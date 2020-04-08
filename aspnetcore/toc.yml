@@ -1082,6 +1082,8 @@
       uid: security/enforcing-ssl
     - name: HTTPS ile Docker’ı barındırma
       uid: security/docker-https
+    - name: HTTPS ile Docker Compose
+      uid: security/docker-compose-https
     - name: AB Genel Veri Koruma Yönetmeliği (GDPR) desteği
       uid: security/gdpr
     - name: İstek sahteciliğinden koruma
