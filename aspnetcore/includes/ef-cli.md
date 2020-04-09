@@ -1,1 +1,1 @@
-EF Core CLı hakkında daha fazla bilgi için bkz. [.net CLI için EF Core araçları başvurusu](/ef/core/miscellaneous/cli/dotnet).
+EF Core için CLI hakkında daha fazla bilgi için [.Net CLI için EF Core araçları referansına](/ef/core/miscellaneous/cli/dotnet)bakın.

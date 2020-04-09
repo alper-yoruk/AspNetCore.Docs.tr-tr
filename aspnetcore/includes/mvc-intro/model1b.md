@@ -1,13 +1,13 @@
-Aşağıdaki özellikleri `Movie` sınıfına ekleyin:
+`Movie` Sınıfa aşağıdaki özellikleri ekleyin:
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Models/Movie.cs?name=snippet1)]
 
-`Movie` sınıfı şunları içerir:
+Sınıf `Movie` şunları içerir:
 
-* Birincil anahtar için veritabanı için gerekli olan `Id` alanı.
-* `[DataType(DataType.Date)]`: [DataType](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.internal.datatypeattributeadapter) özniteliği verilerin türünü belirtir (`Date`). Bu öznitelikle:
+* Birincil `Id` anahtar için veritabanı tarafından gerekli olan alan.
+* `[DataType(DataType.Date)]`: [DataType](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.internal.datatypeattributeadapter) özniteliği, veri türünü belirtir`Date`( ). Bu öznitelik ile:
 
-  * Kullanıcının Tarih alanına saat bilgilerini girmesi gerekli değildir.
-  * Zaman bilgisi değil yalnızca tarih görüntülenir.
+  * Kullanıcının tarih alanına saat bilgilerini girmesi gerekmez.
+  * Yalnızca tarih görüntülenir, saat bilgisi değil.
 
-[Veri açıklamaları](/dotnet/api/system.componentmodel.dataannotations) sonraki bir öğreticide ele alınmıştır.
+[DataAnnotations](/dotnet/api/system.componentmodel.dataannotations) daha sonraki bir öğretici ele alınmıştır.

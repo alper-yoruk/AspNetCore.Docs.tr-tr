@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core ile LibMan CLı kullanın
+title: LibMan CLI'yi ASP.NET Çekirdekli kullanın
 author: scottaddie
-description: ASP.NET Core projesindeki LibMan CLı 'yı nasıl kullanacağınızı öğrenin.
+description: LibMan CLI'yi ASP.NET Core projesinde nasıl kullanacağınızı öğrenin.
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 11/12/2019
@@ -9,61 +9,61 @@ no-loc:
 - SignalR
 uid: client-side/libman/libman-cli
 ms.openlocfilehash: 02d88d09805bd23a86ef924766373245fec7ff52
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78664635"
 ---
-# <a name="use-the-libman-cli-with-aspnet-core"></a>ASP.NET Core ile LibMan CLı kullanın
+# <a name="use-the-libman-cli-with-aspnet-core"></a>LibMan CLI'yi ASP.NET Çekirdekli kullanın
 
-[Scott Ade](https://twitter.com/Scott_Addie) tarafından
+Yazar: [Scott Addie](https://twitter.com/Scott_Addie)
 
-[Libman](xref:client-side/libman/index) CLI, .NET Core 'un desteklendiği her yerde desteklenen platformlar arası bir araçtır.
+[LibMan](xref:client-side/libman/index) CLI, her yerde desteklenen bir çapraz platform aracıdır .NET Core desteklenir.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [!INCLUDE [2.1-SDK](../../includes/2.1-SDK.md)]
 
 ## <a name="installation"></a>Yükleme
 
-LibMan CLı 'yı yüklemek için:
+LibMan CLI'yi yüklemek için:
 
 ```dotnetcli
 dotnet tool install -g Microsoft.Web.LibraryManager.Cli
 ```
 
-[.NET Core küresel aracı](/dotnet/core/tools/global-tools#install-a-global-tool) , [Microsoft. Web. LibraryManager. CLI](https://www.nuget.org/packages/Microsoft.Web.LibraryManager.Cli/) NuGet paketinden yüklenir.
+[Microsoft.Web.LibraryManager.Cli](https://www.nuget.org/packages/Microsoft.Web.LibraryManager.Cli/) NuGet paketinden [bir .NET Core Global Tool](/dotnet/core/tools/global-tools#install-a-global-tool) yüklenir.
 
-Belirli bir NuGet paket kaynağından LibMan CLı 'yı yüklemek için:
+LibMan CLI'yi belirli bir NuGet paket kaynağından yüklemek için:
 
 ```dotnetcli
 dotnet tool install -g Microsoft.Web.LibraryManager.Cli --version 1.0.94-g606058a278 --add-source C:\Temp\
 ```
 
-Yukarıdaki örnekte, yerel Windows makinenin *C:\Temp\Microsoft.Web.LibraryManager.cli.1.0.94-g606058a278.nupkg* dosyasından bir .NET Core genel aracı yüklenir.
+Önceki örnekte, yerel Windows makinesinin *C:\Temp\Microsoft.Web.LibraryManager.Cli.1.0.94-g606058a278.nupkg* dosyasından bir .NET Core Global Tool yüklenir.
 
 ## <a name="usage"></a>Kullanım
 
-CLı başarıyla yüklendikten sonra aşağıdaki komut kullanılabilir:
+CLI'nin başarılı bir şekilde yüklenmesinden sonra aşağıdaki komut kullanılabilir:
 
 ```console
 libman
 ```
 
-Yüklü CLı sürümünü görüntülemek için:
+Yüklü CLI sürümünü görüntülemek için:
 
 ```console
 libman --version
 ```
 
-Kullanılabilir CLı komutlarını görüntülemek için:
+Kullanılabilir CLI komutlarını görüntülemek için:
 
 ```console
 libman --help
 ```
 
-Yukarıdaki komut aşağıdakine benzer bir çıktı görüntüler:
+Önceki komut aşağıdakine benzer çıktı görüntüler:
 
 ```console
  1.0.163+g45474d37ed
@@ -90,13 +90,13 @@ Commands:
 Use "libman [command] --help" for more information about a command.
 ```
 
-Aşağıdaki bölümlerde kullanılabilir CLı komutları ana hatlarıyla verilmiştir.
+Aşağıdaki bölümlerde kullanılabilir CLI komutları sıralanmIst.)
 
-## <a name="initialize-libman-in-the-project"></a>Projedeki LibMan 'ı Başlat
+## <a name="initialize-libman-in-the-project"></a>Projede LibMan'ı başlatma
 
-`libman init` komutu, yoksa bir *Libman. JSON* dosyası oluşturur. Dosya varsayılan öğe şablonu içeriğiyle oluşturulur.
+Komut, `libman init` yoksa *bir libman.json* dosyası oluşturur. Dosya varsayılan öğe şablonu içeriği yle oluşturulur.
 
-### <a name="synopsis"></a>Özeti
+### <a name="synopsis"></a>Özet
 
 ```console
 libman init [-d|--default-destination] [-p|--default-provider] [--verbosity]
@@ -105,15 +105,15 @@ libman init [-h|--help]
 
 ### <a name="options"></a>Seçenekler
 
-`libman init` komutu için aşağıdaki seçenekler kullanılabilir:
+`libman init` Komut için aşağıdaki seçenekler kullanılabilir:
 
 * `-d|--default-destination <PATH>`
 
-  Geçerli klasöre göreli bir yol. *Libman. JSON*içindeki bir kitaplık için `destination` özelliği tanımlanmamışsa kitaplık dosyaları bu konuma yüklenir. `<PATH>` değeri *Libman. JSON*öğesinin `defaultDestination` özelliğine yazılır.
+  Geçerli klasöre göre bir yol. *Libman.json'daki*bir `destination` kitaplık için özellik tanımlanmamışsa, kitaplık dosyaları bu konuma yüklenir. Değeri `<PATH>` `defaultDestination` *libman.json*özelliğine yazılır.
 
 * `-p|--default-provider <PROVIDER>`
 
-  Belirli bir kitaplık için hiçbir sağlayıcı tanımlanmamışsa kullanılacak sağlayıcı. `<PROVIDER>` değeri *Libman. JSON*öğesinin `defaultProvider` özelliğine yazılır. `<PROVIDER>` aşağıdaki değerlerden biriyle değiştirin:
+  Belirli bir kitaplık için sağlayıcı tanımlanmamışsa kullanılacak sağlayıcı. Değeri `<PROVIDER>` `defaultProvider` *libman.json*özelliğine yazılır. Aşağıdaki `<PROVIDER>` değerlerden biriyle değiştirin:
 
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
@@ -121,7 +121,7 @@ libman init [-h|--help]
 
 ### <a name="examples"></a>Örnekler
 
-ASP.NET Core projesinde bir *Libman. JSON* dosyası oluşturmak için:
+ASP.NET Core projesinde *libman.json* dosyası oluşturmak için:
 
 * Proje köküne gidin.
 * Şu komutu çalıştırın:
@@ -130,13 +130,13 @@ ASP.NET Core projesinde bir *Libman. JSON* dosyası oluşturmak için:
   libman init
   ```
 
-* Varsayılan sağlayıcının adını yazın veya varsayılan CDNJS sağlayıcısını kullanmak için `Enter` ' a basın. Geçerli değerler şunlardır:
+* Varsayılan sağlayıcının adını yazın veya `Enter` varsayılan CDNJS sağlayıcısını kullanmak için basın. Geçerli değerler şunlardır:
 
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
-  ![Libman başlatma komutu-varsayılan sağlayıcı](_static/libman-init-provider.png)
+  ![libman init komutu - varsayılan sağlayıcı](_static/libman-init-provider.png)
 
-Aşağıdaki içeriğe sahip proje köküne bir *Libman. JSON* dosyası eklenir:
+Proje köküne aşağıdaki içerikle *bir libman.json* dosyası eklenir:
 
 ```json
 {
@@ -146,11 +146,11 @@ Aşağıdaki içeriğe sahip proje köküne bir *Libman. JSON* dosyası eklenir:
 }
 ```
 
-## <a name="add-library-files"></a>Kitaplık dosyaları Ekle
+## <a name="add-library-files"></a>Kitaplık dosyaları ekleme
 
-`libman install` komutu, kitaplık dosyalarını indirir ve projeye yükler. Bir *Libman. JSON* dosyası yoksa eklenir. *Libman. JSON* dosyası kitaplık dosyaları için yapılandırma ayrıntılarını depolayacak şekilde değiştirilir.
+Komut, `libman install` kitaplık dosyalarını projeye karşı yükler ve yükler. Bir *libman.json* dosyası yoksa eklenir. *Libman.json* dosyası, kitaplık dosyalarının yapılandırma ayrıntılarını depolamak üzere değiştirilir.
 
-### <a name="synopsis"></a>Özeti
+### <a name="synopsis"></a>Özet
 
 ```console
 libman install <LIBRARY> [-d|--destination] [--files] [-p|--provider] [--verbosity]
@@ -161,33 +161,33 @@ libman install [-h|--help]
 
 `LIBRARY`
 
-Yüklenecek kitaplığın adı. Bu ad, sürüm numarası gösterimi içerebilir (örneğin, `@1.2.0`).
+Yüklenmesi gereken kitaplığın adı. Bu ad sürüm numarası gösterimi içerebilir `@1.2.0`(örneğin, ).
 
 ### <a name="options"></a>Seçenekler
 
-`libman install` komutu için aşağıdaki seçenekler kullanılabilir:
+`libman install` Komut için aşağıdaki seçenekler kullanılabilir:
 
 * `-d|--destination <PATH>`
 
-  Kitaplığın yükleneceği konum. Belirtilmemişse, varsayılan konum kullanılır. *Libman. JSON*içinde `defaultDestination` özelliği belirtilmemişse, bu seçenek gereklidir.
+  Kitaplığı yüklemek için konum. Belirtilmemişse, varsayılan konum kullanılır. `defaultDestination` *Libman.json'da*özellik belirtilmemişse, bu seçenek gereklidir.
 
 * `--files <FILE>`
 
-  Kitaplıktan yüklenecek dosyanın adını belirtin. Belirtilmemişse, kitaplıktaki tüm dosyalar yüklenir. Yüklenecek dosya başına bir `--files` seçeneği belirtin. Göreli yollar da desteklenir. Örneğin: `--files dist/browser/signalr.js`.
+  Kitaplıktan yüklenmesi gereken dosyanın adını belirtin. Belirtilmemişse, kitaplıktaki tüm dosyalar yüklenir. Yüklenecek `--files` dosya başına bir seçenek sağlayın. Göreli yollar da desteklenir. Örneğin: `--files dist/browser/signalr.js`.
 
 * `-p|--provider <PROVIDER>`
 
-  Kitaplık alımı için kullanılacak sağlayıcının adı. `<PROVIDER>` aşağıdaki değerlerden biriyle değiştirin:
+  Kitaplık edinimi için kullanılacak sağlayıcının adı. Aşağıdaki `<PROVIDER>` değerlerden biriyle değiştirin:
   
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
-  Belirtilmemişse, *Libman. JSON* içindeki `defaultProvider` özelliği kullanılır. *Libman. JSON*içinde `defaultProvider` özelliği belirtilmemişse, bu seçenek gereklidir.
+  Belirtilmemişse, `defaultProvider` *libman.json'daki* özellik kullanılır. `defaultProvider` *Libman.json'da*özellik belirtilmemişse, bu seçenek gereklidir.
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
 ### <a name="examples"></a>Örnekler
 
-Aşağıdaki *Libman. JSON* dosyasını göz önünde bulundurun:
+Aşağıdaki *libman.json* dosyasını göz önünde bulundurun:
 
 ```json
 {
@@ -197,13 +197,13 @@ Aşağıdaki *Libman. JSON* dosyasını göz önünde bulundurun:
 }
 ```
 
-JQuery sürümü 3.2.1 *jQuery. min. js* dosyasını CDNJS sağlayıcısını kullanarak *Wwwroot/Scripts/jQuery* klasörüne yüklemek için:
+CDNJS sağlayıcısını kullanarak *wwwroot/scripts/jquery* klasörüne jQuery sürümünü 3.2.1 *jquery.min.js* dosyasını yüklemek için:
 
 ```console
 libman install jquery@3.2.1 --provider cdnjs --destination wwwroot/scripts/jquery --files jquery.min.js
 ```
 
-*Libman. JSON* dosyası şuna benzer:
+*Libman.json* dosyası aşağıdakilere benzer:
 
 ```json
 {
@@ -221,20 +221,20 @@ libman install jquery@3.2.1 --provider cdnjs --destination wwwroot/scripts/jquer
 }
 ```
 
-*C:\\temp\\contosotakvim\\* dosya sistemi sağlayıcısını kullanarak *Calendar. js* ve *Calendar. css* dosyalarını yüklemek için:
+C *takvim.js* ve *calendar.css* dosyalarını yüklemek için: *\\\\\\ * dosya sistemi sağlayıcısını kullanarak contosoCalendar'ı geçici olarak kullanma:
 
   ```console
   libman install C:\temp\contosoCalendar\ --provider filesystem --files calendar.js --files calendar.css
   ```
 
-Aşağıdaki istem iki nedenden dolayı görünür:
+Aşağıdaki istemi iki nedenden dolayı görünür:
 
-* *Libman. JSON* dosyası bir `defaultDestination` özelliği içermiyor.
-* `libman install` komutu `-d|--destination` seçeneğini içermez.
+* *Libman.json* dosyasında bir `defaultDestination` özellik yok.
+* Komut `libman install` `-d|--destination` seçeneği içermez.
 
-![Libman Install komut-hedef](_static/libman-install-destination.png)
+![libman yükleme komutu - hedef](_static/libman-install-destination.png)
 
-Varsayılan hedefi kabul ettikten sonra, *Libman. JSON* dosyası şuna benzer:
+Varsayılan hedefi kabul ettikten *sonra, libman.json* dosyası aşağıdakilere benzer:
 
 ```json
 {
@@ -263,13 +263,13 @@ Varsayılan hedefi kabul ettikten sonra, *Libman. JSON* dosyası şuna benzer:
 
 ## <a name="restore-library-files"></a>Kitaplık dosyalarını geri yükleme
 
-`libman restore` komutu *Libman. JSON*içinde tanımlanan kitaplık dosyalarını yüklüyor. Aşağıdaki kurallar geçerlidir:
+`libman restore` Komut, *libman.json'da*tanımlanan kitaplık dosyalarını yükler. Aşağıdaki kurallar geçerlidir:
 
-* Proje kökünde bir *Libman. JSON* dosyası yoksa bir hata döndürülür.
-* Bir kitaplık bir sağlayıcıyı belirtiyorsa, *Libman. JSON* içindeki `defaultProvider` özelliği yok sayılır.
-* Bir kitaplık bir hedef belirtiyorsa, *Libman. JSON* içinde `defaultDestination` özelliği yok sayılır.
+* Proje kökünde *libman.json* dosyası yoksa, bir hata döndürülür.
+* Kitaplık bir sağlayıcı belirtirse, `defaultProvider` *libman.json'daki* özellik yoksayılır.
+* Kitaplık bir hedef belirtirse, `defaultDestination` *libman.json'daki* özellik yoksayılır.
 
-### <a name="synopsis"></a>Özeti
+### <a name="synopsis"></a>Özet
 
 ```console
 libman restore [--verbosity]
@@ -278,23 +278,23 @@ libman restore [-h|--help]
 
 ### <a name="options"></a>Seçenekler
 
-`libman restore` komutu için aşağıdaki seçenekler kullanılabilir:
+`libman restore` Komut için aşağıdaki seçenekler kullanılabilir:
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
 ### <a name="examples"></a>Örnekler
 
-*Libman. JSON*' da tanımlanan kitaplık dosyalarını geri yüklemek için:
+*libman.json'da*tanımlanan kitaplık dosyalarını geri yüklemek için:
 
 ```console
 libman restore
 ```
 
-## <a name="delete-library-files"></a>Kitaplık dosyalarını sil
+## <a name="delete-library-files"></a>Kitaplık dosyalarını silme
 
-`libman clean` komutu, daha önce LibMan aracılığıyla geri yüklenen kitaplık dosyalarını siler. Bu işlemden sonra boş olacak klasörler silinir. *Libman. JSON* ' nin `libraries` özelliğindeki kitaplık dosyalarının ilişkili yapılandırması kaldırılmaz.
+Komut, `libman clean` daha önce LibMan üzerinden geri yüklenen kitaplık dosyalarını siler. Bu işlemden sonra boşalan klasörler silinir. *Libman.json* özelliğindeki `libraries` kitaplık dosyalarının ilişkili yapılandırmaları kaldırılmaz.
 
-### <a name="synopsis"></a>Özeti
+### <a name="synopsis"></a>Özet
 
 ```console
 libman clean [--verbosity]
@@ -303,33 +303,33 @@ libman clean [-h|--help]
 
 ### <a name="options"></a>Seçenekler
 
-`libman clean` komutu için aşağıdaki seçenekler kullanılabilir:
+`libman clean` Komut için aşağıdaki seçenekler kullanılabilir:
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
 ### <a name="examples"></a>Örnekler
 
-LibMan aracılığıyla yüklenen kitaplık dosyalarını silmek için:
+LibMan üzerinden yüklenen kitaplık dosyalarını silmek için:
 
 ```console
 libman clean
 ```
 
-## <a name="uninstall-library-files"></a>Kitaplık dosyalarını kaldır
+## <a name="uninstall-library-files"></a>Kitaplık dosyalarını kaldırma
 
-`libman uninstall` komutu:
+Komut: `libman uninstall`
 
-* Belirtilen kitaplıkla ilişkili tüm dosyaları *Libman. JSON*dosyasındaki hedefle siler.
-* *Libman. JSON*' dan ilişkili kitaplık yapılandırmasını kaldırır.
+* Belirtilen kitaplıkla ilişkili tüm dosyaları *libman.json'daki*hedeften siler.
+* İlişkili kitaplık yapılandırmasını *libman.json'dan*kaldırır.
 
-Şu durumlarda bir hata oluşur:
+Bir hata oluşur:
 
-* Proje kökünde *Libman. JSON* dosyası yok.
+* Proje kökünde *libman.json* dosyası yok.
 * Belirtilen kitaplık yok.
 
-Aynı ada sahip birden fazla kitaplık yüklüyse, bir tane seçmeniz istenir.
+Aynı ada sahip birden fazla kitaplık yüklenmişse, bir kitap seçmeniz istenir.
 
-### <a name="synopsis"></a>Özeti
+### <a name="synopsis"></a>Özet
 
 ```console
 libman uninstall <LIBRARY> [--verbosity]
@@ -340,21 +340,21 @@ libman uninstall [-h|--help]
 
 `LIBRARY`
 
-Kaldırılacak kitaplığın adı. Bu ad, sürüm numarası gösterimi içerebilir (örneğin, `@1.2.0`).
+Kaldırılabilmek için kitaplığın adı. Bu ad sürüm numarası gösterimi içerebilir `@1.2.0`(örneğin, ).
 
 ### <a name="options"></a>Seçenekler
 
-`libman uninstall` komutu için aşağıdaki seçenekler kullanılabilir:
+`libman uninstall` Komut için aşağıdaki seçenekler kullanılabilir:
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
 ### <a name="examples"></a>Örnekler
 
-Aşağıdaki *Libman. JSON* dosyasını göz önünde bulundurun:
+Aşağıdaki *libman.json* dosyasını göz önünde bulundurun:
 
 [!code-json[](samples/LibManSample/libman.json)]
 
-* JQuery 'i kaldırmak için aşağıdaki komutlardan biri başarılı olur:
+* jQuery'yi kaldırmak için aşağıdaki komutlardan biri başarılı dır:
 
   ```console
   libman uninstall jquery
@@ -364,24 +364,24 @@ Aşağıdaki *Libman. JSON* dosyasını göz önünde bulundurun:
   libman uninstall jquery@3.3.1
   ```
 
-* `filesystem` sağlayıcısı aracılığıyla yüklenen Lodash dosyalarını kaldırmak için:
+* Sağlayıcı üzerinden yüklenen Lodash dosyalarını `filesystem` kaldırmak için:
 
   ```console
   libman uninstall C:\temp\lodash\
   ```
 
-## <a name="update-library-version"></a>Kitaplık sürümünü Güncelleştir
+## <a name="update-library-version"></a>Kitaplık sürümünü güncelleştirme
 
-`libman update` komutu, LibMan aracılığıyla yüklenen bir kitaplığı belirtilen sürüme güncelleştirir.
+Komut, `libman update` LibMan üzerinden yüklenen bir kitaplığı belirtilen sürüme güncelleştirir.
 
-Şu durumlarda bir hata oluşur:
+Bir hata oluşur:
 
-* Proje kökünde *Libman. JSON* dosyası yok.
+* Proje kökünde *libman.json* dosyası yok.
 * Belirtilen kitaplık yok.
 
-Aynı ada sahip birden fazla kitaplık yüklüyse, bir tane seçmeniz istenir.
+Aynı ada sahip birden fazla kitaplık yüklenmişse, bir kitap seçmeniz istenir.
 
-### <a name="synopsis"></a>Özeti
+### <a name="synopsis"></a>Özet
 
 ```console
 libman update <LIBRARY> [-pre] [--to] [--verbosity]
@@ -392,11 +392,11 @@ libman update [-h|--help]
 
 `LIBRARY`
 
-Güncelleştirilecek kitaplığın adı.
+Güncelleştirilen kitaplığın adı.
 
 ### <a name="options"></a>Seçenekler
 
-`libman update` komutu için aşağıdaki seçenekler kullanılabilir:
+`libman update` Komut için aşağıdaki seçenekler kullanılabilir:
 
 * `-pre`
 
@@ -410,29 +410,29 @@ Güncelleştirilecek kitaplığın adı.
 
 ### <a name="examples"></a>Örnekler
 
-* JQuery 'i en son sürüme güncelleştirmek için:
+* jQuery'yi en son sürüme güncellemek için:
 
   ```console
   libman update jquery
   ```
 
-* JQuery 'i 3.3.1 sürümüne güncelleştirmek için:
+* jQuery'yi sürüm 3.3.1'e güncellemek için:
 
   ```console
   libman update jquery --to 3.3.1
   ```
 
-* JQuery 'i en son ön sürüm sürümüne güncelleştirmek için:
+* jQuery'yi en son sürüm öncesi sürümüne güncellemek için:
 
   ```console
   libman update jquery -pre
   ```
 
-## <a name="manage-library-cache"></a>Kitaplık önbelleğini Yönet
+## <a name="manage-library-cache"></a>Kitaplık önbelleğini yönetme
 
-`libman cache` komutu LibMan kitaplık önbelleğini yönetir. `filesystem` sağlayıcı kitaplık önbelleğini kullanmaz.
+Komut, `libman cache` LibMan kitaplık önbelleğini yönetir. Sağlayıcı `filesystem` kitaplık önbelleğini kullanmaz.
 
-### <a name="synopsis"></a>Özeti
+### <a name="synopsis"></a>Özet
 
 ```console
 libman cache clean [<PROVIDER>] [--verbosity]
@@ -444,13 +444,13 @@ libman cache [-h|--help]
 
 `PROVIDER`
 
-Yalnızca `clean` komutuyla birlikte kullanılır. Temizleyen sağlayıcı önbelleğini belirtir. Geçerli değerler şunlardır:
+Yalnızca komutla `clean` kullanılır. Sağlayıcı önbelleğinin temizlenmesini belirtir. Geçerli değerler şunlardır:
 
 [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
 ### <a name="options"></a>Seçenekler
 
-`libman cache` komutu için aşağıdaki seçenekler kullanılabilir:
+`libman cache` Komut için aşağıdaki seçenekler kullanılabilir:
 
 * `--files`
 
@@ -458,7 +458,7 @@ Yalnızca `clean` komutuyla birlikte kullanılır. Temizleyen sağlayıcı önbe
 
 * `--libraries`
 
-  Önbelleğe alınan kitaplıkların adlarını listeleyin.
+  Önbelleğe alınmış kitaplıkların adlarını listele.
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
@@ -474,7 +474,7 @@ Yalnızca `clean` komutuyla birlikte kullanılır. Temizleyen sağlayıcı önbe
   libman cache list --libraries
   ```
 
-  Aşağıdakine benzer bir çıktı görüntülenir:
+  Aşağıdakilere benzer çıktı görüntülenir:
 
   ```console
   Cache contents:
@@ -491,13 +491,13 @@ Yalnızca `clean` komutuyla birlikte kullanılır. Temizleyen sağlayıcı önbe
       react
   ```
 
-* Sağlayıcı başına önbelleğe alınmış kitaplık dosyalarının adlarını görüntülemek için:
+* Önbelleğe alınan kitaplık dosyalarının adlarını sağlayıcı başına görüntülemek için:
 
   ```console
   libman cache list --files
   ```
 
-  Aşağıdakine benzer bir çıktı görüntülenir:
+  Aşağıdakilere benzer çıktı görüntülenir:
 
   ```console
   Cache contents:
@@ -540,7 +540,7 @@ Yalnızca `clean` komutuyla birlikte kullanılır. Temizleyen sağlayıcı önbe
           metadata.json
   ```
 
-  Yukarıdaki çıktıda, 3.2.1 ve 3.3.1 jQuery sürümlerinin CDNJS sağlayıcısı altında önbelleğe alındığını görürsünüz.
+  Önceki çıktının jQuery sürümlerinin 3.2.1 ve 3.3.1'in CDNJS sağlayıcısı altında önbelleğe alınmış olduğunu gösterdiğine dikkat edin.
 
 * CDNJS sağlayıcısı için kitaplık önbelleğini boşaltmak için:
 
@@ -548,7 +548,7 @@ Yalnızca `clean` komutuyla birlikte kullanılır. Temizleyen sağlayıcı önbe
   libman cache clean cdnjs
   ```
 
-  CDNJS sağlayıcı önbelleğini boşaltdıktan sonra, `libman cache list` komutu şunları görüntüler:
+  CDNJS sağlayıcı önbelleğini boşalttınktan `libman cache list` sonra, komut aşağıdakileri görüntüler:
 
   ```console
   Cache contents:
@@ -561,13 +561,13 @@ Yalnızca `clean` komutuyla birlikte kullanılır. Temizleyen sağlayıcı önbe
       (empty)
   ```
 
-* Tüm desteklenen sağlayıcıların önbelleğini boşaltmak için:
+* Desteklenen tüm sağlayıcılar için önbelleği boşaltmak için:
 
   ```console
   libman cache clean
   ```
 
-  Tüm sağlayıcı önbellekleri boşaltıldıktan sonra, `libman cache list` komutu şunları görüntüler:
+  Tüm sağlayıcı önbelleklerini boşalttınktan `libman cache list` sonra, komut aşağıdakileri görüntüler:
 
   ```console
   Cache contents:
@@ -580,6 +580,6 @@ Yalnızca `clean` komutuyla birlikte kullanılır. Temizleyen sağlayıcı önbe
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [Küresel bir araç yükler](/dotnet/core/tools/global-tools#install-a-global-tool)
+* [Genel Bir Araç Yükleme](/dotnet/core/tools/global-tools#install-a-global-tool)
 * <xref:client-side/libman/libman-vs>
 * [LibMan GitHub deposu](https://github.com/aspnet/LibraryManager)

@@ -1,10 +1,10 @@
 > [!WARNING]
-> Güvenlik nedenleriyle, `GET` istek verilerini sayfa modeli özelliklerine bağlamayı tercih etmeniz gerekir. Özelliklerle eşleştirmadan önce Kullanıcı girişini doğrulayın. `GET` bağlamaya dönüştürmek, sorgu dizesine veya rota değerlerine dayanan senaryoları adreslemekte yararlıdır.
+> Güvenlik nedenleriyle, istek verilerini `GET` sayfa modeli özelliklerine bağlamayı tercih etmeniz gerekir. Özelliklerle eşlemeden önce kullanıcı girişini doğrulayın. Sorgu dizesi veya rota değerlerine dayanan senaryoları ele alırken bağlamayı `GET` seçmenin yararlıdır.
 >
-> `GET` isteklerindeki bir özelliği bağlamak için, [`[BindProperty]`](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) özniteliğinin `SupportsGet` özelliğini `true`olarak ayarlayın:
+> İsteklere `GET` bir özelliği bağlamak için, özniteliğin [`[BindProperty]`](xref:Microsoft.AspNetCore.Mvc.BindPropertyAttribute) `true` `SupportsGet` özelliğini şu şekilde ayarlayın:
 >
 > ```csharp
 > [BindProperty(SupportsGet = true)]
 > ```
 >
-> Daha fazla bilgi için bkz. [ASP.NET Core topluluk alışması: Get tartışmasına bağlama (YouTube)](https://www.youtube.com/watch?v=p7iHB9V-KVU&feature=youtu.be&t=54m27s).
+> Daha fazla bilgi için [Core Community Standup ASP.NET: GET tartışmasını (YouTube) bağlayın.](https://www.youtube.com/watch?v=p7iHB9V-KVU&feature=youtu.be&t=54m27s)

@@ -4,7 +4,7 @@
 
 * `--verbosity <LEVEL>`
 
-  Çıkışın ayrıntı düzeyini ayarlayın. `<LEVEL>` aşağıdaki değerlerden biriyle değiştirin:
+  Çıktının ayrıntılılığını ayarlayın. Aşağıdaki `<LEVEL>` değerlerden biriyle değiştirin:
   
   * `quiet`
   * `normal`

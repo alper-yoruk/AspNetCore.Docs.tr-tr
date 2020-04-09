@@ -1,61 +1,61 @@
 ---
-title: .NET için gRPC yapılandırması
+title: .NET yapılandırması için gRPC
 author: jamesnk
-description: GRPC 'yi .NET uygulamaları için nasıl yapılandıracağınızı öğrenin.
+description: .NET uygulamaları için gRPC'yi nasıl yapılandırıştırabilirsiniz öğrenin.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.custom: mvc
 ms.date: 02/26/2020
 uid: grpc/configuration
 ms.openlocfilehash: cabe2d86f535bf3063dd7ede9e8a3bc5de70e244
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78666903"
 ---
-# <a name="grpc-for-net-configuration"></a>.NET için gRPC yapılandırması
+# <a name="grpc-for-net-configuration"></a>.NET yapılandırması için gRPC
 
 ## <a name="configure-services-options"></a>Hizmet seçeneklerini yapılandırma
 
-gRPC Hizmetleri, *Startup.cs*içinde `AddGrpc` ile yapılandırılır. Aşağıdaki tabloda, gRPC hizmetlerini yapılandırma seçenekleri açıklanmaktadır:
+gRPC hizmetleri *Startup.cs* `AddGrpc` ile yapılandırılır. Aşağıdaki tabloda gRPC hizmetlerini yapılandırma seçenekleri açıklanmaktadır:
 
 | Seçenek | Varsayılan Değer | Açıklama |
 | ------ | ------------- | ----------- |
-| MaxSendMessageSize | `null` | Sunucudan gönderilebilecek en büyük ileti boyutu (bayt). Yapılandırılan en büyük ileti boyutunu aşan bir ileti gönderilmeye çalışılıyor, bir özel durumla sonuçlanır. |
-| MaxReceiveMessageSize | 4 MB | Sunucu tarafından alınabilecek, bayt olarak en büyük ileti boyutu. Sunucu bu sınırı aşan bir ileti alırsa bir özel durum oluşturur. Bu değeri artırmak, sunucunun daha büyük iletiler almasına izin verir, ancak bellek tüketimini olumsuz etkileyebilir. |
-| EnableDetailedErrors | `false` | `true`, bir hizmet yönteminde özel durum oluştuğunda istemcilere ayrıntılı özel durum iletileri döndürülür. Varsayılan değer: `false`. `EnableDetailedErrors` `true` olarak ayarlamak, hassas bilgileri sızdırabilir. |
-| CompressionProviders | gzip | İletileri sıkıştırmak ve açmak için kullanılan bir sıkıştırma sağlayıcıları koleksiyonu. Özel sıkıştırma sağlayıcıları oluşturulup koleksiyona eklenebilir. Varsayılan yapılandırılmış sağlayıcılar **gzip** sıkıştırmasını destekler. |
-| <span style="word-break:normal;word-wrap:normal">ResponseCompressionAlgorithm</span> | `null` | Sunucudan gönderilen iletileri sıkıştırmak için kullanılan sıkıştırma algoritması. Algoritmanın `CompressionProviders`bir sıkıştırma sağlayıcısıyla eşleşmesi gerekir. Bir yanıtı sıkıştırmaya yönelik algoritma için, istemci, **GRPC-Accept-Encoding** üstbilgisine göndererek algoritmayı desteklediğini göstermelidir. |
-| ResponseCompressionLevel | `null` | Sunucudan gönderilen iletileri sıkıştırmak için kullanılan sıkıştırma düzeyi. |
-| Durdurucular | Yok | Her gRPC çağrısıyla çalıştırılan bir dinleyici koleksiyonu. Yakalayıcılar kayıtlı oldukları sırada çalıştırılır. Küresel olarak yapılandırılan yakalayıcılar, tek bir hizmet için yapılandırmadan önce çalıştırılır. GRPC yakalayıcılar hakkında daha fazla bilgi için bkz. [GRPC yakalayıcılar Ile ara yazılım karşılaştırması](xref:grpc/migration#grpc-interceptors-vs-middleware). |
+| MaxSendMessageSize | `null` | Sunucudan gönderilebilen baytlarda en yüksek ileti boyutu. Yapılandırılan maksimum ileti boyutunu aşan bir ileti göndermeye çalışmak bir özel durumla sonuçlanır. |
+| MaxReceiveMessageSize | 4 MB | Sunucu tarafından alınabilecek baytlarda en yüksek ileti boyutu. Sunucu bu sınırı aşan bir ileti alırsa, bir özel durum atar. Bu değeri artırmak, sunucunun daha büyük iletiler almasına izin verir, ancak bellek tüketimini olumsuz etkileyebilir. |
+| Ayrıntılı Hataları Etkinleştirme | `false` | Bir `true`hizmet yönteminde bir özel durum atıldığında, ayrıntılı özel durum iletileri istemcilere döndürülürse. Varsayılan değer: `false`. Ayar `EnableDetailedErrors` `true` hassas bilgileri sızdırabilir. |
+| Sıkıştırma Sağlayıcıları | Gzip | İletileri sıkıştırmak ve sıkıştırmak için kullanılan sıkıştırma sağlayıcıları topluluğu. Özel sıkıştırma sağlayıcıları oluşturulabilir ve koleksiyona eklenebilir. Varsayılan yapılandırılan sağlayıcılar **gzip** sıkıştırmayı destekler. |
+| <span style="word-break:normal;word-wrap:normal">YanıtSıkıştırma Algoritması</span> | `null` | Sunucudan gönderilen iletileri sıkıştırmak için kullanılan sıkıştırma algoritması. Algoritma, ''deki bir `CompressionProviders`sıkıştırma sağlayıcısıyla eşleşmelidir. Algoritmanın yanıtı sıkıştırması için istemcinin algoritmayı **grpc-accept-coding** üstbilgisine göndererek desteklediğini göstermesi gerekir. |
+| YanıtSıkıştırma Düzeyi | `null` | Sunucudan gönderilen iletileri sıkıştırmak için kullanılan sıkıştırma düzeyi. |
+| Durdurucular | None | Her gRPC çağrısıyla çalıştırılabilen bir önleyici koleksiyonu. Durdurucular kayıtlı oldukları sırayla çalıştırılır. Küresel olarak yapılandırılmış durdurucular, tek bir hizmet için yapılandırılan önleyiciler çalıştırılmadan önce çalıştırılır. gRPC önleyiciler hakkında daha fazla bilgi için [gRPC Interceptors vs. Middleware'e](xref:grpc/migration#grpc-interceptors-vs-middleware)bakın. |
 
-Seçenekler, `Startup.ConfigureServices``AddGrpc` çağrısına bir seçenek temsilcisi sağlayarak tüm hizmetler için yapılandırılabilir:
+Seçenekler tüm hizmetler için `AddGrpc` bir seçenek temsilcisi sunarak `Startup.ConfigureServices`yapılandırılabilir:
 
 [!code-csharp[](~/grpc/configuration/sample/GrcpService/Startup.cs?name=snippet)]
 
-Tek bir hizmetin seçenekleri `AddGrpc` için belirtilen genel seçenekleri geçersiz kılar ve `AddServiceOptions<TService>`kullanılarak yapılandırılabilir:
+Tek bir hizmet için seçenekler, sağlanan `AddGrpc` genel seçenekleri geçersiz `AddServiceOptions<TService>`kılar ve aşağıdakiler kullanılarak yapılandırılabilir:
 
 [!code-csharp[](~/grpc/configuration/sample/GrcpService/Startup2.cs?name=snippet)]
 
 ## <a name="configure-client-options"></a>İstemci seçeneklerini yapılandırma
 
-gRPC istemci yapılandırması `GrpcChannelOptions`ayarlanır. Aşağıdaki tabloda, gRPC kanallarını yapılandırma seçenekleri açıklanmaktadır:
+gRPC istemci yapılandırması `GrpcChannelOptions`ayarlanır. Aşağıdaki tabloda gRPC kanallarını yapılandırma seçenekleri açıklanmaktadır:
 
 | Seçenek | Varsayılan Değer | Açıklama |
 | ------ | ------------- | ----------- |
-| HttpClient | Yeni örnek | GRPC çağrıları yapmak için kullanılan `HttpClient`. İstemci, özel bir `HttpClientHandler`yapılandırmak ya da gRPC çağrıları için HTTP işlem hattına ek işleyiciler eklemek üzere ayarlanabilir. `HttpClient` belirtilmemişse, kanal için yeni bir `HttpClient` örneği oluşturulur. Otomatik olarak elden kaldırılacaktır. |
-| DisposeHttpClient | `false` | `true`ve bir `HttpClient` belirtilmişse, `GrpcChannel` bırakıldığında `HttpClient` örneği de bırakılır. |
-| LoggerFactory | `null` | İstemci tarafından gRPC çağrıları hakkındaki bilgileri günlüğe kaydetmek için kullanılan `LoggerFactory`. `LoggerFactory` bir örnek, `LoggerFactory.Create`kullanılarak bağımlılık ekleme veya oluşturma işleminden çözülebilir. Günlüğe kaydetmeyi yapılandırma örnekleri için bkz. <xref:grpc/diagnostics#grpc-client-logging>. |
-| MaxSendMessageSize | `null` | İstemciden gönderilebilecek en büyük ileti boyutu (bayt). Yapılandırılan en büyük ileti boyutunu aşan bir ileti gönderilmeye çalışılıyor, bir özel durumla sonuçlanır. |
-| <span style="word-break:normal;word-wrap:normal">MaxReceiveMessageSize</span> | 4 MB | İstemci tarafından alınabilecek, bayt olarak en büyük ileti boyutu. İstemci bu sınırı aşan bir ileti alırsa bir özel durum oluşturur. Bu değeri artırmak, istemcinin daha büyük iletiler almasına izin verir, ancak bellek tüketimini olumsuz etkileyebilir. |
-| Kimlik Bilgileri | `null` | Bir `ChannelCredentials` örneği. Kimlik bilgileri, gRPC çağrılarına kimlik doğrulama meta verileri eklemek için kullanılır. |
-| CompressionProviders | gzip | İletileri sıkıştırmak ve açmak için kullanılan bir sıkıştırma sağlayıcıları koleksiyonu. Özel sıkıştırma sağlayıcıları oluşturulup koleksiyona eklenebilir. Varsayılan yapılandırılmış sağlayıcılar **gzip** sıkıştırmasını destekler. |
+| httpİsteC | Yeni örnek | GRPC `HttpClient` aramaları yapmak için kullanılır. İstemci, özel `HttpClientHandler`bir yapıya uygun olarak ayarlanabilir veya gRPC çağrıları için HTTP ardışık hattına ek işleyiciler ekleyebilir. Hayır `HttpClient` belirtilmişse, `HttpClient` kanal için yeni bir örnek oluşturulur. Otomatik olarak imha edilecektir. |
+| Elden ÇıkarhttpClient | `false` | `true`Eğer , `HttpClient` ve bir belirtilirse, `HttpClient` o zaman örnek bertaraf edilir. `GrpcChannel` |
+| LoggerFactory | `null` | Istemci `LoggerFactory` tarafından gRPC aramaları hakkında bilgi günlüğe kaydetmek için kullanılır. Bir `LoggerFactory` örnek bağımlılık enjeksiyonundan çözülebilir `LoggerFactory.Create`veya . Günlüğe kaydetmeyi yapılandırma <xref:grpc/diagnostics#grpc-client-logging>örnekleri için bkz. |
+| MaxSendMessageSize | `null` | İstemciden gönderilebilen baytlarda en büyük ileti boyutu. Yapılandırılan maksimum ileti boyutunu aşan bir ileti göndermeye çalışmak bir özel durumla sonuçlanır. |
+| <span style="word-break:normal;word-wrap:normal">MaxReceiveMessageSize</span> | 4 MB | İstemci tarafından alınabilecek baytlarda en büyük ileti boyutu. İstemci bu sınırı aşan bir ileti alırsa, bir özel durum atar. Bu değeri artırmak istemcinin daha büyük iletiler almasına izin verir, ancak bellek tüketimini olumsuz etkileyebilir. |
+| Kimlik Bilgileri | `null` | Bir `ChannelCredentials` örnek. Kimlik bilgileri, gRPC çağrılarına kimlik doğrulama meta verileri eklemek için kullanılır. |
+| Sıkıştırma Sağlayıcıları | Gzip | İletileri sıkıştırmak ve sıkıştırmak için kullanılan sıkıştırma sağlayıcıları topluluğu. Özel sıkıştırma sağlayıcıları oluşturulabilir ve koleksiyona eklenebilir. Varsayılan yapılandırılan sağlayıcılar **gzip** sıkıştırmayı destekler. |
 
 Aşağıdaki kod:
 
-* Kanalda en büyük gönderme ve alma iletisi boyutunu ayarlar.
-* İstemci oluşturur.
+* Kanaldaki en fazla gönder ve alma ileti boyutunu ayarlar.
+* Bir istemci oluşturur.
 
 [!code-csharp[](~/grpc/configuration/sample/Program.cs?name=snippet&highlight=3-8)]
 

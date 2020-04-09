@@ -1,9 +1,9 @@
-## <a name="forward-request-information-with-a-proxy-or-load-balancer"></a>İstek bilgilerini bir ara sunucu veya yük dengeleyici ile ilet
+## <a name="forward-request-information-with-a-proxy-or-load-balancer"></a>İstek bilgilerini proxy veya yük dengeleyicisiyle iletme
 
-Uygulama bir ara sunucu veya yük dengeleyici arkasında dağıtılırsa, bazı özgün istek bilgileri, istek üst bilgilerinde uygulamaya iletilebilir. Bu bilgiler genellikle güvenli istek düzenini (`https`), Konağı ve istemci IP adresini içerir. Uygulamalar, özgün istek bilgilerini bulacak ve kullanacak şekilde bu istek üst bilgilerini otomatik olarak okumayın.
+Uygulama bir proxy sunucusunun veya yük bakiyesinin arkasına dağıtılırsa, orijinal istek bilgilerinin bazıları istek üstbilgileri yle uygulamaya iletilebilir. Bu bilgiler genellikle güvenli istek`https`düzenini (, ana bilgisayarve istemci IP adresini içerir. Uygulamalar, orijinal istek bilgilerini bulmak ve kullanmak için bu istek üstbilgilerini otomatik olarak okumaz.
 
-Düzen, dış sağlayıcılarla kimlik doğrulama akışını etkileyen bağlantı oluşturma sırasında kullanılır. Güvenli düzenin kaybolması (`https`) uygulamanın hatalı güvenli olmayan yeniden yönlendirme URL 'Leri üretmesine neden olur.
+Şema, dış sağlayıcılarla kimlik doğrulama akışını etkileyen bağlantı oluşturmada kullanılır. Güvenli düzeni kaybetmek`https`( ) uygulamanın yanlış güvensiz yeniden yönlendirme URL'leri oluşturmasını sağlar.
 
-İstek işleme için özgün istek bilgilerini uygulama için kullanılabilir hale getirmek üzere Iletilen üstbilgiler ara yazılımını kullanın.
+Orijinal istek bilgilerini istek işleme için uygulamanın kullanımına açmak için Iletili Üstbilgiler Middleware'i kullanın.
 
 Daha fazla bilgi için bkz. <xref:host-and-deploy/proxy-load-balancer>.

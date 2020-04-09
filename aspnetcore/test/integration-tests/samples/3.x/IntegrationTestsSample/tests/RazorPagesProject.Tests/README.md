@@ -1,8 +1,8 @@
-# <a name="aspnet-core-integration-testing-sample"></a>ASP.NET Core tümleştirme testi örneği
+# <a name="aspnet-core-integration-testing-sample"></a>ASP.NET Çekirdek Entegrasyon Test Örneği
 
-Bu örnekte [ASP.NET Core Razor Pages](https://docs.microsoft.com/aspnet/core/mvc/razor-pages) uygulamasının tümleştirme testi gösterilmektedir. Bu örnek, [ASP.NET Core konusunun tümleştirme testlerinde](https://docs.microsoft.com/aspnet/core/test/integration-tests) açıklanan özellikleri gösterir.
+Bu örnek, [bir ASP.NET Core Razor Pages](https://docs.microsoft.com/aspnet/core/mvc/razor-pages) uygulamasının entegrasyon testini göstermektedir. Bu örnek, ASP.NET Temel [konusutümleştirme testlerinde](https://docs.microsoft.com/aspnet/core/test/integration-tests) açıklanan özellikleri gösterir.
 
-Yerleşik test özellikleriyle IDE kullanmıyorsanız, *testler/RazorPagesProject. Tests* klasöründeki bir komut isteminde aşağıdaki komutu yürütün:
+Yerleşik test özelliklerine sahip bir IDE kullanmıyorsanız, *testler/RazorPagesProject.Tests* klasöründe aşağıdaki komut istemini uygulayın:
 
 ```console
 dotnet test

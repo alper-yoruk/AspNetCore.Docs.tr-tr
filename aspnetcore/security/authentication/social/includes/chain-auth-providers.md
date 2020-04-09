@@ -1,6 +1,6 @@
 ## <a name="multiple-authentication-providers"></a>Birden çok kimlik doğrulama sağlayıcısı
 
-Uygulama birden çok sağlayıcı gerektirdiğinde, sağlayıcı uzantısı yöntemlerini [Addaduthentication](/dotnet/api/microsoft.extensions.dependencyinjection.authenticationservicecollectionextensions.addauthentication)arkasında zincirle:
+Uygulama birden fazla sağlayıcı gerektirdiğinde, sağlayıcı uzantısı [yöntemlerini AddAuthentication'ın](/dotnet/api/microsoft.extensions.dependencyinjection.authenticationservicecollectionextensions.addauthentication)arkasına zincirle:
 
 ```csharp
 services.AddAuthentication()

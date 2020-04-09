@@ -1,106 +1,106 @@
 ---
-title: ASP.NET Core Razor Pages scafkatlama
+title: ASP.NET Core İskeleli Jilet Sayfaları
 author: rick-anderson
-description: Yapı iskelesi tarafından oluşturulan Razor Pages açıklar.
+description: İskele tarafından oluşturulan Jilet Sayfaları açıklar.
 ms.author: riande
 ms.date: 08/17/2019
 uid: tutorials/razor-pages/page
 ms.openlocfilehash: cec4295a2c08c89db0975808583f41c7d09bfc88
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78662451"
 ---
-# <a name="scaffolded-razor-pages-in-aspnet-core"></a>ASP.NET Core Razor Pages scafkatlama
+# <a name="scaffolded-razor-pages-in-aspnet-core"></a>ASP.NET Core İskeleli Jilet Sayfaları
 
 ::: moniker range=">= aspnetcore-3.0"
 
 Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Bu öğreticide, [önceki öğreticide](xref:tutorials/razor-pages/model)scafkatlama tarafından oluşturulan Razor Pages incelenir.
+Bu öğretici, [önceki öğreticide](xref:tutorials/razor-pages/model)iskele tarafından oluşturulan Razor Pages inceler.
 
 [!INCLUDE[View or download sample code](~/includes/rp/download.md)]
 
-## <a name="the-create-delete-details-and-edit-pages"></a>Oluşturma, silme, Ayrıntılar ve düzenleme sayfaları
+## <a name="the-create-delete-details-and-edit-pages"></a>Sayfaları Oluştur, Sil, Ayrıntı ve Düzenle
 
-*Pages/filmler/Index. cshtml. cs* sayfa modelini inceleyin:
+*Sayfaları/Filmleri/Index.cshtml.cs* Sayfa Modelini Inceleyin:
 
 [!code-csharp[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs)]
 
-Razor Pages `PageModel`türetilir. Kurala göre `PageModel`türetilmiş sınıf `<PageName>Model`olarak adlandırılır. Oluşturucu, `RazorPagesMovieContext` sayfaya eklemek için [bağımlılık ekleme](xref:fundamentals/dependency-injection) işlemini kullanır. Tüm yapı iskelesi sayfaları bu düzene uyar. Entity Framework zaman uyumsuz programlama hakkında daha fazla bilgi için bkz. [zaman uyumsuz kod](xref:data/ef-rp/intro#asynchronous-code) .
+Jilet Sayfaları `PageModel`türetilmiştir. Kural olarak, `PageModel`-türetilmiş `<PageName>Model`sınıf denir. Oluşturucu sayfaya eklemek için `RazorPagesMovieContext` [bağımlılık enjeksiyonu](xref:fundamentals/dependency-injection) kullanır. Tüm iskele sayfaları bu deseni takip eder. Entity Framework ile asynchronous programlama hakkında daha fazla bilgi için [Asynchronous koduna](xref:data/ef-rp/intro#asynchronous-code) bakın.
 
-Sayfa için bir istek yapıldığında `OnGetAsync` yöntemi, Razor sayfasına bir film listesi döndürür. `OnGetAsync` veya `OnGet`, sayfanın durumunu başlatmak için çağırılır. Bu durumda, `OnGetAsync` film listesini alır ve görüntüler.
+Sayfa için bir istek yapıldığında, `OnGetAsync` yöntem bir film listesini Razor Page'e döndürür. `OnGetAsync`veya `OnGet` sayfanın durumunu başlatmaya çağrılır. Bu durumda, `OnGetAsync` filmlerin bir listesini alır ve görüntüler.
 
-`OnGet` `void` döndürdüğünde veya `OnGetAsync``Task`döndürürse, hiçbir dönüş açıklaması kullanılmaz. Dönüş türü `IActionResult` veya `Task<IActionResult>`olduğunda, return ifadesinin sağlanması gerekir. Örneğin, *Pages/filmler/Create. cshtml. cs* `OnPostAsync` yöntemi:
+İade `OnGet` `void` veya `OnGetAsync` `Task`rirken, iade deyimi kullanılmaz. İade türü `IActionResult` veya `Task<IActionResult>`, bir iade deyimi sağlanmalıdır. Örneğin, *Sayfalar/Filmler/Create.cshtml.cs* `OnPostAsync` yöntemi:
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Create.cshtml.cs?name=snippet)]
 
-<a name="index"></a>*Pages/filmler/Index. cshtml* Razor sayfasını inceleyin:
+<a name="index"></a>*Sayfaları/Filmleri/Index.cshtml* Jilet Sayfasını Inceleyin:
 
 [!code-cshtml[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Index.cshtml)]
 
-Razor, HTML 'den C# ya da Razor 'e özgü biçimlendirmeye geçiş yapabilir. Bir `@` sembol sonrasında [Razor ayrılmış bir anahtar sözcük](xref:mvc/views/razor#razor-reserved-keywords)olduğunda, bu, ' a geçiş yapar C#.
+Razor HTML'den C#'a veya Jilete özgü biçimlendirmeye geçiş yapabilir. Bir `@` [sembol, Jilet ayrılmış](xref:mvc/views/razor#razor-reserved-keywords)bir anahtar kelime tarafından takip edildiğinde, Razor'a özgü biçimlendirmeye dönüşür, aksi takdirde C#'a dönüşür.
 
-### <a name="the-page-directive"></a>@page yönergesi
+### <a name="the-page-directive"></a>Direktif @page
 
-`@page` Razor yönergesi, dosyayı bir MVC eylemi yapar, bu da istekleri işleyebileceği anlamına gelir. `@page` sayfadaki ilk Razor yönergesi olmalıdır. `@page`, Razor 'e özgü biçimlendirmeye geçme örneğidir. Daha fazla bilgi için bkz. [Razor söz dizimi](xref:mvc/views/razor#razor-syntax) .
+`@page` Razor yönergesi dosyayı bir MVC eylemi yapar, bu da istekleri işleyebilir anlamına gelir. `@page`bir sayfadaki ilk Razor direktifi olmalıdır. `@page`Jilete özgü biçimlendirmeye geçişin bir örneğidir. Daha fazla bilgi için [Razor sözdizimine](xref:mvc/views/razor#razor-syntax) bakın.
 
-Aşağıdaki HTML Yardımcısı 'nda kullanılan lambda ifadesini inceleyin:
+Aşağıdaki HTML Yardımcısı'nda kullanılan lambda ifadesini inceleyin:
 
 ```cshtml
 @Html.DisplayNameFor(model => model.Movie[0].Title)
 ```
 
-`DisplayNameFor` HTML Yardımcısı, görünen adı belirlemede lambda ifadesinde başvurulan `Title` özelliğini inceler. Lambda ifadesi değerlendirilmek yerine incelenir. Bu, `model`, `model.Movie`veya `model.Movie[0]` `null` veya boş olduğunda herhangi bir erişim ihlali olmadığı anlamına gelir. Lambda ifadesi değerlendirildiğinde (örneğin, `@Html.DisplayFor(modelItem => item.Title)`), modelin özellik değerleri değerlendirilir.
+HTML `DisplayNameFor` Yardımcısı, görüntü `Title` adını belirlemek için lambda ifadesinde başvurulan özelliği denetler. Lambda ifadesi değerlendirilmek yerine incelenir. Bu, `model`, , , `model.Movie`veya `model.Movie[0]` boş `null` olduğunda hiçbir erişim ihlali anlamına gelir. Lambda ifadesi değerlendirildiğinde (örneğin, modelin özellik değerleri `@Html.DisplayFor(modelItem => item.Title)`ile) değerlendirilir.
 
 <a name="md"></a>
 
-### <a name="the-model-directive"></a>@model yönergesi
+### <a name="the-model-directive"></a>Direktif @model
 
 [!code-cshtml[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Index.cshtml?range=1-2&highlight=2)]
 
-`@model` yönergesi, Razor sayfasına geçirilen modelin türünü belirtir. Yukarıdaki örnekte `@model` satırı, `PageModel`türetilmiş sınıfı Razor sayfası için kullanılabilir hale getirir. Model, `@Html.DisplayNameFor` ve sayfadaki [HTML yardımcılarını](/aspnet/mvc/overview/older-versions-1/views/creating-custom-html-helpers-cs#understanding-html-helpers) `@Html.DisplayFor` kullanılır.
+Yönerge, `@model` Razor Page'e geçirilen modelin türünü belirtir. Önceki örnekte, `@model` satır `PageModel`-türetilmiş sınıfı Razor Page için kullanılabilir hale getirir. Model, sayfadaki `@Html.DisplayNameFor` HTML `@Html.DisplayFor` Yardımcıları ve [HTML Yardımcıları'nda](/aspnet/mvc/overview/older-versions-1/views/creating-custom-html-helpers-cs#understanding-html-helpers) kullanılır.
 
 ### <a name="the-layout-page"></a>Düzen sayfası
 
-Menü bağlantılarını (**RazorPagesMovie**, **Home**ve **Gizlilik**) seçin. Her sayfada aynı menü düzeni gösterilir. Menü düzeni *sayfa/paylaşılan/_Layout. cshtml* dosyasında uygulanır. *Pages/Shared/_Layout. cshtml* dosyasını açın.
+Menü bağlantılarını seçin **(RazorPagesMovie,** **Home**, ve **Privacy**). Her sayfa aynı menü düzenini gösterir. Menü düzeni *Sayfalar/Paylaşılan/_Layout.cshtml* dosyasında uygulanır. *Sayfalar/Paylaşılan/_Layout.cshtml* dosyasını açın.
 
-[Düzen](xref:mvc/views/layout) ŞABLONLARı, HTML kapsayıcı düzeninin şu şekilde olmasını sağlar:
+[Düzen](xref:mvc/views/layout) şablonları HTML kapsayıcı düzeninin aşağıdakileri olmasını sağlar:
 
-* Tek bir yerde belirtildi.
-* Sitede birden çok sayfada uygulandı.
+* Tek bir yerde belirtilir.
+* Sitede birden çok sayfada uygulanır.
 
-`@RenderBody()` satırını bulun. `RenderBody`, tüm sayfaya özgü görünümlerin, Düzen sayfasında *kaydırılan* bir yer tutucudur. Örneğin, **Gizlilik** bağlantısını seçin ve *Sayfalar/gizlilik. cshtml* görünümü `RenderBody` yöntemi içinde işlenir.
+`@RenderBody()` Hattı bul. `RenderBody`sayfaya özel tüm görünümlerin bulunduğu ve düzen sayfasına *sarılmış* bir yer tutucudur. Örneğin, **Gizlilik** bağlantısını seçin ve *Pages/Privacy.cshtml* görünümü `RenderBody` yöntemin içinde işlenir.
 
 <a name="vd"></a>
 
-### <a name="viewdata-and-layout"></a>ViewData ve Layout
+### <a name="viewdata-and-layout"></a>ViewData ve düzen
 
-*Pages/filmler/Index. cshtml* dosyasından aşağıdaki biçimlendirmeyi göz önünde bulundurun:
+*Sayfalar/Filmler/Index.cshtml* dosyasındaki aşağıdaki biçimlendirmeyi göz önünde bulundurun:
 
 [!code-cshtml[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Index.cshtml?range=1-6&highlight=4-999)]
 
-Önceki vurgulanan biçimlendirme, Razor geçişi örneği olan bir örnektir C#. `{` ve `}` karakterler bir C# kod bloğunu kapsar.
+Önceki vurgulanan biçimlendirme, Razor'Un C#'a geçişine bir örnektir. `{` Ve `}` karakterler C# kodu bloğunu içine alar.
 
-`PageModel` temel sınıfı, verileri bir görünüme geçirmek için kullanılabilen bir `ViewData` Dictionary özelliği içerir. Nesneler, anahtar/değer düzeniyle `ViewData` sözlüğüne eklenir. Yukarıdaki örnekte, `"Title"` özelliği `ViewData` sözlüğüne eklenir.
+Taban `PageModel` sınıf, `ViewData` verileri Görünüm'e geçirmek için kullanılabilecek bir sözlük özelliği içerir. Nesneler anahtar/değer `ViewData` deseni kullanılarak sözlüklere eklenir. Önceki örnekte, `"Title"` özellik sözlük eklenir. `ViewData`
 
-`"Title"` özelliği *sayfa/paylaşılan/_Layout. cshtml* dosyasında kullanılır. Aşağıdaki biçimlendirme *_Layout. cshtml* dosyasının ilk birkaç satırını gösterir.
+`"Title"` Özellik, *Pages/Shared/_Layout.cshtml* dosyasında kullanılır. Aşağıdaki biçimlendirme *_Layout.cshtml* dosyasının ilk birkaç satırını gösterir.
 
 <!-- we need a snapshot copy of layout because we are
 changing in in the next step.
 -->
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/NU/_Layout.cshtml?highlight=6)]
 
-Satır `@*Markup removed for brevity.*@` bir Razor açıklamadır. HTML yorumlarının (`<!-- -->`) aksine, Razor açıklamaları istemciye gönderilmez.
+Satır `@*Markup removed for brevity.*@` bir Razor yorumdur. HTML yorumlarının`<!-- -->`aksine ( ), Razor yorumları istemciye gönderilmez.
 
 ### <a name="update-the-layout"></a>Düzeni güncelleştirme
 
-*Pages/Shared/_Layout. cshtml* dosyasındaki `<title>` öğesini **RazorPagesMovie**yerine **filmi** görüntüleyecek şekilde değiştirin.
+`<title>` *Sayfa/Paylaşılan/_Layout.cshtml* dosyasındaki öğeyi **RazorPagesMovie**yerine **Film** görüntülemek için değiştirin.
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/Pages/Shared/_Layout.cshtml?range=1-6&highlight=6)]
 
-*Sayfa/paylaşılan/_Layout. cshtml* dosyasında aşağıdaki tutturucu öğeyi bulun.
+*Sayfalar/Paylaşılan/_Layout.cshtml* dosyasında aşağıdaki bağlantı öğesini bulun.
 
 ```cshtml
 <a class="navbar-brand" asp-area="" asp-page="/Index">RazorPagesMovie</a>
@@ -112,48 +112,48 @@ Satır `@*Markup removed for brevity.*@` bir Razor açıklamadır. HTML yorumlar
 <a class="navbar-brand" asp-page="/Movies/Index">RpMovie</a>
 ```
 
-Önceki tutturucu öğesi bir [etiket yardımcıdır](xref:mvc/views/tag-helpers/intro). Bu durumda, [bağlantı etiketi yardımcısının](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)olması gerekir. `asp-page="/Movies/Index"` Tag Helper özniteliği ve değeri, `/Movies/Index` Razor sayfasına bir bağlantı oluşturur. `asp-area` öznitelik değeri boş olduğundan, alan bağlantıda kullanılmaz. Daha fazla bilgi için bkz. [alanlara](xref:mvc/controllers/areas) bakın.
+Önceki bağlantı öğesi bir [Etiket Yardımcısı'dır.](xref:mvc/views/tag-helpers/intro) Bu durumda, [Çapa Etiketi Yardımcısı.](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) `asp-page="/Movies/Index"` Tag Helper özniteliği ve `/Movies/Index` değeri, Razor Page'e bir bağlantı oluşturur. Öznitelik `asp-area` değeri boşolduğundan, alan bağlantıda kullanılmaz. Daha fazla bilgi için [Alanlar'a](xref:mvc/controllers/areas) bakın.
 
-Değişikliklerinizi kaydedin ve **Rpmovie** bağlantısına tıklayarak uygulamayı test edin. Herhangi bir sorununuz varsa GitHub 'daki [_Layout. cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Shared/_Layout.cshtml) dosyasına bakın.
+Değişikliklerinizi kaydedin ve **RpMovie** bağlantısına tıklayarak uygulamayı test edin. Herhangi bir sorun varsa GitHub [_Layout.cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Shared/_Layout.cshtml) dosyasına bakın.
 
-Diğer bağlantıları test edin (**giriş**, **rpmovie**, **oluşturma**, **düzenleme**ve **silme**). Her sayfada, tarayıcı sekmesinde görebileceğiniz başlık ayarlanır. Bir sayfada yer işareti eklediğinizde başlık, yer işareti için kullanılır.
+Diğer bağlantıları test edin **(Ana Sayfa**, **RpMovie**, **Oluştur**, **Düzenle**ve **Sil**). Her sayfa, tarayıcı sekmesinde görebileceğiniz başlığı ayarlar. Bir sayfayı yer imi yaptığınızda, başlık yer imi için kullanılır.
 
 > [!NOTE]
-> `Price` alanına ondalık virgül giremeyebilirsiniz. Ondalık bir nokta ve ABD Ingilizcesi olmayan tarih biçimleri için virgül (",") kullanan Ingilizce olmayan yerel ayarlarda [jQuery doğrulamasını](https://jqueryvalidation.org/) desteklemek için, uygulamanızı globalize için adımlar uygulamanız gerekir. Ondalık virgülden ekleme hakkında yönergeler için bkz. [GitHub sorunu 4076](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) .
+> `Price` Alana ondalık virgül giremeyebilirsiniz. Ondalık bir nokta için virgül (",") kullanan İngilizce olmayan yerel halklar ve ABD İngilizce olmayan tarih biçimleri için [jQuery doğrulaması](https://jqueryvalidation.org/) desteklemek için, uygulamanızı küreselleştirmek için adımlar atmalısınız. Ondalık virgül ekleme yönergeleri için bu [GitHub sorunu 4076'ya](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) bakın.
 
-`Layout` özelliği *Pages/_ViewStart. cshtml* dosyasında ayarlanır:
+Özellik `Layout` *Pages/_ViewStart.cshtml* dosyasında ayarlanır:
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/Pages/_ViewStart.cshtml)]
 
-Yukarıdaki biçimlendirme düzen dosyasını *Sayfalar* klasörü altındaki tüm Razor dosyaları için *Sayfalar/paylaşılan/_Layout. cshtml* olarak ayarlar. Daha fazla bilgi için bkz. [Düzen](xref:razor-pages/index#layout) .
+Önceki biçimlendirme, düzen dosyasını *Sayfalar* klasörü altındaki tüm Razor dosyaları için *Sayfalar/Paylaşılan/_Layout.cshtml* olarak ayarlar. Daha fazla bilgi için [Düzen'e](xref:razor-pages/index#layout) bakın.
 
 ### <a name="the-create-page-model"></a>Sayfa oluştur modeli
 
-*Pages/filmler/Create. cshtml. cs* sayfa modelini inceleyin:
+*Sayfalar/Filmler/Create.cshtml.cs* sayfa modelini inceleyin:
 
 [!code-csharp[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Create.cshtml.cs?name=snippetALL)]
 
-`OnGet` yöntemi, sayfa için gereken tüm durumları başlatır. Oluşturma sayfasında başlatılacak durum yok, bu nedenle `Page` döndürülür. Öğreticide daha sonra, `OnGet` başlatma durumuna bir örnek gösterilir. `Page` yöntemi *Create. cshtml* sayfasını işleyen bir `PageResult` nesnesi oluşturur.
+Yöntem, `OnGet` sayfa için gereken durumu başlangıç olarak belirtir. Create sayfasının başlatılması için herhangi bir durumu `Page` yoktur, bu nedenle döndürülür. Daha sonra öğreticide, `OnGet` durum başlatma örneği gösterilir. Yöntem, `Page` `PageResult` *Create.cshtml* sayfasını işleyen bir nesne oluşturur.
 
-`Movie` özelliği, [model bağlamayı](xref:mvc/models/model-binding)kabul etmek için `[BindProperty]` özniteliğini kullanır. Oluşturma formu form değerlerini gönderirse, ASP.NET Core çalışma zamanı, postalanan değerleri `Movie` modeline bağlar.
+`Movie` Özellik, `[BindProperty]` [bağlamayı modellemek](xref:mvc/models/model-binding)için özniteliği kullanır. Form oluştur form değerlerini yayınladığında, ASP.NET Çekirdek çalışma süresi deftere `Movie` nakledilen değerleri modele bağlar.
 
-`OnPostAsync` yöntemi, sayfa form verileri gönderdiğinde çalıştırılır:
+Yöntem, `OnPostAsync` sayfa gönderileri veri oluşturduğunda çalıştırılır:
 
 [!code-csharp[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Create.cshtml.cs?name=snippetPost)]
 
-Herhangi bir model hatası varsa, form, gönderilen tüm form verileriyle birlikte yeniden görüntülenir. Form gönderilmeden önce çoğu model hatası istemci tarafında yakalanabilir. Bir model hatasına bir örnek, Date alanı için bir tarihe dönüştürülemeyen bir değer gönderme. İstemci tarafı doğrulama ve model doğrulaması Öğreticinin ilerleyen kısımlarında ele alınmıştır.
+Herhangi bir model hatası varsa, form, deftere nakledilen form verileriyle birlikte yeniden görüntülenir. Çoğu model hatası form deftere nakledilmeden önce istemci tarafında yakalanabilir. Model hatasıörneği, tarih alanı için tarihe dönüştürülemeyen bir değer deftere nakletmektir. İstemci tarafı doğrulama ve model doğrulama daha sonra öğreticide ele alınmıştır.
 
-Model hatası yoksa, veriler kaydedilir ve tarayıcı dizin sayfasına yönlendirilir.
+Model hatası yoksa, veriler kaydedilir ve tarayıcı Dizin sayfasına yönlendirilir.
 
-### <a name="the-create-razor-page"></a>Razor Oluştur sayfası
+### <a name="the-create-razor-page"></a>Jilet Oluştur Sayfası
 
-*Pages/filmler/Create. cshtml* Razor sayfa dosyasını inceleyin:
+*Sayfaları/Filmleri/Create.cshtml* Jilet Sayfa dosyasını inceleyin:
 
 [!code-cshtml[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Create.cshtml)]
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Visual Studio, etiket yardımcıları için kullanılan farklı kalın yazı tipiyle aşağıdaki etiketleri görüntüler:
+Visual Studio, Tag Helpers için kullanılan farklı bir kalın yazı tipinde aşağıdaki etiketleri görüntüler:
 
 * `<form method="post">`
 * `<div asp-validation-summary="ModelOnly" class="text-danger"></div>`
@@ -161,11 +161,11 @@ Visual Studio, etiket yardımcıları için kullanılan farklı kalın yazı tip
 * `<input asp-for="Movie.Title" class="form-control" />`
 * `<span asp-validation-for="Movie.Title" class="text-danger"></span>`
 
-![Create. cshtml sayfasının VS17 görünümü](page/_static/th3.png)
+![Create.cshtml sayfasının VS17 görünümü](page/_static/th3.png)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Aşağıdaki etiket yardımcıları, önceki biçimlendirmede gösterilmektedir:
+Aşağıdaki Etiket Yardımcıları önceki biçimlendirmede gösterilir:
 
 * `<form method="post">`
 * `<div asp-validation-summary="ModelOnly" class="text-danger"></div>`
@@ -175,7 +175,7 @@ Aşağıdaki etiket yardımcıları, önceki biçimlendirmede gösterilmektedir:
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-Visual Studio, etiket yardımcıları için kullanılan farklı kalın yazı tipiyle aşağıdaki etiketleri görüntüler:
+Visual Studio, Tag Helpers için kullanılan farklı bir kalın yazı tipinde aşağıdaki etiketleri görüntüler:
 
 * `<form method="post">`
 * `<div asp-validation-summary="ModelOnly" class="text-danger"></div>`
@@ -185,25 +185,25 @@ Visual Studio, etiket yardımcıları için kullanılan farklı kalın yazı tip
 
 ---
 
-`<form method="post">` öğesi bir [form etiketi yardımcıdır](xref:mvc/views/working-with-forms#the-form-tag-helper). Form etiketi Yardımcısı, bir [antiforgery belirtecini](xref:security/anti-request-forgery)otomatik olarak içerir.
+Öğe `<form method="post">` bir [Form Tag Helper](xref:mvc/views/working-with-forms#the-form-tag-helper)olduğunu. Form Tag Helper otomatik olarak bir [antiforgery belirteci](xref:security/anti-request-forgery)içerir.
 
-Yapı iskelesi altyapısı, modeldeki her alan için (KIMLIK hariç), aşağıdakine benzer Razor biçimlendirmesi oluşturur:
+İskele motoru, modeldeki her alan için (kimlik hariç) aşağıdakilere benzer jilet biçimlendirmeoluşturur:
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Create.cshtml?range=15-20)]
 
-[Doğrulama etiketi yardımcıları](xref:mvc/views/working-with-forms#the-validation-tag-helpers) (`<div asp-validation-summary` ve `<span asp-validation-for`) doğrulama hatalarını görüntüler. Doğrulama, bu serinin ilerleyen kısımlarında daha ayrıntılı bir şekilde ele alınmıştır.
+[Doğrulama Etiketi Yardımcıları](xref:mvc/views/working-with-forms#the-validation-tag-helpers) (`<div asp-validation-summary` `<span asp-validation-for`ve ) doğrulama hatalarını görüntüler. Doğrulama daha sonra bu seride daha ayrıntılı olarak ele alınmıştır.
 
-[Etiket etiketi Yardımcısı](xref:mvc/views/working-with-forms#the-label-tag-helper) (`<label asp-for="Movie.Title" class="control-label"></label>`), `Title` özelliği için etiket başlığını ve `for` özniteliğini oluşturur.
+[Etiket Yardımcısı](xref:mvc/views/working-with-forms#the-label-tag-helper) `<label asp-for="Movie.Title" class="control-label"></label>`( ) `for` `Title` özelliği için etiket başlığı ve öznitelik oluşturur.
 
-[Giriş etiketi Yardımcısı](xref:mvc/views/working-with-forms) (`<input asp-for="Movie.Title" class="form-control">`), [dataaçıklamaların](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) özniteliklerini kullanır ve istemci tarafında jQuery doğrulaması için gerekli HTML özniteliklerini üretir.
+[Giriş Etiketi Yardımcısı](xref:mvc/views/working-with-forms) (`<input asp-for="Movie.Title" class="form-control">`) [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) özniteliklerini kullanır ve istemci tarafında jQuery Doğrulama sı için gerekli HTML özniteliklerini üretir.
 
-`<form method="post">`gibi etiket yardımcıları hakkında daha fazla bilgi için bkz. [ASP.NET Core etiket yardımcıları](xref:mvc/views/tag-helpers/intro).
+Tag Helpers hakkında `<form method="post">`daha fazla bilgi için , [ASP.NET](xref:mvc/views/tag-helpers/intro)bkz.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 > [!div class="step-by-step"]
-> [Önceki: bir model ekleme](xref:tutorials/razor-pages/model) [sonraki
-> : veritabanı](xref:tutorials/razor-pages/sql)
+> [Önceki: Sonraki model](xref:tutorials/razor-pages/model)
+> [ekleme: Veritabanı](xref:tutorials/razor-pages/sql)
 
 ::: moniker-end
 
@@ -211,166 +211,166 @@ Yapı iskelesi altyapısı, modeldeki her alan için (KIMLIK hariç), aşağıda
 
 Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Bu öğreticide, [önceki öğreticide](xref:tutorials/razor-pages/model)scafkatlama tarafından oluşturulan Razor Pages incelenir.
+Bu öğretici, [önceki öğreticide](xref:tutorials/razor-pages/model)iskele tarafından oluşturulan Razor Pages inceler.
 
-Örneği [görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22) .
+Örneği [görüntüleyin veya indirin.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22)
 
-## <a name="the-create-delete-details-and-edit-pages"></a>Oluşturma, silme, Ayrıntılar ve düzenleme sayfaları
+## <a name="the-create-delete-details-and-edit-pages"></a>Sayfaları Oluştur, Sil, Ayrıntı ve Düzenle
 
-*Pages/filmler/Index. cshtml. cs* sayfa modelini inceleyin:
+*Sayfaları/Filmleri/Index.cshtml.cs* Sayfa Modelini Inceleyin:
 
 [!code-csharp[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml.cs)]
 
-Razor Pages `PageModel`türetilir. Kurala göre `PageModel`türetilmiş sınıf `<PageName>Model`olarak adlandırılır. Oluşturucu, `RazorPagesMovieContext` sayfaya eklemek için [bağımlılık ekleme](xref:fundamentals/dependency-injection) işlemini kullanır. Tüm yapı iskelesi sayfaları bu düzene uyar. Entity Framework zaman uyumsuz programlama hakkında daha fazla bilgi için bkz. [zaman uyumsuz kod](xref:data/ef-rp/intro#asynchronous-code) .
+Jilet Sayfaları `PageModel`türetilmiştir. Kural olarak, `PageModel`-türetilmiş `<PageName>Model`sınıf denir. Oluşturucu sayfaya eklemek için `RazorPagesMovieContext` [bağımlılık enjeksiyonu](xref:fundamentals/dependency-injection) kullanır. Tüm iskele sayfaları bu deseni takip eder. Entity Framework ile asynchronous programlama hakkında daha fazla bilgi için [Asynchronous koduna](xref:data/ef-rp/intro#asynchronous-code) bakın.
 
-Sayfa için bir istek yapıldığında `OnGetAsync` yöntemi, Razor sayfasına bir film listesi döndürür. `OnGetAsync` veya `OnGet` bir Razor sayfasında, sayfanın durumunu başlatmak için çağrılır. Bu durumda, `OnGetAsync` film listesini alır ve görüntüler.
+Sayfa için bir istek yapıldığında, `OnGetAsync` yöntem bir film listesini Razor Page'e döndürür. `OnGetAsync`veya `OnGet` sayfanın durumunu niçin başlatılması için Bir Jilet Sayfası'nda çağrılır. Bu durumda, `OnGetAsync` filmlerin bir listesini alır ve görüntüler.
 
-`OnGet` `void` döndürdüğünde veya `OnGetAsync``Task`döndürürse, hiçbir dönüş yöntemi kullanılmaz. Dönüş türü `IActionResult` veya `Task<IActionResult>`olduğunda, return ifadesinin sağlanması gerekir. Örneğin, *Pages/filmler/Create. cshtml. cs* `OnPostAsync` yöntemi:
+İade `OnGet` `void` veya `OnGetAsync` `Task`rirken, iade yöntemi kullanılmaz. İade türü `IActionResult` veya `Task<IActionResult>`, bir iade deyimi sağlanmalıdır. Örneğin, *Sayfalar/Filmler/Create.cshtml.cs* `OnPostAsync` yöntemi:
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Pages/Movies/Create.cshtml.cs?name=snippet)]
 
-<a name="index"></a>*Pages/filmler/Index. cshtml* Razor sayfasını inceleyin:
+<a name="index"></a>*Sayfaları/Filmleri/Index.cshtml* Jilet Sayfasını Inceleyin:
 
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml)]
 
-Razor, HTML 'den C# ya da Razor 'e özgü biçimlendirmeye geçiş yapabilir. Bir `@` sembol sonrasında [Razor ayrılmış bir anahtar sözcük](xref:mvc/views/razor#razor-reserved-keywords)olduğunda, bu, ' a geçiş yapar C#.
+Razor HTML'den C#'a veya Jilete özgü biçimlendirmeye geçiş yapabilir. Bir `@` [sembol, Jilet ayrılmış](xref:mvc/views/razor#razor-reserved-keywords)bir anahtar kelime tarafından takip edildiğinde, Razor'a özgü biçimlendirmeye dönüşür, aksi takdirde C#'a dönüşür.
 
-`@page` Razor yönergesi, dosyayı bir MVC eylemine dönüştürür, bu da istekleri işleyebileceği anlamına gelir. `@page` sayfadaki ilk Razor yönergesi olmalıdır. `@page`, Razor 'e özgü biçimlendirmeye geçme örneğidir. Daha fazla bilgi için bkz. [Razor söz dizimi](xref:mvc/views/razor#razor-syntax) .
+`@page` Razor yönergesi, dosyayı bir MVC eylemine dönüştürür, bu da istekleri işleyebilir anlamına gelir. `@page`bir sayfadaki ilk Razor direktifi olmalıdır. `@page`Jilete özgü biçimlendirmeye geçişin bir örneğidir. Daha fazla bilgi için [Razor sözdizimine](xref:mvc/views/razor#razor-syntax) bakın.
 
-Aşağıdaki HTML Yardımcısı 'nda kullanılan lambda ifadesini inceleyin:
+Aşağıdaki HTML Yardımcısı'nda kullanılan lambda ifadesini inceleyin:
 
 ```cshtml
 @Html.DisplayNameFor(model => model.Movie[0].Title)
 ```
 
-`DisplayNameFor` HTML Yardımcısı, görünen adı belirlemede lambda ifadesinde başvurulan `Title` özelliğini inceler. Lambda ifadesi değerlendirilmek yerine incelenir. Bu, `model`, `model.Movie`veya `model.Movie[0]` `null` veya boş olduğunda herhangi bir erişim ihlali olmadığı anlamına gelir. Lambda ifadesi değerlendirildiğinde (örneğin, `@Html.DisplayFor(modelItem => item.Title)`), modelin özellik değerleri değerlendirilir.
+HTML `DisplayNameFor` Yardımcısı, görüntü `Title` adını belirlemek için lambda ifadesinde başvurulan özelliği denetler. Lambda ifadesi değerlendirilmek yerine incelenir. Bu, `model`, , , `model.Movie`veya `model.Movie[0]` boş `null` olduğunda hiçbir erişim ihlali anlamına gelir. Lambda ifadesi değerlendirildiğinde (örneğin, modelin özellik değerleri `@Html.DisplayFor(modelItem => item.Title)`ile) değerlendirilir.
 
 <a name="md"></a>
 
-### <a name="the-model-directive"></a>@model yönergesi
+### <a name="the-model-directive"></a>Direktif @model
 
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?range=1-2&highlight=2)]
 
-`@model` yönergesi, Razor sayfasına geçirilen modelin türünü belirtir. Yukarıdaki örnekte `@model` satırı, `PageModel`türetilmiş sınıfı Razor sayfası için kullanılabilir hale getirir. Model, `@Html.DisplayNameFor` ve sayfadaki [HTML yardımcılarını](/aspnet/mvc/overview/older-versions-1/views/creating-custom-html-helpers-cs#understanding-html-helpers) `@Html.DisplayFor` kullanılır.
+Yönerge, `@model` Razor Page'e geçirilen modelin türünü belirtir. Önceki örnekte, `@model` satır `PageModel`-türetilmiş sınıfı Razor Page için kullanılabilir hale getirir. Model, sayfadaki `@Html.DisplayNameFor` HTML `@Html.DisplayFor` Yardımcıları ve [HTML Yardımcıları'nda](/aspnet/mvc/overview/older-versions-1/views/creating-custom-html-helpers-cs#understanding-html-helpers) kullanılır.
 
 ### <a name="the-layout-page"></a>Düzen sayfası
 
-Menü bağlantılarını (**RazorPagesMovie**, **Home**ve **Gizlilik**) seçin. Her sayfada aynı menü düzeni gösterilir. Menü düzeni *sayfa/paylaşılan/_Layout. cshtml* dosyasında uygulanır. *Pages/Shared/_Layout. cshtml* dosyasını açın.
+Menü bağlantılarını seçin **(RazorPagesMovie,** **Home**, ve **Privacy**). Her sayfa aynı menü düzenini gösterir. Menü düzeni *Sayfalar/Paylaşılan/_Layout.cshtml* dosyasında uygulanır. *Sayfalar/Paylaşılan/_Layout.cshtml* dosyasını açın.
 
-[Düzen](xref:mvc/views/layout) şablonları, sitenizin HTML kapsayıcı yerleşimini tek bir yerde belirtmenize ve sonra sitenizdeki birden çok sayfaya uygulamanıza olanak tanır. `@RenderBody()` satırını bulun. `RenderBody`, oluşturduğunuz tüm sayfaya özgü görünümlerin, Düzen sayfasında *kaydırılan* bir yer tutucudur. Örneğin, **Gizlilik** bağlantısını seçerseniz, **Sayfa/Gizlilik. cshtml** görünümü `RenderBody` yöntemi içinde işlenir.
+[Düzen](xref:mvc/views/layout) şablonları, sitenizin HTML kapsayıcı düzenini tek bir yerde belirtmenize ve ardından sitenizdeki birden çok sayfaya uygulamanıza olanak tanır. `@RenderBody()` Hattı bul. `RenderBody`oluşturduğunuz tüm sayfaya özgü görünümlerin düzen sayfasına sarılmış olarak *görüntülendiği* bir yer tutucudur. Örneğin, **Gizlilik** bağlantısını seçerseniz, **Pages/Privacy.cshtml** görünümü `RenderBody` yöntemin içinde işlenir.
 
 <a name="vd"></a>
 
-### <a name="viewdata-and-layout"></a>ViewData ve Layout
+### <a name="viewdata-and-layout"></a>ViewData ve düzen
 
-*Pages/filmler/Index. cshtml* dosyasından aşağıdaki kodu göz önünde bulundurun:
+*Sayfalar/Filmler/Index.cshtml* dosyasındaki aşağıdaki kodu göz önünde bulundurun:
 
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?range=1-6&highlight=4-999)]
 
-Önceki vurgulanan kod, Razor geçişi örneği olan bir örnektir C#. `{` ve `}` karakterler bir C# kod bloğunu kapsar.
+Önceki vurgulanan kod, Razor'Un C#'a geçişine bir örnektir. `{` Ve `}` karakterler C# kodu bloğunu içine alar.
 
-`PageModel` temel sınıfında, bir görünüme geçirmek istediğiniz verileri eklemek için kullanılabilecek bir `ViewData` Dictionary özelliği vardır. Bir anahtar/değer düzeniyle `ViewData` sözlüğüne nesne eklersiniz. Yukarıdaki örnekte, "title" özelliği `ViewData` sözlüğüne eklenir.
+Taban `PageModel` sınıfın, `ViewData` Görünüm'e geçirmek istediğiniz verileri eklemek için kullanılabilecek bir sözlük özelliği vardır. Anahtar/değer deseni `ViewData` kullanarak sözlük içine nesneler eklersiniz. Önceki örnekte, "Başlık" özelliği sözlük eklenir. `ViewData`
 
-"Title" özelliği *sayfa/paylaşılan/_Layout. cshtml* dosyasında kullanılır. Aşağıdaki biçimlendirme *_Layout. cshtml* dosyasının ilk birkaç satırını gösterir.
+"Başlık" özelliği *Sayfalar/Paylaşılan/_Layout.cshtml* dosyasında kullanılır. Aşağıdaki biçimlendirme *_Layout.cshtml* dosyasının ilk birkaç satırını gösterir.
 
 <!-- we need a snapshot copy of layout because we are
 changing in in the next step.
 -->
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/NU/_Layout.cshtml?highlight=6-99)]
 
-Satır `@*Markup removed for brevity.*@`, düzen dosyanızda görünmeyen bir Razor açıklamadır. HTML yorumlarının (`<!-- -->`) aksine, Razor açıklamaları istemciye gönderilmez.
+Satır, `@*Markup removed for brevity.*@` düzen dosyanızda görünmeyen bir Razor yorumudur. HTML yorumlarının`<!-- -->`aksine ( ), Razor yorumları istemciye gönderilmez.
 
 ### <a name="update-the-layout"></a>Düzeni güncelleştirme
 
-*Pages/Shared/_Layout. cshtml* dosyasındaki `<title>` öğesini **RazorPagesMovie**yerine **filmi** görüntüleyecek şekilde değiştirin.
+`<title>` *Sayfa/Paylaşılan/_Layout.cshtml* dosyasındaki öğeyi **RazorPagesMovie**yerine **Film** görüntülemek için değiştirin.
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml?range=1-6&highlight=6)]
 
-*Sayfa/paylaşılan/_Layout. cshtml* dosyasında aşağıdaki tutturucu öğeyi bulun.
+*Sayfalar/Paylaşılan/_Layout.cshtml* dosyasında aşağıdaki bağlantı öğesini bulun.
 
 ```cshtml
 <a class="navbar-brand" asp-area="" asp-page="/Index">RazorPagesMovie</a>
 ```
 
-Önceki öğeyi aşağıdaki biçimlendirme ile değiştirin.
+Önceki öğeyi aşağıdaki biçimlendirmeyle değiştirin.
 
 ```cshtml
 <a class="navbar-brand" asp-page="/Movies/Index">RpMovie</a>
 ```
 
-Önceki tutturucu öğesi bir [etiket yardımcıdır](xref:mvc/views/tag-helpers/intro). Bu durumda, [bağlantı etiketi yardımcısının](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)olması gerekir. `asp-page="/Movies/Index"` Tag Helper özniteliği ve değeri, `/Movies/Index` Razor sayfasına bir bağlantı oluşturur. `asp-area` öznitelik değeri boş olduğundan, alan bağlantıda kullanılmaz. Daha fazla bilgi için bkz. [alanlara](xref:mvc/controllers/areas) bakın.
+Önceki bağlantı öğesi bir [Etiket Yardımcısı'dır.](xref:mvc/views/tag-helpers/intro) Bu durumda, [Çapa Etiketi Yardımcısı.](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) `asp-page="/Movies/Index"` Tag Helper özniteliği ve `/Movies/Index` değeri, Razor Page'e bir bağlantı oluşturur. Öznitelik `asp-area` değeri boşolduğundan, alan bağlantıda kullanılmaz. Daha fazla bilgi için [Alanlar'a](xref:mvc/controllers/areas) bakın.
 
-Değişikliklerinizi kaydedin ve **Rpmovie** bağlantısına tıklayarak uygulamayı test edin. Herhangi bir sorununuz varsa GitHub 'daki [_Layout. cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml) dosyasına bakın.
+Değişikliklerinizi kaydedin ve **RpMovie** bağlantısına tıklayarak uygulamayı test edin. Herhangi bir sorun varsa GitHub [_Layout.cshtml](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml) dosyasına bakın.
 
-Diğer bağlantıları test edin (**giriş**, **rpmovie**, **oluşturma**, **düzenleme**ve **silme**). Her sayfada, tarayıcı sekmesinde görebileceğiniz başlık ayarlanır. Bir sayfada yer işareti eklediğinizde başlık, yer işareti için kullanılır.
+Diğer bağlantıları test edin **(Ana Sayfa**, **RpMovie**, **Oluştur**, **Düzenle**ve **Sil**). Her sayfa, tarayıcı sekmesinde görebileceğiniz başlığı ayarlar. Bir sayfayı yer imi yaptığınızda, başlık yer imi için kullanılır.
 
 > [!NOTE]
-> `Price` alanına ondalık virgül giremeyebilirsiniz. Ondalık bir nokta ve ABD Ingilizcesi olmayan tarih biçimleri için virgül (",") kullanan Ingilizce olmayan yerel ayarlarda [jQuery doğrulamasını](https://jqueryvalidation.org/) desteklemek için, uygulamanızı globalize için adımlar uygulamanız gerekir. Bu GitHub, ondalık virgülden ekleme hakkında yönergeler için [4076 sorun](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420) .
+> `Price` Alana ondalık virgül giremeyebilirsiniz. Ondalık bir nokta için virgül (",") kullanan İngilizce olmayan yerel halklar ve ABD İngilizce olmayan tarih biçimleri için [jQuery doğrulaması](https://jqueryvalidation.org/) desteklemek için, uygulamanızı küreselleştirmek için adımlar atmalısınız. Ondalık virgül ekleme yönergeleri için bu [GitHub sorunu 4076.](https://github.com/dotnet/AspNetCore.Docs/issues/4076#issuecomment-326590420)
 
-`Layout` özelliği *Pages/_ViewStart. cshtml* dosyasında ayarlanır:
+Özellik `Layout` *Pages/_ViewStart.cshtml* dosyasında ayarlanır:
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/_ViewStart.cshtml)]
 
-Yukarıdaki biçimlendirme düzen dosyasını *Sayfalar* klasörü altındaki tüm Razor dosyaları için *Sayfalar/paylaşılan/_Layout. cshtml* olarak ayarlar. Daha fazla bilgi için bkz. [Düzen](xref:razor-pages/index#layout) .
+Önceki biçimlendirme, düzen dosyasını *Sayfalar* klasörü altındaki tüm Razor dosyaları için *Sayfalar/Paylaşılan/_Layout.cshtml* olarak ayarlar. Daha fazla bilgi için [Düzen'e](xref:razor-pages/index#layout) bakın.
 
 ### <a name="the-create-page-model"></a>Sayfa oluştur modeli
 
-*Pages/filmler/Create. cshtml. cs* sayfa modelini inceleyin:
+*Sayfalar/Filmler/Create.cshtml.cs* sayfa modelini inceleyin:
 
 [!code-csharp[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Create.cshtml.cs?name=snippetALL)]
 
-`OnGet` yöntemi, sayfa için gereken tüm durumları başlatır. Oluşturma sayfasında başlatılacak durum yok, bu nedenle `Page` döndürülür. Öğreticide daha sonra `OnGet` yöntemi başlatma durumunu görürsünüz. `Page` yöntemi *Create. cshtml* sayfasını işleyen bir `PageResult` nesnesi oluşturur.
+Yöntem, `OnGet` sayfa için gereken durumu başlangıç olarak belirtir. Create sayfasının başlatılması için herhangi bir durumu `Page` yoktur, bu nedenle döndürülür. Daha sonra öğretici `OnGet` de yöntem durum başlatma bakın. Yöntem, `Page` `PageResult` *Create.cshtml* sayfasını işleyen bir nesne oluşturur.
 
-`Movie` özelliği, [model bağlamayı](xref:mvc/models/model-binding)kabul etmek için `[BindProperty]` özniteliğini kullanır. Oluşturma formu form değerlerini gönderirse, ASP.NET Core çalışma zamanı, postalanan değerleri `Movie` modeline bağlar.
+`Movie` Özellik, `[BindProperty]` [bağlamayı modellemek](xref:mvc/models/model-binding)için özniteliği kullanır. Form oluştur form değerlerini yayınladığında, ASP.NET Çekirdek çalışma süresi deftere `Movie` nakledilen değerleri modele bağlar.
 
-`OnPostAsync` yöntemi, sayfa form verileri gönderdiğinde çalıştırılır:
+Yöntem, `OnPostAsync` sayfa gönderileri veri oluşturduğunda çalıştırılır:
 
 [!code-csharp[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Create.cshtml.cs?name=snippetPost)]
 
-Herhangi bir model hatası varsa, form, gönderilen tüm form verileriyle birlikte yeniden görüntülenir. Form gönderilmeden önce çoğu model hatası istemci tarafında yakalanabilir. Bir model hatasına bir örnek, Date alanı için bir tarihe dönüştürülemeyen bir değer gönderme. İstemci tarafı doğrulama ve model doğrulaması Öğreticinin ilerleyen kısımlarında ele alınmıştır.
+Herhangi bir model hatası varsa, form, deftere nakledilen form verileriyle birlikte yeniden görüntülenir. Çoğu model hatası form deftere nakledilmeden önce istemci tarafında yakalanabilir. Model hatasıörneği, tarih alanı için tarihe dönüştürülemeyen bir değer deftere nakletmektir. İstemci tarafı doğrulama ve model doğrulama daha sonra öğreticide ele alınmıştır.
 
-Model hatası yoksa, veriler kaydedilir ve tarayıcı dizin sayfasına yönlendirilir.
+Model hatası yoksa, veriler kaydedilir ve tarayıcı Dizin sayfasına yönlendirilir.
 
-### <a name="the-create-razor-page"></a>Razor Oluştur sayfası
+### <a name="the-create-razor-page"></a>Jilet Oluştur Sayfası
 
-*Pages/filmler/Create. cshtml* Razor sayfa dosyasını inceleyin:
+*Sayfaları/Filmleri/Create.cshtml* Jilet Sayfa dosyasını inceleyin:
 
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Create.cshtml)]
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Visual Studio, etiket yardımcıları için kullanılan farklı kalın yazı tipiyle `<form method="post">` etiketini görüntüler:
+Visual Studio `<form method="post">` etiketi Tag Helpers için kullanılan farklı bir kalın yazı tipinde görüntüler:
 
-![Create. cshtml sayfasının VS17 görünümü](page/_static/th.png)
+![Create.cshtml sayfasının VS17 görünümü](page/_static/th.png)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-`<form method="post">`gibi etiket yardımcıları hakkında daha fazla bilgi için bkz. [ASP.NET Core etiket yardımcıları](xref:mvc/views/tag-helpers/intro).
+Tag Helpers hakkında `<form method="post">`daha fazla bilgi için , [ASP.NET](xref:mvc/views/tag-helpers/intro)bkz.
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-Mac için Visual Studio etiket yardımcıları için kullanılan farklı kalın yazı tipinde `<form method="post">` etiketini görüntüler.
+Mac için Visual `<form method="post">` Studio etiketi Tag Helpers için kullanılan farklı bir kalın yazı tipinde görüntüler.
 
 ---
 
-`<form method="post">` öğesi bir [form etiketi yardımcıdır](xref:mvc/views/working-with-forms#the-form-tag-helper). Form etiketi Yardımcısı, bir [antiforgery belirtecini](xref:security/anti-request-forgery)otomatik olarak içerir.
+Öğe `<form method="post">` bir [Form Tag Helper](xref:mvc/views/working-with-forms#the-form-tag-helper)olduğunu. Form Tag Helper otomatik olarak bir [antiforgery belirteci](xref:security/anti-request-forgery)içerir.
 
-Yapı iskelesi altyapısı, modeldeki her alan için (KIMLIK hariç), aşağıdakine benzer Razor biçimlendirmesi oluşturur:
+İskele motoru, modeldeki her alan için (kimlik hariç) aşağıdakilere benzer jilet biçimlendirmeoluşturur:
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Create.cshtml?range=15-20)]
 
-[Doğrulama etiketi yardımcıları](xref:mvc/views/working-with-forms#the-validation-tag-helpers) (`<div asp-validation-summary` ve `<span asp-validation-for`) doğrulama hatalarını görüntüler. Doğrulama, bu serinin ilerleyen kısımlarında daha ayrıntılı bir şekilde ele alınmıştır.
+[Doğrulama Etiketi Yardımcıları](xref:mvc/views/working-with-forms#the-validation-tag-helpers) (`<div asp-validation-summary` `<span asp-validation-for`ve ) doğrulama hatalarını görüntüler. Doğrulama daha sonra bu seride daha ayrıntılı olarak ele alınmıştır.
 
-[Etiket etiketi Yardımcısı](xref:mvc/views/working-with-forms#the-label-tag-helper) (`<label asp-for="Movie.Title" class="control-label"></label>`), `Title` özelliği için etiket başlığını ve `for` özniteliğini oluşturur.
+[Etiket Yardımcısı](xref:mvc/views/working-with-forms#the-label-tag-helper) `<label asp-for="Movie.Title" class="control-label"></label>`( ) `for` `Title` özelliği için etiket başlığı ve öznitelik oluşturur.
 
-[Giriş etiketi Yardımcısı](xref:mvc/views/working-with-forms) (`<input asp-for="Movie.Title" class="form-control">`), [dataaçıklamaların](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) özniteliklerini kullanır ve istemci tarafında jQuery doğrulaması için gerekli HTML özniteliklerini üretir.
+[Giriş Etiketi Yardımcısı](xref:mvc/views/working-with-forms) (`<input asp-for="Movie.Title" class="form-control">`) [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) özniteliklerini kullanır ve istemci tarafında jQuery Doğrulama sı için gerekli HTML özniteliklerini üretir.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * [Bu öğreticinin YouTube sürümü](https://youtu.be/zxgKjPYnOMM)
 
 > [!div class="step-by-step"]
-> [Önceki: bir model ekleme](xref:tutorials/razor-pages/model) [sonraki
-> : veritabanı](xref:tutorials/razor-pages/sql)
+> [Önceki: Sonraki model](xref:tutorials/razor-pages/model)
+> [ekleme: Veritabanı](xref:tutorials/razor-pages/sql)
 
 ::: moniker-end

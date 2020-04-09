@@ -1,37 +1,37 @@
 ---
-title: .NET istemcisiyle gRPC hizmetlerini çağırma
+title: .NET istemcisi ile gRPC hizmetlerini arayın
 author: jamesnk
-description: .NET gRPC istemcisiyle gRPC hizmetlerini çağırmayı öğrenin.
+description: .NET gRPC istemcisi ile gRPC hizmetlerini nasıl arayacağınızı öğrenin.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 08/21/2019
 uid: grpc/client
 ms.openlocfilehash: 6a6a649f7194354b16f3d67160be02428cc01170
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78667176"
 ---
-# <a name="call-grpc-services-with-the-net-client"></a>.NET istemcisiyle gRPC hizmetlerini çağırma
+# <a name="call-grpc-services-with-the-net-client"></a>.NET istemcisi ile gRPC hizmetlerini arayın
 
-[GRPC .net. Client](https://www.nuget.org/packages/Grpc.Net.Client) NuGet paketinde bir .net GRPC istemci kitaplığı mevcuttur. Bu belgede nasıl yapılacağı açıklanmaktadır:
+Bir .NET gRPC istemci kitaplığı [Grpc.Net.Client](https://www.nuget.org/packages/Grpc.Net.Client) NuGet paketinde mevcuttur. Bu belge, nasıl açıklanmaktadır:
 
-* GRPC istemcisini, gRPC hizmetlerini çağırmak üzere yapılandırın.
-* GRPC 'yi birli, sunucu akışı, istemci akışı ve iki yönlü akış yöntemlerine göre çağırır.
+* gRPC hizmetlerini aramak için bir gRPC istemcisini yapılandırın.
+* Unary, sunucu akışı, istemci akışı ve çift yönlü akış yöntemleri için gRPC aramaları yapın.
 
-## <a name="configure-grpc-client"></a>GRPC istemcisini yapılandırma
+## <a name="configure-grpc-client"></a>gRPC istemcisi yapılandırma
 
-gRPC istemcileri [ *\*. proto* dosyalarından oluşturulan](xref:grpc/basics#generated-c-assets)somut istemci türleridir. Somut gRPC istemcisinde *\*. proto* dosyasındaki GRPC hizmetine çeviren yöntemler vardır.
+gRPC istemcileri [ * \*.proto* dosyalarından oluşturulan](xref:grpc/basics#generated-c-assets)somut istemci türleridir. Somut gRPC istemcisi * \*.proto* dosyasındaki gRPC hizmetine çevrilen yöntemlere sahiptir.
 
-Bir kanaldan gRPC istemcisi oluşturulur. Kanal oluşturmak için `GrpcChannel.ForAddress` kullanarak başlayın ve ardından bir gRPC istemcisi oluşturmak için kanalı kullanın:
+Bir gRPC istemcisi bir kanaldan oluşturulur. Bir kanal `GrpcChannel.ForAddress` oluşturmak için kullanarak başlayın ve sonra bir gRPC istemcisi oluşturmak için kanalı kullanın:
 
 ```csharp
 var channel = GrpcChannel.ForAddress("https://localhost:5001");
 var client = new Greet.GreeterClient(channel);
 ```
 
-Kanal, gRPC hizmetine uzun süreli bir bağlantıyı temsil eder. Bir kanal oluşturulduğunda, hizmet çağırma ile ilgili seçeneklerle yapılandırılır. Örneğin, çağrı yapmak için kullanılan `HttpClient`, en fazla ileti ve alma iletisi boyutu ve günlüğe kaydetme `GrpcChannelOptions` ve `GrpcChannel.ForAddress`ile kullanılabilir. Seçeneklerin tamamı listesi için bkz. [istemci yapılandırma seçenekleri](xref:grpc/configuration#configure-client-options).
+Kanal, gRPC hizmetiyle uzun süreli bir bağlantıyı temsil eder. Bir kanal oluşturulduğunda, bir hizmeti çağırmayla ilgili seçeneklerle yapılandırılır. Örneğin, arama `HttpClient` yapmak için kullanılan, en fazla gönder ve ileti boyutu `GrpcChannelOptions` ve `GrpcChannel.ForAddress`günlük belirtilebilir ve . Seçeneklerin tam listesi için [istemci yapılandırma seçeneklerine](xref:grpc/configuration#configure-client-options)bakın.
 
 ```csharp
 var channel = GrpcChannel.ForAddress("https://localhost:5001");
@@ -44,34 +44,34 @@ var counterClient = new Count.CounterClient(channel);
 
 Kanal ve istemci performansı ve kullanımı:
 
-* Kanal oluşturma maliyetli bir işlem olabilir. GRPC çağrıları için bir kanalı yeniden kullanmak performans avantajları sağlar.
+* Kanal oluşturmak pahalı bir işlem olabilir. gRPC aramaları için bir kanalı yeniden kullanmak performans avantajları sağlar.
 * gRPC istemcileri kanallarla oluşturulur. gRPC istemcileri hafif nesnelerdir ve önbelleğe alınması veya yeniden kullanılması gerekmez.
-* Farklı istemci türleri dahil olmak üzere bir kanaldan birden çok gRPC istemcisi oluşturulabilir.
-* Kanaldan oluşturulan bir kanal ve istemciler, birden çok iş parçacığı tarafından güvenli bir şekilde kullanılabilir.
-* Kanaldan oluşturulan istemciler birden çok eş zamanlı çağrı yapabilir.
+* Farklı istemci türleri de dahil olmak üzere bir kanaldan birden çok gRPC istemcisi oluşturulabilir.
+* Kanaldan oluşturulan bir kanal ve istemciler birden çok iş parçacığı tarafından güvenle kullanılabilir.
+* Kanaldan oluşturulan istemciler birden çok eşzamanlı arama yapabilir.
 
-`GrpcChannel.ForAddress`, gRPC istemcisi oluşturmak için tek seçenek değildir. GRPC hizmetlerini bir ASP.NET Core uygulamasından arıyorsanız, [GRPC istemci fabrikası tümleştirmesini](xref:grpc/clientfactory)göz önünde bulundurun. `HttpClientFactory` ile gRPC tümleştirmesi, gRPC istemcileri oluşturmaya yönelik merkezi bir alternatif sunar.
-
-> [!NOTE]
-> [.Net istemcisiyle güvenli olmayan gRPC hizmetlerini çağırmak](xref:grpc/troubleshoot#call-insecure-grpc-services-with-net-core-client)için ek yapılandırma gerekir.
+`GrpcChannel.ForAddress`gRPC istemcisi oluşturmak için tek seçenek değildir. bir ASP.NET Core uygulamasından gRPC hizmetlerini arıyorsanız, [gRPC istemci fabrika tümleştirmesi](xref:grpc/clientfactory)göz önünde bulundurun. gRPC istemcileri oluşturmak için merkezi bir alternatif sunar. `HttpClientFactory`
 
 > [!NOTE]
-> `Grpc.Net.Client` ile HTTP/2 üzerinden gRPC çağırma, Xamarin üzerinde şu anda desteklenmiyor. Gelecek bir Xamarin sürümünde HTTP/2 desteğini geliştirmek için çalışıyoruz. [GRPC. Core](https://www.nuget.org/packages/Grpc.Core) ve [GRPC-Web](xref:grpc/browser) , bugün çalışan önemli alternatiflerdir.
+> [.NET istemcisi ile güvenli olmayan gRPC hizmetlerini aramak](xref:grpc/troubleshoot#call-insecure-grpc-services-with-net-core-client)için ek yapılandırma gereklidir.
 
-## <a name="make-grpc-calls"></a>GRPC çağrıları yapma
+> [!NOTE]
+> HTTP/2 üzerinden `Grpc.Net.Client` gRPC arama şu anda Xamarin desteklenmez. Biz gelecekteki bir Xamarin sürümünde HTTP / 2 desteği geliştirmek için çalışıyoruz. [Grpc.Core](https://www.nuget.org/packages/Grpc.Core) ve [gRPC-Web](xref:grpc/browser) bugün çalışmak uygun alternatifler vardır.
 
-Bir gRPC çağrısı, istemcideki bir yöntem çağırarak başlatılır. GRPC istemcisi, ileti serileştirme işlemini işleyecek ve doğru hizmete gRPC çağrısını ele alacak.
+## <a name="make-grpc-calls"></a>gRPC aramaları yapma
 
-gRPC farklı türde yöntemlere sahiptir. Bir gRPC çağrısını yapmak için istemcisini nasıl kullandığınız, çağırdığınız yöntemin türüne bağlıdır. GRPC Yöntem türleri şunlardır:
+Bir gRPC arama istemciüzerinde bir yöntem çağırarak başlatılır. gRPC istemcisi ileti serileştirme ve doğru hizmet için gRPC arama adresleme işleyecek.
 
-* Li
+gRPC'nin farklı yöntemleri vardır. GRPC araması yapmak için istemciyi nasıl kullanacağınız aradığınız yöntemin türüne bağlıdır. gRPC yöntem türleri şunlardır:
+
+* Tekli
 * Sunucu akışı
 * İstemci akışı
-* İki yönlü akış
+* Çift yönlü akış
 
-### <a name="unary-call"></a>Birli çağrı
+### <a name="unary-call"></a>Unary çağrı
 
-Birli çağrı, istemci isteği iletisi gönderen ile başlar. Hizmet bittiğinde bir yanıt iletisi döndürülür.
+Unary arama istemcibir istek iletisi gönderme ile başlar. Hizmet bittiğinde bir yanıt iletisi döndürülür.
 
 ```csharp
 var client = new Greet.GreeterClient(channel);
@@ -81,14 +81,14 @@ Console.WriteLine("Greeting: " + response.Message);
 // Greeting: Hello World
 ```
 
-*\*. proto* dosyasındaki her birli hizmet yöntemi, yöntemi çağırmak Için somut GRPC istemci türünde iki .net yönteminin oluşmasına neden olur: zaman uyumsuz bir yöntem ve engelleyici bir yöntem. Örneğin, `GreeterClient` `SayHello`çağırmanın iki yolu vardır:
+* \*.proto* dosyasındaki her bir unary servis yöntemi, metodu çağırmak için beton gRPC istemci türünde iki .NET yöntemiyle sonuçlanır: bir senkron yöntem ve engelleme yöntemi. Örneğin, arama `GreeterClient` nın iki yolu `SayHello`vardır:
 
-* `GreeterClient.SayHelloAsync`-`Greeter.SayHello` hizmeti zaman uyumsuz olarak çağırır. Beklenmiş olabilir.
-* `GreeterClient.SayHello`-`Greeter.SayHello` hizmeti ve blokları tamamlanana kadar çağırır. Zaman uyumsuz kodda kullanmayın.
+* `GreeterClient.SayHelloAsync`- `Greeter.SayHello` hizmeti eş zamanlı olarak çağırır. Beklenebilir.
+* `GreeterClient.SayHello`- `Greeter.SayHello` tamamlanana kadar servis ve bloklar çağırır. Eşzamanlı kod kullanmayın.
 
-### <a name="server-streaming-call"></a>Sunucu akışı çağrısı
+### <a name="server-streaming-call"></a>Sunucu akış çağrısı
 
-Sunucu akış çağrısı, istemci isteği iletisi gönderen ile başlar. `ResponseStream.MoveNext()` hizmetten akan iletileri okur. `ResponseStream.MoveNext()` `false`döndürdüğünde sunucu akış çağrısı tamamlanır.
+Sunucu akışı çağrısı istemcinin istek iletisi göndermesiyle başlar. `ResponseStream.MoveNext()`hizmetten aktarılan iletileri okur. Sunucu akışı çağrısı döndürdüğünde `ResponseStream.MoveNext()` `false`tamamlanır.
 
 ```csharp
 var client = new Greet.GreeterClient(channel);
@@ -102,7 +102,7 @@ using (var call = client.SayHellos(new HelloRequest { Name = "World" }))
 }
 ```
 
-C# 8 veya üzeri bir sürüm kullanıyorsanız, `await foreach` söz dizimi iletileri okumak için kullanılabilir. `IAsyncStreamReader<T>.ReadAllAsync()` uzantısı yöntemi, yanıt akışındaki tüm iletileri okur:
+C# 8 veya daha sonra `await foreach` kullanıyorsanız, sözdizimi iletileri okumak için kullanılabilir. Uzantı `IAsyncStreamReader<T>.ReadAllAsync()` yöntemi yanıt akışındaki tüm iletileri okur:
 
 ```csharp
 var client = new Greet.GreeterClient(channel);
@@ -118,7 +118,7 @@ using (var call = client.SayHellos(new HelloRequest { Name = "World" }))
 
 ### <a name="client-streaming-call"></a>İstemci akışı çağrısı
 
-İstemci akış *çağrısı, istemci* İleti göndermeden başlatılır. İstemci `RequestStream.WriteAsync`ileti göndermek için seçim yapabilir. İstemci ileti göndermeyi bitirdiğinde `RequestStream.CompleteAsync` hizmete bildirmek için çağrılmalıdır. Hizmet bir yanıt iletisi döndürdüğünde çağrı tamamlanır.
+İstemci akışı çağrısı, istemci ileti *göndermeden* başlar. İstemci `RequestStream.WriteAsync`ile ileti göndermeyi seçebilir. İstemci ileti göndermeyi `RequestStream.CompleteAsync` bitirdiğinde hizmeti bildirmek için çağrılmalıdır. Hizmet bir yanıt iletisi döndürdüğünde çağrı tamamlanır.
 
 ```csharp
 var client = new Counter.CounterClient(channel);
@@ -136,9 +136,9 @@ using (var call = client.AccumulateCount())
 }
 ```
 
-### <a name="bi-directional-streaming-call"></a>İki yönlü akış çağrısı
+### <a name="bi-directional-streaming-call"></a>Çift yönlü akış çağrısı
 
-Çift yönlü bir akış *çağrısı, istemci* bir ileti göndermeden başlatılır. İstemci `RequestStream.WriteAsync`ileti göndermek için seçim yapabilir. Hizmetten akışa alınan iletilere `ResponseStream.MoveNext()` veya `ResponseStream.ReadAllAsync()`erişilebilir. `ResponseStream` daha fazla ileti olmadığında çift yönlü akış çağrısı tamamlanmıştır.
+İstemci ileti *göndermeden* çift yönlü akış çağrısı başlar. İstemci `RequestStream.WriteAsync`ile ileti göndermeyi seçebilir. Hizmetten aktarılan iletilere veya `ResponseStream.MoveNext()` . `ResponseStream.ReadAllAsync()` Daha fazla ileti olmadığında `ResponseStream` çift yönlü akış çağrısı tamamlanır.
 
 ```csharp
 using (var call = client.Echo())
@@ -172,7 +172,7 @@ using (var call = client.Echo())
 }
 ```
 
-Çift yönlü bir akış araması sırasında, istemci ve hizmet herhangi bir zamanda iletileri birbirlerine gönderebilir. Çift yönlü bir çağrı ile etkileşimde bulunmak için en iyi istemci mantığı, hizmet mantığına bağlı olarak farklılık gösterir.
+Çift yönlü akış araması sırasında, istemci ve hizmet istediği zaman birbirlerine ileti gönderebilir. Çift yönlü bir çağrıyla etkileşim kurmak için en iyi istemci mantığı hizmet mantığına bağlı olarak değişir.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

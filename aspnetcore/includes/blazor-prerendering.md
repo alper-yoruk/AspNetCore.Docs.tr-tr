@@ -3,15 +3,15 @@ no-loc:
 - Blazor
 - SignalR
 ms.openlocfilehash: 5f3e22e04fe18149ec5a8acb42f42a8ef83a7664
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78659721"
 ---
-Bir Blazor sunucusu uygulaması prerendering olsa da, tarayıcıyla bir bağlantı kurulmadığından, JavaScript 'e çağırma gibi bazı eylemler mümkün değildir. Bileşenler, ön işlenmiş olduğunda farklı şekilde işlenmesi gerekebilir.
+Sunucu Blazor uygulaması önceden işlenirken, tarayıcıyla bağlantı kurulmadığı ndan, JavaScript'e arama gibi belirli eylemler mümkün değildir. Bileşenlerin önceden işlendiğinde farklı işlemesi gerekebilir.
 
-Tarayıcı bağlantısı kurulana kadar JavaScript birlikte çalışma çağrılarını geciktirmek için [Onafterrenderasync bileşen yaşam döngüsü olayını](xref:blazor/lifecycle#after-component-render)kullanabilirsiniz. Bu olay yalnızca uygulama tam olarak işlendikten ve istemci bağlantısı kurulduktan sonra çağırılır.
+JavaScript interop çağrılarını tarayıcı yla bağlantı kurulana kadar geciktirmek için [OnAfterRenderAsync bileşen yaşam döngüsü olayını](xref:blazor/lifecycle#after-component-render)kullanabilirsiniz. Bu olay yalnızca uygulama tam olarak oluşturulduktan ve istemci bağlantısı kurulduktan sonra çağrılır.
 
 ```cshtml
 @using Microsoft.JSInterop
@@ -33,7 +33,7 @@ Tarayıcı bağlantısı kurulana kadar JavaScript birlikte çalışma çağrıl
 }
 ```
 
-Yukarıdaki örnek kod için, *Wwwroot/index.html* (Blazor WebAssembly) veya *Pages/_Host. cshtml* (Blazor Server) `<head>` öğesi içinde bir `setElementText` JavaScript işlevi sağlayın. İşlevi `IJSRuntime.InvokeVoidAsync` ile çağrılır ve bir değer döndürmez:
+Önceki örnek kod için, `setElementText` *wwwroot/index.html* (WebAssembly)Blazor veya *Pages/_Host.cshtml* (Server)Blazor `<head>` öğesi içinde bir JavaScript işlevi sağlayın. İşlev ile `IJSRuntime.InvokeVoidAsync` denir ve bir değer döndürmez:
 
 ```html
 <script>
@@ -42,13 +42,13 @@ Yukarıdaki örnek kod için, *Wwwroot/index.html* (Blazor WebAssembly) veya *Pa
 ```
 
 > [!WARNING]
-> Yukarıdaki örnek yalnızca tanıtım amacıyla Belge Nesne Modeli (DOM) değiştirir. JavaScript 'in Blazordeğişiklik izlemesini kesintiye uğratacağından, Çoğu senaryoda DOM 'ın JavaScript ile doğrudan değiştirilmesi önerilmez.
+> Önceki örnek, Belge Nesnesi Modelini (DOM) yalnızca gösteri amacıyla doğrudan değiştirir. JavaScript'in değişiklik izlemeyi engelleyebilir, Blazorçünkü JavaScript'in doğrudan JavaScript ile DEĞIŞTIRILMESI çoğu senaryoda önerilmez.
 
-Aşağıdaki bileşen, prerendering ile uyumlu bir şekilde bileşenin başlatma mantığının bir parçası olarak JavaScript birlikte çalışabilirinin nasıl kullanılacağını göstermektedir. Bileşeni, `OnAfterRenderAsync`içinden bir işleme güncelleştirmesi tetiklemenin mümkün olduğunu gösterir. Geliştirici Bu senaryoda sonsuz bir döngü oluşturmaktan kaçınmalıdır.
+Aşağıdaki bileşen, javascript interop'un bir bileşenin başlatma mantığının bir parçası olarak önceden oluşturmayla uyumlu bir şekilde nasıl kullanılacağını gösterir. Bileşen, bir görüntüleme güncelleştirmesini içeriden `OnAfterRenderAsync`tetiklemenin mümkün olduğunu gösterir. Geliştirici bu senaryoda sonsuz bir döngü oluşturmaktan kaçınmalıdır.
 
-`JSRuntime.InvokeAsync` çağrıldığında, bileşen işlenene kadar hiçbir JavaScript öğesi olmadığından, `ElementRef` yalnızca `OnAfterRenderAsync` için kullanılır ve daha önceki bir yaşam döngüsü yönteminde değil.
+Nerede `JSRuntime.InvokeAsync` denir, `ElementRef` bileşen işlendikten sonraya kadar Hiçbir JavaScript öğesi `OnAfterRenderAsync` olduğundan, sadece ve önceki yaşam döngüsü yönteminde kullanılır.
 
-JavaScript birlikte çalışma çağrısından alınan yeni durumla birlikte bileşeni yeniden sağlamak için [Statehaschanged](xref:blazor/lifecycle#state-changes) çağrılır. `StateHasChanged` yalnızca `infoFromJs` `null`olduğunda çağrıldığı için, kod sonsuz bir döngü oluşturmaz.
+[StateHasChanged,](xref:blazor/lifecycle#state-changes) JavaScript interop çağrısından elde edilen yeni durumla bileşeni yeniden işlemek için çağrılır. Kod sonsuz bir döngü oluşturmaz, çünkü `StateHasChanged` `infoFromJs` yalnızca `null`.
 
 ```cshtml
 @page "/prerendered-interop"
@@ -81,7 +81,7 @@ Set value via JS interop call:
 }
 ```
 
-Yukarıdaki örnek kod için, *Wwwroot/index.html* (Blazor WebAssembly) veya *Pages/_Host. cshtml* (Blazor Server) `<head>` öğesi içinde bir `setElementText` JavaScript işlevi sağlayın. İşlevi `IJSRuntime.InvokeAsync` ile çağrılır ve bir değer döndürür:
+Önceki örnek kod için, `setElementText` *wwwroot/index.html* (WebAssembly)Blazor veya *Pages/_Host.cshtml* (Server)Blazor `<head>` öğesi içinde bir JavaScript işlevi sağlayın. İşlev ile `IJSRuntime.InvokeAsync` çağrılır ve bir değer döndürür:
 
 ```html
 <script>
@@ -93,4 +93,4 @@ Yukarıdaki örnek kod için, *Wwwroot/index.html* (Blazor WebAssembly) veya *Pa
 ```
 
 > [!WARNING]
-> Yukarıdaki örnek yalnızca tanıtım amacıyla Belge Nesne Modeli (DOM) değiştirir. JavaScript 'in Blazordeğişiklik izlemesini kesintiye uğratacağından, Çoğu senaryoda DOM 'ın JavaScript ile doğrudan değiştirilmesi önerilmez.
+> Önceki örnek, Belge Nesnesi Modelini (DOM) yalnızca gösteri amacıyla doğrudan değiştirir. JavaScript'in değişiklik izlemeyi engelleyebilir, Blazorçünkü JavaScript'in doğrudan JavaScript ile DEĞIŞTIRILMESI çoğu senaryoda önerilmez.

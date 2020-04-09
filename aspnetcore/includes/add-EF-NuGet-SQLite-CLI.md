@@ -1,4 +1,4 @@
-Aşağıdaki .NET Core CLI komutları çalıştırın:
+Aşağıdaki .NET Core CLI komutlarını çalıştırın:
 
 ```dotnetcli
 dotnet tool install --global dotnet-ef
@@ -9,13 +9,13 @@ dotnet add package Microsoft.EntityFrameworkCore.Design
 dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 ```
 
-Yukarıdaki komutlar şunları ekler:
+Önceki komutlar ekleyin:
 
-* [ASPNET-CodeGenerator scafkatlama aracı](xref:fundamentals/tools/dotnet-aspnet-codegenerator).
-* .NET Core CLI için Entity Framework Core araçları.
-* EF Core paketini bir bağımlılık olarak yükleyecek EF Core SQLite sağlayıcı.
-* Yapı iskelesi için gereken paketler: `Microsoft.VisualStudio.Web.CodeGeneration.Design` ve `Microsoft.EntityFrameworkCore.SqlServer`.
+* [Aspnet-codegenerator iskele aracı](xref:fundamentals/tools/dotnet-aspnet-codegenerator).
+* .NET Core CLI için Entity Framework Core Araçları.
+* EF Core paketini bağımlılık olarak yükleyen EF Core SQLite sağlayıcısı.
+* İskele için gerekli `Microsoft.VisualStudio.Web.CodeGeneration.Design` paketler: `Microsoft.EntityFrameworkCore.SqlServer`ve .
 
-Bir uygulamanın, veritabanı bağlamlarını ortama göre yapılandırmasına izin veren birden çok ortam yapılandırmasında rehberlik için, bkz. <xref:fundamentals/environments#environment-based-startup-class-and-methods>.
+Bir uygulamanın veritabanı bağlamlarını ortama göre yapılandırmasına izin veren <xref:fundamentals/environments#environment-based-startup-class-and-methods>birden çok ortam yapılandırması hakkında kılavuz için bkz.
 
 [!INCLUDE[](~/includes/scaffoldTFM.md)]

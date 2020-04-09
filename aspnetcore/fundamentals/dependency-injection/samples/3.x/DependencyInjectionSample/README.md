@@ -1,3 +1,3 @@
-# <a name="aspnet-core-dependency-injection"></a>ASP.NET Core bağımlılığı ekleme
+# <a name="aspnet-core-dependency-injection"></a>ASP.NET Çekirdek Bağımlılık Enjeksiyonu
 
-Bu örnek, ASP.NET Core ile bağımlılık ekleme 'nin kullanımını gösterir. Bu örnek, [ASP.NET Core konusunun bağımlılık ekleme](https://docs.microsoft.com/aspnet/core/fundamentals/dependency-injection) konusunda açıklanan senaryoyu gösterir.
+Bu örnek, ASP.NET Core ile bağımlılık enjeksiyonu kullanımını göstermektedir. Bu örnek, [Bağımlılık enjeksiyonunda ASP.NET Temel konusunda](https://docs.microsoft.com/aspnet/core/fundamentals/dependency-injection) açıklanan senaryoyu gösterir.

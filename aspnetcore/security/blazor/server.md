@@ -1,163 +1,362 @@
 ---
-title: Güvenli ASP.NET Core Blazor Server uygulamaları
+title: Core Blazor Server uygulamalarını güvenli ASP.NET
 author: guardrex
-description: Sunucu uygulamalarına Blazor yönelik güvenlik tehditlerini nasıl azaltacağınızı öğrenin.
+description: Sunucu uygulamalarına yönelik Blazor güvenlik tehditlerini nasıl azaltılamayı öğrenin.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/16/2020
+ms.date: 04/02/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/server
-ms.openlocfilehash: 128cd5e542153e07dc301032e1e73bf27e1236f3
-ms.sourcegitcommit: 5bdc54162d7dea8d9fa54ac3055678db23586af1
+ms.openlocfilehash: bd03f811d0425fdfdb7bbbc24fea5481b49b8ed3
+ms.sourcegitcommit: 9675db7bf4b67ae269f9226b6f6f439b5cce4603
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/17/2020
-ms.locfileid: "79434428"
+ms.lasthandoff: 04/03/2020
+ms.locfileid: "80626017"
 ---
-# <a name="secure-aspnet-core-blazor-server-apps"></a>Güvenli ASP.NET Core Blazor Server uygulamaları
+# <a name="secure-aspnet-core-blazor-server-apps"></a>Core Blazor Server uygulamaları ASP.NET güvenli
 
-Sağlayan [Javier Calvarro Nelson](https://github.com/javiercn)
+Yazar: [Javier Calvarro Nelson](https://github.com/javiercn)
 
-Blazor Server uygulamaları, sunucu ve istemcinin uzun süreli bir ilişki korumasını gerektiren, *durum bilgisi olan* bir veri işleme modelini benimseyin. Kalıcı durum, büyük olasılıkla uzun süreli bağlantılara yayılabilen bir [devre](xref:blazor/state-management)tarafından korunur.
+Blazor Server uygulamaları, sunucu ve istemcinin uzun süreli bir ilişki sürdürdüğü *durumlu* bir veri işleme modelini benimser. Kalıcı durum, potansiyel olarak uzun ömürlü olan bağlantıları kaplayabilen bir [devre](xref:blazor/state-management)tarafından korunur.
 
-Bir Kullanıcı bir Blazor sunucu sitesini ziyaret ettiğinde sunucu, sunucunun belleğinde bir devre oluşturur. Devre, kullanıcının Kullanıcı ARABIRIMINDE bir düğme seçtiğinde olduğu gibi olaylara hangi içeriğin işleneceğini ve yanıt verdiğini tarayıcıya gösterir. Bu işlemleri gerçekleştirmek için, devre bir bağlantı, kullanıcının tarayıcısında ve .NET yöntemlerinde JavaScript işlevlerini çağırır. Bu iki yönlü JavaScript tabanlı etkileşim, [JavaScript birlikte çalışma (js birlikte çalışma)](xref:blazor/call-javascript-from-dotnet)olarak adlandırılır.
+Bir kullanıcı Blazor Server sitesini ziyaret ettiğinde, sunucu sunucunun belleğinde bir devre oluşturur. Devre, kullanıcının Kullanıcı Aracı'nda bir düğme seçmesi gibi olaylara hangi içeriğin işleneceğini ve bunlara tepki verir. Bu eylemleri gerçekleştirmek için bir devre, kullanıcının tarayıcısında javascript işlevlerini ve sunucudaki .NET yöntemlerini çağırır. Bu iki yönlü JavaScript tabanlı etkileşim [JavaScript interop (JS interop)](xref:blazor/call-javascript-from-dotnet)olarak adlandırılır.
 
-JS birlikte çalışması Internet üzerinden yapıldığından ve istemci uzak bir tarayıcı kullandığından, Blazor Server Apps çoğu Web uygulaması güvenlik kaygılarını paylaşır. Bu konu, Blazor sunucu uygulamalarına yönelik yaygın tehditleri açıklar ve Internet 'e yönelik uygulamalara odaklanan tehdit azaltma kılavuzu sağlar.
+JS interop Internet üzerinden oluşur ve istemci uzak bir tarayıcı kullandığından, Blazor Server uygulamaları çoğu web uygulaması güvenlik endişelerini paylaşır. Bu konu, Blazor Server uygulamalarına yönelik yaygın tehditleri açıklar ve Internet'e dönük uygulamalara odaklanmış tehdit azaltma kılavuzu sağlar.
 
-Şirket ağları veya intranetleri gibi kısıtlı ortamlarda, azaltma yönerglarından bazıları şunlardır:
+Şirket ağları veya intranetler gibi kısıtlı ortamlarda, bazı azaltma kılavuzu aşağıdakilerden biri:
 
-* Kısıtlanmış ortamda uygulanmaz.
-* Güvenlik riski kısıtlı bir ortamda azaldığından, uygulama maliyeti değer değildir.
+* Kısıtlı ortamda geçerli değildir.
+* Güvenlik riski kısıtlı bir ortamda düşük olduğundan, uygulanması gereken maliyete değmez.
+
+## <a name="blazor-server-project-template"></a>Blazor Server proje şablonu
+
+Blazor Server proje şablonu, proje oluşturulduğunda kimlik doğrulaması için yapılandırılabilir.
+
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+Kimlik doğrulama mekanizmasına <xref:blazor/get-started> sahip yeni bir Blazor Server projesi oluşturmak için makaledeki Visual Studio kılavuzunu izleyin.
+
+**Yeni bir ASP.NET Çekirdek Web Uygulaması Oluştur** iletişim kutusunda **Blazor Server App** şablonunu seçtikten sonra Kimlik **Doğrulama**altında **Değiştir'i** seçin.
+
+Diğer ASP.NET Core projeleri için kullanılabilir aynı kimlik doğrulama mekanizmaları kümesini sunmak için bir iletişim kutusu açılır:
+
+* **Kimlik Doğrulaması Yok**
+* **Bireysel Kullanıcı Hesapları** &ndash; Kullanıcı hesapları saklanabilir:
+  * ASP.NET Core'un [Kimlik](xref:security/authentication/identity) sistemini kullanarak uygulama içinde.
+  * [Azure AD B2C](xref:security/authentication/azure-ad-b2c)ile .
+* **İş veya Okul Hesapları**
+* **Windows Kimlik Doğrulama**
+
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+
+Kimlik doğrulama mekanizmasına sahip <xref:blazor/get-started> yeni bir Blazor Server projesi oluşturmak için makaledeki Visual Studio Code kılavuzunu izleyin:
+
+```dotnetcli
+dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
+```
+
+İzin verilen kimlik doğrulama`{AUTHENTICATION}`değerleri ( ) aşağıdaki tabloda gösterilmiştir.
+
+| Kimlik doğrulama mekanizması                                                                 | `{AUTHENTICATION}`Değer |
+| ---------------------------------------------------------------------------------------- | :----------------------: |
+| Kimlik Doğrulaması Yok                                                                        | `None`                   |
+| Bireysel<br>Uygulamada ASP.NET Çekirdek Kimliği ile saklanan kullanıcılar.                        | `Individual`             |
+| Bireysel<br>Azure AD [B2C'de](xref:security/authentication/azure-ad-b2c)depolanan kullanıcılar. | `IndividualB2C`          |
+| İş veya Okul Hesapları<br>Tek bir kiracı için kuruluş kimlik doğrulaması.            | `SingleOrg`              |
+| İş veya Okul Hesapları<br>Birden çok kiracı için kuruluş kimlik doğrulaması.           | `MultiOrg`               |
+| Windows Kimlik Doğrulaması                                                                   | `Windows`                |
+
+Komut, `{APP NAME}` yer tutucuiçin sağlanan değeri içeren bir klasör oluşturur ve klasör adını uygulamanın adı olarak kullanır. Daha fazla bilgi için .NET Core Guide'daki [dotnet yeni](/dotnet/core/tools/dotnet-new) komutuna bakın.
+
+# <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
+
+1. Makaledeki Mac kılavuzu için <xref:blazor/get-started> Visual Studio'yu izleyin.
+
+1. Yeni **Blazor Server App adımınızı Yapılandır'da,** **Kimlik Doğrulama** açılır tarihinden Bireysel **Kimlik Doğrulama'yı (uygulama içi)** seçin.
+
+1. Uygulama, ASP.NET Çekirdek Kimliği ile uygulamada saklanan bireysel kullanıcılar için oluşturulur.
+
+# <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
+
+Kimlik doğrulama mekanizmasına sahip yeni <xref:blazor/get-started> bir Blazor Server projesi oluşturmak için makaledeki .NET Core CLI kılavuzunu izleyin:
+
+```dotnetcli
+dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
+```
+
+İzin verilen kimlik doğrulama`{AUTHENTICATION}`değerleri ( ) aşağıdaki tabloda gösterilmiştir.
+
+| Kimlik doğrulama mekanizması                                                                 | `{AUTHENTICATION}`Değer |
+| ---------------------------------------------------------------------------------------- | :----------------------: |
+| Kimlik Doğrulaması Yok                                                                        | `None`                   |
+| Bireysel<br>Uygulamada ASP.NET Çekirdek Kimliği ile saklanan kullanıcılar.                        | `Individual`             |
+| Bireysel<br>Azure AD [B2C'de](xref:security/authentication/azure-ad-b2c)depolanan kullanıcılar. | `IndividualB2C`          |
+| İş veya Okul Hesapları<br>Tek bir kiracı için kuruluş kimlik doğrulaması.            | `SingleOrg`              |
+| İş veya Okul Hesapları<br>Birden çok kiracı için kuruluş kimlik doğrulaması.           | `MultiOrg`               |
+| Windows Kimlik Doğrulaması                                                                   | `Windows`                |
+
+Komut, `{APP NAME}` yer tutucuiçin sağlanan değeri içeren bir klasör oluşturur ve klasör adını uygulamanın adı olarak kullanır. Daha fazla bilgi için .NET Core Guide'daki [dotnet yeni](/dotnet/core/tools/dotnet-new) komutuna bakın.
+
+---
+
+## <a name="pass-tokens-to-a-blazor-server-app"></a>Jetonları Blazor Server uygulamasına aktarın
+
+Blazor Server uygulamasını normal bir Razor Pages veya MVC uygulamasıyla doğrulayabilirsiniz. Belirteçleri kimlik doğrulama çerezine sağlama ve kaydetme. Örneğin:
+
+```csharp
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+
+...
+
+services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, options =>
+{
+    options.ResponseType = "code";
+    options.SaveTokens = true;
+
+    options.Scope.Add("offline_access");
+    options.Scope.Add("{SCOPE}");
+    options.Resource = "{RESOURCE}";
+});
+```
+
+Tam `Startup.ConfigureServices` bir örnek de dahil olmak üzere örnek kod [için, sunucu tarafındaki Blazor uygulamasına geçen belirteçlere](https://github.com/javiercn/blazor-server-aad-sample)bakın.
+
+Başlangıç uygulama durumunda erişim ve yenileme belirteçleriyle geçmek için bir sınıf tanımlayın:
+
+```csharp
+public class InitialApplicationState
+{
+    public string AccessToken { get; set; }
+    public string RefreshToken { get; set; }
+}
+```
+
+DI'deki belirteçleri çözmek için Blazor uygulaması içinde kullanılabilecek **kapsamlı** bir belirteç sağlayıcısı hizmeti tanımlayın:
+
+```csharp
+using System;
+using System.Security.Claims;
+using System.Threading.Tasks;
+
+public class TokenProvider
+{
+    public string AccessToken { get; set; }
+    public string RefreshToken { get; set; }
+}
+```
+
+In `Startup.ConfigureServices`, için hizmet ekle:
+
+* `IHttpClientFactory`
+* `TokenProvider`
+
+```csharp
+services.AddHttpClient();
+services.AddScoped<TokenProvider>();
+```
+
+*_Host.cshtml* dosyasında, uygulamanın `InitialApplicationState` parametresi olarak oluşturun ve örnek lendirin ve aktarın:
+
+```cshtml
+@using Microsoft.AspNetCore.Authentication
+
+...
+
+@{
+    var tokens = new InitialApplicationState
+    {
+        AccessToken = await HttpContext.GetTokenAsync("access_token"),
+        RefreshToken = await HttpContext.GetTokenAsync("refresh_token")
+    };
+}
+
+<app>
+    <component type="typeof(App)" param-InitialState="tokens" 
+        render-mode="ServerPrerendered" />
+</app>
+```
+
+`App` Bileşende *(App.razor),* hizmeti çözün ve parametredeki verilerle başharfe alet edin:
+
+```razor
+@inject TokenProvider TokensProvider
+
+...
+
+@code {
+    [Parameter]
+    public InitialApplicationState InitialState { get; set; }
+
+    protected override Task OnInitializedAsync()
+    {
+        TokensProvider.AccessToken = InitialState.AccessToken;
+        TokensProvider.RefreshToken = InitialState.RefreshToken;
+
+        return base.OnInitializedAsync();
+    }
+}
+```
+
+Güvenli bir API isteği nde bulunan hizmette, belirteç sağlayıcısına enjekte edin ve API'yi aramak için belirteci alın:
+
+```csharp
+public class WeatherForecastService
+{
+    private readonly TokenProvider _store;
+
+    public WeatherForecastService(IHttpClientFactory clientFactory, 
+        TokenProvider tokenProvider)
+    {
+        Client = clientFactory.CreateClient();
+        _store = tokenProvider;
+    }
+
+    public HttpClient Client { get; }
+
+    public async Task<WeatherForecast[]> GetForecastAsync(DateTime startDate)
+    {
+        var token = _store.AccessToken;
+        var request = new HttpRequestMessage(HttpMethod.Get, 
+            "https://localhost:5003/WeatherForecast");
+        request.Headers.Add("Authorization", $"Bearer {token}");
+        var response = await Client.SendAsync(request);
+        response.EnsureSuccessStatusCode();
+
+        return await response.Content.ReadAsAsync<WeatherForecast[]>();
+    }
+}
+```
 
 ## <a name="resource-exhaustion"></a>Kaynak tükenmesi
 
-İstemci sunucuyla etkileşime geçtiğinde kaynak tükenmesi gerçekleşebilir ve sunucunun aşırı kaynak kullanmasına neden olur. Aşırı kaynak tüketimi öncelikle şunları etkiler:
+Bir istemci sunucuyla etkileşimde ve sunucunun aşırı kaynak tüketmesine neden olduğunda kaynak tükenmesi oluşabilir. Aşırı kaynak tüketimi öncelikle etkiler:
 
-* ['SUNA](#cpu)
+* [CPU](#cpu)
 * [Bellek](#memory)
 * [İstemci bağlantıları](#client-connections)
 
-Hizmet reddi (DoS) saldırıları genellikle bir uygulamanın veya sunucunun kaynaklarını tüketme konusunda arama yapılır. Ancak, kaynak tükenmesi sistem üzerinde bir saldırının sonucu değildir. Örneğin, yüksek Kullanıcı talebi nedeniyle sınırlı kaynaklar tükenebilir. DoS, [hizmet reddi (DOS) saldırıları](#denial-of-service-dos-attacks) bölümünde daha fazla ele alınmıştır.
+Hizmet reddi (DoS) saldırıları genellikle bir uygulamanın veya sunucunun kaynaklarını tüketmeye yöneliktir. Ancak, kaynak tükenmesi mutlaka sisteme yapılan bir saldırının sonucu değildir. Örneğin, sonlu kaynaklar yüksek kullanıcı talebi nedeniyle tükenebilir. DoS, [Hizmet Reddi (DoS) saldırıları](#denial-of-service-dos-attacks) bölümünde daha fazla yer almaktadır.
 
-Veritabanları ve dosya tutamaçları (dosyaları okumak ve yazmak için kullanılır) gibi Blazor Framework dışındaki kaynaklar da kaynak tükenmesi ile karşılaşabilir. Daha fazla bilgi için bkz. <xref:performance/performance-best-practices>.
+Veritabanları ve dosya tutamaçları (dosyaları okumak ve yazmak için kullanılır) gibi Blazor çerçevesi dışındaki kaynaklar da kaynak tükenmesi yaşayabilir. Daha fazla bilgi için bkz. <xref:performance/performance-best-practices>.
 
 ### <a name="cpu"></a>CPU
 
-Bir veya daha fazla istemci, yoğun CPU işi gerçekleştirmeye çalışan bir veya daha fazla istemci tarafından meydana gelebilir.
+CPU tükenmesi, bir veya daha fazla istemci sunucuyu yoğun CPU çalışması yapmaya zorladığında oluşabilir.
 
-Örneğin, *Fibonnacci numarasını*hesaplayan bir Blazor Server uygulaması düşünün. Bir Fibonnacci numarası, dizideki her bir sayının önceki iki sayının toplamı olduğu bir Fibonnacci sırasından oluşturulur. Yanıta ulaşmak için gereken iş miktarı, sıranın uzunluğuna ve ilk değerin boyutuna bağlıdır. Uygulama bir istemcinin isteğine sınır yerleştirmezse, CPU yoğunluklu hesaplamalar CPU 'nun süresini ayırt edebilir ve diğer görevlerin performansını azalrlar. Aşırı kaynak tüketimi, kullanılabilirliği etkileyen bir güvenlik konusudur.
+Örneğin, Bir *Fibonnacci numarası*hesaplayan bir Blazor Server uygulaması düşünün. Fibonnacci numarası, sıradaki her sayının önceki iki sayının toplamı olduğu bir Fibonnacci dizisinden üretilir. Yanıta ulaşmak için gereken çalışma miktarı dizinin uzunluğuna ve başlangıç değerinin boyutuna bağlıdır. Uygulama bir istemcinin isteğine sınır koymazsa, CPU yoğun hesaplamalar CPU'nun zamanına hakim olabilir ve diğer görevlerin performansını azaltabilir. Aşırı kaynak tüketimi kullanılabilirliği etkileyen bir güvenlik sorunudur.
 
-CPU tükenmesi, herkese açık olan tüm uygulamalar için bir sorun teşkil etmez. Normal Web uygulamalarında, istekler ve bağlantılar bir güvenlik önlemi olarak zaman aşımına uğrar, ancak Blazor Server uygulamaları aynı korumaları sağlamaz. Blazor Server uygulamaları, yoğun CPU yoğunluklu iş yapmadan önce uygun denetimleri ve limitleri içermelidir.
+CPU tükenmesi, genel kullanıma açık tüm uygulamalar için bir endişe kaynağıdır. Normal web uygulamalarında, istekler ve bağlantılar güvenlik önlemi olarak zaman alar, ancak Blazor Server uygulamaları aynı güvenlik önlemlerini sağlamaz. Blazor Server uygulamaları, CPU yoğun olabilecek bir çalışma gerçekleştirmeden önce uygun denetimleri ve sınırları içermelidir.
 
 ### <a name="memory"></a>Bellek
 
-Bir veya daha fazla istemci, sunucuyu büyük miktarda bellek kullanmaya zorlmaya zorlarsanız bellek tükenmesi meydana gelebilir.
+Bir veya daha fazla istemci sunucuyu büyük miktarda bellek tüketmeye zorladığında bellek tükenmesi oluşabilir.
 
-Örneğin, bir Blazor-Server yan uygulamasını, öğelerin listesini kabul eden ve görüntüleyen bir bileşen ile düşünün. Blazor uygulaması, izin verilen öğe sayısı veya istemciye geri işlenen öğe sayısı için sınır yerleştirmezse, bellek yoğun işleme ve işleme sunucu belleğini sunucunun performansının bulunduğu noktaya ayırt edebilir. Sunucu kilitlenmişse veya çöktüğünde göründüğü noktadan yavaş olabilir.
+Örneğin, öğelerin listesini kabul eden ve görüntüleyen bir bileşene sahip blazor sunucusu yan uygulamasını düşünün. Blazor uygulaması, izin verilen öğe sayısına veya istemciye geri işlenen öğe sayısına sınırlama lar koymuyorsa, bellek yoğun işlem ve işleme sunucunun performansının zarar gördüğü noktaya kadar sunucunun belleğinde hakim olabilir. Sunucu çökebilir veya çöktüğı gibi görünen noktaya kadar yavaşlayabilir.
 
-Sunucuda olası bir bellek tükenmesi senaryosuna ait öğelerin listesini sürdürmek ve görüntülemek için aşağıdaki senaryoyu göz önünde bulundurun:
+Sunucuda olası bir bellek tükenmesenaryosuyla ilgili öğelerin listesini korumak ve görüntülemek için aşağıdaki senaryoyu göz önünde bulundurun:
 
-* Bir `List<MyItem>` özellik veya alanındaki öğeler, sunucunun belleğini kullanır. Uygulama, öğelerin listesinin sınırsız olarak büyümesine izin veriyorsa, sunucunun belleği tükenmeye karşı bir risk vardır. Belleğin tükenmesinin geçerli oturum sonlandırmasına (kilitlenme) ve bu sunucu örneğindeki tüm eşzamanlı oturumlara bir bellek dışı özel durum almasına neden olur. Bu senaryonun oluşmasını önlemek için, uygulamanın eşzamanlı kullanıcılara bir öğe sınırı uygulayan bir veri yapısı kullanması gerekir.
-* Bir sayfalama şeması işleme için kullanılmazsa, sunucu Kullanıcı arabiriminde görünmeyen nesneler için ek bellek kullanır. Öğe sayısı sınırı olmadan, bellek talepleri kullanılabilir sunucu belleğini tüketebilir. Bu senaryoyu engellemek için aşağıdaki yaklaşımlardan birini kullanın:
-  * İşleme sırasında sayfalandırılmış listeler kullanın.
-  * Yalnızca ilk 100 ' i 1.000 öğeyi görüntüleyin ve kullanıcının görüntülenen öğelerin ötesinde öğeleri bulmak için arama ölçütü girmesini gerektirir.
-  * Daha gelişmiş bir işleme senaryosu için *sanallaştırmayı*destekleyen listeler veya kılavuzlar uygulayın. Sanallaştırma kullanarak, listeler yalnızca kullanıcıya şu anda görünür olan öğelerin bir alt kümesini işler. Kullanıcı ARABIRIMDEKI ScrollBar ile etkileşime geçtiğinde, bileşen yalnızca görüntüleme için gereken öğeleri işler. Şu anda görüntülenmek üzere gerekli olmayan öğeler, en ideal yaklaşım olan ikincil depolamada tutulabilir. Görüntülenmezler olmayan öğeler bellekte tutulabilir ve bu da daha az idealdir.
+* Bir `List<MyItem>` özellik veya alandaki öğeler sunucunun belleği kullanır. Uygulama, öğelerin listesinin sınırsız büyümesine izin veriyorsa, sunucunun belleği tükenebilir. Belleği bitmek üzere olan bu oturum, geçerli oturumun sona erdirilmesine (kilitlenme) neden olur ve bu sunucu örneğindeki eşzamanlı oturumların tümü bellek dışı bir özel durum alır. Bu senaryonun oluşmasını önlemek için, uygulamanın eşzamanlı kullanıcılara madde sınırı getiren bir veri yapısı kullanması gerekir.
+* Görüntüleme için bir sayfalama düzeni kullanılmazsa, sunucu UI'de görünmeyen nesneler için ek bellek kullanır. Öğe sayısında bir sınırlama olmadan, bellek talepleri kullanılabilir sunucu belleği egzoz olabilir. Bu senaryoyu önlemek için aşağıdaki yaklaşımlardan birini kullanın:
+  * İşleme yaparken paginated listeleri kullanın.
+  * Yalnızca ilk 100 ila 1.000 öğeyi görüntüleyin ve görüntülenen öğelerin ötesinde öğeleri bulmak için kullanıcının arama ölçütlerini girmesini gerektirir.
+  * Daha gelişmiş bir işleme senaryosu için, sanallaştırmayı destekleyen listeler veya ızgaralar *uygulayın.* Sanallaştırma yı kullanarak, listeler yalnızca kullanıcı tarafından görülebilen öğelerin bir alt kümesini işler. Kullanıcı Kullanıcı Arabirimi'ndeki kaydırma çubuğuyla etkileşimde olduğunda, bileşen yalnızca görüntülenmek için gereken öğeleri işler. Şu anda görüntülenmek için gerekli olmayan öğeler, ideal bir yaklaşım olan ikincil depolama da tutulabilir. Görüntülenmeyen öğeler de daha az ideal bellekte tutulabilir.
 
-Blazor Server Apps, WPF, Windows Forms veya Blazor WebAssembly gibi durum bilgisi olan uygulamalar için diğer kullanıcı arabirimi çerçevelerine benzer bir programlama modeli sunar. Ana fark, uygulama tarafından tüketilen belleğin, istemciye ait olduğu ve yalnızca o tek istemciyi etkilediği bazı Kullanıcı arabirimi çerçevelerinden biridir. Örneğin, bir Blazor WebAssembly uygulaması tamamen istemcide çalışır ve yalnızca istemci bellek kaynaklarını kullanır. Blazor sunucusu senaryosunda, uygulama tarafından tüketilen bellek sunucuya aittir ve sunucu örneğindeki istemciler arasında paylaşılır.
+Blazor Server uygulamaları, WPF, Windows Forms veya Blazor WebAssembly gibi özel uygulamalar için diğer web hizmeti arabirimi çerçevelerine benzer bir programlama modeli sunar. Temel fark, ui çerçeveleri birkaç uygulama tarafından tüketilen bellek istemciye ait ve sadece bu bireysel istemci etkiler olmasıdır. Örneğin, blazor WebAssembly uygulaması tamamen istemciüzerinde çalışır ve yalnızca istemci bellek kaynaklarını kullanır. Blazor Server senaryosunda, uygulama tarafından tüketilen bellek sunucuya aittir ve sunucu örneğindeki istemciler arasında paylaşılır.
 
-Sunucu tarafı bellek istekleri tüm Blazor Server uygulamaları için bir noktadır. Ancak, çoğu Web uygulaması durum bilgisiz olur ve bir isteği işlerken kullanılan bellek, yanıt döndürüldüğünde serbest bırakılır. Genel bir öneri olarak, istemcilerin, istemci bağlantılarını devam eden diğer tüm sunucu tarafı uygulamalarda olduğu gibi ilişkisiz miktarda bellek ayırmasına izin vermez. Bir Blazor Server uygulaması tarafından tüketilen bellek, tek bir istekten daha uzun bir süre devam ettirir.
+Sunucu tarafı bellek talepleri tüm Blazor Server uygulamaları için göz önünde bulundurulmalıdır. Ancak, web uygulamalarının çoğu durum dilemezdir ve yanıt döndürüldüğünde isteği işlerken kullanılan bellek serbest bırakılır. Genel bir öneri olarak, istemci bağlantılarını devam eden diğer sunucu tarafındaki uygulamalarda olduğu gibi, istemcilerin sınırsız miktarda bellek ayırmasına izin vermez. Blazor Server uygulaması tarafından tüketilen bellek, tek bir istekten daha uzun süre kalır.
 
 > [!NOTE]
-> Geliştirme sırasında, bir profil oluşturucu kullanılabilir veya istemci bellek taleplerini değerlendirmek için yakalanan bir izleme olabilir. Profil Oluşturucu veya izleme, belirli bir istemciye ayrılan belleği yakalamaz. Geliştirme sırasında belirli bir istemcinin bellek kullanımını yakalamak için, bir döküm yakalayın ve Kullanıcı devresi içinde kök olan tüm nesnelerin bellek talebini inceleyin.
+> Geliştirme sırasında, bir profil oluşturucu kullanılabilir veya istemcilerin bellek taleplerini değerlendirmek için bir izleme yakalanır. Bir profil oluşturucu veya izleme, belirli bir istemciye ayrılan belleği yakalamaz. Geliştirme sırasında belirli bir istemcinin bellek kullanımını yakalamak için, bir dökümü yakalayın ve kullanıcının devresine kök salan tüm nesnelerin bellek talebini inceleyin.
 
 ### <a name="client-connections"></a>İstemci bağlantıları
 
-Bir veya daha fazla istemci sunucuya çok fazla eş zamanlı bağlantı açtıklarında, diğer istemcilerin yeni bağlantı kurmasını engellediğinden bağlantı tükenmesi meydana gelebilir.
+Bir veya daha fazla istemci sunucuya çok fazla eşzamanlı bağlantı açtığında bağlantı tükenmesi oluşabilir ve diğer istemcilerin yeni bağlantılar kurmasını engelleyebilir.
 
-Blazor istemcileri, oturum başına tek bir bağlantı kurar ve tarayıcı penceresi açık olduğu sürece bağlantıyı açık halde tutar. Tüm bağlantıları koruma sunucusundaki talepler Blazor uygulamalarına özgü değildir. Bağlantıların kalıcı doğası ve Blazor Server uygulamalarının durum bilgisi olan doğası göz önüne alındığında, bağlantı tükenmesi uygulamanın kullanılabilirliğine daha fazla risk taşır.
+Blazor istemcileri oturum başına tek bir bağlantı kurar ve tarayıcı penceresi açık olduğu sürece bağlantıyı açık tutar. Sunucudaki tüm bağlantıların bakımı yla ilgili talepler Blazor uygulamalarına özgü değildir. Bağlantıların kalıcı yapısı ve Blazor Server uygulamalarının durum daki doğası göz önüne alındığında, bağlantı yorgunluğu uygulamanın kullanılabilirliği açısından daha büyük bir risktir.
 
-Varsayılan olarak, bir Blazor Server uygulaması için Kullanıcı başına bağlantı sayısı sınırı yoktur. Uygulama bir bağlantı sınırı gerektiriyorsa aşağıdaki yaklaşımlardan birini veya daha fazlasını yapın:
+Varsayılan olarak, blazor server uygulaması için kullanıcı başına bağlantı sayısında bir sınır yoktur. Uygulama bir bağlantı sınırı gerektiriyorsa, aşağıdaki yaklaşımlardan birini veya birkaçını alın:
 
-* Yetkisiz kullanıcıların uygulamaya bağlanma yeteneğini doğal olarak sınırlayan kimlik doğrulaması gerektir. Bu senaryonun etkili olabilmesi için kullanıcıların, ' de Yeni Kullanıcı sağlaması engellenmelidir.
-* Kullanıcı başına bağlantı sayısını sınırlayın. Bağlantıları sınırlandırma, aşağıdaki yaklaşımlar aracılığıyla gerçekleştirilebilir. Meşru kullanıcıların uygulamaya erişmesine izin vermeye özen gösterin (örneğin, istemcinin IP adresine göre bir bağlantı sınırı oluşturulduğunda).
+* Yetkisiz kullanıcıların uygulamaya bağlanma yeteneğini doğal olarak sınırlayan kimlik doğrulaması gerektirir. Bu senaryonun etkili olabilmesi için, kullanıcıların yeni kullanıcılar alabilmeli şekilde sağlaması engellenmelidir.
+* Kullanıcı başına bağlantı sayısını sınırlayın. Bağlantıları sınırlandırma aşağıdaki yaklaşımlarla gerçekleştirilebilir. Yasal kullanıcıların uygulamaya erişmesine izin vermek için dikkatli olun (örneğin, istemcinin IP adresine göre bir bağlantı sınırı oluşturulduğunda).
   * Uygulama düzeyinde:
-    * Uç nokta yönlendirme genişletilebilirliği.
-    * Uygulamaya bağlanmak ve Kullanıcı başına etkin oturumları izlemek için kimlik doğrulaması gerektir.
-    * Sınıra ulaştıktan sonra yeni oturumları reddedin.
-    * İstemcilerden bir uygulamaya bağlantı oluşturan [Azure SignalR hizmeti](/azure/azure-signalr/signalr-overview) gibi bir ara sunucu aracılığıyla uygulamaya yönelik proxy WebSocket bağlantıları. Bu, tek bir istemcinin yapabileceğinden daha fazla bağlantı kapasitesine sahip bir uygulama sağlar ve istemcinin sunucu bağlantılarını tüketmesini önler.
-  * Sunucu düzeyinde: uygulamanın önünde bir proxy/ağ geçidi kullanın. Örneğin, [Azure ön kapısı](/azure/frontdoor/front-door-overview) , Web trafiğinin bir uygulamaya küresel olarak yönlendirilmesini tanımlamanıza, yönetmenize ve izlemenize olanak sağlar.
+    * Endpoint yönlendirme genişletilebilirlik.
+    * Uygulamaya bağlanmak ve kullanıcı başına etkin oturumları izlemek için kimlik doğrulaması gerektirir.
+    * Bir sınıra ulaştıktan sonra yeni oturumları reddedin.
+    * Proxy WebSocket bağlantıları, istemcilerden bir uygulamaya bağlantıları birden fazlaya çarpan [Azure SinyalR Hizmeti](/azure/azure-signalr/signalr-overview) gibi bir proxy aracılığıyla bir uygulamaya bağlanır. Bu, tek bir istemcinin kurabileceğinden daha fazla bağlantı kapasitesine sahip bir uygulama sağlayarak istemcinin sunucuya olan bağlantıları tüketmesini önler.
+  * Sunucu düzeyinde: Uygulamanın önünde bir proxy/ağ geçidi kullanın. Örneğin, [Azure Ön Kapı,](/azure/frontdoor/front-door-overview) web trafiğinin bir uygulamaya genel yönlendirmesini tanımlamanızı, yönetmenize ve izlemenize olanak tanır.
 
 ## <a name="denial-of-service-dos-attacks"></a>Hizmet reddi (DoS) saldırıları
 
-Hizmet reddi (DoS) saldırıları, istemcinin bir veya daha fazla kaynağın bir veya daha fazla uygulamayı tüketmesine neden olan bir istemciyi içerir. Blazor Server uygulamaları, DoS saldırılarına karşı koruma sağlamak için bazı varsayılan limitleri içerir ve diğer ASP.NET Core ve SignalR sınırlarına bağımlıdır:
+Hizmet reddi (DoS) saldırıları, sunucunun bir veya daha fazla kaynağının tüketmesine ve uygulamanın kullanılamamasına neden olmasını içerir. Blazor Server uygulamaları bazı varsayılan sınırlar içerir ve DoS saldırılarına karşı korunmak için diğer ASP.NET Core ve SignalR sınırlarına güvenir:
 
-| Blazor sunucusu uygulama sınırı                            | Açıklama | Varsayılan |
+| Blazor Server uygulama sınırı                            | Açıklama | Varsayılan |
 | ------------------------------------------------------- | ----------- | ------- |
-| `CircuitOptions.DisconnectedCircuitMaxRetained`         | Belirli bir sunucunun bellekte tek seferde tuttuğu bağlantı kesilen en fazla bağlantı sayısı. | 100 |
-| `CircuitOptions.DisconnectedCircuitRetentionPeriod`     | Bağlantısı kesilmiş bir devre dışı bırakılmadan önce bellekte tutulan en fazla süre. | 3 dakika |
-| `CircuitOptions.JSInteropDefaultCallTimeout`            | Zaman uyumsuz bir JavaScript işlev çağrısını zaman aşımına uğramadan önce sunucunun bekleyeceği en fazla süre. | 1 dakika |
-| `CircuitOptions.MaxBufferedUnacknowledgedRenderBatches` | En fazla bildirilmemiş işleme toplu işi sayısı sunucu, güçlü yeniden bağlanmayı desteklemek için belirli bir zamanda her bir devreye göre bellekte kalır. Sınıra ulaştıktan sonra sunucu, bir veya daha fazla toplu iş istemci tarafından onaylanana kadar yeni oluşturma toplu işleri oluşturmayı durduruyor. | 10 |
+| `CircuitOptions.DisconnectedCircuitMaxRetained`         | Belirli bir sunucunun bir anda bellekte tuttuğu maksimum bağlantısız devre sayısı. | 100 |
+| `CircuitOptions.DisconnectedCircuitRetentionPeriod`     | Bağlantısı kesilen bir devre nin parçalanmadan önce bellekte tutulduğu maksimum süre. | 3 dakika |
+| `CircuitOptions.JSInteropDefaultCallTimeout`            | Sunucunun, eşzamanlı bir JavaScript işlev çağırması zamanlamasını zamanlamadan önce beklediği maksimum süre. | 1 dakika |
+| `CircuitOptions.MaxBufferedUnacknowledgedRenderBatches` | Sağlam yeniden bağlantıyı desteklemek için sunucunun belirli bir zamanda devre başına bellekte tuttuğu maksimum onaylanmamış render toplu iş sayısı. Sınıra ulaştıktan sonra, sunucu istemci tarafından bir veya daha fazla toplu iş kabul edilene kadar yeni işişleme toplu oluşturmayı durdurur. | 10 |
 
 
-| SignalR ve ASP.NET Core sınırı             | Açıklama | Varsayılan |
+| SignalR ve ASP.NET Çekirdek sınırı             | Açıklama | Varsayılan |
 | ------------------------------------------ | ----------- | ------- |
 | `CircuitOptions.MaximumReceiveMessageSize` | Tek bir ileti için ileti boyutu. | 32 KB |
 
-## <a name="interactions-with-the-browser-client"></a>Tarayıcıyla etkileşimler (istemci)
+## <a name="interactions-with-the-browser-client"></a>Tarayıcı ile etkileşimler (istemci)
 
-İstemci, JS birlikte çalışma olayı gönderme ve işleme tamamlama aracılığıyla sunucuyla etkileşime girer. JS birlikte çalışma iletişimi, JavaScript ve .NET arasında her iki yolla da geçer:
+İstemci, JS interop olay gönderme ve tamamlama render aracılığıyla sunucu ile etkileşim. JS interop iletişim JavaScript ve .NET arasında her iki yönde gider:
 
-* Tarayıcı olayları istemciden sunucuya zaman uyumsuz biçimde gönderilir.
-* Sunucu, gerektiği şekilde kullanıcı arabiriminden zaman uyumsuz olarak rerendering.
+* Tarayıcı olayları istemciden sunucuya eşzamanlı bir şekilde gönderilir.
+* Sunucu, kullanıcı ayını gerektiği gibi eşzamanlı olarak yeniden işlemeye yanıt verir.
 
-### <a name="javascript-functions-invoked-from-net"></a>.NET 'ten çağrılan JavaScript işlevleri
+### <a name="javascript-functions-invoked-from-net"></a>.NET'ten çağrılan JavaScript işlevleri
 
-.NET yöntemlerinden JavaScript 'e yapılan çağrılar için:
+.NET yöntemlerinden JavaScript'e yapılan aramalar için:
 
-* Tüm etkinleştirmeleri, başarısız olduktan sonra, çağırana bir <xref:System.OperationCanceledException> döndüren yapılandırılabilir bir zaman aşımı sağlar.
-  * Bir dakikalık çağrılar (`CircuitOptions.JSInteropDefaultCallTimeout`) için varsayılan bir zaman aşımı vardır. Bu sınırı yapılandırmak için bkz. <xref:blazor/call-javascript-from-dotnet#harden-js-interop-calls>.
-  * İptal belirtecini çağrı başına temelinde denetlemek için bir iptal belirteci sağlayabilirsiniz. Bir iptal belirteci sağlandıysa, mümkün olan ve istemciye yapılan tüm çağrıların zaman içinde sağlandığı varsayılan çağrı zaman aşımını kullanır.
-* JavaScript çağrısının sonucu güvenilir olamaz. Tarayıcıda çalışan Blazor uygulama istemcisi çağırmak için JavaScript işlevini arar. İşlev çağrılır ve sonuç ya da bir hata oluşturulur. Kötü amaçlı bir istemci şunları gerçekleştirmeye çalışabilir:
-  * JavaScript işlevinden bir hata döndürerek uygulamada sorun oluşmasına neden olur.
-  * JavaScript işlevinden beklenmeyen bir sonuç döndürerek sunucuda istemeden bir davranış alır.
+* Tüm çağrıların, bir arayanın döndürülmesi, <xref:System.OperationCanceledException> başarısız oldukları yapılandırılabilir bir zaman acısı vardır.
+  * Aramalar için varsayılan bir zaman ası vardır (`CircuitOptions.JSInteropDefaultCallTimeout`) bir dakika. Bu sınırı yapılandırmak <xref:blazor/call-javascript-from-dotnet#harden-js-interop-calls>için bkz.
+  * İptal iamasını her çağrı başına kontrol etmek için bir iptal belirteci sağlanabilir. İptal belirteci sağlandığı takdirde, istemciye yapılan olası ve zamana bağlı herhangi bir çağrının mümkün olduğu durumlarda varsayılan arama zaman ayarı'na güvenin.
+* JavaScript aramasının sonucuna güvenilemez. Tarayıcıda çalışan Blazor uygulama istemcisi, javascript işlevini çağırmak için arar. İşlev çağrılır ve sonuç veya hata üretilir. Kötü amaçlı bir istemci şunları yapmaya çalışabilir:
+  * JavaScript işlevinden bir hata döndürerek uygulamada bir soruna neden olabilir.
+  * JavaScript işlevinden beklenmeyen bir sonuç döndürerek sunucuda istenmeyen bir davranış alıbın.
 
-Yukarıdaki senaryolara karşı koruma için aşağıdaki önlemleri alın:
+Önceki senaryolara karşı korunmak için aşağıdaki önlemleri alın:
 
-* [Try-catch](/dotnet/csharp/language-reference/keywords/try-catch) DEYIMLERI içindeki js birlikte çalışabilirlik çağrılarını, çağırma sırasında oluşabilecek hataları hesaba eklemek için kaydırın. Daha fazla bilgi için bkz. <xref:blazor/handle-errors#javascript-interop>.
-* Herhangi bir işlem yapmadan önce, hata iletileri de dahil olmak üzere JS birlikte çalışma çağırmaları tarafından döndürülen verileri doğrulayın.
+* Çağrılar sırasında oluşabilecek hataları hesaba katmak için [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) ifadeleri içindeki JS interop çağrılarını sarın. Daha fazla bilgi için bkz. <xref:blazor/handle-errors#javascript-interop>.
+* Herhangi bir işlem yapmadan önce hata iletileri de dahil olmak üzere JS interop çağrılarından döndürülen verileri doğrulayın.
 
-### <a name="net-methods-invoked-from-the-browser"></a>Tarayıcıdan çağrılan .NET yöntemleri
+### <a name="net-methods-invoked-from-the-browser"></a>.TARAYıCıDAN çağrılan NET yöntemleri
 
-JavaScript 'e yönelik çağrılara .NET yöntemlerine güvenmeyin. JavaScript 'e bir .NET yöntemi sunulduğunda, .NET yönteminin nasıl çağrılacağını göz önünde bulundurun:
+JavaScript'ten .NET yöntemlerine yapılan çağrılara güvenmeyin. Bir .NET yöntemi JavaScript'e maruz kaldığında, .NET yönteminin nasıl çağrıldığını göz önünde bulundurun:
 
-* Uygulamaya genel bir uç nokta gibi, JavaScript 'e sunulan tüm .NET metodunu değerlendirin.
-  * Girişi doğrula.
-    * Değerlerin beklenen aralıklar içinde olduğundan emin olun.
-    * Kullanıcının istenen eylemi gerçekleştirme izni olduğundan emin olun.
-  * .NET Yöntem çağırma kapsamında aşırı miktarda kaynak ayırmayın. Örneğin, denetim gerçekleştirin ve CPU ve bellek kullanımı için sınır koyun.
-  * Statik ve örnek yöntemlerinin JavaScript istemcilerine sunutabileceğiniz hesaba sahip olun. Tasarım, uygun kısıtlamalarla durum paylaşma için çağrı yaptığı müddetçe, oturumlar arasında durum paylaşmaktan kaçının.
-    * İlk olarak bağımlılık ekleme (DI) aracılığıyla oluşturulan `DotNetReference` nesneleri aracılığıyla kullanıma sunulan örnek yöntemleri için nesnelerin kapsamlı nesneler olarak kaydedilmesi gerekir. Bu, Blazor sunucu uygulamasının kullandığı tüm DI Hizmetleri için geçerlidir.
-    * Statik yöntemler için, uygulama bir sunucu örneğindeki tüm kullanıcılar genelinde durum tasarımını özel olarak paylaşmadığı müddetçe, istemciye kapsamdaki durumu oluşturmaktan kaçının.
-  * Parametrelerde Kullanıcı tarafından sağlanan verileri JavaScript çağrılarına geçirmekten kaçının. Parametrelerde veri geçirilmesi kesinlikle gerekliyse, JavaScript kodunun, [siteler arası betik oluşturma (XSS)](#cross-site-scripting-xss) güvenlik açıklarına gerek kalmadan verileri geçirmeyi işlediğinden emin olun. Örneğin, bir öğenin `innerHTML` özelliğini ayarlayarak Belge Nesne Modeli (DOM) Kullanıcı tarafından sağlanan verileri yazma. `eval` ve diğer güvenli olmayan JavaScript temel öğelerini devre dışı bırakmak için [Içerik güvenlik ilkesi (CSP)](https://developer.mozilla.org/docs/Web/HTTP/CSP) kullanmayı düşünün.
-* Framework 'ün gönderme uygulamasının en üstünde .NET etkinleştirmeleri için özel bir dağıtma uygulamaktan kaçının. .NET yöntemlerini tarayıcıya sunma, genel Blazor geliştirme için önerilmeyen gelişmiş bir senaryodur.
+* JavaScript'e maruz kalan herhangi bir .NET yöntemini, uygulamanın genel bitiş noktası olarak ele alın.
+  * Girişi doğrulayın.
+    * Değerlerin beklenen aralıklarda olduğundan emin olun.
+    * Kullanıcının istenen eylemi gerçekleştirmek için izni olduğundan emin olun.
+  * .NET yöntemi çağırmasının bir parçası olarak aşırı miktarda kaynak ayırmayın. Örneğin, CPU ve bellek kullanımı için denetimler gerçekleştirin ve sınırlar yerleştirin.
+  * Statik ve örnek yöntemlerinin JavaScript istemcilerine maruz kabileceğini göz önünde bulundurun. Tasarım, durumu uygun kısıtlamalarla paylaşmayı gerektiriyorsa, oturumlar arasında durum paylaşımından kaçının.
+    * Örneğin, başlangıçta `DotNetReference` bağımlılık enjeksiyonu (DI) yoluyla oluşturulan nesneler aracılığıyla ortaya çıkarılan yöntemler, nesnelerin kapsamlı nesneler olarak kaydedilmesi gerekir. Bu, Sunucu uygulamasının Blazor kullandığı herhangi bir DI hizmeti için geçerlidir.
+    * Statik yöntemler için, uygulama bir sunucu örneğindeki tüm kullanıcılar arasında durum by-design açıkça paylaşım olmadığı sürece istemciye kapsamlandırılamaz durum oluşturmaktan kaçının.
+  * Kullanıcı tarafından sağlanan verileri parametrelerdeki JavaScript çağrılarına aktarmaktan kaçının. Parametrelerde veri aktarılması kesinlikle gerekiyorsa, JavaScript kodunun siteleri arası [komut dosyası (XSS)](#cross-site-scripting-xss) güvenlik açıklarını tanıtmadan verileri geçirmeyi işlediğinden emin olun. Örneğin, bir öğenin özelliğini `innerHTML` ayarlayarak kullanıcı tarafından sağlanan verileri Belge Nesnesi Modeline (DOM) yazmayın. Devre dışı ve diğer güvenli olmayan JavaScript `eval` ilkellerini devre dışı katmak için [İçerik Güvenlik İlkesi 'ni (CSP)](https://developer.mozilla.org/docs/Web/HTTP/CSP) kullanmayı düşünün.
+* Çerçevenin gönderme uygulamasının üstüne .NET çağrılarının özel olarak gönderilmesini uygulamaktan kaçının. .NET yöntemlerinin tarayıcıya teşhir edilmesi, genel Blazor geliştirme için önerilmeyen gelişmiş bir senaryodur.
 
 ### <a name="events"></a>Olaylar
 
-Olaylar Blazor sunucusu uygulamasına bir giriş noktası sağlar. Web Apps 'teki uç noktaları koruma için aynı kurallar, Blazor Server uygulamalarındaki olay işleme için geçerlidir. Kötü amaçlı bir istemci, istediği verileri bir olay için yük olarak gönderebilirler.
+Olaylar, sunucu Blazor uygulamasına bir giriş noktası sağlar. Web uygulamalarında uç noktaları korumak için aynı kurallar Blazor Sunucu uygulamalarında olay işleme için de geçerlidir. Kötü niyetli bir istemci, bir olay için yük olarak göndermek istediği verileri gönderebilir.
 
 Örneğin:
 
-* Bir `<select>` için değişiklik olayı, uygulamanın istemciye sunulan seçenekler içinde olmayan bir değer gönderebilir.
-* `<input>`, istemci tarafı doğrulamayı atlayarak herhangi bir metin verisini sunucuya gönderebilir.
+* Bir değişiklik `<select>` olayı, uygulamanın istemciye sunduğu seçenekler arasında olmayan bir değer gönderebilir.
+* İstemci tarafı doğrulaması atlayarak sunucuya herhangi bir `<input>` metin verisi gönderebilirsiniz.
 
-Uygulamanın, uygulamanın işlediği herhangi bir olay için verileri doğrulaması gerekir. Blazor Framework [Forms bileşenleri](xref:blazor/forms-validation) temel doğrulamaları gerçekleştirir. Uygulama özel form bileşenleri kullanıyorsa, olay verilerinin uygun şekilde doğrulanması için özel kodun yazılması gerekir.
+Uygulama, uygulamanın işlediği herhangi bir olay için verileri doğrulamalıdır. Çerçeve Blazor [formları bileşenleri](xref:blazor/forms-validation) temel doğrulamaları gerçekleştirir. Uygulama özel form bileşenleri kullanıyorsa, olay verilerini uygun şekilde doğrulamak için özel kod yazılmalıdır.
 
-Blazor sunucu olayları zaman uyumsuzdur, bu nedenle uygulamanın yeni bir işleme üreten bir işleme süresi geçmeden önce sunucuya birden çok olay gönderilebilir. Göz önünde bulundurulması gereken bazı güvenlik etkileri vardır. Uygulamadaki istemci eylemlerinin sınırlandırmasının, olay işleyicileri içinde gerçekleştirilmesi ve geçerli işlenen görünüm durumuna bağlı olmaması gerekir.
+BlazorSunucu olayları eşzamanlıdır, bu nedenle uygulama yeni bir render oluşturarak tepki vermek için zaman bulamadan birden çok olay sunucuya gönderilebilir. Bu göz önünde bulundurulması gereken bazı güvenlik etkileri vardır. Uygulamadaki istemci eylemlerini sınırlama, olay işleyicileri içinde gerçekleştirilmeli ve geçerli işlenen görünüm durumuna bağlı olmamalıdır.
 
-Bir kullanıcının bir sayacı en fazla üç kez artmasını sağlayan bir sayaç bileşeni düşünün. Sayacı artırma düğmesi, `count`değerine göre koşullu olarak belirlenir:
+Bir kullanıcının sayaç sayacını en fazla üç kez artmasını sağlayacak bir sayaç bileşeni düşünün. Sayacı nitremi leştirmek için düğme aşağıdakilerin `count`değerine bağlıdır:
 
 ```razor
 <p>Count: @count<p>
@@ -178,7 +377,7 @@ Bir kullanıcının bir sayacı en fazla üç kez artmasını sağlayan bir saya
 }
 ```
 
-Bir istemci, çerçeve bu bileşenin yeni bir işlemesini oluşturmadan önce bir veya daha fazla artış olayı gönderebilir. Bu, düğme kullanıcı ARABIRIMI tarafından yeterince hızlı bir şekilde kaldırılmadığı için `count`, Kullanıcı tarafından *üç kez* artılabildiğinden oluşur. Üç `count` artımlarının sınırına ulaşmak için doğru yol aşağıdaki örnekte gösterilmiştir:
+Bir istemci, çerçeve bu bileşenin yeni bir işlemesini oluşturmadan önce bir veya daha fazla artış olayı gönderebilirsiniz. Sonuç, düğme `count` Kullanıcı Arabirimi tarafından yeterince hızlı bir şekilde kaldırılmadığı ndan kullanıcı tarafından *üç kat* daha fazla artımlanolabilir. Üç `count` artış sınırına ulaşmanın doğru yolu aşağıdaki örnekte gösterilmiştir:
 
 ```razor
 <p>Count: @count<p>
@@ -202,11 +401,11 @@ Bir istemci, çerçeve bu bileşenin yeni bir işlemesini oluşturmadan önce bi
 }
 ```
 
-İşleyicinin içindeki `if (count < 3) { ... }` denetimini ekleyerek, `count` artırma kararı geçerli uygulama durumuna göre belirlenir. Bu karar, önceki örnekte olduğu gibi Kullanıcı arabiriminin durumunu temel değildir ve bu da geçici olarak eski olabilir.
+Denetimi `if (count < 3) { ... }` işleyicinin içine ekleyerek, artış `count` kararı geçerli uygulama durumuna bağlıdır. Karar, önceki örnekte olduğu gibi geçici olarak bayat olabilecek Kişisel BirA'nın durumuna dayalı değildir.
 
-### <a name="guard-against-multiple-dispatches"></a>Birden çok gönderine karşı koruma
+### <a name="guard-against-multiple-dispatches"></a>Birden fazla sevkiyata karşı koruma
 
-Bir olay geri çağırması, bir dış hizmetten veya veritabanından veri getirme gibi uzun süre çalışan bir işlemi zaman uyumsuz olarak çağıralıyorsa, bir koruyucu kullanmayı düşünün. Koruyucu, bir işlem görsel geri bildirimde çalışırken, kullanıcının birden çok işlemi sıraya almasını önleyebilir. Aşağıdaki bileşen kodu, `GetForecastAsync` verileri sunucudan alırken `true` `isLoading` ayarlar. `isLoading` `true`, bu düğme Kullanıcı arabiriminde devre dışı bırakılır:
+Bir olay geri araması, harici bir hizmetten veya veritabanından veri alma gibi uzun süren bir işlemi eşit olarak çağırırsa, bir koruma kullanmayı düşünün. Koruma, işlem görsel geri bildirimle devam ederken kullanıcının birden çok işlemi sıraya girmesini engelleyebilir. Aşağıdaki bileşen kodu, `true` `GetForecastAsync` sunucudan veri elde ederken ayarlar. `isLoading` `isLoading` Ise, `true`düğme UI devre dışı bırakılır:
 
 ```razor
 @page "/fetchdata"
@@ -231,11 +430,11 @@ Bir olay geri çağırması, bir dış hizmetten veya veritabanından veri getir
 }
 ```
 
-Önceki örnekte gösterilen koruma deseninin arka plan işlemi `async`-`await` düzeniyle zaman uyumsuz olarak yürütülürse, bu işlem geçerlidir.
+Önceki örnekte gösterilen koruma deseni, arka plan işlemi `async` - `await` desenle eşzamanlı olarak yürütülürse çalışır.
 
-### <a name="cancel-early-and-avoid-use-after-dispose"></a>Erken iptali yapın ve bir-After-Dispose kullanmaktan kaçının
+### <a name="cancel-early-and-avoid-use-after-dispose"></a>Erken iptal edin ve kullanım sonrası elden çıkarmadan kaçının
 
-[Birden çok gönderenlere karşı koruma](#guard-against-multiple-dispatches) bölümünde açıklandığı gibi bir koruyucu kullanmanın yanı sıra, bileşen bırakıldığında uzun süreli işlemleri iptal etmek için bir <xref:System.Threading.CancellationToken> kullanmayı düşünün. Bu yaklaşımda, bileşenlerden *sonra kullanım-sonrasında Dispose özelliğinden kaçınmanın* sağladığı avantaj vardır:
+Birden fazla sevkiyat bölümüne [karşı Guard'da](#guard-against-multiple-dispatches) açıklandığı gibi bir <xref:System.Threading.CancellationToken> koruma kullanmanın yanı sıra, bileşen imha edildiğinde uzun süren işlemleri iptal etmek için bir koruma kullanmayı düşünün. Bu yaklaşım, bileşenlerde *kullanım sonrası elden çıkarmaktan* kaçınmanın ek yararına sahiptir:
 
 ```razor
 @implements IDisposable
@@ -268,145 +467,145 @@ Bir olay geri çağırması, bir dış hizmetten veya veritabanından veri getir
 }
 ```
 
-### <a name="avoid-events-that-produce-large-amounts-of-data"></a>Büyük miktarlarda veri üreten olaylardan kaçının
+### <a name="avoid-events-that-produce-large-amounts-of-data"></a>Büyük miktarda veri üreten olaylardan kaçının
 
-`oninput` veya `onscroll`gibi bazı DOM olayları, büyük miktarda veri üretebilir. Bu olayları Blazor Server uygulamalarında kullanmaktan kaçının.
+Gibi bazı DOM `oninput` olayları, büyük `onscroll`miktarda veri üretebilir. Sunucu uygulamalarında Blazor bu olayları kullanmaktan kaçının.
 
 ## <a name="additional-security-guidance"></a>Ek güvenlik kılavuzu
 
-ASP.NET Core uygulamalarının güvenliğini sağlama kılavuzu Blazor sunucu uygulamalarına uygulanır ve aşağıdaki bölümlerde ele alınmıştır:
+Core uygulamaları ASP.NET güvenliğini sağlama Blazor kılavuzu Server uygulamalarına uygulanır ve aşağıdaki bölümlerde ele alınmıştır:
 
 * [Günlüğe kaydetme ve hassas veriler](#logging-and-sensitive-data)
-* [HTTPS ile yoldaki bilgileri koruma](#protect-information-in-transit-with-https)
-* [Siteler arası betik oluşturma (XSS)](#cross-site-scripting-xss))
-* [Çapraz kaynak koruması](#cross-origin-protection)
-* [Tıklama-Jacking](#click-jacking)
-* [Yeniden yönlendirmeleri aç](#open-redirects)
+* [HTTPS ile geçiş sırasındaki bilgileri koruyun](#protect-information-in-transit-with-https)
+* [Site arası komut dosyası (XSS)](#cross-site-scripting-xss))
+* [Çapraz orijin koruması](#cross-origin-protection)
+* [Tıklama kaçırma](#click-jacking)
+* [Açık yönlendirmeler](#open-redirects)
 
 ### <a name="logging-and-sensitive-data"></a>Günlüğe kaydetme ve hassas veriler
 
-İstemci ve sunucu arasındaki JS birlikte çalışma etkileşimleri, <xref:Microsoft.Extensions.Logging.ILogger> örneklerle sunucu günlüklerine kaydedilir. Blazor, gerçek olaylar veya JS birlikte çalışma girişleri ve çıkışları gibi hassas bilgilerin günlüğe kaydedilmesini önler.
+İstemci ve sunucu arasındaki JS interop etkileşimleri sunucunun <xref:Microsoft.Extensions.Logging.ILogger> günlüklerinde örneklerle kaydedilir. Blazorgerçek olaylar veya JS interop giriş ve çıkışları gibi hassas bilgilerin günlüğe kaydedilmesini önler.
 
-Sunucuda bir hata oluştuğunda, çerçeve istemciye bildirir ve oturumu kapatır. Varsayılan olarak, istemci tarayıcının geliştirici araçlarında görünebileceğini belirten genel bir hata iletisi alır.
+Sunucuda bir hata oluştuğunda, çerçeve istemciyi bildirer ve oturumu yıkın. Varsayılan olarak, istemci tarayıcının geliştirici araçlarında görülebilen genel bir hata iletisi alır.
 
-İstemci tarafı hatası, çağrı yığınını içermez ve hatanın nedeni hakkında ayrıntı sağlamaz, ancak sunucu günlükleri bu gibi bilgileri içerir. Geliştirme amacıyla, önemli hata bilgileri, ayrıntılı hataları etkinleştirerek istemciye kullanılabilir hale getirilebilir.
+İstemci tarafı hatası çağrı yığınını içermez ve hatanın nedeni hakkında ayrıntı sağlamaz, ancak sunucu günlükleri bu tür bilgiler içerir. Geliştirme amacıyla, hassas hata bilgileri ayrıntılı hataları etkinleştirerek istemcinin kullanımına sunulabilir.
 
-İle ilgili ayrıntılı hataları etkinleştir:
+Aşağıdakilerle ayrıntılı hataları etkinleştirme
 
 * `CircuitOptions.DetailedErrors`.
-* yapılandırma anahtarı `DetailedErrors`. Örneğin, `ASPNETCORE_DETAILEDERRORS` ortam değişkenini `true`değerine ayarlayın.
+* `DetailedErrors`yapılandırma anahtarı. Örneğin, ortam `ASPNETCORE_DETAILEDERRORS` değişkenini bir `true`değere ayarlayın.
 
 > [!WARNING]
-> Internet 'teki istemcilere hata bilgilerini ortaya çıkarmak her zaman kaçınılması gereken bir güvenlik riskidir.
+> Hata bilgilerinin Internet'te istemcilere teşhir edilmesi her zaman kaçınılması gereken bir güvenlik riskidir.
 
-### <a name="protect-information-in-transit-with-https"></a>HTTPS ile yoldaki bilgileri koruma
+### <a name="protect-information-in-transit-with-https"></a>HTTPS ile geçiş sırasındaki bilgileri koruyun
 
-Blazor sunucusu, istemci ve sunucu arasındaki iletişim için SignalR kullanır. Blazor sunucusu normalde SignalR üzerinde görüşür, genellikle WebSockets olan aktarımı kullanır.
+BlazorSunucu SignalR istemci ve sunucu arasındaki iletişim için kullanır. BlazorSunucu normalde SignalR genellikle WebSockets olan anlaşmayapan aktarım kullanır.
 
-Blazor sunucusu, sunucu ve istemci arasında gönderilen verilerin bütünlüğünü ve gizliliğini garanti etmez. Her zaman HTTPS kullanın.
+BlazorSunucu, sunucu ve istemci arasında gönderilen verilerin bütünlüğünü ve gizliliğini sağlamaz. Her zaman HTTPS kullanın.
 
-### <a name="cross-site-scripting-xss"></a>Siteler arası betik oluşturma (XSS)
+### <a name="cross-site-scripting-xss"></a>Site arası komut dosyası (XSS)
 
-Siteler arası betik oluşturma (XSS), yetkisiz bir tarafın tarayıcı bağlamında rastgele mantık yürütmesine olanak sağlar. Güvenliği aşılmış bir uygulama, istemcide rastgele kod çalıştırabilir. Güvenlik açığı, sunucuda büyük olasılıkla çok sayıda kötü amaçlı eylem gerçekleştirmek için kullanılabilir:
+Site arası komut dosyası (XSS), yetkisiz bir tarafın tarayıcı bağlamında rasgele mantık yürütmesine olanak tanır. Gizliliği ihlal edilen bir uygulama istemcide rasgele kod çalıştırabilir. Güvenlik açığı, sunucuya karşı bir dizi kötü amaçlı eylem gerçekleştirme potansiyeline sahip olarak kullanılabilir:
 
-* Sahte/geçersiz olayları sunucuya gönderme.
-* Dağıtım başarısız/geçersiz işleme tamamlama.
-* İşleme tamamlamamasını gönderdikten kaçının.
-* JavaScript 'ten .NET 'e birlikte çalışma çağrıları gönderme.
-* .NET 'ten JavaScript 'e birlikte çalışma çağrılarının yanıtını değiştirme.
-* .NET ile JS birlikte çalışma sonuçlarına dağıtma kullanmaktan kaçının.
+* Sunucuya sahte/geçersiz olaylar gönder.
+* Gönderme başarısız /geçersiz render tamamlamaları.
+* Render tamamlamalarını göndermekten kaçının.
+* JavaScript'ten .NET'e interop çağrıları gönder.
+* .NET'ten JavaScript'e interop çağrılarının yanıtını değiştirin.
+* .NET'i JS interop sonuçlarına göndermekten kaçının.
 
-Blazor Server Framework, önceki tehditlere karşı korumak için gereken adımları gerçekleştirir:
+Blazor Sunucu çerçevesi, önceki tehditlere karşı koruma sağlamak için adımlar atsA:
 
-* İstemci, işleme toplu işlerini bildirmeden, yeni UI güncellemeleri oluşturmayı durduruyor. `CircuitOptions.MaxBufferedUnacknowledgedRenderBatches`ile yapılandırılır.
-* İstemciden bir yanıt almadan bir dakikadan sonra herhangi bir .NET için JavaScript çağrısı süresi. `CircuitOptions.JSInteropDefaultCallTimeout`ile yapılandırılır.
-* JS birlikte çalışması sırasında tarayıcıdan gelen tüm girişte temel doğrulama gerçekleştirir:
-  * .NET başvuruları geçerli ve .NET yöntemi tarafından beklenen türde.
-  * Veriler hatalı biçimlendirilmemiş.
-  * Yöntem için doğru sayıda bağımsız değişken, yükte bulunur.
-  * Yöntemi çağırmadan önce bağımsız değişkenler veya sonuç doğru şekilde seri durumdan çıkarılmış olabilir.
-* Tarayıcıdan gönderilen olaylardan gelen tüm girişte temel doğrulama gerçekleştirir:
+* İstemci toplu iş oluşturmayı kabul etmiyorsa yeni UI güncelleştirmeleri oluşturmayı durdurur. ' ile `CircuitOptions.MaxBufferedUnacknowledgedRenderBatches`yapılandırılan.
+* İstemciden yanıt almadan bir dakika sonra herhangi bir .NET'i JavaScript aramasına zaman sızdırın. ' ile `CircuitOptions.JSInteropDefaultCallTimeout`yapılandırılan.
+* JS interop sırasında tarayıcıdan gelen tüm girişlerde temel doğrulama gerçekleştirir:
+  * .NET başvuruları geçerlidir ve .NET yöntemi tarafından beklenen türdendir.
+  * Veriler yanlış biçimlendirilmiş değil.
+  * Yöntem için doğru sayıda bağımsız değişken yükü nde bulunur.
+  * Bağımsız değişkenler veya sonuç, yöntemi aramadan önce doğru şekilde deserialed edilebilir.
+* Gönderilen olaylardan tarayıcıdan gelen tüm girişlerde temel doğrulama yı gerçekleştirir:
   * Olayın geçerli bir türü vardır.
-  * Olay verilerinin serisi kaldırılamaz.
-  * Olayla ilişkili bir olay işleyicisi var.
+  * Olay için veriler deserialized olabilir.
+  * Olayla ilişkili bir olay işleyicisi vardır.
 
-Framework 'ün uyguladığı korumalarına ek olarak, tehditlere karşı korumak ve uygun işlemleri gerçekleştirmek için uygulamanın geliştirici tarafından kodlanmış olması gerekir:
+Çerçevenin uyguladığı güvenlik önlemlerine ek olarak, uygulama nın tehditlere karşı korunmak ve uygun eylemleri uygulamak için geliştirici tarafından kodlanmalıdır:
 
-* Olayları işlerken her zaman verileri doğrulayın.
+* Olayları işlerken verileri her zaman doğrulayın.
 * Geçersiz veri aldıktan sonra uygun eylemi gerçekleştirin:
-  * Verileri yoksayın ve döndürün. Bu, uygulamanın istekleri işlemeye devam etmesine izin verir.
-  * Uygulama girişin meşru olduğunu belirlerse ve meşru istemci tarafından üretilemeyecek bir özel durum oluşturun. Bir özel durum oluşturmak devre dışı olarak oturum kapatır ve oturumu sonlandırır.
-* Günlüklere dahil olan işleme toplu işlemleri tarafından sağlanan hata iletisine güvenmeyin. Hata istemci tarafından sağlanır ve istemcinin güvenliği tehlikeye aşmış olabileceğinden genellikle güvenilemez.
-* JS birlikte çalışma çağrılarında, JavaScript ve .NET yöntemleri arasında her iki yönde de girişe güvenmeyin.
-* Bağımsız değişkenlerin veya sonuçların doğru şekilde seri durumdan çıkarılsa bile, uygulama bağımsız değişkenlerin ve sonuçların içeriğinin geçerli olduğunu doğrulamaktan sorumludur.
+  * Verileri yoksayın ve döndürün. Bu, uygulamanın istekleri işlemeye devam etmesini sağlar.
+  * Uygulama girişin gayrimeşru olduğunu ve yasal istemci tarafından üretilemediğini belirlerse, bir özel durum atın. Bir istisna atma devre aşağı gözyaşları ve oturumu sona erer.
+* Günlüklerde yer alan toplu iş tamamlanmalarını işlemek tarafından sağlanan hata iletisi güvenmeyin. Hata istemci tarafından sağlanır ve istemci tehlikeye olabilir gibi genellikle güvenilir olamaz.
+* JavaScript ve .NET yöntemleri arasında her iki yönde de JS interop çağrıları nın girişine güvenmeyin.
+* Uygulama, bağımsız değişkenler veya sonuçlar doğru şekilde deserialized olsa bile, bağımsız değişkenler ve sonuçların içeriğigeçerli olduğunu doğrulamak için sorumludur.
 
-Bir XSS Güvenlik açığının mevcut olması için, uygulamanın işlenen sayfada Kullanıcı girişini içermesi gerekir. Blazor Server bileşenleri, bir *. Razor* dosyasındaki biçimlendirmenin yordamsal C# mantığa dönüştürülebileceği bir derleme zamanı adımı yürütür. Çalışma zamanında, C# Logic öðeleri, metinleri ve alt bileşenleri açıklayan bir *işleme ağacı* oluşturur. Bu, tarayıcı DOM 'a bir JavaScript yönergeleri dizisi aracılığıyla uygulanır (veya prerendering durumunda HTML olarak serileştirilir):
+Bir XSS açığının mevcut olması için uygulamanın işlenen sayfaya kullanıcı girişi dahil etmesi gerekir. BlazorSunucu bileşenleri, *.jilet* dosyasındaki biçimlendirmenin yordamsal C# mantığına dönüştürüldüğü bir derleme zamanı adımı yürütür. Çalışma zamanında, C# mantığı öğeleri, metni ve alt bileşenleri açıklayan bir *render ağacı* oluşturur. Bu JavaScript yönergeleri bir dizi ile tarayıcının DOM uygulanır (veya önceden işleme durumunda HTML serileştirilmiş):
 
-* Normal Razor söz dizimi (örneğin, `@someStringValue`) ile işlenen Kullanıcı girişi, Razor söz dizimi DOM 'a yalnızca metin yazabileceğiniz komutlar aracılığıyla eklendiğinden bir XSS Güvenlik Açığı sunmaz. Değer HTML biçimlendirmesi içerse bile, değer statik metin olarak görüntülenir. Prerendering olduğunda çıktı HTML kodlamalı olur ve bu da içeriği statik metin olarak görüntüler.
-* Betik etiketlerine izin verilmez ve uygulamanın bileşen işleme ağacına dahil edilmemelidir. Bir komut dosyası etiketi bir bileşenin biçimlendirmesinde yer alıyorsa, derleme zamanı hatası oluşturulur.
-* Bileşen yazarları, Razor kullanmadan bileşenleri C# içinde yazar. Bileşen yazarı, çıkış yayırken doğru API 'Leri kullanmaktan sorumludur. Örneğin, `builder.AddContent(0, someUserSuppliedString)`, ikincisi bir XSS Güvenlik Açığı oluşturmasından `builder.AddMarkupContent(0, someUserSuppliedString)`*değil* ' i kullanın.
+* Normal Razor sözdizimi (örneğin,) aracılığıyla `@someStringValue`işlenen kullanıcı girişi, yalnızca metin yazabilen komutlarla DOM'a eklenmiştir, çünkü XSS güvenlik açığını ortaya çıkarmaz. Değer HTML biçimlendirmesi içerse bile, değer statik metin olarak görüntülenir. Ön işleme yapılırken, çıktı HTML kodlanır ve bu da içeriği statik metin olarak görüntüler.
+* Komut dosyası etiketlerine izin verilmez ve uygulamanın bileşen oluşturma ağacına dahil edilmemelidir. Bir komut dosyası etiketi bileşenin biçimlendirmesinde yer alırsa, derleme zamanı hatası oluşturulur.
+* Bileşen yazarları, Razor kullanmadan C# bileşenlerini yazabilirler. Bileşen yazarı çıktı yayırken doğru API'leri kullanmaktan sorumludur. Örneğin, ikincisi `builder.AddContent(0, someUserSuppliedString)` bir XSS güvenlik açığı oluşturabileceğinden, kullanmayın ve *kullanmayın.* `builder.AddMarkupContent(0, someUserSuppliedString)`
 
-XSS saldırılarına karşı koruma kapsamında, [Içerik güvenlik ilkesi (CSP)](https://developer.mozilla.org/docs/Web/HTTP/CSP)gibi XSS azaltmalarını gerçekleştirmeyi düşünün.
+XSS saldırılarına karşı korumanın bir parçası olarak, İçerik Güvenlik [Politikası (CSP)](https://developer.mozilla.org/docs/Web/HTTP/CSP)gibi XSS azaltıcı etkenleri uygulamayı düşünün.
 
 Daha fazla bilgi için bkz. <xref:security/cross-site-scripting>.
 
-### <a name="cross-origin-protection"></a>Çapraz kaynak koruması
+### <a name="cross-origin-protection"></a>Çapraz orijin koruması
 
-Çapraz kaynak saldırıları, sunucuya yönelik bir eylem gerçekleştiren farklı bir kaynaktan gelen bir istemciyi içerir. Kötü amaçlı eylem, genellikle bir GET isteği veya bir form GÖNDERISINI (siteler arası Istek sahteciliği, CSRF), ancak kötü amaçlı bir WebSocket açmak da mümkündür. Blazor sunucu uygulamaları, [hub protokolünü kullanan diğer SignalR uygulamaların aynısını](xref:signalr/security)sunar:
+Çapraz kaynak saldırıları, farklı bir kökenden gelen bir istemcinin sunucuya karşı bir eylem gerçekleştirmesini içerir. Kötü amaçlı eylem genellikle bir GET isteği veya bir form POST (Çapraz Site İstek Sahteciliği, CSRF), ancak kötü amaçlı bir WebSocket açılması da mümkündür. BlazorSunucu [uygulamaları, hub protokolü'nü SignalR kullanan diğer uygulamaların sunduğu garantilerle aynı garantiyi](xref:signalr/security)sunar:
 
-* Blazor sunucu uygulamalarına ek ölçüler alınana kadar, kaynak dışı erişilebilir. Çapraz kaynak erişimini devre dışı bırakmak için, işlem hattında CORS ana hattını ekleyerek ve Blazor uç nokta meta verilerine ekleyerek `DisableCorsAttribute` izin verilen çıkış noktaları kümesini, [çıkış noktaları arası kaynak paylaşımı için SignalR yapılandırarak](xref:signalr/security#cross-origin-resource-sharing)bir süre sonu devre dışı bırakın.
-* CORS etkinse, CORS yapılandırmasına bağlı olarak uygulamayı korumak için ek adımlar gerekebilir. CORS genel olarak etkinleştirilmişse, `hub.MapBlazorHub()`çağrıldıktan sonra uç nokta meta verilerine `DisableCorsAttribute` meta verileri eklenerek Blazor sunucu hub 'ı için CORS devre dışı bırakılabilir.
+* BlazorSunucu uygulamalarına, bunu önlemek için ek önlemler alınmadığı sürece çapraz orijinerişilebilir. Çapraz orijin erişimini devre dışı kalarak, cors ara yazılımını boru hattına ekleyerek ve `DisableCorsAttribute` Blazor bitiş noktası meta verilerine ekleyerek veya [başlangıçlar SignalR arası kaynak paylaşımı için yapılandırarak](xref:signalr/security#cross-origin-resource-sharing)izin verilen kaynak kümesini sınırlandırarak CORS'i bitiş noktasında devre dışı bırakabilirsiniz.
+* CORS etkinse, CORS yapılandırmasına bağlı olarak uygulamayı korumak için ek adımlar gerekebilir. CORS genel olarak etkinse, çağrıdan Blazor `DisableCorsAttribute` `hub.MapBlazorHub()`sonra meta verileri uç nokta meta verilerine ekleyerek Sunucu hub'ı için CORS devre dışı edilebilir.
 
 Daha fazla bilgi için bkz. <xref:security/anti-request-forgery>.
 
-### <a name="click-jacking"></a>Tıklama-Jacking
+### <a name="click-jacking"></a>Tıklama kaçırma
 
-Tıklama-Jacking, kullanıcıyı saldırı altında sitede eylemler gerçekleştirmeye ikna etmek için bir sitenin farklı bir kaynaktan bir `<iframe>` olarak işlenmesini içerir.
+Tıklama kaçırma, kullanıcıyı saldırı altındaki `<iframe>` sitede eylemler gerçekleştirmesi için kandırmak için bir siteyi farklı bir kaynaktan gelen bir sitenin içinde olarak görüntülemeyi içerir.
 
-Bir uygulamanın bir `<iframe>`içinde işlemesini korumak için [Içerik güvenlik ilkesi (CSP)](https://developer.mozilla.org/docs/Web/HTTP/CSP) ve `X-Frame-Options` üst bilgisini kullanın. Daha fazla bilgi için bkz. [MDN Web belgeleri: X-Frame-Options](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Frame-Options).
+Bir uygulamayı bir `<iframe>`, İçerik Güvenlik [İlkesi (CSP)](https://developer.mozilla.org/docs/Web/HTTP/CSP) `X-Frame-Options` ve üstbilginin içinde işlemekten korumak için kullanın. Daha fazla bilgi için [MDN web dokümanlarına bakın: X-Frame-Options.](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Frame-Options)
 
-### <a name="open-redirects"></a>Yeniden yönlendirmeleri aç
+### <a name="open-redirects"></a>Açık yönlendirmeler
 
-Bir Blazor sunucusu uygulaması oturumu başladığında, sunucu, oturum başlatma işleminin bir parçası olarak gönderilen URL 'lerin temel doğrulamasını gerçekleştirir. Framework, devre oluşturmadan önce temel URL 'nin geçerli URL 'nin bir üst olduğunu denetler. Framework tarafından başka denetim yapılmaz.
+Sunucu Blazor uygulaması oturumu başladığında, sunucu oturumu başlatmanın bir parçası olarak gönderilen URL'lerin temel doğrulanmasını gerçekleştirir. Çerçeve, devreyi kurmadan önce temel URL'nin geçerli URL'nin bir üst öğesi olup olmadığını denetler. Çerçeve tarafından ek denetimler yapılmaz.
 
-Kullanıcı istemcide bir bağlantı seçtiğinde, bağlantının URL 'SI sunucuya gönderilir ve bu işlem gerçekleştirilecek eylemi belirler. Örneğin, uygulama bir istemci tarafı gezintisi gerçekleştirebilir veya tarayıcıya yeni konuma gidemeyeceğini belirtebilir.
+Bir kullanıcı istemcide bir bağlantı seçtiğinde, bağlantının URL'si sunucuya gönderilir ve bu da hangi eylemin gerçekleşip gerçekleşsüreceğini belirler. Örneğin, uygulama istemci tarafında gezinme gerçekleştirebilir veya tarayıcıya yeni konuma gitmesini gösterebilir.
 
-Bileşenler, `NavigationManager`kullanımı aracılığıyla program aracılığıyla gezinme isteklerini de tetikleyebilirler. Bu tür senaryolarda, uygulama bir istemci tarafı gezintisi gerçekleştirebilir veya tarayıcıya yeni konuma gidebileceğini gösterebilir.
+Bileşenler ayrıca, '' kullanımı yoluyla navigasyon `NavigationManager`isteklerini programlı olarak tetikleyebilir. Bu tür senaryolarda, uygulama istemci tarafında gezinme gerçekleştirebilir veya tarayıcıya yeni konuma gitmesini gösterebilir.
 
-Bileşenler:
+Bileşenler şunları yapmalı:
 
-* Gezinti çağrısı bağımsız değişkenlerinin bir parçası olarak Kullanıcı girişini kullanmaktan kaçının.
+* Gezinti çağrısı bağımsız değişkenlerinin bir parçası olarak kullanıcı girişi kullanmaktan kaçının.
 * Hedefin uygulama tarafından izin verildiğinden emin olmak için bağımsız değişkenleri doğrulayın.
 
-Aksi takdirde, kötü niyetli bir kullanıcı tarayıcıyı saldırgan tarafından denetlenen bir siteye gitmesini zorlayabilir. Bu senaryoda, saldırgan uygulamayı `NavigationManager.Navigate` yöntemi çağrısının bir parçası olarak bazı kullanıcı girişlerini kullanarak ' ye püf ediyor.
+Aksi takdirde, kötü amaçlı bir kullanıcı tarayıcıyı saldırgan kontrolündeki bir siteye gitmeye zorlayabilir. Bu senaryoda, saldırgan `NavigationManager.Navigate` yöntemin çağrılması bir parçası olarak bazı kullanıcı girişi kullanarak uygulama hileler.
 
-Bu öneri, uygulamanın bir parçası olarak bağlantılar işlenirken de geçerlidir:
+Bu öneri, uygulamanın bir parçası olarak bağlantıları işlerken de geçerlidir:
 
-* Mümkünse, göreli bağlantıları kullanın.
+* Mümkünse, göreli bağlantılar kullanın.
 * Mutlak bağlantı hedeflerinin bir sayfaya dahil etmeden önce geçerli olduğunu doğrulayın.
 
 Daha fazla bilgi için bkz. <xref:security/preventing-open-redirects>.
 
-## <a name="authentication-and-authorization"></a>Kimlik doğrulaması ve yetkilendirme
+## <a name="authentication-and-authorization"></a>Kimlik doğrulama ve yetkilendirme
 
-Kimlik doğrulama ve yetkilendirme hakkında yönergeler için bkz. <xref:security/blazor/index>.
+Kimlik doğrulama ve yetkilendirme ile <xref:security/blazor/index>ilgili kılavuz için bkz.
 
 ## <a name="security-checklist"></a>Güvenlik denetim listesi
 
-Aşağıdaki güvenlik konuları listesi ayrıntılı değildir:
+Aşağıdaki güvenlik konuları listesi kapsamlı değildir:
 
-* Etkinliklerden bağımsız değişkenleri doğrulayın.
-* Giriş ve, JS birlikte çalışma çağrılarındaki sonuçları doğrulayın.
-* .NET için JS birlikte çalışabilirlik çağrılarına yönelik kullanıcı girişini kullanmaktan (veya önceden doğrulama) kaçının.
-* İstemcinin ilişkisiz miktarda bellek ayırmasını engelleyin.
+* Olaylardan bağımsız değişkenleri doğrulayın.
+* JS interop aramalarından gelen girişleri ve sonuçları doğrulayın.
+* .NET to JS interop aramaları için kullanıcı girişini kullanmaktan (veya önceden doğrulamaktan) kaçının.
+* İstemcinin bağlanmamış miktarda bellek ayırmasını engelleyin.
   * Bileşen içindeki veriler.
-  * istemciye döndürülen başvuruları `DotNetObject`.
-* Birden çok gönderine karşı koruma.
-* Bileşen atıldığı zaman uzun süre çalışan işlemleri iptal edin.
-* Büyük miktarlarda veri üreten olaylardan kaçının.
-* `NavigationManager.Navigate` yapılan çağrıların bir parçası olarak Kullanıcı girişini kullanmaktan kaçının ve URL 'Ler için Kullanıcı girişini, bir izin verilen kaynaklar kümesine göre doğrulama, önce kaçınılmaz.
-* Kullanıcı arabiriminin durumuna göre yetkilendirme kararları yapmayın, ancak yalnızca bileşen durumudur.
-* XSS saldırılarına karşı korunmak için [Içerik güvenlik ilkesi 'ni (CSP)](https://developer.mozilla.org/docs/Web/HTTP/CSP) kullanmayı düşünün.
-* Tıklama-Jacking 'e karşı korumak için CSP ve [X çerçeve seçeneklerini](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Frame-Options) kullanmayı düşünün.
-* CORS 'yi etkinleştirirken veya Blazor uygulamaları için doğrudan CORS 'yi devre dışı bırakrken CORS ayarlarının uygun olduğundan emin olun.
-* Blazor uygulamasına yönelik sunucu tarafı sınırlarının kabul edilemez bir risk düzeyi olmadan kabul edilebilir bir kullanıcı deneyimi sağlamasına emin olmak için test edin.
+  * `DotNetObject`başvurular istemciye döndürülür.
+* Birden fazla sevkiyata karşı korunun.
+* Bileşen imha edildiğinde uzun süren işlemleri iptal edin.
+* Büyük miktarda veri üreten olaylardan kaçının.
+* Url'ler `NavigationManager.Navigate` için kullanıcı girdisini, kaçınılmaz sayılmaması durumunda önce izin verilen bir dizi menşee karşı kullanıcı girişinin bir parçası olarak kullanmaktan kaçının.
+* Yetkilendirme kararlarını Kullanıcı G'ın durumuna göre değil, yalnızca bileşen durumundan alın.
+* XSS saldırılarına karşı korumak için [İçerik Güvenlik Politikası 'nı (CSP)](https://developer.mozilla.org/docs/Web/HTTP/CSP) kullanmayı düşünün.
+* Tıklama kaçırmaya karşı korumak için CSP ve [X-Frame Seçenekleri](https://developer.mozilla.org/docs/Web/HTTP/Headers/X-Frame-Options) kullanmayı düşünün.
+* CORS'i etkinleştirirken veya uygulamalar için Blazor CORS'i açıkça devre dışı kalırken CORS ayarlarının uygun olduğundan emin olun.
+* Uygulamanın sunucu tarafı sınırlarının kabul Blazor edilemez risk düzeyleri olmadan kabul edilebilir bir kullanıcı deneyimi sağladığından emin olmak için sınayın.

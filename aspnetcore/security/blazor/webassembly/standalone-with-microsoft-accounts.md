@@ -1,82 +1,82 @@
 ---
-title: Microsoft hesaplarıyla bir ASP.NET Core Blazor WebAssembly tek başına uygulamasını güvenli hale getirme
+title: Microsoft Hesapları Blazor ile ASP.NET Core WebAssembly bağımsız bir uygulama güvenli
 author: guardrex
 description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/09/2020
+ms.date: 04/08/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-microsoft-accounts
-ms.openlocfilehash: be73bec971f96bd64afc735a1ea750d47c7bc383
-ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
+ms.openlocfilehash: 8c409651b3338c2baeae497bef43b994823a20f9
+ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80219265"
+ms.lasthandoff: 04/08/2020
+ms.locfileid: "80977086"
 ---
-# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-microsoft-accounts"></a>Microsoft hesaplarıyla bir ASP.NET Core Blazor WebAssembly tek başına uygulamasını güvenli hale getirme
+# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-microsoft-accounts"></a>Microsoft Hesapları Blazor ile ASP.NET Core WebAssembly bağımsız bir uygulama güvenli
 
-, [Javier Calvarro Nelson](https://github.com/javiercn) ve [Luke Latham](https://github.com/guardrex) 'e göre
+Yazar: [Javier Calvarro Nelson](https://github.com/javiercn) ve [Luke Latham](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
-Kimlik doğrulaması için [Azure Active Directory (AAD) Ile Microsoft hesapları](/azure/active-directory/develop/quickstart-register-app#register-a-new-application-using-the-azure-portal) kullanan bir Blazor WebAssembly tek başına uygulaması oluşturmak için:
+Kimlik doğrulama Blazor için Azure Etkin [Dizinli (AAD) microsoft hesaplarını](/azure/active-directory/develop/quickstart-register-app#register-a-new-application-using-the-azure-portal) kullanan bağımsız bir WebAssembly uygulaması oluşturmak için:
 
-1. [AAD kiracısı ve Web uygulaması oluşturma](/azure/active-directory/develop/v2-overview)
+1. [AAD kiracısı ve web uygulaması oluşturma](/azure/active-directory/develop/v2-overview)
 
-   Azure portal **Azure Active Directory** > **uygulama KAYıTLARı** alanına bir AAD uygulaması kaydedin:
+   Azure portalının Azure **Etkin Dizin** > **Uygulaması kayıtları** alanında bir AAD uygulaması kaydolun:
 
-   1 \. Uygulama için bir **ad** sağlayın (örneğin, **Blazor istemci AAD**).<br>
-   2 \. **Desteklenen hesap türleri**' nde, **herhangi bir kuruluş dizininde hesaplar**' ı seçin.<br>
-   3 \. **Yeniden yönlendirme URI 'si** açılan listesini **Web**olarak ayarlayın ve `https://localhost:5001/authentication/login-callback`yeniden yönlendirme URI 'si sağlayın.<br>
-   4 \. **Yönetici tarafından OpenID ve offline_access izinleri için Izin ver** onay kutusunu > **izinleri** devre dışı bırakın.<br>
-   5 \. **Kaydol**’u seçin.
+   1\. Uygulama için bir **Ad** sağlayın (örneğin, ** Blazor İstemci AAD).**<br>
+   2\. Desteklenen hesap **türlerinde, herhangi bir kuruluş dizinindeki Hesapları**seçin. **Supported account types**<br>
+   3\. **Redirect URI** damlasını **Web'e**bırak ve uri'yi yeniden yönlendirmeyi `https://localhost:5001/authentication/login-callback`sağlar.<br>
+   4\. **İzinleri** > devre dışı**kaldırın, Yönetici yi openid ve offline_access izinleri** onay kutusunu açmak için yoğunlaşın.<br>
+   5\. **Kaydol**’u seçin.
 
-   **Kimlik doğrulama** > **Platform yapılandırmalarında** **Web** > :
+   **Kimlik** > Doğrulama**Platformu yapılandırmalarında** > **Web**:
 
-   1 \. `https://localhost:5001/authentication/login-callback` **yeniden yönlendirme URI 'sinin** mevcut olduğunu onaylayın.<br>
-   2 \. **Örtük izin**Için, **erişim belirteçleri** ve **Kimlik belirteçleri**onay kutularını seçin.<br>
-   3 \. Uygulamanın kalan varsayılan değerleri bu deneyim için kabul edilebilir.<br>
-   4 \. **Kaydet** düğmesini seçin.
+   1\. **Redirect** URI'nin `https://localhost:5001/authentication/login-callback` mevcut olduğunu doğrulayın.<br>
+   2\. **Örtülü hibe**için, Erişim **belirteçleri** ve **kimlik belirteçleri**için onay kutularını seçin.<br>
+   3\. Uygulama için kalan varsayılanlar bu deneyim için kabul edilebilir.<br>
+   4\. **Kaydet** düğmesini seçin.
 
-   Uygulama KIMLIĞINI (Istemci KIMLIĞI) kaydedin (örneğin, `11111111-1111-1111-1111-111111111111`).
+   Uygulama Kimliğini (İstemci Kimliği) `11111111-1111-1111-1111-111111111111`kaydetme (örneğin, ).
 
-1. Aşağıdaki komutta yer tutucuları, daha önce kaydedilen bilgilerle değiştirin ve komutu bir komut kabuğu 'nda yürütün:
+1. Aşağıdaki komuttaki yer tutucuları daha önce kaydedilen bilgilerle değiştirin ve komutu bir komut kabuğunda uygulayın:
 
    ```dotnetcli
    dotnet new blazorwasm -au SingleOrg --client-id "{CLIENT ID}" --tenant-id "common"
    ```
 
-   Mevcut değilse bir proje klasörü oluşturan çıkış konumunu belirtmek için, çıkış seçeneğini komuta bir yol (örneğin, `-o BlazorSample`) ile birlikte ekleyin. Klasör adı Ayrıca projenin adının bir parçası haline gelir.
+   Yoksa proje klasörü oluşturan çıktı konumunu belirtmek için, çıkış seçeneğini bir yolu olan komuta ekleyin `-o BlazorSample`(örneğin, ). Klasör adı da projenin adının bir parçası olur.
 
-Uygulamayı oluşturduktan sonra şunları yapmanız gerekir:
+Uygulamayı oluşturduktan sonra şunları yapabilmeniz gerekir:
 
-* Bir Microsoft hesabı kullanarak uygulamada oturum açın.
-* Uygulamayı doğru şekilde yapılandırdığınıza yönelik tek başına Blazor uygulamalarla aynı yaklaşımı kullanarak Microsoft API 'Leri için erişim belirteçleri isteyin. Daha fazla bilgi için bkz. [hızlı başlangıç: Web API 'leri göstermek için uygulama yapılandırma](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis).
+* Bir Microsoft Hesabı kullanarak uygulamaya giriş yapın.
+* Uygulamayı doğru şekilde yapılandırmanız koşuluyla, bağımsız Blazor uygulamalarla aynı yaklaşımı kullanarak Microsoft API'leri için erişim belirteçleri isteyin. Daha fazla bilgi için [Bkz. Quickstart: Web API'lerini ortaya çıkarmak için bir uygulamayı yapılandırın.](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis)
 
 ## <a name="authentication-package"></a>Kimlik doğrulama paketi
 
-Iş veya okul hesaplarını (`SingleOrg`) kullanmak üzere bir uygulama oluşturulduğunda, uygulama [Microsoft kimlik doğrulama kitaplığı](/azure/active-directory/develop/msal-overview) (`Microsoft.Authentication.WebAssembly.Msal`) için bir paket başvurusu otomatik olarak alır. Paket, uygulamanın kullanıcıların kimliğini doğrulamasına ve korunan API 'Leri çağırmak için belirteçleri almasına yardımcı olan bir dizi temel sunar.
+İş veya Okul Hesaplarını kullanmak için`SingleOrg`bir uygulama oluşturulduğunda ( ), uygulama otomatik olarak`Microsoft.Authentication.WebAssembly.Msal`Microsoft Kimlik Doğrulama [Kitaplığı](/azure/active-directory/develop/msal-overview) için bir paket başvurusu alır ( ). Paket, uygulamanın kullanıcıları doğrulamasına ve korumalı API'leri aramak için belirteçler almasına yardımcı olan bir dizi ilkel lik sağlar.
 
-Bir uygulamaya kimlik doğrulaması ekliyorsanız, paketi uygulamanın proje dosyasına el ile ekleyin:
+Bir uygulamaya kimlik doğrulama ekliyorsanız, paketi uygulamanın proje dosyasına el ile ekleyin:
 
 ```xml
 <PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" 
     Version="{VERSION}" />
 ```
 
-Önceki paket başvurusunda `{VERSION}`, <xref:blazor/get-started> makalesinde gösterilen `Microsoft.AspNetCore.Blazor.Templates` paketinin sürümü ile değiştirin.
+Önceki `{VERSION}` paket başvuruyu makalede gösterilen `Microsoft.AspNetCore.Blazor.Templates` paketin sürümüyle <xref:blazor/get-started> değiştirin.
 
-`Microsoft.Authentication.WebAssembly.Msal` paketi, `Microsoft.AspNetCore.Components.WebAssembly.Authentication` paketini uygulamaya göre geçişli olarak ekler.
+Paket, `Microsoft.Authentication.WebAssembly.Msal` `Microsoft.AspNetCore.Components.WebAssembly.Authentication` paketi geçici olarak uygulamaya ekler.
 
 ## <a name="authentication-service-support"></a>Kimlik doğrulama hizmeti desteği
 
-Kullanıcıları kimlik doğrulama desteği, hizmet kapsayıcısına `Microsoft.Authentication.WebAssembly.Msal` paketi tarafından sağlanmış `AddMsalAuthentication` uzantısı yöntemiyle kaydedilir. Bu yöntem, uygulamanın kimlik sağlayıcısıyla (IP) etkileşim kurması için gereken tüm hizmetleri ayarlar.
+Kullanıcıların kimlik doğrulaması için destek, paket `AddMsalAuthentication` tarafından sağlanan uzantı yöntemiyle servis kapsayıcısında `Microsoft.Authentication.WebAssembly.Msal` kaydedilir. Bu yöntem, uygulamanın Kimlik Sağlayıcısı (IP) ile etkileşim kurması için gereken tüm hizmetleri ayarlar.
 
 *Program.cs*:
 
@@ -89,7 +89,38 @@ builder.Services.AddMsalAuthentication(options =>
 });
 ```
 
-`AddMsalAuthentication` yöntemi, bir uygulamanın kimliğini doğrulamak için gereken parametreleri yapılandırmak için bir geri çağırma işlemini kabul eder. Uygulamanın yapılandırılması için gereken değerler, uygulamayı kaydettiğinizde Microsoft hesapları yapılandırmasından elde edilebilir.
+Yöntem, `AddMsalAuthentication` bir uygulamanın kimliğini doğrulamak için gereken parametreleri yapılandırmak için bir geri arama kabul eder. Uygulamayı yapılandırmak için gereken değerler, uygulamayı kaydettirdiğinizde Microsoft Hesapları yapılandırmasından elde edilebilir.
+
+## <a name="access-token-scopes"></a>Belirteç kapsamlarına erişim
+
+Blazor WebAssembly şablonu, güvenli bir API için erişim belirteci istemek üzere uygulamayı otomatik olarak yapılandırmaz. Oturum açma akışının bir parçası olarak bir belirteç sağlamak için, kapsamı aşağıdakilerin varsayılan erişim belirteç kapsamına `MsalProviderOptions`ekleyin:
+
+```csharp
+builder.Services.AddMsalAuthentication(options =>
+{
+    ...
+    options.ProviderOptions.DefaultAccessTokenScopes.Add("{SCOPE URI}");
+});
+```
+
+> [!NOTE]
+> Azure portalı bir kapsam oluşturuyorsa URI ve uygulama API'den *401 Yetkisiz* yanıt aldığında **işlenmemiş bir özel durum atarsa,** düzeni ve ana bilgisayarı içermeyen bir KAPSAM URI kullanmayı deneyin. Örneğin, Azure portalı aşağıdaki kapsam URI biçimlerinden birini sağlayabilir:
+>
+> * `https://{ORGANIZATION}.onmicrosoft.com/{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
+> * `api://{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
+>
+> Şema ve ana bilgisayar olmadan URI kapsamını tedarik edin:
+>
+> ```csharp
+> options.ProviderOptions.DefaultAccessTokenScopes.Add(
+>     "{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}");
+> ```
+
+Daha fazla bilgi için bkz. <xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens>.
+
+## <a name="imports-file"></a>Dosyayı alma
+
+[!INCLUDE[](~/includes/blazor-security/imports-file-standalone.md)]
 
 ## <a name="index-page"></a>Dizin sayfası
 
@@ -115,5 +146,6 @@ builder.Services.AddMsalAuthentication(options =>
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [Hızlı başlangıç: Microsoft Identity platformu ile uygulama kaydetme](/azure/active-directory/develop/quickstart-register-app#register-a-new-application-using-the-azure-portal)
-* [Hızlı başlangıç: Web API 'Lerini kullanıma sunmak için uygulama yapılandırma](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis)
+* [Ek erişim belirteçleri isteme](xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens)
+* [Quickstart: Microsoft kimlik platformuile bir uygulama kaydetme](/azure/active-directory/develop/quickstart-register-app#register-a-new-application-using-the-azure-portal)
+* [Quickstart: Web API'lerini ortaya çıkarmak için bir uygulamayı yapılandırma](/azure/active-directory/develop/quickstart-configure-app-expose-web-apis)

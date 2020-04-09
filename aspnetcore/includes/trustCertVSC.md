@@ -4,13 +4,13 @@
   dotnet dev-certs https --trust
   ```
   
-  Yukarıdaki komut Linux üzerinde çalışmaz. Bir sertifikaya güvenmek için Linux dağıtım belgelerine bakın.
+  Önceki komut Linux'ta çalışmaz. Bir sertifikaya güvenmek için Linux dağıtımınızın belgelerine bakın.
 
-  Yukarıdaki komutta aşağıdaki iletişim kutusu görüntülenir:
+  Önceki komut aşağıdaki iletişim kutusunu görüntüler:
 
-  ![Güvenlik Uyarısı iletişim kutusu](~/getting-started/_static/cert.png)
+  ![Güvenlik uyarısı iletişim kutusu](~/getting-started/_static/cert.png)
 
-* Geliştirme sertifikasına güvenmeyi kabul ediyorsanız **Evet** ' i seçin.
+* Geliştirme sertifikasına güvenmeyi kabul ederseniz **Evet'i** seçin.
 
-  Daha fazla bilgi için bkz. [ASP.NET Core https geliştirme sertifikasına güvenin](xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos) .
+  Daha fazla bilgi için [ASP.NET Core HTTPS geliştirme sertifikasına güven'e](xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos) bakın.
   

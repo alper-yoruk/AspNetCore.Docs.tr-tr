@@ -1,151 +1,151 @@
 ---
 title: ASP.NET Core MVC uygulamasına arama ekleme
 author: rick-anderson
-description: Temel bir ASP.NET Core MVC uygulamasına aramanın nasıl ekleneceğini gösterir
+description: Temel bir ASP.NET Core MVC uygulamasına nasıl arama ekleyeceğinizi gösterir
 ms.author: riande
 ms.date: 12/13/2018
 uid: tutorials/first-mvc-app/search
 ms.openlocfilehash: 89f1fa84783430f160ca0b840bf7ae9699520cb7
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78662871"
 ---
 # <a name="add-search-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC uygulamasına arama ekleme
 
 Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Bu bölümde, film *tarzında* veya *ada*göre arama yapmanızı sağlayan `Index` Action yöntemine arama özelliği eklersiniz.
+Bu bölümde, *türveya* *ada*göre film arama yapmanızı sağlayan eylem yöntemine `Index` arama yeteneği eklersiniz.
 
-*Controllers/MoviesController. cs* içinde bulunan `Index` yöntemi aşağıdaki kodla güncelleştirin:
+`Index` *Denetleyiciler/MoviesController.cs* içinde bulunan yöntemi aşağıdaki kodla güncelleştirin:
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/MoviesController.cs?name=snippet_1stSearch)]
 
-`Index` Action yönteminin ilk satırı, filmleri seçmek için bir [LINQ](/dotnet/standard/using-linq) sorgusu oluşturur:
+`Index` Eylem yönteminin ilk satırı filmleri seçmek için bir [LINQ](/dotnet/standard/using-linq) sorgusu oluşturur:
 
 ```csharp
 var movies = from m in _context.Movie
              select m;
 ```
 
-Sorgu *yalnızca* bu noktada tanımlanmış, veritabanında çalıştırılmadı.
+Sorgu *yalnızca* bu noktada tanımlanır, veritabanına karşı **çalıştırılmadı.**
 
-`searchString` parametresi bir dize içeriyorsa, filmler sorgusu arama dizesinin değerine göre filtreleyecek şekilde değiştirilir:
+`searchString` Parametre bir dize içeriyorsa, film sorgusu arama dizesinin değerini filtrelemek için değiştirilir:
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/MoviesController.cs?name=snippet_SearchNull2)]
 
-Yukarıdaki `s => s.Title.Contains()` kodu bir [lambda ifadesidir](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions). Lambdalar, Yöntem tabanlı [LINQ](/dotnet/standard/using-linq) sorgularında, [Where](/dotnet/api/system.linq.enumerable.where) yöntemi veya `Contains` (Yukarıdaki kodda kullanılır) gibi standart sorgu işleci yöntemlerine bağımsız değişkenler olarak kullanılır. LINQ sorguları tanımlandıklarında veya `Where`, `Contains`veya `OrderBy`gibi bir yöntem çağırarak değiştirildiklerinde yürütülmez. Bunun yerine sorgu yürütmesi ertelenir.  Diğer bir deyişle, bir ifadenin değerlendirmesi, gerçekleştirilmiş değeri gerçekten yineleneceği veya `ToListAsync` yöntemi çağrıldığında geciktirilen anlamına gelir. Ertelenmiş sorgu yürütme hakkında daha fazla bilgi için bkz. [sorgu yürütme](/dotnet/framework/data/adonet/ef/language-reference/query-execution).
+Yukarıdaki `s => s.Title.Contains()` kod [lambda ifadesidir.](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions) Lambdas, yöntem tabanlı [LINQ](/dotnet/standard/using-linq) sorgularında [Where](/dotnet/api/system.linq.enumerable.where) metodu veya `Contains` (yukarıdaki kodda kullanılır) gibi standart sorgu işleci yöntemlerine bağımsız değişken olarak kullanılır. LINQ sorguları tanımlandıkları nda veya değiştirildiğinde `Where`, yani . `Contains` `OrderBy` Bunun yerine, sorgu yürütme ertelendi.  Bu, bir ifadenin değerlendirilmesinin, gerçekleşen değeri gerçekten üzerinde yinelenene veya yöntem çağrılına `ToListAsync` kadar geciktiği anlamına gelir. Ertelenmiş sorgu yürütmesi hakkında daha fazla bilgi için sorgu [yürütme](/dotnet/framework/data/adonet/ef/language-reference/query-execution)bölümüne bakın.
 
-Not: [Contains](/dotnet/api/system.data.objects.dataclasses.entitycollection-1.contains) yöntemi yukarıda gösterilen c# kodunda değil, veritabanında çalıştırılır. Sorgudaki büyük/küçük harf duyarlılığı veritabanına ve harmanlamaya bağlıdır. SQL Server üzerinde [SQL gibi](/sql/t-sql/language-elements/like-transact-sql)eşlemeler [içerir](/dotnet/api/system.data.objects.dataclasses.entitycollection-1.contains) , büyük/küçük harfe duyarsız olur. SQLite ' da, varsayılan harmanlama ile büyük/küçük harfe duyarlıdır.
+Not: [İçerme](/dotnet/api/system.data.objects.dataclasses.entitycollection-1.contains) yöntemi, yukarıda gösterilen c# kodunda değil, veritabanında çalıştırılır. Sorgudaki büyük/küçük harf duyarlılığı veritabanına ve harmanlama bağlıdır. SQL Server'da, sql [LIKE](/sql/t-sql/language-elements/like-transact-sql)için haritalar [içerir,](/dotnet/api/system.data.objects.dataclasses.entitycollection-1.contains) bu da büyük/küçük harf duyarsızdır. SQLite'da, varsayılan harmanlama ile, bu durumda duyarlı.
 
-`/Movies/Index` sayfasına gidin. URL 'ye `?searchString=Ghost` gibi bir sorgu dizesi ekleyin. Filtrelenmiş filmler görüntülenir.
+`/Movies/Index` sayfasına gidin. URL gibi `?searchString=Ghost` bir sorgu dizesini ekleyin. Filtre uygulanmış filmler görüntülenir.
 
 ![Dizin görünümü](~/tutorials/first-mvc-app/search/_static/ghost.png)
 
-`Index` yönteminin imzasını `id`adlı bir parametreye sahip olacak şekilde değiştirirseniz `id` parametresi, *Startup.cs*içinde ayarlanan varsayılan yollar için isteğe bağlı `{id}` yer tutucusuyla eşleştirecektir.
+Yöntemin `Index` imzasını bir parametre olarak `id`değiştirirseniz, `id` parametre *Startup.cs* `{id}` ayarlanan varsayılan yollar için isteğe bağlı yer tutucuyla eşleşir.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Startup.cs?highlight=5&name=snippet_1)]
 
-Parametresini `id` olarak değiştirin ve `searchString` değişikliğin tüm oluşumları `id`olarak değiştirin.
+Parametreyi `id` ve tüm `searchString` değişiklik oluşumlarını `id`' ya çevirin.
 
-Önceki `Index` yöntemi:
+Önceki `Index` yöntem:
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/MoviesController.cs?highlight=1,6,8&name=snippet_1stSearch)]
 
-`id` parametresine sahip güncelleştirilmiş `Index` yöntemi:
+Parametre `Index` ile `id` güncelleştirilmiş yöntem:
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/MoviesController.cs?highlight=1,6,8&name=snippet_SearchID)]
 
-Artık arama başlığını sorgu dizesi değeri yerine rota verileri (bir URL segmenti) olarak geçirebilirsiniz.
+Artık arama başlığını sorgu dizesi değeri yerine rota verisi (URL segmenti) olarak geçirebilirsiniz.
 
-![URL 'ye hayalet sözcük eklenmiş olan dizin görünümü, Ghostbusters ve Ghostbusters ters ve 2 adet film listesi](~/tutorials/first-mvc-app/search/_static/g2.png)
+![Url'ye eklenen hayalet sözcüğü ile dizin görünümü ve ghostbusters ve Ghostbusters 2 olmak üzere iki filmden oluşan iade edilen bir film listesi](~/tutorials/first-mvc-app/search/_static/g2.png)
 
-Ancak, kullanıcıların bir filmi her arayışınızda URL 'YI değiştirmesini beklemeniz gerekmez. Böylece, filmlerin filtrelemesine yardımcı olmak için UI öğeleri ekleyeceğiz. Yol ile bağlantılı `ID` parametresinin nasıl geçirileceğini test etmek için `Index` yönteminin imzasını değiştirdiyseniz, `searchString`adlı bir parametre alması için onu geri değiştirin:
+Ancak, kullanıcıların bir film aramak istediklerinde URL'yi değiştirmelerini bekleyemezsiniz. Şimdi filmleri filtrelemelerine yardımcı olmak için Ara Birimi öğelerini eklersiniz. Rotaya bağlı `Index` `ID` parametrenin nasıl geçeceğini test etmek için yöntemin imzasını değiştirdiyseniz, adı `searchString`verilen bir parametre yi kapacak şekilde değiştirin:
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/MoviesController.cs?highlight=1,6,8&name=snippet_1stSearch)]
 
-*Views/filmler/Index. cshtml* dosyasını açın ve aşağıda vurgulanan `<form>` biçimlendirmeyi ekleyin:
+*Görünümler/Filmler/Index.cshtml* dosyasını açın `<form>` ve aşağıda vurgulanan biçimlendirmeyi ekleyin:
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexForm1.cshtml?highlight=10-16&range=4-21)]
 
-HTML `<form>` etiketi, form [etiketi yardımcısını](xref:mvc/views/working-with-forms)kullanır, bu nedenle formu gönderdiğinizde, filtre dizesi, filmler denetleyicisinin `Index` eylemine gönderilir. Değişikliklerinizi kaydedin ve sonra filtreyi test edin.
+HTML `<form>` etiketi [Form Tag Helper](xref:mvc/views/working-with-forms)kullanır, böylece formu gönderdiğinde, filtre `Index` dizesi film denetleyicisinin eylemine nakledilir. Değişikliklerinizi kaydedin ve filtreyi test edin.
 
-![Başlık filtresi metin kutusuna hayalet sözcük türü ile dizin görünümü](~/tutorials/first-mvc-app/search/_static/filter.png)
+![Başlık filtresi metin kutusuna yazılan hayalet sözcüğüyle dizin görünümü](~/tutorials/first-mvc-app/search/_static/filter.png)
 
-`Index` yönteminin `[HttpPost]` aşırı yüklemesi beklenmeyebilir. Bunun için gerekli değildir, çünkü yöntem uygulamanın durumunu değiştirmediğinden verileri filtrelememeniz yeterlidir.
+Tahmin edebileceğiniz `[HttpPost]` gibi `Index` yöntemin aşırı yüklenmez. Yöntem uygulamanın durumunu değiştirmediği için buna ihtiyacınız yok, yalnızca verileri filtreleme.
 
-Aşağıdaki `[HttpPost] Index` yöntemini ekleyebilirsiniz.
+Aşağıdaki `[HttpPost] Index` yöntemi ekleyebilirsiniz.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/MoviesController.cs?highlight=1&name=snippet_SearchPost)]
 
-`notUsed` parametresi, `Index` yöntemi için aşırı yükleme oluşturmak için kullanılır. Öğreticide daha sonra konuşacağız.
+`notUsed` Parametre `Index` yöntem için bir aşırı yük oluşturmak için kullanılır. Bunu daha sonra öğreticide konuşuruz.
 
-Bu yöntemi eklerseniz, bu eylem `[HttpPost] Index` yöntemiyle eşleşir ve `[HttpPost] Index` yöntemi aşağıdaki görüntüde gösterildiği gibi çalışır.
+Bu yöntemi eklerseniz, eylem çağıran `[HttpPost] Index` yöntem eşleşir `[HttpPost] Index` ve yöntem aşağıdaki resimde gösterildiği gibi çalışır.
 
-![HttpPost dizininden uygulama yanıtı olan tarayıcı penceresi: hayalet üzerinde filtrele](~/tutorials/first-mvc-app/search/_static/fo.png)
+![HttpPost Index uygulama yanıtı ile Tarayıcı penceresi: hayalet filtre](~/tutorials/first-mvc-app/search/_static/fo.png)
 
-Ancak, `Index` yönteminin bu `[HttpPost]` sürümünü eklemeseniz bile, tümünün nasıl uygulandığını gösteren bir sınırlama vardır. Belirli bir arama için yer işareti koymak istediğinizi veya aynı film filtrelenmiş listesini görmek için onlara tıklabilecekleri bir bağlantı göndermek istediğinizi düşünün. HTTP POST isteğinin URL 'SI GET isteğinin URL 'siyle (localhost: {PORT}/filmler/dizin) aynı olduğunu fark edin; URL 'de arama bilgisi yok. Arama dizesi bilgileri sunucuya [form alanı değeri](https://developer.mozilla.org/docs/Learn/HTML/Forms/Sending_and_retrieving_form_data)olarak gönderilir. Tarayıcı geliştirici araçları veya harika [Fiddler aracının](https://www.telerik.com/fiddler)olduğunu doğrulayabilirsiniz. Aşağıdaki görüntüde Chrome tarayıcı geliştirici araçları gösterilmektedir:
+Ancak, `Index` yöntemin bu `[HttpPost]` sürümünü ekleseniz bile, tüm bunların nasıl uygulandığı konusunda bir sınırlama vardır. Belirli bir aramayı yer imi yapmak istediğinizi veya aynı filtreuygulanmış film listesini görmek için tıklatabilecekleri arkadaşlarınıza bir bağlantı göndermek istediğinizi düşünün. HTTP POST isteğinin URL'sinin GET isteğinin URL'si ile aynı olduğuna dikkat edin (localhost:{PORT}/Filmler/Dizini) - URL'de arama bilgisi yok. Arama dizesi bilgileri [bir form alanı değeri](https://developer.mozilla.org/docs/Learn/HTML/Forms/Sending_and_retrieving_form_data)olarak sunucuya gönderilir. Bunu tarayıcı Geliştirici araçları veya mükemmel [Fiddler aracı](https://www.telerik.com/fiddler)ile doğrulayabilirsiniz. Aşağıdaki resimde Chrome tarayıcı geliştirici araçları gösterilmektedir:
 
-![Microsoft Edge 'de Geliştirici Araçları, bir searchString değeri hayalet olan bir istek gövdesini gösteren ağ sekmesi](~/tutorials/first-mvc-app/search/_static/f12_rb.png)
+![Microsoft Edge'deki Geliştirici Araçları'nın ağ sekmesi, bir istek gövdesini hayaletin searchString değerine sahip gösteren](~/tutorials/first-mvc-app/search/_static/f12_rb.png)
 
-Arama parametresini ve [XSRF](xref:security/anti-request-forgery) belirtecini istek gövdesinde görebilirsiniz. Bu şekilde, önceki öğreticide bahsedildiği gibi, [form etiketi Yardımcısı](xref:mvc/views/working-with-forms) , bir [XSRF](xref:security/anti-request-forgery) Anti-forgery belirteci oluşturur. Verileri değiştiriyoruz, bu nedenle denetleyiciyi denetleyici yönteminde doğrulamamız gerekmiyor.
+İstek gövdesinde arama parametresini ve [XSRF](xref:security/anti-request-forgery) belirtecinizi görebilirsiniz. Not, önceki öğreticide belirtildiği gibi, [Form Tag Helper](xref:mvc/views/working-with-forms) bir [XSRF](xref:security/anti-request-forgery) anti-sahtebelirteci oluşturur. Verileri değiştirmiyoruz, bu nedenle denetleyici yönteminde belirteçleri doğrulamamız gerekmez.
 
-Arama parametresi, URL değil, istek gövdesinde olduğundan, bu arama bilgilerini, yer işareti veya başkalarıyla paylaşmak için yakalayamazsınız. İsteğin, *Görünümler/filmler/Index. cshtml* dosyasında bulunan `HTTP GET` olması gerektiğini belirterek bunu düzeltemedi.
+Arama parametresi URL'de değil, istek gövdesinde olduğundan, bu arama bilgilerini yer imi yapmak veya başkalarıyla paylaşmak için yakalayamadığınıziçin. İstek belirterek düzeltin `HTTP GET` *Görünümler/Filmler/Index.cshtml* dosyasında bulunmalıdır.
 
 [!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexGet.cshtml?highlight=12&range=1-23)]
 
-Artık bir arama gönderdiğinizde, URL arama sorgu dizesini içerir. Arama, bir `HttpPost Index` yönteminiz olsa bile `HttpGet Index` Action yöntemine de gidecektir.
+Şimdi bir arama gönderdiğinde, URL arama sorgu dizesini içerir. Arama, bir `HttpGet Index` `HttpPost Index` yönteminiz olsa bile eylem yöntemine de gider.
 
-![URL 'de searchString = hayalet ve döndürülen Filmler, Ghostbusters ve Ghostbusters 'ler 2 olan tarayıcı penceresi, hayalet sözcüğünü içerir](~/tutorials/first-mvc-app/search/_static/search_get.png)
+![Tarayıcı penceresi aramaString = Url hayalet gösteren ve filmler döndü, Ghostbusters ve Ghostbusters 2, kelime hayalet içeren](~/tutorials/first-mvc-app/search/_static/search_get.png)
 
-Aşağıdaki biçimlendirme `form` etiketine yapılan değişikliği gösterir:
+Aşağıdaki biçimlendirme `form` etiketteki değişikliği gösterir:
 
 ```cshtml
 <form asp-controller="Movies" asp-action="Index" method="get">
 ```
 
-## <a name="add-search-by-genre"></a>Türe göre arama Ekle
+## <a name="add-search-by-genre"></a>Türe göre Arama Ekle
 
-Aşağıdaki `MovieGenreViewModel` sınıfını *modeller* klasörüne ekleyin:
+`MovieGenreViewModel` *Modeller* klasörüne aşağıdaki sınıfı ekleyin:
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Models/MovieGenreViewModel.cs)]
 
-Film tarzı görünüm modeli şunları içerir:
+Film türü görünümü modeli şunları içerecektir:
 
-* Bir film listesi.
-* Tarzlar listesini içeren bir `SelectList`. Bu, kullanıcının listeden bir tarz seçmesine olanak sağlar.
-* Seçili tarzı içeren `MovieGenre`.
-* `SearchString`, kullanıcılar arama metin kutusuna girdiğiniz metni içerir.
+* Filmlerin listesi.
+* Türlerin `SelectList` listesini içeren bir. Bu, kullanıcının listeden bir tür seçmesine olanak tanır.
+* `MovieGenre`, seçili türü içerir.
+* `SearchString`, kullanıcıların arama metin kutusuna girdikleri metni içerir.
 
-`MoviesController.cs` `Index` yöntemini aşağıdaki kodla değiştirin:
+Yöntemi `Index` aşağıdaki `MoviesController.cs` kodla değiştirin:
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MoviesController.cs?name=snippet_SearchGenre)]
 
-Aşağıdaki kod, veritabanından tüm tarzları alan `LINQ` bir sorgudur.
+Aşağıdaki kod, `LINQ` veritabanından tüm türler alır bir sorgudur.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Controllers/MoviesController.cs?name=snippet_LINQ)]
 
-Tarzın `SelectList`, farklı tarzlar yansıtımdan oluşturulur (Select listenizin yinelenen tarzlarına sahip olmasını istemiyorum).
+Türler, `SelectList` farklı türler yansıtılarak oluşturulur (seçili listemizin yinelenen türlere sahip olmasını istemeyiz).
 
-Kullanıcı öğeyi aradığında arama değeri arama kutusuna tutulur.
+Kullanıcı öğeyi aradığında, arama değeri arama kutusunda tutulur.
 
-## <a name="add-search-by-genre-to-the-index-view"></a>Tarzı, dizin görünümüne göre ara ekleme
+## <a name="add-search-by-genre-to-the-index-view"></a>Dizin görünümüne türe göre arama ekleme
 
-*Görünümlerde/filmlerde* bulunan güncelleştirme `Index.cshtml`/aşağıdaki gibi:
+`Index.cshtml` *Görünümler/Filmler/* aşağıdaki gibi bulunan güncelleştirme:
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexFormGenreNoRating.cshtml?highlight=1,15,16,17,19,28,31,34,37,43)]
 
-Aşağıdaki HTML Yardımcısı 'nda kullanılan lambda ifadesini inceleyin:
+Aşağıdaki HTML Yardımcısı'nda kullanılan lambda ifadesini inceleyin:
 
 `@Html.DisplayNameFor(model => model.Movies[0].Title)`
 
-Yukarıdaki kodda, `DisplayNameFor` HTML Yardımcısı, görünen adı belirlemede lambda ifadesinde başvurulan `Title` özelliğini inceler. Lambda ifadesi değerlendirilmek yerine incelenebileceğinden, `model`, `model.Movies`veya `model.Movies[0]` `null` veya boş olduğunda bir erişim ihlali almazsınız. Lambda ifadesi değerlendirildiğinde (örneğin, `@Html.DisplayFor(modelItem => item.Title)`), modelin özellik değerleri değerlendirilir.
+Önceki kodda, `DisplayNameFor` HTML Yardımcısı görüntü adını `Title` belirlemek için lambda ifadesinde başvurulan özelliği inceler. Lambda `model`ifadesi değerlendirilmek yerine denetlendiğinden, "veya `model.Movies` `model.Movies[0]` `null` boş" olduğunda bir erişim ihlali almazsınız. Lambda ifadesi değerlendirildiğinde (örneğin), `@Html.DisplayFor(modelItem => item.Title)`modelin özellik değerleri değerlendirilir.
 
-Türe göre, film başlığına göre ve her ikisine birden arayarak uygulamayı test edin:
+Uygulamayı türe, film başlığına ve her ikisine göre arayarak test edin:
 
-![https://localhost:5001/Movies?MovieGenre=Comedy&SearchString=2 sonuçlarını gösteren tarayıcı penceresi](~/tutorials/first-mvc-app/search/_static/s2.png)
+![Sonuçlarını gösteren tarayıcı penceresihttps://localhost:5001/Movies?MovieGenre=Comedy&SearchString=2](~/tutorials/first-mvc-app/search/_static/s2.png)
 
 > [!div class="step-by-step"]
 > [Önceki](controller-methods-views.md)
-> [İleri](new-field.md)
+> [Sonraki](new-field.md)

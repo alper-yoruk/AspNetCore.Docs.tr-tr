@@ -1,45 +1,45 @@
 ---
-title: ASP.NET Core Blazor .NET metotlarından JavaScript işlevlerini çağırın
+title: ASP.NET Core'daki .NET yöntemlerinden JavaScript işlevlerini arayınBlazor
 author: guardrex
-description: Blazor uygulamalarında .NET yöntemlerinden JavaScript işlevlerini çağırmayı öğrenin.
+description: Uygulamalardaki Blazor .NET yöntemlerinden JavaScript işlevlerini nasıl çağırılamayı öğrenin.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/19/2020
+ms.date: 04/07/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 7a27b6f1be2ef296d5b2b2a4f566e0cdedbe6480
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 0c6b6a0a8f88fa912523e7772fcd84ef4ce3b4ff
+ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78659714"
+ms.lasthandoff: 04/08/2020
+ms.locfileid: "80977021"
 ---
-# <a name="call-javascript-functions-from-net-methods-in-aspnet-core-opno-locblazor"></a>ASP.NET Core Blazor .NET metotlarından JavaScript işlevlerini çağırın
+# <a name="call-javascript-functions-from-net-methods-in-aspnet-core-opno-locblazor"></a>ASP.NET Core'daki .NET yöntemlerinden JavaScript işlevlerini arayınBlazor
 
-Sağlayan [Javier Calvarro Nelson](https://github.com/javiercn), [Daniel Roth](https://github.com/danroth27)ve [Luke Latham](https://github.com/guardrex)
+Javier [Calvarro Nelson,](https://github.com/javiercn) [Daniel Roth](https://github.com/danroth27)ve Luke [Latham](https://github.com/guardrex) tarafından
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Blazor bir uygulama, JavaScript işlevlerinden .NET yöntemleri ve .NET yöntemlerinden JavaScript işlevlerini çağırabilir. Bu senaryolar *JavaScript birlikte çalışabilirliği* (*js birlikte çalışma*) olarak adlandırılır.
+Bir Blazor uygulama JavaScript işlevlerinden .NET yöntemlerinden ve .NET yöntemlerinden JavaScript işlevlerini çağırabilir. Bu senaryolar *JavaScript birlikte çalışabilirlik* *(JS interop)* olarak adlandırılır.
 
-Bu makalede, .NET 'ten JavaScript işlevlerini çağırma ele alınmaktadır. JavaScript 'ten .NET yöntemlerini çağırma hakkında daha fazla bilgi için bkz. <xref:blazor/call-dotnet-from-javascript>.
+Bu makale, .NET'ten JavaScript işlevlerini çağırarak kapsar. JavaScript'ten .NET yöntemlerini nasıl arayacağıhakkında bilgi için bkz. <xref:blazor/call-dotnet-from-javascript>
 
-[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
+[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ( nasıl[indirilir](xref:index#how-to-download-a-sample))
 
-.NET 'ten JavaScript 'i çağırmak için `IJSRuntime` soyutlamasını kullanın. JS birlikte çalışma çağrıları vermek için `IJSRuntime` soyutlamasını bileşeninizin içine ekler. `InvokeAsync<T>` yöntemi, herhangi bir sayıda JSON seri hale getirilebilir bağımsız değişkenle birlikte çağırmak istediğiniz JavaScript işlevi için bir tanımlayıcı alır. İşlev tanımlayıcısı, genel kapsama (`window`) göredir. `window.someScope.someFunction`çağırmak isterseniz, tanımlayıcı `someScope.someFunction`. Çağrılmadan önce işlevi kaydetmeniz gerekmez. Dönüş türü `T` ayrıca seri hale getirilebilir JSON olmalıdır. `T`, döndürülen JSON türüyle en iyi eşleşen .NET türüyle eşleşmelidir.
+.NET'ten JavaScript'e çağrı `IJSRuntime` yapmak için soyutlamayı kullanın. JS interop çağrıları vermek `IJSRuntime` için, bileşeninize soyutlama enjekte edin. Yöntem, `InvokeAsync<T>` herhangi bir sayıda JSON-serializable bağımsız değişkeni ile birlikte çağırmak istediğiniz JavaScript işlevi için bir tanımlayıcı alır. İşlev tanımlayıcısı genel kapsama göredir (`window`). Aramak `window.someScope.someFunction`isterseniz, tanımlayıcı `someScope.someFunction`. Çağrılmadan önce işlevi kaydetmenize gerek yoktur. İade türü `T` de JSON serileştirilebilir olmalıdır. `T`döndürülen JSON türüyle en iyi eşlemleri içeren .NET türüyle eşleşmelidir.
 
-Prerendering özellikli Blazor Server uygulamaları için, ilk prerendering sırasında JavaScript 'e çağırma mümkün değildir. JavaScript birlikte çalışma çağrılarının, tarayıcıyla bağlantı kurulana kadar ertelenmesi gerekir. Daha fazla bilgi için, [Blazor sunucu uygulamasının ne zaman prerendering olduğunu Algıla](#detect-when-a-blazor-server-app-is-prerendering) bölümüne bakın.
+Ön Blazor oluşturma etkinleştirilmiş Sunucu uygulamaları için, ilk ön oluşturma sırasında JavaScript'e çağrı yapmak mümkün değildir. JavaScript interop çağrıları tarayıcı ile bağlantı kurulana kadar ertelenmelidir. Daha fazla bilgi için, [sunucu Blazor uygulaması nın ön oluşturma](#detect-when-a-blazor-server-app-is-prerendering) bölümü ne zaman algıla'ya bakın.
 
-Aşağıdaki örnek, JavaScript tabanlı bir kod çözücü olan [Textdecoder](https://developer.mozilla.org/docs/Web/API/TextDecoder)tabanlıdır. Örnek, bir C# yöntemden JavaScript işlevinin nasıl çağrılacağını gösterir. JavaScript işlevi bir C# yöntemden bir bayt dizisi kabul eder, dizinin kodunu çözer ve görüntülenecek metni bileşene döndürür.
+Aşağıdaki örnek, JavaScript tabanlı kod çözücü [textdecoder](https://developer.mozilla.org/docs/Web/API/TextDecoder)dayanmaktadır. Örnek, C# yönteminden javascript işlevinin nasıl çağrıldığını gösterir. JavaScript işlevi C# yönteminden bir bayt dizisini kabul eder, diziyi çözer ve metni görüntülenmek üzere bileşene döndürür.
 
-*Wwwroot/index.html* (Blazor WebAssembly) veya *Pages/_Host. cshtml* (Blazor Server) `<head>` öğesi içinde, geçirilen bir dizinin kodunu çözmek Için `TextDecoder` kullanan bir JavaScript işlevi sağlayın ve kodu çözülen değeri döndürün:
+*wwwroot/index.html* (WebAssembly)Blazor veya *Pages/_Host.cshtml* (Server)Blazor `TextDecoder` `<head>` öğesi içinde, geçirilen bir dizide şifreyi çözmek ve çözülmüş değeri döndürmek için kullanan bir JavaScript işlevi sağlayın:
 
 [!code-html[](call-javascript-from-dotnet/samples_snapshot/index-script-convertarray.html)]
 
-Önceki örnekte gösterilen kod gibi JavaScript kodu, betik dosyasına yönelik bir başvuruya sahip bir JavaScript dosyasından ( *. js*) de yüklenebilir:
+Önceki örnekte gösterilen kod gibi JavaScript kodu, komut dosyası dosyasına atıfta bulunularak javascript dosyasından *(.js)* de yüklenebilir:
 
 ```html
 <script src="exampleJsInterop.js"></script>
@@ -47,70 +47,70 @@ Aşağıdaki örnek, JavaScript tabanlı bir kod çözücü olan [Textdecoder](h
 
 Aşağıdaki bileşen:
 
-* Bir bileşen düğmesi (**diziyi Dönüştür**) seçildiğinde `JSRuntime` kullanarak `convertArray` JavaScript işlevini çağırır.
-* JavaScript işlevi çağrıldıktan sonra, geçirilen dizi bir dizeye dönüştürülür. Dize, görüntüleme için bileşene döndürülür.
+* `convertArray` Bir bileşen düğmesi **(Diziyi Dönüştür)** seçildiğinde JavaScript işlevini kullanır. `JSRuntime`
+* JavaScript işlevi çağrıldıktan sonra, geçirilen dizi bir dize dönüştürülür. Dize görüntülenmek üzere bileşene döndürülür.
 
 [!code-razor[](call-javascript-from-dotnet/samples_snapshot/call-js-example.razor?highlight=2,34-35)]
 
 ## <a name="ijsruntime"></a>IJSRuntime
 
-`IJSRuntime` soyutlamasını kullanmak için aşağıdaki yaklaşımlardan birini benimseyin:
+Soyutlamayı `IJSRuntime` kullanmak için aşağıdaki yaklaşımlardan birini benimseyin:
 
-* `IJSRuntime` soyutlama Razor bileşenine ( *. Razor*) ekleme:
+* Soyutlamayı `IJSRuntime` Jilet bileşenine enjekte edin (*.razor):*
 
   [!code-razor[](call-javascript-from-dotnet/samples_snapshot/inject-abstraction.razor?highlight=1)]
 
-  *Wwwroot/index.html* (Blazor WebAssembly) veya *Pages/_Host. cshtml* (Blazor Server) `<head>` öğesinin Içinde, bir `handleTickerChanged` JavaScript işlevi sağlayın. İşlevi `IJSRuntime.InvokeVoidAsync` ile çağrılır ve bir değer döndürmez:
+  *wwwroot/index.html* (WebAssembly)Blazor veya *Pages/_Host.cshtml* (Server)Blazor öğesi `handleTickerChanged` içinde `<head>` bir JavaScript işlevi sağlar. İşlev ile `IJSRuntime.InvokeVoidAsync` denir ve bir değer döndürmez:
 
   [!code-html[](call-javascript-from-dotnet/samples_snapshot/index-script-handleTickerChanged1.html)]
 
-* `IJSRuntime` soyutlamasını bir sınıfa ( *. cs*) Ekle:
+* Soyutlamayı `IJSRuntime` bir sınıfa enjekte edin (*.cs):*
 
   [!code-csharp[](call-javascript-from-dotnet/samples_snapshot/inject-abstraction-class.cs?highlight=5)]
 
-  *Wwwroot/index.html* (Blazor WebAssembly) veya *Pages/_Host. cshtml* (Blazor Server) `<head>` öğesinin Içinde, bir `handleTickerChanged` JavaScript işlevi sağlayın. İşlevi `JSRuntime.InvokeAsync` ile çağrılır ve bir değer döndürür:
+  *wwwroot/index.html* (WebAssembly)Blazor veya *Pages/_Host.cshtml* (Server)Blazor öğesi `handleTickerChanged` içinde `<head>` bir JavaScript işlevi sağlar. İşlev ile `JSRuntime.InvokeAsync` çağrılır ve bir değer döndürür:
 
   [!code-html[](call-javascript-from-dotnet/samples_snapshot/index-script-handleTickerChanged2.html)]
 
-* [Buildrendertree](xref:blazor/advanced-scenarios#manual-rendertreebuilder-logic)ile dinamik içerik oluşturma için `[Inject]` özniteliğini kullanın:
+* [BuildRenderTree](xref:blazor/advanced-scenarios#manual-rendertreebuilder-logic)ile dinamik içerik oluşturma `[Inject]` için özniteliği kullanın:
 
   ```razor
   [Inject]
   IJSRuntime JSRuntime { get; set; }
   ```
 
-Bu konuya eşlik eden istemci tarafı örnek uygulamada, Kullanıcı girişi almak ve bir hoş geldiniz iletisi göstermek üzere DOM ile etkileşime geçen uygulama için iki JavaScript işlevi mevcuttur:
+Bu konuya eşlik eden istemci tarafındaki örnek uygulamada, kullanıcı girişi almak ve hoş geldiniz iletisi görüntülemek için DOM ile etkileşime geçen uygulama için iki JavaScript işlevi kullanılabilir:
 
-* `showPrompt` &ndash; Kullanıcı girişini kabul etmek için bir istem üretir (kullanıcının adı) ve çağıranın adını döndürür.
-* `displayWelcome` &ndash;, çağıran bir `id` `welcome`bir DOM nesnesine bir hoş geldiniz iletisi atar.
+* `showPrompt`&ndash; Kullanıcı girişi (kullanıcının adı) kabul etmek için bir istem üretir ve adı arayana döndürür.
+* `displayWelcome`&ndash; Arayankişiden bir DOM nesnesine hoş `id` geldiniz `welcome`iletisi atar.
 
-*Wwwroot/Examplejsınterop. js*:
+*wwwroot/exampleJsInterop.js*:
 
 [!code-javascript[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=2-7)]
 
-JavaScript dosyasına başvuran `<script>` etiketini *Wwwroot/index.html* dosyasında (Blazor WebAssembly) veya *Pages/_Host. cshtml* dosyasında (Blazor Server) yerleştirin.
+JavaScript `<script>` dosyasına başvuran etiketi *wwwroot/index.html* dosyasınaBlazor (WebAssembly) veya *Pages/_Host.cshtml* dosyasına (Sunucu)Blazor yerleştirin.
 
-*Wwwroot/index.html* (Blazor WebAssembly):
+*wwwroot/index.html* Blazor (WebAssembly):
 
 [!code-html[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/index.html?highlight=22)]
 
-*Pages/_Host. cshtml* (Blazor sunucusu):
+*Sayfa/_Host.cshtml* Blazor (Sunucu):
 
 [!code-cshtml[](./common/samples/3.x/BlazorServerSample/Pages/_Host.cshtml?highlight=35)]
 
-`<script>` etiketi dinamik olarak güncelleştirilemediğinden bir `<script>` etiketini bileşen dosyasına yerleştirmeyin.
+Etiket dinamik olarak `<script>` güncelleştirilemediği için `<script>` bileşen dosyasına etiket yerleştirmeyin.
 
-.NET yöntemleri, `IJSRuntime.InvokeAsync<T>`çağırarak *Examplejsınterop. js* dosyasında JavaScript işlevleriyle birlikte çalışır.
+.NET yöntemleri javascript fonksiyonları ile interop *örnekjsInterop.js* dosyaarayarak `IJSRuntime.InvokeAsync<T>`.
 
-`IJSRuntime` soyutlama, Blazor sunucu senaryolarına izin vermek için zaman uyumsuzdur. Uygulama bir Blazor Weelsembly uygulaması ise ve bir JavaScript işlevini zaman uyumlu olarak çağırmak istiyorsanız, `IJSInProcessRuntime` ve bunun yerine `Invoke<T>` çağırın. Çoğu JS birlikte çalışma kitaplıklarının, kitaplıkların tüm senaryolarda kullanılabilir olmasını sağlamak için zaman uyumsuz API 'Leri kullanmasını öneririz.
+Soyutlama, `IJSRuntime` Sunucu senaryolarına izin vermek Blazor için bir senkrondur. Uygulama bir Blazor WebAssembly uygulamasıysa ve bir JavaScript işlevini eşzamanlı olarak çağırmak `IJSInProcessRuntime` istiyorsanız, bunun yerine aşağı döküm ve çağrı. `Invoke<T>` Çoğu JS interop kitaplıklarının, kitaplıkların tüm senaryolarda kullanılabilir olduğundan emin olmak için async API'lerini kullanmanızı öneririz.
 
-Örnek uygulama, JS birlikte çalışabilirliği göstermek için bir bileşeni içerir. Bileşen:
+Örnek uygulama JS interop göstermek için bir bileşen içerir. Bileşen:
 
-* Bir JavaScript istemi aracılığıyla Kullanıcı girişini alır.
-* İşlemek için bileşene metni döndürür.
-* Bir hoş geldiniz iletisini göstermek için DOM ile etkileşime sahip ikinci bir JavaScript işlevini çağırır.
+* JavaScript komut istemi ile kullanıcı girişi alır.
+* Metni işleme için bileşene döndürür.
+* Hoş geldiniz iletisi görüntülemek için DOM ile etkileşimedebilen ikinci bir JavaScript işlevini çağırır.
 
-*Pages/Jsınterop. Razor*:
+*Sayfa/JSInterop.razor*:
 
 ```razor
 @page "/JSInterop"
@@ -141,28 +141,28 @@ JavaScript dosyasına başvuran `<script>` etiketini *Wwwroot/index.html* dosyas
 }
 ```
 
-1. `TriggerJsPrompt`, bileşenin **tetikleyicisi JavaScript istem** düğmesi seçilerek yürütüldüğünde, *Wwwroot/Examplejsınterop. js* dosyasında verilen JavaScript `showPrompt` işlevi çağırılır.
-1. `showPrompt` işlevi, HTML kodlu ve bileşene döndürülen kullanıcı girişini (kullanıcının adı) kabul eder. Bileşen, kullanıcının adını `name`yerel bir değişkende depolar.
-1. `name` depolanan dize, hoş geldiniz iletisini bir başlık etiketine işleyen `displayWelcome`bir JavaScript işlevine iletilen bir hoş geldiniz iletisine dahil edilir.
+1. Bileşenin **Trigger JavaScript Komut İstedüğmesi** seçilerek yürütüldüğünde, `showPrompt` `TriggerJsPrompt` *wwwroot/exampleJsInterop.js* dosyasında sağlanan JavaScript işlevi çağrılır.
+1. İşlev, `showPrompt` HTML kodlu kullanıcı girişi (kullanıcı adı) kabul eder ve bileşene döndürülür. Bileşen, kullanıcının adını yerel bir değişkende `name`depolar.
+1. Depolanan `name` dize, hoş geldiniz iletisini bir başlık etiketine işleyen `displayWelcome`bir JavaScript işlevine geçirilen bir karşılama iletisine dahil edilir.
 
-## <a name="call-a-void-javascript-function"></a>Void JavaScript işlevini çağırın
+## <a name="call-a-void-javascript-function"></a>Geçersiz bir JavaScript işlevini arayın
 
-[Void (0)/void 0](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void) veya [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined) döndüren JavaScript işlevleri `IJSRuntime.InvokeVoidAsync`ile çağırılır.
+[Void(0)/void 0](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void) veya [tanımlanmamış](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined) döndüren `IJSRuntime.InvokeVoidAsync`JavaScript işlevleri .
 
-## <a name="detect-when-a-opno-locblazor-server-app-is-prerendering"></a>Blazor sunucu uygulamasının ne zaman prerendering olduğunu Algıla
+## <a name="detect-when-a-opno-locblazor-server-app-is-prerendering"></a>Bir Blazor Sunucu uygulamasının ne zaman önceden oluşturulaca-sonuç veriyi algıla
  
 [!INCLUDE[](~/includes/blazor-prerendering.md)]
 
-## <a name="capture-references-to-elements"></a>Öğelere başvuruları yakala
+## <a name="capture-references-to-elements"></a>Öğelere yapılan başvuruları yakalama
 
-Bazı JS birlikte çalışma senaryoları HTML öğelerine başvurular gerektirir. Örneğin, bir kullanıcı arabirimi kitaplığı başlatma için bir öğe başvurusu gerektirebilir veya `focus` veya `play`gibi bir öğe üzerinde komut benzeri API 'Ler çağırmanız gerekebilir.
+Bazı JS interop senaryoları HTML öğelerine başvuru gerektirir. Örneğin, bir UI kitaplığı başlatma için bir öğe başvurusu gerektirebilir veya komut benzeri API'leri bir öğe üzerinde aramanız `focus` gerekebilir. `play`
 
-Aşağıdaki yaklaşımı kullanarak bir bileşen içindeki HTML öğelerine başvuruları yakalayın:
+Aşağıdaki yaklaşımı kullanarak bir bileşendeki HTML öğelerine yapılan başvuruları yakalayın:
 
-* HTML öğesine bir `@ref` özniteliği ekleyin.
-* Adı `@ref` özniteliği değeri ile eşleşen `ElementReference` türünde bir alan tanımlayın.
+* HTML `@ref` öğesine bir öznitelik ekleyin.
+* Adı öznitelik `ElementReference` değeriyle eşleşen bir `@ref` tür alanı tanımlayın.
 
-Aşağıdaki örnek, `username` `<input>` öğesine bir başvuru yakalama göstermektedir:
+Aşağıdaki örnek, `username` `<input>` öğeye bir başvuru yakalama gösterir:
 
 ```razor
 <input @ref="username" ... />
@@ -173,9 +173,9 @@ Aşağıdaki örnek, `username` `<input>` öğesine bir başvuru yakalama göste
 ```
 
 > [!WARNING]
-> Yalnızca Blazoretkileşimde bulunmayan boş bir öğenin içeriğini bulunmamalıdır için bir öğe başvurusu kullanın. Bu senaryo, bir 3. taraf API 'SI öğeye içerik sağladığı zaman yararlıdır. Blazor öğesiyle etkileşmediği için, Blazoröğesi ve DOM gösterimi arasında bir çakışma olabilir.
+> Yalnızca etkileşime girmeyen boş bir öğenin içeriğini mutasyona Blazoruğratmak için bir öğe başvurusu kullanın. Bu senaryo, üçüncü taraf api öğesine içerik sağladığında yararlıdır. Öğeile Blazor etkileşime girmediği için, 'öğenin temsili Blazorile DOM arasında bir çakışma olasılığı yoktur.
 >
-> Aşağıdaki örnekte, Blazor, bu öğenin liste öğelerini (`<li>`) doldurmak üzere DOM ile etkileşimde bulunduğundan, sıralanmamış listenin (`ul`) içeriğini () zaman *zaman aşmaktır* .
+> Aşağıdaki örnekte, bu öğenin liste öğeleridoldurmak için DOM ile`ul` Blazor etkileşimde çünkü sıralanmamış listenin içeriğini mutasyona`<li>`uğratmak için *tehlikelidir* ( ):
 >
 > ```razor
 > <ul ref="MyList">
@@ -186,13 +186,13 @@ Aşağıdaki örnek, `username` `<input>` öğesine bir başvuru yakalama göste
 > </ul>
 > ```
 >
-> JS birlikte çalışma öğesi, öğe `MyList` içeriğini değiştiriyorsa ve Blazor SLA 'ya uygulamaya çalışırsa, diffler DOM ile eşleşmez.
+> JS interop öğenin `MyList` içeriğini mutasyona Blazor uğrar ve elemandiffs uygulamak için çalışırsa, diffs DOM eşleşmez.
 
-.NET kodu açısından düşünüldüğünde, `ElementReference` donuk bir tanıtıcıdır. `ElementReference` ile yapabileceğiniz *tek* şey, JS birlikte çalışma yoluyla JavaScript koduna geçiş yapar. Bunu yaptığınızda, JavaScript tarafı kodu normal DOM API 'Leri ile kullanılabilecek bir `HTMLElement` örneğini alır.
+.NET kodu söz konusu olduğunda, opak `ElementReference` bir tutamaçtır. Yapabileceğiniz *tek* şey JS interop üzerinden JavaScript koduna `ElementReference` geçmektir. Bunu yaptığınızda, JavaScript yan kodu `HTMLElement` normal DOM API'leri ile kullanabileceği bir örnek alır.
 
-Örneğin, aşağıdaki kod bir öğe üzerinde odağı ayarlamaya izin veren bir .NET genişletme yöntemi tanımlar:
+Örneğin, aşağıdaki kod, bir öğenin odağının ayarlanmasını sağlayan bir .NET uzantı yöntemi tanımlar:
 
-*Examplejsınterop. js*:
+*örnekJsInterop.js*:
 
 ```javascript
 window.exampleJsFunctions = {
@@ -202,11 +202,11 @@ window.exampleJsFunctions = {
 }
 ```
 
-Değer döndürmeyen bir JavaScript işlevini çağırmak için `IJSRuntime.InvokeVoidAsync`kullanın. Aşağıdaki kod, yakalanan `ElementReference`önceki JavaScript işlevini çağırarak Kullanıcı adı girişi üzerinde odağı ayarlar:
+Değer vermeyen bir JavaScript işlevini çağırmak için `IJSRuntime.InvokeVoidAsync`. Aşağıdaki kod yakalanan `ElementReference`önceki JavaScript işlevi arayarak kullanıcı adı girişi üzerinde odak ayarlar:
 
 [!code-razor[](call-javascript-from-dotnet/samples_snapshot/component1.razor?highlight=1,3,11-12)]
 
-Bir genişletme yöntemi kullanmak için `IJSRuntime` örneğini alan bir statik genişletme yöntemi oluşturun:
+Uzantı yöntemini kullanmak `IJSRuntime` için, örneği alan statik bir uzantı yöntemi oluşturun:
 
 ```csharp
 public static async Task Focus(this ElementReference elementRef, IJSRuntime jsRuntime)
@@ -216,14 +216,14 @@ public static async Task Focus(this ElementReference elementRef, IJSRuntime jsRu
 }
 ```
 
-`Focus` yöntemi doğrudan nesne üzerinde çağrılır. Aşağıdaki örnek, `Focus` yönteminin `JsInteropClasses` ad alanından kullanılabildiğini varsayar:
+Yöntem `Focus` doğrudan nesne üzerinde çağrılır. Aşağıdaki örnek, yöntemin `Focus` `JsInteropClasses` ad alanından kullanılabildiğini varsayar:
 
 [!code-razor[](call-javascript-from-dotnet/samples_snapshot/component2.razor?highlight=1-4,12)]
 
 > [!IMPORTANT]
-> `username` değişkeni yalnızca bileşen işlendikten sonra doldurulur. Doldurulmamış bir `ElementReference` JavaScript koduna geçirilirse, JavaScript kodu bir `null`değeri alır. Bileşen işlemeyi tamamladıktan sonra öğe başvurularını değiştirmek için (bir öğe üzerinde ilk odağı ayarlamak için) [Onafterrenderasync veya OnAfterRender bileşen yaşam döngüsü yöntemlerini](xref:blazor/lifecycle#after-component-render)kullanın.
+> Değişken `username` yalnızca bileşen işlendikten sonra doldurulur. Doldurulmamış bir `ElementReference` JavaScript koduna aktarılırsa, JavaScript kodu `null`. Bileşen işleme bittikten sonra eleman başvurularını işlemek için (bir öğeye ilk odağı ayarlamak için) [OnAfterRenderAsync veya OnAfterRender bileşen yaşam döngüsü yöntemlerini](xref:blazor/lifecycle#after-component-render)kullanın.
 
-Genel türlerle çalışırken ve bir değer döndürürken, [Valuetask\<t >](xref:System.Threading.Tasks.ValueTask`1)kullanın:
+Genel türlerle çalışırken ve bir değer döndürerken, [ValueTask\<T>](xref:System.Threading.Tasks.ValueTask`1)kullanın:
 
 ```csharp
 public static ValueTask<T> GenericMethod<T>(this ElementReference elementRef, 
@@ -234,22 +234,22 @@ public static ValueTask<T> GenericMethod<T>(this ElementReference elementRef,
 }
 ```
 
-`GenericMethod` doğrudan nesne üzerinde bir tür ile çağırılır. Aşağıdaki örnek, `GenericMethod` `JsInteropClasses` ad alanından kullanılabilir olduğunu varsayar:
+`GenericMethod`türü olan nesneye doğrudan çağrılır. Aşağıdaki örnek, `GenericMethod` `JsInteropClasses` ad alanından kullanılabilir olduğunu varsayar:
 
 [!code-razor[](call-javascript-from-dotnet/samples_snapshot/component3.razor?highlight=17)]
 
-## <a name="reference-elements-across-components"></a>Bileşenler arasında başvuru öğeleri
+## <a name="reference-elements-across-components"></a>Bileşenler arasında referans öğeleri
 
-`ElementReference`, bir bileşenin `OnAfterRender` yönteminde (ve bir öğe başvurusu bir `struct`), bu nedenle bileşenler arasında bir öğe başvurusu geçirilememelidir.
+Bir `ElementReference` bileşenin `OnAfterRender` yönteminde geçerli olduğu garanti edilir (ve `struct`bir öğe başvurusu birdir), bu nedenle bir öğe başvurusu bileşenler arasında geçirilemez.
 
-Bir üst bileşen için bir öğe başvurusunu diğer bileşenlere kullanılabilir hale getirmek için, üst bileşen şunları yapabilir:
+Bir üst bileşenin bir öğe referansını diğer bileşenler için kullanılabilir hale getirebilmek için, üst bileşen şunları yapabilir:
 
-* Alt bileşenlerin geri çağırmaları kaydetmesine izin ver.
-* Geçirilen öğe başvurusuyla `OnAfterRender` olayı sırasında kayıtlı geri çağırmaları çağırın. Bu yaklaşım dolaylı olarak, alt bileşenlerin üst öğenin öğe başvurusuyla etkileşime geçmesini sağlar.
+* Alt bileşenlerin geri aramaları kaydetmesine izin verin.
+* Geçen öğe başvurusuyla `OnAfterRender` olay sırasında kayıtlı geri aramaları çağırın. Dolaylı olarak, bu yaklaşım alt bileşenlerin üst öğe başvurusu ile etkileşim sağlar.
 
-Aşağıdaki Blazor WebAssembly örneğinde yaklaşım gösterilmektedir.
+Aşağıdaki Blazor WebAssembly örneği yaklaşımı göstermektedir.
 
-*Wwwroot/index.html*`<head>`:
+`<head>` *wwwroot/index.html olarak:*
 
 ```html
 <style>
@@ -257,7 +257,7 @@ Aşağıdaki Blazor WebAssembly örneğinde yaklaşım gösterilmektedir.
 </style>
 ```
 
-*Wwwroot/index.html*`<body>`:
+`<body>` *wwwroot/index.html olarak:*
 
 ```html
 <script>
@@ -269,7 +269,7 @@ Aşağıdaki Blazor WebAssembly örneğinde yaklaşım gösterilmektedir.
 </script>
 ```
 
-*Pages/Index. Razor* (üst bileşen):
+*Sayfalar/Index.razor* (üst bileşen):
 
 ```razor
 @page "/"
@@ -281,7 +281,7 @@ Welcome to your new app.
 <SurveyPrompt Parent="this" Title="How is Blazor working for you?" />
 ```
 
-*Sayfa/dizin. Razor. cs*:
+*Sayfa/Index.razor.cs*:
 
 ```csharp
 using System;
@@ -365,7 +365,7 @@ namespace BlazorSample.Pages
 }
 ```
 
-*Shared/gözetimi ve Prompt. Razor* (alt bileşen):
+*Paylaşılan/SurveyPrompt.razor* (alt bileşeni):
 
 ```razor
 @inject IJSRuntime JS
@@ -388,7 +388,7 @@ namespace BlazorSample.Pages
 }
 ```
 
-*Shared/gözetimi ve Prompt. Razor. cs*:
+*Paylaşılan/SurveyPrompt.razor.cs*:
 
 ```csharp
 using System;
@@ -440,30 +440,42 @@ namespace BlazorSample.Shared
 }
 ```
 
-## <a name="harden-js-interop-calls"></a>Harden JS birlikte çalışma çağrıları
+## <a name="harden-js-interop-calls"></a>Harden JS interop aramaları
 
-JS birlikte çalışması, ağ hataları nedeniyle başarısız olabilir ve güvenilmez olarak değerlendirilmelidir. Varsayılan olarak, bir Blazor sunucusu uygulaması, bir dakika sonra sunucu üzerinde JS birlikte çalışabilirlik çağrılarını zaman aşımına uğrar. Bir uygulama, 10 saniye gibi daha agresif zaman aşımına uğrayedebilmesine, aşağıdaki yaklaşımlardan birini kullanarak zaman aşımını ayarlayın:
+JS interop ağ hataları nedeniyle başarısız olabilir ve güvenilmez olarak kabul edilmelidir. Varsayılan olarak, Blazor bir Sunucu uygulaması bir dakika sonra sunucudaki JS interop çağrılarını kez times. Bir uygulama 10 saniye gibi daha agresif bir zaman adabına tahammül edebilirse, zaman anına aşağıdaki yaklaşımlardan birini kullanarak ayarlayın:
 
-* `Startup.ConfigureServices`genel olarak, zaman aşımını belirtin:
+* Genel `Startup.ConfigureServices`olarak, zaman anına belirtin:
 
   ```csharp
   services.AddServerSideBlazor(
       options => options.JSInteropDefaultCallTimeout = TimeSpan.FromSeconds({SECONDS}));
   ```
 
-* Bileşen kodunda çağrı başına, tek bir çağrı zaman aşımını belirtebilir:
+* Bileşen kodunda çağırma başına, tek bir arama zaman ayarı belirtebilir:
 
   ```csharp
   var result = await JSRuntime.InvokeAsync<string>("MyJSOperation", 
       TimeSpan.FromSeconds({SECONDS}), new[] { "Arg1" });
   ```
 
-Kaynak tükenmesi hakkında daha fazla bilgi için bkz. <xref:security/blazor/server>.
+Kaynak tükenmesi hakkında daha <xref:security/blazor/server>fazla bilgi için bkz.
 
 [!INCLUDE[Share interop code in a class library](~/includes/blazor-share-interop-code.md)]
+
+## <a name="avoid-circular-object-references"></a>Dairesel nesne başvurularından kaçının
+
+Dairesel başvurular içeren nesneler istemcide aşağıdakiler için serileştirilemez:
+
+* .NET yöntemi çağırır.
+* İade türü dairesel referansları olduğunda JavaScript yöntemi C#'dan çağrı verir.
+
+Daha fazla bilgi için aşağıdaki sorunlara bakın:
+
+* [Dairesel başvurular desteklenmez, iki tane alın (dotnet/aspnetcore #20525)](https://github.com/dotnet/aspnetcore/issues/20525)
+* [Öneri: Serileştirme yaparken dairesel başvuruları işlemek için mekanizma ekleme (dotnet/runtime #30820)](https://github.com/dotnet/runtime/issues/30820)
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * <xref:blazor/call-dotnet-from-javascript>
-* [InteropComponent. Razor örneği (DotNet/AspNetCore GitHub deposu, 3,1 yayın dalı)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
-* [Blazor Server uygulamalarında büyük veri aktarımları gerçekleştirin](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)
+* [InteropComponent.razor örnek (dotnet/AspNetCore GitHub deposu, 3.1 sürüm şubesi)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
+* [Sunucu uygulamalarında Blazor büyük veri aktarımları gerçekleştirin](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)

@@ -1,120 +1,136 @@
 ---
-title: ASP.NET Core Blazor WebAssembly 'ı barındırma ve dağıtma
+title: Core Blazor WebAssemblyASP.NET ana bilgisayar ve dağıtma
 author: guardrex
-description: ASP.NET Core, Içerik teslim ağları (CDN), dosya sunucuları ve GitHub sayfalarını kullanarak bir Blazor uygulamasını nasıl barındırılacağını ve dağıtacağınızı öğrenin.
+description: ASP.NET Core, Content Blazor Delivery Networks (CDN), dosya sunucuları ve GitHub Sayfalarını kullanarak bir uygulamayı nasıl barındıracağınızı ve dağıtacağınızı öğrenin.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/16/2020
+ms.date: 04/06/2020
 no-loc:
 - Blazor
 - SignalR
 uid: host-and-deploy/blazor/webassembly
-ms.openlocfilehash: ea2c625f424447209a362cdc58bdb18be061e47f
-ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
+ms.openlocfilehash: f364d94085d175fde5596c222ef21852c0106ec1
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/18/2020
-ms.locfileid: "79511359"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80751125"
 ---
-# <a name="host-and-deploy-aspnet-core-opno-locblazor-webassembly"></a>ASP.NET Core Blazor WebAssembly 'ı barındırma ve dağıtma
+# <a name="host-and-deploy-aspnet-core-opno-locblazor-webassembly"></a>Core Blazor WebAssemblyASP.NET ana bilgisayar ve dağıtma
 
-, [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com)ve [Daniel Roth](https://github.com/danroth27) tarafından
+Luke [Latham](https://github.com/guardrex)tarafından , [Rainer Stropek](https://www.timecockpit.com), ve [Daniel Roth](https://github.com/danroth27)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-[Blazor WebAssembly barındırma modeliyle](xref:blazor/hosting-models#blazor-webassembly):
+[ Blazor WebAssembly barındırma modeli](xref:blazor/hosting-models#blazor-webassembly)ile:
 
-* Blazor uygulaması, bağımlılıkları ve .NET çalışma zamanı tarayıcıya indirilir.
-* Uygulama doğrudan tarayıcı kullanıcı arabirimi iş parçacığında yürütülür.
+* Uygulama, Blazor bağımlılıkları ve .NET çalışma süresi tarayıcıya indirilir.
+* Uygulama doğrudan tarayıcı UI iş parçacığı üzerinde yürütülür.
 
 Aşağıdaki dağıtım stratejileri desteklenir:
 
-* Blazor uygulama ASP.NET Core bir uygulama tarafından sunulur. Bu strateji [ASP.NET Core bölümünde barındırılan dağıtımda](#hosted-deployment-with-aspnet-core) ele alınmıştır.
-* Blazor uygulaması, .NET Blazor uygulamasına hizmet vermek için kullanılmayan bir statik barındırma Web sunucusuna veya hizmetine yerleştirilir. Bu strateji [tek başına dağıtım](#standalone-deployment) bölümünde ele alınmıştır. Bu, bir Blazor WebAssembly UYGULAMASıNı bir IIS alt uygulaması olarak barındırma hakkında bilgiler içerir.
+* Uygulama, Blazor ASP.NET Core uygulaması tarafından sunulmaktadır. Bu strateji, [ASP.NET Core bölümüyle Barındırılan dağıtımda](#hosted-deployment-with-aspnet-core) ele alınmıştır.
+* Uygulama, Blazor .NET'in uygulamaya hizmet vermek için kullanılmadığı statik bir Blazor barındırma web sunucusuna veya hizmetine yerleştirilir. Bu strateji, Bir [Standalone deployment](#standalone-deployment) Blazor WebAssembly uygulamasını IIS alt uygulaması olarak barındırma hakkında bilgi içeren Bağımsız dağıtım bölümünde ele alınmıştır.
 
-## <a name="rewrite-urls-for-correct-routing"></a>Doğru yönlendirme için URL 'Leri yeniden yazın
+## <a name="rewrite-urls-for-correct-routing"></a>Doğru yönlendirme için URL'leri yeniden yazma
 
-Blazor WebAssembly uygulamasındaki sayfa bileşenlerine yönelik yönlendirme istekleri, Blazor sunucusu, barındırılan bir uygulamada yönlendirme istekleri kadar basittir. İki bileşeni olan bir Blazor WebAssembly uygulaması düşünün:
+Bir Blazor WebAssembly uygulamasındaki sayfa bileşenleri isteklerini yönlendirme, barındırılan bir Blazor sunucudaki yönlendirme istekleri kadar basit değildir. İki Blazor bileşenden bir WebAssembly uygulaması düşünün:
 
-* *Main. razor* &ndash;, uygulamanın köküne yüklenir ve `About` bileşenine (`href="About"`) bir bağlantı içerir.
-* *. Razor* &ndash; `About` bileşeni hakkında.
+* *Main.razor* &ndash; Yükler uygulamanın kökünde ve `About` bileşene bir`href="About"`bağlantı içerir ( ).
+* *Jilet* &ndash; `About` bileşeni hakkında.
 
-Uygulamanın varsayılan belgesi, tarayıcının adres çubuğu kullanılarak istendiğinde (örneğin, `https://www.contoso.com/`):
+Uygulamanın varsayılan belgesi tarayıcının adres çubuğu kullanılarak istendiğinde (örneğin,): `https://www.contoso.com/`
 
-1. Tarayıcı bir istek yapar.
-1. Varsayılan sayfa döndürülür, bu genellikle *index. html*'dir.
-1. uygulamanın *index. html* önyükleme.
-1. Blazoryönlendirici yükleri ve Razor `Main` bileşeni işlenir.
+1. Tarayıcı bir istekte bulundu.
+1. Varsayılan sayfa döndürülür, genellikle *index.html*.
+1. *index.html* uygulamayı bootstraps.
+1. Blazor''nin yönlendirici yükleri `Main` ve Razor bileşeni işlenir.
 
-Ana sayfada, Blazor yönlendirici tarayıcının `About` için `www.contoso.com` için bir istek yapmasını durdurduğundan ve işlenmiş `About` bileşeninin kendisini hizmet ettiğinden, `About` bileşene olan bağlantıyı seçmek istemcide çalışır. *Blazor WebAssembly uygulaması içindeki* iç uç noktalara yönelik tüm istekler aynı şekilde çalışır: istekler tarayıcı tabanlı istekleri Internet 'teki sunucu tarafından barındırılan kaynaklara tetiklemez. Yönlendirici istekleri dahili olarak işler.
+`About` Ana sayfada, bileşenin bağlantısını seçmek istemcide çalışır, Blazor çünkü yönlendirici tarayıcının Internet'te istekte `www.contoso.com` `About` bulunmasını durdurur `About` ve işlenen bileşenin kendisi için hizmet eder. *WebAssembly uygulamasındaki Blazor * dahili uç noktalara yönelik tüm istekler aynı şekilde çalışır: İstekler, Internet'te sunucu tarafından barındırılan kaynaklara tarayıcı tabanlı istekleri tetiklemez. Yönlendirici istekleri dahili olarak işler.
 
-`www.contoso.com/About`için tarayıcının adres çubuğu kullanılarak bir istek yapılırsa, istek başarısız olur. Uygulamanın Internet ana bilgisayarında böyle bir kaynak yok, bu nedenle *404-bulunamayan* bir yanıt döndürülür.
+Tarayıcının adres çubuğu kullanılarak bir istek `www.contoso.com/About`yapılırsa, istek başarısız olur. Uygulamanın Internet ana bilgisayarında böyle bir kaynak bulunmadığından, *404 - Bulunamadı* yanıtı döndürülür.
 
-Tarayıcılar, istemci tarafı sayfaları için Internet tabanlı konaklara istek yaptığından, Web sunucuları ve barındırma hizmetleri, fiziksel olarak sunucu üzerinde olmayan kaynakların tüm isteklerini *Dizin. html* sayfasına yeniden yazmalıdır. *İndex. html* döndürüldüğünde, uygulamanın Blazor yönlendiricisi, doğru kaynakla yararlanır ve yanıt verir.
+Tarayıcılar istemci tarafı sayfaları için Internet tabanlı ana bilgisayarlara istekte bulunduğundan, web sunucuları ve barındırma hizmetleri sunucudaki kaynaklara yönelik tüm istekleri ni fiziksel olarak *index.html* sayfasına yeniden yazmalıdır. *index.html* döndürüldüğünde, uygulamanın Blazor yönlendiricisi devreye girer ve doğru kaynakla yanıt verir.
 
-Bir IIS sunucusuna dağıtım yaparken, URL yeniden yazma modülünü uygulamanın yayınlanan *Web. config* dosyasıyla birlikte kullanabilirsiniz. Daha fazla bilgi için [IIS](#iis) bölümüne bakın.
+Bir IIS sunucusuna dağıtırken, uygulamanın yayınlanan *web.config* dosyasıyla URL Yeniden Yazma Modül'üni kullanabilirsiniz. Daha fazla bilgi için [IIS](#iis) bölümüne bakın.
 
 ## <a name="hosted-deployment-with-aspnet-core"></a>ASP.NET Core ile barındırılan dağıtım
 
-*Barındırılan bir dağıtım* , bir Web sunucusu üzerinde çalışan bir [ASP.NET Core uygulamasındaki](xref:index) tarayıcılara Blazor webassembly uygulamasını sunar.
+*Barındırılan dağıtım,* WebAssembly uygulamasına Blazor bir web sunucusunda çalışan bir ASP.NET Core [uygulamasından](xref:index) tarayıcılara hizmet eder.
 
-İstemci Blazor WebAssembly uygulaması sunucu uygulamasının */BIN/Release/{Target Framework}/Publish/Wwwroot* klasöründe, sunucu uygulamasının diğer statik Web varlıklarıyla birlikte yayımlanır. İki uygulama birlikte dağıtılır. ASP.NET Core uygulamasını barındırabilen bir Web sunucusu gereklidir. Barındırılan bir dağıtım için Visual Studio, **barındırılan** seçenek seçili olan (`dotnet new` komutu kullanılırken`-ho|--hosted`) **Webassembly uygulama** projesi şablonu ( [DotNet New](/dotnet/core/tools/dotnet-new) komutu kullanılırken`blazorwasm` şablonu)Blazor içerir.
+İstemci Blazor WebAssembly uygulaması sunucu uygulamasının */bin/Release/{TARGET FRAMEWORK}/publish/wwwroot* klasöründe, sunucu uygulamasının diğer statik web varlıklarıyla birlikte yayınlanır. İki uygulama birlikte dağıtılır. ASP.NET Core uygulaması barındırma yeteneğine sahip bir web sunucusu gereklidir. Barındırılan`blazorwasm` bir dağıtım için Visual Studio,`-ho|--hosted` `dotnet new` ** Blazor WebAssembly App** proje şablonunu [(dotnet yeni](/dotnet/core/tools/dotnet-new) komutunu kullanırken şablon) içerir ve **Barındırılan** seçeneği (komutu kullanırken) seçilir.
 
-Uygulama barındırma ve dağıtım ASP.NET Core hakkında daha fazla bilgi için bkz. <xref:host-and-deploy/index>.
+ASP.NET Core uygulaması barındırma ve dağıtımı <xref:host-and-deploy/index>hakkında daha fazla bilgi için bkz.
 
-Azure App Service dağıtma hakkında daha fazla bilgi için bkz. <xref:tutorials/publish-to-azure-webapp-using-vs>.
+Azure Uygulama Hizmetine dağıtım hakkında <xref:tutorials/publish-to-azure-webapp-using-vs>daha fazla bilgi için bkz.
 
-## <a name="standalone-deployment"></a>Tek başına dağıtım
+## <a name="standalone-deployment"></a>Bağımsız dağıtım
 
-*Tek başına dağıtım* , istemci tarafından doğrudan istenen statik dosyalar kümesi olarak Blazor WebAssembly uygulamasına hizmet verir. Herhangi bir statik dosya sunucusu Blazor uygulamasına sunabilir.
+*Bağımsız bir dağıtım,* WebAssembly uygulamasına Blazor doğrudan istemciler tarafından istenen statik dosyalar kümesi olarak hizmet verir. Herhangi bir statik dosya sunucusu Blazor uygulamaya hizmet verebiliyor.
 
-Tek başına dağıtım varlıkları */BIN/Release/{Target Framework}/Publish/Wwwroot* klasöründe yayımlanır.
+Bağımsız dağıtım varlıkları */bin/Release/{TARGET FRAMEWORK}/publish/wwwroot* klasöründe yayımlanır.
 
 ### <a name="iis"></a>IIS
 
-IIS, Blazor uygulamalar için özellikli bir statik dosya sunucusudur. IIS 'yi Blazorbarındıracak şekilde yapılandırmak için bkz. [IIS 'de statik Web sitesi oluşturma](/iis/manage/creating-websites/scenario-build-a-static-website-on-iis).
+IIS uygulamalar için Blazor yetenekli bir statik dosya sunucusudur. IIS'yi barındıracak Blazorşekilde yapılandırmak için [bkz.](/iis/manage/creating-websites/scenario-build-a-static-website-on-iis)
 
-Yayımlanan varlıklar */BIN/Release/{Target Framework}/Publish* klasöründe oluşturulur. Web sunucusunda veya barındırma hizmetinde *Yayımlama* klasörünün içeriğini barındırın.
+Yayınlanan varlıklar */bin/Release/{TARGET FRAMEWORK}/publish* klasöründe oluşturulur. *Yayımlama* klasörünün içeriğini web sunucusunda veya barındırma hizmetinde barındırın.
 
-#### <a name="webconfig"></a>Web. config
+#### <a name="webconfig"></a>Config
 
-Bir Blazor projesi yayımlandığında, aşağıdaki IIS yapılandırmasıyla bir *Web. config* dosyası oluşturulur:
+Bir Blazor proje yayımlandığında, aşağıdaki IIS yapılandırmasıyla bir *web.config* dosyası oluşturulur:
 
 * MIME türleri aşağıdaki dosya uzantıları için ayarlanır:
-  * *. dll* &ndash; `application/octet-stream`
-  * *. json* &ndash; `application/json`
-  * *.* , &ndash; `application/wasm`
-  * *. WOFF* &ndash; `application/font-woff`
-  * *. woff2* &ndash; `application/font-woff`
-* Aşağıdaki MIME türleri için HTTP sıkıştırması etkindir:
+  * *.dll* &ndash;`application/octet-stream`
+  * *.json* &ndash;`application/json`
+  * *.wasm* &ndash;`application/wasm`
+  * *.woff* &ndash;`application/font-woff`
+  * *.woff2* &ndash;`application/font-woff`
+* Aşağıdaki MIME türleri için HTTP sıkıştırma etkinleştirilir:
   * `application/octet-stream`
   * `application/wasm`
-* URL yeniden yazma modülü kuralları oluşturuldu:
-  * Uygulamanın statik varlıklarının bulunduğu alt dizini (*Wwwroot/{Path istenen}* ) sunar.
-  * Dosya olmayan varlıklar için isteklerin statik varlıklar klasöründe (*Wwwroot/index.html*) uygulamanın varsayılan belgesine yeniden YÖNLENDIRILMESI için Spa geri dönüş yönlendirmesi oluşturun.
+* URL Yeniden Yazma Modülü kuralları belirlenir:
+  * Uygulamanın statik varlıklarının bulunduğu alt dizine hizmet *(wwwroot/{PATH REQUESTed}*).
+  * Dosya dışı varlıklara yönelik isteklerin, statik varlıklar klasöründe *(wwwroot/index.html)* uygulamanın varsayılan belgesine yönlendirilmesi için SPA geri dönüş yönlendirmesini oluşturun.
+  
+#### <a name="use-a-custom-webconfig"></a>Özel bir web.config kullanın
 
-#### <a name="install-the-url-rewrite-module"></a>URL yeniden yazma modülünü yükler
+Özel bir *web.config* dosyası kullanmak için:
 
-[URL yeniden yazma modülü](https://www.iis.net/downloads/microsoft/url-rewrite) , URL 'leri yeniden yazmak için gereklidir. Modül varsayılan olarak yüklenmez ve bir Web sunucusu (IIS) rol hizmeti özelliği olarak yükleme için kullanılamaz. Modül IIS Web sitesinden indirilmelidir. Modülünü yüklemek için Web Platformu Yükleyicisi 'ni kullanın:
+1. Özel *web.config* dosyasını proje klasörünün köküne yerleştirin.
+1. Proje dosyasına aşağıdaki hedefi ekleyin (*.csproj):*
 
-1. Yerel olarak, [URL yeniden yazma modülü İndirmeleri sayfasına](https://www.iis.net/downloads/microsoft/url-rewrite#additionalDownloads)gidin. Ingilizce sürümünde, WebPI yükleyicisini indirmek için **WebPI** ' ı seçin. Diğer diller için, yükleyiciyi indirmek üzere sunucu için uygun mimariyi (x86/x64) seçin.
-1. Yükleyiciyi sunucuya kopyalayın. Yükleyiciyi çalıştırın. , **Install** düğmesini seçin ve lisans koşullarını kabul edin. Yüklemesi tamamlandıktan sonra sunucu yeniden başlatması gerekli değildir.
+   ```xml
+   <Target Name="CopyWebConfigOnPublish" AfterTargets="Publish">
+     <Copy SourceFiles="web.config" DestinationFolder="$(PublishDir)" />
+   </Target>
+   ```
+   
+> [!NOTE]
+> IIS'e `<IsWebConfigTransformDisabled>` `true` dağıtılan ASP.NET Core uygulamaları için Blazor olduğu [gibi,](xref:host-and-deploy/iis/index#webconfig-file)WebAssembly uygulamalarında da desteklenmez. Daha fazla bilgi için bkz: [Özel Blazor WASM web.config (dotnet/aspnetcore #20569) sağlamak için gereken kopya hedef.](https://github.com/dotnet/aspnetcore/issues/20569)
+
+#### <a name="install-the-url-rewrite-module"></a>URL Yeniden Yazma Modül'e yükleme
+
+[URL Yeniden Yazma Modülü](https://www.iis.net/downloads/microsoft/url-rewrite) URL'leri yeniden yazmak için gereklidir. Modül varsayılan olarak yüklü değildir ve Web Sunucusu (IIS) rol hizmeti özelliği olarak yüklemek için kullanılamaz. Modül IIS web sitesinden indirilmelidir. Modülü yüklemek için Web Platform Yükleyicisini kullanın:
+
+1. Yerel olarak, [URL Yeniden Yazma Modülü indirme sayfasına](https://www.iis.net/downloads/microsoft/url-rewrite#additionalDownloads)gidin. İngilizce sürüm için **WebPI** yükleyicisini indirmek için WebPI'yi seçin. Diğer diller için, yükleyiciyi indirmek için sunucu (x86/x64) için uygun mimariyi seçin.
+1. Yükleyiciyi sunucuya kopyalayın. Yükleyiciyi çalıştırın. **Yükle** düğmesini seçin ve lisans koşullarını kabul edin. Yükleme tamamlandıktan sonra sunucu yeniden başlatması gerekmez.
 
 #### <a name="configure-the-website"></a>Web sitesini yapılandırma
 
-Web sitesinin **fiziksel yolunu** uygulamanın klasörüne ayarlayın. Klasör şunları içerir:
+Web sitesinin **Fiziksel yolunu** uygulamanın klasörüne ayarlayın. Klasör şunları içerir:
 
-* Gerekli yeniden yönlendirme kuralları ve dosya içerik türleri dahil olmak üzere IIS 'nin Web sitesini yapılandırmak için kullandığı *Web. config* dosyası.
+* IIS'nin web sitesini yapılandırmak için kullandığı *web.config* dosyası, gerekli yönlendirme kuralları ve dosya içeriği türleri de dahil olmak üzere.
 * Uygulamanın statik varlık klasörü.
 
-#### <a name="host-as-an-iis-sub-app"></a>IIS alt uygulaması olarak barındırma
+#### <a name="host-as-an-iis-sub-app"></a>IIS alt uygulaması olarak ana bilgisayar
 
-Tek başına bir uygulama bir IIS alt uygulaması olarak barındırılıyorsa, aşağıdakilerden birini yapın:
+Bağımsız bir uygulama IIS alt uygulaması olarak barındırılırsa, aşağıdakilerden birini gerçekleştirin:
 
-* Devralınan ASP.NET Core modülü işleyicisini devre dışı bırakın.
+* Devralınan ASP.NET Çekirdek Modülü işleyicisini devre dışı bırak.
 
-  Dosyaya bir `<handlers>` bölümü ekleyerek Blazor uygulamasının yayınlanan *Web. config* dosyasındaki işleyiciyi kaldırın:
+  Dosyaya bir `<handlers>` bölüm Blazor ekleyerek uygulamanın yayınlanan *web.config* dosyasındaki işleyiciyi kaldırın:
 
   ```xml
   <handlers>
@@ -122,7 +138,7 @@ Tek başına bir uygulama bir IIS alt uygulaması olarak barındırılıyorsa, a
   </handlers>
   ```
 
-* `inheritInChildApplications` `false`olarak ayarlanan `<location>` bir öğesi kullanarak kök (üst) uygulamanın `<system.webServer>` bölümünü devralmayı devre dışı bırakın:
+* `inheritInChildApplications` Set `false`ile bir `<system.webServer>` `<location>` öğe kullanarak kök (üst) uygulama bölümünün devralma devre dışı bırak:
 
   ```xml
   <?xml version="1.0" encoding="utf-8"?>
@@ -138,28 +154,28 @@ Tek başına bir uygulama bir IIS alt uygulaması olarak barındırılıyorsa, a
   </configuration>
   ```
 
-İşleyicinin kaldırılması veya devralma devre dışı bırakılması, [uygulamanın temel yolunun yapılandırılmasına](xref:host-and-deploy/blazor/index#app-base-path)ek olarak gerçekleştirilir. Uygulamanın *index. html* dosyasındaki uygulama temel yolunu, IIS 'de alt uygulamayı YAPıLANDıRıRKEN kullanılan IIS diğer adına ayarlayın.
+Uygulamanın [temel yolunu yapılandırmaya](xref:host-and-deploy/blazor/index#app-base-path)ek olarak işleyicinin kaldırılması veya devralmanın devre dışı bırakılması gerçekleştirilir. Uygulamanın *index.html* dosyasındaki uygulama temel yolunu, Alt Uygulamayı IIS'de yapılandırırken kullanılan IIS diğer adıyla ayarlayın.
 
 #### <a name="troubleshooting"></a>Sorun giderme
 
-*500-Iç sunucu hatası* ALıNMıŞSA ve IIS Yöneticisi Web sitesinin yapılandırmasına erişmeye çalışırken hatalar OLUŞTURURSA, URL yeniden yazma modülünün yüklü olduğunu doğrulayın. Modül yüklü olmadığında, *Web. config* dosyası IIS tarafından ayrıştırılamaz. Bu, IIS yöneticisinin Web sitesinin yapılandırmasını ve Web sitesinin Blazorstatik dosyalarına hizmet etmesini engeller.
+*500 - Internal Server Hatası* alınırsa ve IIS Yöneticisi web sitesinin yapılandırmasına erişmeye çalışırken hata lar atarsa, URL Yeniden Yazma Modülü'nün yüklü olduğunu onaylayın. Modül yüklenmediği zaman, *web.config* dosyası IIS tarafından ayrıştırılamaz. Bu, IIS Yöneticisi'nin web sitesinin yapılandırmasını ve Blazorweb sitesinin statik dosyalarını yüklemesini engeller.
 
-IIS ile dağıtım sorunlarını giderme hakkında daha fazla bilgi için bkz. <xref:test/troubleshoot-azure-iis>.
+IIS'deki sorun giderme dağıtımları <xref:test/troubleshoot-azure-iis>hakkında daha fazla bilgi için bkz.
 
 ### <a name="azure-storage"></a>Azure Storage
 
-[Azure depolama](/azure/storage/) statik dosya barındırma, sunucusuz Blazor uygulama barındırılmasına olanak sağlar. Özel etki alanı adları, Azure Content Delivery Network (CDN) ve HTTPS desteklenir.
+[Azure Depolama](/azure/storage/) statik dosya Blazor barındırma sunucusuz uygulama barındırma sağlar. Özel alan adları, Azure İçerik Dağıtım Ağı (CDN) ve HTTPS desteklenir.
 
-Blob hizmeti bir depolama hesabında barındırılan statik Web sitesi için etkinleştirildiğinde:
+Bir depolama hesabında statik web sitesi barındırma için blob hizmeti etkinleştirildiğinde:
 
-* **Dizin belgesi adını** `index.html`olarak ayarlayın.
-* **Hata belge yolunu** `index.html`olarak ayarlayın. Razor bileşenleri ve diğer dosya olmayan uç noktaları, blob hizmeti tarafından depolanan statik içerikte fiziksel yollarda yer vermez. Blazor yönlendiricisinin işlemesi gereken bu kaynaklardan birine yönelik bir istek alındığında, blob hizmeti tarafından oluşturulan *404-bulunamayan* hata, isteği **hata belge yoluna**yönlendirir. *İndex. html* blobu döndürülür ve Blazor yönlendirici yolu yükler ve işler.
+* **Dizin belge** adını `index.html`' a ayarlayın
+* Hata **belge yolunu** `index.html`' n için ayarlama Jilet bileşenleri ve diğer dosya dışı uç noktalar, blob hizmeti tarafından depolanan statik içerikteki fiziksel yollarda bulunmaz. Bu kaynaklardan biri için yönlendiricinin Blazor işlemesi gereken bir istek alındığı zaman, blob hizmeti tarafından oluşturulan *404 - Bulunamadı* hatası isteği Hata belge **yoluna**yönlendirir. *Index.html* blob döndürülür ve Blazor yönlendirici yükler ve yol işler.
 
-Daha fazla bilgi için bkz. [Azure Storage 'Da statik Web sitesi barındırma](/azure/storage/blobs/storage-blob-static-website).
+Daha fazla bilgi için [Azure Depolama'da barındırılmayan Statik web sitesine](/azure/storage/blobs/storage-blob-static-website)bakın.
 
 ### <a name="nginx"></a>Nginx
 
-Aşağıdaki *NGINX. conf* dosyası, NGINX 'in, disk üzerinde karşılık gelen bir dosyayı bulamadığı her seferinde *index. html* dosyasını göndermek üzere nasıl yapılandırılacağını gösterecek şekilde basitleştirilmiştir.
+Aşağıdaki *nginx.conf* dosyası, diskte karşılık gelen bir dosya bulamadığında *index.html* dosyasını göndermek için Nginx'in nasıl yapılandırılacağı gösterilebilir.
 
 ```
 events { }
@@ -175,13 +191,13 @@ http {
 }
 ```
 
-Üretim NGINX web sunucusu yapılandırması hakkında daha fazla bilgi için bkz. [NGINX Plus ve NGINX yapılandırma dosyaları oluşturma](https://docs.nginx.com/nginx/admin-guide/basic-functionality/managing-configuration-files/).
+Nginx web sunucusu yapılandırması hakkında daha fazla bilgi için [NGINX Plus ve NGINX Configuration Files oluşturma](https://docs.nginx.com/nginx/admin-guide/basic-functionality/managing-configuration-files/)bilgisine bakın.
 
-### <a name="nginx-in-docker"></a>Docker 'da NGINX
+### <a name="nginx-in-docker"></a>Docker içinde Nginx
 
-Docker 'da NGINX kullanarak Blazor barındırmak için Dockerfile 'ı alp tabanlı NGINX görüntüsünü kullanacak şekilde ayarlayın. Dockerfile dosyasını, *NGINX. config* dosyasını kapsayıcıya kopyalamak için güncelleştirin.
+Nginx kullanarak Docker'da barındırmak Blazor için, Alp tabanlı Nginx görüntüsünü kullanmak üzere Dockerfile'ı kurun. *Nginx.config* dosyasını kapsayıcıya kopyalamak için Dockerdosyasını güncelleştirin.
 
-Aşağıdaki örnekte gösterildiği gibi Dockerfile dosyasına bir satır ekleyin:
+Aşağıdaki örnekte gösterildiği gibi Dockerfile'a bir satır ekleyin:
 
 ```dockerfile
 FROM nginx:alpine
@@ -191,9 +207,9 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 ### <a name="apache"></a>Apache
 
-CentOS 7 veya üzeri bir Blazor WebAssembly uygulaması dağıtmak için:
+Bir Blazor WebAssembly uygulamasını CentOS 7 veya sonraki lere dağıtmak için:
 
-1. Apache yapılandırma dosyasını oluşturun. Aşağıdaki örnek basitleştirilmiş bir yapılandırma dosyasıdır (*blazorapp. config*):
+1. Apache yapılandırma dosyasını oluşturun. Aşağıdaki örnek basitleştirilmiş bir yapılandırma dosyasıdır (*blazorapp.config):*
 
    ```
    <VirtualHost *:80>
@@ -229,41 +245,41 @@ CentOS 7 veya üzeri bir Blazor WebAssembly uygulaması dağıtmak için:
    </VirtualHost>
    ```
 
-1. Apache yapılandırma dosyasını, CentOS 7 ' de varsayılan Apache yapılandırma dizini olan `/etc/httpd/conf.d/` dizinine yerleştirin.
+1. Apache yapılandırma dosyasını `/etc/httpd/conf.d/` CentOS 7'deki varsayılan Apache yapılandırma dizini olan dizine yerleştirin.
 
-1. Uygulamanın dosyalarını `/var/www/blazorapp` dizinine yerleştirin (yapılandırma dosyasına `DocumentRoot` için belirtilen konum).
+1. Uygulamanın dosyalarını `/var/www/blazorapp` dizine (yapılandırma `DocumentRoot` dosyasında belirtilen konum) yerleştirin.
 
 1. Apache hizmetini yeniden başlatın.
 
-Daha fazla bilgi için bkz. [mod_mime](https://httpd.apache.org/docs/2.4/mod/mod_mime.html) ve [mod_deflate](https://httpd.apache.org/docs/current/mod/mod_deflate.html).
+Daha fazla bilgi için [mod_mime](https://httpd.apache.org/docs/2.4/mod/mod_mime.html) ve [mod_deflate](https://httpd.apache.org/docs/current/mod/mod_deflate.html)bakın.
 
-### <a name="github-pages"></a>GitHub sayfaları
+### <a name="github-pages"></a>GitHub Sayfaları
 
-URL yeniden işlemesini işlemek için, isteği *index. html* sayfasına yönlendirmeyi işleyen bir betiği olan bir *404. html* dosyası ekleyin. Topluluk tarafından sunulan örnek bir uygulama için bkz. [GitHub sayfaları Için tek sayfalı uygulamalar](https://spa-github-pages.rafrex.com/) ([GitHub üzerinde rafrex/Spa-GitHub-Pages](https://github.com/rafrex/spa-github-pages#readme)). Topluluk yaklaşımını kullanan bir örnek, GitHub ([canlı site](https://blazor-demo.github.io/)) [üzerinde blazor-demo/blazor-demo. GitHub. IO](https://github.com/blazor-demo/blazor-demo.github.io) adresinde görülebilir.
+URL yeniden yazma işlemlerini işlemek için, isteği *index.html* sayfasına yönlendirmeyi işleyen bir komut dosyası içeren *bir 404.html* dosyası ekleyin. Topluluk tarafından sağlanan örnek bir uygulama [için, GitHub Sayfaları için Tek Sayfa Uygulamaları](https://spa-github-pages.rafrex.com/) [(GitHub'daki rafrex/spa-github sayfaları)](https://github.com/rafrex/spa-github-pages#readme)sayfasına bakın. Topluluk yaklaşımını kullanan bir örnek [github'daki blazor-demo/blazor-demo.github.io](https://github.com/blazor-demo/blazor-demo.github.io) adresinde görülebilir ([canlı site).](https://blazor-demo.github.io/)
 
-Bir kuruluş sitesi yerine bir proje sitesi kullanırken, *index. html*' de `<base>` etiketini ekleyin veya güncelleştirin. `href` öznitelik değerini, sondaki eğik çizgiyle (örneğin, `my-repository/`) GitHub depo adına ayarlayın.
+Kuruluş sitesi yerine proje sitesi kullanırken *index.html*etiketini `<base>` ekleyin veya güncelleştirin. `href` Öznitelik değerini GitHub deposu adına sondalı bir eğik çizgiyle `my-repository/`ayarlama (örneğin, .
 
 ## <a name="host-configuration-values"></a>Ana bilgisayar yapılandırma değerleri
 
-[Blazor WebAssembly Apps](xref:blazor/hosting-models#blazor-webassembly) , geliştirme ortamındaki çalışma zamanında aşağıdaki ana bilgisayar yapılandırma değerlerini komut satırı bağımsız değişkenleri olarak kabul edebilir.
+WebAssembly uygulamaları, geliştirme ortamında çalışma zamanında aşağıdaki ana bilgisayar yapılandırma değerlerini komut satırı bağımsız değişkenleri olarak kabul edebilir. [ Blazor ](xref:blazor/hosting-models#blazor-webassembly)
 
 ### <a name="content-root"></a>İçerik kökü
 
-`--contentroot` bağımsız değişkeni, uygulamanın içerik dosyalarını ([içerik kökü](xref:fundamentals/index#content-root)) içeren dizinin mutlak yolunu ayarlar. Aşağıdaki örneklerde, uygulamanın içerik kök yolu `/content-root-path`.
+Bağımsız `--contentroot` değişken, uygulamanın içerik dosyalarını[(içerik kökü)](xref:fundamentals/index#content-root)içeren dizin için mutlak yolu ayarlar. Aşağıdaki örneklerde, `/content-root-path` uygulamanın içerik kökü yolu verilmiştir.
 
-* Uygulamayı bir komut isteminde yerel olarak çalıştırırken bağımsız değişkenini geçirin. Uygulamanın dizininden şunu yürütün:
+* Uygulamayı bir komut istemiyle yerel olarak çalıştırırken bağımsız değişkeni geçirin. Uygulamanın dizininden çalıştırın:
 
   ```dotnetcli
   dotnet run --contentroot=/content-root-path
   ```
 
-* **IIS Express** profilindeki uygulamanın *launchsettings. JSON* dosyasına bir giriş ekleyin. Bu ayar, uygulama Visual Studio hata ayıklayıcıyla ve `dotnet run`ile bir komut isteminden çalıştırıldığında kullanılır.
+* **Uygulamanın iIS Express** profilindeki *launchSettings.json* dosyasına bir giriş ekleyin. Bu ayar, uygulama Visual Studio Debugger ile çalıştırıldığında ve `dotnet run`bir komut isteminden kullanılır.
 
   ```json
   "commandLineArgs": "--contentroot=/content-root-path"
   ```
 
-* Visual Studio 'da, **özellikler** > **hata ayıklama** > **uygulama bağımsız değişkenleri**' nde bağımsız değişkeni belirtin. Visual Studio özellik sayfasında bağımsız değişkeni ayarlama, bağımsız değişkenini *Launchsettings. JSON* dosyasına ekler.
+* Visual Studio'da, **Özellikler** > **Hata Ayıklama** > Uygulaması bağımsız**değişkenindeki**bağımsız değişkeni belirtin. Visual Studio özellik sayfasındaki bağımsız değişkeni ayarlamak, bağımsız değişkeni *launchSettings.json* dosyasına ekler.
 
   ```console
   --contentroot=/content-root-path
@@ -271,24 +287,24 @@ Bir kuruluş sitesi yerine bir proje sitesi kullanırken, *index. html*' de `<ba
 
 ### <a name="path-base"></a>Yol tabanı
 
-`--pathbase` bağımsız değişkeni, kök olmayan göreli URL yoluyla yerel olarak çalıştırılan bir uygulamanın uygulama temel yolunu ayarlar (`<base>` etiketi `href`, hazırlama ve üretim için `/` dışında bir yola ayarlanır). Aşağıdaki örneklerde, uygulamanın yol tabanı `/relative-URL-path`. Daha fazla bilgi için bkz. [uygulama temel yolu](xref:host-and-deploy/blazor/index#app-base-path).
+Bağımsız `--pathbase` değişken, kök olmayan göreli URL yolu ile yerel olarak çalışan `<base>` `href` bir uygulama için uygulama `/` temel yolunu ayarlar (etiket, hazırlama ve üretim dışında bir yola ayarlanır). Aşağıdaki örneklerde, `/relative-URL-path` uygulamanın yol tabanı dır. Daha fazla bilgi için [Uygulama tabanı yoluna](xref:host-and-deploy/blazor/index#app-base-path)bakın.
 
 > [!IMPORTANT]
-> `<base>` etiketinin `href` olarak belirtilen yolun aksine, `--pathbase` bağımsız değişken değeri geçirilirken sondaki eğik çizgi (`/`) eklemeyin. Uygulama temel yolu, `<base>` etiketinde `<base href="/CoolApp/">` (sondaki eğik çizgi içeriyorsa) olarak sağlanmışsa, komut satırı bağımsız değişken değerini `--pathbase=/CoolApp` (sonunda eğik çizgi yok) olarak geçirin.
+> Etikete sağlanan yolun aksine, bağımsız değişken değerini geçerken`/`bir çizgi () eklemeyin. `--pathbase` `href` `<base>` Uygulama temel yolu `<base>` etikette (sondaki `<base href="/CoolApp/">` eğik çizgi içerir) sağlanırsa, `--pathbase=/CoolApp` komut satırı bağımsız değişken değerini (izleme çizgisini yok) olarak geçirin.
 
-* Uygulamayı bir komut isteminde yerel olarak çalıştırırken bağımsız değişkenini geçirin. Uygulamanın dizininden şunu yürütün:
+* Uygulamayı bir komut istemiyle yerel olarak çalıştırırken bağımsız değişkeni geçirin. Uygulamanın dizininden çalıştırın:
 
   ```dotnetcli
   dotnet run --pathbase=/relative-URL-path
   ```
 
-* **IIS Express** profilindeki uygulamanın *launchsettings. JSON* dosyasına bir giriş ekleyin. Bu ayar, uygulamayı Visual Studio hata ayıklayıcıyla çalıştırırken ve `dotnet run`ile bir komut isteminden kullanılır.
+* **Uygulamanın iIS Express** profilindeki *launchSettings.json* dosyasına bir giriş ekleyin. Bu ayar, Visual Studio Debugger ile uygulamayı çalıştırırken ve `dotnet run`bir komut isteminden kullanılır.
 
   ```json
   "commandLineArgs": "--pathbase=/relative-URL-path"
   ```
 
-* Visual Studio 'da, **özellikler** > **hata ayıklama** > **uygulama bağımsız değişkenleri**' nde bağımsız değişkeni belirtin. Visual Studio özellik sayfasında bağımsız değişkeni ayarlama, bağımsız değişkenini *Launchsettings. JSON* dosyasına ekler.
+* Visual Studio'da, **Özellikler** > **Hata Ayıklama** > Uygulaması bağımsız**değişkenindeki**bağımsız değişkeni belirtin. Visual Studio özellik sayfasındaki bağımsız değişkeni ayarlamak, bağımsız değişkeni *launchSettings.json* dosyasına ekler.
 
   ```console
   --pathbase=/relative-URL-path
@@ -296,21 +312,21 @@ Bir kuruluş sitesi yerine bir proje sitesi kullanırken, *index. html*' de `<ba
 
 ### <a name="urls"></a>URL’ler
 
-`--urls` bağımsız değişkeni, istekler için dinlemek üzere bağlantı noktaları ve protokollerle IP adreslerini veya konak adreslerini ayarlar.
+Bağımsız `--urls` değişken, istekleri dinleyecek bağlantı noktaları ve protokolleri olan IP adreslerini veya ana bilgisayar adreslerini ayarlar.
 
-* Uygulamayı bir komut isteminde yerel olarak çalıştırırken bağımsız değişkenini geçirin. Uygulamanın dizininden şunu yürütün:
+* Uygulamayı bir komut istemiyle yerel olarak çalıştırırken bağımsız değişkeni geçirin. Uygulamanın dizininden çalıştırın:
 
   ```dotnetcli
   dotnet run --urls=http://127.0.0.1:0
   ```
 
-* **IIS Express** profilindeki uygulamanın *launchsettings. JSON* dosyasına bir giriş ekleyin. Bu ayar, uygulamayı Visual Studio hata ayıklayıcıyla çalıştırırken ve `dotnet run`ile bir komut isteminden kullanılır.
+* **Uygulamanın iIS Express** profilindeki *launchSettings.json* dosyasına bir giriş ekleyin. Bu ayar, Visual Studio Debugger ile uygulamayı çalıştırırken ve `dotnet run`bir komut isteminden kullanılır.
 
   ```json
   "commandLineArgs": "--urls=http://127.0.0.1:0"
   ```
 
-* Visual Studio 'da, **özellikler** > **hata ayıklama** > **uygulama bağımsız değişkenleri**' nde bağımsız değişkeni belirtin. Visual Studio özellik sayfasında bağımsız değişkeni ayarlama, bağımsız değişkenini *Launchsettings. JSON* dosyasına ekler.
+* Visual Studio'da, **Özellikler** > **Hata Ayıklama** > Uygulaması bağımsız**değişkenindeki**bağımsız değişkeni belirtin. Visual Studio özellik sayfasındaki bağımsız değişkeni ayarlamak, bağımsız değişkeni *launchSettings.json* dosyasına ekler.
 
   ```console
   --urls=http://127.0.0.1:0
@@ -318,4 +334,4 @@ Bir kuruluş sitesi yerine bir proje sitesi kullanırken, *index. html*' de `<ba
 
 ## <a name="configure-the-linker"></a>Bağlayıcıyı yapılandırma
 
-Blazor, çıkış derlemelerinden gereksiz Il 'yi kaldırmak için her sürüm derlemesinde ara dil (IL) bağlamayı gerçekleştirir. Daha fazla bilgi için bkz. <xref:host-and-deploy/blazor/configure-linker>.
+BlazorÇıktı derlemelerinden gereksiz IL'yi kaldırmak için her Sürüm yapısına ara dil (IL) bağlama gerçekleştirir. Daha fazla bilgi için bkz. <xref:host-and-deploy/blazor/configure-linker>.

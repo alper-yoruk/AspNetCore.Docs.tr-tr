@@ -1,3 +1,3 @@
-Wwwroot 'dan Kopyala.. /cu/veya yeni bir Razor Pages projesinden.
+Wwwroot'u kopyala. /cu/ veya yeni bir Razor Pages projesinden.
 
 `dotnet ef database update` öğesini çalıştırın

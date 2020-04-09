@@ -1,1 +1,1 @@
-Bunu Ingilizce dışındaki bir dilde okuyorsanız, kod açıklamalarını yerel dilinizde görmek istiyorsanız bu [GitHub tartışma sorununu](https://github.com/aspnet/AspNetCore.Docs/issues/16455) bize gönderin.
+Bunu İngilizce dışında bir dilde okuyorsanız, kod yorumlarını ana dilinizde görmek istiyorsanız bu [GitHub tartışma sayısında](https://github.com/aspnet/AspNetCore.Docs/issues/16455) bize bildirin.

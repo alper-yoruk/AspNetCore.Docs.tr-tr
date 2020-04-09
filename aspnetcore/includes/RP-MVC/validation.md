@@ -2,27 +2,27 @@
 
 ## <a name="add-validation-rules-to-the-movie-model"></a>Film modeline doğrulama kuralları ekleme
 
-Dataaçıklamalarda ad alanı, bir sınıfa veya özelliğe bildirimli olarak uygulanan bir yerleşik doğrulama öznitelikleri kümesi sağlar. Veri açıklamaları, biçimlendirme ile yardım eden `DataType` gibi biçimlendirme özniteliklerini de içerir ve herhangi bir doğrulama sağlamaz.
+DataAnnotations ad alanı, bir sınıfa veya özelliğe bildirimsel olarak uygulanan yerleşik doğrulama öznitelikleri kümesi sağlar. DataAnnotations da biçimlendirme `DataType` ile yardımcı gibi biçimlendirme öznitelikleri içerir ve herhangi bir doğrulama sağlamaz.
 
-Yerleşik `Required`, `StringLength`, `RegularExpression`ve `Range` doğrulama özniteliklerinden yararlanmak için `Movie` sınıfını güncelleştirin.
+Yerleşik `Movie` `Required`, , `StringLength`ve `RegularExpression` `Range` doğrulama özniteliklerinden yararlanmak için sınıfı güncelleştirin.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Models/MovieDateRatingDA.cs?name=snippet1)]
 
-Doğrulama öznitelikleri, uygulanan model özellikleri üzerinde zorlamak istediğiniz davranışı belirtir:
+Doğrulama öznitelikleri, uygulandıkları model özellikleriüzerinde zorlamak istediğiniz davranışı belirtir:
 
-* `Required` ve `MinimumLength` öznitelikleri bir özelliğin bir değere sahip olması gerektiğini belirtir; Ancak hiçbir şey, kullanıcının bu doğrulamayı karşılamak için boşluk girmesini engeller.
-* `RegularExpression` özniteliği, hangi karakterlerin giriş yapabileceğini sınırlamak için kullanılır. Yukarıdaki kodda, "tarz":
+* Ve `Required` `MinimumLength` öznitelikleri bir özelliğin bir değeri olması gerektiğini gösterir; ancak hiçbir şey, kullanıcının bu doğrulamayı karşılamak için beyaz alan girmesini engellemez.
+* Öznitelik, `RegularExpression` hangi karakterlerin giriş olabileceğini sınırlamak için kullanılır. Önceki kodda, "Tür":
 
-  * Yalnızca harfler kullanılmalıdır.
-  * İlk harfin büyük harfle olması gerekir. Boşluk, sayı ve özel karakterlere izin verilmez.
+  * Sadece harfleri kullanmalısınız.
+  * İlk harfin büyük harf olması gerekir. Beyaz boşluk, sayılar ve özel karakterlere izin verilmez.
 
-* `RegularExpression` "derecelendirmesi":
+* `RegularExpression` "Derecelendirme":
 
   * İlk karakterin büyük harf olmasını gerektirir.
-  * Sonraki boşlukların içindeki özel karakter ve sayılara izin verir. "PG-13" bir derecelendirme için geçerlidir, ancak bir "tarz" için başarısız olur.
+  * Sonraki alanlarda özel karakterlere ve sayılara izin verir. "PG-13" bir derecelendirme için geçerlidir, ancak bir "Tür" için başarısız olur.
 
-* `Range` özniteliği bir değeri belirtilen bir Aralık içinde kısıtlar.
-* `StringLength` özniteliği, bir dize özelliğinin en büyük uzunluğunu ve isteğe bağlı olarak en düşük uzunluğunu ayarlamanıza olanak sağlar.
-* Değer türleri (örneğin `decimal`, `int`, `float`, `DateTime`), doğal olarak gereklidir ve `[Required]` özniteliğine gerek kalmaz.
+* `Range` özniteliği, bir değeri belirtilen bir aralık içinde kısıtlar.
+* Öznitelik, `StringLength` dize özelliğinin en büyük uzunluğunu ve isteğe bağlı olarak en az uzunluğunu ayarlamanızı sağlar.
+* Değer türleri (, `int` `float`, `DateTime`, , ) doğal `[Required]` `decimal`olarak gereklidir ve öznitelik gerekmez.
 
-Doğrulama kurallarının otomatik olarak uygulanmasını ASP.NET Core uygulamanızın daha sağlam olmasına yardımcı olur. Ayrıca, bir şeyi doğrulamayı unutmanızı ve veritabanına yanlışlıkla veri vermemesini de sağlar.
+doğrulama kurallarının ASP.NET Core tarafından otomatik olarak uygulanması, uygulamanızın daha sağlam olmasına yardımcı olur. Ayrıca, bir şeyi doğrulamayı ve yanlışlıkla kötü verilerin veritabanına girmesine izin vermeyi unutmamanızı sağlar.

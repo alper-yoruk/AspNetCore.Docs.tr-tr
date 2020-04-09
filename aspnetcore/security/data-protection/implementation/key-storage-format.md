@@ -1,26 +1,29 @@
 ---
-title: ASP.NET Core 'de anahtar depolama biçimi
+title: ASP.NET Core'da anahtar depolama biçimi
 author: rick-anderson
-description: ASP.NET Core veri koruma anahtarı depolama biçiminin uygulama ayrıntılarını öğrenin.
+description: ASP.NET Çekirdek Veri Koruması anahtar depolama biçiminin uygulama ayrıntılarını öğrenin.
 ms.author: riande
-ms.date: 10/14/2016
+ms.date: 04/08/2020
 uid: security/data-protection/implementation/key-storage-format
-ms.openlocfilehash: 81df124f3dd0cadf8fd895ab55f66eec6415705f
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 3072c673791b589027a910b80eaba52052eb9311
+ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78667757"
+ms.lasthandoff: 04/08/2020
+ms.locfileid: "80976943"
 ---
-# <a name="key-storage-format-in-aspnet-core"></a>ASP.NET Core 'de anahtar depolama biçimi
+# <a name="key-storage-format-in-aspnet-core"></a>ASP.NET Core'da anahtar depolama biçimi
 
 <a name="data-protection-implementation-key-storage-format"></a>
 
-Nesneler, XML gösteriminde Rest olarak depolanır. Anahtar depolama için varsayılan dizin%LOCALAPPDATA%\ASP.NET\DataProtection-Keys\. ' dir
+Nesneler XML gösteriminde istirahatte depolanır. Anahtar depolama için varsayılan dizin:
 
-## <a name="the-key-element"></a>\<Key > öğesi
+* Windows: *%LOCALAPPDATA%\ASP.NET\DataProtection-Keys\*
+* macOS / Linux: *$HOME/.aspnet/DataProtection-Keys*
 
-Anahtarlar, anahtar deposundaki üst düzey nesneler olarak mevcuttur. Kural anahtarlarına göre anahtar adı **-{Guid}. xml**, burada {GUID} anahtar kimliğidir. Bu tür dosyalar tek bir anahtar içerir. Dosya biçimi aşağıdaki gibidir.
+## <a name="the-key-element"></a>Anahtar \<> öğesi
+
+Anahtarlar, anahtar deposundaki üst düzey nesneler olarak bulunur. Kural kuralları tuşlarına göre dosya adı **tuşu-{guid}.xml**, {guid} tuşunun kimliğidir. Bu tür her dosya tek bir anahtar içerir. Dosyanın biçimi aşağıdaki gibidir.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -43,35 +46,35 @@ Anahtarlar, anahtar deposundaki üst düzey nesneler olarak mevcuttur. Kural ana
 </key>
 ```
 
-\<Key > öğesi aşağıdaki öznitelikleri ve alt öğeleri içerir:
+Anahtar \<> öğesi aşağıdaki öznitelikleri ve alt öğeleri içerir:
 
-* Anahtar kimliği. Bu değer yetkili olarak değerlendirilir; dosya adı, insan okunabilirlik için yalnızca bir nicsan.
+* Anahtar kimliği. Bu değer yetkili olarak kabul edilir; dosya adı sadece insan okunabilirlik için bir incelik olduğunu.
 
-* Şu anda 1 ' de düzeltilen \<Key > öğesinin sürümü.
+* \<Anahtar> öğesinin sürümü, şu anda 1 sabit.
 
-* Anahtarın oluşturulma, etkinleştirme ve sona erme tarihleri.
+* Anahtarın oluşturulması, etkinleştirme ve son kullanma tarihleri.
 
-* Bu anahtarda yer alan kimliği doğrulanmış şifreleme uygulamasıyla ilgili bilgileri içeren bir \<tanımlayıcısı > öğesi.
+* Bu \<anahtar içinde bulunan kimlik doğrulama şifreleme uygulaması hakkında bilgi içeren bir tanımlayıcı> öğesi.
 
-Yukarıdaki örnekte, anahtarın kimliği {80732141-EC8F-4b80-af9c-c4d2d1ff8901}, 19 Mart 2015 ' de oluşturulmuştur ve etkinleştirilir ve bu süre için gün 90 ömrü vardır. (Bazen etkinleştirme tarihi, bu örnekte olduğu gibi, oluşturma tarihinden biraz önce olabilir. Bunun nedeni, API 'Lerin çalıştığı ve çok zararsız olan bir NBT yöntemidir.)
+Yukarıdaki örnekte, anahtarın kimliği {80732141-ec8f-4b80-af9c-c4d2d1ff8901}, 19 Mart 2015 tarihinde oluşturuldu ve etkinleştirildi ve 90 günlük bir ömrü vardır. (Bazen etkinleştirme tarihi bu örnekte olduğu gibi oluşturma tarihinden biraz önce olabilir. Bunun nedeni, API'lerin nasıl çalıştığı ve uygulamada zararsız olduğu bir nit'dir.)
 
-## <a name="the-descriptor-element"></a>\<Descriptor > öğesi
+## <a name="the-descriptor-element"></a>\<Tanımlayıcı> öğesi
 
-Dış \<tanımlayıcısı > öğesi, ıauthenticatedencryptordescriptordeserializer uygulayan bir türün derleme nitelikli adı olan bir deserializerType özniteliği içerir. Bu tür, iç \<tanımlayıcı > öğesini okumaktan ve içinde yer alan bilgilerin ayrıştırılmasından sorumludur.
+Dış \<tanımlayıcı> öğesi iAuthenticatedEncryptorDescriptizer uygulayan bir türün montaj nitelikli adı olan bir öznitelik deserializerType içerir. Bu tür iç \<tanımlayıcı> öğesi okuma ve içerdiği bilgileri ayrıştırma sorumludur.
 
-\<Descriptor > öğesinin belirli biçimi, anahtarla kapsüllenmiş kimliği doğrulanmış Şifreleyici uygulamasına bağlıdır ve her bir seri hale getirici türü bunun için biraz farklı bir biçim bekler. Genellikle, bu öğe algoritmik bilgilerini (adlar, türler, OID 'ler veya benzer) ve gizli anahtar malzemesini içerir. Yukarıdaki örnekte, tanımlayıcı bu anahtarın AES-256-CBC şifreleme + HMACSHA256 doğrulamasını kaydırılacağını belirtir.
+\<Tanımlayıcı> öğesinin belirli biçimi, anahtar tarafından kapsüllenen kimlik doğrulamaşifreleme uygulamasına bağlıdır ve her deserializer türü bunun için biraz farklı bir biçim bekler. Genel olarak, ancak, bu öğe algoritmik bilgi (adlar, türleri, OSB veya benzeri) ve gizli anahtar malzeme içerir. Yukarıdaki örnekte, tanımlayıcı bu anahtarın AES-256-CBC şifreleme + HMACSHA256 doğrulaması sarar belirtir.
 
-## <a name="the-encryptedsecret-element"></a>\<encryptedSecret > öğesi
+## <a name="the-encryptedsecret-element"></a>ŞifreliGizli \<> öğesi
 
-Gizli anahtar malzemesinin şifreli biçimini içeren **&lt;encryptedsecret&gt;** öğesi [, bekleyen gizli dizi şifrelemesi etkinse](xref:security/data-protection/implementation/key-encryption-at-rest)bulunabilir. Öznitelik `decryptorType`, [ıxmldecryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmldecryptor)uygulayan bir türün derleme nitelikli adıdır. Bu tür, Inner **&lt;encryptedKey&gt;** öğesini okumaktan ve özgün düz metin kurtarmak için şifresini çözmekten sorumludur.
+Gizli anahtar materyalinin şifreli biçimini içeren bir ** &lt;şifreli Gizli&gt; ** [öğe, sırlara karşı şifreleme etkinleştirilmişse](xref:security/data-protection/implementation/key-encryption-at-rest)mevcut olabilir. Öznitelik `decryptorType` [IXmlDecryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmldecryptor)uygulayan bir türün montaj nitelikli adıdır. Bu tür, iç ** &lt;şifreli Anahtar&gt; ** öğesini okumaktan ve özgün düz metni kurtarmak için şifresini çözmekten sorumludur.
 
-`<descriptor>`olduğu gibi, `<encryptedSecret>` öğesinin belirli biçimi kullanımda olan Rest şifreleme mekanizmasına bağlıdır. Yukarıdaki örnekte, ana anahtar açıklama başına Windows DPAPI kullanılarak şifrelenir.
+Olduğu `<descriptor>`gibi, öğenin `<encryptedSecret>` belirli biçimi kullanılan istirahat şifreleme mekanizmasına bağlıdır. Yukarıdaki örnekte, ana anahtar yorum başına Windows DPAPI kullanılarak şifrelenir.
 
-## <a name="the-revocation-element"></a>\<iptal > öğesi
+## <a name="the-revocation-element"></a>İptal \<> öğesi
 
-İptal edilecek öğeler, anahtar deposundaki en üst düzey nesneler olarak mevcuttur. Kural iptalinde, dosya adı **iptali-{timestamp}. xml** (belirli bir tarihten önceki tüm anahtarları iptal etmek için) veya **iptal-{GUID}. xml** (belirli bir anahtarı iptal etmek için). Her dosya tek bir \<iptal > öğesi içerir.
+İptaller, anahtar deposundaki üst düzey nesneler olarak bulunur. Sözleşme iptalleri tarafından dosya adı **iptali-{timestamp}.xml** (belirli bir tarihten önce tüm anahtarları iptal etmek için) veya **iptal-{guid}.xml** (belirli bir anahtarı iptal etmek için). Her dosya tek \<bir iptal> öğesi içerir.
 
-Tek tek anahtarların iptal edilmesi için dosya içerikleri aşağıdaki gibi olacaktır.
+Tek tek anahtarların iptali için dosya içeriği aşağıdaki gibi olacaktır.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -82,7 +85,7 @@ Tek tek anahtarların iptal edilmesi için dosya içerikleri aşağıdaki gibi o
 </revocation>
 ```
 
-Bu durumda, yalnızca belirtilen anahtar iptal edilir. Anahtar kimliği "*" ise, ancak aşağıdaki örnekte olduğu gibi, oluşturma tarihi belirtilen iptal tarihi 'nden önce olan tüm anahtarlar iptal edilir.
+Bu durumda, yalnızca belirtilen anahtar iptal edilir. Ancak, anahtar kimliği "*" ise, aşağıdaki örnekte olduğu gibi, oluşturma tarihi belirtilen iptal tarihinden önce olan tüm anahtarlar iptal edilir.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -94,4 +97,4 @@ Bu durumda, yalnızca belirtilen anahtar iptal edilir. Anahtar kimliği "*" ise,
 </revocation>
 ```
 
-\<neden > öğesi sistem tarafından hiçbir şekilde okunamaz. Yalnızca bir iptal için okunabilir bir neden depolamak için kullanışlı bir yerdir.
+> \<öğenin nedeni sistem tarafından asla okunmaz. Bu sadece iptal için insan tarafından okunabilir bir neden saklamak için uygun bir yerdir.

@@ -1,56 +1,56 @@
 ---
 title: dotnet-grpc ile Protobuf başvurularını yönetme
 author: juntaoluo
-description: DotNet-GRPC küresel aracıyla prototip başvuruları ekleme, güncelleştirme, kaldırma ve listeleme hakkında bilgi edinin.
+description: Dotnet-grpc global aracıyla Protobuf referanslarını ekleme, güncelleme, kaldırma ve listeleme hakkında bilgi edinin.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 10/17/2019
 uid: grpc/dotnet-grpc
 ms.openlocfilehash: 994597c854a95bb33de1686ab025cb3744cf6845
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78667337"
 ---
 # <a name="manage-protobuf-references-with-dotnet-grpc"></a>dotnet-grpc ile Protobuf başvurularını yönetme
 
-[John Luo](https://github.com/juntaoluo) tarafından
+Yazar: [John Luo](https://github.com/juntaoluo)
 
-`dotnet-grpc`, bir .NET gRPC projesi içindeki [prototipsiz ( *. proto*)](xref:grpc/basics#proto-file) başvuruların yönetilmesine yönelik bir .NET Core küresel aracıdır. Araç, prototipleme başvurularını eklemek, yenilemek, kaldırmak ve listelemek için kullanılabilir.
+`dotnet-grpc`bir .NET gRPC projesi içinde [Protobuf (*.proto*)](xref:grpc/basics#proto-file) referanslarını yönetmek için bir .NET Core Global Aracıdır. Araç, Protobuf başvuruları eklemek, yenilemek, kaldırmak ve listelemek için kullanılabilir.
 
 ## <a name="installation"></a>Yükleme
 
-`dotnet-grpc` [.NET Core küresel aracı](/dotnet/core/tools/global-tools)'nı yüklemek için şu komutu çalıştırın:
+`dotnet-grpc` [.NET Core Global Aracı'nı](/dotnet/core/tools/global-tools)yüklemek için aşağıdaki komutu çalıştırın:
 
 ```dotnetcli
 dotnet tool install -g dotnet-grpc
 ```
 
-## <a name="add-references"></a>Başvuru Ekle
+## <a name="add-references"></a>Referans ekleme
 
-`dotnet-grpc`, *. csproj* dosyasına `<Protobuf />` öğeler olarak prototip başvuruları eklemek için kullanılabilir:
+`dotnet-grpc`*.csproj* dosyasına öğe `<Protobuf />` olarak Protobuf başvuruları eklemek için kullanılabilir:
 
 ```xml
 <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
 ```
 
-Prototip başvuruları, C# istemci ve/veya sunucu varlıklarını oluşturmak için kullanılır. `dotnet-grpc` araç şunları yapabilir:
+Protobuf başvuruları C# istemcisi ve/veya sunucu varlıklarını oluşturmak için kullanılır. `dotnet-grpc` Araç şunları yapabilir:
 
-* Diskteki yerel dosyalardan Prototipsiz başvuru oluştur.
-* Bir URL ile belirtilen uzak dosyadan Protobir başvuru oluştur.
-* Projeye doğru gRPC paket bağımlılıklarının eklendiğinden emin olun.
+* Diskteki yerel dosyalardan bir Protobuf başvurusu oluşturun.
+* URL tarafından belirtilen uzak bir dosyadan bir Protobuf başvurusu oluşturun.
+* Doğru gRPC paket bağımlılıklarının projeye eklenmediğinden emin olun.
 
-Örneğin, `Grpc.AspNetCore` paketi bir Web uygulamasına eklenir. `Grpc.AspNetCore` gRPC sunucusu ve istemci kitaplıklarını ve araç desteğini içerir. Alternatif olarak, yalnızca gRPC istemci kitaplıklarını ve araç desteğini içeren `Grpc.Net.Client`, `Grpc.Tools` ve `Google.Protobuf` paketleri konsol uygulamasına eklenir.
+Örneğin, `Grpc.AspNetCore` paket bir web uygulamasına eklenir. `Grpc.AspNetCore`gRPC sunucusu ve istemci kitaplıkları ve araç desteği içerir. Alternatif olarak, `Grpc.Net.Client` `Grpc.Tools` yalnızca `Google.Protobuf` gRPC istemci kitaplıkları ve araç desteği içeren , ve paketler konsol uygulamasına eklenir.
 
-### <a name="add-file"></a>Dosya Ekle
+### <a name="add-file"></a>Dosya ekle
 
-`add-file` komutu, yerel dosyaları prototip başvuruları olarak diske eklemek için kullanılır. Belirtilen dosya yolları:
+Komut, `add-file` Protobuf başvuruları olarak diske yerel dosyaları eklemek için kullanılır. Sağlanan dosya yolları:
 
-* Geçerli dizin veya mutlak yollarla göreli olabilir.
-* , [Glob](https://wikipedia.org/wiki/Glob_(programming))model tabanlı dosya için joker karakterler içerebilir.
+* Geçerli dizin veya mutlak yollargöreli olabilir.
+* Desen tabanlı dosya [parlaması](https://wikipedia.org/wiki/Glob_(programming))için joker karakterler içerebilir.
 
-Herhangi bir dosya proje dizininin dışındaysa, dosyayı Visual Studio 'daki `Protos` klasörü altında göstermek için bir `Link` öğesi eklenir.
+Proje dizininin dışında herhangi bir `Link` dosya varsa, dosyayı Visual `Protos` Studio'daki klasörün altında görüntülemek için bir öğe eklenir.
 
 ### <a name="usage"></a>Kullanım
 
@@ -62,20 +62,20 @@ dotnet grpc add-file [options] <files>...
 
 | Bağımsız Değişken | Açıklama |
 |-|-|
-| files | Prototip dosyası başvuruları. Bunlar yerel prototipli dosyalar için glob 'nin bir yolu olabilir. |
+| files | Protobuf dosyası referansları. Bu yerel protobuf dosyaları için glob bir yol olabilir. |
 
 #### <a name="options"></a>Seçenekler
 
-| Short seçeneği | Long seçeneği | Açıklama |
+| Kısa seçenek | Uzun seçenek | Açıklama |
 |-|-|-|
-| -p | --Proje | Üzerinde çalışılacak proje dosyasının yolu. Bir dosya belirtilmemişse, komut geçerli dizinde bir arama yapar.
-| -s | --Hizmetler | Oluşturulması gereken gRPC Hizmetleri türü. `Default` belirtilirse, Web projeleri için `Both` ve `Client` Web dışı projeler için kullanılır. Kabul edilen değerler `Both`, `Client`, `Default`, `None`, `Server`.
-| -i | --ek-içeri aktarma-Dizin | Prototip dosyaları için içeri aktarmalar çözümlenirken kullanılacak ek dizinler. Bu, yolların noktalı virgülle ayrılmış listesidir.
-| | --erişim | Oluşturulan C# sınıflar için kullanılacak erişim değiştiricisi. Varsayılan değer: `Public`. Kabul edilen değerler `Internal` ve `Public`.
+| -p | --proje | Çalışacak proje dosyasına giden yol. Bir dosya belirtilmemişse, komut geçerli dizini arar.
+| -s | --hizmetler | Oluşturulması gereken gRPC hizmetlerinin türü. `Default` Belirtilirse, `Both` Web projeleri için `Client` kullanılır ve Web olmayan projeler için kullanılır. Kabul edilen `Both`değerler `Client` `Default`, `None` `Server`, , , .
+| -i | --ek-alma-dirs | Protobuf dosyaları için içeri aktarımları çözerken kullanılacak ek dizinler. Bu, yarım nokta nokta lı ayrılmış bir yol listesidir.
+| | --erişim | Oluşturulan C# sınıfları için kullanılacak erişim değiştirici. Varsayılan değer: `Public`. Kabul edilen `Internal` değerler `Public`ve .
 
 ### <a name="add-url"></a>URL ekle
 
-`add-url` komutu, bir kaynak URL tarafından belirtilen bir uzak dosyayı prototipde başvuru olarak eklemek için kullanılır. Uzak dosyanın nereye indirileceği belirtmek için bir dosya yolu belirtilmelidir. Dosya yolu, geçerli dizin veya mutlak bir yol ile ilişkili olabilir. Dosya yolu proje dizininin dışındaysa, dosyayı Visual Studio 'daki `Protos` sanal klasör altında göstermek için bir `Link` öğesi eklenir.
+Komut, `add-url` kaynak URL tarafından Protobuf başvurusu olarak belirtilen uzak bir dosya eklemek için kullanılır. Uzak dosyanın nerede indirilir belirtilmesi için bir dosya yolu sağlanmalıdır. Dosya yolu geçerli dizine veya mutlak bir yola göreolabilir. Dosya yolu proje dizininin dışındaysa, `Link` dosyayı Visual Studio'daki sanal `Protos` klasörün altında görüntülemek için bir öğe eklenir.
 
 ### <a name="usage"></a>Kullanım
 
@@ -87,24 +87,24 @@ dotnet-grpc add-url [options] <url>
 
 | Bağımsız Değişken | Açıklama |
 |-|-|
-| URL | Uzak protoarabellek dosyasının URL 'SI. |
+| url | Uzak bir protobuf dosyasının URL'si. |
 
 #### <a name="options"></a>Seçenekler
 
-| Short seçeneği | Long seçeneği | Açıklama |
+| Kısa seçenek | Uzun seçenek | Açıklama |
 |-|-|-|
-| -o | --output | Uzak protoarabellek dosyası için indirme yolunu belirtir. Bu gerekli bir seçenektir.
-| -p | --Proje | Üzerinde çalışılacak proje dosyasının yolu. Bir dosya belirtilmemişse, komut geçerli dizinde bir arama yapar.
-| -s | --Hizmetler | Oluşturulması gereken gRPC Hizmetleri türü. `Default` belirtilirse, Web projeleri için `Both` ve `Client` Web dışı projeler için kullanılır. Kabul edilen değerler `Both`, `Client`, `Default`, `None`, `Server`.
-| -i | --ek-içeri aktarma-Dizin | Prototip dosyaları için içeri aktarmalar çözümlenirken kullanılacak ek dizinler. Bu, yolların noktalı virgülle ayrılmış listesidir.
-| | --erişim | Oluşturulan C# sınıflar için kullanılacak erişim değiştiricisi. Varsayılan değer `Public`. Kabul edilen değerler `Internal` ve `Public`.
+| -o | --output | Uzaktan protobuf dosyasının indirme yolunu belirtir. Bu gerekli bir seçenektir.
+| -p | --proje | Çalışacak proje dosyasına giden yol. Bir dosya belirtilmemişse, komut geçerli dizini arar.
+| -s | --hizmetler | Oluşturulması gereken gRPC hizmetlerinin türü. `Default` Belirtilirse, `Both` Web projeleri için `Client` kullanılır ve Web olmayan projeler için kullanılır. Kabul edilen `Both`değerler `Client` `Default`, `None` `Server`, , , .
+| -i | --ek-alma-dirs | Protobuf dosyaları için içeri aktarımları çözerken kullanılacak ek dizinler. Bu, yarım nokta nokta lı ayrılmış bir yol listesidir.
+| | --erişim | Oluşturulan C# sınıfları için kullanılacak erişim değiştirici. Varsayılan değer. `Public` Kabul edilen `Internal` değerler `Public`ve .
 
 ## <a name="remove"></a>Kaldır
 
-`remove` komutu, *. csproj* dosyasından prototipsiz başvuruları kaldırmak için kullanılır. Komut bağımsız değişken olarak yol bağımsız değişkenlerini ve kaynak URL 'Lerini kabul eder. Araç:
+Komut, `remove` *.csproj* dosyasından Protobuf başvurularını kaldırmak için kullanılır. Komut, yol bağımsız değişkenlerini ve kaynak URL'lerini bağımsız değişken olarak kabul eder. Araç:
 
-* Yalnızca Prototipsiz başvuruyu kaldırır.
-* , İlk olarak uzak bir URL 'den indirilse bile, *. proto* dosyasını silmez.
+* Yalnızca Protobuf referansını kaldırır.
+* Uzak bir URL'den ilk olarak indirilmiş olsa bile *.proto* dosyasını silmez.
 
 ### <a name="usage"></a>Kullanım
 
@@ -116,22 +116,22 @@ dotnet-grpc remove [options] <references>...
 
 | Bağımsız Değişken | Açıklama |
 |-|-|
-| başvurular | Kaldırılacak prototip başvurularının URL 'Leri veya dosya yolları. |
+| başvurular | Kaldırılacak protobuf başvurularının URL'leri veya dosya yolları. |
 
 ### <a name="options"></a>Seçenekler
 
-| Short seçeneği | Long seçeneği | Açıklama |
+| Kısa seçenek | Uzun seçenek | Açıklama |
 |-|-|-|
-| -p | --Proje | Üzerinde çalışılacak proje dosyasının yolu. Bir dosya belirtilmemişse, komut geçerli dizinde bir arama yapar.
+| -p | --proje | Çalışacak proje dosyasına giden yol. Bir dosya belirtilmemişse, komut geçerli dizini arar.
 
 ## <a name="refresh"></a>Yenile
 
-`refresh` komutu, kaynak URL 'den en son içerikle uzak bir başvuruyu güncelleştirmek için kullanılır. Yalnızca indirme dosyası yolu ve kaynak URL 'SI, güncellenmek üzere olan başvuruyu belirtmek için kullanılabilir. Not:
+Komut, kaynak URL'deki `refresh` en son içerikle uzak bir başvuruyu güncelleştirmek için kullanılır. Hem karşıdan yükleme dosyası yolu hem de kaynak URL güncellenecek başvuruyu belirtmek için kullanılabilir. Not:
 
-* Dosya içeriğinin karmaları yerel dosyanın güncelleştirilip güncelleştirilmediğini belirleme ile karşılaştırılır.
-* Zaman damgası bilgisi karşılaştırılmaz.
+* Yerel dosyanın güncelleştirilip güncelleştirilmeyeceğini belirlemek için dosya içeriğinin işlenme leri karşılaştırılır.
+* Hiçbir zaman damgası bilgisi karşılaştırılmada.
 
-Bir güncelleştirme gerekiyorsa araç her zaman yerel dosyayı uzak dosya ile değiştirir.
+Bir güncelleştirme gerekiyorsa araç her zaman uzak dosya ile yerel dosya değiştirir.
 
 ### <a name="usage"></a>Kullanım
 
@@ -143,18 +143,18 @@ dotnet-grpc refresh [options] [<references>...]
 
 | Bağımsız Değişken | Açıklama |
 |-|-|
-| başvurular | Güncellenmesi gereken uzak prototip başvurularına yönelik URL veya dosya yolları. Tüm Uzak başvuruları yenilemek için bu bağımsız değişkeni boş bırakın. |
+| başvurular | URL'ler veya dosya yolları güncelleştirilmelidir uzak protobuf başvuruları için. Tüm uzak başvuruları yenilemek için bu bağımsız değişkeni boş bırakın. |
 
 ### <a name="options"></a>Seçenekler
 
-| Short seçeneği | Long seçeneği | Açıklama |
+| Kısa seçenek | Uzun seçenek | Açıklama |
 |-|-|-|
-| -p | --Proje | Üzerinde çalışılacak proje dosyasının yolu. Bir dosya belirtilmemişse, komut geçerli dizinde bir arama yapar.
-| | --Kuru-Çalıştır | Herhangi bir yeni içerik indirilmeden güncelleştirilenecek dosyaların listesini verir.
+| -p | --proje | Çalışacak proje dosyasına giden yol. Bir dosya belirtilmemişse, komut geçerli dizini arar.
+| | --kuru-çalıştır | Yeni içerik indirilmeden güncellenecek dosyaların listesini çıktırıyor.
 
 ## <a name="list"></a>Liste
 
-`list` komutu, proje dosyasındaki tüm Prototipsiz başvuruları göstermek için kullanılır. Bir sütunun tüm değerleri varsayılan değerler ise, sütun atlanabilir.
+Komut, `list` proje dosyasındaki tüm Protobuf başvurularını görüntülemek için kullanılır. Bir sütunun tüm değerleri varsayılan değerlerse, sütun atlanabilir.
 
 ### <a name="usage"></a>Kullanım
 
@@ -164,9 +164,9 @@ dotnet-grpc list [options]
 
 ### <a name="options"></a>Seçenekler
 
-| Short seçeneği | Long seçeneği | Açıklama |
+| Kısa seçenek | Uzun seçenek | Açıklama |
 |-|-|-|
-| -p | --Proje | Üzerinde çalışılacak proje dosyasının yolu. Bir dosya belirtilmemişse, komut geçerli dizinde bir arama yapar.
+| -p | --proje | Çalışacak proje dosyasına giden yol. Bir dosya belirtilmemişse, komut geçerli dizini arar.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

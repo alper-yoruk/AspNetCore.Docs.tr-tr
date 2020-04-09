@@ -1,51 +1,51 @@
 ---
-title: Yerelleştirme genişletilebilirliği
+title: Yerelleştirme Genişletilebilirlik
 author: hishamco
-description: ASP.NET Core uygulamalarında yerelleştirme API 'Lerini genişletmeyi öğrenin.
+description: ASP.NET Core uygulamalarında yerelleştirme API'lerini nasıl genişleteceklerini öğrenin.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 08/03/2019
 uid: fundamentals/localization-extensibility
 ms.openlocfilehash: dfa2efe78b2e1e118e6b3f09bfc41f3330e1d721
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78662101"
 ---
-# <a name="localization-extensibility"></a>Yerelleştirme genişletilebilirliği
+# <a name="localization-extensibility"></a>Yerelleştirme Genişletilebilirlik
 
-, [Hisham bin Ateya](https://github.com/hishamco) tarafından
+Yazar: [Hisham Bin Ateya](https://github.com/hishamco)
 
 Bu makalede:
 
-* Yerelleştirme API 'Lerinde genişletilebilirlik noktalarını listeler.
-* ASP.NET Core uygulama yerelleştirmesini genişletme hakkında yönergeler sağlar.
+* Yerelleştirme API'lerinde genişletilebilirlik noktalarını listeler.
+* Core uygulaması yerelleştirmeASP.NETnin nasıl genişletilenhakkında yönergeler sağlar.
 
-## <a name="extensible-points-in-localization-apis"></a>Yerelleştirme API 'Lerinde Genişletilebilir noktaları
+## <a name="extensible-points-in-localization-apis"></a>Yerelleştirme API'lerinde Genişletilebilir Noktalar
 
-ASP.NET Core yerelleştirme API 'Leri genişletilebilir olacak şekilde oluşturulmuştur. Genişletilebilirlik, geliştiricilerin gereksinimlerine göre yerelleştirmeyi özelleştirmesini sağlar. Örneğin, [Orchardcore](https://github.com/orchardCMS/OrchardCore/) bir `POStringLocalizer`sahiptir. `POStringLocalizer`, Yerelleştirme kaynaklarını depolamak üzere `PO` dosyalarını kullanmak için [Taşınabilir nesne yerelleştirmesini](xref:fundamentals/portable-object-localization) kullanma hakkında ayrıntılı bilgi sağlar.
+ASP.NET Çekirdek yerelleştirme API'leri genişletilebilir olacak şekilde üretilmiştir. Genişletilebilirlik, geliştiricilerin yerelleştirmeyi gereksinimlerine göre özelleştirmelerine olanak tanır. Örneğin, [OrchardCore](https://github.com/orchardCMS/OrchardCore/) bir `POStringLocalizer`. `POStringLocalizer`yerelleştirme kaynaklarını depolamak için `PO` dosyaları kullanmak için [Taşınabilir Nesne yerelleştirme](xref:fundamentals/portable-object-localization) kullanarak ayrıntılı olarak açıklar.
 
-Bu makalede, yerelleştirme API 'Lerinin sağladığı iki ana genişletilebilirlik noktası listelenmektedir: 
+Bu makalede, yerelleştirme API'leri sağladığı iki ana genişletilebilirlik noktaları listelenir: 
 
 * <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider>
 * <xref:Microsoft.Extensions.Localization.IStringLocalizer>
 
-## <a name="localization-culture-providers"></a>Yerelleştirme kültür sağlayıcıları
+## <a name="localization-culture-providers"></a>Yerelleştirme Kültür Sağlayıcıları
 
-ASP.NET Core yerelleştirme API 'Leri, yürütülen bir isteğin geçerli kültürünü belirleyebilmesi için dört varsayılan sağlayıcıya sahiptir:
+ASP.NET Çekirdek yerelleştirme API'lerinin yürütme isteğinin geçerli kültürünü belirleyebilen dört varsayılan sağlayıcısı var:
 
 * <xref:Microsoft.AspNetCore.Localization.QueryStringRequestCultureProvider>
 * <xref:Microsoft.AspNetCore.Localization.CookieRequestCultureProvider>
 * <xref:Microsoft.AspNetCore.Localization.AcceptLanguageHeaderRequestCultureProvider>
 * <xref:Microsoft.AspNetCore.Localization.CustomRequestCultureProvider>
 
-Önceki sağlayıcılar, [Yerelleştirme ara yazılımı](xref:fundamentals/localization) belgelerinde ayrıntılı olarak açıklanmıştır. Varsayılan sağlayıcılar gereksinimlerinizi karşılamıyorsa, aşağıdaki yaklaşımlardan birini kullanarak özel bir sağlayıcı oluşturun:
+Önceki sağlayıcılar [Yerelleştirme Middleware](xref:fundamentals/localization) belgelerinde ayrıntılı olarak açıklanmıştır. Varsayılan sağlayıcılar gereksinimlerinizi karşılamazsa, aşağıdaki yaklaşımlardan birini kullanarak özel bir sağlayıcı oluşturun:
 
-### <a name="use-customrequestcultureprovider"></a>CustomRequestCultureProvider kullanma
+### <a name="use-customrequestcultureprovider"></a>CustomRequestCultureProvider kullanın
 
-<xref:Microsoft.AspNetCore.Localization.CustomRequestCultureProvider>, geçerli yerelleştirme kültürünü belirlemede basit bir temsilci kullanan özel bir <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> sağlar:
+<xref:Microsoft.AspNetCore.Localization.CustomRequestCultureProvider>geçerli yerelleştirme kültürünü belirlemek için basit bir temsilci kullanan bir özel <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> sağlar:
 
 ::: moniker range="< aspnetcore-3.0"
 ```csharp
@@ -89,11 +89,11 @@ options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(async 
 
 ::: moniker-end
 
-### <a name="use-a-new-implemetation-of-requestcultureprovider"></a>RequestCultureProvider 'in yeni bir ımplemei kullanın
+### <a name="use-a-new-implemetation-of-requestcultureprovider"></a>RequestCultureProvider'ın yeni bir implemetation'ını kullanma
 
-Özel bir kaynaktan gelen istek kültür bilgilerini belirleyen yeni bir <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> uygulanması oluşturulabilir. Örneğin, özel kaynak bir yapılandırma dosyası veya veritabanı olabilir.
+Özel bir <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> kaynaktan istek kültürü bilgilerini belirleyen yeni bir uygulama oluşturulabilir. Örneğin, özel kaynak bir yapılandırma dosyası veya veritabanı olabilir.
 
-Aşağıdaki örnekte, *appSettings. JSON*' dan gelen istek kültür bilgilerini belirleyen <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> genişleten `AppSettingsRequestCultureProvider`gösterilmektedir:
+Aşağıdaki örnek, `AppSettingsRequestCultureProvider` <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> *appsettings.json*gelen istek kültürü bilgilerini belirlemek için genişletir gösterir:
 
 ```csharp
 public class AppSettingsRequestCultureProvider : RequestCultureProvider
@@ -137,11 +137,11 @@ public class AppSettingsRequestCultureProvider : RequestCultureProvider
 
 ## <a name="localization-resources"></a>Yerelleştirme kaynakları
 
-ASP.NET Core yerelleştirme <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer>sağlar. <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer>, Yerelleştirme kaynaklarını depolamak için `resx` kullanan bir <xref:Microsoft.Extensions.Localization.IStringLocalizer> uygulamasıdır.
+ASP.NET Çekirdek yerelleştirme sağlar. <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer> <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer>yerelleştirme kaynaklarını <xref:Microsoft.Extensions.Localization.IStringLocalizer> depolamak `resx` için kullanılan bir uygulamadır.
 
-`resx` dosyaları kullanma sınırlı değilsiniz. `IStringLocalized`uygulayarak, herhangi bir veri kaynağı kullanılabilir.
+Dosyaları kullanmakla `resx` sınırlı değilsiniz. Uygulayarak, `IStringLocalized`herhangi bir veri kaynağı kullanılabilir.
 
-Aşağıdaki örnek projeler <xref:Microsoft.Extensions.Localization.IStringLocalizer>uygular: 
+Aşağıdaki örnek projeler <xref:Microsoft.Extensions.Localization.IStringLocalizer>uygulamak: 
 
 * [EFStringLocalizer](https://github.com/aspnet/Entropy/tree/master/samples/Localization.EntityFramework)
 * [JsonStringLocalizer](https://github.com/hishamco/My.Extensions.Localization.Json)

@@ -1,3 +1,3 @@
-# <a name="aspnet-core-background-tasks-sample"></a>ASP.NET Core arka plan görevleri örneği
+# <a name="aspnet-core-background-tasks-sample"></a>ASP.NET Temel Arka Plan Görevleri Örneği
 
-Bu örnek [ıhostedservice](https://docs.microsoft.com/dotnet/api/microsoft.extensions.hosting.ihostedservice)'in kullanımını gösterir. Bu örnek, [ASP.NET Core konusunun barındırılan Hizmetleri Ile arka plan görevlerinde](https://docs.microsoft.com/aspnet/core/fundamentals/host/hosted-services) açıklanan özellikleri gösterir.
+Bu örnek, [IHostedService](https://docs.microsoft.com/dotnet/api/microsoft.extensions.hosting.ihostedservice)kullanımını göstermektedir. Bu örnek, Temel ASP.NET konusu [barındırılan hizmetlerle Arka Plan görevlerinde](https://docs.microsoft.com/aspnet/core/fundamentals/host/hosted-services) açıklanan özellikleri gösterir.

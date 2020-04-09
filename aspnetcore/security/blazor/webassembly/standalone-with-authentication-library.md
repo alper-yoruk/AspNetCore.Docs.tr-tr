@@ -1,47 +1,47 @@
 ---
-title: Kimlik doğrulama kitaplığıyla bir ASP.NET Core Blazor WebAssembly tek başına uygulamasını güvenli hale getirme
+title: Kimlik Doğrulama Blazor kitaplığı yla ASP.NET Core WebAssembly bağımsız bir uygulama güvenli
 author: guardrex
 description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/19/2020
+ms.date: 04/08/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/standalone-with-authentication-library
-ms.openlocfilehash: ea50d94835b044f9c3d6a0561868f081d32cb62a
-ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
+ms.openlocfilehash: 893fff10df37e1c2be549604f4cb83cd20049108
+ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80219017"
+ms.lasthandoff: 04/08/2020
+ms.locfileid: "80977047"
 ---
-# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-the-authentication-library"></a>Kimlik doğrulama kitaplığıyla bir ASP.NET Core Blazor WebAssembly tek başına uygulamasını güvenli hale getirme
+# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-standalone-app-with-the-authentication-library"></a>Kimlik Doğrulama Blazor kitaplığı yla ASP.NET Core WebAssembly bağımsız bir uygulama güvenli
 
-, [Javier Calvarro Nelson](https://github.com/javiercn) ve [Luke Latham](https://github.com/guardrex) 'e göre
+Yazar: [Javier Calvarro Nelson](https://github.com/javiercn) ve [Luke Latham](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
-*Azure Active Directory (AAD) ve Azure Active Directory B2C (AAD B2C) için, bu konudaki yönergeleri izleyin. Bu içindekiler tablosu düğümündeki AAD ve AAD B2C konularına bakın.*
+*Azure Etkin Dizin (AAD) ve Azure Etkin Dizini B2C (AAD B2C) için bu konudaki yönergeye uymayın. Bu içerik düğümü tablosundaki AAD ve AAD B2C konularına bakın.*
 
-`Microsoft.AspNetCore.Components.WebAssembly.Authentication` kitaplığı kullanan bir Blazor WebAssembly tek başına uygulaması oluşturmak için, komut kabuğu 'nda aşağıdaki komutu yürütün:
+Kitaplık Blazor kullanan `Microsoft.AspNetCore.Components.WebAssembly.Authentication` bir WebAssembly bağımsız uygulaması oluşturmak için, komut kabuğunda aşağıdaki komutu uygulayın:
 
 ```dotnetcli
 dotnet new blazorwasm -au Individual
 ```
 
-Mevcut değilse bir proje klasörü oluşturan çıkış konumunu belirtmek için, çıkış seçeneğini komuta bir yol (örneğin, `-o BlazorSample`) ile birlikte ekleyin. Klasör adı Ayrıca projenin adının bir parçası haline gelir.
+Yoksa proje klasörü oluşturan çıktı konumunu belirtmek için, çıkış seçeneğini bir yolu olan komuta ekleyin `-o BlazorSample`(örneğin, ). Klasör adı da projenin adının bir parçası olur.
 
-Visual Studio 'da [bir Blazor WebAssembly uygulaması oluşturun](xref:blazor/get-started). **Uygulama içi kullanıcı hesaplarını depola** seçeneğiyle **bireysel kullanıcı hesapları** için **kimlik doğrulamasını** ayarlayın.
+Visual Studio'da [bir Blazor WebAssembly uygulaması oluşturun.](xref:blazor/get-started) Mağaza kullanıcı hesapları uygulama içi seçeneğiyle **Kimlik Doğrulamayı** **Bireysel Kullanıcı Hesaplarına** ayarlayın. **Store user accounts in-app**
 
 ## <a name="authentication-package"></a>Kimlik doğrulama paketi
 
-Tek tek kullanıcı hesaplarını kullanmak üzere bir uygulama oluşturulduğunda, uygulama otomatik olarak uygulamanın proje dosyasındaki `Microsoft.AspNetCore.Components.WebAssembly.Authentication` paketi için bir paket başvurusu alır. Paket, uygulamanın kullanıcıların kimliğini doğrulamasına ve korunan API 'Leri çağırmak için belirteçleri almasına yardımcı olan bir dizi temel sunar.
+Bireysel Kullanıcı Hesapları'nı kullanmak için bir uygulama oluşturulduğunda, uygulama `Microsoft.AspNetCore.Components.WebAssembly.Authentication` otomatik olarak uygulamanın proje dosyasındaki paket için bir paket başvurusu alır. Paket, uygulamanın kullanıcıları doğrulamasına ve korumalı API'leri aramak için belirteçler almasına yardımcı olan bir dizi ilkel lik sağlar.
 
-Bir uygulamaya kimlik doğrulaması ekliyorsanız, paketi uygulamanın proje dosyasına el ile ekleyin:
+Bir uygulamaya kimlik doğrulama ekliyorsanız, paketi uygulamanın proje dosyasına el ile ekleyin:
 
 ```xml
 <PackageReference 
@@ -49,11 +49,11 @@ Bir uygulamaya kimlik doğrulaması ekliyorsanız, paketi uygulamanın proje dos
     Version="{VERSION}" />
 ```
 
-Önceki paket başvurusunda `{VERSION}`, <xref:blazor/get-started> makalesinde gösterilen `Microsoft.AspNetCore.Blazor.Templates` paketinin sürümü ile değiştirin.
+Önceki `{VERSION}` paket başvuruyu makalede gösterilen `Microsoft.AspNetCore.Blazor.Templates` paketin sürümüyle <xref:blazor/get-started> değiştirin.
 
 ## <a name="authentication-service-support"></a>Kimlik doğrulama hizmeti desteği
 
-Kullanıcıları kimlik doğrulama desteği, hizmet kapsayıcısına `Microsoft.AspNetCore.Components.WebAssembly.Authentication` paketi tarafından sağlanmış `AddOidcAuthentication` uzantısı yöntemiyle kaydedilir. Bu yöntem, uygulamanın kimlik sağlayıcısıyla (IP) etkileşim kurması için gereken tüm hizmetleri ayarlar.
+Kullanıcıların kimlik doğrulaması için destek, paket `AddOidcAuthentication` tarafından sağlanan uzantı yöntemiyle servis kapsayıcısında `Microsoft.AspNetCore.Components.WebAssembly.Authentication` kaydedilir. Bu yöntem, uygulamanın Kimlik Sağlayıcısı (IP) ile etkileşim kurması için gereken tüm hizmetleri ayarlar.
 
 *Program.cs*:
 
@@ -65,7 +65,38 @@ builder.Services.AddOidcAuthentication(options =>
 });
 ```
 
-Tek başına uygulamalar için kimlik doğrulama desteği, Open ID Connect (OıDC) kullanılarak sunulur. `AddOidcAuthentication` yöntemi, OıDC kullanarak bir uygulamanın kimliğini doğrulamak için gereken parametreleri yapılandırmak üzere bir geri çağırma işlemini kabul eder. Uygulamayı yapılandırmak için gereken değerler OıDC ile uyumlu IP 'den elde edilebilir. Uygulamayı kaydettiğinizde, genellikle çevrimiçi portalında gerçekleşen değerleri alın.
+Bağımsız uygulamalar için kimlik doğrulama desteği Open ID Connect (OIDC) kullanılarak sunulur. Yöntem, `AddOidcAuthentication` OIDC kullanarak bir uygulamanın kimliğini doğrulamak için gereken parametreleri yapılandırmak için bir geri arama kabul eder. Uygulamanın yapılandırılması için gereken değerler OIDC uyumlu IP'den elde edilebilir. Genellikle çevrimiçi portallarında bulunan uygulamayı kaydederken değerleri edinin.
+
+## <a name="access-token-scopes"></a>Belirteç kapsamlarına erişim
+
+Blazor WebAssembly şablonu, güvenli bir API için erişim belirteci istemek üzere uygulamayı otomatik olarak yapılandırmaz. Oturum açma akışının bir parçası olarak bir belirteç sağlamak için, kapsamı `OidcProviderOptions`aşağıdakilerin varsayılan belirteç kapsamına ekleyin:
+
+```csharp
+builder.Services.AddOidcAuthentication(options =>
+{
+    ...
+    options.ProviderOptions.DefaultScopes.Add("{SCOPE URI}");
+});
+```
+
+> [!NOTE]
+> Azure portalı bir kapsam oluşturuyorsa URI ve uygulama API'den *401 Yetkisiz* yanıt aldığında **işlenmemiş bir özel durum atarsa,** düzeni ve ana bilgisayarı içermeyen bir KAPSAM URI kullanmayı deneyin. Örneğin, Azure portalı aşağıdaki kapsam URI biçimlerinden birini sağlayabilir:
+>
+> * `https://{ORGANIZATION}.onmicrosoft.com/{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
+> * `api://{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
+>
+> Şema ve ana bilgisayar olmadan URI kapsamını tedarik edin:
+>
+> ```csharp
+> options.ProviderOptions.DefaultScopes.Add(
+>     "{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}");
+> ```
+
+Daha fazla bilgi için bkz. <xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens>.
+
+## <a name="imports-file"></a>Dosyayı alma
+
+[!INCLUDE[](~/includes/blazor-security/imports-file-standalone.md)]
 
 ## <a name="index-page"></a>Dizin sayfası
 
@@ -88,3 +119,7 @@ Tek başına uygulamalar için kimlik doğrulama desteği, Open ID Connect (OıD
 [!INCLUDE[](~/includes/blazor-security/authentication-component.md)]
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
+
+## <a name="additional-resources"></a>Ek kaynaklar
+
+* [Ek erişim belirteçleri isteme](xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens)

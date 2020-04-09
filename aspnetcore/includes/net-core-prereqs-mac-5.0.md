@@ -1,4 +1,2 @@
-Sürüm 8,6 ' de destek bekleniyor
-
-<!-- * [Visual Studio for Mac version 8.6 or later](https://visualstudio.microsoft.com/vs/mac/)
-* [!INCLUDE [.NET 5.0 SDK](~/includes/5.0-SDK.md)] -->
+* [Mac sürüm 8.6 veya sonrası için Visual Studio](/visualstudio/releasenotes/vs2019-mac-preview-relnotes)
+* [!INCLUDE [.NET 5.0 SDK](~/includes/5.0-SDK.md)]

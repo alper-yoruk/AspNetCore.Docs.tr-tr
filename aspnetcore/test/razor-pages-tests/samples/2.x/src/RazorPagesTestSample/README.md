@@ -1,8 +1,8 @@
-# <a name="aspnet-core-razor-pages-unit-tests-sample"></a>ASP.NET Core Razor Pages birim testleri örneği
+# <a name="aspnet-core-razor-pages-unit-tests-sample"></a>ASP.NET Çekirdek Jilet Sayfaları ünite testleri örneği
 
-Bu örnek, bir [Razor Pages](https://docs.microsoft.com/aspnet/core/mvc/razor-pages) uygulamasının birim testlerini gösterir. Bu örnek [Razor Pages birim testleri](https://docs.microsoft.com/aspnet/core/test/razor-pages-tests) konusunda açıklanan özellikleri gösterir.
+Bu örnek, [Bir Razor Pages](https://docs.microsoft.com/aspnet/core/mvc/razor-pages) uygulamasının birim testlerini göstermektedir. Bu [örnek, Razor Pages birim testleri](https://docs.microsoft.com/aspnet/core/test/razor-pages-tests) konusunda açıklanan özellikleri göstermektedir.
 
-Yerleşik test özellikleriyle IDE kullanmıyorsanız, *testler/RazorPagesTestSample. Tests* klasöründeki bir komut isteminde aşağıdaki komutu yürütün:
+Yerleşik test özelliklerine sahip bir IDE kullanmıyorsanız, *testler/RazorPagesTestSample.Tests* klasöründe aşağıdaki komut istemini uygulayın:
 
 ```console
 dotnet test

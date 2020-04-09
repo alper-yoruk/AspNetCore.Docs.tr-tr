@@ -1,88 +1,88 @@
 ---
 title: gRPC hizmetlerinin sürümünü oluşturma
 author: jamesnk
-description: GRPC hizmetlerini nasıl kullanacağınızı öğrenin.
+description: gRPC hizmetlerini nasıl sürümedebilirsiniz öğrenin.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 01/09/2020
 uid: grpc/versioning
 ms.openlocfilehash: 9bd76009ba28a1abef25a98686afea6753d4a8f4
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78664117"
 ---
 # <a name="versioning-grpc-services"></a>gRPC hizmetlerinin sürümünü oluşturma
 
-, [James bAyKiNg](https://twitter.com/jamesnk)
+Yazar: [James Newton-King](https://twitter.com/jamesnk)
 
-Bir uygulamaya eklenen yeni özellikler, bazı durumlarda bazen beklenmedik ve kırılmaya karşı istemciler için sunulan gRPC hizmetlerini gerektirebilir. GRPC Hizmetleri değiştiğinde:
+Bir uygulamaya eklenen yeni özellikler, istemcilere sağlanan gRPC hizmetlerinin bazen beklenmedik ve kopan şekillerde değişmesini gerektirebilir. gRPC hizmetleri değiştiğinde:
 
-* Değişikliklerin istemcileri nasıl etkilediğini göz önünde bulundurmanız gerekir.
-* Değişiklikleri desteklemek için sürüm oluşturma stratejisi uygulanmalıdır.
+* Değişikliklerin istemcileri nasıl etkilediğine dikkat edilmelidir.
+* Değişiklikleri desteklemek için bir sürüm stratejisi uygulanmalıdır.
 
 ## <a name="backwards-compatibility"></a>Geriye dönük uyumluluk
 
-GRPC protokolü, zaman içinde değişen Hizmetleri destekleyecek şekilde tasarlanmıştır. Genel olarak, gRPC Hizmetleri ve yöntemlerine yapılan ekler kırılmamış değildir. Bölünmez değişiklikler mevcut istemcilerin değişiklik yapmadan çalışmaya devam etmesine izin verir. GRPC hizmetlerini değiştirme veya silme, değişiklikler ortadan kaldırılır. GRPC hizmetlerinde son değişiklikler olduğunda, bu hizmeti kullanan istemcilerin güncellenmesi ve yeniden dağıtılması gerekir.
+gRPC protokolü, zaman içinde değişen hizmetleri desteklemek üzere tasarlanmıştır. Genellikle, gRPC hizmetleri ve yöntemleri eklemeler kırılmaz. Kırılmayan değişiklikler, varolan istemcilerin değişiklik olmadan çalışmaya devam etmesine olanak sağlar. gRPC hizmetlerinin değiştirilmesi veya silmesi değişiklikleri bozuyor. gRPC hizmetlerinde değişiklikler kırıldığında, bu hizmeti kullanan istemcilerin güncelleştirilip yeniden dağıtılması gerekir.
 
-Bir hizmette önemli olmayan değişiklikler yapmak çok sayıda avantaj sunar:
+Bir hizmette kırılmayan değişiklikler yapmanın bir takım avantajları vardır:
 
-* Mevcut istemciler çalışmaya devam eder.
-* , Bir veya daha fazla değişiklik için istemcileri bildirmeye ve bunları güncelleştirmeye dahil olan çalışmayı önler.
-* Hizmetin yalnızca bir sürümünün belgelenilmesi ve saklanması gerekir.
+* Varolan istemciler çalışmaya devam ediyor.
+* İstemcileri değişiklikleri kırma ve güncelleştirme konusunda bilgilendirmek le ilgili çalışmayı önler.
+* Hizmetin yalnızca bir sürümünün belgelenmesi ve bakımı gerekir.
 
-### <a name="non-breaking-changes"></a>Kırılamayan değişiklikler
+### <a name="non-breaking-changes"></a>Kırılmayan değişiklikler
 
-Bu değişiklikler, gRPC protokol düzeyinde ve .NET ikili düzeyinde kırılmamış değildir.
+Bu değişiklikler, gRPC protokol düzeyinde ve .NET ikili düzeyinde kırılmaz.
 
-* **Yeni bir hizmet ekleniyor**
-* **Bir hizmete yeni bir yöntem ekleme**
-* **İstek iletisine alan ekleme** -bir istek iletisine eklenen alanlar, ayarlanmayan sunucu üzerindeki [varsayılan değerle](https://developers.google.com/protocol-buffers/docs/proto3#default) seri durumdan silinir. Yeni alan eski istemciler tarafından ayarlanmamışsa, bir olmayan değişiklik olması için hizmetin başarılı olması gerekir.
-* **Yanıt iletisine bir alan ekleme** -yanıt iletisine eklenen alanlar, istemcideki [Bilinmeyen alanlar](https://developers.google.com/protocol-buffers/docs/proto3#unknowns) koleksiyonuna seri durumdan çıkarılacak.
-* **Sabit listesine değer eklemek** sayısal bir değer olarak serileştirilir. Yeni Enum değerleri, bir sabit listesi adı olmadan, istemcide seri hale getirilmesi değeri olarak seri durumdan silinir. Yeni bir sabit listesi değeri alınırken, daha eski istemcilerin düzgün çalışması gerekir.
+* **Yeni bir hizmet ekleme**
+* **Hizmete yeni bir yöntem ekleme**
+* **İstek iletisine alan ekleme** - İstek iletisine eklenen alanlar ayarlanmadığında sunucudaki [varsayılan değerle](https://developers.google.com/protocol-buffers/docs/proto3#default) birlikte deserialize edilir. Kesintisiz bir değişiklik olmak için, yeni alan eski istemciler tarafından ayarlanmıyorsa hizmetin başarılı olması gerekir.
+* **Yanıt iletisine alan ekleme** - Yanıt iletisine eklenen alanlar iletinin [istemcideki bilinmeyen alanlar](https://developers.google.com/protocol-buffers/docs/proto3#unknowns) koleksiyonuna deserialolarak eklenir.
+* **Bir enum için bir değer ekleme** - Enums sayısal bir değer olarak serihale edilir. Yeni enum değerleri, enum adı olmadan istemci üzerinde enum değerine deserialize edilir. Son dakika değişikliği olmak için, eski istemcilerin yeni enum değerini alırken doğru çalışması gerekir.
 
-### <a name="binary-breaking-changes"></a>İkili son değişiklikler
+### <a name="binary-breaking-changes"></a>İkili kırılma değişiklikleri
 
-Aşağıdaki değişiklikler bir gRPC protokol düzeyinde kırılmamış, ancak en son *. proto* sözleşmesine veya istemci .net derlemesine yükseltiyorsa istemcinin güncelleştirilmesi gerekir. Bir gRPC kitaplığını NuGet 'e yayımlamayı planlıyorsanız ikili uyumluluk önemlidir.
+Aşağıdaki değişiklikler bir gRPC protokolü düzeyinde kırılmaz, ancak istemci nin en son *.proto* sözleşmesine veya istemci .NET derlemesine yükseltilmesi durumunda güncelleştirilmelidir. NuGet'e bir gRPC kitaplığı yayımlamayı planlıyorsanız ikili uyumluluk önemlidir.
 
-* Kaldırılan bir alandan **alan değerlerinin kaldırılması** , iletinin [Bilinmeyen alanlarına](https://developers.google.com/protocol-buffers/docs/proto3#unknowns)seri durumdan çıkarılır. Bu bir gRPC protokol bölünmesi değişikliği değildir, ancak en son sözleşmeye yükseltiyorsa istemcinin güncelleştirilmesi gerekir. Kaldırılmış bir alan numarasının gelecekte yanlışlıkla yeniden kullanılması önemlidir. Bunun gerçekleşmediğinden emin olmak için, Protoarabelleğe ait [ayrılmış](https://developers.google.com/protocol-buffers/docs/proto3#reserved) anahtar sözcüğünü kullanarak, silinen alan numaralarını ve iletideki adları belirtin.
-* **Iletiyi yeniden adlandırma** -ileti adları genellikle ağ üzerinde gönderilmemektedir, bu nedenle bu bir GRPC protokol bölünmesi değişikliği değildir. En son sözleşmeye yükseltiyorsa istemcinin güncelleştirilmeleri gerekir. İleti **adlarının ağ** üzerinde gönderildiği bir durum, ileti adının ileti türünü tanımlamak için [kullanıldığı bir durumdur](https://developers.google.com/protocol-buffers/docs/proto3#any) .
-* **Csharp_namespace** değiştirme `csharp_namespace` değiştirmek, oluşturulan .net türlerinin ad alanını değiştirecek. Bu bir gRPC protokol bölünmesi değişikliği değildir, ancak en son sözleşmeye yükseltiyorsa istemcinin güncelleştirilmesi gerekir.
+* **Alan kaldırma** - Kaldırılan alandaki değerler iletinin [bilinmeyen alanlarına](https://developers.google.com/protocol-buffers/docs/proto3#unknowns)deserialize edilir. Bu bir gRPC protokolü değiştirme kırma değil, ancak istemci en son sözleşmeye yükseltmeleri gerekir güncelleştirilmelidir. Kaldırılan alan numarasının gelecekte yanlışlıkla yeniden kullanılmamış olması önemlidir. Bunun gerçekleşmediğinden emin olmak için, Protobuf'un [ayrılmış](https://developers.google.com/protocol-buffers/docs/proto3#reserved) anahtar sözcük lerini kullanarak iletideki silinmiş alan numaralarını ve adlarını belirtin.
+* **İletiyi yeniden adlandırma** - İleti adları genellikle ağda gönderilmez, bu nedenle bu bir gRPC protokolü bozma değişikliği değildir. En son sözleşmeye yükseltilmesi durumunda istemcinin güncellenmesi gerekir. İleti **adlarının** ağda gönderildiği durumlardan biri, ileti adı ileti türünü tanımlamak için kullanıldığında [Herhangi bir](https://developers.google.com/protocol-buffers/docs/proto3#any) alandaki durumdur.
+* **csharp_namespace değiştirme** `csharp_namespace` - Değiştirme, oluşturulan .NET türlerinin ad alanını değiştirir. Bu bir gRPC protokolü değiştirme kırma değil, ancak istemci en son sözleşmeye yükseltmeleri gerekir güncelleştirilmelidir.
 
-### <a name="protocol-breaking-changes"></a>Protokol bölünmesi değişiklikleri
+### <a name="protocol-breaking-changes"></a>Protokol kesme değişiklikleri
 
-Aşağıdaki öğeler protokol ve ikili parçalara ayırma değişiklerdir:
+Aşağıdaki öğeler protokol ve ikili kesme değişiklikleridir:
 
-* **Alanı yeniden adlandırma** -prototip içeriğiyle, alan adları yalnızca oluşturulan kodda kullanılır. Alan numarası, ağdaki alanları tanımlamak için kullanılır. Bir alanı yeniden adlandırmak, Protoarabelleğe yönelik protokol bölünmesi değişikliği değildir. Ancak, bir sunucu JSON içeriğini kullanıyorsa, bir alanı yeniden adlandırmak, Son değişiklik olur.
-* **Alan veri türünü değiştirme** -bir alanın veri türünü [uyumsuz bir türe](https://developers.google.com/protocol-buffers/docs/proto3#updating) değiştirme, iletinin serisi kaldırılırken hatalara neden olur. Yeni veri türü uyumlu olsa bile, en son sözleşmeye yükseltiyorsa istemcinin yeni türü destekleyecek şekilde güncelleştirilmesi gerekir.
-* **Alan numarasını değiştirme** -prototip yükleri ile, alan numarası ağdaki alanları tanımlamak için kullanılır.
-* **Bir paketi, hizmet veya yöntemi yeniden adlandırma** -GRPC, URL 'yi oluşturmak için paket adını, hizmet adını ve yöntem adını kullanır. İstemci sunucudan *uygulanmayan* bir durum alır.
-* **Bir hizmet veya yöntemi kaldırma** -istemci, kaldırılan yöntemi çağırırken sunucudan *uygulanmayan* bir durum alır.
+* **Bir alanı yeniden adlandırma** - Protobuf içeriğinde alan adları yalnızca oluşturulan kodda kullanılır. Alan numarası ağdaki alanları tanımlamak için kullanılır. Bir alanı yeniden adlandırmak, Protobuf için bir protokol bozan bir değişiklik değildir. Ancak, bir sunucu JSON içeriğini kullanıyorsa, bir alanı yeniden adlandırmak bir kesme değişikliğidir.
+* **Alan veri türünü değiştirme** - Bir alanın veri türünü uyumsuz bir [türle](https://developers.google.com/protocol-buffers/docs/proto3#updating) değiştirmek, iletiyi deserializing yaparken hatalara neden olur. Yeni veri türü uyumlu olsa bile, istemcinin en son sözleşmeye yükseltilmesi durumunda yeni türü desteklemek için güncelleştirilmiş olması gerekir.
+* **Alan numarası değiştirme** - Protobuf yükleri ile alan numarası ağdaki alanları tanımlamak için kullanılır.
+* **Bir paketi, hizmeti veya yöntemi yeniden adlandırma** - gRPC URL'yi oluşturmak için paket adını, hizmet adını ve yöntem adını kullanır. İstemci sunucudan *UYGULANMAMIŞ* bir durum alır.
+* **Bir hizmeti veya yöntemi kaldırma** - İstemci kaldırılan yöntemi ararken sunucudan *UYGULANMAMIŞ* bir durum alır.
 
-### <a name="behavior-breaking-changes"></a>Davranış son değişiklikleri
+### <a name="behavior-breaking-changes"></a>Davranış kesme değişiklikleri
 
-Kırılmamış olmayan değişiklikler yaparken, eski istemcilerin yeni hizmet davranışıyla çalışmaya devam edip etmediğini de göz önünde bulundurmanız gerekir. Örneğin, bir istek iletisine yeni bir alan ekleme:
+Kesintisiz değişiklik yaparken, eski istemcilerin yeni hizmet davranışıyla çalışmaya devam edip edemeyeceğini de göz önünde bulundurmanız gerekir. Örneğin, istek iletisine yeni bir alan ekleme:
 
-* Bir protokol bölünmesi değişikliği değildir.
-* Yeni alan ayarlanmamışsa sunucuya bir hata durumu döndürülüyor, eski istemciler için bir değişiklik yapmaz.
+* Protokolü bozan bir değişiklik değil.
+* Yeni alan ayarlanmıyorsa sunucuda bir hata durumu döndürülme, eski istemciler için bir kırılma değişikliği yapar.
 
-Davranış uyumluluğu, uygulamaya özgü kodunuz tarafından belirlenir.
+Davranış uyumluluğu uygulamaya özgü kodunuz tarafından belirlenir.
 
-## <a name="version-number-services"></a>Sürüm numarası Hizmetleri
+## <a name="version-number-services"></a>Sürüm numarası hizmetleri
 
-Hizmetler, eski istemcilerle geriye dönük olarak uyumlu kalacak şekilde çalışır. Uygulamanızda yapılan değişiklikler, son değişiklikleri gerektirebilir. Eski istemcileri bozun ve hizmetinize birlikte güncelleştirilmesini zorluyor, iyi bir kullanıcı deneyimi değildir. Geriye dönük uyumluluğu sağlamanın bir yolu, büyük değişiklikler yapılırken bir hizmetin birden çok sürümünü yayımlamaktır.
+Hizmetler geriye eski istemciler ile uyumlu kalmak için çaba göstermelidir. Sonunda uygulamanızda yapılan değişiklikler, son dakika değişikliklerini gerektirebilir. Eski istemcileri kırmak ve onları hizmetinizle birlikte güncelleştirilmeye zorlamak iyi bir kullanıcı deneyimi değildir. Kesme değişiklikleri yaparken geriye doğru uyumluluğu korumanın bir yolu, bir hizmetin birden çok sürümü yayımlamaktır.
 
-gRPC, .NET ad alanı gibi işlev gören isteğe bağlı bir [paket](https://developers.google.com/protocol-buffers/docs/proto3#packages) tanımlayıcısını destekler. Aslında, `option csharp_namespace` *. proto* dosyasında ayarlanmamışsa, `package` oluşturulan .net türleri için .net ad alanı olarak kullanılır. Paket, hizmetiniz ve iletileri için bir sürüm numarası belirtmek için kullanılabilir:
+gRPC, .NET ad alanı gibi çalışan isteğe bağlı bir [paket](https://developers.google.com/protocol-buffers/docs/proto3#packages) belirteçini destekler. Aslında, *.proto* dosyasında ayarlanmazise `package` `option csharp_namespace` oluşturulan .NET türleri için .NET ad alanı olarak kullanılır. Paket, hizmetiniz ve iletileri için bir sürüm numarası belirtmek için kullanılabilir:
 
 [!code-protobuf[](versioning/sample/greet.v1.proto?highlight=3)]
 
-Hizmet adresini tanımlamak için paket adı hizmet adıyla birleştirilir. Hizmet adresi, bir hizmetin birden çok sürümünün yan yana barındırılmasına izin verir:
+Paket adı, bir hizmet adresini tanımlamak için servis adı ile birleştirilir. Hizmet adresi, bir hizmetin birden çok sürümüne yan yana barındırılmasına izin verir:
 
 * `greet.v1.Greeter`
 * `greet.v2.Greeter`
 
-Sürümlenmiş hizmetin uygulamaları *Startup.cs*'ye kaydedilir:
+Sürümlü hizmetin uygulamaları *Startup.cs*kayıtlıdır:
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -95,14 +95,14 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-Paket adında bir sürüm numarası dahil olmak üzere, bir *v2* sürümünü, son değişiklikler ile yayımlama olanağı sağlar. bu sayede *v1* sürümünü çağıran eski istemcileri desteklemeye devam edebilirsiniz. İstemciler, *v2* hizmetini kullanmak üzere güncelleştirildikten sonra eski sürümü kaldırmayı seçebilirsiniz. Bir hizmetin birden çok sürümünü yayımlamayı planlarken:
+Paket adına bir sürüm numarası da dahil olmak, değişiklikleri kırarak hizmetinizin *v2* sürümünü yayımlama fırsatı sunarken, *v1* sürümünü arayan eski istemcileri desteklemeye devam edin. İstemciler *v2* hizmetini kullanmak üzere güncelleştirildikten sonra, eski sürümü kaldırmayı seçebilirsiniz. Bir hizmetin birden çok sürümü yayımlanmayı planlarken:
 
-* Makul olursa değişikliklerden kaçının.
-* Son değişiklik yapmadığınız takdirde sürüm numarasını güncelleştirmeyin.
-* Büyük değişiklikler yaptığınızda sürüm numarasını güncelleştirin.
+* Makulse değişiklikleri bozmaktan kaçının.
+* Kesme değişiklikleri yapmadan sürüm numarasını güncelleştirin.
+* Kesme değişiklikleri yaptığınızda sürüm numarasını güncelleştirin.
 
-Bir hizmetin birden çok sürümünün yayımlanması onu çoğaltır. Yinelemeyi azaltmak için, iş mantığını hizmet uygulamalarından eski ve yeni uygulamalar tarafından yeniden kullanılabilen merkezi bir konuma taşımayı göz önünde bulundurun:
+Bir hizmetin birden çok sürümü yayımlanır. Yinelemeyi azaltmak için, iş mantığını hizmet uygulamalarından eski ve yeni uygulamalar tarafından yeniden kullanılabilecek merkezi bir konuma taşımayı düşünün:
 
 [!code-csharp[](versioning/sample/GreeterServiceV1.cs?highlight=10,19)]
 
-Farklı paket adlarıyla oluşturulan hizmetler ve mesajlar **farklı .net türlerdir**. İş mantığını merkezi bir konuma taşımak, iletilerin ortak türlere eşlenmelerini gerektirir.
+Farklı paket adlarıyla oluşturulan hizmetler ve iletiler **farklıdır .NET türleridir.** İş mantığını merkezi bir konuma taşımak, iletileri yaygın türlere eşleme gerektirir.
