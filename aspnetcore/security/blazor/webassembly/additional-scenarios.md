@@ -1,60 +1,99 @@
 ---
-title: ASP.NET Core Blazor Weelsembly ek güvenlik senaryoları
+title: ASP.NET Blazor Core WebAssembly ek güvenlik senaryoları
 author: guardrex
 description: ''
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/19/2020
+ms.date: 03/30/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/additional-scenarios
-ms.openlocfilehash: ccb512392341e3eea33f4ab45740b7900f7b63f9
-ms.sourcegitcommit: 9b6e7f421c243963d5e419bdcfc5c4bde71499aa
+ms.openlocfilehash: 516132379ae20bd31c0f3b3261bb09b3f5b218f2
+ms.sourcegitcommit: 1d8f1396ccc66a0c3fcb5e5f36ea29b50db6d92a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/21/2020
-ms.locfileid: "79989477"
+ms.lasthandoff: 04/01/2020
+ms.locfileid: "80501119"
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly ek güvenlik senaryoları
 
-Sağlayan [Javier Calvarro Nelson](https://github.com/javiercn)
+Yazar: [Javier Calvarro Nelson](https://github.com/javiercn)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
-## <a name="handle-token-request-errors"></a>Tanıtıcı belirteci isteği hataları
+## <a name="request-additional-access-tokens"></a>Ek erişim belirteçleri isteme
 
-Tek sayfalı uygulama (SPA), açma KIMLIĞI Connect (OıDC) kullanarak bir kullanıcının kimliğini doğruladığında, kimlik doğrulama durumu yerel olarak SPA 'da ve kimlik sağlayıcısı 'nda (IP) Kullanıcı tarafından sağlanan Credentials.
+Çoğu uygulama, yalnızca kullandıkları korumalı kaynaklarla etkileşim kurmak için bir erişim jetonu gerektirir. Bazı senaryolarda, bir uygulamanın iki veya daha fazla kaynakla etkileşim kurabilmesi için birden fazla belirteç gerekebilir.
 
-IP 'nin Kullanıcı için yaydığı belirteçler genellikle kısa süreler boyunca geçerlidir. bu nedenle, istemci uygulamanın düzenli olarak yeni belirteçler getirmesi gerekir. Aksi takdirde, Kullanıcı, verilen belirteçlerin süre dolduktan sonra günlüğe kaydedilir. Çoğu durumda, OıDC istemcileri kullanıcının kimlik doğrulaması durumunda veya IP içinde tutulan "oturum" için yeniden kimlik doğrulamasından geçmesini gerektirmeden yeni belirteçler sağlayabiliyor.
+Aşağıdaki örnekte, bir uygulamanın kullanıcı verilerini okuması ve posta göndermesi için ek Azure Etkin Dizin (AAD) Microsoft Graph API kapsamları gereklidir. Azure AAD portalına Microsoft Graph API izinleri ekledikten sonra, ek kapsamlar`Program.Main`İstemci uygulamasında (, *Program.cs)* yapılandırılır:
 
-İstemcinin kullanıcı etkileşimi olmadan bir belirteç edinmedikleri bazı durumlar vardır, örneğin, kullanıcının IP 'den açık bir şekilde oturumu açtığı bir nedenden dolayı. Bu senaryo, bir Kullanıcı `https://login.microsoftonline.com` ve oturumu kapattığında oluşur. Bu senaryolarda, uygulama kullanıcının oturum açtığı hemen haberdar değildir. İstemcinin tuttuğu belirteç artık geçerli olmayabilir. Ayrıca, istemci, geçerli belirtecin süresi dolduktan sonra Kullanıcı etkileşimi olmadan yeni bir belirteç sağlayamaz.
+```csharp
+builder.Services.AddMsalAuthentication(options =>
+{
+    ...
 
-Bu senaryolar belirteç tabanlı kimlik doğrulamasına özgü değildir. Bunlar, maça doğaları 'nın bir parçasıdır. Kimlik doğrulama tanımlama bilgisi kaldırılırsa, tanımlama bilgilerini kullanan bir SPA da sunucu API 'sini çağıramaz.
+    options.ProviderOptions.AdditionalScopesToConsent.Add(
+        "https://graph.microsoft.com/Mail.Send");
+    options.ProviderOptions.AdditionalScopesToConsent.Add(
+        "https://graph.microsoft.com/User.Read");
+}
+```
 
-Bir uygulama, korumalı kaynaklara yönelik API çağrıları gerçekleştirdiğinde, aşağıdakilerin farkında olmanız gerekir:
+Yöntem, `IAccessTokenProvider.RequestToken` bir uygulamanın aşağıdaki örnekte görüldüğü gibi, belirli bir kapsam kümesiyle bir belirteç sağlamasına olanak tanıyan aşırı yük sağlar:
 
-* API 'yi çağırmak için yeni bir erişim belirteci sağlamak üzere kullanıcının yeniden kimlik doğrulaması yapması gerekebilir.
-* İstemcinin geçerli gibi görünen bir belirteci olsa da, belirteç Kullanıcı tarafından iptal edildiğinden sunucu çağrısı başarısız olabilir.
+```csharp
+var tokenResult = await AuthenticationService.RequestAccessToken(
+    new AccessTokenRequestOptions
+    {
+        Scopes = new[] { "https://graph.microsoft.com/Mail.Send", 
+            "https://graph.microsoft.com/User.Read" }
+    });
 
-Uygulama bir belirteç istediğinde, olası iki sonuç vardır:
+if (tokenResult.TryGetToken(out var token))
+{
+    ...
+}
+```
+
+`TryGetToken`Döndürür:
+
+* `true`kullanım `token` için.
+* `false`belirteç geri alınmazsa.
+
+## <a name="handle-token-request-errors"></a>Belirteç isteği hatalarını işleme
+
+Tek Sayfalı Bir Uygulama (SPA) Open ID Connect (OIDC) kullanarak bir kullanıcının kimliğini doğruladığında, kimlik doğrulama durumu SPA içinde ve Kimlik Sağlayıcısı'nda (IP) kullanıcının kimlik bilgilerini sağlaması sonucu ayarlanan oturum çerezi biçiminde yerel olarak tutulur.
+
+Kullanıcı için IP'nin yadığı belirteçler genellikle kısa süreler için geçerlidir, normalde yaklaşık bir saat, bu nedenle istemci uygulaması düzenli olarak yeni belirteçler getirmelidir. Aksi takdirde, verilen belirteçlerin süresi dolduktan sonra kullanıcı oturumdan çıkar. Çoğu durumda, OIDC istemcileri IP içinde tutulan kimlik doğrulama durumu veya "oturum" sayesinde kullanıcının yeniden kimlik doğrulaması gerektirmeden yeni belirteçler sağlama da mümkün.
+
+Örneğin, kullanıcı herhangi bir nedenle IP'den açıkça oturum açtıklarında, istemcinin kullanıcı etkileşimi olmadan bir belirteç alabildiği bazı durumlar vardır. Bu senaryo, bir kullanıcı `https://login.microsoftonline.com` ziyaret edip oturumu kaplarsa oluşur. Bu senaryolarda, uygulama kullanıcının oturum açtığını hemen bilmez. İstemcinin tuttuğu herhangi bir belirteç artık geçerli olmayabilir. Ayrıca, istemci geçerli belirteç sona erdikten sonra kullanıcı etkileşimi olmadan yeni bir belirteç sağlamak mümkün değildir.
+
+Bu senaryolar belirteç tabanlı kimlik doğrulamasına özgü değildir. Onlar SPA'ların doğasının bir parçasıdır. Tanımlama bilgileri kullanan bir SPA, kimlik doğrulama çerezi kaldırılırsa sunucu API'sini de çağıramaz.
+
+Bir uygulama korumalı kaynaklara API çağrıları gerçekleştirdiğinde, aşağıdakilerden haberdar olmalısınız:
+
+* API'yi aramak için yeni bir erişim belirteci sağlamak için, kullanıcının yeniden kimlik doğrulaması gerekebilir.
+* İstemci geçerli gibi görünen bir belirteci olsa bile, belirteç kullanıcı tarafından iptal edildiğiiçin sunucuya yapılan çağrı başarısız olabilir.
+
+Uygulama bir belirteç istediğinde, iki olası sonucu vardır:
 
 * İstek başarılı olur ve uygulamanın geçerli bir belirteci vardır.
-* İstek başarısız olur ve yeni bir belirteç almak için uygulamanın kullanıcının kimliğini doğrulaması gerekir.
+* İstek başarısız olur ve uygulamanın yeni bir belirteç elde etmek için kullanıcının kimliğini yeniden doğrulaması gerekir.
 
-Bir belirteç isteği başarısız olduğunda, yeniden yönlendirme gerçekleştirmeden önce geçerli durumu kaydetmek isteyip istemediğinize karar vermeniz gerekir. Artan karmaşıklık düzeylerinde birkaç yaklaşım mevcuttur:
+Belirteç isteği başarısız olduğunda, yeniden yönlendirme gerçekleştirmeden önce geçerli durumu kaydetmek isteyip istemediğiniz konusunda karar vermeniz gerekir. Çeşitli yaklaşımlar karmaşıklık artan düzeylerde var:
 
-* Geçerli sayfa durumunu oturum depolama alanında depolayın. `OnInitializeAsync`sırasında, devam etmeden önce durumun geri yüklenebildiğinden emin olun.
-* Bir sorgu dizesi parametresi ekleyin ve bunu, uygulamayı daha önce kaydedilen durumu yeniden doldurma ihtiyacı olduğunu bildirmek için bir yol olarak kullanın.
-* Bir sorgu dizesi parametresini, verileri oturum depolamada diğer öğelerle riskli olmayan bir şekilde depolamak için benzersiz bir tanımlayıcıya ekleyin.
+* Geçerli sayfa durumunu oturum depolama alanında depolayın. Sırasında, `OnInitializeAsync`devam etmeden önce durum geri yüklenebilir olup olmadığını denetleyin.
+* Bir sorgu dize parametresi ekleyin ve uygulamanın önceden kaydedilmiş durumu yeniden nemlendirmesi için gereken sinyali vermek için bunu kullanın.
+* Diğer öğelerle çakışma riski olmadan verileri oturum depolama alanında depolamak için benzersiz bir tanımlayıcıiçeren bir sorgu dize parametresi ekleyin.
 
-Aşağıdaki örnekte gösterildiği nasıl yapılır:
+Aşağıdaki örnek, nasıl yapılacağını gösterir:
 
-* Oturum açma sayfasına yönlendirmeden önce durumu koru.
-* Önceki durumu daha sonra sorgu dizesi parametresini kullanarak kimlik doğrulamasını kurtarın.
+* Oturum açma sayfasına yönlendirmeden önce durumu koruyun.
+* Sorgu dizesi parametresini kullanarak önceki durumu sonra kimlik doğrulaması kurtarın.
 
 ```razor
 <EditForm Model="User" @onsubmit="OnSaveAsync">
@@ -115,11 +154,11 @@ Aşağıdaki örnekte gösterildiği nasıl yapılır:
 }
 ```
 
-## <a name="save-app-state-before-an-authentication-operation"></a>Bir kimlik doğrulama işleminden önce uygulama durumunu Kaydet
+## <a name="save-app-state-before-an-authentication-operation"></a>Kimlik doğrulama işleminden önce uygulama durumunu kaydetme
 
-Bir kimlik doğrulama işlemi sırasında, tarayıcı IP 'ye yönlendirilmeden önce uygulama durumunu kaydetmek istediğiniz durumlar vardır. Durum kapsayıcısı gibi bir şey kullandığınızda ve kimlik doğrulaması başarılı olduktan sonra durumu geri yüklemek istediğinizde bu durum oluşabilir. Uygulamaya özgü durumu veya bir başvuruyu korumak ve kimlik doğrulama işlemi başarıyla tamamlandıktan sonra bu durumu geri yüklemek için özel bir kimlik doğrulama durumu nesnesi kullanabilirsiniz.
+Kimlik doğrulama işlemi sırasında, tarayıcı IP'ye yönlendirilmeden önce uygulama durumunu kaydetmek istediğiniz durumlar vardır. Bu durum, durum kapsayıcısı gibi bir şey kullanıyorsanız ve kimlik doğrulaması başarılı olduktan sonra durumu geri yüklemek istediğinizde de geçerli olabilir. Uygulamaya özgü durumu veya başvuruyu korumak için özel bir kimlik doğrulama durumu nesnesi kullanabilir ve kimlik doğrulama işlemi başarıyla tamamlandıktan sonra bu durumu geri yükleyebilirsiniz.
 
-`Authentication` bileşeni (*Sayfalar/Authentication. Razor*):
+`Authentication`bileşen (*Sayfa/Authentication.razor*):
 
 ```razor
 @page "/authentication/{action}"
@@ -163,40 +202,27 @@ Bir kimlik doğrulama işlemi sırasında, tarayıcı IP 'ye yönlendirilmeden �
 }
 ```
 
-## <a name="request-additional-access-tokens"></a>Ek erişim belirteçleri isteyin
+## <a name="customize-app-routes"></a>Uygulama rotalarını özelleştirme
 
-Çoğu uygulama yalnızca kullandıkları korunan kaynaklarla etkileşim kurmak için bir erişim belirteci gerektirir. Bazı senaryolarda, bir uygulama iki veya daha fazla kaynakla etkileşim kurmak için birden fazla belirteç gerektirebilir. `IAccessTokenProvider.RequestToken` yöntemi, bir uygulamanın aşağıdaki örnekte görüldüğü gibi, belirli bir kapsam kümesiyle belirteç sağlamasını sağlayan bir aşırı yükleme sağlar:
-
-```csharp
-var tokenResult = await AuthenticationService.RequestAccessToken(
-    new AccessTokenRequestOptions
-    {
-        Scopes = new[] { "https://graph.microsoft.com/Mail.Send", 
-            "https://graph.microsoft.com/User.Read" }
-    });
-```
-
-## <a name="customize-app-routes"></a>Uygulama yollarını özelleştirme
-
-Varsayılan olarak, `Microsoft.AspNetCore.Components.WebAssembly.Authentication` kitaplığı, farklı kimlik doğrulama durumlarını temsil etmek için aşağıdaki tabloda gösterilen yolları kullanır.
+Varsayılan olarak, `Microsoft.AspNetCore.Components.WebAssembly.Authentication` kitaplık farklı kimlik doğrulama durumlarını temsil etmek için aşağıdaki tabloda gösterilen yolları kullanır.
 
 | Yol                            | Amaç |
 | -------------------------------- | ------- |
-| `authentication/login`           | Bir oturum açma işlemini tetikler. |
+| `authentication/login`           | Oturum açma işlemini tetikler. |
 | `authentication/login-callback`  | Herhangi bir oturum açma işleminin sonucunu işler. |
-| `authentication/login-failed`    | Bazı nedenlerle oturum açma işlemi başarısız olduğunda hata iletilerini görüntüler. |
-| `authentication/logout`          | Bir oturum kapatma işlemi tetikler. |
-| `authentication/logout-callback` | Bir oturum kapatma işleminin sonucunu işler. |
-| `authentication/logout-failed`   | Bir nedenden dolayı oturum kapatma işlemi başarısız olduğunda hata iletilerini görüntüler. |
-| `authentication/logged-out`      | Kullanıcının oturumu başarıyla sonlandırdığını gösterir. |
-| `authentication/profile`         | Kullanıcı profilini düzenlemek için bir işlem tetikler. |
-| `authentication/register`        | Yeni bir kullanıcıyı kaydetmek için bir işlem tetikler. |
+| `authentication/login-failed`    | Oturum açma işlemi bazı nedenlerden dolayı başarısız olduğunda hata iletileri görüntüler. |
+| `authentication/logout`          | Bir oturum açma işlemini tetikler. |
+| `authentication/logout-callback` | Bir oturum son işlem sonucunu işler. |
+| `authentication/logout-failed`   | Oturum açma işlemi bazı nedenlerden dolayı başarısız olduğunda hata iletileri görüntüler. |
+| `authentication/logged-out`      | Kullanıcının başarılı bir şekilde oturumu nettigini gösterir. |
+| `authentication/profile`         | Kullanıcı profilini yeniden düzenledirecek bir işlemi tetikler. |
+| `authentication/register`        | Yeni bir kullanıcıyı kaydetmek için bir işlemi tetikler. |
 
-Yukarıdaki tabloda gösterilen yollar `RemoteAuthenticationOptions<TProviderOptions>.AuthenticationPaths`aracılığıyla yapılandırılabilir. Özel yollar sağlamak için seçenekleri ayarlarken, uygulamanın her yolu işleyen bir yolu olduğunu doğrulayın.
+Önceki tabloda gösterilen yollar . `RemoteAuthenticationOptions<TProviderOptions>.AuthenticationPaths` Özel rotalar sağlamak için seçenekleri ayarlarken, uygulamanın her yolu işleyen bir rotası olduğunu onaylayın.
 
-Aşağıdaki örnekte, tüm yollara `/security`ön eki eklenir.
+Aşağıdaki örnekte, tüm yollar `/security`.
 
-`Authentication` bileşeni (*Sayfalar/Authentication. Razor*):
+`Authentication`bileşen (*Sayfa/Authentication.razor*):
 
 ```razor
 @page "/security/{action}"
@@ -210,7 +236,7 @@ Aşağıdaki örnekte, tüm yollara `/security`ön eki eklenir.
 }
 ```
 
-`Program.Main` (*program.cs*):
+`Program.Main`(*Program.cs*):
 
 ```csharp
 builder.Services.AddApiAuthorization(options => { 
@@ -226,7 +252,7 @@ builder.Services.AddApiAuthorization(options => {
 });
 ```
 
-Gereksinim tamamen farklı yollar çağırırsa, daha önce açıklandığı gibi yolları ayarlayın ve `RemoteAuthenticatorView` açık bir eylem parametresiyle işlenir:
+Gereksinim tamamen farklı yollar gerektiriyorsa, yolları daha önce `RemoteAuthenticatorView` açıklandığı gibi ayarlayın ve açık bir eylem parametresi ile işiçin:
 
 ```razor
 @page "/register"
@@ -234,13 +260,13 @@ Gereksinim tamamen farklı yollar çağırırsa, daha önce açıklandığı gib
 <RemoteAuthenticatorView Action="@RemoteAuthenticationActions.Register" />
 ```
 
-Bunu seçerseniz, Kullanıcı arabirimini farklı sayfalara bölmek için izin verilir.
+İsterseniz ui'yi farklı sayfalara ayırabilirsiniz.
 
 ## <a name="customize-the-authentication-user-interface"></a>Kimlik doğrulama kullanıcı arabirimini özelleştirme
 
-`RemoteAuthenticatorView` her bir kimlik doğrulama durumu için varsayılan bir UI parçaları kümesi içerir. Her durum, özel bir `RenderFragment`geçirerek özelleştirilebilir. İlk oturum açma işlemi sırasında görüntülenecek metni özelleştirmek için `RemoteAuthenticatorView` aşağıdaki gibi değiştirebilir.
+`RemoteAuthenticatorView`her kimlik doğrulama durumu için varsayılan bir ui parçası kümesi içerir. Her durum özel olarak geçirilerek `RenderFragment`özelleştirilebilir. İlk oturum açma işlemi sırasında görüntülenen metni özelleştirmek `RemoteAuthenticatorView` için aşağıdaki gibi değiştirebilirsiniz.
 
-`Authentication` bileşeni (*Sayfalar/Authentication. Razor*):
+`Authentication`bileşen (*Sayfa/Authentication.razor*):
 
 ```razor
 @page "/security/{action}"
@@ -258,7 +284,7 @@ Bunu seçerseniz, Kullanıcı arabirimini farklı sayfalara bölmek için izin v
 }
 ```
 
-`RemoteAuthenticatorView`, aşağıdaki tabloda gösterilen her kimlik doğrulama yolu için kullanılabilecek bir parçaya sahiptir.
+Aşağıdaki `RemoteAuthenticatorView` tabloda gösterilen kimlik doğrulama yolu başına kullanılabilecek bir parçası vardır.
 
 | Yol                            | Parça                |
 | -------------------------------- | ----------------------- |

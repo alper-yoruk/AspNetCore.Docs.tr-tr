@@ -1,38 +1,38 @@
 ---
-title: ASP.NET Core Blazor uygulamalarda hataları işleme
+title: ASP.NET Core Blazor uygulamalarındaki hataları işleme
 author: guardrex
-description: Blazor işlenmemiş özel durumları nasıl yönettiğini ve hataları algılayan ve işleyen uygulamalar geliştirme Blazor nasıl ASP.NET Core olduğunu öğrenin.
+description: ASP.NET Blazor Core'un Blazor işlenmemiş özel durumları nasıl yönettiğini ve hataları algılayan ve işleyen uygulamaların nasıl geliştirilebildiğini keşfedin.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/17/2020
+ms.date: 03/29/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/handle-errors
-ms.openlocfilehash: 2177edb9c3197588a9335f3d14495b86d5d53f65
-ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
+ms.openlocfilehash: 4fdaf7fb90d126b8f7f029aac3af49eec3b69e74
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80218927"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80382281"
 ---
-# <a name="handle-errors-in-aspnet-core-opno-locblazor-apps"></a>ASP.NET Core Blazor uygulamalarda hataları işleme
+# <a name="handle-errors-in-aspnet-core-opno-locblazor-apps"></a>ASP.NET Core Blazor uygulamalarındaki hataları işleme
 
-[Steve Sanderson](https://github.com/SteveSandersonMS) tarafından
+Yazar: [Steve Sanderson](https://github.com/SteveSandersonMS)
 
-Bu makalede, işlenmemiş özel durumları Blazor nasıl yönettiği ve hataları algılayan ve işleyen uygulamalar geliştirileceği açıklanır.
+Bu makalede, Blazor işlenmemiş özel durumları nasıl yönetildiği ve hataları algılayan ve işleyen uygulamaların nasıl geliştirilen anlatılmaktadır.
 
 ## <a name="detailed-errors-during-development"></a>Geliştirme sırasında ayrıntılı hatalar
 
-Geliştirme sırasında Blazor bir uygulama düzgün bir şekilde çalışmadığı zaman, uygulamanın ayrıntılı hata bilgilerinin alınması sorunu gidermeye ve sorunun giderilmesine yardımcı olur. Bir hata oluştuğunda, Blazor uygulamalar ekranın alt kısmında altın bir çubuk görüntüler:
+Bir Blazor uygulama geliştirme sırasında düzgün çalışmadığında, uygulamadan ayrıntılı hata bilgileri almak sorun giderme ve sorunu gidermeye yardımcı olur. Bir hata oluştuğunda, Blazor uygulamalar ekranın alt kısmında bir altın çubuk görüntüler:
 
-* Geliştirme sırasında altın çubuk, özel durumu görebileceğiniz tarayıcı konsoluna yönlendirir.
-* Üretimde, altın çubuk kullanıcıya bir hata oluştuğunu bildirir ve tarayıcıyı yenilemeyi önerir.
+* Geliştirme sırasında, gold bar sizi özel durumu görebileceğiniz tarayıcı konsoluna yönlendirir.
+* Üretimde, altın çubuk kullanıcıya bir hata oluştuğunu bildirer ve tarayıcının yenilenmesini önerir.
 
-Bu hata işleme deneyimi için Kullanıcı arabirimi Blazor projesi şablonlarının bir parçasıdır.
+Bu hata işleme deneyimi için UI Blazor proje şablonlarının bir parçasıdır.
 
-Blazor WebAssembly uygulamasında, *Wwwroot/index.html* dosyasındaki deneyimi özelleştirin:
+Bir Blazor WebAssembly uygulamasında, *wwwroot/index.html* dosyasındaki deneyimi özelleştirin:
 
 ```html
 <div id="blazor-error-ui">
@@ -42,7 +42,7 @@ Blazor WebAssembly uygulamasında, *Wwwroot/index.html* dosyasındaki deneyimi �
 </div>
 ```
 
-Blazor sunucu uygulamasında, *Pages/_Host. cshtml* dosyasındaki deneyimi özelleştirin:
+Sunucu Blazor uygulamasında, *Pages/_Host.cshtml* dosyasındaki deneyimi özelleştirin:
 
 ```cshtml
 <div id="blazor-error-ui">
@@ -57,195 +57,216 @@ Blazor sunucu uygulamasında, *Pages/_Host. cshtml* dosyasındaki deneyimi özel
 </div>
 ```
 
-`blazor-error-ui` öğesi Blazor şablonlarına eklenen stillerle gizlenir ve bir hata oluştuğunda gösterilir.
+Öğe `blazor-error-ui` şablonlarda yer alan Blazor stiller tarafından gizlenir *(wwwroot/css/site.css)* ve bir hata oluştuğunda gösterilir:
 
-## <a name="how-a-opno-locblazor-server-app-reacts-to-unhandled-exceptions"></a>Blazor sunucu uygulamasının işlenmemiş özel durumlara nasıl yeniden davranması
+```css
+#blazor-error-ui {
+    background: lightyellow;
+    bottom: 0;
+    box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
+    display: none;
+    left: 0;
+    padding: 0.6rem 1.25rem 0.7rem 1.25rem;
+    position: fixed;
+    width: 100%;
+    z-index: 1000;
+}
 
-Blazor sunucusu durum bilgisi olan bir çerçevedir. Kullanıcılar bir uygulamayla etkileşim kurarken, *devre*olarak bilinen sunucuya bir bağlantı sağlar. Devre, etkin bileşen örneklerini ve diğer birçok durum düzeyini barındırır; örneğin:
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
+```
+
+## <a name="how-a-opno-locblazor-server-app-reacts-to-unhandled-exceptions"></a>Sunucu Blazor uygulaması işlenmemiş özel durumlara nasıl tepki verir?
+
+BlazorSunucu durumsal bir çerçevedir. Kullanıcılar bir uygulamayla etkileşimde iken, *devre*olarak bilinen sunucuya bağlantı sağlarlar. Devre etkin bileşen örnekleri, artı durum, örneğin diğer birçok yönlerini tutar:
 
 * Bileşenlerin en son işlenmiş çıktısı.
-* İstemci tarafı olayları tarafından tetiklenebilecek geçerli olay işleme temsilcileri kümesi.
+* İstemci tarafı olayları tarafından tetiklenebilen geçerli olay işleme temsilcileri kümesi.
 
-Bir Kullanıcı uygulamayı birden çok tarayıcı sekmelerinde açarsa, birden çok bağımsız devreler vardır.
+Bir kullanıcı uygulamayı birden çok tarayıcı sekmesinde açarsa, birden çok bağımsız devresi vardır.
 
-Blazor, işlenmemiş özel durumların çoğunu gerçekleştiği devreyi önemli olarak değerlendirir. İşlenmeyen bir özel durum nedeniyle devre sonlandırılırsa, Kullanıcı yalnızca yeni bir bağlantı oluşturmak için sayfayı yeniden yükleyerek uygulamayla etkileşime geçerek devam edebilir. Diğer kullanıcılar veya diğer tarayıcı sekmeleri için devre dışı bırakılmış olan Sonlandırıcı dışındaki devreleri etkilenmez. Bu senaryo, kilitlenen uygulamanın yeniden başlatılması gereken&mdash;, ancak diğer uygulamaların etkilenmemesi gerektiğini engelleyen bir masaüstü uygulamasına benzerdir.
+Blazorişlenmemiş çoğu özel durumu, oluştukları devre için ölümcül olarak ele alır. Bir devre işlenmemiş bir özel durum nedeniyle sonlandırılırsa, kullanıcı yalnızca yeni bir devre oluşturmak için sayfayı yeniden yükleyerek uygulamayla etkileşime devam edebilir. Diğer kullanıcılar veya diğer tarayıcı sekmeleri için devreler olan sonlandırılan devrelerin dışındaki devreler etkilenmez. Bu senaryo, çöken uygulamayı çökerten bir masaüstü&mdash;uygulamasına benzer, ancak diğer uygulamalar etkilenmez.
 
-Aşağıdaki nedenlerden dolayı işlenmeyen bir özel durum oluştuğunda devre sonlandırılır:
+İşlenmemiş bir özel durum aşağıdaki nedenlerle oluştuğunda bir devre sonlandırılır:
 
-* İşlenmeyen bir özel durum, genellikle devre dışı bir durumda bırakır.
-* İşlenmemiş bir özel durumdan sonra uygulamanın normal işlemi garanti edilemez.
+* İşlenmemiş bir özel durum genellikle devreyi tanımlanmamış bir durumda bırakır.
+* Uygulamanın normal çalışması işlenmemiş bir özel durum sonrasında garanti edilemez.
 * Devre devam ederse uygulamada güvenlik açıkları görünebilir.
 
-## <a name="manage-unhandled-exceptions-in-developer-code"></a>Geliştirici kodundaki işlenmemiş özel durumları yönetme
+## <a name="manage-unhandled-exceptions-in-developer-code"></a>Geliştirici kodunda işlenmemiş özel durumları yönetme
 
-Bir uygulamanın bir hatadan sonra devam edebilmesi için, uygulamanın hata işleme mantığı olması gerekir. Bu makalenin sonraki bölümlerinde işlenmemiş özel durumların olası kaynakları açıklanır.
+Bir uygulamanın hatadan sonra devam edeabilmesi için uygulamanın hata işleme mantığına sahip olması gerekir. Bu makalenin sonraki bölümleri, işlenmemiş özel durumların olası kaynaklarını açıklar.
 
-Üretimde, çerçeve özel durum iletilerini veya yığın izlemelerini Kullanıcı arabiriminde işlemez. Özel durum iletilerini veya yığın izlemelerini işleme şu şekilde olabilir:
+Üretimde, oluşturma aracında çerçeve özel durum iletileri veya yığın izlemeleri oluşturmayın. Özel durum iletileri veya yığın izlemeleri oluşturma:
 
-* Hassas bilgileri son kullanıcılara açıklayın.
-* Kötü niyetli bir kullanıcının uygulama, sunucu veya ağ güvenliğini tehlikeye atabilecek bir uygulamada zayıf yanları bulmasına yardımcı olun.
+* Hassas bilgileri son kullanıcılara ifşa edin.
+* Kötü niyetli bir kullanıcının uygulamanın, sunucunun veya ağın güvenliğini tehlikeye atabilecek bir uygulamadaki zayıflıkları keşfetmesinde yardımcı olun.
 
-## <a name="log-errors-with-a-persistent-provider"></a>Kalıcı bir sağlayıcıyla hataları günlüğe kaydet
+## <a name="log-errors-with-a-persistent-provider"></a>Kalıcı bir sağlayıcıyla hataları günlüğe kaydetme
 
-İşlenmeyen bir özel durum oluşursa, özel durum hizmet kapsayıcısında yapılandırılmış <xref:Microsoft.Extensions.Logging.ILogger> örneklerine kaydedilir. Varsayılan olarak, Blazor uygulamalar konsol günlüğü sağlayıcısı ile konsol çıktısına kaydedilir. Günlük boyutunu ve günlük döndürmesini yöneten bir sağlayıcı ile daha kalıcı bir konuma oturum açmayı düşünün. Daha fazla bilgi için bkz. <xref:fundamentals/logging/index>.
+İşlenmemiş bir özel durum oluşursa, <xref:Microsoft.Extensions.Logging.ILogger> özel durum hizmet kapsayıcısında yapılandırılan örneklere günlüğe kaydedilir. Varsayılan olarak, Blazor uygulamalar Konsol Günlük Sağlayıcısı ile çıktı konsolu için günlük. Günlük boyutunu ve günlük döndürmeyi yöneten bir sağlayıcıyla daha kalıcı bir konuma günlüğe kaydetmeyi düşünün. Daha fazla bilgi için bkz. <xref:fundamentals/logging/index>.
 
-Geliştirme sırasında, Blazor hata ayıklamaya yardımcı olması için genellikle özel durumların tüm ayrıntılarını tarayıcı konsoluna gönderir. Üretimde, tarayıcı konsolundaki ayrıntılı hatalar varsayılan olarak devre dışıdır. Bu, hataların istemcilere gönderilmediği, ancak özel durumun tam ayrıntılarının hala sunucu tarafında günlüğe kaydedildiği anlamına gelir. Daha fazla bilgi için bkz. <xref:fundamentals/error-handling>.
+Geliştirme sırasında, Blazor genellikle hata ayıklama yardımcı olmak için tarayıcının konsoluna özel durumların tüm ayrıntılarını gönderir. Üretimde, tarayıcının konsolundaki ayrıntılı hatalar varsayılan olarak devre dışı bırakılır, bu da hataların istemcilere gönderilmediği, ancak özel durum ayrıntılarının hala sunucu tarafında günlüğe kaydedildiği anlamına gelir. Daha fazla bilgi için bkz. <xref:fundamentals/error-handling>.
 
-Hangi olayların günlüğe kaydedileceğini ve günlüğe kaydedilen olayların önem düzeyi düzeyini karar vermelisiniz. Saldırgan kullanıcılar hataları kasıtlı olarak tetikleyebiliyor olabilir. Örneğin, ürün ayrıntılarını görüntüleyen bir bileşenin URL 'sinde bilinmeyen bir `ProductId` sağlandığı bir hatadan olay günlüğe kaydetme. Tüm hatalar günlüğe kaydetme için yüksek önem derecesine sahip olaylar olarak değerlendirilmemelidir.
+Hangi olayların günlüğe kaydolacağına ve günlüğe kaydedilen olayların önem düzeyine karar vermelisiniz. Düşman kullanıcılar hataları kasıtlı olarak tetikleyebilir. Örneğin, ürün ayrıntılarını görüntüleyen bir bileşenin `ProductId` URL'sinde bilinmeyenin sağlandığı bir hatadan olay kaydetmeyin. Tüm hatalar günlüğe kaydetme için yüksek öneme yönelik olaylar olarak ele alınmamalıdır.
 
-## <a name="places-where-errors-may-occur"></a>Hataların gerçekleşebileceği yerleri
+## <a name="places-where-errors-may-occur"></a>Hataların oluşabileceği yerler
 
-Çerçeve ve uygulama kodu aşağıdaki konumlardan herhangi birinde işlenmeyen özel durumları tetikleyebiliriz:
+Çerçeve ve uygulama kodu, aşağıdaki konumlardan herhangi birinde işlenmemiş özel durumları tetikleyebilir:
 
-* [Bileşen örneği oluşturma](#component-instantiation)
+* [Bileşen anında](#component-instantiation)
 * [Yaşam döngüsü yöntemleri](#lifecycle-methods)
-* [İşleme mantığı](#rendering-logic)
+* [Oluşturma mantığı](#rendering-logic)
 * [Olay işleyicileri](#event-handlers)
-* [Bileşen elden çıkarma](#component-disposal)
-* [JavaScript birlikte çalışma](#javascript-interop)
-* [Blazor Server rerendering](#blazor-server-prerendering)
+* [Bileşen imha](#component-disposal)
+* [JavaScript ile birlikte çalışma](#javascript-interop)
+* [BlazorSunucu yeniden işleme](#blazor-server-prerendering)
 
-Önceki işlenmemiş özel durumlar, bu makalenin aşağıdaki bölümlerinde açıklanmıştır.
+Önceki işlenmemiş özel durumlar bu makalenin aşağıdaki bölümlerinde açıklanmıştır.
 
-### <a name="component-instantiation"></a>Bileşen örneği oluşturma
+### <a name="component-instantiation"></a>Bileşen anında
 
-Blazor bir bileşenin örneğini oluşturduğunda:
+Bir Blazor bileşen örneğini oluşturduğunda:
 
-* Bileşenin Oluşturucusu çağrılır.
-* [`@inject`](xref:blazor/dependency-injection#request-a-service-in-a-component) yönergesi veya [`[Inject]`](xref:blazor/dependency-injection#request-a-service-in-a-component) özniteliği aracılığıyla bileşen oluşturucusuna sağlanan Singleton olmayan her türlü hizmeti Oluşturucu.
+* Bileşenin oluşturucusu çağrılır.
+* [`@inject`](xref:blazor/dependency-injection#request-a-service-in-a-component) Bileşenin oluşturucuya yönerge veya [`[Inject]`](xref:blazor/dependency-injection#request-a-service-in-a-component) öznitelik yoluyla sağlanan singleton olmayan DI hizmetlerinin üreticileri çağrılır.
 
-Herhangi bir `[Inject]` özelliği için yürütülen herhangi bir Oluşturucu veya ayarlayıcı işlenmeyen bir özel durum oluşturduğunda Blazor sunucusu devresi başarısız olur. Framework bileşeni örneklemediğinden özel durum önemlidir. Oluşturucu mantığı özel durumlar oluşturmayabilir, uygulama hata işleme ve günlüğe kaydetme ile [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) ifadesini kullanarak özel durumları yakalemelidir.
+Herhangi Blazor bir `[Inject]` özellik için çalıştırılan herhangi bir kurucu veya ayarlayıcı işlenmemiş bir özel durum attığında Sunucu devresi başarısız olur. Çerçeve bileşeni anında atamadığı için özel durum ölümcüldür. Oluşturucu mantığı özel durumlar oluşturabılırsa, uygulama hata işleme ve günlüğe kaydetme içeren bir [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) deyimi kullanarak özel durumları yakalamalıdır.
 
 ### <a name="lifecycle-methods"></a>Yaşam döngüsü yöntemleri
 
-Bir bileşenin kullanım ömrü boyunca Blazor aşağıdaki [yaşam döngüsü yöntemlerini](xref:blazor/lifecycle)çağırır:
+Bir bileşenin ömrü Blazor boyunca, aşağıdaki [yaşam döngüsü yöntemlerini](xref:blazor/lifecycle)çağırır:
 
 * `OnInitialized` / `OnInitializedAsync`
 * `OnParametersSet` / `OnParametersSetAsync`
 * `ShouldRender` / `ShouldRenderAsync`
 * `OnAfterRender` / `OnAfterRenderAsync`
 
-Herhangi bir yaşam döngüsü yöntemi, zaman uyumlu veya zaman uyumsuz olarak bir özel durum oluşturursa, özel durum Blazor sunucu devresi için önemli olur. Bileşenler için yaşam döngüsü yöntemlerinde hatalarla başa çıkmak için hata işleme mantığı ekleyin.
+Herhangi bir yaşam döngüsü yöntemi eşzamanlı veya eşzamanlı olarak bir özel durum atarsa, özel durum bir Blazor Sunucu devresi için ölümcüldür. Bileşenlerin yaşam döngüsü yöntemlerindeki hatalarla başa çıkabilmek için hata işleme mantığı ekleyin.
 
-Aşağıdaki örnekte `OnParametersSetAsync` bir ürünü almak için bir yöntemi çağırır:
+Aşağıdaki örnekte, `OnParametersSetAsync` bir ürünü elde etmek için bir yöntem çağırır:
 
-* `ProductRepository.GetProductByIdAsync` yönteminde oluşan bir özel durum `try-catch` ifadesiyle işlenir.
-* `catch` bloğu yürütüldüğünde:
-  * `loadFailed`, kullanıcıya bir hata iletisi göstermek için kullanılan `true`olarak ayarlanır.
+* `ProductRepository.GetProductByIdAsync` Yöntemde atılan bir özel durum `try-catch` bir deyim tarafından işlenir.
+* `catch` Blok yürütüldüğünde:
+  * `loadFailed`kullanıcıya `true`bir hata iletisi görüntülemek için kullanılan olarak ayarlanır.
   * Hata günlüğe kaydedilir.
 
 [!code-razor[](handle-errors/samples_snapshot/3.x/product-details.razor?highlight=11,27-39)]
 
-### <a name="rendering-logic"></a>İşleme mantığı
+### <a name="rendering-logic"></a>Oluşturma mantığı
 
-`.razor` bileşen dosyasındaki bildirim temelli biçimlendirme `BuildRenderTree`adlı bir C# yönteme derlenir. Bir bileşen işlendiğinde `BuildRenderTree` yürütülür ve işlenmiş bileşenin öğelerini, metnini ve alt bileşenlerini açıklayan bir veri yapısı oluşturur.
+Bileşen dosyasındaki `.razor` bildirimbiçimlendirmecif olarak adlandırılan `BuildRenderTree`c# yönteminde derlenir. Bir bileşen, işlenen `BuildRenderTree` bileşenin öğelerini, metni ve alt bileşenlerini açıklayan bir veri yapısını işler, yürütür ve oluşturur.
 
-İşleme mantığı bir özel durum oluşturabilir. `@someObject.PropertyName` değerlendiriliyorsa ancak `@someObject` `null`bu senaryoya bir örnek oluşur. İşleme mantığı tarafından oluşturulan işlenmemiş bir özel durum, Blazor sunucusu devresi için önemli bir durumdur.
+Oluşturma mantığı bir özel durum atabilir. Bu senaryonun bir örneği `@someObject.PropertyName` değerlendirildiğinde `@someObject` oluşur, ancak . `null` Rendermantığı tarafından atılan işlenmemiş bir özel Blazor durum, bir Sunucu devresi için ölümcüldür.
 
-Oluşturma mantığındaki null başvuru özel durumunu engellemek için, üyelerine erişmeden önce bir `null` nesnesini denetleyin. Aşağıdaki örnekte, `person.Address` `null``person.Address` özelliklere erişilmez:
+Oluşturma mantığında geçersiz bir başvuru özel durum `null` larını önlemek için, üyelerine erişmeden önce bir nesneyi denetleyin. Aşağıdaki örnekte, `person.Address` aşağıdaki durumlarda özelliklere `person.Address` erişimez: `null`
 
 [!code-razor[](handle-errors/samples_snapshot/3.x/person-example.razor?highlight=1)]
 
-Yukarıdaki kod, `person` `null`olmadığını varsayar. Genellikle, kodun yapısı, bileşenin işlendiği sırada bir nesnenin var olmasını garanti eder. Bu durumlarda, işleme mantığındaki `null` denetlemek gerekli değildir. Önceki örnekte, bileşen örneği oluşturulduğunda `person` oluşturulduğu için `person` olması garanti edilebilir.
+Önceki kod, `person` `null`'. Genellikle, kodun yapısı bileşenin işlendiği anda bir nesnenin var olduğunu garanti eder. Bu gibi durumlarda, oluşturma mantığı `null` için kontrol etmek gerekli değildir. Önceki örnekte, `person` bileşen anında oluşturulduğunda `person` oluşturulduğu için var olacağı garanti edilebilir.
 
 ### <a name="event-handlers"></a>Olay işleyicileri
 
-İstemci tarafı kod, kullanarak olay işleyicileri C# oluşturulduğunda kodun çağırmaları tetikler:
+İstemci tarafı kodu, olay işleyicileri kullanılarak oluşturulduğunda C# kodunun çağrılarını tetikler:
 
 * `@onclick`
 * `@onchange`
-* Diğer `@on...` öznitelikleri
+* Diğer `@on...` öznitelikler
 * `@bind`
 
-Olay işleyici kodu, bu senaryolarda işlenmeyen bir özel durum oluşturabilir.
+Olay işleyicisi kodu bu senaryolarda işlenmemiş bir özel durum atabilir.
 
-Bir olay işleyicisi işlenmeyen bir özel durum oluşturursa (örneğin, bir veritabanı sorgusu başarısız olursa), özel durum Blazor sunucu devresi için önemli olur. Uygulama, dış nedenlerle başarısız olabilecek kodu çağırırsa, hata işleme ve günlüğe kaydetme ile [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) ifadesini kullanarak özel durumlar yakalayın.
+Bir olay işleyicisi işlenmemiş bir özel durum atarsa (örneğin, bir Blazor veritabanı sorgusu başarısız olursa), özel durum bir Sunucu devresi için ölümcüldür. Uygulama dış nedenlerle başarısız olabilecek kodu çağırırsa, hata işleme ve günlüğe kaydetme içeren bir [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) deyimi kullanarak özel durumları yakalayın.
 
-Kullanıcı kodu yakalanmazsa ve özel durumu işlemezse çerçeve özel durumu günlüğe kaydeder ve devre sonlandırır.
+Kullanıcı kodu özel durumu tutup işlemiyorsa, çerçeve özel durumu kaydeder ve devreyi sonlandırır.
 
-### <a name="component-disposal"></a>Bileşen elden çıkarma
+### <a name="component-disposal"></a>Bileşen imha
 
-Örneğin, Kullanıcı başka bir sayfaya gezindiği için, bir bileşen kullanıcı arabiriminden kaldırılabilir. <xref:System.IDisposable?displayProperty=fullName> uygulayan bir bileşen kullanıcı arabiriminden kaldırıldığında, çerçeve bileşenin <xref:System.IDisposable.Dispose*> yöntemini çağırır.
+Kullanıcı başka bir sayfada gezinme yaptığı için, örneğin bir bileşen Kullanıcı Arabirimi'nden kaldırılabilir. Uygulayan <xref:System.IDisposable?displayProperty=fullName> bir bileşen UI'den kaldırıldığında, çerçeve bileşenin <xref:System.IDisposable.Dispose*> yöntemini çağırır.
 
-Bileşenin `Dispose` yöntemi işlenmeyen bir özel durum oluşturursa, özel durum bir Blazor sunucusu devresi için önemli olur. Çıkarma mantığı özel durumlar oluşturmayabilir, uygulama hata işleme ve günlüğe kaydetme ile [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) ifadesini kullanarak özel durumları yakalemelidir.
+Bileşenin `Dispose` yöntemi işlenmemiş bir özel durum atarsa, özel Blazor durum bir Sunucu devresi için ölümcüldür. Elden çıkarma mantığı özel durumlar atayabı olabilirse, uygulama hata işleme ve günlüğe kaydetme içeren bir [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) deyimi kullanarak özel durumları yakalamalıdır.
 
-Bileşen aktiften çıkarma hakkında daha fazla bilgi için bkz. <xref:blazor/lifecycle#component-disposal-with-idisposable>.
+Bileşen imhası hakkında daha <xref:blazor/lifecycle#component-disposal-with-idisposable>fazla bilgi için bkz.
 
 ### <a name="javascript-interop"></a>JavaScript ile birlikte çalışma
 
-`IJSRuntime.InvokeAsync<T>`, .NET kodunun Kullanıcı tarayıcısındaki JavaScript çalışma zamanına zaman uyumsuz çağrılar yapmasına izin verir.
+`IJSRuntime.InvokeAsync<T>`.NET kodunun kullanıcının tarayıcısında JavaScript çalışma süresine eşzamanlı arama lar yapmasına olanak tanır.
 
-`InvokeAsync<T>`ile ilgili hata işleme için aşağıdaki koşullar geçerlidir:
+Aşağıdaki koşullar aşağıdaki `InvokeAsync<T>`ile hata işleme için geçerlidir:
 
-* `InvokeAsync<T>` çağrısı eşzamanlı olarak başarısız olursa, .NET özel durumu oluşur. `InvokeAsync<T>` çağrısı başarısız olabilir, örneğin, sağlanan bağımsız değişkenler serileştirilemiyor. Geliştirici kodu özel durumu yakalamalı. Bir olay işleyicisindeki veya bileşen yaşam döngüsü yöntemindeki uygulama kodu bir özel durumu işlemezse, ortaya çıkan özel durum Blazor sunucu devresi için önemlidir.
-* `InvokeAsync<T>` çağrısı zaman uyumsuz olarak başarısız olursa, .NET <xref:System.Threading.Tasks.Task> başarısız olur. Örneğin, JavaScript tarafı kodu bir özel durum oluşturduğundan veya `rejected`olarak tamamlanan bir `Promise` döndürdüğünden `InvokeAsync<T>` çağrısı başarısız olabilir. Geliştirici kodu özel durumu yakalamalı. [Await](/dotnet/csharp/language-reference/keywords/await) işleci kullanılıyorsa, yöntem çağrısını hata işleme ve günlüğe kaydetme ile [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) ifadesinde sarmalamalı olarak düşünün. Aksi takdirde, hatalı kod Blazor sunucusu devresi için önemli olan işlenmemiş bir özel durumla sonuçlanır.
-* Varsayılan olarak, `InvokeAsync<T>` çağrıları belirli bir süre içinde tamamlanmalıdır veya çağrı zaman aşımına uğrar. Varsayılan zaman aşımı süresi bir dakikadır. Zaman aşımı, kodu ağ bağlantısında veya hiçbir zaman bir tamamlanma iletisi göndermeme JavaScript kodundaki bir kaybına karşı korur. Çağrı zaman aşımına uğrarsa, elde edilen `Task` bir <xref:System.OperationCanceledException>başarısız olur. Günlüğe kaydetme ile özel durumu yakalar ve işleyin.
+* Bir çağrı `InvokeAsync<T>` eşzamanlı olarak başarısız olursa, bir .NET özel durum oluşur. Örneğin, `InvokeAsync<T>` sağlanan bağımsız değişkenler seri hale getirilemedığından, bir çağrı başarısız olabilir. Geliştirici kodu özel durumu yakalamak gerekir. Olay işleyicisi veya bileşen yaşam döngüsü yöntemindeki uygulama kodu bir özel durum Blazor işlemiyorsa, ortaya çıkan özel durum bir Sunucu devresi için ölümcüldür.
+* Bir çağrı `InvokeAsync<T>` eşzamanlı olarak başarısız olursa, <xref:System.Threading.Tasks.Task> .NET başarısız olur. Örneğin, `InvokeAsync<T>` JavaScript yan kodu bir özel durum attığından veya 'da `Promise` `rejected`tamamlanmış bir özel durum döndürür' den bir çağrı başarısız olabilir. Geliştirici kodu özel durumu yakalamak gerekir. [Bekleme](/dotnet/csharp/language-reference/keywords/await) işleci kullanıyorsanız, yöntem çağrısını hata işleme ve günlüğe kaydetme yle [deneme yakalama](/dotnet/csharp/language-reference/keywords/try-catch) deyiminde sarmayı düşünün. Aksi takdirde, başarısız kod, bir Blazor Sunucu devresi için ölümcül olan işlenmemiş bir özel durumla sonuçlanır.
+* Varsayılan olarak, `InvokeAsync<T>` çağrıların belirli bir süre içinde tamamlanması veya arama saatleri nin tamamlanması gerekir. Varsayılan zaman açıksırılım dönüşü Zaman açıkışığı kodu, tamamlanma iletisi geri gününü asla geri gününüolmayan ağbağlantısı veya JavaScript kodundaki bir kayba karşı korur. Arama zamanları dışarı çıkarsa, `Task` ortaya <xref:System.OperationCanceledException>çıkan bir . Bindirme ve günlük ile özel durum işleme.
 
-Benzer şekilde, JavaScript kodu [`[JSInvokable]`](xref:blazor/call-dotnet-from-javascript) özniteliği tarafından belirtilen .net yöntemlerine çağrı başlatabilir. Bu .NET yöntemleri işlenmeyen bir özel durum oluşturur:
+Benzer şekilde, JavaScript kodu öznitelik tarafından [`[JSInvokable]`](xref:blazor/call-dotnet-from-javascript) belirtilen .NET yöntemlerine çağrı lar başlatabilir. Bu .NET yöntemleri işlenmemiş bir özel durum atarsa:
 
-* Özel durum Blazor sunucu devresi için önemli olarak değerlendirilmez.
-* JavaScript tarafı `Promise` reddedilir.
+* Özel durum, bir Blazor Sunucu devresi için ölümcül olarak kabul edilmez.
+* JavaScript tarafı `Promise` reddedildi.
 
-.NET tarafında ya da yöntem çağrısının JavaScript tarafında hata işleme kodu kullanma seçeneğiniz vardır.
+Yöntem çağrısının .NET tarafında veya JavaScript tarafında hata işleme kodunu kullanma seçeneğiniz vardır.
 
 Daha fazla bilgi için aşağıdaki makalelere bakın:
 
 * <xref:blazor/call-javascript-from-dotnet>
 * <xref:blazor/call-dotnet-from-javascript>
 
-### <a name="opno-locblazor-server-prerendering"></a>Blazor Server prerendering
+### <a name="opno-locblazor-server-prerendering"></a>BlazorSunucu önişleme
 
-Blazor bileşenleri [bileşen etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) kullanılarak önceden ilerek, işlenmiş HTML işaretlemesi kullanıcının ilk http isteğinin bir parçası olarak döndürülür. Bu şu şekilde geçerlidir:
+Blazor[bileşenleri,](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) kullanıcının ilk HTTP isteğinin bir parçası olarak işlenen HTML biçimlendirmesinin döndürülecek şekilde Bileşen Etiket Yardımcısı kullanılarak önceden oluşturulabilir. Bu çalışır:
 
-* Aynı sayfanın parçası olan tüm ön işlenmiş bileşenler için yeni bir devre oluşturma.
-* İlk HTML oluşturuluyor.
-* Kullanıcı tarayıcısının aynı sunucuya geri SignalR bir bağlantı kuruncaya kadar devreyi `disconnected` olarak kabul edin. Bağlantı oluşturulduğunda, devre üzerindeki etkileşim sürdürülür ve bileşenlerin HTML işaretlemesi güncelleştirilir.
+* Aynı sayfanın parçası olan önceden işlenmiş bileşenlerin tümü için yeni bir devre oluşturma.
+* İlk HTML oluşturma.
+* Kullanıcının tarayıcısı `disconnected` aynı sunucuya bir SignalR bağlantı kurana kadar devreyi ele alır. Bağlantı kurulduğunda, devredeki etkileşim devam eder ve bileşenlerin HTML biçimlendirmesi güncelleştirilir.
 
-Herhangi bir bileşen prerendering sırasında, örneğin bir yaşam döngüsü yöntemi veya işleme mantığı sırasında işlenmeyen bir özel durum oluşturursa:
+Herhangi bir bileşen, örneğin, bir yaşam döngüsü yöntemi sırasında veya oluşturma mantığı nda, ön işleme sırasında işlenmemiş bir özel durum atarsa:
 
-* Bu, devre için önemli bir durumdur.
-* Özel durum, `Component` Tag Yardımcısı 'ndan çağrı yığınını ortaya atılır. Bu nedenle, özel durum geliştirici kodu tarafından açıkça yakalanmadığı takdirde tüm HTTP isteği başarısız olur.
+* Özel durum devre için ölümcüldür.
+* Özel durum, Etiket Yardımcısı'ndan `Component` çağrı yığınına atılır. Bu nedenle, özel durum geliştirici kodu tarafından açıkça yakalanmadığı sürece TÜM HTTP isteği başarısız olur.
 
-Normal koşullarda, prerendering başarısız olduğunda bileşeni oluşturma ve işleme devam etmek, çalışan bir bileşen işlenemediği için mantıklı değildir.
+Ön işleme başarısız olduğunda normal koşullar altında, çalışan bir bileşen oluşturulamadığından bileşeni oluşturmaya ve işlemeye devam etmek mantıklı değildir.
 
-Prerendering sırasında oluşabilecek hatalara tolerans sağlamak için hata işleme mantığı özel durum oluşturabilecek bir bileşenin içine yerleştirilmelidir. [Try-catch](/dotnet/csharp/language-reference/keywords/try-catch) deyimlerini hata işleme ve günlüğe kaydetme ile kullanın. Bir `try-catch` bildiriminde `Component` etiketi yardımcısını sarmalama yerine, `Component` etiketi Yardımcısı tarafından işlenen bileşene hata işleme mantığını koyun.
+Ön işleme sırasında oluşabilecek hataları tolere etmek için, hata işleme mantığı özel durumlar atabilecek bir bileşenin içine yerleştirilmelidir. Hata işleme ve günlüğe kaydetme ile [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) deyimleri kullanın. Tag Helper'ı `Component` bir `try-catch` deyimde sarmak yerine, `Component` Tag Helper tarafından işlenen bileşene hata işleme mantığını yerleştirin.
 
 ## <a name="advanced-scenarios"></a>Gelişmiş senaryolar
 
-### <a name="recursive-rendering"></a>Özyinelemeli işleme
+### <a name="recursive-rendering"></a>Özyinelemeli görüntüleme
 
-Bileşenler yinelemeli olarak iç içe olabilir. Bu, özyinelemeli veri yapılarını temsil etmek için kullanışlıdır. Örneğin, bir `TreeNode` bileşeni, düğüm alt öğelerinin her biri için daha fazla `TreeNode` bileşeni işleyebilir.
+Bileşenler özyinelemeli olarak iç içe olabilir. Bu, özyinelemeli veri yapılarını temsil etmek için yararlıdır. Örneğin, bir `TreeNode` bileşen düğümün her bir çocuk için daha fazla `TreeNode` bileşen işleyebilir.
 
-Yinelemeli olarak işlenirken, sonsuz özyineleme sonucu veren kodlama desenlerinden kaçının:
+Özyinelemeli olarak işleme yaparken, sonsuz özyinelemeyle sonuçlanan kodlama desenlerinden kaçının:
 
-* Bir döngüyü içeren bir veri yapısını yinelemeli olarak işlemez. Örneğin, alt öğeleri içeren bir ağaç düğümünü işlemez.
-* Bir döngüyü içeren bir düzen zinciri oluşturmayın. Örneğin, düzeni kendisi olan bir düzen oluşturmayın.
-* Son kullanıcının, kötü amaçlı veri girişi veya JavaScript birlikte çalışabilirlik çağrıları aracılığıyla özyineleme/varyantları (kurallar) ihlal etmemenizi izin verme.
+* Döngü içeren bir veri yapısını özyinelemeli olarak işlemeyin. Örneğin, çocukları kendisini içeren bir ağaç düğümü oluşturmayın.
+* Döngü içeren bir düzenler zinciri oluşturmayın. Örneğin, düzeni kendisi olan bir düzen oluşturmayın.
+* Son kullanıcının kötü amaçlı veri girişi veya JavaScript interop çağrıları yoluyla özyineleme değişmezlerini (kuralları) ihlal etmesine izin vermeyin.
 
-Oluşturma sırasında sonsuz döngüler:
+İşleme sırasında sonsuz döngüler:
 
-* İşleme işleminin süresiz olarak devam etmesine neden olur.
-* Sonlandırılmamış bir döngü oluşturmaya eşdeğerdir.
+* İşleme işleminin sonsuza kadar devam etmesine neden olur.
+* Belirsiz bir döngü oluşturmaya eşdeğerdir.
 
-Bu senaryolarda, etkilenen bir Blazor sunucusu devresi başarısız olur ve iş parçacığı genellikle şunları yapmayı dener:
+Bu senaryolarda, etkilenen Blazor bir Sunucu devresi başarısız olur ve iş parçacığı genellikle aşağıdakileri yapmaya çalışır:
 
-* Süresiz olarak işletim sisteminin izin verdiği CPU süresini çok fazla kullanın.
-* Sınırsız miktarda sunucu belleği tükettin. Sınırsız bellek tüketme, Sonlandırılmamış bir döngünün her yinelemede bir koleksiyona giriş eklediği senaryoya eşdeğerdir.
+* İşletim sisteminin izin verdiği kadar CPU süresini süresiz olarak tüketin.
+* Sınırsız miktarda sunucu belleği tüketin. Sınırsız bellek tüketmek, sonlanmamış bir döngünün her yinelemede bir koleksiyona girişler eklediği senaryoya eşdeğerdir.
 
-Sonsuz özyineleme desenlerinin önüne geçmek için, özyinelemeli işleme kodunun uygun durdurma koşullarını içerdiğinden emin olun.
+Sonsuz özyineleme desenlerinden kaçınmak için, özyinelemeli işleme kodunun uygun durdurma koşulları içerdiğinden emin olun.
 
-### <a name="custom-render-tree-logic"></a>Özel işleme ağacı mantığı
+### <a name="custom-render-tree-logic"></a>Özel render ağacı mantığı
 
-Çoğu Blazor bileşen *. Razor* dosyaları olarak uygulanır ve çıktılarını oluşturmak için `RenderTreeBuilder` üzerinde çalışan Logic üretmek için derlenir. Bir geliştirici, yordamsal C# kodu kullanarak `RenderTreeBuilder` mantığını el ile uygulayabilir. Daha fazla bilgi için bkz. <xref:blazor/advanced-scenarios#manual-rendertreebuilder-logic>.
+Bileşenlerin çoğu Blazor *.razor* dosyaları olarak uygulanır ve çıktılarını işlemek `RenderTreeBuilder` için a üzerinde çalışan mantık üretmek için derlenir. Bir geliştirici, yordamc# kodunu kullanarak mantığı el ile uygulayabilir. `RenderTreeBuilder` Daha fazla bilgi için bkz. <xref:blazor/advanced-scenarios#manual-rendertreebuilder-logic>.
 
 > [!WARNING]
-> El ile işleme ağacı Oluşturucu mantığının kullanımı, genel bileşen geliştirme için önerilmeyen gelişmiş ve güvenli olmayan bir senaryo olarak değerlendirilir.
+> El ile render ağacı oluşturucu mantığının kullanımı, genel bileşen geliştirme için önerilmez gelişmiş ve güvenli olmayan bir senaryo olarak kabul edilir.
 
-`RenderTreeBuilder` kod yazılmışsa, geliştirici kodun doğruluğunu garanti etmelidir. Örneğin, geliştirici şunları sağlamalıdır:
+`RenderTreeBuilder` Kod yazılmışsa, geliştirici kodun doğruluğunu garanti etmelidir. Örneğin, geliştirici aşağıdakileri sağlamalıdır:
 
-* `OpenElement` ve `CloseElement` çağrıları doğru dengelenir.
-* Öznitelikler yalnızca doğru yerlere eklenir.
+* Aramalar `OpenElement` ve `CloseElement` doğru dengelenir.
+* Öznitelikler yalnızca doğru yerlerde eklenir.
 
-Hatalı elle işleme ağacı Oluşturucu mantığı kilitlenmeler, sunucu askıda kalma ve güvenlik açıkları dahil rastgele tanımsız davranışa neden olabilir.
+Yanlış el ile işoluşturma ağacı oluşturucu mantığı, kilitlenmeler, sunucu askıları ve güvenlik açıkları gibi rasgele tanımlanmamış davranışlara neden olabilir.
 
-El ile işleme ağacı Oluşturucu mantığını aynı karmaşıklık düzeyinde ve aynı *tehlike* düzeyiyle, el ile derleme kodu veya MSIL yönergeleri yazarak değerlendirin.
+El ile ağaç oluşturucu mantığını aynı karmaşıklık düzeyinde ve montaj kodu veya MSIL yönergelerini elle yazmakla aynı *tehlike* düzeyinde düşünün.

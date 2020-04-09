@@ -1,9 +1,9 @@
-## <a name="share-interop-code-in-a-class-library"></a>Birlikte çalışma kodunu bir sınıf kitaplığında paylaşma
+## <a name="share-interop-code-in-a-class-library"></a>Sınıf kitaplığında interop kodunu paylaşma
 
-JS birlikte çalışma kodu bir NuGet paketindeki kodu paylaşmanıza olanak sağlayan bir sınıf kitaplığına dahil edilebilir.
+JS interop kodu, kodu NuGet paketinde paylaşmanızı sağlayan bir sınıf kitaplığına eklenebilir.
 
-Sınıf kitaplığı, yerleşik derlemede JavaScript kaynaklarını katıştırmayı işler. JavaScript dosyaları *Wwwroot* klasörüne yerleştirilir. Araç, kitaplık oluşturulduğunda kaynakları katıştırmaya önem kazanır.
+Sınıf kitaplığı, yerleşik derlemeye JavaScript kaynaklarını katıştırma işlemlerini işler. JavaScript dosyaları *wwwroot* klasörüne yerleştirilir. Takım, kitaplık oluşturulurken kaynakları gömme yi halletmekle ilgilenir.
 
-Oluşturulan NuGet paketine, uygulamanın proje dosyasında herhangi bir NuGet paketiyle aynı şekilde başvurulur. Paket geri yüklendikten sonra, uygulama kodu JavaScript 'e, gibi çağrı yapabilir C#.
+Yerleşik NuGet paketi, uygulamanın proje dosyasında herhangi bir NuGet paketine başvurulduğu gibi başvurulan. Paket geri yüklendikten sonra, uygulama kodu JavaScript'e C# gibi çağrıyapabilir.
 
 Daha fazla bilgi için bkz. <xref:blazor/class-libraries>.

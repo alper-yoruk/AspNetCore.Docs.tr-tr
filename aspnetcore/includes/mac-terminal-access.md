@@ -1,18 +1,18 @@
-### <a name="accessing-a-command-terminal-on-visual-studios-for-mac"></a>Mac için Visual Studios 'ta bir komut terminaline erişme
+### <a name="accessing-a-command-terminal-on-visual-studios-for-mac"></a>Mac için Visual Studios'ta Komut Terminaline Erişim
 
-Mac 'te bir komut terminaline ilk kez erişmek için aşağıdaki ayar yapılandırmalarının olması gerekir:
+Mac'te bir komut terminaline ilk kez erişmek için aşağıdaki ayar yapılandırmaları gerektirir:
 
-* **Sistem tercihleri > klavye > kısayolları > Hizmetleri**' ne gidin.
-* **Dosya ve klasörler**altında, **klasördeki yeni terminalin** seçili olduğunu doğrulayın.
+* Klavye **> Kısayolları > Hizmetler > Sistem Tercihlerine**gidin.
+* **Dosya ve Klasörler**altında, **Klasördeki Yeni Terminal'in seçildiğini** doğrulayın.
 
-Yukarıdaki yönergeler, bir komut terminaline iki şekilde erişmenizi sağlar: **Visual Studio** Içinden veya **Finder**'dan. 
+Önceki talimatlar bir komut terminaline iki şekilde erişilmesini sağlar: **Visual Studio'nun** içinden veya **Finder'dan.** 
 
-#### <a name="to-access-a-command-terminal-from-visual-studio-for-mac"></a>Mac için Visual Studio bir komut terminaline erişmek için:
+#### <a name="to-access-a-command-terminal-from-visual-studio-for-mac"></a>Mac için Visual Studio'dan bir komut terminaline erişmek için:
 
-* Proje adına sağ tıklayın.
-* **Terminal Içinde açık > Araçlar '** a gidin.
+* Proje adını sağ tıklatın.
+* **Terminalde Açık > Araçlara**Gidin.
 
-#### <a name="to-access-a-command-terminal-from-finder"></a>Finder 'dan bir komut terminaline erişmek için:
+#### <a name="to-access-a-command-terminal-from-finder"></a>Finder'dan bir komut terminaline erişmek için:
 
-* İstenen klasöre sağ tıklayın.
-* Listenin en altında, **klasöründe yeni Terminal**' i seçin.
+* İstediğinklasörü sağ tıklatın.
+* Listenin en altında, **Klasör'de Yeni Terminal'i**seçin.

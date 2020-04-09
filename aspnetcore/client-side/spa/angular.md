@@ -1,86 +1,86 @@
 ---
-title: Angular proje şablonunu ASP.NET Core ile kullanma
+title: ASP.NET Core ile Açısal proje şablonuna sahip
 author: SteveSandersonMS
-description: Angular ve angular CLı için ASP.NET Core tek sayfalı uygulama (SPA) proje şablonunu kullanmaya nasıl başlaleyeceğinizi öğrenin.
+description: Açısal ve Açısal CLI için ASP.NET Çekirdek Tek Sayfa Uygulaması (SPA) proje şablonu ile nasıl başlayın öğrenin.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: stevesa
 ms.custom: mvc
 ms.date: 02/06/2020
 uid: spa/angular
 ms.openlocfilehash: fee872ff237e14cbe491efed9b320809df4c5654
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78657635"
 ---
-# <a name="use-the-angular-project-template-with-aspnet-core"></a>Angular proje şablonunu ASP.NET Core ile kullanma
+# <a name="use-the-angular-project-template-with-aspnet-core"></a>ASP.NET Core ile Açısal proje şablonuna sahip
 
-Güncelleştirilmiş angular proje şablonu, zengin, istemci tarafı Kullanıcı arabirimi (UI) uygulamak için angular ve angular CLı kullanan ASP.NET Core uygulamalar için uygun bir başlangıç noktası sağlar.
+Güncelleştirilmiş Açısal proje şablonu, zengin, istemci tarafı kullanıcı arabirimi (UI) uygulamak için Açısal ve Açısal CLI'yi kullanan ASP.NET Core uygulamaları için kullanışlı bir başlangıç noktası sağlar.
 
-Şablon, bir API arka ucu görevi gören bir ASP.NET Core projesi ve Kullanıcı arabirimi olarak davranacak angular CLı projesi oluşturma ile eşdeğerdir. Şablon, her iki proje türünü tek bir uygulama projesinde barındırmanın kolaylığını sunar. Sonuç olarak, uygulama projesi tek bir birim olarak oluşturulup yayımlanabilir.
+Şablon, bir API arka uç ve bir Arama CLI projesi olarak hareket etmek için bir ASP.NET Core proje oluşturmaya eşdeğerdir. Şablon, her iki proje türünü tek bir uygulama projesinde barındırma kolaylığı sunar. Sonuç olarak, uygulama projesi tek bir birim olarak oluşturulabilir ve yayınlanabilir.
 
 ## <a name="create-a-new-app"></a>Yeni bir uygulama oluşturma
 
-ASP.NET Core 2,1 yüklüyse, angular proje şablonunu yüklemeye gerek yoktur.
+Core 2.1 yüklü ASP.NET varsa, Açısal proje şablonu yüklemenize gerek yoktur.
 
-Boş bir dizinde komut `dotnet new angular` kullanarak komut isteminden yeni bir proje oluşturun. Örneğin, aşağıdaki komutlar uygulamayı *Yeni bir uygulama* dizininde oluşturur ve bu dizine geçer:
+Boş bir dizindeki komutu `dotnet new angular` kullanarak komut isteminden yeni bir proje oluşturun. Örneğin, aşağıdaki komutlar uygulamayı yeni *uygulama dizinimde* oluşturur ve bu dizine geçer:
 
 ```dotnetcli
 dotnet new angular -o my-new-app
 cd my-new-app
 ```
 
-Uygulamayı Visual Studio 'dan veya .NET Core CLI çalıştırın:
+Uygulamayı Visual Studio veya .NET Core CLI'dan çalıştırın:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
-Oluşturulan *. csproj* dosyasını açın ve uygulamayı buradan normal olarak çalıştırın.
+Oluşturulan *.csproj* dosyasını açın ve uygulamayı buradan normal şekilde çalıştırın.
 
-Yapı işlemi ilk çalıştırmada NPM bağımlılıklarını geri yükler ve bu işlem birkaç dakika sürebilir. Sonraki derlemeler çok daha hızlıdır.
+Yapı işlemi, birkaç dakika sürebilen ilk çalıştırmadaki npm bağımlılıklarını geri yükler. Sonraki yapılar çok daha hızlıdır.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
-`Development`değerine sahip `ASPNETCORE_Environment` adlı bir ortam değişkenine sahip olduğunuzdan emin olun. Windows 'da (PowerShell olmayan istemlerinde) `SET ASPNETCORE_Environment=Development`çalıştırın. Linux veya macOS üzerinde `export ASPNETCORE_Environment=Development`çalıştırın.
+'nin değeri ile `ASPNETCORE_Environment` adlandırılan bir `Development`ortam değişkenine sahip olduğundan emin olun Windows'da (PowerShell olmayan istemlerde), çalıştırın. `SET ASPNETCORE_Environment=Development` Linux veya macOS'ta çalıştırın. `export ASPNETCORE_Environment=Development`
 
-Uygulamanın doğru bir şekilde derlemelerin doğrulanması için [DotNet derlemesini](/dotnet/core/tools/dotnet-build) çalıştırın. İlk çalıştırmada, derleme işlemi NPM bağımlılıklarını geri yükler ve bu işlem birkaç dakika sürebilir. Sonraki derlemeler çok daha hızlıdır.
+Uygulamanın doğru şekilde oluşturduğunu doğrulamak için [dotnet yapısını](/dotnet/core/tools/dotnet-build) çalıştırın. İlk çalıştırmada, yapı işlemi birkaç dakika sürebilir npm bağımlılıkları, geri yüklenir. Sonraki yapılar çok daha hızlıdır.
 
-Uygulamayı başlatmak için [DotNet çalıştırmasını](/dotnet/core/tools/dotnet-run) çalıştırın. Aşağıdakine benzer bir ileti günlüğe kaydedilir:
+Uygulamayı başlatmak için [dotnet çalıştırın.](/dotnet/core/tools/dotnet-run) Aşağıdakilere benzer bir ileti günlüğe kaydedilir:
 
 ```console
 Now listening on: http://localhost:<port>
 ```
 
-Bu URL 'yi bir tarayıcıda gezin.
+Tarayıcıda bu URL'ye gidin.
 
 > [!WARNING]
-> Uygulama arka planda angular CLı sunucusunun bir örneğini başlatır. Aşağıdakine benzer bir ileti günlüğe kaydedilir: *ng Live Development Server, localhost üzerinde dinleme yapıyor:&lt;otherport&gt;, http://localhost:&lt; otherport&gt;/için bir tarayıcı açın* . Bu iletiyi yoksayın&mdash;birleştirilmiş ASP.NET Core ve angular CLı uygulamasının URL 'SI **değildir** .
+> Uygulama arka planda Açısal CLI sunucusunun bir örneğini başlatır. Aşağıdakine benzer bir ileti günlüğe kaydedilir: *NG Live Development&lt;Server&gt;localhost'u http://localhost:&ltdinliyor:&gt;otherport , bir tarayıcı aç ;otherport*. Core ve&mdash;Açısal CLI uygulamasının ASP.NET birleşimi için url **değildir** bu iletiyi yoksayın.
 
 ---
 
-Proje şablonu, bir ASP.NET Core uygulaması ve angular uygulaması oluşturur. ASP.NET Core uygulaması veri erişimi, yetkilendirme ve diğer sunucu tarafı sorunları için kullanılmak üzere tasarlanmıştır. *Clientapp* alt dizininde bulunan angular uygulamasının tüm Kullanıcı arabirimi sorunları için kullanılması amaçlanmıştır.
+Proje şablonu bir ASP.NET Core uygulaması ve Açısal bir uygulama oluşturur. ASP.NET Core uygulaması, veri erişimi, yetkilendirme ve diğer sunucu tarafı sorunları için kullanılmak üzere tasarlanmıştır. *ClientApp* alt dizininde yer alan Açısal uygulamanın tüm UI endişeleri için kullanılması amaçlanmıştır.
 
-## <a name="add-pages-images-styles-modules-etc"></a>Sayfa, resim, stil, modül vb. ekleyin
+## <a name="add-pages-images-styles-modules-etc"></a>Sayfalar, resimler, stiller, modüller vb. ekleyin.
 
-*Clientapp* dizini standart ANGULAR CLI uygulaması içerir. Daha fazla bilgi için bkz. resmi [angular belgeleri](https://angular.io) .
+*ClientApp* dizini standart bir Açısal CLI uygulaması içerir. Daha fazla bilgi için resmi [Açısal belgelere](https://angular.io) bakın.
 
-Bu şablon tarafından oluşturulan angular uygulaması ve angular CLı 'nın kendisi tarafından oluşturulan (`ng new`aracılığıyla) hafif farklar vardır; Ancak, uygulamanın özellikleri değiştirilmez. Şablon tarafından oluşturulan uygulama, [önyükleme](https://getbootstrap.com/)tabanlı bir düzen ve temel bir yönlendirme örneği içerir.
+Bu şablon tarafından oluşturulan Açısal uygulama ile Açısal CLI'nin kendisi tarafından oluşturulan `ng new`uygulama (üzerinden) arasında küçük farklar vardır; ancak, uygulamanın yetenekleri değişmez. Şablon tarafından oluşturulan uygulama, [Bootstrap](https://getbootstrap.com/)tabanlı bir düzen ve temel bir yönlendirme örneği içerir.
 
-## <a name="run-ng-commands"></a>Çalıştır komutları
+## <a name="run-ng-commands"></a>Ng komutlarını çalıştırın
 
-Bir komut isteminde *clientapp* alt dizinine geçin:
+Komut isteminde *ClientApp* alt dizinine geçin:
 
 ```console
 cd ClientApp
 ```
 
-`ng` aracı genel olarak yüklüyse, komutlarından herhangi birini çalıştırabilirsiniz. Örneğin, `ng lint`, `ng test`veya diğer [angular CLI komutlarından](https://angular.io/cli)herhangi birini çalıştırabilirsiniz. ASP.NET Core uygulamanız uygulamanızın sunucu tarafı ve istemci tarafı bölümlerine sunma konusunda anlaştığından, `ng serve` çalışmasına gerek yoktur. Dahili olarak, geliştirme sırasında `ng serve` kullanır.
+`ng` Aracı genel olarak yüklüyorsanız, komutlarından herhangi birini çalıştırabilirsiniz. Örneğin, , , `ng lint` `ng test`veya diğer [Açısal CLI komutlarından](https://angular.io/cli)herhangi birini çalıştırabilirsiniz. Ancak çalıştırmaya `ng serve` gerek yoktur, çünkü ASP.NET Core uygulamanız uygulamanızın hem sunucu hem de istemci tarafı bölümlerine hizmet vermekle ilgilenir. Dahili olarak, `ng serve` geliştirme de kullanır.
 
-`ng` aracı yüklü değilse, bunun yerine `npm run ng` çalıştırın. Örneğin, `npm run ng lint` veya `npm run ng test`çalıştırabilirsiniz.
+`ng` Aracı yüklemediyseniz, bunun yerine çalıştırın. `npm run ng` Örneğin, çalıştırabilirsiniz `npm run ng lint` veya `npm run ng test`.
 
-## <a name="install-npm-packages"></a>NPM paketlerini yükler
+## <a name="install-npm-packages"></a>npm paketleri yükleyin
 
-Üçüncü taraf NPM paketlerini yüklemek için *clientapp* alt dizininde bir komut istemi kullanın. Örnek:
+Üçüncü taraf npm paketleri yüklemek için *ClientApp* alt dizininde bir komut istemi kullanın. Örneğin:
 
 ```console
 cd ClientApp
@@ -89,19 +89,19 @@ npm install --save <package_name>
 
 ## <a name="publish-and-deploy"></a>Yayımla ve dağıt
 
-Geliştirme aşamasında uygulama, geliştirici kolaylığı için iyileştirilmiş bir modda çalışır. Örneğin, JavaScript demeti kaynak eşlemeleri içerir (hata ayıklarken, özgün TypeScript kodunuzu görebilirsiniz). Uygulama TypeScript, HTML ve CSS dosya değişikliklerini diskte izler ve bu dosya değişikliğini gördüğünde otomatik olarak yeniden derlenir ve yeniden yükler.
+Geliştirme aşamasında, uygulama geliştirici kolaylığı için optimize edilmiş bir modda çalışır. Örneğin, JavaScript paketleri kaynak haritaları içerir (böylece hata ayıklama yaparken orijinal TypeScript kodunuzu görebilirsiniz). Uygulama Diskteki TypeScript, HTML ve CSS dosya değişikliklerini izler ve bu dosyaların değiştiğini gördüğünde otomatik olarak yeniden derleyip yeniden yükler.
 
-Üretimde, uygulamanızın performans için iyileştirilmiş bir sürümünü sunar. Bu otomatik olarak gerçekleşecek şekilde yapılandırılmıştır. Yayımladığınızda, derleme yapılandırması, istemci tarafı kodunuzun küçültülmüş, önceden derlenmiş bir derlemesini yayar. Geliştirme derlemesinin aksine, üretim derlemesi, Node. js ' nin sunucuya yüklenmesini gerektirmez (sunucu tarafı işlemesini (SSR) etkinleştirmediğiniz müddetçe).
+Üretimde, uygulamanızın performans için optimize edilmiş bir sürümüne hizmet edin. Bu otomatik olarak gerçekleşmesi için yapılandırılır. Yayımladığınızda, yapı yapılandırması, istemci tarafı kodunuzu derleyen minified, ahead-of-time (AoT) bir yapı yayır. Geliştirme yapısının aksine, üretim yapısı Sunucuya Node.js'nin yüklenmesini gerektirmez (sunucu tarafı oluşturmayı (SSR) etkinleştirmediyseniz).
 
-Standart [ASP.NET Core barındırma ve dağıtım yöntemleri](xref:host-and-deploy/index)kullanabilirsiniz.
+Standart ASP.NET [Core barındırma ve dağıtım yöntemlerini](xref:host-and-deploy/index)kullanabilirsiniz.
 
-## <a name="run-ng-serve-independently"></a>Bağımsız olarak "ng hizmeti" Çalıştır
+## <a name="run-ng-serve-independently"></a>"ng serve"i bağımsız olarak çalıştırın
 
-Proje, ASP.NET Core uygulaması geliştirme modunda başladığında arka planda kendi angular CLı sunucusu örneğini başlatacak şekilde yapılandırılmıştır. Ayrı bir sunucuyu el ile çalıştırmak zorunda olmadığınızdan bu kullanışlıdır.
+Proje, ASP.NET Core uygulaması geliştirme modunda başladığında arka planda açısal CLI sunucusunun kendi örneğini başlatmak üzere yapılandırılmıştır. Ayrı bir sunucuydan el ile çalıştırmanız gerekmedığından bu kullanışlıdır.
 
-Bu varsayılan Kurulumun bir dezavantajı vardır. C# Kodunuzun her değiştirilişinde ve ASP.NET Core uygulamanızın yeniden başlatılması gerektiğinde, ANGULAR CLI sunucusu yeniden başlatılır. Yeniden başlatmak için yaklaşık 10 saniye gereklidir. Sık karşılaşılan C# kod düzenlemeleri yapıyorsanız ve ANGULAR CLI 'nın yeniden başlatılmasını beklemek Istemiyorsanız, angular clı sunucusunu ASP.NET Core işleminden bağımsız olarak dışarıdan çalıştırın. Bunu yapmak için:
+Bu varsayılan kurulumun bir dezavantajı vardır. C# kodunuzu her değiştirip ASP.NET Core uygulamanızın yeniden başlatılması gerektiğinde, Açısal CLI sunucusu yeniden başlatılır. Yeniden başlatmak için yaklaşık 10 saniye gerekir. Sık sık C# kodu düzenlemeyapıyorsanız ve Açısal CLI'nin yeniden başlatılmasını beklemek istemiyorsanız, Açısal CLI sunucusunu ASP.NET Core işleminden bağımsız olarak harici olarak çalıştırın. Bunu yapmak için:
 
-1. Bir komut isteminde *clientapp* alt dizinine geçin ve ANGULAR CLI geliştirme sunucusunu başlatın:
+1. Komut istemiyle *ClientApp* alt dizinine geçin ve Açısal CLI geliştirme sunucusunu başlatın:
 
     ```console
     cd ClientApp
@@ -109,19 +109,19 @@ Bu varsayılan Kurulumun bir dezavantajı vardır. C# Kodunuzun her değiştiril
     ```
 
     > [!IMPORTANT]
-    > *Package. JSON* içindeki yapılandırmanın kullanılması için `ng serve`değil, ANGULAR CLI geliştirme sunucusunu başlatmak için `npm start` kullanın. Angular CLı sunucusuna ek parametreler geçirmek için bunları *Package. JSON* dosyanızdaki ilgili `scripts` satırına ekleyin.
+    > Açısal CLI geliştirme sunucusubaşlatmak için `npm start` `ng serve`kullanın, değil , böylece *package.json* yapılandırma saygı duyulur. Açısal CLI sunucusuna ek parametreler ilerler sayılsın, bunları `scripts` *package.json* dosyanızdaki ilgili satıra ekleyin.
 
-2. ASP.NET Core uygulamanızı, kendi kendine birini başlatmak yerine dış angular CLı örneğini kullanacak şekilde değiştirin. *Başlangıç* sınıfınıza `spa.UseAngularCliServer` çağrılmasını aşağıdaki kodla değiştirin:
+2. kendi uygulamalarından birini başlatmak yerine harici Açısal CLI örneğini kullanacak şekilde ASP.NET Core uygulamanızı değiştirin. *Başlangıç* sınıfınızda, çağırmayı aşağıdakilerle değiştirin: `spa.UseAngularCliServer`
 
     ```csharp
     spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
     ```
 
-ASP.NET Core uygulamanızı başlattığınızda, angular CLı sunucusunu başlatmayacaktır. Bunun yerine el ile başlattığınız örnek kullanılır. Bu, daha hızlı başlamasını ve yeniden başlatılmasını sağlar. Artık, istemci uygulamanızı her seferinde yeniden oluşturmak için angular CLı bekliyor.
+ASP.NET Core uygulamanızı başlattığınızda, bir Açısal CLI sunucusu başlatmaz. Bunun yerine el ile başlattığınız örnek kullanılır. Bu, daha hızlı başlatılmasını ve yeniden başlatılmasını sağlar. Artık Açısal CLI'nin her seferinde istemci uygulamanızı yeniden oluşturmasını beklemiyor.
 
-### <a name="pass-data-from-net-code-into-typescript-code"></a>.NET kodundan verileri TypeScript koduna geçirme
+### <a name="pass-data-from-net-code-into-typescript-code"></a>.NET kodundan typeScript koduna veri aktarma
 
-SSR sırasında, ASP.NET Core uygulamanızdaki istek başına verileri angular uygulamanıza geçirmek isteyebilirsiniz. Örneğin, tanımlama bilgisi bilgilerini veya bir veritabanından okunan bir şeyi geçirebilirsiniz. Bunu yapmak için *Başlangıç* sınıfınızı düzenleyin. `UseSpaPrerendering`için geri çağırmada, `options.SupplyData` için aşağıdaki gibi bir değer ayarlayın:
+SSR sırasında, istek başına verileri ASP.NET Core uygulamanızdan Açısal uygulamanıza aktarmak isteyebilirsiniz. Örneğin, çerez bilgilerini veya veritabanından okunan bir şeyi aktarabilirsiniz. Bunu yapmak için *Başlangıç* sınıfınızı edin. Geri `UseSpaPrerendering`aramada, `options.SupplyData` aşağıdakiler gibi bir değer ayarlayın:
 
 ```csharp
 options.SupplyData = (context, data) =>
@@ -131,17 +131,17 @@ options.SupplyData = (context, data) =>
 };
 ```
 
-`SupplyData` geri çağırma, isteğe bağlı olarak, isteğe bağlı, JSON ile seri hale getirilebilir verileri (örneğin, dizeler, Boole değerleri veya sayılar) geçirmenize olanak sağlar. *Main. Server. TS* kodunuz bunu `params.data`olarak alır. Örneğin, yukarıdaki kod örneği `createServerRenderer` geri çağırması için `params.data.isHttpsRequest` olarak bir Boole değeri geçirir. Bunu uygulamanızın diğer bölümlerine, angular tarafından desteklenen herhangi bir yolla geçirebilirsiniz. Örneğin, bkz. *Main. Server. TS* , `BASE_URL` değerini Oluşturucusu tarafından almak için bildirildiği herhangi bir bileşene geçirir.
+Geri `SupplyData` arama, isteğe göre rasgele, JSON serileştirilebilir verileri (örneğin, dizeleri, booleans veya sayılar) geçirmenizi sağlar. *Main.server.ts* kodunuz bunu `params.data`. Örneğin, önceki kod örneği `params.data.isHttpsRequest` `createServerRenderer` geri arama olarak bir boolean değeri geçer. Bunu, Açısal tarafından desteklenen herhangi bir şekilde uygulamanızın diğer bölümlerine iletebilirsiniz. Örneğin, *main.server.ts'nin* `BASE_URL` değeri, oluşturucusu onu almak üzere bildirilen herhangi bir bileşene nasıl geçtiğini görün.
 
-### <a name="drawbacks-of-ssr"></a>SSR 'nin dezavantajları
+### <a name="drawbacks-of-ssr"></a>SSR'nin Sakıncaları
 
-Tüm uygulamalar SSR 'den faydalanır. Birincil avantaj, performans algılanır. Yavaş bir ağ bağlantısı veya yavaş mobil cihazlarda uygulamanıza ulaşan ziyaretçiler, JavaScript paketlerini getirme veya ayrıştırma sırasında bile ilk Kullanıcı arabirimine hızlı bir şekilde bakın. Ancak, çoğu maça genellikle uygulamanın neredeyse anında göründüğü hızlı bilgisayarlarda hızlı, dahili şirket ağları üzerinde kullanılır.
+Tüm uygulamalar SSR'den yararlanamaz. Birincil yararı algılanan performanstır. Yavaş bir ağ bağlantısı üzerinden veya yavaş mobil cihazlarda uygulamanıza ulaşan ziyaretçiler, JavaScript paketlerini almak veya ayrışdırmak biraz zaman alsa bile ilk UI'yi hızlı bir şekilde görür. Ancak, birçok SCA esas olarak hızlı, uygulama neredeyse anında görünür hızlı bilgisayarlarda dahili şirket ağları üzerinde kullanılır.
 
-Aynı zamanda SSR 'yi etkinleştirmenin önemli sakıncaları vardır. Geliştirme sürecinizi karmaşıklık altına ekler. Kodunuzun iki farklı ortamda çalışması gerekir: istemci tarafı ve sunucu tarafı (ASP.NET Core bir Node. js ortamında çağrılır). Göz önünde bulundurmanız gereken bazı şeyler aşağıda verilmiştir:
+Aynı zamanda, SSR'yi etkinleştirmek için önemli dezavantajları da vardır. Geliştirme sürecinize karmaşıklık katar. Kodunuz iki farklı ortamda çalışmalıdır: istemci tarafı ve sunucu tarafı (ASP.NET Core'dan çağrılan bir Düğüm.js ortamında). Akılda tutulması gereken bazı şeyler şunlardır:
 
-* SSR, üretim sunucularınızda bir Node. js yüklemesi gerektirir. Azure uygulama hizmetleri gibi bazı dağıtım senaryolarında bu durum otomatik olarak yapılır, ancak Azure Service Fabric gibi diğerleri için de değildir.
-* `BuildServerSideRenderer` yapı bayrağını etkinleştirmek *node_modules* dizininizin yayımlamasına neden olur. Bu klasör, dağıtım süresini artıran 20000 + dosyalarını içerir.
-* Kodunuzu bir Node. js ortamında çalıştırmak için, `window` veya `localStorage`gibi tarayıcıya özgü JavaScript API 'Lerinin varlığına bağlı olamaz. Kodunuz (veya başvuru yaptığınız bazı üçüncü taraf kitaplığı) Bu API 'Leri kullanmayı denediğinde SSR sırasında bir hata alırsınız. Örneğin, birçok yerde tarayıcıya özgü API 'Lere başvurduğundan jQuery kullanmayın. Hataları önlemek için SSR 'yi kullanmaktan veya tarayıcıya özgü API 'lerden ya da kitaplıklardan kaçınmalısınız. Bu tür API 'lere yapılan çağrıları SSR sırasında çağrıdıklarından emin olmak için, denetimleri içinde kaydırabilirsiniz. Örneğin, JavaScript veya TypeScript kodunda aşağıdakiler gibi bir denetim kullanın:
+* SSR, üretim sunucularınızda bir Düğüm.js yüklemesi gerektirir. Bu, Azure Uygulama Hizmetleri gibi bazı dağıtım senaryoları için otomatik olarak geçerlidir, ancak Azure Hizmet Kumaşı gibi diğerleri için geçerli değildir.
+* `BuildServerSideRenderer` Yapı bayrağını etkinleştirmek *node_modules* dizininizin yayımlanmasını sağlar. Bu klasör, dağıtım süresini artıran 20.000'den fazla dosya içerir.
+* Kodunuzu Düğüm.js ortamında çalıştırmak için, tarayıcıya özgü JavaScript API'lerinin varlığına `window` güvenemez. `localStorage` Kodunuz (veya başvuruda bulunacağınız bazı üçüncü taraf kitaplık) bu API'leri kullanmaya çalışırsa, SSR sırasında bir hata alırsınız. Örneğin, birçok yerde tarayıcıya özgü API'lere atıfta bulunulduğu için jQuery'yi kullanmayın. Hataları önlemek için SSR'den kaçınmanız veya tarayıcıya özgü API'lerden veya kitaplıklardan kaçınmanız gerekir. SSR sırasında çağrılmadığından emin olmak için bu TÜR API'lere yapılan çağrıları denetimlerde sararsınız. Örneğin, JavaScript veya TypeScript kodunda aşağıdaki gibi bir denetim kullanın:
 
     ```javascript
     if (typeof window !== 'undefined') {

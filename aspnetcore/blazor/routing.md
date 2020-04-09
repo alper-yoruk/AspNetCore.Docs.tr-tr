@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core Blazor yönlendirme
+title: ASP.NET Blazor Çekirdek yönlendirme
 author: guardrex
-description: Uygulamalardaki istekleri yönlendirme ve gezinti bağlantısı bileşeni hakkında bilgi edinin.
+description: Uygulamalardaki ve NavLink bileşeni yle ilgili istekleri nasıl yönlendireceklerini öğrenin.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -11,31 +11,31 @@ no-loc:
 - SignalR
 uid: blazor/routing
 ms.openlocfilehash: 87579c88a37e0258921e199db2b5d8c7627f5499
-ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "80218901"
 ---
-# <a name="aspnet-core-blazor-routing"></a>ASP.NET Core Blazor yönlendirme
+# <a name="aspnet-core-blazor-routing"></a>ASP.NET Çekirdek Blazor yönlendirme
 
-[Luke Latham](https://github.com/guardrex) tarafından
+Yazar: [Luke Latham](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-İstekleri yönlendirmeyi ve Blazor uygulamalarında gezinti bağlantıları oluşturmak için `NavLink` bileşenini kullanmayı öğrenin.
+Blazor uygulamalarında gezinme bağlantıları `NavLink` oluşturmak için istekleri nasıl yönlendireceklerini ve bileşeni nasıl kullanacağınızı öğrenin.
 
-## <a name="aspnet-core-endpoint-routing-integration"></a>Uç nokta yönlendirme tümleştirmesi ASP.NET Core
+## <a name="aspnet-core-endpoint-routing-integration"></a>ASP.NET Core uç nokta yönlendirme tümleştirmesi
 
-Blazor sunucusu [ASP.NET Core uç nokta yönlendirme](xref:fundamentals/routing)ile tümleşiktir. ASP.NET Core bir uygulama, `Startup.Configure``MapBlazorHub` etkileşimli bileşenlere yönelik gelen bağlantıları kabul edecek şekilde yapılandırılmıştır:
+Blazor [Server, Core Endpoint YönlendirmeASP.NET](xref:fundamentals/routing)entegre edilmiştir. Bir ASP.NET Core uygulaması, etkileşimli bileşenler için gelen `MapBlazorHub` `Startup.Configure`bağlantıları kabul etmek üzere yapılandırılmıştır:
 
 [!code-csharp[](routing/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
-En yaygın yapılandırma, tüm istekleri Razor sayfasına yönlendirmesidir ve bu, Blazor Server uygulamasının sunucu tarafı bölümü için ana bilgisayar görevi görür. Kurala göre, *ana bilgisayar* sayfası genellikle *_Host. cshtml*olarak adlandırılır. Ana bilgisayar dosyasında belirtilen yol, yol eşleştirilirken düşük bir öncelik ile çalıştığından bir *geri dönüş yolu* olarak adlandırılır. Geri dönüş yolu, diğer yollar eşleşmediği zaman kabul edilir. Bu, uygulamanın Blazor sunucu uygulamasıyla kesintiye uğramadan diğer denetleyicileri ve sayfaları kullanmasına izin verir.
+En tipik yapılandırma, tüm istekleri Blazor Server uygulamasının sunucu tarafındaki bölümünün ana bilgisayar ı olarak gören bir Razor sayfasına yönlendirmektir. Kural olarak, *ana sayfa* genellikle *_Host.cshtml*olarak adlandırılır. Ana bilgisayar dosyasında belirtilen rota, rota eşleştirmede düşük bir önceliğe sahip çalıştığından *geri dönüş rotası* olarak adlandırılır. Diğer rotalar eşleşmediğinde geri dönüş rotası dikkate alınr. Bu, uygulamanın Blazor Server uygulamasına müdahale etmeden diğer denetleyicileri ve sayfaları kullanmasına olanak tanır.
 
 ## <a name="route-templates"></a>Rota şablonları
 
-`Router` bileşeni, belirtilen bir rota ile her bileşene yönlendirmeyi sağlar. `Router` bileşeni *app. Razor* dosyasında görünür:
+Bileşen, `Router` belirtilen bir rota ile her bileşene yönlendirme sağlar. Bileşen `Router` *App.razor* dosyasında görünür:
 
 ```razor
 <Router AppAssembly="typeof(Startup).Assembly">
@@ -48,16 +48,16 @@ En yaygın yapılandırma, tüm istekleri Razor sayfasına yönlendirmesidir ve 
 </Router>
 ```
 
-`@page` yönergesine sahip bir *. Razor* dosyası derlendiğinde, oluşturulan sınıf yol şablonunu belirten bir <xref:Microsoft.AspNetCore.Components.RouteAttribute> sağlanır.
+Yönergesi olan `@page` bir *.razor* dosyası derlendiğinde, <xref:Microsoft.AspNetCore.Components.RouteAttribute> oluşturulan sınıfa rota şablonu belirten bir bilgi verilir.
 
-Çalışma zamanında `RouteView` bileşeni:
+Çalışma zamanında `RouteView` bileşen:
 
-* Tüm istenen parametrelerle birlikte `Router` `RouteData` alır.
-* Belirtilen parametreleri kullanarak belirtilen bileşeni düzeniyle (veya isteğe bağlı bir varsayılan düzende) işler.
+* `RouteData` İstenilen `Router` parametrelerle birlikte alır.
+* Belirtilen bileşeni, belirtilen parametreleri kullanarak düzeniyle (veya isteğe bağlı varsayılan düzenle) işler.
 
-İsteğe bağlı olarak, düzen belirtmeyen bileşenler için kullanılacak düzen sınıfıyla bir `DefaultLayout` parametresi belirtebilirsiniz. Varsayılan Blazor şablonları `MainLayout` bileşeni belirler. *Mainlayout. Razor* , şablon projenin *paylaşılan* klasöründedir. Düzenler hakkında daha fazla bilgi için bkz. <xref:blazor/layouts>.
+İsteğe bağlı olarak, düzen belirtmeyen bileşenler için kullanılacak düzen sınıfı olan bir `DefaultLayout` parametre belirtebilirsiniz. Varsayılan Blazor şablonları `MainLayout` bileşeni belirtir. *MainLayout.razor* şablon projenin *Paylaşılan* klasöründedir. Düzenler hakkında daha fazla <xref:blazor/layouts>bilgi için bkz.
 
-Birden çok yol şablonu, bir bileşene uygulanabilir. Aşağıdaki bileşen `/BlazorRoute` ve `/DifferentBlazorRoute`isteklerine yanıt verir:
+Bir bileşene birden çok rota şablonu uygulanabilir. Aşağıdaki bileşen isteklere `/BlazorRoute` yanıt `/DifferentBlazorRoute`verir ve:
 
 ```razor
 @page "/BlazorRoute"
@@ -67,13 +67,13 @@ Birden çok yol şablonu, bir bileşene uygulanabilir. Aşağıdaki bileşen `/B
 ```
 
 > [!IMPORTANT]
-> URL 'Lerin doğru şekilde çözülmesi için, uygulamanın, `href` özniteliğinde belirtilen uygulama temel yolu ile *Wwwroot/index.html* dosyasına (Blazor WebAssembly) veya *Pages/_Host. cshtml* dosyasına (Blazor Server) bir `<base>` etiketi içermesi gerekir (`<base href="/">`). Daha fazla bilgi için bkz. <xref:host-and-deploy/blazor/index#app-base-path>.
+> URL'lerin doğru şekilde çözümlemesi için `<base>` uygulamanın *wwwroot/index.html* dosyasına (Blazor WebAssembly) veya *Pages/_Host.cshtml* dosyasına (Blazor `href` Server)`<base href="/">`öznitelikte belirtilen uygulama temel yolu içeren bir etiket eklemesi gerekir. Daha fazla bilgi için bkz. <xref:host-and-deploy/blazor/index#app-base-path>.
 
-## <a name="provide-custom-content-when-content-isnt-found"></a>İçerik bulunamadığında özel içerik sağla
+## <a name="provide-custom-content-when-content-isnt-found"></a>İçerik bulunamadığında özel içerik sağlayın
 
-`Router` bileşeni, istenen rota için içerik bulunmazsa uygulamanın özel içerik belirtmesini sağlar.
+Bileşen, `Router` istenen rota için içerik bulunamıyorsa uygulamanın özel içerik belirtmesine olanak tanır.
 
-*App. Razor* dosyasında, `Router` bileşeninin `NotFound` Şablon parametresinde özel içerik ayarlayın:
+*App.razor* dosyasında, `NotFound` `Router` bileşenin şablon parametresinde özel içerik ayarlayın:
 
 ```razor
 <Router AppAssembly="typeof(Startup).Assembly">
@@ -87,11 +87,11 @@ Birden çok yol şablonu, bir bileşene uygulanabilir. Aşağıdaki bileşen `/B
 </Router>
 ```
 
-`<NotFound>` etiketlerinin içeriği, diğer etkileşimli bileşenler gibi rastgele öğeler içerebilir. `NotFound` içeriğe varsayılan bir düzen uygulamak için bkz. <xref:blazor/layouts>.
+Etiketlerin `<NotFound>` içeriği, diğer etkileşimli bileşenler gibi rasgele öğeler içerebilir. İçerime varsayılan düzen `NotFound` uygulamak <xref:blazor/layouts>için bkz.
 
 ## <a name="route-to-components-from-multiple-assemblies"></a>Birden çok derlemeden bileşenlere rota
 
-`Router` bileşenin yönlendirilebilir bileşenleri ararken dikkate alınması için ek derlemeler belirtmek üzere `AdditionalAssemblies` parametresini kullanın. Belirtilen derlemeler `AppAssembly`belirtilen derlemeye ek olarak değerlendirilir. Aşağıdaki örnekte `Component1`, başvurulan bir sınıf kitaplığında tanımlanan yönlendirilebilir bir bileşendir. Aşağıdaki `AdditionalAssemblies` örnek, `Component1`için yönlendirme desteğiyle sonuçlanır:
+Bileşenin, `AdditionalAssemblies` routable bileşenlerini ararken göz önünde bulundurması gereken `Router` ek derlemeler belirtmek için parametreyi kullanın. Belirtilen `AppAssembly`derlemeler, belirtilen derlemeye ek olarak kabul edilir. Aşağıdaki örnekte, `Component1` başvurulan sınıf kitaplığında tanımlanan bir routable bileşenidir. Aşağıdaki `AdditionalAssemblies` örnek, aşağıdaki yönlendirme desteğiile `Component1`sonuçlanır:
 
 ```razor
 <Router
@@ -103,7 +103,7 @@ Birden çok yol şablonu, bir bileşene uygulanabilir. Aşağıdaki bileşen `/B
 
 ## <a name="route-parameters"></a>Rota parametreleri
 
-Yönlendirici, karşılık gelen bileşen parametrelerini aynı ada (büyük/küçük harfe duyarsız) doldurmak için yol parametrelerini kullanır:
+Yönlendirici, ilgili bileşen parametrelerini aynı ada (büyük/küçük harf duyarsız) doldurmak için rota parametrelerini kullanır:
 
 ```razor
 @page "/RouteParameter"
@@ -122,69 +122,69 @@ Yönlendirici, karşılık gelen bileşen parametrelerini aynı ada (büyük/kü
 }
 ```
 
-İsteğe bağlı parametreler desteklenmez. Önceki örnekte iki `@page` yönergesi uygulanır. İlki, bir parametre olmadan bileşene gezinmesine izin verir. İkinci `@page` yönergesi `{text}` Route parametresini alır ve değeri `Text` özelliğine atar.
+İsteğe bağlı parametreler desteklenmez. Önceki `@page` örnekte iki yönerge uygulanır. İlk bir parametre olmadan bileşene navigasyon izin verir. İkinci `@page` yönerge `{text}` rota parametresini alır ve `Text` değeri özelliğe atar.
 
-## <a name="route-constraints"></a>Yol kısıtlamaları
+## <a name="route-constraints"></a>Rota kısıtlamaları
 
-Yol kısıtlaması bir yönlendirme segmentinde bir bileşene tür eşleştirmeyi zorlar.
+Bir rota kısıtlaması, bir bileşene bir rota kesiminde tür eşleştirmesi zorlar.
 
-Aşağıdaki örnekte, `Users` bileşene olan yol yalnızca şu durumlarda eşleşir:
+Aşağıdaki örnekte, `Users` bileşene giden yol yalnızca aşağıdaki durumlarda eşleşir:
 
-* İstek URL 'sinde bir `Id` yol kesimi var.
-* `Id` segmenti bir tamsayıdır (`int`).
+* İstek `Id` URL'sinde bir rota kesimi bulunur.
+* Segment `Id` bir karşıcıdır`int`( ).
 
 [!code-razor[](routing/samples_snapshot/3.x/Constraint.razor?highlight=1)]
 
-Aşağıdaki tabloda gösterilen yol kısıtlamaları mevcuttur. Sabit kültür ile eşleşen yol kısıtlamaları için daha fazla bilgi için tablonun altındaki uyarıya bakın.
+Aşağıdaki tabloda gösterilen rota kısıtlamaları kullanılabilir. Değişmez kültürle eşleşen rota kısıtlamaları için daha fazla bilgi için tablonun altındaki uyarıya bakın.
 
-| Kısıtlaması | Örnek           | Örnek eşleşmeler                                                                  | Bilmesi<br>kültür<br>eşleştirme |
+| Kısıtlama | Örnek           | Örnek Eşleşmeler                                                                  | Sabit<br>kültür<br>eşleştirme |
 | ---------- | ----------------- | -------------------------------------------------------------------------------- | :------------------------------: |
 | `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | Hayır                               |
-| `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | Yes                              |
-| `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | Yes                              |
-| `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | Yes                              |
-| `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | Yes                              |
+| `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | Evet                              |
+| `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | Evet                              |
+| `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | Evet                              |
+| `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | Evet                              |
 | `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | Hayır                               |
-| `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | Yes                              |
-| `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | Yes                              |
+| `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | Evet                              |
+| `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | Evet                              |
 
 > [!WARNING]
-> URL 'YI doğrulayan ve bir CLR türüne (örneğin `int` veya `DateTime`) dönüştürülen yol kısıtlamaları her zaman sabit kültürü kullanır. Bu kısıtlamalar, URL 'nin yerelleştirilemeyen olduğunu varsayar.
+> URL'yi doğrulayan ve CLR türüne dönüştürülen `int` (örneğin `DateTime`veya) her zaman değişmez kültürü kullanan yol kısıtlamaları. Bu kısıtlamalar, URL'nin yerelleştirilebilir olmadığını varsayar.
 
-### <a name="routing-with-urls-that-contain-dots"></a>Noktalar içeren URL 'lerle yönlendirme
+### <a name="routing-with-urls-that-contain-dots"></a>Nokta içeren URL'lerle yönlendirme
 
-Blazor Server uygulamalarında *_Host. cshtml* içindeki varsayılan yol `/` (`@page "/"`). URL bir dosya isteyecek şekilde göründüğünden, nokta (`.`) içeren bir istek URL 'SI varsayılan yol tarafından eşleşmiyor. Bir Blazor uygulaması mevcut olmayan bir statik dosya için *404-Found* yanıtı döndürür. Bir nokta içeren yolları kullanmak için, *_Host. cshtml* 'yi aşağıdaki yol şablonuyla yapılandırın:
+Blazor Server uygulamalarında, *_Host.cshtml'deki* varsayılan rota `/` ( ).`@page "/"` Nokta (`.`) içeren bir istek URL'si, URL bir dosya istemek için göründüğünden varsayılan rotayla eşleşmiyor. Bir Blazor uygulaması, var olmayan statik bir dosya için *404 - Bulunamadı* yanıtı döndürür. Nokta içeren yolları kullanmak için *_Host.cshtml'i* aşağıdaki rota şablonuyla yapılandırın:
 
 ```cshtml
 @page "/{**path}"
 ```
 
-`"/{**path}"` şablonu şunları içerir:
+Şablon `"/{**path}"` şunları içerir:
 
-* Ters eğik çizgi (`/`) kodlaması olmadan birden çok klasör sınırlarındaki yolu yakalamak için çift yıldız *catch-all* söz dizimi (`**`).
-* `path` Route parametresi adı.
+* Çift yıldız işareti *catch-all* sözdizimi (`**`) ileri kesikleri kodlamadan birden`/`çok klasör sınırları boyunca yolu yakalamak için ( ).
+* `path`rota parametre adı.
 
 > [!NOTE]
-> *Catch-all* parametre sözdizimi (`*`/`**`) Razor bileşenlerinde ( *. Razor* **) desteklenmez.**
+> *Catch-all* parametre sözdizimi (`*`/`**`) Razor bileşenlerinde **desteklenmez** (*.razor*).
 
 Daha fazla bilgi için bkz. <xref:fundamentals/routing>.
 
-## <a name="navlink-component"></a>Gezinti bağlantısı bileşeni
+## <a name="navlink-component"></a>NavLink bileşeni
 
-Gezinti bağlantıları oluştururken, HTML köprü öğelerinin yerine bir `NavLink` bileşeni kullanın (`<a>`). Bir `NavLink` bileşeni, `href` geçerli URL ile eşleşip eşleşmediğini temel alan `active` CSS sınıfına geçiş yaparken, bir `<a>` öğesi gibi davranır. `active` sınıfı, bir kullanıcının hangi sayfanın etkin sayfa olduğunu anlamasına yardımcı olan gezinti bağlantıları.
+Navigasyon `NavLink` bağlantıları oluştururken HTML köprü`<a>`öğeleri () yerine bir bileşen kullanın. Bileşen, `NavLink` geçerli URL `<a>` ile `href` eşleşip eşleşmediğine `active` bağlı olarak bir CSS sınıfını geçişlemesi dışında bir öğe gibi olur. Sınıf, `active` kullanıcının görüntülenen gezinme bağlantıları arasında hangi sayfanın etkin sayfa olduğunu anlamanıza yardımcı olur.
 
-Aşağıdaki `NavMenu` bileşeni, `NavLink` bileşenlerinin nasıl kullanılacağını gösteren bir [önyükleme](https://getbootstrap.com/docs/) gezinti çubuğu oluşturur:
+Aşağıdaki `NavMenu` bileşen, bileşenlerin nasıl kullanılacağını `NavLink` gösteren bir [Bootstrap](https://getbootstrap.com/docs/) gezinti çubuğu oluşturur:
 
 [!code-razor[](routing/samples_snapshot/3.x/NavMenu.razor?highlight=4,9)]
 
-`<NavLink>` öğesinin `Match` özniteliğine atayabilmeniz için iki `NavLinkMatch` seçeneği vardır:
+Öğenin `NavLinkMatch` `Match` özniteliğine atayabileceğiniz iki seçenek vardır: `<NavLink>`
 
-* `NavLinkMatch.All` &ndash; geçerli URL 'nin tamamı eşleştiğinde etkin `NavLink`.
-* `NavLinkMatch.Prefix` (*varsayılan*) `NavLink` geçerli URL 'nin herhangi bir ön ekiyle eşleştiğinde etkin &ndash;.
+* `NavLinkMatch.All`&ndash; Geçerli `NavLink` URL'nin tamamıyla eşleştiğinde etkindir.
+* `NavLinkMatch.Prefix`(*varsayılan*) &ndash; Geçerli `NavLink` URL'nin herhangi bir önekiyle eşleştiğinde etkindir.
 
-Yukarıdaki örnekte, giriş `NavLink` `href=""` giriş URL 'siyle eşleşir ve yalnızca uygulamanın varsayılan temel yol URL 'sindeki `active` CSS sınıfını alır (örneğin, `https://localhost:5001/`). İkinci `NavLink`, Kullanıcı `MyComponent` ön ekine sahip herhangi bir URL 'YI ziyaret ettiğinde `active` sınıfını alır (örneğin, `https://localhost:5001/MyComponent` ve `https://localhost:5001/MyComponent/AnotherSegment`).
+Önceki örnekte, Ev `NavLink` `href=""` ev URL'si eşleşir ve yalnızca uygulamanın `active` varsayılan temel yol URL'sinde (örneğin) `https://localhost:5001/`CSS sınıfını alır. İkinci `NavLink` kullanıcı `active` önek ile herhangi bir `MyComponent` URL ziyaret ettiğinde `https://localhost:5001/MyComponent` sınıf `https://localhost:5001/MyComponent/AnotherSegment`alır (örneğin, ve).
 
-Ek `NavLink` bileşen öznitelikleri, işlenen tutturucu etiketine geçirilir. Aşağıdaki örnekte `NavLink` bileşeni `target` özniteliğini içerir:
+Ek `NavLink` bileşen öznitelikleri işlenen bağlantı etiketine aktarılır. Aşağıdaki örnekte, `NavLink` bileşen özniteliği içerir: `target`
 
 ```razor
 <NavLink href="my-page" target="_blank">My page</NavLink>
@@ -196,20 +196,20 @@ Aşağıdaki HTML biçimlendirmesi işlenir:
 <a href="my-page" target="_blank" rel="noopener noreferrer">My page</a>
 ```
 
-## <a name="uri-and-navigation-state-helpers"></a>URI ve gezinti durumu yardımcıları
+## <a name="uri-and-navigation-state-helpers"></a>URI ve navigasyon durumu yardımcıları
 
-Kod içinde C# , URI 'ler ve gezinme ile çalışmak için <xref:Microsoft.AspNetCore.Components.NavigationManager> kullanın. `NavigationManager`, aşağıdaki tabloda gösterilen olay ve yöntemleri sağlar.
+URI'lerle çalışmak ve C# kodunda gezinmek için kullanın. <xref:Microsoft.AspNetCore.Components.NavigationManager> `NavigationManager`aşağıdaki tabloda gösterilen olay ve yöntemleri sağlar.
 
 | Üye | Açıklama |
 | ------ | ----------- |
-| Uri | Geçerli mutlak URI 'yi alır. |
-| BaseUri | Mutlak bir URI oluşturmak için göreli URI yollarına eklenebilir olan temel URI 'yi (sondaki eğik çizgiyle birlikte) alır. Genellikle `BaseUri`, belgenin *Wwwroot/index.html* (Blazor WebAssembly) veya *Pages/_Host. cshtml* (Blazor Server) içindeki `<base>` öğesinde `href` özniteliğine karşılık gelir. |
-| Gezin | Belirtilen URI 'ye gider. `forceLoad` `true`:<ul><li>İstemci tarafı yönlendirme atlanır.</li><li>Bu tarayıcı, URI 'nin normalde istemci tarafı yönlendirici tarafından işlenip işlenmediğini sunucudan yeni sayfayı yüklemeye zorlanır.</li></ul> |
-| LocationChanged | Gezinti konumu değiştiğinde harekete gelen bir olay. |
-| ToAbsoluteUri | Göreli bir URI 'yi mutlak bir URI 'ye dönüştürür. |
-| <span style="word-break:normal;word-wrap:normal">ToBaseRelativePath</span> | Temel URI (örneğin, daha önce `GetBaseUri`tarafından döndürülen bir URI) verildiğinde, mutlak bir URI 'yi taban URI ön ekine göre bir URI 'ye dönüştürür. |
+| Urı | Geçerli mutlak URI alır. |
+| Baseuri | Mutlak bir URI üretmek için göreceli URI yollarına hazırlanabilen temel URI'yi (sondaki bir eğik çizgiyle) alır. `BaseUri` Genellikle, `href` *belgenin* Blazor `<base>` wwwroot/index.html (WebAssembly) veya *Pages/_Host.cshtml* (Server)Blazor öğesindeki özniteliğe karşılık gelir. |
+| Gezinme | Belirtilen URI'ye doğru iletin. `true`Ise: `forceLoad`<ul><li>İstemci tarafı yönlendirme atlanır.</li><li>Tarayıcı, URI normalde istemci tarafı yönlendirici tarafından işlenir olsun veya olmasın, sunucudan yeni sayfa yüklemek zorunda kalır.</li></ul> |
+| Konum Değiştirildi | Gezinti yeri değiştiğinde ateşleyen bir olay. |
+| Toabsoluteuri | Göreceli bir URI'yi mutlak bir URI'ye dönüştürür. |
+| <span style="word-break:normal;word-wrap:normal">ToBaseRelativePath</span> | Bir temel URI (örneğin, bir URI `GetBaseUri`daha önce döndürülen) göz önüne alındığında, temel URI öneki göre bir URI göreli mutlak bir URI dönüştürür. |
 
-Aşağıdaki bileşen, düğme seçildiğinde uygulamanın `Counter` bileşenine gider:
+Düğme seçildiğinde aşağıdaki bileşen uygulamanın `Counter` bileşenine yönlendirilir:
 
 ```razor
 @page "/navigate"
@@ -229,7 +229,7 @@ Aşağıdaki bileşen, düğme seçildiğinde uygulamanın `Counter` bileşenine
 }
 ```
 
-Aşağıdaki bileşen bir konum değişti olayını işler. `HandleLocationChanged` yöntemi, Framework tarafından `Dispose` çağrıldığında geri çağırılır. Yöntemi kaldırmak, bileşenin çöp toplamasına izin verir.
+Aşağıdaki bileşen, değiştirilen bir konumu işler. Yöntem, `HandleLocationChanged` çerçeve tarafından `Dispose` çağrıldığında çözülz. Yöntemin çözülmesi bileşenin çöp toplaması için izin verir.
 
 ```razor
 @implement IDisposable
@@ -253,9 +253,9 @@ public void Dispose()
 }
 ```
 
-<xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs> olayla ilgili aşağıdaki bilgileri sağlar:
+<xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs>olay hakkında aşağıdaki bilgileri sağlar:
 
-* yeni konumun URL 'sini &ndash; <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.Location>.
-* <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.IsNavigationIntercepted> &ndash; `true`tarayıcıdan gezinmeyi Blazor. `false`, [Navigationmanager. Navigate,](xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A) gezintinin oluşmasına neden oldu.
+* <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.Location>&ndash; Yeni konumun URL'si.
+* <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.IsNavigationIntercepted>&ndash; `true`Eğer, Blazor tarayıcıdan navigasyon ele geçirdi. If `false`, [NavigationManager.NavigateTo](xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A) gezintisinin oluşmasına neden oldu.
 
-Bileşen aktiften çıkarma hakkında daha fazla bilgi için bkz. <xref:blazor/lifecycle#component-disposal-with-idisposable>.
+Bileşen imhası hakkında daha <xref:blazor/lifecycle#component-disposal-with-idisposable>fazla bilgi için bkz.

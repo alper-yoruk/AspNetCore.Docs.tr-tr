@@ -1,6 +1,6 @@
-## <a name="debug-diagnostics"></a>Hata ayıklama tanılaması
+## <a name="debug-diagnostics"></a>Hata ayıklama tanılama
 
-Ayrıntılı yönlendirme tanılama çıktısı için `Logging:LogLevel:Microsoft` `Debug`olarak ayarlayın. Örneğin, geliştirme ortamında appSettings ' i ayarlayın *. Development. JSON*:
+Ayrıntılı yönlendirme tanı çıktısı `Logging:LogLevel:Microsoft` için, '' olarak `Debug`ayarlayın Örneğin, geliştirme ortamında uygulama *ayarlarını ayarlayın. Development.json*:
 
 ```JSON
 {

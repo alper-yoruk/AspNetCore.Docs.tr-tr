@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core Razor bileşenlerini Razor Pages ve MVC uygulamalarıyla tümleştirin
+title: Core Razor bileşenleriASP.NET Razor Pages ve MVC uygulamalarına entegre edin
 author: guardrex
-description: Blazor uygulamalarında bileşenler ve DOM öğeleri için veri bağlama senaryoları hakkında bilgi edinin.
+description: Uygulamalardaki Blazor bileşenler ve DOM öğeleri için veri bağlama senaryoları hakkında bilgi edinin.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -11,43 +11,43 @@ no-loc:
 - SignalR
 uid: blazor/integrate-components
 ms.openlocfilehash: cf6056e0985d5433bddecac8dd183ca3f4c2af5b
-ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "80218940"
 ---
-# <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>ASP.NET Core Razor bileşenlerini Razor Pages ve MVC uygulamalarıyla tümleştirin
+# <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>Core Razor bileşenleriASP.NET Razor Pages ve MVC uygulamalarına entegre edin
 
-, [Luke Latham](https://github.com/guardrex) ve [Daniel Roth](https://github.com/danroth27) tarafından
+Yazar: [Luke Latham](https://github.com/guardrex) ve [Daniel Roth](https://github.com/danroth27)
 
-Razor bileşenleri, Razor Pages ve MVC uygulamalarıyla tümleştirilebilir. Sayfa veya görünüm işlendiğinde, bileşenler aynı anda önceden alınabilir.
+Razor bileşenleri Razor Pages ve MVC uygulamalarına entegre edilebilir. Sayfa veya görünüm işlendiğinde, bileşenler aynı anda önceden oluşturulabilir.
 
-## <a name="prepare-the-app-to-use-components-in-pages-and-views"></a>Uygulamayı sayfalar ve görünümlerde bileşenleri kullanmak üzere hazırlama
+## <a name="prepare-the-app-to-use-components-in-pages-and-views"></a>Uygulamayı sayfa ve görünümlerde bileşenleri kullanacak şekilde hazırlama
 
-Mevcut bir Razor Pages veya MVC uygulaması, Razor bileşenlerini sayfalarla ve görünümleriyle tümleştirebilir:
+Mevcut bir Razor Pages veya MVC uygulaması, Razor bileşenlerini sayfalara ve görünümlere entegre edebilir:
 
-1. Uygulamanın düzen dosyasında ( *_Layout. cshtml*):
+1. Uygulamanın düzen dosyasında (*_Layout.cshtml):*
 
-   * Aşağıdaki `<base>` etiketini `<head>` öğesine ekleyin:
+   * `<head>` Öğeye aşağıdaki `<base>` etiketi ekleyin:
 
      ```html
      <base href="~/" />
      ```
 
-     Yukarıdaki örnekteki `href` değeri ( *uygulama temel yolu*), UYGULAMANıN kök URL yolunda (`/`) bulunduğunu varsayar. Uygulama bir alt uygulama ise, <xref:host-and-deploy/blazor/index#app-base-path> makalesinin *uygulama temel yolu* bölümündeki yönergeleri izleyin.
+     Yukarıdaki `href` örnekteki değer *(uygulama temel yolu)* uygulamanın kök URL yolunda bulunduğunu`/`varsayar ( ). Uygulama bir alt uygulamaysa, <xref:host-and-deploy/blazor/index#app-base-path> makalenin Uygulama temel *yolu* bölümündeki kılavuzu izleyin.
 
-     *_Layout. cshtml* dosyası, bir MVC uygulamasında bir Razor Pages uygulamasının veya *görünümlerinin/paylaşılan* klasörünün *Sayfalar/paylaşılan* klasöründe bulunur.
+     *_Layout.cshtml* dosyası, Bir Jilet Sayfaları uygulamasındaki *Sayfalar/Paylaşılan* klasöründe veya Bir MVC *uygulamasındaki Görünümler/Paylaşılan* klasörde bulunur.
 
-   * Kapanış `</body>` etiketinden hemen önce *blazor. Server. js* betiği için bir `<script>` etiketi ekleyin:
+   * Kapanış `</body>` `<script>` etiketinden hemen önce *blazor.server.js* komut dosyası için bir etiket ekleyin:
 
      ```html
      <script src="_framework/blazor.server.js"></script>
      ```
 
-     Framework, *blazor. Server. js* betiğini uygulamaya ekler. Betiği uygulamaya el ile eklemeniz gerekmez.
+     Çerçeve uygulamaya *blazor.server.js* komut dosyası ekler. Komut dosyasını uygulamaya el ile eklemenize gerek yoktur.
 
-1. Aşağıdaki içerikle projenin kök klasörüne bir *_Imports. Razor* dosyası ekleyin (son ad alanını, `MyAppNamespace`, uygulamanın ad alanına değiştirin):
+1. Aşağıdaki içeriği içeren projenin kök klasörüne bir *_Imports.razor* dosyası ekleyin (son ad alanını, `MyAppNamespace`uygulamanın ad alanına değiştirin):
 
    ```razor
    @using System.Net.Http
@@ -60,29 +60,29 @@ Mevcut bir Razor Pages veya MVC uygulaması, Razor bileşenlerini sayfalarla ve 
    @using MyAppNamespace
    ```
 
-1. `Startup.ConfigureServices`Blazor sunucusu hizmetini kaydedin:
+1. Sunucu `Startup.ConfigureServices`hizmetini Blazor kaydedin:
 
    ```csharp
    services.AddServerSideBlazor();
    ```
 
-1. `Startup.Configure`, Blazor hub uç noktasını `app.UseEndpoints`öğesine ekleyin:
+1. In `Startup.Configure`, Blazor Hub bitiş `app.UseEndpoints`noktasını ekleyin:
 
    ```csharp
    endpoints.MapBlazorHub();
    ```
 
-1. Bileşenleri herhangi bir sayfa veya görünümle tümleştirin. Daha fazla bilgi için, [bir sayfadan veya görünümden bileşenleri işleme](#render-components-from-a-page-or-view) bölümüne bakın.
+1. Bileşenleri herhangi bir sayfaya veya görünüme tümleştirin. Daha fazla bilgi için [bir sayfa veya görünüm bölümünden Render bileşenlerine](#render-components-from-a-page-or-view) bakın.
 
-## <a name="use-routable-components-in-a-razor-pages-app"></a>Razor Pages uygulamasında yönlendirilebilir bileşenleri kullanma
+## <a name="use-routable-components-in-a-razor-pages-app"></a>Razor Pages uygulamasında routable bileşenlerini kullanma
 
-*Bu bölüm, Kullanıcı isteklerinden doğrudan yönlendirilebilir bileşenleri eklemeye aittir.*
+*Bu bölüm, kullanıcı isteklerinden doğrudan routable bileşenleri ekleme ile ilgilidir.*
 
-Razor Pages uygulamalarda yönlendirilebilir Razor bileşenlerini desteklemek için:
+Razor Pages uygulamalarında routable Razor bileşenlerini desteklemek için:
 
-1. [Sayfaları sayfalar ve görünümler 'de kullanmak için uygulamayı hazırlama](#prepare-the-app-to-use-components-in-pages-and-views) bölümündeki yönergeleri izleyin.
+1. Sayfaları ve [görünümleri bölümündebileşenleri kullanmak için uygulamayı Hazırla'daki](#prepare-the-app-to-use-components-in-pages-and-views) kılavuzu izleyin.
 
-1. Aşağıdaki içeriğe sahip proje köküne bir *app. Razor* dosyası ekleyin:
+1. Proje köküne aşağıdaki içerikle bir *App.razor* dosyası ekleyin:
 
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
@@ -98,7 +98,7 @@ Razor Pages uygulamalarda yönlendirilebilir Razor bileşenlerini desteklemek i�
    </Router>
    ```
 
-1. *Sayfalar* klasörüne aşağıdaki içeriğe sahip bir *_Host. cshtml* dosyası ekleyin:
+1. Aşağıdaki içeriği içeren *Sayfalar* klasörüne *bir _Host.cshtml* dosyası ekleyin:
 
    ```cshtml
    @page "/blazor"
@@ -111,9 +111,9 @@ Razor Pages uygulamalarda yönlendirilebilir Razor bileşenlerini desteklemek i�
    </app>
    ```
 
-   Bileşenler, düzeni için paylaşılan *_Layout. cshtml* dosyasını kullanır.
+   Bileşenler, düzenleri için paylaşılan *_Layout.cshtml* dosyasını kullanır.
 
-1. `Startup.Configure`' de uç nokta yapılandırmasına *_Host. cshtml* sayfası için düşük öncelikli bir yol ekleyin:
+1. *_Host.cshtml* sayfası için bitiş noktası yapılandırmasına `Startup.Configure`düşük öncelikli bir rota ekleyin:
 
    ```csharp
    app.UseEndpoints(endpoints =>
@@ -124,7 +124,7 @@ Razor Pages uygulamalarda yönlendirilebilir Razor bileşenlerini desteklemek i�
    });
    ```
 
-1. Uygulamaya yönlendirilebilir bileşenler ekleyin. Örneğin:
+1. Uygulamaya routable bileşenleri ekleyin. Örneğin:
 
    ```razor
    @page "/counter"
@@ -134,17 +134,17 @@ Razor Pages uygulamalarda yönlendirilebilir Razor bileşenlerini desteklemek i�
    ...
    ```
 
-   Ad alanları hakkında daha fazla bilgi için [bileşen ad alanları](#component-namespaces) bölümüne bakın.
+   Ad alanları hakkında daha fazla bilgi için [Bileşen ad alanları](#component-namespaces) bölümüne bakın.
 
-## <a name="use-routable-components-in-an-mvc-app"></a>MVC uygulamasında yönlendirilebilir bileşenleri kullanma
+## <a name="use-routable-components-in-an-mvc-app"></a>Bir MVC uygulamasında routable bileşenleri ni kullanma
 
-*Bu bölüm, Kullanıcı isteklerinden doğrudan yönlendirilebilir bileşenleri eklemeye aittir.*
+*Bu bölüm, kullanıcı isteklerinden doğrudan routable bileşenleri ekleme ile ilgilidir.*
 
-MVC uygulamalarında yönlendirilebilir Razor bileşenlerini desteklemek için:
+MVC uygulamalarında routable Razor bileşenlerini desteklemek için:
 
-1. [Sayfaları sayfalar ve görünümler 'de kullanmak için uygulamayı hazırlama](#prepare-the-app-to-use-components-in-pages-and-views) bölümündeki yönergeleri izleyin.
+1. Sayfaları ve [görünümleri bölümündebileşenleri kullanmak için uygulamayı Hazırla'daki](#prepare-the-app-to-use-components-in-pages-and-views) kılavuzu izleyin.
 
-1. Aşağıdaki içeriğe sahip projenin köküne bir *app. Razor* dosyası ekleyin:
+1. Aşağıdaki içerikle projenin köküne bir *App.razor* dosyası ekleyin:
 
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
@@ -160,7 +160,7 @@ MVC uygulamalarında yönlendirilebilir Razor bileşenlerini desteklemek için:
    </Router>
    ```
 
-1. Aşağıdaki içeriğe sahip *Görünümler/giriş* klasörüne bir *_Host. cshtml* dosyası ekleyin:
+1. *Görünümler/Ev* klasörüne aşağıdaki içeriği içeren bir *_Host.cshtml* dosyası ekleyin:
 
    ```cshtml
    @{
@@ -172,9 +172,9 @@ MVC uygulamalarında yönlendirilebilir Razor bileşenlerini desteklemek için:
    </app>
    ```
 
-   Bileşenler, düzeni için paylaşılan *_Layout. cshtml* dosyasını kullanır.
+   Bileşenler, düzenleri için paylaşılan *_Layout.cshtml* dosyasını kullanır.
 
-1. Ana denetleyiciye bir eylem ekleyin:
+1. Giriş denetleyicisine bir eylem ekleyin:
 
    ```csharp
    public IActionResult Blazor()
@@ -183,7 +183,7 @@ MVC uygulamalarında yönlendirilebilir Razor bileşenlerini desteklemek için:
    }
    ```
 
-1. `Startup.Configure`' deki uç nokta yapılandırmasına *_Host. cshtml* görünümünü döndüren denetleyici eylemi için düşük öncelikli bir yol ekleyin:
+1. *_Host.cshtml* görünümünü bitiş noktası yapılandırmasına döndüren denetleyici eylemi için `Startup.Configure`düşük öncelikli bir rota ekleyin:
 
    ```csharp
    app.UseEndpoints(endpoints =>
@@ -194,7 +194,7 @@ MVC uygulamalarında yönlendirilebilir Razor bileşenlerini desteklemek için:
    });
    ```
 
-1. Bir *Sayfalar* klasörü oluşturun ve uygulamaya yönlendirilebilir bileşenler ekleyin. Örneğin:
+1. Bir *Sayfalar* klasörü oluşturun ve uygulamaya routable bileşenleri ekleyin. Örneğin:
 
    ```razor
    @page "/counter"
@@ -204,30 +204,30 @@ MVC uygulamalarında yönlendirilebilir Razor bileşenlerini desteklemek için:
    ...
    ```
 
-   Ad alanları hakkında daha fazla bilgi için [bileşen ad alanları](#component-namespaces) bölümüne bakın.
+   Ad alanları hakkında daha fazla bilgi için [Bileşen ad alanları](#component-namespaces) bölümüne bakın.
 
 ## <a name="component-namespaces"></a>Bileşen ad alanları
 
-Uygulamanın bileşenlerini tutmak için özel bir klasör kullanırken, klasörü/görünümü veya *_ViewImports. cshtml* dosyasını temsil eden ad alanını ekleyin. Aşağıdaki örnekte:
+Uygulamanın bileşenlerini tutmak için özel bir klasör kullanırken, klasörü temsil eden ad alanını sayfaya/görünüme veya *_ViewImports.cshtml* dosyasına ekleyin. Aşağıdaki örnekte:
 
-* `MyAppNamespace` uygulamanın ad alanıyla değiştirin.
-* *Bileşenler adlı bir* klasör bileşenleri tutmak için kullanılmazsa `Components`, bileşenlerin bulunduğu klasöre geçin.
+* Uygulamanın ad alanına değiştirin. `MyAppNamespace`
+* Bileşenleri tutmak için *Bileşenler* adlı bir klasör kullanılmazsa, bileşenlerin bulunduğu klasöre değiştirin. `Components`
 
 ```cshtml
 @using MyAppNamespace.Components
 ```
 
-*_ViewImports. cshtml* dosyası, bir Razor Pages uygulamasının *Sayfalar* klasöründe veya bir MVC uygulamasının *views* klasöründe bulunur.
+*_ViewImports.cshtml* dosyası, Bir Razor Pages uygulamasının *Sayfalar* klasöründe veya bir MVC uygulamasının *Görünümler* klasöründe bulunur.
 
 Daha fazla bilgi için bkz. <xref:blazor/components#import-components>.
 
-## <a name="render-components-from-a-page-or-view"></a>Bir sayfadan veya görünümden bileşenleri işleme
+## <a name="render-components-from-a-page-or-view"></a>Bileşenleri bir sayfaveya görünümden oluşturma
 
-*Bu bölüm, bileşenlerin Kullanıcı isteklerinden doğrudan yönlendirilemeyen sayfalara veya görünümlere bileşen eklenmesine aittir.*
+*Bu bölüm, bileşenlerin kullanıcı isteklerinden doğrudan çıkarılabildiği sayfalara veya görünümlere bileşenler eklemekle ilgilidir.*
 
-Bir sayfadan veya görünümden bir bileşeni işlemek için [bileşen etiketi yardımcısını](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper)kullanın.
+Bir bileşeni bir sayfa veya görünümden işlemek için [Bileşen Etiket Yardımcısı'nı](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper)kullanın.
 
-Bileşenlerin nasıl işlendiği, bileşen durumu ve `Component` etiketi Yardımcısı hakkında daha fazla bilgi için aşağıdaki makalelere bakın:
+Bileşenlerin nasıl işlendiği, bileşen durumu ve `Component` Etiket Yardımcısı hakkında daha fazla bilgi için aşağıdaki makalelere bakın:
 
 * <xref:blazor/hosting-models>
 * <xref:blazor/hosting-model-configuration>

@@ -1,44 +1,44 @@
 ---
-title: .NET üzerinde gRPC 'de günlüğe kaydetme ve tanılama
+title: .NET'te gRPC'de günlük ve tanılama
 author: jamesnk
-description: .NET 'teki gRPC uygulamanızdan tanılamayı nasıl toplayacağınızı öğrenin.
+description: .NET'teki gRPC uygulamanızdan tanılamayı nasıl topladığınızı öğrenin.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 09/23/2019
 uid: grpc/diagnostics
-ms.openlocfilehash: 17607b734e6d777de9516aa14e81c97f87b61023
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 131144bf7a2c637eb2c1a1d5c54990dd4d429502
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78667344"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80417512"
 ---
-# <a name="logging-and-diagnostics-in-grpc-on-net"></a>.NET üzerinde gRPC 'de günlüğe kaydetme ve tanılama
+# <a name="logging-and-diagnostics-in-grpc-on-net"></a>.NET'te gRPC'de günlük ve tanılama
 
-, [James bAyKiNg](https://twitter.com/jamesnk)
+Yazar: [James Newton-King](https://twitter.com/jamesnk)
 
-Bu makale, sorunları gidermeye yardımcı olmak için bir gRPC uygulamasından tanılamayı toplamaya yönelik rehberlik sağlar. Ele alınan konular:
+Bu makalede, sorunları gidermeye yardımcı olmak için bir gRPC uygulamasından tanılama toplamak için kılavuz sağlar. Ele alınan konular:
 
-* **Günlüğe kaydetme** - [.NET Core günlüğe](xref:fundamentals/logging/index)yazma ile yazılan yapılandırılmış Günlükler. <xref:Microsoft.Extensions.Logging.ILogger>, uygulama çerçeveleri tarafından Günlükler ve kullanıcılar tarafından bir uygulamada kendilerine ait günlüğe kaydetme için kullanılır.
-* **İzleme** -`DiaganosticSource` ve `Activity`kullanılarak yazılmış bir işlemle ilgili olaylar. Tanılama kaynağından alınan izlemeler, [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-core) ve [opentelemetri](https://github.com/open-telemetry/opentelemetry-dotnet)gibi kitaplıklara göre uygulama telemetrisini toplamak için yaygın olarak kullanılır.
-* **Ölçümler** -saniye başına isteklerin zaman aralıklarıyla veri ölçülerinin temsili. Ölçümler `EventCounter` kullanılarak yayınlanır ve [DotNet sayaçları](https://docs.microsoft.com/dotnet/core/diagnostics/dotnet-counters) komut satırı aracı kullanılarak veya [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters)ile gözlemlenebilir.
+* **Günlük** - [.NET Core günlük](xref:fundamentals/logging/index)lerine yazılmış yapılandırılmış günlükler. <xref:Microsoft.Extensions.Logging.ILogger>günlükleri yazmak için uygulama çerçeveleri tarafından ve kullanıcılar tarafından bir uygulamada kendi oturum açma için kullanılır.
+* **İzleme** - Kullanılarak `DiaganosticSource` yazılan bir işlemle ilgili olaylar ve `Activity`. Tanı kaynağından gelen izler genellikle [Uygulama Öngörüleri](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-core) ve [OpenTelemetri](https://github.com/open-telemetry/opentelemetry-dotnet)gibi kitaplıklar tarafından uygulama telemetrisini toplamak için kullanılır.
+* Ölçümler - Veri ölçülerinin zaman aralıkları, örneğin, saniyedeki **istekler** üzerinden gösterimi. Ölçümler kullanılarak `EventCounter` yayılır ve [dotnet sayaçları](https://docs.microsoft.com/dotnet/core/diagnostics/dotnet-counters) komut satırı aracı kullanılarak veya [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters)ile gözlemlenebilir.
 
 ## <a name="logging"></a>Günlüğe kaydetme
 
-gRPC Hizmetleri ve gRPC istemcisi [.NET Core günlüğü](xref:fundamentals/logging/index)kullanarak yazma günlükleri. Günlüklerde, uygulamalarınızda beklenmeyen davranışa hata ayıklamanız gerektiğinde başlamak için iyi bir yerdir.
+gRPC hizmetleri ve gRPC istemcisi [.NET Core günlük](xref:fundamentals/logging/index)lerini kullanarak günlükleri yazmak. Günlükler, uygulamalarınızda beklenmeyen davranışları hata ayıklamanız gerektiğinde başlamak için iyi bir yerdir.
 
-### <a name="grpc-services-logging"></a>gRPC Hizmetleri günlüğü
+### <a name="grpc-services-logging"></a>gRPC hizmetleri günlüğü
 
 > [!WARNING]
-> Sunucu tarafı günlükleri, uygulamanızdan önemli bilgiler içerebilir. Ham günlükleri **hiçbir** şekilde üretim uygulamalarından GitHub gibi genel forumlara nakletmeyin.
+> Sunucu tarafındaki günlükler uygulamanızdan hassas bilgiler içerebilir. **Üretim** uygulamalarından GitHub gibi genel forumlara asla ham günlükler göndermeyin.
 
-GRPC Hizmetleri ASP.NET Core üzerinde barındırıldığından, bu, ASP.NET Core günlük sistemini kullanır. Varsayılan yapılandırmada, gRPC çok az bilgiyi günlüğe kaydeder, ancak bu yapılandırılabilir. ASP.NET Core günlüğü yapılandırma hakkında ayrıntılar için [ASP.NET Core günlüğe kaydetme](xref:fundamentals/logging/index#configuration) hakkındaki belgelere bakın.
+gRPC hizmetleri ASP.NET Core'da barındırılan bu yana, ASP.NET Core günlük sistemini kullanır. Varsayılan yapılandırmada, gRPC çok az bilgi kaydeder, ancak bu yapılandırılabilir. ASP.NET Core [günlük](xref:fundamentals/logging/index#configuration) yapılandırma sı hakkında ayrıntılı bilgi için ASP.NET Core günlük üzerindeki belgelere bakın.
 
-gRPC `Grpc` kategorisi altına Günlükler ekler. GRPC 'den ayrıntılı günlükleri etkinleştirmek için, aşağıdaki öğeleri `Logging``LogLevel` alt bölümüne ekleyerek *appSettings. JSON* dosyanızdaki `Debug` düzeyine `Grpc` öneklerini yapılandırın:
+gRPC kategorisi altında `Grpc` günlükleri ekler. gRPC'den ayrıntılı günlükleri etkinleştirmek `Grpc` için, önekleri *appsettings.json* dosyanızdaki `Debug` düzeye doğru, `LogLevel` aşağıdaki öğeleri `Logging`aşağıdaki alt bölüme ekleyerek yapılandırın:
 
 [!code-json[](diagnostics/sample/logging-config.json?highlight=7)]
 
-Bunu, `ConfigureLogging`ile *Startup.cs* içinde de yapılandırabilirsiniz:
+Ayrıca bu *Startup.cs* ile `ConfigureLogging`yapılandırabilirsiniz:
 
 [!code-csharp[](diagnostics/sample/logging-config-code.cs?highlight=5)]
 
@@ -46,13 +46,13 @@ JSON tabanlı yapılandırma kullanmıyorsanız, yapılandırma sisteminizde aş
 
 * `Logging:LogLevel:Grpc` = `Debug`
 
-İç içe yapılandırma değerlerinin nasıl belirleneceğini belirlemek için yapılandırma sisteminizin belgelerini denetleyin. Örneğin, ortam değişkenlerini kullanırken, `:` yerine iki `_` karakter kullanılır (örneğin, `Logging__LogLevel__Grpc`).
+İç içe geçme yapılandırma değerlerini nasıl belirtin belirlemek için yapılandırma sisteminizin belgelerini denetleyin. Örneğin, ortam değişkenleri kullanılırken, `_` `:` (örneğin,) `Logging__LogLevel__Grpc`yerine iki karakter kullanılır.
 
-Uygulamanız için daha ayrıntılı tanılama toplanırken `Debug` düzeyinin kullanılması önerilir. `Trace` düzeyi çok düşük düzey Tanılamalar üretir ve uygulamanızdaki sorunları tanılamak için nadiren gereklidir.
+Uygulamanız için `Debug` daha ayrıntılı tanılama lar toplarken düzeyi kullanmanızı öneririz. Düzey `Trace` çok düşük düzeyde tanılama üretir ve uygulamanızdaki sorunları tanılamak için nadiren gereklidir.
 
-#### <a name="sample-logging-output"></a>Örnek günlüğe kaydetme çıkışı
+#### <a name="sample-logging-output"></a>Örnek günlük çıktısı
 
-Aşağıda, bir gRPC hizmetinin `Debug` düzeyinde konsol çıkışının bir örneği verilmiştir:
+Aşağıda, bir gRPC `Debug` hizmeti düzeyinde konsol çıkışına bir örnek verilmiştir:
 
 ```console
 info: Microsoft.AspNetCore.Hosting.Diagnostics[1]
@@ -71,43 +71,43 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
       Request finished in 1.4113ms 200 application/grpc
 ```
 
-### <a name="access-server-side-logs"></a>Sunucu tarafı günlüklerine erişin
+### <a name="access-server-side-logs"></a>Sunucu tarafındaki günlüklere erişin
 
-Sunucu tarafı günlüklerine erişme, çalıştırdığınız ortama bağlıdır.
+Sunucu tarafındaki günlüklere nasıl eriştüğün, içinde çalıştığınız ortama bağlıdır.
 
 #### <a name="as-a-console-app"></a>Konsol uygulaması olarak
 
-Konsol uygulamasında çalıştırıyorsanız, [konsol günlükçüsü](xref:fundamentals/logging/index#console-provider) varsayılan olarak etkinleştirilmelidir. gRPC günlükleri konsolunda görünür.
+Bir konsol uygulamasında çalışıyorsanız, [Konsol kaydedicisi](xref:fundamentals/logging/index#console-provider) varsayılan olarak etkinleştirilmelidir. konsolda gRPC günlükleri görünür.
 
 #### <a name="other-environments"></a>Diğer ortamlar
 
-Uygulama başka bir ortama (örneğin, Docker, Kubernetes veya Windows hizmeti) dağıtılırsa, ortama uygun günlük sağlayıcılarının nasıl yapılandırılacağı hakkında daha fazla bilgi için bkz. <xref:fundamentals/logging/index>.
+Uygulama başka bir ortama (örneğin, Docker, Kubernetes veya Windows <xref:fundamentals/logging/index> Service) dağıtılırsa, ortama uygun günlük sağlayıcılarını nasıl yapılandırılabilirsiniz hakkında daha fazla bilgi için bkz.
 
 ### <a name="grpc-client-logging"></a>gRPC istemci günlüğü
 
 > [!WARNING]
-> İstemci tarafı günlükleri, uygulamanızdan önemli bilgiler içerebilir. Ham günlükleri **hiçbir** şekilde üretim uygulamalarından GitHub gibi genel forumlara nakletmeyin.
+> İstemci tarafı günlükleri uygulamanızdan hassas bilgiler içerebilir. **Üretim** uygulamalarından GitHub gibi genel forumlara asla ham günlükler göndermeyin.
 
-.NET istemcisinden günlükleri almak için, istemci kanalının oluşturulduğu zaman `GrpcChannelOptions.LoggerFactory` özelliğini ayarlayabilirsiniz. Bir ASP.NET Core uygulamasından gRPC hizmetini arıyorsanız, günlükçü fabrikası bağımlılık ekleme (DI) ' dan çözülebilir:
+.NET istemcisinden günlük almak için, istemcinin `GrpcChannelOptions.LoggerFactory` kanalı oluşturulduğunda özelliği ayarlayabilirsiniz. Bir ASP.NET Core uygulamasından gRPC hizmetini arıyorsanız, logger fabrikası bağımlılık enjeksiyonundan (DI) çözülebilir:
 
 [!code-csharp[](diagnostics/sample/net-client-dependency-injection.cs?highlight=7,16)]
 
-İstemci günlüğünü etkinleştirmenin alternatif bir yolu, istemci oluşturmak için [GRPC istemci fabrikası](xref:grpc/clientfactory) kullanmaktır. İstemci fabrikasına kayıtlı ve dı 'den çözümlenen bir gRPC istemcisi, otomatik olarak uygulamanın yapılandırılmış günlüğünü kullanacaktır.
+İstemci günlüğe kaydetmeyi etkinleştirmek için alternatif bir yol istemci oluşturmak için [gRPC istemci fabrikasını](xref:grpc/clientfactory) kullanmaktır. İstemci fabrikasına kayıtlı ve DI'den çözümlenen bir gRPC istemcisi, uygulamanın yapılandırılmış günlüğe kaydetmesini otomatik olarak kullanır.
 
-Uygulamanız DI kullanıyorsa, [Loggerfactory. Create](xref:Microsoft.Extensions.Logging.LoggerFactory.Create*)ile yeni bir `ILoggerFactory` örneği oluşturabilirsiniz. Bu yönteme erişmek için [Microsoft. Extensions. Logging](https://www.nuget.org/packages/microsoft.extensions.logging/) paketini uygulamanıza ekleyin.
+Uygulamanız DI kullanmıyorsa `ILoggerFactory` [LoggerFactory.Create](xref:Microsoft.Extensions.Logging.LoggerFactory.Create*)ile yeni bir örnek oluşturabilirsiniz. Bu yönteme erişmek için uygulamanıza [Microsoft.Extensions.Logging](https://www.nuget.org/packages/microsoft.extensions.logging/) paketini ekleyin.
 
 [!code-csharp[](diagnostics/sample/net-client-loggerfactory-create.cs?highlight=1,8)]
 
-#### <a name="grpc-client-log-scopes"></a>gRPC istemci günlüğü kapsamları
+#### <a name="grpc-client-log-scopes"></a>gRPC istemci günlük kapsamları
 
-GRPC istemcisi, gRPC çağrısı sırasında yapılan günlüklere bir [günlüğe kaydetme kapsamı](https://docs.microsoft.com/aspnet/core/fundamentals/logginglog-scopes) ekler. Kapsamda gRPC çağrısıyla ilgili meta veriler vardır:
+gRPC istemcisi, gRPC araması sırasında yapılan günlüklere günlük [kapsamı](https://docs.microsoft.com/aspnet/core/fundamentals/logging#log-scopes) ekler. Kapsam gRPC çağrısı ile ilgili meta verilere sahiptir:
 
-* **Grpcmethodtype** -GRPC Yöntem türü. Olası değerler `Grpc.Core.MethodType` numaralandırıcıdan adlardır, örneğin Birli
-* **Grpcuri** -GRPC yönteminin göreli URI 'si; Örneğin,/bir. Greeter/Saymerhaba s
+* **GrpcMethodType** - gRPC yöntem türü. Olası değerler enum adlarıdır, `Grpc.Core.MethodType` örneğin Unary
+* **GrpcUri** - gRPC yönteminin göreceli URI, örneğin / selamlıyorum. Greeter/SayHellos
 
-#### <a name="sample-logging-output"></a>Örnek günlüğe kaydetme çıkışı
+#### <a name="sample-logging-output"></a>Örnek günlük çıktısı
 
-Aşağıda, bir gRPC istemcisinin `Debug` düzeyinde konsol çıkışının bir örneği verilmiştir:
+Aşağıda, bir gRPC `Debug` istemcisi düzeyinde konsol çıktısı örneği verilmiştir:
 
 ```console
 dbug: Grpc.Net.Client.Internal.GrpcCall[1]
@@ -122,77 +122,77 @@ dbug: Grpc.Net.Client.Internal.GrpcCall[4]
 
 ## <a name="tracing"></a>İzleme
 
-gRPC Hizmetleri ve gRPC istemcisi, [Diagnosticsource](https://docs.microsoft.com/dotnet/api/system.diagnostics.diagnosticsource) ve [Activity](https://docs.microsoft.com/dotnet/api/system.diagnostics.activity)kullanarak GRPC çağrıları hakkında bilgi sağlar.
+gRPC hizmetleri ve gRPC istemcisi [DiagnosticSource](https://docs.microsoft.com/dotnet/api/system.diagnostics.diagnosticsource) ve [Activity](https://docs.microsoft.com/dotnet/api/system.diagnostics.activity)kullanarak gRPC aramaları hakkında bilgi sağlar.
 
-* .NET gRPC, bir gRPC çağrısını temsil eden bir etkinlik kullanır.
-* İzleme olayları, gRPC çağrısı etkinliğinin başlangıcında ve durdurulduğunda tanılama kaynağına yazılır.
-* İzleme, gRPC akış çağrılarının kullanım ömrü boyunca iletiler gönderildiğinde hakkında bilgi yakalamaz.
+* .NET gRPC, gRPC çağrısını temsil etmek için bir etkinlik kullanır.
+* İzleme olayları gRPC arama etkinliğinin başında ve durağında tanı kaynağına yazılır.
+* İzleme, gRPC akış çağrılarının kullanım ömrü boyunca iletilerin ne zaman gönderildiği hakkında bilgi yakalamaz.
 
-### <a name="grpc-service-tracing"></a>gRPC hizmeti izleme
+### <a name="grpc-service-tracing"></a>gRPC hizmet izleme
 
-gRPC Hizmetleri, gelen HTTP istekleriyle ilgili olayları raporlayan ASP.NET Core barındırılır. gRPC 'ye özgü meta veriler, ASP.NET Core sağladığı mevcut HTTP istek tanımasına eklenir.
+gRPC hizmetleri, gelen HTTP istekleriyle ilgili olayları bildiren ASP.NET Core'da barındırılır. ASP.NET Core'un sağladığı mevcut HTTP isteği tanılamalarına gRPC'ye özgü meta veriler eklenir.
 
-* Tanılama kaynağı adı `Microsoft.AspNetCore`.
+* Tanılama kaynak `Microsoft.AspNetCore`adıdır.
 * Etkinlik adı `Microsoft.AspNetCore.Hosting.HttpRequestIn`.
-  * GRPC çağrısı tarafından çağrılan gRPC yönteminin adı, `grpc.method`adında bir etiket olarak eklenir.
-  * İşlemi tamamlandığında gRPC çağrısının durum kodu, `grpc.status_code`adlı bir etiket olarak eklenir.
+  * gRPC çağrısı tarafından çağrılan gRPC yönteminin adı, ad `grpc.method`ile etiket olarak eklenir.
+  * Tamamlandığında gRPC çağrısının durum kodu adı `grpc.status_code`ile bir etiket olarak eklenir.
 
 ### <a name="grpc-client-tracing"></a>gRPC istemci izleme
 
-.NET gRPC istemcisi, gRPC çağrıları yapmak için `HttpClient` kullanır. `HttpClient`, Tanılama olaylarını yazsa da, .NET gRPC istemcisi özel bir tanılama kaynağı, etkinlik ve olaylar sağlayarak bir gRPC çağrısıyla ilgili tüm bilgilerin toplanmasına olanak tanır.
+.NET gRPC istemcisi gRPC aramaları yapmak için kullanır. `HttpClient` Tanılama olayları yazsa da, `HttpClient` .NET gRPC istemcisi özel bir tanılama kaynağı, etkinlik ve olaylar sağlar, böylece bir gRPC çağrısı hakkında tam bilgi toplanabilir.
 
-* Tanılama kaynağı adı `Grpc.Net.Client`.
+* Tanılama kaynak `Grpc.Net.Client`adıdır.
 * Etkinlik adı `Grpc.Net.Client.GrpcOut`.
-  * GRPC çağrısı tarafından çağrılan gRPC yönteminin adı, `grpc.method`adında bir etiket olarak eklenir.
-  * İşlemi tamamlandığında gRPC çağrısının durum kodu, `grpc.status_code`adlı bir etiket olarak eklenir.
+  * gRPC çağrısı tarafından çağrılan gRPC yönteminin adı, ad `grpc.method`ile etiket olarak eklenir.
+  * Tamamlandığında gRPC çağrısının durum kodu adı `grpc.status_code`ile bir etiket olarak eklenir.
 
-### <a name="collecting-tracing"></a>İzleme toplanıyor
+### <a name="collecting-tracing"></a>İzleme yi toplama
 
-`DiagnosticSource` kullanmanın en kolay yolu, uygulamanızda [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-core) veya [opentelemetri](https://github.com/open-telemetry/opentelemetry-dotnet) gibi bir telemetri kitaplığı yapılandırmaktır. Bu kitaplık, gRPC ile diğer uygulama telemetrisini çağıran bilgileri işleyecek.
+En kolay kullanım `DiagnosticSource` yolu, [uygulamanızda Uygulama Öngörüleri](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-core) veya [OpenTelemetri](https://github.com/open-telemetry/opentelemetry-dotnet) gibi bir telemetri kitaplığını yapılandırmaktır. Kitaplık, diğer uygulama telemetrisi ile birlikte gRPC çağrıları hakkındaki bilgileri işleyecek.
 
-İzleme Application Insights gibi bir yönetilen hizmette görüntülenebilir veya kendi dağıtılmış izleme sisteminizi çalıştırmayı tercih edebilirsiniz. Opentelemetri, izleme verilerinin [Caeger](https://www.jaegertracing.io/) ve [zipy](https://zipkin.io/)'ye verilmesini destekler.
+İzleme, Uygulama Öngörüleri gibi yönetilen bir hizmette görüntülenebilir veya kendi dağıtılmış izleme sisteminizi çalıştırmayı seçebilirsiniz. OpenTelemetry [Jaeger](https://www.jaegertracing.io/) ve [Zipkin](https://zipkin.io/)veri izleme dışa aktarAn destekler.
 
-`DiagnosticSource`, `DiagnosticListener`kullanarak koddaki izleme olaylarını tüketebilir. Bir tanılama kaynağını kodla dinleme hakkında daha fazla bilgi için bkz. [diagnosticsource Kullanıcı Kılavuzu](https://github.com/dotnet/corefx/blob/d3942d4671919edb0cca6ddc1840190f524a809d/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md#consuming-data-with-diagnosticlistener).
+`DiagnosticSource`kullanarak `DiagnosticListener`koddaki olayları izleme tüketebilir. Kodlu bir tanı kaynağını dinleme hakkında bilgi için [DiagnosticSource kullanıcı kılavuzuna](https://github.com/dotnet/corefx/blob/d3942d4671919edb0cca6ddc1840190f524a809d/src/System.Diagnostics.DiagnosticSource/src/DiagnosticSourceUsersGuide.md#consuming-data-with-diagnosticlistener)bakın.
 
 > [!NOTE]
-> Telemetri kitaplıkları Şu anda gRPC 'ye özgü `Grpc.Net.Client.GrpcOut` telemetrisini yakalamaz. Telemetri kitaplıklarını geliştirmek için çalış bu izlemeyi devam ediyor.
+> Telemetri kitaplıkları şu anda gRPC'ye özgü `Grpc.Net.Client.GrpcOut` telemetriyi yakalayamıyor. Bu izleme yakalama telemetri kütüphaneleri geliştirmek için çalışmalar devam etmektedir.
 
 ## <a name="metrics"></a>Ölçümler
 
-Ölçümler, zaman aralıklarıyla veri ölçülerinin bir gösterimidir (örneğin, saniye başına istek). Ölçüm verileri, yüksek düzeyde bir uygulamanın durumunun gözlemde yapılmasına izin verir. .NET gRPC ölçümleri `EventCounter`kullanılarak yayınlanır.
+Ölçümler, örneğin saniyedeki istekler gibi zaman aralıklarına göre veri ölçülerinin bir temsilidir. Ölçümler verileri, bir uygulamanın durumunun üst düzeyde gözlemlemesine olanak tanır. .NET gRPC ölçümleri kullanılarak `EventCounter`yayılır.
 
-### <a name="grpc-service-metrics"></a>gRPC hizmeti ölçümleri
+### <a name="grpc-service-metrics"></a>gRPC hizmet ölçümleri
 
 gRPC sunucu ölçümleri `Grpc.AspNetCore.Server` olay kaynağında raporlanır.
 
-| Name                      | Açıklama                   |
+| Adı                      | Açıklama                   |
 | --------------------------|-------------------------------|
-| `total-calls`             | Toplam çağrı sayısı                   |
-| `current-calls`           | Geçerli çağrılar                 |
-| `calls-failed`            | Toplam başarısız çağrı sayısı            |
-| `calls-deadline-exceeded` | Toplam çağrı son tarihi aşıldı |
-| `messages-sent`           | Gönderilen toplam Ileti sayısı           |
-| `messages-received`       | Alınan toplam Ileti sayısı       |
-| `calls-unimplemented`     | Uygulanmayan Toplam çağrı sayısı     |
+| `total-calls`             | Toplam Aramalar                   |
+| `current-calls`           | Güncel Aramalar                 |
+| `calls-failed`            | Toplam Aramalar Başarısız Oldu            |
+| `calls-deadline-exceeded` | Toplam Arama Süresi Aşıldı |
+| `messages-sent`           | Gönderilen Toplam İleti Sayısı           |
+| `messages-received`       | Alınan Toplam İleti       |
+| `calls-unimplemented`     | Uygulanmamış Toplam Aramalar     |
 
-ASP.NET Core Ayrıca, `Microsoft.AspNetCore.Hosting` olay kaynağı üzerinde kendi ölçümlerini de sağlar.
+ASP.NET Core da olay kaynağı `Microsoft.AspNetCore.Hosting` üzerinde kendi ölçümleri sağlar.
 
 ### <a name="grpc-client-metrics"></a>gRPC istemci ölçümleri
 
 gRPC istemci ölçümleri `Grpc.Net.Client` olay kaynağında raporlanır.
 
-| Name                      | Açıklama                   |
+| Adı                      | Açıklama                   |
 | --------------------------|-------------------------------|
-| `total-calls`             | Toplam çağrı sayısı                   |
-| `current-calls`           | Geçerli çağrılar                 |
-| `calls-failed`            | Toplam başarısız çağrı sayısı            |
-| `calls-deadline-exceeded` | Toplam çağrı son tarihi aşıldı |
-| `messages-sent`           | Gönderilen toplam Ileti sayısı           |
-| `messages-received`       | Alınan toplam Ileti sayısı       |
+| `total-calls`             | Toplam Aramalar                   |
+| `current-calls`           | Güncel Aramalar                 |
+| `calls-failed`            | Toplam Aramalar Başarısız Oldu            |
+| `calls-deadline-exceeded` | Toplam Arama Süresi Aşıldı |
+| `messages-sent`           | Gönderilen Toplam İleti Sayısı           |
+| `messages-received`       | Alınan Toplam İleti       |
 
-### <a name="observe-metrics"></a>Ölçümleri gözlemleyin
+### <a name="observe-metrics"></a>Ölçümleri gözlemle
 
-[DotNet sayaçları](https://docs.microsoft.com/dotnet/core/diagnostics/dotnet-counters) , geçici sistem durumu izleme ve ilk düzey performans araştırması için bir performans izleme aracıdır. `Grpc.AspNetCore.Server` veya `Grpc.Net.Client` sağlayıcı adı olarak bir .NET uygulamasını izleyin.
+[dotnet sayaçları,](https://docs.microsoft.com/dotnet/core/diagnostics/dotnet-counters) özel sistem durumu izleme ve birinci düzey performans araştırması için bir performans izleme aracıdır. Bir .NET uygulamasını `Grpc.AspNetCore.Server` sağlayıcı `Grpc.Net.Client` adı olarak veya sağlayıcı adı olarak izleyin.
 
 ```console
 > dotnet-counters monitor --process-id 1902 Grpc.AspNetCore.Server
@@ -209,9 +209,9 @@ Press p to pause, r to resume, q to quit.
     Total Calls Unimplemented                   0
 ```
 
-GRPC ölçümlerini gözlemlemeye yönelik başka bir yol da Application Insights [Microsoft. ApplicationInsights. EventCounterCollector paketini](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters)kullanarak sayaç verilerini yakalemektir. Kurulumdan sonra, Application Insights çalışma zamanında ortak .NET sayaçlarını toplar. gRPC 'nin sayaçları varsayılan olarak toplanmaz, ancak uygulama öngörüleri [ek sayaçlar içerecek şekilde özelleştirilebilir](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters#customizing-counters-to-be-collected).
+gRPC ölçümlerini gözlemlemenin bir diğer yolu da Application Insights'ın [Microsoft.ApplicationInsights.EventCounterCollector paketini](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters)kullanarak karşı veri yakalamaktır. Kurulumdan sonra Application Insights çalışma zamanında ortak .NET sayaçlarını toplar. gRPC sayaçları varsayılan olarak toplanmaz, ancak App Insights [ek sayaçları içerecek şekilde özelleştirilebilir.](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters#customizing-counters-to-be-collected)
 
-*Startup.cs*Içinde toplanacak uygulama öngörüleri Için GRPC sayaçlarını belirtin:
+*Startup.cs*toplamak için Uygulama Öngörüsü için gRPC sayaçlarını belirtin:
 
 ```csharp
     using Microsoft.ApplicationInsights.Extensibility.EventCounterCollector;

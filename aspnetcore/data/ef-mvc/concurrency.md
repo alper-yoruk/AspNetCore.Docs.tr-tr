@@ -1,6 +1,6 @@
 ---
-title: "Öğretici: EF Core eşzamanlılık-ASP.NET MVC 'yi Işleme"
-description: Bu öğreticide, birden çok kullanıcı aynı anda aynı varlık güncelleştirdiğinizde çakışmalarına gösterilmektedir.
+title: 'Öğretici: Eşpara kolu - EF Core ile ASP.NET MVC'
+description: Bu öğretici, birden çok kullanıcı aynı varlığı aynı anda güncelleştirdiğinde çakışmaları nasıl işleyeceğini gösterir.
 author: rick-anderson
 ms.author: riande
 ms.custom: mvc
@@ -8,113 +8,113 @@ ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/concurrency
 ms.openlocfilehash: 6839e383093b993ff55095f26cf88cd68708f001
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78657397"
 ---
-# <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>Öğretici: EF Core eşzamanlılık-ASP.NET MVC 'yi Işleme
+# <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>Öğretici: Eşpara kolu - EF Core ile ASP.NET MVC
 
-Önceki öğreticilerde, verileri güncelleştirme hakkında daha fazla öğrendiniz. Bu öğreticide, birden çok kullanıcı aynı anda aynı varlık güncelleştirdiğinizde çakışmalarına gösterilmektedir.
+Önceki öğreticilerde, verileri nasıl güncelleştirini öğrendiniz. Bu öğretici, birden çok kullanıcı aynı varlığı aynı anda güncelleştirdiğinde çakışmaları nasıl işleyeceğini gösterir.
 
-Departman varlığıyla çalışan ve eşzamanlılık hatalarını işleyecek Web sayfaları oluşturacaksınız. Aşağıdaki çizimler, bir eşzamanlılık çakışması oluşursa görüntülenen bazı iletiler dahil olmak üzere, düzenleme ve silme sayfalarını gösterir.
+Bölüm kuruluşuyla çalışan ve eşzamanlılık hatalarını işleyen web sayfaları oluşturursunuz. Aşağıdaki çizimler, eşzamanlılık çakışması oluşursa görüntülenen bazı iletileri de içeren Düzenle ve Sil sayfalarını gösterir.
 
-![Bölüm düzenleme sayfası](concurrency/_static/edit-error.png)
+![Bölüm Edit sayfası](concurrency/_static/edit-error.png)
 
-![Departmanı silme sayfası](concurrency/_static/delete-error.png)
+![Bölüm Silme sayfası](concurrency/_static/delete-error.png)
 
 Bu öğreticide şunları yaptınız:
 
 > [!div class="checklist"]
 > * Eşzamanlılık çakışmaları hakkında bilgi edinin
-> * İzleme özelliği Ekle
+> * İzleme özelliği ekleme
 > * Departmanlar denetleyicisi ve görünümleri oluşturma
-> * Dizin görünümünü Güncelleştir
-> * Düzenleme yöntemlerini Güncelleştir
-> * Güncelleştirme düzenleme görünümü
-> * Eşzamanlılık çakışmalarını test et
-> * Silme sayfası
-> * Güncelleştirme ayrıntıları ve görünüm oluşturma
+> * Dizin görünümünü güncelleştir
+> * Güncelle yöntemlerini güncelleştir
+> * Görünümü Güncelleştir
+> * Eşzamanlılık çakışmalarını test edin
+> * Sil sayfasını güncelleştir
+> * Ayrıntıları Güncelleştir ve Görünüm Oluştur
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [İlgili verileri güncelleştirme](update-related-data.md)
 
 ## <a name="concurrency-conflicts"></a>Eşzamanlılık çakışmaları
 
-Bir Kullanıcı bir varlığın verilerini düzenlemek için bir varlık verileri görüntülediğinde bir eşzamanlılık çakışması oluşur ve sonra, ilk kullanıcının değişikliği veritabanına yazılmadan önce diğer Kullanıcı aynı varlığın verilerini günceller. Bu tür çakışmaların algılanmasını etkinleştirmezseniz, veritabanını güncelleştirme son olarak diğer kullanıcının değişikliklerinin üzerine yazar. Birçok uygulamada, bu risk kabul edilebilir: birkaç Kullanıcı veya birkaç güncelleştirme varsa veya bazı değişikliklerin üzerine yazılırsa gerçekten önemli değilse, eşzamanlılık için programlama maliyeti avantajdan yararlanabilir. Bu durumda, uygulamayı eşzamanlılık çakışmalarını işleyecek şekilde yapılandırmanız gerekmez.
+Eşzamanlılık çakışması, bir kullanıcı bir varlığın verilerini düzenlemek için görüntülediğinde ve ilk kullanıcı değişikliği veritabanına yazılmadan önce aynı varlığın verilerini güncelleştirir. Bu tür çakışmaların algılanmasını etkinleştiremezseniz, veritabanını en son güncelalan kişi diğer kullanıcının değişikliklerinin üzerine yazar. Birçok uygulamada, bu risk kabul edilebilir: az sayıda kullanıcı veya birkaç güncelleştirme varsa veya bazı değişiklikler üzerine yazılmışsa gerçekten kritik değilse, eşzamanlılık için programlama maliyeti yarar dan daha ağır basabilir. Bu durumda, eşzamanlılık çakışmaları işlemek için uygulamayı yapılandırmanız gerekmez.
 
 ### <a name="pessimistic-concurrency-locking"></a>Kötümser eşzamanlılık (kilitleme)
 
-Uygulamanızın eşzamanlılık senaryolarında yanlışlıkla veri kaybını önlemesi gerekiyorsa, bunu yapmanın bir yolu veritabanı kilitlerini kullanmaktır. Bu, Kötümser eşzamanlılık olarak adlandırılır. Örneğin, bir veritabanından bir satırı okuyabilmeniz için, salt okunurdur veya güncelleştirme erişimi için bir kilit isteyin. Bir satırı güncelleştirme erişimi için kilitlerseniz, başka hiçbir kullanıcının satırı değiştirme sürecinde olan verilerin bir kopyasını alması için salt okunurdur veya güncelleştirme erişimi için bu satırı kilitlemesine izin verilmez. Bir satırı salt okuma erişimi için kilitlerseniz, diğerleri dosyayı salt okuma erişimi için de kilitleyip güncelleştirme için de kilitleyebilirler.
+Uygulamanızın eşzamanlılık senaryolarında yanlışlıkla veri kaybını önlemesi gerekiyorsa, bunu yapmanın bir yolu veritabanı kilitlerini kullanmaktır. Buna kötümser eşzamanlılık denir. Örneğin, veritabanındaki bir satırı okumadan önce, salt okunur veya güncelleştirme erişimi için bir kilit istersiniz. Güncelleştirme erişimi için bir satırı kilitlerseniz, değiştirilme sürecindeolan verilerin bir kopyasını alacakları için başka kullanıcıların satırı salt okunur veya güncelleştirme erişimi için kilitlemesine izin verilmez. Yalnızca okunur erişim için bir satırı kilitlerseniz, diğerleri yalnızca okunur erişim için de kilitleyebilir, ancak güncelleştirme için kilitlenmez.
 
-Kilitleri yönetmek dezavantajlara sahiptir. Program, karmaşık olabilir. Önemli veritabanı yönetim kaynakları gerektirir ve bir uygulamanın kullanıcı sayısı arttıkça performans sorunlarına neden olabilir. Bu nedenlerden dolayı, tüm veritabanı yönetim sistemleri Kötümser eşzamanlılık 'yi desteklemez. Entity Framework Core, BT için yerleşik destek sağlamaz ve bu öğretici bunu nasıl uygulayacağınızı göstermez.
+Kilitleri yönetmenin dezavantajları vardır. Bu program için karmaşık olabilir. Önemli veritabanı yönetim kaynakları gerektirir ve bir uygulamanın kullanıcı sayısı arttıkça performans sorunlarına neden olabilir. Bu nedenlerden dolayı, tüm veritabanı yönetim sistemleri kötümser eşzamanlılığı desteklemez. Entity Framework Core bunun için yerleşik destek sağlamaz ve bu öğretici bunu nasıl uygulayacağınızı göstermez.
 
 ### <a name="optimistic-concurrency"></a>İyimser Eşzamanlılık
 
-Kötümser eşzamanlılık yerine iyimser eşzamanlılık yapılır. İyimser eşzamanlılık, eşzamanlılık çakışmalarının gerçekleşmesine ve sonra uygun şekilde yeniden davranmasını sağlar. Örneğin, Gamze departman düzenleme sayfasını ziyaret ettiğinde, Ingilizce departmanı $350.000,00 olan bütçe tutarını $0,00 olarak değiştirir.
+Kötümser eşzamanlılık alternatif iyimser eşzamanlılık olduğunu. İyimser eşzamanlılık, eşzamanlılık çakışmalarına izin vermek ve varsa uygun şekilde tepki vermek anlamına gelir. Örneğin, Jane Bölüm Edit sayfasını ziyaret eder ve İngilizce bölümü için bütçe tutarını 350.000,00 TL'den 0,00 TL'ye değiştirir.
 
-![Bütçe 0 olarak değiştirme](concurrency/_static/change-budget.png)
+![Bütçeyi 0 olarak değiştirme](concurrency/_static/change-budget.png)
 
-Kemal, **Kaydet**' i tıklamadan önce, John aynı sayfayı ziyaret ettiğinde başlangıç tarihi alanını 9/1/2007 ' den 9/1/2013 ' e değiştirir.
+Jane **Kaydet'i**tıklatmadan önce, John aynı sayfayı ziyaret eder ve Başlangıç Tarihi alanını 9/1/2007'den 9/1/2013'e değiştirir.
 
-![2013'e başlangıç tarihini değiştirme](concurrency/_static/change-date.png)
+![Başlangıç tarihini 2013 olarak değiştirme](concurrency/_static/change-date.png)
 
-Gamze önce **Kaydet** ' i tıklatır ve tarayıcı dizin sayfasına döndüğünde değişikliği görür.
+Jane önce **Kaydet'i** tıklatıyor ve tarayıcı Dizin sayfasına döndüğünde değişikliğini görür.
 
-![Bütçe sıfır olarak değiştirildi](concurrency/_static/budget-zero.png)
+![Bütçe sıfıra değiştirildi](concurrency/_static/budget-zero.png)
 
-Ardından John, hala $350.000,00 bütçesini gösteren bir düzenleme sayfasında **Kaydet** ' e tıklamakta. Sonraki işlemin ne eşzamanlılık çakışmalarını nasıl ele tarafından belirlenir.
+Ardından John, 350.000,00 TL bütçegösteren bir Edit sayfasında **Kaydet'i** tıklatır. Bundan sonra ne olacağı eşzamanlılık çakışmaları nasıl ele aldığınıza göre belirlenir.
 
-Bazı seçenekler şunlardır:
+Seçeneklerden bazıları şunlardır:
 
-* Bir kullanıcının hangi özelliği değiştirdiği ve yalnızca ilgili sütunları veritabanında güncelleştirdiğinden haberdar olabilirsiniz.
+* Bir kullanıcının hangi özelliği değiştirdiğini izleyebilir ve yalnızca veritabanındaki ilgili sütunları güncelleştirebilirsiniz.
 
-     Örnek senaryoda, iki kullanıcı tarafından farklı özellikler güncelleştirildiğinden hiçbir veri kaybolmaz. Ingilizce bölüme bir dahaki sefer ilk kez gözattığında, hem gamze 'nin hem de John 'un değişikliklerini görür; başlangıç tarihi 9/1/2013 ve sıfır dolar bir bütçe olur. Bu güncelleştirme yöntemi, veri kaybına neden olabilecek çakışmaların sayısını azaltabilir, ancak bir varlığın aynı özelliğinde rekabet değişiklikleri yapılırsa veri kaybını önleyebilir. Entity Framework bu şekilde çalışıp çalışmadığını, güncelleştirme kodunuzu nasıl uygulayadığınıza bağlıdır. Genellikle bir Web uygulamasında pratik değildir, çünkü bir varlığın tüm özgün özellik değerlerini ve yeni değerleri izlemek için büyük miktarlarda durum tutmanızı gerektirebilir. Büyük miktarlarda durum bulundurma, uygulama performansını etkileyebilir çünkü sunucu kaynakları gerektirir ya da Web sayfasının kendisine (örneğin, gizli alanlarda) veya bir tanımlama bilgisinde yer almalıdır.
+     Örnek senaryoda, farklı özellikler iki kullanıcı tarafından güncelleştirilmeden hiçbir veri kaybolmaz. Bir dahaki sefere birisi İngilizce bölümüne göz atsa, jane ve John'un değişikliklerini görecekler -- 9/1/2013 başlangıç tarihi ve sıfır dolar lık bir bütçe. Bu güncelleştirme yöntemi, veri kaybına neden olabilecek çakışma sayısını azaltabilir, ancak bir varlığın aynı özelliğinde rakip değişiklikler yapılırsa veri kaybını önleyemez. Varlık Çerçevesi'nin bu şekilde çalışıp çalışmadığına, güncelleştirme kodunuzu nasıl uyguladığınıza bağlıdır. Bir kuruluşun tüm özgün özellik değerlerinin yanı sıra yeni değerleri izlemek için büyük miktarda durum korumanızı gerektirebileceğinden, web uygulamasında genellikle pratik değildir. Sunucu kaynakları gerektirdiğinden veya web sayfasının kendisine (örneğin, gizli alanlarda) veya bir çereze eklenmesi gerektiğinden, büyük miktarda durum korumak uygulama performansını etkileyebilir.
 
-* Gamze'nin değişikliğinin üzerine Can'ın değişiklik sağlayabilirsiniz.
+* John'un değişmesine izin verebilirsin Jane'in bozuk paralarını yazabilirsin.
 
-     Ingilizce bölüme bir dahaki sefer gözattığında, 9/1/2013 ve geri yüklenen $350.000,00 değerini görür. Bu, *Istemci WINS* veya *son WINS* senaryosu olarak adlandırılır. (İstemciden gelen tüm değerler veri deposunda yer alacak şekilde önceliklidir.) Bu bölümün giriş bölümünde belirtildiği gibi, eşzamanlılık işleme için herhangi bir kodlama yapmazsanız, bu otomatik olarak gerçekleşir.
+     Birisi İngilizce bölümüne bir daha ki sefere göz atanın, 9/1/2013 ve geri yüklenen $350,000.00 değerini göreceksiniz. Buna Müşteri *Kazançları* veya *Son Kazanç* senaryosu denir. (İstemcinin tüm değerleri veri deposunda bulunanlardan önceliklidir.) Bu bölümün girişinde belirtildiği gibi, eşzamanlılık işleme için herhangi bir kodlama yapmazsanız, bu otomatik olarak gerçekleşir.
 
-* John 'un değişikliğini veritabanında güncelleştirilmesini engelleyebilirsiniz.
+* John'un değişikliğinin veritabanında güncelleştirilen olmasını engelleyebilirsiniz.
 
-     Genellikle bir hata iletisi görüntüler, verilerin geçerli durumunu gösterir ve yine de bunu yapmak istiyorsa, yaptığı değişiklikleri yeniden uygular. Buna *Mağaza WINS* senaryosu denir. (Veri deposu değerleri, istemci tarafından gönderilen değerlere göre önceliklidir.) Bu öğreticide mağaza WINS senaryosunu uygulayacaksınız. Bu yöntem, bir kullanıcının neler olduğunu bildirmeden önce hiçbir değişikliğin üzerine yazılmamasını sağlar.
+     Genellikle, bir hata iletisi görüntüler, ona verilerin geçerli durumunu gösterir ve hala bunları yapmak istiyorsa değişikliklerini yeniden uygulamasına izin verirsiniz. Buna Mağaza *Kazançları* senaryosu denir. (Veri depolama değerleri istemci tarafından gönderilen değerlerden önceliklidir.) Bu eğitimde Mağaza Kazançları senaryosunu uygularsınız. Bu yöntem, bir kullanıcı ne olup bittiği konusunda uyarılmadan hiçbir değişikliğin üzerine yazılmamasını sağlar.
 
 ### <a name="detecting-concurrency-conflicts"></a>Eşzamanlılık çakışmalarını algılama
 
-Entity Framework oluşturduğu `DbConcurrencyException` özel durumları işleyerek çakışmaları çözebilirsiniz. Bu özel durumların ne zaman throw hakkında bilgi edinmek için Entity Framework çakışmaları algılayabilmelidir. Bu nedenle, veritabanını ve veri modelini uygun şekilde yapılandırmanız gerekir. Çakışma algılamayı etkinleştirmeye yönelik bazı seçenekler şunlardır:
+Varlık Çerçevesi'nin `DbConcurrencyException` attığı özel durumları işleyerek çakışmaları çözebilirsiniz. Bu özel durumların ne zaman atılacağını bilmek için Varlık Çerçevesi'nin çakışmaları algılayabilmesi gerekir. Bu nedenle, veritabanını ve veri modelini uygun şekilde yapılandırmanız gerekir. Çakışma algılamayı etkinleştirmek için bazı seçenekler şunlardır:
 
-* Veritabanı tablosunda, bir satırın ne zaman değiştirildiğini belirlemede kullanılabilecek bir izleme sütunu ekleyin. Daha sonra Entity Framework SQL Update veya delete komutlarının WHERE yan tümcesinde bu sütunu içerecek şekilde yapılandırabilirsiniz.
+* Veritabanı tablosunda, bir satırın ne zaman değiştirildiğini belirlemek için kullanılabilecek bir izleme sütunu ekleyin. Daha sonra Varlık Çerçevesi'ni SQL Update veya Delete komutlarının Where yan tümcesine bu sütunu ekecek şekilde yapılandırabilirsiniz.
 
-     İzleme sütununun veri türü genellikle `rowversion`. `rowversion` değeri, satır her güncelleştirildiği zaman artılan sıralı bir sayıdır. Bir Update veya delete komutunda WHERE yan tümcesi, izleme sütununun (orijinal satır sürümü) orijinal değerini içerir. Güncelleştirilmekte olan satır başka bir kullanıcı tarafından değiştirilmişse, `rowversion` sütunundaki değer özgün değerden farklıdır, bu nedenle Update veya DELETE deyimi WHERE yan tümcesi nedeniyle güncelleştirilecek satırı bulamaz. Entity Framework, Update veya delete komutuyla hiçbir satır güncelleştirilmediğini bulduğunda (yani, etkilenen satır sayısı sıfır olduğunda), bunu bir eşzamanlılık çakışması olarak yorumlar.
+     İzleme sütununun veri türü genellikle. `rowversion` Değer, `rowversion` satır her güncelleştiride artılan sıralı bir sayıdır. Bir Güncelleştirme veya Sil komutunda, Where yan tümcesi izleme sütununun (özgün satır sürümü) özgün değerini içerir. Güncelleştirilen satır başka bir kullanıcı tarafından değiştirildiyse, `rowversion` sütundaki değer özgün değerden farklıdır, bu nedenle Güncelleştirme veya Sil deyimi Where yan tümcesi nedeniyle güncellenecek satırı bulamıyor. Varlık Çerçevesi, Güncelleştirme veya Sil komutu tarafından hiçbir satırın güncelleştirilmediğini fark ettiğinde (diğer bir süre, etkilenen satır sayısı sıfır olduğunda), bunu eşzamanlılık çakışması olarak yorumlar.
 
-* Entity Framework, Update ve DELETE komutlarının WHERE yan tümcesindeki tablodaki her sütunun özgün değerlerini içerecek şekilde yapılandırın.
+* Varlık Çerçevesi'ni, Güncelleştirme ve Sil komutlarının Bulunduğu Yer yan tümcesindeki tablodaki her sütunun özgün değerlerini içerecek şekilde yapılandırın.
 
-     İlk seçenekte olduğu gibi, satırdaki herhangi bir şey satırın ilk okuduğundan beri değiştiyse WHERE yan tümcesi güncelleştirilecek bir satır döndürmez, bu da Entity Framework eşzamanlılık çakışması olarak yorumlar. Birçok sütunu olan veritabanı tablolarında, bu yaklaşım çok büyük WHERE yan tümceleriyle sonuçlanabilir ve büyük miktarlarda durum bulundurmasını gerektirebilir. Daha önce belirtildiği gibi, büyük miktarlarda durumu korumak uygulama performansını etkileyebilir. Bu nedenle bu yaklaşım genellikle önerilmez ve bu öğreticide kullanılan yöntem değildir.
+     İlk seçenekte olduğu gibi, satır ilk okundundan beri satırdaki herhangi bir şey değiştiyse, Nerede yan tümcesi güncelleştirmek için bir satır döndürmez ve Varlık Çerçevesi eşzamanlılık çakışması olarak yorumlar. Çok sayıda sütunu olan veritabanı tabloları için, bu yaklaşım çok büyük Where yan tümcelerine neden olabilir ve büyük miktarda durum korumanızı gerektirebilir. Daha önce de belirtildiği gibi, büyük miktarda durum bakımı uygulama performansını etkileyebilir. Bu nedenle bu yaklaşım genellikle önerilmez ve bu öğreticide kullanılan yöntem değildir.
 
-     Bu yaklaşımı eşzamanlılık 'e uygulamak istiyorsanız, `ConcurrencyCheck` özniteliğini bunlara ekleyerek eşzamanlılık izlemek istediğiniz varlıktaki tüm birincil anahtar olmayan Özellikleri işaretlemeniz gerekir. Bu değişiklik Entity Framework, tüm sütunları Update ve DELETE deyimlerinin SQL WHERE yan tümcesinde içermesini sağlar.
+     Eşzamanlılık için bu yaklaşımı uygulamak istiyorsanız, eşzamanlılığı izlemek istediğiniz varlıktaki tüm birincil anahtar olmayan özellikleri bunlara `ConcurrencyCheck` öznitelik ekleyerek işaretlemeniz gerekir. Bu değişiklik, Varlık Çerçevesi'nin Güncelleştirme ve Silme deyimlerinin SQL Where yan tümcesine tüm sütunları eklemesini sağlar.
 
-Bu öğreticinin geri kalanında, departman varlığına bir `rowversion` izleme özelliği ekleyecek, bir denetleyici ve görünümler oluşturacak ve her şeyin doğru şekilde çalıştığını doğrulamak için test edeceksiniz.
+Bu öğreticinin geri kalanında Bölüm `rowversion` kuruluşuna bir izleme özelliği ekler, bir denetleyici ve görünümler oluşturur ve her şeyin doğru çalıştığını doğrulamak için sınama sağlarsınız.
 
-## <a name="add-a-tracking-property"></a>İzleme özelliği Ekle
+## <a name="add-a-tracking-property"></a>İzleme özelliği ekleme
 
-*Modeller/departman. cs*' de, rowversion adlı bir izleme özelliği ekleyin:
+*Modeller/Department.cs*olarak, RowVersion adlı bir izleme özelliği ekleyin:
 
 [!code-csharp[](intro/samples/cu/Models/Department.cs?name=snippet_Final&highlight=26,27)]
 
-`Timestamp` özniteliği, bu sütunun veritabanına gönderilen WHERE yan tümcesine ve DELETE komutlarına dahil edileceğini belirtir. Önceki SQL Server sürümleri, SQL `rowversion` değiştirilmeden önce bir SQL `timestamp` veri türü kullandığından özniteliğe `Timestamp` denir. `rowversion` için .NET türü bir bayt dizisidir.
+Öznitelik, `Timestamp` bu sütunun veritabanına gönderilen Güncelleştirme ve Sil komutlarının Nerede yan tümcesine dahil olacağını belirtir. SQL Server'ın `Timestamp` önceki sürümleri, SQL `rowversion` yerine `timestamp` gelmeden önce bir SQL veri türü kullandığından öznitelik çağrılır. .NET türü `rowversion` bir bayt dizisidir.
 
-Fluent API kullanmayı tercih ediyorsanız, aşağıdaki örnekte gösterildiği gibi izleme özelliğini belirtmek için `IsConcurrencyToken` yöntemini ( *Data/SchoolContext. cs*) kullanabilirsiniz:
+Akıcı API'yi kullanmayı tercih ederseniz, aşağıdaki `IsConcurrencyToken` örnekte gösterildiği gibi izleme özelliğini belirtmek için *(Data/SchoolContext.cs'de)* yöntemini kullanabilirsiniz:
 
 ```csharp
 modelBuilder.Entity<Department>()
     .Property(p => p.RowVersion).IsConcurrencyToken();
 ```
 
-Bir özellik ekleyerek, veritabanı modelini değiştirdiğiniz için başka bir geçiş yapmanız gerekir.
+Bir özellik ekleyerek veritabanı modelini değiştirdiniz, bu nedenle başka bir geçiş yapmanız gerekir.
 
-Değişikliklerinizi kaydedin ve projeyi derleyin ve ardından komut penceresine aşağıdaki komutları girin:
+Değişikliklerinizi kaydedin ve projeyi oluşturun ve ardından komut penceresinde aşağıdaki komutları girin:
 
 ```dotnetcli
 dotnet ef migrations add RowVersion
@@ -126,190 +126,190 @@ dotnet ef database update
 
 ## <a name="create-departments-controller-and-views"></a>Departmanlar denetleyicisi ve görünümleri oluşturma
 
-Daha önce öğrenciler, Kurslar ve Eğitmenler için yaptığınız gibi bir departman denetleyicisini ve görünümlerini derden katlayın.
+Daha önce Öğrenciler, Kurslar ve Eğitmenler için yaptığınız gibi bir Bölüm denetleyicisi ve görüşlerini iskele.
 
-![Yapı iskelesi departmanı](concurrency/_static/add-departments-controller.png)
+![İskele Bölümü](concurrency/_static/add-departments-controller.png)
 
-*DepartmentsController.cs* dosyasında, "FirstMidName" sözcüğünün dört yinelemesini "FullName" olarak değiştirin, böylece Departman Yöneticisi açılan listeleri yalnızca soyadı yerine eğitmenin tam adını içerecektir.
+*DepartmentsController.cs* dosyasında, bölüm yöneticisi açılır listelerin yalnızca soyadı yerine eğitmenin tam adını içermesini sağlayacak şekilde "FirstMidName" ile "FullName" dört olaylarını da değiştirin.
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?name=snippet_Dropdown)]
 
-## <a name="update-index-view"></a>Dizin görünümünü Güncelleştir
+## <a name="update-index-view"></a>Dizin görünümünü güncelleştir
 
-Yapı iskelesi altyapısı dizin görünümünde bir ROWVERSION sütunu oluşturdu, ancak bu alan gösterilmemelidir.
+İskele altyapısı Dizin görünümünde bir RowVersion sütunu oluşturdu, ancak bu alan görüntülenmemelidir.
 
-*Views/departmanlar/Index. cshtml* içindeki kodu aşağıdaki kodla değiştirin.
+*Görünümler/Bölümler/Index.cshtml'deki* kodu aşağıdaki kodla değiştirin.
 
 [!code-html[](intro/samples/cu/Views/Departments/Index.cshtml?highlight=4,7,44)]
 
-Bu, başlığı "departmanlar" olarak değiştirir, RowVersion sütununu siler ve yöneticinin adı yerine tam adı gösterir.
+Bu, başlığı "Bölümler" olarak değiştirir, RowVersion sütununa silinir ve yöneticinin ilk adı yerine tam adı gösterir.
 
-## <a name="update-edit-methods"></a>Düzenleme yöntemlerini Güncelleştir
+## <a name="update-edit-methods"></a>Güncelle yöntemlerini güncelleştir
 
-Hem HttpGet `Edit` yönteminde hem de `Details` yönteminde `AsNoTracking`ekleyin. HttpGet `Edit` yönteminde, yönetici için Eager yüklemesi ekleyin.
+Hem HttpGet `Edit` yönteminde `Details` hem de `AsNoTracking`yönteme . HttpGet `Edit` yönteminde, Yönetici için istekli yükleme ekleyin.
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?name=snippet_EagerLoading)]
 
-HttpPost `Edit` yöntemi için mevcut kodu şu kodla değiştirin:
+HttpPost `Edit` yönteminin varolan kodunu aşağıdaki kodla değiştirin:
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?name=snippet_EditPost)]
 
-Kod, güncellenen departmanı okumaya çalışırken başlar. `FirstOrDefaultAsync` yöntemi null döndürürse, departman başka bir kullanıcı tarafından silindi. Bu durumda, kod, düzenleme sayfasının bir hata iletisiyle yeniden görüntülenebilmesi için bir departman varlığı oluşturmak üzere postalanan form değerlerini kullanır. Alternatif olarak, departman alanlarını yeniden görüntülemeden yalnızca bir hata iletisi görüntülediğinizde, departman varlığını yeniden oluşturmanız gerekmez.
+Kod güncellenecek bölümü okumaya çalışarak başlar. Yöntem `FirstOrDefaultAsync` null dönerse, bölüm başka bir kullanıcı tarafından silinir. Bu durumda kod, bir departman varlığı oluşturmak için deftere nakledilen form değerlerini kullanır, böylece Edit sayfası bir hata iletisi ile yeniden görüntülenebilir. Alternatif olarak, departman alanlarını yeniden görüntülemeden yalnızca bir hata iletisi görüntülerseniz, departman varlığını yeniden oluşturmanız gerekir.
 
-Görünüm özgün `RowVersion` değerini gizli bir alana depolar ve bu yöntem, `rowVersion` parametresindeki bu değeri alır. `SaveChanges`çağırmadan önce, bu özgün `RowVersion` özellik değerini varlık için `OriginalValues` koleksiyonuna koymanız gerekir.
+Görünüm özgün `RowVersion` değeri gizli bir alanda depolar ve bu `rowVersion` yöntem bu değeri parametrede alır. Aramadan `SaveChanges`önce, varlığın koleksiyonuna `RowVersion` `OriginalValues` özgün özellik değerini koymanız gerekir.
 
 ```csharp
 _context.Entry(departmentToUpdate).Property("RowVersion").OriginalValue = rowVersion;
 ```
 
-Entity Framework bir SQL UPDATE komutu oluşturduğunda, bu komut özgün `RowVersion` değerine sahip bir satırı aramak için bir WHERE yan tümcesi içerecektir. GÜNCELLEŞTIRME komutundan hiçbir satır etkilenmiyorsa (özgün `RowVersion` değerine sahip satır yoksa) Entity Framework bir `DbUpdateConcurrencyException` özel durumu oluşturur.
+Daha sonra Entity Framework bir SQL UPDATE komutu oluşturduğunda, bu komut özgün `RowVersion` değeri olan bir satırı arayan bir WHERE yan tümcesi içerir. Güncelleştirme komutundan hiçbir satır etkilenmezse (hiçbir `RowVersion` satır özgün değere `DbUpdateConcurrencyException` sahip değilse), Varlık Çerçevesi bir özel durum oluşturur.
 
-Bu özel durum için catch bloğundaki kod, özel durum nesnesindeki `Entries` özelliğinden güncelleştirilmiş değerlere sahip etkilenen departman varlığını alır.
+Bu özel durum için catch bloğundaki kod, özel durum nesnesindeki `Entries` özellikten güncelleştirilmiş değerlere sahip etkilenen Departman varlığını alır.
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?range=164)]
 
-`Entries` koleksiyonu yalnızca bir `EntityEntry` nesnesine sahip olur.  Kullanıcı tarafından girilen yeni değerleri ve geçerli veritabanı değerlerini almak için bu nesneyi kullanabilirsiniz.
+Koleksiyonda `Entries` yalnızca bir `EntityEntry` nesne olacaktır.  Kullanıcı tarafından girilen yeni değerleri ve geçerli veritabanı değerlerini almak için bu nesneyi kullanabilirsiniz.
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?range=165-166)]
 
-Kod, kullanıcının düzenleme sayfasına girdikten farklı veritabanı değerleri olan her bir sütun için özel bir hata iletisi ekler (yalnızca bir alan, kısaltma için burada gösterilir).
+Kod, kullanıcının Edit sayfasına girdiklerinden farklı veritabanı değerleri olan her sütun için özel bir hata iletisi ekler (kısaltma için burada yalnızca bir alan gösterilir).
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?range=174-178)]
 
-Son olarak kod, `departmentToUpdate` `RowVersion` değerini veritabanından alınan yeni değere ayarlar. Bu yeni `RowVersion` değeri, düzenleme sayfası yeniden görüntülenirken gizli alanda saklanır ve Kullanıcı **Kaydet**' i tıkladığında, düzenleme sayfasının yeniden görüntülenmesinden bu yana yalnızca gerçekleşen eşzamanlılık hataları yakalanacaktır.
+Son olarak, kod `RowVersion` veritabanından `departmentToUpdate` alınan yeni değerin değerini ayarlar. Bu `RowVersion` yeni değer, Edit sayfası yeniden görüntülendiğinde gizli alanda depolanır ve kullanıcı **Kaydet'i**bir sonraki tıklattığında, yalnızca Edit sayfasının yeniden görüntülenmesinden bu yana oluşan eşzamanlılık hataları olur.
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?range=199-200)]
 
-`ModelState` eski `RowVersion` değerine sahip olduğundan `ModelState.Remove` deyimin olması gerekir. Görünümde, bir alan için `ModelState` değeri, her ikisi de varsa Model özelliği değerlerinin üzerine gelir.
+Eski `ModelState.Remove` `RowVersion` değere `ModelState` sahip olduğundan ifade gereklidir. Görünümde, bir `ModelState` alanın değeri, her ikisi de mevcut olduğunda model özellik değerlerinin üzerinde önceliklidir.
 
-## <a name="update-edit-view"></a>Güncelleştirme düzenleme görünümü
+## <a name="update-edit-view"></a>Görünümü Güncelleştir
 
-*Görünümler/departmanlar/Düzenle. cshtml*'de aşağıdaki değişiklikleri yapın:
+*Görünümler/Bölümler/Edit.cshtml*olarak aşağıdaki değişiklikleri yapın:
 
-* `RowVersion` özellik değerini kaydetmek için, `DepartmentID` özelliğinin gizli alanından hemen sonra bir gizli alan ekleyin.
+* `RowVersion` Özellik için gizli alanı hemen izleyen, özellik değerini kaydetmek için gizli bir alan `DepartmentID` ekleyin.
 
 * Açılan listeye "Yönetici Seç" seçeneği ekleyin.
 
 [!code-html[](intro/samples/cu/Views/Departments/Edit.cshtml?highlight=16,34-36)]
 
-## <a name="test-concurrency-conflicts"></a>Eşzamanlılık çakışmalarını test et
+## <a name="test-concurrency-conflicts"></a>Eşzamanlılık çakışmalarını test edin
 
-Uygulamayı çalıştırın ve departmanlar dizini sayfasına gidin. Ingilizce departman için **düzenleme** köprüsüne sağ tıklayın ve **Yeni sekmesinde aç**' ı seçin ve ardından İngilizce bölümünün **düzenleme** Köprüsü ' ne tıklayın. İki tarayıcı sekmesi artık aynı bilgileri görüntüler.
+Uygulamayı çalıştırın ve Bölümler Dizini sayfasına gidin. İngilizce bölümü için **Edit** köprüünü sağ tıklatın ve **yeni sekmede Aç'ı**seçin, ardından İngilizce bölümü için **Edit** köprüünü tıklatın. İki tarayıcı sekmesi artık aynı bilgileri görüntüler.
 
-İlk tarayıcı sekmesinde bir alanı değiştirin ve **Kaydet**' e tıklayın.
+İlk tarayıcı sekmesinde bir alanı değiştirin ve **Kaydet'i**tıklatın.
 
-![Departman düzenleme değişikliğinden sonra sayfa 1](concurrency/_static/edit-after-change-1.png)
+![Bölüm Değiştir'den sonra sayfa 1'i edit](concurrency/_static/edit-after-change-1.png)
 
-Tarayıcı, değiştirilen değeri olan dizin sayfasını gösterir.
+Tarayıcı, değiştirilen değeri içeren Dizin sayfasını gösterir.
 
-İkinci tarayıcı sekmesinden bir alanı değiştirin.
+İkinci tarayıcı sekmesinde bir alanı değiştirin.
 
-![Departman düzenleme değişikliğinden sonra sayfa 2](concurrency/_static/edit-after-change-2.png)
+![Bölüm Değiştir'den sonra sayfa 2'yi edit](concurrency/_static/edit-after-change-2.png)
 
-**Kaydet** düğmesine tıklayın. Bir hata iletisi görürsünüz:
+**Kaydet**'e tıklayın. Bir hata iletisi görürsünüz:
 
-![Departman düzenleme sayfa hata iletisi](concurrency/_static/edit-error.png)
+![Bölüm Sayfa Yıkla hata iletisi](concurrency/_static/edit-error.png)
 
-Yeniden **Kaydet** ' e tıklayın. İkinci tarayıcı sekmesinde girdiğiniz değer kaydedilir. Dizin sayfası göründüğünde kaydedilen değerleri görürsünüz.
+Yeniden **Kaydet'i** tıklatın. İkinci tarayıcı sekmesine girdiğiniz değer kaydedilir. Dizin sayfası görüntülendiğinde kaydedilen değerleri görürsünüz.
 
-## <a name="update-the-delete-page"></a>Silme sayfası
+## <a name="update-the-delete-page"></a>Sil sayfasını güncelleştir
 
-Silme sayfası için Entity Framework, başka birinin departmanı benzer bir şekilde düzenlemesinden kaynaklanan eşzamanlılık çakışmalarını algılar. HttpGet `Delete` yöntemi onay görünümünü görüntülediğinde, görünüm, gizli bir alanda özgün `RowVersion` değerini içerir. Bu değer daha sonra Kullanıcı silmeyi onayladığında çağrılan HttpPost `Delete` yöntemi için kullanılabilir. Entity Framework, SQL DELETE komutunu oluşturduğunda, özgün `RowVersion` değerine sahip bir WHERE yan tümcesi içerir. Komut, sıfır satır etkilenirse (satır silme onayı sayfası görüntülendikten sonra değiştirildiğinde), bir eşzamanlılık özel durumu oluşturulur ve onay sayfasını bir hata iletisiyle yeniden görüntülemek için HttpGet `Delete` yöntemi bir hata bayrağı true olarak çağırılır. Satır başka bir kullanıcı tarafından silindiğinden, bu durumda herhangi bir hata iletisi görüntülenmediğinden sıfır satırların etkilenmesi de mümkündür.
+Sil sayfası için Varlık Çerçevesi, bölümü benzer bir şekilde düzenleyen başka birinin neden olduğu eşzamanlılık çakışmalarını algılar. HttpGet `Delete` yöntemi onay görünümünü görüntülediğinde, görünüm `RowVersion` gizli bir alandaki özgün değeri içerir. Bu değer daha sonra kullanıcı `Delete` silme onayladığı zaman çağrılan HttpPost yöntemi için kullanılabilir. Varlık Çerçevesi SQL DELETE komutunu oluşturduğunda, özgün `RowVersion` değeri olan bir WHERE yan tümcesi içerir. Komut etkilenen sıfır satırla sonuçlanırsa (yani satır Sil onay sayfası görüntülendikten sonra değiştirildi), eşzamanlılık özel durumu atılır ve Onay sayfasını bir hata iletisiyle yeniden görüntülemek için httpget `Delete` yöntemi gerçek olarak ayarlanmış bir hata bayrağıyla çağrılır. Satır başka bir kullanıcı tarafından silindiğinden sıfır satır etkilenmiş olabilir, bu nedenle bu durumda hata iletisi görüntülenmez.
 
-### <a name="update-the-delete-methods-in-the-departments-controller"></a>Departmanlar denetleyicisindeki silme yöntemlerini güncelleştirme
+### <a name="update-the-delete-methods-in-the-departments-controller"></a>Departmanlar denetleyicisinde Silme yöntemlerini güncelleştirme
 
-*DepartmentsController.cs*' de, httpget `Delete` yöntemini aşağıdaki kodla değiştirin:
+*DepartmentsController.cs,* HttpGet `Delete` yöntemini aşağıdaki kodla değiştirin:
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?name=snippet_DeleteGet&highlight=1,10,14-17,21-29)]
 
-Yöntemi, sayfanın bir eşzamanlılık hatasından sonra yeniden görüntülenip görüntülenmeyeceğini belirten isteğe bağlı bir parametresini kabul eder. Bu bayrak true ise ve belirtilen departman artık mevcut değilse, başka bir kullanıcı tarafından silindi. Bu durumda, kod dizin sayfasına yeniden yönlendirir.  Bu bayrak true ise ve departman varsa, başka bir kullanıcı tarafından değiştirilmiştir. Bu durumda, kod `ViewData`kullanarak görünüme bir hata mesajı gönderir.
+Yöntem, sayfanın eşzamanlılık hatasından sonra yeniden görüntülenip görüntülenmediğini gösteren isteğe bağlı bir parametre kabul eder. Bu bayrak doğruysa ve belirtilen departman artık yoksa, başka bir kullanıcı tarafından silindi. Bu durumda, kod Dizin sayfasına yönlendirir.  Bu bayrak doğruysa ve Bölüm varsa, başka bir kullanıcı tarafından değiştirildi. Bu durumda, kod kullanarak `ViewData`görünüme bir hata iletisi gönderir.
 
-HttpPost `Delete` yöntemindeki (`DeleteConfirmed`adlı) kodu şu kodla değiştirin:
+HttpPost `Delete` yöntemindeki kodu (adlandırılmış) `DeleteConfirmed`aşağıdaki kodla değiştirin:
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?name=snippet_DeletePost&highlight=1,3,5-8,11-18)]
 
-Az önce değiştirdiğiniz scafkatlanmış kodda, bu yöntem yalnızca bir kayıt KIMLIĞI kabul etti:
+Yeni değiştirdiğiniz iskele kodunda, bu yöntem yalnızca bir kayıt kimliği kabul etmiştir:
 
 ```csharp
 public async Task<IActionResult> DeleteConfirmed(int id)
 ```
 
-Bu parametreyi model Ciltçi tarafından oluşturulan bir departman varlığı örneğine değiştirdiniz. Bu, kayıt anahtarına ek olarak ROWVERSION özellik değerine EF erişimi verir.
+Bu parametreyi model bağlayıcısı tarafından oluşturulan bir Departman varlık örneği olarak değiştirdiniz. Bu, EF'nin kayıt anahtarına ek olarak RowVersion özellik değerine erişmesini sağlar.
 
 ```csharp
 public async Task<IActionResult> Delete(Department department)
 ```
 
-Ayrıca `DeleteConfirmed` eylem yöntemi adını `Delete`olarak değiştirdiniz. Yapı iskelesi kodu, HttpPost yöntemine benzersiz bir imza vermek için `DeleteConfirmed` adı kullandı. (CLR aşırı yüklenmiş yöntemlerin farklı yöntem parametrelerine sahip olmasını gerektirir.) İmzalar benzersiz olduğuna göre, MVC kuralını seçebilir ve HttpPost ve HttpGet silme yöntemleri için aynı adı kullanabilirsiniz.
+Ayrıca eylem yöntemi adını da `DeleteConfirmed` `Delete`' dan ' a değiştirdiniz İskele kodu, HttpPost yöntemine benzersiz bir imza vermek için bu adı `DeleteConfirmed` kullandı. (CLR farklı yöntem parametrelerine sahip olmak için aşırı yüklenen yöntemler gerektirir.) Artık imzalar benzersiz olduğuna göre, MVC kuralına bağlı kalabilir ve HttpPost ve HttpGet silme yöntemleri için aynı adı kullanabilirsiniz.
 
-Departman zaten silinirse, `AnyAsync` yöntemi false döndürür ve uygulama yalnızca dizin yöntemine geri döner.
+Bölüm zaten silinmişse, `AnyAsync` yöntem yanlış döndürür ve uygulama dizin yöntemine geri döner.
 
-Bir eşzamanlılık hatası yakalanmışsa, kod silme onayı sayfasını yeniden görüntüler ve bir eşzamanlılık hata mesajı görüntülemesi gerektiğini belirten bir bayrak sağlar.
+Eşzamanlılık hatası yakalanırsa, kod Sil onay sayfasını yeniden görüntüler ve eşzamanlılık hatası iletisi görüntülemesi gerektiğini belirten bir bayrak sağlar.
 
-### <a name="update-the-delete-view"></a>Silme görünümünü Güncelleştir
+### <a name="update-the-delete-view"></a>Sil görünümünü güncelleştir
 
-*Views/departmanlar/delete. cshtml*içinde, scafkatkli kodunu, DepartmentID ve rowversion özellikleri için bir hata iletisi alanı ve gizli alanları ekleyen aşağıdaki kodla değiştirin. Değişiklikler vurgulanır.
+*Görünümler/Bölümler/Delete.cshtml'de,* İskele kodu, DepartmentID ve RowVersion özellikleri için bir hata iletisi alanı ve gizli alanlar ekleyen aşağıdaki kodla değiştirin. Değişiklikler vurgulanır.
 
 [!code-html[](intro/samples/cu/Views/Departments/Delete.cshtml?highlight=9,38,44,45,48)]
 
 Bu, aşağıdaki değişiklikleri yapar:
 
-* `h2` ve `h3` başlıkları arasında bir hata iletisi ekler.
+* Başlıklar arasında `h3` bir `h2` hata iletisi ekler.
 
-* FirstMidName öğesini, **yönetici** alanındaki FullName ile değiştirir.
+* Yönetici **alanında** FirstMidName'i FullName ile değiştirir.
 
 * RowVersion alanını kaldırır.
 
-* `RowVersion` özelliği için gizli bir alan ekler.
+* `RowVersion` Özellik için gizli bir alan ekler.
 
-Uygulamayı çalıştırın ve departmanlar dizini sayfasına gidin. Ingilizce departman için **Sil** köprüsünü sağ tıklayın ve **Yeni sekmede aç**' ı seçin ve ardından ilk sekmede İngilizce departman için **düzenleme** Köprüsü ' ne tıklayın.
+Uygulamayı çalıştırın ve Bölümler Dizini sayfasına gidin. İngilizce bölümü için **Sil** köprüünü sağ tıklatın ve **yeni sekmede Aç'ı**seçin, ardından ilk sekmede İngilizce bölümü için **Düzenle** köprübağlantısını tıklatın.
 
-İlk pencerede, değerlerden birini değiştirin ve **Kaydet**' e tıklayın:
+İlk pencerede, değerlerden birini değiştirin ve **Kaydet'i**tıklatın:
 
-![Silmeden önce değişiklikten sonra departman düzenleme sayfası](concurrency/_static/edit-after-change-for-delete.png)
+![Silmeden önce değişiklikten sonra Bölüm Düzenle sayfası](concurrency/_static/edit-after-change-for-delete.png)
 
-İkinci sekmede **Sil**' e tıklayın. Eşzamanlılık hata iletisini görürsünüz ve departman değerleri şu anda veritabanında olan ile yenilenir.
+İkinci sekmede **Sil'i**tıklatın. Eşzamanlılık hata iletisini görürsünüz ve Departman değerleri veritabanında şu anda bulunanlarla yenilenir.
 
-![Eşzamanlılık hatası olan departman silme onayı sayfası](concurrency/_static/delete-error.png)
+![Bölüm Eşzamanlılık hatası ile onay sayfasını silme](concurrency/_static/delete-error.png)
 
-Yeniden **Sil** ' e tıklarsanız, departmanın silindiğini gösteren dizin sayfasına yönlendirilirsiniz.
+Yeniden **Sil'i** tıklattığınızda, bölümün silindiğini gösteren Dizin sayfasına yönlendirilirsiniz.
 
-## <a name="update-details-and-create-views"></a>Güncelleştirme ayrıntıları ve görünüm oluşturma
+## <a name="update-details-and-create-views"></a>Ayrıntıları Güncelleştir ve Görünüm Oluştur
 
-İsteğe bağlı olarak ayrıntılarda bulunan kodu temizleyebilir ve görünümler oluşturabilirsiniz.
+Ayrıntılar'daki iskele kodunu isteğe bağlı olarak temizleyebilir ve görünüm oluşturabilirsiniz.
 
-RowVersion sütununu silmek ve yöneticinin tam adını göstermek için *views/departmanlar/details. cshtml* içindeki kodu değiştirin.
+RowVersion sütununa silmek ve Yöneticinin tam adını göstermek için *Görünümler/Bölümler/Details.cshtml'deki* kodu değiştirin.
 
 [!code-html[](intro/samples/cu/Views/Departments/Details.cshtml?highlight=35)]
 
-Açılan listeye bir SELECT seçeneği eklemek için *views/departmanlar/Create. cshtml* içindeki kodu değiştirin.
+Açılan listeye Bir Seç seçeneği eklemek için *Görünümler/Bölümler/Create.cshtml'deki* kodu değiştirin.
 
 [!code-html[](intro/samples/cu/Views/Departments/Create.cshtml?highlight=32-34)]
 
 ## <a name="get-the-code"></a>Kodu alma
 
-[Tamamlanmış uygulamayı indirin veya görüntüleyin.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[Tamamlanan uygulamayı karşıdan yükleyin veya görüntüleyin.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
- EF Core eşzamanlılık işleme hakkında daha fazla bilgi için bkz. [eşzamanlılık çakışmaları](/ef/core/saving/concurrency).
+ EF Core'da eşzamanlılık nasıl işleyeceğiniz hakkında daha fazla bilgi için [Eşzamanlılık çakışmaları'na](/ef/core/saving/concurrency)bakın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 Bu öğreticide şunları yaptınız:
 
 > [!div class="checklist"]
-> * Eşzamanlılık çakışmaları hakkında öğrenildi
+> * Eşzamanlılık çakışmaları hakkında bilgi edinilmiş
 > * İzleme özelliği eklendi
-> * Oluşturulan departmanlar denetleyicisi ve görünümleri
-> * Güncelleştirilmiş dizin görünümü
-> * Güncelleştirilmiş düzenleme yöntemleri
-> * Güncelleştirilmiş düzenleme görünümü
-> * Test edilen eşzamanlılık çakışmaları
-> * Silme sayfası güncelleştirildi
-> * Güncelleştirilmiş Ayrıntılar ve görünüm oluşturma
+> * Oluşturulan Bölümler denetleyicisi ve görünümleri
+> * Güncelleştirilmiş Dizin görünümü
+> * Güncelleştirilmiş Edit yöntemleri
+> * Güncelleştirilmiş Edit görünümü
+> * Test edilmiş eşzamanlılık çakışmaları
+> * Sil sayfasını güncelleştir
+> * Güncelleştirilmiş Ayrıntılar ve Görünümler Oluştur
 
-Eğitmen ve öğrenci varlıkları için tablo başına devralma devralmayı nasıl uygulayacağınızı öğrenmek için sonraki öğreticiye ilerleyin.
+Eğitmen ve Öğrenci kuruluşları için hiyerarşi başına tablo kalıbını nasıl uygulayacağınızı öğrenmek için bir sonraki öğreticiye ilerleyin.
 
 > [!div class="nextstepaction"]
-> [Sonraki: tablo-hiyerarşi devralmayı Uygula](inheritance.md)
+> [Sonraki: Tablo başına hiyerarşi kalıtım uygulama](inheritance.md)

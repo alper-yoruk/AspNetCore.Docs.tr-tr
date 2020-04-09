@@ -1,1 +1,1 @@
-Ingilizce dışındaki dillere çevrilmiş kod açıklamalarını görmek isterseniz, [Bu GitHub tartışma sorununu](https://github.com/MicrosoftDocs/feedback/issues/2515)bize tanıyın.
+İngilizce dışındaki dillere çevrilmiş kod yorumlarını görmek istiyorsanız, [bu GitHub tartışma sayısında](https://github.com/MicrosoftDocs/feedback/issues/2515)bize bildirin.

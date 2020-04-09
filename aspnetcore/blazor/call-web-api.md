@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core Blazor bir Web API 'SI çağırma
+title: ASP.NET Core'dan web API'sını arayınBlazor
 author: guardrex
-description: Çıkış noktaları arası kaynak paylaşımı (CORS) istekleri yapma dahil olmak üzere JSON yardımcıları kullanarak bir Blazor uygulamasından Web API 'SI çağırmayı öğrenin.
+description: JSON yardımcılarını kullanarak bir Blazor uygulamadan, kökenler arası kaynak paylaşımı (CORS) istekleri ni içeren bir web API'sini nasıl çağırabilirsiniz öğrenin.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -11,55 +11,55 @@ no-loc:
 - SignalR
 uid: blazor/call-web-api
 ms.openlocfilehash: e6996f0e6731b05038d0a9329152b8afd5f6796d
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78660148"
 ---
-# <a name="call-a-web-api-from-aspnet-core-opno-locblazor"></a>ASP.NET Core Blazor bir Web API 'SI çağırma
+# <a name="call-a-web-api-from-aspnet-core-opno-locblazor"></a>ASP.NET Core'dan web API'sını arayınBlazor
 
-[Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27)ve [Juan de la Cruz](https://github.com/juandelacruz23) tarafından
+Luke [Latham](https://github.com/guardrex)tarafından , [Daniel Roth](https://github.com/danroth27), ve Juan De la [Cruz](https://github.com/juandelacruz23)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) Apps, önceden yapılandırılmış bir `HttpClient` hizmetini kullanarak Web API 'lerini çağırır. Blazor JSON yardımcıları veya <xref:System.Net.Http.HttpRequestMessage>kullanarak JavaScript [getirme API 'si](https://developer.mozilla.org/docs/Web/API/Fetch_API) seçeneklerini içerebilen oluşturma istekleri. Blazor WebAssembly Apps 'teki `HttpClient` hizmeti, isteklerin kaynak sunucusuna geri getirilmesi için odaklanılmıştır. Bu konudaki kılavuz yalnızca WebAssembly uygulamalarına Blazor aittir.
+WebAssembly uygulamaları önceden yapılandırılmış bir `HttpClient` hizmeti kullanarak web API'lerini arar. [ Blazor ](xref:blazor/hosting-models#blazor-webassembly) JSON yardımcılarını kullanarak Blazor veya JavaScript <xref:System.Net.Http.HttpRequestMessage>Getir [API](https://developer.mozilla.org/docs/Web/API/Fetch_API) seçeneklerini içerebilen istekler oluşturun. WebAssembly `HttpClient` Blazor uygulamalarındaki hizmet, istekleri menşe sunucusuna geri yapmaya odaklanmıştır. Bu konudaki kılavuz yalnızca Blazor WebAssembly uygulamalarıyla ilgilidir.
 
-[Blazor Server](xref:blazor/hosting-models#blazor-server) Apps, genellikle <xref:System.Net.Http.IHttpClientFactory>kullanılarak oluşturulan <xref:System.Net.Http.HttpClient> örneklerini kullanarak Web API 'lerini çağırır. Bu konudaki kılavuz Blazor sunucusu uygulamalarıyla ilgili değildir. Blazor Server uygulamaları geliştirirken, <xref:fundamentals/http-requests>' daki yönergeleri izleyin.
+Sunucu uygulamaları genellikle kullanılarak <xref:System.Net.Http.HttpClient> <xref:System.Net.Http.IHttpClientFactory>oluşturulan örnekleri kullanarak web API'lerini arar. [ Blazor ](xref:blazor/hosting-models#blazor-server) Bu konudaki kılavuz Sunucu uygulamalarıyla Blazor ilgili değildir. Sunucu Blazor uygulamaları geliştirirken, 'deki <xref:fundamentals/http-requests>kılavuzu izleyin.
 
-[Örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([nasıl Indirilir](xref:index#how-to-download-a-sample)) &ndash; *BlazorWebAssemblySample* uygulamasını seçin.
+[Örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([nasıl indirilir](xref:index#how-to-download-a-sample)) &ndash; *BlazorWebAssemblySample* uygulamasını seçin.
 
 *BlazorWebAssemblySample* örnek uygulamasında aşağıdaki bileşenlere bakın:
 
-* Web API çağrısı (*Pages/CallWebAPI. Razor*)
-* HTTP Isteği Sınayıcısı (*Bileşenler/HTTPRequestTester. Razor*)
+* Arama Web API (*Sayfalar / CallWebAPI.razor*)
+* HTTP İstek Tester (*Bileşenleri / HTTPRequestTester.razor*)
 
 ## <a name="packages"></a>Paketler
 
-*Deneysel* [Microsoft. aspnetcore.Blazorbaşvurun. Proje dosyasındaki HttpClient](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.HttpClient/) NuGet paketi. `Microsoft.AspNetCore.Blazor.HttpClient`, `HttpClient` ve [System. Text. JSON](https://www.nuget.org/packages/System.Text.Json/)tabanlıdır.
+Referans *deneysel* [Microsoft.AspNetCore.Blazor. Proje](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.HttpClient/) dosyasında httpClient NuGet paketi. `Microsoft.AspNetCore.Blazor.HttpClient`ve `HttpClient` [System.Text.Json](https://www.nuget.org/packages/System.Text.Json/)dayanmaktadır.
 
-Kararlı bir API kullanmak için, [Newtonsoft. Json](https://www.nuget.org/packages/Newtonsoft.Json/)/[JSON.net](https://www.newtonsoft.com/json/help/html/Introduction.htm)kullanan [Microsoft. Aspnet. WebApi. Client](https://www.nuget.org/packages/Microsoft.AspNet.WebApi.Client/) paketini kullanın. `Microsoft.AspNet.WebApi.Client` ' de kararlı API kullanmak, bu konu başlığı altında açıklanan, deneysel `Microsoft.AspNetCore.Blazor.HttpClient` paketine özgü olan JSON yardımcıları sağlamaz.
+Kararlı bir API kullanmak için, [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/)/[Json.NET](https://www.newtonsoft.com/json/help/html/Introduction.htm)kullanan [Microsoft.AspNet.WebApi.Client](https://www.nuget.org/packages/Microsoft.AspNet.WebApi.Client/) paketini kullanın. Kararlı API'yi `Microsoft.AspNet.WebApi.Client` içinde kullanmak, deneysel `Microsoft.AspNetCore.Blazor.HttpClient` pakete özgü olan bu konuda açıklanan JSON yardımcılarını sağlamaz.
 
-## <a name="httpclient-and-json-helpers"></a>HttpClient ve JSON yardımcıları
+## <a name="httpclient-and-json-helpers"></a>Httpİsteve JSON yardımcıları
 
-Blazor WebAssembly uygulamasında, [HttpClient](xref:fundamentals/http-requests) , istekleri kaynak sunucuya geri getirmek için önceden yapılandırılmış bir hizmet olarak kullanılabilir.
+Bir Blazor WebAssembly [uygulamasında, HttpClient](xref:fundamentals/http-requests) istekleri kaynak sunucuya geri yapmak için önceden yapılandırılmış bir hizmet olarak kullanılabilir.
 
-Blazor sunucusu uygulaması, varsayılan olarak bir `HttpClient` hizmeti içermez. [HttpClient Factory altyapısını](xref:fundamentals/http-requests)kullanarak uygulamaya `HttpClient` sağlayın.
+Sunucu Blazor uygulaması varsayılan olarak `HttpClient` bir hizmet içermez. `HttpClient` [HttpClient fabrika altyapısını](xref:fundamentals/http-requests)kullanarak uygulamaya bir değer sağlayın.
 
-`HttpClient` ve JSON yardımcıları, üçüncü taraf Web API uç noktalarını çağırmak için de kullanılır. `HttpClient`, tarayıcı [getirme API 'si](https://developer.mozilla.org/docs/Web/API/Fetch_API) kullanılarak uygulanır ve aynı kaynak ilkesini zorlama dahil olmak üzere sınırlamalarına tabidir.
+`HttpClient`ve JSON yardımcıları da üçüncü taraf web API uç noktaları aramak için kullanılır. `HttpClient`tarayıcı [Getir API](https://developer.mozilla.org/docs/Web/API/Fetch_API) kullanılarak uygulanır ve aynı kaynak ilkesinin uygulanması da dahil olmak üzere kendi sınırlamalarına tabidir.
 
-İstemcinin temel adresi, kaynak sunucunun adresine ayarlanır. `@inject` yönergesini kullanarak bir `HttpClient` örneği ekleme:
+İstemcinin temel adresi, kaynak sunucunun adresine ayarlanır. Yönergeyi kullanarak bir `HttpClient` örnek enjekte edin: `@inject`
 
 ```razor
 @using System.Net.Http
 @inject HttpClient Http
 ```
 
-Aşağıdaki örneklerde, bir Todo Web API 'SI oluşturma, okuma, güncelleştirme ve silme (CRUD) işlemlerini işler. Örnekler, aşağıdakileri depolayan bir `TodoItem` sınıfına dayalıdır:
+Aşağıdaki örneklerde, bir Todo web API işlemleri (CRUD) işlemleri oluşturur, okur, günceller ve siler. Örnekler, aşağıdakileri `TodoItem` depolayan bir sınıfa dayanır:
 
-* Öğenin benzersiz KIMLIĞI &ndash; KIMLIK (`Id`, `long`).
-* Öğenin adı (`Name``string`) &ndash; adı.
-* Durum (`IsComplete`, `bool`) Todo öğesi tamamlandığında gösterge &ndash;.
+* Kimlik`Id`( `long` &ndash; , ) Öğenin benzersiz kimliği.
+* Ad`Name`( `string` &ndash; , ) Öğenin adı.
+* Durum`IsComplete`( `bool` &ndash; , ) Todo öğesinin bitip bitmeyişini belirtin.
 
 ```csharp
 private class TodoItem
@@ -70,11 +70,11 @@ private class TodoItem
 }
 ```
 
-JSON yardımcı yöntemleri bir URI 'ye (aşağıdaki örneklerde bir Web API 'si) istek gönderir ve yanıtı işler:
+JSON yardımcı yöntemleri bir URI'ye (aşağıdaki örneklerdeki bir web API) istek gönderir ve yanıtı işlemeye
 
-* `GetJsonAsync` &ndash; bir HTTP GET isteği gönderir ve bir nesne oluşturmak için JSON yanıt gövdesini ayrıştırır.
+* `GetJsonAsync`&ndash; Bir HTTP GET isteği gönderir ve bir nesne oluşturmak için JSON yanıt gövdesini ayrıştırır.
 
-  Aşağıdaki kodda `_todoItems` bileşen tarafından görüntülenir. `GetTodoItems` yöntemi, bileşen işlemeyi tamamladığında tetiklenir ([Onınitializedadsync](xref:blazor/lifecycle#component-initialization-methods)). Örnek uygulamaya bkz. örnek uygulama.
+  Aşağıdaki kodda, `_todoItems` bileşen tarafından görüntülenir. Yöntem, `GetTodoItems` bileşen işleme tamamlandığında tetiklenir ([OnInitializedAsync).](xref:blazor/lifecycle#component-initialization-methods) Tam bir örnek için örnek uygulamaya bakın.
 
   ```razor
   @using System.Net.Http
@@ -88,9 +88,9 @@ JSON yardımcı yöntemleri bir URI 'ye (aşağıdaki örneklerde bir Web API 's
   }
   ```
 
-* `PostJsonAsync` &ndash;, JSON kodlu içerik dahil olmak üzere bir HTTP POST isteği gönderir ve bir nesne oluşturmak için JSON yanıt gövdesini ayrıştırır.
+* `PostJsonAsync`&ndash; JSON kodlanmış içeriği içeren bir HTTP POST isteği gönderir ve bir nesne oluşturmak için JSON yanıt gövdesini ayrıştırır.
 
-  Aşağıdaki kodda, `_newItemName` bileşenin bağlantılı bir öğesi tarafından sağlanır. `AddItem` yöntemi bir `<button>` öğesi seçilerek tetiklenir. Örnek uygulamaya bkz. örnek uygulama.
+  Aşağıdaki kodda, `_newItemName` bileşenin bağlı bir öğesi tarafından sağlanır. Yöntem `AddItem` bir `<button>` öğe seçilerek tetiklenir. Tam bir örnek için örnek uygulamaya bakın.
 
   ```razor
   @using System.Net.Http
@@ -110,9 +110,9 @@ JSON yardımcı yöntemleri bir URI 'ye (aşağıdaki örneklerde bir Web API 's
   }
   ```
 
-* `PutJsonAsync` &ndash;, JSON kodlu içerik dahil olmak üzere bir HTTP PUT isteği gönderir.
+* `PutJsonAsync`&ndash; JSON kodlanmış içerik de dahil olmak üzere bir HTTP PUT isteği gönderir.
 
-  Aşağıdaki kodda, `Name` ve `IsCompleted` değerlerinin `_editItem`, bileşenin bağlantılı öğeleri tarafından sağlanır. Öğenin `Id`, öğe Kullanıcı arabiriminin başka bir bölümünde seçildiğinde ve `EditItem` çağrıldığında ayarlanır. `SaveItem` yöntemi, Kaydet `<button>` öğesi seçilerek tetiklenir. Örnek uygulamaya bkz. örnek uygulama.
+  Aşağıdaki kodda, `_editItem` bileşenin `IsCompleted` bağlı elemanları tarafından `Name` sağlanan değerler. Öğe UI'nin `Id` başka bir bölümünde seçildiğinde ve `EditItem` çağrıldığında maddenin ki ayarlanır. Yöntem `SaveItem` Kaydet `<button>` öğesi seçilerek tetiklenir. Tam bir örnek için örnek uygulamaya bakın.
 
   ```razor
   @using System.Net.Http
@@ -137,9 +137,9 @@ JSON yardımcı yöntemleri bir URI 'ye (aşağıdaki örneklerde bir Web API 's
   }
   ```
 
-<xref:System.Net.Http>, HTTP istekleri göndermeye ve HTTP yanıtlarını almaya yönelik ek uzantı yöntemleri içerir. [HttpClient. DeleteAsync](xref:System.Net.Http.HttpClient.DeleteAsync*) , BIR Web API 'SINE http delete isteği göndermek için kullanılır.
+<xref:System.Net.Http>HTTP isteklerini göndermek ve HTTP yanıtları almak için ek uzatma yöntemleri içerir. [HttpClient.DeleteAsync](xref:System.Net.Http.HttpClient.DeleteAsync*) bir WEB API'ya HTTP DELETE isteği göndermek için kullanılır.
 
-Aşağıdaki kodda, DELETE `<button>` öğesi `DeleteItem` yöntemini çağırır. Bağlantılı `<input>` öğesi, silinecek öğenin `id` sağlar. Örnek uygulamaya bkz. örnek uygulama.
+Aşağıdaki kodda Sil `<button>` öğesi `DeleteItem` yöntemi çağırır. Bağlı `<input>` öğe, `id` silmek için öğenin sağlar. Tam bir örnek için örnek uygulamaya bakın.
 
 ```razor
 @using System.Net.Http
@@ -156,17 +156,17 @@ Aşağıdaki kodda, DELETE `<button>` öğesi `DeleteItem` yöntemini çağırı
 }
 ```
 
-## <a name="cross-origin-resource-sharing-cors"></a>Çıkış noktaları arası kaynak paylaşımı (CORS)
+## <a name="cross-origin-resource-sharing-cors"></a>Orijinler arası kaynak paylaşımı (CORS)
 
-Tarayıcı güvenliği, bir Web sayfasının, Web sayfasını sunduğundan farklı bir etki alanına istek yapmasını engeller. Bu kısıtlamaya *aynı-Origin ilkesi*adı verilir. Aynı-kaynak ilkesi, kötü niyetli bir sitenin gizli verileri başka bir siteden okumasını engeller. Tarayıcıdan farklı bir kaynağa sahip bir uç noktaya istek yapmak için *uç noktanın* , [çıkış noktaları arası kaynak PAYLAŞıMı 'nı (CORS)](https://www.w3.org/TR/cors/)etkinleştirmesi gerekir.
+Tarayıcı güvenliği, bir web sayfasının web sayfasına hizmet eden den farklı bir etki alanına istekte bulunmasını engeller. Bu kısıtlamaya *aynı kaynak ilkesi*denir. Aynı kaynak ilkesi, kötü amaçlı bir sitenin başka bir siteden gelen hassas verileri okumasını engeller. Tarayıcıdan farklı bir başlangıç noktası olan bir bitiş noktasına istekte bulunmak *için, bitiş noktasının* [kökenler arası kaynak paylaşımını (CORS)](https://www.w3.org/TR/cors/)etkinleştirmesi gerekir.
 
-[Blazor WebAssembly örnek uygulaması (BlazorWebAssemblySample)](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) , Web API bileşeninde CORS 'nin kullanımını gösterir (*Pages/callwebapi. Razor*).
+WebAssembly örnek uygulaması (BlazorWebAssemblySample) Çağrı Web API bileşeninde CORS kullanımını gösterir (*Sayfalar / CallWebAPI.razor*). [ Blazor ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/)
 
-Diğer sitelerin uygulamanıza çıkış noktaları arası kaynak paylaşımı (CORS) istekleri yapmasına izin vermek için bkz. <xref:security/cors>.
+Diğer sitelerin uygulamanızda kökenler arası kaynak paylaşımı (CORS) <xref:security/cors>isteklerini yerine getirmelerine izin vermek için bkz.
 
-## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>API istek seçeneklerini getiren HttpClient ve HttpRequestMessage
+## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>ApI Getir istek seçenekleriyle HttpClient ve HttpRequestMessage
 
-Blazor WebAssembly uygulamasında WebAssembly üzerinde çalışırken, istekleri özelleştirmek için [HttpClient](xref:fundamentals/http-requests) ve <xref:System.Net.Http.HttpRequestMessage> kullanın. Örneğin, istek URI 'SI, HTTP yöntemi ve istenen istek üst bilgilerini belirtebilirsiniz.
+WebAssembly uygulamasında çalışırken [HttpClient'ı](xref:fundamentals/http-requests) kullanın ve <xref:System.Net.Http.HttpRequestMessage> istekleri özelleştirin. Blazor Örneğin, uri, HTTP yöntemi ve istenen istek üstbilgilerini belirtebilirsiniz.
 
 ```razor
 @using System.Net.Http
@@ -202,16 +202,16 @@ Blazor WebAssembly uygulamasında WebAssembly üzerinde çalışırken, istekler
 }
 ```
 
-API seçenekleri getirme hakkında daha fazla bilgi için bkz. [MDN Web belgeleri: WindowOrWorkerGlobalScope. Fetch ():P arameters](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters).
+API Getir seçenekleri hakkında daha fazla bilgi için [BKZ: MDN web dokümanları: WindowOrWorkerGlobalScope.fetch():Parameters](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters).
 
-CORS isteklerinde kimlik bilgileri (yetkilendirme tanımlama bilgileri/üstbilgileri) gönderilirken, CORS ilkesi tarafından `Authorization` üst bilgisine izin verilmelidir.
+CORS isteklerine kimlik bilgileri (yetkilendirme çerezleri/üstbilgiler) gönderirken, üstbilginin `Authorization` CORS ilkesi tarafından izin verilmesi gerekir.
 
-Aşağıdaki ilke için yapılandırma içerir:
+Aşağıdaki ilke aşağıdakiler için yapılandırmayı içerir:
 
-* İstek kaynakları (`http://localhost:5000`, `https://localhost:5001`).
-* Any yöntemi (fiil).
-* `Content-Type` ve `Authorization` üst bilgileri. Özel bir üstbilgiye (örneğin, `x-custom-header`) izin vermek için, <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*>çağrılırken üstbilgiyi listeleyin.
-* İstemci tarafı JavaScript kodu tarafından ayarlanan kimlik bilgileri (`credentials` Özellik `include`olarak ayarlanır).
+* İstek kökenleri`http://localhost:5000` `https://localhost:5001`( , ).
+* Herhangi bir yöntem (fiil).
+* `Content-Type`ve `Authorization` üstbilgi. Özel bir üstbilgi (örneğin, `x-custom-header`), ararken üstbilgi listelemek için <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*>.
+* İstemci tarafı JavaScript koduna göre ayarlanan kimlik bilgileri (özellik`credentials` olarak `include`ayarlanır).
 
 ```csharp
 app.UseCors(policy => 
@@ -221,11 +221,11 @@ app.UseCors(policy =>
     .AllowCredentials());
 ```
 
-Daha fazla bilgi için bkz. <xref:security/cors> ve örnek uygulamanın HTTP Isteği Sınayıcısı bileşeni (*Bileşenler/HTTPRequestTester. Razor*).
+Daha fazla bilgi <xref:security/cors> için, bkz ve örnek uygulamanın HTTP İstek Tester bileşeni *(Components/HTTPRequestTester.razor).*
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * <xref:fundamentals/http-requests>
 * <xref:security/enforcing-ssl>
-* [Kestrel HTTPS uç noktası yapılandırması](xref:fundamentals/servers/kestrel#endpoint-configuration)
-* [W3C üzerinde çapraz kaynak kaynak paylaşımı (CORS)](https://www.w3.org/TR/cors/)
+* [Kerkenez HTTPS uç nokta yapılandırması](xref:fundamentals/servers/kestrel#endpoint-configuration)
+* [W3C'de Çapraz Köken Kaynak Paylaşımı (CORS)](https://www.w3.org/TR/cors/)

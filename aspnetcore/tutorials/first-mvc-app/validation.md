@@ -6,10 +6,10 @@ ms.author: riande
 ms.date: 04/13/2017
 uid: tutorials/first-mvc-app/validation
 ms.openlocfilehash: ecf3d011b38347eb32020df00e44d93ca789443a
-ms.sourcegitcommit: 99e71ae03319ab386baf2ebde956fc2d511df8b8
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/25/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "80242542"
 ---
 # <a name="add-validation-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC uygulamasına doğrulama ekleme
@@ -18,114 +18,114 @@ Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 Bu bölümde:
 
-* Doğrulama mantığı `Movie` modeline eklenir.
-* Bir Kullanıcı bir filmi oluşturduğunda veya düzenleişinizde doğrulama kurallarının uygulanmasını sağlayabilirsiniz.
+* Doğrulama mantığı modele `Movie` eklenir.
+* Doğrulama kurallarının, bir kullanıcı bir film oluşturduğunda veya her zaman herhangi bir şekilde uygulandığından emin olabilirsiniz.
 
-## <a name="keeping-things-dry"></a>İşleri güncel tutma
+## <a name="keeping-things-dry"></a>Şeyler KURU tutmak
 
-MVC ['nin tasarımdan biri ("](https://wikipedia.org/wiki/Don%27t_repeat_yourself) kendini tekrarlama"). ASP.NET Core MVC, işlevselliği veya davranışı yalnızca bir kez belirtmenizi ve bir uygulamada her yerde yansıtıldığını önerir. Bu, yazmanız gereken kod miktarını azaltır ve daha az hata yazmanızı, daha kolay test yapmayı ve bakımını daha kolay hale getirir.
+MVC'nin tasarım ilkelerinden biri [DRY](https://wikipedia.org/wiki/Don%27t_repeat_yourself) 'dir ("Kendinizi Tekrar etmeyin"). ASP.NET Core MVC işlevselliği veya davranışı yalnızca bir kez belirtmenizi ve ardından bir uygulamaya her yere yansıtılmanızı öneririz. Bu, yazmanız gereken kod miktarını azaltır ve yazdığınız kodu daha az hataya yatkın, sınaması ve bakımı daha kolay hale getirir.
 
-MVC ve Entity Framework Core Code First tarafından sunulan doğrulama desteği, işlem içindeki kuru ilkeye uygun bir örnektir. Doğrulama kurallarını tek bir yerde (model sınıfında) bildirimli olarak belirtebilir ve kurallar uygulamada her yerde zorlanır.
+MVC ve Entity Framework Core Code First tarafından sağlanan doğrulama desteği, DRY ilkesinin eyleme uygun olmasının iyi bir örneğidir. Doğrulama kurallarını tek bir yerde (model sınıfında) bildirimsel olarak belirtebilirsiniz ve kurallar uygulamanın her yerinde uygulanır.
 
 [!INCLUDE[](~/includes/RP-MVC/validation.md)]
 
-## <a name="validation-error-ui"></a>Doğrulama hatası Kullanıcı arabirimi
+## <a name="validation-error-ui"></a>Doğrulama Hatası UI
 
-Uygulamayı çalıştırın ve filmler denetleyicisine gidin.
+Uygulamayı çalıştırın ve Filmler denetleyicisine gidin.
 
-Yeni bir film eklemek için **Yeni oluştur** bağlantısına dokunun. Formu, bazı geçersiz değerlerle doldurun. JQuery istemci tarafı doğrulaması hatayı algıladıktan hemen sonra bir hata iletisi görüntüler.
+Yeni bir film eklemek için **Yeni Oluştur** bağlantısına dokunun. Formu bazı geçersiz değerlerle doldurun. JQuery istemci tarafı doğrulama sıyrık hatasını algılar algılamaz, bir hata iletisi görüntüler.
 
-![Birden çok jQuery istemci tarafı doğrulama hatası içeren film görünümü formu](~/tutorials/first-mvc-app/validation/_static/val.png)
+![Birden çok jQuery istemci yan doğrulama hataları ile film görünümü formu](~/tutorials/first-mvc-app/validation/_static/val.png)
 
 [!INCLUDE[](~/includes/localization/currency.md)]
 
-Formun, geçersiz bir değer içeren her bir alanda uygun bir doğrulama hata iletisini nasıl otomatik olarak oluşturduğuna dikkat edin. Hatalar hem istemci tarafında (JavaScript ve jQuery kullanılarak) hem de sunucu tarafında (kullanıcının JavaScript devre dışı bırakılmış olması durumunda) zorlanır.
+Formun geçersiz bir değer içeren her alanda uygun bir doğrulama hatası iletisini otomatik olarak nasıl oluşturduğuna dikkat edin. Hatalar hem istemci tarafı (JavaScript ve jQuery kullanarak) hem de sunucu tarafı (kullanıcının JavaScript devre dışı olması durumunda) uygulanır.
 
-Önemli bir avantaj, bu doğrulama kullanıcı arabirimini etkinleştirmek için `MoviesController` sınıfında veya *Create. cshtml* görünümündeki tek bir kod satırını değiştirmeniz gerekmez. Bu öğreticide daha önce oluşturduğunuz denetleyici ve görünümler, `Movie` model sınıfının özelliklerinde doğrulama özniteliklerini kullanarak belirttiğiniz doğrulama kurallarını otomatik olarak çekti. `Edit` Action yöntemini kullanarak test doğrulaması ve aynı doğrulama uygulanır.
+Önemli bir yararı, bu doğrulama UI etkinleştirmek için `MoviesController` sınıfta veya *Create.cshtml* görünümünde kod tek bir satırı değiştirmeniz gerekmez. Bu öğreticide daha önce oluşturduğunuz denetleyici ve görünümler, `Movie` model sınıfının özellikleri üzerinde doğrulama özniteliklerini kullanarak belirttiğiniz doğrulama kurallarını otomatik olarak aldı. Eylem yöntemini `Edit` kullanarak test doğrulama ve aynı doğrulama uygulanır.
 
-Form verileri, istemci tarafı doğrulama hatası kalmayana kadar sunucuya gönderilmez. Bunu, [Fiddler aracını](https://www.telerik.com/fiddler) veya [F12 geliştirici araçlarını](/microsoft-edge/devtools-guide)kullanarak `HTTP Post` yöntemine bir kesme noktası koyarak doğrulayabilirsiniz.
+İstemci tarafı doğrulama hatası olmadan form verileri sunucuya gönderilmez. Bunu, `HTTP Post` [fiddler aracını](https://www.telerik.com/fiddler) veya [F12 Geliştirici araçlarını](/microsoft-edge/devtools-guide)kullanarak yönteme bir kesme noktası koyarak doğrulayabilirsiniz.
 
-## <a name="how-validation-works"></a>Doğrulamanın çalışması
+## <a name="how-validation-works"></a>Doğrulama nasıl çalışır?
 
-Doğrulama Kullanıcı arabiriminin denetleyici veya görünümlerde kodda herhangi bir güncelleştirme yapmadan nasıl oluşturulduğunu merak edebilirsiniz. Aşağıdaki kod iki `Create` yöntemini gösterir.
+Denetleyicideki veya görünümlerde kodda herhangi bir güncelleştirme olmadan doğrulama ui'sinin nasıl oluşturulduğunu merak edebilirsiniz. Aşağıdaki kod iki `Create` yöntemi gösterir.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc//sample/MvcMovie/Controllers/MoviesController.cs?name=snippetCreate)]
 
-İlk (HTTP GET) `Create` Action yöntemi ilk oluşturma formunu görüntüler. İkinci (`[HttpPost]`) sürüm, form gönderisini işler. İkinci `Create` yöntemi (`[HttpPost]` sürümü), filmin herhangi bir doğrulama hatası olup olmadığını denetlemek için `ModelState.IsValid` çağırır. Bu yöntemi çağırmak, nesnesine uygulanmış olan tüm doğrulama özniteliklerini değerlendirir. Nesnede doğrulama hataları varsa `Create` yöntemi formu yeniden görüntüler. Hata yoksa, yöntemi yeni filmi veritabanına kaydeder. Film örneğimizde, istemci tarafında algılanan doğrulama hataları olduğunda form sunucuya nakledilmez; istemci tarafı doğrulama hataları olduğunda ikinci `Create` yöntemi hiçbir zaman çağrılmaz. Tarayıcınızda JavaScript 'i devre dışı bırakırsanız, istemci doğrulaması devre dışıdır ve herhangi bir doğrulama hatasını tespit `ModelState.IsValid` HTTP POST `Create` yöntemini test edebilirsiniz.
+İlk (HTTP GET) `Create` eylem yöntemi ilk Oluşturma formunu görüntüler. İkinci (`[HttpPost]`) sürüm form gönderisini işler. İkinci `Create` yöntem (sürüm) `[HttpPost]` `ModelState.IsValid` filmin doğrulama hatası olup olmadığını denetlemek için çağırır. Bu yöntemi çağırmak, nesneye uygulanan tüm doğrulama özniteliklerini değerlendirir. Nesnenin doğrulama hataları varsa, `Create` yöntem formu yeniden görüntüler. Hata yoksa, yöntem yeni filmi veritabanına kaydeder. Film örneğimizde, istemci tarafında algılanan doğrulama hataları olduğunda form sunucuya gönderilmez; istemci `Create` tarafı doğrulama hataları olduğunda ikinci yöntem asla çağrılmaz. Tarayıcınızda JavaScript'i devre dışı bıraktıysanız, istemci doğrulama devre dışı `Create` `ModelState.IsValid` bırakılır ve http post yöntemini herhangi bir doğrulama hatası algılayarak test edebilirsiniz.
 
-`[HttpPost] Create` yönteminde bir kesme noktası ayarlayabilir ve yöntemin hiçbir zaman çağrılmadığını doğrulayabilirsiniz, doğrulama hataları algılandığında istemci tarafı doğrulaması form verilerini göndermez. Tarayıcınızda JavaScript 'i devre dışı bırakır, ardından formu hatalarla gönderirseniz, kesme noktası isabet eder. JavaScript olmadan tam doğrulama almaya devam edersiniz. 
+`[HttpPost] Create` Yöntemde bir kesme noktası ayarlayabilir ve yöntemin hiçbir zaman çağrılamayacağını doğrulayabilirsiniz, doğrulama hataları algılandığında istemci tarafı doğrulama form verilerini göndermez. Tarayıcınızda JavaScript'i devre dışı bıraktıysanız, formu hatalarla birlikte gönderin, kesme noktası vurulur. Hala JavaScript olmadan tam doğrulama olsun. 
 
-Aşağıdaki görüntüde, Firefox tarayıcısında JavaScript 'In nasıl devre dışı bırakılacağı gösterilmektedir.
+Aşağıdaki resim, Firefox tarayıcısında JavaScript'in nasıl devre dışı kısıdığını gösterir.
 
-![Firefox: Seçenekler ' in Içerik sekmesinde, JavaScript 'ı etkinleştir onay kutusunun işaretini kaldırın.](~/tutorials/first-mvc-app/validation/_static/ff.png)
+![Firefox: Seçeneklerin İçerik sekmesinde, Javascript'i Etkinleştir onay kutusunun üzerindeki işaretin üzerindekini kaldırın.](~/tutorials/first-mvc-app/validation/_static/ff.png)
 
-Aşağıdaki görüntüde, Chrome tarayıcısında JavaScript 'In nasıl devre dışı bırakılacağı gösterilmektedir.
+Aşağıdaki resim, Chrome tarayıcısında JavaScript'in nasıl devre dışı kalındığını gösterir.
 
-![Google Chrome: Içerik ayarlarının JavaScript bölümünde herhangi bir sitenin JavaScript çalıştırmasına izin verme ' yi seçin.](~/tutorials/first-mvc-app/validation/_static/chrome.png)
+![Google Chrome: İçerik ayarlarının Javascript bölümünde, herhangi bir sitenin JavaScript çalışmasına izin verme seçeneğini belirleyin.](~/tutorials/first-mvc-app/validation/_static/chrome.png)
 
-JavaScript 'i devre dışı bıraktıktan sonra, geçersiz veri gönderin ve hata ayıklayıcıda adım adım ilerleyin.
+JavaScript'i devre dışı bıraktıktan sonra geçersiz verileri deftere nakledin ve hata ayıklayıcıya adım atın.
 
-![Geçersiz verilerin bir göndermasında hata ayıklarken, ModelState. IsValid üzerinde IntelliSense, değerin false olduğunu gösterir.](~/tutorials/first-mvc-app/validation/_static/ms.png)
+![Geçersiz veri gönderisinde hata ayıklarken, ModelState.IsValid'teki Intellisense, değerin yanlış olduğunu gösterir.](~/tutorials/first-mvc-app/validation/_static/ms.png)
 
-*Create. cshtml* görünüm şablonunun bölümü aşağıdaki biçimlendirmede gösterilmiştir:
+*Create.cshtml* görünüm şablonunun bölümü aşağıdaki biçimlendirmede gösterilir:
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/CreateRatingBrevity.html)]
 
-Yukarıdaki biçimlendirme eylem yöntemleri tarafından ilk formu görüntülemek ve bir hata durumunda onu yeniden görüntülemek için kullanılır.
+Önceki biçimlendirme, ilk formu görüntülemek ve bir hata durumunda yeniden görüntülemek için eylem yöntemleri tarafından kullanılır.
 
-[Giriş etiketi Yardımcısı](xref:mvc/views/working-with-forms) , [dataaçıklamaların](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) özniteliklerini kullanır ve istemci tarafında jQuery doğrulaması için gerekli HTML özniteliklerini üretir. [Doğrulama etiketi Yardımcısı](xref:mvc/views/working-with-forms#the-validation-tag-helpers) doğrulama hatalarını görüntüler. Daha fazla bilgi için bkz. [doğrulama](xref:mvc/models/validation) .
+[Giriş Etiketi Yardımcısı,](xref:mvc/views/working-with-forms) [DataAnnotations](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) özniteliklerini kullanır ve istemci tarafında jQuery Doğrulaması için gerekli HTML özniteliklerini üretir. [Doğrulama Etiketi Yardımcısı](xref:mvc/views/working-with-forms#the-validation-tag-helpers) doğrulama hatalarını görüntüler. Daha fazla bilgi için [Doğrulama'ya](xref:mvc/models/validation) bakın.
 
-Bu yaklaşım ne kadar iyi bir şeydir, denetleyicinin ne de `Create` görünüm şablonunun zorlanmakta olan gerçek doğrulama kuralları ya da görüntülenen belirli hata iletileri hakkında herhangi bir şeyi biliyor olması önemlidir. Doğrulama kuralları ve hata dizeleri yalnızca `Movie` sınıfında belirtilmiştir. Aynı doğrulama kuralları `Edit` görünümüne ve modelinizi düzenleyebilecek oluşturabileceğiniz diğer tüm görünümler şablonlarına otomatik olarak uygulanır.
+Bu yaklaşımın en güzel yanı, ne denetleyicinin ne de görünüm şablonunun, `Create` uygulanan gerçek doğrulama kuralları veya görüntülenen belirli hata iletileri hakkında hiçbir şey bulaşamasıdır. Doğrulama kuralları ve hata dizeleri yalnızca `Movie` sınıfta belirtilir. Bu aynı doğrulama kuralları, görünüme `Edit` ve modelinizi düzenlemeyi oluşturabileceğiniz diğer görünüm şablonlarına otomatik olarak uygulanır.
 
-Doğrulama mantığını değiştirmeniz gerektiğinde, modele doğrulama öznitelikleri ekleyerek tam olarak bir yerde bunu yapabilirsiniz (Bu örnekte, `Movie` sınıfı). Kuralların nasıl zorlandığından, uygulamanın farklı bölümlerinin tutarsız olması konusunda endişelenmeniz gerekmez; tüm doğrulama mantığı tek bir yerde tanımlanır ve her yerde kullanılır. Bu, kodun temiz kalmasını sağlar ve bakımını ve gelişmesini kolaylaştırır. Ayrıca, KURULAMA ilkesini tam olarak sunabileceksiniz anlamına gelir.
+Doğrulama mantığını değiştirmeniz gerektiğinde, bunu modele (bu örnekte sınıf) `Movie` doğrulama öznitelikleri ekleyerek tam olarak tek bir yerde yapabilirsiniz. Uygulamanın farklı bölümlerinin kuralların nasıl uygulandığıyla tutarsız olması konusunda endişelenmenize gerek kalmaz - tüm doğrulama mantığı tek bir yerde tanımlanır ve her yerde kullanılır. Bu, kodu çok temiz tutar ve bakımı ve geliştirmeyi kolaylaştırır. Bu da DRY prensibini tam olarak yerine getireceğiniz anlamına gelir.
 
-## <a name="using-datatype-attributes"></a>DataType özniteliklerini kullanma
+## <a name="using-datatype-attributes"></a>DataType Özniteliklerini Kullanma
 
-*Movie.cs* dosyasını açın ve `Movie` sınıfını inceleyin. `System.ComponentModel.DataAnnotations` ad alanı, yerleşik doğrulama öznitelikleri kümesine ek olarak biçimlendirme öznitelikleri sağlar. Yayın tarihine ve fiyat alanlarına `DataType` bir numaralandırma değeri zaten uyguladık. Aşağıdaki kod, uygun `DataType` özniteliğiyle `ReleaseDate` ve `Price` özelliklerini gösterir.
+*Movie.cs* dosyasını açın `Movie` ve sınıfı inceleyin. Ad `System.ComponentModel.DataAnnotations` alanı, yerleşik doğrulama öznitelikleri kümesine ek olarak biçimlendirme öznitelikleri sağlar. Çıkış tarihine ve `DataType` fiyat alanlarına numaralandırma değeri zaten uyguladık. Aşağıdaki kod uygun `ReleaseDate` `DataType` `Price` öznitelik ile özellikleri ve özellikleri gösterir.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc//sample/MvcMovie/Models/MovieDateRatingDA.cs?highlight=2,6&name=snippet2)]
 
-`DataType` öznitelikleri yalnızca görünüm altyapısının verileri biçimlendirmek için ipuçları sağlar (ve URL 'ler için `<a>` gibi öğeleri/öznitelikleri ve e-posta için `<a href="mailto:EmailAddress.com">` sağlar. `RegularExpression` özniteliğini kullanarak verilerin biçimini doğrulayabilirsiniz. `DataType` özniteliği, veritabanı iç türünden daha özel bir veri türü belirtmek için kullanılır, bunlar doğrulama öznitelikleri değildir. Bu durumda, zamanı değil yalnızca tarihi izlemek istiyoruz. `DataType` numaralandırması, tarih, saat, PhoneNumber, para birimi, Emaadresi ve daha fazlası gibi birçok veri türü sağlar. `DataType` özniteliği Ayrıca uygulamanın türe özgü özellikleri otomatik olarak sağlamasını da sağlayabilir. Örneğin, `DataType.EmailAddress`için `mailto:` bir bağlantı oluşturulabilir ve HTML5 'i destekleyen tarayıcılarda `DataType.Date` için bir tarih seçici sağlaneklenebilir. `DataType` öznitelikleri HTML 5 tarayıcıların anlayabilmesi için HTML 5 `data-` (bir veri Dash) öznitelikleri yayar. `DataType` öznitelikleri herhangi bir **doğrulama sağlamaz.**
+Öznitelikler yalnızca `DataType` görünüm altyapısının verileri biçimlendirmesi (ve URL'ler ve `<a>` `<a href="mailto:EmailAddress.com">` e-postalar gibi öğeleri/öznitelikleri) sağlaması için ipuçları sağlar. Verilerin biçimini `RegularExpression` doğrulamak için özniteliği kullanabilirsiniz. Öznitelik `DataType` veritabanı içsel türünden daha özel bir veri türü belirtmek için kullanılır, bunlar doğrulama öznitelikleri değildir. Bu durumda biz sadece tarih değil, zaman takip etmek istiyorum. Numaralandırma, `DataType` Tarih, Saat, Telefon Numarası, Para Birimi, E-posta Adresi ve daha fazlası gibi birçok veri türü sağlar. Öznitelik, `DataType` uygulamanın türe özgü özellikleri otomatik olarak sağlamasına da olanak tanır. Örneğin, HTML5'i destekleyen tarayıcılarda bir `mailto:` bağlantı oluşturulabilir `DataType.Date` `DataType.EmailAddress`ve tarih seçici kullanılabilir. HTML `DataType` 5 `data-` (telaffuz edilen veri tiresi) öznitelikleri, HTML 5 tarayıcılarının anlayabileceği öznitelikleri yayır. Öznitelikler `DataType` herhangi bir doğrulama **sağlamaz.**
 
-`DataType.Date` görüntülenen tarihin biçimini belirtmiyor. Varsayılan olarak, veri alanı, sunucunun `CultureInfo`göre varsayılan biçimlere göre görüntülenir.
+`DataType.Date`görüntülenen tarihin biçimini belirtmez. Varsayılan olarak, veri alanı sunucunun `CultureInfo`.
 
-`DisplayFormat` özniteliği, açıkça tarih biçimini belirtmek için kullanılır:
+Öznitelik, `DisplayFormat` tarih biçimini açıkça belirtmek için kullanılır:
 
 ```csharp
 [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
 public DateTime ReleaseDate { get; set; }
 ```
 
-`ApplyFormatInEditMode` ayarı, bir metin kutusunda değer görüntülenmek üzere görüntülendiğinde biçimlendirmenin de uygulanacağını belirtir. (Örneğin, para birimi değerleri için, büyük olasılıkla, metin kutusundaki para birimi sembolünü, bazı alanlar için istemiyor olabilirsiniz.)
+Ayar, `ApplyFormatInEditMode` değer düzenleme için bir metin kutusunda görüntülendiğinde biçimlendirmenin de uygulanması gerektiğini belirtir. (Bazı alanlar için bunu istemeyebilirsiniz — örneğin, para birimi değerleri için, büyük olasılıkla düzenleme için metin kutusundaki para birimi simgesini istemezsiniz.)
 
-`DisplayFormat` özniteliğini kendisi kullanabilirsiniz, ancak bu genellikle `DataType` özniteliğini kullanmak iyi bir fikir olabilir. `DataType` özniteliği, bir ekranda nasıl işlenirim aksine verilerin semantiğini sunar ve DisplayFormat ile elde olmadığınız aşağıdaki avantajları sağlar:
+Özniteliği tek `DisplayFormat` başına kullanabilirsiniz, ancak özniteliği kullanmak `DataType` genellikle iyi bir fikirdir. Bu `DataType` özellik, verilerin bir ekranda nasıl işlenir, aksine anlamsallarını iletir ve DisplayFormat ile elde edilemediğiniz aşağıdaki avantajları sağlar:
 
-* Tarayıcı HTML5 özelliklerini etkinleştirebilir (örneğin, bir Takvim denetimini, yerel ayara uygun para birimi sembolünü, e-posta bağlantılarını vb. göstermek için)
+* Tarayıcı HTML5 özelliklerini etkinleştirebilir (örneğin bir takvim denetimi, yerel para birimi simgesi, e-posta bağlantıları, vb. göstermek için)
 
-* Varsayılan olarak tarayıcı, verileri yerel ayarınızı temel alarak doğru biçimi kullanarak işleyebilir.
+* Varsayılan olarak, tarayıcı verileri bulunduğunuz yerin temeline göre doğru biçimi kullanarak işler.
 
-* `DataType` özniteliği, verileri işlemek için doğru alan şablonunu seçmek üzere MVC 'yi etkinleştirebilir (kendisi tarafından kullanılırsa, dize şablonunu kullanıyorsa `DisplayFormat`).
+* Öznitelik, `DataType` MVC'nin verileri işlemek için doğru alan `DisplayFormat` şablonunu seçmesini sağlayabilir (eğer kendisi tarafından kullanılıyorsa dize şablonu kullanılır).
 
 > [!NOTE]
-> jQuery doğrulaması, `Range` özniteliğiyle ve `DateTime`birlikte çalışmaz. Örneğin, aşağıdaki kod, tarih belirtilen aralıkta olduğunda bile her zaman bir istemci tarafı doğrulama hatası görüntüler:
+> jQuery doğrulama özniteliği ile `Range` çalışmıyor ve `DateTime`. Örneğin, tarih belirtilen aralıkta olsa bile, aşağıdaki kod her zaman bir istemci yan doğrulama hatası görüntüler:
 >
 > `[Range(typeof(DateTime), "1/1/1966", "1/1/2020")]`
 
-`DateTime``Range` özniteliğini kullanmak için jQuery Tarih doğrulamasını devre dışı bırakmanız gerekir. Modellerinizde sabit tarihleri derlemek genellikle iyi bir uygulamadır, bu nedenle `Range` özniteliği ve `DateTime` kullanılması önerilmez.
+Bu özniteliği kullanmak için jQuery tarih doğrulamasını `Range` devre `DateTime`dışı bırakmanız gerekir. Genellikle modellerinizde zor tarihleri derlemek iyi bir uygulama değildir, `Range` bu nedenle `DateTime` özniteliğini kullanarak ve önerilmez.
 
-Aşağıdaki kod, öznitelikleri tek bir satırda birleştirmeyi gösterir:
+Aşağıdaki kod, öznitelikleri tek bir satırda birleştirir:
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Models/MovieDateRatingDAmult.cs?name=snippet1)]
 
-Serinin bir sonraki bölümünde, uygulamayı gözden geçiririz ve otomatik olarak oluşturulan `Details` ve `Delete` yöntemlerinde bazı geliştirmeler yaparsınız.
+Serinin bir sonraki bölümünde, uygulamayı gözden geçiriyor ve otomatik olarak `Details` oluşturulan `Delete` ve yöntemlerde bazı iyileştirmeler yapıyoruz.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * [Formlarla Çalışma](xref:mvc/views/working-with-forms)
 * [Genelleştirme ve yerelleştirme](xref:fundamentals/localization)
-* [Etiket yardımcılarına giriş](xref:mvc/views/tag-helpers/intro)
-* [Yazar etiketi yardımcıları](xref:mvc/views/tag-helpers/authoring)
+* [Tag Helpers Giriş](xref:mvc/views/tag-helpers/intro)
+* [Yazar Etiketi Yardımcıları](xref:mvc/views/tag-helpers/authoring)
 
 > [!div class="step-by-step"]
 > [Önceki](new-field.md)
-> [İleri](details.md)  
+> [Sonraki](details.md)  

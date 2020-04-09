@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core tarayıcı bağlantısı
+title: ASP.NET Core Tarayıcı Bağlantısı
 author: ncarandini
-description: Tarayıcı bağlantısının, geliştirme ortamını bir veya daha fazla Web tarayıcısına bağlayan bir Visual Studio özelliği olduğunu açıklar.
+description: Tarayıcı Bağlantısının, geliştirme ortamını bir veya daha fazla web tarayıcısıyla ilişkilendiren bir Visual Studio özelliği olduğunu açıklar.
 ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 01/09/2020
@@ -9,53 +9,53 @@ no-loc:
 - SignalR
 uid: client-side/using-browserlink
 ms.openlocfilehash: 19cc3c2ed91bd9e05df3c036123c78ecbf81fcc0
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78658853"
 ---
-# <a name="browser-link-in-aspnet-core"></a>ASP.NET Core tarayıcı bağlantısı
+# <a name="browser-link-in-aspnet-core"></a>ASP.NET Core Tarayıcı Bağlantısı
 
-, [Nicolò Carandini](https://github.com/ncarandini), [Mike, son](https://github.com/MikeWasson)ve [Tom Dykstra](https://github.com/tdykstra) tarafından
+Yazar: [Nicolò Carandini](https://github.com/ncarandini), [Mike Wasson](https://github.com/MikeWasson), ve [Tom Dykstra](https://github.com/tdykstra)
 
-Tarayıcı bağlantısı, bir Visual Studio özelliğidir. Geliştirme ortamı ile bir veya daha fazla Web tarayıcısı arasında bir iletişim kanalı oluşturur. Tarayıcı bağlantısını, Web uygulamanızı birden çok tarayıcıda tek seferde yenilemek için kullanabilirsiniz. Bu, tarayıcılar arası testler için kullanışlıdır.
+Browser Link bir Visual Studio özelliğidir. Geliştirme ortamı ile bir veya daha fazla web tarayıcısı arasında bir iletişim kanalı oluşturur. Tarayıcı Bağlantısı'nı kullanarak web uygulamanızı aynı anda birden fazla tarayıcıda yenileyebilirsiniz, bu da tarayıcılar arası testler için yararlıdır.
 
-## <a name="browser-link-setup"></a>Tarayıcı bağlantısı kurulumu
+## <a name="browser-link-setup"></a>Tarayıcı Bağlantısı kurulumu
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[Microsoft. VisualStudio. Web. BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) paketini projenize ekleyin. ASP.NET Core Razor Pages veya MVC projeleri için, <xref:mvc/views/view-compilation>bölümünde açıklandığı gibi Razor ( *. cshtml*) dosyalarının çalışma zamanı derlemesini de etkinleştirin. Razor söz dizimi değişiklikler yalnızca çalışma zamanı derlemesi etkinleştirildiğinde uygulanır.
+[Microsoft.VisualStudio.Web.BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) paketini projenize ekleyin. Core Razor Pages veya MVC projeleri ASP.NET için, aynı zamanda Razor (*.cshtml*) dosyalarının çalışma zamanı derlemesini de <xref:mvc/views/view-compilation>sağlar. Jilet sözdizimi değişiklikleri yalnızca çalışma zamanı derlemesi etkinleştirildiğinde uygulanır.
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
 
-ASP.NET Core 2,0 projesi ASP.NET Core 2,1 ' e dönüştürülürken ve [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app)'e geçiş yaparken, tarayıcı bağlantısı Işlevselliği için [Microsoft. VisualStudio. Web. browserlink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) paketini yükler. ASP.NET Core 2,1 proje şablonları varsayılan olarak `Microsoft.AspNetCore.App` metapaketini kullanır.
+core 2.1ASP.NET bir ASP.NET Core 2.0 projesini dönüştürüp [Microsoft.AspNetCore.App metapaketine](xref:fundamentals/metapackage-app)geçerken, Tarayıcı Bağlantısı işlevi için [Microsoft.VisualStudio.Web.BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) paketini yükleyin. Core 2.1 proje şablonlarının `Microsoft.AspNetCore.App` ASP.NET varsayılan olarak meta paketi kullanır.
 
 ::: moniker-end
 
 ::: moniker range="= aspnetcore-2.0"
 
-ASP.NET Core 2,0 **Web uygulaması**, **Empty**ve **Web API** proje şablonları, [Microsoft. VisualStudio. Web. browserlink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/)Için bir paket başvurusu içeren [Microsoft. aspnetcore. All meta paketini](xref:fundamentals/metapackage)kullanır. Bu nedenle, `Microsoft.AspNetCore.All` metapackage 'in kullanılması, tarayıcı bağlantısının kullanılabilir olmasını sağlamak için başka bir eylem gerektirmez.
+ASP.NET Core 2.0 **Web Application**, **Boş**ve **Web API** proje şablonları [Microsoft.AspNetCore.All metapackage](xref:fundamentals/metapackage)kullanın , [Microsoft.VisualStudio.Web.BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/)için bir paket referans içerir. Bu nedenle, `Microsoft.AspNetCore.All` metapaketi kullanmak, Tarayıcı Bağlantısını kullanıma açmak için başka bir işlem gerektirmez.
 
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-1.1"
 
-ASP.NET Core 1. x **Web uygulaması** proje şablonunda, [Microsoft. VisualStudio. Web. browserlink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) paketi için bir paket başvurusu vardır. Diğer proje türleri `Microsoft.VisualStudio.Web.BrowserLink`için bir paket başvurusu eklemenizi gerektirir.
+ASP.NET Core 1.x **Web Application** proje şablonu [Microsoft.VisualStudio.Web.BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) paketi için bir paket başvurusu vardır. Diğer proje türleri için bir paket `Microsoft.VisualStudio.Web.BrowserLink`başvurusu eklemenizi gerektirir.
 
 ::: moniker-end
 
 ### <a name="configuration"></a>Yapılandırma
 
-`Startup.Configure` yönteminde `UseBrowserLink` çağırın:
+`Startup.Configure` Yöntemde arama: `UseBrowserLink`
 
 ```csharp
 app.UseBrowserLink();
 ```
 
-`UseBrowserLink` çağrısı genellikle geliştirme ortamında tarayıcının bağlantısını sağlayan bir `if` bloğunun içine yerleştirilir. Örnek:
+Arama `UseBrowserLink` genellikle yalnızca Geliştirme `if` ortamında Tarayıcı Bağlantısı sağlayan bir blok içinde yerleştirilir. Örneğin:
 
 ```csharp
 if (env.IsDevelopment())
@@ -67,70 +67,70 @@ if (env.IsDevelopment())
 
 Daha fazla bilgi için bkz. <xref:fundamentals/environments>.
 
-## <a name="how-to-use-browser-link"></a>Tarayıcı bağlantısı kullanma
+## <a name="how-to-use-browser-link"></a>Tarayıcı Bağlantısı nasıl kullanılır?
 
-Bir ASP.NET Core projesi açıkken, Visual Studio **hata ayıklama hedefi** araç çubuğu denetiminin yanında tarayıcı bağlantısı araç çubuğu denetimini gösterir:
+ASP.NET Core projeniz açık olduğunda, Visual Studio **Hata Ayıklama Hedef** araç çubuğu denetiminin yanındaki Tarayıcı Bağlantısı araç çubuğu denetimini gösterir:
 
-![Tarayıcı bağlantısı açılan menüsü](using-browserlink/_static/browserLink-dropdown-menu.png)
+![Tarayıcı Bağlantısı açılır menüsü](using-browserlink/_static/browserLink-dropdown-menu.png)
 
-Tarayıcı bağlantısı araç çubuğu denetiminden şunları yapabilirsiniz:
+Browser Link araç çubuğu denetiminden şunları yapabilirsiniz:
 
-* Web uygulamasını aynı anda birkaç tarayıcıda yenileyin.
-* **Tarayıcı bağlantısı panosunu**açın.
-* **Tarayıcı bağlantısını**etkinleştirin veya devre dışı bırakın. Note: tarayıcı bağlantısı, Visual Studio 'da varsayılan olarak devre dışıdır.
-* [CSS otomatik eşitlemesini](#enable-or-disable-css-auto-sync)etkinleştirin veya devre dışı bırakın.
+* Web uygulamasını aynı anda birden fazla tarayıcıda yenileyin.
+* Tarayıcı **Bağlantı Panosunu**açın.
+* **Tarayıcı Bağlantısını**etkinleştirme veya devre dışı Not: Visual Studio'da Tarayıcı Bağlantısı varsayılan olarak devre dışı bırakılır.
+* [CSS Otomatik Eşitleme'yi](#enable-or-disable-css-auto-sync)etkinleştirme veya devre dışı.
 
-## <a name="refresh-the-web-app-in-several-browsers-at-once"></a>Aynı anda birkaç tarayıcıda Web uygulamasını yenileyin
+## <a name="refresh-the-web-app-in-several-browsers-at-once"></a>Web uygulamasını aynı anda birden fazla tarayıcıda yenileyin
 
-Projeyi başlatırken başlatılacak tek bir Web tarayıcısı seçmek için, **Hata Ayıkla hedef** araç çubuğu denetimindeki açılan menüyü kullanın:
+Projeyi başlatırken başlatılabilmek için tek bir web tarayıcısı seçmek için **Hata Ayıklama Hedef** araç çubuğu denetiminde açılır menüyü kullanın:
 
-![F5 açılır menüsü](using-browserlink/_static/debug-target-dropdown-menu.png)
+![F5 açılır menü](using-browserlink/_static/debug-target-dropdown-menu.png)
 
-Aynı anda birden çok tarayıcı açmak için, aynı açılan listeden **... öğesine gidin** ' i seçin. İstediğiniz tarayıcıları seçmek için <kbd>CTRL</kbd> tuşunu basılı tutarak, ardından da **Araştır**' a tıklayın:
+Aynı anda birden çok tarayıcı açmak için, aynı açılır yerden **Gözat'ı...** seçin. İstediğiniz tarayıcıları seçmek için <kbd>Ctrl</kbd> tuşuna basılı tutun ve ardından **Gözat'ı**tıklatın:
 
-![Birçok tarayıcıyı aynı anda aç](using-browserlink/_static/open-many-browsers-at-once.png)
+![Aynı anda birçok tarayıcı açın](using-browserlink/_static/open-many-browsers-at-once.png)
 
-Aşağıdaki ekran görüntüsünde, dizin görünümü açık ve iki açık tarayıcıyla Visual Studio gösterilmektedir:
+Aşağıdaki ekran görüntüsü, Index görünümü açık ve iki açık tarayıcısı olan Visual Studio'yu gösterir:
 
-![İki tarayıcıyla Eşitle örneği](using-browserlink/_static/sync-with-two-browsers-example.png)
+![İki tarayıcı örneğiyle eşitleme](using-browserlink/_static/sync-with-two-browsers-example.png)
 
-Projeye bağlı tarayıcıları görmek için tarayıcı bağlantısı araç çubuğu denetiminin üzerine gelin:
+Projeye bağlı tarayıcıları görmek için Tarayıcı Bağlantısı araç çubuğu denetiminin üzerine tıklayın:
 
-![Üzerine gelme İpucu](using-browserlink/_static/hoover-tip.png)
+![Hover ucu](using-browserlink/_static/hoover-tip.png)
 
-Dizin görünümünü değiştirin ve tarayıcı bağlantısı yenileme düğmesine tıkladığınızda tüm bağlı tarayıcılar güncelleştirilir:
+Dizin görünümünü değiştirin ve Tarayıcı Bağlantısı yenileme düğmesini tıklattığınızda bağlı tüm tarayıcılar güncelleştirilir:
 
-![tarayıcılar-değişikliklere karşı eşitleme](using-browserlink/_static/browsers-sync-to-changes.png)
+![tarayıcılar-eşitleme-değişiklikler](using-browserlink/_static/browsers-sync-to-changes.png)
 
-Tarayıcı bağlantısı, Visual Studio dışından başlamış ve uygulama URL 'sine gidebileceğiniz tarayıcılarla de kullanılabilir.
+Tarayıcı Bağlantısı ayrıca Visual Studio'nun dışından başlattığınız ve uygulama URL'sine gidin tarayıcılarla da çalışır.
 
-### <a name="the-browser-link-dashboard"></a>Tarayıcı bağlantısı panosu
+### <a name="the-browser-link-dashboard"></a>Tarayıcı Bağlantı Panosu
 
-Tarayıcı bağlantısı açılan menüsünden **tarayıcı bağlantısı pano** penceresini açın ve açık tarayıcılarla bağlantıyı yönetin:
+Açık tarayıcılarla bağlantıyı yönetmek için Tarayıcı Bağlantısı açılır menüsünden **Tarayıcı Bağlantısı Panosu** penceresini açın:
 
-![Açık-browserslink-Pano](using-browserlink/_static/open-browserlink-dashboard.png)
+![açık tarayıcılarbağlantı panosu](using-browserlink/_static/open-browserlink-dashboard.png)
 
-Hiçbir tarayıcı bağlı değilse, **Tarayıcıda görüntüle** bağlantısını seçerek hata ayıklama olmayan bir oturum başlatabilirsiniz:
+Tarayıcı bağlı değilse, **Tarayıcıda Görüntüle** bağlantısını seçerek hata ayıklamayan bir oturum başlatabilirsiniz:
 
-![browserlink-Pano-bağlantı yok](using-browserlink/_static/browserlink-dashboard-no-connections.png)
+![browserlink-pano-bağlantı yok](using-browserlink/_static/browserlink-dashboard-no-connections.png)
 
-Aksi halde, bağlı tarayıcılar her bir tarayıcının gösterdiği sayfanın yoluyla gösterilir:
+Aksi takdirde, bağlı tarayıcılar her tarayıcının gösterdiği sayfaya giden yol ile gösterilir:
 
-![browserlink-Pano-iki bağlantı](using-browserlink/_static/browserlink-dashboard-two-connections.png)
+![browserlink-pano-iki bağlantı](using-browserlink/_static/browserlink-dashboard-two-connections.png)
 
-Yalnızca bu tarayıcıyı yenilemek için tek bir tarayıcı adına de tıklayabilirsiniz.
+Ayrıca, yalnızca tarayıcıyı yenilemek için tek bir tarayıcı adını tıklatabilirsiniz.
 
-### <a name="enable-or-disable-browser-link"></a>Tarayıcı bağlantısını etkinleştir veya devre dışı bırak
+### <a name="enable-or-disable-browser-link"></a>Tarayıcı Bağlantısını etkinleştirme veya devre dışı
 
-Tarayıcı bağlantısını devre dışı bıraktıktan sonra yeniden etkinleştirdiğinizde, bunları yeniden bağlamak için tarayıcıları yenilemeniz gerekir.
+Tarayıcı Bağlantısını devre dışı ettikten sonra yeniden etkinleştirdiğinizde, tarayıcıları yeniden bağlamak için tarayıcıları yenilemeniz gerekir.
 
-### <a name="enable-or-disable-css-auto-sync"></a>CSS otomatik eşitlemesini etkinleştir veya devre dışı bırak
+### <a name="enable-or-disable-css-auto-sync"></a>CSS Otomatik Eşitleme'yi etkinleştirme veya devre dışı
 
-CSS otomatik eşitleme etkinleştirildiğinde, CSS dosyalarında herhangi bir değişiklik yaptığınızda bağlantılı tarayıcılar otomatik olarak yenilenir.
+CSS Otomatik Eşitleme etkinleştirildiğinde, CSS dosyalarında herhangi bir değişiklik yaptığınızda bağlı tarayıcılar otomatik olarak yenilenir.
 
 ## <a name="how-it-works"></a>Nasıl çalışır?
 
-Tarayıcı bağlantısı, Visual Studio ile tarayıcı arasında bir iletişim kanalı oluşturmak için [SignalR](xref:signalr/introduction) kullanır. Tarayıcı bağlantısı etkinleştirildiğinde, Visual Studio birden çok istemcinin (tarayıcının) bağlanabileceği bir SignalR sunucusu gibi davranır. Tarayıcı bağlantısı ayrıca ASP.NET Core isteği ardışık düzenine bir ara yazılım bileşeni kaydeder. Bu bileşen, sunucudan her sayfa isteğine özel `<script>` başvurularını çıkarır. Tarayıcıda **Görünüm kaynağı** ' nı seçerek komut dosyası başvurularını görebilir ve `<body>` Tag içeriğinin sonuna kadar kaydırma yapabilirsiniz:
+Browser Link, Visual Studio ile tarayıcı arasında bir iletişim kanalı oluşturmak için kullanır. [SignalR](xref:signalr/introduction) Tarayıcı Bağlantısı etkinleştirildiğinde, Visual Studio SignalR birden çok istemcinin (tarayıcıların) bağlanabileceği bir sunucu gibi davranır. Browser Link ayrıca ASP.NET Core istek ardışık alanında bir ara yazılım bileşeni kaydeder. Bu bileşen, `<script>` sunucudan gelen her sayfa isteğine özel başvurular enjekte eder. Tarayıcıda Kaynak Görüntüle'yi **View source** seçerek ve `<body>` etiket içeriğinin sonuna kaydırarak komut dosyası başvurularını görebilirsiniz:
 
 ```html
     <!-- Visual Studio Browser Link -->
@@ -142,6 +142,6 @@ Tarayıcı bağlantısı, Visual Studio ile tarayıcı arasında bir iletişim k
 </body>
 ```
 
-Kaynak dosyalarınız değiştirilmez. Ara yazılım bileşeni, betik başvurularını dinamik olarak çıkarır.
+Kaynak dosyalarınız değiştirilmedi. Ara yazılım bileşeni, komut dosyası başvurularını dinamik olarak enjekte eder.
 
-Tarayıcı tarafı kodu tüm JavaScript olduğundan, tarayıcı eklentisi gerekmeden SignalR desteklediği tüm tarayıcılarda çalışıyor olur.
+Tarayıcı tarafındaki kodun tümü JavaScript olduğundan, tarayıcı eklentisi gerektirmeden SignalR destekleyen tüm tarayıcılarda çalışır.

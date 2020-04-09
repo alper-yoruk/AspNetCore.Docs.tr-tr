@@ -1,7 +1,7 @@
 > [!IMPORTANT]
-> **Azure App Service ile Önizleme sürümlerini ASP.NET Core**
+> **Azure Uygulama Hizmeti ile ASP.NET Core önizleme sürümleri**
 >
-> ASP.NET Core önizleme sürümleri varsayılan olarak Azure App Service dağıtılır. ASP.NET Core Preview sürümü kullanan bir uygulamayı barındırmak için, bkz. [Azure App Service için ASP.NET Core Preview sürümünü dağıtma](xref:host-and-deploy/azure-apps/index#deploy-aspnet-core-preview-release-to-azure-app-service).
+> ASP.NET Core önizleme sürümleri varsayılan olarak Azure Uygulama Hizmeti'ne dağıtılmez. ASP.NET Core önizleme sürümü kullanan bir uygulamayı barındırmak için Azure [Uygulama Hizmeti'ne](xref:host-and-deploy/azure-apps/index#deploy-aspnet-core-preview-release-to-azure-app-service)ASP.NET Çekirdek önizleme sürümüne bakın.
 <!-- 
 > [!IMPORTANT]
 > **ASP.NET Core 3.0 with Azure App Service**

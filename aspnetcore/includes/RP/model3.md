@@ -1,5 +1,5 @@
 
-Aşağıdaki .NET Core CLI komutları çalıştırın:
+Aşağıdaki .NET Core CLI komutlarını çalıştırın:
 
 ```dotnetcli
 dotnet ef migrations add InitialCreate

@@ -1,25 +1,25 @@
 ---
-title: ASP.NET Core yerleşik etiket yardımcıları
+title: ASP.NET Core dahili Etiket Yardımcıları
 author: pkellner
-description: ASP.NET Core yerleşik etiket yardımcılarını üretkenliğinizi artırma hakkında bilgi edinin.
+description: ASP.NET Core yerleşik Tag Helpers'ın üretkenliğinizi nasıl artırdığını öğrenin.
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
 uid: mvc/views/tag-helpers/builtin-th/Index
 ms.openlocfilehash: f19cfa5b843bde8a8633ce778562707e566bebb9
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78662724"
 ---
-# <a name="aspnet-core-built-in-tag-helpers"></a>ASP.NET Core yerleşik etiket yardımcıları
+# <a name="aspnet-core-built-in-tag-helpers"></a>ASP.NET Core dahili Etiket Yardımcıları
 
-By [Peter Kellner](https://peterkellner.net)
+Yazar: [Peter Kellner](https://peterkellner.net)
 
-Etiket Yardımcıları hakkında genel bilgi için bkz. <xref:mvc/views/tag-helpers/intro>.
+Etiket Yardımcıları'na genel bakış <xref:mvc/views/tag-helpers/intro>için bkz.
 
-Bu belgede listelenmeyen yerleşik etiket yardımcıları vardır. Listelenmemiş etiket yardımcıları, [Razor](xref:mvc/views/razor) Görünüm altyapısı tarafından dahili olarak kullanılır. `~` (tilde) karakteri için etiket Yardımcısı listelenmemiş. Tilde etiketi Yardımcısı Web sitesinin kök yoluna genişletilir.
+Bu belgede listelenmemiş yerleşik Etiket Yardımcıları vardır. Listelenmemiş Tag [Helpers, Razor](xref:mvc/views/razor) görünüm motoru tarafından dahili olarak kullanılır. `~` (tilde) karakterin etiket yardımcısı listedışıdır. Tilde Tag Helper web sitesinin kök yolu genişletir.
 
 [!INCLUDE[](~/includes/built-in-TH.md)]
 

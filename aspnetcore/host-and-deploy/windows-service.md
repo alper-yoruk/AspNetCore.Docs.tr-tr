@@ -1,56 +1,56 @@
 ---
-title: Windows hizmetinde konak ASP.NET Core
+title: Windows Hizmetinde Ana Bilgisayar ASP.NET Core
 author: rick-anderson
-description: ASP.NET Core uygulamasının bir Windows hizmetinde nasıl barındıralınacağını öğrenin.
+description: Windows Hizmetinde bir ASP.NET Core uygulamasını nasıl barındırılacın öğrenin.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 uid: host-and-deploy/windows-service
-ms.openlocfilehash: 4eed461788f8fffa2ea00d8c931b0a0f5aaf1b46
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 5cb61d330df7e15fbd54396207792596ae018fd3
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78656186"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80417587"
 ---
-# <a name="host-aspnet-core-in-a-windows-service"></a>Windows hizmetinde konak ASP.NET Core
+# <a name="host-aspnet-core-in-a-windows-service"></a>Windows Hizmetinde Ana Bilgisayar ASP.NET Core
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Bir ASP.NET Core uygulaması, IIS kullanmadan Windows [hizmeti](/dotnet/framework/windows-services/introduction-to-windows-service-applications) olarak Windows üzerinde barındırılabilir. Windows hizmeti olarak barındırıldığı zaman, uygulama otomatik olarak sunucu yeniden başlatıldıktan sonra başlatılır.
+Bir ASP.NET Core uygulaması, IIS kullanmadan [Windows'da Windows Hizmeti](/dotnet/framework/windows-services/introduction-to-windows-service-applications) olarak barındırılabilir. Windows Hizmeti olarak barındırıldığında, uygulama sunucu yeniden başlatıldıktan sonra otomatik olarak başlar.
 
-[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
+[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ( nasıl[indirilir](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
-* [ASP.NET Core SDK 2,1 veya üzeri](https://dotnet.microsoft.com/download)
-* [PowerShell 6,2 veya üzeri](https://github.com/PowerShell/PowerShell)
+* [ASP.NET Core SDK 2.1 veya sonrası](https://dotnet.microsoft.com/download)
+* [PowerShell 6.2 veya sonrası](https://github.com/PowerShell/PowerShell)
 
-## <a name="worker-service-template"></a>Çalışan hizmeti şablonu
+## <a name="worker-service-template"></a>İşçi Hizmeti şablonu
 
-ASP.NET Core Worker hizmeti şablonu, uzun süre çalışan hizmet uygulamalarını yazmak için bir başlangıç noktası sağlar. Şablonu bir Windows Hizmeti uygulamasının temeli olarak kullanmak için:
+ASP.NET Çekirdek İşçi Hizmeti şablonu, uzun süre çalışan hizmet uygulamalarını yazmak için bir başlangıç noktası sağlar. Şablonu bir Windows Hizmeti uygulaması için temel olarak kullanmak için:
 
-1. .NET Core şablonundan bir çalışan hizmeti uygulaması oluşturun.
-1. Çalışan hizmeti uygulamasını bir Windows hizmeti olarak çalışacak şekilde güncelleştirmek için [uygulama yapılandırma](#app-configuration) bölümündeki yönergeleri izleyin.
+1. .NET Core şablonundan bir İşçi Hizmeti uygulaması oluşturun.
+1. Windows Hizmeti olarak çalıştırılabilmek için İşçi Hizmeti uygulamasını güncellemek için [Uygulama yapılandırma](#app-configuration) bölümündeki kılavuzu izleyin.
 
 [!INCLUDE[](~/includes/worker-template-instructions.md)]
 
 ## <a name="app-configuration"></a>Uygulama yapılandırması
 
-Uygulama, [Microsoft. Extensions. Hosting. WindowsServices](https://www.nuget.org/packages/Microsoft.Extensions.Hosting.WindowsServices)için bir paket başvurusu gerektirir.
+Uygulama [Microsoft.Extensions.Hosting.WindowsServices](https://www.nuget.org/packages/Microsoft.Extensions.Hosting.WindowsServices)için bir paket başvuru gerektirir.
 
-`IHostBuilder.UseWindowsService` ana bilgisayar oluşturulurken çağrılır. Uygulama bir Windows hizmeti olarak çalışıyorsa, yöntemi:
+`IHostBuilder.UseWindowsService`ana bilgisayar inşa ederken denir. Uygulama Windows Hizmeti olarak çalışıyorsa, yöntem:
 
-* Ana bilgisayar ömrünü `WindowsServiceLifetime`olarak ayarlar.
-* [İçerik kökünü](xref:fundamentals/index#content-root) [AppContext. BaseDirectory](xref:System.AppContext.BaseDirectory)olarak ayarlar. Daha fazla bilgi için [geçerli dizin ve içerik kökü](#current-directory-and-content-root) bölümüne bakın.
-* Olay günlüğüne kaydetmeyi sağlar:
+* Ana bilgisayar ömrünü `WindowsServiceLifetime`' ne ayarlar.
+* İçerik [kökünü](xref:fundamentals/index#content-root) [AppContext.BaseDirectory](xref:System.AppContext.BaseDirectory)olarak ayarlar. Daha fazla bilgi için [Geçerli dizini ve içerik kökü](#current-directory-and-content-root) bölümüne bakın.
+* Olay günlüğüne günlüğe kaydetmeyi sağlar:
   * Uygulama adı varsayılan kaynak adı olarak kullanılır.
-  * Varsayılan günlük düzeyi, ana bilgisayarı oluşturmak için `CreateDefaultBuilder` çağıran ASP.NET Core şablona dayalı bir uygulama için *Uyarı* veya daha yüksek bir uygulamadır.
-  * Varsayılan günlük düzeyini *appSettings. json*/appsettings içindeki `Logging:EventLog:LogLevel:Default` anahtarıyla geçersiz kılın *. { Environment}. JSON* veya diğer yapılandırma sağlayıcısı.
-  * Yeni olay kaynakları yalnızca yöneticiler tarafından oluşturulabilir. Uygulama adı kullanılarak bir olay kaynağı oluşturuoluşturumadığında, *uygulama* kaynağına bir uyarı kaydedilir ve olay günlükleri devre dışı bırakılır.
+  * Varsayılan günlük düzeyi, ana bilgisayarı oluşturmak için çağrıda `CreateDefaultBuilder` bulunan ASP.NET Core şablonuna dayalı bir uygulama için *Uyarı* veya daha yüksektir.
+  * `Logging:EventLog:LogLevel:Default` *appsettings.json*/appsettings'teki anahtarla varsayılan günlük düzeyini geçersiz*kılın.{ Environment}.json* veya diğer yapılandırma sağlayıcısı.
+  * Yalnızca yöneticiler yeni olay kaynakları oluşturabilir. Bir olay kaynağı uygulama adı kullanılarak oluşturuladığında, uygulama *kaynağına* bir uyarı günlüğe kaydedilir ve olay günlükleri devre dışı bırakılır.
 
-*Program.cs*`CreateHostBuilder`:
+`CreateHostBuilder` *Program.cs:*
 
 ```csharp
 Host.CreateDefaultBuilder(args)
@@ -60,24 +60,24 @@ Host.CreateDefaultBuilder(args)
 
 Aşağıdaki örnek uygulamalar bu konuya eşlik eder:
 
-* Arka plan çalışan hizmeti örneği, arka plan görevleri için [barındırılan Hizmetleri](xref:fundamentals/host/hosted-services) kullanan [çalışan hizmeti şablonunu](#worker-service-template) temel alan, Web olmayan bir uygulama örneğini &ndash;.
-* Web App Service örneği, arka plan görevleri için [barındırılan hizmetlerle](xref:fundamentals/host/hosted-services) Windows hizmeti olarak çalışan bir Razor pages Web uygulaması örneği &ndash;.
+* Arka Plan &ndash; İşçi Sat›r›m Örneği Arka plan görevleri için [barındır›lan hizmetleri](xref:fundamentals/host/hosted-services) kullanan İşçi [Hizmeti şablonuna](#worker-service-template) dayanan web olmayan bir uygulama örneği.
+* Web App &ndash; Service Örnek Arka plan görevleri için [barındırılan hizmetlerle](xref:fundamentals/host/hosted-services) windows hizmeti olarak çalışan Bir Jilet Sayfaları web uygulaması örneği.
 
-MVC Kılavuzu için <xref:mvc/overview> ve <xref:migration/22-to-30>altındaki makalelere bakın.
+MVC kılavuzu için, altındaki <xref:mvc/overview> <xref:migration/22-to-30>makalelere bakın ve .
 
 ## <a name="deployment-type"></a>Dağıtım türü
 
-Dağıtım senaryoları hakkında bilgi ve öneriler için bkz. [.NET Core uygulama dağıtımı](/dotnet/core/deploying/).
+Dağıtım senaryoları hakkında bilgi ve tavsiye için [bkz.](/dotnet/core/deploying/)
 
 ### <a name="sdk"></a>SDK
 
-Razor Pages veya MVC çerçevelerini kullanan bir Web uygulaması tabanlı hizmet için, proje dosyasında Web SDK 'sını belirtin:
+Razor Pages veya MVC çerçevelerini kullanan web uygulaması tabanlı bir hizmet için, proje dosyasında Web SDK'yı belirtin:
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
 ```
 
-Hizmet yalnızca arka plan görevlerini (örneğin, [barındırılan hizmetler](xref:fundamentals/host/hosted-services)) yürütülüyorsa, proje dosyasında çalışan SDK 'sını belirtin:
+Hizmet yalnızca arka plan görevlerini yürütürse (örneğin, [barındırılan hizmetler),](xref:fundamentals/host/hosted-services)Proje dosyasında İşçi SDK'sını belirtin:
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Worker">
@@ -85,9 +85,9 @@ Hizmet yalnızca arka plan görevlerini (örneğin, [barındırılan hizmetler](
 
 ### <a name="framework-dependent-deployment-fdd"></a>Çerçeveye bağımlı dağıtım (FDD)
 
-Çerçeveye bağımlı dağıtım (FDD), hedef sistemde .NET Core 'un paylaşılan sistem genelindeki bir sürümünün varlığına dayanır. Bu makaledeki kılavuzdan sonra FDD senaryosu benimsendiği zaman SDK, *çerçeveye bağlı yürütülebilir dosya*olarak adlandırılan yürütülebilir bir dosya ( *. exe*) oluşturur.
+Çerçeveye bağımlı dağıtım (FDD), hedef sistemde .NET Core'un sistem genelinde paylaşılan bir sürümünün bulunmasına dayanır. FDD senaryosu bu makaledeki kılavuzdan sonra kabul edildiğinde, *SDK, çerçeveye bağımlı yürütülebilir*olarak adlandırılan bir yürütülebilir (*.exe*) üretir.
 
-[Web SDK](#sdk)kullanıyorsanız, normalde bir ASP.NET Core uygulaması yayımlarken üretilen bir *Web. config* dosyası Windows Hizmetleri uygulaması için gereksizdir. *Web. config* dosyasının oluşturulmasını devre dışı bırakmak için `<IsTransformWebConfigDisabled>` özelliği `true`olarak ayarlayın.
+Bir ASP.NET Core uygulaması yayımlanırken normalde üretilen *web SDK* kullanıyorsanız, bir Windows Hizmetleri uygulaması için gereksizdir. [Web SDK](#sdk) *web.config* dosyasının oluşturulmasını devre dışı bırakabilmek `<IsTransformWebConfigDisabled>` `true`için, ayarlanan özelliği ekleyin.
 
 ```xml
 <PropertyGroup>
@@ -96,11 +96,11 @@ Hizmet yalnızca arka plan görevlerini (örneğin, [barındırılan hizmetler](
 </PropertyGroup>
 ```
 
-### <a name="self-contained-deployment-scd"></a>Kendi içinde dağıtım (SCD)
+### <a name="self-contained-deployment-scd"></a>Bağımsız dağıtım (SCD)
 
-Kendinden bağımsız dağıtım (SCD), ana bilgisayar sisteminde paylaşılan bir Framework varlığına güvenmez. Çalışma zamanı ve uygulamanın bağımlılıkları uygulamayla birlikte dağıtılır.
+Bağımsız dağıtım (SCD), ana bilgisayar sisteminde paylaşılan bir çerçevenin varlığına güvenmez. Çalışma süresi ve uygulamanın bağımlılıkları uygulamayla birlikte dağıtılır.
 
-Hedef Framework 'ü içeren `<PropertyGroup>` bir Windows [çalışma zamanı tanımlayıcısı (RID)](/dotnet/core/rid-catalog) bulunur:
+Bir Windows [Runtime Tanımlayıcısı (RID)](/dotnet/core/rid-catalog) `<PropertyGroup>` hedef çerçeveyi içeren dahildir:
 
 ```xml
 <RuntimeIdentifier>win7-x64</RuntimeIdentifier>
@@ -108,53 +108,53 @@ Hedef Framework 'ü içeren `<PropertyGroup>` bir Windows [çalışma zamanı ta
 
 Birden çok RID için yayımlamak için:
 
-* RID 'leri, noktalı virgülle ayrılmış bir liste olarak belirtin.
-* [\<Runtimetanýmlayýcýtanımlayıcıları >](/dotnet/core/tools/csproj#runtimeidentifiers) (plural) için özellik adını kullanın.
+* RID'leri yarı sütunlu sınırlı bir listede sağlayın.
+* [ \<RuntimeIdentifiers>](/dotnet/core/tools/csproj#runtimeidentifiers) (çoğul) özellik adını kullanın.
 
-Daha fazla bilgi için bkz. [.NET Core RID kataloğu](/dotnet/core/rid-catalog).
+Daha fazla bilgi için [.NET Core RID Kataloğu'na](/dotnet/core/rid-catalog)bakın.
 
-## <a name="service-user-account"></a>Hizmet Kullanıcı hesabı
+## <a name="service-user-account"></a>Hizmet kullanıcı hesabı
 
-Bir hizmet için Kullanıcı hesabı oluşturmak için, bir yönetim PowerShell 6 komut kabuğundan [New-LocalUser](/powershell/module/microsoft.powershell.localaccounts/new-localuser) cmdlet 'ini kullanın.
+Bir hizmet için kullanıcı hesabı oluşturmak için, yönetimsel powershell 6 komut kabuğundan [Yeni-LocalUser](/powershell/module/microsoft.powershell.localaccounts/new-localuser) cmdlet'ini kullanın.
 
-Windows 10 Ekim 2018 Güncelleştirmesi (sürüm 1809/Build 10.0.17763) veya sonraki sürümler:
+Windows 10 Ekim 2018 Güncelleştirmesi'nde (sürüm 1809/build 10.0.17763) veya daha sonra:
 
 ```powershell
 New-LocalUser -Name {SERVICE NAME}
 ```
 
-Windows 10 Ekim 2018 (sürüm 1809/Build 10.0.17763) sürümünden önceki Windows IŞLETIM sistemlerinde:
+Windows 10 Ekim 2018 Güncelleştirmesinden önceki Windows İşletim Sistemi'nde (sürüm 1809/build 10.0.17763):
 
 ```console
 powershell -Command "New-LocalUser -Name {SERVICE NAME}"
 ```
 
-İstendiğinde [güçlü bir parola](/windows/security/threat-protection/security-policy-settings/password-must-meet-complexity-requirements) sağlayın.
+İstendiğinde güçlü bir [parola](/windows/security/threat-protection/security-policy-settings/password-must-meet-complexity-requirements) sağlayın.
 
-`-AccountExpires` parametresi [New-LocalUser](/powershell/module/microsoft.powershell.localaccounts/new-localuser) cmdlet 'ine bir süre sonu <xref:System.DateTime>sağlanmamışsa hesabın süresi dolmaz.
+Parametre, sona ermiş <xref:System.DateTime> [yeni yerel kullanıcı](/powershell/module/microsoft.powershell.localaccounts/new-localuser) cmdlet'e sağatılmadığı sürece, hesabın süresi dolmaz. `-AccountExpires`
 
-Daha fazla bilgi için bkz. [Microsoft. PowerShell. LocalAccounts](/powershell/module/microsoft.powershell.localaccounts/) ve [hizmet Kullanıcı hesapları](/windows/desktop/services/service-user-accounts).
+Daha fazla bilgi için [Microsoft.PowerShell.LocalAccounts](/powershell/module/microsoft.powershell.localaccounts/) ve [Hizmet Kullanıcı Hesapları'na](/windows/desktop/services/service-user-accounts)bakın.
 
-Active Directory kullanırken kullanıcıları yönetmeye yönelik alternatif bir yaklaşım, yönetilen hizmet hesaplarını kullanmaktır. Daha fazla bilgi için bkz. [Grup yönetilen hizmet hesaplarına genel bakış](/windows-server/security/group-managed-service-accounts/group-managed-service-accounts-overview).
+Active Directory kullanırken kullanıcıları yönetmek için alternatif bir yaklaşım Yönetilen Hizmet Hesapları kullanmaktır. Daha fazla bilgi için [Grup Yönetilen Hizmet Hesaplarına Genel Bakış'a](/windows-server/security/group-managed-service-accounts/group-managed-service-accounts-overview)bakın.
 
 ## <a name="log-on-as-a-service-rights"></a>Hizmet hakları olarak oturum açma
 
-Hizmet Kullanıcı hesabı için *hizmet hakları olarak oturum* açma oluşturmak için:
+Bir hizmet kullanıcı hesabı için hizmet hakları *olarak Oturum Açma'yı* kurmak için:
 
-1. Yerel Güvenlik Ilkesi düzenleyicisini, *secpol. msc*' i çalıştırarak açın.
-1. **Yerel ilkeler** düğümünü genişletin ve **Kullanıcı hakları ataması**' nı seçin.
-1. **Hizmet olarak oturum** açma ilkesi açın.
-1. **Kullanıcı veya Grup Ekle**' yi seçin.
-1. Aşağıdaki yaklaşımlardan birini kullanarak nesne adını (Kullanıcı hesabı) sağlayın:
-   1. Kullanıcı hesabını (`{DOMAIN OR COMPUTER NAME\USER}`) nesne adı alanına yazın ve kullanıcıyı ilkeye eklemek için **Tamam** ' ı seçin.
-   1. **Gelişmiş**'i seçin. **Şimdi bul**' u seçin. Listeden Kullanıcı hesabını seçin. **Tamam**’ı seçin. Kullanıcıyı ilkeye eklemek için yeniden **Tamam ' ı** seçin.
-1. Değişiklikleri kabul etmek için **Tamam ' ı** veya **Uygula** ' yı seçin.
+1. *Secpol.msc*çalıştırarak Yerel Güvenlik Politikası düzenleyicisini açın.
+1. Yerel **İlkeler** düğümünü genişletin ve **Kullanıcı Hakları Ataması'nı**seçin.
+1. Hizmet ilkesi **olarak Oturum Aç'ı** açın.
+1. **Kullanıcı veya Grup Ekle'yi**seçin.
+1. Aşağıdaki yaklaşımlardan birini kullanarak nesne adını (kullanıcı hesabı) sağlayın:
+   1. Nesne adı alanına`{DOMAIN OR COMPUTER NAME\USER}`kullanıcı hesabı ( ) yazın ve kullanıcıyı ilkeye eklemek için **Tamam'ı** seçin.
+   1. **Gelişmiş**'i seçin. **Şimdi Bul'u**seçin. Listeden kullanıcı hesabını seçin. **Tamam'ı**seçin. Kullanıcıyı ilkeye eklemek için tekrar **Tamam'ı** seçin.
+1. Değişiklikleri kabul etmek için **Tamam** veya **Uygula'yı** seçin.
 
-## <a name="create-and-manage-the-windows-service"></a>Windows hizmetini oluşturma ve yönetme
+## <a name="create-and-manage-the-windows-service"></a>Windows Hizmeti oluşturma ve yönetme
 
-### <a name="create-a-service"></a>Bir hizmet oluşturma
+### <a name="create-a-service"></a>Hizmet oluşturma
 
-Bir hizmeti kaydetmek için PowerShell komutlarını kullanın. Bir yönetim PowerShell 6 komut kabuğundan aşağıdaki komutları yürütün:
+Bir hizmeti kaydetmek için PowerShell komutlarını kullanın. İdari powershell 6 komut uyruktan aşağıdaki komutları uygulayın:
 
 ```powershell
 $acl = Get-Acl "{EXE PATH}"
@@ -166,14 +166,14 @@ $acl | Set-Acl "{EXE PATH}"
 New-Service -Name {SERVICE NAME} -BinaryPathName {EXE FILE PATH} -Credential {DOMAIN OR COMPUTER NAME\USER} -Description "{DESCRIPTION}" -DisplayName "{DISPLAY NAME}" -StartupType Automatic
 ```
 
-* Ana bilgisayardaki uygulamanın klasörünün yolunu &ndash; `{EXE PATH}` (örneğin, `d:\myservice`). Uygulamanın yürütülebilir dosyasını yola eklemeyin. Sondaki eğik çizgi gerekli değildir.
-* `{DOMAIN OR COMPUTER NAME\USER}` &ndash; hizmet Kullanıcı hesabı (örneğin, `Contoso\ServiceUser`).
-* `{SERVICE NAME}` &ndash; hizmet adı (örneğin, `MyService`).
-* uygulamanın yürütülebilir yolunu &ndash; `{EXE FILE PATH}` (örneğin, `d:\myservice\myservice.exe`). Yürütülebilir dosyanın dosya adını uzantısına ekleyin.
-* `{DESCRIPTION}` &ndash; hizmet açıklaması (örneğin, `My sample service`).
-* `{DISPLAY NAME}` &ndash; hizmet görünen adı (örneğin, `My Service`).
+* `{EXE PATH}`&ndash; Uygulamanın ana bilgisayardaki klasörüne giden yol `d:\myservice`(örneğin, ). Uygulamanın çalıştırılabilir uygulamasını yola eklemeyin. İzbırakan bir kesik gerekli değildir.
+* `{DOMAIN OR COMPUTER NAME\USER}`&ndash; Hizmet kullanıcı hesabı (örneğin, `Contoso\ServiceUser`).
+* `{SERVICE NAME}`&ndash; Hizmet adı (örneğin, `MyService`).
+* `{EXE FILE PATH}`&ndash; Uygulamanın çalıştırılabilir yolu (örneğin, `d:\myservice\myservice.exe`). Yürütülebilir dosya adını uzantılı olarak ekleyin.
+* `{DESCRIPTION}`&ndash; Hizmet açıklaması (örneğin, `My sample service`).
+* `{DISPLAY NAME}`&ndash; Hizmet görüntü adı (örneğin, `My Service`).
 
-### <a name="start-a-service"></a>Hizmet başlatma
+### <a name="start-a-service"></a>Bir hizmet başlatın
 
 Aşağıdaki PowerShell 6 komutuyla bir hizmet başlatın:
 
@@ -181,159 +181,159 @@ Aşağıdaki PowerShell 6 komutuyla bir hizmet başlatın:
 Start-Service -Name {SERVICE NAME}
 ```
 
-Komutun başlatılması birkaç saniye sürer.
+Komutun hizmeti başlatması birkaç saniye sürer.
 
-### <a name="determine-a-services-status"></a>Hizmetin durumunu belirleme
+### <a name="determine-a-services-status"></a>Bir hizmetin durumunu belirleme
 
-Bir hizmetin durumunu denetlemek için aşağıdaki PowerShell 6 komutunu kullanın:
+Bir hizmetin durumunu kontrol etmek için aşağıdaki PowerShell 6 komutunu kullanın:
 
 ```powershell
 Get-Service -Name {SERVICE NAME}
 ```
 
-Durum, aşağıdaki değerlerden biri olarak bildirilir:
+Durum aşağıdaki değerlerden biri olarak bildirilir:
 
 * `Starting`
 * `Running`
 * `Stopping`
 * `Stopped`
 
-### <a name="stop-a-service"></a>Bir hizmeti durdur
+### <a name="stop-a-service"></a>Bir hizmet durdurun
 
-Aşağıdaki PowerShell 6 komutuyla bir hizmeti durdurun:
+Aşağıdaki Powershell 6 komutuna sahip bir hizmeti durdurun:
 
 ```powershell
 Stop-Service -Name {SERVICE NAME}
 ```
 
-### <a name="remove-a-service"></a>Hizmeti Kaldır
+### <a name="remove-a-service"></a>Bir hizmeti kaldırma
 
-Bir hizmeti durdurmak için kısa bir gecikmeden sonra, aşağıdaki PowerShell 6 komutuyla bir hizmeti kaldırın:
+Bir hizmeti durdurmak için kısa bir gecikmeden sonra, aşağıdaki Powershell 6 komutuna sahip bir hizmeti kaldırın:
 
 ```powershell
 Remove-Service -Name {SERVICE NAME}
 ```
 
-## <a name="proxy-server-and-load-balancer-scenarios"></a>Ara sunucu ve yük dengeleyici senaryoları
+## <a name="proxy-server-and-load-balancer-scenarios"></a>Proxy sunucusu ve yük dengeleyici senaryoları
 
-Internet 'ten veya şirket ağından gelen isteklerle etkileşime geçen ve bir ara sunucu veya yük dengeleyicinin arkasındaki Hizmetler ek yapılandırma gerektirebilir. Daha fazla bilgi için bkz. <xref:host-and-deploy/proxy-load-balancer>.
+Internet'ten veya şirket ağından gelen isteklerle etkileşimde olan ve proxy veya yük dengeleyicisinin arkasında olan hizmetler ek yapılandırma gerektirebilir. Daha fazla bilgi için bkz. <xref:host-and-deploy/proxy-load-balancer>.
 
 ## <a name="configure-endpoints"></a>Uç noktaları yapılandırma
 
-Varsayılan olarak, ASP.NET Core `http://localhost:5000`bağlar. `ASPNETCORE_URLS` ortam değişkenini ayarlayarak URL 'YI ve bağlantı noktasını yapılandırın.
+Varsayılan olarak, ASP.NET Core `http://localhost:5000`bağlanır. Ortam değişkenini ayarlayarak `ASPNETCORE_URLS` URL'yi ve bağlantı noktasını yapılandırın.
 
 Ek URL ve bağlantı noktası yapılandırma yaklaşımları için ilgili sunucu makalesine bakın:
 
 * <xref:fundamentals/servers/kestrel#endpoint-configuration>
 * <xref:fundamentals/servers/httpsys#configure-windows-server>
 
-Yukarıdaki kılavuz, HTTPS uç noktaları için desteği içerir. Örneğin, bir Windows hizmeti ile kimlik doğrulaması kullanıldığında HTTPS için uygulamayı yapılandırın.
+Önceki kılavuz, HTTPS uç noktaları nın desteğini kapsar. Örneğin, kimlik doğrulama bir Windows Hizmeti ile kullanıldığında uygulamayı HTTPS için yapılandırın.
 
 > [!NOTE]
-> Hizmet uç noktasının güvenliğini sağlamak için ASP.NET Core HTTPS geliştirme sertifikası kullanılması desteklenmez.
+> Bir hizmet bitiş noktasını güvence altına almak için ASP.NET Core HTTPS geliştirme sertifikasının kullanımı desteklenmez.
 
 ## <a name="current-directory-and-content-root"></a>Geçerli dizin ve içerik kökü
 
-Bir Windows hizmeti için <xref:System.IO.Directory.GetCurrentDirectory*> çağırarak döndürülen geçerli çalışma dizini *C:\\windows\\system32* klasörüdür. *System32* klasörü, bir hizmetin dosyalarını (örneğin, ayarlar dosyaları) depolamak için uygun bir konum değildir. Bir hizmetin varlık ve ayar dosyalarını sürdürmek ve erişmek için aşağıdaki yaklaşımlardan birini kullanın.
+Bir Windows Hizmeti için <xref:System.IO.Directory.GetCurrentDirectory*> arayarak döndürülen geçerli çalışma dizini *C:\\WINDOWS\\system32* klasörüdür. *System32* klasörü, bir hizmetin dosyalarını depolamak için uygun bir konum değildir (örneğin, ayarlar dosyaları). Bir hizmetin varlıklarını ve ayar dosyalarını korumak ve bu dosyalara erişmek için aşağıdaki yaklaşımlardan birini kullanın.
 
 ### <a name="use-contentrootpath-or-contentrootfileprovider"></a>ContentRootPath veya ContentRootFileProvider kullanın
 
-Bir uygulamanın kaynaklarını bulmak için [ıhostenvironment. ContentRootPath](xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootPath) veya <xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootFileProvider> kullanın.
+[IHostEnvironment.ContentRootPath'i](xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootPath) kullanın veya <xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootFileProvider> bir uygulamanın kaynaklarını bulun.
 
-Uygulama bir hizmet olarak çalıştığında, <xref:Microsoft.Extensions.Hosting.WindowsServiceLifetimeHostBuilderExtensions.UseWindowsService*> <xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootPath> [AppContext. BaseDirectory](xref:System.AppContext.BaseDirectory)olarak ayarlar.
+Uygulama bir hizmet olarak <xref:Microsoft.Extensions.Hosting.WindowsServiceLifetimeHostBuilderExtensions.UseWindowsService*> çalıştığında, <xref:Microsoft.Extensions.Hosting.IHostEnvironment.ContentRootPath> [AppContext.BaseDirectory'ye](xref:System.AppContext.BaseDirectory)ayarlar.
 
-Uygulamanın varsayılan ayar dosyaları, *appSettings. JSON* ve *appSettings. { '. JSON ortamı*, [konak oluşturma sırasında Createdefaultbuilder](xref:fundamentals/host/generic-host#set-up-a-host)' ı çağırarak uygulamanın içerik kökünden yüklenir.
+Uygulamanın varsayılan ayarları dosyaları, *appsettings.json* ve *appsettings.{ Environment}.json*, [ana bilgisayar inşaatı sırasında CreateDefaultBuilder'ı](xref:fundamentals/host/generic-host#set-up-a-host)arayarak uygulamanın içerik kökünden yüklenir.
 
-<xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*>geliştirici kodu tarafından yüklenen diğer ayar dosyaları için, <xref:Microsoft.Extensions.Configuration.FileConfigurationExtensions.SetBasePath*>çağırmanız gerekmez. Aşağıdaki örnekte, *custom_settings. JSON* dosyası uygulamanın içerik kökünde bulunur ve açıkça bir temel yolu ayarlamadan yüklenir:
+Geliştirici koduyla <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*>yüklenen diğer ayarlar için aramanız <xref:Microsoft.Extensions.Configuration.FileConfigurationExtensions.SetBasePath*>gerekmez. Aşağıdaki örnekte, *custom_settings.json* dosyası uygulamanın içerik kökünde bulunur ve açıkça bir temel yol belirlemeden yüklenir:
 
 [!code-csharp[](windows-service/samples_snapshot/CustomSettingsExample.cs?highlight=13)]
 
-Bir Windows hizmeti uygulaması geçerli dizini olarak *C:\\Windows\\system32* klasörünü döndürdüğünden, kaynak yolunu almak için <xref:System.IO.Directory.GetCurrentDirectory*> kullanmayı denemeyin.
+Bir Windows Service <xref:System.IO.Directory.GetCurrentDirectory*> uygulaması *C:\\WINDOWS\\system32* klasörünü geçerli dizini olarak döndürür, çünkü bir kaynak yolu elde etmek için kullanmayı denemeyin.
 
-### <a name="store-a-services-files-in-a-suitable-location-on-disk"></a>Hizmetin dosyalarını diskte uygun bir konumda depolayın
+### <a name="store-a-services-files-in-a-suitable-location-on-disk"></a>Bir hizmetin dosyalarını diskte uygun bir konumda depolama
 
-Dosyaları içeren klasörde <xref:Microsoft.Extensions.Configuration.IConfigurationBuilder> kullanırken <xref:Microsoft.Extensions.Configuration.FileConfigurationExtensions.SetBasePath*> mutlak bir yol belirtin.
+Dosyaları içeren klasöre <xref:Microsoft.Extensions.Configuration.FileConfigurationExtensions.SetBasePath*> bir <xref:Microsoft.Extensions.Configuration.IConfigurationBuilder> kullanırken ile mutlak bir yol belirtin.
 
 ## <a name="troubleshoot"></a>Sorun giderme
 
-Windows hizmet uygulamasının sorunlarını gidermek için bkz. <xref:test/troubleshoot>.
+Bir Windows Hizmeti uygulamasını gidermek <xref:test/troubleshoot>için bkz.
 
 ### <a name="common-errors"></a>Sık karşılaşılan hatalar
 
-* PowerShell 'in eski veya yayın öncesi sürümü kullanımda.
-* Kayıtlı hizmet, [DotNet Publish](/dotnet/core/tools/dotnet-publish) komutundan uygulamanın **yayımlanmış** çıktısını kullanmaz. [DotNet Build](/dotnet/core/tools/dotnet-build) komutunun çıkışı, uygulama dağıtımı için desteklenmez. Yayımlanan varlıklar, dağıtım türüne bağlı olarak aşağıdaki klasörlerden birinde bulunur:
-  * *bin/Release/{Target Framework}/Publish* (FDD)
-  * *bin/Release/{Target Framework}/{RUNTIME tanımlayıcısı}/Publish* (SCD)
-* Hizmet çalışır durumda değil.
-* Uygulamanın kullandığı kaynakların yolları (örneğin, sertifikalar) yanlış. Windows hizmetinin temel yolu *c:\\windows\\system32*' dir.
-* Kullanıcı, hizmet hakları *olarak oturum* açma hakkına sahip değil.
-* `New-Service` PowerShell komutu çalıştırılırken kullanıcının parolasının kullanım dışı veya yanlış şekilde geçirilmesi.
-* Uygulama ASP.NET Core kimlik doğrulaması gerektiriyor, ancak güvenli bağlantılar (HTTPS) için yapılandırılmamış.
-* İstek URL 'SI bağlantı noktası yanlış veya uygulamada doğru şekilde yapılandırılmamış.
+* PowerShell'in eski veya ön sürüm sürümü kullanımdadır.
+* Kayıtlı hizmet, uygulamanın [yayınlanan dotnet yayımlama](/dotnet/core/tools/dotnet-publish) komutundan **çıkan** çıktısını kullanmaz. [Dotnet yapı](/dotnet/core/tools/dotnet-build) komutunun çıktısı uygulama dağıtımı için desteklenmez. Yayımlanmış varlıklar dağıtım türüne bağlı olarak aşağıdaki klasörlerden birinde bulunur:
+  * *bin/Release/{TARGET FRAMEWORK}/publish* (FDD)
+  * *bin/Release/{TARGET FRAMEWORK}/{RUNTIME IDENTIFIER}/publish* (SCD)
+* Hizmet RUNNING durumunda değil.
+* Uygulamanın kullandığı kaynaklara giden yollar (örneğin, sertifikalar) yanlıştır. Bir Windows Hizmetinin temel yolu *c:\\Windows\\System32.*
+* Kullanıcının hizmet olarak *Oturum* Açma'sı yoktur.
+* PowerShell komutunu çalıştırırken kullanıcının parolasının `New-Service` süresi doldu veya yanlış geçti.
+* Uygulama ASP.NET Çekirdek kimlik doğrulaması gerektirir, ancak güvenli bağlantılar (HTTPS) için yapılandırılmamıştır.
+* İstek URL bağlantı noktası yanlış veya uygulamada doğru yapılandırılmamıştır.
 
-### <a name="system-and-application-event-logs"></a>Sistem ve uygulama olay günlükleri
+### <a name="system-and-application-event-logs"></a>Sistem ve Uygulama Etkinlik Günlükleri
 
-Sistem ve uygulama olay günlüklerine erişin:
+Sistem ve Uygulama Etkinlik Günlüklerine Erişin:
 
-1. Başlat menüsünü açın, *Olay Görüntüleyicisi*araması yapın ve **Olay Görüntüleyicisi** uygulamayı seçin.
-1. **Olay Görüntüleyicisi**, **Windows günlükleri** düğümünü açın.
-1. Sistem olay günlüğünü açmak için **sistem** ' i seçin. Uygulama olay günlüğünü açmak için **uygulama** ' yı seçin.
-1. Başarısız olan uygulama ile ilişkili hataları arayın.
+1. Başlat menüsünü açın, *Olay Görüntüleyicisi'ni*arayın ve **Olay Görüntüleyicisi** uygulamasını seçin.
+1. **Olay Görüntüleyici'de** **Windows Günlükleri** düğümlerini açın.
+1. Sistem Olay Günlüğü'nü açmak için **Sistem'i** seçin. Uygulama Olay Günlüğü'nü açmak için **Uygulama'yı** seçin.
+1. Başarısız uygulamayla ilişkili hataları arayın.
 
-### <a name="run-the-app-at-a-command-prompt"></a>Uygulamayı bir komut isteminde aşağıdakini çalıştırın
+### <a name="run-the-app-at-a-command-prompt"></a>Uygulamayı komut istemiyle çalıştırma
 
-Birçok başlatma hatası olay günlüklerinde yararlı bilgiler oluşturmaz. Bazı hataların nedeni, barındıran sistemde bir komut isteminde uygulamayı çalıştırarak bulabilirsiniz. Uygulamadan ek ayrıntı günlüğe kaydetmek için, [günlük düzeyini](xref:fundamentals/logging/index#log-level) düşürün veya [geliştirme ortamında](xref:fundamentals/environments)uygulamayı çalıştırın.
+Birçok başlangıç hatası olay günlüklerinde yararlı bilgiler üretmez. Bazı hataların nedenini, uygulamayı barındırma sistemindeki bir komut isteminde çalıştırarak bulabilirsiniz. Uygulamadan ek ayrıntı günlüğe kaydetmek [için, günlük düzeyini](xref:fundamentals/logging/index#log-level) düşürün veya [uygulamayı Geliştirme ortamında](xref:fundamentals/environments)çalıştırın.
 
 ### <a name="clear-package-caches"></a>Paket önbelleklerini temizle
 
-Çalışan bir uygulama, geliştirme makinesindeki .NET Core SDK yükseltmeden veya uygulama içindeki paket sürümlerini değiştirirken hemen başarısız olabilir. Bazı durumlarda, ana yükseltme yaparken, bir uygulama tutarsız paketleri kesilebilir. Bu sorunların çoğu, bu yönergeleri izleyerek düzeltilebilir:
+İşleyen bir uygulama, geliştirme makinesindeki .NET Core SDK'yı yükselttikten veya uygulama içindeki paket sürümlerini değiştirdikten hemen sonra başarısız olabilir. Bazı durumlarda, tutarsız paketler büyük yükseltmeler gerçekleştirirken bir uygulamayı bozabilir. Bu sorunların çoğu aşağıdaki yönergeleri izleyerek giderilebilir:
 
 1. *Bin* ve *obj* klasörlerini silin.
-1. Bir komut kabuğundan [DotNet NuGet yerelleri, Tümünü Temizle](/dotnet/core/tools/dotnet-nuget-locals) ' i yürüterek paket önbelleklerini temizleyin.
+1. [Noktanet nuget yerel tüm](/dotnet/core/tools/dotnet-nuget-locals) çalıştırarak paket önbellekleri temizleyin - bir komut kabuğundan temizleyin.
 
-   Paket önbelleklerini Temizleme, [NuGet. exe](https://www.nuget.org/downloads) aracı ile de gerçekleştirilebilir ve komut `nuget locals all -clear`yürütülebilir. *NuGet. exe* , Windows masaüstü işletim sistemiyle birlikte paketlenmiş bir yüklemedir ve [NuGet Web sitesinden](https://www.nuget.org/downloads)ayrı olarak alınmalıdır.
+   Paket önbellekleri takas da [nuget.exe](https://www.nuget.org/downloads) aracı ile gerçekleştirilebilir `nuget locals all -clear`ve komutuyguluyor. *nuget.exe,* Windows masaüstü işletim sistemiyle birlikte yüklenmez ve [NuGet web sitesinden](https://www.nuget.org/downloads)ayrı olarak alınmalıdır.
 
-1. Geri yükle ve projeyi yeniden derleyin.
-1. Uygulamayı yeniden dağıtmadan önce sunucusundaki dağıtım klasöründeki tüm dosyaları silin.
+1. Projeyi geri yükleyin ve yeniden oluşturun.
+1. Uygulamayı yeniden dağıtmadan önce sunucudaki dağıtım klasöründeki tüm dosyaları silin.
 
-### <a name="slow-or-hanging-app"></a>Yavaş veya asılı uygulama
+### <a name="slow-or-hanging-app"></a>Yavaş veya asma uygulaması
 
-*Kilitlenme dökümü* , sistem belleğinin bir anlık görüntüsüdür ve uygulama kilitlenmesinin, başlatma hatasının veya yavaş uygulamanın nedenini belirlemenize yardımcı olabilir.
+*Kilitlenme dökümü,* sistemin belleğindebir anlık görüntüdür ve bir uygulamanın çökmesinin, başlangıç hatasının veya yavaş uygulamanın nedenini belirlemeye yardımcı olabilir.
 
-#### <a name="app-crashes-or-encounters-an-exception"></a>Uygulama kilitleniyor veya bir özel durumla karşılaşırsa
+#### <a name="app-crashes-or-encounters-an-exception"></a>Uygulama çöküyor veya bir özel durumla karşılaşıyor
 
-Windows Hata Bildirimi bir döküm edinin ve çözümleyin [(WER)](/windows/desktop/wer/windows-error-reporting):
+Windows Hata Raporlama [(WER)](/windows/desktop/wer/windows-error-reporting)bir dökümü edinin ve analiz:
 
-1. Kilitlenme döküm dosyalarını `c:\dumps`tutmak için bir klasör oluşturun.
-1. [Enabledökümler PowerShell betiğini](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/scripts/EnableDumps.ps1) uygulama yürütülebilir adıyla çalıştırın:
+1. Kilitlenme döküm dosyalarını '' adresinde `c:\dumps`tutmak için bir klasör oluşturun
+1. [EnableDumps PowerShell komut dosyasını](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/samples/scripts/EnableDumps.ps1) uygulama çalıştırılabilir adla çalıştırın:
 
-   ```console
+   ```powershell
    .\EnableDumps {APPLICATION EXE} c:\dumps
    ```
 
-1. Uygulamayı kilitlenmenin oluşmasına neden olan koşullar altında çalıştırın.
-1. Kilitlenme gerçekleştirildikten sonra, [Disabledökümler PowerShell betiğini](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/scripts/DisableDumps.ps1)çalıştırın:
+1. Uygulamayı çökmenin oluşmasına neden olan koşullar altında çalıştırın.
+1. Çökme oluştuktan sonra, [DisableDumps PowerShell komut dosyası](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/samples/scripts/DisableDumps.ps1)çalıştırın:
 
-   ```console
+   ```powershell
    .\DisableDumps {APPLICATION EXE}
    ```
 
-Uygulama kilitlenmeleri ve döküm koleksiyonu tamamlandıktan sonra, uygulamanın normal olarak sonlandırılmasına izin verilir. PowerShell betiği, WER 'i uygulama başına en fazla beş döküm toplayacak şekilde yapılandırır.
+Bir uygulama çöktükten ve döküm toplama tamamlandıktan sonra, uygulamanın normal olarak sonlandırılmasına izin verilir. PowerShell komut dosyası, WER'i uygulama başına en fazla beş çöplük toplamak üzere yapılandırır.
 
 > [!WARNING]
-> Kilitlenme dökümleri büyük miktarda disk alanı kaplar (her birine kadar çok gigabayt kadar).
+> Kilitlenme dökümleri büyük miktarda disk alanı kapsayabilir (her biri birkaç gigabayta kadar).
 
-#### <a name="app-hangs-fails-during-startup-or-runs-normally"></a>Uygulama askıda kalıyor, başlatma sırasında başarısız oluyor veya normal şekilde çalışıyor
+#### <a name="app-hangs-fails-during-startup-or-runs-normally"></a>Uygulama askıda kalır, başlangıç sırasında başarısız olur veya normal çalışır
 
-Bir uygulama *askıda* kaldığında (yanıt vermeyi keser ancak kilitlenmez), başlatma sırasında başarısız olur veya normal şekilde çalışır. [Kullanıcı modu döküm dosyaları:](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool) döküm oluşturmak için uygun bir aracı seçmek üzere en iyi aracı seçme.
+Bir uygulama *askıda kaldığında* (yanıt vermeyi durdurur ancak kilitlenmez), başlangıç sırasında başarısız olduğunda veya normal olarak çalıştığında, [bkz.](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)
 
-#### <a name="analyze-the-dump"></a>Dökümü çözümle
+#### <a name="analyze-the-dump"></a>Dökümü analiz edin
 
-Bir döküm çeşitli yaklaşımlar kullanılarak analiz edilebilir. Daha fazla bilgi için bkz. [Kullanıcı modu döküm dosyasını çözümleme](/windows-hardware/drivers/debugger/analyzing-a-user-mode-dump-file).
+Bir dökümü çeşitli yaklaşımlar kullanılarak analiz edilebilir. Daha fazla bilgi için [bkz.](/windows-hardware/drivers/debugger/analyzing-a-user-mode-dump-file)
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [Kestrel uç noktası yapılandırması](xref:fundamentals/servers/kestrel#endpoint-configuration) (https yapılandırması ve SNI desteği içerir)
+* [Kestrel uç nokta yapılandırması](xref:fundamentals/servers/kestrel#endpoint-configuration) (HTTPS yapılandırması ve SNI desteği içerir)
 * <xref:fundamentals/host/generic-host>
 * <xref:test/troubleshoot>
 
@@ -341,45 +341,45 @@ Bir döküm çeşitli yaklaşımlar kullanılarak analiz edilebilir. Daha fazla 
 
 ::: moniker range="= aspnetcore-2.2"
 
-Bir ASP.NET Core uygulaması, IIS kullanmadan Windows [hizmeti](/dotnet/framework/windows-services/introduction-to-windows-service-applications) olarak Windows üzerinde barındırılabilir. Windows hizmeti olarak barındırıldığı zaman, uygulama otomatik olarak sunucu yeniden başlatıldıktan sonra başlatılır.
+Bir ASP.NET Core uygulaması, IIS kullanmadan [Windows'da Windows Hizmeti](/dotnet/framework/windows-services/introduction-to-windows-service-applications) olarak barındırılabilir. Windows Hizmeti olarak barındırıldığında, uygulama sunucu yeniden başlatıldıktan sonra otomatik olarak başlar.
 
-[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
+[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ( nasıl[indirilir](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
-* [ASP.NET Core SDK 2,1 veya üzeri](https://dotnet.microsoft.com/download)
-* [PowerShell 6,2 veya üzeri](https://github.com/PowerShell/PowerShell)
+* [ASP.NET Core SDK 2.1 veya sonrası](https://dotnet.microsoft.com/download)
+* [PowerShell 6.2 veya sonrası](https://github.com/PowerShell/PowerShell)
 
 ## <a name="app-configuration"></a>Uygulama yapılandırması
 
-Uygulama [Microsoft. AspNetCore. Hosting. WindowsServices](https://www.nuget.org/packages/Microsoft.AspNetCore.Hosting.WindowsServices) ve [Microsoft. Extensions. Logging. EventLog](https://www.nuget.org/packages/Microsoft.Extensions.Logging.EventLog)için paket başvuruları gerektirir.
+Uygulama [Microsoft.AspNetCore.Hosting.WindowsServices](https://www.nuget.org/packages/Microsoft.AspNetCore.Hosting.WindowsServices) ve [Microsoft.Extensions.Logging.EventLog](https://www.nuget.org/packages/Microsoft.Extensions.Logging.EventLog)için paket referansları gerektirir.
 
-Bir hizmetin dışında çalışırken test ve hata ayıklamak için, uygulamanın bir hizmet olarak mı yoksa bir konsol uygulaması mi çalıştığını belirleme kodu ekleyin. Hata ayıklayıcının ekli olduğunu veya `--console` bir anahtarın mevcut olup olmadığını denetleyin. Her iki koşul de geçerliyse (uygulama hizmet olarak çalıştırılmadıysa) <xref:Microsoft.AspNetCore.Hosting.WebHostExtensions.Run*>çağırın. Koşullar yanlışsa (uygulama bir hizmet olarak çalıştırılır):
+Bir hizmetin dışında çalışırken test etmek ve hata ayıklamak için, uygulamanın bir hizmet veya konsol uygulaması olarak mı çalıştığını belirlemek için kod ekleyin. Hata ayıklayıcının bağlı olup olmadığını `--console` veya bir anahtarın olup olmadığını denetleyin. Her iki koşul da doğruysa (uygulama bir hizmet <xref:Microsoft.AspNetCore.Hosting.WebHostExtensions.Run*>olarak çalıştırılmıyorsa), arayın. Koşullar yanlışsa (uygulama bir hizmet olarak çalıştırılır):
 
-* <xref:System.IO.Directory.SetCurrentDirectory*> çağırın ve uygulamanın yayımlanan konumunun yolunu kullanın. Bir Windows hizmeti uygulaması, <xref:System.IO.Directory.GetCurrentDirectory*> çağrıldığında *C:\\windows\\system32* klasörünü döndürdüğünden yolu almak için <xref:System.IO.Directory.GetCurrentDirectory*> çağırmayın. Daha fazla bilgi için [geçerli dizin ve içerik kökü](#current-directory-and-content-root) bölümüne bakın. Bu adım uygulama `CreateWebHostBuilder`' de yapılandırılmadan önce gerçekleştirilir.
-* Uygulamayı bir hizmet olarak çalıştırmak için <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*> çağırın.
+* Uygulamanın yayımlanmış konumuna giden yolu arayın <xref:System.IO.Directory.SetCurrentDirectory*> ve kullanın. Bir Windows <xref:System.IO.Directory.GetCurrentDirectory*> Service uygulaması çağrıldığında *C:\\WINDOWS\\system32* klasörünü döndürdüğünde <xref:System.IO.Directory.GetCurrentDirectory*> yolu almak için aramayın. Daha fazla bilgi için [Geçerli dizini ve içerik kökü](#current-directory-and-content-root) bölümüne bakın. Bu adım, uygulama 'de `CreateWebHostBuilder`yapılandırılmadan önce gerçekleştirilir.
+* Uygulamayı <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*> hizmet olarak çalıştırmak için arayın.
 
-Komut satırı [yapılandırma sağlayıcısı](xref:fundamentals/configuration/index#command-line-configuration-provider) komut satırı bağımsız değişkenleri için ad-değer çiftleri gerektirdiğinden, <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> bağımsız değişkenleri almadan önce `--console` anahtarı bağımsız değişkenlerden kaldırılır.
+Komut [satırı Yapılandırma Sağlayıcısı](xref:fundamentals/configuration/index#command-line-configuration-provider) komut satırı bağımsız değişkenleri için ad `--console` değeri çiftleri gerektirdiğinden, geçiş bağımsız değişkenleri almadan önce <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> bağımsız değişkenlerden kaldırılır.
 
-Windows olay günlüğü 'ne yazmak için, <xref:Microsoft.AspNetCore.Hosting.WebHostBuilder.ConfigureLogging*>EventLog sağlayıcısını ekleyin. Günlük kaydı düzeyini appSettings 'teki `Logging:LogLevel:Default` anahtarıyla ayarlayın *. Production. JSON* dosyası.
+Windows Olay Günlüğü'ne yazmak için <xref:Microsoft.AspNetCore.Hosting.WebHostBuilder.ConfigureLogging*>EventLog sağlayıcısını ekleyin. Uygulama ayarlarındaki `Logging:LogLevel:Default` anahtarla günlük düzeyini *ayarlayın. Production.json* dosyası.
 
-Örnek uygulamadan aşağıdaki örnekte, uygulama içindeki ömür olaylarını işlemek için <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*> yerine `RunAsCustomService` çağırılır. Daha fazla bilgi için [olayları başlatma ve durdurma olaylarını](#handle-starting-and-stopping-events) inceleyin bölümüne bakın.
+Örnek uygulamadan aşağıdaki örnekte, `RunAsCustomService` uygulama <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*> içindeki yaşam boyu olayları işlemek için yerine çağrılır. Daha fazla bilgi [için, Tanıtıcı başlangıç ve durdurma olayları](#handle-starting-and-stopping-events) bölümüne bakın.
 
 [!code-csharp[](windows-service/samples/2.x/AspNetCoreService/Program.cs?name=snippet_Program)]
 
 ## <a name="deployment-type"></a>Dağıtım türü
 
-Dağıtım senaryoları hakkında bilgi ve öneriler için bkz. [.NET Core uygulama dağıtımı](/dotnet/core/deploying/).
+Dağıtım senaryoları hakkında bilgi ve tavsiye için [bkz.](/dotnet/core/deploying/)
 
 ### <a name="sdk"></a>SDK
 
-Razor Pages veya MVC çerçevelerini kullanan bir Web uygulaması tabanlı hizmet için, proje dosyasında Web SDK 'sını belirtin:
+Razor Pages veya MVC çerçevelerini kullanan web uygulaması tabanlı bir hizmet için, proje dosyasında Web SDK'yı belirtin:
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
 ```
 
-Hizmet yalnızca arka plan görevlerini (örneğin, [barındırılan hizmetler](xref:fundamentals/host/hosted-services)) yürütülüyorsa, proje dosyasında çalışan SDK 'sını belirtin:
+Hizmet yalnızca arka plan görevlerini yürütürse (örneğin, [barındırılan hizmetler),](xref:fundamentals/host/hosted-services)Proje dosyasında İşçi SDK'sını belirtin:
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Worker">
@@ -387,11 +387,11 @@ Hizmet yalnızca arka plan görevlerini (örneğin, [barındırılan hizmetler](
 
 ### <a name="framework-dependent-deployment-fdd"></a>Çerçeveye bağımlı dağıtım (FDD)
 
-Çerçeveye bağımlı dağıtım (FDD), hedef sistemde .NET Core 'un paylaşılan sistem genelindeki bir sürümünün varlığına dayanır. Bu makaledeki kılavuzdan sonra FDD senaryosu benimsendiği zaman SDK, *çerçeveye bağlı yürütülebilir dosya*olarak adlandırılan yürütülebilir bir dosya ( *. exe*) oluşturur.
+Çerçeveye bağımlı dağıtım (FDD), hedef sistemde .NET Core'un sistem genelinde paylaşılan bir sürümünün bulunmasına dayanır. FDD senaryosu bu makaledeki kılavuzdan sonra kabul edildiğinde, *SDK, çerçeveye bağımlı yürütülebilir*olarak adlandırılan bir yürütülebilir (*.exe*) üretir.
 
-Windows [çalışma zamanı tanımlayıcısı (RID)](/dotnet/core/rid-catalog) ([\<runtimeıdentifier >](/dotnet/core/tools/csproj#runtimeidentifier)), hedef Framework 'ü içerir. Aşağıdaki örnekte, RID `win7-x64`olarak ayarlanmıştır. `<SelfContained>` özelliği `false`olarak ayarlanır. Bu özellikler SDK 'nın Windows için bir yürütülebilir ( *. exe*) dosya ve paylaşılan .NET Core çerçevesine bağlı bir uygulama oluşturmasını ister.
+Windows [Runtime Identifier (RID)](/dotnet/core/rid-catalog) ([\<RuntimeIdentifier>) ](/dotnet/core/tools/csproj#runtimeidentifier)hedef çerçeveiçerir. Aşağıdaki örnekte, RID `win7-x64`olarak ayarlanır. `false`Özellik. `<SelfContained>` Bu özellikler, SDK'ya Windows için yürütülebilir (*.exe*) dosyası ve paylaşılan .NET Core çerçevesine bağlı bir uygulama oluşturması talimatını verir.
 
-Bir ASP.NET Core uygulaması yayımlandığında normalde üretilen bir *Web. config* dosyası, Windows Hizmetleri uygulaması için gereksizdir. *Web. config* dosyasının oluşturulmasını devre dışı bırakmak için `<IsTransformWebConfigDisabled>` özelliği `true`olarak ayarlayın.
+Normalde bir ASP.NET Core uygulaması yayımlarken üretilen *bir web.config* dosyası, bir Windows Hizmetleri uygulaması için gereksizdir. *web.config* dosyasının oluşturulmasını devre dışı bırakabilmek `<IsTransformWebConfigDisabled>` `true`için, ayarlanan özelliği ekleyin.
 
 ```xml
 <PropertyGroup>
@@ -402,11 +402,11 @@ Bir ASP.NET Core uygulaması yayımlandığında normalde üretilen bir *Web. co
 </PropertyGroup>
 ```
 
-### <a name="self-contained-deployment-scd"></a>Kendi içinde dağıtım (SCD)
+### <a name="self-contained-deployment-scd"></a>Bağımsız dağıtım (SCD)
 
-Kendinden bağımsız dağıtım (SCD), ana bilgisayar sisteminde paylaşılan bir Framework varlığına güvenmez. Çalışma zamanı ve uygulamanın bağımlılıkları uygulamayla birlikte dağıtılır.
+Bağımsız dağıtım (SCD), ana bilgisayar sisteminde paylaşılan bir çerçevenin varlığına güvenmez. Çalışma süresi ve uygulamanın bağımlılıkları uygulamayla birlikte dağıtılır.
 
-Hedef Framework 'ü içeren `<PropertyGroup>` bir Windows [çalışma zamanı tanımlayıcısı (RID)](/dotnet/core/rid-catalog) bulunur:
+Bir Windows [Runtime Tanımlayıcısı (RID)](/dotnet/core/rid-catalog) `<PropertyGroup>` hedef çerçeveyi içeren dahildir:
 
 ```xml
 <RuntimeIdentifier>win7-x64</RuntimeIdentifier>
@@ -414,59 +414,59 @@ Hedef Framework 'ü içeren `<PropertyGroup>` bir Windows [çalışma zamanı ta
 
 Birden çok RID için yayımlamak için:
 
-* RID 'leri, noktalı virgülle ayrılmış bir liste olarak belirtin.
-* [\<Runtimetanýmlayýcýtanımlayıcıları >](/dotnet/core/tools/csproj#runtimeidentifiers) (plural) için özellik adını kullanın.
+* RID'leri yarı sütunlu sınırlı bir listede sağlayın.
+* [ \<RuntimeIdentifiers>](/dotnet/core/tools/csproj#runtimeidentifiers) (çoğul) özellik adını kullanın.
 
-Daha fazla bilgi için bkz. [.NET Core RID kataloğu](/dotnet/core/rid-catalog).
+Daha fazla bilgi için [.NET Core RID Kataloğu'na](/dotnet/core/rid-catalog)bakın.
 
-`<SelfContained>` Özellik `true`olarak ayarlanır:
+Bir `<SelfContained>` özellik ayarlanır: `true`
 
 ```xml
 <SelfContained>true</SelfContained>
 ```
 
-## <a name="service-user-account"></a>Hizmet Kullanıcı hesabı
+## <a name="service-user-account"></a>Hizmet kullanıcı hesabı
 
-Bir hizmet için Kullanıcı hesabı oluşturmak için, bir yönetim PowerShell 6 komut kabuğundan [New-LocalUser](/powershell/module/microsoft.powershell.localaccounts/new-localuser) cmdlet 'ini kullanın.
+Bir hizmet için kullanıcı hesabı oluşturmak için, yönetimsel powershell 6 komut kabuğundan [Yeni-LocalUser](/powershell/module/microsoft.powershell.localaccounts/new-localuser) cmdlet'ini kullanın.
 
-Windows 10 Ekim 2018 Güncelleştirmesi (sürüm 1809/Build 10.0.17763) veya sonraki sürümler:
+Windows 10 Ekim 2018 Güncelleştirmesi'nde (sürüm 1809/build 10.0.17763) veya daha sonra:
 
 ```powershell
 New-LocalUser -Name {SERVICE NAME}
 ```
 
-Windows 10 Ekim 2018 (sürüm 1809/Build 10.0.17763) sürümünden önceki Windows IŞLETIM sistemlerinde:
+Windows 10 Ekim 2018 Güncelleştirmesinden önceki Windows İşletim Sistemi'nde (sürüm 1809/build 10.0.17763):
 
 ```console
 powershell -Command "New-LocalUser -Name {SERVICE NAME}"
 ```
 
-İstendiğinde [güçlü bir parola](/windows/security/threat-protection/security-policy-settings/password-must-meet-complexity-requirements) sağlayın.
+İstendiğinde güçlü bir [parola](/windows/security/threat-protection/security-policy-settings/password-must-meet-complexity-requirements) sağlayın.
 
-`-AccountExpires` parametresi [New-LocalUser](/powershell/module/microsoft.powershell.localaccounts/new-localuser) cmdlet 'ine bir süre sonu <xref:System.DateTime>sağlanmamışsa hesabın süresi dolmaz.
+Parametre, sona ermiş <xref:System.DateTime> [yeni yerel kullanıcı](/powershell/module/microsoft.powershell.localaccounts/new-localuser) cmdlet'e sağatılmadığı sürece, hesabın süresi dolmaz. `-AccountExpires`
 
-Daha fazla bilgi için bkz. [Microsoft. PowerShell. LocalAccounts](/powershell/module/microsoft.powershell.localaccounts/) ve [hizmet Kullanıcı hesapları](/windows/desktop/services/service-user-accounts).
+Daha fazla bilgi için [Microsoft.PowerShell.LocalAccounts](/powershell/module/microsoft.powershell.localaccounts/) ve [Hizmet Kullanıcı Hesapları'na](/windows/desktop/services/service-user-accounts)bakın.
 
-Active Directory kullanırken kullanıcıları yönetmeye yönelik alternatif bir yaklaşım, yönetilen hizmet hesaplarını kullanmaktır. Daha fazla bilgi için bkz. [Grup yönetilen hizmet hesaplarına genel bakış](/windows-server/security/group-managed-service-accounts/group-managed-service-accounts-overview).
+Active Directory kullanırken kullanıcıları yönetmek için alternatif bir yaklaşım Yönetilen Hizmet Hesapları kullanmaktır. Daha fazla bilgi için [Grup Yönetilen Hizmet Hesaplarına Genel Bakış'a](/windows-server/security/group-managed-service-accounts/group-managed-service-accounts-overview)bakın.
 
 ## <a name="log-on-as-a-service-rights"></a>Hizmet hakları olarak oturum açma
 
-Hizmet Kullanıcı hesabı için *hizmet hakları olarak oturum* açma oluşturmak için:
+Bir hizmet kullanıcı hesabı için hizmet hakları *olarak Oturum Açma'yı* kurmak için:
 
-1. Yerel Güvenlik Ilkesi düzenleyicisini, *secpol. msc*' i çalıştırarak açın.
-1. **Yerel ilkeler** düğümünü genişletin ve **Kullanıcı hakları ataması**' nı seçin.
-1. **Hizmet olarak oturum** açma ilkesi açın.
-1. **Kullanıcı veya Grup Ekle**' yi seçin.
-1. Aşağıdaki yaklaşımlardan birini kullanarak nesne adını (Kullanıcı hesabı) sağlayın:
-   1. Kullanıcı hesabını (`{DOMAIN OR COMPUTER NAME\USER}`) nesne adı alanına yazın ve kullanıcıyı ilkeye eklemek için **Tamam** ' ı seçin.
-   1. **Gelişmiş**'i seçin. **Şimdi bul**' u seçin. Listeden Kullanıcı hesabını seçin. **Tamam**’ı seçin. Kullanıcıyı ilkeye eklemek için yeniden **Tamam ' ı** seçin.
-1. Değişiklikleri kabul etmek için **Tamam ' ı** veya **Uygula** ' yı seçin.
+1. *Secpol.msc*çalıştırarak Yerel Güvenlik Politikası düzenleyicisini açın.
+1. Yerel **İlkeler** düğümünü genişletin ve **Kullanıcı Hakları Ataması'nı**seçin.
+1. Hizmet ilkesi **olarak Oturum Aç'ı** açın.
+1. **Kullanıcı veya Grup Ekle'yi**seçin.
+1. Aşağıdaki yaklaşımlardan birini kullanarak nesne adını (kullanıcı hesabı) sağlayın:
+   1. Nesne adı alanına`{DOMAIN OR COMPUTER NAME\USER}`kullanıcı hesabı ( ) yazın ve kullanıcıyı ilkeye eklemek için **Tamam'ı** seçin.
+   1. **Gelişmiş**'i seçin. **Şimdi Bul'u**seçin. Listeden kullanıcı hesabını seçin. **Tamam'ı**seçin. Kullanıcıyı ilkeye eklemek için tekrar **Tamam'ı** seçin.
+1. Değişiklikleri kabul etmek için **Tamam** veya **Uygula'yı** seçin.
 
-## <a name="create-and-manage-the-windows-service"></a>Windows hizmetini oluşturma ve yönetme
+## <a name="create-and-manage-the-windows-service"></a>Windows Hizmeti oluşturma ve yönetme
 
-### <a name="create-a-service"></a>Bir hizmet oluşturma
+### <a name="create-a-service"></a>Hizmet oluşturma
 
-Bir hizmeti kaydetmek için PowerShell komutlarını kullanın. Bir yönetim PowerShell 6 komut kabuğundan aşağıdaki komutları yürütün:
+Bir hizmeti kaydetmek için PowerShell komutlarını kullanın. İdari powershell 6 komut uyruktan aşağıdaki komutları uygulayın:
 
 ```powershell
 $acl = Get-Acl "{EXE PATH}"
@@ -478,14 +478,14 @@ $acl | Set-Acl "{EXE PATH}"
 New-Service -Name {SERVICE NAME} -BinaryPathName {EXE FILE PATH} -Credential {DOMAIN OR COMPUTER NAME\USER} -Description "{DESCRIPTION}" -DisplayName "{DISPLAY NAME}" -StartupType Automatic
 ```
 
-* Ana bilgisayardaki uygulamanın klasörünün yolunu &ndash; `{EXE PATH}` (örneğin, `d:\myservice`). Uygulamanın yürütülebilir dosyasını yola eklemeyin. Sondaki eğik çizgi gerekli değildir.
-* `{DOMAIN OR COMPUTER NAME\USER}` &ndash; hizmet Kullanıcı hesabı (örneğin, `Contoso\ServiceUser`).
-* `{SERVICE NAME}` &ndash; hizmet adı (örneğin, `MyService`).
-* uygulamanın yürütülebilir yolunu &ndash; `{EXE FILE PATH}` (örneğin, `d:\myservice\myservice.exe`). Yürütülebilir dosyanın dosya adını uzantısına ekleyin.
-* `{DESCRIPTION}` &ndash; hizmet açıklaması (örneğin, `My sample service`).
-* `{DISPLAY NAME}` &ndash; hizmet görünen adı (örneğin, `My Service`).
+* `{EXE PATH}`&ndash; Uygulamanın ana bilgisayardaki klasörüne giden yol `d:\myservice`(örneğin, ). Uygulamanın çalıştırılabilir uygulamasını yola eklemeyin. İzbırakan bir kesik gerekli değildir.
+* `{DOMAIN OR COMPUTER NAME\USER}`&ndash; Hizmet kullanıcı hesabı (örneğin, `Contoso\ServiceUser`).
+* `{SERVICE NAME}`&ndash; Hizmet adı (örneğin, `MyService`).
+* `{EXE FILE PATH}`&ndash; Uygulamanın çalıştırılabilir yolu (örneğin, `d:\myservice\myservice.exe`). Yürütülebilir dosya adını uzantılı olarak ekleyin.
+* `{DESCRIPTION}`&ndash; Hizmet açıklaması (örneğin, `My sample service`).
+* `{DISPLAY NAME}`&ndash; Hizmet görüntü adı (örneğin, `My Service`).
 
-### <a name="start-a-service"></a>Hizmet başlatma
+### <a name="start-a-service"></a>Bir hizmet başlatın
 
 Aşağıdaki PowerShell 6 komutuyla bir hizmet başlatın:
 
@@ -493,86 +493,86 @@ Aşağıdaki PowerShell 6 komutuyla bir hizmet başlatın:
 Start-Service -Name {SERVICE NAME}
 ```
 
-Komutun başlatılması birkaç saniye sürer.
+Komutun hizmeti başlatması birkaç saniye sürer.
 
-### <a name="determine-a-services-status"></a>Hizmetin durumunu belirleme
+### <a name="determine-a-services-status"></a>Bir hizmetin durumunu belirleme
 
-Bir hizmetin durumunu denetlemek için aşağıdaki PowerShell 6 komutunu kullanın:
+Bir hizmetin durumunu kontrol etmek için aşağıdaki PowerShell 6 komutunu kullanın:
 
 ```powershell
 Get-Service -Name {SERVICE NAME}
 ```
 
-Durum, aşağıdaki değerlerden biri olarak bildirilir:
+Durum aşağıdaki değerlerden biri olarak bildirilir:
 
 * `Starting`
 * `Running`
 * `Stopping`
 * `Stopped`
 
-### <a name="stop-a-service"></a>Bir hizmeti durdur
+### <a name="stop-a-service"></a>Bir hizmet durdurun
 
-Aşağıdaki PowerShell 6 komutuyla bir hizmeti durdurun:
+Aşağıdaki Powershell 6 komutuna sahip bir hizmeti durdurun:
 
 ```powershell
 Stop-Service -Name {SERVICE NAME}
 ```
 
-### <a name="remove-a-service"></a>Hizmeti Kaldır
+### <a name="remove-a-service"></a>Bir hizmeti kaldırma
 
-Bir hizmeti durdurmak için kısa bir gecikmeden sonra, aşağıdaki PowerShell 6 komutuyla bir hizmeti kaldırın:
+Bir hizmeti durdurmak için kısa bir gecikmeden sonra, aşağıdaki Powershell 6 komutuna sahip bir hizmeti kaldırın:
 
 ```powershell
 Remove-Service -Name {SERVICE NAME}
 ```
 
-## <a name="handle-starting-and-stopping-events"></a>Olayları başlatma ve durdurma olaylarını işleme
+## <a name="handle-starting-and-stopping-events"></a>Olayları başlatma ve durdurma işlemlerini işleme
 
-<xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService.OnStarting*>, <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService.OnStarted*>ve <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService.OnStopping*> olaylarını işlemek için:
+Ve <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService.OnStarting*> <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService.OnStopping*> olayları <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService.OnStarted*>işlemek için:
 
-1. `OnStarting`, `OnStarted`ve `OnStopping` yöntemlerle <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService> türetilen bir sınıf oluşturun:
+1. , `OnStarted`, ve `OnStopping` yöntemleri <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService> ile türetilmiştir bir sınıf oluşturun: `OnStarting`
 
    [!code-csharp[](windows-service/samples/2.x/AspNetCoreService/CustomWebHostService.cs?name=snippet_CustomWebHostService)]
 
-2. <xref:System.ServiceProcess.ServiceBase.Run*>`CustomWebHostService` ileten <xref:Microsoft.AspNetCore.Hosting.IWebHost> için bir genişletme yöntemi oluşturun:
+2. Bunun için <xref:Microsoft.AspNetCore.Hosting.IWebHost> bir uzantı `CustomWebHostService` <xref:System.ServiceProcess.ServiceBase.Run*>yöntemi oluşturun:
 
    [!code-csharp[](windows-service/samples/2.x/AspNetCoreService/WebHostServiceExtensions.cs?name=ExtensionsClass)]
 
-3. `Program.Main`' de, <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*>yerine `RunAsCustomService` uzantısı metodunu çağırın:
+3. In `Program.Main`, `RunAsCustomService` yerine uzantı <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*>yöntemi ni arayın:
 
    ```csharp
    host.RunAsCustomService();
    ```
 
-   `Program.Main`<xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*> konumunu görmek için, [dağıtım türü](#deployment-type) bölümünde gösterilen kod örneğine bakın.
+   In'in <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*> `Program.Main`yerini görmek için [Dağıtım türü](#deployment-type) bölümünde gösterilen kod örneğine bakın.
 
-## <a name="proxy-server-and-load-balancer-scenarios"></a>Ara sunucu ve yük dengeleyici senaryoları
+## <a name="proxy-server-and-load-balancer-scenarios"></a>Proxy sunucusu ve yük dengeleyici senaryoları
 
-Internet 'ten veya şirket ağından gelen isteklerle etkileşime geçen ve bir ara sunucu veya yük dengeleyicinin arkasındaki Hizmetler ek yapılandırma gerektirebilir. Daha fazla bilgi için bkz. <xref:host-and-deploy/proxy-load-balancer>.
+Internet'ten veya şirket ağından gelen isteklerle etkileşimde olan ve proxy veya yük dengeleyicisinin arkasında olan hizmetler ek yapılandırma gerektirebilir. Daha fazla bilgi için bkz. <xref:host-and-deploy/proxy-load-balancer>.
 
 ## <a name="configure-endpoints"></a>Uç noktaları yapılandırma
 
-Varsayılan olarak, ASP.NET Core `http://localhost:5000`bağlar. `ASPNETCORE_URLS` ortam değişkenini ayarlayarak URL 'YI ve bağlantı noktasını yapılandırın.
+Varsayılan olarak, ASP.NET Core `http://localhost:5000`bağlanır. Ortam değişkenini ayarlayarak `ASPNETCORE_URLS` URL'yi ve bağlantı noktasını yapılandırın.
 
 Ek URL ve bağlantı noktası yapılandırma yaklaşımları için ilgili sunucu makalesine bakın:
 
 * <xref:fundamentals/servers/kestrel#endpoint-configuration>
 * <xref:fundamentals/servers/httpsys#configure-windows-server>
 
-Yukarıdaki kılavuz, HTTPS uç noktaları için desteği içerir. Örneğin, bir Windows hizmeti ile kimlik doğrulaması kullanıldığında HTTPS için uygulamayı yapılandırın.
+Önceki kılavuz, HTTPS uç noktaları nın desteğini kapsar. Örneğin, kimlik doğrulama bir Windows Hizmeti ile kullanıldığında uygulamayı HTTPS için yapılandırın.
 
 > [!NOTE]
-> Hizmet uç noktasının güvenliğini sağlamak için ASP.NET Core HTTPS geliştirme sertifikası kullanılması desteklenmez.
+> Bir hizmet bitiş noktasını güvence altına almak için ASP.NET Core HTTPS geliştirme sertifikasının kullanımı desteklenmez.
 
 ## <a name="current-directory-and-content-root"></a>Geçerli dizin ve içerik kökü
 
-Bir Windows hizmeti için <xref:System.IO.Directory.GetCurrentDirectory*> çağırarak döndürülen geçerli çalışma dizini *C:\\windows\\system32* klasörüdür. *System32* klasörü, bir hizmetin dosyalarını (örneğin, ayarlar dosyaları) depolamak için uygun bir konum değildir. Bir hizmetin varlık ve ayar dosyalarını sürdürmek ve erişmek için aşağıdaki yaklaşımlardan birini kullanın.
+Bir Windows Hizmeti için <xref:System.IO.Directory.GetCurrentDirectory*> arayarak döndürülen geçerli çalışma dizini *C:\\WINDOWS\\system32* klasörüdür. *System32* klasörü, bir hizmetin dosyalarını depolamak için uygun bir konum değildir (örneğin, ayarlar dosyaları). Bir hizmetin varlıklarını ve ayar dosyalarını korumak ve bu dosyalara erişmek için aşağıdaki yaklaşımlardan birini kullanın.
 
-### <a name="set-the-content-root-path-to-the-apps-folder"></a>Uygulamanın klasörü için içerik kök yolunu ayarla
+### <a name="set-the-content-root-path-to-the-apps-folder"></a>İçerik kökü yolunu uygulamanın klasörüne ayarlama
 
-<xref:Microsoft.Extensions.Hosting.IHostingEnvironment.ContentRootPath*>, bir hizmet oluşturulduğunda `binPath` bağımsız değişkenine sunulan yoldur. Ayar dosyalarına yollar oluşturmak için `GetCurrentDirectory` çağırmak yerine, uygulamanın [içerik kökünün](xref:fundamentals/index#content-root)yolunu kullanarak <xref:System.IO.Directory.SetCurrentDirectory*> çağırın.
+Bir <xref:Microsoft.Extensions.Hosting.IHostingEnvironment.ContentRootPath*> hizmet oluşturulduğunda `binPath` bağımsız değişkene sağlanan aynı yoldur. Ayarlar dosyalarına giden yollar oluşturmak için aramak `GetCurrentDirectory` yerine, uygulamanın içerik <xref:System.IO.Directory.SetCurrentDirectory*> [köküne](xref:fundamentals/index#content-root)giden yolu arayın.
 
-`Program.Main`, hizmetin yürütülebilir dosyasının yolunu belirleyin ve uygulamanın içerik kökünü oluşturmak için yolu kullanın:
+' `Program.Main`de, hizmetin yürütülebilir klasörüne giden yolu belirleyin ve uygulamanın içerik kökünü oluşturmak için yolu kullanın:
 
 ```csharp
 var pathToExe = Process.GetCurrentProcess().MainModule.FileName;
@@ -584,90 +584,90 @@ CreateWebHostBuilder(args)
     .RunAsService();
 ```
 
-### <a name="store-a-services-files-in-a-suitable-location-on-disk"></a>Hizmetin dosyalarını diskte uygun bir konumda depolayın
+### <a name="store-a-services-files-in-a-suitable-location-on-disk"></a>Bir hizmetin dosyalarını diskte uygun bir konumda depolama
 
-Dosyaları içeren klasörde <xref:Microsoft.Extensions.Configuration.IConfigurationBuilder> kullanırken <xref:Microsoft.Extensions.Configuration.FileConfigurationExtensions.SetBasePath*> mutlak bir yol belirtin.
+Dosyaları içeren klasöre <xref:Microsoft.Extensions.Configuration.FileConfigurationExtensions.SetBasePath*> bir <xref:Microsoft.Extensions.Configuration.IConfigurationBuilder> kullanırken ile mutlak bir yol belirtin.
 
 ## <a name="troubleshoot"></a>Sorun giderme
 
-Windows hizmet uygulamasının sorunlarını gidermek için bkz. <xref:test/troubleshoot>.
+Bir Windows Hizmeti uygulamasını gidermek <xref:test/troubleshoot>için bkz.
 
 ### <a name="common-errors"></a>Sık karşılaşılan hatalar
 
-* PowerShell 'in eski veya yayın öncesi sürümü kullanımda.
-* Kayıtlı hizmet, [DotNet Publish](/dotnet/core/tools/dotnet-publish) komutundan uygulamanın **yayımlanmış** çıktısını kullanmaz. [DotNet Build](/dotnet/core/tools/dotnet-build) komutunun çıkışı, uygulama dağıtımı için desteklenmez. Yayımlanan varlıklar, dağıtım türüne bağlı olarak aşağıdaki klasörlerden birinde bulunur:
-  * *bin/Release/{Target Framework}/Publish* (FDD)
-  * *bin/Release/{Target Framework}/{RUNTIME tanımlayıcısı}/Publish* (SCD)
-* Hizmet çalışır durumda değil.
-* Uygulamanın kullandığı kaynakların yolları (örneğin, sertifikalar) yanlış. Windows hizmetinin temel yolu *c:\\windows\\system32*' dir.
-* Kullanıcı, hizmet hakları *olarak oturum* açma hakkına sahip değil.
-* `New-Service` PowerShell komutu çalıştırılırken kullanıcının parolasının kullanım dışı veya yanlış şekilde geçirilmesi.
-* Uygulama ASP.NET Core kimlik doğrulaması gerektiriyor, ancak güvenli bağlantılar (HTTPS) için yapılandırılmamış.
-* İstek URL 'SI bağlantı noktası yanlış veya uygulamada doğru şekilde yapılandırılmamış.
+* PowerShell'in eski veya ön sürüm sürümü kullanımdadır.
+* Kayıtlı hizmet, uygulamanın [yayınlanan dotnet yayımlama](/dotnet/core/tools/dotnet-publish) komutundan **çıkan** çıktısını kullanmaz. [Dotnet yapı](/dotnet/core/tools/dotnet-build) komutunun çıktısı uygulama dağıtımı için desteklenmez. Yayımlanmış varlıklar dağıtım türüne bağlı olarak aşağıdaki klasörlerden birinde bulunur:
+  * *bin/Release/{TARGET FRAMEWORK}/publish* (FDD)
+  * *bin/Release/{TARGET FRAMEWORK}/{RUNTIME IDENTIFIER}/publish* (SCD)
+* Hizmet RUNNING durumunda değil.
+* Uygulamanın kullandığı kaynaklara giden yollar (örneğin, sertifikalar) yanlıştır. Bir Windows Hizmetinin temel yolu *c:\\Windows\\System32.*
+* Kullanıcının hizmet olarak *Oturum* Açma'sı yoktur.
+* PowerShell komutunu çalıştırırken kullanıcının parolasının `New-Service` süresi doldu veya yanlış geçti.
+* Uygulama ASP.NET Çekirdek kimlik doğrulaması gerektirir, ancak güvenli bağlantılar (HTTPS) için yapılandırılmamıştır.
+* İstek URL bağlantı noktası yanlış veya uygulamada doğru yapılandırılmamıştır.
 
-### <a name="system-and-application-event-logs"></a>Sistem ve uygulama olay günlükleri
+### <a name="system-and-application-event-logs"></a>Sistem ve Uygulama Etkinlik Günlükleri
 
-Sistem ve uygulama olay günlüklerine erişin:
+Sistem ve Uygulama Etkinlik Günlüklerine Erişin:
 
-1. Başlat menüsünü açın, *Olay Görüntüleyicisi*araması yapın ve **Olay Görüntüleyicisi** uygulamayı seçin.
-1. **Olay Görüntüleyicisi**, **Windows günlükleri** düğümünü açın.
-1. Sistem olay günlüğünü açmak için **sistem** ' i seçin. Uygulama olay günlüğünü açmak için **uygulama** ' yı seçin.
-1. Başarısız olan uygulama ile ilişkili hataları arayın.
+1. Başlat menüsünü açın, *Olay Görüntüleyicisi'ni*arayın ve **Olay Görüntüleyicisi** uygulamasını seçin.
+1. **Olay Görüntüleyici'de** **Windows Günlükleri** düğümlerini açın.
+1. Sistem Olay Günlüğü'nü açmak için **Sistem'i** seçin. Uygulama Olay Günlüğü'nü açmak için **Uygulama'yı** seçin.
+1. Başarısız uygulamayla ilişkili hataları arayın.
 
-### <a name="run-the-app-at-a-command-prompt"></a>Uygulamayı bir komut isteminde aşağıdakini çalıştırın
+### <a name="run-the-app-at-a-command-prompt"></a>Uygulamayı komut istemiyle çalıştırma
 
-Birçok başlatma hatası olay günlüklerinde yararlı bilgiler oluşturmaz. Bazı hataların nedeni, barındıran sistemde bir komut isteminde uygulamayı çalıştırarak bulabilirsiniz. Uygulamadan ek ayrıntı günlüğe kaydetmek için, [günlük düzeyini](xref:fundamentals/logging/index#log-level) düşürün veya [geliştirme ortamında](xref:fundamentals/environments)uygulamayı çalıştırın.
+Birçok başlangıç hatası olay günlüklerinde yararlı bilgiler üretmez. Bazı hataların nedenini, uygulamayı barındırma sistemindeki bir komut isteminde çalıştırarak bulabilirsiniz. Uygulamadan ek ayrıntı günlüğe kaydetmek [için, günlük düzeyini](xref:fundamentals/logging/index#log-level) düşürün veya [uygulamayı Geliştirme ortamında](xref:fundamentals/environments)çalıştırın.
 
 ### <a name="clear-package-caches"></a>Paket önbelleklerini temizle
 
-Çalışan bir uygulama, geliştirme makinesindeki .NET Core SDK yükseltmeden veya uygulama içindeki paket sürümlerini değiştirirken hemen başarısız olabilir. Bazı durumlarda, ana yükseltme yaparken, bir uygulama tutarsız paketleri kesilebilir. Bu sorunların çoğu, bu yönergeleri izleyerek düzeltilebilir:
+İşleyen bir uygulama, geliştirme makinesindeki .NET Core SDK'yı yükselttikten veya uygulama içindeki paket sürümlerini değiştirdikten hemen sonra başarısız olabilir. Bazı durumlarda, tutarsız paketler büyük yükseltmeler gerçekleştirirken bir uygulamayı bozabilir. Bu sorunların çoğu aşağıdaki yönergeleri izleyerek giderilebilir:
 
 1. *Bin* ve *obj* klasörlerini silin.
-1. Bir komut kabuğundan [DotNet NuGet yerelleri, Tümünü Temizle](/dotnet/core/tools/dotnet-nuget-locals) ' i yürüterek paket önbelleklerini temizleyin.
+1. [Noktanet nuget yerel tüm](/dotnet/core/tools/dotnet-nuget-locals) çalıştırarak paket önbellekleri temizleyin - bir komut kabuğundan temizleyin.
 
-   Paket önbelleklerini Temizleme, [NuGet. exe](https://www.nuget.org/downloads) aracı ile de gerçekleştirilebilir ve komut `nuget locals all -clear`yürütülebilir. *NuGet. exe* , Windows masaüstü işletim sistemiyle birlikte paketlenmiş bir yüklemedir ve [NuGet Web sitesinden](https://www.nuget.org/downloads)ayrı olarak alınmalıdır.
+   Paket önbellekleri takas da [nuget.exe](https://www.nuget.org/downloads) aracı ile gerçekleştirilebilir `nuget locals all -clear`ve komutuyguluyor. *nuget.exe,* Windows masaüstü işletim sistemiyle birlikte yüklenmez ve [NuGet web sitesinden](https://www.nuget.org/downloads)ayrı olarak alınmalıdır.
 
-1. Geri yükle ve projeyi yeniden derleyin.
-1. Uygulamayı yeniden dağıtmadan önce sunucusundaki dağıtım klasöründeki tüm dosyaları silin.
+1. Projeyi geri yükleyin ve yeniden oluşturun.
+1. Uygulamayı yeniden dağıtmadan önce sunucudaki dağıtım klasöründeki tüm dosyaları silin.
 
-### <a name="slow-or-hanging-app"></a>Yavaş veya asılı uygulama
+### <a name="slow-or-hanging-app"></a>Yavaş veya asma uygulaması
 
-*Kilitlenme dökümü* , sistem belleğinin bir anlık görüntüsüdür ve uygulama kilitlenmesinin, başlatma hatasının veya yavaş uygulamanın nedenini belirlemenize yardımcı olabilir.
+*Kilitlenme dökümü,* sistemin belleğindebir anlık görüntüdür ve bir uygulamanın çökmesinin, başlangıç hatasının veya yavaş uygulamanın nedenini belirlemeye yardımcı olabilir.
 
-#### <a name="app-crashes-or-encounters-an-exception"></a>Uygulama kilitleniyor veya bir özel durumla karşılaşırsa
+#### <a name="app-crashes-or-encounters-an-exception"></a>Uygulama çöküyor veya bir özel durumla karşılaşıyor
 
-Windows Hata Bildirimi bir döküm edinin ve çözümleyin [(WER)](/windows/desktop/wer/windows-error-reporting):
+Windows Hata Raporlama [(WER)](/windows/desktop/wer/windows-error-reporting)bir dökümü edinin ve analiz:
 
-1. Kilitlenme döküm dosyalarını `c:\dumps`tutmak için bir klasör oluşturun.
-1. [Enabledökümler PowerShell betiğini](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/scripts/EnableDumps.ps1) uygulama yürütülebilir adıyla çalıştırın:
+1. Kilitlenme döküm dosyalarını '' adresinde `c:\dumps`tutmak için bir klasör oluşturun
+1. [EnableDumps PowerShell komut dosyasını](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/scripts/EnableDumps.ps1) uygulama çalıştırılabilir adla çalıştırın:
 
    ```console
    .\EnableDumps {APPLICATION EXE} c:\dumps
    ```
 
-1. Uygulamayı kilitlenmenin oluşmasına neden olan koşullar altında çalıştırın.
-1. Kilitlenme gerçekleştirildikten sonra, [Disabledökümler PowerShell betiğini](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/scripts/DisableDumps.ps1)çalıştırın:
+1. Uygulamayı çökmenin oluşmasına neden olan koşullar altında çalıştırın.
+1. Çökme oluştuktan sonra, [DisableDumps PowerShell komut dosyası](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/scripts/DisableDumps.ps1)çalıştırın:
 
    ```console
    .\DisableDumps {APPLICATION EXE}
    ```
 
-Uygulama kilitlenmeleri ve döküm koleksiyonu tamamlandıktan sonra, uygulamanın normal olarak sonlandırılmasına izin verilir. PowerShell betiği, WER 'i uygulama başına en fazla beş döküm toplayacak şekilde yapılandırır.
+Bir uygulama çöktükten ve döküm toplama tamamlandıktan sonra, uygulamanın normal olarak sonlandırılmasına izin verilir. PowerShell komut dosyası, WER'i uygulama başına en fazla beş çöplük toplamak üzere yapılandırır.
 
 > [!WARNING]
-> Kilitlenme dökümleri büyük miktarda disk alanı kaplar (her birine kadar çok gigabayt kadar).
+> Kilitlenme dökümleri büyük miktarda disk alanı kapsayabilir (her biri birkaç gigabayta kadar).
 
-#### <a name="app-hangs-fails-during-startup-or-runs-normally"></a>Uygulama askıda kalıyor, başlatma sırasında başarısız oluyor veya normal şekilde çalışıyor
+#### <a name="app-hangs-fails-during-startup-or-runs-normally"></a>Uygulama askıda kalır, başlangıç sırasında başarısız olur veya normal çalışır
 
-Bir uygulama *askıda* kaldığında (yanıt vermeyi keser ancak kilitlenmez), başlatma sırasında başarısız olur veya normal şekilde çalışır. [Kullanıcı modu döküm dosyaları:](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool) döküm oluşturmak için uygun bir aracı seçmek üzere en iyi aracı seçme.
+Bir uygulama *askıda kaldığında* (yanıt vermeyi durdurur ancak kilitlenmez), başlangıç sırasında başarısız olduğunda veya normal olarak çalıştığında, [bkz.](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)
 
-#### <a name="analyze-the-dump"></a>Dökümü çözümle
+#### <a name="analyze-the-dump"></a>Dökümü analiz edin
 
-Bir döküm çeşitli yaklaşımlar kullanılarak analiz edilebilir. Daha fazla bilgi için bkz. [Kullanıcı modu döküm dosyasını çözümleme](/windows-hardware/drivers/debugger/analyzing-a-user-mode-dump-file).
+Bir dökümü çeşitli yaklaşımlar kullanılarak analiz edilebilir. Daha fazla bilgi için [bkz.](/windows-hardware/drivers/debugger/analyzing-a-user-mode-dump-file)
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [Kestrel uç noktası yapılandırması](xref:fundamentals/servers/kestrel#endpoint-configuration) (https yapılandırması ve SNI desteği içerir)
+* [Kestrel uç nokta yapılandırması](xref:fundamentals/servers/kestrel#endpoint-configuration) (HTTPS yapılandırması ve SNI desteği içerir)
 * <xref:fundamentals/host/web-host>
 * <xref:test/troubleshoot>
 
@@ -675,45 +675,45 @@ Bir döküm çeşitli yaklaşımlar kullanılarak analiz edilebilir. Daha fazla 
 
 ::: moniker range="< aspnetcore-2.2"
 
-Bir ASP.NET Core uygulaması, IIS kullanmadan Windows [hizmeti](/dotnet/framework/windows-services/introduction-to-windows-service-applications) olarak Windows üzerinde barındırılabilir. Windows hizmeti olarak barındırıldığı zaman, uygulama otomatik olarak sunucu yeniden başlatıldıktan sonra başlatılır.
+Bir ASP.NET Core uygulaması, IIS kullanmadan [Windows'da Windows Hizmeti](/dotnet/framework/windows-services/introduction-to-windows-service-applications) olarak barındırılabilir. Windows Hizmeti olarak barındırıldığında, uygulama sunucu yeniden başlatıldıktan sonra otomatik olarak başlar.
 
-[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
+[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ( nasıl[indirilir](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
-* [ASP.NET Core SDK 2,1 veya üzeri](https://dotnet.microsoft.com/download)
-* [PowerShell 6,2 veya üzeri](https://github.com/PowerShell/PowerShell)
+* [ASP.NET Core SDK 2.1 veya sonrası](https://dotnet.microsoft.com/download)
+* [PowerShell 6.2 veya sonrası](https://github.com/PowerShell/PowerShell)
 
 ## <a name="app-configuration"></a>Uygulama yapılandırması
 
-Uygulama [Microsoft. AspNetCore. Hosting. WindowsServices](https://www.nuget.org/packages/Microsoft.AspNetCore.Hosting.WindowsServices) ve [Microsoft. Extensions. Logging. EventLog](https://www.nuget.org/packages/Microsoft.Extensions.Logging.EventLog)için paket başvuruları gerektirir.
+Uygulama [Microsoft.AspNetCore.Hosting.WindowsServices](https://www.nuget.org/packages/Microsoft.AspNetCore.Hosting.WindowsServices) ve [Microsoft.Extensions.Logging.EventLog](https://www.nuget.org/packages/Microsoft.Extensions.Logging.EventLog)için paket referansları gerektirir.
 
-Bir hizmetin dışında çalışırken test ve hata ayıklamak için, uygulamanın bir hizmet olarak mı yoksa bir konsol uygulaması mi çalıştığını belirleme kodu ekleyin. Hata ayıklayıcının ekli olduğunu veya `--console` bir anahtarın mevcut olup olmadığını denetleyin. Her iki koşul de geçerliyse (uygulama hizmet olarak çalıştırılmadıysa) <xref:Microsoft.AspNetCore.Hosting.WebHostExtensions.Run*>çağırın. Koşullar yanlışsa (uygulama bir hizmet olarak çalıştırılır):
+Bir hizmetin dışında çalışırken test etmek ve hata ayıklamak için, uygulamanın bir hizmet veya konsol uygulaması olarak mı çalıştığını belirlemek için kod ekleyin. Hata ayıklayıcının bağlı olup olmadığını `--console` veya bir anahtarın olup olmadığını denetleyin. Her iki koşul da doğruysa (uygulama bir hizmet <xref:Microsoft.AspNetCore.Hosting.WebHostExtensions.Run*>olarak çalıştırılmıyorsa), arayın. Koşullar yanlışsa (uygulama bir hizmet olarak çalıştırılır):
 
-* <xref:System.IO.Directory.SetCurrentDirectory*> çağırın ve uygulamanın yayımlanan konumunun yolunu kullanın. Bir Windows hizmeti uygulaması, <xref:System.IO.Directory.GetCurrentDirectory*> çağrıldığında *C:\\windows\\system32* klasörünü döndürdüğünden yolu almak için <xref:System.IO.Directory.GetCurrentDirectory*> çağırmayın. Daha fazla bilgi için [geçerli dizin ve içerik kökü](#current-directory-and-content-root) bölümüne bakın. Bu adım uygulama `CreateWebHostBuilder`' de yapılandırılmadan önce gerçekleştirilir.
-* Uygulamayı bir hizmet olarak çalıştırmak için <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*> çağırın.
+* Uygulamanın yayımlanmış konumuna giden yolu arayın <xref:System.IO.Directory.SetCurrentDirectory*> ve kullanın. Bir Windows <xref:System.IO.Directory.GetCurrentDirectory*> Service uygulaması çağrıldığında *C:\\WINDOWS\\system32* klasörünü döndürdüğünde <xref:System.IO.Directory.GetCurrentDirectory*> yolu almak için aramayın. Daha fazla bilgi için [Geçerli dizini ve içerik kökü](#current-directory-and-content-root) bölümüne bakın. Bu adım, uygulama 'de `CreateWebHostBuilder`yapılandırılmadan önce gerçekleştirilir.
+* Uygulamayı <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*> hizmet olarak çalıştırmak için arayın.
 
-Komut satırı [yapılandırma sağlayıcısı](xref:fundamentals/configuration/index#command-line-configuration-provider) komut satırı bağımsız değişkenleri için ad-değer çiftleri gerektirdiğinden, <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> bağımsız değişkenleri almadan önce `--console` anahtarı bağımsız değişkenlerden kaldırılır.
+Komut [satırı Yapılandırma Sağlayıcısı](xref:fundamentals/configuration/index#command-line-configuration-provider) komut satırı bağımsız değişkenleri için ad `--console` değeri çiftleri gerektirdiğinden, geçiş bağımsız değişkenleri almadan önce <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> bağımsız değişkenlerden kaldırılır.
 
-Windows olay günlüğü 'ne yazmak için, <xref:Microsoft.AspNetCore.Hosting.WebHostBuilder.ConfigureLogging*>EventLog sağlayıcısını ekleyin. Günlük kaydı düzeyini appSettings 'teki `Logging:LogLevel:Default` anahtarıyla ayarlayın *. Production. JSON* dosyası.
+Windows Olay Günlüğü'ne yazmak için <xref:Microsoft.AspNetCore.Hosting.WebHostBuilder.ConfigureLogging*>EventLog sağlayıcısını ekleyin. Uygulama ayarlarındaki `Logging:LogLevel:Default` anahtarla günlük düzeyini *ayarlayın. Production.json* dosyası.
 
-Örnek uygulamadan aşağıdaki örnekte, uygulama içindeki ömür olaylarını işlemek için <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*> yerine `RunAsCustomService` çağırılır. Daha fazla bilgi için [olayları başlatma ve durdurma olaylarını](#handle-starting-and-stopping-events) inceleyin bölümüne bakın.
+Örnek uygulamadan aşağıdaki örnekte, `RunAsCustomService` uygulama <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*> içindeki yaşam boyu olayları işlemek için yerine çağrılır. Daha fazla bilgi [için, Tanıtıcı başlangıç ve durdurma olayları](#handle-starting-and-stopping-events) bölümüne bakın.
 
 [!code-csharp[](windows-service/samples/2.x/AspNetCoreService/Program.cs?name=snippet_Program)]
 
 ## <a name="deployment-type"></a>Dağıtım türü
 
-Dağıtım senaryoları hakkında bilgi ve öneriler için bkz. [.NET Core uygulama dağıtımı](/dotnet/core/deploying/).
+Dağıtım senaryoları hakkında bilgi ve tavsiye için [bkz.](/dotnet/core/deploying/)
 
 ### <a name="sdk"></a>SDK
 
-Razor Pages veya MVC çerçevelerini kullanan bir Web uygulaması tabanlı hizmet için, proje dosyasında Web SDK 'sını belirtin:
+Razor Pages veya MVC çerçevelerini kullanan web uygulaması tabanlı bir hizmet için, proje dosyasında Web SDK'yı belirtin:
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
 ```
 
-Hizmet yalnızca arka plan görevlerini (örneğin, [barındırılan hizmetler](xref:fundamentals/host/hosted-services)) yürütülüyorsa, proje dosyasında çalışan SDK 'sını belirtin:
+Hizmet yalnızca arka plan görevlerini yürütürse (örneğin, [barındırılan hizmetler),](xref:fundamentals/host/hosted-services)Proje dosyasında İşçi SDK'sını belirtin:
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Worker">
@@ -721,13 +721,13 @@ Hizmet yalnızca arka plan görevlerini (örneğin, [barındırılan hizmetler](
 
 ### <a name="framework-dependent-deployment-fdd"></a>Çerçeveye bağımlı dağıtım (FDD)
 
-Çerçeveye bağımlı dağıtım (FDD), hedef sistemde .NET Core 'un paylaşılan sistem genelindeki bir sürümünün varlığına dayanır. Bu makaledeki kılavuzdan sonra FDD senaryosu benimsendiği zaman SDK, *çerçeveye bağlı yürütülebilir dosya*olarak adlandırılan yürütülebilir bir dosya ( *. exe*) oluşturur.
+Çerçeveye bağımlı dağıtım (FDD), hedef sistemde .NET Core'un sistem genelinde paylaşılan bir sürümünün bulunmasına dayanır. FDD senaryosu bu makaledeki kılavuzdan sonra kabul edildiğinde, *SDK, çerçeveye bağımlı yürütülebilir*olarak adlandırılan bir yürütülebilir (*.exe*) üretir.
 
-Windows [çalışma zamanı tanımlayıcısı (RID)](/dotnet/core/rid-catalog) ([\<runtimeıdentifier >](/dotnet/core/tools/csproj#runtimeidentifier)), hedef Framework 'ü içerir. Aşağıdaki örnekte, RID `win7-x64`olarak ayarlanmıştır. `<SelfContained>` özelliği `false`olarak ayarlanır. Bu özellikler SDK 'nın Windows için bir yürütülebilir ( *. exe*) dosya ve paylaşılan .NET Core çerçevesine bağlı bir uygulama oluşturmasını ister.
+Windows [Runtime Identifier (RID)](/dotnet/core/rid-catalog) ([\<RuntimeIdentifier>) ](/dotnet/core/tools/csproj#runtimeidentifier)hedef çerçeveiçerir. Aşağıdaki örnekte, RID `win7-x64`olarak ayarlanır. `false`Özellik. `<SelfContained>` Bu özellikler, SDK'ya Windows için yürütülebilir (*.exe*) dosyası ve paylaşılan .NET Core çerçevesine bağlı bir uygulama oluşturması talimatını verir.
 
-`<UseAppHost>` özelliği `true`olarak ayarlanır. Bu özellik, bir FDD için bir etkinleştirme yolu (yürütülebilir, *. exe*) ile hizmeti sağlar.
+`true`Özellik. `<UseAppHost>` Bu özellik, hizmete bir FDD için etkinleştirme yolu (yürütülebilir, *.exe)* sağlar.
 
-Bir ASP.NET Core uygulaması yayımlandığında normalde üretilen bir *Web. config* dosyası, Windows Hizmetleri uygulaması için gereksizdir. *Web. config* dosyasının oluşturulmasını devre dışı bırakmak için `<IsTransformWebConfigDisabled>` özelliği `true`olarak ayarlayın.
+Normalde bir ASP.NET Core uygulaması yayımlarken üretilen *bir web.config* dosyası, bir Windows Hizmetleri uygulaması için gereksizdir. *web.config* dosyasının oluşturulmasını devre dışı bırakabilmek `<IsTransformWebConfigDisabled>` `true`için, ayarlanan özelliği ekleyin.
 
 ```xml
 <PropertyGroup>
@@ -739,11 +739,11 @@ Bir ASP.NET Core uygulaması yayımlandığında normalde üretilen bir *Web. co
 </PropertyGroup>
 ```
 
-### <a name="self-contained-deployment-scd"></a>Kendi içinde dağıtım (SCD)
+### <a name="self-contained-deployment-scd"></a>Bağımsız dağıtım (SCD)
 
-Kendinden bağımsız dağıtım (SCD), ana bilgisayar sisteminde paylaşılan bir Framework varlığına güvenmez. Çalışma zamanı ve uygulamanın bağımlılıkları uygulamayla birlikte dağıtılır.
+Bağımsız dağıtım (SCD), ana bilgisayar sisteminde paylaşılan bir çerçevenin varlığına güvenmez. Çalışma süresi ve uygulamanın bağımlılıkları uygulamayla birlikte dağıtılır.
 
-Hedef Framework 'ü içeren `<PropertyGroup>` bir Windows [çalışma zamanı tanımlayıcısı (RID)](/dotnet/core/rid-catalog) bulunur:
+Bir Windows [Runtime Tanımlayıcısı (RID)](/dotnet/core/rid-catalog) `<PropertyGroup>` hedef çerçeveyi içeren dahildir:
 
 ```xml
 <RuntimeIdentifier>win7-x64</RuntimeIdentifier>
@@ -751,59 +751,59 @@ Hedef Framework 'ü içeren `<PropertyGroup>` bir Windows [çalışma zamanı ta
 
 Birden çok RID için yayımlamak için:
 
-* RID 'leri, noktalı virgülle ayrılmış bir liste olarak belirtin.
-* [\<Runtimetanýmlayýcýtanımlayıcıları >](/dotnet/core/tools/csproj#runtimeidentifiers) (plural) için özellik adını kullanın.
+* RID'leri yarı sütunlu sınırlı bir listede sağlayın.
+* [ \<RuntimeIdentifiers>](/dotnet/core/tools/csproj#runtimeidentifiers) (çoğul) özellik adını kullanın.
 
-Daha fazla bilgi için bkz. [.NET Core RID kataloğu](/dotnet/core/rid-catalog).
+Daha fazla bilgi için [.NET Core RID Kataloğu'na](/dotnet/core/rid-catalog)bakın.
 
-`<SelfContained>` Özellik `true`olarak ayarlanır:
+Bir `<SelfContained>` özellik ayarlanır: `true`
 
 ```xml
 <SelfContained>true</SelfContained>
 ```
 
-## <a name="service-user-account"></a>Hizmet Kullanıcı hesabı
+## <a name="service-user-account"></a>Hizmet kullanıcı hesabı
 
-Bir hizmet için Kullanıcı hesabı oluşturmak için, bir yönetim PowerShell 6 komut kabuğundan [New-LocalUser](/powershell/module/microsoft.powershell.localaccounts/new-localuser) cmdlet 'ini kullanın.
+Bir hizmet için kullanıcı hesabı oluşturmak için, yönetimsel powershell 6 komut kabuğundan [Yeni-LocalUser](/powershell/module/microsoft.powershell.localaccounts/new-localuser) cmdlet'ini kullanın.
 
-Windows 10 Ekim 2018 Güncelleştirmesi (sürüm 1809/Build 10.0.17763) veya sonraki sürümler:
+Windows 10 Ekim 2018 Güncelleştirmesi'nde (sürüm 1809/build 10.0.17763) veya daha sonra:
 
 ```powershell
 New-LocalUser -Name {SERVICE NAME}
 ```
 
-Windows 10 Ekim 2018 (sürüm 1809/Build 10.0.17763) sürümünden önceki Windows IŞLETIM sistemlerinde:
+Windows 10 Ekim 2018 Güncelleştirmesinden önceki Windows İşletim Sistemi'nde (sürüm 1809/build 10.0.17763):
 
 ```console
 powershell -Command "New-LocalUser -Name {SERVICE NAME}"
 ```
 
-İstendiğinde [güçlü bir parola](/windows/security/threat-protection/security-policy-settings/password-must-meet-complexity-requirements) sağlayın.
+İstendiğinde güçlü bir [parola](/windows/security/threat-protection/security-policy-settings/password-must-meet-complexity-requirements) sağlayın.
 
-`-AccountExpires` parametresi [New-LocalUser](/powershell/module/microsoft.powershell.localaccounts/new-localuser) cmdlet 'ine bir süre sonu <xref:System.DateTime>sağlanmamışsa hesabın süresi dolmaz.
+Parametre, sona ermiş <xref:System.DateTime> [yeni yerel kullanıcı](/powershell/module/microsoft.powershell.localaccounts/new-localuser) cmdlet'e sağatılmadığı sürece, hesabın süresi dolmaz. `-AccountExpires`
 
-Daha fazla bilgi için bkz. [Microsoft. PowerShell. LocalAccounts](/powershell/module/microsoft.powershell.localaccounts/) ve [hizmet Kullanıcı hesapları](/windows/desktop/services/service-user-accounts).
+Daha fazla bilgi için [Microsoft.PowerShell.LocalAccounts](/powershell/module/microsoft.powershell.localaccounts/) ve [Hizmet Kullanıcı Hesapları'na](/windows/desktop/services/service-user-accounts)bakın.
 
-Active Directory kullanırken kullanıcıları yönetmeye yönelik alternatif bir yaklaşım, yönetilen hizmet hesaplarını kullanmaktır. Daha fazla bilgi için bkz. [Grup yönetilen hizmet hesaplarına genel bakış](/windows-server/security/group-managed-service-accounts/group-managed-service-accounts-overview).
+Active Directory kullanırken kullanıcıları yönetmek için alternatif bir yaklaşım Yönetilen Hizmet Hesapları kullanmaktır. Daha fazla bilgi için [Grup Yönetilen Hizmet Hesaplarına Genel Bakış'a](/windows-server/security/group-managed-service-accounts/group-managed-service-accounts-overview)bakın.
 
 ## <a name="log-on-as-a-service-rights"></a>Hizmet hakları olarak oturum açma
 
-Hizmet Kullanıcı hesabı için *hizmet hakları olarak oturum* açma oluşturmak için:
+Bir hizmet kullanıcı hesabı için hizmet hakları *olarak Oturum Açma'yı* kurmak için:
 
-1. Yerel Güvenlik Ilkesi düzenleyicisini, *secpol. msc*' i çalıştırarak açın.
-1. **Yerel ilkeler** düğümünü genişletin ve **Kullanıcı hakları ataması**' nı seçin.
-1. **Hizmet olarak oturum** açma ilkesi açın.
-1. **Kullanıcı veya Grup Ekle**' yi seçin.
-1. Aşağıdaki yaklaşımlardan birini kullanarak nesne adını (Kullanıcı hesabı) sağlayın:
-   1. Kullanıcı hesabını (`{DOMAIN OR COMPUTER NAME\USER}`) nesne adı alanına yazın ve kullanıcıyı ilkeye eklemek için **Tamam** ' ı seçin.
-   1. **Gelişmiş**'i seçin. **Şimdi bul**' u seçin. Listeden Kullanıcı hesabını seçin. **Tamam**’ı seçin. Kullanıcıyı ilkeye eklemek için yeniden **Tamam ' ı** seçin.
-1. Değişiklikleri kabul etmek için **Tamam ' ı** veya **Uygula** ' yı seçin.
+1. *Secpol.msc*çalıştırarak Yerel Güvenlik Politikası düzenleyicisini açın.
+1. Yerel **İlkeler** düğümünü genişletin ve **Kullanıcı Hakları Ataması'nı**seçin.
+1. Hizmet ilkesi **olarak Oturum Aç'ı** açın.
+1. **Kullanıcı veya Grup Ekle'yi**seçin.
+1. Aşağıdaki yaklaşımlardan birini kullanarak nesne adını (kullanıcı hesabı) sağlayın:
+   1. Nesne adı alanına`{DOMAIN OR COMPUTER NAME\USER}`kullanıcı hesabı ( ) yazın ve kullanıcıyı ilkeye eklemek için **Tamam'ı** seçin.
+   1. **Gelişmiş**'i seçin. **Şimdi Bul'u**seçin. Listeden kullanıcı hesabını seçin. **Tamam'ı**seçin. Kullanıcıyı ilkeye eklemek için tekrar **Tamam'ı** seçin.
+1. Değişiklikleri kabul etmek için **Tamam** veya **Uygula'yı** seçin.
 
-## <a name="create-and-manage-the-windows-service"></a>Windows hizmetini oluşturma ve yönetme
+## <a name="create-and-manage-the-windows-service"></a>Windows Hizmeti oluşturma ve yönetme
 
-### <a name="create-a-service"></a>Bir hizmet oluşturma
+### <a name="create-a-service"></a>Hizmet oluşturma
 
-Bir hizmeti kaydetmek için PowerShell komutlarını kullanın. Bir yönetim PowerShell 6 komut kabuğundan aşağıdaki komutları yürütün:
+Bir hizmeti kaydetmek için PowerShell komutlarını kullanın. İdari powershell 6 komut uyruktan aşağıdaki komutları uygulayın:
 
 ```powershell
 $acl = Get-Acl "{EXE PATH}"
@@ -815,14 +815,14 @@ $acl | Set-Acl "{EXE PATH}"
 New-Service -Name {SERVICE NAME} -BinaryPathName {EXE FILE PATH} -Credential {DOMAIN OR COMPUTER NAME\USER} -Description "{DESCRIPTION}" -DisplayName "{DISPLAY NAME}" -StartupType Automatic
 ```
 
-* Ana bilgisayardaki uygulamanın klasörünün yolunu &ndash; `{EXE PATH}` (örneğin, `d:\myservice`). Uygulamanın yürütülebilir dosyasını yola eklemeyin. Sondaki eğik çizgi gerekli değildir.
-* `{DOMAIN OR COMPUTER NAME\USER}` &ndash; hizmet Kullanıcı hesabı (örneğin, `Contoso\ServiceUser`).
-* `{SERVICE NAME}` &ndash; hizmet adı (örneğin, `MyService`).
-* uygulamanın yürütülebilir yolunu &ndash; `{EXE FILE PATH}` (örneğin, `d:\myservice\myservice.exe`). Yürütülebilir dosyanın dosya adını uzantısına ekleyin.
-* `{DESCRIPTION}` &ndash; hizmet açıklaması (örneğin, `My sample service`).
-* `{DISPLAY NAME}` &ndash; hizmet görünen adı (örneğin, `My Service`).
+* `{EXE PATH}`&ndash; Uygulamanın ana bilgisayardaki klasörüne giden yol `d:\myservice`(örneğin, ). Uygulamanın çalıştırılabilir uygulamasını yola eklemeyin. İzbırakan bir kesik gerekli değildir.
+* `{DOMAIN OR COMPUTER NAME\USER}`&ndash; Hizmet kullanıcı hesabı (örneğin, `Contoso\ServiceUser`).
+* `{SERVICE NAME}`&ndash; Hizmet adı (örneğin, `MyService`).
+* `{EXE FILE PATH}`&ndash; Uygulamanın çalıştırılabilir yolu (örneğin, `d:\myservice\myservice.exe`). Yürütülebilir dosya adını uzantılı olarak ekleyin.
+* `{DESCRIPTION}`&ndash; Hizmet açıklaması (örneğin, `My sample service`).
+* `{DISPLAY NAME}`&ndash; Hizmet görüntü adı (örneğin, `My Service`).
 
-### <a name="start-a-service"></a>Hizmet başlatma
+### <a name="start-a-service"></a>Bir hizmet başlatın
 
 Aşağıdaki PowerShell 6 komutuyla bir hizmet başlatın:
 
@@ -830,86 +830,86 @@ Aşağıdaki PowerShell 6 komutuyla bir hizmet başlatın:
 Start-Service -Name {SERVICE NAME}
 ```
 
-Komutun başlatılması birkaç saniye sürer.
+Komutun hizmeti başlatması birkaç saniye sürer.
 
-### <a name="determine-a-services-status"></a>Hizmetin durumunu belirleme
+### <a name="determine-a-services-status"></a>Bir hizmetin durumunu belirleme
 
-Bir hizmetin durumunu denetlemek için aşağıdaki PowerShell 6 komutunu kullanın:
+Bir hizmetin durumunu kontrol etmek için aşağıdaki PowerShell 6 komutunu kullanın:
 
 ```powershell
 Get-Service -Name {SERVICE NAME}
 ```
 
-Durum, aşağıdaki değerlerden biri olarak bildirilir:
+Durum aşağıdaki değerlerden biri olarak bildirilir:
 
 * `Starting`
 * `Running`
 * `Stopping`
 * `Stopped`
 
-### <a name="stop-a-service"></a>Bir hizmeti durdur
+### <a name="stop-a-service"></a>Bir hizmet durdurun
 
-Aşağıdaki PowerShell 6 komutuyla bir hizmeti durdurun:
+Aşağıdaki Powershell 6 komutuna sahip bir hizmeti durdurun:
 
 ```powershell
 Stop-Service -Name {SERVICE NAME}
 ```
 
-### <a name="remove-a-service"></a>Hizmeti Kaldır
+### <a name="remove-a-service"></a>Bir hizmeti kaldırma
 
-Bir hizmeti durdurmak için kısa bir gecikmeden sonra, aşağıdaki PowerShell 6 komutuyla bir hizmeti kaldırın:
+Bir hizmeti durdurmak için kısa bir gecikmeden sonra, aşağıdaki Powershell 6 komutuna sahip bir hizmeti kaldırın:
 
 ```powershell
 Remove-Service -Name {SERVICE NAME}
 ```
 
-## <a name="handle-starting-and-stopping-events"></a>Olayları başlatma ve durdurma olaylarını işleme
+## <a name="handle-starting-and-stopping-events"></a>Olayları başlatma ve durdurma işlemlerini işleme
 
-<xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService.OnStarting*>, <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService.OnStarted*>ve <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService.OnStopping*> olaylarını işlemek için:
+Ve <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService.OnStarting*> <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService.OnStopping*> olayları <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService.OnStarted*>işlemek için:
 
-1. `OnStarting`, `OnStarted`ve `OnStopping` yöntemlerle <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService> türetilen bir sınıf oluşturun:
+1. , `OnStarted`, ve `OnStopping` yöntemleri <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostService> ile türetilmiştir bir sınıf oluşturun: `OnStarting`
 
    [!code-csharp[](windows-service/samples/2.x/AspNetCoreService/CustomWebHostService.cs?name=snippet_CustomWebHostService)]
 
-2. <xref:System.ServiceProcess.ServiceBase.Run*>`CustomWebHostService` ileten <xref:Microsoft.AspNetCore.Hosting.IWebHost> için bir genişletme yöntemi oluşturun:
+2. Bunun için <xref:Microsoft.AspNetCore.Hosting.IWebHost> bir uzantı `CustomWebHostService` <xref:System.ServiceProcess.ServiceBase.Run*>yöntemi oluşturun:
 
    [!code-csharp[](windows-service/samples/2.x/AspNetCoreService/WebHostServiceExtensions.cs?name=ExtensionsClass)]
 
-3. `Program.Main`' de, <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*>yerine `RunAsCustomService` uzantısı metodunu çağırın:
+3. In `Program.Main`, `RunAsCustomService` yerine uzantı <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*>yöntemi ni arayın:
 
    ```csharp
    host.RunAsCustomService();
    ```
 
-   `Program.Main`<xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*> konumunu görmek için, [dağıtım türü](#deployment-type) bölümünde gösterilen kod örneğine bakın.
+   In'in <xref:Microsoft.AspNetCore.Hosting.WindowsServices.WebHostWindowsServiceExtensions.RunAsService*> `Program.Main`yerini görmek için [Dağıtım türü](#deployment-type) bölümünde gösterilen kod örneğine bakın.
 
-## <a name="proxy-server-and-load-balancer-scenarios"></a>Ara sunucu ve yük dengeleyici senaryoları
+## <a name="proxy-server-and-load-balancer-scenarios"></a>Proxy sunucusu ve yük dengeleyici senaryoları
 
-Internet 'ten veya şirket ağından gelen isteklerle etkileşime geçen ve bir ara sunucu veya yük dengeleyicinin arkasındaki Hizmetler ek yapılandırma gerektirebilir. Daha fazla bilgi için bkz. <xref:host-and-deploy/proxy-load-balancer>.
+Internet'ten veya şirket ağından gelen isteklerle etkileşimde olan ve proxy veya yük dengeleyicisinin arkasında olan hizmetler ek yapılandırma gerektirebilir. Daha fazla bilgi için bkz. <xref:host-and-deploy/proxy-load-balancer>.
 
 ## <a name="configure-endpoints"></a>Uç noktaları yapılandırma
 
-Varsayılan olarak, ASP.NET Core `http://localhost:5000`bağlar. `ASPNETCORE_URLS` ortam değişkenini ayarlayarak URL 'YI ve bağlantı noktasını yapılandırın.
+Varsayılan olarak, ASP.NET Core `http://localhost:5000`bağlanır. Ortam değişkenini ayarlayarak `ASPNETCORE_URLS` URL'yi ve bağlantı noktasını yapılandırın.
 
 Ek URL ve bağlantı noktası yapılandırma yaklaşımları için ilgili sunucu makalesine bakın:
 
 * <xref:fundamentals/servers/kestrel#endpoint-configuration>
 * <xref:fundamentals/servers/httpsys#configure-windows-server>
 
-Yukarıdaki kılavuz, HTTPS uç noktaları için desteği içerir. Örneğin, bir Windows hizmeti ile kimlik doğrulaması kullanıldığında HTTPS için uygulamayı yapılandırın.
+Önceki kılavuz, HTTPS uç noktaları nın desteğini kapsar. Örneğin, kimlik doğrulama bir Windows Hizmeti ile kullanıldığında uygulamayı HTTPS için yapılandırın.
 
 > [!NOTE]
-> Hizmet uç noktasının güvenliğini sağlamak için ASP.NET Core HTTPS geliştirme sertifikası kullanılması desteklenmez.
+> Bir hizmet bitiş noktasını güvence altına almak için ASP.NET Core HTTPS geliştirme sertifikasının kullanımı desteklenmez.
 
 ## <a name="current-directory-and-content-root"></a>Geçerli dizin ve içerik kökü
 
-Bir Windows hizmeti için <xref:System.IO.Directory.GetCurrentDirectory*> çağırarak döndürülen geçerli çalışma dizini *C:\\windows\\system32* klasörüdür. *System32* klasörü, bir hizmetin dosyalarını (örneğin, ayarlar dosyaları) depolamak için uygun bir konum değildir. Bir hizmetin varlık ve ayar dosyalarını sürdürmek ve erişmek için aşağıdaki yaklaşımlardan birini kullanın.
+Bir Windows Hizmeti için <xref:System.IO.Directory.GetCurrentDirectory*> arayarak döndürülen geçerli çalışma dizini *C:\\WINDOWS\\system32* klasörüdür. *System32* klasörü, bir hizmetin dosyalarını depolamak için uygun bir konum değildir (örneğin, ayarlar dosyaları). Bir hizmetin varlıklarını ve ayar dosyalarını korumak ve bu dosyalara erişmek için aşağıdaki yaklaşımlardan birini kullanın.
 
-### <a name="set-the-content-root-path-to-the-apps-folder"></a>Uygulamanın klasörü için içerik kök yolunu ayarla
+### <a name="set-the-content-root-path-to-the-apps-folder"></a>İçerik kökü yolunu uygulamanın klasörüne ayarlama
 
-<xref:Microsoft.Extensions.Hosting.IHostingEnvironment.ContentRootPath*>, bir hizmet oluşturulduğunda `binPath` bağımsız değişkenine sunulan yoldur. Ayar dosyalarına yollar oluşturmak için `GetCurrentDirectory` çağırmak yerine, uygulamanın [içerik kökünün](xref:fundamentals/index#content-root)yolunu kullanarak <xref:System.IO.Directory.SetCurrentDirectory*> çağırın.
+Bir <xref:Microsoft.Extensions.Hosting.IHostingEnvironment.ContentRootPath*> hizmet oluşturulduğunda `binPath` bağımsız değişkene sağlanan aynı yoldur. Ayarlar dosyalarına giden yollar oluşturmak için aramak `GetCurrentDirectory` yerine, uygulamanın içerik <xref:System.IO.Directory.SetCurrentDirectory*> [köküne](xref:fundamentals/index#content-root)giden yolu arayın.
 
-`Program.Main`, hizmetin yürütülebilir dosyasının yolunu belirleyin ve uygulamanın içerik kökünü oluşturmak için yolu kullanın:
+' `Program.Main`de, hizmetin yürütülebilir klasörüne giden yolu belirleyin ve uygulamanın içerik kökünü oluşturmak için yolu kullanın:
 
 ```csharp
 var pathToExe = Process.GetCurrentProcess().MainModule.FileName;
@@ -921,90 +921,90 @@ CreateWebHostBuilder(args)
     .RunAsService();
 ```
 
-### <a name="store-a-services-files-in-a-suitable-location-on-disk"></a>Hizmetin dosyalarını diskte uygun bir konumda depolayın
+### <a name="store-a-services-files-in-a-suitable-location-on-disk"></a>Bir hizmetin dosyalarını diskte uygun bir konumda depolama
 
-Dosyaları içeren klasörde <xref:Microsoft.Extensions.Configuration.IConfigurationBuilder> kullanırken <xref:Microsoft.Extensions.Configuration.FileConfigurationExtensions.SetBasePath*> mutlak bir yol belirtin.
+Dosyaları içeren klasöre <xref:Microsoft.Extensions.Configuration.FileConfigurationExtensions.SetBasePath*> bir <xref:Microsoft.Extensions.Configuration.IConfigurationBuilder> kullanırken ile mutlak bir yol belirtin.
 
 ## <a name="troubleshoot"></a>Sorun giderme
 
-Windows hizmet uygulamasının sorunlarını gidermek için bkz. <xref:test/troubleshoot>.
+Bir Windows Hizmeti uygulamasını gidermek <xref:test/troubleshoot>için bkz.
 
 ### <a name="common-errors"></a>Sık karşılaşılan hatalar
 
-* PowerShell 'in eski veya yayın öncesi sürümü kullanımda.
-* Kayıtlı hizmet, [DotNet Publish](/dotnet/core/tools/dotnet-publish) komutundan uygulamanın **yayımlanmış** çıktısını kullanmaz. [DotNet Build](/dotnet/core/tools/dotnet-build) komutunun çıkışı, uygulama dağıtımı için desteklenmez. Yayımlanan varlıklar, dağıtım türüne bağlı olarak aşağıdaki klasörlerden birinde bulunur:
-  * *bin/Release/{Target Framework}/Publish* (FDD)
-  * *bin/Release/{Target Framework}/{RUNTIME tanımlayıcısı}/Publish* (SCD)
-* Hizmet çalışır durumda değil.
-* Uygulamanın kullandığı kaynakların yolları (örneğin, sertifikalar) yanlış. Windows hizmetinin temel yolu *c:\\windows\\system32*' dir.
-* Kullanıcı, hizmet hakları *olarak oturum* açma hakkına sahip değil.
-* `New-Service` PowerShell komutu çalıştırılırken kullanıcının parolasının kullanım dışı veya yanlış şekilde geçirilmesi.
-* Uygulama ASP.NET Core kimlik doğrulaması gerektiriyor, ancak güvenli bağlantılar (HTTPS) için yapılandırılmamış.
-* İstek URL 'SI bağlantı noktası yanlış veya uygulamada doğru şekilde yapılandırılmamış.
+* PowerShell'in eski veya ön sürüm sürümü kullanımdadır.
+* Kayıtlı hizmet, uygulamanın [yayınlanan dotnet yayımlama](/dotnet/core/tools/dotnet-publish) komutundan **çıkan** çıktısını kullanmaz. [Dotnet yapı](/dotnet/core/tools/dotnet-build) komutunun çıktısı uygulama dağıtımı için desteklenmez. Yayımlanmış varlıklar dağıtım türüne bağlı olarak aşağıdaki klasörlerden birinde bulunur:
+  * *bin/Release/{TARGET FRAMEWORK}/publish* (FDD)
+  * *bin/Release/{TARGET FRAMEWORK}/{RUNTIME IDENTIFIER}/publish* (SCD)
+* Hizmet RUNNING durumunda değil.
+* Uygulamanın kullandığı kaynaklara giden yollar (örneğin, sertifikalar) yanlıştır. Bir Windows Hizmetinin temel yolu *c:\\Windows\\System32.*
+* Kullanıcının hizmet olarak *Oturum* Açma'sı yoktur.
+* PowerShell komutunu çalıştırırken kullanıcının parolasının `New-Service` süresi doldu veya yanlış geçti.
+* Uygulama ASP.NET Çekirdek kimlik doğrulaması gerektirir, ancak güvenli bağlantılar (HTTPS) için yapılandırılmamıştır.
+* İstek URL bağlantı noktası yanlış veya uygulamada doğru yapılandırılmamıştır.
 
-### <a name="system-and-application-event-logs"></a>Sistem ve uygulama olay günlükleri
+### <a name="system-and-application-event-logs"></a>Sistem ve Uygulama Etkinlik Günlükleri
 
-Sistem ve uygulama olay günlüklerine erişin:
+Sistem ve Uygulama Etkinlik Günlüklerine Erişin:
 
-1. Başlat menüsünü açın, *Olay Görüntüleyicisi*araması yapın ve **Olay Görüntüleyicisi** uygulamayı seçin.
-1. **Olay Görüntüleyicisi**, **Windows günlükleri** düğümünü açın.
-1. Sistem olay günlüğünü açmak için **sistem** ' i seçin. Uygulama olay günlüğünü açmak için **uygulama** ' yı seçin.
-1. Başarısız olan uygulama ile ilişkili hataları arayın.
+1. Başlat menüsünü açın, *Olay Görüntüleyicisi'ni*arayın ve **Olay Görüntüleyicisi** uygulamasını seçin.
+1. **Olay Görüntüleyici'de** **Windows Günlükleri** düğümlerini açın.
+1. Sistem Olay Günlüğü'nü açmak için **Sistem'i** seçin. Uygulama Olay Günlüğü'nü açmak için **Uygulama'yı** seçin.
+1. Başarısız uygulamayla ilişkili hataları arayın.
 
-### <a name="run-the-app-at-a-command-prompt"></a>Uygulamayı bir komut isteminde aşağıdakini çalıştırın
+### <a name="run-the-app-at-a-command-prompt"></a>Uygulamayı komut istemiyle çalıştırma
 
-Birçok başlatma hatası olay günlüklerinde yararlı bilgiler oluşturmaz. Bazı hataların nedeni, barındıran sistemde bir komut isteminde uygulamayı çalıştırarak bulabilirsiniz. Uygulamadan ek ayrıntı günlüğe kaydetmek için, [günlük düzeyini](xref:fundamentals/logging/index#log-level) düşürün veya [geliştirme ortamında](xref:fundamentals/environments)uygulamayı çalıştırın.
+Birçok başlangıç hatası olay günlüklerinde yararlı bilgiler üretmez. Bazı hataların nedenini, uygulamayı barındırma sistemindeki bir komut isteminde çalıştırarak bulabilirsiniz. Uygulamadan ek ayrıntı günlüğe kaydetmek [için, günlük düzeyini](xref:fundamentals/logging/index#log-level) düşürün veya [uygulamayı Geliştirme ortamında](xref:fundamentals/environments)çalıştırın.
 
 ### <a name="clear-package-caches"></a>Paket önbelleklerini temizle
 
-Çalışan bir uygulama, geliştirme makinesindeki .NET Core SDK yükseltmeden veya uygulama içindeki paket sürümlerini değiştirirken hemen başarısız olabilir. Bazı durumlarda, ana yükseltme yaparken, bir uygulama tutarsız paketleri kesilebilir. Bu sorunların çoğu, bu yönergeleri izleyerek düzeltilebilir:
+İşleyen bir uygulama, geliştirme makinesindeki .NET Core SDK'yı yükselttikten veya uygulama içindeki paket sürümlerini değiştirdikten hemen sonra başarısız olabilir. Bazı durumlarda, tutarsız paketler büyük yükseltmeler gerçekleştirirken bir uygulamayı bozabilir. Bu sorunların çoğu aşağıdaki yönergeleri izleyerek giderilebilir:
 
 1. *Bin* ve *obj* klasörlerini silin.
-1. Bir komut kabuğundan [DotNet NuGet yerelleri, Tümünü Temizle](/dotnet/core/tools/dotnet-nuget-locals) ' i yürüterek paket önbelleklerini temizleyin.
+1. [Noktanet nuget yerel tüm](/dotnet/core/tools/dotnet-nuget-locals) çalıştırarak paket önbellekleri temizleyin - bir komut kabuğundan temizleyin.
 
-   Paket önbelleklerini Temizleme, [NuGet. exe](https://www.nuget.org/downloads) aracı ile de gerçekleştirilebilir ve komut `nuget locals all -clear`yürütülebilir. *NuGet. exe* , Windows masaüstü işletim sistemiyle birlikte paketlenmiş bir yüklemedir ve [NuGet Web sitesinden](https://www.nuget.org/downloads)ayrı olarak alınmalıdır.
+   Paket önbellekleri takas da [nuget.exe](https://www.nuget.org/downloads) aracı ile gerçekleştirilebilir `nuget locals all -clear`ve komutuyguluyor. *nuget.exe,* Windows masaüstü işletim sistemiyle birlikte yüklenmez ve [NuGet web sitesinden](https://www.nuget.org/downloads)ayrı olarak alınmalıdır.
 
-1. Geri yükle ve projeyi yeniden derleyin.
-1. Uygulamayı yeniden dağıtmadan önce sunucusundaki dağıtım klasöründeki tüm dosyaları silin.
+1. Projeyi geri yükleyin ve yeniden oluşturun.
+1. Uygulamayı yeniden dağıtmadan önce sunucudaki dağıtım klasöründeki tüm dosyaları silin.
 
-### <a name="slow-or-hanging-app"></a>Yavaş veya asılı uygulama
+### <a name="slow-or-hanging-app"></a>Yavaş veya asma uygulaması
 
-*Kilitlenme dökümü* , sistem belleğinin bir anlık görüntüsüdür ve uygulama kilitlenmesinin, başlatma hatasının veya yavaş uygulamanın nedenini belirlemenize yardımcı olabilir.
+*Kilitlenme dökümü,* sistemin belleğindebir anlık görüntüdür ve bir uygulamanın çökmesinin, başlangıç hatasının veya yavaş uygulamanın nedenini belirlemeye yardımcı olabilir.
 
-#### <a name="app-crashes-or-encounters-an-exception"></a>Uygulama kilitleniyor veya bir özel durumla karşılaşırsa
+#### <a name="app-crashes-or-encounters-an-exception"></a>Uygulama çöküyor veya bir özel durumla karşılaşıyor
 
-Windows Hata Bildirimi bir döküm edinin ve çözümleyin [(WER)](/windows/desktop/wer/windows-error-reporting):
+Windows Hata Raporlama [(WER)](/windows/desktop/wer/windows-error-reporting)bir dökümü edinin ve analiz:
 
-1. Kilitlenme döküm dosyalarını `c:\dumps`tutmak için bir klasör oluşturun.
-1. [Enabledökümler PowerShell betiğini](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/scripts/EnableDumps.ps1) uygulama yürütülebilir adıyla çalıştırın:
+1. Kilitlenme döküm dosyalarını '' adresinde `c:\dumps`tutmak için bir klasör oluşturun
+1. [EnableDumps PowerShell komut dosyasını](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/scripts/EnableDumps.ps1) uygulama çalıştırılabilir adla çalıştırın:
 
    ```console
    .\EnableDumps {APPLICATION EXE} c:\dumps
    ```
 
-1. Uygulamayı kilitlenmenin oluşmasına neden olan koşullar altında çalıştırın.
-1. Kilitlenme gerçekleştirildikten sonra, [Disabledökümler PowerShell betiğini](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/scripts/DisableDumps.ps1)çalıştırın:
+1. Uygulamayı çökmenin oluşmasına neden olan koşullar altında çalıştırın.
+1. Çökme oluştuktan sonra, [DisableDumps PowerShell komut dosyası](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/host-and-deploy/windows-service/scripts/DisableDumps.ps1)çalıştırın:
 
    ```console
    .\DisableDumps {APPLICATION EXE}
    ```
 
-Uygulama kilitlenmeleri ve döküm koleksiyonu tamamlandıktan sonra, uygulamanın normal olarak sonlandırılmasına izin verilir. PowerShell betiği, WER 'i uygulama başına en fazla beş döküm toplayacak şekilde yapılandırır.
+Bir uygulama çöktükten ve döküm toplama tamamlandıktan sonra, uygulamanın normal olarak sonlandırılmasına izin verilir. PowerShell komut dosyası, WER'i uygulama başına en fazla beş çöplük toplamak üzere yapılandırır.
 
 > [!WARNING]
-> Kilitlenme dökümleri büyük miktarda disk alanı kaplar (her birine kadar çok gigabayt kadar).
+> Kilitlenme dökümleri büyük miktarda disk alanı kapsayabilir (her biri birkaç gigabayta kadar).
 
-#### <a name="app-hangs-fails-during-startup-or-runs-normally"></a>Uygulama askıda kalıyor, başlatma sırasında başarısız oluyor veya normal şekilde çalışıyor
+#### <a name="app-hangs-fails-during-startup-or-runs-normally"></a>Uygulama askıda kalır, başlangıç sırasında başarısız olur veya normal çalışır
 
-Bir uygulama *askıda* kaldığında (yanıt vermeyi keser ancak kilitlenmez), başlatma sırasında başarısız olur veya normal şekilde çalışır. [Kullanıcı modu döküm dosyaları:](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool) döküm oluşturmak için uygun bir aracı seçmek üzere en iyi aracı seçme.
+Bir uygulama *askıda kaldığında* (yanıt vermeyi durdurur ancak kilitlenmez), başlangıç sırasında başarısız olduğunda veya normal olarak çalıştığında, [bkz.](/windows-hardware/drivers/debugger/user-mode-dump-files#choosing-the-best-tool)
 
-#### <a name="analyze-the-dump"></a>Dökümü çözümle
+#### <a name="analyze-the-dump"></a>Dökümü analiz edin
 
-Bir döküm çeşitli yaklaşımlar kullanılarak analiz edilebilir. Daha fazla bilgi için bkz. [Kullanıcı modu döküm dosyasını çözümleme](/windows-hardware/drivers/debugger/analyzing-a-user-mode-dump-file).
+Bir dökümü çeşitli yaklaşımlar kullanılarak analiz edilebilir. Daha fazla bilgi için [bkz.](/windows-hardware/drivers/debugger/analyzing-a-user-mode-dump-file)
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [Kestrel uç noktası yapılandırması](xref:fundamentals/servers/kestrel#endpoint-configuration) (https yapılandırması ve SNI desteği içerir)
+* [Kestrel uç nokta yapılandırması](xref:fundamentals/servers/kestrel#endpoint-configuration) (HTTPS yapılandırması ve SNI desteği içerir)
 * <xref:fundamentals/host/web-host>
 * <xref:test/troubleshoot>
 

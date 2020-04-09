@@ -1,52 +1,52 @@
 ---
 title: ASP.NET Core kullanmaya başlayın
 author: rick-anderson
-description: ASP.NET Core kullanarak temel bir Merhaba Dünya uygulaması oluşturan ve çalıştıran kısa bir öğretici.
+description: Core'u kullanarak temel bir Hello World uygulaması oluşturan ve çalıştıran kısa ASP.NET bir öğretici.
 ms.author: riande
 ms.custom: mvc
 ms.date: 01/07/2020
 uid: getting-started
-ms.openlocfilehash: 047fd7a74d3d53f68a730d67b63c65fe6bda529f
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 86a0c8d017138a949fddc0356f3de548d368a4c0
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78658468"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80417605"
 ---
-# <a name="tutorial-get-started-with-aspnet-core"></a>Öğretici: ASP.NET Core kullanmaya başlayın
+# <a name="tutorial-get-started-with-aspnet-core"></a>Öğretici: ASP.NET Core ile başlayın
 
-Bu öğreticide, .NET Core CLI kullanılarak ASP.NET Core bir Web uygulamasının nasıl oluşturulacağı ve çalıştırılacağı gösterilmektedir.
+Bu öğretici, .NET Core CLI'yi kullanarak bir ASP.NET Core web uygulamasının nasıl oluşturulup çalıştırılabildiğini gösterir.
 
 Şunları öğrenirsiniz:
 
 > [!div class="checklist"]
-> * Bir Web uygulaması projesi oluşturun.
+> * Bir web uygulaması projesi oluşturun.
 > * Geliştirme sertifikasına güvenin.
 > * Uygulamayı çalıştırın.
-> * Razor sayfasını düzenleyin.
+> * Razor sayfasını edin.
 
-Sonunda, yerel makinenizde çalışan bir çalışan Web uygulamanız olacaktır.
+Sonunda, yerel makinenizde çalışan bir web uygulamanız olur.
 
 ![Web uygulaması giriş sayfası](_static/home-page.png)
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 [!INCLUDE[](~/includes/3.1-SDK.md)]
 
-## <a name="create-a-web-app-project"></a>Web uygulaması projesi oluşturma
+## <a name="create-a-web-app-project"></a>Bir web uygulaması projesi oluşturma
 
-Bir komut kabuğu açın ve şu komutu girin:
+Komut kabuğunu açın ve aşağıdaki komutu girin:
 
 ```dotnetcli
 dotnet new webapp -o aspnetcoreapp
 ```
 
-Önceki komut:
+Yukarıdaki komut:
 
-* Yeni bir Web uygulaması oluşturur.  
-* `-o aspnetcoreapp` parametresi, uygulama için kaynak dosyalarla *aspnetcoreapp* adlı bir dizin oluşturur.
+* Yeni bir web uygulaması oluşturur.  
+* Parametre, `-o aspnetcoreapp` uygulamanın kaynak dosyalarıyla *aspnetcoreapp* adında bir dizin oluşturur.
 
-### <a name="trust-the-development-certificate"></a>Geliştirme sertifikasına güven
+### <a name="trust-the-development-certificate"></a>Geliştirme sertifikasına güvenin
 
 HTTPS geliştirme sertifikasına güvenin:
 
@@ -56,11 +56,11 @@ HTTPS geliştirme sertifikasına güvenin:
 dotnet dev-certs https --trust
 ```
 
-Yukarıdaki komutta aşağıdaki iletişim kutusu görüntülenir:
+Önceki komut aşağıdaki iletişim kutusunu görüntüler:
 
-![Güvenlik Uyarısı iletişim kutusu](~/getting-started/_static/cert.png)
+![Güvenlik uyarısı iletişim kutusu](~/getting-started/_static/cert.png)
 
-Geliştirme sertifikasına güvenmeyi kabul ediyorsanız **Evet** ' i seçin.
+Geliştirme sertifikasına güvenmeyi kabul ederseniz **Evet'i** seçin.
 
 # <a name="macos"></a>[macOS](#tab/macos)
 
@@ -68,19 +68,19 @@ Geliştirme sertifikasına güvenmeyi kabul ediyorsanız **Evet** ' i seçin.
 dotnet dev-certs https --trust
 ```
 
-Yukarıdaki komut aşağıdaki iletiyi görüntüler:
+Önceki komut aşağıdaki iletiyi görüntüler:
 
-*Https geliştirme sertifikasına güvenmek istendi. Sertifikaya zaten güvenilmiyorsa, şu komutu çalıştıracağız:* `'sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain <<certificate>>'`
+*HTTPS geliştirme sertifikasına güvenmek istendi. Sertifikaya zaten güvenilen değilse, aşağıdaki komutu çalıştıracağız:*`'sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain <<certificate>>'`
 
-Bu komut, sertifikayı sistem anahtarlığınıza yüklemek için parolanızı isteyebilir. Geliştirme sertifikasına güvenmeyi kabul ediyorsanız parolanızı girin.
+Bu komut, parolanızın sertifikayı sistem anahtarlığına yüklemesini isteyebilir. Geliştirme sertifikasına güvenmeyi kabul ederseniz parolanızı girin.
 
 # <a name="linux"></a>[Linux](#tab/linux)
 
-HTTPS geliştirme sertifikasına güvenmek için Linux dağılııza yönelik belgelere bakın.
+HTTPS geliştirme sertifikasına nasıl güveninizle ilgili Linux dağıtımınızın belgelerine bakın.
 
 ---
 
-Daha fazla bilgi için bkz [. asp.NET Core https geliştirme sertifikasına güven](xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos)
+Daha fazla bilgi için bkz: [ASP.NET Çekirdek HTTPS geliştirme sertifikasına güven](xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos)
 
 ## <a name="run-the-app"></a>Uygulamayı çalıştırma
 
@@ -91,27 +91,27 @@ cd aspnetcoreapp
 dotnet watch run
 ```
 
-Komut kabuğu, uygulamanın başlatıldığını gösteriyorsa, [https://localhost:5001](https://localhost:5001)gidin.
+Komut kabuğu uygulamanın başladığını söyledikten sonra, `https://localhost:5001`'ye göz atın.
 
-## <a name="edit-a-razor-page"></a>Razor sayfasını düzenleme
+## <a name="edit-a-razor-page"></a>Jilet sayfasını edin
 
-*Pages/Index. cshtml* dosyasını açın ve sayfayı aşağıdaki vurgulanmış işaretlerle değiştirin ve kaydedin:
+*Sayfaları/Index.cshtml'i* açın ve sayfayı aşağıdaki vurgulanan biçimlendirmeyle değiştirin ve kaydedin:
 
 [!code-cshtml[](sample/index.cshtml?highlight=9)]
 
-[https://localhost:5001](https://localhost:5001)gidin, sayfayı yenileyin ve değişikliklerin görüntülendiğini doğrulayın.
+Sayfaya `https://localhost:5001`göz atın, yenileyin ve değişikliklerin görüntülendiğini doğrulayın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 Bu öğreticide, şunların nasıl yapıldığını öğrendiniz:
 
 > [!div class="checklist"]
-> * Bir Web uygulaması projesi oluşturun.
+> * Bir web uygulaması projesi oluşturun.
 > * Geliştirme sertifikasına güvenin.
 > * Projeyi çalıştırın.
-> * Değişiklik yapın.
+> * Bir değişiklik yap.
 
-ASP.NET Core hakkında daha fazla bilgi edinmek için bkz. giriş bölümünde önerilen öğrenme yolu:
+ASP.NET Core hakkında daha fazla bilgi edinmek için, girişte önerilen öğrenme yoluna bakın:
 
 > [!div class="nextstepaction"]
 > <xref:index#recommended-learning-path>

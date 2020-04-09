@@ -1,5 +1,5 @@
-# <a name="aspnet-core-windows-service-sample"></a>ASP.NET Core Windows hizmeti örneği
+# <a name="aspnet-core-windows-service-sample"></a>ASP.NET Temel Windows Hizmet Örneği
 
-Bu örnek, IIS kullanmadan bir ASP.NET Core uygulamasının bir Windows hizmeti olarak nasıl barındırılacağını gösterir. Bu örnek, [Windows hizmetinde ana bilgisayar ASP.NET Core](https://docs.microsoft.com/aspnet/core/host-and-deploy/windows-service)açıklanan senaryoyu gösterir.
+Bu örnek, iIS kullanmadan bir ASP.NET Core uygulamasının Windows Hizmeti olarak nasıl barındırılabildiğini gösterir. Bu örnek, [Bir Windows Hizmetinde Ana Bilgisayar ASP.NET Core'da](https://docs.microsoft.com/aspnet/core/host-and-deploy/windows-service)açıklanan senaryoyu gösterir.
 
-Hizmeti kurduktan ve başlattıktan sonra, `http://localhost:5000/`bir tarayıcıda uygulamaya erişin.
+Hizmeti kurduktan ve başladıktan sonra, uygulamanın bir tarayıcıdan ' 0'dan `http://localhost:5000/`

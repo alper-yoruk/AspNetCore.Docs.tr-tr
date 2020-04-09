@@ -2,14 +2,14 @@
 npm run release
 ```
 
-Bu komut, uygulamayı çalıştırırken sunulacak istemci tarafı varlıkları oluşturur. Varlıklar *Wwwroot* klasörüne yerleştirilir.
+Bu komut, uygulamayı çalıştırırken sunulacak istemci tarafı varlıklarını oluşturur. Varlıklar *wwwroot* klasörüne yerleştirilir.
 
-WebPack aşağıdaki görevleri tamamladı:
+Webpack aşağıdaki görevleri tamamladı:
 
-* *Wwwroot* dizininin içeriği temizlendi.
-* TypeScript 'i *transpilation*olarak bilinen bir işlemde JavaScript 'e dönüştürüyordu.
-* Dosya boyutunu *minbirleşme*olarak bilinen bir işlemde azaltmak Için üretilen JavaScript 'i karıştırın.
-* İşlenen JavaScript, CSS ve HTML dosyaları *src* 'den *Wwwroot* dizinine kopyalanamadı.
-* *Wwwroot/index.html* dosyasına aşağıdaki öğeler eklenmiş:
-  * *Wwwroot/Main.\<karma\>. css* dosyasına başvuran bir `<link>` etiketi. Bu etiket, kapatma `</head>` etiketinden hemen öncesine yerleştirilir.
-  * Mini olarak belirtilen *Wwwroot/Main.\<karma\>. js* dosyasına başvuruda bulunan bir `<script>` etiketi. Bu etiket, kapatma `</body>` etiketinden hemen öncesine yerleştirilir.
+* *wwwroot* dizinin içeriğini tasfiye.
+* *Transpilasyon*olarak bilinen bir işlemde TypeScript'i JavaScript'e dönüştürdü.
+* *Minification*olarak bilinen bir işlemde dosya boyutunu azaltmak için oluşturulan JavaScript ezilmiş.
+* İşlenen JavaScript, CSS ve HTML dosyalarını *src'den* *wwwroot* dizinine kopyaladı.
+* Aşağıdaki öğeleri *wwwroot/index.html* dosyasına enjekte edilmiştir:
+  * Wwwroot/main'e `<link>` atıfta bulunan bir *etiket.\< hash\>.css* dosyası. Bu etiket kapanış `</head>` etiketinden hemen önce yerleştirilir.
+  * Minified `<script>` *wwwroot/main'e atıfta bulunan\< bir etiket. hash\>.js* dosyası. Bu etiket kapanış `</body>` etiketinden hemen önce yerleştirilir.

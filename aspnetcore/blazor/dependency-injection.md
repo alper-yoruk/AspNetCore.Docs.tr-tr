@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core Blazor bağımlılığı ekleme
+title: ASP.NET Blazor Çekirdek bağımlılık enjeksiyonu
 author: guardrex
-description: Blazor uygulamalarının bileşenlere nasıl hizmet ekleyebilmesi için bkz.
+description: Uygulamaların Blazor hizmetleri bileşenlere nasıl enjekte edebileceğine bakın.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -11,42 +11,42 @@ no-loc:
 - SignalR
 uid: blazor/dependency-injection
 ms.openlocfilehash: 4cdde9ee8c9fd9adf00894a067d32965b180e5ec
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78658076"
 ---
-# <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core Blazor bağımlılığı ekleme
+# <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Çekirdek Blazor bağımlılık enjeksiyonu
 
-Tarafından [Rainer Stropek](https://www.timecockpit.com) ve [Mike rousos](https://github.com/mjrousos)
+Yazar: [Rainer Stropek](https://www.timecockpit.com) ve [Mike Rousos](https://github.com/mjrousos)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Blazor, [bağımlılık ekleme işlemini (dı)](xref:fundamentals/dependency-injection)destekler. Uygulamalar, yerleşik hizmetleri ekleme tarafından bileşenlere kullanabilir. Uygulamalar Ayrıca özel hizmetleri tanımlayabilir ve kaydedebilir ve bu Hizmetleri uygulama genelinde DI aracılığıyla kullanılabilir hale getirebilirsiniz.
+Blazor [bağımlılık enjeksiyonu destekler (DI)](xref:fundamentals/dependency-injection). Uygulamalar yerleşik hizmetleri bileşenlere enjekte ederek kullanabilir. Uygulamalar ayrıca özel hizmetleri tanımlayabilir ve kaydedebilir ve bunları DI aracılığıyla uygulama boyunca kullanılabilir hale getirebilir.
 
-DI, merkezi bir konumda yapılandırılmış hizmetlere erişmek için bir tekniktir. Bu, Blazor uygulamalarında şu şekilde yararlı olabilir:
+DI, merkezi bir konumda yapılandırılan hizmetlere erişmek için bir tekniktir. Bu, Blazor uygulamalarında aşağıdakiler için yararlı olabilir:
 
-* Hizmet sınıfının tek bir *örneğini tek bir hizmet olarak* bilinen birçok bileşen arasında paylaşabilirsiniz.
-* Başvuru soyutlamalarını kullanarak somut hizmet sınıflarından bileşenleri ayırın. Örneğin, uygulamadaki verilere erişmek için bir arabirim `IDataAccess` düşünün. Arabirim somut bir `DataAccess` sınıfı tarafından uygulanır ve uygulamanın hizmet kapsayıcısında bir hizmet olarak kaydedilir. Bir bileşen bir `IDataAccess` uygulamasını almak için DI kullandığında, bileşen somut tür ile eşleştirilmez. Uygulama, büyük olasılıkla birim testlerinde bir sahte uygulama için değiştirilebilir.
+* *Tek ton* hizmeti olarak bilinen birçok bileşen arasında hizmet sınıfının tek bir örneğini paylaşın.
+* Referans soyutlamaları kullanarak bileşenleri somut hizmet sınıflarından ayırın. Örneğin, uygulamadaki `IDataAccess` verilere erişmek için bir arabirim düşünün. Arabirim, somut `DataAccess` bir sınıf tarafından uygulanır ve uygulamanın servis konteynerinde hizmet olarak kaydedilir. Bir bileşen bir `IDataAccess` uygulama almak için DI kullandığında, bileşen beton türüyle birleştiğinde olmaz. Uygulama, belki birim testlerinde sahte bir uygulama için değiştirilebilir.
 
 ## <a name="default-services"></a>Varsayılan hizmetler
 
-Varsayılan hizmetler, uygulamanın hizmet koleksiyonuna otomatik olarak eklenir.
+Varsayılan hizmetler otomatik olarak uygulamanın hizmet koleksiyonuna eklenir.
 
 | Hizmet | Ömür | Açıklama |
 | ------- | -------- | ----------- |
-| <xref:System.Net.Http.HttpClient> | adet | HTTP istekleri göndermek ve bir URI tarafından tanımlanan bir kaynaktan HTTP yanıtlarını almak için yöntemler sağlar.<br><br>Bir Blazor WebAssembly uygulamasındaki `HttpClient` örneği, arka planda HTTP trafiğini işlemek için tarayıcıyı kullanır.<br><br>Blazor sunucu uygulamaları, varsayılan olarak hizmet olarak yapılandırılmış bir `HttpClient` içermez. Bir Blazor sunucu uygulamasına `HttpClient` sağlayın.<br><br>Daha fazla bilgi için bkz. <xref:blazor/call-web-api>. |
-| `IJSRuntime` | Singleton (Blazor WebAssembly)<br>Kapsamlı (Blazor sunucusu) | JavaScript çağrılarının dağıtıldığı bir JavaScript çalışma zamanının örneğini temsil eder. Daha fazla bilgi için bkz. <xref:blazor/call-javascript-from-dotnet>. |
-| `NavigationManager` | Singleton (Blazor WebAssembly)<br>Kapsamlı (Blazor sunucusu) | URI 'Ler ve gezinme durumu ile çalışmaya yönelik yardımcıları içerir. Daha fazla bilgi için bkz. [URI ve gezinti durumu yardımcıları](xref:blazor/routing#uri-and-navigation-state-helpers). |
+| <xref:System.Net.Http.HttpClient> | Singleton | BIR URI tarafından tanımlanan bir kaynaktan HTTP istekleri göndermek ve HTTP yanıtları almak için yöntemler sağlar.<br><br>Blazor `HttpClient` WebAssembly uygulamasındaki örnek, arka planda http trafiğini işlemek için tarayıcıyı kullanır.<br><br>Blazor Server uygulamaları varsayılan `HttpClient` olarak bir hizmet olarak yapılandırılmış içermez. Bir `HttpClient` Blazor Server uygulaması sağlayın.<br><br>Daha fazla bilgi için bkz. <xref:blazor/call-web-api>. |
+| `IJSRuntime` | Singleton (Blazor WebAssembly)<br>Scoped (Blazor Server) | JavaScript çağrılarının gönderildiği bir JavaScript çalışma zamanı örneğini temsil eder. Daha fazla bilgi için bkz. <xref:blazor/call-javascript-from-dotnet>. |
+| `NavigationManager` | Singleton (Blazor WebAssembly)<br>Scoped (Blazor Server) | URI'ler ve navigasyon durumuyla çalışmak için yardımcılar içerir. Daha fazla bilgi için [URI ve navigasyon durumu yardımcıları](xref:blazor/routing#uri-and-navigation-state-helpers)bakın. |
 
-Özel bir hizmet sağlayıcı, tabloda listelenen varsayılan Hizmetleri otomatik olarak sağlamaz. Özel bir hizmet sağlayıcısı kullanır ve tabloda gösterilen hizmetlerden herhangi birini gerekliyse, gerekli hizmetleri yeni hizmet sağlayıcısına ekleyin.
+Özel bir hizmet sağlayıcısı, tabloda listelenen varsayılan hizmetleri otomatik olarak sağlamaz. Özel bir hizmet sağlayıcısı kullanıyorsanız ve tabloda gösterilen hizmetlerden herhangi birini gerektiriyorsanız, gerekli hizmetleri yeni hizmet sağlayıcısına ekleyin.
 
 ## <a name="add-services-to-an-app"></a>Uygulamaya hizmet ekleme
 
 ### <a name="blazor-webassembly"></a>Blazor WebAssembly
 
-*Program.cs*'ın `Main` yönteminde uygulamanın hizmet koleksiyonu için Hizmetleri yapılandırın. Aşağıdaki örnekte, `MyDependency` uygulama `IMyDependency`için kaydedilir:
+`Main` *Uygulamanın*hizmet toplama hizmetlerini Program.cs yöntemiyle yapılandırın. Aşağıdaki örnekte, `MyDependency` uygulama için `IMyDependency`kaydedilir:
 
 ```csharp
 public class Program
@@ -62,7 +62,7 @@ public class Program
 }
 ```
 
-Konak oluşturulduktan sonra, herhangi bir bileşen işlenmeden önce kök dı kapsamından hizmetlere erişilebilir. Bu, içerik işlemeden önce başlatma mantığını çalıştırmak için yararlı olabilir:
+Ana bilgisayar oluşturuluntan sonra, hizmetlere herhangi bir bileşen işlenmeden önce kök DI kapsamından erişilebilir. Bu, içeriği oluşturmadan önce başlatma mantığını çalıştırmak için yararlı olabilir:
 
 ```csharp
 public class Program
@@ -83,7 +83,7 @@ public class Program
 }
 ```
 
-Konak, uygulama için bir merkezi yapılandırma örneği de sağlar. Yukarıdaki örnekte derleme yaparken, hava durumu hizmetinin URL 'SI, `InitializeWeatherAsync`için varsayılan bir yapılandırma kaynağından (örneğin, *appSettings. JSON*) geçirilir:
+Ana bilgisayar, uygulama için merkezi bir yapılandırma örneği de sağlar. Önceki örnekte bina, hava durumu hizmetinin URL'si varsayılan bir yapılandırma kaynağından (örneğin, *appsettings.json)* `InitializeWeatherAsync`geçirilir:
 
 ```csharp
 public class Program
@@ -107,7 +107,7 @@ public class Program
 
 ### <a name="blazor-server"></a>Blazor Server
 
-Yeni bir uygulama oluşturduktan sonra `Startup.ConfigureServices` yöntemini inceleyin:
+Yeni bir uygulama oluşturduktan `Startup.ConfigureServices` sonra yöntemi inceleyin:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -116,7 +116,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-`ConfigureServices` yöntemi, hizmet açıklayıcı nesnelerinin bir listesi olan bir <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection>geçirilir (<xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor>). Hizmetler, hizmet koleksiyonuna hizmet tanımlayıcıları sağlayarak eklenir. Aşağıdaki örnek, `IDataAccess` arabirimiyle kavramı ve somut uygulama `DataAccess`gösterir:
+Yöntem, `ConfigureServices` hizmet <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection>tanımlayıcı nesnelerin listesi olan bir ()<xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor>geçirilir. Hizmetler, hizmet koleksiyonuna hizmet tanımlayıcıları sağlanarak eklenir. Aşağıdaki `IDataAccess` örnek, arayüz ve somut uygulama `DataAccess`ile kavramı göstermektedir:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -127,32 +127,32 @@ public void ConfigureServices(IServiceCollection services)
 
 ### <a name="service-lifetime"></a>Hizmet ömrü
 
-Hizmetler, aşağıdaki tabloda gösterilen ömürlerle yapılandırılabilir.
+Hizmetler, aşağıdaki tabloda gösterilen yaşam süreleriyle yapılandırılabilir.
 
 | Ömür | Açıklama |
 | -------- | ----------- |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped*> | Blazor WebAssembly uygulamalarının Şu anda bir dı kapsamları kavramı yoktur. `Scoped`kayıtlı hizmetler `Singleton` hizmetleri gibi davranır. Ancak, Blazor sunucusu barındırma modeli `Scoped` ömrünü destekler. Blazor Server uygulamalarında, kapsamlı bir hizmet kaydı *bağlantının*kapsamına alınır. Bu nedenle, geçerli amaç tarayıcıda istemci tarafı çalıştırmak olsa bile, kapsama alınmış hizmetlerin kullanılması geçerli kullanıcı kapsamında olması gereken hizmetler için tercih edilir. |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton*> | Dı, hizmetin *tek bir örneğini* oluşturur. Bir `Singleton` hizmeti gerektiren tüm bileşenler aynı hizmetin bir örneğini alır. |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient*> | Bir bileşen hizmet kapsayıcısından bir `Transient` hizmeti örneği aldığında, hizmetin *Yeni bir örneğini* alır. |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped*> | BlazorWebAssembly uygulamaları şu anda DI kapsamları kavramı yok. `Scoped`-kayıtlı hizmetler hizmet `Singleton` gibi olur. Ancak, Blazor Sunucu barındırma modeli `Scoped` ömür boyu destekler. Sunucu Blazor uygulamalarında, kapsamlı bir hizmet kaydı *bağlantıya*kapsamlıdır. Bu nedenle, geçerli amaç istemci tarafında tarayıcıda çalıştırmak olsa bile, geçerli kullanıcıya kapsamlı olması gereken hizmetler için kapsamlı hizmetlerin kullanılması tercih edilir. |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton*> | DI, hizmetin tek bir *örneğini* oluşturur. Hizmet `Singleton` gerektiren tüm bileşenler aynı hizmetin bir örneğini alır. |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient*> | Bir bileşen hizmet kapsayıcısından bir `Transient` hizmet örneği aldığında, hizmetin yeni bir *örneğini* alır. |
 
-Dı sistemi ASP.NET Core içindeki DI sistemini temel alır. Daha fazla bilgi için bkz. <xref:fundamentals/dependency-injection>.
+DI sistemi ASP.NET Core'daki DI sistemine dayanır. Daha fazla bilgi için bkz. <xref:fundamentals/dependency-injection>.
 
-## <a name="request-a-service-in-a-component"></a>Bir bileşende hizmet isteme
+## <a name="request-a-service-in-a-component"></a>Bileşende hizmet isteme
 
-Hizmetler hizmet koleksiyonuna eklendikten sonra, [\@Ekle](xref:mvc/views/razor#inject) Razor yönergesini kullanarak hizmetleri bileşenlere ekleyin. `@inject` iki parametreye sahiptir:
+Hizmetler hizmet koleksiyonuna eklendikten sonra, razor [ \@direktifini kullanarak](xref:mvc/views/razor#inject) hizmetleri bileşenlere enjekte edin. `@inject`iki parametrevardır:
 
-* Eklenecek hizmetin türünü &ndash; yazın.
-* Özelliği, eklenen App Service 'i alan özelliğin adını &ndash;. Özelliği el ile oluşturma gerektirmez. Derleyici özelliği oluşturur.
+* Enjekte &ndash; etmek için hizmet türünü yazın.
+* Özellik &ndash; Enjekte edilen uygulama hizmetini alan özelliğin adı. Özellik manuel oluşturma gerektirmez. Derleyici özelliği oluşturur.
 
 Daha fazla bilgi için bkz. <xref:mvc/views/dependency-injection>.
 
-Farklı hizmetler eklemek için birden çok `@inject` deyimi kullanın.
+Farklı `@inject` hizmetler enjekte etmek için birden çok deyim kullanın.
 
-Aşağıdaki örnek `@inject`nasıl kullanacağınızı gösterir. `Services.IDataAccess` uygulayan hizmet bileşenin Özellik `DataRepository`eklenir. Kodun yalnızca `IDataAccess` soyutlamasını nasıl kullandığını aklınızda yapın:
+Aşağıdaki örnekte nasıl `@inject`kullanılacağı gösterilmektedir. Hizmet uygulaması `Services.IDataAccess` bileşenin özelliğine `DataRepository`enjekte edilir. Kodun yalnızca soyutlamayı `IDataAccess` nasıl kullandığına dikkat edin:
 
 [!code-razor[](dependency-injection/samples_snapshot/3.x/CustomerList.razor?highlight=2-3,23)]
 
-Dahili olarak, oluşturulan Özellik (`DataRepository`) `InjectAttribute` özniteliğini kullanır. Genellikle, bu öznitelik doğrudan kullanılmaz. Bileşenler için bir temel sınıf gerekliyse ve temel sınıf için eklenen özellikler de gerekliyse, `InjectAttribute`el ile ekleyin:
+Dahili olarak, oluşturulan`DataRepository`özellik `InjectAttribute` ( ) özniteliği kullanır. Genellikle, bu öznitelik doğrudan kullanılmaz. Bileşenler için bir taban sınıf gerekiyorsa ve taban sınıf için enjekte edilen `InjectAttribute`özellikler de gerekliyse, el ile ekleyin:
 
 ```csharp
 public class ComponentBase : IComponent
@@ -164,7 +164,7 @@ public class ComponentBase : IComponent
 }
 ```
 
-Temel sınıftan türetilmiş bileşenlerde `@inject` yönergesi gerekli değildir. Temel sınıfın `InjectAttribute` yeterlidir:
+Taban sınıftan türetilen bileşenlerde `@inject` yönerge gerekli değildir. `InjectAttribute` Taban sınıfın yeterlidir:
 
 ```razor
 @page "/demo"
@@ -173,9 +173,9 @@ Temel sınıftan türetilmiş bileşenlerde `@inject` yönergesi gerekli değild
 <h1>Demo Component</h1>
 ```
 
-## <a name="use-di-in-services"></a>Hizmetler 'de dı kullanma
+## <a name="use-di-in-services"></a>Hizmetlerde DI'yi kullanma
 
-Karmaşık hizmetler için ek hizmetler gerekebilir. Önceki örnekte, `DataAccess` `HttpClient` varsayılan hizmeti gerektirebilir. `@inject` (veya `InjectAttribute`), hizmetlerde kullanılamaz. Bunun yerine *Oluşturucu Ekleme* kullanılmalıdır. Gerekli hizmetler, hizmetin oluşturucusuna parametreler eklenerek eklenir. Dı hizmeti oluşturduğunda, oluşturucuda gereken hizmetleri algılar ve bunlara göre sağlar.
+Karmaşık hizmetler ek hizmetler gerektirebilir. Önceki örnekte, `DataAccess` `HttpClient` varsayılan hizmet gerektirebilir. `@inject``InjectAttribute`(veya) hizmetlerde kullanılamaz. *Bunun* yerine yapıcı enjeksiyon kullanılmalıdır. Gerekli hizmetler, hizmetin oluşturucuya parametreler eklenerek eklenir. DI hizmeti oluşturduğunda, oluşturucuda ihtiyaç duyduğu hizmetleri tanır ve buna göre sağlar.
 
 ```csharp
 public class DataAccess : IDataAccess
@@ -189,26 +189,26 @@ public class DataAccess : IDataAccess
 }
 ```
 
-Oluşturucu Ekleme önkoşulları:
+Konstrüktör enjeksiyonu için ön koşullar:
 
-* Bağımsız değişkenlerinin tümü DI tarafından yerine getirilme için tek bir Oluşturucu bulunmalıdır. Varsayılan değerleri belirttiklerinde, DI tarafından kapsanmayan ek parametrelere izin verilir.
-* Uygulanabilir Oluşturucu *ortak*olmalıdır.
-* Uygulanabilir bir Oluşturucu var olmalıdır. Belirsizlik söz konusu olduğunda, bir özel durum oluşturur.
+* Bir oluşturucu olan argümanlar tüm DI tarafından yerine getirilebilir var olmalıdır. Varsayılan değerleri belirtirlerse, DI tarafından kapsanmayan ek parametrelere izin verilir.
+* İlgili yapıcı *genel*olmalıdır.
+* Uygulanabilir bir yapıcı var olmalıdır. Bir belirsizlik durumunda, DI bir özel durum atar.
 
-## <a name="utility-base-component-classes-to-manage-a-di-scope"></a>Bir dı kapsamını yönetmek için yardımcı program temel bileşen sınıfları
+## <a name="utility-base-component-classes-to-manage-a-di-scope"></a>Bir DI kapsamını yönetmek için yardımcı program temel bileşen sınıfları
 
-ASP.NET Core uygulamalarda, kapsamlı hizmetler genellikle geçerli isteğin kapsamlandırılır. İstek tamamlandıktan sonra, tüm kapsamlı veya geçici hizmetler dı sistemi tarafından silinir. Blazor Server uygulamalarında istek kapsamı, istemci bağlantısı süresince sürer ve bu da geçici ve kapsamlı hizmetlerin beklenenden çok daha uzun sürebileceği anlamına gelir. Blazor WebAssembly uygulamalarında, kapsamlı bir ömürle kaydedilen hizmetler tekton olarak değerlendirilir, bu nedenle tipik ASP.NET Core uygulamalardaki kapsamlı hizmetlerden daha uzun bir süre yaşarlar.
+ASP.NET Core uygulamalarında, kapsamlı hizmetler genellikle geçerli isteğe göre kapsamlıdır. İstek tamamlandıktan sonra, kapsamlı veya geçici hizmetler DI sistemi tarafından bertaraf edilir. Sunucu Blazor uygulamalarında, istek kapsamı istemci bağlantısı süresince devam eder ve bu da geçici ve kapsamlı hizmetlerin beklenenden çok daha uzun yaşamalarına neden olabilir. WebAssembly uygulamalarında, Blazor kapsamlı bir kullanım ömrüne sahip hizmetler singletons olarak kabul edilir, bu nedenle tipik ASP.NET Core uygulamalarındaki kapsamlı hizmetlerden daha uzun yaşarlar.
 
-Blazor uygulamalarında bir hizmet ömrünü sınırlayan bir yaklaşım, `OwningComponentBase` türünü kullanmaktır. `OwningComponentBase`, bileşenin ömrüne karşılık gelen bir dı kapsamı oluşturan `ComponentBase` türetilmiş bir soyut türdür. Bu kapsamı kullanarak, dı hizmetlerini kapsamlı bir ömür ile kullanmak mümkündür ve bileşen olarak bu uygulamaları canlı hale gelir. Bileşen yok edildiğinde, bileşenin kapsamlı hizmet sağlayıcısından gelen hizmetler de silinir. Bu, şu hizmetler için yararlı olabilir:
+Uygulamalarda Blazor hizmet ömrünü sınırlayan bir yaklaşım, `OwningComponentBase` bu tür de kullanılır. `OwningComponentBase`bileşenin `ComponentBase` ömrüne karşılık gelen bir DI kapsamı oluşturan soyut bir türdür. Bu kapsamı kullanarak, DI hizmetlerini kapsamlı bir ömür boyu kullanmak ve bileşen kadar uzun süre yaşamalarını sağlamak mümkündür. Bileşen yok edildiğinde, bileşenin kapsamlı servis sağlayıcısının hizmetleri de bertaraf edilir. Bu, aşağıdaki hizmetler için yararlı olabilir:
 
 * Geçici ömür uygun olmadığından, bir bileşen içinde yeniden kullanılmalıdır.
-* Tek yaşam süresi uygun olmadığından, bileşenler arasında paylaşılmamalıdır.
+* Singleton ömrü uygun olmadığından, bileşenler arasında paylaşılmamalıdır.
 
-`OwningComponentBase` türünün iki sürümü kullanılabilir:
+`OwningComponentBase` Türünün iki sürümü mevcuttur:
 
-* `OwningComponentBase`, `IServiceProvider`türünde korumalı bir `ScopedServices` özelliğine sahip `ComponentBase` türünün soyut, atılabilir alt öğesidir. Bu sağlayıcı, bileşenin kullanım ömrü kapsamındaki Hizmetleri çözümlemek için kullanılabilir.
+* `OwningComponentBase``ComponentBase` türünde `ScopedServices` `IServiceProvider`korumalı bir özelliğe sahip türün soyut, tek kullanımlık bir çocuktur. Bu sağlayıcı, bileşenin ömrüne göre kapsamda olan hizmetleri çözümlemek için kullanılabilir.
 
-  `@inject` veya `InjectAttribute` (`[Inject]`) kullanılarak bileşene eklenen dı Hizmetleri bileşen kapsamında oluşturulmaz. Bileşenin kapsamını kullanmak için, `ScopedServices.GetRequiredService` veya `ScopedServices.GetService`kullanılarak hizmetler çözümlenmelidir. `ScopedServices` sağlayıcısı kullanılarak çözümlenen hizmetlerin bağımlılıkları, aynı kapsamdan sağlanmış olmalıdır.
+  Bileşene enjekte `@inject` edilen DI hizmetleri `InjectAttribute` `[Inject]`veya ( ) bileşenin kapsamında oluşturulmaz. Bileşenin kapsamını kullanmak için, hizmetlerin kullanılarak `ScopedServices.GetRequiredService` çözülmesi `ScopedServices.GetService`veya . `ScopedServices` Sağlayıcı kullanılarak çözüme kavuşturulan tüm hizmetlerin bağımlılıkları aynı kapsamdan sağlanır.
 
   ```razor
   @page "/preferences"
@@ -236,7 +236,7 @@ Blazor uygulamalarında bir hizmet ömrünü sınırlayan bir yaklaşım, `Ownin
   }
   ```
 
-* `OwningComponentBase<T>` `OwningComponentBase` türetilir ve kapsamdaki dı sağlayıcısından `T` örneğini döndüren bir özellik `Service` ekler. Bu tür, uygulamanın, bileşenin kapsamını kullanan bir birincil hizmet olduğunda bir `IServiceProvider` örneğini kullanmadan kapsamlı hizmetlere erişmenin kolay bir yoludur. `ScopedServices` özelliği kullanılabilir, bu sayede uygulama, gerekirse diğer türlerde hizmetleri alabilir.
+* `OwningComponentBase<T>`kapsamına giren `OwningComponentBase` DI sağlayıcısından bir örneğini `Service` `T` döndüren bir özellikten türetilmiştir ve ekler. Bu tür, uygulamanın bileşenin kapsamını kullanarak DI `IServiceProvider` kapsayıcısından gerektirdiği bir birincil hizmetin ne zaman olduğunu kullanmadan kapsamlı hizmetlere erişmek için kullanışlı bir yoldur. `ScopedServices` Özellik kullanılabilir, böylece uygulama gerekirse diğer türde hizmetler alabilirsiniz.
 
   ```razor
   @page "/users"
@@ -253,18 +253,18 @@ Blazor uygulamalarında bir hizmet ömrünü sınırlayan bir yaklaşım, `Ownin
   </ul>
   ```
 
-## <a name="use-of-entity-framework-dbcontext-from-di"></a>Dı Entity Framework DbContext kullanımı
+## <a name="use-of-entity-framework-dbcontext-from-di"></a>DI'den Varlık Çerçevesi DbContext Kullanımı
 
-Web Apps 'ten gelen sunucudan alınacak bir ortak hizmet türü Entity Framework (EF) `DbContext` nesneleri. `IServiceCollection.AddDbContext` kullanarak EF hizmetlerini kaydetme, varsayılan olarak `DbContext` kapsamlı bir hizmet olarak ekler. Kapsamlı bir hizmet olarak kaydetme, Blazor uygulamalardaki sorunlara yol açabilir çünkü `DbContext` örneklerinin uzun süreli ve uygulama genelinde paylaşılmasına neden olur. `DbContext`, iş parçacığı açısından güvenli değildir ve aynı anda kullanılmamalıdır.
+Web uygulamalarında DI'den alınacak yaygın bir hizmet `DbContext` türü de Entity Framework (EF) nesneleridir. EF hizmetlerini kullanarak `IServiceCollection.AddDbContext` kaydetmek `DbContext` varsayılan olarak kapsamlı bir hizmet olarak ekler. Kapsamlı bir hizmet olarak kaydolmak, Blazor örneklerin `DbContext` uzun ömürlü olmasına ve uygulama genelinde paylaşılmasına neden olduğundan uygulamalarda sorunlara yol açabilir. `DbContext`iş parçacığı güvenli değildir ve aynı anda kullanılmamalıdır.
 
-Uygulamaya bağlı olarak, bir `DbContext` kapsamını tek bir bileşenle sınırlandırmak için `OwningComponentBase` kullanmak *sorunu çözebilir.* Bir bileşen paralel olarak bir `DbContext` kullanmıyorsa, bileşeni `OwningComponentBase` türetirmez ve `ScopedServices` `DbContext` almak yeterlidir çünkü şunları sağlar:
+Uygulamaya bağlı olarak, `OwningComponentBase` a'nın `DbContext` kapsamını tek bir bileşenle sınırlamak için kullanmak sorunu *çözebilir.* Bir bileşen paralel olarak `DbContext` bir bileşen kullanmıyorsa, `OwningComponentBase` bileşeni elde etmek `DbContext` ve `ScopedServices` ondan almak yeterlidir, çünkü aşağıdakileri sağlar:
 
-* Ayrı bileşenler `DbContext`paylaşmaz.
-* `DbContext`, bu bileşene bağlı olarak yalnızca bileşen gibi sürer.
+* Ayrı bileşenler bir `DbContext`.
+* Sadece `DbContext` bileşen bağlı olduğu sürece yaşıyor.
 
-Tek bir bileşen aynı anda bir `DbContext` kullanabilir (örneğin, bir Kullanıcı bir düğme seçtiğinde), `OwningComponentBase` kullanılması de eşzamanlı EF işlemlerinde sorunlardan kaçınmaz. Bu durumda, her mantıksal EF işlemi için farklı bir `DbContext` kullanın. Aşağıdaki yaklaşımlardan birini kullanın:
+Tek bir bileşen aynı `DbContext` anda bir bileşen kullanıyorsa (örneğin, bir `OwningComponentBase` kullanıcı her düğmeyi seçtiğinde), kullanmak bile eşzamanlı EF işlemleriyle ilgili sorunları önlemez. Bu durumda, her `DbContext` mantıksal EF işlemi için farklı bir kullanın. Aşağıdaki yaklaşımlardan birini kullanın:
 
-* Bir bağımsız değişken olarak `DbContextOptions<TContext>` kullanarak `DbContext` doğrudan oluşturun, bu, dı 'dan alınabilecek ve iş parçacığı güvenlidir.
+* DI'den alınabilir ve iş parçacığı güvenli bir bağımsız değişken olarak `DbContext` doğrudan kullanarak `DbContextOptions<TContext>` oluşturun.
 
     ```razor
     @page "/example"
@@ -298,8 +298,8 @@ Tek bir bileşen aynı anda bir `DbContext` kullanabilir (örneğin, bir Kullan�
     }
     ```
 
-* Hizmet kapsayıcısına geçici bir yaşam süresi ile `DbContext` kaydedin:
-  * Bağlamı kaydederken `ServiceLifetime.Transient`kullanın. `AddDbContext` uzantısı yöntemi `ServiceLifetime`türünde iki isteğe bağlı parametre alır. Bu yaklaşımı kullanmak için yalnızca `contextLifetime` parametresinin `ServiceLifetime.Transient`olması gerekir. `optionsLifetime`, `ServiceLifetime.Scoped`varsayılan değerini tutabilir.
+* Servis `DbContext` konteynerini geçici bir kullanım ömrüyle kaydedin:
+  * Bağlamı kaydederken, `ServiceLifetime.Transient`.' Uzantı `AddDbContext` yöntemi, türünün `ServiceLifetime`iki isteğe bağlı parametresini alır. Bu yaklaşımı kullanmak için `contextLifetime` yalnızca parametrenin . `ServiceLifetime.Transient` `optionsLifetime`varsayılan değerini `ServiceLifetime.Scoped`koruyabilir.
 
     ```csharp
     services.AddDbContext<AppDbContext>(options =>
@@ -307,7 +307,7 @@ Tek bir bileşen aynı anda bir `DbContext` kullanabilir (örneğin, bir Kullan�
          ServiceLifetime.Transient);
     ```  
 
-  * Geçici `DbContext`, paralel olarak birden çok EF işlemini yürütemeyecek bileşenlere normal (`@inject`kullanılarak) eklenebilir. Aynı anda birden çok EF işlemi gerçekleştirebilecek olanlar, `IServiceProvider.GetRequiredService`kullanarak her paralel işlem için ayrı `DbContext` nesneleri isteyebilir.
+  * Geçici, `DbContext` paralel olarak birden fazla `@inject`EF işlemini yürütmeyecek bileşenlere normal (using) olarak enjekte edilebilir. Aynı anda birden çok EF işlemi `DbContext` gerçekleştirebilenler, `IServiceProvider.GetRequiredService`her paralel işlem için ayrı nesneler isteyebilirler.
 
     ```razor
     @page "/example"

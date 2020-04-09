@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core Blazor kullanmaya başlama
+title: ASP.NET Core ile başlayınBlazor
 author: guardrex
-description: Seçtiğiniz araç ile Blazor bir uygulama oluşturarak Blazor kullanmaya başlayın.
+description: Seçtiğiniz araç Blazor ile Blazor bir uygulama oluşturarak başlayın.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -10,114 +10,114 @@ no-loc:
 - Blazor
 - SignalR
 uid: blazor/get-started
-ms.openlocfilehash: 9ebeb57d2fad7e4c288d61a46911f2bf64cac2fb
-ms.sourcegitcommit: f3b1bcfd108e5d53f73abc0bf2555890869d953b
+ms.openlocfilehash: c49209afde21046a6bc0b197cc4b8d93b164b23e
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/26/2020
-ms.locfileid: "80320941"
+ms.lasthandoff: 04/06/2020
+ms.locfileid: "80471818"
 ---
-# <a name="get-started-with-aspnet-core-blazor"></a>ASP.NET Core Blazor kullanmaya başlama
+# <a name="get-started-with-aspnet-core-blazor"></a>Core BlazorASP.NET ile başlayın
 
-[Daniel Roth](https://github.com/danroth27) ve [Luke Latham](https://github.com/guardrex) tarafından
+Yazar: [Daniel Roth](https://github.com/danroth27) ve [Luke Latham](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Blazor kullanmaya başlamak için araç seçiminiz için yönergeleri izleyin:
+Blazor'a başlamak için, araç lama seçiminiz için kılavuzu izleyin:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. Blazor Server uygulamaları oluşturmak için **ASP.net ve Web geliştirme** iş yüküyle [Visual Studio 2019 sürüm 16,4 veya sonraki bir sürümünü](https://visualstudio.microsoft.com/vs/preview/) yüklemelisiniz.
+1. Blazor Server uygulamaları oluşturmak için [Visual Studio 2019'un](https://visualstudio.microsoft.com/downloads/) en son sürümünü ASP.NET ve web geliştirme iş yüküyle birlikte **yükleyin.**
 
-   Blazor Server ve Blazor WebAssembly uygulamaları oluşturmak için **ASP.net ve Web geliştirme** iş yüküyle Visual Studio 2019 16,6 Preview 2 veya sonraki bir sürümünü yüklemelisiniz.
+   Blazor Server ve Blazor WebAssembly uygulamaları oluşturmak için [Visual Studio 2019'un](https://visualstudio.microsoft.com/vs/preview/) en son önizlemesini ASP.NET ve web geliştirme iş yüküyle birlikte **yükleyin.**
 
-   İki Blazor barındırma modeli hakkında daha fazla bilgi için, *Blazor WebAssembly* ve *Blazor Server*<xref:blazor/hosting-models>bkz.
+   İki Blazor barındırma modelleri hakkında bilgi için, *Blazor WebAssembly* ve *Blazor Server*, bkz. <xref:blazor/hosting-models>
 
 1. Yeni bir proje oluşturma.
 
-1. **Blazor uygulamasını**seçin. **İleri**’yi seçin.
+1. **Blazor Uygulamasını**seçin. **Sonraki'ni**seçin.
 
-1. **Proje adı** alanında bir proje adı girin veya varsayılan proje adını kabul edin. **Konum** girişinin doğru olduğunu onaylayın veya proje için bir konum belirtin. **Oluştur**'u seçin.
+1. **Proje adı** alanında bir proje adı sağlayın veya varsayılan proje adını kabul edin. **Konum** girişinin doğru olduğunu onaylayın veya proje için bir konum sağlayın. **Oluştur'u**seçin.
 
-1. Blazor WebAssembly deneyimi için (Visual Studio 16,6 Preview 2 veya üzeri), **Blazor Webassembly uygulama** şablonunu seçin. Bir Blazor Server deneyimi için (Visual Studio 16,4 veya üzeri) **Blazor Server uygulama** şablonunu seçin. **Oluştur**'u seçin.
+1. Blazor WebAssembly deneyimi (Visual Studio 16.6 Preview 2 veya sonraki) için **Blazor WebAssembly Uygulaması** şablonu'nu seçin. Blazor Server deneyimi (Visual Studio 16.4 veya sonrası) için **Blazor Server App** şablonunu seçin. **Oluştur'u**seçin.
 
 1. Uygulamayı çalıştırmak için <kbd>Ctrl</kbd>+<kbd>F5</kbd> tuşuna basın.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-1. [.NET Core 3,1 SDK 'sını](https://dotnet.microsoft.com/download/dotnet-core/3.1)yükler.
+1. [.NET Core 3.1 SDK'yı](https://dotnet.microsoft.com/download/dotnet-core/3.1)yükleyin.
 
-1. İsteğe bağlı olarak, aşağıdaki komutu çalıştırarak [Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) önizleme şablonunu yükler:
+1. İsteğe bağlı olarak aşağıdaki komutu çalıştırarak [Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) önizleme şablonunu yükleyin:
 
    ```dotnetcli
    dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview3.20168.3
    ```
 
    > [!NOTE]
-   > 3,2 Preview 3 Blazor WebAssembly şablonunu kullanmak için [.NET Core SDK Version 3.1.201 veya üzeri](https://dotnet.microsoft.com/download/dotnet-core/3.1) **gereklidir** . Bir komut kabuğunda `dotnet --version` çalıştırarak yüklü .NET Core SDK sürümünü onaylayın.
+   > [.NET Core SDK sürüm 3.1.201 veya sonraki](https://dotnet.microsoft.com/download/dotnet-core/3.1) 3.2 Önizleme 3 Blazor WebAssembly şablonu kullanmak için **gereklidir.** Yüklü .NET Core SDK sürümünü `dotnet --version` komut kabuğunda çalıştırarak onaylayın.
 
-1. [Visual Studio Code](https://code.visualstudio.com/)'i yükler.
+1. [Visual Studio Kodunu](https://code.visualstudio.com/)Yükleyin.
 
-1. En son [ C# Visual Studio Code uzantısını](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) ve [JavaScript hata ayıklayıcı (gecelik)](https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly) uzantısını `true``debug.javascript.usePreview` olarak kurun.
+1. Visual Studio Code uzantısı için en son [C#'ı](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) ve [JavaScript Hata Ayıklayıcı (Gecelik)](https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly) uzantısını `debug.javascript.usePreview` ' olarak `true`ayarlayın.
 
-1. Bir Blazor sunucu deneyimi için komut kabuğu 'nda aşağıdaki komutu yürütün:
+1. Blazor Server deneyimi için aşağıdaki komutu bir komut kabuğunda uygulayın:
 
    ```dotnetcli
    dotnet new blazorserver -o WebApplication1
    ```
 
-   Bir Blazor WebAssembly deneyimi için komut kabuğu 'nda aşağıdaki komutu yürütün:
+   Blazor WebAssembly deneyimi için, komut kabuğunda aşağıdaki komutu uygulayın:
 
    ```dotnetcli
    dotnet new blazorwasm -o WebApplication1
    ```
 
-   İki Blazor barındırma modeli, *Blazor Server* ve *Blazor webassembly*hakkında daha fazla bilgi için bkz. <xref:blazor/hosting-models>.
+   İki Blazor barındırma modelleri hakkında bilgi için, *Blazor* Server <xref:blazor/hosting-models>ve *Blazor WebAssembly*, bkz.
 
-1. Visual Studio Code 'de *WebApplication1* klasörünü açın.
+1. Visual Studio Code'da *WebApplication1* klasörünü açın.
 
-1. IDE, projeyi derlemek ve hatalarını ayıklamak için varlık eklemenizi ister. **Evet**’i seçin.
+1. IDE, projeyi oluşturmak ve hata ayıklamak için varlık eklemenizi ister. **Evet'i**seçin.
 
-1. Visual Studio Code hata ayıklayıcıyı kullanarak uygulamayı çalıştırın.
+1. Visual Studio Code hata ayıklayıcısını kullanarak uygulamayı çalıştırın.
 
-1. Bir tarayıcıda `https://localhost:5001`' a gidin.
+1. Tarayıcıda, `https://localhost:5001`''
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-Blazor sunucusu Mac için Visual Studio desteklenir. Blazor WebAssembly Şu anda desteklenmiyor. MacOS 'ta Blazor WebAssembly uygulamaları derlemek için **.NET Core CLI** sekmesindeki yönergeleri izleyin.
+Blazor Server, Visual Studio for Mac'te desteklenir. Blazor WebAssembly şu anda desteklenmez. MacOS'ta Blazor WebAssembly uygulamaları oluşturmak için **.NET Core CLI** sekmesindeki kılavuzu izleyin.
 
-1. [Mac için Visual Studio](https://visualstudio.microsoft.com/vs/mac/)'i yükler.
+1. [Mac için Visual Studio'u](https://visualstudio.microsoft.com/vs/mac/)yükleyin.
 
-1. **Yeni çözüm** > **Dosya** seçin veya yeni bir **Proje**oluşturun.
+1. **Dosya** > **Yeni Çözüm'ünü** seçin veya Yeni Bir **Proje**oluşturun.
 
-1. Kenar çubuğunda **.NET Core** > **uygulaması**' nı seçin.
+1. Kenar çubuğunda **.NET Core** > **App'ı**seçin.
 
-1. **Blazor Server uygulama** şablonunu seçin. **Oluştur**'u seçin.
+1. **Blazor Server App** şablonu'nu seçin. **Oluştur'u**seçin.
 
-   Blazor sunucusu barındırma modeli hakkında daha fazla bilgi için bkz. <xref:blazor/hosting-models>.
+   Blazor Server barındırma modeli hakkında <xref:blazor/hosting-models>bilgi için bkz.
 
-1. **Hedef Framework 'ü** **.NET Core 3,1** olarak ayarlayın ve **İleri ' yi**seçin.
+1. Hedef **Çerçeveyi** **.NET Core 3.1** olarak ayarlayın ve **İleri'yi**seçin.
 
-1. **Proje adı** alanında, uygulamayı `WebApplication1`olarak adlandırın. **Oluştur**'u seçin.
+1. Proje **Adı** alanında, uygulamayı `WebApplication1`adlandırın. **Oluştur'u**seçin.
 
-1. Uygulamayı *hata ayıklayıcısı olmadan*çalıştırmak Için **hata ayıklama olmadan** **Çalıştır > Çalıştır** ' ı seçin. Uygulamayı hata *ayıklayıcıyla*çalıştırmak Için, **hata ayıklamayı Başlat** ile uygulamayı çalıştırın.
+1. *Hata ayıklama olmadan*uygulamayı çalıştırmak için**Hata Ayıklama olmadan** **Çalıştır'ı** > seçin. Uygulamayı *hata ayıklama yla*çalıştırmak için Uygulamayı Başlat **Hata Ayıklama** ile çalıştırın.
 
-Geliştirme sertifikasına güvenmek için bir istem görünürse, sertifikaya güvenin ve devam edin.
+Geliştirme sertifikasına güvenen bir istem görünüyorsa, sertifikaya güvenin ve devam edin.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
-1. [.NET Core 3,1 SDK 'sını](https://dotnet.microsoft.com/download/dotnet-core/3.1)yükler.
+1. [.NET Core 3.1 SDK'yı](https://dotnet.microsoft.com/download/dotnet-core/3.1)yükleyin.
 
-1. İsteğe bağlı olarak, aşağıdaki komutu çalıştırarak [Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) önizleme şablonunu yükler:
+1. İsteğe bağlı olarak aşağıdaki komutu çalıştırarak [Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) önizleme şablonunu yükleyin:
 
    ```dotnetcli
    dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview3.20168.3
    ```
 
    > [!NOTE]
-   > 3,2 Preview 3 Blazor WebAssembly şablonunu kullanmak için [.NET Core SDK Version 3.1.201 veya üzeri](https://dotnet.microsoft.com/download/dotnet-core/3.1) **gereklidir** . Bir komut kabuğunda `dotnet --version` çalıştırarak yüklü .NET Core SDK sürümünü onaylayın.
+   > [.NET Core SDK sürüm 3.1.201 veya sonraki](https://dotnet.microsoft.com/download/dotnet-core/3.1) 3.2 Önizleme 3 Blazor WebAssembly şablonu kullanmak için **gereklidir.** Yüklü .NET Core SDK sürümünü `dotnet --version` komut kabuğunda çalıştırarak onaylayın.
 
-1. Bir Blazor sunucu deneyimi için aşağıdaki komutları bir komut kabuğunda yürütün:
+1. Blazor Server deneyimi için, komut kabuğunda aşağıdaki komutları uygulayın:
 
    ```dotnetcli
    dotnet new blazorserver -o WebApplication1
@@ -125,7 +125,7 @@ Geliştirme sertifikasına güvenmek için bir istem görünürse, sertifikaya g
    dotnet run
    ```
 
-   Bir Blazor Weelsembly deneyimi için komut kabuğu 'nda aşağıdaki komutları yürütün:
+   Blazor WebAssembly deneyimi için, komut kabuğunda aşağıdaki komutları uygulayın:
 
    ```dotnetcli
    dotnet new blazorwasm -o WebApplication1
@@ -133,59 +133,59 @@ Geliştirme sertifikasına güvenmek için bir istem görünürse, sertifikaya g
    dotnet run
    ```
 
-   İki Blazor barındırma modeli, *Blazor Server* ve *Blazor webassembly*hakkında daha fazla bilgi için bkz. <xref:blazor/hosting-models>.
+   İki Blazor barındırma modelleri hakkında bilgi için, *Blazor* Server <xref:blazor/hosting-models>ve *Blazor WebAssembly*, bkz.
 
-1. Bir tarayıcıda `https://localhost:5001`' a gidin.
+1. Tarayıcıda, `https://localhost:5001`''
 
 ---
 
-Kenar çubuğu 'ndaki sekmelerde birden çok sayfa mevcuttur:
+Kenar çubuğundaki sekmelerden birden çok sayfa bulunur:
 
-* Giriş
+* Ev
 * Sayaç
-* Verileri getir
+* Veri getir
 
-Sayaç sayfasında, bir sayfa yenilemesi olmadan sayacı artırmak için **bana tıklama** düğmesini seçin. Bir Web sayfasında normal olarak bir sayacı artırma, JavaScript yazmayı gerektirir, ancak kullanabilirsiniz C#Blazor.
+Sayaç sayfasında, sayfa yenilemeden sayacı niçin artıya doğru artıya tıklayın **düğmesini** seçin. Bir web sayfasında ki sayacı niçin artıya basması Blazor normalde JavaScript yazmayı gerektirir, ancak c#'ı kullanabilirsiniz.
 
-*Pages/Counter. Razor*:
+*Sayfalar/Counter.razor*:
 
 [!code-razor[](get-started/samples_snapshot/3.x/Counter1.razor?highlight=7,12-15)]
 
-Tarayıcıda `/counter` için bir istek, en üstteki `@page` yönergesi tarafından belirtilen şekilde `Counter` bileşeninin içeriğini işlemesine neden olur. Bileşenler, daha sonra, Kullanıcı arabirimini esnek ve verimli bir şekilde güncelleştirmek için kullanılabilen işleme ağacının bellek içi gösterimine işlenir.
+`/counter` Üstteki `@page` yönergede belirtildiği gibi tarayıcıdaki istek, bileşenin `Counter` içeriğini işlemesine neden olur. Bileşenler, kullanıcı arasını esnek ve verimli bir şekilde güncelleştirmek için kullanılabilecek render ağacının bellek içi gösterimine dönüşür.
 
-**Bana tıklama** düğmesi her seçildiğinde:
+**Beni Tıklat** düğmesi her seçildiğinde:
 
-* `onclick` olayı tetiklenir.
-* `IncrementCount` yöntemi çağrılır.
-* `currentCount` artırılır.
+* Olay `onclick` ateşlendi.
+* Yöntem `IncrementCount` denir.
+* Bu `currentCount` artış.
 * Bileşen yeniden işlenir.
 
-Çalışma zamanı, yeni içeriği önceki içerikle karşılaştırır ve yalnızca değiştirilen içeriği Belge Nesne Modeli (DOM) öğesine uygular.
+Çalışma süresi, yeni içeriği önceki içerikle karşılaştırır ve yalnızca değiştirilen içeriği Belge Nesnesi Modeli'ne (DOM) uygular.
 
-HTML sözdizimini kullanarak başka bir bileşene bileşen ekleyin. Örneğin, `Index` bileşenine bir `<Counter />` öğesi ekleyerek `Counter` bileşenini uygulamanın giriş sayfasına ekleyin.
+HTML sözdizimini kullanarak başka bir bileşene bileşen ekleyin. Örneğin, `Index` bileşene `Counter` bir `<Counter />` öğe ekleyerek bileşeni uygulamanın ana sayfasına ekleyin.
 
-*Pages/Index. Razor*:
+*Sayfalar/Index.razor*:
 
 [!code-razor[](get-started/samples_snapshot/3.x/Index1.razor?highlight=7)]
 
-Uygulamayı çalıştırın. Giriş sayfasının `Counter` bileşeni tarafından kendi sayacı vardır.
+Uygulamayı çalıştırın. Ana sayfanın `Counter` bileşen tarafından sağlanan kendi sayacı vardır.
 
-Bileşen parametreleri, alt bileşende özellikler ayarlamanıza olanak tanıyan öznitelikler veya [alt içerik](xref:blazor/components#child-content)kullanılarak belirtilir. `Counter` bileşenine bir parametre eklemek için, bileşenin `@code` bloğunu güncelleştirin:
+Bileşen parametreleri öznitelikleri veya [alt içerik](xref:blazor/components#child-content)kullanılarak belirtilir , hangi alt bileşeni özellikleri ayarlamak için izin verir. Bileşene `Counter` bir parametre eklemek için bileşenin `@code` bloğunu güncelleştirin:
 
-* `[Parameter]` özniteliğiyle `IncrementAmount` için ortak özellik ekleyin.
-* `currentCount`değerini artırdığınızda `IncrementAmount` kullanmak için `IncrementCount` yöntemini değiştirin.
+* Bir `[Parameter]` öznitelik `IncrementAmount` ile bir kamu malı ekleyin.
+* Değerini `IncrementCount` `IncrementAmount` artırırken kullanmak için yöntemi `currentCount`değiştirin.
 
-*Pages/Counter. Razor*:
+*Sayfalar/Counter.razor*:
 
 [!code-razor[](get-started/samples_snapshot/3.x/Counter2.razor?highlight=12-13,17)]
 
-`Index` bileşenin `<Counter>` öğesindeki bir özniteliği kullanarak `IncrementAmount` belirtin.
+Bir `IncrementAmount` öznitelik `Index` kullanarak `<Counter>` bileşenin öğesini belirtin.
 
-*Pages/Index. Razor*:
+*Sayfalar/Index.razor*:
 
 [!code-razor[](get-started/samples_snapshot/3.x/Index2.razor?highlight=7)]
 
-Uygulamayı çalıştırın. `Index` bileşeni, **bana tıklama** düğmesi seçildiğinde her seferinde on ile artan kendi sayacıdır. `/counter` `Counter` bileşeni (*Counter. Razor*), bir tarafından arttırmaya devam eder.
+Uygulamayı çalıştırın. Bileşenin `Index` kendi sayacı vardır ve **her tıkla düğmesi** seçildiğinde on artış sağlar. Bileşen `Counter` *(Counter.razor*) `/counter` bir artış devam ediyor.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

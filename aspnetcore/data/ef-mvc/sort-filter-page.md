@@ -1,143 +1,143 @@
 ---
-title: 'Öğretici: EF Core sıralama, filtreleme ve sayfalama-ASP.NET MVC ekleme'
-description: Bu öğreticide, öğrenciler dizin sayfasına sıralama, filtreleme ve sayfalama işlevselliği ekleyeceksiniz. Ayrıca basit gruplandırma yapan bir sayfa oluşturacaksınız.
+title: 'Öğretici: Sıralama ekleme, filtreleme ve sayfalama - EF Core ile MVC ASP.NET'
+description: Bu öğreticide Öğrenci Dizini sayfasına sıralama, filtreleme ve sayfalama işlevleri eklersiniz. Ayrıca, basit gruplandırma yapan bir sayfa da oluşturursunuz.
 author: rick-anderson
 ms.author: riande
 ms.date: 03/27/2019
 ms.topic: tutorial
 uid: data/ef-mvc/sort-filter-page
 ms.openlocfilehash: 99bf9ed59b47e8fbba838b97c3e032b9808f6a94
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "78657138"
 ---
-# <a name="tutorial-add-sorting-filtering-and-paging---aspnet-mvc-with-ef-core"></a>Öğretici: EF Core sıralama, filtreleme ve sayfalama-ASP.NET MVC ekleme
+# <a name="tutorial-add-sorting-filtering-and-paging---aspnet-mvc-with-ef-core"></a>Öğretici: Sıralama ekleme, filtreleme ve sayfalama - EF Core ile MVC ASP.NET
 
-Önceki öğreticide, öğrenci varlıkları için temel CRUD işlemleri için bir dizi Web sayfası uyguladık. Bu öğreticide, öğrenciler dizin sayfasına sıralama, filtreleme ve sayfalama işlevselliği ekleyeceksiniz. Ayrıca basit gruplandırma yapan bir sayfa oluşturacaksınız.
+Önceki öğreticide, Öğrenci kuruluşları için temel CRUD işlemleri için bir web sayfası kümesi uygulamışsınız. Bu öğreticide Öğrenci Dizini sayfasına sıralama, filtreleme ve sayfalama işlevleri eklersiniz. Ayrıca, basit gruplandırma yapan bir sayfa da oluşturursunuz.
 
-Aşağıdaki çizimde, işiniz bittiğinde sayfanın nasıl görüneceği gösterilmektedir. Sütun başlıkları, kullanıcının sütuna göre sıralamak için tıkladığı bağlantılardır. Sütun başlığına tıklanması artan ve azalan sıralama düzeni arasında sürekli olarak geçiş yapar.
+Aşağıdaki resimde, sayfanız bittiğinde nasıl görüneceği gösterilmektedir. Sütun başlıkları, kullanıcının bu sütuna göre sıralamak için tıklatabileceği bağlantılardır. Bir sütun başlığını tıklatmak, artan ve azalan sıralama sırası arasında tekrar tekrar geçiş eder.
 
-![Öğrenciler Dizin sayfası](sort-filter-page/_static/paging.png)
+![Öğrenci dizini sayfası](sort-filter-page/_static/paging.png)
 
 Bu öğreticide şunları yaptınız:
 
 > [!div class="checklist"]
-> * Sütun sıralama bağlantıları Ekle
+> * Sütun sıralama bağlantıları ekleme
 > * Arama kutusu ekleme
-> * Öğrenciler dizinine sayfalama ekleme
-> * Dizin yöntemine sayfalama ekleme
-> * Sayfalama bağlantıları Ekle
-> * Hakkında bir sayfa oluşturun
+> * Öğrenci Endeksine Sayfa ekleme
+> * Dizin yöntemine sayfa ekleme
+> * Sayfalama bağlantıları ekleme
+> * Hakkında sayfa oluşturma
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
-* [CRUD Işlevlerini uygulama](crud.md)
+* [CRUD İşlevselliğini Uygulayın](crud.md)
 
-## <a name="add-column-sort-links"></a>Sütun sıralama bağlantıları Ekle
+## <a name="add-column-sort-links"></a>Sütun sıralama bağlantıları ekleme
 
-Öğrenci dizini sayfasına sıralama eklemek için, öğrenciler denetleyicisinin `Index` yöntemini değiştirecek ve öğrenci dizini görünümüne kod ekleyeceksiniz.
+Öğrenci Dizini sayfasına sıralama eklemek için, `Index` Öğrenci denetleyicisinin yöntemini değiştirir ve Öğrenci Dizini görünümüne kod eklersiniz.
 
-### <a name="add-sorting-functionality-to-the-index-method"></a>Dizin yöntemine sıralama Işlevi ekleme
+### <a name="add-sorting-functionality-to-the-index-method"></a>Dizin yöntemine sıralama İşlevselliği ekleme
 
-*StudentsController.cs*' de `Index` yöntemini aşağıdaki kodla değiştirin:
+*StudentsController.cs*olarak, `Index` yöntemi aşağıdaki kodla değiştirin:
 
 [!code-csharp[](intro/samples/cu/Controllers/StudentsController.cs?name=snippet_SortOnly)]
 
-Bu kod, URL 'deki sorgu dizesinden bir `sortOrder` parametresi alır. Sorgu dizesi değeri, ASP.NET Core MVC tarafından eylem yöntemine bir parametre olarak sağlanır. Parametresi, "Name" veya "Date" adlı bir dize, isteğe bağlı olarak bir alt çizgi ve azalan sıralama belirtmek için "desc" dizesi olacaktır. Varsayılan sıralama düzeni artan.
+Bu kod, `sortOrder` URL'deki sorgu dizesinden bir parametre alır. Sorgu dize değeri, ASP.NET Core MVC tarafından eylem yönteminin parametresi olarak sağlanır. Parametre, isteğe bağlı olarak bir alt alt alt sayı ve azalan sırayı belirtmek için "desc" dizesi tarafından izlenen "Ad" veya "Tarih" dizesi olacaktır. Varsayılan sıralama sırası yükseliyor.
 
-Dizin sayfası ilk kez istendiğinde sorgu dizesi yoktur. Öğrenciler, son ada göre artan sırada görüntülenir, bu, `switch` deyimindeki karşı bir durum tarafından kurulduğu varsayılan değer olan addır. Kullanıcı bir sütun başlığı köprüsüne tıkladığında, sorgu dizesinde uygun `sortOrder` değeri sağlanır.
+Dizin sayfası ilk kez istendiğinde, sorgu dizesi yoktur. Öğrenciler, `switch` ekstredeki düşme durumunda belirlenen varsayılan değer olan soyadına göre artan sırada görüntülenirler. Kullanıcı bir sütun başlığı köprü tıklattığında, `sortOrder` uygun değer sorgu dizesinde sağlanır.
 
-İki `ViewData` öğesi (Namesortpara ve Datesortpard), sütun başlığı köprülerini uygun sorgu dizesi değerleriyle yapılandırmak için görünüm tarafından kullanılır.
+İki `ViewData` öğe (NameSortParm ve DateSortParm) uygun sorgu dize değerleri ile sütun başlığı köprüler yapılandırmak için görünüm tarafından kullanılır.
 
 [!code-csharp[](intro/samples/cu/Controllers/StudentsController.cs?name=snippet_SortOnly&highlight=3-4)]
 
-Bunlar Üçlü ifadelerdir. İlki `sortOrder` parametresi null veya boş ise, Namesortparı 'nin "name_desc" olarak ayarlanması gerektiğini belirtir; Aksi takdirde, boş bir dizeye ayarlanmalıdır. Bu iki deyim, görünümün sütun başlığı köprülerini şu şekilde ayarlamaya olanak tanır:
+Bunlar üçüncül ifadeler. İlkinde, parametre boş `sortOrder` veya boşsa, NameSortParm'ın "name_desc" olarak ayarlanılması gerektiği belirtilir; aksi takdirde, boş bir dize olarak ayarlanmalıdır. Bu iki deyim, görünümün sütun başlığı köprülerini aşağıdaki gibi ayarlamasını sağlar:
 
-|  Geçerli sıralama düzeni  | Son ad Köprüsü | Tarih Köprüsü |
+|  Geçerli sıralama sırası  | Soyadı Köprü | Tarih Köprü |
 |:--------------------:|:-------------------:|:--------------:|
-| Artan son ad  | descending          | ascending      |
-| Azalan son ad | ascending           | ascending      |
-| Artan Tarih       | ascending           | descending     |
-| Azalan Tarih      | ascending           | ascending      |
+| Artan Soyadı  | descending          | ascending      |
+| Soyadı azalan | ascending           | ascending      |
+| Artan tarih       | ascending           | descending     |
+| Azalan tarih      | ascending           | ascending      |
 
-Yöntemi, sıralama yapılacak sütunu belirtmek için LINQ to Entities kullanır. Kod, Switch ifadesinden önce bir `IQueryable` değişkeni oluşturur, Switch ifadesinde değiştirir ve `switch` deyimden sonra `ToListAsync` yöntemini çağırır. `IQueryable` değişkenleri oluşturup değiştirirken veritabanına hiçbir sorgu gönderilmez. Sorgu, `ToListAsync`gibi bir yöntemi çağırarak `IQueryable` nesnesini bir koleksiyona dönüştürene kadar yürütülmez. Bu nedenle, bu kod `return View` ifadeye kadar Yürütülmeyen tek bir sorgu ile sonuçlanır.
+Yöntem, sıralamak için sütun belirtmek için Varlıklar LINQ kullanır. Kod, anahtar `IQueryable` deyiminden önce bir değişken oluşturur, anahtar deyiminde değiştirir `ToListAsync` ve `switch` deyiminden sonra yöntemi çağırır. Değişkenler oluşturup `IQueryable` değiştirdiğinizde, veritabanına sorgu gönderilmez. Sorgu, `IQueryable` `ToListAsync`nesneyi koleksiyona dönüştürene kadar yürütülmez. Bu nedenle, bu kod `return View` deyimi kadar yürütülmeyen tek bir sorgu ile sonuçlanır.
 
-Bu kod çok sayıda sütunla ayrıntı alabilir. [Bu serideki son öğretici](advanced.md#dynamic-linq) , bir dize değişkeninde `OrderBy` sütununun adını geçirmenize olanak sağlayan kodun nasıl yazılacağını gösterir.
+Bu kod, çok sayıda sütunla ayrıntılı olabilir. [Bu serinin son öğretici](advanced.md#dynamic-linq) bir `OrderBy` dize değişkeninde sütunun adını geçmenizi sağlayan kod yazmak için nasıl gösterir.
 
-### <a name="add-column-heading-hyperlinks-to-the-student-index-view"></a>Öğrenci dizini görünümüne sütun başlığı köprüleri ekleme
+### <a name="add-column-heading-hyperlinks-to-the-student-index-view"></a>Öğrenci Dizini görünümüne sütun başlığı köprüleri ekleme
 
-*Görünümler/öğrenciler/Index. cshtml*içindeki kodu, sütun başlığı köprüleri eklemek için aşağıdaki kodla değiştirin. Değiştirilen çizgiler vurgulanır.
+*Görünümler/Öğrenciler/Index.cshtml'deki*kodu sütun başlığı köprüleri eklemek için aşağıdaki kodla değiştirin. Değiştirilen satırlar vurgulanır.
 
 [!code-html[](intro/samples/cu/Views/Students/Index2.cshtml?highlight=16,22)]
 
-Bu kod, uygun sorgu dizesi değerleriyle köprüler ayarlamak için `ViewData` özelliklerindeki bilgileri kullanır.
+Bu kod, uygun `ViewData` sorgu dize değerleri ile köprüler kurmak için özellikleri bilgileri kullanır.
 
-Uygulamayı çalıştırın, **öğrenciler** sekmesini seçin ve sıralamanın çalıştığını doğrulamak Için **son ad** ve **kayıt tarihi** sütun başlıklarına tıklayın.
+Uygulamayı çalıştırın, **Öğrenciler** sekmesini seçin ve sıralamanın işe yaradığını doğrulamak için **Soyadı** ve **Kayıt Tarihi** sütunbaşlıklarını tıklatın.
 
-![Ad düzeninde öğrenciler Dizin sayfası](sort-filter-page/_static/name-order.png)
+![Ad sırasına göre öğrenci dizini sayfası](sort-filter-page/_static/name-order.png)
 
 ## <a name="add-a-search-box"></a>Arama kutusu ekleme
 
-Öğrenciler dizin sayfasına filtre eklemek için, görünüme bir metin kutusu ve Gönder düğmesi ekleyeceksiniz ve `Index` yönteminde ilgili değişiklikleri yapmanız gerekir. Metin kutusu, ilk adı ve soyadı alanlarını aramak için bir dize girmenizi sağlar.
+Öğrenci Dizini sayfasına filtreleme eklemek için, görünüme bir metin kutusu ve gönder düğmesi `Index` ekler ve yöntemde ilgili değişiklikler yaparsınız. Metin kutusu, ad ve soyad alanlarında aramak için bir dize girmenizi sağlar.
 
 ### <a name="add-filtering-functionality-to-the-index-method"></a>Dizin yöntemine filtreleme işlevi ekleme
 
-*StudentsController.cs*' de `Index` yöntemini aşağıdaki kodla değiştirin (değişiklikler vurgulanır).
+*StudentsController.cs,* `Index` yöntemi aşağıdaki kodla değiştirin (değişiklikler vurgulanır).
 
 [!code-csharp[](intro/samples/cu/Controllers/StudentsController.cs?name=snippet_SortFilter&highlight=1,5,9-13)]
 
-`Index` yöntemine bir `searchString` parametresi eklediniz. Arama dizesi değeri, dizin görünümüne ekleyeceğiniz bir metin kutusundan alınır. Ayrıca, yalnızca adı veya soyadı arama dizesini içeren öğrencileri seçen bir where yan tümcesine LINQ deyimi de eklediniz. WHERE yan tümcesini ekleyen deyimi, yalnızca aranacak bir değer varsa yürütülür.
+Yönteme bir `searchString` parametre eklediniz. `Index` Arama dizesi değeri, Dizin görünümüne ekleyeceğiniz bir metin kutusundan alınır. Ayrıca LINQ deyimine yalnızca ad veya soyad arama dizesini içeren öğrencileri seçen bir yan tümce eklediniz. Nerede yan tümcesinin yürütüldüğü yalnızca aranacak bir değer varsa ekleyen deyim.
 
 > [!NOTE]
-> Burada `Where` yöntemi bir `IQueryable` nesnesi üzerinde arıyorsanız ve filtrenin sunucuda işlenmesi gerekir. Bazı senaryolarda, bellek içi bir koleksiyonda `Where` yöntemini genişletme yöntemi olarak çağırma olabilirsiniz. (Örneğin, `_context.Students` başvurusunu, bir `DbSet` EF yerine bir `IEnumerable` koleksiyonu döndüren bir depo yöntemine başvurduğu gibi) değiştirdiğinizi varsayın.) Sonuç normalde aynı olur, ancak bazı durumlarda farklı olabilir.
+> Burada bir `IQueryable` nesne `Where` üzerinde yöntemi çağırıyorsunuz ve filtre sunucuda işlenir. Bazı `Where` senaryolarda, yöntemi bellek içi bir koleksiyonda uzantı yöntemi olarak adlandırıyor olabilirsiniz. (Örneğin, başvuruyu, bir `_context.Students` EF `DbSet` yerine `IEnumerable` bir koleksiyonu döndüren bir depo yöntemine başvurur şekilde değiştirdiğinizi varsayalım.) Sonuç normalde aynı olurdu ama bazı durumlarda farklı olabilir.
 >
->Örneğin, `Contains` yönteminin .NET Framework uygulanması, varsayılan olarak büyük/küçük harfe duyarlı bir karşılaştırma gerçekleştirir, ancak SQL Server ' de SQL Server örneğinin harmanlama ayarı tarafından belirlenir. Bu ayar varsayılan olarak büyük/küçük harfe duyarsız olur. Testi açıkça büyük/küçük harfe duyarsız hale getirmek için `ToUpper` yöntemini çağırabilirsiniz: *burada (s = > s. LastName. ToUpper (). Contains (searchString. ToUpper ())* . Bu, kodu daha sonra bir `IQueryable` nesnesi yerine `IEnumerable` koleksiyonu döndüren bir depoyu kullanacak şekilde değiştirirseniz sonuçların aynı kalmasını sağlar. (Bir `IEnumerable` koleksiyonunda `Contains` yöntemini çağırdığınızda .NET Framework uygulamasını alırsınız; bunu bir `IQueryable` nesnesi üzerinde çağırdığınızda, veritabanı sağlayıcısı uygulamasını alırsınız.) Ancak, bu çözüm için bir performans cezası vardır. `ToUpper` kodu, TSQL SELECT ifadesinin WHERE yan tümcesine bir işlev koyar. Bu, iyileştiricinin bir dizin kullanmasını engelleyecek. SQL 'in çoğu büyük küçük harfe duyarsız olarak yüklendiği için, büyük/küçük harfe duyarlı bir veri deposuna geçiş yapılıncaya kadar `ToUpper` koddan kaçınmak en iyisidir.
+>Örneğin, yöntemin `Contains` .NET Framework uygulaması varsayılan olarak büyük/küçük harf duyarlı bir karşılaştırma gerçekleştirir, ancak SQL Server'da bu, SQL Server örneğinin harmanlama ayarı tarafından belirlenir. Bu ayar varsayılan olarak büyük/küçük harf duyarsızı dır. Testi açıkça `ToUpper` büyük/küçük harf duyarsız yapmak için yöntemi arayabilirsiniz: *Where(s => s.LastName.ToUpper(). Içerir(searchString.ToUpper())*. Bu, kodu daha sonra `IEnumerable` `IQueryable` nesne yerine bir koleksiyon döndüren bir depo kullanmak üzere değiştirirseniz sonuçların aynı kalmasını sağlar. (Bir `Contains` `IEnumerable` koleksiyondaki yöntemi aradiğinizde,.NET Framework uygulamasını alırsınız; bir `IQueryable` nesne üzerinde aradiğinizde veritabanı sağlayıcısı uygulamasını alırsınız.) Ancak, bu çözüm için bir performans cezası var. Kod, `ToUpper` TSQL SELECT deyiminin WHERE yan tümcesi'ne bir işlev koyar. Bu, en iyi duruma getiricinin dizin kullanmasını engeller. SQL'in çoğunlukla büyük/küçük harf duyarlı olarak yüklendiğinden, `ToUpper` büyük/küçük harf duyarlı bir veri deposuna geçiş yapana kadar koddan kaçınmak en iyisidir.
 
-### <a name="add-a-search-box-to-the-student-index-view"></a>Öğrenci dizini görünümüne arama kutusu ekleme
+### <a name="add-a-search-box-to-the-student-index-view"></a>Öğrenci Dizini Görünümüne Arama Kutusu Ekleme
 
-*Görünümler/öğrenci/Index. cshtml*'de, bir başlık, metin kutusu ve bir **arama** düğmesi oluşturmak için, açılan tablo etiketinden hemen önce vurgulanan kodu ekleyin.
+*Görünümler/Öğrenci/Index.cshtml'de,* resim yazısı, metin kutusu ve **Arama** düğmesi oluşturmak için vurgulanan kodu açılış tablosu etiketinden hemen önce ekleyin.
 
 [!code-html[](intro/samples/cu/Views/Students/Index3.cshtml?range=9-23&highlight=5-13)]
 
-Bu kod, arama metin kutusu ve düğmesini eklemek için `<form>` [Tag yardımcısını](xref:mvc/views/tag-helpers/intro) kullanır. Varsayılan olarak, `<form>` etiketi Yardımcısı, form verilerini bir GÖNDERIYLE gönderir, yani Parametreler, URL 'de sorgu dizeleri olarak değil, HTTP ileti gövdesinde geçirilir. HTTP GET belirttiğinizde, form verileri URL 'ye sorgu dizeleri olarak geçirilir ve bu da kullanıcıların URL 'ye yer işareti eklemesini sağlar. W3C yönergeleri, eylem bir güncelleştirme ile sonuçlanmazsa Al ' ın kullanılması önerilir.
+Bu kod, `<form>` arama metin kutusunu ve düğmesini eklemek için [etiket yardımcısını](xref:mvc/views/tag-helpers/intro) kullanır. Varsayılan olarak, `<form>` etiket yardımcısı form verilerini BIR POST ile gönderir, bu da parametrelerin SORGU dizeleri olarak URL'de değil, HTTP ileti gövdesinde geçirildiği anlamına gelir. HTTP GET'i belirttiğiniz zaman, form verileri URL'ye sorgu dizeleri olarak aktarılır ve bu da kullanıcıların URL'yi yer imi ne kadar işaretlemelerine olanak tanır. W3C yönergeleri, eylem bir güncelleştirmeyle sonuçlanmadığında GET'i kullanmanızı önerir.
 
-Uygulamayı çalıştırın, **öğrenciler** sekmesini seçin, bir arama dizesi girin ve filtreleme 'nin çalıştığını doğrulamak için ara ' ya tıklayın.
+Uygulamayı çalıştırın, **Öğrenciler** sekmesini seçin, bir arama dizesi girin ve filtrelemenin çalıştığını doğrulamak için Ara'yı tıklatın.
 
-![Bir filtreleme ile öğrenciler Dizin sayfası](sort-filter-page/_static/filtering.png)
+![Filtreleme ile öğrenci dizini sayfası](sort-filter-page/_static/filtering.png)
 
-URL 'nin arama dizesini içerdiğine dikkat edin.
+URL'nin arama dizesini içerdiğine dikkat edin.
 
 ```html
 http://localhost:5813/Students?SearchString=an
 ```
 
-Bu sayfaya yer işareti eklerseniz, yer işaretini kullandığınızda filtrelenmiş listeyi alırsınız. `form` etiketine `method="get"` eklemek, sorgu dizesinin oluşturulmasına neden olur.
+Bu sayfayı yer imi ederseniz, yer imi kullandığınızda filtrelenmiş listeyi alırsınız. Etikete `method="get"` `form` ekleme, sorgu dizesinin oluşturulmasına neden olan şeydir.
 
-Bu aşamada, bir sütun başlığı sıralama bağlantısını tıklatırsanız, **arama** kutusuna girdiğiniz filtre değerini kaybedersiniz. Sonraki bölümde bunu çözeceksiniz.
+Bu aşamada, bir sütun başlığı sıralama bağlantısını tıklattığınızda, **Arama** kutusuna girdiğiniz filtre değerini kaybedersiniz. Bunu bir sonraki bölümde düzelteceksin.
 
-## <a name="add-paging-to-students-index"></a>Öğrenciler dizinine sayfalama ekleme
+## <a name="add-paging-to-students-index"></a>Öğrenci Endeksine Sayfa ekleme
 
-Öğrenciler dizin sayfasına sayfalama eklemek için, `Skip` ve `Take` deyimlerini kullanan bir `PaginatedList` sınıfını, tablodaki verileri her zaman almak yerine, sunucuda filtrelemek için oluşturacaksınız. Daha sonra `Index` yönteminde ek değişiklikler yapar ve `Index` görünümüne sayfalama düğmeleri eklersiniz. Aşağıdaki çizimde sayfalama düğmeleri gösterilmektedir.
+Öğrenci Dizini sayfasına sayfa ekleme eklemek için, tablonun tüm satırlarını her zaman almak yerine sunucudaki verileri filtrelemek için kullanan `PaginatedList` `Skip` ve `Take` ifade veren bir sınıf oluşturursunuz. Ardından `Index` yöntemde ek değişiklikler yapar ve görünüme sayfalama `Index` düğmeleri eklersiniz. Aşağıdaki resimde sayfalama düğmeleri gösterilmektedir.
 
-![Sayfa bağlantılarıyla öğrenciler Dizin sayfası](sort-filter-page/_static/paging.png)
+![Sayfalama bağlantıları olan öğrenci dizini sayfası](sort-filter-page/_static/paging.png)
 
-Proje klasöründe `PaginatedList.cs`oluşturun ve ardından şablon kodunu aşağıdaki kodla değiştirin.
+Proje klasöründe, `PaginatedList.cs`şablon kodunu aşağıdaki kodla oluşturun ve değiştirin.
 
 [!code-csharp[](intro/samples/cu/PaginatedList.cs)]
 
-Bu koddaki `CreateAsync` yöntemi sayfa boyutunu ve sayfa numarasını alır ve uygun `Skip` ve `Take` deyimlerini `IQueryable`uygular. `IQueryable``ToListAsync` çağrıldığında, yalnızca istenen sayfayı içeren bir liste döndürür. `HasPreviousPage` ve `HasNextPage` özellikleri, **önceki** ve **sonraki** sayfalama düğmelerini etkinleştirmek veya devre dışı bırakmak için kullanılabilir.
+Bu `CreateAsync` koddaki yöntem sayfa boyutunu ve sayfa numarasını `Skip` `Take` alır ve `IQueryable`uygun ve ifadeleri uygular. `IQueryable`Çağrıldığında, `ToListAsync` yalnızca istenen sayfayı içeren bir Liste döndürecektir. Özellikleri `HasPreviousPage` ve `HasNextPage` **önceki** ve **sonraki** sayfalama düğmelerini etkinleştirmek veya devre dışı bırakmak için kullanılabilir.
 
-Oluşturucular zaman uyumsuz kod çalıştıramadığından `PaginatedList<T>` nesnesini oluşturmak için bir Oluşturucu yerine bir `CreateAsync` yöntemi kullanılır.
+Oluşturucular eşzamanlı kodu `CreateAsync` çalıştıramadığından, `PaginatedList<T>` nesneyi oluşturmak için oluşturucu yerine bir yöntem kullanılır.
 
-## <a name="add-paging-to-index-method"></a>Dizin yöntemine sayfalama ekleme
+## <a name="add-paging-to-index-method"></a>Dizin yöntemine sayfa ekleme
 
-*StudentsController.cs*' de `Index` yöntemini aşağıdaki kodla değiştirin.
+*StudentsController.cs,* yöntemi `Index` aşağıdaki kodla değiştirin.
 
 [!code-csharp[](intro/samples/cu/Controllers/StudentsController.cs?name=snippet_SortFilterPage&highlight=1-5,7,11-18,45-46)]
 
-Bu kod, bir sayfa numarası parametresi, geçerli bir sıralama düzeni parametresi ve Yöntem imzasına geçerli bir filtre parametresi ekler.
+Bu kod, yöntem imzasına bir sayfa numarası parametresi, geçerli sıralama sipariş parametresi ve geçerli filtre parametresi ekler.
 
 ```csharp
 public async Task<IActionResult> Index(
@@ -147,13 +147,13 @@ public async Task<IActionResult> Index(
     int? pageNumber)
 ```
 
-Sayfa ilk kez görüntülenirken veya Kullanıcı bir sayfalama veya sıralama bağlantısına tıklamamışsa, tüm parametreler null olur.  Bir sayfalama bağlantısına tıklandıysanız, sayfa değişkeni görüntülenecek sayfa numarasını içerir.
+Sayfa ilk kez görüntülendiğinde veya kullanıcı bir sayfalama veya sıralama bağlantısını tıklatmamışsa, tüm parametreler geçersiz olur.  Bir sayfalama bağlantısı tıklanırsa, sayfa değişkeni görüntülenecek sayfa numarasını içerir.
 
-CurrentSort adlı `ViewData` öğesi, sayfalama bağlantılarına dahil edilmesi gerektiğinden, bu sıralama düzeni geçerli sıralama düzeni ile birlikte sağlar.
+CurrentSort adlı `ViewData` öğe görünümü geçerli sıralama sırasıyla sağlar, çünkü bu, sıralama sırasını çağrıyaparken aynı tutmak için çağrı bağlantılarına dahil edilmelidir.
 
-CurrentFilter adlı `ViewData` öğesi, geçerli filtre dizesiyle görünüm sağlar. Bu değer, disk belleği sırasında filtre ayarlarını korumak için disk belleği bağlantılarına dahil olmalıdır ve sayfa yeniden görüntülenirken metin kutusuna geri yüklenmesi gerekir.
+CurrentFilter adlı `ViewData` öğe, görünümü geçerli filtre dizesiyle sağlar. Sayfalama sırasında filtre ayarlarını korumak için bu değer sayfalama bağlantılarına eklenmelidir ve sayfa yeniden görüntülendiğinde metin kutusuna geri yüklenmelidir.
 
-Arama dizesi sayfalama sırasında değiştirilmişse, yeni filtre farklı verilerin görüntülenmesini sağladığından sayfanın 1 olarak sıfırlanması gerekir. Metin kutusuna bir değer girildiğinde ve Gönder düğmesine basıldığında arama dizesi değişir. Bu durumda `searchString` parametresi null değildir.
+Arama dizesi sayfalama sırasında değiştirilirse, yeni filtre farklı verilerin görüntülenmesine neden olabileceğinden sayfanın 1 olarak sıfırlanması gerekir. Metin kutusuna bir değer girildiğinde ve Gönder düğmesine basıldığında arama dizesi değiştirilir. Bu durumda, `searchString` parametre null değildir.
 
 ```csharp
 if (searchString != null)
@@ -166,23 +166,23 @@ else
 }
 ```
 
-`Index` yönteminin sonunda, `PaginatedList.CreateAsync` yöntemi öğrenci sorgusunu, sayfalama destekleyen bir koleksiyon türünde tek bir öğrenciye dönüştürür. Bu tek bir öğrenci sayfası daha sonra görünüme geçirilir.
+`Index` Yöntemin sonunda, `PaginatedList.CreateAsync` yöntem öğrenci sorgusunu çağrılamayı destekleyen bir koleksiyon türündeki tek bir öğrenci sayfasına dönüştürür. Öğrencilerin bu tek sayfası daha sonra görünüme geçirilir.
 
 ```csharp
 return View(await PaginatedList<Student>.CreateAsync(students.AsNoTracking(), pageNumber ?? 1, pageSize));
 ```
 
-`PaginatedList.CreateAsync` yöntemi bir sayfa numarası alır. İki soru işareti, null birleşim işlecini temsil eder. Null birleşim işleci, Nullable bir tür için varsayılan değeri tanımlar; `(pageNumber ?? 1)` ifadesi bir değere sahipse `pageNumber` değerini döndürür veya `pageNumber` null ise 1 döndürür.
+Yöntem `PaginatedList.CreateAsync` bir sayfa numarası alır. İki soru işareti null-coalescing operatör temsil eder. Null-coalescing işleci nullable türü için varsayılan bir değer tanımlar; ifade, `(pageNumber ?? 1)` bir değeri `pageNumber` varsa değerini döndürme veya null `pageNumber` ise 1'i döndürme anlamına gelir.
 
-## <a name="add-paging-links"></a>Sayfalama bağlantıları Ekle
+## <a name="add-paging-links"></a>Sayfalama bağlantıları ekleme
 
-*Görünümler/öğrenciler/Index. cshtml*'de, mevcut kodu aşağıdaki kodla değiştirin. Değişiklikler vurgulanır.
+*Görünümler/Öğrenciler/Index.cshtml'de,* varolan kodu aşağıdaki kodla değiştirin. Değişiklikler vurgulanır.
 
 [!code-html[](intro/samples/cu/Views/Students/Index.cshtml?highlight=1,27,30,33,61-79)]
 
-Sayfanın üst kısmındaki `@model` ifade, görünümün artık `List<T>` nesnesi yerine `PaginatedList<T>` bir nesne aldığından emin olarak belirtir.
+Sayfanın üst kısmındaki deyim, `@model` görünümün artık nesne `PaginatedList<T>` `List<T>` yerine bir nesne aldığını belirtir.
 
-Sütun üst bilgisi bağlantıları, kullanıcının filtre sonuçları içinde sıralama yapabilmesi için geçerli arama dizesini denetleyiciye geçirmek için sorgu dizesini kullanır:
+Sütun üstbilgi bağlantıları, kullanıcının filtre sonuçları içinde sıralayabilmeleri için geçerli arama dizesini denetleyiciye geçirmek için sorgu dizesini kullanır:
 
 ```html
 <a asp-action="Index" asp-route-sortOrder="@ViewData["DateSortParm"]" asp-route-currentFilter ="@ViewData["CurrentFilter"]">Enrollment Date</a>
@@ -200,55 +200,55 @@ Sayfalama düğmeleri etiket yardımcıları tarafından görüntülenir:
 </a>
 ```
 
-Uygulamayı çalıştırın ve öğrenciler sayfasına gidin.
+Uygulamayı çalıştırın ve Öğrenciler sayfasına gidin.
 
-![Sayfa bağlantılarıyla öğrenciler Dizin sayfası](sort-filter-page/_static/paging.png)
+![Sayfalama bağlantıları olan öğrenci dizini sayfası](sort-filter-page/_static/paging.png)
 
-Disk belleğinin çalıştığından emin olmak için farklı sıralama emirlerindeki disk belleği bağlantılarına tıklayın. Daha sonra bir arama dizesi girin ve sayfalama ve filtreleme ile doğru şekilde çalıştığını doğrulamak için sayfalama işlemi yeniden deneyin.
+Sayfalamanın çalıştığından emin olmak için farklı sıralama emirlerindeki çağrı bağlantılarını tıklatın. Ardından bir arama dizesi girin ve arama nın sıralama ve filtreleme ile de doğru çalıştığını doğrulamak için yeniden aramayı deneyin.
 
-## <a name="create-an-about-page"></a>Hakkında bir sayfa oluşturun
+## <a name="create-an-about-page"></a>Hakkında sayfa oluşturma
 
-Contoso Üniversitesi web sitesinin **hakkında** sayfasında, her bir kayıt tarihi için kaç öğrenciye kaydolduğunu görüntüleyeceksiniz. Bu, gruplar üzerinde gruplandırma ve basit hesaplamalar gerektirir. Bunu gerçekleştirmek için aşağıdakileri yapmanız gerekir:
+Contoso Üniversitesi web sitesinin **Hakkında** sayfası için, her kayıt tarihi için kaç öğrencinin kaydolduğunu görüntülersiniz. Bu, gruplar üzerinde gruplandırma ve basit hesaplamalar gerektirir. Bunu başarmak için aşağıdakileri yaparsınız:
 
 * Görünüme geçirmeniz gereken veriler için bir görünüm modeli sınıfı oluşturun.
-* Giriş denetleyicisinde hakkında yöntemini oluşturun.
-* Hakkında görünümünü oluşturun.
+* Giriş denetleyicisinde Hakkında yöntemini oluşturun.
+* About görünümünü oluşturun.
 
-### <a name="create-the-view-model"></a>Görünüm modeli oluşturma
+### <a name="create-the-view-model"></a>Görünüm modelini oluşturma
 
 *Modeller* klasöründe bir *SchoolViewModels* klasörü oluşturun.
 
-Yeni klasörde, *EnrollmentDateGroup.cs* bir sınıf dosyası ekleyin ve şablon kodunu şu kodla değiştirin:
+Yeni klasörde, bir sınıf dosyası *EnrollmentDateGroup.cs* ekleyin ve şablon kodunu aşağıdaki kodla değiştirin:
 
 [!code-csharp[](intro/samples/cu/Models/SchoolViewModels/EnrollmentDateGroup.cs)]
 
-### <a name="modify-the-home-controller"></a>Ana denetleyiciyi değiştirme
+### <a name="modify-the-home-controller"></a>Ev Denetleyicisini Değiştir
 
-*HomeController.cs*' de, aşağıdaki using deyimlerini dosyanın en üstüne ekleyin:
+*HomeController.cs,* dosyanın üst kısmında aşağıdaki ifadeleri kullanarak ekleyin:
 
 [!code-csharp[](intro/samples/cu/Controllers/HomeController.cs?name=snippet_Usings1)]
 
-Sınıf için açma küme ayracından hemen sonra veritabanı bağlamı için bir sınıf değişkeni ekleyin ve ASP.NET Core DI 'den bağlamın bir örneğini alın:
+Sınıf için kıvırcık ayraç açıldıktan hemen sonra veritabanı bağlamı için bir sınıf değişkeni ekleyin ve ASP.NET Core DI'den bağlamın bir örneğini alın:
 
 [!code-csharp[](intro/samples/cu/Controllers/HomeController.cs?name=snippet_AddContext&highlight=3,5,7)]
 
-Aşağıdaki kodla bir `About` yöntemi ekleyin:
+Aşağıdaki `About` kodla bir yöntem ekleyin:
 
 [!code-csharp[](intro/samples/cu/Controllers/HomeController.cs?name=snippet_UseDbSet)]
 
-LINQ deyimleri, öğrenci varlıklarını kayıt tarihine göre gruplandırır, her bir gruptaki varlıkların sayısını hesaplar ve sonuçları bir `EnrollmentDateGroup` View model nesneleri koleksiyonunda depolar.
+LINQ deyimi öğrenci varlıklarını kayıt tarihine göre gruplandırıyor, her gruptaki varlık sayısını hesaplar `EnrollmentDateGroup` ve sonuçları görünüm modeli nesneleri koleksiyonunda saklar.
 
-### <a name="create-the-about-view"></a>Hakkında görünüm oluştur
+### <a name="create-the-about-view"></a>Hakkında Görünüm Oluşturma
 
-Aşağıdaki kodla bir *Görünümler/Home/about. cshtml* dosyası ekleyin:
+Aşağıdaki kodla *görünümler/ev/about.cshtml* dosyası ekleyin:
 
 [!code-html[](intro/samples/cu/Views/Home/About.cshtml)]
 
-Uygulamayı çalıştırın ve hakkında sayfasına gidin. Her kayıt tarihi için öğrenci sayısı bir tabloda görüntülenir.
+Uygulamayı çalıştırın ve Hakkında sayfasına gidin. Her kayıt tarihi için öğrenci sayısı bir tabloda görüntülenir.
 
 ## <a name="get-the-code"></a>Kodu alma
 
-[Tamamlanmış uygulamayı indirin veya görüntüleyin.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[Tamamlanan uygulamayı karşıdan yükleyin veya görüntüleyin.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
@@ -257,12 +257,12 @@ Bu öğreticide şunları yaptınız:
 > [!div class="checklist"]
 > * Sütun sıralama bağlantıları eklendi
 > * Arama kutusu eklendi
-> * Öğrenciler dizinine sayfalama eklendi
-> * Dizin oluşturma yöntemine sayfalama eklendi
-> * Sayfalama bağlantıları eklendi
-> * Hakkında bir sayfa oluşturuldu
+> * Öğrenci Endeksine Çağrı
+> * Dizin yöntemine çağrı ekleme
+> * Eklenen sayfalama bağlantıları
+> * Hakkında sayfa oluşturma
 
-Geçiş kullanarak veri modeli değişikliklerini nasıl işleyebileceğinizi öğrenmek için sonraki öğreticiye ilerleyin.
+Geçişleri kullanarak veri modeli değişikliklerini nasıl işleyeceğinizi öğrenmek için bir sonraki öğreticiye ilerleyin.
 
 > [!div class="nextstepaction"]
-> [Sonraki: veri modeli değişikliklerini Işle](migrations.md)
+> [Sonraki: Veri modeli değişikliklerini işleme](migrations.md)

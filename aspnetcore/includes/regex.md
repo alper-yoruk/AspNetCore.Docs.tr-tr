@@ -1,2 +1,2 @@
 > [!WARNING]
-> Güvenilmeyen girişi işlemek için <xref:System.Text.RegularExpressions> kullanırken bir zaman aşımı geçirin. Kötü niyetli bir Kullanıcı, bir [hizmet reddi saldırısına](https://www.us-cert.gov/ncas/tips/ST04-015)neden `RegularExpressions` giriş sağlayabilir. Bir zaman aşımı `RegularExpressions` kullanan ASP.NET Core Framework API 'Leri.
+> Güvenilmeyen <xref:System.Text.RegularExpressions> girişi işlemek için kullanırken, bir zaman arasını geçirin. Kötü niyetli bir `RegularExpressions` [kullanıcı, Hizmet Reddi saldırısına](https://www.us-cert.gov/ncas/tips/ST04-015)neden olan giriş sağlayabilir. ASP.NET `RegularExpressions` Kullanılan Temel Çerçeve API'leri bir zaman arasını geçer.

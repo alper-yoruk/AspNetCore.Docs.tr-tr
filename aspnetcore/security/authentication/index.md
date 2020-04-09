@@ -1,35 +1,35 @@
 ---
-title: ASP.NET Core kimlik doğrulamasına genel bakış
+title: ASP.NET Çekirdek Kimlik Doğrulamaya Genel Bakış
 author: mjrousos
-description: ASP.NET Core kimlik doğrulaması hakkında bilgi edinin.
+description: ASP.NET Core'da kimlik doğrulama hakkında bilgi edinin.
 ms.author: riande
 ms.custom: mvc
 ms.date: 03/03/2020
 uid: security/authentication/index
 ms.openlocfilehash: 404904ecfa30d1fe7e47f0daaa423ddd6f1b06e8
-ms.sourcegitcommit: 5bdc54162d7dea8d9fa54ac3055678db23586af1
+ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/17/2020
+ms.lasthandoff: 04/06/2020
 ms.locfileid: "79434336"
 ---
-# <a name="overview-of-aspnet-core-authentication"></a>ASP.NET Core kimlik doğrulamasına genel bakış
+# <a name="overview-of-aspnet-core-authentication"></a>ASP.NET Çekirdek kimlik doğrulamaya genel bakış
 
-, [Mike Rousos](https://github.com/mjrousos) tarafından
+Yazar: [Mike Rousos](https://github.com/mjrousos)
 
-Kimlik doğrulaması, bir kullanıcının kimliğini belirleme işlemidir. [Yetkilendirme](xref:security/authorization/introduction) , bir kullanıcının bir kaynağa erişip erişemeyeceğini belirleme işlemidir. ASP.NET Core, kimlik doğrulaması, kimlik doğrulama [ara yazılımı](xref:fundamentals/middleware/index)tarafından kullanılan `IAuthenticationService`tarafından işlenir. Kimlik doğrulama hizmeti, kimlik doğrulama ile ilgili eylemleri tamamlamaya yönelik kayıtlı kimlik doğrulama işleyicilerini kullanır. Kimlik doğrulaması ile ilgili eylemlere örnek olarak şunlar verilebilir:
+Kimlik doğrulama, kullanıcının kimliğini belirleme işlemidir. [Yetkilendirme,](xref:security/authorization/introduction) bir kullanıcının kaynağa erişimi olup olmadığını belirleme işlemidir. ASP.NET Core'da kimlik `IAuthenticationService`doğrulama, kimlik doğrulama [aracı](xref:fundamentals/middleware/index)tarafından kullanılan Kimlik doğrulama hizmeti, kimlik doğrulamayla ilgili eylemleri tamamlamak için kayıtlı kimlik doğrulama işleyicilerini kullanır. Kimlik doğrulamayla ilgili eylemlere örnek olarak şunlar verilebilir:
 
-* Kullanıcı kimlik doğrulaması.
-* Kimliği doğrulanmamış bir Kullanıcı kısıtlı bir kaynağa erişmeyi denediğinde yanıt verir.
+* Bir kullanıcının kimliğini doğrulama.
+* Kimliği doğrulanmamış bir kullanıcı kısıtlı bir kaynağa erişmeye çalıştığında yanıt verir.
 
-Kayıtlı kimlik doğrulama işleyicileri ve yapılandırma seçenekleri "şemalar" olarak adlandırılır.
+Kayıtlı kimlik doğrulama işleyicileri ve yapılandırma seçenekleri "düzenleri" olarak adlandırılır.
 
-Kimlik doğrulama düzenleri `Startup.ConfigureServices`kimlik doğrulama hizmetleri kaydedilerek belirtilir:
+Kimlik doğrulama şemaları, kimlik doğrulama hizmetlerini `Startup.ConfigureServices`şu şekilde kaydederek belirtilir:
 
-* Bir `services.AddAuthentication` çağrısından sonra düzene özgü bir genişletme yöntemini çağırarak (örneğin `AddJwtBearer` veya `AddCookie`gibi). Bu uzantı yöntemleri, uygun ayarlarla şemaları kaydetmek için [Authenticationbuilder. AddScheme](xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilder.AddScheme*) kullanır.
-* Daha seyrek, [Authenticationbuilder. AddScheme](xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilder.AddScheme*) doğrudan çağırarak.
+* Bir çağrıdan sonra şemaya özgü `services.AddAuthentication` bir uzatma `AddJwtBearer` `AddCookie`yöntemini arayarak (örneğin). Bu uzantı yöntemleri, uygun ayarlara sahip şemaları kaydetmek için [AuthenticationBuilder.AddScheme'i](xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilder.AddScheme*) kullanır.
+* Daha az yaygın olarak, [Doğrudan AuthenticationBuilder.AddScheme](xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilder.AddScheme*) arayarak.
 
-Örneğin, aşağıdaki kod, tanımlama bilgisi ve JWT taşıyıcı kimlik doğrulama şemaları için kimlik doğrulama hizmetlerini ve işleyicileri kaydeder:
+Örneğin, aşağıdaki kod, tanımlama bilgisi ve JWT taşıyıcı kimlik doğrulama düzenleri için kimlik doğrulama hizmetlerini ve işleyicilerini kaydeder:
 
 ```csharp
 services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -37,91 +37,91 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options => Configuration.Bind("CookieSettings", options));
 ```
 
-`AddAuthentication` parametresi `JwtBearerDefaults.AuthenticationScheme`, belirli bir düzen istenmediğinde varsayılan olarak kullanılacak düzenin adıdır.
+`AddAuthentication` Parametre, `JwtBearerDefaults.AuthenticationScheme` belirli bir düzen istenmediğinde varsayılan olarak kullanılacak şemanın adıdır.
 
-Birden çok düzen kullanılırsa, yetkilendirme ilkeleri (veya yetkilendirme öznitelikleri) kullanıcının kimliğini doğrulamak için bağımlı oldukları [kimlik doğrulama düzenini (veya düzenleri) belirtebilir](xref:security/authorization/limitingidentitybyscheme) . Yukarıdaki örnekte, tanımlama bilgisi kimlik doğrulama düzeni adı belirtilerek kullanılabilir (varsayılan olarak`CookieAuthenticationDefaults.AuthenticationScheme`, ancak `AddCookie`çağrılırken farklı bir ad sağlandıysa).
+Birden çok düzen kullanılıyorsa, yetkilendirme ilkeleri (veya yetkilendirme öznitelikleri), kullanıcının kimliğini doğrulamak için bağlı oldukları [kimlik doğrulama düzenini (veya şemaları) belirtebilir.](xref:security/authorization/limitingidentitybyscheme) Yukarıdaki örnekte, çerez kimlik doğrulama düzeni adını belirterek`CookieAuthenticationDefaults.AuthenticationScheme` kullanılabilir (varsayılan olarak, arama yaparken `AddCookie`farklı bir ad sağlanabilir).
 
-Bazı durumlarda `AddAuthentication` çağrısı diğer uzantı yöntemleri tarafından otomatik olarak yapılır. Örneğin, [ASP.NET Core kimliği](xref:security/authentication/identity)kullanılırken, `AddAuthentication` dahili olarak çağrılır.
+Bazı durumlarda, arama `AddAuthentication` otomatik olarak diğer uzantı yöntemleri tarafından yapılır. Örneğin, ASP.NET [Çekirdek Kimlik](xref:security/authentication/identity) `AddAuthentication` kullanırken, dahili olarak adlandırılır.
 
-Kimlik doğrulama ara yazılımı, uygulamanın `IApplicationBuilder`<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> uzantısı yöntemi çağırarak `Startup.Configure` eklenir. `UseAuthentication` çağırmak, daha önce kayıtlı kimlik doğrulama düzenlerini kullanan ara yazılımı kaydeder. Kimliği doğrulanan kullanıcılara bağlı olan tüm ara yazılımlar için `UseAuthentication` çağırın. Endpoint Routing kullanılırken, `UseAuthentication` çağrısı şu şekilde olmalıdır:
+Kimlik Doğrulama aracı, uygulamanın uzantısı yöntemini `Startup.Configure` <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> arayarak `IApplicationBuilder`eklenir. Arama, `UseAuthentication` daha önce kaydedilmiş kimlik doğrulama düzenlerini kullanan ara yazılımı kaydeder. Kullanıcıların `UseAuthentication` kimliğine bağlı olarak herhangi bir ara yazılımdan önce arayın. Uç nokta yönlendirmesini kullanırken, `UseAuthentication` çağrının gitmesi gerekir:
 
-* `UseRouting`sonra, kimlik doğrulama kararlarında yol bilgileri kullanılabilir.
-* `UseEndpoints`önce, kullanıcıların, uç noktalara erişmeden önce kimlik doğrulaması yapılır.
+* Sonra `UseRouting`, böylece rota bilgileri kimlik doğrulama kararları için kullanılabilir.
+* Önce `UseEndpoints`, böylece kullanıcıların bitiş noktalarına erişmeden önce kimlik doğrulaması yapılır.
 
-## <a name="authentication-concepts"></a>Kimlik doğrulama kavramları
+## <a name="authentication-concepts"></a>Kimlik Doğrulama Kavramları
 
-### <a name="authentication-scheme"></a>Kimlik doğrulama düzeni
+### <a name="authentication-scheme"></a>Kimlik doğrulama şeması
 
-Kimlik doğrulama düzeni, öğesine karşılık gelen bir addır:
+Kimlik doğrulama düzeni, aşağıdakilere karşılık gelen bir addır:
 
-* Bir kimlik doğrulama işleyicisi.
-* İşleyicinin belirli bir örneğini yapılandırma seçenekleri.
+* Kimlik doğrulama işleyicisi.
+* Işleyicinin belirli bir örneğini yapılandırma seçenekleri.
 
-Şemaları, ilişkili işleyicinin kimlik doğrulama, sınama ve fordeklarasyonu davranışlarına başvurma mekanizması olarak faydalıdır. Örneğin, bir yetkilendirme ilkesi, kullanıcının kimliğini doğrulamak için hangi kimlik doğrulama şemasının (veya düzenlerinin) kullanılması gerektiğini belirtmek için şema adlarını kullanabilir. Kimlik doğrulamasını yapılandırırken, varsayılan kimlik doğrulama düzenini belirlemek yaygın bir hale gelir. Varsayılan şema, bir kaynak belirli bir düzeni istemediği takdirde kullanılır. Şunları da mümkündür:
+Şemalar, ilişkili işleyicinin kimlik doğrulamasına, meydan okumasına ve yasaklayıcı davranışlarına atıfta bulunan bir mekanizma olarak yararlıdır. Örneğin, bir yetkilendirme ilkesi, kullanıcının kimliğini doğrulamak için hangi kimlik doğrulama düzeninin (veya şemalar) kullanılması gerektiğini belirtmek için şema adlarını kullanabilir. Kimlik doğrulaması yapılandırırken, varsayılan kimlik doğrulama düzenini belirtmek yaygındır. Kaynak belirli bir düzen talep etmediği sürece varsayılan düzen kullanılır. Ayrıca şunları yapmak da mümkündür:
 
-* Kimlik doğrulama, sınama ve fordeklarasyon eylemleri için kullanılacak farklı varsayılan şemaları belirtin.
-* Birden çok düzeni [ilke düzenlerini](xref:security/authentication/policyschemes)kullanarak bir tek birleştirme.
+* Kimlik doğrulaması, meydan okuma ve eylemleri yasaklamak için kullanılacak farklı varsayılan düzenleri belirtin.
+* İlke [şemaları](xref:security/authentication/policyschemes)kullanarak birden çok düzeni tek bir şema da birleştirin.
 
 ### <a name="authentication-handler"></a>Kimlik doğrulama işleyicisi
 
 Kimlik doğrulama işleyicisi:
 
-* , Bir düzenin davranışını uygulayan bir türdür.
-* <xref:Microsoft.AspNetCore.Authentication.IAuthenticationHandler> veya <xref:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1>türetilir.
-* , Kullanıcıların kimliğini doğrulamak için Birincil sorumluluğa sahiptir.
+* Bir düzenin davranışını uygulayan bir türdür.
+* Türetilmiştir <xref:Microsoft.AspNetCore.Authentication.IAuthenticationHandler> <xref:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1>veya .
+* Kullanıcıların kimliğini doğrulamak için birincil sorumluluğa sahiptir.
 
-Kimlik doğrulama düzeninin yapılandırmasına ve gelen istek bağlamına göre, kimlik doğrulama işleyicileri:
+Kimlik doğrulama düzeninin yapılandırmasını ve gelen istek bağlamını temel alan kimlik doğrulama işleyicileri:
 
-* Kimlik doğrulaması başarılı olursa kullanıcının kimliğini temsil eden <xref:Microsoft.AspNetCore.Authentication.AuthenticationTicket> nesneleri oluşturun.
-* Kimlik doğrulaması başarısız olursa ' No Result ' veya ' Failure ' döndürün.
-* Kullanıcıların kaynaklara erişmeyi deneyeceği işlemler ve yasaklamaya yönelik yöntemlere sahiptir:
-  * Bunlara erişim yetkisi yoktur (fordeklarasyon).
-  * Kimliği doğrulanmamış olduğunda (zorluk).
+* Kimlik <xref:Microsoft.AspNetCore.Authentication.AuthenticationTicket> doğrulaması başarılı olursa kullanıcının kimliğini temsil eden nesneler oluştur.
+* Kimlik doğrulama başarısız olursa 'sonuç yok' veya 'başarısız' döndürün.
+* Kullanıcılar kaynaklara erişmeye çalıştıklarında meydan okuma ve eylemleri yasaklama yöntemlerine sahip olabilir:
+  * Erişim iznine sahipler (yasaklar).
+  * Onlar doğrulanmamış olduğunda (meydan).
 
 ### <a name="authenticate"></a>Kimlik doğrulaması
 
-Kimlik doğrulama düzeninin kimlik doğrulama eylemi, kullanıcının kimliğini istek bağlamına göre oluşturmaktan sorumludur. Kimlik doğrulamanın başarılı olup olmadığını ve bu durumda kullanıcının kimlik doğrulama biletinde kimliğini belirten bir <xref:Microsoft.AspNetCore.Authentication.AuthenticateResult> döndürür. Bkz. <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.AuthenticateAsync%2A>. Kimlik doğrulama örnekleri şunları içerir:
+Kimlik doğrulama düzeninin kimlik doğrulama eylemi, kullanıcının kimliğini istek bağlamına göre oluşturmakla yükümlüdür. Kimlik doğrulamanın başarılı olup olmadığını ve varsa bir kimlik doğrulama biletinde kullanıcının kimliğini <xref:Microsoft.AspNetCore.Authentication.AuthenticateResult> gösteren bir işaret verir. Bkz. <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.AuthenticateAsync%2A>. Kimlik doğrulama örnekleri şunlardır:
 
-* Tanımlama bilgisi kimlik doğrulama şeması kullanıcının kimlik bilgilerinden kimliğini oluşturan.
-* Bir JWT taşıyıcı şeması, kullanıcının kimliğini oluşturmak için bir JWT taşıyıcı belirtecini seri durumdan çıkarma ve doğrulama.
+* Tanımlama bilgilerinden kullanıcı kimliğini oluşturan bir çerez kimlik doğrulama düzeni.
+* Kullanıcının kimliğini oluşturmak için bir JWT taşıyıcı belirteci deserializing ve doğrulayan bir JWT taşıyıcı düzeni.
 
-### <a name="challenge"></a>Sına
+### <a name="challenge"></a>Sınama
 
-Kimliği doğrulanmamış bir kullanıcı kimlik doğrulaması gerektiren bir uç nokta istediğinde yetkilendirme ile kimlik doğrulama sınaması çağrılır. Örneğin, anonim bir Kullanıcı kısıtlı bir kaynak istediğinde veya bir oturum açma bağlantısına tıkladığı zaman bir kimlik doğrulama sınaması verilir. Yetkilendirme, belirtilen kimlik doğrulama düzenlerini kullanarak bir zorluk çağırır ya da hiçbiri belirtilmemişse varsayılan değer. Bkz. <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ChallengeAsync%2A>. Kimlik doğrulama sınaması örnekleri şunları içerir:
+Kimlik doğrulaması, kimlik doğrulaması olmayan bir kullanıcı kimlik doğrulaması gerektiren bir bitiş noktası istediğinde Yetkilendirme tarafından çağrılır. Örneğin, anonim bir kullanıcı kısıtlı bir kaynak istediğinde veya oturum açma bağlantısını tıklattığında kimlik doğrulama sorunu düzenlenir. Yetkilendirme, belirtilen kimlik doğrulama düzenini(ler) veya hiçbiri belirtilmemişse varsayılanı kullanarak bir meydan okuma çağırır. Bkz. <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ChallengeAsync%2A>. Kimlik doğrulama zorluğu örnekleri şunlardır:
 
-* Bir tanımlama bilgisi kimlik doğrulama şeması kullanıcıyı bir oturum açma sayfasına yönlendiriyor.
-* Bir `www-authenticate: bearer` üst bilgisiyle 401 sonucu döndüren JWT taşıyıcı şeması.
+* Kullanıcıyı oturum açma sayfasına yönlendiren bir çerez kimlik doğrulama düzeni.
+* Bir JWT taşıyıcı düzeni bir `www-authenticate: bearer` üstbilgi ile 401 sonuç dönen.
 
-Bir sınama eylemi, kullanıcının istenen kaynağa erişmek için hangi kimlik doğrulama mekanizmasını kullanacağınızı bilmesine izin verir.
+Bir meydan okuma eylemi, kullanıcıya istenen kaynağa erişmek için hangi kimlik doğrulama mekanizmasını kullanacağını bildirmelidir.
 
-### <a name="forbid"></a>Yasaklamaz
+### <a name="forbid"></a>Koru -sun
 
-Kimliği doğrulanmış bir kullanıcı erişimine izin verilmeyen bir kaynağa erişmeyi denediğinde kimlik doğrulama düzeninin fordeklarasyon eylemi yetkilendirme tarafından çağrılır. Bkz. <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ForbidAsync%2A>. Kimlik doğrulama fordeklarasyon örnekleri şunları içerir:
-* Bir tanımlama bilgisi kimlik doğrulama şeması, kullanıcıyı erişim yasak bir sayfaya yönlendirdi.
-* 403 sonucunu döndüren bir JWT taşıyıcı şeması.
-* Özel bir kimlik doğrulama şeması, kullanıcının kaynağa erişim isteyebileceği bir sayfaya yeniden yönlendiriliyor.
+Kimlik doğrulama düzeninin yasaklama eylemi, kimlik doğrulaması yapılan bir kullanıcı erişmelerine izin verilen olmayan bir kaynağa erişmeye çalıştığında Yetkilendirme tarafından çağrılır. Bkz. <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.ForbidAsync%2A>. Kimlik doğrulama yıkıntMa örnekleri şunlardır:
+* Kullanıcıyı erişimin yasak olduğunu belirten bir sayfaya yönlendiren çerez kimlik doğrulama düzeni.
+* Bir JWT taşıyıcı düzeni 403 sonuç döndürücü.
+* Özel kimlik doğrulama düzeni, kullanıcının kaynağa erişim isteyebileceği bir sayfaya yönlendirilmesi.
 
-Bir fordeklarasyon eylemi, kullanıcının şunları bilmesini sağlayabilir:
+Yasak bir eylem kullanıcıya şunu bildirebilir:
 
-* Bunlar doğrulanır.
+* Kimlik doğrulanmışlar.
 * İstenen kaynağa erişmelerine izin verilmez.
 
-Challenge ve fordeklarasyon arasındaki farklılıklar için aşağıdaki bağlantılara bakın:
+Meydan okuma ve yasaklama arasındaki farklar için aşağıdaki bağlantılara bakın:
 
-* [İşletimsel kaynak Işleyicisiyle Challenge ve fordeklarasyonu](xref:security/authorization/resourcebased#challenge-and-forbid-with-an-operational-resource-handler).
-* [Çekişme ve fordeklarasyon arasındaki farklar](xref:security/authorization/secure-data#challenge).
+* [Bir operasyonel kaynak işleyicisi ile meydan okuma ve yasaklama.](xref:security/authorization/resourcebased#challenge-and-forbid-with-an-operational-resource-handler)
+* [Meydan okuma ve yasaklama arasındaki farklar.](xref:security/authorization/secure-data#challenge)
 
 ## <a name="authentication-providers-per-tenant"></a>Kiracı başına kimlik doğrulama sağlayıcıları
 
-ASP.NET Core Framework 'te çok kiracılı kimlik doğrulaması için yerleşik bir çözüm yoktur.
-Müşterilerin, yerleşik özellikleri kullanarak bir tane yazabilmesi kesinlikle mümkün olsa da, müşterilerin bu amaçla daha fazla [çekirdeğe](https://www.orchardcore.net/) bakmalarını öneririz.
+ASP.NET Core çerçevesi çok kiracılı kimlik doğrulaması için yerleşik bir çözüme sahip değildir.
+Müşterilerin yerleşik özellikleri kullanarak bir tane yazması kesinlikle mümkün olsa da, müşterilerin bu amaçla [Orchard Core'a](https://www.orchardcore.net/) bakmalarını öneririz.
 
 Orchard Core:
 
-* ASP.NET Core ile oluşturulan açık kaynaklı modüler ve çok kiracılı bir uygulama çerçevesi.
-* Bu uygulama çerçevesinin üzerine inşa edilen bir içerik yönetim sistemi (CMS).
+* ASP.NET Core ile oluşturulmuş açık kaynak kodlu modüler ve çok kiracılı bir uygulama çerçevesi.
+* Bu uygulama çerçevesinin üzerine kurulmuş bir içerik yönetim sistemi (CMS).
 
-Kiracı başına kimlik doğrulama sağlayıcılarının bir örneği için bkz. [Orchard Core](https://github.com/OrchardCMS/OrchardCore) kaynağı.
+Kiracı başına kimlik doğrulama sağlayıcıları örneği için [Orchard Core](https://github.com/OrchardCMS/OrchardCore) kaynağına bakın.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

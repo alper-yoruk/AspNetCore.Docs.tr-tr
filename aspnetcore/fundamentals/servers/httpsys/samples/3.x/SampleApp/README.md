@@ -1,3 +1,3 @@
-# <a name="aspnet-core-httpsys-sample"></a>HTTP. sys ASP.NET Core örneği
+# <a name="aspnet-core-httpsys-sample"></a>ASP.NET Çekirdek HTTP.sys Örnek
 
-Bu örnek, HTTP. sys ' nin kullanımını gösterir. Bu örnek, [http. sys Web sunucusu uygulama](https://docs.microsoft.com/aspnet/core/fundamentals/servers/httpsys) konusunda açıklanan özellikleri gösterir.
+Bu örnek HTTP.sys kullanımını göstermektedir. Bu [örnek, HTTP.sys web sunucusu uygulama](https://docs.microsoft.com/aspnet/core/fundamentals/servers/httpsys) konusu açıklanan özellikleri göstermektedir.
