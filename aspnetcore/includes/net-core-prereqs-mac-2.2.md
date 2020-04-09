@@ -1,2 +1,2 @@
-* [<span data-ttu-id="3956e-101">Mac için Visual Studio Sürüm 8,0 veya üzeri</span><span class="sxs-lookup"><span data-stu-id="3956e-101">Visual Studio for Mac version 8.0 or later</span></span>](https://visualstudio.microsoft.com/downloads/)
-* [<span data-ttu-id="3956e-102">.NET Core SDK 2,2 veya üzeri</span><span class="sxs-lookup"><span data-stu-id="3956e-102">.NET Core SDK 2.2 or later</span></span>](https://dotnet.microsoft.com/download/dotnet-core)
+* [<span data-ttu-id="3fd9d-101">Mac sürüm 8.0 veya sonrası için Visual Studio</span><span class="sxs-lookup"><span data-stu-id="3fd9d-101">Visual Studio for Mac version 8.0 or later</span></span>](https://visualstudio.microsoft.com/downloads/)
+* [<span data-ttu-id="3fd9d-102">.NET Core SDK 2.2 veya sonrası</span><span class="sxs-lookup"><span data-stu-id="3fd9d-102">.NET Core SDK 2.2 or later</span></span>](https://dotnet.microsoft.com/download/dotnet-core)

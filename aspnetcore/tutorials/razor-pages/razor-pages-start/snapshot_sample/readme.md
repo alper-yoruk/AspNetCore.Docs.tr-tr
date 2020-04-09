@@ -1,1 +1,1 @@
-<span data-ttu-id="cbf43-101">Bu klasördeki kod, Razor Pages serisinde zaman içindeki anlık görüntüleridir.</span><span class="sxs-lookup"><span data-stu-id="cbf43-101">The code in this folder is snapshots in time from the Razor Pages series.</span></span>
+<span data-ttu-id="c9dfa-101">Bu klasördeki kod, Razor Pages serisinden anlık görüntülerdir.</span><span class="sxs-lookup"><span data-stu-id="c9dfa-101">The code in this folder is snapshots in time from the Razor Pages series.</span></span>
