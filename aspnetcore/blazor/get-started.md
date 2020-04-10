@@ -5,17 +5,17 @@ description: Seçtiğiniz araç Blazor ile Blazor bir uygulama oluşturarak baş
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/26/2020
+ms.date: 04/09/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/get-started
-ms.openlocfilehash: c49209afde21046a6bc0b197cc4b8d93b164b23e
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: e9e6eeeb1d29aa529e43d75f5d3951d2c4384d7e
+ms.sourcegitcommit: 4506a8f71ece921010ad6b7edebc8b200618f40d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80471818"
+ms.lasthandoff: 04/09/2020
+ms.locfileid: "81002918"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>Core BlazorASP.NET ile başlayın
 
@@ -78,7 +78,9 @@ Blazor'a başlamak için, araç lama seçiminiz için kılavuzu izleyin:
 
 1. IDE, projeyi oluşturmak ve hata ayıklamak için varlık eklemenizi ister. **Evet'i**seçin.
 
-1. Visual Studio Code hata ayıklayıcısını kullanarak uygulamayı çalıştırın.
+1. Blazor Server ile uygulamayı Visual Studio Code hata ayıklayıcısını kullanarak çalıştırın.
+
+   Blazor WebAssembly ile uygulamayı **.NET Core Launch (Blazor Standalone)** başlatma yapılandırmasını kullanarak başlatın ve chrome başlatma **yapılandırmasındaki .NET Core Debug Blazor Web Assembly'i** kullanarak tarayıcıyı başlatın (Chrome gerektirir). Daha fazla bilgi için bkz. <xref:blazor/debug#visual-studio-code>.
 
 1. Tarayıcıda, `https://localhost:5001`''
 

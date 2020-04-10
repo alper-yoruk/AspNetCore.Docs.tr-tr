@@ -5,14 +5,14 @@ description: Yayınlanan ASP.NET Core uygulamalarının dizin yapısı hakkında
 monikerRange: '>= aspnetcore-2.2'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/20/2020
+ms.date: 04/09/2020
 uid: host-and-deploy/directory-structure
-ms.openlocfilehash: 0e7bf40520385b7719cb37120709e0a3fd2442e3
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 3ed27db31c5fda8376ed108568ea74b657d30531
+ms.sourcegitcommit: 4506a8f71ece921010ad6b7edebc8b200618f40d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79989735"
+ms.lasthandoff: 04/09/2020
+ms.locfileid: "81002944"
 ---
 # <a name="aspnet-core-directory-structure"></a>ASP.NET Çekirdek dizin yapısı
 
@@ -28,7 +28,7 @@ ms.locfileid: "79989735"
 
 | Uygulama Türü | Dizin Yapısı |
 | -------- | ------------------- |
-| [Çerçeveye bağımlı Yürütülebilir (FDE)](/dotnet/core/deploying/#framework-dependent-executables-fde) | <ul><li>Yayımlamak&dagger;<ul><li>MVC uygulamalarını görüntüler;&dagger; görünümler önceden derlenmiyorsa</li><li>Sayfalar&dagger; önceden derlenmemişse, Sayfalar MVC veya Razor Pages uygulamaları</li><li>wwwroot&dagger;</li><li>\*.dll dosyaları</li><li>{MONTAJ ADI}.deps.json</li><li>{MONTAJ ADI}.dll</li><li>{MONTAJ Adı} {. EXTENSION} *.exe* uzantısı Windows'da, macOS veya Linux'ta uzantı yok</li><li>{MONTAJ ADI}.pdb</li><li>{MONTAJ Adı}. Görünümler.dll</li><li>{MONTAJ Adı}. Görünümler.pdb</li><li>{MONTAJ ADI}.runtimeconfig.json</li><li>web.config (IIS dağıtımları)</li><li>createdump ([Linux createdump programı](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/xplat-minidump-generation.md#configurationpolicy))</li><li>\*.so (Linux paylaşılan nesne kitaplığı)</li><li>\*.a (macOS arşivi)</li><li>\*.dylib (macOS dinamik kitaplık)</li></ul></li></ul> |
+| [Çerçeveye bağımlı Yürütülebilir (FDE)](/dotnet/core/deploying/#framework-dependent-executables-fde) | <ul><li>Yayımlamak&dagger;<ul><li>MVC uygulamalarını görüntüler;&dagger; görünümler önceden derlenmiyorsa</li><li>Sayfalar&dagger; önceden derlenmemişse, Sayfalar MVC veya Razor Pages uygulamaları</li><li>wwwroot&dagger;</li><li>\*.dll dosyaları</li><li>{MONTAJ ADI}.deps.json</li><li>{MONTAJ ADI}.dll</li><li>{MONTAJ Adı} {. EXTENSION} .exe uzantısı Windows'da, macOS veya Linux'ta uzantı yok</li><li>{MONTAJ ADI}.pdb</li><li>{MONTAJ Adı}. Görünümler.dll</li><li>{MONTAJ Adı}. Görünümler.pdb</li><li>{MONTAJ ADI}.runtimeconfig.json</li><li>web.config (IIS dağıtımları)</li><li>createdump ([Linux createdump programı](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/xplat-minidump-generation.md#configurationpolicy))</li><li>\*.so (Linux paylaşılan nesne kitaplığı)</li><li>\*.a (macOS arşivi)</li><li>\*.dylib (macOS dinamik kitaplık)</li></ul></li></ul> |
 | [Bağımsız Dağıtım (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) | <ul><li>Yayımlamak&dagger;<ul><li>Görünümler önceden derlenmiyorsa MVC uygulamalarını görüntüler&dagger;</li><li>Sayfalar&dagger; önceden derlenmemişse, Sayfalar MVC veya Razor Pages uygulamaları</li><li>wwwroot&dagger;</li><li>\*.dll dosyaları</li><li>{MONTAJ ADI}.deps.json</li><li>{MONTAJ ADI}.dll</li><li>{MONTAJ ADI}.exe</li><li>{MONTAJ ADI}.pdb</li><li>{MONTAJ Adı}. Görünümler.dll</li><li>{MONTAJ Adı}. Görünümler.pdb</li><li>{MONTAJ ADI}.runtimeconfig.json</li><li>web.config (IIS dağıtımları)</li></ul></li></ul> |
 
 &dagger;Bir dizini gösterir
@@ -58,9 +58,9 @@ ms.locfileid: "79989735"
 
 | Uygulama Türü | Dizin Yapısı |
 | -------- | ------------------- |
-| [Çerçeveye bağımlı Yürütülebilir (FDE)](/dotnet/core/deploying/#framework-dependent-executables-fde) | <ul><li>Yayımlamak&dagger;<ul><li>MVC uygulamalarını görüntüler;&dagger; görünümler önceden derlenmiyorsa</li><li>Sayfalar&dagger; önceden derlenmemişse, Sayfalar MVC veya Razor Pages uygulamaları</li><li>wwwroot&dagger;</li><li>\*.dll dosyaları</li><li>{MONTAJ ADI}.deps.json</li><li>{MONTAJ ADI}.dll</li><li>{MONTAJ Adı} {. EXTENSION} *.exe* uzantısı Windows'da, macOS veya Linux'ta uzantı yok</li><li>{MONTAJ ADI}.pdb</li><li>{MONTAJ Adı}. Görünümler.dll</li><li>{MONTAJ Adı}. Görünümler.pdb</li><li>{MONTAJ ADI}.runtimeconfig.json</li><li>web.config (IIS dağıtımları)</li><li>createdump ([Linux createdump programı](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/xplat-minidump-generation.md#configurationpolicy))</li><li>\*.so (Linux paylaşılan nesne kitaplığı)</li><li>\*.a (macOS arşivi)</li><li>\*.dylib (macOS dinamik kitaplık)</li></ul></li></ul> |
+| [Çerçeveye bağımlı Yürütülebilir (FDE)](/dotnet/core/deploying/#framework-dependent-executables-fde) | <ul><li>Yayımlamak&dagger;<ul><li>MVC uygulamalarını görüntüler;&dagger; görünümler önceden derlenmiyorsa</li><li>Sayfalar&dagger; önceden derlenmemişse, Sayfalar MVC veya Razor Pages uygulamaları</li><li>wwwroot&dagger;</li><li>\*.dll dosyaları</li><li>{MONTAJ ADI}.deps.json</li><li>{MONTAJ ADI}.dll</li><li>{MONTAJ Adı} {. EXTENSION} .exe uzantısı Windows'da, macOS veya Linux'ta uzantı yok</li><li>{MONTAJ ADI}.pdb</li><li>{MONTAJ Adı}. Görünümler.dll</li><li>{MONTAJ Adı}. Görünümler.pdb</li><li>{MONTAJ ADI}.runtimeconfig.json</li><li>web.config (IIS dağıtımları)</li><li>createdump ([Linux createdump programı](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/xplat-minidump-generation.md#configurationpolicy))</li><li>\*.so (Linux paylaşılan nesne kitaplığı)</li><li>\*.a (macOS arşivi)</li><li>\*.dylib (macOS dinamik kitaplık)</li></ul></li></ul> |
 | [Bağımsız Dağıtım (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) | <ul><li>Yayımlamak&dagger;<ul><li>Görünümler önceden derlenmiyorsa MVC uygulamalarını görüntüler&dagger;</li><li>Sayfalar&dagger; önceden derlenmemişse, Sayfalar MVC veya Razor Pages uygulamaları</li><li>wwwroot&dagger;</li><li>\*.dll dosyaları</li><li>{MONTAJ ADI}.deps.json</li><li>{MONTAJ ADI}.dll</li><li>{MONTAJ ADI}.exe</li><li>{MONTAJ ADI}.pdb</li><li>{MONTAJ Adı}. Görünümler.dll</li><li>{MONTAJ Adı}. Görünümler.pdb</li><li>{MONTAJ ADI}.runtimeconfig.json</li><li>web.config (IIS dağıtımları)</li></ul></li></ul> |
--
+
 &dagger;Bir dizini gösterir
 
 *Yayımlama* dizini, dağıtımın *uygulama temel yolu*olarak da adlandırılan içerik kök *yolunu*temsil eder. Sunucuda dağıtılan uygulamanın *yayımlama* dizinine hangi ad verilirse verilsin, konumu sunucunun barındırılan uygulamaya fiziksel yolu olarak hizmet vermektedir.

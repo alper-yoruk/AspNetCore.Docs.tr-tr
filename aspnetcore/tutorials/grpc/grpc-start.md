@@ -3,14 +3,14 @@ title: ASP.NET Core'da bir .NET Core gRPC istemcisi ve sunucusu oluşturma
 author: juntaoluo
 description: Bu öğretici, ASP.NET Core'da bir gRPC Hizmeti ve gRPC istemcisi oluşturmanın nasıl yapılacağını gösterir. GRPC Service projesi oluşturmayı, bir proto dosyasını nasıl döşeyecek lerini ve çift yönlü akış çağrısı eklemeyi öğrenin.
 ms.author: johluo
-ms.date: 12/05/2019
+ms.date: 04/08/2020
 uid: tutorials/grpc/grpc-start
-ms.openlocfilehash: 0cedeb021427455c3f60a8a8cc36b52794a055bc
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 2bbd40b4b89af170dae40b8a5277749d6bcd5faf
+ms.sourcegitcommit: 9a46e78c79d167e5fa0cddf89c1ef584e5fe1779
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78665825"
+ms.lasthandoff: 04/09/2020
+ms.locfileid: "80994635"
 ---
 # <a name="tutorial-create-a-grpc-client-and-server-in-aspnet-core"></a>Öğretici: ASP.NET Core'da bir gRPC istemcisi ve sunucusu oluşturun
 
@@ -298,7 +298,7 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
 ```
 
 > [!NOTE]
-> Bu makaledeki kod, gRPC hizmetini güvence altına almak için ASP.NET Çekirdek HTTPS geliştirme sertifikasını gerektirir. İstemci iletide `The remote certificate is invalid according to the validation procedure.`başarısız olursa, geliştirme sertifikasına güvenilmez. Bu sorunu gidermek için yönergeleri gidermek için Windows [ve macOS'taki ASP.NET Çekirdek HTTPS geliştirme sertifikasına güven'e](xref:security/enforcing-ssl#trust-the-aspnet-core-https-development-certificate-on-windows-and-macos)bakın.
+> Bu makaledeki kod, gRPC hizmetini güvence altına almak için ASP.NET Çekirdek HTTPS geliştirme sertifikasını gerektirir. .NET gRPC istemcisi `The remote certificate is invalid according to the validation procedure.` iletide `The SSL connection could not be established.`başarısız olursa veya geliştirme sertifikasına güvenilmez. Bu sorunu gidermek için, [güvenilmeyen/geçersiz sertifikaya sahip bir gRPC hizmetini arayın'a](xref:grpc/troubleshoot#call-a-grpc-service-with-an-untrustedinvalid-certificate)bakın.
 
 [!INCLUDE[](~/includes/gRPCazure.md)]
 

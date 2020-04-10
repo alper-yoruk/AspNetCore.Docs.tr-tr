@@ -8,12 +8,12 @@ ms.date: 11/21/2019
 no-loc:
 - SignalR
 uid: tutorials/signalr
-ms.openlocfilehash: 55ebdbfa4556deca74a6cdf0638307425cd1a01a
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 869eb325ee95a78e4b16c61c5b0573bb094292e3
+ms.sourcegitcommit: 9a46e78c79d167e5fa0cddf89c1ef584e5fe1779
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78666749"
+ms.lasthandoff: 04/09/2020
+ms.locfileid: "80994616"
 ---
 # <a name="tutorial-get-started-with-aspnet-core-signalr"></a>Öğretici: ASP.NET Core SignalR ile başlayın
 
@@ -89,7 +89,7 @@ Sonunda, çalışan bir sohbet uygulamanız olur:
 
 ## <a name="add-the-signalr-client-library"></a>SignalR istemci kitaplığını ekleme
 
-SignalR sunucu kitaplığı, Core 3.0 paylaşılan ASP.NET çerçevesine dahildir. JavaScript istemci kitaplığı projeye otomatik olarak dahil edilemiyor. Bu öğretici için, istemci kitaplığını *unpkg'dan*almak için Kitaplık Yöneticisi'ni (LibMan) kullanırsınız. unpkg npm, Node.js paket yöneticisi bulunan bir şey teslim edebilirsiniz bir içerik dağıtım ağı (CDN)) olduğunu.
+SignalR sunucu kitaplığı, Core 3.0 paylaşılan ASP.NET çerçevesine dahildir. JavaScript istemci kitaplığı projeye otomatik olarak dahil edilemiyor. Bu öğretici için, istemci kitaplığını *unpkg'dan*almak için Kitaplık Yöneticisi'ni (LibMan) kullanırsınız. unpkg npm, Node.js paket yöneticisi bulunan bir şey teslim edebilirsiniz bir içerik dağıtım ağı (CDN) olduğunu.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
@@ -320,7 +320,7 @@ Sonunda, çalışan bir sohbet uygulaması olacak: ![SignalR örnek uygulaması]
 
 ## <a name="add-the-signalr-client-library"></a>SignalR istemci kitaplığını ekleme   
 
-SignalR sunucu kitaplığı meta `Microsoft.AspNetCore.App` pakete dahildir. JavaScript istemci kitaplığı projeye otomatik olarak dahil edilemiyor. Bu öğretici için, istemci kitaplığını *unpkg'dan*almak için Kitaplık Yöneticisi'ni (LibMan) kullanırsınız. unpkg npm, Node.js paket yöneticisi bulunan bir şey teslim edebilirsiniz bir içerik dağıtım ağı (CDN)) olduğunu.    
+SignalR sunucu kitaplığı meta `Microsoft.AspNetCore.App` pakete dahildir. JavaScript istemci kitaplığı projeye otomatik olarak dahil edilemiyor. Bu öğretici için, istemci kitaplığını *unpkg'dan*almak için Kitaplık Yöneticisi'ni (LibMan) kullanırsınız. unpkg npm, Node.js paket yöneticisi bulunan bir şey teslim edebilirsiniz bir içerik dağıtım ağı (CDN) olduğunu. 
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)  
 

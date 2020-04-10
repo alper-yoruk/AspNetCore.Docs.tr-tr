@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 3/29/2020
 uid: fundamentals/configuration/index
-ms.openlocfilehash: d76ca78bc988f859b4e99752a0e88735e1df1d82
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 506f01ace72d6e915c0f3ebdaae5b4a3328a79b9
+ms.sourcegitcommit: e72a58d6ebde8604badd254daae8077628f9d63e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80501337"
+ms.lasthandoff: 04/10/2020
+ms.locfileid: "81007164"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core'da Yapılandırma
 
@@ -311,7 +311,7 @@ Yapılandırma tuşları:
 * Hiyerarşik anahtarlar
   * Yapılandırma API'si içinde,`:`bir iki nokta üst üste ayırıcı ( ) tüm platformlarda çalışır.
   * Ortam değişkenlerinde, bir kolon ayırıcısı tüm platformlarda çalışmayabilir. Bir çift alt `__`çizgi, , tüm platformlar tarafından desteklenen ve `:`otomatik olarak bir üst üste dönüştürülür.
-  * Azure Anahtar Kasası'nda `--` hiyerarşik tuşlar ayırıcı olarak kullanılır. Sırların uygulamanın `--` yapılandırmasına yüklenmesiyle a `:` ile değiştirmek için kod yazın.
+  * Azure Anahtar Kasası'nda `--` hiyerarşik tuşlar ayırıcı olarak kullanılır. [Azure Key Vault yapılandırma sağlayıcısı,](xref:security/key-vault-configuration) sırların uygulamanın yapılandırmasına yüklendiği zaman otomatik olarak bir `--` `:` anahtarla değiştirir.
 * Yapılandırma <xref:Microsoft.Extensions.Configuration.ConfigurationBinder> anahtarlarında dizi dizinlerini kullanarak nesnelere bağlama dizilerini destekler. Dizi bağlama, [Bind dizisinde bir sınıf bölümüne](#boa) açıklanır.
 
 Yapılandırma değerleri:
