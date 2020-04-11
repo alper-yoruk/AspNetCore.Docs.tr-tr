@@ -5,17 +5,17 @@ description: Uygulamalardaki Blazor bileşenler ve DOM öğeleri için veri bağ
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/17/2020
+ms.date: 04/01/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/integrate-components
-ms.openlocfilehash: cf6056e0985d5433bddecac8dd183ca3f4c2af5b
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 6efa84c550a4605bde5e1f2bca4f2d1aa4a2667b
+ms.sourcegitcommit: e8dc30453af8bbefcb61857987090d79230a461d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80218940"
+ms.lasthandoff: 04/11/2020
+ms.locfileid: "81123359"
 ---
 # <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>Core Razor bileşenleriASP.NET Razor Pages ve MVC uygulamalarına entegre edin
 
@@ -60,7 +60,7 @@ Mevcut bir Razor Pages veya MVC uygulaması, Razor bileşenlerini sayfalara ve g
    @using MyAppNamespace
    ```
 
-1. Sunucu `Startup.ConfigureServices`hizmetini Blazor kaydedin:
+1. Blazor `Startup.ConfigureServices`Server hizmetini kaydedin:
 
    ```csharp
    services.AddServerSideBlazor();
@@ -112,6 +112,19 @@ Razor Pages uygulamalarında routable Razor bileşenlerini desteklemek için:
    ```
 
    Bileşenler, düzenleri için paylaşılan *_Layout.cshtml* dosyasını kullanır.
+
+   <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>bileşenin: `App`
+
+   * Sayfaya önceden işlenir.
+   * Sayfada statik HTML olarak işlenir veya kullanıcı aracısından bir Blazor uygulamasını önyükleme için gerekli bilgileri içeriyorsa.
+
+   | Render Modu | Açıklama |
+   | ----------- | ----------- |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | `App` Bileşeni statik HTML'ye dönüştürür ve sunucu Blazor uygulaması için bir işaretçi içerir. Kullanıcı aracısı başlatıldığında, bu işaretçi bir Blazor uygulamayı önyükleme için kullanılır. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Blazor Sunucu uygulaması için işaretleyici işler. `App` Bileşenden gelen çıktı dahil değildir. Kullanıcı aracısı başlatıldığında, bu işaretçi bir Blazor uygulamayı önyükleme için kullanılır. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | `App` Bileşeni statik HTML'ye dönüştürür. |
+
+   Bileşen Etiket Yardımcısı hakkında daha fazla <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>bilgi için bkz.
 
 1. *_Host.cshtml* sayfası için bitiş noktası yapılandırmasına `Startup.Configure`düşük öncelikli bir rota ekleyin:
 

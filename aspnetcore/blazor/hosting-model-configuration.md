@@ -5,17 +5,17 @@ description: Razor Blazor bileşenlerinin Razor Pages ve MVC uygulamalarına nas
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/24/2020
+ms.date: 04/07/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/hosting-model-configuration
-ms.openlocfilehash: 1f71ac63bbe9dc9d56cfca2ded19a5b863be828f
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: ca1b3ea9092640ca561b3fbe02ddce6f974c525e
+ms.sourcegitcommit: e8dc30453af8bbefcb61857987090d79230a461d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80306427"
+ms.lasthandoff: 04/11/2020
+ms.locfileid: "81123382"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>ASP.NET Core Blazor hosting modeli yapılandırma
 
@@ -27,14 +27,73 @@ Bu makalede, barındırma modeli yapılandırmakapsar.
 
 ## <a name="blazor-webassembly"></a>Blazor WebAssembly
 
+### <a name="environment"></a>Ortam
+
+Bir uygulamayı yerel olarak çalıştırırken, ortam Geliştirme varsayılan olarak Uygulama yayımlandığında, ortam Üretim varsayılandır.
+
+Barındırılan bir Blazor WebAssembly uygulaması, `blazor-environment` üstbilgi ekleyerek ortamı tarayıcıya bildiren bir ara yazılım aracılığıyla ortamı sunucudan alır. Üstbilginin değeri ortamdır. Barındırılan Blazor uygulaması ve sunucu uygulaması aynı ortamı paylaşır. Ortamın nasıl yapılandırılabildiğini de içeren <xref:fundamentals/environments>daha fazla bilgi için bkz.
+
+Yerel olarak çalışan bağımsız bir uygulama için `blazor-environment` geliştirme sunucusu Geliştirme ortamını belirtmek için üstbilgi ekler. Diğer barındırma ortamları için ortamı `blazor-environment` belirtmek için üstbilgi ekleyin.
+
+IIS için aşağıdaki örnekte, yayınlanan *web.config* dosyasına özel üstbilgi ekleyin. *web.config* dosyası *depo/Yayın/{TARGET FRAMEWORK}/publish* klasöründe bulunur:
+
+```xml
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+  <system.webServer>
+
+    ...
+
+    <httpProtocol>
+      <customHeaders>
+        <add name="blazor-environment" value="Staging" />
+      </customHeaders>
+    </httpProtocol>
+  </system.webServer>
+</configuration>
+```
+
+> [!NOTE]
+> Uygulama *yayımlama* klasöründe yayımlandığında üzerine yazılmayan IIS için özel bir <xref:host-and-deploy/blazor/webassembly#use-a-custom-webconfig> *web.config* dosyası kullanmak için bkz.
+
+Özelliği enjekte ederek ve okuyarak uygulamanın ortamını bir bileşende elde edin: `IWebAssemblyHostEnvironment` `Environment`
+
+```razor
+@page "/"
+@using Microsoft.AspNetCore.Components.WebAssembly.Hosting
+@inject IWebAssemblyHostEnvironment HostEnvironment
+
+<h1>Environment example</h1>
+
+<p>Environment: @HostEnvironment.Environment</p>
+```
+
+### <a name="configuration"></a>Yapılandırma
+
 Core 3.2 Preview 3 sürümüASP.NET itibariyle Blazor WebAssembly aşağıdakilerden yapılandırmayı destekler:
 
 * *wwwroot/appsettings.json*
 * *wwwroot/appsettings adresinde n için. {ÇEVRE}.json*
 
-Blazor Barındırılan bir uygulamada, [çalışma zamanı ortamı](xref:fundamentals/environments) sunucu uygulamasının değeriyle aynıdır.
+*wwwroot* klasörüne bir *appsettings.json* dosyası ekleyin:
 
-Uygulamayı yerel olarak çalıştırırken, ortam Geliştirme varsayılan olarak karşılığını alır. Uygulama yayımlandığında, ortam Üretim varsayılandır. Ortamın nasıl yapılandırılabildiğini de içeren <xref:fundamentals/environments>daha fazla bilgi için bkz.
+```json
+{
+  "message": "Hello from config!"
+}
+```
+
+Yapılandırma <xref:Microsoft.Extensions.Configuration.IConfiguration> verilerine erişmek için bir bileşene örnek enjekte edin:
+
+```razor
+@page "/"
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+<h1>Configuration example</h1>
+
+<p>Message: @Configuration["message"]</p>
+```
 
 > [!WARNING]
 > Blazor WebAssembly uygulamasındaki yapılandırma kullanıcılar tarafından görülebilir. **Uygulama sırlarını veya kimlik bilgilerini yapılandırmada saklamayın.**

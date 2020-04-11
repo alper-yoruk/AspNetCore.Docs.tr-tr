@@ -5,12 +5,12 @@ description: Core MVCASP.NET gelen isteklerin URL'lerini eşleştirmek ve bunlar
 ms.author: riande
 ms.date: 3/25/2020
 uid: mvc/controllers/routing
-ms.openlocfilehash: c63313ec060c5be368fcbd20edf5f0d557046d2e
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: 74afd0a076ca8bd753000f547ef0a26308e8a884
+ms.sourcegitcommit: e8dc30453af8bbefcb61857987090d79230a461d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80977229"
+ms.lasthandoff: 04/11/2020
+ms.locfileid: "81123498"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core'daki eylemleri denetleyiciye yönlendirme
 
@@ -93,10 +93,11 @@ Değiştirir:
 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
 ```
 
-<xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting*> Yönlendirme, ara yazılım ve <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> ara yazılım kullanılarak yapılandırılır. Denetleyicileri kullanmak için:
-
-* <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*> [Yönlendirilmiş](#ar) denetleyicileri eşlemek için içini `UseEndpoints` arayın.
-* Geleneksel <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> [olarak yönlendirilmiş](#cr) denetleyicileri haritalamak için arayın veya.
+> [!IMPORTANT]
+> <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting*> Yönlendirme, ara yazılım ve <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> ara yazılım kullanılarak yapılandırılır. Denetleyicileri kullanmak için:
+>
+> * <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*> [Yönlendirilmiş](#ar) denetleyicileri eşlemek için içini `UseEndpoints` arayın.
+> * Geleneksel <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> [olarak yönlendirilmiş](#cr) denetleyicileri haritalamak için arayın veya.
 
 <a name="routing-conventional-ref-label"></a>
 <a name="crd"></a>

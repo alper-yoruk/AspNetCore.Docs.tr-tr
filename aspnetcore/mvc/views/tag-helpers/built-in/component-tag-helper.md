@@ -1,34 +1,47 @@
 ---
-title: ASP.NET Core bileşen etiketi Yardımcısı
+title: ASP.NET Core'da Bileşen Etiket Yardımcısı
 author: guardrex
 ms.author: riande
-description: Sayfalardaki ve görünümlerde Razor bileşenlerini işlemek için ASP.NET Core bileşen etiketi Yardımcısı 'nı nasıl kullanacağınızı öğrenin.
+description: Razor bileşenlerini sayfalarda ve görünümlerde işlemek için ASP.NET Temel Bileşen Tag Helper'ı nasıl kullanacağınızı öğrenin.
 ms.custom: mvc
-ms.date: 03/18/2020
+ms.date: 04/01/2020
 no-loc:
 - Blazor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/component-tag-helper
-ms.openlocfilehash: 801ceb73de5bb4ef7500624e1fbddbf96d1ab89c
-ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
+ms.openlocfilehash: 4a6b21229ce086099fcddfeb51c3a959ef639f24
+ms.sourcegitcommit: e8dc30453af8bbefcb61857987090d79230a461d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80226398"
+ms.lasthandoff: 04/11/2020
+ms.locfileid: "81123425"
 ---
-# <a name="component-tag-helper-in-aspnet-core"></a>ASP.NET Core bileşen etiketi Yardımcısı
+# <a name="component-tag-helper-in-aspnet-core"></a>ASP.NET Core'da Bileşen Etiket Yardımcısı
 
-[Daniel Roth](https://github.com/danroth27) ve [Luke Latham](https://github.com/guardrex) tarafından
+Yazar: [Daniel Roth](https://github.com/danroth27) ve [Luke Latham](https://github.com/guardrex)
 
-Bir sayfadan veya görünümden bir bileşeni işlemek için [bileşen etiketi yardımcısını](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper)kullanın.
+Bir bileşeni bir sayfa veya görünümden işlemek için [Bileşen Etiket Yardımcısı'nı](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper)kullanın.
 
-Aşağıdaki bileşen etiketi Yardımcısı, `Counter` bileşenini bir sayfada veya görünümde işler:
+## <a name="prerequisites"></a>Ön koşullar
+
+<xref:blazor/integrate-components#prepare-the-app-to-use-components-in-pages-and-views> Makalenin sayfalar *ve görünümler bölümündeki bileşenleri kullanmak için uygulamayı Hazırla'daki* kılavuzu izleyin.
+
+## <a name="component-tag-helper"></a>Bileşen Etiket Yardımcısı
+
+Aşağıdaki Bileşen Tag Yardımcısı `Counter` bileşeni bir sayfada veya görünümde işler:
 
 ```cshtml
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using {APP ASSEMBLY}.Pages
+
+...
+
 <component type="typeof(Counter)" render-mode="ServerPrerendered" />
 ```
 
-Bileşen etiketi Yardımcısı, parametreleri bileşenlere de geçirebilir. Onay kutusu etiketinin rengini ve boyutunu ayarlayan aşağıdaki `ColorfulCheckbox` bileşenini göz önünde bulundurun:
+Önceki örnek, bileşenin `Counter` uygulamanın *Sayfalar* klasöründe olduğunu varsayar.
+
+Bileşen Tag Yardımcısı da bileşenleri parametreleri geçirebilirsiniz. Onay kutusu `ColorfulCheckbox` etiketinin rengini ve boyutunu ayarlayan aşağıdaki bileşeni göz önünde bulundurun:
 
 ```razor
 <label style="font-size:@(Size)px;color:@Color">
@@ -56,12 +69,19 @@ Bileşen etiketi Yardımcısı, parametreleri bileşenlere de geçirebilir. Onay
 }
 ```
 
-`Size` (`int`) ve `Color` (`string`) [bileşen parametreleri](xref:blazor/components#component-parameters) bileşen etiketi Yardımcısı tarafından ayarlanabilir:
+`Size` (`int`) `Color` ve`string`( ) [bileşen parametreleri](xref:blazor/components#component-parameters) Bileşen Tag Yardımcısı tarafından ayarlanabilir:
 
 ```cshtml
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using {APP ASSEMBLY}.Shared
+
+...
+
 <component type="typeof(ColorfulCheckbox)" render-mode="ServerPrerendered" 
     param-Size="14" param-Color="@("blue")" />
 ```
+
+Önceki örnek, bileşenin `ColorfulCheckbox` uygulamanın *Paylaşılan* klasöründe olduğunu varsayar.
 
 Aşağıdaki HTML sayfada veya görünümde işlenir:
 
@@ -72,24 +92,78 @@ Aşağıdaki HTML sayfada veya görünümde işlenir:
 </label>
 ```
 
-Tırnak içine alınan bir dizeyi geçirmek, önceki örnekteki `param-Color` gösterildiği gibi [açık bir Razor ifadesi](xref:mvc/views/razor#explicit-razor-expressions)gerektirir. Öznitelik bir `object` türü olduğundan, bir `string` tür değeri için Razor ayrıştırma davranışı `param-*` bir özniteliğe uygulanmaz.
+Teklif edilen bir dize yi geçmek, `param-Color` önceki örnekte gösterildiği gibi açık bir [Razor ifadesi](xref:mvc/views/razor#explicit-razor-expressions)gerektirir. Tür değeri için `string` Razor ayrıştırma davranışı öznitelik `param-*` bir `object` tür olduğundan öznitelik için geçerli değildir.
 
-Parametre türünün JSON serileştirilebilir olması gerekir, bu, genellikle türün bir varsayılan oluşturucuya ve ayarlanabilir özelliklere sahip olması anlamına gelir. Örneğin, `Size` ve `Color` türleri, JSON seri hale getirici tarafından desteklenen basit türler (`int` ve `string`) olduğundan, önceki örnekte `Size` ve `Color` için bir değer belirtebilirsiniz.
+Parametre türü JSON serileştirilebilir olmalıdır, bu da genellikle türün varsayılan bir oluşturucu ve ayarlanabilir özelliklere sahip olması gerektiği anlamına gelir. Örneğin, json serileştiricisi `Color` tarafından desteklenen ilkel türleri `Size` (ve) `Color` `int` `string`türleri olduğundan, önceki örnekte bir değer `Size` belirtebilirsiniz.
 
-<xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>, bileşenin şunları yapıp kullanmadığını yapılandırır:
+Aşağıdaki örnekte, bir sınıf nesnesi bileşene aktarılır:
 
-* , Sayfaya ön gönderilir.
-* , Sayfada statik HTML olarak veya Kullanıcı aracısından bir Blazor uygulamasını önyüklemek için gerekli bilgileri içeriyorsa.
+*MyClass.cs*:
 
-| Oluşturma modu | Açıklama |
+```csharp
+public class MyClass
+{
+    public MyClass()
+    {
+    }
+
+    public int MyInt { get; set; } = 999;
+    public string MyString { get; set; } = "Initial value";
+}
+```
+
+**Sınıfın ortak parametresiz bir oluşturucusu olmalıdır.**
+
+*Paylaşılan/MyComponent.razor*:
+
+```razor
+<h2>MyComponent</h2>
+
+<p>Int: @MyObject.MyInt</p>
+<p>String: @MyObject.MyString</p>
+
+@code
+{
+    [Parameter]
+    public MyClass MyObject { get; set; }
+}
+```
+
+*Sayfalar/MyPage.cshtml*:
+
+```cshtml
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@using {APP ASSEMBLY}
+@using {APP ASSEMBLY}.Shared
+
+...
+
+@{
+    var myObject = new MyClass();
+    myObject.MyInt = 7;
+    myObject.MyString = "Set by MyPage";
+}
+
+<component type="typeof(MyComponent)" render-mode="ServerPrerendered" 
+    param-MyObject="@myObject" />
+```
+
+Önceki örnek, bileşenin `MyComponent` uygulamanın *Paylaşılan* klasöründe olduğunu varsayar. `MyClass`uygulamanın ad alanındadır (`{APP ASSEMBLY}`).
+
+<xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>bileşenin:
+
+* Sayfaya önceden işlenir.
+* Sayfada statik HTML olarak işlenir veya kullanıcı aracısından bir Blazor uygulamasını önyükleme için gerekli bilgileri içeriyorsa.
+
+| Render Modu | Açıklama |
 | ----------- | ----------- |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Bileşeni statik HTML olarak işler ve Blazor sunucusu uygulaması için bir işaret içerir. Kullanıcı Aracısı başladığında, bu işaretleyici bir Blazor uygulamasının önyüklemesi için kullanılır. |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Blazor sunucusu uygulaması için bir işaret oluşturur. Bileşen çıkışı dahil değildir. Kullanıcı Aracısı başladığında, bu işaretleyici bir Blazor uygulamasının önyüklemesi için kullanılır. |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | Bileşeni statik HTML olarak işler. |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Bileşeni statik HTML'ye dönüştürür ve sunucu Blazor uygulaması için bir işaretçi içerir. Kullanıcı aracısı başlatıldığında, bu işaretçi bir Blazor uygulamayı önyükleme için kullanılır. |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Blazor Sunucu uygulaması için işaretleyici işler. Bileşenden gelen çıktı dahil değildir. Kullanıcı aracısı başlatıldığında, bu işaretçi bir Blazor uygulamayı önyükleme için kullanılır. |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | Bileşeni statik HTML'ye dönüştürür. |
 
-Sayfalar ve görünümler bileşenleri kullanırken, listesiyse doğru değildir. Bileşenler, kısmi görünümler ve bölümler gibi görünüm ve sayfaya özgü özellikleri kullanamaz. Bileşen içindeki kısmi görünümden mantığı kullanmak için kısmi görünüm mantığını bir bileşene ayırın.
+Sayfalar ve görünümler bileşenleri kullanabilse de, tam tersi doğru değildir. Bileşenler, kısmi görünümler ve bölümler gibi görünüm ve sayfaya özgü özellikleri kullanamaz. Bileşendeki kısmi görünümden mantığı kullanmak için, kısmi görünüm mantığını bileşene dönüştürün.
 
-Statik HTML sayfasından sunucu bileşenleri işleme desteklenmiyor.
+Sunucu bileşenlerinin statik bir HTML sayfasından görüntülenmeleri desteklenmez.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
