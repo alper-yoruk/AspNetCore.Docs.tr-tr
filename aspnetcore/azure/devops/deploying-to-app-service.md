@@ -6,12 +6,12 @@ ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 uid: azure/devops/deploy-to-app-service
-ms.openlocfilehash: df41f296e9c4e1eff6e31d45b29ec30ee1e20cf4
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: d7ee3e42d320d35c2aaff6e097203c45289ec5b1
+ms.sourcegitcommit: fbdb8b9ab5a52656384b117ff6e7c92ae070813c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78657747"
+ms.lasthandoff: 04/13/2020
+ms.locfileid: "81228133"
 ---
 # <a name="deploy-an-app-to-app-service"></a>Uygulama Hizmetine uygulama dağıtma
 
@@ -85,7 +85,7 @@ Uygulamayı dağıtmak için bir Uygulama Hizmeti Web [Uygulaması](/azure/app-s
 
     b. Bir kaynak grubu oluşturun. Kaynak grupları, grup olarak yönetilecek Azure kaynaklarını toplamak için bir araç sağlar.
 
-    ```azure-cli
+    ```azurecli
     az group create --location centralus --name AzureTutorial
     ```
 
@@ -93,25 +93,25 @@ Uygulamayı dağıtmak için bir Uygulama Hizmeti Web [Uygulaması](/azure/app-s
 
     c. S1 katmanında bir Uygulama Hizmeti planı oluşturun. Uygulama Hizmeti planı, aynı fiyatlandırma katmanını paylaşan web uygulamalarının gruplandırılmasıdır. S1 katmanı ücretsiz değildir, ancak evreleme yuvaları özelliği için gereklidir.
 
-    ```azure-cli
+    ```azurecli
     az appservice plan create --name $webappname --resource-group AzureTutorial --sku S1
     ```
 
     d. Aynı kaynak grubunda Uygulama Hizmeti planını kullanarak web uygulaması kaynağını oluşturun.
 
-    ```azure-cli
+    ```azurecli
     az webapp create --name $webappname --resource-group AzureTutorial --plan $webappname
     ```
 
     e. Dağıtım kimlik bilgilerini ayarlayın. Bu dağıtım kimlik bilgileri aboneliğinizdeki tüm web uygulamaları için geçerlidir. Kullanıcı adında özel karakterler kullanmayın.
 
-    ```azure-cli
+    ```azurecli
     az webapp deployment user set --user-name REPLACE_WITH_USER_NAME --password REPLACE_WITH_PASSWORD
     ```
 
     f. Web uygulamasını yerel Git'den gelen dağıtımları kabul etmek ve *Git dağıtım URL'sini*görüntülemek için yapılandırın. **Başvuru için bu URL'yi daha sonra not edin.**
 
-    ```azure-cli
+    ```azurecli
     echo Git deployment URL: $(az webapp deployment source config-local-git --name $webappname --resource-group AzureTutorial --query url --output tsv)
     ```
 
@@ -170,13 +170,13 @@ Dağıtım yuvaları, üretimde çalışan uygulamayı etkilemeden değişiklikl
 
     a. Ad *evreleme*ile bir dağıtım yuvası oluşturun.
 
-    ```azure-cli
+    ```azurecli
     az webapp deployment slot create --name $webappname --resource-group AzureTutorial --slot staging
     ```
 
     b. Hazırlama yuvasını yerel Git'den dağıtım kullanacak ve **hazırlama** dağıtım URL'sini alacak şekilde yapılandırın. **Başvuru için bu URL'yi daha sonra not edin.**
 
-    ```azure-cli
+    ```azurecli
     echo Git deployment URL for staging: $(az webapp deployment source config-local-git --name $webappname --resource-group AzureTutorial --slot staging --query url --output tsv)
     ```
 
@@ -216,7 +216,7 @@ Dağıtım yuvaları, üretimde çalışan uygulamayı etkilemeden değişiklikl
 
 7. Cloud Shell'de, doğrulanmış/ısınmış evreleme yuvasını üretime dönüştürün.
 
-    ```azure-cli
+    ```azurecli
     az webapp deployment slot swap --name $webappname --resource-group AzureTutorial --slot staging
     ```
 

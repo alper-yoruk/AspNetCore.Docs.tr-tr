@@ -5,12 +5,12 @@ description: Core MVCASP.NET gelen isteklerin URL'lerini eşleştirmek ve bunlar
 ms.author: riande
 ms.date: 3/25/2020
 uid: mvc/controllers/routing
-ms.openlocfilehash: 74afd0a076ca8bd753000f547ef0a26308e8a884
-ms.sourcegitcommit: e8dc30453af8bbefcb61857987090d79230a461d
+ms.openlocfilehash: 9f7a26a482cb115697a0a3d7439c14a062677c92
+ms.sourcegitcommit: 5af16166977da598953f82da3ed3b7712d38f6cb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/11/2020
-ms.locfileid: "81123498"
+ms.lasthandoff: 04/14/2020
+ms.locfileid: "81277138"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core'daki eylemleri denetleyiciye yönlendirme
 
@@ -530,6 +530,7 @@ Bir `RouteTokenTransformerConvention` seçenek olarak `ConfigureServices`kaydedi
 
 Sümüklüböcek tanımı için [Slug'daki MDN web dokümanlarına](https://developer.mozilla.org/docs/Glossary/Slug) bakın.
 
+[!INCLUDE[](~/includes/regex.md)]
 <a name="routing-multiple-routes-ref-label"></a>
 
 ### <a name="multiple-attribute-routes"></a>Birden çok öznitelik yolu

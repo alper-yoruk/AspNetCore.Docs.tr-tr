@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/28/2019
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: d244ce1527486466bcbc6557ec35869aa206bc4f
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 0835dbf6b5434e4224d9f56ea3335df4b5d9e119
+ms.sourcegitcommit: 5af16166977da598953f82da3ed3b7712d38f6cb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78656578"
+ms.lasthandoff: 04/14/2020
+ms.locfileid: "81277333"
 ---
 # <a name="razor-pages-with-ef-core-in-aspnet-core---read-related-data---6-of-8"></a>ASP.NET Core'da EF Çekirdekli Jilet Sayfaları - İlgili Verileri Oku - 8'de 6
 
@@ -136,6 +136,8 @@ Yöntem, `OnGetAsync` ilgili verileri `Include` yöntemle yükler. Yöntem, `Sel
 Aşağıdaki kod `Select` yöntemle ilgili verileri yükler:
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Pages/Courses/IndexSelect.cshtml.cs?name=snippet_RevisedIndexMethod&highlight=6)]
+
+Önceki kod herhangi bir varlık türü döndürmez, bu nedenle hiçbir izleme yapılır. EF izleme hakkında daha fazla bilgi için Izleme [ve İzleme Sorgusu Yok'a](/ef/core/querying/tracking)bakın.
 
 Ne `CourseViewModel`var:
 

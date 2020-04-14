@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/1/2020
 uid: fundamentals/routing
-ms.openlocfilehash: 5742ac6879ce46e01247ddd2f8bfe3e3b8a2a02a
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 0fc89ccf15c14c67f284a7084a21159af300a195
+ms.sourcegitcommit: 5af16166977da598953f82da3ed3b7712d38f6cb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80751152"
+ms.lasthandoff: 04/14/2020
+ms.locfileid: "81277229"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Çekirdeğinde Yönlendirme
 
@@ -454,6 +454,8 @@ Aşağıdaki tabloörnek rota şablonlarını ve davranışlarını gösterir:
 
 Karmaşık [segmentler, açgözlü olmayan](#greedy) bir şekilde sağdan sola doğru gerçek sınırlayıcılar eşleştirilerek işlenir. Örneğin, `[Route("/a{b}c{d}")]` karmaşık bir segmenttir.
 Karmaşık segmentler, bunları başarıyla kullanabilmek için anlaşılması gereken belirli bir şekilde çalışır. Bu bölümdeki örnek, karmaşık kesimlerin yalnızca sınırlayıcı metin parametre değerlerinin içinde görünmediğinde neden gerçekten iyi çalıştığını göstermektedir. Bir [regex](/dotnet/standard/base-types/regular-expressions) kullanarak ve daha sonra değerleri el ile ayıklama daha karmaşık durumlarda için gereklidir.
+
+[!INCLUDE[](~/includes/regex.md)]
 
 Bu, yönlendirmenin şablon `/a{b}c{d}` ve URL yolu `/abcd`ile gerçekleştirdiği adımların bir özetidir. Algoritmanın `|` nasıl çalıştığını görselleştirmeye yardımcı olmak için kullanılır:
 

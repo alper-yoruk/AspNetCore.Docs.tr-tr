@@ -1,57 +1,56 @@
 ---
-title: ASP.NET Core ile Microsoft hesabı dış oturum açma kurulumu
+title: ASP.NET Core ile Microsoft Hesabı harici giriş kurulumu
 author: rick-anderson
-description: Bu örnek, Microsoft hesabı kullanıcı kimlik doğrulamasının mevcut bir ASP.NET Core uygulamasına tümleştirilmesini gösterir.
+description: Bu örnek, Microsoft hesabı kullanıcı kimlik doğrulamasının varolan bir ASP.NET Core uygulamasına entegrasyonunu gösterir.
 ms.author: riande
 ms.custom: mvc
 ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 uid: security/authentication/microsoft-logins
-ms.openlocfilehash: bd75efb1d7ce08538d1a67be74d2f40f3964614f
-ms.sourcegitcommit: 9b6e7f421c243963d5e419bdcfc5c4bde71499aa
+ms.openlocfilehash: 32315267e0672b0747917228f08591a15e4449f8
+ms.sourcegitcommit: 5af16166977da598953f82da3ed3b7712d38f6cb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/21/2020
-ms.locfileid: "79989754"
+ms.lasthandoff: 04/14/2020
+ms.locfileid: "81277255"
 ---
-# <a name="microsoft-account-external-login-setup-with-aspnet-core"></a>ASP.NET Core ile Microsoft hesabı dış oturum açma kurulumu
+# <a name="microsoft-account-external-login-setup-with-aspnet-core"></a>ASP.NET Core ile Microsoft Hesabı harici giriş kurulumu
 
-Tarafından [Valeriy Novyıtskyy](https://github.com/01binary) ve [Rick Anderson](https://twitter.com/RickAndMSFT)
+Yazar: [Valeriy Novytskyy](https://github.com/01binary) ve [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Bu örnekte, kullanıcıların [önceki sayfada](xref:security/authentication/social/index)oluşturulan ASP.NET Core 3,0 projesini kullanarak Microsoft hesabı oturum açmasını nasıl etkinleştireceğinizi gösterilmektedir.
+Bu örnek, önceki [sayfada](xref:security/authentication/social/index)oluşturulan ASP.NET Core 3.0 projesini kullanarak kullanıcıların Microsoft hesaplarıyla oturum açmalarını nasıl sağlayacağınızı gösterir.
 
-## <a name="create-the-app-in-microsoft-developer-portal"></a>Uygulamayı Microsoft Geliştirici Portalında oluşturma
+## <a name="create-the-app-in-microsoft-developer-portal"></a>Uygulamayı Microsoft Geliştirici Portalı'nda oluşturun
 
-* Projeye [Microsoft. AspNetCore. Authentication. MicrosoftAccount](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.MicrosoftAccount/) NuGet paketini ekleyin.
-* [Azure portal uygulama kayıtları](https://go.microsoft.com/fwlink/?linkid=2083908) sayfasına gidin ve bir Microsoft hesabı oluşturun veya oturum açın:
+* Projeye [Microsoft.AspNetCore.Authentication.MicrosoftAccount](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.MicrosoftAccount/) NuGet paketini ekleyin.
+* [Azure portalına](https://go.microsoft.com/fwlink/?linkid=2083908) gidin - Uygulama kayıtları sayfasına gidin ve bir Microsoft hesabı oluşturun veya oturum açın:
 
-Microsoft hesabı yoksa **bir tane oluştur**' u seçin. Oturum açtıktan sonra, **uygulama kayıtları** sayfasına yönlendirilirsiniz:
+Microsoft hesabınız yoksa, bir tane **oluştur'u**seçin. Oturum açmadan **sonra, Uygulama kayıtları** sayfasına yönlendirilirsiniz:
 
-* **Yeni kayıt** Seç
-* Bir **ad**girin.
-* **Desteklenen hesap türleri**için bir seçenek belirleyin.  <!-- Accounts for any org work with MS domain accounts. Most folks probably want the last option, personal MS accounts -->
-* **Yeniden yönlendirme URI 'si**altında `/signin-microsoft` eklenen geliştirme URL 'nizi girin. Örneğin, `https://localhost:5001/signin-microsoft`. Bu örnekte daha sonra yapılandırılan Microsoft kimlik doğrulama şeması, OAuth akışını uygulamak için `/signin-microsoft` rotadaki istekleri otomatik olarak işleymeyecektir.
-* **Kaydol** ' u seçin
+* **Yeni kayıt** seçin
+* Bir **Ad**girin.
+* Desteklenen hesap **türleri**için bir seçenek seçin.  <!-- Accounts for any org work with MS domain accounts. Most folks probably want the last option, personal MS accounts. It took 24 hours after setting this up for the keys to work -->
+* **Redirect URI**altında, `/signin-microsoft` eklenen geliştirme URL'nizi girin. Örneğin, `https://localhost:5001/signin-microsoft`. Bu örnekte daha sonra yapılandırılan Microsoft kimlik doğrulama `/signin-microsoft` düzeni, OAuth akışını uygulamak için rotadaki istekleri otomatik olarak işler.
+* **Kaydol'u** Seçin
 
-### <a name="create-client-secret"></a>İstemci parolası oluştur
+### <a name="create-client-secret"></a>İstemci sırrı oluşturma
 
-* Sol bölmede **sertifikalar & gizlilikler**' ı seçin.
-* **İstemci gizli**dizileri altında **yeni istemci parolası** ' nı seçin.
+* Sol bölmede, **Sertifikalar & sırları**seçin.
+* **İstemci sırları**altında, **Yeni istemci sırrını** seçin
 
-  * İstemci parolası için bir açıklama ekleyin.
+  * İstemci sırrı için bir açıklama ekleyin.
   * **Ekle** düğmesini seçin.
 
-* **İstemci**gizli dizileri altında, istemci parolasının değerini kopyalayın.
+* **İstemci sırları**altında, istemci sırrının değerini kopyalayın.
 
-> [!NOTE]
-> `/signin-microsoft` URI segmenti, Microsoft kimlik doğrulama sağlayıcısı 'nın varsayılan geri çağırması olarak ayarlanır. Microsoft kimlik doğrulama ara yazılımını, [Microsoftaccountoptions](/dotnet/api/microsoft.aspnetcore.authentication.microsoftaccount.microsoftaccountoptions) sınıfının devralınmış [remoteauthenticationoptions. callbackpath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) özelliği aracılığıyla YAPıLANDıRıRKEN varsayılan geri çağırma URI 'sini değiştirebilirsiniz.
+URI kesimi, `/signin-microsoft` Microsoft kimlik doğrulama sağlayıcısının varsayılan geri araması olarak ayarlanır. [MicrosoftAccountOptions](/dotnet/api/microsoft.aspnetcore.authentication.microsoftaccount.microsoftaccountoptions) sınıfının devralınan [RemoteAuthenticationOptions.CallbackPath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) özelliği aracılığıyla Microsoft kimlik doğrulama aracını yapılandırırken varsayılan geri arama URI'sini değiştirebilirsiniz.
 
-## <a name="store-the-microsoft-client-id-and-secret"></a>Microsoft istemci KIMLIĞINI ve gizli anahtarını depolayın
+## <a name="store-the-microsoft-client-id-and-secret"></a>Microsoft istemci kimliğini ve gizlisini depolama
 
-[Gizli yönetici](xref:security/app-secrets)ile MICROSOFT istemci kimliği ve gizli anahtar değerleri gibi hassas ayarları depolayın. Bu örnek için aşağıdaki adımları kullanın:
+Microsoft istemci kimliği ve gizli değerler gibi hassas ayarları [Gizli Yönetici](xref:security/app-secrets)ile saklayın. Bu örnek için aşağıdaki adımları kullanın:
 
-1. [Gizli depolamayı etkinleştirme](xref:security/app-secrets#enable-secret-storage)konusundaki yönergeler temelinde projeyi gizli depolama için başlatın.
-1. Hassas ayarları, gizli anahtarlar `Authentication:Microsoft:ClientId` ve `Authentication:Microsoft:ClientSecret`ile yerel gizli depolama alanına depolayın:
+1. [Gizli depolamayı etkinleştir'deki](xref:security/app-secrets#enable-secret-storage)yönergelere göre gizli depolama için projeyi başlatma.
+1. Hassas ayarları gizli anahtarlarla `Authentication:Microsoft:ClientId` yerel gizli mağazada saklayın ve: `Authentication:Microsoft:ClientSecret`
 
     ```dotnetcli
     dotnet user-secrets set "Authentication:Microsoft:ClientId" "<client-id>"
@@ -60,40 +59,40 @@ Microsoft hesabı yoksa **bir tane oluştur**' u seçin. Oturum açtıktan sonra
 
 [!INCLUDE[](~/includes/environmentVarableColon.md)]
 
-## <a name="configure-microsoft-account-authentication"></a>Microsoft hesabı kimlik doğrulamasını yapılandırma
+## <a name="configure-microsoft-account-authentication"></a>Microsoft Hesap Kimlik Doğrulamasını Yapılandırma
 
-Microsoft hesabı hizmetini `Startup.ConfigureServices`ekleyin:
+Microsoft Hesabı hizmetini aşağıdakilere `Startup.ConfigureServices`ekleyin:
 
 [!code-csharp[](~/security/authentication/social/social-code/3.x/StartupMS3x.cs?name=snippet&highlight=10-14)]
 
 [!INCLUDE [default settings configuration](includes/default-settings.md)]
 
+Microsoft Hesabı kimlik doğrulaması tarafından desteklenen yapılandırma seçenekleri hakkında daha fazla bilgi için [Microsoft AccountOptions](/dotnet/api/microsoft.aspnetcore.builder.microsoftaccountoptions) API başvurusuna bakın. Bu, kullanıcı hakkında farklı bilgiler istemek için kullanılabilir.
+
+## <a name="sign-in-with-microsoft-account"></a>Microsoft Hesabı ile oturum açın
+
+Uygulamayı çalıştırın ve **Giriş Yap'a**tıklayın. Microsoft ile oturum açma seçeneği görüntülenir. Microsoft'u tıklattığınızda, kimlik doğrulaması için Microsoft'a yönlendirilirsiniz. Microsoft Hesabınızla oturum açtıktan sonra, uygulamanın bilgilerinize erişmesine izin vermeniz istenir:
+
+**Evet'e** dokunduğunuzda e-postanızı ayarlayabileceğiniz web sitesine geri yönlendirilirsiniz.
+
+Artık Microsoft kimlik bilgilerinizi kullanarak oturum açtınız:
+
 [!INCLUDE[](includes/chain-auth-providers.md)]
-
-Microsoft hesabı kimlik doğrulaması tarafından desteklenen yapılandırma seçenekleri hakkında daha fazla bilgi için bkz. [Microsoftaccountoptions](/dotnet/api/microsoft.aspnetcore.builder.microsoftaccountoptions) API başvurusu. Bu kullanıcı ile ilgili farklı bilgi istemek için kullanılabilir.
-
-## <a name="sign-in-with-microsoft-account"></a>Microsoft hesabıyla oturum açın hesabı
-
-Uygulamayı çalıştırın ve **oturum aç**' a tıklayın. Microsoft ile oturum açma seçeneği görüntülenir. Microsoft 'a tıkladığınızda, kimlik doğrulaması için Microsoft 'a yönlendirilirsiniz. Microsoft hesabınızla oturum açtıktan sonra uygulamanın bilgilerinize erişmesine izin vermek isteyip istemediğiniz sorulur:
-
-**Evet** ' e dokunduktan sonra, e-postanızı ayarlayabileceğiniz Web sitesine geri yönlendirilirsiniz.
-
-Şu anda Microsoft kimlik bilgilerinizi kullanarak oturum açtınız:
 
 [!INCLUDE[Forward request information when behind a proxy or load balancer section](includes/forwarded-headers-middleware.md)]
 
 ## <a name="troubleshooting"></a>Sorun giderme
 
-* Microsoft hesabı sağlayıcısı sizi bir oturum açma hatası sayfasına yönlendirirse, URI 'deki `#` (hashtag) doğrudan hata başlığına ve açıklama sorgu dizesi parametrelerine göz önüne alın.
+* Microsoft Hesabı sağlayıcısı sizi bir oturum açma hatası sayfasına yönlendirirse, Uri'deki `#` (hashtag) doğrudan aşağıdaki hata başlığı ve açıklama sorgusu dize parametrelerine dikkat edin.
 
-  Hata iletisi Microsoft kimlik doğrulamasıyla ilgili bir sorun olduğunu gösteriyorsa, en sık karşılaşılan neden, uygulama URI 'niz **Web** platformu Için belirtilen **yeniden yönlendirme URI** 'lerinden hiçbiriyle eşleşmemedir.
-* Kimlik, `ConfigureServices``services.AddIdentity` çağırarak yapılandırılmamışsa, kimlik doğrulamaya çalışmak ArgumentException ile sonuçlanır *: ' Signınscheme ' seçeneği sağlanmalıdır*. Bu örnekte kullanılan proje şablonu bunun yapılmasını sağlar.
-* Site veritabanı ilk geçiş uygulanarak oluşturulmadıysa, *istek hatasını Işlerken bir veritabanı işlemi başarısız* olur. Veritabanını oluşturmak için **geçişleri Uygula** ' ya dokunun ve hatanın ötesinde devam etmek için yenileyin.
+  Hata iletisi Microsoft kimlik doğrulamasıyla ilgili bir sorun olduğunu gösterse de, en yaygın neden uygulamanız Uri'nin **Web** platformu için belirtilen **Yönlendirme URL'lerinden** herhangi biriyle eşleşmemesidir.
+* Kimlik arayarak `services.AddIdentity` `ConfigureServices`yapılandırılmamışsa, kimlik doğrulamaya çalışmak ArgumentException ile *sonuçlanır: 'SignInScheme' seçeneği sağlanmalıdır.* Bu örnekte kullanılan proje şablonu bunun yapılmasını sağlar.
+* Site veritabanı ilk geçiş uygulanarak oluşturulmamışsa, *istek hatasını işlerken bir veritabanı işlemi başarısız olur.* Veritabanını oluşturmak için **Geçişleri Uygula'ya** dokunun ve hatayı geride devam etmek için yenileyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-* Bu makale, Microsoft ile nasıl kimlik doğrulayacağınızı gösterdi. [Önceki sayfada](xref:security/authentication/social/index)listelenen diğer sağlayıcılarla kimlik doğrulaması yapmak için benzer bir yaklaşımı izleyebilirsiniz.
+* Bu makalede, Microsoft ile kimlik doğrulaması nasıl gösterilebilir. [Önceki sayfada](xref:security/authentication/social/index)listelenen diğer sağlayıcılarla kimlik doğrulaması yapmak için benzer bir yaklaşım izleyebilirsiniz.
 
-* Web sitenizi Azure Web App 'e yayımladığınızda, Microsoft Geliştirici Portalında yeni bir istemci gizli dizileri oluşturun.
+* Web sitenizi Azure web uygulamasında yayımladıktan sonra Microsoft Geliştirici Portalı'nda yeni bir istemci sırları oluşturun.
 
-* `Authentication:Microsoft:ClientId` ve `Authentication:Microsoft:ClientSecret` Azure portal uygulama ayarları olarak ayarlayın. Yapılandırma sistemi ortam değişkenlerinden anahtarları okumak için ayarlanır.
+* Azure `Authentication:Microsoft:ClientId` portalında uygulama ayarlarını ve uygulama `Authentication:Microsoft:ClientSecret` ayarlarını ayarlayın. Yapılandırma sistemi, ortam değişkenlerinden anahtarları okumak üzere ayarlanmıştır.
