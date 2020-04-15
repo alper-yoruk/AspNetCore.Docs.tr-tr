@@ -7,18 +7,18 @@ ms.custom: mvc
 ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 uid: security/authentication/microsoft-logins
-ms.openlocfilehash: 32315267e0672b0747917228f08591a15e4449f8
-ms.sourcegitcommit: 5af16166977da598953f82da3ed3b7712d38f6cb
+ms.openlocfilehash: 12c86456dad86731b86487a3a4dd725f36677002
+ms.sourcegitcommit: f29a12486313e38e0163a643d8a97c8cecc7e871
 ms.translationtype: MT
 ms.contentlocale: tr-TR
 ms.lasthandoff: 04/14/2020
-ms.locfileid: "81277255"
+ms.locfileid: "81384041"
 ---
 # <a name="microsoft-account-external-login-setup-with-aspnet-core"></a>ASP.NET Core ile Microsoft Hesabı harici giriş kurulumu
 
 Yazar: [Valeriy Novytskyy](https://github.com/01binary) ve [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Bu örnek, önceki [sayfada](xref:security/authentication/social/index)oluşturulan ASP.NET Core 3.0 projesini kullanarak kullanıcıların Microsoft hesaplarıyla oturum açmalarını nasıl sağlayacağınızı gösterir.
+Bu örnek, önceki [sayfada](xref:security/authentication/social/index)oluşturulan ASP.NET Core 3.0 projesini kullanarak kullanıcıların çalışmaları, okulları veya kişisel Microsoft hesapları yla oturum açmalarını nasıl sağlayacağınızı gösterir.
 
 ## <a name="create-the-app-in-microsoft-developer-portal"></a>Uygulamayı Microsoft Geliştirici Portalı'nda oluşturun
 

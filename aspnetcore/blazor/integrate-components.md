@@ -5,17 +5,17 @@ description: Uygulamalardaki Blazor bileşenler ve DOM öğeleri için veri bağ
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/01/2020
+ms.date: 04/14/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/integrate-components
-ms.openlocfilehash: 6efa84c550a4605bde5e1f2bca4f2d1aa4a2667b
-ms.sourcegitcommit: e8dc30453af8bbefcb61857987090d79230a461d
+ms.openlocfilehash: c242fbef70d289929d5c005abc0aa431619862b3
+ms.sourcegitcommit: f29a12486313e38e0163a643d8a97c8cecc7e871
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/11/2020
-ms.locfileid: "81123359"
+ms.lasthandoff: 04/14/2020
+ms.locfileid: "81383964"
 ---
 # <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>Core Razor bileşenleriASP.NET Razor Pages ve MVC uygulamalarına entegre edin
 
@@ -23,7 +23,14 @@ Yazar: [Luke Latham](https://github.com/guardrex) ve [Daniel Roth](https://githu
 
 Razor bileşenleri Razor Pages ve MVC uygulamalarına entegre edilebilir. Sayfa veya görünüm işlendiğinde, bileşenler aynı anda önceden oluşturulabilir.
 
-## <a name="prepare-the-app-to-use-components-in-pages-and-views"></a>Uygulamayı sayfa ve görünümlerde bileşenleri kullanacak şekilde hazırlama
+[Uygulamayı hazırladıktan](#prepare-the-app)sonra, uygulamanın gereksinimlerine bağlı olarak aşağıdaki bölümlerdeki kılavuzu kullanın:
+
+* Routable &ndash; bileşenleri Kullanıcı isteklerinden doğrudan routable bileşenleri için. Ziyaretçilerin tarayıcılarında bir [`@page`](xref:mvc/views/razor#page) yönergeye sahip bir bileşen için HTTP isteğinde bulunabilmeleri gerektiğinde bu kılavuzu izleyin.
+  * [Razor Pages uygulamasında routable bileşenlerini kullanma](#use-routable-components-in-a-razor-pages-app)
+  * [Bir MVC uygulamasında routable bileşenleri ni kullanma](#use-routable-components-in-an-mvc-app)
+* [Bileşenleri bir sayfadan veya görünümden,](#render-components-from-a-page-or-view) &ndash; kullanıcı isteklerinden doğrudan kaynak sayılabilen bileşenler için görüntüleyin. [Bileşen Etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper)ile bileşenleri varolan sayfalara ve görünümlere yerleştirdiğinde bu kılavuzu izleyin.
+
+## <a name="prepare-the-app"></a>Uygulamayı hazırlama
 
 Mevcut bir Razor Pages veya MVC uygulaması, Razor bileşenlerini sayfalara ve görünümlere entegre edebilir:
 
@@ -80,7 +87,7 @@ Mevcut bir Razor Pages veya MVC uygulaması, Razor bileşenlerini sayfalara ve g
 
 Razor Pages uygulamalarında routable Razor bileşenlerini desteklemek için:
 
-1. Sayfaları ve [görünümleri bölümündebileşenleri kullanmak için uygulamayı Hazırla'daki](#prepare-the-app-to-use-components-in-pages-and-views) kılavuzu izleyin.
+1. [Uygulamayı Hazırla](#prepare-the-app) bölümündeki kılavuzu izleyin.
 
 1. Proje köküne aşağıdaki içerikle bir *App.razor* dosyası ekleyin:
 
@@ -120,8 +127,8 @@ Razor Pages uygulamalarında routable Razor bileşenlerini desteklemek için:
 
    | Render Modu | Açıklama |
    | ----------- | ----------- |
-   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | `App` Bileşeni statik HTML'ye dönüştürür ve sunucu Blazor uygulaması için bir işaretçi içerir. Kullanıcı aracısı başlatıldığında, bu işaretçi bir Blazor uygulamayı önyükleme için kullanılır. |
-   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Blazor Sunucu uygulaması için işaretleyici işler. `App` Bileşenden gelen çıktı dahil değildir. Kullanıcı aracısı başlatıldığında, bu işaretçi bir Blazor uygulamayı önyükleme için kullanılır. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | `App` Bileşeni statik HTML'ye dönüştürür ve Blazor Server uygulaması için bir işaretçi içerir. Kullanıcı aracısı başlatıldığında, bu işaretçi bir Blazor uygulamasını önyükleme için kullanılır. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Blazor Server uygulaması için bir işaretçi işler. `App` Bileşenden gelen çıktı dahil değildir. Kullanıcı aracısı başlatıldığında, bu işaretçi bir Blazor uygulamasını önyükleme için kullanılır. |
    | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | `App` Bileşeni statik HTML'ye dönüştürür. |
 
    Bileşen Etiket Yardımcısı hakkında daha fazla <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>bilgi için bkz.
@@ -147,7 +154,7 @@ Razor Pages uygulamalarında routable Razor bileşenlerini desteklemek için:
    ...
    ```
 
-   Ad alanları hakkında daha fazla bilgi için [Bileşen ad alanları](#component-namespaces) bölümüne bakın.
+Ad alanları hakkında daha fazla bilgi için [Bileşen ad alanları](#component-namespaces) bölümüne bakın.
 
 ## <a name="use-routable-components-in-an-mvc-app"></a>Bir MVC uygulamasında routable bileşenleri ni kullanma
 
@@ -155,7 +162,7 @@ Razor Pages uygulamalarında routable Razor bileşenlerini desteklemek için:
 
 MVC uygulamalarında routable Razor bileşenlerini desteklemek için:
 
-1. Sayfaları ve [görünümleri bölümündebileşenleri kullanmak için uygulamayı Hazırla'daki](#prepare-the-app-to-use-components-in-pages-and-views) kılavuzu izleyin.
+1. [Uygulamayı Hazırla](#prepare-the-app) bölümündeki kılavuzu izleyin.
 
 1. Aşağıdaki içerikle projenin köküne bir *App.razor* dosyası ekleyin:
 
@@ -186,6 +193,19 @@ MVC uygulamalarında routable Razor bileşenlerini desteklemek için:
    ```
 
    Bileşenler, düzenleri için paylaşılan *_Layout.cshtml* dosyasını kullanır.
+   
+   <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>bileşenin: `App`
+
+   * Sayfaya önceden işlenir.
+   * Sayfada statik HTML olarak işlenir veya kullanıcı aracısından bir Blazor uygulamasını önyükleme için gerekli bilgileri içeriyorsa.
+
+   | Render Modu | Açıklama |
+   | ----------- | ----------- |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | `App` Bileşeni statik HTML'ye dönüştürür ve sunucu Blazor uygulaması için bir işaretçi içerir. Kullanıcı aracısı başlatıldığında, bu işaretçi bir Blazor uygulamayı önyükleme için kullanılır. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Blazor Sunucu uygulaması için işaretleyici işler. `App` Bileşenden gelen çıktı dahil değildir. Kullanıcı aracısı başlatıldığında, bu işaretçi bir Blazor uygulamayı önyükleme için kullanılır. |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | `App` Bileşeni statik HTML'ye dönüştürür. |
+
+   Bileşen Etiket Yardımcısı hakkında daha fazla <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>bilgi için bkz.
 
 1. Giriş denetleyicisine bir eylem ekleyin:
 
@@ -217,7 +237,19 @@ MVC uygulamalarında routable Razor bileşenlerini desteklemek için:
    ...
    ```
 
-   Ad alanları hakkında daha fazla bilgi için [Bileşen ad alanları](#component-namespaces) bölümüne bakın.
+Ad alanları hakkında daha fazla bilgi için [Bileşen ad alanları](#component-namespaces) bölümüne bakın.
+
+## <a name="render-components-from-a-page-or-view"></a>Bileşenleri bir sayfaveya görünümden oluşturma
+
+*Bu bölüm, bileşenlerin kullanıcı isteklerinden doğrudan çıkarılabildiği sayfalara veya görünümlere bileşenler eklemekle ilgilidir.*
+
+Bir bileşeni bir sayfa veya görünümden işlemek için [Bileşen Etiket Yardımcısı'nı](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper)kullanın.
+
+Bileşenlerin nasıl işlendiği, bileşen durumu ve `Component` Etiket Yardımcısı hakkında daha fazla bilgi için aşağıdaki makalelere bakın:
+
+* <xref:blazor/hosting-models>
+* <xref:blazor/hosting-model-configuration>
+* <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>
 
 ## <a name="component-namespaces"></a>Bileşen ad alanları
 
@@ -233,15 +265,3 @@ Uygulamanın bileşenlerini tutmak için özel bir klasör kullanırken, klasör
 *_ViewImports.cshtml* dosyası, Bir Razor Pages uygulamasının *Sayfalar* klasöründe veya bir MVC uygulamasının *Görünümler* klasöründe bulunur.
 
 Daha fazla bilgi için bkz. <xref:blazor/components#import-components>.
-
-## <a name="render-components-from-a-page-or-view"></a>Bileşenleri bir sayfaveya görünümden oluşturma
-
-*Bu bölüm, bileşenlerin kullanıcı isteklerinden doğrudan çıkarılabildiği sayfalara veya görünümlere bileşenler eklemekle ilgilidir.*
-
-Bir bileşeni bir sayfa veya görünümden işlemek için [Bileşen Etiket Yardımcısı'nı](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper)kullanın.
-
-Bileşenlerin nasıl işlendiği, bileşen durumu ve `Component` Etiket Yardımcısı hakkında daha fazla bilgi için aşağıdaki makalelere bakın:
-
-* <xref:blazor/hosting-models>
-* <xref:blazor/hosting-model-configuration>
-* <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>

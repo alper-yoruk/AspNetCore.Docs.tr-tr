@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/30/2020
 uid: fundamentals/index
-ms.openlocfilehash: da2b42a7cf5d116a36d1dd9fa586d40ab31fc52d
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: c675644d8480ef7a5290045067e6cec2ea6f4764
+ms.sourcegitcommit: f29a12486313e38e0163a643d8a97c8cecc7e871
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80417649"
+ms.lasthandoff: 04/14/2020
+ms.locfileid: "81384055"
 ---
 # <a name="aspnet-core-fundamentals"></a>ASP.NET Core temelleri
 
@@ -205,7 +205,7 @@ Daha fazla bilgi için bkz. <xref:fundamentals/http-requests>.
   * Veri dosyaları (*.db*)
 * [Web kökü](#web-root), genellikle *wwwroot* klasörü.
 
-Geliştirme sırasında, içerik kökü varsayılan olarak projenin kök dizinine iner. Bu dizin aynı zamanda hem uygulamanın içerik dosyaları hem de [Web kökü](#web-root)için temel yoldur. Ana bilgisayarı kurarken yolunu ayarlayarak farklı bir içerik kökü [belirtin.](#host) Daha fazla bilgi için [İçerik köküne](xref:fundamentals/host/generic-host#contentrootpath-1)bakın.
+Geliştirme sırasında, içerik kökü varsayılan olarak projenin kök dizinine iner. Bu dizin aynı zamanda hem uygulamanın içerik dosyaları hem de [Web kökü](#web-root)için temel yoldur. Ana bilgisayarı kurarken yolunu ayarlayarak farklı bir içerik kökü [belirtin.](#host) Daha fazla bilgi için [İçerik köküne](xref:fundamentals/host/generic-host#contentroot)bakın.
 
 ## <a name="web-root"></a>Web kökü
 
@@ -215,7 +215,7 @@ Web kökü, genel, statik kaynak dosyalarının temel yoludur:
 * JavaScript (*.js*)
 * Görüntüler (*.png*, *.jpg*)
 
-Varsayılan olarak, statik dosyalar yalnızca web kök dizini ve alt dizinlerinden sunulur. Web kök yolu *varsayılan olarak {içerik kökü}/wwwroot.* Ana bilgisayarı kurarken yolunu ayarlayarak farklı bir web kökü [belirtin.](#host) Daha fazla bilgi için [Web köküne](xref:fundamentals/host/generic-host#webroot-1)bakın.
+Varsayılan olarak, statik dosyalar yalnızca web kök dizini ve alt dizinlerinden sunulur. Web kök yolu *varsayılan olarak {içerik kökü}/wwwroot.* Ana bilgisayarı kurarken yolunu ayarlayarak farklı bir web kökü [belirtin.](#host) Daha fazla bilgi için [Web köküne](xref:fundamentals/host/generic-host#webroot)bakın.
 
 Proje dosyasındaki [ \<İçerik> proje öğesi](/visualstudio/msbuild/common-msbuild-project-items#content) ile *wwwroot'da* dosya yayımlamayı engelleyin. Aşağıdaki örnek, *wwwroot/local* ve alt dizinlerinde içerik yayımlamayı engeller:
 
