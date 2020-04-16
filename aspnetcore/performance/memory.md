@@ -1,92 +1,92 @@
 ---
-title: ASP.NET Core bellek yönetimi ve desenleri
+title: ASP.NET Core'da bellek yönetimi ve desenler
 author: rick-anderson
-description: ASP.NET Core ' de belleğin nasıl yönetildiğini ve çöp toplayıcı 'nın (GC) nasıl çalıştığını öğrenin.
+description: ASP.NET Core'da belleğin nasıl yönetildiğini ve çöp toplayıcının (GC) nasıl çalıştığını öğrenin.
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/05/2019
+ms.date: 4/05/2019
 uid: performance/memory
-ms.openlocfilehash: 0ae367e954e21e2f696a3b292fa64f1d2dba98ec
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: b2af9cb567cdb1d7b2d0942601fcc3ebd999a5d9
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78667029"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440954"
 ---
-# <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>ASP.NET Core 'de bellek yönetimi ve çöp toplama (GC)
+# <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>ASP.NET Core'da bellek yönetimi ve çöp toplama (GC)
 
-[Sébastien Ros](https://github.com/sebastienros) ve [Rick Anderson](https://twitter.com/RickAndMSFT) tarafından
+Yazar: [Sébastien Ros](https://github.com/sebastienros) ve [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Bellek yönetimi, .NET gibi yönetilen bir çerçevede bile karmaşıktır. Bellek sorunlarını analiz etmek ve anlamak zor olabilir. Bu makalede:
+Bellek yönetimi,.NET gibi yönetilen bir çerçevede bile karmaşıktır. Bellek sorunlarını analiz etmek ve anlamak zor olabilir. Bu makalede:
 
-* , Çok fazla *bellek sızıntısı* ve *GC çalışmasız* sorunlar tarafından tetiklendi. Bu sorunların çoğu, bellek tüketiminin .NET Core 'da nasıl çalıştığını Anlamamasından veya nasıl ölçüleceğini anlayamadığında oluşur.
+* Birçok bellek *sızıntısı* ve *GC sorunları çalışmıyor* tarafından motive edildi. Bu sorunların çoğu, bellek tüketiminin .NET Core'da nasıl çalıştığını anlamamak veya nasıl ölçüldüğünü anlamamak nedeniyle kaynaklanmıştır.
 * Sorunlu bellek kullanımını gösterir ve alternatif yaklaşımlar önerir.
 
-## <a name="how-garbage-collection-gc-works-in-net-core"></a>Çöp toplama (GC) .NET Core 'da nasıl kullanılır
+## <a name="how-garbage-collection-gc-works-in-net-core"></a>.NET Core'da çöp toplama (GC) nasıl çalışır?
 
-GC, her segmentin bitişik bellek aralığı olduğu yığın kesimlerini ayırır. Yığına yerleştirilmiş nesneler 3 nesilden birine kategorize edilir: 0, 1 veya 2. Oluşturma, GC 'nin, uygulama tarafından artık başvurulmayan yönetilen nesneler üzerinde bellek serbest bırakmaya yönelik sıklığı belirler. Daha düşük numaralandırılmış nesiller GC daha sık kullanılır.
+GC, her kesimin bitişik bir bellek aralığı olduğu yığın segmentler ayırır. Yığına yerleştirilen nesneler 3 nesilden birine ayrılır: 0, 1 veya 2. Oluşturma, GC'nin artık uygulama tarafından başvurulan olmayan yönetilen nesnelerde bellek serbest bırakmaya çalıştığı sıklığını belirler. Daha düşük numaralı nesiller gc'd daha sık vardır.
 
-Nesneler, yaşam sürelerinin ömrü temelinde bir neslin diğerine taşınır. Nesneler daha uzun bir süre içinde yaşlılarsa daha yüksek bir oluşturmaya taşınır. Daha önce belirtildiği gibi, daha yüksek neslikler GC 'yi daha düşüktür. Kısa vadeli süreli nesneler her zaman nesil 0 ' da kalır. Örneğin, bir Web isteğinin ömrü boyunca başvurulan nesneler kısa ömürlü değildir. Uygulama düzeyi [tekton](xref:fundamentals/dependency-injection#service-lifetimes) genellikle 2. nesil 'e geçirilir.
+Nesneler yaşamlarına göre bir nesilden diğerine taşınır. Nesneler daha uzun yaşadıkça, daha yüksek bir nesle taşınırlar. Daha önce de belirtildiği gibi, yüksek nesiller gc'd daha az sıklıkta. Kısa süreli yaşayan nesneler her zaman nesil 0 kalır. Örneğin, bir web isteğinin ömrü boyunca başvurulan nesneler kısa ömürlüdür. Uygulama düzeyi [singletons](xref:fundamentals/dependency-injection#service-lifetimes) genellikle nesil 2'ye göç.
 
-ASP.NET Core bir uygulama başlatıldığında GC:
+bir ASP.NET Core uygulaması başladığında, GC:
 
-* İlk yığın kesimleri için bazı belleği ayırır.
-* Çalışma zamanı yüklenirken belleğin küçük bir bölümünü kaydeder.
+* İlk yığın segmentleri için bazı bellek yedekler.
+* Çalışma zamanı yüklendiğinde belleğin küçük bir bölümünü işler.
 
-Önceki bellek ayırmaları performans nedenleriyle yapılır. Performans avantajı, ardışık bellekteki yığın kesimlerinden gelir.
+Önceki bellek ayırmaları performans nedenleriyle yapılır. Performans avantajı bitişik bellekteki yığın segmentlerden gelir.
 
-### <a name="call-gccollect"></a>GC 'yi çağırın. Topladıktan
+### <a name="call-gccollect"></a>GC'yi ara. Toplamak
 
-[GC çağrılıyor. Açıkça topla](xref:System.GC.Collect*) :
+[GC'yi arıyorum. Açıkça toplayın:](xref:System.GC.Collect*)
 
-* , Üretim ASP.NET Core uygulamaları tarafından **yapılmamalıdır.**
-* Bellek sızıntılarını araştırırken faydalıdır.
-* İnceleme yaparken, GC 'nin tüm sallaştırılmış nesneleri bellekten kaldırdığını doğrular, böylece bellek ölçülenebilir.
+* Core uygulamaları nın üretim ASP.NET **yapılmaması** gerekir.
+* Bellek sızıntılarını araştırırken yararlıdır.
+* Araştırma yaparken, GC bellek ölçülebilir böylece bellekten tüm sarkan nesneleri kaldırdı doğrular.
 
-## <a name="analyzing-the-memory-usage-of-an-app"></a>Uygulamanın bellek kullanımını analiz etme
+## <a name="analyzing-the-memory-usage-of-an-app"></a>Bir uygulamanın bellek kullanımını analiz etme
 
-Adanmış araçlar bellek kullanımının analiz edilmesine yardımcı olabilir:
+Özel araçlar bellek kullanımını analiz yardımcı olabilir:
 
 - Nesne başvurularını sayma
-- GC 'nin CPU kullanımında ne kadar etkili olduğunu ölçme
+- GC'nin CPU kullanımı üzerinde ne kadar etkisi olduğunu ölçme
 - Her nesil için kullanılan bellek alanını ölçme
 
-Bellek kullanımını çözümlemek için aşağıdaki araçları kullanın:
+Bellek kullanımını analiz etmek için aşağıdaki araçları kullanın:
 
-* [DotNet-Trace](/dotnet/core/diagnostics/dotnet-trace): üretim makinelerinde kullanılabilir.
-* [Visual Studio hata ayıklayıcısı olmadan bellek kullanımını analiz etme](/visualstudio/profiling/memory-usage-without-debugging2)
+* [dotnet-trace](/dotnet/core/diagnostics/dotnet-trace): Üretim makinelerinde kullanılabilir.
+* [Visual Studio hata ayıklama olmadan bellek kullanımını analiz edin](/visualstudio/profiling/memory-usage-without-debugging2)
 * [Visual Studio’da bellek kullanımının profilini oluşturma](/visualstudio/profiling/memory-usage)
 
 ### <a name="detecting-memory-issues"></a>Bellek sorunlarını algılama
 
-Görev Yöneticisi, bir ASP.NET uygulamasının ne kadar bellek kullandığını gösteren bir fikir almak için kullanılabilir. Görev Yöneticisi bellek değeri:
+Görev Yöneticisi, bir ASP.NET uygulamasının ne kadar bellek kullandığı hakkında bir fikir almak için kullanılabilir. Görev Yöneticisi bellek değeri:
 
 * ASP.NET işlemi tarafından kullanılan bellek miktarını temsil eder.
-* Uygulamanın oturma nesnelerini ve yerel bellek kullanımı gibi diğer bellek tüketicilerini içerir.
+* Uygulamanın canlı nesnelerini ve yerel bellek kullanımı gibi diğer bellek tüketicilerini içerir.
 
-Görev Yöneticisi bellek değeri sonsuza kadar artıyorsa ve hiçbir şekilde düzermez, uygulamanın bellek sızıntısı vardır. Aşağıdaki bölümlerde, çeşitli bellek kullanımı desenleri gösterilmektedir ve açıklanmaktadır.
+Görev Yöneticisi bellek değeri süresiz olarak artar ve hiçbir zaman düzleşirse, uygulamanın bir bellek sızıntısı vardır. Aşağıdaki bölümlerde çeşitli bellek kullanım desenleri gösterin ve açıklar.
 
-## <a name="sample-display-memory-usage-app"></a>Örnek görüntüleme belleği kullanım uygulaması
+## <a name="sample-display-memory-usage-app"></a>Örnek ekran bellek kullanım uygulaması
 
-[Memoryleak örnek uygulaması](https://github.com/sebastienros/memoryleak) GitHub ' da kullanılabilir. MemoryLeak uygulaması:
+[MemoryLeak örnek uygulaması](https://github.com/sebastienros/memoryleak) GitHub'da kullanılabilir. MemoryLeak uygulaması:
 
-* , Uygulamanın gerçek zamanlı bellek ve GC verilerini toplayan bir tanılama denetleyicisi içerir.
-* , Bellek ve GC verilerini görüntüleyen bir dizin sayfasına sahiptir. Dizin sayfası her saniye yenilenir.
-* Çeşitli bellek yük desenleri sağlayan bir API denetleyicisi içerir.
-* Desteklenen bir araç değildir, ancak ASP.NET Core uygulamaların bellek kullanım düzenlerini göstermek için kullanılabilir.
+* Uygulama için gerçek zamanlı bellek ve GC verilerini toplayan bir tanıdenetleyicisi içerir.
+* Bellek ve GC verilerini görüntüleyen bir Dizin sayfası vardır. Dizin sayfası her saniye yenilenir.
+* Çeşitli bellek yükü desenleri sağlayan bir API denetleyicisi içerir.
+* Desteklenen bir araç değildir, ancak ASP.NET Core uygulamalarıbellek kullanım desenleri görüntülemek için kullanılabilir.
 
-MemoryLeak 'yi çalıştırın. Ayrılan bellek, GC gerçekleşene kadar yavaş artar. Araç, verileri yakalamak için özel nesne ayırdığından bellek artar. Aşağıdaki görüntüde bir gen 0 GC gerçekleştiğinde MemoryLeak Dizin sayfası gösterilmektedir. API denetleyicisinden API uç noktası çağrılmadığından grafik 0 RPS (saniye başına Istek) gösterir.
+MemoryLeak çalıştırın. Ayrılan bellek, GC oluşana kadar yavaşça artar. Araç veri yakalamak için özel nesne ayırdığından bellek artar. Aşağıdaki resim, Gen 0 GC oluştuğunda MemoryLeak Index sayfasını gösterir. GRAFIK, API denetleyicisinden hiçbir API uç noktası çağrıldığından, 0 RPS (Saniyede istek) gösterir.
 
 ![önceki grafik](memory/_static/0RPS.png)
 
-Grafik, bellek kullanımı için iki değer görüntüler:
+Grafik bellek kullanımı için iki değer görüntüler:
 
-- Ayrılan: yönetilen nesnelerin kapladığı bellek miktarı
-- [Çalışma kümesi](/windows/win32/memory/working-set): Şu anda fiziksel bellekte bulunan işlemin sanal adres alanındaki sayfa kümesi. Gösterilen çalışma kümesi, Görev Yöneticisi 'nin görüntülediği değerdir.
+- Ayrılan: yönetilen nesneler tarafından işgal edilen bellek miktarı
+- [Çalışma kümesi](/windows/win32/memory/working-set): Şu anda fiziksel bellekte ikamet eden işlemin sanal adres alanında yer alan sayfa kümesi. Gösterilen çalışma kümesi, Görev Yöneticisi'nin gösterdiği değerle aynıdır.
 
 ### <a name="transient-objects"></a>Geçici nesneler
 
-Aşağıdaki API 10 KB 'lik bir dize örneği oluşturur ve istemciye döndürür. Her istekte, bellekte yeni bir nesne ayrılır ve yanıta yazılır. Dizeler .NET 'te UTF-16 karakter olarak depolanır, böylece her karakter bellekte 2 bayt sürer.
+Aşağıdaki API 10-KB String örneği oluşturur ve istemciye döndürür. Her istekte, bellekte yeni bir nesne ayrılır ve yanıta yazılır. Dizeleri .NET'te UTF-16 karakteri olarak depolanır, böylece her karakter bellekte 2 bayt alır.
 
 ```csharp
 [HttpGet("bigstring")]
@@ -96,40 +96,40 @@ public ActionResult<string> GetBigString()
 }
 ```
 
-Aşağıdaki grafik, ' de, bellek ayırmalarının GC tarafından nasıl etkilendiğini göstermek için görece küçük bir yük ile oluşturulmuştur.
+Aşağıdaki grafik, bellek ayırmalarının GC tarafından nasıl etkilendiğini göstermek için nispeten küçük bir yükle oluşturulur.
 
 ![önceki grafik](memory/_static/bigstring.png)
 
-Yukarıdaki grafik şunları gösterir:
+Önceki grafik tesniye:
 
-* 4K RPS (saniye başına Istek).
-* Nesil 0 GC koleksiyonları her iki saniyede bir gerçekleşir.
-* Çalışma kümesi yaklaşık 500 MB 'tan sabittir.
-* CPU %12 ' dir.
-* Bellek tüketimi ve sürümü (GC aracılığıyla) kararlı bir şekilde yapılır.
+* 4K RPS (İstekler saniyede).
+* Nesil 0 GC koleksiyonları yaklaşık her iki saniyede bir oluşur.
+* Çalışma seti yaklaşık 500 MB sabittir.
+* CPU%12'dir.
+* Bellek tüketimi ve serbest bırakılması (GC ile) kararlıdır.
 
-Aşağıdaki grafik, makine tarafından işlenebilen en fazla aktarım hızı üzerinden alınır.
+Aşağıdaki grafik, makine tarafından işlenebilen maksimum iş lenme noktasında alınır.
 
 ![önceki grafik](memory/_static/bigstring2.png)
 
-Yukarıdaki grafik şunları gösterir:
+Önceki grafik tesniye:
 
 * 22K RPS
-* Nesil 0 GC koleksiyonları saniye başına birkaç kez gerçekleşir.
-* 1\. nesil koleksiyonlar, uygulama saniye başına önemli ölçüde daha fazla bellek ayırdığından tetiklenir.
-* Çalışma kümesi yaklaşık 500 MB 'tan sabittir.
-* CPU %33 ' dir.
-* Bellek tüketimi ve sürümü (GC aracılığıyla) kararlı bir şekilde yapılır.
-* CPU (%33) aşırı kullanılmaz, bu nedenle çöp toplama işlemi yüksek sayıda ayırma ile devam edebilir.
+* Nesil 0 GC koleksiyonları saniyede birkaç kez oluşur.
+* Uygulama saniyede önemli ölçüde daha fazla bellek ayırdığı için nesil 1 koleksiyonları tetiklenir.
+* Çalışma seti yaklaşık 500 MB sabittir.
+* CPU %33'tür.
+* Bellek tüketimi ve serbest bırakılması (GC ile) kararlıdır.
+* CPU (%33) aşırı kullanılmadığından, çöp toplama çok sayıda ayırmaya yetişebilir.
 
-### <a name="workstation-gc-vs-server-gc"></a>Workstation GC vs. Server GC
+### <a name="workstation-gc-vs-server-gc"></a>İş İstasyonu GC vs Sunucu GC
 
-.NET atık toplayıcısı 'nda iki farklı mod vardır:
+.NET Çöp Toplayıcı'nın iki farklı modu vardır:
 
-* **Iş Istasyonu GC**: Masaüstü için iyileştirildi.
-* **Sunucu GC**. ASP.NET Core uygulamalar için varsayılan GC. Sunucu için iyileştirildi.
+* **Workstation GC**: Masaüstü için optimize edin.
+* **Sunucu GC**. ASP.NET Core uygulamaları için varsayılan GC. Sunucu için optimize edin.
 
-GC modu proje dosyasında veya yayımlanan uygulamanın *runtimeconfig. JSON* dosyasında açıkça ayarlanabilir. Aşağıdaki biçimlendirme proje dosyasında `ServerGarbageCollection` ayarlamayı gösterir:
+GC modu, proje dosyasında veya yayınlanan uygulamanın *runtimeconfig.json* dosyasında açıkça ayarlanabilir. Aşağıdaki biçimlendirme proje `ServerGarbageCollection` dosyasındaki ayarı gösterir:
 
 ```xml
 <PropertyGroup>
@@ -137,27 +137,33 @@ GC modu proje dosyasında veya yayımlanan uygulamanın *runtimeconfig. JSON* do
 </PropertyGroup>
 ```
 
-Proje dosyasında `ServerGarbageCollection` değiştirmek için uygulamanın yeniden oluşturulması gerekir.
+Proje `ServerGarbageCollection` dosyasında yapılan değiştirme, uygulamanın yeniden oluşturulmasını gerektirir.
 
-**Note:** Sunucu çöp toplama, tek çekirdekli **makinelerde kullanılamaz.** Daha fazla bilgi için bkz. <xref:System.Runtime.GCSettings.IsServerGC>.
+**Not:** Sunucu çöp toplama tek bir çekirdekli makinelerde **kullanılamaz.** Daha fazla bilgi için bkz. <xref:System.Runtime.GCSettings.IsServerGC>.
 
-Aşağıdaki görüntüde, Workstation GC kullanarak bir 5K RPS altındaki bellek profili gösterilmektedir.
+Aşağıdaki resimde Workstation GC kullanarak bir 5K RPS altında bellek profili gösterilmektedir.
 
 ![önceki grafik](memory/_static/workstation.png)
 
 Bu grafik ve sunucu sürümü arasındaki farklar önemlidir:
 
-- Çalışma kümesi 500 MB ile 70 MB arasında bırakılır.
-- GC, her iki saniyede yerine saniyede birden çok kez 1. nesil koleksiyonu yapar.
-- GC 300 MB 'den 10 MB 'a düşün.
+- Çalışma seti 500 MB'dan 70 MB'a düşer.
+- GC, her iki saniyede bir değil, saniyede birden çok kez nesil 0 koleksiyonu yapar.
+- GC 300 MB'dan 10 MB'a düşer.
 
-Tipik bir Web sunucusu ortamında CPU kullanımı bellekten daha önemlidir, bu nedenle sunucu GC daha iyidir. Bellek kullanımı yüksekse ve CPU kullanımı nispeten düşükse, Iş Istasyonu GC daha iyi olabilir. Örneğin, belleğin scarce olduğu çeşitli Web uygulamalarını barındıran yüksek yoğunluklu.
+Tipik bir web sunucusu ortamında, CPU kullanımı bellekten daha önemlidir, bu nedenle Server GC daha iyidir. Bellek kullanımı yüksekse ve CPU kullanımı nispeten düşükse, Workstation GC daha fazla performans olabilir. Örneğin, bellek kıt olduğu çeşitli web uygulamaları barındırma yüksek yoğunluklu.
+
+<a name="sc"></a>
+
+### <a name="gc-using-docker-and-small-containers"></a>Docker ve küçük kaplar kullanarak GC
+
+Tek bir makinede birden çok kapsayıcı uygulama çalışırken, Workstation GC Server GC'den daha preformant olabilir. Daha fazla bilgi için, [Küçük Bir Kapsayıcı da Server GC ile çalışan](https://devblogs.microsoft.com/dotnet/running-with-server-gc-in-a-small-container-scenario-part-0/) ve Küçük Bir Kapsayıcı Senaryo Bölüm 1 Sunucu GC ile çalışan - [GC Yığını için Sabit Limit](https://devblogs.microsoft.com/dotnet/running-with-server-gc-in-a-small-container-scenario-part-1-hard-limit-for-the-gc-heap/)bakın.
 
 ### <a name="persistent-object-references"></a>Kalıcı nesne başvuruları
 
-GC, başvurulan nesneleri serbest olamaz. Başvurulan ancak artık gerekli olmayan nesneler bellek sızıntısına neden olur. Uygulama genellikle nesneleri ayırırsa ve artık gerekli olmadıklarında bunları boşaltamazsa, bellek kullanımı zaman içinde artar.
+GC başvurulan nesneleri serbest kılamaz. Başvurulan ancak artık gerekk olmayan nesneler bellek sızıntısına neden olur. Uygulama sık sık nesneleri ayırır ve artık ihtiyaç duyulmadıktan sonra bunları serbest bırakmazsa, bellek kullanımı zaman içinde artar.
 
-Aşağıdaki API 10 KB 'lik bir dize örneği oluşturur ve istemciye döndürür. Önceki örnekle aradaki fark, bu örneğe statik bir üye tarafından başvuruluyorsa, yani koleksiyon için hiçbir şekilde kullanılamaz.
+Aşağıdaki API 10-KB String örneği oluşturur ve istemciye döndürür. Önceki örnekteki fark, bu örneğin statik bir üye tarafından başvurulsa da, bu da hiçbir zaman koleksiyon için kullanılamadığı anlamına gelir.
 
 ```csharp
 private static ConcurrentBag<string> _staticStrings = new ConcurrentBag<string>();
@@ -174,25 +180,25 @@ public ActionResult<string> GetStaticString()
 Yukarıdaki kod:
 
 * Tipik bir bellek sızıntısı örneğidir.
-* Sık yapılan çağrılar sayesinde, işlem bir `OutOfMemory` özel durumuyla kilitlenene kadar uygulama belleğinin artmasına neden olur.
+* Sık yapılan aramalarda, işlem bir `OutOfMemory` istisna dışında çökene kadar uygulama belleği nin artmasına neden olur.
 
 ![önceki grafik](memory/_static/eternal.png)
 
-Önceki görüntüde:
+Önceki resimde:
 
-* Yük testi `/api/staticstring` uç noktası bellekte doğrusal artışa neden olur.
-* GC, bellek baskısı arttıkça 2. nesil bir koleksiyon çağırarak belleği boşaltmaya çalışır.
-* GC, sızdırılan belleği serbest olamaz. Ayrılan ve çalışma kümesi zaman ile artar.
+* Uç noktayı `/api/staticstring` test eden yük bellekte doğrusal bir artışa neden olur.
+* GC, bellek basıncı arttıkça, nesil 2 koleksiyonunu arayarak belleği serbest tutmaya çalışır.
+* GC, sızdırılan belleği kurtaramaz. Tahsis ve çalışma seti zamanla artar.
 
-Önbelleğe alma gibi bazı senaryolar, bellek baskısı serbest bırakılana kadar nesne başvurularının tutulmasını gerektirir. <xref:System.WeakReference> sınıfı bu tür bir önbelleğe alma kodu için kullanılabilir. `WeakReference` nesnesi bellek baskılarına altında toplanır. <xref:Microsoft.Extensions.Caching.Memory.IMemoryCache> varsayılan uygulama `WeakReference`kullanır.
+Önbelleğe alma gibi bazı senaryolar, bellek basıncı onları serbest bırakılmaya zorlayana kadar nesne başvurularının tutulmasını gerektirir. Sınıf <xref:System.WeakReference> önbelleğe alma kodu bu tür için kullanılabilir. Bir `WeakReference` nesne bellek basınçları altında toplanır. Kullanımların <xref:Microsoft.Extensions.Caching.Memory.IMemoryCache> varsayılan `WeakReference`uygulaması.
 
 ### <a name="native-memory"></a>Yerel bellek
 
-Bazı .NET Core nesneleri yerel belleğe bağımlıdır. Yerel bellek GC tarafından **toplanamaz.** Yerel bellek kullanan .NET nesnesi yerel kod kullanarak onu serbest vermelidir.
+Bazı .NET Core nesneleri yerel belleğe dayanır. Yerel bellek GC tarafından **toplanabilir.** Yerel belleği kullanan .NET nesnesi, yerel kodu kullanarak onu serbest etmelidir.
 
-.NET, geliştiricilerin yerel bellek yayınlamasına izin vermek için <xref:System.IDisposable> arabirimi sağlar. <xref:System.IDisposable.Dispose*> çağrılmasa bile, [Sonlandırıcı](/dotnet/csharp/programming-guide/classes-and-structs/destructors) çalıştığında doğru uygulanmış sınıflar çağrı `Dispose`.
+.NET, <xref:System.IDisposable> geliştiricilerin yerel belleği serbest bırakmasına izin veren arabirimi sağlar. <xref:System.IDisposable.Dispose*> Çağrılmasa bile, doğru uygulanan `Dispose` sınıflar [sonlandırıcı](/dotnet/csharp/programming-guide/classes-and-structs/destructors) çalıştığında çağırır.
 
-Aşağıdaki kodu göz önünde bulundurun:
+Aşağıdaki kodu inceleyin:
 
 ```csharp
 [HttpGet("fileprovider")]
@@ -203,42 +209,42 @@ public void GetFileProvider()
 }
 ```
 
-[Physicalfileprovider](/dotnet/api/microsoft.extensions.fileproviders.physicalfileprovider?view=dotnet-plat-ext-3.0) yönetilen bir sınıftır, bu nedenle isteğin sonunda herhangi bir örnek toplanacaktır.
+[PhysicalFileProvider](/dotnet/api/microsoft.extensions.fileproviders.physicalfileprovider?view=dotnet-plat-ext-3.0) yönetilen bir sınıftır, bu nedenle herhangi bir örnek isteğin sonunda toplanır.
 
-Aşağıdaki görüntüde `fileprovider` API 'sini sürekli çağırırken bellek profili gösterilmektedir.
+Aşağıdaki resim, `fileprovider` API'yi sürekli olarak çağırırken bellek profilini gösterir.
 
 ![önceki grafik](memory/_static/fileprovider.png)
 
-Yukarıdaki grafikte, bu sınıfın uygulanmasıyla ilgili olarak, bellek kullanımının artmasının devam eden belirgin bir sorun gösterilmektedir. Bu, [Bu sorun](https://github.com/dotnet/aspnetcore/issues/3110)içinde izlenmekte olan bilinen bir sorundur.
+Önceki grafik, bellek kullanımını artırmaya devam ettikçe, bu sınıfın uygulanmasıyla ilgili bariz bir sorun gösterir. Bu, [bu sorunda](https://github.com/dotnet/aspnetcore/issues/3110)izlenen bilinen bir sorundur.
 
-Kullanıcı kodunda, aşağıdakilerden biri ile aynı sızıntı gerçekleşecektir:
+Aynı sızıntı aşağıdakilerden biri tarafından, kullanıcı kodunda olabilir:
 
-* Sınıf doğru şekilde serbest bırakılmıyor.
-* Atılmalıdır bağımlı nesnelerin `Dispose`yöntemini çağırmak için.
+* Sınıfı doğru bırakmamak.
+* Atılması gereken bağımlı `Dispose`nesnelerin yöntemini çağırmayı unutma.
 
-### <a name="large-objects-heap"></a>Büyük nesne yığını
+### <a name="large-objects-heap"></a>Büyük nesneler yığını
 
-Sık bellek ayırma/ücretsiz döngüler, özellikle büyük bellek öbekleri ayrılırken belleği parçalara ayırıyor. Nesneler bitişik bellek bloklarına ayrılır. Parçalanmayı azaltmak için, GC belleği serbest bırakır. Bu işleme **sıkıştırma**adı verilir. Sıkıştırma, nesneleri taşımayı içerir. Büyük nesnelerin taşınması, bir performans cezası getirir. Bu nedenle GC, büyük [nesne yığını](/dotnet/standard/garbage-collection/large-object-heap) (LOH) olarak adlandırılan _büyük_ nesneler için özel bir bellek bölgesi oluşturur. 85.000 bayttan (yaklaşık 83 KB) büyük olan nesneler şunlardır:
+Sık bellek ayırma/boş döngüleri, özellikle büyük bellek parçaları ayırırken belleği parçalayabilir. Nesneler bitişik bellek bloklarında ayrılır. Parçalanmayı azaltmak için, GC belleği serbest ettiğinde, parçalamaya çalışır. Bu işleme **sıkıştırma**denir. Sıkıştırma nesneleri hareketli içerir. Büyük nesneleri taşımak bir performans cezası uygular. Bu nedenle GC, [büyük nesne yığını](/dotnet/standard/garbage-collection/large-object-heap) (LOH) adı verilen _büyük_ nesneler için özel bir bellek bölgesi oluşturur. 85.000 bayttan (yaklaşık 83 KB) büyük nesneler şunlardır:
 
-* LOH 'ye yerleştirildi.
-* Düzenlenmedi.
-* 2\. nesil oluşturma sırasında toplanır.
+* LOH'a yerleştirildi.
+* Sıkıştırılmış değil.
+* Nesil 2 GC'ler sırasında toplanır.
 
-LOH dolduğunda GC, 2. nesil bir koleksiyon tetikleyecektir. 2\. nesil Koleksiyonlar:
+LOH dolduğunda, GC bir nesil 2 koleksiyonu tetikler. Nesil 2 koleksiyonları:
 
-* Doğal olarak yavaştır.
-* Ayrıca, diğer tüm neslerde bir koleksiyonun tetiklenmesi için de ücret uygulanır.
+* Doğal olarak yavaşlar.
+* Ayrıca, diğer tüm nesillerde bir koleksiyonu tetikleme maliyetine de neden olabilir.
 
-Aşağıdaki kod, LOH 'yi hemen sıkıştırır:
+Aşağıdaki kod hemen LOH kompakt:
 
 ```csharp
 GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
 GC.Collect();
 ```
 
-LOH 'yi düzenleme hakkında bilgi için bkz. <xref:System.Runtime.GCSettings.LargeObjectHeapCompactionMode>.
+LOH sıkıştırma hakkında bilgi için bkz. <xref:System.Runtime.GCSettings.LargeObjectHeapCompactionMode>
 
-.NET Core 3,0 ve üstünü kullanan kapsayıcılarda LOH otomatik olarak sıkıştırılır.
+.NET Core 3.0 ve sonrası kullanan kaplarda LOH otomatik olarak sıkıştırılır.
 
 Bu davranışı gösteren aşağıdaki API:
 
@@ -250,48 +256,48 @@ public int GetLOH1(int size)
 }
 ```
 
-Aşağıdaki grafikte, en fazla yük altında `/api/loh/84975` uç noktası çağırma bellek profili gösterilmektedir:
+Aşağıdaki grafik, maksimum yük altında `/api/loh/84975` bitiş noktasını çağırmanın bellek profilini gösterir:
 
 ![önceki grafik](memory/_static/loh1.png)
 
-Aşağıdaki grafikte `/api/loh/84976` uç noktası çağırma bellek profili gösterilmektedir ve *yalnızca bir bayt daha*ayrılıyor:
+Aşağıdaki grafik, `/api/loh/84976` bitiş noktasını çağırmanın bellek profilini gösterir ve yalnızca bir *bayt daha*ayırır:
 
 ![önceki grafik](memory/_static/loh2.png)
 
-Note: `byte[]` yapısının ek yük baytları vardır. Bu nedenle 84.976 bayt 85.000 limitini tetikler.
+Not: `byte[]` Yapının tepede baytları vardır. Bu yüzden 84.976 bayt 85.000 limitini tetikler.
 
-Önceki iki grafik karşılaştırılıyor:
+Önceki iki grafiğin karşılaştırılması:
 
-* Çalışma kümesi, yaklaşık 450 MB olmak üzere her iki senaryo için de benzerdir.
-* Altındaki LOH istekleri (84.975 bayt), çoğunlukla nesil 0 koleksiyonlarını gösterir.
-* Over LOH istekleri, sabit 2. nesil koleksiyonlar üretir. 2\. nesil koleksiyonlar pahalıdır. Daha fazla CPU gerekir ve verimlilik neredeyse %50 ' a düşyordu.
+* Çalışma kümesi her iki senaryo için de benzer, yaklaşık 450 MB.
+* Altında LOH istekleri (84.975 bayt) çoğunlukla nesil 0 koleksiyonları gösterir.
+* Over LOH istekleri sürekli nesil 2 koleksiyonları oluşturur. Generation 2 koleksiyonları pahalıdır. Daha fazla CPU gereklidir ve iş çıktısı neredeyse %50 düşer.
 
-Geçici büyük nesneler özellikle sorunlu olduğundan Gen2 GCs 'ye neden olur.
+Geçici büyük nesneler özellikle sorunludur, çünkü gen2 GC'lere neden olurlar.
 
-En yüksek performans için büyük nesne kullanımı küçültülmüş olmalıdır. Mümkünse, büyük nesneleri ayırın. Örneğin, [yanıt önbelleğe alma](xref:performance/caching/response) ara yazılımı ASP.NET Core önbellek girişlerini 85.000 bayttan daha az blok halinde ayırır.
+Maksimum performans için, büyük nesne kullanımı en aza indirilmelidir. Mümkünse, büyük nesneleri bölün. Örneğin, [Core'ASP.NET'daki Yanıt Önbelleğe Alma](xref:performance/caching/response) ara yazılımı önbellek girişlerini 85.000 bayttan daha az bloklara böler.
 
-Aşağıdaki bağlantılarda, LOH sınırı altına nesneleri tutma ASP.NET Core yaklaşımı gösterilmektedir:
+Aşağıdaki bağlantılar, nesneleri LOH sınırının altında tutmak için ASP.NET Core yaklaşımını gösterir:
 
-* [ResponseCaching/Streams/Streammutilities. cs](https://github.com/dotnet/AspNetCore/blob/v3.0.0/src/Middleware/ResponseCaching/src/Streams/StreamUtilities.cs#L16)
-* [ResponseCaching/MemoryResponseCache. cs](https://github.com/aspnet/ResponseCaching/blob/c1cb7576a0b86e32aec990c22df29c780af29ca5/src/Microsoft.AspNetCore.ResponseCaching/Internal/MemoryResponseCache.cs#L55)
+* [YanıtCaching/Streams/StreamUtilities.cs](https://github.com/dotnet/AspNetCore/blob/v3.0.0/src/Middleware/ResponseCaching/src/Streams/StreamUtilities.cs#L16)
+* [YanıtCaching/MemoryResponseCache.cs](https://github.com/aspnet/ResponseCaching/blob/c1cb7576a0b86e32aec990c22df29c780af29ca5/src/Microsoft.AspNetCore.ResponseCaching/Internal/MemoryResponseCache.cs#L55)
 
 Daha fazla bilgi için bkz.
 
-* [Büyük nesne yığını kapsanmamış](https://devblogs.microsoft.com/dotnet/large-object-heap-uncovered-from-an-old-msdn-article/)
+* [Büyük Nesne Yığını Ortaya Çıkarıldı](https://devblogs.microsoft.com/dotnet/large-object-heap-uncovered-from-an-old-msdn-article/)
 * [Büyük nesne yığını](/dotnet/standard/garbage-collection/large-object-heap)
 
-### <a name="httpclient"></a>HttpClient
+### <a name="httpclient"></a>httpİsteC
 
-<xref:System.Net.Http.HttpClient> kullanarak yanlış bir kaynak sızıntısına neden olabilir. Veritabanı bağlantıları, yuvalar, dosya tutamaçları vb. gibi sistem kaynakları:
+Yanlış kullanmak <xref:System.Net.Http.HttpClient> kaynak sızıntısına neden olabilir. Veritabanı bağlantıları, soketler, dosya tutamaçları vb. gibi sistem kaynakları:
 
-* , Bellekten daha fazla.
-* Bellekten sızmış olduğunda daha sorunlu sorun vardır.
+* Hafızadan daha az.
+* Sızdırıldığında bellekten daha sorunludur.
 
-Deneyimli .NET geliştiricileri, <xref:System.IDisposable>uygulayan nesnelerde <xref:System.IDisposable.Dispose*> çağırılacağını bilir. `IDisposable` uygulayan nesneleri elden atma, genellikle sızdırılan bellek veya sızdırılan sistem kaynaklarına neden olur.
+Deneyimli .NET geliştiricileri <xref:System.IDisposable.Dispose*> uygulayan <xref:System.IDisposable>nesneleri aramayı bilir. Genellikle zamansız bellek veya `IDisposable` sızdırılan sistem kaynakları yla sonuçlanan nesneleri atmaz.
 
-`HttpClient` `IDisposable`uygular, ancak her çağrıdan **atılmamalıdır.** Bunun yerine `HttpClient` yeniden kullanılmalıdır.
+`HttpClient``IDisposable`uygular, ancak her çağrıüzerine **atılmamalıdır.** Bunun `HttpClient` yerine, yeniden kullanılmalıdır.
 
-Aşağıdaki uç nokta her istekte yeni bir `HttpClient` örneği oluşturur ve atar:
+Aşağıdaki bitiş noktası, her istekte `HttpClient` yeni bir örnek oluşturur ve bertaraf eder:
 
 ```csharp
 [HttpGet("httpclient1")]
@@ -305,7 +311,7 @@ public async Task<int> GetHttpClient1(string url)
 }
 ```
 
-Yük altında aşağıdaki hata iletileri günlüğe kaydedilir:
+Yük altında, aşağıdaki hata iletileri günlüğe kaydedilir:
 
 ```
 fail: Microsoft.AspNetCore.Server.Kestrel[13]
@@ -319,9 +325,9 @@ System.Net.Http.HttpRequestException: Only one usage of each socket address
     CancellationToken cancellationToken)
 ```
 
-`HttpClient` örnekleri atılsa da, gerçek ağ bağlantısının işletim sistemi tarafından yayımlanması zaman alır. Sürekli olarak yeni bağlantılar oluşturarak _bağlantı noktaları tükenmesi_ oluşur. Her istemci bağlantısı kendi istemci bağlantı noktasını gerektirir.
+`HttpClient` Örnekler elden çıkarılmış olsa bile, gerçek ağ bağlantısının işletim sistemi tarafından serbest bırakılması biraz zaman alır. Sürekli olarak yeni bağlantılar oluşturarak, _bağlantı noktalarının tükenmesi_ oluşur. Her istemci bağlantısı kendi istemci bağlantı noktasını gerektirir.
 
-Bağlantı noktası tükenmesi 'ni önlemenin bir yolu aynı `HttpClient` örneğini yeniden kullanmaktır:
+Bağlantı noktası yorgunluğunu önlemenin bir yolu `HttpClient` da aynı örneği yeniden kullanmaktır:
 
 ```csharp
 private static readonly HttpClient _httpClient = new HttpClient();
@@ -334,27 +340,27 @@ public async Task<int> GetHttpClient2(string url)
 }
 ```
 
-`HttpClient` örneği, uygulama durdurulduğunda serbest bırakılır. Bu örnek her bir atılabilir kaynağının her bir kullanım sonrasında atılmamalıdır.
+Örnek, `HttpClient` uygulama durduğunda serbest bırakılır. Bu örnek, her tek kullanımlık kaynağın her kullanımdan sonra elden çıkarılmaması gerektiğini göstermektedir.
 
-Bir `HttpClient` örneğinin ömrünü işlemenin daha iyi bir yolu için aşağıdakilere bakın:
+Bir `HttpClient` örneğin kullanım ömrünü daha iyi bir şekilde işlemek için aşağıdakilere bakın:
 
-* [HttpClient ve ömür yönetimi](/aspnet/core/fundamentals/http-requests#httpclient-and-lifetime-management)
-* [HTTPClient Factory blogu](https://devblogs.microsoft.com/aspnet/asp-net-core-2-1-preview1-introducing-httpclient-factory/)
+* [Httpİste ve yaşam boyu yönetim](/aspnet/core/fundamentals/http-requests#httpclient-and-lifetime-management)
+* [HTTPClient fabrika günlüğü](https://devblogs.microsoft.com/aspnet/asp-net-core-2-1-preview1-introducing-httpclient-factory/)
  
-### <a name="object-pooling"></a>Nesne havuzu oluşturma
+### <a name="object-pooling"></a>Nesne havuzu
 
-Önceki örnek, `HttpClient` örneğinin nasıl statik hale getirilme ve tüm istekler tarafından yeniden kullanılma şeklini gösterdi. Yeniden kullanım, kaynak dışı çalışmayı önler.
+Önceki örnek, `HttpClient` örneğin nasıl statik yapılabilir ve tüm istekler tarafından yeniden gösterilebilir gösterdi. Yeniden kullanım, kaynakların tükenmesini önler.
 
 Nesne havuzu:
 
-* Yeniden kullanım modelini kullanır.
-* , Oluşturulması pahalı olan nesneler için tasarlanmıştır.
+* Yeniden kullanım deseni kullanır.
+* Oluşturulması pahalı nesneler için tasarlanmıştır.
 
-Havuz, iş parçacıkları genelinde ayrılmaları ve yayımlanmaları önceden başlatılmış nesnelerden oluşan bir koleksiyondur. Havuzlar sınırlar, önceden tanımlanmış boyutlar veya büyüme oranı gibi ayırma kuralları tanımlayabilir.
+Havuz, iş parçacıkları arasında rezerve edilebilen ve serbest bırakılabilen önceden başlatılanmış nesneler topluluğudur. Havuzlar, sınırlar, önceden tanımlanmış boyutlar veya büyüme hızı gibi ayırma kuralları tanımlayabilir.
 
-[Microsoft. Extensions. ObjectPool](https://www.nuget.org/packages/Microsoft.Extensions.ObjectPool/) NuGet paketi, bu tür havuzları yönetmeye yardımcı olan sınıflar içerir.
+NuGet paketi [Microsoft.Extensions.ObjectPool,](https://www.nuget.org/packages/Microsoft.Extensions.ObjectPool/) bu tür havuzları yönetmeye yardımcı olan sınıflar içerir.
 
-Aşağıdaki API uç noktası her istekte rastgele sayılarla doldurulan bir `byte` arabelleği oluşturur:
+Aşağıdaki API bitiş noktası, her `byte` istekte rasgele sayılarla dolu bir arabellek anında gerçekleşir:
 
 ```csharp
         [HttpGet("array/{size}")]
@@ -368,25 +374,25 @@ Aşağıdaki API uç noktası her istekte rastgele sayılarla doldurulan bir `by
         }
 ```
 
-Aşağıdaki grafik, önceki API 'nin orta yük ile çağrılmasını gösterir:
+Aşağıdaki grafik ekranı önceki API'yi orta düzeyde yükile çağırarak gösterir:
 
 ![önceki grafik](memory/_static/array.png)
 
-Yukarıdaki grafikte, nesil 0 toplamaları yaklaşık olarak saniyede bir kez gerçekleşir.
+Önceki grafikte, nesil 0 koleksiyonları saniyede yaklaşık bir kez gerçekleşir.
 
-Yukarıdaki kod, [Arraypool\<t >](xref:System.Buffers.ArrayPool`1)kullanarak `byte` arabelleğini havuza alarak iyileştirilebilir. Bir statik örnek istekler arasında yeniden kullanılır.
+Önceki kod [ArrayPool\<T>](xref:System.Buffers.ArrayPool`1)kullanarak `byte` arabellek havuzlama tarafından optimize edilebilir. Statik bir örnek istekler arasında yeniden kullanılır.
 
-Bu yaklaşımla farklı olan özellikler, havuza alınmış bir nesnenin API 'den döndürüldüğü şeydir. Bunun anlamı:
+Bu yaklaşımda farklı olan, birleştirilmiş bir nesnenin API'den döndürülür olmasıdır. Bu şu anlama gelir:
 
-* Yöntemi, yönteminden geri döndükten hemen sonra Denetim dışındadır.
-* Nesneyi serbest bırakamıyoruz.
+* Yöntemden döner dönmez nesne sizin denetiminizde değildir.
+* Nesneyi serbest bırakamazsın.
 
-Nesnenin elden çıkarılmasını ayarlamak için:
+Nesnenin bertarafını ayarlamak için:
 
-* Havuza alınmış diziyi bir atılabilir nesnesinde yalıtma.
-* Havuza alınmış nesneyi [HttpContext. Response. RegisterForDispose](xref:Microsoft.AspNetCore.Http.HttpResponse.RegisterForDispose*)ile kaydedin.
+* Tek kullanımlık bir nesnede birleştirilmiş diziyi kapsülle.
+* Havuza toplanan nesneyi [HttpContext.Response.RegisterForDispose](xref:Microsoft.AspNetCore.Http.HttpResponse.RegisterForDispose*)ile kaydedin.
 
-`RegisterForDispose`, hedef nesnede `Dispose`çağırma işlemini gerçekleştirir, böylece yalnızca HTTP isteği tamamlandığında serbest bırakılır.
+`RegisterForDispose`yalnızca HTTP isteği `Dispose`tamamlandığında serbest bırakılması için hedef nesneyi arama yı önemseyecektir.
 
 ```csharp
 private static ArrayPool<byte> _arrayPool = ArrayPool<byte>.Create();
@@ -420,15 +426,15 @@ public byte[] GetPooledArray(int size)
 }
 ```
 
-Havuza alınmamış sürüm olarak aynı yükün uygulanması aşağıdaki grafiğe neden olur:
+Havuza ait olmayan sürümle aynı yükün uygulanması aşağıdaki grafikte sonuçlanır:
 
 ![önceki grafik](memory/_static/pooledarray.png)
 
-Ana fark ayrılan bayttır ve çok daha az nesil 0 koleksiyonu olarak.
+Ana fark bayt ayrılır ve sonuç olarak çok daha az nesil 0 koleksiyonları.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [Atık Toplama](/dotnet/standard/garbage-collection/)
-* [Eşzamanlılık görselleştiricisi ile farklı GC modlarını anlama](https://blogs.msdn.microsoft.com/seteplia/2017/01/05/understanding-different-gc-modes-with-concurrency-visualizer/)
-* [Büyük nesne yığını kapsanmamış](https://devblogs.microsoft.com/dotnet/large-object-heap-uncovered-from-an-old-msdn-article/)
+* [Çöp Toplama](/dotnet/standard/garbage-collection/)
+* [Eşzamanlı Görselleştirici ile farklı GC modlarını anlama](https://blogs.msdn.microsoft.com/seteplia/2017/01/05/understanding-different-gc-modes-with-concurrency-visualizer/)
+* [Büyük Nesne Yığını Ortaya Çıkarıldı](https://devblogs.microsoft.com/dotnet/large-object-heap-uncovered-from-an-old-msdn-article/)
 * [Büyük nesne yığını](/dotnet/standard/garbage-collection/large-object-heap)

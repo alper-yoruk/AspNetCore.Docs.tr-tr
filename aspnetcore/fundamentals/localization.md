@@ -5,12 +5,12 @@ description: ASP.NET Core'un içeriği farklı dillerde ve kültürlerde yerelle
 ms.author: riande
 ms.date: 11/30/2019
 uid: fundamentals/localization
-ms.openlocfilehash: b175354220a8a71c029e005f27443d5a72749a11
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 91db83eb8685c7bee5e976f386c2a12c4090b734
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78662122"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440824"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>ASP.NET Çekirdek'te küreselleşme ve yerelleşme
 
@@ -120,11 +120,11 @@ public void ConfigureServices(IServiceCollection services)
 
 ### <a name="supportedcultures-and-supporteduicultures"></a>Desteklenen Kültürler ve DesteklenenUICultures
 
-ASP.NET Core iki kültür değeri `SupportedCultures` belirtmenizi sağlar ve `SupportedUICultures`. [CultureInfo](/dotnet/api/system.globalization.cultureinfo) nesnesi, `SupportedCultures` tarih, saat, sayı ve para birimi biçimlendirme gibi kültüre bağımlı işlevlerin sonuçlarını belirler. `SupportedCultures`ayrıca metnin sıralama sırasını, kasa kurallarını ve dize karşılaştırmalarını belirler. Sunucunun Kültürü nasıl aldığı hakkında daha fazla bilgi için [CultureInfo.CurrentCulture'a](/dotnet/api/system.stringcomparer.currentculture#System_StringComparer_CurrentCulture) bakın. Dizeleri çeviren `SupportedUICultures` belirlemeler *(.resx* dosyalarından) [ResourceManager](/dotnet/api/system.resources.resourcemanager)tarafından aranır. Basitçe, `ResourceManager` kültüre özgü dizeleri `CurrentUICulture`arar. .NET'teki her `CurrentCulture` `CurrentUICulture` iş parçacığı ve nesne vardır. ASP.NET Core kültüre bağımlı işlevleri işlerken bu değerleri inceler. Örneğin, geçerli iş parçacığının kültürü "en-US" (İngilizce, AMERIKA `DateTime.Now.ToLongDateString()` Birleşik Devletleri) olarak ayarlanmışsa, "18 Şubat `CurrentCulture` 2016 Perşembe" görüntülenirse, ancak "es-ES" (İspanyolca, İspanya) olarak ayarlanırsa çıktı "jueves, 18 de febrero de 2016" olacaktır.
+ASP.NET Core iki kültür değeri `SupportedCultures` belirtmenizi sağlar ve `SupportedUICultures`. [CultureInfo](/dotnet/api/system.globalization.cultureinfo) nesnesi, `SupportedCultures` tarih, saat, sayı ve para birimi biçimlendirme gibi kültüre bağımlı işlevlerin sonuçlarını belirler. `SupportedCultures`ayrıca metnin sıralama sırasını, kasa kurallarını ve dize karşılaştırmalarını belirler. Sunucunun Kültürü nasıl aldığı hakkında daha fazla bilgi için [CultureInfo.CurrentCulture'a](/dotnet/api/system.stringcomparer.currentculture#System_StringComparer_CurrentCulture) bakın. Çevrilen `SupportedUICultures` dizelerin *(.resx* dosyalarından) kaynak [yöneticisi](/dotnet/api/system.resources.resourcemanager)tarafından aranır. Basitçe, `ResourceManager` kültüre özgü dizeleri `CurrentUICulture`arar. .NET'teki her `CurrentCulture` `CurrentUICulture` iş parçacığı ve nesne vardır. ASP.NET Core kültüre bağımlı işlevleri işlerken bu değerleri inceler. Örneğin, geçerli iş parçacığının kültürü "en-US" (İngilizce, AMERIKA `DateTime.Now.ToLongDateString()` Birleşik Devletleri) olarak ayarlanmışsa, "18 Şubat `CurrentCulture` 2016 Perşembe" görüntülenirse, ancak "es-ES" (İspanyolca, İspanya) olarak ayarlanırsa çıktı "jueves, 18 de febrero de 2016" olacaktır.
 
 ## <a name="resource-files"></a>Kaynak dosyalar
 
-Kaynak dosyası, yerelleştirilebilir dizeleri koddan ayırmak için yararlı bir mekanizmadır. Varsayılan olmayan dil için çevrilmiş dizeleri yalıtılmış *.resx* kaynak dosyaları. Örneğin, çevrilmiş dizeleri içeren *Welcome.es.resx* adlı İspanyolca kaynak dosyası oluşturmak isteyebilirsiniz. "es" İspanyolca'nın dil kodudur. Visual Studio'da bu kaynak dosyasını oluşturmak için:
+Kaynak dosyası, yerelleştirilebilir dizeleri koddan ayırmak için yararlı bir mekanizmadır. Varsayılan olmayan dil için çevrilmiş dizeleri *.resx* kaynak dosyalarında yalıtılır. Örneğin, çevrilmiş dizeleri içeren *Welcome.es.resx* adlı İspanyolca kaynak dosyası oluşturmak isteyebilirsiniz. "es" İspanyolca'nın dil kodudur. Visual Studio'da bu kaynak dosyasını oluşturmak için:
 
 1. **Çözüm Gezgini'nde,** Kaynak dosyasını içerecek klasöre sağ tıklayın >**Yeni Öğe** **Ekle.** > 
 

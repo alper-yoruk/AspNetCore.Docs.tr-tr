@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/08/2018
 uid: host-and-deploy/docker/index
-ms.openlocfilehash: cb5f774db5fab46a57f8ca4bbbca148f20f371ba
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 78eb6f467c7e779e1bf998e8ac8e917a90895db9
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78664082"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440733"
 ---
 # <a name="host-aspnet-core-in-docker-containers"></a>Docker konteynerlerinde Ana bilgisayar ASP.NET Core
 
@@ -39,3 +39,5 @@ PowerShell'i kullanarak Azure'daki bir Docker ana bilgisayara ASP.NET Core uygul
 
 [Proxy sunucuları ve yük dengeleyicileri ile çalışmak için ASP.NET Core yapılandırma](xref:host-and-deploy/proxy-load-balancer)  
 Proxy sunucuları ve yük dengeleyicileri arkasında barındırılan uygulamalar için ek yapılandırma gerekebilir. İstekleri bir proxy aracılığıyla aktarmak genellikle düzen ve istemci IP gibi özgün istek le ilgili bilgileri gizler. İstek le ilgili bazı bilgileri el ile uygulamaya iletmek gerekebilir.
+
+[Docker ve küçük kaplar kullanarak GC](xref:performance/memory#sc) GC seçimini küçük kapsayıcılarla tartışır.

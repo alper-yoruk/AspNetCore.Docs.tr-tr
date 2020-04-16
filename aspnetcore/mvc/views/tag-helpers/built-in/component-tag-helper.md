@@ -4,17 +4,17 @@ author: guardrex
 ms.author: riande
 description: Razor bileşenlerini sayfalarda ve görünümlerde işlemek için ASP.NET Temel Bileşen Tag Helper'ı nasıl kullanacağınızı öğrenin.
 ms.custom: mvc
-ms.date: 04/01/2020
+ms.date: 04/15/2020
 no-loc:
 - Blazor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/component-tag-helper
-ms.openlocfilehash: 4a6b21229ce086099fcddfeb51c3a959ef639f24
-ms.sourcegitcommit: e8dc30453af8bbefcb61857987090d79230a461d
+ms.openlocfilehash: aaa4b92a8912b4f52d861ed07432aa7cf3ca5240
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/11/2020
-ms.locfileid: "81123425"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440967"
 ---
 # <a name="component-tag-helper-in-aspnet-core"></a>ASP.NET Core'da Bileşen Etiket Yardımcısı
 
@@ -24,7 +24,7 @@ Bir bileşeni bir sayfa veya görünümden işlemek için [Bileşen Etiket Yard�
 
 ## <a name="prerequisites"></a>Ön koşullar
 
-<xref:blazor/integrate-components#prepare-the-app-to-use-components-in-pages-and-views> Makalenin sayfalar *ve görünümler bölümündeki bileşenleri kullanmak için uygulamayı Hazırla'daki* kılavuzu izleyin.
+<xref:blazor/integrate-components#prepare-the-app> Makalenin sayfalar *ve görünümler bölümündeki bileşenleri kullanmak için uygulamayı Hazırla'daki* kılavuzu izleyin.
 
 ## <a name="component-tag-helper"></a>Bileşen Etiket Yardımcısı
 

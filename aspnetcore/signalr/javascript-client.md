@@ -9,12 +9,12 @@ ms.date: 04/08/2020
 no-loc:
 - SignalR
 uid: signalr/javascript-client
-ms.openlocfilehash: a99c1dd2aba6ef6ff925783762a98e2c81ed7225
-ms.sourcegitcommit: 9a46e78c79d167e5fa0cddf89c1ef584e5fe1779
+ms.openlocfilehash: 43b2cacf9f415ec422a00b28246f30c8ad74de29
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/09/2020
-ms.locfileid: "80994578"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440863"
 ---
 # <a name="aspnet-core-opno-locsignalr-javascript-client"></a>ASP.NET SignalR Core JavaScript istemcisi
 
@@ -145,9 +145,9 @@ SignalRtanımlanan yöntem adı ve bağımsız değişkenleri eşleştirerek `Se
 
 İstemci tarafı hatalarını `start` işlemek için yöntemin sonuna bir `catch` yöntem zincirleyin. Tarayıcının konsolundaki hataları çıkarmak için kullanın. `console.error`
 
-[!code-javascript[Error handling](javascript-client/sample/wwwroot/js/chat.js?range=49-51)]
+[!code-javascript[Error handling](javascript-client/sample/wwwroot/js/chat.js?range=50)]
 
-Bağlantı yapıldığında günlüğe kaydetmek için bir logger ve olay türünü geçirerek istemci tarafı günlük izlemesini kurulum. İletiler belirtilen günlük düzeyi ve daha yüksek günlüğe kaydedilir. Kullanılabilir günlük düzeyleri aşağıdaki gibidir:
+Bağlantı yapıldığında günlüğe kaydetmek için bir logger ve olay türünü geçerek istemci tarafı günlük izlemesini ayarlayın. İletiler belirtilen günlük düzeyi ve daha yüksek günlüğe kaydedilir. Kullanılabilir günlük düzeyleri aşağıdaki gibidir:
 
 * `signalR.LogLevel.Error`&ndash; Hata iletileri. Yalnızca `Error` iletileri günlüğe kaydeder.
 * `signalR.LogLevel.Warning`&ndash; Olası hatalar hakkında uyarı iletileri. Günlükler `Warning`ve `Error` mesajlar.
@@ -178,7 +178,7 @@ Herhangi bir `withAutomaticReconnect()` parametre olmadan, istemciyi her yeniden
 Herhangi bir yeniden bağlanma `HubConnection` girişimine başlamadan `HubConnectionState.Reconnecting` önce, `onreconnecting` `Disconnected` duruma geçiş yapacak ve duruma geçiş yapmak `onclose` yerine geri aramaları `HubConnection` ateşleyecek ve otomatik yeniden bağlanma olmadan geri aramaları tetikleyecek. Bu, kullanıcıları bağlantının kaybolduğu konusunda uyarmak ve Kullanıcı Arabirimi öğelerini devre dışı etmek için bir fırsat sağlar.
 
 ```javascript
-connection.onreconnecting((error) => {
+connection.onreconnecting(error => {
     console.assert(connection.state === signalR.HubConnectionState.Reconnecting);
 
     document.getElementById("messageInput").disabled = true;
@@ -197,7 +197,7 @@ Bağlantı sunucuya tamamen yeni göründüğünden, `connectionId` `onreconnect
 > `onreconnected` Arama nın `connectionId` parametresi, anlaşma [zatını atlamak](xref:signalr/configuration#configure-client-options)için yapılandırıldıysa `HubConnection` tanımsız olacaktır.
 
 ```javascript
-connection.onreconnected((connectionId) => {
+connection.onreconnected(connectionId => {
     console.assert(connection.state === signalR.HubConnectionState.Connected);
 
     document.getElementById("messageInput").disabled = false;
@@ -227,7 +227,7 @@ async function start() {
 İstemci ilk dört denemesinde başarılı bir şekilde `HubConnection` yeniden bağlanmazsa, `Disconnected` duruma geçiş ve [yakın](/javascript/api/%40aspnet/signalr/hubconnection#onclose) geri aramaları ateş. Bu, kullanıcılara bağlantının kalıcı olarak kaybolduğunu bildirmek ve sayfanın yenilenerek tavsiye de bulunmanızı sağlar:
 
 ```javascript
-connection.onclose((error) => {
+connection.onclose(error => {
     console.assert(connection.state === signalR.HubConnectionState.Disconnected);
 
     document.getElementById("messageInput").disabled = true;

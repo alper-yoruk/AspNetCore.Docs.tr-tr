@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 09/12/2018
 uid: host-and-deploy/docker/visual-studio-tools-for-docker
-ms.openlocfilehash: 0e6747a3de220b97cc7a84f9cd42b0da54b57ee9
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: ba79f0af8192ad9e8b263d4304ccc0df36c50f00
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78664068"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440759"
 ---
 # <a name="visual-studio-container-tools-with-aspnet-core"></a>ASP.NET Core ile Visual Studio Konteyner Araçları
 
@@ -238,3 +238,4 @@ microsoft/aspnetcore        2.0     c69d39472da9  13 days ago     347MB
 * [Bir .NET uygulamasını Windows kapsayıcısında Azure Hizmet Kumaşı'na dağıtma](/azure/service-fabric/service-fabric-host-app-in-a-container)
 * [Docker ile Visual Studio geliştirme sorunlarını giderme](/azure/vs-azure-tools-docker-troubleshooting-docker-errors)
 * [Görsel Stüdyo Konteyner Araçları GitHub deposu](https://github.com/Microsoft/DockerTools)
+* [Docker ve küçük kaplar kullanarak GC](xref:performance/memory#sc)

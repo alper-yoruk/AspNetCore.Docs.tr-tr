@@ -4,14 +4,14 @@ author: rick-anderson
 description: Razor dosyalarının derlemesinin ASP.NET Core uygulamasında nasıl oluştuğunu öğrenin.
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/13/2020
+ms.date: 04/14/2020
 uid: mvc/views/view-compilation
-ms.openlocfilehash: 67bbeb88cd944791b522900b69bd10cff38c9f3a
-ms.sourcegitcommit: 5af16166977da598953f82da3ed3b7712d38f6cb
+ms.openlocfilehash: 3d871ab960de28a565280d9e4cb2c597832e2455
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81277281"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440941"
 ---
 # <a name="razor-file-compilation-in-aspnet-core"></a>ASP.NET Core'da jilet dosya derlemesi
 
@@ -83,13 +83,23 @@ Aşağıdaki örnekte, çalışma zamanı derlemesi geliştirme ortamında `IIS 
 
 Projenin `Startup` sınıfında kod değişikliği gerekmez. Çalışma zamanında, ASP.NET Core' da derleme düzeyinde bir `Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation` [HostingStartup özniteliği](xref:fundamentals/configuration/platform-specific-configuration#hostingstartup-attribute) arar. Öznitelik, `HostingStartup` yürütülecek uygulama başlangıç kodunu belirtir. Bu başlangıç kodu çalışma zamanı derlemesini sağlar.
 
+## <a name="enable-runtime-compilation-for-a-razor-class-library"></a>Razor Class Kitaplığı için çalışma zamanı derlemesini etkinleştirme
+
+Bir Razor Pages projesinin *MyClassLib*adlı [Bir Razor Class Library (RCL)](xref:razor-pages/ui-class) referansları bir senaryo düşünün. RCL, ekibinizin tüm MVC ve Razor Pages projelerinin tükettiği bir *_Layout.cshtml* dosyası içerir. Bu RCL'deki *_Layout.cshtml* dosyası için çalışma zamanı derlemesini etkinleştirmek istiyorsunuz. Razor Pages projesinde aşağıdaki değişiklikleri yapın:
+
+1. Koşullu olarak [varolan bir projede çalışma zamanı derlemesini etkinleştirin.](#conditionally-enable-runtime-compilation-in-an-existing-project)
+1. Çalışma zamanı derleme seçeneklerini şu `Startup.ConfigureServices`şekilde yapılandırın:
+
+    [!code-csharp[](~/mvc/views/view-compilation/samples/3.1/Startup.cs?name=snippet_ConfigureServices&highlight=5-10)]
+
+    Önceki kodda, *MyClassLib* RCL için mutlak bir yol oluşturulur. [PhysicalFileProvider API,](xref:fundamentals/file-providers#physicalfileprovider) dizinleri ve dosyaları bu mutlak yolda bulmak için kullanılır. Son olarak, `PhysicalFileProvider` örnek, RCL'nin *.cshtml* dosyalarına erişim sağlayan bir dosya sağlayıcıları koleksiyonuna eklenir.
+
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * [RazorCompileOnBuild ve RazorCompileOnPublish](xref:razor-pages/sdk#properties) özellikleri.
 * <xref:razor-pages/index>
 * <xref:mvc/views/overview>
 * <xref:razor-pages/sdk>
-* Projeler arasında çalışma zamanı derleme çalışması yaptığını gösteren bir örnek için [GitHub'daki çalışma zamanı derleme örneğine](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/mvc/runtimecompilation) bakın.
 
 ::: moniker-end
 

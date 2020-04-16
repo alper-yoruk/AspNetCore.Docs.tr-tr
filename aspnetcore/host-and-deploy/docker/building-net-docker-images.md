@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/15/2020
 uid: host-and-deploy/docker/building-net-docker-images
-ms.openlocfilehash: 31161d6841986cb0bd8080468e5d523d59400490
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: ced0cb7cbeed1b8811813a70035c2e0b42c3e35a
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80405930"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440785"
 ---
 # <a name="docker-images-for-aspnet-core"></a>ASP.NET Core için Docker görüntüleri
 
@@ -262,7 +262,8 @@ ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 * [ASP.NET Core Docker örneği](https://github.com/dotnet/dotnet-docker) (Bu eğitimde kullanılan.)
 * [Proxy sunucuları ve yük dengeleyicileri ile çalışmak için ASP.NET Core yapılandırma](/aspnet/core/host-and-deploy/proxy-load-balancer)
 * [Visual Studio Docker Tools ile çalışma](https://docs.microsoft.com/aspnet/core/publishing/visual-studio-tools-for-docker)
-* [Visual Studio Code ile Hata Ayıklama](https://code.visualstudio.com/docs/nodejs/debugging-recipes#_debug-nodejs-in-docker-containers) 
+* [Visual Studio Code ile Hata Ayıklama](https://code.visualstudio.com/docs/nodejs/debugging-recipes#_debug-nodejs-in-docker-containers)
+* [Docker ve küçük kaplar kullanarak GC](xref:performance/memory#sc)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

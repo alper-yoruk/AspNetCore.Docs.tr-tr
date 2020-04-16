@@ -4,14 +4,14 @@ author: jamesnk
 description: gRPC-Web'i kullanarak tarayıcı uygulamalarından çağrılabilir olması için ASP.NET Core'daki gRPC hizmetlerini nasıl yapılandırabileceğinizi öğrenin.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 02/16/2020
+ms.date: 04/15/2020
 uid: grpc/browser
-ms.openlocfilehash: 0bb8157525ccd32991d8925816c1b599c3d21a92
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: a20e604488b1fb919f18932599ba690bfa308f0c
+ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80977151"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81440772"
 ---
 # <a name="use-grpc-in-browser-apps"></a>Tarayıcı uygulamalarında gRPC kullanma
 
@@ -28,6 +28,15 @@ Yazar: [James Newton-King](https://twitter.com/jamesnk)
 > Geliştiricilerin beğendikleri ve üretken oldukları bir şey oluşturduğumuzdan emin olmak [https://github.com/grpc/grpc-dotnet](https://github.com/grpc/grpc-dotnet) için lütfen geri bildirimde bulundurun.
 
 Tarayıcı tabanlı bir uygulamadan HTTP/2 gRPC hizmetini aramak mümkün değildir. [gRPC-Web](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-WEB.md) tarayıcı JavaScript ve Blazor uygulamaları gRPC hizmetleri aramak için izin veren bir protokoldür. Bu makalede, .NET Core'da gRPC-Web'in nasıl kullanılacağı açıklanmaktadır.
+
+## <a name="grpc-web-in-aspnet-core-vs-envoy"></a>gRPC-Web ASP.NET Core vs Elçi
+
+ASP.NET Core uygulamasına gRPC-Web eklemenin iki seçeneği vardır:
+
+* ASP.NET Core'da gRPC HTTP/2 ile birlikte gRPC-Web'i destekleyin. Bu seçenek, paket tarafından `Grpc.AspNetCore.Web` sağlanan ara yazılım kullanır.
+* GRPC-Web'i gRPC HTTP/2'ye çevirmek için [Elçi proxy'sinin](https://www.envoyproxy.io/) gRPC-Web desteğini kullanın. Çevrilen arama daha sonra ASP.NET Core uygulamasına iletilir.
+
+Her yaklaşımın artıları ve eksileri vardır. Elçisi uygulamanızın ortamında zaten proxy olarak kullanıyorsanız, bunu gRPC-Web desteği sağlamak için de kullanmanız anlamlı olabilir. Eğer sadece ASP.NET Core gerektiren gRPC-Web için `Grpc.AspNetCore.Web` basit bir çözüm istiyorsanız, iyi bir seçimdir.
 
 ## <a name="configure-grpc-web-in-aspnet-core"></a>gRPC-Web'i ASP.NET Core'da yapılandırın
 
@@ -100,7 +109,7 @@ Yukarıdaki kod:
 Oluşturulduğunda `GrpcWebHandler` aşağıdaki yapılandırma seçenekleri vardır:
 
 * **InnerHandler**: <xref:System.Net.Http.HttpMessageHandler> örneğin `HttpClientHandler`gRPC HTTP isteğini oluşturan temel.
-* **Mod**: gRPC HTTP istek isteğinin `Content-Type` olup olmadığını `application/grpc-web` belirten bir `application/grpc-web-text`numaralandırma türü.
+* **Mod**: gRPC HTTP isteğinin `Content-Type` olup olmadığını `application/grpc-web` belirten bir `application/grpc-web-text`numaralandırma türü.
     * `GrpcWebMode.GrpcWeb`kodlar olmadan gönderilecek içeriği yapılandırır. Varsayılan değer.
     * `GrpcWebMode.GrpcWebText`içeriği base64 kodlanacak şekilde yapılandırır. Tarayıcılarda sunucu akışı aramaları için gereklidir.
 * **HttpVersion**: `Version` HTTP protokolü altta yatan gRPC HTTP isteği [httpRequestMessage.Version](xref:System.Net.Http.HttpRequestMessage.Version) ayarlamak için kullanılır. gRPC-Web belirli bir sürümü gerektirmez ve belirtilmedikçe varsayılangeçersiz kılmaz.
