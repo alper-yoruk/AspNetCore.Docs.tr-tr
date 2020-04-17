@@ -5,17 +5,17 @@ description: Razor Blazor bileşenlerinin Razor Pages ve MVC uygulamalarına nas
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/07/2020
+ms.date: 04/16/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/hosting-model-configuration
-ms.openlocfilehash: ca1b3ea9092640ca561b3fbe02ddce6f974c525e
-ms.sourcegitcommit: e8dc30453af8bbefcb61857987090d79230a461d
+ms.openlocfilehash: 1b0f5f4071be7134d7de08615ec016ca6567385d
+ms.sourcegitcommit: 49c91ad4b69f4f8032394cbf2d5ae1b19a7f863b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/11/2020
-ms.locfileid: "81123382"
+ms.lasthandoff: 04/17/2020
+ms.locfileid: "81544849"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>ASP.NET Core Blazor hosting modeli yapılandırma
 
@@ -68,9 +68,39 @@ IIS için aşağıdaki örnekte, yayınlanan *web.config* dosyasına özel üstb
 <p>Environment: @HostEnvironment.Environment</p>
 ```
 
+Başlangıç sırasında, `WebAssemblyHostBuilder` geliştiricilerin `IWebAssemblyHostEnvironment` kodlarında ortama özgü bir mantığa sahip olmalarını sağlayan özellik aracılığıyla `HostEnvironment` ortaya çıkar:
+
+```csharp
+if (builder.HostEnvironment.Environment == "Custom")
+{
+    ...
+};
+```
+
+Aşağıdaki kolaylık uzatma yöntemleri, Geliştirme, Üretim, Evreleme ve özel ortam adları için geçerli ortamın denetlenmesine izin verir:
+
+* `IsDevelopment()`
+* `IsProduction()`
+* `IsStaging()`
+* 'IsEnvironment("{ENVIRONMENT NAME}")
+
+```csharp
+if (builder.HostEnvironment.IsStaging())
+{
+    ...
+};
+
+if (builder.HostEnvironment.IsEnvironment("Custom"))
+{
+    ...
+};
+```
+
+Özellik, `IWebAssemblyHostEnvironment.BaseAddress` `NavigationManager` hizmet kullanılamadığında başlangıç sırasında kullanılabilir.
+
 ### <a name="configuration"></a>Yapılandırma
 
-Core 3.2 Preview 3 sürümüASP.NET itibariyle Blazor WebAssembly aşağıdakilerden yapılandırmayı destekler:
+ASP.NET Core 3.2 Preview 3 sürümü itibariyle[(geçerli sürüm 3.2 Önizleme 4),](xref:blazor/get-started)Blazor WebAssembly yapılandırma destekler:
 
 * *wwwroot/appsettings.json*
 * *wwwroot/appsettings adresinde n için. {ÇEVRE}.json*

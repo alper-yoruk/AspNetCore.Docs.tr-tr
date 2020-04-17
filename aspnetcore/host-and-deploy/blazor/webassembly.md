@@ -5,17 +5,17 @@ description: ASP.NET Core, Content Blazor Delivery Networks (CDN), dosya sunucul
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/06/2020
+ms.date: 04/16/2020
 no-loc:
 - Blazor
 - SignalR
 uid: host-and-deploy/blazor/webassembly
-ms.openlocfilehash: f364d94085d175fde5596c222ef21852c0106ec1
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: f3508144f1e472ee906a35e427fc57f536008ab6
+ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80751125"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81488864"
 ---
 # <a name="host-and-deploy-aspnet-core-opno-locblazor-webassembly"></a>Core Blazor WebAssemblyASP.NET ana bilgisayar ve dağıtma
 
@@ -25,13 +25,17 @@ Luke [Latham](https://github.com/guardrex)tarafından , [Rainer Stropek](https:/
 
 [ Blazor WebAssembly barındırma modeli](xref:blazor/hosting-models#blazor-webassembly)ile:
 
-* Uygulama, Blazor bağımlılıkları ve .NET çalışma süresi tarayıcıya indirilir.
+* Uygulama, Blazor bağımlılıkları ve .NET çalışma süresi tarayıcıya paralel olarak indirilir.
 * Uygulama doğrudan tarayıcı UI iş parçacığı üzerinde yürütülür.
 
 Aşağıdaki dağıtım stratejileri desteklenir:
 
 * Uygulama, Blazor ASP.NET Core uygulaması tarafından sunulmaktadır. Bu strateji, [ASP.NET Core bölümüyle Barındırılan dağıtımda](#hosted-deployment-with-aspnet-core) ele alınmıştır.
 * Uygulama, Blazor .NET'in uygulamaya hizmet vermek için kullanılmadığı statik bir Blazor barındırma web sunucusuna veya hizmetine yerleştirilir. Bu strateji, Bir [Standalone deployment](#standalone-deployment) Blazor WebAssembly uygulamasını IIS alt uygulaması olarak barındırma hakkında bilgi içeren Bağımsız dağıtım bölümünde ele alınmıştır.
+
+## <a name="brotli-precompression"></a>Brotli ön kompresyon
+
+Bir Blazor WebAssembly uygulaması yayımlandığında, çıktı, uygulama boyutunu küçültmek ve çalışma zamanı sıkıştırma gereksinimini ortadan kaldırmak için [brotli sıkıştırma algoritması](https://tools.ietf.org/html/rfc7932) kullanılarak en üst düzeyde sıkıştırılır.
 
 ## <a name="rewrite-urls-for-correct-routing"></a>Doğru yönlendirme için URL'leri yeniden yazma
 

@@ -7,18 +7,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/17/2020
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: b528a33fa52bfe56faaf9f3ff8c7e43db0d4e184
-ms.sourcegitcommit: f29a12486313e38e0163a643d8a97c8cecc7e871
+ms.openlocfilehash: 46a56c278e889778e58a1fbb41ec217aaf023b13
+ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81384031"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81488780"
 ---
 # <a name="net-generic-host"></a>.NET Genel Ana Bilgisayar
 
 ::: moniker range=">= aspnetcore-3.0 <= aspnetcore-3.1"
 
-Core şablonlarının ASP.NET .NET Core Genel<xref:Microsoft.Extensions.Hosting.HostBuilder>Ana Bilgisayar ( ) oluşturur.
+ASP.NET Core şablonları bir .NET Core <xref:Microsoft.Extensions.Hosting.HostBuilder>Genel Ana Bilgisayar oluşturur.
 
 ## <a name="host-definition"></a>Ana bilgisayar tanımı
 
@@ -40,7 +40,7 @@ Ana bilgisayar genellikle `Program` sınıfta kodtarafından yapılandırılır,
 * Oluşturucu `CreateHostBuilder` nesne oluşturmak ve yapılandırmak için bir yöntem çağırır.
 * Oluşturucu nesneüzerinde aramalar `Build` ve `Run` yöntemler.
 
-ASP.NET Core web şablonları bir ana bilgisayar oluşturmak için aşağıdaki kodu oluşturur:
+ASP.NET Core web şablonları, Genel Ana Bilgisayar oluşturmak için aşağıdaki kodu oluşturur:
 
 ```csharp
 public class Program
@@ -59,7 +59,7 @@ public class Program
 }
 ```
 
-Aşağıdaki kod, DI kapsayıcısına eklenen `IHostedService` bir uygulamayla HTTP dışı bir iş yükü oluşturur.
+Aşağıdaki kod, HTTP olmayan iş yükünü kullanarak genel ana bilgisayar oluşturur. Uygulama `IHostedService` DI kapsayıcısına eklenir:
 
 ```csharp
 public class Program
@@ -88,6 +88,8 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
             webBuilder.UseStartup<Startup>();
         });
 ```
+
+Önceki kod ASP.NET Core şablonları tarafından oluşturulur.
 
 Uygulama Entity Framework Core kullanıyorsa, yöntemin adını `CreateHostBuilder` veya imzasını değiştirmeyin. [Entity Framework Core araçları,](/ef/core/miscellaneous/cli/) `CreateHostBuilder` uygulamayı çalıştırmadan ana bilgisayarı yapılandıran bir yöntem bulmayı bekler. Daha fazla bilgi için tasarım [zamanı DbContext Oluşturma bölümüne](/ef/core/miscellaneous/cli/dbcontext-creation)bakın.
 

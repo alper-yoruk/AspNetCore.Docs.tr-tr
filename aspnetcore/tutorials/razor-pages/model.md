@@ -5,12 +5,12 @@ description: Entity Framework Core (EF Core) kullanarak bir veritabanında film 
 ms.author: riande
 ms.date: 12/05/2019
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: f6dbac81b4efceb30c379ab06dd715005d879228
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 7f7c2a09b74e6007ee3ea9c038398bac54988186
+ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78658937"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81488877"
 ---
 # <a name="add-a-model-to-a-razor-pages-app-in-aspnet-core"></a>ASP.NET Core'daki Razor Pages uygulamasına model ekleme
 
@@ -20,7 +20,7 @@ Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 <!-- In the next update on the CLI version, let the scaffolder do the same work the VS driven scaffolder does. That is, create the DB context, etc -->
 
-Bu bölümde, bir çapraz platform [SQLite veritabanında](https://www.sqlite.org/index.html)film yönetmek için sınıflar eklenir. ASP.NET Core şablonundan oluşturulan uygulamalar bir SQLite veritabanı kullanır. Uygulamanın model sınıfları, veritabanıyla çalışmak için [Entity Framework Core (EF Core)](/ef/core) [(SQLite EF Core Database Provider)](/ef/core/providers/sqlite)ile birlikte kullanılır. EF Core, veri erişimini kolaylaştıran bir nesne ilişkisieşleme (ORM) çerçevesidir.
+Bu bölümde, filmleri yönetmek için sınıflar eklenir. Uygulamanın model sınıfları veritabanıyla çalışmak için [Entity Framework Core'u (EF Core)](/ef/core) kullanır. EF Core, veri erişimini kolaylaştıran bir nesne ilişkisisel mapper (O/RM) dir.
 
 MODEL sınıfları POCO sınıfları ("düz eski CLR nesnelerinden") olarak bilinir, çünkü EF Core'a herhangi bir bağımlılıkları yoktur. Veritabanında depolanan verilerin özelliklerini tanımlarlar.
 
@@ -84,7 +84,7 @@ Varlık **Çerçevesi (CRUD)** iletişim kutusunu kullanarak Jilet Sayfaları Ek
 
 * Model **sınıfında** açılan film **(RazorPagesMovie.Models) seçeneğini belirleyin.**
 * Veri **bağlamı sınıf** satırında(artı) işaretini **+** seçin ve RazorPagesMovie'den oluşturulan adı değiştirin. **Modeller**. RazorPagesMovieContext için RazorPagesMovieMovie. **Veri**. RazorPagesMovieContext. [Bu değişiklik](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) gerekli değildir. Doğru ad alanı yla veritabanı bağlam sınıfını oluşturur.
-* **Ekle'yi**seçin.
+* **Add (Ekle)** seçeneğini belirleyin.
 
 ![Önceki talimatlardan görüntü.](model/_static/3/arp.png)
 
@@ -138,7 +138,7 @@ Varlık **Çerçevesi (CRUD)** iletişim kutusunu kullanarak Jilet Sayfaları Ek
 
 * Model **sınıfında** film **(RazorPagesMovie.Models)** aşağı, seçin veya yazın.
 * Veri **bağlamında sınıf** satırında, yeni sınıfın adını yazın, RazorPagesMovie. **Veri**. RazorPagesMovieContext. [Bu değişiklik](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) gerekli değildir. Doğru ad alanı yla veritabanı bağlam sınıfını oluşturur.
-* **Ekle'yi**seçin.
+* **Add (Ekle)** seçeneğini belirleyin.
 
 ![Önceki talimatlardan görüntü.](model/_static/arpMac.png)
 
@@ -369,7 +369,7 @@ to use Data, it should not use models. That will make the namespace the same for
 
 * Model **sınıfında** açılan film **(RazorPagesMovie.Models) seçeneğini belirleyin.**
 * Veri **bağlamında sınıf** satırında(artı) işaretini **+** seçin ve oluşturulan **razorPagesMovie.Models.RazorPagesMovieContext**adını kabul edin.
-* **Ekle'yi**seçin.
+* **Add (Ekle)** seçeneğini belirleyin.
 
 ![Önceki talimatlardan görüntü.](model/_static/arp.png)
 
@@ -415,7 +415,7 @@ Varlık **Çerçevesi (CRUD)** iletişim kutusunu kullanarak Jilet Sayfaları Ek
 
 * Model **sınıfında** aşağı açılan, **Film**seçin veya yazın.
 * Veri **bağlamı sınıf** satırında, **RazorPagesMovieContext'ı** yazın, bu da doğru ad alanına sahip yeni bir db bağlam sınıfı oluşturur. Bu durumda **RazorPagesMovie.Models.RazorPagesMovieContext**olacak .
-* **Ekle'yi**seçin.
+* **Add (Ekle)** seçeneğini belirleyin.
 
 ![Önceki talimatlardan görüntü.](model/_static/arpMac.png)
 

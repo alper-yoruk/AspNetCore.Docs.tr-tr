@@ -1,21 +1,21 @@
 ---
-title: ASP.NET Core'dan web API'sını arayınBlazor
+title: Core Blazor WebAssembly'den web APIASP.NET
 author: guardrex
-description: JSON yardımcılarını kullanarak bir Blazor uygulamadan, kökenler arası kaynak paylaşımı (CORS) istekleri ni içeren bir web API'sini nasıl çağırabilirsiniz öğrenin.
+description: JSON yardımcılarını kullanarak bir Blazor WebAssembly uygulamasından ,orijinler arası kaynak paylaşımı (CORS) isteklerini oluşturma dahil olmak üzere web API'sını nasıl arayacağınızı öğrenin.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/22/2020
+ms.date: 04/16/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: e6996f0e6731b05038d0a9329152b8afd5f6796d
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 2f2d4150f4fa1e7f47310f2a88b816f445cd1d3a
+ms.sourcegitcommit: 49c91ad4b69f4f8032394cbf2d5ae1b19a7f863b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78660148"
+ms.lasthandoff: 04/17/2020
+ms.locfileid: "81544862"
 ---
 # <a name="call-a-web-api-from-aspnet-core-opno-locblazor"></a>ASP.NET Core'dan web API'sını arayınBlazor
 
@@ -36,9 +36,19 @@ Sunucu uygulamaları genellikle kullanılarak <xref:System.Net.Http.HttpClient> 
 
 ## <a name="packages"></a>Paketler
 
-Referans *deneysel* [Microsoft.AspNetCore.Blazor. Proje](https://www.nuget.org/packages/Microsoft.AspNetCore.Blazor.HttpClient/) dosyasında httpClient NuGet paketi. `Microsoft.AspNetCore.Blazor.HttpClient`ve `HttpClient` [System.Text.Json](https://www.nuget.org/packages/System.Text.Json/)dayanmaktadır.
+Proje dosyasındaki [System.Net.Http.Json](https://www.nuget.org/packages/System.Net.Http.Json/) NuGet paketine başvurun.
 
-Kararlı bir API kullanmak için, [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/)/[Json.NET](https://www.newtonsoft.com/json/help/html/Introduction.htm)kullanan [Microsoft.AspNet.WebApi.Client](https://www.nuget.org/packages/Microsoft.AspNet.WebApi.Client/) paketini kullanın. Kararlı API'yi `Microsoft.AspNet.WebApi.Client` içinde kullanmak, deneysel `Microsoft.AspNetCore.Blazor.HttpClient` pakete özgü olan bu konuda açıklanan JSON yardımcılarını sağlamaz.
+## <a name="add-the-httpclient-service"></a>HttpClient hizmetini ekleme
+
+In, `Program.Main`zaten `HttpClient` yoksa bir hizmet ekleyin:
+
+```csharp
+builder.Services.AddSingleton(
+    new HttpClient
+    {
+        BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+    });
+```
 
 ## <a name="httpclient-and-json-helpers"></a>Httpİsteve JSON yardımcıları
 
@@ -72,7 +82,7 @@ private class TodoItem
 
 JSON yardımcı yöntemleri bir URI'ye (aşağıdaki örneklerdeki bir web API) istek gönderir ve yanıtı işlemeye
 
-* `GetJsonAsync`&ndash; Bir HTTP GET isteği gönderir ve bir nesne oluşturmak için JSON yanıt gövdesini ayrıştırır.
+* `GetFromJsonAsync`&ndash; Bir HTTP GET isteği gönderir ve bir nesne oluşturmak için JSON yanıt gövdesini ayrıştırır.
 
   Aşağıdaki kodda, `_todoItems` bileşen tarafından görüntülenir. Yöntem, `GetTodoItems` bileşen işleme tamamlandığında tetiklenir ([OnInitializedAsync).](xref:blazor/lifecycle#component-initialization-methods) Tam bir örnek için örnek uygulamaya bakın.
 
@@ -84,11 +94,11 @@ JSON yardımcı yöntemleri bir URI'ye (aşağıdaki örneklerdeki bir web API) 
       private TodoItem[] _todoItems;
 
       protected override async Task OnInitializedAsync() => 
-          _todoItems = await Http.GetJsonAsync<TodoItem[]>("api/TodoItems");
+          _todoItems = await Http.GetFromJsonAsync<TodoItem[]>("api/TodoItems");
   }
   ```
 
-* `PostJsonAsync`&ndash; JSON kodlanmış içeriği içeren bir HTTP POST isteği gönderir ve bir nesne oluşturmak için JSON yanıt gövdesini ayrıştırır.
+* `PostAsJsonAsync`&ndash; JSON kodlanmış içeriği içeren bir HTTP POST isteği gönderir ve bir nesne oluşturmak için JSON yanıt gövdesini ayrıştırır.
 
   Aşağıdaki kodda, `_newItemName` bileşenin bağlı bir öğesi tarafından sağlanır. Yöntem `AddItem` bir `<button>` öğe seçilerek tetiklenir. Tam bir örnek için örnek uygulamaya bakın.
 
@@ -105,12 +115,14 @@ JSON yardımcı yöntemleri bir URI'ye (aşağıdaki örneklerdeki bir web API) 
       private async Task AddItem()
       {
           var addItem = new TodoItem { Name = _newItemName, IsComplete = false };
-          await Http.PostJsonAsync("api/TodoItems", addItem);
+          await Http.PostAsJsonAsync("api/TodoItems", addItem);
       }
   }
   ```
+  
+  `PostAsJsonAsync` Bir <xref:System.Net.Http.HttpResponseMessage>.
 
-* `PutJsonAsync`&ndash; JSON kodlanmış içerik de dahil olmak üzere bir HTTP PUT isteği gönderir.
+* `PutAsJsonAsync`&ndash; JSON kodlanmış içerik de dahil olmak üzere bir HTTP PUT isteği gönderir.
 
   Aşağıdaki kodda, `_editItem` bileşenin `IsCompleted` bağlı elemanları tarafından `Name` sağlanan değerler. Öğe UI'nin `Id` başka bir bölümünde seçildiğinde ve `EditItem` çağrıldığında maddenin ki ayarlanır. Yöntem `SaveItem` Kaydet `<button>` öğesi seçilerek tetiklenir. Tam bir örnek için örnek uygulamaya bakın.
 
@@ -133,9 +145,11 @@ JSON yardımcı yöntemleri bir URI'ye (aşağıdaki örneklerdeki bir web API) 
       }
 
       private async Task SaveItem() =>
-          await Http.PutJsonAsync($"api/TodoItems/{_editItem.Id}, _editItem);
+          await Http.PutAsJsonAsync($"api/TodoItems/{_editItem.Id}, _editItem);
   }
   ```
+  
+  `PutAsJsonAsync` Bir <xref:System.Net.Http.HttpResponseMessage>.
 
 <xref:System.Net.Http>HTTP isteklerini göndermek ve HTTP yanıtları almak için ek uzatma yöntemleri içerir. [HttpClient.DeleteAsync](xref:System.Net.Http.HttpClient.DeleteAsync*) bir WEB API'ya HTTP DELETE isteği göndermek için kullanılır.
 

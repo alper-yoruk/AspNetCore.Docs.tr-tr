@@ -5,17 +5,17 @@ description: Uygulamaları nasıl hata Blazor ayıklamakonusunda öğrenin.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/26/2020
+ms.date: 04/16/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: eaa67d63f6d15249885d78d3de197ae53e73f072
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 8b63444ba5c8cd45e64e722c8978ba4e6d90af36
+ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80381868"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81488754"
 ---
 # <a name="debug-aspnet-core-opno-locblazor-webassembly"></a>Hata Ayıklama Blazor ASP.NET Çekirdek WebAssembly
 
@@ -55,7 +55,7 @@ Hata ayıklama aşağıdaki tarayıcılardan birini gerektirir:
 
 ## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Visual Studio ve Visual Studio Code için hata ayıklama etkinleştirme
 
-Hata ayıklama, Core 3.2 Preview 3 veya daha sonraki Blazor WebAssembly proje şablonu ASP.NET kullanılarak oluşturulan yeni projeler için otomatik olarak etkinleştirilir.
+Hata ayıklama, ASP.NET Core 3.2 Preview 3 veya daha sonraki Blazor WebAssembly proje şablonu kullanılarak oluşturulan yeni projeler için otomatik olarak[etkinleştirilir (geçerli sürüm 3,2 Önizleme 4'tür).](xref:blazor/get-started)
 
 Varolan Blazor bir WebAssembly uygulaması için hata ayıklamayı etkinleştirmek için, başlangıç projesindeki `inspectUri` *launchSettings.json* dosyasını her başlatma profiline aşağıdaki özelliği içerecek şekilde güncelleştirin:
 

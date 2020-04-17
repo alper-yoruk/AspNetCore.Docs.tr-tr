@@ -5,17 +5,17 @@ description: WebAssembly ile Blazor ASP.NET Core SignalR kullanan bir sohbet uyg
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/26/2020
+ms.date: 04/16/2020
 no-loc:
 - Blazor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: c4843dc282e1978b39738e206ecc79ded87fcff9
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 798068c83e16070d3279c88c44af0cd96d182fe2
+ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80306566"
+ms.lasthandoff: 04/16/2020
+ms.locfileid: "81488890"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Blazor WebAssembly ile ASP.NET Core SignalR kullanın
 
@@ -61,7 +61,7 @@ Bu eğitimin sonunda, çalışan bir sohbet uygulamanız olacak.
 Visual Studio sürüm 16.6 Preview 2 veya sonraki sürümlerini kullanmadığınızda [Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) şablonu'nu yükleyin. [Microsoft.AspNetCore.Components.WebAssembly.Templates](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Templates/) paketi, Blazor WebAssembly önizlemedeyken bir önizleme sürümüne sahiptir. Komut kabuğunda aşağıdaki komutu uygulayın:
 
 ```dotnetcli
-dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview3.20168.3
+dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview4.20210.8
 ```
 
 Araç seçiminiz için kılavuzu izleyin:
@@ -72,13 +72,13 @@ Araç seçiminiz için kılavuzu izleyin:
 
 1. **Blazor Uygulamasını** seçin ve **İleri'yi**seçin.
 
-1. **Proje adı** alanına "BlazorSignalRApp" yazın. **Konum** girişinin doğru olduğunu onaylayın veya proje için bir konum sağlayın. **Oluştur'u**seçin.
+1. **Proje adı** alanına "BlazorSignalRApp" yazın. **Konum** girişinin doğru olduğunu onaylayın veya proje için bir konum sağlayın. **Oluştur**’u seçin.
 
 1. **Blazor WebAssembly App** şablonu seçin.
 
 1. **Advanced**altında, **ASP.NET Core barındırılan** onay kutusunu seçin.
 
-1. **Oluştur'u**seçin.
+1. **Oluştur**’u seçin.
 
 > [!NOTE]
 > Visual Studio'nun yeni bir sürümünü yükselttiyseniz veya yüklediyseniz ve Blazor WebAssembly şablonu VS UI'de görünmüyorsa, şablonu daha önce gösterilen komutu `dotnet new` kullanarak yeniden yükleyin.
