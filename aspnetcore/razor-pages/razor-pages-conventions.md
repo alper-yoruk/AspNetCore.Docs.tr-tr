@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 uid: razor-pages/razor-pages-conventions
-ms.openlocfilehash: b42d63c8f1b5b48fcfc771923171e1105d3f0a29
-ms.sourcegitcommit: 5af16166977da598953f82da3ed3b7712d38f6cb
+ms.openlocfilehash: 6124554d5f9859179edfb5c545cf0b082369c0c9
+ms.sourcegitcommit: 3d07e21868dafc503530ecae2cfa18a7490b58a6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81277320"
+ms.lasthandoff: 04/18/2020
+ms.locfileid: "81642729"
 ---
 # <a name="razor-pages-route-and-app-conventions-in-aspnet-core"></a>ASP.NET Core'da Razor Pages rota ve uygulama kuralları
 
@@ -24,13 +24,13 @@ Tek tek sayfalar için özel sayfa rotalarını yapılandırmanız gerektiğinde
 
 Bir sayfa rotası belirtmek için, rota bölümleri eklemek veya bir rotaya `@page` parametreler eklemek için sayfanın yönergesini kullanın. Daha fazla bilgi için [özel yollara](xref:razor-pages/index#custom-routes)bakın.
 
-Rota bölümleri veya parametre adları olarak kullanılameyecek ayrılmış sözcükler vardır. Daha fazla bilgi için Bkz. [Yönlendirme: Ayrılmış yönlendirme adları.](xref:fundamentals/routing#reserved-routing-names)
+Rota bölümleri veya parametre adları olarak kullanılameyecek ayrılmış sözcükler vardır. Daha fazla bilgi için Bkz. [Yönlendirme: Ayrılmış yönlendirme adları.](xref:mvc/controllers/routing#reserved-routing-names)
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/) ( nasıl[indirilir](xref:index#how-to-download-a-sample))
 
 | Senaryo | Örnek gösterir ... |
 | -------- | --------------------------- |
-| [Model kuralları](#model-conventions)<br><br>Sözleşmeler.Ekle<ul><li>IPageRouteModelConvention</li><li>IPageApplicationModelConvention</li><li>IPageHandlerModelConvention</li></ul> | Uygulamanın sayfalarına bir rota şablonu ve üstbilgi ekleyin. |
+| [Model kurallar](#model-conventions)<br><br>Sözleşmeler.Ekle<ul><li>IPageRouteModelConvention</li><li>IPageApplicationModelConvention</li><li>IPageHandlerModelConvention</li></ul> | Uygulamanın sayfalarına bir rota şablonu ve üstbilgi ekleyin. |
 | [Sayfa rotası eylem kuralları](#page-route-action-conventions)<ul><li>AddFolderRouteModelConvention</li><li>AddPageRouteModelConvention</li><li>AddPageRoute</li></ul> | Bir klasördeki sayfalara ve tek bir sayfaya bir rota şablonu ekleyin. |
 | [Sayfa modeli eylem kuralları](#page-model-action-conventions)<ul><li>AddFolderApplicationModelConvention</li><li>AddPageApplicationModelConvention</li><li>ConfigureFilter (filtre sınıfı, lambda ifadesi veya filtre fabrikası)</li></ul> | Klasördeki sayfalara üstbilgi ekleyin, tek bir sayfaya üstbilgi ekleyin ve uygulamanın sayfalarına üstbilgi eklemek için bir [filtre fabrikasını](xref:mvc/controllers/filters#ifilterfactory) yapılandırın. |
 
@@ -79,7 +79,7 @@ Mümkünse, kurulan bir rota işleme siparişine bağlı olarak kaçının. Gene
 
 Razor Pages yönlendirme ve MVC denetleyici yönlendirme bir uygulamayı paylaşır. MVC konularında rota sırası ile ilgili bilgiler [Yönlendirme'de eylemleri denetleyiciye sahiptir: Öznitelik yollarını sıralama.](xref:mvc/controllers/routing#ordering-attribute-routes)
 
-## <a name="model-conventions"></a>Model kuralları
+## <a name="model-conventions"></a>Model kurallar
 
 Razor Pages <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageConvention> için geçerli [model kuralları](xref:mvc/controllers/application-model#conventions) eklemek için bir temsilci ekleyin.
 
@@ -313,7 +313,7 @@ Rota bölümleri veya parametre adları olarak kullanılameyecek ayrılmış sö
 
 | Senaryo | Örnek gösterir ... |
 | -------- | --------------------------- |
-| [Model kuralları](#model-conventions)<br><br>Sözleşmeler.Ekle<ul><li>IPageRouteModelConvention</li><li>IPageApplicationModelConvention</li><li>IPageHandlerModelConvention</li></ul> | Uygulamanın sayfalarına bir rota şablonu ve üstbilgi ekleyin. |
+| [Model kurallar](#model-conventions)<br><br>Sözleşmeler.Ekle<ul><li>IPageRouteModelConvention</li><li>IPageApplicationModelConvention</li><li>IPageHandlerModelConvention</li></ul> | Uygulamanın sayfalarına bir rota şablonu ve üstbilgi ekleyin. |
 | [Sayfa rotası eylem kuralları](#page-route-action-conventions)<ul><li>AddFolderRouteModelConvention</li><li>AddPageRouteModelConvention</li><li>AddPageRoute</li></ul> | Bir klasördeki sayfalara ve tek bir sayfaya bir rota şablonu ekleyin. |
 | [Sayfa modeli eylem kuralları](#page-model-action-conventions)<ul><li>AddFolderApplicationModelConvention</li><li>AddPageApplicationModelConvention</li><li>ConfigureFilter (filtre sınıfı, lambda ifadesi veya filtre fabrikası)</li></ul> | Klasördeki sayfalara üstbilgi ekleyin, tek bir sayfaya üstbilgi ekleyin ve uygulamanın sayfalarına üstbilgi eklemek için bir [filtre fabrikasını](xref:mvc/controllers/filters#ifilterfactory) yapılandırın. |
 
@@ -362,7 +362,7 @@ Mümkünse, kurulan bir rota işleme siparişine bağlı olarak kaçının. Gene
 
 Razor Pages yönlendirme ve MVC denetleyici yönlendirme bir uygulamayı paylaşır. MVC konularında rota sırası ile ilgili bilgiler [Yönlendirme'de eylemleri denetleyiciye sahiptir: Öznitelik yollarını sıralama.](xref:mvc/controllers/routing#ordering-attribute-routes)
 
-## <a name="model-conventions"></a>Model kuralları
+## <a name="model-conventions"></a>Model kurallar
 
 Razor Pages <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageConvention> için geçerli [model kuralları](xref:mvc/controllers/application-model#conventions) eklemek için bir temsilci ekleyin.
 
@@ -603,7 +603,7 @@ Rota bölümleri veya parametre adları olarak kullanılameyecek ayrılmış sö
 
 | Senaryo | Örnek gösterir ... |
 | -------- | --------------------------- |
-| [Model kuralları](#model-conventions)<br><br>Sözleşmeler.Ekle<ul><li>IPageRouteModelConvention</li><li>IPageApplicationModelConvention</li><li>IPageHandlerModelConvention</li></ul> | Uygulamanın sayfalarına bir rota şablonu ve üstbilgi ekleyin. |
+| [Model kurallar](#model-conventions)<br><br>Sözleşmeler.Ekle<ul><li>IPageRouteModelConvention</li><li>IPageApplicationModelConvention</li><li>IPageHandlerModelConvention</li></ul> | Uygulamanın sayfalarına bir rota şablonu ve üstbilgi ekleyin. |
 | [Sayfa rotası eylem kuralları](#page-route-action-conventions)<ul><li>AddFolderRouteModelConvention</li><li>AddPageRouteModelConvention</li><li>AddPageRoute</li></ul> | Bir klasördeki sayfalara ve tek bir sayfaya bir rota şablonu ekleyin. |
 | [Sayfa modeli eylem kuralları](#page-model-action-conventions)<ul><li>AddFolderApplicationModelConvention</li><li>AddPageApplicationModelConvention</li><li>ConfigureFilter (filtre sınıfı, lambda ifadesi veya filtre fabrikası)</li></ul> | Klasördeki sayfalara üstbilgi ekleyin, tek bir sayfaya üstbilgi ekleyin ve uygulamanın sayfalarına üstbilgi eklemek için bir [filtre fabrikasını](xref:mvc/controllers/filters#ifilterfactory) yapılandırın. |
 
@@ -652,7 +652,7 @@ Mümkünse, kurulan bir rota işleme siparişine bağlı olarak kaçının. Gene
 
 Razor Pages yönlendirme ve MVC denetleyici yönlendirme bir uygulamayı paylaşır. MVC konularında rota sırası ile ilgili bilgiler [Yönlendirme'de eylemleri denetleyiciye sahiptir: Öznitelik yollarını sıralama.](xref:mvc/controllers/routing#ordering-attribute-routes)
 
-## <a name="model-conventions"></a>Model kuralları
+## <a name="model-conventions"></a>Model kurallar
 
 Razor Pages <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.IPageConvention> için geçerli [model kuralları](xref:mvc/controllers/application-model#conventions) eklemek için bir temsilci ekleyin.
 

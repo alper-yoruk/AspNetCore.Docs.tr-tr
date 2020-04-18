@@ -1,21 +1,25 @@
-`FetchData` bileşen şunları gösterir:
+Bileşen `FetchData` nasıl yapılacağını gösterir:
 
-* Erişim belirteci sağlayın.
-* *Sunucu* uygulamasında korumalı bir kaynak API 'si çağırmak için erişim belirtecini kullanın.
+* Erişim jetonu sağlama.
+* *Sunucu* uygulamasında korumalı kaynak API'sini aramak için erişim belirteci'ni kullanın.
 
-`@attribute [Authorize]` yönergesi, kullanıcının bu bileşeni ziyaret edebilmek için yetkilendirilmiş olması gereken Blazor WebAssembly yetkilendirme sistemine işaret ediyor. *İstemci* uygulamasındaki özniteliğin varlığı, sunucudaki API 'nin doğru kimlik bilgileri olmadan çağrılmasına engel olmaz. *Sunucu* uygulamasının aynı zamanda uygun uç noktalar üzerinde `[Authorize]` kullanması gerekir ve bunları doğru şekilde korur.
+Yönerge, `@attribute [Authorize]` Blazor WebAssembly yetkilendirme sistemine kullanıcının bu bileşeni ziyaret etmek için yetkilendirilmesi gerektiğini belirtir. *Müşteri* uygulamasında özniteliğin bulunması, sunucudaki API'nin uygun kimlik bilgileri olmadan çağrılmasını engellemez. *Sunucu* uygulaması da `[Authorize]` doğru korumak için uygun uç noktalarda kullanmanız gerekir.
 
-`AuthenticationService.RequestAccessToken();`, API 'yi çağırmak için isteğe eklenebilen bir erişim belirteci isteme işlemini gerçekleştirir. Belirteç önbelleğe alınmışsa veya hizmet Kullanıcı etkileşimi olmadan yeni bir erişim belirteci sağlayabiliyor ise, belirteç isteği başarılı olur. Aksi takdirde, belirteç isteği başarısız olur.
+`AuthenticationService.RequestAccessToken();`API'yi arama isteğine eklenebilecek bir erişim belirteci istemeye özen diner. Belirteç önbelleğe alınmışsa veya hizmet kullanıcı etkileşimi olmadan yeni bir erişim belirteci sağlanabilirse, belirteç isteği başarılı olur. Aksi takdirde, belirteç isteği başarısız olur.
 
-İsteğe dahil edilecek gerçek belirteci almak için, uygulamanın `tokenResult.TryGetToken(out var token)`çağırarak isteğin başarılı olduğunu denetlemesi gerekir. 
+İstekte yer alacak gerçek belirteci elde etmek için, uygulamanın isteğin `tokenResult.TryGetToken(out var token)`başarılı olup olmadığını kontrol etmesi gerekir. 
 
-İstek başarılı olduysa, belirteç değişkeni erişim belirteciyle doldurulur. Belirtecin `Value` özelliği, `Authorization` istek başlığına dahil etmek için sabit dizeyi gösterir.
+İstek başarılı olduysa, belirteç değişkeni erişim belirteciyle doldurulur. Belirteç `Value` özelliği, istek üstbilgisine dahil edilmesi `Authorization` gereken gerçek dizeyi ortaya çıkarır.
 
-Belirteç Kullanıcı etkileşimi olmadan sağlanamadığından istek başarısız olduysa, belirteç sonucu bir yeniden yönlendirme URL 'SI içerir. Bu URL 'ye gidildiğinde, Kullanıcı oturum açma sayfasına geçer ve başarılı bir kimlik doğrulamasından sonra geçerli sayfaya geri dönün.
+Belirteç kullanıcı etkileşimi olmadan sağlanamadığı için istek başarısız olduysa, belirteç sonucu yeniden yönlendirme URL'si içerir. Bu URL'de gezinmek, kullanıcıyı oturum açma sayfasına ve başarılı bir kimlik doğrulamadan sonra geçerli sayfaya geri götürür.
 
 ```razor
 @page "/fetchdata"
-...
+@using Microsoft.AspNetCore.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject IAccessTokenProvider AuthenticationService
+@inject NavigationManager Navigation
+@using {APPLICATION NAMESPACE}.Shared
 @attribute [Authorize]
 
 ...
@@ -46,4 +50,4 @@ Belirteç Kullanıcı etkileşimi olmadan sağlanamadığından istek başarıs�
 }
 ```
 
-Daha fazla bilgi için bkz. [bir kimlik doğrulama işleminden önce uygulama durumunu kaydetme](xref:security/blazor/webassembly/additional-scenarios#save-app-state-before-an-authentication-operation).
+Daha fazla bilgi için, [kimlik doğrulama işleminden önce uygulama durumunu kaydet'e](xref:security/blazor/webassembly/additional-scenarios#save-app-state-before-an-authentication-operation)bakın.

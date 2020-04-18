@@ -5,16 +5,27 @@ description: Windows Server Internet Bilgi Hizmetleri'nde (IIS) ASP.NET Core uyg
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/07/2020
+ms.date: 04/17/2020
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 819c53f945c1e5bb2cedcef8fc39d4c8761e4549
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: 77f07ba89de4449c6d13006a5fd61499cb5cdfc0
+ms.sourcegitcommit: 3d07e21868dafc503530ecae2cfa18a7490b58a6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80977034"
+ms.lasthandoff: 04/18/2020
+ms.locfileid: "81642746"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>IIS ile Windows'da Ana Bilgisayar ASP.NET Core
+
+<!-- 
+
+    NOTE FOR 5.0
+    
+    When making the 5.0 version of this topic, remove the Hosting Bundle
+    direct download section from the (new) <5.0 & >2.2 version and modify 
+    the text and heading for the *Earlier versions of the installer* 
+    section. See the 2.2 version for an example.
+    
+-->
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -250,9 +261,9 @@ Aşağıdaki bağlantıyı kullanarak yükleyiciindir:
 Yükleyicinin önceki bir sürümünü elde etmek için:
 
 1. [İndir .NET Çekirdek](https://dotnet.microsoft.com/download/dotnet-core) sayfasına gidin.
-1. İstenilen .NET Core sürümüne tıklayın.
+1. İstenilen .NET Core sürümünü seçin.
 1. Çalıştır **uygulamaları - Runtime** sütununda, istenen .NET Core çalışma zamanı sürümünün satırını bulun.
-1. Yükleyiciyi **Runtime & Hosting Paketi** bağlantısını kullanarak indirin.
+1. Yükleyiciyi Barındırma **Paketi** bağlantısını kullanarak indirin.
 
 > [!WARNING]
 > Bazı yükleyiciler, yaşam sürelerine (EOL) ulaşmış ve artık Microsoft tarafından desteklenmeyen sürüm sürümleri içerir. Daha fazla bilgi için [destek ilkesine](https://dotnet.microsoft.com/platform/support/policy/dotnet-core)bakın.
@@ -846,20 +857,12 @@ Web **Sunucusu (IIS)** sunucu rolünü etkinleştirin ve rol hizmetleri kurun.
 >
 > Barındırma Paketi .NET Core'un 64 bit (x64) sürümünü yükledikten sonra yüklenirse, SDK'lar eksik görünebilir[(No .NET Core SDK'lar algılandı).](xref:test/troubleshoot#no-net-core-sdks-were-detected) Sorunu çözmek için <xref:test/troubleshoot#missing-sdk-after-installing-the-net-core-hosting-bundle>bkz.
 
-### <a name="direct-download-current-version"></a>Doğrudan indirme (geçerli sürüm)
-
-Aşağıdaki bağlantıyı kullanarak yükleyiciindir:
-
-[Geçerli .NET Çekirdek Hosting Paketi yükleyici (doğrudan indir)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
-
-### <a name="earlier-versions-of-the-installer"></a>Yükleyicinin önceki sürümleri
-
-Yükleyicinin önceki bir sürümünü elde etmek için:
+### <a name="download"></a>İndirme
 
 1. [İndir .NET Çekirdek](https://dotnet.microsoft.com/download/dotnet-core) sayfasına gidin.
-1. İstenilen .NET Core sürümüne tıklayın.
+1. İstenilen .NET Core sürümünü seçin.
 1. Çalıştır **uygulamaları - Runtime** sütununda, istenen .NET Core çalışma zamanı sürümünün satırını bulun.
-1. Yükleyiciyi **Runtime & Hosting Paketi** bağlantısını kullanarak indirin.
+1. Yükleyiciyi Barındırma **Paketi** bağlantısını kullanarak indirin.
 
 > [!WARNING]
 > Bazı yükleyiciler, yaşam sürelerine (EOL) ulaşmış ve artık Microsoft tarafından desteklenmeyen sürüm sürümleri içerir. Daha fazla bilgi için [destek ilkesine](https://dotnet.microsoft.com/platform/support/policy/dotnet-core)bakın.
@@ -1422,20 +1425,12 @@ Web **Sunucusu (IIS)** sunucu rolünü etkinleştirin ve rol hizmetleri kurun.
 >
 > Barındırma Paketi .NET Core'un 64 bit (x64) sürümünü yükledikten sonra yüklenirse, SDK'lar eksik görünebilir[(No .NET Core SDK'lar algılandı).](xref:test/troubleshoot#no-net-core-sdks-were-detected) Sorunu çözmek için <xref:test/troubleshoot#missing-sdk-after-installing-the-net-core-hosting-bundle>bkz.
 
-### <a name="direct-download-current-version"></a>Doğrudan indirme (geçerli sürüm)
-
-Aşağıdaki bağlantıyı kullanarak yükleyiciindir:
-
-[Geçerli .NET Çekirdek Hosting Paketi yükleyici (doğrudan indir)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
-
-### <a name="earlier-versions-of-the-installer"></a>Yükleyicinin önceki sürümleri
-
-Yükleyicinin önceki bir sürümünü elde etmek için:
+### <a name="download"></a>İndirme
 
 1. [İndir .NET Çekirdek](https://dotnet.microsoft.com/download/dotnet-core) sayfasına gidin.
-1. İstenilen .NET Core sürümüne tıklayın.
+1. İstenilen .NET Core sürümünü seçin.
 1. Çalıştır **uygulamaları - Runtime** sütununda, istenen .NET Core çalışma zamanı sürümünün satırını bulun.
-1. Yükleyiciyi **Runtime & Hosting Paketi** bağlantısını kullanarak indirin.
+1. Yükleyiciyi Barındırma **Paketi** bağlantısını kullanarak indirin.
 
 > [!WARNING]
 > Bazı yükleyiciler, yaşam sürelerine (EOL) ulaşmış ve artık Microsoft tarafından desteklenmeyen sürüm sürümleri içerir. Daha fazla bilgi için [destek ilkesine](https://dotnet.microsoft.com/platform/support/policy/dotnet-core)bakın.
