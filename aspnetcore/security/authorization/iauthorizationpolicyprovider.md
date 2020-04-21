@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/14/2019
 uid: security/authorization/iauthorizationpolicyprovider
-ms.openlocfilehash: 2a8b189cc9f17529a962a1f9642c7bb199d5781b
-ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
+ms.openlocfilehash: 2c67e25ff73bc8c3a5f3af4730a509b2385fc1cf
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81440928"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661780"
 ---
 # <a name="custom-authorization-policy-providers-using-iauthorizationpolicyprovider-in-aspnet-core"></a>ASP.NET Core'da IAuthorizationPolicyProvider kullanan Özel Yetkilendirme İlke Sağlayıcıları 
 
@@ -25,7 +25,7 @@ Genellikle [ilke tabanlı yetkilendirme](xref:security/authorization/policies)ku
 * Çok çeşitli ilkeler kullanmak (örneğin, farklı oda numaraları veya yaşlar için), böylece her bir yetkilendirme `AuthorizationOptions.AddPolicy` ilkesini bir çağrıyla eklemek mantıklı değildir.
 * Harici bir veri kaynağındaki (veritabanı gibi) bilgilere dayalı olarak çalışma zamanında ilkeler oluşturmak veya başka bir mekanizma aracılığıyla yetkilendirme gereksinimlerini dinamik olarak belirlemek.
 
-Örnek kodu [AspNetCore GitHub deposundan görüntüleyin](https://github.com/dotnet/AspNetCore) [veya indirin.](https://github.com/dotnet/AspNetCore/tree/release/2.2/src/Security/samples/CustomPolicyProvider) dotnet/AspNetCore depo ZIP dosyasını indirin. Dosyanın zip'ini açın. *src/Security/samples/CustomPolicyProvider* proje klasörüne gidin.
+Örnek kodu [AspNetCore GitHub deposundan görüntüleyin](https://github.com/dotnet/AspNetCore) [veya indirin.](https://github.com/dotnet/aspnetcore/tree/v3.1.3/src/Security/samples/CustomPolicyProvider) dotnet/AspNetCore depo ZIP dosyasını indirin. Dosyanın zip'ini açın. *src/Security/samples/CustomPolicyProvider* proje klasörüne gidin.
 
 ## <a name="customize-policy-retrieval"></a>İlke alma özelleştir
 
@@ -183,4 +183,4 @@ Bir özel ilkeler kullanmak `IAuthorizationPolicyProvider`için, şunları gerek
 services.AddSingleton<IAuthorizationPolicyProvider, MinimumAgePolicyProvider>();
 ```
 
-Tam bir `IAuthorizationPolicyProvider` özel örnek [dotnet / aspnetcore GitHub deposunda](https://github.com/dotnet/aspnetcore/tree/ea555458dc61e04314598c25b3ab8c56362a5123/src/Security/samples/CustomPolicyProvider)mevcuttur.
+Tam bir `IAuthorizationPolicyProvider` özel örnek [dotnet / aspnetcore GitHub deposunda](https://github.com/dotnet/aspnetcore/tree/v3.1.3/src/Security/samples/CustomPolicyProvider)mevcuttur.

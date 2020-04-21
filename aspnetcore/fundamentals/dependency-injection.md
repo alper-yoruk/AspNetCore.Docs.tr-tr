@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/26/2020
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 943ea30c2e4887638f69b6dcdb7e323bcee40240
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 4e990329b7ebcfc9cbbff8a3c9895604a22461d3
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80405975"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661690"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>ASP.NET Core'da bağımlılık ekleme
 
@@ -196,7 +196,7 @@ Geçici yaşam süresi<xref:Microsoft.Extensions.DependencyInjection.ServiceColl
 Kapsamlı yaşam<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped*>süresi hizmetleri ( ) istemci isteği (bağlantı) başına bir kez oluşturulur.
 
 > [!WARNING]
-> Bir ara yazılımda kapsamlı bir hizmet kullanırken, `Invoke` `InvokeAsync` hizmeti veya yöntemini enjekte edin. Yapıcı enjeksiyon yoluyla enjekte etmeyin çünkü hizmeti tek ton gibi olmaya zorlar. Daha fazla bilgi için bkz. <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
+> Bir ara yazılımda kapsamlı bir hizmet kullanırken, `Invoke` `InvokeAsync` hizmeti veya yöntemini enjekte edin. [Yapıcı enjeksiyon](xref:mvc/controllers/dependency-injection#constructor-injection) yoluyla enjekte etmeyin çünkü hizmeti tek ton gibi olmaya zorlar. Daha fazla bilgi için bkz. <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
 
 ### <a name="singleton"></a>Singleton
 
@@ -261,9 +261,9 @@ Hizmetler iki mekanizma yla çözülebilir:
 
 Oluşturucular bağımlılık enjeksiyonu tarafından sağlanmadı bağımsız değişkenleri kabul edebilir, ancak bağımsız değişkenler varsayılan değerleri atamalıdır.
 
-Hizmetler tarafından `IServiceProvider` çözüldüğünde `ActivatorUtilities`veya , yapıcı enjeksiyon bir *kamu* yapıcı gerektirir.
+Hizmetler `IServiceProvider` tarafından çözüldüğünde `ActivatorUtilities`veya , [yapıcı enjeksiyon](xref:mvc/controllers/dependency-injection#constructor-injection) bir *kamu* yapıcı gerektirir.
 
-Hizmetler tarafından `ActivatorUtilities`çözüldüğünde, yapıcı enjeksiyon sadece bir uygulanabilir yapıcı var gerektirir. Yapıcı aşırı yükler desteklenir, ancak bağımsız değişkenleri bağımlılık enjeksiyonu yla yerine getirilebilen yalnızca bir aşırı yükleme olabilir.
+Hizmetler tarafından `ActivatorUtilities`çözüldüğünde, [yapıcı enjeksiyon](xref:mvc/controllers/dependency-injection#constructor-injection) sadece bir uygulanabilir yapıcı var gerektirir. Yapıcı aşırı yükler desteklenir, ancak bağımsız değişkenleri bağımlılık enjeksiyonu yla yerine getirilebilen yalnızca bir aşırı yükleme olabilir.
 
 ## <a name="entity-framework-contexts"></a>Varlık Çerçevesi bağlamları
 
@@ -733,7 +733,7 @@ Geçici yaşam süresi<xref:Microsoft.Extensions.DependencyInjection.ServiceColl
 Kapsamlı yaşam<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped*>süresi hizmetleri ( ) istemci isteği (bağlantı) başına bir kez oluşturulur.
 
 > [!WARNING]
-> Bir ara yazılımda kapsamlı bir hizmet kullanırken, `Invoke` `InvokeAsync` hizmeti veya yöntemini enjekte edin. Yapıcı enjeksiyon yoluyla enjekte etmeyin çünkü hizmeti tek ton gibi olmaya zorlar. Daha fazla bilgi için bkz. <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
+> Bir ara yazılımda kapsamlı bir hizmet kullanırken, `Invoke` `InvokeAsync` hizmeti veya yöntemini enjekte edin. [Yapıcı enjeksiyon](xref:mvc/controllers/dependency-injection#constructor-injection) yoluyla enjekte etmeyin çünkü hizmeti tek ton gibi olmaya zorlar. Daha fazla bilgi için bkz. <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
 
 ### <a name="singleton"></a>Singleton
 
@@ -798,9 +798,9 @@ Hizmetler iki mekanizma yla çözülebilir:
 
 Oluşturucular bağımlılık enjeksiyonu tarafından sağlanmadı bağımsız değişkenleri kabul edebilir, ancak bağımsız değişkenler varsayılan değerleri atamalıdır.
 
-Hizmetler tarafından `IServiceProvider` çözüldüğünde `ActivatorUtilities`veya , yapıcı enjeksiyon bir *kamu* yapıcı gerektirir.
+Hizmetler `IServiceProvider` tarafından çözüldüğünde `ActivatorUtilities`veya , [yapıcı enjeksiyon](xref:mvc/controllers/dependency-injection#constructor-injection) bir *kamu* yapıcı gerektirir.
 
-Hizmetler tarafından `ActivatorUtilities`çözüldüğünde, yapıcı enjeksiyon sadece bir uygulanabilir yapıcı var gerektirir. Yapıcı aşırı yükler desteklenir, ancak bağımsız değişkenleri bağımlılık enjeksiyonu yla yerine getirilebilen yalnızca bir aşırı yükleme olabilir.
+Hizmetler tarafından `ActivatorUtilities`çözüldüğünde, [yapıcı enjeksiyon](xref:mvc/controllers/dependency-injection#constructor-injection) sadece bir uygulanabilir yapıcı var gerektirir. Yapıcı aşırı yükler desteklenir, ancak bağımsız değişkenleri bağımlılık enjeksiyonu yla yerine getirilebilen yalnızca bir aşırı yükleme olabilir.
 
 ## <a name="entity-framework-contexts"></a>Varlık Çerçevesi bağlamları
 

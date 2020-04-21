@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: 671f68da2ea261cb8ae32a9d5ef875217859054d
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: f994cd1274bda9082a7cd8b637968b2769db1671
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78655332"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661706"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Azure Uygulama Hizmeti ve IIS'de ASP.NET Core sorun giderme
 
@@ -159,6 +159,15 @@ Bu hatayı gidermek için [.NET Core Hosting Paketinin](xref:host-and-deploy/iis
 ANCM, önlenen başlangıç süresi içinde başlayamadı. Varsayılan olarak, zaman ası 120 saniyedir.
 
 Bu hata, aynı makinede çok sayıda uygulama başlatırken oluşabilir. Başlangıç sırasında sunucuda CPU/Bellek kullanım artışlarını denetleyin. Birden çok uygulamanın başlangıç işlemini sendemeniz gerekebilir.
+
+### <a name="50038-ancm-application-dll-not-found"></a>500.38 ANCM Uygulama DLL Bulunamadı
+
+ANCM yürütülebilir yanında olması gereken uygulama DLL, bulmak için başarısız oldu.
+
+Bu hata, işlem içi barındırma modelini kullanarak [tek dosyalı çalıştırılabilir](/dotnet/core/whats-new/dotnet-core-3-0#single-file-executables) olarak paketlenmiş bir uygulamayı barındırırken oluşur. İşlem içi model, ANCM'nin .NET Core uygulamasını mevcut IIS işlemine yüklemesini gerektirir. Bu senaryo tek dosyalı dağıtım modeli tarafından desteklenmez. Bu hatayı düzeltmek için uygulamanın proje dosyasında aşağıdaki **yaklaşımlardan birini** kullanın:
+
+1. MSBuild özelliğini ' ye `PublishSingleFile` `false`ayarlayarak tek dosyayayımlamayı devre dışı
+1. `AspNetCoreHostingModel` MSBuild özelliğini ' ye ayarlayarak işlem dışı `OutOfProcess`barındırma modeline geçin.
 
 ### <a name="5025-process-failure"></a>502.5 İşlem Hatası
 

@@ -5,17 +5,17 @@ description: JSON yardımcılarını kullanarak bir Blazor WebAssembly uygulamas
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/16/2020
+ms.date: 04/19/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: 2f2d4150f4fa1e7f47310f2a88b816f445cd1d3a
-ms.sourcegitcommit: 49c91ad4b69f4f8032394cbf2d5ae1b19a7f863b
+ms.openlocfilehash: 943f9d440adbe11ac1977f28aebee53a5510a86b
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "81544862"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661575"
 ---
 # <a name="call-a-web-api-from-aspnet-core-opno-locblazor"></a>ASP.NET Core'dan web API'sını arayınBlazor
 
@@ -120,7 +120,11 @@ JSON yardımcı yöntemleri bir URI'ye (aşağıdaki örneklerdeki bir web API) 
   }
   ```
   
-  `PostAsJsonAsync` Bir <xref:System.Net.Http.HttpResponseMessage>.
+  `PostAsJsonAsync` Bir <xref:System.Net.Http.HttpResponseMessage>. Yanıt iletisinden JSON içeriğini deserialize etmek `ReadFromJsonAsync<T>` için uzantı yöntemini kullanın:
+  
+  ```csharp
+  var content = response.content.ReadFromJsonAsync<WeatherForecast>();
+  ```
 
 * `PutAsJsonAsync`&ndash; JSON kodlanmış içerik de dahil olmak üzere bir HTTP PUT isteği gönderir.
 
@@ -149,7 +153,11 @@ JSON yardımcı yöntemleri bir URI'ye (aşağıdaki örneklerdeki bir web API) 
   }
   ```
   
-  `PutAsJsonAsync` Bir <xref:System.Net.Http.HttpResponseMessage>.
+  `PutAsJsonAsync` Bir <xref:System.Net.Http.HttpResponseMessage>. Yanıt iletisinden JSON içeriğini deserialize etmek `ReadFromJsonAsync<T>` için uzantı yöntemini kullanın:
+  
+  ```csharp
+  var content = response.content.ReadFromJsonAsync<WeatherForecast>();
+  ```
 
 <xref:System.Net.Http>HTTP isteklerini göndermek ve HTTP yanıtları almak için ek uzatma yöntemleri içerir. [HttpClient.DeleteAsync](xref:System.Net.Http.HttpClient.DeleteAsync*) bir WEB API'ya HTTP DELETE isteği göndermek için kullanılır.
 

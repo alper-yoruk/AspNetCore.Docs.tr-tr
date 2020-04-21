@@ -6,12 +6,12 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 09/26/2019
 uid: data/ef-rp/intro
-ms.openlocfilehash: 94783aa9014aef4c5f775fc8f36a2c3a7715e4b6
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 07faf5e596e7ea8b134d13caa0259c1e9d74ff1b
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78656823"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661624"
 ---
 # <a name="razor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>ASP.NET Core'da Varlık Çerçeve Çekirdekli Jilet Sayfaları - 8'in 1'i Öğretici
 
@@ -159,7 +159,7 @@ Bir öğrenci herhangi bir sayıda kursa kaydolabilir ve bir kursa herhangi bir 
 
   [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Models/Student.cs)]
 
-Özellik, `ID` veritabanı tablosunun bu sınıfa karşılık gelen birincil anahtar sütunu olur. Varsayılan olarak, EF Core adlı veya `ID` `classnameID` birincil anahtar olarak bir özelliği yorumlar. Yani `Student` sınıf birincil anahtarı `StudentID`için otomatik olarak tanınan ad .
+Özellik, `ID` veritabanı tablosunun bu sınıfa karşılık gelen birincil anahtar sütunu olur. Varsayılan olarak, EF Core adlı veya `ID` `classnameID` birincil anahtar olarak bir özelliği yorumlar. Yani `Student` sınıf birincil anahtarı `StudentID`için otomatik olarak tanınan ad . Daha fazla bilgi için [BKZ.](/ef/core/modeling/keys?tabs=data-annotations)
 
 Özellik `Enrollments` bir [navigasyon özelliğidir.](/ef/core/modeling/relationships) Gezinti özellikleri, bu varlıkla ilişkili diğer varlıkları tutar. Bu durumda, `Enrollments` bir `Student` varlığın mülkiyeti, `Enrollment` o Öğrenci ile ilgili tüm varlıkları tutar. Örneğin, veritabanındaki bir Öğrenci satırında ilgili iki Kayıt `Enrollments` satırı varsa, gezinti özelliği bu iki Kayıt varlığını içerir. 
 
@@ -215,7 +215,7 @@ Bu bölümde, oluşturmak için ASP.NET Core iskele aracını kullanırsınız:
   * Model **sınıfı** açılır açılır, **Öğrenci (ContosoUniversity.Models)** seçin.
   * Veri **bağlamı sınıf** satırında **+** (artı) işaretini seçin.
   * *ContosoUniversity.Models.ContosoUniversityContext'den* *ContosoUniversity.Data.SchoolContext'a*veri bağlamı adını değiştirin.
-  * **Ekle'yi**seçin.
+  * **Add (Ekle)** seçeneğini belirleyin.
 
 Aşağıdaki paketler otomatik olarak yüklenir:
 
@@ -598,7 +598,7 @@ Varlık **Çerçevesi (CRUD)** iletişim kutusunu kullanarak Jilet Sayfaları Ek
 * Model **sınıfı** açılır açılır, **Öğrenci (ContosoUniversity.Models)** seçin.
 * Veri **bağlamında sınıf** satırında(artı) işaretini **+** seçin ve oluşturulan adı **ContosoUniversity.Models.SchoolContext olarak değiştirin.**
 * Veri **bağlamında sınıf** açılır, **ContosoUniversity.Models.SchoolContext'ı** seçin
-* **Ekle'yi**seçin.
+* **Add (Ekle)** seçeneğini belirleyin.
 
 ![CRUD iletişim kutusu](intro/_static/s1.png)
 

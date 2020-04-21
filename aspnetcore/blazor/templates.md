@@ -5,17 +5,17 @@ description: ASP.NET Core Blazor uygulama şablonları Blazor ve proje yapısı 
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/26/2020
+ms.date: 04/19/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: 71a9d9eee8637dda0b3cecac82ff96a0c3bfedb5
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 0a4a508beeae3d7bc665372d925989aa4e34ad52
+ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80320974"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81661721"
 ---
 # <a name="aspnet-core-opno-locblazor-templates"></a>ASP.NET Blazor Çekirdek şablonları
 
@@ -31,6 +31,13 @@ Yazar: [Daniel Roth](https://github.com/danroth27) ve [Luke Latham](https://gith
 's barındırma Blazormodelleri hakkında daha <xref:blazor/hosting-models>fazla bilgi için bkz.
 
 Şablondan Blazor uygulama oluşturmayla ilgili adım adım talimatlar <xref:blazor/get-started>için bkz.
+
+Şablon seçenekleri, `--help` seçeneği [dotnet yeni](/dotnet/core/tools/dotnet-new) CLI komutuna geçirerek kullanılabilir:
+
+```dotnetcli
+dotnet new blazorwasm --help
+dotnet new blazorserver --help
+```
 
 ## <a name="opno-locblazor-project-structure"></a>Blazorproje yapısı
 
