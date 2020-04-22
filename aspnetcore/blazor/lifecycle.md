@@ -5,17 +5,17 @@ description: ASP.NET Core Blazor uygulamalarında Razor bileşen yaşam döngüs
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/17/2020
+ms.date: 04/16/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/lifecycle
-ms.openlocfilehash: 831f575afa6ce11d06c016d43ecd1bb59d09eab6
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: e7450ad57acc87500bb977aa8349c6ee009e3bf4
+ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80218914"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "81791461"
 ---
 # <a name="aspnet-core-opno-locblazor-lifecycle"></a>ASP.NET Blazor Çekirdek yaşam döngüsü
 
@@ -213,7 +213,7 @@ Yaşam döngüsü yöntemi yürütme sırasında hataları <xref:blazor/handle-e
 
 ## <a name="stateful-reconnection-after-prerendering"></a>Önişleme den sonra durumlu yeniden bağlantı
 
-Sunucu Blazor `RenderMode` `ServerPrerendered`uygulamasında, bileşen başlangıçta sayfanın bir parçası olarak statik olarak işlenir. Tarayıcı sunucuya bir bağlantı kurduktan sonra, bileşen *yeniden*işlenir ve bileşen artık etkileşimli olur. Bileşeni başlatmaya yönelik [OnInitialized{Async}](xref:blazor/lifecycle#component-initialization-methods) yaşam döngüsü yöntemi varsa, yöntem *iki kez*yürütülür:
+Sunucu Blazor `RenderMode` `ServerPrerendered`uygulamasında, bileşen başlangıçta sayfanın bir parçası olarak statik olarak işlenir. Tarayıcı sunucuya bir bağlantı kurduktan sonra, bileşen *yeniden*işlenir ve bileşen artık etkileşimli olur. Bileşeni başlatmaya yönelik [OnInitialized{Async}](#component-initialization-methods) yaşam döngüsü yöntemi varsa, yöntem *iki kez*yürütülür:
 
 * Bileşen statik olarak önceden işlendiğinde.
 * Sunucu bağlantısı kurulduktan sonra.

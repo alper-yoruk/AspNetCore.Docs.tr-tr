@@ -5,17 +5,17 @@ description: WebAssembly ile Blazor ASP.NET Core SignalR kullanan bir sohbet uyg
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/16/2020
+ms.date: 04/21/2020
 no-loc:
 - Blazor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: 798068c83e16070d3279c88c44af0cd96d182fe2
-ms.sourcegitcommit: 77c046331f3d633d7cc247ba77e58b89e254f487
+ms.openlocfilehash: 03db8b48bdacec1d6877a4ea09f97c242761c42d
+ms.sourcegitcommit: f976dce28ad887bbd31720c318fd4a97cf96cc6d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81488890"
+ms.lasthandoff: 04/21/2020
+ms.locfileid: "81738018"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Blazor WebAssembly ile ASP.NET Core SignalR kullanın
 
@@ -168,7 +168,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Hubs/ChatHub.cs)]
 
-## <a name="add-signalr-services-and-an-endpoint-for-the-signalr-hub"></a>SignalR hizmetleri ve SignalR hub'ı için bir uç nokta ekleme
+## <a name="add-services-and-an-endpoint-for-the-signalr-hub"></a>SignalR hub'ı için hizmet ve bitiş noktası ekleme
 
 1. **BlazorSignalRApp.Server** projesinde *Startup.cs* dosyasını açın.
 
@@ -178,15 +178,13 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
    using BlazorSignalRApp.Server.Hubs;
    ```
 
-1. SignalR hizmetlerini aşağıdakilere `Startup.ConfigureServices`ekleyin:
+1. SignalR ve Yanıt Sıkıştırma Middleware hizmetleri `Startup.ConfigureServices`ekleyin:
 
-   ```csharp
-   services.AddSignalR();
-   ```
+   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_ConfigureServices&highlight=3,5-9)]
 
-1. Varsayılan `Startup.Configure` denetleyici rotasının uç noktaları ile istemci tarafı geri dönüşleri arasında, hub için bir uç nokta ekleyin:
+1. Denetleyiciler için uç noktalar `Startup.Configure` ile istemci tarafı geri dönüşleri arasında, hub için bir uç nokta ekleyin:
 
-   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet&highlight=4)]
+   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_UseEndpoints&highlight=4)]
 
 ## <a name="add-razor-component-code-for-chat"></a>Sohbet için Razor bileşen kodu ekleme
 
@@ -202,7 +200,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. **Solution Explorer'da** **BlazorSignalRApp.Server** projesini seçin. Hata ayıklama olmadan uygulamayı çalıştırmak için **Ctrl+F5** tuşuna basın.
+1. **Solution Explorer'da** **BlazorSignalRApp.Server** projesini seçin. Hata ayıklama veya <kbd>Ctrl</kbd>+<kbd>F5</kbd> ile uygulamayı çalıştırmak için <kbd>F5</kbd> tuşuna basın ve uygulamayı hata ayıklamadan çalıştırın.
 
 1. URL'yi adres çubuğundan kopyalayın, başka bir tarayıcı örneği veya sekmesini açın ve URL'yi adres çubuğuna yapıştırın.
 
@@ -214,7 +212,13 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-1. Araç çubuğundan > **Hata Ayıklama Yapmadan Hata Ayıklama Çalıştır'ı** seçin. **Debug**
+1. VS Code, Sunucu uygulaması için bir başlatma profili oluşturmayı teklif ettiğinde `program` (*.vscode/launch.json*), giriş uygulamanın montajını işaret etmek için aşağıdakine benzer görünür (`{APPLICATION NAME}.Server.dll`):
+
+   ```json
+   "program": "${workspaceFolder}/Server/bin/Debug/netcoreapp3.1/{APPLICATION NAME}.Server.dll"
+   ```
+
+1. Hata ayıklama veya <kbd>Ctrl</kbd>+<kbd>F5</kbd> ile uygulamayı çalıştırmak için <kbd>F5</kbd> tuşuna basın ve uygulamayı hata ayıklamadan çalıştırın.
 
 1. URL'yi adres çubuğundan kopyalayın, başka bir tarayıcı örneği veya sekmesini açın ve URL'yi adres çubuğuna yapıştırın.
 
@@ -226,7 +230,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-1. **Çözüm** kenar çubuğunda **BlazorSignalRApp.Server** projesini seçin. Menüden > **Hata Ayıklama olmadan** **Başlat'ı**seçin.
+1. **Çözüm** kenar çubuğunda **BlazorSignalRApp.Server** projesini seçin. +Uygulamayı hata ayıklama<kbd>⌘</kbd>+yla çalıştırmak <kbd>için</kbd>+<kbd>↩</kbd>** tuşuna <kbd>basın</kbd>veya uygulamayı hata ayıklamadan çalıştırmak için<kbd>↩.</kbd>
 
 1. URL'yi adres çubuğundan kopyalayın, başka bir tarayıcı örneği veya sekmesini açın ve URL'yi adres çubuğuna yapıştırın.
 

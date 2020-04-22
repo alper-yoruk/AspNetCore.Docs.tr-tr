@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 832109530c4aac372fd75aa1a1d2edbe3768f55f
-ms.sourcegitcommit: 1d8f1396ccc66a0c3fcb5e5f36ea29b50db6d92a
+ms.openlocfilehash: 4c51200159ced16132e15bb4a1f0915ca0cf5945
+ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/01/2020
-ms.locfileid: "80501278"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "81791612"
 ---
 # <a name="secure-an-aspnet-core-opno-locblazor-webassembly-hosted-app-with-identity-server"></a>Identity Server Blazor ile ASP.NET Core WebAssembly barındırılan uygulamayı güvenli hale getirin
 
@@ -51,14 +51,13 @@ Sınıfın `Startup` aşağıdaki eklemeleri vardır:
 
 * `Startup.ConfigureServices` içinde:
 
-  * Varsayılan UI ile kimlik:
+  * Kimlik:
 
     ```csharp
     services.AddDbContext<ApplicationDbContext>(options =>
         options.UseSqlite(Configuration.GetConnectionString("DefaultConnection")));
 
     services.AddDefaultIdentity<ApplicationUser>()
-        .AddDefaultUI(UIFramework.Bootstrap4)
         .AddEntityFrameworkStores<ApplicationDbContext>();
     ```
 

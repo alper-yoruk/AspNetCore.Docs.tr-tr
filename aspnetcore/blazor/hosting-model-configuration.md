@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: blazor/hosting-model-configuration
-ms.openlocfilehash: 1b0f5f4071be7134d7de08615ec016ca6567385d
-ms.sourcegitcommit: 49c91ad4b69f4f8032394cbf2d5ae1b19a7f863b
+ms.openlocfilehash: 6a3731657d11faed0b005b429058343b2be4c44b
+ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "81544849"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "81791473"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>ASP.NET Core Blazor hosting modeli yapılandırma
 
@@ -134,6 +134,10 @@ Yapılandırma dosyaları çevrimdışı kullanım için önbelleğe alınır. [
 * PWA'nın *hizmet-worker.js* ve *hizmet-işçi-varlıklar.js* dosyaları derleme üzerine yeniden oluşturulmalıdır, bu da kullanıcının bir sonraki çevrimiçi ziyaretinde uygulamaya uygulamanın yeniden dağıtıldığını bildiren bir sinyal verir.
 
 Arka plan güncelleştirmelerinin PWA'lar tarafından <xref:blazor/progressive-web-app#background-updates>nasıl işlendiği hakkında daha fazla bilgi için bkz.
+
+### <a name="logging"></a>Günlüğe Kaydetme
+
+Blazor WebAssembly günlük desteği hakkında <xref:fundamentals/logging/index#create-logs-in-blazor-webassembly>bilgi için bkz.
 
 ## <a name="blazor-server"></a>Blazor Server
 

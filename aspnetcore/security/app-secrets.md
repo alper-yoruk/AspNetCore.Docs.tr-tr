@@ -6,12 +6,12 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 4/20/2020
 uid: security/app-secrets
-ms.openlocfilehash: 9d4e59c003afc253971ee64fce523c7188d3582a
-ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
+ms.openlocfilehash: c62c5e59ad0a72506fb72bda82aa821a4f1719c8
+ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81661800"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "81791608"
 ---
 # <a name="safe-storage-of-app-secrets-in-development-in-aspnet-core"></a>ASP.NET Core'da uygulama sırlarınıgeliştirmede güvenli depolama
 
@@ -75,7 +75,7 @@ dotnet user-secrets init
 
 Önceki komut `UserSecretsId` *.csproj* dosyasının içinde bir `PropertyGroup` öğe ekler. Varsayılan olarak, iç `UserSecretsId` metin bir GUID'dir. İç metin rasgele, ancak projeye özgüdür.
 
-[!code-xml[](app-secrets/samples/2.x/UserSecrets/UserSecrets.csproj?name=snippet_PropertyGroup&highlight=3)]
+[!code-xml[](app-secrets/samples/3.x/UserSecrets/UserSecrets.csproj?name=snippet_PropertyGroup&highlight=3)]
 
 Visual Studio'da, Solution Explorer'da projeyi sağ tıklatın ve bağlam menüsünden **Kullanıcı Sırlarını Yönet'i** seçin. Bu hareket, `UserSecretsId` *.csproj* dosyasına GUID ile doldurulan bir öğe ekler.
 
@@ -142,18 +142,17 @@ Komut kabuğunu açın ve aşağıdaki komutu uygulayın:
 
 [ASP.NET Core Configuration API,](xref:fundamentals/configuration/index) Gizli Yönetici sırlarına erişim sağlar.
 
-Core 2.0 veya daha sonra ASP.NET, proje önceden yapılandırılmış varsayılanları ile <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> ana bilgisayar yeni bir örnek başlatmaya çağırır kullanıcı sırları yapılandırma kaynağı otomatik olarak geliştirme moduna eklenir. `CreateDefaultBuilder`olduğunda <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName> <xref:Microsoft.AspNetCore.Hosting.EnvironmentName.Development>çağırır:
+Proje, önceden yapılandırılmış varsayılanlara sahip ana bilgisayaryeni <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder%2A> bir örneğini başlatmaya çağırdığında, kullanıcı sırları yapılandırma kaynağı otomatik olarak geliştirme moduna eklenir. `CreateDefaultBuilder`olduğunda <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> <xref:Microsoft.Extensions.Hosting.IHostEnvironment.EnvironmentName> <xref:Microsoft.Extensions.Hosting.EnvironmentName.Development>çağırır:
 
 [!code-csharp[](app-secrets/samples/3.x/UserSecrets/Program.cs?name=snippet_CreateHostBuilder&highlight=2)]
 
-Çağrılmadığı zaman, `CreateDefaultBuilder` <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> `Startup` oluşturucuyu çağırarak kullanıcı sırları yapılandırma kaynağını açıkça ekleyin. Aşağıdaki `AddUserSecrets` örnekte gösterildiği gibi, yalnızca uygulama Geliştirme ortamında çalıştığında arama:
+Çağrılmadığı zaman, `CreateDefaultBuilder` kullanıcı sırları yapılandırma kaynağını açıkça <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A>arayarak ekleyin. Aşağıdaki `AddUserSecrets` örnekte gösterildiği gibi, yalnızca uygulama Geliştirme ortamında çalıştığında arama:
 
-[!code-csharp[](app-secrets/samples/3.x/UserSecrets/Startup2.cs?name=snippet_StartupConstructor&highlight=12)]
+[!code-csharp[](app-secrets/samples/3.x/UserSecrets/Program2.cs?name=snippet_Host&highlight=6-9)]
 
 Kullanıcı sırları `Configuration` API üzerinden alınabilir:
 
-[!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup.cs?name=snippet_StartupClass&highlight=14)]
-
+[!code-csharp[](app-secrets/samples/3.x/UserSecrets/Startup.cs?name=snippet_StartupClass&highlight=14)]
 
 ## <a name="map-secrets-to-a-poco"></a>Bir POCO'ya harita sırları
 
@@ -163,17 +162,17 @@ Tüm nesnenin gerçek bir nesnesini bir POCO (özellikleri olan basit bir .NET s
 
 Önceki sırları bir POCO ile eşlemek `Configuration` için API'nin [nesne grafiği bağlama](xref:fundamentals/configuration/index#bind-to-an-object-graph) özelliğini kullanın. Aşağıdaki kod özel `MovieSettings` bir POCO'ya bağlanır `ServiceApiKey` ve özellik değerine erişir:
 
-[!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup3.cs?name=snippet_BindToObjectGraph)]
+[!code-csharp[](app-secrets/samples/3.x/UserSecrets/Startup3.cs?name=snippet_BindToObjectGraph)]
 
 Ve sırlar ilgili özelliklere `MovieSettings`eşlenir: `Movies:ServiceApiKey` `Movies:ConnectionString`
 
-[!code-csharp[](app-secrets/samples/2.x/UserSecrets/Models/MovieSettings.cs?name=snippet_MovieSettingsClass)]
+[!code-csharp[](app-secrets/samples/3.x/UserSecrets/Models/MovieSettings.cs?name=snippet_MovieSettingsClass)]
 
 ## <a name="string-replacement-with-secrets"></a>Sırlar ile string değiştirme
 
 Parolaları düz metinde depolamak güvenli değildir. Örneğin, *appsettings.json'da* depolanan bir veritabanı bağlantı dizesi, belirtilen kullanıcı için bir parola içerebilir:
 
-[!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
+[!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
 Daha güvenli bir yaklaşım, parolayı bir sır olarak depolamaktır. Örneğin:
 
@@ -183,11 +182,11 @@ dotnet user-secrets set "DbPassword" "pass123"
 
 `Password` *appsettings.json'daki*bağlantı dizesinden anahtar değeri çiftini kaldırın. Örneğin:
 
-[!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings.json?highlight=3)]
+[!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings.json?highlight=3)]
 
 Gizlinin değeri, bağlantı dizesini tamamlamak için bir <xref:System.Data.SqlClient.SqlConnectionStringBuilder> nesnenin <xref:System.Data.SqlClient.SqlConnectionStringBuilder.Password%2A> özelliğine ayarlanabilir:
 
-[!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup2.cs?name=snippet_StartupClass&highlight=14-17)]
+[!code-csharp[](app-secrets/samples/3.x/UserSecrets/Startup2.cs?name=snippet_StartupClass&highlight=14-17)]
 
 ## <a name="list-the-secrets"></a>Sırları listele
 
@@ -388,15 +387,13 @@ Komut kabuğunu açın ve aşağıdaki komutu uygulayın:
 
 Projeniz .NET Framework'u [hedefliyorsa, Microsoft.Extensions.Configuration.UserSecrets](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.UserSecrets) NuGet paketini yükleyin.
 
-
 Core 2.0 veya daha sonra ASP.NET, proje önceden yapılandırılmış varsayılanları ile <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> ana bilgisayar yeni bir örnek başlatmaya çağırır kullanıcı sırları yapılandırma kaynağı otomatik olarak geliştirme moduna eklenir. `CreateDefaultBuilder`olduğunda <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName> <xref:Microsoft.AspNetCore.Hosting.EnvironmentName.Development>çağırır:
 
 [!code-csharp[](app-secrets/samples/2.x/UserSecrets/Program.cs?name=snippet_CreateWebHostBuilder&highlight=2)]
 
-
 Çağrılmadığı zaman, `CreateDefaultBuilder` <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> `Startup` oluşturucuyu çağırarak kullanıcı sırları yapılandırma kaynağını açıkça ekleyin. Aşağıdaki `AddUserSecrets` örnekte gösterildiği gibi, yalnızca uygulama Geliştirme ortamında çalıştığında arama:
 
-[!code-csharp[](app-secrets/samples/1.x/UserSecrets/Startup.cs?name=snippet_StartupConstructor&highlight=12)]
+[!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup3.cs?name=snippet_StartupConstructor&highlight=12)]
 
 Kullanıcı sırları `Configuration` API üzerinden alınabilir:
 

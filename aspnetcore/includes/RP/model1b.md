@@ -6,7 +6,7 @@
 Sınıf `Movie` şunları içerir:
 
 * Alan `ID` birincil anahtar için veritabanı tarafından gereklidir.
-* `[DataType(DataType.Date)]`: [DataType](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.internal.datatypeattributeadapter) özniteliği, veri türünü (Tarih) belirtir. Bu öznitelik ile:
+* `[DataType(DataType.Date)]`: [DataType](xref:System.ComponentModel.DataAnnotations.DataTypeAttribute) özniteliği, veri türünü (Tarih) belirtir. Bu öznitelik ile:
 
   * Kullanıcının tarih alanına saat bilgilerini girmesi gerekmez.
   * Yalnızca tarih görüntülenir, saat bilgisi değil.

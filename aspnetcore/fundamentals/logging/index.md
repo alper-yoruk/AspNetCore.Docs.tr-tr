@@ -7,12 +7,12 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/17/2020
 uid: fundamentals/logging/index
-ms.openlocfilehash: a3c63b738d3eaa51249475b88d78572038348a7a
-ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
+ms.openlocfilehash: b897d0d775da62a11f01a64f39b47b6c5abebc8b
+ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81440746"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "81791569"
 ---
 # <a name="logging-in-net-core-and-aspnet-core"></a>.NET Core ve ASP.NET Core'da Oturum Açma
 
@@ -164,6 +164,23 @@ Bağlı bir hizmeti yapılandırmanız `ILogger<T>`gerekiyorsa, bunu yine de yap
 [!code-csharp[](index/samples/3.x/TodoApiSample/Startup.cs?name=snippet_ConfigureServices&highlight=6-10)]
 
 Önceki vurgulanan kod, `Func` DI kapsayıcısının bir örneğini oluşturmak için `MyService`ilk kez çalışan bir koddur. Kayıtlı hizmetlerden herhangi biri bu şekilde erişebilirsiniz.
+
+### <a name="create-logs-in-blazor-webassembly"></a>Blazor WebAssembly'de günlük oluşturma
+
+Blazor WebAssembly uygulamalarında oturum `WebAssemblyHostBuilder.Logging` açma `Program.Main`özelliği şu şekilde yapılandırın:
+
+```csharp
+using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
+
+...
+
+var builder = WebAssemblyHostBuilder.CreateDefault(args);
+
+builder.Logging.SetMinimumLevel(LogLevel.Debug);
+builder.Logging.AddProvider(new CustomLoggingProvider());
+```
+
+Özellik `Logging` türündedir, <xref:Microsoft.Extensions.Logging.ILoggingBuilder>bu nedenle kullanılabilir <xref:Microsoft.Extensions.Logging.ILoggingBuilder> tüm uzantı `Logging`yöntemleri de mevcuttur.
 
 ### <a name="no-asynchronous-logger-methods"></a>Asynchronous logger yöntemleri yok
 

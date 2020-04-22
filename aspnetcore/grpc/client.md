@@ -1,19 +1,19 @@
 ---
-title: .NET istemcisi ile gRPC hizmetlerini arayın
+title: .NET istemcisiyle gRPC hizmetlerini çağırma
 author: jamesnk
 description: .NET gRPC istemcisi ile gRPC hizmetlerini nasıl arayacağınızı öğrenin.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 08/21/2019
+ms.date: 04/21/2020
 uid: grpc/client
-ms.openlocfilehash: 6a6a649f7194354b16f3d67160be02428cc01170
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: aefa52a5c4c66178c5978aebd4cd9b00559c7f54
+ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78667176"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "81791556"
 ---
-# <a name="call-grpc-services-with-the-net-client"></a>.NET istemcisi ile gRPC hizmetlerini arayın
+# <a name="call-grpc-services-with-the-net-client"></a>.NET istemcisiyle gRPC hizmetlerini çağırma
 
 Bir .NET gRPC istemci kitaplığı [Grpc.Net.Client](https://www.nuget.org/packages/Grpc.Net.Client) NuGet paketinde mevcuttur. Bu belge, nasıl açıklanmaktadır:
 
@@ -50,7 +50,7 @@ Kanal ve istemci performansı ve kullanımı:
 * Kanaldan oluşturulan bir kanal ve istemciler birden çok iş parçacığı tarafından güvenle kullanılabilir.
 * Kanaldan oluşturulan istemciler birden çok eşzamanlı arama yapabilir.
 
-`GrpcChannel.ForAddress`gRPC istemcisi oluşturmak için tek seçenek değildir. bir ASP.NET Core uygulamasından gRPC hizmetlerini arıyorsanız, [gRPC istemci fabrika tümleştirmesi](xref:grpc/clientfactory)göz önünde bulundurun. gRPC istemcileri oluşturmak için merkezi bir alternatif sunar. `HttpClientFactory`
+`GrpcChannel.ForAddress`gRPC istemcisi oluşturmak için tek seçenek değildir. Bir ASP.NET Core uygulamasından gRPC hizmetlerini arıyorsanız, [gRPC istemci fabrika tümleştirmesi](xref:grpc/clientfactory)göz önünde bulundurun. gRPC istemcileri oluşturmak için merkezi bir alternatif sunar. `HttpClientFactory`
 
 > [!NOTE]
 > [.NET istemcisi ile güvenli olmayan gRPC hizmetlerini aramak](xref:grpc/troubleshoot#call-insecure-grpc-services-with-net-core-client)için ek yapılandırma gereklidir.
@@ -62,7 +62,7 @@ Kanal ve istemci performansı ve kullanımı:
 
 Bir gRPC arama istemciüzerinde bir yöntem çağırarak başlatılır. gRPC istemcisi ileti serileştirme ve doğru hizmet için gRPC arama adresleme işleyecek.
 
-gRPC'nin farklı yöntemleri vardır. GRPC araması yapmak için istemciyi nasıl kullanacağınız aradığınız yöntemin türüne bağlıdır. gRPC yöntem türleri şunlardır:
+gRPC'nin farklı yöntemleri vardır. İstemcinin gRPC araması yapmak için nasıl kullanıldığı, çağrılan yöntemin türüne bağlıdır. gRPC yöntem türleri şunlardır:
 
 * Tekli
 * Sunucu akışı
@@ -92,48 +92,45 @@ Sunucu akışı çağrısı istemcinin istek iletisi göndermesiyle başlar. `Re
 
 ```csharp
 var client = new Greet.GreeterClient(channel);
-using (var call = client.SayHellos(new HelloRequest { Name = "World" }))
+using var call = client.SayHellos(new HelloRequest { Name = "World" });
+
+while (await call.ResponseStream.MoveNext())
 {
-    while (await call.ResponseStream.MoveNext())
-    {
-        Console.WriteLine("Greeting: " + call.ResponseStream.Current.Message);
-        // "Greeting: Hello World" is written multiple times
-    }
+    Console.WriteLine("Greeting: " + call.ResponseStream.Current.Message);
+    // "Greeting: Hello World" is written multiple times
 }
 ```
 
-C# 8 veya daha sonra `await foreach` kullanıyorsanız, sözdizimi iletileri okumak için kullanılabilir. Uzantı `IAsyncStreamReader<T>.ReadAllAsync()` yöntemi yanıt akışındaki tüm iletileri okur:
+C# 8 veya daha `await foreach` sonra kullanırken, sözdizimi iletileri okumak için kullanılabilir. Uzantı `IAsyncStreamReader<T>.ReadAllAsync()` yöntemi yanıt akışındaki tüm iletileri okur:
 
 ```csharp
 var client = new Greet.GreeterClient(channel);
-using (var call = client.SayHellos(new HelloRequest { Name = "World" }))
+using var call = client.SayHellos(new HelloRequest { Name = "World" });
+
+await foreach (var response in call.ResponseStream.ReadAllAsync())
 {
-    await foreach (var response in call.ResponseStream.ReadAllAsync())
-    {
-        Console.WriteLine("Greeting: " + response.Message);
-        // "Greeting: Hello World" is written multiple times
-    }
+    Console.WriteLine("Greeting: " + response.Message);
+    // "Greeting: Hello World" is written multiple times
 }
 ```
 
 ### <a name="client-streaming-call"></a>İstemci akışı çağrısı
 
-İstemci akışı çağrısı, istemci ileti *göndermeden* başlar. İstemci `RequestStream.WriteAsync`ile ileti göndermeyi seçebilir. İstemci ileti göndermeyi `RequestStream.CompleteAsync` bitirdiğinde hizmeti bildirmek için çağrılmalıdır. Hizmet bir yanıt iletisi döndürdüğünde çağrı tamamlanır.
+İstemci akışı çağrısı, istemci ileti *göndermeden* başlar. İstemci `RequestStream.WriteAsync`ile ileti göndermeyi seçebilir. İstemci ileti göndermeyi bitirdiğinde, `RequestStream.CompleteAsync` hizmeti bildirmek için çağrılmalıdır. Hizmet bir yanıt iletisi döndürdüğünde çağrı tamamlanır.
 
 ```csharp
 var client = new Counter.CounterClient(channel);
-using (var call = client.AccumulateCount())
-{
-    for (var i = 0; i < 3; i++)
-    {
-        await call.RequestStream.WriteAsync(new CounterRequest { Count = 1 });
-    }
-    await call.RequestStream.CompleteAsync();
+using var call = client.AccumulateCount();
 
-    var response = await call;
-    Console.WriteLine($"Count: {response.Count}");
-    // Count: 3
+for (var i = 0; i < 3; i++)
+{
+    await call.RequestStream.WriteAsync(new CounterRequest { Count = 1 });
 }
+await call.RequestStream.CompleteAsync();
+
+var response = await call;
+Console.WriteLine($"Count: {response.Count}");
+// Count: 3
 ```
 
 ### <a name="bi-directional-streaming-call"></a>Çift yönlü akış çağrısı
@@ -141,38 +138,98 @@ using (var call = client.AccumulateCount())
 İstemci ileti *göndermeden* çift yönlü akış çağrısı başlar. İstemci `RequestStream.WriteAsync`ile ileti göndermeyi seçebilir. Hizmetten aktarılan iletilere veya `ResponseStream.MoveNext()` . `ResponseStream.ReadAllAsync()` Daha fazla ileti olmadığında `ResponseStream` çift yönlü akış çağrısı tamamlanır.
 
 ```csharp
-using (var call = client.Echo())
+var client = new Echo.EchoClient(channel);
+using var call = client.Echo();
+
+Console.WriteLine("Starting background task to receive messages");
+var readTask = Task.Run(async () =>
 {
-    Console.WriteLine("Starting background task to receive messages");
-    var readTask = Task.Run(async () =>
+    await foreach (var response in call.ResponseStream.ReadAllAsync())
     {
-        await foreach (var response in call.ResponseStream.ReadAllAsync())
-        {
-            Console.WriteLine(response.Message);
-            // Echo messages sent to the service
-        }
-    });
+        Console.WriteLine(response.Message);
+        // Echo messages sent to the service
+    }
+});
 
-    Console.WriteLine("Starting to send messages");
-    Console.WriteLine("Type a message to echo then press enter.");
-    while (true)
+Console.WriteLine("Starting to send messages");
+Console.WriteLine("Type a message to echo then press enter.");
+while (true)
+{
+    var result = Console.ReadLine();
+    if (string.IsNullOrEmpty(result))
     {
-        var result = Console.ReadLine();
-        if (string.IsNullOrEmpty(result))
-        {
-            break;
-        }
-
-        await call.RequestStream.WriteAsync(new EchoMessage { Message = result });
+        break;
     }
 
-    Console.WriteLine("Disconnecting");
-    await call.RequestStream.CompleteAsync();
-    await readTask;
+    await call.RequestStream.WriteAsync(new EchoMessage { Message = result });
 }
+
+Console.WriteLine("Disconnecting");
+await call.RequestStream.CompleteAsync();
+await readTask;
 ```
 
 Çift yönlü akış araması sırasında, istemci ve hizmet istediği zaman birbirlerine ileti gönderebilir. Çift yönlü bir çağrıyla etkileşim kurmak için en iyi istemci mantığı hizmet mantığına bağlı olarak değişir.
+
+## <a name="access-grpc-trailers"></a>gRPC fragmanlarına erişin
+
+gRPC aramaları gRPC römorkları döndürebilir. gRPC römorkları, bir çağrı yla ilgili ad/değer meta verilerini sağlamak için kullanılır. Römorklar HTTP üstbilgilerine benzer işlevler sağlar, ancak aramanın sonunda alınır.
+
+gRPC römorklar kullanılarak `GetTrailers()`erişilebilir , hangi meta veri bir koleksiyon döndürür. Yanıt tamamlandıktan sonra römorklar döndürülür, bu nedenle, römorklara erişmeden önce tüm yanıt iletilerini beklemeniz gerekir.
+
+Unary ve istemci akışı `ResponseAsync` aramaları `GetTrailers()`aramadan önce beklemesi gerekir:
+
+```csharp
+var client = new Greet.GreeterClient(channel);
+using var call = client.SayHelloAsync(new HelloRequest { Name = "World" });
+var response = await call.ResponseAsync;
+
+Console.WriteLine("Greeting: " + response.Message);
+// Greeting: Hello World
+
+var trailers = call.GetTrailers();
+var myValue = trailers.First(e => e.Key == "my-trailer-name");
+```
+
+Sunucu ve çift yönlü akış çağrıları aramadan `GetTrailers()`önce yanıt akışını beklerken bitirmek gerekir:
+
+```csharp
+var client = new Greet.GreeterClient(channel);
+using var call = client.SayHellos(new HelloRequest { Name = "World" });
+
+await foreach (var response in call.ResponseStream.ReadAllAsync())
+{
+    Console.WriteLine("Greeting: " + response.Message);
+    // "Greeting: Hello World" is written multiple times
+}
+
+var trailers = call.GetTrailers();
+var myValue = trailers.First(e => e.Key == "my-trailer-name");
+```
+
+gRPC römorklar da `RpcException`erişilebilir . Bir hizmet, tamam olmayan bir gRPC durumuyla birlikte römorkları döndürebilir. Bu durumda römorklar gRPC istemcisi tarafından atılan özel durum alınır:
+
+```csharp
+var client = new Greet.GreeterClient(channel);
+string myValue = null;
+
+try
+{
+    using var call = client.SayHelloAsync(new HelloRequest { Name = "World" });
+    var response = await call.ResponseAsync;
+
+    Console.WriteLine("Greeting: " + response.Message);
+    // Greeting: Hello World
+
+    var trailers = call.GetTrailers();
+    myValue = trailers.First(e => e.Key == "my-trailer-name");
+}
+catch (RpcException ex)
+{
+    var trailers = ex.Trailers;
+    myValue = trailers.First(e => e.Key == "my-trailer-name");
+}
+```
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

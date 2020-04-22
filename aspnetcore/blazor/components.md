@@ -5,21 +5,21 @@ description: Verilere nasıl bağlanılacağı, olayları nasıl işleyeceğiniz
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/25/2020
+ms.date: 04/21/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/components
-ms.openlocfilehash: bc1d07aef9cd60b89343a034168daa6754f4421b
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 4434636992cb2506ef6525996690946f97c43764
+ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80306504"
+ms.lasthandoff: 04/22/2020
+ms.locfileid: "81791483"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>Core Razor bileşenleri ASP.NET oluşturma ve kullanma
 
-Yazar: [Luke Latham](https://github.com/guardrex) ve [Daniel Roth](https://github.com/danroth27)
+Yazar: [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27), ve [Tobias Bartsch](https://www.aveo-solutions.com/)
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ( nasıl[indirilir](xref:index#how-to-download-a-sample))
 
@@ -141,6 +141,9 @@ Bileşenler, öznitelik ile bileşen sınıfında ortak özellikleri kullanılar
 *Sayfalar/ParentComponent.razor*:
 
 [!code-razor[](components/samples_snapshot/ParentComponent.razor?highlight=5-6)]
+
+> [!WARNING]
+> Kendi bileşen parametrelerine yazan *bileşenler*oluşturmayın, bunun yerine özel bir alan kullanın. Daha fazla bilgi için, [kendi parametre özellikleri bölümüne yazan bileşenler oluşturmabölümüne](#dont-create-components-that-write-to-their-own-parameter-properties) bakın.
 
 ## <a name="child-content"></a>Alt içerik
 
@@ -400,7 +403,7 @@ Aşağıdaki örneği inceleyin:
 
 Koleksiyonun `People` içeriği eklenen, silinen veya yeniden sipariş edilen girişlerle değişebilir. Bileşen yeniden işlendiğinde, `<DetailsEditor>` bileşen farklı `Details` parametre değerleri alacak şekilde değişebilir. Bu beklenenden daha karmaşık yeniden işleme neden olabilir. Bazı durumlarda, yeniden oluşturma, kayıp öğe odağı gibi görünür davranış farklılıklarına yol açabilir.
 
-Eşleme `@key` işlemi, yönerge özniteliği ile denetlenebilir. `@key`difüzyon algoritmasının anahtarın değerine göre öğelerin veya bileşenlerin korunmasını garanti etmesi neden olur:
+Eşleme [`@key`](xref:mvc/views/razor#key) işlemi, yönerge özniteliği ile denetlenebilir. `@key`difüzyon algoritmasının anahtarın değerine göre öğelerin veya bileşenlerin korunmasını garanti etmesi neden olur:
 
 ```csharp
 @foreach (var person in People)
@@ -453,6 +456,99 @@ Genel olarak, aşağıdaki değer türlerinden birini sağlamak `@key`mantıklı
 * Benzersiz tanımlayıcılar (örneğin, tür `int`, `string`veya `Guid`birincil anahtar değerleri).
 
 Kullanılan `@key` değerlerin çakışmadığından emin olun. Çakışan değerler aynı üst öğe Blazor içinde algılanırsa, eski öğeleri veya bileşenleri yeni öğelerveya bileşenlerle deterministically eşleyemediği için bir özel durum oluşturur. Yalnızca nesne örnekleri veya birincil anahtar değerleri gibi farklı değerler kullanın.
+
+## <a name="dont-create-components-that-write-to-their-own-parameter-properties"></a>Kendi parametre özelliklerine yazan bileşenler oluşturmayın
+
+Parametreler aşağıdaki koşullar altında üzerine yazılır:
+
+* Bir alt bileşenin içeriği bir `RenderFragment`.
+* <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>üst bileşende çağrılır.
+
+Ana bileşen çağrıldığında <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> yeniden işlendiği ve alt bileşene yeni parametre değerleri sağlandığı için parametreler sıfırlanır.
+
+Aşağıdaki `Expander` bileşeni göz önünde bulundurun:
+
+* Alt içerik işler.
+* Alt içeriği bileşen parametresi ile gösteren geçişler.
+
+```razor
+<div @onclick="@Toggle">
+    Toggle (Expanded = @Expanded)
+
+    @if (Expanded)
+    {
+        @ChildContent
+    }
+</div>
+
+@code {
+    [Parameter]
+    public bool Expanded { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    private void Toggle()
+    {
+        Expanded = !Expanded;
+    }
+}
+```
+
+Bileşen, `Expander` şu leri çağırabilecek `StateHasChanged`bir üst bileşene eklenir:
+
+```razor
+<Expander Expanded="true">
+    <h1>Hello, world!</h1>
+</Expander>
+
+<Expander Expanded="true" />
+
+<button @onclick="@(() => StateHasChanged())">
+    Call StateHasChanged
+</button>
+```
+
+Başlangıçta, `Expander` bileşenleri `Expanded` özellikleri değiştirildiğinde bağımsız olarak olur. Alt bileşenler durumlarını beklendiği gibi korur. Üst `StateHasChanged` öğe çağrıldığında, `Expanded` ilk alt bileşenin parametresi ilk değerine`true`geri sıfırlanır ( ). İkinci `Expander` bileşende `Expanded` alt içerik işlenmediği için ikinci bileşenin değeri sıfırlanmıyor.
+
+Önceki senaryoda durumu korumak için, *private field* değiştirilen `Expander` durumunu korumak için bileşendeki özel bir alanı kullanın.
+
+Aşağıdaki `Expander` bileşen:
+
+* `Expanded` Üst bileşen parametre değerini kabul eder.
+* [OnInitialized olayında](xref:blazor/lifecycle#component-initialization-methods)bileşen parametre`_expanded`değerini özel bir *alana* ( ) atar.
+* Dahili geçiş durumunu korumak için özel alanı kullanır.
+
+```razor
+<div @onclick="@Toggle">
+    Toggle (Expanded = @_expanded)
+
+    @if (_expanded)
+    {
+        @ChildContent
+    }
+</div>
+
+@code {
+    [Parameter]
+    public bool Expanded { get; set; }
+
+    [Parameter]
+    public RenderFragment ChildContent { get; set; }
+
+    private bool _expanded;
+
+    protected override void OnInitialized()
+    {
+        _expanded = Expanded;
+    }
+
+    private void Toggle()
+    {
+        _expanded = !_expanded;
+    }
+}
+```
 
 ## <a name="partial-class-support"></a>Kısmi sınıf desteği
 
