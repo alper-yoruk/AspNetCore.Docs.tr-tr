@@ -1,78 +1,78 @@
 ### YamlMime:Hub
 title: ASP.NET belgeleri
-summary: Hızlı, güvenli, çapraz platform ve bulut tabanlı web uygulamaları ve hizmetleri oluşturmak için ASP.NET Core'u kullanmayı öğrenin. Öğreticilere, örnek kodlara, temellere, API başvurusuna ve daha fazlana göz atın.
+summary: Hızlı, güvenli, platformlar arası ve bulut tabanlı web uygulamaları ve hizmetleri oluşturmak için ASP.NET Core’u kullanmayı öğrenin. Öğreticileri, örnek kodları, temel bilgileri, API başvurularını ve daha birçok bilgiyi gözden geçirin.
 brand: aspnet
 metadata:
   title: ASP.NET belgeleri
-  description: Hızlı, güvenli, çapraz platform ve bulut tabanlı web uygulamaları ve hizmetleri oluşturmak için ASP.NET Core'u kullanmayı öğrenin. Öğreticilere, örnek kodlara, temellere, API başvurusuna ve daha fazlana göz atın.
+  description: Hızlı, güvenli, platformlar arası ve bulut tabanlı web uygulamaları ve hizmetleri oluşturmak için ASP.NET Core’u kullanmayı öğrenin. Öğreticileri, örnek kodları, temel bilgileri, API başvurularını ve daha birçok bilgiyi gözden geçirin.
   ms.product: aspnet
   ms.topic: hub-page
   author: WadePickett
   ms.author: wpickett
-  ms.date: 03/27/2020
-  ms.openlocfilehash: fb6d03616560649a336df8a624e7fb59006a7ea8
-  ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
-  ms.translationtype: MT
+  ms.date: 04/15/2020
+  ms.openlocfilehash: c0f987396a4bfcdbc8c189938125eb2a65dadc8a
+  ms.sourcegitcommit: d5d45d84fe488427d418de770000f7df44a08370
+  ms.translationtype: HT
   ms.contentlocale: tr-TR
-  ms.lasthandoff: 04/06/2020
-  ms.locfileid: "80366654"
+  ms.lasthandoff: 04/17/2020
+  ms.locfileid: "81542404"
 highlightedContent:
   items:
-  - title: 5 dakika içinde herhangi bir platformda ASP.NET Core uygulaması oluşturun
+  - title: ASP.NET Core uygulamasını herhangi bir platformda, 5 dakika içinde oluşturun
     itemType: get-started
     url: getting-started/index.md
-  - title: ASP.NET Core'a genel bakış
+  - title: ASP.NET Core genel bakış
     itemType: overview
     url: introduction-to-aspnet-core.md
-  - title: ASP.NET Core video eğitimleri
+  - title: ASP.NET Core video öğreticileri
     itemType: video
     url: https://www.youtube.com/playlist?list=PLdo4fOcmZ0oW8nviYduHq7bmKode-p8Wy
   - title: ASP.NET Core belgelerindeki yenilikler
     itemType: whats-new
     url: whats-new/index.yml
-  - title: İlk web ui'nizi oluşturun
+  - title: İlk web kullanıcı arabiriminizi oluşturma
     itemType: get-started
     url: tutorials/build-your-first-blazor-app.md
-  - title: İlk web API'nizi oluşturun
+  - title: İlk web API’nizi oluşturma
     itemType: get-started
     url: tutorials/first-web-api.md
-  - title: İlk gerçek zamanlı web uygulamanızı oluşturun
+  - title: İlk gerçek zamanlı web uygulamanızı oluşturma
     itemType: get-started
     url: tutorials/signalr.md
-  - title: İlk veri odaklı MVC web uygulamanızı oluşturun
+  - title: İlk veri odaklı MVC web uygulamanızı oluşturma
     itemType: get-started
-    url: tutorials/first-mvc-app/index.md
+    url: tutorials/first-mvc-app//start-mvc.md
 conceptualContent:
   title: ASP.NET Core uygulamaları geliştirme
-  summary: Etkileşimli web uygulamalarını, web API'sini, MVC desenli uygulamaları, gerçek zamanlı uygulamaları ve daha fazlasını seçin
+  summary: Etkileşimli web uygulamaları, web API’si, MVC desenli uygulamalar, gerçek zamanlı uygulamalar ve daha birçok seçenek arasından seçim yapın
   items:
-  - title: İnteraktif istemci tarafı Blazor uygulamaları
-    summary: Yakın yerel performans için WebAssembly'den yararlanabilen yeniden kullanılabilir Ara Birimi bileşenleriyle geliştirin
+  - title: Etkileşimli istemci tarafı Blazor uygulamaları
+    summary: Neredeyse yerel performans için WebAssembly’nin avantajından yararlanabilen yeniden kullanılabilir kullanıcı arabirimi bileşenleriyle geliştirin
     links:
     - url: blazor/index.md
       itemType: overview
       text: Genel Bakış
     - url: blazor/get-started.md
       itemType: get-started
-      text: İlk Blazor uygulamanızı oluşturun
+      text: İlk Blazor uygulamanızı oluşturma
     - url: tutorials/build-your-first-blazor-app.md
       itemType: get-started
-      text: Yeniden kullanılabilir bileşenlerle ilk Blazor uygulamanızı oluşturun
+      text: Yeniden kullanılabilir bileşenlerle ilk Blazor uygulamanızı oluşturma
     - url: blazor/hosting-models.md
       itemType: concept
-      text: Blazor hosting modelleri
-  - title: RESTful web API uygulamaları
-    summary: ASP.NET Core web API ile restful HTTP hizmetleri geliştirin
+      text: Blazor barındırma modelleri
+  - title: RESTful web API’si uygulamaları
+    summary: ASP.NET Core web API’siyle RESTful HTTP hizmetleri geliştirme
     links:
     - url: tutorials/first-web-api.md
       itemType: get-started
-      text: ASP.NET Core ile web API'si oluşturma
+      text: ASP.NET Core ile web API’si oluşturma
     - url: https://docs.microsoft.com/learn/modules/build-web-api-net-core/
       itemType: learn
-      text: ASP.NET Core ile web API'leri oluşturma
+      text: ASP.NET Core ile web API’leri oluşturma
     - url: tutorials/web-api-help-pages-using-swagger.md
       itemType: tutorial
-      text: Swagger / OpenAPI ile web API yardım sayfaları oluşturma
+      text: Swagger / OpenAPI ile web API’si yardım sayfaları oluşturma
     - url: web-api/action-return-types.md
       itemType: concept
       text: Denetleyici eylemi dönüş türleri
@@ -84,34 +84,34 @@ conceptualContent:
       text: Hataları işleme
     - url: tutorials/web-api-javascript.md
       itemType: tutorial
-      text: JavaScript ile ASP.NET Core web API'yi arayın
-  - title: Jilet Sayfalı Sayfa Odaklı Web Web UI
-    summary: Endişeleri temiz bir ayrım ile sayfa odaklı web uygulamaları geliştirme
+      text: JavaScript ile ASP.NET Core web API’sini çağırma
+  - title: Razor Pages ile sayfa odaklı web kullanıcı arabirimi
+    summary: Sorunların net bir şekilde ayrıldığı sayfa odaklı web uygulamaları geliştirme
     links:
     - url: tutorials/razor-pages/razor-pages-start.md
       itemType: get-started
-      text: İlk Razor Pages web uygulamanızı oluşturun
+      text: İlk Razor Pages web uygulamanızı oluşturma
     - url: https://docs.microsoft.com/learn/modules/create-razor-pages-aspnet-core/
       itemType: tutorial
-      text: Create a page-focused web UI that consumes a web API
+      text: Web API’si kullanan sayfa odaklı web kullanıcı arabirimi oluşturma
     - url: mvc/views/razor.md
       itemType: concept
       text: Razor söz dizimi
     - url: razor-pages/filter.md
       itemType: concept
-      text: Filtreler
+      text: FilTReleri
     - url: razor-pages/razor-pages-conventions.md
       itemType: concept
       text: Yönlendirme
-  - title: MVC ile sayfa odaklı web UI
-    summary: Model-Görünüm-Denetleyici tasarım modelini kullanarak web uygulamaları geliştirme
+  - title: MVC ile sayfa odaklı web kullanıcı arabirimi
+    summary: Model-Görünüm-Denetleyici tasarım desenini kullanarak web uygulamaları geliştirme
     links:
     - url: mvc/overview.md
       itemType: overview
       text: Genel Bakış
     - url: tutorials/first-mvc-app/index.md
       itemType: get-started
-      text: İlk ASP.NET Core MVC uygulamanızı oluşturun
+      text: İlk ASP.NET Core MVC uygulamanızı oluşturma
     - url: mvc/views/overview.md
       itemType: concept
       text: Görünümler
@@ -128,14 +128,14 @@ conceptualContent:
       itemType: concept
       text: Birim testi
   - title: SignalR ile gerçek zamanlı web uygulamaları
-    summary: Web uygulamanıza gerçek zamanlı işlevsellik ekleyin, sunucu tarafı kodunun içeriği anında itmesini etkinleştirin
+    summary: Web uygulamanıza gerçek zamanlı işlevsellik ekleyin, içeriği anında göndermek için sunucu tarafı kodunu etkinleştirin
     links:
     - url: signalr/introduction.md
       itemType: overview
       text: Genel Bakış
     - url: signalr/introduction.md
       itemType: get-started
-      text: İlk SignalR uygulamanızı oluşturun
+      text: İlk SignalR uygulamanızı oluşturma
     - url: tutorials/signalr-blazor-webassembly.md
       itemType: tutorial
       text: Blazor WebAssembly ile SignalR
@@ -147,15 +147,15 @@ conceptualContent:
       text: Örnekler
     - url: signalr/hubs.md
       itemType: concept
-      text: Hub'lar
+      text: Merkezler
     - url: signalr/client-features.md
       itemType: concept
       text: SignalR istemci özellikleri
     - url: signalr/scale.md
       itemType: concept
       text: Konak ve ölçek
-  - title: Uzaktan Yordam Çağrısı (RPC) uygulamaları - gRPC hizmetleri
-    summary: ASP.NET Core'da gRPC ile sözleşmeli, yüksek performanslı hizmetler geliştirin
+  - title: Uzak Yordam Çağrısı (RPC) uygulamaları - gRPC hizmetleri
+    summary: ASP.NET Core’da gRPC ile sözleşme öncelikli, yüksek performanslı hizmetler geliştirme
     links:
     - url: grpc/index.md
       itemType: overview
@@ -165,7 +165,7 @@ conceptualContent:
       text: gRPC istemcisi ve sunucusu oluşturma
     - url: grpc/basics.md
       itemType: concept
-      text: "C'de gRPC hizmetleri kavramları #"
+      text: C# dilinde gRPC hizmetleri kavramları
     - url: https://github.com/grpc/grpc-dotnet/tree/master/examples
       itemType: sample
       text: Örnekler
@@ -177,39 +177,39 @@ conceptualContent:
       text: ASP.NET Core uygulamasına gRPC hizmeti ekleme
     - url: grpc/client.md
       itemType: tutorial
-      text: .NET istemcisi ile gRPC hizmetlerini arayın
+      text: .NET istemcisiyle gRPC hizmetlerini çağırma
     - url: grpc/browser.md
       itemType: tutorial
       text: Tarayıcı uygulamalarında gRPC kullanma
   - title: Veri odaklı web uygulamaları
-    summary: ASP.NET Core'da veri odaklı web uygulamaları oluşturun
+    summary: ASP.NET Core’da veri odaklı web uygulamaları oluşturma
     links:
-    - url: tutorials/first-mvc-app/working-with-sql.md
+    - url: tutorials/first-mvc-app/start-mvc.md
       itemType: tutorial
       text: ASP.NET Core ile SQL
     - url: blazor/data-binding.md
       itemType: concept
-      text: Core Blazor'da ASP.NET Veri bağlama
-    - url: tutorials/razor-pages/sql.md
+      text: ASP.NET Core Blazor’da veri bağlama
+    - url: tutorials/razor-pages/razor-pages-start.md
       itemType: tutorial
-      text: SQL Server Express ve Razor Sayfaları
+      text: SQL Server Express ve Razor Pages
     - url: data/ef-rp/intro.md
       itemType: tutorial
-      text: Jilet Sayfalı Varlık Çerçeve Çekirdeği
+      text: Razor Pages ile Entity Framework Core
     - url: data/ef-rp/intro.md
       itemType: tutorial
-      text: ASP.NET Core MVC ile Varlık Çerçeve Çekirdeği
+      text: ASP.NET Core MVC ile Entity Framework Core
     - url: https://docs.microsoft.com/visualstudio/azure/vs-azure-tools-connected-services-storage?view=vs-2019&viewFallbackFrom=aspnetcore-3.1
       itemType: tutorial
-      text: Azure Storage
+      text: Azure Depolama
     - url: https://docs.microsoft.com/azure/visual-studio/vs-storage-aspnet5-getting-started-blobs?toc=%2Faspnet%2Fcore%2Ftoc.json&bc=%2Faspnet%2Fcore%2Fbreadcrumb%2Ftoc.json&view=aspnetcore-3.1
       itemType: tutorial
       text: Blob Depolama
     - url: https://docs.microsoft.com/azure/visual-studio/vs-storage-aspnet5-getting-started-tables?toc=%2Faspnet%2Fcore%2Ftoc.json&bc=%2Faspnet%2Fcore%2Fbreadcrumb%2Ftoc.json&view=aspnetcore-3.1
       itemType: concept
       text: Azure Table Storage
-  - title: Önceki ASP.NET çerçeve sürümleri
-    summary: Önceki ASP.NET çerçeve sürümleri için genel bakışları, öğreticileri, temel kavramları, mimari ve API başvurularını keşfedin
+  - title: Önceki .NET Framework sürümleri
+    summary: Önceki ASP.NET Framework sürümlerine yönelik genel bakış bilgilerini, öğreticileri, temel kavramları, mimarileri ve API başvurularını gözden geçirin
     links:
     - url: https://docs.microsoft.com/aspnet/overview
       itemType: concept
@@ -227,7 +227,7 @@ additionalContent:
       - url: host-and-deploy/index.md
         text: Genel Bakış
       - url: host-and-deploy/azure-apps/index.md
-        text: Azure App Service’e dağıtma
+        text: Azure App Service'e dağıtma
       - url: azure/devops/index.md
         text: ASP.NET Core ve Azure ile DevOps
       - url: host-and-deploy/linux-apache.md
@@ -245,17 +245,17 @@ additionalContent:
       - url: security/index.md
         text: Genel Bakış
       - url: security/authentication/index.md
-        text: Kimlik Doğrulaması
+        text: Kimlik doğrulaması
       - url: security/authorization/introduction.md
         text: Yetkilendirme
       - url: https://docs.microsoft.com/learn/modules/secure-aspnet-core-identity/
-        text: 'Kurs: Kimlik çerçevesi ile ASP.NET Core web uygulamasını güvenli hale'
+        text: 'Kurs: Kimlik çerçevesiyle ASP.NET Core web uygulamasının güvenliğini sağlama'
       - url: security/data-protection/introduction.md
         text: Veri koruma
       - url: security/app-secrets.md
         text: Gizli dizi yönetimi
       - url: security/enforcing-ssl.md
-        text: HTTPS zorlama
+        text: HTTPS'yi zorunlu tutma
       - url: security/docker-https.md
         text: HTTPS ile Docker’ı barındırma
     - title: Genelleştirme ve yerelleştirme
@@ -263,12 +263,12 @@ additionalContent:
       - url: fundamentals/localization.md
         text: Genel Bakış
       - url: fundamentals/portable-object-localization.md
-        text: Taşınabilir nesne yerelleştirme
+        text: Taşınabilir nesne yerelleştirmesi
       - url: fundamentals/localization-extensibility.md
-        text: Yerelleştirme genişletilebilirlik
+        text: Yerelleştirmenin genişletilebilirliği
       - url: fundamentals/troubleshoot-aspnet-core-localization.md
         text: Sorun giderme
-    - title: Test, hata ayıklama ve sorun giderme
+    - title: Test etme, hata ayıklama ve sorun giderme
       links:
       - url: test/razor-pages-tests.md
         text: Razor Pages birim testleri
@@ -283,31 +283,31 @@ additionalContent:
       - url: test/troubleshoot.md
         text: Sorun giderme ve hata ayıklama
       - url: fundamentals/logging/index.md
-        text: Günlüğe kaydetme
+        text: Günlüğe Kaydetme
       - url: https://docs.microsoft.com/learn/modules/load-test-web-app-azure-devops/
-        text: Azure DevOps'u kullanarak Azure web uygulamalarında yük testi gerçekleştirme
+        text: Azure DevOps kullanarak Azure web uygulamalarında yük testi yapma
     - title: Azure ve ASP.NET Core
       links:
       - url: https://docs.microsoft.com/azure/app-service/app-service-web-get-started-dotnet
         text: ASP.NET web uygulaması dağıtma
       - url: https://docs.microsoft.com/visualstudio/containers/container-tools?view=vs-2019.md
-        text: ASP.NET Çekirdek ve Docker
+        text: ASP.NET Core ve Docker
       - url: https://docs.microsoft.com/learn/modules/host-a-web-app-with-azure-app-service/
         text: Azure App Service ile web uygulaması barındırma
       - url: https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-dotnet-sqldatabase
-        text: Uygulama Hizmeti ve Azure SQL Veritabanı
+        text: App Service ve Azure SQL Veritabanı
       - url: https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-connect-msi
         text: ASP.NET ve Azure SQL Veritabanı ile yönetilen kimlik
       - url: https://docs.microsoft.com/azure/app-service/app-service-web-tutorial-rest-api
-        text: Azure Uygulama Hizmetinde CORS ile Web API
+        text: Azure App Service’de CORS ile Web API’si
       - url: https://docs.microsoft.com/learn/modules/capture-application-logs-app-service/
-        text: App Service Tanılama Günlüğüyle Web Uygulaması Günlüklerini Yakalama
+        text: App Service Tanılama Günlüğü ile Web Uygulaması Günlüklerini Yakalama
     - title: Performans
       links:
       - url: performance/performance-best-practices.md
         text: Genel Bakış
       - url: performance/memory.md
-        text: Bellek ve çöp toplama
+        text: Bellek ve atık toplama
       - url: performance/caching/response.md
         text: Yanıtları Önbelleğe Alma
       - url: performance/response-compression.md
@@ -331,23 +331,23 @@ additionalContent:
     - title: Geçiş
       links:
       - url: migration/31-to-50.md
-        text: ASP.NET Çekirdek 3.1 ile 5.0 arası
+        text: ASP.NET Core 3.1 - 5.0
       - url: migration/30-to-31.md
-        text: ASP.NET Core 3.0 ile 3.1 arası
+        text: ASP.NET Core 3.0 - 3.1
       - url: migration/22-to-30.md
-        text: ASP.NET Core 2.2 ile 3.0 arası
+        text: ASP.NET Core 2.2 - 3.0
       - url: migration/21-to-22.md
-        text: ASP.NET Core 2.1 ile 2.2 arasında
+        text: ASP.NET Core 2.1 - 2.2
       - url: migration/20_21.md
-        text: ASP.NET Core 2.0’dan 2.1’e geçiş
+        text: ASP.NET Core 2.0 - 2.1
       - url: migration/1x-to-2x/index.md
-        text: ASP.NET Core 1.x sürümünden 2.0 sürümüne
+        text: ASP.NET Core 1.x - 2.0
       - url: migration/proper-to-2x/index.md
         text: ASP.NET’ten ASP.NET Core’a
     - title: Mimari
       links:
       - url: https://docs.microsoft.com/dotnet/architecture/modern-web-apps-azure/choose-between-traditional-web-and-single-page-apps
-        text: Geleneksel web uygulamaları ve Tek Sayfauygulamaları (SPA) arasında seçim yapın
+        text: Geleneksel web uygulamaları ile Tek Sayfalı Uuygulamalar (SPA) arasında seçim yapma
       - url: https://docs.microsoft.com/dotnet/architecture/modern-web-apps-azure/architectural-principles
         text: Mimari ilkeleri
       - url: https://docs.microsoft.com/dotnet/architecture/modern-web-apps-azure/common-web-application-architectures
@@ -356,4 +356,4 @@ additionalContent:
         text: Ortak istemci tarafı web teknolojileri
       - url: https://docs.microsoft.com/dotnet/architecture/modern-web-apps-azure/development-process-for-azure
         text: Azure için geliştirme işlemi
-  footer: ASP.NET dokümanlara katkıda bulunun. Katkıda [bulunan kılavuzumuzu](https://github.com/aspnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md)okuyun.
+  footer: ASP.NET belgelerine katkıda bulunun. [Katkıda bulunan kılavuzunu](https://github.com/aspnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md) okuyun.

@@ -357,7 +357,7 @@
           uid: blazor/handle-errors
         - name: WebAssembly hata ayıklaması
           uid: blazor/debug
-        - name: Web API’si çağırma
+        - name: WebAssembly'den bir web API’sini çağırma
           uid: blazor/call-web-api
         - name: Aşamalı Web Uygulamaları
           uid: blazor/progressive-web-app
