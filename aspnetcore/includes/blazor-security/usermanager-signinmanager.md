@@ -1,8 +1,8 @@
 ## <a name="usermanager-and-signinmanager"></a>UserManager ve SignInManager
 
-Bir Sunucu uygulaması gerektirdiğinde kullanıcı tanımlayıcı talep türünü ayarlama:
+Bir sunucu uygulaması gerektirdiğinde Kullanıcı tanımlayıcısı talep türünü ayarlayın:
 
-* <xref:Microsoft.AspNetCore.Identity.UserManager%601>veya <xref:Microsoft.AspNetCore.Identity.SignInManager%601> BIR API bitiş noktasında.
+* <xref:Microsoft.AspNetCore.Identity.UserManager%601>ya <xref:Microsoft.AspNetCore.Identity.SignInManager%601> da bir API uç noktasında.
 * <xref:Microsoft.AspNetCore.Identity.IdentityUser>kullanıcının adı, e-posta adresi veya kilitleme bitiş saati gibi ayrıntılar.
 
 `Startup.ConfigureServices` içinde:
@@ -12,7 +12,7 @@ services.Configure<IdentityOptions>(options =>
     options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier);
 ```
 
-Yöntem `WeatherForecastController` <xref:Microsoft.AspNetCore.Identity.IdentityUser%601.UserName> çağrıldığında `Get` aşağıdaki günlüğe kaydeder:
+Aşağıdaki `WeatherForecastController` , `Get` yöntemi çağrıldığında <xref:Microsoft.AspNetCore.Identity.IdentityUser%601.UserName> günlüğe kaydedilir:
 
 ```csharp
 using System;
@@ -23,10 +23,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
-using BlazorAppIdentityServer.Server.Models;
-using BlazorAppIdentityServer.Shared;
+using {APP NAMESPACE}.Server.Models;
+using {APP NAMESPACE}.Shared;
 
-namespace BlazorAppIdentityServer.Server.Controllers
+namespace {APP NAMESPACE}.Server.Controllers
 {
     [Authorize]
     [ApiController]
