@@ -1,18 +1,18 @@
-## <a name="usermanager-and-signinmanager"></a><span data-ttu-id="cc0a1-101">UserManager ve SignInManager</span><span class="sxs-lookup"><span data-stu-id="cc0a1-101">UserManager and SignInManager</span></span>
+## <a name="usermanager-and-signinmanager"></a><span data-ttu-id="d74dd-101">UserManager ve SignInManager</span><span class="sxs-lookup"><span data-stu-id="d74dd-101">UserManager and SignInManager</span></span>
 
-<span data-ttu-id="cc0a1-102">Bir Sunucu uygulaması gerektirdiğinde kullanıcı tanımlayıcı talep türünü ayarlama:</span><span class="sxs-lookup"><span data-stu-id="cc0a1-102">Set the user identifier claim type when a Server app requires:</span></span>
+<span data-ttu-id="d74dd-102">Bir sunucu uygulaması gerektirdiğinde Kullanıcı tanımlayıcısı talep türünü ayarlayın:</span><span class="sxs-lookup"><span data-stu-id="d74dd-102">Set the user identifier claim type when a Server app requires:</span></span>
 
-* <span data-ttu-id="cc0a1-103"><xref:Microsoft.AspNetCore.Identity.UserManager%601>veya <xref:Microsoft.AspNetCore.Identity.SignInManager%601> BIR API bitiş noktasında.</span><span class="sxs-lookup"><span data-stu-id="cc0a1-103"><xref:Microsoft.AspNetCore.Identity.UserManager%601> or <xref:Microsoft.AspNetCore.Identity.SignInManager%601> in an API endpoint.</span></span>
-* <span data-ttu-id="cc0a1-104"><xref:Microsoft.AspNetCore.Identity.IdentityUser>kullanıcının adı, e-posta adresi veya kilitleme bitiş saati gibi ayrıntılar.</span><span class="sxs-lookup"><span data-stu-id="cc0a1-104"><xref:Microsoft.AspNetCore.Identity.IdentityUser> details, such as the user's name, email address, or lockout end time.</span></span>
+* <span data-ttu-id="d74dd-103"><xref:Microsoft.AspNetCore.Identity.UserManager%601>ya <xref:Microsoft.AspNetCore.Identity.SignInManager%601> da bir API uç noktasında.</span><span class="sxs-lookup"><span data-stu-id="d74dd-103"><xref:Microsoft.AspNetCore.Identity.UserManager%601> or <xref:Microsoft.AspNetCore.Identity.SignInManager%601> in an API endpoint.</span></span>
+* <span data-ttu-id="d74dd-104"><xref:Microsoft.AspNetCore.Identity.IdentityUser>kullanıcının adı, e-posta adresi veya kilitleme bitiş saati gibi ayrıntılar.</span><span class="sxs-lookup"><span data-stu-id="d74dd-104"><xref:Microsoft.AspNetCore.Identity.IdentityUser> details, such as the user's name, email address, or lockout end time.</span></span>
 
-<span data-ttu-id="cc0a1-105">`Startup.ConfigureServices` içinde:</span><span class="sxs-lookup"><span data-stu-id="cc0a1-105">In `Startup.ConfigureServices`:</span></span>
+<span data-ttu-id="d74dd-105">`Startup.ConfigureServices` içinde:</span><span class="sxs-lookup"><span data-stu-id="d74dd-105">In `Startup.ConfigureServices`:</span></span>
 
 ```csharp
 services.Configure<IdentityOptions>(options => 
     options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier);
 ```
 
-<span data-ttu-id="cc0a1-106">Yöntem `WeatherForecastController` <xref:Microsoft.AspNetCore.Identity.IdentityUser%601.UserName> çağrıldığında `Get` aşağıdaki günlüğe kaydeder:</span><span class="sxs-lookup"><span data-stu-id="cc0a1-106">The following `WeatherForecastController` logs the <xref:Microsoft.AspNetCore.Identity.IdentityUser%601.UserName> when the `Get` method is called:</span></span>
+<span data-ttu-id="d74dd-106">Aşağıdaki `WeatherForecastController` , `Get` yöntemi çağrıldığında <xref:Microsoft.AspNetCore.Identity.IdentityUser%601.UserName> günlüğe kaydedilir:</span><span class="sxs-lookup"><span data-stu-id="d74dd-106">The following `WeatherForecastController` logs the <xref:Microsoft.AspNetCore.Identity.IdentityUser%601.UserName> when the `Get` method is called:</span></span>
 
 ```csharp
 using System;
@@ -23,10 +23,10 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
-using BlazorAppIdentityServer.Server.Models;
-using BlazorAppIdentityServer.Shared;
+using {APP NAMESPACE}.Server.Models;
+using {APP NAMESPACE}.Shared;
 
-namespace BlazorAppIdentityServer.Server.Controllers
+namespace {APP NAMESPACE}.Server.Controllers
 {
     [Authorize]
     [ApiController]
