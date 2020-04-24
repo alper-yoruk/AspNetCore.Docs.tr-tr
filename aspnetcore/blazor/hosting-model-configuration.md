@@ -1,41 +1,41 @@
 ---
-title: ASP.NET Blazor Core hosting modeli yapılandırma
+title: ASP.NET Core Blazor barındırma modeli yapılandırması
 author: guardrex
-description: Razor Blazor bileşenlerinin Razor Pages ve MVC uygulamalarına nasıl entegre edilebildiğini de içeren model yapılandırmasını barındırma hakkında bilgi edinin.
+description: Razor bileşenlerini Blazor Razor Pages ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/16/2020
+ms.date: 04/23/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/hosting-model-configuration
-ms.openlocfilehash: 6a3731657d11faed0b005b429058343b2be4c44b
-ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
+ms.openlocfilehash: cf5776109368dc7353d7e21bcad1e947561e7eb4
+ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81791473"
+ms.lasthandoff: 04/24/2020
+ms.locfileid: "82111064"
 ---
-# <a name="aspnet-core-blazor-hosting-model-configuration"></a>ASP.NET Core Blazor hosting modeli yapılandırma
+# <a name="aspnet-core-blazor-hosting-model-configuration"></a>ASP.NET Core Blazor barındırma modeli yapılandırması
 
-Yazar: [Daniel Roth](https://github.com/danroth27)
+[Daniel Roth](https://github.com/danroth27) ve [Luke Latham](https://github.com/guardrex) tarafından
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Bu makalede, barındırma modeli yapılandırmakapsar.
+Bu makalede barındırma modeli yapılandırması ele alınmaktadır.
 
 ## <a name="blazor-webassembly"></a>Blazor WebAssembly
 
 ### <a name="environment"></a>Ortam
 
-Bir uygulamayı yerel olarak çalıştırırken, ortam Geliştirme varsayılan olarak Uygulama yayımlandığında, ortam Üretim varsayılandır.
+Bir uygulamayı yerel olarak çalıştırırken, ortam varsayılan olarak geliştirme aşamasındadır. Uygulama yayımlandığında, ortam varsayılan olarak üretim olur.
 
-Barındırılan bir Blazor WebAssembly uygulaması, `blazor-environment` üstbilgi ekleyerek ortamı tarayıcıya bildiren bir ara yazılım aracılığıyla ortamı sunucudan alır. Üstbilginin değeri ortamdır. Barındırılan Blazor uygulaması ve sunucu uygulaması aynı ortamı paylaşır. Ortamın nasıl yapılandırılabildiğini de içeren <xref:fundamentals/environments>daha fazla bilgi için bkz.
+Barındırılan bir Blazor WebAssembly uygulaması, `blazor-environment` üst bilgiyi ekleyerek ortamı tarayıcıya ileten bir ara yazılım aracılığıyla sunucudan ortamı seçer. Üstbilginin değeri ortamıdır. Barındırılan Blazor uygulaması ve sunucu uygulaması aynı ortamı paylaşır. Ortamın nasıl yapılandırılacağı dahil olmak üzere daha fazla bilgi için bkz <xref:fundamentals/environments>..
 
-Yerel olarak çalışan bağımsız bir uygulama için `blazor-environment` geliştirme sunucusu Geliştirme ortamını belirtmek için üstbilgi ekler. Diğer barındırma ortamları için ortamı `blazor-environment` belirtmek için üstbilgi ekleyin.
+Yerel olarak çalışan tek başına bir uygulama için geliştirme sunucusu, geliştirme `blazor-environment` ortamını belirtmek için üst bilgi ekler. Diğer barındırma ortamlarının ortamını belirtmek için `blazor-environment` üst bilgiyi ekleyin.
 
-IIS için aşağıdaki örnekte, yayınlanan *web.config* dosyasına özel üstbilgi ekleyin. *web.config* dosyası *depo/Yayın/{TARGET FRAMEWORK}/publish* klasöründe bulunur:
+IIS için aşağıdaki örnekte, yayınlanan *Web. config* dosyasına özel üstbilgiyi ekleyin. *Web. config* dosyası *bin/Release/{Target Framework}/Publish* klasöründe bulunur:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -54,9 +54,9 @@ IIS için aşağıdaki örnekte, yayınlanan *web.config* dosyasına özel üstb
 ```
 
 > [!NOTE]
-> Uygulama *yayımlama* klasöründe yayımlandığında üzerine yazılmayan IIS için özel bir <xref:host-and-deploy/blazor/webassembly#use-a-custom-webconfig> *web.config* dosyası kullanmak için bkz.
+> Uygulama *Yayımlama* klasörüne yayımlandığında üzerine YAZıLMAYAN IIS için özel <xref:host-and-deploy/blazor/webassembly#use-a-custom-webconfig> *Web. config* dosyasını kullanmak için, bkz..
 
-Özelliği enjekte ederek ve okuyarak uygulamanın ortamını bir bileşende elde edin: `IWebAssemblyHostEnvironment` `Environment`
+Ekleme `IWebAssemblyHostEnvironment` tarafından bir bileşende uygulamanın ortamını edinin ve `Environment` özelliği okuyun:
 
 ```razor
 @page "/"
@@ -68,7 +68,7 @@ IIS için aşağıdaki örnekte, yayınlanan *web.config* dosyasına özel üstb
 <p>Environment: @HostEnvironment.Environment</p>
 ```
 
-Başlangıç sırasında, `WebAssemblyHostBuilder` geliştiricilerin `IWebAssemblyHostEnvironment` kodlarında ortama özgü bir mantığa sahip olmalarını sağlayan özellik aracılığıyla `HostEnvironment` ortaya çıkar:
+Başlangıç sırasında, geliştiricilerin `WebAssemblyHostBuilder` kendi kodlarında `IWebAssemblyHostEnvironment` ortama özgü `HostEnvironment` mantığa sahip olmasını sağlayan özelliği aracılığıyla kullanıma sunar:
 
 ```csharp
 if (builder.HostEnvironment.Environment == "Custom")
@@ -77,12 +77,12 @@ if (builder.HostEnvironment.Environment == "Custom")
 };
 ```
 
-Aşağıdaki kolaylık uzatma yöntemleri, Geliştirme, Üretim, Evreleme ve özel ortam adları için geçerli ortamın denetlenmesine izin verir:
+Aşağıdaki kullanışlı uzantı yöntemleri, geliştirme, üretim, hazırlama ve özel ortam adları için geçerli ortamı denetlemeye izin verir:
 
 * `IsDevelopment()`
 * `IsProduction()`
 * `IsStaging()`
-* 'IsEnvironment("{ENVIRONMENT NAME}")
+* ' Isenvironment ("{ortam adı}")
 
 ```csharp
 if (builder.HostEnvironment.IsStaging())
@@ -96,16 +96,25 @@ if (builder.HostEnvironment.IsEnvironment("Custom"))
 };
 ```
 
-Özellik, `IWebAssemblyHostEnvironment.BaseAddress` `NavigationManager` hizmet kullanılamadığında başlangıç sırasında kullanılabilir.
+Özelliği `IWebAssemblyHostEnvironment.BaseAddress` , `NavigationManager` hizmet kullanılamadığında başlatma sırasında kullanılabilir.
 
 ### <a name="configuration"></a>Yapılandırma
 
-ASP.NET Core 3.2 Preview 3 sürümü itibariyle[(geçerli sürüm 3.2 Önizleme 4),](xref:blazor/get-started)Blazor WebAssembly yapılandırma destekler:
+Blazor WebAssembly yapılandırmayı şunları destekler:
 
-* *wwwroot/appsettings.json*
-* *wwwroot/appsettings adresinde n için. {ÇEVRE}.json*
+* Uygulama ayarları dosyaları için varsayılan olarak [dosya yapılandırma sağlayıcısı](xref:fundamentals/configuration/index#file-configuration-provider) :
+  * *Wwwroot/appSettings. JSON*
+  * *Wwwroot/appSettings. {ENVIRONMENT}. JSON*
+* Uygulama tarafından kaydedilen diğer [yapılandırma sağlayıcıları](xref:fundamentals/configuration/index) .
 
-*wwwroot* klasörüne bir *appsettings.json* dosyası ekleyin:
+> [!WARNING]
+> Blazor WebAssembly uygulamasındaki yapılandırma kullanıcılar tarafından görülebilir. **Yapılandırma bölümünde uygulama gizli dizilerini veya kimlik bilgilerini depolamamayın.**
+
+Yapılandırma sağlayıcıları hakkında daha fazla bilgi için bkz <xref:fundamentals/configuration/index>..
+
+#### <a name="app-settings-configuration"></a>Uygulama ayarları yapılandırması
+
+*Wwwroot/appSettings. JSON*:
 
 ```json
 {
@@ -113,7 +122,7 @@ ASP.NET Core 3.2 Preview 3 sürümü itibariyle[(geçerli sürüm 3.2 Önizleme 
 }
 ```
 
-Yapılandırma <xref:Microsoft.Extensions.Configuration.IConfiguration> verilerine erişmek için bir bileşene örnek enjekte edin:
+Yapılandırma verilerine <xref:Microsoft.Extensions.Configuration.IConfiguration> erişmek için bileşene örnek ekleme:
 
 ```razor
 @page "/"
@@ -125,27 +134,132 @@ Yapılandırma <xref:Microsoft.Extensions.Configuration.IConfiguration> verileri
 <p>Message: @Configuration["message"]</p>
 ```
 
-> [!WARNING]
-> Blazor WebAssembly uygulamasındaki yapılandırma kullanıcılar tarafından görülebilir. **Uygulama sırlarını veya kimlik bilgilerini yapılandırmada saklamayın.**
+#### <a name="provider-configuration"></a>Sağlayıcı yapılandırması
 
-Yapılandırma dosyaları çevrimdışı kullanım için önbelleğe alınır. [Aşamalı Web Uygulamaları (PWAs)](xref:blazor/progressive-web-app)ile yapılandırma dosyalarını yalnızca yeni bir dağıtım oluştururken güncelleştirebilirsiniz. Dağıtımlar arasında yapılandırma dosyalarını düzenlemenin hiçbir etkisi yoktur, çünkü:
+Aşağıdaki örnek, ek yapılandırma <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> sağlamak için bir ve [dosya yapılandırma sağlayıcısı](xref:fundamentals/configuration/index#file-configuration-provider) kullanır:
 
-* Kullanıcılar, kullanmaya devam ettikleri dosyaların sürümlerini önbelleğe aldılar.
-* PWA'nın *hizmet-worker.js* ve *hizmet-işçi-varlıklar.js* dosyaları derleme üzerine yeniden oluşturulmalıdır, bu da kullanıcının bir sonraki çevrimiçi ziyaretinde uygulamaya uygulamanın yeniden dağıtıldığını bildiren bir sinyal verir.
+`Program.Main`:
 
-Arka plan güncelleştirmelerinin PWA'lar tarafından <xref:blazor/progressive-web-app#background-updates>nasıl işlendiği hakkında daha fazla bilgi için bkz.
+```csharp
+using Microsoft.Extensions.Configuration;
+
+...
+
+var vehicleData = new Dictionary<string, string>()
+{
+    { "color", "blue" },
+    { "type", "car" },
+    { "wheels:count", "3" },
+    { "wheels:brand", "Blazin" },
+    { "wheels:brand:type", "rally" },
+    { "wheels:year", "2008" },
+};
+
+var memoryConfig = new MemoryConfigurationSource { InitialData = vehicleData };
+
+...
+
+builder.Configuration
+    .Add(memoryConfig)
+    .AddJsonFile("cars.json", optional: false, reloadOnChange: true);
+```
+
+Yapılandırma verilerine <xref:Microsoft.Extensions.Configuration.IConfiguration> erişmek için bileşene örnek ekleme:
+
+```razor
+@page "/"
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+<h1>Configuration example</h1>
+
+<h2>Wheels</h2>
+
+<ul>
+    <li>Count: @Configuration["wheels:count"]</p>
+    <li>Brand: @Configuration["wheels:brand"]</p>
+    <li>Type: @Configuration["wheels:brand:type"]</p>
+    <li>Year: @Configuration["wheels:year"]</p>
+</ul>
+
+@code {
+    var wheelsSection = Configuration.GetSection("wheels");
+    
+    ...
+}
+```
+
+#### <a name="authentication-configuration"></a>Kimlik doğrulama yapılandırması
+
+*Wwwroot/appSettings. JSON*:
+
+```json
+{
+  "AzureAD": {
+    "Authority": "https://login.microsoftonline.com/",
+    "ClientId": "aeaebf0f-d416-4d92-a08f-e1d5b51fc494"
+  }
+}
+```
+
+`Program.Main`:
+
+```csharp
+builder.Services.AddOidcAuthentication(options =>
+    builder.Configuration.Bind("AzureAD", options);
+```
+
+#### <a name="logging-configuration"></a>Günlüğe kaydetme yapılandırması
+
+*Wwwroot/appSettings. JSON*:
+
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft": "Warning",
+      "Microsoft.Hosting.Lifetime": "Information"
+    }
+  }
+}
+```
+
+`Program.Main`:
+
+```csharp
+builder.Logging.AddConfiguration(
+    builder.Configuration.GetSection("Logging"));
+```
+
+#### <a name="host-builder-configuration"></a>Konak Oluşturucu yapılandırması
+
+`Program.Main`:
+
+```csharp
+var hostname = builder.Configuration["HostName"];
+```
+
+#### <a name="cached-configuration"></a>Önbelleğe alınmış yapılandırma
+
+Yapılandırma dosyaları çevrimdışı kullanım için önbelleğe alınır. [Aşamalı Web uygulamaları (PWAs)](xref:blazor/progressive-web-app)ile, yalnızca yeni bir dağıtım oluştururken yapılandırma dosyalarını güncelleştirebilirsiniz. Yapılandırma dosyalarının dağıtımlar arasında düzenlenmesinin hiçbir etkisi yoktur çünkü:
+
+* Kullanıcıların, kullanmaya devam ettikleri dosyaların önbelleğe alınmış sürümleri vardır.
+* PWA 'nın *Service-Worker. js* ve *Service-Worker-assets. js* dosyalarının derlemede yeniden oluşturulması gerekir. Bu, kullanıcının bir sonraki çevrimiçi sitesinde uygulamaya işaret eden uygulamanın yeniden dağıtıldığını belirten, derleme üzerinde yeniden oluşturulmalıdır.
+
+Arka plan güncelleştirmelerinin PWAs tarafından nasıl işlendiği hakkında daha fazla bilgi için bkz <xref:blazor/progressive-web-app#background-updates>..
 
 ### <a name="logging"></a>Günlüğe Kaydetme
 
-Blazor WebAssembly günlük desteği hakkında <xref:fundamentals/logging/index#create-logs-in-blazor-webassembly>bilgi için bkz.
+Blazor WebAssembly günlük desteği hakkında bilgi için bkz <xref:fundamentals/logging/index#create-logs-in-blazor>..
 
 ## <a name="blazor-server"></a>Blazor Server
 
-### <a name="reflect-the-connection-state-in-the-ui"></a>Bağlantı durumunu UI'de yansıtma
+### <a name="reflect-the-connection-state-in-the-ui"></a>Kullanıcı arabirimindeki bağlantı durumunu yansıtır
 
-İstemci bağlantının kaybolduğunu algıladığında, istemci yeniden bağlanmaya çalışırken varsayılan kullanıcı arabirimi kullanıcıya görüntülenir. Yeniden bağlantı başarısız olursa, kullanıcıya yeniden deneme seçeneği sağlanır.
+İstemci bağlantının kaybolduğunu algıladığında, istemci yeniden bağlanmayı denediğinde kullanıcıya varsayılan bir kullanıcı arabirimi görüntülenir. Yeniden bağlantı başarısız olursa, kullanıcıya yeniden deneme seçeneği sağlanır.
 
-UI'yi özelleştirmek `id` için, *_Host.cshtml* Razor sayfasındaki öğeyi içeren bir `components-reconnect-modal` `<body>` öğe tanımlayın:
+Kullanıcı arabirimini özelleştirmek için, *_Host. cshtml* Razor sayfasında `id` öğesinin `components-reconnect-modal` içeren `<body>` bir öğesi tanımlayın:
 
 ```cshtml
 <div id="components-reconnect-modal">
@@ -153,18 +267,18 @@ UI'yi özelleştirmek `id` için, *_Host.cshtml* Razor sayfasındaki öğeyi iç
 </div>
 ```
 
-Aşağıdaki tabloda `components-reconnect-modal` öğeye uygulanan CSS sınıfları açıklanmaktadır.
+Aşağıdaki tabloda `components-reconnect-modal` ÖĞESINE uygulanan CSS sınıfları açıklanmaktadır.
 
-| CSS sınıfı                       | Gösterir&hellip; |
+| CSS sınıfı                       | Bildiren&hellip; |
 | ------------------------------- | ----------------- |
-| `components-reconnect-show`     | Kayıp bir bağlantı. İstemci yeniden bağlanmaya çalışıyor. Modal'ı göster. |
-| `components-reconnect-hide`     | Etkin bir bağlantı sunucuya yeniden kurulur. Modal'ı sakla. |
-| `components-reconnect-failed`   | Yeniden bağlantı, büyük olasılıkla bir ağ hatası nedeniyle başarısız oldu. Yeniden bağlanmayı denemek `window.Blazor.reconnect()`için. |
-| `components-reconnect-rejected` | Yeniden bağlantı reddedildi. Sunucuya ulaşıldı ancak bağlantıyı reddetti ve kullanıcının sunucudaki durumu kaybolur. Uygulamayı yeniden yüklemek için `location.reload()`. Bu bağlantı durumu şu anda neden olabilir:<ul><li>Sunucu tarafındaki devrede bir kilitlenme oluşur.</li><li>İstemci, sunucunun kullanıcının durumunu bırakabilecek kadar uzun süre bağlantısı kesildi. Kullanıcının etkileşimde bulunduğu bileşenlerin örnekleri bertaraf edilir.</li><li>Sunucu yeniden başlatılır veya uygulamanın alt işlemi geri dönüştürülür.</li></ul> |
+| `components-reconnect-show`     | Kayıp bir bağlantı. İstemci yeniden bağlanmaya çalışıyor. Kalıcı olarak göster. |
+| `components-reconnect-hide`     | Etkin bir bağlantı sunucuya yeniden oluşturulur. Kalıcı olarak gizleyin. |
+| `components-reconnect-failed`   | Muhtemelen bir ağ hatasından dolayı yeniden bağlantı başarısız oldu. Yeniden bağlanmayı denemek için çağrısı `window.Blazor.reconnect()`yapın. |
+| `components-reconnect-rejected` | Yeniden bağlantı reddedildi. Sunucuya ulaşıldı ancak bağlantı reddedildi ve kullanıcının sunucudaki durumu kayboldu. Uygulamayı yeniden yüklemek için çağrısı `location.reload()`yapın. Bu bağlantı durumu şu durumlarda oluşabilir:<ul><li>Sunucu tarafında devre dışı bir kilitlenme oluşur.</li><li>Sunucunun kullanıcının durumunu bırakması için istemcinin bağlantısı yeterince uzun değil. Kullanıcının etkileşimde bulunduğu bileşenlerin örnekleri atıldı.</li><li>Sunucu yeniden başlatıldı veya uygulamanın çalışan işlemi geri dönüştürüldü.</li></ul> |
 
-### <a name="render-mode"></a>Render modu
+### <a name="render-mode"></a>Oluşturma modu
 
-Blazor Server uygulamaları, sunucuya istemci bağlantısı kurulmadan önce ui'yi sunucuda önceden işlemek için varsayılan olarak ayarlanır. Bu *_Host.cshtml* Razor sayfasında ayarlanır:
+Blazor sunucu uygulamaları, sunucu bağlantısı oluşturulmadan önce sunucudaki kullanıcı arabirimini varsayılan olarak PreRender 'a ayarlar. Bu, *_Host. cshtml* Razor sayfasında ayarlanır:
 
 ```cshtml
 <body>
@@ -176,28 +290,28 @@ Blazor Server uygulamaları, sunucuya istemci bağlantısı kurulmadan önce ui'
 </body>
 ```
 
-`RenderMode`bileşenin:
+`RenderMode`bileşenin şunları yapıp kullanmadığını yapılandırır:
 
-* Sayfaya önceden işlenir.
-* Sayfada statik HTML olarak işlenir veya kullanıcı aracısından bir Blazor uygulamasını önyükleme için gerekli bilgileri içeriyorsa.
+* , Sayfaya ön gönderilir.
+* , Sayfada statik HTML olarak veya Kullanıcı aracısından bir Blazor uygulamasını önyüklemek için gerekli bilgileri içeriyorsa.
 
 | `RenderMode`        | Açıklama |
 | ------------------- | ----------- |
-| `ServerPrerendered` | Bileşeni statik HTML'ye dönüştürür ve sunucu Blazor uygulaması için bir işaretçi içerir. Kullanıcı aracısı başlatıldığında, bu işaretçi bir Blazor uygulamayı önyükleme için kullanılır. |
-| `Server`            | Blazor Sunucu uygulaması için işaretleyici işler. Bileşenden gelen çıktı dahil değildir. Kullanıcı aracısı başlatıldığında, bu işaretçi bir Blazor uygulamayı önyükleme için kullanılır. |
-| `Static`            | Bileşeni statik HTML'ye dönüştürür. |
+| `ServerPrerendered` | Bileşeni statik HTML olarak işler ve Blazor sunucu uygulaması için bir işaret içerir. Kullanıcı Aracısı başladığında, bu işaretleyici bir Blazor uygulamayı önyüklemek için kullanılır. |
+| `Server`            | Blazor Sunucu uygulaması için bir işaret oluşturur. Bileşen çıkışı dahil değildir. Kullanıcı Aracısı başladığında, bu işaretleyici bir Blazor uygulamayı önyüklemek için kullanılır. |
+| `Static`            | Bileşeni statik HTML olarak işler. |
 
-Sunucu bileşenlerinin statik bir HTML sayfasından görüntülenmeleri desteklenmez.
+Statik HTML sayfasından sunucu bileşenleri işleme desteklenmiyor.
 
-### <a name="render-stateful-interactive-components-from-razor-pages-and-views"></a>Razor sayfalarından ve görünümlerinden durumlu etkileşimli bileşenler oluşturma
+### <a name="render-stateful-interactive-components-from-razor-pages-and-views"></a>Razor sayfaları ve görünümlerinden durum bilgisi olan etkileşimli bileşenleri işleme
 
-Bir Razor sayfasına veya görünümüne devletli etkileşimli bileşenler eklenebilir.
+Durum bilgisi olan etkileşimli bileşenler Razor sayfasına veya görünümüne eklenebilir.
 
-Sayfa veya görünüm işlendiğinde:
+Sayfa veya görünüm şunları işler:
 
-* Bileşen sayfa veya görünüm le önceden işlenmiştir.
-* Ön işleme için kullanılan ilk bileşen durumu kaybolur.
-* SignalR Bağlantı kurulduğunda yeni bileşen durumu oluşturulur.
+* Bileşen sayfa veya görünümle birlikte kullanılır.
+* Prerendering için kullanılan ilk bileşen durumu kayboldu.
+* SignalR Bağlantı kurulduunda yeni bileşen durumu oluşturulur.
 
 Aşağıdaki Razor sayfası bir `Counter` bileşeni işler:
 
@@ -213,9 +327,9 @@ Aşağıdaki Razor sayfası bir `Counter` bileşeni işler:
 }
 ```
 
-### <a name="render-noninteractive-components-from-razor-pages-and-views"></a>Razor sayfalarından ve görünümlerinden etkileşimli olmayan bileşenler oluşturma
+### <a name="render-noninteractive-components-from-razor-pages-and-views"></a>Razor sayfaları ve görünümlerinden etkileşimsiz bileşenleri işleme
 
-Aşağıdaki Razor sayfasında bileşen, `Counter` bir form kullanılarak belirtilen bir başlangıç değeriyle statik olarak işlenir:
+Aşağıdaki Razor sayfasında, `Counter` bileşen bir form kullanılarak belirtilen bir başlangıç değeriyle statik olarak işlenir:
 
 ```cshtml
 <h1>My Razor Page</h1>
@@ -234,16 +348,16 @@ Aşağıdaki Razor sayfasında bileşen, `Counter` bir form kullanılarak belirt
 }
 ```
 
-`MyComponent` Statik olarak işlendiğiiçin bileşen etkileşimli olamaz.
+Statik `MyComponent` olarak işlendiğinden bileşen etkileşimli olamaz.
 
 ### <a name="configure-the-opno-locsignalr-client-for-opno-locblazor-server-apps"></a>Sunucu uygulamaları SignalR için Blazor istemciyi yapılandırma
 
-Bazen, Sunucu uygulamaları tarafından SignalR Blazor kullanılan istemciyi yapılandırmanız gerekir. Örneğin, bağlantı sorunu tanılamak için SignalR istemcide günlüğe kaydetmeyi yapılandırmak isteyebilirsiniz.
+Bazen, sunucu uygulamaları tarafından SignalR Blazor kullanılan istemciyi yapılandırmanız gerekir. Örneğin, bir bağlantı sorununu tanılamak için SignalR istemcide günlüğe kaydetmeyi yapılandırmak isteyebilirsiniz.
 
-SignalR *İstemciyi Pages/_Host.cshtml* dosyasında yapılandırmak için:
+İstemciyi, SignalR *Pages/_Host. cshtml* dosyasında yapılandırmak için:
 
-* Komut `autostart="false"` dosyası için `<script>` etikete bir öznitelik ekleyin. `blazor.server.js`
-* Oluşturucuyu belirten bir yapılandırma `Blazor.start` nesnesinde SignalR arama ve geçiş.
+* Betiğin etiketine bir `autostart="false"` `<script>` `blazor.server.js` ekleyin.
+* Oluşturucuyu belirten bir yapılandırma nesnesi çağırın `Blazor.start` ve geçirin. SignalR
 
 ```html
 <script src="_framework/blazor.server.js" autostart="false"></script>
@@ -255,3 +369,7 @@ SignalR *İstemciyi Pages/_Host.cshtml* dosyasında yapılandırmak için:
   });
 </script>
 ```
+
+### <a name="logging"></a>Günlüğe Kaydetme
+
+Sunucu günlüğü desteği Blazor hakkında bilgi için bkz <xref:fundamentals/logging/index#create-logs-in-blazor>..

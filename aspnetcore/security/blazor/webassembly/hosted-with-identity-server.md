@@ -1,57 +1,60 @@
 ---
-title: Identity Server Blazor ile ASP.NET Core WebAssembly barındırılan uygulamayı güvenli hale getirin
+title: Kimlik sunucusuyla ASP.NET Core Blazor weelsembly barındırılan uygulamasının güvenliğini sağlama
 author: guardrex
-description: Visual Studio Blazor içinden kimlik doğrulaması ile [identityServer](https://identityserver.io/) arka uç kullanan yeni bir barındırılan uygulama oluşturmak için
+description: Bir [IdentityServer](https://identityserver.io/) arka Blazor ucu kullanan Visual Studio içinden kimlik doğrulaması ile yeni bir barındırılan uygulama oluşturmak için
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/30/2020
+ms.date: 04/22/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 4c51200159ced16132e15bb4a1f0915ca0cf5945
-ms.sourcegitcommit: c9d1208e86160615b2d914cce74a839ae41297a8
+ms.openlocfilehash: f8de07e2e21ca19b5c4e95839e7b7e621c335ad0
+ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/22/2020
-ms.locfileid: "81791612"
+ms.lasthandoff: 04/24/2020
+ms.locfileid: "82110958"
 ---
-# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-hosted-app-with-identity-server"></a>Identity Server Blazor ile ASP.NET Core WebAssembly barındırılan uygulamayı güvenli hale getirin
+# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-hosted-app-with-identity-server"></a>Kimlik sunucusuyla ASP.NET Core Blazor weelsembly barındırılan uygulamasının güvenliğini sağlama
 
-Yazar: [Javier Calvarro Nelson](https://github.com/javiercn) ve [Luke Latham](https://github.com/guardrex)
+, [Javier Calvarro Nelson](https://github.com/javiercn) ve [Luke Latham](https://github.com/guardrex) 'e göre
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 [!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
-Visual Studio'da kullanıcıların ve API aramalarını doğrulamak için Blazor [IdentityServer'ı](https://identityserver.io/) kullanan yeni bir barındırılan uygulama oluşturmak için:
+> [!NOTE]
+> Bu makaledeki kılavuz, ASP.NET Core 3,2 Preview 4 için geçerlidir. Bu konu, 24 Nisan, Cuma günü, Önizleme 5 ' i kapsayacak şekilde güncelleştirilecektir.
 
-1. Yeni bir ** Blazor WebAssembly** uygulaması oluşturmak için Visual Studio'yı kullanın. Daha fazla bilgi için bkz. <xref:blazor/get-started>.
-1. ** Blazor Yeni bir uygulama oluştur** iletişim kutusunda Kimlik **Doğrulama** bölümünde **Değiştir'i** seçin.
-1. Ok'un ardından **Bireysel Kullanıcı Hesapları'nı** **seçin.**
+Visual Studio 'da, Blazor KULLANıCıLARıN ve API çağrılarının kimliğini doğrulamak Için [IdentityServer](https://identityserver.io/) kullanan yeni bir barındırılan uygulama oluşturmak için:
+
+1. Yeni ** Blazor bir webassembly** uygulaması oluşturmak için Visual Studio 'yu kullanın. Daha fazla bilgi için bkz. <xref:blazor/get-started>.
+1. ** Blazor Yeni uygulama oluştur** iletişim kutusunda **kimlik doğrulama** bölümünde **Değiştir** ' i seçin.
+1. **Her kullanıcı hesabını** ve ardından **Tamam ' ı**seçin.
 1. **Gelişmiş** bölümünde **ASP.NET Core barındırılan** onay kutusunu seçin.
 1. **Oluştur** düğmesini seçin.
 
-Uygulamayı komut kabuğunda oluşturmak için aşağıdaki komutu uygulayın:
+Uygulamayı bir komut kabuğunda oluşturmak için aşağıdaki komutu yürütün:
 
 ```dotnetcli
 dotnet new blazorwasm -au Individual -ho
 ```
 
-Yoksa proje klasörü oluşturan çıktı konumunu belirtmek için, çıkış seçeneğini bir yolu olan komuta ekleyin `-o BlazorSample`(örneğin, ). Klasör adı da projenin adının bir parçası olur.
+Mevcut değilse bir proje klasörü oluşturan çıkış konumunu belirtmek için, komutuna bir yol ile çıkış seçeneğini ekleyin (örneğin, `-o BlazorSample`). Klasör adı Ayrıca projenin adının bir parçası haline gelir.
 
 ## <a name="server-app-configuration"></a>Sunucu uygulaması yapılandırması
 
-Aşağıdaki bölümlerde kimlik doğrulama desteği eklendiğinde projeye yapılan eklemeler açıklanır.
+Aşağıdaki bölümlerde, kimlik doğrulama desteği dahil edildiğinde projenin eklemeleri açıklanır.
 
 ### <a name="startup-class"></a>Başlangıç sınıfı
 
-Sınıfın `Startup` aşağıdaki eklemeleri vardır:
+`Startup` Sınıfı aşağıdaki eklemelere sahiptir:
 
 * `Startup.ConfigureServices` içinde:
 
-  * Kimlik:
+  * IDENTITY
 
     ```csharp
     services.AddDbContext<ApplicationDbContext>(options =>
@@ -61,14 +64,14 @@ Sınıfın `Startup` aşağıdaki eklemeleri vardır:
         .AddEntityFrameworkStores<ApplicationDbContext>();
     ```
 
-  * IdentityServer'ın <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A> üstüne bazı varsayılan ASP.NET Core kuralları nı ayarlayan ek bir yardımcı yöntemiyle IdentityServer:
+  * IdentityServer 'ın en üstünde <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A> bazı varsayılan ASP.NET Core kuralları ayarlayan ek bir yardımcı yöntemi olan IdentityServer:
 
     ```csharp
     services.AddIdentityServer()
         .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
     ```
 
-  * IdentityServer tarafından <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> üretilen JWT belirteçlerini doğrulamak için uygulamayı yapılandıran ek bir yardımcı yöntemiyle kimlik doğrulama:
+  * Kimliği, IdentityServer <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> tarafından üretilen JWT belirteçlerini doğrulamak üzere uygulamayı yapılandıran ek bir yardımcı yöntem ile kimlik doğrulaması:
 
     ```csharp
     services.AddAuthentication()
@@ -77,46 +80,46 @@ Sınıfın `Startup` aşağıdaki eklemeleri vardır:
 
 * `Startup.Configure` içinde:
 
-  * İstek kimlik bilgilerini doğrulamave kullanıcıyı istek bağlamına ayarlamadan sorumlu kimlik doğrulama aracı:
+  * İstek kimlik bilgilerini doğrulamadan ve Kullanıcı istek bağlamında ayarlamaktan sorumlu kimlik doğrulama ara yazılımı:
 
     ```csharp
     app.UseAuthentication();
     ```
 
-  * Open ID Connect (OIDC) uç noktalarını ortaya çıkaran IdentityServer ara yazılımı:
+  * Açık KIMLIK Connect (OıDC) uç noktalarını kullanıma sunan IdentityServer ara yazılımı:
 
     ```csharp
     app.UseIdentityServer();
     ```
 
-### <a name="addapiauthorization"></a>AddApiAuthorization
+### <a name="addapiauthorization"></a>Addadpiauthorization
 
-<xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A> Yardımcı [yöntemi, IdentityServer'ı](https://identityserver.io/) ASP.NET Core senaryoları için yapılandırır. IdentityServer, uygulama güvenliği yle ilgili endişeleri işlemek için güçlü ve genişletilebilir bir çerçevedir. IdentityServer en yaygın senaryolar için gereksiz karmaşıklığı ortaya çıkarır. Sonuç olarak, iyi bir başlangıç noktası olarak düşünmemiz koşuluyla bir dizi konvansiyon ve yapılandırma seçeneği sağlanır. Kimlik doğrulama gereksinimleriniz değiştiğinde, IdentityServer'ın tüm gücü, bir uygulamanın gereksinimlerine uyacak şekilde kimlik doğrulamayı özelleştirmeye devam eder.
+Yardımcı <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A> yöntemi, [ıdentityserver](https://identityserver.io/) 'ı ASP.NET Core senaryolar için yapılandırır. IdentityServer, uygulama güvenliği sorunlarını işlemeye yönelik güçlü ve genişletilebilir bir çerçevedir. IdentityServer, en yaygın senaryolar için gereksiz karmaşıklık sunar. Sonuç olarak, iyi bir başlangıç noktası düşüntiğimiz bir dizi kural ve yapılandırma seçeneği sağlanır. Kimlik doğrulama gereksinimleriniz değiştikçe, IdentityServer 'ın tam gücü, kimlik doğrulamasını uygulamanın gereksinimlerine uyacak şekilde özelleştirmek için hala kullanılabilir.
 
-### <a name="addidentityserverjwt"></a>AddIdentityServerJwt
+### <a name="addidentityserverjwt"></a>Addentityserverjwt
 
-<xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> Yardımcı yöntemi varsayılan kimlik doğrulama işleyicisi olarak uygulama için bir ilke düzeni yapılandırır. İlke, Identity'in Kimlik URL alanındaki `/Identity`herhangi bir alt yola yönlendirilen tüm istekleri işlemesine izin verecek şekilde yapılandırılmıştır. Diğer <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> tüm istekleri işler. Ayrıca, bu yöntem:
+<xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> Yardımcı yöntemi, varsayılan kimlik doğrulama işleyicisi olarak uygulama için bir ilke düzeni yapılandırır. İlke, kimliğin kimlik URL 'sindeki herhangi bir alt yolda yönlendirilen tüm istekleri işlemesine izin verecek şekilde yapılandırılmıştır `/Identity`. Diğer <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> tüm istekleri işler. Ayrıca, bu yöntem:
 
-* Varsayılan kapsamı `{APPLICATION NAME}API` .'ye sahip bir API `{APPLICATION NAME}API`kaynağını IdentityServer'a kaydeder.
-* Uygulama için IdentityServer tarafından verilen belirteçleri doğrulamak için JWT Taşıyıcı Belirteç Orta ware'i yapılandırır.
+* IdentityServer `{APPLICATION NAME}API` ile bir API kaynağını varsayılan kapsamına kaydeder `{APPLICATION NAME}API`.
+* Uygulama için IdentityServer tarafından verilen belirteçleri doğrulamak üzere JWT taşıyıcı belirteç ara yazılımını yapılandırır.
 
-### <a name="weatherforecastcontroller"></a>WeatherForecastController
+### <a name="weatherforecastcontroller"></a>Dalgalı bir denetleyici
 
-*(Controllers/WeatherForecastController.cs)* olarak [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) sınıfa öznitelik uygulanır. `WeatherForecastController` Öznitelik, kaynağa erişmek için varsayılan ilkeyi temel alan kullanıcıya yetki verilmesi gerektiğini belirtir. Varsayılan yetkilendirme ilkesi, daha önce bahsedilen ilke düzeni <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> tarafından ayarlanan varsayılan kimlik doğrulama düzenini kullanacak şekilde yapılandırılır. Yardımcı yöntemi, uygulamaya <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> gelen istekler için varsayılan işleyici olarak yapılandırır.
+`WeatherForecastController` (*Controllers/dalgalı therforeroı Controller. cs*) içinde, [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) özniteliği sınıfına uygulanır. Özniteliği, kullanıcıya kaynağa erişim için varsayılan ilkeye göre yetkilendirilmiş olması gerektiğini belirtir. Varsayılan yetkilendirme ilkesi, tarafından <xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> daha önce bahsedilen ilke şemasına ayarlanan varsayılan kimlik doğrulama düzenini kullanacak şekilde yapılandırılır. Yardımcı yöntemi, uygulamaya <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> yönelik istekler için varsayılan işleyici olarak yapılandırır.
 
 ### <a name="applicationdbcontext"></a>ApplicationDbContext
 
-`ApplicationDbContext` (Data/ApplicationDbContext.cs)*(Data/ApplicationDbContext.cs) (Data/ApplicationDbContext.cs)* olarak, IdentityServer'ın şemasını içerecek şekilde genişletmek <xref:Microsoft.EntityFrameworkCore.DbContext> <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601> dışında kimlikte de kullanılır. <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601><xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext>türetilmiştir.
+`ApplicationDbContext` (*Data/applicationdbcontext. cs*) öğesinde aynı <xref:Microsoft.EntityFrameworkCore.DbContext> şekilde, kimlik içinde, IdentityServer şemasını dahil etmek için genişlettiği <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601> özel durumla birlikte kullanılır. <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601>, öğesinden <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext>türetilir.
 
-Veritabanı şemasının tam denetimini elde etmek için, <xref:Microsoft.EntityFrameworkCore.DbContext> kullanılabilir Kimlik sınıflarından birinden devralır ve `builder.ConfigurePersistedGrantContext(_operationalStoreOptions.Value)` `OnModelCreating` yönteme çağırarak bağlamı Kimlik şemasını içerecek şekilde yapılandırın.
+Veritabanı şeması üzerinde tam denetim elde etmek için, kullanılabilir kimlik <xref:Microsoft.EntityFrameworkCore.DbContext> sınıflarından birini ve `builder.ConfigurePersistedGrantContext(_operationalStoreOptions.Value)` `OnModelCreating` yöntemi metodunu çağırarak kimlik şemasını içerecek şekilde yapılandırın.
 
-### <a name="oidcconfigurationcontroller"></a>OidcConfigurationController
+### <a name="oidcconfigurationcontroller"></a>Oıdcconfigurationcontroller
 
-`OidcConfigurationController` *(Controllers/OidcConfigurationController.cs)* olarak, istemci uç noktası OIDC parametrelerini sunmak üzere sağlanır.
+`OidcConfigurationController` (*Controllers/oıdcconfigurationcontroller. cs*) öğesinde, istemci uç noktası OIDC parametrelerine hizmeti sunacak şekilde sağlanır.
 
 ### <a name="app-settings-files"></a>Uygulama ayarları dosyaları
 
-Proje kökündeki uygulama ayarları dosyasında *(appsettings.json)* `IdentityServer` bölümünde, yapılandırılan istemcilerin listesi açıklanır. Aşağıdaki örnekte, tek bir istemci vardır. İstemci adı uygulama adına karşılık gelir ve OAuth `ClientId` parametresi için sözleşme ile eşlenir. Profil, yapılandırılan uygulama türünü gösterir. Profil, sunucunun yapılandırma işlemini basitleştiren kuralları yönlendirmek için dahili olarak kullanılır. <!-- There are several profiles available, as explained in the [Application profiles](#application-profiles) section. -->
+Proje kökündeki App settings dosyasında (*appSettings. JSON*), `IdentityServer` bölümünde yapılandırılan istemcilerin listesi açıklanmaktadır. Aşağıdaki örnekte, tek bir istemci vardır. İstemci adı, uygulama adına karşılık gelir ve kural tarafından OAuth `ClientId` parametresine eşlenir. Profil, yapılandırılan uygulama türünü gösterir. Profil, sunucu için yapılandırma işlemini basitleştiren kuralları yönlendirmek için dahili olarak kullanılır. <!-- There are several profiles available, as explained in the [Application profiles](#application-profiles) section. -->
 
 ```json
 "IdentityServer": {
@@ -128,7 +131,7 @@ Proje kökündeki uygulama ayarları dosyasında *(appsettings.json)* `IdentityS
 }
 ```
 
-Geliştirme ortamı uygulama ayarları dosyasında (*uygulama ayarları. Development.json*) proje kökünde, `IdentityServer` belirteçleri imzalamak için kullanılan anahtarı açıklar. <!-- When deploying to production, a key needs to be provisioned and deployed alongside the app, as explained in the [Deploy to production](#deploy-to-production) section. -->
+Geliştirme ortamı uygulama ayarları dosyasında (*appSettings. Development. JSON*) proje kökünde, `IdentityServer` bölüm belirteçleri imzalamak için kullanılan anahtarı açıklar. <!-- When deploying to production, a key needs to be provisioned and deployed alongside the app, as explained in the [Deploy to production](#deploy-to-production) section. -->
 
 ```json
 "IdentityServer": {
@@ -138,13 +141,13 @@ Geliştirme ortamı uygulama ayarları dosyasında (*uygulama ayarları. Develop
 }
 ```
 
-## <a name="client-app-configuration"></a>İstemci uygulaması yapılandırması
+## <a name="client-app-configuration"></a>İstemci uygulama yapılandırması
 
 ### <a name="authentication-package"></a>Kimlik doğrulama paketi
 
-Bireysel Kullanıcı Hesapları'nı kullanmak için`Individual`bir uygulama oluşturulduğunda , uygulama `Microsoft.AspNetCore.Components.WebAssembly.Authentication` otomatik olarak uygulamanın proje dosyasındaki paket için bir paket referansı alır. Paket, uygulamanın kullanıcıları doğrulamasına ve korumalı API'leri aramak için belirteçler almasına yardımcı olan bir dizi ilkel lik sağlar.
+Bireysel kullanıcı hesapları (`Individual`) kullanmak üzere bir uygulama oluşturulduğunda, uygulama otomatik olarak uygulamanın proje dosyasındaki `Microsoft.AspNetCore.Components.WebAssembly.Authentication` paket için bir paket başvurusu alır. Paket, uygulamanın kullanıcıların kimliğini doğrulamasına ve korunan API 'Leri çağırmak için belirteçleri almasına yardımcı olan bir dizi temel sunar.
 
-Bir uygulamaya kimlik doğrulama ekliyorsanız, paketi uygulamanın proje dosyasına el ile ekleyin:
+Bir uygulamaya kimlik doğrulaması ekliyorsanız, paketi uygulamanın proje dosyasına el ile ekleyin:
 
 ```xml
 <PackageReference 
@@ -152,19 +155,19 @@ Bir uygulamaya kimlik doğrulama ekliyorsanız, paketi uygulamanın proje dosyas
     Version="{VERSION}" />
 ```
 
-Önceki `{VERSION}` paket başvuruyu makalede gösterilen `Microsoft.AspNetCore.Blazor.Templates` paketin sürümüyle <xref:blazor/get-started> değiştirin.
+Yukarıdaki `{VERSION}` paket başvurusunda, `Microsoft.AspNetCore.Blazor.Templates` <xref:blazor/get-started> makalede gösterilen paketin sürümüyle değiştirin.
 
 ### <a name="api-authorization-support"></a>API yetkilendirme desteği
 
-Kullanıcıların kimlik doğrulaması desteği, paket içinde sağlanan uzantı yöntemi `Microsoft.AspNetCore.Components.WebAssembly.Authentication` yle servis kabına takılır. Bu yöntem, uygulamanın varolan yetkilendirme sistemiyle etkileşim kurabilmesi için gereken tüm hizmetleri ayarlar.
+Kullanıcıları kimlik doğrulama desteği, `Microsoft.AspNetCore.Components.WebAssembly.Authentication` paket içinde sunulan genişletme yöntemi tarafından hizmet kapsayıcısına takılır. Bu yöntem, uygulamanın var olan yetkilendirme sistemiyle etkileşime geçmesini sağlamak için gereken tüm hizmetleri ayarlar.
 
 ```csharp
 builder.Services.AddApiAuthorization();
 ```
 
-Varsayılan olarak, uygulama nın yapılandırmasını kurala göre `_configuration/{client-id}`yükler. Sözleşmeye göre, istemci kimliği uygulamanın montaj adına ayarlanır. Bu URL, seçeneklerle aşırı yüklemeyi çağırarak ayrı bir bitiş noktasına işaret etmek üzere değiştirilebilir.
+Varsayılan olarak, uygulamayı kuralına göre uygulamanın yapılandırmasını yükler `_configuration/{client-id}`. Kural gereği, istemci KIMLIĞI uygulamanın derleme adına ayarlanır. Bu URL, aþýrý yükleme seçeneklerini çağırarak ayrı bir uç noktaya işaret etmek üzere değiştirilebilir.
 
-### <a name="imports-file"></a>Dosyayı alma
+### <a name="imports-file"></a>Dosya içeri aktarmalar
 
 [!INCLUDE[](~/includes/blazor-security/imports-file-hosted.md)]
 
@@ -182,14 +185,14 @@ Varsayılan olarak, uygulama nın yapılandırmasını kurala göre `_configurat
 
 ### <a name="logindisplay-component"></a>LoginDisplay bileşeni
 
-Bileşen `LoginDisplay` *(Paylaşılan/LoginDisplay.razor)* `MainLayout` bileşeni *(Shared/MainLayout.razor)* işlenir ve aşağıdaki davranışları yönetir:
+Bileşen (*paylaşılan/LoginDisplay.* Razor) `MainLayout` , bileşende (*paylaşılan/mainlayout. Razor*) işlenir ve aşağıdaki davranışları yönetir: `LoginDisplay`
 
 * Kimliği doğrulanmış kullanıcılar için:
-  * Geçerli kullanıcı adını görüntüler.
-  * ASP.NET Çekirdek Kimlik'teki kullanıcı profili sayfasına bir bağlantı sunar.
-  * Uygulamadan çıkmak için bir düğme sunar.
+  * Geçerli Kullanıcı adını görüntüler.
+  * ASP.NET Core kimliği içindeki kullanıcı profili sayfasına bir bağlantı sunar.
+  * Uygulamanın oturumunu kapatmak için bir düğme sunar.
 * Anonim kullanıcılar için:
-  * Kayıt seçeneği sunar.
+  * Kayıt için seçeneği sunar.
   * Oturum açma seçeneği sunar.
 
 ```razor
@@ -230,7 +233,7 @@ Bileşen `LoginDisplay` *(Paylaşılan/LoginDisplay.razor)* `MainLayout` bileşe
 
 ## <a name="run-the-app"></a>Uygulamayı çalıştırma
 
-Uygulamayı Sunucu projesinden çalıştırın. Visual Studio'yu kullanırken, **Solution Explorer'daki** Sunucu projesini seçin ve araç çubuğundaki **Çalıştır** düğmesini seçin veya **Hata Ayıklama** menüsünden uygulamayı başlatın.
+Uygulamayı sunucu projesinden çalıştırın. Visual Studio 'Yu kullanırken **Çözüm Gezgini** ' de sunucu projesini seçin ve araç çubuğundaki **Çalıştır** düğmesini seçin veya uygulamayı **Hata Ayıkla** menüsünden başlatın.
 
 [!INCLUDE[](~/includes/blazor-security/usermanager-signinmanager.md)]
 
@@ -238,4 +241,4 @@ Uygulamayı Sunucu projesinden çalıştırın. Visual Studio'yu kullanırken, *
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [Ek erişim belirteçleri isteme](xref:security/blazor/webassembly/additional-scenarios#request-additional-access-tokens)
+* <xref:security/blazor/webassembly/additional-scenarios>

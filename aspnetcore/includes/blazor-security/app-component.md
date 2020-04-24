@@ -1,8 +1,8 @@
-`App` bileşeni (*app. Razor*) Blazor Server uygulamalarında bulunan `App` bileşene benzerdir:
+Bileşen (*app. Razor*) Blazor Server uygulamalarında bulunan `App` bileşene benzerdir: `App`
 
-* `CascadingAuthenticationState` bileşeni, `AuthenticationState` uygulamanın geri kalanında ortaya çıkarmayı yönetir.
-* `AuthorizeRouteView` bileşeni, geçerli kullanıcının belirli bir sayfaya erişim yetkisi olduğundan emin olur veya başka bir şekilde `RedirectToLogin` bileşenini işler.
-* `RedirectToLogin` bileşeni, yetkisiz kullanıcıların oturum açma sayfasına yeniden yönlendirildiğini yönetir.
+* `CascadingAuthenticationState` Bileşen, `AuthenticationState` uygulamanın geri kalanına yönelik olarak ortaya çıkarmayı yönetir.
+* `AuthorizeRouteView` Bileşen, geçerli kullanıcının belirli bir sayfaya erişmek için yetkilendirilmiş olduğundan emin olur veya başka bir şekilde `RedirectToLogin` bileşeni işler.
+* `RedirectToLogin` Bileşen, yetkisiz kullanıcıların oturum açma sayfasına yeniden yönlendirildiğini yönetir.
 
 ```razor
 <CascadingAuthenticationState>
@@ -11,7 +11,17 @@
             <AuthorizeRouteView RouteData="@routeData" 
                 DefaultLayout="@typeof(MainLayout)">
                 <NotAuthorized>
-                    <RedirectToLogin />
+                    @if (!context.User.Identity.IsAuthenticated)
+                    {
+                        <RedirectToLogin />
+                    }
+                    else
+                    {
+                        <p>
+                            You are not authorized to access 
+                            this resource.
+                        </p>
+                    }
                 </NotAuthorized>
             </AuthorizeRouteView>
         </Found>
