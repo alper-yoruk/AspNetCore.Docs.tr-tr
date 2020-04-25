@@ -39,5 +39,3 @@ Belirteç Kullanıcı etkileşimi olmadan sağlanamadığından istek başarıs�
     }
 }
 ```
-
-Daha fazla bilgi için bkz. [bir kimlik doğrulama işleminden önce uygulama durumunu kaydetme](xref:security/blazor/webassembly/additional-scenarios#save-app-state-before-an-authentication-operation).
