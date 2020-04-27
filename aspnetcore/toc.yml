@@ -299,14 +299,14 @@
           uid: blazor/data-binding
         - name: Olay işleme
           uid: blazor/event-handling
+        - name: Yaşam döngüsü
+          uid: blazor/lifecycle
         - name: Şablonlu bileşenler
           uid: blazor/templated-components
         - name: Bileşenleri tümleştirme
           uid: blazor/integrate-components
         - name: Genelleştirme ve yerelleştirme
           uid: blazor/globalization-localization
-        - name: Yaşam döngüsü
-          uid: blazor/lifecycle
         - name: Düzenler
           uid: blazor/layouts
         - name: Formlar ve doğrulama

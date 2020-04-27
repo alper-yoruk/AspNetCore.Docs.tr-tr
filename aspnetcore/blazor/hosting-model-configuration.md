@@ -5,17 +5,17 @@ description: Razor bileşenlerini Blazor Razor Pages ve MVC uygulamalarına tüm
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/23/2020
+ms.date: 04/25/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/hosting-model-configuration
-ms.openlocfilehash: cf5776109368dc7353d7e21bcad1e947561e7eb4
-ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
+ms.openlocfilehash: c7e8d1f2dcba6432072a5cc11a6c5d78e50c2398
+ms.sourcegitcommit: c6f5ea6397af2dd202632cf2be66fc30f3357bcc
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82111064"
+ms.lasthandoff: 04/26/2020
+ms.locfileid: "82159625"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>ASP.NET Core Blazor barındırma modeli yapılandırması
 
@@ -249,7 +249,7 @@ Yapılandırma dosyaları çevrimdışı kullanım için önbelleğe alınır. [
 
 Arka plan güncelleştirmelerinin PWAs tarafından nasıl işlendiği hakkında daha fazla bilgi için bkz <xref:blazor/progressive-web-app#background-updates>..
 
-### <a name="logging"></a>Günlüğe Kaydetme
+### <a name="logging"></a>Günlüğe kaydetme
 
 Blazor WebAssembly günlük desteği hakkında bilgi için bkz <xref:fundamentals/logging/index#create-logs-in-blazor>..
 
@@ -303,53 +303,6 @@ Blazor sunucu uygulamaları, sunucu bağlantısı oluşturulmadan önce sunucuda
 
 Statik HTML sayfasından sunucu bileşenleri işleme desteklenmiyor.
 
-### <a name="render-stateful-interactive-components-from-razor-pages-and-views"></a>Razor sayfaları ve görünümlerinden durum bilgisi olan etkileşimli bileşenleri işleme
-
-Durum bilgisi olan etkileşimli bileşenler Razor sayfasına veya görünümüne eklenebilir.
-
-Sayfa veya görünüm şunları işler:
-
-* Bileşen sayfa veya görünümle birlikte kullanılır.
-* Prerendering için kullanılan ilk bileşen durumu kayboldu.
-* SignalR Bağlantı kurulduunda yeni bileşen durumu oluşturulur.
-
-Aşağıdaki Razor sayfası bir `Counter` bileşeni işler:
-
-```cshtml
-<h1>My Razor Page</h1>
-
-<component type="typeof(Counter)" render-mode="ServerPrerendered" 
-    param-InitialValue="InitialValue" />
-
-@code {
-    [BindProperty(SupportsGet=true)]
-    public int InitialValue { get; set; }
-}
-```
-
-### <a name="render-noninteractive-components-from-razor-pages-and-views"></a>Razor sayfaları ve görünümlerinden etkileşimsiz bileşenleri işleme
-
-Aşağıdaki Razor sayfasında, `Counter` bileşen bir form kullanılarak belirtilen bir başlangıç değeriyle statik olarak işlenir:
-
-```cshtml
-<h1>My Razor Page</h1>
-
-<form>
-    <input type="number" asp-for="InitialValue" />
-    <button type="submit">Set initial value</button>
-</form>
-
-<component type="typeof(Counter)" render-mode="Static" 
-    param-InitialValue="InitialValue" />
-
-@code {
-    [BindProperty(SupportsGet=true)]
-    public int InitialValue { get; set; }
-}
-```
-
-Statik `MyComponent` olarak işlendiğinden bileşen etkileşimli olamaz.
-
 ### <a name="configure-the-opno-locsignalr-client-for-opno-locblazor-server-apps"></a>Sunucu uygulamaları SignalR için Blazor istemciyi yapılandırma
 
 Bazen, sunucu uygulamaları tarafından SignalR Blazor kullanılan istemciyi yapılandırmanız gerekir. Örneğin, bir bağlantı sorununu tanılamak için SignalR istemcide günlüğe kaydetmeyi yapılandırmak isteyebilirsiniz.
@@ -370,6 +323,6 @@ Bazen, sunucu uygulamaları tarafından SignalR Blazor kullanılan istemciyi yap
 </script>
 ```
 
-### <a name="logging"></a>Günlüğe Kaydetme
+### <a name="logging"></a>Günlüğe kaydetme
 
 Sunucu günlüğü desteği Blazor hakkında bilgi için bkz <xref:fundamentals/logging/index#create-logs-in-blazor>..
