@@ -1,69 +1,69 @@
 ---
-title: ASP.NET Core'daki eylemleri denetleyiciye yönlendirme
+title: ASP.NET Core denetleyici eylemlerine yönlendirme
 author: rick-anderson
-description: Core MVCASP.NET gelen isteklerin URL'lerini eşleştirmek ve bunları eylemlerle eşlemek için Yönlendirme Middleware'i nasıl kullandığını öğrenin.
+description: ASP.NET Core MVC 'nin, gelen isteklerin URL 'Lerini eşleştirmek ve bunları eylemlerle eşlemek için yönlendirme ara yazılımını nasıl kullandığını öğrenin.
 ms.author: riande
 ms.date: 3/25/2020
 uid: mvc/controllers/routing
-ms.openlocfilehash: 9f7a26a482cb115697a0a3d7439c14a062677c92
-ms.sourcegitcommit: 5af16166977da598953f82da3ed3b7712d38f6cb
+ms.openlocfilehash: 974a5e7653f2b71b124a96650733ff460e60637a
+ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/14/2020
-ms.locfileid: "81277138"
+ms.lasthandoff: 04/28/2020
+ms.locfileid: "82206118"
 ---
-# <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core'daki eylemleri denetleyiciye yönlendirme
+# <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core denetleyici eylemlerine yönlendirme
 
-Ryan [Nowak](https://github.com/rynowak), [Kirk Larkin](https://twitter.com/serpent5)ve [Rick Anderson](https://twitter.com/RickAndMSFT) tarafından
+[Ryan şimdi ak](https://github.com/rynowak), [Kirk Larkabağı](https://twitter.com/serpent5)ve [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core denetleyicileri gelen isteklerin URL'leri eşlemek ve [eylemlerle](#action)eşlemek için Yönlendirme [ara ware](xref:fundamentals/middleware/index) kullanın.  Rotaşablonları:
+ASP.NET Core denetleyicileri, gelen isteklerin URL 'Leriyle eşleştirmek ve bunları [eylemlerle](#action)eşlemek için yönlendirme [Ara yazılımını](xref:fundamentals/middleware/index) kullanır.  Rota şablonları:
 
-* Başlangıç kodu veya öznitelikleri tanımlanır.
-* URL yollarının [eylemlerle](#action)nasıl eşleştiğini açıklayın.
-* Bağlantılar için URL oluşturmak için kullanılır. Oluşturulan bağlantılar genellikle yanıtlar olarak döndürülür.
+* , Başlangıç kodunda veya özniteliklerde tanımlanmıştır.
+* URL yollarının [eylemlerle](#action)nasıl eşleştiğini betimleyen.
+* Bağlantıların URL 'Leri oluşturmak için kullanılır. Oluşturulan bağlantılar genellikle yanıtlar halinde döndürülür.
 
-Eylemler geleneksel [olarak yönlendirilir](#cr) veya [öznitelik-yönlendirilir.](#ar) Denetleyiciye veya [eyleme](#action) bir rota yerleştirmek, rotayı öznitelik yönlendiren yapar. Daha fazla bilgi için [Karışık yönlendirmeye](#routing-mixed-ref-label) bakın.
+Eylemler [genel olarak-yönlendirildi](#cr) veya [Attribute-yönlendirildi](#ar)' dir. Bir yolun denetleyiciye veya [eyleme](#action) yerleştirilmesi, BT özniteliğinin yönlendirilmesini sağlar. Daha fazla bilgi için bkz. [karma yönlendirme](#routing-mixed-ref-label) .
 
 Bu belge:
 
 * MVC ve yönlendirme arasındaki etkileşimleri açıklar:
-  * Tipik MVC uygulamaları yönlendirme özelliklerinden nasıl yararlanıyor?
-  * Her ikisini de kapsar:
-    * [Geleneksel yönlendirme](#cr) genellikle denetleyicileri ve görünümleri ile kullanılır.
-    * REST API'leri ile kullanılan *öznitelik* yönlendirmesi. Öncelikle REST API'leri yönlendirmeyle ilgileniyorsanız, REST [API'leri için Öznitelik yönlendirmesine](#ar) atlayın.
-  * Gelişmiş yönlendirme ayrıntıları için [Yönlendirme'ye](xref:fundamentals/routing) bakın.
-* ASP.NET Core 3.0'a eklenen ve bitiş noktası yönlendirmesi olarak adlandırılan varsayılan yönlendirme sistemini ifade eder. Uyumluluk amacıyla yönlendirmenin önceki sürümüne sahip denetleyicileri kullanmak mümkündür. Talimatlar için [2.2-3.0 geçiş kılavuzuna](xref:migration/22-to-30) bakın. Eski yönlendirme sistemindereferans materyali için [bu belgenin 2.2 sürümüne](xref:mvc/controllers/routing?view=aspnetcore-2.2) bakın.
+  * Tipik MVC uygulamalarının yönlendirme özelliklerini kullanma şekli.
+  * Her ikisini de içerir:
+    * Genellikle denetleyiciler ve görünümlerle kullanılan [genel olarak yönlendirme](#cr) .
+    * REST API 'Leri ile kullanılan *öznitelik yönlendirme* . Birincil olarak REST API 'Leri için yönlendirme ile ilgileniyorsanız, [REST API 'leri Için öznitelik yönlendirme](#ar) bölümüne atlayın.
+  * Bkz. Gelişmiş yönlendirme ayrıntıları için [yönlendirme](xref:fundamentals/routing) .
+* ASP.NET Core 3,0 ' de eklenen varsayılan yönlendirme sisteminin Endpoint Routing olarak adlandırıldığını gösterir. Uyumluluk amaçlarıyla önceki yönlendirme sürümü ile denetleyicileri kullanmak mümkündür. Yönergeler için [2.2-3.0 geçiş kılavuzuna](xref:migration/22-to-30) bakın. Eski yönlendirme sistemindeki başvuru malzemeleri için [Bu belgenin 2,2 sürümüne](xref:mvc/controllers/routing?view=aspnetcore-2.2) bakın.
 
 <a name="cr"></a>
 
 ## <a name="set-up-conventional-route"></a>Geleneksel rotayı ayarlama
 
-`Startup.Configure`genellikle [geleneksel yönlendirme](#crd)kullanırken aşağıdakilere benzer bir kodvardır:
+`Startup.Configure`genellikle [geleneksel yönlendirme](#crd)kullanılırken aşağıdakine benzer bir kod içerir:
 
 [!code-csharp[](routing/samples/3.x/main/StartupDefaultMVC.cs?name=snippet)]
 
-Çağrının içinde <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> , tek bir rota oluşturmak için kullanılır. Tek rota rota `default` olarak adlandırılır. Denetleyicileri ve görünümleri olan uygulamaların çoğu, `default` rotaya benzer bir rota şablonu kullanır. REST API'ler [öznitelik yönlendirme](#ar)kullanmalıdır.
+Çağrısı içinde <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*>, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> tek bir yol oluşturmak için kullanılır. Tek yol yol olarak adlandırılır `default` . Denetleyiciler ve görünümler içeren çoğu uygulama, `default` yola benzer bir rota şablonu kullanır. REST API 'Leri [öznitelik yönlendirmeyi](#ar)kullanmalıdır.
 
-Rota şablonu: `"{controller=Home}/{action=Index}/{id?}"`
+Yol şablonu `"{controller=Home}/{action=Index}/{id?}"`:
 
-* Url yolunu eşleştirin`/Products/Details/5`
-* Yolu belirterek `{ controller = Products, action = Details, id = 5 }` rota değerlerini ayıklar. Uygulamanın adında `ProductsController` bir denetleyicisi ve bir `Details` eylemi varsa, rota değerlerinin çıkarılması eşleşir:
+* Şöyle bir URL yoluyla eşleşir`/Products/Details/5`
+* Yolu simgeleştirileyerek `{ controller = Products, action = Details, id = 5 }` yol değerlerini ayıklar. Uygulamanın adlı `ProductsController` bir denetleyici ve bir `Details` eylem varsa yol değerlerinin ayıklanması bir eşleşme ile sonuçlanır:
 
   [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippetA)]
 
   [!INCLUDE[](~/includes/MyDisplayRouteInfo.md)]
 
-* `/Products/Details/5`modeli `id = 5` `id` parametreyi ' ye ayarlamak için `5`değerini bağlar. Daha fazla ayrıntı için [Model Bağlama'ya](xref:mvc/models/model-binding) bakın.
-* `{controller=Home}`varsayılan `controller` `Home` olarak tanımlar.
-* `{action=Index}`varsayılan `action` `Index` olarak tanımlar.
-*  Karakter `?` isteğe `id` bağlı olarak `{id?}` tanımlar.
-  * Varsayılan ve isteğe bağlı rota parametrelerinin eşleşme için URL yolunda bulunması gerekmez. Rota şablonu sözdiziminin ayrıntılı bir açıklaması için [Rota Şablonu Başvurusu'na](xref:fundamentals/routing#route-template-reference) bakın.
-* URL yolu `/`yla eşleşir.
-* Rota değerlerini `{ controller = Home, action = Index }`üretir.
+* `/Products/Details/5`model, `id` parametresini olarak `5`ayarlamak `id = 5` için değerini bağlar. Daha fazla ayrıntı için bkz. [model bağlama](xref:mvc/models/model-binding) .
+* `{controller=Home}`Varsayılan `Home` `controller`olarak tanımlar.
+* `{action=Index}`Varsayılan `Index` `action`olarak tanımlar.
+*  İçindeki `?` `{id?}` karakter, isteğe `id` bağlı olarak tanımlar.
+  * Bir eşleşme için URL yolunda varsayılan ve isteğe bağlı yol parametrelerinin mevcut olması gerekmez. Yol şablonu sözdiziminin ayrıntılı açıklaması için bkz. [route Template Reference](xref:fundamentals/routing#route-template-reference) .
+* URL yoluyla `/`eşleşir.
+* Yol değerlerini `{ controller = Home, action = Index }`üretir.
 
-Varsayılan değerler `controller` `action` için değerler ve kullanım. `id`URL yolunda karşılık gelen bir segment olmadığından bir değer üretmez. `/`yalnızca bir `HomeController` ve `Index` eylem varsa eşleşir:
+İçin `controller` değerleri ve `action` varsayılan değerleri kullanır. `id`URL yolunda karşılık gelen bir kesim olmadığından değer üretmez. `/`yalnızca bir `HomeController` ve `Index` eylemi varsa eşleşir:
 
 ```csharp
 public class HomeController : Controller
@@ -72,228 +72,228 @@ public class HomeController : Controller
 }
 ```
 
-Önceki denetleyici tanımı ve yol şablonu `HomeController.Index` kullanılarak, eylem aşağıdaki URL yolları için çalıştırılır:
+Önceki denetleyici tanımı ve yönlendirme şablonunu kullanarak, `HomeController.Index` eylem aşağıdaki URL yolları için çalıştırılır:
 
 * `/Home/Index/17`
 * `/Home/Index`
 * `/Home`
 * `/`
 
-URL yolu, `/` rota şablonu varsayılan `Home` denetleyicilerini ve `Index` eylemi kullanır. URL yolu, `/Home` rota şablonu varsayılan `Index` eylemini kullanır.
+URL yolu `/` , yönlendirme şablonu varsayılan `Home` denetleyicilerini ve `Index` eylemini kullanır. URL yolu `/Home` , yönlendirme şablonu varsayılan `Index` eylemini kullanır.
 
-Kolaylık yöntemi: <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute*>
+Kolaylık yöntemi <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute*>:
 
 ```csharp
 endpoints.MapDefaultControllerRoute();
 ```
 
-Değiştirir:
+Yerine
 
 ```csharp
 endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}");
 ```
 
 > [!IMPORTANT]
-> <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting*> Yönlendirme, ara yazılım ve <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> ara yazılım kullanılarak yapılandırılır. Denetleyicileri kullanmak için:
+> Yönlendirme, <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting*> ve <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> ara yazılımı kullanılarak yapılandırılır. Denetleyicileri kullanmak için:
 >
-> * <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*> [Yönlendirilmiş](#ar) denetleyicileri eşlemek için içini `UseEndpoints` arayın.
-> * Geleneksel <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> [olarak yönlendirilmiş](#cr) denetleyicileri haritalamak için arayın veya.
+> * <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*> [Öznitelik yönlendirmeli](#ar) denetleyicileri eşlemek için içinde `UseEndpoints` çağırın.
+> * <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> [Genel olarak yönlendirmeli](#cr) denetleyicileri eşlemek için veya <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*>çağrısı yapın.
 
 <a name="routing-conventional-ref-label"></a>
 <a name="crd"></a>
 
-## <a name="conventional-routing"></a>Konvansiyonel yönlendirme
+## <a name="conventional-routing"></a>Geleneksel yönlendirme
 
-Geleneksel yönlendirme denetleyicileri ve görünümleri ile kullanılır. Rota: `default`
+Geleneksel yönlendirme, denetleyiciler ve görünümlerle kullanılır. `default` Yol:
 
 [!code-csharp[](routing/samples/3.x/main/StartupDefaultMVC.cs?name=snippet2)]
 
-geleneksel bir *yönlendirme*örneğidir. URL yolları için bir *kural* oluşturmuştur çünkü *geleneksel yönlendirme* denir:
+, *geleneksel yönlendirmeye*bir örnektir. Bu, URL yolları için bir *kural* oluşturduğundan *geleneksel yönlendirme* olarak adlandırılır:
 
-* İlk yol kesimi, `{controller=Home}`denetleyici adı eşler.
-* İkinci bölüm, `{action=Index}` [eylem](#action) adı eşler.
-* Üçüncü segment, `{id?}` isteğe bağlı `id`olarak kullanılır. In `?` `{id?}` isteğe bağlı hale getirir. `id`bir model varlık için eşlemek için kullanılır.
+* İlk yol segmenti, `{controller=Home}`, denetleyici adıyla eşlenir.
+* İkinci kesim, `{action=Index}`, [eylem](#action) adıyla eşlenir.
+* Üçüncü segment, isteğe `{id?}` bağlı `id`olarak kullanılır. İçinde `?` `{id?}` , isteğe bağlı yapar. `id`bir model varlığına eşlemek için kullanılır.
 
 Bu `default` yolu kullanarak, URL yolu:
 
-* `/Products/List`eylem eharitalar. `ProductsController.List`
-* `/Blog/Article/17`haritaları `BlogController.Article` ve genellikle model parametreyi `id` 17'ye bağlar.
+* `/Products/List``ProductsController.List` eyleme eşlenir.
+* `/Blog/Article/17``BlogController.Article` ile eşlenir ve model genellikle `id` parametresini 17 ' ye bağlar.
 
-Bu haritalama:
+Bu eşleme:
 
-* Denetleyici ve [eylem](#action) adlarını temel alan **sadece.**
-* Ad alanlarını, kaynak dosya konumlarını veya yöntem parametrelerini temel almıyor.
+* **Yalnızca**denetleyiciyi ve [eylem](#action) adlarını temel alır.
+* Ad alanlarını, kaynak dosya konumlarını veya yöntem parametrelerini temel alan değildir.
 
-Varsayılan rota ile geleneksel yönlendirme kullanarak her eylem için yeni bir URL deseni ile gelmek zorunda kalmadan uygulama oluşturma sağlar. KUMANDALAR arasında URL'ler için tutarlılık olan [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) tarzı eylemlere sahip bir uygulama için:
+Varsayılan yol ile geleneksel yönlendirmeyi kullanmak, her eylem için yeni bir URL düzeniyle karşılaşmadan uygulamanın oluşturulmasına olanak sağlar. [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) stilinde eylemlere sahip bir uygulama için, denetleyiciler arasında URL 'ler için tutarlılık vardır:
 
 * Kodu basitleştirmeye yardımcı olur.
-* UI'yi daha öngörülebilir hale getirir.
+* Kullanıcı arabirimini daha öngörülebilir hale getirir.
 
 > [!WARNING]
-> Önceki `id` kod, rota şablonu tarafından isteğe bağlı olarak tanımlanır. Eylemler, URL'nin bir parçası olarak sağlanan isteğe bağlı kimlik olmadan yürütülebilir. Genellikle,`id` URL'den atlandığında:
+> Önceki `id` kodda, yol şablonu tarafından isteğe bağlı olarak tanımlanmıştır. Eylemler, URL 'nin bir parçası olarak belirtilen isteğe bağlı KIMLIK olmadan çalıştırılabilir. Genellikle,`id` URL 'den atlandığında:
 >
-> * `id`model bağlama `0` tarafından ayarlanır.
-> * Veritabanında eşleşen `id == 0`varlık bulunamadı.
+> * `id`, model bağlama `0` tarafından olarak ayarlanır.
+> * Veritabanında eşleşen `id == 0`bir varlık bulunamadı.
 >
-> [Öznitelik yönlendirme,](#ar) kimliğin diğerleri için değil, bazı eylemler için gerekli olmasını sağlamak için ince taneli denetim sağlar. Sözleşmeye göre, belgeler doğru `id` kullanımda görünme olasılıkları gibi isteğe bağlı parametreleri içerir.
+> [Öznitelik yönlendirme](#ar) , kimliği bazı eylemler için gerekli hale getirmek için ayrıntılı denetim sağlar ve diğerleri için değildir. Kurala göre belgeler, doğru kullanımlarda görünebilecekleri `id` gibi isteğe bağlı parametreler içerir.
 
-Çoğu uygulama, URL'lerin okunabilir ve anlamlı olması için temel ve açıklayıcı bir yönlendirme şeması seçmelidir. Varsayılan geleneksel `{controller=Home}/{action=Index}/{id?}`rota:
+Çoğu uygulama, URL 'Lerin okunabilir ve anlamlı olması için temel ve açıklayıcı bir yönlendirme şeması seçmelidir. Varsayılan geleneksel yol `{controller=Home}/{action=Index}/{id?}`:
 
-* Temel ve açıklayıcı yönlendirme düzenini destekler.
-* UI tabanlı uygulamalar için yararlı bir başlangıç noktasıdır.
-* Birçok web Ara Birimi uygulaması için gereken tek rota şablonudur. Daha büyük web kullanıcı arabirimi uygulamaları için, sık sık gereken tüm alanlar [kullanarak](#areas) başka bir rota.
+* Temel ve açıklayıcı bir yönlendirme düzenini destekler.
+* , UI tabanlı uygulamalar için kullanışlı bir başlangıç noktasıdır.
+* Birçok Web UI uygulaması için tek yol şablonu gereklidir. Daha büyük Web Kullanıcı arabirimi uygulamaları için, sık sık gerekli olan [alanlarda](#areas) başka bir yol kullanın.
 
 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*>ve <xref:Microsoft.AspNetCore.Builder.MvcAreaRouteBuilderExtensions.MapAreaRoute*> :
 
-* Çağrıldıkları sıraya göre uç noktalarına otomatik olarak bir **sipariş** değeri atayın.
+* , Çağrıldığı sıraya göre kendi uç noktalarına otomatik olarak bir **sipariş** değeri atayın.
 
-Core 3.0 ve sonraki ASP.NET'da bitiş noktası yönlendirmesi:
+ASP.NET Core 3,0 ve üzeri için uç nokta yönlendirme:
 
-* Güzergah kavramı yok.
-* Genişletilebilirliğin yürütülmesi için sipariş garantisi sağlamaz, tüm uç noktalar aynı anda işlenir.
+* Bir yol kavramı yoktur.
+* , Genişletilebilirlik yürütülmesi için sıralama garantisi sağlamaz, tüm uç noktalar bir kerede işlenir.
 
-Yerleşik yönlendirme uygulamalarının <xref:Microsoft.AspNetCore.Routing.Route>istekleri nasıl eşleştirbildiğini görmek için [Günlüğe Kaydetme'yi](xref:fundamentals/logging/index) etkinleştirin.
+İstekleri eşleme gibi yerleşik yönlendirme uygulamalarının <xref:Microsoft.AspNetCore.Routing.Route>nasıl yapıldığını görmek Için [günlük kaydını](xref:fundamentals/logging/index) etkinleştirin.
 
-[Öznitelik yönlendirme](#ar) süresonra bu belgede açıklanıyor.
+[Öznitelik yönlendirme](#ar) bu belgenin ilerleyen kısımlarında açıklanmıştır.
 
 <a name="mr"></a>
 
-### <a name="multiple-conventional-routes"></a>Birden fazla konvansiyonel rota
+### <a name="multiple-conventional-routes"></a>Birden çok geleneksel yollar
 
-Birden fazla [konvansiyonel rotalar](#cr) daha fazla <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*>çağrı ekleyerek içine `UseEndpoints` eklenebilir ve . Bunu yapmak, birden çok kuralın tanımlanmasına veya belirli bir [eyleme](#action)ayrılmış geleneksel yolların eklenmesine olanak tanır ( örneğin:
+Ve <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> ' <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*>ye daha fazla çağrı eklenerek `UseEndpoints` , içine birden çok [geleneksel yol](#cr) eklenebilir. Bunun yapılması, birden çok kural tanımlamayı veya belirli bir [eyleme](#action)adanmış geleneksel yollar eklemeyi sağlar; örneğin:
 
 [!code-csharp[](routing/samples/3.x/main/Startup.cs?name=snippet_1)]
 
 <a name="dcr"></a>
 
-Önceki `blog` koddaki rota özel bir **geleneksel rotadır.** Buna özel konvansiyonel rota denir, çünkü:
+Önceki `blog` koddaki yol, **ayrılmış bir geleneksel yoldur**. Ayrılmış bir geleneksel yol olarak adlandırılır çünkü:
 
-* Bu [geleneksel yönlendirme](#cr)kullanır.
-* Belirli bir [eyleme](#action)adanmıştır.
+* [Geleneksel yönlendirme](#cr)kullanır.
+* Belirli bir [eyleme](#action)ayrılmıştır.
 
-Çünkü `controller` `action` ve rota şablonunda `"blog/{*article}"` parametre olarak görünmeyin:
+`controller` Ve `action` yol şablonunda `"blog/{*article}"` parametre olarak görünmediği için:
 
-* Yalnızca varsayılan değerlere `{ controller = "Blog", action = "Article" }`sahip olabilirler.
-* Bu rota her zaman `BlogController.Article`eylem eşler.
+* Yalnızca varsayılan değerleri `{ controller = "Blog", action = "Article" }`olabilir.
+* Bu yol her zaman eyleme `BlogController.Article`eşlenir.
 
-`/Blog`, `/Blog/Article`ve `/Blog/{any-string}` blog rotasıyla eşleşen tek URL yollarıdır.
+`/Blog`, `/Blog/Article`ve `/Blog/{any-string}` , blog ROTASı ile eşleşen tek URL yollarıdır.
 
 Önceki örnek:
 
-* `blog`önce ekilen rota, `default` maçlar için rotadan daha yüksek bir önceliğe sahiptir.
-* URL'nin bir parçası olarak bir makale adı olması nın tipik olduğu [Sümüklü böcek](https://developer.mozilla.org/docs/Glossary/Slug) stili yönlendirmesi ve örneğidir.
+* `blog`yol, önce eklendiğinden, `default` rotadan eşleşme için daha yüksek önceliğe sahiptir.
+* Ve, URL 'nin bir parçası olarak bir makale adı olması gereken tipik bir [başlık](https://developer.mozilla.org/docs/Glossary/Slug) stili yönlendirme örneğidir.
 
 > [!WARNING]
-> Core 3.0 ve daha sonra ASP.NET, yönlendirme şunları yapmaz:
-> * Rota adı verilen bir kavram *tanımlayın.* `UseRouting`ara yazılım boru hattına eşleşen rota ekler. Ara `UseRouting` yazılım, uygulamada tanımlanan uç nokta kümesine bakar ve isteğe bağlı olarak en iyi bitiş noktası eşleşmesini seçer.
-> * Gibi <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> genişletilebilirlik yürütme emri hakkında garanti <xref:Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint>ler sağlayın.
+> ASP.NET Core 3,0 ve üzeri sürümlerde yönlendirme:
+> * *Yol*adlı bir kavram tanımlayın. `UseRouting`ara yazılım ardışık düzenine eşleşen rota ekler. `UseRouting` Ara yazılım, uygulamada tanımlanan uç noktalar kümesine bakar ve isteğe bağlı olarak en iyi uç nokta eşleşmesini seçer.
+> * Veya <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> <xref:Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint>gibi genişletilebilirlik yürütme sırası hakkında garanti sağlar.
 >
->Yönlendirme yle ilgili referans materyali için [Yönlendirme'ye](xref:fundamentals/routing) bakın.
+>Bkz. yönlendirme ile ilgili başvuru malzemeleri için [yönlendirme](xref:fundamentals/routing) .
 
 <a name="cro"></a>
 
-### <a name="conventional-routing-order"></a>Konvansiyonel yönlendirme düzeni
+### <a name="conventional-routing-order"></a>Geleneksel yönlendirme sırası
 
-Geleneksel yönlendirme yalnızca uygulama tarafından tanımlanan eylem ve denetleyici nin bir birleşimi ile eşleşir. Bu, geleneksel yolların çakıştığı servis taleplerini basitleştirmek için tasarlanmıştır.
-<xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*>Çağrıldıkları sıraya <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute*>göre, ", ve <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> otomatik olarak uç noktalarına bir sipariş değeri atay. Daha önce görünen bir rotadaki eşleşmelerin daha yüksek bir önceliği vardır. Konvansiyonel yönlendirme isteðe baðlð±r. Genel olarak, alanları olan rotalar, alanı olmayan rotalardan daha spesifik oldukları için daha erken yerleştirilmelidir. Gibi `{*article}` tüm rota parametrelerini yakalamak ile [özel geleneksel rotalar](#dcr) çok [açgözlü](xref:fundamentals/routing#greedy)bir rota yapabilirsiniz, diğer rotalar ile eşleşen olması amaçlanan URL'ler eşleşen anlamına gelir. Açgözlü eşleşmeleri önlemek için daha sonra rota tablosuna açgözlü rotaları koyun.
+Geleneksel yönlendirme yalnızca uygulama tarafından tanımlanan eylem ve denetleyicinin bir bileşimiyle eşleşir. Bu, geleneksel yolların çakıştığı durumları basitleştirmek için tasarlanmıştır.
+, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute*>, Ve <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> kullanarak yollar ekleme, çağırdıkları sıraya göre bitiş noktalarına otomatik olarak bir sipariş değeri atar. Daha önce görüntülenen bir rotadaki eşleşmelerin önceliği daha yüksektir. Geleneksel yönlendirme sıra bağımlıdır. Genel olarak, alanlar içeren rotalar daha önce bir alan olmadan rotalardan daha belirgin olduklarından yerleştirilmelidir. Tüm yol parametrelerini yakala gibi `{*article}` [ayrılmış geleneksel yollar](#dcr) , bir [yolu çok fazla](xref:fundamentals/routing#greedy), diğer yollarla eşleştirmek üzere hedeflediğiniz URL 'lerle eşleştirerek çok fazla bir yol yapabilir. Doyumsuz yollarını daha sonra yol tablosuna yerleştirerek doyumsuz eşleşmelerini önleyin.
 
 <a name="best"></a>
 
 ### <a name="resolving-ambiguous-actions"></a>Belirsiz eylemleri çözme
 
-İki uç nokta yönlendirme ile eşleştiğinde, yönlendirme aşağıdakilerden birini yapmalıdır:
+Yönlendirme ile iki uç nokta eşleşmesi durumunda, yönlendirme aşağıdakilerden birini yapmanız gerekir:
 
-* En iyi adayı seç.
-* Bir istisna at.
+* En iyi aday ' ı seçin.
+* Bir özel durum oluşturur.
 
 Örneğin:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet9)]
 
-Önceki denetleyici eşleşen iki eylemi tanımlar:
+Yukarıdaki denetleyici, eşleşen iki eylemi tanımlar:
 
 * URL yolu`/Products33/Edit/17`
-* Veri `{ controller = Products33, action = Edit, id = 17 }`yolu .
+* Veri `{ controller = Products33, action = Edit, id = 17 }`yönlendirin.
 
-Bu, MVC denetleyicileri için tipik bir desendir:
+Bu, MVC denetleyicileri için tipik bir modeldir:
 
-* `Edit(int)`bir ürünü sağlamak için bir form görüntüler.
-* `Edit(int, Product)`deftere nakledilen formu işler.
+* `Edit(int)`bir ürünü düzenlemek için bir form görüntüler.
+* `Edit(int, Product)`Postalanan formu işler.
 
-Doğru rotayı çözmek için:
+Doğru yolu çözümlemek için:
 
 * `Edit(int, Product)`istek bir HTTP `POST`olduğunda seçilir.
-* `Edit(int)`[http fiili](#verb) başka bir şey olduğunda seçilir. `Edit(int)`genellikle üzerinden `GET`denir.
+* `Edit(int)`[http fiili](#verb) başka bir şey olduğunda seçilir. `Edit(int)`genellikle aracılığıyla `GET`çağrılır.
 
-, <xref:Microsoft.AspNetCore.Mvc.HttpPostAttribute> `[HttpPost]`, yönlendirmeye sağlanır, böylece isteğin HTTP yöntemine göre seçim yapabilir. Daha `HttpPostAttribute` `Edit(int, Product)` iyi bir `Edit(int)`maç yapar.
+<xref:Microsoft.AspNetCore.Mvc.HttpPostAttribute>,, İsteğin HTTP yöntemine göre seçim yapabilmesi için yönlendirme için `[HttpPost]`verilmiştir. , `HttpPostAttribute` Daha `Edit(int, Product)` iyi bir eşleşme yapar `Edit(int)`.
 
-Bu gibi `HttpPostAttribute`özniteliklerin rolünü anlamak önemlidir. Benzer öznitelikler diğer [HTTP fiilleri](#verb)için tanımlanır. [Geleneksel yönlendirmede,](#cr)eylemlerin gösteri formunun bir parçası olduklarında aynı eylem adını kullanması, form iş akışı göndermesi yaygındır. Örneğin, [bkz.](xref:tutorials/first-mvc-app/controller-methods-views#get-post)
+Gibi `HttpPostAttribute`özniteliklerin rolünü anlamanız önemlidir. Benzer öznitelikler diğer [http fiilleri](#verb)için tanımlanmıştır. [Geleneksel yönlendirmesinde](#cr), bir görüntüleme formu, gönder formu iş akışının bir parçası olduklarında aynı eylem adını kullanmak yaygın olarak kullanılan bir işlemdir. Örneğin, bkz. [Iki düzenleme eylemi yöntemini İnceleme](xref:tutorials/first-mvc-app/controller-methods-views#get-post).
 
-Yönlendirme en iyi adayı seçemiyorsa, birden çok eşleşen uç noktayı listeleyen bir <xref:System.Reflection.AmbiguousMatchException> atılmıştır.
+Yönlendirme bir en iyi aday seçebilirse, birden <xref:System.Reflection.AmbiguousMatchException> fazla eşleşen uç noktayı listeleyerek bir oluşturulur.
 
 <a name="routing-route-name-ref-label"></a>
 
-### <a name="conventional-route-names"></a>Geleneksel rota adları
+### <a name="conventional-route-names"></a>Geleneksel yol adları
 
-Dizeleri `"blog"` ve `"default"` aşağıdaki örneklerde geleneksel rota adları şunlardır:
+Dizeler `"blog"` ve `"default"` aşağıdaki örneklerde geleneksel yol adları verilmiştir:
 
 [!code-csharp[](routing/samples/3.x/main/Startup.cs?name=snippet_1)]
 
-Rota adları rotaya mantıksal bir ad verir. Adlandırılmış rota URL üretimi için kullanılabilir. Adlandırılmış bir rotanın kullanılması, yolların sıralanması URL oluşturmayı karmaşık hale getirebileceğinde URL oluşturmayı kolaylaştırır. Rota adları benzersiz uygulama genişliğinde olmalıdır.
+Yol adları, yola mantıksal bir ad verir. Adlandırılmış yol, URL oluşturmak için kullanılabilir. Adlandırılmış bir yol kullanmak, yolların sıralaması URL oluşturma karmaşık hale geldiğinde URL oluşturmayı basitleştirir. Yol adları benzersiz uygulama genelinde olmalıdır.
 
-Rota adları:
+Yol adları:
 
-* URL eşleştirme veya isteklerin işlenmesi üzerinde hiçbir etkisi yoktur.
-* Yalnızca URL üretimi için kullanılır.
+* İsteklerin URL 'siyle eşleşmesi veya işlenmesi üzerinde hiçbir etkisi yoktur.
+* Yalnızca URL oluşturmak için kullanılır.
 
-Rota adı kavramı [yönlendirmede IEndpointNameMetadata](xref:Microsoft.AspNetCore.Routing.IEndpointNameMetadata)olarak temsil edilir. Terimrota **adı** ve bitiş **noktası adı:**
+Yol adı kavramı [ıendpointnamemetadata](xref:Microsoft.AspNetCore.Routing.IEndpointNameMetadata)olarak yönlendirme ile temsil edilir. Terimler **yol adı** ve **uç nokta adı**:
 
 * Değiştirilebilir.
-* Hangisinin belge ve kodda kullanıldığı açıklanan API'ye bağlıdır.
+* Belgede kullanılan ve kod, açıklanan API 'ye bağlıdır.
 
 <a name="attribute-routing-ref-label"></a>
 <a name="ar"></a>
 
-## <a name="attribute-routing-for-rest-apis"></a>REST API'leri için öznitelik yönlendirme
+## <a name="attribute-routing-for-rest-apis"></a>REST API 'Leri için öznitelik yönlendirme
 
-REST API'ler, uygulamanın işlevselliğini işlemlerin [HTTP fiilleri](#verb)tarafından temsil edildiği bir kaynak kümesi olarak modellemek için öznitelik yönlendirmesini kullanmalıdır.
+REST API 'Leri, uygulamanın işlevselliğini [http fiilleri](#verb)tarafından temsil edilen bir kaynak kümesi olarak modellemek için öznitelik yönlendirmeyi kullanmalıdır.
 
-Öznitelik yönlendirme, eylemleri doğrudan rota şablonlarına yönlendirmek için bir öznitelik kümesi kullanır. Aşağıdaki `StartUp.Configure` kod REST API için tipiktir ve bir sonraki örnekte kullanılır:
+Öznitelik yönlendirme eylemleri doğrudan yönlendirme şablonlarına eşlemek için bir öznitelik kümesi kullanır. Aşağıdaki `StartUp.Configure` kod, bir REST API için tipik bir sonraki örnekte kullanılır:
 
 [!code-csharp[](routing/samples/3.x/main/StartupApi.cs?name=snippet)]
 
-Önceki kodda, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*> eşöz `UseEndpoints` yönlendirilmiş denetleyicileri eşlemek için içinde denir.
+Önceki kodda, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*> öznitelik yönlendirmeli denetleyicileri eşlemek için `UseEndpoints` içinde çağırılır.
 
 Aşağıdaki örnekte:
 
 * Önceki `Configure` yöntem kullanılır.
-* `HomeController`varsayılan geleneksel rotanın `{controller=Home}/{action=Index}/{id?}` eşleştiğininbenzer URL'leri kümesiyle eşleşir.
+* `HomeController`Varsayılan geleneksel yolun `{controller=Home}/{action=Index}/{id?}` eşleşdiküyle benzer bir URL kümesiyle eşleşir.
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/HomeController.cs?name=snippet2)]
 
-Eylem, `HomeController.Index` `/`URL yollarından herhangi biri `/Home` `/Home/Index`için `/Home/Index/3`çalıştırılır, , , veya .
+`HomeController.Index` Eylem `/`,, veya `/Home` `/Home/Index` `/Home/Index/3`URL yollarından herhangi biri için çalıştırılır.
 
-Bu örnek, öznitelik yönlendirme ve [geleneksel yönlendirme](#cr)arasındaki önemli bir programlama farkvurgulamaktadır. Öznitelik yönlendirme, bir rota belirtmek için daha fazla giriş gerektirir. Geleneksel varsayılan rota yolları daha kısa bir şekilde işler. Ancak, öznitelik yönlendirme, her [eylem](#action)için hangi rota şablonlarının geçerli olduğunu kesin olarak denetlemeye izin verir ve gerektirir.
+Bu örnek, öznitelik yönlendirme ve [geleneksel yönlendirme](#cr)arasında bir temel programlama farkı vurgulamaktadır. Öznitelik yönlendirme için bir yol belirtmek için daha fazla giriş gerekir. Geleneksel varsayılan yol, yönlendirmeleri daha succinctly işler. Ancak, öznitelik yönlendirme izin verir ve her [eyleme](#action)hangi rota şablonlarının uygulanacağını kesin olarak denetler.
 
-Öznitelik yönlendirmesi ile denetleyici adı ve eylem adları eylemin eşleştir olduğu **hiçbir** rol oynamaz. Aşağıdaki örnek, önceki örnekle aynı URL'lerle eşleşir:
+Öznitelik yönlendirme ile, denetleyici adı ve eylem adları, eylem ile eşleşen **hiçbir** rol oynar. Aşağıdaki örnek, önceki örnekle aynı URL 'Lerle eşleşir:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/MyDemoController.cs?name=snippet)]
 
-Aşağıdaki kod için `action` belirteç `controller`replasmanı kullanır ve:
+Aşağıdaki kod, ve `action` `controller`için belirteç yerini kullanır:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/HomeController.cs?name=snippet22)]
 
-Aşağıdaki kod denetleyici `[Route("[controller]/[action]")]` için geçerlidir:
+Aşağıdaki kod denetleyici için `[Route("[controller]/[action]")]` geçerlidir:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/HomeController.cs?name=snippet24)]
 
-Önceki kodda, `Index` yöntem şablonları rota `/` şablonlarına hazırlanmalıdır. `~/` Denetleyiciye uygulanan rota şablonlarıyla `/` başlayan `~/` veya birleşmeyen bir eyleme uygulanan rota şablonları.
+Yukarıdaki kodda, `Index` Yöntem şablonlarının sonuna `/` veya `~/` yol şablonlarına eklenmiş olması gerekir. Bir eyleme uygulanan `/` veya `~/` Bu denetleyiciye uygulanan rota şablonlarıyla birlikte bir araya getirilen bir eyleme uygulanan rota şablonları.
 
-Rota şablonu seçimiyle ilgili bilgi için [Rota şablonu önceliğine](xref:fundamentals/routing#rtp) bakın.
+Rota şablonu seçimi hakkında bilgi için bkz. [route Template önceliği](xref:fundamentals/routing#rtp) .
 
 ## <a name="reserved-routing-names"></a>Ayrılmış yönlendirme adları
 
-Denetleyicileri veya Jilet Sayfaları kullanırken aşağıdaki anahtar kelimeler rota parametre adları ayrılmıştır:
+Aşağıdaki anahtar sözcükler, denetleyiciler veya Razor Pages kullanılırken ayrılmış yol parametresi adlarıdır:
 
 * `action`
 * `area`
@@ -301,20 +301,20 @@ Denetleyicileri veya Jilet Sayfaları kullanırken aşağıdaki anahtar kelimele
 * `handler`
 * `page`
 
-Öznitelik yönlendirmesi ile bir rota parametresi olarak kullanmak `page` yaygın bir hatadır. Bunu yapmak, URL oluşturma yla tutarsız ve kafa karıştırıcı davranışlara neden olur.
+Öznitelik `page` yönlendirme ile yol parametresi olarak kullanmak yaygın bir hatadır. Bunun yapılması, URL oluşturma ile tutarsız ve kafa karıştırıcı davranışa neden olur.
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/MyDemo2Controller.cs?name=snippet)]
 
-Özel parametre adları, URL oluşturma işleminin Bir Jilet Sayfası'na mı yoksa Denetleyiciye mi atıfta bulunduğunu belirlemek için URL oluşturma tarafından kullanılır.
+Özel parametre adları, URL oluşturma işleminin bir Razor sayfasına mı yoksa bir denetleyiciye mi başvurduğunu öğrenmek için URL oluşturma tarafından kullanılır.
 
 <a name="verb"></a>
 
-## <a name="http-verb-templates"></a>HTTP fiil şablonları
+## <a name="http-verb-templates"></a>HTTP fiili şablonları
 
-ASP.NET Core aşağıdaki HTTP fiil şablonları vardır:
+ASP.NET Core aşağıdaki HTTP fiili şablonlarına sahiptir:
 
-* [[HttpGet]](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute)
-* [[Posta]](xref:Microsoft.AspNetCore.Mvc.HttpPostAttribute)
+* [HttpGet](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute)
+* [HttpPost](xref:Microsoft.AspNetCore.Mvc.HttpPostAttribute)
 * [[HttpPut]](xref:Microsoft.AspNetCore.Mvc.HttpPutAttribute)
 * [[HttpDelete]](xref:Microsoft.AspNetCore.Mvc.HttpDeleteAttribute)
 * [[HttpHead]](xref:Microsoft.AspNetCore.Mvc.HttpHeadAttribute)
@@ -324,14 +324,14 @@ ASP.NET Core aşağıdaki HTTP fiil şablonları vardır:
 
 ### <a name="route-templates"></a>Rota şablonları
 
-ASP.NET Core aşağıdaki rota şablonlarına sahiptir:
+ASP.NET Core aşağıdaki yol şablonlarına sahiptir:
 
-* Tüm [HTTP fiil şablonları](#verb) rota şablonlarıdır.
-* [[Rota]](xref:Microsoft.AspNetCore.Mvc.RouteAttribute)
+* Tüm [http fiili şablonları](#verb) rota şablonlarıdır.
+* [Yolu](xref:Microsoft.AspNetCore.Mvc.RouteAttribute)
 
 <a name="arx"></a>
 
-### <a name="attribute-routing-with-http-verb-attributes"></a>Http fiil öznitelikleri ile öznitelik yönlendirme
+### <a name="attribute-routing-with-http-verb-attributes"></a>Http fiili öznitelikleriyle öznitelik yönlendirme
 
 Aşağıdaki denetleyiciyi göz önünde bulundurun:
 
@@ -339,113 +339,113 @@ Aşağıdaki denetleyiciyi göz önünde bulundurun:
 
 Yukarıdaki kodda:
 
-* Her eylem, `[HttpGet]` yalnızca HTTP GET istekleriyle eşleşen öznitelik içerir.
-* `GetProduct` Eylem şablonu `"{id}"` içerir, `id` bu nedenle `"api/[controller]"` denetleyicideki şablona eklenir. Yöntem şablonu. `"api/[controller]/"{id}""` Bu nedenle bu eylem sadece form `/api/test2/xyz``/api/test2/123`için`/api/test2/{any string}`GET isteklerieş , , , vb.
+* Her eylem yalnızca HTTP `[HttpGet]` Get istekleriyle eşleştirmeyi kısıtlayan özniteliği içerir.
+* `GetProduct` Eylem `"{id}"` , şablonu içerir, bu nedenle `id` denetleyicideki `"api/[controller]"` şablonun sonuna eklenir. Yöntemler şablonu `"api/[controller]/"{id}""`. Bu nedenle bu eylem yalnızca `/api/test2/xyz`,`/api/test2/123``/api/test2/{any string}`, vb. için get istekleri ile eşleşir.
   [!code-csharp[](routing/samples/3.x/main/Controllers/Test2Controller.cs?name=snippet2)]
-* `GetIntProduct` Eylem şablonu `"int/{id:int}")` içerir. Şablonun `:int` `id` bölümü, rota değerlerini tamsayıya dönüştürülebilecek dizeleri kısıtlar. Bir GET `/api/test2/int/abc`isteği :
-  * Bu hareketle uyuşmuyor.
-  * [404 Bulunamadı](https://developer.mozilla.org/docs/Web/HTTP/Status/404) hata verir.
+* `GetIntProduct` Eylem `"int/{id:int}")` şablonu içerir. Şablonun `:int` kısmı, `id` yol değerlerini bir tamsayıya dönüştürülebileceği dizelere kısıtlar. Bir GET isteği `/api/test2/int/abc`:
+  * Bu eylemle eşleşmiyor.
+  * Bir [404 bulunamadı](https://developer.mozilla.org/docs/Web/HTTP/Status/404) hatası döndürür.
     [!code-csharp[](routing/samples/3.x/main/Controllers/Test2Controller.cs?name=snippet3)]
-* Eylem `GetInt2Product` şablonda içerir, `{id}` ancak bir karşıcıya dönüştürülebilecek değerlerle sınırlandırmaz. `id` Bir GET `/api/test2/int2/abc`isteği :
-  * Bu rotayla eşleşiyor.
-  * Model bağlama bir `abc` karşıcıya dönüştürmede başarısız olur. Yöntemin `id` parametresi, tümsecidir.
-  * Model bağlama bir tamsayıya dönüştürülemediğinden`abc` [400 Kötü İstek](https://developer.mozilla.org/docs/Web/HTTP/Status/400) döndürür.
+* `GetInt2Product` Eylem şablonda bulunur `{id}` , ancak bir tamsayıya dönüştürülemeyen `id` değerlerle sınırlandırmaz. Bir GET isteği `/api/test2/int2/abc`:
+  * Bu rota ile eşleşir.
+  * Model bağlama bir tamsayıya dönüştürülemez `abc` . Yönteminin `id` parametresi tamsayıdır.
+  * Model bağlama bir tamsayıya dönüştürülemediğinden`abc` , [400 hatalı bir istek](https://developer.mozilla.org/docs/Web/HTTP/Status/400) döndürür.
       [!code-csharp[](routing/samples/3.x/main/Controllers/Test2Controller.cs?name=snippet4)]
 
-Öznitelik yönlendirme, , <xref:Microsoft.AspNetCore.Mvc.Routing.HttpMethodAttribute> ve <xref:Microsoft.AspNetCore.Mvc.HttpPostAttribute> <xref:Microsoft.AspNetCore.Mvc.HttpPutAttribute> <xref:Microsoft.AspNetCore.Mvc.HttpDeleteAttribute>. gibi öznitelikleri kullanabilirsiniz. [TÜM HTTP fiil](#verb) öznitelikleri bir rota şablonu kabul eder. Aşağıdaki örnek, aynı rota şablonuyla eşleşen iki eylemi gösterir:
+<xref:Microsoft.AspNetCore.Mvc.Routing.HttpMethodAttribute> Öznitelik yönlendirme <xref:Microsoft.AspNetCore.Mvc.HttpPostAttribute>, <xref:Microsoft.AspNetCore.Mvc.HttpPutAttribute>, ve <xref:Microsoft.AspNetCore.Mvc.HttpDeleteAttribute>gibi öznitelikleri kullanabilir. Tüm [http fiili](#verb) öznitelikleri bir yol şablonunu kabul eder. Aşağıdaki örnekte, aynı yol şablonuyla eşleşen iki eylem gösterilmektedir:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/MyProductsController.cs?name=snippet1)]
 
-URL yolunu `/products3`kullanma:
+URL yolu `/products3`kullanılarak:
 
-* `MyProductsController.ListProducts` EYLEM, HTTP [fiili](#verb) . `GET`
-* `MyProductsController.CreateProduct` EYLEM, HTTP [fiili](#verb) . `POST`
+* `MyProductsController.ListProducts` Eylem [http fiili](#verb) olduğunda çalışır `GET`.
+* `MyProductsController.CreateProduct` Eylem [http fiili](#verb) olduğunda çalışır `POST`.
 
-BIR REST API'si inşa ederken, eylem tüm `[Route(...)]` HTTP yöntemlerini kabul ettiğinden, bir eylem yönteminde kullanmanız gereken nadirdir. API'nizin neyi desteklediği hakkında kesin olmak için daha spesifik [HTTP fiil özniteliğini](#verb) kullanmak daha iyidir. REST API'lerinin istemcilerinin belirli mantıksal işlemlere hangi yolların ve HTTP fiillerinin eşlenebildiğini bilmeleri beklenir.
+Bir REST API oluştururken, eylem tüm HTTP yöntemlerini kabul ettiğinden bir eylem yönteminde kullanmanız `[Route(...)]` gerekecektir. API 'nizin neleri desteklediği hakkında kesin olması için, daha özel [http fiili özniteliği](#verb) kullanmak daha iyidir. REST API 'lerinin istemcileri, hangi yolların ve HTTP fiillerinin belirli mantıksal işlemlere eşlendiğini bilmelidir.
 
-REST API'leri, uygulamanın işlevselliğini işlemlerin HTTP fiilleri tarafından temsil edildiği bir kaynak kümesi olarak modellemek için öznitelik yönlendirmesini kullanmalıdır. Bu, aynı mantıksal kaynaktaki GET ve POST gibi birçok operasyonun aynı URL'yi kullandığı anlamına gelir. Öznitelik yönlendirme, bir API'nin genel uç nokta düzenini dikkatle tasarlamak için gereken bir denetim düzeyi sağlar.
+REST API 'Leri, uygulamanın işlevselliğini HTTP fiilleri tarafından temsil edilen bir kaynak kümesi olarak modellemek için öznitelik yönlendirmeyi kullanmalıdır. Bu, örneğin, aynı mantıksal kaynaktaki al ve postala gibi birçok işlemin aynı URL 'YI kullanması anlamına gelir. Öznitelik yönlendirme, bir API 'nin Genel uç nokta yerleşimini dikkatle tasarlamak için gereken bir denetim düzeyi sağlar.
 
-Bir öznitelik rotası belirli bir eylem için geçerli olduğundan, rota şablonu tanımının bir parçası olarak gerekli parametreleri yapmak kolaydır. Aşağıdaki örnekte, `id` URL yolunun bir parçası olarak gereklidir:
+Bir öznitelik yolu belirli bir eyleme uyguladığı için, yol şablonu tanımının bir parçası olarak gerekli parametreleri yapmak kolaydır. Aşağıdaki örnekte, `id` URL yolunun bir parçası olarak gereklidir:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsApiController.cs?name=snippet2)]
 
-Eylem: `Products2ApiController.GetProduct(int)`
+`Products2ApiController.GetProduct(int)` Eylem:
 
-* GIBI URL yolu ile çalıştırılır mı`/products2/3`
-* URL yolu `/products2`ile çalıştırılmıyor.
+* , Şunun gibi URL yoluyla çalıştırılır`/products2/3`
+* URL yoluyla `/products2`çalıştırılmadı.
 
-[[Tüketir]](<xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute>) özniteliği, desteklenen istek içerik türlerini sınırlamak için bir eyleme izin verir. Daha fazla bilgi için [bkz.](xref:web-api/index#consumes)
+[[Tüketir]](<xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute>) özniteliği, desteklenen istek içerik türlerini sınırlama eylemi sağlar. Daha fazla bilgi için bkz. [desteklenen istek içerik türlerini tüketir özniteliğiyle tanımlama](xref:web-api/index#consumes).
 
- Rota şablonlarının ve ilgili seçeneklerin tam açıklaması için [Yönlendirme'ye](xref:fundamentals/routing) bakın.
+ Yol şablonlarının ve ilgili seçeneklerin tam açıklaması için bkz. [yönlendirme](xref:fundamentals/routing) .
 
-Daha fazla `[ApiController]`bilgi için [ApiController özniteliğine](xref:web-api/index##apicontroller-attribute)bakın.
+Hakkında `[ApiController]`daha fazla bilgi için bkz. [Apicontroller özniteliği](xref:web-api/index##apicontroller-attribute).
 
 ## <a name="route-name"></a>Yönlendirme adı
 
-Aşağıdaki kod bir rota adı `Products_List`tanımlar:
+Aşağıdaki kod, bir yol adı tanımlar `Products_List`:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsApiController.cs?name=snippet2)]
 
-Rota adları, belirli bir rotayı temel alan bir URL oluşturmak için kullanılabilir. Rota adları:
+Yol adları, belirli bir yolu temel alan bir URL oluşturmak için kullanılabilir. Yol adları:
 
-* Yönlendirmenin URL eşleştirme davranışı üzerinde hiçbir etkisi yoktur.
-* Yalnızca URL üretimi için kullanılır.
+* Yönlendirmenin URL eşleşen davranışı üzerinde hiçbir etkisi yoktur.
+* Yalnızca URL oluşturma için kullanılır.
 
-Rota adları uygulama genelinde benzersiz olmalıdır.
+Yol adları, uygulama genelinde benzersiz olmalıdır.
 
-Önceki kodu, parametreyi `id` isteğe bağlı olarak tanımlayan geleneksel`{id?}`varsayılan rotayla karşılayın ( ). API'leri tam olarak belirtme olanağının, `/products` farklı `/products/5` eylemlere izin verme ve gönderme gibi avantajları vardır.
+Önceki kodu, `id` parametreyi isteğe bağlı (`{id?}`) olarak tanımlayan geleneksel varsayılan rotayla kontrast. API 'Leri tam olarak belirtme özelliği, farklı eylemlere izin verilmesi `/products` ve `/products/5` dağıtılması gibi avantajlara sahiptir.
 
 <a name="routing-combining-ref-label"></a>
 
 ## <a name="combining-attribute-routes"></a>Öznitelik yollarını birleştirme
 
-Öznitelik yönlendirmeyi daha az yinelenen hale getirmek için denetleyicideki rota öznitelikleri, tek tek eylemlerdeki rota öznitelikleriyle birleştirilir. Denetleyicide tanımlanan tüm rota şablonları, eylemlerdeki şablonları yönlendirmeye hazırlanır. Denetleyiciye bir rota özniteliği yerleştirmek, denetleyicideki **tüm** eylemleri öznitelik yönlendirmesi kullanır.
+Öznitelik yönlendirmeyi daha az tekrarlı hale getirmek için, denetleyicideki yol öznitelikleri, bireysel eylemlerdeki rota öznitelikleriyle birleştirilir. Denetleyicide tanımlanan tüm yol şablonları, eylemlerdeki rota şablonlarına eklenir. Bir Route özniteliğinin denetleyiciye yerleştirilmesi, denetleyicideki **Tüm** eylemlerin öznitelik yönlendirme kullanmasını sağlar.
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsApiController.cs?name=snippet)]
 
-Önceki örnekte:
+Yukarıdaki örnekte:
 
-* URL yolu `/products` eşleşebilir`ProductsApi.ListProducts`
-* URL yolu `/products/5` eşleşebilir. `ProductsApi.GetProduct(int)`
+* URL yolu `/products` eşleşiyor`ProductsApi.ListProducts`
+* URL yolu `/products/5` eşleşiyor `ProductsApi.GetProduct(int)`.
 
-Bu eylemlerin her ikisi `GET` de yalnızca HTTP `[HttpGet]` ile eşleşir, çünkü öznitelik ile işaretlenirler.
+Bu eylemlerin her ikisi de, `GET` `[HttpGet]` özniteliğiyle işaretlendiğinden yalnızca http ile eşleşir.
 
-Denetleyiciye uygulanan rota şablonlarıyla `/` başlayan `~/` veya birleşmeyen bir eyleme uygulanan rota şablonları. Aşağıdaki örnek, varsayılan rotaya benzer bir URL yolu kümesiyle eşleşir.
+Bir eyleme uygulanan `/` veya `~/` Bu denetleyiciye uygulanan rota şablonlarıyla birlikte bir araya getirilen bir eyleme uygulanan rota şablonları. Aşağıdaki örnek, varsayılan rotaya benzer bir URL yolları kümesiyle eşleşir.
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/HomeController.cs?name=snippet)]
 
-Aşağıdaki tabloda `[Route]` önceki koddaki öznitelikler açıklanmaktadır:
+Aşağıdaki tabloda önceki koddaki `[Route]` öznitelikler açıklanmaktadır:
 
-| Öznitelik               | Ile birleştirir`[Route("Home")]` | Rota şablonu tanımlar |
+| Öznitelik               | İle birleştirir`[Route("Home")]` | Rota şablonunu tanımlar |
 | ----------------- | ------------ | --------- |
-| `[Route("")]` | Evet | `"Home"` |
-| `[Route("Index")]` | Evet | `"Home/Index"` |
+| `[Route("")]` | Yes | `"Home"` |
+| `[Route("Index")]` | Yes | `"Home/Index"` |
 | `[Route("/")]` | **Hayır** | `""` |
-| `[Route("About")]` | Evet | `"Home/About"` |
+| `[Route("About")]` | Yes | `"Home/About"` |
 
 <a name="routing-ordering-ref-label"></a>
 <a name="oar"></a>
 
-### <a name="attribute-route-order"></a>Öznitelik rota sırası
+### <a name="attribute-route-order"></a>Öznitelik yolu sırası
 
-Yönlendirme bir ağaç oluşturur ve tüm uç noktaları eş zamanlı olarak eşleşir:
+Yönlendirme bir ağaç oluşturur ve aynı anda tüm uç noktaları eşleştirir:
 
-* Rota girişleri ideal bir sıralamaya yerleştirilmiş gibi olur.
-* En özel rotalar, daha genel rotalardan önce yürütme şansına sahiptir.
+* Yol girdileri ideal bir sıralamaya yerleştirilmiş gibi davranır.
+* En özel yolların, daha genel yollardan önce yürütülmesi şansınız vardır.
 
-Örneğin, gibi `blog/search/{topic}` bir öznitelik yolu gibi `blog/{*article}`bir öznitelik yolu daha özeldir. Rota, `blog/search/{topic}` varsayılan olarak daha yüksek önceliğe sahiptir, çünkü daha spesifiktir. [Geleneksel yönlendirmeyi](#cr)kullanarak, geliştirici yolları istenilen sıraya yerleştirmekten sorumludur.
+Örneğin, gibi `blog/search/{topic}` bir öznitelik yolu, gibi `blog/{*article}`bir öznitelik rotasına göre daha özgüdür. Daha `blog/search/{topic}` belirgin olduğundan, yolun önceliği daha yüksektir. [Geleneksel yönlendirmeyi](#cr)kullanarak, yolları istenen sırada yerleştirmekten geliştirici sorumludur.
 
-Öznitelik yolları <xref:Microsoft.AspNetCore.Mvc.RouteAttribute.Order> özelliği kullanarak bir sipariş yapılandırabilirsiniz. Sağlanan tüm çerçeve rota `Order` [öznitelikleri](xref:Microsoft.AspNetCore.Mvc.RouteAttribute) içerir. Rotalar, artan bir `Order` özellik türüne göre işlenir. Varsayılan sıra. `0` Sipariş belirlemeyen `Order = -1` rotalardan önce çalıştırmaları kullanarak rota ayarlama. Varsayılan rota `Order = 1` siparişinden sonra çalışır kullanarak bir rota ayarlama.
+Öznitelik yolları <xref:Microsoft.AspNetCore.Mvc.RouteAttribute.Order> özelliği kullanarak bir sıra yapılandırabilir. Tüm Framework 'ün [yol öznitelikleri](xref:Microsoft.AspNetCore.Mvc.RouteAttribute) dahil `Order` edilmiştir. Yollar, `Order` özelliğin artan sıralamasına göre işlenir. Varsayılan sıra `0`. Bir siparişi ayarlamadığı `Order = -1` rotalardan önce çalıştırmaları kullanarak bir rota ayarlama. Varsayılan yol sıralaması sonrasında `Order = 1` çalıştırmaları kullanarak bir rota ayarlama.
 
-Bağlı olarak `Order` **kaçının.** Bir uygulamanın URL alanı doğru yönlendirmek için açık sipariş değerleri gerektiriyorsa, istemciler için de kafa karıştırıcı olabilir. Genel olarak, öznitelik yönlendirme, URL eşlemeile doğru rotayı seçer. URL oluşturma için kullanılan varsayılan sipariş çalışmıyorsa, geçersiz kılma olarak bir rota adı `Order` kullanmak genellikle özelliği uygulamaktan daha kolaydır.
+**Avoid** Uygulamasına bağlı kaçının `Order`. Bir uygulamanın URL 'SI alanı, doğru şekilde yönlendirmek için açık sıra değerleri gerektiriyorsa, bu durumda istemciler de kafa karıştırıcı olabilir. Genel olarak, öznitelik yönlendirme URL ile eşleşen doğru yolu seçer. URL oluşturma için kullanılan varsayılan sıra çalışmıyorsa, geçersiz kılma olarak bir yol adı kullanılması, `Order` özelliği uygulamadan daha basittir.
 
-Her ikisi de rota eşleşen `/home`tanımlamak aşağıdaki iki denetleyicileri düşünün:
+Her ikisi de eşleşen `/home`yolu tanımlayan aşağıdaki iki denetleyicisi göz önünde bulundurun:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/HomeController.cs?name=snippet2)]
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/MyDemoController.cs?name=snippet)]
 
-Önceki `/home` kodla birlikte istemek aşağıdakilere benzer bir özel durum oluşturur:
+Yukarıdaki `/home` kodla istemek şuna benzer bir özel durum oluşturur:
 
 ```text
 AmbiguousMatchException: The request matched multiple endpoints. Matches:
@@ -454,29 +454,29 @@ AmbiguousMatchException: The request matched multiple endpoints. Matches:
  WebMvcRouting.Controllers.MyDemoController.MyIndex
 ```
 
-Rota `Order` özniteliklerinden birine ekleme belirsizliği giderir:
+Yol `Order` özniteliklerinden birine ekleme belirsizliği çözer:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/MyDemo3Controller.cs?name=snippet3& highlight=2)]
 
-Önceki kodla bitiş `/home` noktasını `HomeController.Index` çalıştırın. Almak için `MyDemoController.MyIndex`, `/home/MyIndex`istek . **Not**:
+Yukarıdaki kodla `/home` `HomeController.Index` bitiş noktasını çalıştırır. Öğesine `MyDemoController.MyIndex`ulaşmak için `/home/MyIndex`. **Not**:
 
-* Önceki kod bir örnek veya kötü yönlendirme tasarımıdır. `Order` Mülkü göstermek için kullanılmış.
-* Özellik `Order` yalnızca belirsizliği giderir, bu şablon eşleşemez. Şablonu `[Route("Home")]` kaldırmak daha iyi olacaktır.
+* Yukarıdaki kod bir örnek veya kötü yönlendirme tasarımdır. `Order` Özelliği göstermek için kullanılmıştı.
+* `Order` Özelliği yalnızca belirsizlik çözümleniyor, bu şablon eşleştirilemez. `[Route("Home")]` Şablonu kaldırmak daha iyi olacaktır.
 
-[Bkz. Razor Pages rota ve uygulama kuralları:](xref:razor-pages/razor-pages-conventions#route-order) Razor Pages ile rota sırası hakkında bilgi için rota sırası.
+Bkz. [Razor Pages yol ve uygulama kuralları:](xref:razor-pages/razor-pages-conventions#route-order) rota sıralaması hakkında bilgiler için Razor Pages.
 
-Bazı durumlarda, bir HTTP 500 hatası belirsiz yollarla döndürülür. Hangi uç noktaların neden `AmbiguousMatchException`olduğunu görmek için [günlüğe kaydetmeyi](xref:fundamentals/logging/index) kullanın.
+Bazı durumlarda, belirsiz yollarla bir HTTP 500 hatası döndürülür. Hangi uç noktaların neden olduğunu görmek için [günlük kaydını](xref:fundamentals/logging/index) kullanın `AmbiguousMatchException`.
 
 <a name="routing-token-replacement-templates-ref-label"></a>
 
-## <a name="token-replacement-in-route-templates-controller-action-area"></a>Rota şablonlarında belirteç değiştirme [denetleyici], [eylem], [alan]
+## <a name="token-replacement-in-route-templates-controller-action-area"></a>Yönlendirme şablonlarında belirteç değiştirme [denetleyici], [eylem], [alan]
 
-Kolaylık sağlamak için, öznitelik rotaları aşağıdakilerden birine bir belirteç ekleyerek ayrılmış rota parametreleri için belirteç değişimini destekler:
+Daha kolay olması için, öznitelik rotaları, aşağıdakilerden birine bir belirteç ekleyerek ayrılmış yol parametrelerine yönelik belirteç değişimini destekler:
 
-* Kare ayraçlar:`[]`
-* Kıvırcık ayraçlar:`{}`
+* Köşeli ayraçlar:`[]`
+* Küme ayraçları:`{}`
 
-Yol `[action]` `[area]`tanımlandığı eylemden `[controller]` eylem adı, alan adı ve denetleyici adının değerleri ile değiştirilir:
+, Ve `[action]` `[controller]` belirteçleri `[area]`, yolun tanımlandığı eylemden eylem adı, alan adı ve denetleyici adı değerleriyle değiştirilmiştir:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet)]
 
@@ -484,136 +484,136 @@ Yukarıdaki kodda:
 
   [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet10)]
 
-  * Eşleşen`/Products0/List`
+  * Eşleştir`/Products0/List`
 
   [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet11)]
 
-  * Eşleşen`/Products0/Edit/{id}`
+  * Eşleştir`/Products0/Edit/{id}`
 
-Belirteç değiştirme, öznitelik yollarını oluşturmanın son adımı olarak gerçekleşir. Önceki örnek aşağıdaki kodla aynı şekilde davranışta dır:
+Belirteç değişikliği, öznitelik yollarının oluşturulması için son adım olarak gerçekleşir. Yukarıdaki örnek aşağıdaki kodla aynı şekilde davranır:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet20)]
 
 [!INCLUDE[](~/includes/MTcomments.md)]
 
-Öznitelik yolları da devralma ile birleştirilebilir. Bu belirteç değiştirme ile birlikte güçlüdür. Belirteç değiştirme, öznitelik yolları tarafından tanımlanan rota adları için de geçerlidir.
-`[Route("[controller]/[action]", Name="[controller]_[action]")]`her eylem için benzersiz bir rota adı oluşturur:
+Öznitelik rotaları de devralma ile birleştirilebilir. Bu, belirteç değiştirme ile güçlü bir şekilde birleştirilir. Belirteç değişikliği, öznitelik rotaları tarafından tanımlanan yol adları için de geçerlidir.
+`[Route("[controller]/[action]", Name="[controller]_[action]")]`Her eylem için benzersiz bir yol adı üretir:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet5)]
 
-Belirteç değiştirme, öznitelik yolları tarafından tanımlanan rota adları için de geçerlidir.
+Belirteç değişikliği, öznitelik rotaları tarafından tanımlanan yol adları için de geçerlidir.
 `[Route("[controller]/[action]", Name="[controller]_[action]")]`
-her eylem için benzersiz bir rota adı oluşturur.
+Her eylem için benzersiz bir yol adı üretir.
 
-Gerçek belirteç değiştirme delimiter `[` `]`maç veya , karakter (veya)`[[` `]]`tekrarlayarak kaçmak.
+Sabit belirteç `[` değiştirme sınırlayıcısıyla eşleştirmek için veya `]`karakteri tekrarlayarak (`[[` veya `]]`) bunu kaçış.
 
 <a name="routing-token-replacement-transformers-ref-label"></a>
 
-### <a name="use-a-parameter-transformer-to-customize-token-replacement"></a>Belirteç değiştirmesini özelleştirmek için parametre transformatörü kullanma
+### <a name="use-a-parameter-transformer-to-customize-token-replacement"></a>Belirteç değişimini özelleştirmek için bir parametre transformatörü kullanın
 
-Belirteç değiştirme parametre transformatörü kullanılarak özelleştirilebilir. Bir parametre transformatörü parametrelerin değerini uygular <xref:Microsoft.AspNetCore.Routing.IOutboundParameterTransformer> ve dönüştürür. Örneğin, özel `SlugifyParameterTransformer` bir parametre `SubscriptionManagement` transformatörü `subscription-management`rota değerini aşağıdakilere değiştirir:
+Belirteç değiştirme, bir parametre transformatörü kullanılarak özelleştirilebilir. Bir parametre transformatörü, <xref:Microsoft.AspNetCore.Routing.IOutboundParameterTransformer> parametrelerinin değerini uygular ve dönüştürür. Örneğin, özel `SlugifyParameterTransformer` bir parametre transformatörü `SubscriptionManagement` rota değerini şu şekilde `subscription-management`değiştirir:
 
 [!code-csharp[](routing/samples/3.x/main/StartupSlugifyParamTransformer.cs?name=snippet2)]
 
-Bir <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.RouteTokenTransformerConvention> uygulama modeli kuralı:
+, <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.RouteTokenTransformerConvention> Şu şekilde bir uygulama modeli kuralıdır:
 
 * Bir uygulamadaki tüm öznitelik yollarına bir parametre transformatörü uygular.
-* Değiştirildikleri gibi öznitelik rotası belirteç değerlerini özelleştirin.
+* Öznitelik yol belirteci değerlerini değiştirildikleri gibi özelleştirir.
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/SubscriptionManagementController.cs?name=snippet)]
 
-Önceki `ListAll` yöntem eşleşir. `/subscription-management/list-all`
+Önceki `ListAll` Yöntem eşleşir `/subscription-management/list-all`.
 
-Bir `RouteTokenTransformerConvention` seçenek olarak `ConfigureServices`kaydedilir.
+, `RouteTokenTransformerConvention` ' `ConfigureServices`Da bir seçeneği olarak kaydedilir.
 
 [!code-csharp[](routing/samples/3.x/main/StartupSlugifyParamTransformer.cs?name=snippet)]
 
-Sümüklüböcek tanımı için [Slug'daki MDN web dokümanlarına](https://developer.mozilla.org/docs/Glossary/Slug) bakın.
+Bilgi tanımı için bkz. [Mdıdn Web docs](https://developer.mozilla.org/docs/Glossary/Slug) for the başlık.
 
 [!INCLUDE[](~/includes/regex.md)]
 <a name="routing-multiple-routes-ref-label"></a>
 
 ### <a name="multiple-attribute-routes"></a>Birden çok öznitelik yolu
 
-Öznitelik yönlendirme, aynı eyleme ulaşan birden çok yol tanımlamayı destekler. Bunun en yaygın kullanımı, aşağıdaki örnekte gösterildiği gibi varsayılan geleneksel rotanın davranışını taklit etmektir:
+Öznitelik yönlendirme, aynı eyleme ulaşan birden çok yolun tanımlanmasını destekler. Bunun en yaygın kullanımları, aşağıdaki örnekte gösterildiği gibi varsayılan geleneksel yolun davranışını taklit etmek olur:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet6x)]
 
-Denetleyiciye birden çok yol öznitelikleri koymak, her birinin eylem yöntemlerindeki her bir rota öznitelikleriyle birleştiği anlamına gelir:
+Denetleyiciye birden çok yol özniteliği koymak, her birinin eylem yöntemlerinde yol özniteliklerinin her biri ile birleştiribileceği anlamına gelir:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet6)]
 
-Tüm [HTTP fiil](#verb) yolu `IActionConstraint`kısıtlamaları uygular.
+Tüm [http fiili](#verb) yol kısıtlamaları uygulanır `IActionConstraint`.
 
-Uygulayan <xref:Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint> birden çok rota öznitelikleri bir eyleme yerleştirildiğinde:
+Uygulayan <xref:Microsoft.AspNetCore.Mvc.ActionConstraints.IActionConstraint> birden çok yol özniteliği bir eyleme yerleştirildiğinde:
 
-* Her eylem kısıtlaması denetleyiciye uygulanan rota şablonuyla birleştirir.
+* Her eylem kısıtlaması, denetleyiciye uygulanan rota şablonuyla birlikte birleşir.
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet7)]
 
-Eylemler üzerinde birden fazla rota kullanmak yararlı ve güçlü görünebilir, uygulamanızın URL alanını temel ve iyi tanımlanmış tutmak daha iyidir. Varolan istemcileri desteklemek için **yalnızca** gerektiğinde eylemlerde birden çok yol kullanın.
+Eylemlerde birden çok yolun kullanılması yararlı ve güçlü görünebilir, uygulamanızın URL alanını temel ve iyi tanımlanmış tutmanız daha iyidir. **Yalnızca** gerektiğinde, var olan istemcileri desteklemek için, eylemlerde birden çok yol kullanın.
 
 <a name="routing-attr-options"></a>
 
-### <a name="specifying-attribute-route-optional-parameters-default-values-and-constraints"></a>Öznitelik rotası isteğe bağlı parametreleri, varsayılan değerleri ve kısıtlamaları belirtme
+### <a name="specifying-attribute-route-optional-parameters-default-values-and-constraints"></a>Öznitelik rotası isteğe bağlı parametreler, varsayılan değerler ve kısıtlamalar belirtme
 
-Öznitelik yolları, isteğe bağlı parametreleri, varsayılan değerleri ve kısıtlamaları belirtmek için geleneksel yollarla aynı satır sıralı sözdizimini destekler.
+Öznitelik yolları, isteğe bağlı parametreleri, varsayılan değerleri ve kısıtlamaları belirtmek için geleneksel yollarla aynı satır içi sözdizimini destekler.
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet8&highlight=3)]
 
-Önceki kodda, `[HttpPost("product/{id:int}")]` bir rota kısıtlaması uygular. Eylem `ProductsController.ShowProduct` yalnızca `/product/3`URL yollarla eşleşir. Rota şablonu `{id:int}` bölümü, bu kesimi yalnızca tamsayılarla kısıtlar.
+Yukarıdaki kodda, `[HttpPost("product/{id:int}")]` bir yol kısıtlaması uygular. `ProductsController.ShowProduct` Eylem yalnızca, gibi `/product/3`URL yollarıyla eşleştirilir. Yol şablonu bölümü `{id:int}` , bu segmenti yalnızca tamsayılarla kısıtlar.
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/HomeController.cs?name=snippet24)]
 
-Rota şablonu sözdiziminin ayrıntılı bir açıklaması için [Rota Şablonu Başvurusu'na](xref:fundamentals/routing#route-template-reference) bakın.
+Yol şablonu sözdiziminin ayrıntılı açıklaması için bkz. [route Template Reference](xref:fundamentals/routing#route-template-reference) .
 
 <a name="routing-cust-rt-attr-irt-ref-label"></a>
 
-### <a name="custom-route-attributes-using-iroutetemplateprovider"></a>IRouteTemplateProvider kullanarak özel rota öznitelikleri
+### <a name="custom-route-attributes-using-iroutetemplateprovider"></a>Iroutetemplateprovider kullanarak özel yol öznitelikleri
 
-Tüm [rota öznitelikleri](#rt) uygular. <xref:Microsoft.AspNetCore.Mvc.Routing.IRouteTemplateProvider> ASP.NET Core çalışma zamanı:
+Tüm [Rota öznitelikleri](#rt) uygular <xref:Microsoft.AspNetCore.Mvc.Routing.IRouteTemplateProvider>. ASP.NET Core çalışma zamanı:
 
-* Uygulama başladığında denetleyici sınıfları ve eylem yöntemleriyle ilgili öznitelikleri arar.
-* İlk rota kümesini oluşturmak için uygulanan `IRouteTemplateProvider` öznitelikleri kullanır.
+* Uygulama başladığında denetleyici sınıflarında ve eylem yöntemlerinde öznitelikler arar.
+* İlk yol kümesini oluşturmak için `IRouteTemplateProvider` uygulayan öznitelikleri kullanır.
 
-Özel `IRouteTemplateProvider` rota özniteliklerini tanımlamak için uygulayın. Her `IRouteTemplateProvider` biri özel bir rota şablonu, sipariş ve ad ile tek bir rota tanımlamanızı sağlar:
+Özel `IRouteTemplateProvider` yol özniteliklerini tanımlamak için uygulayın. Her `IRouteTemplateProvider` biri, özel bir yol şablonu, sırası ve adı ile tek bir yol tanımlamanızı sağlar:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/MyTestApiController.cs?name=snippet&highlight=1-10)]
 
-Önceki `Get` yöntem döndürür. `Order = 2, Template = api/MyTestApi`
+Önceki `Get` Yöntem döndürülür `Order = 2, Template = api/MyTestApi`.
 
 <a name="routing-app-model-ref-label"></a>
 
-### <a name="use-application-model-to-customize-attribute-routes"></a>Öznitelik rotalarını özelleştirmek için uygulama modelini kullanma
+### <a name="use-application-model-to-customize-attribute-routes"></a>Öznitelik yollarını özelleştirmek için uygulama modelini kullanın
 
 Uygulama modeli:
 
-* Başlangıçta oluşturulan bir nesne modelidir.
-* ASP.NET Core tarafından bir uygulamadaki eylemleri yönlendirmek ve yürütmek için kullanılan tüm meta verileri içerir.
+* , Başlangıçta oluşturulan bir nesne modelidir.
+* Bir uygulamadaki eylemleri yönlendirmek ve yürütmek için ASP.NET Core tarafından kullanılan tüm meta verileri içerir.
 
-Uygulama modeli, rota özniteliklerinden toplanan tüm verileri içerir. Rota özniteliklerinden gelen veriler `IRouteTemplateProvider` uygulama tarafından sağlanır. Kural -ları:
+Uygulama modeli, yol özniteliklerinden toplanan tüm verileri içerir. Yol özniteliklerinin verileri `IRouteTemplateProvider` uygulama tarafından sağlanır. Adlandır
 
-* Yönlendirmenin nasıl bir şekilde nasıl bir şekilde nasıl bir şekilde nasıl bir şekilde nasıl bir şekilde gerçekleştirileceğini özelleştirmek için uygulama modelini değiştirmek için yazılabilir.
-* Uygulama başlangıç noktasında okunur.
+* , Yönlendirmenin nasıl davranacağını özelleştirmek için uygulama modelini değiştirmek üzere yazılabilir.
+* Uygulama başlangıcında okundu.
 
-Bu bölümde, uygulama modelini kullanarak yönlendirme özelleştirme temel bir örnek gösterilmektedir. Aşağıdaki kod, yolların kabaca projenin klasör yapısıyla hizaya dizilmesini sağlar.
+Bu bölümde, uygulama modeli kullanılarak yönlendirmeyi özelleştirmenin temel bir örneği gösterilmektedir. Aşağıdaki kod, rotaları projenin klasör yapısıyla kabaca bir şekilde oluşturur.
 
 [!code-csharp[](routing/samples/3.x/nsrc/NamespaceRoutingConvention.cs?name=snippet)]
 
-Aşağıdaki kod, öznitelik yönlendirilmiş denetleyicilere kuralın `namespace` uygulanmasını engeller:
+Aşağıdaki kod, `namespace` kuralı yönlendirilen denetleyicilere uygulanmasını engeller:
 
 [!code-csharp[](routing/samples/3.x/nsrc/NamespaceRoutingConvention.cs?name=snippet2)]
 
-Örneğin, aşağıdaki denetleyici aşağıdakileri `NamespaceRoutingConvention`kullanmaz:
+Örneğin, aşağıdaki denetleyici kullanmaz `NamespaceRoutingConvention`:
 
 [!code-csharp[](routing/samples/3.x/nsrc/Controllers/ManagersController.cs?name=snippet&highlight=1)]
 
-Yöntem: `NamespaceRoutingConvention.Apply`
+`NamespaceRoutingConvention.Apply` Yöntemi:
 
-* Denetleyici öznitelik yönlendirilmişse hiçbir şey yapmaz.
-* Denetleyicişablonu `namespace`, tabanı `namespace` kaldırılmış olarak ayarlar.
+* Denetleyici öznitelik yönlendirmemişse hiçbir şey yapmaz.
+* Temel `namespace` kaldırılmış olarak, denetleyici şablonunu öğesine `namespace`göre ayarlar.
 
-`Startup.ConfigureServices`Uygulanabilir: `NamespaceRoutingConvention`
+, `NamespaceRoutingConvention` ' De `Startup.ConfigureServices`uygulanabilir:
 
 [!code-csharp[](routing/samples/3.x/nsrc/Startup.cs?name=snippet&highlight=1,14-18)]
 
@@ -623,41 +623,41 @@ Yöntem: `NamespaceRoutingConvention.Apply`
 
 Yukarıdaki kodda:
 
-* `My.Application`Üs. `namespace`
-* Önceki denetleyicinin tam `My.Application.Admin.Controllers.UsersController`adı.
-* Denetleyicişablonu `NamespaceRoutingConvention` `Admin/Controllers/Users/[action]/{id?`ayarlar.
+* Temel `namespace` `My.Application`.
+* Önceki denetleyicinin tam adı `My.Application.Admin.Controllers.UsersController`.
+* , `NamespaceRoutingConvention` Denetleyiciler şablonunu olarak `Admin/Controllers/Users/[action]/{id?`ayarlar.
 
-Denetleyiciye `NamespaceRoutingConvention` öznitelik olarak da uygulanabilir:
+, `NamespaceRoutingConvention` Bir denetleyiciye bir öznitelik olarak da uygulanabilir:
 
 [!code-csharp[](routing/samples/3.x/nsrc/Controllers/TestController.cs?name=snippet&highlight=1)]
 
 <a name="routing-mixed-ref-label"></a>
 
-## <a name="mixed-routing-attribute-routing-vs-conventional-routing"></a>Karışık yönlendirme: Atfetme yönlendirme vs konvansiyonel yönlendirme
+## <a name="mixed-routing-attribute-routing-vs-conventional-routing"></a>Karma yönlendirme: öznitelik yönlendirme vs geleneksel yönlendirme
 
-ASP.NET Core uygulamaları geleneksel yönlendirme ve öznitelik yönlendirme kullanımını karıştırabilir. Tarayıcılar için HTML sayfaları sunan denetleyiciler için geleneksel rotalar kullanmak ve REST API'leri sunan denetleyiciler için yönlendirme özelliği kullanmak tipiktir.
+ASP.NET Core uygulamalar geleneksel yönlendirme ve öznitelik yönlendirmenin kullanımını karıştırabilir. Tarayıcılar için HTML sayfalarına hizmet veren denetleyiciler için geleneksel yollar ve REST API 'Lerine hizmet veren denetleyiciler için öznitelik yönlendirme kullanılması normaldir.
 
-Eylemler geleneksel olarak yönlendirilir veya öznitelik yönlendirilir. Denetleyiciye bir rota veya eylem yerleştirmek, rotayı bağlamasını sağlar. Öznitelik yollarını tanımlayan eylemlere geleneksel yollardan ve bunun tersi üzerinden ulaşılamıyor. Denetleyicideki **herhangi bir** rota özniteliği, denetleyici özniteliğindeki **tüm** eylemleri yönlendirilen yapar.
+Eylemler genel olarak Dolaştırılan veya Attribute olarak yönlendirilir. Bir yolu denetleyiciye koymak veya eylemi, BT özniteliği yönlendirilmesini sağlar. Öznitelik yollarını tanımlayan eylemlere geleneksel yollar üzerinden ulaşılamıyor ve bunun tersi de geçerlidir. Denetleyicideki **herhangi bir** rota özniteliği, denetleyici özniteliğindeki **Tüm** eylemlerin yönlendirilmesini sağlar.
 
-Öznitelik yönlendirme ve konvansiyonel yönlendirme aynı yönlendirme motorkullanın.
+Öznitelik yönlendirme ve geleneksel yönlendirme aynı yönlendirme altyapısını kullanır.
 
 <a name="routing-url-gen-ref-label"></a>
 <a name="ambient"></a>
 
-## <a name="url-generation-and-ambient-values"></a>URL Oluşturma ve ortam değerleri
+## <a name="url-generation-and-ambient-values"></a>URL oluşturma ve ortam değerleri
 
-Uygulamalar, eylemlere URL bağlantıları oluşturmak için yönlendirme URL oluşturma özelliklerini kullanabilir. URL'ler üretmek, kodlama URL'lerini ortadan kaldırarak kodu daha sağlam ve korunabilir hale getirir. Bu bölümde, MVC tarafından sağlanan URL oluşturma özellikleri üzerinde duruluyor ve yalnızca URL oluşturmanın nasıl çalıştığına ilişkin temel bilgileri kapsamaktadır. URL oluşturmanın ayrıntılı bir açıklaması için [Yönlendirme'ye](xref:fundamentals/routing) bakın.
+Uygulamalar, eylemlere URL bağlantıları oluşturmak için yönlendirme URL 'SI oluşturma özelliklerini kullanabilir. URL 'Leri oluşturmak, kod daha sağlam ve sürdürülebilir hale getirmek için sorunsuz kodlama URL 'Lerini ortadan kaldırır. Bu bölüm, MVC tarafından sunulan URL oluşturma özelliklerine odaklanır ve yalnızca URL oluşturma özelliğinin nasıl çalıştığına ilişkin temel bilgileri kapsar. URL oluşturma hakkında ayrıntılı bir açıklama için bkz. [yönlendirme](xref:fundamentals/routing) .
 
-Arabirim, <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> MVC ile URL üretimi için yönlendirme arasındaki altyapının temel öğesidir. Bir örneği `IUrlHelper` denetleyiciler, `Url` görünümler ve görünüm bileşenleri özelliği aracılığıyla kullanılabilir.
+<xref:Microsoft.AspNetCore.Mvc.IUrlHelper> ARABIRIM, URL oluşturma için MVC ve yönlendirme arasındaki altyapının temel öğesidir. Bir örneği `IUrlHelper` , denetleyiciler, görünümler ve `Url` görünüm bileşenlerinde özelliği aracılığıyla kullanılabilir.
 
-Aşağıdaki örnekte, `IUrlHelper` arabirim `Controller.Url` başka bir eylem için bir URL oluşturmak için özellik üzerinden kullanılır.
+Aşağıdaki örnekte, `IUrlHelper` arabirimi başka bir eyleme bir URL oluşturmak için `Controller.Url` özelliği aracılığıyla kullanılır.
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/UrlGenerationController.cs?name=snippet_1)]
 
-Uygulama varsayılan geleneksel rotayı kullanıyorsa, `url` değişkenin değeri URL `/UrlGeneration/Destination`yol dizesidir. Bu URL yolu, şu yolu birleştirerek yönlendirme yle oluşturulur:
+Uygulama varsayılan geleneksel yolu kullanıyorsa, `url` DEĞIŞKENININ değeri URL yol dizesidir. `/UrlGeneration/Destination` Bu URL yolu, yönlendirme tarafından birleştirerek oluşturulur:
 
-* **Ortam değerleri**olarak adlandırılan geçerli istekten rota değerleri.
-* Bu değerlere `Url.Action` geçirilen ve bu değerlerin yerine geçen değerler:
+* Geçerli istekten, **ortam değerleri**olarak adlandırılan rota değerleri.
+* Bu değerleri yol şablonuna `Url.Action` geçirilen ve yerine geçen değerler:
 
 ``` text
 ambient values: { controller = "UrlGeneration", action = "Source" }
@@ -667,151 +667,151 @@ route template: {controller}/{action}/{id?}
 result: /UrlGeneration/Destination
 ```
 
-Rota şablonundaki her rota parametresinin değeri, adları değerler ve ortam değerleriyle eşleştirerek ikame edilmiştir. Değeri olmayan bir rota parametresi şunları yapabilir:
+Yol şablonundaki her bir rota parametresinin değeri, değerler ve ortam değerleri ile eşleşen adlara sahip olacak şekilde değiştirilir. Bir değere sahip olmayan bir rota parametresi şunları yapabilir:
 
-* Varsa varsayılan bir değer kullanın.
-* İsteğe bağlıysa atlanmalıdır. Örneğin, rota `id` şablonundan. `{controller}/{action}/{id?}`
+* Bir varsayılan değer varsa, bu değeri kullanın.
+* İsteğe bağlı ise atlanır. Örneğin, `id` rota şablonundan `{controller}/{action}/{id?}`.
 
-Gerekli rota parametresi karşılık gelen bir değere sahip değilse URL oluşturma başarısız olur. URL oluşturma bir rota için başarısız olursa, sonraki rota tüm yollar denenene veya eşleşme bulunana kadar denendi.
+Herhangi bir gerekli yol parametresi karşılık gelen bir değere sahip değilse, URL oluşturma başarısız olur. Bir yol için URL oluşturma başarısız olursa, tüm yollar Denenene veya bir eşleşme bulunana kadar sonraki yol denenir.
 
-Önceki örnek, `Url.Action` geleneksel [yönlendirmeyi](#cr)varsayar. URL oluşturma, kavramlar farklı olsa da [öznitelik yönlendirme](#ar)ile benzer şekilde çalışır. Konvansiyonel yönlendirme ile:
+Yukarıdaki örnekte `Url.Action` [geleneksel yönlendirme](#cr)varsayılır. URL oluşturma, [öznitelik yönlendirme](#ar)ile benzer şekilde çalışır, ancak kavramlar farklıdır. Geleneksel yönlendirme ile:
 
-* Rota değerleri şablonu genişletmek için kullanılır.
-* Bu şablonda `controller` `action` genellikle rota değerleri görüntülenir. Yönlendirme yle eşleşen URL'ler bir sözleşmeye uyduğu için bu işe yarar.
+* Rota değerleri bir şablonu genişletmek için kullanılır.
+* İçin `controller` yol değerleri ve `action` genellikle bu şablonda görüntülenir. Bu, yönlendirme ile eşleşen URL 'Ler bir kurala bağlı olduğundan, bu işe yarar.
 
-Aşağıdaki örneköznite yönlendirme kullanır:
+Aşağıdaki örnek öznitelik yönlendirme kullanır:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/UrlGenerationAttrController.cs?name=snippet_1)]
 
-Önceki `Source` koddaki eylem oluşturur. `custom/url/to/destination`
+Yukarıdaki `Source` koddaki eylem oluşturulur `custom/url/to/destination`.
 
-<xref:Microsoft.AspNetCore.Routing.LinkGenerator>alternatif olarak Core 3.0ASP.NET eklendi. `IUrlHelper` `LinkGenerator`benzer ancak daha esnek işlevsellik sunar. Her yöntem `IUrlHelper` üzerinde `LinkGenerator` de ilgili bir yöntem ailesi vardır.
+<xref:Microsoft.AspNetCore.Routing.LinkGenerator>ASP.NET Core 3,0 ' ye `IUrlHelper`alternatif olarak eklenmiştir. `LinkGenerator`benzer ancak daha esnek işlevler sunar. Üzerindeki `IUrlHelper` her bir yöntemi, buna karşılık gelen bir yöntem `LinkGenerator` ailesini de içerir.
 
-### <a name="generating-urls-by-action-name"></a>Eylem adına göre URL oluşturma
+### <a name="generating-urls-by-action-name"></a>Eylem adına göre URL 'Leri oluşturma
 
-[Url.Action](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*), [LinkGenerator.GetPathByAction](xref:Microsoft.AspNetCore.Routing.ControllerLinkGeneratorExtensions.GetPathByAction*), ve ilgili tüm overloads tüm bir denetleyici adı ve eylem adı belirterek hedef bitiş noktası oluşturmak için tasarlanmıştır.
+[URL. Action](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*), [Linkgenerator. GetPathByAction](xref:Microsoft.AspNetCore.Routing.ControllerLinkGeneratorExtensions.GetPathByAction*)ve tüm ilgili aşırı yüklemeler, bir denetleyici adı ve eylem adı belirtilerek hedef uç noktası oluşturmak için tasarlanmıştır.
 
-Kullanırken, `Url.Action`geçerli rota `controller` değerleri `action` için ve çalışma zamanı tarafından sağlanır:
+Kullanırken `Url.Action`, ve `controller` `action` için geçerli yol değerleri çalışma zamanı tarafından sağlanır:
 
-* Değeri `controller` ve `action` hem ortam değerleri ve [değerlerinin](#ambient) bir parçasıdır. Yöntem `Url.Action` her zaman geçerli `action` değerleri `controller` kullanır ve geçerli eyleme giden bir URL yolu oluşturur.
+* `controller` Ve `action` değeri hem [ortam değerlerinin](#ambient) hem de değerlerinin bir parçasıdır. Yöntemi `Url.Action` her zaman `action` ve `controller` geçerli değerlerini KULLANıR ve geçerli eyleme yönlendiren bir URL yolu oluşturur.
 
-Yönlendirme, URL oluştururken sağlanmadı bilgileri doldurmak için ortam değerlerindeki değerleri kullanmaya çalışır. Ortam değerleri `{ a = Alice, b = Bob, c = Carol, d = David }` `{a}/{b}/{c}/{d}` gibi bir rota düşünün:
+Yönlendirme, bir URL oluştururken sağlanmayan bilgileri doldurmanızı sağlamak için çevresel değerlerde değerleri kullanmaya çalışır. Ortam değerleriyle `{a}/{b}/{c}/{d}` `{ a = Alice, b = Bob, c = Carol, d = David }`benzer bir yol düşünün:
 
-* Yönlendirme, ek değerler olmadan bir URL oluşturmak için yeterli bilgiye sahiptir.
-* Yönlendirme, tüm rota parametrelerinin bir değeri olduğundan yeterli bilgiye sahiptir.
+* Yönlendirmenin ek değer olmadan bir URL oluşturmak için yeterli bilgi vardır.
+* Tüm rota parametrelerinin bir değeri olduğundan, yönlendirmeye yeterli bilgi vardır.
 
-Katma değer `{ d = Donovan }` eklenirse:
+Değer `{ d = Donovan }` eklenirse:
 
-* Değer `{ d = David }` yoksayılır.
-* Oluşturulan URL `Alice/Bob/Carol/Donovan`yolu.
+* Değer `{ d = David }` yok sayılır.
+* Oluşturulan URL yolu `Alice/Bob/Carol/Donovan`.
 
-**Uyarı**: URL yolları hiyerarşiktir. Önceki örnekte, değer `{ c = Cheryl }` eklenirse:
+**Uyarı**: URL yolları hiyerarşiktir. Yukarıdaki örnekte, değer `{ c = Cheryl }` eklenirse:
 
-* Her iki `{ c = Carol, d = David }` değer de yoksayılır.
+* Her iki değer `{ c = Carol, d = David }` de yok sayılır.
 * Artık bir değer yoktur `d` ve URL oluşturma başarısız olur.
-* Bir URL `c` oluşturmak `d` için istenen değerler belirtilmelidir.  
+* İçin istenen değerleri `c` ve `d` bir URL oluşturmak için belirtilmelidir.  
 
-Varsayılan rota `{controller}/{action}/{id?}`ile bu sorunu vurmak bekleyebilirsiniz. Her zaman a `Url.Action` `controller` ve `action` değeri açıkça belirttiğinden, bu sorun pratikte nadirdir.
+Varsayılan yol `{controller}/{action}/{id?}`ile bu soruna isabet etmeniz gerekebilir. `Url.Action` Her zaman açıkça bir `controller` ve `action` değeri belirttiğinden bu sorun pratikte nadir olarak belirlenir.
 
-[Url.Action'ın](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*) birkaç aşırı yükü, rota parametreleri için `controller` değerler `action`sağlamak için bir rota değerleri nesnesi alır ve . Rota değerleri nesnesi sık `id`sık . Örneğin, `Url.Action("Buy", "Products", new { id = 17 })`. Rota değerleri nesnesi:
+URL 'nin çeşitli aşırı yüklemeleri [. eylem](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*) , `controller` ve `action`dışındaki rota parametreleri için değerler sağlamak üzere bir yol değerleri nesnesi alır. Route Values nesnesi genellikle ile birlikte `id`kullanılır. Örneğin, `Url.Action("Buy", "Products", new { id = 17 })`. Yol değerleri nesnesi:
 
-* Kural olarak genellikle anonim türde bir nesnedir.
-* Bir `IDictionary<>` veya [POCO](https://wikipedia.org/wiki/Plain_old_CLR_object)olabilir).
+* Kural gereği genellikle anonim türdeki bir nesnedir.
+* Bir `IDictionary<>` veya [poco](https://wikipedia.org/wiki/Plain_old_CLR_object)olabilir).
 
-Rota parametreleri ile eşleşmeyen ek rota değerleri sorgu dizesinde konur.
+Yol parametreleriyle eşleşmeyen ek rota değerleri sorgu dizesine konur.
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/TestController.cs?name=snippet)]
 
-Önceki kod `/Products/Buy/17?color=red`oluşturur.
+Yukarıdaki kod oluşturulur `/Products/Buy/17?color=red`.
 
-Aşağıdaki kod mutlak bir URL oluşturur:
+Aşağıdaki kod mutlak URL oluşturur:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/TestController.cs?name=snippet2)]
 
-Mutlak bir URL oluşturmak için aşağıdakilerden birini kullanın:
+Mutlak URL oluşturmak için, aşağıdakilerden birini kullanın:
 
-* Bir aşırı yük kabul `protocol`eder. Örneğin, önceki kod.
-* [LinkGenerator.GetUriByAction](xref:Microsoft.AspNetCore.Routing.ControllerLinkGeneratorExtensions.GetUriByAction*), varsayılan olarak mutlak URIs oluşturur.
+* Kabul eden bir `protocol`aşırı yükleme. Örneğin, yukarıdaki kod.
+* Varsayılan olarak mutlak URI 'Ler üreten [Linkgenerator. GetUriByAction](xref:Microsoft.AspNetCore.Routing.ControllerLinkGeneratorExtensions.GetUriByAction*).
 
 <a name="routing-gen-urls-route-ref-label"></a>
 
-### <a name="generate-urls-by-route"></a>Rotaya göre URL'ler oluşturma
+### <a name="generate-urls-by-route"></a>Yola göre URL oluşturma
 
-Önceki kod denetleyici ve eylem adı geçerek bir URL oluşturma gösterdi. `IUrlHelper`ayrıca [Url.RouteUrl](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.RouteUrl*) yöntemleri ailesi sağlar. Bu yöntemler [Url.Action'a](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*)benzer, ancak geçerli değerleri `action` ve `controller` rota değerlerini kopyalamaz. En yaygın `Url.RouteUrl`kullanımı:
+Yukarıdaki kod, denetleyiciyi ve eylem adını geçirerek bir URL oluşturmayı göstermiştir. `IUrlHelper`Ayrıca [URL. RouteUrl](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.RouteUrl*) ailesi yöntemlerin de sağlar. Bu yöntemler [URL. Action](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*)ile benzerdir, ancak geçerli değerlerini `action` ve `controller` rota değerlerine kopyalamaz. En yaygın kullanımı `Url.RouteUrl`:
 
-* URL'yi oluşturmak için bir rota adı belirtir.
+* URL oluşturmak için bir yol adı belirtir.
 * Genellikle bir denetleyici veya eylem adı belirtmez.
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/UrlGeneration2Controller.cs?name=snippet_1)]
 
-Aşağıdaki Razor dosyası için bir HTML `Destination_Route`bağlantısı oluşturur:
+Aşağıdaki Razor dosyası bir HTML bağlantısı oluşturur `Destination_Route`:
 
 [!code-cshtml[](routing/samples/3.x/main/Views/Shared/MyLink.cshtml)]
 
 <a name="routing-gen-urls-html-ref-label"></a>
 
-### <a name="generate-urls-in-html-and-razor"></a>HTML ve Razor'da URL'ler oluşturma
+### <a name="generate-urls-in-html-and-razor"></a>HTML ve Razor 'de URL oluşturma
 
-<xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper><xref:Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper> [html.BeginForm](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.BeginForm*) ve [Html.ActionLink](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.ActionLink*) yöntemlerini `<form>` `<a>` sağlar ve sırasıyla öğeleri sağlar. Bu yöntemler url oluşturmak için [Url.Action](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*) yöntemini kullanır ve benzer bağımsız değişkenleri kabul ederler. Bunun `Url.RouteUrl` için `HtmlHelper` refakatçive `Html.BeginRouteForm` `Html.RouteLink` benzer işlevsellik vardır.
+<xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper>sırasıyla ve <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper> `<a>` öğeleri oluşturmak `<form>` Için [HTML. BeginForm](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.BeginForm*) ve [HTML. ActionLink](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.ActionLink*) yöntemlerini sağlar. Bu yöntemler bir URL oluşturmak için [URL. Action](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*) yöntemini kullanır ve benzer bağımsız değişkenleri kabul ederler. İçin `Url.RouteUrl` `HtmlHelper` şirkeme `Html.BeginRouteForm` , ve `Html.RouteLink` benzer işlevlere sahiptir.
 
-`form` TagHelpers, TagHelper ve `<a>` TagHelper aracılığıyla URL'ler oluşturur. Bunların her `IUrlHelper` ikisi de bunların uygulanması için kullanılır. Daha fazla bilgi için [Formlarda Yardımcıları Etiketle'](xref:mvc/views/working-with-forms) ye bakın.
+Taghelmakalar, `form` taghelper ve `<a>` taghelper aracılığıyla URL 'ler oluşturur. Bunların her ikisi de `IUrlHelper` kendi uygulamaları için kullanılır. Daha fazla bilgi için bkz. [Formlardaki etiket yardımcıları](xref:mvc/views/working-with-forms) .
 
-İç görünümler, `IUrlHelper` yukarıda `Url` yer almayan herhangi bir özel URL nesli için özellik üzerinden kullanılabilir.
+Görünümler `IUrlHelper` içinde, yukarıda yer almayan herhangi BIR `Url` geçici URL oluşturma özelliği aracılığıyla kullanılabilir.
 
 <a name="routing-gen-urls-action-ref-label"></a>
 
-### <a name="url-generation-in-action-results"></a>Eylem Sonuçlarında URL oluşturma
+### <a name="url-generation-in-action-results"></a>Eylem sonuçlarında URL oluşturma
 
-Önceki örnekler bir `IUrlHelper` denetleyicide kullanılarak gösterilmektedir. Denetleyicide en yaygın kullanım, eylem sonucunun bir parçası olarak bir URL oluşturmaktır.
+Yukarıdaki örneklerde bir denetleyicide `IUrlHelper` kullanılması gösterildi. Bir denetleyicideki en yaygın kullanım, bir eylem sonucunun parçası olarak bir URL oluşturmak olur.
 
-Ve <xref:Microsoft.AspNetCore.Mvc.ControllerBase> <xref:Microsoft.AspNetCore.Mvc.Controller> temel sınıflar, başka bir eyleme başvuran eylem sonuçları için kolaylık yöntemleri sağlar. Tipik bir kullanım kullanıcı girişi kabul ettikten sonra yeniden yönlendirmek için:
+Ve <xref:Microsoft.AspNetCore.Mvc.ControllerBase> <xref:Microsoft.AspNetCore.Mvc.Controller> temel sınıflar, başka bir eyleme başvuruda bulunan eylem sonuçları için kolay yöntemler sağlar. Kullanıcı girişini kabul ettikten sonra, yaygın olarak kullanılan bir kullanım yeniden yönlendirilmelidir:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/CustomerController.cs?name=snippet)]
 
-Eylem gibi fabrika yöntemleri <xref:Microsoft.AspNetCore.Mvc.ControllerBase.RedirectToAction*> <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*> sonuçları ve üzerinde `IUrlHelper`yöntemlere benzer bir desen izleyin.
+Eylem, gibi Fabrika yöntemleri sonuçları <xref:Microsoft.AspNetCore.Mvc.ControllerBase.RedirectToAction*> ve <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*> üzerindeki `IUrlHelper`yöntemlere benzer bir model izler.
 
 <a name="routing-dedicated-ref-label"></a>
 
-### <a name="special-case-for-dedicated-conventional-routes"></a>Özel konvansiyonel rotalar için özel durum
+### <a name="special-case-for-dedicated-conventional-routes"></a>Adanmış geleneksel yollar için özel durum
 
-[Konvansiyonel yönlendirme,](#cr) özel bir [konvansiyonel rota](#dcr)adı verilen özel bir rota tanımı türü kullanabilir. Aşağıdaki örnekte, adlandırılmış `blog` rota özel bir geleneksel rotadır:
+[Geleneksel yönlendirme](#cr) , [adanmış geleneksel yol](#dcr)olarak adlandırılan özel bir yol tanımı türünü kullanabilir. Aşağıdaki örnekte, adlı `blog` yol ayrılmış bir geleneksel yoldur:
 
 [!code-csharp[](routing/samples/3.x/main/Startup.cs?name=snippet_1)]
 
-Önceki rota tanımlarını kullanarak, `Url.Action("Index", "Home")` `/` `default` yolu kullanarak URL yolunu oluşturur, ancak neden? Rota değerlerinin `{ controller = Home, action = Index }` bir URL oluşturmak `blog`için yeterli olacağını tahmin edebilirsiniz ve sonuç . `/blog?action=Index&controller=Home`
+Önceki yol tanımlarını kullanarak, `Url.Action("Index", "Home")` `/` `default` yolu kullanarak URL yolunu oluşturur, ancak neden? Yol değerlerinin `{ controller = Home, action = Index }` bir URL `blog`oluşturmak için yeterli olacağını tahmin edebilirsiniz ve sonuç olur. `/blog?action=Index&controller=Home`
 
-[Özel geleneksel rotalar,](#dcr) rotanın URL oluşturma yla çok [açgözlü](xref:fundamentals/routing#greedy) olmasını engelleyen karşılık gelen bir rota parametresi olmayan varsayılan değerlerin özel bir davranışına dayanır. Bu durumda varsayılan değerler `{ controller = Blog, action = Article }`, `controller` ve `action` ne ne de bir rota parametresi olarak görünür. Yönlendirme URL oluşturma gerçekleştirirken, sağlanan değerler varsayılan değerlerle eşleşmelidir. Değerler `blog` `{ controller = Home, action = Index }` eşleşmediği `{ controller = Blog, action = Article }`için URL oluşturma başarısız olur. Yönlendirme sonra denemek `default`için geri düşer , hangi başarılı.
+[Adanmış geleneksel yollar](#dcr) , karşılık gelen bir rota parametresi olmayan varsayılan değerlerin özel bir davranışına dayanır ve bu da yol, URL oluşturma ile çok fazla [dodan](xref:fundamentals/routing#greedy) yararlanın. Bu durumda `{ controller = Blog, action = Article }`, varsayılan değerler, `controller` ya `action` da yol parametresi olarak görünmez. Yönlendirme URL oluşturma işlemi gerçekleştirdiğinde, belirtilen değerler varsayılan değerlerle eşleşmelidir. Değerler `{ controller = Home, action = Index }` eşleşmediğinden `{ controller = Blog, action = Article }`URL `blog` oluşturma başarısız olur. Sonra yeniden yönlendirme işlemi denemeye `default`geri döner ve başarılı olur.
 
 <a name="routing-areas-ref-label"></a>
 
 ## <a name="areas"></a>Alanlar
 
-[Alanlar,](xref:mvc/controllers/areas) ilgili işlevleri ayrı olarak bir gruba düzenlemek için kullanılan bir MVC özelliğidir:
+[Bölgeler](xref:mvc/controllers/areas) , ilgili işlevselliği ayrı olarak bir grup içinde düzenlemek için kullanılan bir MVC özelliğidir:
 
-* Denetleyici eylemler için ad alanını yönlendirme.
+* Denetleyici eylemleri için yönlendirme ad alanı.
 * Görünümler için klasör yapısı.
 
-Alanları kullanmak, farklı alanlara sahip oldukları sürece bir uygulamanın aynı ada sahip birden çok denetleyiciye sahip olmasını sağlar. Alanları kullanmak, `area` başka bir rota parametresi ekleyerek yönlendirme amacıyla bir `controller` `action`hiyerarşi oluşturur. Bu bölümde yönlendirmenin alanlarla nasıl etkileştiği açıklanmıştır. Görünümlerle alanların nasıl kullanıldığıyla ilgili ayrıntılar için [Alanlar'a](xref:mvc/controllers/areas) bakın.
+Alanların kullanılması, farklı alanlara sahip oldukları sürece bir uygulamanın aynı ada sahip birden çok denetleyicisi olmasına olanak sağlar. Alanların kullanılması, ve `area` `controller` `action`' ye başka bir rota parametresi ekleyerek yönlendirmenin amacı için bir hiyerarşi oluşturur. Bu bölümde yönlendirmenin alanlarla nasıl etkileşim kurduğu açıklanmaktadır. Alanların görünümlerle nasıl kullanıldığı hakkında ayrıntılar için bkz. [alanlara](xref:mvc/controllers/areas) bakın.
 
-Aşağıdaki örnekte, Varsayılan geleneksel rotayı ve `area` adlandırılmış `Blog` `area` bir rotayı kullanacak Şekilde MVC yapılandırılır:
+Aşağıdaki örnek, MVC 'yi varsayılan geleneksel yolu ve bir `area` `area` adlandırılmış `Blog`yolu kullanacak şekilde yapılandırır:
 
 [!code-csharp[](routing/samples/3.x/AreasRouting/Startup.cs?name=snippet1)]
 
-Önceki kodda, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> oluşturmak için `"blog_route"`çağrılır. İkinci parametre, `"Blog"`alan adıdır.
+Önceki kodda, öğesini <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> oluşturmak için çağırılır. `"blog_route"` İkinci parametresi, `"Blog"`, alan adıdır.
 
-Bir URL yolu `/Manage/Users/AddUser`gibi `"blog_route"` eşleştirirken, rota `{ area = Blog, controller = Users, action = AddUser }`rota değerlerini oluşturur. Rota `area` değeri için varsayılan değer `area`tarafından üretilir. Oluşturulan `MapAreaControllerRoute` rota aşağıdakilere eşdeğerdir:
+Benzer `/Manage/Users/AddUser`bir URL yolu eşleştirilirken `"blog_route"` yol, yol değerlerini `{ area = Blog, controller = Users, action = AddUser }`oluşturur. `area` Rota değeri, için `area`varsayılan bir değer tarafından üretilir. Tarafından `MapAreaControllerRoute` oluşturulan yol, aşağıdaki ile eşdeğerdir:
 
 [!code-csharp[](routing/samples/3.x/AreasRouting/Startup2.cs?name=snippet2)]
 
-`MapAreaControllerRoute`bu durumda, `Blog`sağlanan alan adını kullanmak `area` için hem varsayılan değeri hem de kısıtlamayı kullanarak bir rota oluşturur. Varsayılan değer, rotanın her `{ area = Blog, ... }`zaman üretir, kısıtlama `{ area = Blog, ... }` URL oluşturma için değer gerektirir sağlar.
+`MapAreaControllerRoute`Bu durumda `area` `Blog`, belirtilen alan adını kullanmak için hem varsayılan bir değer hem de kısıtlama kullanarak bir yol oluşturur. Varsayılan değer, yolun her zaman oluşturulmasını sağlar `{ area = Blog, ... }`, kısıtlama URL oluşturma için değeri `{ area = Blog, ... }` gerektirir.
 
-Konvansiyonel yönlendirme isteðe baðlð±r. Genel olarak, alanları olan rotalar, alanı olmayan rotalardan daha spesifik oldukları için daha erken yerleştirilmelidir.
+Geleneksel yönlendirme sıra bağımlıdır. Genel olarak, alanlar içeren rotalar daha önce bir alan olmadan rotalardan daha belirgin olduklarından yerleştirilmelidir.
 
-Önceki örneği kullanarak, rota `{ area = Blog, controller = Users, action = AddUser }` değerleri aşağıdaki eylemle eşleşir:
+Önceki örneği kullanarak, yol değerleri `{ area = Blog, controller = Users, action = AddUser }` aşağıdaki eylemle eşleşir:
 
 [!code-csharp[](routing/samples/3.x/AreasRouting/Areas/Blog/Controllers/UsersController.cs)]
 
-[[Alan]](xref:Microsoft.AspNetCore.Mvc.AreaAttribute) özniteliği, bir denetleyiciyi bir alanın parçası olarak gösterir. Bu denetleyici `Blog` bölgede. Özniteliği olmayan `[Area]` denetleyiciler herhangi bir alanın üyesi değildir ve `area` rota değeri yönlendirme ile sağlandığında **eşleşmez.** Aşağıdaki örnekte, yalnızca listelenen ilk denetleyici rota `{ area = Blog, controller = Users, action = AddUser }`değerleriyle eşleşebilir.
+[[Area]](xref:Microsoft.AspNetCore.Mvc.AreaAttribute) özniteliği, bir alanın parçası olarak denetleyiciyi belirtir. Bu denetleyici `Blog` alanında bulunur. Özniteliği olmayan denetleyiciler hiçbir alanın üyesi değildir ve `area` rota değeri yönlendirme tarafından sağlandığında **eşleşmez.** `[Area]` Aşağıdaki örnekte, yalnızca listelenen ilk denetleyici rota değerleriyle `{ area = Blog, controller = Users, action = AddUser }`eşleştirebilir.
 
 [!code-csharp[](routing/samples/3.x/AreasRouting/Areas/Blog/Controllers/UsersController.cs)]
 
@@ -819,21 +819,21 @@ Konvansiyonel yönlendirme isteðe baðlð±r. Genel olarak, alanları olan rota
 
 [!code-csharp[](routing/samples/3.x/AreasRouting/Controllers/UsersController.cs)]
 
-Her denetleyicinin ad alanı tamolmak için burada gösterilir. Önceki denetleyiciler aynı ad alanını kullanırsa, derleyici hatası oluşturulur. Sınıf ad alanlarının MVC'nin yönlendirmesi üzerinde hiçbir etkisi yoktur.
+Her denetleyicinin ad alanı, tamamlanma açısından burada gösterilmiştir. Yukarıdaki denetleyiciler aynı ad alanını kullanıyorsa, bir derleyici hatası oluşturulur. Sınıf ad alanlarının MVC 'nin yönlendirme üzerinde hiçbir etkisi yoktur.
 
-İlk iki denetleyici alanların üyeleridir ve yalnızca ilgili alan adları `area` rota değeri tarafından sağlandığında eşleşir. Üçüncü denetleyici herhangi bir alanın üyesi değildir ve yalnızca yönlendirme `area` ile değer sağlanmadığı zaman eşleşebilir.
+İlk iki denetleyici alanların üyeleridir ve yalnızca ilgili alan adı `area` rota değeri tarafından sağlandığında eşleşir. Üçüncü denetleyici hiçbir alanın üyesi değildir ve yalnızca Yönlendirme tarafından hiçbir değer `area` sağlanmamışsa eşleşemez.
 
 <a name="aa"></a>
 
-Hiçbir *değer*eşleştirme açısından, `area` değer yokluğu için `area` değer null veya boş dize sanki aynıdır.
+Değer *olmadan*eşleşme açısından `area` değerin yokluğu değeri null ya da boş dize olarak `area` aynıdır.
 
-Bir alan içinde bir eylem yürütürken, rota değeri `area` URL oluşturma için kullanılacak yönlendirme için ortam [değeri](#ambient) olarak kullanılabilir. Bu, varsayılan olarak alanların URL oluşturma için aşağıdaki örnekte gösterildiği gibi *yapışkan* davrandığı anlamına gelir.
+Bir alan içinde bir eylem yürütürken, için `area` rota değeri, yönlendirme IÇIN, URL oluşturma için kullanılacak bir [çevresel değer](#ambient) olarak kullanılabilir. Bu, varsayılan olarak, aşağıdaki örnekte gösterildiği gibi, URL oluşturma için *yapışkan* olarak hareket ettiği anlamına gelir.
 
 [!code-csharp[](routing/samples/3.x/AreasRouting/Startup3.cs?name=snippet3)]
 
 [!code-csharp[](routing/samples/3.x/AreasRouting/Areas/Duck/Controllers/UsersController.cs)]
 
-Aşağıdaki kod için bir `/Zebra/Users/AddUser`URL oluşturur:
+Aşağıdaki kod, için `/Zebra/Users/AddUser`bir URL oluşturur:
 
 [!code-csharp[](routing/samples/3.x/AreasRouting/Controllers/HomeController.cs?name=snippet)]
 
@@ -841,12 +841,12 @@ Aşağıdaki kod için bir `/Zebra/Users/AddUser`URL oluşturur:
 
 ## <a name="action-definition"></a>Eylem tanımı
 
-[Eylem Dışı](xref:Microsoft.AspNetCore.Mvc.NonActionAttribute) özelliği olanlar hariç, denetleyicideki ortak yöntemler eylemlerdir.
+Bir denetleyicide, [Nonactıon](xref:Microsoft.AspNetCore.Mvc.NonActionAttribute) özniteliğine sahip olanlar hariç genel yöntemler eylemlerdir.
 
 ## <a name="sample-code"></a>Örnek kod
 
- * [MyDisplayRouteInfo](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/routing/samples/3.x/main/Extensions/ControllerContextExtensions.cs) yöntemi [örnek indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/routing/samples/3.x) ye dahildir ve yönlendirme bilgilerini görüntülemek için kullanılır.
-* [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/routing/samples/3.x) ( nasıl[indirilir](xref:index#how-to-download-a-sample))
+ * [Mydisplayrouteınfo](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/routing/samples/3.x/main/Extensions/ControllerContextExtensions.cs) yöntemi [örnek karşıdan yüklemeye](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/routing/samples/3.x) dahildir ve yönlendirme bilgilerini görüntülemek için kullanılır.
+* [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/routing/samples/3.x) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
 [!INCLUDE[](~/includes/dbg-route.md)]
 
@@ -854,15 +854,15 @@ Aşağıdaki kod için bir `/Zebra/Users/AddUser`URL oluşturur:
 
 ::: moniker range="< aspnetcore-3.0"
 
-ASP.NET Core MVC, gelen isteklerin URL'lerini eşleştirmek ve bunları eylemlerle eşleştirmek için Yönlendirme [aracını](xref:fundamentals/middleware/index) kullanır. Yollar başlangıç kodunda veya özniteliklerinde tanımlanır. Rotalar, URL yollarının eylemlerle nasıl eşleşeceğini açıklar. Rotalar, yanıtlar olarak gönderilen URL'ler (bağlantılar için) oluşturmak için de kullanılır.
+ASP.NET Core MVC, gelen isteklerin URL 'Leriyle eşleştirmek ve bunları eylemlerle eşlemek için yönlendirme [Ara yazılımını](xref:fundamentals/middleware/index) kullanır. Yollar başlangıç kodunda veya özniteliklerde tanımlanmıştır. Yollar URL yollarının eylemlerle nasıl eşleştirileceği açıklanır. Yollar, yanıt olarak gönderilen URL 'Leri (bağlantılar için) oluşturmak için de kullanılır.
 
-Eylemler geleneksel olarak yönlendirilir veya öznitelik yönlendirilir. Denetleyiciye bir rota veya eylem yerleştirmek, rotayı bağlamasını sağlar. Daha fazla bilgi için [Karışık yönlendirmeye](#routing-mixed-ref-label) bakın.
+Eylemler genel olarak Dolaştırılan veya Attribute olarak yönlendirilir. Bir yolu denetleyiciye koymak veya eylemi, BT özniteliği yönlendirilmesini sağlar. Daha fazla bilgi için bkz. [karma yönlendirme](#routing-mixed-ref-label) .
 
-Bu belge, MVC ve yönlendirme arasındaki etkileşimleri ve tipik MVC uygulamalarının yönlendirme özelliklerinden nasıl yararlandığını açıklar. Gelişmiş yönlendirme yle ilgili ayrıntılar için [Yönlendirme'ye](xref:fundamentals/routing) bakın.
+Bu belge, MVC ve yönlendirme arasındaki etkileşimleri ve tipik MVC uygulamalarının yönlendirme özelliklerini nasıl kullandığını açıklar. Gelişmiş yönlendirme hakkında ayrıntılar için bkz. [yönlendirme](xref:fundamentals/routing) .
 
-## <a name="setting-up-routing-middleware"></a>Yönlendirme Middleware'ini ayarlama
+## <a name="setting-up-routing-middleware"></a>Yönlendirme ara yazılımını ayarlama
 
-*Yapılandırma* yönteminizde şuna benzer bir kod görebilirsiniz:
+*Yapılandırma* yönteminde şuna benzer bir kod görebilirsiniz:
 
 ```csharp
 app.UseMvc(routes =>
@@ -871,9 +871,9 @@ app.UseMvc(routes =>
 });
 ```
 
-Çağrının `UseMvc`içinde, `MapRoute` `default` rota olarak adlandırılacağız tek bir rota oluşturmak için kullanılır. Çoğu MVC `default` uygulaması, rotaya benzer bir şablona sahip bir rota kullanır.
+Çağrısı içinde `UseMvc`, `MapRoute` `default` yolu olarak başvurabileceğiniz tek bir yol oluşturmak için kullanılır. Çoğu MVC uygulaması, `default` yola benzer bir şablon içeren bir yol kullanır.
 
-Rota şablonu `"{controller=Home}/{action=Index}/{id?}"` gibi `/Products/Details/5` bir URL yolu eşleşebilir ve yolu belirterek rota değerlerini `{ controller = Products, action = Details, id = 5 }` ayıklar. MVC adlı `ProductsController` bir denetleyici bulmak ve `Details`eylem çalıştırmak için çalışacağız:
+Yol şablonu `"{controller=Home}/{action=Index}/{id?}"` , gıbı `/Products/Details/5` bir URL yoluyla eşleşir ve yolu simgeleştirileyerek yol değerlerini `{ controller = Products, action = Details, id = 5 }` ayıklar. MVC adlı `ProductsController` bir denetleyiciyi bulmayı dener ve bu eylemi `Details`çalıştırır:
 
 ```csharp
 public class ProductsController : Controller
@@ -882,25 +882,25 @@ public class ProductsController : Controller
 }
 ```
 
-Bu örnekte, model bağlama bu eylemi `id = 5` çağırırken `id` parametre `5` ayarlamak için değerini kullanacağını unutmayın. Daha fazla ayrıntı için [Model Bağlama'ya](../models/model-binding.md) bakın.
+Bu örnekte, model bağlamanın bu eylemi çağırırken `id = 5` `id` parametresini olarak `5` ayarlamak için değerini kullanacağı unutulmamalıdır. Daha fazla ayrıntı için [model bağlamaya](../models/model-binding.md) bakın.
 
-Rotayı `default` kullanma:
+`default` Yolu kullanarak:
 
 ```csharp
 routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
 ```
 
-Rota şablonu:
+Yol şablonu:
 
-* `{controller=Home}`varsayılan `Home` olarak tanımlar`controller`
+* `{controller=Home}`Varsayılan `Home` olarak tanımlar`controller`
 
-* `{action=Index}`varsayılan `Index` olarak tanımlar`action`
+* `{action=Index}`Varsayılan `Index` olarak tanımlar`action`
 
 * `{id?}`isteğe `id` bağlı olarak tanımlar
 
-Varsayılan ve isteğe bağlı rota parametrelerinin eşleşme için URL yolunda bulunması gerekmez. Rota şablonu sözdiziminin ayrıntılı bir açıklaması için [Rota Şablonu Başvurusu'na](xref:fundamentals/routing#route-template-reference) bakın.
+Bir eşleşme için URL yolunda varsayılan ve isteğe bağlı yol parametrelerinin mevcut olması gerekmez. Yol şablonu sözdiziminin ayrıntılı açıklaması için bkz. [route Template Reference](xref:fundamentals/routing#route-template-reference) .
 
-`"{controller=Home}/{action=Index}/{id?}"`URL yolu `/` eşleşebilir ve rota `{ controller = Home, action = Index }`değerleri üretecek. URL yolunda `controller` `action` karşılık gelen bir segment `id` olmadığından, varsayılan değerlerin değerleri ve varsayılan değerleri kullanma değerleri bir değer üretmez. MVC, eylemi `HomeController` ve eylemi `Index` seçmek için bu rota değerlerini kullanır:
+`"{controller=Home}/{action=Index}/{id?}"`URL yoluyla `/` eşleştirebilir ve yol değerlerini `{ controller = Home, action = Index }`oluşturacaktır. , URL yolunda `controller` karşılık `action` gelen bir kesim olmadığından, için değerleri `id` ve varsayılan değerleri kullanır, bir değer üretmez. MVC, `HomeController` ve `Index` eylemini seçmek için bu yol değerlerini kullanır:
 
 ```csharp
 public class HomeController : Controller
@@ -909,7 +909,7 @@ public class HomeController : Controller
 }
 ```
 
-Bu denetleyici tanımı ve yol `HomeController.Index` şablonu kullanılarak, eylem aşağıdaki URL yollarından herhangi biri için yürütülür:
+Bu denetleyici tanımı ve yönlendirme şablonunu kullanarak, `HomeController.Index` eylem aşağıdaki URL yollarından herhangi biri için yürütülür:
 
 * `/Home/Index/17`
 
@@ -919,7 +919,7 @@ Bu denetleyici tanımı ve yol `HomeController.Index` şablonu kullanılarak, ey
 
 * `/`
 
-Kolaylık yöntemi: `UseMvcWithDefaultRoute`
+Kolaylık yöntemi `UseMvcWithDefaultRoute`:
 
 ```csharp
 app.UseMvcWithDefaultRoute();
@@ -934,7 +934,7 @@ app.UseMvc(routes =>
 });
 ```
 
-`UseMvc`ve `UseMvcWithDefaultRoute` ara yazılım `RouterMiddleware` boru hattına bir örnek ekleyin. MVC ara yazılımlarla doğrudan etkileşime girmez ve istekleri işlemek için yönlendirme kullanır. MVC bir örneği ile yollara `MvcRouteHandler`bağlanır. İçindeki `UseMvc` kod aşağıdakilere benzer:
+`UseMvc`ve `UseMvcWithDefaultRoute` , ara yazılım ardışık `RouterMiddleware` düzenine bir örneği ekleyin. MVC, doğrudan ara yazılım ile etkileşime girmez ve istekleri işlemek için yönlendirmeyi kullanır. MVC, bir örneği aracılığıyla yollara bağlanır `MvcRouteHandler`. İçindeki `UseMvc` kod şuna benzer:
 
 ```csharp
 var routes = new RouteBuilder(app);
@@ -949,35 +949,35 @@ routes.DefaultHandler = new MvcRouteHandler(...);
 app.UseRouter(routes.Build());
 ```
 
-`UseMvc`doğrudan herhangi bir rota tanımlamaz, `attribute` rota için rota koleksiyonuna bir yer tutucu ekler. Aşırı yük, `UseMvc(Action<IRouteBuilder>)` kendi rotalarınızı eklemenize olanak tanır ve öznitelik yönlendirmeyi de destekler.  `UseMvc`ve tüm varyasyonları öznitelik yolu için bir yer tutucu ekleyin - öznitelik yönlendirme nasıl `UseMvc`yapılandırırsanız yapılandırırsanız yapının her zaman kullanılabilir. `UseMvcWithDefaultRoute`varsayılan bir rota tanımlar ve öznitelik yönlendirmeyi destekler. [Öznitelik Yönlendirme](#attribute-routing-ref-label) bölümü öznitelik yönlendirme hakkında daha fazla ayrıntı içerir.
+`UseMvc`hiçbir yol doğrudan tanımlamaz, yol için `attribute` yol koleksiyonuna bir yer tutucu ekler. Aşırı yükleme `UseMvc(Action<IRouteBuilder>)` kendi rotalarınızı eklemenize olanak tanır ve öznitelik yönlendirmeyi de destekler.  `UseMvc`ve tüm varyasyonları, yapılandırma `UseMvc`şeklinden bağımsız olarak her zaman için öznitelik rotası özniteliği yönlendirme özelliği için bir yer tutucu ekler. `UseMvcWithDefaultRoute`Varsayılan bir yol tanımlar ve öznitelik yönlendirmeyi destekler. [Öznitelik yönlendirme](#attribute-routing-ref-label) bölümü öznitelik yönlendirme hakkında daha fazla ayrıntı içerir.
 
 <a name="routing-conventional-ref-label"></a>
 
-## <a name="conventional-routing"></a>Konvansiyonel yönlendirme
+## <a name="conventional-routing"></a>Geleneksel yönlendirme
 
-Rota: `default`
+`default` Yol:
 
 ```csharp
 routes.MapRoute("default", "{controller=Home}/{action=Index}/{id?}");
 ```
 
-Önceki kod, geleneksel bir yönlendirme örneğidir. URL yolları için bir *kural kuralı* oluşturduğundan, bu stil geleneksel yönlendirme olarak adlandırılır:
+Yukarıdaki kod geleneksel yönlendirmeye bir örnektir. Bu stil, URL yolları için bir *kural* oluşturduğundan geleneksel yönlendirme olarak adlandırılır:
 
-* İlk yol kesimi denetleyici adı eşler.
-* Eylem adının ikinci eşleri.
-* Üçüncü segment isteğe bağlı `id`olarak kullanılır. `id`bir model varlık için eşler.
+* İlk yol segmenti, denetleyicinin adıyla eşlenir.
+* İkincisi eylem adıyla eşlenir.
+* Üçüncü segment, isteğe bağlı `id`olarak kullanılır. `id`bir model varlığına eşlenir.
 
-`default` Bu yolu kullanarak, `/Products/List` URL yolu `ProductsController.List` eyleme `/Blog/Article/17` eşler ve `BlogController.Article`eşler. Bu eşleme **yalnızca** denetleyici ve eylem adlarını temel alınarak ad alanlarını, kaynak dosya konumlarını veya yöntem parametrelerini temel almamaktadır.
+`default` Bu yolu `/Products/List` kullanarak, URL yolu `ProductsController.List` eyleme eşlenir ve `/Blog/Article/17` ile `BlogController.Article`eşlenir. Bu eşleme **yalnızca** denetleyiciye ve eylem adlarına dayalıdır ve ad alanları, kaynak dosya konumları veya yöntem parametrelerine göre değildir.
 
 > [!TIP]
-> Varsayılan rota ile geleneksel yönlendirme yi kullanmak, tanımladığınız her eylem için yeni bir URL deseni bulmak zorunda kalmadan uygulamayı hızlı bir şekilde oluşturmanıza olanak tanır. CRUD tarzı eylemleri olan bir uygulama için, denetleyicilerinizdeki URL'ler için tutarlılık olması kodunuzu basitleştirmeye ve kullanıcı aranızı daha öngörülebilir hale getirmeye yardımcı olabilir.
+> Varsayılan yol ile geleneksel yönlendirmeyi kullanmak, tanımladığınız her eylem için yeni bir URL düzeniyle karşılaşmanıza gerek kalmadan uygulamayı hızlı bir şekilde oluşturmanıza olanak tanır. CRUD stilinde eylemlere sahip bir uygulama için denetleyicilerinizdeki URL 'Lerin tutarlılığı, kodunuzun basitleştirilmesine ve Kullanıcı arabiriminizi daha öngörülebilir hale getirmenize yardımcı olabilir.
 
 > [!WARNING]
-> Rota `id` şablonu tarafından isteğe bağlı olarak tanımlanır, bu da eylemlerinizin URL'nin bir parçası olarak sağlanan kimlik olmadan yürütülebileceği anlamına gelir. URL'den atlanırsa genellikle ne olur, `id` model bağlama `0` tarafından ayarlanacak ve sonuç olarak veritabanı eşleşen `id == 0`hiçbir varlık bulunamaz. Öznitelik yönlendirme, bazı eylemler için gerekli olan kimliği yapmak için, diğerleri için değil, ince taneli denetim sağlayabilir. Sözleşmeye göre belgeler, doğru `id` kullanımda görünme olasılıkları gibi isteğe bağlı parametreleri içerir.
+> , `id` Yol şablonu tarafından isteğe bağlı olarak tanımlanır ve bu, EYLEMLERINIZIN URL 'nin bir parçası olarak sağlanmadan yürütebileceği anlamına gelir. Genellikle URL 'den atlanırsa ne `id` olacağı, model bağlama `0` tarafından ayarlanabileceği ve sonuç olarak veritabanı eşleştirmesinin `id == 0`hiçbir varlık bulunamadığı durumlarda gerçekleşir. Öznitelik yönlendirme, bazı eylemler için gereken KIMLIĞI, diğerleri için değil, daha ayrıntılı bir denetim sağlayabilir. Kurala göre belgeler, doğru kullanımda görünebilecekleri gibi `id` isteğe bağlı parametreleri de içerecektir.
 
-## <a name="multiple-routes"></a>Birden çok rota
+## <a name="multiple-routes"></a>Birden çok yol
 
-Daha fazla çağrı `UseMvc` ekleyerek içine birden `MapRoute`çok yol ekleyebilirsiniz. Bunu yapmak, birden çok kural tanımlamanıza veya belirli bir eyleme adanmış geleneksel rotalar eklemenize olanak tanır:
+Uygulamasına `MapRoute`daha fazla çağrı ekleyerek içine `UseMvc` birden çok yol ekleyebilirsiniz. Bunun yapılması, birden çok kural tanımlamanızı veya belirli bir eyleme adanmış geleneksel yollar eklemenizi sağlar; örneğin:
 
 ```csharp
 app.UseMvc(routes =>
@@ -988,20 +988,20 @@ app.UseMvc(routes =>
 });
 ```
 
-Buradaki `blog` rota özel bir *konvansiyonel rotadır,* yani geleneksel yönlendirme sistemini kullanır, ancak belirli bir eyleme adanmıştır. `controller` Rota `action` şablonunda parametre olarak görünmediğinden ve görünmediğinden, yalnızca varsayılan değerlere sahip olabilirler `BlogController.Article`ve bu nedenle bu yol her zaman eylemle eşlenecektir.
+Burada `blog` yol, geleneksel bir *geleneksel yol*olduğundan geleneksel yönlendirme sistemini kullanır, ancak belirli bir eyleme ayrılmıştır. `controller` Yol şablonunda `action` parametre olarak görünmeyin, ancak bu yol yalnızca varsayılan değerlere sahip olabilir ve bu nedenle bu yol her zaman eyleme `BlogController.Article`eşlenir.
 
-Rota koleksiyonundaki rotalar sipariş edilir ve eklendikleri sırada işlenir. Bu örnekte, `blog` rota rotadan `default` önce denenecektir.
+Rota koleksiyonundaki yollar sıralanır ve eklendikleri sırada işlenir. Bu nedenle bu örnekte `blog` yol, `default` yol öncesinde denenmeye sunulacaktır.
 
 > [!NOTE]
-> *Özel geleneksel rotalar* genellikle URL `{*article}` yolunun kalan kısmını yakalamak gibi **tüm yolları yakalama** parametrelerini kullanır. Bu, diğer rotalarla eşleşmek istediğiniz URL'lerle eşleştiğini anlamına gelen bir rotayı 'çok açgözlü' yapabilir. Bunu çözmek için daha sonra rota tablosuna 'açgözlü' yolları koyun.
+> *Adanmış geleneksel yollar* genellıkle, URL yolunun kalan kısmını yakalamak için `{*article}` gibi **catch-all** yol parametrelerini kullanır. Bu, ' çok Greedy ' yolunu diğer yollarla eşleştirirken hedeflediğiniz URL 'Lerle eşleşen bir yol haline getirir. Bunu çözümlemek için ' Greedy ' yollarını daha sonra yol tablosuna koyun.
 
 ### <a name="fallback"></a>Geri dönüş
 
-İstek işlemenin bir parçası olarak, MVC rota değerlerinin uygulamanızda bir denetleyici ve eylem bulmak için kullanılabileceğini doğrular. Rota değerleri bir eylemle eşleşmiyorsa, rota eşleşmez ve bir sonraki rota denenecektir. Buna *geri dönüş*denir ve geleneksel yolların çakıştığı durumlarda basitleştirilmesi amaçlanır.
+İstek işlemenin bir parçası olarak, MVC, uygulamanızdaki bir denetleyiciyi ve eylemi bulmak için yol değerlerinin kullanılabileceğini doğrular. Rota değerleri bir eylemle eşleşmezse, yol eşleşme olarak kabul edilmez ve sonraki rota denenir. Buna *geri dönüş*denir ve geleneksel yolların çakıştığı durumları basitleştirmek için tasarlanmıştır.
 
-### <a name="disambiguating-actions"></a>Disambiguating eylemleri
+### <a name="disambiguating-actions"></a>Kesinleştirme eylemleri
 
-İki eylem yönlendirme yoluyla eşleştiğinde, MVC 'en iyi' adayı seçmek için ayrıştırmalı veya başka bir özel durum atmalıdır. Örneğin:
+İki eylem yönlendirme aracılığıyla eşleşiyorsa, MVC ' en iyi ' adayı seçmek için bir özel durum oluşturması veya bir özel durum oluşturmak için, MVC 'nin belirsizliğini Örneğin:
 
 ```csharp
 public class ProductsController : Controller
@@ -1013,19 +1013,19 @@ public class ProductsController : Controller
 }
 ```
 
-Bu denetleyici, URL yolu `/Products/Edit/17` ve rota verileri `{ controller = Products, action = Edit, id = 17 }`eşleşecek iki eylem tanımlar. Bu, bir ürünü düzenlemek için `Edit(int)` bir form gösterdiği ve `Edit(int, Product)` deftere nakledilen formu işlediği MVC denetleyicileri için tipik bir desendir. Bunu mümkün kılmak için MVC `Edit(int, Product)` istek bir HTTP `POST` `Edit(int)` ve ne zaman HTTP fiil başka bir şey olduğunu seçmek gerekir.
+Bu denetleyici, URL yolu `/Products/Edit/17` ve rota verileri `{ controller = Products, action = Edit, id = 17 }`ile eşleşen iki eylemi tanımlar. Bu, bir ürünü düzenlemek için bir form `Edit(int)` gösteren ve `Edit(int, Product)` postalanan formu işleyen MVC denetleyicileri için tipik bir modeldir. Bunu yapmak için, istek bir HTTP `Edit(int, Product)` `POST` olduğunda ve `Edit(int)` http fiili başka bir şey olduğunda bu olası MVC 'nin seçim yapması gerekir.
 
-`HttpPostAttribute` ( `[HttpPost]` ) ( ) `IActionConstraint` yalnızca http fiili . `POST` Bir `IActionConstraint` varlığı `Edit(int, Product)` daha bir 'daha iyi' maç yapar `Edit(int)`, bu yüzden `Edit(int, Product)` ilk denenecektir.
+( `HttpPostAttribute` `[HttpPost]` ), Yalnızca http fiili olduğunda `IActionConstraint` eylemin seçili olmasını sağlayan bir uygulamasıdır `POST`. ' Nin varlığı ' `IActionConstraint` daha iyi `Edit(int, Product)` ' bir eşleşme yapar `Edit(int)`, bu nedenle `Edit(int, Product)` ilk olarak denenir.
 
-Yalnızca özel senaryolarda `IActionConstraint` özel uygulamalar yazmanız gerekir, ancak benzer `HttpPostAttribute` öznitelikler diğer HTTP fiilleri için tanımlanır gibi özniteliklerin rolünü anlamak önemlidir. Geleneksel yönlendirmede, eylemlerin `show form -> submit form` iş akışının bir parçası olduklarında aynı eylem adını kullanması yaygındır. Bu desenin kolaylığı, [Anlama IActionConstraint](#understanding-iactionconstraint) bölümünü inceledikten sonra daha belirgin hale gelecektir.
+Yalnızca özelleştirilmiş senaryolarda özel `IActionConstraint` uygulamalar yazmanız gerekir, ancak benzer öznitelikler gibi `HttpPostAttribute` özniteliklerin rolün diğer HTTP fiilleri için tanımlandığını anlamak önemlidir. Geleneksel yönlendirmesinde, bir iş akışının parçası olduklarında aynı eylem adını kullanmak yaygın olarak karşılaşılan bir `show form -> submit form` işlemdir. Bu düzenin rahatlığı, [ıactionconstraint 'ı anlama](#understanding-iactionconstraint) bölümünde daha sonra görünür hale gelir.
 
-Birden çok rota eşleşirse ve MVC 'en iyi' `AmbiguousActionException`rota bulamazsa, bir .
+Birden çok yol eşleşirse ve MVC ' en iyi ' yolu bulamazsa, bir `AmbiguousActionException`oluşturur.
 
 <a name="routing-route-name-ref-label"></a>
 
-### <a name="route-names"></a>Rota adları
+### <a name="route-names"></a>Yol adları
 
-Dizeleri `"blog"` ve `"default"` aşağıdaki örneklerde rota adları şunlardır:
+Dizeler `"blog"` ve `"default"` aşağıdaki örneklerde yol adları verilmiştir:
 
 ```csharp
 app.UseMvc(routes =>
@@ -1036,15 +1036,15 @@ app.UseMvc(routes =>
 });
 ```
 
-Rota adları, adlandırılmış rotanın URL üretimi için kullanılabileceğini görebilmek için rotaya mantıksal bir ad verir. Bu, yolların sıralanması URL oluşturmayı karmaşık hale getirebildiği zaman URL oluşturmayı büyük ölçüde kolaylaştırır. Rota adları uygulama genelinde benzersiz olmalıdır.
+Yol adları, URL oluşturma için adlandırılmış yolun kullanılabilmesi için yola mantıksal bir ad verir. Bu, yolların sıralaması URL oluşturma karmaşık hale geldiğinde URL oluşturmayı büyük ölçüde basitleştirir. Yol adları, uygulama genelinde benzersiz olmalıdır.
 
-Rota adlarının URL eşleştirmesi veya isteklerin işlenmesi üzerinde hiçbir etkisi yoktur; yalnızca URL üretimi için kullanılırlar. [Yönlendirme,](xref:fundamentals/routing) MVC'ye özel yardımcılarda URL üretimi de dahil olmak üzere URL oluşturma hakkında daha ayrıntılı bilgilere sahiptir.
+Yol adları, isteklerin URL 'SI ile eşleşmesini veya işlenmesini etkilemez; Bunlar yalnızca URL oluşturma için kullanılır. [Yönlendirme](xref:fundamentals/routing) , MVC 'ye özgü yardımcılardaki URL oluşturma da dahil olmak üzere URL oluşturma hakkında daha ayrıntılı bilgiler içerir.
 
 <a name="attribute-routing-ref-label"></a>
 
 ## <a name="attribute-routing"></a>Öznitelik yönlendirme
 
-Öznitelik yönlendirme, eylemleri doğrudan rota şablonlarına yönlendirmek için bir öznitelik kümesi kullanır. Aşağıdaki örnekte, `app.UseMvc();` `Configure` yöntem kullanılır ve hiçbir rota geçirilir. Varsayılan `HomeController` rotanın `{controller=Home}/{action=Index}/{id?}` eşleşeceği URL'lerle eşleşecek:
+Öznitelik yönlendirme eylemleri doğrudan yönlendirme şablonlarına eşlemek için bir öznitelik kümesi kullanır. Aşağıdaki örnekte, `app.UseMvc();` `Configure` yönteminde kullanılır ve hiçbir yol geçirilir. `HomeController` Varsayılan yolun `{controller=Home}/{action=Index}/{id?}` eşleşeceğini benzer bir URL kümesiyle eşleşir:
 
 ```csharp
 public class HomeController : Controller
@@ -1069,12 +1069,12 @@ public class HomeController : Controller
 }
 ```
 
-Eylem, `HomeController.Index()` URL `/`yollarından herhangi biri `/Home`için `/Home/Index`yürütülecektir, veya .
+Bu `HomeController.Index()` eylem, veya `/` `/Home` `/Home/Index`URL yollarının herhangi biri için yürütülür.
 
 > [!NOTE]
-> Bu örnek, öznitelik yönlendirme ve geleneksel yönlendirme arasındaki önemli bir programlama farkVurgulamaktadır. Öznitelik yönlendirme, bir rota belirtmek için daha fazla giriş gerektirir; geleneksel varsayılan rota yolları daha kısa bir şekilde işler. Ancak, öznitelik yönlendirme, her eylem için hangi rota şablonlarının geçerli olduğunu niçin hassas bir şekilde denetlemeye izin verir (ve gerektirir).
+> Bu örnek, öznitelik yönlendirme ve geleneksel yönlendirme arasında bir temel programlama farkı vurgulamaktadır. Öznitelik yönlendirme, bir yol belirtmek için daha fazla giriş gerektirir; geleneksel varsayılan yol, yönlendirmeleri daha succinctly işler. Ancak, öznitelik yönlendirme (ve gerektirir) her eylem için hangi rota şablonlarının uygulanacağını kesin olarak denetler.
 
-Öznitelik yönlendirme ile denetleyici adı ve eylem adları hangi eylem seçilir **hiçbir** rol oynar. Bu örnek, önceki örnekle aynı URL'lerle eşleşir.
+Öznitelik yönlendirme ile, denetleyici adı ve eylem adları, **herhangi** bir eylem seçildiği hiçbir rol oynar. Bu örnek, önceki örnekle aynı URL 'Lerle eşleştirecektir.
 
 ```csharp
 public class MyDemoController : Controller
@@ -1100,11 +1100,11 @@ public class MyDemoController : Controller
 ```
 
 > [!NOTE]
-> Yukarıdaki rota şablonları `action`, ve `area`. `controller` Aslında, bu rota parametreleri öznitelik yollarında izin verilmez. Rota şablonu zaten bir eylemle ilişkili olduğundan, eylem adını URL'den ayrıştırmak mantıklı olmaz.
+> Yukarıdaki yol şablonları, `action` `area`, ve `controller`için yol parametreleri tanımlamaz. Aslında, öznitelik rotalarında bu yol parametrelerine izin verilmez. Yol şablonu bir eylemle zaten ilişkili olduğundan, URL 'den eylem adını ayrıştırmak mantıklı değildir.
 
-## <a name="attribute-routing-with-httpverb-attributes"></a>Http[Fiil] öznitelikleri ile öznitelik yönlendirme
+## <a name="attribute-routing-with-httpverb-attributes"></a>Http [fiil] öznitelikleriyle öznitelik yönlendirme
 
-Öznitelik yönlendirme `Http[Verb]` si gibi `HttpPostAttribute`öznitelikleri de yararlanabilir. Bu özniteliklerin tümü bir rota şablonu kabul edebilir. Bu örnek, aynı rota şablonu eşleşen iki eylem gösterir:
+Öznitelik yönlendirme, `Http[Verb]` gibi öznitelikleri de kullanabilir `HttpPostAttribute`. Bu özniteliklerin hepsi bir yol şablonunu kabul edebilir. Bu örnekte, aynı rota şablonuyla eşleşen iki eylem gösterilmektedir:
 
 ```csharp
 [HttpGet("/products")]
@@ -1120,26 +1120,12 @@ public IActionResult CreateProduct(...)
 }
 ```
 
-Http fiili olduğunda `/products` `ProductsApi.ListProducts` `GET` eylem gibi bir URL yolu `ProductsApi.CreateProduct` yürütülür ve HTTP `POST`fiili . Öznitelik yönlendirmesi ilk olarak URL ile rota öznitelikleri tarafından tanımlanan rota şablonları kümesiyle eşleşir. Bir rota şablonu `IActionConstraint` eşleştikten sonra, hangi eylemlerin yürütülebileceğini belirlemek için kısıtlamalar uygulanır.
+Bir URL yolu için, `/products` http `ProductsApi.ListProducts` fiili olduğunda `GET` ve `ProductsApi.CreateProduct` http fiili olduğunda yürütülecektir, eylem gibi bir URL yolu yürütülür `POST`. Öznitelik yönlendirme öncelikle URL ile yol öznitelikleri tarafından tanımlanan yol şablonları kümesine göre eşleşir. Bir rota şablonu eşleştiğinde, `IActionConstraint` hangi eylemlerin yürütüleceğini belirleyen kısıtlamalar uygulanır.
 
 > [!TIP]
-> Bir REST API'si inşa ederken, eylem `[Route(...)]` tüm HTTP yöntemlerini kabul edeceği için bir eylem yönteminde kullanmak isteyeceğiniz nadirdir. API'nizin neyi desteklediği `Http*Verb*Attributes` konusunda kesin olmak için daha spesifik olanı kullanmak daha iyidir. REST API'lerinin istemcilerinin belirli mantıksal işlemlere hangi yolların ve HTTP fiillerinin eşlenebildiğini bilmeleri beklenir.
+> Bir REST API oluştururken, eylem tüm HTTP yöntemlerini kabul edecek şekilde bir eylem yönteminde `[Route(...)]` kullanmak isteyeceksiniz. API 'nizin neleri desteklediği hakkında kesin olması için `Http*Verb*Attributes` daha belirgin bir şekilde kullanılması daha iyidir. REST API 'lerinin istemcileri, hangi yolların ve HTTP fiillerinin belirli mantıksal işlemlere eşlendiğini bilmelidir.
 
-Bir öznitelik rotası belirli bir eylem için geçerli olduğundan, rota şablonu tanımının bir parçası olarak gerekli parametreleri yapmak kolaydır. Bu örnekte, `id` URL yolunun bir parçası olarak gereklidir.
-
-```csharp
-public class ProductsApiController : Controller
-{
-   [HttpGet("/products/{id}", Name = "Products_List")]
-   public IActionResult GetProduct(int id) { ... }
-}
-```
-
-Eylem `ProductsApi.GetProduct(int)` gibi `/products/3` bir URL yolu için yürütülür, `/products`ancak gibi bir URL yolu için değil. Rota şablonlarının ve ilgili seçeneklerin tam açıklaması için [Yönlendirme'ye](xref:fundamentals/routing) bakın.
-
-## <a name="route-name"></a>Rota Adı
-
-Aşağıdaki kod bir *rota* adı `Products_List`tanımlar:
+Bir öznitelik yolu belirli bir eyleme uyguladığı için, yol şablonu tanımının bir parçası olarak gerekli parametreleri yapmak kolaydır. Bu örnekte, `id` URL yolunun bir parçası olarak gereklidir.
 
 ```csharp
 public class ProductsApiController : Controller
@@ -1149,16 +1135,30 @@ public class ProductsApiController : Controller
 }
 ```
 
-Rota adları, belirli bir rotayı temel alan bir URL oluşturmak için kullanılabilir. Rota adlarının yönlendirmenin URL eşleştirme davranışı üzerinde hiçbir etkisi yoktur ve yalnızca URL oluşturma için kullanılır. Rota adları uygulama genelinde benzersiz olmalıdır.
+Eylem `ProductsApi.GetProduct(int)` , gibi bir URL yolu için değil, gıbı `/products/3` bir URL yolu için yürütülür `/products`. Yol şablonlarının ve ilgili seçeneklerin tam açıklaması için bkz. [yönlendirme](xref:fundamentals/routing) .
+
+## <a name="route-name"></a>Yol adı
+
+Aşağıdaki kod, bir *yol adı* tanımlar `Products_List`:
+
+```csharp
+public class ProductsApiController : Controller
+{
+   [HttpGet("/products/{id}", Name = "Products_List")]
+   public IActionResult GetProduct(int id) { ... }
+}
+```
+
+Yol adları, belirli bir yolu temel alan bir URL oluşturmak için kullanılabilir. Rota adlarının, yönlendirmenin URL eşleştirme davranışına etkisi yoktur ve yalnızca URL oluşturma için kullanılır. Yol adları, uygulama genelinde benzersiz olmalıdır.
 
 > [!NOTE]
-> Bunu, parametreyi `id` isteğe bağlı olarak tanımlayan geleneksel`{id?}` *varsayılan rotayla*karşılaştırın ( ). API'leri tam olarak belirtme becerisinin, `/products` farklı `/products/5` eylemlere izin verme ve gönderilme gibi avantajları vardır.
+> Bunu, isteğe bağlı ( `id` `{id?}`) parametresini tanımlayan geleneksel *varsayılan yol*ile kontrast. API 'Leri tam olarak belirtme özelliği, farklı eylemlere izin verilmesi `/products` ve `/products/5` dağıtılması gibi avantajlara sahiptir.
 
 <a name="routing-combining-ref-label"></a>
 
 ### <a name="combining-routes"></a>Yolları birleştirme
 
-Öznitelik yönlendirmeyi daha az yinelenen hale getirmek için denetleyicideki rota öznitelikleri, tek tek eylemlerdeki rota öznitelikleriyle birleştirilir. Denetleyicide tanımlanan tüm rota şablonları, eylemlerdeki şablonları yönlendirmeye hazırlanır. Denetleyiciye bir rota özniteliği yerleştirmek, denetleyicideki **tüm** eylemleri öznitelik yönlendirmesi kullanır.
+Öznitelik yönlendirmeyi daha az tekrarlı hale getirmek için, denetleyicideki yol öznitelikleri, bireysel eylemlerdeki rota öznitelikleriyle birleştirilir. Denetleyicide tanımlanan tüm yol şablonları, eylemlerdeki rota şablonlarına eklenir. Bir Route özniteliğinin denetleyiciye yerleştirilmesi, denetleyicideki **Tüm** eylemlerin öznitelik yönlendirme kullanmasını sağlar.
 
 ```csharp
 [Route("products")]
@@ -1172,9 +1172,9 @@ public class ProductsApiController : Controller
 }
 ```
 
-Bu örnekte URL `/products` yolu `ProductsApi.ListProducts`eşleşebilir `/products/5` ve `ProductsApi.GetProduct(int)`URL yolu eşleşebilir. Bu eylemlerin her ikisi `GET` de sadece HTTP `HttpGetAttribute`eşleşir, çünkü onlar ile işaretlenirler.
+Bu örnekte, URL `/products` yolu eşleştirebilir `ProductsApi.ListProducts`ve URL yolu `/products/5` eşleştirebilir. `ProductsApi.GetProduct(int)` Bu eylemlerin her ikisi de ile işaretlendikleri için `GET` `HttpGetAttribute`http ile eşleşir.
 
-Denetleyiciye uygulanan rota şablonlarıyla `/` başlayan `~/` veya birleşmeyen bir eyleme uygulanan rota şablonları. Bu örnek, *varsayılan rotaya*benzer bir URL yolu kümesiyle eşleşir.
+Bir eyleme uygulanan `/` veya `~/` Bu denetleyiciye uygulanan rota şablonlarıyla birlikte bir araya getirilen bir eyleme uygulanan rota şablonları. Bu örnek, *varsayılan rotaya*benzer bir URL yolları kümesiyle eşleşir.
 
 ```csharp
 [Route("Home")]
@@ -1201,32 +1201,32 @@ public class HomeController : Controller
 
 <a name="routing-ordering-ref-label"></a>
 
-### <a name="ordering-attribute-routes"></a>Öznitelik rotalarını sıralama
+### <a name="ordering-attribute-routes"></a>Öznitelik yollarını sıralama
 
-Tanımlı bir sırada yürüten geleneksel yolların aksine, öznitelik yönlendirmesi bir ağaç oluşturur ve tüm rotalarla eşleşir. Bu, rota girişleri ideal bir sıralamaya yerleştirilmişse, bu şekilde olur; en özel yolları daha genel yolları önce yürütmek için bir şans var.
+Tanımlı bir düzende yürütülen geleneksel yolların aksine, öznitelik yönlendirme bir ağaç oluşturur ve tüm yollarla aynı anda eşleşir. Bu, yol girişleri ideal bir sıralamaya yerleştirildiyse olduğu gibi davranır; en özel yolların, daha genel yollardan önce yürütülmesi şansınız vardır.
 
-Örneğin, gibi `blog/search/{topic}` bir rota, .' `blog/{*article}`gibi bir rotadan daha belirgindir. Mantıksal olarak `blog/search/{topic}` rota 'çalışır' ilk, varsayılan olarak, çünkü tek mantıklı sipariş konuşuyor. Geleneksel yönlendirmeyi kullanarak, geliştirici yolları istenilen sıraya yerleştirmekten sorumludur.
+Örneğin, gibi `blog/search/{topic}` bir yol gibi `blog/{*article}`bir yol daha özeldir. Tek yapmanız gereken `blog/search/{topic}` tek bir sıralama olduğundan, varsayılan olarak ' çalıştırmaları ' yolunu mantıksal olarak konuşuyor. Geleneksel yönlendirmeyi kullanarak, yolları istenen sırada yerleştirmekten geliştirici sorumludur.
 
-Öznitelik yolları, sağlanan tüm çerçevenin `Order` özelliğini kullanarak bir siparişi yapılandırabilir. Rotalar, artan bir `Order` özellik türüne göre işlenir. Varsayılan sıra. `0` Bir rotayı `Order = -1` kullanarak ayarlama, sipariş belirlemeyen rotalardan önce çalışır. Varsayılan rota `Order = 1` siparişinden sonra bir rota yı kullanmak çalışır.
+Öznitelik rotaları, tüm Framework yol özniteliklerinin `Order` özelliğini kullanarak bir sıra yapılandırabilir. Yollar, `Order` özelliğin artan sıralamasına göre işlenir. Varsayılan sıra `0`. Kullanarak `Order = -1` bir yolun ayarlanması, bir sipariş ayarlamamadan önce çalışır. Kullanarak `Order = 1` bir yolun ayarlanması, varsayılan yol sıralaması sonrasında çalışır.
 
 > [!TIP]
-> Bağlı olarak `Order`kaçının. URL alanınız doğru yönlendirmek için açık sipariş değerleri gerektiriyorsa, istemciler için de kafa karıştırıcı olabilir. Genel öznitelik yönlendirme, URL eşlemi ile doğru rotayı seçer. URL oluşturma için kullanılan varsayılan sipariş çalışmıyorsa, rota adını geçersiz kılma olarak kullanmak `Order` genellikle özelliği uygulamaktan daha kolaydır.
+> Uygulamasına bağlı kaçının `Order`. URL alanınız, doğru sıralama değerlerinin doğru şekilde yönlendirilmesini gerektiriyorsa, istemciler de kafa karıştırıcı olabilir. Genel öznitelik yönlendirme ' de, URL eşleştirme ile doğru yolu seçer. URL oluşturma için kullanılan varsayılan sıra çalışmıyorsa, bir geçersiz kılma olarak yol adı kullanılması, `Order` özelliği uygulamadan daha basittir.
 
-Razor Pages yönlendirme ve MVC denetleyici yönlendirme bir uygulamayı paylaşır. Razor Pages konularında rota sırası ile ilgili bilgiler [Razor Pages rota ve uygulama kurallarında mevcuttur: Rota sırası.](xref:razor-pages/razor-pages-conventions#route-order)
+Razor Pages yönlendirme ve MVC denetleyici yönlendirme bir uygulamayı paylaşır. Razor Pages konularındaki yol siparişi hakkında bilgiler [Razor Pages yol ve uygulama kuralları: yol sıralaması](xref:razor-pages/razor-pages-conventions#route-order)' nda bulunabilir.
 
 <a name="routing-token-replacement-templates-ref-label"></a>
 
-## <a name="token-replacement-in-route-templates-controller-action-area"></a>Rota şablonlarında belirteç değiştirme ([denetleyici], [eylem], [alan])
+## <a name="token-replacement-in-route-templates-controller-action-area"></a>Yol şablonlarında belirteç değiştirme ([denetleyici], [eylem], [alan])
 
-Kolaylık sağlamak için, öznitelik rotaları, bir belirteç imal`[` `]`eden bir belirteç imal ederek *belirteç değiştirmeyi* destekler ( , ). `[action]`Belirteçler, `[area]`ve `[controller]` rota tanımlandığı eylemeylem eylem eylem adı, alan adı ve denetleyici adı değerleri ile değiştirilir. Aşağıdaki örnekte, eylemler yorumlarda açıklandığı gibi URL yollarla eşleşir:
+Daha kolay olması için, öznitelik rotaları bir belirteci köşeli ayraç (`[`, `]`) içine alarak *belirteç değiştirmeyi* destekler. , Ve `[action]` `[controller]` belirteçleri `[area]`, yolun tanımlandığı eylemden eylem adı, alan adı ve denetleyici adı değerleriyle değiştirilmiştir. Aşağıdaki örnekte, Eylemler, açıklamalarda açıklandığı gibi URL yollarıyla eşleşir:
 
 [!code-csharp[](routing/samples/2.x/main/Controllers/ProductsController.cs?range=7-11,13-17,20-22)]
 
-Belirteç değiştirme, öznitelik yollarını oluşturmanın son adımı olarak gerçekleşir. Yukarıdaki örnek aşağıdaki kodla aynı şekilde olacaktır:
+Belirteç değişikliği, öznitelik yollarının oluşturulması için son adım olarak gerçekleşir. Yukarıdaki örnek aşağıdaki kodla aynı şekilde davranır:
 
 [!code-csharp[](routing/samples/2.x/main/Controllers/ProductsController2.cs?range=7-11,13-17,20-22)]
 
-Öznitelik yolları da devralma ile birleştirilebilir. Bu özellikle belirteç değiştirme ile birlikte güçlüdür.
+Öznitelik rotaları de devralma ile birleştirilebilir. Bu özellikle, belirteç değiştirme ile güçlü bir şekilde birleştirilir.
 
 ```csharp
 [Route("api/[controller]")]
@@ -1242,9 +1242,9 @@ public class ProductsController : MyBaseController
 }
 ```
 
-Belirteç değiştirme, öznitelik yolları tarafından tanımlanan rota adları için de geçerlidir. `[Route("[controller]/[action]", Name="[controller]_[action]")]`her eylem için benzersiz bir rota adı oluşturur.
+Belirteç değişikliği, öznitelik rotaları tarafından tanımlanan yol adları için de geçerlidir. `[Route("[controller]/[action]", Name="[controller]_[action]")]`Her eylem için benzersiz bir yol adı üretir.
 
-Gerçek belirteç değiştirme delimiter `[` `]`maç veya , karakter (veya)`[[` `]]`tekrarlayarak kaçmak.
+Sabit belirteç `[` değiştirme sınırlayıcısıyla eşleştirmek için veya `]`karakteri tekrarlayarak (`[[` veya `]]`) bunu kaçış.
 
 ::: moniker-end
 
@@ -1252,14 +1252,14 @@ Gerçek belirteç değiştirme delimiter `[` `]`maç veya , karakter (veya)`[[` 
 
 <a name="routing-token-replacement-transformers-ref-label"></a>
 
-### <a name="use-a-parameter-transformer-to-customize-token-replacement"></a>Belirteç değiştirmesini özelleştirmek için parametre transformatörü kullanma
+### <a name="use-a-parameter-transformer-to-customize-token-replacement"></a>Belirteç değişimini özelleştirmek için bir parametre transformatörü kullanın
 
-Belirteç değiştirme parametre transformatörü kullanılarak özelleştirilebilir. Bir parametre transformatörü parametrelerin değerini uygular `IOutboundParameterTransformer` ve dönüştürür. Örneğin, özel `SlugifyParameterTransformer` bir parametre `SubscriptionManagement` transformatörü `subscription-management`rota değerini .
+Belirteç değiştirme, bir parametre transformatörü kullanılarak özelleştirilebilir. Bir parametre transformatörü, `IOutboundParameterTransformer` parametrelerinin değerini uygular ve dönüştürür. Örneğin, özel `SlugifyParameterTransformer` bir parametre transformatörü `SubscriptionManagement` rota değerini olarak `subscription-management`değiştirir.
 
-Bir `RouteTokenTransformerConvention` uygulama modeli kuralı:
+, `RouteTokenTransformerConvention` Şu şekilde bir uygulama modeli kuralıdır:
 
 * Bir uygulamadaki tüm öznitelik yollarına bir parametre transformatörü uygular.
-* Değiştirildikleri gibi öznitelik rotası belirteç değerlerini özelleştirin.
+* Öznitelik yol belirteci değerlerini değiştirildikleri gibi özelleştirir.
 
 ```csharp
 public class SubscriptionManagementController : Controller
@@ -1269,7 +1269,7 @@ public class SubscriptionManagementController : Controller
 }
 ```
 
-Bir `RouteTokenTransformerConvention` seçenek olarak `ConfigureServices`kaydedilir.
+, `RouteTokenTransformerConvention` ' `ConfigureServices`Da bir seçeneği olarak kaydedilir.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -1299,9 +1299,9 @@ public class SlugifyParameterTransformer : IOutboundParameterTransformer
 ::: moniker range="< aspnetcore-3.0"
 <a name="routing-multiple-routes-ref-label"></a>
 
-### <a name="multiple-routes"></a>Birden Fazla Rota
+### <a name="multiple-routes"></a>Birden çok yol
 
-Öznitelik yönlendirme, aynı eyleme ulaşan birden çok yol tanımlamayı destekler. Bunun en yaygın kullanımı, aşağıdaki örnekte gösterildiği gibi *varsayılan geleneksel rotanın* davranışını taklit etmektir:
+Öznitelik yönlendirme, aynı eyleme ulaşan birden çok yolun tanımlanmasını destekler. Bunun en yaygın kullanımları, aşağıdaki örnekte gösterildiği gibi *varsayılan geleneksel yolun* davranışını taklit etmek olur:
 
 ```csharp
 [Route("[controller]")]
@@ -1313,7 +1313,7 @@ public class ProductsController : Controller
 }
 ```
 
-Denetleyiciye birden çok yol öznitelikleri koymak, her birinin eylem yöntemlerindeki her bir rota öznitelikleriyle birleşeceği anlamına gelir.
+Denetleyiciye birden çok yol özniteliği koymak, her birinin eylem yöntemlerinde yol özniteliklerinin her biriyle birleşmesi anlamına gelir.
 
 ```csharp
 [Route("Store")]
@@ -1326,7 +1326,7 @@ public class ProductsController : Controller
 }
 ```
 
-Birden çok yol öznitelikleri (bu uygulama) `IActionConstraint`bir eylem ekikonulduğunda, her eylem kısıtlaması onu tanımlayan öznitelikten rota şablonuyla birleşir.
+Birden çok yol özniteliği (uygulayan `IActionConstraint`) bir eyleme yerleştirildiğinde, her eylem kısıtlaması, onu tanımlayan öznitelikten yol şablonuyla birleştirir.
 
 ```csharp
 [Route("api/[controller]")]
@@ -1339,13 +1339,13 @@ public class ProductsController : Controller
 ```
 
 > [!TIP]
-> Eylemler üzerinde birden çok yol kullanmak güçlü görünse de, uygulamanızın URL alanını basit ve iyi tanımlanmış tutmak daha iyidir. Örneğin, varolan istemcileri desteklemek için yalnızca gerektiğinde eylemlerde birden çok yol kullanın.
+> Eylemlerde birden çok yolun kullanılması güçlü görünse de, uygulamanızın URL alanının basit ve iyi tanımlanmış tutulması daha iyidir. Yalnızca gerektiğinde eylemler üzerinde birden çok yol kullanın, örneğin mevcut istemcileri desteklemek için.
 
 <a name="routing-attr-options"></a>
 
-### <a name="specifying-attribute-route-optional-parameters-default-values-and-constraints"></a>Öznitelik rotası isteğe bağlı parametreleri, varsayılan değerleri ve kısıtlamaları belirtme
+### <a name="specifying-attribute-route-optional-parameters-default-values-and-constraints"></a>Öznitelik rotası isteğe bağlı parametreler, varsayılan değerler ve kısıtlamalar belirtme
 
-Öznitelik yolları, isteğe bağlı parametreleri, varsayılan değerleri ve kısıtlamaları belirtmek için geleneksel yollarla aynı satır sıralı sözdizimini destekler.
+Öznitelik yolları, isteğe bağlı parametreleri, varsayılan değerleri ve kısıtlamaları belirtmek için geleneksel yollarla aynı satır içi sözdizimini destekler.
 
 ```csharp
 [HttpPost("product/{id:int}")]
@@ -1355,15 +1355,15 @@ public IActionResult ShowProduct(int id)
 }
 ```
 
-Rota şablonu sözdiziminin ayrıntılı bir açıklaması için [Rota Şablonu Başvurusu'na](xref:fundamentals/routing#route-template-reference) bakın.
+Yol şablonu sözdiziminin ayrıntılı açıklaması için bkz. [route Template Reference](xref:fundamentals/routing#route-template-reference) .
 
 <a name="routing-cust-rt-attr-irt-ref-label"></a>
 
-### <a name="custom-route-attributes-using-iroutetemplateprovider"></a>Özel rota öznitelikleri kullanarak`IRouteTemplateProvider`
+### <a name="custom-route-attributes-using-iroutetemplateprovider"></a>Kullanarak özel yol öznitelikleri`IRouteTemplateProvider`
 
-Çerçevede sağlanan tüm rota öznitelikleri (, `[Route(...)]`, `[HttpGet(...)]` `IRouteTemplateProvider` vb.) arabirimi uygular. MVC, uygulama başlatıldığında denetleyici sınıfları ve eylem yöntemleriyle `IRouteTemplateProvider` ilgili öznitelikleri arar ve ilk rota kümesini oluşturmak için uygulayanları kullanır.
+Çerçevede ( `[Route(...)]`, `[HttpGet(...)]` , vb.) sunulan tüm rota öznitelikleri, `IRouteTemplateProvider` arabirimini uygular. MVC, uygulama başlatıldığında denetleyici sınıflarında ve eylem yöntemlerinde öznitelikler arar ve ilk rota kümesini oluşturmak için uygulamalarını `IRouteTemplateProvider` kullanır.
 
-Kendi rota `IRouteTemplateProvider` özniteliklerinizi tanımlamak için uygulayabilirsiniz. Her `IRouteTemplateProvider` biri özel bir rota şablonu, sipariş ve ad ile tek bir rota tanımlamanızı sağlar:
+Kendi yol öznitelerinizi tanımlamak `IRouteTemplateProvider` için öğesini uygulayabilirsiniz. Her `IRouteTemplateProvider` biri, özel bir yol şablonu, sırası ve adı ile tek bir yol tanımlamanızı sağlar:
 
 ```csharp
 public class MyApiControllerAttribute : Attribute, IRouteTemplateProvider
@@ -1376,44 +1376,44 @@ public class MyApiControllerAttribute : Attribute, IRouteTemplateProvider
 }
 ```
 
-Yukarıdaki örnekteki öznitelik otomatik olarak `Template` `"api/[controller]"` ne `[MyApiController]` zaman uygulanacağı ayarlar.
+Yukarıdaki örnekteki özniteliği, `Template` `"api/[controller]"` ne zaman `[MyApiController]` uygulanacağını otomatik olarak olarak ayarlar.
 
 <a name="routing-app-model-ref-label"></a>
 
-### <a name="using-application-model-to-customize-attribute-routes"></a>Öznitelik yollarını özelleştirmek için Uygulama Modelini kullanma
+### <a name="using-application-model-to-customize-attribute-routes"></a>Öznitelik yollarını özelleştirmek için uygulama modelini kullanma
 
-*Uygulama modeli,* mvc tarafından eylemlerinizi yönlendirmek ve yürütmek için kullanılan tüm meta verilerle başlangıçta oluşturulan bir nesne modelidir. *Uygulama modeli,* rota özniteliklerinden (aracılığıyla) `IRouteTemplateProvider`toplanan tüm verileri içerir. Yönlendirmenin nasıl bir şekilde nasıl bir şekilde nasıl bir şekilde nasıl olduğunu özelleştirmek için başlangıç zamanında uygulama modelini değiştirmek için *kurallar* yazabilirsiniz. Bu bölümde, uygulama modelini kullanarak yönlendirme özelleştirme basit bir örnek gösterilmektedir.
+*Uygulama modeli* , MVC tarafından eylemlerinizi yönlendirmek ve yürütmek için kullanılan tüm meta veriler ile başlangıçta oluşturulan bir nesne modelidir. *Uygulama modeli* , yol özniteliklerinden (aracılığıyla `IRouteTemplateProvider`) toplanan tüm verileri içerir. Yönlendirme işleminin nasıl davranacağını özelleştirmek için, Başlangıç zamanında uygulama modelini değiştirmek üzere *kurallar* yazabilirsiniz. Bu bölümde, uygulama modeli kullanılarak yönlendirmeyi özelleştirmenin basit bir örneği gösterilmektedir.
 
 [!code-csharp[](routing/samples/2.x/main/NamespaceRoutingConvention.cs)]
 
 <a name="routing-mixed-ref-label"></a>
 
-## <a name="mixed-routing-attribute-routing-vs-conventional-routing"></a>Karışık yönlendirme: Atfetme yönlendirme vs konvansiyonel yönlendirme
+## <a name="mixed-routing-attribute-routing-vs-conventional-routing"></a>Karma yönlendirme: öznitelik yönlendirme vs geleneksel yönlendirme
 
-MVC uygulamaları geleneksel yönlendirme ve öznitelik yönlendirme kullanımını karıştırabilir. Tarayıcılar için HTML sayfaları sunan denetleyiciler için geleneksel rotalar kullanmak ve REST API'leri sunan denetleyiciler için yönlendirme özelliği kullanmak tipiktir.
+MVC uygulamaları, geleneksel yönlendirme ve öznitelik yönlendirmenin kullanımını karıştırabilir. Tarayıcılar için HTML sayfalarına hizmet veren denetleyiciler için geleneksel yollar ve REST API 'Lerine hizmet veren denetleyiciler için öznitelik yönlendirme kullanılması normaldir.
 
-Eylemler geleneksel olarak yönlendirilir veya öznitelik yönlendirilir. Denetleyiciye bir rota veya eylem yerleştirmek, rotayı bağlamasını sağlar. Öznitelik yollarını tanımlayan eylemlere geleneksel yollardan ve bunun tersi üzerinden ulaşılamıyor. Denetleyicideki **herhangi bir** rota özniteliği, denetleyici özniteliğindeki tüm eylemleri yönlendirilen yapar.
+Eylemler genel olarak Dolaştırılan veya Attribute olarak yönlendirilir. Bir yolu denetleyiciye koymak veya eylemi, BT özniteliği yönlendirilmesini sağlar. Öznitelik yollarını tanımlayan eylemlere geleneksel yollar üzerinden ulaşılamıyor ve bunun tersi de geçerlidir. Denetleyicideki **herhangi bir** rota özniteliği, denetleyici özniteliğindeki tüm eylemlerin yönlendirilmesini sağlar.
 
 > [!NOTE]
-> İki yönlendirme sistemi türünü diğerlerinden ayıran şey, bir URL rota şablonuyla eşleştikten sonra uygulanan işlemdir. Geleneksel yönlendirmede, eşleşmedeki rota değerleri, tüm geleneksel yönlendirilmiş eylemlerin bir arama tablosundan eylem ve denetleyiciyi seçmek için kullanılır. Öznitelik yönlendirmesinde, her şablon zaten bir eylemle ilişkilidir ve başka bir arama gerekmez.
+> İki tür yönlendirme sisteminin ayırt edilmesini ne kadar ayırt eden, bir URL bir yol şablonuyla eşleştirdikten sonra uygulanan işlemdir. Geleneksel yönlendirmesinde, eşleşmeden yol değerleri, tüm geleneksel yönlendirilmiş eylemlerin arama tablosundan eylemi ve denetleyiciyi seçmek için kullanılır. Öznitelik yönlendirmesinde, her şablon zaten bir eylemle ilişkilendirilir ve başka bir arama gerekmez.
 
 ## <a name="complex-segments"></a>Karmaşık segmentler
 
-Karmaşık segmentler (örneğin, `[Route("/dog{token}cat")]`), açgözlü olmayan bir şekilde sağdan sola literals eşleştirerek işlenir. Açıklamanın [kaynak koduna](https://github.com/aspnet/Routing/blob/9cea167cfac36cf034dbb780e3f783114ef94780/src/Microsoft.AspNetCore.Routing/Patterns/RoutePatternMatcher.cs#L296) bakın. Daha fazla bilgi için [bu soruna](https://github.com/dotnet/AspNetCore.Docs/issues/8197)bakın.
+Karmaşık segmentler (örneğin, `[Route("/dog{token}cat")]`), sabit değerli olmayan değişmez değer ile sağdan sola eşleştirilirken işlenir. Bir açıklama için bkz. [kaynak kodu](https://github.com/aspnet/Routing/blob/9cea167cfac36cf034dbb780e3f783114ef94780/src/Microsoft.AspNetCore.Routing/Patterns/RoutePatternMatcher.cs#L296) . Daha fazla bilgi için [Bu soruna](https://github.com/dotnet/AspNetCore.Docs/issues/8197)bakın.
 
 <a name="routing-url-gen-ref-label"></a>
 
-## <a name="url-generation"></a>URL Oluşturma
+## <a name="url-generation"></a>URL oluşturma
 
-MVC uygulamaları, eylemlere URL bağlantıları oluşturmak için yönlendirmenin URL oluşturma özelliklerini kullanabilir. URL'ler üretmek, kodlama URL'lerini ortadan kaldırarak kodunuzu daha sağlam ve korunabilir hale getirir. Bu bölüm, MVC tarafından sağlanan URL oluşturma özelliklerine odaklanır ve yalnızca URL oluşturmanın nasıl çalıştığına ilişkin temel bilgileri kapsar. URL oluşturmanın ayrıntılı bir açıklaması için [Yönlendirme'ye](xref:fundamentals/routing) bakın.
+MVC uygulamaları, eylemlere URL bağlantıları oluşturmak için yönlendirmenin URL oluşturma özelliklerini kullanabilir. URL oluşturma, kodlarınızın daha sağlam ve sürdürülebilir hale getirilmesi için sorunsuz kodlama URL 'Lerini ortadan kaldırır. Bu bölüm, MVC tarafından sunulan URL oluşturma özelliklerine odaklanır ve yalnızca URL oluşturmanın nasıl çalıştığına ilişkin temel bilgileri kapsar. URL oluşturma hakkında ayrıntılı bir açıklama için bkz. [yönlendirme](xref:fundamentals/routing) .
 
-Arabirim, `IUrlHelper` MVC ve URL üretimi için yönlendirme arasındaki altyapının altında yatan parçadır. Denetleyiciler, görünümler `IUrlHelper` ve görünüm `Url` bileşenleri nde özellik aracılığıyla kullanılabilir bir örnek bulacaksınız.
+`IUrlHelper` ARABIRIM, URL oluşturma için MVC ve yönlendirme arasındaki temel altyapı parçasıdır. Denetleyiciler, görünümler ve görünüm bileşenlerinde `IUrlHelper` `Url` özelliği aracılığıyla kullanılabilir bir örnek bulacaksınız.
 
-Bu örnekte, `IUrlHelper` arabirim `Controller.Url` başka bir eylem için bir URL oluşturmak için özellik üzerinden kullanılır.
+Bu örnekte `IUrlHelper` arabirim, başka bir eyleme YÖNELIK bir URL `Controller.Url` oluşturmak için özelliği aracılığıyla kullanılır.
 
 [!code-csharp[](routing/samples/2.x/main/Controllers/UrlGenerationController.cs?name=snippet_1)]
 
-Uygulama varsayılan geleneksel rotayı kullanıyorsa, `url` değişkenin değeri URL `/UrlGeneration/Destination`yol dizesi olacaktır. Bu URL yolu, geçerli istekteki (ortam değerleri) rota değerlerini, geçirilen değerlerle birleştirerek `Url.Action` ve bu değerleri rota şablonuna ikame ederek yönlendirilerek oluşturulur:
+Uygulama varsayılan geleneksel yolu kullanıyorsa, `url` DEĞIŞKENIN değeri URL yol dizesi `/UrlGeneration/Destination`olacaktır. Bu URL yolu, yönlendirme değerlerini, geçerli istekten (çevresel değerler), bu değerleri geçirilen değerlerle `Url.Action` ve bu değerlerin yol şablonuna geçirerek birleştirerek oluşturulur.
 
 ```
 ambient values: { controller = "UrlGeneration", action = "Source" }
@@ -1423,62 +1423,62 @@ route template: {controller}/{action}/{id?}
 result: /UrlGeneration/Destination
 ```
 
-Rota şablonundaki her rota parametresinin değeri, adları değerler ve ortam değerleriyle eşleştirerek ikame edilmiştir. Değeri olmayan bir rota parametresi varsa varsayılan bir değer kullanabilir veya isteğe bağlıysa atlanabilir (bu `id` örnekte olduğu gibi). Gerekli rota parametresi karşılık gelen bir değere sahip değilse, URL oluşturma başarısız olur. URL oluşturma bir rota için başarısız olursa, sonraki rota tüm yollar denenene veya eşleşme bulunana kadar denendi.
+Yol şablonundaki her bir rota parametresinin değeri, değerler ve ortam değerleri ile eşleşen adlara sahip olacak şekilde değiştirilir. Bir değere sahip olmayan bir rota parametresi, varsa varsayılan bir değer kullanabilir veya isteğe bağlı ise (Bu örnekte olduğu gibi `id` ) atlanır. Gerekli yol parametresinin karşılık gelen bir değeri yoksa, URL oluşturma başarısız olur. Bir yol için URL oluşturma başarısız olursa, tüm yollar Denenene veya bir eşleşme bulunana kadar sonraki yol denenir.
 
-`Url.Action` Yukarıdaki örnek, geleneksel yönlendirme yi varsayar, ancak URL oluşturma kavramları farklı olsa da öznitelik yönlendirmeile benzer şekilde çalışır. Geleneksel yönlendirme ile, rota değerleri bir şablonu genişletmek için kullanılır `controller` `action` ve rota değerleri için ve genellikle bu şablonda görünür - yönlendirme ile eşleşen URL'ler bir *kural kuralına*uygun olduğu için çalışır. Öznitelik yönlendirmesinde, rota değerlerinin `controller` `action` şablonda görünmesine izin verilmez ve bunun yerine hangi şablonun kullanılacağını aramak için kullanılır.
+`Url.Action` Yukarıdaki örneği geleneksel yönlendirmeyi varsayar, ancak URL oluşturma özniteliği farklı olsa da, öznitelik yönlendirme ile benzer şekilde çalışır. Geleneksel yönlendirme ile, bir şablonu genişletmek için yol değerleri kullanılır ve `controller` `action` genellikle bu şablonda görüntülenir. Bu, yönlendirme ile eşleşen URL 'ler bir *kurala*bağlı olduğundan, bu işe yarar. Öznitelik yönlendirmesinde, ve `controller` `action` için rota değerlerinin şablonda görünmesine izin verilmez; bunun yerine kullanılacak şablonu aramak için kullanılır.
 
-Bu örnek, öznitelik yönlendirme kullanır:
+Bu örnek öznitelik yönlendirme kullanır:
 
 [!code-csharp[](routing/samples/2.x/main/StartupUseMvc.cs?name=snippet_1)]
 
 [!code-csharp[](routing/samples/2.x/main/Controllers/UrlGenerationControllerAttr.cs?name=snippet_1)]
 
-MVC, yönlendirilen tüm eylemlerin bir arama tablosu oluşturur `controller` `action` ve URL oluşturma için kullanılacak rota şablonu seçmek için ve değerleri eşleşir. Yukarıdaki örnekte, `custom/url/to/destination` oluşturulur.
+MVC, `controller` tüm öznitelik yönlendirilmiş eylemlerinin bir arama tablosunu oluşturur ve URL oluşturma için kullanılacak `action` yol şablonunu seçmek için ve değerleriyle eşleştirecektir. Yukarıdaki `custom/url/to/destination` örnekte oluşturulur.
 
-### <a name="generating-urls-by-action-name"></a>Eylem adına göre URL oluşturma
+### <a name="generating-urls-by-action-name"></a>Eylem adına göre URL 'Leri oluşturma
 
-`Url.Action` (`IUrlHelper` . `Action`) ve ilgili tüm aşırı yüklemelerin tümü, bir denetleyici adı ve eylem adı belirterek neye bağlandığınızı belirtmek istediğiniz fikrine dayanır.
+`Url.Action` (`IUrlHelper` . `Action`) ve tüm ilgili aşırı yüklemeler, bir denetleyici adı ve eylem adı belirterek ne bağlandığınızı belirtmek istediğiniz fikri temel alır.
 
 > [!NOTE]
-> Kullanırken, `Url.Action`geçerli rota `controller` değerleri `action` sizin için belirtilir ve `controller` `action` sizin için belirtilir - değeri ve hem *ortam değerleri* **ve** *değerlerinin*bir parçasıdır. Yöntem, `Url.Action`her zaman geçerli `action` değerleri `controller` kullanır ve geçerli eyleme yönlendirir bir URL yolu oluşturur.
+> Kullanırken `Url.Action`, `controller` için geçerli yol değerleri ve `action` değeri için belirtilir `controller` ve `action` her iki *çevresel değerin* **ve** *değerin*bir parçasıdır. Yöntemi `Url.Action`her zaman ve `action` `controller` ' nin geçerli değerlerini KULLANıR ve geçerli eyleme yönlendiren bir URL yolu oluşturacaktır.
 
-Yönlendirme, URL oluştururken sağlamadığınız bilgileri doldurmak için ortam değerlerindeki değerleri kullanmaya çalışır. Rota gibi `{a}/{b}/{c}/{d}` bir rota ve `{ a = Alice, b = Bob, c = Carol, d = David }`ortam değerleri kullanarak, yönlendirme, tüm rota parametrelerinin bir değeri olduğundan, ek değer içermeyen bir URL oluşturmak için yeterli bilgiye sahiptir. Değeri `{ d = Donovan }`eklediyseniz, değer `{ d = David }` yoksayılır ve oluşturulan URL yolu `Alice/Bob/Carol/Donovan`.
+Yönlendirme, bir URL oluştururken sağlamadığınız bilgileri doldurmanızı sağlamak için çevresel değerlerde değerleri kullanmayı dener. Yönlendirme ve ortam değerleri `{a}/{b}/{c}/{d}` `{ a = Alice, b = Bob, c = Carol, d = David }`gibi bir yol kullanarak, yönlendirmenin tüm rota parametreleri bir değere sahip olduğundan, ek değer olmadan bir URL oluşturmak için yeterli bilgi vardır. Değeri `{ d = Donovan }`eklediyseniz değer `{ d = David }` yok sayılır ve oluşturulan URL yolu da olur. `Alice/Bob/Carol/Donovan`
 
 > [!WARNING]
-> URL yolları hiyerarşiktir. Yukarıdaki örnekte, değeri `{ c = Cheryl }`eklediyseniz, her iki `{ c = Carol, d = David }` değer de yoksayılır. Bu durumda artık bir değerimiz `d` kalmaz ve URL oluşturma başarısız olur. İstenilen değeri belirtmeniz `c` `d`gerekir ve .  Bu sorunu varsayılan rotayla vurmayı`{controller}/{action}/{id?}`bekleyebilirsiniz ( ) - ancak her `Url.Action` zaman açıkça bir `controller` `action` ve değer belirteceği gibi uygulamada bu davranışla nadiren karşılaşırsınız.
+> URL yolları hiyerarşiktir. Yukarıdaki örnekte, değerini `{ c = Cheryl }`eklediyseniz, her iki değer `{ c = Carol, d = David }` de yok sayılır. Bu durumda artık için `d` bir değer yoktur ve URL oluşturma başarısız olur. İstenen değerini `c` ve ' i `d`belirtmeniz gerekir.  Varsayılan yol`{controller}/{action}/{id?}`() ile bu soruna yaklaşmanız gerekebilir, ancak her zaman açıkça `Url.Action` bir `controller` ve `action` değeri belirtmek için uygulamada bu davranış hakkında nadiren karşılaşacaksınız.
 
-Daha uzun `Url.Action` aşırı yükler, rota parametreleri dışındaki değerler sağlamak `controller` `action`için ek bir *rota değerleri* nesnesi de alır. En sık bu gibi `id` `Url.Action("Buy", "Products", new { id = 17 })`kullanılır göreceksiniz . Kural değeri nesnesi kural *değerlerine* göre genellikle anonim bir `IDictionary<>` nesnedir, ancak aynı zamanda eski bir *.NET nesnesi*de olabilir. Rota parametreleri ile eşleşmeyen ek rota değerleri sorgu dizesinde konur.
+Daha uzun aşırı `Url.Action` yüklemeleri Ayrıca, `controller` ve `action`dışındaki rota parametreleri için değerler sağlamak üzere ek bir *yol değerleri* nesnesi de alır. Bunun en yaygın olarak bu `id` şekilde `Url.Action("Buy", "Products", new { id = 17 })`kullanıldığını görürsünüz. Kurala göre *yol değerleri* nesnesi genellikle anonim türdeki bir nesnedir, ancak bir `IDictionary<>` veya düz olarak *eski .net nesnesi*de olabilir. Yol parametreleriyle eşleşmeyen ek rota değerleri sorgu dizesine konur.
 
 [!code-csharp[](routing/samples/2.x/main/Controllers/TestController.cs)]
 
 > [!TIP]
-> Mutlak bir URL oluşturmak için, bir: `protocol``Url.Action("Buy", "Products", new { id = 17 }, protocol: Request.Scheme)`
+> Mutlak URL oluşturmak için şunu kabul eden bir aşırı yükleme kullanın `protocol`:`Url.Action("Buy", "Products", new { id = 17 }, protocol: Request.Scheme)`
 
 <a name="routing-gen-urls-route-ref-label"></a>
 
 ### <a name="generating-urls-by-route"></a>Rotaya göre URL oluşturma
 
-Yukarıdaki kod, denetleyici ve eylem adını geçerek bir URL oluşturmayı gösterdi. `IUrlHelper`aynı zamanda `Url.RouteUrl` yöntem ailesi sağlar. Bu yöntemler `Url.Action`, ancak geçerli değerleri `action` ve `controller` rota değerlerine kopyalamak yok benzer. En yaygın kullanım, genellikle bir denetleyici veya eylem adı *belirtmeden* URL'yi oluşturmak için belirli bir rotayı kullanmak üzere bir rota adı belirtmektir.
+Yukarıdaki kod, denetleyiciyi ve eylem adını geçirerek bir URL oluşturmayı göstermiştir. `IUrlHelper`Ayrıca Yöntem `Url.RouteUrl` ailesini de sağlar. Bu yöntemler öğesine `Url.Action`benzerdir, ancak geçerli değerlerini `action` ve `controller` yol değerlerini kopyalamalardır. En yaygın kullanım, genellikle bir denetleyici veya eylem *adı belirtmeden,* URL oluşturmak için belirli bir yolu kullanmak üzere bir yol adı belirtmektir.
 
 [!code-csharp[](routing/samples/2.x/main/Controllers/UrlGenerationControllerRouting.cs?name=snippet_1)]
 
 <a name="routing-gen-urls-html-ref-label"></a>
 
-### <a name="generating-urls-in-html"></a>HTML'de URL oluşturma
+### <a name="generating-urls-in-html"></a>HTML 'de URL oluşturma
 
-`IHtmlHelper``HtmlHelper` yöntemleri `Html.BeginForm` sağlar `Html.ActionLink` ve `<form>` oluşturmak `<a>` ve elemanları sırasıyla. Bu yöntemler `Url.Action` bir URL oluşturmak için yöntemi kullanır ve benzer bağımsız değişkenleri kabul ederler. Bunun `Url.RouteUrl` için `HtmlHelper` refakatçive `Html.BeginRouteForm` `Html.RouteLink` benzer işlevsellik vardır.
+`IHtmlHelper`, `HtmlHelper` `Html.BeginForm` ve `Html.ActionLink` `<form>` öğelerini sırasıyla oluşturmak ve oluşturmak için yöntemler sağlar. `<a>` Bu yöntemler bir URL `Url.Action` oluşturmak için yöntemini kullanır ve benzer bağımsız değişkenleri kabul ederler. İçin `Url.RouteUrl` `HtmlHelper` şirkeme `Html.BeginRouteForm` , ve `Html.RouteLink` benzer işlevlere sahiptir.
 
-`form` TagHelpers, TagHelper ve `<a>` TagHelper aracılığıyla URL'ler oluşturur. Bunların her `IUrlHelper` ikisi de bunların uygulanması için kullanılır. Daha fazla bilgi için [Formlarla Çalışma'ya](../views/working-with-forms.md) bakın.
+Taghelmakalar, `form` taghelper ve `<a>` taghelper aracılığıyla URL 'ler oluşturur. Bunların her ikisi de `IUrlHelper` kendi uygulamaları için kullanılır. Daha fazla bilgi için bkz. [formlarla çalışma](../views/working-with-forms.md) .
 
-İç görünümler, `IUrlHelper` yukarıda `Url` yer almayan herhangi bir özel URL nesli için özellik üzerinden kullanılabilir.
+Görünümler `IUrlHelper` içinde, yukarıda yer almayan herhangi BIR `Url` geçici URL oluşturma özelliği aracılığıyla kullanılabilir.
 
 <a name="routing-gen-urls-action-ref-label"></a>
 
-### <a name="generating-urls-in-action-results"></a>Eylem Sonuçlarında URL Oluşturma
+### <a name="generating-urls-in-action-results"></a>Eylem sonuçlarında URL oluşturma
 
-Yukarıdaki örnekler denetleyicide `IUrlHelper` kullanmayı gösterirken, denetleyicideki en yaygın kullanım eylem sonucunun bir parçası olarak bir URL oluşturmaktır.
+Yukarıdaki örnekler bir denetleyicide kullanılarak `IUrlHelper` gösteriliyor, ancak denetleyicideki en yaygın kullanım, bir eylem sonucunun parçası olarak bir URL oluşturmak olur.
 
-Ve `ControllerBase` `Controller` temel sınıflar, başka bir eyleme başvuran eylem sonuçları için kolaylık yöntemleri sağlar. Tipik bir kullanım, kullanıcı girdisini kabul ettikten sonra yeniden yönlendirmektir.
+Ve `ControllerBase` `Controller` temel sınıflar, başka bir eyleme başvuruda bulunan eylem sonuçları için kolay yöntemler sağlar. Tipik bir kullanım, Kullanıcı girişi kabul edildikten sonra yeniden yönlendirilmelidir.
 
 ```csharp
 public IActionResult Edit(int id, Customer customer)
@@ -1492,13 +1492,13 @@ public IActionResult Edit(int id, Customer customer)
 }
 ```
 
-Eylem sonuçları fabrika yöntemleri üzerinde `IUrlHelper`yöntemlere benzer bir desen izleyin.
+Eylem sonuçları Fabrika yöntemleri, üzerindeki `IUrlHelper`yöntemlere benzer bir model izler.
 
 <a name="routing-dedicated-ref-label"></a>
 
-### <a name="special-case-for-dedicated-conventional-routes"></a>Özel konvansiyonel rotalar için özel durum
+### <a name="special-case-for-dedicated-conventional-routes"></a>Adanmış geleneksel yollar için özel durum
 
-Konvansiyonel yönlendirme, özel bir *konvansiyonel rota*adı verilen özel bir rota tanımı türü kullanabilir. Aşağıdaki örnekte, adlı `blog` rota özel bir geleneksel rotadır.
+Geleneksel yönlendirme, *adanmış geleneksel yol*olarak adlandırılan özel bir yol tanımı türünü kullanabilir. Aşağıdaki örnekte, adlı `blog` yol ayrılmış bir geleneksel yoldur.
 
 ```csharp
 app.UseMvc(routes =>
@@ -1509,34 +1509,34 @@ app.UseMvc(routes =>
 });
 ```
 
-Bu rota tanımlarını `Url.Action("Index", "Home")` kullanarak, `default` rota `/` ile URL yolu oluşturur, ama neden? Rota değerlerinin `{ controller = Home, action = Index }` bir URL oluşturmak `blog`için yeterli olacağını tahmin edebilirsiniz ve sonuç . `/blog?action=Index&controller=Home`
+Bu yol tanımlarının `Url.Action("Index", "Home")` kullanılması, `/` `default` yol ile URL yolunu oluşturacak, ancak neden? Yol değerlerinin `{ controller = Home, action = Index }` bir URL `blog`oluşturmak için yeterli olacağını tahmin edebilirsiniz ve sonuç olur. `/blog?action=Index&controller=Home`
 
-Özel geleneksel rotalar, rotanın URL oluşturmayla "çok açgözlü" olmasını engelleyen karşılık gelen bir rota parametresi olmayan varsayılan değerlerin özel bir davranışına dayanır. Bu durumda varsayılan değerler `{ controller = Blog, action = Article }`, `controller` ve `action` ne ne de bir rota parametresi olarak görünür. Yönlendirme URL oluşturma gerçekleştirirken, sağlanan değerler varsayılan değerlerle eşleşmelidir. Değerler `blog` `{ controller = Home, action = Index }` eşleşmediği `{ controller = Blog, action = Article }`için URL oluşturma kullanımı başarısız olur. Yönlendirme sonra denemek `default`için geri düşer , hangi başarılı.
+Adanmış geleneksel yollar, URL oluşturmayla "çok Greedy" olmasını önleyen karşılık gelen bir yol parametresi olmayan varsayılan değerlerin özel bir davranışına bağımlıdır. Bu durumda `{ controller = Blog, action = Article }`, varsayılan değerler, `controller` ya `action` da yol parametresi olarak görünmez. Yönlendirme URL oluşturma işlemi gerçekleştirdiğinde, belirtilen değerler varsayılan değerlerle eşleşmelidir. Değerler `{ controller = Home, action = Index }` eşleşmediğinden `{ controller = Blog, action = Article }`, `blog` kullanılarak URL oluşturma başarısız olur. Sonra yeniden yönlendirme işlemi denemeye `default`geri döner ve başarılı olur.
 
 <a name="routing-areas-ref-label"></a>
 
 ## <a name="areas"></a>Alanlar
 
-[Alanlar,](areas.md) ilgili işlevselliği ayrı bir yönlendirme ad alanı (denetleyici eylemleri için) ve klasör yapısı (görünümler için) olarak bir gruba düzenlemek için kullanılan bir MVC özelliğidir. Alanları kullanmak, farklı *alanlara*sahip oldukları sürece, bir uygulamanın aynı ada sahip birden çok denetleyiciye sahip olmasını sağlar. Alanları kullanmak, `area` başka bir rota parametresi ekleyerek yönlendirme amacıyla bir `controller` `action`hiyerarşi oluşturur. Bu bölümde yönlendirmenin alanlarla nasıl etkileşimde olduğu tartışılır - alanların görünümlerle nasıl kullanıldığıyla ilgili ayrıntılar için [Alanlar'a](areas.md) bakın.
+[Bölgeler](areas.md) , ilgili işlevselliği ayrı bir yönlendirme-ad alanı (denetleyici eylemleri için) ve klasör yapısı (görünümler için) olarak bir grupla düzenlemek için kullanılan bir MVC özelliğidir. Alanların kullanılması, bir uygulamanın farklı *alanlara*sahip oldukları sürece aynı ada sahip birden çok denetleyicisi olmasına olanak sağlar. Alanların kullanılması, ve `area` `controller` `action`' ye başka bir rota parametresi ekleyerek yönlendirmenin amacı için bir hiyerarşi oluşturur. Bu bölüm, yönlendirmenin alanlarla nasıl etkileşime gireceğini tartışır. alanların görünümlerle nasıl kullanıldığı hakkında ayrıntılar için bkz. [alanlara](areas.md) bakın.
 
-Aşağıdaki örnekte, Varsayılan geleneksel rotayı ve adlı bir alan `Blog`için alan *rotasını* kullanacak Şekilde MVC yapılandırılır:
+Aşağıdaki örnek, MVC 'yi varsayılan geleneksel yolu ve adlı `Blog`bir alan için bir *alan yolu* kullanacak şekilde yapılandırır:
 
 [!code-csharp[](routing/samples/3.x/AreasRouting/Startup.cs?name=snippet1)]
 
-Bir URL yolu `/Manage/Users/AddUser`gibi eşleştirirken, ilk rota `{ area = Blog, controller = Users, action = AddUser }`rota değerlerini üretecektir. `area` Rota değeri için `area`varsayılan bir değer tarafından üretilen , aslında tarafından `MapAreaRoute` oluşturulan rota aşağıdakilere eşdeğerdir:
+Benzer `/Manage/Users/AddUser`bir URL yolu eşleştirilirken, ilk yol yol değerlerini `{ area = Blog, controller = Users, action = AddUser }`oluşturur. `area` Yol değeri, tarafından `MapAreaRoute` oluşturulan yolun aşağıdaki değere eşit olduğu aslında için `area`varsayılan bir değer tarafından üretilir:
 
 [!code-csharp[](routing/samples/3.x/AreasRouting/Startup.cs?name=snippet2)]
 
-`MapAreaRoute`bu durumda, `Blog`sağlanan alan adını kullanmak `area` için hem varsayılan değeri hem de kısıtlamayı kullanarak bir rota oluşturur. Varsayılan değer, rotanın her `{ area = Blog, ... }`zaman üretir, kısıtlama `{ area = Blog, ... }` URL oluşturma için değer gerektirir sağlar.
+`MapAreaRoute`Bu durumda `area` `Blog`, belirtilen alan adını kullanmak için hem varsayılan bir değer hem de kısıtlama kullanarak bir yol oluşturur. Varsayılan değer, yolun her zaman oluşturulmasını sağlar `{ area = Blog, ... }`, kısıtlama URL oluşturma için değeri `{ area = Blog, ... }` gerektirir.
 
 > [!TIP]
-> Konvansiyonel yönlendirme isteðe baðlð±r. Genel olarak, alanları olan rotalar, alanı olmayan rotalardan daha spesifik olduğundan, rota tablosuna daha erken yerleştirilmelidir.
+> Geleneksel yönlendirme sıra bağımlıdır. Genel olarak, alanlar içeren rotalar, alan olmayan rotalardan daha belirgin olduklarından daha önce rota tablosuna yerleştirilmelidir.
 
-Yukarıdaki örneği kullanarak, rota değerleri aşağıdaki eylemle eşleşir:
+Yukarıdaki örneği kullanarak, yol değerleri aşağıdaki eylemle eşleşir:
 
 [!code-csharp[](routing/samples/3.x/AreasRouting/Areas/Blog/Controllers/UsersController.cs)]
 
-Bir `AreaAttribute` denetleyiciyi bir alanın parçası olarak ifade eden şey, bu `Blog` denetleyicinin bölgede olduğunu söylüyoruz. Özniteliği olmayan `[Area]` denetleyiciler herhangi bir alanın üyesi değildir ve `area` rota değeri yönlendirme ile sağlandığında **eşleşmez.** Aşağıdaki örnekte, yalnızca listelenen ilk denetleyici rota `{ area = Blog, controller = Users, action = AddUser }`değerleriyle eşleşebilir.
+, `AreaAttribute` Bir alanın parçası olarak denetleyiciyi belirtir, bu denetleyicinin `Blog` alanında olduğunu varsayalım. Özniteliği olmayan denetleyiciler hiçbir alanın üyesi değildir ve `area` rota değeri yönlendirme tarafından sağlandığında **eşleşmeyecektir.** `[Area]` Aşağıdaki örnekte, yalnızca listelenen ilk denetleyici rota değerleriyle `{ area = Blog, controller = Users, action = AddUser }`eşleştirebilir.
 
 [!code-csharp[](routing/samples/3.x/AreasRouting/Areas/Blog/Controllers/UsersController.cs)]
 
@@ -1545,26 +1545,26 @@ Bir `AreaAttribute` denetleyiciyi bir alanın parçası olarak ifade eden şey, 
 [!code-csharp[](routing/samples/3.x/AreasRouting/Controllers/UsersController.cs)]
 
 > [!NOTE]
-> Her denetleyicinin ad alanı burada tamolarak gösterilir - aksi takdirde denetleyicilerin bir adlandırma çakışması olur ve derleyici hatası oluşturur. Sınıf ad alanlarının MVC'nin yönlendirmesi üzerinde hiçbir etkisi yoktur.
+> Her denetleyicinin ad alanı, tamamlanma için burada gösterilir. Aksi takdirde, denetleyicilerde adlandırma çakışması olur ve derleyici hatası oluşturur. Sınıf ad alanlarının MVC 'nin yönlendirme üzerinde hiçbir etkisi yoktur.
 
-İlk iki denetleyici alanların üyeleridir ve yalnızca ilgili alan adları `area` rota değeri tarafından sağlandığında eşleşir. Üçüncü denetleyici herhangi bir alanın üyesi değildir ve yalnızca yönlendirme `area` ile değer sağlanmadığı zaman eşleşebilir.
+İlk iki denetleyici alanların üyeleridir ve yalnızca ilgili alan adı `area` rota değeri tarafından sağlandığında eşleşir. Üçüncü denetleyici hiçbir alanın üyesi değildir ve yalnızca Yönlendirme tarafından hiçbir değer `area` sağlanmamışsa eşleşemez.
 
 > [!NOTE]
-> Hiçbir *değer*eşleştirme açısından, `area` değer yokluğu için `area` değer null veya boş dize sanki aynıdır.
+> Değer *olmadan*eşleşme açısından `area` değerin yokluğu değeri null ya da boş dize olarak `area` aynıdır.
 
-Bir alan içinde bir eylem yürütürken, rota değeri `area` URL oluşturma için kullanılacak yönlendirme için bir ortam *değeri* olarak kullanılabilir. Bu, varsayılan olarak alanların URL oluşturma için aşağıdaki örnekte gösterildiği gibi *yapışkan* davrandığı anlamına gelir.
+Bir alan içinde bir eylem yürütürken, için `area` rota DEĞERI, URL oluşturma için kullanılmak üzere yönlendirme için bir *ortam değeri* olarak kullanılabilir olacaktır. Bu, varsayılan olarak, aşağıdaki örnekte gösterildiği gibi, URL oluşturma için *yapışkan* olarak hareket ettiği anlamına gelir.
 [!code-csharp[](routing/samples/3.x/AreasRouting/Startup.cs?name=snippet3)]
 
 [!code-csharp[](routing/samples/3.x/AreasRouting/Areas/Duck/Controllers/UsersController.cs)]
 
 <a name="iactionconstraint-ref-label"></a>
 
-## <a name="understanding-iactionconstraint"></a>IActionConstraint'i Anlama
+## <a name="understanding-iactionconstraint"></a>Iactionconstraint 'i anlama
 
 > [!NOTE]
-> Bu bölüm, çerçeve içi ve MVC'nin yürütmek için nasıl bir eylem seçtiği konusunda derin bir dalıştır. Tipik bir uygulamanın özel bir`IActionConstraint`
+> Bu bölüm, Framework iç işlevleri hakkında ayrıntılı bir bakış ve MVC 'nin yürütülecek eylemi nasıl seçtiği. Tipik bir uygulamanın özel olması gerekmez`IActionConstraint`
 
-Arabirimi bilmiyorsanız `IActionConstraint` bile büyük olasılıkla zaten kullanmışsınızdır. Öznitelik `[HttpGet]` ve `[Http-VERB]` benzeri `IActionConstraint` öznitelikleri bir eylem yönteminin yürütülmesini sınırlamak için uygular.
+Arabirime tanıdık olmasanız bile büyük `IActionConstraint` olasılıkla zaten kullandık. Özniteliği `[HttpGet]` ve benzer `[Http-VERB]` öznitelikleri, bir `IActionConstraint` eylem yönteminin yürütülmesini sınırlandırmak için uygular.
 
 ```csharp
 public class ProductsController : Controller
@@ -1576,19 +1576,19 @@ public class ProductsController : Controller
 }
 ```
 
-Varsayılan geleneksel rotayı varsayarsak, URL `/Products/Edit` `{ controller = Products, action = Edit }`yolu burada gösterilen eylemlerin **her ikisiyle de** eşleşen değerleri üretir. Terminolojide, `IActionConstraint` bu eylemlerin her ikisinin de rota verileriyle eşleşeceği için aday olarak kabul edilir.
+Varsayılan geleneksel yol varsayılıyor, URL yolu `/Products/Edit` burada gösterilen eylemlerin `{ controller = Products, action = Edit }` **her ikisiyle de** eşleşen değerleri üretir. `IActionConstraint` Terminolojisinde, her ikisi de rota verileriyle eşleşen her iki eylemin da aday kabul edileceğini söyliyoruz.
 
-`HttpGetAttribute` Yürütüldüğünde, *Edit()* *GET* için bir maç olduğunu ve başka bir HTTP fiiliyle eşleşmediğini söyler. Eylem `Edit(...)` tanımlanan herhangi bir kısıtlama yok ve bu yüzden herhangi bir HTTP fiil eşleşecektir. Yani varsayarak - `POST` sadece `Edit(...)` maçlar. Ancak, her `GET` iki eylem için de hala eşleşebilir - ancak, bir `IActionConstraint` eylem her zaman olmadan bir eylem daha *iyi* olarak kabul edilir. Bu `Edit()` nedenle `[HttpGet]` daha spesifik olarak kabul edilir ve her iki eylem eşleşebilir eğer seçilecektir.
+Yürütüldüğünde, *Düzenle ()* , Get için bir eşleşmedir ve diğer http fiili için bir eşleşme değildir. *GET* `HttpGetAttribute` `Edit(...)` Eylemin tanımlı hiçbir kısıtlaması yok, bu nedenle HERHANGI bir http fiili ile eşleşir. Bu nedenle, `POST` yalnızca `Edit(...)` bir eşleşme olduğunu varsayıyoruz. Ancak, `GET` her iki eylem de eşleşemez, ancak bir eylem `IActionConstraint` , olmadan bir eylemden her zaman *daha iyi* kabul edilebilir. Bu nedenle `Edit()` , daha belirli bir kabul edildiğinden ve her iki eylem de eşleşeceğinden seçilecek. `[HttpGet]`
 
-Kavramsal olarak, `IActionConstraint` aşırı *yükleme*biçimidir, ancak aynı ada sahip aşırı yükleme yöntemleri yerine, aynı URL ile eşleşen eylemler arasında aşırı yükleme dir. Öznitelik yönlendirme de `IActionConstraint` kullanır ve farklı denetleyicileri her ikisi de aday olarak kabul edilen eylemleri neden olabilir.
+Kavramsal olarak `IActionConstraint` , bir *aşırı yükleme*biçimidir, ancak aynı ada sahip yöntemlerin AŞıRı yüklenmesi yerine aynı URL ile eşleşen eylemler arasında aşırı yükleme yapılır. Öznitelik yönlendirme Ayrıca `IActionConstraint` , farklı denetleyicilerle her ikisi de olarak kabul edilen eylemlere neden olabilir.
 
 <a name="iactionconstraint-impl-ref-label"></a>
 
-### <a name="implementing-iactionconstraint"></a>IActionConstraint'in Uygulanması
+### <a name="implementing-iactionconstraint"></a>Iactionconstraint uygulama
 
-Bir uygulamayı `IActionConstraint` uygulamanın en basit yolu, `System.Attribute` türetilen bir sınıf oluşturmak ve bunu eylemlerinizin ve denetleyicilerinizin üzerine yerleştirmektir. MVC, öznitelik `IActionConstraint` olarak uygulanan ları otomatik olarak keşfeder. Kısıtlamaları uygulamak için uygulama modelini kullanabilirsiniz ve bu, bunların nasıl uygulandığını meta programlamanıza olanak sağladığından büyük olasılıkla en esnek yaklaşımdır.
+' `IActionConstraint` Nin uygulanmasının en kolay yolu, ' dan `System.Attribute` türetilmiş bir sınıf oluşturmaktır ve bunları eylemleriniz ve denetleyicilerinize yerleştirmelidir. MVC, öznitelik olarak uygulanan `IActionConstraint` her türlü otomatik olarak keşfedilir. Kısıtlama uygulamak için uygulama modelini kullanabilirsiniz ve bu, büyük olasılıkla en esnek yaklaşımdır ve bu sayede, nasıl uygulanabileceğini meta programlayabilirsiniz.
 
-Aşağıdaki örnekte, bir kısıtlama rota verilerinden bir *ülke koduna* dayalı bir eylem seçer. [GitHub tam örnek](https://github.com/aspnet/Entropy/blob/master/samples/Mvc.ActionConstraintSample.Web/CountrySpecificAttribute.cs).
+Aşağıdaki örnekte, bir kısıtlama yol verilerinden bir *ülke kodunu* temel alan bir eylem seçer. [GitHub 'daki tam örnek](https://github.com/aspnet/Entropy/blob/master/samples/Mvc.ActionConstraintSample.Web/CountrySpecificAttribute.cs).
 
 ```csharp
 public class CountrySpecificAttribute : Attribute, IActionConstraint
@@ -1618,11 +1618,11 @@ public class CountrySpecificAttribute : Attribute, IActionConstraint
 }
 ```
 
-Yöntemi uygulamaktan ve `Accept` kısıtlamanın yürütülmesi için bir 'Sipariş' seçmekten siz sorumlusunuz. Bu durumda, `Accept` eylemi `true` belirtmek için yöntem döner `country` rota değeri eşleştiğinde bir eşleşmedir. Bu, atfedilmeyen bir eyleme geri dönüşe izin verdiği açısından farklıdır. `RouteValueAttribute` Örnek, bir `en-US` eylem tanımlarsanız, benzer `fr-FR` bir ülke kodunun uygulanmamış `[CountrySpecific(...)]` daha genel bir denetleyiciye geri döneceğini gösterir.
+`Accept` Yöntemi uygulamaktan ve kısıtlamanın yürütülmesi için bir ' Order ' seçmeye sorumlusunuz. Bu durumda, `Accept` yöntemi, `true` `country` yol değeri eşleştiğinde eylemin bir eşleşme olduğunu belirtmek için öğesini döndürür. Bu, öğesinden farklı bir `RouteValueAttribute` eyleme geri dönüş yapılmasına izin verir. Örnek, bir `en-US` eylem tanımlarsanız, gibi `fr-FR` bir ülke kodunun, `[CountrySpecific(...)]` uygulanmamış daha fazla genel denetleyiciye geri dönemeyeceğini gösterir.
 
-Özellik, `Order` kısıtlamanın hangi *aşamanın* parçası olduğuna karar verir. Eylem kısıtlamaları gruplar halinde `Order`çalışır. Örneğin, http yöntemi öznitelikleri sağlanan çerçevenin `Order` tümü aynı aşamada çalıştırmak için aynı değeri kullanın. İstediğiniz ilkeleri uygulamak için gereken kadar aşamanız olabilir.
+`Order` Özelliği kısıtlamanın parçası olan *aşamayı* belirler. Eylem kısıtlamaları, `Order`gruplarına göre gruplar içinde çalışır. Örneğin, tüm Framework tarafından sunulan HTTP yöntemi öznitelikleri aynı aşamada çalışacak şekilde aynı `Order` değeri kullanır. İstediğiniz ilkeleri uygulamak için ihtiyacınız olan çok sayıda aşamaya sahip olabilirsiniz.
 
 > [!TIP]
-> Kısıtlamanızın HTTP yöntemlerine önce uygulanıp uygulanmayacağı hakkında düşünmek için `Order` bir değer eve karar vermek. Önce daha düşük sayılar çalışır.
+> Bir değere karar vermek için, `Order` KıSıTLAMALARıNıZıN http yöntemlerinden önce uygulanıp uygulanmayacağı hakkında düşünün. Daha az sayı önce çalışır.
 
 ::: moniker-end
