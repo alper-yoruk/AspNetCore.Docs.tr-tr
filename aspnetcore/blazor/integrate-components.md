@@ -10,12 +10,12 @@ no-loc:
 - Blazor
 - SignalR
 uid: blazor/integrate-components
-ms.openlocfilehash: 282f96a4198d20b7fa38c186721b48ace5219ca6
-ms.sourcegitcommit: c6f5ea6397af2dd202632cf2be66fc30f3357bcc
+ms.openlocfilehash: 4e2103b7e8b65478808093d7a31e8cfe29b04984
+ms.sourcegitcommit: f9a5069577e8f7c53f8bcec9e13e117950f4f033
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/26/2020
-ms.locfileid: "82159612"
+ms.lasthandoff: 04/29/2020
+ms.locfileid: "82558909"
 ---
 # <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>ASP.NET Core Razor bileşenlerini Razor Pages ve MVC uygulamalarıyla tümleştirin
 
@@ -269,7 +269,7 @@ Aşağıdaki Razor sayfası bir `Counter` bileşeni işler:
 }
 ```
 
-Daha fazla bilgi için bkz. <xref:xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.
+Daha fazla bilgi için bkz. <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.
 
 ### <a name="render-noninteractive-components"></a>Etkileşimsiz bileşenleri işle
 
@@ -292,7 +292,7 @@ Aşağıdaki Razor sayfasında, `Counter` bileşen bir form kullanılarak belirt
 }
 ```
 
-Daha fazla bilgi için bkz. <xref:xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.
+Daha fazla bilgi için bkz. <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper>.
 
 ## <a name="component-namespaces"></a>Bileşen ad alanları
 

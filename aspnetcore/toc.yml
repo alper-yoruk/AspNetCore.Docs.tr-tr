@@ -348,7 +348,13 @@
                 - name: İlave senaryolar
                   uid: security/blazor/webassembly/additional-scenarios
             - name: Blazor Server
-              uid: security/blazor/server
+              items:
+                - name: Genel Bakış
+                  uid: security/blazor/server/index
+                - name: Tehdit azaltma
+                  uid: security/blazor/server/threat-mitigation
+                - name: İlave senaryolar
+                  uid: security/blazor/server/additional-scenarios
             - name: İçerik Güvenliği İlkesi
               uid: security/blazor/content-security-policy
         - name: Durum yönetimi
@@ -1135,7 +1141,13 @@
             - name: İlave senaryolar
               uid: security/blazor/webassembly/additional-scenarios
         - name: Blazor Server
-          uid: security/blazor/server
+          items:
+            - name: Genel Bakış
+              uid: security/blazor/server/index
+            - name: Tehdit azaltma
+              uid: security/blazor/server/threat-mitigation
+            - name: İlave senaryolar
+              uid: security/blazor/server/additional-scenarios
         - name: İçerik Güvenliği İlkesi
           uid: security/blazor/content-security-policy
 - name: Performans
