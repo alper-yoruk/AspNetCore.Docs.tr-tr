@@ -5,43 +5,43 @@ description: ASP.NET Core, Içerik teslim ağları (CDN Blazor ), dosya sunucula
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/23/2020
+ms.date: 04/30/2020
 no-loc:
 - Blazor
 - SignalR
 uid: host-and-deploy/blazor/webassembly
-ms.openlocfilehash: daaaab360e93de1cf10feec2db21d3acc25920bd
-ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
+ms.openlocfilehash: 2472fd499128a8807b76a3cc031d466140e180f5
+ms.sourcegitcommit: 23243f6d6a3100303802e4310b0634860cc0b268
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82110882"
+ms.lasthandoff: 05/01/2020
+ms.locfileid: "82619375"
 ---
-# <a name="host-and-deploy-aspnet-core-opno-locblazor-webassembly"></a>ASP.NET Core Blazor webassembly 'ı barındırma ve dağıtma
+# <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>Barındırma ve dağıtım ASP.NET Core Blazor WebAssembly
 
-[Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com), [Daniel Roth](https://github.com/danroth27)ve [ben Adams](https://twitter.com/ben_a_adams)tarafından.
+[Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com), [Daniel Roth](https://github.com/danroth27), [ben Adams](https://twitter.com/ben_a_adams)ve [Safia Abdalla](https://safia.rocks) tarafından
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Webassembly barındırma modeliyle: [ Blazor ](xref:blazor/hosting-models#blazor-webassembly)
+[Blazor WebAssembly barındırma modeliyle](xref:blazor/hosting-models#blazor-webassembly):
 
-* Blazor Uygulama, bağımlılıkları ve .NET çalışma zamanı, tarayıcıya paralel olarak indirilir.
+* Blazor uygulaması, bağımlılıkları ve .NET çalışma zamanı, tarayıcıya paralel olarak indirilir.
 * Uygulama doğrudan tarayıcı kullanıcı arabirimi iş parçacığında yürütülür.
 
 Aşağıdaki dağıtım stratejileri desteklenir:
 
-* Uygulama Blazor , bir ASP.NET Core uygulaması tarafından sunulur. Bu strateji [ASP.NET Core bölümünde barındırılan dağıtımda](#hosted-deployment-with-aspnet-core) ele alınmıştır.
-* Blazor Uygulama, bir statik barındırma Web sunucusuna veya hizmetine yerleştirilir, burada .net Blazor uygulamayı sunmak için kullanılmaz. Bu strateji [tek başına dağıtım](#standalone-deployment) bölümünde ele alınmıştır. Bu, bir Blazor WEBASSEMBLY uygulamasını bir IIS alt uygulaması olarak barındırma hakkında bilgiler içerir.
+* Blazor uygulaması, bir ASP.NET Core uygulaması tarafından sunulur. Bu strateji [ASP.NET Core bölümünde barındırılan dağıtımda](#hosted-deployment-with-aspnet-core) ele alınmıştır.
+* Blazor uygulaması, .NET, Blazor uygulamasına hizmet vermek için kullanılmayan bir statik barındırma Web sunucusuna veya hizmetine yerleştirilir. Bu strateji, bir Blazor WebAssembly uygulamasını IIS alt uygulaması olarak barındırma hakkında bilgi içeren [tek başına dağıtım](#standalone-deployment) bölümünde ele alınmıştır.
 
 ## <a name="brotli-precompression"></a>Brotli ön sıkıştırma
 
-Blazor Webassembly uygulaması yayımlandığında, çıkış en yüksek düzeydeki [Brotli sıkıştırma algoritması](https://tools.ietf.org/html/rfc7932) kullanılarak, uygulama boyutunu azaltmak ve çalışma zamanı sıkıştırması gereksinimini kaldırmak için önceden sıkıştırılır.
+Bir Blazor WebAssembly uygulaması yayımlandığında, çıkış en yüksek düzeydeki [Brotli sıkıştırma algoritması](https://tools.ietf.org/html/rfc7932) kullanılarak uygulama boyutunu azaltmak ve çalışma zamanı sıkıştırması gereksinimini kaldırmak için önceden sıkıştırılır.
 
 IIS *Web. config* sıkıştırma yapılandırması için [IIS: Brotli ve gzip sıkıştırma](#brotli-and-gzip-compression) bölümüne bakın.
 
 ## <a name="rewrite-urls-for-correct-routing"></a>Doğru yönlendirme için URL 'Leri yeniden yazın
 
-Blazor Webassembly uygulamasındaki sayfa bileşenlerine yönelik yönlendirme istekleri, sunucuda, barındırılan bir Blazor uygulamada yönlendirme istekleri kadar basittir. İki bileşeni Blazor olan bir webassembly uygulaması düşünün:
+Bir Blazor WebAssembly uygulamasındaki sayfa bileşenlerine yönelik yönlendirme istekleri, bir Blazor sunucusu barındırılan uygulamasındaki yönlendirme istekleri kadar basittir. İki bileşeni olan bir Blazor WebAssembly uygulaması düşünün:
 
 * *Main. Razor* &ndash; , uygulamanın köküne yüklenir ve `About` bileşene (`href="About"`) bir bağlantı içerir.
 * *. Razor* &ndash; `About` bileşeni hakkında.
@@ -51,21 +51,21 @@ Uygulamanın varsayılan belgesi, tarayıcının adres çubuğu kullanılarak is
 1. Tarayıcı bir istek yapar.
 1. Varsayılan sayfa döndürülür, bu genellikle *index. html*'dir.
 1. uygulamanın *index. html* önyükleme.
-1. Blazoruygulamasının yönlendirici yükleri ve Razor `Main` bileşeni işlenir.
+1. Blazor 'in yönlendirici yükleri ve Razor `Main` bileşeni işlenir.
 
-`About` Ana sayfada, Blazor yönlendirici tarayıcıyı `www.contoso.com` Internet 'te için bir istek yapmayı durdurduğundan `About` ve işlenmiş `About` bileşenin kendisini sunan ana sayfada, istemci üzerinde çalışır. Webassembly uygulamasındaki iç uç noktalara yönelik tüm istekler aynı şekilde çalışır: Istekler tarayıcı tabanlı istekleri Internet 'teki sunucu tarafından barındırılan kaynaklara tetiklemez. * Blazor * Yönlendirici istekleri dahili olarak işler.
+Ana sayfada, Blazor `About` yönlendiricisi tarayıcıyı Internet `www.contoso.com` 'te için bir istek yapmadan `About` ve işlenmiş `About` bileşenin kendisini görecek olduğundan, bileşen bağlantısını seçtiğinizde istemci üzerinde çalışır. *Blazor WebAssembly uygulamasındaki* iç uç noktalara yönelik tüm istekler aynı şekilde çalışır: istekler tarayıcı tabanlı istekleri Internet 'teki sunucu tarafından barındırılan kaynaklara tetiklemez. Yönlendirici istekleri dahili olarak işler.
 
 Tarayıcının adres çubuğu kullanılarak bir istek yapılırsa `www.contoso.com/About`, istek başarısız olur. Uygulamanın Internet ana bilgisayarında böyle bir kaynak yok, bu nedenle *404-bulunamayan* bir yanıt döndürülür.
 
-Tarayıcılar, istemci tarafı sayfaları için Internet tabanlı konaklara istek yaptığından, Web sunucuları ve barındırma hizmetleri, fiziksel olarak sunucu üzerinde olmayan kaynakların tüm isteklerini *Dizin. html* sayfasına yeniden yazmalıdır. *İndex. html* döndürüldüğünde, uygulamanın Blazor yönlendiricisi doğru kaynakla sürer ve yanıt verir.
+Tarayıcılar, istemci tarafı sayfaları için Internet tabanlı konaklara istek yaptığından, Web sunucuları ve barındırma hizmetleri, fiziksel olarak sunucu üzerinde olmayan kaynakların tüm isteklerini *Dizin. html* sayfasına yeniden yazmalıdır. *İndex. html* döndürüldüğünde, uygulamanın Blazor yönlendiricisi, doğru kaynakla yararlanır ve yanıt verir.
 
 Bir IIS sunucusuna dağıtım yaparken, URL yeniden yazma modülünü uygulamanın yayınlanan *Web. config* dosyasıyla birlikte kullanabilirsiniz. Daha fazla bilgi için [IIS](#iis) bölümüne bakın.
 
 ## <a name="hosted-deployment-with-aspnet-core"></a>ASP.NET Core ile barındırılan dağıtım
 
-*Barındırılan dağıtım* , Blazor webassembly uygulamasını web sunucusunda çalışan bir [ASP.NET Core](xref:index) uygulamasından tarayıcılara sunar.
+*Barındırılan bir dağıtım* , Web sunucusu üzerinde çalışan bir [ASP.NET Core](xref:index) uygulamasından tarayıcıları Blazor webassembly uygulamasına sunar.
 
-İstemci Blazor weelsembly uygulaması, sunucu UYGULAMASıNıN */bin/Release/{Target Framework}/Publish/Wwwroot* klasöründe, sunucu uygulamasının diğer statik Web varlıklarıyla birlikte yayımlanır. İki uygulama birlikte dağıtılır. ASP.NET Core uygulamasını barındırabilen bir Web sunucusu gereklidir. Barındırılan bir dağıtım için Visual Studio, **barındırılan** seçenek seçili`-ho|--hosted` olarak ( [DotNet yeni](/dotnet/core/tools/dotnet-new) komut kullanılırken`blazorwasm` şablon), ** Blazor webassembly uygulama** projesi şablonunu ( `dotnet new` komut kullanılırken) içerir.
+Client Blazor WebAssembly uygulaması sunucu uygulamasının */BIN/Release/{Target Framework}/Publish/Wwwroot* klasöründe, sunucu uygulamasının diğer statik Web varlıklarıyla birlikte yayımlanır. İki uygulama birlikte dağıtılır. ASP.NET Core uygulamasını barındırabilen bir Web sunucusu gereklidir. Barındırılan bir dağıtım için Visual Studio, **barındırılan** `-ho|--hosted` seçenek seçili olan (" `dotnet new` komut kullanılırken) **Blazor webassembly uygulama** projesi şablonunu (`blazorwasm` [DotNet yeni](/dotnet/core/tools/dotnet-new) komut kullanılırken şablon) içerir.
 
 Uygulama barındırma ve dağıtım ASP.NET Core hakkında daha fazla bilgi için bkz <xref:host-and-deploy/index>..
 
@@ -73,19 +73,19 @@ Azure App Service dağıtma hakkında daha fazla bilgi için bkz <xref:tutorials
 
 ## <a name="standalone-deployment"></a>Tek başına dağıtım
 
-*Tek başına dağıtım* , Blazor webassembly uygulamasına doğrudan istemciler tarafından istenen statik dosyalar kümesi olarak hizmet verir. Herhangi bir statik dosya sunucusu, Blazor uygulamayı sunabilir.
+*Tek başına dağıtım* , doğrudan istemciler tarafından istenen statik dosyalar kümesi olarak Blazor WebAssembly uygulamasına hizmet verir. Herhangi bir statik dosya sunucusu Blazor uygulamasını sunabilir.
 
 Tek başına dağıtım varlıkları */BIN/Release/{Target Framework}/Publish/Wwwroot* klasöründe yayımlanır.
 
 ### <a name="iis"></a>IIS
 
-IIS, uygulamalar için Blazor özellikli bir statik dosya sunucusudur. IIS 'yi barındıracak Blazorşekilde yapılandırmak için bkz. [IIS 'de statik Web sitesi oluşturma](/iis/manage/creating-websites/scenario-build-a-static-website-on-iis).
+IIS, Blazor uygulamaları için özellikli bir statik dosya sunucusudur. IIS 'yi Blazor barındıracak şekilde yapılandırmak için bkz. [IIS 'de statik Web sitesi oluşturma](/iis/manage/creating-websites/scenario-build-a-static-website-on-iis).
 
 Yayımlanan varlıklar */BIN/Release/{Target Framework}/Publish* klasöründe oluşturulur. Web sunucusunda veya barındırma hizmetinde *Yayımlama* klasörünün içeriğini barındırın.
 
 #### <a name="webconfig"></a>Web. config
 
-Bir Blazor proje yayımlandığında, aşağıdaki IIS yapılandırmasıyla bir *Web. config* dosyası oluşturulur:
+Bir Blazor projesi yayımlandığında, aşağıdaki IIS yapılandırmasıyla bir *Web. config* dosyası oluşturulur:
 
 * MIME türleri aşağıdaki dosya uzantıları için ayarlanır:
   * *. dll* &ndash;`application/octet-stream`
@@ -124,7 +124,7 @@ Tek başına bir uygulama bir IIS alt uygulaması olarak barındırılıyorsa, a
 
 * Devralınan ASP.NET Core modülü işleyicisini devre dışı bırakın.
 
-  Dosyaya bir Blazor `<handlers>` bölüm ekleyerek uygulamanın yayınlanan *Web. config* dosyasındaki işleyiciyi kaldırın:
+  Dosyaya bir `<handlers>` bölüm ekleyerek Blazor uygulamasının yayınlanan *Web. config* dosyasındaki işleyiciyi kaldırın:
 
   ```xml
   <handlers>
@@ -152,22 +152,22 @@ Tek başına bir uygulama bir IIS alt uygulaması olarak barındırılıyorsa, a
 
 #### <a name="brotli-and-gzip-compression"></a>Brotli ve gzip sıkıştırması
 
-IIS, *Web. config* aracılığıyla Brotli veya gzip sıkıştırılan Blazor varlıkları sunacak şekilde yapılandırılabilir. Örnek bir yapılandırma için bkz. [Web. config](webassembly/_samples/web.config?raw=true).
+IIS, *Web. config* aracılığıyla Brotli veya gzip sıkıştırılmış Blazor varlıklarını sunacak şekilde yapılandırılabilir. Örnek bir yapılandırma için bkz. [Web. config](webassembly/_samples/web.config?raw=true).
 
 #### <a name="troubleshooting"></a>Sorun giderme
 
-*500-Iç sunucu hatası* ALıNMıŞSA ve IIS Yöneticisi Web sitesinin yapılandırmasına erişmeye çalışırken hatalar OLUŞTURURSA, URL yeniden yazma modülünün yüklü olduğunu doğrulayın. Modül yüklü olmadığında, *Web. config* dosyası IIS tarafından ayrıştırılamaz. Bu, IIS yöneticisinin Web sitesinin yapılandırmasını ve Web sitesini, statik dosyaları hizmet Blazorolarak yüklemesini engeller.
+*500-Iç sunucu hatası* ALıNMıŞSA ve IIS Yöneticisi Web sitesinin yapılandırmasına erişmeye çalışırken hatalar OLUŞTURURSA, URL yeniden yazma modülünün yüklü olduğunu doğrulayın. Modül yüklü olmadığında, *Web. config* dosyası IIS tarafından ayrıştırılamaz. Bu, IIS yöneticisinin Web sitesinin yapılandırmasını ve Web sitesinin Blazor 'in statik dosyalarına hizmet etmesini engeller.
 
 IIS ile dağıtım sorunlarını giderme hakkında daha fazla bilgi için <xref:test/troubleshoot-azure-iis>bkz..
 
-### <a name="azure-storage"></a>Azure Storage
+### <a name="azure-storage"></a>Azure Depolama
 
-[Azure depolama](/azure/storage/) statik dosya barındırma, sunucusuz Blazor uygulama barındırmayı sağlar. Özel etki alanı adları, Azure Content Delivery Network (CDN) ve HTTPS desteklenir.
+[Azure depolama](/azure/storage/) statik dosya barındırma, sunucusuz Blazor uygulamasının barındırılmasına olanak sağlar. Özel etki alanı adları, Azure Content Delivery Network (CDN) ve HTTPS desteklenir.
 
 Blob hizmeti bir depolama hesabında barındırılan statik Web sitesi için etkinleştirildiğinde:
 
 * **Dizin belgesi adını** olarak `index.html`ayarlayın.
-* **Hata belge yolunu** olarak `index.html`ayarlayın. Razor bileşenleri ve diğer dosya olmayan uç noktaları, blob hizmeti tarafından depolanan statik içerikte fiziksel yollarda yer vermez. Blazor Yönlendiricinin işlemesi gereken bu kaynaklardan birine yönelik bir istek alındığında, blob hizmeti tarafından oluşturulan *404-bulunamayan* hata, isteği **hata belge yoluna**yönlendirir. *İndex. html* blobu döndürülür ve Blazor yönlendirici yolu yükler ve işler.
+* **Hata belge yolunu** olarak `index.html`ayarlayın. Razor bileşenleri ve diğer dosya olmayan uç noktaları, blob hizmeti tarafından depolanan statik içerikte fiziksel yollarda yer vermez. Blazor yönlendiricisinin işlemesi gereken bu kaynaklardan birine yönelik bir istek alındığında, blob hizmeti tarafından oluşturulan *404-bulunamayan* hata, isteği **hata belge yoluna**yönlendirir. *İndex. html* blobu döndürülür ve Blazor yönlendiricisi yolu yükler ve işler.
 
 Daha fazla bilgi için bkz. [Azure Storage 'Da statik Web sitesi barındırma](/azure/storage/blobs/storage-blob-static-website).
 
@@ -193,7 +193,7 @@ http {
 
 ### <a name="nginx-in-docker"></a>Docker 'da NGINX
 
-NGINX kullanarak Docker 'da barındırmak Blazor Için Dockerfile 'ı alp tabanlı NGINX görüntüsünü kullanacak şekilde ayarlayın. Dockerfile dosyasını, *NGINX. config* dosyasını kapsayıcıya kopyalamak için güncelleştirin.
+NGINX kullanarak Docker 'da Blazor barındırmak için Dockerfile 'ı alp tabanlı NGINX görüntüsünü kullanacak şekilde ayarlayın. Dockerfile dosyasını, *NGINX. config* dosyasını kapsayıcıya kopyalamak için güncelleştirin.
 
 Aşağıdaki örnekte gösterildiği gibi Dockerfile dosyasına bir satır ekleyin:
 
@@ -205,7 +205,7 @@ COPY nginx.conf /etc/nginx/nginx.conf
 
 ### <a name="apache"></a>Apache
 
-Cenelsembly Blazor uygulamasını CentOS 7 veya sonraki bir sürüme dağıtmak için:
+CentOS 7 veya sonraki bir Blazor WebAssembly uygulamasını dağıtmak için:
 
 1. Apache yapılandırma dosyasını oluşturun. Aşağıdaki örnek basitleştirilmiş bir yapılandırma dosyasıdır (*blazorapp. config*):
 
@@ -259,7 +259,7 @@ Bir kuruluş sitesi yerine bir proje sitesi kullanırken `<base>` etiketi *index
 
 ## <a name="host-configuration-values"></a>Ana bilgisayar yapılandırma değerleri
 
-Webassembly uygulamaları, geliştirme ortamındaki çalışma zamanında aşağıdaki ana bilgisayar yapılandırma değerlerini komut satırı bağımsız değişkenleri olarak kabul edebilir. [ Blazor ](xref:blazor/hosting-models#blazor-webassembly)
+[Blazor WebAssembly Apps](xref:blazor/hosting-models#blazor-webassembly) , geliştirme ortamındaki çalışma zamanında aşağıdaki ana bilgisayar yapılandırma değerlerini komut satırı bağımsız değişkenleri olarak kabul edebilir.
 
 ### <a name="content-root"></a>İçerik kökü
 
@@ -332,4 +332,73 @@ Bağımsız `--pathbase` değişkeni, kök olmayan GÖRELI bir URL yoluyla yerel
 
 ## <a name="configure-the-linker"></a>Bağlayıcıyı yapılandırma
 
-Blazorçıkış derlemelerinden gereksiz Il 'yi kaldırmak için her sürüm derlemesinde ara dil (IL) bağlamayı gerçekleştirir. Daha fazla bilgi için bkz. <xref:host-and-deploy/blazor/configure-linker>.
+Blazor, çıkış derlemelerinden gereksiz Il 'yi kaldırmak için her sürüm derlemesinde ara dil (IL) bağlamayı gerçekleştirir. Daha fazla bilgi için bkz. <xref:host-and-deploy/blazor/configure-linker>.
+
+## <a name="custom-boot-resource-loading"></a>Özel önyükleme kaynağı yükleme
+
+Yerleşik önyükleme kaynağı yükleme mekanizmasını geçersiz kılmak için `loadBootResource` işleviyle birlikte bir Blazor WebAssembly uygulaması başlatılabilir. Aşağıdaki `loadBootResource` senaryolar için kullanın:
+
+* Kullanıcıların bir CDN 'den saat dilimi verileri veya *DotNet. IStream* gibi statik kaynakları yüklemesine izin verin.
+* Bir HTTP isteği kullanarak sıkıştırılmış derlemeler yükleyin ve sunucudan sıkıştırılmış içerik getirmeyi desteklemeyen konaklar için istemcide sıkıştırmasını açın.
+* Her `fetch` isteği yeni bir ada yönlendirerek farklı bir ada diğer ad kaynakları.
+
+`loadBootResource`Parametreler aşağıdaki tabloda görüntülenir.
+
+| Parametre    | Açıklama |
+| ------------ | ----------- |
+| `type`       | Kaynağın türü. İzinleri olan türler: `assembly`, `pdb`, `dotnetjs`, `dotnetwasm`,`timezonedata` |
+| `name`       | Kaynağın adı. |
+| `defaultUri` | Kaynağın göreli veya mutlak URI 'SI. |
+| `integrity`  | Yanıtta beklenen içeriği temsil eden bütünlük dizesi. |
+
+`loadBootResource`yükleme işlemini geçersiz kılmak için aşağıdakilerden herhangi birini döndürür:
+
+* URI dizesi. Aşağıdaki örnekte (*Wwwroot/index.html*), aşağıdaki dosyalar ŞURADA `https://my-awesome-cdn.com/`bir CDN 'den sunulur:
+
+  * *olmalı. \*. js*
+  * *DotNet.*
+  * Saat dilimi verileri
+
+  ```html
+  ...
+
+  <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+  <script>
+    Blazor.start({
+      loadBootResource: function (type, name, defaultUri, integrity) {
+        console.log(`Loading: '${type}', '${name}', '${defaultUri}', '${integrity}'`);
+        switch (type) {
+          case 'dotnetjs':
+          case 'dotnetwasm':
+          case 'timezonedata':
+            return `https://my-awesome-cdn.com/blazorwebassembly/3.2.0/${name}`;
+        }
+      }
+    });
+  </script>
+  ```
+
+* `Promise<Response>`. Varsayılan bütünlük `integrity` denetimi davranışını korumak için parametreyi bir üstbilgiye geçirin.
+
+  Aşağıdaki örnek (*Wwwroot/index.html*) giden isteklere özel bir http üst bilgisi ekler ve `integrity` parametresini `fetch` çağrıya geçirir:
+  
+  ```html
+  <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+  <script>
+    Blazor.start({
+      loadBootResource: function (type, name, defaultUri, integrity) {
+        return fetch(defaultUri, { 
+          cache: 'no-cache',
+          integrity: integrity,
+          headers: { 'MyCustomHeader': 'My custom value' }
+        });
+      }
+    });
+  </script>
+  ```
+
+* `null`/`undefined`Bu, varsayılan yükleme davranışına neden olur.
+
+Dış kaynaklar, tarayıcılar arası kaynak yüklemeye izin vermek için gereken CORS üst bilgilerini döndürmelidir. CDNs, genellikle gerekli üst bilgileri varsayılan olarak sağlar.
+
+Yalnızca özel davranışlar için türleri belirtmeniz yeterlidir. İçin `loadBootResource` belirtilmemiş türler, varsayılan yükleme davranışları başına Framework tarafından yüklenir.

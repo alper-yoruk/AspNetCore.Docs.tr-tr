@@ -5,17 +5,17 @@ description: Webassembly ile SignalR Blazor ASP.NET Core kullanan bir sohbet uyg
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/23/2020
+ms.date: 04/30/2020
 no-loc:
 - Blazor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: 78c5fbb8b91b934bcb34525672e9e26b6a95290e
-ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
+ms.openlocfilehash: e86047c9a830cd3ea906d0798f61d90eaee5a18c
+ms.sourcegitcommit: 6318d2bdd63116e178c34492a904be85ec9ac108
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82111155"
+ms.lasthandoff: 04/30/2020
+ms.locfileid: "82604837"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Blazor WebAssembly ile ASP.NET Core SignalR kullanma
 
@@ -36,7 +36,7 @@ Bu öğreticinin sonunda, çalışan bir sohbet uygulamanız olacaktır.
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/signalr-blazor-webassembly/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -61,7 +61,7 @@ Bu öğreticinin sonunda, çalışan bir sohbet uygulamanız olacaktır.
 Visual Studio sürüm 16,6 Preview 2 veya sonraki bir sürümü kullanmadığınız durumlarda, [Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) şablonunu ' nı yükledikten sonra. [Microsoft. AspNetCore. components. WebAssembly. Templates](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Templates/) paketinin önizleme sürümü vardır, ancak Blazor WebAssembly önizlemededir. Bir komut kabuğunda, aşağıdaki komutu yürütün:
 
 ```dotnetcli
-dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview5.20216.8
+dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-rc1.20223.4
 ```
 
 Araç seçiminiz için yönergeleri izleyin:

@@ -5,14 +5,14 @@ description: ASP.NET Core projesindeki kimliği nasıl yapılandıracağınızı
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/15/2020
+ms.date: 5/1/2020
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: b3e077aeac11e62d9e992884100476f7be35b59a
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: ac95035b114274ddaa6ccb0b5b6e3da98885e39e
+ms.sourcegitcommit: 6318d2bdd63116e178c34492a904be85ec9ac108
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78663872"
+ms.lasthandoff: 04/30/2020
+ms.locfileid: "82604733"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>ASP.NET Core projelerinde yapı iskelesi kimliği
 
@@ -30,13 +30,25 @@ Dosya farklılıklarını gösteren ve değişikliklerden geri dönüş yapmanı
 
 [Iki öğeli kimlik doğrulaması](xref:security/authentication/identity-enable-qrcodes), [Hesap onaylama ve parola kurtarma](xref:security/authentication/accconfirm)ve kimlik ile diğer güvenlik özellikleri kullanılırken hizmetler gereklidir. Hizmet veya hizmet saplamaları, kimliğe iskele oluştururken oluşturulmaz. Bu özelliklerin etkinleştirilmesi için hizmetlerin el ile eklenmesi gerekir. Örneğin, bkz. [e-posta onayı gerektir](xref:security/authentication/accconfirm#require-email-confirmation).
 
-Bu belgede, scaffolder çalıştırılırken oluşturulan *Scaffoldingreadme. txt* dosyasından daha eksiksiz yönergeler bulunur.
+Yeni bir veri bağlamı olan kimliği, mevcut bireysel hesaplara sahip bir projeye dönüştürmek için:
+
+* İçinde `Startup.ConfigureServices`, şu çağrıları kaldırın:
+  * `AddDbContext`
+  * `AddDefaultIdentity`
+
+Örneğin, `AddDbContext` ve `AddDefaultIdentity` aşağıdaki kodda yorum yapılır:
+
+[!code-csharp[](scaffold-identity/3.1sample/StartupRemove.cs?name=snippet)]
+
+Önceki kod, *alanlarda/Identity/ıdentityhostingstartup. cs* dosyasında çoğaltılan kodu Yorumlar
+
+Genellikle, bireysel hesaplarla oluşturulan uygulamalar yeni bir veri bağlamı ***oluşturmamalıdır*** .
 
 ## <a name="scaffold-identity-into-an-empty-project"></a>Boş bir projede yapı iskelesi kimliği
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-`Startup` sınıfını aşağıdakine benzer kodla güncelleştirin:
+`Startup` Sınıfını aşağıdakine benzer kodla güncelleştirin:
 
 [!code-csharp[](scaffold-identity/3.1sample/StartupMVC.cs?name=snippet)]
 
@@ -85,7 +97,7 @@ Kimlik, */kimlik/ıdentityhostingstartup. cs alanlarında*yapılandırılır. da
 
 ### <a name="enable-authentication"></a>Kimlik doğrulamasını etkinleştir
 
-`Startup` sınıfını aşağıdakine benzer kodla güncelleştirin:
+`Startup` Sınıfını aşağıdakine benzer kodla güncelleştirin:
 
 [!code-csharp[](scaffold-identity/3.1sample/StartupRP.cs?name=snippet)]
 
@@ -93,7 +105,7 @@ Kimlik, */kimlik/ıdentityhostingstartup. cs alanlarında*yapılandırılır. da
 
 ### <a name="layout-changes"></a>Düzen değişiklikleri
 
-İsteğe bağlı: (`_LoginPartial`) oturum açma bölümünü düzen dosyasına ekleyin:
+İsteğe bağlı: (`_LoginPartial`) oturum açma bilgilerini düzen dosyasına ekleyin:
 
 [!code-html[Main](scaffold-identity/3.1sample/_Layout.cshtml?highlight=20)]
 
@@ -111,7 +123,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 -->
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
-Bazı kimlik seçenekleri */Identity/ıdentityhostingstartup. cs alanlarında*yapılandırılır. daha fazla bilgi için bkz. [ıhostingstartup](xref:fundamentals/configuration/platform-specific-configuration).
+Bazı kimlik seçenekleri */Identity/ıdentityhostingstartup. cs alanlarında*yapılandırılır. Daha fazla bilgi için bkz. [ıhostingstartup](xref:fundamentals/configuration/platform-specific-configuration).
 
 ## <a name="scaffold-identity-into-an-mvc-project-without-existing-authorization"></a>Var olan yetkilendirme olmadan bir MVC projesinde kimlik oluşturma kimliği
 
@@ -131,7 +143,7 @@ dotnet ef database update
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-İsteğe bağlı: (`_LoginPartial`) öğesini *Görünümler/Shared/_Layout. cshtml* dosyasına ekleyin:
+İsteğe bağlı: bir Login (`_LoginPartial`) öğesini *views/Shared/_Layout. cshtml* dosyasına ekleyin:
 
 [!code-html[Main](scaffold-identity/3.1sample/_Layout.cshtml?highlight=20)]
 
@@ -141,7 +153,7 @@ Kimlik, */kimlik/ıdentityhostingstartup. cs alanlarında*yapılandırılır. Da
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
-`Startup` sınıfını aşağıdakine benzer kodla güncelleştirin:
+`Startup` Sınıfını aşağıdakine benzer kodla güncelleştirin:
 
 [!code-csharp[](scaffold-identity/3.1sample/StartupMVC.cs?name=snippet)]
 
@@ -177,7 +189,7 @@ Aşağıdaki kod, [Loginpath](/dotnet/api/microsoft.aspnetcore.authentication.co
 
 [!code-csharp[](scaffold-identity/sample/StartupFull.cs?name=snippet3)]
 
-Bir `IEmailSender` uygulamasını kaydedin, örneğin:
+Bir `IEmailSender` uygulamayı kaydedin, örneğin:
 
 [!code-csharp[](scaffold-identity/sample/StartupFull.cs?name=snippet4)]
 
@@ -195,7 +207,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 Kullanıcı kaydını devre dışı bırakmak için:
 
-* Yapı iskelesi kimliği. Account. Register, Account. Login ve account. RegisterConfirmation bilgilerini ekleyin. Örnek:
+* Yapı iskelesi kimliği. Account. Register, Account. Login ve account. RegisterConfirmation bilgilerini ekleyin. Örneğin:
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
@@ -222,7 +234,7 @@ Kullanıcı kaydını devre dışı bırakmak için:
 * *Bölgeler/kimlik/sayfalar/hesap/RegisterConfirmation* sayfasını güncelleştirin.
 
   * Cshtml dosyasındaki kodu ve bağlantıları kaldırın.
-  * `PageModel`onay kodunu kaldırın:
+  * Onay kodunu şuradan kaldırın `PageModel`:
 
   ```csharp
    [AllowAnonymous]
@@ -259,7 +271,7 @@ Aşağıdaki kod, bir kullanıcı ekleme ana hatlarıyla verilmiştir:
 
 ## <a name="prevent-publish-of-static-identity-assets"></a>Statik kimlik varlıklarının yayımlanmasını engelle
 
-Statik kimlik varlıklarının Web köküne yayımlanmasını engellemek için bkz. <xref:security/authentication/identity#prevent-publish-of-static-identity-assets>.
+Statik kimlik varlıklarının Web köküne yayımlanmasını engellemek için bkz <xref:security/authentication/identity#prevent-publish-of-static-identity-assets>..
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
@@ -327,7 +339,7 @@ Kimlik, */kimlik/ıdentityhostingstartup. cs alanlarında*yapılandırılır. da
 
 ### <a name="enable-authentication"></a>Kimlik doğrulamasını etkinleştir
 
-`Startup` sınıfının `Configure` yönteminde `UseStaticFiles`sonra [UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) ' ı çağırın:
+`Startup` Sınıfının `Configure` yönteminde, sonrasında `UseStaticFiles` [UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) ' ı çağırın:
 
 [!code-csharp[](scaffold-identity/sample/StartupRPnoAuth.cs?name=snippet1&highlight=29)]
 
@@ -335,7 +347,7 @@ Kimlik, */kimlik/ıdentityhostingstartup. cs alanlarında*yapılandırılır. da
 
 ### <a name="layout-changes"></a>Düzen değişiklikleri
 
-İsteğe bağlı: (`_LoginPartial`) oturum açma bölümünü düzen dosyasına ekleyin:
+İsteğe bağlı: (`_LoginPartial`) oturum açma bilgilerini düzen dosyasına ekleyin:
 
 [!code-html[Main](scaffold-identity/sample/_Layout.cshtml?highlight=37)]
 
@@ -353,7 +365,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 -->
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
-Bazı kimlik seçenekleri */Identity/ıdentityhostingstartup. cs alanlarında*yapılandırılır. daha fazla bilgi için bkz. [ıhostingstartup](xref:fundamentals/configuration/platform-specific-configuration).
+Bazı kimlik seçenekleri */Identity/ıdentityhostingstartup. cs alanlarında*yapılandırılır. Daha fazla bilgi için bkz. [ıhostingstartup](xref:fundamentals/configuration/platform-specific-configuration).
 
 ## <a name="scaffold-identity-into-an-mvc-project-without-existing-authorization"></a>Var olan yetkilendirme olmadan bir MVC projesinde kimlik oluşturma kimliği
 
@@ -373,7 +385,7 @@ dotnet ef database update
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-İsteğe bağlı: (`_LoginPartial`) öğesini *Görünümler/Shared/_Layout. cshtml* dosyasına ekleyin:
+İsteğe bağlı: bir Login (`_LoginPartial`) öğesini *views/Shared/_Layout. cshtml* dosyasına ekleyin:
 
 [!code-html[](scaffold-identity/sample/_LayoutMvc.cshtml?highlight=37)]
 
@@ -383,7 +395,7 @@ Kimlik, */kimlik/ıdentityhostingstartup. cs alanlarında*yapılandırılır. Da
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
-`UseStaticFiles`sonra [UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) 'ı çağır:
+Şu tarihten sonra `UseStaticFiles` [UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) çağrısı:
 
 [!code-csharp[](scaffold-identity/sample/StartupMvcNoAuth.cs?name=snippet1&highlight=23)]
 
@@ -421,7 +433,7 @@ Aşağıdaki kod, [Loginpath](/dotnet/api/microsoft.aspnetcore.authentication.co
 
 [!code-csharp[](scaffold-identity/sample/StartupFull.cs?name=snippet3)]
 
-Bir `IEmailSender` uygulamasını kaydedin, örneğin:
+Bir `IEmailSender` uygulamayı kaydedin, örneğin:
 
 [!code-csharp[](scaffold-identity/sample/StartupFull.cs?name=snippet4)]
 
@@ -439,7 +451,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 Kullanıcı kaydını devre dışı bırakmak için:
 
-* Yapı iskelesi kimliği. Account. Register, Account. Login ve account. RegisterConfirmation bilgilerini ekleyin. Örnek:
+* Yapı iskelesi kimliği. Account. Register, Account. Login ve account. RegisterConfirmation bilgilerini ekleyin. Örneğin:
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
@@ -466,7 +478,7 @@ Kullanıcı kaydını devre dışı bırakmak için:
 * *Bölgeler/kimlik/sayfalar/hesap/RegisterConfirmation* sayfasını güncelleştirin.
 
   * Cshtml dosyasındaki kodu ve bağlantıları kaldırın.
-  * `PageModel`onay kodunu kaldırın:
+  * Onay kodunu şuradan kaldırın `PageModel`:
 
   ```csharp
    [AllowAnonymous]

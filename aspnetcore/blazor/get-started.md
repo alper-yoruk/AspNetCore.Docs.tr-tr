@@ -5,17 +5,17 @@ description: Tercih ettiğiniz araç Blazor ile Blazor uygulama oluşturarak ba�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/16/2020
+ms.date: 04/30/2020
 no-loc:
 - Blazor
 - SignalR
 uid: blazor/get-started
-ms.openlocfilehash: 2f10b00adce31c020d46d107c087159c17341beb
-ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
+ms.openlocfilehash: 8ef55b92c45aa07113fd4601a3c7464b42125623
+ms.sourcegitcommit: 6318d2bdd63116e178c34492a904be85ec9ac108
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82111077"
+ms.lasthandoff: 04/30/2020
+ms.locfileid: "82604772"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>ASP.NET Core Blazor kullanmaya başlama
 
@@ -36,7 +36,7 @@ Blazor kullanmaya başlamak için araç seçiminiz için yönergeleri izleyin:
 1. Aşağıdaki komutu çalıştırarak [Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) önizleme şablonunu yüklemelisiniz:
 
    ```dotnetcli
-   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview5.20216.8
+   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-rc1.20223.4
    ```
 
 1. Yeni bir proje oluşturma.
@@ -56,7 +56,7 @@ Blazor kullanmaya başlamak için araç seçiminiz için yönergeleri izleyin:
 1. İsteğe bağlı olarak, aşağıdaki komutu çalıştırarak [Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) önizleme şablonunu yükler:
 
    ```dotnetcli
-   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview5.20216.8
+   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-rc1.20223.4
    ```
 
    > [!NOTE]
@@ -98,19 +98,19 @@ Blazor sunucusu Mac için Visual Studio desteklenir. Blazor WebAssembly Şu anda
 
 1. **Dosya** > **yeni çözüm** ' ı seçin veya **Yeni bir proje**oluşturun.
 
-1. Kenar çubuğunda **.NET Core** > **uygulaması**' nı seçin.
+1. Yan çubukta **Web ve konsol** > **uygulaması**' nı seçin.
 
-1. **Blazor Server uygulama** şablonunu seçin. **Oluştur**’u seçin.
+1. **Blazor Server uygulama** şablonunu seçin. **İleri**’yi seçin.
 
    Blazor sunucusu barındırma modeli hakkında daha fazla bilgi için bkz <xref:blazor/hosting-models>..
 
-1. **Hedef Framework 'ü** **.NET Core 3,1** olarak ayarlayın ve **İleri ' yi**seçin.
+1. **Hedef Framework 'ün** **.NET Core 3,1** olarak ayarlandığını doğrulayın ve **İleri ' yi**seçin.
 
 1. **Proje adı** alanında, uygulamayı `WebApplication1`adlandırın. **Oluştur**’u seçin.
 
-1. Uygulamayı hata *ayıklayıcı olmadan*çalıştırmak için**hata ayıklama olmadan** **Çalıştır ' ı seçin.** >  Uygulamayı hata *ayıklayıcıyla*çalıştırmak Için, **hata ayıklamayı Başlat** ile uygulamayı çalıştırın.
+1. Uygulamayı hata *ayıklayıcı olmadan*çalıştırmak için**hata ayıklama olmadan** **Çalıştır ' ı seçin.** >  Uygulamayı hata *ayıklayıcıyla*çalıştırmak Için, **hata ayıklamayı Başlat** veya Çalıştır (&#9654;) düğmesini kullanarak uygulamayı çalıştırın.
 
-Geliştirme sertifikasına güvenmek için bir istem görünürse, sertifikaya güvenin ve devam edin.
+Geliştirme sertifikasına güvenmek için bir istem görünürse, sertifikaya güvenin ve devam edin. Sertifikaya güvenmek için Kullanıcı ve anahtarlık parolaların olması gerekir.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
@@ -119,7 +119,7 @@ Geliştirme sertifikasına güvenmek için bir istem görünürse, sertifikaya g
 1. İsteğe bağlı olarak, aşağıdaki komutu çalıştırarak [Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) önizleme şablonunu yükler:
 
    ```dotnetcli
-   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-preview5.20216.8
+   dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-rc1.20223.4
    ```
 
    > [!NOTE]
