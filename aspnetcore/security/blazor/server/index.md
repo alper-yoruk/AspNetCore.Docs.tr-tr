@@ -5,17 +5,17 @@ description: Sunucu uygulamalarının ASP.NET Core uygulamalar Blazor olarak nas
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/27/2020
+ms.date: 05/02/2020
 no-loc:
 - Blazor
 - SignalR
 uid: security/blazor/server/index
-ms.openlocfilehash: 0021911b731e57bc6eabf857c27a13462e7400ae
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 324b3e8ed2d931c81bb41381caa469b0ec2f2fda
+ms.sourcegitcommit: c19e388c83c981232e6f128d97440262adfe06e2
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206370"
+ms.lasthandoff: 05/02/2020
+ms.locfileid: "82727807"
 ---
 # <a name="secure-aspnet-core-blazor-server-apps"></a>Güvenli ASP.NET Core Blazor Server uygulamaları
 
@@ -101,3 +101,7 @@ Bu `-o|--output` seçeneği kullanarak, komut `{APP NAME}` yer tutucusu için be
 Daha fazla bilgi için .NET Core kılavuzundaki [DotNet New](/dotnet/core/tools/dotnet-new) komutuna bakın.
 
 ---
+
+## <a name="secure-an-existing-app"></a>Mevcut bir uygulamanın güvenliğini sağlama
+
+BlazorSunucu uygulamaları güvenlik için ASP.NET Core uygulamalarla aynı şekilde yapılandırılır. Daha fazla bilgi için, altındaki <xref:security/index>makalelere bakın.
