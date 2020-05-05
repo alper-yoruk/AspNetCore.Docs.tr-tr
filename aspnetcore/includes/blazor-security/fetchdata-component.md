@@ -5,7 +5,7 @@
 
 `@attribute [Authorize]` Yönerge, kullanıcının bu bileşeni ziyaret etmek için yetkilendirilmiş olması gereken Blazor WebAssembly yetkilendirme sistemine işaret ediyor. *İstemci* uygulamasındaki özniteliğin varlığı, sunucudaki API 'nin doğru kimlik bilgileri olmadan çağrılmasına engel olmaz. *Sunucu* uygulamasının aynı zamanda uygun uç `[Authorize]` noktalar üzerinde doğru korunması için kullanması gerekir.
 
-`AuthenticationService.RequestAccessToken();`API 'yi çağırmak için isteğe eklenebilen bir erişim belirteci isteme işlemini gerçekleştirir. Belirteç önbelleğe alınmışsa veya hizmet Kullanıcı etkileşimi olmadan yeni bir erişim belirteci sağlayabiliyor ise, belirteç isteği başarılı olur. Aksi takdirde, belirteç isteği başarısız olur.
+`IAccessTokenProvider.RequestAccessToken();`API 'yi çağırmak için isteğe eklenebilen bir erişim belirteci isteme işlemini gerçekleştirir. Belirteç önbelleğe alınmışsa veya hizmet Kullanıcı etkileşimi olmadan yeni bir erişim belirteci sağlayabiliyor ise, belirteç isteği başarılı olur. Aksi takdirde, belirteç isteği bir `AccessTokenNotAvailableException` `try-catch` bildirimde yakalanabilecek bir hata ile başarısız olur.
 
 İsteğe dahil edilecek gerçek belirteci almak için, uygulamanın çağırarak `tokenResult.TryGetToken(out var token)`isteğin başarılı olduğunu denetlemesi gerekir. 
 

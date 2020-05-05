@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core SignalR günlüğe kaydetme ve tanılama
+title: ASP.NET Core 'de günlüğe kaydetme ve tanılamaSignalR
 author: anurse
 description: ASP.NET Core SignalR uygulamanızdan tanılamayı nasıl toplayacağınızı öğrenin.
 monikerRange: '>= aspnetcore-2.1'
@@ -7,14 +7,18 @@ ms.author: anurse
 ms.custom: signalr
 ms.date: 11/12/2019
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: c5bd2ac27f8ca486b0d75aed8439747f72448625
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 5fda458c2418c3570d55d551ce5144730afd7f85
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78660974"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767232"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>ASP.NET Core SignalR 'de günlüğe kaydetme ve tanılama
 
@@ -31,14 +35,14 @@ SignalR ASP.NET Core bir parçası olduğundan, ASP.NET Core günlük sistemini 
 
 SignalR iki günlükçü kategorisi kullanır:
 
-* Merkez protokolleriyle ilgili Günlükler için `Microsoft.AspNetCore.SignalR`, hub 'Ları etkinleştirme, yöntemleri çağırma ve hub ile ilgili diğer etkinlikler için &ndash;.
-* WebSockets, uzun yoklama ve sunucu tarafından gönderilen olaylar ve alt düzey SignalR altyapısı gibi aktarımlarıyla ilgili Günlükler için `Microsoft.AspNetCore.Http.Connections` &ndash;.
+* `Microsoft.AspNetCore.SignalR`&ndash; Merkez protokolleriyle ilgili Günlükler Için, hub 'ları etkinleştirme, yöntemleri çağırma ve hub ile ilgili diğer etkinlikler için.
+* `Microsoft.AspNetCore.Http.Connections`&ndash; WebSockets, uzun yoklama ve sunucu tarafından gönderilen olaylar ve alt düzey SignalR altyapısı gibi aktarımlarıyla ilgili Günlükler için.
 
-SignalR 'den ayrıntılı günlükleri etkinleştirmek için, aşağıdaki öğeleri `Logging``LogLevel` alt bölümüne ekleyerek, yukarıdaki ön ekleri *appSettings. JSON* dosyanızdaki `Debug` düzeyine yapılandırın:
+SignalR 'den ayrıntılı günlükleri etkinleştirmek için, aşağıdaki öğeleri içindeki `Debug` `LogLevel` `Logging`alt bölümüne ekleyerek, yukarıdaki ön ekleri *appSettings. JSON* dosyanızdaki düzeye yapılandırın:
 
 [!code-json[](diagnostics/logging-config.json?highlight=7-8)]
 
-Ayrıca, `CreateWebHostBuilder` yöntemdeki kodda de yapılandırabilirsiniz:
+Ayrıca, bu kodu `CreateWebHostBuilder` yönteminizin içinde de yapılandırabilirsiniz:
 
 [!code-csharp[](diagnostics/logging-config-code.cs?highlight=5-6)]
 
@@ -47,9 +51,9 @@ JSON tabanlı yapılandırma kullanmıyorsanız, yapılandırma sisteminizde aş
 * `Logging:LogLevel:Microsoft.AspNetCore.SignalR` = `Debug`
 * `Logging:LogLevel:Microsoft.AspNetCore.Http.Connections` = `Debug`
 
-İç içe yapılandırma değerlerinin nasıl belirleneceğini belirlemek için yapılandırma sisteminizin belgelerini denetleyin. Örneğin, ortam değişkenlerini kullanırken, `:` yerine iki `_` karakter kullanılır (örneğin, `Logging__LogLevel__Microsoft.AspNetCore.SignalR`).
+İç içe yapılandırma değerlerinin nasıl belirleneceğini belirlemek için yapılandırma sisteminizin belgelerini denetleyin. Örneğin, ortam değişkenleri kullanılırken, yerine iki `_` karakter kullanılır `:` (örneğin, `Logging__LogLevel__Microsoft.AspNetCore.SignalR`).
 
-Uygulamanız için daha ayrıntılı tanılama toplanırken `Debug` düzeyinin kullanılması önerilir. `Trace` düzeyi çok düşük düzey Tanılamalar üretir ve uygulamanızdaki sorunları tanılamak için nadiren gereklidir.
+Uygulamanız için daha ayrıntılı `Debug` tanılama toplanırken düzeyin kullanılmasını öneririz. Düzey `Trace` , çok düşük düzey Tanılamalar üretir ve uygulamanızdaki sorunları tanılamak için nadiren gereklidir.
 
 ## <a name="access-server-side-logs"></a>Sunucu tarafı günlüklerine erişin
 
@@ -63,24 +67,24 @@ Konsol uygulamasında çalıştırıyorsanız, [konsol günlükçüsü](xref:fun
 
 Visual Studio **çıktı** penceresinde günlük çıktısını görüntüler. **ASP.NET Core Web sunucusu** açılır seçeneğini belirleyin.
 
-### <a name="azure-app-service"></a>Azure uygulama hizmeti
+### <a name="azure-app-service"></a>Azure App Service
 
-Azure App Service portalının **tanılama günlükleri** bölümünde **uygulama günlüğü (dosya sistemi)** seçeneğini etkinleştirin ve **düzeyi** `Verbose`olarak yapılandırın. Günlükler **günlük akış** hizmetinden ve App Service dosya sistemindeki günlüklerde kullanılabilir olmalıdır. Daha fazla bilgi için bkz. [Azure günlük akışı](xref:fundamentals/logging/index#azure-log-streaming).
+Azure App Service portalının **tanılama günlükleri** bölümünde **uygulama günlüğü (dosya sistemi)** seçeneğini etkinleştirin ve **düzeyini** olarak `Verbose`yapılandırın. Günlükler **günlük akış** hizmetinden ve App Service dosya sistemindeki günlüklerde kullanılabilir olmalıdır. Daha fazla bilgi için bkz. [Azure günlük akışı](xref:fundamentals/logging/index#azure-log-streaming).
 
 ### <a name="other-environments"></a>Diğer ortamlar
 
-Uygulama başka bir ortama (örneğin, Docker, Kubernetes veya Windows hizmeti) dağıtılırsa, ortama uygun günlük sağlayıcılarının nasıl yapılandırılacağı hakkında daha fazla bilgi için bkz. <xref:fundamentals/logging/index>.
+Uygulama başka bir ortama (örneğin, Docker, Kubernetes veya Windows hizmeti) dağıtılırsa, ortama uygun günlük sağlayıcılarının nasıl <xref:fundamentals/logging/index> yapılandırılacağı hakkında daha fazla bilgi için bkz..
 
 ## <a name="javascript-client-logging"></a>JavaScript istemci günlüğü
 
 > [!WARNING]
 > İstemci tarafı günlükleri, uygulamanızdan önemli bilgiler içerebilir. Ham günlükleri **hiçbir** şekilde üretim uygulamalarından GitHub gibi genel forumlara nakletmeyin.
 
-JavaScript istemcisini kullanırken, `HubConnectionBuilder``configureLogging` yöntemi kullanarak günlüğe kaydetme seçeneklerini yapılandırabilirsiniz:
+JavaScript istemcisini kullanırken, oturum açma seçeneklerini kullanarak şu `configureLogging` yöntemi kullanabilirsiniz: `HubConnectionBuilder`
 
 [!code-javascript[](diagnostics/logging-config-js.js?highlight=3)]
 
-Günlüğe kaydetmeyi tamamen devre dışı bırakmak için `configureLogging` yönteminde `signalR.LogLevel.None` belirtin.
+Günlüğe kaydetmeyi tamamen devre dışı bırakmak `signalR.LogLevel.None` için `configureLogging` yönteminde belirtin.
 
 Aşağıdaki tabloda JavaScript istemcisi için kullanılabilir olan günlük düzeyleri gösterilmektedir. Günlük düzeyinin bu değerlerden birine ayarlanması, bu düzeyde ve tabloda üzerindeki tüm düzeylerde günlüğe kaydetmeyi sağlar.
 
@@ -96,7 +100,7 @@ Aşağıdaki tabloda JavaScript istemcisi için kullanılabilir olan günlük d�
 
 Ayrıntı düzeyini yapılandırdıktan sonra, Günlükler tarayıcı konsoluna yazılır (veya bir NodeJS uygulamasında standart çıkış).
 
-Günlükleri özel bir günlüğe kaydetme sistemine göndermek istiyorsanız, `ILogger` arabirimini uygulayan bir JavaScript nesnesi sağlayabilirsiniz. Uygulanması gereken tek yöntem, olayın düzeyini ve olayla ilişkili iletiyi alan `log`. Örnek:
+Günlükleri özel bir günlüğe kaydetme sistemine göndermek istiyorsanız, `ILogger` arabirimini uygulayan bir JavaScript nesnesi sağlayabilirsiniz. Uygulanması gereken tek yöntem `log`, olay düzeyini ve olayla ilişkili iletiyi alır. Örneğin:
 
 [!code-typescript[](diagnostics/custom-logger.ts?highlight=3-7,13)]
 
@@ -105,11 +109,11 @@ Günlükleri özel bir günlüğe kaydetme sistemine göndermek istiyorsanız, `
 > [!WARNING]
 > İstemci tarafı günlükleri, uygulamanızdan önemli bilgiler içerebilir. Ham günlükleri **hiçbir** şekilde üretim uygulamalarından GitHub gibi genel forumlara nakletmeyin.
 
-.NET istemcisinden günlükleri almak için `HubConnectionBuilder``ConfigureLogging` yöntemi kullanabilirsiniz. Bu, `WebHostBuilder` ve `HostBuilder``ConfigureLogging` yöntemiyle aynı şekilde çalışmaktadır. ASP.NET Core ' de kullandığınız günlük sağlayıcılarını yapılandırabilirsiniz. Ancak, bireysel günlük sağlayıcıları için NuGet paketlerini el ile yükleyip etkinleştirmeniz gerekir.
+.NET istemcisinden günlükleri almak için, üzerinde `ConfigureLogging` `HubConnectionBuilder`yöntemini kullanabilirsiniz. Bu, ve `ConfigureLogging` `WebHostBuilder` `HostBuilder`üzerindeki yöntemiyle aynı şekilde çalışmaktadır. ASP.NET Core ' de kullandığınız günlük sağlayıcılarını yapılandırabilirsiniz. Ancak, bireysel günlük sağlayıcıları için NuGet paketlerini el ile yükleyip etkinleştirmeniz gerekir.
 
 ### <a name="console-logging"></a>Konsol günlüğü
 
-Konsol günlüğünü etkinleştirmek için [Microsoft. Extensions. Logging. Console](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console) paketini ekleyin. Ardından, konsol günlükçüsü 'yi yapılandırmak için `AddConsole` yöntemini kullanın:
+Konsol günlüğünü etkinleştirmek için [Microsoft. Extensions. Logging. Console](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console) paketini ekleyin. Ardından, konsol günlükçüsü `AddConsole` 'yi yapılandırmak için yöntemini kullanın:
 
 [!code-csharp[](diagnostics/net-client-console-log.cs?highlight=6)]
 
@@ -121,13 +125,13 @@ Günlükleri, Visual Studio 'daki **Çıkış** penceresine gitmek için de yap�
 
 ### <a name="other-logging-providers"></a>Diğer günlüğe kaydetme sağlayıcıları
 
-SignalR, Serilog, seq, NLog veya `Microsoft.Extensions.Logging`ile tümleştirilen herhangi bir günlük sistemi gibi diğer günlük sağlayıcılarını destekler. Günlüğe kaydetme sisteminiz bir `ILoggerProvider`sağlıyorsa, bu dosyayı `AddProvider`kaydedebilirsiniz:
+SignalRSerilog, seq, NLog gibi diğer günlük sağlayıcılarını veya ile `Microsoft.Extensions.Logging`tümleştirilen diğer bir günlük sistemini destekler. Günlük sisteminiz bir `ILoggerProvider`sağlıyorsa, şunu kullanarak `AddProvider`kaydedebilirsiniz:
 
 [!code-csharp[](diagnostics/net-client-custom-log.cs?highlight=6)]
 
 ### <a name="control-verbosity"></a>Denetim ayrıntı düzeyi
 
-Uygulamanızdaki diğer yerlerden oturum açıyorsanız, varsayılan düzeyin `Debug` olarak değiştirilmesi çok ayrıntılı olabilir. Kayıt düzeyini SignalR Günlükler için yapılandırmak üzere bir filtre kullanabilirsiniz. Bu, sunucuda olduğu şekilde kodda yapılabilir:
+Uygulamanızdaki diğer yerlerden oturum açıyorsanız, varsayılan düzeyin olarak `Debug` değiştirilmesi çok ayrıntılı olabilir. Günlükler için SignalR günlüğe kaydetme düzeyini yapılandırmak üzere bir filtre kullanabilirsiniz. Bu, sunucuda olduğu şekilde kodda yapılabilir:
 
 [!code-csharp[Controlling verbosity in .NET client](diagnostics/logging-config-client-code.cs?highlight=9-10)]
 
@@ -146,7 +150,7 @@ Fiddler, HTTP izlemelerinin toplanması için çok güçlü bir araçtır. [Tele
 
 HTTPS kullanarak bağlanıyorsanız, Fiddler 'ın HTTPS trafiğinin şifresini çözebilmesini sağlamaya yönelik bazı ek adımlar vardır. Daha ayrıntılı bilgi için bkz. [Fiddler belgeleri](https://docs.telerik.com/fiddler/Configure-Fiddler/Tasks/DecryptHTTPS).
 
-İzlemeyi topladıktan sonra, **dosya** > seçerek izlemeyi dışarı aktarabilirsiniz. bu işlemi, menü çubuğundan **tüm oturumları** > **Kaydet** ' i seçin.
+İzlemeyi topladıktan sonra, **Dosya** > **Save** > **tüm oturumları** menü çubuğundan Kaydet ' i seçerek izlemeyi dışarı aktarabilirsiniz.
 
 ![Fiddler 'tan tüm oturumlar dışarı aktarılıyor](diagnostics/fiddler-export.png)
 
@@ -154,13 +158,13 @@ HTTPS kullanarak bağlanıyorsanız, Fiddler 'ın HTTPS trafiğinin şifresini �
 
 Bu yöntem tüm uygulamalar için geçerlidir.
 
-Komut kabuğundan aşağıdaki komutu çalıştırarak, tcpdump kullanarak ham TCP izlemeleri toplayabilirsiniz. Bir izin hatası alırsanız, `root` olması veya komutun `sudo` öneki olması gerekebilir:
+Komut kabuğundan aşağıdaki komutu çalıştırarak, tcpdump kullanarak ham TCP izlemeleri toplayabilirsiniz. Bir izin hatası alırsanız, `root` komutuna sahip `sudo` olmanız veya komuta önek uygulamanız gerekebilir:
 
 ```console
 tcpdump -i [interface] -w trace.pcap
 ```
 
-`[interface]`, yakalamak istediğiniz ağ arabirimiyle değiştirin. Genellikle bu, `/dev/eth0` (Standart Ethernet arabiriminiz için) veya `/dev/lo0` (localhost trafiği için) gibi bir şeydir. Daha fazla bilgi için, ana bilgisayar sisteminizdeki `tcpdump` Man sayfasına bakın.
+Yakalamak `[interface]` istediğiniz ağ arabirimiyle değiştirin. Genellikle bu, (Standart Ethernet `/dev/eth0` arabiriminiz için) veya `/dev/lo0` (localhost trafiği için) gibi bir şeydir. Daha fazla bilgi için bkz. `tcpdump` ana bilgisayar sisteminizdeki adam sayfası.
 
 ## <a name="collect-a-network-trace-in-the-browser"></a>Tarayıcıda bir ağ izlemesi toplayın
 
@@ -199,7 +203,7 @@ Bu yöntem yalnızca tarayıcı tabanlı uygulamalar için geçerlidir.
 
 ## <a name="attach-diagnostics-files-to-github-issues"></a>GitHub sorunlarına tanılama dosyaları iliştirme
 
-Tanılama dosyalarını, `.txt` uzantısına sahip olacak şekilde yeniden adlandırarak ve sonra sorunu üzerine sürükleyip bırakarak GitHub sorunlarına iliştirebilirsiniz.
+Tanılama dosyalarını, bir `.txt` uzantıya sahip olacak şekilde yeniden adlandırarak ve sonra sorunu üzerine sürükleyip bırakarak GitHub sorunlarına iliştirebilirsiniz.
 
 > [!NOTE]
 > Lütfen günlük dosyalarının veya ağ izlemelerinin içeriğini bir GitHub sorununa yapıştırmayın. Bu Günlükler ve izlemeler oldukça büyük olabilir ve GitHub genellikle bunları keser.

@@ -1,47 +1,53 @@
 ---
-title: Visual Studio Code ile Azure'da ASP.NET Core uygulaması yayınlama
+title: Visual Studio Code ile Azure 'da ASP.NET Core uygulaması yayımlama
 author: rick-anderson
-description: Visual Studio Code'u kullanarak Azure Uygulama Hizmeti'nde ASP.NET Core uygulamasını nasıl yayınlayacağınızı öğrenin
+description: Visual Studio Code kullanarak Azure App Service ASP.NET Core uygulama yayımlamayı öğrenin
 ms.author: riserrad
 ms.custom: mvc
 ms.date: 07/10/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/publish-to-azure-webapp-using-vscode
-ms.openlocfilehash: 5f117cb2867a6e7b54269ef39abe819256b429ec
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: fde0290020e08701bd19b72ebea0e2739462b232
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80242684"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767850"
 ---
-# <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio-code"></a>Visual Studio Code ile Azure'da ASP.NET Core uygulaması yayınlama
+# <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio-code"></a>Visual Studio Code ile Azure 'da ASP.NET Core uygulaması yayımlama
 
-Yazar: [Ricardo Serradas](https://twitter.com/ricardoserradas)
+[Ricardo Serrat](https://twitter.com/ricardoserradas) tarafından
 
 [!INCLUDE [Azure App Service Preview Notice](../includes/azure-apps-preview-notice.md)]
 
-Bir Uygulama Hizmeti dağıtım sorununu <xref:test/troubleshoot-azure-iis>gidermek için bkz.
+App Service dağıtım sorununu gidermek için, bkz <xref:test/troubleshoot-azure-iis>..
 
 ## <a name="intro"></a>Giriş
 
-Bu öğretici ile, nasıl bir ASP.Net Core MVC Uygulama oluşturmak ve Visual Studio Code içinde dağıtmak öğreneceksiniz.
+Bu öğreticide, ASP.Net Core MVC uygulaması oluşturmayı ve Visual Studio Code içinde dağıtmayı öğreneceksiniz.
 
-## <a name="set-up"></a>Ayarla
+## <a name="set-up"></a>Ayarlama
 
-- Hesabınız yoksa ücretsiz bir [Azure hesabı](https://azure.microsoft.com/free/dotnet/) açın.
-- [Install .NET Core SDK](https://dotnet.microsoft.com/download)
-- [Visual Studio Kodunu](https://code.visualstudio.com/Download) Yükleyin
-  - [C# Uzantısını](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) Visual Studio Koduna Yükleyin
-  - Azure [Uygulama Hizmeti Uzantısını](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice) Visual Studio Koduna yükleyin ve devam etmeden önce yapılandırın
+- Hesabınız yoksa [ücretsiz bir Azure hesabı](https://azure.microsoft.com/free/dotnet/) açın.
+- [.NET Core SDK](https://dotnet.microsoft.com/download) yüklensin
+- [Visual Studio Code](https://code.visualstudio.com/Download) yüklensin
+  - Visual Studio Code için [C# uzantısını](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) yükler
+  - Devam etmeden önce Visual Studio Code [Azure App Service uzantısını](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice) yükleyip yapılandırmak için
 
 ## <a name="create-an-aspnet-core-mvc-project"></a>ASP.Net Core MVC projesi oluşturma
 
-Bir terminal kullanarak, projenin oluşturulmasını istediğiniz klasöre gidin ve aşağıdaki komutu kullanın:
+Bir Terminal kullanarak, projenin oluşturulmasını istediğiniz klasöre gidin ve aşağıdaki komutu kullanın:
 
 ```dotnetcli
 dotnet new mvc
 ```
 
-Aşağıdakilere benzer bir klasör yapınız olacak:
+Aşağıdakine benzer bir klasör yapısına sahip olacaksınız:
 
 ```cmd
       appsettings.Development.json
@@ -59,91 +65,91 @@ Aşağıdakilere benzer bir klasör yapınız olacak:
 
 ## <a name="open-it-with-visual-studio-code"></a>Visual Studio Code ile açın
 
-Projeniz oluşturulduktan sonra aşağıdaki seçeneklerden birini kullanarak Visual Studio Code ile açabilirsiniz:
+Projeniz oluşturulduktan sonra, aşağıdaki seçeneklerden birini kullanarak Visual Studio Code ile açabilirsiniz:
 
-### <a name="through-the-command-line"></a>Komut satırı ndan
+### <a name="through-the-command-line"></a>Komut satırı aracılığıyla
 
-Projeyi oluşturduğunuz klasörde aşağıdaki komutu kullanın:
+Projeyi oluşturduğunuz klasör içinde aşağıdaki komutu kullanın:
 
 ```cmd
 > code .
 ```
 
-Aşağıdaki komut çalışmıyorsa, [yüklemenizin bu bağlantıya](https://code.visualstudio.com/docs/setup/setup-overview#_cross-platform)başvurarak düzgün bir şekilde yapılandırıp yapılmadığını kontrol edin.
+Aşağıdaki komut çalışmazsa, [Bu bağlantıya](https://code.visualstudio.com/docs/setup/setup-overview#_cross-platform)başvurarak yüklemenizin doğru şekilde yapılandırılıp yapılandırılmadığını denetleyin.
 
-### <a name="through-visual-studio-code-interface"></a>Visual Studio Code arabirimi ile
+### <a name="through-visual-studio-code-interface"></a>Visual Studio Code arabirimi aracılığıyla
 
-- Görsel Stüdyo Kodunu Aç
-- Menüde,`File > Open Folder`
-- MVC Projesi'ni oluşturduğunuz klasörün kökünü seçin
+- Visual Studio Code açın
+- Menüsünde, şunu seçin`File > Open Folder`
+- MVC projesini oluşturduğunuz klasörün kökünü seçin
 
-Proje klasörünü açtığınızda, oluşturmak ve hata ayıklamak için gerekli varlıkların eksik olduğunu belirten bir ileti alırsınız. Bunları eklemek için yardım kabul edin.
+Proje klasörünü açtığınızda, gerekli varlıkların derleme ve hata ayıklama için eksik olduğunu söyleyen bir ileti alırsınız. Bunları eklemek için yardımı kabul edin.
 
-![Proje yüklü Görsel Stüdyo Kodu arayüzü](publish-to-azure-webapp-using-vscode/_static/folder-structure-restore-netcore.jpg)
+![Project yüklü Visual Studio Code arabirimi](publish-to-azure-webapp-using-vscode/_static/folder-structure-restore-netcore.jpg)
 
-Proje `.vscode` yapısının altında bir klasör oluşturulur. Aşağıdaki dosyaları içerecektir:
+Proje `.vscode` yapısı altında bir klasör oluşturulur. Bu, aşağıdaki dosyaları içerir:
 
 ```cmd
 launch.json
 tasks.json
 ```
 
-Bunlar,.NET Core Web Uygulamanızı oluşturmanıza ve hata ayıklamanıza yardımcı olacak yardımcı program dosyalarıdır.
+Bunlar, .NET Core Web uygulamanızı oluşturmanıza ve hata ayıklamanıza yardımcı olan yardımcı dosyalardır.
 
 ## <a name="run-the-app"></a>Uygulamayı çalıştırma
 
-Uygulamayı Azure'a dağıtmadan önce, uygulamanın yerel makinenizde düzgün şekilde çalıştırdığından emin olun.
+Uygulamayı Azure 'a dağıtmadan önce, yerel makinenizde düzgün çalıştığından emin olun.
 
-- Projeyi çalıştırmak için F5 tuşuna basın
+- Projeyi çalıştırmak için F5 'e basın
 
-Web uygulamanız varsayılan tarayıcınızın yeni bir sekmesinde çalışmaya başlar. Başlar başlamaz bir gizlilik uyarısı fark edebilirsiniz. Bunun nedeni, uygulamanızın HTTP ve HTTPS'yi kullanmaya başlaması ve varsayılan olarak HTTPS bitiş noktasına yönlendirilen uygulamadır.
+Web uygulamanız, varsayılan tarayıcınızın yeni bir sekmesinde çalışmaya başlayacaktır. Başladıktan hemen sonra bir gizlilik uyarısı görebilirsiniz. Bunun nedeni, uygulamanızın HTTP ve HTTPS kullanılarak başlayacağından ve varsayılan olarak HTTPS uç noktasına gider.
 
-![Uygulamayı yerel olarak hata ayıklarken gizlilik uyarısı](publish-to-azure-webapp-using-vscode/_static/run-webapp-https-warning.jpg)
+![Uygulamanın yerel olarak hata ayıklaması sırasında Gizlilik Uyarısı](publish-to-azure-webapp-using-vscode/_static/run-webapp-https-warning.jpg)
 
-Hata ayıklama oturumunu tutmak `Advanced` için `Continue to localhost (unsafe)`tıklatın ve sonra.
+Hata ayıklama oturumunu tutmak için ve ardından `Advanced` ' a `Continue to localhost (unsafe)`tıklayın.
 
 ## <a name="generate-the-deployment-package-locally"></a>Dağıtım paketini yerel olarak oluşturma
 
-- Açık Görsel Stüdyo Kodu terminali
-- Bir `publish`alt klasöre `Release` bir paket oluşturmak için aşağıdaki komutu kullanın:
+- Visual Studio Code terminali aç
+- Adlı `Release` `publish`bir alt klasöre paket oluşturmak için aşağıdaki komutu kullanın:
   - `dotnet publish -c Release -o ./publish`
-- Proje `publish` yapısı altında yeni bir klasör oluşturulacak
+- Proje yapısı `publish` altında yeni bir klasör oluşturulacak
 
-![Klasör yapısını yayımlama](publish-to-azure-webapp-using-vscode/_static/publish-folder.jpg)
+![Klasör yapısını Yayımla](publish-to-azure-webapp-using-vscode/_static/publish-folder.jpg)
 
 ## <a name="publish-to-azure-app-service"></a>Azure App Service’e yayımlama
 
-Visual Studio Code için Azure Uygulama Hizmeti uzantısından yararlanarak, web sitesini doğrudan Azure Uygulama Hizmeti'nde yayınlamak için aşağıdaki adımları izleyin.
+Visual Studio Code Azure App Service uzantısı 'ndan yararlanarak, Web sitesini doğrudan Azure App Service yayımlamak için aşağıdaki adımları izleyin.
 
-### <a name="if-youre-creating-a-new-web-app"></a>Yeni bir Web Uygulaması oluşturuyorsanız
+### <a name="if-youre-creating-a-new-web-app"></a>Yeni bir Web uygulaması oluşturuyorsanız
 
-- Klasöre `publish` sağ tıklayın ve`Deploy to Web App...`
-- Web Uygulamasını oluşturmak istediğiniz aboneliği seçin
+- `publish` Klasöre sağ tıklayın ve şunları seçin`Deploy to Web App...`
+- Web uygulaması oluşturmak istediğiniz aboneliği seçin
 - `Create New Web App` seçeneğini belirleyin
-- Web Uygulaması için bir ad girin
+- Web uygulaması için bir ad girin
 
-Uzantı yeni Web Uygulamasını oluşturur ve paketi otomatik olarak dağıtmaya başlar. Dağıtım tamamlandıktan sonra, `Browse Website` dağıtımı doğrulamak için tıklatın.
+Uzantı yeni Web uygulamasını oluşturur ve paketin otomatik olarak dağıtıma başlamasını sağlar. Dağıtım tamamlandıktan sonra, dağıtımı doğrulamak için `Browse Website` öğesine tıklayın.
 
-![Dağıtım başarılı ileti](publish-to-azure-webapp-using-vscode/_static/deployment-succeeded-message.jpg)
+![Dağıtım başarılı iletisi](publish-to-azure-webapp-using-vscode/_static/deployment-succeeded-message.jpg)
 
-Tıklattığınızda, `Browse Website`varsayılan tarayıcınızı kullanarak tarayıcıya gidersiniz:
+' A tıkladığınızda `Browse Website`, varsayılan tarayıcınızı kullanarak bu sayfaya gidebilirsiniz:
 
-![Yeni Web Uygulaması başarıyla dağıtıldı](publish-to-azure-webapp-using-vscode/_static/new-webapp-deployed.jpg)
+![Yeni Web uygulaması başarıyla dağıtıldı](publish-to-azure-webapp-using-vscode/_static/new-webapp-deployed.jpg)
 
-### <a name="if-youre-deploying-to-an-existing-web-app"></a>Varolan bir Web Uygulamasına dağıtım yapıyorsunuz
+### <a name="if-youre-deploying-to-an-existing-web-app"></a>Var olan bir Web uygulamasına dağıtım yapıyorsanız
 
-- Klasöre `publish` sağ tıklayın ve`Deploy to Web App...`
-- Varolan Web Uygulamasının bulunduğu aboneliği seçin
-- Listeden Web Uygulamasını seçin
-- Visual Studio Code, varolan içeriğin üzerine yazmak isteyip istemediğinizi sorar. Onaylamak `Deploy` için tıklayın
+- `publish` Klasöre sağ tıklayın ve şunları seçin`Deploy to Web App...`
+- Mevcut Web uygulamasının bulunduğu aboneliği seçin
+- Listeden Web uygulamasını seçin
+- Visual Studio Code, var olan içeriğin üzerine yazmak isteyip istemediğinizi sorar. Onaylamak `Deploy` için tıklayın
 
-Uzantı, güncelleştirilmiş içeriği Web Uygulamasına dağıtacaktır. Bu iş bittikten `Browse Website` sonra, dağıtımı doğrulamak için tıklatın.
+Uzantı, güncelleştirilmiş içeriği Web uygulamasına dağıtacaktır. Tamamlandıktan sonra, dağıtımı doğrulamak için `Browse Website` öğesine tıklayın.
 
-![Mevcut Web Uygulaması başarıyla dağıtıldı](publish-to-azure-webapp-using-vscode/_static/existing-webapp-deployed.jpg)
+![Mevcut Web uygulaması başarıyla dağıtıldı](publish-to-azure-webapp-using-vscode/_static/existing-webapp-deployed.jpg)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-- [İlk Azure DevOps ardCihazınızı oluşturun](/azure/devops/pipelines/create-first-pipeline)
+- [İlk Azure DevOps işlem hattınızı oluşturma](/azure/devops/pipelines/create-first-pipeline)
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

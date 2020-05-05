@@ -1,41 +1,47 @@
 ---
-title: dotnet aspnet-codegenerator komutu
+title: DotNet ASPNET-CodeGenerator komutu
 author: rick-anderson
-description: Dotnet aspnet-codegenerator komut iskeleleri ASP.NET Core projeleri.
+description: DotNet ASPNET-CodeGenerator komutu yapı ASP.NET Core projeler.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 07/04/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
-ms.openlocfilehash: 1043a578f66d5bb57f4a81e9fe21afa5e3c37cb8
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 58f7aa30d3e916307437d56c61e80765ac0c21cf
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78665188"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82766478"
 ---
-# <a name="dotnet-aspnet-codegenerator"></a>dotnet aspnet-codegenerator
+# <a name="dotnet-aspnet-codegenerator"></a>DotNet ASPNET-CodeGenerator
 
 Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-`dotnet aspnet-codegenerator`- ASP.NET Core iskele motoru çalışır. `dotnet aspnet-codegenerator`sadece komut satırından iskele için gerekli olan, Visual Studio ile iskele kullanmak için gerekli değildir.
+`dotnet aspnet-codegenerator`-ASP.NET Core scafkatlama altyapısını çalıştırır. `dotnet aspnet-codegenerator`yalnızca komut satırından yapı iskelesi sağlamak için gereklidir, Visual Studio ile scafkatlamayı kullanmak gerekli değildir.
 
-Bu makale [.NET Core 2.1 SDK](https://dotnet.microsoft.com/download/dotnet-core/2.1) ve sonrası için geçerlidir.
+Bu makale [.NET Core 2,1 SDK](https://dotnet.microsoft.com/download/dotnet-core/2.1) ve üzeri için geçerlidir.
 
-## <a name="installing-aspnet-codegenerator"></a>Aspnet kodlayıcı yükleme
+## <a name="installing-aspnet-codegenerator"></a>ASPNET-CodeGenerator yükleniyor
 
-`dotnet-aspnet-codegenerator`yüklenmesi gereken genel bir [araçtır.](/dotnet/core/tools/global-tools) Aşağıdaki komut `dotnet-aspnet-codegenerator` aracın en son kararlı sürümünü yükler:
+`dotnet-aspnet-codegenerator`yüklenmesi gereken [küresel bir araçtır](/dotnet/core/tools/global-tools) . Aşağıdaki komut `dotnet-aspnet-codegenerator` aracın en son kararlı sürümünü yüklüyor:
 
 ```dotnetcli
 dotnet tool install -g dotnet-aspnet-codegenerator
 ```
 
-Yüklenen .NET `dotnet-aspnet-codegenerator` Core SDK'lardan edinilebilen en son kararlı sürüme aşağıdaki komut güncelleştirmeleri:
+Aşağıdaki komut, yüklü `dotnet-aspnet-codegenerator` .NET Core SDK 'larında kullanılabilen en son kararlı sürümü güncelleştirir:
 
 ```dotnetcli
 dotnet tool update -g dotnet-aspnet-codegenerator
 ```
 
-## <a name="synopsis"></a>Özet
+## <a name="synopsis"></a>Özeti
 
 ```
 dotnet aspnet-codegenerator [arguments] [-p|--project] [-n|--nuget-package-dir] [-c|--configuration] [-tfm|--target-framework] [-b|--build-base-path] [--no-build] 
@@ -44,21 +50,21 @@ dotnet aspnet-codegenerator [-h|--help]
 
 ## <a name="description"></a>Açıklama
 
-Küresel `dotnet aspnet-codegenerator` komut ASP.NET Core kod jeneratörve iskele motoru çalışır.
+`dotnet aspnet-codegenerator` Genel komut ASP.NET Core kod Oluşturucu ve yapı iskelesi altyapısını çalıştırır.
 
 ## <a name="arguments"></a>Bağımsız Değişkenler
 
 `generator`
 
-Çalışacak kod jeneratörü. Aşağıdaki jeneratörler mevcuttur:
+Çalıştırılacak kod Oluşturucu. Aşağıdaki oluşturucular kullanılabilir:
 
 | Oluşturucu | İşlem |
 | ----------------- | ------------ | 
-| alan      | [İskeleler Bir Alan](/aspnet/core/mvc/controllers/areas) |
-  denetleyici| [İskele bir denetleyici](/aspnet/core/tutorials/first-mvc-app/adding-model) |
-  identity  | [İskele kimliği](/aspnet/core/security/authentication/scaffold-identity) |
-  jilet sayfası | [İskeleler Jilet Sayfaları](/aspnet/core/tutorials/razor-pages/model) |
-  görüntüle      | [İskeleler bir görünüm](/aspnet/core/mvc/views/overview) |
+| alan      | [Bir alanı dolandırın](/aspnet/core/mvc/controllers/areas) |
+  denetleyici| [Bir denetleyiciyi yapı iskelesi](/aspnet/core/tutorials/first-mvc-app/adding-model) |
+  identity  | [Yapı iskelesi kimliği](/aspnet/core/security/authentication/scaffold-identity) |
+  razorpage | [Yapı iskelesi Razor Pages](/aspnet/core/tutorials/razor-pages/model) |
+  görüntüle      | [Bir görünümü dolandırın](/aspnet/core/mvc/views/overview) |
 
 ## <a name="options"></a>Seçenekler
 
@@ -72,11 +78,11 @@ Yapı yapılandırmasını tanımlar. Varsayılan değer: `Debug`.
 
 `-tfm|--target-framework`
 
-Kullanılacak [Hedef Çerçeve.](/dotnet/standard/frameworks) Örneğin, `net46`.
+Kullanılacak hedef [çerçeve](/dotnet/standard/frameworks) . Örneğin, `net46`.
 
 `-b|--build-base-path`
 
-Yapı tabanı yolu.
+Yapı temel yolu.
 
 `-h|--help`
 
@@ -84,18 +90,18 @@ Komut için kısa bir yardım yazdırır.
 
 `--no-build`
 
-Çalıştırmadan önce projeyi oluşturmaz. Ayrıca bayrağı da `--no-restore` örtülü olarak ayarlar.
+Çalıştırmadan önce projeyi oluşturmaz. Ayrıca `--no-restore` bayrağı örtülü olarak ayarlar.
 
 `-p|--project <PATH>`
 
-Proje dosyasının çalışma yolunu (klasör adı veya tam yol) belirtir. Belirtilmemişse, varsayılan olarak geçerli dizine göre olur.
+Çalıştırılacak proje dosyasının yolunu belirtir (klasör adı veya tam yol). Belirtilmezse, varsayılan olarak geçerli dizini alır.
 
-## <a name="generator-options"></a>Jeneratör seçenekleri
+## <a name="generator-options"></a>Oluşturucu seçenekleri
 
-Aşağıdaki bölümler, desteklenen jeneratörler için mevcut seçenekleri ayrıntılı olarak açıklanır:
+Aşağıdaki bölümler, desteklenen oluşturucular için kullanılabilen seçenekleri ayrıntılandırır:
 
 * Alan
-* Denetleyicisi
+* Kumandasını
 * Kimlik  
 * Razorpage
 * Görüntüle
@@ -104,14 +110,14 @@ Aşağıdaki bölümler, desteklenen jeneratörler için mevcut seçenekleri ayr
 
 ### <a name="area-options"></a>Alan seçenekleri
 
-Bu araç, denetleyicileri ve görünümleri ile core web projeleri ASP.NET için tasarlanmıştır. Razor Pages uygulamaları için tasarlanmamıştır.
+Bu araç, denetleyiciler ve görünümler içeren ASP.NET Core Web projelerine yöneliktir. Razor Pages uygulamalarına yönelik değildir.
 
 Kullanım: `dotnet aspnet-codegenerator area AreaNameToGenerate`
 
-Önceki komut aşağıdaki klasörleri oluşturur:
+Yukarıdaki komut aşağıdaki klasörleri oluşturur:
 
 * *Alanlar*
-  * *AlanNameToGenerate*
+  * *AreaNameToGenerate*
     * *Denetleyiciler*
     * *Veri*
     * *Modeller*
@@ -119,35 +125,35 @@ Kullanım: `dotnet aspnet-codegenerator area AreaNameToGenerate`
 
 <a name="ctl"></a>
 
-### <a name="controller-options"></a>Denetleyici seçenekleri
+### <a name="controller-options"></a>Denetleyici Seçenekleri
 
-Aşağıdaki tablo da `aspnet-codegenerator` `controller` seçenekler `razorpage`ve:
+Aşağıdaki tabloda `aspnet-codegenerator` `controller` ve `razorpage`seçenekleri listelenmiştir:
 
 [!INCLUDE [aspnet-codegenerator-args-md.md](~/includes/aspnet-codegenerator-args-md.md)]
 
-Aşağıdaki tabloda benzersiz `aspnet-codegenerator controller`seçenekler listeledir:
+Aşağıdaki tabloda aşağıdakiler için `aspnet-codegenerator controller`benzersiz seçenekler listelenmektedir:
 
 | Seçenek               | Açıklama|
 | ----------------- | ------------ |
-| --controllerName veya -name | Denetleyicinin adı. |
-| --useAsyncActions veya -async | Async denetleyici eylemleri oluşturun. |
-| --noViews veya -nv | Görünüm **oluşturmayın.** |
-| --restWithNoViews veya -api  | REST stili API'li bir Denetleyici oluşturun. `noViews`varsayılabilir ve görünümle ilgili seçenekler yoksayılır. |
-| --readWriteActions veya -actions | Model olmadan okuma/yazma eylemleri içeren denetleyici oluşturun. |
+| --controllerName veya-Name | Denetleyicinin adı. |
+| --Kullanılan Asyncactions veya-async | Zaman uyumsuz denetleyici eylemleri oluştur. |
+| --noViews veya-NV | **Hiçbir** görünüm oluşturun. |
+| --restWithNoViews veya-API  | REST stili API ile bir denetleyici oluşturun. `noViews`varsayılır ve tüm görünümle ilgili seçenekler yok sayılır. |
+| --readWriteActions veya-Actions | Model olmadan okuma/yazma eylemleri ile denetleyici oluşturun. |
 
-`aspnet-codegenerator controller` Komut üzerinde `-h` yardım için anahtarı kullanın:
+`aspnet-codegenerator controller` Komutuyla ilgili yardım için `-h` anahtarı kullanın:
 
 ```dotnetcli
 dotnet aspnet-codegenerator controller -h
 ```
 
-Örnek olarak [film modelini İskele'ye](/aspnet/core/tutorials/razor-pages/model) `dotnet aspnet-codegenerator controller`bakın.
+Bir örneği için bkz `dotnet aspnet-codegenerator controller`. [film modelini yapı iskelesi](/aspnet/core/tutorials/razor-pages/model) .
 
 ### <a name="razorpage"></a>Razorpage
 
 <a name="rp"></a>
 
-Jilet Sayfaları, yeni sayfanın adını ve kullanılacak şablonu belirterek ayrı ayrı iskeleye eklenebilir. Desteklenen şablonlar şunlardır:
+Razor Pages yeni sayfanın adı ve kullanılacak şablon belirtilerek tek tek iskele alınabilir. Desteklenen şablonlar şunlardır:
 
 * `Empty`
 * `Create`
@@ -156,13 +162,13 @@ Jilet Sayfaları, yeni sayfanın adını ve kullanılacak şablonu belirterek ay
 * `Details`
 * `List`
 
-Örneğin, aşağıdaki komut *MyEdit.cshtml* oluşturmak için Edit şablonunu kullanır ve *MyEdit.cshtml.cs:*
+Örneğin, aşağıdaki komut *myedit. cshtml* ve *MyEdit.cshtml.cs*oluşturmak için düzenleme şablonunu kullanır:
 
 ```dotnetcli
 dotnet aspnet-codegenerator razorpage MyEdit Edit -m Movie -dc RazorPagesMovieContext -outDir Pages/Movies
 ```
 
-Genellikle, şablon ve oluşturulan dosya adı belirtilmemiş ve aşağıdaki şablonlar oluşturulur:
+Genellikle, şablon ve oluşturulan dosya adı belirtilmez ve aşağıdaki şablonlar oluşturulur:
 
 * `Create`
 * `Edit`
@@ -170,26 +176,26 @@ Genellikle, şablon ve oluşturulan dosya adı belirtilmemiş ve aşağıdaki ş
 * `Details`
 * `List`
 
-Aşağıdaki tablo da `aspnet-codegenerator` `razorpage` seçenekler `controller`ve:
+Aşağıdaki tabloda `aspnet-codegenerator` `razorpage` ve `controller`seçenekleri listelenmiştir:
 
 [!INCLUDE [aspnet-codegenerator-args-md.md](~/includes/aspnet-codegenerator-args-md.md)]
 
-Aşağıdaki tabloda benzersiz `aspnet-codegenerator razorpage`seçenekler listeledir:
+Aşağıdaki tabloda aşağıdakiler için `aspnet-codegenerator razorpage`benzersiz seçenekler listelenmektedir:
 
 | Seçenek               | Açıklama|
 | ----------------- | ------------ |
-|   --namespaceName veya -namespace | Oluşturulan PageModel için kullanılacak ad alanının adı |
-| --partialView veya -kısmi | Kısmi bir görünüm oluşturun. Bu belirtilirse düzen seçenekleri -l ve -udl yoksayılır. |
-| --noPageModel veya -npm | Boş şablon için PageModel sınıfı oluşturmamak için geçiş yap |
+|   --namespaceName veya-Namespace | Oluşturulan PageModel için kullanılacak ad alanının adı |
+| --partialView veya-Partial | Kısmi bir görünüm oluşturun. Bu belirtilirse, düzen seçenekleri-l ve-UDL yok sayılır. |
+| --noPageModel veya-NPM | Boş şablon için bir PageModel sınıfı oluşturmamı geç |
 
-`aspnet-codegenerator razorpage` Komut üzerinde `-h` yardım için anahtarı kullanın:
+`aspnet-codegenerator razorpage` Komutuyla ilgili yardım için `-h` anahtarı kullanın:
 
 ```dotnetcli
 dotnet aspnet-codegenerator razorpage -h
 ```
 
-Örnek olarak [film modelini İskele'ye](/aspnet/core/tutorials/razor-pages/model) `dotnet aspnet-codegenerator razorpage`bakın.
+Bir örneği için bkz `dotnet aspnet-codegenerator razorpage`. [film modelini yapı iskelesi](/aspnet/core/tutorials/razor-pages/model) .
 
-### <a name="identity"></a>Kimlik
+### Identity
 
-Bkz. [İskele Kimliği](/aspnet/core/security/authentication/scaffold-identity)
+Bkz. [Yapı Iskelesi Identity ](/aspnet/core/security/authentication/scaffold-identity)

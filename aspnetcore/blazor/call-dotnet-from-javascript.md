@@ -1,41 +1,44 @@
 ---
-title: ASP.NET Core'daki JavaScript işlevlerinden .NET yöntemlerini arayınBlazor
+title: ASP.NET Core içindeki JavaScript işlevlerinden .NET yöntemlerini çağırınBlazor
 author: guardrex
-description: Uygulamalardaki Blazor JavaScript işlevlerinden .NET yöntemlerini nasıl çağırılamayı öğrenin.
+description: Blazor Uygulamalarda JavaScript işlevlerinden .net yöntemlerini çağırmayı öğrenin.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 04/07/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/call-dotnet-from-javascript
-ms.openlocfilehash: e2344dd15efd243a405373b6cf0362f28b48173a
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: 1bc75f0825b114a24def287bb7ccb11c27514f01
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80976956"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767193"
 ---
-# <a name="call-net-methods-from-javascript-functions-in-aspnet-core-opno-locblazor"></a>ASP.NET Core'daki JavaScript işlevlerinden .NET yöntemlerini arayınBlazor
+# <a name="call-net-methods-from-javascript-functions-in-aspnet-core-blazor"></a>ASP.NET Core içindeki JavaScript işlevlerinden .NET yöntemlerini çağırınBlazor
 
-Javier [Calvarro Nelson,](https://github.com/javiercn) [Daniel Roth](https://github.com/danroth27), [Shashikant Rudrawadi](http://wisne.co)ve [Luke Latham](https://github.com/guardrex) tarafından
+, [Javier Calvarro Nelson](https://github.com/javiercn), [Daniel Roth](https://github.com/danroth27), [Shashikant Rudrawadi](http://wisne.co)ve [Luke Latham](https://github.com/guardrex)
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Bir Blazor uygulama JavaScript işlevlerinden .NET yöntemlerinden ve .NET yöntemlerinden JavaScript işlevlerini çağırabilir. Bu senaryolar *JavaScript birlikte çalışabilirlik* *(JS interop)* olarak adlandırılır.
+Bir Blazor uygulama, JavaScript işlevlerinden .net yöntemleri ve .net yöntemlerinden JavaScript işlevlerini çağırabilir. Bu senaryolar *JavaScript birlikte çalışabilirliği* (*js birlikte çalışma*) olarak adlandırılır.
 
-Bu makale, JavaScript'ten .NET yöntemlerini çağrıştıran kapsar. .NET'ten JavaScript işlevlerini nasıl arayacağız hakkında bilgi için bkz. <xref:blazor/call-javascript-from-dotnet>
+Bu makalede, JavaScript 'ten .NET yöntemlerini çağırma ele alınmaktadır. .NET JavaScript işlevlerinin nasıl çağrılacağını öğrenmek için bkz <xref:blazor/call-javascript-from-dotnet>..
 
-[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ( nasıl[indirilir](xref:index#how-to-download-a-sample))
+[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
 ## <a name="static-net-method-call"></a>Statik .NET yöntemi çağrısı
 
-JavaScript'ten statik bir .NET yöntemi `DotNet.invokeMethod` `DotNet.invokeMethodAsync` çağırmak için, işlevleri kullanın. Çağırmak istediğiniz statik yöntemin tanımlayıcısını, işlevi içeren derlemenin adını ve bağımsız değişkenleri geçirin. Asynchronous sürümü Sunucu senaryoları desteklemek Blazor için tercih edilir. .NET yöntemi genel, statik olmalı ve `[JSInvokable]` özniteliğe sahip olmalıdır. Açık genel yöntemleri çağırmak şu anda desteklenmiyor.
+JavaScript 'ten statik bir .NET yöntemi çağırmak için `DotNet.invokeMethod` veya `DotNet.invokeMethodAsync` işlevlerini kullanın. Çağırmak istediğiniz statik metodun tanımlayıcısını, işlevi içeren derlemenin adını ve tüm bağımsız değişkenleri geçirin. Sunucu senaryolarını desteklemek Blazor için zaman uyumsuz sürüm tercih edilir. .NET yöntemi genel, statik ve `[JSInvokable]` özniteliği olmalıdır. Açık genel yöntemlerin çağrılması Şu anda desteklenmiyor.
 
-Örnek uygulama, bir `int` diziyi döndürmek için bir C# yöntemi içerir. Öznitelik `JSInvokable` yönteme uygulanır.
+Örnek uygulama, bir `int` dizi döndürmek Için C# yöntemi içerir. `JSInvokable` Özniteliği yöntemine uygulanır.
 
-*Sayfa/JsInterop.razor*:
+*Pages/Jsınterop. Razor*:
 
 ```razor
 <button type="button" class="btn btn-primary"
@@ -52,21 +55,21 @@ JavaScript'ten statik bir .NET yöntemi `DotNet.invokeMethod` `DotNet.invokeMeth
 }
 ```
 
-İstemciye sunulan JavaScript C# .NET yöntemini çağırır.
+İstemciye sunulan JavaScript, C# .NET yöntemini çağırır.
 
-*wwwroot/exampleJsInterop.js*:
+*Wwwroot/Examplejsınterop. js*:
 
 [!code-javascript[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=8-14)]
 
-Trigger **.NET statik yöntem ReturnArrayAsync** düğmesi seçildiğinde, konsol çıktısını tarayıcının web geliştirici araçlarında inceleyin.
+**Tetikleyici .net static yöntemi ReturnArrayAsync** düğmesi seçildiğinde, tarayıcının Web geliştirici araçlarında konsol çıkışını inceleyin.
 
-Konsol çıkışı:
+Konsol çıktısı:
 
 ```console
 Array(4) [ 1, 2, 3, 4 ]
 ```
 
-Dördüncü dizi değeri diziye itilir`data.push(4);`( `ReturnArrayAsync`) tarafından döndürülür.
+Dördüncü dizi değeri tarafından`data.push(4);` `ReturnArrayAsync`döndürülen diziye () gönderilir.
 
 Varsayılan olarak, yöntem tanımlayıcısı yöntem adıdır, ancak `JSInvokableAttribute` oluşturucuyu kullanarak farklı bir tanımlayıcı belirtebilirsiniz:
 
@@ -80,7 +83,7 @@ Varsayılan olarak, yöntem tanımlayıcısı yöntem adıdır, ancak `JSInvokab
 }
 ```
 
-İstemci tarafındaki JavaScript dosyasında:
+İstemci tarafı JavaScript dosyasında:
 
 ```javascript
 returnArrayAsyncJs: function () {
@@ -94,19 +97,19 @@ returnArrayAsyncJs: function () {
 
 ## <a name="instance-method-call"></a>Örnek yöntem çağrısı
 
-JavaScript'ten .NET örnek yöntemlerini de arayabilirsiniz. JavaScript'ten bir .NET örnek yöntemi çağırmak için:
+JavaScript 'ten de .NET örnek yöntemlerini çağırabilirsiniz. JavaScript 'ten bir .NET örnek yöntemi çağırmak için:
 
-* .NET örneğini JavaScript'e atıfta bulunarak geçirin:
-  * Statik arama `DotNetObjectReference.Create`yapın.
-  * Örneği bir `DotNetObjectReference` örnekte sarın `DotNetObjectReference` ve örneği çağırın. `Create` `DotNetObjectReference` Nesneleri atın (bu bölümde daha sonra bir örnek görüntülenir).
-* Instance veya işlevleri kullanarak .NET `invokeMethod` `invokeMethodAsync` örnek yöntemlerini çağırın. .NET örneği, JavaScript'ten diğer .NET yöntemlerini çağırırken bir bağımsız değişken olarak da geçirilebilir.
+* .NET örneğini JavaScript 'e başvuruya göre geçirin:
+  * İçin `DotNetObjectReference.Create`statik bir çağrı yapın.
+  * Örneği bir `DotNetObjectReference` örnek içinde sarın ve `Create` `DotNetObjectReference` örnek üzerinde çağırın. `DotNetObjectReference` Nesneleri atma (Bu bölümün ilerleyen kısımlarında bir örnek görünür).
+* `invokeMethod` Or `invokeMethodAsync` işlevlerini kullanarak örnekte .NET örnek yöntemlerini çağırın. .NET örneği, JavaScript 'ten başka .NET yöntemleri çağrılırken bir bağımsız değişken olarak da geçirilebilir.
 
 > [!NOTE]
-> Örnek uygulama iletileri istemci tarafındaki konsola kaydeder. Örnek uygulama tarafından gösterilen aşağıdaki örnekler için, tarayıcının konsol çıktısını tarayıcının geliştirici araçlarında inceleyin.
+> Örnek uygulama, iletileri istemci tarafı konsoluna kaydeder. Örnek uygulama tarafından gösterilen aşağıdaki örnekler için tarayıcının geliştirici araçlarında tarayıcının konsol çıkışını inceleyin.
 
-Trigger **.NET örnek yöntemi HelloHelper.SayHello** düğmesi `ExampleJsInterop.CallHelloHelperSayHello` seçildiğinde, çağrılır ve yönteme bir ad `Blazor`geçer.
+**Tetikleyici .NET örnek yöntemi HelloHelper. SayHello** düğmesi seçildiğinde, `ExampleJsInterop.CallHelloHelperSayHello` çağrılır ve yöntemine bir ad `Blazor`geçirir.
 
-*Sayfa/JsInterop.razor*:
+*Pages/Jsınterop. Razor*:
 
 ```razor
 <button type="button" class="btn btn-primary" @onclick="TriggerNetInstanceMethod">
@@ -122,31 +125,31 @@ Trigger **.NET örnek yöntemi HelloHelper.SayHello** düğmesi `ExampleJsIntero
 }
 ```
 
-`CallHelloHelperSayHello`yeni bir örneği `sayHello` ile JavaScript `HelloHelper`işlevini çağırır.
+`CallHelloHelperSayHello`JavaScript işlevini `sayHello` yeni bir örneğiyle çağırır `HelloHelper`.
 
-*JsInteropClasses/ExampleJsInterop.cs*:
+*JsInteropClasses/Examplejsınterop. cs*:
 
 [!code-csharp[](./common/samples/3.x/BlazorWebAssemblySample/JsInteropClasses/ExampleJsInterop.cs?name=snippet1&highlight=11-18)]
 
-*wwwroot/exampleJsInterop.js*:
+*Wwwroot/Examplejsınterop. js*:
 
 [!code-javascript[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=15-18)]
 
-Ad, özelliği `HelloHelper`belirleyen ''ın yapıcısına `HelloHelper.Name` geçer. JavaScript işlevi `sayHello` yürütüldüğünde, `HelloHelper.SayHello` `Hello, {Name}!` JavaScript işlevi tarafından konsola yazılan iletiyi döndürür.
+Ad, `HelloHelper.Name` özelliğini ayarlayan oluşturucuya `HelloHelper`geçirilir. JavaScript işlevi `sayHello` yürütüldüğünde, `HelloHelper.SayHello` JavaScript işlevi tarafından konsola yazılan `Hello, {Name}!` iletiyi döndürür.
 
-*JsInteropClasses/ HelloHelper.cs*:
+*JsInteropClasses/HelloHelper. cs*:
 
 [!code-csharp[](./common/samples/3.x/BlazorWebAssemblySample/JsInteropClasses/HelloHelper.cs?name=snippet1&highlight=5,10-11)]
 
-Tarayıcının web geliştirici araçlarında konsol çıktısı:
+Tarayıcının Web geliştirici araçlarında konsol çıkışı:
 
 ```console
 Hello, Blazor!
 ```
 
-Bellek sızıntısını önlemek ve aşağıdaki yaklaşımlardan birini `DotNetObjectReference`benimseyen bir bileşenüzerinde çöp toplamaya izin vermek için:
+Bir `DotNetObjectReference`Bellek sızıntısını önlemek ve oluşturan bir bileşende çöp toplamaya izin vermek için aşağıdaki yaklaşımlardan birini benimseyin:
 
-* Örneği oluşturan sınıftaki nesneyi `DotNetObjectReference` atın:
+* `DotNetObjectReference` Örneği oluşturan sınıftaki nesneyi atma:
 
   ```csharp
   public class ExampleJsInterop : IDisposable
@@ -175,7 +178,7 @@ Bellek sızıntısını önlemek ve aşağıdaki yaklaşımlardan birini `DotNet
   }
   ```
 
-  `ExampleJsInterop` Sınıfta gösterilen önceki desen bir bileşende de uygulanabilir:
+  `ExampleJsInterop` Sınıfında gösterilen önceki model de bir bileşende uygulanabilir:
 
   ```razor
   @page "/JSInteropComponent"
@@ -208,7 +211,7 @@ Bellek sızıntısını önlemek ve aşağıdaki yaklaşımlardan birini `DotNet
   }
   ```
 
-* Bileşen veya sınıf atmadığı `DotNetObjectReference`zaman, nesneyi istemciye atarak `.dispose()`atın:
+* Bileşen veya sınıf `DotNetObjectReference`öğesini atmazsa, şunu çağırarak `.dispose()`istemci üzerindeki nesnesini atın:
 
   ```javascript
   window.myFunction = (dotnetHelper) => {
@@ -217,14 +220,14 @@ Bellek sızıntısını önlemek ve aşağıdaki yaklaşımlardan birini `DotNet
   }
   ```
 
-## <a name="component-instance-method-call"></a>Bileşen örneği yöntemi çağrısı
+## <a name="component-instance-method-call"></a>Bileşen örneği Yöntem çağrısı
 
 Bir bileşenin .NET yöntemlerini çağırmak için:
 
-* Bileşene `invokeMethod` `invokeMethodAsync` statik bir yöntem çağrısı yapmak için veya işlevi kullanın.
-* Bileşenin statik yöntemi çağrıyı örnek yöntemine çağrıolarak `Action`sarar.
+* Bileşene statik `invokeMethod` Yöntem `invokeMethodAsync` çağrısı yapmak için or işlevini kullanın.
+* Bileşenin static yöntemi, çağırma yöntemi olarak çağrılır `Action`.
 
-İstemci tarafındaki JavaScript'te:
+İstemci tarafı JavaScript 'te:
 
 ```javascript
 function updateMessageCallerJS() {
@@ -232,7 +235,7 @@ function updateMessageCallerJS() {
 }
 ```
 
-*Sayfa/JSInteropComponent.razor*:
+*Pages/JSInteropComponent. Razor*:
 
 ```razor
 @page "/JSInteropComponent"
@@ -268,13 +271,13 @@ function updateMessageCallerJS() {
 }
 ```
 
-Her biri çağrılması gereken örnek yöntemleri olan birkaç bileşen olduğunda, her `Action`bileşenin örnek yöntemlerini (as s) çağırmak için bir yardımcı sınıf kullanın.
+Her biri çağrılacak örnek yöntemleri olan birkaç bileşen olduğunda, her bileşenin örnek yöntemlerini (as `Action`) çağırmak için bir yardımcı sınıfı kullanın.
 
 Aşağıdaki örnekte:
 
-* Bileşen `JSInterop` birkaç `ListItem` bileşen içerir.
-* Her `ListItem` bileşen bir ileti ve düğmeden oluşur.
-* Bir `ListItem` bileşen düğmesi seçildiğinde, bu `ListItem`''nin `UpdateMessage` yöntemi liste öğesi metnini değiştirir ve düğmeyi gizler.
+* `JSInterop` Bileşen birkaç `ListItem` bileşen içerir.
+* Her `ListItem` bileşen bir ileti ve bir düğmeden oluşur.
+* Bir `ListItem` bileşen düğmesi seçildiğinde, bu `ListItem` `UpdateMessage` Yöntem liste öğesi metnini değiştirir ve düğmeyi gizler.
 
 *MessageUpdateInvokeHelper.cs*:
 
@@ -299,7 +302,7 @@ public class MessageUpdateInvokeHelper
 }
 ```
 
-İstemci tarafındaki JavaScript'te:
+İstemci tarafı JavaScript 'te:
 
 ```javascript
 window.updateMessageCallerJS = (dotnetHelper) => {
@@ -308,7 +311,7 @@ window.updateMessageCallerJS = (dotnetHelper) => {
 }
 ```
 
-*Paylaşılan/ListItem.razor*:
+*Shared/ListItem. Razor*:
 
 ```razor
 @inject IJSRuntime JsRuntime
@@ -343,7 +346,7 @@ window.updateMessageCallerJS = (dotnetHelper) => {
 }
 ```
 
-*Sayfa/JSInterop.razor*:
+*Pages/Jsınterop. Razor*:
 
 ```razor
 @page "/JSInterop"
@@ -360,20 +363,20 @@ window.updateMessageCallerJS = (dotnetHelper) => {
 
 [!INCLUDE[Share interop code in a class library](~/includes/blazor-share-interop-code.md)]
 
-## <a name="avoid-circular-object-references"></a>Dairesel nesne başvurularından kaçının
+## <a name="avoid-circular-object-references"></a>Döngüsel nesne başvurularından kaçının
 
-Dairesel başvurular içeren nesneler istemcide aşağıdakiler için serileştirilemez:
+Döngüsel başvurular içeren nesneler, her biri için istemcide serileştirilemiyor:
 
-* .NET yöntemi çağırır.
-* İade türü dairesel referansları olduğunda JavaScript yöntemi C#'dan çağrı verir.
+* .NET yöntemi çağrıları.
+* Dönüş türünün döngüsel başvuruları olduğunda C# ' den JavaScript Yöntem çağrıları.
 
-Daha fazla bilgi için aşağıdaki sorunlara bakın:
+Daha fazla bilgi için aşağıdaki konulara bakın:
 
-* [Dairesel başvurular desteklenmez, iki tane alın (dotnet/aspnetcore #20525)](https://github.com/dotnet/aspnetcore/issues/20525)
-* [Öneri: Serileştirme yaparken dairesel başvuruları işlemek için mekanizma ekleme (dotnet/runtime #30820)](https://github.com/dotnet/runtime/issues/30820)
+* [Döngüsel başvurular desteklenmez, iki alma (DotNet/aspnetcore #20525)](https://github.com/dotnet/aspnetcore/issues/20525)
+* [Teklif: serileştirilirken döngüsel başvuruları işlemek için mekanizma ekleyin (DotNet/Runtime #30820)](https://github.com/dotnet/runtime/issues/30820)
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * <xref:blazor/call-javascript-from-dotnet>
-* [InteropComponent.razor örnek (dotnet/AspNetCore GitHub deposu, 3.1 sürüm şubesi)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
-* [Sunucu uygulamalarında Blazor büyük veri aktarımları gerçekleştirin](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)
+* [InteropComponent. Razor örneği (DotNet/AspNetCore GitHub deposu, 3,1 yayın dalı)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
+* [Blazor Sunucu uygulamalarında büyük veri aktarımları gerçekleştirin](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)
