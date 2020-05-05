@@ -1,22 +1,28 @@
 ---
-title: ASP.NET Core MVC ILE EF Core - öğretici serisi
+title: EF Core öğreticisi serisi ile MVC ASP.NET Core
 author: rick-anderson
 description: ''
 ms.author: riande
 ms.date: 03/27/2017
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-mvc/index
-ms.openlocfilehash: 9ff070022260aae597d71b2da8d342f41f0c976b
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 8e32f8261ebd33af035990e68031e3bf2719761d
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78657292"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773568"
 ---
-# <a name="aspnet-core-mvc-with-ef-core---tutorial-series"></a>ASP.NET Core MVC ILE EF Core - öğretici serisi
+# <a name="aspnet-core-mvc-with-ef-core---tutorial-series"></a>EF Core öğreticisi serisi ile MVC ASP.NET Core
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Bu öğretici Core 3.0 ASP.NET **güncelleştirilemedi.** [Razor Pages sürümü](xref:data/ef-rp/intro) güncellendi. Bunun ne zaman güncelleştirilebileceği hakkında bilgi için [bu GitHub sorununa](https://github.com/dotnet/AspNetCore.Docs/issues/13920)bakın.
+Bu öğretici 3,0 **not** ASP.NET Core güncelleştirilmedi. Sayfalar sürümü güncelleştirildi. [ Razor ](xref:data/ef-rp/intro) Bunun ne zaman güncelleştirilemeyebilir hakkında bilgi edinmek için [Bu GitHub sorununa](https://github.com/dotnet/AspNetCore.Docs/issues/13920)bakın.
 
 ::: moniker-end
 

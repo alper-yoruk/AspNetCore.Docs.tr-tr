@@ -1,89 +1,92 @@
 ---
-title: ASP.NET Core 3.0'daki yenilikler
+title: ASP.NET Core 3,0 ' deki yenilikler
 author: rick-anderson
-description: ASP.NET Core 3.0'daki yeni özellikler hakkında bilgi edinin.
+description: ASP.NET Core 3,0 ' deki yeni özellikler hakkında bilgi edinin.
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: 4886673a9b16b8be8d9a0b0d5c7002a91760544e
-ms.sourcegitcommit: f0aeeab6ab6e09db713bb9b7862c45f4d447771b
+ms.openlocfilehash: aa0b2b51632cff729449018f9823c38cc26ce612
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/08/2020
-ms.locfileid: "80976982"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774099"
 ---
-# <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3.0'daki yenilikler
+# <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3,0 ' deki yenilikler
 
-Bu makalede, ilgili belgelere bağlantılar ile ASP.NET Core 3.0 en önemli değişiklikleri vurgulamaktadır.
+Bu makalede, ASP.NET Core 3,0 ' deki en önemli değişiklikler ilgili belgelerin bağlantılarıyla vurgulanır.
 
 ## Blazor
 
-Blazor.NET ile etkileşimli istemci tarafı web Web Web Web Web'i oluşturmak için ASP.NET Core'da yeni bir çerçevedir:
+Blazor, .NET ile etkileşimli istemci tarafı Web Kullanıcı arabirimi oluşturmak için ASP.NET Core yeni bir çerçevedir:
 
-* JavaScript yerine C# kullanarak zengin etkileşimli web'ler oluşturun.
-* .NET'te yazılı sunucu ve istemci tarafı uygulama mantığını paylaşın.
-* Mobil tarayıcılar da dahil olmak üzere geniş tarayıcı desteği için UI'yi HTML ve CSS olarak işleyin.
+* JavaScript yerine C# kullanarak zengin etkileşimli uo 'lar oluşturun.
+* .NET ' te yazılmış sunucu tarafı ve istemci tarafı uygulama mantığını paylaşabilirsiniz.
+* Mobil tarayıcılar dahil olmak üzere geniş tarayıcı desteği için Kullanıcı arabirimini HTML ve CSS olarak işleme.
 
-Blazorçerçeve desteklenen senaryolar:
+Blazorçerçeve tarafından desteklenen senaryolar:
 
-* Yeniden kullanılabilir UI bileşenleri (Jilet bileşenleri)
+* Yeniden kullanılabilir kullanıcı arabirimiRazor bileşenleri (bileşenler)
 * İstemci tarafı yönlendirme
 * Bileşen düzenleri
-* Bağımlılık enjeksiyonu desteği
+* Bağımlılık ekleme desteği
 * Formlar ve doğrulama
-* Razor sınıf kitaplıkları içeren bileşen kitaplıkları oluşturma
+* Razor Sınıf kitaplıklarıyla bileşen kitaplıkları derleme
 * JavaScript ile birlikte çalışma
 
 Daha fazla bilgi için bkz. <xref:blazor/index>.
 
-### <a name="opno-locblazor-server"></a>BlazorSunucu
+### <a name="blazor-server"></a>BlazorServer
 
-Blazorui güncelleştirmelerinin nasıl uygulandığından bileşen oluşturma mantığını ayırır. BlazorSunucu, ASP.NET Core uygulamasında Razor bileşenlerini sunucuda barındırma desteği sağlar. UI güncelleştirmeleri bir SignalR bağlantı üzerinden işlenir. BlazorSunucu ASP.NET Core 3.0 desteklenir.
+BlazorKullanıcı arabirimi güncelleştirmelerinin uygulanma, bileşen işleme mantığını ayırır. BlazorSunucu, bir ASP.NET Core uygulamasındaki Razor sunucuda bileşenleri barındırmak için destek sağlar. Kullanıcı Arabirimi güncelleştirmeleri bir SignalR bağlantı üzerinden işlenir. BlazorSunucu ASP.NET Core 3,0 ' de desteklenir.
 
-### <a name="opno-locblazor-webassembly-preview"></a>BlazorWebAssembly (Önizleme)
+### <a name="blazor-webassembly-preview"></a>BlazorWebAssembly (Önizleme)
 
-Blazoruygulamalar, WebAssembly tabanlı .NET çalışma zamanı kullanılarak doğrudan tarayıcıda çalıştırılabilir. BlazorWebAssembly önizlemededir ve Core 3.0ASP.NET de *desteklenmez.* BlazorWebAssembly ASP.NET Core gelecekteki sürümünde desteklenecektir.
+Blazoruygulamalar, bir WebAssembly tabanlı .NET çalışma zamanı kullanarak doğrudan tarayıcıda da çalıştırılabilir. BlazorWebAssembly Önizleme *aşamasındadır ve ASP.NET Core 3,0 ' de* desteklenmez. BlazorWebAssembly ASP.NET Core gelecek bir sürümünde desteklenecektir.
 
-### <a name="razor-components"></a>Jilet bileşenleri
+### <a name="razor-components"></a>Razorbileşenleri
 
-Blazoruygulamalar bileşenlerden oluşturulur. Bileşenler, sayfa, iletişim kutusu veya form gibi kullanıcı arabiriminin (UI) kendi kendine yeten parçalarıdır. Bileşenler, UI oluşturma mantığını ve istemci tarafı olay işleyicilerini tanımlayan normal .NET sınıflarıdır. JavaScript olmadan zengin etkileşimli web uygulamaları oluşturabilirsiniz.
+Blazoruygulamalar bileşenlerden oluşturulmuştur. Bileşenler, bir sayfa, iletişim kutusu veya form gibi kullanıcı arabirimi (UI) için kendi içinde yer alan öbeklerdir. Bileşenler, Kullanıcı arabirimi işleme mantığını ve istemci tarafı olay işleyicilerini tanımlayan normal .NET sınıflarıdır. JavaScript olmadan zengin etkileşimli Web uygulamaları oluşturabilirsiniz.
 
-Bileşenler Blazor genellikle HTML ve C#'ın doğal bir karışımı olan Razor sözdizimi kullanılarak yazılır. Jilet bileşenleri, her ikisinin de Razor kullandığı için Razor Pages ve MVC görünümlerine benzer. İstek yanıt modeline dayanan sayfa ve görünümlerin aksine, bileşenler özellikle Web-yüksek ödenşeyini işlemek için kullanılır.
+İçindeki Blazor BILEŞENLER genellikle HTML ve C# Razor ' nin doğal bir karışımı olan sözdizimi kullanılarak yazılır. Razorbileşenler, her ikisi Razor de kullandıkları Razorsayfalara ve MVC görünümlerine benzerdir. Bir istek-yanıt modelini temel alan sayfaların ve görünümlerin aksine, bileşenler Kullanıcı arabirimi oluşturmayı işlemek için kullanılır.
 
 ## <a name="grpc"></a>gRPC
 
-[gRPC](https://grpc.io/):
+[GRPC](https://grpc.io/):
 
-* Popüler, yüksek performanslı bir RPC (uzaktan yordam çağrısı) çerçevesidir.
-* API geliştirme için dik kafalı bir sözleşme ilk yaklaşım sunar.
-* Şu lar gibi modern teknolojileri kullanır:
+* Popüler, yüksek performanslı bir RPC (uzak yordam çağrısı) çerçevesidir.
+* , API geliştirmeye yönelik olarak yapılan bir sözleşmenin ilk yaklaşımını sağlar.
+* , Gibi modern teknolojiler kullanır:
 
-  * Ulaşım için HTTP/2.
-  * Arabirim açıklama dili olarak protokol arabellekleri.
+  * Taşıma için HTTP/2.
+  * Arabirim açıklaması dili olarak protokol arabellekleri.
   * İkili serileştirme biçimi.
-* Şu gibi özellikler sağlar:
+* Şöyle özellikler sağlar:
 
-  * Kimlik Doğrulaması
-  * Çift yönlü akış ve akış kontrolü.
-  * İptal ve zaman zaman ları.
+  * Kimlik doğrulaması
+  * Çift yönlü akış ve akış denetimi.
+  * İptal ve zaman aşımları.
 
-core 3.0 ASP.NET gRPC işlevselliği içerir:
+ASP.NET Core 3,0 ' deki gRPC işlevselliği şunları içerir:
 
-* [Grpc.AspNetCore](https://www.nuget.org/packages/Grpc.AspNetCore) &ndash; gRPC hizmetleri barındırma için ASP.NET Core çerçeve. ASP.NET Core'daki gRPC, günlük ASP.NET, bağımlılık enjeksiyonu (DI), kimlik doğrulama ve yetkilendirme gibi standart ASP.NET Core özellikleriyle bütünleşir.
-* [Grpc.Net.Client](https://www.nuget.org/packages/Grpc.Net.Client) &ndash; tanıdık `HttpClient`üzerine inşa .NET Core için bir gRPC istemcisi .
-* [Grpc.Net.ClientFactory](https://www.nuget.org/packages/Grpc.Net.ClientFactory) &ndash; gRPC istemci `HttpClientFactory`entegrasyonu ile .
+* [GRPC. aspnetcore](https://www.nuget.org/packages/Grpc.AspNetCore) &ndash; , GRPC hizmetlerini barındırmak için bir ASP.NET Core çerçevesi. gRPC on ASP.NET Core, günlüğe kaydetme, bağımlılık ekleme (dı), kimlik doğrulama ve yetkilendirme gibi standart ASP.NET Core özelliklerle tümleştirilir.
+* [GRPC .net. istemci](https://www.nuget.org/packages/Grpc.Net.Client) &ndash; .NET Core için bir GRPC istemcisini tanıdık `HttpClient`bir şekilde oluşturur.
+* [GRPC .net. clientfactory](https://www.nuget.org/packages/Grpc.Net.ClientFactory) &ndash; GRPC istemci tümleştirmesi ile `HttpClientFactory`tümleştirme.
 
 Daha fazla bilgi için bkz. <xref:grpc/index>.
 
 ## SignalR
 
-Geçiş yönergeleri için [ SignalR güncelleştirme koduna](xref:migration/22-to-30#signalr) bakın. SignalRşimdi `System.Text.Json` JSON iletilerini serihale/deserialize etmek için kullanır. Bkz. Tabanlı serileştiriciyi geri yüklemek `Newtonsoft.Json`için talimatlar için [Newtonsoft.Json'a geç.](xref:migration/22-to-30#switch-to-newtonsoftjson)
+Bkz. geçiş yönergeleri için [kodu güncelleştirme SignalR ](xref:migration/22-to-30#signalr) . SignalRArtık JSON `System.Text.Json` iletilerini seri hale getirmek/seri durumdan çıkarmak için kullanır. Tabanlı serileştiriciyi geri yükleme `Newtonsoft.Json`yönergeleri için bkz. [Newtonsoft. JSON öğesine geçme](xref:migration/22-to-30#switch-to-newtonsoftjson) .
 
-JavaScript ve .NET Istemcileri için SignalR, destek otomatik yeniden bağlantı için eklendi. Varsayılan olarak, istemci hemen yeniden bağlanmaya çalışır ve gerekirse 2, 10 ve 30 saniye sonra yeniden deneyin. İstemci başarılı bir şekilde yeniden bağlanırsa, yeni bir bağlantı kimliği alır. Otomatik yeniden bağlanma devre dışı bırakma dır:
+İçin SignalRJavaScript ve .net istemcilerinde, otomatik yeniden bağlanma için destek eklenmiştir. Varsayılan olarak, istemci hemen yeniden bağlanmaya çalışır ve gerekirse 2, 10 ve 30 saniye sonra yeniden dener. İstemci başarıyla yeniden bağlanırsa, yeni bir bağlantı KIMLIĞI alır. Otomatik yeniden bağlanma kabul etme:
 
 ```javascript
 const connection = new signalR.HubConnectionBuilder()
@@ -92,7 +95,7 @@ const connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-Yeniden bağlantı aralıkları milisaniye tabanlı süreler dizisi geçerek belirtilebilir:
+Yeniden bağlantı aralıkları bir dizi milisaniyelik tabanlı süre geçirerek belirtilebilir:
 
 ```javascript
 .withAutomaticReconnect([0, 3000, 5000, 10000, 15000, 30000])
@@ -103,17 +106,17 @@ Yeniden bağlantı aralıklarının tam denetimi için özel bir uygulama geçir
 
 Son yeniden bağlanma aralığından sonra yeniden bağlantı başarısız olursa:
 
-* İstemci, bağlantının çevrimdışı olduğunu düşünüyor.
-* İstemci yeniden bağlanmaya çalışmayı durdurur.
+* İstemci, bağlantının çevrimdışı olduğunu varsayar.
+* İstemci yeniden bağlanmayı denemeyi durduruyor.
 
-Yeniden bağlantı denemeleri sırasında, kullanıcıya yeniden bağlantının denendiğini bildirmek için uygulama Kullanıcı Arabirimi'ni güncelleştirin.
+Yeniden bağlanma denemeleri sırasında, kullanıcıya yeniden bağlantı denenmekte olduğunu bildirmek için uygulama kullanıcı arabirimini güncelleştirin.
 
-Bağlantı kesildiğinde UI geri bildirimi SignalR sağlamak için istemci API'sı aşağıdaki olay işleyicilerini içerecek şekilde genişletildi:
+Bağlantı kesildiğinde UI geri bildirimi sağlamak için, SignalR istemci API 'si aşağıdaki olay işleyicilerini içerecek şekilde genişletilir:
 
-* `onreconnecting`: Geliştiricilere Kullanıcı Arabirimi'ni devre dışı bırakma veya kullanıcılara uygulamanın çevrimdışı olduğunu bilmeleri için bir fırsat verir.
-* `onreconnected`: Bağlantı yeniden kurulduktan sonra geliştiricilere Kullanıcı Arabirimi'ni güncelleştirme fırsatı verir.
+* `onreconnecting`: Geliştiricilere Kullanıcı arabirimini devre dışı bırakma veya uygulamanın çevrimdışı olduğunu bilmesini sağlayan bir fırsat sağlar.
+* `onreconnected`: Bağlantı kurulduktan sonra geliştiricilere Kullanıcı arabirimini güncelleştirme fırsatı verir.
 
-Aşağıdaki kod, `onreconnecting` bağlanmaya çalışırken Kullanıcı Arabirimi'ni güncelleştirmek için kullanır:
+Aşağıdaki kod, bağlanmaya `onreconnecting` çalışırken kullanıcı arabirimini güncelleştirmek için kullanır:
 
 ```javascript
 connection.onreconnecting((error) => {
@@ -124,7 +127,7 @@ connection.onreconnecting((error) => {
 });
 ```
 
-Bağlantıda Kullanıcı `onreconnected` Arabirimi'ni güncelleştirmek için aşağıdaki kod kullanır:
+Aşağıdaki kod, bağlantıda `onreconnected` Kullanıcı arabirimini güncelleştirmek için kullanır:
 
 ```javascript
 connection.onreconnected((connectionId) => {
@@ -135,13 +138,13 @@ connection.onreconnected((connectionId) => {
 });
 ```
 
-SignalR3.0 ve daha sonra bir hub yöntemi yetkilendirme gerektirdiğinde yetkilendirme işleyicileri için özel bir kaynak sağlar. Kaynak bir `HubInvocationContext`örneğidir. Aşağıdakileri `HubInvocationContext` içerir:
+SignalR3,0 ve üzeri, bir hub yöntemi yetkilendirme gerektirdiğinde, yetkilendirme işleyicilerine özel bir kaynak sağlar. Kaynak bir örneğidir `HubInvocationContext`. `HubInvocationContext` Şunları içerir:
 
 * `HubCallerContext`
 * Çağrılan hub yönteminin adı.
-* Hub yöntemine bağımsız değişkenler.
+* Hub yöntemi için bağımsız değişkenler.
 
-Azure Active Directory üzerinden birden çok kuruluş oturum açma izni veren bir sohbet odası uygulamasının aşağıdaki örneğini göz önünde bulundurun. Microsoft hesabı olan herkes sohbet etmek için oturum açabilir, ancak yalnızca sahip olan kuruluşun üyeleri kullanıcıları yasaklayabilir veya kullanıcıların sohbet geçmişlerini görüntüleyebilir. Uygulama belirli kullanıcılardan belirli işlevleri kısıtlayabilir.
+Azure Active Directory aracılığıyla birden çok kuruluşun oturum açmasına izin veren bir sohbet odası uygulamasının aşağıdaki örneğini göz önünde bulundurun. Microsoft hesabı herkes sohbet için oturum açabilir, ancak yalnızca sahip olunan kuruluşun üyeleri kullanıcıları veya kullanıcıların sohbet geçmişlerini görüntüleyebilir. Uygulama belirli kullanıcılardan belirli işlevleri kısıtlayabilir.
 
 ```csharp
 public class DomainRestrictedRequirement :
@@ -177,16 +180,16 @@ public class DomainRestrictedRequirement :
 }
 ```
 
-Önceki kodda, `DomainRestrictedRequirement` bir özel `IAuthorizationRequirement`olarak hizmet vermektedir. Kaynak `HubInvocationContext` parametresi geçirildiği için, iç mantık şunları yapabilir:
+Yukarıdaki kodda özel `DomainRestrictedRequirement` `IAuthorizationRequirement`işlevi görür. `HubInvocationContext` Kaynak parametresi geçirildiğinden iç mantık şunları yapabilir:
 
-* Hub'ın çağrıldığı bağlamı denetleyin.
-* Kullanıcının tek tek Hub yöntemlerini yürütmesine izin verme konusunda kararlar verin.
+* Hub 'ın çağrıldığı bağlamı inceleyin.
+* Kullanıcının bireysel hub yöntemlerini yürütmesine izin verirken kararlar alın.
 
-Tek tek Hub yöntemleri, kodun çalışma zamanında denetleyebileceği ilkenin adı ile işaretlenebilir. İstemciler tek tek Hub `DomainRestrictedRequirement` yöntemlerini çağırmaya çalıştıkça, işleyici metotlara erişimi çalıştırAr ve denetler. Denetimlerin erişim `DomainRestrictedRequirement` şekline bağlı olarak:
+Tek tek hub yöntemleri, çalışma zamanında kodun denetlediği ilkenin adıyla işaretlenebilir. İstemciler tek tek hub yöntemlerini çağırmayı denediğinden, `DomainRestrictedRequirement` işleyici çalışır ve yöntemlere erişimi denetler. `DomainRestrictedRequirement` Denetimlerin erişim yöntemine göre:
 
-* Tüm oturum açmış kullanıcılar `SendMessage` yöntemi arayabilir.
-* Yalnızca bir `@jabbr.net` e-posta adresiyle giriş yapmış olan kullanıcılar kullanıcıların geçmişlerini görüntüleyebilir.
-* Kullanıcıları `bob42@jabbr.net` yalnızca sohbet odasından yasaklayabilir.
+* Tüm oturum açmış kullanıcılar `SendMessage` yöntemini çağırabilir.
+* Yalnızca bir `@jabbr.net` e-posta adresiyle oturum açan kullanıcılar, kullanıcıların geçmişlerini görüntüleyebilir.
+* Yalnızca `bob42@jabbr.net` sohbet odasından kullanıcıları Ban yapabilir.
 
 ```csharp
 [Authorize]
@@ -208,11 +211,11 @@ public class ChatHub : Hub
 }
 ```
 
-İlke `DomainRestricted` oluşturma şunları içerebilir:
+`DomainRestricted` İlkeyi oluşturmak şunları içerebilir:
 
-* *Startup.cs,* yeni ilke ekleyerek.
-* Parametre `DomainRestrictedRequirement` olarak özel gereksinimi sağlayın.
-* Yetkilendirme `DomainRestricted` aracıile kayıt.
+* *Startup.cs*' de, yeni ilkeyi ekleme.
+* Özel `DomainRestrictedRequirement` gereksinimi parametre olarak belirtin.
+* Yetkilendirme `DomainRestricted` ara yazılımı ile kaydetme.
 
 ```csharp
 services
@@ -225,7 +228,7 @@ services
     });
 ```
 
-SignalRhub'lar [Endpoint Yönlendirme'yi](xref:fundamentals/routing)kullanır. SignalRhub bağlantısı daha önce açıkça yapıldı:
+SignalRHub [uç nokta yönlendirme](xref:fundamentals/routing)kullanır. SignalRHub bağlantısı daha önce açık olarak yapıldı:
 
 ```csharp
 app.UseSignalR(routes =>
@@ -234,7 +237,7 @@ app.UseSignalR(routes =>
 });
 ```
 
-Önceki sürümde, geliştiricilerin denetleyicileri, Razor sayfalarını ve hub'ları çeşitli yerlere bağlamaları gerekiyordu. Açık bağlantı, neredeyse aynı yönlendirme segmentleri bir dizi sonuçlanır:
+Önceki sürümde, geliştiriciler, Razor sayfalar ve hub 'ları çeşitli yerlerde bağlamak için gereklidir. Açık bağlantı, neredeyse aynı bir dizi yönlendirme segmentine neden olur:
 
 ```csharp
 app.UseSignalR(routes =>
@@ -248,7 +251,7 @@ app.UseRouting(routes =>
 });
 ```
 
-SignalR3.0 hub'ları uç nokta yönlendirme yoluyla yönlendirilebilir. Uç nokta yönlendirmeile, genellikle tüm yönlendirme şu şekilde `UseRouting`yapılandırılabilir:
+SignalR3,0 hub 'ları, uç nokta yönlendirme aracılığıyla yönlendirilebilir. Uç nokta yönlendirme ile, genellikle tüm yönlendirme ' de `UseRouting`yapılandırılabilir:
 
 ```csharp
 app.UseRouting(routes =>
@@ -258,9 +261,9 @@ app.UseRouting(routes =>
 });
 ```
 
-ASP.NET Core 3.0 SignalR ekledi:
+ASP.NET Core 3,0 SignalR eklendi:
 
-İstemciden sunucuya akış. İstemciden sunucuya akışla, sunucu tarafı yöntemleri bir `IAsyncEnumerable<T>` `ChannelReader<T>`veya . Aşağıdaki C# örneğinde, `UploadStream` Hub'daki yöntem istemciden bir dize akışı alır:
+İstemciden sunucuya akış. İstemciden sunucuya akışla, sunucu tarafı yöntemleri `IAsyncEnumerable<T>` veya `ChannelReader<T>`örneklerinden birini alabilir. Aşağıdaki C# örneğinde, hub 'daki `UploadStream` Yöntem istemciden dizelerin akışını alacaktır:
 
 ```csharp
 public async Task UploadStream(IAsyncEnumerable<string> stream)
@@ -272,9 +275,9 @@ public async Task UploadStream(IAsyncEnumerable<string> stream)
 }
 ```
 
-.NET istemci uygulamaları, `IAsyncEnumerable<T>` yukarıdaki `ChannelReader<T>` `UploadStream` Hub `stream` yönteminin bağımsız değişkeni olarak bir veya örnek ten geçebilir.
+`IAsyncEnumerable<T>` .NET istemci uygulamaları, yukarıdaki `ChannelReader<T>` `stream` `UploadStream` hub yönteminin bağımsız değişkeni olarak bir ya da örneği geçirebilir.
 
-`for` Döngü tamamlandıktan ve yerel işlev çıktıktan sonra akış tamamlama gönderilir:
+`for` Döngü tamamlandıktan ve yerel işlev çıktıktan sonra, akış tamamlama gönderilir:
 
 ```csharp
 async IAsyncEnumerable<string> clientStreamData()
@@ -289,59 +292,59 @@ async IAsyncEnumerable<string> clientStreamData()
 await connection.SendAsync("UploadStream", clientStreamData());
 ```
 
-JavaScript istemci uygulamaları SignalR `Subject` yukarıdaki `stream` `UploadStream` Hub yönteminin bağımsız değişkeni için (veya [RxJS Konusu)](https://rxjs.dev/api/index/class/Subject)kullanır.
+JavaScript istemci uygulamaları, yukarıdaki SignalR `Subject` `stream` `UploadStream` hub yönteminin bağımsız değişkeni olarak (veya bir [rxjs konusu](https://rxjs.dev/api/index/class/Subject)) kullanır.
 
 ```javascript
 let subject = new signalR.Subject();
 await connection.send("StartStream", "MyAsciiArtStream", subject);
 ```
 
-JavaScript kodu, dizeleri yakalanan ve sunucuya gönderilmeye hazır olarak işlemek için `subject.next` yöntemi kullanabilirsiniz.
+JavaScript kodu, yakalandıkları ve `subject.next` sunucuya gönderilmeye hazırlanıyor gibi dizeleri işlemek için yöntemini kullanabilir.
 
 ```javascript
 subject.next("example");
 subject.complete();
 ```
 
-Önceki iki parçacık gibi kod kullanılarak, gerçek zamanlı akış deneyimleri oluşturulabilir.
+Önceki iki kod parçacığı gibi kodu kullanarak gerçek zamanlı akış deneyimleri oluşturulabilir.
 
-## <a name="new-json-serialization"></a>Yeni JSON serileştirme
+## <a name="new-json-serialization"></a>Yeni JSON serileştirmesi
 
-ASP.NET Core 3.0 <xref:System.Text.Json> şimdi Varsayılan olarak JSON serileştirme için kullanır:
+ASP.NET Core 3,0 artık JSON <xref:System.Text.Json> serileştirme için varsayılan olarak kullanır:
 
-* Okur ve JSON asynchronously yazıyor.
-* UTF-8 metni için optimize edi.
-* Genellikle `Newtonsoft.Json`daha yüksek performans .
+* JSON 'yi zaman uyumsuz olarak okur ve yazar.
+* UTF-8 metni için iyileştirilmiştir.
+* Genellikle daha yüksek performans `Newtonsoft.Json`.
 
-Core 3.0'ASP.NET Json.NET eklemek için Bkz. [Newtonsoft.Json tabanlı JSON format desteği ekle.](xref:web-api/advanced/formatting#add-newtonsoftjson-based-json-format-support)
+ASP.NET Core 3,0 ' ye Json.NET eklemek için bkz. [Newtonsoft. JSON tabanlı JSON biçimi desteği ekleme](xref:web-api/advanced/formatting#add-newtonsoftjson-based-json-format-support).
 
-## <a name="new-razor-directives"></a>Yeni Razor direktifleri
+## <a name="new-razor-directives"></a>Yeni Razor yönergeler
 
-Aşağıdaki liste yeni Razor yönergeleri içerir:
+Aşağıdaki listede yeni Razor yönergeler yer almaktadır:
 
-* [`@attribute`](xref:mvc/views/razor#attribute)&ndash; Yönerge, `@attribute` verilen özniteliği oluşturulan sayfa veya görünümün sınıfına uygular. Örneğin, `@attribute [Authorize]`.
-* [`@implements`](xref:mvc/views/razor#implements)&ndash; Yönerge, `@implements` oluşturulan sınıf için bir arabirim uygular. Örneğin, `@implements IDisposable`.
+* [`@attribute`](xref:mvc/views/razor#attribute)&ndash; Yönergesi verilen özniteliği oluşturulan sayfanın veya görünümün sınıfına `@attribute` uygular. Örneğin, `@attribute [Authorize]`.
+* [`@implements`](xref:mvc/views/razor#implements)&ndash; Yönergesi, oluşturulan sınıf için bir arabirim `@implements` uygular. Örneğin, `@implements IDisposable`.
 
-## <a name="identityserver4-supports-authentication-and-authorization-for-web-apis-and-spas"></a>IdentityServer4 web API'leri ve SP'leri için kimlik doğrulamayı ve yetkilendirmeyi destekler
+## <a name="identityserver4-supports-authentication-and-authorization-for-web-apis-and-spas"></a>Identityserver4, Web API 'Leri ve maça 'Ları için kimlik doğrulama ve yetkilendirmeyi destekler
 
-ASP.NET Core 3.0, web API yetkilendirme desteğini kullanarak Tek Sayfalı Uygulamalarda (SPA' lar) kimlik doğrulaması sunar. ASP.NET Kullanıcıların kimlik doğrulaması ve depolanması için Temel Kimlik, Open ID Connect'i uygulamak için [IdentityServer4](https://identityserver.io/) ile birleştirilir.
+ASP.NET Core 3,0, Web API yetkilendirmesi desteğini kullanarak tek sayfalı uygulamalarda (Spaon) kimlik doğrulaması sunmaktadır. Kimlik Identity doğrulama ve depolama için ASP.NET Core, açık kimlik bağlamayı uygulamak için [ıdentityserver4](https://identityserver.io/) ile birleştirilir.
 
-IdentityServer4 Core 3.0 ASP.NET için bir OpenID Connect ve OAuth 2.0 çerçevesidir. Aşağıdaki güvenlik özelliklerini sağlar:
+Identityserver4, ASP.NET Core 3,0 için bir OpenID Connect ve OAuth 2,0 çerçevesidir. Aşağıdaki güvenlik özelliklerini sunar:
 
-* Hizmet Olarak Kimlik Doğrulama (AaaS)
-* Birden fazla uygulama türü üzerinde tek oturum açma/kapatma (SSO)
-* API'ler için erişim denetimi
-* Federasyon Ağ Geçidi
+* Hizmet olarak kimlik doğrulaması (AaaS)
+* Birden çok uygulama türü üzerinde çoklu oturum açma/kapatma (SSO)
+* API 'Ler için erişim denetimi
+* Federasyon ağ geçidi
 
-Daha fazla bilgi [için, IdentityServer4 belgelerine](http://docs.identityserver.io/en/latest/index.html) veya [SP'ler için kimlik doğrulama ve yetkilendirmeye](xref:security/authentication/identity/spa)bakın.
+Daha fazla bilgi için bkz. [ıdentityserver4 belgeleri](http://docs.identityserver.io/en/latest/index.html) veya [kimlik doğrulaması ve kimlik doğrulama ve yetkilendirme](xref:security/authentication/identity/spa).
 
 ## <a name="certificate-and-kerberos-authentication"></a>Sertifika ve Kerberos kimlik doğrulaması
 
 Sertifika kimlik doğrulaması şunları gerektirir:
 
-* Sunucuyu sertifika kabul etmek üzere yapılandırma.
-* Kimlik doğrulama ara sını `Startup.Configure`ekleme.
-* Sertifika kimlik doğrulama hizmetini `Startup.ConfigureServices`'ye ekleme
+* Sunucu, sertifikaları kabul edecek şekilde yapılandırılıyor.
+* Kimlik doğrulama ara yazılımı ' `Startup.Configure`ye ekleme.
+* ' De `Startup.ConfigureServices`sertifika kimlik doğrulama hizmeti ekleniyor.
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -359,15 +362,15 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 }
 ```
 
-Sertifika kimlik doğrulaması için seçenekler şunları içerir:
+Sertifika kimlik doğrulaması seçenekleri şunları yapabilme:
 
-* İmzalı sertifikaları kabul edin.
-* Sertifika iptalini denetleyin.
-* Sunulan sertifikanın içinde doğru kullanım bayrakları olduğundan kontrol edin.
+* Otomatik olarak imzalanan sertifikaları kabul edin.
+* Sertifika iptali olup olmadığını denetleyin.
+* Profili oluşturulan sertifikanın, içinde doğru kullanım bayrakları olduğunu denetleyin.
 
-Varsayılan kullanıcı ilkesi sertifika özelliklerinden oluşturulur. Kullanıcı ilkesi, anaparanın eklanmasını veya değiştirilmesini sağlayan bir olay içerir. Daha fazla bilgi için bkz. <xref:security/authentication/certauth>.
+Varsayılan bir Kullanıcı sorumlusu, sertifika özelliklerinden oluşturulur. Kullanıcı sorumlusu, sorumlunun takıma veya değiştirilmesine izin veren bir olay içerir. Daha fazla bilgi için bkz. <xref:security/authentication/certauth>.
 
-[Windows Kimlik Doğrulama](/windows-server/security/windows-authentication/windows-authentication-overview) Linux ve macOS üzerine genişletildi. Önceki sürümlerde, Windows Kimlik Doğrulama [IIS](xref:host-and-deploy/iis/index) ve [HttpSys](xref:fundamentals/servers/httpsys)ile sınırlıydı. Core 3.0ASP.NET, [Kestrel](xref:fundamentals/servers/kestrel) Windows, Linux ve MacOS Windows etki alanı birleştirilmiş ana bilgisayarlar için Müzakere, [Kerberos](/windows-server/security/kerberos/kerberos-authentication-overview)ve [NTLM](/windows-server/security/kerberos/ntlm-overview)kullanma yeteneğine sahiptir. Bu kimlik doğrulama şemalarının kerkenez desteği [Microsoft.AspNetCore.Authentication.Negotiate NuGet](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate) paketi tarafından sağlanır. Diğer kimlik doğrulama hizmetlerinde olduğu gibi, kimlik doğrulama uygulamasını geniş bir şekilde yapılandırın ve hizmeti yapılandırın:
+[Windows kimlik doğrulaması](/windows-server/security/windows-authentication/windows-authentication-overview) , Linux ve MacOS üzerine genişletildi. Önceki sürümlerde, Windows kimlik doğrulaması [IIS](xref:host-and-deploy/iis/index) ve [httpsys](xref:fundamentals/servers/httpsys)ile sınırlandırıldı. ASP.NET Core 3,0 ' de [Kestrel](xref:fundamentals/servers/kestrel) , Windows etki alanına katılmış konaklar için Windows, Linux ve MacOS üzerinde Negotiate, [Kerberos](/windows-server/security/kerberos/kerberos-authentication-overview)ve [NTLM](/windows-server/security/kerberos/ntlm-overview)kullanma olanağına sahiptir. Bu kimlik doğrulama düzenlerinin Kestrel desteği [Microsoft. AspNetCore. Authentication. Negotiate NuGet](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate) paketi tarafından sağlanır. Diğer kimlik doğrulama hizmetlerinde olduğu gibi, kimlik doğrulama uygulaması genelinde yapılandırın ve ardından hizmeti yapılandırın:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -386,59 +389,59 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 Ana bilgisayar gereksinimleri:
 
-* Windows ana bilgisayarlarının, uygulamayı barındıran kullanıcı hesabına [Hizmet Ana](/windows/win32/ad/service-principal-names) Adı (SPNs) eklenmeleri gerekir.
-* Linux ve macOS makineleri etki alanına birleştirilmelidir.
-  * Web işlemi için SPN'ler oluşturulmalıdır.
-  * [Anahtar sekme dosyaları](https://blogs.technet.microsoft.com/pie/2018/01/03/all-you-need-to-know-about-keytab-files/) ana bilgisayarda oluşturulmalı ve yapılandırılmalıdır.
+* Windows Konakları, uygulamayı barındıran Kullanıcı hesabına eklenmiş [hizmet sorumlusu adlarına](/windows/win32/ad/service-principal-names) (SPN) sahip olmalıdır.
+* Linux ve macOS makineleri etki alanına katılmalıdır.
+  * Web işlemi için SPN oluşturulması gerekir.
+  * Ana makinede [keytab dosyalarının](https://blogs.technet.microsoft.com/pie/2018/01/03/all-you-need-to-know-about-keytab-files/) oluşturulup yapılandırılması gerekir.
 
 Daha fazla bilgi için bkz. <xref:security/authentication/windowsauth>.
 
 ## <a name="template-changes"></a>Şablon değişiklikleri
 
-Web UI şablonları (Razor Pages, MVC denetleyici ve görünümler) aşağıdaki kaldırılmış var:
+Web UI şablonları (Razor sayfalar, denetleyici ve görünümlerle Mvc) aşağıdaki gibi kaldırılmıştır:
 
-* Çerez onayı UI artık dahil değildir. ASP.NET Core 3.0 şablonu oluşturulan bir uygulamada çerez <xref:security/gdpr>onayı özelliğini etkinleştirmek için bkz.
-* Komut dosyaları ve ilgili statik varlıklar artık CDN'ler kullanmak yerine yerel dosyalar olarak başvurulmaktadır. Daha fazla bilgi için, bkz [#14350.](https://github.com/dotnet/AspNetCore.Docs/issues/14350)
+* Tanımlama bilgisi onayı Kullanıcı arabirimi artık dahil değildir. ASP.NET Core 3,0 şablon tarafından oluşturulan bir uygulamada tanımlama bilgisi onay özelliğini etkinleştirmek için, bkz <xref:security/gdpr>..
+* Betiklerin ve ilgili statik varlıkların artık CDNs kullanmak yerine yerel dosyalar olarak başvuruluyor. Daha fazla bilgi için, bkz. [betiklerin ve ilgili statik varlıkların artık geçerli ortama göre CDNs kullanmak yerine yerel dosyalar olarak başvuruluyor (ASPNET/AspNetCore. Docs #14350)](https://github.com/dotnet/AspNetCore.Docs/issues/14350).
 
-Açısal 8'i kullanmak üzere güncelleştirilmiş Açısal şablon.
+Angular şablonu, angular 8 ' i kullanacak şekilde güncelleştirildi.
 
-Razor sınıf kitaplığı (RCL) şablonu varsayılan olarak Razor bileşen geliştirme için varsayılan dır. Visual Studio'da yeni bir şablon seçeneği, sayfalar ve görünümler için şablon desteği sağlar. Komut kabuğundaki şablondan Bir RCL oluştururken, `--support-pages-and-views` `dotnet new razorclasslib --support-pages-and-views`seçeneği ().
+Razor Sınıf kitaplığı (RCL) şablonu varsayılan olarak varsayılan Razor olarak bileşen geliştirme olur. Visual Studio 'da yeni bir şablon seçeneği, sayfalar ve görünümler için şablon desteği sağlar. Bir komut kabuğunda şablondan RCL oluştururken, ( `--support-pages-and-views` `dotnet new razorclasslib --support-pages-and-views`) seçeneğini geçirin.
 
 ## <a name="generic-host"></a>Genel Konak
 
-Core 3.0 şablonlarının <xref:fundamentals/host/generic-host>ASP.NET kullanılır. Önceki sürümler kullanılır. <xref:Microsoft.AspNetCore.Hosting.WebHostBuilder> .NET Core Generic Host<xref:Microsoft.Extensions.Hosting.HostBuilder>() kullanarak web'e özgü olmayan diğer sunucu senaryoları ile ASP.NET Core uygulamaları daha iyi entegrasyon sağlar. Daha fazla bilgi için, [HostBuilder WebHostBuilder yerini](xref:migration/22-to-30?view=aspnetcore-2.2#hostbuilder-replaces-webhostbuilder)bakın.
+ASP.NET Core 3,0 şablonları kullanılır <xref:fundamentals/host/generic-host>. Önceki sürümler kullanıldı <xref:Microsoft.AspNetCore.Hosting.WebHostBuilder>. .NET Core Genel Host (<xref:Microsoft.Extensions.Hosting.HostBuilder>) kullanımı, Web 'e özgü olmayan diğer sunucu senaryolarıyla ASP.NET Core uygulamaları daha iyi tümleştirme sağlar. Daha fazla bilgi için bkz. [Hostbuilder WebHostBuilder 'ın yerini alır](xref:migration/22-to-30?view=aspnetcore-2.2#hostbuilder-replaces-webhostbuilder).
 
-### <a name="host-configuration"></a>Ana bilgisayar yapılandırması
+### <a name="host-configuration"></a>Konak yapılandırması
 
-ASP.NET Core 3.0 yayımlanmasından önce, önceden belirlenmiş `ASPNETCORE_` ortam değişkenleri Web Barındıran Kişi'nin ana bilgisayar yapılandırması için yüklenmiş. 3.0'da, `AddEnvironmentVariables` ana bilgisayar yapılandırması `DOTNET_` için önceden belirlenmiş `CreateDefaultBuilder`ortam değişkenlerini yüklemek için kullanılır.
+ASP.NET Core 3,0 ' nin yayınlanmasından önce, Web konağının ana bilgisayar `ASPNETCORE_` yapılandırması için, öneki olan ortam değişkenleri yüklendi. 3,0 ' de `AddEnvironmentVariables` , ile `DOTNET_` `CreateDefaultBuilder`konak yapılandırması için önekli ortam değişkenlerini yüklemek için kullanılır.
 
-### <a name="changes-to-startup-constructor-injection"></a>Başlangıç yapıcı enjeksiyonunda yapılan değişiklikler
+### <a name="changes-to-startup-constructor-injection"></a>Başlangıç Oluşturucu Ekleme değişiklikleri
 
-Genel Ana Bilgisayar yalnızca yapıcı `Startup` enjeksiyon için aşağıdaki türleri destekler:
+Genel konak yalnızca Oluşturucu ekleme için `Startup` aşağıdaki türleri destekler:
 
 * <xref:Microsoft.Extensions.Hosting.IHostEnvironment>
 * `IWebHostEnvironment`
 * <xref:Microsoft.Extensions.Configuration.IConfiguration>
 
-Tüm hizmetler yine de `Startup.Configure` doğrudan yönteme bağımsız değişken olarak enjekte edilebilir. Daha fazla bilgi için bkz [#353.](https://github.com/aspnet/Announcements/issues/353)
+Tüm hizmetler yine de `Startup.Configure` yönteme bağımsız değişken olarak eklenebilir. Daha fazla bilgi için bkz. [genel ana bilgisayar başlangıç Oluşturucu Ekleme (ASPNET/duyurular #353)](https://github.com/aspnet/Announcements/issues/353).
 
 ## <a name="kestrel"></a>Kestrel
 
-* Kerkenez yapılandırması Genel Ana Bilgisayar'a geçiş için güncelleştirildi. 3.0 yılında, Kerkenez tarafından `ConfigureWebHostDefaults`sağlanan web barındırma oluşturucu üzerinde yapılandırılmıştır.
-* Bağlantı Bağdaştırıcıları Kerkenez'den kaldırıldı ve ASP.NET Core ardışık ASP.NET'daki ANCAK alt düzey bağlantılar için BENZER Olan Bağlantı Middleware ile değiştirildi.
-* Kerkenez aktarım katmanı, 'de `Connections.Abstractions`genel bir arayüz olarak ortaya çıkmıştır.
-* Üstbilgi ve römorklar arasındaki belirsizlik, izleyen üstbilginin yeni bir koleksiyona taşınmasıyla giderildi.
-* Senkron G/Ç API'leri, `HttpRequest.Body.Read`örneğin, uygulama çökmelerine yol açan iş parçacığı açlığı için ortak bir kaynaktır. 3.0'da, `AllowSynchronousIO` varsayılan olarak devre dışı bırakılır.
+* Kestrel yapılandırması, genel konağa geçiş için güncelleştirildi. 3,0 ' de, Kestrel tarafından `ConfigureWebHostDefaults`sağlanmış Web ana bilgisayar Oluşturucu üzerinde yapılandırılır.
+* Bağlantı bağdaştırıcıları, Kestrel adresinden kaldırılmıştır ve bağlantı ara yazılımı ile değiştirilmiştir ve bu, ASP.NET Core işlem hattındaki HTTP ara hattına benzer ancak alt düzey bağlantılar için kullanılır.
+* Kestrel aktarım katmanı, içinde `Connections.Abstractions`ortak bir arabirim olarak kullanıma sunuldu.
+* Sondaki üstbilgiler yeni bir koleksiyona taşınarak üstbilgiler ve tanıtımları arasındaki belirsizlik çözüldü.
+* Gibi zaman uyumlu g/ç API 'Leri `HttpRequest.Body.Read`, uygulama kilitlenmelerine neden olan yaygın bir iş parçacığı kaynağıdır. 3,0 ' `AllowSynchronousIO` de varsayılan olarak devre dışıdır.
 
 Daha fazla bilgi için bkz. <xref:migration/22-to-30#kestrel>.
 
-## <a name="http2-enabled-by-default"></a>VARSAYıLAN OLARAK ETKINLEŞTIRILEN HTTP/2
+## <a name="http2-enabled-by-default"></a>Varsayılan olarak etkin HTTP/2
 
-HTTPS uç noktaları için Kestrel'de varsayılan olarak HTTP/2 etkinleştirilir. İşletim sistemi tarafından desteklendiğinde IIS veya HTTP.sys için HTTP/2 desteği etkinleştirilir.
+HTTP/2, HTTPS uç noktaları için Kestrel içinde varsayılan olarak etkindir. IIS veya HTTP. sys için HTTP/2 desteği, işletim sistemi tarafından desteklendikleri zaman etkindir.
 
 ## <a name="eventcounters-on-request"></a>İstek üzerine EventCounters
 
-Hosting EventSource, `Microsoft.AspNetCore.Hosting`gelen isteklerle ilgili <xref:System.Diagnostics.Tracing.EventCounter> aşağıdaki yeni türleri yayır:
+EventSource `Microsoft.AspNetCore.Hosting`barındırma, gelen isteklerle ilgili aşağıdaki yeni <xref:System.Diagnostics.Tracing.EventCounter> türleri yayar:
 
 * `requests-per-second`
 * `total-requests`
@@ -447,18 +450,18 @@ Hosting EventSource, `Microsoft.AspNetCore.Hosting`gelen isteklerle ilgili <xref
 
 ## <a name="endpoint-routing"></a>Uç nokta yönlendirme
 
-Çerçevelerin (örneğin, MVC) ara yazılımla iyi çalışmasını sağlayan Uç Nokta Yönlendirmesi geliştirildi:
+Çerçeveler 'in (örneğin, MVC) ara yazılım ile iyi çalışmasına izin veren uç nokta yönlendirme geliştirildi:
 
-* Ara yazılım ve uç noktaların `Startup.Configure`sırası, istek işleme ardışık düzeninde yapılandırılabilir.
-* Uç noktalar ve ara yazılımlar, Sağlık Denetimleri gibi diğer ASP.NET Çekirdek tabanlı teknolojiler ile iyi bir şekilde oluşur.
-* Uç noktalar, hem ara yazılımda hem de MVC'de CORS veya yetkilendirme gibi bir ilke uygulayabilir.
-* Filtreler ve öznitelikler denetleyicilerde yöntemler üzerine yerleştirilebilir.
+* Ara yazılım ve uç noktaların sırası istek işleme ardışık düzeninde yapılandırılabilir `Startup.Configure`.
+* Uç noktalar ve ara yazılımlar, sistem durumu denetimleri gibi diğer ASP.NET Core tabanlı teknolojilerle birlikte.
+* Uç noktalar, hem yazılım hem de MVC 'de CORS veya yetkilendirme gibi bir ilke uygulayabilir.
+* Filtreler ve öznitelikler, denetleyicilerde yöntemler üzerine yerleştirilebilir.
 
 Daha fazla bilgi için bkz. <xref:fundamentals/routing#routing-basics>.
 
 ## <a name="health-checks"></a>Sistem durumu denetimleri
 
-Sistem Durumu Denetimleri, Genel Ana Bilgisayar ile uç nokta yönlendirmeyi kullanır. In, `Startup.Configure` `MapHealthChecks` bitiş noktası URL'si veya göreli yolu olan bitiş noktası oluşturucuyu arayın:
+Sistem durumu denetimleri, genel ana bilgisayar ile Endpoint Routing kullanır. ' `Startup.Configure`De, `MapHealthChecks` uç nokta URL 'si veya göreli yol ile Endpoint Builder ' ı çağırın:
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -467,63 +470,63 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-Sistem Durumu Denetimleri bitiş noktaları şunları yapabilir:
+Durum denetimleri uç noktaları şunları yapabilir:
 
-* İzin verilen bir veya daha fazla ana bilgisayar/bağlantı noktası belirtin.
-* Yetkilendirme gerektirir.
-* CORS gerektirir.
+* İzin verilen bir veya daha fazla Konakları/bağlantı noktasını belirtin.
+* Yetkilendirme gerektir.
+* CORS gerektir.
 
 Daha fazla bilgi için aşağıdaki makalelere bakın:
 
 * <xref:migration/22-to-30#health-checks>
 * <xref:host-and-deploy/health-checks>
 
-## <a name="pipes-on-httpcontext"></a>HttpContext üzerinde Borular
+## <a name="pipes-on-httpcontext"></a>HttpContext üzerindeki kanallar
 
-Artık istek gövdesini okumak ve <xref:System.IO.Pipelines> YANıT gövdesini API'yi kullanarak yazmak mümkündür. Sanal Makineye (VM) bağlı bir veya birden çok işletim sistemi diski içerdiği için <!-- <xref:Microsoft.AspNetCore.Http.HttpRequest.BodyReader> --> `HttpRequest.BodyReader`özelliği istek <xref:System.IO.Pipelines.PipeReader> gövdesini okumak için kullanılabilecek bir özellik sağlar. Sanal Makineye (VM) bağlı bir veya birden çok işletim sistemi diski içerdiği için <!-- <xref:Microsoft.AspNetCore.Http.> --> `HttpResponse.BodyWriter`özelliği yanıt <xref:System.IO.Pipelines.PipeWriter> gövdesi yazmak için kullanılabilecek bir sağlar. `HttpRequest.BodyReader`akımın `HttpRequest.Body` bir analogudur. `HttpResponse.BodyWriter`akımın `HttpResponse.Body` bir analogudur.
+Artık istek gövdesini okumak ve yanıt gövdesini <xref:System.IO.Pipelines> API kullanarak yazmak mümkündür. Sanal Makineye (VM) bağlı bir veya birden çok işletim sistemi diski içerdiği için <!-- <xref:Microsoft.AspNetCore.Http.HttpRequest.BodyReader> --> `HttpRequest.BodyReader`özelliği, istek <xref:System.IO.Pipelines.PipeReader> gövdesini okumak için kullanılabilecek bir sağlar. Sanal Makineye (VM) bağlı bir veya birden çok işletim sistemi diski içerdiği için <!-- <xref:Microsoft.AspNetCore.Http.> --> `HttpResponse.BodyWriter`özelliği, yanıt <xref:System.IO.Pipelines.PipeWriter> gövdesini yazmak için kullanılabilecek bir sağlar. `HttpRequest.BodyReader``HttpRequest.Body` akışın analog bir kadır. `HttpResponse.BodyWriter``HttpResponse.Body` akışın analog bir kadır.
 
 <!-- indirectly related, https://github.com/dotnet/docs/pull/14414 won't be published by 9/23  -->
 
-## <a name="improved-error-reporting-in-iis"></a>IIS'de geliştirilmiş hata raporlaması
+## <a name="improved-error-reporting-in-iis"></a>IIS 'de geliştirilmiş hata raporlama
 
-IIS'de ASP.NET Core uygulamalarını barındırırken ki başlangıç hataları artık daha zengin tanılama verileri üretir. Bu hatalar, uygun olan her yerde yığın izleriyle Birlikte Windows Olay Günlüğü'ne bildirilir. Ayrıca, tüm uyarılar, hatalar ve işlenmemiş özel durumlar Windows Olay Günlüğü'ne günlüğe kaydedilir.
+IIS 'de ASP.NET Core uygulamalar barındırırken başlatma hataları artık daha zengin Tanılama verileri oluşturuyor. Bu hatalar, geçerli her yerde yığın izlemelerle Windows olay günlüğü 'ne bildirilir. Ayrıca, tüm uyarılar, hatalar ve işlenmemiş özel durumlar Windows olay günlüğü 'ne kaydedilir.
 
-## <a name="worker-service-and-worker-sdk"></a>İşçi Hizmeti ve İşçi SDK
+## <a name="worker-service-and-worker-sdk"></a>Çalışan hizmeti ve çalışan SDK 'Sı
 
-.NET Core 3.0 yeni İşçi Hizmeti uygulaması şablonu tanıttı. Bu şablon, .NET Core'da uzun süre çalışan hizmetleri yazmak için bir başlangıç noktası sağlar.
+.NET Core 3,0 yeni çalışan hizmeti uygulama şablonunu tanıtır. Bu şablon, .NET Core 'da uzun süre çalışan hizmetler yazmak için bir başlangıç noktası sağlar.
 
 Daha fazla bilgi için bkz.
 
-* [.NET Çekirdek İşçiler Windows Hizmetleri olarak](https://devblogs.microsoft.com/aspnet/net-core-workers-as-windows-services/)
+* [Windows Hizmetleri olarak .NET Core çalışanları](https://devblogs.microsoft.com/aspnet/net-core-workers-as-windows-services/)
 * <xref:fundamentals/host/hosted-services>
 * <xref:host-and-deploy/windows-service>
 
-## <a name="forwarded-headers-middleware-improvements"></a>İleşli Üstbilgi Ara ware geliştirmeleri
+## <a name="forwarded-headers-middleware-improvements"></a>İletilen üstbilgiler ara yazılımı geliştirmeleri
 
-ASP.NET Core'un önceki <xref:Microsoft.AspNetCore.Builder.HstsBuilderExtensions.UseHsts*> sürümlerinde, bir Azure Linux'a veya IIS dışındaki herhangi bir ters proxy'nin arkasına dağıtıldığında arama yapmak ve <xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection*> sorunludur. Önceki sürümleri için düzeltme [İleri Linux ve Non-IIS ters yakınlıklar için düzeni](xref:host-and-deploy/proxy-load-balancer#forward-the-scheme-for-linux-and-non-iis-reverse-proxies)belgelenmiştir.
+Önceki ASP.NET Core sürümlerinde, <xref:Microsoft.AspNetCore.Builder.HstsBuilderExtensions.UseHsts*> <xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection*> bir Azure LINUX 'a dağıtılırken veya IIS dışında herhangi bir ters proxy 'nin arkasında sorun. Önceki sürümlere yönelik düzeltmeler, [Linux ve IIS olmayan ters proxy 'lerin düzenini iletme](xref:host-and-deploy/proxy-load-balancer#forward-the-scheme-for-linux-and-non-iis-reverse-proxies)bölümünde belgelenmiştir.
 
-Bu senaryo Core 3.0 ASP.NET düzeltilir. Ana bilgisayar, [Forwarded Headers Middleware](xref:host-and-deploy/proxy-load-balancer#forwarded-headers-middleware-options) `ASPNETCORE_FORWARDEDHEADERS_ENABLED` ortam değişkeni `true`. `ASPNETCORE_FORWARDEDHEADERS_ENABLED`bizim konteyner `true` görüntüleri ayarlanır.
+Bu senaryo ASP.NET Core 3,0 ' de düzeltilmiştir. `ASPNETCORE_FORWARDEDHEADERS_ENABLED` Ortam değişkeni olarak `true`ayarlandığında, ana bilgisayar [iletilen üstbilgiler ara yazılımını](xref:host-and-deploy/proxy-load-balancer#forwarded-headers-middleware-options) sağlar. `ASPNETCORE_FORWARDEDHEADERS_ENABLED`, kapsayıcı görüntülerimizde olarak `true` ayarlanır.
 
 ## <a name="performance-improvements"></a>Performans iyileştirmeleri
 
-ASP.NET Core 3.0 bellek kullanımını azaltmak ve iş verimi geliştirmek birçok iyileştirmeler içerir:
+ASP.NET Core 3,0, bellek kullanımını azaltan ve üretilen işi geliştiren birçok geliştirme içerir:
 
-* Kapsamlı hizmetler için yerleşik bağımlılık enjeksiyon konteyneri kullanırken bellek kullanımında azalma.
-* Ara yazılım senaryoları ve yönlendirme de dahil olmak üzere çerçeve genelinde ayırmalarda azalma.
-* WebSocket bağlantıları için bellek kullanımında azalma.
-* HTTPS bağlantıları için bellek azaltma ve iş geliştirmeleri.
-* Yeni optimize edilmiş ve tamamen asynchronous JSON serializer.
-* Form ayrıştırma bellek kullanımı ve iş geliştirmeleri azalma.
+* Kapsamlı hizmetler için yerleşik bağımlılık ekleme kapsayıcısını kullanırken bellek kullanımında azaltma.
+* Ara yazılım senaryoları ve yönlendirme dahil olmak üzere çerçeve genelinde ayırmalarda azaltma.
+* WebSocket bağlantıları için bellek kullanımında azaltma.
+* HTTPS bağlantıları için bellek azaltma ve verimlilik geliştirmeleri.
+* Yeni iyileştirilmiş ve tamamen zaman uyumsuz JSON serileştiricisi.
+* Form ayrıştırılırken bellek kullanımı ve üretilen iş iyileştirmeleri azaltılması.
 
-## <a name="aspnet-core-30-only-runs-on-net-core-30"></a>ASP.NET Core 3.0 yalnızca .NET Core 3.0 üzerinde çalışır
+## <a name="aspnet-core-30-only-runs-on-net-core-30"></a>ASP.NET Core 3,0 yalnızca .NET Core 3,0 üzerinde çalışır
 
-Core 3.0ASP.NET itibariyle .NET Framework artık desteklenen bir hedef çerçevesi değildir. .NET Framework'u hedefleyen projeler [.NET Core 2.1 LTS sürümü](https://dotnet.microsoft.com/download/dotnet-core/2.1)kullanılarak tam destekli bir şekilde devam edebilir. Core 2.1.x ile ilgili paketlerin çoğu ASP.NET .NET Core 2.1 için üç yıllık LTS döneminin ötesinde süresiz olarak desteklenecektir.
+ASP.NET Core 3,0 itibariyle, .NET Framework artık desteklenen bir hedef çerçeve değildir. .NET Framework hedefleyen projeler [.NET Core 2,1 LTS sürümünü](https://dotnet.microsoft.com/download/dotnet-core/2.1)kullanarak tam olarak desteklenen bir biçimde devam edebilir. ASP.NET Core 2.1. x ile ilgili paketlerin çoğu, .NET Core 2,1 için üç yıllık LTS döneminin ötesinde süresiz olarak desteklenecektir.
 
-Geçiş bilgileri için [kodunuzun .NET Framework'den .NET Core'a geçişine](/dotnet/core/porting/)bakın.
+Geçiş bilgileri için bkz. [kodunuzu .NET Core 'a .NET Framework](/dotnet/core/porting/).
 
 ## <a name="use-the-aspnet-core-shared-framework"></a>ASP.NET Core paylaşılan çerçevesini kullanma
 
-ASP.NET Core 3.0 paylaşılan çerçeve, [Microsoft.AspNetCore.App metapackage](xref:fundamentals/metapackage-app)bulunan, `<PackageReference />` artık proje dosyasında açık bir öğe gerektirir. Paylaşılan çerçeve, proje dosyasında `Microsoft.NET.Sdk.Web` SDK kullanırken otomatik olarak başvurulur:
+[Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app)içinde bulunan ASP.NET Core 3,0 paylaşılan çerçevesi artık proje dosyasında açık `<PackageReference />` bir öğe gerektirmez. Proje dosyasında `Microsoft.NET.Sdk.Web` SDK kullanılırken paylaşılan çerçeveye otomatik olarak başvurulur:
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
@@ -531,12 +534,12 @@ ASP.NET Core 3.0 paylaşılan çerçeve, [Microsoft.AspNetCore.App metapackage](
 
 ## <a name="assemblies-removed-from-the-aspnet-core-shared-framework"></a>ASP.NET Core paylaşılan çerçevesinden kaldırılan derlemeler
 
-Core 3.0 paylaşılan ASP.NET'nden kaldırılan en önemli derlemeler şunlardır:
+ASP.NET Core 3,0 paylaşılan çerçevesinden çıkarılan en önemli derlemeler şunlardır:
 
-* [Newtonsoft.Json](https://www.nuget.org/packages/Newtonsoft.Json/) (Json.NET). Core 3.0'ASP.NET Json.NET eklemek için Bkz. [Newtonsoft.Json tabanlı JSON format desteği ekle.](xref:web-api/advanced/formatting#add-newtonsoftjson-based-json-format-support) ASP.NET Core 3.0 `System.Text.Json` okuma ve JSON yazmak için tanıttı. Daha fazla bilgi için bu belgede [Yeni JSON serileştirme](#new-json-serialization) bakın.
+* [Newtonsoft. JSON](https://www.nuget.org/packages/Newtonsoft.Json/) (JSON.net). ASP.NET Core 3,0 ' ye Json.NET eklemek için bkz. [Newtonsoft. JSON tabanlı JSON biçimi desteği ekleme](xref:web-api/advanced/formatting#add-newtonsoftjson-based-json-format-support). ASP.NET Core 3,0, `System.Text.Json` JSON okuma ve yazma için tanıtılmıştır. Daha fazla bilgi için bu belgede [yenı JSON serileştirmesi](#new-json-serialization) bölümüne bakın.
 * [Entity Framework Core](/ef/core/)
 
-Paylaşılan çerçeveden kaldırılan derlemelerin tam listesi için [bkz.](https://github.com/dotnet/AspNetCore/issues/3755) Bu değişikliğin motivasyonu hakkında daha fazla bilgi için, [3.0'da Microsoft.AspNetCore.App'teki Breaking değişiklikleri](https://github.com/aspnet/Announcements/issues/325) ve [Core 3.0'ASP.NET gelen değişikliklere ilk bakışta](https://devblogs.microsoft.com/aspnet/a-first-look-at-changes-coming-in-asp-net-core-3-0/)bakın.
+Paylaşılan çerçeveden kaldırılan derlemelerin tamamen listesi için bkz [. Microsoft. AspNetCore. App 3,0 ' den kaldırılan derlemeler](https://github.com/dotnet/AspNetCore/issues/3755). Bu değişiklik için mosyon hakkında daha fazla bilgi için bkz. [3,0 'de Microsoft. AspNetCore. app 'e yönelik son değişiklikler](https://github.com/aspnet/Announcements/issues/325) ve [ASP.NET Core 3,0 ' de gelen değişikliklere ilk bakış](https://devblogs.microsoft.com/aspnet/a-first-look-at-changes-coming-in-asp-net-core-3-0/).
 
 <!-- 
 ## Additional information

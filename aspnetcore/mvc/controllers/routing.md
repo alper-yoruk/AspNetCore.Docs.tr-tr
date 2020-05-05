@@ -4,13 +4,19 @@ author: rick-anderson
 description: ASP.NET Core MVC 'nin, gelen isteklerin URL 'Lerini eşleştirmek ve bunları eylemlerle eşlemek için yönlendirme ara yazılımını nasıl kullandığını öğrenin.
 ms.author: riande
 ms.date: 3/25/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: 974a5e7653f2b71b124a96650733ff460e60637a
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 4208ef8fb7a9b10621f214f79679ff8d7fd83996
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206118"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775030"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core denetleyici eylemlerine yönlendirme
 
@@ -195,7 +201,9 @@ Ve <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.M
 ### <a name="conventional-routing-order"></a>Geleneksel yönlendirme sırası
 
 Geleneksel yönlendirme yalnızca uygulama tarafından tanımlanan eylem ve denetleyicinin bir bileşimiyle eşleşir. Bu, geleneksel yolların çakıştığı durumları basitleştirmek için tasarlanmıştır.
-, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute*>, Ve <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> kullanarak yollar ekleme, çağırdıkları sıraya göre bitiş noktalarına otomatik olarak bir sipariş değeri atar. Daha önce görüntülenen bir rotadaki eşleşmelerin önceliği daha yüksektir. Geleneksel yönlendirme sıra bağımlıdır. Genel olarak, alanlar içeren rotalar daha önce bir alan olmadan rotalardan daha belirgin olduklarından yerleştirilmelidir. Tüm yol parametrelerini yakala gibi `{*article}` [ayrılmış geleneksel yollar](#dcr) , bir [yolu çok fazla](xref:fundamentals/routing#greedy), diğer yollarla eşleştirmek üzere hedeflediğiniz URL 'lerle eşleştirerek çok fazla bir yol yapabilir. Doyumsuz yollarını daha sonra yol tablosuna yerleştirerek doyumsuz eşleşmelerini önleyin.
+, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute*>, Ve <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> kullanarak yollar ekleme, çağırdıkları sıraya göre bitiş noktalarına otomatik olarak bir sipariş değeri atar. Daha önce görüntülenen bir rotadaki eşleşmelerin önceliği daha yüksektir. Geleneksel yönlendirme sıra bağımlıdır. Genel olarak, alanlar içeren rotalar daha önce bir alan olmadan rotalardan daha belirgin olduklarından yerleştirilmelidir. Catch-all yol parametrelerine sahip [adanmış geleneksel yollar](#dcr) , `{*article}` bir [yol çok uzun](xref:fundamentals/routing#greedy)sürebilir, yani diğer yollarla eşleştirmek istediğiniz URL 'lerle eşleşir. Doyumsuz yollarını daha sonra yol tablosuna yerleştirerek doyumsuz eşleşmelerini önleyin.
+
+[!INCLUDE[](~/includes/catchall.md)]
 
 <a name="best"></a>
 
@@ -463,7 +471,7 @@ Yukarıdaki kodla `/home` `HomeController.Index` bitiş noktasını çalıştır
 * Yukarıdaki kod bir örnek veya kötü yönlendirme tasarımdır. `Order` Özelliği göstermek için kullanılmıştı.
 * `Order` Özelliği yalnızca belirsizlik çözümleniyor, bu şablon eşleştirilemez. `[Route("Home")]` Şablonu kaldırmak daha iyi olacaktır.
 
-Bkz. [Razor Pages yol ve uygulama kuralları:](xref:razor-pages/razor-pages-conventions#route-order) rota sıralaması hakkında bilgiler için Razor Pages.
+Bkz [ Razor . sayfa yönlendirme ve uygulama kuralları:](xref:razor-pages/razor-pages-conventions#route-order) Razor sayfalarla rota sıralaması hakkında bilgi için rota sırası.
 
 Bazı durumlarda, belirsiz yollarla bir HTTP 500 hatası döndürülür. Hangi uç noktaların neden olduğunu görmek için [günlük kaydını](xref:fundamentals/logging/index) kullanın `AmbiguousMatchException`.
 
@@ -744,13 +752,13 @@ Yukarıdaki kod, denetleyiciyi ve eylem adını geçirerek bir URL oluşturmayı
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/UrlGeneration2Controller.cs?name=snippet_1)]
 
-Aşağıdaki Razor dosyası bir HTML bağlantısı oluşturur `Destination_Route`:
+Aşağıdaki Razor dosya, `Destination_Route`için bir HTML bağlantısı oluşturur:
 
 [!code-cshtml[](routing/samples/3.x/main/Views/Shared/MyLink.cshtml)]
 
 <a name="routing-gen-urls-html-ref-label"></a>
 
-### <a name="generate-urls-in-html-and-razor"></a>HTML ve Razor 'de URL oluşturma
+### <a name="generate-urls-in-html-and-razor"></a>HTML ve, URL 'Leri oluşturmaRazor
 
 <xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper>sırasıyla ve <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper> `<a>` öğeleri oluşturmak `<form>` Için [HTML. BeginForm](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.BeginForm*) ve [HTML. ActionLink](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.ActionLink*) yöntemlerini sağlar. Bu yöntemler bir URL oluşturmak için [URL. Action](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*) yöntemini kullanır ve benzer bağımsız değişkenleri kabul ederler. İçin `Url.RouteUrl` `HtmlHelper` şirkeme `Html.BeginRouteForm` , ve `Html.RouteLink` benzer işlevlere sahiptir.
 
@@ -1212,7 +1220,7 @@ Tanımlı bir düzende yürütülen geleneksel yolların aksine, öznitelik yön
 > [!TIP]
 > Uygulamasına bağlı kaçının `Order`. URL alanınız, doğru sıralama değerlerinin doğru şekilde yönlendirilmesini gerektiriyorsa, istemciler de kafa karıştırıcı olabilir. Genel öznitelik yönlendirme ' de, URL eşleştirme ile doğru yolu seçer. URL oluşturma için kullanılan varsayılan sıra çalışmıyorsa, bir geçersiz kılma olarak yol adı kullanılması, `Order` özelliği uygulamadan daha basittir.
 
-Razor Pages yönlendirme ve MVC denetleyici yönlendirme bir uygulamayı paylaşır. Razor Pages konularındaki yol siparişi hakkında bilgiler [Razor Pages yol ve uygulama kuralları: yol sıralaması](xref:razor-pages/razor-pages-conventions#route-order)' nda bulunabilir.
+RazorSayfa yönlendirme ve MVC denetleyici yönlendirme bir uygulamayı paylaşır. Sayfalar için Razor yol [ Razor ve uygulama kuralları: yol sırası](xref:razor-pages/razor-pages-conventions#route-order)bölümünde yer alan bilgi başlıkları hakkında bilgiler bulabilirsiniz.
 
 <a name="routing-token-replacement-templates-ref-label"></a>
 

@@ -1,211 +1,217 @@
 ---
-title: ASP.NET Çekirdekte Orijinler Arası İstekleri (CORS) etkinleştirme
+title: ASP.NET Core 'de çıkış noktaları arası Istekleri (CORS) etkinleştirme
 author: rick-anderson
-description: ASP.NET Core uygulamasında, KORS'un çapraz orijin isteklerine izin vermek veya reddetmek için nasıl bir standart olduğunu öğrenin.
+description: ASP.NET Core uygulamasında çapraz kaynak isteklerini izin vermek veya reddetmek için CORS 'nin nasıl standart olduğunu öğrenin.
 ms.author: riande
 ms.custom: mvc
 ms.date: 04/17/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/cors
-ms.openlocfilehash: 56a339d9018f619af38aecc6f4c2ff40c3c43d2f
-ms.sourcegitcommit: 3d07e21868dafc503530ecae2cfa18a7490b58a6
+ms.openlocfilehash: 6f523a21fe8119c2e4ca4f751ac5b6abc686404b
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/18/2020
-ms.locfileid: "81642695"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773817"
 ---
-# <a name="enable-cross-origin-requests-cors-in-aspnet-core"></a>ASP.NET Çekirdekte Orijinler Arası İstekleri (CORS) etkinleştirme
+# <a name="enable-cross-origin-requests-cors-in-aspnet-core"></a>ASP.NET Core 'de çıkış noktaları arası Istekleri (CORS) etkinleştirme
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Yazar: [Rick Anderson](https://twitter.com/RickAndMSFT) ve [Kirk Larkin](https://twitter.com/serpent5)
+Tarafından [Rick Anderson](https://twitter.com/RickAndMSFT) ve [Kirk larkabağı](https://twitter.com/serpent5)
 
-Bu makalede, bir ASP.NET Core uygulamasında CORS'in nasıl etkinleştirilen gösterilmektedir.
+Bu makalede, ASP.NET Core uygulamasında CORS 'nin nasıl etkinleştirileceği gösterilmektedir.
 
-Tarayıcı güvenliği, bir web sayfasının web sayfasına hizmet eden den farklı bir etki alanına istekte bulunmasını engeller. Bu kısıtlamaya *aynı kaynak ilkesi*denir. Aynı kaynak ilkesi, kötü amaçlı bir sitenin başka bir siteden gelen hassas verileri okumasını engeller. Bazen, diğer sitelerin uygulamanızda çapraz orijin isteklerinde yer almasına izin vermek isteyebilirsiniz. Daha fazla bilgi için [Mozilla CORS makalesine](https://developer.mozilla.org/docs/Web/HTTP/CORS)bakın.
+Tarayıcı güvenliği, bir Web sayfasının Web sayfasını sunduğundan farklı bir etki alanına istek yapmasını engeller. Bu kısıtlamaya *aynı-Origin ilkesi*adı verilir. Aynı-kaynak ilkesi, kötü niyetli bir sitenin gizli verileri başka bir siteden okumasını engeller. Bazen diğer sitelerin uygulamanıza çapraz çıkış istekleri yapmasına izin vermek isteyebilirsiniz. Daha fazla bilgi için bkz. [MOZILLA CORS makalesi](https://developer.mozilla.org/docs/Web/HTTP/CORS).
 
-[Çapraz Kaynak Paylaşımı](https://www.w3.org/TR/cors/) (CORS):
+[Çapraz kaynak kaynak paylaşımı](https://www.w3.org/TR/cors/) (CORS):
 
-* Bir sunucunun aynı orijin ilkesini gevşetmesine olanak tanıyan bir W3C standardıdır.
-* Bir güvenlik özelliği **değildir,** CORS güvenliği rahatlatır. BIR API CORS izin vererek daha güvenli değildir. Daha fazla bilgi için [CORS'in nasıl çalıştığını](#how-cors)görün.
-* Sunucunun, diğerlerini reddederken bazı kişiler arası isteklere açıkça izin vermesine izin verir.
-* [JSONP](/dotnet/framework/wcf/samples/jsonp)gibi önceki tekniklerden daha güvenli ve daha esnektir.
+* , Bir sunucunun aynı kaynak ilkeyi rahat bir şekilde sağlamasına izin veren bir W3C standardıdır.
+* Güvenlik özelliği **değil** , CORS güvenliği. CORS 'nin izin vermesini sağlayan bir API daha güvenli değildir. Daha fazla bilgi için bkz. [CORS çalışma](#how-cors).
+* Bir sunucunun bazı çapraz kaynak isteklerine, diğerlerini reddetirken açık olarak izin almasına izin verir.
+* , [JSONP](/dotnet/framework/wcf/samples/jsonp)gibi önceki tekniklerin daha güvenli ve daha esnektir.
 
-[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/3.1sample/Cors/WebAPI) ( nasıl[indirilir](xref:index#how-to-download-a-sample))
+[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/3.1sample/Cors/WebAPI) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="same-origin"></a>Aynı köken
+## <a name="same-origin"></a>Aynı kaynak
 
-Aynı düzenleri, ana bilgisayarlar ve bağlantı noktaları[(RFC 6454)](https://tools.ietf.org/html/rfc6454)varsa, iki URL aynı kökene sahiptir.
+Özdeş şemaları, konakları ve bağlantı noktalarına sahip olmaları durumunda iki URL aynı kaynağa sahiptir ([RFC 6454](https://tools.ietf.org/html/rfc6454)).
 
-Bu iki URL aynı kökene sahiptir:
+Bu iki URL aynı kaynağa sahiptir:
 
 * `https://example.com/foo.html`
 * `https://example.com/bar.html`
 
-Bu URL'lerin önceki iki URL'den farklı kökenleri vardır:
+Bu URL 'Ler, önceki iki URL 'den farklı kaynaklardan farklıdır:
 
 * `https://example.net`&ndash; Farklı etki alanı
 * `https://www.example.com/foo.html`&ndash; Farklı alt etki alanı
-* `http://example.com/foo.html`&ndash; Farklı şema
+* `http://example.com/foo.html`&ndash; Farklı düzen
 * `https://example.com:9000/foo.html`&ndash; Farklı bağlantı noktası
 
 ## <a name="enable-cors"></a>CORS'yi etkinleştirme
 
-CORS'i etkinleştirmenin üç yolu vardır:
+CORS 'yi etkinleştirmenin üç yolu vardır:
 
-* Adlandırılmış bir [ilke](#np) veya [varsayılan ilke](#dp)kullanarak ara yazılımda.
-* [Uç nokta yönlendirmeyi](#ecors)kullanma.
-* [[EnableCors]](#attr) özelliği ile.
+* [Adlandırılmış bir ilke](#np) veya [varsayılan ilke](#dp)kullanan ara yazılımlar.
+* [Uç nokta yönlendirme](#ecors)kullanılıyor.
+* [[Enablecors]](#attr) özniteliğiyle birlikte.
 
-[[EnableCors]](#attr) özniteliğinin adlandırılmış bir ilkeyle kullanılması, CORS'i destekleyen uç noktaları sınırlamada en iyi denetimi sağlar.
+Adlandırılmış ilkeyle [[Enablecors]](#attr) ÖZNITELIĞINI kullanmak CORS 'yi destekleyen uç noktaları sınırlayan en yoğun denetimi sağlar.
 
-Her yaklaşım aşağıdaki bölümlerde ayrıntılı olarak açıklanır.
+Her yaklaşım aşağıdaki bölümlerde ayrıntılı olarak verilmiştir.
 
 <a name="np"></a>
 
-## <a name="cors-with-named-policy-and-middleware"></a>Adlı ilke ve middleware ile CORS
+## <a name="cors-with-named-policy-and-middleware"></a>Adlandırılmış ilke ve ara yazılım ile CORS
 
-CORS Middleware, çapraz orijin isteklerini işler. Aşağıdaki kod, belirtilen kökenlere sahip uygulamanın tüm uç noktalarına bir CORS ilkesi uygular:
+CORS ara yazılımı, çıkış noktaları arası istekleri işler. Aşağıdaki kod, belirtilen kaynakları kullanarak tüm uygulamanın uç noktalarına bir CORS ilkesi uygular:
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/Startup.cs?name=snippet&highlight=3,9,31)]
 
 Yukarıdaki kod:
 
-* İlke adını `_myAllowSpecificOrigins`' a ayarlar. İlke adı rasgele.
-* Uzantı <xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors*> yöntemini çağırır ve `_myAllowSpecificOrigins` CORS ilkesini belirtir. `UseCors`CORS ara yazılımekler. Çağrı sonra `UseCors` `UseRouting`yerleştirilmelidir, ancak `UseAuthorization`önce . Daha fazla bilgi için [Middleware sırasına](xref:fundamentals/middleware/index#middleware-order)bakın.
-* <xref:Microsoft.Extensions.DependencyInjection.CorsServiceCollectionExtensions.AddCors*> [Lambda ifadesi](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions)ile aramalar . Lambda bir <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder> nesne alır. [Yapılandırma seçenekleri](#cors-policy-options), `WithOrigins`örneğin, bu makalede daha sonra açıklanmıştır.
-* Tüm denetleyici `_myAllowSpecificOrigins` uç noktaları için CORS ilkesini etkinleştiri. Belirli uç noktalara BIR CORS ilkesi uygulamak için [uç nokta yönlendirmesine](#ecors) bakın.
+* İlke adını olarak `_myAllowSpecificOrigins`ayarlar. İlke adı rastgele olur.
+* <xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors*> Uzantı yöntemini çağırır ve `_myAllowSpecificOrigins` CORS ilkesini belirtir. `UseCors`CORS ara yazılımını ekler. Çağrısının sonra `UseCors` `UseRouting`, öncesi `UseAuthorization`yerleştirilmesi gerekir. Daha fazla bilgi için bkz. [Ara yazılım sırası](xref:fundamentals/middleware/index#middleware-order).
+* <xref:Microsoft.Extensions.DependencyInjection.CorsServiceCollectionExtensions.AddCors*> [Lambda ifadesi](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions)ile çağrılar. Lambda bir <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder> nesnesi alır. Gibi [yapılandırma seçenekleri](#cors-policy-options) `WithOrigins`, bu makalenin ilerleyen kısımlarında açıklanmıştır.
+* Tüm denetleyici `_myAllowSpecificOrigins` uç noktaları için CORS ilkesini etkinleştirilir. Belirli uç noktalara bir CORS ilkesi uygulamak için bkz. [Endpoint Routing](#ecors) .
 
-Uç nokta yönlendirmesi ile, CORS ara ware ve aramalar `UseRouting` arasında `UseEndpoints`yürütmek için ***yapılandırılmalıdır.***
+Endpoint Routing ile ***CORS ara yazılımı*** , `UseRouting` ve `UseEndpoints`çağrıları arasında yürütülecek şekilde yapılandırılmalıdır.
 
-Önceki koda benzer test kodu yla ilgili talimatlar için [Test CORS'e](#testc) bakın.
+Yukarıdaki koda benzer test kodu hakkında yönergeler için bkz. [Test CORS](#testc) .
 
-Yöntem <xref:Microsoft.Extensions.DependencyInjection.MvcCorsMvcCoreBuilderExtensions.AddCors*> çağrısı, uygulamanın servis konteynerine CORS hizmetlerini ekler:
+<xref:Microsoft.Extensions.DependencyInjection.MvcCorsMvcCoreBuilderExtensions.AddCors*> Yöntem çağrısı, uygulamanın HIZMET kapsayıcısına CORS Hizmetleri ekler:
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/Startup.cs?name=snippet2)]
 
-Daha fazla bilgi için bu belgedeki [CORS ilkesi seçeneklerine](#cpo) bakın.
+Daha fazla bilgi için bu belgedeki [CORS ilke seçenekleri](#cpo) bölümüne bakın.
 
-Yöntemler, <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder> aşağıdaki kodda gösterildiği gibi zincirlenebilir:
+<xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder> Yöntemler aşağıdaki kodda gösterildiği gibi zincirleme olabilir:
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/Startup2.cs?name=snippet)]
 
-Not: Belirtilen URL, sondaki eğik`/`çizgi () **içermemelidir.** URL ile sonlandırma, `/`karşılaştırma `false` döndürür ve hiçbir üstbilgi döndürülür.
+Not: belirtilen URL sonunda eğik çizgi (`/` **) içermemelidir.** URL ile `/`sonlandığında karşılaştırma döndürülür `false` ve üst bilgi döndürülmez.
 
 <a name="dp"></a>
 
 ### <a name="cors-with-default-policy-and-middleware"></a>Varsayılan ilke ve ara yazılım ile CORS
 
-Aşağıdaki vurgulanan kod varsayılan CORS ilkesini sağlar:
+Aşağıdaki vurgulanan kod varsayılan CORS ilkesini sunar:
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupDefaultPolicy.cs?name=snippet2&highlight=7,29)]
 
-Önceki kod, varsayılan CORS ilkesini tüm denetleyici uç noktalarına uygular.
+Yukarıdaki kod, tüm denetleyici uç noktalarına varsayılan CORS ilkesini uygular.
 
 <a name="ecors"></a>
 
-## <a name="enable-cors-with-endpoint-routing"></a>Uç nokta yönlendirme ile Kors'u etkinleştirme
+## <a name="enable-cors-with-endpoint-routing"></a>Uç nokta yönlendirme ile CORS 'yi etkinleştirme
 
-Cors'un şu anda kullanarak `RequireCors` uç nokta bazında etkinleştirilmesi otomatik ön uçuş [isteklerini](#apf) ***desteklemez.*** Daha fazla bilgi [için, bu GitHub sorunu](https://github.com/dotnet/aspnetcore/issues/20709) ve [test CORS uç noktası yönlendirme ve [HttpOptions] bakın.](#tcer)
+`RequireCors` Şu anda bir uç nokta temelinde CORS etkinleştirildiğinde [Otomatik ön kontrol istekleri](#apf) ***desteklenmez.*** Daha fazla bilgi için [Bu GitHub sorununa](https://github.com/dotnet/aspnetcore/issues/20709) bakın ve [uç nokta yönlendirme ve [HttpOptions] ile test CORS 'yi test](#tcer)edin.
 
-Uç nokta yönlendirmeile CORS, uzantı yöntemleri <xref:Microsoft.AspNetCore.Builder.CorsEndpointConventionBuilderExtensions.RequireCors*> kümesi kullanılarak uç nokta başına etkinleştirilebilir:
+Uç nokta yönlendirmesinde, CORS uzantı yöntemleri <xref:Microsoft.AspNetCore.Builder.CorsEndpointConventionBuilderExtensions.RequireCors*> kümesi kullanılarak uç nokta temelinde etkinleştirilebilir:
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupEndPt.cs?name=snippet2&highlight=3,7-15,32,40,43)]
 
 Yukarıdaki kodda:
 
-* `app.UseCors`CORS ara yazılımını sağlar. Varsayılan ilke yapılandırılmadığından, `app.UseCors()` tek başına CORS'u etkinleştirmez.
-* Ve `/echo` denetleyici uç noktaları belirtilen ilkeyi kullanarak orijinler arası isteklere izin verir.
-* Ve `/echo2` Razor Pages bitiş noktaları, varsayılan ilke belirtilmedi, çünkü çapraz başlangıç isteklerine izin ***vermez.***
+* `app.UseCors`CORS ara yazılımını sunar. Varsayılan bir ilke yapılandırılmadığından, tek başına CORS `app.UseCors()` 'yi etkinleştirmeyin.
+* Ve `/echo` denetleyici uç noktaları, belirtilen ilkeyi kullanarak çıkış noktaları arası isteklere izin verir.
+* Varsayılan `/echo2` ilke Razor belirtilmediğinden ve sayfa uç noktaları, çıkış noktaları arası isteklere izin ***vermez*** .
 
-[[Engelleyici Korse]](#dc) özelliği, uç nokta yönlendirme ile `RequireCors`etkinleştirilen CORS'leri ***devre*** dışı almaz.
+[[Disablecors]](#dc) özniteliği, ile Endpoint Routing tarafından etkinleştirilen CORS 'yi `RequireCors`devre dışı ***bırakmıyor*** .
 
-Yukarıdakine benzer test koduyla ilgili talimatlar için [uç nokta yönlendirme stoyonu ve [HttpOptions] içeren Test CORS'e](#tcer) bakın.
+Yukarıdaki koda benzer test kodu hakkında yönergeler için bkz. [Endpoint Routing Ile test CORS ve [HttpOptions]](#tcer) .
 
 <a name="attr"></a>
 
-## <a name="enable-cors-with-attributes"></a>Özniteliklerle CORS'i etkinleştirme
+## <a name="enable-cors-with-attributes"></a>CORS 'yi özniteliklerle etkinleştir
 
-[[EnableCors]](xref:Microsoft.AspNetCore.Cors.EnableCorsAttribute) özelliği ile CORS etkinleştirme ve yalnızca CORS gerektiren uç noktalara adlandırılmış bir ilke uygulamak en iyi denetimi sağlar.
+CORS 'yi [[Enablecors]](xref:Microsoft.AspNetCore.Cors.EnableCorsAttribute) özniteliğiyle etkinleştirmek ve yalnızca CORS gerektiren uç noktalara adlandırılmış bir ilke uygulamak, en derin denetimi sağlar.
 
-[[EnableCors]](xref:Microsoft.AspNetCore.Cors.EnableCorsAttribute) özniteliği, CORS'u küresel olarak uygulamak için bir alternatif sağlar. Öznitelik, `[EnableCors]` tüm uç noktalar yerine seçili uç noktalar için CORS'e olanak sağlar:
+[[Enablecors]](xref:Microsoft.AspNetCore.Cors.EnableCorsAttribute) ÖZNITELIĞI, CORS 'yi küresel olarak uygulamaya bir alternatif sağlar. `[EnableCors]` Öznitelik, tüm uç noktalar yerine seçili uç noktalar için CORS 'yi sunar:
 
 * `[EnableCors]`varsayılan ilkeyi belirtir.
-* `[EnableCors("{Policy String}")]`adlı bir ilke belirtir.
+* `[EnableCors("{Policy String}")]`adlandırılmış bir ilke belirtir.
 
-Öznitelik `[EnableCors]` uygulanabilir:
+`[EnableCors]` Özniteliği öğesine uygulanabilir:
 
-* Jilet Sayfası`PageModel`
-* Denetleyicisi
-* Denetleyici eylem yöntemi
+* RazorSayfasında`PageModel`
+* Kumandasını
+* Denetleyici eylemi yöntemi
 
-Öznitelik ile denetleyicilere, sayfa modellerine veya eylem `[EnableCors]` yöntemlerine farklı ilkeler uygulanabilir. Öznitelik `[EnableCors]` bir denetleyici, sayfa modeli veya eylem yöntemine uygulandığında ve ARA Yazılım'da CORS etkinleştirildiğinde, ***her iki*** ilke de uygulanır. ***Politikaların birleştirilmesine karşı tavsiye ediyoruz. ***Her ***ikisini de aynı uygulamada değil, öznitelik veya ara yazılımı kullanın.*** `[EnableCors]`
+`[EnableCors]` Öznitelikleri olan denetleyicilere, sayfa modellerine veya eylem yöntemlerine farklı ilkeler uygulanabilir. `[EnableCors]` Öznitelik bir denetleyiciye, sayfa modeline veya eylem yöntemine uygulandığında ve bir ara yazılım içinde CORS etkinleştirildiğinde, ***her iki ilke de*** uygulanır. ***İlkelerin birleştirilmesi önerilir. ***Aynı uygulamada ***değil, özniteliğini veya ara yazılımını kullanın.*** `[EnableCors]`
 
-Aşağıdaki kod her yöntem için farklı bir ilke uygular:
+Aşağıdaki kod her bir yönteme farklı bir ilke uygular:
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/Controllers/WidgetController.cs?name=snippet&highlight=6,14)]
 
-Aşağıdaki kod iki CORS ilkeleri oluşturur:
+Aşağıdaki kod iki CORS ilkesi oluşturur:
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/Startup3.cs?name=snippet&highlight=12-28,44)]
 
-CORS isteklerini sınırlandırma nın en iyi kontrolü için:
+CORS isteklerini sınırlayan en yoğun denetim için:
 
-* Adlandırılmış bir ilke ile kullanın. `[EnableCors("MyPolicy")]`
+* Adlandırılmış `[EnableCors("MyPolicy")]` ilkeyle kullanın.
 * Varsayılan bir ilke tanımlamayın.
-* Uç nokta [yönlendirmekullanmayın.](#ecors)
+* [Endpoint Routing](#ecors)kullanmayın.
 
-Sonraki bölümdeki kod önceki listeyi karşılar.
+Sonraki bölümdeki kod, önceki listeyi karşılar.
 
-Önceki koda benzer test kodu yla ilgili talimatlar için [Test CORS'e](#testc) bakın.
+Yukarıdaki koda benzer test kodu hakkında yönergeler için bkz. [Test CORS](#testc) .
 
 <a name="dc"></a>
 
-### <a name="disable-cors"></a>CORS'u devre dışı
+### <a name="disable-cors"></a>CORS 'yi devre dışı bırak
 
-[[Engelleyici Ler]](xref:Microsoft.AspNetCore.Cors.DisableCorsAttribute) [özniteliği, bitiş noktası yönlendirmesi](#ecors)ile etkinleştirilen CORS'leri devre ***dışı*** almaz.
+[[Disablecors]](xref:Microsoft.AspNetCore.Cors.DisableCorsAttribute) özniteliği [Endpoint ROUTING](#ecors)tarafından etkinleştirilen CORS 'yi devre dışı ***bırakmıyor*** .
 
 Aşağıdaki kod CORS ilkesini `"MyPolicy"`tanımlar:
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupTestMyPolicy.cs?name=snippet)]
 
-Aşağıdaki kod `GetValues2` eylem için CORS devre dışı kalmaktadır:
+Aşağıdaki kod, `GetValues2` eylem için CORS 'yi devre dışı bırakır:
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/Controllers/ValuesController.cs?name=snippet&highlight=1,23)]
 
 Yukarıdaki kod:
 
-* [Uç nokta yönlendirmeile](#ecors)CORS'u etkinleştirmez.
+* , [Uç nokta yönlendirme](#ecors)ile CORS 'yi etkinleştirmez.
 * [Varsayılan BIR CORS ilkesi](#dp)tanımlamaz.
-* Denetleyiciiçin CORS ilkesini `"MyPolicy"` etkinleştirmek için [[EnableCors("MyPolicy")]](#attr) kullanır.
-* `GetValues2` Yöntem için CORS'u devre dışı kılabilir.
+* Denetleyicinin `"MyPolicy"` CORS ilkesini etkinleştirmek Için [[Enablecors ("mypolicy")]](#attr) kullanır.
+* `GetValues2` YÖNTEMI için CORS 'yi devre dışı bırakır.
 
-Yukarıdaki kodun sınanma talimatları için [Test CORS'a](#testc) bakın.
+Önceki kodun test edilmesine ilişkin yönergeler için bkz. [Test CORS](#testc) .
 
 <a name="cpo"></a>
 
-## <a name="cors-policy-options"></a>CORS politika seçenekleri
+## <a name="cors-policy-options"></a>CORS ilke seçenekleri
 
-Bu bölümde, BIR CORS ilkesinde ayarlanabilecek çeşitli seçenekler açıklanmaktadır:
+Bu bölümde, bir CORS ilkesinde ayarlanmakta olabilecek çeşitli seçenekler açıklanmaktadır:
 
-* [İzin verilen kökenleri ayarlama](#set-the-allowed-origins)
+* [İzin verilen kaynakları ayarla](#set-the-allowed-origins)
 * [İzin verilen HTTP yöntemlerini ayarlama](#set-the-allowed-http-methods)
-* [İzin verilen istek üstbilgisini ayarlama](#set-the-allowed-request-headers)
-* [Açıkta kalan yanıt üstaylarını ayarlama](#set-the-exposed-response-headers)
-* [Orijinler arası isteklerde kimlik bilgileri](#credentials-in-cross-origin-requests)
-* [Uçuş öncesi son kullanma süresini ayarlama](#set-the-preflight-expiration-time)
+* [İzin verilen istek üst bilgilerini ayarlama](#set-the-allowed-request-headers)
+* [Gösterilen yanıt üst bilgilerini ayarlama](#set-the-exposed-response-headers)
+* [Kaynaklar arası isteklerde kimlik bilgileri](#credentials-in-cross-origin-requests)
+* [Ön kontrol sona erme süresini ayarlama](#set-the-preflight-expiration-time)
 
-<xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsOptions.AddPolicy*>olarak `Startup.ConfigureServices`adlandırılır. Bazı seçenekler için, [önce CORS nasıl çalışır](#how-cors) bölümünü okumak yararlı olabilir.
+<xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsOptions.AddPolicy*>içinde `Startup.ConfigureServices`çağırılır. Bazı seçenekler için, ilk olarak [CORS 'Nin nasıl çalıştığı](#how-cors) bölümü okumanız yararlı olabilir.
 
-## <a name="set-the-allowed-origins"></a>İzin verilen kökenleri ayarlama
+## <a name="set-the-allowed-origins"></a>İzin verilen kaynakları ayarla
 
-<xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyOrigin*>&ndash; Herhangi bir şema (veya)`http` `https`ile tüm kökenlerden CORS isteklerini sağlar. `AllowAnyOrigin`herhangi bir *web sitesi* uygulamaya çapraz orijin isteklerinde bulunabileceğinden güvenli değildir.
+<xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyOrigin*>&ndash; Herhangi bir düzen (`http` veya `https`) ile tüm kaynaklardan gelen CORS isteklerine izin verir. `AllowAnyOrigin`, *herhangi bir Web sitesi* uygulamaya çapraz kaynak istekleri yapabildiğinden güvenli değildir.
 
 > [!NOTE]
-> Belirtilmesi `AllowAnyOrigin` `AllowCredentials` ve güvenli olmayan bir yapılandırmadır ve site ler arası istek sahteciliğiyle sonuçlanabilir. Bir uygulama her iki yöntemle de yapılandırıldığında CORS hizmeti geçersiz bir CORS yanıtını döndürür.
+> Ve `AllowAnyOrigin` `AllowCredentials` güvenli olmayan bir yapılandırma belirtip, siteler arası istek sahteciliği ile sonuçlanabilir. Bir uygulama her iki yöntemle yapılandırıldığında, CORS hizmeti geçersiz bir CORS yanıtı döndürür.
 
-`AllowAnyOrigin`ön kontrol isteklerini `Access-Control-Allow-Origin` ve üstbilgietkiler. Daha fazla bilgi için [Ön Uçuş istekleri](#preflight-requests) bölümüne bakın.
+`AllowAnyOrigin`ön kontrol isteklerini ve `Access-Control-Allow-Origin` üstbilgiyi etkiler. Daha fazla bilgi için bkz. [ön kontrol istekleri](#preflight-requests) bölümü.
 
-<xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.SetIsOriginAllowedToAllowWildcardSubdomains*>&ndash; İlkenin <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicy.IsOriginAllowed*> özelliğini, kaynağın izin verilip verilmediğini değerlendirirken, kökenlerin yapılandırılmış bir joker etki alanıyla eşleşmesine olanak tanıyan bir işlev olarak ayarlar.
+<xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.SetIsOriginAllowedToAllowWildcardSubdomains*>&ndash; Kaynağa izin <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicy.IsOriginAllowed*> verilip verilmediğini değerlendirirken, kaynağın bir yapılandırılmış joker karakterle eşleşmesini sağlayan bir işlev olarak ilkenin özelliğini ayarlar.
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupAllowSubdomain.cs?name=snippet)]
 
@@ -214,39 +220,39 @@ Bu bölümde, BIR CORS ilkesinde ayarlanabilecek çeşitli seçenekler açıklan
 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyMethod*>:
 
 * Herhangi bir HTTP yöntemine izin verir:
-* Ön kontrol isteklerini `Access-Control-Allow-Methods` ve üstbilgiyi etkiler. Daha fazla bilgi için [Ön Uçuş istekleri](#preflight-requests) bölümüne bakın.
+* Ön kontrol isteklerini ve `Access-Control-Allow-Methods` üstbilgiyi etkiler. Daha fazla bilgi için bkz. [ön kontrol istekleri](#preflight-requests) bölümü.
 
-### <a name="set-the-allowed-request-headers"></a>İzin verilen istek üstbilgisini ayarlama
+### <a name="set-the-allowed-request-headers"></a>İzin verilen istek üst bilgilerini ayarlama
 
-Belirli üstbilginin CORS isteğinde gönderilmesine izin vermek için <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*> yazar [istek üstbilgisini](https://xhr.spec.whatwg.org/#request)arayın, arayın ve izin verilen üstbilgibelirtin:
+Belirli başlıkların, [Yazar isteği üstbilgileri](https://xhr.spec.whatwg.org/#request)ADLı bir CORS isteğinde gönderilmesine izin vermek için, ' i çağırın <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*> ve izin verilen üst bilgileri belirtin:
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupAllowSubdomain.cs?name=snippet2)]
 
-Tüm [yazar istek üstbilgilerine](https://www.w3.org/TR/cors/#author-request-headers)izin vermek için , arayın: <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyHeader*>
+Tüm [Yazar isteği başlıklarına](https://www.w3.org/TR/cors/#author-request-headers)izin vermek için şunu <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyHeader*>çağırın:
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupAllowSubdomain.cs?name=snippet3)]
 
-`AllowAnyHeader`ön kontrol isteklerini ve [Erişim-Kontrol-İstek-Üstbilgi](https://developer.mozilla.org/docs/Web/HTTP/Headers/Access-Control-Request-Method) üstbilgisini etkiler. Daha fazla bilgi için [Ön Uçuş istekleri](#preflight-requests) bölümüne bakın.
+`AllowAnyHeader`ön kontrol isteklerini ve [erişim-denetim-istek-üst](https://developer.mozilla.org/docs/Web/HTTP/Headers/Access-Control-Request-Method) bilgi üst bilgisini etkiler. Daha fazla bilgi için bkz. [ön kontrol istekleri](#preflight-requests) bölümü.
 
-Cors Middleware ilkesi tarafından `WithHeaders` belirtilen belirli üstbilgilerle eşleşerek, `Access-Control-Request-Headers` yalnızca gönderilen üstbilgiler `WithHeaders`üstbilgilerle tam olarak eşleştiğinde mümkündür.
+Tarafından belirtilen belirli başlıklarıyla `WithHeaders` eşleşen bir CORS ara yazılım ilkesi, yalnızca ' de `Access-Control-Request-Headers` `WithHeaders`belirtilen üstbilgiler ile tam olarak eşleşiyorsa mümkündür.
 
-Örneğin, aşağıdaki gibi yapılandırılan bir uygulamayı düşünün:
+Örneğin, aşağıdaki gibi yapılandırılmış bir uygulamayı göz önünde bulundurun:
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupAllowSubdomain.cs?name=snippet4)]
 
-([HeaderNames.ContentLanguage](xref:Microsoft.Net.Http.Headers.HeaderNames.ContentLanguage)) listede yer olmadığı `Content-Language` için CORS Middleware aşağıdaki istek üstbilgisi ile ön kontrol isteğini `WithHeaders`reddeder:
+CORS ara yazılımı, ([headernames. contentlanguage](xref:Microsoft.Net.Http.Headers.HeaderNames.ContentLanguage)) `WithHeaders`içinde `Content-Language` listelenmediği için aşağıdaki istek üst bilgisi ile bir ön denetim isteğini reddettiğinde:
 
 ```
 Access-Control-Request-Headers: Cache-Control, Content-Language
 ```
 
-Uygulama *200 Ok* yanıtı döndürür, ancak CORS üstbilgilerini geri göndermez. Bu nedenle, tarayıcı çapraz kaynak isteği denemez.
+Uygulama *200 ok* yanıtı DÖNDÜRÜYOR ancak CORS üst bilgilerini geri göndermez. Bu nedenle tarayıcı, çıkış noktaları arası isteği denemez.
 
-### <a name="set-the-exposed-response-headers"></a>Açıkta kalan yanıt üstaylarını ayarlama
+### <a name="set-the-exposed-response-headers"></a>Gösterilen yanıt üst bilgilerini ayarlama
 
-Varsayılan olarak, tarayıcı tüm yanıt üstbilgisini uygulamaya maruz bırakmaz. Daha fazla bilgi için [W3C Cross-Origin Kaynak Paylaşımı (Terminoloji): Basit Yanıt Üstbilgisi'ne](https://www.w3.org/TR/cors/#simple-response-header)bakın.
+Varsayılan olarak tarayıcı, tüm yanıt üst bilgilerini uygulamaya sunmaz. Daha fazla bilgi için bkz. [W3C çıkış noktaları arası kaynak paylaşımı (terminoloji): basit yanıt üst bilgisi](https://www.w3.org/TR/cors/#simple-response-header).
 
-Varsayılan olarak kullanılabilir yanıt üstbilgi:
+Varsayılan olarak kullanılabilen yanıt üstbilgileri şunlardır:
 
 * `Cache-Control`
 * `Content-Language`
@@ -255,14 +261,14 @@ Varsayılan olarak kullanılabilir yanıt üstbilgi:
 * `Last-Modified`
 * `Pragma`
 
-CORS belirtimi bu üstbilgi *basit yanıt üstbilgi çağırır.* Diğer üstbilgileri uygulamaiçin kullanılabilir <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithExposedHeaders*>hale getirmek için aşağıdakileri arayın:
+CORS belirtimi, bu üst bilgiler *basit yanıt üst bilgilerini*çağırır. Diğer üst bilgileri uygulama için kullanılabilir hale getirmek için şunu <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithExposedHeaders*>çağırın:
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupAllowSubdomain.cs?name=snippet5)]
-### <a name="credentials-in-cross-origin-requests"></a>Orijinler arası isteklerde kimlik bilgileri
+### <a name="credentials-in-cross-origin-requests"></a>Kaynaklar arası isteklerde kimlik bilgileri
 
-Kimlik bilgileri, CORS isteğinde özel kullanım gerektirir. Varsayılan olarak, tarayıcı bir çapraz kaynak isteği ile kimlik bilgileri göndermez. Kimlik bilgileri çerezleri ve HTTP kimlik doğrulama şemalarını içerir. Bir çapraz kaynak isteği ile kimlik bilgileri `XMLHttpRequest.withCredentials` göndermek `true`için, istemci nin .
+Kimlik bilgileri CORS isteğinde özel işleme gerektirir. Varsayılan olarak tarayıcı, kimlik bilgilerini bir çapraz kaynak isteğiyle göndermez. Kimlik bilgileri, tanımlama bilgileri ve HTTP kimlik doğrulama düzenlerini içerir. Bir çapraz kaynak isteğiyle kimlik bilgilerini göndermek için, istemcisinin olarak `XMLHttpRequest.withCredentials` `true`ayarlanması gerekir.
 
-Doğrudan `XMLHttpRequest` kullanma:
+Doğrudan `XMLHttpRequest` kullanarak:
 
 ```javascript
 var xhr = new XMLHttpRequest();
@@ -270,7 +276,7 @@ xhr.open('get', 'https://www.example.com/api/test');
 xhr.withCredentials = true;
 ```
 
-jQuery kullanma:
+JQuery kullanarak:
 
 ```javascript
 $.ajax({
@@ -282,7 +288,7 @@ $.ajax({
 });
 ```
 
-Getir [API'sini](https://developer.mozilla.org/docs/Web/API/Fetch_API)kullanma :
+[Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API)'sini kullanma:
 
 ```javascript
 fetch('https://www.example.com/api/test', {
@@ -290,35 +296,35 @@ fetch('https://www.example.com/api/test', {
 });
 ```
 
-Sunucu kimlik bilgilerine izin vermelidir. Orijinler arası kimlik <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowCredentials*>bilgilerine izin vermek için:
+Sunucu kimlik bilgilerine izin vermelidir. Çıkış noktaları arası kimlik bilgilerine izin vermek için <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowCredentials*>şunu arayın:
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupAllowSubdomain.cs?name=snippet6)]
 
-HTTP yanıtı, `Access-Control-Allow-Credentials` tarayıcıya sunucunun bir çapraz kaynak isteği için kimlik bilgilerine izin verdiğini söyleyen bir üstbilgi içerir.
+HTTP yanıtı, tarayıcıya sunucunun `Access-Control-Allow-Credentials` bir çapraz kaynak isteği için kimlik bilgileri verdiğini bildiren bir üst bilgi içerir.
 
-Tarayıcı kimlik bilgileri gönderir, ancak yanıt geçerli `Access-Control-Allow-Credentials` bir üstbilgi içermiyorsa, tarayıcı uygulamaya yanıtı açıklamaz ve çapraz kaynak isteği başarısız olur.
+Tarayıcı kimlik bilgilerini gönderirse ancak yanıt geçerli `Access-Control-Allow-Credentials` bir üst bilgi içermiyorsa, tarayıcı uygulamaya yanıtı kullanıma sunmaz ve çapraz kaynak isteği başarısız olur.
 
-Orjinal kimlik bilgilerine izin vermek bir güvenlik riskidir. Başka bir etki alanında bulunan bir web sitesi, kullanıcının bilgisi olmadan kullanıcı adına oturum açmış bir kullanıcının kimlik bilgilerini uygulamaya gönderebilir. <!-- TODO Review: When using `AllowCredentials`, all CORS enabled domains must be trusted.
+Çıkış noktaları arası kimlik bilgilerine izin vermek bir güvenlik riskidir. Başka bir etki alanındaki Web sitesi, kullanıcının bilgisi olmadan kullanıcı adına, oturum açmış bir kullanıcının kimlik bilgilerini uygulamaya gönderebilir. <!-- TODO Review: When using `AllowCredentials`, all CORS enabled domains must be trusted.
 I don't like "all CORS enabled domains must be trusted", because it implies that if you're not using  `AllowCredentials`, domains don't need to be trusted. -->
 
-CORS belirtimi, üstbilgi `"*"` varsa(tüm kökenlerin) kaynağını ayarlamanın `Access-Control-Allow-Credentials` geçersiz olduğunu da belirtir.
+CORS belirtimi Ayrıca `"*"` `Access-Control-Allow-Credentials` üst bilgi varsa, çıkış (tüm kaynaklar) ayarının geçersiz olduğunu belirtir.
 
 <a name="pref"></a>
 
 ## <a name="preflight-requests"></a>Ön kontrol istekleri
 
-Bazı CORS istekleri için tarayıcı, gerçek isteği yapmadan önce ek bir [OPTIONS](https://developer.mozilla.org/docs/Web/HTTP/Methods/OPTIONS) isteği gönderir. Bu istek [bir ön kontrol isteği](https://developer.mozilla.org/docs/Glossary/Preflight_request)olarak adlandırılır. Aşağıdaki ***tüm*** koşullar doğruysa, tarayıcı ön kontrol isteğini atlayabilir:
+Bazı CORS istekleri için, tarayıcı gerçek isteği yapmadan önce ek bir [seçenek](https://developer.mozilla.org/docs/Web/HTTP/Methods/OPTIONS) isteği gönderir. Bu isteğe bir [ön kontrol isteği](https://developer.mozilla.org/docs/Glossary/Preflight_request)denir. Aşağıdaki koşulların ***Tümü*** doğruysa tarayıcı, ön kontrol isteğini atlayabilir:
 
-* İstek yöntemi GET, HEAD veya POST'dur.
-* Uygulama, istek `Accept`üstbilgisini , , `Accept-Language` `Content-Language`, `Content-Type`veya `Last-Event-ID`.
-* Üstbilgi, `Content-Type` küme, aşağıdaki değerlerden birine sahiptir:
+* İstek yöntemi al, HEAD veya POST.
+* Uygulama `Accept`, `Accept-Language` `Content-Language`,, veya `Last-Event-ID`dışındaki istek üst bilgilerini ayarlanmamış. `Content-Type`
+* , `Content-Type` Ayarlandıysa, aşağıdaki değerlerden birine sahip olan üst bilgi:
   * `application/x-www-form-urlencoded`
   * `multipart/form-data`
   * `text/plain`
 
-İstemci isteği için ayarlanan istek üstbilgilerine ilişkin kural, `setRequestHeader` `XMLHttpRequest` uygulamanın nesneyi çağırarak ayarladığını üstbilgi için geçerlidir. CORS belirtimi bu üstbilgi [yazar istek üstbilgi](https://www.w3.org/TR/cors/#author-request-headers)çağırır. Kural, tarayıcının ayarlayabileceği `User-Agent`, , `Host`veya `Content-Length`.
+İstemci isteği için ayarlanan istek üst bilgileri kuralı, uygulamanın, `setRequestHeader` `XMLHttpRequest` nesne üzerinde çağırarak ayarladığı üst bilgiler için geçerlidir. CORS belirtimi, bu üst bilgiler [Yazar istek üst bilgilerini](https://www.w3.org/TR/cors/#author-request-headers)çağırır. Kural `User-Agent`, `Host`, veya gibi tarayıcının ayarlayabilmesi için, veya `Content-Length`gibi bir üst bilgiye uygulanmaz.
 
-Aşağıda, bu belgenin [Test CORS](#testc) bölümündeki **[Test Yap]** düğmesinden yapılan ön kontrol isteğine benzer bir örnek yanıt verilmiştir.
+Aşağıda, bu belgenin [Test CORS](#testc) bölümündeki **[testi koy]** düğmesinden yapılmış olan ön kontrol isteğine benzer bir yanıt verilmiştir.
 
 ```
 General:
@@ -348,31 +354,31 @@ Sec-Fetch-Site: cross-site
 User-Agent: Mozilla/5.0
 ```
 
-Ön kontrol isteği [HTTP OPTIONS](https://developer.mozilla.org/docs/Web/HTTP/Methods/OPTIONS) yöntemini kullanır. Aşağıdaki üstbilgi içerebilir:
+Ön kontrol isteği [http seçenekleri](https://developer.mozilla.org/docs/Web/HTTP/Methods/OPTIONS) yöntemini kullanır. Aşağıdaki üstbilgiler bulunabilir:
 
-* [Access-Control-Request-Method](https://developer.mozilla.org/docs/Web/HTTP/Headers/Access-Control-Request-Method): Gerçek istek için kullanılacak HTTP yöntemi.
-* [Erişim-Denetim-İstek-Üstbilgi](https://developer.mozilla.org/docs/Web/HTTP/Headers/Access-Control-Allow-Headers): Uygulamanın gerçek istek üzerine ayarladığının istek üstbilgilerinin listesi. Daha önce belirtildiği gibi, `User-Agent`bu, tarayıcının belirlediği üstleri içermez.
-* [Erişim-Denetim-İzin Verme-Yöntemler](https://developer.mozilla.org/docs/Web/HTTP/Headers/Access-Control-Allow-Methods)
+* [Access-Control-Request-Method](https://developer.mozilla.org/docs/Web/HTTP/Headers/Access-Control-Request-Method): gerçek istek IÇIN kullanılacak http yöntemi.
+* [Erişim-denetim-istek-üstbilgiler](https://developer.mozilla.org/docs/Web/HTTP/Headers/Access-Control-Allow-Headers): uygulamanın gerçek istekte ayarladığı istek üst bilgilerinin bir listesi. Daha önce belirtildiği gibi, bu, tarayıcının ayarladığı üst bilgileri içermez `User-Agent`.
+* [Erişim-denetim-Izin-Yöntemler](https://developer.mozilla.org/docs/Web/HTTP/Headers/Access-Control-Allow-Methods)
 
-Ön kontrol isteği reddedilirse, uygulama bir `200 OK` yanıt verir, ancak CORS üstbilgisini ayarlamaz. Bu nedenle, tarayıcı çapraz kaynak isteği denemez. Reddedilen ön kontrol isteği örneği için, bu belgenin [Test CORS](#testc) bölümüne bakın.
+Ön kontrol isteği reddedilirse, uygulama bir `200 OK` yanıt döndürür ancak CORS üst bilgilerini yapmaz. Bu nedenle tarayıcı, çıkış noktaları arası isteği denemez. Reddedilen bir ön kontrol isteğine bir örnek için, bu belgenin [Test CORS](#testc) bölümüne bakın.
 
 Konsol uygulaması, F12 araçlarını kullanarak tarayıcıya bağlı olarak aşağıdakilerden birine benzer bir hata gösterir:
 
-* Firefox: Cross-Origin İstek Engellendi: Aynı Başlangıç Politikası uzak `https://cors1.azurewebsites.net/api/TodoItems1/MyDelete2/5`kaynağı okuma ya da izin vermiyor. (Sebep: CORS isteği başarılı olmadı). [Daha Fazla Bilgi Edinin](https://developer.mozilla.org/docs/Web/HTTP/CORS/Errors/CORSDidNotSucceed)
-* Krom bazlı: ' 'https://cors1.azurewebsites.net/api/TodoItems1/MyDelete2/5from origin 'https://cors3.azurewebsites.net' 'eve erişim CORS ilkesi tarafından engellendi: Ön kontrol isteğine yanıt erişim denetiminden geçmiyor: İstenen kaynakta 'Access-Control-Allow-Allow-Origin' başlığı bulunmamaktadır. İhtiyaçlarınıza opak bir yanıt yanıt veriyorsa, CORS devre dışı bırakılmış kaynağı almak için istek modunu 'kors'a göre ayarlayın.
+* Firefox: çapraz kaynak Isteği engellendi: aynı kaynak Ilkesi, konumundaki `https://cors1.azurewebsites.net/api/TodoItems1/MyDelete2/5`uzak kaynağı okumaktan izin vermez. (Neden: CORS isteği başarılı olmadı). [Daha Fazla Bilgi Edinin](https://developer.mozilla.org/docs/Web/HTTP/CORS/Errors/CORSDidNotSucceed)
+* Kmıum tabanlı: ' ' kaynağındanhttps://cors1.azurewebsites.net/api/TodoItems1/MyDelete2/5https://cors3.azurewebsites.net' ' konumundaki getirme erişimi CORS ilkesi tarafından engellendi: ön kontrol isteğine verilen yanıt erişim denetimi denetimine geçti: İstenen kaynakta ' Access-Control-Allow-Origin ' üst bilgisi yok. Donuk bir yanıt ihtiyaçlarınıza hizmet veriyorsa, isteği CORS devre dışı olarak getirmek için isteğin modunu ' No-CORS ' olarak ayarlayın.
 
-Belirli üstbilgi için: <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*>
+Belirli üstbilgilere izin vermek için şunu <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*>arayın:
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupAllowSubdomain.cs?name=snippet2)]
 
-Tüm [yazar istek üstbilgilerine](https://www.w3.org/TR/cors/#author-request-headers)izin vermek için , arayın: <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyHeader*>
+Tüm [Yazar isteği başlıklarına](https://www.w3.org/TR/cors/#author-request-headers)izin vermek için şunu <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyHeader*>çağırın:
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupAllowSubdomain.cs?name=snippet3)]
 
-Tarayıcılar, ayarlarken `Access-Control-Request-Headers`tutarlı değildir. Eğer ikisinden biri:
+Tarayıcılar, nasıl ayarlandıklarından `Access-Control-Request-Headers`tutarlı değildir. Aşağıdakilerden biri:
 
-* Üstbilgi, başka bir şeye ayarlanır`"*"`
-* <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicy.AllowAnyHeader*>denir: En az `Accept` `Content-Type`, `Origin`, ve , artı desteklemek istediğiniz herhangi bir özel üstbilgi içerir.
+* Üst bilgiler, dışında bir şeye ayarlanır`"*"`
+* <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicy.AllowAnyHeader*>çağrıldı: en az `Accept`, `Content-Type`, ve, ve `Origin`desteklemek istediğiniz tüm özel üstbilgileri ekleyin.
 
 <a name="apf"></a>
 
@@ -380,12 +386,12 @@ Tarayıcılar, ayarlarken `Access-Control-Request-Headers`tutarlı değildir. E�
 
 CORS ilkesi uygulandığında:
 
-* Global olarak `app.UseCors` arayarak `Startup.Configure`.
-* Özniteliği `[EnableCors]` kullanarak.
+* ' `Startup.Configure`İ çağırarak `app.UseCors` küresel olarak.
+* `[EnableCors]` Özniteliği kullanılıyor.
 
-ASP.NET Core, uçuş öncesi OPTIONS isteğine yanıt verir.
+ASP.NET Core, ön kontrol SEÇENEKLERI isteğine yanıt verir.
 
-Cors'un şu anda kullanarak `RequireCors` uç nokta bazında etkinleştirilmesi otomatik ön uçuş isteklerini ***desteklemez.***
+`RequireCors` Şu anda bir uç nokta temelinde CORS etkinleştirildiğinde otomatik ön kontrol ***istekleri desteklenmez.***
 
 Bu belgenin [Test CORS](#testc) bölümü bu davranışı gösterir.
 
@@ -393,46 +399,46 @@ Bu belgenin [Test CORS](#testc) bölümü bu davranışı gösterir.
 
 ### <a name="httpoptions-attribute-for-preflight-requests"></a>[HttpOptions] ön kontrol istekleri için öznitelik
 
-CORS uygun ilke ile etkinleştirildiğinde, ASP.NET Core genellikle CORS uçuş öncesi isteklerine otomatik olarak yanıt verir. Bazı senaryolarda durum böyle olmayabilir. Örneğin, [uç nokta yönlendirme ile CORS](#ecors)kullanarak.
+CORS uygun ilkeyle etkinleştirildiğinde, ASP.NET Core genellikle CORS ön denetim isteklerini otomatik olarak yanıtlar. Bazı senaryolarda bu durum olmayabilir. Örneğin, [uç nokta yönlendirme Ile CORS](#ecors)'yi kullanma.
 
-Aşağıdaki kod, OPTIONS istekleri için uç noktaları oluşturmak için [[HttpOptions]](xref:Microsoft.AspNetCore.Mvc.HttpOptionsAttribute) özniteliğini kullanır:
+Aşağıdaki kod, Seçenekler istekleri için uç noktalar oluşturmak için [[HttpOptions]](xref:Microsoft.AspNetCore.Mvc.HttpOptionsAttribute) özniteliğini kullanır:
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/Controllers/TodoItems2Controller.cs?name=snippet&highlight=5-17)]
 
-Yukarıdaki kodun sınanma yönergeleri için [uç nokta yönlendirme ve [HttpOptions] içeren Test CORS'e](#tcer) bakın.
+Önceki kodun test edilmesine ilişkin yönergeler için bkz. [Endpoint Routing Ile test CORS ve [HttpOptions]](#tcer) .
 
-### <a name="set-the-preflight-expiration-time"></a>Uçuş öncesi son kullanma süresini ayarlama
+### <a name="set-the-preflight-expiration-time"></a>Ön kontrol sona erme süresini ayarlama
 
-Üstbilgi, `Access-Control-Max-Age` ön kontrol isteğine verilen yanıtın ne kadar süreyle önbelleğe alınabileceğini belirtir. Bu üstbilgi ayarlamak <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.SetPreflightMaxAge*>için:
+`Access-Control-Max-Age` Üst bilgi, ön kontrol isteğine olan yanıtın ne kadar süreyle önbelleğe alınacağını belirtir. Bu üstbilgiyi ayarlamak için şunu arayın <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.SetPreflightMaxAge*>:
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupAllowSubdomain.cs?name=snippet7)]
 <a name="how-cors"></a>
 
-## <a name="how-cors-works"></a>CORS nasıl çalışır?
+## <a name="how-cors-works"></a>CORS nasıl kullanılır?
 
-Bu bölümde, HTTP iletileri düzeyinde bir [CORS](https://developer.mozilla.org/docs/Web/HTTP/CORS) isteğine neler olduğu açıklanmaktadır.
+Bu bölümde, HTTP iletileri düzeyindeki bir [CORS](https://developer.mozilla.org/docs/Web/HTTP/CORS) isteğinde ne olacağı açıklanmaktadır.
 
-* CORS bir güvenlik özelliği **değildir.** CORS, bir sunucunun aynı orijin ilkesini gevşetmesine olanak tanıyan bir W3C standardıdır.
-  * Örneğin, kötü niyetli bir aktör sitenize karşı [Site Arası Komut Dosyası (XSS)](xref:security/cross-site-scripting) kullanabilir ve cors özellikli sitesine bilgi çalmak için bir çapraz site isteği yürütebilir.
-* BIR API CORS izin vererek daha güvenli değildir.
-  * CORS'i uygulamak istemciye (tarayıcıya) kalmış. Sunucu isteği yürütür ve yanıtı döndürür, bir hata döndürür ve yanıtı engeller istemcisidir. Örneğin, aşağıdaki araçlardan herhangi biri sunucu yanıtını görüntüler:
+* CORS bir güvenlik özelliği **değil** . CORS, bir sunucunun aynı kaynaklı ilkeyi rahat bir şekilde sağlamasına izin veren bir W3C standardıdır.
+  * Örneğin, kötü niyetli bir aktör sitenize karşı [siteler arası komut dosyası (XSS)](xref:security/cross-site-scripting) kullanabilir ve bilgileri çalmak için CORS özellikli sitesine bir siteler arası istek yürütebilir.
+* Bir API, CORS 'ye izin vererek daha güvenli değildir.
+  * CORS 'yi zorlamak için istemciye (tarayıcı) sahiptir. Sunucu isteği yürütür ve yanıtı döndürür. Bu, bir hatayı döndüren ve yanıtı engelleyen istemcdir. Örneğin, aşağıdaki araçlardan herhangi birinde sunucu yanıtı görüntülenir:
     * [Fiddler](https://www.telerik.com/fiddler)
     * [Postman](https://www.getpostman.com/)
-    * [.NET Https://yayla](/dotnet/csharp/tutorials/console-webapiclient)
-    * Adres çubuğuna URL girerek bir web tarayıcısı.
-* Bu, bir sunucunun tarayıcıların aksi takdirde yasaklanacak bir çapraz kökenli [XHR](https://developer.mozilla.org/docs/Web/API/XMLHttpRequest) veya [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API) isteğini yürütmesine izin vermenin bir yoludur.
-  * CORS'siz tarayıcılar çapraz kökenli isteklerde bulunabilir. CORS önce, [JSONP](https://www.w3schools.com/js/js_json_jsonp.asp) bu kısıtlamayı atlatmak için kullanılmıştır. JSONP XHR kullanmaz, yanıtı `<script>` almak için etiketi kullanır. Komut dosyalarıçapraz kökenli yüklenebilir.
+    * [.NET HttpClient](/dotnet/csharp/tutorials/console-webapiclient)
+    * Adres çubuğuna URL girerek bir Web tarayıcısı.
+* Bir sunucu, tarayıcıların çapraz kaynak [XHR](https://developer.mozilla.org/docs/Web/API/XMLHttpRequest) veya [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API) isteği çalıştırmasına izin vermesinin yasaktır bir yoludur.
+  * CORS içermeyen tarayıcılar, çıkış noktaları arası istekleri yapamıyor. CORS 'den önce, bu kısıtlamayı aşmak için [JSONP](https://www.w3schools.com/js/js_json_jsonp.asp) kullanılmıştır. JSONP XHR kullanmaz, yanıtı almak için `<script>` etiketini kullanır. Betiklerin, çapraz kaynak olarak yüklenmesine izin verilir.
 
-[CORS belirtimi,](https://www.w3.org/TR/cors/) orijinler arası istekleri etkinleştiren birkaç yeni HTTP üstbilgisini tanıttı. Bir tarayıcı CORS'i destekliyorsa, bu başlıkları çapraz başlangıç istekleri için otomatik olarak ayarlar. CORS'i etkinleştirmek için özel JavaScript kodu gerekmez.
+[CORS belirtimi](https://www.w3.org/TR/cors/) , çıkış noktaları arası istekleri etkinleştiren bırkaç yeni http üst bilgisi sunmuştur. Bir tarayıcı CORS 'yi destekliyorsa, bu üst bilgileri, çıkış noktaları arası istekler için otomatik olarak ayarlar. CORS 'yi etkinleştirmek için özel JavaScript kodu gerekli değildir.
 
-Dağıtılan [örnekteki](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/3.1sample/Cors/WebAPI) [PUT test düğmesi](https://cors3.azurewebsites.net/test)
+Dağıtılan [örnekteki](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/3.1sample/Cors/WebAPI) [testi Yerleştir düğmesi](https://cors3.azurewebsites.net/test)
 
-Aşağıda, [Değerler](https://cors3.azurewebsites.net/) test düğmesinden `https://cors1.azurewebsites.net/api/values`' e bir çapraz kaynak isteği örneği verilmiştir. Üstbilgi: `Origin`
+Aşağıda, [Values](https://cors3.azurewebsites.net/) test düğmesinden olan bir çapraz kaynak isteğine bir örnek verilmiştir `https://cors1.azurewebsites.net/api/values`. `Origin` Üst bilgi:
 
-* İstekte bulunduran sitenin etki alanını sağlar.
-* Gereklidir ve ana bilgisayardan farklı olmalıdır.
+* , İsteği yapan sitenin etki alanını sağlar.
+* Gereklidir ve konaktan farklı olmalıdır.
 
-**Genel başlıklar**
+**Genel üstbilgiler**
 
 ```
 Request URL: https://cors1.azurewebsites.net/api/values
@@ -440,7 +446,7 @@ Request Method: GET
 Status Code: 200 OK
 ```
 
-**Yanıt üstleri**
+**Yanıt üst bilgileri**
 
 ```
 Content-Encoding: gzip
@@ -452,7 +458,7 @@ Vary: Accept-Encoding
 X-Powered-By: ASP.NET
 ```
 
-**İstek üstbilgi**
+**İstek üst bilgileri**
 
 ```
 Accept: */*
@@ -468,9 +474,9 @@ Sec-Fetch-Site: cross-site
 User-Agent: Mozilla/5.0 ...
 ```
 
-İsteklerde, `OPTIONS` sunucu yanıt **üstbilgisini** `Access-Control-Allow-Origin: {allowed origin}` yanıt olarak ayarlar. Örneğin, dağıtılan [örnek](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/3.1sample/Cors/WebAPI), [Sil [EnableCors]](https://cors1.azurewebsites.net/test?number=2) düğmesi `OPTIONS` isteği aşağıdaki üstbilgileri içerir:
+`OPTIONS` İsteklerde, sunucu yanıtta **yanıt üstbilgileri** `Access-Control-Allow-Origin: {allowed origin}` üst bilgisini ayarlar. Örneğin, dağıtılan [örnek](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/3.1sample/Cors/WebAPI), [delete [enablecors]](https://cors1.azurewebsites.net/test?number=2) düğme `OPTIONS` isteği aşağıdaki üstbilgileri içerir:
 
-**Genel başlıklar**
+**Genel üstbilgiler**
 
 ```
 Request URL: https://cors3.azurewebsites.net/api/TodoItems2/MyDelete2/5
@@ -478,7 +484,7 @@ Request Method: OPTIONS
 Status Code: 204 No Content
 ```
 
-**Yanıt üstleri**
+**Yanıt üst bilgileri**
 
 ```
 Access-Control-Allow-Headers: Content-Type,x-custom-header
@@ -490,7 +496,7 @@ Vary: Origin
 X-Powered-By: ASP.NET
 ```
 
-**İstek üstbilgi**
+**İstek üst bilgileri**
 
 ```
 Accept: */*
@@ -508,65 +514,65 @@ Sec-Fetch-Site: cross-site
 User-Agent: Mozilla/5.0
 ```
 
-Önceki Yanıt **üstbilgisinde,** sunucu yanıtta [Access-Control-Allow-Origin](https://developer.mozilla.org/docs/Web/HTTP/Headers/Access-Control-Allow-Origin) üstbilgisini ayarlar. Bu `https://cors1.azurewebsites.net` üstbilginin değeri `Origin` istekteki üstbilgiyle eşleşir.
+Önceki **yanıt üst bilgilerinde**sunucu, yanıtta [Access-Control-Allow-Origin](https://developer.mozilla.org/docs/Web/HTTP/Headers/Access-Control-Allow-Origin) üst bilgisini ayarlar. Bu `https://cors1.azurewebsites.net` üstbilginin değeri, istekten gelen `Origin` üstbilgiyle eşleşir.
 
-<xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyOrigin*> Çağrıldığında, `Access-Control-Allow-Origin: *`joker karakter değeri döndürülür. `AllowAnyOrigin`herhangi bir menşe sağlar.
+<xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyOrigin*> Çağrılırsa `Access-Control-Allow-Origin: *`, joker karakter değeri döndürülür. `AllowAnyOrigin`Tüm kaynağa izin verir.
 
-Yanıt `Access-Control-Allow-Origin` üstbilgi içermiyorsa, çapraz kaynak isteği başarısız olur. Özellikle, tarayıcı isteği izin verir. Sunucu başarılı bir yanıt döndürse bile, tarayıcı yanıtı istemci uygulamasına sunmaz.
+Yanıt `Access-Control-Allow-Origin` üstbilgiyi içermiyorsa, çapraz kaynak isteği başarısız olur. Özellikle, tarayıcı isteğe izin vermez. Sunucu başarılı bir yanıt döndürse bile tarayıcı, yanıtı istemci uygulama için kullanılabilir hale getirir.
 
 <a name="options"></a>
 
-### <a name="display-options-requests"></a>SEÇENEKLER isteklerini görüntüleme
+### <a name="display-options-requests"></a>Görüntüleme SEÇENEKLERI istekleri
 
-Varsayılan olarak, Chrome ve Edge tarayıcıları F12 araçlarının ağ sekmesinde OPTIONS isteklerini göstermez. Bu tarayıcılarda OPTIONS isteklerini görüntülemek için:
+Varsayılan olarak, Chrome ve Edge tarayıcıları, F12 araçlarının Ağ sekmesinde seçenek isteklerini göstermez. Bu tarayıcılarda seçenek isteklerini göstermek için:
 
 * `chrome://flags/#out-of-blink-cors` veya `edge://flags/#out-of-blink-cors`
-* bayrağı devre dışı kılabilir.
-* Yeni -den başlatın.
+* bayrağı devre dışı bırakın.
+* uygulamasını.
 
-Firefox varsayılan olarak OPTIONS isteklerini gösterir.
+Firefox, varsayılan olarak seçenek isteklerini gösterir.
 
-## <a name="cors-in-iis"></a>CORS in IIS
+## <a name="cors-in-iis"></a>IIS 'de CORS
 
-IIS'ye dağıtılırken, sunucu anonim erişime izin verecek şekilde yapılandırılmamışsa CORS'in Windows Kimlik Doğrulama'dan önce çalışması gerekiyor. Bu senaryoyu desteklemek için [IIS CORS modülünün](https://www.iis.net/downloads/microsoft/iis-cors-module) uygulama için yüklenmesi ve yapılandırılması gerekir.
+IIS 'ye dağıtım yaparken, sunucu anonim erişime izin verecek şekilde yapılandırılmamışsa CORS, Windows kimlik doğrulamasından önce çalıştırılmalıdır. Bu senaryoyu desteklemek için, [IIS CORS modülünün](https://www.iis.net/downloads/microsoft/iis-cors-module) uygulama için yüklenmiş ve yapılandırılmış olması gerekir.
 
 <a name="testc"></a>
 
 ## <a name="test-cors"></a>Test CORS
 
-[Örnek indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/3.1sample/Cors/WebAPI) CORS test etmek için kodu vardır. [Nasıl indirilir bakın.](xref:index#how-to-download-a-sample) Örnek Razor Pages eklenen bir API projesidir:
+[Örnek indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/3.1sample/Cors/WebAPI) , CORS 'yi test etmek için kod içerir. Bkz. [indirme](xref:index#how-to-download-a-sample). Örnek, eklenen sayfaların bulunduğu Razor bir API projem örneğidir:
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupTest2.cs?name=snippet2)]
 
   > [!WARNING]
-  > `WithOrigins("https://localhost:<port>");`yalnızca [indirme örnek koduna](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/cors/3.1sample/Cors)benzer bir örnek uygulamayı test etmek için kullanılmalıdır.
+  > `WithOrigins("https://localhost:<port>");`yalnızca [indirme örnek koduna](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/cors/3.1sample/Cors)benzer bir örnek uygulamanın test edilmesi için kullanılmalıdır.
 
-Aşağıdaki `ValuesController` sınama için uç noktaları sağlar:
+Aşağıdakiler `ValuesController` , test için uç noktaları sağlar:
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/Controllers/ValuesController.cs?name=snippet)]
 
-[MyDisplayRouteInfo](https://github.com/Rick-Anderson/RouteInfo/blob/master/Microsoft.Docs.Samples.RouteInfo/ControllerContextExtensions.cs) [Rick.Docs.Samples.RouteInfo](https://www.nuget.org/packages/Rick.Docs.Samples.RouteInfo) NuGet paketi tarafından sağlanır ve rota bilgilerini görüntüler.
+[Mydisplayrouteınfo](https://github.com/Rick-Anderson/RouteInfo/blob/master/Microsoft.Docs.Samples.RouteInfo/ControllerContextExtensions.cs) , [Rick. docs. Samples. routeınfo](https://www.nuget.org/packages/Rick.Docs.Samples.RouteInfo) NuGet paketi tarafından sağlanır ve rota bilgilerini görüntüler.
 
 Aşağıdaki yaklaşımlardan birini kullanarak önceki örnek kodu test edin:
 
-* Dağıtılan örnek uygulamayı ' [https://cors3.azurewebsites.net/](https://cors3.azurewebsites.net/)da kullanın. Örneği indirmenize gerek yoktur.
-* Örneği varsayılan `dotnet run` URL'sini kullanarak `https://localhost:5001`çalıştırın.
-* Bir URL için 44398 olarak ayarlanmış bağlantı noktası `https://localhost:44398`ile Visual Studio örnek çalıştırın.
+* Üzerinde [https://cors3.azurewebsites.net/](https://cors3.azurewebsites.net/)dağıtılan örnek uygulamayı kullanın. Örneği indirmeniz gerekmez.
+* Varsayılan URL 'sini `dotnet run` kullanarak örneği çalıştırın `https://localhost:5001`.
+* Bir URL 'SI için, bağlantı noktası 44398 olarak ayarlanan Visual Studio 'daki örneği çalıştırın `https://localhost:44398`.
 
-F12 araçları ile bir tarayıcı kullanma:
+F12 araçlarıyla bir tarayıcı kullanma:
 
-* **Değerler** düğmesini seçin ve **Ağ** sekmesindeki üstbilgiincelemesi.
-* PUT **test** düğmesini seçin. SEÇENEKLER isteğini görüntülerken verilen talimatlar için SEÇENEKLER'i görüntüleme [isteklerine](#options) bakın. **PUT testi** iki istek, bir OPTIONS ön uçuş isteği ve PUT isteği oluşturur.
-* Başarısız **`GetValues2 [DisableCors]`** bir CORS isteğini tetiklemek için düğmeyi seçin. Belgede belirtildiği gibi, yanıt 200 başarı döndürür, ancak CORS isteği yapılmaz. CORS hatasını görmek için **Konsol** sekmesini seçin. Tarayıcıya bağlı olarak, aşağıdakilere benzer bir hata görüntülenir:
+* **Değerler** düğmesini seçin ve **ağ** sekmesindeki üst bilgileri gözden geçirin.
+* **Testi yerleştir** düğmesini seçin. Seçenekler isteği görüntüleme yönergeleri için bkz. [görüntüleme seçenekleri istekleri](#options) . **PUT testi** iki istek, bir seçenekler ön hazırlığı ISTEğI ve PUT isteği oluşturur.
+* Başarısız bir **`GetValues2 [DisableCors]`** CORS isteğini tetiklemek için düğmeyi seçin. Belgede bahsedildiği gibi, yanıt 200 başarılı döndürür, ancak CORS isteği yapılmaz. CORS hatasını görmek için **konsol** sekmesini seçin. Tarayıcıya bağlı olarak aşağıdakine benzer bir hata görüntülenir:
 
-     `'https://cors1.azurewebsites.net/api/values/GetValues2'` Orijinden `'https://cors3.azurewebsites.net'` erişim CORS ilkesi tarafından engellendi: İstenen kaynakta 'Access-Control-Allow-Origin' başlığı bulunmamaktadır. İhtiyaçlarınıza opak bir yanıt yanıt veriyorsa, CORS devre dışı bırakılmış kaynağı almak için istek modunu 'kors'a göre ayarlayın.
+     Kaynak `'https://cors1.azurewebsites.net/api/values/GetValues2'` KIMDEN kaynağı `'https://cors3.azurewebsites.net'` CORS ilkesi tarafından engellendi: İstenen kaynakta ' erişim-denetim-izin-Origin ' üst bilgisi yok. Donuk bir yanıt ihtiyaçlarınıza hizmet veriyorsa, isteği CORS devre dışı olarak getirmek için isteğin modunu ' No-CORS ' olarak ayarlayın.
      
-CORS özellikli uç [noktalar, curl,](https://curl.haxx.se/) [Fiddler](https://www.telerik.com/fiddler)veya [Postacı](https://www.getpostman.com/)gibi bir araçla test edilebilir. Bir araç kullanırken, `Origin` üstbilgi tarafından belirtilen isteğin kaynağı, isteği alan ana bilgisayardan farklı olmalıdır. Üstbilginin değerine *cross-origin* `Origin` göre istek çapraz kökenli değilse:
+CORS özellikli uç noktalar, [kıvrımlı](https://curl.haxx.se/), [Fiddler](https://www.telerik.com/fiddler)veya [Postman](https://www.getpostman.com/)gibi bir araçla test edilebilir. Bir araç kullanırken, `Origin` üst bilgi tarafından belirtilen isteğin kaynağı isteği alan konaktan farklı olmalıdır. İstek, `Origin` üst bilgi değerine göre *Çıkış dışı* değilse:
 
-* CORS Middleware'in isteği işlemesine gerek yoktur.
-* CORS başlıkları yanıt olarak döndürülür.
+* CORS ara yazılımı için isteği işleme gereksinimi yoktur.
+* CORS üstbilgileri yanıtta döndürülmedi.
 
-Aşağıdaki komut, `curl` bir OPTIONS isteğini bilgiyle birlikte vermek için kullanır:
+Aşağıdaki komut, bilgileri `curl` IÇEREN bir seçenek isteği vermek için kullanır:
 
 ```bash
 curl -X OPTIONS https://cors3.azurewebsites.net/api/TodoItems2/5 -i
@@ -579,19 +585,19 @@ C:\Program Files\Git\mingw64\bin\
 
 <a name="tcer"></a>
 
-### <a name="test-cors-with-endpoint-routing-and-httpoptions"></a>Uç nokta yönlendirme ile TEST CORS ve [HttpOptions]
+### <a name="test-cors-with-endpoint-routing-and-httpoptions"></a>ENDPOINT yönlendirme ve [HttpOptions] ile test CORS
 
-Cors'un şu anda kullanarak `RequireCors` uç nokta bazında etkinleştirilmesi otomatik ön uçuş [isteklerini](#apf) ***desteklemez.*** [CORS'i etkinleştirmek için uç nokta yönlendirmeyi](#ecors)kullanan aşağıdaki kodu göz önünde bulundurun:
+`RequireCors` Şu anda bir uç nokta temelinde CORS etkinleştirildiğinde [Otomatik ön kontrol istekleri](#apf) ***desteklenmez.*** [CORS 'yi etkinleştirmek için Endpoint Routing](#ecors)kullanan aşağıdaki kodu göz önünde bulundurun:
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/StartupEndPointBugTest.cs?name=snippet2)]
 
-Aşağıdaki `TodoItems1Controller` sınama için uç noktaları sağlar:
+Aşağıdakiler `TodoItems1Controller` test için uç noktalar sağlar:
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/Controllers/TodoItems1Controller.cs?name=snippet2)]
 
-Dağıtılan [örneğin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/3.1sample/Cors/WebAPI) [test sayfasından](https://cors1.azurewebsites.net/test?number=1) önceki kodu test edin.
+Önceki kodu dağıtılan [Örneğin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/3.1sample/Cors/WebAPI) [Test sayfasından](https://cors1.azurewebsites.net/test?number=1) test edin.
 
-**[EnableCors]** ve **GET [EnableCors] düğmeleri** başarılı olur, `[EnableCors]` çünkü uç noktalar uçuş öncesi isteklere sahip ve yanıt verir. Diğer uç noktalar başarısız olur. [JavaScript](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/3.1sample/Cors/WebAPI/wwwroot/js/MyJS.js) gönderdiğinden **GET** düğmesi başarısız olur:
+Bitiş noktaları, ön kontrol isteklerini içerdiğinden `[EnableCors]` ve yanıt verdiği için **delete [enablecors]** ve **Get [enablecors]** düğmeleri başarılı olur. Diğer uç noktalar başarısız olur. [JavaScript](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/3.1sample/Cors/WebAPI/wwwroot/js/MyJS.js) şu şekilde gönderdiği için **Al** düğmesi başarısız olur:
 
 ```javascript
  headers: {
@@ -599,16 +605,16 @@ Dağıtılan [örneğin](https://github.com/dotnet/AspNetCore.Docs/tree/master/a
  },
 ```
 
-Aşağıdakibenzer `TodoItems2Controller` uç noktaları sağlar, ancak OPTIONS isteklerini yanıtlamak için açık kod içerir:
+Aşağıdakiler `TodoItems2Controller` benzer uç noktalar sağlar, ancak seçenek isteklerine yanıt vermek için açık kod içerir:
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/Controllers/TodoItems2Controller.cs?name=snippet2)]
 
-Dağıtılan örneğin [test sayfasından](https://cors1.azurewebsites.net/test?number=2) önceki kodu test edin. **Denetleyici** açılır listesinde Ön **Kontrol'i** seçin ve ardından **Denetleyiciyi Ayarlayın.** `TodoItems2Controller` Uç noktalara yapılan tüm CORS çağrıları başarılı dır.
+Önceki kodu dağıtılan örneğin [Test sayfasından](https://cors1.azurewebsites.net/test?number=2) test edin. **Denetleyici** açılan listesinde, **ön kontrol** ' yı ve ardından **denetleyiciyi ayarla**' yı seçin. `TodoItems2Controller` Uç noktalara YÖNELIK tüm CORS çağrıları başarılı olur.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * [Çıkış Noktaları Arası Kaynak Paylaşımı (CORS)](https://developer.mozilla.org/docs/Web/HTTP/CORS)
-* [IIS CORS modülü ile başlarken](https://blogs.iis.net/iisteam/getting-started-with-the-iis-cors-module)
+* [IIS CORS modülünü kullanmaya başlama](https://blogs.iis.net/iisteam/getting-started-with-the-iis-cors-module)
 
 ::: moniker-end
 
@@ -616,62 +622,62 @@ Dağıtılan örneğin [test sayfasından](https://cors1.azurewebsites.net/test?
 
 Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Bu makalede, bir ASP.NET Core uygulamasında CORS'in nasıl etkinleştirilen gösterilmektedir.
+Bu makalede, ASP.NET Core uygulamasında CORS 'nin nasıl etkinleştirileceği gösterilmektedir.
 
-Tarayıcı güvenliği, bir web sayfasının web sayfasına hizmet eden den farklı bir etki alanına istekte bulunmasını engeller. Bu kısıtlamaya *aynı kaynak ilkesi*denir. Aynı kaynak ilkesi, kötü amaçlı bir sitenin başka bir siteden gelen hassas verileri okumasını engeller. Bazen, diğer sitelerin uygulamanızda çapraz orijin isteklerinde yer almasına izin vermek isteyebilirsiniz. Daha fazla bilgi için [Mozilla CORS makalesine](https://developer.mozilla.org/docs/Web/HTTP/CORS)bakın.
+Tarayıcı güvenliği, bir Web sayfasının Web sayfasını sunduğundan farklı bir etki alanına istek yapmasını engeller. Bu kısıtlamaya *aynı-Origin ilkesi*adı verilir. Aynı-kaynak ilkesi, kötü niyetli bir sitenin gizli verileri başka bir siteden okumasını engeller. Bazen diğer sitelerin uygulamanıza çapraz çıkış istekleri yapmasına izin vermek isteyebilirsiniz. Daha fazla bilgi için bkz. [MOZILLA CORS makalesi](https://developer.mozilla.org/docs/Web/HTTP/CORS).
 
-[Çapraz Kaynak Paylaşımı](https://www.w3.org/TR/cors/) (CORS):
+[Çapraz kaynak kaynak paylaşımı](https://www.w3.org/TR/cors/) (CORS):
 
-* Bir sunucunun aynı orijin ilkesini gevşetmesine olanak tanıyan bir W3C standardıdır.
-* Bir güvenlik özelliği **değildir,** CORS güvenliği rahatlatır. BIR API CORS izin vererek daha güvenli değildir. Daha fazla bilgi için [CORS'in nasıl çalıştığını](#how-cors)görün.
-* Sunucunun, diğerlerini reddederken bazı kişiler arası isteklere açıkça izin vermesine izin verir.
-* [JSONP](/dotnet/framework/wcf/samples/jsonp)gibi önceki tekniklerden daha güvenli ve daha esnektir.
+* , Bir sunucunun aynı kaynak ilkeyi rahat bir şekilde sağlamasına izin veren bir W3C standardıdır.
+* Güvenlik özelliği **değil** , CORS güvenliği. CORS 'nin izin vermesini sağlayan bir API daha güvenli değildir. Daha fazla bilgi için bkz. [CORS çalışma](#how-cors).
+* Bir sunucunun bazı çapraz kaynak isteklerine, diğerlerini reddetirken açık olarak izin almasına izin verir.
+* , [JSONP](/dotnet/framework/wcf/samples/jsonp)gibi önceki tekniklerin daha güvenli ve daha esnektir.
 
-[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/sample) ( nasıl[indirilir](xref:index#how-to-download-a-sample))
+[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/sample) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="same-origin"></a>Aynı köken
+## <a name="same-origin"></a>Aynı kaynak
 
-Aynı düzenleri, ana bilgisayarlar ve bağlantı noktaları[(RFC 6454)](https://tools.ietf.org/html/rfc6454)varsa, iki URL aynı kökene sahiptir.
+Özdeş şemaları, konakları ve bağlantı noktalarına sahip olmaları durumunda iki URL aynı kaynağa sahiptir ([RFC 6454](https://tools.ietf.org/html/rfc6454)).
 
-Bu iki URL aynı kökene sahiptir:
+Bu iki URL aynı kaynağa sahiptir:
 
 * `https://example.com/foo.html`
 * `https://example.com/bar.html`
 
-Bu URL'lerin önceki iki URL'den farklı kökenleri vardır:
+Bu URL 'Ler, önceki iki URL 'den farklı kaynaklardan farklıdır:
 
 * `https://example.net`&ndash; Farklı etki alanı
 * `https://www.example.com/foo.html`&ndash; Farklı alt etki alanı
-* `http://example.com/foo.html`&ndash; Farklı şema
+* `http://example.com/foo.html`&ndash; Farklı düzen
 * `https://example.com:9000/foo.html`&ndash; Farklı bağlantı noktası
 
-Internet Explorer, kaynaklarını karşılaştırırken bağlantı noktasını dikkate almaz.
+Internet Explorer, kaynakları karşılaştırırken bağlantı noktasını dikkate almaz.
 
-## <a name="cors-with-named-policy-and-middleware"></a>Adlı ilke ve middleware ile CORS
+## <a name="cors-with-named-policy-and-middleware"></a>Adlandırılmış ilke ve ara yazılım ile CORS
 
-CORS Middleware, çapraz orijin isteklerini işler. Aşağıdaki kod, belirtilen menşee sahip tüm uygulama için CORS sağlar:
+CORS ara yazılımı, çıkış noktaları arası istekleri işler. Aşağıdaki kod, belirtilen kaynağa sahip tüm uygulama için CORS 'yi sunar:
 
 [!code-csharp[](cors/sample/Cors/WebAPI/Startup.cs?name=snippet&highlight=8,14-23,38)]
 
 Yukarıdaki kod:
 
-* İlke adını "myAllowSpecificOrigins"\_olarak ayarlar. İlke adı rasgele.
-* CORS'u sağlayan uzatma yöntemini <xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors*> çağırır.
-* <xref:Microsoft.Extensions.DependencyInjection.CorsServiceCollectionExtensions.AddCors*> [Lambda ifadesi](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions)ile aramalar . Lambda bir <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder> nesne alır. [Yapılandırma seçenekleri](#cors-policy-options), `WithOrigins`örneğin, bu makalede daha sonra açıklanmıştır.
+* İlke adını "\_myallowspecifickaynaklarına" olarak ayarlar. İlke adı rastgele olur.
+* CORS 'yi <xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors*> sağlayan genişletme yöntemini çağırır.
+* <xref:Microsoft.Extensions.DependencyInjection.CorsServiceCollectionExtensions.AddCors*> [Lambda ifadesi](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions)ile çağrılar. Lambda bir <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder> nesnesi alır. Gibi [yapılandırma seçenekleri](#cors-policy-options) `WithOrigins`, bu makalenin ilerleyen kısımlarında açıklanmıştır.
 
-Yöntem <xref:Microsoft.Extensions.DependencyInjection.MvcCorsMvcCoreBuilderExtensions.AddCors*> çağrısı, uygulamanın servis konteynerine CORS hizmetlerini ekler:
+<xref:Microsoft.Extensions.DependencyInjection.MvcCorsMvcCoreBuilderExtensions.AddCors*> Yöntem çağrısı, uygulamanın HIZMET kapsayıcısına CORS Hizmetleri ekler:
 
 [!code-csharp[](cors/sample/Cors/WebAPI/Startup.cs?name=snippet2)]
 
-Daha fazla bilgi için bu belgedeki [CORS ilke seçeneklerine](#cpo) bakın.
+Daha fazla bilgi için bu belgedeki [CORS ilke seçenekleri](#cpo) bölümüne bakın.
 
-Yöntem, <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder> aşağıdaki kodda gösterildiği gibi yöntemleri zincirleyebilir:
+<xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder> Yöntemi aşağıdaki kodda gösterildiği gibi yöntemleri zincirleyebilir:
 
 [!code-csharp[](cors/sample/Cors/WebAPI/Startup2.cs?name=snippet2)]
 
-Not: URL' de sondaki eğik çizgi ()`/` **içermemelidir.** URL ile sonlandırma, `/`karşılaştırma `false` döndürür ve hiçbir üstbilgi döndürülür.
+Not: URL sonunda eğik çizgi (`/` **) bulunmamalıdır.** URL ile `/`sonlandığında karşılaştırma döndürülür `false` ve üst bilgi döndürülmez.
 
-Aşağıdaki kod, CORS Middleware aracılığıyla tüm uygulama uç noktalarına CORS ilkelerini uygular:
+Aşağıdaki kod, CORS ara yazılımı aracılığıyla CORS ilkelerini tüm uygulama uç noktalarına uygular:
 ```csharp
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 {
@@ -690,63 +696,63 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
     app.UseMvc();
 }
 ```
-Not: `UseCors` önce `UseMvc`çağrılmalıdır.
+Note: `UseCors` öğesinden önce `UseMvc`çağrılmalıdır.
 
-Bkz. Sayfa/denetleyici/eylem düzeyinde CORS ilkesini uygulamak için [Razor Pages, denetleyiciler ve eylem yöntemlerinde CORS'i etkinleştirin.](#ecors)
+CORS ilkesini sayfa/denetleyici/eylem düzeyinde uygulamak için bkz. [ Razor sayfalarda, denetleyicilerde ve eylem yöntemlerinde CORS 'yi etkinleştirme](#ecors) .
 
-Önceki koda benzer test kodu yla ilgili talimatlar için [Test CORS'e](#test) bakın.
+Yukarıdaki koda benzer test kodu hakkında yönergeler için bkz. [Test CORS](#test) .
 
-## <a name="enable-cors-with-attributes"></a>Özniteliklerle CORS'i etkinleştirme
+## <a name="enable-cors-with-attributes"></a>CORS 'yi özniteliklerle etkinleştir
 
-[EnableCors&rbrack; özniteliği, CORS'u küresel olarak uygulamak için bir alternatif sağlar. &lbrack;](xref:Microsoft.AspNetCore.Cors.EnableCorsAttribute) Öznitelik, `[EnableCors]` tüm uç noktalar yerine seçilen uç noktalar için CORS'e olanak sağlar.
+[ &lbrack;Enablecors&rbrack; ](xref:Microsoft.AspNetCore.Cors.EnableCorsAttribute) özniteliği, CORS 'yi küresel olarak uygulamaya bir alternatif sağlar. `[EnableCors]` Öznitelik, tüm bitiş noktaları yerine, seçilen bitiş noktaları için CORS 'yi mümkün.
 
-Varsayılan `[EnableCors]` ilkeyi belirtmek `[EnableCors("{Policy String}")]` ve bir ilke belirtmek için kullanın.
+Varsayılan `[EnableCors]` ilkeyi belirtmek ve `[EnableCors("{Policy String}")]` bir ilke belirlemek için kullanın.
 
-Öznitelik `[EnableCors]` uygulanabilir:
+`[EnableCors]` Özniteliği öğesine uygulanabilir:
 
-* Jilet Sayfası`PageModel`
-* Denetleyicisi
-* Denetleyici eylem yöntemi
+* RazorSayfasında`PageModel`
+* Kumandasını
+* Denetleyici eylemi yöntemi
 
-Öznitelik ile `[EnableCors]` denetleyici/sayfa modeli/eylem için farklı ilkeler uygulayabilirsiniz. Öznitelik `[EnableCors]` denetleyicilere/sayfa modeli/eylem yöntemine uygulandığında ve ara yazılımda CORS etkinleştirildiğinde, ***her iki*** ilke de uygulanır. İlkeleri ***birleştirmemenizi*** öneririz. Öznitelik veya ara yazılım kullanın, ***her ikisi de değil**. `[EnableCors]` Kullanırken, `[EnableCors]`varsayılan bir ilke **tanımlamayın.**
+`[EnableCors]` Özniteliği ile denetleyici/sayfa-model/eylem 'e farklı ilkeler uygulayabilirsiniz. Özniteliği bir denetleyiciler/sayfa modeli/eylem yöntemine uygulandığında ve bu işlem, ara yazılım 'nda CORS 'yi etkinleştirmişse, ***her iki ilke de*** uygulanır. `[EnableCors]` İlkeleri ***birleştirmediğimiz*** için önerilir. `[EnableCors]` Özniteliği veya ara yazılım, ***her ikisi değil**kullanın. Kullanırken `[EnableCors]`, varsayılan bir **ilke tanımlamayın** .
 
-Aşağıdaki kod her yöntem için farklı bir ilke uygular:
+Aşağıdaki kod her bir yönteme farklı bir ilke uygular:
 
 [!code-csharp[](cors/sample/Cors/WebAPI/Controllers/WidgetController.cs?name=snippet&highlight=6,14)]
 
-Aşağıdaki kod bir CORS varsayılan ilkesi ve `"AnotherPolicy"`adlı bir ilke oluşturur:
+Aşağıdaki kod, bir CORS varsayılan ilkesi ve adlı `"AnotherPolicy"`bir ilke oluşturur:
 
 [!code-csharp[](cors/sample/Cors/WebAPI/StartupMultiPolicy.cs?name=snippet&highlight=12-28)]
 
-### <a name="disable-cors"></a>CORS'u devre dışı
+### <a name="disable-cors"></a>CORS 'yi devre dışı bırak
 
-[DisableCors&rbrack; denetleyici/sayfa modeli/eylem için CORS'u devre dışı bırakmaz. &lbrack;](xref:Microsoft.AspNetCore.Cors.DisableCorsAttribute)
+[Disablecors&rbrack; özniteliği denetleyici/sayfa modeli/eylem için CORS 'yi devre dışı &lbrack;](xref:Microsoft.AspNetCore.Cors.DisableCorsAttribute) bırakır.
 
 <a name="cpo"></a>
 
-## <a name="cors-policy-options"></a>CORS politika seçenekleri
+## <a name="cors-policy-options"></a>CORS ilke seçenekleri
 
-Bu bölümde, BIR CORS ilkesinde ayarlanabilecek çeşitli seçenekler açıklanmaktadır:
+Bu bölümde, bir CORS ilkesinde ayarlanmakta olabilecek çeşitli seçenekler açıklanmaktadır:
 
-* [İzin verilen kökenleri ayarlama](#set-the-allowed-origins)
+* [İzin verilen kaynakları ayarla](#set-the-allowed-origins)
 * [İzin verilen HTTP yöntemlerini ayarlama](#set-the-allowed-http-methods)
-* [İzin verilen istek üstbilgisini ayarlama](#set-the-allowed-request-headers)
-* [Açıkta kalan yanıt üstaylarını ayarlama](#set-the-exposed-response-headers)
-* [Orijinler arası isteklerde kimlik bilgileri](#credentials-in-cross-origin-requests)
-* [Uçuş öncesi son kullanma süresini ayarlama](#set-the-preflight-expiration-time)
+* [İzin verilen istek üst bilgilerini ayarlama](#set-the-allowed-request-headers)
+* [Gösterilen yanıt üst bilgilerini ayarlama](#set-the-exposed-response-headers)
+* [Kaynaklar arası isteklerde kimlik bilgileri](#credentials-in-cross-origin-requests)
+* [Ön kontrol sona erme süresini ayarlama](#set-the-preflight-expiration-time)
 
-<xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsOptions.AddPolicy*>olarak `Startup.ConfigureServices`adlandırılır. Bazı seçenekler için, [önce CORS nasıl çalışır](#how-cors) bölümünü okumak yararlı olabilir.
+<xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsOptions.AddPolicy*>içinde `Startup.ConfigureServices`çağırılır. Bazı seçenekler için, ilk olarak [CORS 'Nin nasıl çalıştığı](#how-cors) bölümü okumanız yararlı olabilir.
 
-## <a name="set-the-allowed-origins"></a>İzin verilen kökenleri ayarlama
+## <a name="set-the-allowed-origins"></a>İzin verilen kaynakları ayarla
 
-<xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyOrigin*>&ndash; Herhangi bir şema (veya)`http` `https`ile tüm kökenlerden CORS isteklerini sağlar. `AllowAnyOrigin`herhangi bir *web sitesi* uygulamaya çapraz orijin isteklerinde bulunabileceğinden güvenli değildir.
+<xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyOrigin*>&ndash; Herhangi bir düzen (`http` veya `https`) ile tüm kaynaklardan gelen CORS isteklerine izin verir. `AllowAnyOrigin`, *herhangi bir Web sitesi* uygulamaya çapraz kaynak istekleri yapabildiğinden güvenli değildir.
 
 > [!NOTE]
-> Belirtilmesi `AllowAnyOrigin` `AllowCredentials` ve güvenli olmayan bir yapılandırmadır ve site ler arası istek sahteciliğiyle sonuçlanabilir. Güvenli bir uygulama için, istemcinin sunucu kaynaklarına erişmek için kendisini yetkilendirmesi gerekiyorsa, tam bir kaynak listesi belirtin.
+> Ve `AllowAnyOrigin` `AllowCredentials` güvenli olmayan bir yapılandırma belirtip, siteler arası istek sahteciliği ile sonuçlanabilir. Güvenli bir uygulama için, istemcinin sunucu kaynaklarına erişim yetkisi olması gerekiyorsa, kaynakların tam bir listesini belirtin.
 
-`AllowAnyOrigin`ön kontrol isteklerini `Access-Control-Allow-Origin` ve üstbilgietkiler. Daha fazla bilgi için [Ön Uçuş istekleri](#preflight-requests) bölümüne bakın.
+`AllowAnyOrigin`ön kontrol isteklerini ve `Access-Control-Allow-Origin` üstbilgiyi etkiler. Daha fazla bilgi için bkz. [ön kontrol istekleri](#preflight-requests) bölümü.
 
-<xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.SetIsOriginAllowedToAllowWildcardSubdomains*>&ndash; İlkenin <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicy.IsOriginAllowed*> özelliğini, kaynağın izin verilip verilmediğini değerlendirirken, kökenlerin yapılandırılmış bir joker etki alanıyla eşleşmesine olanak tanıyan bir işlev olarak ayarlar.
+<xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.SetIsOriginAllowedToAllowWildcardSubdomains*>&ndash; Kaynağa izin <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicy.IsOriginAllowed*> verilip verilmediğini değerlendirirken, kaynağın bir yapılandırılmış joker karakterle eşleşmesini sağlayan bir işlev olarak ilkenin özelliğini ayarlar.
 
 [!code-csharp[](cors/sample/CorsExample4/Startup.cs?range=100-105&highlight=4-5)]
 
@@ -755,44 +761,44 @@ Bu bölümde, BIR CORS ilkesinde ayarlanabilecek çeşitli seçenekler açıklan
 <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyMethod*>:
 
 * Herhangi bir HTTP yöntemine izin verir:
-* Ön kontrol isteklerini `Access-Control-Allow-Methods` ve üstbilgiyi etkiler. Daha fazla bilgi için [Ön Uçuş istekleri](#preflight-requests) bölümüne bakın.
+* Ön kontrol isteklerini ve `Access-Control-Allow-Methods` üstbilgiyi etkiler. Daha fazla bilgi için bkz. [ön kontrol istekleri](#preflight-requests) bölümü.
 
-### <a name="set-the-allowed-request-headers"></a>İzin verilen istek üstbilgisini ayarlama
+### <a name="set-the-allowed-request-headers"></a>İzin verilen istek üst bilgilerini ayarlama
 
-Belirli üstbilginin CORS isteğinde gönderilmesine izin vermek için <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*> yazar *istek üstbilgisini*arayın, arayın ve izin verilen üstbilgibelirtin:
+Belirli başlıkların, *Yazar isteği üstbilgileri*ADLı bir CORS isteğinde gönderilmesine izin vermek için, ' i çağırın <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*> ve izin verilen üst bilgileri belirtin:
 
 [!code-csharp[](cors/sample/CorsExample4/Startup.cs?range=55-60&highlight=5)]
 
-Tüm yazar istek üstbilgilerine <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyHeader*>izin vermek için:
+Tüm yazar isteği başlıklarına izin vermek için şunu <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyHeader*>çağırın:
 
 [!code-csharp[](cors/sample/CorsExample4/Startup.cs?range=64-69&highlight=5)]
 
-Bu ayar, ön kontrol `Access-Control-Request-Headers` isteklerini ve üstbilgiyi etkiler. Daha fazla bilgi için [Ön Uçuş istekleri](#preflight-requests) bölümüne bakın.
+Bu ayar, `Access-Control-Request-Headers` ön kontrol isteklerini ve üstbilgiyi etkiler. Daha fazla bilgi için bkz. [ön kontrol istekleri](#preflight-requests) bölümü.
 
-CORS Middleware her zaman CorsPolicy.Headers yapılandırılan değerlerne bakılmaksızın gönderilmesi `Access-Control-Request-Headers` için dört üstbilgi sağlar. Bu üstbilgi listesi şunları içerir:
+CORS ara yazılımı her zaman CorsPolicy `Access-Control-Request-Headers` . Headers ' de yapılandırılan değerlerden bağımsız olarak, ' deki dört üst bilgilerin gönderilmesine izin verir. Bu üst bilgi listesi şunları içerir:
 
 * `Accept`
 * `Accept-Language`
 * `Content-Language`
 * `Origin`
 
-Örneğin, aşağıdaki gibi yapılandırılan bir uygulamayı düşünün:
+Örneğin, aşağıdaki gibi yapılandırılmış bir uygulamayı göz önünde bulundurun:
 
 ```csharp
 app.UseCors(policy => policy.WithHeaders(HeaderNames.CacheControl));
 ```
 
-CORS Middleware, her zaman beyaz listeye alındığı için ön `Content-Language` kontrol isteğine aşağıdaki istek üstbilgisiyle başarıyla yanıt verir:
+CORS ara yazılımı, her zaman beyaz listelenmiş olduğundan `Content-Language` , aşağıdaki istek üstbilgisiyle bir ön kontrol isteğine başarıyla yanıt veriyor:
 
 ```
 Access-Control-Request-Headers: Cache-Control, Content-Language
 ```
 
-### <a name="set-the-exposed-response-headers"></a>Açıkta kalan yanıt üstaylarını ayarlama
+### <a name="set-the-exposed-response-headers"></a>Gösterilen yanıt üst bilgilerini ayarlama
 
-Varsayılan olarak, tarayıcı tüm yanıt üstbilgisini uygulamaya maruz bırakmaz. Daha fazla bilgi için [W3C Cross-Origin Kaynak Paylaşımı (Terminoloji): Basit Yanıt Üstbilgisi'ne](https://www.w3.org/TR/cors/#simple-response-header)bakın.
+Varsayılan olarak tarayıcı, tüm yanıt üst bilgilerini uygulamaya sunmaz. Daha fazla bilgi için bkz. [W3C çıkış noktaları arası kaynak paylaşımı (terminoloji): basit yanıt üst bilgisi](https://www.w3.org/TR/cors/#simple-response-header).
 
-Varsayılan olarak kullanılabilir yanıt üstbilgi:
+Varsayılan olarak kullanılabilen yanıt üstbilgileri şunlardır:
 
 * `Cache-Control`
 * `Content-Language`
@@ -801,15 +807,15 @@ Varsayılan olarak kullanılabilir yanıt üstbilgi:
 * `Last-Modified`
 * `Pragma`
 
-CORS belirtimi bu üstbilgi *basit yanıt üstbilgi çağırır.* Diğer üstbilgileri uygulamaiçin kullanılabilir <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithExposedHeaders*>hale getirmek için aşağıdakileri arayın:
+CORS belirtimi, bu üst bilgiler *basit yanıt üst bilgilerini*çağırır. Diğer üst bilgileri uygulama için kullanılabilir hale getirmek için şunu <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithExposedHeaders*>çağırın:
 
 [!code-csharp[](cors/sample/CorsExample4/Startup.cs?range=73-78&highlight=5)]
 
-### <a name="credentials-in-cross-origin-requests"></a>Orijinler arası isteklerde kimlik bilgileri
+### <a name="credentials-in-cross-origin-requests"></a>Kaynaklar arası isteklerde kimlik bilgileri
 
-Kimlik bilgileri, CORS isteğinde özel kullanım gerektirir. Varsayılan olarak, tarayıcı bir çapraz kaynak isteği ile kimlik bilgileri göndermez. Kimlik bilgileri çerezleri ve HTTP kimlik doğrulama şemalarını içerir. Bir çapraz kaynak isteği ile kimlik bilgileri `XMLHttpRequest.withCredentials` göndermek `true`için, istemci nin .
+Kimlik bilgileri CORS isteğinde özel işleme gerektirir. Varsayılan olarak tarayıcı, kimlik bilgilerini bir çapraz kaynak isteğiyle göndermez. Kimlik bilgileri, tanımlama bilgileri ve HTTP kimlik doğrulama düzenlerini içerir. Bir çapraz kaynak isteğiyle kimlik bilgilerini göndermek için, istemcisinin olarak `XMLHttpRequest.withCredentials` `true`ayarlanması gerekir.
 
-Doğrudan `XMLHttpRequest` kullanma:
+Doğrudan `XMLHttpRequest` kullanarak:
 
 ```javascript
 var xhr = new XMLHttpRequest();
@@ -817,7 +823,7 @@ xhr.open('get', 'https://www.example.com/api/test');
 xhr.withCredentials = true;
 ```
 
-jQuery kullanma:
+JQuery kullanarak:
 
 ```javascript
 $.ajax({
@@ -829,7 +835,7 @@ $.ajax({
 });
 ```
 
-Getir [API'sini](https://developer.mozilla.org/docs/Web/API/Fetch_API)kullanma :
+[Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API)'sini kullanma:
 
 ```javascript
 fetch('https://www.example.com/api/test', {
@@ -837,33 +843,33 @@ fetch('https://www.example.com/api/test', {
 });
 ```
 
-Sunucu kimlik bilgilerine izin vermelidir. Orijinler arası kimlik <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowCredentials*>bilgilerine izin vermek için:
+Sunucu kimlik bilgilerine izin vermelidir. Çıkış noktaları arası kimlik bilgilerine izin vermek için <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowCredentials*>şunu arayın:
 
 [!code-csharp[](cors/sample/CorsExample4/Startup.cs?range=82-87&highlight=5)]
 
-HTTP yanıtı, `Access-Control-Allow-Credentials` tarayıcıya sunucunun bir çapraz kaynak isteği için kimlik bilgilerine izin verdiğini söyleyen bir üstbilgi içerir.
+HTTP yanıtı, tarayıcıya sunucunun `Access-Control-Allow-Credentials` bir çapraz kaynak isteği için kimlik bilgileri verdiğini bildiren bir üst bilgi içerir.
 
-Tarayıcı kimlik bilgileri gönderir, ancak yanıt geçerli `Access-Control-Allow-Credentials` bir üstbilgi içermiyorsa, tarayıcı uygulamaya yanıtı açıklamaz ve çapraz kaynak isteği başarısız olur.
+Tarayıcı kimlik bilgilerini gönderirse ancak yanıt geçerli `Access-Control-Allow-Credentials` bir üst bilgi içermiyorsa, tarayıcı uygulamaya yanıtı kullanıma sunmaz ve çapraz kaynak isteği başarısız olur.
 
-Orjinal kimlik bilgilerine izin vermek bir güvenlik riskidir. Başka bir etki alanında bulunan bir web sitesi, kullanıcının bilgisi olmadan kullanıcı adına oturum açmış bir kullanıcının kimlik bilgilerini uygulamaya gönderebilir. <!-- TODO Review: When using `AllowCredentials`, all CORS enabled domains must be trusted.
+Çıkış noktaları arası kimlik bilgilerine izin vermek bir güvenlik riskidir. Başka bir etki alanındaki Web sitesi, kullanıcının bilgisi olmadan kullanıcı adına, oturum açmış bir kullanıcının kimlik bilgilerini uygulamaya gönderebilir. <!-- TODO Review: When using `AllowCredentials`, all CORS enabled domains must be trusted.
 I don't like "all CORS enabled domains must be trusted", because it implies that if you're not using  `AllowCredentials`, domains don't need to be trusted. -->
 
-CORS belirtimi, üstbilgi `"*"` varsa(tüm kökenlerin) kaynağını ayarlamanın `Access-Control-Allow-Credentials` geçersiz olduğunu da belirtir.
+CORS belirtimi Ayrıca `"*"` `Access-Control-Allow-Credentials` üst bilgi varsa, çıkış (tüm kaynaklar) ayarının geçersiz olduğunu belirtir.
 
 ### <a name="preflight-requests"></a>Ön kontrol istekleri
 
-Bazı CORS istekleri için tarayıcı, gerçek isteği yapmadan önce ek bir istek gönderir. Bu istek *bir ön kontrol isteği*olarak adlandırılır. Aşağıdaki koşullar doğruysa, tarayıcı ön kontrol isteğini atlayabilir:
+Bazı CORS istekleri için, tarayıcı gerçek isteği yapmadan önce ek bir istek gönderir. Bu isteğe bir *ön kontrol isteği*denir. Aşağıdaki koşullar doğruysa tarayıcı, ön kontrol isteğini atlayabilir:
 
-* İstek yöntemi GET, HEAD veya POST'dur.
-* Uygulama, istek `Accept`üstbilgisini , , `Accept-Language` `Content-Language`, `Content-Type`veya `Last-Event-ID`.
-* Üstbilgi, `Content-Type` küme, aşağıdaki değerlerden birine sahiptir:
+* İstek yöntemi al, HEAD veya POST.
+* Uygulama `Accept`, `Accept-Language` `Content-Language`,, veya `Last-Event-ID`dışındaki istek üst bilgilerini ayarlanmamış. `Content-Type`
+* , `Content-Type` Ayarlandıysa, aşağıdaki değerlerden birine sahip olan üst bilgi:
   * `application/x-www-form-urlencoded`
   * `multipart/form-data`
   * `text/plain`
 
-İstemci isteği için ayarlanan istek üstbilgilerine ilişkin kural, `setRequestHeader` `XMLHttpRequest` uygulamanın nesneyi çağırarak ayarladığını üstbilgi için geçerlidir. CORS belirtimi bu üstbilgi *yazar istek üstbilgi*çağırır. Kural, tarayıcının ayarlayabileceği `User-Agent`, , `Host`veya `Content-Length`.
+İstemci isteği için ayarlanan istek üst bilgileri kuralı, uygulamanın, `setRequestHeader` `XMLHttpRequest` nesne üzerinde çağırarak ayarladığı üst bilgiler için geçerlidir. CORS belirtimi, bu üst bilgiler *Yazar istek üst bilgilerini*çağırır. Kural `User-Agent`, `Host`, veya gibi tarayıcının ayarlayabilmesi için, veya `Content-Length`gibi bir üst bilgiye uygulanmaz.
 
-Aşağıda, ön kontrol isteğine bir örnek verilmiştir:
+Aşağıda bir ön denetim isteğine örnek verilmiştir:
 
 ```
 OPTIONS https://myservice.azurewebsites.net/api/test HTTP/1.1
@@ -877,28 +883,28 @@ Host: myservice.azurewebsites.net
 Content-Length: 0
 ```
 
-Uçuş öncesi istek HTTP OPTIONS yöntemini kullanır. İki özel üstbilgi içerir:
+Uçuş öncesi isteği HTTP SEÇENEKLERI yöntemini kullanır. İki özel üst bilgi içerir:
 
 * `Access-Control-Request-Method`: Gerçek istek için kullanılacak HTTP yöntemi.
-* `Access-Control-Request-Headers`: Uygulamanın gerçek istek üzerine ayarladığının istek üstbilgilerinin listesi. Daha önce belirtildiği gibi, `User-Agent`bu, tarayıcının belirlediği üstleri içermez.
+* `Access-Control-Request-Headers`: Uygulamanın gerçek istekte ayarladığı istek üst bilgilerinin bir listesi. Daha önce belirtildiği gibi, bu, tarayıcının ayarladığı üst bilgileri içermez `User-Agent`.
 
 <!-- I think this needs to be removed, was put here accidently -->
 
-CORS uygun ilke ile etkinleştirildiğinde, ASP.NET Core genellikle CORS uçuş öncesi isteklerine otomatik olarak yanıt verir. [Ön uçuş istekleri için [HttpOptions] özniteliğine](#pro)bakın.
+CORS uygun ilkeyle etkinleştirildiğinde ASP.NET Core, genellikle CORS ön denetim isteklerini otomatik olarak yanıtlar. [Ön kontrol istekleri için bkz. [HttpOptions] özniteliği](#pro).
 
-CORS ön kontrol isteği, `Access-Control-Request-Headers` sunucuya gerçek istekle birlikte gönderilen üstbilgileri gösteren bir üstbilgi içerebilir.
+CORS ön kontrol isteği, sunucuya gerçek `Access-Control-Request-Headers` istekle gönderilen üstbilgileri belirten bir üst bilgi içerebilir.
 
-Belirli üstbilgi için: <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*>
+Belirli üstbilgilere izin vermek için şunu <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*>arayın:
 
 [!code-csharp[](cors/sample/CorsExample4/Startup.cs?range=55-60&highlight=5)]
 
-Tüm yazar istek üstbilgilerine <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyHeader*>izin vermek için:
+Tüm yazar isteği başlıklarına izin vermek için şunu <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.AllowAnyHeader*>çağırın:
 
 [!code-csharp[](cors/sample/CorsExample4/Startup.cs?range=64-69&highlight=5)]
 
-Tarayıcılar, nasıl ayarlandıkları `Access-Control-Request-Headers`konusunda tamamen tutarlı değildir. Üstbilginizi (veya kullanım) `"*"` <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicy.AllowAnyHeader*>dışında başka bir şeye `Accept`ayarlarsanız, en az , `Content-Type`ve `Origin`, artı desteklemek istediğiniz özel üstbilgi içermelidir.
+Tarayıcılar, nasıl ayarlandıklarından `Access-Control-Request-Headers`tamamen tutarlı değildir. Üst `"*"` bilgileri (veya kullanımı <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicy.AllowAnyHeader*>) dışında bir şeye ayarlarsanız, desteklemek istediğiniz en az `Accept`, `Content-Type`, ve ve `Origin`Ek üstbilgileri dahil etmelisiniz.
 
-Aşağıda, ön kontrol isteğine örnek bir yanıt verilmiştir (sunucunun isteğe izin verdiğini varsayarsak):
+Aşağıda, ön kontrol isteğine örnek bir yanıt verilmiştir (sunucunun isteğe izin verdiği varsayıldığında):
 
 ```
 HTTP/1.1 200 OK
@@ -911,36 +917,36 @@ Access-Control-Allow-Methods: PUT
 Date: Wed, 20 May 2015 06:33:22 GMT
 ```
 
-Yanıt, izin `Access-Control-Allow-Methods` verilen yöntemleri ve isteğe bağlı `Access-Control-Allow-Headers` olarak izin verilen üstbilgilisteleyen bir üstbilgi içeren bir üstbilgi içerir. Ön kontrol isteği başarılı olursa, tarayıcı gerçek isteği gönderir.
+Yanıt, izin verilen `Access-Control-Allow-Methods` üst bilgileri listeleyen, izin verilen yöntemleri ve isteğe `Access-Control-Allow-Headers` bağlı olarak bir üst bilgiyi listeleyen bir üst bilgi içerir. Ön kontrol isteği başarılı olursa, tarayıcı gerçek isteği gönderir.
 
-Ön kontrol isteği reddedilirse, uygulama *200 Tamam* yanıtını döndürür, ancak CORS üstbilgilerini geri göndermez. Bu nedenle, tarayıcı çapraz kaynak isteği denemez.
+Ön kontrol isteği reddedilirse, uygulama *200 ok* yanıtı döndürür ancak CORS üst bilgilerini geri göndermez. Bu nedenle tarayıcı, çıkış noktaları arası isteği denemez.
 
-### <a name="set-the-preflight-expiration-time"></a>Uçuş öncesi son kullanma süresini ayarlama
+### <a name="set-the-preflight-expiration-time"></a>Ön kontrol sona erme süresini ayarlama
 
-Üstbilgi, `Access-Control-Max-Age` ön kontrol isteğine verilen yanıtın ne kadar süreyle önbelleğe alınabileceğini belirtir. Bu üstbilgi ayarlamak <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.SetPreflightMaxAge*>için:
+`Access-Control-Max-Age` Üst bilgi, ön kontrol isteğine olan yanıtın ne kadar süreyle önbelleğe alınacağını belirtir. Bu üstbilgiyi ayarlamak için şunu arayın <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.SetPreflightMaxAge*>:
 
 [!code-csharp[](cors/sample/CorsExample4/Startup.cs?range=91-96&highlight=5)]
 
 <a name="how-cors"></a>
 
-## <a name="how-cors-works"></a>CORS nasıl çalışır?
+## <a name="how-cors-works"></a>CORS nasıl kullanılır?
 
-Bu bölümde, HTTP iletileri düzeyinde bir [CORS](https://developer.mozilla.org/docs/Web/HTTP/CORS) isteğine neler olduğu açıklanmaktadır.
+Bu bölümde, HTTP iletileri düzeyindeki bir [CORS](https://developer.mozilla.org/docs/Web/HTTP/CORS) isteğinde ne olacağı açıklanmaktadır.
 
-* CORS bir güvenlik özelliği **değildir.** CORS, bir sunucunun aynı orijin ilkesini gevşetmesine olanak tanıyan bir W3C standardıdır.
-  * Örneğin, kötü niyetli bir aktör sitenize karşı [Site Ötesi Komut Dosyasını (XSS) engelleyebilir](xref:security/cross-site-scripting) ve CORS özellikli sitesine bilgi çalmak için bir çapraz site isteği gerçekleştirebilir.
-* CORS'e izin vererek API'niz daha güvenli değildir.
-  * CORS'i uygulamak istemciye (tarayıcıya) kalmış. Sunucu isteği yürütür ve yanıtı döndürür, bir hata döndürür ve yanıtı engeller istemcisidir. Örneğin, aşağıdaki araçlardan herhangi biri sunucu yanıtını görüntüler:
+* CORS bir güvenlik özelliği **değil** . CORS, bir sunucunun aynı kaynaklı ilkeyi rahat bir şekilde sağlamasına izin veren bir W3C standardıdır.
+  * Örneğin, kötü niyetli bir aktör sitenize karşı [siteler arası komut dosyalarını (XSS) engelliyor](xref:security/cross-site-scripting) ve bilgileri çalmak için CORS özellikli sitesine bir siteler arası istek yürütebilir.
+* CORS 'nin izin vermesini sağlayan API 'niz daha güvenli değildir.
+  * CORS 'yi zorlamak için istemciye (tarayıcı) sahiptir. Sunucu isteği yürütür ve yanıtı döndürür. Bu, bir hatayı döndüren ve yanıtı engelleyen istemcdir. Örneğin, aşağıdaki araçlardan herhangi birinde sunucu yanıtı görüntülenir:
     * [Fiddler](https://www.telerik.com/fiddler)
     * [Postman](https://www.getpostman.com/)
-    * [.NET Https://yayla](/dotnet/csharp/tutorials/console-webapiclient)
-    * Adres çubuğuna URL girerek bir web tarayıcısı.
-* Bu, bir sunucunun tarayıcıların aksi takdirde yasaklanacak bir çapraz kökenli [XHR](https://developer.mozilla.org/docs/Web/API/XMLHttpRequest) veya [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API) isteğini yürütmesine izin vermenin bir yoludur.
-  * Tarayıcılar (CORS olmadan) çapraz kökenli isteklerde olamaz. CORS önce, [JSONP](https://www.w3schools.com/js/js_json_jsonp.asp) bu kısıtlamayı atlatmak için kullanılmıştır. JSONP XHR kullanmaz, yanıtı `<script>` almak için etiketi kullanır. Komut dosyalarıçapraz kökenli yüklenebilir.
+    * [.NET HttpClient](/dotnet/csharp/tutorials/console-webapiclient)
+    * Adres çubuğuna URL girerek bir Web tarayıcısı.
+* Bir sunucu, tarayıcıların çapraz kaynak [XHR](https://developer.mozilla.org/docs/Web/API/XMLHttpRequest) veya [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API) isteği çalıştırmasına izin vermesinin yasaktır bir yoludur.
+  * Tarayıcılar (CORS olmadan), çapraz kaynak istekleri yapamıyor. CORS 'den önce, bu kısıtlamayı aşmak için [JSONP](https://www.w3schools.com/js/js_json_jsonp.asp) kullanılmıştır. JSONP XHR kullanmaz, yanıtı almak için `<script>` etiketini kullanır. Betiklerin, çapraz kaynak olarak yüklenmesine izin verilir.
 
-[CORS belirtimi,](https://www.w3.org/TR/cors/) orijinler arası istekleri etkinleştiren birkaç yeni HTTP üstbilgisini tanıttı. Bir tarayıcı CORS'i destekliyorsa, bu başlıkları çapraz başlangıç istekleri için otomatik olarak ayarlar. CORS'i etkinleştirmek için özel JavaScript kodu gerekmez.
+[CORS belirtimi](https://www.w3.org/TR/cors/) , çıkış noktaları arası istekleri etkinleştiren bırkaç yeni http üst bilgisi sunmuştur. Bir tarayıcı CORS 'yi destekliyorsa, bu üst bilgileri, çıkış noktaları arası istekler için otomatik olarak ayarlar. CORS 'yi etkinleştirmek için özel JavaScript kodu gerekli değildir.
 
-Aşağıda, bir çapraz kaynak isteği örneği verilmiştir. Üstbilgi, `Origin` isteği yapan sitenin etki alanını sağlar. Üstbilgi `Origin` gereklidir ve ana bilgisayardan farklı olmalıdır.
+Aşağıda, bir çapraz kaynak isteğine bir örnek verilmiştir. `Origin` Üst bilgi, isteği yapan sitenin etki alanını sağlar. `Origin` Üst bilgi gereklidir ve konaktan farklı olmalıdır.
 
 ```
 GET https://myservice.azurewebsites.net/api/test HTTP/1.1
@@ -953,7 +959,7 @@ User-Agent: Mozilla/5.0 (compatible; MSIE 10.0; Windows NT 6.2; WOW64; Trident/6
 Host: myservice.azurewebsites.net
 ```
 
-Sunucu isteğe izin veriyorsa, yanıttaki üstbilgiyi `Access-Control-Allow-Origin` ayarlar. Bu üstbilginin değeri, `Origin` istekteki üstbilgiyle eşleşir veya `"*"`joker karakter değeridir, yani herhangi bir menşee izin verilir:
+Sunucu isteğe izin veriyorsa, yanıttaki `Access-Control-Allow-Origin` üstbilgiyi ayarlar. Bu üstbilginin değeri, istekten gelen `Origin` üstbilgiyle eşleşir veya joker değerdir `"*"`, yani herhangi bir kaynağa izin verilir.
 
 ```
 HTTP/1.1 200 OK
@@ -967,53 +973,53 @@ Content-Length: 12
 Test message
 ```
 
-Yanıt `Access-Control-Allow-Origin` üstbilgi içermiyorsa, çapraz kaynak isteği başarısız olur. Özellikle, tarayıcı isteği izin verir. Sunucu başarılı bir yanıt döndürse bile, tarayıcı yanıtı istemci uygulamasına sunmaz.
+Yanıt `Access-Control-Allow-Origin` üstbilgiyi içermiyorsa, çapraz kaynak isteği başarısız olur. Özellikle, tarayıcı isteğe izin vermez. Sunucu başarılı bir yanıt döndürse bile tarayıcı, yanıtı istemci uygulama için kullanılabilir hale getirir.
 
 <a name="test"></a>
 
 ## <a name="test-cors"></a>Test CORS
 
-CORS'u test etmek için:
+CORS 'yi sınamak için:
 
-1. [Bir API projesi oluşturun.](xref:tutorials/first-web-api) Alternatif olarak, [örnek indirebilirsiniz.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/sample/Cors)
-1. Bu belgedeki yaklaşımlardan birini kullanarak CORS'i etkinleştirin. Örneğin:
+1. [BIR API projesi oluşturun](xref:tutorials/first-web-api). Alternatif olarak, [örneği de indirebilirsiniz](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/sample/Cors).
+1. Bu belgedeki yaklaşımlardan birini kullanarak CORS 'yi etkinleştirin. Örneğin:
 
   [!code-csharp[](cors/sample/Cors/WebAPI/StartupTest.cs?name=snippet2&highlight=13-18)]
 
   > [!WARNING]
-  > `WithOrigins("https://localhost:<port>");`yalnızca [indirme örnek koduna](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/cors/sample/Cors)benzer bir örnek uygulamayı test etmek için kullanılmalıdır.
+  > `WithOrigins("https://localhost:<port>");`yalnızca [indirme örnek koduna](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/cors/sample/Cors)benzer bir örnek uygulamanın test edilmesi için kullanılmalıdır.
 
-1. Bir web uygulaması projesi (Razor Pages veya MVC) oluşturun. Örnekte Razor Pages kullanır. Web uygulamasını API projesiyle aynı çözümde oluşturabilirsiniz.
-1. *Index.cshtml* dosyasına aşağıdaki vurgulanmış kodu ekleyin:
+1. Web uygulaması projesi (Razor sayfalar veya Mvc) oluşturun. Örnek, sayfaları Razor kullanır. Web uygulamasını, API projesiyle aynı çözümde oluşturabilirsiniz.
+1. Aşağıdaki Vurgulanan kodu *Index. cshtml* dosyasına ekleyin:
 
   [!code-csharp[](cors/sample/Cors/ClientApp/Pages/Index2.cshtml?highlight=7-99)]
 
-1. Önceki kodda, dağıtılan `url: 'https://<web app>.azurewebsites.net/api/values/1',` uygulamanın URL'si ile değiştirin.
-1. API projesini dağıtın. Örneğin, [Azure'a dağıtın.](xref:host-and-deploy/azure-apps/index)
-1. Masaüstünden Razor Pages veya MVC uygulamasını çalıştırın ve **Test** düğmesine tıklayın. Hata iletilerini gözden geçirmek için F12 araçlarını kullanın.
-1. Yerel ana bilgisayar `WithOrigins` kaynağını kaldırın ve uygulamayı dağıtın. Alternatif olarak, istemci uygulamasını farklı bir bağlantı noktasıyla çalıştırın. Örneğin, Visual Studio çalıştırın.
-1. İstemci uygulaması yla test edin. CORS hataları bir hata döndürer, ancak hata iletisi JavaScript için kullanılamaz. Hatayı görmek için F12 araçlarındaki konsol sekmesini kullanın. Tarayıcıya bağlı olarak, aşağıdakilere benzer bir hata (F12 araçları konsolunda) alırsınız:
+1. Yukarıdaki kodda, dağıtılan uygulamanın URL `url: 'https://<web app>.azurewebsites.net/api/values/1',` 'siyle değiştirin.
+1. API projesini dağıtın. Örneğin, [Azure 'a dağıtın](xref:host-and-deploy/azure-apps/index).
+1. Masaüstünden Razor sayfaları veya MVC uygulamasını çalıştırın ve **Test** düğmesine tıklayın. Hata iletilerini gözden geçirmek için F12 araçlarını kullanın.
+1. Localhost kaynağını kaldırın `WithOrigins` ve uygulamayı dağıtın. Alternatif olarak, istemci uygulamasını farklı bir bağlantı noktasıyla çalıştırın. Örneğin, Visual Studio 'dan çalıştırın.
+1. İstemci uygulamasıyla test edin. CORS hataları bir hata döndürüyor, ancak hata iletisi JavaScript için kullanılabilir değil. Hatayı görmek için F12 araçlarındaki konsol sekmesini kullanın. Tarayıcıya bağlı olarak, aşağıdakine benzer bir hata alırsınız (F12 araçları konsolunda):
 
-   * Microsoft Edge'i kullanma:
+   * Microsoft Edge 'i kullanarak:
 
-     **SEC7120: [CORS] `https://localhost:44375` Menşei, erişim kaynağı kaynağı için Access-Control-Allow-Origin yanıt `https://localhost:44375` başlığında`https://webapi.azurewebsites.net/api/values/1`**
+     **SEC7120: [CORS] kaynak `https://localhost:44375` , ' deki çıkış `https://localhost:44375` noktaları için erişim-denetim-izin-kaynak yanıt üstbilgisinde bulunamadı`https://webapi.azurewebsites.net/api/values/1`**
 
-   * Chrome'u kullanma:
+   * Chrome kullanarak:
 
-     **XMLHttpRequest'e `https://webapi.azurewebsites.net/api/values/1` orijinli `https://localhost:44375` erişim CORS ilkesi tarafından engellendi: İstenen kaynakta 'Access-Control-Allow-Origin' başlığı bulunmamaktadır.**
+     **Kaynak `https://webapi.azurewebsites.net/api/values/1` `https://localhost:44375` BAŞıNDA XMLHttpRequest erişimi CORS ilkesi tarafından engellendi: İstenen kaynakta ' erişim-denetim-izin-Origin ' üst bilgisi yok.**
      
-CORS özellikli uç [noktalar, Kemancı](https://www.telerik.com/fiddler) veya [Postacı](https://www.getpostman.com/)gibi bir araçla test edilebilir. Bir araç kullanırken, `Origin` üstbilgi tarafından belirtilen isteğin kaynağı, isteği alan ana bilgisayardan farklı olmalıdır. Üstbilginin değerine *cross-origin* `Origin` göre istek çapraz kökenli değilse:
+CORS özellikli uç noktalar [Fiddler](https://www.telerik.com/fiddler) veya [Postman](https://www.getpostman.com/)gibi bir araçla test edilebilir. Bir araç kullanırken, `Origin` üst bilgi tarafından belirtilen isteğin kaynağı isteği alan konaktan farklı olmalıdır. İstek, `Origin` üst bilgi değerine göre *Çıkış dışı* değilse:
 
-* CORS Middleware'in isteği işlemesine gerek yoktur.
-* CORS başlıkları yanıt olarak döndürülür.
+* CORS ara yazılımı için isteği işleme gereksinimi yoktur.
+* CORS üstbilgileri yanıtta döndürülmedi.
 
-## <a name="cors-in-iis"></a>CORS in IIS
+## <a name="cors-in-iis"></a>IIS 'de CORS
 
-IIS'ye dağıtılırken, sunucu anonim erişime izin verecek şekilde yapılandırılmamışsa CORS'in Windows Kimlik Doğrulama'dan önce çalışması gerekiyor. Bu senaryoyu desteklemek için [IIS CORS modülünün](https://www.iis.net/downloads/microsoft/iis-cors-module) uygulama için yüklenmesi ve yapılandırılması gerekir.
+IIS 'ye dağıtım yaparken, sunucu anonim erişime izin verecek şekilde yapılandırılmamışsa CORS, Windows kimlik doğrulamasından önce çalıştırılmalıdır. Bu senaryoyu desteklemek için, [IIS CORS modülünün](https://www.iis.net/downloads/microsoft/iis-cors-module) uygulama için yüklenmiş ve yapılandırılmış olması gerekir.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * [Çıkış Noktaları Arası Kaynak Paylaşımı (CORS)](https://developer.mozilla.org/docs/Web/HTTP/CORS)
-* [IIS CORS modülü ile başlarken](https://blogs.iis.net/iisteam/getting-started-with-the-iis-cors-module)
+* [IIS CORS modülünü kullanmaya başlama](https://blogs.iis.net/iisteam/getting-started-with-the-iis-cors-module)
 
 ::: moniker-end

@@ -1,95 +1,98 @@
 ---
-title: ASP.NET Blazor Çekirdek küreselleşme ve yerelleştirme
+title: Genelleştirme Blazor ve yerelleştirme ASP.NET Core
 author: guardrex
-description: Razor bileşenlerini birden çok kültür ve dilde kullanıcılar için nasıl erişilebilir hale getirebileceğimi öğrenin.
+description: Birden çok kültürde Razor veya dilde kullanıcıların kullanıcılar için erişilebilir hale getirme hakkında bilgi edinin.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 04/14/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 1b0db66b23c0caffc6b7c4e4af723c020609612a
-ms.sourcegitcommit: d5d45d84fe488427d418de770000f7df44a08370
+ms.openlocfilehash: b39695f8b506744b4af27a1d7e09bfac9594d7ca
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/17/2020
-ms.locfileid: "81539667"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772497"
 ---
-# <a name="aspnet-core-opno-locblazor-globalization-and-localization"></a>ASP.NET Blazor Çekirdek küreselleşme ve yerelleştirme
+# <a name="aspnet-core-blazor-globalization-and-localization"></a>Genelleştirme Blazor ve yerelleştirme ASP.NET Core
 
-Yazar: [Luke Latham](https://github.com/guardrex) ve [Daniel Roth](https://github.com/danroth27)
+, [Luke Latham](https://github.com/guardrex) ve [Daniel Roth](https://github.com/danroth27) tarafından
 
-Jilet bileşenleri, birden fazla kültür ve dilde kullanıcılar tarafından erişilebilir hale getirilebilir. Aşağıdaki .NET küreselleşme ve yerelleştirme senaryoları kullanılabilir:
+Razorbileşenlere birden fazla kültürde ve dilde kullanıcılar erişilebilir hale getirilebilir. Aşağıdaki .NET Genelleştirme ve yerelleştirme senaryoları kullanılabilir:
 
-* . NET'in kaynak sistemi
-* Kültüre özel sayı ve tarih biçimlendirme
+* . NET ' in kaynak sistemi
+* Kültüre özgü sayı ve Tarih biçimlendirmesi
 
-Sınırlı sayıda ASP.NET Core'un yerelleştirme senaryoları şu anda desteklenir:
+Sınırlı bir ASP.NET Core yerelleştirme senaryosu kümesi şu anda desteklenmektedir:
 
-* `IStringLocalizer<>`uygulamalarda Blazor *desteklenir.*
-* `IHtmlLocalizer<>`, `IViewLocalizer<>`ve Veri Ek Açıklamaları yerelleştirme ASP.NET Core MVC senaryoları ve uygulamalarda Blazor **desteklenmez.**
+* `IStringLocalizer<>`Blazor uygulamalarda *desteklenir* .
+* `IHtmlLocalizer<>`, `IViewLocalizer<>`ve veri ek açıklamaları YERELLEŞTIRME ASP.NET Core MVC senaryolardır ve **not supported** Blazor uygulamalarda desteklenmez.
 
 Daha fazla bilgi için bkz. <xref:fundamentals/localization>.
 
 ## <a name="globalization"></a>Genelleştirme
 
-Blazor'ın `@bind` işlevselliği, kullanıcının geçerli kültürüne göre görüntü için biçimleri ve ayrıştırıcı değerleri gerçekleştirir.
+Blazor`@bind` işlevselliği, kullanıcının geçerli kültürüne göre biçimleri gerçekleştirir ve görüntüleme değerlerini ayrıştırır.
 
-Geçerli kültüre <xref:System.Globalization.CultureInfo.CurrentCulture?displayProperty=fullName> tesisten erişilebilir.
+Geçerli kültüre <xref:System.Globalization.CultureInfo.CurrentCulture?displayProperty=fullName> özelliğinden erişilebilir.
 
-[CultureInfo.InvariantKültür](xref:System.Globalization.CultureInfo.InvariantCulture) aşağıdaki alan türleri için`<input type="{TYPE}" />`kullanılır ():
+Aşağıdaki alan türleri için [CultureInfo. InvariantCulture](xref:System.Globalization.CultureInfo.InvariantCulture) kullanılır (`<input type="{TYPE}" />`):
 
 * `date`
 * `number`
 
-Önceki alan türleri:
+Yukarıdaki alan türleri:
 
-* Uygun tarayıcı tabanlı biçimlendirme kuralları kullanılarak görüntülenir.
+* , Uygun tarayıcı tabanlı biçimlendirme kuralları kullanılarak görüntülenir.
 * Serbest biçimli metin içeremez.
-* Tarayıcının uygulamasına dayalı kullanıcı etkileşimi özellikleri sağlayın.
+* Tarayıcının uygulamasına göre Kullanıcı etkileşimi özellikleri sağlar.
 
-Aşağıdaki alan türleri belirli biçimlendirme gereksinimlerine sahiptir ve Blazor tüm büyük tarayıcılar tarafından desteklenmedikleri için şu anda tarafından desteklenmez:
+Aşağıdaki alan türleri belirli biçimlendirme gereksinimlerine sahiptir ve şu anda tüm büyük tarayıcılarda Blazor desteklenmediğinden tarafından desteklenmemektedir:
 
 * `datetime-local`
 * `month`
 * `week`
 
-`@bind`bir `@bind:culture` değerayrıştma <xref:System.Globalization.CultureInfo?displayProperty=fullName> ve biçimlendirme sağlamak için parametreyi destekler. Alan türlerini kullanırken `date` `number` bir kültür belirtilmesi önerilmez. `date`ve `number` gerekli kültürü Blazor sağlayan yerleşik desteğe sahip olmak.
+`@bind`, `@bind:culture` bir değeri ayrıştırmak ve biçimlendirmek <xref:System.Globalization.CultureInfo?displayProperty=fullName> için bir parametresini destekler. `date` Ve `number` alan türleri kullanılırken bir kültürün belirtilmesi önerilmez. `date`ve `number` gerekli kültürü sağlayan yerleşik Blazor desteğe sahiptir.
 
 ## <a name="localization"></a>Yerelleştirme
 
-### <a name="opno-locblazor-webassembly"></a>BlazorWebAssembly
+### <a name="blazor-webassembly"></a>BlazorWebAssembly
 
-BlazorWebAssembly uygulamaları, kullanıcının dil [tercihini](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages)kullanarak kültürü ayarlar.
+BlazorWebAssembly uygulamaları, kullanıcının [Dil tercihini](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages)kullanarak kültürü ayarlar.
 
-Kültürü açıkça yapılandırmak için, `CultureInfo.DefaultThreadCurrentCulture` `CultureInfo.DefaultThreadCurrentUICulture` ayarlayın `Program.Main`ve .
+Kültürü açıkça yapılandırmak için, ve `CultureInfo.DefaultThreadCurrentCulture` `CultureInfo.DefaultThreadCurrentUICulture` içinde `Program.Main`öğesini ayarlayın.
 
-Varsayılan olarak, WebAssembly uygulamaları Blazor için ''nin bağlayıcı yapılandırması, Blazoraçıkça istenen yerel durumlar dışında uluslararasılaştırma bilgilerini siler. Bağlayıcının davranışını denetleme hakkında daha fazla bilgi <xref:host-and-deploy/blazor/configure-linker#configure-the-linker-for-internationalization>ve kılavuz için bkz.
+Varsayılan olarak, Blazorwebassembly uygulamaları Blazor için bağlayıcı yapılandırması, açıkça istenen yerel ayarlar dışında uluslararası duruma getirme bilgilerini şeritleri. Bağlayıcının davranışını denetleme hakkında daha fazla bilgi ve yönergeler için bkz <xref:host-and-deploy/blazor/configure-linker#configure-the-linker-for-internationalization>..
 
-Varsayılan olarak Blazor seçen kültür çoğu kullanıcı için yeterli olsa da, kullanıcıların tercih ettikleri yerel alanı belirtmeleri için bir yol sunmayı düşünün. Kültür Blazor seçiciiçeren bir WebAssembly örnek uygulaması için [LocSample](https://github.com/pranavkm/LocSample) yerelleştirme örnek uygulamasına bakın.
+Varsayılan olarak seçen kültür Blazor çoğu kullanıcı için yeterli olabilir, ancak kullanıcıların tercih ettiği yerel ayarlarını belirtmelerini sağlayan bir yol sunmayı göz önünde bulundurun. Kültür seçiciyle Blazor webassembly örnek uygulaması için bkz. [locsample](https://github.com/pranavkm/LocSample) yerelleştirme örnek uygulaması.
 
-### <a name="opno-locblazor-server"></a>BlazorSunucu
+### <a name="blazor-server"></a>BlazorServer
 
-BlazorSunucu uygulamaları [Yerelleştirme Middleware](xref:fundamentals/localization#localization-middleware)kullanılarak yerelleştirilir. Ara yazılım, uygulamadan kaynak isteyen kullanıcılar için uygun kültürü seçer.
+BlazorSunucu uygulamaları, [Yerelleştirme ara yazılımı](xref:fundamentals/localization#localization-middleware)kullanılarak yerelleştirilir. Ara yazılım, uygulamadan kaynak isteyen kullanıcılar için uygun kültürü seçer.
 
 Kültür aşağıdaki yaklaşımlardan biri kullanılarak ayarlanabilir:
 
 * [Çerezler](#cookies)
-* [Kültürü seçmek için UI sağlayın](#provide-ui-to-choose-the-culture)
+* [Kültürü seçmek için Kullanıcı arabirimi sağlama](#provide-ui-to-choose-the-culture)
 
-Daha fazla bilgi ve <xref:fundamentals/localization>örnekler için bkz.
+Daha fazla bilgi ve örnek için bkz <xref:fundamentals/localization>..
 
 #### <a name="cookies"></a>Tanımlama bilgileri
 
-Bir yerelleştirme kültür çerezkullanıcının kültürünü devam edebilir. Çerez, uygulamanın `OnGet` ana sayfa *(Pages/Host.cshtml.cs)* yöntemiyle oluşturulur. Yerelleştirme Middleware kullanıcının kültürünü ayarlamak için sonraki isteklerde çerez okur. 
+Yerelleştirme kültürü tanımlama bilgisi kullanıcının kültürünü kalıcı hale getirebilirler. Tanımlama bilgisi, uygulamanın ana bilgisayar `OnGet` sayfası (*Pages/Host. cshtml. cs*) yöntemi tarafından oluşturulur. Yerelleştirme ara yazılımı, sonraki isteklerde Kullanıcı kültürünü ayarlamak için tanımlama bilgilerini okur. 
 
-Çerez kullanımı, WebSocket bağlantısının kültürü doğru şekilde yaymasını sağlar. Yerelleştirme düzenleri URL yolunu veya sorgu dizesini temel alıyorsa, düzen WebSockets ile çalışamayabilir, bu nedenle kültürü devam ettiremeyebilir. Bu nedenle, bir yerelleştirme kültür çerez kullanımı önerilen bir yaklaşımdır.
+Tanımlama bilgisinin kullanımı, WebSocket bağlantısının kültürü doğru şekilde yaymasını sağlar. Yerelleştirme şemaları URL yolunu veya sorgu dizesini temel alıyorsa, düzen WebSockets ile çalışmayabilir, bu nedenle kültürü kalıcı hale getiremeyebilir. Bu nedenle, yerelleştirme kültürü tanımlama bilgisinin kullanılması önerilen yaklaşımdır.
 
-Kültür bir yerelleştirme çerezinde kalıcıysa, herhangi bir teknik bir kültür atamak için kullanılabilir. Uygulamanın sunucu tarafı ASP.NET Core için zaten kurulmuş bir yerelleştirme şeması varsa, uygulamanın varolan yerelleştirme altyapısını kullanmaya devam edin ve uygulamanın şeması içinde yerelleştirme kültür çerezini ayarlayın.
+Kültür bir yerelleştirme tanımlama bilgisinde kalıcı hale getirilir kültür atamak için herhangi bir teknik kullanılabilir. Uygulamanın zaten sunucu tarafı ASP.NET Core için bir yerelleştirme şeması varsa, uygulamanın var olan yerelleştirme altyapısını kullanmaya devam edin ve uygulamanın şeması içinde yerelleştirme kültür tanımlama bilgisini ayarlayın.
 
-Aşağıdaki örnek, yerelleştirme middleware tarafından okunabilir bir çerez geçerli kültür ayarlamak için nasıl gösterir. Blazor Server uygulamasında aşağıdaki içerikleri içeren bir *Pages/_Host.cshtml.cs* dosyası oluşturun:
+Aşağıdaki örnekte, yerelleştirme ara yazılımı tarafından okunabilen bir tanımlama bilgisinde geçerli kültürün nasıl ayarlanacağı gösterilmektedir. Sunucu uygulamasında aşağıdaki içeriklerle bir *Pages/_Host. cshtml. cs* dosyası oluşturun: Blazor
 
 ```csharp
 public class HostModel : PageModel
@@ -106,22 +109,22 @@ public class HostModel : PageModel
 }
 ```
 
-Yerelleştirme, uygulama tarafından aşağıdaki olaylar dizisinde ele alınır:
+Yerelleştirme, uygulama tarafından aşağıdaki olay dizisinde işlenir:
 
-1. Tarayıcı uygulamaya bir ilk HTTP isteği gönderir.
-1. Kültür Yerelleştirme Middleware tarafından atanır.
-1. `OnGet` *_Host.cshtml.cs'deki* yöntem, yanıtın bir parçası olarak bir çerezdeki kültürü devam eder.
-1. Tarayıcı, etkileşimli Blazor bir Sunucu oturumu oluşturmak için bir WebSocket bağlantısı açar.
-1. Yerelleştirme Middleware çerez okur ve kültür atar.
-1. Blazor Sunucu oturumu doğru kültürle başlar.
+1. Tarayıcı, uygulamaya bir ilk HTTP isteği gönderir.
+1. Kültür, yerelleştirme ara yazılımı tarafından atanır.
+1. `OnGet` *_Host. cshtml. cs* içindeki yöntemi, yanıtın bir parçası olarak bir tanımlama bilgisinde kültürü devam ettirir.
+1. Tarayıcı, etkileşimli Blazor bir sunucu oturumu oluşturmak Için bir WebSocket bağlantısı açar.
+1. Yerelleştirme ara yazılımı tanımlama bilgisini okur ve kültürü atar.
+1. Blazor Sunucu oturumu doğru kültür ile başlar.
 
-#### <a name="provide-ui-to-choose-the-culture"></a>Kültürü seçmek için UI sağlayın
+#### <a name="provide-ui-to-choose-the-culture"></a>Kültürü seçmek için Kullanıcı arabirimi sağlama
 
-Kullanıcının bir kültür seçmesine izin verecek kullanıcı kullanıcı nın kullanıcı yı sağlaması için *yeniden yönlendirme tabanlı* bir yaklaşım önerilir. Bu işlem, bir kullanıcı güvenli bir kaynağa erişmeye çalıştığında bir web uygulamasında olana benzer. Kullanıcı oturum açma sayfasına yönlendirilir ve daha sonra özgün kaynağa yönlendirilir. 
+Bir kullanıcının bir kültür seçmesine izin vermek için kullanıcı ARABIRIMI sağlamak üzere bir *yeniden yönlendirme tabanlı yaklaşım* önerilir. Bir Kullanıcı güvenli bir kaynağa erişmeyi denediğinde, işlem Web uygulamasında gerçekleşmelere benzer. Kullanıcı bir oturum açma sayfasına yönlendirilir ve ardından özgün kaynağa yeniden yönlendirilir. 
 
-Uygulama, bir denetleyiciye yönlendirme yoluyla kullanıcının seçili kültürünü devam ettir. Denetleyici, kullanıcının seçili kültürünü bir çerez olarak ayarlar ve kullanıcıyı orijinal URI'ye yönlendirir.
+Uygulama, bir denetleyiciye yeniden yönlendirme yoluyla kullanıcının seçili kültürünü devam ettirir. Denetleyici kullanıcının seçili kültürünü bir tanımlama bilgisine ayarlar ve kullanıcıyı özgün URI 'ye yeniden yönlendirir.
 
-Kullanıcının seçili kültürünü bir çerezde ayarlamak ve orijinal URI'ye yönlendirmeyi gerçekleştirmek için sunucuda bir HTTP bitiş noktası kurun:
+Bir tanımlama bilgisinde kullanıcının seçili kültürünü ayarlamak ve özgün URI 'ye yeniden yönlendirmeyi gerçekleştirmek için sunucuda bir HTTP uç noktası oluşturun:
 
 ```csharp
 [Route("[controller]/[action]")]
@@ -143,9 +146,9 @@ public class CultureController : Controller
 ```
 
 > [!WARNING]
-> Açık `LocalRedirect` yeniden yönlendirme saldırılarını önlemek için eylem sonucunu kullanın. Daha fazla bilgi için bkz. <xref:security/preventing-open-redirects>.
+> Açık yeniden `LocalRedirect` yönlendirme saldırılarını engellemek için eylem sonucunu kullanın. Daha fazla bilgi için bkz. <xref:security/preventing-open-redirects>.
 
-Aşağıdaki bileşen, kullanıcı bir kültür seçtiğinde ilk yeniden yönlendirmenin nasıl gerçekleştirilecekine bir örnek gösterir:
+Aşağıdaki bileşen, Kullanıcı bir kültür seçtiğinde ilk yeniden yönlendirmenin nasıl gerçekleştirileceği hakkında bir örnek göstermektedir:
 
 ```razor
 @inject NavigationManager NavigationManager

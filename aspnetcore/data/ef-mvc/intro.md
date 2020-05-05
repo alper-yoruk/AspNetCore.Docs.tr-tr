@@ -1,388 +1,394 @@
 ---
-title: 'Öğretici: ASP.NET bir MVC web uygulamasında EF Core ile başlayın'
-description: Bu sıfırdan Contoso Üniversitesi örnek uygulama oluşturmak için nasıl açıklayan öğreticiler bir dizi ilkidir.
+title: 'Öğretici: bir ASP.NET MVC web uygulamasında EF Core kullanmaya başlama'
+description: Bu, Contoso Üniversitesi örnek uygulamasının sıfırdan nasıl oluşturulacağını açıklayan bir öğretici serisinin ilkisidir.
 author: rick-anderson
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/06/2019
 ms.topic: tutorial
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-mvc/intro
-ms.openlocfilehash: fca9fdc425506ec8b4eec5c609237208f4c0d7b5
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 7f17352d2e7e3f4239b338ec961120ab3088c77a
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79511307"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773555"
 ---
-# <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Öğretici: ASP.NET bir MVC web uygulamasında EF Core ile başlayın
+# <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Öğretici: bir ASP.NET MVC web uygulamasında EF Core kullanmaya başlama
 
-Bu öğretici Core 3.0 ASP.NET **güncelleştirilemedi.** [Razor Pages sürümü](xref:data/ef-rp/intro) güncellendi. Bu öğreticinin ASP.NET Core 3.0 ve sonraki sürümü için kod değişikliklerinin çoğu:
+Bu öğretici 3,0 **not** ASP.NET Core güncelleştirilmedi. Sayfalar sürümü güncelleştirildi. [ Razor ](xref:data/ef-rp/intro) Kodun büyük bir çoğunluğu, Bu öğreticinin ASP.NET Core 3,0 ve sonraki bir sürümü için değişir:
 
-* *Startup.cs* ve *Program.cs* dosyalarında bulunmaktadır.
-* [Razor Pages sürümünde](xref:data/ef-rp/intro)bulunabilir. 
+* *Startup.cs* ve *program.cs* dosyalarıdır.
+* , [ Razor Sayfalar sürümünde](xref:data/ef-rp/intro)bulunabilir. 
 
-Bunun ne zaman güncelleştirilebileceği hakkında bilgi için [bu GitHub sorununa](https://github.com/dotnet/AspNetCore.Docs/issues/13920)bakın.
+Bunun ne zaman güncelleştirilemeyebilir hakkında bilgi edinmek için [Bu GitHub sorununa](https://github.com/dotnet/AspNetCore.Docs/issues/13920)bakın.
 
 [!INCLUDE [RP better than MVC](~/includes/RP-EF/rp-over-mvc.md)]
 
-Contoso Üniversitesi örnek web uygulaması, Entity Framework (EF) Core 2.2 ve Visual Studio 2017 veya 2019'u kullanarak ASP.NET Core 2.2 MVC web uygulamalarının nasıl oluşturulacak larını göstermektedir.
+Contoso Üniversitesi örnek Web uygulaması, Entity Framework (EF) Core 2,2 ve Visual Studio 2017 veya 2019 kullanarak ASP.NET Core 2,2 MVC web uygulamalarının nasıl oluşturulacağını gösterir.
 
-Örnek uygulama kurgusal bir Contoso Üniversitesi için bir web sitesidir. Öğrenci kabulü, ders oluşturma ve eğitmen atamaları gibi işlevleri içerir. Bu sıfırdan Contoso Üniversitesi örnek uygulama oluşturmak için nasıl açıklayan öğreticiler bir dizi ilkidir.
+Örnek uygulama, kurgusal bir Contoso Üniversitesi için bir Web sitesidir. Öğrenci giriş, kurs oluşturma ve eğitmen atamaları gibi işlevleri içerir. Bu, Contoso Üniversitesi örnek uygulamasının sıfırdan nasıl oluşturulacağını açıklayan bir öğretici serisinin ilkisidir.
 
 Bu öğreticide şunları yaptınız:
 
 > [!div class="checklist"]
 > * ASP.NET Core MVC web uygulaması oluşturma
-> * Site stilini ayarlama
+> * Site stilini ayarlayın
 > * EF Core NuGet paketleri hakkında bilgi edinin
 > * Veri modelini oluşturma
 > * Veritabanı bağlamını oluşturma
-> * Bağımlılık enjeksiyonu için bağlamı kaydetme
+> * Bağımlılık ekleme için bağlamı kaydetme
 > * Test verileriyle veritabanını başlatma
-> * Denetleyici ve görünümler oluşturma
+> * Denetleyici ve görünüm oluşturma
 > * Veritabanını görüntüleme
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
-* [.NET Çekirdek SDK 2.2](https://dotnet.microsoft.com/download)
-* [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) aşağıdaki iş yükleri ile:
-  * **ASP.NET ve web geliştirme** iş yükü
-  * **.NET Core çapraz platform geliştirme** iş yükü
+* [.NET Core SDK 2,2](https://dotnet.microsoft.com/download)
+* Aşağıdaki iş yükleriyle [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) :
+  * **ASP.net ve Web geliştirme** iş yükü
+  * **.NET Core platformlar arası geliştirme** iş yükü
 
 ## <a name="troubleshooting"></a>Sorun giderme
 
-Çözemediğiniz bir sorunla karşınıza çıkarsa, kodunuzu [tamamlanan projeyle](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)karşılaştırarak genellikle çözümü bulabilirsiniz. Sık karşılaşılan hataların listesi ve bunları nasıl çözeceğiniz için, [serinin son öğreticisinin Sorun Giderme bölümüne](advanced.md#common-errors)bakın. İhtiyacınız olanı bulamazsanız, [ASP.NET Core](https://stackoverflow.com/questions/tagged/asp.net-core) veya EF [Core](https://stackoverflow.com/questions/tagged/entity-framework-core)için StackOverflow.com bir soru gönderebilirsiniz.
+Çözemiyoruz bir sorunla karşılaşırsanız, kodunuzun [Tamamlanan projeyle](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)karşılaştırılmasıyla genellikle çözümü bulabilirsiniz. Yaygın hataların bir listesi ve bunların nasıl çözüleceği için, [serideki son öğreticinin sorun giderme bölümüne](advanced.md#common-errors)bakın. İhtiyacınız olanları bulamazsanız, [ASP.NET Core](https://stackoverflow.com/questions/tagged/asp.net-core) veya [EF Core](https://stackoverflow.com/questions/tagged/entity-framework-core)için bir soru gönderebilirsiniz.
 
 > [!TIP]
-> Bu 10 öğreticiler, her biri önceki öğreticiler yapılır ne üzerine inşa bir dizi. Her başarılı öğretici tamamlandıktan sonra projenin bir kopyasını kaydetmeyi düşünün. Sonra sorunlarla karşınıza çıkarsa, tüm serinin başına geri dönmek yerine önceki öğretici baştan başlayabilirsiniz.
+> Bu, her biri daha önceki öğreticilerde gerçekleştirilen bir dizi 10 öğreticisidir. Her başarılı öğreticinin tamamlanmasından sonra projenin bir kopyasını kaydetmeyi göz önünde bulundurun. Daha sonra sorunlarla karşılaşırsanız, tüm serinin başlangıcına dönmek yerine önceki öğreticiden baştan başlayabilirsiniz.
 
 ## <a name="contoso-university-web-app"></a>Contoso Üniversitesi web uygulaması
 
-Bu öğreticiler inşa olacak uygulama basit bir üniversite web sitesidir.
+Bu öğreticilerde oluşturacağınız uygulama basit bir üniversite web sitesidir.
 
-Kullanıcılar öğrenci, kurs ve eğitmen bilgilerini görüntüleyebilir ve güncelleyebilir. Oluşturacağınız ekranlardan birkaçı aşağıda veda edebilirsiniz.
+Kullanıcılar öğrenci, kurs ve eğitmen bilgilerini görüntüleyebilir ve güncelleştirebilir. Oluşturacağınız ekranların bazıları aşağıda verilmiştir.
 
-![Öğrenci Endeksi sayfası](intro/_static/students-index.png)
+![Öğrenciler Dizin sayfası](intro/_static/students-index.png)
 
-![Öğrenciler Sayfayı Edit](intro/_static/student-edit.png)
+![Öğrenciler düzenleme sayfası](intro/_static/student-edit.png)
 
 ## <a name="create-web-app"></a>Web uygulaması oluşturma
 
 * Visual Studio'yu açın.
 
-* **Dosya** menüsünden **Yeni > Projesi'ni**seçin.
+* **Dosya** menüsünden **Yeni > proje**' yi seçin.
 
-* Sol **bölmeden, Yüklü > Visual C# > Web'i**seçin.
+* Sol bölmeden, **yüklü > Visual C# > Web**' i seçin.
 
-* ASP.NET **Çekirdek Web Uygulaması** proje şablonu seçin.
+* **ASP.NET Core Web uygulaması** proje şablonunu seçin.
 
-* Ad olarak **ContosoUniversity** girin ve **Tamam'ı**tıklatın.
+* Ad olarak **Contosouniversity** yazın ve **Tamam**' a tıklayın.
 
   ![Yeni Proje iletişim kutusu](intro/_static/new-project2.png)
 
-* **Yeni ASP.NET Çekirdek Web Uygulaması** iletişim kutusunun görünmesini bekleyin.
+* **Yeni ASP.NET Core Web uygulaması** iletişim kutusunun görünmesini bekleyin.
 
-* **.NET Core**, **ASP.NET Core 2.2** ve **Web Application (Model-View-Controller)** şablonu'nu seçin.
+* **.NET Core**, **ASP.NET Core 2,2** ve **Web uygulaması (Model-View-Controller)** şablonu ' nu seçin.
 
-* Kimlik **Doğrulamanın** Kimlik **Doğrulama Yok**olarak ayarlandıklarına emin olun.
+* **Kimlik doğrulamanın** **kimlik doğrulaması yok**olarak ayarlandığından emin olun.
 
-* **Tamam'ı** seçin
+* **Tamam 'ı** seçin
 
-  ![Yeni ASP.NET Çekirdek Projesi iletişim kutusu](intro/_static/new-aspnet2.png)
+  ![Yeni ASP.NET Core projesi iletişim kutusu](intro/_static/new-aspnet2.png)
 
-## <a name="set-up-the-site-style"></a>Site stilini ayarlama
+## <a name="set-up-the-site-style"></a>Site stilini ayarlayın
 
-Birkaç basit değişiklik site menüsünü, düzeni ve ana sayfayı ayarlar.
+Birkaç basit değişiklik, site menüsünü, düzeni ve giriş sayfasını ayarlar.
 
-*Görünümleri Aç/Paylaşılan/_Layout.cshtml* ve aşağıdaki değişiklikleri yapın:
+*Görünümler/paylaşılan/_Layout. cshtml* dosyasını açın ve aşağıdaki değişiklikleri yapın:
 
-* "ContosoUniversity"in her oluşumunu "Contoso Üniversitesi" olarak değiştirin. Üç olay var.
+* "ContosoUniversity" öğesinin her oluşumunu "Contoso Üniversitesi" olarak değiştirin. Üç oluşum vardır.
 
-* **Hakkında**, **Öğrenciler**, **Kurslar**, **Eğitmenler**ve **Bölümler**için menü girişleri ekleyin ve **Gizlilik** menü girişini silin.
+* **Hakkında**, **öğrenciler**, **Kurslar**, **eğitmenler**ve **Departmanlar**için menü girişleri ekleyin ve **Gizlilik** menü girişini silin.
 
 Değişiklikler vurgulanır.
 
 [!code-cshtml[](intro/samples/cu/Views/Shared/_Layout.cshtml?highlight=6,34-48,63)]
 
-*Görünümler/Ana Sayfa/Index.cshtml'de,* ASP.NET ve MVC hakkındaki metni bu uygulamayla ilgili metinle değiştirmek için dosyanın içeriğini aşağıdaki kodla değiştirin:
+*Görünümler/Home/Index. cshtml*'de, ASP.net ve MVC hakkındaki metni bu uygulamayla ilgili metinle değiştirmek için dosyanın içeriğini aşağıdaki kodla değiştirin:
 
 [!code-cshtml[](intro/samples/cu/Views/Home/Index.cshtml)]
 
-Projeyi çalıştırmak için CTRL+F5 tuşuna basın veya menüden **Hata Ayıklama olmadan Başlat > Hata Ayıklama'yı** seçin. Bu öğreticilerde oluşturacağınız sayfaların sekmelerini içeren ana sayfayı görürsünüz.
+Projeyi çalıştırmak için CTRL + F5 tuşlarına basın veya menüden **hata ayıklama > Başlat** ' ı seçin. Bu öğreticilerde oluşturacağınız sayfaların sekmelerini içeren giriş sayfasını görürsünüz.
 
-![Contoso Üniversitesi giriş sayfası](intro/_static/home-page.png)
+![Contoso Üniversitesi ana sayfası](intro/_static/home-page.png)
 
-## <a name="about-ef-core-nuget-packages"></a>EF Core NuGet paketleri hakkında
+## <a name="about-ef-core-nuget-packages"></a>NuGet paketleri EF Core hakkında
 
-Projeye EF Core desteği eklemek için hedeflemek istediğiniz veritabanı sağlayıcısını yükleyin. Bu öğretici SQL Server kullanır ve sağlayıcı paketi [Microsoft.EntityFrameworkCore.SqlServer](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer/)olduğunu. Bu paket [Microsoft.AspNetCore.App meta paketine](xref:fundamentals/metapackage-app)dahildir, bu nedenle pakete başvurmanız gerekmez.
+Bir projeye EF Core destek eklemek için hedeflemek istediğiniz veritabanı sağlayıcısını yükleyebilirsiniz. Bu öğretici SQL Server kullanır ve sağlayıcı paketi [Microsoft. EntityFrameworkCore. SqlServer](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer/)' dır. Bu paket [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app)içinde bulunur, bu nedenle pakete başvurmanız gerekmez.
 
-EF SQL Server paketi`Microsoft.EntityFrameworkCore` ve bağımlılıkları ( ve `Microsoft.EntityFrameworkCore.Relational`) EF için çalışma zamanı desteği sağlar. Daha [sonra, Geçişler](migrations.md) öğreticisinde bir araç paketi eklersiniz.
+EF SQL Server paketi ve bağımlılıkları (`Microsoft.EntityFrameworkCore` ve `Microsoft.EntityFrameworkCore.Relational`) EF için çalışma zamanı desteği sağlar. [Geçiş](migrations.md) öğreticisinde daha sonra bir araç paketi ekleyeceksiniz.
 
-Entity Framework Core için kullanılabilen diğer veritabanı sağlayıcıları hakkında bilgi için veritabanı [sağlayıcılarına](/ef/core/providers/)bakın.
+Entity Framework Core için kullanılabilen diğer veritabanı sağlayıcıları hakkında daha fazla bilgi için bkz. [veritabanı sağlayıcıları](/ef/core/providers/).
 
 ## <a name="create-the-data-model"></a>Veri modelini oluşturma
 
 Daha sonra Contoso Üniversitesi uygulaması için varlık sınıfları oluşturacaksınız. Aşağıdaki üç varlıkla başlayacaksınız.
 
-![Ders-Kayıt-Öğrenci veri modeli diyagramı](intro/_static/data-model-diagram.png)
+![Kurs-kayıt-öğrenci veri modeli diyagramı](intro/_static/data-model-diagram.png)
 
-Varlıklar `Student` la `Enrollment` varlıklar arasında bir-çok ilişkisi vardır ve varlıklarla varlıklar arasında `Course` `Enrollment` bire bir ilişki vardır. Başka bir deyişle, bir öğrenci herhangi bir sayıda kursa kaydolabilir ve bir derse herhangi bir sayıda öğrenci kaydolabilir.
+Ve `Student` `Enrollment` varlıkları arasında bire çok ilişki vardır ve ile `Course` `Enrollment` varlıklar arasında bire çok ilişki vardır. Diğer bir deyişle, bir öğrenci herhangi bir sayıda kursa kaydedilebilir ve bir kurs, kayıtlı sayıda öğrenciye sahip olabilir.
 
-Aşağıdaki bölümlerde bu varlıkların her biri için bir sınıf oluşturursunuz.
+Aşağıdaki bölümlerde, bu varlıkların her biri için bir sınıf oluşturacaksınız.
 
 ### <a name="the-student-entity"></a>Öğrenci varlığı
 
 ![Öğrenci varlık diyagramı](intro/_static/student-entity.png)
 
-*Modeller* klasöründe, *Student.cs* adında bir sınıf dosyası oluşturun ve şablon kodunu aşağıdaki kodla değiştirin.
+*Modeller* klasöründe, *Student.cs* adlı bir sınıf dosyası oluşturun ve şablon kodunu aşağıdaki kodla değiştirin.
 
 [!code-csharp[](intro/samples/cu/Models/Student.cs?name=snippet_Intro)]
 
-Özellik, `ID` veritabanı tablosunun bu sınıfa karşılık gelen birincil anahtar sütunu olur. Varsayılan olarak Entity Framework, `ID` veya `classnameID` olarak adlandırılan özellikleri birincil anahtar olarak algılar.
+Özelliği `ID` , bu sınıfa karşılık gelen veritabanı tablosunun birincil anahtar sütunu olacak. Varsayılan olarak Entity Framework, `ID` veya `classnameID` olarak adlandırılan özellikleri birincil anahtar olarak algılar.
 
-Özellik `Enrollments` bir [navigasyon özelliğidir.](/ef/core/modeling/relationships) Gezinti özellikleri, bu varlıkla ilişkili diğer varlıkları tutar. Bu durumda, `Enrollments` a'nın `Student entity` özelliği, o `Enrollment` `Student` varlıkla ilişkili tüm varlıkları tutar. Başka bir deyişle, veritabanındaki belirli bir Öğrenci satırında ilgili iki Kayıt satırı varsa (öğrencinin Öğrenci Kimliği yabancı `Student` anahtar sütunundaki birincil anahtar değerini içeren satırlar), bu varlığın `Enrollments` gezinti özelliği bu iki `Enrollment` varlığı içerir.
+`Enrollments` Özelliği bir [Gezinti özelliğidir](/ef/core/modeling/relationships). Gezinti özellikleri, bu varlıkla ilgili diğer varlıkları tutar. Bu durumda `Enrollments` , öğesinin özelliği bu `Student entity` `Enrollment` `Student` varlıkla ilgili varlıkların tümünü tutacaktır. Diğer bir deyişle, veritabanında verilen bir öğrenci satırında iki ilişkili kayıt satırı varsa (bu öğrencinin birincil anahtar değerini kendi Studentitıd yabancı anahtar sütununda içeren satırlar) varsa, söz konusu `Student` varlığın `Enrollments` gezinti özelliği bu iki `Enrollment` varlığı içerecektir.
 
-Bir gezinti özelliği birden çok tüzel kişilik tutabiliyorsa (çok-çok veya bir-çok ilişkisinde olduğu gibi), türü girişlerin `ICollection<T>`eklenebileceği, silinebileceği ve güncelleştirilebildiği bir liste olmalıdır. Belirtebilirsiniz `ICollection<T>` veya gibi bir `List<T>` `HashSet<T>`tür ya da . Belirtirseniz, `ICollection<T>`EF varsayılan `HashSet<T>` olarak bir koleksiyon oluşturur.
+Bir gezinti özelliği birden çok varlığı tutabileceiyorsa (çok-çok veya bire çok ilişkilerde olduğu gibi), türü girişlerin eklenebileceği, silinebileceği ve güncelleştirilemeyebilir bir liste olmalıdır `ICollection<T>`. Veya gibi bir `ICollection<T>` tür `List<T>` belirtebilirsiniz `HashSet<T>`. Belirtirseniz `ICollection<T>`, EF varsayılan olarak bir `HashSet<T>` koleksiyon oluşturur.
 
 ### <a name="the-enrollment-entity"></a>Kayıt varlığı
 
 ![Kayıt varlık diyagramı](intro/_static/enrollment-entity.png)
 
-*Modeller* klasöründe, *Enrollment.cs* oluşturun ve varolan kodu aşağıdaki kodla değiştirin:
+*Modeller* klasöründe *enrollment.cs* oluşturun ve mevcut kodu şu kodla değiştirin:
 
 [!code-csharp[](intro/samples/cu/Models/Enrollment.cs?name=snippet_Intro)]
 
-Özellik `EnrollmentID` birincil anahtar olacak; bu varlık, `classnameID` `Student` varlıkta `ID` gördüğünüz gibi kendi başına değil deseni kullanır. Normalde bir desen seçer ve veri modeli boyunca kullanabilirsiniz. Burada, varyasyon her iki deseni de kullanabileceğinizi göstermektedir. Daha [sonraki](inheritance.md)bir öğreticide, sınıf adı olmadan kimlik kullanmanın veri modelinde devralmayı nasıl kolaylaştırdığını görürsünüz.
+`EnrollmentID` Özelliği birincil anahtar olacaktır; Bu varlık, `classnameID` `Student` varlıkta gördüğünüz gibi kendi `ID` başına bir model kullanır. Normalde tek bir model seçip veri modeliniz genelinde kullanabilirsiniz. Burada, değişim, her iki stili de kullanabileceğinizi gösterir. [Daha sonraki bir öğreticide](inheritance.md), ID 'yi ClassName olmadan kullanarak, veri modelinde devralma uygulamayı daha kolay hale getirir.
 
-Özellik `Grade` bir `enum`. Tür bildiriminden `Grade` sonraki soru işareti `Grade` özelliğin geçersiz olduğunu gösterir. Sıfır notundan farklı olan bir not - null, bir notun bilinmediği veya henüz atanmadığı anlamına gelir.
+`Grade` Özelliği bir `enum`. `Grade` Tür bildiriminden sonraki soru işareti, `Grade` özelliğin null yapılabilir olduğunu gösterir. Null olan bir sınıf sıfır bir sınıf ile farklıdır--null, henüz bir sınıf bilinmediğini veya henüz atanmadığını belirtir.
 
-Özellik `StudentID` yabancı bir anahtardır ve ilgili `Student`navigasyon özelliği . Bir `Enrollment` varlık tek `Student` bir varlıkla ilişkilidir, bu `Student` nedenle özellik `Student.Enrollments` yalnızca tek bir varlığı tutabilir `Enrollment` (daha önce gördüğünüz ve birden çok varlığı tutabilen gezinti özelliğinden farklı olarak).
+`StudentID` Özelliği bir yabancı anahtardır ve karşılık gelen gezinti özelliği ' dir `Student`. `Enrollment` `Student` Bir varlık bir varlıkla ilişkilendirilir, bu nedenle özellik yalnızca `Student` tek bir varlığı tutabilir (daha önce gördüğünüz `Student.Enrollments` gezinti özelliğinden farklı olarak, birden çok `Enrollment` varlık tutabilir).
 
-Özellik `CourseID` yabancı bir anahtardır ve ilgili `Course`navigasyon özelliği . Bir `Enrollment` varlık tek `Course` bir varlıkla ilişkilidir.
+`CourseID` Özelliği bir yabancı anahtardır ve karşılık gelen gezinti özelliği ' dir `Course`. Bir `Enrollment` varlık bir `Course` varlıkla ilişkilendirilir.
 
-Entity Framework, bir özelliği, `<navigation property name><primary key property name>` adlandırılmışsa yabancı bir anahtar `StudentID` özelliği `Student` olarak yorumlar `Student` (örneğin, varlığın birincil anahtarı olduğundan `ID`gezinti özelliği için). Yabancı anahtar özellikleri de `<primary key property name>` basitçe adlandırılabilir `CourseID` (örneğin, varlığın `Course` `CourseID`birincil anahtarı olduğundan).
+Entity Framework, bir özelliği bir yabancı `<navigation property name><primary key property name>` anahtar özelliği olarak (örneğin, `StudentID` `Student` `Student` varlığın birincil anahtarından bu yana gezinti özelliği için `ID`) olarak yorumlar. Yabancı anahtar `<primary key property name>` özellikleri de yalnızca adlandırılmış olabilir (örneğin, `CourseID` `Course` varlığın birincil anahtarı olduğundan `CourseID`).
 
 ### <a name="the-course-entity"></a>Kurs varlığı
 
-![Ders varlık diyagramı](intro/_static/course-entity.png)
+![Kurs varlık diyagramı](intro/_static/course-entity.png)
 
-*Modeller* klasöründe, *Course.cs* oluşturun ve varolan kodu aşağıdaki kodla değiştirin:
+*Modeller* klasöründe *Course.cs* oluşturun ve mevcut kodu şu kodla değiştirin:
 
 [!code-csharp[](intro/samples/cu/Models/Course.cs?name=snippet_Intro)]
 
-Tesis `Enrollments` bir navigasyon özelliğidir. Bir `Course` varlık herhangi bir sayıda `Enrollment` varlıkla ilişkili olabilir.
+`Enrollments` Özelliği bir gezinti özelliğidir. Bir `Course` varlık herhangi bir sayıda `Enrollment` varlıkla ilişkili olabilir.
 
-Biz bu serinin `DatabaseGenerated` daha sonraki bir [öğretici](complex-data-model.md) öznitelik hakkında daha fazla şey söyleyeceğiz. Temel olarak, bu öznitelik, veritabanının oluşturmasıyerine kursun birincil anahtarını girmenizi sağlar.
+Bu serinin sonraki bir `DatabaseGenerated` [öğreticide](complex-data-model.md) özniteliği hakkında daha fazla bilgi edineceksiniz. Temel olarak bu öznitelik, veritabanının oluşturması yerine kursa ait birincil anahtarı girmenize olanak sağlar.
 
 ## <a name="create-the-database-context"></a>Veritabanı bağlamını oluşturma
 
-Belirli bir veri modeli için Varlık Çerçevesi işlevselliğini koordine eden ana sınıf veritabanı bağlam sınıfıdır. Bu sınıfı `Microsoft.EntityFrameworkCore.DbContext` sınıftan çıkararak oluşturursunuz. Kodunuzda veri modeline hangi varlıkların dahil olduğunu belirtirsiniz. Belirli Varlık Çerçevesi davranışını da özelleştirebilirsiniz. Bu projede sınıfadlandırılmış. `SchoolContext`
+Belirli bir veri modeli için Entity Framework işlevselliğini koordine eden ana sınıf veritabanı bağlamı sınıfıdır. `Microsoft.EntityFrameworkCore.DbContext` Sınıfından türeterek bu sınıfı oluşturursunuz. Kodunuzda, veri modeline hangi varlıkların ekleneceğini belirtirsiniz. Ayrıca, belirli Entity Framework davranışlarını özelleştirebilirsiniz. Bu projede, sınıfı olarak adlandırılır `SchoolContext`.
 
-Proje *klasöründe, Veri*adlı bir klasör oluşturun.
+Proje klasöründe, *veri*adlı bir klasör oluşturun.
 
-*Veri* klasöründe *SchoolContext.cs*adında yeni bir sınıf dosyası oluşturun ve şablon kodunu aşağıdaki kodla değiştirin:
+*Veri* klasöründe, *SchoolContext.cs*adlı yeni bir sınıf dosyası oluşturun ve şablon kodunu şu kodla değiştirin:
 
 [!code-csharp[](intro/samples/cu/Data/SchoolContext.cs?name=snippet_Intro)]
 
-Bu kod, `DbSet` her varlık kümesi için bir özellik oluşturur. Varlık Çerçevesi terminolojisinde, bir varlık kümesi genellikle bir veritabanı tablosuna karşılık gelir ve varlık tablodaki bir satıra karşılık gelir.
+Bu kod, her `DbSet` bir varlık kümesi için bir özellik oluşturur. Entity Framework terimlerinde, genellikle bir varlık kümesi bir veritabanı tablosuna karşılık gelir ve bir varlık tablodaki bir satıra karşılık gelir.
 
-İfadeleri atlayabilirdin `DbSet<Enrollment>` `DbSet<Course>` ve aynı şekilde işe yarayacak. `Student` Varlık, `Enrollment` varlık referansları ve `Enrollment` varlık varlık referansları `Course` nedeniyle Varlık Çerçevesi bunları dolaylı olarak içerecektir.
+`DbSet<Enrollment>` Ve `DbSet<Course>` deyimlerini atlamış olabilirsiniz ve aynı şekilde çalışır. Entity Framework, `Student` varlık `Enrollment` varlığa başvurduğundan ve `Enrollment` varlık varlığa başvurduğundan `Course` bunları örtülü olarak içerebilir.
 
-Veritabanı oluşturulduğunda, EF `DbSet` özellik adlarıyla aynı adlara sahip tablolar oluşturur. Koleksiyonlar için özellik adları genellikle çoğuldur (Öğrenci yerine Öğrenciler), ancak geliştiriciler tablo adlarının çoğul olarak verilip verilmeyeceği konusunda hemfikir değildir. Bu öğreticiler için, DbContext'da tekil tablo adlarını belirterek varsayılan davranışı geçersiz kılarsınız. Bunu yapmak için, son DbSet özelliğinden sonra aşağıdaki vurgulanan kodu ekleyin.
+Veritabanı oluşturulduğunda EF, `DbSet` Özellik adlarıyla aynı adlara sahip tablolar oluşturur. Koleksiyonlar için özellik adları genellikle plural (öğrenci yerine öğrenciler), ancak geliştiriciler tablo adlarının plurulululmasını kabul etmez. Bu öğreticiler için DbContext içinde tekil tablo adları belirterek varsayılan davranışı geçersiz kılarsınız. Bunu yapmak için, son DbSet özelliğinden sonra aşağıdaki vurgulanmış kodu ekleyin.
 
 [!code-csharp[](intro/samples/cu/Data/SchoolContext.cs?name=snippet_TableNames&highlight=16-21)]
 
-## <a name="register-the-schoolcontext"></a>Okul Bağlamını Kaydedin
+## <a name="register-the-schoolcontext"></a>SchoolContext kaydetme
 
-ASP.NET Core varsayılan olarak [bağımlılık enjeksiyonuyguluyor.](../../fundamentals/dependency-injection.md) Hizmetler (EF veritabanı bağlamı gibi) uygulama başlatma sırasında bağımlılık enjeksiyonu ile kaydedilir. Bu hizmetleri gerektiren bileşenlere (MVC denetleyicileri gibi) bu hizmetler yapıcı parametreler aracılığıyla sağlanır. Bu öğreticide daha sonra bir bağlam örneği alan denetleyici oluşturucu kodunu görürsünüz.
+ASP.NET Core, varsayılan olarak [bağımlılık ekleme](../../fundamentals/dependency-injection.md) işlemini uygular. Hizmetler (EF veritabanı bağlamı gibi) uygulama başlatma sırasında bağımlılık ekleme ile kaydedilir. Bu hizmetleri gerektiren bileşenler (MVC denetleyicileri gibi) bu hizmetleri Oluşturucu parametreleri aracılığıyla sağlamaktadır. Bu öğreticide daha sonra bir bağlam örneği alan denetleyici Oluşturucu kodunu görürsünüz.
 
-Hizmet `SchoolContext` olarak kaydolmak için *Startup.cs*açın ve vurgulanan `ConfigureServices` satırları yönteme ekleyin.
+Hizmet olarak `SchoolContext` kaydetmek için *Startup.cs*açın ve vurgulanan satırları `ConfigureServices` yöntemine ekleyin.
 
 [!code-csharp[](intro/samples/cu/Startup.cs?name=snippet_SchoolContext&highlight=9-10)]
 
-Bağlantı dizesinin adı, `DbContextOptionsBuilder` bir nesne üzerinde bir yöntem çağırılarak içeriğe aktarılır. Yerel geliştirme [için, ASP.NET Core yapılandırma sistemi](xref:fundamentals/configuration/index) *appsettings.json* dosyasından bağlantı dizesini okur.
+Bağlantı dizesinin adı bir `DbContextOptionsBuilder` nesne üzerinde bir yöntem çağırarak bağlama geçirilir. Yerel geliştirme için [ASP.NET Core yapılandırma sistemi](xref:fundamentals/configuration/index) , *appSettings. JSON* dosyasından bağlantı dizesini okur.
 
-`ContosoUniversity.Data` Ekstreler `Microsoft.EntityFrameworkCore` ve ad alanları ekleyin `using` ve sonra projeyi oluşturun.
+Ve `using` `Microsoft.EntityFrameworkCore` ad alanları `ContosoUniversity.Data` için deyimler ekleyin ve ardından projeyi derleyin.
 
 [!code-csharp[](intro/samples/cu/Startup.cs?name=snippet_Usings)]
 
-*appsettings.json* dosyasını açın ve aşağıdaki örnekte gösterildiği gibi bir bağlantı dizesi ekleyin.
+*AppSettings. JSON* dosyasını açın ve aşağıdaki örnekte gösterildiği gibi bir bağlantı dizesi ekleyin.
 
 [!code-json[](./intro/samples/cu/appsettings1.json?highlight=2-4)]
 
 ### <a name="sql-server-express-localdb"></a>SQL Server Express LocalDB
 
-Bağlantı dizesi bir SQL Server LocalDB veritabanı belirtir. LocalDB, SQL Server Express Veritabanı Altyapısının hafif bir sürümüdür ve üretim kullanımı için değil, uygulama geliştirme için tasarlanmıştır. LocalDB isteğe bağlı olarak başlar ve kullanıcı modunda çalışır, bu nedenle karmaşık bir yapılandırma yoktur. Varsayılan olarak, LocalDB `C:/Users/<user>` dizinde *.mdf* veritabanı dosyaları oluşturur.
+Bağlantı dizesi bir SQL Server LocalDB veritabanı belirtir. LocalDB, SQL Server Express veritabanı altyapısının hafif bir sürümüdür ve üretim kullanımı için değil uygulama geliştirmeye yöneliktir. LocalDB, istek üzerine başlar ve kullanıcı modunda çalışır, bu nedenle karmaşık bir yapılandırma yoktur. Varsayılan olarak, LocalDB `C:/Users/<user>` dizinde *. mdf* veritabanı dosyaları oluşturur.
 
-## <a name="initialize-db-with-test-data"></a>Test verileriyle DB'yi başlatma
+## <a name="initialize-db-with-test-data"></a>Test verileriyle VERITABANıNı başlatma
 
-Varlık Çerçevesi sizin için boş bir veritabanı oluşturur. Bu bölümde, veritabanı test verileriyle doldurmak için oluşturulduktan sonra çağrılan bir yöntem yazarsınız.
+Entity Framework, sizin için boş bir veritabanı oluşturacaktır. Bu bölümde, test verileriyle doldurmak için veritabanı oluşturulduktan sonra çağrılan bir yöntem yazarsınız.
 
-Burada veritabanını `EnsureCreated` otomatik olarak oluşturmak için yöntemi kullanırsınız. Daha [sonraki](migrations.md) bir öğreticide, veritabanını bırakmak ve yeniden oluşturmak yerine veritabanı şemasını değiştirmek için Kod İlk Geçişleri'ni kullanarak model değişikliklerini nasıl işleyeceğiniz göreceksiniz.
+Burada, `EnsureCreated` veritabanını otomatik olarak oluşturmak için yöntemini kullanacaksınız. Sonraki bir [öğreticide](migrations.md) , veritabanını bırakıp yeniden oluşturmak yerine veritabanı şemasını değiştirmek için Code First Migrations kullanarak model değişikliklerini nasıl işleyeceğinizi göreceksiniz.
 
-*Veri* klasöründe, *DbInitializer.cs* adında yeni bir sınıf dosyası oluşturun ve gerektiğinde bir veritabanıoluşturulmasına neden olan ve test verilerini yeni veritabanına yükleyen şablon kodunu aşağıdaki kodla değiştirin.
+*Veri* klasöründe, *DbInitializer.cs* adlı yeni bir sınıf dosyası oluşturun ve şablon kodunu, gerektiğinde bir veritabanının oluşturulmasına neden olan aşağıdaki kodla değiştirin ve test verilerini yeni veritabanına yükler.
 
 [!code-csharp[](intro/samples/cu/Data/DbInitializer.cs?name=snippet_Intro)]
 
-Kod, veritabanında öğrenci olup olmadığını denetler ve varsa, veritabanının yeni olduğunu ve test verileriyle tohumlanması gerektiğini varsayar. Performansı en iyi duruma getirmek `List<T>` için test verilerini koleksiyonlar yerine dizilere yükler.
+Kod, veritabanında herhangi bir öğrenci olup olmadığını denetler ve yoksa, veritabanının yeni olduğunu ve test verileriyle hazırlanması gerektiğini varsayar. Performansı iyileştirmek için test verilerini `List<T>` koleksiyonlar yerine dizilere yükler.
 
-*Program.cs,* uygulama `Main` başlatma da aşağıdaki leri yapmak için yöntemi değiştirin:
+*Program.cs*' de, uygulama `Main` başlangıcında aşağıdakini yapmak için yöntemini değiştirin:
 
-* Bağımlılık enjeksiyon kapsayıcısından bir veritabanı bağlam örneği alın.
-* Tohum yöntemini çağırın, ona bağlamı geçirin.
-* Tohum yöntemi yapıldığında bağlamı atın.
+* Bağımlılık ekleme kapsayıcısından bir veritabanı bağlamı örneği alın.
+* Temel yöntemi çağırın ve bu yönteme geçerek bağlamı geçer.
+* Çekirdek yöntemi tamamlandığında bağlamı atın.
 
 [!code-csharp[](intro/samples/cu/Program.cs?name=snippet_Seed&highlight=3-20)]
 
-Deyim `using` ler ekleyin:
+Deyim `using` ekle:
 
 [!code-csharp[](intro/samples/cu/Program.cs?name=snippet_Usings)]
 
-Eski öğreticilerde, `Configure` *Startup.cs*yönteminde benzer kod görebilirsiniz. `Configure` Yöntemi yalnızca istek ardışık hattını ayarlamak için kullanmanızı öneririz. Uygulama başlangıç kodu `Main` yönteme aittir.
+Eski öğreticilerde, `Configure` *Startup.cs*içinde yönteminde benzer bir kod görebilirsiniz. `Configure` Yöntemini yalnızca istek ardışık düzenini ayarlamak için kullanmanızı öneririz. Uygulama başlangıç kodu `Main` yöntemine aittir.
 
-Şimdi uygulamayı ilk çalıştırdığınızda, veritabanı oluşturulur ve test verileriyle tohumlanır. Veri modelinizi her değiştirdiğinizde, veritabanını silebilir, tohum yönteminizi güncelleyebilir ve aynı şekilde yeni bir veritabanıyla yeniden başlayabilirsiniz. Daha sonraki öğreticilerde, veri modeli değiştiğinde veritabanını silmeden ve yeniden oluşturmadan nasıl değiştireceğinizi görürsünüz.
+Uygulamayı ilk kez çalıştırdığınızda veritabanı oluşturulur ve test verileriyle birlikte gösterilir. Veri modelinizi her değiştirdiğinizde, veritabanını silebilir, çekirdek yönteminizi güncelleştirebilir ve yeni bir veritabanıyla aynı şekilde bir baştan başlatabilirsiniz. Sonraki öğreticilerde, veri modeli değiştiğinde ve yeniden oluşturmadan veritabanını nasıl değiştireceğiniz hakkında bilgi edineceksiniz.
 
-## <a name="create-controller-and-views"></a>Denetleyici ve görünümler oluşturma
+## <a name="create-controller-and-views"></a>Denetleyici ve görünüm oluşturma
 
-Ardından, Visual Studio'daki iskele altyapısını kullanarak bir MVC denetleyicisi ve verileri sorgulamak ve kaydetmek için EF'yi kullanacak görünümler eklersiniz.
+Daha sonra, verileri sorgulamak ve kaydetmek için EF 'i kullanacak bir MVC denetleyicisi ve görünümleri eklemek üzere Visual Studio 'da scafkatlama altyapısını kullanacaksınız.
 
-CRUD eylem yöntemleri ve görünümleri otomatik oluşturma iskele olarak bilinir. İskele, iskele kodun kendi gereksinimlerinize uyacak şekilde değiştirebileceğiniz bir başlangıç noktası olması nedeniyle kod oluşturma noktasından farklıdır, oysa genellikle oluşturulan kodu değiştirmezsiniz. Oluşturulan kodu özelleştirmeniz gerektiğinde, kısmi sınıflar kullanırsınız veya bir şeyler değiştiğinde kodu yeniden oluşturursunuz.
+CRUD eylem yöntemlerinin ve görünümlerinin otomatik olarak oluşturulması, yapı iskelesi olarak bilinir. Yapı iskelesi, yapı oluşturma işleminden farklı olarak, kendi gereksinimlerinize uyacak şekilde değiştirebileceğiniz bir başlangıç noktası ve genellikle oluşturulan kodu değiştirmezsiniz. Oluşturulan kodu özelleştirmeniz gerektiğinde, kısmi sınıfları kullanırsınız veya işlemler değiştiğinde kodu yeniden oluşturmanız gerekir.
 
-* **Solution Explorer'daki** **Denetleyiciler** klasörüne sağ tıklayın ve Yeni İskele Öğesi **> ekle'yi**seçin.
+* **Çözüm Gezgini** ' de **denetleyiciler** klasörüne sağ tıklayın ve **> yeni iskele öğe Ekle**' yi seçin.
 
-* İskele **Ekle** iletişim kutusunda:
+* **Yapı Iskelesi Ekle** iletişim kutusunda:
 
-  * **Entity Framework'u kullanarak görünüme sahip MVC denetleyicisi**seçin.
+  * **Entity Framework kullanarak, görünümlerle MVC denetleyicisi ' ni**seçin.
 
-  * **Ekle**’ye tıklayın. **Görünümli MVC Denetleyicisi Ekle, Entity Framework** iletişim kutusunu kullanarak görüntülenir.
+  * **Ekle**'ye tıklayın. **Görünümler Ile MVC denetleyicisi ekleme, Entity Framework kullanma** iletişim kutusu görüntülenir.
 
-    ![İskele Öğrenci](intro/_static/scaffold-student2.png)
+    ![Yapı iskelesi öğrenci](intro/_static/scaffold-student2.png)
 
-  * **Model sınıfında** **Öğrenci**seçin.
+  * **Model sınıfı** ' nda **öğrenci**' yi seçin.
 
-  * **Veri bağlamında sınıf** seçin **SchoolContext**.
+  * **Veri bağlamı sınıfında** **SchoolContext**öğesini seçin.
 
-  * Varsayılan **StudentsController'ı** ad olarak kabul edin.
+  * Varsayılan **Studentscontroller** adını olarak kabul edin.
 
-  * **Ekle**’ye tıklayın.
+  * **Ekle**'ye tıklayın.
 
-  **Ekle'yi**tıklattığınızda, Visual Studio iskele motoru *denetleyiciyle* çalışan bir StudentsController.cs dosyası ve bir görünüm kümesi *(.cshtml* dosyaları) oluşturur.
+  **Ekle**' ye tıkladığınızda, Visual Studio yapı iskelesi altyapısı, denetleyicisiyle birlikte çalışan bir *StudentsController.cs* dosyası ve bir dizi görünüm (*. cshtml* dosyası) oluşturur.
 
-(İskele motoru, bu öğretici için daha önce yaptığınız gibi ilk el ile oluşturmazsanız, veritabanı bağlamını da sizin için oluşturabilir. **Veri bağlamı sınıfının**sağındaki artı işaretini tıklatarak **Denetleyici Ekle** kutusunda yeni bir bağlam sınıfı belirtebilirsiniz.  Visual Studio daha `DbContext` sonra sınıfınızın yanı sıra denetleyici ve görünümler oluşturacaktır.)
+(Yapı iskelesi altyapısı, daha önce Bu öğreticide yaptığınız gibi, daha önce el ile oluşturmazsanız, sizin için veritabanı bağlamını de oluşturabilir. **Veri bağlam sınıfının**sağ tarafındaki artı Işaretine tıklayarak **Denetleyici Ekle** kutusunda yeni bir bağlam sınıfı belirtebilirsiniz.  Daha sonra, Visual Studio `DbContext` sınıfınızın yanı sıra denetleyiciyi ve görünümleri de oluşturacaktır.)
 
-Denetleyicinin bir `SchoolContext` oluşturucu parametre olarak aldığını fark edeceksiniz.
+Denetleyicinin bir `SchoolContext` Oluşturucu parametresi olarak aldığını fark edeceksiniz.
 
 [!code-csharp[](intro/samples/cu/Controllers/StudentsController.cs?name=snippet_Context&highlight=5,7,9)]
 
-ASP.NET Çekirdek bağımlılık enjeksiyonu denetleyici `SchoolContext` içine bir örnek geçen ilgilenir. Bunu daha önce *Startup.cs* dosyasında yapılandırmışsınız.
+ASP.NET Core bağımlılığı ekleme, denetleyiciye bir örneğini `SchoolContext` geçirme işlemini gerçekleştirir. Bunu *Startup.cs* dosyasında daha önce yapılandırdınız.
 
-Denetleyici, veritabanındaki tüm öğrencileri görüntüleyen bir `Index` eylem yöntemi içerir. Yöntem, veritabanı bağlamı örneğinin özelliğini `Students` okuyarak Öğrenci varlığından belirlenen öğrencilerin listesini alır:
+Denetleyici, veritabanındaki tüm `Index` öğrencileri görüntüleyen bir Action yöntemi içerir. Yöntemi, veritabanı bağlamı örneğinin `Students` özelliğini okuyarak öğrenciler varlık kümesinden öğrencilerin bir listesini alır:
 
 [!code-csharp[](intro/samples/cu/Controllers/StudentsController.cs?name=snippet_ScaffoldedIndex&highlight=3)]
 
-Bu koddaki eşzamanlı programlama öğeleri hakkında daha sonra öğreticide öğreneceksiniz.
+Öğreticide daha sonra bu kodda zaman uyumsuz programlama öğeleri hakkında bilgi edineceksiniz.
 
-*Görünümler/Öğrenciler/Index.cshtml* görünümü bu listeyi bir tabloda görüntüler:
+*Views/öğrenciler/Index. cshtml* görünümü bu listeyi bir tabloda görüntüler:
 
 [!code-cshtml[](intro/samples/cu/Views/Students/Index1.cshtml)]
 
-Projeyi çalıştırmak için CTRL+F5 tuşuna basın veya menüden **Hata Ayıklama olmadan Başlat > Hata Ayıklama'yı** seçin.
+Projeyi çalıştırmak için CTRL + F5 tuşlarına basın veya menüden **hata ayıklama > Başlat** ' ı seçin.
 
-Yöntemin ekteki test verilerini görmek `DbInitializer.Initialize` için Öğrenciler sekmesini tıklatın. Tarayıcı pencerenizin ne kadar dar olduğuna bağlı `Students` olarak, sayfanın üst kısmındaki sekme bağlantısını görürsünüz veya bağlantıyı görmek için sağ üst köşedeki gezinti simgesini tıklatmanız gerekir.
+`DbInitializer.Initialize` Metodun eklendiği test verilerini görmek için öğrenciler sekmesine tıklayın. Tarayıcı pencerenizin ne kadar dar olduğuna bağlı olarak sayfanın en üstünde `Students` sekme bağlantısını görürsünüz veya bağlantıyı görmek için sağ üst köşedeki gezinti simgesine tıklamanız gerekir.
 
 ![Contoso Üniversitesi giriş sayfası dar](intro/_static/home-page-narrow.png)
 
-![Öğrenci Endeksi sayfası](intro/_static/students-index.png)
+![Öğrenciler Dizin sayfası](intro/_static/students-index.png)
 
 ## <a name="view-the-database"></a>Veritabanını görüntüleme
 
-Uygulamayı başlattığınızda, `DbInitializer.Initialize` yöntem çağırır. `EnsureCreated` EF hiçbir veritabanı olduğunu gördüm ve bu yüzden bir `Initialize` oluşturdu, sonra yöntem kodunun geri kalanı veri ile veritabanı doldurulur. Visual Studio'daki veritabanını görüntülemek için **SQL Server Object Explorer'ı** (SSOX) kullanabilirsiniz.
+Uygulamayı başlattığınızda, `DbInitializer.Initialize` yöntemi çağırır `EnsureCreated`. EF, bir veritabanı olmadığını ve bu nedenle bir tane oluşturduğunu gördük, daha sonra `Initialize` Yöntem kodunun geri kalanı veritabanını verilerle doldurmuş. Visual Studio 'da veritabanını görüntülemek için **SQL Server Nesne Gezgini** (ssox) kullanabilirsiniz.
 
 Tarayıcıyı kapatın.
 
-SSOX penceresi zaten açık değilse, Visual Studio'daki **Görünüm** menüsünden seçin.
+SSOX penceresi henüz açık değilse, Visual Studio 'daki **Görünüm** menüsünden bunu seçin.
 
-SSOX'ta **(localdb)\MSSQLLocalDB > Databases'ı**tıklatın ve ardından *appsettings.json* dosyanızdaki bağlantı dizesinde bulunan veritabanı adının girişini tıklatın.
+SSOX 'te **(LocalDB) \MSSQLLocalDB > veritabanları**' na tıklayın ve ardından *appSettings. JSON* dosyanızdaki bağlantı dizesinde bulunan veritabanı adı için girişe tıklayın.
 
-Veritabanınızdaki tabloları görmek için **Tablolar** düğümunu genişletin.
+Veritabanınızdaki tabloları görmek için **Tablolar** düğümünü genişletin.
 
-![SSOX tabloları](intro/_static/ssox-tables.png)
+![SSOX içindeki tablolar](intro/_static/ssox-tables.png)
 
-Oluşturulan sütunları ve tabloya eklenen satırları görmek için **Öğrenci** tablosuna sağ tıklayın ve **Verileri Görüntüle'yi** tıklatın.
+Oluşturulan sütunları ve tabloya eklenmiş satırları görmek için **öğrenci** tablosuna sağ tıklayın ve **verileri görüntüle** ' ye tıklayın.
 
-![SSOX öğrenci tablosu](intro/_static/ssox-student-table.png)
+![SSOX 'te öğrenci tablosu](intro/_static/ssox-student-table.png)
 
-*.mdf* ve *.ldf* veritabanı dosyaları *C:\Users\\\<yourusername>* klasöründe bulunmaktadır.
+*. Mdf* ve *. ldf* veritabanı dosyaları, *\\\<C:\Users YourUserName>* klasöründedir.
 
-Uygulama başlangıcında çalışan `EnsureCreated` başlatım yöntemini aradığınızdan, artık `Student` sınıfta bir değişiklik yapabilir, veritabanını silebilir, uygulamayı yeniden çalıştırabilirsiniz ve veritabanı değişikliğinize uyacak şekilde otomatik olarak yeniden oluşturulur. Örneğin, `EmailAddress` `Student` sınıfa bir özellik eklerseniz, yeniden oluşturulan `EmailAddress` tabloda yeni bir sütun görürsünüz.
+Uygulama başlatma sırasında çalışan `EnsureCreated` Başlatıcı metodunu çağırırken, artık `Student` sınıfta bir değişiklik yapabilir, veritabanını silebilir, uygulamayı yeniden çalıştırabilirsiniz ve veritabanı, değişikliklerinizi eşleştirmek için otomatik olarak yeniden oluşturulur. Örneğin, `EmailAddress` `Student` sınıfa bir özellik eklerseniz, yeniden oluşturulan tabloda yeni `EmailAddress` bir sütun görürsünüz.
 
 ## <a name="conventions"></a>Kurallar
 
-Varlık Çerçevesi'nin sizin için tam bir veritabanı oluşturabilmesi için yazmanız gereken kod miktarı, Varlık Çerçevesi'nin yaptığı kuralların veya varsayımların kullanımı nedeniyle çok azdır.
+Entity Framework, kuralların kullanımı veya Entity Framework varsayımlarıyla ilgili olarak en az bir veritabanı oluşturabilmesini sağlamak için yazmanız gereken kod miktarı.
 
-* Özelliklerin `DbSet` adları tablo adları olarak kullanılır. Bir `DbSet` özellik tarafından başvurulmayan varlıklar için, varlık sınıf adları tablo adları olarak kullanılır.
+* `DbSet` Özelliklerin adları tablo adı olarak kullanılır. Bir `DbSet` özellik tarafından başvurulmayan varlıklar için, varlık sınıfı adları tablo adı olarak kullanılır.
 
-* Sütun adları için varlık özellik adları kullanılır.
+* Varlık özelliği adları, sütun adları için kullanılır.
 
-* ID veya classnameID adlı varlık özellikleri birincil anahtar özellikleri olarak kabul edilir.
+* ID veya Classnameıd olarak adlandırılan varlık özellikleri, birincil anahtar özellikleri olarak tanınır.
 
-* Bir özellik, * \<gezinti özelliği adı \<>birincil anahtar özellik adı>* (örneğin, `StudentID` `Student` `Student` varlığın birincil anahtarı olduğundan `ID`gezinti özelliği için) adlı yabancı anahtar özelliği olarak yorumlanır. Yabancı anahtar özellikleri de `Enrollment` yalnızca `EnrollmentID` * \<birincil anahtar özellik adı>* adlandırılabilir (örneğin, `EnrollmentID` varlığın birincil anahtarı olduğundan).
+* Bir özellik, * \< \<gezinti özelliği adı>birincil anahtar özellik adı>* (örneğin, `StudentID` `Student` `Student` varlığın birincil anahtarı olduğundan `ID`gezinti özelliği için) olarak adlandırılmışsa, yabancı anahtar özelliği olarak yorumlanır. Yabancı anahtar özelliklerine de yalnızca * \<birincil anahtar özellik adı>* (örneğin, `EnrollmentID` `Enrollment` varlığın birincil anahtarı olduğu `EnrollmentID`için) adlandırılmış olabilir.
 
-Geleneksel davranışlar geçersiz kılınabilir. Örneğin, bu öğreticide daha önce gördüğünüz gibi tablo adlarını açıkça belirtebilirsiniz. Sütun adlarını ayarlayabilir ve bu serinin daha sonraki bir [öğreticisinde](complex-data-model.md) göreceğiniz gibi, herhangi bir özelliği birincil anahtar veya yabancı anahtar olarak ayarlayabilirsiniz.
+Geleneksel davranış geçersiz kılınabilir. Örneğin, bu öğreticide daha önce gördüğünüz gibi tablo adlarını açıkça belirtebilirsiniz. Ayrıca, bu serinin [sonraki bir öğreticide](complex-data-model.md) göreceğiniz gibi, sütun adlarını ayarlayabilir ve herhangi bir özelliği birincil anahtar veya yabancı anahtar olarak ayarlayabilirsiniz.
 
-## <a name="asynchronous-code"></a>Asynchronous kodu
+## <a name="asynchronous-code"></a>Zaman uyumsuz kod
 
-Asynchronous programlama ASP.NET Core ve EF Core için varsayılan moddur.
+Zaman uyumsuz programlama, ASP.NET Core ve EF Core için varsayılan moddur.
 
-Bir web sunucusunda sınırlı sayıda iş parçacığı vardır ve yüksek yük durumlarında kullanılabilir tüm iş parçacıkları kullanılıyor olabilir. Bu durumda, iş parçacıkları serbest bırakılıncaya kadar sunucu yeni istekleri işleyebilir. Senkron kodla, G/Ç'nin tamamlanmasını bekledikleri için birçok iş parçacığı aslında herhangi bir iş yapmasalar da bağlanabilir. Bir işlem G/Ç'nin tamamlanmasını beklerken, iş parçacığı sunucunun diğer istekleri işlemek için kullanması için serbest bırakılır. Sonuç olarak, eşzamanlı kod sunucu kaynaklarının daha verimli kullanılmasını sağlar ve sunucunun gecikmeden daha fazla trafiği işlemesi sağlanır.
+Web sunucusunda sınırlı sayıda iş parçacığı bulunur ve yüksek yük durumlarında tüm kullanılabilir iş parçacıkları kullanımda olabilir. Bu durumda, sunucu, iş parçacıkları boşaltılana kadar yeni istekleri işleyemez. Zaman uyumlu kodla, çok sayıda iş parçacığı, g/ç 'nin tamamlanmasını beklediği için aslında herhangi bir iş yapmadıklarında bağlı olabilir. Zaman uyumsuz kod ile, bir işlem g/ç 'yi tamamlanmayı beklerken, sunucunun diğer istekleri işlemek için kullanması için iş parçacığı serbest bırakılır. Sonuç olarak, zaman uyumsuz kod sunucu kaynaklarının daha verimli kullanılmasını sağlar ve sunucu, gecikme olmadan daha fazla trafiği işlemeye etkinleştirilir.
 
-Asynchronous kodu çalışma zamanında ek yükü küçük bir miktar tanıtmak yok, ancak düşük trafik durumları için performans isabet ihmal edilebilir, yüksek trafik durumları için ise, potansiyel performans geliştirme önemli.
+Zaman uyumsuz kod, çalışma zamanında az miktarda yük getirir, ancak düşük trafik durumlarında performans artışı göz ardı edilebilir, ancak yüksek trafik durumları için olası performans iyileştirmesi oldukça önemlidir.
 
-Aşağıdaki kodda, `async` anahtar kelime, `Task<T>` iade `await` değeri, `ToListAsync` anahtar kelime ve yöntem kodu eşzamanlı olarak yürütmeyi yapar.
+Aşağıdaki `async` kodda, anahtar sözcüğü, return değeri `Task<T>` , `await` anahtar sözcüğü ve `ToListAsync` yöntemi kodu zaman uyumsuz olarak yürütür.
 
 [!code-csharp[](intro/samples/cu/Controllers/StudentsController.cs?name=snippet_ScaffoldedIndex)]
 
-* Anahtar `async` kelime derleyiciye yöntem gövdesinin bölümleri için geri aramalar oluşturmasını `Task<IActionResult>` ve döndürülen nesneyi otomatik olarak oluşturmasını söyler.
+* `async` Anahtar sözcüğü, derleyiciye Yöntem gövdesinin parçaları için geri çağrılar oluşturmasını ve döndürülen `Task<IActionResult>` nesneyi otomatik olarak oluşturmasını söyler.
 
-* İade türü, `Task<IActionResult>` türünden `IActionResult`bir sonucu olan devam eden çalışmayı temsil eder.
+* Dönüş türü `Task<IActionResult>` , türünde `IActionResult`bir sonuçla devam eden işi temsil eder.
 
-* Anahtar `await` kelime derleyicinin yöntemi iki bölüme bölmesine neden olur. İlk bölüm, eş zamanlı olarak başlatılan işlemle sona erer. İkinci bölüm, işlem tamamlandığında çağrılan bir geri arama yöntemine konur.
+* `await` Anahtar sözcüğü, derleyicinin yöntemi iki parçaya böetmesine neden olur. İlk bölüm, zaman uyumsuz olarak başlatılan işlemle biter. İkinci bölüm, işlem tamamlandığında çağrılan bir geri çağırma yöntemine konur.
 
-* `ToListAsync`uzantı yönteminin `ToList` eşzamanlı sürümüdür.
+* `ToListAsync`, `ToList` Uzantı yönteminin zaman uyumsuz sürümüdür.
 
-Varlık Çerçevesi'ni kullanan eşzamanlı kod yazarken dikkat edilmesi gereken bazı noktalar:
+Entity Framework kullanan zaman uyumsuz kod yazarken dikkat edilmesi gereken bazı şeyler:
 
-* Yalnızca sorguların veya komutların veritabanına gönderilmesine neden olan ifadeler eşsenkronize olarak yürütülür. Buna, örneğin, `ToListAsync`, `SingleOrDefaultAsync`, `SaveChangesAsync`ve . Örneğin, bir `IQueryable`şeyi değiştiren ifadeler `var students = context.Students.Where(s => s.LastName == "Davolio")`içermez.
+* Yalnızca sorguları veya komutlarının veritabanına gönderilmesine neden olan deyimler zaman uyumsuz olarak yürütülür. Bu, örneğin `ToListAsync` `SingleOrDefaultAsync`,, ve `SaveChangesAsync`içerir. Örneğin, gibi yalnızca bir `IQueryable`değiştiren deyimler içermez. `var students = context.Students.Where(s => s.LastName == "Davolio")`
 
-* EF bağlamı iş parçacığı güvenli değildir: paralel olarak birden çok işlem yapmaya çalışmayın. Herhangi bir async EF yöntemini `await` çağırdığınızda, her zaman anahtar kelimeyi kullanın.
+* EF bağlamı iş parçacığı açısından güvenli değildir: paralel olarak birden çok işlem yapmayı denemeyin. Herhangi bir zaman uyumsuz EF yöntemini çağırdığınızda, her zaman `await` anahtar sözcüğünü kullanın.
 
-* Async kodunun performans avantajlarından yararlanmak istiyorsanız, kullandığınız kitaplık paketlerinin (sayfa lama gibi) sorguların veritabanına gönderilmesine neden olan Varlık Çerçevesi yöntemlerini aramaları durumunda da async kullandığından emin olun.
+* Zaman uyumsuz kodun performans avantajlarından yararlanmak isterseniz, kullanmakta olduğunuz tüm kitaplık paketlerinin (örneğin, sayfalama için), sorguların veritabanına gönderilmesine neden olan herhangi bir Entity Framework yöntemini çağırıyorsa, zaman uyumsuz olarak da kullanılmasını sağlayın.
 
-.NET'teki eşzamanlı programlama hakkında daha fazla bilgi için [Async Genel Bakış'a](/dotnet/articles/standard/async)bakın.
+.NET ' te zaman uyumsuz programlama hakkında daha fazla bilgi için bkz. [Async Overview](/dotnet/articles/standard/async).
 
 ## <a name="get-the-code"></a>Kodu alma
 
-[Tamamlanan uygulamayı karşıdan yükleyin veya görüntüleyin.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[Tamamlanmış uygulamayı indirin veya görüntüleyin.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 Bu öğreticide şunları yaptınız:
 
 > [!div class="checklist"]
-> * Core MVC web uygulaması ASP.NET oluşturuldu
-> * Site stilini ayarlama
-> * EF Core NuGet paketleri hakkında bilgi edinilmiş
-> * Veri modelini oluşturma
-> * Veritabanı bağlamını oluşturma
-> * Okul Bağlamını Kaydetti
-> * Test verileri ile başharfe çevrilmiş DB
-> * Oluşturulan denetleyici ve görünümler
-> * Veritabanı görüntülendi
+> * ASP.NET Core MVC web uygulaması oluşturuldu
+> * Site stilini ayarlayın
+> * EF Core NuGet paketleri hakkında bilgi edinildi
+> * Veri modeli oluşturuldu
+> * Veritabanı bağlamı oluşturuldu
+> * SchoolContext kaydedildi
+> * Test verileriyle VERITABANı başlatıldı
+> * Denetleyici ve görünümler oluşturuldu
+> * Veritabanı görüntüleniyor
 
-Aşağıdaki öğreticide, temel CRUD (oluşturma, okuma, güncelleme, silme) işlemlerini nasıl yapacağınızı öğreneceksiniz.
+Aşağıdaki öğreticide, temel CRUD (oluşturma, okuma, güncelleştirme, silme) işlemlerini nasıl gerçekleştireceğinizi öğreneceksiniz.
 
-Temel CRUD (oluşturma, okuma, güncelleme, silme) işlemlerinin nasıl yapılacağını öğrenmek için bir sonraki öğreticiye ilerleyin.
+Temel CRUD (oluşturma, okuma, güncelleştirme, silme) işlemlerini nasıl gerçekleştireceğinizi öğrenmek için sonraki öğreticiye ilerleyin.
 
 > [!div class="nextstepaction"]
-> [Temel CRUD işlevselliğini uygulayın](crud.md)
+> [Temel CRUD işlevlerini uygulama](crud.md)
 

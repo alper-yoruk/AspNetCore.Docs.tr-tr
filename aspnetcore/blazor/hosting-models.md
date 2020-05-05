@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 03/31/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 48f5b09199091b2b55974010a2b0715c28eb1bae
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 524fd015278d1a5f784fa306f077d06b865201c4
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82205975"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772093"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>Barındırma Blazor modellerini ASP.NET Core
 
@@ -94,9 +97,9 @@ Blazor Sunucu uygulama modeli [Docker kapsayıcılarını](/dotnet/standard/micr
 
 ### <a name="comparison-to-server-rendered-ui"></a>Sunucu tarafından işlenmiş Kullanıcı arabirimine karşılaştırma
 
-Sunucu uygulamalarını anlamanın Blazor bir yolu, Razor görünümlerini veya Razor Pages kullanarak ASP.NET Core uygulamalarda Kullanıcı arabirimi oluşturma için geleneksel modellerden nasıl farklılık gösterir. Her iki model de, HTML içeriğini anlatmak için Razor dilini kullanır, ancak biçimlendirmenin nasıl işlendiği konusunda önemli ölçüde farklılık gösterir.
+Sunucu uygulamalarını anlamanın Blazor bir yolu, görünümleri veya Razor Razor sayfaları kullanarak ASP.NET Core uygulamalarda Kullanıcı arabirimi oluşturma için geleneksel modellerden nasıl farklılık gösterir. Her iki model de Razor HTML içeriğini anlatmak için dili kullanır, ancak biçimlendirmenin nasıl işlendiği konusunda önemli ölçüde farklılık gösterir.
 
-Bir Razor sayfası veya görünüm işlendiğinde, her Razor kodu satırı metin biçiminde HTML yayar. Oluşturulduktan sonra sunucu, üretilen herhangi bir durum da dahil olmak üzere sayfayı veya görünüm örneğini ortadan kaldırır. Sayfa için başka bir istek gerçekleştiğinde, örneğin sunucu doğrulaması başarısız olduğunda ve doğrulama özeti görüntülendiğinde:
+Bir Razor sayfa veya görünüm işlendiğinde, her Razor kod satırı metin biçiminde HTML yayar. Oluşturulduktan sonra sunucu, üretilen herhangi bir durum da dahil olmak üzere sayfayı veya görünüm örneğini ortadan kaldırır. Sayfa için başka bir istek gerçekleştiğinde, örneğin sunucu doğrulaması başarısız olduğunda ve doğrulama özeti görüntülendiğinde:
 
 * Sayfanın tamamı HTML metnine yeniden eklenir.
 * Sayfa istemciye gönderilir.
@@ -106,7 +109,7 @@ Blazor Uygulama, *bileşen*olarak adlandırılan Kullanıcı arabiriminin yenide
 * HTML metnine açıldı (prerendering&dagger;sırasında).
 * Düzenli işleme sırasında biçimlendirmeyi verimli bir şekilde güncelleştirmek için kullanılır.
 
-&dagger;*Prerendering* &ndash; istenen Razor bileşeni, sunucuda statik HTML olarak derlenir ve istemciye gönderilir ve Kullanıcı tarafından işlenir. İstemci ve sunucu arasında bağlantı kurulduktan sonra, bileşenin statik ön işlenmiş öğeleri etkileşimli öğelerle değiştirilmiştir. Prerendering, uygulamanın kullanıcıya daha fazla yanıt vermesini sağlar.
+&dagger;*Prerendering* &ndash; istenen Razor bileşen, sunucuda statik HTML 'ye derlendi ve istemciye gönderildiğinde, kullanıcıya işlendiğinde. İstemci ve sunucu arasında bağlantı kurulduktan sonra, bileşenin statik ön işlenmiş öğeleri etkileşimli öğelerle değiştirilmiştir. Prerendering, uygulamanın kullanıcıya daha fazla yanıt vermesini sağlar.
 
 İçindeki Blazor bir kullanıcı arabirimi güncelleştirmesi tarafından tetiklenir:
 

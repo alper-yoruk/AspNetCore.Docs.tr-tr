@@ -1,57 +1,63 @@
 ---
-title: ASP.NET Çekirdek'teki Alanlar
+title: ASP.NET Core bölgeler
 author: rick-anderson
-description: Alanların, ilgili işlevleri ayrı bir ad alanı (yönlendirme için) ve klasör yapısı (görünümler için) olarak grup halinde düzenlemek için kullanılan ASP.NET bir MVC özelliğinin nasıl olduğunu öğrenin.
+description: Alanların ilgili işlevleri bir grup içinde ayrı bir ad alanı (yönlendirme için) ve klasör yapısı (görünümler için) olarak düzenlemek için kullanılan bir ASP.NET MVC özelliği olduğunu öğrenin.
 ms.author: riande
 ms.date: 03/21/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/controllers/areas
-ms.openlocfilehash: 8859bc52416ff657036198c73f63b8b0a0201e11
-ms.sourcegitcommit: 9675db7bf4b67ae269f9226b6f6f439b5cce4603
+ms.openlocfilehash: 00071b91f2ef374668b74a41190d49b0be83e817
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/03/2020
-ms.locfileid: "80625924"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774307"
 ---
-# <a name="areas-in-aspnet-core"></a>ASP.NET Çekirdek'teki Alanlar
+# <a name="areas-in-aspnet-core"></a>ASP.NET Core bölgeler
 
-Yazar: [Dhananjay Kumar](https://twitter.com/debug_mode) ve [Rick Anderson](https://twitter.com/RickAndMSFT)
+[Dhananjay Rohan](https://twitter.com/debug_mode) ve [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Alanlar, ilgili işlevselliği ayrı olarak bir gruba düzenlemek için kullanılan ASP.NET bir özelliktir:
+Bölgeler, ilgili işlevselliği ayrı olarak bir grup içinde düzenlemek için kullanılan bir ASP.NET özelliğidir:
 
 * Yönlendirme için ad alanı.
-* Görünümler ve Jilet Sayfaları için klasör yapısı.
+* Görünümler ve Razor sayfalar için klasör yapısı.
 
-`area`Alanları kullanmak, başka bir rota parametresi, `controller` `action` yani Jilet Sayfası `page`ekleyerek yönlendirme amacıyla bir hiyerarşi oluşturur.
+Alanların kullanılması, başka bir rota `area`parametresi,, `controller` ve `action` veya bir Razor sayfa `page`ekleyerek yönlendirmenin amacı için bir hiyerarşi oluşturur.
 
-Alanlar, ASP.NET Core Web uygulamasını her biri kendi Jilet Sayfaları, denetleyicileri, görünümleri ve modelleri olan daha küçük işlevsel gruplara bölmenin bir yolunu sağlar. Alan, etkin bir uygulama nın içindeki bir yapıdır. ASP.NET Core web projesinde, Sayfalar, Model, Denetleyici ve Görünüm gibi mantıksal bileşenler farklı klasörlerde tutulur. ASP.NET Core çalışma zamanı, bu bileşenler arasındaki ilişkiyi oluşturmak için adlandırma kurallarını kullanır. Büyük bir uygulama için, uygulamayı ayrı üst düzey işlevsellik alanlarına bölmek avantajlı olabilir. Örneğin, ödeme, faturalandırma ve arama gibi birden çok iş birimine sahip bir e-ticaret uygulaması. Bu birimlerin her birinin görünümleri, denetleyicileri, Jilet Sayfaları ve modelleri içeren kendi alanı vardır.
+Alanları, her biri kendi Razor sayfa, denetleyiciler, görünümler ve modeller kümesine sahip bir ASP.NET Core Web uygulamasını daha küçük işlevsel gruplar halinde bölümlemek için bir yol sağlar. Bir alan, bir uygulamanın içindeki yapısı etkin bir şekilde. Bir ASP.NET Core Web projesinde, sayfalar, model, denetleyici ve görünüm gibi mantıksal bileşenler farklı klasörlerde tutulur. ASP.NET Core çalışma zamanı, bu bileşenler arasındaki ilişkiyi oluşturmak için adlandırma kurallarını kullanır. Büyük bir uygulama için, uygulamayı işlevlerin ayrı üst düzey alanlarında bölümlemek avantajlı olabilir. Örneğin, kullanıma alma, faturalandırma ve arama gibi birden çok iş birimi içeren bir e-ticaret uygulaması. Bu birimlerin her birinin görünümleri, denetleyicileri, Razor sayfaları ve modelleri içermesi için kendi alanı vardır.
 
-Şu anda projedeki Alanları kullanmayı düşünün:
+Şu durumlarda bir projedeki alanı kullanmayı göz önünde bulundurun:
 
 * Uygulama, mantıksal olarak ayrılabilen birden çok üst düzey işlevsel bileşenden oluşur.
-* Uygulamayı, her işlevsel alanın bağımsız olarak çalışabilmesi için bölmek istiyorsunuz.
+* Her işlevsel alanın bağımsız olarak çalışabilmesi için uygulamayı bölümlemek istiyorsunuz.
 
-[Örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples) ([nasıl indirilir).](xref:index#how-to-download-a-sample) İndirme örneği, test alanları için temel bir uygulama sağlar.
+[Örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples) ([nasıl indirilir](xref:index#how-to-download-a-sample)). İndirme örneği, test bölgeleri için temel bir uygulama sağlar.
 
-Jilet Sayfaları kullanıyorsanız, bu belgede [Jilet Li Alanlar'a](#areas-with-razor-pages) bakın.
+Sayfalar kullanıyorsanız Razor , bkz. bu belgede [sayfaları bulunan Razor bölgeler](#areas-with-razor-pages) .
 
-## <a name="areas-for-controllers-with-views"></a>Görünüme sahip denetleyiciler için alanlar
+## <a name="areas-for-controllers-with-views"></a>Görünümlere sahip denetleyiciler için bölgeler
 
-Alanları, denetleyicileri ve görünümleri kullanan tipik bir ASP.NET Core web uygulaması aşağıdakileri içerir:
+Alanları, denetleyicileri ve görünümleri kullanan tipik bir ASP.NET Core Web uygulaması şunları içerir:
 
-* Alan [klasör yapısı.](#area-folder-structure)
-* Denetleyiciyi [`[Area]`](#attribute) alanla ilişkilendirecek öznitelikteki denetleyiciler:
+* Bir [alan klasörü yapısı](#area-folder-structure).
+* Denetleyiciyi içeren [`[Area]`](#attribute) ve denetleyiciyi alanla ilişkilendiren denetleyiciler:
 
   [!code-csharp[](areas/31samples/MVCareas/Areas/Products/Controllers/ManageController.cs?name=snippet2)]
 
-* [Başlangıç için eklenen alan rotası:](#add-area-route)
+* [Başlangıç alanına eklenen alan yolu](#add-area-route):
 
   [!code-csharp[](areas/31samples/MVCareas/Startup.cs?name=snippet2&highlight=3-6)]
 
-### <a name="area-folder-structure"></a>Alan klasör yapısı
+### <a name="area-folder-structure"></a>Alan klasörü yapısı
 
-İki mantıksal grubu olan bir uygulamayı düşünün, *Ürünler* ve *Hizmetler.* Alanları kullanarak, klasör yapısı aşağıdakilere benzer olacaktır:
+İki mantıksal grup, *ürün* ve *hizmet*içeren bir uygulamayı düşünün. Alan kullanarak, klasör yapısı aşağıdakine benzer olacaktır:
 
 * Proje adı
   * Alanlar
@@ -60,19 +66,19 @@ Alanları, denetleyicileri ve görünümleri kullanan tipik bir ASP.NET Core web
         * HomeController.cs
         * ManageController.cs
       * Görünümler
-        * Ev
+        * Giriş
           * Index.cshtml
         * Yönetme
           * Index.cshtml
-          * Hakkında.cshtml
+          * . Cshtml hakkında
     * Hizmetler
       * Denetleyiciler
         * HomeController.cs
       * Görünümler
-        * Ev
+        * Giriş
           * Index.cshtml
 
-Alanlar kullanılırken önceki düzen tipik olsa da, bu klasör yapısını kullanmak için yalnızca görünüm dosyaları gereklidir. Eşleşen bir alan görünümü dosyasını aşağıdaki sırada bulma aramalarını görüntüle:
+Yukarıdaki düzen, alan kullanılırken tipik olsa da, bu klasör yapısını kullanmak için yalnızca görünüm dosyaları gereklidir. Eşleşen bir alan görünümü dosyası için bulma aramalarını aşağıdaki sırayla görüntüleyin:
 
 ```text
 /Areas/<Area-Name>/Views/<Controller-Name>/<Action-Name>.cshtml
@@ -83,80 +89,80 @@ Alanlar kullanılırken önceki düzen tipik olsa da, bu klasör yapısını kul
 
 <a name="attribute"></a>
 
-### <a name="associate-the-controller-with-an-area"></a>Denetleyiciyi bir Alanla ilişkilendirin
+### <a name="associate-the-controller-with-an-area"></a>Denetleyiciyi bir alanla ilişkilendir
 
-Alan denetleyicileri [ &lbrack;Alan&rbrack; ](xref:Microsoft.AspNetCore.Mvc.AreaAttribute) özniteliği ile belirlenir:
+Alan denetleyicileri, [ &lbrack;alan&rbrack; ](xref:Microsoft.AspNetCore.Mvc.AreaAttribute) özniteliğiyle belirlenir:
 
 [!code-csharp[](areas/31samples/MVCareas/Areas/Products/Controllers/ManageController.cs?highlight=5&name=snippet)]
 
-### <a name="add-area-route"></a>Alan rota ekle
+### <a name="add-area-route"></a>Alan yolu Ekle
 
-Alan yolları genellikle [öznitelik yönlendirmeyerine](xref:mvc/controllers/routing#ar) [geleneksel yönlendirme](xref:mvc/controllers/routing#cr) kullanın. Konvansiyonel yönlendirme isteðe baðlð±r. Genel olarak, alanları olan rotalar, alanı olmayan rotalardan daha spesifik olduğundan, rota tablosuna daha erken yerleştirilmelidir.
+Alan rotaları genellikle [öznitelik yönlendirme](xref:mvc/controllers/routing#ar)yerine [geleneksel yönlendirmeyi](xref:mvc/controllers/routing#cr) kullanır. Geleneksel yönlendirme sıra bağımlıdır. Genel olarak, alanlar içeren rotalar, alan olmayan rotalardan daha belirgin olduklarından daha önce rota tablosuna yerleştirilmelidir.
 
-`{area:...}`url alanı tüm alanlarda tek düze yse rota şablonlarında belirteç olarak kullanılabilir:
+`{area:...}`, URL alanı tüm alanlarda Tekdüzen ise yol şablonlarında bir belirteç olarak kullanılabilir:
 
 [!code-csharp[](areas/31samples/MVCareas/Startup.cs?name=snippet&highlight=21-23)]
 
-Önceki kodda, `exists` rotanın bir alanla eşleşmesi gereken bir kısıtlama uygulanır. `MapControllerRoute`Kullanarak: `{area:...}`
+Önceki kodda, `exists` yolun bir alanla eşleşmesi gereken bir kısıtlama uygular. İle `{area:...}` `MapControllerRoute`kullanma:
 
 * Alanlara yönlendirme eklemek için en az karmaşık mekanizmadır.
-* Tüm denetleyicileri öznitelik ile `[Area("Area name")]` eşleşir.
+* `[Area("Area name")]` Özniteliği ile tüm denetleyicilerle eşleşir.
 
-Aşağıdaki kod, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> iki adlandırılmış alan yolu oluşturmak için kullanır:
+Aşağıdaki kod, iki <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> adlandırılmış alan yolları oluşturmak için kullanır:
 
 [!code-csharp[](areas/31samples/MVCareas/StartupMapAreaRoute.cs?name=snippet&highlight=21-29)]
 
-Daha fazla bilgi için [Bkz. Alan](xref:mvc/controllers/routing#areas)yönlendirmesi.
+Daha fazla bilgi için bkz. [alan yönlendirme](xref:mvc/controllers/routing#areas).
 
-### <a name="link-generation-with-mvc-areas"></a>MVC alanları ile bağlantı oluşturma
+### <a name="link-generation-with-mvc-areas"></a>MVC alanlarıyla bağlantı oluşturma
 
-[Örnek indirmeden](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples) aşağıdaki kod, belirtilen alana bağlantı oluşturmayı gösterir:
+[Örnek indirmenin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples) aşağıdaki kodu, belirtilen alanla birlikte bağlantı oluşturmayı gösterir:
 
 [!code-cshtml[](areas/31samples/MVCareas/Views/Shared/_testLinksPartial.cshtml?name=snippet)]
 
-Örnek karşıdan yükleme, aşağıdakileri içeren kısmi bir [görünüm](xref:mvc/views/partial) içerir:
+Örnek indirme, aşağıdakileri içeren [kısmi bir görünüm](xref:mvc/views/partial) içerir:
 
 * Önceki bağlantılar.
-* Önceki ne benzer bağlantılar `area` hariç belirtilmemiştir.
+* Önceki `area` bir ile benzer bağlantılar belirtilmedi.
 
-Kısmi görünüm [düzen dosyasında](xref:mvc/views/layout)başvurulyur, böylece uygulamadaki her sayfa oluşturulan bağlantıları görüntüler. Alanı belirtmeden oluşturulan bağlantılar yalnızca aynı alandaki ve denetleyicideki bir sayfadan başvurulduğunda geçerlidir.
+Kısmi görünüme, [Düzen dosyasında](xref:mvc/views/layout)başvurulur, bu nedenle uygulamadaki her sayfa oluşturulan bağlantıları görüntüler. Alanı belirtmeden oluşturulan bağlantılar yalnızca aynı alan ve denetleyicideki bir sayfadan başvuruluyorsa geçerlidir.
 
-Alan veya denetleyici belirtilmediğinde, yönlendirme [ortam](xref:mvc/controllers/routing#ambient) değerlerine bağlıdır. Geçerli isteğin geçerli rota değerleri bağlantı oluşturma için ortam değerleri olarak kabul edilir. Örnek uygulama için birçok durumda, ortam değerlerini kullanarak alanı belirtmeyen biçimlendirme ile yanlış bağlantılar oluşturur.
+Alan veya denetleyici belirtilmediğinde, yönlendirme [ortam](xref:mvc/controllers/routing#ambient) değerlerine göre değişir. Geçerli isteğin geçerli yol değerleri, bağlantı oluşturma için çevresel değerler olarak kabul edilir. Örnek uygulama için birçok durumda, ortam değerlerini kullanmak, alanı belirtmeyen biçimlendirme ile yanlış bağlantılar oluşturur.
 
-Daha fazla bilgi [için, eylemleri denetlemek için Yönlendirme'ye](xref:mvc/controllers/routing)bakın.
+Daha fazla bilgi için bkz. [Denetleyici eylemlerine yönlendirme](xref:mvc/controllers/routing).
 
-### <a name="shared-layout-for-areas-using-the-_viewstartcshtml-file"></a>_ViewStart.cshtml dosyasını kullanan Alanlar için paylaşılan düzen
+### <a name="shared-layout-for-areas-using-the-_viewstartcshtml-file"></a>_ViewStart. cshtml dosyasını kullanan alanların paylaşılan düzeni
 
-Uygulamanın tamamı için ortak bir düzeni paylaşmak için *_ViewStart.cshtml'i* [uygulama kökü klasöründe](#arf)tutun. Daha fazla bilgi için bkz. <xref:mvc/views/layout>.
+Uygulamanın tamamı için ortak bir düzen paylaşmak üzere, [uygulama kök klasöründe](#arf) *_ViewStart. cshtml* 'yi saklayın. Daha fazla bilgi için bkz. <xref:mvc/views/layout>.
 
 <a name="arf"></a>
 
 ### <a name="application-root-folder"></a>Uygulama kök klasörü
 
-Uygulama kökü klasörü, ASP.NET Core şablonları ile oluşturulan web uygulamasında *Startup.cs* içeren klasördür.
+Uygulama kök klasörü, ASP.NET Core şablonları ile oluşturulan Web uygulamasındaki *Startup.cs* içeren klasördür.
 
-### <a name="_viewimportscshtml"></a>_ViewImports.cshtml
+### <a name="_viewimportscshtml"></a>_ViewImports. cshtml
 
- */Views/_ViewImports.cshtml*, MVC için ve */Pages/_ViewImports.cshtml* for Razor Pages, alanlardaki görünümlere aktarılmaz. Tüm görünümlere görünüm içeriaklarını sağlamak için aşağıdaki yaklaşımlardan birini kullanın:
+ */Views/_ViewImports. cshtml*, MVC için */pages/_ViewImports. cshtml* for Razor Pages, alanlardaki görünümlere aktarılmaz. Tüm görünümlere görünüm içeri aktarmaları sağlamak için aşağıdaki yaklaşımlardan birini kullanın:
 
-* [Uygulama kök klasörüne](#arf) *_ViewImports.cshtml* ekleyin. Uygulama kökü klasöründeki *bir _ViewImports.cshtml* uygulamadaki tüm görünümler için geçerli olacaktır.
-* *_ViewImports.cshtml* dosyasını alanların altındaki uygun görünüm klasörüne kopyalayın.
+* [Uygulama kök klasörüne](#arf) *_ViewImports. cshtml* ekleyin. Uygulama kök klasöründeki bir *_ViewImports. cshtml* uygulamadaki tüm görünümlere uygulanır.
+* *_ViewImports. cshtml* dosyasını, alanlarda uygun görünüm klasörüne kopyalayın.
 
-*_ViewImports.cshtml* dosyası genellikle [Tag Helpers](xref:mvc/views/tag-helpers/intro) `@using`içeri `@inject` aktarımları ve deyimleri içerir. Daha fazla bilgi için [bkz.](xref:mvc/views/layout#importing-shared-directives)
+*_ViewImports. cshtml* dosyası genellikle [Etiket Yardımcıları](xref:mvc/views/tag-helpers/intro) içeri aktarmaları, `@using`, ve `@inject` deyimlerini içerir. Daha fazla bilgi için bkz. [paylaşılan yönergeleri Içeri aktarma](xref:mvc/views/layout#importing-shared-directives).
 
 <a name="rename"></a>
 
 ### <a name="change-default-area-folder-where-views-are-stored"></a>Görünümlerin depolandığı varsayılan alan klasörünü değiştirme
 
-Aşağıdaki kod varsayılan alan klasörünü aşağıdakilerden `"Areas"` şu şekilde `"MyAreas"`değiştirir:
+Aşağıdaki kod varsayılan alan klasörünü ' den `"Areas"` ' a değiştirir `"MyAreas"`:
 
 [!code-csharp[](areas/31samples/MVCareas/Startup2.cs?name=snippet)]
 
 <a name="arp"></a>
 
-## <a name="areas-with-razor-pages"></a>Jilet Sayfalı Alanlar
+## <a name="areas-with-razor-pages"></a>Sayfaları olan Razor bölgeler
 
-Razor Pages içeren `Areas/<area name>/Pages` alanlar, uygulamanın kökünde bir klasör gerektirir. Örnek [uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples)ile aşağıdaki klasör yapısı kullanılır:
+Sayfaları olan Razor alanlarda, uygulamanın `Areas/<area name>/Pages` kökünde bir klasör gerekir. Aşağıdaki klasör yapısı [örnek uygulamayla](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples)birlikte kullanılır:
 
 * Proje adı
   * Alanlar
@@ -171,89 +177,89 @@ Razor Pages içeren `Areas/<area name>/Pages` alanlar, uygulamanın kökünde bi
           * Hakkında
           * Dizin oluşturma
 
-### <a name="link-generation-with-razor-pages-and-areas"></a>Razor Pages ve alanları ile bağlantı oluşturma
+### <a name="link-generation-with-razor-pages-and-areas"></a>Razor Sayfalar ve alanlarla bağlantı oluşturma
 
-[Örnek indirmeden](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas) aşağıdaki kod, belirtilen alana sahip bağlantı `asp-area="Products"`oluşturmayı gösterir (örneğin,):
+[Örnek indirmenin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas) aşağıdaki kodu, belirtilen alanla birlikte bağlantı oluşturmayı gösterir (örneğin, `asp-area="Products"`):
 
 [!code-cshtml[](areas/31samples/RPareas/Pages/Shared/_testLinksPartial.cshtml?name=snippet)]
 
-Örnek karşıdan yükleme, alanı belirtmeden önceki bağlantıları ve aynı bağlantıları içeren kısmi bir [görünüm](xref:mvc/views/partial) içerir. Kısmi görünüm [düzen dosyasında](xref:mvc/views/layout)başvurulyur, böylece uygulamadaki her sayfa oluşturulan bağlantıları görüntüler. Alanı belirtmeden oluşturulan bağlantılar yalnızca aynı alandaki bir sayfadan başvurulduğunda geçerlidir.
+Örnek indirme, önceki bağlantıları içeren [kısmi bir görünüm](xref:mvc/views/partial) ve alanı belirtmeksizin aynı bağlantıları içerir. Kısmi görünüme, [Düzen dosyasında](xref:mvc/views/layout)başvurulur, bu nedenle uygulamadaki her sayfa oluşturulan bağlantıları görüntüler. Alanı belirtmeden oluşturulan bağlantılar yalnızca aynı alandaki bir sayfadan başvuruluyorsa geçerlidir.
 
-Alan belirtilmediğinde, yönlendirme *ortam* değerlerine bağlıdır. Geçerli isteğin geçerli rota değerleri bağlantı oluşturma için ortam değerleri olarak kabul edilir. Örnek uygulama için birçok durumda, ortam değerlerini kullanarak yanlış bağlantılar oluşturur. Örneğin, aşağıdaki koddan oluşturulan bağlantıları göz önünde bulundurun:
+Alan belirtilmediğinde, yönlendirme *ortam* değerlerine göre değişir. Geçerli isteğin geçerli yol değerleri, bağlantı oluşturma için çevresel değerler olarak kabul edilir. Örnek uygulama için birçok durumda, ortam değerlerini kullanmak yanlış bağlantılar oluşturur. Örneğin, aşağıdaki koddan oluşturulan bağlantıları göz önünde bulundurun:
 
 [!code-cshtml[](areas/31samples/RPareas/Pages/Shared/_testLinksPartial.cshtml?name=snippet2)]
 
 Önceki kod için:
 
-* Oluşturulan bağlantı `<a asp-page="/Manage/About">` yalnızca son istek alandaki `Services` bir sayfa için olduğunda doğrudur. Örneğin, `/Services/Manage/`, `/Services/Manage/Index`, `/Services/Manage/About`veya .
-* Oluşturulan bağlantı `<a asp-page="/About">` yalnızca son istek bir sayfa için `/Home`olduğunda doğrudur.
-* Kod [örnek indir](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples/RPareas).
+* Öğesinden `<a asp-page="/Manage/About">` oluşturulan bağlantı, yalnızca son istek alanındaki bir sayfa `Services` için olduğunda doğrudur. Örneğin `/Services/Manage/` `/Services/Manage/Index`,, veya `/Services/Manage/About`.
+* Öğesinden `<a asp-page="/About">` oluşturulan bağlantı yalnızca son istek içindeki `/Home`bir sayfa için olduğunda doğrudur.
+* Kod, [örnek indirden](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples/RPareas).
 
-### <a name="import-namespace-and-tag-helpers-with-_viewimports-file"></a>_ViewImports dosyayla ad alanı ve Tag Yardımcıları alma
+### <a name="import-namespace-and-tag-helpers-with-_viewimports-file"></a>Ad alanı ve etiket yardımcıları _ViewImports dosya ile içeri aktarma
 
-Klasördeki her Razor Page'e ad alanı ve Tag Helpers'ı almak için her alan *Sayfaları* klasörüne *bir _ViewImports.cshtml* dosyası eklenebilir.
+Bir *_ViewImports. cshtml* dosyası her bir alan *sayfaları* klasörüne eklenerek, ad alanı ve etiket yardımcıları, klasördeki her Razor bir sayfaya alınır.
 
-Örnek kodun *_ViewImports.cshtml* dosyası içermeyen *Hizmetler* alanını göz önünde bulundurun. Aşağıdaki biçimlendirme */Hizmetler/Yönet/Hakkında* Jilet Sayfasını gösterir:
+Örnek kodun bir *_ViewImports. cshtml* dosyası içermeyen *Hizmetler* alanını göz önünde bulundurun. Aşağıdaki biçimlendirme */Services/Manage/about* Razor sayfasını göstermektedir:
 
 [!code-cshtml[](areas/31samples/RPareas/Areas/Services/Pages/Manage/About.cshtml)]
 
 Önceki biçimlendirmede:
 
-* Modeli belirtmek için tam nitelikli alan adı`@model RPareas.Areas.Services.Pages.Manage.AboutModel`kullanılmalıdır ( ).
-* [Tag Yardımcıları](xref:mvc/views/tag-helpers/intro) tarafından etkinleştirilir`@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`
+* Modeli belirtmek için tam etki alanı adının kullanılması gerekir (`@model RPareas.Areas.Services.Pages.Manage.AboutModel`).
+* [Etiket Yardımcıları](xref:mvc/views/tag-helpers/intro) tarafından etkinleştirilir`@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`
 
-Örnek indirmede, Ürünler alanı aşağıdaki *_ViewImports.cshtml* dosyasını içerir:
+Örnek indirme sırasında, ürünler alanı aşağıdaki *_ViewImports. cshtml* dosyasını içerir:
 
 [!code-cshtml[](areas/31samples/RPareas/Areas/Products/Pages/_ViewImports.cshtml)]
 
-Aşağıdaki biçimlendirme */Ürünler/Jilet Hakkında* Sayfayı gösterir:
+Aşağıdaki biçimlendirme */Products/about* Razor sayfasını göstermektedir:
 
 [!code-cshtml[](areas/31samples/RPareas/Areas/Products/Pages/About.cshtml)]
 
-Önceki dosyada, ad alanı `@addTagHelper` ve yönerge *Alanlar/Ürünler/Sayfalar/_ViewImports.cshtml* dosyası tarafından dosyaya aktarılır.
+Önceki dosyada, ad alanı ve `@addTagHelper` yönerge, *alan/ürün/sayfa/_ViewImports. cshtml* dosyası tarafından dosyaya aktarılır.
 
-Daha fazla bilgi için [Bkz. Etiket Yardımcısı kapsamını Yönetme](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope) ve Paylaşılan Yönergeleri [Alma.](xref:mvc/views/layout#importing-shared-directives)
+Daha fazla bilgi için bkz. [etiket Yardımcısı kapsamını yönetme](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope) ve [paylaşılan yönergeleri içeri aktarma](xref:mvc/views/layout#importing-shared-directives).
 
-### <a name="shared-layout-for-razor-pages-areas"></a>Jilet Sayfaları Alanları için paylaşılan düzen
+### <a name="shared-layout-for-razor-pages-areas"></a>Sayfalar için Razor paylaşılan düzen alanı
 
-Uygulamanın tamamı için ortak bir düzen paylaşmak için *_ViewStart.cshtml'i* uygulama kökü klasörüne taşıyın.
+Uygulamanın tamamında ortak bir düzen paylaşmak için *_ViewStart. cshtml* 'yi uygulama kök klasörüne taşıyın.
 
-### <a name="publishing-areas"></a>Yayın Alanları
+### <a name="publishing-areas"></a>Yayımlama alanı
 
-*Wwwroot* dizinindeki tüm *.cshtml dosyaları ve dosyaları `<Project Sdk="Microsoft.NET.Sdk.Web">` *.csproj dosyasına dahil edildiğinde çıktıya yayınlanır.
+*Wwwroot* dizinindeki tüm *. cshtml dosyaları ve dosyaları, *. csproj dosyasına dahil edildiğinde `<Project Sdk="Microsoft.NET.Sdk.Web">` çıkışa yayımlanır.
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-Alanlar, ilgili işlevleri ayrı bir ad alanı (yönlendirme için) ve klasör yapısı (görünümler için) olarak grup halinde düzenlemek için kullanılan ASP.NET bir özelliktir. `area`Alanları kullanmak, başka bir rota parametresi, `controller` `action` yani Jilet Sayfası `page`ekleyerek yönlendirme amacıyla bir hiyerarşi oluşturur.
+Bölgeler, ilgili işlevselliği ayrı bir ad alanı (yönlendirme için) ve klasör yapısı (görünümler için) olarak bir grup içinde düzenlemek için kullanılan bir ASP.NET özelliğidir. Alanların kullanılması, başka bir rota `area`parametresi,, `controller` ve `action` veya bir Razor sayfa `page`ekleyerek yönlendirmenin amacı için bir hiyerarşi oluşturur.
 
-Alanlar, ASP.NET Core Web uygulamasını her biri kendi Jilet Sayfaları, denetleyicileri, görünümleri ve modelleri olan daha küçük işlevsel gruplara bölmenin bir yolunu sağlar. Alan, etkin bir uygulama nın içindeki bir yapıdır. ASP.NET Core web projesinde, Sayfalar, Model, Denetleyici ve Görünüm gibi mantıksal bileşenler farklı klasörlerde tutulur. ASP.NET Core çalışma zamanı, bu bileşenler arasındaki ilişkiyi oluşturmak için adlandırma kurallarını kullanır. Büyük bir uygulama için, uygulamayı ayrı üst düzey işlevsellik alanlarına bölmek avantajlı olabilir. Örneğin, ödeme, faturalandırma ve arama gibi birden çok iş birimine sahip bir e-ticaret uygulaması. Bu birimlerin her birinin görünümleri, denetleyicileri, Jilet Sayfaları ve modelleri içeren kendi alanı vardır.
+Alanları, her biri kendi Razor sayfa, denetleyiciler, görünümler ve modeller kümesine sahip bir ASP.NET Core Web uygulamasını daha küçük işlevsel gruplar halinde bölümlemek için bir yol sağlar. Bir alan, bir uygulamanın içindeki yapısı etkin bir şekilde. Bir ASP.NET Core Web projesinde, sayfalar, model, denetleyici ve görünüm gibi mantıksal bileşenler farklı klasörlerde tutulur. ASP.NET Core çalışma zamanı, bu bileşenler arasındaki ilişkiyi oluşturmak için adlandırma kurallarını kullanır. Büyük bir uygulama için, uygulamayı işlevlerin ayrı üst düzey alanlarında bölümlemek avantajlı olabilir. Örneğin, kullanıma alma, faturalandırma ve arama gibi birden çok iş birimi içeren bir e-ticaret uygulaması. Bu birimlerin her birinin görünümleri, denetleyicileri, Razor sayfaları ve modelleri içermesi için kendi alanı vardır.
 
-Şu anda projedeki Alanları kullanmayı düşünün:
+Şu durumlarda bir projedeki alanı kullanmayı göz önünde bulundurun:
 
 * Uygulama, mantıksal olarak ayrılabilen birden çok üst düzey işlevsel bileşenden oluşur.
-* Uygulamayı, her işlevsel alanın bağımsız olarak çalışabilmesi için bölmek istiyorsunuz.
+* Her işlevsel alanın bağımsız olarak çalışabilmesi için uygulamayı bölümlemek istiyorsunuz.
 
-[Örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples) ([nasıl indirilir).](xref:index#how-to-download-a-sample) İndirme örneği, test alanları için temel bir uygulama sağlar.
+[Örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples) ([nasıl indirilir](xref:index#how-to-download-a-sample)). İndirme örneği, test bölgeleri için temel bir uygulama sağlar.
 
-Jilet Sayfaları kullanıyorsanız, bu belgede [Jilet Li Alanlar'a](#areas-with-razor-pages) bakın.
+Sayfalar kullanıyorsanız Razor , bkz. bu belgede [sayfaları bulunan Razor bölgeler](#areas-with-razor-pages) .
 
-## <a name="areas-for-controllers-with-views"></a>Görünüme sahip denetleyiciler için alanlar
+## <a name="areas-for-controllers-with-views"></a>Görünümlere sahip denetleyiciler için bölgeler
 
-Alanları, denetleyicileri ve görünümleri kullanan tipik bir ASP.NET Core web uygulaması aşağıdakileri içerir:
+Alanları, denetleyicileri ve görünümleri kullanan tipik bir ASP.NET Core Web uygulaması şunları içerir:
 
-* Alan [klasör yapısı.](#area-folder-structure)
-* Denetleyiciyi [`[Area]`](#attribute) alanla ilişkilendirecek öznitelikteki denetleyiciler:
+* Bir [alan klasörü yapısı](#area-folder-structure).
+* Denetleyiciyi içeren [`[Area]`](#attribute) ve denetleyiciyi alanla ilişkilendiren denetleyiciler:
 
   [!code-csharp[](areas/samples/MVCareas/Areas/Products/Controllers/ManageController.cs?name=snippet2)]
 
-* [Başlangıç için eklenen alan rotası:](#add-area-route)
+* [Başlangıç alanına eklenen alan yolu](#add-area-route):
 
   [!code-csharp[](areas/samples/MVCareas/Startup.cs?name=snippet2&highlight=3-6)]
 
-### <a name="area-folder-structure"></a>Alan klasör yapısı
+### <a name="area-folder-structure"></a>Alan klasörü yapısı
 
-İki mantıksal grubu olan bir uygulamayı düşünün, *Ürünler* ve *Hizmetler.* Alanları kullanarak, klasör yapısı aşağıdakilere benzer olacaktır:
+İki mantıksal grup, *ürün* ve *hizmet*içeren bir uygulamayı düşünün. Alan kullanarak, klasör yapısı aşağıdakine benzer olacaktır:
 
 * Proje adı
   * Alanlar
@@ -262,19 +268,19 @@ Alanları, denetleyicileri ve görünümleri kullanan tipik bir ASP.NET Core web
         * HomeController.cs
         * ManageController.cs
       * Görünümler
-        * Ev
+        * Giriş
           * Index.cshtml
         * Yönetme
           * Index.cshtml
-          * Hakkında.cshtml
+          * . Cshtml hakkında
     * Hizmetler
       * Denetleyiciler
         * HomeController.cs
       * Görünümler
-        * Ev
+        * Giriş
           * Index.cshtml
 
-Alanlar kullanılırken önceki düzen tipik olsa da, bu klasör yapısını kullanmak için yalnızca görünüm dosyaları gereklidir. Eşleşen bir alan görünümü dosyasını aşağıdaki sırada bulma aramalarını görüntüle:
+Yukarıdaki düzen, alan kullanılırken tipik olsa da, bu klasör yapısını kullanmak için yalnızca görünüm dosyaları gereklidir. Eşleşen bir alan görünümü dosyası için bulma aramalarını aşağıdaki sırayla görüntüleyin:
 
 ```text
 /Areas/<Area-Name>/Views/<Controller-Name>/<Action-Name>.cshtml
@@ -285,65 +291,65 @@ Alanlar kullanılırken önceki düzen tipik olsa da, bu klasör yapısını kul
 
 <a name="attribute"></a>
 
-### <a name="associate-the-controller-with-an-area"></a>Denetleyiciyi bir Alanla ilişkilendirin
+### <a name="associate-the-controller-with-an-area"></a>Denetleyiciyi bir alanla ilişkilendir
 
-Alan denetleyicileri [ &lbrack;Alan&rbrack; ](xref:Microsoft.AspNetCore.Mvc.AreaAttribute) özniteliği ile belirlenir:
+Alan denetleyicileri, [ &lbrack;alan&rbrack; ](xref:Microsoft.AspNetCore.Mvc.AreaAttribute) özniteliğiyle belirlenir:
 
 [!code-csharp[](areas/samples/MVCareas/Areas/Products/Controllers/ManageController.cs?highlight=5&name=snippet)]
 
-### <a name="add-area-route"></a>Alan rota ekle
+### <a name="add-area-route"></a>Alan yolu Ekle
 
-Alan yolları genellikle öznitelik yönlendirmeyerine geleneksel yönlendirme kullanır. Konvansiyonel yönlendirme isteðe baðlð±r. Genel olarak, alanları olan rotalar, alanı olmayan rotalardan daha spesifik olduğundan, rota tablosuna daha erken yerleştirilmelidir.
+Alan rotaları genellikle öznitelik yönlendirme yerine geleneksel yönlendirmeyi kullanır. Geleneksel yönlendirme sıra bağımlıdır. Genel olarak, alanlar içeren rotalar, alan olmayan rotalardan daha belirgin olduklarından daha önce rota tablosuna yerleştirilmelidir.
 
-`{area:...}`url alanı tüm alanlarda tek düze yse rota şablonlarında belirteç olarak kullanılabilir:
+`{area:...}`, URL alanı tüm alanlarda Tekdüzen ise yol şablonlarında bir belirteç olarak kullanılabilir:
 
 [!code-csharp[](areas/samples/MVCareas/Startup.cs?name=snippet&highlight=18-21)]
 
-Önceki kodda, `exists` rotanın bir alanla eşleşmesi gereken bir kısıtlama uygulanır. Kullanma, `{area:...}` alanlara yönlendirme eklemek için en az karmaşık mekanizmadır.
+Önceki kodda, `exists` yolun bir alanla eşleşmesi gereken bir kısıtlama uygular. Kullanmak `{area:...}` , alanlara yönlendirme eklemek için en az karmaşık mekanizmadır.
 
-Aşağıdaki kod, <xref:Microsoft.AspNetCore.Builder.MvcAreaRouteBuilderExtensions.MapAreaRoute*> iki adlandırılmış alan yolu oluşturmak için kullanır:
+Aşağıdaki kod, iki <xref:Microsoft.AspNetCore.Builder.MvcAreaRouteBuilderExtensions.MapAreaRoute*> adlandırılmış alan yolları oluşturmak için kullanır:
 
 [!code-csharp[](areas/samples/MVCareas/StartupMapAreaRoute.cs?name=snippet&highlight=18-27)]
 
-core `MapAreaRoute` 2.2 ASP.NET kullanırken, [bu GitHub sorununa](https://github.com/dotnet/AspNetCore/issues/7772)bakın.
+ASP.NET Core 2,2 `MapAreaRoute` ile kullanırken, [Bu GitHub sorununa](https://github.com/dotnet/AspNetCore/issues/7772)bakın.
 
-Daha fazla bilgi için [Bkz. Alan](xref:mvc/controllers/routing#areas)yönlendirmesi.
+Daha fazla bilgi için bkz. [alan yönlendirme](xref:mvc/controllers/routing#areas).
 
-### <a name="link-generation-with-mvc-areas"></a>MVC alanları ile bağlantı oluşturma
+### <a name="link-generation-with-mvc-areas"></a>MVC alanlarıyla bağlantı oluşturma
 
-[Örnek indirmeden](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples) aşağıdaki kod, belirtilen alana bağlantı oluşturmayı gösterir:
+[Örnek indirmenin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples) aşağıdaki kodu, belirtilen alanla birlikte bağlantı oluşturmayı gösterir:
 
 [!code-cshtml[](areas/samples/MVCareas/Views/Shared/_testLinksPartial.cshtml?name=snippet)]
 
-Önceki kodla oluşturulan bağlantılar uygulamanın her yerinde geçerlidir.
+Yukarıdaki kodla oluşturulan bağlantılar, uygulamanın herhangi bir yerinde geçerlidir.
 
-Örnek karşıdan yükleme, alanı belirtmeden önceki bağlantıları ve aynı bağlantıları içeren kısmi bir [görünüm](xref:mvc/views/partial) içerir. Kısmi görünüm [düzen dosyasında](xref:mvc/views/layout)başvurulyur, böylece uygulamadaki her sayfa oluşturulan bağlantıları görüntüler. Alanı belirtmeden oluşturulan bağlantılar yalnızca aynı alandaki ve denetleyicideki bir sayfadan başvurulduğunda geçerlidir.
+Örnek indirme, önceki bağlantıları içeren [kısmi bir görünüm](xref:mvc/views/partial) ve alanı belirtmeksizin aynı bağlantıları içerir. Kısmi görünüme, [Düzen dosyasında](xref:mvc/views/layout)başvurulur, bu nedenle uygulamadaki her sayfa oluşturulan bağlantıları görüntüler. Alanı belirtmeden oluşturulan bağlantılar yalnızca aynı alan ve denetleyicideki bir sayfadan başvuruluyorsa geçerlidir.
 
-Alan veya denetleyici belirtilmediğinde, yönlendirme *ortam* değerlerine bağlıdır. Geçerli isteğin geçerli rota değerleri bağlantı oluşturma için ortam değerleri olarak kabul edilir. Örnek uygulama için birçok durumda, ortam değerlerini kullanarak yanlış bağlantılar oluşturur.
+Alan veya denetleyici belirtilmediğinde, yönlendirme *ortam* değerlerine göre değişir. Geçerli isteğin geçerli yol değerleri, bağlantı oluşturma için çevresel değerler olarak kabul edilir. Örnek uygulama için birçok durumda, ortam değerlerini kullanmak yanlış bağlantılar oluşturur.
 
-Daha fazla bilgi [için, eylemleri denetlemek için Yönlendirme'ye](xref:mvc/controllers/routing)bakın.
+Daha fazla bilgi için bkz. [Denetleyici eylemlerine yönlendirme](xref:mvc/controllers/routing).
 
-### <a name="shared-layout-for-areas-using-the-_viewstartcshtml-file"></a>_ViewStart.cshtml dosyasını kullanan Alanlar için paylaşılan düzen
+### <a name="shared-layout-for-areas-using-the-_viewstartcshtml-file"></a>_ViewStart. cshtml dosyasını kullanan alanların paylaşılan düzeni
 
-Uygulamanın tamamı için ortak bir düzen paylaşmak için *_ViewStart.cshtml'i* uygulama kökü klasörüne taşıyın.
+Uygulamanın tamamında ortak bir düzen paylaşmak için *_ViewStart. cshtml* 'yi uygulama kök klasörüne taşıyın.
 
-### <a name="_viewimportscshtml"></a>_ViewImports.cshtml
+### <a name="_viewimportscshtml"></a>_ViewImports. cshtml
 
-Standart konumunda *, /Views/_ViewImports.cshtml* alanlar için geçerli değildir. Yaygın [Etiket Yardımcıları](xref:mvc/views/tag-helpers/intro)kullanmak `@using`için `@inject` , veya bölgenizde, uygun bir *_ViewImports.cshtml* dosyası [bölge görünümleriniz için geçerli olduğundan](xref:mvc/views/layout#importing-shared-directives)emin olun. Tüm görünümlerinizde aynı davranışı istiyorsanız, */Views/_ViewImports.cshtml'i* uygulama köküne taşıyın.
+Standart konumunda */views/_ViewImports. cshtml* , alanlara uygulanmaz. Ortak [Etiket Yardımcıları](xref:mvc/views/tag-helpers/intro), `@using`veya `@inject` bölgenizde kullanmak için, [alan Görünümleriniz için](xref:mvc/views/layout#importing-shared-directives)uygun bir *_ViewImports. cshtml* dosyasının geçerli olduğundan emin olun. Tüm görünümlerinizin aynı davranışını istiyorsanız, */views/_ViewImports. cshtml* öğesini uygulama köküne taşıyın.
 
 <a name="rename"></a>
 
 ### <a name="change-default-area-folder-where-views-are-stored"></a>Görünümlerin depolandığı varsayılan alan klasörünü değiştirme
 
-Aşağıdaki kod varsayılan alan klasörünü aşağıdakilerden `"Areas"` şu şekilde `"MyAreas"`değiştirir:
+Aşağıdaki kod varsayılan alan klasörünü ' den `"Areas"` ' a değiştirir `"MyAreas"`:
 
 [!code-csharp[](areas/samples/MVCareas/Startup2.cs?name=snippet)]
 
 <a name="arp"></a>
 
-## <a name="areas-with-razor-pages"></a>Jilet Sayfalı Alanlar
+## <a name="areas-with-razor-pages"></a>Sayfaları olan Razor bölgeler
 
-Razor Pages içeren `Areas/<area name>/Pages` alanlar, uygulamanın kökünde bir klasör gerektirir. Örnek [uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples)ile aşağıdaki klasör yapısı kullanılır:
+Sayfaları olan Razor alanlarda, uygulamanın `Areas/<area name>/Pages` kökünde bir klasör gerekir. Aşağıdaki klasör yapısı [örnek uygulamayla](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples)birlikte kullanılır:
 
 * Proje adı
   * Alanlar
@@ -358,56 +364,56 @@ Razor Pages içeren `Areas/<area name>/Pages` alanlar, uygulamanın kökünde bi
           * Hakkında
           * Dizin oluşturma
 
-### <a name="link-generation-with-razor-pages-and-areas"></a>Razor Pages ve alanları ile bağlantı oluşturma
+### <a name="link-generation-with-razor-pages-and-areas"></a>Razor Sayfalar ve alanlarla bağlantı oluşturma
 
-[Örnek indirmeden](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas) aşağıdaki kod, belirtilen alana sahip bağlantı `asp-area="Products"`oluşturmayı gösterir (örneğin,):
+[Örnek indirmenin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas) aşağıdaki kodu, belirtilen alanla birlikte bağlantı oluşturmayı gösterir (örneğin, `asp-area="Products"`):
 
 [!code-cshtml[](areas/samples/RPareas/Pages/Shared/_testLinksPartial.cshtml?name=snippet)]
 
-Önceki kodla oluşturulan bağlantılar uygulamanın her yerinde geçerlidir.
+Yukarıdaki kodla oluşturulan bağlantılar, uygulamanın herhangi bir yerinde geçerlidir.
 
-Örnek karşıdan yükleme, alanı belirtmeden önceki bağlantıları ve aynı bağlantıları içeren kısmi bir [görünüm](xref:mvc/views/partial) içerir. Kısmi görünüm [düzen dosyasında](xref:mvc/views/layout)başvurulyur, böylece uygulamadaki her sayfa oluşturulan bağlantıları görüntüler. Alanı belirtmeden oluşturulan bağlantılar yalnızca aynı alandaki bir sayfadan başvurulduğunda geçerlidir.
+Örnek indirme, önceki bağlantıları içeren [kısmi bir görünüm](xref:mvc/views/partial) ve alanı belirtmeksizin aynı bağlantıları içerir. Kısmi görünüme, [Düzen dosyasında](xref:mvc/views/layout)başvurulur, bu nedenle uygulamadaki her sayfa oluşturulan bağlantıları görüntüler. Alanı belirtmeden oluşturulan bağlantılar yalnızca aynı alandaki bir sayfadan başvuruluyorsa geçerlidir.
 
-Alan belirtilmediğinde, yönlendirme *ortam* değerlerine bağlıdır. Geçerli isteğin geçerli rota değerleri bağlantı oluşturma için ortam değerleri olarak kabul edilir. Örnek uygulama için birçok durumda, ortam değerlerini kullanarak yanlış bağlantılar oluşturur. Örneğin, aşağıdaki koddan oluşturulan bağlantıları göz önünde bulundurun:
+Alan belirtilmediğinde, yönlendirme *ortam* değerlerine göre değişir. Geçerli isteğin geçerli yol değerleri, bağlantı oluşturma için çevresel değerler olarak kabul edilir. Örnek uygulama için birçok durumda, ortam değerlerini kullanmak yanlış bağlantılar oluşturur. Örneğin, aşağıdaki koddan oluşturulan bağlantıları göz önünde bulundurun:
 
 [!code-cshtml[](areas/samples/RPareas/Pages/Shared/_testLinksPartial.cshtml?name=snippet2)]
 
 Önceki kod için:
 
-* Oluşturulan bağlantı `<a asp-page="/Manage/About">` yalnızca son istek alandaki `Services` bir sayfa için olduğunda doğrudur. Örneğin, `/Services/Manage/`, `/Services/Manage/Index`, `/Services/Manage/About`veya .
-* Oluşturulan bağlantı `<a asp-page="/About">` yalnızca son istek bir sayfa için `/Home`olduğunda doğrudur.
-* Kod [örnek indir](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas).
+* Öğesinden `<a asp-page="/Manage/About">` oluşturulan bağlantı, yalnızca son istek alanındaki bir sayfa `Services` için olduğunda doğrudur. Örneğin `/Services/Manage/` `/Services/Manage/Index`,, veya `/Services/Manage/About`.
+* Öğesinden `<a asp-page="/About">` oluşturulan bağlantı yalnızca son istek içindeki `/Home`bir sayfa için olduğunda doğrudur.
+* Kod, [örnek indirden](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas).
 
-### <a name="import-namespace-and-tag-helpers-with-_viewimports-file"></a>_ViewImports dosyayla ad alanı ve Tag Yardımcıları alma
+### <a name="import-namespace-and-tag-helpers-with-_viewimports-file"></a>Ad alanı ve etiket yardımcıları _ViewImports dosya ile içeri aktarma
 
-Klasördeki her Razor Page'e ad alanı ve Tag Helpers'ı almak için her alan *Sayfaları* klasörüne *bir _ViewImports.cshtml* dosyası eklenebilir.
+Bir *_ViewImports. cshtml* dosyası her bir alan *sayfaları* klasörüne eklenerek, ad alanı ve etiket yardımcıları, klasördeki her Razor bir sayfaya alınır.
 
-Örnek kodun *_ViewImports.cshtml* dosyası içermeyen *Hizmetler* alanını göz önünde bulundurun. Aşağıdaki biçimlendirme */Hizmetler/Yönet/Hakkında* Jilet Sayfasını gösterir:
+Örnek kodun bir *_ViewImports. cshtml* dosyası içermeyen *Hizmetler* alanını göz önünde bulundurun. Aşağıdaki biçimlendirme */Services/Manage/about* Razor sayfasını göstermektedir:
 
 [!code-cshtml[](areas/samples/RPareas/Areas/Services/Pages/Manage/About.cshtml)]
 
 Önceki biçimlendirmede:
 
-* Modeli belirtmek için tam nitelikli alan adı`@model RPareas.Areas.Services.Pages.Manage.AboutModel`kullanılmalıdır ( ).
-* [Tag Yardımcıları](xref:mvc/views/tag-helpers/intro) tarafından etkinleştirilir`@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`
+* Modeli belirtmek için tam etki alanı adının kullanılması gerekir (`@model RPareas.Areas.Services.Pages.Manage.AboutModel`).
+* [Etiket Yardımcıları](xref:mvc/views/tag-helpers/intro) tarafından etkinleştirilir`@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`
 
-Örnek indirmede, Ürünler alanı aşağıdaki *_ViewImports.cshtml* dosyasını içerir:
+Örnek indirme sırasında, ürünler alanı aşağıdaki *_ViewImports. cshtml* dosyasını içerir:
 
 [!code-cshtml[](areas/samples/RPareas/Areas/Products/Pages/_ViewImports.cshtml)]
 
-Aşağıdaki biçimlendirme */Ürünler/Jilet Hakkında* Sayfayı gösterir:
+Aşağıdaki biçimlendirme */Products/about* Razor sayfasını göstermektedir:
 
 [!code-cshtml[](areas/samples/RPareas/Areas/Products/Pages/About.cshtml)]
 
-Önceki dosyada, ad alanı `@addTagHelper` ve yönerge *Alanlar/Ürünler/Sayfalar/_ViewImports.cshtml* dosyası tarafından dosyaya aktarılır.
+Önceki dosyada, ad alanı ve `@addTagHelper` yönerge, *alan/ürün/sayfa/_ViewImports. cshtml* dosyası tarafından dosyaya aktarılır.
 
-Daha fazla bilgi için [Bkz. Etiket Yardımcısı kapsamını Yönetme](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope) ve Paylaşılan Yönergeleri [Alma.](xref:mvc/views/layout#importing-shared-directives)
+Daha fazla bilgi için bkz. [etiket Yardımcısı kapsamını yönetme](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope) ve [paylaşılan yönergeleri içeri aktarma](xref:mvc/views/layout#importing-shared-directives).
 
-### <a name="shared-layout-for-razor-pages-areas"></a>Jilet Sayfaları Alanları için paylaşılan düzen
+### <a name="shared-layout-for-razor-pages-areas"></a>Sayfalar için Razor paylaşılan düzen alanı
 
-Uygulamanın tamamı için ortak bir düzen paylaşmak için *_ViewStart.cshtml'i* uygulama kökü klasörüne taşıyın.
+Uygulamanın tamamında ortak bir düzen paylaşmak için *_ViewStart. cshtml* 'yi uygulama kök klasörüne taşıyın.
 
-### <a name="publishing-areas"></a>Yayın Alanları
+### <a name="publishing-areas"></a>Yayımlama alanı
 
-*Wwwroot* dizinindeki tüm *.cshtml dosyaları ve dosyaları `<Project Sdk="Microsoft.NET.Sdk.Web">` *.csproj dosyasına dahil edildiğinde çıktıya yayınlanır.
+*Wwwroot* dizinindeki tüm *. cshtml dosyaları ve dosyaları, *. csproj dosyasına dahil edildiğinde `<Project Sdk="Microsoft.NET.Sdk.Web">` çıkışa yayımlanır.
 ::: moniker-end

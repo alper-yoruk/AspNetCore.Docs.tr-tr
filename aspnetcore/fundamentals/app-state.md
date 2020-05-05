@@ -6,14 +6,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/06/2020
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: fundamentals/app-state
-ms.openlocfilehash: 706468d44ddabbd3a695dbb60aaf1be15fe166e2
-ms.sourcegitcommit: f9a5069577e8f7c53f8bcec9e13e117950f4f033
+ms.openlocfilehash: c29b58eb14a7962f53f2c8c48067de2f5872fded
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82558897"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774814"
 ---
 # <a name="session-and-state-management-in-aspnet-core"></a>ASP.NET Core 'de oturum ve durum yönetimi
 
@@ -396,7 +400,7 @@ Oturum durumu *kilitli*değil. İki istek aynı anda bir oturumun içeriğini de
 
 ### <a name="set-and-get-session-values"></a>Oturum değerlerini ayarlama ve edinme
 
-Razor Pages [Pagemodel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel) sınıfından ya da [HttpContext. Session](/dotnet/api/microsoft.aspnetcore.http.httpcontext.session)ile MVC [Denetleyici](/dotnet/api/microsoft.aspnetcore.mvc.controller) sınıfından oturum durumuna erişilir. Bu özellik bir [ISession](/dotnet/api/microsoft.aspnetcore.http.isession) uygulamasıdır.
+Oturum durumuna, Razor bir Pages [pagemodel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel) sınıfından ya da [HttpContext. Session](/dotnet/api/microsoft.aspnetcore.http.httpcontext.session)ile MVC [Denetleyici](/dotnet/api/microsoft.aspnetcore.mvc.controller) sınıfından erişilir. Bu özellik bir [ISession](/dotnet/api/microsoft.aspnetcore.http.isession) uygulamasıdır.
 
 Uygulama `ISession` , tamsayı ve dize değerlerini ayarlamak ve almak için birkaç uzantı yöntemi sağlar. Uzantı yöntemleri, proje tarafından [Microsoft. AspNetCore. http. Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.Http.Extensions/) paketine başvurulduğunda [Microsoft. aspnetcore. http](/dotnet/api/microsoft.aspnetcore.http) ad alanında (uzantı yöntemlerine erişim sağlamak için bir `using Microsoft.AspNetCore.Http;` ifade ekleyin). Her iki paket de [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app)'e dahildir.
 
@@ -408,7 +412,7 @@ Uygulama `ISession` , tamsayı ve dize değerlerini ayarlamak ve almak için bir
 * [Setınt32 (ISession, dize, Int32)](/dotnet/api/microsoft.aspnetcore.http.sessionextensions.setint32)
 * [SetString (ISession, dize, dize)](/dotnet/api/microsoft.aspnetcore.http.sessionextensions.setstring)
 
-Aşağıdaki örnek, bir Razor Pages sayfasındaki `IndexModel.SessionKeyName` anahtarın (`_Name` örnek uygulamada) oturum değerini alır:
+Aşağıdaki örnek, bir `IndexModel.SessionKeyName` `_Name` Razor sayfalar sayfasındaki anahtar (örnek uygulamada) için oturum değerini alır:
 
 ```csharp
 @page
@@ -436,7 +440,7 @@ Aşağıdaki örnek, uzantı yöntemleriyle bir serileştirilebilir nesnenin nas
 
 ## <a name="tempdata"></a>TempData
 
-ASP.NET Core, Razor Pages [TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) veya Controller <xref:Microsoft.AspNetCore.Mvc.Controller.TempData>'ı kullanıma sunar. Bu özellik, verileri başka bir istekte okunana kadar depolar. [Sakla (dize)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) ve [Peek (dize)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*) yöntemleri, isteğin sonunda silme yapılmadan verileri incelemek için kullanılabilir. [Keep ()](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) sözlükte tüm öğeleri bekletme için işaretler. `TempData`, tek bir istek için veri gerektiğinde yeniden yönlendirme için özellikle kullanışlıdır. `TempData`, tanımlama bilgileri `TempData` ya da oturum durumu kullanılarak sağlayıcılar tarafından uygulanır.
+ASP.NET Core, Razor [TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) veya Controller <xref:Microsoft.AspNetCore.Mvc.Controller.TempData>sayfalarını kullanıma sunar. Bu özellik, verileri başka bir istekte okunana kadar depolar. [Sakla (dize)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) ve [Peek (dize)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*) yöntemleri, isteğin sonunda silme yapılmadan verileri incelemek için kullanılabilir. [Keep ()](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) sözlükte tüm öğeleri bekletme için işaretler. `TempData`, tek bir istek için veri gerektiğinde yeniden yönlendirme için özellikle kullanışlıdır. `TempData`, tanımlama bilgileri `TempData` ya da oturum durumu kullanılarak sağlayıcılar tarafından uygulanır.
 
 ## <a name="tempdata-samples"></a>TempData örnekleri
 

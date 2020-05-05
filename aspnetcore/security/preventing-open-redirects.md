@@ -4,13 +4,19 @@ author: ardalis
 description: ASP.NET Core uygulamasında açık yeniden yönlendirme saldırılarının nasıl önleneceği gösterilmektedir
 ms.author: riande
 ms.date: 07/07/2017
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/preventing-open-redirects
-ms.openlocfilehash: 9d8cac8708fe9aeadba5af1287362a20df7f6bfe
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: ad4c9806146567b6ef1f5e78eaeca96cb649c1af
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78660526"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774398"
 ---
 # <a name="prevent-open-redirect-attacks-in-aspnet-core"></a>ASP.NET Core 'da açık yeniden yönlendirme saldırılarını önleme
 
@@ -20,24 +26,24 @@ Uygulamanızın mantığı belirtilen bir URL 'ye yeniden yönlendirdiğinde, ye
 
 ## <a name="what-is-an-open-redirect-attack"></a>Açık yeniden yönlendirme saldırısı nedir?
 
-Web uygulamaları, kimlik doğrulaması gerektiren kaynaklara erişirken kullanıcıları sıklıkla bir oturum açma sayfasına yönlendirir. Yeniden yönlendirme genellikle, kullanıcının başarıyla oturum açtıktan sonra ilk olarak istenen URL 'ye dönebilmesi için bir `returnUrl` QueryString parametresi içerir. Kullanıcı kimlik doğrulamasından geçtikten sonra, ilk olarak istediği URL 'ye yeniden yönlendirilir.
+Web uygulamaları, kimlik doğrulaması gerektiren kaynaklara erişirken kullanıcıları sıklıkla bir oturum açma sayfasına yönlendirir. Yeniden yönlendirme tipik olarak bir `returnUrl` QueryString parametresi içerir, böylece Kullanıcı başarıyla oturum açtıktan sonra kullanıcının istenen URL 'ye dönebilmesini sağlar. Kullanıcı kimlik doğrulamasından geçtikten sonra, ilk olarak istediği URL 'ye yeniden yönlendirilir.
 
 Hedef URL isteğin QueryString öğesinde belirtildiğinden, kötü niyetli bir Kullanıcı QueryString ile oynayabilir. Değiştirilen bir QueryString, sitenin kullanıcıyı harici, kötü amaçlı bir siteye yönlendirmesine izin verebilir. Bu teknik bir açık yeniden yönlendirme (veya yeniden yönlendirme) saldırısı olarak adlandırılır.
 
 ### <a name="an-example-attack"></a>Örnek saldırı
 
-Kötü niyetli bir Kullanıcı, kötü niyetli kullanıcıların bir kullanıcının kimlik bilgilerine veya gizli bilgilere erişmesine izin veren bir saldırı geliştirebilir. Kötü amaçlı Kullanıcı, saldırının başlaması için kullanıcıyı, URL 'ye eklenen bir `returnUrl` QueryString değeri ile sitenizin oturum açma sayfasının bağlantısını tıklamayı ikna eder. Örneğin, `http://contoso.com/Account/LogOn?returnUrl=/Home/About`bir oturum açma sayfası içeren `contoso.com` bir uygulamayı düşünün. Saldırı aşağıdaki adımları izler:
+Kötü niyetli bir Kullanıcı, kötü niyetli kullanıcıların bir kullanıcının kimlik bilgilerine veya gizli bilgilere erişmesine izin veren bir saldırı geliştirebilir. Kötü amaçlı Kullanıcı, saldırının başlaması için kullanıcıyı, URL 'ye bir `returnUrl` QueryString değeri eklenerek sitenizin oturum açma sayfasının bağlantısını tıklamayı ikna eder. Örneğin, ' de bir oturum açma `contoso.com` sayfası içeren bir uygulama düşünün `http://contoso.com/Account/LogOn?returnUrl=/Home/About`. Saldırı aşağıdaki adımları izler:
 
-1. Kullanıcı `http://contoso.com/Account/LogOn?returnUrl=http://contoso1.com/Account/LogOn` için kötü amaçlı bir bağlantıyı tıklatır (ikinci URL "contoso**1**. com", "contoso.com" değil).
+1. Kullanıcı kötü amaçlı bir bağlantıyı tıklatır `http://contoso.com/Account/LogOn?returnUrl=http://contoso1.com/Account/LogOn` (ikinci URL "contoso**1**. com", "contoso.com" değil).
 2. Kullanıcı başarıyla oturum açar.
-3. Kullanıcı (tam olarak gerçek site gibi görünen kötü amaçlı bir site) `http://contoso1.com/Account/LogOn` için yeniden yönlendirilir (site tarafından).
+3. Kullanıcı (site tarafından) öğesine `http://contoso1.com/Account/LogOn` (tam olarak gerçek site gibi görünen kötü amaçlı bir site) yönlendirilir.
 4. Kullanıcı yeniden oturum açar (kötü amaçlı site kimlik bilgileri verir) ve gerçek siteye yeniden yönlendirilir.
 
 Kullanıcı, ilk oturum açma girişiminin başarısız olduğunu ve ikinci denemesinin başarılı olduğunu düşündüğü bir durum olabilir. Kullanıcı kimlik bilgilerinin güvenliğinin aşıldığına ilişkin büyük olasılıkla Kullanıcı farkında değildir.
 
 ![Yeniden yönlendirme saldırı Işlemini aç](preventing-open-redirects/_static/open-redirection-attack-process.png)
 
-Bazı siteler, oturum açma sayfalarının yanı sıra yeniden yönlendirme sayfaları veya uç noktaları sağlar. Uygulamanızı açık yeniden yönlendirme içeren bir sayfa olduğunu düşünün `/Home/Redirect`. Saldırgan, `[yoursite]/Home/Redirect?url=http://phishingsite.com/Home/Login`giden bir e-postada bağlantı oluşturabilir. Tipik bir Kullanıcı URL 'ye bakar ve site adınızla başlayıp başlamadığını görür. Bunun için bağlantıya tıklamaları gerekir. Açık yeniden yönlendirme daha sonra kullanıcıyı sizinkilerle aynı olan kimlik avı sitesine gönderir ve Kullanıcı büyük olasılıkla sitenizin ne olduğuna inandıkları anlamına gelir.
+Bazı siteler, oturum açma sayfalarının yanı sıra yeniden yönlendirme sayfaları veya uç noktaları sağlar. Uygulamanızın açık bir yeniden yönlendirmeye sahip bir sayfası olduğunu düşünün `/Home/Redirect`. Bir saldırgan, bir e-postada bağlantı oluşturabilir, örneğin `[yoursite]/Home/Redirect?url=http://phishingsite.com/Home/Login`. Tipik bir Kullanıcı URL 'ye bakar ve site adınızla başlayıp başlamadığını görür. Bunun için bağlantıya tıklamaları gerekir. Açık yeniden yönlendirme daha sonra kullanıcıyı sizinkilerle aynı olan kimlik avı sitesine gönderir ve Kullanıcı büyük olasılıkla sitenizin ne olduğuna inandıkları anlamına gelir.
 
 ## <a name="protecting-against-open-redirect-attacks"></a>Açık yeniden yönlendirme saldırılarına karşı koruma
 
@@ -45,7 +51,7 @@ Web uygulamaları geliştirirken, Kullanıcı tarafından sağlanmış tüm veri
 
 ### <a name="localredirect"></a>LocalRedirect
 
-Temel `Controller` sınıfındaki `LocalRedirect` yardımcı yöntemini kullanın:
+Temel `Controller` sınıftan `LocalRedirect` yardımcı yöntemini kullanın:
 
 ```csharp
 public IActionResult SomeAction(string redirectUrl)
@@ -54,7 +60,7 @@ public IActionResult SomeAction(string redirectUrl)
 }
 ```
 
-`LocalRedirect`, yerel olmayan bir URL belirtildiğinde bir özel durum oluşturur. Aksi takdirde, tıpkı `Redirect` yöntemi gibi davranır.
+`LocalRedirect`Yerel olmayan bir URL belirtilirse, bir özel durum oluşturur. Aksi takdirde, tıpkı `Redirect` yöntemi gibi davranır.
 
 ### <a name="islocalurl"></a>IsLocalUrl 'Si
 
@@ -76,4 +82,4 @@ private IActionResult RedirectToLocal(string returnUrl)
 }
 ```
 
-`IsLocalUrl` yöntemi, kullanıcıların farkında olmadan kötü amaçlı bir siteye yönlendirilmesini önler. Yerel bir URL 'yi beklediğiniz bir durumda, yerel olmayan bir URL sağlandığında sağlanan URL 'nin ayrıntılarını günlüğe kaydedebilirsiniz. Günlüğe kaydetme yeniden yönlendirme URL 'Leri, yeniden yönlendirme saldırılarını tanılamaya yardımcı olabilir.
+Yöntemi `IsLocalUrl` , kullanıcıların farkında olmadan kötü amaçlı bir siteye yönlendirilmesini önler. Yerel bir URL 'yi beklediğiniz bir durumda, yerel olmayan bir URL sağlandığında sağlanan URL 'nin ayrıntılarını günlüğe kaydedebilirsiniz. Günlüğe kaydetme yeniden yönlendirme URL 'Leri, yeniden yönlendirme saldırılarını tanılamaya yardımcı olabilir.

@@ -5,17 +5,23 @@ description: IIS ve HTTP. sys için ASP.NET Core sertifika kimlik doğrulamasın
 monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
 ms.date: 01/02/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 280daa86510d4445c791b6952653122961f13aeb
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 2cee719014d57fa01b5e8b14edd703c192cfbe18
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78665328"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776649"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core sertifika kimlik doğrulamasını yapılandırma
 
-`Microsoft.AspNetCore.Authentication.Certificate`, ASP.NET Core için [sertifika kimlik doğrulamasına](https://tools.ietf.org/html/rfc5246#section-7.4.4) benzer bir uygulama içerir. Sertifika kimlik doğrulaması TLS düzeyinde gerçekleşir ve bu süre ASP.NET Core. Daha doğru, bu, sertifikayı doğrulayan bir kimlik doğrulama işleyicisidir ve bu sertifikayı bir `ClaimsPrincipal`çözümleyebileceğiniz bir olay verir. 
+`Microsoft.AspNetCore.Authentication.Certificate`ASP.NET Core için [sertifika kimlik doğrulamasına](https://tools.ietf.org/html/rfc5246#section-7.4.4) benzer bir uygulama içerir. Sertifika kimlik doğrulaması TLS düzeyinde gerçekleşir ve bu süre ASP.NET Core. Daha doğru, bu, sertifikayı doğrulayan bir kimlik doğrulama işleyicisidir ve bu sertifikayı bir ' a `ClaimsPrincipal`çözebileceğiniz bir olay verir. 
 
 [Ana bilgisayarınızı](#configure-your-host-to-require-certificates) sertifika kimlik doğrulaması için yapılandırın, BT IIS, Kestrel, Azure Web Apps veya kullandığınız başka herhangi bir şeydir.
 
@@ -32,11 +38,11 @@ Proxy 'lerin ve yük dengeleyicilerin kullanıldığı ortamlarda sertifika kiml
 
 Bir HTTPS sertifikası alın, uygulayın ve [ana bilgisayarınızı](#configure-your-host-to-require-certificates) sertifika gerektirecek şekilde yapılandırın.
 
-Web uygulamanızda `Microsoft.AspNetCore.Authentication.Certificate` paketine bir başvuru ekleyin. Daha sonra `Startup.ConfigureServices` yönteminde, `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(...);`, isteklerle gönderilen istemci sertifikası üzerinde herhangi bir ek doğrulama yapmak üzere `OnCertificateValidated` için bir temsilci sağlayarak seçeneklerinizi çağırın. Bu bilgileri bir `ClaimsPrincipal` açın ve `context.Principal` özelliğinde ayarlayın.
+Web uygulamanızda `Microsoft.AspNetCore.Authentication.Certificate` pakete bir başvuru ekleyin. Daha sonra `Startup.ConfigureServices` yönteminde, isteklerle birlikte `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(...);` gönderilen istemci sertifikasında herhangi bir destek doğrulaması yapmak `OnCertificateValidated` için bir temsilci sağlayan seçeneklerinizde çağrı yapın. Bu bilgileri bir `ClaimsPrincipal` öğesine dönüştürün ve `context.Principal` özelliği üzerinde ayarlayın.
 
-Kimlik doğrulaması başarısız olursa, bu işleyici, bekleneceğiniz gibi bir `401 (Unauthorized)`yerine `403 (Forbidden)` yanıtı döndürür. Bu durum, kimlik doğrulamanın ilk TLS bağlantısı sırasında gerçekleşme nedendir. İşleyiciye ulaştığında, çok geç olur. Anonim bir bağlantıyla bir sertifikayla bir bağlantıyı yükseltmenin bir yolu yoktur.
+Kimlik doğrulaması başarısız olursa, bu işleyici, `403 (Forbidden)` bekleolabileceğiniz gibi `401 (Unauthorized)`bir yanıt döndürür. Bu durum, kimlik doğrulamanın ilk TLS bağlantısı sırasında gerçekleşme nedendir. İşleyiciye ulaştığında, çok geç olur. Anonim bir bağlantıyla bir sertifikayla bir bağlantıyı yükseltmenin bir yolu yoktur.
 
-Ayrıca, `Startup.Configure` yöntemine `app.UseAuthentication();` ekleyin. Aksi takdirde `HttpContext.User`, sertifikadan oluşturulan `ClaimsPrincipal` olarak ayarlanmayacak. Örnek:
+`Startup.Configure` Yöntemine de ekleyin. `app.UseAuthentication();` `HttpContext.User` Aksi takdirde, sertifika, sertifikadan oluşturulacak şekilde `ClaimsPrincipal` ayarlanmayacak. Örneğin:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -59,29 +65,29 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 ## <a name="configure-certificate-validation"></a>Sertifika doğrulamasını yapılandırma
 
-`CertificateAuthenticationOptions` işleyicisinde, bir sertifikada gerçekleştirmeniz gereken en düşük doğrulamalar olan yerleşik doğrulamalar vardır. Bu ayarların her biri varsayılan olarak etkindir.
+İşleyicide, `CertificateAuthenticationOptions` bir sertifikada gerçekleştirmeniz gereken en düşük doğrulamalar olan yerleşik doğrulamalar vardır. Bu ayarların her biri varsayılan olarak etkindir.
 
 ### <a name="allowedcertificatetypes--chained-selfsigned-or-all-chained--selfsigned"></a>AllowedCertificateTypes = zincirleme, SelfSigned veya All (zincirleme | SelfSigned)
 
-Varsayılan değer: `CertificateTypes.Chained`
+Varsayılan değer:`CertificateTypes.Chained`
 
-Bu denetim yalnızca uygun sertifika türüne izin verildiğini doğrular. Uygulama otomatik olarak imzalanan sertifikalar kullanıyorsa, bu seçeneğin `CertificateTypes.All` veya `CertificateTypes.SelfSigned`olarak ayarlanması gerekir.
+Bu denetim yalnızca uygun sertifika türüne izin verildiğini doğrular. Uygulama otomatik olarak imzalanan sertifikalar kullanıyorsa, bu seçeneğin veya `CertificateTypes.All` `CertificateTypes.SelfSigned`olarak ayarlanması gerekir.
 
 ### <a name="validatecertificateuse"></a>ValidateCertificateUse
 
-Varsayılan değer: `true`
+Varsayılan değer:`true`
 
 Bu denetim, istemci tarafından sunulan sertifikanın Istemci kimlik doğrulaması genişletilmiş anahtar kullanımı (EKU) olduğunu veya hiç EKU olmadığını doğrular. Belirtimlerde bir EKU belirtilmemişse, tüm EKU 'lar geçerli kabul edilir.
 
 ### <a name="validatevalidityperiod"></a>ValidateValidityPeriod
 
-Varsayılan değer: `true`
+Varsayılan değer:`true`
 
 Bu denetim, sertifikanın geçerlilik süresi içinde olduğunu doğrular. Her istekte işleyici, geçerli oturumu sırasında sunulmadığı zaman geçerli olmayan bir sertifikanın süresinin dolmamasını sağlar.
 
 ### <a name="revocationflag"></a>Revocationbayrağı
 
-Varsayılan değer: `X509RevocationFlag.ExcludeRoot`
+Varsayılan değer:`X509RevocationFlag.ExcludeRoot`
 
 Zincirdeki hangi sertifikaların iptal için denetleneceğini belirten bayrak.
 
@@ -89,7 +95,7 @@ Zincirdeki hangi sertifikaların iptal için denetleneceğini belirten bayrak.
 
 ### <a name="revocationmode"></a>Revocationmodu
 
-Varsayılan değer: `X509RevocationMode.Online`
+Varsayılan değer:`X509RevocationMode.Online`
 
 İptal denetimlerinin nasıl gerçekleştirileceğini belirten bayrak.
 
@@ -105,10 +111,10 @@ Bu mümkün değildir. Sertifika değişimi 'nin HTTPS konuşması başlangıcı
 
 İşleyicinin iki olayı vardır:
 
-* `OnAuthenticationFailed` &ndash;, kimlik doğrulaması sırasında bir özel durum oluşursa çağrılır ve yanıt vermenize olanak tanır.
-* Sertifika doğrulandıktan sonra `OnCertificateValidated` &ndash; çağrıldı, doğrulama geçildi ve bir varsayılan asıl oluşturulur. Bu olay kendi doğrulamayı gerçekleştirmenize ve sorumluyu artırabilir veya değiştirmenize olanak sağlar. Örnekler için şunları içerir:
+* `OnAuthenticationFailed`&ndash; Kimlik doğrulaması sırasında bir özel durum oluşursa ve işlem yapmanıza izin veriyorsa çağırılır.
+* `OnCertificateValidated`&ndash; Sertifika doğrulandıktan sonra, doğrulama geçildi ve bir varsayılan asıl oluşturulur. Bu olay kendi doğrulamayı gerçekleştirmenize ve sorumluyu artırabilir veya değiştirmenize olanak sağlar. Örnekler için şunları içerir:
   * Sertifikanın hizmetlerinize göre bilinip tanınmadığını belirleme.
-  * Kendi sorumlunuzu oluşturma. `Startup.ConfigureServices`içinde aşağıdaki örneği göz önünde bulundurun:
+  * Kendi sorumlunuzu oluşturma. İçinde `Startup.ConfigureServices`aşağıdaki örneği göz önünde bulundurun:
 
 ```csharp
 services.AddAuthentication(
@@ -142,9 +148,9 @@ services.AddAuthentication(
     });
 ```
 
-Gelen sertifikayı, ek doğrulamadan uymadığını fark ederseniz bir hata nedeniyle `context.Fail("failure reason")` çağırın.
+Gelen sertifikayı, ek doğrulamadan uymadığını fark ederseniz bir hata nedeniyle çağırın `context.Fail("failure reason")` .
 
-Gerçek işlevsellik için muhtemelen bir veritabanına veya diğer Kullanıcı Mağazası türüne bağlanan bağımlılık ekleme bölümünde kayıtlı bir hizmeti çağırmak isteyeceksiniz. Temsilciniz 'e geçirilen bağlamı kullanarak hizmetinize erişin. `Startup.ConfigureServices`içinde aşağıdaki örneği göz önünde bulundurun:
+Gerçek işlevsellik için muhtemelen bir veritabanına veya diğer Kullanıcı Mağazası türüne bağlanan bağımlılık ekleme bölümünde kayıtlı bir hizmeti çağırmak isteyeceksiniz. Temsilciniz 'e geçirilen bağlamı kullanarak hizmetinize erişin. İçinde `Startup.ConfigureServices`aşağıdaki örneği göz önünde bulundurun:
 
 ```csharp
 services.AddAuthentication(
@@ -187,7 +193,7 @@ services.AddAuthentication(
     });
 ```
 
-Kavramsal olarak, sertifikanın doğrulanması bir yetkilendirme konusudur. `OnCertificateValidated`içinde değil, yetkilendirme ilkesindeki bir veren veya parmak izi gibi bir denetim eklemek, kusursuz kabul edilebilir.
+Kavramsal olarak, sertifikanın doğrulanması bir yetkilendirme konusudur. Örneğin, bir yetkilendirme ilkesindeki `OnCertificateValidated`bir veren veya parmak izi gibi bir denetim eklemek, mükemmel bir kabul edilebilir.
 
 ## <a name="configure-your-host-to-require-certificates"></a>Ana bilgisayarınızı sertifika gerektirecek şekilde yapılandırma
 
@@ -218,7 +224,7 @@ public static IHostBuilder CreateHostBuilder(string[] args)
 ```
 
 > [!NOTE]
-> <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> çağrılmadan oluşturulan bitiş noktaları, <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> çağrılmadan **önce** , varsayılan olarak uygulanmaz.
+> <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.Listen*> **before** Çağrılmadan <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ConfigureHttpsDefaults*> önce çağırarak oluşturulan uç noktalara varsayılan değer uygulanmaz.
 
 ### <a name="iis"></a>IIS
 
@@ -243,12 +249,12 @@ Azure için bir iletme yapılandırması gerekmez. Bu, sertifika iletme ara orta
 
 ### <a name="use-certificate-authentication-in-custom-web-proxies"></a>Özel Web proxy 'lerinde sertifika kimlik doğrulamasını kullanma
 
-`AddCertificateForwarding` yöntemi şunu belirtmek için kullanılır:
+`AddCertificateForwarding` Yöntemi belirtmek için kullanılır:
 
 * İstemci üst bilgi adı.
-* Sertifika nasıl yüklenir (`HeaderConverter` özelliği kullanılarak).
+* Sertifika nasıl yüklenir ( `HeaderConverter` özelliğini kullanarak).
 
-Özel Web proxy 'lerinde, sertifika özel bir istek üst bilgisi olarak geçirilir, örneğin `X-SSL-CERT`. Bunu kullanmak için `Startup.ConfigureServices`sertifika iletmeyi yapılandırın:
+Özel Web proxy 'lerinde, sertifika özel bir istek üst bilgisi olarak geçirilir, örneğin `X-SSL-CERT`. Bunu kullanmak için, içinde `Startup.ConfigureServices`sertifika iletmeyi yapılandırın:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -285,7 +291,7 @@ private static byte[] StringToByteArray(string hex)
 }
 ```
 
-`Startup.Configure` yöntemi daha sonra ara yazılımı ekler. `UseCertificateForwarding`, `UseAuthentication` ve `UseAuthorization`çağrılarından önce çağrılır:
+`Startup.Configure` Yöntemi daha sonra ara yazılımı ekler. `UseCertificateForwarding`, ve `UseAuthentication` `UseAuthorization`çağrıları için çağrılır:
 
 ```csharp
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -414,7 +420,7 @@ Sunucuya doğru sertifika gönderiliyorsa, veriler döndürülür. Sertifika yok
 
 ### <a name="create-certificates-in-powershell"></a>PowerShell 'de sertifika oluşturma
 
-Sertifikaların oluşturulması, bu akışı ayarlamanın en zor bölümüdür. Bir kök sertifika `New-SelfSignedCertificate` PowerShell cmdlet 'i kullanılarak oluşturulabilir. Sertifikayı oluştururken güçlü bir parola kullanın. `KeyUsageProperty` parametresini ve `KeyUsage` parametresini gösterildiği gibi eklemek önemlidir.
+Sertifikaların oluşturulması, bu akışı ayarlamanın en zor bölümüdür. Bir kök sertifika, `New-SelfSignedCertificate` PowerShell cmdlet 'i kullanılarak oluşturulabilir. Sertifikayı oluştururken güçlü bir parola kullanın. `KeyUsageProperty` Parametresi ve `KeyUsage` parametresini gösterildiği gibi eklemek önemlidir.
 
 #### <a name="create-root-ca"></a>Kök CA oluştur
 
@@ -429,7 +435,7 @@ Export-Certificate -Cert cert:\localMachine\my\"The thumbprint..." -FilePath roo
 ```
 
 > [!NOTE]
-> `-DnsName` parametre değeri uygulamanın dağıtım hedefi ile aynı olmalıdır. Örneğin, geliştirme için "localhost".
+> `-DnsName` Parametre değeri uygulamanın dağıtım hedefi ile aynı olmalıdır. Örneğin, geliştirme için "localhost".
 
 #### <a name="install-in-the-trusted-root"></a>Güvenilen köke yüklensin
 
@@ -439,7 +445,7 @@ https://social.msdn.microsoft.com/Forums/SqlServer/5ed119ef-1704-4be4-8a4f-ef11d
 
 #### <a name="intermediate-certificate"></a>Ara sertifika
 
-Artık kök sertifikadan bir ara sertifika oluşturulabilir. Bu, tüm kullanım durumları için gerekli değildir, ancak birçok sertifika oluşturmanız veya sertifika gruplarını etkinleştirmeniz veya devre dışı bırakmanız gerekebilir. Sertifikanın temel kısıtlamalarında yol uzunluğunu ayarlamak için `TextExtension` parametresi gereklidir.
+Artık kök sertifikadan bir ara sertifika oluşturulabilir. Bu, tüm kullanım durumları için gerekli değildir, ancak birçok sertifika oluşturmanız veya sertifika gruplarını etkinleştirmeniz veya devre dışı bırakmanız gerekebilir. Sertifikanın `TextExtension` temel kısıtlamalarında yol uzunluğunu ayarlamak için parametresi gereklidir.
 
 Ara sertifika daha sonra Windows ana bilgisayar sistemindeki güvenilen ara sertifikaya eklenebilir.
 

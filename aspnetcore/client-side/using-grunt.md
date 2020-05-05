@@ -1,62 +1,68 @@
 ---
-title: ASP.NET Core'da Grunt'u Kullanma
+title: ASP.NET Core Grönyı kullanma
 author: rick-anderson
-description: ASP.NET Core'da Grunt'u Kullanma
+description: ASP.NET Core Grönyı kullanma
 ms.author: riande
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: client-side/using-grunt
-ms.openlocfilehash: e516b85da7e94d0c93be642086fede0a11fea3c2
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: b51973e82bb1bd382be68a501c40ba613217fb03
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78657593"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773646"
 ---
-# <a name="use-grunt-in-aspnet-core"></a>ASP.NET Core'da Grunt'u Kullanma
+# <a name="use-grunt-in-aspnet-core"></a>ASP.NET Core Grönyı kullanma
 
-Grunt komut dosyası minification, TypeScript derleme, kod kalitesi "tiftik" araçları, CSS ön işlemciler ve istemci gelişimini desteklemek için yapılması gereken herhangi bir tekrarlayan iş hemen otomatikleştirir bir JavaScript görev koşucusudur. Grunt, Visual Studio'da tam olarak desteklenmiştir.
+Grrete, komut dosyası küçültmeye, TypeScript derlemesini, kod kalitesi "Lint" araçlarını, CSS ön işlemcilerini ve yalnızca istemci geliştirmeyi desteklemek için gereken tüm yinelenen chore 'yi otomatikleştiren bir JavaScript görev Çalıştırıcısı. Gryeniden bağlama Visual Studio 'da tam olarak desteklenir.
 
-Bu örnek, istemci oluşturma işlemini sıfırdan nasıl otomatikleştireceğimi göstermek için başlangıç noktası olarak boş bir ASP.NET Core projesini kullanır.
+Bu örnek, başlangıç noktası olarak boş bir ASP.NET Core projesi kullanarak, istemci derleme işleminin sıfırdan nasıl otomatikleştirileceğini gösterir.
 
-Bitmiş örnek hedef dağıtım dizini temizler, JavaScript dosyalarını birleştirir, kod kalitesini denetler, JavaScript dosya içeriğini yoğunlaştırır ve web uygulamanızın köküne dağıtır. Aşağıdaki paketleri kullanacağız:
+Tamamlanmış örnek, hedef dağıtım dizinini temizler, JavaScript dosyalarını birleştirir, kod kalitesini denetler, JavaScript dosya içeriğini daraltabilir ve Web uygulamanızın köküne dağıtır. Aşağıdaki paketleri kullanacağız:
 
-* **homurtu**: Grunt görev koşucu paketi.
+* **gryeniden bağlama**: gryeniden görev Çalıştırıcısı paketi.
 
-* **grunt-contrib-clean**: Dosyaları veya dizinleri kaldıran bir eklenti.
+* **gryeniden bağlama-contrib-Clean**: dosya veya dizinleri kaldıran bir eklenti.
 
-* **grunt-contrib-jshint**: JavaScript kod kalitesini inceleyen bir eklenti.
+* **grkıt-contrib-jshınt**: JavaScript kod kalitesini inceleyen bir eklenti.
 
-* **grunt-contrib-concat**: Dosyaları tek bir dosyada birleştiren eklenti.
+* **gryeniden bağlama-contrib-Concat**: dosyaları tek bir dosyaya birleştiren bir eklenti.
 
-* **grunt-contrib-uglify**: Boyutu azaltmak için JavaScript'i küçülten bir eklenti.
+* **gryeniden bağlama-contrib-utimy**: boyutu azaltmak Için JavaScript 'i mini görüntüleyen bir eklenti.
 
-* **grunt-contrib-watch**: Dosya etkinliğini izleyen bir eklenti.
+* **gryeniden bağlama-contrib-Watch**: dosya etkinliğini izleyen bir eklenti.
 
-## <a name="preparing-the-application"></a>Başvurunun hazırlanması
+## <a name="preparing-the-application"></a>Uygulama hazırlanıyor
 
-Başlamak için yeni bir boş web uygulaması ayarlayın ve TypeScript örnek dosyaları ekleyin. TypeScript dosyaları varsayılan Visual Studio ayarları kullanılarak JavaScript'e otomatik olarak derlenir ve Grunt'u kullanmak için hammaddemiz olacaktır.
+Başlamak için yeni bir boş Web uygulaması ayarlayın ve TypeScript örnek dosyaları ekleyin. TypeScript dosyaları varsayılan Visual Studio ayarları kullanılarak JavaScript 'e otomatik olarak derlenir ve Grönyı kullanarak işlemek için ham malzemelerimiz olacaktır.
 
-1. Visual Studio'da yeni `ASP.NET Web Application`bir .
+1. Visual Studio 'da yeni `ASP.NET Web Application`bir oluştur.
 
-2. Yeni **ASP.NET Projesi** iletişim kutusunda, ASP.NET Boş **ASP.NET** şablonu seçin ve Tamam düğmesini tıklatın.
+2. **Yeni ASP.NET projesi** Iletişim kutusunda **boş** şablon ASP.NET Core seçin ve Tamam düğmesine tıklayın.
 
-3. Çözüm Gezgini'nde proje yapısını gözden geçirin. Klasör `\src` boş `wwwroot` ve `Dependencies` düğümleri içerir.
+3. Çözüm Gezgini, proje yapısını gözden geçirin. `\src` Klasör boş `wwwroot` ve `Dependencies` düğümleri içerir.
 
-    ![boş web çözümü](using-grunt/_static/grunt-solution-explorer.png)
+    ![boş Web çözümü](using-grunt/_static/grunt-solution-explorer.png)
 
-4. Proje dizininize `TypeScript` yeni bir klasör ekleyin.
+4. Proje dizininize adlı `TypeScript` yeni bir klasör ekleyin.
 
-5. Herhangi bir dosya eklemeden önce Visual Studio'nun, denetlenen TypeScript dosyaları için 'kaydet'i derleme seçeneğine sahip olduğundan emin olun. **AraçlarA** > Git**Seçenekleri** > **Metin Düzenleyici** > **Saktib** > **Projesi**:
+5. Herhangi bir dosya eklemeden önce, Visual Studio 'Nun TypeScript dosyaları için ' kaydetme sırasında derle ' seçeneğinin işaretli olduğundan emin olun. **Araçlar** > **Seçenekler** > **Text Editor** > **Project**metin Düzenleyicisi TypeScript projesinde git:**Typescript** > 
 
     ![TypeScript dosyalarının otomatik derlemesini ayarlama seçenekleri](using-grunt/_static/typescript-options.png)
 
-6. Dizin etıklayın `TypeScript` ve bağlam menüsünden **Yeni Öğe > ekle'yi** seçin. **JavaScript dosya** öğesini seçin ve *Tastes.ts* \*dosyasını adlandırın (.ts uzantısına dikkat edin). Aşağıdaki TypeScript kodunun satırını dosyaya kopyalayın (kaydettiğinizde JavaScript kaynağında yeni bir *Tastes.js* dosyası görüntülenir).
+6. `TypeScript` Dizine sağ tıklayın ve bağlam menüsünden **> yeni öğe Ekle** ' yi seçin. **JavaScript dosya** öğesini seçin ve dosyayı *tastes. TS* olarak adlandırın ( \*. TS uzantısını aklınızda). Aşağıdaki TypeScript kodu satırını dosyaya kopyalayın (kaydettiğinizde, JavaScript kaynağıyla yeni bir *tastes. js* dosyası görünür).
 
     ```typescript
     enum Tastes { Sweet, Sour, Salty, Bitter }
     ```
 
-7. **TypeScript** dizinine ikinci bir dosya ekleyin `Food.ts`ve adlandırın. Aşağıdaki kodu dosyaya kopyalayın.
+7. **TypeScript** dizinine ikinci bir dosya ekleyin ve bunu `Food.ts`adlandırın. Aşağıdaki kodu dosyasına kopyalayın.
 
     ```typescript
     class Food {
@@ -83,20 +89,20 @@ Başlamak için yeni bir boş web uygulaması ayarlayın ve TypeScript örnek do
     }
     ```
 
-## <a name="configuring-npm"></a>NPM'yi yapılandırma
+## <a name="configuring-npm"></a>NPM 'yi yapılandırma
 
-Ardından, Homurtu ve homurtu görevlerini karşıdan yükecek Şekilde NPM'yi yapılandırın.
+Daha sonra, NPM 'yi, grer ve grsıt-görevler 'i indirmek için yapılandırın
 
-1. Çözüm Gezgini'nde projeyi sağ tıklatın ve bağlam menüsünden **Yeni Öğe > ekle'yi** seçin. **NPM yapılandırma dosya** öğesini seçin, varsayılan adı, *package.json'u*bırakın ve **Ekle** düğmesini tıklatın.
+1. Çözüm Gezgini, projeye sağ tıklayın ve bağlam menüsünden **> yeni öğe Ekle** ' yi seçin. **NPM yapılandırma dosyası** öğesini seçin, varsayılan adı *Package. JSON*olarak bırakın ve **Ekle** düğmesine tıklayın.
 
-2. *Package.json* dosyasında, `devDependencies` nesne ayraçlarının içinde "homurtu" girin. Intellisense listesinden seçin `grunt` ve Enter tuşuna basın. Visual Studio homurtu paket adını alıntı ve bir üst üste ekler. Üst üste, Intellisense listesinin en üstünden paketin en son kararlı sürümünü `Ctrl-Space` seçin (Intellisense görünmüyorsa basın).
+2. *Package. JSON* dosyasında, `devDependencies` nesne ayraçları içinde "grönbağlama" yazın. IntelliSense `grunt` listesinden seçin ve ENTER tuşuna basın. Visual Studio gryeniden paket adını teklif eder ve iki nokta üst üste ekler. İki nokta üst üste sağ tarafta, IntelliSense listesinin en üstünden paketin en son kararlı sürümünü seçin (IntelliSense görünmüyorsa tuşuna basın `Ctrl-Space` ).
 
-    ![homurtu Intellisense](using-grunt/_static/devdependencies-grunt.png)
+    ![gryeniden bağlama IntelliSense](using-grunt/_static/devdependencies-grunt.png)
 
     > [!NOTE]
-    > NPM bağımlılıkları düzenlemek için [anlamsal sürüm](https://semver.org/) kullanır. SemVer olarak da bilinen anlamsal sürüm, paketleri numaralandırma \<şeması ana> tanımlar. \<küçük>. \<yama>. Intellisense sadece birkaç ortak seçenek göstererek anlamsal sürümü kolaylaştırır. Intellisense listesindeki en üst öğe (yukarıdaki örnekte 0,4,5) paketin en son kararlı sürümü olarak kabul edilir. Caret (^) sembolü en son ana sürüme eşleşir ve tilde (~) en son küçük sürümle eşleşir. SemVer'in sağladığı tam ifade için bir rehber olarak [NPM semver sürüm parer referansına](https://www.npmjs.com/package/semver) bakın.
+    > NPM, bağımlılıkları düzenlemek için [anlamsal sürüm oluşturmayı](https://semver.org/) kullanır. SemVer olarak da bilinen anlamsal sürüm oluşturma, birincil> numaralandırma düzenine \<sahip paketleri tanımlar. \<küçük>. \<düzeltme eki>. IntelliSense yalnızca birkaç ortak seçeneği göstererek anlamsal sürüm oluşturmayı basitleştirir. IntelliSense listesindeki üst öğe (Yukarıdaki örnekte 0.4.5), paketin en son kararlı sürümü olarak değerlendirilir. Şapka (^) simgesi en son ana sürümle eşleşir ve tilde (~) en son ikincil sürümle eşleşir. SemVer 'in sağladığı tam ifade çekimi için bir kılavuz olarak [NPM semver sürüm ayrıştırıcısı başvurusuna](https://www.npmjs.com/package/semver) bakın.
 
-3. \* *Temizlemek*için homurtu-contrib-paketleri yüklemek için daha fazla bağımlılık ekleyin , *jshint*, *concat*, *uglify*, ve aşağıdaki örnekte gösterildiği gibi *izleyin.* Sürümlerin örnekle eşleşmesine gerek yoktur.
+3. Aşağıdaki örnekte gösterildiği gibi *Clean*, jshınt,\* *Concat*, *uıshowmy*ve *Watch* için Load *grkıt*-contrib-Packages için daha fazla bağımlılık ekleyin. Sürümlerin örnekle eşleşmesi gerekmez.
 
     ```json
     "devDependencies": {
@@ -109,24 +115,24 @@ Ardından, Homurtu ve homurtu görevlerini karşıdan yükecek Şekilde NPM'yi y
     }
     ```
 
-4. *Paket.json* dosyasını kaydedin.
+4. *Package. JSON* dosyasını kaydedin.
 
-Her `devDependencies` öğe için paketler, her paketin gerektirdiği dosyalarla birlikte karşıdan yüklenecektir. **Çözüm Gezgini'nde** **Tüm Dosyaları Göster** düğmesini etkinleştirerek paket dosyalarını *node_modules* dizinde bulabilirsiniz.
+Her bir `devDependencies` öğe için paketler, her paketin gerektirdiği tüm dosyalarla birlikte indirilir. Paket dosyalarını, **Çözüm Gezgini** **tüm dosyaları göster** düğmesini etkinleştirerek *node_modules* dizininde bulabilirsiniz.
 
-![homurtu node_modules](using-grunt/_static/node-modules.png)
+![gryeniden bağlama node_modules](using-grunt/_static/node-modules.png)
 
 > [!NOTE]
-> Gerekirse, **Paketleri Geri Yükle** menüsü seçeneğini sağ tıklayıp `Dependencies\NPM` seçerek Çözüm **Gezgini'ndeki** bağımlılıkları el ile geri yükleyebilirsiniz.
+> Gerekirse, sağ tıklayıp `Dependencies\NPM` **paketleri geri yükle** menü seçeneğini belirleyerek **Çözüm Gezgini** bağımlılıkları el ile geri yükleyebilirsiniz.
 
-![paketleri geri yükleme](using-grunt/_static/restore-packages.png)
+![paketleri geri yükle](using-grunt/_static/restore-packages.png)
 
-## <a name="configuring-grunt"></a>Grunt'ı Yapılandırma
+## <a name="configuring-grunt"></a>Grönbağlama yapılandırma
 
-Grunt, Visual Studio'daki olaylara göre el ile çalıştırılabilen veya otomatik olarak çalışacak şekilde yapılandırılabilen görevleri tanımlayan, yükleyen ve kaydeden *Gruntfile.js* adlı bir manifesto kullanılarak yapılandırılır.
+Gror, el ile çalıştırılabilecek veya Visual Studio 'daki olaylara göre otomatik olarak çalışacak şekilde yapılandırılmış görevleri tanımlayan, yükleyen ve kaydeden *Gruntfile. js* adlı bir bildirim kullanılarak yapılandırılır.
 
-1. Projeyi sağ tıklatın ve**Yeni Öğe** **Ekle'yi** > seçin. **JavaScript Dosya** öğesi şablonu seçin, *gruntfile.js*adını değiştirin ve **Ekle** düğmesini tıklatın.
+1. Projeye sağ tıklayın ve**Yeni öğe** **Ekle** > ' yi seçin. **JavaScript dosya** öğesi şablonunu seçin, adı *Gruntfile. js*olarak değiştirin ve **Ekle** düğmesine tıklayın.
 
-1. *Gruntfile.js'ye*aşağıdaki kodu ekleyin. İşlev, `initConfig` her paket için seçenekler ayarlar ve modül yüklerinin geri kalanı ve kayıt görevleri.
+1. *Gruntfile. js*' ye aşağıdaki kodu ekleyin. `initConfig` İşlevi her bir paket için seçenekleri ayarlar ve modülün geri kalanı görevleri yükler ve kaydeder.
 
    ```javascript
    module.exports = function (grunt) {
@@ -135,7 +141,7 @@ Grunt, Visual Studio'daki olaylara göre el ile çalıştırılabilen veya otoma
    };
    ```
 
-1. İşlevin `initConfig` içinde, aşağıdaki `clean` *Gruntfile.js* örneğinde gösterildiği gibi görev için seçenekler ekleyin. Görev `clean` dizin dizeleri bir dizi kabul eder. Bu görev dosyaları *wwwroot/lib'den* kaldırır ve tüm */geçici* dizini kaldırır.
+1. `initConfig` İşlevin içinde, aşağıdaki örnek *Gruntfile. js* dosyasında gösterildiği şekilde `clean` görev için seçenekler ekleyin. Görev `clean` , Dizin dizeleri dizisini kabul eder. Bu görev, dosyaları *Wwwroot/lib* 'den kaldırır ve tüm */Temp klasörüne yazılır* dizinini kaldırır.
 
     ```javascript
     module.exports = function (grunt) {
@@ -145,34 +151,34 @@ Grunt, Visual Studio'daki olaylara göre el ile çalıştırılabilen veya otoma
     };
     ```
 
-1. Fonksiyonun `initConfig` altında, ''ye `grunt.loadNpmTasks`bir çağrı ekleyin Bu, görevi Visual Studio'dan çalıştırılabilir hale getirir.
+1. `initConfig` İşlevin altına bir çağrı ekleyin `grunt.loadNpmTasks`. Bu işlem, görevin Visual Studio 'dan bir şekilde bir şekilde bir şekilde bir şekilde
 
     ```javascript
     grunt.loadNpmTasks("grunt-contrib-clean");
     ```
 
-1. *Gruntfile.js*kaydet. Dosya aşağıdaki ekran görüntüsü gibi bir şey görünmelidir.
+1. *Gruntfile. js dosyasını*kaydedin. Dosya aşağıdaki ekran görüntüsüne benzer şekilde görünmelidir.
 
     ![ilk gruntfile](using-grunt/_static/gruntfile-js-initial.png)
 
-1. *Gruntfile.js'yi* sağ tıklatın ve bağlam menüsünden **Task Runner Explorer'ı** seçin. **Görev Koşucusu Gezgini Penceresi** açılır.
+1. *Gruntfile. js* ' ye sağ tıklayın ve bağlam menüsünden **görev Çalıştırıcısı Gezgini** ' ni seçin. **Görev çalıştırıcı Gezgini** penceresi açılır.
 
-    ![görev koşucusu explorer menüsü](using-grunt/_static/task-runner-explorer-menu.png)
+    ![görev Çalıştırıcısı Gezgin menüsü](using-grunt/_static/task-runner-explorer-menu.png)
 
-1. Görev `clean` **Koşucusu Gezgini Gezgini'nde** **Görevler'in** altında gösteriyi doğrulayın.
+1. `clean` **Görev Çalıştırıcısı Gezgininde** **Görevler** altında göründüğünü doğrulayın.
 
-    ![görev koşucusu explorer görev listesi](using-grunt/_static/task-runner-explorer-tasks.png)
+    ![görev çalıştırıcı Gezgini görev listesi](using-grunt/_static/task-runner-explorer-tasks.png)
 
-1. Temiz görev sağ tıklatın ve bağlam menüsünden **Çalıştır'ı** seçin. Komut penceresi görevin ilerlemesini görüntüler.
+1. Temizleme görevine sağ tıklayın ve bağlam menüsünden **Çalıştır** ' ı seçin. Bir komut penceresi, görevin ilerlemesini görüntüler.
 
-    ![görev koşucusu explorer temiz görev çalıştırın](using-grunt/_static/task-runner-explorer-run-clean.png)
+    ![görev çalıştırıcı Gezgini temiz görevi çalıştır](using-grunt/_static/task-runner-explorer-run-clean.png)
 
     > [!NOTE]
-    > Henüz temizleyecek dosya veya dizin yok. İsterseniz, bunları Çözüm Gezgini'nde el ile oluşturabilir ve temiz görevi test olarak çalıştırabilirsiniz.
+    > Henüz temizleyene dosya veya dizin yok. İsterseniz, bunları Çözüm Gezgini el ile oluşturabilir ve sonra temiz görevi bir test olarak çalıştırabilirsiniz.
 
-1. İşlevolarak, `initConfig` aşağıdaki kodu `concat` kullanmak için bir giriş ekleyin.
+1. `initConfig` İşlevinde, aşağıdaki kodu kullanmak için `concat` bir giriş ekleyin.
 
-    Özellik `src` dizisi, birleştirilmesi gereken sırayla birleştirecek dosyaları listeler. Özellik, `dest` üretilen birleştirilmiş dosyaya giden yolu atar.
+    `src` Özellik dizisi birleştirilecek dosyaları, birleştirilmeleri gereken sırayla listeler. Özelliği `dest` , üretilen Birleşik dosyanın yolunu atar.
 
     ```javascript
     concat: {
@@ -184,11 +190,11 @@ Grunt, Visual Studio'daki olaylara göre el ile çalıştırılabilen veya otoma
     ```
 
     > [!NOTE]
-    > Yukarıdaki `all` koddaki özellik bir hedefin adıdır. Hedefler, birden çok yapı ortamına izin vermek için bazı Homurtu görevlerinde kullanılır. Yerleşik hedefleri IntelliSense'i kullanarak görüntüleyebilir veya kendi hedefinizi atayabilirsiniz.
+    > Yukarıdaki `all` koddaki özelliği bir hedefin adıdır. Hedefler, bazı Grsi görevlerinde birden çok derleme ortamına izin vermek için kullanılır. IntelliSense kullanarak yerleşik hedefleri görüntüleyebilir veya kendi kendinize atayabilirsiniz.
 
-1. Aşağıdaki `jshint` kodu kullanarak görevi ekleyin.
+1. Aşağıdaki kodu `jshint` kullanarak görevi ekleyin.
 
-    Jshint `code-quality` yardımcı programı *geçici* dizinde bulunan her JavaScript dosyasına karşı çalıştırılır.
+    Jshınt `code-quality` yardımcı programı, *Temp* dizininde bulunan her JavaScript dosyasında çalışır.
 
     ```javascript
     jshint: {
@@ -200,11 +206,11 @@ Grunt, Visual Studio'daki olaylara göre el ile çalıştırılabilen veya otoma
     ```
 
     > [!NOTE]
-    > "-W069" seçeneği, JavaScript nokta gösterimi yerine bir özellik atamak için parantez sözdizimini kullandığında jshint `Tastes.Sweet`tarafından üretilen bir hatadır. `Tastes["Sweet"]` Seçenek, işlemin geri kalanının devam etmesine izin vermek için uyarıyı kapatır.
+    > "-W069" seçeneği, JavaScript, nokta gösterimi yerine bir özellik atamak için köşeli ayraç sözdizimi kullandığında jshınt tarafından oluşturulan bir hatadır, yani `Tastes["Sweet"]` yerine. `Tastes.Sweet` Seçeneği, işlemin geri kalanının devam etmesine izin vermek için uyarıyı kapatır.
 
-1. Aşağıdaki `uglify` kodu kullanarak görevi ekleyin.
+1. Aşağıdaki kodu `uglify` kullanarak görevi ekleyin.
 
-    Görev, geçici dizinde bulunan *combined.js* dosyasını minifies ve standart adlandırma kuralı * \<\>dosya adı .min.js*aşağıdaki wwwroot / lib sonuç dosyası oluşturur.
+    Görev, Temp dizininde bulunan *birleştirilmiş. js* dosyasını mini olarak oluşturur ve standart adlandırma kuralı * \<dosya adı\>. min. js*' den sonra bir sonuç dosyası Wwwroot/LIB içinde oluşturur.
 
     ```javascript
     uglify: {
@@ -215,7 +221,7 @@ Grunt, Visual Studio'daki olaylara göre el ile çalıştırılabilen veya otoma
     },
     ```
 
-1. Bu yükleriçin `grunt.loadNpmTasks` `grunt-contrib-clean`arama altında, jshint, concat için aynı çağrı dahil ve aşağıdaki kodu kullanarak uglify.
+1. `grunt.loadNpmTasks` Bu yüklere `grunt-contrib-clean`yapılan çağrının altında, aşağıdaki kodu kullanarak jshınt, Concat ve UART comp için aynı çağrıyı dahil edin.
 
     ```javascript
     grunt.loadNpmTasks('grunt-contrib-jshint');
@@ -223,36 +229,36 @@ Grunt, Visual Studio'daki olaylara göre el ile çalıştırılabilen veya otoma
     grunt.loadNpmTasks('grunt-contrib-uglify');
     ```
 
-1. *Gruntfile.js*kaydet. Dosya aşağıdaki örnek gibi bir şey görünmelidir.
+1. *Gruntfile. js dosyasını*kaydedin. Dosya aşağıdaki örnekteki gibi görünmelidir.
 
-    ![tam homurtu dosya örneği](using-grunt/_static/gruntfile-js-complete.png)
+    ![Tüm gryeniden dosya örneğini doldurun](using-grunt/_static/gruntfile-js-complete.png)
 
-1. **Görev Koşucusu Gezgini** Görevleri `clean` `concat`listesinin , `jshint` ve `uglify` görevleri içerdiğine dikkat edin. Her görevi sırayla çalıştırın ve Çözüm Gezgini'ndeki sonuçları **gözlemleyin.** Her görev hatasız çalıştırılmalıdır.
+1. **Görev çalıştırıcı Gezgini** görev listesinin `clean`, `concat` `jshint` ve `uglify` görevlerini içerdiğine dikkat edin. Her görevi sırayla çalıştırın ve **Çözüm Gezgini**sonuçları gözlemleyin. Her görev hatasız çalışmalıdır.
 
-    ![görev koşucusu gezgini her görevi çalıştırın](using-grunt/_static/task-runner-explorer-run-each-task.png)
+    ![görev çalıştırıcı Gezgini her görevi çalıştır](using-grunt/_static/task-runner-explorer-run-each-task.png)
 
-    Concat görevi yeni bir *combined.js* dosyası oluşturur ve geçici dizine yerleştirir. Görev `jshint` yalnızca çalışır ve çıktı üretmez. Görev `uglify` yeni bir *combined.min.js* dosyası oluşturur ve *wwwroot/lib'e*yerleştirir. Tamamlandığında, çözüm aşağıdaki ekran görüntüsü gibi bir şey görünmelidir:
+    Concat görevi yeni bir *birleştirilmiş. js* dosyası oluşturur ve bunu Temp dizinine koyar. `jshint` Görev yalnızca çalışır ve çıkış üretmez. `uglify` Görev yeni bir *birleştirilmiş. min. js* dosyası oluşturur ve bunu *Wwwroot/lib*'e koyar. Tamamlandığında, çözüm aşağıdaki ekran görüntüsüne benzer şekilde görünmelidir:
 
-    ![tüm görevden sonra çözüm gezgini](using-grunt/_static/solution-explorer-after-all-tasks.png)
+    ![tüm görevlerden sonra Çözüm Gezgini](using-grunt/_static/solution-explorer-after-all-tasks.png)
 
     > [!NOTE]
-    > Her paket için seçenekler hakkında daha [https://www.npmjs.com/](https://www.npmjs.com/) fazla bilgi için, ana sayfadaki arama kutusundapaket adını ziyaret edin ve arayın. Örneğin, tüm parametrelerini açıklayan bir belge bağlantısı almak için homurdanan-contrib-temiz paketi arayabilirsiniz.
+    > Her bir paket için seçenekler hakkında daha fazla bilgi için, [https://www.npmjs.com/](https://www.npmjs.com/) ana sayfadaki arama kutusunda paket adı ' nı ziyaret edin ve arama yapın. Örneğin, tüm parametrelerini açıklayan bir belge bağlantısı almak için grcönt-contrib-Clean paketini arayabilirsiniz.
 
 ### <a name="all-together-now"></a>Özet
 
-Belirli bir sırada `registerTask()` bir dizi görevi çalıştırmak için Grunt yöntemini kullanın. Örneğin, yukarıdaki örnek adımları temiz -> concat -> jshint -> uglify olarak yukarıdaki örnek adımları çalıştırmak için, modüle aşağıdaki kodu ekleyin. Kod, initConfig dışında loadNpmTasks() çağrılarıyla aynı düzeye eklenmelidir.
+Belirli bir dizideki bir `registerTask()` dizi görevi çalıştırmak için Gryeniden bağlama yöntemini kullanın. Örneğin, yukarıdaki örnek adımları sırayla çalıştırmak için > Concat-> jshınt-> uıshowmy ' a gidin ve aşağıdaki kodu modüle ekleyin. Kod, InitConfig dışında loadNpmTasks () çağrılarıyla aynı düzeye eklenmelidir.
 
 ```javascript
 grunt.registerTask("all", ['clean', 'concat', 'jshint', 'uglify']);
 ```
 
-Yeni görev, Diğer Ad Görevleri altında Görev Koşucusu Gezgini Gezgini'nde gösterilmektedir. Diğer görevlerde olduğu gibi sağ tıklayıp çalıştırabilirsiniz. Görev `all` , `clean`, `concat` `jshint` ve `uglify`, sırayla çalışacaktır.
+Yeni görev, görev Çalıştırıcısı Gezgini 'nde diğer ad görevleri altında görüntülenir. Bunu, diğer görevleri yaptığınız gibi sağ tıklayıp çalıştırabilirsiniz. `all` Görev, `jshint` ve `uglify`sırasıyla `clean`çalıştırılır `concat`.
 
-![diğer ad homurtu görevleri](using-grunt/_static/alias-tasks.png)
+![diğer ad grer görevleri](using-grunt/_static/alias-tasks.png)
 
-## <a name="watching-for-changes"></a>Değişiklikleri izleme
+## <a name="watching-for-changes"></a>Değişiklik izleme
 
-Görev, `watch` dosyaları ve dizinleri izler. Saat, değişiklikleri algılarsa görevleri otomatik olarak tetikler. TypeScript dizinindeki \*.js dosyalarındaki değişiklikleri izlemek için aşağıdaki kodu initConfig'e ekleyin. Bir JavaScript dosyası `watch` değiştirilirse, `all` görevi çalıştırılır.
+Bir `watch` görev, dosyalara ve dizinlere göz önünde bulundurur. İzleme, değişiklikleri algılarsa görevleri otomatik olarak tetikler. TypeScript dizinindeki \*. js dosyalarında yapılan değişiklikleri izlemek için aşağıdaki kodu InitConfig dosyasına ekleyin. Bir JavaScript dosyası değiştirilirse, `watch` `all` görevi çalıştırır.
 
 ```javascript
 watch: {
@@ -261,26 +267,26 @@ watch: {
 }
 ```
 
-Görevi Koşucu `loadNpmTasks()` Gezgini `watch` Gezgini'nde göstermek için bir arama ekleyin.
+Görev Çalıştırıcısı Gezgininde `watch` görevi `loadNpmTasks()` göstermek için öğesine bir çağrı ekleyin.
 
 ```javascript
 grunt.loadNpmTasks('grunt-contrib-watch');
 ```
 
-Görev Koşucusu Gezgini Gezgini'nde izleme görevine sağ tıklayın ve bağlam menüsünden Çalıştır'ı seçin. Çalışan izleme görevini gösteren komut penceresi bir "Bekleme..." görüntülenir. İleti. TypeScript dosyalarından birini açın, bir boşluk ekleyin ve ardından dosyayı kaydedin. Bu, izleme görevini tetikler ve diğer görevleri sırayla çalıştırmasını tetikler. Aşağıdaki ekran görüntüsü örnek bir çalışma gösterir.
+Görev çalıştırıcı Gezgini ' nde gözcü görevine sağ tıklayın ve bağlam menüsünden Çalıştır ' ı seçin. Çalışan izleme görevini gösteren komut penceresinde "bekleniyor..." görüntülenir İleti. TypeScript dosyalarından birini açın, bir boşluk ekleyin ve dosyayı kaydedin. Bu işlem, izleme görevini tetikler ve diğer görevleri sırayla çalışacak şekilde tetikler. Aşağıdaki ekran görüntüsünde örnek bir çalıştırma gösterilmektedir.
 
-![görev çıktısını çalıştırma](using-grunt/_static/watch-running.png)
+![çalışan görevler çıkışı](using-grunt/_static/watch-running.png)
 
-## <a name="binding-to-visual-studio-events"></a>Visual Studio etkinliklerine bağlanma
+## <a name="binding-to-visual-studio-events"></a>Visual Studio olaylarına bağlama
 
-Visual Studio'da her çalıştığınızda görevlerinizi el ile başlatmak istemiyorsanız, görevleri **Oluşturmadan Önce**, **İnşdan Sonra**, **Temizle**ve **Project Open** etkinliklerine bağlayın.
+Visual Studio 'da her çalıştığınızda görevlerinizi el ile başlatmak istemediğiniz müddetçe, derleme, **Temizleme**ve **proje açık** olayları **sonrasında** **derlemeden önce**görevleri bağlayın.
 
-Visual `watch` Studio her açıldığında çalışır böylece bind. Görev Koşucusu Gezgini Gezgini'nde, izleme görevini sağ tıklatın ve bağlam menüsünden **Bağlayıcılar** > **Projesi Aç'ı** seçin.
+Visual `watch` Studio her açıldığında çalışacak şekilde bağlayın. Görev çalıştırıcı Gezgini ' nde, izle görevine sağ tıklayın ve bağlam menüsünden **bağlamalar** > **projesi aç** ' ı seçin.
 
-![bir görevi proje açılışına bağlama](using-grunt/_static/bindings-project-open.png)
+![projeyi açmak için bir görev bağlama](using-grunt/_static/bindings-project-open.png)
 
-Projeyi boşaltın ve yeniden yükleyin. Proje yeniden yüklendiğinde, izleme görevi otomatik olarak çalışmaya başlar.
+Projeyi kaldırın ve yeniden yükleyin. Proje yeniden yüklendiğinde, izleme görevi otomatik olarak çalışmaya başlar.
 
 ## <a name="summary"></a>Özet
 
-Grunt, istemci oluşturma görevlerinin çoğunu otomatikleştirmek için kullanılabilecek güçlü bir görev koşucusudur. Grunt, paketlerini teslim etmek için NPM'den yararlanır ve Visual Studio ile takım entegrasyonu na sahiptir. Visual Studio'nun Görev Koşucusu Gezgini Gezgini yapılandırma dosyalarındaki değişiklikleri algılar ve görevleri çalıştırmak, çalışan görevleri görüntülemek ve görevleri Visual Studio etkinliklerine bağlamak için kullanışlı bir arayüz sağlar.
+Gryeniden oluşturma, çoğu istemci derleme görevini otomatikleştirmek için kullanılabilen güçlü bir görev Çalıştırıcısı. Grsıt, paketlerini teslim etmek için NPM 'den yararlanır ve Visual Studio ile tümleştirme özellikleri sağlar. Visual Studio 'nun görev Çalıştırıcısı Gezgini yapılandırma dosyalarındaki değişiklikleri algılar ve görevleri çalıştırmak, çalışan görevleri görüntülemek ve görevleri Visual Studio olaylarına bağlamak için uygun bir arabirim sağlar.

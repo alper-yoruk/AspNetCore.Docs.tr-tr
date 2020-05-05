@@ -1,71 +1,77 @@
 ---
-title: ASP.NET Core'daki İstek Özellikleri
+title: ASP.NET Core içindeki istek özellikleri
 author: ardalis
-description: ASP.NET Core arabirimlerinde tanımlanan HTTP istekleri ve yanıtları ile ilgili web sunucusu uygulama ayrıntıları hakkında bilgi edinin.
+description: ASP.NET Core arabirimlerde tanımlanan HTTP istekleri ve yanıtları ile ilgili Web sunucusu uygulama ayrıntıları hakkında bilgi edinin.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/request-features
-ms.openlocfilehash: d0f3ae521d1f314dd04cb581d9a921da4719273d
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: e26a1a7b35d40c1214bbc40269571545cbd2c235
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79416228"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776031"
 ---
-# <a name="request-features-in-aspnet-core"></a>ASP.NET Core'daki İstek Özellikleri
+# <a name="request-features-in-aspnet-core"></a>ASP.NET Core içindeki istek özellikleri
 
-Yazar: [Steve Smith](https://ardalis.com/)
+[Steve Smith](https://ardalis.com/) tarafından
 
-HTTP istekleri ve yanıtları ile ilgili Web sunucusu uygulama ayrıntıları arabirimlerde tanımlanır. Bu arabirimler, sunucu uygulamaları ve ara yazılımlar tarafından uygulamanın barındırma ardışık hattını oluşturmak ve değiştirmek için kullanılır.
+HTTP istekleri ve yanıtları ile ilgili Web sunucusu uygulama ayrıntıları arabirimlerde tanımlanmıştır. Bu arabirimler, uygulamanın barındırma işlem hattını oluşturmak ve değiştirmek için sunucu uygulamaları ve ara yazılım tarafından kullanılır.
 
 ## <a name="feature-interfaces"></a>Özellik arabirimleri
 
-ASP.NET Core, sunucular `Microsoft.AspNetCore.Http.Features` tarafından destekledikleri özellikleri tanımlamak için kullanılan bir dizi HTTP özellik arabirimi tanımlar. Aşağıdaki özellik arabirimleri istekleri ve yanıtları döndürün:
+ASP.NET Core, `Microsoft.AspNetCore.Http.Features` sunucularının destekledikleri özellikleri tanımlamak için kullandıkları BIR dizi http özelliği arabirimini tanımlar. Aşağıdaki özellik arabirimleri istekleri ve dönüş yanıtlarını işler:
 
-`IHttpRequestFeature`Protokol, yol, sorgu dizesi, üstbilgi ve gövde dahil olmak üzere bir HTTP isteğinin yapısını tanımlar.
+`IHttpRequestFeature`Protokol, yol, sorgu dizesi, üst bilgiler ve gövde dahil olmak üzere bir HTTP isteğinin yapısını tanımlar.
 
-`IHttpResponseFeature`Durum kodu, üstbilgi ve yanıtın gövdesi de dahil olmak üzere bir HTTP yanıtının yapısını tanımlar.
+`IHttpResponseFeature`Durum kodu, üst bilgiler ve yanıtın gövdesi dahil olmak üzere bir HTTP yanıtının yapısını tanımlar.
 
-`IHttpAuthenticationFeature`Kullanıcıları bir `ClaimsPrincipal` temele göre tanımlamak ve kimlik doğrulaması belirleyen desteği tanımlar.
+`IHttpAuthenticationFeature`, Ve bir `ClaimsPrincipal` kimlik doğrulama işleyicisi belirterek kullanıcıları tanımlama desteğini tanımlar.
 
-`IHttpUpgradeFeature`Sunucu protokolleri değiştirmek isterse hangi ek protokolleri kullanmak istediğini belirtmek için istemciye izin veren [HTTP Yükseltmeleri](https://tools.ietf.org/html/rfc2616.html#section-14.42)desteği tanımlar.
+`IHttpUpgradeFeature`Sunucu, protokolleri değiştirmek isterse, istemcinin kullanmak istediğiniz ek protokolleri belirtmesini sağlayan [http yükseltmeleri](https://tools.ietf.org/html/rfc2616.html#section-14.42)için desteği tanımlar.
 
-`IHttpBufferingFeature`İstek lerin ve/veya yanıtların arabelleğe alma yöntemlerini tanımlar.
+`IHttpBufferingFeature`İsteklerin ve/veya yanıtlarının arabelleğe alınması devre dışı bırakma yöntemlerini tanımlar.
 
 `IHttpConnectionFeature`Yerel ve uzak adresler ve bağlantı noktaları için özellikleri tanımlar.
 
-`IHttpRequestLifetimeFeature`Bağlantıların iptali veya istemci bağlantısının kesilmesi gibi bir isteğin zamanından önce sonlandırıldığını algılama desteği tanımlar.
+`IHttpRequestLifetimeFeature`Bağlantıların iptal edilme desteğini tanımlar veya bir isteğin erken sonlandırılıp sonlandırılmayacağını (örneğin, bir istemci bağlantısı kesildiğini) belirler.
 
-`IHttpSendFileFeature`Dosyaları eşit bir şekilde göndermek için bir yöntem tanımlar.
+`IHttpSendFileFeature`Dosyaları zaman uyumsuz olarak göndermek için bir yöntem tanımlar.
 
 `IHttpWebSocketFeature`Web yuvalarını desteklemek için bir API tanımlar.
 
-`IHttpRequestIdentifierFeature`İstekleri benzersiz olarak tanımlamak için uygulanabilecek bir özellik ekler.
+`IHttpRequestIdentifierFeature`İstekleri benzersiz şekilde tanımlamak için uygulanabilecek bir özellik ekler.
 
-`ISessionFeature`Kullanıcı `ISessionFactory` oturumlarını desteklemek için tanımlar ve `ISession` soyutlamalar.
+`ISessionFeature`Kullanıcı `ISessionFactory` oturumlarını `ISession` desteklemek için tanımlar ve soyutlamalar tanımlar.
 
 `ITlsConnectionFeature`İstemci sertifikalarını almak için bir API tanımlar.
 
-`ITlsTokenBindingFeature`TLS belirteç bağlama parametreleri ile çalışma yöntemlerini tanımlar.
+`ITlsTokenBindingFeature`TLS belirteci bağlama parametreleriyle çalışma yöntemlerini tanımlar.
 
 > [!NOTE]
-> `ISessionFeature`bir sunucu özelliği değildir, ancak `SessionMiddleware` (bkz. [Uygulama Durumunu Yönetme)](app-state.md)tarafından uygulanır.
+> `ISessionFeature`bir sunucu özelliği değildir, ancak `SessionMiddleware` (bkz. [uygulama durumunu yönetme](app-state.md)) tarafından uygulanır.
 
 ## <a name="feature-collections"></a>Özellik koleksiyonları
 
-Özelliği, `Features` `HttpContext` geçerli istek için kullanılabilir HTTP özelliklerini almak ve ayarlamak için bir arabirim sağlar. Özellik koleksiyonu bir istek bağlamında bile tustubl olduğundan, ara yazılım koleksiyonu değiştirmek ve ek özellikler için destek eklemek için kullanılabilir.
+Özelliği `Features` , geçerli `HttpContext` istek için kullanılabilir http özelliklerini almak ve ayarlamak için bir arabirim sağlar. Özellik koleksiyonu bir istek bağlamı içinde bile değişebilir olduğundan, ara yazılım, koleksiyonu değiştirmek ve ek özellikler için destek eklemek üzere kullanılabilir.
 
 ## <a name="middleware-and-request-features"></a>Ara yazılım ve istek özellikleri
 
-Sunucular özellik koleksiyonunu oluşturmaktan sorumlu olsa da, ara yazılımlar hem bu koleksiyona ekleyebilir hem de koleksiyondaki özellikleri tüketebilir. Örneğin, `IHttpSendFileFeature` özellik `StaticFileMiddleware` erişir. Özellik varsa, istenen statik dosyayı fiziksel yolundan göndermek için kullanılır. Aksi takdirde, dosyayı göndermek için daha yavaş bir alternatif yöntem kullanılır. Kullanılabilir olduğunda, `IHttpSendFileFeature` işletim sisteminin dosyayı açmasına ve ağ kartına doğrudan çekirdek modu kopyasını gerçekleştirmesine olanak tanır.
+Sunucular Özellik koleksiyonu oluşturmaktan sorumludur, ancak ara yazılım bu koleksiyona ekleyebilir ve koleksiyondaki özellikleri kullanabilir. Örneğin, `StaticFileMiddleware` `IHttpSendFileFeature` özelliğine erişir. Özellik varsa, istenen statik dosyayı fiziksel yolundan göndermek için kullanılır. Aksi takdirde, dosyayı göndermek için daha yavaş bir alternatif yöntem kullanılır. Kullanılabilir olduğunda, işletim `IHttpSendFileFeature` sisteminin dosyayı açmasına ve ağ kartına doğrudan bir çekirdek modu kopyalaması gerçekleştirmesine izin verir.
 
-Ayrıca, ara yazılım sunucu tarafından kurulan özellik koleksiyonuna ekleyebilirsiniz. Mevcut özellikler, ara yazılımın sunucunun işlevselliğini genişletmesine olanak tanıyan ara yazılımlarla bile değiştirilebilir. Koleksiyona eklenen özellikler, istek ardışık alanında hemen diğer ara yazılımlara veya altta yatan uygulamanın kendisine kullanılabilir.
+Ayrıca, ara yazılım, sunucu tarafından belirlenen özellik koleksiyonuna eklenebilir. Mevcut özellikler, ara yazılım tarafından da değiştirilebilir ve bu da ara yazılım, sunucunun işlevselliğini artırabilir. Koleksiyona eklenen özellikler, daha sonra istek ardışık düzeninde bulunan diğer ara yazılım veya temeldeki uygulamanın kendisi için de kullanılabilir.
 
-Özel sunucu uygulamaları ve belirli ara yazılım geliştirmeleri birleştirilerek, bir uygulamanın gerektirdiği kesin özellik kümesi oluşturulabilir. Bu, eksik özelliklerin sunucuda değişiklik gerektirmeden eklenmesine olanak tanır ve yalnızca en az sayıda özelliğin açığa çıkarolmasını sağlayarak saldırı yüzey alanını sınırlandırarak performansı artırır.
+Özel sunucu uygulamalarını ve belirli ara yazılım geliştirmelerini birleştirerek, bir uygulamanın gerektirdiği kesin özellikler kümesi oluşturulabilir. Bu, sunucuda değişiklik gerektirmeden eksik özelliklerin eklenmesine izin verir ve yalnızca en düşük miktarda özelliğin gösterilmesini sağlar, böylece saldırı yüzeyi alanını kısıtlar ve performansı geliştirir.
 
 ## <a name="summary"></a>Özet
 
-Özellik arabirimleri, belirli bir isteğin desteklenebilen belirli HTTP özelliklerini tanımlar. Sunucular, özellik koleksiyonlarını ve bu sunucu tarafından desteklenen ilk özellik kümesini tanımlar, ancak bu özellikleri geliştirmek için ara yazılımkullanılabilir.
+Özellik arabirimleri, belirli bir isteğin destekleyebileceği belirli HTTP özelliklerini tanımlar. Sunucular, özellik koleksiyonlarını ve bu sunucu tarafından desteklenen ilk özellik kümesini tanımlar, ancak bu özellikleri geliştirmek için ara yazılım kullanılabilir.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

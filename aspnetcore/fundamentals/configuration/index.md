@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 3/29/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 7715adc9b39edd4f8a5882b2e60a1b5513fe400b
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: c2a7ef9c1523bc179524f328905f3a4b1460a1a5
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206001"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774502"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core yapılandırma
 
@@ -1792,11 +1798,11 @@ public class Startup
 
 Başlangıç kolaylığı yöntemlerini kullanarak yapılandırmaya erişme örneği için bkz. [uygulama başlatma: kullanışlı yöntemler](xref:fundamentals/startup#convenience-methods).
 
-## <a name="access-configuration-in-a-razor-pages-page-or-mvc-view"></a>Razor Pages sayfasında veya MVC görünümünde erişim yapılandırması
+## <a name="access-configuration-in-a-razor-pages-page-or-mvc-view"></a>Razor Sayfalar SAYFASıNDA veya MVC görünümünde erişim yapılandırması
 
-Razor Pages sayfasındaki veya MVC görünümündeki yapılandırma ayarlarına erişmek için, [Microsoft. Extensions. Configuration ad alanı](xref:Microsoft.Extensions.Configuration) için bir <xref:Microsoft.Extensions.Configuration.IConfiguration> [using yönergesi](xref:mvc/views/razor#using) ([C# başvurusu: using yönergesi](/dotnet/csharp/language-reference/keywords/using-directive)) ekleyin ve sayfa ya da görünüme ekleyin.
+Bir Razor sayfalar SAYFASıNDAKI veya MVC görünümündeki yapılandırma ayarlarına erişmek Için, [Microsoft. Extensions. Configuration ad alanı](xref:Microsoft.Extensions.Configuration) için bir <xref:Microsoft.Extensions.Configuration.IConfiguration> [using yönergesi](xref:mvc/views/razor#using) ([C# başvurusu: using yönergesi](/dotnet/csharp/language-reference/keywords/using-directive)) ekleyin ve sayfa ya da görünüme ekleyin.
 
-Razor Pages sayfasında:
+Razor Sayfalar sayfasında:
 
 ```cshtml
 @page

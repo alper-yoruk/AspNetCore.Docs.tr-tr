@@ -5,17 +5,20 @@ description: Kimlik doğrulama Blazor ve yetkilendirme senaryoları hakkında bi
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/26/2020
+ms.date: 05/04/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/index
-ms.openlocfilehash: ced8e90147b08bc75aec4534fdd8d8552506f88c
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: d55880265ed1ceedf8f115412e5ac47309521239
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206105"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772901"
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>ASP.NET Core Blazor kimlik doğrulaması ve yetkilendirme
 
@@ -35,12 +38,12 @@ Güvenlik senaryoları sunucu ve Blazor Blazor webassembly uygulamaları arasın
 
 BlazorWebAssembly uygulamaları istemcide çalışır. Yetkilendirme *yalnızca* hangi kullanıcı arabirimi seçeneklerinin gösterileceğini belirlemede kullanılır. İstemci tarafı denetimleri bir kullanıcı tarafından değiştirilebilecek veya atlandığından, Blazor webassembly uygulaması yetkilendirme erişim kurallarını zorunlu kılamaz.
 
-[Razor Pages yetkilendirme kuralları](xref:security/authorization/razor-pages-authorization) yönlendirilebilir Razor bileşenleri için uygulanmaz. Yönlendirilemeyen bir Razor bileşeni [bir sayfaya katıştırılmışsa](xref:blazor/integrate-components#render-components-from-a-page-or-view), sayfanın yetkilendirme kuralları, diğer sayfanın Içeriğiyle birlikte Razor bileşenini dolaylı olarak etkiler.
+Sayfalar yetkilendirme kuralları yönlendirilebilir Razor bileşenlere uygulanmaz. [ Razor ](xref:security/authorization/razor-pages-authorization) Bir sayfada yönlendirilemeyen Razor bir bileşen [gömüliyorsa](xref:blazor/integrate-components#render-components-from-a-page-or-view), sayfanın yetkilendirme kuralları, sayfanın geri kalanı ile birlikte, Razor bileşeni dolaylı olarak etkiler.
 
 > [!NOTE]
-> <xref:Microsoft.AspNetCore.Identity.SignInManager%601>ve <xref:Microsoft.AspNetCore.Identity.UserManager%601> Razor bileşenlerinde desteklenmez.
+> <xref:Microsoft.AspNetCore.Identity.SignInManager%601>ve <xref:Microsoft.AspNetCore.Identity.UserManager%601> Razor bileşenlerde desteklenmez.
 
-## <a name="authentication"></a>Kimlik Doğrulaması
+## <a name="authentication"></a>Kimlik doğrulaması
 
 Blazor, kullanıcının kimliğini kurmak için mevcut ASP.NET Core kimlik doğrulama mekanizmalarını kullanır. Tam mekanizma, Blazor uygulamanın nasıl barındırıldığını, webassembly Blazor veya Blazor Server 'a bağlıdır.
 
@@ -246,7 +249,7 @@ Erişim, genellikle aşağıdakileri yapıp verilmeksizin verilir veya reddedili
 * Bir kullanıcının *talebi*vardır.
 * Bir *ilke* karşılandı.
 
-Bu kavramların her biri, ASP.NET Core MVC veya Razor Pages uygulamasındaki ile aynıdır. ASP.NET Core güvenliği hakkında daha fazla bilgi için, [ASP.NET Core güvenlik ve kimlik](xref:security/index)' in altındaki makalelere bakın.
+Bu kavramların her biri, ASP.NET Core MVC veya Razor Pages uygulamasındaki ile aynıdır. ASP.NET Core güvenliği hakkında daha fazla bilgi için [ASP.NET Core güvenlik ve Identity ](xref:security/index)altındaki makalelere bakın.
 
 ## <a name="authorizeview-component"></a>AuthorizeView bileşeni
 
@@ -338,7 +341,7 @@ Bu yaklaşım normalde sunucu uygulamaları için Blazor geçerli değildir. Bla
 
 ## <a name="authorize-attribute"></a>[Yetkilendir] özniteliği
 
-`[Authorize]` Öznitelik Razor bileşenlerinde kullanılabilir:
+Özniteliği `[Authorize]` , Razor bileşenlerinde kullanılabilir:
 
 ```razor
 @page "/"
@@ -426,6 +429,7 @@ Uygulama, temeldeki kimlik doğrulama durumu verilerinin değiştiğini belirler
 Uygulama, yordamsal mantığın bir parçası olarak yetkilendirme kurallarını denetmek için gerekliyse, Kullanıcı tarafından `Task<AuthenticationState>` <xref:System.Security.Claims.ClaimsPrincipal>elde etmek için türünde basamaklı bir parametre kullanın. `Task<AuthenticationState>``IAuthorizationService`, ilkeleri değerlendirmek için gibi diğer hizmetlerle birleştirilebilir.
 
 ```razor
+@using Microsoft.AspNetCore.Authorization
 @inject IAuthorizationService AuthorizationService
 
 <button @onclick="@DoSomething">Do something important</button>

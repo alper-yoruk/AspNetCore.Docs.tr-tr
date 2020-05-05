@@ -1,63 +1,69 @@
 ---
-title: ASP.NET Core'da üçüncü taraf bir kapsayıcı ile ara yazılım etkinleştirme
+title: ASP.NET Core bir üçüncü taraf kapsayıcısı ile ara yazılım etkinleştirme
 author: rick-anderson
-description: ASP.NET Core'da fabrika tabanlı etkinleştirme ve üçüncü taraf bir kapsayıcı ile güçlü bir şekilde yazılan ara yazılımları nasıl kullanacağınızı öğrenin.
+description: Fabrika tabanlı etkinleştirme ve ASP.NET Core bir üçüncü taraf kapsayıcısı ile kesin olarak belirlenmiş bir ara yazılımı nasıl kullanacağınızı öğrenin.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 09/22/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/middleware/extensibility-third-party-container
-ms.openlocfilehash: a5c5bf6dff6ef795add075df932dd625129ef793
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 9a551777c58ba8eae1cf04758e1631710ff16e51
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78663137"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774476"
 ---
-# <a name="middleware-activation-with-a-third-party-container-in-aspnet-core"></a>ASP.NET Core'da üçüncü taraf bir kapsayıcı ile ara yazılım etkinleştirme
+# <a name="middleware-activation-with-a-third-party-container-in-aspnet-core"></a>ASP.NET Core bir üçüncü taraf kapsayıcısı ile ara yazılım etkinleştirme
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Bu makalede, nasıl <xref:Microsoft.AspNetCore.Http.IMiddlewareFactory> kullanılacağını ve <xref:Microsoft.AspNetCore.Http.IMiddleware> üçüncü taraf bir kapsayıcı ile [ara yazılım](xref:fundamentals/middleware/index) etkinleştirme için bir genişletilebilirlik noktası olarak gösterir. Giriş hakkında bilgi `IMiddlewareFactory` `IMiddleware`için <xref:fundamentals/middleware/extensibility>ve , bkz.
+Bu makalede <xref:Microsoft.AspNetCore.Http.IMiddlewareFactory> , üçüncü taraf kapsayıcı ile <xref:Microsoft.AspNetCore.Http.IMiddleware> [Ara yazılım](xref:fundamentals/middleware/index) etkinleştirme için bir genişletilebilirlik noktası ve nasıl kullanılacağı gösterilir. Ve `IMiddlewareFactory` `IMiddleware`hakkında giriş bilgileri için bkz <xref:fundamentals/middleware/extensibility>..
 
-[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/middleware/extensibility-third-party-container/samples/) ( nasıl[indirilir](xref:index#how-to-download-a-sample))
+[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/middleware/extensibility-third-party-container/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-Örnek uygulama, bir `IMiddlewareFactory` uygulama tarafından ara `SimpleInjectorMiddlewareFactory`yazılım aktivasyonu gösterir. Örnek basit [enjektör](https://simpleinjector.org) bağımlılığı enjeksiyon (DI) konteyner kullanır.
+Örnek uygulama, `IMiddlewareFactory` `SimpleInjectorMiddlewareFactory`bir uygulama tarafından ara yazılım etkinleştirmesini gösterir. Örnek, [basit Injector](https://simpleinjector.org) bağımlılık ekleme (dı) kapsayıcısını kullanır.
 
-Örneğin ara yazılım uygulaması, sorgu dize parametresi`key`( tarafından sağlanan değeri kaydeder. Ara yazılım, sorgu dize değerini bellek içi bir veritabanına kaydetmek için enjekte edilmiş bir veritabanı bağlamını (kapsamlı bir hizmet) kullanır.
+Örneğin ara yazılım uygulamasının bir sorgu dizesi parametresi (`key`) tarafından belirtilen değeri kaydeder. Ara yazılım, sorgu dizesi değerini bellek içi bir veritabanına kaydetmek için eklenen bir veritabanı bağlamını (kapsamlı bir hizmet) kullanır.
 
 > [!NOTE]
-> Örnek uygulama sadece gösteri amacıyla [Basit Enjektör](https://github.com/simpleinjector/SimpleInjector) kullanır. Basit Enjektör kullanımı bir ciro değildir. Basit Enjektör belgelerinde açıklanan ara yazılım etkinleştirme yaklaşımları ve GitHub sorunları, Basit Enjektör'ün koruyucuları tarafından önerilir. Daha fazla bilgi için, [Basit Enjektör belgeleri](https://simpleinjector.readthedocs.io/en/latest/index.html) ve [Basit Enjektör GitHub deposuna](https://github.com/simpleinjector/SimpleInjector)bakın.
+> Örnek uygulama, yalnızca tanıtım amacıyla [basit Injector](https://github.com/simpleinjector/SimpleInjector) kullanır. Basit Injector kullanımı bir onay değildir. Basit Injector belgelerinde açıklanan ara yazılım etkinleştirme yaklaşımları ve GitHub sorunları, basit Injector 'ın sürdürülebilir tarafından önerilir. Daha fazla bilgi için bkz. [basit Injector belgeleri](https://simpleinjector.readthedocs.io/en/latest/index.html) ve [basit injecgithub deposu](https://github.com/simpleinjector/SimpleInjector).
 
-## <a name="imiddlewarefactory"></a>IMiddlewareFactory
+## <a name="imiddlewarefactory"></a>Imıddliwarefactory
 
 <xref:Microsoft.AspNetCore.Http.IMiddlewareFactory>ara yazılım oluşturmak için yöntemler sağlar.
 
-Örnek uygulamada, bir `SimpleInjectorActivatedMiddleware` örnek oluşturmak için bir ara yazılım fabrikası uygulanır. Ara yazılım fabrikası, ara yazılımı çözmek için Basit Enjektör kabını kullanır:
+Örnek uygulamada bir `SimpleInjectorActivatedMiddleware` örnek oluşturmak için bir ara yazılım fabrikası uygulanır. Ara yazılım fabrikası, ara yazılımı çözümlemek için basit Injector kapsayıcısını kullanır:
 
 [!code-csharp[](extensibility-third-party-container/samples/3.x/SampleApp/Middleware/SimpleInjectorMiddlewareFactory.cs?name=snippet1&highlight=5-8,12)]
 
-## <a name="imiddleware"></a>IMiddleware
+## <a name="imiddleware"></a>Imıddliware
 
-<xref:Microsoft.AspNetCore.Http.IMiddleware>uygulamanın istek ardışık alanı için ara yazılım tanımlar.
+<xref:Microsoft.AspNetCore.Http.IMiddleware>uygulamanın istek ardışık düzeni için ara yazılımı tanımlar.
 
-Middleware bir `IMiddlewareFactory` uygulama tarafından aktive (*Middleware / SimpleInjectorActivatedMiddleware.cs):*
+Bir `IMiddlewareFactory` uygulama tarafından etkinleştirilen ara yazılım (*Ara yazılım/Simpleınjectoractivatedara yazılım. cs*):
 
 [!code-csharp[](extensibility-third-party-container/samples/3.x/SampleApp/Middleware/SimpleInjectorActivatedMiddleware.cs?name=snippet1)]
 
-Middleware *(Middleware/MiddlewareExtensions.cs):*
+Ara yazılım (*Ara yazılım/MiddlewareExtensions. cs*) için bir uzantı oluşturulur:
 
 [!code-csharp[](extensibility-third-party-container/samples/3.x/SampleApp/Middleware/MiddlewareExtensions.cs?name=snippet1)]
 
-`Startup.ConfigureServices`birkaç görevi gerçekleştirmesi gerekir:
+`Startup.ConfigureServices`birkaç görev gerçekleştirmeniz gerekir:
 
-* Basit Enjektör konteynerini ayarlayın.
-* Fabrikayı ve ara yazılımı kaydedin.
-* Uygulamanın veritabanı bağlamını Basit Enjektör kapsayıcısından kullanılabilir hale getirin.
+* Basit Injector kapsayıcısını ayarlayın.
+* Fabrika ve ara yazılımı kaydedin.
+* Uygulamanın veritabanı bağlamını basit ınjtor kapsayıcısından kullanılabilir hale getirin.
 
 [!code-csharp[](extensibility-third-party-container/samples/3.x/SampleApp/Startup.cs?name=snippet1)]
 
-Ara yazılım istek işleme boru hattında `Startup.Configure`kayıtlıdır:
+Ara yazılım, içindeki `Startup.Configure`istek işleme ardışık düzenine kaydedilir:
 
 [!code-csharp[](extensibility-third-party-container/samples/3.x/SampleApp/Startup.cs?name=snippet2&highlight=12)]
 
@@ -65,46 +71,46 @@ Ara yazılım istek işleme boru hattında `Startup.Configure`kayıtlıdır:
 
 ::: moniker range="< aspnetcore-3.0"
 
-Bu makalede, nasıl <xref:Microsoft.AspNetCore.Http.IMiddlewareFactory> kullanılacağını ve <xref:Microsoft.AspNetCore.Http.IMiddleware> üçüncü taraf bir kapsayıcı ile [ara yazılım](xref:fundamentals/middleware/index) etkinleştirme için bir genişletilebilirlik noktası olarak gösterir. Giriş hakkında bilgi `IMiddlewareFactory` `IMiddleware`için <xref:fundamentals/middleware/extensibility>ve , bkz.
+Bu makalede <xref:Microsoft.AspNetCore.Http.IMiddlewareFactory> , üçüncü taraf kapsayıcı ile <xref:Microsoft.AspNetCore.Http.IMiddleware> [Ara yazılım](xref:fundamentals/middleware/index) etkinleştirme için bir genişletilebilirlik noktası ve nasıl kullanılacağı gösterilir. Ve `IMiddlewareFactory` `IMiddleware`hakkında giriş bilgileri için bkz <xref:fundamentals/middleware/extensibility>..
 
-[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/middleware/extensibility-third-party-container/samples/) ( nasıl[indirilir](xref:index#how-to-download-a-sample))
+[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/middleware/extensibility-third-party-container/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-Örnek uygulama, bir `IMiddlewareFactory` uygulama tarafından ara `SimpleInjectorMiddlewareFactory`yazılım aktivasyonu gösterir. Örnek basit [enjektör](https://simpleinjector.org) bağımlılığı enjeksiyon (DI) konteyner kullanır.
+Örnek uygulama, `IMiddlewareFactory` `SimpleInjectorMiddlewareFactory`bir uygulama tarafından ara yazılım etkinleştirmesini gösterir. Örnek, [basit Injector](https://simpleinjector.org) bağımlılık ekleme (dı) kapsayıcısını kullanır.
 
-Örneğin ara yazılım uygulaması, sorgu dize parametresi`key`( tarafından sağlanan değeri kaydeder. Ara yazılım, sorgu dize değerini bellek içi bir veritabanına kaydetmek için enjekte edilmiş bir veritabanı bağlamını (kapsamlı bir hizmet) kullanır.
+Örneğin ara yazılım uygulamasının bir sorgu dizesi parametresi (`key`) tarafından belirtilen değeri kaydeder. Ara yazılım, sorgu dizesi değerini bellek içi bir veritabanına kaydetmek için eklenen bir veritabanı bağlamını (kapsamlı bir hizmet) kullanır.
 
 > [!NOTE]
-> Örnek uygulama sadece gösteri amacıyla [Basit Enjektör](https://github.com/simpleinjector/SimpleInjector) kullanır. Basit Enjektör kullanımı bir ciro değildir. Basit Enjektör belgelerinde açıklanan ara yazılım etkinleştirme yaklaşımları ve GitHub sorunları, Basit Enjektör'ün koruyucuları tarafından önerilir. Daha fazla bilgi için, [Basit Enjektör belgeleri](https://simpleinjector.readthedocs.io/en/latest/index.html) ve [Basit Enjektör GitHub deposuna](https://github.com/simpleinjector/SimpleInjector)bakın.
+> Örnek uygulama, yalnızca tanıtım amacıyla [basit Injector](https://github.com/simpleinjector/SimpleInjector) kullanır. Basit Injector kullanımı bir onay değildir. Basit Injector belgelerinde açıklanan ara yazılım etkinleştirme yaklaşımları ve GitHub sorunları, basit Injector 'ın sürdürülebilir tarafından önerilir. Daha fazla bilgi için bkz. [basit Injector belgeleri](https://simpleinjector.readthedocs.io/en/latest/index.html) ve [basit injecgithub deposu](https://github.com/simpleinjector/SimpleInjector).
 
-## <a name="imiddlewarefactory"></a>IMiddlewareFactory
+## <a name="imiddlewarefactory"></a>Imıddliwarefactory
 
 <xref:Microsoft.AspNetCore.Http.IMiddlewareFactory>ara yazılım oluşturmak için yöntemler sağlar.
 
-Örnek uygulamada, bir `SimpleInjectorActivatedMiddleware` örnek oluşturmak için bir ara yazılım fabrikası uygulanır. Ara yazılım fabrikası, ara yazılımı çözmek için Basit Enjektör kabını kullanır:
+Örnek uygulamada bir `SimpleInjectorActivatedMiddleware` örnek oluşturmak için bir ara yazılım fabrikası uygulanır. Ara yazılım fabrikası, ara yazılımı çözümlemek için basit Injector kapsayıcısını kullanır:
 
 [!code-csharp[](extensibility-third-party-container/samples/2.x/SampleApp/Middleware/SimpleInjectorMiddlewareFactory.cs?name=snippet1&highlight=5-8,12)]
 
-## <a name="imiddleware"></a>IMiddleware
+## <a name="imiddleware"></a>Imıddliware
 
-<xref:Microsoft.AspNetCore.Http.IMiddleware>uygulamanın istek ardışık alanı için ara yazılım tanımlar.
+<xref:Microsoft.AspNetCore.Http.IMiddleware>uygulamanın istek ardışık düzeni için ara yazılımı tanımlar.
 
-Middleware bir `IMiddlewareFactory` uygulama tarafından aktive (*Middleware / SimpleInjectorActivatedMiddleware.cs):*
+Bir `IMiddlewareFactory` uygulama tarafından etkinleştirilen ara yazılım (*Ara yazılım/Simpleınjectoractivatedara yazılım. cs*):
 
 [!code-csharp[](extensibility-third-party-container/samples/2.x/SampleApp/Middleware/SimpleInjectorActivatedMiddleware.cs?name=snippet1)]
 
-Middleware *(Middleware/MiddlewareExtensions.cs):*
+Ara yazılım (*Ara yazılım/MiddlewareExtensions. cs*) için bir uzantı oluşturulur:
 
 [!code-csharp[](extensibility-third-party-container/samples/2.x/SampleApp/Middleware/MiddlewareExtensions.cs?name=snippet1)]
 
-`Startup.ConfigureServices`birkaç görevi gerçekleştirmesi gerekir:
+`Startup.ConfigureServices`birkaç görev gerçekleştirmeniz gerekir:
 
-* Basit Enjektör konteynerini ayarlayın.
-* Fabrikayı ve ara yazılımı kaydedin.
-* Uygulamanın veritabanı bağlamını Basit Enjektör kapsayıcısından kullanılabilir hale getirin.
+* Basit Injector kapsayıcısını ayarlayın.
+* Fabrika ve ara yazılımı kaydedin.
+* Uygulamanın veritabanı bağlamını basit ınjtor kapsayıcısından kullanılabilir hale getirin.
 
 [!code-csharp[](extensibility-third-party-container/samples/2.x/SampleApp/Startup.cs?name=snippet1)]
 
-Ara yazılım istek işleme boru hattında `Startup.Configure`kayıtlıdır:
+Ara yazılım, içindeki `Startup.Configure`istek işleme ardışık düzenine kaydedilir:
 
 [!code-csharp[](extensibility-third-party-container/samples/2.x/SampleApp/Startup.cs?name=snippet2&highlight=12)]
 
@@ -114,5 +120,5 @@ Ara yazılım istek işleme boru hattında `Startup.Configure`kayıtlıdır:
 
 * [Ara yazılım](xref:fundamentals/middleware/index)
 * [Fabrika tabanlı ara yazılım etkinleştirme](xref:fundamentals/middleware/extensibility)
-* [Basit Enjektör GitHub deposu](https://github.com/simpleinjector/SimpleInjector)
-* [Basit Enjektör belgeleri](https://simpleinjector.readthedocs.io/en/latest/index.html)
+* [Basit ınjecgithub deposu](https://github.com/simpleinjector/SimpleInjector)
+* [Basit Injector belgeleri](https://simpleinjector.readthedocs.io/en/latest/index.html)

@@ -7,14 +7,18 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/17/2020
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: 260e2f0c16288fec2e0a694d070f357529782d8d
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 23ac2b1c80b9d73d6e9ac57f0ef774ac2ea54be4
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78668156"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775082"
 ---
 # <a name="aspnet-core-signalr-hosting-and-scaling"></a>ASP.NET Core SignalR barındırma ve ölçeklendirme
 
@@ -32,7 +36,7 @@ SignalR belirli bir bağlantı için tüm HTTP isteklerinin aynı sunucu işlemi
 
 Tüm diğer koşullarda (Redsıs geri düzlemi kullanıldığında dahil), sunucu ortamının yapışkan oturumlar için yapılandırılması gerekir.
 
-SignalR için Azure App Service yapılandırma hakkında yönergeler için bkz. <xref:signalr/publish-to-azure-web-app>.
+SignalR için Azure App Service yapılandırma hakkında yönergeler için bkz <xref:signalr/publish-to-azure-web-app>..
 
 ## <a name="tcp-connection-resources"></a>TCP bağlantı kaynakları
 
@@ -42,7 +46,7 @@ Kalıcı bağlantılar, her bağlantıyı izlemek için ek bellek de tüketir.
 
 SignalR tarafından kurulan bağlantıyla ilgili kaynakların ağır kullanımı, aynı sunucuda barındırılan diğer Web uygulamalarını etkileyebilir. SignalR açıldığında ve en son kullanılabilir TCP bağlantılarını tutuyorsa, aynı sunucudaki diğer Web uygulamalarına da daha fazla bağlantı yoktur.
 
-Sunucuda bağlantı biterse rastgele yuva hataları ve bağlantı sıfırlama hataları görürsünüz. Örnek:
+Sunucuda bağlantı biterse rastgele yuva hataları ve bağlantı sıfırlama hataları görürsünüz. Örneğin:
 
 ```
 An attempt was made to access a socket in a way forbidden by its access permissions...
@@ -94,8 +98,8 @@ Daha önce belirtilen Azure SignalR hizmeti avantajları Redsıs geri düzlemi i
   * Tüm istemciler **yalnızca** WebSockets kullanacak şekilde yapılandırılır.
   * [Skipanlaşma ayarı](xref:signalr/configuration#configure-additional-options) istemci yapılandırmasında etkindir. 
    Sunucuda bir bağlantı başlatıldıktan sonra bağlantı o sunucuda kalmaya devam etmek zorunda kalır.
-* Birkaç ileti gönderilse bile SignalR bir uygulama, istemci sayısına göre ölçeklendirmelidir.
-* SignalR uygulaması, SignalRolmayan bir Web uygulamasından çok daha fazla bağlantı kaynağı kullanır.
+* Birkaç SignalR ileti gönderilse bile, bir uygulamanın, istemci sayısına göre ölçeği ölçeklendirilmesi gerekir.
+* Bir SignalR uygulama, olmadan SignalRbir Web uygulamasından çok daha fazla bağlantı kaynağı kullanır.
 
 ## <a name="iis-limitations-on-windows-client-os"></a>Windows istemci işletim sisteminde IIS sınırlamaları
 
@@ -111,7 +115,7 @@ Yukarıdaki koşullar, istemci işletim sistemi üzerindeki 10 bağlantı sını
 
 ## <a name="linux-with-nginx"></a>Nginx ile Linux
 
-Proxy 'nin `Connection` ve `Upgrade` üst bilgilerini SignalR WebSockets için aşağıdaki şekilde ayarlayın:
+Proxy 'nin `Connection` ve `Upgrade` üst bilgilerini WebSockets için SignalR aşağıdaki şekilde ayarlayın:
 
 ```nginx
 proxy_set_header Upgrade $http_upgrade;
@@ -120,7 +124,7 @@ proxy_set_header Connection $connection_upgrade;
 
 Daha fazla bilgi için bkz. [WebSocket proxy 'si olarak NGINX](https://www.nginx.com/blog/websocket-nginx/).
 
-## <a name="third-party-opno-locsignalr-backplane-providers"></a>Üçüncü taraf SignalR arka düzlem sağlayıcıları
+## <a name="third-party-signalr-backplane-providers"></a>Üçüncü taraf SignalR arka düzlem sağlayıcıları
 
 * [NCache](https://www.alachisoft.com/ncache/asp-net-core-signalr.html)
 * [Orleans](https://github.com/OrleansContrib/SignalR.Orleans)

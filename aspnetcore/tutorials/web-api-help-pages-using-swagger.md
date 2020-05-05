@@ -1,37 +1,43 @@
 ---
-title: ASP.NET Core Web API yardım sayfaları Swagger / OpenAPI ile
+title: Swagger/Openapı ile Web API Yardım sayfaları ASP.NET Core
 author: RicoSuter
-description: Bu öğretici, bir Web API uygulaması için belge ve yardım sayfaları oluşturmak için Swagger ekleme nin bir walkthrough sağlar.
+description: Bu öğretici, bir Web API uygulaması için belge ve yardım sayfaları oluşturmak üzere Swagger ekleme hakkında bir yol sağlar.
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/07/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/web-api-help-pages-using-swagger
-ms.openlocfilehash: 4408e02996b958bf009903aa1e4eeda9ad4f457c
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: bde38fcbc11ef36c42523acb182fc62a934821c3
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78658475"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774528"
 ---
-# <a name="aspnet-core-web-api-help-pages-with-swagger--openapi"></a>ASP.NET Core web API yardım sayfaları Swagger / OpenAPI ile
+# <a name="aspnet-core-web-api-help-pages-with-swagger--openapi"></a>Swagger/Openapı ile Web API Yardım sayfaları ASP.NET Core
 
-Yazar: [Christoph Nienaber](https://twitter.com/zuckerthoben) ve [Rico Suter](https://blog.rsuter.com/)
+Sağlayan- [Christoph Nienaber](https://twitter.com/zuckerthoben) ve [Riko Suter](https://blog.rsuter.com/)
 
-Bir Web API'sini tüketirken, çeşitli yöntemlerini anlamak bir geliştirici için zor olabilir. [OpenAPI](https://www.openapis.org/)olarak da bilinen [Swagger,](https://swagger.io/)Web API'leri için yararlı belgeler ve yardım sayfaları oluşturma sorununu çözer. Etkileşimli dokümantasyon, istemci SDK oluşturma ve API keşfedilebilirlik gibi avantajlar sağlar.
+Bir Web API 'sini kullanırken, çeşitli yöntemlerini anlamak bir geliştirici için zor olabilir. [Openapı](https://www.openapis.org/)olarak da bilinen [Swagger](https://swagger.io/), Web API 'leri için faydalı belge ve yardım sayfaları oluşturma sorununu çözer. Etkileşimli belgeler, istemci SDK 'Sı oluşturma ve API bulunabilirliği gibi avantajlar sağlar.
 
-Bu makalede, [Swashbuckle.AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) ve [NSwag](https://github.com/RicoSuter/NSwag) .NET Swagger uygulamaları sergilenir:
+Bu makalede, [swashbuckle. AspNetCore](https://github.com/domaindrivendev/Swashbuckle.AspNetCore) ve [nswag](https://github.com/RicoSuter/NSwag) .net Swagger uygulamaları gösterilir:
 
-* **Swashbuckle.AspNetCore** ASP.NET Core Web API'ları için Swagger belgeleri oluşturmak için bir açık kaynak projesidir.
+* **Swashbuckle. AspNetCore** , ASP.NET Core Web API 'Leri için Swagger belgelerini oluşturmaya yönelik açık kaynak bir projem.
 
-* **NSwag** Swagger belgeleri oluşturmak ve Core web API'ASP.NET [Swagger UI](https://swagger.io/swagger-ui/) veya [ReDoc](https://github.com/Rebilly/ReDoc) entegre için başka bir açık kaynak projesidir. Ayrıca, NSwag API'nız için C# ve TypeScript istemci kodu oluşturmak için yaklaşımlar sunar.
+* **Nswag** , Swagger belgelerini oluşturmaya ve [Swagger Kullanıcı arabirimini](https://swagger.io/swagger-ui/) veya [yeniden belgeyi](https://github.com/Rebilly/ReDoc) ASP.NET Core Web API 'lerine tümleştirmede başka bir açık kaynak projem. Ayrıca, NSwag API 'niz için C# ve TypeScript istemci kodu oluşturma yaklaşımları sunmaktadır.
 
-## <a name="what-is-swagger--openapi"></a>Swagger / OpenAPI nedir?
+## <a name="what-is-swagger--openapi"></a>Swagger/Openapı nedir?
 
-Swagger, [REST](https://en.wikipedia.org/wiki/Representational_state_transfer) API'lerini tanımlamak için bir dil-agnostik belirtimidir. Swagger projesi [OpenAPI Girişimi'ne](https://www.openapis.org/)bağışlandı ve burada openapi olarak anılıyor. Her iki ad birbirinin yerine kullanılır; ancak OpenAPI tercih edilir. Hem bilgisayarların hem de insanların bir hizmetin özelliklerini uygulamaya (kaynak kodu, ağ erişimi, dokümantasyon) doğrudan erişim olmadan anlamalarını sağlar. Amaçlardan biri, bağlantısı kesilen hizmetleri bağlamak için gereken iş miktarını en aza indirmektir. Başka bir amaç, bir hizmeti doğru bir şekilde belgelemek için gereken süreyi azaltmaktır.
+Swagger, [rest](https://en.wikipedia.org/wiki/Representational_state_transfer) API 'leri açıklamak için dilden bağımsız bir belirtimdir. Swagger projesi, openapı [Initiative](https://www.openapis.org/)'e bağlılmıştı ve burada openapı olarak adlandırılmıştır. Her iki ad de birbirinin yerine kullanılır; Ancak, Openapı tercih edilir. Hem bilgisayarların hem de insanların uygulamaya doğrudan erişim (kaynak kodu, ağ erişimi, belgeler) olmadan bir hizmetin yeteneklerini anlamasına imkan sağlar. Bir hedef, bağlantı ilişkilendirmesi yapılan hizmetleri bağlamak için gereken iş miktarını en aza indirmektir. Başka bir amaç, bir hizmeti doğru bir şekilde belgelemek için gereken süre miktarını azaltmaktır.
 
-## <a name="swagger-specification-swaggerjson"></a>Swagger belirtimi (swagger.json)
+## <a name="swagger-specification-swaggerjson"></a>Swagger belirtimi (Swagger. JSON)
 
-Swagger akışının çekirdeği varsayılan olarak Swagger belirtimidir,&mdash; *swagger.json*adlı bir belgedir. Hizmetinize dayalı olarak Swagger takım zinciri (veya üçüncü taraf uygulamaları) tarafından oluşturulur. API'nizin yeteneklerini ve HTTP ile nasıl erişilenleri açıklar. Swagger UI'yi kullanır ve bulma ve istemci kodu oluşturmayı etkinleştirmek için takım zinciri tarafından kullanılır. Kısaltma için azaltılmış bir Swagger belirtimi örneği aşağıda verilmiştir:
+Swagger akışının çekirdeği, Swagger *. JSON*adlı bir belge&mdash;olan varsayılan olarak Swagger belirtimidir. Bu, hizmetinize bağlı olarak Swagger araç zinciri (veya bunun üçüncü taraf uygulamaları) tarafından oluşturulmuştur. API 'nizin yeteneklerini ve HTTP ile nasıl erişebileceğinizi açıklar. Swagger Kullanıcı arabirimini yürütür ve araç zinciri tarafından keşif ve istemci kodu oluşturmayı etkinleştirmek için kullanılır. Aşağıda, breçekimi için azaltılmış bir Swagger belirtimi örneği verilmiştir:
 
 ```json
 {
@@ -102,18 +108,18 @@ Swagger akışının çekirdeği varsayılan olarak Swagger belirtimidir,&mdash;
 }
 ```
 
-## <a name="swagger-ui"></a>Swagger UI
+## <a name="swagger-ui"></a>Swagger Kullanıcı arabirimi
 
-[Swagger Kullanıcı İyi UI, oluşturulan Swagger](https://swagger.io/swagger-ui/) belirtimini kullanarak hizmet hakkında bilgi sağlayan web tabanlı bir kullanıcı arası hizmeti sunar. Hem Swashbuckle hem de NSwag, bir ara yazılım kayıt çağrısı kullanarak ASP.NET Core uygulamanızda barındırılabilmek için Swagger UI'nin gömülü bir sürümünü içerir. Web UI şuna benzer:
+[Swagger Kullanıcı arabirimi](https://swagger.io/swagger-ui/) , oluşturulan Swagger belirtimini kullanarak hizmet hakkında bilgi sağlayan Web tabanlı bir kullanıcı arabirimi sunar. Hem swashbuckle hem de NSwag, Swagger Kullanıcı arabirimi 'nin ekli bir sürümünü içerir, böylece bir ara yazılım kayıt çağrısı kullanarak ASP.NET Core uygulamanızda barındırılabilmesini sağlayabilirsiniz. Web Kullanıcı arabirimi şöyle görünür:
 
-![Swagger UI](web-api-help-pages-using-swagger/_static/swagger-ui.png)
+![Swagger Kullanıcı arabirimi](web-api-help-pages-using-swagger/_static/swagger-ui.png)
 
-Denetleyicilerinizdeki her genel eylem yöntemi UI'den test edilebilir. Bölümü genişletmek için bir yöntem adını tıklatın. Gerekli parametreleri ekleyin ve **deneyin tıklayın!**.
+Denetleyicilerinizdeki her genel eylem yöntemi kullanıcı arabiriminden test edilebilir. Bölümü genişletmek için bir yöntem adına tıklayın. Gerekli parametreleri ekleyin ve **deneyin!**' e tıklayın.
 
 ![Örnek Swagger GET testi](web-api-help-pages-using-swagger/_static/get-try-it-out.png)
 
 > [!NOTE]
-> Ekran görüntüleri için kullanılan Swagger UI sürümü sürüm 2'dir. Sürüm 3 örneği [için Petstore örneğine](https://petstore.swagger.io/)bakın.
+> Ekran görüntüleri için kullanılan Swagger Kullanıcı arabirimi sürümü sürüm 2 ' dir. Sürüm 3 örneği için bkz. [petstore örneği](https://petstore.swagger.io/).
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

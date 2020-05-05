@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 04/27/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/server/additional-scenarios
-ms.openlocfilehash: 1a3e5a215daedbb9b97c1924275701915806983e
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: 95e9e57889fdbb5270f895874c9b8148ae4ca48d
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206391"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772810"
 ---
 # <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>ASP.NET Core Blazor sunucusu ek güvenlik senaryoları
 
@@ -23,9 +26,9 @@ Sağlayan [Javier Calvarro Nelson](https://github.com/javiercn)
 
 ## <a name="pass-tokens-to-a-blazor-server-app"></a>Belirteçleri bir Blazor sunucu uygulamasına geçirme
 
-Bir Blazor sunucu uygulamasındaki Razor bileşenleri dışında bulunan belirteçler, bu bölümde açıklanan yaklaşımla birlikte bileşenlere geçirilebilir. Örnek kod için, tam `Startup.ConfigureServices` bir örnek de dahil olmak üzere [belirteçleri sunucu tarafı Blazor uygulamasına geçirme](https://github.com/javiercn/blazor-server-aad-sample)konusuna bakın.
+Bir Razor Blazor sunucu uygulamasındaki bileşenlerin dışında bulunan belirteçler, bu bölümde açıklanan yaklaşımla birlikte bileşenlere geçirilebilir. Örnek kod için, tam `Startup.ConfigureServices` bir örnek de dahil olmak üzere [belirteçleri sunucu tarafı Blazor uygulamasına geçirme](https://github.com/javiercn/blazor-server-aad-sample)konusuna bakın.
 
-Blazor Sunucu uygulamasının kimliğini düzenli bir Razor Pages veya MVC uygulamasıyla yaptığınız gibi doğrulayın. Belirteçleri sağlama ve kimlik doğrulama tanımlama bilgisine kaydetme. Örneğin:
+Blazor Sunucu uygulamasının kimliğini düzenli Razor sayfalar veya MVC uygulamasıyla yaptığınız gibi doğrulayın. Belirteçleri sağlama ve kimlik doğrulama tanımlama bilgisine kaydetme. Örneğin:
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;

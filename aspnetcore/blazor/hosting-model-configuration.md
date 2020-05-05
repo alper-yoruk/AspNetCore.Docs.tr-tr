@@ -1,21 +1,24 @@
 ---
 title: ASP.NET Core Blazor barındırma modeli yapılandırması
 author: guardrex
-description: Razor bileşenlerini Blazor Razor Pages ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin.
+description: Bileşenleri Razor sayfalar Blazor ve MVC uygulamalarıyla tümleştirme Razor dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/25/2020
+ms.date: 05/04/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/hosting-model-configuration
-ms.openlocfilehash: c7e8d1f2dcba6432072a5cc11a6c5d78e50c2398
-ms.sourcegitcommit: c6f5ea6397af2dd202632cf2be66fc30f3357bcc
+ms.openlocfilehash: 17ed43a12643f067da73658bec72400acbe1be43
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/26/2020
-ms.locfileid: "82159625"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772080"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>ASP.NET Core Blazor barındırma modeli yapılandırması
 
@@ -100,12 +103,12 @@ if (builder.HostEnvironment.IsEnvironment("Custom"))
 
 ### <a name="configuration"></a>Yapılandırma
 
-Blazor WebAssembly yapılandırmayı şunları destekler:
+Blazor WebAssembly yapılandırmayı şuradan yükler:
 
-* Uygulama ayarları dosyaları için varsayılan olarak [dosya yapılandırma sağlayıcısı](xref:fundamentals/configuration/index#file-configuration-provider) :
+* Uygulama ayarları dosyaları varsayılan olarak:
   * *Wwwroot/appSettings. JSON*
   * *Wwwroot/appSettings. {ENVIRONMENT}. JSON*
-* Uygulama tarafından kaydedilen diğer [yapılandırma sağlayıcıları](xref:fundamentals/configuration/index) .
+* Uygulama tarafından kaydedilen diğer [yapılandırma sağlayıcıları](xref:fundamentals/configuration/index) . Tüm sağlayıcılar Blazor WebAssembly uygulamalarına uygun değildir. Blazor WebAssembly için desteklenen sağlayıcıların açıklanması, Blazor pro5 [(DotNet/AspNetCore. Docs #18134) için yapılandırma sağlayıcıları açıklığa kavuşturarak](https://github.com/dotnet/AspNetCore.Docs/issues/18134)izlenir.
 
 > [!WARNING]
 > Blazor WebAssembly uygulamasındaki yapılandırma kullanıcılar tarafından görülebilir. **Yapılandırma bölümünde uygulama gizli dizilerini veya kimlik bilgilerini depolamamayın.**
@@ -136,12 +139,12 @@ Yapılandırma verilerine <xref:Microsoft.Extensions.Configuration.IConfiguratio
 
 #### <a name="provider-configuration"></a>Sağlayıcı yapılandırması
 
-Aşağıdaki örnek, ek yapılandırma <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> sağlamak için bir ve [dosya yapılandırma sağlayıcısı](xref:fundamentals/configuration/index#file-configuration-provider) kullanır:
+Aşağıdaki örnek, ek yapılandırma <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> sağlamak için bir kullanır:
 
 `Program.Main`:
 
 ```csharp
-using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Configuration.Memory;
 
 ...
 
@@ -159,9 +162,7 @@ var memoryConfig = new MemoryConfigurationSource { InitialData = vehicleData };
 
 ...
 
-builder.Configuration
-    .Add(memoryConfig)
-    .AddJsonFile("cars.json", optional: false, reloadOnChange: true);
+builder.Configuration.Add(memoryConfig);
 ```
 
 Yapılandırma verilerine <xref:Microsoft.Extensions.Configuration.IConfiguration> erişmek için bileşene örnek ekleme:
@@ -176,10 +177,10 @@ Yapılandırma verilerine <xref:Microsoft.Extensions.Configuration.IConfiguratio
 <h2>Wheels</h2>
 
 <ul>
-    <li>Count: @Configuration["wheels:count"]</p>
-    <li>Brand: @Configuration["wheels:brand"]</p>
-    <li>Type: @Configuration["wheels:brand:type"]</p>
-    <li>Year: @Configuration["wheels:year"]</p>
+    <li>Count: @Configuration["wheels:count"]</li>
+    <li>Brand: @Configuration["wheels:brand"]</li>
+    <li>Type: @Configuration["wheels:brand:type"]</li>
+    <li>Year: @Configuration["wheels:year"]</li>
 </ul>
 
 @code {
@@ -187,6 +188,36 @@ Yapılandırma verilerine <xref:Microsoft.Extensions.Configuration.IConfiguratio
     
     ...
 }
+```
+
+*Wwwroot* klasöründeki diğer yapılandırma dosyalarını yapılandırmaya okumak için dosyanın içeriğini almak üzere bir `HttpClient` kullanın. Bu yaklaşım kullanıldığında, mevcut `HttpClient` hizmet kaydı, aşağıdaki örnekte gösterildiği gibi, dosyayı okumak için oluşturulan yerel istemciyi kullanabilir:
+
+*Wwwroot/otomobil. JSON*:
+
+```json
+{
+    "size": "tiny"
+}
+```
+
+`Program.Main`:
+
+```csharp
+using Microsoft.Extensions.Configuration;
+
+...
+
+var client = new HttpClient()
+{
+    BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+};
+
+builder.Services.AddTransient(sp => client);
+
+using var response = await client.GetAsync("cars.json");
+using var stream = await response.Content.ReadAsStreamAsync();
+
+builder.Configuration.AddJsonStream(stream);
 ```
 
 #### <a name="authentication-configuration"></a>Kimlik doğrulama yapılandırması
@@ -249,7 +280,7 @@ Yapılandırma dosyaları çevrimdışı kullanım için önbelleğe alınır. [
 
 Arka plan güncelleştirmelerinin PWAs tarafından nasıl işlendiği hakkında daha fazla bilgi için bkz <xref:blazor/progressive-web-app#background-updates>..
 
-### <a name="logging"></a>Günlüğe kaydetme
+### <a name="logging"></a>Günlüğe Kaydetme
 
 Blazor WebAssembly günlük desteği hakkında bilgi için bkz <xref:fundamentals/logging/index#create-logs-in-blazor>..
 
@@ -303,7 +334,7 @@ Blazor sunucu uygulamaları, sunucu bağlantısı oluşturulmadan önce sunucuda
 
 Statik HTML sayfasından sunucu bileşenleri işleme desteklenmiyor.
 
-### <a name="configure-the-opno-locsignalr-client-for-opno-locblazor-server-apps"></a>Sunucu uygulamaları SignalR için Blazor istemciyi yapılandırma
+### <a name="configure-the-signalr-client-for-blazor-server-apps"></a>Sunucu uygulamaları SignalR için Blazor istemciyi yapılandırma
 
 Bazen, sunucu uygulamaları tarafından SignalR Blazor kullanılan istemciyi yapılandırmanız gerekir. Örneğin, bir bağlantı sorununu tanılamak için SignalR istemcide günlüğe kaydetmeyi yapılandırmak isteyebilirsiniz.
 
@@ -323,6 +354,6 @@ Bazen, sunucu uygulamaları tarafından SignalR Blazor kullanılan istemciyi yap
 </script>
 ```
 
-### <a name="logging"></a>Günlüğe kaydetme
+### <a name="logging"></a>Günlüğe Kaydetme
 
 Sunucu günlüğü desteği Blazor hakkında bilgi için bkz <xref:fundamentals/logging/index#create-logs-in-blazor>..

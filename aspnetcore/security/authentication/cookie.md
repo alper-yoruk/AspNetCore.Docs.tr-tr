@@ -1,17 +1,23 @@
 ---
-title: ASP.NET Core kimliği olmadan tanımlama bilgisi kimlik doğrulaması kullanma
+title: ASP.NET Core olmadan tanımlama bilgisi kimlik doğrulaması kullanmaIdentity
 author: rick-anderson
-description: ASP.NET Core kimliği olmadan tanımlama bilgisi kimlik doğrulamasını nasıl kullanacağınızı öğrenin.
+description: ASP.NET Core Identityolmadan tanımlama bilgisi kimlik doğrulamasını nasıl kullanacağınızı öğrenin.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 02/11/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/cookie
-ms.openlocfilehash: b7c8b2cccb27dd6818330b17439675e41bfef013
-ms.sourcegitcommit: 91dc1dd3d055b4c7d7298420927b3fd161067c64
+ms.openlocfilehash: c179b3657ad4cbda960c2afe685a63f3266a7402
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/24/2020
-ms.locfileid: "80219213"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773850"
 ---
 # <a name="use-cookie-authentication-without-aspnet-core-identity"></a>ASP.NET Core kimliği olmadan tanımlama bilgisi kimlik doğrulaması kullanma
 
@@ -23,29 +29,29 @@ ASP.NET Core kimlik, oturum açma işlemleri oluşturmaya ve korumaya yönelik e
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/cookie/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-Örnek uygulamadaki tanıtım amacıyla, Maria Rodriguez olan kuramsal kullanıcının Kullanıcı hesabı, uygulamaya sabit olarak kodlanmıştır. Kullanıcı oturumu açmak için **e-posta** adresi `maria.rodriguez@contoso.com` ve herhangi bir parolayı kullanın. Kullanıcının kimliği, *Sayfalar/Account/Login. cshtml. cs* dosyasındaki `AuthenticateUser` yönteminde doğrulanır. Gerçek dünyada bir örnekte, kullanıcının kimliği bir veritabanında doğrulanır.
+Örnek uygulamadaki tanıtım amacıyla, Maria Rodriguez olan kuramsal kullanıcının Kullanıcı hesabı, uygulamaya sabit olarak kodlanmıştır. Kullanıcı oturumu açmak için `maria.rodriguez@contoso.com` **e-posta** adresini ve parolayı kullanın. Kullanıcının kimliği, `AuthenticateUser` *Sayfalar/Account/Login. cshtml. cs* dosyasındaki yönteminde doğrulanır. Gerçek dünyada bir örnekte, kullanıcının kimliği bir veritabanında doğrulanır.
 
 ## <a name="configuration"></a>Yapılandırma
 
 Uygulama [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app)kullanmıyorsa, [Microsoft. Aspnetcore. Authentication. Cookies](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Cookies/) paketi için proje dosyasında bir paket başvurusu oluşturun.
 
-`Startup.ConfigureServices` yönteminde, <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> ve <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*> yöntemleriyle kimlik doğrulama ara yazılım hizmetleri oluşturun:
+`Startup.ConfigureServices` Yönteminde, <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> ve <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*> yöntemleriyle kimlik doğrulama ara yazılım hizmetlerini oluşturun:
 
 [!code-csharp[](cookie/samples/3.x/CookieSample/Startup.cs?name=snippet1)]
 
-`AddAuthentication` geçirilen <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme>, uygulamanın varsayılan kimlik doğrulama şemasını ayarlar. `AuthenticationScheme`, tanımlama bilgisi kimlik doğrulamasının birden çok örneği olduğunda ve [belirli bir şemayla yetkilendirmek](xref:security/authorization/limitingidentitybyscheme)istediğiniz durumlarda kullanışlıdır. `AuthenticationScheme`, [ıeauthenticationdefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) olarak ayarlanması, düzen Için "tanımlama bilgileri" değeri sağlar. Düzeni ayıran herhangi bir dize değeri sağlayabilirsiniz.
+<xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme>geçildi, `AddAuthentication` uygulamanın varsayılan kimlik doğrulama şemasını ayarlar. `AuthenticationScheme`birden fazla tanımlama bilgisi kimlik doğrulaması örneği olduğunda ve [belirli bir şemayla yetkilendirmek](xref:security/authorization/limitingidentitybyscheme)istediğinizde yararlıdır. ' In `AuthenticationScheme` [ıeauthenticationdefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) olarak ayarlanması, şema Için bir "tanımlama bilgileri" değeri sağlar. Düzeni ayıran herhangi bir dize değeri sağlayabilirsiniz.
 
-Uygulamanın kimlik doğrulama düzeni, uygulamanın tanımlama bilgisi kimlik doğrulama düzeninden farklıdır. <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*>için bir tanımlama bilgisi kimlik doğrulama düzeni sağlanmamışsa, `CookieAuthenticationDefaults.AuthenticationScheme` ("Cookies") kullanır.
+Uygulamanın kimlik doğrulama düzeni, uygulamanın tanımlama bilgisi kimlik doğrulama düzeninden farklıdır. İçin <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*>bir tanımlama bilgisi kimlik doğrulama düzeni sağlanmazsa, (" `CookieAuthenticationDefaults.AuthenticationScheme` Cookies") kullanır.
 
-Kimlik doğrulama tanımlama bilgisinin <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> özelliği varsayılan olarak `true` olarak ayarlanır. Bir site ziyaretçisi veri toplamaya onay vermemişse kimlik doğrulama tanımlama bilgilerine izin verilir. Daha fazla bilgi için bkz. <xref:security/gdpr#essential-cookies>.
+Kimlik doğrulama tanımlama bilgisinin <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> özelliği varsayılan olarak olarak `true` ayarlanır. Bir site ziyaretçisi veri toplamaya onay vermemişse kimlik doğrulama tanımlama bilgilerine izin verilir. Daha fazla bilgi için bkz. <xref:security/gdpr#essential-cookies>.
 
-`Startup.Configure`, `HttpContext.User` özelliğini ayarlamak ve istekler için yetkilendirme ara yazılımını çalıştırmak için `UseAuthentication` ve `UseAuthorization` çağırın. `UseEndpoints`çağrılmadan önce `UseAuthentication` ve `UseAuthorization` yöntemlerini çağırın:
+İçinde `Startup.Configure`, `HttpContext.User` özelliği `UseAuthentication` ayarlamak `UseAuthorization` ve istekler için yetkilendirme ara yazılımını çalıştırmak için öğesini çağırın. Çağrılmadan `UseEndpoints`önce `UseAuthentication` ve `UseAuthorization` yöntemlerini çağırın:
 
 [!code-csharp[](cookie/samples/3.x/CookieSample/Startup.cs?name=snippet2)]
 
-<xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions> sınıfı, kimlik doğrulama sağlayıcısı seçeneklerini yapılandırmak için kullanılır.
+<xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions> Sınıfı, kimlik doğrulama sağlayıcısı seçeneklerini yapılandırmak için kullanılır.
 
-`Startup.ConfigureServices` yönteminde kimlik doğrulaması için hizmet yapılandırmasında `CookieAuthenticationOptions` ayarlayın:
+Yönteminde kimlik doğrulaması için hizmet yapılandırmasında ayarlanır `CookieAuthenticationOptions` `Startup.ConfigureServices`
 
 ```csharp
 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -57,15 +63,15 @@ services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 
 ## <a name="cookie-policy-middleware"></a>Tanımlama bilgisi Ilkesi ara yazılımı
 
-[Tanımlama bilgisi Ilkesi ara yazılımı](xref:Microsoft.AspNetCore.CookiePolicy.CookiePolicyMiddleware) , tanımlama bilgisi İlkesi yeteneklerini sunar. Ara yazılımı uygulama işleme işlem hattına eklemek&mdash;, yalnızca işlem hattına kayıtlı aşağı akış bileşenlerini etkiler.
+[Tanımlama bilgisi Ilkesi ara yazılımı](xref:Microsoft.AspNetCore.CookiePolicy.CookiePolicyMiddleware) , tanımlama bilgisi İlkesi yeteneklerini sunar. Ara yazılımı uygulama işleme işlem hattına eklemek, yalnızca&mdash;işlem hattına kaydedilen aşağı akış bileşenlerini etkiler.
 
 ```csharp
 app.UseCookiePolicy(cookiePolicyOptions);
 ```
 
-Tanımlama bilgisi işlemenin genel özelliklerini denetlemek için tanımlama bilgisi Ilkesi ara yazılımı ' nı <xref:Microsoft.AspNetCore.Builder.CookiePolicyOptions> kullanın ve tanımlama bilgileri eklenmiş veya silinmiş olduğunda tanımlama bilgisi işleme işleyicilerine kanca ekleyin.
+Tanımlama <xref:Microsoft.AspNetCore.Builder.CookiePolicyOptions> bilgisi işlemenin genel özelliklerini denetlemek için tanımlama bilgisi Ilkesi ara yazılımı, tanımlama bilgileri eklenmiş veya silinmiş olduğunda tanımlama bilgisi işleme işleyicilerine kanca olarak sunulur.
 
-Varsayılan <xref:Microsoft.AspNetCore.Builder.CookiePolicyOptions.MinimumSameSitePolicy> değeri, OAuth2 kimlik doğrulamasına izin verecek şekilde `SameSiteMode.Lax`. `SameSiteMode.Strict`aynı site ilkesini kesinlikle zorlamak için `MinimumSameSitePolicy`ayarlayın. Bu ayar, OAuth2 ve diğer çapraz kaynak kimlik doğrulama düzenlerini kesse de, çıkış noktaları arası istek işlemeye bağlı olmayan diğer uygulama türleri için tanımlama bilgisi güvenlik düzeyini yükseltir.
+Varsayılan <xref:Microsoft.AspNetCore.Builder.CookiePolicyOptions.MinimumSameSitePolicy> değer OAuth2 kimlik `SameSiteMode.Lax` doğrulamasına izin vermek için kullanılır. Aynı site ilkesini kesinlikle zorlamak için, `SameSiteMode.Strict`öğesini ayarlayın. `MinimumSameSitePolicy` Bu ayar, OAuth2 ve diğer çapraz kaynak kimlik doğrulama düzenlerini kesse de, çıkış noktaları arası istek işlemeye bağlı olmayan diğer uygulama türleri için tanımlama bilgisi güvenlik düzeyini yükseltir.
 
 ```csharp
 var cookiePolicyOptions = new CookiePolicyOptions
@@ -74,7 +80,7 @@ var cookiePolicyOptions = new CookiePolicyOptions
 };
 ```
 
-`MinimumSameSitePolicy` için tanımlama bilgisi Ilkesi ara yazılım ayarı, aşağıdaki matriye göre `CookieAuthenticationOptions` ayarlarındaki `Cookie.SameSite` ayarını etkileyebilir.
+İçin `MinimumSameSitePolicy` tanımlama bilgisi Ilkesi ara yazılımı ayarı, aşağıdaki matriye `Cookie.SameSite` göre `CookieAuthenticationOptions` ayarlar ' ın ayarını etkileyebilir.
 
 | MinimumSameSitePolicy | Cookie. SameSite | Sonuç tanımlama bilgisi. SameSite ayarı |
 | --------------------- | --------------- | --------------------------------- |
@@ -84,25 +90,25 @@ var cookiePolicyOptions = new CookiePolicyOptions
 
 ## <a name="create-an-authentication-cookie"></a>Kimlik doğrulama tanımlama bilgisi oluşturma
 
-Kullanıcı bilgilerini tutan bir tanımlama bilgisi oluşturmak için bir <xref:System.Security.Claims.ClaimsPrincipal>oluşturun. Kullanıcı bilgileri serileştirilir ve tanımlama bilgisinde depolanır. 
+Kullanıcı bilgilerini tutan bir tanımlama bilgisi oluşturmak için, oluşturun <xref:System.Security.Claims.ClaimsPrincipal>. Kullanıcı bilgileri serileştirilir ve tanımlama bilgisinde depolanır. 
 
-Gerekli <xref:System.Security.Claims.Claim>s <xref:System.Security.Claims.ClaimsIdentity> oluşturun ve Kullanıcı oturumu açmak için <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignInAsync*> çağırın:
+Gerekli <xref:System.Security.Claims.ClaimsIdentity> <xref:System.Security.Claims.Claim>tüm öğeleri içeren bir oluşturun ve Kullanıcı <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignInAsync*> oturumunu açmak için çağırın:
 
 [!code-csharp[](cookie/samples/3.x/CookieSample/Pages/Account/Login.cshtml.cs?name=snippet1)]
 
 [!INCLUDE[request localized comments](~/includes/code-comments-loc.md)]
 
-`SignInAsync` şifreli bir tanımlama bilgisi oluşturur ve geçerli yanıta ekler. `AuthenticationScheme` belirtilmemişse, varsayılan düzen kullanılır.
+`SignInAsync`şifreli bir tanımlama bilgisi oluşturur ve geçerli yanıta ekler. `AuthenticationScheme` Belirtilmemişse, varsayılan düzen kullanılır.
 
 ASP.NET Core [veri koruma](xref:security/data-protection/using-data-protection) sistemi şifreleme için kullanılır. Birden çok makinede barındırılan bir uygulama, uygulamalar arasında yük dengeleme veya bir Web grubu kullanma için, [veri korumayı](xref:security/data-protection/configuration/overview) aynı anahtar halkasını ve uygulama tanımlayıcısını kullanacak şekilde yapılandırın.
 
 ## <a name="sign-out"></a>Oturumu kapat
 
-Geçerli kullanıcının oturumunu kapatmak ve tanımlama bilgilerini silmek için <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*>çağırın:
+Geçerli kullanıcının oturumunu kapatmak ve tanımlama bilgilerini silmek için şunu arayın <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*>:
 
 [!code-csharp[](cookie/samples/3.x/CookieSample/Pages/Account/Login.cshtml.cs?name=snippet2)]
 
-`CookieAuthenticationDefaults.AuthenticationScheme` (veya "Cookies"), düzen olarak (örneğin, "ContosoCookie") kullanılmazsa, kimlik doğrulama sağlayıcısını yapılandırırken kullanılan düzeni sağlayın. Aksi takdirde, varsayılan düzen kullanılır.
+`CookieAuthenticationDefaults.AuthenticationScheme` (Veya "Cookies"), düzen olarak (örneğin, "contosocookie") kullanılmazsa, kimlik doğrulama sağlayıcısını yapılandırırken kullanılan düzeni sağlayın. Aksi takdirde, varsayılan düzen kullanılır.
 
 ## <a name="react-to-back-end-changes"></a>Arka uç değişikliklerine tepki verme
 
@@ -111,11 +117,11 @@ Tanımlama bilgisi oluşturulduktan sonra tanımlama bilgisi tek kimlik kaynağ�
 * Uygulamanın tanımlama bilgisi kimlik doğrulama sistemi, kimlik doğrulama tanımlama bilgisine göre istekleri işlemeye devam eder.
 * Kimlik doğrulama tanımlama bilgisi geçerli olduğu sürece kullanıcı uygulamada oturum açmış durumda kalır.
 
-<xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents.ValidatePrincipal*> olayı, tanımlama bilgisi kimliğinin doğrulanmasını ve geçersiz kılınması için kullanılabilir. Her istekte tanımlama bilgisinin doğrulanması, uygulamaya erişen kullanıcıların iptal edilmesinin riskini azaltır.
+<xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents.ValidatePrincipal*> Olay, tanımlama bilgisi kimliği doğrulamasını ele almak ve geçersiz kılmak için kullanılabilir. Her istekte tanımlama bilgisinin doğrulanması, uygulamaya erişen kullanıcıların iptal edilmesinin riskini azaltır.
 
-Tanımlama bilgisi doğrulamasına yönelik bir yaklaşım, kullanıcı veritabanının değiştiği zaman izlemenin izlenmesine bağlıdır. Kullanıcının tanımlama bilgisi verildikten sonra veritabanı değiştirilmediyse, tanımlama bilgisi hala geçerliyse kullanıcının kimliğini yeniden doğrulamaya gerek yoktur. Örnek uygulamada, veritabanı `IUserRepository` uygulanır ve bir `LastChanged` değeri depolar. Veritabanında bir Kullanıcı güncelleştirildiği zaman, `LastChanged` değeri geçerli saate ayarlanır.
+Tanımlama bilgisi doğrulamasına yönelik bir yaklaşım, kullanıcı veritabanının değiştiği zaman izlemenin izlenmesine bağlıdır. Kullanıcının tanımlama bilgisi verildikten sonra veritabanı değiştirilmediyse, tanımlama bilgisi hala geçerliyse kullanıcının kimliğini yeniden doğrulamaya gerek yoktur. Örnek uygulamada, veritabanı ' de `IUserRepository` uygulanır ve bir `LastChanged` değer depolar. Veritabanında bir Kullanıcı güncellenmiştir, `LastChanged` değer geçerli saate ayarlanır.
 
-Veritabanı `LastChanged` değerine göre değiştiğinde bir tanımlama bilgisini geçersiz kılmak için, veritabanından geçerli `LastChanged` değerini içeren bir `LastChanged` talep ile tanımlama bilgisini oluşturun:
+Veritabanı `LastChanged` değere göre değiştiğinde bir tanımlama bilgisini geçersiz kılmak için, veritabanından geçerli `LastChanged` `LastChanged` değeri içeren bir talep ile tanımlama bilgisini oluşturun:
 
 ```csharp
 var claims = new List<Claim>
@@ -133,13 +139,13 @@ await HttpContext.SignInAsync(
     new ClaimsPrincipal(claimsIdentity));
 ```
 
-`ValidatePrincipal` olayına bir geçersiz kılma uygulamak için, <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents>türetilen bir sınıfa aşağıdaki imzaya sahip bir yöntem yazın:
+`ValidatePrincipal` Olay için bir geçersiz kılma uygulamak üzere, aşağıdakilerden türetilen bir sınıfa aşağıdaki imzaya sahip bir yöntem yazın <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents>:
 
 ```csharp
 ValidatePrincipal(CookieValidatePrincipalContext)
 ```
 
-Aşağıda `CookieAuthenticationEvents`örnek bir uygulamasıdır:
+Aşağıda örnek bir uygulama verilmiştir `CookieAuthenticationEvents`:
 
 ```csharp
 using System.Linq;
@@ -178,7 +184,7 @@ public class CustomCookieAuthenticationEvents : CookieAuthenticationEvents
 }
 ```
 
-`Startup.ConfigureServices` yönteminde tanımlama bilgisi hizmeti kaydı sırasında olay örneğini kaydedin. `CustomCookieAuthenticationEvents` sınıfınız için [kapsamlı bir hizmet kaydı](xref:fundamentals/dependency-injection#service-lifetimes) sağlayın:
+`Startup.ConfigureServices` Yöntemine tanımlama bilgisi hizmeti kaydı sırasında olay örneğini kaydedin. Sınıfınız için [kapsamlı bir hizmet kaydı](xref:fundamentals/dependency-injection#service-lifetimes) sağlayın: `CustomCookieAuthenticationEvents`
 
 ```csharp
 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -190,7 +196,7 @@ services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 services.AddScoped<CustomCookieAuthenticationEvents>();
 ```
 
-Kullanıcı adının güncelleştirildiği bir durumu, güvenliği hiçbir şekilde etkilemeyen bir kararı&mdash;göz önünde bulundurun. Kullanıcı sorumlusunu kalıcı olarak güncelleştirmek istiyorsanız, `context.ReplacePrincipal` çağırın ve `context.ShouldRenew` özelliğini `true`olarak ayarlayın.
+Kullanıcı adının, güvenliği hiçbir şekilde etkilemeyen bir kararı güncelleştirmediği&mdash;bir durum düşünün. Kullanıcı sorumlusunu kalıcı olarak güncelleştirmek istiyorsanız, çağırın `context.ReplacePrincipal` ve `context.ShouldRenew` özelliğini olarak `true`ayarlayın.
 
 > [!WARNING]
 > Burada açıklanan yaklaşım her istekte tetiklenir. Her istekteki tüm kullanıcılar için kimlik doğrulama tanımlama bilgilerinin doğrulanması, uygulama için büyük bir performans cezası oluşmasına neden olabilir.
@@ -201,7 +207,7 @@ Tanımlama bilgisinin tarayıcı oturumları arasında kalıcı olmasını istey
 
 Aşağıdaki kod parçacığı, tarayıcı kapanışları aracılığıyla ilerlikli bir kimlik ve ilgili tanımlama bilgisi oluşturur. Daha önce yapılandırılmış tüm Kayan süre sonu ayarları kabul edilir. Tarayıcı kapalıyken tanımlama bilgisinin süresi dolarsa tarayıcı, yeniden başlatıldıktan sonra tanımlama bilgisini temizler.
 
-<xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties.IsPersistent> <xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties>`true` olarak ayarlayın:
+Şu <xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties.IsPersistent> şekilde `true` ayarlayın <xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties>:
 
 ```csharp
 // using Microsoft.AspNetCore.Authentication;
@@ -217,7 +223,7 @@ await HttpContext.SignInAsync(
 
 ## <a name="absolute-cookie-expiration"></a>Mutlak tanımlama bilgisi süre sonu
 
-Mutlak bir süre sonu, <xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties.ExpiresUtc>ile ayarlanabilir. Kalıcı bir tanımlama bilgisi oluşturmak için, `IsPersistent` de ayarlanması gerekir. Aksi takdirde, tanımlama bilgisi oturum tabanlı bir yaşam süresi ile oluşturulur ve bu kimlik doğrulama biletinden önce ya da sonra zaman alabilir. `ExpiresUtc` ayarlandığında, ayarlandıysa, <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions><xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions.ExpireTimeSpan> seçeneğinin değerini geçersiz kılar.
+Mutlak bir sona erme saati ile <xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties.ExpiresUtc>ayarlanabilir. Kalıcı tanımlama bilgisi `IsPersistent` oluşturmak için de ayarlanmalıdır. Aksi takdirde, tanımlama bilgisi oturum tabanlı bir yaşam süresi ile oluşturulur ve bu kimlik doğrulama biletinden önce ya da sonra zaman alabilir. `ExpiresUtc` , Ayarlandığında, <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions.ExpireTimeSpan> seçeneğinin <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions>değerini geçersiz kılar.
 
 Aşağıdaki kod parçacığı, 20 dakika boyunca bir kimlik ve karşılık gelen tanımlama bilgisi oluşturur. Bu, daha önce yapılandırılmış olan tüm Kayan süre sonu ayarlarını yoksayar.
 
@@ -242,29 +248,29 @@ ASP.NET Core kimlik, oturum açma işlemleri oluşturmaya ve korumaya yönelik e
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/cookie/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-Örnek uygulamadaki tanıtım amacıyla, Maria Rodriguez olan kuramsal kullanıcının Kullanıcı hesabı, uygulamaya sabit olarak kodlanmıştır. Kullanıcı oturumu açmak için **e-posta** adresi `maria.rodriguez@contoso.com` ve herhangi bir parolayı kullanın. Kullanıcının kimliği, *Sayfalar/Account/Login. cshtml. cs* dosyasındaki `AuthenticateUser` yönteminde doğrulanır. Gerçek dünyada bir örnekte, kullanıcının kimliği bir veritabanında doğrulanır.
+Örnek uygulamadaki tanıtım amacıyla, Maria Rodriguez olan kuramsal kullanıcının Kullanıcı hesabı, uygulamaya sabit olarak kodlanmıştır. Kullanıcı oturumu açmak için `maria.rodriguez@contoso.com` **e-posta** adresini ve parolayı kullanın. Kullanıcının kimliği, `AuthenticateUser` *Sayfalar/Account/Login. cshtml. cs* dosyasındaki yönteminde doğrulanır. Gerçek dünyada bir örnekte, kullanıcının kimliği bir veritabanında doğrulanır.
 
 ## <a name="configuration"></a>Yapılandırma
 
 Uygulama [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app)kullanmıyorsa, [Microsoft. Aspnetcore. Authentication. Cookies](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Cookies/) paketi için proje dosyasında bir paket başvurusu oluşturun.
 
-`Startup.ConfigureServices` yönteminde, kimlik doğrulama ara yazılım hizmetini <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> ve <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*> yöntemlerle oluşturun:
+`Startup.ConfigureServices` Yönteminde, <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> ve <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*> yöntemleriyle kimlik doğrulama ara yazılım hizmetini oluşturun:
 
 [!code-csharp[](cookie/samples/2.x/CookieSample/Startup.cs?name=snippet1)]
 
-`AddAuthentication` geçirilen <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme>, uygulamanın varsayılan kimlik doğrulama şemasını ayarlar. `AuthenticationScheme`, tanımlama bilgisi kimlik doğrulamasının birden çok örneği olduğunda ve [belirli bir şemayla yetkilendirmek](xref:security/authorization/limitingidentitybyscheme)istediğiniz durumlarda kullanışlıdır. `AuthenticationScheme`, [ıeauthenticationdefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) olarak ayarlanması, düzen Için "tanımlama bilgileri" değeri sağlar. Düzeni ayıran herhangi bir dize değeri sağlayabilirsiniz.
+<xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme>geçildi, `AddAuthentication` uygulamanın varsayılan kimlik doğrulama şemasını ayarlar. `AuthenticationScheme`birden fazla tanımlama bilgisi kimlik doğrulaması örneği olduğunda ve [belirli bir şemayla yetkilendirmek](xref:security/authorization/limitingidentitybyscheme)istediğinizde yararlıdır. ' In `AuthenticationScheme` [ıeauthenticationdefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) olarak ayarlanması, şema Için bir "tanımlama bilgileri" değeri sağlar. Düzeni ayıran herhangi bir dize değeri sağlayabilirsiniz.
 
-Uygulamanın kimlik doğrulama düzeni, uygulamanın tanımlama bilgisi kimlik doğrulama düzeninden farklıdır. <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*>için bir tanımlama bilgisi kimlik doğrulama düzeni sağlanmamışsa, `CookieAuthenticationDefaults.AuthenticationScheme` ("Cookies") kullanır.
+Uygulamanın kimlik doğrulama düzeni, uygulamanın tanımlama bilgisi kimlik doğrulama düzeninden farklıdır. İçin <xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*>bir tanımlama bilgisi kimlik doğrulama düzeni sağlanmazsa, (" `CookieAuthenticationDefaults.AuthenticationScheme` Cookies") kullanır.
 
-Kimlik doğrulama tanımlama bilgisinin <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> özelliği varsayılan olarak `true` olarak ayarlanır. Bir site ziyaretçisi veri toplamaya onay vermemişse kimlik doğrulama tanımlama bilgilerine izin verilir. Daha fazla bilgi için bkz. <xref:security/gdpr#essential-cookies>.
+Kimlik doğrulama tanımlama bilgisinin <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> özelliği varsayılan olarak olarak `true` ayarlanır. Bir site ziyaretçisi veri toplamaya onay vermemişse kimlik doğrulama tanımlama bilgilerine izin verilir. Daha fazla bilgi için bkz. <xref:security/gdpr#essential-cookies>.
 
-`Startup.Configure` yönteminde, `HttpContext.User` özelliğini ayarlayan kimlik doğrulama ara yazılımını çağırmak için `UseAuthentication` yöntemini çağırın. `UseMvcWithDefaultRoute` veya `UseMvc`çağrılmadan önce `UseAuthentication` yöntemi çağırın:
+`Startup.Configure` Yönteminde, `HttpContext.User` özelliğini ayarlayan kimlik doğrulama ara yazılımını çağırmak için `UseAuthentication` yöntemini çağırın. Veya `UseMvc`çağrılmadan `UseAuthentication` `UseMvcWithDefaultRoute` önce yöntemi çağırın:
 
 [!code-csharp[](cookie/samples/2.x/CookieSample/Startup.cs?name=snippet2)]
 
-<xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions> sınıfı, kimlik doğrulama sağlayıcısı seçeneklerini yapılandırmak için kullanılır.
+<xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions> Sınıfı, kimlik doğrulama sağlayıcısı seçeneklerini yapılandırmak için kullanılır.
 
-`Startup.ConfigureServices` yönteminde kimlik doğrulaması için hizmet yapılandırmasında `CookieAuthenticationOptions` ayarlayın:
+Yönteminde kimlik doğrulaması için hizmet yapılandırmasında ayarlanır `CookieAuthenticationOptions` `Startup.ConfigureServices`
 
 ```csharp
 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -276,15 +282,15 @@ services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 
 ## <a name="cookie-policy-middleware"></a>Tanımlama bilgisi Ilkesi ara yazılımı
 
-[Tanımlama bilgisi Ilkesi ara yazılımı](xref:Microsoft.AspNetCore.CookiePolicy.CookiePolicyMiddleware) , tanımlama bilgisi İlkesi yeteneklerini sunar. Ara yazılımı uygulama işleme işlem hattına eklemek&mdash;, yalnızca işlem hattına kayıtlı aşağı akış bileşenlerini etkiler.
+[Tanımlama bilgisi Ilkesi ara yazılımı](xref:Microsoft.AspNetCore.CookiePolicy.CookiePolicyMiddleware) , tanımlama bilgisi İlkesi yeteneklerini sunar. Ara yazılımı uygulama işleme işlem hattına eklemek, yalnızca&mdash;işlem hattına kaydedilen aşağı akış bileşenlerini etkiler.
 
 ```csharp
 app.UseCookiePolicy(cookiePolicyOptions);
 ```
 
-Tanımlama bilgisi işlemenin genel özelliklerini denetlemek için tanımlama bilgisi Ilkesi ara yazılımı ' nı <xref:Microsoft.AspNetCore.Builder.CookiePolicyOptions> kullanın ve tanımlama bilgileri eklenmiş veya silinmiş olduğunda tanımlama bilgisi işleme işleyicilerine kanca ekleyin.
+Tanımlama <xref:Microsoft.AspNetCore.Builder.CookiePolicyOptions> bilgisi işlemenin genel özelliklerini denetlemek için tanımlama bilgisi Ilkesi ara yazılımı, tanımlama bilgileri eklenmiş veya silinmiş olduğunda tanımlama bilgisi işleme işleyicilerine kanca olarak sunulur.
 
-Varsayılan <xref:Microsoft.AspNetCore.Builder.CookiePolicyOptions.MinimumSameSitePolicy> değeri, OAuth2 kimlik doğrulamasına izin verecek şekilde `SameSiteMode.Lax`. `SameSiteMode.Strict`aynı site ilkesini kesinlikle zorlamak için `MinimumSameSitePolicy`ayarlayın. Bu ayar, OAuth2 ve diğer çapraz kaynak kimlik doğrulama düzenlerini kesse de, çıkış noktaları arası istek işlemeye bağlı olmayan diğer uygulama türleri için tanımlama bilgisi güvenlik düzeyini yükseltir.
+Varsayılan <xref:Microsoft.AspNetCore.Builder.CookiePolicyOptions.MinimumSameSitePolicy> değer OAuth2 kimlik `SameSiteMode.Lax` doğrulamasına izin vermek için kullanılır. Aynı site ilkesini kesinlikle zorlamak için, `SameSiteMode.Strict`öğesini ayarlayın. `MinimumSameSitePolicy` Bu ayar, OAuth2 ve diğer çapraz kaynak kimlik doğrulama düzenlerini kesse de, çıkış noktaları arası istek işlemeye bağlı olmayan diğer uygulama türleri için tanımlama bilgisi güvenlik düzeyini yükseltir.
 
 ```csharp
 var cookiePolicyOptions = new CookiePolicyOptions
@@ -293,7 +299,7 @@ var cookiePolicyOptions = new CookiePolicyOptions
 };
 ```
 
-`MinimumSameSitePolicy` için tanımlama bilgisi Ilkesi ara yazılım ayarı, aşağıdaki matriye göre `CookieAuthenticationOptions` ayarlarındaki `Cookie.SameSite` ayarını etkileyebilir.
+İçin `MinimumSameSitePolicy` tanımlama bilgisi Ilkesi ara yazılımı ayarı, aşağıdaki matriye `Cookie.SameSite` göre `CookieAuthenticationOptions` ayarlar ' ın ayarını etkileyebilir.
 
 | MinimumSameSitePolicy | Cookie. SameSite | Sonuç tanımlama bilgisi. SameSite ayarı |
 | --------------------- | --------------- | --------------------------------- |
@@ -303,23 +309,23 @@ var cookiePolicyOptions = new CookiePolicyOptions
 
 ## <a name="create-an-authentication-cookie"></a>Kimlik doğrulama tanımlama bilgisi oluşturma
 
-Kullanıcı bilgilerini tutan bir tanımlama bilgisi oluşturmak için bir <xref:System.Security.Claims.ClaimsPrincipal>oluşturun. Kullanıcı bilgileri serileştirilir ve tanımlama bilgisinde depolanır. 
+Kullanıcı bilgilerini tutan bir tanımlama bilgisi oluşturmak için, oluşturun <xref:System.Security.Claims.ClaimsPrincipal>. Kullanıcı bilgileri serileştirilir ve tanımlama bilgisinde depolanır. 
 
-Gerekli <xref:System.Security.Claims.Claim>s <xref:System.Security.Claims.ClaimsIdentity> oluşturun ve Kullanıcı oturumu açmak için <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignInAsync*> çağırın:
+Gerekli <xref:System.Security.Claims.ClaimsIdentity> <xref:System.Security.Claims.Claim>tüm öğeleri içeren bir oluşturun ve Kullanıcı <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignInAsync*> oturumunu açmak için çağırın:
 
 [!code-csharp[](cookie/samples/2.x/CookieSample/Pages/Account/Login.cshtml.cs?name=snippet1)]
 
-`SignInAsync` şifreli bir tanımlama bilgisi oluşturur ve geçerli yanıta ekler. `AuthenticationScheme` belirtilmemişse, varsayılan düzen kullanılır.
+`SignInAsync`şifreli bir tanımlama bilgisi oluşturur ve geçerli yanıta ekler. `AuthenticationScheme` Belirtilmemişse, varsayılan düzen kullanılır.
 
 ASP.NET Core [veri koruma](xref:security/data-protection/using-data-protection) sistemi şifreleme için kullanılır. Birden çok makinede barındırılan bir uygulama, uygulamalar arasında yük dengeleme veya bir Web grubu kullanma için, [veri korumayı](xref:security/data-protection/configuration/overview) aynı anahtar halkasını ve uygulama tanımlayıcısını kullanacak şekilde yapılandırın.
 
 ## <a name="sign-out"></a>Oturumu kapat
 
-Geçerli kullanıcının oturumunu kapatmak ve tanımlama bilgilerini silmek için <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*>çağırın:
+Geçerli kullanıcının oturumunu kapatmak ve tanımlama bilgilerini silmek için şunu arayın <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*>:
 
 [!code-csharp[](cookie/samples/2.x/CookieSample/Pages/Account/Login.cshtml.cs?name=snippet2)]
 
-`CookieAuthenticationDefaults.AuthenticationScheme` (veya "Cookies"), düzen olarak (örneğin, "ContosoCookie") kullanılmazsa, kimlik doğrulama sağlayıcısını yapılandırırken kullanılan düzeni sağlayın. Aksi takdirde, varsayılan düzen kullanılır.
+`CookieAuthenticationDefaults.AuthenticationScheme` (Veya "Cookies"), düzen olarak (örneğin, "contosocookie") kullanılmazsa, kimlik doğrulama sağlayıcısını yapılandırırken kullanılan düzeni sağlayın. Aksi takdirde, varsayılan düzen kullanılır.
 
 ## <a name="react-to-back-end-changes"></a>Arka uç değişikliklerine tepki verme
 
@@ -328,11 +334,11 @@ Tanımlama bilgisi oluşturulduktan sonra tanımlama bilgisi tek kimlik kaynağ�
 * Uygulamanın tanımlama bilgisi kimlik doğrulama sistemi, kimlik doğrulama tanımlama bilgisine göre istekleri işlemeye devam eder.
 * Kimlik doğrulama tanımlama bilgisi geçerli olduğu sürece kullanıcı uygulamada oturum açmış durumda kalır.
 
-<xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents.ValidatePrincipal*> olayı, tanımlama bilgisi kimliğinin doğrulanmasını ve geçersiz kılınması için kullanılabilir. Her istekte tanımlama bilgisinin doğrulanması, uygulamaya erişen kullanıcıların iptal edilmesinin riskini azaltır.
+<xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents.ValidatePrincipal*> Olay, tanımlama bilgisi kimliği doğrulamasını ele almak ve geçersiz kılmak için kullanılabilir. Her istekte tanımlama bilgisinin doğrulanması, uygulamaya erişen kullanıcıların iptal edilmesinin riskini azaltır.
 
-Tanımlama bilgisi doğrulamasına yönelik bir yaklaşım, kullanıcı veritabanının değiştiği zaman izlemenin izlenmesine bağlıdır. Kullanıcının tanımlama bilgisi verildikten sonra veritabanı değiştirilmediyse, tanımlama bilgisi hala geçerliyse kullanıcının kimliğini yeniden doğrulamaya gerek yoktur. Örnek uygulamada, veritabanı `IUserRepository` uygulanır ve bir `LastChanged` değeri depolar. Veritabanında bir Kullanıcı güncelleştirildiği zaman, `LastChanged` değeri geçerli saate ayarlanır.
+Tanımlama bilgisi doğrulamasına yönelik bir yaklaşım, kullanıcı veritabanının değiştiği zaman izlemenin izlenmesine bağlıdır. Kullanıcının tanımlama bilgisi verildikten sonra veritabanı değiştirilmediyse, tanımlama bilgisi hala geçerliyse kullanıcının kimliğini yeniden doğrulamaya gerek yoktur. Örnek uygulamada, veritabanı ' de `IUserRepository` uygulanır ve bir `LastChanged` değer depolar. Veritabanında bir Kullanıcı güncellenmiştir, `LastChanged` değer geçerli saate ayarlanır.
 
-Veritabanı `LastChanged` değerine göre değiştiğinde bir tanımlama bilgisini geçersiz kılmak için, veritabanından geçerli `LastChanged` değerini içeren bir `LastChanged` talep ile tanımlama bilgisini oluşturun:
+Veritabanı `LastChanged` değere göre değiştiğinde bir tanımlama bilgisini geçersiz kılmak için, veritabanından geçerli `LastChanged` `LastChanged` değeri içeren bir talep ile tanımlama bilgisini oluşturun:
 
 ```csharp
 var claims = new List<Claim>
@@ -350,13 +356,13 @@ await HttpContext.SignInAsync(
     new ClaimsPrincipal(claimsIdentity));
 ```
 
-`ValidatePrincipal` olayına bir geçersiz kılma uygulamak için, <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents>türetilen bir sınıfa aşağıdaki imzaya sahip bir yöntem yazın:
+`ValidatePrincipal` Olay için bir geçersiz kılma uygulamak üzere, aşağıdakilerden türetilen bir sınıfa aşağıdaki imzaya sahip bir yöntem yazın <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationEvents>:
 
 ```csharp
 ValidatePrincipal(CookieValidatePrincipalContext)
 ```
 
-Aşağıda `CookieAuthenticationEvents`örnek bir uygulamasıdır:
+Aşağıda örnek bir uygulama verilmiştir `CookieAuthenticationEvents`:
 
 ```csharp
 using System.Linq;
@@ -395,7 +401,7 @@ public class CustomCookieAuthenticationEvents : CookieAuthenticationEvents
 }
 ```
 
-`Startup.ConfigureServices` yönteminde tanımlama bilgisi hizmeti kaydı sırasında olay örneğini kaydedin. `CustomCookieAuthenticationEvents` sınıfınız için [kapsamlı bir hizmet kaydı](xref:fundamentals/dependency-injection#service-lifetimes) sağlayın:
+`Startup.ConfigureServices` Yöntemine tanımlama bilgisi hizmeti kaydı sırasında olay örneğini kaydedin. Sınıfınız için [kapsamlı bir hizmet kaydı](xref:fundamentals/dependency-injection#service-lifetimes) sağlayın: `CustomCookieAuthenticationEvents`
 
 ```csharp
 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -407,7 +413,7 @@ services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
 services.AddScoped<CustomCookieAuthenticationEvents>();
 ```
 
-Kullanıcı adının güncelleştirildiği bir durumu, güvenliği hiçbir şekilde etkilemeyen bir kararı&mdash;göz önünde bulundurun. Kullanıcı sorumlusunu kalıcı olarak güncelleştirmek istiyorsanız, `context.ReplacePrincipal` çağırın ve `context.ShouldRenew` özelliğini `true`olarak ayarlayın.
+Kullanıcı adının, güvenliği hiçbir şekilde etkilemeyen bir kararı güncelleştirmediği&mdash;bir durum düşünün. Kullanıcı sorumlusunu kalıcı olarak güncelleştirmek istiyorsanız, çağırın `context.ReplacePrincipal` ve `context.ShouldRenew` özelliğini olarak `true`ayarlayın.
 
 > [!WARNING]
 > Burada açıklanan yaklaşım her istekte tetiklenir. Her istekteki tüm kullanıcılar için kimlik doğrulama tanımlama bilgilerinin doğrulanması, uygulama için büyük bir performans cezası oluşmasına neden olabilir.
@@ -418,7 +424,7 @@ Tanımlama bilgisinin tarayıcı oturumları arasında kalıcı olmasını istey
 
 Aşağıdaki kod parçacığı, tarayıcı kapanışları aracılığıyla ilerlikli bir kimlik ve ilgili tanımlama bilgisi oluşturur. Daha önce yapılandırılmış tüm Kayan süre sonu ayarları kabul edilir. Tarayıcı kapalıyken tanımlama bilgisinin süresi dolarsa tarayıcı, yeniden başlatıldıktan sonra tanımlama bilgisini temizler.
 
-<xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties.IsPersistent> <xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties>`true` olarak ayarlayın:
+Şu <xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties.IsPersistent> şekilde `true` ayarlayın <xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties>:
 
 ```csharp
 // using Microsoft.AspNetCore.Authentication;
@@ -434,7 +440,7 @@ await HttpContext.SignInAsync(
 
 ## <a name="absolute-cookie-expiration"></a>Mutlak tanımlama bilgisi süre sonu
 
-Mutlak bir süre sonu, <xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties.ExpiresUtc>ile ayarlanabilir. Kalıcı bir tanımlama bilgisi oluşturmak için, `IsPersistent` de ayarlanması gerekir. Aksi takdirde, tanımlama bilgisi oturum tabanlı bir yaşam süresi ile oluşturulur ve bu kimlik doğrulama biletinden önce ya da sonra zaman alabilir. `ExpiresUtc` ayarlandığında, ayarlandıysa, <xref:Microsoft.AspNetCore.Builder.CookieAuthenticationOptions><xref:Microsoft.AspNetCore.Builder.CookieAuthenticationOptions.ExpireTimeSpan> seçeneğinin değerini geçersiz kılar.
+Mutlak bir sona erme saati ile <xref:Microsoft.AspNetCore.Authentication.AuthenticationProperties.ExpiresUtc>ayarlanabilir. Kalıcı tanımlama bilgisi `IsPersistent` oluşturmak için de ayarlanmalıdır. Aksi takdirde, tanımlama bilgisi oturum tabanlı bir yaşam süresi ile oluşturulur ve bu kimlik doğrulama biletinden önce ya da sonra zaman alabilir. `ExpiresUtc` , Ayarlandığında, <xref:Microsoft.AspNetCore.Builder.CookieAuthenticationOptions.ExpireTimeSpan> seçeneğinin <xref:Microsoft.AspNetCore.Builder.CookieAuthenticationOptions>değerini geçersiz kılar.
 
 Aşağıdaki kod parçacığı, 20 dakika boyunca bir kimlik ve karşılık gelen tanımlama bilgisi oluşturur. Bu, daha önce yapılandırılmış olan tüm Kayan süre sonu ayarlarını yoksayar.
 

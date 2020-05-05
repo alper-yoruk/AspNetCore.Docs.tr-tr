@@ -5,13 +5,19 @@ description: Openapı dosyalarına başvurular eklemek için ' Microsoft. DotNet
 ms.author: rybrande
 ms.date: 09/26/2019
 monikerRange: '>= aspnetcore-3.0'
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: web-api/Microsoft.dotnet-openapi
-ms.openlocfilehash: 079e36511b63c186ffa7726bdb1e3c3bcbda9d34
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 1924fb8ee5ac1ba8dc31d2175a336c8333c81fb2
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78655269"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775719"
 ---
 # <a name="develop-aspnet-core-apps-using-openapi-tools"></a>Openapı araçlarını kullanarak ASP.NET Core uygulamaları geliştirme
 
@@ -21,7 +27,7 @@ ms.locfileid: "78655269"
 
 ## <a name="installation"></a>Yükleme
 
-`Microsoft.dotnet-openapi`yüklemek için şu komutu çalıştırın:
+Yüklemek `Microsoft.dotnet-openapi`için şu komutu çalıştırın:
 
 ```dotnetcli
 dotnet tool install -g Microsoft.dotnet-openapi
@@ -29,7 +35,7 @@ dotnet tool install -g Microsoft.dotnet-openapi
 
 ## <a name="add"></a>Ekle
 
-Bu sayfadaki komutlardan herhangi birini kullanarak bir Openapı başvurusu eklemek, *. csproj* dosyasına aşağıdakine benzer bir `<OpenApiReference />` öğesi ekler:
+Bu sayfadaki komutlardan herhangi birini kullanarak bir Openapı başvurusu eklemek, *. csproj* dosyasına `<OpenApiReference />` aşağıdakine benzer bir öğe ekler:
 
 ```xml
 <OpenApiReference Include="openapi.json" />
@@ -59,7 +65,7 @@ Uygulamanın oluşturulan istemci kodunu çağırması için önceki başvuru ge
 | Short seçeneği| Long seçeneği| Açıklama | Örnek |
 |-------|------|-------|---------|
 | -p|--updateProject | Üzerinde çalışılacak proje. |DotNet openapı dosya Ekle *--updateproject .\Ref.exe* .\Openapi.exe |
-| -c|--Code-Generator| Başvuruya uygulanacak kod Oluşturucu. Seçenekler `NSwagCSharp` ve `NSwagTypeScript`. `--code-generator` belirtilmemişse araç varsayılan olarak `NSwagCSharp`.|DotNet openapı Add dosyası .\Openapi.exe JSON--Code-Generator
+| -c|--Code-Generator| Başvuruya uygulanacak kod Oluşturucu. Seçenekler ve `NSwagCSharp` ' `NSwagTypeScript`dir. Belirtilmemişse `--code-generator` , araçları varsayılan olarak `NSwagCSharp`ayarlanır.|DotNet openapı Add dosyası .\Openapi.exe JSON--Code-Generator
 | -h|--yardım|Yardım bilgilerini göster|DotNet openapı dosya Ekle--yardım|
 
 #### <a name="arguments"></a>Bağımsız Değişkenler
@@ -68,22 +74,22 @@ Uygulamanın oluşturulan istemci kodunu çağırması için önceki başvuru ge
 |-------------|-------------|---------|
 | Kaynak dosya | Başvuru oluşturulacak kaynak. Bir Openapı dosyası olmalıdır. |DotNet openapı dosya ekleme *.\Openapi.exe* |
 
-### <a name="add-url"></a>URL ekle
+### <a name="add-url"></a>URL Ekle
 
 #### <a name="options"></a>Seçenekler
 
 | Short seçeneği| Long seçeneği| Açıklama | Örnek |
 |-------|------|-------------|---------|
-| -p|--updateProject | Üzerinde çalışılacak proje. |DotNet openapı Add URL *--updateproject .\Ref.exe* `https://contoso.com/openapi.json` |
-| -o|--Çıkış-dosya | Openapı dosyasının yerel kopyasının yerleştirileceği yer. |DotNet openapı URL ekleme `https://contoso.com/openapi.json` *--çıktı-dosya MyClient. JSON* |
-| -c|--Code-Generator| Başvuruya uygulanacak kod Oluşturucu. Seçenekler `NSwagCSharp` ve `NSwagTypeScript`. |DotNet openapı Add dosyası .\Openapi.exe JSON--Code-Generator
+| -p|--updateProject | Üzerinde çalışılacak proje. |DotNet openapı Add URL *--updateproject .\Ref.exe*`https://contoso.com/openapi.json` |
+| -o|--Çıkış-dosya | Openapı dosyasının yerel kopyasının yerleştirileceği yer. |DotNet openapı Add URL `https://contoso.com/openapi.json` *--çıktı-File MyClient. JSON* |
+| -c|--Code-Generator| Başvuruya uygulanacak kod Oluşturucu. Seçenekler ve `NSwagCSharp` ' `NSwagTypeScript`dir. |DotNet openapı Add dosyası .\Openapi.exe JSON--Code-Generator
 | -h|--yardım|Yardım bilgilerini göster|DotNet openapı URL ekleme--Yardım|
 
 #### <a name="arguments"></a>Bağımsız Değişkenler
 
 |  Bağımsız Değişken  | Açıklama | Örnek |
 |-------------|-------------|---------|
-| Kaynak-URL | Başvuru oluşturulacak kaynak. Bir URL olmalıdır. |DotNet openapı URL ekleme `https://contoso.com/openapi.json` |
+| Kaynak-URL | Başvuru oluşturulacak kaynak. Bir URL olmalıdır. |DotNet openapı URL 'si Ekle`https://contoso.com/openapi.json` |
 
 ## <a name="remove"></a>Kaldır
 
@@ -110,11 +116,11 @@ Verilen dosya adıyla eşleşen Openapı başvurusunu *. csproj* dosyasından ka
 
 | Short seçeneği| Long seçeneği| Açıklama | Örnek |
 |-------|------|-------------|---------|
-| -p|--updateProject | Üzerinde çalışılacak proje. | DotNet openapı yenilemesi *--updateproject .\Ref.exe* `https://contoso.com/openapi.json` |
+| -p|--updateProject | Üzerinde çalışılacak proje. | DotNet openapı yenileme *--updateproject .\ref.exe*`https://contoso.com/openapi.json` |
 | -h|--yardım|Yardım bilgilerini göster|DotNet openapı yenilemesi--yardım|
 
 ### <a name="arguments"></a>Bağımsız Değişkenler
 
 |  Bağımsız Değişken  | Açıklama | Örnek |
 | ------------|-------------|---------|
-| Kaynak-URL | Başvurunun yenileneceği URL. | DotNet openapı yenileme `https://contoso.com/openapi.json` |
+| Kaynak-URL | Başvurunun yenileneceği URL. | DotNet openapı yenilemesi`https://contoso.com/openapi.json` |

@@ -1,18 +1,24 @@
 ---
-title: ASP.NET Core içindeki uygulama bölümleriyle denetleyicileri, görünümleri, Razor Pages ve daha fazlasını paylaşma
+title: ASP.NET Core içindeki uygulama bölümleriyle denetleyicileri Razor , görünümleri, sayfaları ve daha fazlasını paylaşma
 author: rick-anderson
-description: ASP.NET Core içindeki uygulama bölümleriyle denetleyicileri, görünümü, Razor Pages ve daha fazlasını paylaşma
+description: ASP.NET Core içindeki uygulama bölümleriyle denetleyicileri Razor , görünümü, sayfaları ve daha fazlasını paylaşma
 ms.author: riande
 ms.date: 11/11/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/extensibility/app-parts
-ms.openlocfilehash: 0156c94bc6d0b83d0e14b8ef49468cfdf106d7e6
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 68991a3df5e09b63dc52bdadae55f055a721ad3c
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78667134"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774411"
 ---
-# <a name="share-controllers-views-razor-pages-and-more-with-application-parts"></a>Uygulama parçalarıyla denetleyiciler, görünümler, Razor Pages ve daha fazlasını paylaşma
+# <a name="share-controllers-views-razor-pages-and-more-with-application-parts"></a>Uygulama parçalarıyla denetleyiciler, görünümler Razor , sayfalar ve daha fazlasını paylaşma
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -20,33 +26,33 @@ Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-*Uygulama bölümü* , bir uygulamanın kaynakları üzerinde soyutlamadır. Uygulama bölümleri ASP.NET Core denetleyicileri bulmasına, bileşenleri, etiket yardımcılarını, Razor Pages, Razor derleme kaynaklarını ve daha fazlasını bulmasına olanak tanır. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> bir uygulama bölümüdür. `AssemblyPart` bir derleme başvurusunu kapsüller ve türleri ve derleme başvurularını ortaya koyar.
+*Uygulama bölümü* , bir uygulamanın kaynakları üzerinde soyutlamadır. Uygulama bölümleri ASP.NET Core denetleyicileri bulmasına, bileşenleri, etiket yardımcılarını, Razor sayfaları, Razor derleme kaynaklarını ve daha fazlasını bulmasına olanak tanır. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart>bir uygulama bölümüdür. `AssemblyPart`derleme başvurusunu kapsüller ve türleri ve derleme başvurularını ortaya koyar.
 
-[Özellik sağlayıcıları](#fp) , uygulama bölümleriyle birlikte çalışarak bir ASP.NET Core uygulamasının özelliklerini doldurur. Uygulama bölümleri için ana kullanım örneği, bir derlemeyi, bir derlemeden ASP.NET Core özellikleri bulacak (ya da yüklemeden kaçınacak) şekilde yapılandırmaktır. Örneğin, birden çok uygulama arasında ortak işlevselliği paylaşmak isteyebilirsiniz. Uygulama parçalarını kullanarak, birden çok uygulamayla denetleyiciler, görünümler, Razor Pages, Razor derleme kaynakları, etiket yardımcıları ve daha fazlasını içeren bir derlemeyi (DLL) paylaşabilirsiniz. Birden çok projedeki kodu çoğaltmak için bir derlemeyi paylaşma tercih edilir.
+[Özellik sağlayıcıları](#fp) , uygulama bölümleriyle birlikte çalışarak bir ASP.NET Core uygulamasının özelliklerini doldurur. Uygulama bölümleri için ana kullanım örneği, bir derlemeyi, bir derlemeden ASP.NET Core özellikleri bulacak (ya da yüklemeden kaçınacak) şekilde yapılandırmaktır. Örneğin, birden çok uygulama arasında ortak işlevselliği paylaşmak isteyebilirsiniz. Uygulama parçalarını kullanarak, çeşitli uygulamalarla denetleyiciler, görünümler, Razor sayfalar, Razor derleme kaynakları, etiket yardımcıları ve daha fazlasını içeren bir DERLEMEYI (dll) paylaşabilirsiniz. Birden çok projedeki kodu çoğaltmak için bir derlemeyi paylaşma tercih edilir.
 
-ASP.NET Core uygulamalar <xref:System.Web.WebPages.ApplicationPart>özellikleri yükler. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> sınıfı, bir derleme tarafından desteklenen bir uygulama bölümünü temsil eder.
+ASP.NET Core uygulamalar, içindeki <xref:System.Web.WebPages.ApplicationPart>özellikleri yükler. Sınıfı <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> , bir derleme tarafından desteklenen bir uygulama parçasını temsil eder.
 
 ## <a name="load-aspnet-core-features"></a>ASP.NET Core özellikleri yükle
 
-ASP.NET Core özelliklerini (denetleyiciler, görünüm bileşenleri vb.) bulup yüklemek için <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> ve <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> sınıflarını kullanın. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartManager>, kullanılabilir uygulama parçalarını ve özellik sağlayıcılarını izler. `ApplicationPartManager` `Startup.ConfigureServices`yapılandırılır:
+ASP.NET Core özelliklerini <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> ( <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> denetleyiciler, görünüm bileşenleri vs.) bulup yüklemek için ve sınıflarını kullanın. Uygulama <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartManager> parçalarını ve özellik sağlayıcılarını izler. `ApplicationPartManager`Şu şekilde yapılandırılır `Startup.ConfigureServices`:
 
 [!code-csharp[](./app-parts/3.0sample1/WebAppParts/Startup.cs?name=snippet)]
 
-Aşağıdaki kod, `AssemblyPart`kullanarak `ApplicationPartManager` yapılandırmaya yönelik alternatif bir yaklaşım sağlar:
+Aşağıdaki kod, kullanarak `ApplicationPartManager` `AssemblyPart`yapılandırma için alternatif bir yaklaşım sağlar:
 
 [!code-csharp[](./app-parts/3.0sample1/WebAppParts/Startup2.cs?name=snippet)]
 
-Önceki iki kod örneği bir derlemeden `SharedController` yükler. `SharedController`, uygulamanın projesinde değil. Bkz. [Webappparts çözüm](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/3.0sample1/WebAppParts) örneği indirmesi.
+Önceki iki kod örneği bir derlemeden yüklenir `SharedController` . `SharedController` Uygulamanın projesinde değil. Bkz. [Webappparts çözüm](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/3.0sample1/WebAppParts) örneği indirmesi.
 
 ### <a name="include-views"></a>Görünümleri dahil et
 
-Derlemeye görünümler eklemek için [Razor sınıf kitaplığı](xref:razor-pages/ui-class) kullanın.
+Derleme içindeki görünümleri dahil etmek için bir [ Razor sınıf kitaplığı](xref:razor-pages/ui-class) kullanın.
 
 ### <a name="prevent-loading-resources"></a>Kaynakları yüklemeyi engelle
 
-Uygulama bölümleri, belirli bir derleme veya konumdaki kaynakları yüklemeyi *önlemek* için kullanılabilir. Kullanılabilir kaynakları gizlemek veya mevcut hale getirmek için <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> koleksiyonun üyelerini ekleyin veya kaldırın. `ApplicationParts` koleksiyonundaki girdilerin sırası önemli değildir. Kapsayıcıdaki hizmetleri yapılandırmak için kullanmadan önce `ApplicationPartManager` yapılandırın. Örneğin, `AddControllersAsServices`çağırmadan önce `ApplicationPartManager` yapılandırın. Bir kaynağı kaldırmak için `ApplicationParts` koleksiyonundaki `Remove` çağırın.
+Uygulama bölümleri, belirli bir derleme veya konumdaki kaynakları yüklemeyi *önlemek* için kullanılabilir. Kullanılabilir kaynakları gizlemek veya saklamak için <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> koleksiyonun üyelerini ekleyin veya kaldırın. `ApplicationParts` Koleksiyondaki girişlerin sırası önemli değildir. Kapsayıcısını, `ApplicationPartManager` kapsayıcıdaki hizmetleri yapılandırmak için kullanmadan önce yapılandırın. Örneğin, öğesini çağırmadan `ApplicationPartManager` `AddControllersAsServices`önce öğesini yapılandırın. Kaynağı `Remove` kaldırmak için `ApplicationParts` koleksiyonda çağrı yapın.
 
-`ApplicationPartManager` şunlar için parçalar içerir:
+, `ApplicationPartManager` Şunlar için parçalar içerir:
 
 * Uygulamanın derlemesi ve bağımlı derlemeleri.
 * `Microsoft.AspNetCore.Mvc.ApplicationParts.CompiledRazorAssemblyPart`
@@ -64,13 +70,13 @@ Uygulama özelliği sağlayıcıları uygulama parçalarını inceler ve bu par�
 * <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.TagHelperFeatureProvider>
 * <xref:Microsoft.AspNetCore.Mvc.Razor.Compilation.MetadataReferenceFeatureProvider>
 * <xref:Microsoft.AspNetCore.Mvc.Razor.Compilation.ViewsFeatureProvider>
-* `internal class` [RazorCompiledItemFeatureProvider](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Razor/src/ApplicationParts/RazorCompiledItemFeatureProvider.cs#L14)
+* `internal class`[RazorCompiledItemFeatureProvider](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Razor/src/ApplicationParts/RazorCompiledItemFeatureProvider.cs#L14)
 
-Özellik sağlayıcıları, `T` özelliğin türü olduğu <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.IApplicationFeatureProvider`1>devralınır. Özellik sağlayıcıları, daha önce listelenen özellik türlerinden herhangi biri için uygulanabilir. `ApplicationPartManager.FeatureProviders` özellik sağlayıcılarının sırası çalışma zamanı davranışını etkileyebilir. Daha sonra eklenen sağlayıcılar, daha önce eklenen sağlayıcıların yaptığı eylemlere yanıt verebilir.
+Özellik sağlayıcıları öğesinden <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.IApplicationFeatureProvider`1>devralınır, burada `T` özelliğin türüdür. Özellik sağlayıcıları, daha önce listelenen özellik türlerinden herhangi biri için uygulanabilir. İçindeki `ApplicationPartManager.FeatureProviders` özellik sağlayıcılarının sırası çalışma süresi davranışından etkileyebilir. Daha sonra eklenen sağlayıcılar, daha önce eklenen sağlayıcıların yaptığı eylemlere yanıt verebilir.
 
 ### <a name="display-available-features"></a>Kullanılabilir özellikleri görüntüle
 
-Bir uygulama için kullanılabilen özellikler, [bağımlılık ekleme](../../fundamentals/dependency-injection.md)yoluyla bir `ApplicationPartManager` isteyerek numaralandırılabilir:
+Bir uygulama için kullanılabilen özellikler, bir `ApplicationPartManager` [bağımlılık ekleme](../../fundamentals/dependency-injection.md)isteği isteyerek numaralandırılabilir:
 
 [!code-csharp[](./app-parts/sample2/AppPartsSample/Controllers/FeaturesController.cs?highlight=16,25-27)]
 
@@ -98,7 +104,7 @@ View Components:
 
 HTTP 404 hataları, uygulama parçalarıyla geliştirme sırasında sık karşılaşılan bir durumdur. Bu hatalar genellikle uygulamaların bölümlerinin nasıl keşfedildiği konusunda önemli bir gereksinimin eksik olmasından kaynaklanır. Uygulamanız bir HTTP 404 hatası döndürürse, aşağıdaki gereksinimlerin karşılandığından emin olun:
 
-* `applicationName` ayarının, bulma için kullanılan kök derlemeye ayarlanması gerekir. Bulma için kullanılan kök derleme normalde giriş noktası derlemesidir.
+* Ayarın `applicationName` , bulma için kullanılan kök derlemeye ayarlanması gerekir. Bulma için kullanılan kök derleme normalde giriş noktası derlemesidir.
 * Kök derlemenin, bulma için kullanılan bölümlere bir başvuruya sahip olması gerekir. Başvuru doğrudan veya geçişli olabilir.
 * Kök derlemenin Web SDK 'sına başvurması gerekiyor. Çerçevede, öznitelikleri bulma için kullanılan kök derlemeye damgalayan mantık vardır.
 
@@ -110,35 +116,35 @@ Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-*Uygulama bölümü* , bir uygulamanın kaynakları üzerinde soyutlamadır. Uygulama bölümleri ASP.NET Core denetleyicileri bulmasına, bileşenleri, etiket yardımcılarını, Razor Pages, Razor derleme kaynaklarını ve daha fazlasını bulmasına olanak tanır. [AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart) bir uygulama bölümüdür. `AssemblyPart` bir derleme başvurusunu kapsüller ve türleri ve derleme başvurularını ortaya koyar.
+*Uygulama bölümü* , bir uygulamanın kaynakları üzerinde soyutlamadır. Uygulama bölümleri ASP.NET Core denetleyicileri bulmasına, bileşenleri, etiket yardımcılarını, Razor sayfaları, Razor derleme kaynaklarını ve daha fazlasını bulmasına olanak tanır. [AssemblyPart](/dotnet/api/microsoft.aspnetcore.mvc.applicationparts.assemblypart#Microsoft_AspNetCore_Mvc_ApplicationParts_AssemblyPart) bir uygulama bölümüdür. `AssemblyPart`derleme başvurusunu kapsüller ve türleri ve derleme başvurularını ortaya koyar.
 
-*Özellik sağlayıcıları* , uygulama bölümleriyle birlikte çalışarak bir ASP.NET Core uygulamasının özelliklerini doldurur. Uygulama bölümleri için ana kullanım örneği, bir derlemeyi, bir derlemeden ASP.NET Core özellikleri bulacak (ya da yüklemeden kaçınacak) şekilde yapılandırmaktır. Örneğin, birden çok uygulama arasında ortak işlevselliği paylaşmak isteyebilirsiniz. Uygulama parçalarını kullanarak, birden çok uygulamayla denetleyiciler, görünümler, Razor Pages, Razor derleme kaynakları, etiket yardımcıları ve daha fazlasını içeren bir derlemeyi (DLL) paylaşabilirsiniz. Birden çok projedeki kodu çoğaltmak için bir derlemeyi paylaşma tercih edilir.
+*Özellik sağlayıcıları* , uygulama bölümleriyle birlikte çalışarak bir ASP.NET Core uygulamasının özelliklerini doldurur. Uygulama bölümleri için ana kullanım örneği, bir derlemeyi, bir derlemeden ASP.NET Core özellikleri bulacak (ya da yüklemeden kaçınacak) şekilde yapılandırmaktır. Örneğin, birden çok uygulama arasında ortak işlevselliği paylaşmak isteyebilirsiniz. Uygulama parçalarını kullanarak, çeşitli uygulamalarla denetleyiciler, görünümler, Razor sayfalar, Razor derleme kaynakları, etiket yardımcıları ve daha fazlasını içeren bir DERLEMEYI (dll) paylaşabilirsiniz. Birden çok projedeki kodu çoğaltmak için bir derlemeyi paylaşma tercih edilir.
 
-ASP.NET Core uygulamalar <xref:System.Web.WebPages.ApplicationPart>özellikleri yükler. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> sınıfı, bir derleme tarafından desteklenen bir uygulama bölümünü temsil eder.
+ASP.NET Core uygulamalar, içindeki <xref:System.Web.WebPages.ApplicationPart>özellikleri yükler. Sınıfı <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.AssemblyPart> , bir derleme tarafından desteklenen bir uygulama parçasını temsil eder.
 
 ## <a name="load-aspnet-core-features"></a>ASP.NET Core özellikleri yükle
 
-ASP.NET Core özelliklerini (denetleyiciler, görünüm bileşenleri vb.) bulup yüklemek için `ApplicationPart` ve `AssemblyPart` sınıflarını kullanın. <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartManager>, kullanılabilir uygulama parçalarını ve özellik sağlayıcılarını izler. `ApplicationPartManager` `Startup.ConfigureServices`yapılandırılır:
+ASP.NET Core özelliklerini `ApplicationPart` ( `AssemblyPart` denetleyiciler, görünüm bileşenleri vs.) bulup yüklemek için ve sınıflarını kullanın. Uygulama <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.ApplicationPartManager> parçalarını ve özellik sağlayıcılarını izler. `ApplicationPartManager`Şu şekilde yapılandırılır `Startup.ConfigureServices`:
 
 [!code-csharp[](./app-parts/sample1/WebAppParts/Startup.cs?name=snippet)]
 
-Aşağıdaki kod, `AssemblyPart`kullanarak `ApplicationPartManager` yapılandırmaya yönelik alternatif bir yaklaşım sağlar:
+Aşağıdaki kod, kullanarak `ApplicationPartManager` `AssemblyPart`yapılandırma için alternatif bir yaklaşım sağlar:
 
 [!code-csharp[](./app-parts/sample1/WebAppParts/Startup2.cs?name=snippet)]
 
-Önceki iki kod örneği bir derlemeden `SharedController` yükler. `SharedController`, uygulamanın projesinde değil. Bkz. [Webappparts çözüm](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/sample1/WebAppParts) örneği indirmesi.
+Önceki iki kod örneği bir derlemeden yüklenir `SharedController` . `SharedController` Uygulamanın projesinde değil. Bkz. [Webappparts çözüm](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/advanced/app-parts/sample1/WebAppParts) örneği indirmesi.
 
 ### <a name="include-views"></a>Görünümleri dahil et
 
-Derlemeye görünümler eklemek için [Razor sınıf kitaplığı](xref:razor-pages/ui-class) kullanın.
+Derleme içindeki görünümleri dahil etmek için bir [ Razor sınıf kitaplığı](xref:razor-pages/ui-class) kullanın.
 
 ### <a name="prevent-loading-resources"></a>Kaynakları yüklemeyi engelle
 
-Uygulama bölümleri, belirli bir derleme veya konumdaki kaynakları yüklemeyi *önlemek* için kullanılabilir. Kullanılabilir kaynakları gizlemek veya mevcut hale getirmek için <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> koleksiyonun üyelerini ekleyin veya kaldırın. `ApplicationParts` koleksiyonundaki girdilerin sırası önemli değildir. Kapsayıcıdaki hizmetleri yapılandırmak için kullanmadan önce `ApplicationPartManager` yapılandırın. Örneğin, `AddControllersAsServices`çağırmadan önce `ApplicationPartManager` yapılandırın. Bir kaynağı kaldırmak için `ApplicationParts` koleksiyonundaki `Remove` çağırın.
+Uygulama bölümleri, belirli bir derleme veya konumdaki kaynakları yüklemeyi *önlemek* için kullanılabilir. Kullanılabilir kaynakları gizlemek veya saklamak için <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> koleksiyonun üyelerini ekleyin veya kaldırın. `ApplicationParts` Koleksiyondaki girişlerin sırası önemli değildir. Kapsayıcısını, `ApplicationPartManager` kapsayıcıdaki hizmetleri yapılandırmak için kullanmadan önce yapılandırın. Örneğin, öğesini çağırmadan `ApplicationPartManager` `AddControllersAsServices`önce öğesini yapılandırın. Kaynağı `Remove` kaldırmak için `ApplicationParts` koleksiyonda çağrı yapın.
 
-Aşağıdaki kod uygulamadan `MyDependentLibrary` kaldırmak için <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> kullanır: [!code-csharp[](./app-parts/sample1/WebAppParts/StartupRm.cs?name=snippet)]
+Aşağıdaki kod uygulamadan kaldırmak <xref:Microsoft.AspNetCore.Mvc.ApplicationParts> `MyDependentLibrary` için kullanır:[!code-csharp[](./app-parts/sample1/WebAppParts/StartupRm.cs?name=snippet)]
 
-`ApplicationPartManager` şunlar için parçalar içerir:
+, `ApplicationPartManager` Şunlar için parçalar içerir:
 
 * Uygulamanın derlemesi ve bağımlı derlemeleri.
 * `Microsoft.AspNetCore.Mvc.TagHelpers`.
@@ -152,11 +158,11 @@ Uygulama özelliği sağlayıcıları uygulama parçalarını inceler ve bu par�
 * [Etiket Yardımcıları](/dotnet/api/microsoft.aspnetcore.mvc.razor.taghelpers.taghelperfeatureprovider)
 * [Bileşenleri görüntüle](/dotnet/api/microsoft.aspnetcore.mvc.viewcomponents.viewcomponentfeatureprovider)
 
-Özellik sağlayıcıları, `T` özelliğin türü olduğu <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.IApplicationFeatureProvider`1>devralınır. Özellik sağlayıcıları, daha önce listelenen özellik türlerinden herhangi biri için uygulanabilir. `ApplicationPartManager.FeatureProviders` özellik sağlayıcılarının sırası çalışma zamanı davranışını etkileyebilir. Daha sonra eklenen sağlayıcılar, daha önce eklenen sağlayıcıların yaptığı eylemlere yanıt verebilir.
+Özellik sağlayıcıları öğesinden <xref:Microsoft.AspNetCore.Mvc.ApplicationParts.IApplicationFeatureProvider`1>devralınır, burada `T` özelliğin türüdür. Özellik sağlayıcıları, daha önce listelenen özellik türlerinden herhangi biri için uygulanabilir. İçindeki `ApplicationPartManager.FeatureProviders` özellik sağlayıcılarının sırası çalışma süresi davranışından etkileyebilir. Daha sonra eklenen sağlayıcılar, daha önce eklenen sağlayıcıların yaptığı eylemlere yanıt verebilir.
 
 ### <a name="display-available-features"></a>Kullanılabilir özellikleri görüntüle
 
-Bir uygulama için kullanılabilen özellikler, [bağımlılık ekleme](../../fundamentals/dependency-injection.md)yoluyla bir `ApplicationPartManager` isteyerek numaralandırılabilir:
+Bir uygulama için kullanılabilen özellikler, bir `ApplicationPartManager` [bağımlılık ekleme](../../fundamentals/dependency-injection.md)isteği isteyerek numaralandırılabilir:
 
 [!code-csharp[](./app-parts/sample2/AppPartsSample/Controllers/FeaturesController.cs?highlight=16,25-27)]
 
@@ -184,7 +190,7 @@ View Components:
 
 HTTP 404 hataları, uygulama parçalarıyla geliştirme sırasında sık karşılaşılan bir durumdur. Bu hatalar genellikle uygulamaların bölümlerinin nasıl keşfedildiği konusunda önemli bir gereksinimin eksik olmasından kaynaklanır. Uygulamanız bir HTTP 404 hatası döndürürse, aşağıdaki gereksinimlerin karşılandığından emin olun:
 
-* `applicationName` ayarının, bulma için kullanılan kök derlemeye ayarlanması gerekir. Bulma için kullanılan kök derleme normalde giriş noktası derlemesidir.
+* Ayarın `applicationName` , bulma için kullanılan kök derlemeye ayarlanması gerekir. Bulma için kullanılan kök derleme normalde giriş noktası derlemesidir.
 * Kök derlemenin, bulma için kullanılan bölümlere bir başvuruya sahip olması gerekir. Başvuru doğrudan veya geçişli olabilir.
 * Kök derlemenin Web SDK 'sına başvurması gerekiyor.
   * ASP.NET Core Framework 'te, bulma için kullanılan kök derlemeye öznitelikleri damgalayan özel yapı mantığı vardır.

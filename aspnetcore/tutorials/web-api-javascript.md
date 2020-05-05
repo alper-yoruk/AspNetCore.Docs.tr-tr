@@ -1,107 +1,113 @@
 ---
-title: "Öğretici: JavaScript ile ASP.NET Core web API'yi arayın"
+title: "Öğretici: JavaScript ile ASP.NET Core Web API 'SI çağırma"
 author: rick-anderson
-description: JavaScript ile ASP.NET Core web API'yi nasıl arayacağınızı öğrenin.
+description: JavaScript ile ASP.NET Core Web API 'sini çağırmayı öğrenin.
 ms.author: riande
 ms.custom: mvc
 ms.date: 11/26/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/web-api-javascript
-ms.openlocfilehash: 2a19a7d16ca8b8f5d6ac8eb99ad919b89f1e368b
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: c3eb003812a31d8cf3168453fcc11601ffba19fb
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78655255"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774359"
 ---
-# <a name="tutorial-call-an-aspnet-core-web-api-with-javascript"></a>Öğretici: JavaScript ile ASP.NET Core web API'yi arayın
+# <a name="tutorial-call-an-aspnet-core-web-api-with-javascript"></a>Öğretici: JavaScript ile ASP.NET Core Web API 'SI çağırma
 
 Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Bu öğretici, [ApI Getir'i](https://developer.mozilla.org/docs/Web/API/Fetch_API)kullanarak JavaScript ile ASP.NET Core web API'yi nasıl çağıracağımı gösterir.
+Bu öğreticide, [Fetch API](https://developer.mozilla.org/docs/Web/API/Fetch_API)kullanılarak JavaScript ile ASP.NET Core Web API 'sinin nasıl çağrılacağını gösterilmektedir.
 
 ::: moniker range="< aspnetcore-3.0"
 
-Core 2.2ASP.NET [için, JavaScript ile web API'yi Arayın'ın](xref:tutorials/first-web-api#call-the-web-api-with-javascript)2.2 sürümüne bakın.
+ASP.NET Core 2,2 için, [JavaScript ile Web API 'Sini çağırma](xref:tutorials/first-web-api#call-the-web-api-with-javascript)2,2 sürümüne bakın.
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
-* Komple [Öğretici: Bir web API oluşturma](xref:tutorials/first-web-api)
-* CSS, HTML ve JavaScript ile aşinalık
+* Tüm [öğreticiyi: Web API 'Si oluşturma](xref:tutorials/first-web-api)
+* CSS, HTML ve JavaScript ile benzerlik
 
-## <a name="call-the-web-api-with-javascript"></a>JavaScript ile web API'sini arayın
+## <a name="call-the-web-api-with-javascript"></a>JavaScript ile Web API 'sini çağırma
 
-Bu bölümde, yapılacak lar öğeleri oluşturmak ve yönetmek için formlar içeren bir HTML sayfası eklersiniz. Olay işleyicileri sayfadaki öğelere eklenir. Olay işleyicileri, web API'nin eylem yöntemlerine http istekleriyle sonuçlanır. Api Getir `fetch` işlevi her BIR HTTP isteğini başlatır.
+Bu bölümde, Yapılacaklar öğeleri oluşturmak ve yönetmek için form içeren bir HTML sayfası ekleyeceksiniz. Olay işleyicileri sayfadaki öğelere iliştirilir. Olay işleyicileri, Web API 'sinin eylem yöntemlerine HTTP istekleri sonucu vermez. Fetch API 'nin `fetch` IşLEVI her http isteğini başlatır.
 
-İşlev, `fetch` [Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise) `Response` nesne olarak temsil edilen bir HTTP yanıtı içeren bir Söz nesnesini döndürür. Yaygın bir desen `json` `Response` nesne üzerinde işlevi çağırarak JSON yanıt gövdesi ayıklamaktır. JavaScript, sayfayı web API'sının yanıtındaki ayrıntılarla güncelleştirir.
+`fetch` İşlevi, `Response` nesne olarak temsil edilen bir http yanıtı içeren bir [Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise) nesnesi döndürür. Ortak bir model, `json` `Response` nesnesinde işlevini çağırarak JSON yanıt gövdesini ayıklamaya yönelik olur. JavaScript, sayfayı Web API 'sinin yanıtından alınan ayrıntılarla güncelleştirir.
 
-En basit `fetch` arama, rotayı temsil eden tek bir parametreyi kabul eder. `init` Nesne olarak bilinen ikinci bir parametre isteğe bağlıdır. `init`HTTP isteğini yapılandırmak için kullanılır.
+En basit `fetch` çağrı, yolu temsil eden tek bir parametre kabul eder. `init` Nesne olarak bilinen ikinci bir parametre isteğe bağlıdır. `init`HTTP isteğini yapılandırmak için kullanılır.
 
-1. Uygulamayı [statik dosyalara hizmet etmek](/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles#Microsoft_AspNetCore_Builder_StaticFileExtensions_UseStaticFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) ve varsayılan dosya [eşlemesini etkinleştirecek](/dotnet/api/microsoft.aspnetcore.builder.defaultfilesextensions.usedefaultfiles#Microsoft_AspNetCore_Builder_DefaultFilesExtensions_UseDefaultFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_)şekilde yapılandırın. Aşağıdaki vurgulanan kod *Startup.cs* `Configure` yöntemi gereklidir:
+1. Uygulamayı [statik dosyaları sunacak](/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles#Microsoft_AspNetCore_Builder_StaticFileExtensions_UseStaticFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) ve [varsayılan dosya eşlemesini etkinleştirecek](/dotnet/api/microsoft.aspnetcore.builder.defaultfilesextensions.usedefaultfiles#Microsoft_AspNetCore_Builder_DefaultFilesExtensions_UseDefaultFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_)şekilde yapılandırın. Aşağıdaki vurgulanan kod, `Configure` *Startup.cs*yönteminde gereklidir:
 
     [!code-csharp[](first-web-api/samples/3.0/TodoApi/StartupJavaScript.cs?highlight=8-9&name=snippet_configure)]
 
-1. Proje kökünde bir *wwwroot* klasörü oluşturun.
+1. Proje kökünde bir *Wwwroot* klasörü oluşturun.
 
-1. *wwwroot* klasörünün içinde bir *js* klasörü oluşturun.
+1. *Wwwroot* klasörü içinde bir *js* klasörü oluşturun.
 
-1. *wwwroot* klasörüne *index.html* adlı bir HTML dosyası ekleyin. *index.html* içeriğini aşağıdaki biçimlendirmeyle değiştirin:
+1. *Wwwroot* klasörüne *index. HTML* adlı bir HTML dosyası ekleyin. *İndex. html* içeriğini aşağıdaki biçimlendirme ile değiştirin:
 
     [!code-html[](first-web-api/samples/3.0/TodoApi/wwwroot/index.html)]
 
-1. *wwwroot/js* klasörüne *site.js* adında bir JavaScript dosyası ekleyin. *site.js* içeriğini aşağıdaki kodla değiştirin:
+1. *Wwwroot/js* klasörüne *site. js* adlı bir JavaScript dosyası ekleyin. *Site. js* içeriğini aşağıdaki kodla değiştirin:
 
     [!code-javascript[](first-web-api/samples/3.0/TodoApi/wwwroot/js/site.js?name=snippet_SiteJs)]
 
-HTML sayfasını yerel olarak test etmek için ASP.NET Core projesinin başlatma ayarlarında bir değişiklik gerekebilir:
+HTML sayfasını yerel olarak test etmek için ASP.NET Core projesinin başlatma ayarlarındaki bir değişikliğin yapılması gerekebilir:
 
-1. *Özellikleri Aç\launchSettings.json*.
-1. Uygulamayı `launchUrl` projenin varsayılan *dosyasıindex.html'de*&mdash;açmaya zorlamak için özelliği kaldırın.
+1. *Properties\launchSettings.JSON*'i açın.
+1. Uygulamanın varsayılan `launchUrl` dosyasını *index. html*&mdash;dizininde açılmasını zorlamak için özelliği kaldırın.
 
-Bu örnek, web API'sının tüm CRUD yöntemlerini çağırır. Aşağıda web API isteklerinin açıklamaları veremeleri yer alıyor.
+Bu örnek, Web API 'sinin tüm CRUD yöntemlerini çağırır. Web API isteklerinin açıklamaları aşağıda verilmiştir.
 
-### <a name="get-a-list-of-to-do-items"></a>Yapılacak lar listesi alın
+### <a name="get-a-list-of-to-do-items"></a>Yapılacaklar öğelerinin bir listesini alın
 
-Aşağıdaki kodda, *api/TodoItems* rotasına bir HTTP GET isteği gönderilir:
+Aşağıdaki kodda, *API/todoıtems* yoluna BIR http get isteği gönderilir:
 
 [!code-javascript[](first-web-api/samples/3.0/TodoApi/wwwroot/js/site.js?name=snippet_GetItems)]
 
-Web API başarılı bir durum kodu `_displayItems` döndürdüğünde, işlev çağrılır. Kabul `_displayItems` edilen dizi parametresindeki yapılacaklar öğesi **Düzenle** ve **Sil** düğmelerinin yer aldığı bir tabloya eklenir. Web API isteği başarısız olursa, tarayıcının konsoluna bir hata kaydedilir.
+Web API 'SI başarılı bir durum kodu döndürdüğünde, `_displayItems` işlev çağrılır. Tarafından `_displayItems` kabul edilen dizi parametresindeki her Yapılacaklar öğesi, **Düzenle** ve **Sil** düğmeleri içeren bir tabloya eklenir. Web API isteği başarısız olursa, tarayıcının konsoluna bir hata kaydedilir.
 
 ### <a name="add-a-to-do-item"></a>Yapılacaklar öğesi ekleme
 
 Aşağıdaki kodda:
 
-* Bir `item` değişken, yapılacaklar öğesinin nesne gerçek gösterimini oluşturmak için bildirilir.
-* Bir Getir isteği aşağıdaki seçeneklerle yapılandırılır:
-  * `method`&mdash;POST HTTP eylem fiilini belirtir.
-  * `body`&mdash;talep organının JSON temsilini belirtir. JSON, depolanan nesnenin `item` [json.stringify](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) işlevine aktarılmasıyla üretilir.
-  * `headers`&mdash;ve `Content-Type` HTTP `Accept` istek üstbilgilerini belirtir. Her iki üstbilgi `application/json` de sırasıyla alınan ve gönderilen ortam türünü belirtmek için ayarlanır.
-* *API/TodoItems* rotasına bir HTTP POST isteği gönderilir.
+* Bir `item` değişken, yapılacaklar öğesinin nesne sabit gösterimini oluşturmak için bildirilmiştir.
+* Aşağıdaki seçeneklerle bir getirme isteği yapılandırılır:
+  * `method`&mdash;HTTP SONRASı eylem fiilini belirtir.
+  * `body`&mdash;istek gövdesinin JSON temsilini belirtir. JSON, içinde `item` depolanan nesne sabit değeri [JSON. stringbelirt](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify) işlevine geçirilerek oluşturulur.
+  * `headers`&mdash;`Accept` ve `Content-Type` http istek üst bilgilerini belirtir. Her iki üst bilgi, `application/json` sırasıyla alınan ve gönderilen medya türünü belirtmek için olarak ayarlanır.
+* *API/todoıtems* yoluna BIR http post isteği gönderilir.
 
 [!code-javascript[](first-web-api/samples/3.0/TodoApi/wwwroot/js/site.js?name=snippet_AddItem)]
 
-Web API başarılı bir durum kodu `getItems` döndürdüğünde, işlev HTML tablosunu güncelleştirmek için çağrılır. Web API isteği başarısız olursa, tarayıcının konsoluna bir hata kaydedilir.
+Web API 'SI başarılı bir durum kodu döndürdüğünde, `getItems` işlev HTML tablosunu güncelleştirmek için çağrılır. Web API isteği başarısız olursa, tarayıcının konsoluna bir hata kaydedilir.
 
 ### <a name="update-a-to-do-item"></a>Yapılacaklar öğesini güncelleştirme
 
-Yapılacaklar öğesini güncelleştirmek, bir öğe eklemeye benzer; ancak, iki önemli fark vardır:
+Bir yapılacaklar öğesinin güncelleştirilmesi bir tane eklemeye benzer; Ancak, iki önemli fark vardır:
 
-* Rota, güncelleştirilen öğenin benzersiz tanımlayıcısıyla sabitlenir. Örneğin, *api/TodoItems/1*.
-* HTTP eylem fiili, `method` seçenekte belirtildiği gibi PUT'dur.
+* Yol, güncelleştirilecek öğenin benzersiz tanımlayıcısı ile sone düzeltildi. Örneğin, *api/todoıtems/1*.
+* HTTP eylemi fiili, `method` seçeneğinde GÖSTERILDIĞI gibi konur.
 
 [!code-javascript[](first-web-api/samples/3.0/TodoApi/wwwroot/js/site.js?name=snippet_UpdateItem)]
 
-### <a name="delete-a-to-do-item"></a>Yapılacaklar öğesini silme
+### <a name="delete-a-to-do-item"></a>Bir yapılacaklar öğesini silme
 
-Yapılacaklar öğesini silmek için, isteğin `method` `DELETE` seçeneğini belirleyin ve öğenin URL'deki benzersiz tanımlayıcısını belirtin.
+Bir yapılacaklar öğesini silmek için isteğin `method` seçeneğini olarak `DELETE` ayarlayın ve URL 'de öğenin benzersiz tanımlayıcısını belirtin.
 
 [!code-javascript[](first-web-api/samples/3.0/TodoApi/wwwroot/js/site.js?name=snippet_DeleteItem)]
 
-Web API yardım sayfalarını nasıl oluşturacağınızı öğrenmek için bir sonraki öğreticiye ilerleyin:
+Web API 'SI yardım sayfaları oluşturmayı öğrenmek için bir sonraki öğreticiye ilerleyin:
 
 > [!div class="nextstepaction"]
 > <xref:tutorials/get-started-with-swashbuckle>
