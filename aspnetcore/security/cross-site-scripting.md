@@ -4,13 +4,19 @@ author: rick-anderson
 description: ASP.NET Core uygulamasında bu güvenlik açığını gidermeye yönelik siteler arası betik oluşturma (XSS) ve teknikler hakkında bilgi edinin.
 ms.author: riande
 ms.date: 10/02/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/cross-site-scripting
-ms.openlocfilehash: 1d6f605dc336d8768b8a47e4995f119d198a61af
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 5a14042db6250d5f7a47acaf4083b44272c606ab
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78667981"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777494"
 ---
 # <a name="prevent-cross-site-scripting-xss-in-aspnet-core"></a>ASP.NET Core siteler arası komut dosyası (XSS) engelle
 
@@ -20,23 +26,23 @@ Siteler arası betik oluşturma (XSS), bir saldırganın istemci tarafı komut d
 
 ## <a name="protecting-your-application-against-xss"></a>Uygulamanızı XSS 'ye karşı koruma
 
-Temel düzeyde XSS, uygulamanıza, işlenmiş sayfanıza bir `<script>` etiketi eklemek veya bir `On*` olayını bir öğeye eklemek için göz ayırarak çalışmaktadır. Geliştiriciler, uygulamaları için XSS 'ye giriş yapmaktan kaçınmak için aşağıdaki önleme adımlarını kullanmalıdır.
+Temel düzeyde XSS, uygulamanıza, işlenmiş sayfanıza bir `<script>` etiket ekleyerek veya bir `On*` olayı bir olaya ekleyerek çalışarak işe yarar. Geliştiriciler, uygulamaları için XSS 'ye giriş yapmaktan kaçınmak için aşağıdaki önleme adımlarını kullanmalıdır.
 
 1. Aşağıdaki adımları takip etmediğiniz takdirde, güvenilmeyen verileri hiçbir şekilde HTML girişine yerleştirmeyin. Güvenilmeyen veriler, bir saldırgan olarak bir saldırgan, HTML form girişleri, sorgu dizeleri, HTTP üst bilgileri ve bir saldırgan tarafından denetlenebilecek veri kaynağı, uygulamanızı ihlal edemese bile veritabanınızı ihlal edebiliyor olabilir.
 
-2. Güvenli olmayan verileri bir HTML öğesine geçirmeden önce, HTML kodlamalı olduğundan emin olun. HTML kodlaması &lt; gibi karakterler alır ve bunları &amp;lt; gibi güvenli bir biçimde değiştirir
+2. Güvenli olmayan verileri bir HTML öğesine geçirmeden önce, HTML kodlamalı olduğundan emin olun. HTML kodlaması gibi karakterler alır &lt; ve lt; gibi &amp;güvenli bir biçimde değiştirir
 
 3. Güvenilir olmayan verileri HTML özniteliğine geçirmeden önce, HTML kodlamalı olduğundan emin olun. HTML öznitelik kodlaması, HTML kodlamasının bir üst kümesidir ve "ve" gibi ek karakterlerin kodlamasını belirler.
 
-4. Güvenilir olmayan verileri JavaScript 'e geçirmeden önce, verileri çalışma zamanında aldığınız bir HTML öğesine yerleştirin. Bu mümkün değilse, verilerin JavaScript kodlamalı olduğundan emin olun. JavaScript kodlaması, JavaScript için tehlikeli karakterler alır ve bunları onaltılı olarak değiştirir. Örneğin &lt; `\u003C`olarak kodlanır.
+4. Güvenilir olmayan verileri JavaScript 'e geçirmeden önce, verileri çalışma zamanında aldığınız bir HTML öğesine yerleştirin. Bu mümkün değilse, verilerin JavaScript kodlamalı olduğundan emin olun. JavaScript kodlaması, JavaScript için tehlikeli karakterler alır ve bunları onaltılı olarak değiştirir. Örneğin &lt; , olarak `\u003C`kodlanır.
 
 5. Güvenilmeyen verileri bir URL sorgu dizesine geçirmeden önce URL 'nin kodlandığından emin olun.
 
-## <a name="html-encoding-using-razor"></a>Razor kullanarak HTML kodlaması
+## <a name="html-encoding-using-razor"></a>Kullanarak HTML kodlamasıRazor
 
-MVC 'de kullanılan Razor altyapısı, bunu yapmamaya gerçekten engel olmadığınız müddetçe, değişkenlerden kaynaklanan tüm çıktıyı otomatik olarak kodlar. *@* yönergesini her kullandığınızda html öznitelik kodlama kurallarını kullanır. Html öznitelik kodlaması bir HTML kodlaması üst kümesidir, bu, HTML kodlaması veya HTML öznitelik kodlaması kullanılması gerekip gerekmediği için kendinize sorun olması gerekmediği anlamına gelir. Güvenilmeyen girişi doğrudan JavaScript 'e eklemeye çalışırken değil, yalnızca bir HTML içeriğinde @ kullandığınızdan emin olmanız gerekir. Etiket Yardımcıları, etiket parametrelerinde kullandığınız girişi de kodlayacaktır.
+MVC Razor 'de kullanılan motor, bunu yapmamaya gerçekten engel olmadığınız müddetçe, değişkenlerden kaynaklanan tüm çıktıyı otomatik olarak kodlar. *@* Yönergesini her kullandığınızda html öznitelik kodlama kurallarını kullanır. Html öznitelik kodlaması bir HTML kodlaması üst kümesidir, bu, HTML kodlaması veya HTML öznitelik kodlaması kullanılması gerekip gerekmediği için kendinize sorun olması gerekmediği anlamına gelir. Güvenilmeyen girişi doğrudan JavaScript 'e eklemeye çalışırken değil, yalnızca bir HTML içeriğinde @ kullandığınızdan emin olmanız gerekir. Etiket Yardımcıları, etiket parametrelerinde kullandığınız girişi de kodlayacaktır.
 
-Aşağıdaki Razor görünümünü alın:
+Aşağıdaki Razor görünümü uygulayın:
 
 ```cshtml
 @{
@@ -46,18 +52,18 @@ Aşağıdaki Razor görünümünü alın:
    @untrustedInput
    ```
 
-Bu görünüm *Untrustedınput* değişkeninin içeriğini verir. Bu değişken, XSS saldırılarında kullanılan bazı karakterleri içerir, yani &lt;, "ve &gt;. Kaynağı incelemek, işlenen çıktının şu şekilde kodlanmış olduğunu gösterir:
+Bu görünüm *Untrustedınput* değişkeninin içeriğini verir. Bu değişken, XSS saldırılarında kullanılan bazı karakterleri içerir, yani &lt;"ve. &gt; Kaynağı incelemek, işlenen çıktının şu şekilde kodlanmış olduğunu gösterir:
 
 ```html
 &lt;&quot;123&quot;&gt;
    ```
 
 >[!WARNING]
-> ASP.NET Core MVC, çıkış üzerine otomatik olarak kodlanmayan bir `HtmlString` sınıfı sağlar. Bu, XSS Güvenlik Açığı sunan güvenilir olmayan girişle birlikte asla kullanılmamalıdır.
+> ASP.NET Core MVC, çıkış `HtmlString` üzerine otomatik olarak kodlanmayan bir sınıf sağlar. Bu, XSS Güvenlik Açığı sunan güvenilir olmayan girişle birlikte asla kullanılmamalıdır.
 
-## <a name="javascript-encoding-using-razor"></a>Razor kullanarak JavaScript kodlaması
+## <a name="javascript-encoding-using-razor"></a>Kullanılarak JavaScript kodlamasıRazor
 
-Görünümünüzde işlemek için JavaScript 'e bir değer eklemek istediğiniz zaman olabilir. Bunu yapmanın iki yolu vardır. Değer eklemenin en güvenli yolu, değeri bir etiketinin veri özniteliğinde yerleştirmenin ve JavaScript 'te alamaktır. Örnek:
+Görünümünüzde işlemek için JavaScript 'e bir değer eklemek istediğiniz zaman olabilir. Bunu yapmanın iki yolu vardır. Değer eklemenin en güvenli yolu, değeri bir etiketinin veri özniteliğinde yerleştirmenin ve JavaScript 'te alamaktır. Örneğin:
 
 ```cshtml
 @{
@@ -138,7 +144,7 @@ Bu, tarayıcıda şu şekilde işlenir:
 ```
 
 >[!WARNING]
-> DOM öğeleri oluşturmak için, JavaScript 'te güvenilmeyen girişi birleştirme. `createElement()` kullanmalı ve `node.TextContent=`gibi özellik değerlerini uygun şekilde atamanız ya da `element.SetAttribute()``element[attribute]=` /kullanın, aksi halde kendinizi DOM tabanlı XSS 'de kullanıma sunacaksınız.
+> DOM öğeleri oluşturmak için, JavaScript 'te güvenilmeyen girişi birleştirme. Ya da gibi `createElement()` özellik değerlerini kullanmanız `node.TextContent=`ve atamanız ya `element.SetAttribute()` / `element[attribute]=` da başka bir şekilde kendi kendinize Dom tabanlı XSS 'de kullanıma sunacaksınız.
 
 ## <a name="accessing-encoders-in-code"></a>Koddaki kodlayıcılara erişme
 
@@ -166,14 +172,14 @@ public class HomeController : Controller
 
 ## <a name="encoding-url-parameters"></a>Kodlama URL parametreleri
 
-Değer olarak güvenilmeyen girişe sahip bir URL sorgu dizesi derlemek istiyorsanız, değeri kodlamak için `UrlEncoder` kullanın. Örneğin,
+Değer olarak güvenilmeyen giriş içeren bir URL sorgu dizesi derlemek istiyorsanız, `UrlEncoder` değeri kodlamak için öğesini kullanın. Örneğin,
 
 ```csharp
 var example = "\"Quoted Value with spaces and &\"";
    var encodedValue = _urlEncoder.Encode(example);
    ```
 
-Kodladıktan sonra, encodedValue değişkeni `%22Quoted%20Value%20with%20spaces%20and%20%26%22`içerecektir. Boşluk, tırnak, noktalama ve diğer güvenli olmayan karakterler, onaltılık değerlerine göre yüzde olarak kodlanır, örneğin bir boşluk karakteri %20 olur.
+Kodladıktan sonra, encodedValue değişkeni de `%22Quoted%20Value%20with%20spaces%20and%20%26%22`içerecektir. Boşluk, tırnak, noktalama ve diğer güvenli olmayan karakterler, onaltılık değerlerine göre yüzde olarak kodlanır, örneğin bir boşluk karakteri %20 olur.
 
 >[!WARNING]
 > Güvenilmeyen girişi, URL yolunun bir parçası olarak kullanmayın. Güvenilmeyen girişi her zaman bir sorgu dizesi değeri olarak geçirin.
@@ -182,13 +188,13 @@ Kodladıktan sonra, encodedValue değişkeni `%22Quoted%20Value%20with%20spaces%
 
 ## <a name="customizing-the-encoders"></a>Kodlayıcıları özelleştirme
 
-Varsayılan olarak kodlayıcılar, temel Latin Unicode aralığıyla sınırlı bir güvenli liste kullanır ve karakter kodu eşdeğerleri olarak bu aralığın dışındaki tüm karakterleri kodlayabilir. Bu davranış, Dizelerinizin çıktısını almak için kodlayıcıları kullanacağı için Razor TagHelper ve HtmlHelper işlemesini da etkiler.
+Varsayılan olarak kodlayıcılar, temel Latin Unicode aralığıyla sınırlı bir güvenli liste kullanır ve karakter kodu eşdeğerleri olarak bu aralığın dışındaki tüm karakterleri kodlayabilir. Bu davranış, Dizelerinizin çıktısını almak için kodlayıcıları kullanacağı için taghelper ve HtmlHelper işlemesini da etkiler Razor .
 
 Bunun arkasındaki nedenler bilinmeyen veya gelecekteki tarayıcı hataları karşısında korunmaktan (önceki tarayıcı hataları Ingilizce olmayan karakterlerin işlenmesine göre ayrıştırılır). Web siteniz Çince, Kiril veya diğerleri gibi Latin olmayan karakterlerin büyük bir bölümünü kullanıyorsa, bu durum muhtemelen istediğiniz davranış değildir.
 
-`ConfigureServices()`' de başlangıç sırasında uygulamanıza uygun Unicode aralıklarını dahil etmek için Kodlayıcı güvenli listelerini özelleştirebilirsiniz.
+' De `ConfigureServices()`başlangıç sırasında uygulamanıza uygun Unicode aralıklarını dahil etmek için Kodlayıcı güvenli listelerini özelleştirebilirsiniz.
 
-Örneğin, varsayılan yapılandırmayı kullanma gibi bir Razor HtmlHelper kullanabilirsiniz;
+Örneğin, varsayılan yapılandırmayı kullanarak, benzer bir Razor HtmlHelper kullanabilirsiniz;
 
 ```html
 <p>This link text is in Chinese: @Html.ActionLink("汉语/漢語", "Index")</p>
@@ -200,7 +206,7 @@ Web sayfasının kaynağını görüntülediğinizde, Çince metin kodlamalı ş
 <p>This link text is in Chinese: <a href="/">&#x6C49;&#x8BED;/&#x6F22;&#x8A9E;</a></p>
    ```
 
-Kodlayıcı tarafından güvenli olarak değerlendirilen karakterleri genişletmek için, `startup.cs``ConfigureServices()` yöntemine aşağıdaki satırı ekleyin.
+Kodlayıcı tarafından güvenli olarak değerlendirilen karakterleri genişletmek için, içindeki `ConfigureServices()` `startup.cs`yöntemine aşağıdaki satırı ekleyin;
 
 ```csharp
 services.AddSingleton<HtmlEncoder>(
@@ -217,7 +223,7 @@ Bu örnek, Cjkunifiedideograf Unicode aralığını dahil etmek için güvenli l
 Güvenli liste aralıkları, diller değil Unicode kod grafikleri olarak belirtilir. [Unicode standardında](https://unicode.org/) , karakterlerinizi içeren grafiği bulmak için kullanabileceğiniz bir [kod grafikleri](https://www.unicode.org/charts/index.html) listesi bulunur. Her kodlayıcı, HTML, JavaScript ve URL 'Nin ayrı ayrı yapılandırılması gerekir.
 
 > [!NOTE]
-> Güvenli listenin özelleştirilmesi yalnızca DI aracılığıyla kaynak kodlayıcıları etkiler. Bir kodlayıcıya `System.Text.Encodings.Web.*Encoder.Default` aracılığıyla doğrudan erişmeniz durumunda varsayılan olarak yalnızca temel Latin SafeList kullanılacaktır.
+> Güvenli listenin özelleştirilmesi yalnızca DI aracılığıyla kaynak kodlayıcıları etkiler. Daha sonra varsayılan olarak bir kodlayıcıyla `System.Text.Encodings.Web.*Encoder.Default` doğrudan erişmeniz durumunda yalnızca temel Latin SafeList kullanılacaktır.
 
 ## <a name="where-should-encoding-take-place"></a>Kodlama nerede gerçekleşmelidir?
 

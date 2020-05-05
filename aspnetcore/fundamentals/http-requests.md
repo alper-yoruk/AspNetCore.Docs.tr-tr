@@ -1,100 +1,106 @@
 ---
-title: ASP.NET Core'da IHttpClientFactory kullanarak HTTP isteklerini gerçekleştirin
+title: ASP.NET Core 'de ıhttpclientfactory kullanarak HTTP istekleri yapın
 author: stevejgordon
-description: ASP.NET Core'da mantıksal HttpClient örneklerini yönetmek için IHttpClientFactory arabirimini kullanma hakkında bilgi edinin.
+description: ASP.NET Core içindeki mantıksal HttpClient örneklerini yönetmek için ıhttpclientfactory arabirimini kullanma hakkında bilgi edinin.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 02/09/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/http-requests
-ms.openlocfilehash: 912be34ae0ee25837a94aab65443f15b17ab4556
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: ae33218d6944c62a08e677592ac0c66f9026b15f
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78661688"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82766556"
 ---
-# <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>ASP.NET Core'da IHttpClientFactory kullanarak HTTP isteklerini gerçekleştirin
+# <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>ASP.NET Core 'de ıhttpclientfactory kullanarak HTTP istekleri yapın
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Glenn [Condron](https://github.com/glennc), [Ryan Nowak](https://github.com/rynowak), [Steve Gordon](https://github.com/stevejgordon), Rick [Anderson](https://twitter.com/RickAndMSFT), ve [Kirk Larkin](https://github.com/serpent5) tarafından
+[Glenn CONDRON](https://github.com/glennc), [Ryan şimdi ak](https://github.com/rynowak), [Steve Gordon](https://github.com/stevejgordon), [Rick Anderson](https://twitter.com/RickAndMSFT)ve [Kirk larkabağı](https://github.com/serpent5)
 
-Bir <xref:System.Net.Http.IHttpClientFactory> uygulamadaki örnekleri yapılandırmak ve <xref:System.Net.Http.HttpClient> oluşturmak için kaydedilebilir ve kullanılabilir. `IHttpClientFactory`aşağıdaki avantajları sunar:
+Bir <xref:System.Net.Http.IHttpClientFactory> uygulamadaki örnekleri yapılandırmak ve oluşturmak <xref:System.Net.Http.HttpClient> için kayıt yapılabilir ve kullanılabilir. `IHttpClientFactory`aşağıdaki avantajları sunar:
 
-* Mantıksal `HttpClient` örnekleri adlandırmak ve yapılandırmak için merkezi bir konum sağlar. Örneğin, *github* adlı bir istemci kaydedilebilir ve [GitHub'a](https://github.com/)erişmek için yapılandırılabilir. Varsayılan istemci genel erişim için kaydedilebilir.
-* Giden ara yazılım kavramını işleyicileri 'nde `HttpClient`atayarak kodlar. Polly tabanlı ara yazılım için uzantılar `HttpClient`sağlar.
-* Temel `HttpClientMessageHandler` örneklerin havuzlama ve ömür boyu yönetir. Otomatik yönetim, yaşam ömürlerini el ile yönetirken `HttpClient` oluşan yaygın DNS (Etki Alanı Adı Sistemi) sorunlarını önler.
-* Fabrika tarafından oluşturulan istemciler `ILogger`aracılığıyla gönderilen tüm istekler için yapılandırılabilir bir günlük deneyimi (üzerinden) ekler.
+* , Mantıksal `HttpClient` örnekleri adlandırmak ve yapılandırmak için merkezi bir konum sağlar. Örneğin, *GitHub* adlı bir Istemci, [GitHub](https://github.com/)'a erişmek için kaydedilebilir ve yapılandırılabilir. Varsayılan istemci, genel erişim için kaydedilebilir.
+* ' De `HttpClient`işleyiciler temsilci seçme yoluyla giden ara yazılım kavramını daha da artırır. ' De `HttpClient`işleyiciler temsilci atama avantajlarından faydalanmak Için, Polya tabanlı bir ara yazılım için uzantılar sağlar.
+* Temel `HttpClientMessageHandler` örneklerin biriktirmesini ve ömrünü yönetir. Otomatik yönetim, yaşam sürelerini el ile yönetirken `HttpClient` oluşan ortak DNS (etki alanı adı sistemi) sorunlarını önler.
+* Fabrika tarafından oluşturulan istemciler aracılığıyla gönderilen tüm `ILogger`istekler için yapılandırılabilir bir günlüğe kaydetme deneyimi ekler (aracılığıyla).
 
-[Örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples) ([nasıl indirilir).](xref:index#how-to-download-a-sample)
+[Örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples) ([nasıl indirilir](xref:index#how-to-download-a-sample)).
 
-Bu konu sürümündeki örnek <xref:System.Text.Json> kod, HTTP yanıtlarında döndürülen JSON içeriğini deserialize etmek için kullanır. Bu konuyu `Json.NET` kullanan `ReadAsAsync<T>`ve sürüm seçicisini kullanan örnekler için bu konunun 2.x sürümünü seçin.
+Bu konu sürümündeki örnek kod, HTTP yanıtlarında döndürülen JSON içeriğinin serisini kaldırmak için kullanır <xref:System.Text.Json> . Ve `Json.NET` `ReadAsAsync<T>`kullanan örnekler için, bu konunun 2. x sürümünü seçmek üzere sürüm seçiciyi kullanın.
 
-## <a name="consumption-patterns"></a>Tüketim alışkanlıkları
+## <a name="consumption-patterns"></a>Tüketim desenleri
 
-Bir uygulamada `IHttpClientFactory` kullanılabilen çeşitli yollar vardır:
+Bir uygulamada çeşitli yollar `IHttpClientFactory` kullanılabilir:
 
 * [Temel kullanım](#basic-usage)
 * [Adlandırılmış istemciler](#named-clients)
 * [Yazılan istemciler](#typed-clients)
 * [Oluşturulan istemciler](#generated-clients)
 
-En iyi yaklaşım uygulamanın gereksinimlerine bağlıdır.
+En iyi yaklaşım, uygulamanın gereksinimlerine bağlı olarak değişir.
 
 ### <a name="basic-usage"></a>Temel kullanım
 
-`IHttpClientFactory`arayarak `AddHttpClient`kaydedilebilir:
+`IHttpClientFactory`, çağırarak `AddHttpClient`kaydedilebilir:
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup.cs?name=snippet1)]
 
-Bağımlılık `IHttpClientFactory` [enjeksiyonu (DI)](xref:fundamentals/dependency-injection)kullanılarak istenebilir. Aşağıdaki kod `IHttpClientFactory` bir `HttpClient` örnek oluşturmak için kullanır:
+`IHttpClientFactory` [Bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection)kullanılarak bir istek yapılabilir. Aşağıdaki kod bir `HttpClient` örnek `IHttpClientFactory` oluşturmak için kullanır:
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Pages/BasicUsage.cshtml.cs?name=snippet1&highlight=9-12,21)]
 
-Yukarıdaki `IHttpClientFactory` örnekte olduğu gibi kullanmak, varolan bir uygulamayı yeniden düzenlemenin iyi bir yoludur. Nasıl kullanılacağı üzerinde `HttpClient` hiçbir etkisi yoktur. Varolan `HttpClient` bir uygulamada örneklerin oluşturulduğu yerlerde, bu oluşumları ' ya yapılan <xref:System.Net.Http.IHttpClientFactory.CreateClient*>çağrılarla değiştirin.
+Yukarıdaki `IHttpClientFactory` örnekte olduğu gibi kullanmak, mevcut bir uygulamayı yeniden düzenleme için iyi bir yoldur. Kullanım hakkında hiçbir etkisi `HttpClient` yoktur. Var olan bir `HttpClient` uygulamada örneklerin oluşturulduğu yerlerde, bu oluşumların ' i çağrılarıyla değiştirin <xref:System.Net.Http.IHttpClientFactory.CreateClient*>.
 
 ### <a name="named-clients"></a>Adlandırılmış istemciler
 
-Adlandırılmış istemciler, şu zaman iyi bir seçimdir:
+Adlandırılmış istemciler şu durumlarda iyi bir seçimdir:
 
-* Uygulama birçok farklı kullanım `HttpClient`gerektirir.
-* Birçok `HttpClient`s farklı yapılandırma var.
+* Uygulama birçok farklı kullanımı gerektirir `HttpClient`.
+* Birçok `HttpClient`s farklı yapılandırmaya sahiptir.
 
-Bir adlandırılmış `HttpClient` için yapılandırma kayıt `Startup.ConfigureServices`sırasında belirtilebilir:
+Adlandırılmış `HttpClient` için yapılandırma, içinde `Startup.ConfigureServices`kayıt sırasında belirtilebilir:
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup.cs?name=snippet2)]
 
-Önceki kodda istemci aşağıdakilerle yapılandırılır:
+İstemcinin yapılandırıldığı önceki kodda:
 
-* Temel adres. `https://api.github.com/`
-* GitHub API ile çalışmak için iki üstbilgi gerekir.
+* Temel adres `https://api.github.com/`.
+* GitHub API 'SI ile çalışmak için iki üst bilgi gereklidir.
 
 #### <a name="createclient"></a>CreateClient
 
-Her <xref:System.Net.Http.IHttpClientFactory.CreateClient*> zaman denir:
+Her zaman <xref:System.Net.Http.IHttpClientFactory.CreateClient*> çağrılır:
 
-* Yeni `HttpClient` bir örnek oluşturulur.
-* Yapılandırma eylemi denir.
+* Yeni bir örneği `HttpClient` oluşturulur.
+* Yapılandırma eylemi çağrılır.
 
-Adlandırılmış bir istemci oluşturmak için, adını şu na `CreateClient`
+Adlandırılmış bir istemci oluşturmak için adını içine `CreateClient`geçirin:
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Pages/NamedClient.cshtml.cs?name=snippet1&highlight=21)]
 
-Önceki kodda, istek bir ana bilgisayar adı belirtmek gerekmez. İstemci için yapılandırılan temel adres kullanıldığından, kod yalnızca yolu geçebilir.
+Yukarıdaki kodda, isteğin bir ana bilgisayar adı belirtmesi gerekmez. İstemci için yapılandırılan taban adresi kullanıldığından, kod yalnızca yolu geçirebilir.
 
 ### <a name="typed-clients"></a>Yazılan istemciler
 
 Yazılan istemciler:
 
-* Dizeleri anahtar olarak kullanmaya gerek kalmadan adlandırılmış istemcilerle aynı yetenekleri sağlayın.
-* Müşterileri tüketirken IntelliSense ve derleyici yardımı sağlar.
-* Belirli bir yeri yapılandırmak ve etkileşimde bulunabilmek `HttpClient`için tek bir konum sağlayın. Örneğin, tek bir dakti-sa-yazılı istemci kullanılabilir:
-  * Tek bir arka uç bitiş noktası için.
-  * Bitiş noktası ile ilgili tüm mantık kapsüllemek için.
-* DI ile çalışın ve uygulamada gerektiğinde enjekte edilebilir.
+* Dizeleri anahtar olarak kullanma gereksinimi olmadan, adlandırılmış istemcilerle aynı özellikleri sağlayın.
+* İstemcileri tükettiren IntelliSense ve derleyici yardımı sağlar.
+* Yapılandırmak ve belirli `HttpClient`bir ile etkileşimde bulunmak için tek bir konum belirtin. Örneğin, tek bir türü belirtilmiş istemci kullanılabilir:
+  * Tek bir arka uç uç noktası için.
+  * Uç nokta ile ilgili tüm mantığı kapsüllemek için.
+* DI ile birlikte çalışın ve uygulamada gerektiğinde eklenebilir.
 
-Yazılan istemci, oluşturucusu bir `HttpClient` parametre kabul eder:
+Türü belirtilmiş istemci, oluşturucusunda `HttpClient` bir parametreyi kabul eder:
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/GitHub/GitHubService.cs?name=snippet1&highlight=5)]
 [!INCLUDE[about the series](~/includes/code-comments-loc.md)]
@@ -102,38 +108,38 @@ Yazılan istemci, oluşturucusu bir `HttpClient` parametre kabul eder:
 Yukarıdaki kodda:
 
 * Yapılandırma, yazılan istemciye taşınır.
-* Nesne `HttpClient` bir kamu malı olarak ortaya çıkarır.
+* `HttpClient` Nesne bir ortak özellik olarak sunulur.
 
-İşlevselliği ortaya çıkaran `HttpClient` API'ye özgü yöntemler oluşturulabilir. Örneğin, `GetAspNetDocsIssues` yöntem açık sorunları almak için kodu kapsüller.
+İşlevselliği kullanıma `HttpClient` sunan, API 'ye özgü Yöntemler oluşturulabilir. Örneğin, `GetAspNetDocsIssues` yöntemi açık sorunları almak için kodu kapsüller.
 
-Bir dakti-sa'lık istemci sınıfını kaydetmek <xref:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient*> `Startup.ConfigureServices` için aşağıdaki kod çağırır:
+Aşağıdaki kod, türü <xref:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient*> belirtilmiş `Startup.ConfigureServices` bir istemci sınıfını kaydetmek için ' de çağırır:
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup.cs?name=snippet3)]
 
-Yazılan istemci, DI ile geçici olarak kaydedilir. Önceki kodda, `AddHttpClient` geçici `GitHubService` bir hizmet olarak kaydeder. Bu kayıt, bir fabrika yöntemi kullanır:
+Yazılan istemci, DI ile geçici olarak kaydedilir. Yukarıdaki kodda geçici bir hizmet `AddHttpClient` olarak `GitHubService` kaydedilir. Bu kayıt, için bir fabrika yöntemi kullanır:
 
 1. `HttpClient` örneği oluşturun.
-1. Bir örnek `GitHubService`oluşturun , onun `HttpClient` yapıcı için örneğinde geçen.
+1. Örneğini oluşturucusuna geçirerek `HttpClient` bir `GitHubService`örneğini oluşturun.
 
-Yazılan istemci doğrudan enjekte edilebilir ve tüketilebilir:
+Yazılan istemci doğrudan eklenebilir ve tüketilebilir:
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Pages/TypedClient.cshtml.cs?name=snippet1&highlight=11-14,20)]
 
-Daktio istemci için yapılandırma, yazılı `Startup.ConfigureServices`istemcinin oluşturucusu yerine, kayıt sırasında belirtilebilir:
+Türü belirtilmiş bir istemcinin yapılandırması `Startup.ConfigureServices`, türü belirlenmiş istemcinin Oluşturucusu yerine kayıt sırasında belirtilebilir:
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup.cs?name=snippet4)]
 
-Yazılmış `HttpClient` bir istemci içinde kapsüllenebilir. Bir özellik olarak teşhir etmek yerine, `HttpClient` örneği dahili olarak çağıran bir yöntem tanımlayın:
+, `HttpClient` Türü belirlenmiş bir istemci içinde kapsüllenebilir. Bunu bir özellik olarak göstermek yerine, `HttpClient` örneği dahili olarak çağıran bir yöntem tanımlayın:
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/GitHub/RepoService.cs?name=snippet1&highlight=4)]
 
-Önceki kodda, özel `HttpClient` bir alanda depolanır. Erişim ortak `HttpClient` `GetRepos` yöntemle.
+Yukarıdaki kodda `HttpClient` , bir özel alanda depolanır. Öğesine erişimi, `HttpClient` genel `GetRepos` yöntemi tarafından yapılır.
 
 ### <a name="generated-clients"></a>Oluşturulan istemciler
 
-`IHttpClientFactory`[Refit](https://github.com/paulcbetts/refit)gibi üçüncü taraf kitaplıkları ile birlikte kullanılabilir. Refit ,NET için bir REST kitaplığıdır. REST API'lerini canlı arabirimlere dönüştürür. Arabirimin bir uygulaması, harici HTTP `RestService`aramaları `HttpClient` yapmak için kullanılarak dinamik olarak oluşturulur.
+`IHttpClientFactory`, [yeniden sığdırma](https://github.com/paulcbetts/refit)gibi üçüncü taraf kitaplıklarla birlikte kullanılabilir. Yeniden sığdırma, .NET için bir REST kitaplığıdır. REST API 'Leri canlı arabirimlere dönüştürür. Arabirim bir uygulama, dış HTTP çağrıları yapmak için kullanılarak `RestService` `HttpClient` tarafından dinamik olarak oluşturulur.
 
-Dış API'yi ve yanıtını temsil edecek bir arabirim ve yanıt tanımlanır:
+Bir arabirim ve yanıt, dış API 'yi ve yanıtını temsil edecek şekilde tanımlanır:
 
 ```csharp
 public interface IHelloClient
@@ -148,7 +154,7 @@ public class Reply
 }
 ```
 
-Uygulamayı oluşturmak için Refit kullanılarak yazılan bir istemci eklenebilir:
+Türü belirlenmiş bir istemci eklenebilir, uygulamayı oluşturmak için yeniden sığdırma kullanımı kullanılabilir:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -163,7 +169,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Tanımlanan arabirim, DI ve Refit tarafından sağlanan uygulama ile gerektiğinde tüketilebilir:
+Tanımlı arabirim, gereken yerde, mak ve Refit tarafından sağlanmış uygulama ile kullanılabilir.
 
 ```csharp
 [ApiController]
@@ -184,191 +190,191 @@ public class ValuesController : ControllerBase
 }
 ```
 
-## <a name="outgoing-request-middleware"></a>Giden istek middleware
+## <a name="outgoing-request-middleware"></a>Giden istek ara yazılımı
 
-`HttpClient`giden HTTP istekleri için birbirine bağlanabilir işleyicileri delegating kavramı vardır. `IHttpClientFactory`:
+`HttpClient`, giden HTTP istekleri için birlikte bağlanabilen işleyicileri temsilci seçme kavramıdır. `IHttpClientFactory`:
 
-* Her adlandırılmış istemci için uygulamak için işleyicileri tanımlama kolaylaştırır.
-* Giden istek ara yazılım ardışık oluşturmak için birden çok işleyicinin kaydedilmesi ve zincirlemesi destekler. Bu işleyicilerin her biri, giden istekten önce ve sonra iş yapabilir. Bu desen:
+* Her bir adlandırılmış istemci için uygulanacak işleyiciler tanımlamayı basitleştirir.
+* Bir giden istek ara yazılım işlem hattı oluşturmak için birden çok işleyicinin kaydedilmesini ve zincirleme kullanımını destekler. Bu işleyicilerin her biri, giden istekten önce ve sonra iş gerçekleştirebilir. Bu model:
 
-  * ASP.NET Core gelen middleware boru hattı benzer.
-  * HTTP istekleri yle ilgili çapraz kesme endişelerini yönetmek için bir mekanizma sağlar:
+  * ASP.NET Core gelen ara yazılım ardışık düzenine benzerdir.
+  * , HTTP istekleri etrafında çapraz kesme sorunlarını yönetmek için bir mekanizma sağlar, örneğin:
 
-    * Önbelleğe alma
+    * önbelleği
     * hata işleme
-    * Seri -leştirme
+    * getir
     * günlüğe kaydetme
 
-Devratıcı bir işleyici oluşturmak için:
+Temsilci seçme işleyicisi oluşturmak için:
 
-* Türetin <xref:System.Net.Http.DelegatingHandler>.
-* Geçersiz <xref:System.Net.Http.DelegatingHandler.SendAsync*>kılma. İsteği ardışık alandaki bir sonraki işleyiciye geçirmeden önce kodu yürüt:
+* Türet <xref:System.Net.Http.DelegatingHandler>.
+* Geçersiz <xref:System.Net.Http.DelegatingHandler.SendAsync*>kıl. İsteği ardışık düzen içindeki bir sonraki işleyiciye geçirmeden önce kodu yürütün:
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Handlers/ValidateHeaderHandler.cs?name=snippet1)]
 
-`X-API-KEY` Üstbilgi istekte olup olmadığını önceki kod denetler. `X-API-KEY` Eksikse, <xref:System.Net.HttpStatusCode.BadRequest> döndürülür.
+Yukarıdaki kod, `X-API-KEY` üstbilginin istekte olup olmadığını denetler. `X-API-KEY` Eksikse, <xref:System.Net.HttpStatusCode.BadRequest> döndürülür.
 
-Bir yapılandırmaya `HttpClient` birden fazla işleyici <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.AddHttpMessageHandler*?displayProperty=fullName>eklenebilir:
+İçin `HttpClient` yapılandırmasına birden fazla işleyici eklenebilir <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.AddHttpMessageHandler*?displayProperty=fullName>:
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup2.cs?name=snippet1)]
 
-Önceki kodda, DI `ValidateHeaderHandler` kayıtlıdır. Her `IHttpClientFactory` işleyici için ayrı bir DI kapsamı oluşturur. İşleyiciler herhangi bir kapsamdaki hizmetlere güvenebilir. İşleyicinin bağlı olduğu hizmetler, işleyici imha edildiğinde elden çıkarılır.
+Yukarıdaki kodda `ValidateHeaderHandler` ,, dı ile kaydedilir. Her `IHttpClientFactory` işleyici için ayrı bir dı kapsamı oluşturur. İşleyiciler herhangi bir kapsamın hizmetlerine bağlı olabilir. İşleyicilerin bağımlı olduğu hizmetler, işleyicinin elden çıkarılmasıyla kaldırılır.
 
-Bir kez <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.AddHttpMessageHandler*> kaydedildikten sonra, işleyici için tür geçen, çağrılabilir.
+Kaydedildikten sonra, <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.AddHttpMessageHandler*> işleyicinin türü geçirerek, çağrılabilir.
 
-Birden çok işleyici, yürütmeleri gerektiği sırada kaydedilebilir. Her işleyici, son `HttpClientHandler` isteği çalıştırana kadar sonraki işleyiciyi sarar:
+Birden çok işleyici, yürütülmesi gereken sırayla kaydedilebilir. Her işleyici, son `HttpClientHandler` isteği çalıştırana kadar sonraki işleyiciyi sarmalar:
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup.cs?name=snippet6)]
 
-İsteme başına durumu ileti işleyicileriyle paylaşmak için aşağıdaki yaklaşımlardan birini kullanın:
+İleti işleyicileriyle istek başına durumu paylaşmak için aşağıdaki yaklaşımlardan birini kullanın:
 
-* [HttpRequestMessage.Properties'i](xref:System.Net.Http.HttpRequestMessage.Properties)kullanarak verileri işleyiciye aktarın.
+* [HttpRequestMessage. Properties](xref:System.Net.Http.HttpRequestMessage.Properties)kullanarak işleyicide veri geçirin.
 * Geçerli <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> isteğe erişmek için kullanın.
-* Verileri aktarmak <xref:System.Threading.AsyncLocal`1> için özel bir depolama nesnesi oluşturun.
+* Verileri geçirmek için <xref:System.Threading.AsyncLocal`1> özel bir depolama nesnesi oluşturun.
 
-## <a name="use-polly-based-handlers"></a>Polly tabanlı işleyicileri kullanma
+## <a name="use-polly-based-handlers"></a>Polly tabanlı işleyiciler kullanın
 
-`IHttpClientFactory`üçüncü taraf kütüphane [Polly](https://github.com/App-vNext/Polly)ile entegre . Polly, .NET için kapsamlı bir esneklik ve geçici hata işleme kitaplığıdır. Geliştiricilerin Retry, Circuit Breaker, Timeout, Bulkhead Isolation ve Fallback gibi ilkeleri akıcı ve iş parçacığı güvenli bir şekilde ifade etmesine olanak tanır.
+`IHttpClientFactory`üçüncü taraf kitaplığı [Polly](https://github.com/App-vNext/Polly)ile tümleşir. Polly, .NET için kapsamlı bir esnekliği ve geçici hata işleme kitaplığıdır. Geliştiricilerin yeniden deneme, devre kesici, zaman aşımı, Bulkbaş yalıtımı, akıcı ve iş parçacığı açısından güvenli bir şekilde geri dönüş gibi ilkeler almasına olanak tanır.
 
-Polly ilkelerinin yapılandırılmış `HttpClient` örneklerle kullanımını etkinleştirmek için uzantı yöntemleri sağlanır. Polly uzantıları, istemcilere Polly tabanlı işleyiciler eklemeyi destekler. Polly [Microsoft.Extensions.Http.Polly](https://www.nuget.org/packages/Microsoft.Extensions.Http.Polly/) NuGet paketi gerektirir.
+Uzantı yöntemleri, yapılandırılmış `HttpClient` örneklerle Polly ilkelerin kullanımını etkinleştirmek için sağlanır. Polly uzantıları, istemcilere Polly tabanlı işleyiciler eklemeyi destekler. Polly, [Microsoft. Extensions. http. Polly](https://www.nuget.org/packages/Microsoft.Extensions.Http.Polly/) NuGet paketini gerektirir.
 
-### <a name="handle-transient-faults"></a>Geçici hataları işleme
+### <a name="handle-transient-faults"></a>Geçici hataları işle
 
-Hatalar genellikle harici HTTP çağrıları geçici olduğunda oluşur. <xref:Microsoft.Extensions.DependencyInjection.PollyHttpClientBuilderExtensions.AddTransientHttpErrorPolicy*>geçici hataları işlemek için bir ilke tanımlanmasına izin verir. Aşağıdaki yanıtları `AddTransientHttpErrorPolicy` işlemek ile yapılandırılan ilkeler:
+Hatalar genellikle dış HTTP çağrıları geçici olduğunda oluşur. <xref:Microsoft.Extensions.DependencyInjection.PollyHttpClientBuilderExtensions.AddTransientHttpErrorPolicy*>geçici hataları işlemek için bir ilkenin tanımlanmasını sağlar. Aşağıdaki yanıtları `AddTransientHttpErrorPolicy` işleyecek şekilde yapılandırılan ilkeler:
 
 * <xref:System.Net.Http.HttpRequestException>
 * HTTP 5xx
 * HTTP 408
 
-`AddTransientHttpErrorPolicy`olası geçici `PolicyBuilder` bir hatayı temsil eden hataları işlemek için yapılandırılan bir nesneye erişim sağlar:
+`AddTransientHttpErrorPolicy`olası bir geçici hatayı `PolicyBuilder` temsil eden hataları işlemek için yapılandırılmış bir nesneye erişim sağlar:
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup3.cs?name=snippet1)]
 
-Önceki kodda bir `WaitAndRetryAsync` ilke tanımlanır. Başarısız istekler, denemeler arasında 600 ms'lik bir gecikmeyle üç defaya kadar yeniden denenir.
+Yukarıdaki kodda bir `WaitAndRetryAsync` ilke tanımlanmıştır. Başarısız istekler, denemeler arasındaki 600 MS gecikmeyle en fazla üç kez yeniden denenir.
 
-### <a name="dynamically-select-policies"></a>Dinamik olarak ilkeleri seçin
+### <a name="dynamically-select-policies"></a>Dinamik olarak ilke seçme
 
-Uzantı yöntemleri Polly tabanlı işleyicileri eklemek için <xref:Microsoft.Extensions.DependencyInjection.PollyHttpClientBuilderExtensions.AddPolicyHandler*>sağlanır, örneğin. Aşağıdaki `AddPolicyHandler` aşırı yükleme, hangi politikanın uygulanacağına karar verme isteğini denetler:
+Uzantı yöntemleri, örneğin, <xref:Microsoft.Extensions.DependencyInjection.PollyHttpClientBuilderExtensions.AddPolicyHandler*>Polly tabanlı işleyiciler eklemek için sağlanır. Aşağıdaki `AddPolicyHandler` aşırı yükleme, hangi ilkenin uygulanacağını belirlemek için isteği inceler:
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup.cs?name=snippet8)]
 
-Önceki kodda, giden istek bir HTTP GET ise, 10 saniyelik bir zaman ayarı uygulanır. Başka bir HTTP yöntemi için 30 saniyelik bir zaman aşımı kullanılır.
+Yukarıdaki kodda, giden istek bir HTTP GET ise, 10 saniyelik bir zaman aşımı uygulanır. Diğer HTTP yöntemleri için, 30 saniyelik bir zaman aşımı kullanılır.
 
-### <a name="add-multiple-polly-handlers"></a>Birden çok Polly işleyicisi ekleme
+### <a name="add-multiple-polly-handlers"></a>Birden çok Polly işleyici ekleme
 
-Polly politikalarını yuvalamak yaygındır:
+Polly ilkeleri iç içe almak yaygın bir şekilde yapılır:
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup.cs?name=snippet9)]
 
-Önceki örnekte:
+Yukarıdaki örnekte:
 
 * İki işleyici eklenir.
-* İlk işleyici <xref:Microsoft.Extensions.DependencyInjection.PollyHttpClientBuilderExtensions.AddTransientHttpErrorPolicy*> yeniden deneme ilkesi eklemek için kullanır. Başarısız istekler en fazla üç kez yeniden denendir.
-* İkinci `AddTransientHttpErrorPolicy` çağrı bir devre kesici ilkesi ekler. 5 başarısız deneme sırayla gerçekleşirse, diğer dış istekler 30 saniye boyunca engellenir. Devre kesici ilkeleri durumludur. Bu istemci den gelen tüm aramalar aynı devre durumunu paylaşır.
+* İlk işleyici, yeniden <xref:Microsoft.Extensions.DependencyInjection.PollyHttpClientBuilderExtensions.AddTransientHttpErrorPolicy*> deneme ilkesi eklemek için kullanır. Başarısız istekler en fazla üç kez yeniden denenir.
+* İkinci `AddTransientHttpErrorPolicy` çağrı bir devre kesici ilkesi ekler. 5 başarısız girişim sıralı olarak gerçekleşirse, daha fazla dış istek 30 saniye boyunca engellenir. Devre kesici ilkeleri durum bilgisi vardır. Bu istemci aracılığıyla yapılan tüm çağrılar aynı devre durumunu paylaşır.
 
-### <a name="add-policies-from-the-polly-registry"></a>Polly kayıt defterinden ilkeler ekleme
+### <a name="add-policies-from-the-polly-registry"></a>Polly kayıt defterinden ilke ekleme
 
-Düzenli olarak kullanılan ilkeleri yönetmeye yönelik bir yaklaşım, bunları `PolicyRegistry`bir kez tanımlamak ve bir .
+Düzenli olarak kullanılan ilkeleri yönetmeye yönelik bir yaklaşım, bunları bir kez tanımlayıp bir `PolicyRegistry`ile kaydetmektir.
 
 Aşağıdaki kodda:
 
-* "Düzenli" ve "uzun" polisler eklenir.
-* <xref:Microsoft.Extensions.DependencyInjection.PollyHttpClientBuilderExtensions.AddPolicyHandlerFromRegistry*>kayıt defterinden "düzenli" ve "uzun" ilkeleri ekler.
+* "Normal" ve "uzun" ilkeler eklenmiştir.
+* <xref:Microsoft.Extensions.DependencyInjection.PollyHttpClientBuilderExtensions.AddPolicyHandlerFromRegistry*>kayıt defterinden "normal" ve "uzun" ilkeleri ekler.
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup4.cs?name=snippet1)]
 
-Polly entegrasyonları `IHttpClientFactory` hakkında daha fazla bilgi için [Polly wiki sayfasına](https://github.com/App-vNext/Polly/wiki/Polly-and-HttpClientFactory)bakın.
+Ve daha fazla tümleştirme `IHttpClientFactory` hakkında daha fazla bilgi için bkz. [Polly wiki](https://github.com/App-vNext/Polly/wiki/Polly-and-HttpClientFactory).
 
-## <a name="httpclient-and-lifetime-management"></a>Httpİste ve yaşam boyu yönetim
+## <a name="httpclient-and-lifetime-management"></a>HttpClient ve ömür yönetimi
 
-Yeni `HttpClient` bir örnek her `CreateClient` zaman `IHttpClientFactory`döndürülür. Adlandırılmış istemci başına bir <xref:System.Net.Http.HttpMessageHandler> oluşturulur. `HttpMessageHandler` Fabrika, örneklerin yaşam ömürlerini yönetir.
+Her `HttpClient` `CreateClient` çağrıldığında yeni bir örnek döndürülür `IHttpClientFactory`. <xref:System.Net.Http.HttpMessageHandler> Adlandırılmış istemci başına oluşturulur. Fabrika, `HttpMessageHandler` örneklerin yaşam sürelerini yönetir.
 
-`IHttpClientFactory`kaynak tüketimini `HttpMessageHandler` azaltmak için fabrika tarafından oluşturulan örnekleri bir araya sağlar. Bir `HttpMessageHandler` örnek, kullanım ömrü dolmamışsa `HttpClient` yeni bir örnek oluştururken havuzdan yeniden kullanılabilir.
+`IHttpClientFactory`kaynak tüketimini `HttpMessageHandler` azaltmak için fabrika tarafından oluşturulan örnekleri havuzlar. Bir `HttpMessageHandler` örnek, süresi dolmamışsa yeni `HttpClient` bir örnek oluştururken havuzdan yeniden kullanılabilir.
 
-Her işleyici genellikle kendi temel HTTP bağlantılarını yönetir gibi işleyicileri havuzlama arzu edilir. Gerekenden daha fazla işleyici oluşturmak bağlantı gecikmelerine neden olabilir. Bazı işleyiciler de bağlantıları süresiz olarak açık tutar, bu da işleyicinin DNS (Etki Alanı Adı Sistemi) değişikliklerine tepki sini engelleyebilir.
+Her işleyici genellikle kendi temel HTTP bağlantılarını yönettiğinden, işleyicilerin havuzlaması tercih edilir. Gerekenden daha fazla işleyici oluşturulması bağlantı gecikmeleri oluşmasına neden olabilir. Ayrıca, bazı işleyiciler bağlantıları süresiz olarak açık tutar, bu da işleyicinin DNS (etki alanı adı sistemi) değişikliklerine yeniden davranmasını engelleyebilir.
 
-Varsayılan işleyici ömrü iki dakikadır. Varsayılan değer, adlandırılmış istemci bazında geçersiz kılınabilir:
+Varsayılan işleyici ömrü iki dakikadır. Varsayılan değer, adlandırılmış istemci temelinde geçersiz kılınabilir:
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup5.cs?name=snippet1)]
 
-`HttpClient`örnekleri genellikle imha **gerektirmeyen** .NET nesneleri olarak kabul edilebilir. Elden çıkarma giden istekleri iptal eder `HttpClient` ve verilen örneğin aramadan <xref:System.IDisposable.Dispose*>sonra kullanılamayacağından garanti eder. `IHttpClientFactory`örnekleri tarafından `HttpClient` kullanılan kaynakları izler ve elden çıkar.
+`HttpClient`örnekler genellikle aktiften **çıkarma gerektirmeyen .NET nesneleri olarak** kabul edilebilir. Çıkarma giden istekleri iptal eder ve çağırma `HttpClient` <xref:System.IDisposable.Dispose*>sonrasında verilen örneğin kullanılamaz olmasını sağlar. `IHttpClientFactory`örnekler tarafından `HttpClient` kullanılan kaynakları izler ve ortadan kaldırdık.
 
-Tek `HttpClient` bir örneği uzun süre canlı tutmak, kuruluşundan önce `IHttpClientFactory`kullanılan yaygın bir desendir. Bu desen' e geçtikten `IHttpClientFactory`sonra gereksiz hale gelir.
+Tek `HttpClient` bir örneğinin uzun süre canlı tutulması, önünde `IHttpClientFactory`kullanılmadan önce kullanılan ortak bir modeldir. Bu model, ' a geçtikten sonra `IHttpClientFactory`gereksiz hale gelir.
 
-### <a name="alternatives-to-ihttpclientfactory"></a>IHttpClientFactory için alternatifler
+### <a name="alternatives-to-ihttpclientfactory"></a>Ihttpclientfactory alternatifleri
 
-DI `IHttpClientFactory` özellikli bir uygulamada kullanmak şunları önler:
+Dı `IHttpClientFactory` etkin bir uygulamada kullanmak şunları önler:
 
-* Örnekleri birleştirerek `HttpMessageHandler` kaynak tükenmesi sorunları.
-* Düzenli aralıklarla bisiklet `HttpMessageHandler` örnekleri tarafından Bayat DNS sorunları.
+* Havuz `HttpMessageHandler` örneklerine göre kaynak tükenmesi sorunları.
+* Düzenli aralıklarla `HttpMessageHandler` örnekleri GEÇIREREK eski DNS sorunları.
 
-Uzun ömürlü bir örneği kullanarak önceki sorunları çözmek <xref:System.Net.Http.SocketsHttpHandler> için alternatif yollar vardır.
+Uzun süreli <xref:System.Net.Http.SocketsHttpHandler> bir örnek kullanarak önceki sorunları çözmenin alternatif yolları vardır.
 
-- Uygulamanın ne `SocketsHttpHandler` zaman başladığına bir örnek oluşturun ve uygulamanın ömrü boyunca kullanın.
-- DNS yenileme sürelerine göre uygun bir değere göre <xref:System.Net.Http.SocketsHttpHandler.PooledConnectionLifetime> yapılandırın.
-- Gerektiğinde `HttpClient` kullanarak `new HttpClient(handler, disposeHandler: false)` örnekler oluşturun.
+- Uygulamanın başladığı `SocketsHttpHandler` zaman bir örneği oluşturun ve uygulamanın ömrü boyunca kullanın.
+- DNS <xref:System.Net.Http.SocketsHttpHandler.PooledConnectionLifetime> yenileme süreleri temelinde uygun bir değere yapılandırın.
+- Gerektiğinde `HttpClient` örnek `new HttpClient(handler, disposeHandler: false)` oluşturun.
 
-Önceki yaklaşımlar benzer bir şekilde `IHttpClientFactory` çözen kaynak yönetimi sorunlarını çözer.
+Yukarıdaki yaklaşımlar, benzer bir şekilde `IHttpClientFactory` çözen kaynak yönetimi sorunlarını çözer.
 
-- Örnekler `SocketsHttpHandler` arasında `HttpClient` bağlantıları paylaşır. Bu paylaşım soket yorgunluğunu önler.
-- Eski `SocketsHttpHandler` DNS sorunlarını `PooledConnectionLifetime` önlemek için döngüleri bağlantıları.
+- , `SocketsHttpHandler` Örnekleri arasında `HttpClient` bağlantıları paylaşır. Bu paylaşım, yuva azalmasına engel olur.
+- Bağlantıları `SocketsHttpHandler` , eski DNS sorunlarından `PooledConnectionLifetime` kaçınmak için öğesine göre döngüler.
 
 ### <a name="cookies"></a>Tanımlama bilgileri
 
-Birleştirilmiş `HttpMessageHandler` örnekler, nesnelerin `CookieContainer` paylaşılmasına neden oluyor. Beklenmeyen `CookieContainer` nesne paylaşımı genellikle yanlış kodla sonuçlanır. Tanımlama bilgisi gerektiren uygulamalar için aşağıdakileri göz önünde bulundurun:
+Havuza alınmış `HttpMessageHandler` örnekler, paylaşılan `CookieContainer` nesneler ile sonuçlanır. Beklenmeyen `CookieContainer` nesne paylaşımı genellikle hatalı kodla sonuçlanır. Tanımlama bilgileri gerektiren uygulamalar için şunlardan birini göz önünde bulundurun:
 
- - Otomatik çerez işlemeyi devre dışı bırakma
- - Kaçın -arak`IHttpClientFactory`
+ - Otomatik tanımlama bilgisi işlemeyi devre dışı bırakma
+ - Önlemenin`IHttpClientFactory`
 
-Otomatik <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> çerez kullanımını devre dışı kılabilir:
+Otomatik <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> tanımlama bilgisi işlemesini devre dışı bırakmak için çağırın:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
 
-## <a name="logging"></a>Günlüğe kaydetme
+## <a name="logging"></a>Günlüğe Kaydetme
 
-Tüm istekler için kayıt günlüğü iletileri aracılığıyla `IHttpClientFactory` oluşturulan istemciler. Varsayılan günlük iletilerini görmek için günlüğe kaydetme yapılandırmasında uygun bilgi düzeyini etkinleştirin. İstek üstbilgilerinin günlüğe kaydedilmesi gibi ek günlüğe kaydetme yalnızca izleme düzeyinde dahildir.
+Tüm istekler için `IHttpClientFactory` kayıt günlüğü iletileri aracılığıyla oluşturulan istemciler. Varsayılan günlük iletilerini görmek için günlük yapılandırmasında uygun bilgi düzeyini etkinleştirin. İstek üst bilgilerinin günlüğe kaydedilmesi gibi ek Günlükler yalnızca izleme düzeyinde yer alır.
 
-Her istemci için kullanılan günlük kategorisi istemcinin adını içerir. Örneğin *MyNamedClient*adlı bir istemci iletileri "System.Net.Http.HttpClient" kategorisiyle günlüğe kaydeder. **MyNamedClient**. MantıksalHandler". *LogicalHandler* ile sabitlenmiş iletiler istek işleyicisi ardışık alanıdışında oluşur. İstek üzerine, iletiler ardışık ardışık işlemden önce günlüğe kaydedilir. Yanıtta, iletiler yanıtı aldıktan sonra günlüğe kaydedilir.
+Her istemci için kullanılan günlük kategorisi, istemcinin adını içerir. Örneğin, *Mynamedclient*adlı bir istemci, "System .net. http. HttpClient" kategorisine sahip iletileri günlüğe kaydeder. **Mynamedclient**. LogicalHandler ". *Logicalhandler* ile düzeltilen iletiler istek işleyicisi ardışık düzeni dışında oluşur. İstekte, işlem hattındaki diğer işleyiciler işlenmeden önce iletiler günlüğe kaydedilir. Yanıtta, tüm diğer işlem hattı işleyicileri yanıtı aldıktan sonra iletiler günlüğe kaydedilir.
 
-Günlüğe kaydetme, istek işleyicisi ardışık hattının içinde de oluşur. *MyNamedClient* örneğinde, bu iletiler "System.Net.HttpClient" günlük kategorisi ile günlüğe kaydedilir. **MyNamedClient**. MüşteriHandler". İstek için, bu, diğer tüm işleyiciler çalıştırdıktan sonra ve istek gönderilmeden hemen önce oluşur. Yanıtta, bu günlüğe kaydetme, işleyici ardışık işlemden geçmeden önce yanıtın durumunu içerir.
+Günlüğe kaydetme, istek işleyicisi ardışık düzeni içinde de gerçekleşir. *Mynamedclient* örneğinde, bu Iletiler "System .net. http. HttpClient" günlük kategorisiyle günlüğe kaydedilir. **Mynamedclient**. ClientHandler ". İstek için bu, tüm diğer işleyiciler çalıştırıldıktan sonra ve istek gönderilmeden hemen önce gerçekleşir. Yanıtta, bu günlüğe kaydetme, işleyicinin işleyici işlem hattı üzerinden geri geçirmeden önce yanıtın durumunu içerir.
 
-Boru hattının dışında ve içinde günlüğe kaydetmeyi etkinleştirmek, diğer boru hattı işleyicileri tarafından yapılan değişikliklerin incelenmesini sağlar. Bu, istek üstbilgisi veya yanıt durum kodu değişiklikleri içerebilir.
+İşlem hattının dışında ve içinde günlüğe kaydetmenin etkinleştirilmesi, diğer işlem hattı işleyicileri tarafından yapılan değişikliklerin incelemesini etkinleştirir. Bu, istek üst bilgilerinde veya yanıt durum kodunda yapılan değişiklikleri içerebilir.
 
-Günlük kategorisinde istemcinin adını niçin de dahil olmak üzere, belirli adlandırılmış istemciler için günlük filtreleme sağlar.
+İstemcinin adını log kategorisinde da içermek, belirli adlandırılmış istemciler için günlük filtrelemeyi sunar.
 
-## <a name="configure-the-httpmessagehandler"></a>HttpMessageHandler'ı yapılandırın
+## <a name="configure-the-httpmessagehandler"></a>HttpMessageHandler 'ı yapılandırma
 
-Bir istemci tarafından kullanılan iç `HttpMessageHandler` yapılandırmasını denetlemek için gerekli olabilir.
+İstemci tarafından kullanılan iç `HttpMessageHandler` yapılandırmayı denetlemek gerekli olabilir.
 
-Adlandırılmış veya yazılan istemciler eklendiğinde bir `IHttpClientBuilder` döndürülür. Uzantı <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> yöntemi bir temsilci tanımlamak için kullanılabilir. Temsilci, bu istemci tarafından kullanılan `HttpMessageHandler` birincil oluşturmak ve yapılandırmak için kullanılır:
+Adlandırılmış `IHttpClientBuilder` veya yazılan istemciler eklenirken bir döndürülür. <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> Genişletme yöntemi bir temsilciyi tanımlamak için kullanılabilir. Temsilci, bu istemci tarafından kullanılan birincili `HttpMessageHandler` oluşturmak ve yapılandırmak için kullanılır:
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup6.cs?name=snippet1)]
 
-## <a name="use-ihttpclientfactory-in-a-console-app"></a>iHttpClientFactory konsol uygulamasında kullanma
+## <a name="use-ihttpclientfactory-in-a-console-app"></a>Konsol uygulamasında ıhttpclientfactory kullanma
 
-Konsol uygulamasında, projeye aşağıdaki paket başvurularını ekleyin:
+Konsol uygulamasında, aşağıdaki paket başvurularını projeye ekleyin:
 
-* [Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting)
-* [Microsoft.Extensions.Http](https://www.nuget.org/packages/Microsoft.Extensions.Http)
+* [Microsoft. Extensions. Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting)
+* [Microsoft. Extensions. http](https://www.nuget.org/packages/Microsoft.Extensions.Http)
 
 Aşağıdaki örnekte:
 
-* <xref:System.Net.Http.IHttpClientFactory>Genel Ana [Bilgisayar hizmet](xref:fundamentals/host/generic-host) konteynerine kaydedilir.
-* `MyService`bir `HttpClient`. oluşturmak için kullanılan hizmetten bir istemci fabrika örneği oluşturur `HttpClient`bir web sayfasını almak için kullanılır.
-* `Main`hizmetin `GetPage` yöntemini yürütmek ve web sayfası içeriğinin ilk 500 karakterini konsola yazmak için bir kapsam oluşturur.
+* <xref:System.Net.Http.IHttpClientFactory>, [genel konağın](xref:fundamentals/host/generic-host) hizmet kapsayıcısına kaydedilir.
+* `MyService`hizmetinden bir `HttpClient`istemci fabrikası örneği oluşturur. `HttpClient`, bir Web sayfasını almak için kullanılır.
+* `Main`Hizmetin `GetPage` yöntemini yürütmek için bir kapsam oluşturur ve Web sayfası içeriğinin ilk 500 karakterini konsola yazar.
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactoryConsoleSample/Program.cs?highlight=14-15,20,26-27,59-62)]
 
-## <a name="header-propagation-middleware"></a>Üstbilgi yayılımı ara ware
+## <a name="header-propagation-middleware"></a>Üst bilgi yayma ara yazılımı
 
-Üstbilgi yayılımı, gelen istekten giden HTTP İstemci isteklerine HTTP üstbilgilerini yayaymak için ASP.NET bir Çekirdek ara yazılımıdır. Üstbilgi yayılmasını kullanmak için:
+Üst bilgi yayma, gelen istekten giden HTTP Istemci isteklerine HTTP üstbilgilerini yaymaya yönelik bir ASP.NET Core ara istemcindedir. Üst bilgi yaymayı kullanmak için:
 
-* [Microsoft.AspNetCore.HeaderPropagation](https://www.nuget.org/packages/Microsoft.AspNetCore.HeaderPropagation) paketine başvurun.
-* Ara yazılımı yapılandırın ve `HttpClient` şu `Startup`şekilde:
+* [Microsoft. AspNetCore. Headeryayma](https://www.nuget.org/packages/Microsoft.AspNetCore.HeaderPropagation) paketine başvurun.
+* Ara yazılımı ve `HttpClient` içinde `Startup`yapılandırın:
 
   [!code-csharp[](http-requests/samples/3.x/Startup.cs?highlight=5-9,21&name=snippet)]
 
-* İstemci, giden isteklerde yapılandırılan üstbilgiiçerir:
+* İstemci giden isteklerde yapılandırılan üst bilgileri içerir:
 
   ```csharp
   var client = clientFactory.CreateClient("MyForwardingClient");
@@ -378,102 +384,102 @@ Aşağıdaki örnekte:
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * [Dayanıklı HTTP isteklerini uygulamak için HttpClientFactory kullanma](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests)
-* [HttpClientFactory ve Polly politikaları ile üstel geri dönüş ile HTTP çağrı yeniden uygulama](/dotnet/standard/microservices-architecture/implement-resilient-applications/implement-http-call-retries-exponential-backoff-polly)
+* [HttpClientFactory ve Polly ilkeleriyle üstel geri alma ile HTTP çağrı yeniden denemeleri uygulayın](/dotnet/standard/microservices-architecture/implement-resilient-applications/implement-http-call-retries-exponential-backoff-polly)
 * [Devre Kesici desenini uygulama](/dotnet/standard/microservices-architecture/implement-resilient-applications/implement-circuit-breaker-pattern)
-* [JSON'u .NET'te serihale ve deserialize etme](/dotnet/standard/serialization/system-text-json-how-to)
+* [.NET 'te JSON serileştirme ve serisini kaldırma](/dotnet/standard/serialization/system-text-json-how-to)
 
 ::: moniker-end
 
 ::: moniker range="= aspnetcore-2.2"
 
-Glenn [Condron](https://github.com/glennc)tarafından , [Ryan Nowak](https://github.com/rynowak), ve [Steve Gordon](https://github.com/stevejgordon)
+, [Glenn CONDRON](https://github.com/glennc), [Ryan şimdi e](https://github.com/rynowak)ve [Steve Gordon](https://github.com/stevejgordon)
 
-Bir <xref:System.Net.Http.IHttpClientFactory> uygulamadaki örnekleri yapılandırmak ve <xref:System.Net.Http.HttpClient> oluşturmak için kaydedilebilir ve kullanılabilir. Aşağıdaki avantajları sunar:
+Bir <xref:System.Net.Http.IHttpClientFactory> uygulamadaki örnekleri yapılandırmak ve oluşturmak <xref:System.Net.Http.HttpClient> için kayıt yapılabilir ve kullanılabilir. Aşağıdaki avantajları sunar:
 
-* Mantıksal `HttpClient` örnekleri adlandırmak ve yapılandırmak için merkezi bir konum sağlar. Örneğin, bir *github* istemcisi kaydedilebilir ve [GitHub'a](https://github.com/)erişmek için yapılandırılabilir. Varsayılan istemci başka amaçlarla kaydedilebilir.
-* Giden ara yazılım kavramını işleyicileri atayarak kodlar `HttpClient` ve Polly tabanlı ara yazılımiçin bundan yararlanmak için uzantılar sağlar.
-* Yaşam ömürlerini el ile `HttpClientMessageHandler` yönetirken `HttpClient` ortaya çıkan yaygın DNS sorunlarını önlemek için temel örneklerin biraraya getiriyi ve kullanım ömrünü yönetir.
-* Fabrika tarafından oluşturulan istemciler `ILogger`aracılığıyla gönderilen tüm istekler için yapılandırılabilir bir günlük deneyimi (üzerinden) ekler.
+* , Mantıksal `HttpClient` örnekleri adlandırmak ve yapılandırmak için merkezi bir konum sağlar. Örneğin, *GitHub istemcisi kayıtlı* ve [GitHub](https://github.com/)'a erişebilecek şekilde yapılandırılabilir. Varsayılan istemci, diğer amaçlar için kaydedilebilir.
+* ' De `HttpClient` işleyiciler için temsilci atama ile giden ara yazılım kavramı ve bundan faydalanmak Için, Polly tabanlı ara yazılım için uzantılar sağlar.
+* Yaşam sürelerini el ile yönetirken `HttpClientMessageHandler` `HttpClient` gerçekleşen yaygın DNS sorunlarından kaçınmak için temeldeki örneklerin biriktirmesini ve ömrünü yönetir.
+* Fabrika tarafından oluşturulan istemciler aracılığıyla gönderilen tüm `ILogger`istekler için yapılandırılabilir bir günlüğe kaydetme deneyimi ekler (aracılığıyla).
 
-[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples) ( nasıl[indirilir](xref:index#how-to-download-a-sample))
+[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="consumption-patterns"></a>Tüketim alışkanlıkları
+## <a name="consumption-patterns"></a>Tüketim desenleri
 
-Bir uygulamada `IHttpClientFactory` kullanılabilen çeşitli yollar vardır:
+Bir uygulamada çeşitli yollar `IHttpClientFactory` kullanılabilir:
 
 * [Temel kullanım](#basic-usage)
 * [Adlandırılmış istemciler](#named-clients)
 * [Yazılan istemciler](#typed-clients)
 * [Oluşturulan istemciler](#generated-clients)
 
-Hiçbiri diğerinden kesinlikle üstün değil. En iyi yaklaşım uygulamanın kısıtlamalarına bağlıdır.
+Hiçbiri diğerinden tamamen üst değildir. En iyi yaklaşım, uygulamanın kısıtlamalarına bağlıdır.
 
 ### <a name="basic-usage"></a>Temel kullanım
 
-Yöntemin `IHttpClientFactory` `AddHttpClient` `IServiceCollection`içinde, `Startup.ConfigureServices` uzantı yöntemi ni arayarak kaydedilebilir.
+`IHttpClientFactory` `AddHttpClient` , `Startup.ConfigureServices` Yöntemi içindeki içindeki genişletme yöntemi `IServiceCollection`çağırarak kaydedilebilir.
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet1)]
 
-Bir kez kayıtlı, `IHttpClientFactory` kod bağımlılık [enjeksiyon (DI)](xref:fundamentals/dependency-injection)ile enjekte edilebilir her yerde hizmetleri kabul edebilirsiniz. Bir `IHttpClientFactory` `HttpClient` örnek oluşturmak için kullanılabilir:
+Kaydedildikten sonra kod, `IHttpClientFactory` [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection)ile her yerden bir hizmeti kabul edebilir. `IHttpClientFactory` Bir `HttpClient` örnek oluşturmak için kullanılabilir:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Pages/BasicUsage.cshtml.cs?name=snippet1&highlight=9-12,21)]
 
-Bu `IHttpClientFactory` şekilde kullanmak, varolan bir uygulamayı yeniden düzenlemenin iyi bir yoludur. Bu şekilde `HttpClient` kullanılan hiçbir etkisi yoktur. Örneklerin `HttpClient` şu anda oluşturulduğu yerlerde, bu oluşumları bir çağrıyla değiştirin. <xref:System.Net.Http.IHttpClientFactory.CreateClient*>
+Bu `IHttpClientFactory` biçimde kullanmak, mevcut bir uygulamayı yeniden düzenleme için iyi bir yoldur. Kullanım şekli `HttpClient` üzerinde hiçbir etkisi yoktur. `HttpClient` Örneklerin Şu anda oluşturulduğu yerlerde, bu tekrarlamaları ' a çağrı ile değiştirin <xref:System.Net.Http.IHttpClientFactory.CreateClient*>.
 
 ### <a name="named-clients"></a>Adlandırılmış istemciler
 
-Bir `HttpClient`uygulama, her biri farklı bir yapılandırmaya sahip olan birçok farklı kullanım gerektiriyorsa, **adlandırılmış istemcileri**kullanma seçeneği vardır. Bir adlandırılmış `HttpClient` için yapılandırma kayıt `Startup.ConfigureServices`sırasında belirtilebilir.
+Bir uygulama `HttpClient`, her biri farklı bir yapılandırmaya sahip birçok farklı kullanım gerektiriyorsa, **adlandırılmış istemciler**kullanılır. Adlandırılmış `HttpClient` için yapılandırma, içinde `Startup.ConfigureServices`kayıt sırasında belirtilebilir.
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet2)]
 
-Önceki kodda, `AddHttpClient` adı *github*sağlayan denir. Bu istemci, temel&mdash;adres ve GitHub API ile çalışmak için gerekli iki üstbilgi uygulanan bazı varsayılan yapılandırma vardır.
+Yukarıdaki kodda, `AddHttpClient` *GitHub*adının sağlanması denir. Bu istemci, GitHub API 'siyle birlikte&mdash;çalışmak için gerekli olan temel adres ve iki üst bilgi olan bazı varsayılan yapılandırma uygulanmış.
 
-Her `CreateClient` zaman çağrılır, `HttpClient` yeni bir örnek oluşturulur ve yapılandırma eylem denir.
+Her seferinde `CreateClient` her çağrıldığında yeni bir örneği `HttpClient` oluşturulur ve yapılandırma eylemi çağrılır.
 
-Adlandırılmış bir istemciyi tüketmek için `CreateClient`dize parametresi . Oluşturulacak istemcinin adını belirtin:
+Adlandırılmış bir istemciyi kullanmak için, bir dize parametresi iletilebilir `CreateClient`. Oluşturulacak istemcinin adını belirtin:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Pages/NamedClient.cshtml.cs?name=snippet1&highlight=21)]
 
-Önceki kodda, istek bir ana bilgisayar adı belirtmek gerekmez. İstemci için yapılandırılan temel adres kullanıldığından, yalnızca yolu geçebilir.
+Yukarıdaki kodda, isteğin bir ana bilgisayar adı belirtmesi gerekmez. İstemci için yapılandırılan taban adresi kullanıldığından, bu yalnızca yolu geçirebilir.
 
 ### <a name="typed-clients"></a>Yazılan istemciler
 
 Yazılan istemciler:
 
-* Dizeleri anahtar olarak kullanmaya gerek kalmadan adlandırılmış istemcilerle aynı yetenekleri sağlayın.
-* Müşterileri tüketirken IntelliSense ve derleyici yardımı sağlar.
-* Belirli bir yeri yapılandırmak ve etkileşimde bulunabilmek `HttpClient`için tek bir konum sağlayın. Örneğin, tek bir daktilo istemcisi tek bir arka uç bitiş noktası için kullanılabilir ve bu uç noktaile ilgili tüm mantığı kapsülleyebilir.
-* DI ile çalışın ve uygulamanızda gerektiğinde enjekte edilebilir.
+* Dizeleri anahtar olarak kullanma gereksinimi olmadan, adlandırılmış istemcilerle aynı özellikleri sağlayın.
+* İstemcileri tükettiren IntelliSense ve derleyici yardımı sağlar.
+* Yapılandırmak ve belirli `HttpClient`bir ile etkileşimde bulunmak için tek bir konum belirtin. Örneğin, tek bir arka uç uç noktası için tek bir adet yazılmış istemci kullanılabilir ve bu uç nokta ile ilgili tüm mantığı kapsüllenebilir.
+* DI ile birlikte çalışın ve uygulamanızda gerektiğinde eklenebilir.
 
-Yazılan istemci, oluşturucusu bir `HttpClient` parametre kabul eder:
+Türü belirtilmiş istemci, oluşturucusunda `HttpClient` bir parametreyi kabul eder:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/GitHub/GitHubService.cs?name=snippet1&highlight=5)]
 
-Önceki kodda, yapılandırma yazılan istemciye taşınır. Nesne `HttpClient` bir kamu malı olarak ortaya çıkarır. İşlevselliği ortaya `HttpClient` çıkaran API'ye özgü yöntemleri tanımlamak mümkündür. Yöntem, `GetAspNetDocsIssues` github deposundan en son açık sorunları sorgulamak ve ayrışdırmak için gereken kodu kapsüller.
+Önceki kodda, yapılandırma yazılan istemciye taşınır. `HttpClient` Nesne bir ortak özellik olarak sunulur. İşlevselliği kullanıma `HttpClient` sunan API 'ye özel yöntemler tanımlamak mümkündür. Yöntemi `GetAspNetDocsIssues` , GitHub deposundan en son açık sorunları sorgulamak ve ayrıştırmak için gereken kodu saklar.
 
-Bir daktilan istemci kaydetmek <xref:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient*> için, genel `Startup.ConfigureServices`uzantı yöntemi içinde kullanılabilir , daktilan istemci sınıfı belirterek:
+Türü belirtilmiş bir istemciyi kaydettirmek için, genel <xref:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient*> genişletme yöntemi içinde `Startup.ConfigureServices`kullanılabilir istemci sınıfını belirterek kullanılabilir:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet3)]
 
-Yazılan istemci, DI ile geçici olarak kaydedilir. Yazılan istemci doğrudan enjekte edilebilir ve tüketilebilir:
+Yazılan istemci, DI ile geçici olarak kaydedilir. Yazılan istemci doğrudan eklenebilir ve tüketilebilir:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Pages/TypedClient.cshtml.cs?name=snippet1&highlight=11-14,20)]
 
-Tercih edilirse, yazılan istemcinin oluşturucusu yerine, `Startup.ConfigureServices`kayıt sırasında yazılı istemcinin yapılandırması belirtilebilir:
+Tercih edilirse, yazılan istemcinin yapılandırması, türü belirlenmiş istemcinin Oluşturucusu yerine kayıt `Startup.ConfigureServices`sırasında belirtilebilir:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet4)]
 
-Yazılan istemciyi `HttpClient` tamamen kapsüllemek mümkündür. Bir özellik olarak teşhir etmek yerine, `HttpClient` örneği dahili olarak adlandıran genel yöntemler sağlanabilir.
+Türü belirtilmiş bir istemci `HttpClient` içinde tamamen kapsüllenebilir. Bunu bir özellik olarak göstermek yerine, `HttpClient` örneği dahili olarak çağıran ortak Yöntemler sunulabilir.
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/GitHub/RepoService.cs?name=snippet1&highlight=4)]
 
-Önceki kodda, özel `HttpClient` alan olarak depolanır. Harici arama yapmak için tüm `GetRepos` erişim yöntemi geçer.
+Önceki kodda `HttpClient` , bir özel alan olarak depolanır. Dış çağrıları yapmak için tüm erişim `GetRepos` yönteminden geçer.
 
 ### <a name="generated-clients"></a>Oluşturulan istemciler
 
-`IHttpClientFactory`[Refit](https://github.com/paulcbetts/refit)gibi diğer üçüncü taraf kitaplıkları ile birlikte kullanılabilir. Refit ,NET için bir REST kitaplığıdır. REST API'lerini canlı arabirimlere dönüştürür. Arabirimin bir uygulaması, harici HTTP `RestService`aramaları `HttpClient` yapmak için kullanılarak dinamik olarak oluşturulur.
+`IHttpClientFactory`, [yeniden sığdırma](https://github.com/paulcbetts/refit)gibi diğer üçüncü taraf kitaplıklarıyla birlikte kullanılabilir. Yeniden sığdırma, .NET için bir REST kitaplığıdır. REST API 'Leri canlı arabirimlere dönüştürür. Arabirim bir uygulama, dış HTTP çağrıları yapmak için kullanılarak `RestService` `HttpClient` tarafından dinamik olarak oluşturulur.
 
-Dış API'yi ve yanıtını temsil edecek bir arabirim ve yanıt tanımlanır:
+Bir arabirim ve yanıt, dış API 'yi ve yanıtını temsil edecek şekilde tanımlanır:
 
 ```csharp
 public interface IHelloClient
@@ -488,7 +494,7 @@ public class Reply
 }
 ```
 
-Uygulamayı oluşturmak için Refit kullanılarak yazılan bir istemci eklenebilir:
+Türü belirlenmiş bir istemci eklenebilir, uygulamayı oluşturmak için yeniden sığdırma kullanımı kullanılabilir:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -503,7 +509,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Tanımlanan arabirim, DI ve Refit tarafından sağlanan uygulama ile gerektiğinde tüketilebilir:
+Tanımlı arabirim, gereken yerde, mak ve Refit tarafından sağlanmış uygulama ile kullanılabilir.
 
 ```csharp
 [ApiController]
@@ -524,261 +530,261 @@ public class ValuesController : ControllerBase
 }
 ```
 
-## <a name="outgoing-request-middleware"></a>Giden istek middleware
+## <a name="outgoing-request-middleware"></a>Giden istek ara yazılımı
 
-`HttpClient`zaten giden HTTP istekleri için birbirine bağlanabilir işleyicileri delegating kavramı vardır. Bu, `IHttpClientFactory` her adlandırılmış istemci için uygulamak için işleyicileri tanımlamak kolaylaştırır. Giden bir istek ara yazılım boru hattı oluşturmak için birden çok işleyicinin kaydedilmesi ve zincirlemesi destekler. Bu işleyicilerin her biri, giden istekten önce ve sonra iş yapabilir. Bu desen, ASP.NET Core'daki gelen ara yazılım düzenine benzer. Desen, önbelleğe alma, hata işleme, serileştirme ve günlüğe kaydetme gibi HTTP istekleri etrafında çapraz kesme yle ilgili endişeleri yönetmek için bir mekanizma sağlar.
+`HttpClient`, giden HTTP istekleri için birlikte bağlanabilen işleyicileri temsilci seçme kavramı zaten var. , `IHttpClientFactory` Her bir adlandırılmış istemci için uygulanacak işleyicileri tanımlamanızı kolaylaştırır. Bir giden istek ara yazılım işlem hattı oluşturmak için birden çok işleyicinin kaydını ve zincirlemeyi destekler. Bu işleyicilerin her biri, giden istekten önce ve sonra iş gerçekleştirebilir. Bu düzen, ASP.NET Core gelen ara yazılım ardışık düzenine benzer. Bu model, önbelleğe alma, hata işleme, serileştirme ve günlüğe kaydetme dahil olmak üzere HTTP istekleri etrafında çapraz kesme sorunlarını yönetmek için bir mekanizma sağlar.
 
-İşleyici oluşturmak için, 'den <xref:System.Net.Http.DelegatingHandler>kaynaklanan bir sınıf tanımlayın. İsteği `SendAsync` ardışık sistemdeki bir sonraki işleyiciye geçirmeden önce kodu yürütmek için yöntemi geçersiz kıl:
+Bir işleyici oluşturmak için, öğesinden türeten <xref:System.Net.Http.DelegatingHandler>bir sınıf tanımlayın. İsteği ardışık `SendAsync` düzen içindeki bir sonraki işleyiciye geçirmeden önce kodu yürütmek için yöntemi geçersiz kılın:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Handlers/ValidateHeaderHandler.cs?name=snippet1)]
 
-Önceki kod temel bir işleyici tanımlar. `X-API-KEY` Üstbilginin isteğe ekilip eklenmediğini denetler. Üstbilgi eksikse, HTTP aramasını önleyebilir ve uygun bir yanıt döndürebilir.
+Yukarıdaki kod, temel bir işleyiciyi tanımlar. İsteğe bağlı bir `X-API-KEY` başlık olup olmadığını denetler. Üst bilgi eksikse, HTTP çağrısından kaçınabilir ve uygun bir yanıt döndürebilir.
 
-Kayıt sırasında, bir veya daha fazla işleyicisi `HttpClient`için yapılandırmaya eklenebilir. Bu görev, uzantı yöntemleri <xref:Microsoft.Extensions.DependencyInjection.IHttpClientBuilder>ile gerçekleştirilir.
+Kayıt sırasında, bir veya daha fazla işleyici bir `HttpClient`için yapılandırmasına eklenebilir. Bu görev, <xref:Microsoft.Extensions.DependencyInjection.IHttpClientBuilder>üzerindeki genişletme yöntemleri aracılığıyla gerçekleştirilir.
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet5)]
 
-Önceki kodda, DI `ValidateHeaderHandler` kayıtlıdır. Her `IHttpClientFactory` işleyici için ayrı bir DI kapsamı oluşturur. İşleyiciler herhangi bir kapsamdaki hizmetlere bağımlı olmakta serbesttir. İşleyicinin bağlı olduğu hizmetler, işleyici imha edildiğinde elden çıkarılır.
+Yukarıdaki kodda `ValidateHeaderHandler` ,, dı ile kaydedilir. Her `IHttpClientFactory` işleyici için ayrı bir dı kapsamı oluşturur. İşleyiciler herhangi bir kapsamın hizmetlerine bağlı olarak ücretsizdir. İşleyicilerin bağımlı olduğu hizmetler, işleyicinin elden çıkarılmasıyla kaldırılır.
 
-Bir kez <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.AddHttpMessageHandler*> kaydedildikten sonra, işleyici için tür geçen, çağrılabilir.
+Kaydedildikten sonra, <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.AddHttpMessageHandler*> işleyicinin türü geçirerek, çağrılabilir.
 
-Birden çok işleyici, yürütmeleri gerektiği sırada kaydedilebilir. Her işleyici, son `HttpClientHandler` isteği çalıştırana kadar sonraki işleyiciyi sarar:
+Birden çok işleyici, yürütülmesi gereken sırayla kaydedilebilir. Her işleyici, son `HttpClientHandler` isteği çalıştırana kadar sonraki işleyiciyi sarmalar:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet6)]
 
-İsteme başına durumu ileti işleyicileriyle paylaşmak için aşağıdaki yaklaşımlardan birini kullanın:
+İleti işleyicileriyle istek başına durumu paylaşmak için aşağıdaki yaklaşımlardan birini kullanın:
 
-* Kullanarak verileri işleyiciye `HttpRequestMessage.Properties`aktarın.
+* Kullanarak `HttpRequestMessage.Properties`işleyicide veri geçirin.
 * Geçerli `IHttpContextAccessor` isteğe erişmek için kullanın.
-* Verileri aktarmak `AsyncLocal` için özel bir depolama nesnesi oluşturun.
+* Verileri geçirmek için `AsyncLocal` özel bir depolama nesnesi oluşturun.
 
-## <a name="use-polly-based-handlers"></a>Polly tabanlı işleyicileri kullanma
+## <a name="use-polly-based-handlers"></a>Polly tabanlı işleyiciler kullanın
 
-`IHttpClientFactory`[Polly](https://github.com/App-vNext/Polly)adlı popüler bir üçüncü taraf kütüphanesi ile entegre . Polly, .NET için kapsamlı bir esneklik ve geçici hata işleme kitaplığıdır. Geliştiricilerin Retry, Circuit Breaker, Timeout, Bulkhead Isolation ve Fallback gibi ilkeleri akıcı ve iş parçacığı güvenli bir şekilde ifade etmesine olanak tanır.
+`IHttpClientFactory`, [Polly](https://github.com/App-vNext/Polly)adlı popüler bir üçüncü taraf kitaplığı ile tümleşir. Polly, .NET için kapsamlı bir esnekliği ve geçici hata işleme kitaplığıdır. Geliştiricilerin yeniden deneme, devre kesici, zaman aşımı, Bulkbaş yalıtımı, akıcı ve iş parçacığı açısından güvenli bir şekilde geri dönüş gibi ilkeler almasına olanak tanır.
 
-Polly ilkelerinin yapılandırılmış `HttpClient` örneklerle kullanımını etkinleştirmek için uzantı yöntemleri sağlanır. Polly uzantıları:
+Uzantı yöntemleri, yapılandırılmış `HttpClient` örneklerle Polly ilkelerin kullanımını etkinleştirmek için sağlanır. Polly uzantıları:
 
-* İstemcilere Polly tabanlı işleyiciler eklemeyi destekleyin.
-* [Microsoft.Extensions.Http.Polly](https://www.nuget.org/packages/Microsoft.Extensions.Http.Polly/) NuGet paketini yükledikten sonra kullanılabilir. Paket, ASP.NET Core paylaşılan çerçevesine dahil değildir.
+* İstemcilere Polly tabanlı işleyiciler eklemeyi destekler.
+* , [Microsoft. Extensions. http. Polly](https://www.nuget.org/packages/Microsoft.Extensions.Http.Polly/) NuGet paketini yükledikten sonra kullanılabilir. Paket, ASP.NET Core paylaşılan çerçevesine dahil değildir.
 
-### <a name="handle-transient-faults"></a>Geçici hataları işleme
+### <a name="handle-transient-faults"></a>Geçici hataları işle
 
-En sık kullanılan hatalar, harici HTTP çağrıları geçici olduğunda oluşur. Geçici hataları işlemek `AddTransientHttpErrorPolicy` için bir ilke tanımlanmasına olanak sağlayan uygun bir uzatma yöntemi denir. Bu uzantı yöntemi ile `HttpRequestException`yapılandırılan ilkeler, HTTP 5xx yanıtları ve HTTP 408 yanıtları.
+Yaygın hatalar, dış HTTP çağrıları geçici olduğunda oluşur. Geçici hataları işlemek üzere bir `AddTransientHttpErrorPolicy` ilkenin tanımlanmasını sağlayan, çağrılan bir uygun genişletme yöntemi eklenmiştir. Bu uzantı yöntemi tanıtıcısıyla `HttpRequestException`yapılandırılmış ilkeler, http 5xx YANıTLARı ve http 408 yanıtları.
 
-Uzantısı `AddTransientHttpErrorPolicy` içinde `Startup.ConfigureServices`kullanılabilir. Uzantı, olası `PolicyBuilder` geçici bir hatayı temsil eden hataları işlemek için yapılandırılan bir nesneye erişim sağlar:
+`AddTransientHttpErrorPolicy` Uzantı içinde `Startup.ConfigureServices`kullanılabilir. Uzantı, olası bir geçici hatayı `PolicyBuilder` temsil eden hataları işlemek için yapılandırılmış bir nesneye erişim sağlar:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet7)]
 
-Önceki kodda bir `WaitAndRetryAsync` ilke tanımlanır. Başarısız istekler, denemeler arasında 600 ms'lik bir gecikmeyle üç defaya kadar yeniden denenir.
+Yukarıdaki kodda bir `WaitAndRetryAsync` ilke tanımlanmıştır. Başarısız istekler, denemeler arasındaki 600 MS gecikmeyle en fazla üç kez yeniden denenir.
 
-### <a name="dynamically-select-policies"></a>Dinamik olarak ilkeleri seçin
+### <a name="dynamically-select-policies"></a>Dinamik olarak ilke seçme
 
-Polly tabanlı işleyicileri eklemek için kullanılabilecek ek uzatma yöntemleri vardır. Böyle bir `AddPolicyHandler`uzantısı , birden fazla aşırı yükleri vardır. Bir aşırı yükleme, hangi politikanın uygulanacağı tanımlanırken isteğin denetlenmesini sağlar:
+Polly tabanlı işleyiciler eklemek için kullanılabilecek ek uzantı yöntemleri vardır. Bu tür bir uzantının `AddPolicyHandler`birden çok aşırı yüklemesi vardır. Bir aşırı yükleme, hangi ilkenin uygulanacağını tanımlarken isteğin incelenebilirliğini sağlar:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet8)]
 
-Önceki kodda, giden istek bir HTTP GET ise, 10 saniyelik bir zaman ayarı uygulanır. Başka bir HTTP yöntemi için 30 saniyelik bir zaman aşımı kullanılır.
+Yukarıdaki kodda, giden istek bir HTTP GET ise, 10 saniyelik bir zaman aşımı uygulanır. Diğer HTTP yöntemleri için, 30 saniyelik bir zaman aşımı kullanılır.
 
-### <a name="add-multiple-polly-handlers"></a>Birden çok Polly işleyicisi ekleme
+### <a name="add-multiple-polly-handlers"></a>Birden çok Polly işleyici ekleme
 
-Gelişmiş işlevsellik sağlamak için Polly ilkelerini iç içe yerleştirmek yaygındır:
+Gelişmiş işlevsellik sağlamak için çok fazla ilke iç içe geçmiş bir yaygın hale gelir:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet9)]
 
-Önceki örnekte, iki işleyicieklenir. İlk bir `AddTransientHttpErrorPolicy` yeniden deneme ilkesi eklemek için uzantısı kullanır. Başarısız istekler en fazla üç kez yeniden denendir. İkinci çağrı `AddTransientHttpErrorPolicy` bir devre kesici ilkesi ekler. Beş başarısız deneme sırayla gerçekleşirse, diğer dış istekler 30 saniye boyunca engellenir. Devre kesici ilkeleri durumludur. Bu istemci den gelen tüm aramalar aynı devre durumunu paylaşır.
+Yukarıdaki örnekte, iki işleyici eklenmiştir. İlki, yeniden deneme `AddTransientHttpErrorPolicy` ilkesi eklemek için uzantıyı kullanır. Başarısız istekler en fazla üç kez yeniden denenir. İçin `AddTransientHttpErrorPolicy` ikinci çağrı, bir devre kesici ilkesi ekler. Beş başarısız girişim sırayla gerçekleşiyorsa, daha fazla dış istek 30 saniye için engellenir. Devre kesici ilkeleri durum bilgisi vardır. Bu istemci aracılığıyla yapılan tüm çağrılar aynı devre durumunu paylaşır.
 
-### <a name="add-policies-from-the-polly-registry"></a>Polly kayıt defterinden ilkeler ekleme
+### <a name="add-policies-from-the-polly-registry"></a>Polly kayıt defterinden ilke ekleme
 
-Düzenli olarak kullanılan ilkeleri yönetmeye yönelik bir yaklaşım, bunları `PolicyRegistry`bir kez tanımlamak ve bir . Kayıt defterinden bir ilke kullanılarak işleyicinin eklenmesine olanak tanıyan bir uzantı yöntemi sağlanır:
+Düzenli olarak kullanılan ilkeleri yönetmeye yönelik bir yaklaşım, bunları bir kez tanımlayıp bir `PolicyRegistry`ile kaydetmektir. Kayıt defterinden bir ilke kullanılarak bir işleyicinin eklenmesine izin veren bir genişletme yöntemi sağlanır:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet10)]
 
-Önceki kodda, `PolicyRegistry` `ServiceCollection`iki ilke kaydedilir. Kayıt defterinden bir ilke `AddPolicyHandlerFromRegistry` kullanmak için, yöntem uygulanacak ilkenin adını geçerek kullanılır.
+Yukarıdaki kodda, öğesine eklendiğinde iki ilke kaydedilir `PolicyRegistry` `ServiceCollection`. Kayıt defterinden bir ilke kullanmak için `AddPolicyHandlerFromRegistry` yöntemi kullanılır ve uygulanacak ilke adı geçer.
 
-Polly `IHttpClientFactory` [wiki'de polly wiki](https://github.com/App-vNext/Polly/wiki/Polly-and-HttpClientFactory)hakkında daha fazla bilgi bulabilirsiniz.
+Ve daha fazla `IHttpClientFactory` tümleştirme hakkında daha fazla bilgi, [Polly wiki](https://github.com/App-vNext/Polly/wiki/Polly-and-HttpClientFactory)' de bulunabilir.
 
-## <a name="httpclient-and-lifetime-management"></a>Httpİste ve yaşam boyu yönetim
+## <a name="httpclient-and-lifetime-management"></a>HttpClient ve ömür yönetimi
 
-Yeni `HttpClient` bir örnek her `CreateClient` zaman `IHttpClientFactory`döndürülür. Her bir <xref:System.Net.Http.HttpMessageHandler> müşteri yeası var. `HttpMessageHandler` Fabrika, örneklerin yaşam ömürlerini yönetir.
+Her `HttpClient` `CreateClient` çağrıldığında yeni bir örnek döndürülür `IHttpClientFactory`. Adlandırılmış istemci <xref:System.Net.Http.HttpMessageHandler> başına. Fabrika, `HttpMessageHandler` örneklerin yaşam sürelerini yönetir.
 
-`IHttpClientFactory`kaynak tüketimini `HttpMessageHandler` azaltmak için fabrika tarafından oluşturulan örnekleri bir araya sağlar. Bir `HttpMessageHandler` örnek, kullanım ömrü dolmamışsa `HttpClient` yeni bir örnek oluştururken havuzdan yeniden kullanılabilir.
+`IHttpClientFactory`kaynak tüketimini `HttpMessageHandler` azaltmak için fabrika tarafından oluşturulan örnekleri havuzlar. Bir `HttpMessageHandler` örnek, süresi dolmamışsa yeni `HttpClient` bir örnek oluştururken havuzdan yeniden kullanılabilir.
 
-Her işleyici genellikle kendi temel HTTP bağlantılarını yönetir gibi işleyicileri havuzlama arzu edilir. Gerekenden daha fazla işleyici oluşturmak bağlantı gecikmelerine neden olabilir. Bazı işleyiciler de bağlantıları süresiz olarak açık tutar, bu da işleyicinin DNS değişikliklerine tepki sini engelleyebilir.
+Her işleyici genellikle kendi temel HTTP bağlantılarını yönettiğinden, işleyicilerin havuzlaması tercih edilir. Gerekenden daha fazla işleyici oluşturulması bağlantı gecikmeleri oluşmasına neden olabilir. Ayrıca, bazı işleyiciler bağlantıları süresiz olarak açık tutar, bu da işleyicinin DNS değişikliklerine yeniden davranmasını engelleyebilir.
 
-Varsayılan işleyici ömrü iki dakikadır. Varsayılan değer, adlandırılmış istemci bazında geçersiz kılınabilir. Geçersiz kılmak için, <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.SetHandlerLifetime*> istemci `IHttpClientBuilder` oluştururken döndürülenleri arayın:
+Varsayılan işleyici ömrü iki dakikadır. Varsayılan değer, adlandırılmış istemci temelinde geçersiz kılınabilir. Bunu geçersiz kılmak için, <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.SetHandlerLifetime*> istemcisini oluştururken `IHttpClientBuilder` döndürülen öğesini çağırın:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet11)]
 
-İstemcinin atılması gerekli değildir. Elden çıkarma giden istekleri iptal eder `HttpClient` ve verilen örneğin aramadan <xref:System.IDisposable.Dispose*>sonra kullanılamayacağından garanti eder. `IHttpClientFactory`örnekleri tarafından `HttpClient` kullanılan kaynakları izler ve elden çıkar. Örnekler `HttpClient` genellikle imha gerektirmeyen .NET nesneleri olarak kabul edilebilir.
+İstemcinin çıkarılması gerekli değildir. Çıkarma giden istekleri iptal eder ve çağırma `HttpClient` <xref:System.IDisposable.Dispose*>sonrasında verilen örneğin kullanılamaz olmasını sağlar. `IHttpClientFactory`örnekler tarafından `HttpClient` kullanılan kaynakları izler ve ortadan kaldırdık. `HttpClient` Örnekler genellikle aktiften çıkarma gerektirmeyen .NET nesneleri olarak kabul edilebilir.
 
-Tek `HttpClient` bir örneği uzun süre canlı tutmak, kuruluşundan önce `IHttpClientFactory`kullanılan yaygın bir desendir. Bu desen' e geçtikten `IHttpClientFactory`sonra gereksiz hale gelir.
+Tek `HttpClient` bir örneğinin uzun süre canlı tutulması, önünde `IHttpClientFactory`kullanılmadan önce kullanılan ortak bir modeldir. Bu model, ' a geçtikten sonra `IHttpClientFactory`gereksiz hale gelir.
 
-### <a name="alternatives-to-ihttpclientfactory"></a>IHttpClientFactory için alternatifler
+### <a name="alternatives-to-ihttpclientfactory"></a>Ihttpclientfactory alternatifleri
 
-DI `IHttpClientFactory` özellikli bir uygulamada kullanmak şunları önler:
+Dı `IHttpClientFactory` etkin bir uygulamada kullanmak şunları önler:
 
-* Örnekleri birleştirerek `HttpMessageHandler` kaynak tükenmesi sorunları.
-* Düzenli aralıklarla bisiklet `HttpMessageHandler` örnekleri tarafından Bayat DNS sorunları.
+* Havuz `HttpMessageHandler` örneklerine göre kaynak tükenmesi sorunları.
+* Düzenli aralıklarla `HttpMessageHandler` örnekleri GEÇIREREK eski DNS sorunları.
 
-Uzun ömürlü bir örneği kullanarak önceki sorunları çözmek <xref:System.Net.Http.SocketsHttpHandler> için alternatif yollar vardır.
+Uzun süreli <xref:System.Net.Http.SocketsHttpHandler> bir örnek kullanarak önceki sorunları çözmenin alternatif yolları vardır.
 
-- Uygulamanın ne `SocketsHttpHandler` zaman başladığına bir örnek oluşturun ve uygulamanın ömrü boyunca kullanın.
-- DNS yenileme sürelerine göre uygun bir değere göre <xref:System.Net.Http.SocketsHttpHandler.PooledConnectionLifetime> yapılandırın.
-- Gerektiğinde `HttpClient` kullanarak `new HttpClient(handler, disposeHandler: false)` örnekler oluşturun.
+- Uygulamanın başladığı `SocketsHttpHandler` zaman bir örneği oluşturun ve uygulamanın ömrü boyunca kullanın.
+- DNS <xref:System.Net.Http.SocketsHttpHandler.PooledConnectionLifetime> yenileme süreleri temelinde uygun bir değere yapılandırın.
+- Gerektiğinde `HttpClient` örnek `new HttpClient(handler, disposeHandler: false)` oluşturun.
 
-Önceki yaklaşımlar benzer bir şekilde `IHttpClientFactory` çözen kaynak yönetimi sorunlarını çözer.
+Yukarıdaki yaklaşımlar, benzer bir şekilde `IHttpClientFactory` çözen kaynak yönetimi sorunlarını çözer.
 
-- Örnekler `SocketsHttpHandler` arasında `HttpClient` bağlantıları paylaşır. Bu paylaşım soket yorgunluğunu önler.
-- Eski `SocketsHttpHandler` DNS sorunlarını `PooledConnectionLifetime` önlemek için döngüleri bağlantıları.
+- , `SocketsHttpHandler` Örnekleri arasında `HttpClient` bağlantıları paylaşır. Bu paylaşım, yuva azalmasına engel olur.
+- Bağlantıları `SocketsHttpHandler` , eski DNS sorunlarından `PooledConnectionLifetime` kaçınmak için öğesine göre döngüler.
 
 ### <a name="cookies"></a>Tanımlama bilgileri
 
-Birleştirilmiş `HttpMessageHandler` örnekler, nesnelerin `CookieContainer` paylaşılmasına neden oluyor. Beklenmeyen `CookieContainer` nesne paylaşımı genellikle yanlış kodla sonuçlanır. Tanımlama bilgisi gerektiren uygulamalar için aşağıdakileri göz önünde bulundurun:
+Havuza alınmış `HttpMessageHandler` örnekler, paylaşılan `CookieContainer` nesneler ile sonuçlanır. Beklenmeyen `CookieContainer` nesne paylaşımı genellikle hatalı kodla sonuçlanır. Tanımlama bilgileri gerektiren uygulamalar için şunlardan birini göz önünde bulundurun:
 
- - Otomatik çerez işlemeyi devre dışı bırakma
- - Kaçın -arak`IHttpClientFactory`
+ - Otomatik tanımlama bilgisi işlemeyi devre dışı bırakma
+ - Önlemenin`IHttpClientFactory`
 
-Otomatik <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> çerez kullanımını devre dışı kılabilir:
+Otomatik <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> tanımlama bilgisi işlemesini devre dışı bırakmak için çağırın:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
 
-## <a name="logging"></a>Günlüğe kaydetme
+## <a name="logging"></a>Günlüğe Kaydetme
 
-Tüm istekler için kayıt günlüğü iletileri aracılığıyla `IHttpClientFactory` oluşturulan istemciler. Varsayılan günlük iletilerini görmek için günlük yapılandırmanızda uygun bilgi düzeyini etkinleştirin. İstek üstbilgilerinin günlüğe kaydedilmesi gibi ek günlüğe kaydetme yalnızca izleme düzeyinde dahildir.
+Tüm istekler için `IHttpClientFactory` kayıt günlüğü iletileri aracılığıyla oluşturulan istemciler. Varsayılan günlük iletilerini görmek için günlük yapılandırmanızda uygun bilgi düzeyini etkinleştirin. İstek üst bilgilerinin günlüğe kaydedilmesi gibi ek Günlükler yalnızca izleme düzeyinde yer alır.
 
-Her istemci için kullanılan günlük kategorisi istemcinin adını içerir. *Örneğin MyNamedClient*adlı bir istemci, iletileri `System.Net.Http.HttpClient.MyNamedClient.LogicalHandler`. *LogicalHandler* ile sabitlenmiş iletiler istek işleyicisi ardışık alanıdışında oluşur. İstek üzerine, iletiler ardışık ardışık işlemden önce günlüğe kaydedilir. Yanıtta, iletiler yanıtı aldıktan sonra günlüğe kaydedilir.
+Her istemci için kullanılan günlük kategorisi, istemcinin adını içerir. Örneğin, *Mynamedclient*adlı bir istemci, bir kategorisine sahip iletileri günlüğe kaydeder `System.Net.Http.HttpClient.MyNamedClient.LogicalHandler`. *Logicalhandler* ile düzeltilen iletiler istek işleyicisi ardışık düzeni dışında oluşur. İstekte, işlem hattındaki diğer işleyiciler işlenmeden önce iletiler günlüğe kaydedilir. Yanıtta, tüm diğer işlem hattı işleyicileri yanıtı aldıktan sonra iletiler günlüğe kaydedilir.
 
-Günlüğe kaydetme, istek işleyicisi ardışık hattının içinde de oluşur. *MyNamedClient* örneğinde, bu iletiler günlük kategorisine `System.Net.Http.HttpClient.MyNamedClient.ClientHandler`göre günlüğe kaydedilir. İstek için, bu işlem, diğer tüm işleyiciler çalıştırdıktan sonra ve istek ağa gönderilmeden hemen önce oluşur. Yanıtta, bu günlüğe kaydetme, işleyici ardışık işlemden geçmeden önce yanıtın durumunu içerir.
+Günlüğe kaydetme, istek işleyicisi ardışık düzeni içinde de gerçekleşir. *Mynamedclient* örneğinde, bu iletiler günlük kategorisine `System.Net.Http.HttpClient.MyNamedClient.ClientHandler`göre günlüğe kaydedilir. İstek için bu, tüm diğer işleyiciler çalıştıktan sonra ve istek ağda gönderilmeden hemen önce gerçekleşir. Yanıtta, bu günlüğe kaydetme, işleyicinin işleyici işlem hattı üzerinden geri geçirmeden önce yanıtın durumunu içerir.
 
-Boru hattının dışında ve içinde günlüğe kaydetmeyi etkinleştirmek, diğer boru hattı işleyicileri tarafından yapılan değişikliklerin incelenmesini sağlar. Bu, örneğin istek üstbilgisi veya yanıt durum kodunda yapılan değişiklikleri içerebilir.
+İşlem hattının dışında ve içinde günlüğe kaydetmenin etkinleştirilmesi, diğer işlem hattı işleyicileri tarafından yapılan değişikliklerin incelemesini etkinleştirir. Bu, örneğin veya yanıt durum kodunda istek başlıklarındaki değişiklikleri içerebilir.
 
-Günlük kategorisine istemcinin adını niçin eklenmesi gerektiğinde belirli adlandırılmış istemciler için günlük filtreleme sağlar.
+İstemci adı ' nı log kategorisinde da içermek, gerektiğinde belirli adlandırılmış istemciler için günlük filtrelemeyi sunar.
 
-## <a name="configure-the-httpmessagehandler"></a>HttpMessageHandler'ı yapılandırın
+## <a name="configure-the-httpmessagehandler"></a>HttpMessageHandler 'ı yapılandırma
 
-Bir istemci tarafından kullanılan iç `HttpMessageHandler` yapılandırmasını denetlemek için gerekli olabilir.
+İstemci tarafından kullanılan iç `HttpMessageHandler` yapılandırmayı denetlemek gerekli olabilir.
 
-Adlandırılmış veya yazılan istemciler eklendiğinde bir `IHttpClientBuilder` döndürülür. Uzantı <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> yöntemi bir temsilci tanımlamak için kullanılabilir. Temsilci, bu istemci tarafından kullanılan `HttpMessageHandler` birincil oluşturmak ve yapılandırmak için kullanılır:
+Adlandırılmış `IHttpClientBuilder` veya yazılan istemciler eklenirken bir döndürülür. <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> Genişletme yöntemi bir temsilciyi tanımlamak için kullanılabilir. Temsilci, bu istemci tarafından kullanılan birincili `HttpMessageHandler` oluşturmak ve yapılandırmak için kullanılır:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet12)]
 
-## <a name="use-ihttpclientfactory-in-a-console-app"></a>iHttpClientFactory konsol uygulamasında kullanma
+## <a name="use-ihttpclientfactory-in-a-console-app"></a>Konsol uygulamasında ıhttpclientfactory kullanma
 
-Konsol uygulamasında, projeye aşağıdaki paket başvurularını ekleyin:
+Konsol uygulamasında, aşağıdaki paket başvurularını projeye ekleyin:
 
-* [Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting)
-* [Microsoft.Extensions.Http](https://www.nuget.org/packages/Microsoft.Extensions.Http)
+* [Microsoft. Extensions. Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting)
+* [Microsoft. Extensions. http](https://www.nuget.org/packages/Microsoft.Extensions.Http)
 
 Aşağıdaki örnekte:
 
-* <xref:System.Net.Http.IHttpClientFactory>Genel Ana [Bilgisayar hizmet](xref:fundamentals/host/generic-host) konteynerine kaydedilir.
-* `MyService`bir `HttpClient`. oluşturmak için kullanılan hizmetten bir istemci fabrika örneği oluşturur `HttpClient`bir web sayfasını almak için kullanılır.
-* `Main`hizmetin `GetPage` yöntemini yürütmek ve web sayfası içeriğinin ilk 500 karakterini konsola yazmak için bir kapsam oluşturur.
+* <xref:System.Net.Http.IHttpClientFactory>, [genel konağın](xref:fundamentals/host/generic-host) hizmet kapsayıcısına kaydedilir.
+* `MyService`hizmetinden bir `HttpClient`istemci fabrikası örneği oluşturur. `HttpClient`, bir Web sayfasını almak için kullanılır.
+* `Main`Hizmetin `GetPage` yöntemini yürütmek için bir kapsam oluşturur ve Web sayfası içeriğinin ilk 500 karakterini konsola yazar.
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactoryConsoleSample/Program.cs?highlight=14-15,20,26-27,59-62)]
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * [Dayanıklı HTTP isteklerini uygulamak için HttpClientFactory kullanma](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests)
-* [HttpClientFactory ve Polly politikaları ile üstel geri dönüş ile HTTP çağrı yeniden uygulama](/dotnet/standard/microservices-architecture/implement-resilient-applications/implement-http-call-retries-exponential-backoff-polly)
+* [HttpClientFactory ve Polly ilkeleriyle üstel geri alma ile HTTP çağrı yeniden denemeleri uygulayın](/dotnet/standard/microservices-architecture/implement-resilient-applications/implement-http-call-retries-exponential-backoff-polly)
 * [Devre Kesici desenini uygulama](/dotnet/standard/microservices-architecture/implement-resilient-applications/implement-circuit-breaker-pattern)
 
 ::: moniker-end
 
 ::: moniker range="= aspnetcore-2.1"
 
-Glenn [Condron](https://github.com/glennc)tarafından , [Ryan Nowak](https://github.com/rynowak), ve [Steve Gordon](https://github.com/stevejgordon)
+, [Glenn CONDRON](https://github.com/glennc), [Ryan şimdi e](https://github.com/rynowak)ve [Steve Gordon](https://github.com/stevejgordon)
 
-Bir <xref:System.Net.Http.IHttpClientFactory> uygulamadaki örnekleri yapılandırmak ve <xref:System.Net.Http.HttpClient> oluşturmak için kaydedilebilir ve kullanılabilir. Aşağıdaki avantajları sunar:
+Bir <xref:System.Net.Http.IHttpClientFactory> uygulamadaki örnekleri yapılandırmak ve oluşturmak <xref:System.Net.Http.HttpClient> için kayıt yapılabilir ve kullanılabilir. Aşağıdaki avantajları sunar:
 
-* Mantıksal `HttpClient` örnekleri adlandırmak ve yapılandırmak için merkezi bir konum sağlar. Örneğin, bir *github* istemcisi kaydedilebilir ve [GitHub'a](https://github.com/)erişmek için yapılandırılabilir. Varsayılan istemci başka amaçlarla kaydedilebilir.
-* Giden ara yazılım kavramını işleyicileri atayarak kodlar `HttpClient` ve Polly tabanlı ara yazılımiçin bundan yararlanmak için uzantılar sağlar.
-* Yaşam ömürlerini el ile `HttpClientMessageHandler` yönetirken `HttpClient` ortaya çıkan yaygın DNS sorunlarını önlemek için temel örneklerin biraraya getiriyi ve kullanım ömrünü yönetir.
-* Fabrika tarafından oluşturulan istemciler `ILogger`aracılığıyla gönderilen tüm istekler için yapılandırılabilir bir günlük deneyimi (üzerinden) ekler.
+* , Mantıksal `HttpClient` örnekleri adlandırmak ve yapılandırmak için merkezi bir konum sağlar. Örneğin, *GitHub istemcisi kayıtlı* ve [GitHub](https://github.com/)'a erişebilecek şekilde yapılandırılabilir. Varsayılan istemci, diğer amaçlar için kaydedilebilir.
+* ' De `HttpClient` işleyiciler için temsilci atama ile giden ara yazılım kavramı ve bundan faydalanmak Için, Polly tabanlı ara yazılım için uzantılar sağlar.
+* Yaşam sürelerini el ile yönetirken `HttpClientMessageHandler` `HttpClient` gerçekleşen yaygın DNS sorunlarından kaçınmak için temeldeki örneklerin biriktirmesini ve ömrünü yönetir.
+* Fabrika tarafından oluşturulan istemciler aracılığıyla gönderilen tüm `ILogger`istekler için yapılandırılabilir bir günlüğe kaydetme deneyimi ekler (aracılığıyla).
 
-[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples) ( nasıl[indirilir](xref:index#how-to-download-a-sample))
+[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
-.NET Framework'ü hedefleyen projeler [microsoft.extensions.Http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) NuGet paketinin yüklenmesini gerektirir. .NET Core'u hedefleyen ve [Microsoft.AspNetCore.App metapaketine](xref:fundamentals/metapackage-app) başvuran projeler zaten `Microsoft.Extensions.Http` paketi içerir.
+.NET Framework hedefleyen projeler [Microsoft. Extensions. http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) NuGet paketinin yüklenmesini gerektirir. .NET Core ile hedeflenen ve [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app) 'e başvuran projeler zaten `Microsoft.Extensions.Http` paketi içeriyor.
 
-## <a name="consumption-patterns"></a>Tüketim alışkanlıkları
+## <a name="consumption-patterns"></a>Tüketim desenleri
 
-Bir uygulamada `IHttpClientFactory` kullanılabilen çeşitli yollar vardır:
+Bir uygulamada çeşitli yollar `IHttpClientFactory` kullanılabilir:
 
 * [Temel kullanım](#basic-usage)
 * [Adlandırılmış istemciler](#named-clients)
 * [Yazılan istemciler](#typed-clients)
 * [Oluşturulan istemciler](#generated-clients)
 
-Hiçbiri diğerinden kesinlikle üstün değil. En iyi yaklaşım uygulamanın kısıtlamalarına bağlıdır.
+Hiçbiri diğerinden tamamen üst değildir. En iyi yaklaşım, uygulamanın kısıtlamalarına bağlıdır.
 
 ### <a name="basic-usage"></a>Temel kullanım
 
-Yöntemin `IHttpClientFactory` `AddHttpClient` `IServiceCollection`içinde, `Startup.ConfigureServices` uzantı yöntemi ni arayarak kaydedilebilir.
+`IHttpClientFactory` `AddHttpClient` , `Startup.ConfigureServices` Yöntemi içindeki içindeki genişletme yöntemi `IServiceCollection`çağırarak kaydedilebilir.
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet1)]
 
-Bir kez kayıtlı, `IHttpClientFactory` kod bağımlılık [enjeksiyon (DI)](xref:fundamentals/dependency-injection)ile enjekte edilebilir her yerde hizmetleri kabul edebilirsiniz. Bir `IHttpClientFactory` `HttpClient` örnek oluşturmak için kullanılabilir:
+Kaydedildikten sonra kod, `IHttpClientFactory` [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection)ile her yerden bir hizmeti kabul edebilir. `IHttpClientFactory` Bir `HttpClient` örnek oluşturmak için kullanılabilir:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Pages/BasicUsage.cshtml.cs?name=snippet1&highlight=9-12,21)]
 
-Bu `IHttpClientFactory` şekilde kullanmak, varolan bir uygulamayı yeniden düzenlemenin iyi bir yoludur. Bu şekilde `HttpClient` kullanılan hiçbir etkisi yoktur. Örneklerin `HttpClient` şu anda oluşturulduğu yerlerde, bu oluşumları bir çağrıyla değiştirin. <xref:System.Net.Http.IHttpClientFactory.CreateClient*>
+Bu `IHttpClientFactory` biçimde kullanmak, mevcut bir uygulamayı yeniden düzenleme için iyi bir yoldur. Kullanım şekli `HttpClient` üzerinde hiçbir etkisi yoktur. `HttpClient` Örneklerin Şu anda oluşturulduğu yerlerde, bu tekrarlamaları ' a çağrı ile değiştirin <xref:System.Net.Http.IHttpClientFactory.CreateClient*>.
 
 ### <a name="named-clients"></a>Adlandırılmış istemciler
 
-Bir `HttpClient`uygulama, her biri farklı bir yapılandırmaya sahip olan birçok farklı kullanım gerektiriyorsa, **adlandırılmış istemcileri**kullanma seçeneği vardır. Bir adlandırılmış `HttpClient` için yapılandırma kayıt `Startup.ConfigureServices`sırasında belirtilebilir.
+Bir uygulama `HttpClient`, her biri farklı bir yapılandırmaya sahip birçok farklı kullanım gerektiriyorsa, **adlandırılmış istemciler**kullanılır. Adlandırılmış `HttpClient` için yapılandırma, içinde `Startup.ConfigureServices`kayıt sırasında belirtilebilir.
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet2)]
 
-Önceki kodda, `AddHttpClient` adı *github*sağlayan denir. Bu istemci, temel&mdash;adres ve GitHub API ile çalışmak için gerekli iki üstbilgi uygulanan bazı varsayılan yapılandırma vardır.
+Yukarıdaki kodda, `AddHttpClient` *GitHub*adının sağlanması denir. Bu istemci, GitHub API 'siyle birlikte&mdash;çalışmak için gerekli olan temel adres ve iki üst bilgi olan bazı varsayılan yapılandırma uygulanmış.
 
-Her `CreateClient` zaman çağrılır, `HttpClient` yeni bir örnek oluşturulur ve yapılandırma eylem denir.
+Her seferinde `CreateClient` her çağrıldığında yeni bir örneği `HttpClient` oluşturulur ve yapılandırma eylemi çağrılır.
 
-Adlandırılmış bir istemciyi tüketmek için `CreateClient`dize parametresi . Oluşturulacak istemcinin adını belirtin:
+Adlandırılmış bir istemciyi kullanmak için, bir dize parametresi iletilebilir `CreateClient`. Oluşturulacak istemcinin adını belirtin:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Pages/NamedClient.cshtml.cs?name=snippet1&highlight=21)]
 
-Önceki kodda, istek bir ana bilgisayar adı belirtmek gerekmez. İstemci için yapılandırılan temel adres kullanıldığından, yalnızca yolu geçebilir.
+Yukarıdaki kodda, isteğin bir ana bilgisayar adı belirtmesi gerekmez. İstemci için yapılandırılan taban adresi kullanıldığından, bu yalnızca yolu geçirebilir.
 
 ### <a name="typed-clients"></a>Yazılan istemciler
 
 Yazılan istemciler:
 
-* Dizeleri anahtar olarak kullanmaya gerek kalmadan adlandırılmış istemcilerle aynı yetenekleri sağlayın.
-* Müşterileri tüketirken IntelliSense ve derleyici yardımı sağlar.
-* Belirli bir yeri yapılandırmak ve etkileşimde bulunabilmek `HttpClient`için tek bir konum sağlayın. Örneğin, tek bir daktilo istemcisi tek bir arka uç bitiş noktası için kullanılabilir ve bu uç noktaile ilgili tüm mantığı kapsülleyebilir.
-* DI ile çalışın ve uygulamanızda gerektiğinde enjekte edilebilir.
+* Dizeleri anahtar olarak kullanma gereksinimi olmadan, adlandırılmış istemcilerle aynı özellikleri sağlayın.
+* İstemcileri tükettiren IntelliSense ve derleyici yardımı sağlar.
+* Yapılandırmak ve belirli `HttpClient`bir ile etkileşimde bulunmak için tek bir konum belirtin. Örneğin, tek bir arka uç uç noktası için tek bir adet yazılmış istemci kullanılabilir ve bu uç nokta ile ilgili tüm mantığı kapsüllenebilir.
+* DI ile birlikte çalışın ve uygulamanızda gerektiğinde eklenebilir.
 
-Yazılan istemci, oluşturucusu bir `HttpClient` parametre kabul eder:
+Türü belirtilmiş istemci, oluşturucusunda `HttpClient` bir parametreyi kabul eder:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/GitHub/GitHubService.cs?name=snippet1&highlight=5)]
 
-Önceki kodda, yapılandırma yazılan istemciye taşınır. Nesne `HttpClient` bir kamu malı olarak ortaya çıkarır. İşlevselliği ortaya `HttpClient` çıkaran API'ye özgü yöntemleri tanımlamak mümkündür. Yöntem, `GetAspNetDocsIssues` github deposundan en son açık sorunları sorgulamak ve ayrışdırmak için gereken kodu kapsüller.
+Önceki kodda, yapılandırma yazılan istemciye taşınır. `HttpClient` Nesne bir ortak özellik olarak sunulur. İşlevselliği kullanıma `HttpClient` sunan API 'ye özel yöntemler tanımlamak mümkündür. Yöntemi `GetAspNetDocsIssues` , GitHub deposundan en son açık sorunları sorgulamak ve ayrıştırmak için gereken kodu saklar.
 
-Bir daktilan istemci kaydetmek <xref:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient*> için, genel `Startup.ConfigureServices`uzantı yöntemi içinde kullanılabilir , daktilan istemci sınıfı belirterek:
+Türü belirtilmiş bir istemciyi kaydettirmek için, genel <xref:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient*> genişletme yöntemi içinde `Startup.ConfigureServices`kullanılabilir istemci sınıfını belirterek kullanılabilir:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet3)]
 
-Yazılan istemci, DI ile geçici olarak kaydedilir. Yazılan istemci doğrudan enjekte edilebilir ve tüketilebilir:
+Yazılan istemci, DI ile geçici olarak kaydedilir. Yazılan istemci doğrudan eklenebilir ve tüketilebilir:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Pages/TypedClient.cshtml.cs?name=snippet1&highlight=11-14,20)]
 
-Tercih edilirse, yazılan istemcinin oluşturucusu yerine, `Startup.ConfigureServices`kayıt sırasında yazılı istemcinin yapılandırması belirtilebilir:
+Tercih edilirse, yazılan istemcinin yapılandırması, türü belirlenmiş istemcinin Oluşturucusu yerine kayıt `Startup.ConfigureServices`sırasında belirtilebilir:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet4)]
 
-Yazılan istemciyi `HttpClient` tamamen kapsüllemek mümkündür. Bir özellik olarak teşhir etmek yerine, `HttpClient` örneği dahili olarak adlandıran genel yöntemler sağlanabilir.
+Türü belirtilmiş bir istemci `HttpClient` içinde tamamen kapsüllenebilir. Bunu bir özellik olarak göstermek yerine, `HttpClient` örneği dahili olarak çağıran ortak Yöntemler sunulabilir.
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/GitHub/RepoService.cs?name=snippet1&highlight=4)]
 
-Önceki kodda, özel `HttpClient` alan olarak depolanır. Harici arama yapmak için tüm `GetRepos` erişim yöntemi geçer.
+Önceki kodda `HttpClient` , bir özel alan olarak depolanır. Dış çağrıları yapmak için tüm erişim `GetRepos` yönteminden geçer.
 
 ### <a name="generated-clients"></a>Oluşturulan istemciler
 
-`IHttpClientFactory`[Refit](https://github.com/paulcbetts/refit)gibi diğer üçüncü taraf kitaplıkları ile birlikte kullanılabilir. Refit ,NET için bir REST kitaplığıdır. REST API'lerini canlı arabirimlere dönüştürür. Arabirimin bir uygulaması, harici HTTP `RestService`aramaları `HttpClient` yapmak için kullanılarak dinamik olarak oluşturulur.
+`IHttpClientFactory`, [yeniden sığdırma](https://github.com/paulcbetts/refit)gibi diğer üçüncü taraf kitaplıklarıyla birlikte kullanılabilir. Yeniden sığdırma, .NET için bir REST kitaplığıdır. REST API 'Leri canlı arabirimlere dönüştürür. Arabirim bir uygulama, dış HTTP çağrıları yapmak için kullanılarak `RestService` `HttpClient` tarafından dinamik olarak oluşturulur.
 
-Dış API'yi ve yanıtını temsil edecek bir arabirim ve yanıt tanımlanır:
+Bir arabirim ve yanıt, dış API 'yi ve yanıtını temsil edecek şekilde tanımlanır:
 
 ```csharp
 public interface IHelloClient
@@ -793,7 +799,7 @@ public class Reply
 }
 ```
 
-Uygulamayı oluşturmak için Refit kullanılarak yazılan bir istemci eklenebilir:
+Türü belirlenmiş bir istemci eklenebilir, uygulamayı oluşturmak için yeniden sığdırma kullanımı kullanılabilir:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -808,7 +814,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Tanımlanan arabirim, DI ve Refit tarafından sağlanan uygulama ile gerektiğinde tüketilebilir:
+Tanımlı arabirim, gereken yerde, mak ve Refit tarafından sağlanmış uygulama ile kullanılabilir.
 
 ```csharp
 [ApiController]
@@ -829,173 +835,173 @@ public class ValuesController : ControllerBase
 }
 ```
 
-## <a name="outgoing-request-middleware"></a>Giden istek middleware
+## <a name="outgoing-request-middleware"></a>Giden istek ara yazılımı
 
-`HttpClient`zaten giden HTTP istekleri için birbirine bağlanabilir işleyicileri delegating kavramı vardır. Bu, `IHttpClientFactory` her adlandırılmış istemci için uygulamak için işleyicileri tanımlamak kolaylaştırır. Giden bir istek ara yazılım boru hattı oluşturmak için birden çok işleyicinin kaydedilmesi ve zincirlemesi destekler. Bu işleyicilerin her biri, giden istekten önce ve sonra iş yapabilir. Bu desen, ASP.NET Core'daki gelen ara yazılım düzenine benzer. Desen, önbelleğe alma, hata işleme, serileştirme ve günlüğe kaydetme gibi HTTP istekleri etrafında çapraz kesme yle ilgili endişeleri yönetmek için bir mekanizma sağlar.
+`HttpClient`, giden HTTP istekleri için birlikte bağlanabilen işleyicileri temsilci seçme kavramı zaten var. , `IHttpClientFactory` Her bir adlandırılmış istemci için uygulanacak işleyicileri tanımlamanızı kolaylaştırır. Bir giden istek ara yazılım işlem hattı oluşturmak için birden çok işleyicinin kaydını ve zincirlemeyi destekler. Bu işleyicilerin her biri, giden istekten önce ve sonra iş gerçekleştirebilir. Bu düzen, ASP.NET Core gelen ara yazılım ardışık düzenine benzer. Bu model, önbelleğe alma, hata işleme, serileştirme ve günlüğe kaydetme dahil olmak üzere HTTP istekleri etrafında çapraz kesme sorunlarını yönetmek için bir mekanizma sağlar.
 
-İşleyici oluşturmak için, 'den <xref:System.Net.Http.DelegatingHandler>kaynaklanan bir sınıf tanımlayın. İsteği `SendAsync` ardışık sistemdeki bir sonraki işleyiciye geçirmeden önce kodu yürütmek için yöntemi geçersiz kıl:
+Bir işleyici oluşturmak için, öğesinden türeten <xref:System.Net.Http.DelegatingHandler>bir sınıf tanımlayın. İsteği ardışık `SendAsync` düzen içindeki bir sonraki işleyiciye geçirmeden önce kodu yürütmek için yöntemi geçersiz kılın:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Handlers/ValidateHeaderHandler.cs?name=snippet1)]
 
-Önceki kod temel bir işleyici tanımlar. `X-API-KEY` Üstbilginin isteğe ekilip eklenmediğini denetler. Üstbilgi eksikse, HTTP aramasını önleyebilir ve uygun bir yanıt döndürebilir.
+Yukarıdaki kod, temel bir işleyiciyi tanımlar. İsteğe bağlı bir `X-API-KEY` başlık olup olmadığını denetler. Üst bilgi eksikse, HTTP çağrısından kaçınabilir ve uygun bir yanıt döndürebilir.
 
-Kayıt sırasında, bir veya daha fazla işleyicisi `HttpClient`için yapılandırmaya eklenebilir. Bu görev, uzantı yöntemleri <xref:Microsoft.Extensions.DependencyInjection.IHttpClientBuilder>ile gerçekleştirilir.
+Kayıt sırasında, bir veya daha fazla işleyici bir `HttpClient`için yapılandırmasına eklenebilir. Bu görev, <xref:Microsoft.Extensions.DependencyInjection.IHttpClientBuilder>üzerindeki genişletme yöntemleri aracılığıyla gerçekleştirilir.
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet5)]
 
-Önceki kodda, DI `ValidateHeaderHandler` kayıtlıdır. İşleyici, di'ye geçici bir hizmet olarak **kaydedilmeli,** hiçbir zaman kapsama alınmalıdır. İşleyici kapsamlı bir hizmet olarak kayıtlıysa ve işleyicinin bağlı olduğu hizmetler tek kullanımlıksa:
+Yukarıdaki kodda `ValidateHeaderHandler` ,, dı ile kaydedilir. İşleyicinin, bir geçici hizmet olarak dı 'ye kayıtlı olması **gerekir** , hiçbir koşulda kapsamı yoktur. İşleyici kapsamlı bir hizmet olarak kayıtlıysa ve işleyicinin bağımlı olduğu tüm hizmetler atılabilir olur:
 
-* Işleyicinin hizmetleri kapsam dışına çıkmadan önce elden çıkarılabilir.
-* Elden çıkarılan işleyici hizmetleri işleyicinin başarısız olması için neden olur.
+* İşleyici kapsam dışına geçmeden önce işleyicinin Hizmetleri atılamaz.
+* Atılmış işleyici Hizmetleri işleyicinin başarısız olmasına neden olur.
 
-Bir kez <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.AddHttpMessageHandler*> kaydedildikten sonra, işleyici türünde geçerek çağrılabilir.
+Kaydedildikten sonra, <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.AddHttpMessageHandler*> işleyici türünü geçirerek çağrılabilir.
 
-Birden çok işleyici, yürütmeleri gerektiği sırada kaydedilebilir. Her işleyici, son `HttpClientHandler` isteği çalıştırana kadar sonraki işleyiciyi sarar:
+Birden çok işleyici, yürütülmesi gereken sırayla kaydedilebilir. Her işleyici, son `HttpClientHandler` isteği çalıştırana kadar sonraki işleyiciyi sarmalar:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet6)]
 
-İsteme başına durumu ileti işleyicileriyle paylaşmak için aşağıdaki yaklaşımlardan birini kullanın:
+İleti işleyicileriyle istek başına durumu paylaşmak için aşağıdaki yaklaşımlardan birini kullanın:
 
-* Kullanarak verileri işleyiciye `HttpRequestMessage.Properties`aktarın.
+* Kullanarak `HttpRequestMessage.Properties`işleyicide veri geçirin.
 * Geçerli `IHttpContextAccessor` isteğe erişmek için kullanın.
-* Verileri aktarmak `AsyncLocal` için özel bir depolama nesnesi oluşturun.
+* Verileri geçirmek için `AsyncLocal` özel bir depolama nesnesi oluşturun.
 
-## <a name="use-polly-based-handlers"></a>Polly tabanlı işleyicileri kullanma
+## <a name="use-polly-based-handlers"></a>Polly tabanlı işleyiciler kullanın
 
-`IHttpClientFactory`[Polly](https://github.com/App-vNext/Polly)adlı popüler bir üçüncü taraf kütüphanesi ile entegre . Polly, .NET için kapsamlı bir esneklik ve geçici hata işleme kitaplığıdır. Geliştiricilerin Retry, Circuit Breaker, Timeout, Bulkhead Isolation ve Fallback gibi ilkeleri akıcı ve iş parçacığı güvenli bir şekilde ifade etmesine olanak tanır.
+`IHttpClientFactory`, [Polly](https://github.com/App-vNext/Polly)adlı popüler bir üçüncü taraf kitaplığı ile tümleşir. Polly, .NET için kapsamlı bir esnekliği ve geçici hata işleme kitaplığıdır. Geliştiricilerin yeniden deneme, devre kesici, zaman aşımı, Bulkbaş yalıtımı, akıcı ve iş parçacığı açısından güvenli bir şekilde geri dönüş gibi ilkeler almasına olanak tanır.
 
-Polly ilkelerinin yapılandırılmış `HttpClient` örneklerle kullanımını etkinleştirmek için uzantı yöntemleri sağlanır. Polly uzantıları:
+Uzantı yöntemleri, yapılandırılmış `HttpClient` örneklerle Polly ilkelerin kullanımını etkinleştirmek için sağlanır. Polly uzantıları:
 
-* İstemcilere Polly tabanlı işleyiciler eklemeyi destekleyin.
-* [Microsoft.Extensions.Http.Polly](https://www.nuget.org/packages/Microsoft.Extensions.Http.Polly/) NuGet paketini yükledikten sonra kullanılabilir. Paket, ASP.NET Core paylaşılan çerçevesine dahil değildir.
+* İstemcilere Polly tabanlı işleyiciler eklemeyi destekler.
+* , [Microsoft. Extensions. http. Polly](https://www.nuget.org/packages/Microsoft.Extensions.Http.Polly/) NuGet paketini yükledikten sonra kullanılabilir. Paket, ASP.NET Core paylaşılan çerçevesine dahil değildir.
 
-### <a name="handle-transient-faults"></a>Geçici hataları işleme
+### <a name="handle-transient-faults"></a>Geçici hataları işle
 
-En sık kullanılan hatalar, harici HTTP çağrıları geçici olduğunda oluşur. Geçici hataları işlemek `AddTransientHttpErrorPolicy` için bir ilke tanımlanmasına olanak sağlayan uygun bir uzatma yöntemi denir. Bu uzantı yöntemi ile `HttpRequestException`yapılandırılan ilkeler, HTTP 5xx yanıtları ve HTTP 408 yanıtları.
+Yaygın hatalar, dış HTTP çağrıları geçici olduğunda oluşur. Geçici hataları işlemek üzere bir `AddTransientHttpErrorPolicy` ilkenin tanımlanmasını sağlayan, çağrılan bir uygun genişletme yöntemi eklenmiştir. Bu uzantı yöntemi tanıtıcısıyla `HttpRequestException`yapılandırılmış ilkeler, http 5xx YANıTLARı ve http 408 yanıtları.
 
-Uzantısı `AddTransientHttpErrorPolicy` içinde `Startup.ConfigureServices`kullanılabilir. Uzantı, olası `PolicyBuilder` geçici bir hatayı temsil eden hataları işlemek için yapılandırılan bir nesneye erişim sağlar:
+`AddTransientHttpErrorPolicy` Uzantı içinde `Startup.ConfigureServices`kullanılabilir. Uzantı, olası bir geçici hatayı `PolicyBuilder` temsil eden hataları işlemek için yapılandırılmış bir nesneye erişim sağlar:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet7)]
 
-Önceki kodda bir `WaitAndRetryAsync` ilke tanımlanır. Başarısız istekler, denemeler arasında 600 ms'lik bir gecikmeyle üç defaya kadar yeniden denenir.
+Yukarıdaki kodda bir `WaitAndRetryAsync` ilke tanımlanmıştır. Başarısız istekler, denemeler arasındaki 600 MS gecikmeyle en fazla üç kez yeniden denenir.
 
-### <a name="dynamically-select-policies"></a>Dinamik olarak ilkeleri seçin
+### <a name="dynamically-select-policies"></a>Dinamik olarak ilke seçme
 
-Polly tabanlı işleyicileri eklemek için kullanılabilecek ek uzatma yöntemleri vardır. Böyle bir `AddPolicyHandler`uzantısı , birden fazla aşırı yükleri vardır. Bir aşırı yükleme, hangi politikanın uygulanacağı tanımlanırken isteğin denetlenmesini sağlar:
+Polly tabanlı işleyiciler eklemek için kullanılabilecek ek uzantı yöntemleri vardır. Bu tür bir uzantının `AddPolicyHandler`birden çok aşırı yüklemesi vardır. Bir aşırı yükleme, hangi ilkenin uygulanacağını tanımlarken isteğin incelenebilirliğini sağlar:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet8)]
 
-Önceki kodda, giden istek bir HTTP GET ise, 10 saniyelik bir zaman ayarı uygulanır. Başka bir HTTP yöntemi için 30 saniyelik bir zaman aşımı kullanılır.
+Yukarıdaki kodda, giden istek bir HTTP GET ise, 10 saniyelik bir zaman aşımı uygulanır. Diğer HTTP yöntemleri için, 30 saniyelik bir zaman aşımı kullanılır.
 
-### <a name="add-multiple-polly-handlers"></a>Birden çok Polly işleyicisi ekleme
+### <a name="add-multiple-polly-handlers"></a>Birden çok Polly işleyici ekleme
 
-Gelişmiş işlevsellik sağlamak için Polly ilkelerini iç içe yerleştirmek yaygındır:
+Gelişmiş işlevsellik sağlamak için çok fazla ilke iç içe geçmiş bir yaygın hale gelir:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet9)]
 
-Önceki örnekte, iki işleyicieklenir. İlk bir `AddTransientHttpErrorPolicy` yeniden deneme ilkesi eklemek için uzantısı kullanır. Başarısız istekler en fazla üç kez yeniden denendir. İkinci çağrı `AddTransientHttpErrorPolicy` bir devre kesici ilkesi ekler. Beş başarısız deneme sırayla gerçekleşirse, diğer dış istekler 30 saniye boyunca engellenir. Devre kesici ilkeleri durumludur. Bu istemci den gelen tüm aramalar aynı devre durumunu paylaşır.
+Yukarıdaki örnekte, iki işleyici eklenmiştir. İlki, yeniden deneme `AddTransientHttpErrorPolicy` ilkesi eklemek için uzantıyı kullanır. Başarısız istekler en fazla üç kez yeniden denenir. İçin `AddTransientHttpErrorPolicy` ikinci çağrı, bir devre kesici ilkesi ekler. Beş başarısız girişim sırayla gerçekleşiyorsa, daha fazla dış istek 30 saniye için engellenir. Devre kesici ilkeleri durum bilgisi vardır. Bu istemci aracılığıyla yapılan tüm çağrılar aynı devre durumunu paylaşır.
 
-### <a name="add-policies-from-the-polly-registry"></a>Polly kayıt defterinden ilkeler ekleme
+### <a name="add-policies-from-the-polly-registry"></a>Polly kayıt defterinden ilke ekleme
 
-Düzenli olarak kullanılan ilkeleri yönetmeye yönelik bir yaklaşım, bunları `PolicyRegistry`bir kez tanımlamak ve bir . Kayıt defterinden bir ilke kullanılarak işleyicinin eklenmesine olanak tanıyan bir uzantı yöntemi sağlanır:
+Düzenli olarak kullanılan ilkeleri yönetmeye yönelik bir yaklaşım, bunları bir kez tanımlayıp bir `PolicyRegistry`ile kaydetmektir. Kayıt defterinden bir ilke kullanılarak bir işleyicinin eklenmesine izin veren bir genişletme yöntemi sağlanır:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet10)]
 
-Önceki kodda, `PolicyRegistry` `ServiceCollection`iki ilke kaydedilir. Kayıt defterinden bir ilke `AddPolicyHandlerFromRegistry` kullanmak için, yöntem uygulanacak ilkenin adını geçerek kullanılır.
+Yukarıdaki kodda, öğesine eklendiğinde iki ilke kaydedilir `PolicyRegistry` `ServiceCollection`. Kayıt defterinden bir ilke kullanmak için `AddPolicyHandlerFromRegistry` yöntemi kullanılır ve uygulanacak ilke adı geçer.
 
-Polly `IHttpClientFactory` [wiki'de polly wiki](https://github.com/App-vNext/Polly/wiki/Polly-and-HttpClientFactory)hakkında daha fazla bilgi bulabilirsiniz.
+Ve daha fazla `IHttpClientFactory` tümleştirme hakkında daha fazla bilgi, [Polly wiki](https://github.com/App-vNext/Polly/wiki/Polly-and-HttpClientFactory)' de bulunabilir.
 
-## <a name="httpclient-and-lifetime-management"></a>Httpİste ve yaşam boyu yönetim
+## <a name="httpclient-and-lifetime-management"></a>HttpClient ve ömür yönetimi
 
-Yeni `HttpClient` bir örnek her `CreateClient` zaman `IHttpClientFactory`döndürülür. Her bir <xref:System.Net.Http.HttpMessageHandler> müşteri yeası var. `HttpMessageHandler` Fabrika, örneklerin yaşam ömürlerini yönetir.
+Her `HttpClient` `CreateClient` çağrıldığında yeni bir örnek döndürülür `IHttpClientFactory`. Adlandırılmış istemci <xref:System.Net.Http.HttpMessageHandler> başına. Fabrika, `HttpMessageHandler` örneklerin yaşam sürelerini yönetir.
 
-`IHttpClientFactory`kaynak tüketimini `HttpMessageHandler` azaltmak için fabrika tarafından oluşturulan örnekleri bir araya sağlar. Bir `HttpMessageHandler` örnek, kullanım ömrü dolmamışsa `HttpClient` yeni bir örnek oluştururken havuzdan yeniden kullanılabilir.
+`IHttpClientFactory`kaynak tüketimini `HttpMessageHandler` azaltmak için fabrika tarafından oluşturulan örnekleri havuzlar. Bir `HttpMessageHandler` örnek, süresi dolmamışsa yeni `HttpClient` bir örnek oluştururken havuzdan yeniden kullanılabilir.
 
-Her işleyici genellikle kendi temel HTTP bağlantılarını yönetir gibi işleyicileri havuzlama arzu edilir. Gerekenden daha fazla işleyici oluşturmak bağlantı gecikmelerine neden olabilir. Bazı işleyiciler de bağlantıları süresiz olarak açık tutar, bu da işleyicinin DNS değişikliklerine tepki sini engelleyebilir.
+Her işleyici genellikle kendi temel HTTP bağlantılarını yönettiğinden, işleyicilerin havuzlaması tercih edilir. Gerekenden daha fazla işleyici oluşturulması bağlantı gecikmeleri oluşmasına neden olabilir. Ayrıca, bazı işleyiciler bağlantıları süresiz olarak açık tutar, bu da işleyicinin DNS değişikliklerine yeniden davranmasını engelleyebilir.
 
-Varsayılan işleyici ömrü iki dakikadır. Varsayılan değer, adlandırılmış istemci bazında geçersiz kılınabilir. Geçersiz kılmak için, <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.SetHandlerLifetime*> istemci `IHttpClientBuilder` oluştururken döndürülenleri arayın:
+Varsayılan işleyici ömrü iki dakikadır. Varsayılan değer, adlandırılmış istemci temelinde geçersiz kılınabilir. Bunu geçersiz kılmak için, <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.SetHandlerLifetime*> istemcisini oluştururken `IHttpClientBuilder` döndürülen öğesini çağırın:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet11)]
 
-İstemcinin atılması gerekli değildir. Elden çıkarma giden istekleri iptal eder `HttpClient` ve verilen örneğin aramadan <xref:System.IDisposable.Dispose*>sonra kullanılamayacağından garanti eder. `IHttpClientFactory`örnekleri tarafından `HttpClient` kullanılan kaynakları izler ve elden çıkar. Örnekler `HttpClient` genellikle imha gerektirmeyen .NET nesneleri olarak kabul edilebilir.
+İstemcinin çıkarılması gerekli değildir. Çıkarma giden istekleri iptal eder ve çağırma `HttpClient` <xref:System.IDisposable.Dispose*>sonrasında verilen örneğin kullanılamaz olmasını sağlar. `IHttpClientFactory`örnekler tarafından `HttpClient` kullanılan kaynakları izler ve ortadan kaldırdık. `HttpClient` Örnekler genellikle aktiften çıkarma gerektirmeyen .NET nesneleri olarak kabul edilebilir.
 
-Tek `HttpClient` bir örneği uzun süre canlı tutmak, kuruluşundan önce `IHttpClientFactory`kullanılan yaygın bir desendir. Bu desen' e geçtikten `IHttpClientFactory`sonra gereksiz hale gelir.
+Tek `HttpClient` bir örneğinin uzun süre canlı tutulması, önünde `IHttpClientFactory`kullanılmadan önce kullanılan ortak bir modeldir. Bu model, ' a geçtikten sonra `IHttpClientFactory`gereksiz hale gelir.
 
-### <a name="alternatives-to-ihttpclientfactory"></a>IHttpClientFactory için alternatifler
+### <a name="alternatives-to-ihttpclientfactory"></a>Ihttpclientfactory alternatifleri
 
-DI `IHttpClientFactory` özellikli bir uygulamada kullanmak şunları önler:
+Dı `IHttpClientFactory` etkin bir uygulamada kullanmak şunları önler:
 
-* Örnekleri birleştirerek `HttpMessageHandler` kaynak tükenmesi sorunları.
-* Düzenli aralıklarla bisiklet `HttpMessageHandler` örnekleri tarafından Bayat DNS sorunları.
+* Havuz `HttpMessageHandler` örneklerine göre kaynak tükenmesi sorunları.
+* Düzenli aralıklarla `HttpMessageHandler` örnekleri GEÇIREREK eski DNS sorunları.
 
-Uzun ömürlü bir örneği kullanarak önceki sorunları çözmek <xref:System.Net.Http.SocketsHttpHandler> için alternatif yollar vardır.
+Uzun süreli <xref:System.Net.Http.SocketsHttpHandler> bir örnek kullanarak önceki sorunları çözmenin alternatif yolları vardır.
 
-- Uygulamanın ne `SocketsHttpHandler` zaman başladığına bir örnek oluşturun ve uygulamanın ömrü boyunca kullanın.
-- DNS yenileme sürelerine göre uygun bir değere göre <xref:System.Net.Http.SocketsHttpHandler.PooledConnectionLifetime> yapılandırın.
-- Gerektiğinde `HttpClient` kullanarak `new HttpClient(handler, disposeHandler: false)` örnekler oluşturun.
+- Uygulamanın başladığı `SocketsHttpHandler` zaman bir örneği oluşturun ve uygulamanın ömrü boyunca kullanın.
+- DNS <xref:System.Net.Http.SocketsHttpHandler.PooledConnectionLifetime> yenileme süreleri temelinde uygun bir değere yapılandırın.
+- Gerektiğinde `HttpClient` örnek `new HttpClient(handler, disposeHandler: false)` oluşturun.
 
-Önceki yaklaşımlar benzer bir şekilde `IHttpClientFactory` çözen kaynak yönetimi sorunlarını çözer.
+Yukarıdaki yaklaşımlar, benzer bir şekilde `IHttpClientFactory` çözen kaynak yönetimi sorunlarını çözer.
 
-- Örnekler `SocketsHttpHandler` arasında `HttpClient` bağlantıları paylaşır. Bu paylaşım soket yorgunluğunu önler.
-- Eski `SocketsHttpHandler` DNS sorunlarını `PooledConnectionLifetime` önlemek için döngüleri bağlantıları.
+- , `SocketsHttpHandler` Örnekleri arasında `HttpClient` bağlantıları paylaşır. Bu paylaşım, yuva azalmasına engel olur.
+- Bağlantıları `SocketsHttpHandler` , eski DNS sorunlarından `PooledConnectionLifetime` kaçınmak için öğesine göre döngüler.
 
 ### <a name="cookies"></a>Tanımlama bilgileri
 
-Birleştirilmiş `HttpMessageHandler` örnekler, nesnelerin `CookieContainer` paylaşılmasına neden oluyor. Beklenmeyen `CookieContainer` nesne paylaşımı genellikle yanlış kodla sonuçlanır. Tanımlama bilgisi gerektiren uygulamalar için aşağıdakileri göz önünde bulundurun:
+Havuza alınmış `HttpMessageHandler` örnekler, paylaşılan `CookieContainer` nesneler ile sonuçlanır. Beklenmeyen `CookieContainer` nesne paylaşımı genellikle hatalı kodla sonuçlanır. Tanımlama bilgileri gerektiren uygulamalar için şunlardan birini göz önünde bulundurun:
 
- - Otomatik çerez işlemeyi devre dışı bırakma
- - Kaçın -arak`IHttpClientFactory`
+ - Otomatik tanımlama bilgisi işlemeyi devre dışı bırakma
+ - Önlemenin`IHttpClientFactory`
 
-Otomatik <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> çerez kullanımını devre dışı kılabilir:
+Otomatik <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> tanımlama bilgisi işlemesini devre dışı bırakmak için çağırın:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
 
-## <a name="logging"></a>Günlüğe kaydetme
+## <a name="logging"></a>Günlüğe Kaydetme
 
-Tüm istekler için kayıt günlüğü iletileri aracılığıyla `IHttpClientFactory` oluşturulan istemciler. Varsayılan günlük iletilerini görmek için günlük yapılandırmanızda uygun bilgi düzeyini etkinleştirin. İstek üstbilgilerinin günlüğe kaydedilmesi gibi ek günlüğe kaydetme yalnızca izleme düzeyinde dahildir.
+Tüm istekler için `IHttpClientFactory` kayıt günlüğü iletileri aracılığıyla oluşturulan istemciler. Varsayılan günlük iletilerini görmek için günlük yapılandırmanızda uygun bilgi düzeyini etkinleştirin. İstek üst bilgilerinin günlüğe kaydedilmesi gibi ek Günlükler yalnızca izleme düzeyinde yer alır.
 
-Her istemci için kullanılan günlük kategorisi istemcinin adını içerir. *Örneğin MyNamedClient*adlı bir istemci, iletileri `System.Net.Http.HttpClient.MyNamedClient.LogicalHandler`. *LogicalHandler* ile sabitlenmiş iletiler istek işleyicisi ardışık alanıdışında oluşur. İstek üzerine, iletiler ardışık ardışık işlemden önce günlüğe kaydedilir. Yanıtta, iletiler yanıtı aldıktan sonra günlüğe kaydedilir.
+Her istemci için kullanılan günlük kategorisi, istemcinin adını içerir. Örneğin, *Mynamedclient*adlı bir istemci, bir kategorisine sahip iletileri günlüğe kaydeder `System.Net.Http.HttpClient.MyNamedClient.LogicalHandler`. *Logicalhandler* ile düzeltilen iletiler istek işleyicisi ardışık düzeni dışında oluşur. İstekte, işlem hattındaki diğer işleyiciler işlenmeden önce iletiler günlüğe kaydedilir. Yanıtta, tüm diğer işlem hattı işleyicileri yanıtı aldıktan sonra iletiler günlüğe kaydedilir.
 
-Günlüğe kaydetme, istek işleyicisi ardışık hattının içinde de oluşur. *MyNamedClient* örneğinde, bu iletiler günlük kategorisine `System.Net.Http.HttpClient.MyNamedClient.ClientHandler`göre günlüğe kaydedilir. İstek için, bu işlem, diğer tüm işleyiciler çalıştırdıktan sonra ve istek ağa gönderilmeden hemen önce oluşur. Yanıtta, bu günlüğe kaydetme, işleyici ardışık işlemden geçmeden önce yanıtın durumunu içerir.
+Günlüğe kaydetme, istek işleyicisi ardışık düzeni içinde de gerçekleşir. *Mynamedclient* örneğinde, bu iletiler günlük kategorisine `System.Net.Http.HttpClient.MyNamedClient.ClientHandler`göre günlüğe kaydedilir. İstek için bu, tüm diğer işleyiciler çalıştıktan sonra ve istek ağda gönderilmeden hemen önce gerçekleşir. Yanıtta, bu günlüğe kaydetme, işleyicinin işleyici işlem hattı üzerinden geri geçirmeden önce yanıtın durumunu içerir.
 
-Boru hattının dışında ve içinde günlüğe kaydetmeyi etkinleştirmek, diğer boru hattı işleyicileri tarafından yapılan değişikliklerin incelenmesini sağlar. Bu, örneğin istek üstbilgisi veya yanıt durum kodunda yapılan değişiklikleri içerebilir.
+İşlem hattının dışında ve içinde günlüğe kaydetmenin etkinleştirilmesi, diğer işlem hattı işleyicileri tarafından yapılan değişikliklerin incelemesini etkinleştirir. Bu, örneğin veya yanıt durum kodunda istek başlıklarındaki değişiklikleri içerebilir.
 
-Günlük kategorisine istemcinin adını niçin eklenmesi gerektiğinde belirli adlandırılmış istemciler için günlük filtreleme sağlar.
+İstemci adı ' nı log kategorisinde da içermek, gerektiğinde belirli adlandırılmış istemciler için günlük filtrelemeyi sunar.
 
-## <a name="configure-the-httpmessagehandler"></a>HttpMessageHandler'ı yapılandırın
+## <a name="configure-the-httpmessagehandler"></a>HttpMessageHandler 'ı yapılandırma
 
-Bir istemci tarafından kullanılan iç `HttpMessageHandler` yapılandırmasını denetlemek için gerekli olabilir.
+İstemci tarafından kullanılan iç `HttpMessageHandler` yapılandırmayı denetlemek gerekli olabilir.
 
-Adlandırılmış veya yazılan istemciler eklendiğinde bir `IHttpClientBuilder` döndürülür. Uzantı <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> yöntemi bir temsilci tanımlamak için kullanılabilir. Temsilci, bu istemci tarafından kullanılan `HttpMessageHandler` birincil oluşturmak ve yapılandırmak için kullanılır:
+Adlandırılmış `IHttpClientBuilder` veya yazılan istemciler eklenirken bir döndürülür. <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*> Genişletme yöntemi bir temsilciyi tanımlamak için kullanılabilir. Temsilci, bu istemci tarafından kullanılan birincili `HttpMessageHandler` oluşturmak ve yapılandırmak için kullanılır:
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet12)]
 
-## <a name="use-ihttpclientfactory-in-a-console-app"></a>iHttpClientFactory konsol uygulamasında kullanma
+## <a name="use-ihttpclientfactory-in-a-console-app"></a>Konsol uygulamasında ıhttpclientfactory kullanma
 
-Konsol uygulamasında, projeye aşağıdaki paket başvurularını ekleyin:
+Konsol uygulamasında, aşağıdaki paket başvurularını projeye ekleyin:
 
-* [Microsoft.Extensions.Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting)
-* [Microsoft.Extensions.Http](https://www.nuget.org/packages/Microsoft.Extensions.Http)
+* [Microsoft. Extensions. Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting)
+* [Microsoft. Extensions. http](https://www.nuget.org/packages/Microsoft.Extensions.Http)
 
 Aşağıdaki örnekte:
 
-* <xref:System.Net.Http.IHttpClientFactory>Genel Ana [Bilgisayar hizmet](xref:fundamentals/host/generic-host) konteynerine kaydedilir.
-* `MyService`bir `HttpClient`. oluşturmak için kullanılan hizmetten bir istemci fabrika örneği oluşturur `HttpClient`bir web sayfasını almak için kullanılır.
-* `Main`hizmetin `GetPage` yöntemini yürütmek ve web sayfası içeriğinin ilk 500 karakterini konsola yazmak için bir kapsam oluşturur.
+* <xref:System.Net.Http.IHttpClientFactory>, [genel konağın](xref:fundamentals/host/generic-host) hizmet kapsayıcısına kaydedilir.
+* `MyService`hizmetinden bir `HttpClient`istemci fabrikası örneği oluşturur. `HttpClient`, bir Web sayfasını almak için kullanılır.
+* `Main`Hizmetin `GetPage` yöntemini yürütmek için bir kapsam oluşturur ve Web sayfası içeriğinin ilk 500 karakterini konsola yazar.
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactoryConsoleSample/Program.cs?highlight=14-15,20,26-27,59-62)]
 
-## <a name="header-propagation-middleware"></a>Üstbilgi yayılımı ara ware
+## <a name="header-propagation-middleware"></a>Üst bilgi yayma ara yazılımı
 
-Üstbilgi yayılımı, gelen istekten giden HTTP İstemci isteklerine HTTP üstbilgilerini yaymak için desteklenen bir topluluk orta yazılımıdır. Üstbilgi yayılmasını kullanmak için:
+Üst bilgi yayma, gelen istekten giden HTTP Istemci isteklerine HTTP üstbilgilerini yaymak için bir topluluk tarafından desteklenen bir ara yazılımlar. Üst bilgi yaymayı kullanmak için:
 
-* Başvuru topluluk paketinin bağlantı noktası desteklenen [HeaderPropagation](https://www.nuget.org/packages/HeaderPropagation). ASP.NET Core 3.1 ve daha sonra [Microsoft.AspNetCore.HeaderPropagation](https://www.nuget.org/packages/Microsoft.AspNetCore.HeaderPropagation)destekler.
+* Topluluğun, paket [Headeryayılmasının](https://www.nuget.org/packages/HeaderPropagation)desteklediği bağlantı noktasına başvurun. ASP.NET Core 3,1 ve üzeri, [Microsoft. AspNetCore. Headeryayılmayı](https://www.nuget.org/packages/Microsoft.AspNetCore.HeaderPropagation)destekler.
 
-* Ara yazılımı yapılandırın ve `HttpClient` şu `Startup`şekilde:
+* Ara yazılımı ve `HttpClient` içinde `Startup`yapılandırın:
 
   [!code-csharp[](http-requests/samples/2.x/Startup21.cs?highlight=5-9,25&name=snippet)]
 
-* İstemci, giden isteklerde yapılandırılan üstbilgiiçerir:
+* İstemci giden isteklerde yapılandırılan üst bilgileri içerir:
 
   ```csharp
   var client = clientFactory.CreateClient("MyForwardingClient");
@@ -1005,7 +1011,7 @@ Aşağıdaki örnekte:
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * [Dayanıklı HTTP isteklerini uygulamak için HttpClientFactory kullanma](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests)
-* [HttpClientFactory ve Polly politikaları ile üstel geri dönüş ile HTTP çağrı yeniden uygulama](/dotnet/standard/microservices-architecture/implement-resilient-applications/implement-http-call-retries-exponential-backoff-polly)
+* [HttpClientFactory ve Polly ilkeleriyle üstel geri alma ile HTTP çağrı yeniden denemeleri uygulayın](/dotnet/standard/microservices-architecture/implement-resilient-applications/implement-http-call-retries-exponential-backoff-polly)
 * [Devre Kesici desenini uygulama](/dotnet/standard/microservices-architecture/implement-resilient-applications/implement-circuit-breaker-pattern)
 
 ::: moniker-end

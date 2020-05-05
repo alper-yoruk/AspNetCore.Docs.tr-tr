@@ -4,13 +4,19 @@ author: rick-anderson
 description: Kimlik doğrulama ilkesi şemaları, tek bir mantıksal kimlik doğrulama şemasına sahip olmasını kolaylaştırır
 ms.author: riande
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/policyschemes
-ms.openlocfilehash: f02d8e5cac20a9b60c5eddbd28253efacf682ea1
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: ddedf62c5e8363bd93c9948fd2d3418abc566539
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78660736"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767323"
 ---
 # <a name="policy-schemes-in-aspnet-core"></a>ASP.NET Core 'de ilke şemaları
 
@@ -19,7 +25,7 @@ Kimlik doğrulama ilkesi şemaları, tek bir mantıksal kimlik doğrulama düzen
 * Herhangi bir kimlik doğrulama eylemini başka bir düzene iletmek kolay.
 * İsteğe göre dinamik olarak ilet.
 
-Türetilmiş <xref:Microsoft.AspNetCore.Authentication.AuthenticationSchemeOptions> ve ilişkili [Authenticationhandler\<TOptions >](/dotnet/api/microsoft.aspnetcore.authentication.authenticationhandler-1)kullanan tüm kimlik doğrulama şemaları:
+Türetilmiş <xref:Microsoft.AspNetCore.Authentication.AuthenticationSchemeOptions> ve Ilişkili [authenticationhandler\< ](/dotnet/api/microsoft.aspnetcore.authentication.authenticationhandler-1)' i kullanan tüm kimlik doğrulama şemaları>:
 
 * ASP.NET Core 2,1 ve sonraki sürümlerde otomatik olarak ilke düzenleridir.
 * Düzenin seçenekleri yapılandırılarak etkinleştirilebilir.

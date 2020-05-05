@@ -1,21 +1,24 @@
 ---
 title: ASP.NET Core Razor bileşenleri oluşturma ve kullanma
 author: guardrex
-description: Veri bağlama, olayları işleme ve bileşen yaşam döngülerini yönetme dahil Razor bileşenleri oluşturmayı ve kullanmayı öğrenin.
+description: Verileri bağlama, olayları işleme ve Razor bileşen yaşam döngülerini yönetme dahil olmak üzere bileşenleri oluşturma ve kullanma hakkında bilgi edinin.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 04/21/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/components
-ms.openlocfilehash: a9ae84c36716bfc07ae3cf86214e48ad24770401
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: f8b1ffef1b8375337f66c93d9b4652ad3c5dd616
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82205962"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767753"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor bileşenleri oluşturma ve kullanma
 
@@ -27,11 +30,11 @@ Blazoruygulamalar, *Bileşenler*kullanılarak oluşturulmuştur. Bir bileşen, b
 
 ## <a name="component-classes"></a>Bileşen sınıfları
 
-Bileşenler, C# ve HTML biçimlendirme birleşimi kullanılarak [Razor](xref:mvc/views/razor) bileşen dosyalarında (*. Razor*) uygulanır. İçindeki Blazor bir bileşen, bir *Razor bileşeni*olarak adlandırılır.
+Bileşenler, C# ve [Razor](xref:mvc/views/razor) HTML biçimlendirme birleşimi kullanılarak bileşen dosyalarında (*. Razor*) uygulanır. İçindeki Blazor bir bileşen bir * Razor bileşen*olarak adlandırılır.
 
 Bir bileşenin adı, büyük harfle başlamalıdır. Örneğin, *mycoolcomponent. Razor* geçerlidir ve *mycoolcomponent. Razor* geçersizdir.
 
-Bir bileşen için Kullanıcı arabirimi HTML kullanılarak tanımlanır. Dinamik işleme mantığı (örneğin, döngüler, koşullar, ifadeler) [Razor](xref:mvc/views/razor)adlı gömülü bir C# sözdizimi kullanılarak eklenir. Bir uygulama derlendiğinde, HTML biçimlendirme ve C# işleme mantığı bir bileşen sınıfına dönüştürülür. Oluşturulan sınıfın adı, dosyanın adıyla eşleşir.
+Bir bileşen için Kullanıcı arabirimi HTML kullanılarak tanımlanır. Dinamik işleme mantığı (örneğin, döngüler, koşullar, ifadeler) adlı [Razor](xref:mvc/views/razor)gömülü C# sözdizimi kullanılarak eklenir. Bir uygulama derlendiğinde, HTML biçimlendirme ve C# işleme mantığı bir bileşen sınıfına dönüştürülür. Oluşturulan sınıfın adı, dosyanın adıyla eşleşir.
 
 Bileşen sınıfının üyeleri bir `@code` blokta tanımlanır. `@code` Bloğunda, bileşen durumu (özellikler, alanlar) olay işleme yöntemleriyle veya diğer bileşen mantığını tanımlamaya yönelik yöntemlerle belirtilir. Birden çok `@code` blok izin verilir.
 
@@ -76,13 +79,13 @@ Statik bir varlık için Web köküne başvurmak`/`üzere temel göreli bir yol 
 <img alt="Company logo" src="/images/logo.png" />
 ```
 
-Razor bileşenleri, tilde işareti gösterimini (`~/` **) desteklemez.**
+Razorbileşenler, tilde işareti gösterimini (`~/` **) desteklemez.**
 
 Uygulamanın temel yolunu ayarlama hakkında daha fazla bilgi için bkz <xref:host-and-deploy/blazor/index#app-base-path>..
 
 ## <a name="tag-helpers-arent-supported-in-components"></a>Etiket Yardımcıları bileşenlerde desteklenmiyor
 
-Razor bileşenlerinde (*. Razor* dosyaları) [Etiket Yardımcıları](xref:mvc/views/tag-helpers/intro) desteklenmez. ' De Blazoretiket Yardımcısı benzeri işlevsellik sağlamak Için, etiket Yardımcısı ile aynı işlevselliğe sahip bir bileşen oluşturun ve bunun yerine bileşeni kullanın.
+[Etiket Yardımcıları](xref:mvc/views/tag-helpers/intro) , Razor bileşenlerinde (*. Razor* dosyaları) desteklenmez. ' De Blazoretiket Yardımcısı benzeri işlevsellik sağlamak Için, etiket Yardımcısı ile aynı işlevselliğe sahip bir bileşen oluşturun ve bunun yerine bileşeni kullanın.
 
 ## <a name="use-components"></a>Bileşenleri kullanma
 
@@ -104,7 +107,7 @@ Bir bileşen bir bileşen adıyla eşleşmeyen büyük harfle yazılmış bir HT
 
 Uygulamasında Blazor yönlendirme, uygulamadaki her erişilebilir bileşene bir rota şablonu sağlanarak elde edilir.
 
-Bir `@page` yönergeyle bir Razor dosyası derlendiğinde, oluşturulan sınıfa yol şablonu <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> belirtilerek verilir. Çalışma zamanında, yönlendirici bileşen sınıflarını bir `RouteAttribute` ile arar ve hangi BILEŞENIN istenen URL ile eşleşen bir rota şablonuna sahip olduğunu işler.
+Yönergeyle Razor bir dosya derlendiğinde, oluşturulan sınıfa yol şablonunu belirten bir <xref:Microsoft.AspNetCore.Mvc.RouteAttribute> değer verilir. `@page` Çalışma zamanında, yönlendirici bileşen sınıflarını bir `RouteAttribute` ile arar ve hangi BILEŞENIN istenen URL ile eşleşen bir rota şablonuna sahip olduğunu işler.
 
 ```razor
 @page "/ParentComponent"
@@ -126,7 +129,7 @@ Bileşenler, `@page` yönergede belirtilen yol şablonundan rota parametreleri a
 
 İsteğe bağlı parametreler desteklenmez, bu nedenle `@page` önceki örnekte iki yönergeler uygulanır. İlki, bir parametre olmadan bileşene gezinmesine izin verir. İkinci `@page` yönerge, `{text}` Route parametresini alır ve değeri `Text` özelliğine atar.
 
-Birden çok klasör sınırlarındaki yolu`*`/`**`yakalayan *catch-all* parametre sözdizimi ( **), Razor** bileşenlerinde (*. Razor*) desteklenmez.
+Birden çok klasör sınırlarındaki Razor yolu`*`/`**`yakalayan *catch-all* parametresi sözdizimi (), bileşenlerde (*. Razor* **) desteklenmez.**
 
 ### <a name="component-parameters"></a>Bileşen parametreleri
 
@@ -166,7 +169,7 @@ Aşağıdaki örnekte, öğesinin işlemek için `ChildComponent` bir Kullanıc�
 
 ## <a name="attribute-splatting-and-arbitrary-parameters"></a>Öznitelik döndürme ve rastgele parametreler
 
-Bileşenler, bileşen tarafından tanımlanan parametrelere ek olarak ek öznitelikler yakalayabilir ve işleyebilir. Ek öznitelikler bir sözlükte yakalanıp *, daha sonra* bileşen [`@attributes`](xref:mvc/views/razor#attributes) Razor yönergesi kullanılarak işlendiğinde bir öğe üzerine bırakılabilir. Bu senaryo, çeşitli özelleştirmeleri destekleyen bir işaretleme öğesi üreten bir bileşen tanımlarken yararlıdır. Örneğin, çok sayıda parametreyi destekleyen bir `<input>` için öznitelikleri ayrı olarak tanımlamak sıkıcı olabilir.
+Bileşenler, bileşen tarafından tanımlanan parametrelere ek olarak ek öznitelikler yakalayabilir ve işleyebilir. Ek öznitelikler bir sözlükte yakalanıp, sonra bileşen [`@attributes`](xref:mvc/views/razor#attributes) Razor yönergesi kullanılarak işlendiğinde bir *öğe üzerine bırakılabilir* . Bu senaryo, çeşitli özelleştirmeleri destekleyen bir işaretleme öğesi üreten bir bileşen tanımlarken yararlıdır. Örneğin, çok sayıda parametreyi destekleyen bir `<input>` için öznitelikleri ayrı olarak tanımlamak sıkıcı olabilir.
 
 Aşağıdaki örnekte `<input>` , ilk öğesi (`id="useIndividualParams"`) bağımsız bileşen parametrelerini kullanır, ancak ikinci `<input>` öğe (`id="useAttributesDict"`) öznitelik splatesini kullanır:
 
@@ -552,12 +555,12 @@ Aşağıdaki `Expander` bileşen:
 
 ## <a name="partial-class-support"></a>Kısmi sınıf desteği
 
-Razor bileşenleri kısmi sınıflar olarak oluşturulur. Razor bileşenleri aşağıdaki yaklaşımlardan birini kullanarak yazılır:
+Razorbileşenler kısmi sınıflar olarak oluşturulur. Razorbileşenler aşağıdaki yaklaşımlardan birini kullanarak yazılır:
 
-* C# kodu, tek bir dosyada [`@code`](xref:mvc/views/razor#code) HTML Işaretlemesi ve Razor kodu olan bir blokta tanımlanmıştır. BlazorŞablonlar, bu yaklaşımı kullanarak Razor bileşenlerini tanımlar.
+* C# kodu, tek bir dosyada [`@code`](xref:mvc/views/razor#code) HTML işaretlemesi ve Razor kodu olan bir blokta tanımlanmıştır. BlazorŞablonlar, Razor bu yaklaşımı kullanarak bileşenlerini tanımlar.
 * C# kodu, kısmi sınıf olarak tanımlanmış bir arka plan kod dosyasına yerleştirilir.
 
-Aşağıdaki örnek, bir `Counter` `@code` Blazor şablondan oluşturulan uygulamada bir blok içeren varsayılan bileşeni gösterir. HTML Markup, Razor kodu ve C# kodu aynı dosyada:
+Aşağıdaki örnek, bir `Counter` `@code` Blazor şablondan oluşturulan uygulamada bir blok içeren varsayılan bileşeni gösterir. HTML Markup, Razor Code ve C# kodu aynı dosyada:
 
 *Counter. Razor*:
 
@@ -611,7 +614,7 @@ namespace BlazorApp.Pages
 }
 ```
 
-Gerekli olan ad alanlarını kısmi sınıf dosyasına gereken şekilde ekleyin. Razor bileşenleri tarafından kullanılan tipik ad alanları şunlardır:
+Gerekli olan ad alanlarını kısmi sınıf dosyasına gereken şekilde ekleyin. Bileşenler tarafından Razor kullanılan tipik ad alanları şunlardır:
 
 ```csharp
 using Microsoft.AspNetCore.Authorization;
@@ -652,7 +655,7 @@ namespace BlazorSample
 
 ## <a name="specify-an-attribute"></a>Bir öznitelik belirtin
 
-Özellikler Razor bileşenlerinde [`@attribute`](xref:mvc/views/razor#attribute) yönergeyle birlikte belirtilebilir. Aşağıdaki örnek, bileşen sınıfına `[Authorize]` özniteliğini uygular:
+Öznitelikler, [`@attribute`](xref:mvc/views/razor#attribute) yönergeyle birlikte Razor bileşenlerde belirtilebilir. Aşağıdaki örnek, bileşen sınıfına `[Authorize]` özniteliğini uygular:
 
 ```razor
 @page "/"
@@ -661,15 +664,15 @@ namespace BlazorSample
 
 ## <a name="import-components"></a>Bileşenleri içeri aktar
 
-Razor ile yazılan bir bileşenin ad alanı temel alınarak belirlenir (öncelik sırasına göre):
+İle Razor yazılmış bir bileşenin ad alanı, tabanlıdır (öncelik sırasına göre):
 
-* [`@namespace`](xref:mvc/views/razor#namespace)Razor dosyası (*. Razor*) biçimlendirmesinde atama (`@namespace BlazorSample.MyNamespace`).
+* [`@namespace`](xref:mvc/views/razor#namespace)dosya (*. Razor*) biçimlendirmesinde atama (`@namespace BlazorSample.MyNamespace`). Razor
 * `RootNamespace` Proje, proje dosyasında (`<RootNamespace>BlazorSample</RootNamespace>`).
 * Proje dosyasının dosya adından (*. csproj*) ve proje kökünden bileşen yolundan alınan proje adı. Örneğin, çerçeve ad alanına `BlazorSample.Pages` *{Project root}/Pages/Index.Razor* (*BlazorSample. csproj*) çözümleniyor. Bileşenler C# ad bağlama kurallarını izler. Bu örnekteki `Index` bileşen için, kapsamdaki bileşenler tüm bileşenlerdir:
   * Aynı klasörde, *sayfalarda*.
   * Proje kökündeki, açıkça farklı bir ad alanı belirtmeyen bileşenler.
 
-Farklı bir ad alanında tanımlanan bileşenler, Razor 'nin [`@using`](xref:mvc/views/razor#using) yönergesi kullanılarak kapsama alınır.
+Farklı bir ad alanında tanımlanan bileşenler, ' ın Razor [`@using`](xref:mvc/views/razor#using) yönergesi kullanılarak kapsama alınır.
 
 *BlazorSample/Shared/* klasöründe başka bir bileşen `Index.razor` `@using` `NavMenu.razor`varsa, bileşeni aşağıdaki ifadesiyle birlikte kullanılabilir:
 
@@ -912,9 +915,9 @@ Alt `Tab` bileşenler, kapsayan `TabSet` ' i basamaklı bir parametre olarak yak
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/Tab.razor)]
 
-## <a name="razor-templates"></a>Razor şablonları
+## <a name="razor-templates"></a>Razorşablondan
 
-Oluşturma parçaları Razor şablonu sözdizimi kullanılarak tanımlanabilir. Razor şablonları, bir UI parçacığı tanımlamak ve aşağıdaki biçimi varsaymak için bir yoldur:
+İşleme parçaları, şablon sözdizimi kullanılarak Razor tanımlanabilir. RazorŞablonlar, UI parçacığı tanımlamanın ve aşağıdaki biçimi varsayacak bir yoldur:
 
 ```razor
 @<{HTML tag}>...</{HTML tag}>

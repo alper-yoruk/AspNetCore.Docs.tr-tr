@@ -1,34 +1,40 @@
 ---
 title: ASP.NET Core'da bağımlılık ekleme
 author: rick-anderson
-description: ASP.NET Core'un bağımlılık enjeksiyonunu nasıl uyguladığını ve nasıl kullanılacağını öğrenin.
+description: ASP.NET Core bağımlılık ekleme ve nasıl kullanılacağı hakkında bilgi edinin.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 03/26/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 4e990329b7ebcfc9cbbff8a3c9895604a22461d3
-ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
+ms.openlocfilehash: 8a4ee8bee09b3d6e9de932dab17bbc5c6494a492
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81661690"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767531"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>ASP.NET Core'da bağımlılık ekleme
 
-Yazar: [Steve Smith](https://ardalis.com/) ve [Scott Addie](https://scottaddie.com)
+, [Steve Smith](https://ardalis.com/) ve [Scott Ade](https://scottaddie.com) tarafından
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core, sınıflar ve bunların bağımlılıkları arasında [Kontrol Inversion (IoC)](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#dependency-inversion) elde etmek için bir teknik tir bağımlılık enjeksiyon (DI) yazılım tasarım deseni destekler.
+ASP.NET Core, sınıflar ve bunların bağımlılıkları arasında [denetimin INVERSION (IoC)](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#dependency-inversion) elde etmek için bir teknik olan bağımlılık ekleme (dı) yazılım tasarım modelini destekler.
 
-MVC denetleyicileri içinde bağımlılık enjeksiyonuna özgü <xref:mvc/controllers/dependency-injection>daha fazla bilgi için bkz.
+MVC denetleyicileri içindeki bağımlılık eklenmesine özgü daha fazla bilgi için bkz <xref:mvc/controllers/dependency-injection>..
 
-[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples) ( nasıl[indirilir](xref:index#how-to-download-a-sample))
+[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="overview-of-dependency-injection"></a>Bağımlılık enjeksiyonuna genel bakış
+## <a name="overview-of-dependency-injection"></a>Bağımlılık eklenmesine genel bakış
 
-*Bağımlılık,* başka bir nesnenin gerektirdiği herhangi bir nesnedir. Bir uygulamadaki diğer `WriteMessage` sınıfların bağlı olduğu bir yöntemle aşağıdaki `MyDependency` sınıfı inceleyin:
+*Bağımlılık* , başka bir nesnenin gerektirdiği herhangi bir nesnedir. Aşağıdaki `MyDependency` sınıfı, bir uygulamadaki diğer `WriteMessage` sınıfların bağlı olduğu bir yöntemle inceleyin:
 
 ```csharp
 public class MyDependency
@@ -47,7 +53,7 @@ public class MyDependency
 }
 ```
 
-Yöntemi bir `MyDependency` sınıf için kullanılabilir hale getirmek için sınıfın bir örneği oluşturulabilir. `WriteMessage` Sınıf `MyDependency` sınıfın bir bağımlılıktır: `IndexModel`
+Yöntemi bir sınıf için `MyDependency` kullanılabilir hale getirmek için sınıfının bir örneği oluşturulabilir. `WriteMessage` `MyDependency` Sınıfı, `IndexModel` sınıfının bir bağımlılığı olur:
 
 ```csharp
 public class IndexModel : PageModel
@@ -62,44 +68,44 @@ public class IndexModel : PageModel
 }
 ```
 
-Sınıf oluşturur ve doğrudan örneğin `MyDependency` bağlıdır. Kod bağımlılıkları (önceki örnekte olduğu gibi) sorunludur ve aşağıdaki nedenlerden dolayı kaçınılmalıdır:
+Sınıf oluşturur ve `MyDependency` örneğe doğrudan bağlıdır. Kod bağımlılıkları (önceki örnekte olduğu gibi) sorunlu olur ve aşağıdaki nedenlerden dolayı kaçınılması gerekir:
 
-* Farklı `MyDependency` bir uygulamayla değiştirmek için sınıfın değiştirilmesi gerekir.
-* Bağımlılıkları `MyDependency` varsa, sınıf tarafından yapılandırılmalıdır. Bağlı olarak birden fazla sınıfa `MyDependency`sahip büyük bir projede, yapılandırma kodu uygulamaya dağılır.
-* Bu uygulamayı birleştirmek zordur. Uygulama, bu yaklaşımla mümkün `MyDependency` olmayan bir sahte veya saplama sınıfı kullanmalıdır.
+* Farklı bir `MyDependency` uygulamayla değiştirmek için, sınıfın değiştirilmesi gerekir.
+* `MyDependency` Bağımlılıkları varsa, sınıfı tarafından yapılandırılması gerekir. Uygulamasına bağlı olarak `MyDependency`, birden çok sınıfı olan büyük bir projede yapılandırma kodu uygulama genelinde dağılmış hale gelir.
+* Bu uygulamanın birim testi zordur. Uygulamanın bu yaklaşım ile mümkün olmayan bir sahte `MyDependency` veya saplama sınıfı kullanması gerekir.
 
-Bağımlılık enjeksiyonu bu sorunları şu yollarla giderir:
+Bağımlılık ekleme bu sorunları şu şekilde giderir:
 
-* Bağımlılık uygulamasını soyutlamak için arabirim veya taban sınıf kullanımı.
-* Bir hizmet kapsayıcısında ki bağımlılığın kaydı. ASP.NET Core dahili servis konteyneri sağlar. <xref:System.IServiceProvider> Hizmetler uygulamanın `Startup.ConfigureServices` yöntemine kaydedilir.
-* Hizmetin kullanıldığı sınıfın yapıcısına *enjeksiyonu.* Çerçeve, artık ihtiyaç duyulmadığında bağımlılığın bir örneğini oluşturma ve ortadan çıkarma sorumluluğunu üstlenir.
+* Bağımlılık uygulamasını soyutlamak için bir arabirim veya temel sınıf kullanımı.
+* Bir hizmet kapsayıcısına bağımlılığın kaydı. ASP.NET Core, <xref:System.IServiceProvider>yerleşik bir hizmet kapsayıcısı sağlar. Hizmetler, uygulamanın `Startup.ConfigureServices` yöntemine kaydedilir.
+* Hizmetin kullanıldığı sınıf oluşturucusuna *ekleme* . Çerçeve, bağımlılığın bir örneğini oluşturma ve artık gerekli olmadığında bu uygulamayı atma sorumluluğunu alır.
 
-Örnek [uygulamada,](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples) `IMyDependency` arabirim, hizmetin uygulamaya sağladığı bir yöntemi tanımlar:
+[Örnek uygulamada](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples), `IMyDependency` arabirim, hizmetin uygulamaya sağladığı bir yöntemi tanımlar:
 
 [!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Interfaces/IMyDependency.cs?name=snippet1)]
 
-Bu arayüz, somut bir tür `MyDependency`tarafından uygulanır:
+Bu arabirim somut bir tür tarafından uygulanır, `MyDependency`:
 
 [!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Services/MyDependency.cs?name=snippet1)]
 
-`MyDependency`onun <xref:Microsoft.Extensions.Logging.ILogger`1> yapıcı bir talep. Bağımlılık enjeksiyonunu zincirli bir şekilde kullanmak alışılmadık bir şey değil. İstenen her bağımlılık sırayla kendi bağımlılıklarını ister. Kapsayıcı grafikteki bağımlılıkları giderir ve tam olarak çözülmüş hizmeti döndürür. Çözülmesi gereken toplu bağımlılıkkümesi genellikle *bağımlılık ağacı,* *bağımlılık grafiği*veya nesne *grafiği*olarak adlandırılır.
+`MyDependency`kendi oluşturucusunda <xref:Microsoft.Extensions.Logging.ILogger`1> bir ister. Bağımlılık ekleme işlemini zincirleme bir biçimde kullanmak olağan dışı değildir. Her istenen bağımlılık, kendi bağımlılıklarını ister. Kapsayıcı grafikteki bağımlılıkları çözer ve tamamen çözümlenen hizmeti döndürür. Çözümlenmesi gereken, genellikle *bağımlılık ağacı*, *bağımlılık grafiği*veya *nesne grafiği*olarak adlandırılan toplu bağımlılıklar kümesi.
 
-`IMyDependency`ve `ILogger<TCategoryName>` servis konteynerine kayıtlı olmalıdır. `IMyDependency``Startup.ConfigureServices`kayıtlıdır. `ILogger<TCategoryName>`günlük soyutlamaaltyapısı tarafından kaydedilir, bu nedenle çerçeve tarafından varsayılan olarak kaydedilmiş bir [çerçeve tarafından sağlanan](#framework-provided-services) bir hizmettir.
+`IMyDependency`ve `ILogger<TCategoryName>` hizmet kapsayıcısında kayıtlı olmalıdır. `IMyDependency`kaydedilir `Startup.ConfigureServices`. `ILogger<TCategoryName>`günlüğe kaydetme soyutlamaları altyapısı tarafından kaydedilir. bu nedenle, Framework tarafından varsayılan olarak kaydedilen [Framework tarafından sağlanmış bir hizmettir](#framework-provided-services) .
 
-Kapsayıcı `ILogger<TCategoryName>` [(genel) açık türleri](/dotnet/csharp/language-reference/language-specification/types#open-and-closed-types)yararlanarak giderir , her [(genel) inşa türü](/dotnet/csharp/language-reference/language-specification/types#constructed-types)kayıt ihtiyacını ortadan kaldırarak:
+Kapsayıcı `ILogger<TCategoryName>` [(genel) açık türlerden](/dotnet/csharp/language-reference/language-specification/types#open-and-closed-types)yararlanarak çözümlenir, her [(genel) oluşturulan türü](/dotnet/csharp/language-reference/language-specification/types#constructed-types)kaydetme ihtiyacını ortadan kaldırır:
 
 ```csharp
 services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
 ```
 
-Örnek uygulamada, `IMyDependency` hizmet beton türüne `MyDependency`kaydedilir. Kayıt, hizmet ömrünü tek bir isteğin ömrüne kadar kapsamlıdır. [Hizmet ömürleri](#service-lifetimes) bu konuda daha sonra açıklanmıştır.
+Örnek uygulamada, `IMyDependency` hizmet somut tür `MyDependency`ile kaydedilir. Kayıt, hizmet ömrünü tek bir isteğin kullanım ömrüne göre kapsamlar. [Hizmet yaşam süreleri](#service-lifetimes) bu konunun ilerleyen kısımlarında açıklanmıştır.
 
 [!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Startup.cs?name=snippet1&highlight=5)]
 
 > [!NOTE]
-> Her `services.Add{SERVICE_NAME}` uzantı yöntemi hizmetleri ekler (ve büyük ölçüde yapılandırır). Örneğin, `services.AddMvc()` Razor Pages ve MVC'nin gerektirdiği hizmetleri ekler. Uygulamaların bu kuralı izlemelerini tavsiye ettik. Hizmet kayıtları gruplarını kapsüllemek için uzantı yöntemlerini [Microsoft.Extensions.DependencyInjection](/dotnet/api/microsoft.extensions.dependencyinjection) ad alanına yerleştirin.
+> Her `services.Add{SERVICE_NAME}` uzantı yöntemi Hizmetleri ekler (ve potansiyel olarak yapılandırır). Örneğin, `services.AddMvc()` Razor Pages ve MVC 'nin gerektirdiği Hizmetleri ekler. Uygulamaların bu kuralı izlemesini öneririz. Hizmet kaydı gruplarını kapsüllemek için uzantı yöntemlerini [Microsoft. Extensions. Dependencyınjection](/dotnet/api/microsoft.extensions.dependencyinjection) ad alanına yerleştirin.
 
-Hizmetin oluşturucusu, yapılandırma [veya](xref:fundamentals/configuration/index) [seçenekler deseni](xref:fundamentals/configuration/options)kullanılarak enjekte edilebilir, bir , bir `string`gibi yerleşik bir [tür](/dotnet/csharp/language-reference/keywords/built-in-types-table)gerektirir:
+Hizmetin Oluşturucusu, gibi [yerleşik bir tür](/dotnet/csharp/language-reference/keywords/built-in-types-table) `string`gerektiriyorsa, tür [yapılandırma](xref:fundamentals/configuration/index) veya [Seçenekler düzeniyle](xref:fundamentals/configuration/options)eklenebilir:
 
 ```csharp
 public class MyDependency : IMyDependency
@@ -115,21 +121,21 @@ public class MyDependency : IMyDependency
 }
 ```
 
-Hizmetin bir örneği, hizmetin kullanıldığı ve özel bir alana atandığı bir sınıfın oluşturucusu aracılığıyla istenir. Alan, sınıf boyunca gerektiğinde hizmete erişmek için kullanılır.
+Hizmetin bir örneği, hizmetin kullanıldığı ve özel bir alana atandığı bir sınıfın Oluşturucusu aracılığıyla istenir. Alanı, sınıfına gereken şekilde hizmete erişmek için kullanılır.
 
-Örnek uygulamada, `IMyDependency` örnek istenir ve hizmetin `WriteMessage` yöntemini aramak için kullanılır:
+Örnek uygulamada, `IMyDependency` örnek istenir ve hizmetin `WriteMessage` yöntemini çağırmak için kullanılır:
 
 [!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Pages/Index.cshtml.cs?name=snippet1&highlight=3,6,13,29-30)]
 
-## <a name="services-injected-into-startup"></a>Başlangıç'a enjekte edilen hizmetler
+## <a name="services-injected-into-startup"></a>Başlangıca eklenen hizmetler
 
-Genel Ana Bilgisayar kullanırken `Startup` oluşturucuya yalnızca aşağıdaki hizmet<xref:Microsoft.Extensions.Hosting.IHostBuilder>türleri enjekte edilebilir ( ):
+Genel ana bilgisayar ( `Startup` <xref:Microsoft.Extensions.Hosting.IHostBuilder>) kullanılırken oluşturucuya yalnızca aşağıdaki hizmet türleri eklenebilir:
 
 * `IWebHostEnvironment`
 * <xref:Microsoft.Extensions.Hosting.IHostEnvironment>
 * <xref:Microsoft.Extensions.Configuration.IConfiguration>
 
-Hizmetler enjekte `Startup.Configure`edilebilir:
+Hizmetler şu şekilde eklenebilir `Startup.Configure`:
 
 ```csharp
 public void Configure(IApplicationBuilder app, IOptions<MyOptions> options)
@@ -140,30 +146,30 @@ public void Configure(IApplicationBuilder app, IOptions<MyOptions> options)
 
 Daha fazla bilgi için bkz. <xref:fundamentals/startup>.
 
-## <a name="framework-provided-services"></a>Çerçeve tarafından sağlanan hizmetler
+## <a name="framework-provided-services"></a>Framework tarafından sunulan hizmetler
 
-Yöntem, `Startup.ConfigureServices` Entity Framework Core ve ASP.NET Core MVC gibi platform özellikleri de dahil olmak üzere uygulamanın kullandığı hizmetleri tanımlamaktan sorumludur. Başlangıçta, `IServiceCollection` sağlanan `ConfigureServices` hizmetler [ana bilgisayar yapılandırılmıştır nasıl](xref:fundamentals/index#host)bağlı olarak çerçeve tarafından tanımlanan vardır. ASP.NET Core şablonuna dayalı bir uygulamanın çerçeve tarafından yüzlerce hizmetin kaydolması nadir değildir. Çerçeveye kayıtlı hizmetlerin küçük bir örneği aşağıdaki tabloda listelenmiştir.
+`Startup.ConfigureServices` Yöntemi, Entity Framework Core ve ASP.NET Core MVC gibi platform özellikleri de dahil olmak üzere, uygulamanın kullandığı hizmetleri tanımlamaktan sorumludur. Başlangıçta, için `IServiceCollection` `ConfigureServices` belirtilen, [konağın nasıl yapılandırıldığına](xref:fundamentals/index#host)bağlı olarak Framework tarafından tanımlanan hizmetlere sahiptir. Çerçeve tarafından kaydedilmiş yüzlerce hizmete sahip olmak ASP.NET Core şablona dayalı bir uygulama için sık görülen bir durumdur. Aşağıdaki tabloda çerçeve kayıtlı hizmetlerden oluşan küçük bir örnek listelenmiştir.
 
 | Hizmet Türü | Ömür |
 | ------------ | -------- |
-| <xref:Microsoft.AspNetCore.Hosting.Builder.IApplicationBuilderFactory?displayProperty=fullName> | Geçi -ci |
-| `IHostApplicationLifetime` | Singleton |
-| `IWebHostEnvironment` | Singleton |
-| <xref:Microsoft.AspNetCore.Hosting.IStartup?displayProperty=fullName> | Singleton |
-| <xref:Microsoft.AspNetCore.Hosting.IStartupFilter?displayProperty=fullName> | Geçi -ci |
-| <xref:Microsoft.AspNetCore.Hosting.Server.IServer?displayProperty=fullName> | Singleton |
-| <xref:Microsoft.AspNetCore.Http.IHttpContextFactory?displayProperty=fullName> | Geçi -ci |
-| <xref:Microsoft.Extensions.Logging.ILogger`1?displayProperty=fullName> | Singleton |
-| <xref:Microsoft.Extensions.Logging.ILoggerFactory?displayProperty=fullName> | Singleton |
-| <xref:Microsoft.Extensions.ObjectPool.ObjectPoolProvider?displayProperty=fullName> | Singleton |
-| <xref:Microsoft.Extensions.Options.IConfigureOptions`1?displayProperty=fullName> | Geçi -ci |
-| <xref:Microsoft.Extensions.Options.IOptions`1?displayProperty=fullName> | Singleton |
-| <xref:System.Diagnostics.DiagnosticSource?displayProperty=fullName> | Singleton |
-| <xref:System.Diagnostics.DiagnosticListener?displayProperty=fullName> | Singleton |
+| <xref:Microsoft.AspNetCore.Hosting.Builder.IApplicationBuilderFactory?displayProperty=fullName> | Larsa |
+| `IHostApplicationLifetime` | Adet |
+| `IWebHostEnvironment` | Adet |
+| <xref:Microsoft.AspNetCore.Hosting.IStartup?displayProperty=fullName> | Adet |
+| <xref:Microsoft.AspNetCore.Hosting.IStartupFilter?displayProperty=fullName> | Larsa |
+| <xref:Microsoft.AspNetCore.Hosting.Server.IServer?displayProperty=fullName> | Adet |
+| <xref:Microsoft.AspNetCore.Http.IHttpContextFactory?displayProperty=fullName> | Larsa |
+| <xref:Microsoft.Extensions.Logging.ILogger`1?displayProperty=fullName> | Adet |
+| <xref:Microsoft.Extensions.Logging.ILoggerFactory?displayProperty=fullName> | Adet |
+| <xref:Microsoft.Extensions.ObjectPool.ObjectPoolProvider?displayProperty=fullName> | Adet |
+| <xref:Microsoft.Extensions.Options.IConfigureOptions`1?displayProperty=fullName> | Larsa |
+| <xref:Microsoft.Extensions.Options.IOptions`1?displayProperty=fullName> | Adet |
+| <xref:System.Diagnostics.DiagnosticSource?displayProperty=fullName> | Adet |
+| <xref:System.Diagnostics.DiagnosticListener?displayProperty=fullName> | Adet |
 
-## <a name="register-additional-services-with-extension-methods"></a>Ek hizmetleri genişletme yöntemleriyle kaydetme
+## <a name="register-additional-services-with-extension-methods"></a>Uzantı yöntemleriyle ek hizmetleri kaydetme
 
-Bir hizmeti kaydetmek için bir hizmet toplama uzantısı yöntemi (ve gerekirse bağımlı hizmetleri) `Add{SERVICE_NAME}` kullanılabilir olduğunda, sözleşme, söz le ilgili hizmetin gerektirdiği tüm hizmetleri kaydetmek için tek bir uzantı yöntemi kullanmaktır. Aşağıdaki kod, [AddDbContext\<TContext>](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext) ve aşağıdaki uzantı yöntemlerini kullanarak kapsayıcıya ek hizmetlerin nasıl ekleyeceğinize bir <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionExtensions.AddIdentityCore*>örnektir:
+Bir hizmet koleksiyonu genişletme yöntemi (ve gerekirse bağımlı hizmetleri) kaydetmek için kullanılabilir olduğunda, bu hizmet için gereken tüm hizmetleri kaydetmek üzere kural tek `Add{SERVICE_NAME}` bir genişletme yöntemi kullanmaktır. Aşağıdaki kod, [Adddbcontext\<tcontext>](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext) uzantı yöntemlerini kullanarak kapsayıcıya ek hizmetler eklemenin bir örneğidir: <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionExtensions.AddIdentityCore*>
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -181,47 +187,47 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Daha fazla bilgi <xref:Microsoft.Extensions.DependencyInjection.ServiceCollection> için API belgelerindeki sınıfa bakın.
+Daha fazla bilgi için API belgelerindeki <xref:Microsoft.Extensions.DependencyInjection.ServiceCollection> sınıfına bakın.
 
-## <a name="service-lifetimes"></a>Hizmet ömürleri
+## <a name="service-lifetimes"></a>Hizmet yaşam süreleri
 
-Her kayıtlı hizmet için uygun bir ömür seçin. ASP.NET Core hizmetleri aşağıdaki yaşam süreleriyle yapılandırılabilir:
+Kayıtlı her hizmet için uygun bir yaşam süresi seçin. ASP.NET Core hizmetler aşağıdaki yaşam süreleri ile yapılandırılabilir:
 
-### <a name="transient"></a>Geçi -ci
+### <a name="transient"></a>Larsa
 
-Geçici yaşam süresi<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddTransient*>hizmetleri ( ) hizmet kapsayıcısından her istendiğinde oluşturulur. Bu ömür, hafif ve devletsiz hizmetler için en iyi şekilde çalışır.
+Geçici ömür Hizmetleri (<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddTransient*>), hizmet kapsayıcısından her istenilişinde oluşturulur. Bu ömür, hafif ve durumsuz hizmetler için en iyi şekilde kullanılır.
 
-### <a name="scoped"></a>Kapsamlı
+### <a name="scoped"></a>Yayıl
 
-Kapsamlı yaşam<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped*>süresi hizmetleri ( ) istemci isteği (bağlantı) başına bir kez oluşturulur.
-
-> [!WARNING]
-> Bir ara yazılımda kapsamlı bir hizmet kullanırken, `Invoke` `InvokeAsync` hizmeti veya yöntemini enjekte edin. [Yapıcı enjeksiyon](xref:mvc/controllers/dependency-injection#constructor-injection) yoluyla enjekte etmeyin çünkü hizmeti tek ton gibi olmaya zorlar. Daha fazla bilgi için bkz. <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
-
-### <a name="singleton"></a>Singleton
-
-Singleton yaşam<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton*>boyu hizmetleri ( ) ilk kez istendiğinde `Startup.ConfigureServices` oluşturulur (veya çalıştırıldığında ve hizmet kaydıyla bir örnek belirtilir). Sonraki her istek aynı örneği kullanır. Uygulama singleton davranışı gerektiriyorsa, hizmet kapsayıcısının hizmetin kullanım ömrünü yönetmesine izin vermek önerilir. Singleton tasarım deseni uygulamayın ve nesnenin sınıftaki ömrünü yönetmek için kullanıcı kodu sağlamayın.
+Kapsamlı ömür Hizmetleri (<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped*>), istemci isteği başına bir kez oluşturulur (bağlantı).
 
 > [!WARNING]
-> Tek tonlu bir hizmeti çözmek tehlikelidir. Sonraki istekleri işlerken hizmetin yanlış duruma sahip olmasına neden olabilir.
+> Bir ara yazılım içinde kapsamlı bir hizmet kullanırken, hizmeti `Invoke` veya `InvokeAsync` yöntemine ekleyin. [Oluşturucu Ekleme](xref:mvc/controllers/dependency-injection#constructor-injection) yoluyla ekleme, hizmeti tek bir gibi davranmaya zoryor. Daha fazla bilgi için bkz. <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
+
+### <a name="singleton"></a>Adet
+
+Tek yaşam süresi Hizmetleri<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton*>() her istendiğinde oluşturulur (veya `Startup.ConfigureServices` çalıştırıldığında ve hizmet kaydıyla bir örnek belirtildiğinde). Her sonraki istek aynı örneği kullanır. Uygulama tek davranış gerektiriyorsa, hizmet kapsayıcısının hizmetin ömrünü yönetmesine izin verilmesi önerilir. Tekil tasarım modelini uygulamayın ve nesnenin sınıfındaki ömrünü yönetmek için Kullanıcı kodu sağlayın.
+
+> [!WARNING]
+> Kapsamlı bir hizmetin tek bir bilgisayardan çözümlenmesi tehlikelidir. Bu, sonraki istekleri işlerken hizmetin yanlış duruma gelmesine neden olabilir.
 
 ## <a name="service-registration-methods"></a>Hizmet kayıt yöntemleri
 
-Hizmet kaydı uzatma yöntemleri, belirli senaryolarda yararlı olan aşırı yüklemeler sunar.
+Hizmet kayıt uzantısı yöntemleri, belirli senaryolarda yararlı olan aşırı yüklemeler sunar.
 
-| Yöntem | Automatic<br>object<br>Elden çıkarma | Birden çok<br>uygulamalar | Pass args |
+| Yöntem | Automatic<br>object<br>elden | Birden çok<br>uygulamalar | Geçiş bağımsız değişkenleri |
 | ------ | :-----------------------------: | :-------------------------: | :-------: |
-| `Add{LIFETIME}<{SERVICE}, {IMPLEMENTATION}>()`<br>Örnek:<br>`services.AddSingleton<IMyDep, MyDep>();` | Evet | Evet | Hayır |
-| `Add{LIFETIME}<{SERVICE}>(sp => new {IMPLEMENTATION})`<br>Örnekler:<br>`services.AddSingleton<IMyDep>(sp => new MyDep());`<br>`services.AddSingleton<IMyDep>(sp => new MyDep("A string!"));` | Evet | Evet | Evet |
-| `Add{LIFETIME}<{IMPLEMENTATION}>()`<br>Örnek:<br>`services.AddSingleton<MyDep>();` | Evet | Hayır | Hayır |
-| `AddSingleton<{SERVICE}>(new {IMPLEMENTATION})`<br>Örnekler:<br>`services.AddSingleton<IMyDep>(new MyDep());`<br>`services.AddSingleton<IMyDep>(new MyDep("A string!"));` | Hayır | Evet | Evet |
-| `AddSingleton(new {IMPLEMENTATION})`<br>Örnekler:<br>`services.AddSingleton(new MyDep());`<br>`services.AddSingleton(new MyDep("A string!"));` | Hayır | Hayır | Evet |
+| `Add{LIFETIME}<{SERVICE}, {IMPLEMENTATION}>()`<br>Örnek:<br>`services.AddSingleton<IMyDep, MyDep>();` | Yes | Yes | Hayır |
+| `Add{LIFETIME}<{SERVICE}>(sp => new {IMPLEMENTATION})`<br>Örnekler:<br>`services.AddSingleton<IMyDep>(sp => new MyDep());`<br>`services.AddSingleton<IMyDep>(sp => new MyDep("A string!"));` | Yes | Yes | Yes |
+| `Add{LIFETIME}<{IMPLEMENTATION}>()`<br>Örnek:<br>`services.AddSingleton<MyDep>();` | Yes | Hayır | Hayır |
+| `AddSingleton<{SERVICE}>(new {IMPLEMENTATION})`<br>Örnekler:<br>`services.AddSingleton<IMyDep>(new MyDep());`<br>`services.AddSingleton<IMyDep>(new MyDep("A string!"));` | Hayır | Yes | Yes |
+| `AddSingleton(new {IMPLEMENTATION})`<br>Örnekler:<br>`services.AddSingleton(new MyDep());`<br>`services.AddSingleton(new MyDep("A string!"));` | Hayır | Hayır | Yes |
 
-Tür elden çıkarma hakkında daha fazla bilgi [için, hizmetlerin Elden Çıkarılması](#disposal-of-services) bölümüne bakın. Birden çok uygulama için ortak bir [senaryo, sınama türleri ile alay ediyor.](xref:test/integration-tests#inject-mock-services)
+Tür çıkarma hakkında daha fazla bilgi için [Hizmetler 'In aktiften çıkarılması](#disposal-of-services) bölümüne bakın. Birden çok uygulama için yaygın bir senaryo, [test için bir sahte işlem türüdür](xref:test/integration-tests#inject-mock-services).
 
-`TryAdd{LIFETIME}`yöntemler yalnızca kayıtlı bir uygulama yoksa hizmeti kaydedin.
+`TryAdd{LIFETIME}`Yöntemler, zaten kayıtlı bir uygulama yoksa hizmeti kaydeder.
 
-Aşağıdaki örnekte, ilk satır `MyDependency` için `IMyDependency`kaydeder. `IMyDependency` Zaten kayıtlı bir uygulama olduğundan ikinci satırın hiçbir etkisi yoktur:
+Aşağıdaki örnekte, ilk satır için `MyDependency` `IMyDependency`kaydedilir. Zaten kayıtlı bir uygulamaya sahip olduğundan `IMyDependency` ikinci satır etkisizdir:
 
 ```csharp
 services.AddSingleton<IMyDependency, MyDependency>();
@@ -236,9 +242,9 @@ Daha fazla bilgi için bkz.
 * <xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddScoped*>
 * <xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddSingleton*>
 
-[TryAddEnumerable (ServiceDescriptor)](xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddEnumerable*) yöntemleri yalnızca *aynı türde*bir uygulama yoksa hizmeti kaydeder. Birden çok hizmet `IEnumerable<{SERVICE}>`. Hizmetleri kaydederken, geliştirici yalnızca aynı türden biri henüz eklenmemişse bir örnek eklemek ister. Genellikle, bu yöntem kapsayıcıda bir örneğin iki kopyasını kaydetmeyi önlemek için kitaplık yazarları tarafından kullanılır.
+[TryAddEnumerable (ServiceDescriptor)](xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddEnumerable*) yöntemleri yalnızca *aynı türde*bir uygulama yoksa hizmeti kaydeder. Aracılığıyla `IEnumerable<{SERVICE}>`birden çok hizmet çözümlenir. Hizmetleri kaydederken, geliştirici yalnızca aynı türden biri zaten eklenmediyse bir örnek eklemek istemektedir. Genellikle, bu yöntem, kapsayıcıda bir örneğin iki kopyasını kaydetmemek için kitaplık yazarları tarafından kullanılır.
 
-Aşağıdaki örnekte, ilk satır `MyDep` için `IMyDep1`kaydeder. İkinci satır `MyDep` için `IMyDep2`kaydeder. Zaten kayıtlı bir uygulama `IMyDep1` vardır, çünkü `MyDep`üçüncü satırın hiçbir etkisi yoktur:
+Aşağıdaki örnekte, ilk satır için `MyDep` `IMyDep1`kaydedilir. İkinci satır için `IMyDep2`kaydedilir `MyDep` . Zaten kayıtlı bir uygulamasına sahip olduğundan `IMyDep1` , üçüncü satırın etkisi yoktur: `MyDep`
 
 ```csharp
 public interface IMyDep1 {}
@@ -252,94 +258,94 @@ services.TryAddEnumerable(ServiceDescriptor.Singleton<IMyDep2, MyDep>());
 services.TryAddEnumerable(ServiceDescriptor.Singleton<IMyDep1, MyDep>());
 ```
 
-### <a name="constructor-injection-behavior"></a>Yapıcı enjeksiyon davranışı
+### <a name="constructor-injection-behavior"></a>Oluşturucu Ekleme davranışı
 
-Hizmetler iki mekanizma yla çözülebilir:
+Hizmetler, iki mekanizma tarafından çözülebilir:
 
 * <xref:System.IServiceProvider>
-* <xref:Microsoft.Extensions.DependencyInjection.ActivatorUtilities>&ndash; Bağımlılık enjeksiyon konteynerinde hizmet kaydı olmadan nesne oluşturmaya izin verir. `ActivatorUtilities`Etiket Yardımcıları, MVC denetleyicileri ve model bağlayıcıları gibi kullanıcıya yönelik soyutlamalarla kullanılır.
+* <xref:Microsoft.Extensions.DependencyInjection.ActivatorUtilities>&ndash; Bağımlılık ekleme kapsayıcısında hizmet kaydı olmadan nesne oluşturulmasına izin verir. `ActivatorUtilities`Etiket Yardımcıları, MVC denetleyicileri ve model ciltler gibi kullanıcıya yönelik soyutlamalar ile kullanılır.
 
-Oluşturucular bağımlılık enjeksiyonu tarafından sağlanmadı bağımsız değişkenleri kabul edebilir, ancak bağımsız değişkenler varsayılan değerleri atamalıdır.
+Oluşturucular bağımlılık ekleme tarafından sağlanmayan bağımsız değişkenleri kabul edebilir, ancak bağımsız değişkenlerin varsayılan değerleri ataması gerekir.
 
-Hizmetler `IServiceProvider` tarafından çözüldüğünde `ActivatorUtilities`veya , [yapıcı enjeksiyon](xref:mvc/controllers/dependency-injection#constructor-injection) bir *kamu* yapıcı gerektirir.
+`IServiceProvider` Hizmetler veya `ActivatorUtilities`tarafından çözümlendiğinde, [Oluşturucu Ekleme](xref:mvc/controllers/dependency-injection#constructor-injection) *ortak* bir Oluşturucu gerektirir.
 
-Hizmetler tarafından `ActivatorUtilities`çözüldüğünde, [yapıcı enjeksiyon](xref:mvc/controllers/dependency-injection#constructor-injection) sadece bir uygulanabilir yapıcı var gerektirir. Yapıcı aşırı yükler desteklenir, ancak bağımsız değişkenleri bağımlılık enjeksiyonu yla yerine getirilebilen yalnızca bir aşırı yükleme olabilir.
+Hizmetler tarafından `ActivatorUtilities`çözümlendiğinde, [Oluşturucu Ekleme](xref:mvc/controllers/dependency-injection#constructor-injection) yalnızca bir adet geçerli oluşturucunun var olmasını gerektirir. Oluşturucu aşırı yüklemeleri desteklenir, ancak bağımsız değişkenleri bağımlılık ekleme tarafından yerine yalnızca bir aşırı yükleme bulunabilir.
 
-## <a name="entity-framework-contexts"></a>Varlık Çerçevesi bağlamları
+## <a name="entity-framework-contexts"></a>Entity Framework bağlamları
 
-Varlık Çerçevesi bağlamları genellikle [kapsamlı yaşam süresi](#service-lifetimes) kullanılarak hizmet kapsayıcısına eklenir, çünkü web uygulaması veritabanı işlemleri normalde istemci isteğine yöneliktir. Veritabanı bağlamını kaydederken bir [adddbContext\<TContext>](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext) aşırı yüklenme tarafından bir ömür belirtilmemişse varsayılan yaşam süresi kapsamlıdır. Belirli bir yaşam süresinin hizmetleri, hizmetten daha kısa bir kullanım ömrüne sahip bir veritabanı bağlamı kullanmamalıdır.
+Entity Framework bağlamlar genellikle, Web uygulaması veritabanı işlemleri normalde istemci isteği kapsamında olduğundan [kapsamlı ömür](#service-lifetimes) kullanılarak hizmet kapsayıcısına eklenir. Veritabanı bağlamı kaydedilirken aşırı yükleme [>bir\<adddbcontext tcontext](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext) tarafından belirtilmemişse, varsayılan yaşam süresi kapsamındadır. Belirli bir yaşam süresinin Hizmetleri, hizmetten daha kısa bir yaşam süresine sahip bir veritabanı bağlamı kullanmamalıdır.
 
-## <a name="lifetime-and-registration-options"></a>Ömür boyu ve kayıt seçenekleri
+## <a name="lifetime-and-registration-options"></a>Ömür ve kayıt seçenekleri
 
-Kullanım ömrü ve kayıt seçenekleri arasındaki farkı göstermek için, görevleri benzersiz bir tanımlayıcıya sahip bir `OperationId`işlem olarak temsil eden aşağıdaki arabirimleri düşünün. Bir işlem hizmetinin kullanım ömrünün aşağıdaki arabirimler için nasıl yapılandırıldığına bağlı olarak, kapsayıcı bir sınıf tarafından istendiğinde hizmetin aynı veya farklı bir örneğini sağlar:
+Ömür ve kayıt seçenekleri arasındaki farkı göstermek için, görevleri benzersiz bir tanımlayıcıya sahip bir işlem olarak temsil eden aşağıdaki arayüzleri göz önünde bulundurun `OperationId`. Bir işlem hizmetinin yaşam süresinin aşağıdaki arabirimler için nasıl yapılandırıldığına bağlı olarak kapsayıcı, bir sınıf tarafından istendiğinde aynı ya da farklı bir hizmet örneği sağlar:
 
 [!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Interfaces/IOperation.cs?name=snippet1)]
 
-Arabirimler `Operation` sınıfta uygulanır. Oluşturucu, `Operation` sağlanmazsa bir GUID oluşturur:
+Arabirimler `Operation` sınıfında uygulanır. Bir `Operation` tane sağlanmazsa Oluşturucu bir GUID oluşturur:
 
 [!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Models/Operation.cs?name=snippet1)]
 
-Diğer `OperationService` `Operation` türlerin her birine bağlı olarak bir kayıtlıdır. Bağımlılık `OperationService` enjeksiyonu yoluyla istendiğinde, bağımlı hizmetin kullanım ömrüne bağlı olarak her hizmetin yeni bir örneğini veya varolan bir örneği alır.
+`OperationService` , Diğer `Operation` türlerin her birine bağlı olarak kaydedilir. `OperationService` Bağımlılık ekleme yoluyla istendiğinde, her bir hizmetin yeni bir örneğini ya da bağımlı hizmetin kullanım ömrü temelinde mevcut bir örneği alır.
 
-* Kapsayıcıdan istendiğinde geçici hizmetler oluşturulduğunda, `OperationId` `IOperationTransient` hizmetin .'den `OperationId` farkı `OperationService`vardır. `OperationService`sınıfın yeni bir `IOperationTransient` örneğini alır. Yeni örnek farklı `OperationId`bir verim verir.
-* Kapsamlı hizmetler istemci isteği başına `OperationId` oluşturulduğunda, `IOperationScoped` hizmetin istemci `OperationService` isteği içindekiyle aynıdır. İstemci istekleri arasında, `OperationId` her iki hizmet de farklı bir değeri paylaşır.
-* Singleton ve singleton-instance hizmetleri bir kez oluşturulduğunda ve tüm `OperationId` istemci istekleri ve tüm hizmetler arasında kullanıldığında, tüm hizmet istekleri arasında sabittir.
+* Kapsayıcıda istendiğinde geçici `OperationId` hizmetler oluşturulduğunda, `IOperationTransient` hizmet öğesinden `OperationId` farklı olur. `OperationService` `OperationService``IOperationTransient` sınıfının yeni bir örneğini alır. Yeni örnek farklı `OperationId`bir şekilde oluşturur.
+* İstemci isteği başına kapsamlı hizmetler oluşturulduğunda, `OperationId` `IOperationScoped` hizmetin istemci isteği `OperationService` içindeki ile aynı olması gerekir. İstemci istekleri arasında her iki hizmet de farklı `OperationId` bir değer paylaşır.
+* Tek ve tek örnekli hizmetler bir kez oluşturulduğunda ve tüm istemci isteklerinde ve tüm hizmetlerde `OperationId` kullanıldığında, tüm hizmet istekleri genelinde sabittir.
 
 [!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Services/OperationService.cs?name=snippet1)]
 
-Her `Startup.ConfigureServices`tür, kapta adlandırılmış ömrüne göre eklenir:
+' `Startup.ConfigureServices`De, her tür kapsayıcısına, adlandırılmış ömrüne göre eklenir:
 
 [!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Startup.cs?name=snippet1&highlight=6-9,12)]
 
-Hizmet, `IOperationSingletonInstance` bilinen bir kimliği olan belirli `Guid.Empty`bir örneği kullanıyor. Bu tür kullanımda olduğunda açıktır (ONUN GUID tüm sıfırlar).
+`IOperationSingletonInstance` Hizmet, bilinen kimliği olan belirli bir örnek kullanıyor `Guid.Empty`. Bu tür kullanımda olduğunda (GUID 'sinin tümü sıfırlardan tamamen) Bu bir şey vardır.
 
-Örnek uygulama, tek tek istekler içinde ve arasında nesne yaşam ömürlerini gösterir. Örnek uygulamanın `IndexModel` her `IOperation` tür ve `OperationService`. Sayfa daha sonra özellik atamaları aracılığıyla sayfa modeli `OperationId` sınıfının ve hizmet değerlerinin tümlerini görüntüler:
+Örnek uygulama, bireysel istekler içindeki ve içindeki nesne yaşam sürelerini gösterir. Örnek uygulama, her `IndexModel` `IOperation` tür ve ' i ister `OperationService`. Daha sonra sayfa, tüm sayfa modeli sınıfının ve hizmetin `OperationId` değerlerini özellik atamaları aracılığıyla görüntüler:
 
 [!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Pages/Index.cshtml.cs?name=snippet1&highlight=7-11,14-18,21-25)]
 
-Aşağıdaki iki çıktı iki isteğin sonuçlarını gösterir:
+Aşağıdaki iki çıktıda iki isteğin sonuçları gösterilmektedir:
 
 **İlk istek:**
 
 Denetleyici işlemleri:
 
-Geçici: d233e165-f417-469b-a866-1cf1935d2518  
+Geçici: d233e165-f417-469B-a866-1cf1935d2518  
 Kapsam: 5d997e2d-55f5-4a64-8388-51c4e3a1ad19  
-Tek kişilik: 01271bc1-9e31-48e7-8f7c-7261b040ded9  
-Örnek: 00000000-0000-0000-0000-0000000000000
+Tek: 01271bc1-9e31-48e7-8f7c-7261b040ded9  
+Örnek: 00000000-0000-0000-0000-000000000000
 
-`OperationService`Işlem:
+`OperationService`operasyonları
 
-Geçici: c6b049eb-1318-4e31-90f1-eb2dd849ff64  
+Geçici: c6b049eb-1318-4E31-90f1-eb2dd849ff64  
 Kapsam: 5d997e2d-55f5-4a64-8388-51c4e3a1ad19  
-Tek kişilik: 01271bc1-9e31-48e7-8f7c-7261b040ded9  
-Örnek: 00000000-0000-0000-0000-0000000000000
+Tek: 01271bc1-9e31-48e7-8f7c-7261b040ded9  
+Örnek: 00000000-0000-0000-0000-000000000000
 
 **İkinci istek:**
 
 Denetleyici işlemleri:
 
-Geçici: b63bd538-0a37-4ff1-90ba-081c5138dda0  
+Geçici: b63bd538-0a37-4FF1-90ba-081c5138dda0  
 Kapsam: 31e820c5-4834-4d22-83fc-a60118acb9f4  
-Tek kişilik: 01271bc1-9e31-48e7-8f7c-7261b040ded9  
-Örnek: 00000000-0000-0000-0000-0000000000000
+Tek: 01271bc1-9e31-48e7-8f7c-7261b040ded9  
+Örnek: 00000000-0000-0000-0000-000000000000
 
-`OperationService`Işlem:
+`OperationService`operasyonları
 
 Geçici: c4cbacb8-36a2-436d-81c8-8c1b78808aaf  
 Kapsam: 31e820c5-4834-4d22-83fc-a60118acb9f4  
-Tek kişilik: 01271bc1-9e31-48e7-8f7c-7261b040ded9  
-Örnek: 00000000-0000-0000-0000-0000000000000
+Tek: 01271bc1-9e31-48e7-8f7c-7261b040ded9  
+Örnek: 00000000-0000-0000-0000-000000000000
 
-Değerlerden hangisinin `OperationId` istek içinde ve istekler arasında farklılık gösterdiğini gözlemleyin:
+`OperationId` Değerlerin bir istek içinde ve istekler arasında değiştiğini gözlemleyin:
 
-* *Geçici* nesneler her zaman farklıdır. Hem birinci `OperationId` hem de ikinci istemci istekleri için `OperationService` geçici değer hem işlemler hem de istemci istekleri arasında farklıdır. Her hizmet isteği ve istemci isteği için yeni bir örnek sağlanır.
-* *Kapsamlı* nesneler istemci isteği içinde aynıdır, ancak istemci istekleri arasında farklıdır.
-* *Singleton* nesneleri, bir `Operation` örneğin sağlanıp sağlanmadığına bakılmaksızın her `Startup.ConfigureServices`nesne ve her istek için aynıdır.
+* *Geçici* nesneler her zaman farklıdır. Hem birinci `OperationId` hem de ikinci istemci isteklerinin geçici değeri hem işlemler hem de `OperationService` istemci istekleri arasında farklıdır. Her hizmet isteğine ve istemci isteğine yeni bir örnek sağlanır.
+* *Kapsamlı* nesneler istemci isteği içinde aynıdır ancak istemci istekleri arasında farklıdır.
+* *Tek* nesneler, ' de `Operation` `Startup.ConfigureServices`bir örneğin sağlanmadığına bakılmaksızın her nesne için ve her istek için aynıdır.
 
-## <a name="call-services-from-main"></a>Ana hizmetten çağrı hizmetleri
+## <a name="call-services-from-main"></a>Ana bilgisayardan Hizmetleri çağır
 
-Uygulama <xref:Microsoft.Extensions.DependencyInjection.IServiceScope> kapsamındaki kapsamlı bir hizmeti çözmek için [iServiceScopeFactory.CreateScope](xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory.CreateScope*) ile bir uygulama oluşturun. Bu yaklaşım, başlatma görevlerini çalıştırmak için başlangıçta kapsamlı bir hizmete erişmek için yararlıdır. Aşağıdaki örnek, aşağıdaki `MyScopedService` `Program.Main`için bir bağlam nasıl elde edilebildiğini gösterir:
+Uygulamanın kapsamındaki <xref:Microsoft.Extensions.DependencyInjection.IServiceScope> bir kapsamlı hizmeti çözümlemek Için [ıvicescopefactory. CreateScope](xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory.CreateScope*) ile bir oluşturun. Bu yaklaşım, başlatma görevlerini çalıştırmak üzere başlangıçta kapsamlı bir hizmete erişmek için yararlıdır. Aşağıdaki örnek, `MyScopedService` içinde `Program.Main`için nasıl bağlam alınacağını gösterir:
 
 ```csharp
 using System;
@@ -382,46 +388,46 @@ public class Program
 }
 ```
 
-## <a name="scope-validation"></a>Kapsam doğrulama
+## <a name="scope-validation"></a>Kapsam doğrulaması
 
-Uygulama Geliştirme ortamında çalışırken ve ana bilgisayarı oluşturmak için [CreateDefaultBuilder'ı](xref:fundamentals/host/generic-host#default-builder-settings) aradığında, varsayılan hizmet sağlayıcısı bunu doğrulamak için denetimler gerçekleştirir:
+Uygulama geliştirme ortamında çalışırken ve Konağı derlemek için [Createdefaultbuilder](xref:fundamentals/host/generic-host#default-builder-settings) çağırdığında, varsayılan hizmet sağlayıcı aşağıdakileri doğrulamak için denetimler gerçekleştirir:
 
-* Kapsamlı hizmetler, kök hizmet sağlayıcısından doğrudan veya dolaylı olarak çözülmez.
-* Kapsamlı hizmetler doğrudan veya dolaylı olarak singleton içine enjekte değildir.
+* Kapsamlı hizmetler doğrudan veya dolaylı olarak kök hizmet sağlayıcısından çözümlenmez.
+* Kapsamlı hizmetler doğrudan veya dolaylı olarak Singleton 'a eklenmiş değildir.
 
-Kök hizmet sağlayıcısı çağrıldığında <xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider*> oluşturulur. Kök servis sağlayıcısının ömrü, sağlayıcı nın uygulamayla birlikte işe başlaması ve uygulama kapandığında imha edilmesiyle uygulamanın/sunucunun ömrüne karşılık gelir.
+Kök hizmet sağlayıcısı çağrıldığında oluşturulur <xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider*> . Kök hizmet sağlayıcısının ömrü, sağlayıcının uygulamayla başladığı ve uygulama kapandığında bırakıldığı uygulama/sunucunun yaşam süresine karşılık gelir.
 
-Kapsamlı hizmetler, bunları oluşturan kapsayıcı tarafından bertaraf edilir. Kök kapsayıcıda kapsamlı bir hizmet oluşturulursa, yalnızca uygulama/sunucu kapatıldığında kök kapsayıcı tarafından bertaraf edildiğinden, hizmetin ömrü etkin bir şekilde singleton'a yükseltilir. Hizmet kapsamlarını doğrulama çağrıldığında `BuildServiceProvider` bu durumları yakalar.
+Kapsamlı hizmetler kendilerini oluşturan kapsayıcı tarafından atılmış. Kök kapsayıcıda kapsamlı bir hizmet oluşturulduysa, hizmetin ömrü etkin şekilde tek başına yükseltilir çünkü yalnızca uygulama/sunucu kapatıldığında kök kapsayıcı tarafından atılmış olur. Hizmet kapsamlarını doğrulamak `BuildServiceProvider` , çağrıldığında bu durumları yakalar.
 
 Daha fazla bilgi için bkz. <xref:fundamentals/host/web-host#scope-validation>.
 
-## <a name="request-services"></a>Talep Hizmetleri
+## <a name="request-services"></a>İstek Hizmetleri
 
-ASP.NET Core isteği içinde sunulan `HttpContext` [hizmetler, HttpContext.RequestServices](xref:Microsoft.AspNetCore.Http.HttpContext.RequestServices) koleksiyonu aracılığıyla açıklanır.
+ASP.NET Core isteği `HttpContext` içinde bulunan hizmetler, [HttpContext. requestservices](xref:Microsoft.AspNetCore.Http.HttpContext.RequestServices) koleksiyonu aracılığıyla sunulur.
 
-İstek Hizmetleri, uygulamanın bir parçası olarak yapılandırılan ve istenen hizmetleri temsil ediyor. Nesneler bağımlılıkları belirttiğinde, bunlar , `RequestServices` `ApplicationServices`değil' de bulunan türlerle karşılanır.
+İstek Hizmetleri, uygulamanın bir parçası olarak yapılandırılan ve istenen hizmetleri temsil eder. Nesneler bağımlılıklar belirttiğinizde, bunlar ' de `RequestServices`bulunan türler tarafından karşılanır. `ApplicationServices`
 
-Genellikle, uygulama bu özellikleri doğrudan kullanmamalıdır. Bunun yerine, sınıf oluşturucular aracılığıyla sınıfların gerektirdiği türleri isteyin ve çerçevenin bağımlılıkları enjekte etmesine izin verin. Bu, sınaması daha kolay olan sınıflar verir.
+Genellikle, uygulamanın bu özellikleri doğrudan kullanmamalıdır. Bunun yerine, sınıfların Sınıf oluşturucuları aracılığıyla gerektirdiği türleri isteyin ve çerçevenin bağımlılıkları eklemesine izin verin. Bu, test etmek daha kolay olan sınıfları oluşturur.
 
 > [!NOTE]
-> Koleksiyona erişmek için kurucu parametreleri olarak `RequestServices` bağımlılıkları talep etmeyi tercih edin.
+> `RequestServices` Koleksiyona erişmek için Oluşturucu parametreleri olarak bağımlılıklar istemeyi tercih edin.
 
-## <a name="design-services-for-dependency-injection"></a>Bağımlılık enjeksiyonu için tasarım hizmetleri
+## <a name="design-services-for-dependency-injection"></a>Bağımlılık ekleme için tasarım hizmetleri
 
 En iyi uygulamalar şunlardır:
 
-* Bağımlılıklarını elde etmek için bağımlılık enjeksiyonu kullanmak için tasarım hizmetleri.
-* Durum lu, statik sınıflardan ve üyelerden kaçının. Bunun yerine, küresel durum oluşturmaktan kaçınan singleton hizmetlerini kullanmak için uygulamalar tasarlayın.
-* Hizmetler içindeki bağımlı sınıfların doğrudan anında anlanmasından kaçının. Kodu belirli bir uygulamaya yönlendirin anlık çiftler.
-* Uygulama sınıflarını küçük, iyi faktörlü ve kolayca test edilebilen hale getirin.
+* Bağımlılıklarını almak için bağımlılık ekleme 'yi kullanmak üzere Hizmetleri tasarlayın.
+* Durum bilgisi olan statik sınıflar ve Üyeler kullanmaktan kaçının. Genel durum oluşturulmasını önlemek yerine, tek tek Hizmetleri kullanmak için uygulamaları tasarlayın.
+* Hizmetler içindeki bağımlı sınıfların doğrudan örneklenmesini önleyin. Doğrudan örnekleme kodu belirli bir uygulamaya bağar.
+* Uygulama sınıflarını küçük, iyi bir şekilde ve kolayca test edin.
 
-Bir sınıfın çok fazla enjekte edilmiş bağımlılığı varsa, bu genellikle sınıfın çok fazla sorumluluğu olduğunun ve [Tek Sorumluluk İlkesi'ni (SRP)](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#single-responsibility)ihlal ettiğini gösteren bir işarettir. Bazı sorumluluklarını yeni bir sınıfa taşıyarak sınıfı yeniden düzenlemeyi dene. Razor Pages sayfa modeli sınıflarının ve MVC denetleyici sınıflarının UI endişelerine odaklanması gerektiğini unutmayın. İş kuralları ve veri erişimi uygulama ayrıntıları bu [ayrı endişelere](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#separation-of-concerns)uygun sınıflarda tutulmalıdır.
+Bir sınıfta çok fazla sayıda bağımlılık varsa, bu genellikle sınıfta çok fazla sorumluluk olduğu ve [tek sorumluluk ilkesini (SRP)](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#single-responsibility)ihlal eden bir imzadır. Bazı sorumlulukları yeni bir sınıfa taşıyarak sınıfı yeniden düzenleme girişimi. Razor Pages sayfa modeli sınıfları ve MVC denetleyici sınıflarının UI kaygılarıyla odaklanıp ilgilenmeyeceğini aklınızda bulundurun. İş kuralları ve veri erişimi uygulama ayrıntıları, bu [ayrı kaygılara](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#separation-of-concerns)uygun sınıflarda tutulmalıdır.
 
-### <a name="disposal-of-services"></a>Hizmetlerin bertaraf edilmesi
+### <a name="disposal-of-services"></a>Hizmetlerin elden çıkarılması
 
-Kapsayıcı, <xref:System.IDisposable.Dispose*> oluşturduğu <xref:System.IDisposable> türleri çağırır. Kullanıcı koduyla kapsayıcıya bir örnek eklenirse, otomatik olarak atılmaz.
+Kapsayıcı, oluşturduğu <xref:System.IDisposable.Dispose*> <xref:System.IDisposable> türleri çağırır. Kapsayıcıda Kullanıcı kodu tarafından bir örnek eklenirse, otomatik olarak atılamaz.
 
-Aşağıdaki örnekte, hizmetler servis kapsayıcısı tarafından oluşturulur ve otomatik olarak atılır:
+Aşağıdaki örnekte, hizmetler hizmet kapsayıcısı tarafından oluşturulur ve otomatik olarak elden alınır:
 
 ```csharp
 public class Service1 : IDisposable {}
@@ -440,10 +446,10 @@ public void ConfigureServices(IServiceCollection services)
 
 Aşağıdaki örnekte:
 
-* Hizmet örnekleri servis kapsayıcısı tarafından oluşturulmaz.
-* Amaçlanan hizmet ömürleri çerçeve tarafından bilinmemektedir.
-* Çerçeve hizmetleri otomatik olarak elden çıkarmaz.
-* Hizmetler geliştirici kodunda açıkça belirtinmezse, uygulama kapanana kadar devam eder.
+* Hizmet örnekleri hizmet kapsayıcısı tarafından oluşturulmaz.
+* Hedeflenen hizmet yaşam süreleri Framework tarafından bilinmemektedir.
+* Framework Hizmetleri otomatik olarak atmaz.
+* Hizmetler, geliştirici kodunda açıkça atılmadıklarında, uygulama kapatılıncaya kadar kalır.
 
 ```csharp
 public class Service1 : IDisposable {}
@@ -456,46 +462,46 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Hizmet imha seçeneklerinin tartışılması [için, IDisposables'i ASP.NET Core'da elden çıkarmanın dört yolunu](https://andrewlock.net/four-ways-to-dispose-idisposables-in-asp-net-core/)görün.
+Hizmet verme seçeneklerinin bir tartışması için bkz. [ASP.NET Core ' de, Ndisposaveya ' ı atılamayan dört yol](https://andrewlock.net/four-ways-to-dispose-idisposables-in-asp-net-core/).
 
 ## <a name="default-service-container-replacement"></a>Varsayılan hizmet kapsayıcısı değiştirme
 
-Dahili servis konteyneri, çerçevenin ve çoğu tüketici uygulamasının ihtiyaçlarına hizmet etmek üzere tasarlanmıştır. Yerleşik kapsayıcının desteklemediği belirli bir özelliğe ihtiyacınız olmadığı sürece yerleşik kapsayıcıyı kullanmanızı öneririz:
+Yerleşik hizmet kapsayıcısı, çerçeve ihtiyaçlarına ve çoğu tüketici uygulamasına hizmet vermek için tasarlanmıştır. Yerleşik kapsayıcının desteklemediği belirli bir özelliğe ihtiyacınız yoksa, yerleşik kapsayıcının kullanılması önerilir, örneğin:
 
-* Özellik enjeksiyonu
-* İsme göre enjeksiyon
-* Çocuk kapları
-* Özel yaşam boyu yönetimi
-* `Func<T>`tembel başlatma desteği
-* Sözleşme tabanlı kayıt
+* Özellik ekleme
+* Ada göre ekleme
+* Alt kapsayıcılar
+* Özel ömür yönetimi
+* `Func<T>`yavaş başlatma desteği
+* Kural tabanlı kayıt
 
-Aşağıdaki 3 ASP.NET.
+Aşağıdaki 3. taraf kapsayıcıları ASP.NET Core uygulamalarla kullanılabilir:
 
 * [Autofac](https://autofac.readthedocs.io/en/latest/integration/aspnetcore.html)
-* [Dryioc](https://www.nuget.org/packages/DryIoc.Microsoft.DependencyInjection)
-* [Zarafet](https://www.nuget.org/packages/Grace.DependencyInjection.Extensions)
-* [LightInject](https://github.com/seesharper/LightInject.Microsoft.DependencyInjection)
-* [Lamar](https://jasperfx.github.io/lamar/)
-* [Zula kutusu](https://github.com/z4kn4fein/stashbox-extensions-dependencyinjection)
+* [Drıioc](https://www.nuget.org/packages/DryIoc.Microsoft.DependencyInjection)
+* [Yetkisiz kullanım](https://www.nuget.org/packages/Grace.DependencyInjection.Extensions)
+* [Açık Inject](https://github.com/seesharper/LightInject.Microsoft.DependencyInjection)
+* [E](https://jasperfx.github.io/lamar/)
+* [Stakıbox](https://github.com/z4kn4fein/stashbox-extensions-dependencyinjection)
 * [Unity](https://www.nuget.org/packages/Unity.Microsoft.DependencyInjection)
 
 ### <a name="thread-safety"></a>İş parçacığı güvenliği
 
-İş parçacığı güvenli singleton hizmetleri oluşturun. Bir singleton hizmetigeçici bir hizmete bağımlıysa, geçici hizmet, singleton tarafından nasıl kullanıldığına bağlı olarak iş parçacığı güvenliği de gerektirebilir.
+İş parçacığı güvenli Singleton Hizmetleri oluşturun. Tek bir hizmetin geçici bir hizmete bağımlılığı varsa, geçici hizmet aynı zamanda tek tek tarafından nasıl kullanıldığına bağlı olarak iş parçacığı güvenliği de gerektirebilir.
 
-[AddSingleton\<TService>(IServiceCollection, Func\<IServiceProvider,TService>)](xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton*)ikinci bağımsız değişkeni gibi tek hizmet fabrika yöntemi, iş parçacığı güvenli olması gerekmez. Bir tür`static`gibi ( ) oluşturucu, tek bir iş parçacığı tarafından bir kez çağrılması garanti.
+Tek bir hizmetin fabrika yöntemi (örneğin, [AddSingleton\<TService> için ikinci bağımsız değişken) (ıseviecollection,\<Func ıserviceprovider, TService>)](xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton*), iş parçacığı açısından güvenli olması gerekmez. Bir Type (`static`) Oluşturucusu gibi, tek bir iş parçacığı tarafından bir kez çağrılması garanti edilir.
 
 ## <a name="recommendations"></a>Öneriler
 
-* `async/await`ve `Task` tabanlı hizmet çözünürlüğü desteklenmez. C# asynchronous yapıcıları desteklemez; bu nedenle, önerilen desen eşitolarak hizmeti çözdükten sonra eşzamanlı yöntemler kullanmaktır.
+* `async/await`ve `Task` tabanlı hizmet çözümlemesi desteklenmez. C# zaman uyumsuz oluşturucuları desteklemez; Bu nedenle, önerilen model hizmeti zaman uyumlu olarak çözümledikten sonra zaman uyumsuz yöntemler kullanmaktır.
 
-* Verileri ve yapılandırmayı doğrudan servis kapsayıcısında depolamaktan kaçının. Örneğin, bir kullanıcının alışveriş sepeti genellikle servis kapsayıcısına eklenmemelidir. Yapılandırma seçenekleri [deseni](xref:fundamentals/configuration/options)kullanmalıdır. Benzer şekilde, yalnızca başka bir nesneye erişime izin vermek için var olan "veri tutucu" nesnelerden kaçının. Bu DI üzerinden gerçek öğeyi istemek daha iyidir.
+* Veri ve yapılandırmayı doğrudan hizmet kapsayıcısında saklamaktan kaçının. Örneğin, bir kullanıcının alışveriş sepeti genellikle hizmet kapsayıcısına eklenmemelidir. Yapılandırma, [Seçenekler modelini](xref:fundamentals/configuration/options)kullanmalıdır. Benzer şekilde, yalnızca başka bir nesneye erişime izin vermek için mevcut olan "veri sahibi" nesnelerinden kaçının. DI aracılığıyla gerçek öğe istemek daha iyidir.
 
-* Hizmetlere statik erişimden kaçının (örneğin, başka bir yerde kullanmak için statik olarak [IApplicationBuilder.ApplicationServices](xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices) yazarak).
+* Hizmetlere statik erişimi önleyin (örneğin, başka bir yerde kullanmak üzere, statik olarak yazılan [IApplicationBuilder. ApplicationServices](xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices) ).
 
-* *Servis bulucu deseni*kullanmaktan kaçının. Örneğin, di yerine <xref:System.IServiceProvider.GetService*> kullanabileceğiniz bir hizmet örneği almak için çağrıda almayın:
+* *Hizmet bulucu deseninin*kullanmaktan kaçının. Örneğin, yerine şunu kullandığınızda <xref:System.IServiceProvider.GetService*> bir hizmet örneği elde etme çağrısı yapmayın:
 
-  **Yanlış:**
+  **Olmayan**
 
   ```csharp
   public class MyClass()
@@ -532,13 +538,13 @@ Aşağıdaki 3 ASP.NET.
   }
   ```
 
-* Önlemek için başka bir hizmet bulucu varyasyon çalışma zamanında bağımlılıkları çözen bir fabrika enjekte etmektir. Bu uygulamaların her ikisi de [Kontrol stratejilerinin Ters Çevrilmesini](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#dependency-inversion) karıştırır.
+* Önlemek için başka bir hizmet bulucu çeşitlemesi, çalışma zamanında bağımlılıkları çözümleyen bir ekleme. Bu uygulamalardan her ikisi de [Denetim stratejilerini geçersiz kılar](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#dependency-inversion) .
 
-* Statik erişimden `HttpContext` kaçının (örneğin, [IHttpContextAccessor.HttpContext).](xref:Microsoft.AspNetCore.Http.IHttpContextAccessor.HttpContext)
+* Uygulamasına `HttpContext` statik erişimi önleyin (örneğin, [ıhttpcontextaccessor. HttpContext](xref:Microsoft.AspNetCore.Http.IHttpContextAccessor.HttpContext)).
 
-Tüm öneri kümeleri gibi, bir öneriyi yoksaymanın gerekli olduğu durumlarla karşılaşabilirsiniz. İstisnalar, çerçevenin kendisi içinde nadir görülen&mdash;özel durumlardır.
+Tüm öneri kümeleri gibi, bir öneriyi yok saymayı yok saymış durumlarla karşılaşabilirsiniz. Özel durumlar&mdash;genellikle çerçevenin kendisi içinde özel durumlardır.
 
-DI statik /küresel nesne erişim desenleri için bir *alternatiftir.* Statik nesne erişimiyle karıştırırsanız DI'nin faydalarını fark edemeyebilirsiniz.
+Dı, statik/genel nesne erişim desenlerinin bir *alternatifidir* . Statik nesne erişimi ile karıştırırsanız, dı 'nin avantajlarını fark edemeyebilirsiniz.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
@@ -548,24 +554,24 @@ DI statik /küresel nesne erişim desenleri için bir *alternatiftir.* Statik ne
 * <xref:blazor/dependency-injection>
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/extensibility>
-* [Bağımlılık Enjeksiyonu (MSDN) ile ASP.NET Çekirdekte Temiz Kod Yazma](https://msdn.microsoft.com/magazine/mt703433.aspx)
-* [Açık Bağımlılıklar İlkesi](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)
-* [Kontrol Kapları ve Bağımlılık Enjeksiyon Deseni (Martin Fowler) Ters](https://www.martinfowler.com/articles/injection.html)
-* [Core DI'de birden çok arabirimi olan bir hizmet ASP.NET](https://andrewlock.net/how-to-register-a-service-with-multiple-interfaces-for-in-asp-net-core-di/)
+* [Bağımlılık ekleme (MSDN) ile ASP.NET Core temizleme kodu yazma](https://msdn.microsoft.com/magazine/mt703433.aspx)
+* [Açık bağımlılıklar Ilkesi](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)
+* [Denetim kapsayıcıları ve bağımlılık ekleme deseninin Inversion 'ı (Marwler)](https://www.martinfowler.com/articles/injection.html)
+* [ASP.NET Core DI 'de birden çok arabirime sahip bir hizmeti kaydetme](https://andrewlock.net/how-to-register-a-service-with-multiple-interfaces-for-in-asp-net-core-di/)
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-ASP.NET Core, sınıflar ve bunların bağımlılıkları arasında [Kontrol Inversion (IoC)](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#dependency-inversion) elde etmek için bir teknik tir bağımlılık enjeksiyon (DI) yazılım tasarım deseni destekler.
+ASP.NET Core, sınıflar ve bunların bağımlılıkları arasında [denetimin INVERSION (IoC)](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#dependency-inversion) elde etmek için bir teknik olan bağımlılık ekleme (dı) yazılım tasarım modelini destekler.
 
-MVC denetleyicileri içinde bağımlılık enjeksiyonuna özgü <xref:mvc/controllers/dependency-injection>daha fazla bilgi için bkz.
+MVC denetleyicileri içindeki bağımlılık eklenmesine özgü daha fazla bilgi için bkz <xref:mvc/controllers/dependency-injection>..
 
-[Örnek kodu görüntüleme veya indirme](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples) ( nasıl[indirilir](xref:index#how-to-download-a-sample))
+[Örnek kodu görüntüleme veya indirme](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="overview-of-dependency-injection"></a>Bağımlılık enjeksiyonuna genel bakış
+## <a name="overview-of-dependency-injection"></a>Bağımlılık eklenmesine genel bakış
 
-*Bağımlılık,* başka bir nesnenin gerektirdiği herhangi bir nesnedir. Bir uygulamadaki diğer `WriteMessage` sınıfların bağlı olduğu bir yöntemle aşağıdaki `MyDependency` sınıfı inceleyin:
+*Bağımlılık* , başka bir nesnenin gerektirdiği herhangi bir nesnedir. Aşağıdaki `MyDependency` sınıfı, bir uygulamadaki diğer `WriteMessage` sınıfların bağlı olduğu bir yöntemle inceleyin:
 
 ```csharp
 public class MyDependency
@@ -584,7 +590,7 @@ public class MyDependency
 }
 ```
 
-Yöntemi bir `MyDependency` sınıf için kullanılabilir hale getirmek için sınıfın bir örneği oluşturulabilir. `WriteMessage` Sınıf `MyDependency` sınıfın bir bağımlılıktır: `IndexModel`
+Yöntemi bir sınıf için `MyDependency` kullanılabilir hale getirmek için sınıfının bir örneği oluşturulabilir. `WriteMessage` `MyDependency` Sınıfı, `IndexModel` sınıfının bir bağımlılığı olur:
 
 ```csharp
 public class IndexModel : PageModel
@@ -599,44 +605,44 @@ public class IndexModel : PageModel
 }
 ```
 
-Sınıf oluşturur ve doğrudan örneğin `MyDependency` bağlıdır. Kod bağımlılıkları (önceki örnekte olduğu gibi) sorunludur ve aşağıdaki nedenlerden dolayı kaçınılmalıdır:
+Sınıf oluşturur ve `MyDependency` örneğe doğrudan bağlıdır. Kod bağımlılıkları (önceki örnekte olduğu gibi) sorunlu olur ve aşağıdaki nedenlerden dolayı kaçınılması gerekir:
 
-* Farklı `MyDependency` bir uygulamayla değiştirmek için sınıfın değiştirilmesi gerekir.
-* Bağımlılıkları `MyDependency` varsa, sınıf tarafından yapılandırılmalıdır. Bağlı olarak birden fazla sınıfa `MyDependency`sahip büyük bir projede, yapılandırma kodu uygulamaya dağılır.
-* Bu uygulamayı birleştirmek zordur. Uygulama, bu yaklaşımla mümkün `MyDependency` olmayan bir sahte veya saplama sınıfı kullanmalıdır.
+* Farklı bir `MyDependency` uygulamayla değiştirmek için, sınıfın değiştirilmesi gerekir.
+* `MyDependency` Bağımlılıkları varsa, sınıfı tarafından yapılandırılması gerekir. Uygulamasına bağlı olarak `MyDependency`, birden çok sınıfı olan büyük bir projede yapılandırma kodu uygulama genelinde dağılmış hale gelir.
+* Bu uygulamanın birim testi zordur. Uygulamanın bu yaklaşım ile mümkün olmayan bir sahte `MyDependency` veya saplama sınıfı kullanması gerekir.
 
-Bağımlılık enjeksiyonu bu sorunları şu yollarla giderir:
+Bağımlılık ekleme bu sorunları şu şekilde giderir:
 
-* Bağımlılık uygulamasını soyutlamak için arabirim veya taban sınıf kullanımı.
-* Bir hizmet kapsayıcısında ki bağımlılığın kaydı. ASP.NET Core dahili servis konteyneri sağlar. <xref:System.IServiceProvider> Hizmetler uygulamanın `Startup.ConfigureServices` yöntemine kaydedilir.
-* Hizmetin kullanıldığı sınıfın yapıcısına *enjeksiyonu.* Çerçeve, artık ihtiyaç duyulmadığında bağımlılığın bir örneğini oluşturma ve ortadan çıkarma sorumluluğunu üstlenir.
+* Bağımlılık uygulamasını soyutlamak için bir arabirim veya temel sınıf kullanımı.
+* Bir hizmet kapsayıcısına bağımlılığın kaydı. ASP.NET Core, <xref:System.IServiceProvider>yerleşik bir hizmet kapsayıcısı sağlar. Hizmetler, uygulamanın `Startup.ConfigureServices` yöntemine kaydedilir.
+* Hizmetin kullanıldığı sınıf oluşturucusuna *ekleme* . Çerçeve, bağımlılığın bir örneğini oluşturma ve artık gerekli olmadığında bu uygulamayı atma sorumluluğunu alır.
 
-Örnek [uygulamada,](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples) `IMyDependency` arabirim, hizmetin uygulamaya sağladığı bir yöntemi tanımlar:
+[Örnek uygulamada](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/dependency-injection/samples), `IMyDependency` arabirim, hizmetin uygulamaya sağladığı bir yöntemi tanımlar:
 
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Interfaces/IMyDependency.cs?name=snippet1)]
 
-Bu arayüz, somut bir tür `MyDependency`tarafından uygulanır:
+Bu arabirim somut bir tür tarafından uygulanır, `MyDependency`:
 
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Services/MyDependency.cs?name=snippet1)]
 
-`MyDependency`onun <xref:Microsoft.Extensions.Logging.ILogger`1> yapıcı bir talep. Bağımlılık enjeksiyonunu zincirli bir şekilde kullanmak alışılmadık bir şey değil. İstenen her bağımlılık sırayla kendi bağımlılıklarını ister. Kapsayıcı grafikteki bağımlılıkları giderir ve tam olarak çözülmüş hizmeti döndürür. Çözülmesi gereken toplu bağımlılıkkümesi genellikle *bağımlılık ağacı,* *bağımlılık grafiği*veya nesne *grafiği*olarak adlandırılır.
+`MyDependency`kendi oluşturucusunda <xref:Microsoft.Extensions.Logging.ILogger`1> bir ister. Bağımlılık ekleme işlemini zincirleme bir biçimde kullanmak olağan dışı değildir. Her istenen bağımlılık, kendi bağımlılıklarını ister. Kapsayıcı grafikteki bağımlılıkları çözer ve tamamen çözümlenen hizmeti döndürür. Çözümlenmesi gereken, genellikle *bağımlılık ağacı*, *bağımlılık grafiği*veya *nesne grafiği*olarak adlandırılan toplu bağımlılıklar kümesi.
 
-`IMyDependency`ve `ILogger<TCategoryName>` servis konteynerine kayıtlı olmalıdır. `IMyDependency``Startup.ConfigureServices`kayıtlıdır. `ILogger<TCategoryName>`günlük soyutlamaaltyapısı tarafından kaydedilir, bu nedenle çerçeve tarafından varsayılan olarak kaydedilmiş bir [çerçeve tarafından sağlanan](#framework-provided-services) bir hizmettir.
+`IMyDependency`ve `ILogger<TCategoryName>` hizmet kapsayıcısında kayıtlı olmalıdır. `IMyDependency`kaydedilir `Startup.ConfigureServices`. `ILogger<TCategoryName>`günlüğe kaydetme soyutlamaları altyapısı tarafından kaydedilir. bu nedenle, Framework tarafından varsayılan olarak kaydedilen [Framework tarafından sağlanmış bir hizmettir](#framework-provided-services) .
 
-Kapsayıcı `ILogger<TCategoryName>` [(genel) açık türleri](/dotnet/csharp/language-reference/language-specification/types#open-and-closed-types)yararlanarak giderir , her [(genel) inşa türü](/dotnet/csharp/language-reference/language-specification/types#constructed-types)kayıt ihtiyacını ortadan kaldırarak:
+Kapsayıcı `ILogger<TCategoryName>` [(genel) açık türlerden](/dotnet/csharp/language-reference/language-specification/types#open-and-closed-types)yararlanarak çözümlenir, her [(genel) oluşturulan türü](/dotnet/csharp/language-reference/language-specification/types#constructed-types)kaydetme ihtiyacını ortadan kaldırır:
 
 ```csharp
 services.AddSingleton(typeof(ILogger<>), typeof(Logger<>));
 ```
 
-Örnek uygulamada, `IMyDependency` hizmet beton türüne `MyDependency`kaydedilir. Kayıt, hizmet ömrünü tek bir isteğin ömrüne kadar kapsamlıdır. [Hizmet ömürleri](#service-lifetimes) bu konuda daha sonra açıklanmıştır.
+Örnek uygulamada, `IMyDependency` hizmet somut tür `MyDependency`ile kaydedilir. Kayıt, hizmet ömrünü tek bir isteğin kullanım ömrüne göre kapsamlar. [Hizmet yaşam süreleri](#service-lifetimes) bu konunun ilerleyen kısımlarında açıklanmıştır.
 
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Startup.cs?name=snippet1&highlight=5)]
 
 > [!NOTE]
-> Her `services.Add{SERVICE_NAME}` uzantı yöntemi hizmetleri ekler (ve büyük ölçüde yapılandırır). Örneğin, `services.AddMvc()` Razor Pages ve MVC'nin gerektirdiği hizmetleri ekler. Uygulamaların bu kuralı izlemelerini tavsiye ettik. Hizmet kayıtları gruplarını kapsüllemek için uzantı yöntemlerini [Microsoft.Extensions.DependencyInjection](/dotnet/api/microsoft.extensions.dependencyinjection) ad alanına yerleştirin.
+> Her `services.Add{SERVICE_NAME}` uzantı yöntemi Hizmetleri ekler (ve potansiyel olarak yapılandırır). Örneğin, `services.AddMvc()` Razor Pages ve MVC 'nin gerektirdiği Hizmetleri ekler. Uygulamaların bu kuralı izlemesini öneririz. Hizmet kaydı gruplarını kapsüllemek için uzantı yöntemlerini [Microsoft. Extensions. Dependencyınjection](/dotnet/api/microsoft.extensions.dependencyinjection) ad alanına yerleştirin.
 
-Hizmetin oluşturucusu, yapılandırma [veya](xref:fundamentals/configuration/index) [seçenekler deseni](xref:fundamentals/configuration/options)kullanılarak enjekte edilebilir, bir , bir `string`gibi yerleşik bir [tür](/dotnet/csharp/language-reference/keywords/built-in-types-table)gerektirir:
+Hizmetin Oluşturucusu, gibi [yerleşik bir tür](/dotnet/csharp/language-reference/keywords/built-in-types-table) `string`gerektiriyorsa, tür [yapılandırma](xref:fundamentals/configuration/index) veya [Seçenekler düzeniyle](xref:fundamentals/configuration/options)eklenebilir:
 
 ```csharp
 public class MyDependency : IMyDependency
@@ -652,21 +658,21 @@ public class MyDependency : IMyDependency
 }
 ```
 
-Hizmetin bir örneği, hizmetin kullanıldığı ve özel bir alana atandığı bir sınıfın oluşturucusu aracılığıyla istenir. Alan, sınıf boyunca gerektiğinde hizmete erişmek için kullanılır.
+Hizmetin bir örneği, hizmetin kullanıldığı ve özel bir alana atandığı bir sınıfın Oluşturucusu aracılığıyla istenir. Alanı, sınıfına gereken şekilde hizmete erişmek için kullanılır.
 
-Örnek uygulamada, `IMyDependency` örnek istenir ve hizmetin `WriteMessage` yöntemini aramak için kullanılır:
+Örnek uygulamada, `IMyDependency` örnek istenir ve hizmetin `WriteMessage` yöntemini çağırmak için kullanılır:
 
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Pages/Index.cshtml.cs?name=snippet1&highlight=3,6,13,29-30)]
 
-## <a name="services-injected-into-startup"></a>Başlangıç'a enjekte edilen hizmetler
+## <a name="services-injected-into-startup"></a>Başlangıca eklenen hizmetler
 
-Genel Ana Bilgisayar kullanırken `Startup` oluşturucuya yalnızca aşağıdaki hizmet<xref:Microsoft.Extensions.Hosting.IHostBuilder>türleri enjekte edilebilir ( ):
+Genel ana bilgisayar ( `Startup` <xref:Microsoft.Extensions.Hosting.IHostBuilder>) kullanılırken oluşturucuya yalnızca aşağıdaki hizmet türleri eklenebilir:
 
 * `IWebHostEnvironment`
 * <xref:Microsoft.Extensions.Hosting.IHostEnvironment>
 * <xref:Microsoft.Extensions.Configuration.IConfiguration>
 
-Hizmetler enjekte `Startup.Configure`edilebilir:
+Hizmetler şu şekilde eklenebilir `Startup.Configure`:
 
 ```csharp
 public void Configure(IApplicationBuilder app, IOptions<MyOptions> options)
@@ -677,30 +683,30 @@ public void Configure(IApplicationBuilder app, IOptions<MyOptions> options)
 
 Daha fazla bilgi için bkz. <xref:fundamentals/startup>.
 
-## <a name="framework-provided-services"></a>Çerçeve tarafından sağlanan hizmetler
+## <a name="framework-provided-services"></a>Framework tarafından sunulan hizmetler
 
-Yöntem, `Startup.ConfigureServices` Entity Framework Core ve ASP.NET Core MVC gibi platform özellikleri de dahil olmak üzere uygulamanın kullandığı hizmetleri tanımlamaktan sorumludur. Başlangıçta, `IServiceCollection` sağlanan `ConfigureServices` hizmetler [ana bilgisayar yapılandırılmıştır nasıl](xref:fundamentals/index#host)bağlı olarak çerçeve tarafından tanımlanan vardır. ASP.NET Core şablonuna dayalı bir uygulamanın çerçeve tarafından yüzlerce hizmetin kaydolması nadir değildir. Çerçeveye kayıtlı hizmetlerin küçük bir örneği aşağıdaki tabloda listelenmiştir.
+`Startup.ConfigureServices` Yöntemi, Entity Framework Core ve ASP.NET Core MVC gibi platform özellikleri de dahil olmak üzere, uygulamanın kullandığı hizmetleri tanımlamaktan sorumludur. Başlangıçta, için `IServiceCollection` `ConfigureServices` belirtilen, [konağın nasıl yapılandırıldığına](xref:fundamentals/index#host)bağlı olarak Framework tarafından tanımlanan hizmetlere sahiptir. Çerçeve tarafından kaydedilmiş yüzlerce hizmete sahip olmak ASP.NET Core şablona dayalı bir uygulama için sık görülen bir durumdur. Aşağıdaki tabloda çerçeve kayıtlı hizmetlerden oluşan küçük bir örnek listelenmiştir.
 
 | Hizmet Türü | Ömür |
 | ------------ | -------- |
-| <xref:Microsoft.AspNetCore.Hosting.Builder.IApplicationBuilderFactory?displayProperty=fullName> | Geçi -ci |
-| <xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime?displayProperty=fullName> | Singleton |
-| <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment?displayProperty=fullName> | Singleton |
-| <xref:Microsoft.AspNetCore.Hosting.IStartup?displayProperty=fullName> | Singleton |
-| <xref:Microsoft.AspNetCore.Hosting.IStartupFilter?displayProperty=fullName> | Geçi -ci |
-| <xref:Microsoft.AspNetCore.Hosting.Server.IServer?displayProperty=fullName> | Singleton |
-| <xref:Microsoft.AspNetCore.Http.IHttpContextFactory?displayProperty=fullName> | Geçi -ci |
-| <xref:Microsoft.Extensions.Logging.ILogger`1?displayProperty=fullName> | Singleton |
-| <xref:Microsoft.Extensions.Logging.ILoggerFactory?displayProperty=fullName> | Singleton |
-| <xref:Microsoft.Extensions.ObjectPool.ObjectPoolProvider?displayProperty=fullName> | Singleton |
-| <xref:Microsoft.Extensions.Options.IConfigureOptions`1?displayProperty=fullName> | Geçi -ci |
-| <xref:Microsoft.Extensions.Options.IOptions`1?displayProperty=fullName> | Singleton |
-| <xref:System.Diagnostics.DiagnosticSource?displayProperty=fullName> | Singleton |
-| <xref:System.Diagnostics.DiagnosticListener?displayProperty=fullName> | Singleton |
+| <xref:Microsoft.AspNetCore.Hosting.Builder.IApplicationBuilderFactory?displayProperty=fullName> | Larsa |
+| <xref:Microsoft.AspNetCore.Hosting.IApplicationLifetime?displayProperty=fullName> | Adet |
+| <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment?displayProperty=fullName> | Adet |
+| <xref:Microsoft.AspNetCore.Hosting.IStartup?displayProperty=fullName> | Adet |
+| <xref:Microsoft.AspNetCore.Hosting.IStartupFilter?displayProperty=fullName> | Larsa |
+| <xref:Microsoft.AspNetCore.Hosting.Server.IServer?displayProperty=fullName> | Adet |
+| <xref:Microsoft.AspNetCore.Http.IHttpContextFactory?displayProperty=fullName> | Larsa |
+| <xref:Microsoft.Extensions.Logging.ILogger`1?displayProperty=fullName> | Adet |
+| <xref:Microsoft.Extensions.Logging.ILoggerFactory?displayProperty=fullName> | Adet |
+| <xref:Microsoft.Extensions.ObjectPool.ObjectPoolProvider?displayProperty=fullName> | Adet |
+| <xref:Microsoft.Extensions.Options.IConfigureOptions`1?displayProperty=fullName> | Larsa |
+| <xref:Microsoft.Extensions.Options.IOptions`1?displayProperty=fullName> | Adet |
+| <xref:System.Diagnostics.DiagnosticSource?displayProperty=fullName> | Adet |
+| <xref:System.Diagnostics.DiagnosticListener?displayProperty=fullName> | Adet |
 
-## <a name="register-additional-services-with-extension-methods"></a>Ek hizmetleri genişletme yöntemleriyle kaydetme
+## <a name="register-additional-services-with-extension-methods"></a>Uzantı yöntemleriyle ek hizmetleri kaydetme
 
-Bir hizmeti kaydetmek için bir hizmet toplama uzantısı yöntemi (ve gerekirse bağımlı hizmetleri) `Add{SERVICE_NAME}` kullanılabilir olduğunda, sözleşme, söz le ilgili hizmetin gerektirdiği tüm hizmetleri kaydetmek için tek bir uzantı yöntemi kullanmaktır. Aşağıdaki kod, [AddDbContext\<TContext>](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext) ve aşağıdaki uzantı yöntemlerini kullanarak kapsayıcıya ek hizmetlerin nasıl ekleyeceğinize bir <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionExtensions.AddIdentityCore*>örnektir:
+Bir hizmet koleksiyonu genişletme yöntemi (ve gerekirse bağımlı hizmetleri) kaydetmek için kullanılabilir olduğunda, bu hizmet için gereken tüm hizmetleri kaydetmek üzere kural tek `Add{SERVICE_NAME}` bir genişletme yöntemi kullanmaktır. Aşağıdaki kod, [Adddbcontext\<tcontext>](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext) uzantı yöntemlerini kullanarak kapsayıcıya ek hizmetler eklemenin bir örneğidir: <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionExtensions.AddIdentityCore*>
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -718,47 +724,47 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Daha fazla bilgi <xref:Microsoft.Extensions.DependencyInjection.ServiceCollection> için API belgelerindeki sınıfa bakın.
+Daha fazla bilgi için API belgelerindeki <xref:Microsoft.Extensions.DependencyInjection.ServiceCollection> sınıfına bakın.
 
-## <a name="service-lifetimes"></a>Hizmet ömürleri
+## <a name="service-lifetimes"></a>Hizmet yaşam süreleri
 
-Her kayıtlı hizmet için uygun bir ömür seçin. ASP.NET Core hizmetleri aşağıdaki yaşam süreleriyle yapılandırılabilir:
+Kayıtlı her hizmet için uygun bir yaşam süresi seçin. ASP.NET Core hizmetler aşağıdaki yaşam süreleri ile yapılandırılabilir:
 
-### <a name="transient"></a>Geçi -ci
+### <a name="transient"></a>Larsa
 
-Geçici yaşam süresi<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddTransient*>hizmetleri ( ) hizmet kapsayıcısından her istendiğinde oluşturulur. Bu ömür, hafif ve devletsiz hizmetler için en iyi şekilde çalışır.
+Geçici ömür Hizmetleri (<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddTransient*>), hizmet kapsayıcısından her istenilişinde oluşturulur. Bu ömür, hafif ve durumsuz hizmetler için en iyi şekilde kullanılır.
 
-### <a name="scoped"></a>Kapsamlı
+### <a name="scoped"></a>Yayıl
 
-Kapsamlı yaşam<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped*>süresi hizmetleri ( ) istemci isteği (bağlantı) başına bir kez oluşturulur.
-
-> [!WARNING]
-> Bir ara yazılımda kapsamlı bir hizmet kullanırken, `Invoke` `InvokeAsync` hizmeti veya yöntemini enjekte edin. [Yapıcı enjeksiyon](xref:mvc/controllers/dependency-injection#constructor-injection) yoluyla enjekte etmeyin çünkü hizmeti tek ton gibi olmaya zorlar. Daha fazla bilgi için bkz. <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
-
-### <a name="singleton"></a>Singleton
-
-Singleton yaşam<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton*>boyu hizmetleri ( ) ilk kez istendiğinde `Startup.ConfigureServices` oluşturulur (veya çalıştırıldığında ve hizmet kaydıyla bir örnek belirtilir). Sonraki her istek aynı örneği kullanır. Uygulama singleton davranışı gerektiriyorsa, hizmet kapsayıcısının hizmetin kullanım ömrünü yönetmesine izin vermek önerilir. Singleton tasarım deseni uygulamayın ve nesnenin sınıftaki ömrünü yönetmek için kullanıcı kodu sağlamayın.
+Kapsamlı ömür Hizmetleri (<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddScoped*>), istemci isteği başına bir kez oluşturulur (bağlantı).
 
 > [!WARNING]
-> Tek tonlu bir hizmeti çözmek tehlikelidir. Sonraki istekleri işlerken hizmetin yanlış duruma sahip olmasına neden olabilir.
+> Bir ara yazılım içinde kapsamlı bir hizmet kullanırken, hizmeti `Invoke` veya `InvokeAsync` yöntemine ekleyin. [Oluşturucu Ekleme](xref:mvc/controllers/dependency-injection#constructor-injection) yoluyla ekleme, hizmeti tek bir gibi davranmaya zoryor. Daha fazla bilgi için bkz. <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
+
+### <a name="singleton"></a>Adet
+
+Tek yaşam süresi Hizmetleri<xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton*>() her istendiğinde oluşturulur (veya `Startup.ConfigureServices` çalıştırıldığında ve hizmet kaydıyla bir örnek belirtildiğinde). Her sonraki istek aynı örneği kullanır. Uygulama tek davranış gerektiriyorsa, hizmet kapsayıcısının hizmetin ömrünü yönetmesine izin verilmesi önerilir. Tekil tasarım modelini uygulamayın ve nesnenin sınıfındaki ömrünü yönetmek için Kullanıcı kodu sağlayın.
+
+> [!WARNING]
+> Kapsamlı bir hizmetin tek bir bilgisayardan çözümlenmesi tehlikelidir. Bu, sonraki istekleri işlerken hizmetin yanlış duruma gelmesine neden olabilir.
 
 ## <a name="service-registration-methods"></a>Hizmet kayıt yöntemleri
 
-Hizmet kaydı uzatma yöntemleri, belirli senaryolarda yararlı olan aşırı yüklemeler sunar.
+Hizmet kayıt uzantısı yöntemleri, belirli senaryolarda yararlı olan aşırı yüklemeler sunar.
 
-| Yöntem | Automatic<br>object<br>Elden çıkarma | Birden çok<br>uygulamalar | Pass args |
+| Yöntem | Automatic<br>object<br>elden | Birden çok<br>uygulamalar | Geçiş bağımsız değişkenleri |
 | ------ | :-----------------------------: | :-------------------------: | :-------: |
-| `Add{LIFETIME}<{SERVICE}, {IMPLEMENTATION}>()`<br>Örnek:<br>`services.AddSingleton<IMyDep, MyDep>();` | Evet | Evet | Hayır |
-| `Add{LIFETIME}<{SERVICE}>(sp => new {IMPLEMENTATION})`<br>Örnekler:<br>`services.AddSingleton<IMyDep>(sp => new MyDep());`<br>`services.AddSingleton<IMyDep>(sp => new MyDep("A string!"));` | Evet | Evet | Evet |
-| `Add{LIFETIME}<{IMPLEMENTATION}>()`<br>Örnek:<br>`services.AddSingleton<MyDep>();` | Evet | Hayır | Hayır |
-| `AddSingleton<{SERVICE}>(new {IMPLEMENTATION})`<br>Örnekler:<br>`services.AddSingleton<IMyDep>(new MyDep());`<br>`services.AddSingleton<IMyDep>(new MyDep("A string!"));` | Hayır | Evet | Evet |
-| `AddSingleton(new {IMPLEMENTATION})`<br>Örnekler:<br>`services.AddSingleton(new MyDep());`<br>`services.AddSingleton(new MyDep("A string!"));` | Hayır | Hayır | Evet |
+| `Add{LIFETIME}<{SERVICE}, {IMPLEMENTATION}>()`<br>Örnek:<br>`services.AddSingleton<IMyDep, MyDep>();` | Yes | Yes | Hayır |
+| `Add{LIFETIME}<{SERVICE}>(sp => new {IMPLEMENTATION})`<br>Örnekler:<br>`services.AddSingleton<IMyDep>(sp => new MyDep());`<br>`services.AddSingleton<IMyDep>(sp => new MyDep("A string!"));` | Yes | Yes | Yes |
+| `Add{LIFETIME}<{IMPLEMENTATION}>()`<br>Örnek:<br>`services.AddSingleton<MyDep>();` | Yes | Hayır | Hayır |
+| `AddSingleton<{SERVICE}>(new {IMPLEMENTATION})`<br>Örnekler:<br>`services.AddSingleton<IMyDep>(new MyDep());`<br>`services.AddSingleton<IMyDep>(new MyDep("A string!"));` | Hayır | Yes | Yes |
+| `AddSingleton(new {IMPLEMENTATION})`<br>Örnekler:<br>`services.AddSingleton(new MyDep());`<br>`services.AddSingleton(new MyDep("A string!"));` | Hayır | Hayır | Yes |
 
-Tür elden çıkarma hakkında daha fazla bilgi [için, hizmetlerin Elden Çıkarılması](#disposal-of-services) bölümüne bakın. Birden çok uygulama için ortak bir [senaryo, sınama türleri ile alay ediyor.](xref:test/integration-tests#inject-mock-services)
+Tür çıkarma hakkında daha fazla bilgi için [Hizmetler 'In aktiften çıkarılması](#disposal-of-services) bölümüne bakın. Birden çok uygulama için yaygın bir senaryo, [test için bir sahte işlem türüdür](xref:test/integration-tests#inject-mock-services).
 
-`TryAdd{LIFETIME}`yöntemler yalnızca kayıtlı bir uygulama yoksa hizmeti kaydedin.
+`TryAdd{LIFETIME}`Yöntemler, zaten kayıtlı bir uygulama yoksa hizmeti kaydeder.
 
-Aşağıdaki örnekte, ilk satır `MyDependency` için `IMyDependency`kaydeder. `IMyDependency` Zaten kayıtlı bir uygulama olduğundan ikinci satırın hiçbir etkisi yoktur:
+Aşağıdaki örnekte, ilk satır için `MyDependency` `IMyDependency`kaydedilir. Zaten kayıtlı bir uygulamaya sahip olduğundan `IMyDependency` ikinci satır etkisizdir:
 
 ```csharp
 services.AddSingleton<IMyDependency, MyDependency>();
@@ -773,9 +779,9 @@ Daha fazla bilgi için bkz.
 * <xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddScoped*>
 * <xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddSingleton*>
 
-[TryAddEnumerable (ServiceDescriptor)](xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddEnumerable*) yöntemleri yalnızca *aynı türde*bir uygulama yoksa hizmeti kaydeder. Birden çok hizmet `IEnumerable<{SERVICE}>`. Hizmetleri kaydederken, geliştirici yalnızca aynı türden biri henüz eklenmemişse bir örnek eklemek ister. Genellikle, bu yöntem kapsayıcıda bir örneğin iki kopyasını kaydetmeyi önlemek için kitaplık yazarları tarafından kullanılır.
+[TryAddEnumerable (ServiceDescriptor)](xref:Microsoft.Extensions.DependencyInjection.Extensions.ServiceCollectionDescriptorExtensions.TryAddEnumerable*) yöntemleri yalnızca *aynı türde*bir uygulama yoksa hizmeti kaydeder. Aracılığıyla `IEnumerable<{SERVICE}>`birden çok hizmet çözümlenir. Hizmetleri kaydederken, geliştirici yalnızca aynı türden biri zaten eklenmediyse bir örnek eklemek istemektedir. Genellikle, bu yöntem, kapsayıcıda bir örneğin iki kopyasını kaydetmemek için kitaplık yazarları tarafından kullanılır.
 
-Aşağıdaki örnekte, ilk satır `MyDep` için `IMyDep1`kaydeder. İkinci satır `MyDep` için `IMyDep2`kaydeder. Zaten kayıtlı bir uygulama `IMyDep1` vardır, çünkü `MyDep`üçüncü satırın hiçbir etkisi yoktur:
+Aşağıdaki örnekte, ilk satır için `MyDep` `IMyDep1`kaydedilir. İkinci satır için `IMyDep2`kaydedilir `MyDep` . Zaten kayıtlı bir uygulamasına sahip olduğundan `IMyDep1` , üçüncü satırın etkisi yoktur: `MyDep`
 
 ```csharp
 public interface IMyDep1 {}
@@ -789,94 +795,94 @@ services.TryAddEnumerable(ServiceDescriptor.Singleton<IMyDep2, MyDep>());
 services.TryAddEnumerable(ServiceDescriptor.Singleton<IMyDep1, MyDep>());
 ```
 
-### <a name="constructor-injection-behavior"></a>Yapıcı enjeksiyon davranışı
+### <a name="constructor-injection-behavior"></a>Oluşturucu Ekleme davranışı
 
-Hizmetler iki mekanizma yla çözülebilir:
+Hizmetler, iki mekanizma tarafından çözülebilir:
 
 * <xref:System.IServiceProvider>
-* <xref:Microsoft.Extensions.DependencyInjection.ActivatorUtilities>&ndash; Bağımlılık enjeksiyon konteynerinde hizmet kaydı olmadan nesne oluşturmaya izin verir. `ActivatorUtilities`Etiket Yardımcıları, MVC denetleyicileri ve model bağlayıcıları gibi kullanıcıya yönelik soyutlamalarla kullanılır.
+* <xref:Microsoft.Extensions.DependencyInjection.ActivatorUtilities>&ndash; Bağımlılık ekleme kapsayıcısında hizmet kaydı olmadan nesne oluşturulmasına izin verir. `ActivatorUtilities`Etiket Yardımcıları, MVC denetleyicileri ve model ciltler gibi kullanıcıya yönelik soyutlamalar ile kullanılır.
 
-Oluşturucular bağımlılık enjeksiyonu tarafından sağlanmadı bağımsız değişkenleri kabul edebilir, ancak bağımsız değişkenler varsayılan değerleri atamalıdır.
+Oluşturucular bağımlılık ekleme tarafından sağlanmayan bağımsız değişkenleri kabul edebilir, ancak bağımsız değişkenlerin varsayılan değerleri ataması gerekir.
 
-Hizmetler `IServiceProvider` tarafından çözüldüğünde `ActivatorUtilities`veya , [yapıcı enjeksiyon](xref:mvc/controllers/dependency-injection#constructor-injection) bir *kamu* yapıcı gerektirir.
+`IServiceProvider` Hizmetler veya `ActivatorUtilities`tarafından çözümlendiğinde, [Oluşturucu Ekleme](xref:mvc/controllers/dependency-injection#constructor-injection) *ortak* bir Oluşturucu gerektirir.
 
-Hizmetler tarafından `ActivatorUtilities`çözüldüğünde, [yapıcı enjeksiyon](xref:mvc/controllers/dependency-injection#constructor-injection) sadece bir uygulanabilir yapıcı var gerektirir. Yapıcı aşırı yükler desteklenir, ancak bağımsız değişkenleri bağımlılık enjeksiyonu yla yerine getirilebilen yalnızca bir aşırı yükleme olabilir.
+Hizmetler tarafından `ActivatorUtilities`çözümlendiğinde, [Oluşturucu Ekleme](xref:mvc/controllers/dependency-injection#constructor-injection) yalnızca bir adet geçerli oluşturucunun var olmasını gerektirir. Oluşturucu aşırı yüklemeleri desteklenir, ancak bağımsız değişkenleri bağımlılık ekleme tarafından yerine yalnızca bir aşırı yükleme bulunabilir.
 
-## <a name="entity-framework-contexts"></a>Varlık Çerçevesi bağlamları
+## <a name="entity-framework-contexts"></a>Entity Framework bağlamları
 
-Varlık Çerçevesi bağlamları genellikle [kapsamlı yaşam süresi](#service-lifetimes) kullanılarak hizmet kapsayıcısına eklenir, çünkü web uygulaması veritabanı işlemleri normalde istemci isteğine yöneliktir. Veritabanı bağlamını kaydederken bir [adddbContext\<TContext>](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext) aşırı yüklenme tarafından bir ömür belirtilmemişse varsayılan yaşam süresi kapsamlıdır. Belirli bir yaşam süresinin hizmetleri, hizmetten daha kısa bir kullanım ömrüne sahip bir veritabanı bağlamı kullanmamalıdır.
+Entity Framework bağlamlar genellikle, Web uygulaması veritabanı işlemleri normalde istemci isteği kapsamında olduğundan [kapsamlı ömür](#service-lifetimes) kullanılarak hizmet kapsayıcısına eklenir. Veritabanı bağlamı kaydedilirken aşırı yükleme [>bir\<adddbcontext tcontext](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext) tarafından belirtilmemişse, varsayılan yaşam süresi kapsamındadır. Belirli bir yaşam süresinin Hizmetleri, hizmetten daha kısa bir yaşam süresine sahip bir veritabanı bağlamı kullanmamalıdır.
 
-## <a name="lifetime-and-registration-options"></a>Ömür boyu ve kayıt seçenekleri
+## <a name="lifetime-and-registration-options"></a>Ömür ve kayıt seçenekleri
 
-Kullanım ömrü ve kayıt seçenekleri arasındaki farkı göstermek için, görevleri benzersiz bir tanımlayıcıya sahip bir `OperationId`işlem olarak temsil eden aşağıdaki arabirimleri düşünün. Bir işlem hizmetinin kullanım ömrünün aşağıdaki arabirimler için nasıl yapılandırıldığına bağlı olarak, kapsayıcı bir sınıf tarafından istendiğinde hizmetin aynı veya farklı bir örneğini sağlar:
+Ömür ve kayıt seçenekleri arasındaki farkı göstermek için, görevleri benzersiz bir tanımlayıcıya sahip bir işlem olarak temsil eden aşağıdaki arayüzleri göz önünde bulundurun `OperationId`. Bir işlem hizmetinin yaşam süresinin aşağıdaki arabirimler için nasıl yapılandırıldığına bağlı olarak kapsayıcı, bir sınıf tarafından istendiğinde aynı ya da farklı bir hizmet örneği sağlar:
 
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Interfaces/IOperation.cs?name=snippet1)]
 
-Arabirimler `Operation` sınıfta uygulanır. Oluşturucu, `Operation` sağlanmazsa bir GUID oluşturur:
+Arabirimler `Operation` sınıfında uygulanır. Bir `Operation` tane sağlanmazsa Oluşturucu bir GUID oluşturur:
 
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Models/Operation.cs?name=snippet1)]
 
-Diğer `OperationService` `Operation` türlerin her birine bağlı olarak bir kayıtlıdır. Bağımlılık `OperationService` enjeksiyonu yoluyla istendiğinde, bağımlı hizmetin kullanım ömrüne bağlı olarak her hizmetin yeni bir örneğini veya varolan bir örneği alır.
+`OperationService` , Diğer `Operation` türlerin her birine bağlı olarak kaydedilir. `OperationService` Bağımlılık ekleme yoluyla istendiğinde, her bir hizmetin yeni bir örneğini ya da bağımlı hizmetin kullanım ömrü temelinde mevcut bir örneği alır.
 
-* Kapsayıcıdan istendiğinde geçici hizmetler oluşturulduğunda, `OperationId` `IOperationTransient` hizmetin .'den `OperationId` farkı `OperationService`vardır. `OperationService`sınıfın yeni bir `IOperationTransient` örneğini alır. Yeni örnek farklı `OperationId`bir verim verir.
-* Kapsamlı hizmetler istemci isteği başına `OperationId` oluşturulduğunda, `IOperationScoped` hizmetin istemci `OperationService` isteği içindekiyle aynıdır. İstemci istekleri arasında, `OperationId` her iki hizmet de farklı bir değeri paylaşır.
-* Singleton ve singleton-instance hizmetleri bir kez oluşturulduğunda ve tüm `OperationId` istemci istekleri ve tüm hizmetler arasında kullanıldığında, tüm hizmet istekleri arasında sabittir.
+* Kapsayıcıda istendiğinde geçici `OperationId` hizmetler oluşturulduğunda, `IOperationTransient` hizmet öğesinden `OperationId` farklı olur. `OperationService` `OperationService``IOperationTransient` sınıfının yeni bir örneğini alır. Yeni örnek farklı `OperationId`bir şekilde oluşturur.
+* İstemci isteği başına kapsamlı hizmetler oluşturulduğunda, `OperationId` `IOperationScoped` hizmetin istemci isteği `OperationService` içindeki ile aynı olması gerekir. İstemci istekleri arasında her iki hizmet de farklı `OperationId` bir değer paylaşır.
+* Tek ve tek örnekli hizmetler bir kez oluşturulduğunda ve tüm istemci isteklerinde ve tüm hizmetlerde `OperationId` kullanıldığında, tüm hizmet istekleri genelinde sabittir.
 
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Services/OperationService.cs?name=snippet1)]
 
-Her `Startup.ConfigureServices`tür, kapta adlandırılmış ömrüne göre eklenir:
+' `Startup.ConfigureServices`De, her tür kapsayıcısına, adlandırılmış ömrüne göre eklenir:
 
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Startup.cs?name=snippet1&highlight=6-9,12)]
 
-Hizmet, `IOperationSingletonInstance` bilinen bir kimliği olan belirli `Guid.Empty`bir örneği kullanıyor. Bu tür kullanımda olduğunda açıktır (ONUN GUID tüm sıfırlar).
+`IOperationSingletonInstance` Hizmet, bilinen kimliği olan belirli bir örnek kullanıyor `Guid.Empty`. Bu tür kullanımda olduğunda (GUID 'sinin tümü sıfırlardan tamamen) Bu bir şey vardır.
 
-Örnek uygulama, tek tek istekler içinde ve arasında nesne yaşam ömürlerini gösterir. Örnek uygulamanın `IndexModel` her `IOperation` tür ve `OperationService`. Sayfa daha sonra özellik atamaları aracılığıyla sayfa modeli `OperationId` sınıfının ve hizmet değerlerinin tümlerini görüntüler:
+Örnek uygulama, bireysel istekler içindeki ve içindeki nesne yaşam sürelerini gösterir. Örnek uygulama, her `IndexModel` `IOperation` tür ve ' i ister `OperationService`. Daha sonra sayfa, tüm sayfa modeli sınıfının ve hizmetin `OperationId` değerlerini özellik atamaları aracılığıyla görüntüler:
 
 [!code-csharp[](dependency-injection/samples/2.x/DependencyInjectionSample/Pages/Index.cshtml.cs?name=snippet1&highlight=7-11,14-18,21-25)]
 
-Aşağıdaki iki çıktı iki isteğin sonuçlarını gösterir:
+Aşağıdaki iki çıktıda iki isteğin sonuçları gösterilmektedir:
 
 **İlk istek:**
 
 Denetleyici işlemleri:
 
-Geçici: d233e165-f417-469b-a866-1cf1935d2518  
+Geçici: d233e165-f417-469B-a866-1cf1935d2518  
 Kapsam: 5d997e2d-55f5-4a64-8388-51c4e3a1ad19  
-Tek kişilik: 01271bc1-9e31-48e7-8f7c-7261b040ded9  
-Örnek: 00000000-0000-0000-0000-0000000000000
+Tek: 01271bc1-9e31-48e7-8f7c-7261b040ded9  
+Örnek: 00000000-0000-0000-0000-000000000000
 
-`OperationService`Işlem:
+`OperationService`operasyonları
 
-Geçici: c6b049eb-1318-4e31-90f1-eb2dd849ff64  
+Geçici: c6b049eb-1318-4E31-90f1-eb2dd849ff64  
 Kapsam: 5d997e2d-55f5-4a64-8388-51c4e3a1ad19  
-Tek kişilik: 01271bc1-9e31-48e7-8f7c-7261b040ded9  
-Örnek: 00000000-0000-0000-0000-0000000000000
+Tek: 01271bc1-9e31-48e7-8f7c-7261b040ded9  
+Örnek: 00000000-0000-0000-0000-000000000000
 
 **İkinci istek:**
 
 Denetleyici işlemleri:
 
-Geçici: b63bd538-0a37-4ff1-90ba-081c5138dda0  
+Geçici: b63bd538-0a37-4FF1-90ba-081c5138dda0  
 Kapsam: 31e820c5-4834-4d22-83fc-a60118acb9f4  
-Tek kişilik: 01271bc1-9e31-48e7-8f7c-7261b040ded9  
-Örnek: 00000000-0000-0000-0000-0000000000000
+Tek: 01271bc1-9e31-48e7-8f7c-7261b040ded9  
+Örnek: 00000000-0000-0000-0000-000000000000
 
-`OperationService`Işlem:
+`OperationService`operasyonları
 
 Geçici: c4cbacb8-36a2-436d-81c8-8c1b78808aaf  
 Kapsam: 31e820c5-4834-4d22-83fc-a60118acb9f4  
-Tek kişilik: 01271bc1-9e31-48e7-8f7c-7261b040ded9  
-Örnek: 00000000-0000-0000-0000-0000000000000
+Tek: 01271bc1-9e31-48e7-8f7c-7261b040ded9  
+Örnek: 00000000-0000-0000-0000-000000000000
 
-Değerlerden hangisinin `OperationId` istek içinde ve istekler arasında farklılık gösterdiğini gözlemleyin:
+`OperationId` Değerlerin bir istek içinde ve istekler arasında değiştiğini gözlemleyin:
 
-* *Geçici* nesneler her zaman farklıdır. Hem birinci `OperationId` hem de ikinci istemci istekleri için `OperationService` geçici değer hem işlemler hem de istemci istekleri arasında farklıdır. Her hizmet isteği ve istemci isteği için yeni bir örnek sağlanır.
-* *Kapsamlı* nesneler istemci isteği içinde aynıdır, ancak istemci istekleri arasında farklıdır.
-* *Singleton* nesneleri, bir `Operation` örneğin sağlanıp sağlanmadığına bakılmaksızın her `Startup.ConfigureServices`nesne ve her istek için aynıdır.
+* *Geçici* nesneler her zaman farklıdır. Hem birinci `OperationId` hem de ikinci istemci isteklerinin geçici değeri hem işlemler hem de `OperationService` istemci istekleri arasında farklıdır. Her hizmet isteğine ve istemci isteğine yeni bir örnek sağlanır.
+* *Kapsamlı* nesneler istemci isteği içinde aynıdır ancak istemci istekleri arasında farklıdır.
+* *Tek* nesneler, ' de `Operation` `Startup.ConfigureServices`bir örneğin sağlanmadığına bakılmaksızın her nesne için ve her istek için aynıdır.
 
-## <a name="call-services-from-main"></a>Ana hizmetten çağrı hizmetleri
+## <a name="call-services-from-main"></a>Ana bilgisayardan Hizmetleri çağır
 
-Uygulama <xref:Microsoft.Extensions.DependencyInjection.IServiceScope> kapsamındaki kapsamlı bir hizmeti çözmek için [iServiceScopeFactory.CreateScope](xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory.CreateScope*) ile bir uygulama oluşturun. Bu yaklaşım, başlatma görevlerini çalıştırmak için başlangıçta kapsamlı bir hizmete erişmek için yararlıdır. Aşağıdaki örnek, aşağıdaki `MyScopedService` `Program.Main`için bir bağlam nasıl elde edilebildiğini gösterir:
+Uygulamanın kapsamındaki <xref:Microsoft.Extensions.DependencyInjection.IServiceScope> bir kapsamlı hizmeti çözümlemek Için [ıvicescopefactory. CreateScope](xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory.CreateScope*) ile bir oluşturun. Bu yaklaşım, başlatma görevlerini çalıştırmak üzere başlangıçta kapsamlı bir hizmete erişmek için yararlıdır. Aşağıdaki örnek, `MyScopedService` içinde `Program.Main`için nasıl bağlam alınacağını gösterir:
 
 ```csharp
 using System;
@@ -917,46 +923,46 @@ public class Program
 }
 ```
 
-## <a name="scope-validation"></a>Kapsam doğrulama
+## <a name="scope-validation"></a>Kapsam doğrulaması
 
-Uygulama Geliştirme ortamında çalışırken, varsayılan hizmet sağlayıcısı aşağıdakileri doğrulamak için denetimler gerçekleştirir:
+Uygulama geliştirme ortamında çalışırken, varsayılan hizmet sağlayıcısı şunları doğrulamak için denetimler gerçekleştirir:
 
-* Kapsamlı hizmetler, kök hizmet sağlayıcısından doğrudan veya dolaylı olarak çözülmez.
-* Kapsamlı hizmetler doğrudan veya dolaylı olarak singleton içine enjekte değildir.
+* Kapsamlı hizmetler doğrudan veya dolaylı olarak kök hizmet sağlayıcısından çözümlenmez.
+* Kapsamlı hizmetler doğrudan veya dolaylı olarak Singleton 'a eklenmiş değildir.
 
-Kök hizmet sağlayıcısı çağrıldığında <xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider*> oluşturulur. Kök servis sağlayıcısının ömrü, sağlayıcı nın uygulamayla birlikte işe başlaması ve uygulama kapandığında imha edilmesiyle uygulamanın/sunucunun ömrüne karşılık gelir.
+Kök hizmet sağlayıcısı çağrıldığında oluşturulur <xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionContainerBuilderExtensions.BuildServiceProvider*> . Kök hizmet sağlayıcısının ömrü, sağlayıcının uygulamayla başladığı ve uygulama kapandığında bırakıldığı uygulama/sunucunun yaşam süresine karşılık gelir.
 
-Kapsamlı hizmetler, bunları oluşturan kapsayıcı tarafından bertaraf edilir. Kök kapsayıcıda kapsamlı bir hizmet oluşturulursa, yalnızca uygulama/sunucu kapatıldığında kök kapsayıcı tarafından bertaraf edildiğinden, hizmetin ömrü etkin bir şekilde singleton'a yükseltilir. Hizmet kapsamlarını doğrulama çağrıldığında `BuildServiceProvider` bu durumları yakalar.
+Kapsamlı hizmetler kendilerini oluşturan kapsayıcı tarafından atılmış. Kök kapsayıcıda kapsamlı bir hizmet oluşturulduysa, hizmetin ömrü etkin şekilde tek başına yükseltilir çünkü yalnızca uygulama/sunucu kapatıldığında kök kapsayıcı tarafından atılmış olur. Hizmet kapsamlarını doğrulamak `BuildServiceProvider` , çağrıldığında bu durumları yakalar.
 
 Daha fazla bilgi için bkz. <xref:fundamentals/host/web-host#scope-validation>.
 
-## <a name="request-services"></a>Talep Hizmetleri
+## <a name="request-services"></a>İstek Hizmetleri
 
-ASP.NET Core isteği içinde sunulan `HttpContext` [hizmetler, HttpContext.RequestServices](xref:Microsoft.AspNetCore.Http.HttpContext.RequestServices) koleksiyonu aracılığıyla açıklanır.
+ASP.NET Core isteği `HttpContext` içinde bulunan hizmetler, [HttpContext. requestservices](xref:Microsoft.AspNetCore.Http.HttpContext.RequestServices) koleksiyonu aracılığıyla sunulur.
 
-İstek Hizmetleri, uygulamanın bir parçası olarak yapılandırılan ve istenen hizmetleri temsil ediyor. Nesneler bağımlılıkları belirttiğinde, bunlar , `RequestServices` `ApplicationServices`değil' de bulunan türlerle karşılanır.
+İstek Hizmetleri, uygulamanın bir parçası olarak yapılandırılan ve istenen hizmetleri temsil eder. Nesneler bağımlılıklar belirttiğinizde, bunlar ' de `RequestServices`bulunan türler tarafından karşılanır. `ApplicationServices`
 
-Genellikle, uygulama bu özellikleri doğrudan kullanmamalıdır. Bunun yerine, sınıf oluşturucular aracılığıyla sınıfların gerektirdiği türleri isteyin ve çerçevenin bağımlılıkları enjekte etmesine izin verin. Bu, sınaması daha kolay olan sınıflar verir.
+Genellikle, uygulamanın bu özellikleri doğrudan kullanmamalıdır. Bunun yerine, sınıfların Sınıf oluşturucuları aracılığıyla gerektirdiği türleri isteyin ve çerçevenin bağımlılıkları eklemesine izin verin. Bu, test etmek daha kolay olan sınıfları oluşturur.
 
 > [!NOTE]
-> Koleksiyona erişmek için kurucu parametreleri olarak `RequestServices` bağımlılıkları talep etmeyi tercih edin.
+> `RequestServices` Koleksiyona erişmek için Oluşturucu parametreleri olarak bağımlılıklar istemeyi tercih edin.
 
-## <a name="design-services-for-dependency-injection"></a>Bağımlılık enjeksiyonu için tasarım hizmetleri
+## <a name="design-services-for-dependency-injection"></a>Bağımlılık ekleme için tasarım hizmetleri
 
 En iyi uygulamalar şunlardır:
 
-* Bağımlılıklarını elde etmek için bağımlılık enjeksiyonu kullanmak için tasarım hizmetleri.
-* Durum lu, statik sınıflardan ve üyelerden kaçının. Bunun yerine, küresel durum oluşturmaktan kaçınan singleton hizmetlerini kullanmak için uygulamalar tasarlayın.
-* Hizmetler içindeki bağımlı sınıfların doğrudan anında anlanmasından kaçının. Kodu belirli bir uygulamaya yönlendirin anlık çiftler.
-* Uygulama sınıflarını küçük, iyi faktörlü ve kolayca test edilebilen hale getirin.
+* Bağımlılıklarını almak için bağımlılık ekleme 'yi kullanmak üzere Hizmetleri tasarlayın.
+* Durum bilgisi olan statik sınıflar ve Üyeler kullanmaktan kaçının. Genel durum oluşturulmasını önlemek yerine, tek tek Hizmetleri kullanmak için uygulamaları tasarlayın.
+* Hizmetler içindeki bağımlı sınıfların doğrudan örneklenmesini önleyin. Doğrudan örnekleme kodu belirli bir uygulamaya bağar.
+* Uygulama sınıflarını küçük, iyi bir şekilde ve kolayca test edin.
 
-Bir sınıfın çok fazla enjekte edilmiş bağımlılığı varsa, bu genellikle sınıfın çok fazla sorumluluğu olduğunun ve [Tek Sorumluluk İlkesi'ni (SRP)](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#single-responsibility)ihlal ettiğini gösteren bir işarettir. Bazı sorumluluklarını yeni bir sınıfa taşıyarak sınıfı yeniden düzenlemeyi dene. Razor Pages sayfa modeli sınıflarının ve MVC denetleyici sınıflarının UI endişelerine odaklanması gerektiğini unutmayın. İş kuralları ve veri erişimi uygulama ayrıntıları bu [ayrı endişelere](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#separation-of-concerns)uygun sınıflarda tutulmalıdır.
+Bir sınıfta çok fazla sayıda bağımlılık varsa, bu genellikle sınıfta çok fazla sorumluluk olduğu ve [tek sorumluluk ilkesini (SRP)](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#single-responsibility)ihlal eden bir imzadır. Bazı sorumlulukları yeni bir sınıfa taşıyarak sınıfı yeniden düzenleme girişimi. Sayfaların sayfa modeli sınıflarının Razor ve MVC denetleyici sınıflarının Kullanıcı arabirimi endişeleri üzerine odaklandığını unutmayın. İş kuralları ve veri erişimi uygulama ayrıntıları, bu [ayrı kaygılara](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#separation-of-concerns)uygun sınıflarda tutulmalıdır.
 
-### <a name="disposal-of-services"></a>Hizmetlerin bertaraf edilmesi
+### <a name="disposal-of-services"></a>Hizmetlerin elden çıkarılması
 
-Kapsayıcı, <xref:System.IDisposable.Dispose*> oluşturduğu <xref:System.IDisposable> türleri çağırır. Kullanıcı koduyla kapsayıcıya bir örnek eklenirse, otomatik olarak atılmaz.
+Kapsayıcı, oluşturduğu <xref:System.IDisposable.Dispose*> <xref:System.IDisposable> türleri çağırır. Kapsayıcıda Kullanıcı kodu tarafından bir örnek eklenirse, otomatik olarak atılamaz.
 
-Aşağıdaki örnekte, hizmetler servis kapsayıcısı tarafından oluşturulur ve otomatik olarak atılır:
+Aşağıdaki örnekte, hizmetler hizmet kapsayıcısı tarafından oluşturulur ve otomatik olarak elden alınır:
 
 ```csharp
 public class Service1 : IDisposable {}
@@ -975,10 +981,10 @@ public void ConfigureServices(IServiceCollection services)
 
 Aşağıdaki örnekte:
 
-* Hizmet örnekleri servis kapsayıcısı tarafından oluşturulmaz.
-* Amaçlanan hizmet ömürleri çerçeve tarafından bilinmemektedir.
-* Çerçeve hizmetleri otomatik olarak elden çıkarmaz.
-* Hizmetler geliştirici kodunda açıkça belirtinmezse, uygulama kapanana kadar devam eder.
+* Hizmet örnekleri hizmet kapsayıcısı tarafından oluşturulmaz.
+* Hedeflenen hizmet yaşam süreleri Framework tarafından bilinmemektedir.
+* Framework Hizmetleri otomatik olarak atmaz.
+* Hizmetler, geliştirici kodunda açıkça atılmadıklarında, uygulama kapatılıncaya kadar kalır.
 
 ```csharp
 public class Service1 : IDisposable {}
@@ -993,44 +999,44 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="default-service-container-replacement"></a>Varsayılan hizmet kapsayıcısı değiştirme
 
-Dahili servis konteyneri, çerçevenin ve çoğu tüketici uygulamasının ihtiyaçlarına hizmet etmek üzere tasarlanmıştır. Yerleşik kapsayıcının desteklemediği belirli bir özelliğe ihtiyacınız olmadığı sürece yerleşik kapsayıcıyı kullanmanızı öneririz:
+Yerleşik hizmet kapsayıcısı, çerçeve ihtiyaçlarına ve çoğu tüketici uygulamasına hizmet vermek için tasarlanmıştır. Yerleşik kapsayıcının desteklemediği belirli bir özelliğe ihtiyacınız yoksa, yerleşik kapsayıcının kullanılması önerilir, örneğin:
 
-* Özellik enjeksiyonu
-* İsme göre enjeksiyon
-* Çocuk kapları
-* Özel yaşam boyu yönetimi
-* `Func<T>`tembel başlatma desteği
-* Sözleşme tabanlı kayıt
+* Özellik ekleme
+* Ada göre ekleme
+* Alt kapsayıcılar
+* Özel ömür yönetimi
+* `Func<T>`yavaş başlatma desteği
+* Kural tabanlı kayıt
 
-Aşağıdaki 3 ASP.NET.
+Aşağıdaki 3. taraf kapsayıcıları ASP.NET Core uygulamalarla kullanılabilir:
 
 * [Autofac](https://autofac.readthedocs.io/en/latest/integration/aspnetcore.html)
-* [Dryioc](https://www.nuget.org/packages/DryIoc.Microsoft.DependencyInjection)
-* [Zarafet](https://www.nuget.org/packages/Grace.DependencyInjection.Extensions)
-* [LightInject](https://github.com/seesharper/LightInject.Microsoft.DependencyInjection)
-* [Lamar](https://jasperfx.github.io/lamar/)
-* [Zula kutusu](https://github.com/z4kn4fein/stashbox-extensions-dependencyinjection)
+* [Drıioc](https://www.nuget.org/packages/DryIoc.Microsoft.DependencyInjection)
+* [Yetkisiz kullanım](https://www.nuget.org/packages/Grace.DependencyInjection.Extensions)
+* [Açık Inject](https://github.com/seesharper/LightInject.Microsoft.DependencyInjection)
+* [E](https://jasperfx.github.io/lamar/)
+* [Stakıbox](https://github.com/z4kn4fein/stashbox-extensions-dependencyinjection)
 * [Unity](https://www.nuget.org/packages/Unity.Microsoft.DependencyInjection)
 
 ### <a name="thread-safety"></a>İş parçacığı güvenliği
 
-İş parçacığı güvenli singleton hizmetleri oluşturun. Bir singleton hizmetigeçici bir hizmete bağımlıysa, geçici hizmet, singleton tarafından nasıl kullanıldığına bağlı olarak iş parçacığı güvenliği de gerektirebilir.
+İş parçacığı güvenli Singleton Hizmetleri oluşturun. Tek bir hizmetin geçici bir hizmete bağımlılığı varsa, geçici hizmet aynı zamanda tek tek tarafından nasıl kullanıldığına bağlı olarak iş parçacığı güvenliği de gerektirebilir.
 
-[AddSingleton\<TService>(IServiceCollection, Func\<IServiceProvider,TService>)](xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton*)ikinci bağımsız değişkeni gibi tek hizmet fabrika yöntemi, iş parçacığı güvenli olması gerekmez. Bir tür`static`gibi ( ) oluşturucu, tek bir iş parçacığı tarafından bir kez çağrılması garanti.
+Tek bir hizmetin fabrika yöntemi (örneğin, [AddSingleton\<TService> için ikinci bağımsız değişken) (ıseviecollection,\<Func ıserviceprovider, TService>)](xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton*), iş parçacığı açısından güvenli olması gerekmez. Bir Type (`static`) Oluşturucusu gibi, tek bir iş parçacığı tarafından bir kez çağrılması garanti edilir.
 
 ## <a name="recommendations"></a>Öneriler
 
-* `async/await`ve `Task` tabanlı hizmet çözünürlüğü desteklenmez. C# asynchronous yapıcıları desteklemez; bu nedenle, önerilen desen eşitolarak hizmeti çözdükten sonra eşzamanlı yöntemler kullanmaktır.
+* `async/await`ve `Task` tabanlı hizmet çözümlemesi desteklenmez. C# zaman uyumsuz oluşturucuları desteklemez; Bu nedenle, önerilen model hizmeti zaman uyumlu olarak çözümledikten sonra zaman uyumsuz yöntemler kullanmaktır.
 
-* Verileri ve yapılandırmayı doğrudan servis kapsayıcısında depolamaktan kaçının. Örneğin, bir kullanıcının alışveriş sepeti genellikle servis kapsayıcısına eklenmemelidir. Yapılandırma seçenekleri [deseni](xref:fundamentals/configuration/options)kullanmalıdır. Benzer şekilde, yalnızca başka bir nesneye erişime izin vermek için var olan "veri tutucu" nesnelerden kaçının. Bu DI üzerinden gerçek öğeyi istemek daha iyidir.
+* Veri ve yapılandırmayı doğrudan hizmet kapsayıcısında saklamaktan kaçının. Örneğin, bir kullanıcının alışveriş sepeti genellikle hizmet kapsayıcısına eklenmemelidir. Yapılandırma, [Seçenekler modelini](xref:fundamentals/configuration/options)kullanmalıdır. Benzer şekilde, yalnızca başka bir nesneye erişime izin vermek için mevcut olan "veri sahibi" nesnelerinden kaçının. DI aracılığıyla gerçek öğe istemek daha iyidir.
 
-* Hizmetlere statik erişimden kaçının (örneğin, başka bir yerde kullanmak için statik olarak [IApplicationBuilder.ApplicationServices](xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices) yazarak).
+* Hizmetlere statik erişimi önleyin (örneğin, başka bir yerde kullanmak üzere, statik olarak yazılan [IApplicationBuilder. ApplicationServices](xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices) ).
 
-* Denetim stratejilerinin [Ters Çevrilmesini](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#dependency-inversion) karıştıran *hizmet bulucu deseni*kullanmaktan kaçının.
+* [Denetim](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#dependency-inversion) stratejilerini kapsayan *hizmet bulucu deseninin*kullanmaktan kaçının.
 
-  * Bunun yerine <xref:System.IServiceProvider.GetService*> DI'yi kullanabileceğiniz bir hizmet örneği almak için çağrıda almayın:
+  * Bunun yerine <xref:System.IServiceProvider.GetService*> , şunu kullandığınızda bir hizmet örneği elde etmek için çağırmayın:
 
-    **Yanlış:**
+    **Olmayan**
 
     ```csharp
     public class MyClass()
@@ -1067,13 +1073,13 @@ Aşağıdaki 3 ASP.NET.
     }
     ```
 
-  * Kullanarak çalışma zamanında bağımlılıkları çözen bir <xref:System.IServiceProvider.GetService*>fabrika enjekte kaçının.
+  * Kullanarak <xref:System.IServiceProvider.GetService*>çalışma zamanında bağımlılıkları çözümleyen bir fabrikaya ekleme önleyin.
 
-* Statik erişimden `HttpContext` kaçının (örneğin, [IHttpContextAccessor.HttpContext).](xref:Microsoft.AspNetCore.Http.IHttpContextAccessor.HttpContext)
+* Uygulamasına `HttpContext` statik erişimi önleyin (örneğin, [ıhttpcontextaccessor. HttpContext](xref:Microsoft.AspNetCore.Http.IHttpContextAccessor.HttpContext)).
 
-Tüm öneri kümeleri gibi, bir öneriyi yoksaymanın gerekli olduğu durumlarla karşılaşabilirsiniz. İstisnalar, çerçevenin kendisi içinde nadir görülen&mdash;özel durumlardır.
+Tüm öneri kümeleri gibi, bir öneriyi yok saymayı yok saymış durumlarla karşılaşabilirsiniz. Özel durumlar&mdash;genellikle çerçevenin kendisi içinde özel durumlardır.
 
-DI statik /küresel nesne erişim desenleri için bir *alternatiftir.* Statik nesne erişimiyle karıştırırsanız DI'nin faydalarını fark edemeyebilirsiniz.
+Dı, statik/genel nesne erişim desenlerinin bir *alternatifidir* . Statik nesne erişimi ile karıştırırsanız, dı 'nin avantajlarını fark edemeyebilirsiniz.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
@@ -1083,9 +1089,9 @@ DI statik /küresel nesne erişim desenleri için bir *alternatiftir.* Statik ne
 * <xref:blazor/dependency-injection>
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/extensibility>
-* [Bağımlılık Enjeksiyonu (MSDN) ile ASP.NET Çekirdekte Temiz Kod Yazma](https://msdn.microsoft.com/magazine/mt703433.aspx)
-* [Açık Bağımlılıklar İlkesi](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)
-* [Kontrol Kapları ve Bağımlılık Enjeksiyon Deseni (Martin Fowler) Ters](https://www.martinfowler.com/articles/injection.html)
-* [Core DI'de birden çok arabirimi olan bir hizmet ASP.NET](https://andrewlock.net/how-to-register-a-service-with-multiple-interfaces-for-in-asp-net-core-di/)
+* [Bağımlılık ekleme (MSDN) ile ASP.NET Core temizleme kodu yazma](https://msdn.microsoft.com/magazine/mt703433.aspx)
+* [Açık bağımlılıklar Ilkesi](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#explicit-dependencies)
+* [Denetim kapsayıcıları ve bağımlılık ekleme deseninin Inversion 'ı (Marwler)](https://www.martinfowler.com/articles/injection.html)
+* [ASP.NET Core DI 'de birden çok arabirime sahip bir hizmeti kaydetme](https://andrewlock.net/how-to-register-a-service-with-multiple-interfaces-for-in-asp-net-core-di/)
 
 ::: moniker-end

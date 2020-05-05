@@ -4,19 +4,25 @@ author: rick-anderson
 description: Yeni ve daha güvenli bir veri koruma sisteminin kullanımına izin vermek için ASP.NET içindeki machineKey nasıl değiştirileceğini öğrenin.
 ms.author: riande
 ms.date: 04/06/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/compatibility/replacing-machinekey
-ms.openlocfilehash: 2317cb50cfe63226baf336ebfc5d681d1cebe5c6
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 72e736f820ec243a7ad1461fc70e2711ac8b76ee
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78667988"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777468"
 ---
 # <a name="replace-the-aspnet-machinekey-in-aspnet-core"></a>ASP.NET Core ASP.NET machineKey değiştirme
 
 <a name="compatibility-replacing-machinekey"></a>
 
-ASP.NET içinde `<machineKey>` öğesinin uygulanması [değiştirilebilir](https://blogs.msdn.microsoft.com/webdev/2012/10/23/cryptographic-improvements-in-asp-net-4-5-pt-2/). Bu, ASP.NET şifreleme yordamlarına yapılan çağrıların, yeni veri koruma sistemi dahil olmak üzere bir değiştirme veri koruma mekanizması aracılığıyla yönlendirilmesini sağlar.
+ASP.NET içindeki `<machineKey>` öğesinin uygulanması [değiştirilebilir](https://blogs.msdn.microsoft.com/webdev/2012/10/23/cryptographic-improvements-in-asp-net-4-5-pt-2/). Bu, ASP.NET şifreleme yordamlarına yapılan çağrıların, yeni veri koruma sistemi dahil olmak üzere bir değiştirme veri koruma mekanizması aracılığıyla yönlendirilmesini sağlar.
 
 ## <a name="package-installation"></a>Paket yüklemesi
 
@@ -32,7 +38,7 @@ Paketi yüklediğinizde, ASP.NET. *config* dosyasına form kimlik doğrulaması,
 ```
 
 >[!TIP]
-> Yeni veri koruma sisteminin, aşağıdaki örnekte olduğu gibi, "CfDJ8" ile başlaması gereken `__VIEWSTATE`gibi alanları inceleyerek etkin olup olmadığını söyleyebilirsiniz. "CfDJ8", veri koruma sistemi tarafından korunan bir yükü tanımlayan Magic "09 F0 C9 F0" üstbilgisinin Base64 gösterimidir.
+> Yeni veri koruma sisteminin, aşağıdaki örnekte olduğu gibi "CfDJ8" ile başlaması gereken `__VIEWSTATE`alanları inceleyerek, etkin olup olmadığını söyleyebilirsiniz. "CfDJ8", veri koruma sistemi tarafından korunan bir yükü tanımlayan Magic "09 F0 C9 F0" üstbilgisinin Base64 gösterimidir.
 
 ```html
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="CfDJ8AWPr2EQPTBGs3L2GCZOpk...">
@@ -67,9 +73,9 @@ namespace DataProtectionDemo
 ```
 
 >[!TIP]
-> Ayrıca, SetApplicationName 'e açık bir çağrı yerine `<machineKey applicationName="my-app" ... />` de kullanabilirsiniz. Bu, geliştiricilerin yapılandırmak istiyorlarsa, uygulama adı ayarlarsa, geliştiricinin bir DataProtectionStartup ile türetilmiş tür oluşturmasını zormaktan kaçınmak için kullanışlı bir mekanizmadır.
+> Ayrıca, SetApplicationName 'e açık bir çağrı yerine kullanabilirsiniz `<machineKey applicationName="my-app" ... />` . Bu, geliştiricilerin yapılandırmak istiyorlarsa, uygulama adı ayarlarsa, geliştiricinin bir DataProtectionStartup ile türetilmiş tür oluşturmasını zormaktan kaçınmak için kullanışlı bir mekanizmadır.
 
-Bu özel yapılandırmayı etkinleştirmek için, Web. config dosyasına dönün ve paket yüklemesinin yapılandırma dosyasına eklendiği `<appSettings>` öğesini arayın. Aşağıdaki biçimlendirme gibi görünür:
+Bu özel yapılandırmayı etkinleştirmek için, Web. config dosyasına dönün ve paket yüklemesinin yapılandırma dosyasına `<appSettings>` eklendiği öğeyi bulun. Aşağıdaki biçimlendirme gibi görünür:
 
 ```xml
 <appSettings>

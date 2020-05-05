@@ -4,13 +4,19 @@ author: rick-anderson
 description: ASP.NET Core uygulamalarda yetkilendirme ve yetkilendirme ile ilgili temel bilgileri öğrenin.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authorization/introduction
-ms.openlocfilehash: b5e60b3c256941fff5e54e1a02e077c34c535902
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 241ef8b00e9dcbd1983d32edcd9c1db2eaa5c687
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78660715"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777533"
 ---
 # <a name="introduction-to-authorization-in-aspnet-core"></a>ASP.NET Core yetkilendirme için giriş
 
@@ -20,7 +26,7 @@ Yetkilendirme, bir kullanıcının ne yapabileceğini belirleyen işlemi ifade e
 
 Yetkilendirme, kimlik doğrulamasından dik ve bağımsızdır. Ancak, yetkilendirme bir kimlik doğrulama mekanizması gerektirir. Kimlik doğrulaması, kullanıcı kim olduğunu belirlememe işlemidir. Kimlik doğrulaması geçerli kullanıcı için bir veya daha fazla kimlik oluşturabilir.
 
-ASP.NET Core kimlik doğrulaması hakkında daha fazla bilgi için bkz. <xref:security/authentication/index>.
+ASP.NET Core kimlik doğrulaması hakkında daha fazla bilgi için bkz <xref:security/authentication/index>..
 
 ## <a name="authorization-types"></a>Yetkilendirme türleri
 
@@ -28,6 +34,6 @@ ASP.NET Core yetkilendirme basit, bildirime dayalı bir [rol](xref:security/auth
 
 ## <a name="namespaces"></a>Ad Alanları
 
-`AuthorizeAttribute` ve `AllowAnonymousAttribute` öznitelikleri dahil olmak üzere yetkilendirme bileşenleri `Microsoft.AspNetCore.Authorization` ad alanında bulunur.
+`AuthorizeAttribute` Ve `AllowAnonymousAttribute` özniteliklerini de içeren yetkilendirme bileşenleri `Microsoft.AspNetCore.Authorization` ad alanında bulunur.
 
 [Basit yetkilendirme](xref:security/authorization/simple)ile ilgili belgelere başvurun.

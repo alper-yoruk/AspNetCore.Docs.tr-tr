@@ -1,5 +1,5 @@
 ---
-title: Kimlik sunucusuyla ASP.NET Core Blazor weelsembly barındırılan uygulamasının güvenliğini sağlama
+title: Sunucu ile Identity ASP.NET Core Blazor weelsembly barındırılan uygulamasının güvenliğini sağlama
 author: guardrex
 description: Bir [IdentityServer](https://identityserver.io/) arka Blazor ucu kullanan Visual Studio içinden kimlik doğrulaması ile yeni bir barındırılan uygulama oluşturmak için
 monikerRange: '>= aspnetcore-3.1'
@@ -8,16 +8,19 @@ ms.custom: mvc
 ms.date: 04/24/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/webassembly/hosted-with-identity-server
-ms.openlocfilehash: ffdcd30ae9ce5350113569a500e99cf8db82ad65
-ms.sourcegitcommit: 4f91da9ce4543b39dba5e8920a9500d3ce959746
+ms.openlocfilehash: bf2298618e922df412e0742177afd390c4116388
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82138618"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82768135"
 ---
-# <a name="secure-an-aspnet-core-opno-locblazor-webassembly-hosted-app-with-identity-server"></a>Kimlik sunucusuyla ASP.NET Core Blazor weelsembly barındırılan uygulamasının güvenliğini sağlama
+# <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-identity-server"></a>Sunucu ile Identity ASP.NET Core Blazor weelsembly barındırılan uygulamasının güvenliğini sağlama
 
 , [Javier Calvarro Nelson](https://github.com/javiercn) ve [Luke Latham](https://github.com/guardrex) 'e göre
 
@@ -51,7 +54,7 @@ Aşağıdaki bölümlerde, kimlik doğrulama desteği dahil edildiğinde projeni
 
 * `Startup.ConfigureServices` içinde:
 
-  * IDENTITY
+  * Identity:
 
     ```csharp
     services.AddDbContext<ApplicationDbContext>(options =>
@@ -104,7 +107,7 @@ Yardımcı <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderC
 
 ### <a name="addidentityserverjwt"></a>Addentityserverjwt
 
-<xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> Yardımcı yöntemi, varsayılan kimlik doğrulama işleyicisi olarak uygulama için bir ilke düzeni yapılandırır. İlke, kimliğin kimlik URL 'sindeki herhangi bir alt yolda yönlendirilen tüm istekleri işlemesine izin verecek şekilde yapılandırılmıştır `/Identity`. Diğer <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> tüm istekleri işler. Ayrıca, bu yöntem:
+<xref:Microsoft.AspNetCore.Authentication.AuthenticationBuilderExtensions.AddIdentityServerJwt%2A> Yardımcı yöntemi, varsayılan kimlik doğrulama işleyicisi olarak uygulama için bir ilke düzeni yapılandırır. İlke, Identity Identity URL alanındaki herhangi bir alt yolda yönlendirilen tüm istekleri işlemeye izin verecek şekilde yapılandırılmıştır `/Identity`. Diğer <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerHandler> tüm istekleri işler. Ayrıca, bu yöntem:
 
 * IdentityServer `{APPLICATION NAME}API` ile bir API kaynağını varsayılan kapsamına kaydeder `{APPLICATION NAME}API`.
 * Uygulama için IdentityServer tarafından verilen belirteçleri doğrulamak üzere JWT taşıyıcı belirteç ara yazılımını yapılandırır.
@@ -115,9 +118,9 @@ Yardımcı <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderC
 
 ### <a name="applicationdbcontext"></a>ApplicationDbContext
 
-`ApplicationDbContext` (*Data/applicationdbcontext. cs*) öğesinde aynı <xref:Microsoft.EntityFrameworkCore.DbContext> şekilde, kimlik içinde, IdentityServer şemasını dahil etmek için genişlettiği <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601> özel durumla birlikte kullanılır. <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601>, öğesinden <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext>türetilir.
+`ApplicationDbContext` (*Data/applicationdbcontext. cs*) öğesinde, aynı <xref:Microsoft.EntityFrameworkCore.DbContext> şekilde, IdentityServer şemasını Identity dahil etmek için genişlettiği <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601> özel durumla birlikte kullanılır. <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiAuthorizationDbContext%601>, öğesinden <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext>türetilir.
 
-Veritabanı şeması üzerinde tam denetim elde etmek için, kullanılabilir kimlik <xref:Microsoft.EntityFrameworkCore.DbContext> sınıflarından birini ve `builder.ConfigurePersistedGrantContext(_operationalStoreOptions.Value)` `OnModelCreating` yöntemi metodunu çağırarak kimlik şemasını içerecek şekilde yapılandırın.
+Veritabanı şemasının tam denetimini elde etmek Identity <xref:Microsoft.EntityFrameworkCore.DbContext> için, kullanılabilir sınıflardan birini ve Identity `builder.ConfigurePersistedGrantContext(_operationalStoreOptions.Value)` `OnModelCreating` yöntemi metodunu çağırarak şemayı içerecek şekilde yapılandırın.
 
 ### <a name="oidcconfigurationcontroller"></a>Oıdcconfigurationcontroller
 
@@ -185,7 +188,7 @@ Bileşen (*paylaşılan/LoginDisplay.* Razor) `MainLayout` , bileşende (*payla�
 
 * Kimliği doğrulanmış kullanıcılar için:
   * Geçerli Kullanıcı adını görüntüler.
-  * ASP.NET Core kimliği içindeki kullanıcı profili sayfasına bir bağlantı sunar.
+  * ASP.NET Core Identity'daki Kullanıcı profili sayfasına bir bağlantı sunar.
   * Uygulamanın oturumunu kapatmak için bir düğme sunar.
 * Anonim kullanıcılar için:
   * Kayıt için seçeneği sunar.

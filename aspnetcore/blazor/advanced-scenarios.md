@@ -1,29 +1,32 @@
 ---
-title: ASP.NET Blazor Core gelişmiş senaryoları
+title: ASP.NET Core Blazor gelişmiş senaryolar
 author: guardrex
-description: Manuel RenderTreeBuilder Blazormantığını bir uygulamaya nasıl dahil edebilirsiniz dahil olmak üzere gelişmiş senaryolar hakkında bilgi edinin.
+description: "' Deki Blazorgelişmiş senaryolar, El Ile RenderTreeBuilder mantığını bir uygulamaya nasıl dahil leyeceğinizi öğrenin."
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/18/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/advanced-scenarios
-ms.openlocfilehash: 5edbbe36e8389bac0335594b1e4331aee1c02867
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 9f1e5ea4d883a027f40ac0eccc7a9bba1435139d
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78659455"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767206"
 ---
-# <a name="aspnet-core-blazor-advanced-scenarios"></a>core Blazor gelişmiş senaryoları ASP.NET
+# <a name="aspnet-core-blazor-advanced-scenarios"></a>ASP.NET Core Blazor gelişmiş senaryolar
 
-Yazar: [Luke Latham](https://github.com/guardrex) ve [Daniel Roth](https://github.com/danroth27)
+, [Luke Latham](https://github.com/guardrex) ve [Daniel Roth](https://github.com/danroth27) tarafından
 
-## <a name="blazor-server-circuit-handler"></a>Blazor Server devre işleyicisi
+## <a name="blazor-server-circuit-handler"></a>Blazor sunucusu devre işleyicisi
 
-Blazor Server, kodun bir *devre işleyicisini*tanımlamasına izin verir, bu da kullanıcının devresinin durumuna yapılan değişikliklerde kod çalışmasını sağlar. Bir devre işleyicisi, sınıfın `CircuitHandler` uygulamanın hizmet konteynerine kaydedilmesi yle uygulanır. Bir devre işleyicisi aşağıdaki örnek açık SignalR bağlantıları izler:
+Blazor sunucusu kodun bir Kullanıcı devresi durumunda değişiklikler üzerinde kod çalıştırmaya izin veren bir *devhandler*tanımlamasına olanak tanır. Devre işleyici, uygulamanın hizmet kapsayıcısındaki sınıfından türeterek ve kayıt işleminden `CircuitHandler` uygulanır. Aşağıdaki bir devre işleyicinin örneği açık SignalR bağlantılarını izler:
 
 ```csharp
 using System.Collections.Generic;
@@ -55,7 +58,7 @@ public class TrackingCircuitHandler : CircuitHandler
 }
 ```
 
-Devre işleyicileri DI kullanılarak kaydedilir. Kapsamlı örnekler, bir devrenin örneğine göre oluşturulur. Önceki `TrackingCircuitHandler` örnekte kullanarak, tüm devrelerin durumu izlenmesi gerektiğinden, singleton hizmeti oluşturulur:
+Devre işleyicileri DI kullanılarak kaydedilir. Kapsamlı örnekler, bir devrenin örneği başına oluşturulur. `TrackingCircuitHandler` Önceki örnekte kullanılarak, tüm devrelerin durumu izlenmelidir çünkü bir tek hizmet oluşturulur:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -65,18 +68,18 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Özel bir devre işleyicisinin yöntemleri işlenmemiş bir özel durum atarsa, özel durum Blazor Server devresi için ölümcüldür. İşleyicinin kodundaki veya çağrılan yöntemlerdeki özel durumları tolere etmek için, kodu hata işleme ve günlüğe kaydetme içeren bir veya daha fazla [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) deyimine sarın.
+Özel bir devre işleyicisindeki Yöntemler işlenmeyen bir özel durum oluşturuyorsam, özel durum Blazor Server devresi için önemli olur. Bir işleyicinin kodundaki veya yöntemleri çağrılan özel durumlara tolerans sağlamak için kodu bir veya daha fazla [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) deyiminde hata işleme ve günlüğe kaydetme ile sarın.
 
-Bir kullanıcı bağlantısı kesildiği nden ve çerçeve devre durumunu temizlediği için bir devre sona erdiğinde, çerçeve devrenin DI kapsamını ortadan kaldırmıştır. Kapsamı atmak, devreye sahip tüm devre kapsamlı <xref:System.IDisposable?displayProperty=fullName>DI hizmetlerini ortadan çıkarır. Herhangi bir DI hizmeti imha sırasında işlenmemiş bir özel durum atarsa, çerçeve özel durumu kaydeder.
+Bir kullanıcının bağlantısı kesilmediği ve Framework devre durumunu temizlemede bir devre dışı bırakıldığında, çerçeve devre dışı bırakıldı. Kapsamı elden atılırken, uygulayan <xref:System.IDisposable?displayProperty=fullName>hiçbir devre kapsamlı dı hizmeti yok. Herhangi bir DI hizmeti, elden çıkarma sırasında işlenmeyen bir özel durum oluşturursa, çerçeve özel durumu günlüğe kaydeder.
 
-## <a name="manual-rendertreebuilder-logic"></a>Manuel RenderTreeBuilder mantığı
+## <a name="manual-rendertreebuilder-logic"></a>El ile RenderTreeBuilder mantığı
 
-`Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder`c# kodunda bileşenleri el ile oluşturmak da dahil olmak üzere bileşenleri ve öğeleri işlemek için yöntemler sağlar.
+`Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder`bileşenleri ve öğeleri düzenlemek için yöntemler sağlar. bu sayede bileşenleri C# kodunda el ile oluşturma da dahil olmak üzere.
 
 > [!NOTE]
-> Bileşenleri `RenderTreeBuilder` oluşturmak için kullanımı gelişmiş bir senaryodur. Hatalı biçimlendirilmiş bir bileşen (örneğin, kapalı biçimlendirme etiketi) tanımlanmamış davranışlara neden olabilir.
+> Bileşenlerini oluşturmak `RenderTreeBuilder` için kullanımı gelişmiş bir senaryodur. Hatalı biçimlendirilmiş bir bileşen (örneğin, kapatılmamış bir biçimlendirme etiketi) tanımsız davranışa neden olabilir.
 
-Başka bir `PetDetails` bileşende el ile oluşturulabilen aşağıdaki bileşeni göz önünde bulundurun:
+Aşağıdaki `PetDetails` bileşeni, başka bir bileşende el ile yerleşik olarak kullanılabilecek şekilde göz önünde bulundurun:
 
 ```razor
 <h2>Pet Details Component</h2>
@@ -90,9 +93,9 @@ Başka bir `PetDetails` bileşende el ile oluşturulabilen aşağıdaki bileşen
 }
 ```
 
-Aşağıdaki örnekte, yöntemdeki `CreateComponent` döngü üç `PetDetails` bileşen oluşturur. Bileşenleri `RenderTreeBuilder` oluşturmak için yöntemleri`OpenComponent` ararken ( ve `AddAttribute`), sıra numaraları kaynak kodu satır numaralarıdır. Blazor fark algoritması, farklı çağrı çağrılarına değil, farklı kod satırlarına karşılık gelen sıra numaralarına dayanır. Yöntemlerle `RenderTreeBuilder` bir bileşen oluştururken, sıra numaraları için bağımsız değişkenleri kodlayın. **Sıra numarasını oluşturmak için bir hesaplama veya sayaç kullanmak düşük performansa yol açabilir.** Daha fazla bilgi için, [Sıra numaralarının yürütme sırası bölümüyle değil, kod satır numaralarıyla ilgili](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order) olduğunu görün.
+Aşağıdaki örnekte, `CreateComponent` yöntemindeki döngü üç `PetDetails` bileşen oluşturur. Bileşenleri ( `RenderTreeBuilder` `OpenComponent` ve `AddAttribute`) oluşturmak için yöntemler çağrılırken, dizi numaraları kaynak kodu satır numaralarıdır. Blazor fark algoritması, ayrı çağrı etkinleştirmeleri değil ayrı kod satırlarına karşılık gelen sıra numaralarına dayanır. Yöntemler içeren `RenderTreeBuilder` bir bileşen oluştururken, dizi numaralarına yönelik bağımsız değişkenleri kod olarak kodlayın. **Sıra numarasını oluşturmak için bir hesaplama veya sayaç kullanmak kötü performansa neden olabilir.** Daha fazla bilgi için bkz. [kod satırı numaralarıyla Ilgili sıra numaraları ve yürütme sırası çalışmıyor](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order) bölümü.
 
-`BuiltContent`Bileşen:
+`BuiltContent`bileşeninde
 
 ```razor
 @page "/BuiltContent"
@@ -126,15 +129,15 @@ Aşağıdaki örnekte, yöntemdeki `CreateComponent` döngü üç `PetDetails` b
 ```
 
 > [!WARNING]
-> İşleme `Microsoft.AspNetCore.Components.RenderTree` işlemlerinin *sonuçlarının* işlenmesine izin veren türler. Bunlar Blazor çerçeve uygulamasının iç detaylarıdır. Bu tür *kararsız* ve gelecekteki sürümlerde değişebilir olarak kabul edilmelidir.
+> İçindeki `Microsoft.AspNetCore.Components.RenderTree` türler, işleme işlemlerinin *sonuçlarının* işlenmesine izin verir. Bunlar, Blazor Framework uygulamasının iç ayrıntılardır. Bu türlerin *dengesizleşilmesi* ve gelecekteki sürümlerde değişikliğe tabi olması gerekir.
 
-### <a name="sequence-numbers-relate-to-code-line-numbers-and-not-execution-order"></a>Sıra numaraları, yürütme sırası ile değil, kod satır numaralarıyla ilgilidir
+### <a name="sequence-numbers-relate-to-code-line-numbers-and-not-execution-order"></a>Sıra numaraları, kod satırı numaralarıyla ilgilidir ve yürütme sırası değildir
 
-Jilet bileşen ilerleç dosyaları (*.razor*) her zaman derlenir. Derleme, çalışma zamanında uygulama performansını artıran bilgileri enjekte etmek için kullanılabildiği için kod yorumlamaya göre potansiyel bir avantajdır.
+Razor bileşen dosyaları (*. Razor*) her zaman derlenir. Derleme adımı, çalışma zamanında uygulama performansını geliştiren bilgileri eklemek için kullanılabilir olduğundan, kod yorumlanması üzerinde olası bir avantajdır.
 
-Bu geliştirmelerin önemli bir örneği *sıra numaralarını*içerir. Sıra numaraları, hangi çıktıların farklı ve sıralanmış kod satırlarından geldiğini çalışma zamanı olarak gösterir. Çalışma zamanı, genel bir ağaç diff algoritması için normalde mümkün olandan çok daha hızlı olan doğrusal zamanda verimli ağaç farkları oluşturmak için bu bilgileri kullanır.
+Bu geliştirmelerin önemli bir örneği, *sıra numaraları*içerir. Sıra numaraları, hangi çıkışların ayrı ve sıralı kod satırlarından geldiğini çalışma zamanına işaret ediyor. Çalışma zamanı, doğrusal bir zamanda, genel ağaç farkı algoritması için genellikle mümkün olandan çok daha hızlı olan etkili ağaç SLA 'ları oluşturmak için bu bilgileri kullanır.
 
-Aşağıdaki Razor bileşenini (*.razor*) dosyasını göz önünde bulundurun:
+Aşağıdaki Razor bileşeni (*. Razor*) dosyasını göz önünde bulundurun:
 
 ```razor
 @if (someFlag)
@@ -145,7 +148,7 @@ Aşağıdaki Razor bileşenini (*.razor*) dosyasını göz önünde bulundurun:
 Second
 ```
 
-Önceki kod aşağıdaki gibi bir şey için derler:
+Yukarıdaki kod, aşağıdakine benzer şekilde derlenir:
 
 ```csharp
 if (someFlag)
@@ -156,26 +159,26 @@ if (someFlag)
 builder.AddContent(1, "Second");
 ```
 
-Kod ilk kez yürütüldüğünde, `someFlag` oluşturucu `true`alır:
+Kod ilk kez `someFlag` `true`çalıştırıldığında, Oluşturucu şunları alır:
 
 | Sequence | Tür      | Veriler   |
 | :------: | --------- | :----: |
 | 0        | Metin düğümü | İlk  |
 | 1        | Metin düğümü | Saniye |
 
-Bunun `someFlag` olduğunu `false`ve biçimlendirmenin yeniden işlenir olduğunu düşünün. Bu kez, oluşturucu alır:
+Olduğunu `someFlag` `false`düşünün ve biçimlendirme yeniden işlenir. Bu kez, Oluşturucu şunları alır:
 
 | Sequence | Tür       | Veriler   |
 | :------: | ---------- | :----: |
 | 1        | Metin düğümü  | Saniye |
 
-Çalışma zamanı bir diff gerçekleştirdiğinde, sıralı `0` öğenin kaldırıldığını görür, bu nedenle aşağıdaki önemsiz *edit komut dosyası*oluşturur:
+Çalışma zamanı bir fark gerçekleştirdiğinde, sıradaki `0` öğenin kaldırıldığını görür, bu nedenle aşağıdaki önemsiz *düzenleme betiğini*oluşturur:
 
-* İlk metin düğümlerini kaldırın.
+* İlk metin düğümünü kaldırın.
 
-### <a name="the-problem-with-generating-sequence-numbers-programmatically"></a>Programlı sıra numaraları oluşturma sorunu
+### <a name="the-problem-with-generating-sequence-numbers-programmatically"></a>Program aracılığıyla sıra numaraları oluşturma sorunu
 
-Bunun yerine aşağıdaki render ağacı oluşturucu mantığı yazdı düşünün:
+Aşağıdaki işleme Ağacı Oluşturucusu mantığını yazmanız yerine düşünün:
 
 ```csharp
 var seq = 0;
@@ -188,62 +191,62 @@ if (someFlag)
 builder.AddContent(seq++, "Second");
 ```
 
-Şimdi, ilk çıkış:
+Şimdi ilk çıktı:
 
 | Sequence | Tür      | Veriler   |
 | :------: | --------- | :----: |
 | 0        | Metin düğümü | İlk  |
 | 1        | Metin düğümü | Saniye |
 
-Bu sonuç önceki durumla aynıdır, bu nedenle olumsuz bir sorun yoktur. `someFlag`ikinci `false` işleme ve çıktı:
+Bu sonuç önceki bir durum ile aynıdır, bu nedenle olumsuz bir sorun yoktur. `someFlag``false` ikinci işleme ve çıktı:
 
 | Sequence | Tür      | Veriler   |
 | :------: | --------- | ------ |
 | 0        | Metin düğümü | Saniye |
 
-Bu kez, diff algoritması *iki* değişiklik oluştuğunu görür ve algoritma aşağıdaki düzenle komut dosyası oluşturur:
+Bu kez, fark algoritması *iki* değişikliğin oluştuğunu görür ve algoritma aşağıdaki düzenleme betiğini üretir:
 
-* İlk metin düğümünün değerini ' `Second`le değiştirin
-* İkinci metin düğümlerini kaldırın.
+* İlk metin düğümünün değerini olarak `Second`değiştirin.
+* İkinci metin düğümünü kaldırın.
 
-Sıra numaralarının üretilmesi, `if/else` dalların ve döngülerin özgün kodda nerede bulunduğuna ilişkin tüm yararlı bilgileri kaybetmiştir. Bu, öncekinin **iki katı kadar bir** diff ile sonuçlanır.
+Sıra numaralarının oluşturulması, `if/else` dal ve döngülerin orijinal kodda bulunduğu yer hakkındaki tüm yararlı bilgileri kaybetti. Bu, daha önce olduğu gibi bir fark **ile iki kez** sonuçlanır.
 
-Bu önemsiz bir örnektir. Karmaşık ve derin iç içe yapılarile daha gerçekçi durumlarda ve özellikle döngüler ile, performans maliyeti genellikle daha yüksektir. Hangi döngü bloklarının veya dalların eklendiğini veya kaldırıldığını hemen belirlemek yerine, diff algoritmasının render ağaçlarına derinden yeniden lanetlenmesi gerekir. Diff algoritması eski ve yeni yapıların birbiriyle nasıl ilişkili olduğu hakkında yanlış bilgilendirildiği için, bu genellikle daha uzun düzenkomut dosyaları oluşturmak zorunda sonuçlanır.
+Bu, önemsiz bir örnektir. Karmaşık ve derin iç içe yapıları ve özellikle döngülerle daha gerçekçi durumlarda performans maliyeti genellikle daha yüksektir. Hangi döngü bloklarının veya dallarının eklendiğini veya kaldırıldığını hemen belirlemek yerine, fark algoritmasının işleme ağaçlarına göre belirlenmesi gerekir. Bu genellikle, fark algoritması, eski ve yeni yapıların birbirleriyle nasıl ilişkilendirileceğiyle ilgili bilgi sahibi olduğu için daha uzun düzenleme betikleri oluşturma ile sonuçlanır.
 
-### <a name="guidance-and-conclusions"></a>Rehberlik ve sonuçlar
+### <a name="guidance-and-conclusions"></a>Kılavuz ve ekibinizle
 
-* Sıra numaraları dinamik olarak oluşturulursa uygulama performansı zarar görür.
-* Derleme zamanında yakalanmadığı sürece gerekli bilgiler bulunmadığından, çerçeve çalışma zamanında otomatik olarak kendi sıra numaralarını oluşturamaz.
-* El ile uygulanan `RenderTreeBuilder` mantığın uzun bloklarını yazmayın. .razor dosyalarını tercih *edin* ve derleyicinin sıra numaralarıyla ilgilenmesine izin verin. El ile `RenderTreeBuilder` mantıktan kaçınamıyorsanız, uzun kod bloklarını `OpenRegion` / `CloseRegion` çağrılara sarılmış daha küçük parçalara bölün. Her bölgenin kendi sıra numaraları alanı vardır, böylece her bölge içindeki sıfırdan (veya başka bir rasgele sayıdan) yeniden başlatabilirsiniz.
-* Sıra numaraları kodlanmışsa, diff algoritması yalnızca sıra numaralarının değer artışını gerektirir. İlk değer ve boşluklar alakasızdır. Yasal seçeneklerden biri, kod satır numarasını sıra numarası olarak kullanmak veya sıfırdan başlayıp birler veya yüzlerce (veya tercih edilen herhangi bir aralık) ile artırmaktır. 
-* Blazorsıra numaralarını kullanırken, diğer ağaç dağılayan UI çerçeveleri bunları kullanmaz. Dizi numaraları kullanıldığında dağıtma çok daha Blazor hızlıdır ve *.razor* dosyaları yazan geliştiriciler için sıra numaralarıyla otomatik olarak ilgilenen bir derleme adımının avantajına sahiptir.
+* Sıra numaraları dinamik olarak oluşturulursa uygulama performansı de vardır.
+* Altyapı, derleme zamanında yakalanmadığı takdirde gerekli bilgiler bulunmadığından, çalışma zamanında kendi sıra numaralarını otomatik olarak oluşturamaz.
+* El ile uygulanan `RenderTreeBuilder` mantık uzun blokları yazmayın. *. Razor* dosyalarını tercih edin ve derleyicinin sıra numaralarıyla uğraşmak için izin verin. El ile `RenderTreeBuilder` mantığın olmaması durumunda, uzun kod bloklarını `OpenRegion` / `CloseRegion` çağrılarında kaydırılmış küçük parçalara ayırın. Her bölge kendi ayrı dizi numaralarına sahiptir, bu nedenle her bölge içinde sıfırdan (veya herhangi bir rastgele sayıdan) yeniden başlatabilirsiniz.
+* Dizi numaraları sabit kodluysa, fark algoritması yalnızca değer değerinde sıra numaralarının artırılmasını gerektirir. İlk değer ve boşluklar ilgisiz. Tek bir seçenek, kod satırı numarasını sıra numarası olarak kullanmak veya sıfırdan başlayıp bir ya da yüzlerce (ya da tercih edilen aralığa) artırmak için kullanılır. 
+* Blazorsıra numaralarını kullanır, diğer ağaç dağıtma Kullanıcı arabirimi çerçeveleri bunları kullanmaz. Dizi numaraları kullanıldığında, yayılma çok daha hızlıdır ve Blazor bir derleme adımından yararlanarak *. Razor* dosyaları yazan geliştiriciler için otomatik olarak sıra numaralarıyla ilgilenen bir derleme adımının avantajı vardır.
 
-## <a name="perform-large-data-transfers-in-opno-locblazor-server-apps"></a>Sunucu uygulamalarında Blazor büyük veri aktarımları gerçekleştirin
+## <a name="perform-large-data-transfers-in-blazor-server-apps"></a>Blazor Sunucu uygulamalarında büyük veri aktarımları gerçekleştirin
 
-Bazı senaryolarda, büyük miktarda veri JavaScript ve Blazor. Genellikle, büyük veri aktarımları oluşur:
+Bazı senaryolarda, JavaScript ve Blazorarasında büyük miktarlarda veri aktarılmalıdır. Genellikle, büyük veri aktarımları şu durumlarda oluşur:
 
-* Tarayıcı dosya sistemi API'leri bir dosyayı yüklemek veya indirmek için kullanılır.
-* Üçüncü taraf kitaplığı ile interop gereklidir.
+* Tarayıcı dosya sistemi API 'Leri bir dosyayı karşıya yüklemek veya indirmek için kullanılır.
+* Üçüncü taraf kitaplığı ile birlikte çalışma gerekir.
 
-Sunucu'da, Blazor performans sorunlarına neden olabilecek tek büyük iletilerin geçmesini önlemek için bir sınırlama vardır.
+Blazor Sunucuda, performans sorunlarına neden olabilecek tek büyük mesajların geçirilmesini engellemek için bir sınırlama vardır.
 
-JavaScript ile Blazoraşağıdaki arasında veri aktaran kod geliştirirken aşağıdaki kılavuzu göz önünde bulundurun:
+JavaScript arasında veri aktaran kodu geliştirirken aşağıdaki kılavuzu göz önünde bulundurun Blazor:
 
-* Verileri daha küçük parçalara dilimleyin ve tüm veriler sunucu tarafından alınana kadar veri bölümlerini sırayla gönderin.
-* JavaScript ve C# kodunda büyük nesneleri ayırmayın.
-* Veri gönderirken veya alırken ana Web Bilgisi iş parçacığının uzun süreler için engellenmesini.
-* İşlem tamamlandığında veya iptal edildiğinde tüketilen tüm bellekleri boşaltın.
+* Verileri daha küçük parçalara dilimleyin ve tüm veriler sunucu tarafından alınana kadar veri segmentlerini sırayla gönderin.
+* JavaScript ve C# kodunda büyük nesneler ayırmayın.
+* Veri gönderirken veya alırken uzun süreler için ana UI iş parçacığını engellemez.
+* İşlem tamamlandığında veya iptal edildiğinde tüketilen tüm belleği boşaltın.
 * Güvenlik amaçları için aşağıdaki ek gereksinimleri uygulayın:
-  * Geçirilebilen en büyük dosyayı veya veri boyutunu bildirin.
-  * İstemciden sunucuya minimum yükleme oranını bildirin.
-* Veriler sunucu tarafından alındıktan sonra, veriler aşağıdaki ler olabilir:
-  * Tüm kesimler toplanana kadar geçici olarak bir bellek arabelleğinde saklanır.
-  * Hemen tüketilir. Örneğin, veriler hemen bir veritabanında depolanabilir veya her kesim alınırken diske yazılabilir.
+  * Geçirilebilen en büyük dosya veya veri boyutunu bildirin.
+  * İstemciden sunucuya en düşük karşıya yükleme hızını bildirin.
+* Veriler, sunucu tarafından alındıktan sonra şu olabilir:
+  * Tüm segmentler toplanana kadar bir bellek arabelleğinde geçici olarak depolanır.
+  * Hemen tüketildi. Örneğin, veriler bir veritabanında hemen depolanabilir veya her bir segment alındığında diske yazılabilir.
 
-Aşağıdaki dosya yükleyici sınıfı istemci ile JS interop işler. Yükleyici sınıfı JS interop kullanır:
+Aşağıdaki dosya Yükleyici sınıfı istemcisiyle JS birlikte çalışabilirliği yönetir. Uploader sınıfı, JS birlikte çalışması için şunu kullanır:
 
-* Bir veri kesimi göndermek için istemciyi yokla.
-* Yoklama süreleri dolursa işlemi iptal edin.
+* Veri segmenti göndermek için istemciyi yoklayın.
+* Yoklama zaman aşımına uğrarsa işlemi iptal edin.
 
 ```csharp
 using System;
@@ -330,18 +333,18 @@ public class FileUploader : IDisposable
 }
 ```
 
-Önceki örnekte:
+Yukarıdaki örnekte:
 
-* 'den `_maxBase64SegmentSize` hesaplanan `8192` `_maxBase64SegmentSize = _segmentSize * 4 / 3`' olarak ayarlanır.
-* Düşük düzeyli .NET Core bellek yönetimi API'leri sunucudaki `_uploadedSegments`bellek bölümlerini '' de depolamak için kullanılır.
-* JS interop üzerinden yükleme işlemek için bir `ReceiveFile` yöntem kullanılır:
-  * Dosya boyutu JS interop üzerinden `_jsRuntime.InvokeAsync<FileInfo>('getFileSize', selector)`bayt olarak belirlenir.
-  * Alınacak segment sayısı hesaplanır ve 'de `numberOfSegments`saklanır.
-  * Segmentler JS interop `for` ile bir döngü `_jsRuntime.InvokeAsync<string>('receiveSegment', i, selector)`içinde istenir. Tüm segmentler ama son çözme önce 8.192 bayt olmalıdır. İstemci verileri verimli bir şekilde göndermek zorunda kalır.
-  * Alınan her kesim için denetimler' <xref:System.Convert.TryFromBase64String*>in '' ile çözülmesiönce gerçekleştirilir.
-  * Yükleme tamamlandıktan sonra verilerle <xref:System.IO.Stream> birlikte`SegmentedStream`bir akış yeni ( ) olarak döndürülür.
+* , ' A ayarlanır, ' den `_maxBase64SegmentSize = _segmentSize * 4 / 3`hesaplanır. `8192` `_maxBase64SegmentSize`
+* Düşük düzey .NET Core bellek yönetimi API 'Leri, bellek kesimlerini içindeki `_uploadedSegments`sunucuda depolamak için kullanılır.
+* Bir `ReceiveFile` Yöntem, JS birlikte çalışması aracılığıyla karşıya yüklemeyi işlemek için kullanılır:
+  * Dosya boyutu, ile `_jsRuntime.InvokeAsync<FileInfo>('getFileSize', selector)`js birlikte çalışma üzerinden bayt olarak belirlenir.
+  * Alacak segmentlerin sayısı ' de `numberOfSegments`hesaplanıp depolanır.
+  * Kesimleri, ile `_jsRuntime.InvokeAsync<string>('receiveSegment', i, selector)`js birlikte çalışma `for` aracılığıyla bir döngüde istenir. Tüm kesimler ancak son, kod çözmede önce 8.192 bayt olmalıdır. İstemci verileri verimli bir şekilde gönderilmeye zorlanır.
+  * Alınan her segment için, ile <xref:System.Convert.TryFromBase64String*>kod çözme işleminden önce denetimler gerçekleştirilir.
+  * Karşıya yükleme tamamlandıktan sonra verileri içeren bir akış New <xref:System.IO.Stream> (`SegmentedStream`) olarak döndürülür.
 
-Bölümlenmiş akış sınıfı, segmentlerin listesini yalnızca aranamayan <xref:System.IO.Stream>bir bölüm olarak ortaya çıkarır:
+Kesimli akış sınıfı, kesim listesini ReadOnly olmayan salt okunur olarak kullanıma sunar <xref:System.IO.Stream>:
 
 ```csharp
 using System;
@@ -437,7 +440,7 @@ public class SegmentedStream : Stream
 }
 ```
 
-Aşağıdaki kod verileri almak için JavaScript işlevlerini uygular:
+Aşağıdaki kod, verileri almak için JavaScript işlevlerini uygular:
 
 ```javascript
 function getFileSize(selector) {

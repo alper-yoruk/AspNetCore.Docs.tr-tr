@@ -1,67 +1,73 @@
 ---
 title: ASP.NET Core ve Azure ile DevOps
 author: CamSoper
-description: Azure'da barındırılan bir ASP.NET Core uygulaması için DevOps ardışık hattı oluşturma konusunda uçuça kılavuz sağlayan bir kılavuz.
+description: Azure 'da barındırılan bir ASP.NET Core uygulaması için DevOps işlem hattı oluşturmaya yönelik uçtan uca rehberlik sağlayan bir kılavuz.
 ms.author: casoper
 ms.date: 08/07/2018
 ms.custom: mvc, seodec18
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: azure/devops/index
-ms.openlocfilehash: f45bb2a5dd4b3d1a820085ede7ce3219045ed80b
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: da9d5365b6e3920dbf672f65d5fab4ea158932c2
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78658083"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82766907"
 ---
 # <a name="devops-with-aspnet-core-and-azure"></a>ASP.NET Core ve Azure ile DevOps
 
-[![Kapak Resmi](./media/cover-large.png)](https://aka.ms/devopsbook)
+[![Kapak resmi](./media/cover-large.png)](https://aka.ms/devopsbook)
 
-Yazar: [Cam Soper](https://twitter.com/camsoper) ve [Scott Addie](https://twitter.com/scottaddie)
+By [Cam Soper](https://twitter.com/camsoper) ve [Scott Ade](https://twitter.com/scottaddie)
 
-Bu kılavuz indirilebilir PDF [e-kitap](https://aka.ms/devopsbook)olarak kullanılabilir.
+Bu kılavuz, [indirilebilir BIR PDF e-kitabı](https://aka.ms/devopsbook)olarak sunulmaktadır.
 
 ## <a name="welcome"></a>Hoş Geldiniz 
 
-.NET için Azure Geliştirme Yaşam Döngüsü kılavuzuna hoş geldiniz! Bu kılavuz, .NET araçlarını ve işlemlerini kullanarak Azure çevresinde bir geliştirme yaşam döngüsü oluşturmanın temel kavramlarını tanıtır. Bu kılavuzu bitirdikten sonra, olgun bir DevOps araç zincirinin avantajlarından yararlanacaksınız.
+.NET için Azure geliştirme yaşam döngüsü kılavuzuna hoş geldiniz! Bu kılavuzda, .NET araçları ve süreçleri kullanılarak Azure 'da bir geliştirme yaşam döngüsü oluşturmaya yönelik temel kavramlar tanıtılmaktadır. Bu kılavuzu tamamladıktan sonra, yetişkinlere yönelik bir DevOps araç zincirinin avantajlarından yararlanabilirsiniz.
 
-## <a name="who-this-guide-is-for"></a>Bu kılavuz kimin için
+## <a name="who-this-guide-is-for"></a>Bu kılavuzun kim olduğunu
 
-Sen deneyimli bir ASP.NET Core geliştirici (200-300 düzeyi) olmalıdır. Azure hakkında hiçbir şey bilmenizgerekmez, çünkü bu girişte bunu ele alacağız. Bu kılavuz, geliştirmeden çok operasyonlara odaklanmış DevOps mühendisleri için de yararlı olabilir.
+Deneyimli bir ASP.NET Core Geliştirici (200-300 düzeyi) olmanız gerekir. Bu giriş bölümünde yer alan bilgileri sunduğumuz için Azure ile ilgili herhangi bir şey bilmeniz gerekmez. Bu kılavuz, geliştirmeden işlemlere daha fazla odaklanan DevOps mühendisleri için de kullanışlı olabilir.
 
-Bu kılavuz, Windows geliştiricileri hedefler. Ancak, Linux ve macOS tam olarak .NET Core tarafından desteklenir. Bu kılavuzu Linux/macOS için uyarlamak için, Linux/macOS farklılıkları için bilgi için izleyin.
+Bu kılavuz Windows geliştiricilerini hedefler. Ancak, Linux ve macOS .NET Core tarafından tam olarak desteklenmektedir. Linux/macOS için bu kılavuzu uyarlamanız için, Linux/macOS farklılıkları için belirtme çizgilerini izleyin.
 
-## <a name="what-this-guide-doesnt-cover"></a>Bu kılavuzun kapsamadığı
+## <a name="what-this-guide-doesnt-cover"></a>Bu kılavuzun kapsamıyor
 
-Bu kılavuz, .NET geliştiricileri için uçuça sürekli dağıtım deneyimine odaklanmıştır. Azure'daki her şey için kapsamlı bir kılavuz değildir ve Azure hizmetleri için .NET API'lerine kapsamlı bir şekilde odaklanmaz. Vurgu sürekli entegrasyon, dağıtım, izleme ve hata ayıklama etrafında. Kılavuzun sonuna yakın, sonraki adımlar için öneriler sunulur. Önerilere, ASP.NET Çekirdek geliştiricileri için yararlı olan Azure platform hizmetleri dahildir.
+Bu kılavuz, .NET geliştiricileri için uçtan uca bir sürekli dağıtım deneyimine odaklanılmıştır. Azure 'a yönelik kapsamlı bir kılavuz değildir ve Azure hizmetleri için .NET API 'Lerinde kapsamlı bir şekilde odaklanmaz. Vurgu, sürekli tümleştirme, dağıtım, izleme ve hata ayıklama etrafında bulunur. Kılavuzun sonuna yakın bir şekilde, sonraki adımlara yönelik öneriler sunulur. Önerilere dahil olan Azure platform hizmetleri, ASP.NET Core geliştiricileri için yararlıdır.
 
-## <a name="whats-in-this-guide"></a>Bu kılavuzda neler var?
+## <a name="whats-in-this-guide"></a>Bu kılavuzda neler vardır
 
 ### <a name="tools-and-downloads"></a>[Araçlar ve indirmeler](xref:azure/devops/tools-and-downloads)
 
-Bu kılavuzda kullanılan araçları nereden edinebileceğinizi öğrenin.
+Bu kılavuzda kullanılan araçların nereden edineceğinizi öğrenin.
 
 ### <a name="deploy-to-app-service"></a>[App Service’e dağıtma](xref:azure/devops/deploy-to-app-service)
 
-Azure Uygulama Hizmeti'ne ASP.NET Core uygulaması dağıtmak için çeşitli yöntemleri öğrenin.
+Azure App Service ASP.NET Core uygulama dağıtmaya yönelik çeşitli yöntemler hakkında bilgi edinin.
 
 ### <a name="continuous-integration-and-deployment"></a>[Sürekli tümleştirme ve dağıtım](xref:azure/devops/cicd)
 
-GitHub, Azure DevOps Hizmetleri ve Azure ile ASP.NET Core uygulamanız için uçtan uca sürekli tümleştirme ve dağıtım çözümü oluşturun.
+GitHub, Azure DevOps Services ve Azure ile ASP.NET Core uygulamanız için uçtan uca bir sürekli tümleştirme ve dağıtım çözümü oluşturun.
 
-### <a name="monitor-and-debug"></a>[Monitör ve hata ayıklama](xref:azure/devops/monitor)
+### <a name="monitor-and-debug"></a>[İzleme ve hata ayıklama](xref:azure/devops/monitor)
 
-Uygulamanızı izlemek, sorun gidermek ve ayarlamak için Azure araçlarını kullanın.
+Uygulamanızı izlemek, sorunlarını gidermek ve ayarlamak için Azure araçlarını kullanın.
 
 ### <a name="next-steps"></a>[Sonraki adımlar](xref:azure/devops/next-steps)
 
-Azure'u öğrenen ASP.NET Core geliştiricisi için diğer öğrenme yolları.
+ASP.NET Core geliştirici için diğer öğrenme yolları Azure 'ı öğreniyor.
 
-## <a name="additional-introductory-reading"></a>Ek giriş okuması
+## <a name="additional-introductory-reading"></a>Ek tanıtım okuma
 
-Bu, bulut bilgi işlem için ilk maruz kalma ise, bu makaleler temel açıklar.
+Bu, bulut bilgi işlemin ilk etkilenmesi ise, bu makalelerde temel bilgiler açıklanmaktadır.
 
-* [Bulut Bilgi İşlem Nedir?](https://azure.microsoft.com/overview/what-is-cloud-computing/)
-* [Bulut Bilgi İşlem Örnekleri](https://azure.microsoft.com/overview/examples-of-cloud-computing/)
-* [IaaS nedir?](https://azure.microsoft.com/overview/what-is-iaas/)
+* [Bulut bilgi Işlem nedir?](https://azure.microsoft.com/overview/what-is-cloud-computing/)
+* [Bulut bilgi Işlem örnekleri](https://azure.microsoft.com/overview/examples-of-cloud-computing/)
+* [IaaS Nedir?](https://azure.microsoft.com/overview/what-is-iaas/)
 * [PaaS nedir?](https://azure.microsoft.com/overview/what-is-paas/)

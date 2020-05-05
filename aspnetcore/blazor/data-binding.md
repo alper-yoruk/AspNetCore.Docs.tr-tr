@@ -1,29 +1,32 @@
 ---
-title: ASP.NET Blazor Çekirdek veri bağlama
+title: ASP.NET Core Blazor veri bağlama
 author: guardrex
-description: Uygulamalardaki Blazor bileşenler ve DOM öğeleri için veri bağlama özellikleri hakkında bilgi edinin.
+description: Blazor Uygulamalardaki BILEŞENLER ve DOM öğeleri için veri bağlama özellikleri hakkında bilgi edinin.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 03/26/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/data-binding
-ms.openlocfilehash: a7b3730dad48b5bbb6134dab181051da4e3651b4
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 73e73869d58e4a22e9dbee059f69fd15605ce2ce
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "80320958"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82767557"
 ---
-# <a name="aspnet-core-opno-locblazor-data-binding"></a>ASP.NET Blazor Çekirdek veri bağlama
+# <a name="aspnet-core-blazor-data-binding"></a>ASP.NET Core Blazor veri bağlama
 
-Yazar: [Luke Latham](https://github.com/guardrex) ve [Daniel Roth](https://github.com/danroth27)
+, [Luke Latham](https://github.com/guardrex) ve [Daniel Roth](https://github.com/danroth27) tarafından
 
-Razor bileşenleri, alan, özellik veya Jilet ifade değeriyle birlikte adlı [`@bind`](xref:mvc/views/razor#bind) bir HTML öğesi özniteliği aracılığıyla veri bağlama özellikleri sağlar.
+Razorbileşenler, bir alan, özellik veya [`@bind`](xref:mvc/views/razor#bind) Razor ifade DEĞERI ile adlandırılmış bir HTML öğesi özniteliği aracılığıyla veri bağlama özellikleri sağlar.
 
-Aşağıdaki örnek özelliği metin `CurrentValue` kutusunun değerine bağlar:
+Aşağıdaki örnek, `CurrentValue` özelliğini metin kutusu değerine bağlar:
 
 ```razor
 <input @bind="CurrentValue" />
@@ -33,11 +36,11 @@ Aşağıdaki örnek özelliği metin `CurrentValue` kutusunun değerine bağlar:
 }
 ```
 
-Metin kutusu odağı kaybettiğinde, özelliğin değeri güncelleştirilir.
+Metin kutusu odağı kaybettiğinde, özelliğin değeri güncellenir.
 
-Metin kutusu, yalnızca bileşen işlendiğinde, özelliğin değerini değiştirmeye yanıt olarak değil, Kullanıcı Arası Bilgi Birimi'nde güncelleştirilir. Bileşenler olay işleyicisi kodu yürütülmeden sonra kendilerini işlediğinden, özellik güncelleştirmeleri *genellikle* bir olay işleyicisi tetiklendikten hemen sonra UI'ye yansıtılır.
+Metin kutusu kullanıcı arabiriminde, özelliğin değerini değiştirme yanıt olarak değil, yalnızca bileşen işlendiğinde güncelleştirilir. Bileşenler olay işleyicisi kodu yürütüldükten sonra kendilerini oluşturduğundan, özellik güncelleştirmeleri *genellikle* olay işleyicisi tetiklendikten hemen sonra Kullanıcı arabirimine yansıtılır.
 
-Özellik ile birlikte kullanmak `@bind` aslında aşağıdakilere eşdeğerdir:`<input @bind="CurrentValue" />` `CurrentValue`
+`CurrentValue` Özelliği (`<input @bind="CurrentValue" />`) ile kullanmak `@bind` , temelde aşağıdakilere eşdeğerdir:
 
 ```razor
 <input value="@CurrentValue"
@@ -49,9 +52,9 @@ Metin kutusu, yalnızca bileşen işlendiğinde, özelliğin değerini değişti
 }
 ```
 
-Bileşen işlendiğinde, giriş `value` öğesinin `CurrentValue` özelliği nden gelir. Kullanıcı metin kutusunda ki öğe odağında yazıp `onchange` değiştirdiğinde, `CurrentValue` olay ateşlenir ve özellik değiştirilen değere ayarlanır. Gerçekte, tür dönüşümlerinin gerçekleştirildiği `@bind` durumları işlediği için kod oluşturma daha karmaşıktır. Prensip `@bind` olarak, bir ifadenin geçerli `value` değerini bir öznitelikle ilişkilendirer ve değişiklikleri kayıtlı işleyiciyi kullanarak işler.
+Bileşen işlendiğinde, `value` giriş öğesi `CurrentValue` özelliğinden gelir. Kullanıcı metin kutusuna yazdığında ve öğe odağını değiştirdiğinde, `onchange` olay tetiklenir ve `CurrentValue` Özellik değiştirilen değere ayarlanır. Tür dönüştürmelerinde oluşan durumları işletiğinden `@bind` , gerçekte kod oluşturma daha karmaşıktır. İlke ' de `@bind` , bir ifadenin geçerli değerini bir `value` özniteliğiyle ilişkilendirir ve kayıtlı işleyiciyi kullanarak değişiklikleri işler.
 
-`event` Parametreli bir `@bind:event` öznitelik de ekleyerek bir özelliği veya alanı diğer olaylara bağla. Aşağıdaki örnek `CurrentValue` `oninput` olay özelliği bağlar:
+`event` Parametre içeren bir `@bind:event` özniteliği de ekleyerek diğer olaylardaki bir özelliği veya alanı bağlayın. Aşağıdaki örnek, `CurrentValue` `oninput` olayında özelliği bağlar:
 
 ```razor
 <input @bind="CurrentValue" @bind:event="oninput" />
@@ -61,9 +64,9 @@ Bileşen işlendiğinde, giriş `value` öğesinin `CurrentValue` özelliği nde
 }
 ```
 
-Öğe `onchange`odağı kaybettiğinde ateşlenen, `oninput` metin kutusunun değeri değiştiğinde çıkanın aksine.
+' `onchange`In aksine, öğe odağı kaybettiğinde harekete geçirilir, `oninput` metin kutusunun değeri değiştiğinde harekete geçirilir.
 
-Öğe `@bind-{ATTRIBUTE}` `@bind-{ATTRIBUTE}:event` özniteliklerini başka bir öğe `value`öznitelikleribağlamak için sözdizimi ile kullanın. Aşağıdaki örnekte, `_paragraphStyle` değer değiştiğinde paragrafın stili güncelleştirilir:
+Dışındaki `@bind-{ATTRIBUTE}` `value`öğe `@bind-{ATTRIBUTE}:event` özniteliklerini bağlamak için sözdizimi ile kullanın. Aşağıdaki örnekte, paragrafın stili `_paragraphStyle` değer değiştiğinde güncelleştirilir:
 
 ```razor
 @page "/binding-example"
@@ -81,15 +84,15 @@ Bileşen işlendiğinde, giriş `value` öğesinin `CurrentValue` özelliği nde
 }
 ```
 
-Öznitelik bağlama büyük/küçük harf duyarlıdır. Örneğin, `@bind` geçerli dir `@Bind` ve geçersizdir.
+Öznitelik bağlama büyük/küçük harfe duyarlıdır. Örneğin, `@bind` geçerlidir ve `@Bind` geçersizdir.
 
-## <a name="unparsable-values"></a>Parlanamaz değerler
+## <a name="unparsable-values"></a>Ayrıştırılamayan değerler
 
-Bir kullanıcı veri yle dolu bir öğeye ayrı ayrı değer verdiğinde, bağlama olayı tetiklendiğinde, ayrıştırılamaz değer otomatik olarak önceki değerine geri döndürülür.
+Bir Kullanıcı, bir veri sınırlama öğesine ayrıştırılamayan bir değer sağlıyorsa, bağlama olayı tetiklendiğinde, çözümlenemeyen değer otomatik olarak önceki değerine döndürülür.
 
 Şu senaryoyu göz önünde bulundurun:
 
-* Bir `<input>` öğe, başlangıç `int` değeri olan bir `123`türe bağlıdır:
+* Bir `<input>` öğesi, başlangıç değeri olan `int` bir türe bağlanır `123`:
 
   ```razor
   <input @bind="MyProperty" />
@@ -99,21 +102,21 @@ Bir kullanıcı veri yle dolu bir öğeye ayrı ayrı değer verdiğinde, bağla
       public int MyProperty { get; set; } = 123;
   }
   ```
-* Kullanıcı öğenin değerini `123.45` sayfaya güncelleştirir ve öğe odağı değişir.
+* Kullanıcı, öğesinin değerini sayfada olarak `123.45` güncelleştirir ve öğe odağını değiştirir.
 
-Önceki senaryoda, öğenin değeri `123`. Değer `123.45` orijinal değeri lehine `123`reddedildiğinde, kullanıcı değerinin kabul olmadığını anlar.
+Önceki senaryoda, öğenin değeri öğesine `123`geri döndürülür. Değeri `123.45` özgün değeri yararına reddedildiğinde `123`, Kullanıcı değerinin kabul edilmediğini anlamıştır.
 
-Varsayılan olarak, bağlama öğenin `onchange` olay (`@bind="{PROPERTY OR FIELD}"`için geçerlidir. Farklı `@bind="{PROPERTY OR FIELD}" @bind:event={EVENT}` bir olay üzerinde bağlamayı tetiklemek için kullanın. `oninput` Olay için`@bind:event="oninput"`( ), reversion ayrılmaz bir değer tanıtan herhangi bir tuş vuruşundan sonra oluşur. Olayı bağlı `oninput` bir `int`türle hedeflenirken, kullanıcının karakter `.` yazması engellenir. Bir `.` karakter hemen kaldırılır, böylece kullanıcı yalnızca tam sayılara izin verilen anında geri bildirim alır. `oninput` Kullanıcının ayrı ayrı bir `<input>` değeri temizlemesine izin verilmesi gerektiği gibi, olaydaki değeri geri almanın ideal olmadığı senaryolar vardır. Alternatifler şunlardır:
+Varsayılan olarak, bağlama öğenin `onchange` olayına (`@bind="{PROPERTY OR FIELD}"`) uygulanır. Farklı `@bind="{PROPERTY OR FIELD}" @bind:event={EVENT}` bir olayda bağlamayı tetiklemek için kullanın. `oninput` Event (`@bind:event="oninput"`) için yeniden sürüm, ayrıştırılamayan bir değer sunan herhangi bir tuş vuruşu sonrasında oluşur. `oninput` Olayı, ilişkili bir `int`tür ile hedeflerken, bir kullanıcının bir `.` karakter yazmasının engellenmiş olması engellenir. Bir `.` karakter hemen kaldırılır, bu nedenle Kullanıcı yalnızca tam sayılara izin verilen anında geri bildirim alır. `oninput` Olay üzerindeki değerin geri döndürülmesi ideal değil (örneğin, kullanıcının ayrıştırılamayan `<input>` bir değeri temizlemeye izin verilmesi gerektiği durumlarda). Alternatifler şunlardır:
 
-* `oninput` Olayı kullanma. Öğe odağı `onchange` kaybedene `@bind="{PROPERTY OR FIELD}"`kadar geçersiz bir değerin geri döndürülmediği varsayılan olayı (yalnızca belirtin) kullanın.
-* Geçersiz girişleri işlemek için özel `int?` mantık `string`sağlayın, örneğin, geçersiz bir türe bağlayın.
-* Bir [form doğrulama bileşeni](xref:blazor/forms-validation)kullanın `InputNumber` `InputDate`, gibi veya . Form doğrulama bileşenleri, geçersiz girişleri yönetmek için yerleşik desteğe sahiptir. Form doğrulama bileşenleri:
-  * Kullanıcının geçersiz giriş sağlamasına ve ilişkili `EditContext`üzerinde doğrulama hataları almasına izin ver.
-  * Kullanıcının ek web form verileri girmesini engellemeden Kullanıcı Arama Bilgisi'ndeki doğrulama hatalarını görüntüleyin.
+* `oninput` Olayı kullanmayın. Varsayılan `onchange` olayı kullanın (yalnızca belirtin `@bind="{PROPERTY OR FIELD}"`); burada, öğe odağı kaybetene kadar geçersiz bir değer geri döndürülemez.
+* `int?` Veya `string`gibi null yapılabilir bir türe bağlayın ve geçersiz girdileri işlemek için özel mantık sağlayın.
+* Veya gibi bir [form doğrulama bileşeni](xref:blazor/forms-validation) `InputDate` `InputNumber` kullanın. Form doğrulama bileşenlerinde geçersiz girişleri yönetmek için yerleşik destek vardır. Form doğrulama bileşenleri:
+  * Kullanıcının geçersiz giriş sağlamasına ve ilişkili `EditContext`doğrulama hatalarını almasına izin verin.
+  * Kullanıcı ek WebForm verisi girmeye uğramadan doğrulama hatalarını Kullanıcı ARABIRIMINDE görüntüleyin.
 
-## <a name="format-strings"></a>Dizeleri biçimlendirme
+## <a name="format-strings"></a>Biçim dizeleri
 
-Veri bağlama <xref:System.DateTime> kullanarak [`@bind:format`](xref:mvc/views/razor#bind)biçim dizeleri ile çalışır. Para birimi veya sayı biçimleri gibi diğer biçim ifadeleri şu anda kullanılamaz.
+Veri bağlama, kullanılarak <xref:System.DateTime> [`@bind:format`](xref:mvc/views/razor#bind)biçim dizeleriyle birlikte kullanılabilir. Para birimi veya sayı biçimleri gibi diğer biçim ifadeleri şu anda kullanılamaz.
 
 ```razor
 <input @bind="StartDate" @bind:format="yyyy-MM-dd" />
@@ -124,26 +127,26 @@ Veri bağlama <xref:System.DateTime> kullanarak [`@bind:format`](xref:mvc/views/
 }
 ```
 
-Önceki kodda, öğenin `<input>` alan türü`type`( ) `text`varsayılan olarak . `@bind:format`aşağıdaki .NET türlerinin bağlanması için desteklenir:
+Yukarıdaki kodda, `<input>` öğesinin alan türü (`type`) varsayılan olarak `text`olur. `@bind:format`, aşağıdaki .NET türlerini bağlamak için desteklenir:
 
 * <xref:System.DateTime?displayProperty=fullName>
 * <xref:System.DateTime?displayProperty=fullName>?
 * <xref:System.DateTimeOffset?displayProperty=fullName>
 * <xref:System.DateTimeOffset?displayProperty=fullName>?
 
-Öznitelik, `@bind:format` `value` `<input>` öğenin uygulanması için tarih biçimini belirtir. Biçim, bir `onchange` olay oluştuğunda değeri ayrıştırmak için de kullanılır.
+`@bind:format` `value` Özniteliği `<input>` öğesi için uygulanacak tarih biçimini belirtir. Biçim Ayrıca bir `onchange` olay gerçekleştiğinde değeri ayrıştırmak için de kullanılır.
 
-Tarihleri biçimlendirmek `date` için yerleşik desteği Blazor olduğundan alan türü için bir biçim belirtmek önerilmez. Öneriye rağmen, `yyyy-MM-dd` `date` alan türüyle birlikte bir biçim sağlanıyorsa, yalnızca doğru çalışması için tarih biçimini kullanın:
+Tarihleri biçimlendirmek için yerleşik destek `date` içerdiğinden Blazor , alan türü için bir biçim belirtmenin kullanılması önerilmez. Önerinin artma içinde, `yyyy-MM-dd` `date` alan türüyle bir biçim sağlanırsa, bağlama için yalnızca tarih biçimini kullanın:
 
 ```razor
 <input type="date" @bind="StartDate" @bind:format="yyyy-MM-dd">
 ```
 
-## <a name="parent-to-child-binding-with-component-parameters"></a>Bileşen parametreleri ile üst-alt bağlama
+## <a name="parent-to-child-binding-with-component-parameters"></a>Bileşen parametreleriyle üst-alt öğe bağlama
 
-Bağlama, bir üst `@bind-{PROPERTY}` bileşenden alt bileşene bir özellik değeri bağlayabilirsiniz bileşen parametrelerini tanır. Bir çocuktan bir ebeveyne bağlanma, [zincirli bağlama bölümüyle çocuktan ebeveyne bağlama](#child-to-parent-binding-with-chained-bind) kapsamındadır.
+Bağlama, bir üst bileşenden bir `@bind-{PROPERTY}` özellik değerini alt bileşene doğru bir şekilde bağlayabileceği bileşen parametrelerini tanır. Bir alt öğeden üst öğeye bağlama, [zincirleme bağlama Ile alt-üst öğe bağlama](#child-to-parent-binding-with-chained-bind) bölümünde ele alınmıştır.
 
-Aşağıdaki alt bileşen`ChildComponent`( `Year` ) bir `YearChanged` bileşen parametresi ve geri arama vardır:
+Aşağıdaki alt bileşende (`ChildComponent`) bir `Year` bileşen parametresi ve `YearChanged` geri çağırması vardır:
 
 ```razor
 <h2>Child Component</h2>
@@ -159,12 +162,12 @@ Aşağıdaki alt bileşen`ChildComponent`( `Year` ) bir `YearChanged` bileşen p
 }
 ```
 
-`EventCallback<T>`olarak <xref:blazor/event-handling#eventcallback>açıklanmıştır.
+`EventCallback<T>`, bölümünde <xref:blazor/event-handling#eventcallback>açıklanmıştır.
 
-Aşağıdaki üst bileşen kullanır:
+Aşağıdaki üst bileşen şunları kullanır:
 
-* `ChildComponent`ve parametreyi `ParentYear` alt bileşendeki `Year` üst öğeden parametreye bağlar.
-* Olay `onclick` `ChangeTheYear` yöntemi tetiklemek için kullanılır. Daha fazla bilgi için bkz. <xref:blazor/event-handling>.
+* `ChildComponent`ve `ParentYear` parametresini üst bileşenden alt bileşenin `Year` parametresine bağlar.
+* `onclick` Olay, `ChangeTheYear` yöntemi tetiklemek için kullanılır. Daha fazla bilgi için bkz. <xref:blazor/event-handling>.
 
 ```razor
 @page "/ParentComponent"
@@ -190,7 +193,7 @@ Aşağıdaki üst bileşen kullanır:
 }
 ```
 
-Yükleme `ParentComponent` aşağıdaki biçimlendirme üretir:
+Yüklemesi aşağıdaki `ParentComponent` biçimlendirmeyi üretir:
 
 ```html
 <h1>Parent Component</h1>
@@ -202,7 +205,7 @@ Yükleme `ParentComponent` aşağıdaki biçimlendirme üretir:
 <p>Year: 1978</p>
 ```
 
-Özelliğin `ParentYear` değeri `ParentComponent`değiştirilirse, düğme seçilerek , `Year` özelliği `ChildComponent` güncelleştirilir. Yeni değer, `Year` yeniden işlendiğinde UI'de `ParentComponent` işlenir:
+`ParentYear` Özelliğin değeri, `ParentComponent`içindeki düğme seçilerek değiştirilirse, öğesinin `Year` `ChildComponent` özelliği güncellenir. Yeni değeri `Year` , `ParentComponent` yeniden kullanıldığında kullanıcı arabiriminde işlenir:
 
 ```html
 <h1>Parent Component</h1>
@@ -214,31 +217,31 @@ Yükleme `ParentComponent` aşağıdaki biçimlendirme üretir:
 <p>Year: 1986</p>
 ```
 
-`Year` Parametre, `Year` parametrenin türüyle eşleşen bir eşlik `YearChanged` eden olayı olduğundan bağlanabilir.
+Parametrenin `Year` türüyle `YearChanged` `Year` eşleşen bir yardımcı olayı olduğundan parametre bağlanabilir.
 
-Sözleşmeye `<ChildComponent @bind-Year="ParentYear" />` göre, temelde yazmaya eşdeğerdir:
+Kurala göre, `<ChildComponent @bind-Year="ParentYear" />` temelde yazmaya eşdeğerdir:
 
 ```razor
 <ChildComponent @bind-Year="ParentYear" @bind-Year:event="YearChanged" />
 ```
 
-Genel olarak, bir özellik bir `@bind-{PROPRETY}:event` öznitelik ekleyerek ilgili olay işleyicisi bağlanabilir. Örneğin, özellik `MyProp` aşağıdaki iki `MyEventHandler` öznitelikleri kullanarak bağlı olabilir:
+Genel olarak, bir özellik bir `@bind-{PROPRETY}:event` özniteliği eklenerek ilgili olay işleyicisine bağlanabilir. Örneğin, özelliği `MyProp` aşağıdaki iki öznitelik `MyEventHandler` kullanılarak bağlanabilir:
 
 ```razor
 <MyComponent @bind-MyProp="MyValue" @bind-MyProp:event="MyEventHandler" />
 ```
 
-## <a name="child-to-parent-binding-with-chained-bind"></a>Zincirli bağlama ile alt-üst teneye bağlama
+## <a name="child-to-parent-binding-with-chained-bind"></a>Zincirli bağlama ile üstten üst öğe bağlama
 
-Yaygın bir senaryo, bileşenin çıktısındaki bir sayfa öğesine veriye bağlı bir parametreyi zincirlemektir. Birden çok bağlama düzeyi aynı anda oluştuğundan, bu senaryoya *zincirleme bağlama* denir.
+Yaygın bir senaryo, bir veri bağlama parametresini bileşen çıkışında bir sayfa öğesine zincirlemesini sağlar. Birden çok bağlama düzeyi aynı anda gerçekleştiğinden, bu senaryoya *zincirleme bağlama* denir.
 
-Zincirleme bağlama, sayfanın öğesindeki `@bind` sözdizimiyle uygulaılamaz. Olay işleyicisi ve değeri ayrı olarak belirtilmelidir. Ancak bir üst bileşen, `@bind` bileşenin parametresi ile sözdizimini kullanabilir.
+Bir zincir bağlama, sayfanın öğesinde sözdizimi `@bind` ile uygulanamaz. Olay işleyicisi ve değeri ayrı olarak belirtilmelidir. Ancak, bir üst bileşen, bir sözdizimi `@bind` bileşenin parametresiyle birlikte kullanabilir.
 
-Aşağıdaki `PasswordField` bileşen (*PasswordField.razor):*
+Aşağıdaki `PasswordField` bileşen (*passwordfield. Razor*):
 
-* Bir `<input>` öğeiçin `Password` öğenin değerini ayarlar.
-* Özellik değişikliklerini `Password` [EventCallback](xref:blazor/event-handling#eventcallback)ile bir üst bileşene maruz bırakır.
-* Yöntemi `onclick` tetiklemek için kullanılan olayı kullanır. `ToggleShowPassword` Daha fazla bilgi için bkz. <xref:blazor/event-handling>.
+* Bir `<input>` öğenin değerini bir `Password` özelliğe ayarlar.
+* `Password` Özellik değişikliklerini bir [eventcallback](xref:blazor/event-handling#eventcallback)ile üst bileşene gösterir.
+* , `ToggleShowPassword` Yöntemini `onclick` tetiklemek için kullanılan olayını kullanır. Daha fazla bilgi için bkz. <xref:blazor/event-handling>.
 
 ```razor
 <h1>Child Component</h1>
@@ -277,7 +280,7 @@ Password:
 }
 ```
 
-Bileşen `PasswordField` başka bir bileşende kullanılır:
+`PasswordField` Bileşen başka bir bileşende kullanılır:
 
 ```razor
 @page "/ParentComponent"
@@ -291,12 +294,12 @@ Bileşen `PasswordField` başka bir bileşende kullanılır:
 }
 ```
 
-Önceki örnekte parola üzerinde denetimler veya bindirme hataları gerçekleştirmek için:
+Önceki örnekteki parolada denetim veya tuzak hataları gerçekleştirmek için:
 
-* (Aşağıdaki`_password` örnek `Password` kodda) için bir destek alanı oluşturun.
-* Ayarlayıcıdaki denetimleri veya `Password` bindirme hatalarını gerçekleştirin.
+* İçin `Password` bir yedekleme alanı oluşturun (`_password` aşağıdaki örnek kodda).
+* `Password` Ayarlayıcıdaki denetimleri veya yakalama hatalarını gerçekleştirin.
 
-Aşağıdaki örnek, parolanın değerinde bir alan kullanılırsa kullanıcıya anında geri bildirim sağlar:
+Aşağıdaki örnek, parolanın değerinde bir boşluk kullanılmışsa kullanıcıya anında geri bildirim sağlar:
 
 ```razor
 <h1>Child Component</h1>
@@ -359,4 +362,4 @@ Password:
 
 ## <a name="radio-buttons"></a>Radyo düğmeleri
 
-Bir formdaki radyo düğmelerine bağlama hakkında <xref:blazor/forms-validation#work-with-radio-buttons>bilgi için bkz.
+Bir form içindeki radyo düğmelerine bağlama hakkında bilgi için bkz <xref:blazor/forms-validation#work-with-radio-buttons>..

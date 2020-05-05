@@ -1,53 +1,59 @@
 ---
-title: ASP.NET Çekirdek özel yetkilendirme politikası sağlayıcıları
+title: ASP.NET Core 'de özel yetkilendirme Ilkesi sağlayıcıları
 author: mjrousos
-description: Yetkilendirme ilkelerini dinamik olarak oluşturmak için ASP.NET Core uygulamasında özel bir IAuthorizationPolicyProvider'ı nasıl kullanacağınızı öğrenin.
+description: Bir ASP.NET Core uygulamasında özel bir ıauthorizationpolicyprovider kullanarak yetkilendirme ilkelerini dinamik olarak oluşturma hakkında bilgi edinin.
 ms.author: riande
 ms.custom: mvc
 ms.date: 11/14/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authorization/iauthorizationpolicyprovider
-ms.openlocfilehash: 2c67e25ff73bc8c3a5f3af4730a509b2385fc1cf
-ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
+ms.openlocfilehash: 1db78e5b2cea964471e4eea090f713f6af5f4740
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81661780"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777546"
 ---
-# <a name="custom-authorization-policy-providers-using-iauthorizationpolicyprovider-in-aspnet-core"></a>ASP.NET Core'da IAuthorizationPolicyProvider kullanan Özel Yetkilendirme İlke Sağlayıcıları 
+# <a name="custom-authorization-policy-providers-using-iauthorizationpolicyprovider-in-aspnet-core"></a>ASP.NET Core 'de ıauthorizationpolicyprovider kullanan özel yetkilendirme Ilkesi sağlayıcıları 
 
-Yazar: [Mike Rousos](https://github.com/mjrousos)
+, [Mike Rousos](https://github.com/mjrousos) tarafından
 
-Genellikle [ilke tabanlı yetkilendirme](xref:security/authorization/policies)kullanırken, ilkeler `AuthorizationOptions.AddPolicy` yetkilendirme hizmeti yapılandırmasının bir parçası olarak arayarak kaydedilir. Bazı senaryolarda, tüm yetkilendirme ilkelerini bu şekilde kaydetmek (veya arzu edilen) olmayabilir. Bu gibi durumlarda, yetkilendirme `IAuthorizationPolicyProvider` ilkelerinin nasıl sağlandığını denetlemek için özel bir özel kullanabilirsiniz.
+Genellikle [ilke tabanlı yetkilendirme](xref:security/authorization/policies)kullanılırken, ilkeler, yetkilendirme hizmeti yapılandırmasının bir parçası `AuthorizationOptions.AddPolicy` olarak çağırarak kaydedilir. Bazı senaryolarda, tüm yetkilendirme ilkelerini bu şekilde kaydetmek mümkün olmayabilir (veya istenebilir). Bu durumlarda, yetkilendirme ilkelerinin nasıl sağlanmış olduğunu denetlemek `IAuthorizationPolicyProvider` için özel ' i kullanabilirsiniz.
 
-Özel bir [IAuthorizationPolicyProvider'ın](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationpolicyprovider) yararlı olabileceği senaryolara örnek olarak şunlar verilebilir:
+Özel bir [ıauthorizationpolicyprovider](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationpolicyprovider) yararlı olabilecek senaryolara örnek olarak şunlar verilebilir:
 
-* İlke değerlendirmesi sağlamak için harici bir hizmet kullanma.
-* Çok çeşitli ilkeler kullanmak (örneğin, farklı oda numaraları veya yaşlar için), böylece her bir yetkilendirme `AuthorizationOptions.AddPolicy` ilkesini bir çağrıyla eklemek mantıklı değildir.
-* Harici bir veri kaynağındaki (veritabanı gibi) bilgilere dayalı olarak çalışma zamanında ilkeler oluşturmak veya başka bir mekanizma aracılığıyla yetkilendirme gereksinimlerini dinamik olarak belirlemek.
+* İlke değerlendirmesi sağlamak için bir dış hizmet kullanma.
+* Büyük bir ilke yelpazesi (örneğin, farklı oda numaraları veya yaşlar için) kullanarak, her bireysel yetkilendirme ilkesini bir `AuthorizationOptions.AddPolicy` çağrısıyla eklemek mantıklı değildir.
+* Dış veri kaynağındaki bilgilere (bir veritabanı gibi) göre veya başka bir mekanizmaya göre yetkilendirme gereksinimlerini dinamik olarak belirleyerek çalışma zamanında ilkeler oluşturma.
 
-Örnek kodu [AspNetCore GitHub deposundan görüntüleyin](https://github.com/dotnet/AspNetCore) [veya indirin.](https://github.com/dotnet/aspnetcore/tree/v3.1.3/src/Security/samples/CustomPolicyProvider) dotnet/AspNetCore depo ZIP dosyasını indirin. Dosyanın zip'ini açın. *src/Security/samples/CustomPolicyProvider* proje klasörüne gidin.
+[Aspnetcore GitHub deposundan](https://github.com/dotnet/AspNetCore) [örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/aspnetcore/tree/v3.1.3/src/Security/samples/CustomPolicyProvider) . DotNet/AspNetCore depo ZIP dosyasını indirin. Dosyayı sıkıştırmayı açın. *Src/Security/Samples/CustomPolicyProvider* proje klasörüne gidin.
 
-## <a name="customize-policy-retrieval"></a>İlke alma özelleştir
+## <a name="customize-policy-retrieval"></a>İlke almayı özelleştirme
 
-ASP.NET Core uygulamaları yetkilendirme `IAuthorizationPolicyProvider` ilkeleri almak için arabirimin bir uygulama kullanın. Varsayılan olarak, [DefaultAuthorizationPolicyProvider](/dotnet/api/microsoft.aspnetcore.authorization.defaultauthorizationpolicyprovider) kaydedilir ve kullanılır. `DefaultAuthorizationPolicyProvider`bir `AuthorizationOptions` `IServiceCollection.AddAuthorization` çağrıda sağlanan ilkeler döndürür.
+ASP.NET Core uygulamalar, `IAuthorizationPolicyProvider` yetkilendirme ilkelerini almak için arabirimin bir uygulamasını kullanır. Varsayılan olarak, [Defaultauthorizationpolicyprovider](/dotnet/api/microsoft.aspnetcore.authorization.defaultauthorizationpolicyprovider) kaydedilir ve kullanılır. `DefaultAuthorizationPolicyProvider`bir `AuthorizationOptions` `IServiceCollection.AddAuthorization` çağrıda sunulan ilkeleri döndürür.
 
-Uygulamanın bağımlılık `IAuthorizationPolicyProvider` [enjeksiyon](xref:fundamentals/dependency-injection) konteynerine farklı bir uygulama kaydederek bu davranışı özelleştirin. 
+Uygulamanın `IAuthorizationPolicyProvider` [bağımlılık ekleme](xref:fundamentals/dependency-injection) kapsayıcısına farklı bir uygulama kaydederek bu davranışı özelleştirin. 
 
-Arabirim `IAuthorizationPolicyProvider` üç API içerir:
+`IAuthorizationPolicyProvider` Arabirim üç API içerir:
 
-* [GetPolicyAsync](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationpolicyprovider.getpolicyasync#Microsoft_AspNetCore_Authorization_IAuthorizationPolicyProvider_GetPolicyAsync_System_String_) belirli bir ad için bir yetkilendirme ilkesi döndürür.
-* [GetDefaultPolicyAsync](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationpolicyprovider.getdefaultpolicyasync) varsayılan yetkilendirme ilkesini (ilke belirtilmeden öznitelikler için `[Authorize]` kullanılan ilke) döndürür. 
-* [GetFallbackPolicyAsync](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationpolicyprovider.getfallbackpolicyasync) geri dönüş yetkilendirme ilkesini döndürür (hiçbir ilke belirtilmediğinde Yetkilendirme Middleware tarafından kullanılan ilke). 
+* [Getpolicyasync](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationpolicyprovider.getpolicyasync#Microsoft_AspNetCore_Authorization_IAuthorizationPolicyProvider_GetPolicyAsync_System_String_) , belirli bir ad için yetkilendirme ilkesi döndürüyor.
+* [Getdefaultpolicyasync](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationpolicyprovider.getdefaultpolicyasync) varsayılan yetkilendirme ilkesini döndürür (bir ilke belirtilmeden öznitelikler için `[Authorize]` kullanılan ilke). 
+* [Getfallbackpolicyasync](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationpolicyprovider.getfallbackpolicyasync) , geri dönüş yetkilendirme ilkesini döndürür (Ilke belirtilmediğinde yetkilendirme ara yazılımı tarafından kullanılan ilke). 
 
-Bu API'leri uygulayarak, yetkilendirme ilkelerinin nasıl sağlandığını özelleştirebilirsiniz.
+Bu API 'Leri uygulayarak, yetkilendirme ilkelerinin nasıl sağlandığını özelleştirebilirsiniz.
 
-## <a name="parameterized-authorize-attribute-example"></a>Parametreli yetkilendirme öznitelik örneği
+## <a name="parameterized-authorize-attribute-example"></a>Parametreli yetkilendirme özniteliği örneği
 
-Yararlı olan `IAuthorizationPolicyProvider` bir senaryo, `[Authorize]` gereksinimleri bir parametreye bağlı olan özel öznitelikleri etkinleştirmektir. Örneğin, [ilke tabanlı yetkilendirme](xref:security/authorization/policies) belgelerinde, örnek olarak yaşa dayalı ("En Az21") bir ilke kullanılmıştır. Bir uygulamadaki farklı denetleyici eylemleri *farklı* yaşlardaki kullanıcıların kullanımına sunulmalıdır, çok farklı yaş tabanlı ilkelere sahip olmak yararlı olabilir. Uygulamanın gereksinim edeceği tüm farklı yaş tabanlı ilkeleri kaydetmek `AuthorizationOptions`yerine, ilkeleri bir özelle `IAuthorizationPolicyProvider`dinamik olarak oluşturabilirsiniz. İlkeleri kullanmayı kolaylaştırmak için, eylemleri '' nin gibi `[MinimumAgeAuthorize(20)]`özel yetkilendirme özniteliğiyle açıklama ekleyebilirsiniz.
+Tek senaryo `IAuthorizationPolicyProvider` , gereksinimleri bir parametreye bağlı özel `[Authorize]` öznitelikleri etkinleştirir. Örneğin, [ilke tabanlı yetkilendirme](xref:security/authorization/policies) belgelerinde, örnek olarak yaş tabanlı ("AtLeast21") ilkesi kullanılmıştır. Bir uygulamadaki farklı denetleyici eylemleri *farklı* yaştaki kullanıcılar için kullanılabilir hale getirilse, çok sayıda farklı yaş tabanlı ilke olması faydalı olabilir. Uygulamanın ihtiyaç duyduğu tüm farklı yaş tabanlı ilkeleri kaydetmek yerine `AuthorizationOptions`, ilkeleri özel `IAuthorizationPolicyProvider`olarak dinamik bir şekilde oluşturabilirsiniz. İlkeleri kullanmak daha kolay hale getirmek için, gibi `[MinimumAgeAuthorize(20)]`özel yetkilendirme özniteliğiyle eylemlere not ekleyebilirsiniz.
 
-## <a name="custom-authorization-attributes"></a>Özel Yetkilendirme öznitelikleri
+## <a name="custom-authorization-attributes"></a>Özel yetkilendirme öznitelikleri
 
-Yetkilendirme ilkeleri adlarıyla tanımlanır. Daha `MinimumAgeAuthorizeAttribute` önce açıklanan özel ilgili yetkilendirme ilkesi almak için kullanılabilecek bir dize bağımsız değişkenleri eşlemek gerekir. Bunu, `AuthorizeAttribute` `Age` mülkün mülkiyetini saran `AuthorizeAttribute.Policy` ve türeterek yapabilirsiniz.
+Yetkilendirme ilkeleri adlarıyla tanımlanır. Daha önce `MinimumAgeAuthorizeAttribute` açıklanan özel, bağımsız değişkenleri ilgili yetkilendirme ilkesini almak için kullanılabilecek bir dizeye eşlemenize ihtiyaç duyuyor. Bunu öğesinden `AuthorizeAttribute` türeterek ve özelliği sararak `Age` `AuthorizeAttribute.Policy` yaparak yapabilirsiniz.
 
 ```csharp
 internal class MinimumAgeAuthorizeAttribute : AuthorizeAttribute
@@ -75,25 +81,25 @@ internal class MinimumAgeAuthorizeAttribute : AuthorizeAttribute
 }
 ```
 
-Bu öznitelik türü, sabit kodlu önek () `Policy` `"MinimumAge"`dayalı bir dize ve bir tamsayı oluşturucu üzerinden geçti.
+Bu öznitelik türü, sabit `Policy` kodlanmış ön eki (`"MinimumAge"`) ve Oluşturucu aracılığıyla geçirilen bir tamsayıyı temel alan bir dizeye sahiptir.
 
-Bunu, parametre olarak bir tamsayı `Authorize` alması dışında, diğer özniteliklerle aynı şekilde eylemlere uygulayabilirsiniz.
+Bir parametre olarak bir tamsayı almak dışında, diğer `Authorize` özniteliklerle aynı şekilde eylemlere uygulayabilirsiniz.
 
 ```csharp
 [MinimumAgeAuthorize(10)]
 public IActionResult RequiresMinimumAge10()
 ```
 
-## <a name="custom-iauthorizationpolicyprovider"></a>Özel IAuthorizationPolicyProvider
+## <a name="custom-iauthorizationpolicyprovider"></a>Özel ıauthorizationpolicyprovider
 
-Özel, `MinimumAgeAuthorizeAttribute` istenilen herhangi bir minimum yaş için yetkilendirme ilkeleri talep etmeyi kolaylaştırır. Çözülmesi gereken bir sonraki sorun, yetkilendirme ilkelerinin tüm bu farklı yaşlar için kullanılabilir olduğundan emin olmaktır. Burada bir `IAuthorizationPolicyProvider` yararlıdır.
+Özel `MinimumAgeAuthorizeAttribute` , istenen en düşük yaş için yetkilendirme ilkeleri istemeyi kolaylaştırır. Çözecek bir sonraki sorun, yetkilendirme ilkelerinin tüm bu farklı yaşlar için kullanılabilir olduğundan emin olmanızı sağlar. Bunun yararlı olduğu yerdir `IAuthorizationPolicyProvider` .
 
-Kullanırken, `MinimumAgeAuthorizationAttribute`yetkilendirme ilkesi adları deseni `"MinimumAge" + Age`izler, `IAuthorizationPolicyProvider` bu nedenle özel yetkilendirme ilkeleri oluşturmak gerekir:
+Kullanırken `MinimumAgeAuthorizationAttribute`, yetkilendirme ilkesi adları, bu `"MinimumAge" + Age`sayede, özel `IAuthorizationPolicyProvider` olarak yetkilendirme ilkeleri oluşturması gerekir.
 
-* İlke adından yaşı ayrışdırma.
-* Yeni `AuthorizationPolicyBuilder` bir oluşturmak için kullanma`AuthorizationPolicy`
-* Bu ve aşağıdaki örneklerde, kullanıcının bir çerez aracılığıyla kimlik doğrulaması olduğu varsayılır. En `AuthorizationPolicyBuilder` az bir yetkilendirme düzeni adı ile oluşturulmalı veya her zaman başarılı olmalıdır. Aksi takdirde, kullanıcıya nasıl meydan okuyacağı hakkında bilgi yoktur ve bir özel durum atılır.
-* `AuthorizationPolicyBuilder.AddRequirements`İlkeye gereksinimler ekleme. Diğer senaryolarda, ", `RequireClaim` `RequireRole`" `RequireUserName` veya bunun yerine kullanabilirsiniz.
+* İlke adından yaş ayrıştırılıyor.
+* Yeni `AuthorizationPolicyBuilder` bir oluşturmak için kullanarak`AuthorizationPolicy`
+* Bu ve aşağıdaki örneklerde, kullanıcının kimliğinin bir tanımlama bilgisi aracılığıyla doğrulandığını varsayacaktır. `AuthorizationPolicyBuilder` En az bir yetkilendirme düzeni adıyla oluşturulmalıdır ya da her zaman başarılı olur. Aksi takdirde, kullanıcıya nasıl bir sınama sağlayacaksınız ve bir özel durum oluşturulur.
+* Yaş temelinde ilkeye gereksinimler ekleme `AuthorizationPolicyBuilder.AddRequirements`. Diğer senaryolarda, veya `RequireClaim` `RequireRole` `RequireUserName` yerine kullanabilirsiniz.
 
 ```csharp
 internal class MinimumAgePolicyProvider : IAuthorizationPolicyProvider
@@ -121,14 +127,14 @@ internal class MinimumAgePolicyProvider : IAuthorizationPolicyProvider
 
 ## <a name="multiple-authorization-policy-providers"></a>Birden çok yetkilendirme ilkesi sağlayıcısı
 
-Özel `IAuthorizationPolicyProvider` uygulamaları kullanırken, ASP.NET Core'un yalnızca bir `IAuthorizationPolicyProvider`tane .' Özel bir sağlayıcı kullanılacak tüm ilke adları için yetkilendirme ilkeleri sağlayamazsa, bir yedekleme sağlayıcısına ertelemelidir. 
+Özel `IAuthorizationPolicyProvider` uygulamalar kullanırken ASP.NET Core yalnızca bir örneğini kullandığını aklınızda bulundurun `IAuthorizationPolicyProvider`. Özel bir sağlayıcı kullanılacak tüm ilke adları için yetkilendirme ilkeleri sağlayamıyorsa, bu, bir yedekleme sağlayıcısına ertelemelidir. 
 
-Örneğin, hem özel yaş ilkeleri hem de daha geleneksel rol tabanlı ilke alma gerektiren bir uygulama düşünün. Böyle bir uygulama, özel bir yetkilendirme ilkesi sağlayıcısı kullanabilir:
+Örneğin, özel yaş ilkelerine ve daha geleneksel rol tabanlı ilke almaya ihtiyacı olan bir uygulamayı düşünün. Bu tür bir uygulama, özel bir yetkilendirme ilkesi sağlayıcısını şu şekilde kullanabilir:
 
-* İlke adlarını ayrışdırmaya çalışır. 
-* İlke adı bir yaş `DefaultAuthorizationPolicyProvider`içermiyorsa, farklı bir ilke sağlayıcısına (örneğin) çağrılar.
+* İlke adlarını ayrıştırmaya çalışır. 
+* İlke adı bir yaş içermiyorsa farklı bir ilke `DefaultAuthorizationPolicyProvider`sağlayıcısına (gibi) çağrı yapılır.
 
-Yukarıda `IAuthorizationPolicyProvider` gösterilen örnek uygulama, oluşturucusunda bir yedekleme ilkesi sağlayıcısı `DefaultAuthorizationPolicyProvider` oluşturarak (ilke adının beklenen 'MinimumYaş' + yaş deseniyle eşleşmemesi durumunda kullanılacak) kullanmak üzere güncellenebilir.
+Yukarıda gösterilen `IAuthorizationPolicyProvider` örnek uygulama, `DefaultAuthorizationPolicyProvider` oluşturucusunda bir yedekleme ilkesi sağlayıcısı oluşturularak (Ilke adının beklenen ' minimum umage ' ve Age ile eşleşmemesi durumunda kullanılmak üzere) tarafından kullanılmak üzere güncelleştirilemeyebilir.
 
 ```csharp
 private DefaultAuthorizationPolicyProvider BackupPolicyProvider { get; }
@@ -141,7 +147,7 @@ public MinimumAgePolicyProvider(IOptions<AuthorizationOptions> options)
 }
 ```
 
-Daha sonra, `GetPolicyAsync` yöntem yerine null `BackupPolicyProvider` dönen kullanmak için güncelleştirilebilir:
+Daha sonra, `GetPolicyAsync` yöntemi null döndürmek `BackupPolicyProvider` yerine öğesini kullanacak şekilde yapılandırılabilir:
 
 ```csharp
 ...
@@ -150,37 +156,37 @@ return BackupPolicyProvider.GetPolicyAsync(policyName);
 
 ## <a name="default-policy"></a>Varsayılan ilke
 
-Adlandırılmış yetkilendirme ilkeleri sağlamanın yanı `IAuthorizationPolicyProvider` sıra, `GetDefaultPolicyAsync` bir ilke adı `[Authorize]` belirtilmeden öznitelikler için bir yetkilendirme ilkesi sağlamak için bir özel uygulama gerekir.
+Adlandırılmış Yetkilendirme İlkeleri sağlamaya ek olarak, bir ilke adı `IAuthorizationPolicyProvider` belirtmeden öznitelikler için `GetDefaultPolicyAsync` `[Authorize]` bir yetkilendirme ilkesi sağlamak üzere özel bir uygulama gerekir.
 
-Çoğu durumda, bu yetkilendirme özniteliği yalnızca kimlik doğrulaması yapılan bir kullanıcıyı gerektirir, böylece aşağıdakileri arayarak gerekli ilkeyi `RequireAuthenticatedUser`yapabilirsiniz:
+Çoğu durumda, bu yetkilendirme özniteliği yalnızca kimliği doğrulanmış bir kullanıcı gerektirir, bu nedenle gerekli ilkeyi öğesine `RequireAuthenticatedUser`bir çağrı ile yapabilirsiniz:
 
 ```csharp
 public Task<AuthorizationPolicy> GetDefaultPolicyAsync() => 
     Task.FromResult(new AuthorizationPolicyBuilder(CookieAuthenticationDefaults.AuthenticationScheme).RequireAuthenticatedUser().Build());
 ```
 
-Bir özel `IAuthorizationPolicyProvider`tüm yönleriyle olduğu gibi, gerektiğinde, bu özelleştirebilirsiniz. Bazı durumlarda, varsayılan ilkeyi bir geri dönüşten `IAuthorizationPolicyProvider`almak istenebilir.
+Özel `IAuthorizationPolicyProvider`bir tüm yönlere göre, bunu gerektiği şekilde özelleştirebilirsiniz. Bazı durumlarda, varsayılan ilkeyi bir geri `IAuthorizationPolicyProvider`yüklemeden almak istenebilir.
 
 ## <a name="fallback-policy"></a>Geri dönüş ilkesi
 
-Bir `IAuthorizationPolicyProvider` özel, ilkeleri `GetFallbackPolicyAsync` [birleştirirken](/dotnet/api/microsoft.aspnetcore.authorization.authorizationpolicy.combine) ve hiçbir ilke belirtilmediğinde kullanılan bir ilke sağlamak için isteğe bağlı olarak uygulayabilirsiniz. Null `GetFallbackPolicyAsync` olmayan bir ilke döndürürse, iade edilen ilke, istek için hiçbir ilke belirtilmediğinde Yetkilendirme Middleware tarafından kullanılır.
+Özel `IAuthorizationPolicyProvider` olarak, `GetFallbackPolicyAsync` [ilkeler birleştirilirken](/dotnet/api/microsoft.aspnetcore.authorization.authorizationpolicy.combine) ve hiçbir ilke belirtilmediğinde kullanılan bir ilke sağlamak için isteğe bağlı olarak uygulanabilir. Null `GetFallbackPolicyAsync` olmayan bir ilke döndürürse, istek için hiçbir ilke belirtilmediğinde, döndürülen Ilke yetkilendirme ara yazılımı tarafından kullanılır.
 
-Geri dönüş ilkesi gerekmiyorsa, sağlayıcı `null` geri dönüş sağlayıcısına dönebilir veya erteleyebilir:
+Geri dönüş ilkesi gerekmiyorsa, sağlayıcı geri dönüş sağlayıcısına dönebilir `null` veya erteleyebilirsiniz:
 
 ```csharp
 public Task<AuthorizationPolicy> GetFallbackPolicyAsync() => 
     Task.FromResult<AuthorizationPolicy>(null);
 ```
 
-## <a name="use-a-custom-iauthorizationpolicyprovider"></a>Özel bir IAuthorizationPolicyProvider kullanın
+## <a name="use-a-custom-iauthorizationpolicyprovider"></a>Özel bir ıauthorizationpolicyprovider kullanın
 
-Bir özel ilkeler kullanmak `IAuthorizationPolicyProvider`için, şunları gerekir:
+Özel ilkeleri bir `IAuthorizationPolicyProvider`ile kullanmak için şunları yapmanız gerekir:
 
-* Tüm ilke tabanlı yetkilendirme senaryolarında olduğu gibi, bağımlılık enjeksiyonu `AuthorizationHandler` [(ilke tabanlı yetkilendirmede](xref:security/authorization/policies#authorization-handlers)açıklanan) uygun türleri kaydedin.
-* Varsayılan ilke sağlayıcısının yerini almak için uygulamanın `Startup.ConfigureServices`bağımlılık enjeksiyon hizmeti koleksiyonuna (içinde) özel `IAuthorizationPolicyProvider` türü kaydedin.
+* İlke tabanlı yetkilendirme `AuthorizationHandler` senaryolarında olduğu gibi, bağımlılık ekleme ( [ilke tabanlı yetkilendirme](xref:security/authorization/policies#authorization-handlers)bölümünde açıklanmıştır) ile uygun türleri kaydedin.
+* Varsayılan ilke sağlayıcısını `IAuthorizationPolicyProvider` değiştirmek için uygulamanın bağımlılık ekleme hizmeti koleksiyonuna (içine `Startup.ConfigureServices`) özel türü kaydedin.
 
 ```csharp
 services.AddSingleton<IAuthorizationPolicyProvider, MinimumAgePolicyProvider>();
 ```
 
-Tam bir `IAuthorizationPolicyProvider` özel örnek [dotnet / aspnetcore GitHub deposunda](https://github.com/dotnet/aspnetcore/tree/v3.1.3/src/Security/samples/CustomPolicyProvider)mevcuttur.
+`IAuthorizationPolicyProvider` [DotNet/aspnetcore GitHub deposunda](https://github.com/dotnet/aspnetcore/tree/v3.1.3/src/Security/samples/CustomPolicyProvider)tüm özel bir örnek kullanılabilir.
