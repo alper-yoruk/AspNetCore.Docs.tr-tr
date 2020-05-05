@@ -4,13 +4,19 @@ author: rick-anderson
 description: ASP.NET Core veri koruma bağlamı üst bilgilerinin uygulama ayrıntılarını öğrenin.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/context-headers
-ms.openlocfilehash: 518423f5df93924d3df144994e4beb1755cd0bfc
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 381cc137d1de87e87f36c3b32a6a551a318ed3cf
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78666581"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776961"
 ---
 # <a name="context-headers-in-aspnet-core"></a>ASP.NET Core bağlam üst bilgileri
 
@@ -20,9 +26,9 @@ ms.locfileid: "78666581"
 
 Veri koruma sisteminde, "anahtar" kimliği doğrulanmış şifreleme hizmetleri sağlayabilen bir nesne anlamına gelir. Her anahtar benzersiz bir kimlik (GUID) tarafından tanımlanır ve IT algoritmik Information ve entropıc malzemesiyle birlikte bulunur. Her bir anahtarın benzersiz entropi taşıması ve sistem bunu zorunlu kılamaz ve anahtar halkasının mevcut bir anahtarın algoritmik bilgilerini değiştirerek anahtar halkasını el ile değiştirebilen geliştiriciler için de hesap yapmanız gerekir. Bu durumlarda güvenlik gereksinimlerimize ulaşmak için, veri koruma sisteminin bir [şifreleme çevikliği](https://www.microsoft.com/en-us/research/publication/cryptographic-agility-and-its-relation-to-circular-encryption/)vardır. Bu, birden çok şifreleme algoritmasında tek bir entropıc değeri güvenli bir şekilde kullanılmasına olanak tanır.
 
-Şifreleme çevikliği destekleyen çoğu sistem, yük içindeki algoritmayla ilgili bazı tanımlayıcı bilgileri de ekleyerek bunu destekler. Algoritmanın OID 'si genellikle bunun için iyi bir adaydır. Bununla birlikte, çalıştırdığımız bir sorun aynı algoritmayı belirtmenizin birden çok yolu vardır: "AES" (CNG) ve yönetilen AES, AesManaged, AesCryptoServiceProvider, AesCng ve Rijndadelmanaged (verili belirli parametreler) sınıfları aslında aynıdır her şeyi doğru OID ile eşleştirmemiz gerekir. Bir geliştirici özel bir algoritma (ya da başka bir AES uygulama) sağlamak istiyorlarsa, onun OID 'sini söylemeleri gerekir. Bu ek kayıt adımı, sistem yapılandırmasını özellikle sorunsuz hale getirir.
+Şifreleme çevikliği destekleyen çoğu sistem, yük içindeki algoritmayla ilgili bazı tanımlayıcı bilgileri de ekleyerek bunu destekler. Algoritmanın OID 'si genellikle bunun için iyi bir adaydır. Ancak, çalıştırdığımız bir sorun aynı algoritmayı belirtmenizin birden çok yolu vardır: "AES" (CNG) ve yönetilen AES, AES, AesCryptoServiceProvider, AesCng ve Rijndadelmanaged (verilen belirli parametreler) sınıflarının hepsi aslında aynı şeydir ve bunların tümünün doğru OID 'ye eşlenmesinin devam etmemiz gerekir. Bir geliştirici özel bir algoritma (ya da başka bir AES uygulama) sağlamak istiyorlarsa, onun OID 'sini söylemeleri gerekir. Bu ek kayıt adımı, sistem yapılandırmasını özellikle sorunsuz hale getirir.
 
-Geri adımla, sorunu yanlış yönden yaklaşdığımızda kararıyoruz. Bir OID, algoritmanın ne olduğunu söyler, ancak bunu gerçekten ilgilentik. İki farklı algoritmalarda tek bir entropıc değeri güvenli bir şekilde kullanılması gerekiyorsa, algoritmaların gerçekten ne olduğunu bilmemizi gerekli değildir. Ne kadar önemli olduğumuz. Her türlü simetrik blok şifre algoritması da güçlü bir pseudportaıdom permütasyon (PRP): girişleri düzeltin (anahtar, zincir oluşturma modu, IV, düz metin) ve şifreli çıktı, daha fazla simetrik blok şifreinden farklı olabilir algoritma aynı girdileri verdi. Benzer şekilde, her türlü anahtarlı karma işlevi de güçlü bir pseudportaıdom işlevidir (PRF) ve sabit bir giriş kümesi, çıkış overwhelmingly başka bir anahtarlı karma işlevden farklı olacaktır.
+Geri adımla, sorunu yanlış yönden yaklaşdığımızda kararıyoruz. Bir OID, algoritmanın ne olduğunu söyler, ancak bunu gerçekten ilgilentik. İki farklı algoritmalarda tek bir entropıc değeri güvenli bir şekilde kullanılması gerekiyorsa, algoritmaların gerçekten ne olduğunu bilmemizi gerekli değildir. Ne kadar önemli olduğumuz. Her türlü simetrik blok şifre algoritması da güçlü bir pseudportaıdom permütasyon (PRP): girişleri düzeltin (anahtar, zincir oluşturma modu, IV, düz metin) ve şifreli çıktı, büyük olasılıkla aynı girişler verilen diğer herhangi bir simetrik blok şifre algoritmasından farklı olacaktır. Benzer şekilde, her türlü anahtarlı karma işlevi de güçlü bir pseudportaıdom işlevidir (PRF) ve sabit bir giriş kümesi, çıkış overwhelmingly başka bir anahtarlı karma işlevden farklı olacaktır.
 
 Bu güçlü PRPs ve PRFs kavramını bir bağlam üst bilgisi oluşturmak için kullanırız. Bu bağlam üstbilgisi temel olarak, belirli bir işlem için kullanımdaki algoritmaların üzerinde kararlı bir parmak izi görevi görür ve veri koruma sistemi için gereken şifreleme çevikliğini sağlar. Bu üst bilgi tekrarlanabilir ve daha sonra [alt anahtar türetme işleminin](xref:security/data-protection/implementation/subkeyderivation#data-protection-implementation-subkey-derivation)bir parçası olarak kullanılır. Temel algoritmaların işlem modlarına bağlı olarak bağlam üst bilgisini oluşturmanın iki farklı yolu vardır.
 
@@ -50,7 +56,7 @@ Bağlam üst bilgisi aşağıdaki bileşenlerden oluşur:
 
 Bunun yerine, temel alınan PRF olarak (bkz. [NıST SP800-108](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf), Sec. 5,1), sıfır uzunluklu bir anahtar, etiket ve bağlam ve HMACSHA512 ile. Türettik | K_E | + | K_H | çıkış baytları, ardından K_E ve K_H kendilerini parçalara ayırın. Matematik olarak bu, aşağıdaki gibi gösterilir.
 
-( K_E || K_H ) = SP800_108_CTR(prf = HMACSHA512, key = "", label = "", context = "")
+(K_E | | K_H) = SP800_108_CTR (prf = HMACSHA512, Key = "", Label = "", Context = "")
 
 ### <a name="example-aes-192-cbc--hmacsha256"></a>Örnek: AES-192-CBC + HMACSHA256
 
@@ -168,11 +174,11 @@ K_E = SP800_108_CTR (prf = HMACSHA512, Key = "", Label = "", Context = "")
 
 İlk olarak, izin K_E = SP800_108_CTR (prf = HMACSHA512, Key = "", Label = "", Context = ""), burada | K_E | = 256 bit.
 
-K_E := 22BC6F1B171C08C4AE2F27444AF8FC8B3087A90006CAEA91FDCFB47C1B8733B8
+K_E: = 22BC6F1B171C08C4AE2F27444AF8FC8B3087A90006CAEA91FDCFB47C1B8733B8
 
 Daha sonra, Enc_GCM (K_E, nonce, "") kimlik doğrulama etiketini AES-256-GCM verilen nonce = 096 ve yukarıdaki gibi K_E için hesaplayın.
 
-result := E7DCCE66DF855A323A6BB7BD7A59BE45
+Sonuç: = E7DCCE66DF855A323A6BB7BD7A59BE45
 
 Bu, aşağıdaki tam bağlam üstbilgisini üretir:
 

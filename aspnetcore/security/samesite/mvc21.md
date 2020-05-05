@@ -6,19 +6,25 @@ monikerRange: '>= aspnetcore-2.1 < aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/03/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/samesite/mvc21
-ms.openlocfilehash: 14f3d3d27d5740519e1ba57529d5694b4cdeb9ec
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 6a53c0d3c0a314c4137f071cf50062182b654658
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78667750"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777312"
 ---
 # <a name="aspnet-core-21-mvc-samesite-cookie-sample"></a>ASP.NET Core 2,1 MVC SameSite tanımlama bilgisi örneği
 
-ASP.NET Core 2,1, [SameSite](https://www.owasp.org/index.php/SameSite) özniteliği için yerleşik desteğe sahiptir, ancak özgün standart olarak yazılmıştır. [Düzeltme eki uygulanmış davranış](https://github.com/dotnet/aspnetcore/issues/8212) , `SameSite.None` değerini, değeri hiçbir şekilde yaymaması yerine, bir `None`değeri ile birlikte göstermek için anlamını değiştirdi. Değeri göstermek istiyorsanız, bir tanımlama bilgisinde `SameSite` özelliğini-1 olarak ayarlayabilirsiniz.
+ASP.NET Core 2,1, [SameSite](https://www.owasp.org/index.php/SameSite) özniteliği için yerleşik desteğe sahiptir, ancak özgün standart olarak yazılmıştır. [Düzeltme eki uygulanmış davranış](https://github.com/dotnet/aspnetcore/issues/8212) , değerini değeri `SameSite.None` bir değere yaymaması yerine `None`, ' ın bir değeriyle birlikte göstermek için öğesinin anlamını değiştirdi. Değeri göstermek istiyorsanız, `SameSite` bir tanımlama bilgisinde özelliğini-1 olarak ayarlayabilirsiniz.
 
-## <a name="sampleCode"></a>SameSite özniteliği yazılıyor
+## <a name="writing-the-samesite-attribute"></a><a name="sampleCode"></a>SameSite özniteliği yazılıyor
 
 Bir tanımlama bilgisine bir SameSite özniteliği yazma örneği aşağıda verilmiştir:
 
@@ -63,21 +69,21 @@ services.AddSession(options =>
 });
 ```
 
-Yukarıdaki kodda, tanımlama bilgisi kimlik doğrulaması ve oturum durumu `None`olarak ayarlanır, özniteliği bir `None` değeriyle yayın ve ayrıca güvenli özniteliğini true olarak ayarlayın.
+Yukarıdaki kodda, tanımlama bilgisi kimlik doğrulaması ve oturum durumu ' ı ' olarak `None`ayarlayın, özniteliği bir `None` değerle yayın ve ayrıca güvenli özniteliği true olarak ayarlayın.
 
 ### <a name="run-the-sample"></a>Örneği çalıştırma
 
-[Örnek projeyi](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore21MVC)çalıştırırsanız, tarayıcı hata ayıklayıcıyı ilk sayfaya yükleyin ve site için tanımlama bilgisi toplamasını görüntülemek için kullanın. Bunu kenar ve Chrome 'a bas `F12` için `Application` sekmesini seçin ve `Storage` bölümündeki `Cookies` seçeneğinin altındaki site URL 'sine tıklayın.
+[Örnek projeyi](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore21MVC)çalıştırırsanız, tarayıcı hata ayıklayıcıyı ilk sayfaya yükleyin ve site için tanımlama bilgisi toplamasını görüntülemek için kullanın. Bunu Edge ve `F12` Chrome 'da yapmak için, `Application` sekmesini seçin ve `Cookies` `Storage` bölümünde seçeneğinin altındaki site URL 'sine tıklayın.
 
 ![Tarayıcı hata ayıklayıcısı tanımlama bilgisi listesi](BrowserDebugger.png)
 
-"SameSite tanımlama bilgisi oluştur" düğmesine tıkladığınızda örnek tarafından oluşturulan tanımlama bilgisinin, [örnek kodda](#sampleCode)ayarlanan değerle eşleşen `Lax`bir SameSite özniteliği değeri olduğunu görürsünüz.
+"SameSite tanımlama bilgisi oluştur" düğmesine tıkladığınızda örnek tarafından oluşturulan tanımlama bilgisinin, `Lax` [örnek kodda](#sampleCode)ayarlanan değer Ile eşleşen bir SameSite özniteliği değeri olduğundan, yukarıdaki görüntüden bakabilirsiniz.
 
-## <a name="interception"></a>Tanımlama bilgilerini kesintiye
+## <a name="intercepting-cookies"></a><a name="interception"></a>Tanımlama bilgilerini kesintiye
 
-Tanımlama bilgilerini ele almak için, kullanıcının tarayıcı aracısındaki desteğine göre None değerini ayarlamak üzere `CookiePolicy` ara yazılımını kullanmanız gerekir. Bu, tanımlama bilgilerini yazan ve `ConfigureServices()`içinde yapılandırılan bileşenlerden **önce** http istek ardışık düzenine yerleştirilmelidir.
+Tanımlama bilgilerini ele almak için, yok değerini kullanıcının tarayıcı aracısındaki desteğine göre ayarlamak için, `CookiePolicy` ara yazılımı kullanmanız gerekir. Bu, tanımlama bilgilerini yazan ve içinde `ConfigureServices()`yapılandırılan bileşenlerden **önce** http istek ardışık düzenine yerleştirilmesi gerekir.
 
-İşlem hattına eklemek için [Startup.cs](https://github.com/blowdart/AspNetSameSiteSamples/blob/master/AspNetCore21MVC/Startup.cs)içindeki `Configure(IApplicationBuilder, IHostingEnvironment)` yönteminde `app.UseCookiePolicy()` kullanın. Örnek:
+`app.UseCookiePolicy()` `Configure(IApplicationBuilder, IHostingEnvironment)` [Startup.cs](https://github.com/blowdart/AspNetSameSiteSamples/blob/master/AspNetCore21MVC/Startup.cs)içindeki yönteminde işlem hattı kullanımına eklemek için. Örneğin:
 
 ```c#
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -107,7 +113,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 }
 ```
 
-Ardından `ConfigureServices(IServiceCollection services)` tanımlama bilgisi ilkesini, tanımlama bilgileri eklendiği veya silindiği bir yardımcı sınıfa çağırmak üzere yapılandırın. Örnek:
+Ardından tanımlama bilgilerini `ConfigureServices(IServiceCollection services)` eklenen ya da silinen bir yardımcı sınıfa çağırmak için tanımlama bilgisi ilkesini yapılandırın. Örneğin:
 
 ```c#
 public void ConfigureServices(IServiceCollection services)
@@ -139,9 +145,9 @@ private void CheckSameSite(HttpContext httpContext, CookieOptions options)
 Yardımcı işlevi `CheckSameSite(HttpContext, CookieOptions)`:
 
 * , İstek için tanımlama bilgilerinin eklendiği veya istekten silindiği zaman çağrılır.
-* `SameSite` özelliğinin `None`olarak ayarlanmış olup olmadığını denetler.
-* `SameSite` `None` olarak ayarlanırsa ve geçerli kullanıcı aracısının None öznitelik değerini desteklemediği bilinmektedir. Denetim, [Samesitesupport](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/samesite/sample/snippets/SameSiteSupport.cs) sınıfı kullanılarak yapılır:
-  * Özelliği `(SameSiteMode)(-1)` olarak ayarlayarak değeri yaymayan `SameSite` ayarlar
+* `SameSite` Özelliğinin olarak `None`ayarlanmış olup olmadığını denetler.
+* `SameSite` , Olarak `None` ayarlanmışsa ve geçerli kullanıcı aracısına None öznitelik değerini desteklemediği bilinmektedir. Denetim, [Samesitesupport](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/samesite/sample/snippets/SameSiteSupport.cs) sınıfı kullanılarak yapılır:
+  * Özelliği `SameSite` özelliği olarak ayarlayarak değeri yaymayan ayarlar`(SameSiteMode)(-1)`
 
 ## <a name="targeting-net-framework"></a>Hedefleme .NET Framework
 
@@ -159,5 +165,5 @@ ASP.NET Core ve System. Web (ASP.NET Classic), SameSite 'nin bağımsız uygulam
 ### <a name="more-information"></a>Daha Fazla Bilgi
  
 [Chrome güncelleştirmeleri](https://www.chromium.org/updates/same-site)
-[ASP.NET Core samesite belgeleri](https://docs.microsoft.com/aspnet/core/security/samesite?view=aspnetcore-2.1)
+[ASP.NET Core SameSite belgeleri](https://docs.microsoft.com/aspnet/core/security/samesite?view=aspnetcore-2.1)
 [ASP.NET Core 2,1 SameSite değişiklik duyurusu](https://github.com/dotnet/aspnetcore/issues/8212)

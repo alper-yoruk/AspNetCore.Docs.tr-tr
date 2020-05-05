@@ -5,13 +5,19 @@ description: Filtrelerin nasıl çalıştığını ve ASP.NET Core nasıl kullan
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/04/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 03335811766ea3a1455901199863c6da0e35f7e4
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 7272e05b408ac6f8daeda586c6f40fcc5bd1f6eb
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78662787"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776792"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core filtreler
 
@@ -50,8 +56,8 @@ Her filtre türü, filtre ardışık düzeninde farklı bir aşamada yürütül�
 * [Kaynak filtreleri](#resource-filters):
 
   * Yetkilendirmeden sonra çalıştırın.  
-  * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting*>, filtre ardışık düzeninin geri kalanından önce kodu çalıştırır. Örneğin, `OnResourceExecuting` model bağlamalarından önce kodu çalıştırır.
-  * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted*>, ardışık düzenin geri kalanı tamamlandıktan sonra kodu çalıştırır.
+  * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting*>Filtre işlem hattının geri kalanında kodu çalıştırır. Örneğin, `OnResourceExecuting` model bağlamadan önce kodu çalıştırır.
+  * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted*>ardışık düzenin geri kalanı tamamlandıktan sonra kodu çalıştırır.
 
 * [Eylem filtreleri](#action-filters):
 
@@ -76,21 +82,21 @@ Zaman uyumlu filtreler, ardışık düzen aşamasından önce ve sonra kodu çal
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/MySampleActionFilter.cs?name=snippet_ActionFilter)]
 
-Zaman uyumsuz filtreler bir `On-Stage-ExecutionAsync` yöntemi tanımlar. Örneğin, <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*>:
+Zaman uyumsuz filtreler bir `On-Stage-ExecutionAsync` yöntemi tanımlar. Örneğin <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*>:
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/SampleAsyncActionFilter.cs?name=snippet)]
 
-Yukarıdaki kodda `SampleAsyncActionFilter`, eylem yöntemini yürüten bir <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate> (`next`) sahiptir.
+Önceki kodda,, `SampleAsyncActionFilter` Action metodunu yürüten bir <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate> (`next`) içerir.
 
 ### <a name="multiple-filter-stages"></a>Birden çok filtre aşaması
 
 Birden çok filtre aşaması için arabirimler tek bir sınıfta uygulanabilir. Örneğin, <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> sınıfı şunları uygular:
 
-* Zaman uyumlu: <xref:Microsoft.AspNetCore.Mvc.Filters.IActionFilter> ve <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter>
-* Zaman uyumsuz: <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncActionFilter> ve <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter>
+* Zaman uyumlu <xref:Microsoft.AspNetCore.Mvc.Filters.IActionFilter> : ve<xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter>
+* Zaman uyumsuz <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncActionFilter> : ve<xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter>
 * <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter>
 
-Her ikisini de **değil** , bir filtre arabiriminin zaman uyumlu veya zaman uyumsuz **sürümünü uygulayın.** Çalışma zamanı öncelikle filtrenin zaman uyumsuz arabirimi uygulayıp uygulamadığını denetler ve bu durumda bunu çağırır. Aksi takdirde, zaman uyumlu arabirimin Yöntem (ler) i çağırır. Tek bir sınıfta hem zaman uyumsuz hem de zaman uyumlu arabirimler uygulanmışsa, yalnızca zaman uyumsuz yöntem çağrılır. <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute>gibi soyut sınıflar kullanılırken, her bir filtre türü için yalnızca zaman uyumlu yöntemleri veya zaman uyumsuz yöntemi geçersiz kılın.
+Her ikisini de **değil** , bir filtre arabiriminin zaman uyumlu veya zaman uyumsuz **sürümünü uygulayın.** Çalışma zamanı öncelikle filtrenin zaman uyumsuz arabirimi uygulayıp uygulamadığını denetler ve bu durumda bunu çağırır. Aksi takdirde, zaman uyumlu arabirimin Yöntem (ler) i çağırır. Tek bir sınıfta hem zaman uyumsuz hem de zaman uyumlu arabirimler uygulanmışsa, yalnızca zaman uyumsuz yöntem çağrılır. Gibi <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute>soyut sınıflar kullanırken, her bir filtre türü için yalnızca zaman uyumlu yöntemleri veya zaman uyumsuz yöntemi geçersiz kılın.
 
 ### <a name="built-in-filter-attributes"></a>Yerleşik filtre öznitelikleri
 
@@ -100,13 +106,13 @@ ASP.NET Core, alt sınıflanmış ve özelleştirilebilen yerleşik öznitelik t
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/AddHeaderAttribute.cs?name=snippet)]
 
-Öznitelikler, önceki örnekte gösterildiği gibi, filtrelerin bağımsız değişkenleri kabul etmesine izin verir. `AddHeaderAttribute` bir denetleyiciye veya eylem yöntemine uygulayın ve HTTP üstbilgisinin adını ve değerini belirtin:
+Öznitelikler, önceki örnekte gösterildiği gibi, filtrelerin bağımsız değişkenleri kabul etmesine izin verir. `AddHeaderAttribute` ' İ bir denetleyiciye veya eylem yöntemine UYGULAYıN ve http üstbilgisinin adını ve değerini belirtin:
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet_AddHeader&highlight=1)]
 
-Üst bilgileri incelemek için [tarayıcı geliştirici araçları](https://developer.mozilla.org/docs/Learn/Common_questions/What_are_browser_developer_tools) gibi bir araç kullanın. **Yanıt üst bilgileri**altında `author: Rick Anderson` görüntülenir.
+Üst bilgileri incelemek için [tarayıcı geliştirici araçları](https://developer.mozilla.org/docs/Learn/Common_questions/What_are_browser_developer_tools) gibi bir araç kullanın. **Yanıt üst bilgileri** `author: Rick Anderson` altında görüntülenir.
 
-Aşağıdaki kod şu şekilde bir `ActionFilterAttribute` uygular:
+Aşağıdaki kod şunları uygular `ActionFilterAttribute` :
 
 * Yapılandırma sistemindeki başlığı ve adı okur. Önceki örnekten farklı olarak, aşağıdaki kod koda filtre parametrelerinin eklenmesine gerek yoktur.
 * Başlık ve adı yanıt üstbilgisine ekler.
@@ -117,24 +123,24 @@ Yapılandırma seçenekleri, [Seçenekler deseninin](xref:fundamentals/configura
 
 [!code-csharp[](filters/3.1sample/FiltersSample/appsettings.json)]
 
-`StartUp.ConfigureServices`:
+İçinde `StartUp.ConfigureServices`:
 
-* `PositionOptions` sınıfı, `"Position"` yapılandırma alanı ile hizmet kapsayıcısına eklenir.
-* `MyActionFilterAttribute`, hizmet kapsayıcısına eklenir.
+* `PositionOptions` Sınıfı, `"Position"` yapılandırma alanı ile hizmet kapsayıcısına eklenir.
+* , `MyActionFilterAttribute` Hizmet kapsayıcısına eklenir.
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/StartupAF.cs?name=snippet)]
 
-Aşağıdaki kod `PositionOptions` sınıfını gösterir:
+Aşağıdaki kod, `PositionOptions` sınıfını göstermektedir:
 
 [!code-csharp[](filters/3.1sample/FiltersSample/Helper/PositionOptions.cs?name=snippet)]
 
-Aşağıdaki kod, `Index2` yöntemine `MyActionFilterAttribute` uygular:
+Aşağıdaki kod `MyActionFilterAttribute` `Index2` yöntemi için geçerlidir:
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet2&highlight=9)]
 
-**Yanıt üst bilgileri**, `author: Rick Anderson`ve `Editor: Joe Smith` altında `Sample/Index2` uç noktası çağrıldığında görüntülenir.
+**Yanıt üst bilgileri**altında `author: Rick Anderson`, ve `Editor: Joe Smith` `Sample/Index2` uç nokta çağrıldığında görüntülenir.
 
-Aşağıdaki kod, Razor sayfasına `MyActionFilterAttribute` ve `AddHeaderAttribute` uygular:
+Aşağıdaki kod, `MyActionFilterAttribute` ve ' i `AddHeaderAttribute` Razor sayfasına uygular:
 
 [!code-csharp[](filters/3.1sample/FiltersSample/Pages/Movies/Index.cshtml.cs?name=snippet)]
 
@@ -176,9 +182,9 @@ Filtre iç içe geçme sonucu *olarak, filtrenin kodu,* *önceki* kodun ters sı
   
 Zaman uyumlu eylem filtreleri için filtre yöntemlerinin çağrıldığı sırayı gösteren aşağıdaki örnek.
 
-| Dizisi | Filtre kapsamı | Filter yöntemi |
+| Sequence | Filtre kapsamı | Filter yöntemi |
 |:--------:|:------------:|:-------------:|
-| 1\. | Genel | `OnActionExecuting` |
+| 1 | Genel | `OnActionExecuting` |
 | 2 | Denetleyici veya Razor sayfası| `OnActionExecuting` |
 | 3 | Yöntem | `OnActionExecuting` |
 | 4 | Yöntem | `OnActionExecuted` |
@@ -187,26 +193,26 @@ Zaman uyumlu eylem filtreleri için filtre yöntemlerinin çağrıldığı sıra
 
 ### <a name="controller-level-filters"></a>Denetleyici düzeyi filtreleri
 
-<xref:Microsoft.AspNetCore.Mvc.Controller> temel sınıfından devralan her denetleyici [Controller. OnActionExecuting](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuting*), [Controller. OnActionExecutionAsync](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*)ve [controller. onactionyürütülmüş](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuted*)
-`OnActionExecuted` yöntemlerini içerir. Bu Yöntemler:
+<xref:Microsoft.AspNetCore.Mvc.Controller> Temel sınıftan devralan her denetleyici [Controller. OnActionExecuting](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuting*), [Controller. onactionexecutionasync](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*)ve [Controller. onactionyürütülmüş](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuted*) 
+ `OnActionExecuted` yöntemlerini içerir. Bu Yöntemler:
 
 * Belirli bir eylem için çalışan filtreleri sarın.
 * `OnActionExecuting`, eylemin filtrelerinden herhangi birinin önüne çağırılır.
-* `OnActionExecuted` tüm eylem filtrelerinden sonra çağrılır.
-* `OnActionExecutionAsync`, eylemin filtrelerinden herhangi birinin önüne çağırılır. `next` sonra filtre içindeki kod eylem yönteminden sonra çalışır.
+* `OnActionExecuted`tüm eylem filtrelerinden sonra çağrılır.
+* `OnActionExecutionAsync`, eylemin filtrelerinden herhangi birinin önüne çağırılır. Eylem yöntemiyle çalıştıktan sonra `next` filtredeki kod.
 
-Örneğin, indirme örneğinde `MySampleActionFilter`, başlangıçta genel olarak uygulanır.
+Örneğin, indirme örneğinde, `MySampleActionFilter` başlangıçta genel olarak uygulanır.
 
-`TestController`:
+`TestController`Şunları yapın:
 
-* `FilterTest2` eyleme `SampleActionFilterAttribute` (`[SampleActionFilter]`) uygular.
-* `OnActionExecuting` ve `OnActionExecuted`geçersiz kılar.
+* `FilterTest2` Eyleme `SampleActionFilterAttribute` (`[SampleActionFilter]`) uygular.
+* Geçersiz `OnActionExecuting` kılmalar `OnActionExecuted`ve.
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/TestController.cs?name=snippet)]
 
 <!-- test via  webBuilder.UseStartup<Startup>(); -->
 
-`https://localhost:5001/Test2/FilterTest2` gitme aşağıdaki kodu çalıştırır:
+' A `https://localhost:5001/Test2/FilterTest2` gitme aşağıdaki kodu çalıştırır:
 
 * `TestController.OnActionExecuting`
   * `MySampleActionFilter.OnActionExecuting`
@@ -216,18 +222,18 @@ Zaman uyumlu eylem filtreleri için filtre yöntemlerinin çağrıldığı sıra
   * `MySampleActionFilter.OnActionExecuted`
 * `TestController.OnActionExecuted`
 
-Denetleyici düzeyi filtreleri [Order](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/Filters/ControllerActionFilter.cs#L15-L17) özelliğini `int.MinValue`olarak ayarlar. Denetleyici düzeyi filtreleri metotlara uygulandıktan sonra çalıştırılacak şekilde ayarlanamaz. Sıra, sonraki bölümde açıklanmaktadır.
+Denetleyici düzeyi filtreleri [Order](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/Filters/ControllerActionFilter.cs#L15-L17) özelliğini olarak `int.MinValue`ayarlar. Denetleyici düzeyi filtreleri metotlara uygulandıktan sonra çalıştırılacak şekilde ayarlanamaz. **not** Sıra, sonraki bölümde açıklanmaktadır.
 
 Razor Pages için bkz. [filtre yöntemlerini geçersiz kılarak Razor sayfası filtrelerini uygulama](xref:razor-pages/filter#implement-razor-page-filters-by-overriding-filter-methods).
 
 ### <a name="overriding-the-default-order"></a>Varsayılan sırayı geçersiz kılma
 
-Varsayılan yürütme sırası <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter>uygulayarak geçersiz kılınabilir. `IOrderedFilter`, yürütme sırasını belirlemede kapsama göre öncelik alan <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order> özelliğini kullanıma sunar. Daha düşük bir `Order` değerine sahip bir filtre:
+Varsayılan yürütme sırası, uygulama <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter>tarafından geçersiz kılınabilir. `IOrderedFilter`yürütme sırasını <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order> tespit etmek için kapsama göre öncelik alan özelliği gösterir. Düşük `Order` değere sahip bir filtre:
 
-* Daha yüksek bir `Order`bir filtrenin *önüne kodundan önce* kodu çalıştırır.
-* Daha yüksek `Order` değerine sahip bir filtrenin *sonrasında koddan sonra* çalışır.
+* Daha yüksek değeri olan bir filtreden önce koddan *önce* kodu çalıştırır `Order`.
+* Daha yüksek *after* `Order` bir değere sahip bir filtrenin sonrasında koddan sonra çalışır.
 
-`Order` özelliği bir Oluşturucu parametresiyle ayarlanır:
+`Order` Özelliği bir Oluşturucu parametresiyle ayarlanır:
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/Test3Controller.cs?name=snippet)]
 
@@ -235,7 +241,7 @@ Aşağıdaki denetleyicide iki eylem filtresini göz önünde bulundurun:
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/Test2Controller.cs?name=snippet)]
 
-`StartUp.ConfigureServices`genel bir filtre eklendi:
+İçinde `StartUp.ConfigureServices`genel bir filtre eklenir:
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/StartupOrder.cs?name=snippet)]
 
@@ -249,30 +255,30 @@ Aşağıdaki denetleyicide iki eylem filtresini göz önünde bulundurun:
   * `MyAction2FilterAttribute.OnResultExecuting`
 * `Test2Controller.OnActionExecuted`
 
-`Order` özelliği filtrelerin çalıştırıldığı sırayı belirlerken kapsamı geçersiz kılar. Filtreler sırasıyla sıraya göre sıralanır, ardından kapsam bölmek için kullanılır. Yerleşik filtrelerin tümü `IOrderedFilter` uygular ve varsayılan `Order` değerini 0 olarak ayarlar. Daha önce belirtildiği gibi, denetleyici düzeyi filtreleri [Order](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/Filters/ControllerActionFilter.cs#L15-L17) özelliğini yerleşik filtreler için `int.MinValue` olarak ayarlar, `Order` sıfır olmayan bir değere ayarlanmadığı sürece kapsam sıralamayı belirler.
+`Order` Özelliği filtrelerin çalıştırılacağı sıra belirlenirken kapsamı geçersiz kılar. Filtreler sırasıyla sıraya göre sıralanır, ardından kapsam bölmek için kullanılır. Yerleşik filtrelerin hepsi uygular `IOrderedFilter` ve varsayılan `Order` değeri 0 olarak ayarlar. Daha önce belirtildiği gibi, denetleyici düzeyi filtreleri [Order](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/Filters/ControllerActionFilter.cs#L15-L17) özelliğini yerleşik filtreler `int.MinValue` için olarak ayarlar, sıfır olmayan bir değere ayarlanmadığı sürece `Order` kapsam sıralamayı belirler.
 
-Yukarıdaki kodda, `MySampleActionFilter` denetleyici kapsamı bulunan `MyAction2FilterAttribute`önce çalışması için genel kapsama sahip olur. `MyAction2FilterAttribute` önce çalıştırmak için sırayı `int.MinValue`olarak ayarlayın:
+Önceki kodda, `MySampleActionFilter` denetleyici kapsamı olan, daha önce `MyAction2FilterAttribute`çalışması için genel kapsama sahiptir. Önce `MyAction2FilterAttribute` çalıştırmak için, sırayı şu şekilde `int.MinValue`ayarlayın:
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/Test2Controller.cs?name=snippet2)]
 
-Genel filtre `MySampleActionFilter` önce çalıştırmak için, `Order` `int.MinValue`olarak ayarlayın:
+Önce genel filtrenin `MySampleActionFilter` çalışmasını sağlamak için şu şekilde `Order` `int.MinValue`ayarlayın:
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/StartupOrder2.cs?name=snippet&highlight=6)]
 
 ## <a name="cancellation-and-short-circuiting"></a>İptal ve kısa devre dışı
 
-Filtre işlem hattı, filtre yöntemine sunulan <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext> parametresindeki <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext.Result> özelliği ayarlanarak kısa devre dışı olabilir. Örneğin, aşağıdaki kaynak filtresi, ardışık düzenin geri kalanının yürütülmesini engeller:
+Filtre işlem hattı, filtre yöntemine sunulan <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext.Result> <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext> parametrede özelliği ayarlanarak kısa devre yapılabilir. Örneğin, aşağıdaki kaynak filtresi, ardışık düzenin geri kalanının yürütülmesini engeller:
 
 <a name="short-circuiting-resource-filter"></a>
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/ShortCircuitingResourceFilterAttribute.cs?name=snippet)]
 
-Aşağıdaki kodda, hem `ShortCircuitingResourceFilter` hem de `AddHeader` filtresi `SomeResource` Action metodunu hedefleyin. `ShortCircuitingResourceFilter`:
+Aşağıdaki kodda, `ShortCircuitingResourceFilter` ve `AddHeader` filtresi `SomeResource` Action metodunu hedefleyin. `ShortCircuitingResourceFilter`Şunları yapın:
 
-* Önce bir kaynak filtresi olduğundan ve `AddHeader` bir eylem filtresi olduğundan, önce çalışır.
+* İlk olarak bir kaynak filtresi olduğundan ve `AddHeader` bir eylem filtresiyle çalışır.
 * Kısa süreli işlem hattının geri kalanı.
 
-Bu nedenle `AddHeader` filtresi `SomeResource` eylemi için hiçbir şekilde çalışmamayacaktır. Her iki filtre de eylem yöntemi düzeyinde uygulanırsa, `ShortCircuitingResourceFilter` ilk kez çalıştırıldıysa bu davranış aynı olur. `ShortCircuitingResourceFilter`, filtre türü veya `Order` özelliğinin açık kullanımı nedeniyle önce çalışır.
+Bu nedenle `AddHeader` , filtre `SomeResource` eylem için hiçbir şekilde çalışmayacaktır. Bu davranış, her iki filtre de eylem yöntemi düzeyinde uygulanırsa, ilk olarak `ShortCircuitingResourceFilter` çalıştırıldığında aynı olur. İlk `ShortCircuitingResourceFilter` olarak, filtre türü veya açıkça `Order` özelliğin kullanımı kullanılarak çalışır.
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet_AddHeader&highlight=1)]
 
@@ -292,7 +298,7 @@ Aşağıdaki filtreler, dı tarafından belirtilen Oluşturucu bağımlılıklar
 
 * <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute>
 * <xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute>
-* <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory> özniteliğe uygulandı.
+* <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>özniteliği üzerinde uygulandı.
 
 Önceki filtreler bir denetleyiciye veya eylem yöntemine uygulanabilir:
 
@@ -303,21 +309,21 @@ Günlükçüler, DI 'den alınabilir. Ancak, yalnızca günlüğe kaydetme amac�
 
 ### <a name="servicefilterattribute"></a>ServiceFilterAttribute
 
-Hizmet filtresi uygulama türleri `ConfigureServices`kaydedilir. <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute>, bir filtrenin bir örneğini dı öğesinden alır.
+Hizmet filtresi uygulama türleri ' de `ConfigureServices`kaydedilir. Bir <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute> filtrenin bir örneğini alır.
 
-Aşağıdaki kod `AddHeaderResultServiceFilter`gösterir:
+Aşağıdaki kod şunu gösterir `AddHeaderResultServiceFilter`:
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/LoggingAddHeaderFilter.cs?name=snippet_ResultFilter)]
 
-Aşağıdaki kodda, `AddHeaderResultServiceFilter` dı kapsayıcısına eklenir:
+Aşağıdaki kodda, `AddHeaderResultServiceFilter` dı kapsayıcısına eklenmiştir:
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Startup.cs?name=snippet&highlight=4)]
 
-Aşağıdaki kodda, `ServiceFilter` özniteliği dı öğesinden `AddHeaderResultServiceFilter` filtrenin bir örneğini alır:
+Aşağıdaki kodda, `ServiceFilter` özniteliği, bir `AddHeaderResultServiceFilter` filtrenin bir örneğini dı:
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/HomeController.cs?name=snippet_ServiceFilter&highlight=1)]
 
-`ServiceFilterAttribute`kullanırken, [Servicefilterattribute. ısyeniden kullanılabilir](xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute.IsReusable)olarak ayarlanıyor:
+Kullanırken `ServiceFilterAttribute`, [servicefilterattribute. ıyeniden kullanılabilir](xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute.IsReusable)olarak ayarlanıyor:
 
 * Filtre örneğinin, içinde oluşturulduğu istek kapsamının dışında yeniden *kullanılabilir olabileceğini gösteren* bir ipucu sağlar. ASP.NET Core çalışma zamanı garanti etmez:
 
@@ -326,23 +332,23 @@ Aşağıdaki kodda, `ServiceFilter` özniteliği dı öğesinden `AddHeaderResul
 
 * Tek bir yaşam süresine sahip hizmetlere bağımlı olan bir filtreyle kullanılmamalıdır.
 
- <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute> <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>uygular. `IFilterFactory`, bir <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> örneği oluşturmak için <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> yöntemini kullanıma sunar. `CreateInstance`, belirtilen türü DI 'dan yükler.
+ <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute>uygular <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>. `IFilterFactory`<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> örnek oluşturma <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> yöntemini gösterir. `CreateInstance`belirtilen türü DI 'dan yükler.
 
 ### <a name="typefilterattribute"></a>TypeFilterAttribute
 
-<xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute> <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute>benzerdir, ancak türü doğrudan dı kapsayıcısından çözümlenmez. <xref:Microsoft.Extensions.DependencyInjection.ObjectFactory?displayProperty=fullName>kullanarak türü başlatır.
+<xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute>benzerdir <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute>, ancak türü doğrudan dı kapsayıcısından çözümlenmez. Kullanarak <xref:Microsoft.Extensions.DependencyInjection.ObjectFactory?displayProperty=fullName>türü başlatır.
 
-`TypeFilterAttribute` türler doğrudan dı kapsayıcısından çözümlenmediğinden:
+Türler `TypeFilterAttribute` doğrudan dı kapsayıcısından çözümlenmediğinden:
 
-* `TypeFilterAttribute` kullanılarak başvurulan türlerin dı kapsayıcısına kaydedilmesi gerekmez.  Bunların bağımlılıkları, dı kapsayıcısı tarafından yerine getirilir.
-* `TypeFilterAttribute`, isteğe bağlı olarak tür için Oluşturucu bağımsız değişkenlerini kabul edebilir.
+* ' İ kullanılarak başvurulan türlerin, `TypeFilterAttribute` dı kapsayıcısına kayıtlı olması gerekmez.  Bunların bağımlılıkları, dı kapsayıcısı tarafından yerine getirilir.
+* `TypeFilterAttribute`isteğe bağlı olarak tür için Oluşturucu bağımsız değişkenlerini kabul edebilir.
 
-`TypeFilterAttribute`kullanırken [Typefilterattribute. ıyeniden kullanılabilir](xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute.IsReusable)olarak ayarlanıyor:
+Kullanırken `TypeFilterAttribute`, [typefilterattribute. ıyeniden kullanılabilir](xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute.IsReusable)olarak ayarlanıyor:
 * Filtre örneğinin, içinde oluşturulduğu istek kapsamının dışında yeniden kullanılabilir *olabileceği* ipucu sağlar. ASP.NET Core çalışma zamanı, filtrenin tek bir örneğinin oluşturulacağı garantisi vermez.
 
 * Tek bir yaşam süresine sahip hizmetlere bağımlı olan bir filtreyle kullanılmamalıdır.
 
-Aşağıdaki örnek `TypeFilterAttribute`kullanarak bir türe bağımsız değişkenlerin nasıl geçirileceğini gösterir:
+Aşağıdaki örnek kullanarak `TypeFilterAttribute`bir türe bağımsız değişkenlerin nasıl geçirileceğini göstermektedir:
 
 [!code-csharp[](filters/3.1sample/FiltersSample/Controllers/HomeController.cs?name=snippet_TypeFilter&highlight=1,2)]
 
@@ -378,7 +384,7 @@ Bir yetkilendirme filtresinde özel durum oluştuğunda bir sınama vermeyi dü�
 
 Kaynak filtreleri:
 
-* <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter> ya da <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResourceFilter> arabirimini uygulayın.
+* <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter> Ya <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResourceFilter> da arabirimini uygulayın.
 * Yürütme, filtre işlem hattının çoğunu sarmalar.
 * Kaynak filtrelerinden önce yalnızca [Yetkilendirme filtreleri](#authorization-filters) çalışır.
 
@@ -394,60 +400,60 @@ Kaynak filtresi örnekleri:
 
 ## <a name="action-filters"></a>Eylem filtreleri
 
-Eylem filtreleri Razor Pages **için uygulanmaz.** Razor Pages <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> ve <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> destekler. Daha fazla bilgi için bkz. [Razor Pages Için filtre yöntemleri](xref:razor-pages/filter).
+Eylem filtreleri Razor Pages **için uygulanmaz.** Razor Pages ve <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> destekler. Daha fazla bilgi için bkz. [Razor Pages Için filtre yöntemleri](xref:razor-pages/filter).
 
 Eylem filtreleri:
 
-* <xref:Microsoft.AspNetCore.Mvc.Filters.IActionFilter> ya da <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncActionFilter> arabirimini uygulayın.
+* <xref:Microsoft.AspNetCore.Mvc.Filters.IActionFilter> Ya <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncActionFilter> da arabirimini uygulayın.
 * Yürütmesinin, eylem yöntemlerinin yürütülmesi çevreler.
 
 Aşağıdaki kod bir örnek eylem filtresi gösterir:
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/MySampleActionFilter.cs?name=snippet_ActionFilter)]
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext> aşağıdaki özellikleri sağlar:
+, <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext> Aşağıdaki özellikleri sağlar:
 
 * <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext.ActionArguments>-girişlerin bir eylem yöntemine okunmasını sağlar.
 * <xref:Microsoft.AspNetCore.Mvc.Controller>-denetleyici örneğinin işlenmesine izin vermez.
-* <xref:System.Web.Mvc.ActionExecutingContext.Result>-eylem yönteminin ve sonraki eylem filtrelerinin `Result` kısa devre dışı yürütmesi.
+* <xref:System.Web.Mvc.ActionExecutingContext.Result>-Eylem `Result` yönteminin ve sonraki eylem filtrelerinin kısa devre dışı yürütülmesi ayarlanıyor.
 
 Eylem yönteminde özel durum oluşturma:
 
 * Sonraki filtrelerin çalıştırılmasını önler.
-* `Result`ayarının aksine, başarılı bir sonuç yerine başarısızlık olarak değerlendirilir.
+* Ayarından `Result`farklı olarak, başarılı bir sonuç yerine başarısızlık olarak değerlendirilir.
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext> `Controller` ve `Result` ek olarak aşağıdaki özellikleri sağlar:
+, <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext> Ve `Controller` `Result` ek olarak aşağıdaki özellikleri sağlar:
 
-* <xref:System.Web.Mvc.ActionExecutedContext.Canceled>-eylem yürütmesi başka bir filtre tarafından kabul edilse true.
-* <xref:System.Web.Mvc.ActionExecutedContext.Exception>-eylem veya daha önce çalıştırılan eylem filtresi bir özel durum oluşturdu, null değil. Bu özellik null olarak ayarlanıyor:
+* <xref:System.Web.Mvc.ActionExecutedContext.Canceled>-Eylem yürütmesi başka bir filtre tarafından kabul edilse true.
+* <xref:System.Web.Mvc.ActionExecutedContext.Exception>-Eylem veya daha önce çalıştırılan eylem filtresi bir özel durum oluşturdu-null değil. Bu özellik null olarak ayarlanıyor:
 
   * Özel durumu etkin bir şekilde işler.
-  * `Result`, eylem yönteminden döndürülmüş gibi yürütülür.
+  * `Result`eylem yönteminden döndürülmüş gibi yürütülür.
 
-Bir `IAsyncActionFilter`için <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate>çağrısı:
+Bir `IAsyncActionFilter`için bir çağrısı <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate>:
 
 * Sonraki eylem filtrelerini ve eylem yöntemini yürütür.
 * `ActionExecutedContext` döndürür.
 
-Kısa devre dışı, bir sonuç örneğine <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext.Result?displayProperty=fullName> atayın ve `next` çağırmayın (`ActionExecutionDelegate`).
+Kısa devre dışı, bir sonuç <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext.Result?displayProperty=fullName> örneğine atayın ve çağırmayın `next` ( `ActionExecutionDelegate`).
 
-Framework, alt sınıflı olabilecek bir soyut <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> sağlar.
+Çerçeve, alt sınıflı <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> olabilecek bir Özet sağlar.
 
-`OnActionExecuting` eylem filtresi şu şekilde kullanılabilir:
+`OnActionExecuting` Eylem filtresi şu şekilde kullanılabilir:
 
 * Model durumunu doğrulayın.
 * Durum geçersizse bir hata döndürür.
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/ValidateModelAttribute.cs?name=snippet)]
 
-`OnActionExecuted` yöntemi eylem yönteminden sonra çalışır:
+`OnActionExecuted` Yöntemi eylem yönteminden sonra çalışır:
 
-* Ve <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext.Result> özelliği aracılığıyla eylemin sonuçlarını görebilir ve değiştirebilir.
-* eylem yürütmesi başka bir filtre tarafından kabul edilse, <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext.Canceled> true olarak ayarlanır.
-* eylem veya sonraki eylem filtresi bir özel durum harekete geçirdi, <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext.Exception> null olmayan bir değere ayarlanır. `Exception` null olarak ayarlanıyor:
+* Ve, <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext.Result> özelliği aracılığıyla eylemin sonuçlarını görebilir ve değiştirebilir.
+* <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext.Canceled>eylem yürütmesi başka bir filtre tarafından kabul edilse, true olarak ayarlanır.
+* <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext.Exception>eylem veya sonraki bir eylem filtresi bir özel durum harekete geçirdi null olmayan bir değer olarak ayarlanır. Null `Exception` olarak ayarlanıyor:
 
   * Bir özel durumu etkin bir şekilde işler.
-  * `ActionExecutedContext.Result`, normal olarak eylem yönteminden döndürülmüş gibi yürütülür.
+  * `ActionExecutedContext.Result`eylem yönteminden normal olarak döndürülmüş gibi yürütülür.
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/ValidateModelAttribute.cs?name=snippet2&higlight=12-99)]
 
@@ -455,7 +461,7 @@ Framework, alt sınıflı olabilecek bir soyut <xref:Microsoft.AspNetCore.Mvc.Fi
 
 Özel durum filtreleri:
 
-* <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter> veya <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter>uygulayın.
+* Veya <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter> <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter>uygulayın.
 * , Yaygın hata işleme ilkelerini uygulamak için kullanılabilir.
 
 Aşağıdaki örnek özel durum filtresi, uygulama geliştirmede olduğunda oluşan özel durumlar hakkındaki ayrıntıları görüntülemek için özel bir hata görünümü kullanır:
@@ -469,11 +475,11 @@ Aşağıdaki kod özel durum filtresini sınar:
 Özel durum filtreleri:
 
 * Etkinlikden önceki ve sonraki olaylar yok.
-* <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException*> veya <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync*>uygulayın.
+* Veya <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException*> <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync*>uygulayın.
 * Razor sayfası veya denetleyici oluşturma, [model bağlama](xref:mvc/models/model-binding), eylem filtreleri veya eylem yöntemlerinde oluşan işlenmemiş özel durumları işleyin.
 * Kaynak filtrelerinde, sonuç filtrelerinde veya MVC sonuç yürütülürken oluşan özel **durumları yakalamayın** .
 
-Bir özel durumu işlemek için <xref:System.Web.Mvc.ExceptionContext.ExceptionHandled> özelliğini `true` veya bir yanıt yazın. Bu, özel durumun yayılmasını engeller. Özel durum filtresi bir özel durumu "başarılı" olarak açamaz. Yalnızca bir eylem filtresi bunu yapabilir.
+Bir özel durumu işlemek için, <xref:System.Web.Mvc.ExceptionContext.ExceptionHandled> özelliğini bir yanıt `true` olarak ayarlayın veya yazın. Bu, özel durumun yayılmasını engeller. Özel durum filtresi bir özel durumu "başarılı" olarak açamaz. Yalnızca bir eylem filtresi bunu yapabilir.
 
 Özel durum filtreleri:
 
@@ -497,44 +503,44 @@ Aşağıdaki kod, bir HTTP üst bilgisi ekleyen bir sonuç filtresi gösterir:
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/LoggingAddHeaderFilter.cs?name=snippet_ResultFilter)]
 
-Yürütülen sonuç türü eyleme göre değişir. Bir görünüm döndüren bir eylem, yürütülen <xref:Microsoft.AspNetCore.Mvc.ViewResult> bir parçası olarak tüm Razor işlemlerini içerir. Bir API yöntemi, sonucun yürütülmesinin bir parçası olarak bazı serileştirme işlemleri gerçekleştirebilir. [Eylem sonuçları](xref:mvc/controllers/actions)hakkında daha fazla bilgi edinin.
+Yürütülen sonuç türü eyleme göre değişir. Bir görünüm döndüren bir eylem, <xref:Microsoft.AspNetCore.Mvc.ViewResult> çalıştırılmakta olan bir parçası olarak tüm Razor işlemlerini içerir. Bir API yöntemi, sonucun yürütülmesinin bir parçası olarak bazı serileştirme işlemleri gerçekleştirebilir. [Eylem sonuçları](xref:mvc/controllers/actions)hakkında daha fazla bilgi edinin.
 
 Sonuç filtreleri yalnızca bir eylem veya eylem filtresi bir eylem sonucu üretirse yürütülür. Şu durumlarda sonuç filtreleri yürütülmez:
 
 * Bir yetkilendirme filtresi veya kaynak filtresi, işlem hattı için kısa süreli olarak devre dışı.
 * Bir özel durum filtresi, bir eylem sonucu üreterek özel durumu işler.
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuting*?displayProperty=fullName> yöntemi, eylem sonucunun ve sonraki sonuç filtrelerinin `true`<xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel?displayProperty=fullName> ayarlanarak kısa devre yürütülmesine neden olabilir. Boş bir yanıt oluşturmamaya kaçınmak için kısa devre dışı bırakıldığında yanıt nesnesine yazın. `IResultFilter.OnResultExecuting`bir özel durum üretiliyor:
+<xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuting*?displayProperty=fullName> Yöntemi, olarak <xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel?displayProperty=fullName> `true`ayarlanarak eylem sonucunun ve sonraki sonuç filtrelerinin kısa devre yürütülmesine neden olabilir. Boş bir yanıt oluşturmamaya kaçınmak için kısa devre dışı bırakıldığında yanıt nesnesine yazın. İçinde `IResultFilter.OnResultExecuting`bir özel durum üretiliyor:
 
 * Eylem sonucunun ve sonraki filtrelerin yürütülmesini önler.
 * Başarılı bir sonuç yerine başarısızlık olarak değerlendirilir.
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuted*?displayProperty=fullName> yöntemi çalıştırıldığında, yanıt muhtemelen istemciye zaten gönderilmiştir. Yanıt istemciye zaten gönderildiyse, bu değiştirilemez.
+<xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuted*?displayProperty=fullName> Yöntem çalıştığında, yanıt muhtemelen istemciye zaten gönderilmiştir. Yanıt istemciye zaten gönderildiyse, bu değiştirilemez.
 
-`ResultExecutedContext.Canceled`, eylem sonucu yürütmesi başka bir filtre tarafından kabul edilen kısa devre ise `true` olarak ayarlanır.
+`ResultExecutedContext.Canceled`eylem sonucu yürütmesi `true` başka bir filtre tarafından kabul edilen ise olarak ayarlanır.
 
-eylem sonucu veya sonraki sonuç filtresi bir özel durum harekete geçirdi, `ResultExecutedContext.Exception` null olmayan bir değere ayarlanır. `Exception` null olarak ayarlanması, bir özel durumu etkili bir şekilde işler ve özel durumun daha sonra işlem hattının daha sonra oluşturulmasını önler. Bir sonuç filtresinde özel durum işlenirken yanıta veri yazmanın güvenilir bir yolu yoktur. Bir eylem sonucu bir özel durum oluşturduğunda üstbilgiler istemciye temizleniyorsa, hata kodu göndermek için güvenilir bir mekanizma yoktur.
+`ResultExecutedContext.Exception`eylem sonucu veya sonraki sonuç filtresi bir özel durum harekete geçirdi null olmayan bir değer olarak ayarlanır. Null `Exception` olarak ayarlanması bir özel durumu işler ve sonra işlem hattının daha sonra yeniden oluşturulmasını engeller. Bir sonuç filtresinde özel durum işlenirken yanıta veri yazmanın güvenilir bir yolu yoktur. Bir eylem sonucu bir özel durum oluşturduğunda üstbilgiler istemciye temizleniyorsa, hata kodu göndermek için güvenilir bir mekanizma yoktur.
 
-Bir <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter>için, <xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate> bir `await next` çağrısı, sonraki sonuç filtrelerini ve eylem sonucunu yürütür. Kısa devre dışı, [ResultExecutingContext. Cancel](xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel) `true` ve `ResultExecutionDelegate`çağırmayın:
+Bir <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter>için bir çağrısı `await next` , sonraki sonuç filtrelerini <xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate> ve eylem sonucunu yürütür. Kısa devre dışı, [ResultExecutingContext. Cancel](xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel) olarak ayarlayın `true` ve şunu çağırmayın `ResultExecutionDelegate`:
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/MyAsyncResponseFilter.cs?name=snippet)]
 
-Framework, alt sınıflı olabilecek bir soyut `ResultFilterAttribute` sağlar. Daha önce gösterilen [Addheaderattribute](#add-header-attribute) sınıfı bir sonuç Filtresi özniteliği örneğidir.
+Çerçeve, alt sınıflı `ResultFilterAttribute` olabilecek bir Özet sağlar. Daha önce gösterilen [Addheaderattribute](#add-header-attribute) sınıfı bir sonuç Filtresi özniteliği örneğidir.
 
 ### <a name="ialwaysrunresultfilter-and-iasyncalwaysrunresultfilter"></a>Ialwaysrunresultfilter ve ıasyncalwaysrunresultfilter
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.IAlwaysRunResultFilter> ve <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncAlwaysRunResultFilter> arabirimleri, tüm eylem sonuçları için çalışan bir <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter> uygulamasını bildirir. Bu, tarafından oluşturulan eylem sonuçlarını içerir:
+Ve <xref:Microsoft.AspNetCore.Mvc.Filters.IAlwaysRunResultFilter> <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncAlwaysRunResultFilter> arabirimleri, tüm eylem <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter> sonuçları için çalışan bir uygulama bildirir. Bu, tarafından oluşturulan eylem sonuçlarını içerir:
 
 * Kısa devre olan Yetkilendirme filtreleri ve kaynak filtreleri.
 * Özel durum filtreleri.
 
-Örneğin, aşağıdaki filtre her zaman çalışır ve içerik anlaşması başarısız olduğunda *422 olmayan bir varlık* durum kodu ile bir eylem sonucu (<xref:Microsoft.AspNetCore.Mvc.ObjectResult>) ayarlar:
+Örneğin, aşağıdaki filtre her zaman çalışır ve içerik anlaşması başarısız olduğunda<xref:Microsoft.AspNetCore.Mvc.ObjectResult> *422 olmayan bir varlık* durum kodu ile bir eylem sonucu () ayarlar:
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/UnprocessableResultFilter.cs?name=snippet)]
 
 ### <a name="ifilterfactory"></a>IFilterFactory
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory> <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata>uygular. Bu nedenle, bir `IFilterFactory` örneği, filtre ardışık düzeninde herhangi bir yerde `IFilterMetadata` bir örnek olarak kullanılabilir. Çalışma zamanı filtreyi çağırmayı hazırlarken, bir `IFilterFactory`dönüştürmeyi dener. Bu atama başarılı olursa, çağrılan `IFilterMetadata` örneğini oluşturmak için <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> yöntemi çağırılır. Bu, tam filtre işlem hattının uygulama başladığında açıkça ayarlanması gerektiğinden esnek bir tasarım sağlar.
+<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>uygular <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata>. Bu nedenle, `IFilterFactory` bir örnek, filtre ardışık düzeninde `IFilterMetadata` herhangi bir yerde örnek olarak kullanılabilir. Çalışma zamanı filtreyi çağırmayı hazırlarken, bir `IFilterFactory`öğesine dönüştürmeyi dener. Atama başarılı olursa, çağrılan <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> `IFilterMetadata` örneği oluşturmak için yöntemi çağırılır. Bu, tam filtre işlem hattının uygulama başladığında açıkça ayarlanması gerektiğinden esnek bir tasarım sağlar.
 
 `IFilterFactory`, filtre oluşturmaya yönelik başka bir yaklaşım olarak özel öznitelik uygulamaları kullanılarak uygulanabilir:
 
@@ -551,9 +557,9 @@ Filtre aşağıdaki kodda uygulanır:
 
 F12 geliştirici araçları, örnek kod tarafından eklenen aşağıdaki yanıt üstbilgilerini görüntüler:
 
-* **Yazar:** `Rick Anderson`
-* **globaladdheader:** `Result filter added to MvcOptions.Filters`
-* **iç:** `My header`
+* **Yazar:**`Rick Anderson`
+* **globaladdheader:**`Result filter added to MvcOptions.Filters`
+* **iç:**`My header`
 
 Yukarıdaki kod, **iç:** `My header` yanıt üst bilgisini oluşturur.
 
@@ -564,30 +570,30 @@ This section needs to be rewritten.
 What's a non-named attribute?
 -->
 
-`IFilterFactory` uygulayan filtreler şu filtreler için yararlıdır:
+Uygulayan `IFilterFactory` filtreler şu filtreler için yararlıdır:
 
 * Parametre geçirme gerekmez.
 * DI tarafından doldurulması gereken Oluşturucu bağımlılıkları vardır.
 
-<xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute> <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>uygular. `IFilterFactory`, bir <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> örneği oluşturmak için <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> yöntemini kullanıma sunar. `CreateInstance`, belirtilen türü hizmetler kapsayıcısından (DI) yükler.
+<xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute>uygular <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>. `IFilterFactory`<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> örnek oluşturma <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> yöntemini gösterir. `CreateInstance`belirtilen türü hizmetler kapsayıcısından (dı) yükler.
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/SampleActionFilterAttribute.cs?name=snippet_TypeFilterAttribute&highlight=1,3,7)]
 
-Aşağıdaki kodda `[SampleActionFilter]`uygulamak için üç yaklaşım gösterilmektedir:
+Aşağıdaki kod, `[SampleActionFilter]`uygulamak için üç yaklaşımda gösterilmiştir:
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/HomeController.cs?name=snippet&highlight=1)]
 
-Yukarıdaki kodda, yöntemi `[SampleActionFilter]` olarak dekorasyon, `SampleActionFilter`uygulamak için tercih edilen yaklaşımdır.
+Yukarıdaki kodda, yöntemi ile `[SampleActionFilter]` dekorasyon, uygulamak için tercih edilen yaklaşımdır. `SampleActionFilter`
 
 ## <a name="using-middleware-in-the-filter-pipeline"></a>Filtre ardışık düzeninde ara yazılım kullanma
 
 Kaynak filtreleri, işlem hattında daha sonra gelen her şeyin yürütülmesini çevreleyecek olan [Ara yazılım](xref:fundamentals/middleware/index) gibi çalışır. Ancak filtreler, çalışma zamanının bir parçası oldukları ve bu sayede bağlam ve yapılara erişimi olan ara yazılımlar farklıdır.
 
-Ara yazılımı bir filtre olarak kullanmak için, filtre ardışık düzenine eklenecek olan ara yazılımı belirten `Configure` yöntemi ile bir tür oluşturun. Aşağıdaki örnek, bir istek için geçerli kültürü oluşturmak üzere yerelleştirme ara yazılımını kullanır:
+Ara yazılımı bir filtre olarak kullanmak için, filtre ardışık düzenine eklenecek `Configure` olan ara yazılımı belirten bir yöntemi olan bir tür oluşturun. Aşağıdaki örnek, bir istek için geçerli kültürü oluşturmak üzere yerelleştirme ara yazılımını kullanır:
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/LocalizationPipeline.cs?name=snippet_MiddlewareFilter&highlight=3,22)]
 
-Ara yazılımı çalıştırmak için <xref:Microsoft.AspNetCore.Mvc.MiddlewareFilterAttribute> kullanın:
+Ara yazılımını <xref:Microsoft.AspNetCore.Mvc.MiddlewareFilterAttribute> çalıştırmak için kullanın:
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/HomeController.cs?name=snippet_MiddlewareFilter&highlight=2)]
 
@@ -632,8 +638,8 @@ Her filtre türü, filtre ardışık düzeninde farklı bir aşamada yürütül�
 * [Kaynak filtreleri](#resource-filters):
 
   * Yetkilendirmeden sonra çalıştırın.  
-  * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting*>, filtre işlem hattının geri kalanının önüne kod çalıştırabilir. Örneğin `OnResourceExecuting`, model bağlamadan önce kodu çalıştırabilir.
-  * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted*>, ardışık düzenin geri kalanı tamamlandıktan sonra kodu çalıştırabilir.
+  * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuting*>Filtre işlem hattının geri kalanından önce kod çalıştırabilir. Örneğin, `OnResourceExecuting` model bağlamadan önce kodu çalıştırabilir.
+  * <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter.OnResourceExecuted*>ardışık düzenin geri kalanı tamamlandıktan sonra kodu çalıştırabilir.
 
 * [Eylem filtreleri](#action-filters) , tek bir eylem yöntemi çağrıldıktan hemen önce ve sonra kodu çalıştırabilir. Bir eyleme geçirilen bağımsız değişkenleri ve eylemden döndürülen sonucu işlemek için kullanılabilirler. Eylem filtreleri Razor Pages **desteklenmez.**
 
@@ -649,7 +655,7 @@ Aşağıdaki diyagramda filtre türlerinin filtre ardışık düzeninde nasıl e
 
 Filtreler, farklı arabirim tanımları aracılığıyla hem zaman uyumlu hem de zaman uyumsuz uygulamaları destekler.
 
-Zaman uyumlu filtreler, ardışık düzen aşamasından önce (`On-Stage-Executing`) ve sonra kodu çalıştırabilir (`On-Stage-Executed`). Örneğin, `OnActionExecuting` eylem yöntemi çağrılmadan önce çağrılır. `OnActionExecuted`, eylem yöntemi döndüğünde çağrılır.
+Zaman uyumlu filtreler, ardışık düzen aşamasını`On-Stage-Executing`() ve sonra`On-Stage-Executed`kodu çalıştırabilir. Örneğin, `OnActionExecuting` eylem yöntemi çağrılmadan önce çağrılır. `OnActionExecuted`, eylem yöntemi döndüğünde çağrılır.
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/MySampleActionFilter.cs?name=snippet_ActionFilter)]
 
@@ -657,13 +663,13 @@ Zaman uyumsuz filtreler bir `On-Stage-ExecutionAsync` yöntemi tanımlar:
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/SampleAsyncActionFilter.cs?name=snippet)]
 
-Yukarıdaki kodda `SampleAsyncActionFilter`, eylem yöntemini yürüten bir <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate> (`next`) sahiptir.  `On-Stage-ExecutionAsync` yöntemlerinin her biri, filtrenin ardışık düzen aşamasını yürüten bir `FilterType-ExecutionDelegate` alır.
+Önceki kodda,, `SampleAsyncActionFilter` Action metodunu yürüten bir <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate> (`next`) içerir.  `On-Stage-ExecutionAsync` Yöntemlerin her biri, filtrenin ardışık `FilterType-ExecutionDelegate` düzen aşamasını yürüten bir alır.
 
 ### <a name="multiple-filter-stages"></a>Birden çok filtre aşaması
 
-Birden çok filtre aşaması için arabirimler tek bir sınıfta uygulanabilir. Örneğin, <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> sınıfı `IActionFilter`, `IResultFilter`ve zaman uyumsuz eşdeğerlerini uygular.
+Birden çok filtre aşaması için arabirimler tek bir sınıfta uygulanabilir. Örneğin, <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> sınıfı, `IActionFilter` `IResultFilter`ve zaman uyumsuz eşdeğerlerini uygular.
 
-Her ikisini de **değil** , bir filtre arabiriminin zaman uyumlu veya zaman uyumsuz **sürümünü uygulayın.** Çalışma zamanı öncelikle filtrenin zaman uyumsuz arabirimi uygulayıp uygulamadığını denetler ve bu durumda bunu çağırır. Aksi takdirde, zaman uyumlu arabirimin Yöntem (ler) i çağırır. Tek bir sınıfta hem zaman uyumsuz hem de zaman uyumlu arabirimler uygulanmışsa, yalnızca zaman uyumsuz yöntem çağrılır. <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> gibi soyut sınıflar kullanılırken, yalnızca zaman uyumlu yöntemleri veya her bir filtre türü için zaman uyumsuz yöntemi geçersiz kılın.
+Her ikisini de **değil** , bir filtre arabiriminin zaman uyumlu veya zaman uyumsuz **sürümünü uygulayın.** Çalışma zamanı öncelikle filtrenin zaman uyumsuz arabirimi uygulayıp uygulamadığını denetler ve bu durumda bunu çağırır. Aksi takdirde, zaman uyumlu arabirimin Yöntem (ler) i çağırır. Tek bir sınıfta hem zaman uyumsuz hem de zaman uyumlu arabirimler uygulanmışsa, yalnızca zaman uyumsuz yöntem çağrılır. Soyut sınıfların kullanıldığı durumlarda, <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> yalnızca zaman uyumlu yöntemleri veya her bir filtre türü için zaman uyumsuz yöntemi geçersiz kılın.
 
 ### <a name="built-in-filter-attributes"></a>Yerleşik filtre öznitelikleri
 
@@ -673,7 +679,7 @@ ASP.NET Core, alt sınıflanmış ve özelleştirilebilen yerleşik öznitelik t
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/AddHeaderAttribute.cs?name=snippet)]
 
-Öznitelikler, önceki örnekte gösterildiği gibi, filtrelerin bağımsız değişkenleri kabul etmesine izin verir. `AddHeaderAttribute` bir denetleyiciye veya eylem yöntemine uygulayın ve HTTP üstbilgisinin adını ve değerini belirtin:
+Öznitelikler, önceki örnekte gösterildiği gibi, filtrelerin bağımsız değişkenleri kabul etmesine izin verir. `AddHeaderAttribute` ' İ bir denetleyiciye veya eylem yöntemine UYGULAYıN ve http üstbilgisinin adını ve değerini belirtin:
 
 [!code-csharp[](./filters/sample/FiltersSample/Controllers/SampleController.cs?name=snippet_AddHeader&highlight=1)]
 
@@ -717,13 +723,13 @@ Filtre iç içe geçme sonucu *olarak, filtrenin kodu,* *önceki* kodun ters sı
   
 Zaman uyumlu eylem filtreleri için filtre yöntemlerinin çağrıldığı sırayı gösteren aşağıdaki örnek.
 
-| Dizisi | Filtre kapsamı | Filter yöntemi |
+| Sequence | Filtre kapsamı | Filter yöntemi |
 |:--------:|:------------:|:-------------:|
-| 1\. | Genel | `OnActionExecuting` |
-| 2 | Denetleyici | `OnActionExecuting` |
+| 1 | Genel | `OnActionExecuting` |
+| 2 | Kumandasını | `OnActionExecuting` |
 | 3 | Yöntem | `OnActionExecuting` |
 | 4 | Yöntem | `OnActionExecuted` |
-| 5 | Denetleyici | `OnActionExecuted` |
+| 5 | Kumandasını | `OnActionExecuted` |
 | 6 | Genel | `OnActionExecuted` |
 
 Bu sıra şunları gösterir:
@@ -733,24 +739,24 @@ Bu sıra şunları gösterir:
 
 ### <a name="controller-and-razor-page-level-filters"></a>Denetleyici ve Razor sayfa düzeyi filtreleri
 
-<xref:Microsoft.AspNetCore.Mvc.Controller> temel sınıfından devralan her denetleyici [Controller. OnActionExecuting](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuting*), [Controller. OnActionExecutionAsync](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*)ve [controller. onactionyürütülmüş](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuted*)
-`OnActionExecuted` yöntemlerini içerir. Bu Yöntemler:
+<xref:Microsoft.AspNetCore.Mvc.Controller> Temel sınıftan devralan her denetleyici [Controller. OnActionExecuting](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuting*), [Controller. onactionexecutionasync](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*)ve [Controller. onactionyürütülmüş](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuted*) 
+ `OnActionExecuted` yöntemlerini içerir. Bu Yöntemler:
 
 * Belirli bir eylem için çalışan filtreleri sarın.
 * `OnActionExecuting`, eylemin filtrelerinden herhangi birinin önüne çağırılır.
-* `OnActionExecuted` tüm eylem filtrelerinden sonra çağrılır.
-* `OnActionExecutionAsync`, eylemin filtrelerinden herhangi birinin önüne çağırılır. `next` sonra filtre içindeki kod eylem yönteminden sonra çalışır.
+* `OnActionExecuted`tüm eylem filtrelerinden sonra çağrılır.
+* `OnActionExecutionAsync`, eylemin filtrelerinden herhangi birinin önüne çağırılır. Eylem yöntemiyle çalıştıktan sonra `next` filtredeki kod.
 
-Örneğin, indirme örneğinde `MySampleActionFilter`, başlangıçta genel olarak uygulanır.
+Örneğin, indirme örneğinde, `MySampleActionFilter` başlangıçta genel olarak uygulanır.
 
-`TestController`:
+`TestController`Şunları yapın:
 
-* `FilterTest2` eyleme `SampleActionFilterAttribute` (`[SampleActionFilter]`) uygular.
-* `OnActionExecuting` ve `OnActionExecuted`geçersiz kılar.
+* `FilterTest2` Eyleme `SampleActionFilterAttribute` (`[SampleActionFilter]`) uygular.
+* Geçersiz `OnActionExecuting` kılmalar `OnActionExecuted`ve.
 
 [!code-csharp[](./filters/sample/FiltersSample/Controllers/TestController.cs?name=snippet)]
 
-`https://localhost:5001/Test/FilterTest2` gitme aşağıdaki kodu çalıştırır:
+' A `https://localhost:5001/Test/FilterTest2` gitme aşağıdaki kodu çalıştırır:
 
 * `TestController.OnActionExecuting`
   * `MySampleActionFilter.OnActionExecuting`
@@ -764,44 +770,44 @@ Razor Pages için bkz. [filtre yöntemlerini geçersiz kılarak Razor sayfası f
 
 ### <a name="overriding-the-default-order"></a>Varsayılan sırayı geçersiz kılma
 
-Varsayılan yürütme sırası <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter>uygulayarak geçersiz kılınabilir. `IOrderedFilter`, yürütme sırasını belirlemede kapsama göre öncelik alan <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order> özelliğini kullanıma sunar. Daha düşük bir `Order` değerine sahip bir filtre:
+Varsayılan yürütme sırası, uygulama <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter>tarafından geçersiz kılınabilir. `IOrderedFilter`yürütme sırasını <xref:Microsoft.AspNetCore.Mvc.Filters.IOrderedFilter.Order> tespit etmek için kapsama göre öncelik alan özelliği gösterir. Düşük `Order` değere sahip bir filtre:
 
-* Daha yüksek bir `Order`bir filtrenin *önüne kodundan önce* kodu çalıştırır.
-* Daha yüksek `Order` değerine sahip bir filtrenin *sonrasında koddan sonra* çalışır.
+* Daha yüksek değeri olan bir filtreden önce koddan *önce* kodu çalıştırır `Order`.
+* Daha yüksek *after* `Order` bir değere sahip bir filtrenin sonrasında koddan sonra çalışır.
 
-`Order` özelliği bir Oluşturucu parametresiyle ayarlanabilir:
+`Order` Özelliği bir Oluşturucu parametresiyle ayarlanabilir:
 
 ```csharp
 [MyFilter(Name = "Controller Level Attribute", Order=1)]
 ```
 
-Yukarıdaki örnekte gösterilen 3 eylem filtresini göz önünde bulundurun. Denetleyicinin ve genel filtrelerin `Order` özelliği sırasıyla 1 ve 2 ' ye ayarlandıysa, yürütme sırası tersine çevrilir.
+Yukarıdaki örnekte gösterilen 3 eylem filtresini göz önünde bulundurun. Denetleyicinin ve `Order` genel filtrelerin özelliği sırasıyla 1 ve 2 olarak ayarlandıysa, yürütme sırası tersine çevrilir.
 
-| Dizisi | Filtre kapsamı | `Order` özelliği | Filter yöntemi |
+| Sequence | Filtre kapsamı | `Order`özelliði | Filter yöntemi |
 |:--------:|:------------:|:-----------------:|:-------------:|
-| 1\. | Yöntem | 0 | `OnActionExecuting` |
-| 2 | Denetleyici | 1\.  | `OnActionExecuting` |
+| 1 | Yöntem | 0 | `OnActionExecuting` |
+| 2 | Kumandasını | 1  | `OnActionExecuting` |
 | 3 | Genel | 2  | `OnActionExecuting` |
 | 4 | Genel | 2  | `OnActionExecuted` |
-| 5 | Denetleyici | 1\.  | `OnActionExecuted` |
+| 5 | Kumandasını | 1  | `OnActionExecuted` |
 | 6 | Yöntem | 0  | `OnActionExecuted` |
 
-`Order` özelliği filtrelerin çalıştırıldığı sırayı belirlerken kapsamı geçersiz kılar. Filtreler sırasıyla sıraya göre sıralanır, ardından kapsam bölmek için kullanılır. Yerleşik filtrelerin tümü `IOrderedFilter` uygular ve varsayılan `Order` değerini 0 olarak ayarlar. Yerleşik filtreler için, `Order` sıfır olmayan bir değere ayarlanmadığı takdirde kapsam sıralamayı belirler.
+`Order` Özelliği filtrelerin çalıştırılacağı sıra belirlenirken kapsamı geçersiz kılar. Filtreler sırasıyla sıraya göre sıralanır, ardından kapsam bölmek için kullanılır. Yerleşik filtrelerin hepsi uygular `IOrderedFilter` ve varsayılan `Order` değeri 0 olarak ayarlar. Yerleşik filtreler için kapsam, sıfır olmayan bir değere ayarlanmadığı `Order` takdirde sıralamayı belirler.
 
 ## <a name="cancellation-and-short-circuiting"></a>İptal ve kısa devre dışı
 
-Filtre işlem hattı, filtre yöntemine sunulan <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext> parametresindeki <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext.Result> özelliği ayarlanarak kısa devre dışı olabilir. Örneğin, aşağıdaki kaynak filtresi, ardışık düzenin geri kalanının yürütülmesini engeller:
+Filtre işlem hattı, filtre yöntemine sunulan <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext.Result> <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingContext> parametrede özelliği ayarlanarak kısa devre yapılabilir. Örneğin, aşağıdaki kaynak filtresi, ardışık düzenin geri kalanının yürütülmesini engeller:
 
 <a name="short-circuiting-resource-filter"></a>
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/ShortCircuitingResourceFilterAttribute.cs?name=snippet)]
 
-Aşağıdaki kodda, hem `ShortCircuitingResourceFilter` hem de `AddHeader` filtresi `SomeResource` Action metodunu hedefleyin. `ShortCircuitingResourceFilter`:
+Aşağıdaki kodda, `ShortCircuitingResourceFilter` ve `AddHeader` filtresi `SomeResource` Action metodunu hedefleyin. `ShortCircuitingResourceFilter`Şunları yapın:
 
-* Önce bir kaynak filtresi olduğundan ve `AddHeader` bir eylem filtresi olduğundan, önce çalışır.
+* İlk olarak bir kaynak filtresi olduğundan ve `AddHeader` bir eylem filtresiyle çalışır.
 * Kısa süreli işlem hattının geri kalanı.
 
-Bu nedenle `AddHeader` filtresi `SomeResource` eylemi için hiçbir şekilde çalışmamayacaktır. Her iki filtre de eylem yöntemi düzeyinde uygulanırsa, `ShortCircuitingResourceFilter` ilk kez çalıştırıldıysa bu davranış aynı olur. `ShortCircuitingResourceFilter`, filtre türü veya `Order` özelliğinin açık kullanımı nedeniyle önce çalışır.
+Bu nedenle `AddHeader` , filtre `SomeResource` eylem için hiçbir şekilde çalışmayacaktır. Bu davranış, her iki filtre de eylem yöntemi düzeyinde uygulanırsa, ilk olarak `ShortCircuitingResourceFilter` çalıştırıldığında aynı olur. İlk `ShortCircuitingResourceFilter` olarak, filtre türü veya açıkça `Order` özelliğin kullanımı kullanılarak çalışır.
 
 [!code-csharp[](./filters/sample/FiltersSample/Controllers/SampleController.cs?name=snippet_AddHeader&highlight=1,9)]
 
@@ -821,7 +827,7 @@ Aşağıdaki filtreler, dı tarafından belirtilen Oluşturucu bağımlılıklar
 
 * <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute>
 * <xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute>
-* <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory> özniteliğe uygulandı.
+* <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>özniteliği üzerinde uygulandı.
 
 Önceki filtreler bir denetleyiciye veya eylem yöntemine uygulanabilir:
 
@@ -832,21 +838,21 @@ Günlükçüler, DI 'den alınabilir. Ancak, yalnızca günlüğe kaydetme amac�
 
 ### <a name="servicefilterattribute"></a>ServiceFilterAttribute
 
-Hizmet filtresi uygulama türleri `ConfigureServices`kaydedilir. <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute>, bir filtrenin bir örneğini dı öğesinden alır.
+Hizmet filtresi uygulama türleri ' de `ConfigureServices`kaydedilir. Bir <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute> filtrenin bir örneğini alır.
 
-Aşağıdaki kod `AddHeaderResultServiceFilter`gösterir:
+Aşağıdaki kod şunu gösterir `AddHeaderResultServiceFilter`:
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/LoggingAddHeaderFilter.cs?name=snippet_ResultFilter)]
 
-Aşağıdaki kodda, `AddHeaderResultServiceFilter` dı kapsayıcısına eklenir:
+Aşağıdaki kodda, `AddHeaderResultServiceFilter` dı kapsayıcısına eklenmiştir:
 
 [!code-csharp[](./filters/sample/FiltersSample/Startup.cs?name=snippet_ConfigureServices&highlight=4)]
 
-Aşağıdaki kodda, `ServiceFilter` özniteliği dı öğesinden `AddHeaderResultServiceFilter` filtrenin bir örneğini alır:
+Aşağıdaki kodda, `ServiceFilter` özniteliği, bir `AddHeaderResultServiceFilter` filtrenin bir örneğini dı:
 
 [!code-csharp[](./filters/sample/FiltersSample/Controllers/HomeController.cs?name=snippet_ServiceFilter&highlight=1)]
 
-`ServiceFilterAttribute`kullanırken, [Servicefilterattribute. ısyeniden kullanılabilir](xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute.IsReusable)olarak ayarlanıyor:
+Kullanırken `ServiceFilterAttribute`, [servicefilterattribute. ıyeniden kullanılabilir](xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute.IsReusable)olarak ayarlanıyor:
 
 * Filtre örneğinin, içinde oluşturulduğu istek kapsamının dışında yeniden *kullanılabilir olabileceğini gösteren* bir ipucu sağlar. ASP.NET Core çalışma zamanı garanti etmez:
 
@@ -855,23 +861,23 @@ Aşağıdaki kodda, `ServiceFilter` özniteliği dı öğesinden `AddHeaderResul
 
 * Tek bir yaşam süresine sahip hizmetlere bağımlı olan bir filtreyle kullanılmamalıdır.
 
- <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute> <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>uygular. `IFilterFactory`, bir <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> örneği oluşturmak için <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> yöntemini kullanıma sunar. `CreateInstance`, belirtilen türü DI 'dan yükler.
+ <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute>uygular <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>. `IFilterFactory`<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> örnek oluşturma <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> yöntemini gösterir. `CreateInstance`belirtilen türü DI 'dan yükler.
 
 ### <a name="typefilterattribute"></a>TypeFilterAttribute
 
-<xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute> <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute>benzerdir, ancak türü doğrudan dı kapsayıcısından çözümlenmez. <xref:Microsoft.Extensions.DependencyInjection.ObjectFactory?displayProperty=fullName>kullanarak türü başlatır.
+<xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute>benzerdir <xref:Microsoft.AspNetCore.Mvc.ServiceFilterAttribute>, ancak türü doğrudan dı kapsayıcısından çözümlenmez. Kullanarak <xref:Microsoft.Extensions.DependencyInjection.ObjectFactory?displayProperty=fullName>türü başlatır.
 
-`TypeFilterAttribute` türler doğrudan dı kapsayıcısından çözümlenmediğinden:
+Türler `TypeFilterAttribute` doğrudan dı kapsayıcısından çözümlenmediğinden:
 
-* `TypeFilterAttribute` kullanılarak başvurulan türlerin dı kapsayıcısına kaydedilmesi gerekmez.  Bunların bağımlılıkları, dı kapsayıcısı tarafından yerine getirilir.
-* `TypeFilterAttribute`, isteğe bağlı olarak tür için Oluşturucu bağımsız değişkenlerini kabul edebilir.
+* ' İ kullanılarak başvurulan türlerin, `TypeFilterAttribute` dı kapsayıcısına kayıtlı olması gerekmez.  Bunların bağımlılıkları, dı kapsayıcısı tarafından yerine getirilir.
+* `TypeFilterAttribute`isteğe bağlı olarak tür için Oluşturucu bağımsız değişkenlerini kabul edebilir.
 
-`TypeFilterAttribute`kullanırken [Typefilterattribute. ıyeniden kullanılabilir](xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute.IsReusable)olarak ayarlanıyor:
+Kullanırken `TypeFilterAttribute`, [typefilterattribute. ıyeniden kullanılabilir](xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute.IsReusable)olarak ayarlanıyor:
 * Filtre örneğinin, içinde oluşturulduğu istek kapsamının dışında yeniden kullanılabilir *olabileceği* ipucu sağlar. ASP.NET Core çalışma zamanı, filtrenin tek bir örneğinin oluşturulacağı garantisi vermez.
 
 * Tek bir yaşam süresine sahip hizmetlere bağımlı olan bir filtreyle kullanılmamalıdır.
 
-Aşağıdaki örnek `TypeFilterAttribute`kullanarak bir türe bağımsız değişkenlerin nasıl geçirileceğini gösterir:
+Aşağıdaki örnek kullanarak `TypeFilterAttribute`bir türe bağımsız değişkenlerin nasıl geçirileceğini göstermektedir:
 
 [!code-csharp[](../../mvc/controllers/filters/sample/FiltersSample/Controllers/HomeController.cs?name=snippet_TypeFilter&highlight=1,2)]
 [!code-csharp[](../../mvc/controllers/filters/sample/FiltersSample/Filters/LogConstantFilter.cs?name=snippet_TypeFilter_Implementation&highlight=6)]
@@ -908,7 +914,7 @@ Bir yetkilendirme filtresinde özel durum oluştuğunda bir sınama vermeyi dü�
 
 Kaynak filtreleri:
 
-* <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter> ya da <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResourceFilter> arabirimini uygulayın.
+* <xref:Microsoft.AspNetCore.Mvc.Filters.IResourceFilter> Ya <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResourceFilter> da arabirimini uygulayın.
 * Yürütme, filtre işlem hattının çoğunu sarmalar.
 * Kaynak filtrelerinden önce yalnızca [Yetkilendirme filtreleri](#authorization-filters) çalışır.
 
@@ -925,60 +931,60 @@ Kaynak filtresi örnekleri:
 ## <a name="action-filters"></a>Eylem filtreleri
 
 > [!IMPORTANT]
-> Eylem filtreleri Razor Pages **için uygulanmaz.** Razor Pages <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> ve <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> destekler. Daha fazla bilgi için bkz. [Razor Pages Için filtre yöntemleri](xref:razor-pages/filter).
+> Eylem filtreleri Razor sayfalara **uygulanmaz.** RazorSayfalar ve <xref:Microsoft.AspNetCore.Mvc.Filters.IPageFilter> <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncPageFilter> destekler. Daha fazla bilgi için bkz. [Sayfalar Için Razor filtre yöntemleri](xref:razor-pages/filter).
 
 Eylem filtreleri:
 
-* <xref:Microsoft.AspNetCore.Mvc.Filters.IActionFilter> ya da <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncActionFilter> arabirimini uygulayın.
+* <xref:Microsoft.AspNetCore.Mvc.Filters.IActionFilter> Ya <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncActionFilter> da arabirimini uygulayın.
 * Yürütmesinin, eylem yöntemlerinin yürütülmesi çevreler.
 
 Aşağıdaki kod bir örnek eylem filtresi gösterir:
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/MySampleActionFilter.cs?name=snippet_ActionFilter)]
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext> aşağıdaki özellikleri sağlar:
+, <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext> Aşağıdaki özellikleri sağlar:
 
 * <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext.ActionArguments>-bir eylem yöntemine yönelik girişlerin okunmalarını sağlar.
 * <xref:Microsoft.AspNetCore.Mvc.Controller>-denetleyici örneğinin işlenmesine izin vermez.
-* <xref:System.Web.Mvc.ActionExecutingContext.Result>-eylem yönteminin ve sonraki eylem filtrelerinin `Result` kısa devre dışı yürütmesi.
+* <xref:System.Web.Mvc.ActionExecutingContext.Result>-Eylem `Result` yönteminin ve sonraki eylem filtrelerinin kısa devre dışı yürütülmesi ayarlanıyor.
 
 Eylem yönteminde özel durum oluşturma:
 
 * Sonraki filtrelerin çalıştırılmasını önler.
-* `Result`ayarının aksine, başarılı bir sonuç yerine başarısızlık olarak değerlendirilir.
+* Ayarından `Result`farklı olarak, başarılı bir sonuç yerine başarısızlık olarak değerlendirilir.
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext> `Controller` ve `Result` ek olarak aşağıdaki özellikleri sağlar:
+, <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext> Ve `Controller` `Result` ek olarak aşağıdaki özellikleri sağlar:
 
-* <xref:System.Web.Mvc.ActionExecutedContext.Canceled>-eylem yürütmesi başka bir filtre tarafından kabul edilse true.
-* <xref:System.Web.Mvc.ActionExecutedContext.Exception>-eylem veya daha önce çalıştırılan eylem filtresi bir özel durum oluşturdu, null değil. Bu özellik null olarak ayarlanıyor:
+* <xref:System.Web.Mvc.ActionExecutedContext.Canceled>-Eylem yürütmesi başka bir filtre tarafından kabul edilse true.
+* <xref:System.Web.Mvc.ActionExecutedContext.Exception>-Eylem veya daha önce çalıştırılan eylem filtresi bir özel durum oluşturdu-null değil. Bu özellik null olarak ayarlanıyor:
 
   * Özel durumu etkin bir şekilde işler.
-  * `Result`, eylem yönteminden döndürülmüş gibi yürütülür.
+  * `Result`eylem yönteminden döndürülmüş gibi yürütülür.
 
-Bir `IAsyncActionFilter`için <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate>çağrısı:
+Bir `IAsyncActionFilter`için bir çağrısı <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutionDelegate>:
 
 * Sonraki eylem filtrelerini ve eylem yöntemini yürütür.
 * `ActionExecutedContext` döndürür.
 
-Kısa devre dışı, bir sonuç örneğine <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext.Result?displayProperty=fullName> atayın ve `next` çağırmayın (`ActionExecutionDelegate`).
+Kısa devre dışı, bir sonuç <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutingContext.Result?displayProperty=fullName> örneğine atayın ve çağırmayın `next` ( `ActionExecutionDelegate`).
 
-Framework, alt sınıflı olabilecek bir soyut <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> sağlar.
+Çerçeve, alt sınıflı <xref:Microsoft.AspNetCore.Mvc.Filters.ActionFilterAttribute> olabilecek bir Özet sağlar.
 
-`OnActionExecuting` eylem filtresi şu şekilde kullanılabilir:
+`OnActionExecuting` Eylem filtresi şu şekilde kullanılabilir:
 
 * Model durumunu doğrulayın.
 * Durum geçersizse bir hata döndürür.
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/ValidateModelAttribute.cs?name=snippet)]
 
-`OnActionExecuted` yöntemi eylem yönteminden sonra çalışır:
+`OnActionExecuted` Yöntemi eylem yönteminden sonra çalışır:
 
-* Ve <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext.Result> özelliği aracılığıyla eylemin sonuçlarını görebilir ve değiştirebilir.
-* eylem yürütmesi başka bir filtre tarafından kabul edilse, <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext.Canceled> true olarak ayarlanır.
-* eylem veya sonraki eylem filtresi bir özel durum harekete geçirdi, <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext.Exception> null olmayan bir değere ayarlanır. `Exception` null olarak ayarlanıyor:
+* Ve, <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext.Result> özelliği aracılığıyla eylemin sonuçlarını görebilir ve değiştirebilir.
+* <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext.Canceled>eylem yürütmesi başka bir filtre tarafından kabul edilse, true olarak ayarlanır.
+* <xref:Microsoft.AspNetCore.Mvc.Filters.ActionExecutedContext.Exception>eylem veya sonraki bir eylem filtresi bir özel durum harekete geçirdi null olmayan bir değer olarak ayarlanır. Null `Exception` olarak ayarlanıyor:
 
   * Bir özel durumu etkin bir şekilde işler.
-  * `ActionExecutedContext.Result`, normal olarak eylem yönteminden döndürülmüş gibi yürütülür.
+  * `ActionExecutedContext.Result`eylem yönteminden normal olarak döndürülmüş gibi yürütülür.
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/ValidateModelAttribute.cs?name=snippet2&higlight=12-99)]
 
@@ -986,7 +992,7 @@ Framework, alt sınıflı olabilecek bir soyut <xref:Microsoft.AspNetCore.Mvc.Fi
 
 Özel durum filtreleri:
 
-* <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter> veya <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter>uygulayın. 
+* Veya <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter> <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter>uygulayın. 
 * , Yaygın hata işleme ilkelerini uygulamak için kullanılabilir.
 
 Aşağıdaki örnek özel durum filtresi, uygulama geliştirmede olduğunda oluşan özel durumlar hakkındaki ayrıntıları görüntülemek için özel bir hata görünümü kullanır:
@@ -996,11 +1002,11 @@ Aşağıdaki örnek özel durum filtresi, uygulama geliştirmede olduğunda olu�
 Özel durum filtreleri:
 
 * Etkinlikden önceki ve sonraki olaylar yok.
-* <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException*> veya <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync*>uygulayın.
-* Razor sayfası veya denetleyici oluşturma, [model bağlama](xref:mvc/models/model-binding), eylem filtreleri veya eylem yöntemlerinde oluşan işlenmemiş özel durumları işleyin.
+* Veya <xref:Microsoft.AspNetCore.Mvc.Filters.IExceptionFilter.OnException*> <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncExceptionFilter.OnExceptionAsync*>uygulayın.
+* Razor Sayfa veya denetleyici oluşturma, [model bağlama](xref:mvc/models/model-binding), eylem filtreleri veya eylem yöntemlerinde oluşan işlenmemiş özel durumları işleyin.
 * Kaynak filtrelerinde, sonuç filtrelerinde veya MVC sonuç yürütülürken oluşan özel **durumları yakalamayın** .
 
-Bir özel durumu işlemek için <xref:System.Web.Mvc.ExceptionContext.ExceptionHandled> özelliğini `true` veya bir yanıt yazın. Bu, özel durumun yayılmasını engeller. Özel durum filtresi bir özel durumu "başarılı" olarak açamaz. Yalnızca bir eylem filtresi bunu yapabilir.
+Bir özel durumu işlemek için, <xref:System.Web.Mvc.ExceptionContext.ExceptionHandled> özelliğini bir yanıt `true` olarak ayarlayın veya yazın. Bu, özel durumun yayılmasını engeller. Özel durum filtresi bir özel durumu "başarılı" olarak açamaz. Yalnızca bir eylem filtresi bunu yapabilir.
 
 Özel durum filtreleri:
 
@@ -1024,44 +1030,44 @@ Aşağıdaki kod, bir HTTP üst bilgisi ekleyen bir sonuç filtresi gösterir:
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/LoggingAddHeaderFilter.cs?name=snippet_ResultFilter)]
 
-Yürütülen sonuç türü eyleme göre değişir. Bir görünüm döndüren bir eylem, yürütülen <xref:Microsoft.AspNetCore.Mvc.ViewResult> bir parçası olarak tüm Razor işlemlerini içerir. Bir API yöntemi, sonucun yürütülmesinin bir parçası olarak bazı serileştirme işlemleri gerçekleştirebilir. [Eylem sonuçları](xref:mvc/controllers/actions)hakkında daha fazla bilgi edinin.
+Yürütülen sonuç türü eyleme göre değişir. Bir görünüm döndüren bir eylem, <xref:Microsoft.AspNetCore.Mvc.ViewResult> çalıştırılmakta olan bir parçası olarak tüm Razor işlemlerini içerir. Bir API yöntemi, sonucun yürütülmesinin bir parçası olarak bazı serileştirme işlemleri gerçekleştirebilir. [Eylem sonuçları](xref:mvc/controllers/actions)hakkında daha fazla bilgi edinin.
 
 Sonuç filtreleri yalnızca bir eylem veya eylem filtresi bir eylem sonucu üretirse yürütülür. Şu durumlarda sonuç filtreleri yürütülmez:
 
 * Bir yetkilendirme filtresi veya kaynak filtresi, işlem hattı için kısa süreli olarak devre dışı.
 * Bir özel durum filtresi, bir eylem sonucu üreterek özel durumu işler.
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuting*?displayProperty=fullName> yöntemi, eylem sonucunun ve sonraki sonuç filtrelerinin `true`<xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel?displayProperty=fullName> ayarlanarak kısa devre yürütülmesine neden olabilir. Boş bir yanıt oluşturmamaya kaçınmak için kısa devre dışı bırakıldığında yanıt nesnesine yazın. `IResultFilter.OnResultExecuting` bir özel durum oluşturma şu şekilde yapılır:
+<xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuting*?displayProperty=fullName> Yöntemi, olarak <xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel?displayProperty=fullName> `true`ayarlanarak eylem sonucunun ve sonraki sonuç filtrelerinin kısa devre yürütülmesine neden olabilir. Boş bir yanıt oluşturmamaya kaçınmak için kısa devre dışı bırakıldığında yanıt nesnesine yazın. Bir özel durum oluşturmak `IResultFilter.OnResultExecuting` için şunları yapmanız gerekir:
 
 * Eylem sonucunun ve sonraki filtrelerin yürütülmesini önleyin.
 * Başarılı bir sonuç yerine hata olarak kabul edilir.
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuted*?displayProperty=fullName> yöntemi çalıştırıldığında, yanıt istemciye zaten gönderilir. Yanıt istemciye zaten gönderildiyse, daha fazla değiştirilemez.
+<xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter.OnResultExecuted*?displayProperty=fullName> Yöntem çalıştığında, yanıt zaten istemciye gönderilmiştir. Yanıt istemciye zaten gönderildiyse, daha fazla değiştirilemez.
 
-`ResultExecutedContext.Canceled`, eylem sonucu yürütmesi başka bir filtre tarafından kabul edilen kısa devre ise `true` olarak ayarlanır.
+`ResultExecutedContext.Canceled`eylem sonucu yürütmesi `true` başka bir filtre tarafından kabul edilen ise olarak ayarlanır.
 
-eylem sonucu veya sonraki sonuç filtresi bir özel durum harekete geçirdi, `ResultExecutedContext.Exception` null olmayan bir değere ayarlanır. `Exception` null olarak ayarlanması, bir özel durumu etkili bir şekilde işler ve özel durumun, ardışık düzendeki ASP.NET Core daha sonra yeniden oluşturulmasını önler. Bir sonuç filtresinde özel durum işlenirken yanıta veri yazmanın güvenilir bir yolu yoktur. Bir eylem sonucu bir özel durum oluşturduğunda üstbilgiler istemciye temizleniyorsa, hata kodu göndermek için güvenilir bir mekanizma yoktur.
+`ResultExecutedContext.Exception`eylem sonucu veya sonraki sonuç filtresi bir özel durum harekete geçirdi null olmayan bir değer olarak ayarlanır. Null `Exception` olarak ayarlanması bir özel durumu işler ve işlem hattının ilerleyen kısımlarında ASP.NET Core özel durumun yeniden oluşturulmasını önler. Bir sonuç filtresinde özel durum işlenirken yanıta veri yazmanın güvenilir bir yolu yoktur. Bir eylem sonucu bir özel durum oluşturduğunda üstbilgiler istemciye temizleniyorsa, hata kodu göndermek için güvenilir bir mekanizma yoktur.
 
-Bir <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter>için, <xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate> bir `await next` çağrısı, sonraki sonuç filtrelerini ve eylem sonucunu yürütür. Kısa devre dışı, [ResultExecutingContext. Cancel](xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel) `true` ve `ResultExecutionDelegate`çağırmayın:
+Bir <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncResultFilter>için bir çağrısı `await next` , sonraki sonuç filtrelerini <xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutionDelegate> ve eylem sonucunu yürütür. Kısa devre dışı, [ResultExecutingContext. Cancel](xref:Microsoft.AspNetCore.Mvc.Filters.ResultExecutingContext.Cancel) olarak ayarlayın `true` ve şunu çağırmayın `ResultExecutionDelegate`:
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/MyAsyncResponseFilter.cs?name=snippet)]
 
-Framework, alt sınıflı olabilecek bir soyut `ResultFilterAttribute` sağlar. Daha önce gösterilen [Addheaderattribute](#add-header-attribute) sınıfı bir sonuç Filtresi özniteliği örneğidir.
+Çerçeve, alt sınıflı `ResultFilterAttribute` olabilecek bir Özet sağlar. Daha önce gösterilen [Addheaderattribute](#add-header-attribute) sınıfı bir sonuç Filtresi özniteliği örneğidir.
 
 ### <a name="ialwaysrunresultfilter-and-iasyncalwaysrunresultfilter"></a>Ialwaysrunresultfilter ve ıasyncalwaysrunresultfilter
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.IAlwaysRunResultFilter> ve <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncAlwaysRunResultFilter> arabirimleri, tüm eylem sonuçları için çalışan bir <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter> uygulamasını bildirir. Bu, tarafından oluşturulan eylem sonuçlarını içerir:
+Ve <xref:Microsoft.AspNetCore.Mvc.Filters.IAlwaysRunResultFilter> <xref:Microsoft.AspNetCore.Mvc.Filters.IAsyncAlwaysRunResultFilter> arabirimleri, tüm eylem <xref:Microsoft.AspNetCore.Mvc.Filters.IResultFilter> sonuçları için çalışan bir uygulama bildirir. Bu, tarafından oluşturulan eylem sonuçlarını içerir:
 
 * Kısa devre olan Yetkilendirme filtreleri ve kaynak filtreleri.
 * Özel durum filtreleri.
 
-Örneğin, aşağıdaki filtre her zaman çalışır ve içerik anlaşması başarısız olduğunda *422 olmayan bir varlık* durum kodu ile bir eylem sonucu (<xref:Microsoft.AspNetCore.Mvc.ObjectResult>) ayarlar:
+Örneğin, aşağıdaki filtre her zaman çalışır ve içerik anlaşması başarısız olduğunda<xref:Microsoft.AspNetCore.Mvc.ObjectResult> *422 olmayan bir varlık* durum kodu ile bir eylem sonucu () ayarlar:
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/UnprocessableResultFilter.cs?name=snippet)]
 
 ### <a name="ifilterfactory"></a>IFilterFactory
 
-<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory> <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata>uygular. Bu nedenle, bir `IFilterFactory` örneği, filtre ardışık düzeninde herhangi bir yerde `IFilterMetadata` bir örnek olarak kullanılabilir. Çalışma zamanı filtreyi çağırmayı hazırlarken, bir `IFilterFactory`dönüştürmeyi dener. Bu atama başarılı olursa, çağrılan `IFilterMetadata` örneğini oluşturmak için <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> yöntemi çağırılır. Bu, tam filtre işlem hattının uygulama başladığında açıkça ayarlanması gerektiğinden esnek bir tasarım sağlar.
+<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>uygular <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata>. Bu nedenle, `IFilterFactory` bir örnek, filtre ardışık düzeninde `IFilterMetadata` herhangi bir yerde örnek olarak kullanılabilir. Çalışma zamanı filtreyi çağırmayı hazırlarken, bir `IFilterFactory`öğesine dönüştürmeyi dener. Atama başarılı olursa, çağrılan <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> `IFilterMetadata` örneği oluşturmak için yöntemi çağırılır. Bu, tam filtre işlem hattının uygulama başladığında açıkça ayarlanması gerektiğinden esnek bir tasarım sağlar.
 
 `IFilterFactory`, filtre oluşturmaya yönelik başka bir yaklaşım olarak özel öznitelik uygulamaları kullanılarak uygulanabilir:
 
@@ -1074,9 +1080,9 @@ Framework, alt sınıflı olabilecek bir soyut `ResultFilterAttribute` sağlar. 
 
 F12 geliştirici araçları, örnek kod tarafından eklenen aşağıdaki yanıt üstbilgilerini görüntüler:
 
-* **Yazar:** `Joe Smith`
-* **globaladdheader:** `Result filter added to MvcOptions.Filters`
-* **iç:** `My header`
+* **Yazar:**`Joe Smith`
+* **globaladdheader:**`Result filter added to MvcOptions.Filters`
+* **iç:**`My header`
 
 Yukarıdaki kod, **iç:** `My header` yanıt üst bilgisini oluşturur.
 
@@ -1087,30 +1093,30 @@ This section needs to be rewritten.
 What's a non-named attribute?
 -->
 
-`IFilterFactory` uygulayan filtreler şu filtreler için yararlıdır:
+Uygulayan `IFilterFactory` filtreler şu filtreler için yararlıdır:
 
 * Parametre geçirme gerekmez.
 * DI tarafından doldurulması gereken Oluşturucu bağımlılıkları vardır.
 
-<xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute> <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>uygular. `IFilterFactory`, bir <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> örneği oluşturmak için <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> yöntemini kullanıma sunar. `CreateInstance`, belirtilen türü hizmetler kapsayıcısından (DI) yükler.
+<xref:Microsoft.AspNetCore.Mvc.TypeFilterAttribute>uygular <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory>. `IFilterFactory`<xref:Microsoft.AspNetCore.Mvc.Filters.IFilterMetadata> örnek oluşturma <xref:Microsoft.AspNetCore.Mvc.Filters.IFilterFactory.CreateInstance*> yöntemini gösterir. `CreateInstance`belirtilen türü hizmetler kapsayıcısından (dı) yükler.
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/SampleActionFilterAttribute.cs?name=snippet_TypeFilterAttribute&highlight=1,3,7)]
 
-Aşağıdaki kodda `[SampleActionFilter]`uygulamak için üç yaklaşım gösterilmektedir:
+Aşağıdaki kod, `[SampleActionFilter]`uygulamak için üç yaklaşımda gösterilmiştir:
 
 [!code-csharp[](./filters/sample/FiltersSample/Controllers/HomeController.cs?name=snippet&highlight=1)]
 
-Yukarıdaki kodda, yöntemi `[SampleActionFilter]` olarak dekorasyon, `SampleActionFilter`uygulamak için tercih edilen yaklaşımdır.
+Yukarıdaki kodda, yöntemi ile `[SampleActionFilter]` dekorasyon, uygulamak için tercih edilen yaklaşımdır. `SampleActionFilter`
 
 ## <a name="using-middleware-in-the-filter-pipeline"></a>Filtre ardışık düzeninde ara yazılım kullanma
 
 Kaynak filtreleri, işlem hattında daha sonra gelen her şeyin yürütülmesini çevreleyecek olan [Ara yazılım](xref:fundamentals/middleware/index) gibi çalışır. Ancak filtreler, ASP.NET Core çalışma zamanının bir parçası olan ara yazılımlar dışında farklılık gösterir, bu da ASP.NET Core bağlamına ve yapılarına erişime sahip oldukları anlamına gelir.
 
-Ara yazılımı bir filtre olarak kullanmak için, filtre ardışık düzenine eklenecek olan ara yazılımı belirten `Configure` yöntemi ile bir tür oluşturun. Aşağıdaki örnek, bir istek için geçerli kültürü oluşturmak üzere yerelleştirme ara yazılımını kullanır:
+Ara yazılımı bir filtre olarak kullanmak için, filtre ardışık düzenine eklenecek `Configure` olan ara yazılımı belirten bir yöntemi olan bir tür oluşturun. Aşağıdaki örnek, bir istek için geçerli kültürü oluşturmak üzere yerelleştirme ara yazılımını kullanır:
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/LocalizationPipeline.cs?name=snippet_MiddlewareFilter&highlight=3,22)]
 
-Ara yazılımı çalıştırmak için <xref:Microsoft.AspNetCore.Mvc.MiddlewareFilterAttribute> kullanın:
+Ara yazılımını <xref:Microsoft.AspNetCore.Mvc.MiddlewareFilterAttribute> çalıştırmak için kullanın:
 
 [!code-csharp[](./filters/sample/FiltersSample/Controllers/HomeController.cs?name=snippet_MiddlewareFilter&highlight=2)]
 
@@ -1118,7 +1124,7 @@ Ara yazılım filtreleri, filtre işlem hattının aynı aşamasında, model ba�
 
 ## <a name="next-actions"></a>Sonraki eylemler
 
-* [Razor Pages Için filtre yöntemlerine](xref:razor-pages/filter)bakın.
+* [Sayfalar Için Razor filtre yöntemlerine](xref:razor-pages/filter)bakın.
 * Filtrelerle denemek için [GitHub örneğini indirin, test edin ve değiştirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/filters/sample).
 
 ::: moniker-end

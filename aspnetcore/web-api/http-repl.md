@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/11/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: d9beae68cc869b665ff5d2b6cf34f120406098dc
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 4d0200cd412cce6eda473a64d132d74d8641db34
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78661891"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777104"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>HTTP REPL ile Web API 'Lerini test etme
 
@@ -26,8 +32,8 @@ HTTP okuma-değerlendirme-yazdırma döngüsü (REPL):
 
 Aşağıdaki [http fiilleri](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#74-supported-methods) desteklenir:
 
-* [DELETE](#test-http-delete-requests)
-* [GET](#test-http-get-requests)
+* [SILMELI](#test-http-delete-requests)
+* [Al](#test-http-get-requests)
 * [BAŞLı](#test-http-head-requests)
 * [Seçenekler](#test-http-options-requests)
 * [DÜZELTMESI](#test-http-patch-requests)
@@ -134,7 +140,7 @@ Aşağıdaki komutu çalıştırarak bir Web API 'sine bağlanın:
 httprepl <ROOT URI>
 ```
 
-`<ROOT URI>`, Web API 'sinin temel URI 'sidir. Örnek:
+`<ROOT URI>`, Web API 'sinin temel URI 'sidir. Örneğin:
 
 ```console
 httprepl https://localhost:5001
@@ -146,7 +152,7 @@ Alternatif olarak, HTTP REPL çalışırken istediğiniz zaman aşağıdaki komu
 connect <ROOT URI>
 ```
 
-Örnek:
+Örneğin:
 
 ```console
 (Disconnected)~ connect https://localhost:5001
@@ -154,13 +160,13 @@ connect <ROOT URI>
 
 ## <a name="manually-point-to-the-swagger-document-for-the-web-api"></a>Web API 'SI için Swagger belgesine el ile işaret edin
 
-Yukarıdaki Connect komutu Swagger belgesini otomatik olarak bulmaya çalışacaktır. Bir nedenden dolayı yapamaması durumunda, `--swagger` seçeneğini kullanarak Web API 'SI için Swagger belgesinin URI 'sini belirtebilirsiniz:
+Yukarıdaki Connect komutu Swagger belgesini otomatik olarak bulmaya çalışacaktır. Bir nedenden dolayı yapamaması durumunda, bu `--swagger` seçeneği kullanarak Web API 'Si için Swagger belgesinin URI 'sini belirtebilirsiniz:
 
 ```console
 connect <ROOT URI> --swagger <SWAGGER URI>
 ```
 
-Örnek:
+Örneğin:
 
 ```console
 (Disconnected)~ connect https://localhost:5001 --swagger /swagger/v1/swagger.json
@@ -170,7 +176,7 @@ connect <ROOT URI> --swagger <SWAGGER URI>
 
 ### <a name="view-available-endpoints"></a>Kullanılabilir uç noktaları görüntüle
 
-Web API adresinin geçerli yolundaki farklı uç noktaları (denetleyiciler) listelemek için `ls` veya `dir` komutunu çalıştırın:
+Web API adresinin geçerli yolundaki farklı uç noktaları (denetleyiciler) listelemek için, `ls` veya `dir` komutunu çalıştırın:
 
 ```console
 https://localhot:5001/~ ls
@@ -186,9 +192,9 @@ People   [get|post]
 https://localhost:5001/~
 ```
 
-Yukarıdaki çıkış iki denetleyicinin bulunduğunu gösterir: `Fruits` ve `People`. Her iki denetleyici de parametresiz HTTP GET ve POST işlemlerini destekler.
+Yukarıdaki çıkış, kullanılabilir iki denetleyici olduğunu gösterir: `Fruits` ve. `People` Her iki denetleyici de parametresiz HTTP GET ve POST işlemlerini destekler.
 
-Belirli bir denetleyicide gezinmek daha ayrıntılı bilgi gösterir. Örneğin, aşağıdaki komut çıktısı, `Fruits` denetleyicisinin HTTP GET, PUT ve DELETE işlemlerini de desteklediğini gösterir. Bu işlemlerin her biri, rotada bir `id` parametresi bekler:
+Belirli bir denetleyicide gezinmek daha ayrıntılı bilgi gösterir. Örneğin, aşağıdaki komut çıktısı, `Fruits` DENETLEYICIYI de http get, put ve DELETE işlemlerini destekler. Bu işlemlerin her biri, rotada `id` bir parametre bekler:
 
 ```console
 https://localhost:5001/fruits~ ls
@@ -199,7 +205,7 @@ https://localhost:5001/fruits~ ls
 https://localhost:5001/fruits~
 ```
 
-Alternatif olarak, Web API 'sinin Swagger Kullanıcı Arabirimi sayfasını bir tarayıcıda açmak için `ui` komutunu çalıştırın. Örnek:
+Alternatif olarak, Web `ui` API 'sinin Swagger Kullanıcı Arabirimi sayfasını bir tarayıcıda açmak için komutunu çalıştırın. Örneğin:
 
 ```console
 https://localhost:5001/~ ui
@@ -213,7 +219,7 @@ Web API 'sindeki farklı bir uç noktaya gitmek için `cd` komutunu çalıştır
 https://localhost:5001/~ cd people
 ```
 
-`cd` komutundan sonraki yol büyük/küçük harfe duyarlıdır. Aşağıdaki çıkış biçimi görüntülenir:
+`cd` Komutu izleyen yol büyük/küçük harfe duyarlıdır. Aşağıdaki çıkış biçimi görüntülenir:
 
 ```console
 /people    [get|post]
@@ -229,7 +235,7 @@ HTTP REPL 'un varsayılan [renkleri](#set-color-preferences) özelleştirilebili
 
 *% GIRIŞ%/. httpreplprefs*
 
-# <a name="macos"></a>[macOS](#tab/macos)
+# <a name="macos"></a>[Mac OS](#tab/macos)
 
 *% GIRIŞ%/. httpreplprefs*
 
@@ -243,7 +249,7 @@ HTTP REPL 'un varsayılan [renkleri](#set-color-preferences) özelleştirilebili
 
 ### <a name="view-the-settings"></a>Ayarları görüntüleyin
 
-Kullanılabilir ayarları görüntülemek için `pref get` komutunu çalıştırın. Örnek:
+Kullanılabilir ayarları görüntülemek için `pref get` komutunu çalıştırın. Örneğin:
 
 ```console
 https://localhost:5001/~ pref get
@@ -264,7 +270,7 @@ colors.status=BoldYellow
 
 ### <a name="set-color-preferences"></a>Renk tercihlerini ayarla
 
-Yanıt renklendirme Şu anda yalnızca JSON için destekleniyor. Varsayılan HTTP REPL aracı renklendirmesini özelleştirmek için, değiştirilecek renge karşılık gelen anahtarı bulun. Anahtarları bulma hakkında yönergeler için bkz. [ayarları görüntüleme](#view-the-settings) bölümü. Örneğin, `Green` `colors.json` anahtar değerini aşağıdaki gibi `White` olarak değiştirin:
+Yanıt renklendirme Şu anda yalnızca JSON için destekleniyor. Varsayılan HTTP REPL aracı renklendirmesini özelleştirmek için, değiştirilecek renge karşılık gelen anahtarı bulun. Anahtarları bulma hakkında yönergeler için bkz. [ayarları görüntüleme](#view-the-settings) bölümü. Örneğin, `colors.json` anahtar değerini şu şekilde `Green` olacak `White` şekilde değiştirin:
 
 ```console
 https://localhost:5001/people~ pref set colors.json White
@@ -274,14 +280,14 @@ Yalnızca [izin verilen renkler](https://github.com/dotnet/HttpRepl/blob/01d5c3c
 
 Belirli renk anahtarları ayarlanmamışsa, daha genel anahtarlar kabul edilir. Bu geri dönüş davranışını göstermek için aşağıdaki örneği göz önünde bulundurun:
 
-* `colors.json.name` bir değere sahip değilse, `colors.json.string` kullanılır.
-* `colors.json.string` bir değere sahip değilse, `colors.json.literal` kullanılır.
-* `colors.json.literal` bir değere sahip değilse, `colors.json` kullanılır. 
-* `colors.json` bir değere sahip değilse, komut kabuğun varsayılan metin rengi (`AllowedColors.None`) kullanılır.
+* Eğer `colors.json.name` bir değeri yoksa, `colors.json.string` kullanılır.
+* Eğer `colors.json.string` bir değeri yoksa, `colors.json.literal` kullanılır.
+* Eğer `colors.json.literal` bir değeri yoksa, `colors.json` kullanılır. 
+* Bir `colors.json` değere sahip değilse, komut kabuğun varsayılan metin rengi (`AllowedColors.None`) kullanılır.
 
 ### <a name="set-indentation-size"></a>Girinti boyutunu ayarla
 
-Yanıt girintileme boyut özelleştirmesi Şu anda yalnızca JSON için destekleniyor. Varsayılan boyut iki boşluklardan oluşamaz. Örnek:
+Yanıt girintileme boyut özelleştirmesi Şu anda yalnızca JSON için destekleniyor. Varsayılan boyut iki boşluklardan oluşamaz. Örneğin:
 
 ```json
 [
@@ -300,7 +306,7 @@ Yanıt girintileme boyut özelleştirmesi Şu anda yalnızca JSON için destekle
 ]
 ```
 
-Varsayılan boyutu değiştirmek için `formatting.json.indentSize` anahtarını ayarlayın. Örneğin, her zaman dört boşluk kullanmak için:
+Varsayılan boyutu değiştirmek için `formatting.json.indentSize` anahtarı ayarlayın. Örneğin, her zaman dört boşluk kullanmak için:
 
 ```console
 pref set formatting.json.indentSize 4
@@ -341,7 +347,7 @@ Yukarıdaki komutta, `<EXECUTABLE>` metin düzenleyicisinin yürütülebilir dos
 pref set editor.command.default "/usr/bin/code"
 ```
 
-# <a name="macos"></a>[macOS](#tab/macos)
+# <a name="macos"></a>[Mac OS](#tab/macos)
 
 ```console
 pref set editor.command.default "/Applications/Visual Studio Code.app/Contents/Resources/app/bin/code"
@@ -355,7 +361,7 @@ pref set editor.command.default "C:\Program Files\Microsoft VS Code\Code.exe"
 
 ---
 
-Varsayılan metin düzenleyiciyi belirli CLı bağımsız değişkenleriyle başlatmak için `editor.command.default.arguments` anahtarını ayarlayın. Örneğin, Visual Studio Code varsayılan metin Düzenleyicisi olduğunu ve her zaman HTTP REPL 'un uzantıları devre dışı bırakılmış yeni bir oturumda Visual Studio Code açmasını istediğinizi varsayalım. Şu komutu çalıştırın:
+Varsayılan metin düzenleyiciyi belirli CLı bağımsız değişkenleriyle başlatmak için `editor.command.default.arguments` anahtarı ayarlayın. Örneğin, Visual Studio Code varsayılan metin Düzenleyicisi olduğunu ve her zaman HTTP REPL 'un uzantıları devre dışı bırakılmış yeni bir oturumda Visual Studio Code açmasını istediğinizi varsayalım. Şu komutu çalıştırın:
 
 ```console
 pref set editor.command.default.arguments "--disable-extensions --new-window"
@@ -363,14 +369,14 @@ pref set editor.command.default.arguments "--disable-extensions --new-window"
 
 ### <a name="set-the-swagger-search-paths"></a>Swagger arama yollarını ayarla
 
-Varsayılan olarak, HTTP REPL, `--swagger` seçeneği olmadan `connect` komutunu yürütürken Swagger belgesini bulmak için kullandığı bir göreli yollar kümesine sahiptir. Bu göreli yollar, `connect` komutunda belirtilen kök ve taban yollarla birleştirilir. Varsayılan göreli yollar şunlardır:
+Varsayılan olarak, HTTP REPL, `connect` komutu `--swagger` seçeneği olmadan yürütürken Swagger belgesini bulmak için kullandığı bir göreli yollar kümesine sahiptir. Bu göreli yollar, `connect` komutta belirtilen kök ve taban yollarla birleştirilir. Varsayılan göreli yollar şunlardır:
 
 - *Swagger. JSON*
 - *Swagger/v1/Swagger. JSON*
 - */swagger.json*
 - */swagger/v1/swagger.json*
 
-Ortamınızda farklı bir arama yolları kümesi kullanmak için `swagger.searchPaths` tercihini ayarlayın. Değer, göreli yolların kanal ile ayrılmış bir listesi olmalıdır. Örnek:
+Ortamınızda farklı bir arama yolları kümesi kullanmak için `swagger.searchPaths` tercihi ayarlayın. Değer, göreli yolların kanal ile ayrılmış bir listesi olmalıdır. Örneğin:
 
 ```console
 pref set swagger.searchPaths "swagger/v2/swagger.json|swagger/v3/swagger.json"
@@ -392,7 +398,7 @@ Varsa, ilişkili denetleyici eylem yöntemi tarafından beklenen rota parametres
 
 ### <a name="options"></a>Seçenekler
 
-`get` komutu için aşağıdaki seçenekler kullanılabilir:
+`get` Komutu için aşağıdaki seçenekler kullanılabilir:
 
 [!INCLUDE [standard CLI options](~/includes/http-repl/standard-options.md)]
 
@@ -400,7 +406,7 @@ Varsa, ilişkili denetleyici eylem yöntemi tarafından beklenen rota parametres
 
 HTTP GET isteği vermek için:
 
-1. `get` komutunu bunu destekleyen bir uç noktada çalıştırın:
+1. `get` Komutu onu destekleyen bir uç noktada çalıştırın:
 
     ```console
     https://localhost:5001/people~ get
@@ -434,7 +440,7 @@ HTTP GET isteği vermek için:
     https://localhost:5001/people~
     ```
 
-1. `get` komutuna bir parametre geçirerek belirli bir kaydı alın:
+1. `get` Komutuna bir parametre geçirerek belirli bir kaydı alın:
 
     ```console
     https://localhost:5001/people~ get 2
@@ -484,13 +490,13 @@ Varsa, ilişkili denetleyici eylem yöntemi tarafından beklenen rota parametres
 
 HTTP POST isteği vermek için:
 
-1. `post` komutunu bunu destekleyen bir uç noktada çalıştırın:
+1. `post` Komutu onu destekleyen bir uç noktada çalıştırın:
 
     ```console
     https://localhost:5001/people~ post -h Content-Type=application/json
     ```
 
-    Önceki komutta, `Content-Type` HTTP istek üst bilgisi bir istek gövdesi medya türü olan JSON belirten şekilde ayarlanır. Varsayılan metin Düzenleyicisi, HTTP istek gövdesini temsil eden bir JSON şablonuyla bir *. tmp* dosyası açar. Örnek:
+    Önceki komutta, `Content-Type` http istek üst BILGISI, JSON türünde bir istek gövdesi medya türünü gösterecek şekilde ayarlanır. Varsayılan metin Düzenleyicisi, HTTP istek gövdesini temsil eden bir JSON şablonuyla bir *. tmp* dosyası açar. Örneğin:
 
     ```json
     {
@@ -554,7 +560,7 @@ Varsa, ilişkili denetleyici eylem yöntemi tarafından beklenen rota parametres
 
 HTTP PUT isteği vermek için:
 
-1. *Isteğe bağlı*: verileri değiştirmeden önce görüntülemek için `get` komutunu çalıştırın:
+1. *Isteğe bağlı*: verileri `get` değiştirmeden önce görüntülemek için komutunu çalıştırın:
 
     ```console
     https://localhost:5001/fruits~ get
@@ -580,13 +586,13 @@ HTTP PUT isteği vermek için:
     ]
     ```
 
-1. `put` komutunu bunu destekleyen bir uç noktada çalıştırın:
+1. `put` Komutu onu destekleyen bir uç noktada çalıştırın:
 
     ```console
     https://localhost:5001/fruits~ put 2 -h Content-Type=application/json
     ```
 
-    Önceki komutta, `Content-Type` HTTP istek üst bilgisi bir istek gövdesi medya türü olan JSON belirten şekilde ayarlanır. Varsayılan metin Düzenleyicisi, HTTP istek gövdesini temsil eden bir JSON şablonuyla bir *. tmp* dosyası açar. Örnek:
+    Önceki komutta, `Content-Type` http istek üst BILGISI, JSON türünde bir istek gövdesi medya türünü gösterecek şekilde ayarlanır. Varsayılan metin Düzenleyicisi, HTTP istek gövdesini temsil eden bir JSON şablonuyla bir *. tmp* dosyası açar. Örneğin:
 
     ```json
     {
@@ -616,7 +622,7 @@ HTTP PUT isteği vermek için:
     Server: Kestrel
     ```
 
-1. *Isteğe bağlı*: değişiklikleri görmek için bir `get` komutu verin. Örneğin, metin düzenleyicisinde "Chraz" yazdıysanız, `get` aşağıdakileri döndürür:
+1. *Isteğe bağlı*: değişiklikleri `get` görmek için bir komut verin. Örneğin, metin düzenleyicisinde "Chraz" yazdıysanız, bir `get` , şunu döndürür:
 
     ```console
     https://localhost:5001/fruits~ get
@@ -667,7 +673,7 @@ Varsa, ilişkili denetleyici eylem yöntemi tarafından beklenen rota parametres
 
 HTTP SILME isteği vermek için:
 
-1. *Isteğe bağlı*: verileri değiştirmeden önce görüntülemek için `get` komutunu çalıştırın:
+1. *Isteğe bağlı*: verileri `get` değiştirmeden önce görüntülemek için komutunu çalıştırın:
 
     ```console
     https://localhost:5001/fruits~ get
@@ -693,7 +699,7 @@ HTTP SILME isteği vermek için:
     ]
     ```
 
-1. `delete` komutunu bunu destekleyen bir uç noktada çalıştırın:
+1. `delete` Komutu onu destekleyen bir uç noktada çalıştırın:
 
     ```console
     https://localhost:5001/fruits~ delete 2
@@ -707,7 +713,7 @@ HTTP SILME isteği vermek için:
     Server: Kestrel
     ```
 
-1. *Isteğe bağlı*: değişiklikleri görmek için bir `get` komutu verin. Bu örnekte, bir `get` aşağıdakini döndürür:
+1. *Isteğe bağlı*: değişiklikleri `get` görmek için bir komut verin. Bu örnekte, bir `get` , şunu döndürür:
 
     ```console
     https://localhost:5001/fruits~ get
@@ -792,7 +798,7 @@ Varsa, ilişkili denetleyici eylem yöntemi tarafından beklenen rota parametres
 
 Bir HTTP istek üst bilgisi ayarlamak için aşağıdaki yaklaşımlardan birini kullanın:
 
-* HTTP isteğiyle satır içi ayarlayın. Örnek:
+* HTTP isteğiyle satır içi ayarlayın. Örneğin:
 
     ```console
     https://localhost:5001/people~ post -h Content-Type=application/json
@@ -800,13 +806,13 @@ Bir HTTP istek üst bilgisi ayarlamak için aşağıdaki yaklaşımlardan birini
     
     Önceki yaklaşımla, her ayrı HTTP istek üst bilgisi kendi `-h` seçeneğini gerektirir.
 
-* HTTP isteğini göndermeden önce ayarlayın. Örnek:
+* HTTP isteğini göndermeden önce ayarlayın. Örneğin:
 
     ```console
     https://localhost:5001/people~ set header Content-Type application/json
     ```
     
-    Bir isteği göndermeden önce üst bilgi ayarlanırken üst bilgi, komut kabuğu oturumunun süresi boyunca ayarlanmış olarak kalır. Üstbilgiyi temizlemek için boş bir değer sağlayın. Örnek:
+    Bir isteği göndermeden önce üst bilgi ayarlanırken üst bilgi, komut kabuğu oturumunun süresi boyunca ayarlanmış olarak kalır. Üstbilgiyi temizlemek için boş bir değer sağlayın. Örneğin:
     
     ```console
     https://localhost:5001/people~ set header Content-Type
@@ -852,7 +858,7 @@ Azure 'da barındırılan bir uç noktaya erişmek veya [azure REST API](/rest/a
     httprepl https://management.azure.com
     ```
 
-1. `Authorization` HTTP istek üst bilgisini ayarlayın:
+1. `Authorization` Http istek üst bilgisini ayarlayın:
 
     ```console
     https://management.azure.com/> set header Authorization "bearer <ACCESS TOKEN>"
@@ -900,14 +906,14 @@ Varsayılan olarak, gönderilmekte olan HTTP isteğinin görüntüsü bastırıl
 
 ### <a name="enable-request-display"></a>İstek görüntülemesini etkinleştir
 
-`echo on` komutunu çalıştırarak gönderilmekte olan HTTP isteğini görüntüleyin. Örnek:
+`echo on` Komutunu çalıştırarak GÖNDERILMEKTE olan http isteğini görüntüleyin. Örneğin:
 
 ```console
 https://localhost:5001/people~ echo on
 Request echoing is on
 ```
 
-Geçerli oturumdaki sonraki HTTP istekleri, istek üst bilgilerini görüntüler. Örnek:
+Geçerli oturumdaki sonraki HTTP istekleri, istek üst bilgilerini görüntüler. Örneğin:
 
 ```console
 https://localhost:5001/people~ post
@@ -945,16 +951,16 @@ https://localhost:5001/people~
 
 ### <a name="disable-request-display"></a>İstek görüntüsünü devre dışı bırak
 
-`echo off` komutu çalıştırılarak gönderilmekte olan HTTP isteğinin görüntülenmesini gizleyin. Örnek:
+`echo off` Komutunu ÇALıŞTıRARAK gönderilen http isteğinin görüntülenmesini gizleyin. Örneğin:
 
 ```console
 https://localhost:5001/people~ echo off
 Request echoing is off
 ```
 
-## <a name="run-a-script"></a>Betik çalıştır
+## <a name="run-a-script"></a>Betik çalıştırma
 
-Aynı HTTP REPL komutları kümesini sıklıkla yürütüyorsanız bunları bir metin dosyasında depolamayı göz önünde bulundurun. Dosyadaki komutlar, komut satırında el ile çalıştıranlarla aynı formu alır. Komutlar, `run` komutu kullanılarak toplanmış bir biçimde yürütülebilir. Örnek:
+Aynı HTTP REPL komutları kümesini sıklıkla yürütüyorsanız bunları bir metin dosyasında depolamayı göz önünde bulundurun. Dosyadaki komutlar, komut satırında el ile çalıştıranlarla aynı formu alır. Komutlar, `run` komutu kullanılarak toplanmış bir biçimde yürütülebilir. Örneğin:
 
 1. Yeni satır için ayrılmış komutlar kümesini içeren bir metin dosyası oluşturun. Göstermek için aşağıdaki komutları içeren bir *People-Script. txt* dosyası düşünün:
 
@@ -966,13 +972,13 @@ Aynı HTTP REPL komutları kümesini sıklıkla yürütüyorsanız bunları bir 
     get 1
     ```
 
-1. Metin dosyasının yolunu geçirerek `run` komutunu yürütün. Örnek:
+1. Metin dosyasının `run` yolunu geçirerek komutunu yürütün. Örneğin:
 
     ```console
     https://localhost:5001/~ run C:\http-repl-scripts\people-script.txt
     ```
 
-    Aşağıdaki çıktı görüntülenir:
+    Şu çıktı görünür:
 
     ```console
     https://localhost:5001/~ set base https://localhost:5001

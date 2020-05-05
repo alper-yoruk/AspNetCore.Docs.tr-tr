@@ -5,13 +5,19 @@ description: Mevcut ASP.NET MVC veya Web API uygulamalarını ASP.NET Core 2,0 '
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/24/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: migration/mvc2
-ms.openlocfilehash: 5a2437f8dddee49d402bf7df67cb15aa895367b2
-ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
+ms.openlocfilehash: 98b93731d40b47be8d7d5050afc7c74d25a7e1dc
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/18/2020
-ms.locfileid: "79511096"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776278"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core-20"></a>ASP.NET 'den ASP.NET Core 2,0 'ye geçiş
 
@@ -34,7 +40,7 @@ ASP.NET Core 2,0 projeleri, geliştiricilere .NET Core, .NET Framework veya her 
 
 .NET Framework hedeflenirken, projelerin ayrı NuGet paketlerine başvurması gerekir.
 
-.NET Core 'u hedeflemek, ASP.NET Core 2,0 [metapackage](xref:fundamentals/metapackage)sayesinde çok sayıda açık paket başvurularını ortadan kaldırmanıza olanak tanır. `Microsoft.AspNetCore.All` metapackage 'i projenize yükler:
+.NET Core 'u hedeflemek, ASP.NET Core 2,0 [metapackage](xref:fundamentals/metapackage)sayesinde çok sayıda açık paket başvurularını ortadan kaldırmanıza olanak tanır. `Microsoft.AspNetCore.All` Meta paketini projenize yükler:
 
 ```xml
 <ItemGroup>
@@ -42,7 +48,7 @@ ASP.NET Core 2,0 projeleri, geliştiricilere .NET Core, .NET Framework veya her 
 </ItemGroup>
 ```
 
-Metapackage kullanıldığında, metapackage içinde başvurulan hiçbir paket uygulamayla birlikte dağıtılır. .NET Core çalışma zamanı deposu bu varlıkları içerir ve performansı artırmak için önceden ön derlenmiş hale getiriyoruz. Daha fazla ayrıntı için bkz. <xref:fundamentals/metapackage>.
+Metapackage kullanıldığında, metapackage içinde başvurulan hiçbir paket uygulamayla birlikte dağıtılır. .NET Core çalışma zamanı deposu bu varlıkları içerir ve performansı artırmak için önceden ön derlenmiş hale getiriyoruz. Daha <xref:fundamentals/metapackage> fazla ayrıntı için bkz..
 
 ## <a name="project-structure-differences"></a>Proje yapısı farkları
 
@@ -60,37 +66,37 @@ ASP.NET Core, bir uygulamayı önyüklemeden yeni bir mekanizma getirmiştir. AS
 
 [!code-csharp[](samples/globalasax-sample.cs)]
 
-Bu yaklaşım, uygulamayı ve dağıtıldığı sunucuyu uygulamayı kesintiye uğratan bir şekilde bağar. Bağımsız olarak, [Owin](https://owin.org/) , birden çok çerçeveyi birlikte kullanmanın bir temizleyici yolunu sağlamak için sunulmuştur. OWIN yalnızca gereken modülleri eklemek için bir işlem hattı sağlar. Barındırma ortamı, hizmetleri ve uygulamanın istek ardışık düzenini yapılandırmak için bir [Başlangıç](xref:fundamentals/startup) işlevi alır. `Startup` uygulamayla bir ara yazılım kümesini kaydeder. Her istek için, uygulama bir ara yazılım bileşeninin her birini bağlantılı listenin baş işaretçisi ile mevcut bir işleyici kümesine çağırır. Her bir ara yazılım bileşeni, istek işleme ardışık düzenine bir veya daha fazla işleyici ekleyebilir. Bu, listenin yeni başlığı olan işleyiciye bir başvuru döndürülerek gerçekleştirilir. Her işleyici, listedeki bir sonraki işleyiciyi hatırlayıp çağırmaktan sorumludur. ASP.NET Core, bir uygulamaya giriş noktası `Startup`ve artık *Global. asax*' a bağımlılığı yoktur. .NET Framework ile OWIN kullanırken, işlem hattı olarak aşağıdaki gibi bir şey kullanın:
+Bu yaklaşım, uygulamayı ve dağıtıldığı sunucuyu uygulamayı kesintiye uğratan bir şekilde bağar. Bağımsız olarak, [Owin](https://owin.org/) , birden çok çerçeveyi birlikte kullanmanın bir temizleyici yolunu sağlamak için sunulmuştur. OWIN yalnızca gereken modülleri eklemek için bir işlem hattı sağlar. Barındırma ortamı, hizmetleri ve uygulamanın istek ardışık düzenini yapılandırmak için bir [Başlangıç](xref:fundamentals/startup) işlevi alır. `Startup`uygulamayla bir ara yazılım kümesini kaydeder. Her istek için, uygulama bir ara yazılım bileşeninin her birini bağlantılı listenin baş işaretçisi ile mevcut bir işleyici kümesine çağırır. Her bir ara yazılım bileşeni, istek işleme ardışık düzenine bir veya daha fazla işleyici ekleyebilir. Bu, listenin yeni başlığı olan işleyiciye bir başvuru döndürülerek gerçekleştirilir. Her işleyici, listedeki bir sonraki işleyiciyi hatırlayıp çağırmaktan sorumludur. ASP.NET Core, bir uygulamaya giriş noktası olur `Startup`ve artık *Global. asax*' a bağımlılığı yoktur. .NET Framework ile OWIN kullanırken, işlem hattı olarak aşağıdaki gibi bir şey kullanın:
 
 [!code-csharp[](samples/webapi-owin.cs)]
 
 Bu, varsayılan rotalarınızı yapılandırır ve varsayılan olarak JSON üzerinden XmlSerialization olur. Gerektiğinde bu işlem hattına başka bir ara yazılım ekleyin (Yükleme Hizmetleri, yapılandırma ayarları, statik dosyalar vb.).
 
-ASP.NET Core benzer bir yaklaşım kullanır, ancak girişi işlemek için OWıN 'u kullanmaz. Bunun yerine, *Program.cs* `Main` yöntemi aracılığıyla yapılır (konsol uygulamalarına benzer) ve `Startup` bu şekilde yüklenir.
+ASP.NET Core benzer bir yaklaşım kullanır, ancak girişi işlemek için OWıN 'u kullanmaz. Bunun yerine, *program.cs* `Main` yöntemi aracılığıyla yapılır (konsol uygulamalarına benzer) ve `Startup` bunlar üzerinden yüklenir.
 
 [!code-csharp[](samples/program.cs)]
 
-`Startup` bir `Configure` yöntemi içermelidir. `Configure`, işlem hattına gerekli bir ara yazılım ekleyin. Aşağıdaki örnekte (varsayılan Web sitesi şablonundan), işlem hattını desteğiyle yapılandırmak için birkaç uzantı yöntemi kullanılır:
+`Startup`bir `Configure` yöntem içermelidir. ' `Configure`De, gerekli ara yazılımı ardışık düzene ekleyin. Aşağıdaki örnekte (varsayılan Web sitesi şablonundan), işlem hattını desteğiyle yapılandırmak için birkaç uzantı yöntemi kullanılır:
 
 * [BrowserLink](https://vswebessentials.com/features/browserlink)
 * Hata sayfaları
 * Statik dosyalar
 * ASP.NET Core MVC
-* Kimlik
+* Identity
 
 [!code-csharp[](../../common/samples/WebApplication1/Startup.cs?highlight=8,9,10,14,17,19,21&start=58&end=84)]
 
 Ana bilgisayar ve uygulama, gelecekte farklı bir platforma geçme esnekliği sağlayan bir şekilde ayrılmış.
 
-ASP.NET Core başlatmaya ve ara yazılıma yönelik daha ayrıntılı bir başvuru için bkz. <xref:fundamentals/startup>.
+ASP.NET Core başlangıç ve ara yazılım için daha ayrıntılı bir başvuru için bkz <xref:fundamentals/startup>..
 
 ## <a name="storing-configurations"></a>Yapılandırma depolama
 
-ASP.NET, ayarları depolamayı destekler. Bu ayar, örneğin, uygulamaların dağıtıldığı ortamı desteklemek için kullanılır. Genel bir uygulama, *Web. config* dosyasının `<appSettings>` bölümünde tüm özel anahtar-değer çiftlerini depolandı:
+ASP.NET, ayarları depolamayı destekler. Bu ayar, örneğin, uygulamaların dağıtıldığı ortamı desteklemek için kullanılır. Genel bir uygulama, `<appSettings>` *Web. config* dosyasının bölümünde tüm özel anahtar-değer çiftlerini depolandı:
 
 [!code-xml[](samples/webconfig-sample.xml)]
 
-Uygulamalar, `System.Configuration` ad alanındaki `ConfigurationManager.AppSettings` koleksiyonunu kullanarak bu ayarları okur:
+Uygulamalar `ConfigurationManager.AppSettings` `System.Configuration` ad alanındaki koleksiyonu kullanarak bu ayarları okur:
 
 [!code-csharp[](samples/read-webconfig.cs)]
 
@@ -98,11 +104,11 @@ ASP.NET Core, uygulama için yapılandırma verilerini herhangi bir dosyada depo
 
 [!code-json[](samples/appsettings-sample.json)]
 
-Bu dosyayı uygulamanızın içindeki bir `IConfiguration` örneğine yüklemek *Startup.cs*içinde yapılır:
+Bu dosyayı uygulamanızın `IConfiguration` içindeki bir örneğine yüklemek *Startup.cs*içinde yapılır:
 
 [!code-csharp[](samples/startup-builder.cs)]
 
-Uygulama, ayarları almak için `Configuration` 'dan okur:
+Uygulama, ayarları almak `Configuration` için öğesinden okur:
 
 [!code-csharp[](samples/read-appsettings.cs)]
 
@@ -113,7 +119,7 @@ Bu şekilde, bu değerlere sahip bir hizmeti yüklemek için [bağımlılık ekl
 services.Configure<AppConfiguration>(Configuration.GetSection("AppConfiguration"));
 ```
 
-**Note:** ASP.NET Core yapılandırmaya yönelik daha ayrıntılı bir başvuru için bkz. <xref:fundamentals/configuration/index>.
+**Note:** ASP.NET Core yapılandırmaya yönelik daha ayrıntılı bir başvuru için bkz <xref:fundamentals/configuration/index>..
 
 ## <a name="native-dependency-injection"></a>Yerel bağımlılığı ekleme
 
@@ -121,11 +127,11 @@ Büyük, ölçeklenebilir uygulamalar, bileşenlerin ve hizmetlerin gevşek bağ
 
 ASP.NET uygulamalarında, geliştiriciler bağımlılık ekleme işlemini uygulamak için bir üçüncü taraf kitaplığı kullanır. Bu tür bir kitaplık [, Microsoft](https://github.com/unitycontainer/unity)düzenleri & uygulamalar tarafından sağlanır.
 
-Unity ile bağımlılık ekleme ayarlamayı bir örnek, bir `UnityContainer`sarmalayan `IDependencyResolver` uygulamadır:
+Unity `IDependencyResolver` ile bağımlılık ekleme ayarlamayı bir örnek şunu sarmalayan bir `UnityContainer`örnektir:
 
 [!code-csharp[](samples/sample8.cs)]
 
-`UnityContainer`bir örneğini oluşturun, hizmetinizi kaydedin ve `HttpConfiguration` bağımlılık çözümleyici 'yi Kapsayıcınız için yeni `UnityResolver` örneğine ayarlayın:
+Bir örneği oluşturun `UnityContainer`, hizmetinizi kaydedin ve bağımlılık çözümleyicisini `HttpConfiguration` kapsayıcının yeni örneğine `UnityResolver` ayarlayın:
 
 [!code-csharp[](samples/sample9.cs)]
 
@@ -133,13 +139,13 @@ Gerektiğinde `IProductRepository` ekle:
 
 [!code-csharp[](samples/sample5.cs)]
 
-Bağımlılık ekleme ASP.NET Core bir parçası olduğu için hizmetinizi `Startup.ConfigureServices`ekleyebilirsiniz:
+Bağımlılık ekleme ASP.NET Core bir parçası olduğundan, hizmetinizi şu şekilde ekleyebilirsiniz `Startup.ConfigureServices`:
 
 [!code-csharp[](samples/configure-services.cs)]
 
 Depo, Unity ile doğru olduğu için her yerde eklenebilir.
 
-ASP.NET Core bağımlılık ekleme hakkında daha fazla bilgi için bkz. <xref:fundamentals/dependency-injection>.
+ASP.NET Core bağımlılık ekleme hakkında daha fazla bilgi için bkz <xref:fundamentals/dependency-injection>..
 
 ## <a name="serving-static-files"></a>Statik dosyaları sunma
 
@@ -147,15 +153,15 @@ Web geliştirmenin önemli bir bölümü, statik, istemci tarafı varlıkları s
 
 ASP.NET ' de statik dosyalar çeşitli dizinlerde depolanır ve görünümlerde başvurulur.
 
-ASP.NET Core, aksi belirtilmedikçe statik dosyalar "Web root" ( *&lt;içerik kökü&gt;/Wwwroot*) içinde depolanır. Dosyalar, `Startup.Configure``UseStaticFiles` uzantısı yöntemi çağrılarak istek ardışık düzenine yüklenir:
+ASP.NET Core, statik dosyalar, aksi belirtilmedikçe "Web kökünde" (*&lt;içerik kökü&gt;/Wwwroot*) içinde depolanır. Dosyalar, şuradan `UseStaticFiles` `Startup.Configure`genişletme yöntemi çağrılarak istek ardışık düzenine yüklenir:
 
 [!code-csharp[](../../fundamentals/static-files/samples/1x/StartupStaticFiles.cs?highlight=3&name=snippet_ConfigureMethod)]
 
-**Note:** .NET Framework hedefliyorsanız, NuGet paketini `Microsoft.AspNetCore.StaticFiles`yüklemelisiniz.
+**Note:** .NET Framework hedefliyorsanız, NuGet paketini `Microsoft.AspNetCore.StaticFiles`yükler.
 
-Örneğin, *Wwwroot/görüntüler* klasöründeki bir görüntü varlığına, `http://<app>/images/<imageFileName>`gibi bir konumda tarayıcı tarafından erişilebilir.
+Örneğin, *Wwwroot/görüntüler* klasöründeki bir görüntü varlığı, tarayıcı tarafından gibi `http://<app>/images/<imageFileName>`bir konumda erişilebilir.
 
-**Note:** ASP.NET Core içinde statik dosyalar sunma hakkında daha ayrıntılı bir başvuru için bkz. <xref:fundamentals/static-files>.
+**Note:** ASP.NET Core içinde statik dosyaları sunmaya yönelik daha ayrıntılı bir başvuru için bkz <xref:fundamentals/static-files>..
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

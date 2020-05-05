@@ -4,23 +4,29 @@ author: rick-anderson
 description: ASP.NET Core kısa ömürlü veri koruma sağlayıcılarının uygulama ayrıntılarını öğrenin.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/key-storage-ephemeral
-ms.openlocfilehash: e4b0014ab3bdbf90b91383e8a33102f94faa8153
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 22a332230e15256dc33fd1d06f2da3ea8d34d3bc
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78664740"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776896"
 ---
 # <a name="ephemeral-data-protection-providers-in-aspnet-core"></a>ASP.NET Core kısa ömürlü veri koruma sağlayıcıları
 
 <a name="data-protection-implementation-key-storage-ephemeral"></a>
 
-Bir uygulamanın bir throwaway `IDataProtectionProvider`ihtiyaç duyacağı senaryolar vardır. Örneğin, geliştirici yalnızca tek bir konsol uygulamasında çalışabilir ya da uygulamanın kendisi geçici (betikleştirilmiş veya bir birim test projesi). Bu senaryoları desteklemek için [Microsoft. AspNetCore. DataProtection](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection/) paketi `EphemeralDataProtectionProvider`bir tür içerir. Bu tür, anahtar deposunun yalnızca bellek içinde tutulduğu ve herhangi bir yedekleme deposuna yazılmadığı `IDataProtectionProvider` temel bir uygulamasını sağlar.
+Bir uygulamanın bir throwaway `IDataProtectionProvider`ihtiyacı olan senaryolar vardır. Örneğin, geliştirici yalnızca tek bir konsol uygulamasında çalışabilir ya da uygulamanın kendisi geçici (betikleştirilmiş veya bir birim test projesi). Bu senaryoları desteklemek için, [Microsoft. AspNetCore. DataProtection](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection/) paketi bir tür `EphemeralDataProtectionProvider`içerir. Bu tür, anahtar deposunun yalnızca bellek `IDataProtectionProvider` içinde tutulduğu ve herhangi bir yedekleme deposuna yazılmadığı temel bir uygulama sağlar.
 
-Her `EphemeralDataProtectionProvider` örneği kendi benzersiz ana anahtarını kullanır. Bu nedenle, bir `EphemeralDataProtectionProvider` kökü olan bir `IDataProtector` korunan bir yük oluşturursa, bu yük yalnızca aynı `EphemeralDataProtectionProvider` örneğinde belirtilen eşdeğer bir `IDataProtector` (aynı [Amaç](xref:security/data-protection/consumer-apis/purpose-strings#data-protection-consumer-apis-purposes) zinciri olarak) tarafından korumasız olabilir.
+Her bir `EphemeralDataProtectionProvider` örneği kendi benzersiz ana anahtarını kullanır. Bu nedenle, bir `IDataProtector` kökü bir `EphemeralDataProtectionProvider` korumalı yük oluşturursa, bu yük yalnızca aynı `IDataProtector` `EphemeralDataProtectionProvider` örneğe sahip olan bir eşdeğer (aynı [Amaç](xref:security/data-protection/consumer-apis/purpose-strings#data-protection-consumer-apis-purposes) zinciri verilen) tarafından korumasız olabilir.
 
-Aşağıdaki örnek, `EphemeralDataProtectionProvider` örneğini oluşturma ve verileri korumak ve korumayı kaldırmak için kullanmayı göstermektedir.
+Aşağıdaki örnek, bir `EphemeralDataProtectionProvider` örneğini örneklemenizi ve verileri korumak ve korumayı kaldırmak için kullanmayı göstermektedir.
 
 ```csharp
 using System;

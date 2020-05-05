@@ -5,19 +5,25 @@ description: ASP.NET Core ile gRPC hizmetlerini yazarken temel kavramları öğr
 monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 09/03/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: grpc/aspnetcore
-ms.openlocfilehash: 6107704a4b4d9c629a7abe907efd5b1932019130
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: c14ae1fb3c2e046ae577c63824eebb4411a6e804
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78667631"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776226"
 ---
 # <a name="grpc-services-with-aspnet-core"></a>ASP.NET Core içeren gRPC Hizmetleri
 
-Bu belge, ASP.NET Core kullanarak gRPC hizmetlerine nasıl başlanınan bu belgeyi gösterir.
+Bu belgede, ASP.NET Core kullanarak gRPC Hizmetleri ile çalışmaya başlama gösterilmektedir.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -35,73 +41,73 @@ Bu belge, ASP.NET Core kullanarak gRPC hizmetlerine nasıl başlanınan bu belge
 
 ## <a name="get-started-with-grpc-service-in-aspnet-core"></a>ASP.NET Core’da gRPC hizmeti ile çalışmaya başlama
 
-[Örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/grpc/grpc-start/sample) ([nasıl indirilir).](xref:index#how-to-download-a-sample)
+[Örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/grpc/grpc-start/sample) ([nasıl indirilir](xref:index#how-to-download-a-sample)).
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Bkz. gRPC projesinin nasıl oluşturulacağına ilişkin ayrıntılı talimatlar için [gRPC hizmetlerine başlayın.](xref:tutorials/grpc/grpc-start)
+GRPC projesi oluşturma hakkında ayrıntılı yönergeler için bkz. [GRPC hizmetlerini kullanmaya başlama](xref:tutorials/grpc/grpc-start) .
 
-# <a name="visual-studio-code--visual-studio-for-mac"></a>[Mac için Visual Studio Code / Visual Studio](#tab/visual-studio-code+visual-studio-mac)
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
 Komut `dotnet new grpc -o GrpcGreeter` satırından çalıştırın.
 
 ---
 
-## <a name="add-grpc-services-to-an-aspnet-core-app"></a>ASP.NET Core uygulamasına gRPC hizmetleri ekleme
+## <a name="add-grpc-services-to-an-aspnet-core-app"></a>ASP.NET Core uygulamasına gRPC Hizmetleri ekleme
 
-gRPC [Grpc.AspNetCore](https://www.nuget.org/packages/Grpc.AspNetCore) paketi gerektirir.
+gRPC, [GRPC. AspNetCore](https://www.nuget.org/packages/Grpc.AspNetCore) paketini gerektirir.
 
-### <a name="configure-grpc"></a>gRPC'yi yapılandır
+### <a name="configure-grpc"></a>GRPC 'yi yapılandırma
 
-*Startup.cs:*
+*Startup.cs*içinde:
 
-* yöntemle `AddGrpc` gRPC etkindir.
-* Her gRPC hizmeti yöntem aracılığıyla yönlendirme boru `MapGrpcService` hattına eklenir.
+* gRPC, `AddGrpc` yöntemiyle etkinleştirilir.
+* Her gRPC hizmeti, yönlendirme ardışık düzenine `MapGrpcService` yöntemi aracılığıyla eklenir.
 
 [!code-csharp[](~/tutorials/grpc/grpc-start/sample/GrpcGreeter/Startup.cs?name=snippet&highlight=7,24)]
 [!INCLUDE[about the series](~/includes/code-comments-loc.md)]
 
-ASP.NET Core ara yazılımları ve özellikleri yönlendirme ardışık hattını paylaşır, bu nedenle bir uygulama ek istek işleyicilerine hizmet etmek üzere yapılandırılabilir. MVC denetleyicileri gibi ek istek işleyicileri, yapılandırılan gRPC hizmetlerine paralel olarak çalışır.
+ASP.NET Core middlewares ve Özellikler yönlendirme işlem hattını paylaşır, bu nedenle uygulama ek istek işleyicileri sunacak şekilde yapılandırılabilir. MVC denetleyicileri gibi ek istek işleyicileri, yapılandırılmış gRPC hizmetleriyle paralel olarak çalışır.
 
-### <a name="configure-kestrel"></a>Kerkenezi Yapılandır
+### <a name="configure-kestrel"></a>Kestrel yapılandırma
 
-Kerkenez gRPC uç noktaları:
+Kestrel gRPC uç noktaları:
 
-* HTTP/2'yi talep edin.
-* [Taşıma Katmanı Güvenliği (TLS)](https://tools.ietf.org/html/rfc5246)ile güvence altına alınmalıdır.
+* HTTP/2 gerektir.
+* [Aktarım Katmanı Güvenliği (TLS)](https://tools.ietf.org/html/rfc5246)ile güvenli hale getirilmesi gerekir.
 
 #### <a name="http2"></a>HTTP/2
 
-gRPC http/2 gerektirir. ASP.NET Core için gRPC [HttpRequest.Protocol](xref:Microsoft.AspNetCore.Http.HttpRequest.Protocol*) doğrular. `HTTP/2`
+gRPC, HTTP/2 gerektirir. ASP.NET Core için gRPC, [HttpRequest. Protocol](xref:Microsoft.AspNetCore.Http.HttpRequest.Protocol*) olduğunu `HTTP/2`doğrular.
 
-Kerkenez, en modern işletim sistemlerinde [HTTP/2'yi destekler.](xref:fundamentals/servers/kestrel#http2-support) Kestrel uç noktaları varsayılan olarak HTTP/1.1 ve HTTP/2 bağlantılarını destekleyecek şekilde yapılandırılmıştır.
+Kestrel çoğu modern işletim sisteminde [http/2 destekler](xref:fundamentals/servers/kestrel#http2-support) . Kestrel uç noktaları, varsayılan olarak HTTP/1.1 ve HTTP/2 bağlantılarını destekleyecek şekilde yapılandırılmıştır.
 
 #### <a name="tls"></a>TLS
 
-gRPC için kullanılan kerkenez uç noktaları TLS ile güvence altına alınmalıdır. Geliştirme aşamasında, ASP.NET Çekirdek geliştirme sertifikası nın bulunduğu `https://localhost:5001` anda TLS ile güvenli bir uç nokta otomatik olarak oluşturulur. Yapılandırma gerekmez. Bir `https` önek, Kestrel bitiş noktasının TLS kullandığını doğrular.
+GRPC için kullanılan Kestrel uç noktaları TLS ile güvenli hale gelmelidir. Geliştirme aşamasında, ASP.NET Core geliştirme sertifikası mevcut `https://localhost:5001` olduğunda, TLS ile güvenli bir uç nokta otomatik olarak oluşturulur. Yapılandırma gerekmez. `https` Ön ek, Kestrel uç noktasının TLS kullandığını doğrular.
 
-Üretimde TLS açıkça yapılandırılmalıdır. Aşağıdaki *appsettings.json* örneğinde, TLS ile güvenli bir HTTP/2 bitiş noktası sağlanır:
+Üretimde, TLS açıkça yapılandırılmalıdır. Aşağıdaki *appSettings. JSON* ÖRNEĞINDE, TLS ile güvenliği SAĞLANMıŞ bir http/2 uç noktası verilmiştir:
 
 [!code-json[](~/grpc/aspnetcore/sample/appsettings.json?highlight=4)]
 
-Alternatif olarak, Kerkenez uç noktaları *Program.cs*olarak yapılandırılabilir:
+Alternatif olarak, Kestrel uç noktaları *program.cs*içinde yapılandırılabilir:
 
 [!code-csharp[](~/grpc/aspnetcore/sample/Program.cs?highlight=7&name=snippet)]
 
 #### <a name="protocol-negotiation"></a>Protokol anlaşması
 
-TLS, iletişimi güvence altına almaktan daha fazlası için kullanılır. TLS [Application-Layer Protocol Negotiation (ALPN)](https://tools.ietf.org/html/rfc7301#section-3) el sıkışması, bir bitiş noktası birden çok protokolü desteklediğinde istemci ve sunucu arasındaki bağlantı iletişimini görüşmek için kullanılır. Bu görüşme, bağlantının HTTP/1.1 veya HTTP/2 kullanıp kullanmayacağını belirler.
+TLS, iletişimin güvenliğinin daha fazlası için kullanılır. TLS [uygulama katmanı protokol anlaşması (ALPN)](https://tools.ietf.org/html/rfc7301#section-3) el sıkışması, bir uç nokta birden çok protokolü desteklediğinde istemci ile sunucu arasındaki bağlantı protokolünü anlaşmak için kullanılır. Bu anlaşma, bağlantının HTTP/1.1 veya HTTP/2 kullanıp kullanmadığını belirler.
 
-BIR HTTP/2 bitiş noktası TLS olmadan yapılandırılırsa, bitiş noktasının `HttpProtocols.Http2` [ListenOptions.Protocols'u](xref:fundamentals/servers/kestrel#listenoptionsprotocols) . Birden çok protokolü olan bir bitiş `HttpProtocols.Http1AndHttp2`noktası (örneğin, ) tls olmadan kullanılamaz, çünkü anlaşma yoktur. Güvenli olmayan uç nokta varsayılanına yapılan tüm bağlantılar HTTP/1.1 ve gRPC çağrıları başarısız olur.
+Bir HTTP/2 uç noktası TLS olmadan yapılandırılırsa, uç noktanın [Listenoptions. Protocols](xref:fundamentals/servers/kestrel#listenoptionsprotocols) olarak `HttpProtocols.Http2`ayarlanmalıdır. Bir anlaşma olmadığından, birden fazla protokolle ( `HttpProtocols.Http1AndHttp2`Örneğin,) bir uç nokta TLS olmadan kullanılamaz. Güvenli olmayan uç nokta varsayılan HTTP/1.1 ve gRPC çağrıları için tüm bağlantılar başarısız olur.
 
-Kestrel ile HTTP/2 ve TLS'yi etkinleştirme hakkında daha fazla bilgi için [Kerkenez uç noktası yapılandırması](xref:fundamentals/servers/kestrel#endpoint-configuration)na bakın.
+HTTP/2 ve TLS 'yi Kestrel ile etkinleştirme hakkında daha fazla bilgi için bkz. [Kestrel Endpoint Configuration](xref:fundamentals/servers/kestrel#endpoint-configuration).
 
 > [!NOTE]
-> macOS, TLS ile Core gRPC ASP.NET desteklemez. macOS'ta gRPC hizmetlerini başarıyla çalıştırmak için ek yapılandırma gereklidir. Daha fazla bilgi için bkz: [macOS'ta Core gRPC ASP.NET başlatılamıyor.](xref:grpc/troubleshoot#unable-to-start-aspnet-core-grpc-app-on-macos)
+> macOS, TLS ile ASP.NET Core gRPC 'yi desteklemez. MacOS 'ta gRPC hizmetlerini başarıyla çalıştırmak için ek yapılandırma gerekir. Daha fazla bilgi için bkz. [macOS üzerinde gRPC uygulaması ASP.NET Core başlatılamıyor](xref:grpc/troubleshoot#unable-to-start-aspnet-core-grpc-app-on-macos).
 
-## <a name="integration-with-aspnet-core-apis"></a>ASP.NET Çekirdek API'lerle entegrasyon
+## <a name="integration-with-aspnet-core-apis"></a>ASP.NET Core API 'Leri ile tümleştirme
 
-gRPC hizmetleri [Bağımlılık Enjeksiyonu](xref:fundamentals/dependency-injection) (DI) ve [Günlük](xref:fundamentals/logging/index)gibi ASP.NET Core özelliklerine tam erişime sahiptir. Örneğin, hizmet uygulaması, oluşturucu aracılığıyla DI kapsayıcısından bir logger hizmetini çözebilir:
+gRPC Hizmetleri, [bağımlılık ekleme](xref:fundamentals/dependency-injection) (dı) ve [günlüğe kaydetme](xref:fundamentals/logging/index)gibi ASP.NET Core özelliklerine tam erişime sahiptir. Örneğin, hizmet uygulama, Oluşturucu aracılığıyla bir günlükçü hizmetini dı kapsayıcısından çözümleyebilir:
 
 ```csharp
 public class GreeterService : Greeter.GreeterBase
@@ -112,15 +118,15 @@ public class GreeterService : Greeter.GreeterBase
 }
 ```
 
-Varsayılan olarak, gRPC hizmeti uygulaması diğer DI hizmetlerini herhangi bir yaşam süresiyle (Singleton, Scoped veya Geçici) çözebilir.
+Varsayılan olarak, gRPC hizmeti uygulama diğer dı hizmetlerini herhangi bir yaşam süresi (tek, kapsamlı veya geçici) ile çözümleyebilir.
 
-### <a name="resolve-httpcontext-in-grpc-methods"></a>GRPC yöntemleriyle HttpContext'ı Çözümle
+### <a name="resolve-httpcontext-in-grpc-methods"></a>GRPC yöntemlerinde HttpContext 'i çözümle
 
-gRPC API yöntem, ana bilgisayar, üstbilgi ve römorklar gibi bazı HTTP/2 ileti verilerine erişim sağlar. Erişim, her `ServerCallContext` gRPC yöntemine geçirilen bağımsız değişkenden geçer:
+GRPC API 'SI, yöntem, ana bilgisayar, üst bilgi ve tanıtımları gibi bazı HTTP/2 ileti verilerine erişim sağlar. Erişim, her gRPC yöntemine geçirilen `ServerCallContext` bağımsız değişkendir:
 
 [!code-csharp[](~/grpc/aspnetcore/sample/GrcpService/GreeterService.cs?highlight=3-4&name=snippet)]
 
-`ServerCallContext`tüm ASP.NET `HttpContext` API'lerine tam erişim sağlamaz. Uzantı yöntemi, `GetHttpContext` ASP.NET `HttpContext` API'lerinde temel http/2 iletisini temsil eden tam erişim sağlar:
+`ServerCallContext`tüm ASP.NET API 'Lerinde tam erişim `HttpContext` sağlamaz. `GetHttpContext` Genişletme yöntemi, ASP.NET API 'lerinde temel alınan `HttpContext` http/2 iletisini temsil eden öğesine tam erişim sağlar:
 
 [!code-csharp[](~/grpc/aspnetcore/sample/GrcpService/GreeterService2.cs?highlight=6-7&name=snippet)]
 

@@ -4,20 +4,26 @@ author: rick-anderson
 description: Iauthenticatedencryptor, ıauthenticatedencryptordescriptor, ıauthenticatedencryptordescriptordeserializer ve en üst düzey fabrika hakkında bilgi edinin.
 ms.author: riande
 ms.date: 08/11/2017
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/extensibility/core-crypto
-ms.openlocfilehash: a5f651e3313cc579b995b45905826a5bffcc241c
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: c63cc124e1893f23c18581841194fa66848a2a1e
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78663571"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776428"
 ---
 # <a name="core-cryptography-extensibility-in-aspnet-core"></a>ASP.NET Core temel şifreleme genişletilebilirliği
 
 <a name="data-protection-extensibility-core-crypto"></a>
 
 >[!WARNING]
-> Aşağıdaki arabirimlerinden birini uygulayan türler, iş parçacığı açısından güvenli olmalıdır birden çok arayanlar için.
+> Aşağıdaki arabirimlerin herhangi birini uygulayan türler birden çok çağıranlar için iş parçacığı açısından güvenli olmalıdır.
 
 <a name="data-protection-extensibility-core-crypto-iauthenticatedencryptor"></a>
 
@@ -120,7 +126,7 @@ Iauthenticatedencryptor ve ıauthenticatedencryptordescriptor arasındaki birinc
 
 Tanımlayıcı, ExportToXml yordamı aracılığıyla seri hale getirilebilir. Bu yordam iki özellik içeren bir Xmlserializeddescriptorınfo döndürür: Descriptor 'ın XElement temsili ve bu tanımlayıcıyı ilgili XElement 'e geri döndürmek için kullanılabilecek bir [ıauthenticatedencryptordescriptordeserializer](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptordeserializer) temsil eden tür.
 
-Serileştirilmiş tanımlayıcı, şifreleme anahtar malzemesi gibi hassas bilgiler içerebilir. Veri koruma sistemi, depolama alanına kalıcı olmadan önce bilgileri şifrelemek için yerleşik desteğe sahiptir. Bundan faydalanmak için, tanımlayıcı "requiresEncryption" (xmlns "<http://schemas.asp.net/2015/03/dataProtection>") öznitelik adı ile gizli bilgiler içeren öğeyi işaretlemelidir, değer "true" olur.
+Serileştirilmiş tanımlayıcı, şifreleme anahtar malzemesi gibi hassas bilgiler içerebilir. Veri koruma sistemi, depolama alanına kalıcı olmadan önce bilgileri şifrelemek için yerleşik desteğe sahiptir. Bu özelliğin avantajlarından yararlanabilmek için tanımlayıcı, "requiresEncryption" (xmlns "<http://schemas.asp.net/2015/03/dataProtection>") öznitelik adı, "true" özniteliği ile hassas bilgiler içeren öğeyi işaretlemelidir.
 
 >[!TIP]
 > Bu özniteliği ayarlamak için yardımcı bir API vardır. Microsoft. AspNetCore. DataProtection. AuthenticatedEncryption. ConfigurationModel ad alanında bulunan XElement. Markasrequiresencryptıon () uzantı yöntemini çağırın.
@@ -139,9 +145,9 @@ ImportFromXML yöntemi [ıauthenticatedencryptordescriptor. ExportToXml](xref:se
 
 Iauthenticatedencryptordescriptordeserializer uygulayan türler aşağıdaki iki ortak oluşturucudan birine sahip olmalıdır:
 
-* .ctor(IServiceProvider)
+* . ctor (Iservvoiceprovider)
 
-* .ctor()
+* . ctor ()
 
 > [!NOTE]
 > Oluşturucuya geçirilen IServiceProvider null olabilir.

@@ -4,13 +4,19 @@ author: rick-anderson
 description: ASP.NET Core veri koruma kullanan tüm uygulamalar için varsayılan makine genelindeki bir ilke ayarlamaya yönelik destek hakkında bilgi edinin.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/configuration/machine-wide-policy
-ms.openlocfilehash: 70aaca7afcd3df22cebb4466fbd9845a2277688c
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 84f54b37dfff3112ea5ca84f931103624cfde90a
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78667953"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776844"
 ---
 # <a name="data-protection-machine-wide-policy-support-in-aspnet-core"></a>ASP.NET Core 'de veri koruma makineye özel ilke desteği
 
@@ -31,17 +37,17 @@ Varsayılan ilkeyi ayarlamak için, bir yönetici aşağıdaki kayıt defteri an
 
 Desteklenen değerler aşağıda gösterilmiştir.
 
-| Value              | Tür   | Açıklama |
+| Değer              | Tür   | Açıklama |
 | ------------------ | :----: | ----------- |
 | EncryptionType     | string | Veri koruma için hangi algoritmaların kullanılması gerektiğini belirtir. Değer CNG-CBC, CNG-GCM veya yönetilen olmalıdır ve aşağıda daha ayrıntılı olarak açıklanmıştır. |
-| DefaultKeyLifetime | DWORD  | Yeni oluşturulan anahtarların yaşam süresini belirtir. Değer, gün cinsinden belirtilir ve > = 7 olmalıdır. |
+| DefaultKeyLifetime | DWORD  | Yeni oluşturulan anahtarların yaşam süresini belirtir. Değer, gün cinsinden belirtilir ve >= 7 olmalıdır. |
 | Keyescrowhavuzları     | string | Anahtar Emanet için kullanılan türleri belirtir. Değer, listedeki her öğe [ıkeyescrowsink](/dotnet/api/microsoft.aspnetcore.dataprotection.keymanagement.ikeyescrowsink)uygulayan bir türün derleme nitelikli adı olduğunda, noktalı virgülle ayrılmış anahtar Emanet listesidir. |
 
 ## <a name="encryption-types"></a>Şifreleme türleri
 
 EncryptionType değeri CNG-CBC ise, sistem, Windows CNG tarafından sunulan hizmetlere yönelik gizlilik ve HMAC için bir CBC modu simetrik blok şifresi kullanacak şekilde yapılandırılır (daha fazla ayrıntı için bkz. [özel WINDOWS CNG algoritmaları belirtme](xref:security/data-protection/configuration/overview#specifying-custom-windows-cng-algorithms) ). Her biri CngCbcAuthenticatedEncryptionSettings türündeki bir özelliğe karşılık gelen aşağıdaki ek değerler desteklenir.
 
-| Value                       | Tür   | Açıklama |
+| Değer                       | Tür   | Açıklama |
 | --------------------------- | :----: | ----------- |
 | EncryptionAlgorithm         | string | CNG tarafından anlaşılan simetrik bir blok şifre algoritması adı. Bu algoritma CBC modunda açılır. |
 | EncryptionAlgorithmProvider | string | Algoritma Şifrelemealgoritması oluşturabilecek CNG sağlayıcısı uygulamasının adı. |
@@ -51,7 +57,7 @@ EncryptionType değeri CNG-CBC ise, sistem, Windows CNG tarafından sunulan hizm
 
 EncryptionType değeri CNG-GCM ise, sistem Windows CNG tarafından sunulan hizmetlerle gizlilik ve özgünlük için bir Galoa/sayaç modu simetrik blok şifresi kullanacak şekilde yapılandırılır (daha fazla ayrıntı için bkz. [özel WINDOWS CNG algoritmaları belirtme](xref:security/data-protection/configuration/overview#specifying-custom-windows-cng-algorithms) ). Aşağıdaki ek değerler desteklenir, her biri Cnggcmakimliksidencryptionsettings türündeki bir özelliğe karşılık gelir.
 
-| Value                       | Tür   | Açıklama |
+| Değer                       | Tür   | Açıklama |
 | --------------------------- | :----: | ----------- |
 | EncryptionAlgorithm         | string | CNG tarafından anlaşılan simetrik bir blok şifre algoritması adı. Bu algoritma Galoa/sayaç modunda açılır. |
 | EncryptionAlgorithmProvider | string | Algoritma Şifrelemealgoritması oluşturabilecek CNG sağlayıcısı uygulamasının adı. |
@@ -59,7 +65,7 @@ EncryptionType değeri CNG-GCM ise, sistem Windows CNG tarafından sunulan hizme
 
 EncryptionType yönetiliyorsa, sistem, özgünlük için Gizlilik ve KeyedHashAlgorithm için yönetilen bir SymmetricAlgorithm kullanacak şekilde yapılandırılır (daha fazla ayrıntı için bkz. [özel yönetilen algoritmalar belirtme](xref:security/data-protection/configuration/overview#specifying-custom-managed-algorithms) ). Aşağıdaki ek değerler desteklenir, her biri Managedavılationcatedencryptionsettings türündeki bir özelliğe karşılık gelir.
 
-| Value                      | Tür   | Açıklama |
+| Değer                      | Tür   | Açıklama |
 | -------------------------- | :----: | ----------- |
 | EncryptionAlgorithmType    | string | SymmetricAlgorithm uygulayan bir türün derleme nitelikli adı. |
 | EncryptionAlgorithmKeySize | DWORD  | Simetrik şifreleme algoritması için türetmeye yönelik anahtarın uzunluğu (bit cinsinden). |

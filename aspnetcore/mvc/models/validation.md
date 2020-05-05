@@ -1,19 +1,25 @@
 ---
 title: ASP.NET Core MVC 'de model doğrulaması
 author: rick-anderson
-description: ASP.NET Core MVC ve Razor Pages model doğrulaması hakkında bilgi edinin.
+description: ASP.NET Core MVC ve Razor sayfalarında model doğrulama hakkında bilgi edinin.
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/15/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/models/validation
-ms.openlocfilehash: 0e3d4f4705dbfdae00943de2d85c603b6762a2f8
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: a0f7c070514de26ae007526a5587c13d26d1eb1b
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82205897"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777182"
 ---
-# <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>ASP.NET Core MVC ve Razor Pages model doğrulaması
+# <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>ASP.NET Core MVC ve Razor sayfalarda model doğrulaması
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -27,7 +33,7 @@ Bu makalede, ASP.NET Core MVC veya Razor Pages uygulamasında Kullanıcı giriş
 
 Model durumu iki alt sistemden gelen hataları temsil eder: model bağlama ve model doğrulama. [Model bağlamasından](model-binding.md) kaynaklanan hatalar genellikle veri dönüştürme hatalardır. Örneğin, bir tamsayı alanına bir "x" girilir. Model bağlama sonrasında model doğrulaması oluşur ve verilerin iş kurallarına uygun olmadığı rapor hataları raporlar. Örneğin, 1 ile 5 arasında bir derecelendirme bekleyen bir alana 0 girilir.
 
-Hem model bağlama hem de model doğrulama, bir denetleyici eyleminin veya bir Razor Pages işleyicisi yönteminin yürütülmesinden önce oluşur. Web uygulamaları için uygulama, uygun şekilde İnceleme `ModelState.IsValid` ve tepki verme sorumluluğundadır. Web Apps genellikle sayfayı bir hata iletisiyle yeniden görüntülerdi:
+Hem model bağlama hem de model doğrulama, bir denetleyici eyleminin veya bir Razor sayfa işleyici yönteminin yürütülmesinden önce oluşur. Web uygulamaları için uygulama, uygun şekilde İnceleme `ModelState.IsValid` ve tepki verme sorumluluğundadır. Web Apps genellikle sayfayı bir hata iletisiyle yeniden görüntülerdi:
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Pages/Movies/Create.cshtml.cs?name=snippet_OnPostAsync&highlight=3-6)]
 
@@ -367,7 +373,7 @@ HTML 'de öznitelikleri işleme `data-` yöntemi örnek uygulamadaki `ClassicMov
 
 ## <a name="disable-client-side-validation"></a>İstemci tarafı doğrulamayı devre dışı bırak
 
-Aşağıdaki kod Razor Pages istemci doğrulamasını devre dışı bırakır:
+Aşağıdaki kod Razor sayfalarda istemci doğrulamasını devre dışı bırakır:
 
 [!code-csharp[](validation/samples/3.x/ValidationSample/Startup.cs?name=snippet_DisableClientValidation&highlight=2-5)]
 
@@ -376,7 +382,7 @@ Aşağıdaki kod Razor Pages istemci doğrulamasını devre dışı bırakır:
 * Tüm *. cshtml* dosyalarındaki başvuruyu `_ValidationScriptsPartial` not edin.
 * *Pages\shared\_validationscriptspartial. cshtml* dosyasının içeriğini kaldırın.
 
-Yukarıdaki yaklaşım ASP.NET Core Identity Razor sınıfı kitaplığının istemci tarafında doğrulanmasını engellemez. Daha fazla bilgi için bkz. <xref:security/authentication/scaffold-identity>.
+Önceki yaklaşım ASP.NET Core Identity Razor sınıf kitaplığının istemci tarafında doğrulanmasını engellemez. Daha fazla bilgi için bkz. <xref:security/authentication/scaffold-identity>.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
@@ -395,7 +401,7 @@ Bu makalede, ASP.NET Core MVC veya Razor Pages uygulamasında Kullanıcı giriş
 
 Model durumu iki alt sistemden gelen hataları temsil eder: model bağlama ve model doğrulama. [Model bağlamasından](model-binding.md) kaynaklanan hatalar genellikle veri dönüştürme hatalardır (örneğin, bir tamsayı bekleyen bir alana bir "x" girilir). Model bağlama ve verilerin iş kurallarına uygun olmadığı rapor hataları (örneğin, 1 ile 5 arasında bir derecelendirme bekleyen bir alana bir 0 girildiğinde) oluşturulduktan sonra model doğrulaması oluşur.
 
-Hem model bağlama hem de doğrulama, bir denetleyici eyleminin veya bir Razor Pages işleyicisi yönteminin yürütülmesinden önce oluşur. Web uygulamaları için uygulama, uygun şekilde İnceleme `ModelState.IsValid` ve tepki verme sorumluluğundadır. Web Apps genellikle sayfayı bir hata iletisiyle yeniden görüntülerdi:
+Hem model bağlama hem de doğrulama, bir denetleyici eyleminin veya bir Razor sayfa işleyici yönteminin yürütülmesinden önce oluşur. Web uygulamaları için uygulama, uygun şekilde İnceleme `ModelState.IsValid` ve tepki verme sorumluluğundadır. Web Apps genellikle sayfayı bir hata iletisiyle yeniden görüntülerdi:
 
 [!code-csharp[](validation/samples_snapshot/2.x/Create.cshtml.cs?name=snippet&highlight=3-6)]
 
@@ -418,7 +424,7 @@ Doğrulama öznitelikleri, model özellikleri için doğrulama kuralları belirt
 Yerleşik doğrulama öznitelikleri şunlardır:
 
 * `[CreditCard]`: Özelliğin kredi kartı biçimine sahip olduğunu doğrular.
-* `[Compare]`: Bir modeldeki iki özelliği eşleştiğini doğrular. Örneğin, *register.cshtml.cs* dosyası, girilen iki `[Compare]` parola eşleşmesini doğrulamak için kullanır. Kayıt kodunu görmek için [Scaffold kimliği](xref:security/authentication/scaffold-identity) .
+* `[Compare]`: Bir modeldeki iki özelliği eşleştiğini doğrular. Örneğin, *register.cshtml.cs* dosyası, girilen iki `[Compare]` parola eşleşmesini doğrulamak için kullanır. Kayıt kodunu görmek için [Yapı iskelesi Identity ](xref:security/authentication/scaffold-identity) .
 * `[EmailAddress]`: Özelliğin bir e-posta biçimine sahip olduğunu doğrular.
 * `[Phone]`: Özelliğin bir telefon numarası biçimine sahip olduğunu doğrular.
 * `[Range]`: Özellik değerinin belirtilen bir aralık dahilinde olduğunu doğrular.
@@ -742,7 +748,7 @@ Aşağıdaki kod, MVC görünümlerinde istemci doğrulamasını devre dışı b
 
 [!code-csharp[](validation/samples_snapshot/2.x/Startup2.cs?name=snippet_DisableClientValidation)]
 
-Ve Razor Pages:
+Ve Razor sayfalarında:
 
 [!code-csharp[](validation/samples_snapshot/2.x/Startup3.cs?name=snippet_DisableClientValidation)]
 

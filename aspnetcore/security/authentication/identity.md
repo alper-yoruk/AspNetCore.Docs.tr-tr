@@ -1,16 +1,22 @@
 ---
-title: ASP.NET Core kimliğe giriş
+title: Identity ASP.NET Core giriş
 author: rick-anderson
-description: ASP.NET Core bir uygulamayla kimlik kullanın. Parola gereksinimlerini (RequireDigit, RequiredLength, RequiredUniqueChars ve daha fazlasını) ayarlamayı öğrenin.
+description: ASP.NET Core Identity bir uygulamayla kullanın. Parola gereksinimlerini (RequireDigit, RequiredLength, RequiredUniqueChars ve daha fazlasını) ayarlamayı öğrenin.
 ms.author: riande
 ms.date: 01/15/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/identity
-ms.openlocfilehash: 4bc5f206b3aee7c2d34055703acc5b6c5218f964
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
+ms.openlocfilehash: d596a8357c5c812b94950809eedf35718328747c
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82205949"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777013"
 ---
 # <a name="introduction-to-identity-on-aspnet-core"></a>ASP.NET Core kimliğe giriş
 
@@ -391,30 +397,30 @@ Temel `Controller` sınıf, denetleyici yöntemlerinden `User` erişebileceğini
 
 [!code-csharp[](identity/sample/WebApp1/Pages/Shared/_LoginPartial.cshtml?highlight=16)]
 
-## <a name="test-identity"></a>Test kimliği
+## <a name="test-identity"></a>SınamanızIdentity
 
-Varsayılan Web projesi şablonları, giriş sayfalarına anonim erişime izin verir. Kimliği test etmek için Gizlilik [`[Authorize]`](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute) sayfasına ekleyin.
+Varsayılan Web projesi şablonları, giriş sayfalarına anonim erişime izin verir. Test Identityetmek için Gizlilik [`[Authorize]`](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute) sayfasına ekleyin.
 
 [!code-csharp[](identity/sample/WebApp1/Pages/Privacy.cshtml.cs?highlight=7)]
 
 Oturumunuz açık ise oturumu kapatın. Uygulamayı çalıştırın ve **Gizlilik** bağlantısını seçin. Oturum açma sayfasına yönlendirilirsiniz.
 
-### <a name="explore-identity"></a>Kimliği keşfet
+### <a name="explore-identity"></a>ExplorerIdentity
 
-Kimliği daha ayrıntılı incelemek için:
+Daha ayrıntılı Identity incelemek için:
 
 * [Tam kimlik UI kaynağı oluşturma](xref:security/authentication/scaffold-identity#create-full-identity-ui-source)
 * Her sayfanın kaynağını inceleyin ve hata ayıklayıcıda ilerleyin.
 
-## <a name="identity-components"></a>Kimlik bileşenleri
+## <a name="identity-components"></a>IdentityBileşenleri
 
-Tüm kimlik bağımlı NuGet paketleri [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app)'e dahildir.
+Tüm Identity bağımlı NuGet paketleri [Microsoft. Aspnetcore. app metapackage](xref:fundamentals/metapackage-app)'e dahildir.
 
-Kimliğin birincil paketi [Microsoft. AspNetCore. Identity](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity/)' dır. Bu paket, ASP.NET Core kimliği için çekirdek arabirim kümesini içerir ve tarafından `Microsoft.AspNetCore.Identity.EntityFrameworkCore`dahildir.
+İçin Identity birincil paket [Microsoft. aspnetcore.Identity](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity/).. Bu paket, ASP.NET Core Identityiçin temel arabirim kümesini içerir ve tarafından `Microsoft.AspNetCore.Identity.EntityFrameworkCore`dahildir.
 
-## <a name="migrating-to-aspnet-core-identity"></a>ASP.NET Core kimliğe geçiriliyor
+## <a name="migrating-to-aspnet-core-identity"></a>ASP.NET Core geçiriliyorIdentity
 
-Mevcut kimlik deponuzu geçirme hakkında daha fazla bilgi ve yönergeler için bkz. [kimlik doğrulama ve kimlik geçişi](xref:migration/identity).
+Mevcut Identity deponuzu geçirme hakkında daha fazla bilgi ve yönergeler için bkz. [geçiş kimlik Identitydoğrulaması ve ](xref:migration/identity).
 
 ## <a name="setting-password-strength"></a>Parola gücünü ayarlama
 
@@ -422,8 +428,8 @@ Minimum parola gereksinimlerini ayarlayan bir örnek için bkz. [yapılandırma]
 
 ## <a name="next-steps"></a>Sonraki Adımlar
 
-* SQLite kullanarak kimlik yapılandırma hakkında bilgi için [Bu GitHub sorununa](https://github.com/dotnet/AspNetCore.Docs/issues/5131) bakın.
-* [Kimliği Yapılandırma](xref:security/authentication/identity-configuration)
+* SQLite kullanarak yapılandırma Identity hakkında bilgi Için [Bu GitHub sorununa](https://github.com/dotnet/AspNetCore.Docs/issues/5131) bakın.
+* [YapılandırmaIdentity](xref:security/authentication/identity-configuration)
 * <xref:security/authorization/secure-data>
 * <xref:security/authentication/add-user-data>
 * <xref:security/authentication/identity-enable-qrcodes>

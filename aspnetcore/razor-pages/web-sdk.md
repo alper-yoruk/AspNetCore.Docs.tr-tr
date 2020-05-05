@@ -1,29 +1,33 @@
 ---
-title: ASP.NET Çekirdek Web SDK
+title: ASP.NET Core Web SDK 'Sı
 author: Rick-Anderson
-description: Microsoft.NET.Sdk.Web'e Genel Bakış.
+description: Microsoft. NET. SDK. Web 'e genel bakış.
 ms.author: riande
 ms.date: 01/25/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: razor-pages/web-sdk
-ms.openlocfilehash: 6a9d531efd2188aed525c949bb124914c31119db
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 2797f0b3003b8ad89093fe1115dee2acc8650c73
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78661058"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777169"
 ---
-# <a name="aspnet-core-web-sdk"></a>ASP.NET Çekirdek Web SDK
+# <a name="aspnet-core-web-sdk"></a>ASP.NET Core Web SDK 'Sı
 
 ### <a name="overview"></a>Genel Bakış
 
-`Microsoft.NET.Sdk.Web`Core uygulamaları oluşturmak için bir [MSBuild projesi SDK](https://docs.microsoft.com/visualstudio/msbuild/how-to-use-project-sdk) ASP.NET. Bu SDK olmadan bir ASP.NET Core uygulaması oluşturmak mümkündür, ancak, Web SDK:
+`Microsoft.NET.Sdk.Web`, ASP.NET Core uygulamalar oluşturmaya yönelik bir [MSBuild proje SDK 'sına](https://docs.microsoft.com/visualstudio/msbuild/how-to-use-project-sdk) sahiptir. Bu SDK olmadan bir ASP.NET Core uygulaması oluşturmak mümkündür, ancak Web SDK 'Sı şu şekilde olur:
 
-* Birinci sınıf bir deneyim sağlamak için uyarlanmıştır.
+* Birinci sınıf bir deneyim sağlamaya yönelik olarak tasarlanmıştır.
 * Çoğu kullanıcı için önerilen hedef.
 
-Web.SDK'yı bir projede kullanın:
+Bir projede Web. SDK 'Yı kullanın:
 
   ```xml
   <Project Sdk="Microsoft.NET.Sdk.Web">
@@ -33,16 +37,16 @@ Web.SDK'yı bir projede kullanın:
 
 Web SDK kullanılarak etkinleştirilen özellikler:
 
-* .NET Core 3.0 veya daha sonra dolaylı olarak başvuru hedefleyen projeler:
+* .NET Core 3,0 veya sonraki bir sürümü hedefleyen projeler:
 
   * [ASP.NET Core paylaşılan çerçeve](xref:fundamentals/metapackage-app).
-  * Core uygulamaları oluşturmak için tasarlanan [ASP.NET analizörler.](/visualstudio/extensibility/getting-started-with-roslyn-analyzers)
-* Web SDK, WebDeploy kullanarak yayımlama profillerinin ve yayımlamanın kullanımını sağlayan MSBuild hedeflerini içeri niçin üstler.
+  * ASP.NET Core uygulamalar oluşturmak için tasarlanan [çözümleyiciler](/visualstudio/extensibility/getting-started-with-roslyn-analyzers) .
+* Web SDK 'Sı, yayımlama profillerinin kullanımını ve WebDeploy kullanarak yayımlamayı etkinleştiren MSBuild hedeflerini içeri aktarır.
 
 ### <a name="properties"></a>Özellikler
 
 | Özellik | Açıklama |
 | -------- | ----------- |
-| `DisableImplicitFrameworkReferences` | Paylaşılan çerçeveye örtülü başvuruyu `Microsoft.AspNetCore.App` devre dışı kılabilir. |
-| `DisableImplicitAspNetCoreAnalyzers` | ASP.NET Core çözümleyicilerine örtülü başvuruları devre dışı kılabilir. |
-| `DisableImplicitComponentsAnalyzers` | (sunucu) uygulamaları yaparken Blazor Razor Components çözümleyicilerine örtülü başvuruyu devre dışı katır. |
+| `DisableImplicitFrameworkReferences` | `Microsoft.AspNetCore.App` Paylaşılan çerçeveye örtük başvuruyu devre dışı bırakır. |
+| `DisableImplicitAspNetCoreAnalyzers` | ASP.NET Core Çözümleyicileri için örtülü başvuruyu devre dışı bırakır. |
+| `DisableImplicitComponentsAnalyzers` | (Sunucu) uygulamaları Razor oluştururken Blazor çözümleyiciler çözümleyicilere örtülü başvuruyu devre dışı bırakır. |

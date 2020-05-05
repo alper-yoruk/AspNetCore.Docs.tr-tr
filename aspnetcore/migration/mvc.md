@@ -4,13 +4,19 @@ author: ardalis
 description: ASP.NET MVC projesini ASP.NET Core MVC 'ye geçirmeye nasıl başlaleyeceğinizi öğrenin.
 ms.author: riande
 ms.date: 04/06/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: migration/mvc
-ms.openlocfilehash: 6c9449fb43960d05db8aa6dcba64d3d830834cdb
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 59a10c002958e5f719dbd59686f21df69da5f43e
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78661170"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777052"
 ---
 # <a name="migrate-from-aspnet-mvc-to-aspnet-core-mvc"></a>ASP.NET MVC 'den ASP.NET Core MVC 'ye geçiş
 
@@ -61,13 +67,13 @@ Yükseltmeyi göstermek için, bir ASP.NET MVC uygulaması oluşturarak başlaya
 
 ::: moniker-end
 
-`Microsoft.AspNetCore.Mvc`, ASP.NET Core MVC çerçevesidir. `Microsoft.AspNetCore.StaticFiles` statik dosya işleyicisidir. ASP.NET Core çalışma zamanı Modüler olur ve statik dosyalara (bkz. [statik dosyaları](xref:fundamentals/static-files)) hizmeti sağlamak için açıkça oturum açmalısınız.
+`Microsoft.AspNetCore.Mvc`ASP.NET Core MVC çerçevesidir. `Microsoft.AspNetCore.StaticFiles`, statik dosya işleyicisidir. ASP.NET Core çalışma zamanı Modüler olur ve statik dosyalara (bkz. [statik dosyaları](xref:fundamentals/static-files)) hizmeti sağlamak için açıkça oturum açmalısınız.
 
 * *Startup.cs* dosyasını açın ve kodu aşağıdakiler ile eşleşecek şekilde değiştirin:
 
   [!code-csharp[](mvc/sample/Startup.cs?highlight=13,26-31)]
 
-`UseStaticFiles` uzantısı yöntemi statik dosya işleyicisini ekler. Daha önce belirtildiği gibi, ASP.NET çalışma zamanı Modüler olur ve statik dosyaları sağlamak için açıkça kabul etmeniz gerekir. `UseMvc` uzantısı yöntemi yönlendirme ekler. Daha fazla bilgi için bkz. [uygulama başlatma](xref:fundamentals/startup) ve [yönlendirme](xref:fundamentals/routing).
+`UseStaticFiles` Genişletme yöntemi statik dosya işleyicisini ekler. Daha önce belirtildiği gibi, ASP.NET çalışma zamanı Modüler olur ve statik dosyaları sağlamak için açıkça kabul etmeniz gerekir. `UseMvc` Uzantı yöntemi yönlendirme ekler. Daha fazla bilgi için bkz. [uygulama başlatma](xref:fundamentals/startup) ve [yönlendirme](xref:fundamentals/routing).
 
 ## <a name="add-a-controller-and-view"></a>Denetleyici ekleme ve görüntüleme
 
@@ -83,7 +89,7 @@ Bu bölümde, sonraki bölümde geçirebileceğiniz ASP.NET MVC denetleyicisi ve
 
 * Bir *Görünüm/giriş* klasörü ekleyin.
 
-* *Views/Home* klasörüne *Index. cshtml* adlı bir **Razor görünümü** ekleyin.
+* *Görünümler/giriş* klasörüne *Index. cshtml* adlı bir ** Razor görünüm** ekleyin.
 
 ![Yeni öğe Ekle iletişim kutusu](mvc/_static/view.png)
 
@@ -117,15 +123,15 @@ Artık en az çalışma ASP.NET Core projesi olduğuna göre, işlevselliği ASP
 
 * filtreler
 
-* Oturum açma/kapatma, kimlik (Bu, sonraki öğreticide yapılır.)
+* Oturum açma/kapatma Identity (Bu, sonraki öğreticide yapılır.)
 
 ## <a name="controllers-and-views"></a>Denetleyiciler ve görünümler
 
-* Yöntemlerin her birini ASP.NET MVC `HomeController` yeni `HomeController`kopyalayın. ASP.NET MVC 'de, yerleşik şablonun denetleyici eylem yönteminin dönüş türü [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); ASP.NET Core MVC 'de, eylem yöntemleri bunun yerine `IActionResult` döndürür. `ActionResult` `IActionResult`uygular, bu nedenle eylem yöntemlerinizi dönüş türünü değiştirmenize gerek yoktur.
+* Yöntemlerin her birini ASP.NET MVC `HomeController` 'den New `HomeController`öğesine kopyalayın. ASP.NET MVC 'de, yerleşik şablonun denetleyici eylem yönteminin dönüş türü [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); ASP.NET Core MVC 'de, eylem metotları bunun yerine `IActionResult` döndürülür. `ActionResult`uygular `IActionResult`, bu nedenle eylem yöntemlerinizi dönüş türünü değiştirmenize gerek yoktur.
 
 * ASP.NET MVC projesindeki *. cshtml*, *Contact. cshtml*ve *Index. cshtml* Razor görünüm dosyalarını ASP.NET Core projesine kopyalayın.
 
-* ASP.NET Core uygulamasını çalıştırın ve her yöntemi test edin. Düzen dosyasını veya stilleri henüz geçirmedik, bu nedenle işlenmiş görünümler yalnızca görünüm dosyalarındaki içeriği içerir. `About` ve `Contact` görünümleriyle ilgili düzen dosyası bağlantıları oluşturmayacaksınız. bu nedenle, bunları tarayıcıdan çağırmanız gerekir ( **4492** değerini projenizde kullanılan bağlantı noktası numarasıyla değiştirin).
+* ASP.NET Core uygulamasını çalıştırın ve her yöntemi test edin. Düzen dosyasını veya stilleri henüz geçirmedik, bu nedenle işlenmiş görünümler yalnızca görünüm dosyalarındaki içeriği içerir. Ve görünümleri için Düzen dosyası oluşturulmuş bağlantılar yoktur, bu nedenle bunları tarayıcıdan çağırmanız gerekir (4492 değerini projenizde kullanılan bağlantı noktası numarasıyla değiştirin). **4492** `About` `Contact`
 
   * `http://localhost:4492/home/about`
 
@@ -133,7 +139,7 @@ Artık en az çalışma ASP.NET Core projesi olduğuna göre, işlevselliği ASP
 
 ![Kişi sayfası](mvc/_static/contact-page.png)
 
-Stil ve menü öğelerinin eksikliğine göz önünde. Sonraki bölümde, gidereceğiz.
+Stil ve menü öğelerinin eksikliğine göz önünde. Sonraki bölümde bunu çözeceğiz.
 
 ## <a name="static-content"></a>Statik içerik
 
@@ -155,15 +161,15 @@ Eski ASP.NET MVC projesi, stili için [önyükleme](https://getbootstrap.com/) k
 
 *_Layout. cshtml* dosyasını açın ve aşağıdaki değişiklikleri yapın (tamamlanan kod aşağıda gösterilmiştir):
 
-* *Bootstrap. css* ' i yüklemek için `@Styles.Render("~/Content/css")` bir `<link>` öğesiyle değiştirin (aşağıya bakın).
+* *Bootstrap. css* ' nin yükleneceği bir `@Styles.Render("~/Content/css")` `<link>` öğeyle değiştirin (aşağıya bakın).
 
-* `@Scripts.Render("~/bundles/modernizr")`kaldırın.
+* Kaldırın `@Scripts.Render("~/bundles/modernizr")`.
 
-* `@Html.Partial("_LoginPartial")` çizgiyi açıklama (çizgiyi `@*...*@`ile çevreleyin). Daha fazla bilgi için bkz. [kimlik doğrulaması ve kimliğini ASP.NET Core geçirme](xref:migration/identity)
+* `@Html.Partial("_LoginPartial")` Çizgiyi açıklama (çizgi ile `@*...*@`çevreleyin). Daha fazla bilgi için bkz. [kimlik Identity doğrulamasını geçirme ve ASP.NET Core](xref:migration/identity)
 
-* `@Scripts.Render("~/bundles/jquery")` bir `<script>` öğesiyle değiştirin (aşağıya bakın).
+* Bir `@Scripts.Render("~/bundles/jquery")` `<script>` öğesiyle değiştirin (aşağıya bakın).
 
-* `@Scripts.Render("~/bundles/bootstrap")` bir `<script>` öğesiyle değiştirin (aşağıya bakın).
+* Bir `@Scripts.Render("~/bundles/bootstrap")` `<script>` öğesiyle değiştirin (aşağıya bakın).
 
 Önyükleme CSS ekleme için değiştirme biçimlendirmesi:
 
@@ -196,7 +202,7 @@ Paketleme ve küçültmeye yönelik yapılandırma hakkında daha fazla bilgi i�
 
 ## <a name="solve-http-500-errors"></a>HTTP 500 hatalarını çözme
 
-Sorunun kaynağı hakkında bilgi içermeyen bir HTTP 500 hata iletisine neden olabilecek birçok sorun vardır. Örneğin, *views/_ViewImports. cshtml* dosyası projenizde mevcut olmayan bir ad alanı içeriyorsa, bir http 500 hatası alırsınız. ASP.NET Core uygulamalarda varsayılan olarak, `UseDeveloperExceptionPage` uzantısı `IApplicationBuilder` eklenir ve yapılandırma *geliştirmede*yürütülür. Bu, aşağıdaki kodda ayrıntılı olarak verilmiştir:
+Sorunun kaynağı hakkında bilgi içermeyen bir HTTP 500 hata iletisine neden olabilecek birçok sorun vardır. Örneğin, *views/_ViewImports. cshtml* dosyası projenizde mevcut olmayan bir ad alanı içeriyorsa, bir http 500 hatası alırsınız. ASP.NET Core uygulamalarda varsayılan olarak, `UseDeveloperExceptionPage` uzantı öğesine eklenir `IApplicationBuilder` ve yapılandırma *geliştirme*sırasında yürütülür. Bu, aşağıdaki kodda ayrıntılı olarak verilmiştir:
 
 [!code-csharp[](mvc/sample/Startup.cs?highlight=19-22)]
 

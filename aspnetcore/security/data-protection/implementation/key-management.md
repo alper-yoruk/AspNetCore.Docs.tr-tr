@@ -4,13 +4,19 @@ author: rick-anderson
 description: ASP.NET Core veri koruma anahtarı yönetim API 'Lerinin uygulama ayrıntılarını öğrenin.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/key-management
-ms.openlocfilehash: c571222d734fa69183563aefa5cc6ce5a10e7612
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 0f54ceedf3558fb4fa2349903461fdfdb4dc02e6
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78664712"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776909"
 ---
 # <a name="key-management-in-aspnet-core"></a>ASP.NET Core 'de anahtar yönetimi
 
@@ -59,7 +65,7 @@ services.AddDataProtection()
        .SetDefaultKeyLifetime(TimeSpan.FromDays(14));
 ```
 
-Yönetici, varsayılan sistem genelinde de değişiklik yapabilir, ancak `SetDefaultKeyLifetime` açık çağrısı sistem genelinde tüm ilkeleri geçersiz kılar. Varsayılan anahtar yaşam süresi 7 günden daha kısa olamaz.
+Bir yönetici varsayılan sistem genelinde de değişiklik yapabilir, ancak ' a açık bir çağrı `SetDefaultKeyLifetime` , sistem genelinde herhangi bir ilkeyi geçersiz kılar. Varsayılan anahtar yaşam süresi 7 günden daha kısa olamaz.
 
 ## <a name="automatic-key-ring-refresh"></a>Otomatik anahtar halkasını yenileme
 
@@ -68,11 +74,11 @@ Veri koruma sistemi başlatıldığında, temel alınan depodan anahtar halkası
 >[!WARNING]
 > Geliştiricilerin, anahtar yönetim API 'Lerini doğrudan kullanması gerekir (her zaman). Veri koruma sistemi, yukarıda açıklandığı şekilde otomatik anahtar yönetimi gerçekleştirecek.
 
-Veri koruma sistemi, anahtar halkasını incelemek ve değişiklikler yapmak için kullanılabilecek bir arabirim `IKeyManager` sunar. `IDataProtectionProvider` örneğini sağlayan dı sistemi, tüketiminize yönelik bir `IKeyManager` örneği de verebilir. Alternatif olarak, aşağıdaki örnekte olduğu gibi `IKeyManager` `IServiceProvider` düz olarak çekebilirsiniz.
+Veri koruma sistemi, anahtar halkasını `IKeyManager` incelemek ve değişiklikler yapmak için kullanılabilecek bir arabirim sunar. Örneğini `IDataProtectionProvider` sağlayan dı sistemi, tüketiminizi `IKeyManager` için bir örneği de sağlayabilir. Alternatif olarak, aşağıdaki örnekte `IKeyManager` `IServiceProvider` olduğu gibi düz bir şekilde çekebilirsiniz.
 
-Anahtar halkasını değiştiren tüm işlemler (açıkça veya iptal işlemi gerçekleştirerek), bellek içi önbelleği geçersiz kılar. `Protect` veya `Unprotect` sonraki çağrısı, veri koruma sisteminin anahtar halkasını yeniden kullanmasına ve önbelleğin yeniden oluşturulmasına neden olur.
+Anahtar halkasını değiştiren tüm işlemler (açıkça veya iptal işlemi gerçekleştirerek), bellek içi önbelleği geçersiz kılar. Bir sonraki `Protect` veya `Unprotect` çağrısı, veri koruma sisteminin anahtar halkasını yeniden kullanmasına ve önbelleğin yeniden oluşturulmasına neden olur.
 
-Aşağıdaki örnek, anahtar halkasını denetlemek ve işlemek için, mevcut anahtarları iptal etme ve yeni bir anahtarı el ile oluşturma dahil olmak üzere `IKeyManager` arabirimini kullanmayı göstermektedir.
+Aşağıdaki örnek, mevcut anahtarları iptal `IKeyManager` etme ve yeni bir anahtarı el ile oluşturma dahil olmak üzere anahtar halkasını incelemek ve işlemek için arabirimin kullanımını gösterir.
 
 [!code-csharp[](key-management/samples/key-management.cs)]
 

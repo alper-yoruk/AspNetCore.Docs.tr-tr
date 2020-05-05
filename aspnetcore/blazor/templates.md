@@ -1,90 +1,93 @@
 ---
-title: ASP.NET Blazor Çekirdek şablonları
+title: ASP.NET Core Blazor şablonları
 author: guardrex
-description: ASP.NET Core Blazor uygulama şablonları Blazor ve proje yapısı hakkında bilgi edinin.
+description: ASP.NET Core Blazor uygulama şablonları ve Blazor proje yapısı hakkında bilgi edinin.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 04/19/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: 0a4a508beeae3d7bc665372d925989aa4e34ad52
-ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
+ms.openlocfilehash: c84d6415728bf56836d98cfa66d1b9d46d2eadc8
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81661721"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82770920"
 ---
-# <a name="aspnet-core-opno-locblazor-templates"></a>ASP.NET Blazor Çekirdek şablonları
+# <a name="aspnet-core-blazor-templates"></a>ASP.NET Core Blazor şablonları
 
-Yazar: [Daniel Roth](https://github.com/danroth27) ve [Luke Latham](https://github.com/guardrex)
+[Daniel Roth](https://github.com/danroth27) ve [Luke Latham](https://github.com/guardrex) tarafından
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Çerçeve, Blazor Blazor barındırma modellerinin her biri için uygulamalar geliştirmek için şablonlar sağlar:
+Blazor Framework, Blazor barındırma modellerinin her biri için uygulama geliştirmeye yönelik şablonlar sağlar:
 
-* BlazorWebAssembly`blazorwasm`( )
-* BlazorSunucu`blazorserver`( )
+* BlazorWebAssembly (`blazorwasm`)
+* BlazorSunucu (`blazorserver`)
 
-'s barındırma Blazormodelleri hakkında daha <xref:blazor/hosting-models>fazla bilgi için bkz.
+Barındırma modelleri hakkında Blazordaha fazla bilgi için bkz <xref:blazor/hosting-models>..
 
-Şablondan Blazor uygulama oluşturmayla ilgili adım adım talimatlar <xref:blazor/get-started>için bkz.
+Şablondan Blazor uygulama oluşturmaya yönelik adım adım yönergeler için, bkz <xref:blazor/get-started>..
 
-Şablon seçenekleri, `--help` seçeneği [dotnet yeni](/dotnet/core/tools/dotnet-new) CLI komutuna geçirerek kullanılabilir:
+Şablon seçenekleri, bu `--help` seçeneği [DotNet New](/dotnet/core/tools/dotnet-new) CLI komutuna geçirerek kullanılabilir:
 
 ```dotnetcli
 dotnet new blazorwasm --help
 dotnet new blazorserver --help
 ```
 
-## <a name="opno-locblazor-project-structure"></a>Blazorproje yapısı
+## <a name="blazor-project-structure"></a>Blazorproje yapısı
 
-Aşağıdaki dosya ve klasörler Blazor bir Blazor şablondan oluşturulan bir uygulamayı oluşur:
+Aşağıdaki dosya ve klasörler bir Blazor Blazor şablondan oluşturulan bir uygulamayı yapar:
 
-* *Program.cs* &ndash; Uygulamanın aşağıdakileri ayarlayan giriş noktası:
+* *Program.cs* &ndash; , uygulamanın giriş noktasını şu şekilde ayarlar:
 
-  * ASP.NET CoreBlazor ana [bilgisayar](xref:fundamentals/host/generic-host) (Sunucu)
-  * WebAssembly anaBlazor bilgisayarı &ndash; (WebAssembly) Bu dosyadaki Blazor kod, WebAssembly`blazorwasm`şablonundan oluşturulan uygulamalara özgüdür ( ).
-    * Uygulamanın `App` kök bileşeni olan bileşen, `app` `Add` yönteme DOM öğesi olarak belirtilir.
-    * Hizmetler ana bilgisayar oluşturucu (örneğin, `ConfigureServices` `builder.Services.AddSingleton<IMyDependency, MyDependency>();`) yöntemi ile yapılandırılabilir.
-    * Yapılandırma ana bilgisayar oluşturucu (`builder.Configuration`) aracılığıyla sağlanabilir.
+  * ASP.NET Core [ana bilgisayar](xref:fundamentals/host/generic-host) (Blazor sunucu)
+  * WebAssembly Host (Blazor webassembly) &ndash; bu dosyadaki kod, Blazor webassembly şablonundan (`blazorwasm`) oluşturulan uygulamalar için benzersizdir.
+    * Uygulamanın `App` kök bileşeni olan bileşeni, `app` `Add` yönteminin DOM öğesi olarak belirtilir.
+    * Hizmetler, ana bilgisayar Oluşturucu 'daki `ConfigureServices` yöntemiyle yapılandırılabilir (örneğin, `builder.Services.AddSingleton<IMyDependency, MyDependency>();`).
+    * Yapılandırma, ana bilgisayar Oluşturucu (`builder.Configuration`) yoluyla sağlanabilir.
 
-* *Startup.cs* Blazor (Sunucu) &ndash; Uygulamanın başlangıç mantığını içerir. Sınıf `Startup` iki yöntem tanımlar:
+* *Startup.cs* (Blazor sunucu) &ndash; uygulamanın başlangıç mantığını içerir. `Startup` Sınıfı iki yöntemi tanımlar:
 
-  * `ConfigureServices`&ndash; Uygulamanın [bağımlılık enjeksiyonu (DI)](xref:fundamentals/dependency-injection) hizmetlerini yapılandırır. Sunucu Blazor uygulamalarında, hizmetler çağrılar <xref:Microsoft.Extensions.DependencyInjection.ComponentServiceCollectionExtensions.AddServerSideBlazor*>ekleyerek eklenir ve örnek `WeatherForecastService` `FetchData` bileşen tarafından kullanılmak üzere servis kapsayıcısına eklenir.
-  * `Configure`&ndash; Uygulamanın istek işleme ardışık hattını yapılandırır:
-    * <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub*>tarayıcı ile gerçek zamanlı bağlantı için bir bitiş noktası kurmak için çağrılır. [SignalR](xref:signalr/introduction)Bağlantı, uygulamalara gerçek zamanlı web işlevselliği eklemek için bir çerçeve olan ile oluşturulur.
-    * [MapFallbackToPage("/_Host")](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage*) uygulamanın kök sayfasını *(Pages/_Host.cshtml)* ayarlamak ve gezinmeyi etkinleştirmek için çağrılır.
+  * `ConfigureServices`&ndash; Uygulamanın [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection) hizmetlerini yapılandırır. Blazor Sunucu uygulamalarında, Hizmetleri çağırarak <xref:Microsoft.Extensions.DependencyInjection.ComponentServiceCollectionExtensions.AddServerSideBlazor*>eklenir ve `WeatherForecastService` örnek `FetchData` bileşen tarafından kullanılmak üzere hizmet kapsayıcısına eklenir.
+  * `Configure`&ndash; Uygulamanın istek işleme ardışık düzenini yapılandırır:
+    * <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub*>, tarayıcıya gerçek zamanlı bağlantı için bir uç nokta ayarlamak üzere çağırılır. Bağlantı, uygulamalarına gerçek zamanlı [SignalR](xref:signalr/introduction)Web işlevselliği ekleme çerçevesi olan ile oluşturulur.
+    * [Mapfallbacktopage ("/_Host")](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage*) , uygulamanın kök sayfasını (*Pages/_Host. cshtml*) ayarlamak ve gezinmeyi etkinleştirmek için çağırılır.
 
-* *wwwroot/index.html* Blazor (WebAssembly) &ndash; HTML sayfası olarak uygulanan uygulamanın kök sayfası:
-  * Uygulamanın herhangi bir sayfası başlangıçta istendiğinde, bu sayfa işlenir ve yanıt olarak döndürülür.
-  * Sayfa, kök `App` bileşenin nerede işlenir olduğunu belirtir. Bileşen `App` *(App.razor)* `app` `AddComponent` yönteminin DOM elemanı olarak `Startup.Configure`belirtilir.
-  * `_framework/blazor.webassembly.js` JavaScript dosyası yüklenir:
-    * .NET çalışma saatini, uygulamayı ve uygulamanın bağımlılıklarını indirir.
-    * Uygulamayı çalıştırmak için çalışma süresini başlangıç olarak değerlendirir.
+* *Wwwroot/index.html* (Blazor webassembly) &ndash; bir HTML sayfası olarak uygulanan uygulamanın kök sayfası:
+  * Uygulamanın herhangi bir sayfası başlangıçta istendiğinde, Bu sayfa işlenir ve yanıtta döndürülür.
+  * Bu sayfa, kök `App` bileşenin nerede işleneceğini belirtir. `App` Bileşen (*app. Razor*), içindeki `app` `AddComponent` `Startup.Configure`metoduna DOM öğesi olarak belirtilir.
+  * `_framework/blazor.webassembly.js` JavaScript dosyası yüklenir ve şunları yapın:
+    * .NET çalışma zamanını, uygulamayı ve uygulamanın bağımlılıklarını indirir.
+    * Uygulamayı çalıştırmak için çalışma zamanını başlatır.
 
-* *App.razor* &ndash; Bileşeni kullanarak istemci tarafı yönlendirmeyi ayarlayan uygulamanın <xref:Microsoft.AspNetCore.Components.Routing.Router> kök bileşeni. Bileşen `Router` tarayıcı gezintisini keser ve istenen adresle eşleşen sayfayı işler.
+* *App. Razor* &ndash; <xref:Microsoft.AspNetCore.Components.Routing.Router> bileşeni kullanarak istemci tarafı yönlendirmeyi ayarlayan uygulamanın kök bileşeni. `Router` Bileşen tarayıcı gezintisini karşılar ve istenen adresle eşleşen sayfayı işler.
 
-* *Sayfalar* &ndash; klasörü Blazor Uygulamayı oluşturan routable bileşenleri/sayfaları *(.jilet)* ve bir Blazor Server uygulamasının root Razor sayfasını içerir. Her sayfanın [`@page`](xref:mvc/views/razor#page) rotası yönerge kullanılarak belirtilir. Şablon aşağıdakileri içerir:
-  * *_Host.cshtml* Blazor (Server) &ndash; Razor Page olarak uygulanan uygulamanın kök sayfası:
-    * Uygulamanın herhangi bir sayfası başlangıçta istendiğinde, bu sayfa işlenir ve yanıt olarak döndürülür.
-    * `_framework/blazor.server.js` JavaScript dosyası, tarayıcı ve sunucu arasındaki SignalR gerçek zamanlı bağlantıyı ayarlayan yüklenir.
-    * Ana Bilgisayar sayfası kök `App` bileşenin *(App.razor)* nerede işlenir olduğunu belirtir.
-  * `Counter`(*Counter.razor*) &ndash; Sayaç sayfasını uygular.
-  * `Error`(*Error.razor*, Blazor Yalnızca Sunucu uygulaması) &ndash; Uygulamada işlenmemiş bir özel durum oluştuğunda işlenir.
-  * `FetchData`(*FetchData.razor*) &ndash; Veri Getir sayfasını uygular.
-  * `Index`(*Index.razor*) &ndash; Ana sayfayı uygular.
+* *Sayfalar* klasörü &ndash; , bir Blazor sunucu uygulamasının Blazor uygulamasını ve kök Razor sayfasını oluşturan yönlendirilebilir bileşenleri/sayfaları (*. Razor*) içerir. Her sayfanın yolu, [`@page`](xref:mvc/views/razor#page) yönergesi kullanılarak belirtilir. Şablon şunları içerir:
+  * *_Host. cshtml* (Blazor sunucu) &ndash; bir Razor sayfa olarak uygulanan uygulamanın kök sayfası:
+    * Uygulamanın herhangi bir sayfası başlangıçta istendiğinde, Bu sayfa işlenir ve yanıtta döndürülür.
+    * Tarayıcı `_framework/blazor.server.js` ve sunucu arasındaki gerçek zamanlı SignalR bağlantıyı ayarlayan JavaScript dosyası yüklenir.
+    * Ana bilgisayar sayfası, kök `App` bileşeni 'Nin (*app. Razor*) nerede işleneceğini belirtir.
+  * `Counter`(*Counter. Razor*) &ndash; sayaç sayfasını uygular.
+  * `Error`(*Error. Razor*, Blazor yalnızca sunucu uygulaması) &ndash; Uygulamada işlenmeyen bir özel durum oluştuğunda işlenir.
+  * `FetchData`(*Fetchdata. Razor*) &ndash; veri getirme sayfasını uygular.
+  * `Index`(*Index. Razor*) &ndash; giriş sayfasını uygular.
 
-* *Paylaşılan* &ndash; klasör Uygulama tarafından kullanılan diğer kullanıcı arabirimi bileşenlerini (*.jilet)* içerir:
-  * `MainLayout`(*MainLayout.razor*) &ndash; Uygulamanın düzen bileşeni.
-  * `NavMenu`(*NavMenu.razor*) &ndash; Kenar çubuğu navigasyon uyguluyor. Diğer Razor bileşenlerine<xref:Microsoft.AspNetCore.Components.Routing.NavLink>navigasyon bağlantıları sağlayan [NavLink bileşenini](xref:blazor/routing#navlink-component) (), içerir. Bileşen, `NavLink` bileşeni yüklendiğinde seçili durumu otomatik olarak gösterir ve bu da kullanıcının hangi bileşenin şu anda görüntülendiğini anlamasına yardımcı olur.
+* *Paylaşılan* klasör &ndash; , uygulama tarafından kullanılan diğer Kullanıcı Arabirimi bileşenlerini (*. Razor*) içerir:
+  * `MainLayout`(*Mainlayout. Razor*) &ndash; uygulamanın Düzen bileşeni.
+  * `NavMenu`(*Navmenu. Razor*) &ndash; kenar çubuğu gezintisini uygular. Diğer Razor bileşenlere yönelik gezinti bağlantılarını işleyen<xref:Microsoft.AspNetCore.Components.Routing.NavLink> [navlink bileşenini](xref:blazor/routing#navlink-component) () içerir. `NavLink` Bileşeni, bileşeni yüklendiği zaman otomatik olarak seçili durumu gösterir ve bu, kullanıcının hangi bileşenin görüntülenmekte olduğunu anlamasına yardımcı olur.
 
-* *_Imports.razor,* &ndash; ad boşlukları için direktifler gibi [`@using`](xref:mvc/views/razor#using) uygulamanın bileşenlerine *(.jilet)* dahil etmek için yaygın Razor yönergeleri içerir.
+* *_Imports. Razor* &ndash; , uygulamanın Razor bileşenlerine (*. Razor*) dahil etmek için, ad alanları için [`@using`](xref:mvc/views/razor#using) yönergeler gibi genel yönergeleri içerir.
 
-* *Veri* Blazor klasörü &ndash; (Sunucu) Uygulamanın `WeatherForecast` `WeatherForecastService` `FetchData` bileşenine örnek hava durumu verileri sağlayan sınıfın ve uygulamanın uygulanmasını içerir.
+* *Veri* klasörü (Blazor sunucu) &ndash; , `WeatherForecast` `WeatherForecastService` uygulamanın `FetchData` bileşenine örnek Hava durumu verileri sağlayan sınıfını ve uygulamasını içerir.
 
-* *wwwroot* &ndash; Uygulamanın ortak statik varlıklarını içeren uygulama için [Web Root](xref:fundamentals/index#web-root) klasörü.
+* uygulamanın genel statik varlıklarını içeren uygulamanın [Web kök](xref:fundamentals/index#web-root) klasörünü *Wwwroot* &ndash; .
 
-* uygulama için *appsettings.json* (Sunucu)Blazor &ndash; Yapılandırma ayarları.
+* uygulama için *appSettings. JSON* Blazor ( &ndash; sunucu) yapılandırma ayarları.
