@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core Razor bileşenlerini Razor Pages ve MVC uygulamalarıyla tümleştirin
+title: ASP.NET Core Razor bileşenlerini Razor sayfalar ve MVC uygulamalarıyla tümleştirme
 author: guardrex
 description: Blazor Uygulamalarda BILEŞENLER ve DOM öğeleri için veri bağlama senaryoları hakkında bilgi edinin.
 monikerRange: '>= aspnetcore-3.1'
@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 04/25/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/integrate-components
-ms.openlocfilehash: 4e2103b7e8b65478808093d7a31e8cfe29b04984
-ms.sourcegitcommit: f9a5069577e8f7c53f8bcec9e13e117950f4f033
+ms.openlocfilehash: eb4378223c40594ac52f50b7b890785067515555
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/29/2020
-ms.locfileid: "82558909"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82771780"
 ---
 # <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>ASP.NET Core Razor bileşenlerini Razor Pages ve MVC uygulamalarıyla tümleştirin
 
@@ -247,7 +250,7 @@ Bir sayfadan veya görünümden bir bileşeni işlemek için [bileşen etiketi y
 
 ### <a name="render-stateful-interactive-components"></a>Durum bilgisi olan etkileşimli bileşenleri işle
 
-Durum bilgisi olan etkileşimli bileşenler Razor sayfasına veya görünümüne eklenebilir.
+Durum bilgisi olan etkileşimli bileşenler, bir Razor sayfaya veya görünüme eklenebilir.
 
 Sayfa veya görünüm şunları işler:
 
@@ -255,7 +258,7 @@ Sayfa veya görünüm şunları işler:
 * Prerendering için kullanılan ilk bileşen durumu kayboldu.
 * SignalR Bağlantı kurulduunda yeni bileşen durumu oluşturulur.
 
-Aşağıdaki Razor sayfası bir `Counter` bileşeni işler:
+Aşağıdaki Razor sayfa bir `Counter` bileşeni işler:
 
 ```cshtml
 <h1>My Razor Page</h1>
@@ -273,7 +276,7 @@ Daha fazla bilgi için bkz. <xref:mvc/views/tag-helpers/builtin-th/component-tag
 
 ### <a name="render-noninteractive-components"></a>Etkileşimsiz bileşenleri işle
 
-Aşağıdaki Razor sayfasında, `Counter` bileşen bir form kullanılarak belirtilen bir başlangıç değeriyle statik olarak işlenir. Bileşen statik olarak işlendiğinden, bileşen etkileşimli değildir:
+Aşağıdaki Razor sayfada, `Counter` bileşen bir form kullanılarak belirtilen bir başlangıç değeriyle statik olarak işlenir. Bileşen statik olarak işlendiğinden, bileşen etkileşimli değildir:
 
 ```cshtml
 <h1>My Razor Page</h1>
@@ -305,6 +308,6 @@ Uygulamanın bileşenlerini tutmak için özel bir klasör kullanırken, klasör
 @using MyAppNamespace.Components
 ```
 
-*_ViewImports. cshtml* dosyası, bir Razor Pages uygulamasının *Sayfalar* klasöründe veya bir MVC uygulamasının *views* klasöründe bulunur.
+*_ViewImports. cshtml* dosyası bir Razor Pages uygulamasının *Pages* klasöründe veya bir MVC uygulamasının *views* klasöründe bulunur.
 
 Daha fazla bilgi için bkz. <xref:blazor/components#import-components>.

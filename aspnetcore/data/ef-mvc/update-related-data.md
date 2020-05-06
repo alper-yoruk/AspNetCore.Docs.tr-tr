@@ -1,47 +1,53 @@
 ---
-title: 'Öğretici: Güncelleme ile ilgili verileri - EF Core ile ASP.NET MVC'
-description: Bu eğitimde, yabancı anahtar alanlarını ve gezinme özelliklerini güncelleştirerek ilgili verileri güncelleştireceksiniz.
+title: 'Öğretici: ilgili verileri güncelleştirme-ASP.NET MVC EF Core'
+description: Bu öğreticide, yabancı anahtar alanlarını ve gezinti özelliklerini güncelleştirerek ilgili verileri güncelleştireceksiniz.
 author: rick-anderson
 ms.author: riande
 ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: data/ef-mvc/update-related-data
-ms.openlocfilehash: 83d662659fb4bc7a2867be563e4e36927d2adafe
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 54783ebbac26a10a92716b5e53ed6cd7cc8bb65d
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78657145"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773503"
 ---
-# <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>Öğretici: Güncelleme ile ilgili verileri - EF Core ile ASP.NET MVC
+# <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>Öğretici: ilgili verileri güncelleştirme-ASP.NET MVC EF Core
 
-Önceki öğreticide ilgili verileri görüntülediğiniz; Bu eğitimde, yabancı anahtar alanlarını ve gezinme özelliklerini güncelleyerek ilgili verileri güncelleştireceksiniz.
+Önceki öğreticide ilgili verileri görüntülediyseniz; Bu öğreticide, yabancı anahtar alanlarını ve gezinti özelliklerini güncelleştirerek ilgili verileri güncelleştireceksiniz.
 
-Aşağıdaki çizimler, çalışacağınız bazı sayfaları gösterir.
+Aşağıdaki çizimlerde, üzerinde çalıştığınız sayfaların bazıları gösterilmektedir.
 
-![Kurs Edit sayfası](update-related-data/_static/course-edit.png)
+![Kurs düzenleme sayfası](update-related-data/_static/course-edit.png)
 
-![Eğitmen Edit sayfası](update-related-data/_static/instructor-edit-courses.png)
+![Eğitmen düzenleme sayfası](update-related-data/_static/instructor-edit-courses.png)
 
 Bu öğreticide şunları yaptınız:
 
 > [!div class="checklist"]
-> * Kursları Özelleştir sayfalarını özelleştir
-> * Eğitmenler Ekle Sayfayı Edit
-> * Ekle sayfasına ders ekle
-> * Sayfayı Sil'i Güncelleştir
-> * Sayfa Oluştur'a ofis konumu ve kurslar ekleme
+> * Kurslar sayfalarını özelleştirme
+> * Eğitmenler düzenleme sayfası ekle
+> * Düzenleme sayfasına kurslar ekleyin
+> * Güncelleştirme silme sayfası
+> * Sayfa oluşturmak için Office konumu ve kurslar ekleme
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * [İlgili verileri okuma](read-related-data.md)
 
-## <a name="customize-courses-pages"></a>Kursları Özelleştir sayfalarını özelleştir
+## <a name="customize-courses-pages"></a>Kurslar sayfalarını özelleştirme
 
-Yeni bir ders varlığı oluşturulduğunda, varolan bir bölümle ilişkisi olmalıdır. Bunu kolaylaştırmak için, iskelekodu denetleyici yöntemlerini içerir ve bölümü seçmek için açılır liste içeren görünümler oluşturun ve edit. Açılan liste yabancı anahtar `Course.DepartmentID` özelliğini ayarlar ve gezinti özelliğini `Department` uygun Departman varlığıyla yüklemek için Entity Framework'ün ihtiyacı olan tek şey bu. İskele kodu kullanırsınız, ancak hata işleme eklemek ve açılır listeyi sıralamak için biraz değiştirin.
+Yeni bir kurs varlığı oluşturulduğunda, mevcut bir departmanla bir ilişkisi olmalıdır. Bunu kolaylaştırmak için, yapı iskelesi kodu denetleyici yöntemlerini içerir ve departmanı seçmeye yönelik bir açılan liste içeren görünümler oluşturup düzenleyebilir. Açılan liste, `Course.DepartmentID` yabancı anahtar özelliğini ayarlar ve ilgili departman varlığı ile `Department` gezinti özelliğini yüklemek için tüm Entity Framework gereksinimlidir. Scafkatmış kodu kullanacaksınız, ancak hata işleme eklemek ve açılan listeyi sıralamak için biraz değişiklik yapacaksınız.
 
-*CoursesController.cs,* dört Oluştur ve Düzenle yöntemini silin ve bunları aşağıdaki kodla değiştirin:
+*CoursesController.cs*' de, dört oluşturma ve düzenleme yöntemini silin ve bunları şu kodla değiştirin:
 
 [!code-csharp[](intro/samples/cu/Controllers/CoursesController.cs?name=snippet_CreateGet)]
 
@@ -51,91 +57,91 @@ Yeni bir ders varlığı oluşturulduğunda, varolan bir bölümle ilişkisi olm
 
 [!code-csharp[](intro/samples/cu/Controllers/CoursesController.cs?name=snippet_EditPost)]
 
-HttpPost `Edit` yönteminden sonra, açılan liste için departman bilgilerini yükleyen yeni bir yöntem oluşturun.
+`Edit` HttpPost yönteminden sonra, açılan liste için departman bilgisini yükleyen yeni bir yöntem oluşturun.
 
 [!code-csharp[](intro/samples/cu/Controllers/CoursesController.cs?name=snippet_Departments)]
 
-Yöntem, `PopulateDepartmentsDropDownList` ada göre sıralanmış tüm bölümlerin `SelectList` listesini alır, açılır liste için bir koleksiyon oluşturur `ViewBag`ve koleksiyonu 'daki görünüme geçirir. Yöntem, arama kodunun açılır liste işlendiğinde seçilecek öğeyi belirtmesine olanak tanıyan isteğe bağlı `selectedDepartment` parametreyi kabul eder. `<select>` Görünüm, etiket yardımcısına "DepartmentID" adını geçirir ve yardımcı daha sonra "DepartmentID" adlı bir `ViewBag` `SelectList` nesnenin nesnesine bakmayı bilir.
+`PopulateDepartmentsDropDownList` Yöntemi ada göre sıralanmış tüm bölümlerin listesini alır, açılan liste için bir `SelectList` koleksiyon oluşturur ve koleksiyonu içindeki `ViewBag`görünümüne geçirir. Yöntemi, çağıran kodun, `selectedDepartment` açılan liste işlendiğinde seçilecek öğeyi belirtmesini sağlayan isteğe bağlı parametresini kabul eder. Görünüm, "DepartmentID" adını `<select>` etiket yardımcısından geçireceğini ve yardımcı sonra, "DepartmentID" adlı bir `ViewBag` `SelectList` nesneyi bulmak için bu adı bilecektir.
 
-Yeni bir `Create` kurs `PopulateDepartmentsDropDownList` için bölüm henüz kurulmadığından, HttpGet yöntemi seçili öğeyi ayarlamadan yöntemi çağırır:
+HttpGet `Create` yöntemi, seçilen öğeyi `PopulateDepartmentsDropDownList` ayarlamadan yöntemi çağırır, çünkü yeni bir kurs için departman henüz kurulmadı:
 
 [!code-csharp[](intro/samples/cu/Controllers/CoursesController.cs?highlight=3&name=snippet_CreateGet)]
 
-HttpGet `Edit` yöntemi, seçili öğeyi, düzenlenen kursa atanmış olan bölümün kimliğine göre ayarlar:
+HttpGet `Edit` yöntemi, düzenlenen kursa zaten atanmış olan departmanın kimliğine bağlı olarak seçili öğeyi ayarlar:
 
 [!code-csharp[](intro/samples/cu/Controllers/CoursesController.cs?highlight=15&name=snippet_EditGet)]
 
-Her ikisi `Create` için de `Edit` HttpPost yöntemleri ve ayrıca bir hatadan sonra sayfayı yeniden görüntülediğinde seçili öğeyi ayarlayan kod içerir. Bu, sayfa hata iletisini göstermek için yeniden görüntülendiğinde, seçilen bölümün seçili kalmasını sağlar.
+Hem `Create` hem de Için HttpPost yöntemleri `Edit` , bir hatadan sonra sayfayı yeniden görüntülerken seçili öğeyi ayarlayan kodu içerir. Bu, sayfa hata iletisini göstermek için yeniden görüntülendiğinde, seçilen departmanın seçili kalır olduğunu sağlar.
 
-### <a name="add-asnotracking-to-details-and-delete-methods"></a>Ekle. Ayrıntılara AsNoTracking ve Silme yöntemleri
+### <a name="add-asnotracking-to-details-and-delete-methods"></a>Ekleyemiyorum. Ayrıntı ve silme yöntemlerine AsNoTracking
 
-Ders Ayrıntıları ve Sil sayfalarının performansını `AsNoTracking` optimize `Details` etmek için, http ve httpget `Delete` yöntemlerine arama ekleyin.
+Kurs ayrıntılarının ve sayfa silmenin performansını iyileştirmek için, `AsNoTracking` `Details` ve HttpGet `Delete` yöntemlerine çağrı ekleyin.
 
 [!code-csharp[](intro/samples/cu/Controllers/CoursesController.cs?highlight=10&name=snippet_Details)]
 
 [!code-csharp[](intro/samples/cu/Controllers/CoursesController.cs?highlight=10&name=snippet_DeleteGet)]
 
-### <a name="modify-the-course-views"></a>Ders görünümlerini değiştirme
+### <a name="modify-the-course-views"></a>Kurs görünümlerini değiştirme
 
-*Görünümler/Kurslar/Create.cshtml'de,* **Bölüm** açılır listesine "Bölüm Seç" seçeneğini ekleyin, altyazıyı **DepartmentID'den** **Bölüm'e**değiştirin ve doğrulama iletisi ekleyin.
+*Görünümler/kurslar/oluşturma. cshtml*'de, **Departman** açılan listesine bir "Departman Seç" seçeneği ekleyin, **DepartmentID** etiketini **bölüm**olarak değiştirin ve bir doğrulama iletisi ekleyin.
 
 [!code-html[](intro/samples/cu/Views/Courses/Create.cshtml?highlight=2-6&range=29-34)]
 
-*Görünümler /Kurslar/Edit.cshtml*olarak, sadece *Create.cshtml*yaptım Bölüm alanı için aynı değişikliği yapmak.
+*Görünümler/kurslar/Düzenle. cshtml*'de, *Create. cshtml*içinde yaptığınız departman alanı için aynı değişikliği yapın.
 
-Ayrıca *Görünümler /Kurslar/Edit.cshtml'* de, **Başlık** alanından önce bir ders numarası alanı ekleyin. Kurs numarası birincil anahtar olduğundan, görüntülenir, ancak değiştirilemez.
+Ayrıca, *Görünümler/kurslar/Düzenle. cshtml*'de **başlık** alanından önce bir kurs numarası alanı ekleyin. Kurs numarası birincil anahtar olduğundan, görüntülenir, ancak değiştirilemez.
 
 [!code-html[](intro/samples/cu/Views/Courses/Edit.cshtml?range=15-18)]
 
-Edit görünümünde kurs`<input type="hidden">`numarası için zaten gizli bir alan var. `<label>` Etiket yardımcısı eklemek, kullanıcı **Edit** sayfasında **Kaydet'i** tıklattığında kurs numarasının deftere nakledilen verilere eklenmesine neden olmadığından gizli alana olan gereksinimi ortadan kaldırmaz.
+Düzenleme görünümündeki kurs numarası için zaten gizli`<input type="hidden">`bir alan () var. Kullanıcı `<label>` **düzenleme** sayfasında **Kaydet** ' i tıklattığında, bir etiket Yardımcısı ekleme, gizli alan gereksinimini ortadan kaldırmaz, çünkü
 
-*Görünümler/Kurslar/Sil.cshtml'de,* en üste bir ders numarası alanı ekleyin ve bölüm adını bölüm adına değiştirin.
+*Görünümler/kurslar/delete. cshtml*'de, üst kısımdaki bir kurs numarası alanı ekleyin ve bölüm kimliğini bölüm adı olarak değiştirin.
 
 [!code-html[](intro/samples/cu/Views/Courses/Delete.cshtml?highlight=14-19,36)]
 
-*Görünümler / Dersler / Details.cshtml*olarak, sadece *Delete.cshtml*için yaptığınız aynı değişikliği yapmak .
+*Görünümler/kurslar/ayrıntılar. cshtml*'de, *delete. cshtml*için yaptığınız aynı değişikliği yapın.
 
-### <a name="test-the-course-pages"></a>Ders sayfalarını test edin
+### <a name="test-the-course-pages"></a>Kurs sayfalarını test etme
 
-Uygulamayı çalıştırın, **Kurslar** sekmesini seçin, **Yeni Oluştur'u**tıklatın ve yeni bir kurs için veri girin:
+Uygulamayı çalıştırın, **Kurslar** sekmesini seçin, **Yeni oluştur**' a tıklayın ve yeni bir kurs için veri girin:
 
-![Kurs Oluşturma sayfası](update-related-data/_static/course-create.png)
+![Kurs sayfa oluştur](update-related-data/_static/course-create.png)
 
-**Oluştur'u**tıklatın. Dersler Endeksi sayfası, listeye eklenen yeni dersle birlikte görüntülenir. Dizin sayfası listesindeki bölüm adı, ilişkinin doğru kurulduğunu gösteren gezinti özelliğinden gelir.
+**Oluştur**' a tıklayın. Kurslar Dizin sayfası, listeye eklenen yeni kursla birlikte görüntülenir. Dizin sayfası listesindeki departman adı, ilişkinin doğru şekilde oluşturulduğunu gösteren gezinti özelliğinden gelir.
 
-Kurslar Dizini sayfasındaki bir kursu **Edit'e** tıklayın.
+Kurslar Dizin sayfasında bir kursa **Düzenle** ' ye tıklayın.
 
-![Kurs Edit sayfası](update-related-data/_static/course-edit.png)
+![Kurs düzenleme sayfası](update-related-data/_static/course-edit.png)
 
-Sayfadaki verileri değiştirin ve **Kaydet'i**tıklatın. Dersler Dizini sayfası güncelleştirilmiş ders verileri ile birlikte görüntülenir.
+Sayfadaki verileri değiştirin ve **Kaydet**' e tıklayın. Kurslar Dizin sayfası, güncelleştirilmiş kurs verileriyle birlikte görüntülenir.
 
-## <a name="add-instructors-edit-page"></a>Eğitmenler Ekle Sayfayı Edit
+## <a name="add-instructors-edit-page"></a>Eğitmenler düzenleme sayfası ekle
 
-Bir eğitmen kaydını güncellediğinizde, eğitmenin ofis atamasını güncelleştirmek istersiniz. Eğitmen tüzel kişiliğinin OfficeAssignment varlığıyla bire sıfır veya bir ilişkisi vardır, bu da kodunuzun aşağıdaki durumları ele almak zorunda olduğu anlamına gelir:
+Bir eğitmen kaydını düzenlediğinizde, eğitmenin Office atamasını güncelleştirebilmek istersiniz. Eğitmen varlığı, OfficeAssignment varlığıyla bire sıfır veya-arasında bir ilişkiye sahiptir; bu, kodunuzun aşağıdaki durumları işlemesi gerektiği anlamına gelir:
 
-* Kullanıcı ofis atamasını temizlerse ve başlangıçta bir değeri varsa, OfficeAssignment varlığını silin.
+* Kullanıcı Office atamasını temizlediğinde ve başlangıçta bir değere sahipse, OfficeAssignment varlığını silin.
 
-* Kullanıcı bir ofis atama değeri girer ve başlangıçta boşsa, yeni bir OfficeAssignment tüzel kişiliği oluşturun.
+* Kullanıcı bir Office atama değeri girerse ve başlangıçta boşsa, yeni bir OfficeAssignment varlığı oluşturun.
 
-* Kullanıcı bir ofis atamasının değerini değiştirirse, varolan bir OfficeAssignment varlığındaki değeri değiştirin.
+* Kullanıcı bir Office atamasının değerini değiştirirse, var olan bir OfficeAssignment varlığındaki değeri değiştirin.
 
-### <a name="update-the-instructors-controller"></a>Eğitmenler denetleyicisini güncelleştirin
+### <a name="update-the-instructors-controller"></a>Eğitmenler denetleyicisini güncelleştirme
 
-*InstructorsController.cs,* HttpGet `Edit` yöntemindeki kodu, Eğitmen varlığın `OfficeAssignment` gezinti özelliğini yükler `AsNoTracking`ve aşağıdakileri çağırır:
+*InstructorsController.cs*Içinde, `Edit` HttpGet yöntemindeki kodu, eğitmen varlığının `OfficeAssignment` gezinti özelliğini ve çağrılarını `AsNoTracking`yükleyen şekilde değiştirin:
 
 [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?highlight=8-11&name=snippet_EditGetOA)]
 
-Ofis atama `Edit` güncelleştirmelerini işlemek için HttpPost yöntemini aşağıdaki kodla değiştirin:
+HttpPost `Edit` yöntemini, Office atama güncelleştirmelerini işlemek için aşağıdaki kodla değiştirin:
 
 [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?name=snippet_EditPostOA)]
 
-Kod aşağıdakileri yapar:
+Kod şunları yapar:
 
-* İmza `EditPost` artık HttpGet `Edit` yöntemiyle aynı olduğundan yöntem adını değiştirir `ActionName` (öznitelik URL'nin `/Edit/` hala kullanıldığını belirtir).
+* `EditPost` Imza artık HttpGet `Edit` yöntemiyle aynı olduğundan ( `ActionName` öznitelik, `/Edit/` URL 'nin hala kullanıldığını belirtir), yöntem adını olarak değiştirir.
 
-* `OfficeAssignment` Gezinti özelliği için istekli yüklemeyi kullanarak geçerli Instructor varlığını veritabanından alır. Bu, HttpGet `Edit` yönteminde yaptığınızla aynıdır.
+* `OfficeAssignment` Gezinti özelliği için Eager yüklemesini kullanarak geçerli eğitmen varlığını veritabanından alır. Bu, HttpGet `Edit` yönteminde yaptığınız şeydir.
 
-* Alınan Instructor varlığı model bağlayıcısından gelen değerlerle güncelleştirir. Aşırı `TryUpdateModel` yükleme, eklemek istediğiniz özellikleri beyaz listeye almanızı sağlar. Bu, [ikinci öğreticide](crud.md)açıklandığı gibi aşırı deftere nakil yi önler.
+* Alınan eğitmen varlığını model Ciltçideki değerlerle güncelleştirir. Aşırı `TryUpdateModel` yükleme, dahil etmek istediğiniz özellikleri beyaz listelemenize olanak sağlar. Bu, [ikinci öğreticide](crud.md)açıklandığı gibi, daha fazla nakletmeyi önler.
 
     <!-- Snippets don't play well with <ul> [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?range=241-244)] -->
 
@@ -146,7 +152,7 @@ Kod aşağıdakileri yapar:
         i => i.FirstMidName, i => i.LastName, i => i.HireDate, i => i.OfficeAssignment))
     ```
 
-* Ofis konumu boşsa, OfficeAtama tablosundaki ilgili satırın silinecek şekilde Instructor.OfficeAtama özelliğini geçersiz kılacak şekilde ayarlar.
+* Office konumu boşsa, OfficeAssignment tablosundaki ilgili satırın silinebilmesi için eğitmen. OfficeAssignment özelliğini null olarak ayarlar.
 
     <!-- Snippets don't play well with <ul>  "intro/samples/cu/Controllers/InstructorsController.cs"} -->
 
@@ -159,118 +165,118 @@ Kod aşağıdakileri yapar:
 
 * Değişiklikleri veritabanına kaydeder.
 
-### <a name="update-the-instructor-edit-view"></a>Eğitmen Edit görünümünü güncelleştir
+### <a name="update-the-instructor-edit-view"></a>Eğitmen düzenleme görünümünü güncelleştirme
 
-*Görünümler/Eğitmenler/Edit.cshtml'de,* **Kaydet** düğmesinden önce sonunda, ofis konumunu düzenlemek için yeni bir alan ekleyin:
+*Görünümler/eğitmenler/Edit. cshtml*' de, **Kaydet** düğmesinin sonundaki Office konumunu düzenlemek için yeni bir alan ekleyin:
 
 [!code-html[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=30-34)]
 
-Uygulamayı çalıştırın, **Eğitmenler** sekmesini seçin ve ardından bir eğitmenin üzerine **Edit'i** tıklatın. Office **Konumunu** değiştirin ve **Kaydet'i**tıklatın.
+Uygulamayı çalıştırın, **eğitmenler** sekmesini seçin ve ardından bir eğitmende **Düzenle** ' ye tıklayın. **Office konumunu** değiştirin ve **Kaydet**' e tıklayın.
 
-![Eğitmen Edit sayfası](update-related-data/_static/instructor-edit-office.png)
+![Eğitmen düzenleme sayfası](update-related-data/_static/instructor-edit-office.png)
 
-## <a name="add-courses-to-edit-page"></a>Ekle sayfasına ders ekle
+## <a name="add-courses-to-edit-page"></a>Düzenleme sayfasına kurslar ekleyin
 
-Eğitmenler herhangi bir sayıda ders verebilirler. Şimdi, aşağıdaki ekran görüntüsünde gösterildiği gibi, bir kutu grubu kullanarak ders atamalarını değiştirme özelliğini ekleyerek Eğitmen Düzenleme sayfasını geliştireceksiniz:
+Eğitmenler, istediğiniz sayıda kurs öğretebilir. Artık, aşağıdaki ekran görüntüsünde gösterildiği gibi, bir grup onay kutusu kullanarak kurs atamalarını değiştirme özelliğini ekleyerek eğitmen düzenleme sayfasını geliştirirsiniz:
 
-![Kurslarla Eğitmen Edit sayfası](update-related-data/_static/instructor-edit-courses.png)
+![Kurslar ile eğitmen düzenleme sayfası](update-related-data/_static/instructor-edit-courses.png)
 
-Kurs ve Eğitmen varlıkları arasındaki ilişki çok-çok. İlişkiler eklemek ve kaldırmak için, Ders Atamaları'na ve programdan gelen varlıkları ekler ve kaldırırsınız.
+Kurs ve eğitmen varlıkları arasındaki ilişki çoktan çoğa olur. İlişki eklemek ve kaldırmak için, kurs ekleme ve kurs, katılımcı varlık kümesine ekleme ve kaldırma.
 
-Bir eğitmenin atandığı dersleri değiştirmenizi sağlayan uI, bir onay kutusu grubudur. Veritabanındaki her ders için bir onay kutusu görüntülenir ve eğitmenin şu anda atandığı onay kutusu seçilir. Kullanıcı, ders atamalarını değiştirmek için onay kutularını seçebilir veya temizleyebilir. Kurs sayısı çok daha fazla olsaydı, büyük olasılıkla görünümdeki verileri sunmak için farklı bir yöntem kullanmak isteyebilirsiniz, ancak ilişkileri oluşturmak veya silmek için birleştirilmiş varlığı manipüle etme yöntemini kullanırsınız.
+Bir eğitmenin hangi kurslara atandığını değiştirmenize olanak sağlayan kullanıcı arabirimi bir grup onay kutusu olur. Veritabanındaki her kurs için bir onay kutusu görüntülenir ve eğitmenin Şu anda atanmış olduğu yer seçilidir. Kullanıcı kurs atamalarını değiştirmek için onay kutularını seçebilir veya temizleyebilir. Kurs sayısı çok fazlaysa, büyük olasılıkla görünümde verileri göstermek için farklı bir yöntem kullanmak isteyeceksiniz, ancak ilişkiler oluşturmak veya silmek için bir JOIN varlığını işlemek için aynı yöntemi kullanmanız gerekir.
 
-### <a name="update-the-instructors-controller"></a>Eğitmenler denetleyicisini güncelleştirin
+### <a name="update-the-instructors-controller"></a>Eğitmenler denetleyicisini güncelleştirme
 
-Onay kutuları listesinin görünümüne veri sağlamak için bir görünüm modeli sınıfı kullanırsınız.
+Onay kutuları listesinin görünümüne veri sağlamak için bir görünüm modeli sınıfı kullanacaksınız.
 
-*SchoolViewModels* klasöründe *AssignedCourseData.cs* oluşturun ve varolan kodu aşağıdaki kodla değiştirin:
+*SchoolViewModels* klasöründe *AssignedCourseData.cs* oluşturun ve mevcut kodu şu kodla değiştirin:
 
 [!code-csharp[](intro/samples/cu/Models/SchoolViewModels/AssignedCourseData.cs)]
 
-*InstructorsController.cs,* HttpGet `Edit` yöntemini aşağıdaki kodla değiştirin. Değişiklikler vurgulanır.
+*InstructorsController.cs*' de, HttpGet `Edit` yöntemini aşağıdaki kodla değiştirin. Değişiklikler vurgulanır.
 
 [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?highlight=10,17,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36&name=snippet_EditGetCourses)]
 
-Kod, `Courses` gezinti özelliği için istekli yükleme `PopulateAssignedCourseData` ekler ve `AssignedCourseData` görünüm modeli sınıfını kullanarak onay kutusu dizisi için bilgi sağlamak için yeni yöntemi çağırır.
+Kod, `Courses` gezinti özelliği için Eager yüklemesi ekler ve `PopulateAssignedCourseData` `AssignedCourseData` görüntüleme modeli sınıfını kullanarak onay kutusu dizisi için bilgi sağlamak üzere yeni yöntemi çağırır.
 
-Yöntemdeki `PopulateAssignedCourseData` kod, görünüm modeli sınıfını kullanan derslerin listesini yüklemek için tüm Ders varlıklarını okur. Her kurs için kod, kursun eğitmenin `Courses` navigasyon özelliğinde bulunup bulunmadığına kontrol eder. Bir kursun öğretim üyesine atanıp atanmadığını kontrol ederken etkin bir araştırma oluşturmak `HashSet` için, öğretim üyesine atanan dersler bir koleksiyona konur. Tesis, `Assigned` eğitmenin atandığı dersler için geçerli dir. Görünüm, seçili olarak hangi onay kutularının görüntülenmesi gerektiğini belirlemek için bu özelliği kullanır. Son olarak, liste ' deki `ViewData`görünüme geçirilir.
+`PopulateAssignedCourseData` Yöntemindeki kod, görünüm modeli sınıfını kullanarak bir kurs listesi yüklemek Için tüm kurs varlıklarını okur. Kod her kurs için, kursun, eğitmenin `Courses` gezinti özelliğinde mevcut olup olmadığını denetler. Eğitmenin bir kurs atanıp atanmadığını denetlerken etkili arama oluşturmak için, eğitmene atanan kurslar bir `HashSet` koleksiyona konur. , `Assigned` Eğitmenin atandığı kurslar için özelliği true olarak ayarlanır. Görünüm, hangi onay kutularının seçili olarak gösterileceğini belirlemede bu özelliği kullanır. Son olarak, liste içindeki `ViewData`görünüme geçirilir.
 
-Ardından, kullanıcı **Kaydet'i**tıklattığında çalıştırılan kodu ekleyin. `EditPost` Yöntemi aşağıdaki kodla değiştirin ve Eğitmen varlığın `Courses` gezinti özelliğini güncelleyen yeni bir yöntem ekleyin.
+Sonra, Kullanıcı **Kaydet**' i tıklattığında yürütülen kodu ekleyin. `EditPost` Yöntemini aşağıdaki kodla değiştirin ve eğitmen varlığının `Courses` gezinti özelliğini güncelleştiren yeni bir yöntem ekleyin.
 
 [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?highlight=1,3,12,13,25,39-40&name=snippet_EditPostCourses)]
 
 [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?name=snippet_UpdateCourses&highlight=1-31)]
 
-Yöntem imzası artık HttpGet `Edit` yönteminden farklıdır, bu nedenle `EditPost` yöntem `Edit`adı arkadan 'a değişir.
+Yöntem imzası artık HttpGet `Edit` yönteminden farklıdır, bu nedenle Yöntem adı ' dan `EditPost` ' a değişir. `Edit`
 
-Görünümde Ders varlıkları koleksiyonu olmadığından, model bağlayıcısı gezinti özelliğini `CourseAssignments` otomatik olarak güncelleştiremez. Gezinti özelliğini güncelleştirmek için `CourseAssignments` model bağlayıcısını kullanmak yerine, `UpdateInstructorCourses` bunu yeni yöntemde yaparsınız. Bu nedenle `CourseAssignments` özelliği model bağlamadan çıkarmanız gerekir. Bu, beyaz liste aşırı yüklemesini `TryUpdateModel` kullandığınız ve `CourseAssignments` dahil listesinde olmadığınız için çağıran kodda herhangi bir değişiklik gerektirmez.
+Görünüm bir kurs varlıkları koleksiyonuna sahip olmadığından, model Bağlayıcısı `CourseAssignments` gezinti özelliğini otomatik olarak güncelleştiremez. `CourseAssignments` Gezinti özelliğini güncelleştirmek için model cildi kullanmak yerine, bunu yeni `UpdateInstructorCourses` yöntemde yapmanız gerekir. Bu nedenle, `CourseAssignments` özelliği model bağlamadan hariç bırakmanız gerekir. Bu, beyaz liste aşırı yüklemesini kullandığınız ve `TryUpdateModel` `CourseAssignments` içerme listesinde olmadığı için çağıran kodda herhangi bir değişiklik yapılmasını gerektirmez.
 
-Onay kutusu seçilmediyse, kod `UpdateInstructorCourses` gezinti özelliğini `CourseAssignments` boş bir koleksiyonla baş harfe döndürür ve döndürür:
+Hiçbir onay kutusu seçili değilse, içindeki `UpdateInstructorCourses` kod `CourseAssignments` gezinti özelliğini boş bir koleksiyonla başlatır ve döndürür:
 
 [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?name=snippet_UpdateCourses&highlight=3-7)]
 
-Kod daha sonra veritabanındaki tüm dersler arasında döngüler ve görünümde seçilen olanlar aleyhine şu anda öğretim atanan olanlar atanır her ders denetler. Verimli aramaları kolaylaştırmak için, son iki koleksiyon `HashSet` nesnelerde depolanır.
+Kod daha sonra, veritabanındaki tüm kurslardan geçer ve bu her kursu, görünümde seçili olanlar ile ilgili olarak eğitmenin atandığı her bir kursa karşı denetler. Etkili aramaları kolaylaştırmak için, ikinci iki koleksiyon `HashSet` nesnelerde depolanır.
 
-Bir kursun onay kutusu seçiliyse ancak kurs `Instructor.CourseAssignments` navigasyon özelliğinde değilse, kurs gezinti özelliğindeki koleksiyona eklenir.
+Kurs onay kutusu seçilmişse ancak kurs, `Instructor.CourseAssignments` gezinti özelliğinde değilse kurs, Gezinti özelliğindeki koleksiyona eklenir.
 
 [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?highlight=14-20&name=snippet_UpdateCourses)]
 
-Bir kursun onay kutusu seçilmediyse, ancak kurs navigasyon `Instructor.CourseAssignments` özelliğindeyse, kurs navigasyon özelliğinden kaldırılır.
+Kurs onay kutusu seçili değilse, ancak kurs `Instructor.CourseAssignments` gezinti özelliği ise, kurs, gezinti özelliğinden kaldırılır.
 
 [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?highlight=21-29&name=snippet_UpdateCourses)]
 
 ### <a name="update-the-instructor-views"></a>Eğitmen görünümlerini güncelleştirme
 
-*Görünümler/Eğitmenler/Edit.cshtml'de,* **Office** alanının `div` `div` öğelerinden hemen sonra ve **Kaydet** düğmesinin öğesinden önce aşağıdaki kodu ekleyerek bir dizi onay kutusu içeren bir **Kurs** alanı ekleyin.
+*Görünümler/eğitmenler/Edit. cshtml*' de, **Office** alanı `div` `div` öğelerinden hemen sonra ve **Kaydet** düğmesine ait öğeden önce aşağıdaki kodu ekleyerek bir dizi onay kutusu içeren bir **Kurslar** alanı ekleyin.
 
 <a id="notepad"></a>
 > [!NOTE]
-> Görsel Studio'da kodu yapıştırdığınızda, satır sonları kodu kıracak şekilde değiştirilebilir. Yapıştırma dan sonra kod farklı görünüyorsa, otomatik biçimlendirmeyi geri almak için ctrl+Z tuşuna bir kez basın. Bu, hat sonlarını düzeltecek, böylece burada gördüğünüz gibi görünürler. Girintisi mükemmel olmak zorunda değildir, ancak `@</tr><tr>` `@:<td>`, `@:</td>`, `@:</tr>` , ve çizgiler her gösterildiği gibi tek bir satırda olmalıdır veya bir çalışma zamanı hatası alırsınız. Yeni kod bloğu seçilise, yeni kodu varolan kodla hizalamak için Sekme'ye üç kez basın. Bu sorun Visual Studio 2019'da giderilmiştir.
+> Kodu Visual Studio 'Ya yapıştırdığınızda, satır sonları kodu kesen bir şekilde değiştirilebilir. Kod yapıştırdıktan sonra farklı görünüyorsa, otomatik biçimlendirmeyi geri almak için CTRL + Z bir kez tuşuna basın. Bu işlem satır sonlarını, burada gördüğünüz gibi görünmeleri için düzeltir. Girintide kusursuz olması gerekmez, `@</tr><tr>`ancak, `@:<td>` `@:</td>`, ve `@:</tr>` çizgilerinin her biri gösterildiği gibi tek bir satırda olması gerekir, aksi halde bir çalışma zamanı hatası alırsınız. Yeni kod bloğu seçiliyken, yeni kodu mevcut kodla hizalamak için üç kez Tab tuşuna basın. Bu sorun Visual Studio 2019 ' de düzeltilmiştir.
 
 [!code-html[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=35-61)]
 
-Bu kod, üç sütunu olan bir HTML tablosu oluşturur. Her sütunda bir onay kutusu ve ardından ders numarası ve başlığından oluşan bir başlık vardır. Onay kutularının tümü, model bağlayıcısına grup olarak davranılması gerektiğini bildiren aynı ada ("selectedCourses") sahiptir. Her onay kutusunun değer `CourseID`özniteliği. Sayfa deftere nakledildiğinde, model bağlayıcısı yalnızca seçili onay `CourseID` kutuları için değerlerden oluşan bir diziyi denetleyiciye geçirir.
+Bu kod, üç sütun içeren bir HTML tablosu oluşturur. Her sütunda, bir onay kutusu ve ardından kurs numarası ve başlığından oluşan bir açıklamalı alt yazı bulunur. Onay kutularının hepsi aynı ada ("Selectedkurslar") sahiptir, bu da model cilde bir grup olarak değerlendirilme bildirir. Her onay kutusunun değer özniteliği değerine ayarlanır `CourseID`. Sayfa gönderildiğinde, model Ciltçi yalnızca seçili onay kutularının `CourseID` değerlerinden oluşan bir diziyi denetleyiciye geçirir.
 
-Onay kutuları başlangıçta işlendiğinde, eğitmene atanan dersler için olanlar, onları seçen (kontrol edilmiş olarak görüntüler) özniteliklerini işaretlemiş olur.
+Onay kutuları başlangıçta işlendiğinde, eğitmenin atandığı kurslara yönelik olanlar, işaretlenmiş özniteliklere sahiptir ve bunları seçer (denetlenen görüntüler).
 
-Uygulamayı çalıştırın, **Eğitmenler** sekmesini seçin ve **Edit** sayfasını görmek için bir eğitmende **Edit'i** tıklatın.
+Uygulamayı çalıştırın, **eğitmenler** sekmesini seçin ve ardından **düzenleme** sayfasını görmek Için bir eğitmende **Düzenle** ' ye tıklayın.
 
-![Kurslarla Eğitmen Edit sayfası](update-related-data/_static/instructor-edit-courses.png)
+![Kurslar ile eğitmen düzenleme sayfası](update-related-data/_static/instructor-edit-courses.png)
 
-Bazı ders atamalarını değiştirin ve Kaydet'i tıklatın. Yaptığınız değişiklikler Dizin sayfasına yansıtılır.
+Bazı kurs atamalarını değiştirin ve Kaydet ' e tıklayın. Yaptığınız değişiklikler Dizin sayfasında yansıtılır.
 
 > [!NOTE]
-> Eğitmen ders verilerini yeniden düzenlemesi için burada alınan yaklaşım, sınırlı sayıda kurs olduğunda iyi çalışır. Çok daha büyük koleksiyonlar için farklı bir u-ui ve farklı bir güncelleştirme yöntemi gerekir.
+> Eğitim kursu verilerini düzenlemek için buradaki yaklaşım, sınırlı sayıda kurs olduğunda iyi bir şekilde gerçekleştirilir. Çok daha büyük olan koleksiyonlar için, farklı bir kullanıcı arabirimi ve farklı bir güncelleştirme yöntemi gerekir.
 
-## <a name="update-delete-page"></a>Sayfayı Sil'i Güncelleştir
+## <a name="update-delete-page"></a>Güncelleştirme silme sayfası
 
-*InstructorsController.cs,* `DeleteConfirmed` yöntemi silin ve yerine aşağıdaki kodu ekleyin.
+*InstructorsController.cs*' de, `DeleteConfirmed` yöntemini silin ve yerine aşağıdaki kodu ekleyin.
 
 [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?highlight=5-7,9-12&name=snippet_DeleteConfirmed)]
 
 Bu kod aşağıdaki değişiklikleri yapar:
 
-* `CourseAssignments` Navigasyon özelliği için istekli yükleme yapar. Bunu eklemeniz gerekir, yoksa EF ilgili `CourseAssignment` varlıklar hakkında bilgi sahibi olmaz ve bunları silmez. Burada bunları okumak gerekmemesi için veritabanında basamaklı silme yapılandırmak olabilir.
+* , `CourseAssignments` Gezinti özelliği için ekip yükleme yapar. Bunu eklemeniz gerekir, ilgili `CourseAssignment` varlıklar hakkında bilgi sahibi olmaz ve onları silmez. Bunları okumaktan kaçınmak için, veritabanında art arda silme yapılandırabilirsiniz.
 
-* Silinecek eğitmen herhangi bir bölümün yöneticisi olarak atanırsa, eğitmen atamasını bu bölümlerden kaldırır.
+* Silinecek eğitmen herhangi bir departmanların Yöneticisi olarak atanırsa, bu departmanlardan eğitmen atamasını kaldırır.
 
-## <a name="add-office-location-and-courses-to-create-page"></a>Sayfa Oluştur'a ofis konumu ve kurslar ekleme
+## <a name="add-office-location-and-courses-to-create-page"></a>Sayfa oluşturmak için Office konumu ve kurslar ekleme
 
-*InstructorsController.cs,* HttpGet ve HttpPost `Create` yöntemlerini silin ve ardından yerine aşağıdaki kodu ekleyin:
+*InstructorsController.cs*Içinde, HttpGet ve HttpPost `Create` yöntemlerini silin ve ardından aşağıdaki kodu kendi yerine ekleyin:
 
 [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?name=snippet_Create&highlight=3-5,12,14-22,29)]
 
-Bu kod, başlangıçta hiçbir ders `Edit` seçilmemiş olması dışında yöntemler için gördüklerinize benzer. HttpGet `Create` yöntemi, `PopulateAssignedCourseData` seçili kurslar olabileceğinden değil, görünümdeki `foreach` döngü için boş bir koleksiyon sağlamak için (aksi takdirde görünüm kodu geçersiz bir başvuru özel durum oluşturur) yöntemi çağırır.
+Bu kod, ilk olarak hiçbir kurs seçilmemiş olması dışında `Edit` , yöntemler için gördüğünüz yönteme benzer. HttpGet `Create` yöntemi, ' ın `PopulateAssignedCourseData` seçili olması, ancak görünümde `foreach` döngü için boş bir koleksiyon sağlamak üzere değil yöntemini çağırır (Aksi halde görünüm kodu bir null başvuru özel durumu oluşturur).
 
-HttpPost `Create` yöntemi, doğrulama hatalarını `CourseAssignments` kontrol etmeden önce seçilen her kursu gezinti özelliğine ekler ve veritabanına yeni eğitmen ekler. Modellerde hatalar olsa bile kurslar eklenir (örneğin, kullanıcı geçersiz bir tarih anahtarladı) ve sayfa bir hata iletisiyle yeniden görüntülenir, yapılan kurs seçimleri otomatik olarak geri yüklenir.
+HttpPost `Create` yöntemi, seçili her kursu doğrulama hatalarını kontrol `CourseAssignments` etmeden önce gezinti özelliğine ekler ve yeni eğitmeni veritabanına ekler. Model hataları olduğunda (örneğin, Kullanıcı geçersiz bir tarih anahtarlanır) ve sayfa bir hata iletisiyle yeniden görüntülenirken, yapılan kurs seçimleri otomatik olarak geri yüklenir.
 
-`CourseAssignments` Navigasyon özelliğine kurs ekleyebilmek için mülkü boş bir koleksiyon olarak başlatmanız gerektiğine dikkat edin:
+`CourseAssignments` Gezinti özelliğine kurslar ekleyebilmesinin, özelliği boş bir koleksiyon olarak başlatmak için sahip olmanız gerektiğini unutmayın:
 
 ```csharp
 instructor.CourseAssignments = new List<CourseAssignment>();
 ```
 
-Denetleyici kodunda bunu yapmanın alternatifi olarak, aşağıdaki örnekte gösterildiği gibi, özellik getter'Ini otomatik olarak oluşturabilecek şekilde değiştirerek, bunu Eğitmen modelinde yapabilirsiniz:
+Bunu denetleyici kodunda yapmanın bir alternatifi olarak, aşağıdaki örnekte gösterildiği gibi, özellik alıcısının, koleksiyonu otomatik olarak oluşturmak üzere değiştirerek, bunu eğitmen modelinde yapabilirsiniz:
 
 ```csharp
 private ICollection<CourseAssignment> _courseAssignments;
@@ -289,19 +295,19 @@ public ICollection<CourseAssignment> CourseAssignments
 
 `CourseAssignments` Özelliği bu şekilde değiştirirseniz, denetleyicideki açık özellik başlatma kodunu kaldırabilirsiniz.
 
-*Görünümler/Eğitmen/Create.cshtml'de,* Gönder düğmesinden önce bir ofis konumu metin kutusu ekleyin ve kurslar için onay kutuları ekleyin. Edit sayfasında olduğu gibi, [Visual Studio yapıştırdığınızda kodu yeniden biçimlendirirse biçimlendirmeyi düzeltin.](#notepad)
+*Görünümler/eğitmen/oluşturma. cshtml*'de, gönder düğmesinden önce kurslar için bir Office konum metin kutusu ve onay kutuları ekleyin. Düzenleme sayfasında olduğu gibi, [dosyayı yapıştırdığınızda Visual Studio kodu yeniden biçimlendirdiğinden biçimlendirmeyi onarın](#notepad).
 
 [!code-html[](intro/samples/cu/Views/Instructors/Create.cshtml?range=29-61)]
 
-Uygulamayı çalıştırarak ve bir eğitmen oluşturarak test edin.
+Uygulamayı çalıştırıp bir eğitmen oluşturarak test edin.
 
-## <a name="handling-transactions"></a>İşlemleri N
+## <a name="handling-transactions"></a>Işlemleri işleme
 
-[CRUD öğreticisinde](crud.md)açıklandığı gibi, Entity Framework işlemleri dolaylı olarak uygular. Daha fazla denetime ihtiyaç duyduğunuz senaryolar için (örneğin, bir harekette Entity Framework dışında yapılan işlemleri eklemek istiyorsanız), [Hareketler'e](/ef/core/saving/transactions)bakın.
+[CRUD öğreticisinde](crud.md)açıklandığı gibi Entity Framework, işlemleri örtük olarak uygular. Daha fazla denetime ihtiyacınız olan senaryolar için--örneğin, işlem içinde Entity Framework dışında yapılan işlemleri eklemek istiyorsanız, bkz. [işlemler](/ef/core/saving/transactions).
 
 ## <a name="get-the-code"></a>Kodu alma
 
-[Tamamlanan uygulamayı karşıdan yükleyin veya görüntüleyin.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
+[Tamamlanmış uygulamayı indirin veya görüntüleyin.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-mvc/intro/samples/cu-final)
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
@@ -309,12 +315,12 @@ Bu öğreticide şunları yaptınız:
 
 > [!div class="checklist"]
 > * Özelleştirilmiş Kurslar sayfaları
-> * Eklenen Eğitmenler Edit sayfası
-> * Ekle sayfasına dersler eklendi
-> * Güncelleştirilmiş Silme sayfası
-> * Sayfa Oluşturma'ya ofis konumu ve kurslar eklendi
+> * Eklenen eğitmenler düzenleme sayfası
+> * Düzenleme sayfasına kurslar eklendi
+> * Silme sayfası güncelleştirildi
+> * Sayfa oluşturmak için Office konumu ve kurslar eklendi
 
-Eşzamanlılık çakışmaları nasıl ele alınılacağını öğrenmek için bir sonraki öğreticiye ilerleyin.
+Eşzamanlılık çakışmalarını nasıl işleyeceğinizi öğrenmek için sonraki öğreticiye ilerleyin.
 
 > [!div class="nextstepaction"]
 > [Eşzamanlılık çakışmalarını işleme](concurrency.md)

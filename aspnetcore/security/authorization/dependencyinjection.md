@@ -4,13 +4,19 @@ author: rick-anderson
 description: Bağımlılık ekleme kullanarak ASP.NET Core uygulamasına yetkilendirme gereksinimi işleyicilerini nasıl ekleyeceğinizi öğrenin.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authorization/dependencyinjection
-ms.openlocfilehash: 71d563e11d308a95c08e6d012d3a071f4697d2de
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 16285f6f731455d6e45a04f82437793891a77668
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78666091"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775126"
 ---
 # <a name="dependency-injection-in-requirement-handlers-in-aspnet-core"></a>ASP.NET Core 'de gereksinim işleyicilerde bağımlılık ekleme
 
@@ -20,7 +26,7 @@ ms.locfileid: "78666091"
 
 Bir yetkilendirme işleyicisinde değerlendirmek istediğiniz bir kural deposudur olduğunu ve bu deponun hizmet koleksiyonunda kayıtlı olduğunu varsayalım. Yetkilendirme çözülecek ve oluşturucuya eklenecektir.
 
-Örneğin, ASP 'yi kullanmak isterseniz. İşleyicisine `ILoggerFactory` eklemek istediğiniz NET günlük altyapısı. Böyle bir işleyici şöyle görünebilir:
+Örneğin, ASP 'yi kullanmak isterseniz. İşleyicinizden eklemek istediğiniz NET 'in günlük altyapısı `ILoggerFactory` . Böyle bir işleyici şöyle görünebilir:
 
 ```csharp
 public class LoggingAuthorizationHandler : AuthorizationHandler<MyRequirement>
@@ -41,13 +47,13 @@ public class LoggingAuthorizationHandler : AuthorizationHandler<MyRequirement>
    }
    ```
 
-İşleyiciyi `services.AddSingleton()`kaydetmelisiniz:
+İşleyiciyi şu ile `services.AddSingleton()`kaydedersiniz:
 
 ```csharp
 services.AddSingleton<IAuthorizationHandler, LoggingAuthorizationHandler>();
 ```
 
-Uygulamanız başlatıldığında işleyicinin bir örneği oluşturulur ve bu, kayıtlı `ILoggerFactory` oluşturucuya eklenir.
+Uygulamanız başlatıldığında işleyicinin bir örneği oluşturulacaktır ve dı, oluşturucuya kayıtlı `ILoggerFactory` olarak eklenir.
 
 > [!NOTE]
 > Entity Framework kullanan işleyiciler tekton olarak kaydedilmelidir.

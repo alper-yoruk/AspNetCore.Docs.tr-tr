@@ -1,70 +1,76 @@
 ---
-title: Apache ile Linux'ta Ana ASP.NET Core'u barındırın
+title: Apache ile Linux üzerinde ASP.NET Core barındırma
 author: rick-anderson
-description: Http trafiğini Kestrel'de çalışan ASP.NET Core web uygulamasına yönlendirmek için Apache'yi CentOS'ta ters proxy sunucusu olarak nasıl ayarlayabilirsiniz öğrenin.
+description: HTTP trafiğini Kestrel üzerinde çalışan bir ASP.NET Core Web uygulamasına yönlendirmek için CentOS üzerinde bir ters proxy sunucusu olarak Apache 'yi ayarlamayı öğrenin.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: shboyer
 ms.custom: mvc
 ms.date: 04/10/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: host-and-deploy/linux-apache
-ms.openlocfilehash: 1256f6d21f94ef6c4baad7aae4bd0e751af5c675
-ms.sourcegitcommit: 6f1b516e0c899a49afe9a29044a2383ce2ada3c7
+ms.openlocfilehash: 9f0825f65f316ee4caf67e82fe5812e3a1ae813e
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/13/2020
-ms.locfileid: "81224043"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775914"
 ---
-# <a name="host-aspnet-core-on-linux-with-apache"></a>Apache ile Linux'ta Ana ASP.NET Core'u barındırın
+# <a name="host-aspnet-core-on-linux-with-apache"></a>Apache ile Linux üzerinde ASP.NET Core barındırma
 
-Yazar: [Shayne Boyer](https://github.com/spboyer)
+Sağlayan- [Shayne Boyer](https://github.com/spboyer)
 
-Bu kılavuzu kullanarak, Http trafiğini [Kestrel](xref:fundamentals/servers/kestrel) sunucusunda çalışan ASP.NET Core web uygulamasına yönlendirmek için [Apache'yi](https://httpd.apache.org/) [CentOS 7'de](https://www.centos.org/) ters proxy sunucusu olarak nasıl ayarlayabilirsiniz öğrenin. [mod_proxy uzantısı](https://httpd.apache.org/docs/2.4/mod/mod_proxy.html) ve ilgili modüller sunucunun ters proxy'sini oluşturur.
+Bu kılavuzu kullanarak, HTTP trafiğinin [Kestrel](xref:fundamentals/servers/kestrel) Server üzerinde çalışan bir ASP.NET Core Web uygulamasına yönlendirilmesini sağlamak Için [CentOS 7](https://www.centos.org/) ' de bir ters proxy sunucusu olarak [Apache](https://httpd.apache.org/) 'yi ayarlamayı öğrenin. [Mod_proxy uzantısı](https://httpd.apache.org/docs/2.4/mod/mod_proxy.html) ve ilgili Modüller sunucunun ters proxy 'sini oluşturur.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
-* Sudo ayrıcalığına sahip standart bir kullanıcı hesabı ile CentOS 7 çalıştıran sunucu.
-* Sunucuya .NET Core çalışma saatini yükleyin.
-   1. İndir [.NET Çekirdek sayfasını](https://dotnet.microsoft.com/download/dotnet-core)ziyaret edin.
-   1. En son önizleme olmayan .NET Core sürümünü seçin.
-   1. Uygulamaları Çalıştır - Runtime altında tabloda en son önizleme olmayan çalışma **süresini indirin.**
-   1. Linux **Paketi yöneticisi yönergeleri** bağlantısını seçin ve CentOS yönergelerini izleyin.
+* Sudo ayrıcalığına sahip standart bir kullanıcı hesabıyla CentOS 7 çalıştıran sunucu.
+* .NET Core çalışma zamanını sunucuya yükler.
+   1. [.Net çekirdeğini indir sayfasını](https://dotnet.microsoft.com/download/dotnet-core)ziyaret edin.
+   1. En son Önizleme olmayan .NET Core sürümünü seçin.
+   1. **Uygulama çalıştırma-çalışma zamanı**altındaki tabloda en son önizleme dışı çalışma zamanını indirin.
+   1. Linux **Paket Yöneticisi yönergeleri** bağlantısını seçin ve CentOS talimatlarını izleyin.
 * Mevcut bir ASP.NET Core uygulaması.
 
-Paylaşılan çerçeveyi yükselttikten sonra gelecekte herhangi bir noktada, sunucu tarafından barındırılan ASP.NET Core uygulamalarını yeniden başlatın.
+Paylaşılan Framework 'ü yükselttikten sonra gelecekte herhangi bir noktada, sunucu tarafından barındırılan ASP.NET Core uygulamaları yeniden başlatın.
 
-## <a name="publish-and-copy-over-the-app"></a>Uygulama üzerinde yayımlama ve kopyalama
+## <a name="publish-and-copy-over-the-app"></a>Uygulama üzerinde Yayımla ve Kopyala
 
 Uygulamayı [çerçeveye bağımlı bir dağıtım](/dotnet/core/deploying/#framework-dependent-deployments-fdd)için yapılandırın.
 
-Uygulama yerel olarak çalıştırılırsa ve güvenli bağlantılar (HTTPS) yapacak şekilde yapılandırılmamışsa, aşağıdaki yaklaşımlardan birini benimseyin:
+Uygulama yerel olarak çalıştırılır ve güvenli bağlantı (HTTPS) yapmak üzere yapılandırılmamışsa aşağıdaki yaklaşımlardan birini benimseyin:
 
-* Uygulamayı güvenli yerel bağlantıları işleyeceğini zedele. Daha fazla bilgi için [HTTPS yapılandırma](#https-configuration) bölümüne bakın.
-* `https://localhost:5001` *Properties/launchSettings.json* dosyasındaki `applicationUrl` özellikten (varsa) kaldırın.
+* Uygulamayı güvenli yerel bağlantıları işleyecek şekilde yapılandırın. Daha fazla bilgi için [https yapılandırma](#https-configuration) bölümüne bakın.
+* `https://localhost:5001` *Properties/launchsettings. JSON* dosyasındaki `applicationUrl` özelliğinden (varsa) kaldırın.
 
-Bir uygulamayı sunucuda çalıştırabilen bir dizine (örneğin, *&lt;bin/Release/ target_framework_moniker&gt;/publish)* paketlemek için geliştirme ortamından [dotnet yayımlamayı](/dotnet/core/tools/dotnet-publish) çalıştırın:
+Bir uygulamayı sunucuda çalışabilecek bir dizine (örneğin, *bin/Release/&lt;target_framework_moniker&gt;/Publish*) paketlemek için geliştirme ortamından [DotNet Publish](/dotnet/core/tools/dotnet-publish) çalıştırın:
 
 ```dotnetcli
 dotnet publish --configuration Release
 ```
 
-Sunucuda .NET Core çalışma süresini korumamak isterseniz, uygulama bağımsız bir [dağıtım](/dotnet/core/deploying/#self-contained-deployments-scd) olarak da yayınlanabilir.
+Uygulama, sunucuda .NET Core çalışma zamanının bakımını yapmayı tercih ediyorsanız, [kendi kendine içerilen bir dağıtım](/dotnet/core/deploying/#self-contained-deployments-scd) olarak da yayımlanabilir.
 
-kuruluşun iş akışına entegre olan bir aracı kullanarak ASP.NET Core uygulamasını sunucuya kopyalayın (örneğin, SCP, SFTP). Var *dizininin* altında web uygulamalarını bulmak yaygındır (örneğin, *var/www/helloapp).*
+ASP.NET Core uygulamasını, kuruluşun iş akışını (örneğin, SCP, SFTP) tümleştiren bir aracı kullanarak sunucuya kopyalayın. *Var* dizini altında Web uygulamalarının (örneğin, *var/www/HelloApp*) yerini bulmak yaygındır.
 
 > [!NOTE]
-> Üretim dağıtım senaryosunda, sürekli tümleştirme iş akışı, uygulamayı yayımlama ve varlıkları sunucuya kopyalama işini yapar.
+> Bir üretim dağıtım senaryosunda, sürekli tümleştirme iş akışı, uygulamayı yayımlama ve varlıkları sunucuya kopyalama işini yapar.
 
 ## <a name="configure-a-proxy-server"></a>Proxy sunucusu yapılandırma
 
-Ters proxy, dinamik web uygulamaları için ortak bir kurulumdur. Ters proxy HTTP isteğini sona erdirir ve ASP.NET uygulamasına iletilir.
+Ters proxy, dinamik Web uygulamaları sunmak için ortak bir kurulumtir. Ters proxy, HTTP isteğini sonlandırır ve ASP.NET uygulamasına iletir.
 
-Proxy sunucusu, istekleriyerine yerine getirmek yerine istemci isteklerini başka bir sunucuya iletir. Ters proxy, genellikle rasgele istemciler adına sabit bir hedefe iletir. Bu kılavuzda, Apache Kestrel'in ASP.NET Core uygulamasına hizmet verdiği sunucuda çalışan ters proxy olarak yapılandırılır.
+Proxy sunucusu, istemci isteklerini istekleri yerine başka bir sunucuya ileten bir sunucu olur. Ters proxy, genellikle rastgele istemciler adına sabit bir hedefe iletilir. Bu kılavuzda Apache, Kestrel 'in ASP.NET Core uygulamasına hizmet veren aynı sunucuda çalışan ters proxy olarak yapılandırılmıştır.
 
-İstekler ters proxy ile iletilir olduğundan, [Microsoft.AspNetCore.HttpOverrides](https://www.nuget.org/packages/Microsoft.AspNetCore.HttpOverrides/) paketinden [Iletili Üstbilgi Middleware](xref:host-and-deploy/proxy-load-balancer) kullanın. Orta `Request.Scheme`yazılım, üstbilgi `X-Forwarded-Proto` kullanarak, URI'leri ve diğer güvenlik ilkelerini yeniden yönlendirmenin doğru çalışmasını güncelleştirir.
+İstekler ters proxy tarafından iletileceği için, [Microsoft. AspNetCore. HttpOverrides](https://www.nuget.org/packages/Microsoft.AspNetCore.HttpOverrides/) paketindeki [Iletilen üstbilgiler ara yazılımını](xref:host-and-deploy/proxy-load-balancer) kullanın. Ara yazılım, `X-Forwarded-Proto` üstbilgiyi `Request.Scheme`kullanarak, yeniden yönlendirme URI 'leri ve diğer güvenlik ilkelerini doğru çalışacak şekilde güncelleştirir.
 
-Kimlik doğrulama, bağlantı oluşturma, yeniden yönlendirmeler ve coğrafi konum gibi şemaya bağlı olan tüm bileşen, İlliyeli Üstbilgi Middleware'i çağırdıktan sonra yerleştirilmelidir. Genel bir kural olarak, Iletili Üstbilgi Middleware tanılama ve hata işleme middleware dışında diğer ara önce çalışması gerekir. Bu sıralama, iletilen üstbilgiler bilgilerine güvenen ara yazılımın işlem için üstbilgi değerlerini tüketmesini sağlar.
+Bir şemaya bağlı kimlik doğrulama, bağlantı oluşturma, yeniden yönlendirme ve coğrafi konum gibi herhangi bir bileşen, Iletilen üstbilgiler ara yazılımı çağrıldıktan sonra yerleştirilmelidir. Genel bir kural olarak, Iletilen üstbilgiler ara yazılımı, tanılama ve hata işleme ara yazılımı dışında diğer ara yazılım ile önce çalışmalıdır. Bu sıralama, iletilen üst bilgi bilgilerine bağlı olan ara yazılımın işleme için üst bilgi değerlerini kullanmasını sağlar.
 
-<xref:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders*> Diğer ara yazılımları `Startup.Configure` çağırmadan önce yöntemi en üstteki yönteme çağırın. Orta yazılımı ve `X-Forwarded-For` üstbilgiileri `X-Forwarded-Proto` iletecek şekilde yapılandırın:
+Diğer ara <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersExtensions.UseForwardedHeaders*> yazılım çağrılmadan `Startup.Configure` önce yönteminin en üstünde yöntemi çağırın. Ara yazılımı, `X-Forwarded-For` ve `X-Forwarded-Proto` üst bilgilerini iletecek şekilde yapılandırın:
 
 ```csharp
 // using Microsoft.AspNetCore.HttpOverrides;
@@ -77,9 +83,9 @@ app.UseForwardedHeaders(new ForwardedHeadersOptions
 app.UseAuthentication();
 ```
 
-Ara <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions> yazılımda hayır belirtilmemişse, ileriye dönük `None`varsayılan üstbilgi .
+Hayır <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions> , ara yazılım için belirtilmemişse, iletmek için varsayılan üstbilgiler şunlardır `None`.
 
-Standart localhost adresi (127.0.0.1) dahil olmak üzere geri dönüş adreslerinde çalışan ekseksenler varsayılan olarak güvenilir. Kuruluş içindeki diğer güvenilir vekiller veya ağlar, Internet ve web sunucusu arasındaki istekleri <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownProxies*> işlerse, bunları listeye <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownNetworks*> <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions>ekleyin. Aşağıdaki örnek, IP adresi 10.0.0.100'de güvenilir bir proxy sunucusunu `KnownProxies` `Startup.ConfigureServices`Ilileli Üstbilgi Orta Ware'e ekler:
+Standart localhost adresi (127.0.0.1) dahil olmak üzere geri döngü adreslerinde çalışan proxy 'ler (127.0.0.0/8, [:: 1]), varsayılan olarak güvenilirdir. Kuruluş içindeki diğer güvenilir proxy 'ler veya ağlar, Internet ve Web sunucusu arasında istekleri ele alıyorsa, bunları <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownProxies*> veya <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions.KnownNetworks*> ile <xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions>listesine ekleyin. Aşağıdaki örnek, içindeki `KnownProxies` `Startup.ConfigureServices`iletilen ÜSTBILGILER ara sunucusuna alana 10.0.0.100 IP adresinde bir güvenilen ara sunucu ekler:
 
 ```csharp
 // using System.Net;
@@ -92,21 +98,21 @@ services.Configure<ForwardedHeadersOptions>(options =>
 
 Daha fazla bilgi için bkz. <xref:host-and-deploy/proxy-load-balancer>.
 
-### <a name="install-apache"></a>Apache'yi Yükleyin
+### <a name="install-apache"></a>Apache 'yi yükler
 
-CentOS paketlerini en son kararlı sürümlerine güncelleyin:
+CentOS paketlerini en son kararlı sürümlerine güncelleştirin:
 
 ```bash
 sudo yum update -y
 ```
 
-Apache web sunucusunu CentOS'a `yum` tek bir komutla yükleyin:
+Tek `yum` bir komutla, CentOS üzerinde Apache Web sunucusunu yükler:
 
 ```bash
 sudo yum -y install httpd mod_ssl
 ```
 
-Komutu çalıştırdıktan sonra örnek çıktı:
+Komutu çalıştırdıktan sonra örnek çıkış:
 
 ```bash
 Downloading packages:
@@ -125,13 +131,13 @@ Complete!
 ```
 
 > [!NOTE]
-> Bu örnekte, CentOS 7 sürümü 64 bit olduğundan çıktı httpd.86_64 yansıtır. Apache'nin nerede yüklü olduğunu `whereis httpd` doğrulamak için bir komut isteminden çalıştırın.
+> Bu örnekte, CentOS 7 sürümü 64 bit olduğundan çıkış httpd. 86_64 ' i yansıtır. Apache 'nin yüklü olduğu yeri doğrulamak için komut `whereis httpd` isteminden komutunu çalıştırın.
 
-### <a name="configure-apache"></a>Apache'yi Yapılandır
+### <a name="configure-apache"></a>Apache yapılandırma
 
-Apache için yapılandırma dosyaları dizinde `/etc/httpd/conf.d/` yer alır. *.conf* uzantılı tüm dosyalar, modülyüklemek için gerekli yapılandırma dosyalarını içeren modül yapılandırma dosyalarına `/etc/httpd/conf.modules.d/`ek olarak alfabetik sıraya göre işlenir.
+Apache için yapılandırma dosyaları, `/etc/httpd/conf.d/` dizin içinde bulunur. *. Conf* uzantısına sahip herhangi bir dosya, içindeki `/etc/httpd/conf.modules.d/`modül yapılandırma dosyalarının yanı sıra, modülleri yüklemek için gereken yapılandırma dosyalarını içeren alfabetik sırada işlenir.
 
-Uygulama için *helloapp.conf*adlı bir yapılandırma dosyası oluşturun:
+Uygulama için *HelloApp. conf*adlı bir yapılandırma dosyası oluşturun:
 
 ```
 <VirtualHost *:*>
@@ -149,20 +155,20 @@ Uygulama için *helloapp.conf*adlı bir yapılandırma dosyası oluşturun:
 </VirtualHost>
 ```
 
-Blok, `VirtualHost` bir sunucudaki bir veya daha fazla dosyada birden çok kez görünebilir. Önceki yapılandırma dosyasında, Apache bağlantı noktası 80'deki genel trafiği kabul eder. Etki `www.example.com` alanı sunuluyor ve `*.example.com` diğer ad aynı web sitesinde çözülür. Daha fazla bilgi için [Ad tabanlı sanal ana bilgisayar desteğine](https://httpd.apache.org/docs/current/vhosts/name-based.html) bakın. İstekler 127.0.0.1 adresindesunucunun 5000 bağlantı noktasına kökten yakınlanır. Çift yönlü iletişim `ProxyPass` için `ProxyPassReverse` gereklidir. Kerkenez'in IP/bağlantı noktasını değiştirmek için [Kerkenez: Bitiş Noktası yapılandırmasına](xref:fundamentals/servers/kestrel#endpoint-configuration)bakın.
+`VirtualHost` Blok, sunucuda bir veya daha fazla dosyada birden çok kez görünebilir. Yukarıdaki yapılandırma dosyasında Apache, 80 numaralı bağlantı noktasında genel trafiği kabul eder. Etki alanına `www.example.com` sunulmakta ve `*.example.com` diğer ad aynı Web sitesine çözümlenmektedir. Daha fazla bilgi için bkz. [ad tabanlı sanal konak desteği](https://httpd.apache.org/docs/current/vhosts/name-based.html) . İstekler, kökte, sunucunun bağlantı noktası 5000 ' den 127.0.0.1 ' de sunucu üzerinden alınır. İki yönlü iletişim için gereklidir `ProxyPass` ve `ProxyPassReverse` gereklidir. Kestrel 'in IP/bağlantı noktasını değiştirmek için bkz. [Kestrel: Endpoint Configuration](xref:fundamentals/servers/kestrel#endpoint-configuration).
 
 > [!WARNING]
-> **VirtualHost** bloğunda uygun bir [ServerName yönergesi](https://httpd.apache.org/docs/current/mod/core.html#servername) belirtilmemesi, uygulamanızın güvenlik açıklarına maruz kalır. Alt etki alanı joker karakter `*.example.com`bağlama (örneğin, ) tüm üst etki alanını denetlerseniz (bunun `*.com`aksine, savunmasız dır) bu güvenlik riski oluşturmaz. Daha fazla bilgi için [rfc7230 bölüm-5.4'e](https://tools.ietf.org/html/rfc7230#section-5.4) bakın.
+> **VirtualHost** bloğunda uygun bir [ServerName yönergesi](https://httpd.apache.org/docs/current/mod/core.html#servername) belirtmemesi, uygulamanızı güvenlik açıklarına karşı kullanıma sunar. Alt etki alanı joker karakteri bağlama ( `*.example.com`Örneğin,), tüm üst etki alanını (Bu güvenlik açığı olan aksine `*.com`) kontrol ediyorsanız bu güvenlik riskini ortadan yapmaz. Daha fazla bilgi için bkz. [rfc7230 Section-5,4](https://tools.ietf.org/html/rfc7230#section-5.4) .
 
-Günlük kullanımı `ErrorLog` ve `CustomLog` `VirtualHost` yönergeleri başına yapılandırılabilir. `ErrorLog`sunucunun hataları günlüğe kaydettiği `CustomLog` ve günlük dosyasının dosya adını ve biçimini ayarladığı yerdir. Bu durumda, istek bilgilerinin günlüğe kaydedildiği yer burasıdır. Her istek için bir satır vardır.
+Günlüğe kaydetme, `ErrorLog` ve `CustomLog` yönergeleri `VirtualHost` başına yapılandırılabilir. `ErrorLog`, sunucunun hataları günlüğe kaydettiği konumdur ve `CustomLog` günlük dosyasının dosya adını ve biçimini ayarlar. Bu durumda istek bilgileri günlüğe kaydedilir. Her istek için bir satır vardır.
 
-Dosyayı kaydedin ve yapılandırmayı test edin. Her şey geçerse, yanıt `Syntax [OK]`.
+Dosyayı kaydedin ve yapılandırmayı test edin. Her şey geçerse yanıtın olması `Syntax [OK]`gerekir.
 
 ```bash
 sudo service httpd configtest
 ```
 
-Apache'yi yeniden başlatın:
+Apache 'i yeniden Başlat:
 
 ```bash
 sudo systemctl restart httpd
@@ -171,7 +177,7 @@ sudo systemctl enable httpd
 
 ## <a name="monitor-the-app"></a>Uygulamayı izleme
 
-Apache şimdi kerkenez `http://localhost:80` `http://127.0.0.1:5000`üzerinde çalışan ASP.NET Core uygulamasına yapılan istekleri iletmek için kurulum. Ancak, Apache Kerkenez işlemini yönetmek için kurulmaz. *Sistemli* kullanın ve temel web uygulamasını başlatmak ve izlemek için bir hizmet dosyası oluşturun. *sistemli,* süreçleri başlatmak, durdurmak ve yönetmek için birçok güçlü özellik sağlayan bir init sistemidir.
+Apache, ' de Kestrel üzerinde çalışan ASP.NET Core uygulamasına `http://localhost:80` yapılan istekleri iletmek için kurulum kuruyor `http://127.0.0.1:5000`. Ancak, Kestrel işlemini yönetmek için Apache ayarlanmamış. Temel Web uygulamasını başlatmak ve izlemek için *systemd* ve hizmet dosyası oluşturma ' yı kullanın. *systemd* , işlem başlatmak, durdurmak ve yönetmek için birçok güçlü özellik sağlayan bir init sistemidir.
 
 ### <a name="create-the-service-file"></a>Hizmet dosyasını oluşturma
 
@@ -202,22 +208,22 @@ Environment=ASPNETCORE_ENVIRONMENT=Production
 WantedBy=multi-user.target
 ```
 
-Önceki örnekte, hizmeti yöneten kullanıcı `User` seçeneği tarafından belirtilir. Kullanıcı (`apache`) var olmalı ve uygulamanın dosyalarının düzgün sahipliğine sahip olmalıdır.
+Yukarıdaki örnekte, hizmeti yöneten Kullanıcı `User` seçeneğiyle belirtilir. Kullanıcı (`apache`) var olmalıdır ve uygulamanın dosyalarının doğru sahipliğini içermelidir.
 
-Uygulamanın ilk kesme sinyalini aldıktan sonra kapanmasını beklemek için süreyi yapılandırmak için kullanın. `TimeoutStopSec` Bu süre içinde uygulama kapanmazsa, uygulamayı sonlandırmak için SIGKILL verilir. Değeri birimsiz saniye (örneğin, `150`), zaman aralığı değeri (örneğin, `infinity` `2min 30s`) olarak veya zaman aralığını devre dışı düşürün. `TimeoutStopSec``DefaultTimeoutStopSec` yönetici yapılandırma dosyasındaki değere varsayılanlar (*systemd-system.conf*, *system.conf.d*, *systemd-user.conf*, *user.conf.d*). Çoğu dağıtım için varsayılan zaman ası 90 saniyedir.
+Uygulamanın `TimeoutStopSec` ilk kesme sinyali aldıktan sonra kapanması için bekleyeceği süreyi yapılandırmak için kullanın. Uygulama bu dönemde kapanmazsa, uygulamayı sonlandırmak için SIGKıLL çıkarılır. Değeri unitless saniyeler (örneğin, `150`), bir zaman aralığı değeri (örneğin, `2min 30s`) veya `infinity` zaman aşımını devre dışı bırakmak için girin. `TimeoutStopSec`Varsayılan olarak, yönetici yapılandırma `DefaultTimeoutStopSec` dosyasındaki değerini alır (*systemd-System. conf*, *System. conf. d*, *systemd-User. conf*, *User. conf. d*). Çoğu dağıtım için varsayılan zaman aşımı 90 saniyedir.
 
 ```
 # The default value is 90 seconds for most distributions.
 TimeoutStopSec=90
 ```
 
-Yapılandırma sağlayıcılarının ortam değişkenlerini okuyabilmesi için bazı değerlerin (örneğin, SQL bağlantı dizeleri) kaçılması gerekir. Yapılandırma dosyasında kullanılmak üzere düzgün bir şekilde kaçan bir değer oluşturmak için aşağıdaki komutu kullanın:
+Yapılandırma sağlayıcılarının ortam değişkenlerini okuyabilmesi için bazı değerler (örneğin, SQL bağlantı dizeleri) kaçışmalıdır. Yapılandırma dosyasında kullanılmak üzere uygun bir kaçış değeri oluşturmak için aşağıdaki komutu kullanın:
 
 ```console
 systemd-escape "<value-to-escape>"
 ```
 
-Kolon`:`( ) ayırıcıları çevre değişken adlarında desteklenmez. Bir kolon yerine`__`bir çift alt çizgi ( ) kullanın. [Çevre Değişkenleri yapılandırma sağlayıcısı,](xref:fundamentals/configuration/index#environment-variables-configuration-provider) ortam değişkenleri yapılandırmaya okunduğunda çift alt puanları iki nokta üst üste dönüştürür. Aşağıdaki örnekte, bağlantı dizesi anahtarı `ConnectionStrings:DefaultConnection` hizmet tanım `ConnectionStrings__DefaultConnection`dosyasına şu şekilde ayarlanır:
+İki nokta`:`() ayırıcılar ortam değişkeni adlarında desteklenmez. İki nokta üst üste yerine`__`çift alt çizgi () kullanın. Ortam değişkenleri [yapılandırma sağlayıcısı](xref:fundamentals/configuration/index#environment-variables-configuration-provider) , ortam değişkenleri yapılandırmaya okurken çift alt çizgileri iki nokta üst üste dönüştürür. Aşağıdaki örnekte, bağlantı dizesi anahtarı `ConnectionStrings:DefaultConnection` hizmet tanımı dosyasına şu şekilde `ConnectionStrings__DefaultConnection`ayarlanır:
 
 ```
 Environment=ConnectionStrings__DefaultConnection={Connection String}
@@ -243,7 +249,7 @@ Main PID: 9021 (dotnet)
             └─9021 /usr/local/bin/dotnet /var/www/helloapp/helloapp.dll
 ```
 
-Ters proxy yapılandırılan ve Kerkenez *sistemi*ile yönetilen ile, web uygulaması tamamen yapılandırılmış ve yerel makinede bir tarayıcıdan erişilebilir `http://localhost`. Yanıt üstbilgilerini inceleyen **Sunucu** üstbilgi, ASP.NET Core uygulamasının Kestrel tarafından sunulduğunu gösterir:
+Ters proxy yapılandırılmış ve *systemd*üzerinden yönetilen Kestrel, Web uygulaması tam olarak yapılandırılır ve adresinden `http://localhost`yerel makinedeki bir tarayıcıdan erişilebilir. Yanıt üst bilgilerini inceleyerek **sunucu** üst bilgisi, ASP.NET Core uygulamasının Kestrel tarafından sunulduğunu belirtir:
 
 ```
 HTTP/1.1 200 OK
@@ -256,13 +262,13 @@ Transfer-Encoding: chunked
 
 ### <a name="view-logs"></a>Günlükleri görüntüleme
 
-Kestrel kullanarak web uygulaması *systemd*kullanılarak yönetildiği için, olaylar ve işlemler merkezi bir günlükte günlüğe kaydedilir. Ancak, bu *günlük, systemd*tarafından yönetilen tüm hizmet ve işlemleriçin girişleri içerir. `kestrel-helloapp.service`-belirli öğeleri görüntülemek için aşağıdaki komutu kullanın:
+Kestrel kullanan Web uygulaması *systemd*kullanılarak yönetildiğinden, olaylar ve süreçler merkezi bir günlüğe kaydedilir. Ancak, bu günlük *systemd*tarafından yönetilen tüm hizmet ve işlemlere ait girişleri içerir. Belirli öğeleri görüntülemek `kestrel-helloapp.service`için aşağıdaki komutu kullanın:
 
 ```bash
 sudo journalctl -fu kestrel-helloapp.service
 ```
 
-Zaman filtreleme için, komutla zaman seçeneklerini belirtin. Örneğin, geçerli `--since today` gün için filtre `--until 1 hour ago` uygulama veya önceki saatin girişlerini görmek için kullanın. Daha fazla bilgi [için journalctl için adam sayfasına](https://www.unix.com/man-page/centos/1/journalctl/)bakın.
+Zaman filtreleme için komutuyla saat seçeneklerini belirtin. Örneğin, geçerli güne `--since today` filtre uygulamak veya `--until 1 hour ago` önceki saatin girişlerini görmek için kullanın. Daha fazla bilgi için bkz. [journalctl için man sayfası](https://www.unix.com/man-page/centos/1/journalctl/).
 
 ```bash
 sudo journalctl -fu kestrel-helloapp.service --since "2016-10-18" --until "2016-10-18 04:00"
@@ -270,37 +276,37 @@ sudo journalctl -fu kestrel-helloapp.service --since "2016-10-18" --until "2016-
 
 ## <a name="data-protection"></a>Veri koruma
 
-[ASP.NET Çekirdek Veri Koruma yığını,](xref:security/data-protection/introduction) kimlik doğrulama ara yazılımları (örneğin, çerez ara yazılımları) ve site ler arası istek sahteciliği (CSRF) korumaları da dahil olmak üzere birkaç ASP.NET Core ara [yazılımtarafından](xref:fundamentals/middleware/index)kullanılır. Veri Koruma API'leri kullanıcı koduyla çağrılmasa bile, veri koruması kalıcı bir şifreleme [anahtar deposu](xref:security/data-protection/implementation/key-management)oluşturacak şekilde yapılandırılmalıdır. Veri koruması yapılandırılmamışsa, anahtarlar bellekte tutulur ve uygulama yeniden başlatıldığında atılır.
+[ASP.NET Core veri koruma yığını](xref:security/data-protection/introduction) , kimlik doğrulama ara yazılımı (örneğin, tanımlama bilgisi ara yazılımı) ve siteler arası istek sahteciliğini önleme (CSRF) korumaları dahil olmak üzere birkaç ASP.NET Core [middlewares](xref:fundamentals/middleware/index)tarafından kullanılır. Veri koruma API 'Leri Kullanıcı kodu tarafından çağrılmasa bile, veri korumasının kalıcı bir şifreleme [anahtarı deposu](xref:security/data-protection/implementation/key-management)oluşturacak şekilde yapılandırılması gerekir. Veri koruması yapılandırılmamışsa, anahtarlar bellekte tutulur ve uygulama yeniden başlatıldığında atılır.
 
-Uygulama yeniden başlatıldığında anahtarlık bellekte depolanırsa:
+Uygulama yeniden başlatıldığında anahtar halkası bellekte depolanıyorsa:
 
-* Tüm çerez tabanlı kimlik doğrulama belirteçleri geçersiz kılındı.
-* Kullanıcıların bir sonraki istekleri üzerine yeniden oturum açmaları gerekmektedir.
-* Anahtarlıkla korunan tüm verilerin şifresi artık çözülemez. Buna [CSRF belirteçleri](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) ve [ASP.NET Core MVC TempData tanımlama bilgileri](xref:fundamentals/app-state#tempdata)de dahil olabilir.
+* Tüm tanımlama bilgisi tabanlı kimlik doğrulama belirteçleri geçersiz kılınır.
+* Kullanıcıların bir sonraki isteğinde yeniden oturum açması gerekir.
+* Anahtar halkası ile korunan tüm veriler artık çözülemez. Bu, [CSRF belirteçlerini](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) ve [ASP.NET Core MVC TempData tanımlama bilgilerini](xref:fundamentals/app-state#tempdata)içerebilir.
 
-Anahtarlık devam etmek ve şifrelemek için veri korumayapılandırmak için bkz:
+Veri korumayı, anahtar halkasını sürdürmek ve şifrelemek üzere yapılandırmak için, bkz.:
 
 * <xref:security/data-protection/implementation/key-storage-providers>
 * <xref:security/data-protection/implementation/key-encryption-at-rest>
 
-## <a name="secure-the-app"></a>Uygulamayı güvenli hale
+## <a name="secure-the-app"></a>Uygulamanın güvenliğini sağlama
 
 ### <a name="configure-firewall"></a>Güvenlik duvarını yapılandırma
 
-*Firewalld* ağ bölgeleri desteği ile güvenlik duvarı yönetmek için dinamik bir daemon olduğunu. Bağlantı noktaları ve paket filtreleme iptables tarafından yönetilebilir. *Firewalld* varsayılan olarak yüklenmelidir. `yum`paketi yüklemek veya yüklü olduğunu doğrulamak için kullanılabilir.
+*Firewallld* , ağ bölgeleri desteğiyle güvenlik duvarını yönetmek için dinamik bir Daemon. Bağlantı noktaları ve paket filtrelemesi, Iptables tarafından hala yönetilebilir. *Firewalld* , varsayılan olarak yüklenmelidir. `yum`paketi yüklemek veya yüklendiğini doğrulamak için kullanılabilir.
 
 ```bash
 sudo yum install firewalld -y
 ```
 
-Yalnızca `firewalld` uygulama için gereken bağlantı noktalarını açmak için kullanın. Bu durumda, port 80 ve 443 kullanılır. Aşağıdaki komutlar kalıcı olarak 80 ve 443 bağlantı noktalarını açmak üzere ayarlar:
+Yalnızca `firewalld` uygulama için gerekli olan bağlantı noktalarını açmak için kullanın. Bu durumda, 80 ve 443 numaralı bağlantı noktası kullanılır. Aşağıdaki komutlar şunları açmak için 80 ve 443 bağlantı noktalarını kalıcı olarak ayarlar:
 
 ```bash
 sudo firewall-cmd --add-port=80/tcp --permanent
 sudo firewall-cmd --add-port=443/tcp --permanent
 ```
 
-Güvenlik duvarı ayarlarını yeniden yükleyin. Varsayılan bölgede kullanılabilir hizmetleri ve bağlantı noktalarını denetleyin. Seçenekler inceleyerek `firewall-cmd -h`kullanılabilir.
+Güvenlik Duvarı ayarlarını yeniden yükleyin. Varsayılan bölgedeki kullanılabilir hizmetleri ve bağlantı noktalarını kontrol edin. Seçenekler inceleyerek `firewall-cmd -h`kullanılabilir.
 
 ```bash
 sudo firewall-cmd --reload
@@ -321,30 +327,30 @@ rich rules:
 
 ### <a name="https-configuration"></a>HTTPS yapılandırması
 
-**Uygulamayı güvenli (HTTPS) yerel bağlantılar için yapılandırın**
+**Uygulamayı güvenli (HTTPS) yerel bağlantılar için yapılandırma**
 
-[Dotnet çalıştır](/dotnet/core/tools/dotnet-run) komutu, uygulamanın özellik tarafından sağlanan URL'leri dinleyecek şekilde yapılandıran *Özellikler/launchSettings.json* dosyasını `applicationUrl` kullanır (örneğin, `https://localhost:5001;http://localhost:5000`).
+[DotNet Run](/dotnet/core/tools/dotnet-run) komutu uygulamanın *Özellikler/launchsettings. JSON* dosyasını kullanır, bu da uygulamayı `applicationUrl` özelliği tarafından belirtilen URL 'lerde dinlemek üzere yapılandırır (örneğin, `https://localhost:5001;http://localhost:5000`).
 
-Aşağıdaki yaklaşımlardan birini kullanarak uygulamayı `dotnet run` komut veya geliştirme ortamı (Visual Studio Code'ta F5 veya Ctrl+F5) için geliştirme aşamasında bir sertifika kullanacak şekilde yapılandırın:
+Aşağıdaki yaklaşımlardan birini kullanarak, uygulamayı `dotnet run` komut veya geliştirme ortamı için geliştirme sırasında (F5 veya CTRL + F5 Visual Studio Code) bir sertifikayı kullanacak şekilde yapılandırın:
 
-* [Yapılandırmadan varsayılan sertifikayı değiştirme](xref:fundamentals/servers/kestrel#configuration) (*Önerilen*)
-* [KestrelServerOptions.ConfigureHttpsDefaults](xref:fundamentals/servers/kestrel#configurehttpsdefaultsactionhttpsconnectionadapteroptions)
+* [Varsayılan sertifikayı yapılandırmadan Değiştir](xref:fundamentals/servers/kestrel#configuration) (*önerilir*)
+* [KestrelServerOptions. ConfigureHttpsDefaults](xref:fundamentals/servers/kestrel#configurehttpsdefaultsactionhttpsconnectionadapteroptions)
 
-**Güvenli (HTTPS) istemci bağlantıları için ters proxy'yi yapılandırın**
+**Güvenli (HTTPS) istemci bağlantıları için ters proxy 'yi yapılandırma**
 
-Https için Apache yapılandırmak için *mod_ssl* modülü kullanılır. *Httpd* modülü *kurulduğunda, mod_ssl* modülü de kuruldu. Yüklenmiyorsa, yapılandırmaya `yum` eklemek için kullanın.
+HTTPS için Apache 'yi yapılandırmak için *mod_ssl* modülü kullanılır. *Httpd* modülü yüklendiğinde *mod_ssl* modülü de yüklendi. Yüklenmemişse, yapılandırmaya eklemek için kullanın `yum` .
 
 ```bash
 sudo yum install mod_ssl
 ```
 
-HTTPS'yi zorlamak `mod_rewrite` için, URL yeniden yazmayı etkinleştirmek için modülü yükleyin:
+HTTPS 'yi zorlamak için, URL `mod_rewrite` yeniden yazmayı etkinleştirmek üzere modülünü yükler:
 
 ```bash
 sudo yum install mod_rewrite
 ```
 
-URL yeniden yazma ve port 443 üzerinde güvenli iletişim etkinleştirmek için *helloapp.conf* dosyasını değiştirin:
+Bağlantı noktası 443 üzerinde URL yeniden yazma ve güvenli iletişim sağlamak için *HelloApp. conf* dosyasını değiştirin:
 
 ```
 <VirtualHost *:*>
@@ -372,7 +378,7 @@ URL yeniden yazma ve port 443 üzerinde güvenli iletişim etkinleştirmek için
 ```
 
 > [!NOTE]
-> Bu örnek, yerel olarak oluşturulan bir sertifika kullanıyor. **SSLCertificateFile** etki alanı adı için birincil sertifika dosyası olmalıdır. **SSLCertificateKeyFile** CSR oluşturulduğunda oluşturulan anahtar dosyası olmalıdır. **SSLCertificateChainFile,** sertifika yetkilisi tarafından sağlanan ara sertifika dosyası (varsa) olmalıdır.
+> Bu örnek, yerel olarak üretilmiş bir sertifika kullanıyor. **Sslcertificatefile** , etki alanı adı için birincil sertifika dosyası olmalıdır. **Sslcertificatekeyfile** , CSR oluşturulduğunda oluşturulan anahtar dosyası olmalıdır. **Sslcertificatechainfile** , sertifika yetkilisi tarafından sağlanan ara sertifika dosyası (varsa) olmalıdır.
 
 Dosyayı kaydedin ve yapılandırmayı test edin:
 
@@ -380,33 +386,33 @@ Dosyayı kaydedin ve yapılandırmayı test edin:
 sudo service httpd configtest
 ```
 
-Apache'yi yeniden başlatın:
+Apache 'i yeniden Başlat:
 
 ```bash
 sudo systemctl restart httpd
 ```
 
-## <a name="additional-apache-suggestions"></a>Ek Apaçi önerileri
+## <a name="additional-apache-suggestions"></a>Ek Apache önerileri
 
-### <a name="restart-apps-with-shared-framework-updates"></a>Paylaşılan çerçeve güncellemeleriyle uygulamaları yeniden başlatın
+### <a name="restart-apps-with-shared-framework-updates"></a>Paylaşılan çerçeve güncelleştirmeleriyle uygulamaları yeniden başlatma
 
-Sunucuda paylaşılan çerçeveyi yükselttikten sonra, sunucu tarafından barındırılan ASP.NET Core uygulamalarını yeniden başlatın.
+Sunucuda paylaşılan Framework 'ü yükselttikten sonra, sunucu tarafından barındırılan ASP.NET Core uygulamaları yeniden başlatın.
 
-### <a name="additional-headers"></a>Ek üstbilgi
+### <a name="additional-headers"></a>Ek üstbilgiler
 
-Kötü amaçlı saldırılara karşı güvenli hale getirmek için, değiştirilmesi veya eklenmesi gereken birkaç üstbilgi vardır. Modülün `mod_headers` yüklü olduğundan emin olun:
+Kötü amaçlı saldırılara karşı korumak için, değiştirilmesi veya eklenmesi gereken birkaç üstbilgi vardır. `mod_headers` Modülün yüklü olduğundan emin olun:
 
 ```bash
 sudo yum install mod_headers
 ```
 
-#### <a name="secure-apache-from-clickjacking-attacks"></a>Apaçi'yi clickjacking saldırılarından koruma
+#### <a name="secure-apache-from-clickjacking-attacks"></a>Tıklama ve tıklama saldırılarına karşı güvenli Apache
 
-*UI telafi saldırısı*olarak da bilinen [Clickjacking,](https://blog.qualys.com/securitylabs/2015/10/20/clickjacking-a-common-implementation-mistake-that-can-put-your-websites-in-danger)bir web sitesi ziyaretçisi şu anda ziyaret ettiklerinden farklı bir sayfadaki bir bağlantıyı veya düğmeyi tıklatmak için kandırıldığı kötü amaçlı bir saldırıdır. Siteyi `X-FRAME-OPTIONS` güvenli hale getirmek için kullanın.
+*UI redki saldırısı*olarak da bilinen [tıklama](https://blog.qualys.com/securitylabs/2015/10/20/clickjacking-a-common-implementation-mistake-that-can-put-your-websites-in-danger), bir Web sitesi ziyaretçisinin bir bağlantı veya düğmeye Şu anda ziyaret ettiğinden farklı bir sayfada tıklanması zor olan kötü amaçlı bir saldırıya neden olur. Sitesini `X-FRAME-OPTIONS` güvenli hale getirmek için kullanın.
 
-Tıklama kaçırma saldırılarını azaltmak için:
+Tıklama saldırılarını azaltmak için:
 
-1. *httpd.conf* dosyasını edin:
+1. *Httpd. conf* dosyasını düzenleyin:
 
    ```bash
    sudo nano /etc/httpd/conf/httpd.conf
@@ -414,29 +420,29 @@ Tıklama kaçırma saldırılarını azaltmak için:
 
    `Header append X-FRAME-OPTIONS "SAMEORIGIN"` satırını ekleyin.
 1. Dosyayı kaydedin.
-1. Apaçi'yi yeniden başlatın.
+1. Apache 'i yeniden başlatın.
 
-#### <a name="mime-type-sniffing"></a>MIME tipi koklama
+#### <a name="mime-type-sniffing"></a>MIME türü algılaması
 
-Üstbilgi, Internet Explorer'ın `X-Content-Type-Options` *MIME koklamasını* (dosyanın `Content-Type` içeriğinden bir dosyanın kini belirleme) engeller. Sunucu üstbilgiyi `Content-Type` `text/html` `nosniff` seçenek kümesiyle ayarlarsa, Internet Explorer `text/html` içeriği dosyanın içeriğinden bağımsız olarak işler.
+Üst `X-Content-Type-Options` bilgi, Internet Explorer 'ın *MIME algılaması* (dosyanın içeriğinden bir dosya `Content-Type` belirleme) gerçekleştirmesini engeller. Sunucu `Content-Type` üstbilgiyi `text/html` `nosniff` seçenek kümesiyle ayarlarsa, Internet Explorer içeriği dosyanın içeriğinden bağımsız olarak `text/html` işler.
 
-*httpd.conf* dosyasını edin:
+*Httpd. conf* dosyasını düzenleyin:
 
 ```bash
 sudo nano /etc/httpd/conf/httpd.conf
 ```
 
-`Header set X-Content-Type-Options "nosniff"` satırını ekleyin. Dosyayı kaydedin. Apaçi'yi yeniden başlatın.
+`Header set X-Content-Type-Options "nosniff"` satırını ekleyin. Dosyayı kaydedin. Apache 'i yeniden başlatın.
 
 ### <a name="load-balancing"></a>Yük Dengeleme
 
-Bu örnek, CentOS 7 ve Kestrel'de Apache'nin aynı örnek makinede nasıl ayarlandığı ve yapılandırılabildiği gösterilmektedir. Tek bir başarısızlık noktası nın olmaması için; *mod_proxy_balancer* kullanarak ve **VirtualHost** değiştirerek Apache proxy sunucusu arkasında web uygulamaları birden fazla örneklerini yönetmek için izin verecek.
+Bu örnek, CentOS 7 ve Kestrel üzerinde Apache 'in aynı örnek makinede nasıl ayarlanacağını ve yapılandırılacağını gösterir. Tek bir hata noktası olmaması için; *mod_proxy_balancer* kullanmak ve **VirtualHost** 'u değiştirmek, Apache proxy sunucusunun arkasındaki Web uygulamalarının birden çok örneğini yönetmeye olanak tanır.
 
 ```bash
 sudo yum install mod_proxy_balancer
 ```
 
-Aşağıda gösterilen yapılandırma dosyasında, bağlantı `helloapp` noktası 5001'de çalışacak şekilde ek bir örnek ayarlanır. *Proxy* bölümü, bakiye *yan isteklerini*yüklemek için iki üyeli bir denge yapılandırması ile ayarlanır.
+Aşağıda gösterilen yapılandırma dosyasında, bağlantı noktası 5001 ' de çalışacak ek `helloapp` bir örneği ayarlanır. *Proxy* bölümü, Yük Dengeleme *istekleri*için iki üyeli bir dengeleyici yapılandırması ile ayarlanır.
 
 ```
 <VirtualHost *:*>
@@ -474,15 +480,15 @@ Aşağıda gösterilen yapılandırma dosyasında, bağlantı `helloapp` noktas�
 </VirtualHost>
 ```
 
-### <a name="rate-limits"></a>Fiyat Limitleri
+### <a name="rate-limits"></a>Oran limitleri
 
-*httpd* modülünde yer alan *mod_ratelimit*kullanarak istemcilerin bant genişliği sınırlanabilir:
+*Httpd* modülüne eklenen *mod_ratelimit*kullanarak, istemcilerin bant genişliği sınırlandırılabilir:
 
 ```bash
 sudo nano /etc/httpd/conf.d/ratelimit.conf
 ```
 
-Örnek dosya, kök konumu altında bant genişliğini 600 KB/sn olarak sınırlar:
+Örnek dosya, bant genişliğini kök konumu altında 600 KB/sn olarak sınırlandırır:
 
 ```
 <IfModule mod_ratelimit.c>
@@ -493,15 +499,15 @@ sudo nano /etc/httpd/conf.d/ratelimit.conf
 </IfModule>
 ```
 
-### <a name="long-request-header-fields"></a>Uzun istek üstbilgi alanları
+### <a name="long-request-header-fields"></a>Uzun istek üst bilgisi alanları
 
-Proxy sunucusu varsayılan ayarları genellikle istek üstbilgi alanları 8.190 bayt ile sınırlandırın. Bir uygulama varsayılan dan daha uzun alanlar gerektirebilir (örneğin, [Azure Etkin Dizinkullanan](https://azure.microsoft.com/services/active-directory/)uygulamalar). Daha uzun alanlar gerekiyorsa, proxy sunucusunun [LimitRequestFieldSize](https://httpd.apache.org/docs/2.4/mod/core.html#LimitRequestFieldSize) yönergesi ayarlama gerektirir. Uygulanacak değer senaryoya bağlıdır. Daha fazla bilgi için sunucunuzun belgelerine bakın.
+Proxy sunucusu varsayılan ayarları, istek üst bilgisi alanlarını genellikle 8.190 bayt ile sınırlar. Bir uygulama, varsayılan değerden daha uzun bir süre gerektirebilir (örneğin, [Azure Active Directory](https://azure.microsoft.com/services/active-directory/)kullanan uygulamalar). Daha uzun alanlar gerekliyse, proxy sunucusunun [LimitRequestFieldSize](https://httpd.apache.org/docs/2.4/mod/core.html#LimitRequestFieldSize) yönergesi ayarlamayı gerektirir. Uygulanacak değer senaryoya bağlıdır. Daha fazla bilgi için sunucunuzun belgelerine bakın.
 
 > [!WARNING]
-> Gerekli `LimitRequestFieldSize` olmadıkça varsayılan değerini artırmayın. Değeri artırmak, arabellek taşması (taşması) ve kötü amaçlı kullanıcıların Hizmet Reddi (DoS) saldırılarına riskini artırır.
+> Gerekli `LimitRequestFieldSize` olmadığı takdirde varsayılan değerini artırmaz. Değerin artırılması, kötü amaçlı kullanıcılar tarafından arabellek taşması (taşma) ve hizmet reddi (DoS) saldırıları riskini artırır.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [Linux'ta .NET Core için ön koşullar](/dotnet/core/linux-prerequisites)
+* [Linux üzerinde .NET Core önkoşulları](/dotnet/core/linux-prerequisites)
 * <xref:test/troubleshoot>
 * <xref:host-and-deploy/proxy-load-balancer>

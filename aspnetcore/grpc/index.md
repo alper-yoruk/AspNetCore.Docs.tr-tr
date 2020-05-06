@@ -1,39 +1,45 @@
 ---
-title: .NET Core'da gRPC'ye Giriş
+title: .NET Core 'da gRPC 'ye giriş
 author: juntaoluo
-description: Kestrel sunucusu ve ASP.NET Core yığını ile gRPC hizmetleri hakkında bilgi edinin.
+description: Kestrel Server ve ASP.NET Core Stack ile gRPC hizmetleri hakkında bilgi edinin.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 09/20/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: grpc/index
-ms.openlocfilehash: d97eea1da28424680a3cfa38102637b1e20ff661
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 2d7d683051fd1eb97f3f57d75bd582109166a6cd
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78667316"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82768854"
 ---
-# <a name="introduction-to-grpc-on-net-core"></a>.NET Core'da gRPC'ye Giriş
+# <a name="introduction-to-grpc-on-net-core"></a>.NET Core 'da gRPC 'ye giriş
 
-Yazar: [John Luo](https://github.com/juntaoluo) ve [James Newton-King](https://twitter.com/jamesnk)
+[John Luo](https://github.com/juntaoluo) ve [James bAyKiNg](https://twitter.com/jamesnk)
 
-[gRPC](https://grpc.io/docs/guides/) bir dil agnostik, yüksek performanslı Uzaktan Yordam Çağrısı (RPC) çerçevesidir.
+[GRPC](https://grpc.io/docs/guides/) , dilden bağımsız, yüksek performanslı bir uzak yordam ÇAĞRıSı (RPC) çerçevesidir.
 
-gRPC'nin başlıca yararları şunlardır:
+GRPC 'nin başlıca avantajları şunlardır:
 * Modern, yüksek performanslı, hafif RPC çerçevesi.
-* Varsayılan olarak Protokol Arabellekleri kullanarak, dil agnostik uygulamalarına izin veren sözleşme ilk API geliştirme.
-* Güçlü bir şekilde yazılan sunucular ve istemciler oluşturmak için birçok dil için kullanılabilir araç.
-* İstemci, sunucu ve çift yönlü akış çağrılarını destekler.
-* Protobuf ikili serileştirme ile azaltılmış ağ kullanımı.
+* Sözleşme-ilk API geliştirmesi, varsayılan olarak protokol arabellekleri kullanarak, dilden bağımsız uygulamalar için izin verir.
+* Birçok dilde araç, kesin türü belirtilmiş sunucu ve istemciler oluşturmak için kullanılabilir.
+* İstemci, sunucu ve iki yönlü akış çağrılarını destekler.
+* Protoarabelleğe ikili serileştirme ile azaltılmış ağ kullanımı.
 
-Bu avantajlar gRPC'yi şunlar için ideal hale getirir:
-* Verimliliğin kritik olduğu hafif mikro hizmetler.
-* Geliştirme için birden fazla dilin gerekli olduğu polyglot sistemleri.
-* Akış isteklerini veya yanıtlarını işlemesi gereken noktadan noktaya gerçek zamanlı hizmetler.
+Bu avantajlar, gRPC 'yi ideal hale getirir:
+* Verimlilik açısından kritik olan hafif mikro hizmetler.
+* Geliştirme için birden fazla dilin gerekli olduğu çok yönlü sistemleri.
+* Akış isteklerini veya yanıtlarını işlemek için gereken noktadan noktaya gerçek zamanlı hizmetler.
 
-## <a name="c-tooling-support-for-proto-files"></a>C# .proto dosyaları için araçlama desteği
+## <a name="c-tooling-support-for-proto-files"></a>. Proto dosyaları için C# araçları desteği
 
-gRPC, API geliştirme için sözleşmeye ilk yaklaşım kullanır. Hizmetler ve iletiler * \*.proto* dosyalarında tanımlanır:
+gRPC, API geliştirmesi için bir sözleşmenin ilk yaklaşımını kullanır. Hizmetler ve mesajlar * \*. proto* dosyalarında tanımlanmıştır:
 
 ```protobuf
 syntax = "proto3";
@@ -51,10 +57,10 @@ message HelloReply {
 }
 ```
 
-.Net hizmetleri, istemcileri ve iletileri için türleri otomatik olarak bir projeye * \*.proto* dosyaları dahil edilerek oluşturulur:
+Hizmetler, istemciler ve iletiler için .net türleri bir projedeki * \*. proto* dosyaları eklenerek otomatik olarak oluşturulur:
 
-* [Grpc.Tools](https://www.nuget.org/packages/Grpc.Tools/) paketine bir paket başvurusu ekleyin.
-* Öğe * \*grubuna .proto* dosyaları ekleyin. `<Protobuf>`
+* [GRPC. Tools](https://www.nuget.org/packages/Grpc.Tools/) paketine bir paket başvurusu ekleyin.
+* * \*. Proto* dosyalarını `<Protobuf>` öğe grubuna ekleyin.
 
 ```xml
 <ItemGroup>
@@ -62,13 +68,13 @@ message HelloReply {
 </ItemGroup>
 ```
 
-gRPC araç lama desteği hakkında <xref:grpc/basics>daha fazla bilgi için bkz.
+GRPC araç desteği hakkında daha fazla bilgi için bkz <xref:grpc/basics>..
 
-## <a name="grpc-services-on-aspnet-core"></a>ASP.NET Core'da gRPC hizmetleri
+## <a name="grpc-services-on-aspnet-core"></a>ASP.NET Core gRPC Hizmetleri
 
-gRPC hizmetleri ASP.NET Core'da barındırılabilir. Hizmetler, günlük, bağımlılık enjeksiyonu (DI), kimlik doğrulama ve yetkilendirme gibi popüler ASP.NET Core özellikleriyle tam entegrasyona sahiptir.
+gRPC Hizmetleri, ASP.NET Core üzerinde barındırılabilir. Hizmetler, günlüğe kaydetme, bağımlılık ekleme (dı), kimlik doğrulama ve yetkilendirme gibi popüler ASP.NET Core özelliklerle tam tümleştirmeye sahiptir.
 
-gRPC hizmet proje şablonu bir başlangıç hizmeti sağlar:
+GRPC hizmeti proje şablonu bir başlatıcı hizmeti sağlar:
 
 ```csharp
 public class GreeterService : Greeter.GreeterBase
@@ -92,7 +98,7 @@ public class GreeterService : Greeter.GreeterBase
 }
 ```
 
-`GreeterService``GreeterBase` `Greeter` *.proto dosyasındaki hizmetten oluşturulan türden \** devralır. Hizmet *Startup.cs*istemciler için erişilebilir hale getirilir:
+`GreeterService``GreeterBase` `Greeter` *, \*. proto* dosyasındaki hizmetten oluşturulan türden devralır. Hizmet, *Startup.cs*içindeki istemciler için erişilebilir hale getirilir:
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -101,11 +107,11 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-ASP.NET Core'daki gRPC hizmetleri hakkında <xref:grpc/aspnetcore>daha fazla bilgi edinmek için bkz.
+ASP.NET Core 'de gRPC hizmetleri hakkında daha fazla bilgi edinmek için <xref:grpc/aspnetcore>bkz..
 
-## <a name="call-grpc-services-with-a-net-client"></a>.NET istemcisi ile gRPC hizmetlerini arayın
+## <a name="call-grpc-services-with-a-net-client"></a>Bir .NET istemcisiyle gRPC hizmetlerini çağırma
 
-gRPC istemcileri [ * \*.proto* dosyalarından oluşturulan](xref:grpc/basics#generated-c-assets)somut istemci türleridir. Somut gRPC istemcisi * \*.proto* dosyasındaki gRPC hizmetine çevrilen yöntemlere sahiptir.
+GRPC istemcileri [ * \*. proto* dosyalarından oluşturulan](xref:grpc/basics#generated-c-assets)somut istemci türleridir. Somut GRPC istemcisinde * \*. proto* dosyasındaki GRPC hizmetine çeviren yöntemler vardır.
 
 ```csharp
 var channel = GrpcChannel.ForAddress("https://localhost:5001");
@@ -117,9 +123,9 @@ var response = await client.SayHelloAsync(
 Console.WriteLine(response.Message);
 ```
 
-Bir gRPC istemcisi, gRPC hizmetine uzun süreli bir bağlantıyı temsil eden bir kanal kullanılarak oluşturulur. Bir kanal kullanılarak `GrpcChannel.ForAddress`oluşturulabilir.
+GRPC istemcisi, bir gRPC hizmeti ile uzun süreli bağlantıyı temsil eden bir kanal kullanılarak oluşturulur. Kullanılarak `GrpcChannel.ForAddress`bir kanal oluşturulabilir.
 
-İstemci oluşturma ve farklı hizmet yöntemlerini <xref:grpc/client>arama hakkında daha fazla bilgi için bkz.
+İstemci oluşturma ve farklı hizmet yöntemlerini çağırma hakkında daha fazla bilgi için bkz <xref:grpc/client>..
 
 [!INCLUDE[](~/includes/gRPCazure.md)]
 

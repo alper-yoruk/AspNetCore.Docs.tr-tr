@@ -5,13 +5,19 @@ description: Formlarla kullanılan yerleşik etiket yardımcılarını açıklar
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/working-with-forms
-ms.openlocfilehash: 5af532db35b858d157f61a6aca30f55d15e9ff1e
-ms.sourcegitcommit: 98bcf5fe210931e3eb70f82fd675d8679b33f5d6
+ms.openlocfilehash: ba523fba60153e2ae804f5a875cfaa1aa8fffedd
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/16/2020
-ms.locfileid: "79416242"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82769108"
 ---
 # <a name="tag-helpers-in-forms-in-aspnet-core"></a>ASP.NET Core formlardaki etiket yardımcıları
 
@@ -27,13 +33,13 @@ Birçok durumda, HTML Yardımcıları belirli bir etiket Yardımcısı için alt
 
 [Form](https://www.w3.org/TR/html401/interact/forms.html) etiketi Yardımcısı:
 
-* MVC denetleyicisi eylemi veya adlandırılmış yol için HTML [\<FORM >](https://www.w3.org/TR/html401/interact/forms.html) `action` öznitelik değeri oluşturur
+* MVC denetleyicisi eylemi veya adlandırılmış yol için HTML [ \<form>](https://www.w3.org/TR/html401/interact/forms.html) `action` öznitelik değeri oluşturur
 
-* Siteler arası istek yasaklamasını engellemek için gizli bir [Istek doğrulama belirteci](/aspnet/mvc/overview/security/xsrfcsrf-prevention-in-aspnet-mvc-and-web-pages) ÜRETIR (http post eylem yönteminde `[ValidateAntiForgeryToken]` özniteliğiyle kullanıldığında)
+* Siteler arası istek yasaklamasını engellemek için gizli bir [Istek doğrulama belirteci](/aspnet/mvc/overview/security/xsrfcsrf-prevention-in-aspnet-mvc-and-web-pages) ÜRETIR (http post eylem yönteminde `[ValidateAntiForgeryToken]` özniteliğiyle birlikte kullanıldığında)
 
-* Yol değerlerine `<Parameter Name>` eklendiği `asp-route-<Parameter Name>` özniteliğini sağlar. `Html.BeginForm` ve `Html.BeginRouteForm` `routeValues` parametreleri benzer işlevlere sahiptir.
+* , `<Parameter Name>` Yol `asp-route-<Parameter Name>` değerlerine eklendiği özniteliği sağlar. Ve `routeValues` `Html.BeginRouteForm` için `Html.BeginForm` parametreler, benzer işlevlere sahiptir.
 
-* Bir HTML Yardımcısı alternatifi `Html.BeginForm` ve `Html.BeginRouteForm`
+* Bir HTML Yardımcısı alternatifi `Html.BeginForm` ve`Html.BeginRouteForm`
 
 Örnek:
 
@@ -48,11 +54,11 @@ Yukarıdaki form etiketi Yardımcısı aşağıdaki HTML 'yi oluşturur:
 </form>
 ```
 
-MVC çalışma zamanı, etiket Yardımcısı öznitelikleri `asp-controller` ve `asp-action`olan `action` öznitelik değerini oluşturur. Form etiketi Yardımcısı ayrıca, siteler arası istek sahteciliği (HTTP POST eylem yönteminde `[ValidateAntiForgeryToken]` özniteliğiyle kullanıldığında) engellemek için gizli bir [Istek doğrulama belirteci](/aspnet/mvc/overview/security/xsrfcsrf-prevention-in-aspnet-mvc-and-web-pages) oluşturur. Bir saf HTML formunun siteler arası istek sahteciliğini önleme 'den korunması zordur, form etiketi Yardımcısı bu hizmeti sizin için sağlar.
+MVC çalışma zamanı, form `action` etiketi yardımcı öznitelikleri `asp-controller` ve ' `asp-action`den öznitelik değeri oluşturur. Form etiketi Yardımcısı ayrıca siteler arası istek sahteciliği (HTTP POST eylem yönteminde `[ValidateAntiForgeryToken]` özniteliğiyle kullanıldığında) engellemek için gizli bir [istek doğrulama belirteci](/aspnet/mvc/overview/security/xsrfcsrf-prevention-in-aspnet-mvc-and-web-pages) oluşturur. Bir saf HTML formunun siteler arası istek sahteciliğini önleme 'den korunması zordur, form etiketi Yardımcısı bu hizmeti sizin için sağlar.
 
 ### <a name="using-a-named-route"></a>Adlandırılmış yol kullanma
 
-`asp-route` Tag Helper özniteliği, HTML `action` özniteliği için de biçimlendirme oluşturabilir. `register` [adlı bir](../../fundamentals/routing.md) uygulama, kayıt sayfası için aşağıdaki biçimlendirmeyi kullanabilir:
+`asp-route` Etiket Yardımcısı ÖZNITELIĞI, HTML `action` özniteliği için de biçimlendirme oluşturabilir. Adlı `register` [yolu](../../fundamentals/routing.md) içeren bir uygulama, kayıt sayfası için aşağıdaki biçimlendirmeyi kullanabilir:
 
 [!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterRoute.cshtml)]
 
@@ -65,13 +71,13 @@ MVC çalışma zamanı, etiket Yardımcısı öznitelikleri `asp-controller` ve 
 ```
 
 >[!NOTE]
->Yerleşik şablonlarla `returnUrl`, yalnızca yetkili bir kaynağa erişmeye çalıştığınızda ancak kimliği doğrulanmamış veya yetkilendirilmeyen otomatik olarak doldurulur. Yetkisiz erişim yapmaya çalıştığınızda, güvenlik ara yazılımı sizi `returnUrl` kümesi ile oturum açma sayfasına yönlendirir.
+>Yerleşik şablonlarla, `returnUrl` yetkili bir kaynağa erişmeye çalıştığınızda ancak kimliği doğrulanmamış veya yetkilendirilmeyen otomatik olarak doldurulur. Yetkisiz erişim yapmaya çalıştığınızda güvenlik ara yazılımı sizi, `returnUrl` küme ile oturum açma sayfasına yönlendirir.
 
 ## <a name="the-form-action-tag-helper"></a>Form eylemi etiketi Yardımcısı
 
-Form eylemi etiketi Yardımcısı, `formaction` özniteliği oluşturulan `<button ...>` veya `<input type="image" ...>` etiketi üzerinde oluşturur. `formaction` özniteliği bir formun verilerini nereden gönderdiğini denetler. `image` ve [\<düğme >](https://www.w3.org/wiki/HTML/Elements/button) öğeleri [\<giriş >](https://www.w3.org/wiki/HTML/Elements/input) öğelerine bağlanır. Form eylemi etiketi Yardımcısı, karşılık gelen öğe için `formaction` bağlantısının oluşturulduğunu denetlemek için birkaç [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) `asp-` özniteliği kullanımını sağlar.
+Form eylemi etiketi Yardımcısı, oluşturulan `formaction` `<button ...>` veya `<input type="image" ...>` etiketteki özniteliği oluşturur. `formaction` Özniteliği bir formun verilerini nereden gönderdiğini denetler. Tür `image` [ve \<düğme>](https://www.w3.org/wiki/HTML/Elements/button) öğeleri [ \<giriş>](https://www.w3.org/wiki/HTML/Elements/input) öğelerine bağlanır. Form eylemi etiketi Yardımcısı, ilgili öğe için hangi `formaction` bağlantının oluşturulduğunu denetlemek için çeşitli [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) `asp-` özniteliklerinin kullanılmasını sağlar.
 
-`formaction`değerini denetlemek için desteklenen [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) öznitelikleri:
+Değerini denetlemek için desteklenen [AnchorTagHelper](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) öznitelikleri `formaction`:
 
 |Öznitelik|Açıklama|
 |---|---|
@@ -80,14 +86,14 @@ Form eylemi etiketi Yardımcısı, `formaction` özniteliği oluşturulan `<butt
 |[ASP-alanı](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-area)|Alanın adı.|
 |[asp-sayfa](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page)|Razor sayfasının adı.|
 |[ASP-Page-Handler](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-page-handler)|Razor sayfası işleyicisinin adı.|
-|[ASP-Route](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route)|Rotanın adı.|
+|[ASP-Route](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route)|Yolun adı.|
 |[ASP-Route-{Value}](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-route-value)|Tek bir URL yol değeri. Örneğin, `asp-route-id="1234"`.|
 |[ASP-All-Route-Data](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-all-route-data)|Tüm rota değerleri.|
 |[ASP-Fragment](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper#asp-fragment)|URL parçası.|
 
 ### <a name="submit-to-controller-example"></a>Denetleyiciye gönder örneği
 
-Aşağıdaki biçimlendirme, giriş veya düğme seçildiğinde formu `HomeController` `Index` eylemine gönderir:
+Aşağıdaki biçimlendirme, formu giriş veya düğme seçildiğinde `Index` eyleme `HomeController` gönderir:
 
 ```cshtml
 <form method="post">
@@ -128,7 +134,7 @@ Aşağıdaki biçimlendirme formu `About` Razor sayfasına gönderir:
 
 ### <a name="submit-to-route-example"></a>Yönlendirme örneğine gönder
 
-`/Home/Test` uç noktasını göz önünde bulundurun:
+`/Home/Test` Uç noktayı göz önünde bulundurun:
 
 ```csharp
 public class HomeController : Controller
@@ -141,7 +147,7 @@ public class HomeController : Controller
 }
 ```
 
-Aşağıdaki biçimlendirme formu `/Home/Test` uç noktasına gönderir.
+Aşağıdaki biçimlendirme formu `/Home/Test` uç noktaya gönderir.
 
 ```cshtml
 <form method="post">
@@ -161,7 +167,7 @@ Aşağıdaki biçimlendirme formu `/Home/Test` uç noktasına gönderir.
 
 ## <a name="the-input-tag-helper"></a>Giriş etiketi Yardımcısı
 
-Giriş etiketi Yardımcısı, bir HTML [\<girişi >](https://www.w3.org/wiki/HTML/Elements/input) öğesini Razor görünüminizdeki bir model ifadesine bağlar.
+Giriş etiketi Yardımcısı, bir HTML [ \<giriş>](https://www.w3.org/wiki/HTML/Elements/input) öğesini Razor görünüminizdeki bir model ifadesine bağlar.
 
 Söz dizimi:
 
@@ -171,15 +177,15 @@ Söz dizimi:
 
 Giriş etiketi Yardımcısı:
 
-* `asp-for` özniteliğinde belirtilen ifade adı için `id` ve `name` HTML özniteliklerini üretir. `asp-for="Property1.Property2"` `m => m.Property1.Property2`eşdeğerdir. İfadenin adı, `asp-for` özniteliği değeri için kullanılan şeydir. Ek bilgi için [ifade adları](#expression-names) bölümüne bakın.
+* Özniteliğinde belirtilen `id` ifade `name` adı için ve HTML özniteliklerini üretir. `asp-for` `asp-for="Property1.Property2"`değerine `m => m.Property1.Property2`eşdeğerdir. İfadenin adı, `asp-for` öznitelik değeri için kullanılan şeydir. Ek bilgi için [ifade adları](#expression-names) bölümüne bakın.
 
-* Model özelliğine uygulanan model türüne ve [veri ek açıklaması](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.iattributeadapter) ÖZNITELIKLERINE göre HTML `type` öznitelik değerini ayarlar
+* Model özelliğine uygulanan `type` model türüne ve [veri ek AÇıKLAMASı](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.iattributeadapter) özniteliklerine göre html öznitelik değerini ayarlar
 
-* Belirtilirse, HTML `type` öznitelik değerinin üzerine yazmaz
+* Belirtildiğinde HTML `type` öznitelik değerinin üzerine yazılmaz
 
 * Model özelliklerine uygulanan [veri ek açıklama](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.iattributeadapter) özniteliklerinden [HTML5](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5) doğrulama öznitelikleri oluşturur
 
-* `Html.TextBoxFor` ve `Html.EditorFor`bir HTML Yardımcısı özelliği örtüşüyor. Ayrıntılar için bkz. **giriş etiketi Yardımcısı Için HTML Yardımcısı alternatifleri** .
+* , Ve `Html.TextBoxFor` `Html.EditorFor`Ile çakışan bir HTML yardımcı özelliğine sahiptir. Ayrıntılar için bkz. **giriş etiketi Yardımcısı Için HTML Yardımcısı alternatifleri** .
 
 * Güçlü yazma sağlar. Özelliğin adı değişirse ve etiket yardımcısını güncelleştirmezseniz aşağıdakine benzer bir hata alırsınız:
 
@@ -194,9 +200,9 @@ Type expected
  could be found (are you missing a using directive or an assembly reference?)
 ```
 
-`Input` Tag Yardımcısı, HTML `type` özniteliğini .NET türüne göre ayarlar. Aşağıdaki tabloda bazı ortak .NET türleri ve oluşturulan HTML türü listelenmekte (her .NET türü listelenmemiştir).
+`Input` Etiket Yardımcısı, HTML `type` özniteliğini .net türüne göre ayarlar. Aşağıdaki tabloda bazı ortak .NET türleri ve oluşturulan HTML türü listelenmekte (her .NET türü listelenmemiştir).
 
-|.NET türü|Giriş türü|
+|.NET türü|Giriş Türü|
 |---|---|
 |Bool|Type = "onay kutusu"|
 |Dize|Type = "metin"|
@@ -207,7 +213,7 @@ Type expected
 
 Aşağıdaki tabloda, giriş etiketi Yardımcısı 'nın belirli giriş türleriyle eşleşecağı bazı ortak [veri ek açıklamaları](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.iattributeadapter) (her doğrulama özniteliği listelenmez) gösterilmektedir:
 
-|Öznitelik|Giriş türü|
+|Öznitelik|Giriş Türü|
 |---|---|
 |EmailAddress|Type = "e-posta"|
 |'Deki|Type = "URL"|
@@ -241,15 +247,15 @@ Yukarıdaki kod, aşağıdaki HTML 'yi oluşturur:
    </form>
 ```
 
-`Email` ve `Password` özelliklerine uygulanan veri ek açıklamaları modelde meta veriler oluşturur. Giriş etiketi Yardımcısı, model meta verilerini kullanır ve [HTML5](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5) `data-val-*` öznitelikleri üretir (bkz. [model doğrulama](../models/validation.md)). Bu öznitelikler, giriş alanlarına iliştirilecek Doğrulayıcıları anlatmaktadır. Bu unobtrusive HTML5 ve [jQuery](https://jquery.com/) doğrulaması sağlar. Unobtrusive özniteliklerinin biçimi `data-val-rule="Error Message"`, burada kural doğrulama kuralının adıdır (örneğin, `data-val-required`, `data-val-email`, `data-val-maxlength`vb.) Öznitelikte bir hata iletisi sağlanırsa, `data-val-rule` özniteliği için değer olarak görüntülenir. Ayrıca, kuralla ilgili ek ayrıntılar sağlayan `data-val-ruleName-argumentName="argumentValue"` form öznitelikleri de vardır, örneğin, `data-val-maxlength-max="1024"`.
+`Email` Ve `Password` özelliklerine uygulanan veri ek açıklamaları modelde meta veriler oluşturur. Giriş etiketi Yardımcısı, model meta verilerini kullanır ve [HTML5](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5) `data-val-*` öznitelikleri üretir (bkz. [model doğrulama](../models/validation.md)). Bu öznitelikler, giriş alanlarına iliştirilecek Doğrulayıcıları anlatmaktadır. Bu unobtrusive HTML5 ve [jQuery](https://jquery.com/) doğrulaması sağlar. `data-val-rule="Error Message"`Unobtrusive öznitelikleri biçimindedir, burada kural doğrulama kuralının adıdır ( `data-val-required`örneğin `data-val-email` `data-val-maxlength`,, vb.) Öznitelikte bir hata iletisi sağlanırsa, `data-val-rule` özniteliği için değer olarak görüntülenir. Ayrıca, kural hakkında ek ayrıntılar sağlayan `data-val-ruleName-argumentName="argumentValue"` formun öznitelikleri de vardır, örneğin `data-val-maxlength-max="1024"` .
 
 ### <a name="html-helper-alternatives-to-input-tag-helper"></a>Giriş etiketi Yardımcısı için HTML Yardımcısı alternatifleri
 
-`Html.TextBox`, `Html.TextBoxFor`, `Html.Editor` ve `Html.EditorFor`, giriş etiketi Yardımcısı ile çakışan özelliklere sahiptir. Giriş etiketi Yardımcısı `type` özniteliğini otomatik olarak ayarlar; `Html.TextBox` ve `Html.TextBoxFor`. `Html.Editor` ve `Html.EditorFor` tanıtıcı koleksiyonları, karmaşık nesneler ve şablonlar; Giriş etiketi Yardımcısı yok. Giriş etiketi Yardımcısı, `Html.EditorFor` ve `Html.TextBoxFor` kesin türdedir (lambda ifadeleri kullanırlar); `Html.TextBox` ve `Html.Editor` değildir (ifade adlarını kullanırlar).
+`Html.TextBox`, `Html.TextBoxFor`ve `Html.Editor` `Html.EditorFor` , giriş etiketi Yardımcısı ile çakışan özelliklere sahiptir. Giriş etiketi Yardımcısı `type` özniteliği otomatik olarak ayarlar; `Html.TextBox` ve `Html.TextBoxFor` değildir. `Html.Editor`ve `Html.EditorFor` idare koleksiyonları, karmaşık nesneler ve şablonlar; Giriş etiketi Yardımcısı yok. Giriş etiketi Yardımcısı ve `Html.EditorFor` `Html.TextBoxFor` kesin olarak türlidir (lambda ifadeleri kullanır); `Html.TextBox` değil (ifade adları kullanır `Html.Editor` ).
 
 ### <a name="htmlattributes"></a>HtmlAttributes
 
-`@Html.Editor()` ve `@Html.EditorFor()`, varsayılan şablonlarını yürütürken `htmlAttributes` adlı özel bir `ViewDataDictionary` girişi kullanır. Bu davranış, isteğe bağlı olarak `additionalViewData` parametreleri kullanılarak genişletilebilir. "HtmlAttributes" anahtarı büyük/küçük harfe duyarlıdır. "HtmlAttributes" anahtarı, `@Html.TextBox()`gibi giriş yardımcılarını geçirilmiş `htmlAttributes` nesnesine benzer şekilde işlenir.
+`@Html.Editor()`ve `@Html.EditorFor()` varsayılan şablonlarını yürütürken `ViewDataDictionary` adlı `htmlAttributes` özel bir giriş kullanın. Bu davranış, isteğe bağlı olarak parametreler `additionalViewData` kullanılarak genişletilmiş şekilde belirlenir. "HtmlAttributes" anahtarı büyük/küçük harfe duyarlıdır. "HtmlAttributes" anahtarı, gibi `htmlAttributes` `@Html.TextBox()`giriş yardımcılarını geçirilmiş nesneye benzer şekilde işlenir.
 
 ```cshtml
 @Html.EditorFor(model => model.YourProperty, 
@@ -258,7 +264,7 @@ Yukarıdaki kod, aşağıdaki HTML 'yi oluşturur:
 
 ### <a name="expression-names"></a>İfade adları
 
-`asp-for` öznitelik değeri, bir lambda ifadesinin bir `ModelExpression` ve sağ tarafıdır. Bu nedenle, `asp-for="Property1"` oluşturulan kodda `m => m.Property1` hale gelir ve bu nedenle `Model`ile önek gerektirmez. "\@" karakterini kullanarak bir satır içi ifadeyi başlatabilir ve `m.`önce taşıyabilirsiniz:
+`asp-for` Öznitelik değeri bir lambda ifadesinin `ModelExpression` bir ve sağ tarafıdır. Bu nedenle `asp-for="Property1"` , `m => m.Property1` ile `Model`öneki gerekmez, oluşturulan kodda olur. "\@" Karakterini kullanarak bir satır içi ifade başlatabilir ve öğesinden önce taşıyabilirsiniz `m.`:
 
 ```cshtml
 @{
@@ -274,26 +280,26 @@ Yukarıdaki kod, aşağıdaki HTML 'yi oluşturur:
 <input type="text" id="joe" name="joe" value="Joe">
 ```
 
-Koleksiyon özellikleriyle `asp-for="CollectionProperty[23].Member"`, `i` değer `23`olduğunda `asp-for="CollectionProperty[i].Member"` aynı adı üretir.
+`asp-for="CollectionProperty[23].Member"` Koleksiyon özellikleriyle, `asp-for="CollectionProperty[i].Member"` değeri `i` `23`olduğu gibi aynı adı oluşturur.
 
-ASP.NET Core MVC `ModelExpression`değerini hesapladığında `ModelState`dahil olmak üzere çeşitli kaynakları inceler. `<input type="text" asp-for="@Name">`göz önünde bulundurun. Hesaplanan `value` özniteliği, öğesinden gelen ilk null olmayan değerdir:
+ASP.NET Core MVC değeri `ModelExpression`hesapladığında, dahil olmak üzere `ModelState`çeşitli kaynakları inceler. Göz `<input type="text" asp-for="@Name">`önünde bulundurun. Hesaplanan `value` öznitelik, öğesinden gelen ilk null olmayan değerdir:
 
-* "Name" anahtarına sahip giriş `ModelState`.
-* İfadenin sonucu `Model.Name`.
+* `ModelState`"Name" anahtarına sahip giriş.
+* İfadenin `Model.Name`sonucu.
 
 ### <a name="navigating-child-properties"></a>Alt özelliklerde gezinme
 
-Ayrıca, görünüm modelinin özellik yolunu kullanarak alt Özellikler ' e gidebilirsiniz. Alt `Address` özelliği içeren daha karmaşık bir model sınıfı düşünün.
+Ayrıca, görünüm modelinin özellik yolunu kullanarak alt Özellikler ' e gidebilirsiniz. Alt `Address` özellik içeren daha karmaşık bir model sınıfı düşünün.
 
 [!code-csharp[](../../mvc/views/working-with-forms/sample/final/ViewModels/AddressViewModel.cs?highlight=1,2,3,4&range=5-8)]
 
 [!code-csharp[](../../mvc/views/working-with-forms/sample/final/ViewModels/RegisterAddressViewModel.cs?highlight=8&range=5-13)]
 
-Görünümde `Address.AddressLine1`bağlandık:
+Görünümünde, şu şekilde `Address.AddressLine1`bağlandık:
 
 [!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterAddress.cshtml?highlight=6)]
 
-`Address.AddressLine1`için aşağıdaki HTML oluşturulmuştur:
+İçin `Address.AddressLine1`aşağıdaki HTML oluşturulur:
 
 ```html
 <input type="text" id="Address_AddressLine1" name="Address.AddressLine1" value="">
@@ -301,7 +307,7 @@ Görünümde `Address.AddressLine1`bağlandık:
 
 ### <a name="expression-names-and-collections"></a>İfade adları ve koleksiyonlar
 
-Örnek, bir dizi `Colors`içeren bir modeldir:
+Örnek, bir dizisi içeren bir model `Colors`:
 
 [!code-csharp[](../../mvc/views/working-with-forms/sample/final/ViewModels/Person.cs?highlight=3&range=5-10)]
 
@@ -315,7 +321,7 @@ public IActionResult Edit(int id, int colorIndex)
 }
 ```
 
-Aşağıdaki Razor, belirli bir `Color` öğesine nasıl erişistediğinizi göstermektedir:
+Aşağıdaki Razor, belirli `Color` bir öğeye nasıl erişistediğinizi göstermektedir:
 
 [!code-HTML[](working-with-forms/sample/final/Views/Demo/EditColor.cshtml)]
 
@@ -323,7 +329,7 @@ Aşağıdaki Razor, belirli bir `Color` öğesine nasıl erişistediğinizi gös
 
 [!code-HTML[](working-with-forms/sample/final/Views/Shared/EditorTemplates/String.cshtml)]
 
-`List<T>`kullanarak örnek:
+Örnek kullanarak `List<T>`:
 
 [!code-csharp[](working-with-forms/sample/final/ViewModels/ToDoItem.cs?range=3-8)]
 
@@ -335,22 +341,22 @@ Aşağıdaki Razor, bir koleksiyonun üzerinde nasıl yineleme yapılacağını 
 
 [!code-HTML[](working-with-forms/sample/final/Views/Shared/EditorTemplates/ToDoItem.cshtml)]
 
-değer bir `asp-for` veya `Html.DisplayFor` denk bir bağlamda kullanılacaksa, mümkünse `foreach` kullanılmalıdır. Genel olarak, `for` bir Numaralandırıcı ayırması gerekmiyorsa, `foreach` daha iyidir (senaryo buna izin veriyorsa). Ancak, bir LINQ ifadesinde bir dizin oluşturucuyu değerlendirmek pahalı olabilir ve simge durumuna küçültülmüş olmalıdır.
+`foreach`değer bir `asp-for` veya `Html.DisplayFor` eşdeğer bağlamda kullanılacaksa, mümkünse kullanılması gerekir. Genel olarak, `for` bir Numaralandırıcı ayırması `foreach` gerekmiyorsa (senaryo buna izin veriyorsa) daha iyidir; Ancak, bir LINQ ifadesinde bir dizin oluşturucuyu değerlendirmek pahalı olabilir ve simge durumuna küçültülmüş olmalıdır.
 
 &nbsp;
 
 >[!NOTE]
->Yukarıdaki açıklamalı örnek kod, listedeki her bir `ToDoItem` erişmek için lambda ifadesinin `@` işleçle nasıl değiştirileceğini gösterir.
+>Yukarıdaki açıklamalı örnek kod, listedeki her birine `@` `ToDoItem` erişmek için lambda ifadesinin işleçle nasıl değiştirileceğini gösterir.
 
 ## <a name="the-textarea-tag-helper"></a>TextArea etiketi Yardımcısı
 
-`Textarea Tag Helper` Tag Yardımcısı giriş etiketi Yardımcısı ile benzerdir.
+`Textarea Tag Helper` Etiket Yardımcısı giriş etiketi Yardımcısı ile benzerdir.
 
-* `id` ve `name` özniteliklerini ve [\<textarea >](https://www.w3.org/wiki/HTML/Elements/textarea) öğesi için modelden veri doğrulama özniteliklerini üretir.
+* , `id` Ve `name` özniteliklerini ve bir [ \<TextArea>](https://www.w3.org/wiki/HTML/Elements/textarea) öğesi için modelden veri doğrulama özniteliklerini üretir.
 
 * Güçlü yazma sağlar.
 
-* HTML Yardımcısı alternatifi: `Html.TextAreaFor`
+* HTML Yardımcısı alternatifi:`Html.TextAreaFor`
 
 Örnek:
 
@@ -376,13 +382,13 @@ Aşağıdaki HTML oluşturulur:
 
 ## <a name="the-label-tag-helper"></a>Etiket etiketi Yardımcısı
 
-* Bir ifade adı için bir [\<label >](https://www.w3.org/wiki/HTML/Elements/label) öğesinde etiket başlık yazısı ve `for` özniteliği oluşturur
+* Bir ifade adı için `for` [ \<etiket>](https://www.w3.org/wiki/HTML/Elements/label) öğesinde etiket başlık yazısını ve özniteliği oluşturur
 
 * HTML Yardımcısı alternatifi: `Html.LabelFor`.
 
-`Label Tag Helper`, saf HTML etiket öğesi üzerinde aşağıdaki avantajları sağlar:
+, `Label Tag Helper` Saf HTML etiket öğesi üzerinde aşağıdaki avantajları sağlar:
 
-* `Display` özniteliğinden açıklayıcı etiket değerini otomatik olarak alırsınız. İstenen görünen ad zaman içinde değişebilir ve `Display` özniteliği ve etiket etiketi Yardımcısı 'nın birleşimi, `Display` her yere uygular.
+* `Display` Öznitelikten açıklayıcı etiket değerini otomatik olarak alırsınız. İstenen görünen ad zaman içinde değişebilir ve öznitelik ve etiket etiketi Yardımcısı 'nın `Display` birleşimi, `Display` kullanıldığı her yere uygulanır.
 
 * Kaynak kodunda daha az biçimlendirme
 
@@ -394,27 +400,27 @@ Aşağıdaki HTML oluşturulur:
 
 [!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterLabel.cshtml?highlight=4)]
 
-`<label>` öğesi için aşağıdaki HTML oluşturulur:
+`<label>` Öğesi IÇIN aşağıdaki HTML oluşturulur:
 
 ```html
 <label for="Email">Email Address</label>
 ```
 
-Etiket etiketi Yardımcısı, `<input>` öğesiyle ilişkili KIMLIK olan "e-posta" `for` öznitelik değerini oluşturdu. Etiket Yardımcıları, doğru ilişkilendirilebilen şekilde tutarlı `id` ve `for` öğeleri oluşturur. Bu örnekteki başlık `Display` özniteliğinden gelir. Modelde bir `Display` özniteliği yoksa, başlık ifadenin Özellik adı olacaktır.
+Etiket etiketi Yardımcısı, `for` `<input>` öğesiyle Ilişkili kimlik olan "e-posta" öznitelik değerini oluşturdu. Etiket Yardımcıları, doğru şekilde `id` ilişkilendirilebilen tutarlı ve `for` öğeleri oluşturur. Bu örnekteki başlık, `Display` özniteliğinden gelir. Modelde bir `Display` öznitelik yoksa, başlık ifadenin Özellik adı olacaktır.
 
 ## <a name="the-validation-tag-helpers"></a>Doğrulama etiketi yardımcıları
 
-İki doğrulama etiketi yardımcıları vardır. `Validation Message Tag Helper` (modelinizdeki tek bir özellik için bir doğrulama iletisi görüntüler) ve `Validation Summary Tag Helper` (doğrulama hatalarının özetini görüntüler). `Input Tag Helper`, model sınıflarınızda bulunan veri ek açıklaması özniteliklerini temel alan giriş öğelerine HTML5 istemci tarafı doğrulama öznitelikleri ekler. Doğrulama de sunucuda gerçekleştirilir. Doğrulama etiketi Yardımcısı, bir doğrulama hatası oluştuğunda bu hata iletilerini görüntüler.
+İki doğrulama etiketi yardımcıları vardır. `Validation Message Tag Helper` (Bu, modelinizde tek bir özellik için bir doğrulama iletisi gösterir) ve `Validation Summary Tag Helper` (doğrulama hatalarının özetini görüntüler). , `Input Tag Helper` Model sınıflarınızda bulunan veri ek açıklaması özniteliklerini temel alan GIRIŞ öğelerine HTML5 istemci tarafı doğrulama öznitelikleri ekler. Doğrulama de sunucuda gerçekleştirilir. Doğrulama etiketi Yardımcısı, bir doğrulama hatası oluştuğunda bu hata iletilerini görüntüler.
 
 ### <a name="the-validation-message-tag-helper"></a>Doğrulama Iletisi etiketi Yardımcısı
 
-* Belirtilen model özelliğinin giriş alanındaki doğrulama hatası mesajlarını bağlayan [span](https://developer.mozilla.org/docs/Web/HTML/Element/span) öğesine [HTML5](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5)`data-valmsg-for="property"` özniteliğini ekler. İstemci tarafı doğrulama hatası oluştuğunda, [jQuery](https://jquery.com/) `<span>` öğesinde hata iletisini görüntüler.
+* Belirtilen model özelliğinin giriş alanındaki doğrulama hatası mesajlarını bağlayan [span](https://developer.mozilla.org/docs/Web/HTML/Element/span) öğesine [HTML5](https://developer.mozilla.org/docs/Web/Guide/HTML/HTML5) `data-valmsg-for="property"` özniteliğini ekler.   İstemci tarafı doğrulama hatası oluştuğunda [jQuery](https://jquery.com/) , `<span>` öğesinde hata iletisini görüntüler.
 
 * Doğrulama de sunucuda gerçekleşir. İstemciler JavaScript devre dışı bırakılmış olabilir ve bazı doğrulamalar yalnızca sunucu tarafında yapılabilir.
 
-* HTML Yardımcısı alternatifi: `Html.ValidationMessageFor`
+* HTML Yardımcısı alternatifi:`Html.ValidationMessageFor`
 
-`Validation Message Tag Helper`, bir HTML [span](https://developer.mozilla.org/docs/Web/HTML/Element/span) öğesinde `asp-validation-for` özniteliğiyle kullanılır.
+, `Validation Message Tag Helper` Bir HTML [span](https://developer.mozilla.org/docs/Web/HTML/Element/span) öğesinde `asp-validation-for` özniteliğiyle kullanılır.
 
 ```cshtml
 <span asp-validation-for="Email"></span>
@@ -428,12 +434,12 @@ Doğrulama Iletisi etiketi Yardımcısı aşağıdaki HTML 'yi oluşturur:
   data-valmsg-replace="true"></span>
 ```
 
-Aynı özellik için bir `Input` etiketi Yardımcısı sonrasında `Validation Message Tag Helper` genellikle kullanırsınız. Bunun yapılması, hataya neden olan girişin yakınında herhangi bir doğrulama hata iletisi görüntüler.
+Genellikle aynı özellik için `Validation Message Tag Helper` bir `Input` etiket Yardımcısı ' nı kullanırsınız. Bunun yapılması, hataya neden olan girişin yakınında herhangi bir doğrulama hata iletisi görüntüler.
 
 > [!NOTE]
 > İstemci tarafı doğrulaması için doğru JavaScript ve [jQuery](https://jquery.com/) betik başvurularını içeren bir görünümsiniz olmalıdır. Daha fazla bilgi için bkz. [model doğrulaması](../models/validation.md) .
 
-Sunucu tarafı doğrulama hatası oluştuğunda (örneğin, özel sunucu tarafı doğrulamadan veya istemci tarafı doğrulaması devre dışı bırakılmışsa), MVC bu hata iletisini `<span>` öğesinin gövdesi olarak koyar.
+Sunucu tarafı doğrulama hatası oluştuğunda (örneğin, özel sunucu tarafı doğrulama veya istemci tarafı doğrulaması devre dışı bırakılmışsa), MVC bu hata iletisini `<span>` öğenin gövdesi olarak koyar.
 
 ```html
 <span class="field-validation-error" data-valmsg-for="Email"
@@ -444,21 +450,21 @@ Sunucu tarafı doğrulama hatası oluştuğunda (örneğin, özel sunucu tarafı
 
 ### <a name="the-validation-summary-tag-helper"></a>Doğrulama Özeti etiketi Yardımcısı
 
-* `asp-validation-summary` özniteliği olan öğeleri `<div>` hedefleri
+* `asp-validation-summary` Özniteliği olan öğeleri hedefler `<div>`
 
-* HTML Yardımcısı alternatifi: `@Html.ValidationSummary`
+* HTML Yardımcısı alternatifi:`@Html.ValidationSummary`
 
-`Validation Summary Tag Helper`, doğrulama iletilerinin özetini göstermek için kullanılır. `asp-validation-summary` öznitelik değeri, aşağıdakilerden herhangi biri olabilir:
+, `Validation Summary Tag Helper` Doğrulama iletilerinin özetini göstermek için kullanılır. `asp-validation-summary` Öznitelik değeri, aşağıdakilerden herhangi biri olabilir:
 
 |ASP-doğrulama-Özet|Görünen doğrulama iletileri|
 |--- |--- |
 |ValidationSummary. All|Özellik ve model düzeyi|
 |Yalnızca ValidationSummary. model|Model|
-|ValidationSummary. None|Yok|
+|ValidationSummary. None|Hiçbiri|
 
 ### <a name="sample"></a>Örnek
 
-Aşağıdaki örnekte, veri modelinde `<input>` öğesinde doğrulama hata iletileri üreten `DataAnnotation` öznitelikleri vardır.  Doğrulama hatası oluştuğunda, doğrulama etiketi Yardımcısı şu hata iletisini görüntüler:
+Aşağıdaki örnekte, veri modelinde, `DataAnnotation` `<input>` öğesinde doğrulama hatası iletileri üreten öznitelikler vardır.  Doğrulama hatası oluştuğunda, doğrulama etiketi Yardımcısı şu hata iletisini görüntüler:
 
 [!code-csharp[](working-with-forms/sample/final/ViewModels/RegisterViewModel.cs)]
 
@@ -489,9 +495,9 @@ Oluşturulan HTML (model geçerli olduğunda):
 
 * Modelinizin özellikleri için [Select](https://www.w3.org/wiki/HTML/Elements/select) ve ilişkili [seçenek](https://www.w3.org/wiki/HTML/Elements/option) öğeleri oluşturur.
 
-* Bir HTML Yardımcısı alternatifi `Html.DropDownListFor` ve `Html.ListBoxFor`
+* Bir HTML Yardımcısı alternatifi `Html.DropDownListFor` ve`Html.ListBoxFor`
 
-`Select Tag Helper` `asp-for`, [Select](https://www.w3.org/wiki/HTML/Elements/select) öğesi için model özelliği adını belirtir ve `asp-items` [seçenek](https://www.w3.org/wiki/HTML/Elements/option) öğelerini belirtir.  Örnek:
+, `Select Tag Helper` `asp-for` [Select](https://www.w3.org/wiki/HTML/Elements/select) öğesi için model özelliği adını belirtir ve `asp-items` [seçenek](https://www.w3.org/wiki/HTML/Elements/option) öğelerini belirtir.  Örneğin:
 
 [!code-HTML[](working-with-forms/sample/final/Views/Home/Index.cshtml?range=4)]
 
@@ -499,7 +505,7 @@ Oluşturulan HTML (model geçerli olduğunda):
 
 [!code-csharp[](working-with-forms/sample/final/ViewModels/CountryViewModel.cs)]
 
-`Index` yöntemi `CountryViewModel`başlatır, seçilen ülkeyi ayarlar ve `Index` görünümüne geçirir.
+Yöntemi öğesini başlatır, seçilen ülkeyi ayarlar ve `Index` görünüme geçirir. `CountryViewModel` `Index`
 
 [!code-csharp[](working-with-forms/sample/final/Controllers/HomeController.cs?range=8-13)]
 
@@ -507,7 +513,7 @@ HTTP POST `Index` yöntemi seçimi görüntüler:
 
 [!code-csharp[](working-with-forms/sample/final/Controllers/HomeController.cs?range=15-27)]
 
-`Index` görünümü:
+`Index` Görünüm:
 
 [!code-cshtml[](working-with-forms/sample/final/Views/Home/Index.cshtml?highlight=4)]
 
@@ -526,15 +532,15 @@ Aşağıdaki HTML 'yi üreten ("CA" seçiliyken):
 ```
 
 > [!NOTE]
-> Etiket Seç Yardımcısı ile `ViewBag` veya `ViewData` kullanmanızı önermiyoruz. Bir görünüm modeli, MVC meta verileri sağlamaya ve genellikle daha az soruna neden olacak daha sağlamdır.
+> Etiket Seç Yardımcısı ile `ViewBag` veya `ViewData` kullanmayı önermiyoruz. Bir görünüm modeli, MVC meta verileri sağlamaya ve genellikle daha az soruna neden olacak daha sağlamdır.
 
-`asp-for` öznitelik değeri özel bir durumdur ve `Model` öneki gerektirmez, diğer etiket Yardımcısı öznitelikleri olur (`asp-items`gibi)
+`asp-for` Öznitelik değeri özel bir durumdur ve bir `Model` ön ek gerektirmez, diğer etiket Yardımcısı öznitelikleri olur (gibi `asp-items`)
 
 [!code-HTML[](working-with-forms/sample/final/Views/Home/Index.cshtml?range=4)]
 
 ### <a name="enum-binding"></a>Sabit Listesi bağlama
 
-`<select>`, `enum` bir özellik ile kullanmak ve `enum` değerlerinden `SelectListItem` öğeleri oluşturmak için kullanışlıdır.
+`<select>` Genellikle bir `enum` özellikle kullanılması ve `SelectListItem` `enum` değerlerden öğeleri oluşturmak kullanışlıdır.
 
 Örnek:
 
@@ -542,11 +548,11 @@ Aşağıdaki HTML 'yi üreten ("CA" seçiliyken):
 
 [!code-csharp[](working-with-forms/sample/final/ViewModels/CountryEnum.cs)]
 
-`GetEnumSelectList` yöntemi bir numaralandırma için `SelectList` nesnesi oluşturur.
+Yöntemi `GetEnumSelectList` , bir numaralandırma `SelectList` için bir nesne oluşturur.
 
 [!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Home/IndexEnum.cshtml?highlight=5)]
 
-Daha zengin bir kullanıcı arabirimi almak için, Numaralandırıcı listenizi `Display` özniteliğiyle işaretleyebilirsiniz:
+Daha zengin bir kullanıcı arabirimi almak için, `Display` Numaralandırıcı listenizi özniteliğiyle işaretleyebilirsiniz:
 
 [!code-csharp[](working-with-forms/sample/final/ViewModels/CountryEnum.cs?highlight=5,7)]
 
@@ -570,9 +576,9 @@ Aşağıdaki HTML oluşturulur:
 
 ### <a name="option-group"></a>Seçenek grubu
 
-HTML [\<SeçenekGrubu >](https://www.w3.org/wiki/HTML/Elements/optgroup) öğesi, görünüm modelinde bir veya daha fazla `SelectListGroup` nesnesi içerdiğinde oluşturulur.
+HTML [ \<SeçenekGrubu>](https://www.w3.org/wiki/HTML/Elements/optgroup) öğesi, görünüm modelinde bir veya daha fazla `SelectListGroup` nesne içerdiğinde oluşturulur.
 
-`CountryViewModelGroup`, `SelectListItem` öğelerini "Kuzey Amerika" ve "Avrupa" gruplarına gruplandırır:
+Öğeleri "Kuzey Amerika" ve "Avrupa" gruplarında `CountryViewModelGroup` gruplandırır: `SelectListItem`
 
 [!code-csharp[](../../mvc/views/working-with-forms/sample/final/ViewModels/CountryViewModelGroup.cs?highlight=5,6,14,20,26,32,38,44&range=6-56)]
 
@@ -603,7 +609,7 @@ Oluşturulan HTML:
 
 ### <a name="multiple-select"></a>Çoklu seçim
 
-`asp-for` özniteliğinde belirtilen özellik bir `IEnumerable`ise, select etiketi Yardımcısı otomatik olarak [birden çok = "Multiple"](https://w3c.github.io/html-reference/select.html) özniteliği oluşturacaktır. Örneğin, aşağıdaki model verildiğinde:
+Öznitelikte belirtilen özellik bir `IEnumerable`Ise, select etiketi Yardımcısı otomatik olarak [birden çok = "çoklu"](https://w3c.github.io/html-reference/select.html) özniteliği oluşturur. `asp-for` Örneğin, aşağıdaki model verildiğinde:
 
 [!code-csharp[](../../mvc/views/working-with-forms/sample/final/ViewModels/CountryViewModelIEnumerable.cs?highlight=6)]
 
@@ -639,13 +645,13 @@ Birden çok sayfada "belirtilmemiş" seçeneğini kullanarak kendinizi bulursan�
 
 [!code-HTML[](working-with-forms/sample/final/Views/Shared/EditorTemplates/CountryViewModel.cshtml)]
 
-HTML [\<seçenek >](https://www.w3.org/wiki/HTML/Elements/option) öğeleri ekleme *hiçbir seçim* durumuyla sınırlı değildir. Örneğin, aşağıdaki görünüm ve eylem yöntemi yukarıdaki koda benzer HTML oluşturur:
+HTML [ \<seçeneği>](https://www.w3.org/wiki/HTML/Elements/option) öğesi ekleme *hiçbir seçim* durumuyla sınırlı değildir. Örneğin, aşağıdaki görünüm ve eylem yöntemi yukarıdaki koda benzer HTML oluşturur:
 
 [!code-csharp[](working-with-forms/sample/final/Controllers/HomeController.cs?name=snippetNone)]
 
 [!code-HTML[](working-with-forms/sample/final/Views/Home/IndexOption.cshtml)]
 
-Geçerli `Country` değerine bağlı olarak doğru `<option>` öğesi seçilecek (`selected="selected"` özniteliğini içerir).
+Geçerli `Country` değere `<option>` bağlı olarak doğru öğe seçilir ( `selected="selected"` özniteliği içerir).
 
 [!code-csharp[](working-with-forms/sample/final/Controllers/HomeController.cs?range=114-119)]
 

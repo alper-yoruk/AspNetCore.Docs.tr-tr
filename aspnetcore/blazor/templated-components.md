@@ -1,40 +1,43 @@
 ---
-title: ASP.NET Blazor Core şablonbileşenleri
+title: Şablonlu bileşenleri ASP.NET Core Blazor
 author: guardrex
-description: Şablonlanmış bileşenlerin bir veya daha fazla UI şablonlarını parametre olarak nasıl kabul edebileceğini ve bu şablonun oluşturma mantığının bir parçası olarak nasıl kullanılabileceğini öğrenin.
+description: Şablonlu bileşenlerin bir veya daha fazla kullanıcı arabirimi şablonunu parametre olarak kabul edip etmesinin, daha sonra bileşenin işleme mantığının bir parçası olarak kullanılabileceği hakkında bilgi edinin.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 03/18/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/templated-components
-ms.openlocfilehash: b57e3fe186402723607e90b1628062f602c77632
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: de603d3520c124b278312e5167a2f8bad14cf6e9
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79989494"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82771073"
 ---
-# <a name="aspnet-core-opno-locblazor-templated-components"></a>ASP.NET Blazor Core şablonbileşenleri
+# <a name="aspnet-core-blazor-templated-components"></a>Şablonlu bileşenleri ASP.NET Core Blazor
 
-Yazar: [Luke Latham](https://github.com/guardrex) ve [Daniel Roth](https://github.com/danroth27)
+, [Luke Latham](https://github.com/guardrex) ve [Daniel Roth](https://github.com/danroth27) tarafından
 
-Şablonbileşenleri, bir veya daha fazla UI şablonlarını parametre olarak kabul eden ve daha sonra bileşenin oluşturma mantığının bir parçası olarak kullanılabilecek bileşenlerdir. Şablonlu bileşenler, normal bileşenlerden daha kullanılabilir olan daha üst düzey bileşenler yazmanıza olanak sağlar. Birkaç örnek şunlardır:
+Şablonlu bileşenler, bir veya daha fazla UI şablonunu parametre olarak kabul eden bileşenlerdir, daha sonra bileşen işleme mantığının bir parçası olarak kullanılabilir. Şablonlu bileşenler, normal bileşenlerden daha yeniden kullanılabilir olan üst düzey bileşenleri yazmanıza izin verir. Birkaç örnek şunlardır:
 
-* Kullanıcının tablonun üstbilgisi, satırları ve altbilgiiçin şablonlar belirtmesine olanak tanıyan tablo bileşeni.
-* Kullanıcının listedeki öğeleri işlemek için şablon belirtmesine olanak tanıyan bir liste bileşeni.
+* Kullanıcının tablo üst bilgisi, satırları ve altbilgisi için şablon belirtmesini sağlayan tablo bileşeni.
+* Bir kullanıcının bir listedeki öğeleri işlemek için şablon belirlemesine izin veren bir liste bileşenidir.
 
 ## <a name="template-parameters"></a>Şablon parametreleri
 
-Şablonlanmış bileşen, bir `RenderFragment` veya daha fazla bileşen parametresi belirtilerek tanımlanır. `RenderFragment<T>` İşleme parçası, işlenebilmek için ui'nin bir kesimini temsil eder. `RenderFragment<T>`render parçası çağrıldığızaman belirtilebilen bir tür parametresi alır.
+Şablonlu bir bileşen, veya `RenderFragment` `RenderFragment<T>`türünde bir veya daha fazla bileşen parametresi belirtilerek tanımlanır. Bir işleme parçası, işlenecek Kullanıcı arabiriminin bir kesimini temsil eder. `RenderFragment<T>`işleme parçası çağrıldığında belirtilebildiği bir tür parametresi alır.
 
-`TableTemplate`Bileşen:
+`TableTemplate`bileşeninde
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/TableTemplate.razor)]
 
-Şablonlu bir bileşen kullanırken, şablon parametreleri parametrelerin adlarıyla eşleşen`TableHeader` alt `RowTemplate` öğeler kullanılarak belirtilebilir (ve aşağıdaki örnekte):
+Şablonlu bir bileşen kullanırken, şablon parametreleri parametrelerin adlarıyla (`TableHeader` ve `RowTemplate` aşağıdaki örnekte) eşleşen alt öğeler kullanılarak belirtilebilir:
 
 ```razor
 <TableTemplate Items="pets">
@@ -50,11 +53,11 @@ Yazar: [Luke Latham](https://github.com/guardrex) ve [Daniel Roth](https://githu
 ```
 
 > [!NOTE]
-> Genel tür kısıtlamaları gelecekteki bir sürümde desteklenir. Daha fazla bilgi için bkz. [genel tür kısıtlamalarına izin ver (dotnet/aspnetcore #8433)](https://github.com/dotnet/aspnetcore/issues/8433).
+> Genel tür kısıtlamaları sonraki sürümlerde desteklenecektir. Daha fazla bilgi için bkz. [genel tür kısıtlamalarına Izin ver (DotNet/aspnetcore #8433)](https://github.com/dotnet/aspnetcore/issues/8433).
 
 ## <a name="template-context-parameters"></a>Şablon bağlam parametreleri
 
-Öğeler olarak `RenderFragment<T>` geçirilen tür bileşeni bağımsız değişkenler adında `context` örtülü bir parametreye sahiptir (örneğin önceki kod örneğinden), `@context.PetId`ancak alt öğedeki `Context` özniteliği kullanarak parametre adını değiştirebilirsiniz. Aşağıdaki örnekte, `RowTemplate` öğenin `Context` özniteliği parametreyi `pet` belirtir:
+Öğe olarak geçirilmiş türdeki `RenderFragment<T>` bileşen bağımsız değişkenleri adlı `context` örtük bir parametreye sahiptir (örneğin, `@context.PetId`Yukarıdaki kod örneğinden), ancak alt öğe üzerindeki `Context` özniteliğini kullanarak parametre adını değiştirebilirsiniz. Aşağıdaki örnekte, `RowTemplate` öğesinin `Context` özniteliği `pet` parametresini belirtir:
 
 ```razor
 <TableTemplate Items="pets">
@@ -69,7 +72,7 @@ Yazar: [Luke Latham](https://github.com/guardrex) ve [Daniel Roth](https://githu
 </TableTemplate>
 ```
 
-Alternatif olarak, bileşen `Context` öğesiüzerinde öznitelik belirtebilirsiniz. Belirtilen `Context` öznitelik tüm belirtilen şablon parametreleri için geçerlidir. Bu, örtülü alt içerik için içerik parametre adını belirtmek istediğinizde (herhangi bir kaydırma alt öğesi olmadan) yararlı olabilir. Aşağıdaki örnekte, `Context` öznitelik öğeüzerinde `TableTemplate` görünür ve tüm şablon parametreleri için geçerlidir:
+Alternatif olarak, bileşen öğesi üzerinde `Context` özniteliğini de belirtebilirsiniz. Belirtilen `Context` öznitelik, belirtilen tüm şablon parametreleri için geçerlidir. Bu, örtük alt içerik (herhangi bir sarmalama alt öğesi olmadan) için içerik parametre adını belirtmek istediğinizde yararlı olabilir. Aşağıdaki örnekte, `Context` özniteliği `TableTemplate` öğesinde görünür ve tüm şablon parametreleri için geçerlidir:
 
 ```razor
 <TableTemplate Items="pets" Context="pet">
@@ -84,13 +87,13 @@ Alternatif olarak, bileşen `Context` öğesiüzerinde öznitelik belirtebilirsi
 </TableTemplate>
 ```
 
-## <a name="generic-typed-components"></a>Genel dakti-yazılı bileşenler
+## <a name="generic-typed-components"></a>Genel olarak yazılmış bileşenler
 
-Şablondaki bileşenler genellikle genel olarak dizilir. Örneğin, değerleri `ListViewTemplate` işlemek `IEnumerable<T>` için genel bir bileşen kullanılabilir. Genel bir bileşen tanımlamak [`@typeparam`](xref:mvc/views/razor#typeparam) için, tür parametrelerini belirtmek için yönergeyi kullanın:
+Şablonlu bileşenler çoğunlukla genel olarak türdedir. Örneğin, değerleri işlemek `ListViewTemplate` `IEnumerable<T>` için genel bir bileşen kullanılabilir. Genel bir bileşen tanımlamak için, tür parametrelerini [`@typeparam`](xref:mvc/views/razor#typeparam) belirtmek için yönergesini kullanın:
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/ListViewTemplate.razor)]
 
-Genel olarak yazılan bileşenleri kullanırken, tür parametresi mümkünse çıkarılır:
+Genel türsüz bileşenleri kullanırken tür parametresi mümkünse algılanır:
 
 ```razor
 <ListViewTemplate Items="pets">
@@ -100,7 +103,7 @@ Genel olarak yazılan bileşenleri kullanırken, tür parametresi mümkünse ç�
 </ListViewTemplate>
 ```
 
-Aksi takdirde, tür parametresi, tür parametresinin adıyla eşleşen bir öznitelik kullanılarak açıkça belirtilmelidir. Aşağıdaki örnekte, `TItem="Pet"` türü belirtir:
+Aksi halde tür parametresi, tür parametresinin adıyla eşleşen bir öznitelik kullanılarak açıkça belirtilmelidir. Aşağıdaki örnekte, `TItem="Pet"` türü belirtir:
 
 ```razor
 <ListViewTemplate Items="pets" TItem="Pet">
