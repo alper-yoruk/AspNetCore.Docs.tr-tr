@@ -7,14 +7,18 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/05/2019
 no-loc:
+- Blazor
+- Identity
 - Let's Encrypt
+- Razor
+- SignalR
 uid: security/docker-https
-ms.openlocfilehash: f2a615093e7b1190962bd1c6ecbcc63f65bfbe7e
-ms.sourcegitcommit: d64ef143c64ee4fdade8f9ea0b753b16752c5998
+ms.openlocfilehash: 74d4a215b81259674fa6c14bdc8f306a3508f71a
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/18/2020
-ms.locfileid: "79511593"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775134"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-over-https"></a>HTTPS üzerinden Docker ile görüntüleri barındırma ASP.NET Core
 
@@ -34,16 +38,16 @@ Bu belgedeki bazı yönergeler için [.NET Core 2,2 SDK](https://dotnet.microsof
 
 ## <a name="certificates"></a>Sertifikalar
 
-Bir etki alanı için [Üretim barındırma](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/) için bir [sertifika yetkilisinden](https://wikipedia.org/wiki/Certificate_authority) bir sertifika gereklidir. [Let's Encrypt](https://letsencrypt.org/) , ücretsiz sertifikalar sunan bir sertifika yetkilisindir.
+Bir etki alanı için [Üretim barındırma](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/) için bir [sertifika yetkilisinden](https://wikipedia.org/wiki/Certificate_authority) bir sertifika gereklidir. [Let's Encrypt](https://letsencrypt.org/), ücretsiz sertifikalar sunan bir sertifika yetkilisindir.
 
-Bu belge, `localhost`üzerinde önceden oluşturulmuş görüntüleri barındırmak için [otomatik olarak imzalanan geliştirme sertifikaları](https://en.wikipedia.org/wiki/Self-signed_certificate) kullanır. Yönergeler, üretim sertifikalarını kullanmaya benzerdir.
+Bu belge, üzerine `localhost`önceden oluşturulmuş görüntüleri barındırmak için otomatik olarak [imzalanan geliştirme sertifikaları](https://en.wikipedia.org/wiki/Self-signed_certificate) kullanır. Yönergeler, üretim sertifikalarını kullanmaya benzerdir.
 
 Üretim sertifikaları için:
 
-* `dotnet dev-certs` aracı gerekli değildir.
+* `dotnet dev-certs` Araç gerekli değildir.
 * Sertifikaların, yönergelerde kullanılan konumda depolanması gerekmez. Herhangi bir konumun çalışması gerekir, ancak bu sertifikalar site dizininizde depolanarak önerilmez.
 
-Aşağıdaki bölümde yer alan yönergeler, Docker 'ın `-v` komut satırı seçeneğini kullanarak sertifikaları kapsayıcılara bağlama. Bir *Dockerfile*içinde `COPY` komutuyla kapsayıcı görüntülerine sertifika ekleyebilirsiniz, ancak bu önerilmez. Sertifikaları bir görüntüye kopyalamak aşağıdaki nedenlerden dolayı önerilmez:
+Aşağıdaki bölümde yer alan yönergeler, Docker 'ın `-v` komut satırı seçeneğini kullanarak sertifikaları kapsayıcılara bağlama. `COPY` *Dockerfile*dosyasında bir komutla kapsayıcı görüntülerine sertifika ekleyebilirsiniz, ancak bunu yapmanız önerilmez. Sertifikaları bir görüntüye kopyalamak aşağıdaki nedenlerden dolayı önerilmez:
 
 * Geliştirici sertifikaları ile test etmek için aynı görüntünün kullanımını zorlaştırır.
 * Üretim sertifikaları ile barındırmak için aynı görüntünün kullanımını zorlaştırır.
@@ -62,7 +66,7 @@ dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { passwo
 dotnet dev-certs https --trust
 ```
 
-Yukarıdaki komutlarda `{ password here }` bir parolayla değiştirin.
+Yukarıdaki komutlarda, öğesini parolayla değiştirin `{ password here }` .
 
 Kapsayıcı görüntüsünü HTTPS için yapılandırılan ASP.NET Core çalıştırın:
 
@@ -82,9 +86,9 @@ dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p { password her
 dotnet dev-certs https --trust
 ```
 
-`dotnet dev-certs https --trust` yalnızca macOS ve Windows 'ta desteklenir. Linux 'ta sertifikalarınızın desteklediği şekilde sertifika almanız gerekir. Büyük olasılıkla, tarayıcınızda sertifikaya güvenmeniz gerekir.
+`dotnet dev-certs https --trust`yalnızca macOS ve Windows 'da desteklenir. Linux 'ta sertifikalarınızın desteklediği şekilde sertifika almanız gerekir. Büyük olasılıkla, tarayıcınızda sertifikaya güvenmeniz gerekir.
 
-Yukarıdaki komutlarda `{ password here }` bir parolayla değiştirin.
+Yukarıdaki komutlarda, öğesini parolayla değiştirin `{ password here }` .
 
 Kapsayıcı görüntüsünü HTTPS için yapılandırılan ASP.NET Core çalıştırın:
 
@@ -104,7 +108,7 @@ dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { passwo
 dotnet dev-certs https --trust
 ```
 
-Yukarıdaki komutlarda `{ password here }` bir parolayla değiştirin.
+Yukarıdaki komutlarda, öğesini parolayla değiştirin `{ password here }` .
 
 Kapsayıcı görüntüsünü HTTPS için yapılandırılan ASP.NET Core çalıştırın:
 

@@ -5,21 +5,27 @@ description: ASP.NET Core tutturucu etiketi yardımcı özniteliklerini ve her b
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/13/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-ms.openlocfilehash: 6bfbad39115c7823b5677d3c52ca64cfb0683037
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 142ad62bbbc25fc5390331b253a6173f064ef162
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78664005"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773971"
 ---
 # <a name="anchor-tag-helper-in-aspnet-core"></a>ASP.NET Core 'de bağlayıcı etiketi Yardımcısı
 
 By [Peter Kellner](https://peterkellner.net) ve [Scott Ade](https://github.com/scottaddie)
 
-[Tutturucu etiketi Yardımcısı](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper) , yeni öznitelikler ekleyerek standart HTML bağlayıcısı (`<a ... ></a>`) etiketini geliştirir. Kurala göre, öznitelik adlarına ön eki eklenmiş olarak `asp-`. İşlenmiş tutturucu öğenin `href` özniteliği değeri, `asp-` özniteliklerinin değerleriyle belirlenir.
+[Tutturucu etiketi Yardımcısı](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper) , yeni öznitelikler ekleyerek standart HTML Tutturucu`<a ... ></a>`() etiketini geliştirir. Kurala göre, öznitelik adları ön ekine sahiptir `asp-`. İşlenmiş tutturucu öğenin `href` öznitelik değeri, `asp-` özniteliklerin değerlerine göre belirlenir.
 
-Etiket Yardımcıları hakkında genel bilgi için bkz. <xref:mvc/views/tag-helpers/intro>.
+Etiket Yardımcıları hakkında genel bilgi için bkz <xref:mvc/views/tag-helpers/intro>..
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/built-in/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
@@ -41,7 +47,7 @@ Oluşturulan HTML:
 <a href="/Speaker">All Speakers</a>
 ```
 
-`asp-controller` özniteliği belirtilirse ve `asp-action` değilse, varsayılan `asp-action` değeri şu anda yürütülmekte olan görünüm ile ilişkili denetleyici eylemi olur. Önceki işaretten `asp-action` atlanırsa ve *HomeController*'ın *Dizin* görünümünde ( */Home*) tutturucu etiketi Yardımcısı kullanılırsa, oluşturulan HTML:
+`asp-controller` Özniteliği belirtilmişse ve `asp-action` yoksa, varsayılan `asp-action` değer şu anda yürütülmekte olan görünümle ilişkili denetleyici eylemi olur. `asp-action` Önceki biçimlendirmeden atlanırsa ve bağlayıcı etiketi Yardımcısı *HomeController*'ın *Dizin* görünümünde (*/Home*) kullanılırsa, oluşturulan HTML:
 
 ```html
 <a href="/Home">All Speakers</a>
@@ -49,7 +55,7 @@ Oluşturulan HTML:
 
 ### <a name="asp-action"></a>ASP-eylem
 
-[ASP-Action](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Action*) öznitelik değeri, oluşturulan `href` özniteliğinde bulunan denetleyici eylemi adını temsil eder. Aşağıdaki biçimlendirme, üretilen `href` özniteliği değerini konuşmacı değerlendirmeleri sayfasına ayarlar:
+[ASP-Action](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Action*) öznitelik değeri, oluşturulan `href` özniteliğe dahil olan denetleyici eylemi adını temsil eder. Aşağıdaki biçimlendirme oluşturulan `href` öznitelik değerini konuşmacı değerlendirmeleri sayfasına ayarlar:
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspAction)]
 
@@ -59,13 +65,13 @@ Oluşturulan HTML:
 <a href="/Speaker/Evaluations">Speaker Evaluations</a>
 ```
 
-`asp-controller` öznitelik belirtilmemişse, geçerli görünümü yürüten görünümü çağıran varsayılan denetleyici kullanılır.
+Hiçbir `asp-controller` öznitelik belirtilmemişse, geçerli görünümü yürüten görünümü çağıran varsayılan denetleyici kullanılır.
 
-`asp-action` öznitelik değeri `Index`ise, URL 'ye hiçbir eylem eklenmez ve bu, varsayılan `Index` eyleminin çağrılması için önde gelen bir eylem değildir. Belirtilen eylem (veya varsayılan olarak) `asp-controller`içinde başvurulan denetleyicide bulunmalıdır.
+`asp-action` Öznitelik değeri Ise `Index`, URL 'ye hiçbir eylem eklenmez ve bu, varsayılan `Index` eylemi çağırmaya önde gelen bir eylem değildir. Belirtilen eylem (veya varsayılan olarak), içinde `asp-controller`başvurulan denetleyicide bulunmalıdır.
 
 ### <a name="asp-route-value"></a>ASP-Route-{Value}
 
-[ASP-Route-{Value}](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.RouteValues*) özniteliği bir joker karakter yolu öneki sunar. `{value}` yer tutucusunu kullanan her türlü değer olası bir yol parametresi olarak yorumlanır. Varsayılan bir yol bulunmazsa, bu rota öneki oluşturulan `href` özniteliğine bir istek parametresi ve değeri olarak eklenir. Aksi takdirde, yol şablonunda değiştirilir.
+[ASP-Route-{Value}](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.RouteValues*) özniteliği bir joker karakter yolu öneki sunar. `{value}` Yer tutucusunu kaplayan herhangi bir değer olası bir yol parametresi olarak yorumlanır. Varsayılan bir yol bulunmazsa, bu rota öneki oluşturulan `href` özniteliğe bir istek parametresi ve değeri olarak eklenir. Aksi takdirde, yol şablonunda değiştirilir.
 
 Aşağıdaki denetleyici eylemini göz önünde bulundurun:
 
@@ -109,21 +115,21 @@ Aşağıdaki MVC görünümünde olduğu gibi, yol ön ekinin eşleşen yönlend
 </html>
 ```
 
-Eşleşen rotada `speakerid` bulunamadığı için aşağıdaki HTML oluşturuldu:
+Eşleşen rotada bulunamadığı için aşağıdaki HTML `speakerid` oluşturuldu:
 
 ```html
 <a href="/Speaker/Detail?speakerid=12">SpeakerId: 12</a>
 ```
 
-`asp-controller` veya `asp-action` belirtilmemişse, aynı varsayılan işleme, `asp-route` özniteliğinde olduğu gibi olur.
+Ya da `asp-controller` `asp-action` belirtilmemişse, aynı varsayılan işleme, `asp-route` özniteliğinde olduğu gibi olur.
 
 ### <a name="asp-route"></a>ASP-Route
 
-[ASP-Route](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Route*) özniteliği, doğrudan adlandırılmış bir yola bağlanan bir URL oluşturmak için kullanılır. [Yönlendirme özniteliklerini](xref:mvc/controllers/routing#attribute-routing)kullanarak, bir yol `SpeakerController` gösterildiği gibi adlandırılabilir ve `Evaluations` eyleminde kullanılır:
+[ASP-Route](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Route*) özniteliği, doğrudan adlandırılmış bir yola bağlanan bir URL oluşturmak için kullanılır. [Yönlendirme özniteliklerini](xref:mvc/controllers/routing#attribute-routing)kullanarak, bir yol, `SpeakerController` öğesinde gösterildiği gibi adlandırılabilir ve `Evaluations` eyleminde kullanılır:
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Controllers/SpeakerController.cs?range=22-24)]
 
-Aşağıdaki biçimlendirmede, `asp-route` özniteliği adlandırılmış yola başvurur:
+Aşağıdaki biçimlendirmede `asp-route` öznitelik, adlandırılmış yola başvurur:
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspRoute)]
 
@@ -133,13 +139,13 @@ Tutturucu etiketi Yardımcısı, */Hoparlörker/değerlendirmeleri*URL 'sini kul
 <a href="/Speaker/Evaluations">Speaker Evaluations</a>
 ```
 
-`asp-route`ek olarak `asp-controller` veya `asp-action` belirtilirse, oluşturulan yol beklediğiniz şekilde olmayabilir. Yol çakışmasını önlemek için, `asp-controller` ve `asp-action` öznitelikleriyle kullanılmamalıdır `asp-route`.
+`asp-controller` Veya `asp-action` buna ek olarak belirtilmişse `asp-route`, oluşturulan yol beklediğiniz gibi olmayabilir. Bir yol çakışmasını `asp-route` önlemek için `asp-controller` ve `asp-action` öznitelikleriyle kullanılmamalıdır.
 
 ### <a name="asp-all-route-data"></a>ASP-All-Route-Data
 
 [ASP-All-Route-Data](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.RouteValues*) özniteliği, anahtar-değer çiftleri sözlüğü oluşturmayı destekler. Anahtar parametre adıdır ve değer parametre değeridir.
 
-Aşağıdaki örnekte, bir sözlük başlatılmış ve Razor görünümüne geçirilir. Alternatif olarak, veriler modelinize iletilebilir.
+Aşağıdaki örnekte, bir sözlük başlatılır ve bir Razor görünüme geçirilir. Alternatif olarak, veriler modelinize iletilebilir.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspAllRouteData)]
 
@@ -149,7 +155,7 @@ Yukarıdaki kod, aşağıdaki HTML 'yi oluşturur:
 <a href="/Speaker/EvaluationsCurrent?speakerId=11&currentYear=true">Speaker Evaluations</a>
 ```
 
-`asp-all-route-data` sözlüğü, aşırı yüklenmiş `Evaluations` eyleminin gereksinimlerini karşılayan bir QueryString oluşturmak üzere düzleştirilir:
+`asp-all-route-data` Sözlük, aşırı yüklenmiş `Evaluations` eylemin gereksinimlerini karşılayan bir QueryString oluşturmak için düzleştirilir:
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Controllers/SpeakerController.cs?range=26-30)]
 
@@ -171,25 +177,25 @@ Karma Etiketler, istemci tarafı uygulamalar oluşturulurken faydalıdır. JavaS
 
 ### <a name="asp-area"></a>ASP-alanı
 
-[ASP-Area](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Area*) özniteliği, uygun yolu ayarlamak için kullanılan alan adını ayarlar. Aşağıdaki örneklerde `asp-area` özniteliğinin yolların yeniden eşleştirmesine neden olduğu gösterilmektedir.
+[ASP-Area](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Area*) özniteliği, uygun yolu ayarlamak için kullanılan alan adını ayarlar. Aşağıdaki örneklerde, `asp-area` özniteliğinin yolların yeniden eşleştirmesine neden olduğu gösterilmektedir.
 
-#### <a name="usage-in-razor-pages"></a>Razor Pages kullanımı
+#### <a name="usage-in-razor-pages"></a>Razor Sayfalarda kullanım
 
-Razor Pages alan ASP.NET Core 2,1 veya sonraki sürümlerde desteklenir.
+RazorSayfa alanı ASP.NET Core 2,1 veya üzeri sürümlerde desteklenir.
 
 Aşağıdaki dizin hiyerarşisini göz önünde bulundurun:
 
 * **{Proje adı}**
-  * **Wwwroot**
+  * **wwwroot**
   * **Alanlar**
-    * **Bağlanabilecek**
+    * **Oturumlar**
       * **Sayfalar**
         * *\_ViewStart. cshtml*
-        * *Index. cshtml*
+        * *Index.cshtml*
         * *Index.cshtml.cs*
   * **Sayfalar**
 
-*Oturum* alanı *dizini* Razor sayfasına başvurmak için yapılan biçimlendirme şunlardır:
+*Oturumlar* alanı *Dizin* Razor sayfasına başvurmak için yapılan biçimlendirme şunlardır:
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspAreaRazorPages)]
 
@@ -200,10 +206,10 @@ Oluşturulan HTML:
 ```
 
 > [!TIP]
-> Razor Pages uygulamasındaki bölgeleri desteklemek için `Startup.ConfigureServices`' de aşağıdakilerden birini yapın:
+> Bir Razor sayfalar uygulamasındaki bölgeleri desteklemek için aşağıdakilerden birini yapın `Startup.ConfigureServices`:
 >
 > * [Uyumluluk sürümünü](xref:mvc/compatibility-version) 2,1 veya üzeri olarak ayarlayın.
-> * [RazorPagesOptions. AllowAreas](xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.AllowAreas*) özelliğini `true`olarak ayarlayın:
+> * [RazorPagesOptions. AllowAreas](xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.AllowAreas*) özelliğini şu şekilde `true`ayarlayın:
 >
 >   [!code-csharp[](samples/TagHelpersBuiltIn/Startup.cs?name=snippet_AllowAreas)]
 
@@ -212,19 +218,19 @@ Oluşturulan HTML:
 Aşağıdaki dizin hiyerarşisini göz önünde bulundurun:
 
 * **{Proje adı}**
-  * **Wwwroot**
+  * **wwwroot**
   * **Alanlar**
     * **Bloglar**
       * **Denetleyiciler**
         * *HomeController.cs*
       * **Görünümler**
-        * **Sayfa**
+        * **Giriş**
           * *AboutBlog. cshtml*
-          * *Index. cshtml*
+          * *Index.cshtml*
         * *\_ViewStart. cshtml*
   * **Denetleyiciler**
 
-`asp-area` "blogları" olarak ayarlamak, Dizin *alanları/bloglarını* bu tutturucu etiketi için ilişkili denetleyicilerin ve görünümlerin yollarına ön ekler. *Aboutblog* görünümüne başvurmak için yapılan biçimlendirme şu şekilde yapılır:
+" `asp-area` Bloglar" ayarı, Dizin *alanları/bloglarını* bu tutturucu etiketi için ilişkili denetleyicilerin ve görünümlerin yollarına ön ekler. *Aboutblog* görünümüne başvurmak için yapılan biçimlendirme şu şekilde yapılır:
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspArea)]
 
@@ -235,13 +241,13 @@ Oluşturulan HTML:
 ```
 
 > [!TIP]
-> MVC uygulamasındaki bölgeleri desteklemek için, yol şablonu varsa alana bir başvuru içermelidir. Bu şablon, başlangıçta `routes.MapRoute` yöntemi çağrısının ikinci parametresiyle temsil edilir *. configure*:
+> MVC uygulamasındaki bölgeleri desteklemek için, yol şablonu varsa alana bir başvuru içermelidir. Bu şablon, başlangıç sırasında `routes.MapRoute` yöntem çağrısının ikinci parametresiyle temsil edilir *. configure*:
 >
 > [!code-csharp[](samples/TagHelpersBuiltIn/Startup.cs?name=snippet_UseMvc&highlight=5)]
 
 ### <a name="asp-protocol"></a>ASP-protokol
 
-[ASP-Protocol](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Protocol*) ÖZNITELIĞI, URL 'nize bir protokol (örneğin, `https`) belirtmektir. Örnek:
+[ASP-Protocol](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Protocol*) ÖZNITELIĞI, URL 'niz için bir protokol (gibi `https`) belirtmek içindir. Örneğin:
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspProtocol)]
 
@@ -255,7 +261,7 @@ Oluşturulan HTML:
 
 ### <a name="asp-host"></a>ASP-ana bilgisayar
 
-[ASP-Host](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Host*) ÖZNITELIĞI, URL 'niz için bir ana bilgisayar adı belirtmektir. Örnek:
+[ASP-Host](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Host*) ÖZNITELIĞI, URL 'niz için bir ana bilgisayar adı belirtmektir. Örneğin:
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspHost)]
 
@@ -267,7 +273,7 @@ Oluşturulan HTML:
 
 ### <a name="asp-page"></a>asp-sayfa
 
-[ASP-Page](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Page*) özniteliği Razor Pages ile kullanılır. Bir bağlayıcı etiketinin `href` öznitelik değerini belirli bir sayfaya ayarlamak için kullanın. Sayfa adının eğik çizgiyle ("/") önek olarak URL 'SI oluşturulur.
+[ASP-Page](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Page*) özniteliği Razor sayfalarla kullanılır. Bir tutturucu etiketinin `href` öznitelik değerini belirli bir sayfaya ayarlamak için kullanın. Sayfa adının eğik çizgiyle ("/") önek olarak URL 'SI oluşturulur.
 
 Aşağıdaki örnek, katılımcı Razor sayfasına işaret eder:
 
@@ -279,7 +285,7 @@ Oluşturulan HTML:
 <a href="/Attendee">All Attendees</a>
 ```
 
-`asp-page` özniteliği `asp-route`, `asp-controller`ve `asp-action` öznitelikleriyle birbirini dışlıyor. Ancak, aşağıdaki biçimlendirmede gösterildiği gibi `asp-page` yönlendirmeyi denetlemek için `asp-route-{value}` ile birlikte kullanılabilir:
+`asp-page` Özniteliği `asp-route`, `asp-controller`, ve `asp-action` öznitelikleriyle birbirini dışlıyor. Ancak, `asp-page` aşağıdaki işaretlemenin gösterdiği `asp-route-{value}` gibi yönlendirmeyi denetlemek için ile birlikte kullanılabilir:
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspPageAspRouteId)]
 
@@ -291,13 +297,13 @@ Oluşturulan HTML:
 
 ### <a name="asp-page-handler"></a>ASP-Page-Handler
 
-[ASP-Page-Handler](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.PageHandler*) özniteliği Razor Pages ile birlikte kullanılır. Belirli sayfa işleyicileriyle bağlantı için tasarlanmıştır.
+[ASP-Page-Handler](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.PageHandler*) özniteliği Razor sayfalarla kullanılır. Belirli sayfa işleyicileriyle bağlantı için tasarlanmıştır.
 
 Aşağıdaki sayfa işleyicisini göz önünde bulundurun:
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Pages/Attendee.cshtml.cs?name=snippet_OnGetProfileHandler)]
 
-Sayfa modelinin ilişkili biçimlendirmesi `OnGetProfile` sayfa işleyicisine bağlanır. Burada, sayfa işleyicisi yöntem adının `On<Verb>` ön eki `asp-page-handler` öznitelik değerinde atlanacaktır. Yöntem zaman uyumsuz olduğunda, `Async` soneki de atlanır.
+Sayfa modelinin ilişkili biçimlendirmesi `OnGetProfile` sayfa işleyicisine bağlanır. Göz önünde `On<Verb>` , sayfa işleyicisi yöntem adının ön eki `asp-page-handler` öznitelik değerinde atlanacaktır. Yöntem zaman uyumsuz olduğunda, `Async` sonek de atlanır.
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspPageHandler)]
 

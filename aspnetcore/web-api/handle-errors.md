@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: prkrishn
 ms.custom: mvc
 ms.date: 12/10/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: web-api/handle-errors
-ms.openlocfilehash: e445fb3d50973643c9cea60395d1ed02c2f5f675
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 7c641fb12e0d06ebd7bb3ce9f878f0469b4a3d8e
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78660890"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775069"
 ---
 # <a name="handle-errors-in-aspnet-core-web-apis"></a>ASP.NET Core Web API 'Lerinde hataları işleme
 
@@ -22,11 +28,11 @@ Bu makalede, ASP.NET Core Web API 'Leriyle hata işlemenin nasıl işleneceği v
 
 ## <a name="developer-exception-page"></a>Geliştirici özel durum sayfası
 
-[Geliştirici özel durum sayfası](xref:fundamentals/error-handling) , sunucu hataları için ayrıntılı yığın izlemeleri almak için kullanışlı bir araçtır. HTTP ardışık düzeninde zaman uyumlu ve zaman uyumsuz özel durumları yakalamak ve hata yanıtları oluşturmak için <xref:Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware> kullanır. Göstermek için aşağıdaki denetleyici eylemini göz önünde bulundurun:
+[Geliştirici özel durum sayfası](xref:fundamentals/error-handling) , sunucu hataları için ayrıntılı yığın izlemeleri almak için kullanışlı bir araçtır. Bu, <xref:Microsoft.AspNetCore.Diagnostics.DeveloperExceptionPageMiddleware> http ardışık düzeninde zaman uyumlu ve zaman uyumsuz özel durumları yakalamak ve hata yanıtları oluşturmak için kullanır. Göstermek için aşağıdaki denetleyici eylemini göz önünde bulundurun:
 
 [!code-csharp[](handle-errors/samples/3.x/Controllers/WeatherForecastController.cs?name=snippet_GetByCity)]
 
-Önceki eylemi test etmek için aşağıdaki `curl` komutunu çalıştırın:
+Önceki eylemi test `curl` etmek için aşağıdaki komutu çalıştırın:
 
 ```bash
 curl -i https://localhost:5001/weatherforecast/chicago
@@ -34,7 +40,7 @@ curl -i https://localhost:5001/weatherforecast/chicago
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core 3,0 ve üzeri sürümlerde geliştirici özel durum sayfasında, istemci HTML biçimli çıkış isteğinde yoksa bir düz metin yanıtı görüntülenir. Aşağıdaki çıktı görüntülenir:
+ASP.NET Core 3,0 ve üzeri sürümlerde geliştirici özel durum sayfasında, istemci HTML biçimli çıkış isteğinde yoksa bir düz metin yanıtı görüntülenir. Şu çıktı görünür:
 
 ```console
 HTTP/1.1 500 Internal Server Error
@@ -68,7 +74,7 @@ Host: localhost:44312
 User-Agent: curl/7.55.1
 ```
 
-Bunun yerine HTML biçimli bir yanıt göstermek için `Accept` HTTP istek üst bilgisini `text/html` medya türüne ayarlayın. Örnek:
+Bunun yerine HTML biçimli bir yanıt göstermek için, `Accept` http istek üst bilgisini `text/html` medya türüne ayarlayın. Örneğin:
 
 ```bash
 curl -i -H "Accept: text/html" https://localhost:5001/weatherforecast/chicago
@@ -115,13 +121,13 @@ HTML biçimli yanıt Postman gibi araçlar aracılığıyla test edilirken yarar
 ::: moniker-end
 
 > [!WARNING]
-> Geliştirici özel durum sayfasını **yalnızca uygulama geliştirme ortamında çalışırken**etkinleştirin. Uygulama üretimde çalıştırıldığında ayrıntılı özel durum bilgilerini herkese açık bir şekilde paylaşmak istemezsiniz. Ortamları yapılandırma hakkında daha fazla bilgi için bkz. <xref:fundamentals/environments>.
+> Geliştirici özel durum sayfasını **yalnızca uygulama geliştirme ortamında çalışırken**etkinleştirin. Uygulama üretimde çalıştırıldığında ayrıntılı özel durum bilgilerini herkese açık bir şekilde paylaşmak istemezsiniz. Ortamları yapılandırma hakkında daha fazla bilgi için bkz <xref:fundamentals/environments>..
 
 ## <a name="exception-handler"></a>Özel durum işleyicisi
 
 Geliştirme dışı ortamlarda, [özel durum Işleme ara yazılımı](xref:fundamentals/error-handling) bir hata yükü oluşturmak için kullanılabilir:
 
-1. `Startup.Configure`' de, ara yazılımı kullanmak için <xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler%2A> çağırın:
+1. ' `Startup.Configure`De, <xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler%2A> ara yazılımı kullanmak için çağırın:
 
     ::: moniker range=">= aspnetcore-3.0"
 
@@ -135,7 +141,7 @@ Geliştirme dışı ortamlarda, [özel durum Işleme ara yazılımı](xref:funda
 
     ::: moniker-end
 
-1. `/error` yoluna yanıt vermek için bir denetleyici eylemi yapılandırın:
+1. `/error` Yola yanıt vermek için bir denetleyici eylemi yapılandırın:
 
     ::: moniker range=">= aspnetcore-3.0"
 
@@ -149,11 +155,11 @@ Geliştirme dışı ortamlarda, [özel durum Işleme ara yazılımı](xref:funda
 
     ::: moniker-end
 
-Yukarıdaki `Error` eylemi istemciye [RFC 7807](https://tools.ietf.org/html/rfc7807)ile uyumlu bir yük gönderir.
+Yukarıdaki `Error` eylem istemciye [RFC 7807](https://tools.ietf.org/html/rfc7807)ile uyumlu bir yük gönderir.
 
 Özel durum Işleme ara yazılımı, yerel geliştirme ortamında daha ayrıntılı içerik üzerinde anlaşılan çıkış de sağlayabilir. Geliştirme ve üretim ortamları genelinde tutarlı bir yük biçimi oluşturmak için aşağıdaki adımları kullanın:
 
-1. `Startup.Configure`, ortama özgü özel durum Işleme ara yazılım örneklerini kaydedin:
+1. ' `Startup.Configure`De, ortama özgü özel durum Işleme ara yazılım örneklerini kaydedin:
 
     ::: moniker range=">= aspnetcore-3.0"
 
@@ -193,8 +199,8 @@ Yukarıdaki `Error` eylemi istemciye [RFC 7807](https://tools.ietf.org/html/rfc7
 
     Yukarıdaki kodda, ara yazılım ile kaydedilir:
 
-    * Geliştirme ortamında `/error-local-development` yolu.
-    * Geliştirmeyen ortamlarda `/error` yolu.
+    * Geliştirme ortamında bir `/error-local-development` yol.
+    * Geliştirme olmayan ortamlarda `/error` bir yolu.
     
 1. Denetleyici eylemlerine öznitelik yönlendirmeyi Uygula:
 
@@ -212,17 +218,17 @@ Yukarıdaki `Error` eylemi istemciye [RFC 7807](https://tools.ietf.org/html/rfc7
 
 ## <a name="use-exceptions-to-modify-the-response"></a>Yanıtı değiştirmek için özel durumları kullanın
 
-Yanıtın içeriği, denetleyicinin dışından değiştirilebilir. ASP.NET 4. x Web API 'sinde, bunu yapmanın bir yolu <xref:System.Web.Http.HttpResponseException> türünü kullanmaktır. ASP.NET Core eşdeğer bir tür içermez. `HttpResponseException` için destek aşağıdaki adımlarla eklenebilir:
+Yanıtın içeriği, denetleyicinin dışından değiştirilebilir. ASP.NET 4. x Web API 'sinde, bunu yapmanın bir yolu <xref:System.Web.Http.HttpResponseException> türünü kullanmaktır. ASP.NET Core eşdeğer bir tür içermez. İçin `HttpResponseException` destek aşağıdaki adımlarla eklenebilir:
 
-1. `HttpResponseException`adlı iyi bilinen bir özel durum türü oluşturun:
+1. Adında `HttpResponseException`iyi bilinen bir özel durum türü oluşturun:
 
     [!code-csharp[](handle-errors/samples/3.x/Exceptions/HttpResponseException.cs?name=snippet_HttpResponseException)]
 
-1. `HttpResponseExceptionFilter`adlı bir eylem filtresi oluşturun:
+1. Adlı `HttpResponseExceptionFilter`bir eylem filtresi oluşturun:
 
     [!code-csharp[](handle-errors/samples/3.x/Filters/HttpResponseExceptionFilter.cs?name=snippet_HttpResponseExceptionFilter)]
 
-1. `Startup.ConfigureServices`, filtre koleksiyonuna eylem filtresini ekleyin:
+1. İçinde `Startup.ConfigureServices`, filtre koleksiyonuna eylem filtresini ekleyin:
 
     ::: moniker range=">= aspnetcore-3.0"
 
@@ -244,7 +250,7 @@ Yanıtın içeriği, denetleyicinin dışından değiştirilebilir. ASP.NET 4. x
 
 ## <a name="validation-failure-error-response"></a>Doğrulama hatası hata yanıtı
 
-Web API denetleyicileri için,, model doğrulama başarısız olduğunda MVC bir <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> yanıt türüyle yanıt verir. MVC, bir doğrulama hatasına yönelik hata yanıtını oluşturmak için <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.InvalidModelStateResponseFactory> sonuçlarını kullanır. Aşağıdaki örnek, varsayılan yanıt türünü `Startup.ConfigureServices`<xref:Microsoft.AspNetCore.Mvc.SerializableError> olarak değiştirmek için fabrikası kullanır:
+Web API denetleyicileri için, bir model doğrulaması başarısız <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails> olduğunda MVC bir yanıt türüyle yanıt verir. MVC, doğrulama hatasına yönelik <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.InvalidModelStateResponseFactory> hata yanıtını oluşturmak için sonuçlarını kullanır. Aşağıdaki örnek, varsayılan yanıt türünü <xref:Microsoft.AspNetCore.Mvc.SerializableError> içinde `Startup.ConfigureServices`olarak değiştirmek için fabrikası kullanır:
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -266,7 +272,7 @@ Web API denetleyicileri için,, model doğrulama başarısız olduğunda MVC bir
 
 ## <a name="client-error-response"></a>İstemci hata yanıtı
 
-Bir *hata sonucu* , 400 veya ÜZERI bir http durum kodu ile sonuç olarak tanımlanır. Web API denetleyicileri için, MVC bir hata sonucunu <xref:Microsoft.AspNetCore.Mvc.ProblemDetails>bir sonuçla dönüştürür.
+Bir *hata sonucu* , 400 veya ÜZERI bir http durum kodu ile sonuç olarak tanımlanır. Web API denetleyicileri için, MVC bir hata sonucunu ile <xref:Microsoft.AspNetCore.Mvc.ProblemDetails>sonucuyla dönüştürür.
 
 ::: moniker range="= aspnetcore-2.1"
 
@@ -284,9 +290,9 @@ Hata yanıtı aşağıdaki yollarla yapılandırılabilir:
 
 ### <a name="implement-problemdetailsfactory"></a>Problemayrıntılar Fabrikası Uygulama
 
-MVC, tüm <xref:Microsoft.AspNetCore.Mvc.ProblemDetails> ve <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails>örneklerini üretmek için `Microsoft.AspNetCore.Mvc.ProblemDetailsFactory` kullanır. Buna istemci hata yanıtları, doğrulama hatası hata yanıtları ve `Microsoft.AspNetCore.Mvc.ControllerBase.Problem` ve <xref:Microsoft.AspNetCore.Mvc.ControllerBase.ValidationProblem> yardımcı yöntemler dahildir.
+MVC, `Microsoft.AspNetCore.Mvc.ProblemDetailsFactory` ve <xref:Microsoft.AspNetCore.Mvc.ProblemDetails> <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails>öğesinin tüm örneklerini üretmek için kullanır. Buna istemci hata yanıtları, doğrulama hatası hata yanıtları ve `Microsoft.AspNetCore.Mvc.ControllerBase.Problem` ve <xref:Microsoft.AspNetCore.Mvc.ControllerBase.ValidationProblem> yardımcı yöntemler dahildir.
 
-Sorun ayrıntıları yanıtını özelleştirmek için `Startup.ConfigureServices``ProblemDetailsFactory` özel bir uygulamasını kaydedin:
+Sorun ayrıntıları yanıtını özelleştirmek için, `ProblemDetailsFactory` içinde `Startup.ConfigureServices`özel bir uygulamasını kaydedin:
 
 ```csharp
 public void ConfigureServices(IServiceCollection serviceCollection)
@@ -308,7 +314,7 @@ Hata yanıtı, [Use ApiBehaviorOptions. ClientErrorMapping](#use-apibehavioropti
 
 ### <a name="use-apibehavioroptionsclienterrormapping"></a>ApiBehaviorOptions. ClientErrorMapping kullanın
 
-`ProblemDetails` yanıtının içeriğini yapılandırmak için <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.ClientErrorMapping%2A> özelliğini kullanın. Örneğin, `Startup.ConfigureServices` aşağıdaki kod 404 yanıtları için `type` özelliğini güncelleştirir:
+`ProblemDetails` Yanıtın içeriğini yapılandırmak için <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.ClientErrorMapping%2A> özelliğini kullanın. Örneğin, aşağıdaki kod 404 yanıtlarının `Startup.ConfigureServices` `type` özelliğini güncelleştirir:
 
 ::: moniker-end
 

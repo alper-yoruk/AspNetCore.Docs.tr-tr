@@ -1,33 +1,37 @@
 ---
-title: gRPC istemci fabrika entegrasyonu .NET Core
+title: .NET Core 'da gRPC istemci fabrikası tümleştirmesi
 author: jamesnk
-description: İstemci fabrikasını kullanarak gRPC istemcilerini nasıl oluşturabilirsiniz öğrenin.
+description: İstemci fabrikasını kullanarak gRPC istemcilerini oluşturmayı öğrenin.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 11/12/2019
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: grpc/clientfactory
-ms.openlocfilehash: 3042bb61367f8b9a9f3142217ad329270ab2cca5
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 42b786b9a4d9b422ccf92d7a329979894a35b275
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78667169"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774723"
 ---
-# <a name="grpc-client-factory-integration-in-net-core"></a>gRPC istemci fabrika entegrasyonu .NET Core
+# <a name="grpc-client-factory-integration-in-net-core"></a>.NET Core 'da gRPC istemci fabrikası tümleştirmesi
 
-gRPC entegrasyonu `HttpClientFactory` ile gRPC istemcileri oluşturmak için merkezi bir yol sunar. Tek [başına gRPC istemci örneklerini yapılandırmaya](xref:grpc/client)alternatif olarak kullanılabilir. Fabrika entegrasyonu [Grpc.Net.ClientFactory](https://www.nuget.org/packages/Grpc.Net.ClientFactory) NuGet paketinde mevcuttur.
+ile gRPC tümleştirmesi `HttpClientFactory` , GRPC istemcileri oluşturmaya yönelik merkezi bir yöntem sunar. [Tek başına gRPC istemci örneklerini yapılandırmaya](xref:grpc/client)alternatif olarak kullanılabilir. Fabrika tümleştirmesi, [GRPC .net. ClientFactory](https://www.nuget.org/packages/Grpc.Net.ClientFactory) NuGet paketinde bulunabilir.
 
 Fabrika aşağıdaki avantajları sunar:
 
 * Mantıksal gRPC istemci örneklerini yapılandırmak için merkezi bir konum sağlar
-* Altta yatan ömrü yönetir`HttpClientMessageHandler`
-* Core gRPC hizmeti ASP.NETnde son tarihin otomatik olarak yayılması ve iptal edilmesi
+* Temeldeki bir yaşam süresini yönetir`HttpClientMessageHandler`
+* ASP.NET Core gRPC hizmetinde son tarih ve iptali otomatik olarak yayma
 
-## <a name="register-grpc-clients"></a>gRPC istemcilerini kaydedin
+## <a name="register-grpc-clients"></a>GRPC istemcilerini kaydetme
 
-Bir gRPC istemcisi `AddGrpcClient` kaydetmek için, genel `Startup.ConfigureServices`uzatma yöntemi içinde kullanılabilir , gRPC dakti-si istemci sınıfı ve hizmet adresi belirterek:
+Bir gRPC istemcisini kaydetmek için, genel `AddGrpcClient` genişletme yöntemi Içinde `Startup.ConfigureServices`, GRPC türü belirtilmiş istemci sınıfı ve hizmet adresi belirtilerek kullanılabilir:
 
 ```csharp
 services.AddGrpcClient<Greeter.GreeterClient>(o =>
@@ -36,7 +40,7 @@ services.AddGrpcClient<Greeter.GreeterClient>(o =>
 });
 ```
 
-gRPC istemci türü bağımlılık enjeksiyonu (DI) ile geçici olarak kaydedilir. İstemci artık doğrudan DI tarafından oluşturulan türlerde enjekte edilebilir ve tüketilebilir. ASP.NET Core MVC SignalR denetleyicileri, hub'lar ve gRPC hizmetleri gRPC istemcilerinin otomatik olarak enjekte edilebildiği yerlerdir:
+GRPC istemci türü, bağımlılık ekleme (dı) ile geçici olarak kaydedilir. İstemci artık, DI tarafından oluşturulan türlere eklenebilir ve doğrudan tüketilebilir. ASP.NET Core MVC denetleyicileri, SignalR hub 'Lar ve GRPC Hizmetleri, GRPC istemcilerinin otomatik olarak eklenebilir yer lardır:
 
 ```csharp
 public class AggregatorService : Aggregator.AggregatorBase
@@ -63,9 +67,9 @@ public class AggregatorService : Aggregator.AggregatorBase
 }
 ```
 
-## <a name="configure-httpclient"></a>Yapılandırma httpClient
+## <a name="configure-httpclient"></a>HttpClient 'ı yapılandırma
 
-`HttpClientFactory`gRPC `HttpClient` istemcisi tarafından kullanılan oluşturur. Standart `HttpClientFactory` yöntemler giden istek ara eklemek veya altta yatan `HttpClientHandler` yapılandırmak `HttpClient`için kullanılabilir:
+`HttpClientFactory`gRPC `HttpClient` istemcisi tarafından kullanılan öğesini oluşturur. Standart `HttpClientFactory` Yöntemler, `HttpClientHandler` `HttpClient`giden istek ara yazılımı eklemek veya öğesinin temelini yapılandırmak için kullanılabilir:
 
 ```csharp
 services
@@ -81,14 +85,14 @@ services
     });
 ```
 
-Daha fazla bilgi için Bkz. [IHttpClientFactory'yi kullanarak HTTP isteklerini gerçekleştirin.](xref:fundamentals/http-requests)
+Daha fazla bilgi için bkz. [ıhttpclientfactory kullanarak http Istekleri oluşturma](xref:fundamentals/http-requests).
 
-## <a name="configure-channel-and-interceptors"></a>Kanal ve Durdurucuları Yapılandırma
+## <a name="configure-channel-and-interceptors"></a>Kanalı ve Yakacıları yapılandırma
 
-gRPC'ye özgü yöntemler şunlardır:
+gRPC 'ye özgü Yöntemler şu şekilde kullanılabilir:
 
-* gRPC istemcisinin temel kanalLarını yapılandırın.
-* istemcinin gRPC aramaları yaparken kullanacağı örnekleri ekleyin. `Interceptor`
+* Bir gRPC istemcisinin temel kanalını yapılandırın.
+* İstemcisinin `Interceptor` GRPC çağrıları yaparken kullanacağı örnekleri ekleyin.
 
 ```csharp
 services
@@ -103,11 +107,11 @@ services
     });
 ```
 
-## <a name="deadline-and-cancellation-propagation"></a>Son tarih ve iptal yayılımı
+## <a name="deadline-and-cancellation-propagation"></a>Son Tarih ve iptal yayma
 
-bir gRPC hizmetinde fabrika tarafından oluşturulan gRPC `EnableCallContextPropagation()` istemcileri, son tarihi ve iptal jetonunu çocuk çağrılarına otomatik olarak yaymak üzere yapılandırılabilir. Uzatma `EnableCallContextPropagation()` yöntemi [Grpc.AspNetCore.Server.ClientFactory](https://www.nuget.org/packages/Grpc.AspNetCore.Server.ClientFactory) NuGet paketinde mevcuttur.
+bir gRPC hizmetinde fabrika tarafından oluşturulan gRPC istemcileri, son tarih ve iptal belirtecini `EnableCallContextPropagation()` alt çağrılara otomatik olarak yaymak üzere ile yapılandırılabilir. `EnableCallContextPropagation()` Genişletme yöntemi [GRPC. Aspnetcore. Server. clientfactory](https://www.nuget.org/packages/Grpc.AspNetCore.Server.ClientFactory) NuGet paketinde bulunur.
 
-Mevcut gRPC istek bağlamından son tarih ve iptal belirteci okuyarak ve bunları otomatik olarak gRPC istemcisi tarafından yapılan giden aramalara çoğaltarak çağrı bağlamı yayılımı çalışır. Çağrı bağlamı yayılımı, karmaşık, iç içe açılan gRPC senaryolarının her zaman son tarihi ve iptali yaymasını sağlamanın mükemmel bir yoludur.
+Çağrı bağlamı yayma, geçerli gRPC isteği bağlamından son tarih ve iptal belirtecini okuyarak ve bunları otomatik olarak gRPC istemcisi tarafından yapılan giden çağrılara yayarak işe yarar. Çağrı bağlamı yayma, karmaşık, iç içe gRPC senaryolarının her zaman son tarihi ve iptali yaymasını sağlamaya yönelik mükemmel bir yoldur.
 
 ```csharp
 services
@@ -118,7 +122,7 @@ services
     .EnableCallContextPropagation();
 ```
 
-Son tarihler ve RPC iptali hakkında daha fazla bilgi için [RPC yaşam döngüsüne](https://www.grpc.io/docs/guides/concepts/#rpc-life-cycle)bakın.
+Son tarihler ve RPC iptali hakkında daha fazla bilgi için bkz. [RPC yaşam döngüsü](https://www.grpc.io/docs/guides/concepts/#rpc-life-cycle).
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

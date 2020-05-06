@@ -4,21 +4,27 @@ author: rick-anderson
 description: ASP.NET Core veri koruma API 'Leri ile ilişkili olduğu için amaç dize hiyerarşisi ve çok kiracılı olma hakkında bilgi edinin.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/consumer-apis/purpose-strings-multitenancy
-ms.openlocfilehash: 1133d40e7b325d58b3f70e7387494dae36ff8ac9
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 73edb8082d2df263bc1e6d73fee1360fa6840514
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78664754"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776779"
 ---
 # <a name="purpose-hierarchy-and-multi-tenancy-in-aspnet-core"></a>ASP.NET Core 'de amaç hiyerarşisi ve çok kiracılı
 
-`IDataProtector` de örtük bir `IDataProtectionProvider`olduğundan, amaçları birlikte zincirleme olabilir. Bu anlamda, `provider.CreateProtector([ "purpose1", "purpose2" ])` `provider.CreateProtector("purpose1").CreateProtector("purpose2")`eşdeğerdir.
+Ayrıca, `IDataProtector` örtük bir `IDataProtectionProvider`şekilde de olduğu için, bir amaç birlikte zincirlenebilir. Bu anlamda `provider.CreateProtector([ "purpose1", "purpose2" ])` ile `provider.CreateProtector("purpose1").CreateProtector("purpose2")`eşdeğerdir.
 
-Bu, veri koruma sistemi aracılığıyla bazı ilginç hiyerarşik ilişkilerin kullanılmasına olanak tanır. [Contoso. Messaging. securemessage](xref:security/data-protection/consumer-apis/purpose-strings#data-protection-contoso-purpose)' in önceki örneğinde, securemessage bileşeni, ön uca `provider.CreateProtector("Contoso.Messaging.SecureMessage")` çağırabilir ve sonucu özel bir `_myProvider` alanına önbelleğe alabilir. Daha sonra, `_myProvider.CreateProtector("User: username")`çağrıları aracılığıyla daha sonra oluşturulabilir ve bu koruyucular tek tek iletilerin güvenliğini sağlamak için kullanılır.
+Bu, veri koruma sistemi aracılığıyla bazı ilginç hiyerarşik ilişkilerin kullanılmasına olanak tanır. [Contoso. Messaging. securemessage](xref:security/data-protection/consumer-apis/purpose-strings#data-protection-contoso-purpose)dosyasındaki önceki örnekte, securemessage bileşeni bir `provider.CreateProtector("Contoso.Messaging.SecureMessage")` kez önyükleyebilir ve sonucu özel `_myProvider` bir alana önbelleğe alabilir. Daha sonra, yapılan `_myProvider.CreateProtector("User: username")`çağrılar aracılığıyla daha sonra oluşturulabilir ve bu koruyucular tek tek iletilerin güvenliğini sağlamak için kullanılır.
 
-Bu, ayrıca çevrilebilir. Birden çok kiracıyı barındıran tek bir mantıksal uygulamayı düşünün (bir CMS makul görünmektedir) ve her kiracı kendi kimlik doğrulama ve durum yönetim sistemiyle yapılandırılabilir. Şemsiye uygulaması tek bir ana sağlayıcıya sahiptir ve her kiracının veri koruma sisteminin yalıtılmış dilimine izin vermesi için `provider.CreateProtector("Tenant 1")` ve `provider.CreateProtector("Tenant 2")` çağırır. Kiracılar daha sonra kendi ihtiyaçlarına göre kendi bireysel koruyucularını türetebilir, ancak bunları ne kadar zor bir şekilde, sistemdeki diğer kiracılarla çakıştıkları bir koruyucu oluşturamazlar. Grafik olarak, aşağıda gösterildiği gibi gösterilir.
+Bu, ayrıca çevrilebilir. Birden çok kiracıyı barındıran tek bir mantıksal uygulamayı düşünün (bir CMS makul görünmektedir) ve her kiracı kendi kimlik doğrulama ve durum yönetim sistemiyle yapılandırılabilir. Şemsiye uygulaması tek bir ana sağlayıcıya sahiptir ve her kiracıya veri `provider.CreateProtector("Tenant 1")` koruma `provider.CreateProtector("Tenant 2")` sisteminin yalıtılmış dilimine vermek için ve çağırır. Kiracılar daha sonra kendi ihtiyaçlarına göre kendi bireysel koruyucularını türetebilir, ancak bunları ne kadar zor bir şekilde, sistemdeki diğer kiracılarla çakıştıkları bir koruyucu oluşturamazlar. Grafik olarak, aşağıda gösterildiği gibi gösterilir.
 
 ![Çoklu kiracı amaçları](purpose-strings-multitenancy/_static/purposes-multi-tenancy.png)
 

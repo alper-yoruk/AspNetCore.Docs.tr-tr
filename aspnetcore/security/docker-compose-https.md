@@ -1,69 +1,73 @@
 ---
-title: HTTPS ile komandite oluşturmayı kullanarak konteynerde ASP.NET Core görüntüsünü barındırma
+title: HTTPS ile Docker Compose kullanarak kapsayıcıda ASP.NET Core görüntü barındırma
 author: ravipal
-description: Docker Compose over HTTPS ile ASP.NET Core Görüntüleri nasıl barındırılanın öğrenin
+description: HTTPS üzerinden Docker Compose ile ASP.NET Core görüntülerinin nasıl barındırılacağını öğrenin
 monikerRange: '>= aspnetcore-2.1'
 ms.author: ravipal
 ms.custom: mvc
 ms.date: 03/28/2020
 no-loc:
+- Blazor
+- Identity
 - Let's Encrypt
+- Razor
+- SignalR
 uid: security/docker-compose-https
-ms.openlocfilehash: 616ccf906e98534ffda08c0c2b6d0a171f063cc1
-ms.sourcegitcommit: d03905aadf5ceac39fff17706481af7f6c130411
+ms.openlocfilehash: 533d86fb17e3c89fdca59685b090645a11ba5473
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2020
-ms.locfileid: "80381826"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775147"
 ---
-# <a name="hosting-aspnet-core-images-with-docker-compose-over-https"></a>Docker Compose ile ASP.NET Core görüntülerini HTTPS üzerinden barındırma
+# <a name="hosting-aspnet-core-images-with-docker-compose-over-https"></a>HTTPS üzerinden Docker Compose olan ASP.NET Core görüntülerini barındırma
 
 
-ASP.NET Core [varsayılan olarak HTTPS](/aspnet/core/security/enforcing-ssl)kullanır. [HTTPS](https://en.wikipedia.org/wiki/HTTPS) güven, kimlik ve şifreleme [sertifikalarına](https://en.wikipedia.org/wiki/Public_key_certificate) dayanır.
+ASP.NET Core [Varsayılan olarak https](/aspnet/core/security/enforcing-ssl)kullanır. [Https](https://en.wikipedia.org/wiki/HTTPS) , güven, kimlik ve şifreleme için [sertifikalara](https://en.wikipedia.org/wiki/Public_key_certificate) bağımlıdır.
 
-Bu belge, önceden oluşturulmuş kapsayıcı görüntülerinin HTTPS ile nasıl çalıştırılabildiğini açıklar.
+Bu belgede önceden oluşturulmuş kapsayıcı görüntülerinin HTTPS ile nasıl çalıştırılacağı açıklanmaktadır.
 
-Geliştirme [senaryoları](https://github.com/dotnet/dotnet-docker/blob/master/samples/run-aspnetcore-https-development.md) için HTTPS üzerinden Docker ile ASP.NET Temel Uygulamalar Geliştirme bölümüne bakın.
+Geliştirme senaryoları için bkz. [https üzerinden Docker ile ASP.NET Core uygulamaları geliştirme](https://github.com/dotnet/dotnet-docker/blob/master/samples/run-aspnetcore-https-development.md) .
 
-Bu örnek [Docker 17.06](https://docs.docker.com/release-notes/docker-ce) veya daha sonra [Docker istemcisi](https://www.docker.com/products/docker)gerektirir.
+Bu örnek, [Docker Istemcisinin](https://www.docker.com/products/docker) [Docker 17,06](https://docs.docker.com/release-notes/docker-ce) veya sonraki bir sürümünü gerektirir.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
-[.NET Core 2.2 SDK](https://dotnet.microsoft.com/download) veya daha sonra bu belgedeki bazı talimatlar için gereklidir.
+Bu belgedeki bazı yönergeler için [.NET Core 2,2 SDK](https://dotnet.microsoft.com/download) veya üzeri gereklidir.
 
 ## <a name="certificates"></a>Sertifikalar
 
-Bir etki alanı için [üretim barındırma](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/) için [sertifika yetkilisinden](https://wikipedia.org/wiki/Certificate_authority) bir sertifika gereklidir. [Let's Encrypt](https://letsencrypt.org/)ücretsiz sertifika lar sunan bir sertifika yetkilisidir.
+Bir etki alanı için [Üretim barındırma](https://blogs.msdn.microsoft.com/webdev/2017/11/29/configuring-https-in-asp-net-core-across-different-platforms/) için bir [sertifika yetkilisinden](https://wikipedia.org/wiki/Certificate_authority) bir sertifika gereklidir. [Let's Encrypt](https://letsencrypt.org/), ücretsiz sertifikalar sunan bir sertifika yetkilisindir.
 
-Bu belge, önceden oluşturulmuş görüntüleri barındırmak `localhost`için kendi imzalı geliştirme [sertifikalarını](https://wikipedia.org/wiki/Self-signed_certificate) kullanır. Yönergeler üretim sertifikaları kullanmaya benzer.
+Bu belge, üzerine `localhost`önceden oluşturulmuş görüntüleri barındırmak için otomatik olarak [imzalanan geliştirme sertifikaları](https://wikipedia.org/wiki/Self-signed_certificate) kullanır. Yönergeler, üretim sertifikalarını kullanmaya benzerdir.
 
 Üretim sertifikaları için:
 
-* Araç `dotnet dev-certs` gerekli değildir.
-* Sertifikaların yönergelerde kullanılan konumda depolanmış olması gerekmez. Sertifikaları site dizininin dışındaki herhangi bir yerde saklayın.
+* `dotnet dev-certs` Araç gerekli değildir.
+* Sertifikaların, yönergelerde kullanılan konumda depolanması gerekmez. Sertifikaları, site dizini dışında herhangi bir konumda depolayın.
 
-Aşağıdaki bölümde yer alan talimatlar `volumes` *docker-compose.yml* özelliğini kullanarak konteyneriçine montaj sertifikaları. `COPY` *Dockerfile'da*komutu olan kapsayıcı görüntülere sertifika ekleyebilirsiniz, ancak bu önerilmez. Sertifikaların görüntüye kopyalanması aşağıdaki nedenlerden dolayı önerilmez:
+Aşağıdaki bölümde yer alan yönergeler, `volumes` *Docker-Compose. yıml* içindeki özelliğini kullanarak sertifikaları kapsayıcılara bağlama. `COPY` *Dockerfile*dosyasında bir komutla kapsayıcı görüntülerine sertifika ekleyebilirsiniz, ancak bunu yapmanız önerilmez. Sertifikaları bir görüntüye kopyalamak aşağıdaki nedenlerden dolayı önerilmez:
 
-* Geliştirici sertifikalarıyla test etmek için aynı görüntüyü kullanmayı zorlaştırır.
-* Üretim sertifikaları ile Barındırma için aynı görüntüyü kullanmak zorlaştırır.
-* Sertifika nın açıklanması nda önemli risk vardır.
+* Geliştirici sertifikaları ile test için aynı görüntünün kullanımını zorlaştırır.
+* Üretim sertifikaları ile barındırmak için aynı görüntünün kullanımını zorlaştırır.
+* Sertifika açıklanmasının önemli bir riski vardır.
 
-## <a name="starting-a-container-with-https-support-using-docker-compose"></a>Docker oluşturmayı kullanarak https desteği ile konteyner başlatma
+## <a name="starting-a-container-with-https-support-using-docker-compose"></a>Docker Compose kullanarak https desteğiyle kapsayıcı başlatma
 
 İşletim sistemi yapılandırmanız için aşağıdaki yönergeleri kullanın.
 
-### <a name="windows-using-linux-containers"></a>Linux kapsayıcılarını kullanan Windows
+### <a name="windows-using-linux-containers"></a>Linux kapsayıcıları kullanan Windows
 
-Sertifika oluşturun ve yerel makineyi yapılandırın:
+Sertifika Oluştur ve yerel makineyi Yapılandır:
 
 ```dotnetcli
 dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { password here }
 dotnet dev-certs https --trust
 ```
 
-Önceki komutlarda parolayla `{ password here }` değiştirin.
+Yukarıdaki komutlarda, öğesini parolayla değiştirin `{ password here }` .
 
-Aşağıdaki içeriği içeren bir _docker-compose.debug.yml_ dosyası oluşturun:
+Aşağıdaki içeriğe sahip bir _Docker-Compose. Debug. yml_ dosyası oluşturun:
 
 ```json
 version: '3.4'
@@ -82,9 +86,9 @@ services:
     volumes:
       - ~/.aspnet/https:/https:ro
 ```
-Docker oluşturma dosyasında belirtilen parola, sertifika için kullanılan parolayla eşleşmelidir.
+Docker Compose dosyasında belirtilen parolanın, sertifika için kullanılan parolayla eşleşmesi gerekir.
 
-Kapsayıcıyı HTTPS için yapılandırılmış ASP.NET Core ile başlatın:
+Kapsayıcıyı HTTPS için yapılandırılan ASP.NET Core başlatın:
 
 ```console
 docker-compose -f "docker-compose.debug.yml" up -d
@@ -92,18 +96,18 @@ docker-compose -f "docker-compose.debug.yml" up -d
 
 ### <a name="macos-or-linux"></a>macOS veya Linux
 
-Sertifika oluşturun ve yerel makineyi yapılandırın:
+Sertifika Oluştur ve yerel makineyi Yapılandır:
 
 ```dotnetcli
 dotnet dev-certs https -ep ${HOME}/.aspnet/https/aspnetapp.pfx -p { password here }
 dotnet dev-certs https --trust
 ```
 
-`dotnet dev-certs https --trust`yalnızca macOS ve Windows'da desteklenir. Linux'taki sertifikalara dağıtımınız tarafından desteklenen şekilde güvenmeniz gerekir. Tarayıcınızda sertifikaya güvenmeniz gerekebilir.
+`dotnet dev-certs https --trust`yalnızca macOS ve Windows 'da desteklenir. Linux 'ta sertifikalarınızın desteklediği şekilde sertifikalara güvenmeniz gerekir. Büyük olasılıkla, tarayıcınızda sertifikaya güvenmeniz gerekir.
 
-Önceki komutlarda parolayla `{ password here }` değiştirin.
+Yukarıdaki komutlarda, öğesini parolayla değiştirin `{ password here }` .
 
-Aşağıdaki içeriği içeren bir _docker-compose.debug.yml_ dosyası oluşturun:
+Aşağıdaki içeriğe sahip bir _Docker-Compose. Debug. yml_ dosyası oluşturun:
 
 ```json
 version: '3.4'
@@ -122,26 +126,26 @@ services:
     volumes:
       - ~/.aspnet/https:/https:ro
 ```
-Docker oluşturma dosyasında belirtilen parola, sertifika için kullanılan parolayla eşleşmelidir.
+Docker Compose dosyasında belirtilen parolanın, sertifika için kullanılan parolayla eşleşmesi gerekir.
 
-Kapsayıcıyı HTTPS için yapılandırılmış ASP.NET Core ile başlatın:
+Kapsayıcıyı HTTPS için yapılandırılan ASP.NET Core başlatın:
 
 ```console
 docker-compose -f "docker-compose.debug.yml" up -d
 ```
 
-### <a name="windows-using-windows-containers"></a>Windows kapsayıcılarını kullanan Windows
+### <a name="windows-using-windows-containers"></a>Windows kapsayıcıları kullanan pencereler
 
-Sertifika oluşturun ve yerel makineyi yapılandırın:
+Sertifika Oluştur ve yerel makineyi Yapılandır:
 
 ```dotnetcli
 dotnet dev-certs https -ep %USERPROFILE%\.aspnet\https\aspnetapp.pfx -p { password here }
 dotnet dev-certs https --trust
 ```
 
-Önceki komutlarda parolayla `{ password here }` değiştirin.
+Yukarıdaki komutlarda, öğesini parolayla değiştirin `{ password here }` .
 
-Aşağıdaki içeriği içeren bir _docker-compose.debug.yml_ dosyası oluşturun:
+Aşağıdaki içeriğe sahip bir _Docker-Compose. Debug. yml_ dosyası oluşturun:
 
 ```json
 version: '3.4'
@@ -160,9 +164,9 @@ services:
     volumes:
       - ${USERPROFILE}\.aspnet\https:C:\https:ro
 ```
-Docker oluşturma dosyasında belirtilen parola, sertifika için kullanılan parolayla eşleşmelidir.
+Docker Compose dosyasında belirtilen parolanın, sertifika için kullanılan parolayla eşleşmesi gerekir.
 
-Kapsayıcıyı HTTPS için yapılandırılmış ASP.NET Core ile başlatın:
+Kapsayıcıyı HTTPS için yapılandırılan ASP.NET Core başlatın:
 
 ```console
 docker-compose -f "docker-compose.debug.yml" up -d

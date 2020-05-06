@@ -4,13 +4,19 @@ author: rick-anderson
 description: Bekleyen ASP.NET Core veri koruma anahtarı şifrelemesinin uygulama ayrıntılarını öğrenin.
 ms.author: riande
 ms.date: 07/16/2018
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/key-encryption-at-rest
-ms.openlocfilehash: 52c3137dbe467096364b42430c92aecc7c15e313
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: e68b8e09dbd876c6f0d37242ebaa415994b3b808
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78658391"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776935"
 ---
 # <a name="key-encryption-at-rest-in-aspnet-core"></a>ASP.NET Core bekleyen anahtar şifreleme
 
@@ -21,9 +27,9 @@ Veri koruma sistemi, şifreleme anahtarlarının bekleyen bir şekilde nasıl ş
 
 ::: moniker range=">= aspnetcore-2.1"
 
-## <a name="azure-key-vault"></a>Azure anahtar kasası
+## <a name="azure-key-vault"></a>Azure Key Vault
 
-Anahtarları [Azure Key Vault](https://azure.microsoft.com/services/key-vault/)içinde depolamak için, `Startup` sınıfında sistemi [ProtectKeysWithAzureKeyVault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault) ile yapılandırın:
+Anahtarları [Azure Key Vault](https://azure.microsoft.com/services/key-vault/)içinde depolamak Için, [ProtectKeysWithAzureKeyVault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault) `Startup` ile sistemi yapılandırın:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -53,7 +59,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-`ProtectKeysWithDpapi` parametre olmadan çağrılırsa, yalnızca geçerli Windows Kullanıcı hesabı kalıcı anahtar halkasını çözebilir. İsteğe bağlı olarak, makinedeki herhangi bir kullanıcı hesabının (yalnızca geçerli kullanıcı hesabı değil) anahtar halkasını çözebilmesini sağlayabilirsiniz:
+`ProtectKeysWithDpapi` Parametresi olmadan çağrılırsa, yalnızca geçerli Windows Kullanıcı hesabı kalıcı anahtar halkasını çözebilir. İsteğe bağlı olarak, makinedeki herhangi bir kullanıcı hesabının (yalnızca geçerli kullanıcı hesabı değil) anahtar halkasını çözebilmesini sağlayabilirsiniz:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -100,7 +106,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Ayrıca, `ProtectKeysWithDpapiNG`Parametresiz aşırı yüklemesi de vardır. "SID = {CURRENT_ACCOUNT_SID}" kuralını belirtmek için bu kullanışlı yöntemi kullanın; burada *CURRENT_ACCOUNT_SID* geçerli Windows Kullanıcı hesabının SID 'sidir:
+Ayrıca, ' nin `ProtectKeysWithDpapiNG`Parametresiz aşırı yüklemesi de vardır. "SID = {CURRENT_ACCOUNT_SID}" kuralını belirtmek için bu kullanışlı yöntemi kullanın; burada *CURRENT_ACCOUNT_SID* geçerli Windows Kullanıcı hesabının SID 'sidir:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)

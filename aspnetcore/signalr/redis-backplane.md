@@ -1,33 +1,37 @@
 ---
-title: ASP.NET Core SignalR genişletme için redsıs geri düzlemi
+title: ASP.NET Core SignalR ölçeği genişletme için redsıs geri düzlemi
 author: bradygaster
-description: Bir ASP.NET Core SignalR uygulaması için ölçeklendirmeyi etkinleştirmek üzere Redsıs arka düzlemi ayarlamayı öğrenin.
+description: Bir ASP.NET Core SignalR uygulaması için ölçeklendirmeyi etkinleştirmek üzere redsıs arka düzlemi ayarlamayı öğrenin.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: signalr/redis-backplane
-ms.openlocfilehash: 0461fc6a212ba78111bc2054cca74951721c5820
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 6068890f4089a13add05bf8cf8009367e343adce
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78661373"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82775355"
 ---
-# <a name="set-up-a-redis-backplane-for-aspnet-core-opno-locsignalr-scale-out"></a>ASP.NET Core SignalR genişleme için Redsıs arka düzlemi ayarlama
+# <a name="set-up-a-redis-backplane-for-aspnet-core-signalr-scale-out"></a>ASP.NET Core SignalR ölçeği genişletme için redsıs arka düzlemi ayarlama
 
 , [Andrew Stanton-nuri](https://twitter.com/anurse), [Brady Gaster](https://twitter.com/bradygaster)ve [Tom Dykstra](https://github.com/tdykstra),
 
-Bu makalede, bir ASP.NET Core SignalR uygulamasını ölçeklendirmek için kullanılacak bir [redo](https://redis.io/) sunucusu ayarlamanın SignalRözgü yönleri açıklanmaktadır.
+Bu makalede, SignalRbir ASP.NET Core SignalR uygulamasının ölçeğini genişletmek için bir [Redl](https://redis.io/) sunucusu ayarlamanın belirli yönleri açıklanmaktadır.
 
 ## <a name="set-up-a-redis-backplane"></a>Redsıs geri düzlemi ayarlama
 
 * Redsıs sunucusunu dağıtın.
 
   > [!IMPORTANT] 
-  > Üretim kullanımı için, yalnızca SignalR uygulamasıyla aynı veri merkezinde çalıştığında Redsıs geri düzlemi önerilir. Aksi takdirde, ağ gecikmesi performansı düşürür. SignalR uygulamanız Azure bulutu 'nda çalışıyorsa, redin geri düzlemi yerine Azure SignalR hizmeti önerilir. Geliştirme ve test ortamları için Azure Redis Cache hizmetini kullanabilirsiniz.
+  > Üretim kullanımı için, bir redin geri düzlemi yalnızca SignalR uygulamayla aynı veri merkezinde çalışırken önerilir. Aksi takdirde, ağ gecikmesi performansı düşürür. SignalR Uygulamanız Azure bulutu 'nda çalışıyorsa, redin geri düzlemi yerine Azure SignalR hizmeti önerilir. Geliştirme ve test ortamları için Azure Redis Cache hizmetini kullanabilirsiniz.
 
   Daha fazla bilgi için aşağıdaki kaynaklara bakın:
 
@@ -37,8 +41,8 @@ Bu makalede, bir ASP.NET Core SignalR uygulamasını ölçeklendirmek için kull
 
 ::: moniker range="= aspnetcore-2.1"
 
-* SignalR uygulamasında `Microsoft.AspNetCore.SignalR.Redis` NuGet paketini () yüklemelisiniz.
-* `Startup.ConfigureServices` yönteminde, `AddSignalR`sonra `AddRedis` çağırın:
+* SignalR Uygulamada, `Microsoft.AspNetCore.SignalR.Redis` NuGet paketini yükledikten sonra.
+* `Startup.ConfigureServices` Yönteminde, şu tarihten sonra `AddRedis` `AddSignalR`çağırın:
 
   ```csharp
   services.AddSignalR().AddRedis("<your_Redis_connection_string>");
@@ -46,7 +50,7 @@ Bu makalede, bir ASP.NET Core SignalR uygulamasını ölçeklendirmek için kull
 
 * Seçenekleri gerektiği şekilde yapılandırın:
  
-  Çoğu seçenek bağlantı dizesinde veya [ConfigurationOptions](https://stackexchange.github.io/StackExchange.Redis/Configuration#configuration-options) nesnesinde ayarlanabilir. `ConfigurationOptions` belirtilen seçenekler bağlantı dizesinde ayarlanmış olanları geçersiz kılar.
+  Çoğu seçenek bağlantı dizesinde veya [ConfigurationOptions](https://stackexchange.github.io/StackExchange.Redis/Configuration#configuration-options) nesnesinde ayarlanabilir. ' De `ConfigurationOptions` belirtilen seçenekler bağlantı dizesinde ayarlanmış olanları geçersiz kılar.
 
   Aşağıdaki örnek, `ConfigurationOptions` nesnesindeki seçeneklerin nasıl ayarlanacağını gösterir. Bu örnek, aşağıdaki adımda anlatıldığı gibi birden çok uygulamanın aynı redo örneğini paylaşabilmesi için bir kanal öneki ekler.
 
@@ -57,28 +61,28 @@ Bu makalede, bir ASP.NET Core SignalR uygulamasını ölçeklendirmek için kull
     });
   ```
 
-  Yukarıdaki kodda `options.Configuration`, bağlantı dizesinde belirtilen şeyle başlatılır.
+  Yukarıdaki kodda, `options.Configuration` bağlantı dizesinde belirtilen şeyle birlikte başlatılır.
 
 ::: moniker-end
 
 ::: moniker range="= aspnetcore-2.2"
 
-* SignalR uygulamasında, aşağıdaki NuGet paketlerinden birini yüklemelisiniz:
+* SignalR Uygulamada, aşağıdaki NuGet paketlerinden birini yüklemelisiniz:
 
   * `Microsoft.AspNetCore.SignalR.StackExchangeRedis`-StackExchange 'e bağlıdır. Redsıs 2. X.X. Bu, ASP.NET Core 2,2 ve üzeri için önerilen pakettir.
-  * `Microsoft.AspNetCore.SignalR.Redis`-StackExchange. Redsıs 1. X.X. 'e bağımlıdır Bu paket ASP.NET Core 3,0 ve üzeri bir sürüme dahil değildir.
+  * `Microsoft.AspNetCore.SignalR.Redis`-StackExchange 'e bağlıdır. Redsıs 1. X.X. Bu paket ASP.NET Core 3,0 ve üzeri bir sürüme dahil değildir.
 
-* `Startup.ConfigureServices` yönteminde, <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisDependencyInjectionExtensions.AddStackExchangeRedis*>çağırın:
+* `Startup.ConfigureServices` Yönteminde, şunu çağırın <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisDependencyInjectionExtensions.AddStackExchangeRedis*>:
 
   ```csharp
   services.AddSignalR().AddStackExchangeRedis("<your_Redis_connection_string>");
   ```
 
- `Microsoft.AspNetCore.SignalR.Redis`kullanırken <xref:Microsoft.Extensions.DependencyInjection.RedisDependencyInjectionExtensions.AddRedis*>çağırın.
+ Kullanırken `Microsoft.AspNetCore.SignalR.Redis`, çağırın <xref:Microsoft.Extensions.DependencyInjection.RedisDependencyInjectionExtensions.AddRedis*>.
 
 * Seçenekleri gerektiği şekilde yapılandırın:
  
-  Çoğu seçenek bağlantı dizesinde veya [ConfigurationOptions](https://stackexchange.github.io/StackExchange.Redis/Configuration#configuration-options) nesnesinde ayarlanabilir. `ConfigurationOptions` belirtilen seçenekler bağlantı dizesinde ayarlanmış olanları geçersiz kılar.
+  Çoğu seçenek bağlantı dizesinde veya [ConfigurationOptions](https://stackexchange.github.io/StackExchange.Redis/Configuration#configuration-options) nesnesinde ayarlanabilir. ' De `ConfigurationOptions` belirtilen seçenekler bağlantı dizesinde ayarlanmış olanları geçersiz kılar.
 
   Aşağıdaki örnek, `ConfigurationOptions` nesnesindeki seçeneklerin nasıl ayarlanacağını gösterir. Bu örnek, aşağıdaki adımda anlatıldığı gibi birden çok uygulamanın aynı redo örneğini paylaşabilmesi için bir kanal öneki ekler.
 
@@ -89,9 +93,9 @@ Bu makalede, bir ASP.NET Core SignalR uygulamasını ölçeklendirmek için kull
     });
   ```
 
- `Microsoft.AspNetCore.SignalR.Redis`kullanırken <xref:Microsoft.Extensions.DependencyInjection.RedisDependencyInjectionExtensions.AddRedis*>çağırın.
+ Kullanırken `Microsoft.AspNetCore.SignalR.Redis`, çağırın <xref:Microsoft.Extensions.DependencyInjection.RedisDependencyInjectionExtensions.AddRedis*>.
 
-  Yukarıdaki kodda `options.Configuration`, bağlantı dizesinde belirtilen şeyle başlatılır.
+  Yukarıdaki kodda, `options.Configuration` bağlantı dizesinde belirtilen şeyle birlikte başlatılır.
 
   Redu seçenekleri hakkında daha fazla bilgi için bkz. [StackExchange redin belgeleri](https://stackexchange.github.io/StackExchange.Redis/Configuration.html).
 
@@ -99,11 +103,11 @@ Bu makalede, bir ASP.NET Core SignalR uygulamasını ölçeklendirmek için kull
 
 ::: moniker range=">= aspnetcore-3.0"
 
-* SignalR uygulamasında, aşağıdaki NuGet paketini yüklerken:
+* SignalR Uygulamada, aşağıdaki NuGet paketini yüklerken:
 
   * `Microsoft.AspNetCore.SignalR.StackExchangeRedis`
   
-* `Startup.ConfigureServices` yönteminde, <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisDependencyInjectionExtensions.AddStackExchangeRedis*>çağırın:
+* `Startup.ConfigureServices` Yönteminde, şunu çağırın <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisDependencyInjectionExtensions.AddStackExchangeRedis*>:
 
   ```csharp
   services.AddSignalR().AddStackExchangeRedis("<your_Redis_connection_string>");
@@ -111,7 +115,7 @@ Bu makalede, bir ASP.NET Core SignalR uygulamasını ölçeklendirmek için kull
   
 * Seçenekleri gerektiği şekilde yapılandırın:
  
-  Çoğu seçenek bağlantı dizesinde veya [ConfigurationOptions](https://stackexchange.github.io/StackExchange.Redis/Configuration#configuration-options) nesnesinde ayarlanabilir. `ConfigurationOptions` belirtilen seçenekler bağlantı dizesinde ayarlanmış olanları geçersiz kılar.
+  Çoğu seçenek bağlantı dizesinde veya [ConfigurationOptions](https://stackexchange.github.io/StackExchange.Redis/Configuration#configuration-options) nesnesinde ayarlanabilir. ' De `ConfigurationOptions` belirtilen seçenekler bağlantı dizesinde ayarlanmış olanları geçersiz kılar.
 
   Aşağıdaki örnek, `ConfigurationOptions` nesnesindeki seçeneklerin nasıl ayarlanacağını gösterir. Bu örnek, aşağıdaki adımda anlatıldığı gibi birden çok uygulamanın aynı redo örneğini paylaşabilmesi için bir kanal öneki ekler.
 
@@ -122,15 +126,15 @@ Bu makalede, bir ASP.NET Core SignalR uygulamasını ölçeklendirmek için kull
     });
   ```
 
-  Yukarıdaki kodda `options.Configuration`, bağlantı dizesinde belirtilen şeyle başlatılır.
+  Yukarıdaki kodda, `options.Configuration` bağlantı dizesinde belirtilen şeyle birlikte başlatılır.
 
   Redu seçenekleri hakkında daha fazla bilgi için bkz. [StackExchange redin belgeleri](https://stackexchange.github.io/StackExchange.Redis/Configuration.html).
 
 ::: moniker-end
 
-* Birden çok SignalR uygulama için bir Redsıs sunucusu kullanıyorsanız, her bir SignalR uygulaması için farklı bir kanal öneki kullanın.
+* Birden çok SignalR uygulama Için bir redsıs sunucusu kullanıyorsanız, her SignalR uygulama için farklı bir kanal öneki kullanın.
 
-  Kanal öneki ayarlamak, farklı kanal öneklerini kullanan diğerlerinden bir SignalR uygulamasını yalıtır. Farklı ön ekler atamadıysanız, bir uygulamadan tüm istemcilerine gönderilen bir ileti, Redo sunucusunu bir geri düzlemi olarak kullanan tüm uygulamaların tüm istemcilerine gider.
+  Bir kanal öneki ayarlandığında, farklı SignalR kanal ön ekleri kullanan diğerlerinden bir uygulama yalıtır. Farklı ön ekler atamadıysanız, bir uygulamadan tüm istemcilerine gönderilen bir ileti, Redo sunucusunu bir geri düzlemi olarak kullanan tüm uygulamaların tüm istemcilerine gider.
 
 * Sunucu grubu yük dengeleme yazılımınızı yapışkan oturumlar için yapılandırın. Bunun nasıl yapılacağını gösteren bazı örnekler aşağıda verilmiştir:
 
@@ -141,15 +145,15 @@ Bu makalede, bir ASP.NET Core SignalR uygulamasını ölçeklendirmek için kull
 
 ## <a name="redis-server-errors"></a>Redsıs sunucu hataları
 
-Bir redin sunucusu aşağı gittiğinde SignalR, iletilerin teslim edilmediğini belirten özel durumlar oluşturur. Bazı tipik özel durum iletileri:
+Redsıs sunucusu aşağı gittiğinde, SignalR iletilerin teslim edilmediğini belirten özel durumlar oluşturur. Bazı tipik özel durum iletileri:
 
 * *İleti yazılamadı*
 * *' MethodName ' hub yöntemi çağrılamadı*
 * *Redsıs bağlantısı başarısız oldu*
 
-SignalR, sunucu geri geldiğinde iletileri göndermek için arabelleğe almaz. Redsıs sunucusu kapatıldığında gönderilen iletiler kaybedilir.
+SignalRsunucu yeniden geldiğinde iletileri göndermek için arabelleğe almaz. Redsıs sunucusu kapatıldığında gönderilen iletiler kaybedilir.
 
-Redi sunucusu yeniden kullanılabilir olduğunda SignalR otomatik olarak yeniden bağlanır.
+SignalRRedsıs sunucusu yeniden kullanılabilir olduğunda otomatik olarak yeniden bağlanır.
 
 ### <a name="custom-behavior-for-connection-failures"></a>Bağlantı hatalarıyla ilgili özel davranış
 

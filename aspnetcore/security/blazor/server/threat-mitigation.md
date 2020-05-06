@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 04/27/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: security/blazor/server/threat-mitigation
-ms.openlocfilehash: 9a5e313153e5c5c17fc723cc9768c49ffd828007
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
-ms.translationtype: MT
+ms.openlocfilehash: 2c87e6cef5a16b394b03dac1635f18d09593eb94
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.translationtype: HT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206384"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774190"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>ASP.NET Core Blazor Server için tehdit azaltma Kılavuzu
 
@@ -342,9 +345,9 @@ Framework 'ün uyguladığı korumalarına ek olarak, tehditlere karşı korumak
 
 Bir XSS Güvenlik açığının mevcut olması için, uygulamanın işlenen sayfada Kullanıcı girişini içermesi gerekir. BlazorSunucu bileşenleri, bir *. Razor* dosyasındaki biçimlendirmenin yordamsal C# mantığına dönüştürülebileceği bir derleme zamanı adımı yürütür. Çalışma zamanında C# mantığı öğeleri, metni ve alt bileşenleri açıklayan bir *işleme ağacı* oluşturur. Bu, tarayıcı DOM 'a bir JavaScript yönergeleri dizisi aracılığıyla uygulanır (veya prerendering durumunda HTML olarak serileştirilir):
 
-* Normal Razor söz dizimi (örneğin, `@someStringValue`) ile işlenen Kullanıcı girişi, Razor söz dizimi yalnızca metin yazabileceğinden komutlar aracılığıyla Dom 'a EKLENDIĞINDEN, XSS Güvenlik Açığı sunmaz. Değer HTML biçimlendirmesi içerse bile, değer statik metin olarak görüntülenir. Prerendering olduğunda çıktı HTML kodlamalı olur ve bu da içeriği statik metin olarak görüntüler.
+* Normal Razor sözdizimi aracılığıyla işlenen Kullanıcı girişi (örneğin, `@someStringValue`), Razor sözdizimi yalnızca metin yazabileceğinden komutlar aracılığıyla Dom 'a eklendiğinden bir XSS Güvenlik Açığı sunmaz. Değer HTML biçimlendirmesi içerse bile, değer statik metin olarak görüntülenir. Prerendering olduğunda çıktı HTML kodlamalı olur ve bu da içeriği statik metin olarak görüntüler.
 * Betik etiketlerine izin verilmez ve uygulamanın bileşen işleme ağacına dahil edilmemelidir. Bir komut dosyası etiketi bir bileşenin biçimlendirmesinde yer alıyorsa, derleme zamanı hatası oluşturulur.
-* Bileşen yazarları, Razor kullanmadan C# dilinde bileşen yazabilir. Bileşen yazarı, çıkış yayırken doğru API 'Leri kullanmaktan sorumludur. Örneğin, ikinci olarak `builder.AddContent(0, someUserSuppliedString)` bir XSS Güvenlik Açığı oluşturmasından dolayı *değil* `builder.AddMarkupContent(0, someUserSuppliedString)`kullanın.
+* Bileşen yazarları, kullanmadan RazorC# içindeki bileşenleri yazabilir. Bileşen yazarı, çıkış yayırken doğru API 'Leri kullanmaktan sorumludur. Örneğin, ikinci olarak `builder.AddContent(0, someUserSuppliedString)` bir XSS Güvenlik Açığı oluşturmasından dolayı *değil* `builder.AddMarkupContent(0, someUserSuppliedString)`kullanın.
 
 XSS saldırılarına karşı koruma kapsamında, [Içerik güvenlik ilkesi (CSP)](https://developer.mozilla.org/docs/Web/HTTP/CSP)gibi XSS azaltmalarını gerçekleştirmeyi düşünün.
 

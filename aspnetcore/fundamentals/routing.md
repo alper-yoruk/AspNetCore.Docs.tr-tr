@@ -6,13 +6,19 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 4/1/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: 79a46cac4122728e84fa6f5acb3defa182092bec
-ms.sourcegitcommit: 56861af66bb364a5d60c3c72d133d854b4cf292d
-ms.translationtype: MT
+ms.openlocfilehash: e2b1672066a5b3c0bb6bc44e316bda93ae0f21b7
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.translationtype: HT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/28/2020
-ms.locfileid: "82206131"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774918"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core yönlendirme
 
@@ -348,7 +354,7 @@ Yönlendirme tarafından sunulan genişletilebilirlik türleri nedeniyle, yönle
 * Değişmez değerli bir kesim, bir parametre segmentinden daha belirgin olarak değerlendirilir.
 * Kısıtlaması olan bir parametre segmenti, olmadan birden fazla olarak değerlendirilir.
 * Karmaşık bir kesim, kısıtlama içeren bir parametre segmenti olarak kabul edilir.
-* Tüm parametreleri yakala en az özgüdür.
+* Catch-all parametreleri en az özgüdür. Catch **-All** rotaları hakkında önemli bilgiler için bkz. [route Template başvurusu](#rtr) .
 
 Tam değerler başvurusu için [GitHub 'da kaynak koda](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Template/RoutePrecedence.cs#L189) bakın.
 
@@ -415,6 +421,8 @@ Yıldız `*` işareti veya çift `**`yıldız işareti:
 * , **Catch-all** parametreleri olarak adlandırılır. Örneğin `blog/{**slug}`:
   * İle `/blog` başlayan ve bundan sonraki bir değere sahıp tüm URI ile eşleşir.
   * Aşağıdaki `/blog` değer, [başlık](https://developer.mozilla.org/docs/Glossary/Slug) yolu değerine atanır.
+
+[!INCLUDE[](~/includes/catchall.md)]
 
 Catch-all parametreleri boş dizeyle de aynı olabilir.
 
