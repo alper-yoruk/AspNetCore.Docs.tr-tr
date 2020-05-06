@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/update-related-data
-ms.openlocfilehash: 54783ebbac26a10a92716b5e53ed6cd7cc8bb65d
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 32d3a22b85675d817286e3e72b8b9c8e63df6ca6
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773503"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850428"
 ---
 # <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>Öğretici: ilgili verileri güncelleştirme-ASP.NET MVC EF Core
 
@@ -39,7 +39,7 @@ Bu öğreticide şunları yaptınız:
 > * Güncelleştirme silme sayfası
 > * Sayfa oluşturmak için Office konumu ve kurslar ekleme
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [İlgili verileri okuma](read-related-data.md)
 
@@ -231,7 +231,7 @@ Kurs onay kutusu seçili değilse, ancak kurs `Instructor.CourseAssignments` gez
 
 <a id="notepad"></a>
 > [!NOTE]
-> Kodu Visual Studio 'Ya yapıştırdığınızda, satır sonları kodu kesen bir şekilde değiştirilebilir. Kod yapıştırdıktan sonra farklı görünüyorsa, otomatik biçimlendirmeyi geri almak için CTRL + Z bir kez tuşuna basın. Bu işlem satır sonlarını, burada gördüğünüz gibi görünmeleri için düzeltir. Girintide kusursuz olması gerekmez, `@</tr><tr>`ancak, `@:<td>` `@:</td>`, ve `@:</tr>` çizgilerinin her biri gösterildiği gibi tek bir satırda olması gerekir, aksi halde bir çalışma zamanı hatası alırsınız. Yeni kod bloğu seçiliyken, yeni kodu mevcut kodla hizalamak için üç kez Tab tuşuna basın. Bu sorun Visual Studio 2019 ' de düzeltilmiştir.
+> Kodu Visual Studio 'Ya yapıştırdığınızda, satır sonları kodu kesen bir şekilde değiştirilebilir. Kod yapıştırdıktan sonra farklı görünüyorsa, otomatik biçimlendirmeyi geri almak için CTRL + Z bir kez tuşuna basın. Bu işlem satır sonlarını, burada gördüğünüz gibi görünmeleri için düzeltir. Girintide kusursuz olması gerekmez, `@:</tr><tr>`ancak, `@:<td>` `@:</td>`, ve `@:</tr>` çizgilerinin her biri gösterildiği gibi tek bir satırda olması gerekir, aksi halde bir çalışma zamanı hatası alırsınız. Yeni kod bloğu seçiliyken, yeni kodu mevcut kodla hizalamak için üç kez Tab tuşuna basın. Bu sorun Visual Studio 2019 ' de düzeltilmiştir.
 
 [!code-html[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=35-61)]
 

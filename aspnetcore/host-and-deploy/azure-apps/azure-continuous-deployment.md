@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/azure-apps/azure-continuous-deployment
-ms.openlocfilehash: 3a865c2c42cb71e109331675460456a27dc500fc
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 0b9f5f15403c7d18d68a41baa2a59582cf039f44
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775316"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850571"
 ---
 # <a name="continuous-deployment-to-azure-with-visual-studio-and-git-with-aspnet-core"></a>ASP.NET Core ile Visual Studio ve Git kullanarak Azure’a sürekli dağıtım
 
@@ -30,9 +30,9 @@ Bu öğreticide, Visual Studio kullanarak ASP.NET Core bir Web uygulamasının n
 Ayrıca, Azure DevOps Services kullanarak [Azure App Service](/azure/app-service/app-service-web-overview) için sürekli teslım (CD) iş akışını yapılandırmayı gösteren [Azure Pipelines ilk Işlem hattınızı oluşturun](/azure/devops/pipelines/get-started-yaml). Azure Pipelines (bir Azure DevOps Services hizmeti), Azure App Service 'de barındırılan uygulamalar için güncelleştirmeleri yayımlamak üzere güçlü bir dağıtım işlem hattı ayarlamayı basitleştirir. İşlem hattı, Azure portal derlemek, testler çalıştırmak, bir hazırlama yuvasına dağıtmak ve sonra üretime dağıtmak için yapılandırılabilir.
 
 > [!NOTE]
-> Bu öğreticiyi tamamlayabilmeniz için bir Microsoft Azure hesabı gereklidir. Bir hesap almak için [MSDN abone avantajlarını etkinleştirin](https://azure.microsoft.com/pricing/member-offers/credit-for-visual-studio-subscribers/?WT.mc_id=A261C142F) veya [ücretsiz deneme için kaydolun](https://azure.microsoft.com/free/?WT.mc_id=A261C142F).
+> Bu öğreticiyi tamamlayabilmeniz için bir Microsoft Azure hesabı gereklidir. Bir hesap almak için [MSDN abone avantajlarını etkinleştirin](https://azure.microsoft.com/pricing/member-offers/credit-for-visual-studio-subscribers/?WT.mc_id=A261C142F) veya [ücretsiz deneme için kaydolun](https://azure.microsoft.com/free/dotnet/?WT.mc_id=A261C142F).
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 Bu öğreticide aşağıdaki yazılımların yüklü olduğu varsayılmaktadır:
 

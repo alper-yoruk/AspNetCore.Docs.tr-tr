@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/azure-ad-b2c
-ms.openlocfilehash: 86808e6bdd3bb669a62ad9e333b11df4c09a9cd3
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: d62889ba6dba6748ce3d047f0d37b3a904199496
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774645"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850441"
 ---
 # <a name="cloud-authentication-with-azure-active-directory-b2c-in-aspnet-core"></a>ASP.NET Core Azure Active Directory B2C ile bulut kimlik doğrulaması
 
@@ -36,11 +36,11 @@ Bu öğreticide şunların nasıl yapıldığını öğrenirsiniz:
 > * Kimlik doğrulaması için Azure AD B2C kiracısını kullanacak şekilde yapılandırılmış bir ASP.NET Core Web uygulaması oluşturmak için Visual Studio 'Yu kullanma
 > * Azure AD B2C kiracının davranışını denetleyen ilkeleri yapılandırın
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 Bu izlenecek yol için aşağıdakiler gereklidir:
 
-* [Microsoft Azure aboneliği](https://azure.microsoft.com/free/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)
+* [Microsoft Azure aboneliği](https://azure.microsoft.com/free/dotnet/?ref=microsoft.com&utm_source=microsoft.com&utm_medium=docs&utm_campaign=visualstudio)
 * [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
 
 ## <a name="create-the-azure-active-directory-b2c-tenant"></a>Azure Active Directory B2C kiracı oluşturma
@@ -60,7 +60,7 @@ Aşağıdaki değerleri kullanın:
 | **Örtük akışa izin verme**       | Yes                       |                                                                                                                                                                                                    |
 | **Yanıt URL'si**                 | `https://localhost:44300/signin-oidc` | Yanıt URL'leri, Azure AD B2C'nin, uygulamanız tarafından istenen belirteçleri döndürdüğü uç noktalardır. Visual Studio, kullanılacak yanıt URL 'sini sağlar. Şu an için formunu `https://localhost:44300/signin-oidc` doldurun için yazın. |
 | **Uygulama Kimliği URI'si**                | Boş bırakın               | Bu öğretici için gerekli değildir.                                                                                                                                                                    |
-| **Yerel istemci ekle**     | Hayır                        |                                                                                                                                                                                                    |
+| **Yerel istemci ekle**     | No                        |                                                                                                                                                                                                    |
 
 > [!WARNING]
 > Localhost olmayan bir yanıt URL 'SI ayarlıyorsanız, [yanıt URL 'si listesinde izin verilen kısıtlamalara](/azure/active-directory-b2c/tutorial-register-applications#register-a-web-application)dikkat edin. 
@@ -168,4 +168,4 @@ ASP.NET Core uygulaması kimlik doğrulaması için Azure AD B2C kullanacak şek
 * [Microsoft](/azure/active-directory-b2c/active-directory-b2c-setup-msa-app), [Facebook](/azure/active-directory-b2c/active-directory-b2c-setup-fb-app), [Google](/azure/active-directory-b2c/active-directory-b2c-setup-goog-app), [Amazon](/azure/active-directory-b2c/active-directory-b2c-setup-amzn-app), [Twitter](/azure/active-directory-b2c/active-directory-b2c-setup-twitter-app)ve diğerleri gibi ek kimlik sağlayıcılarını yapılandırın.
 * Azure AD B2C kiracısından grup üyeliği gibi ek kullanıcı bilgilerini almak için [Azure AD Graph API kullanın](/azure/active-directory-b2c/active-directory-b2c-devquickstarts-graph-dotnet) .
 * [Azure AD B2C kullanarak bir ASP.NET Core Web API 'Sinin güvenliğini sağlayın](https://azure.microsoft.com/resources/samples/active-directory-b2c-dotnetcore-webapi/).
-* [Azure AD B2C kullanarak .NET Web uygulamasından bir .NET Web API 'Si çağırın](/azure/active-directory-b2c/active-directory-b2c-devquickstarts-web-api-dotnet).
+* [Öğretici: Azure Active Directory B2C kullanarak bir ASP.NET Web API 'sine erişim Izni verme](/azure/active-directory-b2c/tutorial-web-api-dotnet).

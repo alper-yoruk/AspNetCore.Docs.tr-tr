@@ -12,22 +12,22 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/tools-and-downloads
-ms.openlocfilehash: 321d506760d057914136f77c15e85043fa9d9832
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 1917a329a5dcbe60542541cfcdc746799307e3d5
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82766543"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850415"
 ---
 # <a name="tools-and-downloads"></a>Araçlar ve indirmeler
 
 Azure 'da [Azure Portal](https://portal.azure.com), [azure CLI](/cli/azure/), [Azure PowerShell](/powershell/azure/overview), [Azure Cloud Shell](https://shell.azure.com/bash)ve Visual Studio gibi kaynakları sağlamak ve yönetmek için çeşitli arabirimler vardır. Bu kılavuz, en az aList yaklaşımla yararlanır ve gerekli adımları azaltmak için mümkün olan her durumda Azure Cloud Shell kullanır. Ancak, bazı bölümlerinde Azure portal kullanılması gerekir.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 Aşağıdaki abonelikler gereklidir:
 
-* Azure &mdash; hesabınız yoksa [ücretsiz deneme sürümü alın](https://azure.microsoft.com/free/).
+* Azure &mdash; hesabınız yoksa [ücretsiz deneme sürümü alın](https://azure.microsoft.com/free/dotnet/).
 * Azure DevOps Services &mdash; , Azure DevOps aboneliğiniz ve kuruluşunuz Bölüm 4 ' te oluşturulmuştur.
 * GitHub &mdash; hesabınız yoksa [ücretsiz kaydolun](https://github.com/join).
 

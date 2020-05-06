@@ -12,18 +12,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/ws-federation
-ms.openlocfilehash: ce0c484e84bc2ddb4a1d287246c63663f3875924
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: fede3887ad7dacd40cf3bb5d1b785392a9bc1480
+ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768435"
+ms.lasthandoff: 05/06/2020
+ms.locfileid: "82850467"
 ---
 # <a name="authenticate-users-with-ws-federation-in-aspnet-core"></a>ASP.NET Core 'de WS-Federation ile kullanıcıların kimliğini doğrulama
 
-Bu öğreticide, kullanıcıların Active Directory Federasyon Hizmetleri (AD FS) (ADFS) veya [Azure Active Directory](/azure/active-directory/) (AAD) gıbı bir WS-Federasyon kimlik doğrulama sağlayıcısıyla oturum açmasını sağlama gösterilmektedir. [Facebook, Google ve dış sağlayıcı kimlik doğrulamasında](xref:security/authentication/social/index)açıklanan ASP.NET Core 2,0 örnek uygulamasını kullanır.
+Bu öğreticide, kullanıcıların Active Directory Federasyon Hizmetleri (AD FS) (ADFS) veya [Azure Active Directory](/azure/active-directory/) (AAD) gıbı bir WS-Federasyon kimlik doğrulama sağlayıcısıyla oturum açmasını sağlama gösterilmektedir. [Facebook, Google ve dış sağlayıcı kimlik doğrulamasında](xref:security/authentication/social/index)açıklanan ASP.NET Core örnek uygulamasını kullanır.
 
-ASP.NET Core 2,0 uygulamaları için, [Microsoft. AspNetCore. Authentication. WSFederation](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation)tarafından WS-Federation desteği sağlanır. Bu bileşen [Microsoft. Owin. Security. WsFederation](https://www.nuget.org/packages/Microsoft.Owin.Security.WsFederation) 'tan ve bu bileşenin mekanizması 'nın birçoğunu paylaşır. Ancak, bileşenler birkaç önemli şekilde farklılık gösterir.
+ASP.NET Core uygulamalar için, [Microsoft. AspNetCore. Authentication. WSFederation](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation)tarafından WS-Federation desteği sağlanır. Bu bileşen [Microsoft. Owin. Security. WsFederation](https://www.nuget.org/packages/Microsoft.Owin.Security.WsFederation) 'tan ve bu bileşenin mekanizması 'nın birçoğunu paylaşır. Ancak, bileşenler birkaç önemli şekilde farklılık gösterir.
 
 Varsayılan olarak, yeni ara yazılım:
 
