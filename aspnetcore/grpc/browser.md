@@ -1,123 +1,129 @@
 ---
 title: Tarayıcı uygulamalarında gRPC kullanma
 author: jamesnk
-description: gRPC-Web'i kullanarak tarayıcı uygulamalarından çağrılabilir olması için ASP.NET Core'daki gRPC hizmetlerini nasıl yapılandırabileceğinizi öğrenin.
+description: ASP.NET Core GRPC hizmetlerini, gRPC-Web kullanan tarayıcı uygulamalarından çağrılabilir olacak şekilde nasıl yapılandıracağınızı öğrenin.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 04/15/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: grpc/browser
-ms.openlocfilehash: a20e604488b1fb919f18932599ba690bfa308f0c
-ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
+ms.openlocfilehash: a74f7acb54b4601a0c30ff1a39dc30231e2b5a78
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81440772"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82774749"
 ---
 # <a name="use-grpc-in-browser-apps"></a>Tarayıcı uygulamalarında gRPC kullanma
 
-Yazar: [James Newton-King](https://twitter.com/jamesnk)
+, [James bAyKiNg](https://twitter.com/jamesnk)
 
 > [!IMPORTANT]
-> **.NET'te gRPC-Web desteği deneyseldir**
+> **gRPC-.NET 'teki Web desteği deneysel**
 >
-> .NET için gRPC-Web, taahhüt edilen bir ürün değil, deneysel bir projedir. Biz istiyorum:
+> gRPC-.NET için Web, kaydedilmiş bir ürün değil, deneysel bir projem projem. Şunları yapmak istiyoruz:
 >
-> * gRPC-Web'i uygulama yaklaşımımızın işe yaradığını test edin.
-> * Bu yaklaşımın .NET geliştiricileri için bir proxy aracılığıyla gRPC-Web'i kurmanın geleneksel yolu ile karşılaştırıldığında yararlı olup olmadığını hakkında geri bildirim alın.
+> * GRPC-Web ' i uygulamaya yönelik yaklaşımımızı test edin.
+> * Bu yaklaşım .NET geliştiricileri için, bir ara sunucu aracılığıyla gRPC-Web ayarlamanın geleneksel bir yolu ile karşılaştırıldığında yararlı olup olmadığını hakkında geri bildirim alın.
 >
-> Geliştiricilerin beğendikleri ve üretken oldukları bir şey oluşturduğumuzdan emin olmak [https://github.com/grpc/grpc-dotnet](https://github.com/grpc/grpc-dotnet) için lütfen geri bildirimde bulundurun.
+> Geliştiricilerin, ve ile [https://github.com/grpc/grpc-dotnet](https://github.com/grpc/grpc-dotnet) üretken olduğu bir şey oluşturduğumdan emin olmak için lütfen geri bildirimde bulunun.
 
-Tarayıcı tabanlı bir uygulamadan HTTP/2 gRPC hizmetini aramak mümkün değildir. [gRPC-Web](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-WEB.md) tarayıcı JavaScript ve Blazor uygulamaları gRPC hizmetleri aramak için izin veren bir protokoldür. Bu makalede, .NET Core'da gRPC-Web'in nasıl kullanılacağı açıklanmaktadır.
+Tarayıcı tabanlı bir uygulamadan HTTP/2 gRPC hizmetini çağırmak mümkün değildir. [GRPC-Web](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-WEB.md) , tarayıcı JavaScript ve Blazor uygulamalarının GRPC hizmetlerini çağırmasını sağlayan bir protokoldür. Bu makalede, .NET Core 'da gRPC-Web ' i kullanma açıklanmaktadır.
 
-## <a name="grpc-web-in-aspnet-core-vs-envoy"></a>gRPC-Web ASP.NET Core vs Elçi
+## <a name="grpc-web-in-aspnet-core-vs-envoy"></a>gRPC-Web 'de ASP.NET Core ve Envoy 'ye karşı
 
-ASP.NET Core uygulamasına gRPC-Web eklemenin iki seçeneği vardır:
+GRPC-Web ' i bir ASP.NET Core uygulamasına eklemenin iki seçeneği vardır:
 
-* ASP.NET Core'da gRPC HTTP/2 ile birlikte gRPC-Web'i destekleyin. Bu seçenek, paket tarafından `Grpc.AspNetCore.Web` sağlanan ara yazılım kullanır.
-* GRPC-Web'i gRPC HTTP/2'ye çevirmek için [Elçi proxy'sinin](https://www.envoyproxy.io/) gRPC-Web desteğini kullanın. Çevrilen arama daha sonra ASP.NET Core uygulamasına iletilir.
+* ASP.NET Core 'de GRPC HTTP/2 ile birlikte gRPC-Web desteği. Bu seçenek, `Grpc.AspNetCore.Web` paket tarafından sağlanmış olan ara yazılımı kullanır.
+* GRPC-Web ' i GRPC HTTP/2 ' ye çevirmek için [Envoy proxy 'nin](https://www.envoyproxy.io/) GRPC-Web desteğini kullanın. Çevrilen çağrı daha sonra ASP.NET Core uygulamasına iletilir.
 
-Her yaklaşımın artıları ve eksileri vardır. Elçisi uygulamanızın ortamında zaten proxy olarak kullanıyorsanız, bunu gRPC-Web desteği sağlamak için de kullanmanız anlamlı olabilir. Eğer sadece ASP.NET Core gerektiren gRPC-Web için `Grpc.AspNetCore.Web` basit bir çözüm istiyorsanız, iyi bir seçimdir.
+Her yaklaşımın olumlu ve olumsuz yönleri vardır. Zaten uygulamanızın ortamında bir ara sunucu olarak kullanmak istiyorsanız, gRPC-Web desteği sağlamak için de kullanabilirsiniz. GRPC-Web için yalnızca ASP.NET Core `Grpc.AspNetCore.Web` gerektiren basit bir çözüm istiyorsanız iyi bir seçimdir.
 
-## <a name="configure-grpc-web-in-aspnet-core"></a>gRPC-Web'i ASP.NET Core'da yapılandırın
+## <a name="configure-grpc-web-in-aspnet-core"></a>ASP.NET Core 'de gRPC-Web yapılandırma
 
-ASP.NET Core'da barındırılan gRPC hizmetleri, HTTP/2 gRPC ile birlikte gRPC-Web'i destekleyecek şekilde yapılandırılabilir. gRPC-Web hizmetlerde herhangi bir değişiklik gerektirmez. Tek değişiklik başlangıç yapılandırmasıdır.
+ASP.NET Core 'de barındırılan gRPC Hizmetleri, gRPC-Web ' i HTTP/2 gRPC ile birlikte destekleyecek şekilde yapılandırılabilir. gRPC-Web, hizmetlerde herhangi bir değişiklik yapılmasını gerektirmez. Tek değişiklik başlangıç yapılandırması ' dır.
 
-ASP.NET Core gRPC hizmeti ile gRPC-Web'i etkinleştirmek için:
+GRPC-Web ' i bir ASP.NET Core gRPC hizmeti ile etkinleştirmek için:
 
-* [Grpc.AspNetCore.Web](https://www.nuget.org/packages/Grpc.AspNetCore.Web) paketine bir başvuru ekleyin.
-* Uygulamayı gRPC-Web'i ekleyerek `AddGrpcWeb` ve `UseGrpcWeb` *Startup.cs*kullanacak şekilde yapılandırın:
+* [GRPC. AspNetCore. Web](https://www.nuget.org/packages/Grpc.AspNetCore.Web) paketine bir başvuru ekleyin.
+* Uygulamayı `AddGrpcWeb` `UseGrpcWeb` *Startup.cs*ekleyerek GRPC-Web kullanacak şekilde yapılandırın:
 
 [!code-csharp[](~/grpc/browser/sample/Startup.cs?name=snippet_1&highlight=10,14)]
 
 Yukarıdaki kod:
 
-* gRPC-Web ara yazılımını, `UseGrpcWeb`yönlendirmeden sonra ve uç noktalardan önce ekler.
-* `endpoints.MapGrpcService<GreeterService>()` Yöntemi gRPC-Web ile `EnableGrpcWeb`destekler belirtir. 
+* Yönlendirme sonrasında ve bitiş noktalarından önce gRPC `UseGrpcWeb`-Web ara yazılımını ekler.
+* Yöntemi, `endpoints.MapGrpcService<GreeterService>()` Ile `EnableGrpcWeb`GRPC-Web ' i destekler. 
 
-Alternatif olarak, ConfigureServices'e ekleyerek `services.AddGrpcWeb(o => o.GrpcWebEnabled = true);` gRPC-Web'i desteklemek için tüm hizmetleri yapılandırın.
+Alternatif olarak, tüm hizmetleri, bir ConfigureServices 'e ekleyerek `services.AddGrpcWeb(o => o.GrpcWebEnabled = true);` GRPC-Web ' i destekleyecek şekilde yapılandırın.
 
 [!code-csharp[](~/grpc/browser/sample/AllServicesSupportExample_Startup.cs?name=snippet_1&highlight=6,13)]
 
 > [!NOTE]
-> GRPC-Web'in .NET Core [3.x'te Http.sys tarafından barındırıldığında](xref:fundamentals/servers/httpsys) başarısız olmasına neden olan bilinen bir sorun vardır.
+> .NET Core 3. x içinde [http. sys tarafından barındırılırken](xref:fundamentals/servers/httpsys) GRPC-Web ' i, başarısız olmasına neden olan bilinen bir sorun vardır.
 >
-> Http.sys üzerinde çalışan gRPC-Web almak için bir geçici çözüm [burada](https://github.com/grpc/grpc-dotnet/issues/853#issuecomment-610078202)mevcuttur.
+> GRPC 'yi almaya yönelik bir geçici çözüm olan http. sys üzerinde Web 'de çalışmaya [buradan](https://github.com/grpc/grpc-dotnet/issues/853#issuecomment-610078202)ulaşabilirsiniz.
 
 ### <a name="grpc-web-and-cors"></a>gRPC-Web ve CORS
 
-Tarayıcı güvenliği, bir web sayfasının web sayfasına hizmet eden den farklı bir etki alanına istekte bulunmasını engeller. Bu kısıtlama tarayıcı uygulamaları yla gRPC-Web aramaları yapmak için geçerlidir. Örneğin, hizmet verilen bir `https://www.contoso.com` tarayıcı uygulamasının gRPC-Web hizmetlerini `https://services.contoso.com`barındıran ' ı araması engellenir. Cross Origin Kaynak Paylaşımı (CORS) bu kısıtlamayı gevşetmek için kullanılabilir.
+Tarayıcı güvenliği, bir Web sayfasının Web sayfasını sunduğundan farklı bir etki alanına istek yapmasını engeller. Bu kısıtlama, tarayıcı uygulamalarıyla gRPC Web çağrıları yapmak için geçerlidir. Örneğin, tarafından `https://www.contoso.com` sunulan bir tarayıcı uygulamasının üzerinde `https://services.contoso.com`barındırılan GRPC-Web hizmetlerinden çağrılması engellenir. Bu kısıtlamayı rahatmak için çapraz kaynak kaynak paylaşımı (CORS) kullanılabilir.
 
-Tarayıcı uygulamanızın orjinal gRPC-Web aramaları yapabilmesine izin vermek [için, ASP.NET Core'da CORS'u](xref:security/cors)ayarlayın. Yerleşik CORS desteğini kullanın ve gRPC'ye özgü <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithExposedHeaders*>üstbilgideki leri açığa çıkar.
+Tarayıcı uygulamanızın çıkış noktaları arası gRPC-Web çağrıları yapmasına izin vermek için [ASP.NET Core 'de CORS](xref:security/cors)'yi ayarlayın. Yerleşik CORS desteğini kullanın ve gRPC 'ye özgü üst bilgileri ile <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithExposedHeaders*>kullanıma sunun.
 
 [!code-csharp[](~/grpc/browser/sample/CORS_Startup.cs?name=snippet_1&highlight=5-11,19,24)]
 
 Yukarıdaki kod:
 
-* CORS hizmetlerini eklemek için çağrılar `AddCors` ve gRPC'ye özgü üstbilgiler ortaya çıkaran bir CORS ilkesini yapılandırır.
-* Yönlendirmeden sonra ve bitiş noktalarından önce CORS ara yazılımını eklemek için çağrılar. `UseCors`
-* `endpoints.MapGrpcService<GreeterService>()` Yöntem ile CORS destekler `RequiresCors`belirtir.
+* CORS `AddCors` Hizmetleri ekleme ve GRPC 'ye özgü üst bilgileri kullanıma sunan bir CORS ilkesini yapılandırma çağrıları.
+* Yönlendirmeden `UseCors` ve bitiş NOKTALARıNDAN önce CORS ara yazılımını ekleme çağrıları.
+* CORS 'yi `endpoints.MapGrpcService<GreeterService>()` ile `RequiresCors`desteklerken yöntemi belirtir.
 
-## <a name="call-grpc-web-from-the-browser"></a>tarayıcıdan gRPC-Web'i arayın
+## <a name="call-grpc-web-from-the-browser"></a>Tarayıcıdan gRPC-Web 'i çağırma
 
-Tarayıcı uygulamaları gRPC hizmetlerini aramak için gRPC-Web'i kullanabilir. Tarayıcıdan gRPC-Web ile gRPC hizmetlerini ararken bazı gereksinimler ve sınırlamalar vardır:
+Tarayıcı uygulamaları GRPC hizmetlerini çağırmak için gRPC-Web kullanabilir. GRPC hizmetlerini tarayıcıda GRPC-Web ile çağırırken bazı gereksinimler ve sınırlamalar vardır:
 
-* Sunucu gRPC-Web'i destekleyecek şekilde yapılandırılmış olmalıdır.
-* İstemci akışı ve çift yönlü akış çağrıları desteklenmez. Sunucu akışı desteklenir.
-* GRPC hizmetlerinin farklı bir etki alanında çağrılması, [CORS'in](xref:security/cors) sunucuda yapılandırılmasını gerektirir.
+* Sunucu, gRPC-Web ' i destekleyecek şekilde yapılandırılmış olmalıdır.
+* İstemci akışı ve çift yönlü akış çağrıları desteklenmez. Sunucu akışı destekleniyor.
+* Farklı bir etki alanında gRPC hizmetlerinin çağrılması için [CORS](xref:security/cors) 'nin sunucuda yapılandırılması gerekir.
 
 ### <a name="javascript-grpc-web-client"></a>JavaScript gRPC-Web istemcisi
 
-Bir JavaScript gRPC-Web istemcisi vardır. JavaScript'ten gRPC-Web'in nasıl kullanılacağına ilişkin talimatlar için [bkz.](https://github.com/grpc/grpc-web/tree/master/net/grpc/gateway/examples/helloworld#write-client-code)
+Bir JavaScript gRPC-Web istemcisi vardır. JavaScript 'ten gRPC-Web kullanma hakkında yönergeler için bkz. [gRPC-web Ile JavaScript istemci kodu yazma](https://github.com/grpc/grpc-web/tree/master/net/grpc/gateway/examples/helloworld#write-client-code).
 
-### <a name="configure-grpc-web-with-the-net-grpc-client"></a>gRPC-Web'i .NET gRPC istemcisi ile yapılandırın
+### <a name="configure-grpc-web-with-the-net-grpc-client"></a>.NET gRPC istemcisiyle gRPC-Web yapılandırma
 
-.NET gRPC istemcisi gRPC-Web aramaları yapacak şekilde yapılandırılabilir. Bu, tarayıcıda barındırılan ve JavaScript kodunun aynı HTTP sınırlamaları olan [Blazor WebAssembly](xref:blazor/index#blazor-webassembly) uygulamaları için yararlıdır. gRPC-Web'i .NET istemcisi ile aramak [HTTP/2 gRPC ile aynıdır.](xref:grpc/client) Tek değişiklik kanalın nasıl oluşturulduğudur.
+.NET gRPC istemcisi, gRPC-Web çağrıları yapmak için yapılandırılabilir. Bu, tarayıcıda barındırılan ve JavaScript koduyla aynı http kısıtlamalarına sahip olan [ Blazor webassembly](xref:blazor/index#blazor-webassembly) uygulamaları için kullanışlıdır. Bir .NET istemcisiyle gRPC-Web ' i çağırmak [http/2 gRPC ile aynıdır](xref:grpc/client). Tek değişiklik, kanalın oluşturulma şekli olur.
 
-gRPC-Web'i kullanmak için:
+GRPC-Web kullanmak için:
 
-* [Grpc.Net.Client.Web](https://www.nuget.org/packages/Grpc.Net.Client.Web) paketine bir başvuru ekleyin.
-* [Grpc.Net.Client](https://www.nuget.org/packages/Grpc.Net.Client) paketine başvuru2.27.0 veya daha büyük olduğundan emin olun.
-* Kanalı kullanmak için `GrpcWebHandler`yapılandırın:
+* [GRPC .net. Client. Web](https://www.nuget.org/packages/Grpc.Net.Client.Web) paketine başvuru ekleyin.
+* [GRPC .net. Client](https://www.nuget.org/packages/Grpc.Net.Client) paketine yönelik başvurunun 2.27.0 veya daha büyük olduğundan emin olun.
+* Kanalı şunu kullanacak şekilde yapılandırın `GrpcWebHandler`:
 
 [!code-csharp[](~/grpc/browser/sample/Handler.cs?name=snippet_1)]
 
 Yukarıdaki kod:
 
-* bir kanalı gRPC-Web'i kullanacak şekilde yapılandırır.
-* İstemci oluşturur ve kanalı kullanarak arama yapar.
+* GRPC-Web kullanmak için bir kanal yapılandırır.
+* Bir istemci oluşturur ve kanalı kullanarak bir çağrı yapar.
 
-Oluşturulduğunda `GrpcWebHandler` aşağıdaki yapılandırma seçenekleri vardır:
+, `GrpcWebHandler` Oluşturulduğunda aşağıdaki yapılandırma seçeneklerine sahiptir:
 
-* **InnerHandler**: <xref:System.Net.Http.HttpMessageHandler> örneğin `HttpClientHandler`gRPC HTTP isteğini oluşturan temel.
-* **Mod**: gRPC HTTP isteğinin `Content-Type` olup olmadığını `application/grpc-web` belirten bir `application/grpc-web-text`numaralandırma türü.
-    * `GrpcWebMode.GrpcWeb`kodlar olmadan gönderilecek içeriği yapılandırır. Varsayılan değer.
-    * `GrpcWebMode.GrpcWebText`içeriği base64 kodlanacak şekilde yapılandırır. Tarayıcılarda sunucu akışı aramaları için gereklidir.
-* **HttpVersion**: `Version` HTTP protokolü altta yatan gRPC HTTP isteği [httpRequestMessage.Version](xref:System.Net.Http.HttpRequestMessage.Version) ayarlamak için kullanılır. gRPC-Web belirli bir sürümü gerektirmez ve belirtilmedikçe varsayılangeçersiz kılmaz.
+* **InnerHandler**:, örneğin <xref:System.Net.Http.HttpMessageHandler> , `HttpClientHandler`GRPC http isteğini oluşturan temel.
+* **Mode**: GRPC http isteğinin `Content-Type` `application/grpc-web` veya `application/grpc-web-text`olup olmadığını belirten bir numaralandırma türü.
+    * `GrpcWebMode.GrpcWeb`kodlamadan gönderilecek içeriği yapılandırır. Varsayılan değer.
+    * `GrpcWebMode.GrpcWebText`içeriği Base64 kodlamalı olarak yapılandırır. Tarayıcılarda sunucu akış çağrıları için gereklidir.
+* **HttpVersion**: temeldeki GRPC http `Version` Isteğindeki [HttpRequestMessage. Version](xref:System.Net.Http.HttpRequestMessage.Version) öğesini ayarlamak için kullanılan http protokolü. gRPC-Web belirli bir sürüm gerektirmez ve belirtilmediği takdirde varsayılanı geçersiz kılmaz.
 
 > [!IMPORTANT]
-> Oluşturulan gRPC istemcileri unary yöntemleri aramak için eşitleme ve async yöntemleri var. Örneğin, `SayHello` eşitlenir `SayHelloAsync` ve async olduğunu. Blazor WebAssembly uygulamasında eşitleme yöntemini çağırmak, uygulamanın yanıt vermese neden olur. Blazor WebAssembly'de async yöntemleri her zaman kullanılmalıdır.
+> Oluşturulan gRPC istemcilerinin birli yöntemleri çağırmak için eşitleme ve zaman uyumsuz yöntemleri vardır. Örneğin, `SayHello` eşitlenir ve `SayHelloAsync` zaman uyumsuz olur. Bir Blazor webassembly uygulamasında bir Sync yönteminin çağrılması uygulamanın yanıt vermemeye başlamasına neden olur. Zaman uyumsuz yöntemlerin her zaman webassembly içinde Blazor kullanılması gerekir.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [Web Istemcileri GitHub projesi için gRPC](https://github.com/grpc/grpc-web)
+* [Web Istemcileri için gRPC GitHub projesi](https://github.com/grpc/grpc-web)
 * <xref:security/cors>

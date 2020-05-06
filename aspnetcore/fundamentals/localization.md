@@ -1,107 +1,113 @@
 ---
-title: ASP.NET Çekirdek'te küreselleşme ve yerelleşme
+title: ASP.NET Core Genelleştirme ve yerelleştirme
 author: rick-anderson
-description: ASP.NET Core'un içeriği farklı dillerde ve kültürlerde yerelleştirmek için nasıl hizmet ve ara yazılım sağladığını öğrenin.
+description: ASP.NET Core farklı diller ve kültürlere içerik yerelleştirilmesi için nasıl hizmet ve ara yazılım sağladığını öğrenin.
 ms.author: riande
 ms.date: 11/30/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: fundamentals/localization
-ms.openlocfilehash: 91db83eb8685c7bee5e976f386c2a12c4090b734
-ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
+ms.openlocfilehash: 1111c0c57baf5bfd52b26b553179338100b9ba79
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81440824"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776571"
 ---
-# <a name="globalization-and-localization-in-aspnet-core"></a>ASP.NET Çekirdek'te küreselleşme ve yerelleşme
+# <a name="globalization-and-localization-in-aspnet-core"></a>ASP.NET Core Genelleştirme ve yerelleştirme
 
-Yazar: [Rick Anderson](https://twitter.com/RickAndMSFT), [Damien Bowden](https://twitter.com/damien_bod), Bart [Calixto](https://twitter.com/bartmax), [Nadeem Afana](https://afana.me/), ve [Hisham Bin Ateya](https://twitter.com/hishambinateya)
+By [Rick Anderson](https://twitter.com/RickAndMSFT), [Hemien Bowden](https://twitter.com/damien_bod), [Bart calixto](https://twitter.com/bartmax), [Nadeem Afana](https://afana.me/), ve [fiham bin ateya](https://twitter.com/hishambinateya)
 
-ASP.NET Core ile çok dilli bir web sitesi oluşturmak, sitenizin daha geniş bir kitleye ulaşmasını sağlayacaktır. ASP.NET Core, farklı dillerde ve kültürlere yerelleştirme hizmetleri ve ara yazılımlar sunmaktadır.
+ASP.NET Core bir çoklu dil web sitesi oluşturmak, sitenizin daha geniş bir hedef kitleye ulaşmasını sağlar. ASP.NET Core, farklı diller ve kültürlere yerelleştirme için hizmet ve ara yazılım sağlar.
 
-Uluslararasılaşma [Küreselleşme](/dotnet/api/system.globalization) ve [Yerelleşme](/dotnet/standard/globalization-localization/localization)içerir. Küreselleşme, farklı kültürleri destekleyen uygulamalar tasarlama işlemidir. Genelleştirme, belirli coğrafi bölgelerle ilgili tanımlı bir dil komut dosyası kümesinin girişi, görüntülenmesi ve çıktısı için destek ekler.
+Uluslararası duruma getirme, [Genelleştirme](/dotnet/api/system.globalization) ve [Yerelleştirme](/dotnet/standard/globalization-localization/localization)içerir. Genelleştirme, farklı kültürleri destekleyen uygulamalar tasarlama işlemidir. Genelleştirme, belirli coğrafi alanlarla ilgili olarak tanımlanmış bir dil betikleri kümesinin giriş, görüntüleme ve çıkışı için destek ekler.
 
-Yerelleştirme, yerelleştirilebilirlik için zaten işlemiş olduğunuz küreselleştirilmiş bir uygulamayı belirli bir kültüre/yerelliğe uyarlama işlemidir. Daha fazla bilgi için bu belgenin sonuna yakın **Küreselleşme ve yerelleştirme terimlerini** görün.
+Yerelleştirme, belirli bir kültür/yerel ayara, Yerelleştirilebilirlik için zaten işlenmiş olan bir Genelleştirilmiş uygulamasını uyarlatma işlemidir. Daha fazla bilgi için bu belgenin sonundaki **Genelleştirme ve yerelleştirme koşullarına** bakın.
 
-Uygulama yerelleştirme aşağıdakileri içerir:
+Uygulama yerelleştirmesi şunları içerir:
 
-1. Uygulamanın içeriğini yerelleştirilebilir hale getirin
+1. Uygulamanın içeriğini yerelleştirilebilir yapın
 
-2. Desteklediğiniz diller ve kültürler için yerelleştirilmiş kaynaklar sağlayın
+2. Destekettiğiniz diller ve kültürler için yerelleştirilmiş kaynaklar sağlayın
 
-3. Her istek için dili/kültürü seçmek için bir strateji uygulayın
+3. Her istek için dil/kültür seçmek üzere bir strateji uygulayın
 
-[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/Localization) ( nasıl[indirilir](xref:index#how-to-download-a-sample))
+[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/Localization) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="make-the-apps-content-localizable"></a>Uygulamanın içeriğini yerelleştirilebilir hale getirin
+## <a name="make-the-apps-content-localizable"></a>Uygulamanın içeriğini yerelleştirilebilir yapın
 
-ASP.NET Core'da `IStringLocalizer` tanıtıldı `IStringLocalizer<T>` ve yerelleştirilmiş uygulamalar geliştirirken üretkenliği artırmak için geliştirildi. `IStringLocalizer`çalışma zamanında kültüre özgü kaynaklar sağlamak için [ResourceManager](/dotnet/api/system.resources.resourcemanager) ve [ResourceReader'ı](/dotnet/api/system.resources.resourcereader) kullanır. Basit arabirimde bir dizinleyici ve yerelleştirilmiş dizeleri döndüren için bir `IEnumerable` vardır. `IStringLocalizer`varsayılan dil dizelerini bir kaynak dosyasında depolamanızı gerektirmez. Yerelleştirme için hedeflenen bir uygulama geliştirebilirsiniz ve geliştirme nin başında kaynak dosyaları oluşturmanız gerekmez. Aşağıdaki kod, yerelleştirme için "Başlık Hakkında" dizesini nasıl sarın gösterir.
+ASP.NET Core tanıtılan `IStringLocalizer` ve `IStringLocalizer<T>` yerelleştirilmiş uygulamalar geliştirilirken üretkenliği artırmak için tasarlanmıştır. `IStringLocalizer`çalışma zamanında kültüre özgü kaynaklar sağlamak için [ResourceManager](/dotnet/api/system.resources.resourcemanager) ve [ResourceReader](/dotnet/api/system.resources.resourcereader) kullanır. Basit arabirimde bir Dizin Oluşturucu ve yerelleştirilmiş dizeleri `IEnumerable` döndürmek için bir. `IStringLocalizer`, varsayılan dil dizelerini bir kaynak dosyasında depolamanızı gerektirmez. Yerelleştirmeye yönelik bir uygulama geliştirebilir ve geliştirmede erken kaynak dosyaları oluşturmaya gerek yoktur. Aşağıdaki kod, yerelleştirme için "başlık hakkında" dizesinin nasıl sarılacağı gösterilmektedir.
 
 [!code-csharp[](localization/sample/Localization/Controllers/AboutController.cs)]
 
-Yukarıdaki kodda, `IStringLocalizer<T>` uygulama [Bağımlılık Enjeksiyon](dependency-injection.md)geliyor. "Başlık Hakkında"nın yerelleştirilmiş değeri bulunamazsa, dizinleyici anahtarı döndürülür, yani "Başlık Hakkında" dizesi. Uygulamayı geliştirmeye odaklanabilmek için varsayılan dil deki edebi dizeleri uygulamada bırakabilir ve yerelleştiriciye sarabilirsiniz. Varsayılan dilinizle uygulamanızı geliştirir ve varsayılan kaynak dosyası oluşturmadan yerelleştirme adımına hazırlarsınız. Alternatif olarak, geleneksel yaklaşımı kullanabilir ve varsayılan dil dizesini almak için bir anahtar sağlayabilirsiniz. Birçok geliştirici için varsayılan bir dile sahip olmamak *.resx* dosyası ve yalnızca dize literallerini sarmak, bir uygulamayı yerelleştirmenin ek yüküne neden olabilir. Diğer geliştiriciler, daha uzun dize gerçekleriyle çalışmayı ve yerelleştirilmiş dizeleri güncelleştirmeyi kolaylaştırabileceğinden geleneksel iş akışını tercih eder.
+Yukarıdaki kodda, `IStringLocalizer<T>` uygulama [bağımlılık ekleme](dependency-injection.md)işleminden gelir. Yerelleştirilmiş "başlık hakkında" değeri bulunmazsa, Dizin Oluşturucu anahtarı döndürülür, diğer bir deyişle "başlık hakkında" dizesidir. Uygulama geliştirmeye odaklanabilmeniz için varsayılan dil değişmez dizelerini uygulamada bırakabilir ve Localizer ' da kaydırabilirsiniz. Uygulamanızı varsayılan diliniz ile geliştirin ve öncelikle varsayılan bir kaynak dosyası oluşturmadan yerelleştirme adımına hazırlayın. Alternatif olarak, geleneksel yaklaşımı kullanabilir ve varsayılan dil dizesini almak için bir anahtar sağlayabilirsiniz. Birçok geliştirici için, varsayılan Language *. resx* dosyası olmayan yeni iş akışı ve yalnızca dize değişmez değerlerini sarmalama, bir uygulamayı yerelleştirme yükünü azaltabilir. Diğer geliştiriciler geleneksel iş akışını tercih eder, daha uzun dize sabit değerleri ile çalışmayı kolaylaştırır ve yerelleştirilmiş dizelerin güncelleştirilmesini kolaylaştırır.
 
-`IHtmlLocalizer<T>` HTML içeren kaynaklar için uygulamayı kullanın. `IHtmlLocalizer`HTML, kaynak dizesinde biçimlendirilmiş bağımsız değişkenleri kodlar, ancak KAYNAK dizesini HTML kodlamaz. Aşağıda vurgulanan örnekte, yalnızca `name` parametrenin değeri HTML kodlanır.
+HTML içeren `IHtmlLocalizer<T>` kaynaklar için uygulamayı kullanın. `IHtmlLocalizer`HTML, kaynak dizesinde biçimlendirilen, ancak kaynak dizenin kendisini kodlayan bağımsız değişkenleri kodluyor. Aşağıda vurgulanan örnekte, yalnızca `name` PARAMETRESININ değeri HTML kodlamalı olur.
 
 [!code-csharp[](../fundamentals/localization/sample/Localization/Controllers/BookController.cs?highlight=3,5,20&start=1&end=24)]
 
-**Not:** Genellikle html değil, yalnızca metni yerelleştirmek istersiniz.
+**Note:** Genellikle HTML değil yalnızca metni yerelleştirmek istersiniz.
 
-En düşük düzeyde, Bağımlılık `IStringLocalizerFactory` [Enjeksiyon](dependency-injection.md)ulabilirsiniz:
+En düşük düzeyde, `IStringLocalizerFactory` [bağımlılık ekleme](dependency-injection.md)işlemini alabilirsiniz:
 
 [!code-csharp[](localization/sample/Localization/Controllers/TestController.cs?start=9&end=26&highlight=7-13)]
 
-Yukarıdaki kod, her iki fabrika oluşturma yöntemlerini gösterir.
+Yukarıdaki kod, iki fabrika oluşturma yönteminin her birini gösterir.
 
-Yerelleştirilmiş dizelerinizi denetleyiciye, alana göre bölümlere alabilir veya yalnızca bir kapsayıcınız olabilir. Örnek uygulamada, paylaşılan kaynaklar için `SharedResource` adlandırılmış bir sahte sınıf kullanılır.
+Yerelleştirilmiş dizelerinizi denetleyiciye, alana veya yalnızca bir kapsayıcıya göre bölümleyebilirsiniz. Örnek uygulamada, paylaşılan kaynaklar için adlı `SharedResource` bir kukla sınıf kullanılır.
 
 [!code-csharp[](localization/sample/Localization/Resources/SharedResource.cs)]
 
-Bazı geliştiriciler `Startup` sınıfı genel veya paylaşılan dizeleri içerecek şekilde kullanır. Aşağıdaki örnekte, `InfoController` yerelleştiriciler ve `SharedResource` yerelleştiriciler kullanılır:
+Bazı geliştiriciler, `Startup` genel veya paylaşılan dizeler içeren sınıfını kullanır. Aşağıdaki örnekte, `InfoController` ve `SharedResource` yerelleştiriciler kullanılır:
 
 [!code-csharp[](localization/sample/Localization/Controllers/InfoController.cs?range=9-26)]
 
-## <a name="view-localization"></a>Yerelleştirmeyi görüntüleme
+## <a name="view-localization"></a>Yerelleştirmeyi görüntüle
 
-Hizmet, `IViewLocalizer` [görünüm](xref:mvc/views/overview)için yerelleştirilmiş dizeleri sağlar. Sınıf `ViewLocalizer` bu arabirimi uygular ve kaynak konumunu görünüm dosyası yolundan bulur. Aşağıdaki kod, varsayılan uygulamanın nasıl `IViewLocalizer`kullanılacağını gösterir:
+Hizmet `IViewLocalizer` , bir [Görünüm](xref:mvc/views/overview)için yerelleştirilmiş dizeler sağlar. `ViewLocalizer` Sınıfı bu arabirimi uygular ve görünüm dosyası yolundan kaynak konumunu bulur. Aşağıdaki kod, öğesinin `IViewLocalizer`varsayılan uygulamasının nasıl kullanılacağını gösterir:
 
 [!code-cshtml[](localization/sample/Localization/Views/Home/About.cshtml)]
 
-Varsayılan uygulama, `IViewLocalizer` görünümün dosya adını temel alan kaynak dosyasını bulur. Genel paylaşılan kaynak dosyasını kullanma seçeneği yoktur. `ViewLocalizer`kullanarak yerelleştiriciyi `IHtmlLocalizer`uygular, böylece Razor yerelleştirilmiş dizeyi HTML kodlamaz. Kaynak dizeleri parametrenize `IViewLocalizer` edebilirsiniz ve HTML parametreleri kodlar, ancak kaynak dizesini kodlar. Aşağıdaki Jilet biçimlendirmesini göz önünde bulundurun:
+Varsayılan uygulama, görünümün `IViewLocalizer` dosya adına göre kaynak dosyasını bulur. Genel paylaşılan kaynak dosyası kullanma seçeneği yoktur. `ViewLocalizer`kullanarak `IHtmlLocalizer`yorumdur 'ı uygular, bu yüzden Razor, yerelleştirilmiş dize olarak HTML kodlaması yapmaz. Kaynak dizelerini parametreleştirebilirsiniz ve `IViewLocalizer` kaynak dizesini değil, parametreleri HTML olarak kodlayabilirsiniz. Aşağıdaki Razor işaretlemesini göz önünde bulundurun:
 
 ```cshtml
 @Localizer["<i>Hello</i> <b>{0}!</b>", UserManager.GetUserName(User)]
 ```
 
-Bir Fransızca kaynak dosyası aşağıdakileri içerebilir:
+Bir Fransızca kaynak dosyası şunları içerebilir:
 
 | Anahtar | Değer |
 | ----- | ------ |
 | `<i>Hello</i> <b>{0}!</b>` | `<i>Bonjour</i> <b>{0} !</b>` |
 
-İşlenen görünüm, kaynak dosyasındaki HTML biçimlendirmesini içerir.
+İşlenmiş görünüm, kaynak dosyasındaki HTML işaretlemesini içerir.
 
-**Not:** Genellikle html değil, yalnızca metni yerelleştirmek istersiniz.
+**Note:** Genellikle HTML değil yalnızca metni yerelleştirmek istersiniz.
 
-Paylaşılan kaynak dosyasını görünümde kullanmak `IHtmlLocalizer<T>`için şunları enjekte edin:
+Bir görünümde paylaşılan kaynak dosyasını kullanmak için şunu ekleme `IHtmlLocalizer<T>`:
 
 [!code-cshtml[](../fundamentals/localization/sample/Localization/Views/Test/About.cshtml?highlight=5,12)]
 
-## <a name="dataannotations-localization"></a>DataAnnotations yerelleştirme
+## <a name="dataannotations-localization"></a>Dataaçıklamaların yerelleştirilmesi
 
-DataAnnotations hata iletileri ile `IStringLocalizer<T>`yerelleştirilir. `ResourcesPath = "Resources"`Seçeneğini kullanarak, hata iletileri `RegisterViewModel` aşağıdaki yollardan birinde saklanabilir:
+Dataek açıklamalar hata iletileri ile `IStringLocalizer<T>`yereldir. Seçeneğini `ResourcesPath = "Resources"`kullanarak, içindeki `RegisterViewModel` hata iletileri aşağıdaki yollardan birinde depolanabilir:
 
-* *Kaynaklar/ViewModels.Account.RegisterViewModel.fr.resx*
-* *Kaynaklar/Görünüm Modelleri/Hesap/RegisterViewModel.fr.resx*
+* *Resources/Viewmodeller. account. RegisterViewModel. fr. resx*
+* *Kaynaklar/Viewmodeller/hesap/RegisterViewModel. fr. resx*
 
 [!code-csharp[](localization/sample/Localization/ViewModels/Account/RegisterViewModel.cs?start=9&end=26)]
 
-Core MVC 1.1.0 ve daha yüksek ASP.NET, doğrulama olmayan öznitelikler yerelleştirilmiştir. ASP.NET Core MVC 1.0, doğrulama olmayan öznitelikler için yerelleştirilmiş dizeleri **aramaz.**
+ASP.NET Core MVC 1.1.0 ve üzeri, doğrulama olmayan öznitelikler yereldir. ASP.NET Core MVC 1,0, doğrulama olmayan öznitelikler için yerelleştirilmiş **dizeleri aramaz.**
 
 <a name="one-resource-string-multiple-classes"></a>
 
-### <a name="using-one-resource-string-for-multiple-classes"></a>Birden çok sınıf için tek kaynak dizesini kullanma
+### <a name="using-one-resource-string-for-multiple-classes"></a>Birden çok sınıf için bir kaynak dizesi kullanma
 
-Aşağıdaki kod, birden çok sınıfiçeren doğrulama öznitelikleri için bir kaynak dizesinin nasıl kullanılacağını gösterir:
+Aşağıdaki kod, birden çok sınıfa sahip doğrulama öznitelikleri için bir kaynak dizesinin nasıl kullanılacağını gösterir:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -114,67 +120,67 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Önceki kodda, `SharedResource` doğrulama iletilerinizin depolandığı resx'e karşılık gelen sınıf dır. Bu yaklaşımla, DataAnnotations `SharedResource`yalnızca , yerine her sınıf için kaynak kullanır.
+Yukarıdaki kodda, `SharedResource` doğrulama iletilerinizin depolandığı resx öğesine karşılık gelen sınıftır. Bu yaklaşımda, veri açıklamaları yalnızca her bir `SharedResource`sınıf için kaynak yerine yalnızca kullanılır.
 
-## <a name="provide-localized-resources-for-the-languages-and-cultures-you-support"></a>Desteklediğiniz diller ve kültürler için yerelleştirilmiş kaynaklar sağlayın
+## <a name="provide-localized-resources-for-the-languages-and-cultures-you-support"></a>Destekettiğiniz diller ve kültürler için yerelleştirilmiş kaynaklar sağlayın
 
-### <a name="supportedcultures-and-supporteduicultures"></a>Desteklenen Kültürler ve DesteklenenUICultures
+### <a name="supportedcultures-and-supporteduicultures"></a>Supportedkültürleri ve SupportedUICultures
 
-ASP.NET Core iki kültür değeri `SupportedCultures` belirtmenizi sağlar ve `SupportedUICultures`. [CultureInfo](/dotnet/api/system.globalization.cultureinfo) nesnesi, `SupportedCultures` tarih, saat, sayı ve para birimi biçimlendirme gibi kültüre bağımlı işlevlerin sonuçlarını belirler. `SupportedCultures`ayrıca metnin sıralama sırasını, kasa kurallarını ve dize karşılaştırmalarını belirler. Sunucunun Kültürü nasıl aldığı hakkında daha fazla bilgi için [CultureInfo.CurrentCulture'a](/dotnet/api/system.stringcomparer.currentculture#System_StringComparer_CurrentCulture) bakın. Çevrilen `SupportedUICultures` dizelerin *(.resx* dosyalarından) kaynak [yöneticisi](/dotnet/api/system.resources.resourcemanager)tarafından aranır. Basitçe, `ResourceManager` kültüre özgü dizeleri `CurrentUICulture`arar. .NET'teki her `CurrentCulture` `CurrentUICulture` iş parçacığı ve nesne vardır. ASP.NET Core kültüre bağımlı işlevleri işlerken bu değerleri inceler. Örneğin, geçerli iş parçacığının kültürü "en-US" (İngilizce, AMERIKA `DateTime.Now.ToLongDateString()` Birleşik Devletleri) olarak ayarlanmışsa, "18 Şubat `CurrentCulture` 2016 Perşembe" görüntülenirse, ancak "es-ES" (İspanyolca, İspanya) olarak ayarlanırsa çıktı "jueves, 18 de febrero de 2016" olacaktır.
+ASP.NET Core iki kültür değeri `SupportedCultures` belirtmenize olanak tanır. `SupportedUICultures` `SupportedCultures` İçin [CultureInfo](/dotnet/api/system.globalization.cultureinfo) nesnesi, tarih, saat, sayı ve para birimi biçimlendirme gibi kültüre bağımlı işlevlerin sonuçlarını belirler. `SupportedCultures`Ayrıca metnin, büyük/küçük harf kurallarının ve dize karşılaştırmalarının sıralama sırasını belirler. Sunucunun kültürü nasıl aldığı hakkında daha fazla bilgi için bkz [. CultureInfo. CurrentCulture](/dotnet/api/system.stringcomparer.currentculture#System_StringComparer_CurrentCulture) . , `SupportedUICultures` Hangi çevrilmiş dizelerin ( *. resx* dosyalarından) [ResourceManager](/dotnet/api/system.resources.resourcemanager)tarafından arandığını belirler. `ResourceManager` Yalnızca tarafından `CurrentUICulture`belirlenen kültüre özgü dizeleri arar. .NET 'teki her iş parçacığında `CurrentCulture` ve `CurrentUICulture` nesneler bulunur. ASP.NET Core kültüre bağımlı işlevleri işlerken bu değerleri inceler. Örneğin, geçerli iş parçacığının kültürü "en-US" (Ingilizce, Birleşik Devletler) olarak ayarlandıysa, "Perşembe, 18 `DateTime.Now.ToLongDateString()` Şubat 2016" görüntüler, ancak `CurrentCulture` "es-es" (İspanyolca, İspanya) olarak ayarlandıysa çıkış "Jueves, 18 de febrero de 2016" olacaktır.
 
 ## <a name="resource-files"></a>Kaynak dosyalar
 
-Kaynak dosyası, yerelleştirilebilir dizeleri koddan ayırmak için yararlı bir mekanizmadır. Varsayılan olmayan dil için çevrilmiş dizeleri *.resx* kaynak dosyalarında yalıtılır. Örneğin, çevrilmiş dizeleri içeren *Welcome.es.resx* adlı İspanyolca kaynak dosyası oluşturmak isteyebilirsiniz. "es" İspanyolca'nın dil kodudur. Visual Studio'da bu kaynak dosyasını oluşturmak için:
+Kaynak dosyası, koddan yerelleştirilebilir dizeleri ayırmak için kullanışlı bir mekanizmadır. Varsayılan olmayan dil için çevrilmiş dizeler *. resx* kaynak dosyalarında yalıtılmıştır. Örneğin, çevrilmiş dizeleri içeren *Welcome. es. resx* adlı İspanyolca kaynak dosyası oluşturmak isteyebilirsiniz. "es", Ispanyolca için dil kodudur. Bu kaynak dosyasını Visual Studio 'da oluşturmak için:
 
-1. **Çözüm Gezgini'nde,** Kaynak dosyasını içerecek klasöre sağ tıklayın >**Yeni Öğe** **Ekle.** > 
+1. **Çözüm Gezgini**' de,**Yeni öğe** **Ekle** > > kaynak dosyasını içerecek klasöre sağ tıklayın.
 
-    ![İç içe bağlamsal menü: Solution Explorer'da Kaynaklar için bağlamsal bir menü açıktır. Vurgulanan Yeni Öğe komutunu gösteren Ekle için ikinci bir bağlamsal menü açılır.](localization/_static/newi.png)
+    ![İç içe bağlamsal bağlam menüsü: Çözüm Gezgini, kaynaklar için bir bağlamsal menü açıktır. İkinci bağlamsal menü, yeni öğe komutunun vurgulandığı ekleme için açıktır.](localization/_static/newi.png)
 
-2. Arama **yüklü şablonlar** kutusuna "kaynak" girin ve dosyayı adlandırın.
+2. **Yüklü şablonları ara** kutusuna "kaynak" yazın ve dosyayı adlandırın.
 
-    ![Yeni Öğe iletişim kutusu ekle](localization/_static/res.png)
+    ![Yeni öğe Ekle iletişim kutusu](localization/_static/res.png)
 
-3. **Ad** sütununa anahtar değerini (yerel dizeyi) ve **Değer** sütununa çevrilmiş dizeyi girin.
+3. **Ad** sütununa anahtar değerini (yerel dize) ve **değer** sütununda çevrilmiş dizeyi girin.
 
-    ![Welcome.es.resx dosyası (İspanyolca için hoş geldiniz kaynak dosyası) Ad sütununda Merhaba sözcüğü ve Değer sütununda Hola (İspanyolca Merhaba) sözcüğü ile](localization/_static/hola.png)
+    ![Ad sütunundaki Merhaba. es. resx dosyası (Ispanyolca için hoş geldiniz kaynak dosyası) ve değer sütununda Hola (Ispanyolca) adlı kelime](localization/_static/hola.png)
 
-    Visual Studio *Welcome.es.resx* dosyasını gösterir.
+    Visual Studio, *Welcome. es. resx* dosyasını gösterir.
 
-    ![Hoş Geldiniz İspanyolca (es) kaynak dosyasını gösteren Çözüm Gezgini](localization/_static/se.png)
+    ![Hoş geldiniz Ispanyolca (es) kaynak dosyasını gösteren Çözüm Gezgini](localization/_static/se.png)
 
 ## <a name="resource-file-naming"></a>Kaynak dosyası adlandırma
 
-Kaynaklar, sınıflarının tam tür adı eksi derleme adı için adlandırılır. Örneğin, ana derlemesi sınıf `LocalizationWebsite.Web.dll` `LocalizationWebsite.Web.Startup` için olan bir projedeki Bir Fransızca kaynak *Başlangıç.fr.resx*olarak adlandırılır. Sınıf `LocalizationWebsite.Web.Controllers.HomeController` için bir kaynak *Controllers.HomeController.fr.resx*adlı olacaktır. Hedeflediğiniz sınıfın ad alanı derleme adı ile aynı değilse, tam tür adı gerekir. Örneğin, örnek projede türü `ExtraNamespace.Tools` için bir kaynak *ExtraNamespace.Tools.fr.resx*adlı olacaktır.
+Kaynaklar, sınıfının tam tür adı için derleme adı eksi olarak adlandırılır. Örneğin, ana derlemesi sınıf `LocalizationWebsite.Web.dll` `LocalizationWebsite.Web.Startup` için olan bir projedeki bir Fransızca kaynak, *Startup. fr. resx*olarak adlandırılır. Sınıf `LocalizationWebsite.Web.Controllers.HomeController` için bir kaynak *denetleyicileri. HomeController. fr. resx*olarak adlandırılır. Hedeflenen sınıfınızın ad alanı, derleme adı ile aynı değilse, tam tür adına ihtiyacınız olur. Örneğin, örnek projede, tür `ExtraNamespace.Tools` için bir kaynak *ExtraNamespace. Tools. fr. resx*olarak adlandırılır.
 
-Örnek projede, `ConfigureServices` yöntem "Kaynaklar" `ResourcesPath` olarak ayarlar, bu nedenle ev denetleyicisinin Fransızca kaynak dosyasıiçin proje göreli yolu *Kaynaklar/Controllers.HomeController.fr.resx'tir.* Alternatif olarak, kaynak dosyalarını düzenlemek için klasörleri kullanabilirsiniz. Ev denetleyicisi için yol *Kaynaklar/Denetleyiciler/HomeController.fr.resx*olacaktır. Seçeneği kullanmazsanız, `ResourcesPath` *.resx* dosyası proje temel dizinine gider. Kaynak `HomeController` dosyası *controllers.HomeController.fr.resx*adlı olacaktır. Nokta veya yol adlandırma kuralını kullanma seçeneği, kaynak dosyalarınızı nasıl düzenlemek istediğinize bağlıdır.
+Örnek projede, `ConfigureServices` yöntemi "resources" `ResourcesPath` olarak ayarlıyor, bu nedenle ana denetleyicinin Fransızca kaynak dosyasının proje göreli yolu *Resources/Controllers. HomeController. fr. resx*olur. Alternatif olarak, kaynak dosyalarını düzenlemek için klasörleri de kullanabilirsiniz. Ana denetleyici için yol *kaynaklar/denetleyiciler/HomeController. fr. resx*olacaktır. `ResourcesPath` Seçeneğini kullanmazsanız, *. resx* dosyası proje temel dizinine gidecek. İçin `HomeController` kaynak dosyası, *Controllers. HomeController. fr. resx*olarak adlandırılır. Nokta veya yol adlandırma kuralını kullanma seçeneği, kaynak dosyalarınızı nasıl düzenlemek istediğinize bağlıdır.
 
 | Kaynak adı | Nokta veya yol adlandırma |
 | ------------   | ------------- |
-| Kaynaklar/Denetleyiciler.HomeController.fr.resx | Nokta  |
-| Kaynaklar/Denetleyiciler/HomeController.fr.resx  | Yol |
+| Kaynaklar/denetleyiciler. HomeController. fr. resx | Nokta  |
+| Kaynaklar/denetleyiciler/HomeController. fr. resx  | Yol |
 |    |     |
 
-Razor görünümlerinde kullanan `@inject IViewLocalizer` kaynak dosyaları da benzer bir desen izler. Görünüm için kaynak dosyası nokta adlandırma veya yol adlandırma kullanarak adlandırılabilir. Jilet görünümü kaynak dosyaları ilişkili görünüm dosyalarının yolunu taklit. "Kaynaklar" `ResourcesPath` olarak ayarladiğimizı varsayarsak, *Görünümler/Ana Sayfa/About.cshtml* görünümüyle ilişkili Fransızca kaynak dosyası aşağıdakilerden biri olabilir:
+Razor Görünümlerde kullanılan `@inject IViewLocalizer` kaynak dosyaları benzer bir model izler. Bir görünüm için kaynak dosyası, nokta adlandırması veya yol adlandırması kullanılarak adlandırılabilir. Razorkaynak dosyalarını görüntüleme, ilişkili görünüm dosyalarının yolunu taklit eden. "Resources" `ResourcesPath` olarak belirlediğimiz varsayılarak, *Görünümler/Home/about. cshtml* görünümü ile ilişkili Fransızca kaynak dosyası aşağıdakilerden biri olabilir:
 
-* Kaynaklar/Görünümler/Ana Sayfa/About.fr.resx
+* Kaynaklar/görünümler/giriş/about. fr. resx
 
-* Kaynaklar/Görünümler.Home.About.fr.resx
+* Kaynaklar/görünümler. Home. about. fr. resx
 
-Seçeneği kullanmazsanız, `ResourcesPath` görünüm için *.resx* dosyası görünümle aynı klasörde bulunur.
+`ResourcesPath` Seçeneğini kullanmazsanız, bir görünüm için *. resx* dosyası görünümüyle aynı klasörde bulunur.
 
-### <a name="rootnamespaceattribute"></a>Rootnamespaceattribute 
+### <a name="rootnamespaceattribute"></a>RootNamespaceAttribute 
 
 [RootNamespace](/dotnet/api/microsoft.extensions.localization.rootnamespaceattribute?view=aspnetcore-2.1) özniteliği, bir derlemenin kök ad alanı derleme adından farklı olduğunda bir derlemenin kök ad alanını sağlar. 
 
 > [!WARNING]
-> Bu, bir projenin adı geçerli bir .NET tanımlayıcısı olmadığında oluşabilir. Örneğin, `my-project-name.csproj` kök ad alanını `my_project_name` ve bu `my-project-name` hataya yol açan derleme adını kullanır. 
+> Bu durum, projenin adı geçerli bir .NET tanımlayıcısı olmadığında ortaya çıkabilir. `my-project-name.csproj` Örneğin, bu hata için kök ad `my_project_name` alanını ve derleme adını `my-project-name` kullanır. 
 
-Bir derlemenin kök ad alanı derleme adından farklıysa:
+Bir derlemenin kök ad alanı, derleme adından farklıysa:
 
-* Yerelleştirme varsayılan olarak çalışmıyor.
-* Yerelleştirme, derleme içinde kaynakların aranması nedeniyle başarısız olur. `RootNamespace`yürütme işlemi için kullanılamayan bir yapı zamanı değeridir. 
+* Yerelleştirme varsayılan olarak çalışmaz.
+* Yerelleştirme, derleme içinde kaynakların aranacağı yol nedeniyle başarısız olur. `RootNamespace`, yürütme işlemi için kullanılamayan bir derleme zamanı değeridir. 
 
-Farklı `RootNamespace` `AssemblyName`ise, *AssemblyInfo.cs* (parametre değerleri gerçek değerlerle değiştirilir) aşağıdakileri içerir:
+`RootNamespace` , Öğesinden `AssemblyName`farklıysa, *AssemblyInfo.cs* içine aşağıdakini ekleyin (parametre değerleri gerçek değerlerle değiştirilmelidir):
 
 ```csharp
 using System.Reflection;
@@ -184,115 +190,115 @@ using Microsoft.Extensions.Localization;
 [assembly: RootNamespace("App Root Namespace")]
 ```
 
-Önceki kod, resx dosyalarının başarılı bir şekilde çözümlemesini sağlar.
+Yukarıdaki kod resx dosyalarının başarıyla çözümlenmesine izin vermez.
 
 ## <a name="culture-fallback-behavior"></a>Kültür geri dönüş davranışı
 
-Bir kaynak ararken, yerelleştirme "kültür geri dönüş" meşgul. İstenen kültürden başlayarak, bulunamazsa, o kültürün ana kültürüne geri döner. Bir kenara, [CultureInfo.Parent](/dotnet/api/system.globalization.cultureinfo.parent) özelliği üst kültürü temsil eder. Bu genellikle (ama her zaman değil) ISO gelen ulusal signifier kaldırılması anlamına gelir. Örneğin, Meksika'da konuşulan İspanyolca lehçesi "es-MX". Bu ebeveyn "es"&mdash;İspanyolca olmayan herhangi bir ülkeye özgü vardır.
+Bir kaynak aranırken, yerelleştirme "kültür geri dönüş" bölümünde ilgilenir. İstenen kültürden başlayarak, bulunamazsa bu kültürün üst kültürüne geri döner. Bir kenara de, [CultureInfo. Parent](/dotnet/api/system.globalization.cultureinfo.parent) özelliği üst kültürü temsil eder. Bu genellikle (her zaman değil), National signifier 'in ISO 'dan kaldırılması anlamına gelir. Örneğin, Meksika 'da konuşulan Ispanyolca diyalekt "es-MX" dir. Ana "es"&mdash;İspanyolca herhangi bir ülkeye özgü değildir.
 
-Sitenizin "fr-CA" kültürünü kullanarak bir "Hoş Geldiniz" kaynağı için bir istek aldığını düşünün. Yerelleştirme sistemi sırayla aşağıdaki kaynakları arar ve ilk eşleşmeyi seçer:
+Sitenizin "fr-CA" kültürünü kullanarak "hoş geldiniz" kaynağı için bir istek aldığını düşünün. Yerelleştirme sistemi aşağıdaki kaynakları sırayla arar ve ilk eşleşmeyi seçer:
 
-* *Welcome.fr-CA.resx*
-* *Hoşgeldiniz.fr.resx*
-* *Welcome.resx* (eğer `NeutralResourcesLanguage` "fr-CA")
+* *Welcome.fr-CA. resx*
+* *Welcome. fr. resx*
+* *Welcome. resx* ("fr `NeutralResourcesLanguage` -CA" ise)
 
-Örnek olarak, ".fr" kültür atası kaldırırsanız ve kültür Fransızca olarak ayarlanmışsa, varsayılan kaynak dosyası okunur ve dizeleri yerelleştirilmiştir. Kaynak yöneticisi, hiçbir şey istediğiniz kültürünüzü karşılamadığında varsayılan veya geri dönüş kaynağı belirler. İstenen kültür için bir kaynak eksikken anahtarı döndürmek istiyorsanız, varsayılan bir kaynak dosyanız olmamalıdır.
+Örnek olarak, ". fr" kültür göstergesini kaldırırsanız ve kültürü Fransızca olarak ayarlarsanız, varsayılan kaynak dosyası okunurdur ve dizeler yerelleştirilir. Kaynak Yöneticisi, istenen kültürü hiçbir şey karşılamıyorsa, için bir varsayılan veya geri dönüş kaynağı belirler. Yalnızca istenen kültür için bir kaynak eksik olduğunda anahtarı döndürmek istiyorsanız varsayılan bir kaynak dosyanız olmamalıdır.
 
 ### <a name="generate-resource-files-with-visual-studio"></a>Visual Studio ile kaynak dosyaları oluşturma
 
-Visual Studio'da dosya adında kültürü olmayan bir kaynak dosyası oluşturursanız (örneğin, *Welcome.resx),* Visual Studio her dize için bir özelliği olan bir C# sınıfı oluşturur. ASP.NET Core'da genelde böyle olmasını istemezsin. Genellikle varsayılan *.resx* kaynak dosyanız (kültür adı olmayan bir *.resx* dosyası) yoktur. *.resx* dosyasını bir kültür adı içeren oluşturmanızı öneririz (örneğin *Welcome.fr.resx).* Bir kültür *adındabir .resx* dosyası oluşturduğunuzda, Visual Studio sınıf dosyasını oluşturmaz.
+Dosya adında bir kültür olmadan Visual Studio 'da bir kaynak dosyası oluşturursanız (örneğin, *Welcome. resx*), Visual Studio her bir dize için bir özelliği olan bir C# sınıfı oluşturur. ASP.NET Core, genellikle istediğiniz gibi değildir. Genellikle Default *. resx* kaynak dosyanız (kültür adı olmayan bir *. resx* dosyası) yoktur. *. Resx* dosyasını bir kültür adı (örneğin, *Welcome. fr. resx*) ile oluşturmanızı öneririz. Kültür adı ile bir *. resx* dosyası oluşturduğunuzda, Visual Studio sınıf dosyası oluşturmaz.
 
-### <a name="add-other-cultures"></a>Diğer kültürleri ekleme
+### <a name="add-other-cultures"></a>Diğer kültürleri Ekle
 
-Her dil ve kültür birleşimi (varsayılan dil dışında) benzersiz bir kaynak dosyası gerektirir. ISO dil kodlarının dosya adının bir parçası olduğu yeni kaynak dosyaları oluşturarak farklı kültürler ve yerel dosyalar için kaynak dosyaları oluşturursunuz (örneğin, **en-us**, **fr-ca**, ve **en-gb).** Bu ISO *kodları, Welcome.es-MX.resx* (İspanyolca/Meksika) gibi dosya adı ve *.resx* dosya uzantısı arasına yerleştirilir.
+Her dil ve kültür bileşimi (varsayılan dil dışında), benzersiz bir kaynak dosyası gerektirir. ISO dili kodlarının dosya adının parçası olduğu yeni kaynak dosyaları oluşturarak farklı kültürler ve yerel ayarlar için kaynak dosyaları oluşturun (örneğin, **en-US**, **fr-CA**ve **en-GB**). Bu ISO kodları, *Welcome.es-MX. resx* (Ispanyolca/Meksika) içinde olduğu gibi dosya adı ve *. resx* dosya uzantısı arasına yerleştirilir.
 
-## <a name="implement-a-strategy-to-select-the-languageculture-for-each-request"></a>Her istek için dili/kültürü seçmek için bir strateji uygulayın
+## <a name="implement-a-strategy-to-select-the-languageculture-for-each-request"></a>Her istek için dil/kültür seçmek üzere bir strateji uygulayın
 
 ### <a name="configure-localization"></a>Yerelleştirmeyi yapılandırma
 
-Yerelleştirme `Startup.ConfigureServices` yönteminde yapılandırılır:
+Yerelleştirme, `Startup.ConfigureServices` yönteminde yapılandırılır:
 
 [!code-csharp[](localization/sample/Localization/Startup.cs?name=snippet1)]
 
-* `AddLocalization`Yerelleştirme hizmetlerini hizmet kapsayıcısına ekler. Yukarıdaki kod da "Kaynaklar" için kaynak yolunu ayarlar.
+* `AddLocalization`Yerelleştirme hizmetlerini hizmetler kapsayıcısına ekler. Yukarıdaki kod, kaynakların yolunu da "resources" olarak ayarlar.
 
-* `AddViewLocalization`Yerelleştirilmiş görünüm dosyaları için destek ekler. Bu örnek görünümünde yerelleştirme görünüm dosyası sonekine dayanır. Örneğin *Index.fr.cshtml* dosyasındaki "fr"
+* `AddViewLocalization`Yerelleştirilmiş görünüm dosyaları için destek ekler. Bu örnek görünümde yerelleştirme, görünüm dosyası sonekini temel alır. Örneğin, *Index. fr. cshtml* dosyasındaki "fr".
 
-* `AddDataAnnotationsLocalization`Soyutlamalar aracılığıyla `IStringLocalizer` `DataAnnotations` yerelleştirilmiş doğrulama iletileri için destek ekler.
+* `AddDataAnnotationsLocalization`Soyutlamalar aracılığıyla `IStringLocalizer` yerelleştirilmiş `DataAnnotations` doğrulama iletileri için destek ekler.
 
-### <a name="localization-middleware"></a>Yerelleştirme ara ware
+### <a name="localization-middleware"></a>Yerelleştirme ara yazılımı
 
-Bir istekteki geçerli kültür, yerelleştirme [Middleware'inde](xref:fundamentals/middleware/index)ayarlanır. `Startup.Configure` Yöntemde yerelleştirme ara ware etkindir. Yerelleştirme ara ware istek kültürünü kontrol edebilir herhangi bir ara yazılım `app.UseMvcWithDefaultRoute()`önce yapılandırılmalıdır (örneğin, ).
+Bir istekteki geçerli kültür, yerelleştirme [Ara](xref:fundamentals/middleware/index)ortamında ayarlanır. Yerelleştirme ara yazılımı `Startup.Configure` yönteminde etkindir. Yerelleştirme ara yazılımı, istek kültürünü denetlemeyebilir (örneğin, `app.UseMvcWithDefaultRoute()`) herhangi bir ara yazılım önce yapılandırılmalıdır.
 
 [!code-csharp[](localization/sample/Localization/Startup.cs?name=snippet2)]
 [!INCLUDE[about the series](~/includes/code-comments-loc.md)]
 
-`UseRequestLocalization`bir `RequestLocalizationOptions` nesneyi başharfe alar. Her `RequestCultureProvider` istekte `RequestLocalizationOptions` liste numaralandırılır ve istek kültürünü başarıyla belirleyebilen ilk sağlayıcı kullanılır. Varsayılan sağlayıcılar `RequestLocalizationOptions` sınıftan gelir:
+`UseRequestLocalization`bir `RequestLocalizationOptions` nesnesi başlatır. Her istekte `RequestCultureProvider` içindeki `RequestLocalizationOptions` listesinin listesi numaralandırılır ve istek kültürünü başarıyla belirleyebilmesi için ilk sağlayıcı kullanılır. Varsayılan sağlayıcılar `RequestLocalizationOptions` sınıftan gelir:
 
 1. `QueryStringRequestCultureProvider`
 2. `CookieRequestCultureProvider`
 3. `AcceptLanguageHeaderRequestCultureProvider`
 
-Varsayılan liste en çok belirli den en az özel gider. Makalenin ilerleyen saatlerinde, siparişi nasıl değiştirebileceğinizi ve hatta özel bir kültür sağlayıcısı nasıl ekleyebileceğinizi göreceğiz. Sağlayıcılardan hiçbiri istek kültürünü belirleyemezse, bu `DefaultRequestCulture` durum kullanılır.
+Varsayılan liste, en çok belirli olan en az özel. Makalenin ilerleyen kısımlarında, sırayı nasıl değiştirekullanabileceğinizi ve hatta özel bir kültür sağlayıcısı nasıl ekleyebileceğiniz hakkında bilgi edineceksiniz. Sağlayıcıların hiçbiri istek kültürünü `DefaultRequestCulture` belirleyeiyorsa, kullanılır.
 
 ### <a name="querystringrequestcultureprovider"></a>QueryStringRequestCultureProvider
 
-Bazı uygulamalar [kültür ve ui kültürünü](https://msdn.microsoft.com/library/system.globalization.cultureinfo.aspx)ayarlamak için bir sorgu dizesi kullanır. Çerez veya Kabul Dili üstbilgisi yaklaşımını kullanan uygulamalar için, URL'ye sorgu dizesi eklemek hata ayıklama ve test kodu için yararlıdır. Varsayılan olarak, `QueryStringRequestCultureProvider` `RequestCultureProvider` listedeki ilk yerelleştirme sağlayıcısı olarak kaydedilir. Sorgu dize parametrelerini `culture` ve `ui-culture`. Aşağıdaki örnek, Belirli bir kültürü (dil ve bölge) İspanyolca/Meksika olarak belirlemektedir:
+Bazı uygulamalar [kültür ve UI kültürünü](https://msdn.microsoft.com/library/system.globalization.cultureinfo.aspx)ayarlamak için bir sorgu dizesi kullanır. Tanımlama bilgisi veya Accept-Language üst bilgisi yaklaşımını kullanan uygulamalar için, URL 'ye bir sorgu dizesi eklemek hata ayıklama ve test kodu için yararlıdır. Varsayılan olarak,, `QueryStringRequestCultureProvider` `RequestCultureProvider` listede ilk yerelleştirme sağlayıcısı olarak kaydedilir. Sorgu dizesi parametrelerini `culture` ve `ui-culture`öğesini geçirirsiniz. Aşağıdaki örnek, belirli kültürü (dil ve bölge) Ispanyolca/Meksika olarak ayarlar:
 
    `http://localhost:5000/?culture=es-MX&ui-culture=es-MX`
 
-Yalnızca iki (veya),`culture` `ui-culture`sorgu dize sağlayıcısından birini geçerseniz, geçiş yaptığınız değeri kullanarak her iki değeri de ayarlar. Örneğin, sadece kültür ayarı hem `Culture` ve `UICulture`hem de ayarlar:
+Yalnızca iki (`culture` veya `ui-culture`) birini geçirirseniz, sorgu dizesi sağlayıcısı, her iki değeri de geçirdiğiniz birini kullanarak ayarlar. Örneğin, yalnızca kültür ayarlandığında, `Culture` ve ' nin her ikisi de ayarlanır `UICulture`:
 
    `http://localhost:5000/?culture=es-MX`
 
 ### <a name="cookierequestcultureprovider"></a>CookieRequestCultureProvider
 
-Üretim uygulamaları genellikle ASP.NET Çekirdek kültür çerezi ile kültürü ayarlamak için bir mekanizma sağlar. Bir `MakeCookieValue` çerez oluşturmak için yöntemi kullanın.
+Üretim uygulamaları genellikle ASP.NET Core kültür tanımlama bilgisiyle kültürü ayarlamaya yönelik bir mekanizma sağlar. Bir tanımlama `MakeCookieValue` bilgisi oluşturmak için yöntemini kullanın.
 
-Kullanıcının `CookieRequestCultureProvider` `DefaultCookieName` tercih edilen kültür bilgilerini izlemek için kullanılan varsayılan çerez adını döndürür. Varsayılan çerez adı. `.AspNetCore.Culture`
+, `CookieRequestCultureProvider` `DefaultCookieName` Kullanıcının tercih ettiği kültür bilgilerini izlemek için kullanılan varsayılan tanımlama bilgisi adını döndürür. Varsayılan tanımlama bilgisi adı `.AspNetCore.Culture`.
 
-Çerez biçimi `c=%LANGCODE%|uic=%LANGCODE%`, `c` nerede `Culture` `uic` ve, `UICulture`örneğin:
+Tanımlama `c=%LANGCODE%|uic=%LANGCODE%`bilgisi biçimi, `c` `Culture` ve `uic` `UICulture`nerede olduğu, örneğin:
 
     c=en-UK|uic=en-US
 
-Yalnızca kültür bilgileri ve Kullanıcı Arabirimi kültüründen birini belirtirseniz, belirtilen kültür hem kültür bilgisi hem de Kullanıcı Arabirimi kültürü için kullanılır.
+Kültür bilgisi ve UI kültürünün yalnızca birini belirtirseniz, belirtilen kültür hem kültür bilgileri hem de UI kültürü için kullanılacaktır.
 
-### <a name="the-accept-language-http-header"></a>Kabul Dili HTTP üstbilgisi
+### <a name="the-accept-language-http-header"></a>Accept-Language HTTP üstbilgisi
 
-[Kabul Dili üstbilgisi](https://www.w3.org/International/questions/qa-accept-lang-locales) çoğu tarayıcıda ayarlanabilir ve başlangıçta kullanıcının dilini belirtmek için tasarlanmıştır. Bu ayar, tarayıcının ne göndermek üzere ayarlandığını veya temel işletim sisteminden devralındığını gösterir. Tarayıcı isteğinden kabul dili HTTP üstbilgisi, kullanıcının tercih ettiği dili algılamanın yanılmaz [bir](https://www.w3.org/International/questions/qa-lang-priorities.en.php)yolu değildir (bkz. Bir üretim uygulaması, bir kullanıcının kültür seçimini özelleştirmesi için bir yol içermelidir.
+[Accept-Language üst bilgisi](https://www.w3.org/International/questions/qa-accept-lang-locales) tarayıcıların çoğu tarayıcıda ayarlanabilir ve başlangıçta kullanıcının dilini belirtmeye yöneliktir. Bu ayar, tarayıcının temel alınan işletim sisteminden gönderme veya devralma olarak ayarlandığını gösterir. Bir tarayıcıdan Accept-Language HTTP üst bilgisi, kullanıcının tercih ettiği dili algılamaya yönelik uygun olmayan bir yoldur (bkz. [bir tarayıcıda dil tercihlerini ayarlama](https://www.w3.org/International/questions/qa-lang-priorities.en.php)). Bir üretim uygulaması, kullanıcının kültür seçimini özelleştirmenin bir yolunu içermelidir.
 
-### <a name="set-the-accept-language-http-header-in-ie"></a>IE'de Kabul Dili HTTP üstbilgisini ayarlama
+### <a name="set-the-accept-language-http-header-in-ie"></a>IE 'de Accept-Language HTTP üstbilgisini ayarlama
 
-1. Dişli simgesinden **Internet Seçenekleri'ne**dokunun.
+1. Dişli simgesinden **Internet seçenekleri**' ne dokunun.
 
-2. **Dillere**dokunun.
+2. **Diller**' e dokunun.
 
-    ![İnternet Seçenekleri](localization/_static/lang.png)
+    ![Internet seçenekleri](localization/_static/lang.png)
 
-3. **Dil Tercihlerini Ayarla'ya**dokunun.
+3. **Dil tercihlerini ayarla**' ya dokunun.
 
-4. **Dil ekle'ye**dokunun.
+4. **Dil ekle**' ye dokunun.
 
-5. Dili ekleyin.
+5. Dilini ekleyin.
 
-6. Dile dokunun, ardından **Yukarı Taşı'ya**dokunun.
+6. Dile dokunun ve ardından **Yukarı taşı**' ya dokunun.
 
 ::: moniker range="> aspnetcore-3.1"
-### <a name="the-content-language-http-header"></a>İçerik-Dil HTTP üstbilgisi
+### <a name="the-content-language-http-header"></a>Content-Language HTTP üst bilgisi
 
-[İçerik-Dil](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Language) varlık üstbilgisi:
+[Content-Language](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Language) varlık üst bilgisi:
 
- - Dinleyicilere yönelik dil(ler) tanımlamak için kullanılır.
- - Kullanıcının kendi tercih ettiği dile göre ayırt etmesini sağlar.
+ - , Hedef kitleleri için tasarlanan dilleri tanımlamakta kullanılır.
+ - Kullanıcının kendi tercih ettiği dile göre ayırt etmesine izin verir.
 
-Varlık üstleleri hem HTTP isteklerinde hem de yanıtlarında kullanılır.
+Varlık üstbilgileri hem HTTP isteklerinde hem de yanıtlarda kullanılır.
 
-Üstbilgi `Content-Language` özelliği `ApplyCurrentCultureToResponseHeaders`ayarlayarak eklenebilir.
+`Content-Language` Üst bilgi, özelliği `ApplyCurrentCultureToResponseHeaders`ayarlanarak eklenebilir.
 
-Üstbilgi `Content-Language` ekleme:
+`Content-Language` Üst bilgi ekleniyor:
 
- - RequestLocalizationMiddleware ile `Content-Language` üstbilgi ayarlamak için `CurrentUICulture`izin verir .
- - Yanıt üstbilgisini `Content-Language` açıkça ayarlama gereksinimini ortadan kaldırır.
+ - Requestlocalizationara yazılımı ile `Content-Language` üstbilgiyi ayarlamaya izin verir `CurrentUICulture`.
+ - Yanıt üst bilgisini `Content-Language` açıkça ayarlama gereksinimini ortadan kaldırır.
 
 ```csharp
 app.UseRequestLocalization(new RequestLocalizationOptions
@@ -302,9 +308,9 @@ app.UseRequestLocalization(new RequestLocalizationOptions
 ```
 ::: moniker-end
 
-### <a name="use-a-custom-provider"></a>Özel bir sağlayıcı kullanma
+### <a name="use-a-custom-provider"></a>Özel bir sağlayıcı kullan
 
-Müşterilerinizin dillerini ve kültürlerini veritabanlarınızda depolamasına izin vermek istediğinizi varsayalım. Kullanıcı için bu değerleri aramak için bir sağlayıcı yazabilirsiniz. Aşağıdaki kod, özel bir sağlayıcının nasıl ekleyeceğini gösterir:
+Müşterilerinizin kendi dil ve kültürünü veritabanlarınızı veritabanlarına depolamasına izin vermek istediğinizi varsayalım. Kullanıcı için bu değerleri aramak üzere bir sağlayıcı yazabilirsiniz. Aşağıdaki kod, özel bir sağlayıcının nasıl ekleneceğini göstermektedir:
 
 ::: moniker range="< aspnetcore-3.0"
 ```csharp
@@ -356,48 +362,48 @@ services.Configure<RequestLocalizationOptions>(options =>
 ```
 ::: moniker-end
 
-Yerelleştirme sağlayıcıları eklemek veya kaldırmak için kullanın. `RequestLocalizationOptions`
+Yerelleştirme `RequestLocalizationOptions` sağlayıcıları eklemek veya kaldırmak için kullanın.
 
-### <a name="set-the-culture-programmatically"></a>Kültürü programlı olarak ayarlayın
+### <a name="set-the-culture-programmatically"></a>Kültürü program aracılığıyla ayarlama
 
-[GitHub](https://github.com/aspnet/entropy) bu örnek **Localization.StarterWeb** proje ayarlamak `Culture`için UI içerir. *Views/Shared/_SelectLanguagePartial.cshtml* dosyası, desteklenen kültürler listesinden kültürü seçmenize olanak tanır:
+[GitHub](https://github.com/aspnet/entropy) 'daki Bu örnek `Culture` **Yerelleştirme. starterweb** projesi, ayarlamak için Kullanıcı arabirimi içerir. *Views/Shared/_SelectLanguagePartial. cshtml* dosyası desteklenen kültürler listesinden kültürü seçmenize olanak sağlar:
 
 [!code-cshtml[](localization/sample/Localization/Views/Shared/_SelectLanguagePartial.cshtml)]
 
-*Görünümler/Paylaşılan/_SelectLanguagePartial.cshtml* dosyası düzen `footer` dosyasının bölümüne eklenir, böylece tüm görünümler için kullanılabilir olacaktır:
+*Görünümler/Shared/_SelectLanguagePartial. cshtml* dosyası, düzen dosyasının `footer` bölümüne eklenir, bu nedenle tüm görünümlerde kullanılabilir hale gelir:
 
 [!code-cshtml[](localization/sample/Localization/Views/Shared/_Layout.cshtml?range=43-56&highlight=10)]
 
-Yöntem `SetLanguage` kültür çerezayarlar.
+`SetLanguage` Yöntemi kültür tanımlama bilgisini ayarlar.
 
 [!code-csharp[](localization/sample/Localization/Controllers/HomeController.cs?range=57-67)]
 
-Bu proje için örnek kod için *_SelectLanguagePartial.cshtml* takamazsınız. [GitHub'daki](https://github.com/aspnet/entropy) **Localization.StarterWeb** projesi, Bağımlılık `RequestLocalizationOptions` [Enjeksiyonu](dependency-injection.md) kabından bir Razor kısmi akışı için koda sahiptir.
+Bu proje için örnek koda *_SelectLanguagePartial. cshtml* 'yi ekleyemezsiniz. GitHub 'daki **Yerelleştirme. StarterWeb** projesi [GitHub](https://github.com/aspnet/entropy) `RequestLocalizationOptions` , Razor [bağımlılık ekleme](dependency-injection.md) kapsayıcısına kısmi bir şekilde akışı için kod içerir.
 
-## <a name="model-binding-route-data-and-query-strings"></a>Yol verilerini ve sorgu dizelerini model bağlama
+## <a name="model-binding-route-data-and-query-strings"></a>Model bağlama yolu verileri ve sorgu dizeleri
 
-Bkz. [Model bağlama rota verileri ve sorgu dizeleri Küreselleşme davranışı.](xref:mvc/models/model-binding#glob)
+[Model bağlama yolu verilerinin ve sorgu dizelerinin Genelleştirme davranışını](xref:mvc/models/model-binding#glob)inceleyin.
 
-## <a name="globalization-and-localization-terms"></a>Küreselleşme ve yerelleştirme terimleri
+## <a name="globalization-and-localization-terms"></a>Genelleştirme ve yerelleştirme koşulları
 
-Uygulamanızı yerelleştirme işlemi, modern yazılım geliştirmede yaygın olarak kullanılan alakalı karakter kümelerinin temel bir şekilde anlaşılmasını ve bunlarla ilişkili sorunların anlaşılmasını da gerektirir. Tüm bilgisayarlar metni sayı (kod) olarak depolamak la birlikte, farklı sistemler farklı sayılar kullanarak aynı metni depolar. Yerelleştirme işlemi, uygulama kullanıcı arabiriminin (UI) belirli bir kültür/yerel alan için çevrilmesi anlamına gelir.
+Uygulamanızı yerelleştirme işlemi, modern yazılım geliştirmede yaygın olarak kullanılan ilgili karakter kümelerinin temel olarak anlaşılmasını ve bunlarla ilişkili sorunların anlaşılmasını gerektirir. Tüm bilgisayarlar metni sayı (kodlar) olarak depolayabilse de, farklı sistemler farklı sayılar kullanarak aynı metni depolar. Yerelleştirme süreci, belirli bir kültür/yerel ayar için uygulama kullanıcı arabirimini (UI) çevirmeye başvurur.
 
-[Yerelleştirilebilirlik,](/dotnet/standard/globalization-localization/localizability-review) küreselleştirilmiş bir uygulamanın yerelleştirme için hazır olduğunu doğrulamak için bir ara işlemdir.
+[Yerelleştirilebilirlik](/dotnet/standard/globalization-localization/localizability-review) , bir Genelleştirilmiş uygulamasının yerelleştirme için hazırlandığının doğrulanması için bir ara işlemdir.
 
-Kültür adı için [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) `<languagecode2>-<country/regioncode2>`biçimi `<languagecode2>` , nerede `<country/regioncode2>` dil kodu ve alt kültür kodudur. Örneğin, `es-CL` İspanyolca (Şili), `en-US` İngilizce (AMERIKA Birleşik `en-AU` Devletleri) ve İngilizce (Avustralya) için. [RFC 4646,](https://www.ietf.org/rfc/rfc4646.txt) bir dille ilişkili bir ISO 639 iki harfli küçük harfli kültür kodu ile bir ülke veya bölgeyle ilişkili bir ISO 3166 iki harfli büyük harfli alt kültür kodunun birleşimidir. [Bkz. Dil Kültür Adı](https://msdn.microsoft.com/library/ee825488(v=cs.20).aspx).
+Kültür adı için [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) biçimi `<languagecode2>-<country/regioncode2>`, burada `<languagecode2>` dil kodudur ve `<country/regioncode2>` alt kültür kodudur. Örneğin, `es-CL` Ispanyolca (Şili) Için, `en-US` İngilizce (Birleşik Devletler) ve `en-AU` İngilizce (Avustralya) için. [RFC 4646](https://www.ietf.org/rfc/rfc4646.txt) , bir dille ILIŞKILI bir ISO 639 2-Letter küçük harfli kültür kodu ve bir ülke veya bölgeyle ILIŞKILI bir ISO 3166 2 harfli büyük harf alt kültür kodu birleşimidir. Bkz. [dil kültürü adı](https://msdn.microsoft.com/library/ee825488(v=cs.20).aspx).
 
-Uluslararasılaşma genellikle "I18N" olarak kısaltılır. Kısaltma ilk ve son harfleri ve aralarındaki harf sayısını alır, bu nedenle 18 ilk "I" ve son "N" arasındaki harf sayısını temsil alır. Aynı şey Küreselleşme (G11N) ve Yerelleştirme (L10N) için de geçerlidir.
+Uluslararası duruma getirme genellikle "I18N" olarak kısaltılır. Kısaltma ilk ve son harfleri ve aralarındaki harflerin sayısını alır, bu nedenle 18 ilk "I" ve son "N" arasındaki harflerin sayısını temsil eder. Aynı Genelleştirme (G11N) ve yerelleştirme (L10N) için de geçerlidir.
 
-Terim:
+Larındaki
 
-* Küreselleşme (G11N): Bir uygulamanın farklı dilleri ve bölgeleri desteklemesi süreci.
-* Yerelleştirme (L10N): Belirli bir dil ve bölge için bir uygulamayı özelleştirme işlemi.
-* Uluslararasılaşma (I18N): Küreselleşmeyi ve yerelleşmeyi açıklar.
-* Kültür: Bu bir dil ve isteğe bağlı olarak, bir bölge.
-* Tarafsız kültür: Belirli bir dile sahip, ancak bölgeye sahip olmayan bir kültür. (örneğin "en", "es")
-* Özel kültür: Belirli bir dil ve bölgeye sahip bir kültür. (örneğin "en-US", "en-GB", "es-CL")
-* Üst kültür: Belirli bir kültürü içeren tarafsız kültür. (örneğin, "en" "en-US" ve "en-GB" ana kültürüdür)
-* Yerel: Yerel bir kültürle aynıdır.
+* Genelleştirme (G11N): bir uygulamanın farklı dil ve bölgeleri desteklemesini sağlama işlemi.
+* Yerelleştirme (L10N): belirli bir dil ve bölge için bir uygulamayı özelleştirme işlemi.
+* Uluslararası duruma getirme (I18N): hem Genelleştirme hem de yerelleştirmeyi açıklar.
+* Kültür: bir dildir ve isteğe bağlı olarak bir bölgedir.
+* Nötr kültür: belirtilen dile sahip, ancak bölge olmayan bir kültür. (örneğin, "en", "es")
+* Belirli kültür: belirtilen dile ve bölgeye sahip bir kültür. (örneğin, "en-US", "en-GB", "es-CL")
+* Üst kültür: belirli bir kültürü içeren nötr kültür. (örneğin, "tr", "en-US" ve "en-GB" öğesinin üst kültürüdür)
+* Yerel ayar: bir yerel ayar kültür ile aynıdır.
 
 [!INCLUDE[](~/includes/localization/currency.md)]
 
@@ -408,8 +414,8 @@ Terim:
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * <xref:fundamentals/troubleshoot-aspnet-core-localization>
-* [Localization.StarterWeb projesi](https://github.com/aspnet/Entropy/tree/master/samples/Localization.StarterWeb) makalede kullanılmıştır.
-* [Küreselleştirme ve yerelleştirme .NET uygulamaları](/dotnet/standard/globalization-localization/index)
+* Makalesinde kullanılan [Yerelleştirme. StarterWeb projesi](https://github.com/aspnet/Entropy/tree/master/samples/Localization.StarterWeb) .
+* [.NET uygulamalarını genelleştirmek ve yerelleştirme](/dotnet/standard/globalization-localization/index)
 * [.resx Dosyalarındaki Kaynaklar](/dotnet/framework/resources/working-with-resx-files-programmatically)
-* [Microsoft Çok Dilli Uygulama Araç Seti](https://marketplace.visualstudio.com/items?itemName=MultilingualAppToolkit.MultilingualAppToolkit-18308)
-* [Generics & Yerelleştirme](http://hishambinateya.com/localization-and-generics)
+* [Microsoft çok dilli uygulama araç seti](https://marketplace.visualstudio.com/items?itemName=MultilingualAppToolkit.MultilingualAppToolkit-18308)
+* [Yerelleştirme & genel türler](http://hishambinateya.com/localization-and-generics)

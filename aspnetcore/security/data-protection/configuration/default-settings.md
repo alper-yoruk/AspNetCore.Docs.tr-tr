@@ -4,13 +4,19 @@ author: rick-anderson
 description: ASP.NET Core veri koruma anahtarı yönetimi ve ömrü hakkında bilgi edinin.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/configuration/default-settings
-ms.openlocfilehash: 2f022a4c7519485fe629ce47c27d214c8c27d5bc
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 1db5177230fd4076af080e208f094ce4d6537c62
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78667967"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777455"
 ---
 # <a name="data-protection-key-management-and-lifetime-in-aspnet-core"></a>ASP.NET Core veri koruma anahtarı yönetimi ve ömrü
 
@@ -27,18 +33,18 @@ Uygulama, işletimsel ortamı algılamaya çalışır ve anahtar yapılandırmas
 
 1. Kullanıcı profili varsa, anahtarlar *%LocalAppData%\ASP.NET\DataProtection-Keys* klasöründe kalıcı hale getirilir. İşletim sistemi Windows ise, anahtarlar DPAPI kullanılarak geri kalanıyla şifrelenir.
 
-   Uygulama havuzunun [Setprofileenvironment özniteliğinin](/iis/configuration/system.applicationhost/applicationpools/add/processmodel#configuration) de etkinleştirilmesi gerekir. `setProfileEnvironment` varsayılan değeri `true`. Bazı senaryolarda (örneğin, Windows işletim sistemi), `setProfileEnvironment` `false`olarak ayarlanır. Anahtarlar beklenen şekilde Kullanıcı profili dizininde depolanmıyorsa:
+   Uygulama havuzunun [Setprofileenvironment özniteliğinin](/iis/configuration/system.applicationhost/applicationpools/add/processmodel#configuration) de etkinleştirilmesi gerekir. Varsayılan değeri `setProfileEnvironment` `true`. Bazı senaryolarda (örneğin, Windows işletim sistemi), `setProfileEnvironment` olarak `false`ayarlanır. Anahtarlar beklenen şekilde Kullanıcı profili dizininde depolanmıyorsa:
 
    1. *% Windir%/system32/inetsrv/config* klasörüne gidin.
    1. *ApplicationHost. config* dosyasını açın.
-   1. `<system.applicationHost><applicationPools><applicationPoolDefaults><processModel>` öğesini bulun.
-   1. `setProfileEnvironment` özniteliğinin mevcut olmadığını, bu değerin varsayılan olarak `true`veya özniteliğin değerini `true`olarak ayarlamış olduğunu doğrulayın.
+   1. `<system.applicationHost><applicationPools><applicationPoolDefaults><processModel>` Öğesini bulun.
+   1. `setProfileEnvironment` Özniteliğinin mevcut olmadığını, değeri varsayılan olarak değerini `true`, veya özniteliğin değerini olarak olarak ayarlandığını doğrulayın `true`.
 
 1. Uygulama IIS 'de barındırılıyorsa, anahtarlar yalnızca çalışan işlem hesabına karşılık gelen özel bir kayıt defteri anahtarındaki HKLM Kayıt defteri 'nde kalıcı hale getirilir. Anahtarlar DPAPI kullanılarak geri kalanıyla şifrelenir.
 
 1. Bu koşulların hiçbiri eşleşmezse anahtarlar geçerli işlemin dışında kalıcı olmaz. İşlem kapandığında, oluşturulan tüm anahtarlar kaybedilir.
 
-Geliştirici her zaman tam denetime sahiptir ve anahtarların nerede ve nerede depolandığını geçersiz kılabilir. Yukarıdaki ilk üç seçenek, ASP.NET **\<machineKey >** otomatik oluşturma yordamlarının geçmişte nasıl çalıştığı hakkında benzer uygulamalar için iyi varsayılanlar sağlamalıdır. Son, geri dönüş seçeneği, geliştiricinin anahtar kalıcılığı istiyorsa [yapılandırma](xref:security/data-protection/configuration/overview) ön ucu belirtmesini gerektiren tek senaryodur, ancak bu geri dönüş yalnızca nadir durumlarda oluşur.
+Geliştirici her zaman tam denetime sahiptir ve anahtarların nerede ve nerede depolandığını geçersiz kılabilir. Yukarıdaki ilk üç seçenek, ASP.net ** \<machineKey>** otomatik oluşturma yordamlarının geçmişte nasıl çalıştığı hakkında benzer uygulamalar için iyi varsayılanlar sağlamalıdır. Son, geri dönüş seçeneği, geliştiricinin anahtar kalıcılığı istiyorsa [yapılandırma](xref:security/data-protection/configuration/overview) ön ucu belirtmesini gerektiren tek senaryodur, ancak bu geri dönüş yalnızca nadir durumlarda oluşur.
 
 Bir Docker kapsayıcısında barındırırken, anahtarların bir Docker birimi (bir paylaşılan birim veya kapsayıcının yaşam süresinin ötesinde devam eden konağa bağlı bir birim) veya [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) ya da [redin](https://redis.io/)gibi bir dış sağlayıcıda kalıcı olması gerekir. Uygulamalar paylaşılan bir ağ birimine erişebiliyorsa (daha fazla bilgi için bkz. [Persistkeystofilesystem](xref:security/data-protection/configuration/overview#persistkeystofilesystem) ) Web grubu senaryolarında bir dış sağlayıcı da yararlıdır.
 

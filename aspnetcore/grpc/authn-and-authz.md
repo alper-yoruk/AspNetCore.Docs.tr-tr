@@ -1,29 +1,35 @@
 ---
-title: ASP.NET Core için gRPC'de kimlik doğrulama ve yetkilendirme
+title: ASP.NET Core için gRPC 'de kimlik doğrulaması ve yetkilendirme
 author: jamesnk
-description: ASP.NET Core için gRPC'de kimlik doğrulama ve yetkilendirmeyi nasıl kullanacağınızı öğrenin.
+description: ASP.NET Core için gRPC 'de kimlik doğrulama ve yetkilendirmeyi nasıl kullanacağınızı öğrenin.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: grpc/authn-and-authz
-ms.openlocfilehash: c0312b186bbb35e3b802984484b7213016d8bf04
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: eecdebe5ea7555df0914adfbff728331e3592093
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78964435"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776174"
 ---
-# <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>ASP.NET Core için gRPC'de kimlik doğrulama ve yetkilendirme
+# <a name="authentication-and-authorization-in-grpc-for-aspnet-core"></a>ASP.NET Core için gRPC 'de kimlik doğrulaması ve yetkilendirme
 
-Yazar: [James Newton-King](https://twitter.com/jamesnk)
+, [James bAyKiNg](https://twitter.com/jamesnk)
 
-[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/grpc/authn-and-authz/sample/) [(nasıl indirilir)](xref:index#how-to-download-a-sample)
+[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/grpc/authn-and-authz/sample/) [(nasıl indirileceği)](xref:index#how-to-download-a-sample)
 
-## <a name="authenticate-users-calling-a-grpc-service"></a>gRPC hizmetini çağıran kullanıcıların kimliğini doğrula
+## <a name="authenticate-users-calling-a-grpc-service"></a>GRPC hizmetini çağıran kullanıcıların kimliğini doğrulama
 
-gRPC, bir kullanıcıyı her aramayla ilişkilendirmek için [ASP.NET Çekirdek kimlik doğrulaması](xref:security/authentication/identity) ile kullanılabilir.
+gRPC, bir kullanıcıyı her çağrıyla ilişkilendirmek için [ASP.NET Core kimlik doğrulamasıyla](xref:security/authentication/identity) birlikte kullanılabilir.
 
-Aşağıda gRPC `Startup.Configure` ve ASP.NET Core kimlik doğrulaması kullanan bir örnek verilmiştir:
+Aşağıda, gRPC ve ASP.NET Core `Startup.Configure` kimlik doğrulaması kullanan bir örnek verilmiştir:
 
 ```csharp
 public void Configure(IApplicationBuilder app)
@@ -41,11 +47,11 @@ public void Configure(IApplicationBuilder app)
 ```
 
 > [!NOTE]
-> ASP.NET Core kimlik doğrulama aracını kaydetme sırası önemlidir. Her `UseAuthentication` zaman `UseAuthorization` `UseRouting` arayın `UseEndpoints`ve sonra ve önce .
+> ASP.NET Core kimlik doğrulama ara yazılımını kaydetme sırası önemli. Her zaman `UseAuthentication` ve `UseAuthorization` sonra `UseRouting` ve sonra `UseEndpoints`çağırın.
 
-Uygulamanızın arama sırasında kullandığı kimlik doğrulama mekanizmasının yapılandırılması gerekir. Kimlik doğrulama yapılandırması `Startup.ConfigureServices` eklenir ve uygulamanızın kullandığı kimlik doğrulama mekanizmasına bağlı olarak farklı olacaktır. ASP.NET Core uygulamalarının nasıl güvenli hale ASP.NET örnekler için kimlik [doğrulama örneklerine](xref:security/authentication/samples)bakın.
+Bir çağrı sırasında uygulamanızın kullandığı kimlik doğrulama mekanizması yapılandırılmalıdır. Kimlik doğrulama yapılandırması ' de `Startup.ConfigureServices` eklenir ve uygulamanızın kullandığı kimlik doğrulama mekanizmasına bağlı olarak farklı olacaktır. ASP.NET Core uygulamaları güvenli hale getirmeye yönelik örnekler için bkz. [kimlik doğrulama örnekleri](xref:security/authentication/samples).
 
-Kimlik doğrulama kurulduktan sonra, kullanıcıya gRPC hizmet yöntemleri yle `ServerCallContext`erişilebiliyor.
+Kimlik doğrulaması kurulduktan sonra, Kullanıcı aracılığıyla bir gRPC hizmeti yöntemleriyle erişilebilir `ServerCallContext`.
 
 ```csharp
 public override Task<BuyTicketsResponse> BuyTickets(
@@ -60,11 +66,11 @@ public override Task<BuyTicketsResponse> BuyTickets(
 
 ### <a name="bearer-token-authentication"></a>Taşıyıcı belirteç kimlik doğrulaması
 
-İstemci kimlik doğrulaması için bir erişim belirteci sağlayabilir. Sunucu belirteci doğrular ve kullanıcıtanımlamak için kullanır.
+İstemci, kimlik doğrulaması için bir erişim belirteci sağlayabilir. Sunucu belirteci doğrular ve kullanıcıyı tanımlamak için kullanır.
 
-Sunucuda, taşıyıcı belirteç kimlik doğrulaması [JWT Bearer ara ware](/dotnet/api/microsoft.extensions.dependencyinjection.jwtbearerextensions.addjwtbearer)kullanılarak yapılandırılır.
+Sunucusunda, taşıyıcı belirteç kimlik doğrulaması [JWT taşıyıcı ara yazılımı](/dotnet/api/microsoft.extensions.dependencyinjection.jwtbearerextensions.addjwtbearer)kullanılarak yapılandırılır.
 
-.NET gRPC istemcisinde, belirteç üstbilgi olarak çağrılarla gönderilebilir:
+.NET gRPC istemcisinde, belirteç aramalar ile üst bilgi olarak gönderilebilir:
 
 ```csharp
 public bool DoAuthenticatedCall(
@@ -80,9 +86,9 @@ public bool DoAuthenticatedCall(
 }
 ```
 
-Bir `ChannelCredentials` kanalda yapılandırma, gRPC çağrıları ile hizmete belirteci göndermek için alternatif bir yoldur. Kimlik bilgileri, gRPC çağrısı her yapıldığında çalıştırılır ve bu da belirteci kendiniz geçirmek için birden çok yerde kod yazma gereksinimini önler.
+Kanalı `ChannelCredentials` üzerinde yapılandırmak, belirteci GRPC çağrılarıyla hizmete göndermenin alternatif bir yoludur. Kimlik bilgisi her bir gRPC çağrısının yapılışında çalıştırılır. Bu, belirteci kendi kendinize geçirmek için birden çok yere kod yazma gereksinimini ortadan kaldırır.
 
-Aşağıdaki örnekteki kimlik bilgisi, her gRPC çağrısıyla belirteci gönderecek şekilde kanalı yapılandırır:
+Aşağıdaki örnekteki kimlik bilgileri, kanalı her gRPC çağrısıyla birlikte gönderecek şekilde yapılandırır:
 
 ```csharp
 private static GrpcChannel CreateAuthenticatedChannel(string address)
@@ -108,12 +114,12 @@ private static GrpcChannel CreateAuthenticatedChannel(string address)
 
 ### <a name="client-certificate-authentication"></a>İstemci sertifikası kimlik doğrulaması
 
-İstemci alternatif olarak kimlik doğrulaması için bir istemci sertifikası sağlayabilir. [Sertifika kimlik doğrulaması](https://tools.ietf.org/html/rfc5246#section-7.4.4) TLS düzeyinde, ASP.NET Core'a gelmeden çok önce gerçekleşir. İstek ASP.NET Core'a girdiğinde, [istemci sertifikası kimlik doğrulama paketi](xref:security/authentication/certauth) `ClaimsPrincipal`sertifikayı bir .
+İstemci alternatif olarak kimlik doğrulaması için bir istemci sertifikası sağlayabilir. [Sertifika kimlik doğrulaması](https://tools.ietf.org/html/rfc5246#section-7.4.4) TLS düzeyinde gerçekleşir ve bu süre ASP.NET Core. İstek ASP.NET Core girdiğinde, [istemci sertifikası kimlik doğrulama paketi](xref:security/authentication/certauth) , sertifikayı bir `ClaimsPrincipal`ile çözmenize olanak tanır.
 
 > [!NOTE]
-> Ana bilgisayar, istemci sertifikalarını kabul edecek şekilde yapılandırılmalıdır. Kerkenez, IIS ve Azure'da istemci sertifikalarını kabul etme hakkında bilgi almak için [ev sahibinizi sertifika gerektirecek şekilde yapılandırın.](xref:security/authentication/certauth#configure-your-host-to-require-certificates)
+> Konağın istemci sertifikalarını kabul edecek şekilde yapılandırılması gerekir. Bkz. Kestrel, IIS ve Azure 'da istemci sertifikalarını kabul etme hakkında bilgi için bkz. [ana bilgisayarınızı yapılandırma](xref:security/authentication/certauth#configure-your-host-to-require-certificates) .
 
-.NET gRPC istemcisinde, istemci sertifikası `HttpClientHandler` daha sonra gRPC istemcisini oluşturmak için kullanılır:
+.NET gRPC istemcisinde, daha sonra gRPC istemcisini oluşturmak için kullanılan `HttpClientHandler` istemci sertifikası eklenir:
 
 ```csharp
 public Ticketer.TicketerClient CreateClientWithCert(
@@ -136,29 +142,29 @@ public Ticketer.TicketerClient CreateClientWithCert(
 
 ### <a name="other-authentication-mechanisms"></a>Diğer kimlik doğrulama mekanizmaları
 
-Birçok ASP.NET Core destekli kimlik doğrulama mekanizmaları gRPC ile çalışır:
+Desteklenen birçok ASP.NET Core kimlik doğrulama mekanizması gRPC ile çalışır:
 
 * Azure Active Directory
-* Müşteri Sertifikası
+* İstemci sertifikası
 * IdentityServer
-* JWT Belirteci
+* JWT belirteci
 * OAuth 2.0
 * OpenID Connect
 * WS-Federation
 
-Sunucuda kimlik doğrulamayapılandırma hakkında daha fazla bilgi için [ASP.NET Core kimlik doğrulaması'na](xref:security/authentication/identity)bakın.
+Sunucuda kimlik doğrulamasını yapılandırma hakkında daha fazla bilgi için, [ASP.NET Core kimlik doğrulaması](xref:security/authentication/identity)' na bakın.
 
-gRPC istemcisini kimlik doğrulaması kullanacak şekilde yapılandırmak, kullandığınız kimlik doğrulama mekanizmasına bağlıdır. Önceki taşıyıcı belirteci ve istemci sertifikası örnekleri, gRPC istemcisinin gRPC çağrılarıyla kimlik doğrulama meta verilerini göndermek üzere yapılandırılabildiği birkaç yolu gösterir:
+GRPC istemcisini kimlik doğrulaması kullanacak şekilde yapılandırmak, kullanmakta olduğunuz kimlik doğrulama mekanizmasına bağlı olarak değişir. Önceki taşıyıcı belirteci ve istemci sertifikası örnekleri, GRPC istemcisinin, gRPC çağrılarına yönelik kimlik doğrulama meta verilerini gönderecek şekilde yapılandırılabilmesinin birkaç yolunu gösterir:
 
-* Güçlü bir şekilde yazılan gRPC istemcileri dahili olarak kullanır. `HttpClient` Kimlik [doğrulama, HttpClientHandler](/dotnet/api/system.net.http.httpclienthandler)üzerinde veya özel [HttpMessageHandler](/dotnet/api/system.net.http.httpmessagehandler) örnekleri ekleyerek `HttpClient`yapılandırılabilir.
-* Her gRPC araması `CallOptions` isteğe bağlı bir bağımsız değişkene sahiptir. Özel üstbilgi seçeneğin üstbilgi koleksiyonu kullanılarak gönderilebilir.
+* Türü kesin belirlenmiş gRPC istemcileri `HttpClient` dahili olarak kullanılır. Kimlik doğrulaması, [HttpClientHandler](/dotnet/api/system.net.http.httpclienthandler)üzerinde veya öğesine özel [HttpMessageHandler](/dotnet/api/system.net.http.httpmessagehandler) örnekleri eklenerek yapılandırılabilir `HttpClient`.
+* Her gRPC çağrısının isteğe bağlı `CallOptions` bir bağımsız değişkeni vardır. Özel üstbilgiler, seçeneğin üstbilgiler koleksiyonu kullanılarak gönderilebilir.
 
 > [!NOTE]
-> Windows Kimlik Doğrulama (NTLM/Kerberos/Negotiate) gRPC ile kullanılamaz. gRPC HTTP/2 gerektirir ve HTTP/2 Windows Kimlik Doğrulama'yı desteklemez.
+> Windows kimlik doğrulaması (NTLM/Kerberos/Negotiate), gRPC ile kullanılamaz. gRPC için HTTP/2 ve HTTP/2 Windows kimlik doğrulamasını desteklemez.
 
 ## <a name="authorize-users-to-access-services-and-service-methods"></a>Kullanıcılara hizmetlere ve hizmet yöntemlerine erişim yetkisi verme
 
-Varsayılan olarak, bir hizmetteki tüm yöntemler kimliği doğrulanmamış kullanıcılar tarafından çağrılabilir. Kimlik doğrulaması gerektirmek [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) için hizmete özniteliği uygulayın:
+Varsayılan olarak, bir hizmette tüm yöntemler kimliği doğrulanmamış kullanıcılar tarafından çağrılabilir. Kimlik doğrulaması gerektirmek için, [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) özelliği hizmetine uygulayın:
 
 ```csharp
 [Authorize]
@@ -167,7 +173,7 @@ public class TicketerService : Ticketer.TicketerBase
 }
 ```
 
-Yalnızca belirli yetkilendirme ilkeleriyle eşleşen `[Authorize]` kullanıcılara erişimi kısıtlamak için öznitelik oluşturucu bağımsız [değişkenlerini](xref:security/authorization/policies)ve özelliklerini kullanabilirsiniz. Örneğin, adı verilen `MyAuthorizationPolicy`özel bir yetkilendirme ilkesiniz varsa, yalnızca bu iii eşleşen kullanıcıların aşağıdaki kodu kullanarak hizmete erişebilmesini sağlayın:
+Yalnızca belirli `[Authorize]` [Yetkilendirme ilkeleriyle](xref:security/authorization/policies)eşleşen kullanıcılara erişimi kısıtlamak için özniteliğinin Oluşturucu bağımsız değişkenlerini ve özelliklerini kullanabilirsiniz. Örneğin, adlı `MyAuthorizationPolicy`bir özel yetkilendirme ilkeniz varsa, aşağıdaki kodu kullanarak yalnızca bu ilkeyle eşleşen kullanıcıların hizmete erişebildiğinden emin olun:
 
 ```csharp
 [Authorize("MyAuthorizationPolicy")]
@@ -176,7 +182,7 @@ public class TicketerService : Ticketer.TicketerBase
 }
 ```
 
-Tek tek hizmet `[Authorize]` yöntemleri özniteliği de uygulanabilir. Geçerli kullanıcı hem yönteme **hem de** sınıfa uygulanan ilkelerle eşleşmiyorsa, arayana bir hata döndürülür:
+Bağımsız hizmet yöntemlerinin `[Authorize]` özniteliği de uygulanabilir. Geçerli Kullanıcı hem yönteme hem **de** sınıfa uygulanan ilkelerle eşleşmezse, çağırana bir hata döndürülür:
 
 ```csharp
 [Authorize]
@@ -199,5 +205,5 @@ public class TicketerService : Ticketer.TicketerBase
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [ASP.NET Core'da Taşıyıcı Belirteç kimlik doğrulaması](https://blogs.msdn.microsoft.com/webdev/2016/10/27/bearer-token-authentication-in-asp-net-core/)
-* [İstemci Sertifikası kimlik doğrulamasını ASP.NET Core'da yapılandırma](xref:security/authentication/certauth)
+* [ASP.NET Core 'de taşıyıcı belirteç kimlik doğrulaması](https://blogs.msdn.microsoft.com/webdev/2016/10/27/bearer-token-authentication-in-asp-net-core/)
+* [ASP.NET Core 'de Istemci sertifikası kimlik doğrulamasını yapılandırma](xref:security/authentication/certauth)

@@ -1,30 +1,36 @@
 ---
-title: ASP.NET Core ile web API'leri oluşturma
+title: ASP.NET Core ile web API’leri oluşturma
 author: scottaddie
-description: ASP.NET Core'da web API oluşturmanın temellerini öğrenin.
+description: ASP.NET Core ' de Web API 'SI oluşturmanın temellerini öğrenin.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 02/02/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: web-api/index
-ms.openlocfilehash: be88b8d58f1f660f3a815c395c210c05a7b4917c
-ms.sourcegitcommit: 72792e349458190b4158fcbacb87caf3fc605268
+ms.openlocfilehash: 5ea82d36d305b1f6ba58fba1b4c5bb4dca22f912
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78666007"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776532"
 ---
-# <a name="create-web-apis-with-aspnet-core"></a>ASP.NET Core ile web API'leri oluşturma
+# <a name="create-web-apis-with-aspnet-core"></a>ASP.NET Core ile web API’leri oluşturma
 
-Scott [Addie](https://github.com/scottaddie) ve [Tom Dykstra](https://github.com/tdykstra) tarafından
+[Scott Ade](https://github.com/scottaddie) ve [Tom Dykstra](https://github.com/tdykstra) tarafından
 
-ASP.NET Core, web API'leri olarak da bilinen RESTful hizmetleri oluşturulmasını C# kullanarak desteklemektedir. İstekleri işlemek için web API denetleyicileri kullanır. Web API'sindeki *denetleyiciler,* `ControllerBase`'den türeyen sınıflardır. Bu makalede, web API isteklerini işlemek için denetleyicileri nasıl kullanılacağı nı gösterir.
+ASP.NET Core, web API'leri olarak da bilinen RESTful hizmetleri oluşturulmasını C# kullanarak desteklemektedir. İstekleri işlemek için, bir Web API 'SI denetleyicileri kullanır. Bir Web API 'sindeki *denetleyiciler* öğesinden `ControllerBase`türetilen sınıflardır. Bu makalede, Web API isteklerini işlemek için denetleyicilerin nasıl kullanılacağı gösterilmektedir.
 
-[Örnek kodu görüntüleyin veya indirin.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/index/samples) ([Nasıl indirilir).](xref:index#how-to-download-a-sample)
+[Örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/index/samples). ([İndirme](xref:index#how-to-download-a-sample)).
 
 ## <a name="controllerbase-class"></a>ControllerBase sınıfı
 
-Web API'si, bir veya daha <xref:Microsoft.AspNetCore.Mvc.ControllerBase>fazla denetleyici sınıftan oluşur. Web API proje şablonu bir başlatıcı denetleyicisi sağlar:
+Bir Web API 'SI, öğesinden <xref:Microsoft.AspNetCore.Mvc.ControllerBase>türetilen bir veya daha fazla denetleyici sınıfından oluşur. Web API proje şablonu bir başlatıcı denetleyicisi sağlar:
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -38,55 +44,55 @@ Web API'si, bir veya daha <xref:Microsoft.AspNetCore.Mvc.ControllerBase>fazla de
 
 ::: moniker-end
 
-<xref:Microsoft.AspNetCore.Mvc.Controller> Sınıftan çıkararak bir web API denetleyicisi oluşturmayın. `Controller`görünümlerden kaynaklanır `ControllerBase` ve görünümler için destek ekler, bu nedenle web API isteklerini değil, web sayfalarını işlemek içindir. Bu kuralın bir istisnası vardır: Hem görünümler hem de web API'leri `Controller`için aynı denetleyiciyi kullanmayı planlıyorsanız, bunu .
+<xref:Microsoft.AspNetCore.Mvc.Controller> Sınıfından türeterek BIR Web API denetleyicisi oluşturmayın. `Controller`' dan `ControllerBase` türetilir ve görünümler için destek ekler, bu nedenle Web API istekleri için değil Web sayfalarını işlemeye yöneliktir. Bu kural için bir özel durum var: aynı denetleyiciyi hem görünümler hem de Web API 'Leri için kullanmayı planlıyorsanız, öğesinden `Controller`türetirsiniz.
 
-Sınıf, `ControllerBase` HTTP isteklerini işlemek için yararlı olan birçok özellik ve yöntem sağlar. Örneğin, `ControllerBase.CreatedAtAction` 201 durum kodunu döndürür:
+Sınıfı `ControllerBase` , http isteklerini işlemek için yararlı olan birçok özellik ve yöntem sağlar. Örneğin, `ControllerBase.CreatedAtAction` bir 201 durum kodu döndürür:
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/PetsController.cs?name=snippet_400And201&highlight=10)]
 
-Aşağıda, `ControllerBase` sağlayan yöntemlere birkaç örnek daha verilmiştir.
+`ControllerBase` Sağladığı yöntemlere ilişkin bazı örnekler aşağıda verilmiştir.
 
 |Yöntem   |Notlar    |
 |---------|---------|
 |<xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest%2A>| 400 durum kodunu döndürür.|
 |<xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound%2A>|404 durum kodunu döndürür.|
-|<xref:Microsoft.AspNetCore.Mvc.ControllerBase.PhysicalFile%2A>|Bir dosyayı döndürür.|
-|<xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync%2A>|Model [bağlamayı](xref:mvc/models/model-binding)çağırır.|
-|<xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryValidateModel%2A>|Model [doğrulaması](xref:mvc/models/validation)çağırır.|
+|<xref:Microsoft.AspNetCore.Mvc.ControllerBase.PhysicalFile%2A>|Bir dosya döndürür.|
+|<xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync%2A>|[Model bağlamasını](xref:mvc/models/model-binding)çağırır.|
+|<xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryValidateModel%2A>|[Model doğrulamasını](xref:mvc/models/validation)çağırır.|
 
-Kullanılabilir tüm yöntem ve özelliklerin <xref:Microsoft.AspNetCore.Mvc.ControllerBase>listesi için bkz.
+Tüm kullanılabilir yöntemlerin ve özelliklerin listesi için bkz <xref:Microsoft.AspNetCore.Mvc.ControllerBase>..
 
 ## <a name="attributes"></a>Öznitelikler
 
-Ad <xref:Microsoft.AspNetCore.Mvc> alanı, web API denetleyicilerinin ve eylem yöntemlerinin davranışını yapılandırmak için kullanılabilecek öznitelikler sağlar. Aşağıdaki örnek, desteklenen HTTP eylem fiilini ve döndürülebilecek bilinen herhangi bir HTTP durum kodlarını belirtmek için öznitelikleri kullanır:
+Ad <xref:Microsoft.AspNetCore.Mvc> alanı, Web API denetleyicileri ve eylem yöntemlerinin davranışını yapılandırmak için kullanılabilecek öznitelikleri sağlar. Aşağıdaki örnek, desteklenen HTTP eylem fiilini ve döndürülebilecek bilinen HTTP durum kodlarını belirtmek için özniteliklerini kullanır:
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/PetsController.cs?name=snippet_400And201&highlight=1-3)]
 
-Burada kullanılabilir özniteliklere birkaç daha fazla örnek verilmiştir.
+Aşağıda, kullanılabilecek özniteliklerin daha fazla örneği verilmiştir.
 
 |Öznitelik|Notlar|
 |---------|-----|
-|[`[Route]`](<xref:Microsoft.AspNetCore.Mvc.RouteAttribute>)      |Denetleyici veya eylem için URL deseni belirtir.|
-|[`[Bind]`](<xref:Microsoft.AspNetCore.Mvc.BindAttribute>)        |Model bağlama için ekecek önek ve özellikler belirtir.|
-|[`[HttpGet]`](<xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute>)  |HTTP GET eylem fiilini destekleyen bir eylemi tanımlar.|
+|[`[Route]`](<xref:Microsoft.AspNetCore.Mvc.RouteAttribute>)      |Bir denetleyicinin veya eylemin URL modelini belirtir.|
+|[`[Bind]`](<xref:Microsoft.AspNetCore.Mvc.BindAttribute>)        |Model bağlama için dahil edilecek öneki ve özellikleri belirtir.|
+|[`[HttpGet]`](<xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute>)  |HTTP GET ACTION fiilini destekleyen bir eylemi tanımlar.|
 |[`[Consumes]`](<xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute>)|Bir eylemin kabul ettiği veri türlerini belirtir.|
-|[`[Produces]`](<xref:Microsoft.AspNetCore.Mvc.ProducesAttribute>)|Bir eylemin döndürdüğü veri düşüntülerini|
+|[`[Produces]`](<xref:Microsoft.AspNetCore.Mvc.ProducesAttribute>)|Bir eylemin döndürdüğü veri türlerini belirtir.|
 
-Kullanılabilir öznitelikleri içeren bir liste <xref:Microsoft.AspNetCore.Mvc> için ad alanına bakın.
+Kullanılabilir öznitelikleri içeren bir liste için, bkz. <xref:Microsoft.AspNetCore.Mvc> ad alanı.
 
 ## <a name="apicontroller-attribute"></a>ApiController özniteliği
 
-Öznitelik, [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) aşağıdaki göreli, API'ye özgü davranışları etkinleştirmek için bir denetleyici sınıfına uygulanabilir:
+[`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) Özniteliği bir denetleyici sınıfına uygulanabilir ve bu, API 'ye özgü aşağıdaki davranışları etkinleştirmek için kullanılabilir:
 
 ::: moniker range=">= aspnetcore-2.2"
 
 * [Öznitelik yönlendirme gereksinimi](#attribute-routing-requirement)
 * [Otomatik HTTP 400 yanıtları](#automatic-http-400-responses)
-* [Bağlayıcı kaynak parametresi çıkarımı](#binding-source-parameter-inference)
-* [Çoklu bölüm/form-veri isteği çıkarımı](#multipartform-data-request-inference)
+* [Bağlama kaynak parametresi çıkarımı](#binding-source-parameter-inference)
+* [Multipart/form-veri isteği çıkarımı](#multipartform-data-request-inference)
 * [Hata durum kodları için sorun ayrıntıları](#problem-details-for-error-status-codes)
 
-Hata durumu kodları özelliği *için Sorun ayrıntıları* 2.2 veya daha sonra bir uyumluluk [sürümü](xref:mvc/compatibility-version) gerektirir. Diğer özellikler 2.1 veya sonraki bir uyumluluk sürümü gerektirir.
+*Hata durum kodları özelliği Için sorun ayrıntıları* , 2,2 veya üzeri bir [Uyumluluk sürümü](xref:mvc/compatibility-version) gerektirir. Diğer özellikler, 2,1 veya üzeri bir uyumluluk sürümü gerektirir.
 
 ::: moniker-end
 
@@ -94,16 +100,16 @@ Hata durumu kodları özelliği *için Sorun ayrıntıları* 2.2 veya daha sonra
 
 * [Öznitelik yönlendirme gereksinimi](#attribute-routing-requirement)
 * [Otomatik HTTP 400 yanıtları](#automatic-http-400-responses)
-* [Bağlayıcı kaynak parametresi çıkarımı](#binding-source-parameter-inference)
-* [Çoklu bölüm/form-veri isteği çıkarımı](#multipartform-data-request-inference)
+* [Bağlama kaynak parametresi çıkarımı](#binding-source-parameter-inference)
+* [Multipart/form-veri isteği çıkarımı](#multipartform-data-request-inference)
 
-Bu özellikler 2.1 veya sonraki bir [uyumluluk sürümü](xref:mvc/compatibility-version) gerektirir.
+Bu özellikler, 2,1 veya üzeri bir [Uyumluluk sürümü](xref:mvc/compatibility-version) gerektirir.
 
 ::: moniker-end
 
-### <a name="attribute-on-specific-controllers"></a>Belirli denetleyicilere öznitelik
+### <a name="attribute-on-specific-controllers"></a>Belirli denetleyicilerde öznitelik
 
-Öznitelik, `[ApiController]` proje şablonundaki aşağıdaki örnekte olduğu gibi belirli denetleyicilere uygulanabilir:
+`[ApiController]` Özniteliği, proje şablonundan aşağıdaki örnekte olduğu gibi belirli denetleyicilere uygulanabilir:
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -117,9 +123,9 @@ Bu özellikler 2.1 veya sonraki bir [uyumluluk sürümü](xref:mvc/compatibility
 
 ::: moniker-end
 
-### <a name="attribute-on-multiple-controllers"></a>Birden çok denetleyiciye öznitelik
+### <a name="attribute-on-multiple-controllers"></a>Birden çok denetleyicilerde öznitelik
 
-Özniteliği birden fazla denetleyicide kullanmaya yönelik bir yaklaşım, öznitelik ile `[ApiController]` açıklamalı özel bir taban denetleyici sınıfı oluşturmaktır. Aşağıdaki örnek, özel bir taban sınıf ve ondan türetilen bir denetleyici gösterir:
+Özniteliği birden fazla denetleyicide kullanmanın bir yaklaşımı, `[ApiController]` özniteliğiyle birlikte açıklanan özel bir temel denetleyici sınıfı oluşturmaktır. Aşağıdaki örnekte, özel bir temel sınıf ve ondan türetilen bir denetleyici gösterilmektedir:
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/MyControllerBase.cs?name=snippet_MyControllerBase)]
 
@@ -137,9 +143,9 @@ Bu özellikler 2.1 veya sonraki bir [uyumluluk sürümü](xref:mvc/compatibility
 
 ::: moniker range=">= aspnetcore-2.2"
 
-### <a name="attribute-on-an-assembly"></a>Montajda öznitelik
+### <a name="attribute-on-an-assembly"></a>Bir derlemedeki öznitelik
 
-[Uyumluluk sürümü](xref:mvc/compatibility-version) 2.2 veya daha sonra `[ApiController]` olarak ayarlanırsa, öznitelik bir derlemeye uygulanabilir. Bu şekilde ek açıklama, derlemedeki tüm denetleyicilere web API davranışını uygular. Tek tek denetleyicileri devre dışı bırakmanın bir yolu yok. Sınıfı çevreleyen ad alanı bildirimine derleme düzeyinde `Startup` öznitelik uygulayın:
+[Uyumluluk sürümü](xref:mvc/compatibility-version) 2,2 veya üzeri bir sürüme ayarlandıysa, `[ApiController]` öznitelik bir derlemeye uygulanabilir. Bu şekilde ek açıklama, derlemedeki tüm denetleyicilere Web API davranışını uygular. Tek tek denetleyiciler için geri alma yöntemi yoktur. Derleme düzeyi özniteliğini `Startup` sınıfı çevreleyen ad alanı bildirimine uygulayın:
 
 ```csharp
 [assembly: ApiController]
@@ -156,13 +162,13 @@ namespace WebApiSample
 
 ## <a name="attribute-routing-requirement"></a>Öznitelik yönlendirme gereksinimi
 
-Öznitelik `[ApiController]` öznitelik yönlendirme bir gereksinim i Örneğin:
+Öznitelik `[ApiController]` , öznitelik yönlendirme bir gereksinim yapar. Örneğin:
 
 ::: moniker range=">= aspnetcore-3.0"
 
 [!code-csharp[](index/samples/3.x/Controllers/WeatherForecastController.cs?name=snippet_ControllerSignature&highlight=2)]
 
-[conventional routes](xref:mvc/controllers/routing#conventional-routing) Eylemlere `UseEndpoints`, ' <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A>veya <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute%2A> . `Startup.Configure`
+Eylemlere `UseEndpoints`, <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A>, <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute%2A> veya içinde `Startup.Configure`tanımlanan [geleneksel yollar](xref:mvc/controllers/routing#conventional-routing) aracılığıyla erişilemez.
 
 ::: moniker-end
 
@@ -170,13 +176,13 @@ namespace WebApiSample
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/ValuesController.cs?name=snippet_ControllerSignature&highlight=1)]
 
-Eylemlere, tarafından <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A> tanımlanan geleneksel <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute%2A> [yollarla](xref:mvc/controllers/routing#conventional-routing) veya `Startup.Configure`
+Eylemlere, <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A> veya <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvcWithDefaultRoute%2A> içinde `Startup.Configure`tanımlanan [geleneksel yollar](xref:mvc/controllers/routing#conventional-routing) aracılığıyla erişilemez.
 
 ::: moniker-end
 
 ## <a name="automatic-http-400-responses"></a>Otomatik HTTP 400 yanıtları
 
-Öznitelik, model doğrulama hatalarının `[ApiController]` otomatik olarak bir HTTP 400 yanıtını tetikletir. Sonuç olarak, bir eylem yönteminde aşağıdaki kod gereksizdir:
+Öznitelik `[ApiController]` , model doğrulama hatalarının otomatik olarak bir HTTP 400 yanıtı tetiklenmesine neden olur. Sonuç olarak, aşağıdaki kod bir eylem yönteminde gereksizdir:
 
 ```csharp
 if (!ModelState.IsValid)
@@ -185,11 +191,11 @@ if (!ModelState.IsValid)
 }
 ```
 
-ASP.NET Core MVC <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter> önceki denetimi yapmak için eylem filtresini kullanır.
+ASP.NET Core MVC, önceki <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalidFilter> denetimi yapmak için eylem filtresini kullanır.
 
 ### <a name="default-badrequest-response"></a>Varsayılan BadRequest yanıtı
 
-2.1 uyumluluk sürümüile, bir HTTP 400 yanıtı için <xref:Microsoft.AspNetCore.Mvc.SerializableError>varsayılan yanıt türü . Aşağıdaki istek gövdesi serileştirilmiş türe örnektir:
+Uyumluluk sürümü 2,1 ile, bir HTTP 400 yanıtı için varsayılan yanıt türü ' dir <xref:Microsoft.AspNetCore.Mvc.SerializableError>. Aşağıdaki istek gövdesi, serileştirilmiş türün bir örneğidir:
 
 ```json
 {
@@ -201,7 +207,7 @@ ASP.NET Core MVC <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalid
 
 ::: moniker range=">= aspnetcore-2.2"
 
-2.2 veya sonraki uyumluluk sürümünde, HTTP 400 yanıtı için <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails>varsayılan yanıt türü . Aşağıdaki istek gövdesi serileştirilmiş türe örnektir:
+2,2 veya üzeri bir uyumluluk sürümü ile, bir HTTP 400 yanıtı için varsayılan yanıt türü ' dir <xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails>. Aşağıdaki istek gövdesi, serileştirilmiş türün bir örneğidir:
 
 ```json
 {
@@ -217,20 +223,20 @@ ASP.NET Core MVC <xref:Microsoft.AspNetCore.Mvc.Infrastructure.ModelStateInvalid
 }
 ```
 
-Türü: `ValidationProblemDetails`
+`ValidationProblemDetails` Tür:
 
-* Web API yanıtlarında hataları belirtmek için makine tarafından okunabilir bir biçim sağlar.
-* [RFC 7807 belirtimine](https://tools.ietf.org/html/rfc7807)uygundur.
+* Web API yanıtlarında hata belirtmek için makine tarafından okunabilen bir biçim sağlar.
+* [RFC 7807 belirtimine](https://tools.ietf.org/html/rfc7807)uyar.
 
 ::: moniker-end
 
-### <a name="log-automatic-400-responses"></a>Günlük otomatik 400 yanıt
+### <a name="log-automatic-400-responses"></a>Otomatik 400 yanıtlarını günlüğe kaydet
 
-[Model doğrulama hataları (aspnet/AspNetCore.Docs #12157) üzerinde otomatik 400 yanıtları nasıl günlüğe kaydedeceğimi](https://github.com/dotnet/AspNetCore.Docs/issues/12157)görün.
+Bkz. [otomatik 400 yanıtlarını model doğrulama hatalarında günlüğe kaydetme (ASPNET/AspNetCore. Docs #12157)](https://github.com/dotnet/AspNetCore.Docs/issues/12157).
 
-### <a name="disable-automatic-400-response"></a>Otomatik 400 yanıtını devre dışı
+### <a name="disable-automatic-400-response"></a>Otomatik 400 yanıtını devre dışı bırak
 
-Otomatik 400 davranışını devre dışı <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressModelStateInvalidFilter> bırakabilmek için `true`özelliği ' ye göre ayarla Aşağıdaki vurgulanan kodu `Startup.ConfigureServices`ekleyin:
+Otomatik 400 davranışını devre dışı bırakmak için <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressModelStateInvalidFilter> özelliğini olarak `true`ayarlayın. Aşağıdaki Vurgulanan kodu içine `Startup.ConfigureServices`ekleyin:
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -250,56 +256,56 @@ Otomatik 400 davranışını devre dışı <xref:Microsoft.AspNetCore.Mvc.ApiBeh
 
 ::: moniker-end
 
-## <a name="binding-source-parameter-inference"></a>Bağlayıcı kaynak parametresi çıkarımı
+## <a name="binding-source-parameter-inference"></a>Bağlama kaynak parametresi çıkarımı
 
-Bağlayıcı kaynak özniteliği, eylem parametresi değerinin bulunduğu konumu tanımlar. Aşağıdaki bağlayıcı kaynak öznitelikleri vardır:
+Bağlama kaynak özniteliği, bir eylem parametresi değerinin bulunduğu konumu tanımlar. Aşağıdaki bağlama kaynak öznitelikleri var:
 
-|Öznitelik|Kaynak bağlama |
+|Öznitelik|Bağlama kaynağı |
 |---------|---------|
 |[`[FromBody]`](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute)     | İstek gövdesi |
-|[`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute)     | İstek gövdesindeki form verileri |
+|[`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute)     | İstek gövdesinde form verileri |
 |[`[FromHeader]`](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute) | İstek üst bilgisi |
 |[`[FromQuery]`](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute)   | İstek sorgusu dize parametresi |
-|[`[FromRoute]`](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute)   | Geçerli istekteki verileri yönlendirme |
-|[`[FromServices]`](xref:mvc/controllers/dependency-injection#action-injection-with-fromservices) | Eylem parametresi olarak enjekte edilen istek hizmeti |
+|[`[FromRoute]`](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute)   | Geçerli istekten veri yönlendir |
+|[`[FromServices]`](xref:mvc/controllers/dependency-injection#action-injection-with-fromservices) | Eylem parametresi olarak eklenen istek hizmeti |
 
 > [!WARNING]
-> Değerler içerebileceğinde `[FromRoute]` `%2f` `/`(yani) kullanmayın. `%2f`kaçmadan `/`olmayacaktır. Değer `[FromQuery]` içeriyorsa `%2f`kullanın.
+> Değerler ( `[FromRoute]` yani `%2f` `/`) içerdiğinde kullanmayın. `%2f`atlanmaz `/`. Değer `[FromQuery]` içermesi `%2f`gerekiyorsa kullanın.
 
-Gibi `[ApiController]` öznitelik veya bağlayıcı `[FromQuery]`kaynak öznitelikleri olmadan, ASP.NET Core çalışma zamanı karmaşık nesne modeli bağlayıcısı kullanmaya çalışır. Karmaşık nesne modeli bağlayıcısı, tanımlı bir sırada değer sağlayıcılardan veri çeker.
+`[ApiController]` Özniteliği veya gibi `[FromQuery]`bağlama kaynak öznitelikleri olmadan, ASP.NET Core çalışma zamanı karmaşık nesne modeli cildi kullanmaya çalışır. Karmaşık nesne modeli Ciltçi, verileri değer sağlayıcılarından tanımlı bir düzende çeker.
 
-Aşağıdaki örnekte, `[FromQuery]` `discontinuedOnly` öznitelik, parametre değerinin istek URL'sinin sorgu dizesinde sağlandığını gösterir:
+Aşağıdaki örnekte `[FromQuery]` öznitelik, istek URL 'sinin sorgu dizesinde `discontinuedOnly` parametre değerinin sağlandığını gösterir:
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/ProductsController.cs?name=snippet_BindingSourceAttributes&highlight=3)]
 
-Öznitelik, `[ApiController]` eylem parametrelerinin varsayılan veri kaynakları için çıkarım kuralları uygular. Bu kurallar, eylem parametrelerine öznitelikleri uygulayarak bağlayıcı kaynakları el ile tanımlamak zorunda kalmanızı sağlar. Bağlayıcı kaynak çıkarım kuralları aşağıdaki gibi hareket eder:
+`[ApiController]` Öznitelik, eylem parametrelerinin varsayılan veri kaynakları için çıkarım kurallarını uygular. Bu kurallar, eylem parametrelerine öznitelikleri uygulayarak bağlama kaynaklarını el ile tanımlamak zorunda kalmadan sizi kaydeder. Bağlama kaynak çıkarımı kuralları aşağıdaki gibi davranır:
 
-* `[FromBody]`karmaşık tür parametreleri için çıkarılır. Çıkarım kuralının `[FromBody]` bir istisnası, özel bir anlamı olan karmaşık, <xref:Microsoft.AspNetCore.Http.IFormCollection> yerleşik <xref:System.Threading.CancellationToken>bir türdür. Bağlayıcı kaynak çıkarım kodu bu özel türleri yoksayılsın.
-* `[FromForm]`türü <xref:Microsoft.AspNetCore.Http.IFormFile> ve <xref:Microsoft.AspNetCore.Http.IFormFileCollection>eylem parametreleri için çıkarılır. Basit veya kullanıcı tarafından tanımlanan türler için çıkarılmaz.
-* `[FromRoute]`rota şablonundaki bir parametreyle eşleşen herhangi bir eylem parametresi adı için çıkarılır. Birden fazla rota bir eylem parametresi ile `[FromRoute]`eşleştiğinde, herhangi bir rota değeri dikkate alınr.
-* `[FromQuery]`diğer eylem parametreleri için çıkarılır.
+* `[FromBody]`karmaşık tür parametreleri için algılanır. `[FromBody]` Çıkarım kuralı için bir özel durum, <xref:Microsoft.AspNetCore.Http.IFormCollection> ve <xref:System.Threading.CancellationToken>gibi özel bir anlamı olan karmaşık, yerleşik bir türdür. Bağlama kaynak çıkarımı kodu bu özel türleri yoksayar.
+* `[FromForm]`, ve <xref:Microsoft.AspNetCore.Http.IFormFile> <xref:Microsoft.AspNetCore.Http.IFormFileCollection>türündeki eylem parametreleri için algılanır. Bu, herhangi bir basit veya Kullanıcı tanımlı tür için çıkarsanamıyor.
+* `[FromRoute]`yol şablonundaki bir parametreyle eşleşen herhangi bir eylem parametresi adı için algılanır. Birden fazla yol bir eylem parametresiyle eşleştiğinde, herhangi bir rota değeri kabul `[FromRoute]`edilir.
+* `[FromQuery]`diğer eylem parametreleri için algılanır.
 
 ### <a name="frombody-inference-notes"></a>FromBody çıkarım notları
 
-`[FromBody]`gibi basit türleri için `string` çıkarılmaz. `int` Bu nedenle, `[FromBody]` öznitelik bu işlevsellik gerektiğinde basit türleri için kullanılmalıdır.
+`[FromBody]`, `string` veya `int`gibi basit türler için çıkarsanamıyor. Bu nedenle, `[FromBody]` bu işlev gerektiğinde basit türler için özniteliği kullanılmalıdır.
 
-Bir eylemin istek gövdesinden birden fazla parametre bağlı olması halinde, bir özel durum atılır. Örneğin, aşağıdaki eylem yöntemi imzalarının tümü bir özel durum neden olur:
+Bir eylem, istek gövdesinden birden fazla parametre bağlamışsa, bir özel durum oluşturulur. Örneğin, aşağıdaki eylem yöntemi imzalarının tümü bir özel duruma neden olur:
 
-* `[FromBody]`karmaşık türleri olduğu için her ikisi de çıkarılır.
+* `[FromBody]`karmaşık türler olduklarından her ikisi de üzerinde algılanır.
 
   ```csharp
   [HttpPost]
   public IActionResult Action1(Product product, Order order)
   ```
 
-* `[FromBody]`karmaşık bir tür olduğu için diğerinde çıkarılan öznitelik.
+* `[FromBody]`karmaşık bir tür olduğundan, diğeri üzerinde olan özniteliği.
 
   ```csharp
   [HttpPost]
   public IActionResult Action2(Product product, [FromBody] Order order)
   ```
 
-* `[FromBody]`her ikide de öznitelik.
+* `[FromBody]`her ikisinde de özniteliği.
 
   ```csharp
   [HttpPost]
@@ -309,13 +315,13 @@ Bir eylemin istek gövdesinden birden fazla parametre bağlı olması halinde, b
 ::: moniker range="= aspnetcore-2.1"
 
 > [!NOTE]
-> ASP.NET Core 2.1'de, listeler ve diziler gibi toplama türü `[FromQuery]`parametreleri yanlış olarak çıkarılır. İstek `[FromBody]` gövdesinden bağlı olacaksa, bu parametreler için öznitelik kullanılmalıdır. Bu davranış, toplama türü parametrelerinin varsayılan olarak gövdeden bağlı olarak çıkarıldığı ASP.NET Core 2.2 veya daha sonra düzeltilir.
+> ASP.NET Core 2,1 ' de, listeler ve diziler gibi koleksiyon türü parametreleri yanlış olarak `[FromQuery]`algılanır. `[FromBody]` Öznitelik, istek gövdesinden bağlanmaları durumunda bu parametreler için kullanılmalıdır. Bu davranış ASP.NET Core 2,2 veya sonraki bir sürümde düzeltilir. burada, koleksiyon türü parametrelerinin varsayılan olarak gövdeden bağlanacak şekilde çıkarsandır.
 
 ::: moniker-end
 
-### <a name="disable-inference-rules"></a>Çıkarım kurallarını devre dışı
+### <a name="disable-inference-rules"></a>Çıkarım kurallarını devre dışı bırak
 
-Bağlayıcı kaynak çıkarımLarını devre dışı <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressInferBindingSourcesForParameters> `true`kılabilir, '' olarak ayarlayın Aşağıdaki kodu `Startup.ConfigureServices`ekleyin:
+Bağlama kaynak çıkarımını devre dışı bırakmak <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressInferBindingSourcesForParameters> için `true`, olarak ayarlayın. Aşağıdaki kodu içine `Startup.ConfigureServices`ekleyin:
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -335,11 +341,11 @@ Bağlayıcı kaynak çıkarımLarını devre dışı <xref:Microsoft.AspNetCore.
 
 ::: moniker-end
 
-## <a name="multipartform-data-request-inference"></a>Çoklu bölüm/form-veri isteği çıkarımı
+## <a name="multipartform-data-request-inference"></a>Multipart/form-veri isteği çıkarımı
 
-Bir `[ApiController]` eylem parametresi öznitelik ile [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) açıklamalı olduğunda öznitelik bir çıkarım kuralı uygular. İstek `multipart/form-data` içeriği türü çıkarılır.
+Özniteliği `[ApiController]` ile [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) bir eylem parametresine ek açıklama eklendiğinde öznitelik bir çıkarım kuralı uygular. `multipart/form-data` İstek içerik türü çıkarsandı.
 
-Varsayılan davranışı devre dışı kılabilir, <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressConsumesConstraintForFormFileParameters> `true` özelliği `Startup.ConfigureServices`şu şekilde ayarlayın:
+Varsayılan davranışı devre dışı bırakmak için <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressConsumesConstraintForFormFileParameters> özelliğini `true` olarak `Startup.ConfigureServices`ayarlayın:
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -363,13 +369,13 @@ Varsayılan davranışı devre dışı kılabilir, <xref:Microsoft.AspNetCore.Mv
 
 ## <a name="problem-details-for-error-status-codes"></a>Hata durum kodları için sorun ayrıntıları
 
-Uyumluluk sürümü 2,2 veya daha sonra olduğunda, MVC bir hata sonucunu (durum kodu 400 <xref:Microsoft.AspNetCore.Mvc.ProblemDetails>veya daha yüksek bir sonuç) . Tür, `ProblemDetails` http yanıtında makine tarafından okunabilir hata ayrıntıları sağlamak için [RFC 7807 belirtimine](https://tools.ietf.org/html/rfc7807) dayanır.
+Uyumluluk sürümü 2,2 veya üzeri olduğunda, MVC bir hata sonucunu (durum kodu 400 veya üzeri olan bir sonuç) ile <xref:Microsoft.AspNetCore.Mvc.ProblemDetails>bir sonuçla dönüştürür. `ProblemDetails` Türü, bir http yanıtında makine tarafından okunabilen hata ayrıntılarını sağlamak için [RFC 7807 belirtimine](https://tools.ietf.org/html/rfc7807) dayalıdır.
 
-Denetleyici eyleminde aşağıdaki kodu göz önünde bulundurun:
+Bir denetleyici eyleminde aşağıdaki kodu göz önünde bulundurun:
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/PetsController.cs?name=snippet_ProblemDetailsStatusCode)]
 
-Yöntem, `NotFound` gövdeli bir `ProblemDetails` HTTP 404 durum kodu üretir. Örneğin:
+Yöntemi `NotFound` , `ProblemDetails` gövdesi olan bir HTTP 404 durum kodu üretir. Örneğin:
 
 ```json
 {
@@ -380,9 +386,9 @@ Yöntem, `NotFound` gövdeli bir `ProblemDetails` HTTP 404 durum kodu üretir. �
 }
 ```
 
-### <a name="disable-problemdetails-response"></a>SorunAyrıntıları devre dışı
+### <a name="disable-problemdetails-response"></a>ProblemDetails yanıtını devre dışı bırak
 
-Hata durum kodları `ProblemDetails` için otomatik oluşturma <xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressMapClientErrors%2A> özelliği ayarlandığında `true`devre dışı bırakılır. Aşağıdaki kodu `Startup.ConfigureServices`ekleyin:
+<xref:Microsoft.AspNetCore.Mvc.ApiBehaviorOptions.SuppressMapClientErrors%2A> Özelliği olarak `true`ayarlandığında hata durumu kodlarının otomatik olarak `ProblemDetails` oluşturulması devre dışı bırakılır. Aşağıdaki kodu içine `Startup.ConfigureServices`ekleyin:
 
 ::: moniker-end
 
@@ -400,11 +406,11 @@ Hata durum kodları `ProblemDetails` için otomatik oluşturma <xref:Microsoft.A
 
 <a name="consumes"></a>
 
-## <a name="define-supported-request-content-types-with-the-consumes-attribute"></a>Desteklenen istek içerik türlerini [Tüketenler] özelliğiyle tanımlama
+## <a name="define-supported-request-content-types-with-the-consumes-attribute"></a>Desteklenen istek içerik türlerini [tüketir] özniteliğiyle tanımlayın
 
-Varsayılan olarak, bir eylem tüm kullanılabilir istek içerik türlerini destekler. Örneğin, bir uygulama hem JSON hem de XML [giriş formatters](xref:mvc/models/model-binding#input-formatters)destekleyecek şekilde yapılandırılırsa, bir eylem dahil olmak üzere birden çok içerik türünü `application/json` destekler. `application/xml`
+Varsayılan olarak, bir eylem tüm kullanılabilir istek içerik türlerini destekler. Örneğin, bir uygulama hem JSON hem de XML [giriş formatlarını](xref:mvc/models/model-binding#input-formatters)destekleyecek şekilde yapılandırıldıysa, bir eylem, ve `application/json` `application/xml`dahil olmak üzere birden çok içerik türünü destekler.
 
-[[Tüketir]](<xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute>) özniteliği, desteklenen istek içerik türlerini sınırlamak için bir eyleme izin verir. `[Consumes]` Bir veya daha fazla içerik türünü belirterek bir eyleme veya denetleyiciye özniteliği uygulayın:
+[[Tüketir]](<xref:Microsoft.AspNetCore.Mvc.ConsumesAttribute>) özniteliği, desteklenen istek içerik türlerini sınırlama eylemi sağlar. `[Consumes]` Özniteliği bir eylem veya denetleyiciye uygulayarak bir veya daha fazla içerik türü belirtin:
 
 ```csharp
 [HttpPost]
@@ -412,15 +418,15 @@ Varsayılan olarak, bir eylem tüm kullanılabilir istek içerik türlerini dest
 public IActionResult CreateProduct(Product product)
 ```
 
-Önceki kodda, `CreateProduct` eylem içerik türünü `application/xml`belirtir. Bu eyleme yönlendirilen `Content-Type` istekler `application/xml`bir üstbilgi belirtmelidir. [415 Desteklenmeyen Medya](https://developer.mozilla.org/docs/Web/HTTP/Status/415) `application/xml` Türü yanıtında bir `Content-Type` üstbilgi belirtmeyan istekler.
+Yukarıdaki kodda, `CreateProduct` eylem içerik türünü `application/xml`belirtir. Bu eyleme yönlendirilen isteklerin bir `Content-Type` üst bilgisi belirtmesi gerekir. `application/xml` `Content-Type` Üst bilgisi belirtmeyen istekler, `application/xml` [415 desteklenmeyen medya türü](https://developer.mozilla.org/docs/Web/HTTP/Status/415) yanıtı ile sonuçlanır.
 
-Öznitelik `[Consumes]` ayrıca, bir tür kısıtlaması uygulayarak gelen bir isteğin içerik türüne dayalı olarak bir eylemin seçimini etkilemesine de olanak tanır. Aşağıdaki örneği inceleyin:
+`[Consumes]` Öznitelik Ayrıca bir eylemin bir tür kısıtlaması uygulayarak bir gelen isteğin içerik türüne göre seçimini etkilemesini sağlar. Aşağıdaki örneği inceleyin:
 
 [!code-csharp[](index/samples/3.x/Controllers/ConsumesController.cs?name=snippet_Class)]
 
-Önceki kodda, `ConsumesController` `https://localhost:5001/api/Consumes` URL'ye gönderilen istekleri işlemek için yapılandırılmıştır. Denetleyicinin eylemlerinin her `PostJson` ikisi `PostForm`de ve POST isteklerini aynı URL ile işler. `[Consumes]` Öznitelik bir tür kısıtlaması uygulamadan, belirsiz bir eşleme özel durumu atılır.
+Önceki kodda, `ConsumesController` `https://localhost:5001/api/Consumes` URL 'ye gönderilen istekleri işleyecek şekilde yapılandırılır. Denetleyicinin eylemlerinin `PostJson` `PostForm`her ikisi de aynı URL 'ye sahip post isteklerini işler. `[Consumes]` Öznitelik bir tür kısıtlaması uygulamadan, belirsiz eşleşme özel durumu oluşur.
 
-Öznitelik `[Consumes]` her iki eyleme de uygulanır. Eylem, `PostJson` üstbilgi `Content-Type` ile `application/json`gönderilen istekleri işler. Eylem, `PostForm` üstbilgi `Content-Type` ile `application/x-www-form-urlencoded`gönderilen istekleri işler. 
+`[Consumes]` Özniteliği her iki eyleme de uygulanır. Eylem `PostJson` , `Content-Type` üst bilgisi ile gönderilen istekleri işler `application/json`. Eylem `PostForm` , `Content-Type` üst bilgisi ile gönderilen istekleri işler `application/x-www-form-urlencoded`. 
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

@@ -4,13 +4,19 @@ author: rick-anderson
 description: ASP.NET Core veri koruma kimliği doğrulanmış şifrelemenin uygulama ayrıntılarını öğrenin.
 ms.author: riande
 ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/authenticated-encryption-details
-ms.openlocfilehash: 9def03e6b27e19fc34a839e923d6152e086889db
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: 3066cd505781ed2ddad46626dda9d9ce35307877
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78667764"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776974"
 ---
 # <a name="authenticated-encryption-details-in-aspnet-core"></a>ASP.NET Core kimliği doğrulanmış şifreleme ayrıntıları
 
@@ -55,4 +61,4 @@ Sonraki 128 bit veya 16 bayt anahtar tanımlayıcısıdır (80 9C 81 0C 19 66 19
 Kalan, yükü içerir ve kullanılan biçime özeldir.
 
 > [!WARNING]
-> Belirli bir anahtara korunan tüm yüklerin aynı 20 baytlık (sihirli değer, anahtar kimliği) üst bilgisi ile başlaması gerekir. Yöneticiler bu olguyu, bir yükün ne zaman oluşturulduğunu yaklaşık olarak tanılama amacıyla kullanabilir. Örneğin, yukarıdaki yük {0c819c80-6619-4019-9536-53f8aaffee57} anahtarına karşılık gelir. Anahtar deposunu denetledikten sonra, bu anahtarın etkinleştirme tarihinin 2015-01-01 olduğunu ve sona erme tarihi 2015-03-01 olduğunu fark ederseniz, bu pencerede yükün (üzerinde oynanmadıysa) Bu pencerede oluşturulduğunu varsaymak mantıklı, Her iki tarafta da bir faktör vardır.
+> Belirli bir anahtara korunan tüm yüklerin aynı 20 baytlık (sihirli değer, anahtar kimliği) üst bilgisi ile başlaması gerekir. Yöneticiler bu olguyu, bir yükün ne zaman oluşturulduğunu yaklaşık olarak tanılama amacıyla kullanabilir. Örneğin, yukarıdaki yük {0c819c80-6619-4019-9536-53f8aaffee57} anahtarına karşılık gelir. Anahtar deposunu denetledikten sonra, bu anahtarın etkinleştirme tarihinin 2015-01-01 olduğunu ve sona erme tarihi 2015-03-01 olduğunu fark ederseniz, bu pencerede yükün (üzerinde oynanmadıysa) Bu pencerede oluşturulduğunu varsaymak mantıklı olur.

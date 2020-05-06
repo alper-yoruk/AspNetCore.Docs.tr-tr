@@ -1,84 +1,88 @@
 ---
-title: İlk Blazor uygulamanızı oluşturun
+title: İlk Blazor uygulamanızı oluşturma
 author: guardrex
-description: Adım Blazor adım bir uygulama oluşturun.
+description: Bir Blazor uygulamayı adım adım oluşturun.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 03/20/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: 138057c2ceb9ed01bdf958c01f5cf2275387df23
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 5a5a56ee646cba21a883df2cf686cb1ccb18d7f9
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79989429"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776610"
 ---
-# <a name="build-your-first-opno-locblazor-app"></a>İlk Blazor uygulamanızı oluşturun
+# <a name="build-your-first-blazor-app"></a>İlk Blazor uygulamanızı oluşturma
 
-Yazar: [Daniel Roth](https://github.com/danroth27) ve [Luke Latham](https://github.com/guardrex)
+[Daniel Roth](https://github.com/danroth27) ve [Luke Latham](https://github.com/guardrex) tarafından
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
-Bu öğretici, bir Blazor uygulamayı nasıl oluşturup değiştirdiğinizi gösterir.
+Bu öğreticide, bir Blazor uygulamayı nasıl oluşturabileceğiniz ve değiştireceğiniz gösterilmektedir.
 
-## <a name="build-components"></a>Bileşenler oluşturma
+## <a name="build-components"></a>Derleme bileşenleri
 
-1. Bu öğretici için <xref:blazor/get-started> bir Blazor proje oluşturmak için makaledeki kılavuzu izleyin. Proje *ToDoList*adını.
+1. Bu öğretici için bir <xref:blazor/get-started> Blazor proje oluşturmak üzere makalesindeki yönergeleri izleyin. Projeyi *ToDoList*olarak adlandırın.
 
-1. *Uygulamanın Sayfalar* klasöründeki üç sayfasının her birine göz atın: Ana Sayfa, Sayaç ve Getir verileri. Bu sayfalar Razor bileşen dosyaları *Index.razor,* *Counter.razor*ve *FetchData.razor*tarafından uygulanır.
+1. *Sayfalar* klasöründe uygulamanın üç sayfasının her birine gidin: giriş, sayaç ve veri getirme. Bu sayfalar, Razor *Dizin. Razor*, *Counter. Razor*ve *fetchdata. Razor*bileşen dosyaları tarafından uygulanır.
 
-1. Sayaç sayfasında, sayfa yenilemeden sayacı niçin artıya doğru artıya tıklayın **düğmesini** seçin. Bir web sayfasında ki sayaç ları artıya yazmak normalde JavaScript yazmayı gerektirir. Ile, Blazorbunun yerine C# yazabilirsiniz.
+1. Sayaç sayfasında, bir sayfa yenilemesi olmadan sayacı artırmak için **bana tıklama** düğmesini seçin. Bir Web sayfasında normal olarak bir sayacı artırma, JavaScript yazmayı gerektirir. İle Blazorbunun yerine C# yazabilirsiniz.
 
-1. `Counter` *Counter.razor* dosyasındaki bileşenin uygulanmasını inceleyin.
+1. `Counter` *Counter. Razor* dosyasındaki bileşenin uygulamasını inceleyin.
 
-   *Sayfalar/Counter.razor*:
+   *Pages/Counter. Razor*:
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/Counter1.razor)]
 
-   `Counter` Bileşenin UI'si HTML kullanılarak tanımlanır. Dinamik işleme mantığı (örneğin, döngüler, koşullular, ifadeler) [Razor](xref:mvc/views/razor)adlı katıştırılmış c# sözdizimi kullanılarak eklenir. HTML biçimlendirmesi ve C# oluşturma mantığı, oluşturma zamanında bileşen sınıfına dönüştürülür. Oluşturulan .NET sınıfının adı dosya adıyla eşleşir.
+   `Counter` Bileşenin kullanıcı arabirimi HTML kullanılarak tanımlanır. Dinamik işleme mantığı (örneğin, döngüler, koşullar, ifadeler) adlı [Razor](xref:mvc/views/razor)gömülü C# sözdizimi kullanılarak eklenir. HTML biçimlendirme ve C# işleme mantığı, derleme zamanında bir bileşen sınıfına dönüştürülür. Oluşturulan .NET sınıfının adı dosya adıyla eşleşir.
 
-   Bileşen sınıfının üyeleri bir `@code` blokta tanımlanır. Blokta, `@code` olay işleme veya diğer bileşen mantığını tanımlamak için bileşen durumu (özellikler, alanlar) ve yöntemler belirtilir. Bu üyeler daha sonra bileşenin oluşturma mantığının bir parçası olarak ve olayları işlemek için kullanılır.
+   Bileşen sınıfının üyeleri bir `@code` blokta tanımlanır. `@code` Bloğunda, bileşen durumu (özellikler, alanlar) ve yöntemler olay işleme için veya diğer bileşen mantığını tanımlamak için belirtilir. Bu Üyeler daha sonra bileşenin işleme mantığının bir parçası olarak ve olayları işlemek için kullanılır.
 
-   Beni **Tıklatın** düğmesi seçildiğinde:
+   **Bana tıklama** düğmesi seçildiğinde:
 
-   * Bileşenin `Counter` kayıtlı `onclick` işleyicisi `IncrementCount` (yöntem) olarak adlandırılır.
-   * Bileşen, `Counter` render ağacını yeniden oluşturur.
-   * Yeni render ağacı öncekiyle karşılaştırılır.
-   * Yalnızca Belge Nesnesi Modelinde (DOM) değişiklikler uygulanır. Görüntülenen sayı güncelleştirilir.
+   * `Counter` Bileşenin kayıtlı `onclick` işleyicisine ( `IncrementCount` yöntemi) denir.
+   * `Counter` Bileşen, işleme ağacını yeniden oluşturur.
+   * Yeni işleme ağacı öncekiyle karşılaştırılır.
+   * Yalnızca Belge Nesne Modeli (DOM) üzerinde yapılan değişiklikler uygulanır. Görünen sayı güncelleştirildi.
 
-1. Bileşenin `Counter` C# mantığını değiştirerek sayım artışını bir yerine iki yapın.
+1. Sayıyı bir yerine iki ile artırmak `Counter` Için bileşenin C# mantığını değiştirin.
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/Counter2.razor?highlight=14)]
 
-1. Değişiklikleri görmek için uygulamayı yeniden oluşturve çalıştırın. Beni **Tıklatın** düğmesini seçin. Sayaç iki şer kademeli olarak artıyor.
+1. Değişiklikleri görmek için uygulamayı yeniden derleyin ve çalıştırın. **Ben tıklama** düğmesini seçin. Sayaç iki olarak artar.
 
 ## <a name="use-components"></a>Bileşenleri kullanma
 
-HTML sözdizimini kullanarak başka bir bileşene bileşen ekleyin.
+Bir bileşeni, bir HTML söz dizimini kullanarak başka bir bileşene ekleyin.
 
-1. `Counter` Bileşene `Index` bir `<Counter />` öğe ekleyerek bileşeni uygulamanın bileşenine `Index` ekleyin *(Index.razor).*
+1. Bileşene bir `Counter` `Index` `<Counter />` öğe `Index` ekleyerek bileşeni uygulamanın bileşenine ekleyin (*Index. Razor*).
 
-   Bu deneyim için Blazor WebAssembly kullanıyorsanız, `SurveyPrompt` `Index` bileşen tarafından bir bileşen kullanılır. Öğeyi `<SurveyPrompt>` bir `<Counter />` öğeyle değiştirin. Bu deneyim için Blazor bir Sunucu uygulaması kullanıyorsanız, öğeyi `<Counter />` `Index` bileşene ekleyin:
+   Bu deneyim için webassembly kullanıyorsanız Blazor bileşen tarafından `SurveyPrompt` `Index` bir bileşen kullanılır. `<SurveyPrompt>` Öğesini bir `<Counter />` öğesiyle değiştirin. Bu deneyim için bir Blazor sunucu uygulaması kullanıyorsanız, `<Counter />` öğesini `Index` bileşene ekleyin:
 
-   *Sayfalar/Index.razor*:
+   *Pages/Index. Razor*:
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/Index1.razor?highlight=7)]
 
-1. Uygulamayı yeniden oluşturve çalıştırın. Bileşenin `Index` kendi sayacı vardır.
+1. Uygulamayı yeniden derleyin ve çalıştırın. `Index` Bileşenin kendi sayacı vardır.
 
 ## <a name="component-parameters"></a>Bileşen parametreleri
 
-Bileşenlerin parametreleri de olabilir. Bileşen parametreleri öznitelik ile `[Parameter]` bileşen sınıfında ortak özellikleri kullanılarak tanımlanır. Biçimlendirmede bir bileşenin bağımsız değişkenlerini belirtmek için öznitelikleri kullanın.
+Bileşenler de parametrelere sahip olabilir. Bileşen parametreleri, bileşen sınıfında `[Parameter]` özniteliğiyle birlikte ortak özellikler kullanılarak tanımlanır. Biçimlendirme içindeki bir bileşenin bağımsız değişkenlerini belirtmek için öznitelikleri kullanın.
 
 1. Bileşenin `@code` C# kodunu aşağıdaki gibi güncelleştirin:
 
-   * Öznitelik `IncrementAmount` içeren bir kamu malı ekleyin. `[Parameter]`
-   * Değerini `IncrementCount` artırırken `IncrementAmount` özelliği kullanmak için yöntemi `currentCount`değiştirin.
+   * `[Parameter]` Özniteliği ile ortak `IncrementAmount` bir özellik ekleyin.
+   * Değerini artırdığınızda `IncrementCount` `IncrementAmount` özelliğini kullanmak için yöntemini değiştirin `currentCount`.
 
-   *Sayfalar/Counter.razor*:
+   *Pages/Counter. Razor*:
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/Counter.razor?highlight=13,17)]
 
@@ -87,55 +91,55 @@ Bileşenlerin parametreleri de olabilir. Bileşen parametreleri öznitelik ile `
        > From Visual Studio, you can quickly add a component parameter by using the `para` snippet. Type `para` and press the `Tab` key twice.
    -->
 
-1. Bir `IncrementAmount` öznitelik kullanarak `Index` bileşenin `<Counter>` öğesinde bir parametre belirtin. Sayacı on yla artıya göre değere ayarlayın.
+1. Öznitelik kullanarak `IncrementAmount` `Index` bileşenin `<Counter>` öğesinde bir parametre belirtin. Sayacı on olarak artırmak için değeri ayarlayın.
 
-   *Sayfalar/Index.razor*:
+   *Pages/Index. Razor*:
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/Index2.razor?highlight=7)]
 
-1. Bileşeni yeniden `Index` yükleyin. **Bana Tıkla** düğmesi seçildiğinde sayaç on oranında artarak tamamlanır. Bileşendeki `Counter` sayaç bir oranında artmaya devam ediyor.
+1. `Index` Bileşeni yeniden yükleyin. **Beni tıklama** düğmesi seçildiğinde sayaç on bir kez artar. `Counter` Bileşendeki sayaç bir artırmaya devam eder.
 
-## <a name="route-to-components"></a>Bileşenlere rota
+## <a name="route-to-components"></a>Bileşenlere yönlendir
 
-*Counter.razor* dosyasının üst kısmındaki `Counter` `@page` yönerge, bileşenin bir yönlendirme bitiş noktası olduğunu belirtir. Bileşen, `Counter` ''ye `/counter`gönderilen istekleri işler. Yönerge `@page` olmadan, bir bileşen yönlendirilen istekleri işlemez, ancak bileşen yine de diğer bileşenler tarafından kullanılabilir.
+*Counter. Razor* dosyasının en üstündeki `Counter` `@page` yönerge, bileşenin bir yönlendirme uç noktası olduğunu belirtir. `Counter` Bileşen öğesine `/counter`gönderilen istekleri işler. `@page` Yönerge olmadan, bileşen yönlendirilmiş istekleri işlemez, ancak bileşen diğer bileşenler tarafından hala kullanılabilir.
 
 ## <a name="dependency-injection"></a>Bağımlılık ekleme
 
-### <a name="opno-locblazor-server-experience"></a>BlazorSunucu deneyimi
+### <a name="blazor-server-experience"></a>BlazorSunucu deneyimi
 
-Bir Blazor Server uygulamasıyla çalışıyorsanız, `WeatherForecastService` hizmet [singleton](xref:fundamentals/dependency-injection#service-lifetimes) `Startup.ConfigureServices`singleton olarak kaydedilir. Hizmetin bir örneği [bağımlılık enjeksiyonu (DI)](xref:fundamentals/dependency-injection)yoluyla uygulama boyunca kullanılabilir:
+Blazor Sunucu uygulamasıyla çalışıyorsanız, `WeatherForecastService` hizmet [tek](xref:fundamentals/dependency-injection#service-lifetimes) bir olarak kaydedilir `Startup.ConfigureServices`. Uygulamanın tamamında [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection)yoluyla hizmetin bir örneği mevcuttur:
 
 [!code-csharp[](build-your-first-blazor-app/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
-Yönerge, `@inject` `WeatherForecastService` hizmet örneğini `FetchData` bileşene enjekte etmek için kullanılır.
+`@inject` Yönergesi, `WeatherForecastService` hizmet örneğini `FetchData` bileşene eklemek için kullanılır.
 
-*Sayfalar/FetchData.razor*:
+*Pages/FetchData. Razor*:
 
 [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData1.razor?highlight=3)]
 
-Bileşen, `FetchData` `ForecastService`bir dizi `WeatherForecast` nesne almak için enjekte edilen hizmeti kullanır:
+`FetchData` Bileşen, `WeatherForecast` nesne dizisini almak için olarak `ForecastService`eklenen hizmeti kullanır:
 
 [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData2.razor?highlight=6)]
 
-### <a name="opno-locblazor-webassembly-experience"></a>BlazorWebAssembly deneyimi
+### <a name="blazor-webassembly-experience"></a>BlazorWebAssembly deneyimi
 
-Bir Blazor WebAssembly uygulamasıyla `HttpClient` çalışıyorsanız, *wwwroot/sample-data* klasöründeki *weather.json* dosyasından hava tahmini verileri elde etmek için enjekte edilir.
+Blazor Webassembly uygulamasıyla çalışıyorsanız `HttpClient` , *Wwwroot/Sample-Data* klasöründeki *Hava durumu. JSON* dosyasından Hava durumu tahmin verileri almak için eklenir.
 
-*Sayfalar/FetchData.razor*:
+*Pages/FetchData. Razor*:
 
 [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData1_client.razor?highlight=7-8)]
 
-Döngü, [`@foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) her tahmin örneğini hava durumu verileri tablosunda bir satır olarak işlemek için kullanılır:
+Bir [`@foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) döngü, her tahmin örneğini Hava durumu verileri tablosunda bir satır olarak işlemek için kullanılır:
 
 [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData3.razor?highlight=11-19)]
 
 ## <a name="build-a-todo-list"></a>Yapılacaklar listesi oluşturma
 
-Basit bir yapılacaklar listesi uygulayan uygulamaya yeni bir bileşen ekleyin.
+Uygulamaya basit bir yapılacaklar listesi uygulayan yeni bir bileşen ekleyin.
 
-1. `Todo` *Sayfalar* klasöründeki uygulamaya yeni bir Razor bileşeni ekleyin. Visual Studio'da, **Sayfalar** klasörüne sağ tıklayın ve**Yeni Öğe** > **Jilet Bileşeni** **Ekle'yi** > seçin. Bileşenin dosyasını *Todo.razor*olarak adlandırın. Diğer geliştirme ortamlarında, *Todo.razor*adlı **Sayfalar** klasörüne boş bir dosya ekleyin.
+1. *Sayfalar* klasöründe uygulamaya `Todo` Razor yeni bir bileşen ekleyin. Visual Studio 'da **Sayfalar** klasörüne sağ tıklayın ve**Yeni öğe**  >  ** Razor ** **Ekle** > bileşeni ' ni seçin. Bileşenin dosya *Todo. Razor*olarak adlandırın. Diğer geliştirme ortamlarında, *Todo. Razor*adlı **Sayfalar** klasörüne boş bir dosya ekleyin.
 
-1. Bileşen için ilk biçimlendirmeyi sağlayın:
+1. Bileşen için ilk biçimlendirmeyi belirtin:
 
    ```razor
    @page "/todo"
@@ -145,9 +149,9 @@ Basit bir yapılacaklar listesi uygulayan uygulamaya yeni bir bileşen ekleyin.
 
 1. `Todo` Bileşeni gezinti çubuğuna ekleyin.
 
-   Bileşen `NavMenu` *(Paylaşılan/NavMenu.razor)* uygulamanın düzeninde kullanılır. Düzenler, uygulamadaki içeriğin çoğaltılmasını önlemenize olanak tanıyan bileşenlerdir.
+   `NavMenu` Bileşen (*Shared/navmenu. Razor*) uygulamanın düzeninde kullanılır. Düzenler, uygulamadaki içeriğin çoğaltılmasını önlemenize olanak sağlayan bileşenlerdir.
 
-   `<NavLink>` *Paylaşılan/NavMenu.razor* dosyasındaki `Todo` varolan liste öğelerinin altına aşağıdaki liste öğesi biçimlendirmesini ekleyerek bileşen için bir öğe ekleyin:
+   `<NavLink>` *Paylaşılan/navmenu. Razor* dosyasındaki mevcut liste öğelerinin altına aşağıdaki liste öğesi işaretlemesini ekleyerek `Todo` bileşen için bir öğe ekleyin:
 
    ```razor
    <li class="nav-item px-3">
@@ -157,30 +161,30 @@ Basit bir yapılacaklar listesi uygulayan uygulamaya yeni bir bileşen ekleyin.
    </li>
    ```
 
-1. Uygulamayı yeniden oluşturve çalıştırın. Bileşene bağlantının çalıştığını doğrulamak için yeni `Todo` Todo sayfasını ziyaret edin.
+1. Uygulamayı yeniden derleyin ve çalıştırın. `Todo` Bileşen bağlantısının çalıştığından emin olmak Için yeni Todo sayfasını ziyaret edin.
 
-1. Bir todo öğesini temsil eden bir sınıf tutmak için projenin köküne *bir TodoItem.cs* dosyası ekleyin. `TodoItem` Sınıf için aşağıdaki C# kodunu kullanın:
+1. Bir Todo öğesini temsil eden bir sınıfı tutmak için projenin köküne bir *TodoItem.cs* dosyası ekleyin. `TodoItem` Sınıfı Için aşağıdaki C# kodunu kullanın:
 
    [!code-csharp[](build-your-first-blazor-app/samples_snapshot/3.x/TodoItem.cs)]
 
-1. Bileşene `Todo` dön (*Pages/Todo.razor):*
+1. `Todo` Bileşene geri dön (*Pages/Todo. Razor*):
 
-   * Bir bloktaki todo öğeleri `@code` için bir alan ekleyin. Bileşen, `Todo` yapılacaklar listesinin durumunu korumak için bu alanı kullanır.
-   * Her bir todo öğesini `foreach` liste öğesi olarak işlemek için sıralanmamış liste biçimlendirmesi ve döngü ekleyin (`<li>`).
+   * Bir `@code` bloktaki Todo öğeleri için bir alan ekleyin. `Todo` Bileşen, Todo listesinin durumunu korumak için bu alanı kullanır.
+   * Her Todo öğesini bir liste öğesi `foreach` (`<li>`) olarak işlemek için sıralanmamış liste işaretlemesi ve bir döngüsü ekleyin.
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/ToDo4.razor?highlight=5-10,12-14)]
 
-1. Uygulama, listeye todo öğeleri eklemek için UI öğeleri gerektirir. Sıralanmamış listenin`<input>`altına metin girişi`<button>`( ) ve bir`<ul>...</ul>`düğme ( ) ekleyin ( ):
+1. Uygulama, listeye Todo öğeleri eklemek için Kullanıcı arabirimi öğeleri gerektirir. Sıralanmamış listenin`<ul>...</ul>`() altına`<input>`bir metin girişi ()`<button>`ve bir düğme () ekleyin:
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/ToDo5.razor?highlight=12-13)]
 
-1. Uygulamayı yeniden oluşturve çalıştırın. **Ekle** düğmesi seçildiğinde, olay işleyicisi düğmeye bağlı olmadığından hiçbir şey olmaz.
+1. Uygulamayı yeniden derleyin ve çalıştırın. **Todo Ekle** düğmesi seçildiğinde, bir olay işleyicisi düğmeye kablolu olmadığı için hiçbir şey olmaz.
 
-1. Bileşene `AddTodo` bir yöntem ekleyin ve özniteliği kullanarak düğme seçimlerine kaydedin. `@onclick` `Todo` Düğme `AddTodo` seçildiğinde C# yöntemi çağrılır:
+1. Bileşene bir `AddTodo` yöntem ekleyin ve `@onclick` özniteliği kullanarak düğme seçimleri için kaydedin. `Todo` `AddTodo` C# yöntemi, düğme seçildiğinde çağrılır:
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/ToDo6.razor?highlight=2,7-10)]
 
-1. Yeni yapılacak lar öğesinin başlığını almak `newTodo` için bloğun üst `@code` kısmındabir dize alanı ekleyin ve `bind` `<input>` öğedeki özniteliği kullanarak metin girişinin değerine bağlayın:
+1. Yeni Todo öğesinin başlığını `newTodo` almak için, `@code` bloğunun üst kısmına bir dize alanı ekleyin ve bunu, `bind` `<input>` öğesindeki özniteliği kullanarak metin girişinin değerine bağlayın:
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/ToDo7.razor?highlight=2)]
 
@@ -188,27 +192,27 @@ Basit bir yapılacaklar listesi uygulayan uygulamaya yeni bir bileşen ekleyin.
    <input placeholder="Something todo" @bind="newTodo" />
    ```
 
-1. Belirtilen `AddTodo` başlığı listeye `TodoItem` eklemek için yöntemi güncelleştirin. Boş bir dize `newTodo` ayarlayarak metin girişinin değerini temizleyin:
+1. Belirtilen başlığa `AddTodo` `TodoItem` sahip öğesini listeye eklemek için yöntemini güncelleştirin. Metin girişinin değerini boş bir dizeye ayarlayarak `newTodo` temizleyin:
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/ToDo8.razor?highlight=19-26)]
 
-1. Uygulamayı yeniden oluşturve çalıştırın. Yeni kodu test etmek için yapılacaklar listesine bazı yapılacaklar öğeleri ekleyin.
+1. Uygulamayı yeniden derleyin ve çalıştırın. Yeni kodu test etmek için Todo listesine bazı Todo öğeleri ekleyin.
 
-1. Her bir yapılacak öğenin başlık metni değiştirilebilir hale getirilebilir ve onay kutusu kullanıcının tamamlanan öğeleri izlemesine yardımcı olabilir. Her todo öğesi için bir onay kutusu girişi ekleyin `IsDone` ve değerini özelliğe bağlayın. Bağlı `@todo.Title` bir `<input>` öğeye `@todo.Title`değiştirin:
+1. Her Todo öğesi için başlık metni düzenlenebilir hale getirilebilir ve bir onay kutusu kullanıcının tamamlanmış öğeleri izlemesine yardımcı olabilir. Her Todo öğesi için bir onay kutusu girişi ekleyin ve değerini `IsDone` özelliğine bağlayın. `@todo.Title` Öğesine göre bir `<input>` öğeye geç `@todo.Title`:
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/ToDo9.razor?highlight=5-6)]
 
-1. Bu değerlerin bağlı olduğunu doğrulamak `<h3>` için, tamamlanmamış todo öğeleri sayısının sayısını göstermek için`IsDone` `false`üstbilgigünceli güncelleştirin ( is).
+1. Bu değerlerin bağlandığını doğrulamak için `<h3>` üst bilgiyi, tamamlanmamış olan Todo öğelerinin sayısının sayısını gösterecek şekilde güncelleştirin (`IsDone` yani `false`).
 
    ```razor
    <h3>Todo (@todos.Count(todo => !todo.IsDone))</h3>
    ```
 
-1. Tamamlanan `Todo` bileşen (*Pages/Todo.razor):*
+1. Tamamlanan `Todo` bileşen (*sayfa/Todo. Razor*):
 
    [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/Todo.razor)]
 
-1. Uygulamayı yeniden oluşturve çalıştırın. Yeni kodu sınamak için todo öğeleri ekleyin.
+1. Uygulamayı yeniden derleyin ve çalıştırın. Yeni kodu test etmek için Todo öğeleri ekleyin.
 
 > [!div class="nextstepaction"]
 > <xref:blazor/components>

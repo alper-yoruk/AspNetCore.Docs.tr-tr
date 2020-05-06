@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Blazor Core destekli platformlar
+title: Desteklenen Blazor platformları ASP.NET Core
 author: guardrex
 description: ASP.NET Core Blazoriçin desteklenen platformlar hakkında bilgi edinin.
 monikerRange: '>= aspnetcore-3.1'
@@ -8,18 +8,21 @@ ms.custom: mvc
 ms.date: 12/18/2019
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/supported-platforms
-ms.openlocfilehash: 505974280b5c96ec2bcae42c6e076ab67a15bb07
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 1c78803e6468f924bf8c8e9403a34565b114006f
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78658860"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82771122"
 ---
 # <a name="aspnet-core-blazor-supported-platforms"></a>ASP.NET Core Blazor desteklenen platformlar
 
-Yazar: [Luke Latham](https://github.com/guardrex)
+[Luke Latham](https://github.com/guardrex) tarafından
 
 [!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
@@ -31,11 +34,11 @@ Yazar: [Luke Latham](https://github.com/guardrex)
 | -------------------------------- | :-------------------: |
 | Microsoft Edge                   | Geçerli               |
 | Mozilla Firefox                  | Geçerli               |
-| Google Chrome, Android dahil | Geçerli               |
-| Safari, iOS dahil            | Geçerli               |
+| Android dahil Google Chrome | Geçerli               |
+| İOS dahil Safari            | Geçerli               |
 | Microsoft Internet Explorer      | Desteklenmiyor&dagger; |
 
-&dagger;Microsoft Internet Explorer [WebAssembly'i](https://webassembly.org)desteklemez.
+&dagger;Microsoft Internet Explorer [Webassembly](https://webassembly.org)'yi desteklemez.
 
 ### <a name="blazor-server"></a>Blazor Server
 
@@ -43,11 +46,11 @@ Yazar: [Luke Latham](https://github.com/guardrex)
 | -------------------------------- | :--------: |
 | Microsoft Edge                   | Geçerli    |
 | Mozilla Firefox                  | Geçerli    |
-| Google Chrome, Android dahil | Geçerli    |
-| Safari, iOS dahil            | Geçerli    |
-| Microsoft Internet Explorer      | 11&dagger; |
+| Android dahil Google Chrome | Geçerli    |
+| İOS dahil Safari            | Geçerli    |
+| Microsoft Internet Explorer      | üst&dagger; |
 
-&dagger;Ek polifills gereklidir (örneğin, vaatler [Polyfill.io](https://polyfill.io/v3/) bir paket üzerinden eklenebilir).
+&dagger;Ek polydolgular gereklidir (örneğin, [Polyfill.io](https://polyfill.io/v3/) bir paket aracılığıyla taahhüt eklenebilir).
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

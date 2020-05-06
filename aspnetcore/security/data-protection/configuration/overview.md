@@ -5,13 +5,19 @@ description: ASP.NET Core 'de veri korumayı yapılandırma hakkında bilgi edin
 ms.author: riande
 ms.custom: mvc
 ms.date: 10/07/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/configuration/overview
-ms.openlocfilehash: c0846aca4bb663b1d562ab0c877fefba02da460f
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: d37fdc44bb9a603d85818fc72a7a07de67006366
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78666595"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776818"
 ---
 # <a name="configure-aspnet-core-data-protection"></a>ASP.NET Core veri korumasını yapılandırma
 
@@ -25,7 +31,7 @@ Bu senaryolar için veri koruma sistemi, zengin bir yapılandırma API 'SI sunar
 > [!WARNING]
 > Yapılandırma dosyalarına benzer şekilde, veri koruma anahtarı halkası uygun izinler kullanılarak korunmalıdır. Rest 'de anahtarları şifrelemeyi seçebilirsiniz, ancak bu, saldırganların yeni anahtar oluşturmasını engellemez. Sonuç olarak, uygulamanızın güvenliği etkilenir. Veri koruma ile yapılandırılan depolama konumu, yapılandırma dosyalarını korumanıza benzer şekilde uygulamanın kendisiyle sınırlı olmalıdır. Örneğin, anahtar halkasını diskte depolamayı seçerseniz, dosya sistemi izinleri ' ni kullanın. Yalnızca Web uygulamanızın çalıştırıldığı kimliğin bu dizine okuma, yazma ve oluşturma erişimi olduğundan emin olun. Azure Blob depolama kullanırsanız, yalnızca Web uygulaması Blob deposunda, vb. için yeni girişler okuma, yazma veya oluşturma yeteneğine sahip olmalıdır.
 >
-> [Adddataprotection](/dotnet/api/microsoft.extensions.dependencyinjection.dataprotectionservicecollectionextensions.adddataprotection) genişletme yöntemi bir [ıdataprotectionbuilder](/dotnet/api/microsoft.aspnetcore.dataprotection.idataprotectionbuilder)döndürür. `IDataProtectionBuilder`, veri koruma seçeneklerini yapılandırmak için birlikte zincirleyebilirsiniz uzantı yöntemleri sunar.
+> [Adddataprotection](/dotnet/api/microsoft.extensions.dependencyinjection.dataprotectionservicecollectionextensions.adddataprotection) genişletme yöntemi bir [ıdataprotectionbuilder](/dotnet/api/microsoft.aspnetcore.dataprotection.idataprotectionbuilder)döndürür. `IDataProtectionBuilder`Veri koruma seçeneklerini yapılandırmak için birlikte zincirleyebilirsiniz uzantı yöntemleri sunar.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -40,7 +46,7 @@ Bu makalede kullanılan veri koruma uzantıları için aşağıdaki NuGet paketl
 
 ## <a name="protectkeyswithazurekeyvault"></a>ProtectKeysWithAzureKeyVault
 
-Anahtarları [Azure Key Vault](https://azure.microsoft.com/services/key-vault/)içinde depolamak için, `Startup` sınıfında sistemi [ProtectKeysWithAzureKeyVault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault) ile yapılandırın:
+Anahtarları [Azure Key Vault](https://azure.microsoft.com/services/key-vault/)içinde depolamak Için, [ProtectKeysWithAzureKeyVault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault) `Startup` ile sistemi yapılandırın:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -51,15 +57,15 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Anahtar halka depolama konumunu ayarlayın (örneğin, [PersistKeysToAzureBlobStorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage)). Çağırma `ProtectKeysWithAzureKeyVault`, anahtar halka depolama konumu da dahil olmak üzere otomatik veri koruma ayarlarını devre dışı bırakan bir [ıxmlencryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmlencryptor) uyguladığından, konum ayarlanmalıdır. Yukarıdaki örnek, anahtar halkasını sürdürmek için Azure Blob depolamayı kullanır. Daha fazla bilgi için bkz. [anahtar depolama sağlayıcıları: Azure Storage](xref:security/data-protection/implementation/key-storage-providers#azure-storage). Ayrıca, [Persistkeystofilesystem](xref:security/data-protection/implementation/key-storage-providers#file-system)ile anahtar halkasını yerel olarak kalıcı hale getirebilirsiniz.
+Anahtar halka depolama konumunu ayarlayın (örneğin, [PersistKeysToAzureBlobStorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage)). Çağırma `ProtectKeysWithAzureKeyVault` , anahtar halka depolama konumu da dahil olmak üzere otomatik veri koruma ayarlarını devre dışı bırakan bir [ıxmlencryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmlencryptor) uyguladığından, konum ayarlanmalıdır. Yukarıdaki örnek, anahtar halkasını sürdürmek için Azure Blob depolamayı kullanır. Daha fazla bilgi için bkz. [anahtar depolama sağlayıcıları: Azure Storage](xref:security/data-protection/implementation/key-storage-providers#azure-storage). Ayrıca, [Persistkeystofilesystem](xref:security/data-protection/implementation/key-storage-providers#file-system)ile anahtar halkasını yerel olarak kalıcı hale getirebilirsiniz.
 
-`keyIdentifier`, anahtar şifreleme için kullanılan Anahtar Kasası anahtar tanımlayıcısıdır. Örneğin, `contosokeyvault` `dataprotection` adlı anahtar kasasında oluşturulan bir anahtarın anahtar tanımlayıcısı `https://contosokeyvault.vault.azure.net/keys/dataprotection/`vardır. Anahtar Kasası için anahtar **sarmalama** ve **sarmalama** anahtarı izinlerini içeren uygulamayı belirtin.
+`keyIdentifier` Anahtar şifreleme için kullanılan Anahtar Kasası anahtar tanımlayıcısıdır. Örneğin, içinde adlı `dataprotection` anahtar kasasında oluşturulan bir anahtarın anahtar tanımlayıcısı `contosokeyvault` `https://contosokeyvault.vault.azure.net/keys/dataprotection/`vardır. Anahtar Kasası için anahtar **sarmalama** ve **sarmalama** anahtarı izinlerini içeren uygulamayı belirtin.
 
-`ProtectKeysWithAzureKeyVault` Aşırı Yüklemeler:
+`ProtectKeysWithAzureKeyVault`kullanabilen
 
 * [ProtectKeysWithAzureKeyVault (ıdataprotectionbuilder, keyvaultclient, String)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_Microsoft_Azure_KeyVault_KeyVaultClient_System_String_) , veri koruma sisteminin anahtar kasasını kullanmasını sağlamak Için bir [keyvaultclient](/dotnet/api/microsoft.azure.keyvault.keyvaultclient) kullanılmasına izin verir.
-* [ProtectKeysWithAzureKeyVault (ıdataprotectionbuilder, String, String, X509Certificate2)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_Security_Cryptography_X509Certificates_X509Certificate2_) , veri koruma sisteminin anahtar kasasını kullanmasını sağlamak için bir `ClientId` ve [X509Certificate](/dotnet/api/system.security.cryptography.x509certificates.x509certificate2) kullanılmasına izin verir.
-* [ProtectKeysWithAzureKeyVault (ıdataprotectionbuilder, String, String, String)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_String_) , veri koruma sisteminin anahtar kasasını kullanmasını sağlamak için bir `ClientId` ve `ClientSecret` kullanılmasına izin verir.
+* [ProtectKeysWithAzureKeyVault (ıdataprotectionbuilder, String, String, X509Certificate2)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_Security_Cryptography_X509Certificates_X509Certificate2_) , veri koruma sisteminin anahtar `ClientId` kasasını kullanmasını sağlamak için a ve [X509Certificate](/dotnet/api/system.security.cryptography.x509certificates.x509certificate2) kullanılmasına izin verir.
+* [ProtectKeysWithAzureKeyVault (ıdataprotectionbuilder, String, String, String)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_String_) , `ClientId` ve ' nin kullanılmasına izin `ClientSecret` verir ve veri koruma sisteminin anahtar kasasını kullanmasını sağlar.
 
 ::: moniker-end
 
@@ -80,7 +86,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="protectkeyswith"></a>ProtectKeysWith\*
 
-Sistemi, [ProtectKeysWith\*](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions) Yapılandırma API 'lerinden herhangi birini çağırarak, bekleyen anahtarları koruyacak şekilde yapılandırabilirsiniz. Anahtarları bir UNC paylaşımında depolayan ve bu anahtarları belirli bir X. 509.952 sertifikasıyla bekleyen bir şekilde şifreleyen aşağıdaki örneği göz önünde bulundurun:
+Sistemi, [ProtectKeysWith\* ](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions) Yapılandırma API 'lerinden herhangi birini çağırarak, bekleyen anahtarları koruyacak şekilde yapılandırabilirsiniz. Anahtarları bir UNC paylaşımında depolayan ve bu anahtarları belirli bir X. 509.952 sertifikasıyla bekleyen bir şekilde şifreleyen aşağıdaki örneği göz önünde bulundurun:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -148,7 +154,7 @@ Varsayılan olarak, veri koruma sistemi, aynı fiziksel anahtar deposunu paylaş
 
 Korumalı yükleri uygulamalar arasında paylaşmak için:
 
-* Aynı değere sahip her uygulamadaki <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.SetApplicationName*> yapılandırın.
+* Aynı <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.SetApplicationName*> değere sahip her bir uygulamada yapılandırın.
 * Uygulamalar genelinde veri koruma API yığınının aynı sürümünü kullanın. Uygulamaların proje **dosyalarında aşağıdakilerden birini yapın:**
   * [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app)aracılığıyla aynı paylaşılan çerçeve sürümüne başvurun.
   * Aynı [veri koruma paketi](xref:security/data-protection/introduction#package-layout) sürümüne başvurun.
@@ -163,7 +169,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="disableautomatickeygeneration"></a>DisableAutomaticKeyGeneration
 
-Süre sonu yaklaşımında bir uygulamanın anahtarları otomatik olarak (yeni anahtar oluştur) oluşturmasını istemediğiniz bir senaryoya sahip olabilirsiniz. Bunun bir örneği, birincil/ikincil ilişkide ayarlanmış uygulamalar olabilir; burada yalnızca birincil uygulama önemli yönetim kaygılarıyla sorumludur ve ikincil uygulamalar yalnızca bir anahtar halkasının Salt okunabilir bir görünümüne sahip olur. İkincil uygulamalar, sistemi <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.DisableAutomaticKeyGeneration*>ile yapılandırarak anahtar halkasını Salt okunabilir olarak işleyecek şekilde yapılandırılabilir:
+Süre sonu yaklaşımında bir uygulamanın anahtarları otomatik olarak (yeni anahtar oluştur) oluşturmasını istemediğiniz bir senaryoya sahip olabilirsiniz. Bunun bir örneği, birincil/ikincil ilişkide ayarlanmış uygulamalar olabilir; burada yalnızca birincil uygulama önemli yönetim kaygılarıyla sorumludur ve ikincil uygulamalar yalnızca bir anahtar halkasının Salt okunabilir bir görünümüne sahip olur. İkincil uygulamalar, sistemi ile <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.DisableAutomaticKeyGeneration*>yapılandırarak anahtar halkasını salt okuma olarak işleyecek şekilde yapılandırılabilir:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -177,12 +183,12 @@ public void ConfigureServices(IServiceCollection services)
 
 Veri koruma sistemi bir ASP.NET Core ana bilgisayar tarafından sağlandığında, bu uygulamalar aynı çalışan işlemi hesabı altında çalışıyor ve aynı ana anahtarlama malzemesini kullanıyor olsa bile, uygulamaları otomatik olarak birbirinden yalıtır. Bu, System. Web 'in `<machineKey>` öğesinden ısoteapps değiştiricisine biraz benzer.
 
-Yalıtım mekanizması, yerel makinedeki her uygulamayı benzersiz bir kiracı olarak düşünürken çalışarak, belirli bir uygulama için kök olan <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> otomatik olarak uygulama KIMLIĞI 'ni Ayrıştırıcı olarak içerir. Uygulamanın benzersiz KIMLIĞI uygulamanın fiziksel yoludur:
+Yalıtım mekanizması, yerel makinedeki her uygulamayı benzersiz bir kiracı olarak düşünürken çalışarak, belirli bir uygulama için <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> kök olarak uygulama kimliğini Ayrıştırıcı olarak dahil eder. Uygulamanın benzersiz KIMLIĞI uygulamanın fiziksel yoludur:
 
 * IIS 'de barındırılan uygulamalar için benzersiz KIMLIK, uygulamanın IIS fiziksel yoludur. Bir uygulama bir Web grubu ortamında dağıtılırsa, bu değer, IIS ortamlarının Web grubundaki tüm makinelerde benzer şekilde yapılandırıldığından kararlı bir şekilde yapılır.
 * [Kestrel sunucusunda](xref:fundamentals/servers/index#kestrel)çalışan şirket içinde barındırılan uygulamalar IÇIN benzersiz kimlik, diskteki uygulamanın fiziksel yoludur.
 
-Benzersiz tanımlayıcı, her iki uygulamanın ve makinenin kendisi&mdash;sıfırlamaları için tasarlanmıştır.
+Benzersiz tanımlayıcı, her iki uygulamayı ve makinenin&mdash;kendisini sıfırlamaları için tasarlanmıştır.
 
 Bu yalıtım mekanizması, uygulamaların kötü amaçlı olmayan olduğunu varsayar. Kötü amaçlı bir uygulama, aynı çalışan işlem hesabı altında çalışan diğer uygulamaları her zaman etkileyebilir. Uygulamaların birbirini dışlayan bir paylaşılan barındırma ortamında, barındırma sağlayıcısı, uygulamaların temel alınan anahtar depolarını ayırmak dahil olmak üzere uygulamalar arasında işletim sistemi düzeyinde yalıtımlarını sağlamak için gerekli adımları almalıdır.
 
@@ -220,9 +226,9 @@ services.AddDataProtection()
 
 ::: moniker-end
 
-Varsayılan EncryptionAlgorithm AES-256-CBC, varsayılan ValidationAlgorithm ise HMACSHA256. Varsayılan ilke, bir sistem yöneticisi tarafından [makine genelindeki bir ilke](xref:security/data-protection/configuration/machine-wide-policy)aracılığıyla ayarlanabilir, ancak `UseCryptographicAlgorithms` için açık bir çağrı varsayılan ilkeyi geçersiz kılar.
+Varsayılan EncryptionAlgorithm AES-256-CBC, varsayılan ValidationAlgorithm ise HMACSHA256. Varsayılan ilke, bir sistem yöneticisi tarafından [makine genelindeki bir ilke](xref:security/data-protection/configuration/machine-wide-policy)aracılığıyla ayarlanabilir, ancak açık bir çağrı varsayılan ilkeyi `UseCryptographicAlgorithms` geçersiz kılar.
 
-`UseCryptographicAlgorithms` çağırmak, önceden tanımlanmış bir yerleşik listeden istediğiniz algoritmayı belirtmenize olanak tanır. Algoritmanın uygulanması konusunda endişelenmeniz gerekmez. Yukarıdaki senaryoda, veri koruma sistemi Windows üzerinde çalışıyorsa AES 'nin CNG uygulamasını kullanmaya çalışır. Aksi takdirde, yönetilen [System. Security. Cryptography. AES](/dotnet/api/system.security.cryptography.aes) sınıfına geri döner.
+Çağırma `UseCryptographicAlgorithms` , önceden tanımlanmış bir yerleşik listeden istenen algoritmayı belirtmenize olanak tanır. Algoritmanın uygulanması konusunda endişelenmeniz gerekmez. Yukarıdaki senaryoda, veri koruma sistemi Windows üzerinde çalışıyorsa AES 'nin CNG uygulamasını kullanmaya çalışır. Aksi takdirde, yönetilen [System. Security. Cryptography. AES](/dotnet/api/system.security.cryptography.aes) sınıfına geri döner.
 
 Bir uygulamayı [Usecustomccryptotographicalgoritmalarına](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.usecustomcryptographicalgorithms)bir çağrı yoluyla el ile belirtebilirsiniz.
 
@@ -275,10 +281,10 @@ serviceCollection.AddDataProtection()
 
 ::: moniker-end
 
-Genellikle \*türü özellikleri, [SymmetricAlgorithm](/dotnet/api/system.security.cryptography.symmetricalgorithm) ve [KeyedHashAlgorithm](/dotnet/api/system.security.cryptography.keyedhashalgorithm)' nin somut, instantiable (Ortak parametresiz ctor aracılığıyla), ancak sistem özel durumları için `typeof(Aes)` gibi bazı değerler sağlar.
+Genellikle \*tür özelliklerinin [simetrik](/dotnet/api/system.security.cryptography.symmetricalgorithm) , instantiable (Ortak parametresiz ctor aracılığıyla) sağlaması gerekir, ancak sistem özel [durumları, kolaylık](/dotnet/api/system.security.cryptography.keyedhashalgorithm)sağlamak gibi `typeof(Aes)` bazı değerler sağlar.
 
 > [!NOTE]
-> SymmetricAlgorithm, ≥ 128 bitlerinin anahtar uzunluğuna ve ≥ 64 bit blok boyutuna sahip olmalıdır ve PKCS #7 dolgusu ile CBC modunda şifrelemeyi desteklemelidir. KeyedHashAlgorithm > = 128 bitlik bir Özet boyutuna sahip olmalıdır ve karma algoritmanın Özet uzunluğuna eşit olan anahtarların uzunluğunu desteklemelidir. KeyedHashAlgorithm, HMAC için kesinlikle gerekli değildir.
+> SymmetricAlgorithm, ≥ 128 bitlerinin anahtar uzunluğuna ve ≥ 64 bit blok boyutuna sahip olmalıdır ve PKCS #7 dolgusu ile CBC modunda şifrelemeyi desteklemelidir. KeyedHashAlgorithm >= 128 bitlik bir Özet boyutuna sahip olmalıdır ve karma algoritmanın Özet uzunluğuna eşit olan anahtarların uzunluğunu desteklemelidir. KeyedHashAlgorithm, HMAC için kesinlikle gerekli değildir.
 
 ### <a name="specifying-custom-windows-cng-algorithms"></a>Özel Windows CNG algoritmaları belirtme
 
@@ -331,7 +337,7 @@ services.AddDataProtection()
 ::: moniker-end
 
 > [!NOTE]
-> Simetrik blok şifreleme algoritmasının anahtar uzunluğu > = 128 bit, > = 64 bit blok boyutunda olmalıdır ve PKCS #7 dolgusu ile CBC modunda şifrelemeyi desteklemesi gerekir. Karma algoritmasının > = 128 bitlik bir Özet boyutu olmalıdır ve BCRYPT\_ALG\_tanıtıcı\_HMAC\_bayrak bayrağıyla birlikte açılmakta olmaları gerekir. \*sağlayıcısı özellikleri, belirtilen algoritma için varsayılan sağlayıcıyı kullanmak üzere null olarak ayarlanabilir. Daha fazla bilgi için [BCryptOpenAlgorithmProvider](https://msdn.microsoft.com/library/windows/desktop/aa375479(v=vs.85).aspx) belgelerine bakın.
+> Simetrik blok şifreleme algoritmasının anahtar uzunluğu >= 128 bit, >= 64 bit blok boyutunda olmalıdır ve PKCS #7 dolgusu ile CBC modunda şifrelemeyi desteklemesi gerekir. Karma algoritmasının >= 128 bitlik bir Özet boyutu olmalıdır ve\_bcrypt alg\_tanıtıcısı\_HMAC\_bayrağı bayrağıyla açılmakta olması gerekir. \*Sağlayıcı özellikleri, belirtilen algoritma için varsayılan sağlayıcıyı kullanmak üzere null olarak ayarlanabilir. Daha fazla bilgi için [BCryptOpenAlgorithmProvider](https://msdn.microsoft.com/library/windows/desktop/aa375479(v=vs.85).aspx) belgelerine bakın.
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -374,7 +380,7 @@ services.AddDataProtection()
 ::: moniker-end
 
 > [!NOTE]
-> Simetrik blok şifreleme algoritmasının anahtar uzunluğu > = 128 bit, tam olarak 128 bit blok boyutu ve GCM şifrelemesini desteklemesi gerekir. [EncryptionAlgorithmProvider](/dotnet/api/microsoft.aspnetcore.dataprotection.authenticatedencryption.configurationmodel.cngcbcauthenticatedencryptorconfiguration.encryptionalgorithmprovider) özelliğini, belirtilen algoritma için varsayılan sağlayıcıyı kullanacak şekilde null olarak ayarlayabilirsiniz. Daha fazla bilgi için [BCryptOpenAlgorithmProvider](https://msdn.microsoft.com/library/windows/desktop/aa375479(v=vs.85).aspx) belgelerine bakın.
+> Simetrik blok şifreleme algoritmasının anahtar uzunluğu >= 128 bit, tam olarak 128 bit blok boyutu ve GCM şifrelemesini desteklemesi gerekir. [EncryptionAlgorithmProvider](/dotnet/api/microsoft.aspnetcore.dataprotection.authenticatedencryption.configurationmodel.cngcbcauthenticatedencryptorconfiguration.encryptionalgorithmprovider) özelliğini, belirtilen algoritma için varsayılan sağlayıcıyı kullanacak şekilde null olarak ayarlayabilirsiniz. Daha fazla bilgi için [BCryptOpenAlgorithmProvider](https://msdn.microsoft.com/library/windows/desktop/aa375479(v=vs.85).aspx) belgelerine bakın.
 
 ### <a name="specifying-other-custom-algorithms"></a>Diğer özel algoritmaları belirtme
 

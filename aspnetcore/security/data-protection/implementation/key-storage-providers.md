@@ -1,23 +1,29 @@
 ---
-title: ASP.NET core'da anahtar depolama sağlayıcıları
+title: ASP.NET Core 'de anahtar depolama sağlayıcıları
 author: rick-anderson
-description: Anahtar depolama sağlayıcıları ASP.NET Core ve anahtar depolama konumları yapılandırma hakkında bilgi edinin.
+description: ASP.NET Core 'de anahtar depolama sağlayıcıları ve anahtar depolama konumlarının nasıl yapılandırılacağı hakkında bilgi edinin.
 ms.author: riande
 ms.date: 12/05/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/data-protection/implementation/key-storage-providers
-ms.openlocfilehash: 19f64e816d88d2fc156915e31dc147645c5a630a
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: a8d38f17b066a0aa9a38b1bdfea3491f733cf1bc
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78662962"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82776883"
 ---
-# <a name="key-storage-providers-in-aspnet-core"></a>ASP.NET core'da anahtar depolama sağlayıcıları
+# <a name="key-storage-providers-in-aspnet-core"></a>ASP.NET Core 'de anahtar depolama sağlayıcıları
 
-Veri koruma sistemi, şifreleme anahtarlarının nerede kalıcı olacağını belirlemekte [Varsayılan olarak bir bulma mekanizması kullanır](xref:security/data-protection/configuration/default-settings) . Geliştirici, varsayılan bulma mekanizmasını geçersiz kılmak ve el ile konumu belirtin.
+Veri koruma sistemi, şifreleme anahtarlarının nerede kalıcı olacağını belirlemekte [Varsayılan olarak bir bulma mekanizması kullanır](xref:security/data-protection/configuration/default-settings) . Geliştirici varsayılan bulma mekanizmasını geçersiz kılabilir ve konumu el ile belirtebilir.
 
 > [!WARNING]
-> Bir açık anahtar kalıcılığı konum belirtirseniz, anahtarlar artık bekleme durumundayken şifrelenir, böylece veri koruma sisteminde rest mekanizması, varsayılan anahtar şifreleme deregisters. Ayrıca, üretim dağıtımları için [bir açık anahtar şifreleme mekanizması belirtmeniz](xref:security/data-protection/implementation/key-encryption-at-rest) önerilir.
+> Açık anahtar Kalıcılık konumu belirtirseniz, veri koruma sistemi REST mekanizmasında varsayılan anahtar şifrelemesini kaldırır, bu nedenle anahtarlar artık Rest 'de şifrelenmez. Ayrıca, üretim dağıtımları için [bir açık anahtar şifreleme mekanizması belirtmeniz](xref:security/data-protection/implementation/key-encryption-at-rest) önerilir.
 
 ## <a name="file-system"></a>Dosya sistemi
 
@@ -31,11 +37,11 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-`DirectoryInfo`, yerel makinedeki bir dizine işaret edebilir veya ağ paylaşımındaki bir klasöre işaret edebilir. Yerel makinedeki bir dizine işaret ediyorsanız (ve senaryo yalnızca yerel makinedeki uygulamaların bu depoyu kullanmak için erişim gerektirmesidir), bekleyen anahtarları şifrelemek için [WINDOWS DPAPI](xref:security/data-protection/implementation/key-encryption-at-rest) (Windows üzerinde) kullanmayı göz önünde bulundurun. Aksi takdirde, bekleyen anahtarları şifrelemek için bir [X. 509.952 sertifikası](xref:security/data-protection/implementation/key-encryption-at-rest) kullanmayı düşünün.
+Yerel `DirectoryInfo` makinedeki bir dizine işaret edebilir veya ağ paylaşımındaki bir klasöre işaret edebilir. Yerel makinedeki bir dizine işaret ediyorsanız (ve senaryo yalnızca yerel makinedeki uygulamaların bu depoyu kullanmak için erişim gerektirmesidir), bekleyen anahtarları şifrelemek için [WINDOWS DPAPI](xref:security/data-protection/implementation/key-encryption-at-rest) (Windows üzerinde) kullanmayı göz önünde bulundurun. Aksi takdirde, bekleyen anahtarları şifrelemek için bir [X. 509.952 sertifikası](xref:security/data-protection/implementation/key-encryption-at-rest) kullanmayı düşünün.
 
 ## <a name="azure-storage"></a>Azure Storage
 
-[Microsoft. AspNetCore. DataProtection. AzureStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage/) Package, veri koruma anahtarlarının Azure Blob depolama alanında depolanmasını sağlar. Anahtarları birden fazla örneği bir web uygulaması arasında paylaşılabilir. Uygulamalar, kimlik doğrulama tanımlama bilgisi veya CSRF koruması birden çok sunucu arasında paylaşabilirsiniz.
+[Microsoft. AspNetCore. DataProtection. AzureStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.AzureStorage/) Package, veri koruma anahtarlarının Azure Blob depolama alanında depolanmasını sağlar. Anahtarlar, bir Web uygulamasının çeşitli örnekleri arasında paylaşılabilir. Uygulamalar, kimlik doğrulama tanımlama bilgilerini veya CSRF korumasını birden çok sunucu arasında paylaşabilir.
 
 Azure Blob depolama sağlayıcısını yapılandırmak için [PersistKeysToAzureBlobStorage](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.persistkeystoazureblobstorage) aşırı yüklemelerinin birini çağırın.
 
@@ -70,13 +76,13 @@ services.AddDataProtection()
 
 ::: moniker range=">= aspnetcore-2.2"
 
-[Microsoft. AspNetCore. DataProtection. StackExchangeRedis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.StackExchangeRedis/) paketi, veri koruma anahtarlarının redsıs önbelleğinde depolanmasını sağlar. Anahtarları birden fazla örneği bir web uygulaması arasında paylaşılabilir. Uygulamalar, kimlik doğrulama tanımlama bilgisi veya CSRF koruması birden çok sunucu arasında paylaşabilirsiniz.
+[Microsoft. AspNetCore. DataProtection. StackExchangeRedis](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.StackExchangeRedis/) paketi, veri koruma anahtarlarının redsıs önbelleğinde depolanmasını sağlar. Anahtarlar, bir Web uygulamasının çeşitli örnekleri arasında paylaşılabilir. Uygulamalar, kimlik doğrulama tanımlama bilgilerini veya CSRF korumasını birden çok sunucu arasında paylaşabilir.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-2.2"
 
-[Microsoft. AspNetCore. DataProtection. redsıs](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Redis/) paketi, veri koruma anahtarlarının redsıs önbelleğinde depolanmasını sağlar. Anahtarları birden fazla örneği bir web uygulaması arasında paylaşılabilir. Uygulamalar, kimlik doğrulama tanımlama bilgisi veya CSRF koruması birden çok sunucu arasında paylaşabilirsiniz.
+[Microsoft. AspNetCore. DataProtection. redsıs](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Redis/) paketi, veri koruma anahtarlarının redsıs önbelleğinde depolanmasını sağlar. Anahtarlar, bir Web uygulamasının çeşitli örnekleri arasında paylaşılabilir. Uygulamalar, kimlik doğrulama tanımlama bilgilerini veya CSRF korumasını birden çok sunucu arasında paylaşabilir.
 
 ::: moniker-end
 
@@ -113,14 +119,14 @@ public void ConfigureServices(IServiceCollection services)
 Daha fazla bilgi edinmek için aşağıdaki kaynaklara bakın:
 
 * [StackExchange. Redsıs Connectionçoğullayıcı](https://github.com/StackExchange/StackExchange.Redis/blob/master/docs/Basics.md)
-* [Azure Redis Önbelleği](/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache#connect-to-the-cache)
+* [Azure Redis Cache](/azure/redis-cache/cache-dotnet-how-to-use-azure-redis-cache#connect-to-the-cache)
 * [ASP.NET Core DataProtection örnekleri](https://github.com/dotnet/AspNetCore/tree/2.2.0/src/DataProtection/samples)
 
-## <a name="registry"></a>Kayıt defteri
+## <a name="registry"></a>Kayıt Defteri
 
 **Yalnızca Windows dağıtımları için geçerlidir.**
 
-Bazen uygulama dosya sistemine yazma erişimi olmayabilir. Bir uygulamanın sanal hizmet hesabı ( *W3wp. exe*' nin uygulama havuzu kimliği gibi) olarak çalıştığı bir senaryo düşünün. Bu durumlarda, bir yönetici hizmet hesabı kimliği tarafından erişilebilir bir kayıt defteri anahtarı sağlayabilirsiniz. Aşağıda gösterildiği gibi, [Persistkeystoregistry](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.persistkeystoregistry) uzantı yöntemini çağırın. Şifreleme anahtarlarının saklanacağı konuma işaret eden bir [RegistryKey](/dotnet/api/microsoft.aspnetcore.dataprotection.repositories.registryxmlrepository.registrykey) belirtin:
+Bazen uygulamanın dosya sistemine yazma erişimi olmayabilir. Bir uygulamanın sanal hizmet hesabı ( *W3wp. exe*' nin uygulama havuzu kimliği gibi) olarak çalıştığı bir senaryo düşünün. Bu durumlarda, yönetici hizmet hesabı kimliği tarafından erişilebilen bir kayıt defteri anahtarı sağlayabilir. Aşağıda gösterildiği gibi, [Persistkeystoregistry](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.persistkeystoregistry) uzantı yöntemini çağırın. Şifreleme anahtarlarının saklanacağı konuma işaret eden bir [RegistryKey](/dotnet/api/microsoft.aspnetcore.dataprotection.repositories.registryxmlrepository.registrykey) belirtin:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -137,21 +143,21 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="entity-framework-core"></a>Entity Framework Core
 
-[Microsoft. AspNetCore. DataProtection. EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.EntityFrameworkCore/) paketi, veri koruma anahtarlarını Entity Framework Core kullanarak bir veritabanına depolamak için bir mekanizma sağlar. `Microsoft.AspNetCore.DataProtection.EntityFrameworkCore` NuGet paketi proje dosyasına eklenmelidir, [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app)'in bir parçası değil.
+[Microsoft. AspNetCore. DataProtection. EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.EntityFrameworkCore/) paketi, veri koruma anahtarlarını Entity Framework Core kullanarak bir veritabanına depolamak için bir mekanizma sağlar. `Microsoft.AspNetCore.DataProtection.EntityFrameworkCore` NuGet paketi proje dosyasına eklenmelidir, [Microsoft. Aspnetcore. app metapackage](xref:fundamentals/metapackage-app)'in bir parçası değil.
 
-Bu Paketle, anahtarları birden fazla örneğini bir web uygulaması arasında paylaşılabilir.
+Bu paket ile, anahtarlar bir Web uygulamasının birden çok örneği arasında paylaşılabilir.
 
-EF Core sağlayıcıyı yapılandırmak için, [Persistkeystodbcontext\<TContext >](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcoredataprotectionextensions.persistkeystodbcontext) metodunu çağırın:
+EF Core sağlayıcıyı yapılandırmak için, [Persistkeystodbcontext\<tcontext>](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcoredataprotectionextensions.persistkeystodbcontext) metodunu çağırın:
 
 [!code-csharp[Main](key-storage-providers/sample/Startup.cs?name=snippet&highlight=13-20)]
 
 [!INCLUDE[about the series](~/includes/code-comments-loc.md)]
 
-`TContext`genel parametresi, [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) öğesinden devralması ve [ıdataprotectionkeycontext](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcore.idataprotectionkeycontext)uygulamalıdır:
+Genel parametresi `TContext`, [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) öğesinden devralması ve [ıdataprotectionkeycontext](/dotnet/api/microsoft.aspnetcore.dataprotection.entityframeworkcore.idataprotectionkeycontext)uygulamalıdır:
 
 [!code-csharp[Main](key-storage-providers/sample/MyKeysContext.cs)]
 
-`DataProtectionKeys` tablosunu oluşturun.
+`DataProtectionKeys` Tablo oluşturun.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -173,9 +179,9 @@ dotnet ef database update --context MyKeysContext
 
 ---
 
-`MyKeysContext`, yukarıdaki kod örneğinde tanımlanan `DbContext`. Farklı bir ada sahip bir `DbContext` kullanıyorsanız, `MyKeysContext`için `DbContext` adınızı yerine koyun.
+`MyKeysContext`, önceki `DbContext` kod örneğinde tanımlanır. Farklı bir `DbContext` ada sahip kullanıyorsanız, `DbContext` adınızı yerine koyun. `MyKeysContext`
 
-`DataProtectionKeys` sınıfı/varlığı, aşağıdaki tabloda gösterilen yapıyı benimsemiştir.
+`DataProtectionKeys` Sınıf/varlık, aşağıdaki tabloda gösterilen yapıyı benimsemiştir.
 
 | Özellik/alan | CLR türü | SQL türü              |
 | -------------- | -------- | --------------------- |

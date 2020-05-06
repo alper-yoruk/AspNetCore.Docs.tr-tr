@@ -8,14 +8,17 @@ ms.custom: mvc
 ms.date: 04/30/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: e86047c9a830cd3ea906d0798f61d90eaee5a18c
-ms.sourcegitcommit: 6318d2bdd63116e178c34492a904be85ec9ac108
+ms.openlocfilehash: 1579b92dbc9db08bfdc5572e5d4245bd18d50590
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/30/2020
-ms.locfileid: "82604837"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82773794"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Blazor WebAssembly ile ASP.NET Core SignalR kullanma
 
@@ -36,7 +39,7 @@ Bu öğreticinin sonunda, çalışan bir sohbet uygulamanız olacaktır.
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/signalr-blazor-webassembly/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -268,7 +271,7 @@ Bu öğreticide, şunların nasıl yapıldığını öğrendiniz:
 > * SignalR İstemci kitaplığını ekleme
 > * SignalR Hub ekleme
 > * Hub için hizmetler ve uç nokta ekleme SignalR SignalR
-> * Sohbet için Razor bileşeni kodu ekleme
+> * Sohbet Razor için bileşen kodu ekle
 
 Uygulama oluşturma Blazor hakkında daha fazla bilgi edinmek için Blazor belgelere bakın:
 

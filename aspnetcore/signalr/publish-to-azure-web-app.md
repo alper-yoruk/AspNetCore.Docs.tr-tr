@@ -1,20 +1,24 @@
 ---
 title: Azure App Service için ASP.NET Core SignalR uygulaması yayımlama
 author: bradygaster
-description: ASP.NET Core SignalR uygulamasını Azure App Service nasıl yayımlayacağınızı öğrenin.
+description: Azure App Service için ASP.NET Core SignalR uygulamasının nasıl yayımlanacağını öğrenin.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: signalr/publish-to-azure-web-app
-ms.openlocfilehash: d03a007ca883b3d0391b848e3e92c90469ee640a
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
+ms.openlocfilehash: a5d19c1519c69351605e8da1d8fa70bff784efd4
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78661359"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82777195"
 ---
 # <a name="publish-an-aspnet-core-signalr-app-to-azure-app-service"></a>Azure App Service için ASP.NET Core SignalR uygulaması yayımlama
 
@@ -39,18 +43,18 @@ Bu makalede, Visual Studio 'daki araçları kullanarak yayımlama ele alınmakta
 
    | Öğe               | Açıklama |
    | ------------------ | ----------- |
-   | **Ad**           | Uygulamanın benzersiz adı. |
+   | **Adı**           | Uygulamanın benzersiz adı. |
    | **Abonelik**   | Uygulamanın kullandığı Azure aboneliği. |
-   | **Kaynak Grubu** | Uygulamanın ait olduğu ilgili kaynaklar grubu. |
+   | **Kaynak grubu** | Uygulamanın ait olduğu ilgili kaynaklar grubu. |
    | **Barındırma Planı**   | Web uygulaması için fiyatlandırma planı. |
 
-1. **Bağımlılıklar** > **Ekle** açılan listesinden **Azure SignalR hizmetini** seçin:
+1. **Dependencies**Bağımlılıklar > **ekleme** açılan listesinden **Azure SignalR hizmetini** seçin:
 
-   Ekle açılan listesinde Azure SignalR hizmetinin seçimini gösteren ![bağımlılıklar alanı](publish-to-azure-web-app/_static/signalr-service-dependency.png)
+   ![Ekle açılan listesinde Azure SignalR hizmeti seçimini gösteren bağımlılıklar alanı](publish-to-azure-web-app/_static/signalr-service-dependency.png)
 
-1. **Azure SignalR hizmeti** iletişim kutusunda **yeni bir Azure SignalR hizmet örneği oluştur**' u seçin.
+1. ** SignalR Azure hizmeti** Iletişim kutusunda **Yeni bir SignalR Azure hizmet örneği oluştur**' u seçin.
 
-1. Bir **ad**, **kaynak grubu**ve **konum**belirtin. **Azure SignalR hizmeti** iletişim kutusuna dönün ve **Ekle**' yi seçin.
+1. Bir **ad**, **kaynak grubu**ve **konum**belirtin. ** SignalR Azure hizmeti** Iletişim kutusuna dönün ve **Ekle**' yi seçin.
 
 Visual Studio aşağıdaki görevleri tamamlar:
 
@@ -59,7 +63,7 @@ Visual Studio aşağıdaki görevleri tamamlar:
 * Uygulamayı yayımlar.
 * Web uygulamasını yükleyen bir tarayıcı başlatır.
 
-Uygulama URL 'sinin biçimi `{APP SERVICE NAME}.azurewebsites.net`. Örneğin, `SignalRChatApp` adlı bir uygulamanın `https://signalrchatapp.azurewebsites.net`URL 'SI vardır.
+Uygulamanın URL 'sinin biçimi `{APP SERVICE NAME}.azurewebsites.net`. Örneğin, adlı `SignalRChatApp` bir uygulamanın URL 'si vardır `https://signalrchatapp.azurewebsites.net`.
 
 Bir Preview .NET Core sürümünü hedefleyen bir uygulama dağıtırken HTTP *502,2-Hatalı ağ geçidi* hatası oluşursa, bu sorunu çözmek için [Azure App Service ASP.NET Core önizleme sürümünü dağıtma](xref:host-and-deploy/azure-apps/index#deploy-aspnet-core-preview-release-to-azure-app-service) bölümüne bakın.
 
@@ -68,7 +72,7 @@ Bir Preview .NET Core sürümünü hedefleyen bir uygulama dağıtırken HTTP *5
 > [!NOTE]
 > *Bu bölüm yalnızca Azure SignalR hizmetini kullanmayan uygulamalar için geçerlidir.*
 >
-> Uygulama Azure SignalR hizmetini kullanıyorsa, App Service uygulama Isteği yönlendirme (ARR) benzeşimi ve bu bölümde açıklanan Web Yuvaları yapılandırmasını gerektirmez. İstemciler Web yuvalarını doğrudan uygulamaya değil Azure SignalR hizmetine birbirine bağlayamıyor.
+> Uygulama Azure SignalR hizmetini kullanıyorsa, App Service uygulama isteği yönlendirme (ARR) benzeşimi ve bu bölümde açıklanan Web Yuvaları yapılandırmasını gerektirmez. İstemciler Web yuvalarını doğrudan uygulamaya değil Azure SignalR hizmetine bağlanır.
 
 Azure SignalR hizmeti olmadan barındırılan uygulamalar için şunları etkinleştirin:
 
@@ -76,7 +80,7 @@ Azure SignalR hizmeti olmadan barındırılan uygulamalar için şunları etkinl
 * Web Sockets taşımanın çalışmasına izin veren [Web Yuvaları](xref:fundamentals/websockets) . Varsayılan ayar **kapalıdır**.
 
 1. Azure portal, **uygulama hizmetleri**' nde Web uygulamasına gidin.
-1. **Yapılandırma** > **genel ayarları**' nı açın.
+1. **Yapılandırma** > **genel ayarlarını**açın.
 1. **Web yuvalarını** **Açık**olarak ayarlayın.
 1. **ARR benzeşiminin** **Açık**olarak ayarlandığını doğrulayın.
 

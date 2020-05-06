@@ -8,16 +8,19 @@ ms.custom: mvc
 ms.date: 04/23/2020
 no-loc:
 - Blazor
+- Identity
+- Let's Encrypt
+- Razor
 - SignalR
 uid: blazor/handle-errors
-ms.openlocfilehash: 63bb791958785fa9a4a676f1aab79126c6873068
-ms.sourcegitcommit: 7bb14d005155a5044c7902a08694ee8ccb20c113
+ms.openlocfilehash: 7eefc988da275c0efccd97958d04e76f04e7cad4
+ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/24/2020
-ms.locfileid: "82111051"
+ms.lasthandoff: 05/04/2020
+ms.locfileid: "82772119"
 ---
-# <a name="handle-errors-in-aspnet-core-opno-locblazor-apps"></a>ASP.NET Core Blazor uygulamalardaki hataları işleme
+# <a name="handle-errors-in-aspnet-core-blazor-apps"></a>ASP.NET Core Blazor uygulamalardaki hataları işleme
 
 [Steve Sanderson](https://github.com/SteveSandersonMS) tarafından
 
@@ -80,7 +83,7 @@ Bir Blazor sunucu uygulamasında, *Pages/_Host. cshtml* dosyasındaki deneyimi �
 }
 ```
 
-## <a name="how-a-opno-locblazor-server-app-reacts-to-unhandled-exceptions"></a>Blazor Sunucu uygulamasının işlenmemiş özel durumlara nasıl yeniden davranması
+## <a name="how-a-blazor-server-app-reacts-to-unhandled-exceptions"></a>Blazor Sunucu uygulamasının işlenmemiş özel durumlara nasıl yeniden davranması
 
 BlazorSunucu, durum bilgisi olan bir çerçevedir. Kullanıcılar bir uygulamayla etkileşim kurarken, *devre*olarak bilinen sunucuya bir bağlantı sağlar. Devre, etkin bileşen örneklerini ve diğer birçok durum düzeyini barındırır; örneğin:
 
@@ -216,7 +219,7 @@ Daha fazla bilgi için aşağıdaki makalelere bakın:
 * <xref:blazor/call-javascript-from-dotnet>
 * <xref:blazor/call-dotnet-from-javascript>
 
-### <a name="opno-locblazor-server-prerendering"></a>BlazorSunucu prerendering
+### <a name="blazor-server-prerendering"></a>BlazorSunucu prerendering
 
 Blazorbileşenler, işlenen HTML işaretlemesi kullanıcının ilk HTTP isteğinin bir parçası olarak döndürüldüğünden, [bileşen etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) kullanılarak önceden uygulanabilir. Bu şu şekilde geçerlidir:
 
