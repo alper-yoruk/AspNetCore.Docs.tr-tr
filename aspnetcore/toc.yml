@@ -665,6 +665,8 @@
       uid: test/razor-pages-tests
     - name: Test denetleyicileri
       uid: mvc/controllers/testing
+    - name: Test ara yazılımları
+      uid: test/middleware
     - name: Uzaktan hata ayıklama
       href: /visualstudio/debugger/remote-debugging-azure
     - name: Anlık görüntü hatalarını ayıklama
