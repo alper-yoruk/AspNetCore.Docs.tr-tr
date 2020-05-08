@@ -28,7 +28,7 @@ Bir ASP.NET Core uygulaması, IIS kullanmadan Windows [hizmeti](/dotnet/framewor
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [ASP.NET Core SDK 2,1 veya üzeri](https://dotnet.microsoft.com/download)
 * [PowerShell 6,2 veya üzeri](https://github.com/PowerShell/PowerShell)
@@ -351,7 +351,7 @@ Bir ASP.NET Core uygulaması, IIS kullanmadan Windows [hizmeti](/dotnet/framewor
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [ASP.NET Core SDK 2,1 veya üzeri](https://dotnet.microsoft.com/download)
 * [PowerShell 6,2 veya üzeri](https://github.com/PowerShell/PowerShell)
@@ -685,7 +685,7 @@ Bir ASP.NET Core uygulaması, IIS kullanmadan Windows [hizmeti](/dotnet/framewor
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [ASP.NET Core SDK 2,1 veya üzeri](https://dotnet.microsoft.com/download)
 * [PowerShell 6,2 veya üzeri](https://github.com/PowerShell/PowerShell)

@@ -46,7 +46,7 @@ Razor SDK, `Content` `Include` `**\*.cshtml` glob düzenine ayarlanmış bir öz
 
 ::: moniker-end
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 [!INCLUDE[](~/includes/2.1-SDK.md)]
 

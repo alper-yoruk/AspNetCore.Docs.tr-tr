@@ -24,7 +24,7 @@ ms.locfileid: "82766517"
 
 Bu makale, ASP.NET uygulamalarının ASP.NET Core geçişine yönelik bir başvuru kılavuzu görevi görür.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 [.NET Core SDK 2,2 veya üzeri](https://dotnet.microsoft.com/download)
 

@@ -1,4 +1,4 @@
-`LoginDisplay` bileşeni (*Shared/LoginDisplay.* razor) `MainLayout` bileşeninde (*Shared/mainlayout. Razor*) işlenir ve aşağıdaki davranışları yönetir:
+Bileşen (*paylaşılan/LoginDisplay.* Razor) `MainLayout` , bileşende (*paylaşılan/mainlayout. Razor*) işlenir ve aşağıdaki davranışları yönetir: `LoginDisplay`
 
 * Kimliği doğrulanmış kullanıcılar için:
   * Geçerli Kullanıcı adını görüntüler.

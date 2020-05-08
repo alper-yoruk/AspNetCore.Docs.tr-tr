@@ -75,12 +75,12 @@ Uygulama, aşağıdaki `Contact` model için [Yapı iskelesi](xref:tutorials/fir
 * `ContactManagerAuthorizationHandler`: Yöneticilerin kişileri onaylamasını veya reddetmesini sağlar.
 * `ContactAdministratorsAuthorizationHandler`: Yöneticilerin kişileri onaylamasını veya reddetmesini ve kişileri düzenlemesini/silmesini sağlar.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 Bu öğretici gelişmiş bir deyişle. Şunu tanımanız gerekir:
 
 * [ASP.NET Core](xref:tutorials/first-mvc-app/start-mvc)
-* [Kimlik doğrulaması](xref:security/authentication/identity)
+* [Kimlik Doğrulaması](xref:security/authentication/identity)
 * [Hesap onaylama ve parola kurtarma](xref:security/authentication/accconfirm)
 * [Yetkilendirme](xref:security/authorization/introduction)
 * [Entity Framework Core](xref:data/ef-mvc/intro)
@@ -316,7 +316,7 @@ Tamamlanmış uygulamayı test etmenin kolay bir yolu da üç farklı tarayıcı
 
 | Kullanıcı                | Uygulama tarafından sağlanan | Seçenekler                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
-| test@example.com    | Hayır                | Kendi verilerini düzenleyin/silin.                |
+| test@example.com    | No                | Kendi verilerini düzenleyin/silin.                |
 | manager@contoso.com | Yes               | Kendi verilerini onaylama/reddetme ve düzenleme/silme. |
 | admin@contoso.com   | Yes               | Tüm verileri onaylama/reddetme ve düzenleme/silme. |
 
@@ -411,12 +411,12 @@ Uygulama, aşağıdaki `Contact` model için [Yapı iskelesi](xref:tutorials/fir
 * `ContactManagerAuthorizationHandler`: Yöneticilerin kişileri onaylamasını veya reddetmesini sağlar.
 * `ContactAdministratorsAuthorizationHandler`: Yöneticilerin kişileri onaylamasını veya reddetmesini ve kişileri düzenlemesini/silmesini sağlar.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 Bu öğretici gelişmiş bir deyişle. Şunu tanımanız gerekir:
 
 * [ASP.NET Core](xref:tutorials/first-mvc-app/start-mvc)
-* [Kimlik doğrulaması](xref:security/authentication/identity)
+* [Kimlik Doğrulaması](xref:security/authentication/identity)
 * [Hesap onaylama ve parola kurtarma](xref:security/authentication/accconfirm)
 * [Yetkilendirme](xref:security/authorization/introduction)
 * [Entity Framework Core](xref:data/ef-mvc/intro)
@@ -643,7 +643,7 @@ Tamamlanmış uygulamayı test etmenin kolay bir yolu da üç farklı tarayıcı
 
 | Kullanıcı                | Uygulama tarafından sağlanan | Seçenekler                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
-| test@example.com    | Hayır                | Kendi verilerini düzenleyin/silin.                |
+| test@example.com    | No                | Kendi verilerini düzenleyin/silin.                |
 | manager@contoso.com | Yes               | Kendi verilerini onaylama/reddetme ve düzenleme/silme. |
 | admin@contoso.com   | Yes               | Tüm verileri onaylama/reddetme ve düzenleme/silme. |
 

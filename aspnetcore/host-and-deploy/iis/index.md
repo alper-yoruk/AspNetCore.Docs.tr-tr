@@ -5,7 +5,7 @@ description: Windows Server Internet Information Services (IIS) üzerinde ASP.NE
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/17/2020
+ms.date: 05/07/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 72f433ffdc7d08e23fb68fc6ed9903a39959363b
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 157cfc4c42d5e057e9b2ebd04c93d80db55419c9
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775992"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967499"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>IIS ile Windows üzerinde ASP.NET Core barındırma
 
@@ -59,6 +59,8 @@ Sorun giderme kılavuzu için bkz <xref:test/troubleshoot>..
 * 64 bitlik bir uygulama için kullanılabilir daha büyük sanal bellek adres alanını gerektirir.
 * Daha büyük IIS yığın boyutunu gerektirir.
 * 64 bitlik yerel bağımlılıklara sahiptir.
+
+32 bit (x86) için yayımlanan uygulamalarda IIS uygulama havuzları için 32 bit etkinleştirilmiş olmalıdır. Daha fazla bilgi için [IIS sitesini oluşturma](#create-the-iis-site) bölümüne bakın.
 
 64 bit uygulama yayımlamak için 64 bit (x64) .NET Core SDK kullanın. Ana bilgisayar sisteminde 64 bit çalışma zamanı bulunmalıdır.
 
@@ -326,11 +328,13 @@ Uygulamaları [Web dağıtımı](/iis/install/installing-publishing-technologies
 
    ![.NET CLR sürümü için yönetilen kod ayarlama.](index/_static/edit-apppool-ws2016.png)
 
-    ASP.NET Core ayrı bir işlemde çalışır ve çalışma zamanını yönetir. ASP.NET Core, masaüstü CLR 'nin (.NET CLR)&mdash;yüklenmemesine bağlı değildir. .NET Core Için çekirdek ortak dil çalışma zamanı (CoreCLR), uygulamayı çalışan işlemde barındırmak için önyüklenir. **.NET CLR sürümünün** **yönetilen kod olmadan** ayarlanması isteğe bağlıdır, ancak önerilir.
+    ASP.NET Core ayrı bir işlemde çalışır ve çalışma zamanını yönetir. ASP.NET Core, masaüstü CLR 'yi (.NET CLR) yüklemeye bağlı değildir. .NET Core için çekirdek ortak dil çalışma zamanı (CoreCLR), uygulamayı çalışan işlemde barındırmak için önyüklenir. **.NET CLR sürümünün** **yönetilen kod olmadan** ayarlanması isteğe bağlıdır, ancak önerilir.
 
-1. *ASP.NET Core 2,2 veya üzeri*: [işlem içi barındırma modelini](#in-process-hosting-model)kullanan 64 bit (x64) [tabanlı bir dağıtım](/dotnet/core/deploying/#self-contained-deployments-scd) için, 32-bit (x86) işlemleri için uygulama havuzunu devre dışı bırakın.
+1. *ASP.NET Core 2,2 veya üzeri*:
 
-   IIS Yöneticisi > **uygulama havuzlarının** **Eylemler** kenar çubuğunda, **uygulama havuzu varsayılanlarını** veya **Gelişmiş ayarları**ayarla ' yı seçin. **32 bitlik uygulamaları etkinleştir** ' i bulun ve değerini olarak `False`ayarlayın. Bu ayar [, işlem dışı barındırma](xref:host-and-deploy/aspnet-core-module#out-of-process-hosting-model)için dağıtılan uygulamaları etkilemez.
+   * [İşlem içi barındırma modelini](#in-process-hosting-model)kullanan 32 bit SDK ile yayımlanmış 32-bit (x86) bir [dağıtımı](/dotnet/core/deploying/#self-contained-deployments-scd) için, uygulama havuzunu 32 bit olarak etkinleştirin. IIS Yöneticisi 'nde **Bağlantılar** kenar çubuğunda **uygulama havuzları** ' na gidin. Uygulamanın uygulama havuzunu seçin. **Eylemler** kenar çubuğunda **Gelişmiş ayarlar**' ı seçin. **32 bitlik uygulamaları etkinleştir** olarak `True`ayarlayın. 
+
+   * [İşlem içi barındırma modelini](#in-process-hosting-model)kullanan 64 bitlik (x64) bir [dağıtım](/dotnet/core/deploying/#self-contained-deployments-scd) için, 32 bit (x86) işlemleri için uygulama havuzunu devre dışı bırakın. IIS Yöneticisi 'nde **Bağlantılar** kenar çubuğunda **uygulama havuzları** ' na gidin. Uygulamanın uygulama havuzunu seçin. **Eylemler** kenar çubuğunda **Gelişmiş ayarlar**' ı seçin. **32 bitlik uygulamaları etkinleştir** olarak `False`ayarlayın. 
 
 1. İşlem modeli kimliğinin uygun izinlere sahip olduğunu doğrulayın.
 

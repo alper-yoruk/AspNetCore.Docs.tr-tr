@@ -31,7 +31,7 @@ Bu öğreticide aşağıdaki konular ele alınmaktadır:
 > * IIS Yöneticisi 'nde bir IIS sitesi oluşturun.
 > * ASP.NET Core uygulamasını dağıtın.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * Geliştirme makinesinde yüklü [.NET Core SDK](/dotnet/core/sdk) .
 * **Web sunucusu (IIS)** sunucu rolüyle yapılandırılmış Windows Server. Sunucunuz Web sitelerini IIS ile barındırmak üzere yapılandırılmamışsa, <xref:host-and-deploy/iis/index#iis-configuration> makalenin *IIS yapılandırması* bölümündeki yönergeleri izleyin ve ardından Bu öğreticiye geri dönün.

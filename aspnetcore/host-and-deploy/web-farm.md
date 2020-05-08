@@ -66,7 +66,7 @@ Aşağıdaki senaryolar ek yapılandırma gerektirmez, ancak Web grupları için
 
 | Senaryo | Bağlı&hellip; |
 | -------- | ------------------- |
-| Kimlik doğrulaması | Veri koruma (bkz <xref:security/data-protection/configuration/overview>.).<br><br>Daha fazla bilgi için <xref:security/authentication/cookie> ve <xref:security/cookie-sharing> bölümlerine bakın. |
+| Kimlik Doğrulaması | Veri koruma (bkz <xref:security/data-protection/configuration/overview>.).<br><br>Daha fazla bilgi için <xref:security/authentication/cookie> ve <xref:security/cookie-sharing> bölümlerine bakın. |
 | Identity | Kimlik doğrulama ve veritabanı yapılandırması.<br><br>Daha fazla bilgi için bkz. <xref:security/authentication/identity>. |
 | Oturum | Veri koruma (şifreli tanımlama bilgileri) ( <xref:security/data-protection/configuration/overview>bkz.) ve önbelleğe <xref:performance/caching/distributed>alma (bkz.).<br><br>Daha fazla bilgi için bkz. [oturum ve durum yönetimi: oturum durumu](xref:fundamentals/app-state#session-state). |
 | TempData | Veri koruma (şifreli tanımlama bilgileri) ( <xref:security/data-protection/configuration/overview>bkz. [oturum ve durum yönetimi: oturum durumu](xref:fundamentals/app-state#session-state)).<br><br>Daha fazla bilgi için bkz. [oturum ve durum yönetimi: TempData](xref:fundamentals/app-state#tempdata). |

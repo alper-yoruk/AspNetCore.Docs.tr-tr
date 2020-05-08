@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/lifecycle
-ms.openlocfilehash: 87c65776684f9cc91b868b8e88926e46b25592ff
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 571f14247efe08ac6abbd6d1e2720656f94c213c
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82771526"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967460"
 ---
 # <a name="aspnet-core-blazor-lifecycle"></a>ASP.NET Core Blazor yaşam döngüsü
 
@@ -30,7 +30,7 @@ ms.locfileid: "82771526"
 
 ### <a name="component-initialization-methods"></a>Bileşen başlatma yöntemleri
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync*>ve <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized*> , bileşen ilk parametrelerini ana bileşeninden aldıktan sonra başlatıldığında çağrılır. Bileşen `OnInitializedAsync` zaman uyumsuz bir işlem gerçekleştirdiğinde ve işlem tamamlandığında yenilenmesi gerektiğinde kullanın.
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>ve <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized%2A> , bileşen ilk parametrelerini ana bileşeninden aldıktan sonra başlatıldığında çağrılır. Bileşen `OnInitializedAsync` zaman uyumsuz bir işlem gerçekleştirdiğinde ve işlem tamamlandığında yenilenmesi gerektiğinde kullanın.
 
 Zaman uyumlu bir işlem için, `OnInitialized`geçersiz kılın:
 
@@ -63,7 +63,7 @@ Herhangi bir olay işleyicisi ayarlandıysa, bunların aktiften çıkarılmasın
 
 ### <a name="before-parameters-are-set"></a>Parametreler ayarlanmadan önce
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync*>işleme ağacındaki bileşenin üst öğesi tarafından sağlanan parametreleri ayarlar:
+<xref:Microsoft.AspNetCore.Components.ComponentBase.SetParametersAsync%2A>işleme ağacındaki bileşenin üst öğesi tarafından sağlanan parametreleri ayarlar:
 
 ```csharp
 public override async Task SetParametersAsync(ParameterView parameters)
@@ -84,7 +84,7 @@ Herhangi bir olay işleyicisi ayarlandıysa, bunların aktiften çıkarılmasın
 
 ### <a name="after-parameters-are-set"></a>Parametreler ayarlandıktan sonra
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync*>ve <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSet*> şu şekilde adlandırılır:
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A>ve <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSet%2A> şu şekilde adlandırılır:
 
 * Bileşen başlatıldığında ve üst bileşeninden ilk parametre kümesini aldığında.
 * Üst bileşen yeniden oluşturup şunları sağlar:
@@ -112,7 +112,7 @@ Herhangi bir olay işleyicisi ayarlandıysa, bunların aktiften çıkarılmasın
 
 ### <a name="after-component-render"></a>Bileşen oluşturulduktan sonra
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync*>ve <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender*> bir bileşen işlemeyi tamamladıktan sonra çağrılır. Öğe ve bileşen başvuruları bu noktada doldurulur. İşlenmiş DOM öğelerinde çalışan üçüncü taraf JavaScript kitaplıklarını etkinleştirme gibi, işlenmiş içeriği kullanarak ek başlatma adımları gerçekleştirmek için bu aşamayı kullanın.
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A>ve <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> bir bileşen işlemeyi tamamladıktan sonra çağrılır. Öğe ve bileşen başvuruları bu noktada doldurulur. İşlenmiş DOM öğelerinde çalışan üçüncü taraf JavaScript kitaplıklarını etkinleştirme gibi, işlenmiş içeriği kullanarak ek başlatma adımları gerçekleştirmek için bu aşamayı kullanın.
 
 Ve `firstRender` `OnAfterRender`için `OnAfterRenderAsync` parametresi:
 
@@ -150,7 +150,7 @@ Herhangi bir olay işleyicisi ayarlandıysa, bunların aktiften çıkarılmasın
 
 ### <a name="suppress-ui-refreshing"></a>UI yenilemeyi bastır
 
-UI <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender*> yenilemeyi gizlemek için geçersiz kılın. Uygulama döndürürse `true`, Kullanıcı arabirimi yenilenir:
+UI <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> yenilemeyi gizlemek için geçersiz kılın. Uygulama döndürürse `true`, Kullanıcı arabirimi yenilenir:
 
 ```csharp
 protected override bool ShouldRender()
@@ -167,7 +167,7 @@ protected override bool ShouldRender()
 
 ## <a name="state-changes"></a>Durum değişiklikleri
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged*>bileşene durumunun değiştiğini bildirir. Uygun olduğunda, çağırma `StateHasChanged` bileşenin yeniden yönlendirilmesine neden olur.
+<xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>bileşene durumunun değiştiğini bildirir. Uygun olduğunda, çağırma `StateHasChanged` bileşenin yeniden yönlendirilmesine neden olur.
 
 ## <a name="handle-incomplete-async-actions-at-render"></a>İşleme sırasında tamamlanmamış zaman uyumsuz eylemleri işle
 
@@ -198,7 +198,7 @@ Bir bileşen uygularsa <xref:System.IDisposable>, bileşen kullanıcı arabirimi
 ```
 
 > [!NOTE]
-> ' <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged*> In `Dispose` çağrılması desteklenmez. `StateHasChanged`oluşturucuyu aşağı doğru olarak çağrılabilir, bu nedenle bu noktada UI güncelleştirmelerinin kullanılması desteklenmez.
+> ' <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> In `Dispose` çağrılması desteklenmez. `StateHasChanged`oluşturucuyu aşağı doğru olarak çağrılabilir, bu nedenle bu noktada UI güncelleştirmelerinin kullanılması desteklenmez.
 
 .NET etkinliklerinden olay işleyicilerini kaldırma. Aşağıdaki [ Blazor form](xref:blazor/forms-validation) örnekleri, `Dispose` yönteminde bir olay işleyicisinin nasıl geri yükleneceğini göstermektedir:
 
@@ -234,7 +234,7 @@ Aşağıdaki kod, bir şablon tabanlı `WeatherForecastService` Blazor sunucu uy
 ```csharp
 public class WeatherForecastService
 {
-    private static readonly string[] _summaries = new[]
+    private static readonly string[] summaries = new[]
     {
         "Freezing", "Bracing", "Chilly", "Cool", "Mild",
         "Warm", "Balmy", "Hot", "Sweltering", "Scorching"
@@ -265,7 +265,7 @@ public class WeatherForecastService
             {
                 Date = startDate.AddDays(index),
                 TemperatureC = rng.Next(-20, 55),
-                Summary = _summaries[rng.Next(_summaries.Length)]
+                Summary = summaries[rng.Next(summaries.Length)]
             }).ToArray();
         });
     }

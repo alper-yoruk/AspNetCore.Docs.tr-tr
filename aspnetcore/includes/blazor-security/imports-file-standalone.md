@@ -1,3 +1,3 @@
-Ad <xref:Microsoft.AspNetCore.Components.Authorization?displayProperty=fullName> *alanı, _Imports.razor* dosyası üzerinden uygulama nın her alanında kullanılabilir hale getirilir:
+<xref:Microsoft.AspNetCore.Components.Authorization?displayProperty=fullName> Ad alanı, *_Imports. Razor* dosyası aracılığıyla uygulama genelinde kullanılabilir hale getirilir:
 
 [!code-razor[](imports-standalone.razor?highlight=3)]

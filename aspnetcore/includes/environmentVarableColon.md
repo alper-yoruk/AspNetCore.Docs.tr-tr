@@ -1,4 +1,4 @@
-Ayırıcı `:` tüm platformlarda ortam değişkeni hiyerarşik tuşları ile çalışmaz. `__`, çift altını çizer, şudur:
+Ayırıcı `:` , tüm platformlarda ortam değişkeni hiyerarşik anahtarlarla birlikte çalışmaz. `__`, Çift alt çizgi:
 
-* Tüm platformlar tarafından desteklenir. Örneğin, `:` ayırıcı [Bash](https://linuxhint.com/bash-environment-variables/)tarafından desteklenmez, `__` ancak.
+* Tüm platformlar tarafından desteklenir. Örneğin, `:` ayırıcı [Bash](https://linuxhint.com/bash-environment-variables/)tarafından desteklenmez, ancak `__` .
 * Otomatik olarak bir`:`
