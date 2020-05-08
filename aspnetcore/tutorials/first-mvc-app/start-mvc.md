@@ -40,7 +40,7 @@ Sonunda, film verilerini yönetebilen ve görüntüleyebilen bir uygulamanız va
 
 [!INCLUDE[](~/includes/mvc-intro/download.md)]
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -188,7 +188,7 @@ Sonunda, film verilerini yönetebilen ve görüntüleyebilen bir uygulamanız va
 
 [!INCLUDE[](~/includes/mvc-intro/download.md)]
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 

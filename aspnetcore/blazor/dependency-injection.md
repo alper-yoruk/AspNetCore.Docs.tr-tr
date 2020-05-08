@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/dependency-injection
-ms.openlocfilehash: 742f3c5ea26fab5e168f162a0e133da05fd74a74
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: e96698bd0bd8f3f3b290ba24bc8169efb16f1d03
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767128"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967538"
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core Blazor bağımlılığı ekleme
 
@@ -134,9 +134,9 @@ Hizmetler, aşağıdaki tabloda gösterilen ömürlerle yapılandırılabilir.
 
 | Ömür | Açıklama |
 | -------- | ----------- |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped*> | BlazorWebAssembly uygulamalarında Şu anda bir dı kapsamları kavramı yoktur. `Scoped`-kayıtlı hizmetler hizmetler gibi `Singleton` davranır. Ancak, Blazor sunucu barındırma modeli `Scoped` yaşam süresini destekler. Blazor Sunucu uygulamalarında, kapsamlı bir hizmet kaydı *bağlantının*kapsamına alınır. Bu nedenle, geçerli amaç tarayıcıda istemci tarafı çalıştırmak olsa bile, kapsama alınmış hizmetlerin kullanılması geçerli kullanıcı kapsamında olması gereken hizmetler için tercih edilir. |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton*> | Dı, hizmetin *tek bir örneğini* oluşturur. `Singleton` Hizmet gerektiren tüm bileşenler aynı hizmetin bir örneğini alır. |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient*> | Bir bileşen hizmet kapsayıcısından bir `Transient` hizmetin örneğini edindiğinde, hizmetin yeni bir *örneğini* alır. |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | BlazorWebAssembly uygulamalarında Şu anda bir dı kapsamları kavramı yoktur. `Scoped`-kayıtlı hizmetler hizmetler gibi `Singleton` davranır. Ancak, Blazor sunucu barındırma modeli `Scoped` yaşam süresini destekler. Blazor Sunucu uygulamalarında, kapsamlı bir hizmet kaydı *bağlantının*kapsamına alınır. Bu nedenle, geçerli amaç tarayıcıda istemci tarafı çalıştırmak olsa bile, kapsama alınmış hizmetlerin kullanılması geçerli kullanıcı kapsamında olması gereken hizmetler için tercih edilir. |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton%2A> | Dı, hizmetin *tek bir örneğini* oluşturur. `Singleton` Hizmet gerektiren tüm bileşenler aynı hizmetin bir örneğini alır. |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient%2A> | Bir bileşen hizmet kapsayıcısından bir `Transient` hizmetin örneğini edindiğinde, hizmetin yeni bir *örneğini* alır. |
 
 Dı sistemi ASP.NET Core içindeki DI sistemini temel alır. Daha fazla bilgi için bkz. <xref:fundamentals/dependency-injection>.
 
@@ -274,7 +274,7 @@ Tek bir bileşen `DbContext` eşzamanlı olarak kullanılabilir (örneğin, Kull
     @inject DbContextOptions<AppDbContext> DbContextOptions
 
     <ul>
-        @foreach (var item in _data)
+        @foreach (var item in data)
         {
             <li>@item</li>
         }
@@ -283,11 +283,11 @@ Tek bir bileşen `DbContext` eşzamanlı olarak kullanılabilir (örneğin, Kull
     <button @onclick="LoadData">Load Data</button>
 
     @code {
-        private List<string> _data = new List<string>();
+        private List<string> data = new List<string>();
 
         private async Task LoadData()
         {
-            _data = await GetAsync();
+            data = await GetAsync();
             StateHasChanged();
         }
 
@@ -318,7 +318,7 @@ Tek bir bileşen `DbContext` eşzamanlı olarak kullanılabilir (örneğin, Kull
     @inject IServiceProvider ServiceProvider
 
     <ul>
-        @foreach (var item in _data)
+        @foreach (var item in data)
         {
             <li>@item</li>
         }
@@ -327,11 +327,11 @@ Tek bir bileşen `DbContext` eşzamanlı olarak kullanılabilir (örneğin, Kull
     <button @onclick="LoadData">Load Data</button>
 
     @code {
-        private List<string> _data = new List<string>();
+        private List<string> data = new List<string>();
 
         private async Task LoadData()
         {
-            _data = await GetAsync();
+            data = await GetAsync();
             StateHasChanged();
         }
 

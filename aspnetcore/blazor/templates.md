@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: c84d6415728bf56836d98cfa66d1b9d46d2eadc8
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 705fa32ee72221b3c18653e9f3495b9cd61e9ad1
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82770920"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967434"
 ---
 # <a name="aspnet-core-blazor-templates"></a>ASP.NET Core Blazor şablonları
 
@@ -56,9 +56,9 @@ Aşağıdaki dosya ve klasörler bir Blazor Blazor şablondan oluşturulan bir u
 
 * *Startup.cs* (Blazor sunucu) &ndash; uygulamanın başlangıç mantığını içerir. `Startup` Sınıfı iki yöntemi tanımlar:
 
-  * `ConfigureServices`&ndash; Uygulamanın [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection) hizmetlerini yapılandırır. Blazor Sunucu uygulamalarında, Hizmetleri çağırarak <xref:Microsoft.Extensions.DependencyInjection.ComponentServiceCollectionExtensions.AddServerSideBlazor*>eklenir ve `WeatherForecastService` örnek `FetchData` bileşen tarafından kullanılmak üzere hizmet kapsayıcısına eklenir.
+  * `ConfigureServices`&ndash; Uygulamanın [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection) hizmetlerini yapılandırır. Blazor Sunucu uygulamalarında, Hizmetleri çağırarak <xref:Microsoft.Extensions.DependencyInjection.ComponentServiceCollectionExtensions.AddServerSideBlazor%2A>eklenir ve `WeatherForecastService` örnek `FetchData` bileşen tarafından kullanılmak üzere hizmet kapsayıcısına eklenir.
   * `Configure`&ndash; Uygulamanın istek işleme ardışık düzenini yapılandırır:
-    * <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub*>, tarayıcıya gerçek zamanlı bağlantı için bir uç nokta ayarlamak üzere çağırılır. Bağlantı, uygulamalarına gerçek zamanlı [SignalR](xref:signalr/introduction)Web işlevselliği ekleme çerçevesi olan ile oluşturulur.
+    * <xref:Microsoft.AspNetCore.Builder.ComponentEndpointRouteBuilderExtensions.MapBlazorHub%2A>, tarayıcıya gerçek zamanlı bağlantı için bir uç nokta ayarlamak üzere çağırılır. Bağlantı, uygulamalarına gerçek zamanlı [SignalR](xref:signalr/introduction)Web işlevselliği ekleme çerçevesi olan ile oluşturulur.
     * [Mapfallbacktopage ("/_Host")](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage*) , uygulamanın kök sayfasını (*Pages/_Host. cshtml*) ayarlamak ve gezinmeyi etkinleştirmek için çağırılır.
 
 * *Wwwroot/index.html* (Blazor webassembly) &ndash; bir HTML sayfası olarak uygulanan uygulamanın kök sayfası:

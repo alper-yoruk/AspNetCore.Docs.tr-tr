@@ -36,7 +36,7 @@ Bu öğreticide şunları yaptınız:
 > * Geçişleri oluşturma ve güncelleştirme
 > * Uygulamayı test etme
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [Eşzamanlılık işle](concurrency.md)
 

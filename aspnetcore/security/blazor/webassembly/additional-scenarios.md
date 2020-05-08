@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/additional-scenarios
-ms.openlocfilehash: e69b598431027aa540227b87dedfd091057a1af4
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: e804c43ebea8f6a79443e24047a7be47587cbd8a
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768175"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967552"
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly ek güvenlik senaryoları
 
@@ -35,6 +35,11 @@ Hizmeti `AuthorizationMessageHandler` , giden isteklere erişim belirteçleri `H
 Aşağıdaki `AuthorizationMessageHandler` örnekte, `HttpClient` içinde `Program.Main` bir (*program.cs*) yapılandırır:
 
 ```csharp
+using System.Net.Http;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+...
+
 builder.Services.AddTransient(sp =>
 {
     return new HttpClient(sp.GetRequiredService<AuthorizationMessageHandler>()
@@ -47,9 +52,14 @@ builder.Services.AddTransient(sp =>
 });
 ```
 
-Kolaylık olması için, `BaseAddressAuthorizationMessageHandler` bır yetkili URL olarak uygulama temel adresiyle önceden yapılandırılmış bir içerir. Kimlik doğrulaması etkinleştirilmiş Blazor WebAssembly şablonları artık [ıhttpclientfactory](https://docs.microsoft.com/aspnet/core/fundamentals/http-requests) kullanarak bir `HttpClient` ile ayarlama yapın `BaseAddressAuthorizationMessageHandler`:
+Kolaylık olması için, `BaseAddressAuthorizationMessageHandler` bır yetkili URL olarak uygulama temel adresiyle önceden yapılandırılmış bir içerir. Kimlik doğrulaması etkinleştirilmiş Blazor WebAssembly şablonları artık sunucu API <xref:System.Net.Http.IHttpClientFactory> 'si projesinde şu şekilde bir <xref:System.Net.Http.HttpClient> ile ayarlamak için kullanır `BaseAddressAuthorizationMessageHandler`:
 
 ```csharp
+using System.Net.Http;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+...
+
 builder.Services.AddHttpClient("BlazorWithIdentityApp1.ServerAPI", 
     client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
         .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
@@ -58,11 +68,16 @@ builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
     .CreateClient("BlazorWithIdentityApp1.ServerAPI"));
 ```
 
-Önceki örnekte istemci oluşturulduğu `CreateClient` yerde, `HttpClient` sunucu projesine istek yaparken erişim belirteçlerini içeren örnekler sağlanır.
+Önceki örnekte istemci oluşturulduğu `CreateClient` yerde, <xref:System.Net.Http.HttpClient> sunucu projesine istek yaparken erişim belirteçlerini içeren örnekler sağlanır.
 
-Daha sonra `HttpClient` , yapılandırılmış bir basit `try-catch` model kullanarak yetkili istekler oluşturmak için kullanılır. Aşağıdaki `FetchData` bileşen, hava durumu tahmin verilerini ister:
+Daha sonra <xref:System.Net.Http.HttpClient> , yapılandırılmış bir basit `try-catch` model kullanarak yetkili istekler oluşturmak için kullanılır. Aşağıdaki `FetchData` bileşen, hava durumu tahmin verilerini ister:
 
 ```csharp
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject HttpClient Http
+
+...
+
 protected override async Task OnInitializedAsync()
 {
     try
@@ -82,6 +97,13 @@ Alternatif olarak, tek bir sınıftaki tüm HTTP ve belirteç alımı sorunları
 *WeatherClient.cs*:
 
 ```csharp
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+using static {APP ASSEMBLY}.Data;
+
 public class WeatherClient
 {
     private readonly HttpClient httpClient;
@@ -99,6 +121,8 @@ public class WeatherClient
         {
             forecasts = await httpClient.GetFromJsonAsync<WeatherForecast[]>(
                 "WeatherForecast");
+
+            ...
         }
         catch (AccessTokenNotAvailableException exception)
         {
@@ -113,6 +137,11 @@ public class WeatherClient
 *Program.cs*:
 
 ```csharp
+using System.Net.Http;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+...
+
 builder.Services.AddHttpClient<WeatherClient>(
     client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
     .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();

@@ -33,7 +33,7 @@ ASP.NET Core 2,2 için, [JavaScript ile Web API 'Sini çağırma](xref:tutorials
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * Tüm [öğreticiyi: Web API 'Si oluşturma](xref:tutorials/first-web-api)
 * CSS, HTML ve JavaScript ile benzerlik

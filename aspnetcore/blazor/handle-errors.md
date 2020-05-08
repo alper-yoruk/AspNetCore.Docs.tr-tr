@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/handle-errors
-ms.openlocfilehash: 7eefc988da275c0efccd97958d04e76f04e7cad4
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 7601e448a52be5e1064326929281e72ad28a0e65
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82772119"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967161"
 ---
 # <a name="handle-errors-in-aspnet-core-blazor-apps"></a>ASP.NET Core Blazor uygulamalardaki hataları işleme
 
@@ -191,7 +191,7 @@ Kullanıcı kodu yakalanmazsa ve özel durumu işlemezse çerçeve özel durumu 
 
 ### <a name="component-disposal"></a>Bileşen elden çıkarma
 
-Örneğin, Kullanıcı başka bir sayfaya gezindiği için, bir bileşen kullanıcı arabiriminden kaldırılabilir. Uygulayan <xref:System.IDisposable?displayProperty=fullName> bir bileşen kullanıcı arabiriminden kaldırıldığında, çerçeve bileşenin <xref:System.IDisposable.Dispose*> yöntemini çağırır.
+Örneğin, Kullanıcı başka bir sayfaya gezindiği için, bir bileşen kullanıcı arabiriminden kaldırılabilir. Uygulayan <xref:System.IDisposable?displayProperty=fullName> bir bileşen kullanıcı arabiriminden kaldırıldığında, çerçeve bileşenin <xref:System.IDisposable.Dispose%2A> yöntemini çağırır.
 
 Bileşenin `Dispose` yöntemi işlenmeyen bir özel durum oluşturursa, özel durum Blazor sunucu devresi için önemli olur. Çıkarma mantığı özel durumlar oluşturmayabilir, uygulama hata işleme ve günlüğe kaydetme ile [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) ifadesini kullanarak özel durumları yakalemelidir.
 

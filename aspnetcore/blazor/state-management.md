@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/state-management
-ms.openlocfilehash: 75d9a66eb25201c2993b8f922754b8aa7ab84615
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 5e14a0697fbc98575970b93dfa12c68e9f561c56
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82771174"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967421"
 ---
 # <a name="aspnet-core-blazor-state-management"></a>ASP.NET Core Blazor durum yönetimi
 
@@ -175,26 +175,26 @@ Seçim, hangi yedekleme deposunu kullanmak istediğinize bağlıdır. Aşağıda
 
 `@using` İfade, bileşen yerine bir *_Imports. Razor* dosyasına yerleştirilebilir. *_Imports. Razor* dosyası kullanımı, ad alanını uygulamanın daha büyük kesimlerine veya uygulamanın tamamına kullanılabilir hale getirir.
 
-`_currentCount` Proje şablonunun `Counter` bileşenindeki değeri kalıcı hale getirmek için, kullanmak `IncrementCount` `ProtectedSessionStore.SetAsync`üzere yöntemi değiştirin:
+`currentCount` Proje şablonunun `Counter` bileşenindeki değeri kalıcı hale getirmek için, kullanmak `IncrementCount` `ProtectedSessionStore.SetAsync`üzere yöntemi değiştirin:
 
 ```csharp
 private async Task IncrementCount()
 {
-    _currentCount++;
-    await ProtectedSessionStore.SetAsync("count", _currentCount);
+    currentCount++;
+    await ProtectedSessionStore.SetAsync("count", currentCount);
 }
 ```
 
 Daha büyük, daha gerçekçi uygulamalar, tek tek alanların depolanması ise olası bir senaryodur. Uygulamalar karmaşık durum içeren tüm model nesnelerini depolamaya daha olasıdır. `ProtectedSessionStore`JSON verilerini otomatik olarak serileştirir ve seri hale getirir.
 
-Yukarıdaki kod örneğinde, `_currentCount` veriler kullanıcının tarayıcısında olarak `sessionStorage['count']` depolanır. Veriler düz metin biçiminde depolanmaz, bunun yerine ASP.NET Core [veri koruma](xref:security/data-protection/introduction)kullanılarak korunur. Şifrelenmiş veriler, tarayıcının geliştirici konsolunda değerlendirildiğinde `sessionStorage['count']` görülebilir.
+Yukarıdaki kod örneğinde, `currentCount` veriler kullanıcının tarayıcısında olarak `sessionStorage['count']` depolanır. Veriler düz metin biçiminde depolanmaz, bunun yerine ASP.NET Core [veri koruma](xref:security/data-protection/introduction)kullanılarak korunur. Şifrelenmiş veriler, tarayıcının geliştirici konsolunda değerlendirildiğinde `sessionStorage['count']` görülebilir.
 
-Kullanıcı daha sonra `_currentCount` `Counter` bileşene geri dönerse verileri kurtarmak için (tamamen yeni bir devrede olanlar dahil), şunu kullanın `ProtectedSessionStore.GetAsync`:
+Kullanıcı daha sonra `currentCount` `Counter` bileşene geri dönerse verileri kurtarmak için (tamamen yeni bir devrede olanlar dahil), şunu kullanın `ProtectedSessionStore.GetAsync`:
 
 ```csharp
 protected override async Task OnInitializedAsync()
 {
-    _currentCount = await ProtectedSessionStore.GetAsync<int>("count");
+    currentCount = await ProtectedSessionStore.GetAsync<int>("count");
 }
 ```
 
@@ -211,18 +211,18 @@ Bileşenin parametreleri gezinti durumu içeriyorsa, sonucunu çağırın `Prote
 
 Tarayıcı depolaması zaman uyumsuz olduğundan (bir ağ bağlantısı üzerinden erişilir), veriler yüklenmeden ve bir bileşen tarafından kullanıma sunulmadan önce her zaman bir zaman dilimi vardır. En iyi sonuçlar için, yükleme sırasında, boş veya varsayılan verileri görüntülemek yerine bir yükleme durumu iletisi işleme devam ediyor.
 
-Bir yaklaşım, verilerin `null` (hala yükleme) olup olmadığını izlemedir. Varsayılan `Counter` bileşende, sayı bir `int`içinde tutulur. Türe `_currentCount` (`?``int`) bir soru işareti () ekleyerek null yapılabilir yapın:
+Bir yaklaşım, verilerin `null` (hala yükleme) olup olmadığını izlemedir. Varsayılan `Counter` bileşende, sayı bir `int`içinde tutulur. Türe `currentCount` (`?``int`) bir soru işareti () ekleyerek null yapılabilir yapın:
 
 ```csharp
-private int? _currentCount;
+private int? currentCount;
 ```
 
 Sayı ve **artış** düğmesini koşullu olarak görüntülemediğinizden, bu öğeleri yalnızca veriler yüklenmişse görüntülemeyi seçin:
 
 ```razor
-@if (_currentCount.HasValue)
+@if (currentCount.HasValue)
 {
-    <p>Current count: <strong>@_currentCount</strong></p>
+    <p>Current count: <strong>@currentCount</strong></p>
 
     <button @onclick="IncrementCount">Increment</button>
 }
@@ -256,8 +256,8 @@ Prerendering, veya `localStorage` `sessionStorage`kullanmayan diğer sayfalar i�
 ... rendering code goes here ...
 
 @code {
-    private int? _currentCount;
-    private bool _isConnected = false;
+    private int? currentCount;
+    private bool isConnected = false;
 
     protected override async Task OnAfterRenderAsync(bool firstRender)
     {
@@ -265,7 +265,7 @@ Prerendering, veya `localStorage` `sessionStorage`kullanmayan diğer sayfalar i�
         {
             // When execution reaches this point, the first *interactive* render
             // is complete. The component has an active connection to the browser.
-            _isConnected = true;
+            isConnected = true;
             await LoadStateAsync();
             StateHasChanged();
         }
@@ -273,13 +273,13 @@ Prerendering, veya `localStorage` `sessionStorage`kullanmayan diğer sayfalar i�
 
     private async Task LoadStateAsync()
     {
-        _currentCount = await ProtectedLocalStore.GetAsync<int>("prerenderedCount");
+        currentCount = await ProtectedLocalStore.GetAsync<int>("prerenderedCount");
     }
 
     private async Task IncrementCount()
     {
-        _currentCount++;
-        await ProtectedSessionStore.SetAsync("count", _currentCount);
+        currentCount++;
+        await ProtectedSessionStore.SetAsync("count", currentCount);
     }
 }
 ```
@@ -294,7 +294,7 @@ Aşağıdaki bir `CounterStateProvider` bileşen örneğinde, sayaç verileri ka
 @using Microsoft.AspNetCore.ProtectedBrowserStorage
 @inject ProtectedSessionStorage ProtectedSessionStore
 
-@if (_hasLoaded)
+@if (hasLoaded)
 {
     <CascadingValue Value="@this">
         @ChildContent
@@ -306,7 +306,7 @@ else
 }
 
 @code {
-    private bool _hasLoaded;
+    private bool hasLoaded;
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
@@ -316,7 +316,7 @@ else
     protected override async Task OnInitializedAsync()
     {
         CurrentCount = await ProtectedSessionStore.GetAsync<int>("count");
-        _hasLoaded = true;
+        hasLoaded = true;
     }
 
     public async Task SaveChangesAsync()

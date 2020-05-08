@@ -34,7 +34,7 @@ Bu öğreticide şunları yaptınız:
 > * Veri modeli anlık görüntüsü hakkında bilgi edinin
 > * Geçişi Uygula
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [Sıralama, filtreleme ve sayfalama](sort-filter-page.md)
 

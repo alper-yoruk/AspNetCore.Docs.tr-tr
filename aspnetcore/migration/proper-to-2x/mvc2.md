@@ -25,7 +25,7 @@ ms.locfileid: "82776278"
 
 Bu makale, ASP.NET uygulamalarını ASP.NET Core 2,0 ' ye geçirmeye yönelik bir başvuru kılavuzu görevi görür.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 .Net downloads 'lerden **aşağıdakilerden birini** yükler [: Windows](https://dotnet.microsoft.com/download):
 

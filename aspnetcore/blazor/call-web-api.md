@@ -5,7 +5,7 @@ description: Çıkış noktaları arası kaynak paylaşımı (CORS) istekleri Bl
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/04/2020
+ms.date: 05/07/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: d823db3688e05f6befefacc9f390e0dcdbf329a7
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 7476e9dce3fa26948d2091235747f893d805d7be
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767154"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967278"
 ---
 # <a name="call-a-web-api-from-aspnet-core-blazor"></a>ASP.NET Core bir Web API 'SI çağırmaBlazor
 
@@ -87,37 +87,37 @@ JSON yardımcı yöntemleri bir URI 'ye (aşağıdaki örneklerde bir Web API 's
 
 * `GetFromJsonAsync`&ndash; BIR http get isteği gönderir ve bir nesne oluşturmak için JSON yanıt gövdesini ayrıştırır.
 
-  Aşağıdaki kodda,, `_todoItems` bileşeni tarafından görüntülenir. `GetTodoItems` Yöntemi, bileşen işlemeyi tamamladığında tetiklenir ([Onınitializedadsync](xref:blazor/lifecycle#component-initialization-methods)). Örnek uygulamaya bkz. örnek uygulama.
+  Aşağıdaki kodda,, `todoItems` bileşeni tarafından görüntülenir. `GetTodoItems` Yöntemi, bileşen işlemeyi tamamladığında tetiklenir ([Onınitializedadsync](xref:blazor/lifecycle#component-initialization-methods)). Örnek uygulamaya bkz. örnek uygulama.
 
   ```razor
   @using System.Net.Http
   @inject HttpClient Http
 
   @code {
-      private TodoItem[] _todoItems;
+      private TodoItem[] todoItems;
 
       protected override async Task OnInitializedAsync() => 
-          _todoItems = await Http.GetFromJsonAsync<TodoItem[]>("api/TodoItems");
+          todoItems = await Http.GetFromJsonAsync<TodoItem[]>("api/TodoItems");
   }
   ```
 
 * `PostAsJsonAsync`&ndash; JSON kodlu içerik dahil olmak üzere BIR http post isteği gönderir ve bir nesne oluşturmak için JSON yanıt gövdesini ayrıştırır.
 
-  Aşağıdaki kodda, `_newItemName` bileşenin bağlantılı bir öğesi tarafından sağlanır. `AddItem` Yöntemi bir `<button>` öğesi seçilerek tetiklenir. Örnek uygulamaya bkz. örnek uygulama.
+  Aşağıdaki kodda, `newItemName` bileşenin bağlantılı bir öğesi tarafından sağlanır. `AddItem` Yöntemi bir `<button>` öğesi seçilerek tetiklenir. Örnek uygulamaya bkz. örnek uygulama.
 
   ```razor
   @using System.Net.Http
   @inject HttpClient Http
 
-  <input @bind="_newItemName" placeholder="New Todo Item" />
+  <input @bind="newItemName" placeholder="New Todo Item" />
   <button @onclick="@AddItem">Add</button>
 
   @code {
-      private string _newItemName;
+      private string newItemName;
 
       private async Task AddItem()
       {
-          var addItem = new TodoItem { Name = _newItemName, IsComplete = false };
+          var addItem = new TodoItem { Name = newItemName, IsComplete = false };
           await Http.PostAsJsonAsync("api/TodoItems", addItem);
       }
   }
@@ -131,28 +131,28 @@ JSON yardımcı yöntemleri bir URI 'ye (aşağıdaki örneklerde bir Web API 's
 
 * `PutAsJsonAsync`&ndash; JSON kodlu içerik dahil olmak üzere BIR http put isteği gönderir.
 
-  Aşağıdaki kodda, `_editItem` `Name` ve `IsCompleted` değerleri bileşenin bağlantılı öğelerine göre sağlanır. `Id` Öğe, Kullanıcı arabiriminin başka bir bölümünde seçildiğinde ayarlanır ve `EditItem` çağrılır. `SaveItem` Yöntemi, Kaydet `<button>` öğesi seçilerek tetiklenir. Örnek uygulamaya bkz. örnek uygulama.
+  Aşağıdaki kodda, `editItem` `Name` ve `IsCompleted` değerleri bileşenin bağlantılı öğelerine göre sağlanır. `Id` Öğe, Kullanıcı arabiriminin başka bir bölümünde seçildiğinde ayarlanır ve `EditItem` çağrılır. `SaveItem` Yöntemi, Kaydet `<button>` öğesi seçilerek tetiklenir. Örnek uygulamaya bkz. örnek uygulama.
 
   ```razor
   @using System.Net.Http
   @inject HttpClient Http
 
-  <input type="checkbox" @bind="_editItem.IsComplete" />
-  <input @bind="_editItem.Name" />
+  <input type="checkbox" @bind="editItem.IsComplete" />
+  <input @bind="editItem.Name" />
   <button @onclick="@SaveItem">Save</button>
 
   @code {
-      private TodoItem _editItem = new TodoItem();
+      private TodoItem editItem = new TodoItem();
 
       private void EditItem(long id)
       {
-          var editItem = _todoItems.Single(i => i.Id == id);
-          _editItem = new TodoItem { Id = editItem.Id, Name = editItem.Name, 
+          var editItem = todoItems.Single(i => i.Id == id);
+          editItem = new TodoItem { Id = editItem.Id, Name = editItem.Name, 
               IsComplete = editItem.IsComplete };
       }
 
       private async Task SaveItem() =>
-          await Http.PutAsJsonAsync($"api/TodoItems/{_editItem.Id}, _editItem);
+          await Http.PutAsJsonAsync($"api/TodoItems/{editItem.Id}, editItem);
   }
   ```
   
@@ -170,16 +170,46 @@ Aşağıdaki kodda, Delete `<button>` öğesi `DeleteItem` yöntemini çağırı
 @using System.Net.Http
 @inject HttpClient Http
 
-<input @bind="_id" />
+<input @bind="id" />
 <button @onclick="@DeleteItem">Delete</button>
 
 @code {
-    private long _id;
+    private long id;
 
     private async Task DeleteItem() =>
-        await Http.DeleteAsync($"api/TodoItems/{_id}");
+        await Http.DeleteAsync($"api/TodoItems/{id}");
 }
 ```
+
+## <a name="handle-errors"></a>Hataları işleme
+
+Bir Web API 'SI ile etkileşirken hatalar oluştuğunda, geliştirici kodu tarafından işlenebilir. Örneğin, `GetFromJsonAsync` Ile `Content-Type` sunucu API 'sinden bir JSON yanıtı bekler. `application/json` Yanıt JSON biçiminde değilse, içerik doğrulaması bir <xref:System.NotSupportedException>oluşturur.
+
+Aşağıdaki örnekte, hava durumu tahmin verileri isteği için URI uç noktası yanlış yazılmıştır. URI 'nin olması gerekir `WeatherForecast` ancak çağrıda `WeatherForcast` (eksik "e") görünmesi gerekir.
+
+`GetFromJsonAsync` Çağrı JSON 'ın döndürülmesini bekler, ancak sunucu, ' a `Content-Type` sahip sunucudaki işlenmeyen BIR özel durum için HTML döndürür `text/html`. Yol bulunamadığı ve ara yazılım, istek için bir sayfa veya görünüm hizmeti veremediği için sunucuda işlenmeyen özel durum oluşur.
+
+`OnInitializedAsync` İstemcisinde, <xref:System.NotSupportedException> yanıt içeriği JSON olmayan olarak doğrulandığında oluşturulur. Özel mantık hatayı günlüğe kaydetmek veya `catch` kullanıcıya kolay bir hata iletisi sunmak üzere bloğunda özel durum yakalanır:
+
+```csharp
+protected override async Task OnInitializedAsync()
+{
+    try
+    {
+        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>(
+            "WeatherForcast");
+    }
+    catch (NotSupportedException exception)
+    {
+        ...
+    }
+}
+```
+
+> [!NOTE]
+> Yukarıdaki örnek tanıtım amaçlıdır. Bir Web API sunucu uygulaması, bir uç nokta mevcut olmadığında veya sunucu üzerinde işlenmeyen bir durum oluştuğunda bile JSON döndürecek şekilde yapılandırılabilir.
+
+Daha fazla bilgi için bkz. <xref:blazor/handle-errors>.
 
 ## <a name="cross-origin-resource-sharing-cors"></a>Çıkış noktaları arası kaynak paylaşımı (CORS)
 

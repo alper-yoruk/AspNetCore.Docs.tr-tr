@@ -49,7 +49,7 @@ Kullanılabilir senaryolar şunlardır:
 
 Yaklaşan sürümlerde hata ayıklama deneyimini iyileştirmeye devam edeceğiz.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 Hata ayıklama aşağıdaki tarayıcılardan birini gerektirir:
 

@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/docker/visual-studio-tools-for-docker
-ms.openlocfilehash: b73903eae2b289fd410599748c1f48bdb4601543
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 8b62e27033bf0b7c05a70050807970fe0c74e2f8
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776135"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967577"
 ---
 # <a name="visual-studio-container-tools-with-aspnet-core"></a>ASP.NET Core ile Visual Studio kapsayıcı araçları
 
@@ -25,7 +25,7 @@ Visual Studio 2017 ve üzeri sürümleri, .NET Core 'u hedefleyen ASP.NET Core K
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/docker/visual-studio-tools-for-docker/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [Docker for Windows](https://docs.docker.com/docker-for-windows/install/)
 * **.NET Core platformlar arası geliştirme** iş yüküyle [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
@@ -90,7 +90,11 @@ Yukarıdaki *Dockerfile* , [Microsoft/aspnetcore](https://hub.docker.com/r/micro
 
 Visual Studio 2017, tek kapsayıcı düzenleme çözümü olarak [Docker Compose](https://docs.docker.com/compose/overview/) 15,7 veya önceki bir sürümü destekler. Docker Compose yapıtlar,**Docker desteği** **Ekle** > aracılığıyla eklenir.
 
-Visual Studio 2017 sürümleri 15,8 veya üzeri bir düzenleme çözümünü yalnızca sorulduğunda ekleyin. **Çözüm Gezgini** ' de projeye sağ tıklayın ve**kapsayıcı Orchestrator desteği** **Ekle** > ' yi seçin. İki farklı seçenek sunulur: [Docker Compose](#docker-compose) ve [Service Fabric](#service-fabric).
+Visual Studio 2017 sürümleri 15,8 veya üzeri bir düzenleme çözümünü yalnızca sorulduğunda ekleyin. **Çözüm Gezgini** ' de projeye sağ tıklayın ve**kapsayıcı Orchestrator desteği** **Ekle** > ' yi seçin. Aşağıdaki seçenekler kullanılabilir: 
+
+* [Docker Compose](#docker-compose)
+* [Service Fabric](#service-fabric)
+* [Kubernetes/Held](https://helm.sh/)
 
 ### <a name="docker-compose"></a>Docker Compose
 

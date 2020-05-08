@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components
-ms.openlocfilehash: f8b1ffef1b8375337f66c93d9b4652ad3c5dd616
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 9e36a3239e703e1279feafc65288a1f9ec82c277
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767753"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967187"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core Razor bileşenleri oluşturma ve kullanma
 
@@ -40,15 +40,15 @@ Bileşen sınıfının üyeleri bir `@code` blokta tanımlanır. `@code` Bloğun
 
 Bileşen üyeleri, ile `@`başlayan C# ifadeleri kullanılarak bileşenin işleme mantığının bir parçası olarak kullanılabilir. Örneğin, bir C# alanı alan adının önüne eklenerek `@` işlenir. Aşağıdaki örnek değerlendirilir ve işler:
 
-* `_headingFontStyle`için CSS özellik değerine `font-style`.
-* `_headingText``<h1>` öğenin içeriğine.
+* `headingFontStyle`için CSS özellik değerine `font-style`.
+* `headingText``<h1>` öğenin içeriğine.
 
 ```razor
-<h1 style="font-style:@_headingFontStyle">@_headingText</h1>
+<h1 style="font-style:@headingFontStyle">@headingText</h1>
 
 @code {
-    private string _headingFontStyle = "italic";
-    private string _headingText = "Put on your new Blazor!";
+    private string headingFontStyle = "italic";
+    private string headingText = "Put on your new Blazor!";
 }
 ```
 
@@ -291,22 +291,22 @@ Bileşen başvuruları, bir bileşen örneğine başvurmak için bir yol sağlar
 * Alt bileşenle aynı türde bir alan tanımlayın.
 
 ```razor
-<MyLoginDialog @ref="_loginDialog" ... />
+<MyLoginDialog @ref="loginDialog" ... />
 
 @code {
-    private MyLoginDialog _loginDialog;
+    private MyLoginDialog loginDialog;
 
     private void OnSomething()
     {
-        _loginDialog.Show();
+        loginDialog.Show();
     }
 }
 ```
 
-Bileşen işlendiğinde, `_loginDialog` alan `MyLoginDialog` alt bileşen örneğiyle doldurulur. Daha sonra bileşen örneğinde .NET yöntemlerini çağırabilirsiniz.
+Bileşen işlendiğinde, `loginDialog` alan `MyLoginDialog` alt bileşen örneğiyle doldurulur. Daha sonra bileşen örneğinde .NET yöntemlerini çağırabilirsiniz.
 
 > [!IMPORTANT]
-> `_loginDialog` Değişken yalnızca bileşen işlendikten sonra ve çıktısı `MyLoginDialog` öğesi içerdiğinde doldurulur. Bu noktaya kadar başvurulmasına hiçbir şey yok. Bileşen işlemesini tamamladıktan sonra bileşen başvurularını işlemek için [Onafterrenderasync veya OnAfterRender yöntemlerini](xref:blazor/lifecycle#after-component-render)kullanın.
+> `loginDialog` Değişken yalnızca bileşen işlendikten sonra ve çıktısı `MyLoginDialog` öğesi içerdiğinde doldurulur. Bu noktaya kadar başvurulmasına hiçbir şey yok. Bileşen işlemesini tamamladıktan sonra bileşen başvurularını işlemek için [Onafterrenderasync veya OnAfterRender yöntemlerini](xref:blazor/lifecycle#after-component-render)kullanın.
 
 Bir döngüdeki bileşenlere başvurmak için bkz. [birden çok benzer alt bileşene başvuruları yakalama (DotNet/aspnetcore #13358)](https://github.com/dotnet/aspnetcore/issues/13358).
 
@@ -358,10 +358,10 @@ Bir bileşeni `NotifierService` güncelleştirmek için kullanın:
 @inject NotifierService Notifier
 @implements IDisposable
 
-<p>Last update: @_lastNotification.key = @_lastNotification.value</p>
+<p>Last update: @lastNotification.key = @lastNotification.value</p>
 
 @code {
-    private (string key, int value) _lastNotification;
+    private (string key, int value) lastNotification;
 
     protected override void OnInitialized()
     {
@@ -372,7 +372,7 @@ Bir bileşeni `NotifierService` güncelleştirmek için kullanın:
     {
         await InvokeAsync(() =>
         {
-            _lastNotification = (key, value);
+            lastNotification = (key, value);
             StateHasChanged();
         });
     }
@@ -519,14 +519,14 @@ Başlangıçta, `Expander` bileşenleri `Expanded` özellikleri bir kez değişt
 Aşağıdaki `Expander` bileşen:
 
 * Üst öğeden `Expanded` bileşen parametre değerini kabul eder.
-* [OnInitialized olaydaki](xref:blazor/lifecycle#component-initialization-methods)bir *özel alana* (`_expanded`) bileşen parametre değerini atar.
+* [OnInitialized olaydaki](xref:blazor/lifecycle#component-initialization-methods)bir *özel alana* (`expanded`) bileşen parametre değerini atar.
 * İç geçiş durumunu korumak için özel alanını kullanır.
 
 ```razor
 <div @onclick="@Toggle">
-    Toggle (Expanded = @_expanded)
+    Toggle (Expanded = @expanded)
 
-    @if (_expanded)
+    @if (expanded)
     {
         @ChildContent
     }
@@ -539,16 +539,16 @@ Aşağıdaki `Expander` bileşen:
     [Parameter]
     public RenderFragment ChildContent { get; set; }
 
-    private bool _expanded;
+    private bool expanded;
 
     protected override void OnInitialized()
     {
-        _expanded = Expanded;
+        expanded = Expanded;
     }
 
     private void Toggle()
     {
-        _expanded = !_expanded;
+        expanded = !expanded;
     }
 }
 ```
@@ -569,16 +569,16 @@ Aşağıdaki örnek, bir `Counter` `@code` Blazor şablondan oluşturulan uygula
 
 <h1>Counter</h1>
 
-<p>Current count: @_currentCount</p>
+<p>Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 
 @code {
-    private int _currentCount = 0;
+    private int currentCount = 0;
 
     void IncrementCount()
     {
-        _currentCount++;
+        currentCount++;
     }
 }
 ```
@@ -592,7 +592,7 @@ Aşağıdaki örnek, bir `Counter` `@code` Blazor şablondan oluşturulan uygula
 
 <h1>Counter</h1>
 
-<p>Current count: @_currentCount</p>
+<p>Current count: @currentCount</p>
 
 <button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
 ```
@@ -604,11 +604,11 @@ namespace BlazorApp.Pages
 {
     public partial class Counter
     {
-        private int _currentCount = 0;
+        private int currentCount = 0;
 
         void IncrementCount()
         {
-            _currentCount++;
+            currentCount++;
         }
     }
 }
@@ -741,10 +741,10 @@ Dizeler normalde DOM metin düğümleri kullanılarak işlenir. Bu, içerdikleri
 Aşağıdaki örnek, bir bileşenin işlenmiş `MarkupString` ÇıKTıSıNA statik HTML içeriği bloğunu eklemek için türünün kullanımını gösterir:
 
 ```html
-@((MarkupString)_myMarkup)
+@((MarkupString)myMarkup)
 
 @code {
-    private string _myMarkup = 
+    private string myMarkup = 
         "<p class='markup'>This is a <em>markup string</em>.</p>";
 }
 ```
@@ -782,7 +782,7 @@ Bir üst bileşen basamaklı değer bileşeni kullanılarak basamaklı bir değe
             <NavMenu />
         </div>
         <div class="col-sm-9">
-            <CascadingValue Value="_theme">
+            <CascadingValue Value="theme">
                 <div class="content px-4">
                     @Body
                 </div>
@@ -792,7 +792,7 @@ Bir üst bileşen basamaklı değer bileşeni kullanılarak basamaklı bir değe
 </div>
 
 @code {
-    private ThemeInfo _theme = new ThemeInfo { ButtonClass = "btn-success" };
+    private ThemeInfo theme = new ThemeInfo { ButtonClass = "btn-success" };
 }
 ```
 
@@ -809,7 +809,7 @@ Basamaklı değerlerin kullanılması için, bileşenler `[CascadingParameter]` 
 
 <h1>Cascading Values & Parameters</h1>
 
-<p>Current count: @_currentCount</p>
+<p>Current count: @currentCount</p>
 
 <p>
     <button class="btn" @onclick="IncrementCount">
@@ -824,14 +824,14 @@ Basamaklı değerlerin kullanılması için, bileşenler `[CascadingParameter]` 
 </p>
 
 @code {
-    private int _currentCount = 0;
+    private int currentCount = 0;
 
     [CascadingParameter]
     protected ThemeInfo ThemeInfo { get; set; }
 
     private void IncrementCount()
     {
-        _currentCount++;
+        currentCount++;
     }
 }
 ```
@@ -839,14 +839,14 @@ Basamaklı değerlerin kullanılması için, bileşenler `[CascadingParameter]` 
 Aynı alt ağaç içindeki aynı türdeki birden çok değeri basamakla, her `Name` `CascadingValue` bileşene ve karşılık gelen `CascadingParameter`öğesine benzersiz bir dize sağlayın. Aşağıdaki örnekte, iki `CascadingValue` bileşen adına `MyCascadingType` göre farklı örneklerini basamakla:
 
 ```razor
-<CascadingValue Value=@_parentCascadeParameter1 Name="CascadeParam1">
+<CascadingValue Value=@parentCascadeParameter1 Name="CascadeParam1">
     <CascadingValue Value=@ParentCascadeParameter2 Name="CascadeParam2">
         ...
     </CascadingValue>
 </CascadingValue>
 
 @code {
-    private MyCascadingType _parentCascadeParameter1;
+    private MyCascadingType parentCascadeParameter1;
 
     [Parameter]
     public MyCascadingType ParentCascadeParameter2 { get; set; }
@@ -926,13 +926,13 @@ Alt `Tab` bileşenler, kapsayan `TabSet` ' i basamaklı bir parametre olarak yak
 Aşağıdaki örnek, bir bileşeni doğrudan bir `RenderFragment` bileşende `RenderFragment<T>` nasıl belirtdiğini ve işleneceğini gösterir. Oluşturma parçaları, [şablonlu bileşenlere](xref:blazor/templated-components)bağımsız değişken olarak da geçirilebilir.
 
 ```razor
-@_timeTemplate
+@timeTemplate
 
-@_petTemplate(new Pet { Name = "Rex" })
+@petTemplate(new Pet { Name = "Rex" })
 
 @code {
-    private RenderFragment _timeTemplate = @<p>The time is @DateTime.Now.</p>;
-    private RenderFragment<Pet> _petTemplate = (pet) => @<p>Pet: @pet.Name</p>;
+    private RenderFragment timeTemplate = @<p>The time is @DateTime.Now.</p>;
+    private RenderFragment<Pet> petTemplate = (pet) => @<p>Pet: @pet.Name</p>;
 
     private class Pet
     {

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/event-handling
-ms.openlocfilehash: a9b0d0efd4afd4941bd4d93f33adecdf3288992f
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: aa338bbe61eec14bc1e1b3606e11e26bfb0e6a09
+ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767076"
+ms.lasthandoff: 05/08/2020
+ms.locfileid: "82967473"
 ---
 # <a name="aspnet-core-blazor-event-handling"></a>ASP.NET Core Blazor olay işleme
 
@@ -108,7 +108,7 @@ Daha fazla bilgi için aşağıdaki kaynaklara bakın:
 Genellikle, bir dizi öğe üzerinde yineleme yaparken olduğu gibi ek değerlerin üzerinde kapatılabilir. Aşağıdaki örnek, her biri `UpdateHeading` Kullanıcı arabiriminde seçildiğinde bir olay bağımsız değişkeni (`MouseEventArgs`) ve düğme numarası (`buttonNumber`) geçiren üç düğme oluşturur:
 
 ```razor
-<h2>@_message</h2>
+<h2>@message</h2>
 
 @for (var i = 1; i < 4; i++)
 {
@@ -121,11 +121,11 @@ Genellikle, bir dizi öğe üzerinde yineleme yaparken olduğu gibi ek değerler
 }
 
 @code {
-    private string _message = "Select a button to learn its position.";
+    private string message = "Select a button to learn its position.";
 
     private void UpdateHeading(MouseEventArgs e, int buttonNumber)
     {
-        _message = $"You selected Button #{buttonNumber} at " +
+        message = $"You selected Button #{buttonNumber} at " +
             $"mouse position: {e.ClientX} X {e.ClientY}.";
     }
 }
@@ -157,28 +157,28 @@ Genellikle, bir dizi öğe üzerinde yineleme yaparken olduğu gibi ek değerler
     by the parent component.
 </ChildComponent>
 
-<p><b>@_messageText</b></p>
+<p><b>@messageText</b></p>
 
 @code {
-    private string _messageText;
+    private string messageText;
 
     private void ShowMessage(MouseEventArgs e)
     {
-        _messageText = $"Blaze a new trail with Blazor! ({e.ScreenX}, {e.ScreenY})";
+        messageText = $"Blaze a new trail with Blazor! ({e.ScreenX}, {e.ScreenY})";
     }
 }
 ```
 
 Düğme ' de seçildiğinde `ChildComponent`:
 
-* `ParentComponent`Öğesinin `ShowMessage` yöntemi çağrılır. `_messageText`güncelleştirilir ve içinde görüntülenir `ParentComponent`.
+* `ParentComponent`Öğesinin `ShowMessage` yöntemi çağrılır. `messageText`güncelleştirilir ve içinde görüntülenir `ParentComponent`.
 * Geri çağırma yönteminde (`ShowMessage`) [statehaschanged](xref:blazor/lifecycle#state-changes) çağrısı gerekli değildir. `StateHasChanged`alt olaylar, alt öğe içinde yürütülen `ParentComponent`olay işleyicilerinde bileşen rerendering tetiklenmesi için otomatik olarak çağrılır.
 
 `EventCallback`ve `EventCallback<T>` zaman uyumsuz temsilcilere izin verir. `EventCallback<T>`kesin bir şekilde türdedir ve belirli bir bağımsız değişken türü gerektirir. `EventCallback`zayıf ve bağımsız değişken türüne izin veriyor.
 
 ```razor
 <ChildComponent 
-    OnClickCallback="@(async () => { await Task.Yield(); _messageText = "Blaze It!"; })" />
+    OnClickCallback="@(async () => { await Task.Yield(); messageText = "Blaze It!"; })" />
 ```
 
 Bir `EventCallback` veya `EventCallback<T>` ile `InvokeAsync` çağırın ve şunu bekler <xref:System.Threading.Tasks.Task>:
@@ -198,16 +198,16 @@ Bir olayın [`@on{EVENT}:preventDefault`](xref:mvc/views/razor#oneventpreventdef
 Giriş cihazında bir anahtar seçildiğinde ve öğe odağı bir metin kutusunda olduğunda, bir tarayıcı normalde metin kutusunda anahtarın karakterini görüntüler. Aşağıdaki örnekte, `@onkeypress:preventDefault` Directive özniteliği belirtilerek varsayılan davranış engellenir. Sayaç artar ve **+** anahtar `<input>` öğenin değerine yakalanmaz:
 
 ```razor
-<input value="@_count" @onkeypress="KeyHandler" @onkeypress:preventDefault />
+<input value="@count" @onkeypress="KeyHandler" @onkeypress:preventDefault />
 
 @code {
-    private int _count = 0;
+    private int count = 0;
 
     private void KeyHandler(KeyboardEventArgs e)
     {
         if (e.Key == "+")
         {
-            _count++;
+            count++;
         }
     }
 }
@@ -215,10 +215,10 @@ Giriş cihazında bir anahtar seçildiğinde ve öğe odağı bir metin kutusund
 
 `@on{EVENT}:preventDefault` Özniteliği bir değer olmadan belirtmek ile `@on{EVENT}:preventDefault="true"`eşdeğerdir.
 
-Özniteliğin değeri de bir ifade olabilir. `_shouldPreventDefault` Aşağıdaki örnekte, `bool` ya `true` `false`da olarak ayarlanan bir alandır:
+Özniteliğin değeri de bir ifade olabilir. `shouldPreventDefault` Aşağıdaki örnekte, `bool` ya `true` `false`da olarak ayarlanan bir alandır:
 
 ```razor
-<input @onkeypress:preventDefault="_shouldPreventDefault" />
+<input @onkeypress:preventDefault="shouldPreventDefault" />
 ```
 
 Varsayılan eylemi engellemek için bir olay işleyicisi gerekli değildir. Olay işleyicisi ve varsayılan eylem senaryolarına bağımsız olarak bir şekilde kullanılabilir.
@@ -231,7 +231,7 @@ Aşağıdaki örnekte, onay kutusunun seçilmesi ikinci alt `<div>` öğeden üs
 
 ```razor
 <label>
-    <input @bind="_stopPropagation" type="checkbox" />
+    <input @bind="stopPropagation" type="checkbox" />
     Stop Propagation
 </label>
 
@@ -242,13 +242,13 @@ Aşağıdaki örnekte, onay kutusunun seçilmesi ikinci alt `<div>` öğeden üs
         Child div that doesn't stop propagation when selected.
     </div>
 
-    <div @onclick="OnSelectChildDiv" @onclick:stopPropagation="_stopPropagation">
+    <div @onclick="OnSelectChildDiv" @onclick:stopPropagation="stopPropagation">
         Child div that stops propagation when selected.
     </div>
 </div>
 
 @code {
-    private bool _stopPropagation = false;
+    private bool stopPropagation = false;
 
     private void OnSelectParentDiv() => 
         Console.WriteLine($"The parent div was selected. {DateTime.Now}");
