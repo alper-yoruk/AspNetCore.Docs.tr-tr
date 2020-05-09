@@ -5,7 +5,7 @@ description: ASP.NET Core Blazor uygulamalarda bileşen yaşam Razor döngüsü 
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/16/2020
+ms.date: 05/07/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/lifecycle
-ms.openlocfilehash: 571f14247efe08ac6abbd6d1e2720656f94c213c
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
+ms.openlocfilehash: 81699158a161d0e9c9621235840979ebcd634a7e
+ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
 ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967460"
+ms.locfileid: "82976707"
 ---
 # <a name="aspnet-core-blazor-lifecycle"></a>ASP.NET Core Blazor yaşam döngüsü
 
@@ -277,3 +277,73 @@ Hakkında `RenderMode`daha fazla bilgi için bkz <xref:blazor/hosting-model-conf
 ## <a name="detect-when-the-app-is-prerendering"></a>Uygulamanın ne zaman prerendering olduğunu Algıla
 
 [!INCLUDE[](~/includes/blazor-prerendering.md)]
+
+## <a name="cancelable-background-work"></a>İptal edilebilen arka plan çalışması
+
+Bileşenler genellikle ağ çağrıları yapma (<xref:System.Net.Http.HttpClient>) ve veritabanlarıyla etkileşim kurma gibi uzun süre çalışan arka plan işleri gerçekleştirir. Çeşitli durumlarda sistem kaynaklarını korumak için arka plan işinin durdurulması istenebilir. Örneğin, bir Kullanıcı bir bileşenden uzaklaştığında arka planda zaman uyumsuz işlemler otomatik olarak durdurulur.
+
+Arka plan iş öğelerinin iptal etme gerektirmesinin diğer nedenleri şunlardır:
+
+* Hatalı giriş verileriyle veya işleme parametreleriyle çalışan bir arka plan görevi başlatıldı.
+* Çalışan arka plan iş öğelerinin geçerli kümesi, yeni bir iş öğesi kümesiyle değiştirilmelidir.
+* Yürütülmekte olan görevlerin önceliği değiştirilmelidir.
+* Uygulamanın sunucuya yeniden dağıtılması için kapatılması gerekebilir.
+* Sunucu kaynakları sınırlı hale gelir, tasarımda iş öğelerinin yeniden çizelgeleşmesine sahiptir.
+
+Bir bileşene iptal edilebilen bir arka plan çalışma deseninin uygulanması için:
+
+* <xref:System.Threading.CancellationTokenSource> Ve <xref:System.Threading.CancellationToken>kullanın.
+* [Bileşenin elden çıkarılmasında](#component-disposal-with-idisposable) ve herhangi bir noktada iptal işlemi, belirteci el ile iptal ederek istenir [CancellationTokenSource.Cancel](xref:System.Threading.CancellationTokenSource.Cancel%2A)
+* Zaman uyumsuz çağrı geri döndüğünde, belirteci <xref:System.Threading.CancellationToken.ThrowIfCancellationRequested%2A> çağırın.
+
+Aşağıdaki örnekte:
+
+* `await Task.Delay(5000, cts.Token);`uzun süreli zaman uyumsuz arka plan çalışmasını temsil eder.
+* `BackgroundResourceMethod`yöntemi çağrılmadan önce atıldığı takdirde, `Resource` uzun süre çalışan bir arka plan yöntemini temsil eder.
+
+```razor
+@implements IDisposable
+@using System.Threading
+
+<button @onclick="LongRunningWork">Trigger long running work</button>
+
+@code {
+    private Resource resource = new Resource();
+    private CancellationTokenSource cts = new CancellationTokenSource();
+
+    protected async Task LongRunningWork()
+    {
+        await Task.Delay(5000, cts.Token);
+
+        cts.Token.ThrowIfCancellationRequested();
+        resource.BackgroundResourceMethod();
+    }
+
+    public void Dispose()
+    {
+        cts.Cancel();
+        cts.Dispose();
+        resource.Dispose();
+    }
+
+    private class Resource : IDisposable
+    {
+        private bool disposed;
+
+        public void BackgroundResourceMethod()
+        {
+            if (disposed)
+            {
+                throw new ObjectDisposedException(nameof(Resource));
+            }
+            
+            ...
+        }
+        
+        public void Dispose()
+        {
+            disposed = true;
+        }
+    }
+}
+```
