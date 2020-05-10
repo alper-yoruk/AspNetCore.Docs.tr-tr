@@ -1,94 +1,100 @@
 ---
-title: ASP.NET Core için jilet sözdizimi başvurusu
+title: ASP.NET Core için Razor söz dizimi başvurusu
 author: rick-anderson
-description: Sunucu tabanlı kodu web sayfalarına katıştırma için Razor biçimlendirme sözdizimi hakkında bilgi edinin.
+description: Sunucu tabanlı Razor kodu Web sayfalarına eklemek için biçimlendirme sözdizimi hakkında bilgi edinin.
 ms.author: riande
 ms.date: 02/12/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: dd5c73be56ed0dafb759df2f5ff2eac1a3b5b09e
-ms.sourcegitcommit: d03905aadf5ceac39fff17706481af7f6c130411
+ms.openlocfilehash: 3e77b25e2660688d0040d47840e47dab8f260197
+ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 03/29/2020
-ms.locfileid: "80381763"
+ms.lasthandoff: 05/09/2020
+ms.locfileid: "83003198"
 ---
-# <a name="razor-syntax-reference-for-aspnet-core"></a>ASP.NET Core için jilet sözdizimi başvurusu
+# <a name="razor-syntax-reference-for-aspnet-core"></a>ASP.NET Core için Razor söz dizimi başvurusu
 
-Yazar: [Rick Anderson](https://twitter.com/RickAndMSFT), [Taylor Mullen](https://twitter.com/ntaylormullen), ve Dan [Vicarel](https://github.com/Rabadash8820)
+By [Rick Anderson](https://twitter.com/RickAndMSFT), [Taylor Mullen](https://twitter.com/ntaylormullen)ve [dan vicarel](https://github.com/Rabadash8820)
 
-Razor, sunucu tabanlı kodu web sayfalarına katıştırma amaçlı bir biçimlendirme sözdizimidir. Razor sözdizimi Razor biçimlendirme, C#ve HTML'den oluşur. Razor içeren dosyaların genellikle *.cshtml* dosya uzantısı vardır. Jilet de [Razor bileşenleri](xref:blazor/components) dosyaları bulunur (*.razor*).
+Razor, Web sayfalarına sunucu tabanlı kod eklemeye yönelik bir biçimlendirme sözdizimidir. Razor söz dizimi Razor Markup, C# ve HTML 'den oluşur. Razor içeren dosyalar genellikle *. cshtml* dosya uzantısına sahiptir. Razor, [Razor bileşenleri](xref:blazor/components) dosyalarında (*. Razor*) de bulunur.
 
-## <a name="rendering-html"></a>HTML oluşturma
+## <a name="rendering-html"></a>HTML işleniyor
 
-Varsayılan Razor dili HTML’dir. Razor işaretlemesinden HTML işlemek, HTML dosyasından HTML işlemekten farklı değildir. *.cshtml* Razor dosyalarındaki HTML biçimlendirmesi sunucu tarafından değiştirilmeden işlenir.
+Varsayılan Razor dili HTML’dir. Razor işaretlemesinden HTML işlemek, HTML dosyasından HTML işlemekten farklı değildir. *. Cshtml* Razor dosyalarındaki HTML işaretlemesi sunucu tarafından değiştirilmeden işlenir.
 
 ## <a name="razor-syntax"></a>Razor söz dizimi
 
-Razor C# destekler `@` ve HTML'den C#'a geçiş için sembolü kullanır. Razor C# ifadelerini değerlendirir ve HTML çıkışında işler.
+Razor, `@` c# ' i destekler ve HTML 'den c# ' ye geçiş yapmak için sembolünü kullanır. Razor, C# ifadelerini değerlendirir ve bunları HTML çıktısında oluşturur.
 
-Bir `@` [sembol, Jilet ayrılmış](#razor-reserved-keywords)bir anahtar kelime tarafından takip edildiğinde, Razor'a özgü biçimlendirmeye dönüşür. Aksi takdirde, düz C# dönüşür.
+Bir `@` sembol sonrasında [Razor ayrılmış anahtar sözcüğü](#razor-reserved-keywords)olduğunda, bu, Razor 'e özgü işaretlere geçer. Aksi halde, düz C# ' ye geçiş yapar.
 
-Razor biçimlendirmesindeki bir `@` sembolden `@` kaçmak için ikinci bir sembol kullanın:
+Razor biçimlendirmesinde bir `@` sembolün çıkmak için ikinci `@` bir sembol kullanın:
 
 ```cshtml
 <p>@@Username</p>
 ```
 
-Kod HTML'de tek `@` bir sembolle işlenir:
+Kod, HTML 'de tek `@` bir sembol ile işlenir:
 
 ```html
 <p>@Username</p>
 ```
 
-HTML öznitelikleri ve e-posta adresleri `@` içeren içerik, simgeyi bir geçiş karakteri olarak ele almaz. Aşağıdaki örnekteki e-posta adreslerine Razor ayrıştma tarafından dokunulmaz:
+HTML öznitelikleri ve e-posta adreslerini içeren içerik `@` sembol bir geçiş karakteri olarak kabul değildir. Aşağıdaki örnekteki e-posta adresleri Razor ayrıştırma tarafından dokunmaz:
 
 ```cshtml
 <a href="mailto:Support@contoso.com">Support@contoso.com</a>
 ```
 
-## <a name="implicit-razor-expressions"></a>Örtük Jilet ifadeleri
+## <a name="implicit-razor-expressions"></a>Örtük Razor ifadeleri
 
-Örtük Jilet `@` ifadeleri C# kodu ile başlar:
+Örtük Razor ifadeleri, sonrasında `@` C# kodu ile başlar:
 
 ```cshtml
 <p>@DateTime.Now</p>
 <p>@DateTime.IsLeapYear(2016)</p>
 ```
 
-C# `await` anahtar sözcüğü dışında, örtük ifadeler boşluk içermemelidir. C# deyiminin net bir sonu varsa, boşluklar iç içe olabilir:
+C# `await` anahtar sözcüğünün dışında, örtük ifadeler boşluk içermemelidir. C# ifadesinde Temizleme işlemi varsa, boşluklar ıntermingled olabilir:
 
 ```cshtml
 <p>@await DoSomething("hello", "world")</p>
 ```
 
-Köşeli ayraçiçindeki karakterler (`<>`) HTML etiketi olarak yorumlandırılamadığı ndan, örtük ifadeler C# jenerikleri **içeremez.** Aşağıdaki kod geçerli **değildir:**
+Parantez (`<>`) içindeki karakterler bir HTML etiketi olarak yorumlandığından **örtük ifadeler C# generics içeremez.** Aşağıdaki kod geçerli **değil** :
 
 ```cshtml
 <p>@GenericMethod<int>()</p>
 ```
 
-Önceki kod aşağıdakilerden birine benzer bir derleyici hatası oluşturur:
+Yukarıdaki kod, aşağıdakilerden birine benzer bir derleyici hatası oluşturur:
 
-* "Int" öğesi kapalı değildi. Tüm öğeler kendi kendine kapanıyor olmalı veya eşleşen bir uç etiketine sahip olmalıdır.
-* Yöntem grubu 'GenericMethod' 'object' olmayan temsilci türüne dönüştüremez. Bu yöntemi uygulamak niyetinde miydiniz?'
+* "İnt" öğesi kapatılmamış. Tüm öğeler kendi kendini kapatıyor ya da eşleşen bir bitiş etiketine sahip olmalıdır.
+* ' GenericMethod ' Yöntem grubu temsilci olmayan ' Object ' türüne dönüştürülemiyor. Yöntemi çağırmak mı istiyordunuz? "
 
-Genel yöntem çağrıları açık bir [Razor ifadesine](#explicit-razor-expressions) veya [Razor kod bloğuna](#razor-code-blocks)sarılmalıdır.
+Genel metot çağrılarının [açık bir Razor ifadesinde](#explicit-razor-expressions) veya [Razor kodu bloğunda](#razor-code-blocks)sarmalanması gerekir.
 
-## <a name="explicit-razor-expressions"></a>Açık Jilet ifadeleri
+## <a name="explicit-razor-expressions"></a>Açık Razor ifadeleri
 
-Açık Razor ifadeler dengeli `@` parantez içeren bir sembolden oluşur. Geçen haftanın saatini işlemek için aşağıdaki Razor biçimlendirmesi kullanılır:
+Açık Razor ifadeleri, dengeli parantez `@` içeren bir sembolden oluşur. Son haftanın saatini işlemek için aşağıdaki Razor işaretlemesi kullanılır:
 
 ```cshtml
 <p>Last week this time: @(DateTime.Now - TimeSpan.FromDays(7))</p>
 ```
 
-Parantez içindeki `@()` tüm içerik değerlendirilir ve çıktıya işlenir.
+`@()` Parantez içindeki içerikler değerlendirilir ve çıkışa işlenir.
 
-Önceki bölümde açıklanan örtük ifadeler genellikle boşluk içeremez. Aşağıdaki kodda, bir hafta geçerli zamandan çıkarılmıyor:
+Önceki bölümde açıklanan örtük ifadeler, genellikle boşluk içeremez. Aşağıdaki kodda, bir hafta geçerli saatten çıkarılır:
 
 [!code-cshtml[](razor/sample/Views/Home/Contact.cshtml?range=17)]
 
-Kod aşağıdaki HTML'yi işler:
+Kod, aşağıdaki HTML 'yi işler:
 
 ```html
 <p>Last week: 7/7/2016 4:39:52 PM - TimeSpan.FromDays(7)</p>
@@ -104,52 +110,52 @@ Açık ifadeler, metni bir ifade sonucuyla birleştirmek için kullanılabilir:
 <p>Age@(joe.Age)</p>
 ```
 
-Açık ifade olmadan, `<p>Age@joe.Age</p>` bir e-posta `<p>Age@joe.Age</p>` adresi olarak kabul edilir ve işlenir. Açık bir ifade olarak `<p>Age33</p>` yazıldığında, işlenir.
+Açık ifade `<p>Age@joe.Age</p>` olmadan bir e-posta adresi olarak kabul edilir ve `<p>Age@joe.Age</p>` işlenir. Açık bir ifade `<p>Age33</p>` olarak yazıldığında işlenir.
 
-Açık ifadeler *.cshtml* dosyalarındaki genel yöntemlerden çıktı işlemek için kullanılabilir. Aşağıdaki biçimlendirme, c# genel in parantezinin neden olduğu daha önce gösterilen hatanın nasıl düzeltilebildiğini gösterir. Kod açık bir ifade olarak yazılır:
+Açık ifadeler, *. cshtml* dosyalarındaki genel metotlardan çıkış oluşturmak için kullanılabilir. Aşağıdaki biçimlendirme, C# genel parantezinin neden olduğu daha önce gösterilen hatayı nasıl düzeltebileceğiniz gösterilmektedir. Kod açık bir ifade olarak yazılır:
 
 ```cshtml
 <p>@(GenericMethod<int>())</p>
 ```
 
-## <a name="expression-encoding"></a>İfade kodlama
+## <a name="expression-encoding"></a>İfade kodlaması
 
-Bir dize yi değerlendiren C# ifadeleri HTML kodlanır. Değerlendirmek için `IHtmlContent` değerlendiren C# ifadeleri doğrudan `IHtmlContent.WriteTo`. Değerlendirmeyen `IHtmlContent` C# ifadeleri, işlenmeden önce bir `ToString` dize dönüştürülür ve kodlanır.
+Dizeyi değerlendiren C# ifadeleri HTML kodlandı. Sonucunu `IHtmlContent` veren C# ifadeleri doğrudan aracılığıyla `IHtmlContent.WriteTo`işlenir. Değerlendirilmeyen C# ifadeleri `IHtmlContent` , işlenmeden önce bir dizeye dönüştürülür `ToString` ve kodlanabilir.
 
 ```cshtml
 @("<span>Hello World</span>")
 ```
 
-Kod aşağıdaki HTML'yi işler:
+Kod, aşağıdaki HTML 'yi işler:
 
 ```html
 &lt;span&gt;Hello World&lt;/span&gt;
 ```
 
-HTML tarayıcıda aşağıdaki gibi gösterilir:
+HTML tarayıcıda şu şekilde gösterilir:
 
 ```html
 <span>Hello World</span>
 ```
 
-`HtmlHelper.Raw`çıktı kodlanmış değil, HTML biçimlendirmesi olarak işlenir.
+`HtmlHelper.Raw`çıktı kodlanmamış, ancak HTML işaretlemesi olarak işlendi.
 
 > [!WARNING]
-> Sanitize edilmemiş kullanıcı girişi `HtmlHelper.Raw` kullanmak bir güvenlik riskidir. Kullanıcı girişi kötü amaçlı JavaScript veya diğer açıkları içerebilir. Kullanıcı girişini dezenfekte etmek zordur. Kullanıcı `HtmlHelper.Raw` girişi ile kullanmaktan kaçının.
+> Ayıklanmış `HtmlHelper.Raw` Kullanıcı girişinde kullanmak bir güvenlik riskidir. Kullanıcı girişi kötü amaçlı JavaScript veya diğer kötüye kullanım içerebilir. Kullanıcı girişinin Temizleme işlemi zordur. `HtmlHelper.Raw` Kullanıcı girişiyle kullanmaktan kaçının.
 
 ```cshtml
 @Html.Raw("<span>Hello World</span>")
 ```
 
-Kod aşağıdaki HTML'yi işler:
+Kod, aşağıdaki HTML 'yi işler:
 
 ```html
 <span>Hello World</span>
 ```
 
-## <a name="razor-code-blocks"></a>Jilet kod blokları
+## <a name="razor-code-blocks"></a>Razor kod blokları
 
-Jilet kod `@` blokları ile başlar `{}`ve ile çevrilidir. İfadelerin aksine, kod bloklarının içindeki C# kodu işlenmez. Görünümdeki kod blokları ve ifadeler aynı kapsamı paylaşır ve sırayla tanımlanır:
+Razor kod blokları ile `@` başlar ve tarafından `{}`alınmıştır. İfadelerin aksine, kod blokları içindeki C# kodu işlenmez. Bir görünümdeki kod blokları ve ifadeler aynı kapsamı paylaşır ve sırasıyla tanımlanmıştır:
 
 ```cshtml
 @{
@@ -165,7 +171,7 @@ Jilet kod `@` blokları ile başlar `{}`ve ile çevrilidir. İfadelerin aksine, 
 <p>@quote</p>
 ```
 
-Kod aşağıdaki HTML'yi işler:
+Kod, aşağıdaki HTML 'yi işler:
 
 ```html
 <p>The future depends on what you do today. - Mahatma Gandhi</p>
@@ -174,7 +180,7 @@ Kod aşağıdaki HTML'yi işler:
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Kod bloklarında, yerel [işlevleri](/dotnet/csharp/programming-guide/classes-and-structs/local-functions) biçimlendirme yöntemleri olarak hizmet etmek üzere biçimlendirmeile bildirin:
+Kod blokları ' nda, şablon oluşturma yöntemleri olarak kullanılacak biçimlendirme ile [yerel işlevler](/dotnet/csharp/programming-guide/classes-and-structs/local-functions) bildirin:
 
 ```cshtml
 @{
@@ -188,7 +194,7 @@ Kod bloklarında, yerel [işlevleri](/dotnet/csharp/programming-guide/classes-an
 }
 ```
 
-Kod aşağıdaki HTML'yi işler:
+Kod, aşağıdaki HTML 'yi işler:
 
 ```html
 <p>Name: <strong>Mahatma Gandhi</strong></p>
@@ -199,7 +205,7 @@ Kod aşağıdaki HTML'yi işler:
 
 ### <a name="implicit-transitions"></a>Örtük geçişler
 
-Kod bloğundaki varsayılan dil C#'dır, ancak Razor Page HTML'ye geri dönebilir:
+Bir kod bloğundaki varsayılan dil C# ' dir, ancak Razor sayfası HTML 'ye geri dönebilir:
 
 ```cshtml
 @{
@@ -210,7 +216,7 @@ Kod bloğundaki varsayılan dil C#'dır, ancak Razor Page HTML'ye geri dönebili
 
 ### <a name="explicit-delimited-transition"></a>Açık sınırlı geçiş
 
-HTML oluşturması gereken bir kod bloğunun alt bölümlerini tanımlamak için, `<text>` oluşturma için karakterleri Razor etiketiyle çevrelayın:
+HTML oluşturması gereken bir kod bloğunun alt bölümünü tanımlamak için, göstermek için karakterleri Razor `<text>` etiketiyle çevreleyin:
 
 ```cshtml
 @for (var i = 0; i < people.Length; i++)
@@ -220,16 +226,16 @@ HTML oluşturması gereken bir kod bloğunun alt bölümlerini tanımlamak için
 }
 ```
 
-Html etiketiyle çevrili olmayan HTML'yi işlemek için bu yaklaşımı kullanın. HTML veya Razor etiketi olmadan, Razor çalışma zamanı hatası oluşur.
+HTML etiketiyle çevrelenmiş HTML 'yi işlemek için bu yaklaşımı kullanın. HTML veya Razor etiketi olmadan Razor çalışma zamanı hatası oluşur.
 
-Etiket, `<text>` içeriği işlerken beyaz alanı denetlemek için yararlıdır:
+Etiket `<text>` , içerik işlerken boşluğu denetlemek için yararlıdır:
 
-* Yalnızca `<text>` etiket arasındaki içerik işlenir.
-* ETIKETten önce veya `<text>` sonra HTML çıkışında boşluk bulunmaz.
+* Yalnızca `<text>` etiketi arasındaki içerik işlenir.
+* HTML çıktısında `<text>` etiket görüntülenmeden önce veya sonra boşluk yok.
 
 ### <a name="explicit-line-transition"></a>Açık satır geçişi
 
-Bir kod bloğu içinde tüm satırın geri kalanını `@:` HTML olarak işlemek için sözdizimini kullanın:
+Tüm satırın geri kalanını bir kod bloğu içinde HTML olarak işlemek için sözdizimi kullanın `@:` :
 
 ```cshtml
 @for (var i = 0; i < people.Length; i++)
@@ -239,17 +245,17 @@ Bir kod bloğu içinde tüm satırın geri kalanını `@:` HTML olarak işlemek 
 }
 ```
 
-Kodda `@:` olmadan, bir Razor çalışma zamanı hatası oluşturulur.
+`@:` Kodda olmadan bir Razor çalışma zamanı hatası oluşturulur.
 
-Razor `@` dosyasındaki ek karakterler, daha sonra bloktaki ifadelerde derleyici hatalarına neden olabilir. Gerçek hata bildirilen hatadan önce oluştuğundan, bu derleyici hatalarını anlamak zor olabilir. Bu hata, birden çok örtük/açık ifadeyi tek bir kod bloğunda birleştirdikten sonra sık görülür.
+Razor `@` dosyasındaki fazla karakter, bloktaki daha sonra bulunan deyimlerde derleyici hatalarına neden olabilir. Bu derleyici hatalarının anlaşılması zor olabilir çünkü asıl hata bildirilen hatadan önce oluşur. Bu hata, birden çok örtük/açık ifade tek bir kod bloğu içinde birleştirildikten sonra ortaktır.
 
-## <a name="control-structures"></a>Kontrol yapıları
+## <a name="control-structures"></a>Denetim yapıları
 
-Denetim yapıları kod bloklarının bir uzantısıdır. Kod bloklarının tüm yönleri (biçimlendirmeye geçiş, satır altı C#) aşağıdaki yapılar için de geçerlidir:
+Denetim yapıları, kod bloklarının bir uzantısıdır. Kod bloklarının tüm yönleri (biçimlendirmeye geçme, satır içi C#) Ayrıca aşağıdaki yapılar için de geçerlidir:
 
-### <a name="conditionals-if-else-if-else-and-switch"></a>Koşullu \@lar eğer, başka if, else ve \@anahtar
+### <a name="conditionals-if-else-if-else-and-switch"></a>Koşul \@varsa, Else, Else ve \@anahtar
 
-`@if`kod çalıştığında denetimleri:
+`@if`kodun ne zaman çalışacağını denetler:
 
 ```cshtml
 @if (value % 2 == 0)
@@ -258,7 +264,7 @@ Denetim yapıları kod bloklarının bir uzantısıdır. Kod bloklarının tüm 
 }
 ```
 
-`else`ve `else if` `@` sembol gerekmez:
+`else`ve `else if` `@` sembol gerektirmez:
 
 ```cshtml
 @if (value % 2 == 0)
@@ -275,7 +281,7 @@ else
 }
 ```
 
-Aşağıdaki biçimlendirme, anahtar deyiminin nasıl kullanılacağını gösterir:
+Aşağıdaki biçimlendirme bir switch ifadesinin nasıl kullanılacağını göstermektedir:
 
 ```cshtml
 @switch (value)
@@ -292,9 +298,9 @@ Aşağıdaki biçimlendirme, anahtar deyiminin nasıl kullanılacağını göste
 }
 ```
 
-### <a name="looping-for-foreach-while-and-do-while"></a>\@Döngü için, \@foreach, \@süre, ve \@süre yapmak
+### <a name="looping-for-foreach-while-and-do-while"></a>For \@döngüsü, \@foreach, \@while ve \@do
 
-Şablonlu HTML döngü denetim ifadeleri ile oluşturulabilir. Kişilerin listesini işlemek için:
+Şablonlu HTML, döngü denetim deyimleri ile oluşturulabilir. Bir kişi listesini işlemek için:
 
 ```cshtml
 @{
@@ -358,9 +364,9 @@ Aşağıdaki döngü deyimleri desteklenir:
 } while (i < people.Length);
 ```
 
-### <a name="compound-using"></a>Bileşik \@kullanarak
+### <a name="compound-using"></a>Kullanarak \@bileşik
 
-C#'da, `using` bir nesnenin atıldığından emin olmak için bir deyim kullanılır. Razor'da, aynı mekanizma ek içerik içeren HTML Yardımcıları oluşturmak için kullanılır. Aşağıdaki kodda, HTML Yardımcıları `<form>` `@using` deyimle birlikte bir etiket işler:
+C# ' de bir `using` nesne atılmış olduğundan emin olmak için bir ifade kullanılır. Razor 'de, ek içerik içeren HTML Yardımcıları oluşturmak için aynı mekanizma kullanılır. Aşağıdaki kodda, HTML Yardımcıları `<form>` `@using` ifadesiyle bir etiketi işlerler:
 
 ```cshtml
 @using (Html.BeginForm())
@@ -372,15 +378,15 @@ C#'da, `using` bir nesnenin atıldığından emin olmak için bir deyim kullanı
 }
 ```
 
-### <a name="try-catch-finally"></a>\@deneyin, yakalamak, nihayet
+### <a name="try-catch-finally"></a>\@TRY, catch, finally
 
-Özel durum işleme C#'a benzer:
+Özel durum işleme C# ile benzerdir:
 
 [!code-cshtml[](razor/sample/Views/Home/Contact7.cshtml)]
 
-### <a name="lock"></a>\@Kilit
+### <a name="lock"></a>\@ine
 
-Razor kilit ifadeleri ile kritik bölümleri korumak için yeteneğine sahiptir:
+Razor, kilit deyimleriyle önemli bölümleri koruma özelliğine sahiptir:
 
 ```cshtml
 @lock (SomeLock)
@@ -389,9 +395,9 @@ Razor kilit ifadeleri ile kritik bölümleri korumak için yeteneğine sahiptir:
 }
 ```
 
-### <a name="comments"></a>Yorumlar
+### <a name="comments"></a>Açıklamalar
 
-Razor C# ve HTML yorumlarını destekler:
+Razor, C# ve HTML açıklamalarını destekler:
 
 ```cshtml
 @{
@@ -401,13 +407,13 @@ Razor C# ve HTML yorumlarını destekler:
 <!-- HTML comment -->
 ```
 
-Kod aşağıdaki HTML'yi işler:
+Kod, aşağıdaki HTML 'yi işler:
 
 ```html
 <!-- HTML comment -->
 ```
 
-Web sayfası oluşturulmadan önce razor yorumları sunucu tarafından kaldırılır. Razor `@*  *@` yorumları sınırlamak için kullanır. Aşağıdaki kod yorumlanır, böylece sunucu herhangi bir biçimlendirme oluşturmaz:
+Razor açıklamaları, Web sayfası işlenmeden önce sunucu tarafından kaldırılır. Razor, `@*  *@` Yorumları sınırlandırmak için kullanır. Aşağıdaki kod açıklama olarak belirlenir, bu nedenle sunucu herhangi bir biçimlendirme oluşturmaz:
 
 ```cshtml
 @*
@@ -421,13 +427,13 @@ Web sayfası oluşturulmadan önce razor yorumları sunucu tarafından kaldırı
 
 ## <a name="directives"></a>Yönergeler
 
-Razor `@` yönergeleri, sembolü izleyen ayrılmış anahtar kelimelerle örtük ifadelerle temsil edilir. Yönerge genellikle görünümün ayrıştırılmanını değiştirir veya farklı işlevsellik sağlar.
+Razor yönergeleri, `@` simgeyi izleyen ayrılmış anahtar sözcüklerle örtük ifadelerle temsil edilir. Yönerge genellikle görünümün ayrıştırılma şeklini değiştirir veya farklı işlevleri sunar.
 
-Razor'Un bir görünüm için kod nasıl oluşturduğunu anlamak, yönergelerin nasıl çalıştığını anlamayı kolaylaştırır.
+Razor 'nin bir görünüm için nasıl kod üretdiğini anlamak, yönergelerin nasıl çalıştığını anlamayı kolaylaştırır.
 
 [!code-cshtml[](razor/sample/Views/Home/Contact8.cshtml)]
 
-Kod aşağıdakilere benzer bir sınıf oluşturur:
+Kod, aşağıdakine benzer bir sınıf oluşturur:
 
 ```csharp
 public class _Views_Something_cshtml : RazorPage<dynamic>
@@ -443,11 +449,11 @@ public class _Views_Something_cshtml : RazorPage<dynamic>
 }
 ```
 
-Bu makalenin ilerleyen bölümlerinde, [görünüm için oluşturulan Razor C# sınıfını incele](#inspect-the-razor-c-class-generated-for-a-view) bölümü, oluşturulan bu sınıfın nasıl görüntülenilecek olarak görüntülenilecek olduğunu açıklar.
+Bu makalenin ilerleyen kısımlarında, [bir görünüm için oluşturulan Razor C# sınıfını İnceleme](#inspect-the-razor-c-class-generated-for-a-view) bölümünde bu oluşturulan sınıfın nasıl görüntüleneceği açıklanmaktadır.
 
-### <a name="attribute"></a>\@Öznitelik
+### <a name="attribute"></a>\@özniteliği
 
-Yönerge, `@attribute` verilen özniteliği oluşturulan sayfa veya görünüm sınıfına ekler. Aşağıdaki örnek öznitelik `[Authorize]` ekler:
+`@attribute` Yönergesi verilen özniteliği oluşturulan sayfanın veya görünümün sınıfına ekler. Aşağıdaki örnek `[Authorize]` özniteliğini ekler:
 
 ```cshtml
 @attribute [Authorize]
@@ -455,11 +461,11 @@ Yönerge, `@attribute` verilen özniteliği oluşturulan sayfa veya görünüm s
 
 ::: moniker range=">= aspnetcore-3.0"
 
-### <a name="code"></a>\@Kod
+### <a name="code"></a>\@kodudur
 
-*Bu senaryo yalnızca Razor bileşenleri (.razor) için geçerlidir.*
+*Bu senaryo yalnızca Razor bileşenleri (. Razor) için geçerlidir.*
 
-Blok, `@code` Bir [Razor bileşeninin](xref:blazor/components) bir bileşene C# üyeleri (alanlar, özellikler ve yöntemler) eklemesini sağlar:
+Blok `@code` , bir [Razor bileşeninin](xref:blazor/components) bir bileşene C# üyeleri (alanlar, Özellikler ve Yöntemler) eklemesini sağlar:
 
 ```razor
 @code {
@@ -467,13 +473,13 @@ Blok, `@code` Bir [Razor bileşeninin](xref:blazor/components) bir bileşene C# 
 }
 ```
 
-Razor bileşenleri `@code` için, bir [`@functions`](#functions) takma ad `@functions`ve üzerinde önerilir. Birden `@code` fazla blokca izin verilir.
+Razor bileşenleri için, `@code` öğesinin [`@functions`](#functions) diğer adı ve önerilir `@functions`. Birden çok `@code` blok izin verilir.
 
 ::: moniker-end
 
-### <a name="functions"></a>\@Işlev
+### <a name="functions"></a>\@lerdir
 
-Yönerge, `@functions` oluşturulan sınıfa C# üyeleri (alanlar, özellikler ve yöntemler) eklenmesini sağlar:
+Yönergesi `@functions` , oluşturulan sınıfa C# üyeleri (alanlar, Özellikler ve Yöntemler) eklemeyi sağlar:
 
 ```cshtml
 @functions {
@@ -483,7 +489,7 @@ Yönerge, `@functions` oluşturulan sınıfa C# üyeleri (alanlar, özellikler v
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[Razor bileşenlerinde,](xref:blazor/components) `@functions` C# üyeleri eklemek için üzerinde kullanın. `@code`
+[Razor bileşenlerinde](xref:blazor/components)C# üyelerini eklemek `@code` `@functions` için ' i kullanın.
 
 ::: moniker-end
 
@@ -491,19 +497,19 @@ Yönerge, `@functions` oluşturulan sınıfa C# üyeleri (alanlar, özellikler v
 
 [!code-cshtml[](razor/sample/Views/Home/Contact6.cshtml)]
 
-Kod aşağıdaki HTML biçimlendirmesini oluşturur:
+Kod, aşağıdaki HTML işaretlemesini oluşturur:
 
 ```html
 <div>From method: Hello</div>
 ```
 
-Aşağıdaki kod oluşturulan Razor C# sınıfıdır:
+Aşağıdaki kod, üretilen Razor C# sınıfıdır:
 
 [!code-csharp[](razor/sample/Classes/Views_Home_Test_cshtml.cs?range=1-19)]
 
 ::: moniker range=">= aspnetcore-3.0"
 
-`@functions`yöntemleri biçimlendirme olduğunda cazip yöntemler olarak hizmet vermektedir:
+`@functions`Yöntemler, işaretlemelerdeki şablon oluşturma yöntemleri olarak görev yapar:
 
 ```cshtml
 @{
@@ -519,18 +525,18 @@ Aşağıdaki kod oluşturulan Razor C# sınıfıdır:
 }
 ```
 
-Kod aşağıdaki HTML'yi işler:
+Kod, aşağıdaki HTML 'yi işler:
 
 ```html
 <p>Name: <strong>Mahatma Gandhi</strong></p>
 <p>Name: <strong>Martin Luther King, Jr.</strong></p>
 ```
 
-### <a name="implements"></a>\@Uygulayan
+### <a name="implements"></a>\@uygulamalar
 
-Yönerge, `@implements` oluşturulan sınıf için bir arabirim uygular.
+`@implements` Yönergesi, oluşturulan sınıf için bir arabirim uygular.
 
-Yöntemin çağrılması <xref:System.IDisposable?displayProperty=fullName> için <xref:System.IDisposable.Dispose*> aşağıdaki örnek uygular:
+Aşağıdaki örnek, yönteminin <xref:System.IDisposable?displayProperty=fullName> çağrılabilmesi için <xref:System.IDisposable.Dispose*> uygular:
 
 ```cshtml
 @implements IDisposable
@@ -548,23 +554,23 @@ Yöntemin çağrılması <xref:System.IDisposable?displayProperty=fullName> içi
 
 ::: moniker-end
 
-### <a name="inherits"></a>\@Devralır
+### <a name="inherits"></a>\@alıp
 
-Yönerge, `@inherits` görünümün devraldığı sınıfın tam denetimini sağlar:
+`@inherits` Yönergesi, görünümün devraldığı sınıfın tam denetimini sağlar:
 
 ```cshtml
 @inherits TypeNameOfClassToInheritFrom
 ```
 
-Aşağıdaki kod özel bir Razor sayfa türüdür:
+Aşağıdaki kod özel bir Razor sayfası türüdür:
 
 [!code-csharp[](razor/sample/Classes/CustomRazorPage.cs)]
 
-Görünümde `CustomText` görüntülenir:
+, `CustomText` Bir görünümde görüntülenir:
 
 [!code-cshtml[](razor/sample/Views/Home/Contact10.cshtml)]
 
-Kod aşağıdaki HTML'yi işler:
+Kod, aşağıdaki HTML 'yi işler:
 
 ```html
 <div>
@@ -573,15 +579,15 @@ Kod aşağıdaki HTML'yi işler:
 </div>
 ```
 
- `@model`ve `@inherits` aynı görünümde kullanılabilir. `@inherits`görünümü niçin içe aktardığı *bir _ViewImports.cshtml* dosyasında olabilir:
+ `@model``@inherits` aynı görünümde kullanılabilir. `@inherits`görünümün içeri aktardığı bir *_ViewImports. cshtml* dosyasında olabilir:
 
 [!code-cshtml[](razor/sample/Views/_ViewImportsModel.cshtml)]
 
-Aşağıdaki kod, güçlü bir şekilde yazılan bir görünüme örnektir:
+Aşağıdaki kod, türü kesin belirlenmiş bir görünümün örneğidir:
 
 [!code-cshtml[](razor/sample/Views/Home/Login1.cshtml)]
 
-Modelderick@contoso.com" " " geçirilirse, görünüm aşağıdaki HTML biçimlendirmesini oluşturur:
+"rick@contoso.com" Modelde geçirilirse, Görünüm aşağıdaki HTML işaretlemesini oluşturur:
 
 ```html
 <div>The Login Email: rick@contoso.com</div>
@@ -591,117 +597,117 @@ Modelderick@contoso.com" " " geçirilirse, görünüm aşağıdaki HTML biçimle
 </div>
 ```
 
-### <a name="inject"></a>\@Enjekte
+### <a name="inject"></a>\@eklenecek
 
-Yönerge, `@inject` Razor Page'in [servis kabından](xref:fundamentals/dependency-injection) bir hizmeti görünüme enjekte etmesini sağlar. Daha fazla bilgi [için, görünümlere Bağımlılık enjeksiyonu](xref:mvc/views/dependency-injection)bakın.
+`@inject` Yönergesi, Razor sayfasının [hizmet kapsayıcısından](xref:fundamentals/dependency-injection) bir hizmeti bir görünüme eklemesine olanak sağlar. Daha fazla bilgi için bkz. [görünümlere bağımlılık ekleme](xref:mvc/views/dependency-injection).
 
 ::: moniker range=">= aspnetcore-3.0"
 
-### <a name="layout"></a>\@Düzen
+### <a name="layout"></a>\@Düzenle
 
-*Bu senaryo yalnızca Razor bileşenleri (.razor) için geçerlidir.*
+*Bu senaryo yalnızca Razor bileşenleri (. Razor) için geçerlidir.*
 
-Yönerge, `@layout` bir Razor bileşeni için bir düzen belirtir. Düzen bileşenleri kod yinelemesini ve tutarsızlığı önlemek için kullanılır. Daha fazla bilgi için bkz. <xref:blazor/layouts>.
+Yönerge `@layout` , Razor bileşeni için bir düzen belirtir. Düzen bileşenleri kod yinelemeyi ve tutarsızlığın önüne geçmek için kullanılır. Daha fazla bilgi için bkz. <xref:blazor/layouts>.
 
 ::: moniker-end
 
-### <a name="model"></a>\@Modeli
+### <a name="model"></a>\@modelinizi
 
-*Bu senaryo yalnızca MVC görünümleri ve Razor Pages (.cshtml) için geçerlidir.*
+*Bu senaryo yalnızca MVC görünümleri ve Razor Pages (. cshtml) için geçerlidir.*
 
-Yönerge, `@model` bir görünüme veya sayfaya geçirilen modeltürünü belirtir:
+`@model` Yönergesi bir görünüm veya sayfaya geçirilen modelin türünü belirtir:
 
 ```cshtml
 @model TypeNameOfModel
 ```
 
-Tek tek kullanıcı hesaplarıyla oluşturulan ASP.NET Core MVC veya Razor Pages *uygulamasında, Views/Account/Login.cshtml* aşağıdaki model bildirimini içerir:
+Bir ASP.NET Core MVC veya bireysel kullanıcı hesaplarıyla oluşturulan Razor Pages uygulama, *Görünümler/Account/Login. cshtml* aşağıdaki model bildirimini içerir:
 
 ```cshtml
 @model LoginViewModel
 ```
 
-Oluşturulan sınıf `RazorPage<dynamic>`devralır:
+Oluşturulan sınıf şuradan `RazorPage<dynamic>`devralır:
 
 ```csharp
 public class _Views_Account_Login_cshtml : RazorPage<LoginViewModel>
 ```
 
-Razor, görünüme geçirilen modele erişmek için bir `Model` özelliği ortaya çıkarır:
+Razor, görünüme `Model` geçirilen modele erişim için bir özellik sunar:
 
 ```cshtml
 <div>The Login Email: @Model.Email</div>
 ```
 
-Yönerge özelliğin `@model` `Model` türünü belirtir. Yönerge, görünümün `T` `RazorPage<T>` türetildiği oluşturulan sınıfa göre belirtir. `@model` Yönerge belirtilmemişse, `Model` özellik türündedir. `dynamic` Daha fazla bilgi için, [Güçlü olarak @model yazılan modellere ve anahtar kelimeye](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword)bakın.
+`@model` Yönerge, `Model` özelliğin türünü belirtir. Yönergesi, görünümün türettiği `RazorPage<T>` oluşturulan sınıfın öğesini belirtir `T` . `@model` Yönerge belirtilmemişse, `Model` özelliği türündedir `dynamic`. Daha fazla bilgi için bkz. [türü kesin belirlenmiş modeller @model ve anahtar sözcüğü](xref:tutorials/first-mvc-app/adding-model#strongly-typed-models-and-the--keyword).
 
 ### <a name="namespace"></a>\@ad alanı
 
-Yönerge: `@namespace`
+`@namespace` Yönergesi:
 
-* Oluşturulan Razor sayfasının, MVC görünümünün veya Razor bileşeninin sınıfının ad alanını ayarlar.
-* Dizin ağacındaki, *_ViewImports.cshtml* (görünümler veya sayfalar) veya *_Imports.razor* (Jilet bileşenleri) en yakın içe alma dosyasından bir sayfa, görünüm veya bileşen sınıflarının kök türetilmiş ad alanlarını ayarlar.
+* Oluşturulan Razor sayfası, MVC görünümü veya Razor bileşeni sınıfının ad alanını ayarlar.
+* Bir sayfa, görünüm veya bileşen sınıfının kök türetilmiş ad alanlarını dizin ağacındaki en yakın içeri aktarmalar dosyasından, *_ViewImports. cshtml* (görünümler veya sayfalar) veya *_Imports. Razor* (Razor bileşenleri) olarak ayarlar.
 
 ```cshtml
 @namespace Your.Namespace.Here
 ```
 
-Aşağıdaki tabloda gösterilen Jilet Sayfaları örneği için:
+Aşağıdaki tabloda gösterilen Razor Pages örneği için:
 
-* Her sayfa *Sayfa/_ViewImports.cshtml aktarım.*
-* *Sayfalar/_ViewImports.cshtml* `@namespace Hello.World`içerir.
-* Her sayfanın kökü ad alanı dır. `Hello.World`
+* Her sayfa *sayfaları/_ViewImports. cshtml*'yi içeri aktarır.
+* *Pages/_ViewImports. cshtml* içerir `@namespace Hello.World`.
+* Her sayfa, `Hello.World` ad alanının kökü olarak bulunur.
 
 | Sayfa                                        | Ad Alanı                             |
 | ------------------------------------------- | ------------------------------------- |
-| *Sayfalar/Index.cshtml*                        | `Hello.World`                         |
-| *Sayfalar/MorePages/Page.cshtml*               | `Hello.World.MorePages`               |
-| *Sayfalar/MorePages/EvenMorePages/Page.cshtml* | `Hello.World.MorePages.EvenMorePages` |
+| *Pages/Index. cshtml*                        | `Hello.World`                         |
+| *Sayfa/fazla sayfa/sayfa. cshtml*               | `Hello.World.MorePages`               |
+| *Pages/te Pages/Evente Pages/Page. cshtml* | `Hello.World.MorePages.EvenMorePages` |
 
-Önceki ilişkiler, MVC görünümleri ve Razor bileşenleriyle kullanılan içe aktarma dosyaları için geçerlidir.
+Yukarıdaki ilişkiler, MVC görünümleri ve Razor bileşenleriyle kullanılan dosyaları içeri aktarmak için geçerlidir.
 
-Birden çok içe `@namespace` aktarma dosyasında bir yönerge varsa, dizin ağacındaki sayfaya, görünüme veya bileşene en yakın dosya kök ad alanını ayarlamak için kullanılır.
+Birden çok içeri aktarma dosyasında bir `@namespace` yönerge olduğunda, kök ad alanını ayarlamak için dizin ağacındaki sayfaya, görünüme veya bileşene en yakın dosya kullanılır.
 
-Önceki örnekteki *EvenMorePages* klasöründe `@namespace Another.Planet` (veya *Pages/MorePages/EvenMorePages/Page.cshtml* dosyasıiçeren) `@namespace Another.Planet`bir aktarım dosyası varsa, sonuç aşağıdaki tabloda gösterilir.
+Yukarıdaki örnekteki *evente Pages* klasöründe bir içeri aktarmalar dosyası varsa `@namespace Another.Planet` (veya sayfa/değer sayfaları */evente Pages/Page. cshtml* dosyası içeriyorsa `@namespace Another.Planet`), sonuç aşağıdaki tabloda gösterilir.
 
 | Sayfa                                        | Ad Alanı               |
 | ------------------------------------------- | ----------------------- |
-| *Sayfalar/Index.cshtml*                        | `Hello.World`           |
-| *Sayfalar/MorePages/Page.cshtml*               | `Hello.World.MorePages` |
-| *Sayfalar/MorePages/EvenMorePages/Page.cshtml* | `Another.Planet`        |
+| *Pages/Index. cshtml*                        | `Hello.World`           |
+| *Sayfa/fazla sayfa/sayfa. cshtml*               | `Hello.World.MorePages` |
+| *Pages/te Pages/Evente Pages/Page. cshtml* | `Another.Planet`        |
 
-### <a name="page"></a>\@Sayfası
+### <a name="page"></a>\@sayfasında
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Yönerge, `@page` göründüğü dosyanın türüne bağlı olarak farklı etkilere sahiptir. Yönerge:
+`@page` Yönergesinin, göründüğü dosyanın türüne bağlı olarak farklı etkileri vardır. Yönergesi:
 
-* *.cshtml* dosyasında dosyanın Bir Jilet Sayfası olduğunu gösterir. Daha fazla bilgi için <xref:razor-pages/index> [bkz.](xref:razor-pages/index#custom-routes)
-* Bir Razor bileşeninin istekleri doğrudan işlemesi gerektiğini belirtir. Daha fazla bilgi için bkz. <xref:blazor/routing>.
+* İçindeki bir *. cshtml* dosyasında, dosyanın bir Razor sayfası olduğunu gösterir. Daha fazla bilgi için bkz. [özel rotalar](xref:razor-pages/index#custom-routes) ve <xref:razor-pages/index>.
+* Bir Razor bileşeninin istekleri doğrudan işlemesini belirtir. Daha fazla bilgi için bkz. <xref:blazor/routing>.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-`@page` *.cshtml* dosyasının ilk satırındaki yönerge, dosyanın bir Jilet Sayfası olduğunu gösterir. Daha fazla bilgi için bkz. <xref:razor-pages/index>.
+Bir `@page` *. cshtml* dosyasının ilk satırındaki yönergesi, dosyanın bir Razor sayfası olduğunu gösterir. Daha fazla bilgi için bkz. <xref:razor-pages/index>.
 
 ::: moniker-end
 
-### <a name="section"></a>\@Bölüm
+### <a name="section"></a>\@kısmı
 
-*Bu senaryo yalnızca MVC görünümleri ve Razor Pages (.cshtml) için geçerlidir.*
+*Bu senaryo yalnızca MVC görünümleri ve Razor Pages (. cshtml) için geçerlidir.*
 
-Yönerge, `@section` HTML sayfasının farklı bölümlerinde içerik işlemek için görünümleri veya sayfaları etkinleştirmek için [MVC ve Jilet Sayfaları düzenleri](xref:mvc/views/layout) ile birlikte kullanılır. Daha fazla bilgi için bkz. <xref:mvc/views/layout>.
+`@section` Yönerge, HTML sayfasının farklı kısımlarında görünüm veya sayfaların içerik işlemesini sağlamak için [MVC ve Razor Pages düzenleriyle](xref:mvc/views/layout) birlikte kullanılır. Daha fazla bilgi için bkz. <xref:mvc/views/layout>.
 
 ### <a name="using"></a>\@kullanma
 
-Yönerge, `@using` oluşturulan `using` görünüme C# yönergesi ekler:
+`@using` Yönergesi, oluşturulan görünüme C# `using` yönergesini ekler:
 
 [!code-cshtml[](razor/sample/Views/Home/Contact9.cshtml)]
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[Razor bileşenlerinde,](xref:blazor/components) `@using` hangi bileşenlerin kapsamda olduğunu da denetler.
+[Razor bileşenlerinde](xref:blazor/components) `@using` Ayrıca hangi bileşenlerin kapsamda olduğunu da kontrol eder.
 
 ::: moniker-end
 
@@ -709,39 +715,39 @@ Yönerge, `@using` oluşturulan `using` görünüme C# yönergesi ekler:
 
 ## <a name="directive-attributes"></a>Yönerge öznitelikleri
 
-### <a name="attributes"></a>\@Öznitelik
+### <a name="attributes"></a>\@özelliklerine
 
-*Bu senaryo yalnızca Razor bileşenleri (.razor) için geçerlidir.*
+*Bu senaryo yalnızca Razor bileşenleri (. Razor) için geçerlidir.*
 
-`@attributes`bir bileşenin beyan edilmeyen öznitelikleri işlemesine izin verir. Daha fazla bilgi için bkz. <xref:blazor/components#attribute-splatting-and-arbitrary-parameters>.
+`@attributes`bir bileşenin bildirilmeyen öznitelikleri işlemesini sağlar. Daha fazla bilgi için bkz. <xref:blazor/components#attribute-splatting-and-arbitrary-parameters>.
 
-### <a name="bind"></a>\@Bağlamak
+### <a name="bind"></a>\@bağladığınızda
 
-*Bu senaryo yalnızca Razor bileşenleri (.razor) için geçerlidir.*
+*Bu senaryo yalnızca Razor bileşenleri (. Razor) için geçerlidir.*
 
-Bileşenlerde veri bağlama `@bind` öznitelik ile gerçekleştirilir. Daha fazla bilgi için bkz. <xref:blazor/data-binding>.
+Bileşenlerdeki veri bağlama, `@bind` özniteliğiyle gerçekleştirilir. Daha fazla bilgi için bkz. <xref:blazor/data-binding>.
 
-### <a name="onevent"></a>\@on{EVENT}
+### <a name="onevent"></a>\@{EVENT} üzerinde
 
-*Bu senaryo yalnızca Razor bileşenleri (.razor) için geçerlidir.*
+*Bu senaryo yalnızca Razor bileşenleri (. Razor) için geçerlidir.*
 
-Razor bileşenler için olay işleme özellikleri sağlar. Daha fazla bilgi için bkz. <xref:blazor/event-handling>.
+Razor, bileşenler için olay işleme özellikleri sağlar. Daha fazla bilgi için bkz. <xref:blazor/event-handling>.
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-3.1"
 
-### <a name="oneventpreventdefault"></a>\@on{EVENT}:preventVarsayılan
+### <a name="oneventpreventdefault"></a>\@{EVENT} üzerinde:p reventDefault
 
-*Bu senaryo yalnızca Razor bileşenleri (.razor) için geçerlidir.*
+*Bu senaryo yalnızca Razor bileşenleri (. Razor) için geçerlidir.*
 
-Olay için varsayılan eylemi önler.
+Olay için varsayılan eylemi engeller.
 
-### <a name="oneventstoppropagation"></a>\@on{EVENT}:stopPropagation
+### <a name="oneventstoppropagation"></a>\@{EVENT}: Stopyayma
 
-*Bu senaryo yalnızca Razor bileşenleri (.razor) için geçerlidir.*
+*Bu senaryo yalnızca Razor bileşenleri (. Razor) için geçerlidir.*
 
-Olay için olay yayılmasını durdurur.
+Olay için olay yaymayı sonlandırır.
 
 ::: moniker-end
 
@@ -749,33 +755,33 @@ Olay için olay yayılmasını durdurur.
 
 ### <a name="key"></a>\@anahtar
 
-*Bu senaryo yalnızca Razor bileşenleri (.razor) için geçerlidir.*
+*Bu senaryo yalnızca Razor bileşenleri (. Razor) için geçerlidir.*
 
-Yönerge özniteliği, `@key` anahtar değerine dayalı öğelerin veya bileşenlerin korunmasını garanti etmek için bileşenlerin dağılarak algoritmaya neden olur. Daha fazla bilgi için bkz. <xref:blazor/components#use-key-to-control-the-preservation-of-elements-and-components>.
+`@key` Directive özniteliği, anahtar değerine göre öğelerin veya bileşenlerin korunmasını güvence altına almak için bileşenlerin algoritma almasına neden olur. Daha fazla bilgi için bkz. <xref:blazor/components#use-key-to-control-the-preservation-of-elements-and-components>.
 
 ### <a name="ref"></a>\@ref
 
-*Bu senaryo yalnızca Razor bileşenleri (.razor) için geçerlidir.*
+*Bu senaryo yalnızca Razor bileşenleri (. Razor) için geçerlidir.*
 
-Bileşen başvuruları`@ref`( ) bir bileşen örneğine başvurmanın bir yolunu sağlar, böylece bu örne komutlar verebilirsiniz. Daha fazla bilgi için bkz. <xref:blazor/components#capture-references-to-components>.
+Bileşen başvuruları (`@ref`) bir bileşen örneğine başvurmak için bir yol sağlar, böylece bu örneğe komut verebilirsiniz. Daha fazla bilgi için bkz. <xref:blazor/components#capture-references-to-components>.
 
-### <a name="typeparam"></a>\@daktison
+### <a name="typeparam"></a>\@typeparam
 
-*Bu senaryo yalnızca Razor bileşenleri (.razor) için geçerlidir.*
+*Bu senaryo yalnızca Razor bileşenleri (. Razor) için geçerlidir.*
 
-Yönerge, `@typeparam` oluşturulan bileşen sınıfı için genel bir tür parametresi bildirir. Daha fazla bilgi için bkz. <xref:blazor/templated-components#generic-typed-components>.
+`@typeparam` Yönergesi, oluşturulan bileşen sınıfı için genel bir tür parametresi bildirir. Daha fazla bilgi için bkz. <xref:blazor/templated-components#generic-typed-components>.
 
 ::: moniker-end
 
-## <a name="templated-razor-delegates"></a>Şablonlanmış Razor delegeleri
+## <a name="templated-razor-delegates"></a>Şablonlu Razor temsilcileri
 
-Jilet şablonları, aşağıdaki biçime sahip bir UI snippet tanımlamanızı sağlar:
+Razor şablonları aşağıdaki biçimde bir UI parçacığı tanımlamanızı sağlar:
 
 ```cshtml
 @<tag>...</tag>
 ```
 
-Aşağıdaki örnekte, şablonlanmış bir Razor temsilcisinin <xref:System.Func%602>nasıl bir . olarak belirtilmeniz gösteriş [Dinamik tür,](/dotnet/csharp/programming-guide/types/using-type-dynamic) temsilcinin kapsülletiyi kapsayan yöntemin parametresi için belirtilir. Nesne [türü,](/dotnet/csharp/language-reference/keywords/object) temsilcinin geri dönüş değeri olarak belirtilir. Şablon, bir özelliği <xref:System.Collections.Generic.List%601> `Pet` olan bir `Name` ile kullanılır.
+Aşağıdaki örnekte, bir şablonlu Razor temsilcisinin bir <xref:System.Func%602>olarak nasıl belirtildiği gösterilmektedir. [Dinamik tür](/dotnet/csharp/programming-guide/types/using-type-dynamic) , temsilcinin sarmalayan yönteminin parametresi için belirtilir. Bir [nesne türü](/dotnet/csharp/language-reference/keywords/object) , temsilcinin dönüş değeri olarak belirtilir. Şablon, bir <xref:System.Collections.Generic.List%601> `Name` özelliğine sahip olan bir `Pet` ile kullanılır.
 
 ```csharp
 public class Pet
@@ -797,7 +803,7 @@ public class Pet
 }
 ```
 
-Şablon bir `foreach` deyim `pets` le sağlanır:
+Şablon, bir `foreach` ifade tarafından `pets` sağlanan ile işlenir:
 
 ```cshtml
 @foreach (var pet in pets)
@@ -806,7 +812,7 @@ public class Pet
 }
 ```
 
-İşlenen çıktı:
+İşlenmiş çıkış:
 
 ```html
 <p>You have a pet named <strong>Rin Tin Tin</strong>.</p>
@@ -814,7 +820,7 @@ public class Pet
 <p>You have a pet named <strong>K-9</strong>.</p>
 ```
 
-Bir yönteme bağımsız değişken olarak satır içinde Jilet şablonu da sağlayabilirsiniz. Aşağıdaki örnekte, `Repeat` yöntem bir Razor şablonu alır. Yöntem, bir listeden sağlanan öğelerin tekrarı ile HTML içeriği oluşturmak için şablonu kullanır:
+Ayrıca bir yönteme bağımsız değişken olarak bir satır içi Razor şablonu da sağlayabilirsiniz. Aşağıdaki örnekte, `Repeat` yöntemi Razor şablonu alır. Yöntemi, bir listeden sağlanan öğelerin tekrarlandığı HTML içeriğini oluşturmak için şablonunu kullanır:
 
 ```cshtml
 @using Microsoft.AspNetCore.Html
@@ -838,11 +844,11 @@ Bir yönteme bağımsız değişken olarak satır içinde Jilet şablonu da sağ
 }
 ```
 
-Önceki örnekteki evcil hayvanların listesini `Repeat` kullanarak, yöntem şu şekilde çağrılır:
+Önceki örnekteki Evcil hayvanlar 'ların listesini kullanarak, `Repeat` yöntemi ile çağrılır:
 
-* <xref:System.Collections.Generic.List%601>ve `Pet`.
-* Her evcil hayvanı tekrarlamak için kaç kez.
-* Sıralanmamış bir listenin liste öğeleri için kullanılacak satır çizgisi şablonu.
+* <xref:System.Collections.Generic.List%601>`Pet`.
+* Her evcil hayvan kaç kez tekrarlanacak.
+* Sıralanmamış bir listenin liste öğeleri için kullanılacak satır içi şablon.
 
 ```cshtml
 <ul>
@@ -850,7 +856,7 @@ Bir yönteme bağımsız değişken olarak satır içinde Jilet şablonu da sağ
 </ul>
 ```
 
-İşlenen çıktı:
+İşlenmiş çıkış:
 
 ```html
 <ul>
@@ -868,31 +874,31 @@ Bir yönteme bağımsız değişken olarak satır içinde Jilet şablonu da sağ
 
 ## <a name="tag-helpers"></a>Etiket Yardımcıları
 
-*Bu senaryo yalnızca MVC görünümleri ve Razor Pages (.cshtml) için geçerlidir.*
+*Bu senaryo yalnızca MVC görünümleri ve Razor Pages (. cshtml) için geçerlidir.*
 
-[Tag Helpers](xref:mvc/views/tag-helpers/intro)ile ilgili üç yönerge vardır.
+[Etiket Yardımcıları](xref:mvc/views/tag-helpers/intro)ile ilgili üç yönergeler vardır.
 
-| Yönergesi | İşlev |
+| Deki | İşlev |
 | --------- | -------- |
-| [`@addTagHelper`](xref:mvc/views/tag-helpers/intro#add-helper-label) | Tag Helpers'ı görünümde kullanılabilir hale getirir. |
-| [`@removeTagHelper`](xref:mvc/views/tag-helpers/intro#remove-razor-directives-label) | Daha önce görünümden eklenen Etiket Yardımcıları kaldırır. |
-| [`@tagHelperPrefix`](xref:mvc/views/tag-helpers/intro#prefix-razor-directives-label) | Tag Helper desteğini etkinleştirmek ve Tag Helper kullanımını açık hale getirmek için bir etiket öneki belirtir. |
+| [`@addTagHelper`](xref:mvc/views/tag-helpers/intro#add-helper-label) | Etiket yardımcılarını bir görünüm için kullanılabilir hale getirir. |
+| [`@removeTagHelper`](xref:mvc/views/tag-helpers/intro#remove-razor-directives-label) | Daha önce bir görünümden eklenen etiket yardımcıları kaldırır. |
+| [`@tagHelperPrefix`](xref:mvc/views/tag-helpers/intro#prefix-razor-directives-label) | Etiket Yardımcısı desteğini etkinleştirmek ve etiket Yardımcısı kullanımını açık hale getirmek için bir etiket ön eki belirtir. |
 
-## <a name="razor-reserved-keywords"></a>Jilet rezerve anahtar kelimeler
+## <a name="razor-reserved-keywords"></a>Razorayrılmış anahtar sözcükler
 
-### <a name="razor-keywords"></a>Jilet anahtar kelimeler
+### <a name="razor-keywords"></a>Razorlerimi
 
-* sayfa (Core 2.1 veya sonraki ASP.NET gerektirir)
+* sayfa (ASP.NET Core 2,1 veya üzeri bir sürüm gerektirir)
 * ad alanı
 *  işlevleri
-* Devralır
+* alıp
 * model
 * section
 * yardımcı (Şu anda ASP.NET Core tarafından desteklenmiyor)
 
-Jilet anahtar `@(Razor Keyword)` kelimeler (örneğin, `@(functions)`) ile kaçılır.
+Razoranahtar kelimelerden kaçışın `@(Razor Keyword)` (örneğin `@(functions)`,).
 
-### <a name="c-razor-keywords"></a>C# Jilet anahtar kelimeleri
+### <a name="c-razor-keywords"></a>C# Razor anahtar sözcükleri
 
 * büyük/küçük harf
 * do
@@ -904,91 +910,91 @@ Jilet anahtar `@(Razor Keyword)` kelimeler (örneğin, `@(functions)`) ile kaç�
 * lock
 * switch
 * Deneme
-* Yakalamak
+* yakalaya
 * finally
 * kullanma
 * while
 
-C# Razor anahtar kelimeleri ile `@(@C# Razor Keyword)` çift kaçtı `@(@case)`olmalıdır (örneğin, ). İlki `@` Razor parser'dan kaçar. İkincisi `@` C# parser'dan kaçar.
+C# Razor anahtar sözcükleri ile `@(@C# Razor Keyword)` çift kaçış olmalıdır (örneğin, `@(@case)`). İlki `@` Razor Ayrıştırıcıdan çıkar. İkincisi `@` , C# ayrıştırıcısının çıkar.
 
-### <a name="reserved-keywords-not-used-by-razor"></a>Razor tarafından kullanılmayan ayrılmış anahtar kelimeler
+### <a name="reserved-keywords-not-used-by-razor"></a>Ayrılmış anahtar sözcükler tarafından kullanılmıyorRazor
 
 * sınıf
 
-## <a name="inspect-the-razor-c-class-generated-for-a-view"></a>Görünüm için oluşturulan Razor C# sınıfını inceleyin
+## <a name="inspect-the-razor-c-class-generated-for-a-view"></a>Bir görünüm Razor için oluşturulan C# sınıfını inceleyin
 
 ::: moniker range=">= aspnetcore-2.1"
 
-.NET Core SDK 2.1 veya sonraki ile [Razor SDK,](xref:razor-pages/sdk) Razor dosyalarının derlemesini işler. Bir proje oluştururken, Razor SDK proje kökünde *obj/<build_configuration>/<target_framework_moniker>/Razor* dizini oluşturur. *Razor* dizinindeki dizin yapısı projenin dizin yapısını yansıtıyor.
+.NET Core SDK 2,1 veya sonraki bir sürümü ile [ Razor SDK](xref:razor-pages/sdk) , Razor dosyaların derlemesini işler. Bir proje oluştururken, Razor SDK proje kökünde bir *obj/<build_configuration>/<target_framework_moniker>/Razor * dizin oluşturur. *Razor* Dizin içindeki dizin yapısı, projenin dizin yapısını yansıtır.
 
-.NET Core 2.1'i hedefleyen ASP.NET Core 2.1 Razor Pages projesinde aşağıdaki dizin yapısını göz önünde bulundurun:
+ASP.NET Core 2,1 Razor sayfaları projesinde .net Core 2,1 ' i hedefleyen aşağıdaki dizin yapısını göz önünde bulundurun:
 
-* **Alanlar/**
-  * **Yönetici/**
-    * **Sayfalar/**
+* **Alanları**
+  * **Yöneticileri**
+    * **Sayfaları**
       * *Index.cshtml*
       * *Index.cshtml.cs*
-* **Sayfalar/**
-  * **Paylaşılan/**
+* **Sayfaları**
+  * **Paylaşılan**
     * *_Layout.cshtml*
-  * *_ViewImports.cshtml*
-  * *_ViewStart.cshtml*
+  * *_ViewImports. cshtml*
+  * *_ViewStart. cshtml*
   * *Index.cshtml*
   * *Index.cshtml.cs*
 
-*Projeyi Hata Ayıklama* yapılandırmasında oluşturmak aşağıdaki *obj* dizinini verir:
+Projenin *hata ayıklama* yapılandırmasında oluşturulması aşağıdaki *obj* dizinini verir:
 
-* **obj/**
-  * **Hata Ayıklama/**
-    * **netcoreapp2.1/**
-      * **Jilet/**
-        * **Alanlar/**
-          * **Yönetici/**
-            * **Sayfalar/**
+* **nesnesi**
+  * **H**
+    * **netcoreapp 2.1/**
+      * **Razor/**
+        * **Alanları**
+          * **Yöneticileri**
+            * **Sayfaları**
               * *Index.g.cshtml.cs*
-        * **Sayfalar/**
-          * **Paylaşılan/**
-            * *_Layout.g.cshtml.cs*
-          * *_ViewImports.g.cshtml.cs*
-          * *_ViewStart.g.cshtml.cs*
+        * **Sayfaları**
+          * **Paylaşılan**
+            * *_Layout. g. cshtml. cs*
+          * *_ViewImports. g. cshtml. cs*
+          * *_ViewStart. g. cshtml. cs*
           * *Index.g.cshtml.cs*
 
-*Pages/Index.cshtml*için oluşturulan sınıfı görüntülemek için, açık *obj/Debug/netcoreapp2.1/Razor/Pages/Index.g.cshtml.cs*.
+*Pages/Index. cshtml*için oluşturulan sınıfı görüntülemek için *obj/Debug/netcoreapp 2.1/Razor/Pages/Index.g.cshtml.cs*öğesini açın.
 
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-2.0"
 
-ASP.NET Core MVC projesine aşağıdaki sınıfı ekleyin:
+Aşağıdaki Sınıfı ASP.NET Core MVC projesine ekleyin:
 
 [!code-csharp[](razor/sample/Utilities/CustomTemplateEngine.cs)]
 
-In `Startup.ConfigureServices`, `CustomTemplateEngine` sınıf `RazorTemplateEngine` ile MVC tarafından eklenen geçersiz kılmak:
+' `Startup.ConfigureServices`De, ile `RazorTemplateEngine` MVC tarafından eklenen ' i `CustomTemplateEngine` şu sınıfla geçersiz kılın:
 
 [!code-csharp[](razor/sample/Startup.cs?highlight=4&range=10-14)]
 
-'nin `CustomTemplateEngine`ifadesi üzerinde `return csharpDocument;` bir kesme noktası ayarlayın. Program yürütme kesme noktasında durduğunda, değerini `generatedCode`görüntüleyin.
+`return csharpDocument;` Bildiriminde bir kesme noktası ayarlayın `CustomTemplateEngine`. Kesme noktasında program yürütmesi durdurulduğunda değerini görüntüleyin `generatedCode`.
 
-![Oluşturulan Kodun Metin Görselleştirici görünümü](razor/_static/tvr.png)
+![GeneratedCode 'ın metin görselleştiricisi görünümü](razor/_static/tvr.png)
 
 ::: moniker-end
 
-## <a name="view-lookups-and-case-sensitivity"></a>Aramaları ve servis talebi hassasiyetini görüntüleme
+## <a name="view-lookups-and-case-sensitivity"></a>Aramaları ve büyük/küçük harf duyarlılığını görüntüle
 
-Razor görünüm motoru, görünümler için büyük/küçük harf duyarlı aramalar gerçekleştirir. Ancak, gerçek arama temel dosya sistemi tarafından belirlenir:
+Görünüm Razor altyapısı, görünümler için büyük/küçük harfe duyarlı aramalar gerçekleştirir. Ancak gerçek arama, temel alınan dosya sistemine göre belirlenir:
 
 * Dosya tabanlı kaynak:
-  * Büyük/küçük harf duyarsız dosya sistemlerine (örneğin, Windows) sahip işletim sistemlerinde, fiziksel dosya sağlayıcısı aramaları büyük/küçük harf duyarsızdır. Örneğin, `return View("Test")` */Views/Home/Test.cshtml*, */Views/home/test.cshtml*ve diğer kasa varyantları için eşleşmeler elde edilir.
-  * Büyük/küçük harf duyarlı dosya sistemlerinde (örneğin, Linux, OSX ve ile), `EmbeddedFileProvider`aramalar büyük/küçük harf duyarlıdır. Örneğin, `return View("Test")` özellikle */Views/Home/Test.cshtml ile*eşleşir.
-* Önceden derlenmiş görünümler: ASP.NET Core 2.0 ve daha sonra, önceden derlenmiş görünümleri yukarı bakarak tüm işletim sistemlerinde duyarsız durumda. Davranış, fiziksel dosya sağlayıcısının Windows'daki davranışıyla aynıdır. Önceden derlenmiş iki görünüm yalnızca farklıysa, aramanın sonucu belirleyici değildir.
+  * Büyük/küçük harf duyarsız dosya sistemlerine (örneğin, Windows) sahip işletim sistemlerinde, fiziksel dosya sağlayıcısı aramaları büyük/küçük harfe duyarsızdır. Örneğin, `return View("Test")` */views/Home/test.exe*, */views/Home/test.exe*ve diğer tüm büyük/küçük harf çeşitlerüyle sonuçlanır.
+  * Büyük/küçük harf duyarlı dosya sistemlerinde (örneğin, Linux, OSX ve ile `EmbeddedFileProvider`), aramalar büyük/küçük harfe duyarlıdır. Örneğin, `return View("Test")` özellikle */views/Home/test.exe. cshtml*ile eşleşir.
+* Önceden derlenmiş görünümler: ASP.NET Core 2,0 ve üzeri sürümlerde, önceden derlenmiş görünümleri aramak tüm işletim sistemlerinde büyük/küçük harfe duyarlıdır. Davranış, fiziksel dosya sağlayıcısının Windows 'daki davranışlarıyla aynıdır. Ön derlenmiş iki görünüm yalnızca bir durumda farklıysa, arama sonucu belirleyici değildir.
 
-Geliştiricilerin dosya ve dizin adlarının kasasını kasayla eşleştirmeleri tavsiye edilir:
+Geliştiricilerin dosya ve dizin adlarını büyük küçük harf olarak eşleşmesi önerilir:
 
 * Alan, denetleyici ve eylem adları.
-* Jilet Sayfaları.
+* RazorSayfaları.
 
-Eşleşen servis talebi, dağıtımların temel dosya sisteminden bağımsız olarak görünümlerini bulmasını sağlar.
+Eşleşen durum, dağıtımların görünümlerini temel alınan dosya sisteminden bağımsız olarak bulmasını sağlar.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-[ASP.NET Web Programlamaya Giriş Jilet Sözdizimini Kullanarak](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) Razor sözdizimi ile programlama birçok örnek sağlar.
+[Sözdizimi kullanılarak ASP.NET Web programlamaya giriş, Razor ](/aspnet/web-pages/overview/getting-started/introducing-razor-syntax-c) sözdizimi ile Razor programlama için birçok örnek sağlar.

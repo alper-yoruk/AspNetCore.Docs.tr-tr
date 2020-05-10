@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/validation
-ms.openlocfilehash: a0f7c070514de26ae007526a5587c13d26d1eb1b
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 56c8d799b98cc09b8cfff12744c6eeb46af4f8e6
+ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777182"
+ms.lasthandoff: 05/09/2020
+ms.locfileid: "83003172"
 ---
 # <a name="model-validation-in-aspnet-core-mvc-and-razor-pages"></a>ASP.NET Core MVC ve Razor sayfalarda model doğrulaması
 
@@ -55,7 +55,7 @@ Doğrulama öznitelikleri, model özellikleri için doğrulama kuralları belirt
 
 Yerleşik doğrulama özniteliklerinden bazıları şunlardır:
 
-* `[CreditCard]`: Özelliğin kredi kartı biçimine sahip olduğunu doğrular.
+* `[CreditCard]`: Özelliğin kredi kartı biçimine sahip olduğunu doğrular. [JQuery doğrulaması ek yöntemleri](https://cdnjs.cloudflare.com/ajax/libs/jquery-validate/1.19.1/additional-methods.min.js)gerektirir.
 * `[Compare]`: Bir modeldeki iki özelliği eşleştiğini doğrular.
 * `[EmailAddress]`: Özelliğin bir e-posta biçimine sahip olduğunu doğrular.
 * `[Phone]`: Özelliğin bir telefon numarası biçimine sahip olduğunu doğrular.
@@ -122,7 +122,7 @@ Daha önce belirtildiği gibi, null olamayan türler bir `[Required]` özniteli�
 
 Uzaktan doğrulamayı uygulamak için:
 
-1. JavaScript 'e çağırmak için bir eylem yöntemi oluşturun.  JQuery Validate [uzak](https://jqueryvalidation.org/remote-method/) YÖNTEMI bir JSON yanıtı bekliyor:
+1. JavaScript 'e çağırmak için bir eylem yöntemi oluşturun.  JQuery doğrulaması [uzak](https://jqueryvalidation.org/remote-method/) YÖNTEMI bir JSON yanıtı bekliyor:
 
    * `true`giriş verilerinin geçerli olduğu anlamına gelir.
    * `false`, `undefined`ya `null` da girişin geçersiz olduğu anlamına gelir. Varsayılan hata iletisini görüntüler.
@@ -248,7 +248,7 @@ Bir form üzerinde giriş hataları olduğunda, istemci tarafı doğrulaması su
 
 [!code-cshtml[](validation/samples/3.x/ValidationSample/Views/Shared/_ValidationScriptsPartial.cshtml?name=snippet_Scripts)]
 
-[JQuery unobtrusive doğrulama](https://github.com/aspnet/jquery-validation-unobtrusive) betiği, popüler [jQuery Validate](https://jqueryvalidation.org/) eklentisi üzerinde derleme yapan özel bir Microsoft ön uç kitaplığıdır. JQuery unobtrusive doğrulaması olmadan, iki yerde aynı doğrulama mantığını kodlamakta olmanız gerekir: model özelliklerindeki Sunucu tarafı doğrulama özniteliklerinde bir kez ve sonra istemci tarafı betiklerimizde. Bunun yerine, [Etiket Yardımcıları](xref:mvc/views/tag-helpers/intro) ve [HTML Yardımcıları](xref:mvc/views/overview) , doğrulama GEREKTIREN form öğeleri için HTML 5 `data-` özniteliklerini işlemek üzere model özelliklerinden doğrulama özniteliklerini ve tür meta verilerini kullanır. jQuery unobtrusive doğrulaması `data-` öznitelikleri ayrıştırır ve mantığı, sunucu tarafı doğrulama mantığını istemciye, etkili bir şekilde "kopyalamak" amacıyla jQuery doğrulamasına geçirir. Aşağıda gösterildiği gibi, etiket yardımcıları kullanarak istemcisinde doğrulama hatalarını görüntüleyebilirsiniz:
+[JQuery unobtrusive doğrulama](https://github.com/aspnet/jquery-validation-unobtrusive) betiği, popüler [jQuery doğrulama](https://jqueryvalidation.org/) eklentisi üzerinde derleme yapan özel bir Microsoft ön uç kitaplığıdır. JQuery unobtrusive doğrulaması olmadan, iki yerde aynı doğrulama mantığını kodlamakta olmanız gerekir: model özelliklerindeki Sunucu tarafı doğrulama özniteliklerinde bir kez ve sonra istemci tarafı betiklerimizde. Bunun yerine, [Etiket Yardımcıları](xref:mvc/views/tag-helpers/intro) ve [HTML Yardımcıları](xref:mvc/views/overview) , doğrulama GEREKTIREN form öğeleri için HTML 5 `data-` özniteliklerini işlemek üzere model özelliklerinden doğrulama özniteliklerini ve tür meta verilerini kullanır. jQuery unobtrusive doğrulaması `data-` öznitelikleri ayrıştırır ve mantığı jQuery doğrulamasına geçirir ve sunucu tarafı doğrulama mantığını istemciye etkin bir şekilde "kopyalıyor". Aşağıda gösterildiği gibi, etiket yardımcıları kullanarak istemcisinde doğrulama hatalarını görüntüleyebilirsiniz:
 
 [!code-cshtml[](validation/samples/3.x/ValidationSample/Pages/Movies/Create.cshtml?name=snippet_ReleaseDate&highlight=3-4)]
 
@@ -265,7 +265,7 @@ Bir form üzerinde giriş hataları olduğunda, istemci tarafı doğrulaması su
 </div>
 ```
 
-HTML çıkışındaki `data-` özniteliklerin, `Movie.ReleaseDate` özelliği için doğrulama özniteliklerine karşılık geldiğini unutmayın. `data-val-required` Öznitelik, Kullanıcı Yayın tarihi alanını doldurmazsa, görüntülenecek bir hata iletisi içerir. jQuery unobtrusive doğrulaması bu değeri jQuery Validate [Required ()](https://jqueryvalidation.org/required-method/) yöntemine geçirir ve sonra bu iletiyi, eşlik eden ** \<yayılma>** öğesinde görüntüler.
+HTML çıkışındaki `data-` özniteliklerin, `Movie.ReleaseDate` özelliği için doğrulama özniteliklerine karşılık geldiğini unutmayın. `data-val-required` Öznitelik, Kullanıcı Yayın tarihi alanını doldurmazsa, görüntülenecek bir hata iletisi içerir. jQuery unobtrusive doğrulaması bu değeri jQuery doğrulaması [Required ()](https://jqueryvalidation.org/required-method/) yöntemine geçirir ve bu ileti, eşlik eden ** \<yayılma>** öğesinde görüntülenir.
 
 Veri türü doğrulama, bir `[DataType]` öznitelik tarafından geçersiz kılınmadığı müddetçe, özelliğin .NET türünü temel alır. Tarayıcıların kendi varsayılan hata iletileri vardır ancak jQuery doğrulaması unobtrusive doğrulama paketi bu iletileri geçersiz kılabilir. `[DataType]`gibi öznitelikler ve alt sınıflar `[EmailAddress]` , hata iletisini belirtmenize izin verir.
 
@@ -275,7 +275,7 @@ Obtrusive doğrulaması hakkında bilgi için [Bu GitHub sorununa](https://githu
 
 ### <a name="add-validation-to-dynamic-forms"></a>Dinamik formlara doğrulama ekleme
 
-jQuery unobtrusive doğrulaması, sayfa ilk yüklendiğinde jQuery doğrulaması için doğrulama mantığını ve parametreleri geçirir. Bu nedenle, doğrulama dinamik olarak üretilen formlarda otomatik olarak çalışmaz. Doğrulamayı etkinleştirmek için, jQuery 'ten kaçınmaya yönelik doğrulamayı, dinamik formu oluşturduktan hemen sonra ayrıştırmaya söyleyin. Örneğin, aşağıdaki kod, AJAX aracılığıyla eklenen bir formda istemci tarafı doğrulamayı ayarlar.
+jQuery unobtrusive doğrulaması, sayfa ilk kez yüklendiğinde, jQuery doğrulamasına yönelik doğrulama mantığını ve parametreleri geçirir. Bu nedenle, doğrulama dinamik olarak üretilen formlarda otomatik olarak çalışmaz. Doğrulamayı etkinleştirmek için, jQuery 'ten kaçınmaya yönelik doğrulamayı, dinamik formu oluşturduktan hemen sonra ayrıştırmaya söyleyin. Örneğin, aşağıdaki kod, AJAX aracılığıyla eklenen bir formda istemci tarafı doğrulamayı ayarlar.
 
 ```javascript
 $.get({
@@ -294,7 +294,7 @@ $.get({
 })
 ```
 
-Yöntemi `$.validator.unobtrusive.parse()` , bir bağımsız değişkeni olarak bir jQuery seçiciyi kabul eder. Bu yöntem, `data-` jQuery 'in bu seçicideki formların özniteliklerini ayrıştırmasına izin vermez. Daha sonra bu özniteliklerin değerleri jQuery Validate eklentisine geçirilir.
+Yöntemi `$.validator.unobtrusive.parse()` , bir bağımsız değişkeni olarak bir jQuery seçiciyi kabul eder. Bu yöntem, `data-` jQuery 'in bu seçicideki formların özniteliklerini ayrıştırmasına izin vermez. Daha sonra bu özniteliklerin değerleri jQuery doğrulama eklentisine geçirilir.
 
 ### <a name="add-validation-to-dynamic-controls"></a>Dinamik denetimlere doğrulama ekleme
 
@@ -310,7 +310,7 @@ $.get({
     success: function(newInputHTML) {
         var form = document.getElementById("my-form");
         form.insertAdjacentHTML("beforeend", newInputHTML);
-        $(form).removeData("validator")    // Added by jQuery Validate
+        $(form).removeData("validator")    // Added by jQuery Validation
                .removeData("unobtrusiveValidation");   // Added by jQuery Unobtrusive Validation
         $.validator.unobtrusive.parse(form);
     }
@@ -319,11 +319,11 @@ $.get({
 
 ## <a name="custom-client-side-validation"></a>Özel istemci tarafı doğrulaması
 
-Özel istemci tarafı doğrulama, özel bir jQuery Validate `data-` bağdaştırıcısıyla çalışan HTML öznitelikleri oluşturarak yapılır. Aşağıdaki örnek bağdaştırıcı kodu, `[ClassicMovie]` Bu makalede daha önce sunulan `[ClassicMovieWithClientValidator]` ve öznitelikleri için yazılmıştır:
+Özel istemci tarafı doğrulaması, özel bir jQuery doğrulama `data-` bağdaştırıcısıyla çalışan HTML öznitelikleri oluşturarak yapılır. Aşağıdaki örnek bağdaştırıcı kodu, `[ClassicMovie]` Bu makalede daha önce sunulan `[ClassicMovieWithClientValidator]` ve öznitelikleri için yazılmıştır:
 
 [!code-javascript[](validation/samples/3.x/ValidationSample/wwwroot/js/classicMovieValidator.js)]
 
-Bağdaştırıcıların nasıl yazılacağı hakkında daha fazla bilgi için [jQuery Validate belgelerine](https://jqueryvalidation.org/documentation/)bakın.
+Bağdaştırıcıların nasıl yazılacağı hakkında daha fazla bilgi için [jQuery doğrulama belgelerine](https://jqueryvalidation.org/documentation/)bakın.
 
 Belirli bir alan için bir bağdaştırıcının kullanımı, şu öznitelikler tarafından `data-` tetiklenir:
 

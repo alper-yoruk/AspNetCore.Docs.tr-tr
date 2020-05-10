@@ -5,7 +5,7 @@ description: Windows Server Internet Information Services (IIS) üzerinde ASP.NE
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/07/2020
+ms.date: 5/7/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 157cfc4c42d5e057e9b2ebd04c93d80db55419c9
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
+ms.openlocfilehash: c3841babe213a9a3f303b8f9b83a947fd33ad647
+ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967499"
+ms.lasthandoff: 05/09/2020
+ms.locfileid: "83003127"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>IIS ile Windows üzerinde ASP.NET Core barındırma
 
@@ -77,22 +77,26 @@ ASP.NET Core bir uygulama, işlem içi barındırma kullanarak IIS çalışan i�
   * Çağırır `Program.Main`.
 * IIS yerel isteğinin ömrünü işler.
 
-İşlem içi barındırma modeli, .NET Framework hedef ASP.NET Core uygulamalar için desteklenmez.
-
 Aşağıdaki diyagramda IIS, ASP.NET Core modülü ve süreçte barındırılan bir uygulama arasındaki ilişki gösterilmektedir:
 
 ![İşlem içi barındırma senaryosunda modül ASP.NET Core](index/_static/ancm-inprocess.png)
 
-Web 'den çekirdek modu HTTP. sys sürücüsüne bir istek ulaşır. Sürücü, yerel isteği Web sitesinin yapılandırılmış bağlantı noktasında IIS 'ye yönlendirir, genellikle 80 (HTTP) veya 443 (HTTPS). ASP.NET Core modülü yerel isteği alır ve IIS HTTP sunucusuna (`IISHttpServer`) geçirir. IIS HTTP sunucusu, isteği yerelden yönetilene dönüştüren bir IIS için işlem içi sunucu uygulamasıdır.
+1. Web 'den çekirdek modu HTTP. sys sürücüsüne bir istek ulaşır.
+1. Sürücü, yerel isteği Web sitesinin yapılandırılmış bağlantı noktasında IIS 'ye yönlendirir, genellikle 80 (HTTP) veya 443 (HTTPS).
+1. ASP.NET Core modülü yerel isteği alır ve IIS HTTP sunucusuna (`IISHttpServer`) geçirir. IIS HTTP sunucusu, isteği yerelden yönetilene dönüştüren bir IIS için işlem içi sunucu uygulamasıdır.
 
-IIS HTTP sunucusu isteği işlediğinde, istek ASP.NET Core ara yazılım ardışık düzenine gönderilir. Ara yazılım ardışık düzeni isteği işler ve uygulamanın mantığına bir `HttpContext` örnek olarak geçirir. Uygulamanın yanıtı IIS HTTP sunucusu aracılığıyla IIS 'e geri geçirilir. IIS yanıtı, isteği başlatan istemciye gönderir.
+IIS HTTP sunucusu isteği tamamladıktan sonra:
 
-İşlem içi barındırma, mevcut uygulamalar için kabul ediyor, ancak tüm IIS ve IIS Express senaryoları için varsayılan [DotNet yeni](/dotnet/core/tools/dotnet-new) şablonlar, işlem içi barındırma modeli için varsayılan olarak kullanılır.
+1. İstek ASP.NET Core ara yazılım ardışık düzenine gönderilir.
+1. Ara yazılım ardışık düzeni isteği işler ve uygulamanın mantığına bir `HttpContext` örnek olarak geçirir.
+1. Uygulamanın yanıtı IIS HTTP sunucusu aracılığıyla IIS 'e geri geçirilir.
+1. IIS yanıtı, isteği başlatan istemciye gönderir.
 
-`CreateDefaultBuilder`[CoreCLR](/dotnet/standard/glossary#coreclr) 'yi önyüklemek ve <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS*> uygulamayı IIS çalışan işleminin (*W3wp. exe* veya *iisexpress. exe*) içinde barındırmak için yöntemini çağırarak bir <xref:Microsoft.AspNetCore.Hosting.Server.IServer> örnek ekler. Performans testleri, bir .NET Core uygulamasını işlem içinde barındıran uygulamanın, uygulamayı işlem dışı ve [Kestrel](xref:fundamentals/servers/kestrel) sunucusuna proxy alma isteklerinin barındırılmasına kıyasla önemli ölçüde daha yüksek istek aktarım hızı sağladığını gösterir.
+İşlem içi barındırma, mevcut uygulamalar için kabul edilir. ASP.NET Core Web şablonları, işlem içi barındırma modelini kullanır.
 
-> [!NOTE]
-> Tek bir dosya yürütülebilir dosyası olarak yayınlanan uygulamalar, işlem içi barındırma modeliyle yüklenemez.
+`CreateDefaultBuilder`[CoreCLR](/dotnet/standard/glossary#coreclr) 'yi önyüklemek ve <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS*> uygulamayı IIS çalışan işleminin (*W3wp. exe* veya *iisexpress. exe*) içinde barındırmak için yöntemini çağırarak bir <xref:Microsoft.AspNetCore.Hosting.Server.IServer> örnek ekler. Performans testleri, bir .NET Core uygulamasını işlem içinde barındırmanın, uygulamayı işlem dışı ve [Kestrel](xref:fundamentals/servers/kestrel)'e yönelik proxy istekleri barındırmakla karşılaştırıldığında önemli ölçüde daha yüksek istek aktarım hızı sağladığını gösterir.
+
+Tek bir dosya yürütülebilir dosyası olarak yayınlanan uygulamalar, işlem içi barındırma modeliyle yüklenemez.
 
 ### <a name="out-of-process-hosting-model"></a>İşlem dışı barındırma modeli
 
@@ -102,11 +106,14 @@ Aşağıdaki diyagramda IIS, ASP.NET Core modülü ve işlem dışı barındır�
 
 ![İşlem dışı barındırma senaryosunda modül ASP.NET Core](index/_static/ancm-outofprocess.png)
 
-İstekler Web 'den çekirdek modu HTTP. sys sürücüsüne ulaşır. Sürücü, istekleri Web sitesinin yapılandırılmış bağlantı noktasında IIS 'ye yönlendirir, genellikle 80 (HTTP) veya 443 (HTTPS). Modül, 80 veya 443 numaralı bağlantı noktası olmayan uygulama için rastgele bir bağlantı noktasında istekleri Kestrel 'e iletir.
+1. İstekler Web 'den çekirdek modu HTTP. sys sürücüsüne ulaşır.
+1. Sürücü, Web sitesinin yapılandırılmış bağlantı noktasında istekleri IIS 'ye yönlendirir. Yapılandırılmış bağlantı noktası genellikle 80 (HTTP) veya 443 (HTTPS).
+1. Modül, isteği uygulama için rastgele bir bağlantı noktasında Kestrel 'e iletir. Rastgele bağlantı noktası 80 veya 443 değildir.
 
-Modül, başlangıç sırasında bir ortam değişkeni aracılığıyla bağlantı noktasını belirtir ve <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*> uzantı sunucuyu dinleyecek şekilde yapılandırır. `http://localhost:{PORT}` Ek denetimler gerçekleştirilir ve modülünden kaynaklanmayan istekler reddedilir. Modül HTTPS iletmeyi desteklemez, bu nedenle istekler HTTPS üzerinden IIS tarafından alınsa bile HTTP üzerinden iletilir.
+<!-- make this a bullet list -->
+ASP.NET Core modülü başlatma sırasında bir ortam değişkeni aracılığıyla bağlantı noktasını belirtir. <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*> Uzantı, sunucuyu dinlemek üzere yapılandırır `http://localhost:{PORT}`. Ek denetimler gerçekleştirilir ve modülünden kaynaklanmayan istekler reddedilir. Modül HTTPS iletmeyi desteklemiyor. İstekler, HTTPS üzerinden IIS tarafından alınsa bile HTTP üzerinden iletilir.
 
-Kestrel, isteği modülden başlattıktan sonra, istek ASP.NET Core ara yazılım ardışık düzenine gönderilir. Ara yazılım ardışık düzeni isteği işler ve uygulamanın mantığına bir `HttpContext` örnek olarak geçirir. IIS tümleştirmesi tarafından eklenen ara yazılım, isteği Kestrel iletmek için düzen, uzak IP ve pathbase 'i hesaba göre güncelleştirir. Uygulamanın yanıtı IIS 'e geri geçirilir ve bu, isteği başlatan HTTP istemcisine geri gönderilir.
+Kestrel, isteği modülden başlattıktan sonra, istek ASP.NET Core ara yazılım ardışık düzenine iletilir. Ara yazılım ardışık düzeni isteği işler ve uygulamanın mantığına bir `HttpContext` örnek olarak geçirir. IIS tümleştirmesi tarafından eklenen ara yazılım, isteği Kestrel iletmek için düzen, uzak IP ve pathbase 'i hesaba göre güncelleştirir. Uygulamanın yanıtı IIS 'e geri geçirilir ve bu, isteği başlatan HTTP istemcisine geri iletilir.
 
 ASP.NET Core modülü yapılandırma kılavuzu için bkz <xref:host-and-deploy/aspnet-core-module>..
 
@@ -165,7 +172,14 @@ services.Configure<IISOptions>(options =>
 
 ### <a name="proxy-server-and-load-balancer-scenarios"></a>Proxy sunucusu ve yük dengeleyici senaryoları
 
-Iletilen üstbilgiler ara yazılımını yapılandıran [IIS tümleştirme ara yazılımı](#enable-the-iisintegration-components)ve ASP.NET Core modülü, DÜZENI (http/https) ve isteğin KAYNAKLANDıĞı uzak IP adresini iletecek şekilde yapılandırılmıştır. Ek proxy sunucularının ve yük dengeleyiciler arkasında barındırılan uygulamalar için ek yapılandırma gerekebilir. Daha fazla bilgi için bkz. [proxy sunucularıyla ve yük dengeleyicilerle çalışacak ASP.NET Core yapılandırma](xref:host-and-deploy/proxy-load-balancer).
+[IIS tümleştirme ara yazılımı](#enable-the-iisintegration-components) ve ASP.NET Core modülü, iletmek üzere yapılandırılır:
+
+* Düzen (HTTP/HTTPS).
+* İsteğin kaynaklandığı uzak IP adresi.
+
+[IIS tümleştirme ara yazılımı](#enable-the-iisintegration-components) , Iletilen üstbilgiler ara yazılımını yapılandırır.
+
+Ek proxy sunucularının ve yük dengeleyiciler arkasında barındırılan uygulamalar için ek yapılandırma gerekebilir. Daha fazla bilgi için bkz. [proxy sunucularıyla ve yük dengeleyicilerle çalışacak ASP.NET Core yapılandırma](xref:host-and-deploy/proxy-load-balancer).
 
 ### <a name="webconfig-file"></a>Web. config dosyası
 
@@ -201,7 +215,7 @@ Uygulamanın fiziksel yolunda ( * \<derleme>. runtimeconfig. JSON*, * \<Assembly
 
 ### <a name="transform-webconfig"></a>Web.config’i dönüştürme
 
-*Web. config* 'i yayımlama sırasında dönüştürmeniz gerekiyorsa (örneğin, yapılandırma, profil veya ortama göre ortam değişkenlerini ayarlayın), bkz <xref:host-and-deploy/iis/transform-webconfig>..
+Yayımlama sırasında *Web. config* ' i dönüştürmeniz gerekiyorsa bkz <xref:host-and-deploy/iis/transform-webconfig>.. Yapılandırma, profil veya ortama göre ortam değişkenlerini ayarlamak için Publish üzerinde *Web. config* ' i dönüştürmeniz gerekebilir.
 
 ## <a name="iis-configuration"></a>IIS yapılandırması
 
@@ -682,7 +696,11 @@ Sorun giderme kılavuzu için bkz <xref:test/troubleshoot>..
 
 ### <a name="in-process-hosting-model"></a>İşlem içi barındırma modeli
 
-ASP.NET Core bir uygulama, işlem içi barındırma kullanarak IIS çalışan işlemiyle aynı işlemde çalışır. İşlem içi barındırma, istek dışı barındırmak için gelişmiş performans sağlar çünkü istekler, giden ağ trafiği ile aynı makineye geri döndürülen bir ağ arabirimidir. IIS, [Windows Işlem etkinleştirme hizmeti (was)](/iis/manage/provisioning-and-managing-iis/features-of-the-windows-process-activation-service-was)ile işlem yönetimini işler.
+ASP.NET Core bir uygulama, işlem içi barındırma kullanarak IIS çalışan işlemiyle aynı işlemde çalışır. İşlem içi barındırma, işlem dışı barındırma üzerinde daha iyi performans sağlar çünkü:
+
+* İsteklerin geri döngü bağdaştırıcısı üzerinde proxy yok. Geri döngü bağdaştırıcısı, giden ağ trafiğinin aynı makineye geri döndürdüğü bir ağ arabirimidir.
+
+IIS, [Windows Işlem etkinleştirme hizmeti (was)](/iis/manage/provisioning-and-managing-iis/features-of-the-windows-process-activation-service-was)ile işlem yönetimini işler.
 
 [ASP.NET Core modülü](xref:host-and-deploy/aspnet-core-module):
 
