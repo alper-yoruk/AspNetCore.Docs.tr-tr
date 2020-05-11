@@ -339,14 +339,16 @@
                   uid: security/blazor/webassembly/standalone-with-azure-active-directory
                 - name: AAD B2C ile bağımsız
                   uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
-                - name: Kimlik Sunucusu ile barındırılan
-                  uid: security/blazor/webassembly/hosted-with-identity-server
                 - name: AAD ile barındırılan
                   uid: security/blazor/webassembly/hosted-with-azure-active-directory
                 - name: AAD B2C ile barındırılan
                   uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
+                - name: Kimlik Sunucusu ile barındırılan
+                  uid: security/blazor/webassembly/hosted-with-identity-server
                 - name: İlave senaryolar
                   uid: security/blazor/webassembly/additional-scenarios
+                - name: AAD grupları ve rolleri
+                  uid: security/blazor/webassembly/aad-groups-roles
             - name: Blazor Server
               items:
                 - name: Genel Bakış
@@ -1134,14 +1136,16 @@
               uid: security/blazor/webassembly/standalone-with-azure-active-directory
             - name: AAD B2C ile bağımsız
               uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
-            - name: Kimlik Sunucusu ile barındırılan
-              uid: security/blazor/webassembly/hosted-with-identity-server
             - name: AAD ile barındırılan
               uid: security/blazor/webassembly/hosted-with-azure-active-directory
             - name: AAD B2C ile barındırılan
               uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
+            - name: Kimlik Sunucusu ile barındırılan
+              uid: security/blazor/webassembly/hosted-with-identity-server
             - name: İlave senaryolar
               uid: security/blazor/webassembly/additional-scenarios
+            - name: AAD grupları ve rolleri
+              uid: security/blazor/webassembly/aad-groups-roles
         - name: Blazor Server
           items:
             - name: Genel Bakış
