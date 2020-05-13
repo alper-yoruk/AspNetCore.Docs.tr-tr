@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core bekleyen anahtar şifreleme
+title: ASP.NET Core kullanarak Windows ve Azure 'da bekleyen anahtar şifreleme
 author: rick-anderson
 description: Bekleyen ASP.NET Core veri koruma anahtarı şifrelemesinin uygulama ayrıntılarını öğrenin.
 ms.author: riande
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-encryption-at-rest
-ms.openlocfilehash: e68b8e09dbd876c6f0d37242ebaa415994b3b808
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: c927c926212aeb1263d15fd3fdc753c377b2e305
+ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776935"
+ms.lasthandoff: 05/12/2020
+ms.locfileid: "83153563"
 ---
-# <a name="key-encryption-at-rest-in-aspnet-core"></a>ASP.NET Core bekleyen anahtar şifreleme
+# <a name="key-encryption-at-rest-in-windows-and-azure-using-aspnet-core"></a>ASP.NET Core kullanarak Windows ve Azure 'da bekleyen anahtar şifreleme
 
 Veri koruma sistemi, şifreleme anahtarlarının bekleyen bir şekilde nasıl şifrelendiğini belirlemekte [Varsayılan olarak bir bulma mekanizması kullanır](xref:security/data-protection/configuration/default-settings) . Geliştirici bulma mekanizmasını geçersiz kılabilir ve anahtarların Rest 'te nasıl şifrelendiğini el ile belirtebilir.
 
@@ -29,7 +29,7 @@ Veri koruma sistemi, şifreleme anahtarlarının bekleyen bir şekilde nasıl ş
 
 ## <a name="azure-key-vault"></a>Azure Key Vault
 
-Anahtarları [Azure Key Vault](https://azure.microsoft.com/services/key-vault/)içinde depolamak Için, [ProtectKeysWithAzureKeyVault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault) `Startup` ile sistemi yapılandırın:
+Anahtarları [Azure Key Vault](https://azure.microsoft.com/services/key-vault/)içinde depolamak Için, [ProtectKeysWithAzureKeyVault](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault) ile sistemi yapılandırın `Startup` :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -59,7 +59,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-`ProtectKeysWithDpapi` Parametresi olmadan çağrılırsa, yalnızca geçerli Windows Kullanıcı hesabı kalıcı anahtar halkasını çözebilir. İsteğe bağlı olarak, makinedeki herhangi bir kullanıcı hesabının (yalnızca geçerli kullanıcı hesabı değil) anahtar halkasını çözebilmesini sağlayabilirsiniz:
+`ProtectKeysWithDpapi`Parametresi olmadan çağrılırsa, yalnızca geçerli Windows Kullanıcı hesabı kalıcı anahtar halkasını çözebilir. İsteğe bağlı olarak, makinedeki herhangi bir kullanıcı hesabının (yalnızca geçerli kullanıcı hesabı değil) anahtar halkasını çözebilmesini sağlayabilirsiniz:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -106,7 +106,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Ayrıca, ' nin `ProtectKeysWithDpapiNG`Parametresiz aşırı yüklemesi de vardır. "SID = {CURRENT_ACCOUNT_SID}" kuralını belirtmek için bu kullanışlı yöntemi kullanın; burada *CURRENT_ACCOUNT_SID* geçerli Windows Kullanıcı hesabının SID 'sidir:
+Ayrıca, ' nin Parametresiz aşırı yüklemesi de vardır `ProtectKeysWithDpapiNG` . "SID = {CURRENT_ACCOUNT_SID}" kuralını belirtmek için bu kullanışlı yöntemi kullanın; burada *CURRENT_ACCOUNT_SID* geçerli Windows Kullanıcı hesabının SID 'sidir:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
