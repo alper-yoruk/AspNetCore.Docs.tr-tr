@@ -27,6 +27,7 @@
     - name: 1.1 sürümündeki yenilikler
       uid: aspnetcore-1.1
 - name: Öğreticiler
+  displayName: tutorial
   items:
     - name: Web uygulamaları
       items:
@@ -154,20 +155,19 @@
               uid: data/ef-mvc/inheritance
             - name: Gelişmiş konular
               uid: data/ef-mvc/advanced
-- name: Öğreticiler (Microsoft Learn)
-  displayName: tutorial
-  items:
-    - name: Web uygulamaları
-      displayName: 'tutorial, razor, razor pages, ui'
-      href: /learn/modules/create-razor-pages-aspnet-core/
-    - name: Web API’si uygulamaları
-      href: /learn/modules/build-web-api-net-core/
-    - name: Veri erişimi
-      displayName: 'tutorial, ef, entity framework'
-      href: /learn/modules/persist-data-ef-core/
-    - name: Web uygulaması güvenliği
-      displayName: 'tutorial, identity'
-      href: /learn/modules/secure-aspnet-core-identity/
+    - name: Microsoft Learn modülleri
+      items:
+        - name: Web uygulamaları >>
+          displayName: 'tutorial, razor, razor pages, ui'
+          href: /learn/modules/create-razor-pages-aspnet-core/
+        - name: Web API’si uygulamaları >>
+          href: /learn/modules/build-web-api-net-core/
+        - name: Veri erişimi >>
+          displayName: 'tutorial, ef, entity framework'
+          href: /learn/modules/persist-data-ef-core/
+        - name: Web uygulaması güvenliği >>
+          displayName: 'tutorial, identity'
+          href: /learn/modules/secure-aspnet-core-identity/
 - name: Temeller
   items:
     - name: Genel Bakış

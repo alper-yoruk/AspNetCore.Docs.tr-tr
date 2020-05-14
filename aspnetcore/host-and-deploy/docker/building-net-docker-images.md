@@ -4,7 +4,7 @@ author: rick-anderson
 description: Docker kayıt defterinden yayınlanan .NET Core Docker görüntülerini nasıl kullanacağınızı öğrenin. Görüntüleri çekin ve kendi görüntülerinizi oluşturun.
 ms.author: riande
 ms.custom: mvc
-ms.date: 01/15/2020
+ms.date: 05/12/2020
 no-loc:
 - Blazor
 - Identity
@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/docker/building-net-docker-images
-ms.openlocfilehash: bce04caf20dcf23ab7160066d55a279b29dca1ae
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 7394cba07109fce5a8718998b4e2a3b5bf752b0b
+ms.sourcegitcommit: e87dfa08fec0be1008249b1be678e5f79dcc5acb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774112"
+ms.lasthandoff: 05/13/2020
+ms.locfileid: "83382523"
 ---
 # <a name="docker-images-for-aspnet-core"></a>ASP.NET Core için Docker görüntüleri
 
@@ -44,9 +44,9 @@ Bu öğreticide, ASP.NET Core örnek bir uygulama indirir ve Docker kapsayıcıl
 
 * `dotnet/core/aspnet`
 
-   Örnek, uygulamayı çalıştırmak için bu görüntüyü kullanır. Görüntü, ASP.NET Core çalışma zamanını ve kitaplıklarını içerir ve üretimde uygulamaları çalıştırmak için iyileştirilmiştir. Dağıtım ve uygulama başlatma hızı için tasarlanan görüntü görece küçüktür, bu nedenle Docker kayıt defterinden Docker ana bilgisayarına ağ performansı en iyi duruma getirilmiştir. Yalnızca bir uygulamayı çalıştırmak için gereken ikili dosyalar ve içerikler kapsayıcıya kopyalanır. İçerik çalıştırılmaya hazırlanmaya, en hızlı süreyi `Docker run` uygulama başlatmaya kadar etkinleştirir. Docker modelinde dinamik kod derlemesi gerekli değildir.
+   Örnek, uygulamayı çalıştırmak için bu görüntüyü kullanır. Görüntü, ASP.NET Core çalışma zamanını ve kitaplıklarını içerir ve üretimde uygulamaları çalıştırmak için iyileştirilmiştir. Dağıtım ve uygulama başlatma hızı için tasarlanan görüntü görece küçüktür, bu nedenle Docker kayıt defterinden Docker ana bilgisayarına ağ performansı en iyi duruma getirilmiştir. Yalnızca bir uygulamayı çalıştırmak için gereken ikili dosyalar ve içerikler kapsayıcıya kopyalanır. İçerik çalıştırılmaya hazırlanmaya, en hızlı süreyi uygulama başlatmaya kadar etkinleştirir `Docker run` . Docker modelinde dinamik kod derlemesi gerekli değildir.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 ::: moniker range="< aspnetcore-3.0"
 
 * [.NET Core 2,2 SDK](https://dotnet.microsoft.com/download/dotnet-core)
@@ -65,7 +65,7 @@ Bu öğreticide, ASP.NET Core örnek bir uygulama indirir ve Docker kapsayıcıl
     * [Debian](https://docs.docker.com/install/linux/docker-ce/debian/)
     * [Fedora](https://docs.docker.com/install/linux/docker-ce/fedora/)
     * [Ubuntu](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
-  * [Mac OS](https://docs.docker.com/docker-for-mac/install/)
+  * [macOS](https://docs.docker.com/docker-for-mac/install/)
   * [Windows](https://docs.docker.com/docker-for-windows/install/)
 
 * [Git](https://git-scm.com/download)
@@ -88,7 +88,7 @@ Bu öğreticide, ASP.NET Core örnek bir uygulama indirir ve Docker kapsayıcıl
   dotnet run
   ```
 
-* `http://localhost:5000` Uygulamayı test etmek için bir tarayıcıda adresine gidin.
+* `http://localhost:5000`Uygulamayı test etmek için bir tarayıcıda adresine gidin.
 
 * Uygulamayı durdurmak için komut isteminde CTRL + C tuşlarına basın.
 
@@ -105,24 +105,24 @@ Bu öğreticide, ASP.NET Core örnek bir uygulama indirir ve Docker kapsayıcıl
   docker run -it --rm -p 5000:80 --name aspnetcore_sample aspnetapp
   ```
 
-  `build` Komut bağımsız değişkenleri:
+  `build`Komut bağımsız değişkenleri:
   * Görüntüyü aspnetapp olarak adlandırın.
   * Geçerli klasörde Dockerfile dosyasını arayın (sonundaki süre).
 
   Run komutu bağımsız değişkenleri:
-  * Bir sözde TTY ayırın ve ekli olmasa bile açık tutun. (İle `--interactive --tty`aynı efekt)
+  * Bir sözde TTY ayırın ve ekli olmasa bile açık tutun. (İle aynı efekt `--interactive --tty` )
   * Kapsayıcıyı çıkış sırasında otomatik olarak kaldır.
   * Yerel makinedeki 5000 numaralı bağlantı noktasını kapsayıcıda 80 numaralı bağlantı noktasına eşleyin.
   * Kapsayıcının aspnetcore_sample adı.
   * Aspnetapp görüntüsünü belirtin.
 
-* `http://localhost:5000` Uygulamayı test etmek için bir tarayıcıda adresine gidin.
+* `http://localhost:5000`Uygulamayı test etmek için bir tarayıcıda adresine gidin.
 
 ## <a name="run-in-a-windows-container"></a>Bir Windows kapsayıcısında Çalıştır
 
 * Docker istemcisinde Windows kapsayıcıları ' na geçin.
 
-Konumundaki `dotnet-docker/samples/aspnetapp`Docker dosya klasörüne gidin.
+Konumundaki Docker dosya klasörüne gidin `dotnet-docker/samples/aspnetapp` .
 
 * Örneği Docker 'da derlemek ve çalıştırmak için aşağıdaki komutları çalıştırın:
 
@@ -133,8 +133,8 @@ Konumundaki `dotnet-docker/samples/aspnetapp`Docker dosya klasörüne gidin.
 
 * Windows kapsayıcıları için kapsayıcının IP adresi gerekir (Bu işe göz atma `http://localhost:5000` çalışmayacak):
   * Başka bir komut istemi açın.
-  * Çalışan `docker ps` kapsayıcıları görmek için ' i çalıştırın. "Aspnetcore_sample" kapsayıcısının orada olduğunu doğrulayın.
-  * Kapsayıcının `docker exec aspnetcore_sample ipconfig` IP adresini göstermek için öğesini çalıştırın. Komutun çıktısı şu örneğe benzer şekilde görünür:
+  * `docker ps`Çalışan kapsayıcıları görmek için ' i çalıştırın. "Aspnetcore_sample" kapsayıcısının orada olduğunu doğrulayın.
+  * `docker exec aspnetcore_sample ipconfig`KAPSAYıCıNıN IP adresini göstermek için öğesini çalıştırın. Komutun çıktısı şu örneğe benzer şekilde görünür:
 
     ```console
     Ethernet adapter Ethernet:
@@ -178,9 +178,9 @@ Bazı senaryolarda, çalışma zamanında gerekli olan uygulama dosyalarını ko
     dotnet published/aspnetapp.dll
     ```
 
-* Giriş sayfasını `http://localhost:5000` görmek için öğesine gidin.
+* `http://localhost:5000`Giriş sayfasını görmek için öğesine gidin.
 
-El ile yayınlanan uygulamayı bir Docker kapsayıcısı içinde kullanmak için yeni bir Dockerfile oluşturun ve kapsayıcıyı derlemek için `docker build .` komutunu kullanın.
+El ile yayınlanan uygulamayı bir Docker kapsayıcısı içinde kullanmak için yeni bir Dockerfile oluşturun ve `docker build .` kapsayıcıyı derlemek için komutunu kullanın.
 
 ::: moniker range="< aspnetcore-3.0"
 
@@ -193,7 +193,7 @@ ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 
 ### <a name="the-dockerfile"></a>Dockerfile
 
-Daha önce çalıştırdığınız `docker build` komut tarafından kullanılan *dockerfile* aşağıda verilmiştir.  Bu bölümde `dotnet publish` derlemek ve dağıtmak için kullandığınız şekilde aynı şekilde kullanılır.  
+Daha önce çalıştırdığınız komut tarafından kullanılan *Dockerfile* aşağıda verilmiştir `docker build` .  `dotnet publish`Bu bölümde derlemek ve dağıtmak için kullandığınız şekilde aynı şekilde kullanılır.  
 
 ```dockerfile
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
@@ -208,7 +208,6 @@ RUN dotnet restore
 COPY aspnetapp/. ./aspnetapp/
 WORKDIR /app/aspnetapp
 RUN dotnet publish -c Release -o out
-
 
 FROM mcr.microsoft.com/dotnet/core/aspnet:2.2 AS runtime
 WORKDIR /app
@@ -229,7 +228,7 @@ ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 
 ### <a name="the-dockerfile"></a>Dockerfile
 
-Daha önce çalıştırdığınız `docker build` komut tarafından kullanılan *dockerfile* aşağıda verilmiştir.  Bu bölümde `dotnet publish` derlemek ve dağıtmak için kullandığınız şekilde aynı şekilde kullanılır.  
+Daha önce çalıştırdığınız komut tarafından kullanılan *Dockerfile* aşağıda verilmiştir `docker build` .  `dotnet publish`Bu bölümde derlemek ve dağıtmak için kullandığınız şekilde aynı şekilde kullanılır.  
 
 ```dockerfile
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
@@ -245,21 +244,15 @@ COPY aspnetapp/. ./aspnetapp/
 WORKDIR /app/aspnetapp
 RUN dotnet publish -c Release -o out
 
-
 FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS runtime
 WORKDIR /app
 COPY --from=build /app/aspnetapp/out ./
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 ```
 
-::: moniker-end
+Önceki Dockerfile içinde belirtildiği gibi, `*.csproj` dosyalar ayrı *Katmanlar*olarak kopyalanır ve geri yüklenir. `docker build`Komut bir görüntü oluşturduğunda, yerleşik bir önbellek kullanır. `*.csproj`Komutun son çalıştırılmasından bu yana dosyalar değiştirilmediyse `docker build` , `dotnet restore` komutun yeniden çalıştırılması gerekmez. Bunun yerine, karşılık gelen katman için yerleşik önbellek `dotnet restore` yeniden kullanılır. Daha fazla bilgi için bkz. [Dockerfiles yazmak Için en iyi uygulamalar](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache).
 
-```dockerfile
-FROM mcr.microsoft.com/dotnet/core/aspnet:3.0 AS runtime
-WORKDIR /app
-COPY published/aspnetapp.dll ./
-ENTRYPOINT ["dotnet", "aspnetapp.dll"]
-```
+::: moniker-end
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
