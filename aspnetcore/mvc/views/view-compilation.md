@@ -1,44 +1,33 @@
 ---
-title: ASP.NET Core'da jilet dosya derlemesi
-author: rick-anderson
-description: Razor dosyalarının derlemesinin ASP.NET Core uygulamasında nasıl oluştuğunu öğrenin.
-ms.author: riande
-ms.custom: mvc
-ms.date: 04/14/2020
-uid: mvc/views/view-compilation
-ms.openlocfilehash: 3d871ab960de28a565280d9e4cb2c597832e2455
-ms.sourcegitcommit: 6c8cff2d6753415c4f5d2ffda88159a7f6f7431a
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 04/16/2020
-ms.locfileid: "81440941"
+title: Razor compilación de archivos en ASP.net Core autor: Rick-Anderson Description: Obtenga información Razor sobre cómo se produce la compilación de archivos en una aplicación ASP.net Core.
+MS. Author: Riande ms. Custom: MVC ms. Date: 04/14/2020 no-LOC: [extraordinariamente, "Identity", "continuen", Razor, Signalr] UID: MVC/views/View-Compilation
 ---
-# <a name="razor-file-compilation-in-aspnet-core"></a>ASP.NET Core'da jilet dosya derlemesi
+# <a name="razor-file-compilation-in-aspnet-core"></a>Compilación de archivos de Razor en ASP.NET Core
 
-Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
+Por [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.1"
 
-*.cshtml* uzantılı razor [dosyaları, Razor SDK](xref:razor-pages/sdk)kullanılarak hem oluşturma hem de yayımlama zamanında derlenir. Runtime derlemesi, projenizi yapılandırarak isteğe bağlı olarak etkinleştirilebilir.
+Los archivos de Razor con una extensión *.cshtml* se compilan en tiempo de compilación y publicación mediante el [SDK de Razor](xref:razor-pages/sdk). La compilación en tiempo de ejecución puede habilitarse opcionalmente mediante la configuración del proyecto.
 
-## <a name="razor-compilation"></a>Jilet derlemesi
+## <a name="razor-compilation"></a>Compilación de Razor
 
-Razor dosyalarının oluşturma zamanı ve yayımlama zamanı derlemesi varsayılan olarak Razor SDK tarafından etkinleştirilir. Etkinleştirildiğinde, runtime derlemesi yapı zamanı derlemesini tamamlayarak Razor dosyalarının düzenlenirse güncelleştirilmesini sağlar.
+El SDK de Razor habilita de forma predeterminada la compilación de archivos Razor en tiempo de compilación y en tiempo de publicación. Cuando está habilitada, la compilación en tiempo de ejecución complementa la compilación en tiempo de compilación, lo que permite actualizar archivos de Razor si se modifican.
 
-## <a name="enable-runtime-compilation-at-project-creation"></a>Proje oluşturmada çalışma zamanı derlemesini etkinleştirme
+## <a name="enable-runtime-compilation-at-project-creation"></a>Habilitar compilación en tiempo de ejecución al crear el proyecto
 
-Razor Pages ve MVC proje şablonları, proje oluşturulduğunda çalışma zamanı derlemesini etkinleştirme seçeneğini içerir. Bu seçenek Core 3.1 ve sonraki ASP.NET desteklenir.
+Las plantillas de proyecto de Razor Pages y MVC incluyen una opción para habilitar la compilación en tiempo de ejecución cuando se crea el proyecto. Esta opción se admite en ASP.NET Core 3,1 y versiones posteriores.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Yeni **bir ASP.NET Core web uygulaması** oluştur iletişim kutusunda:
+En el cuadro de diálogo **crear una nueva aplicación Web de ASP.net Core** :
 
-1. **Web Uygulaması** veya Web **Uygulaması (Model-View-Controller)** proje şablonu seçin.
-1. Etkinleştir **Jilet çalışma zamanı derleme** onay kutusunu seçin.
+1. Seleccione la plantilla de **proyecto aplicación web o** **aplicación web (controlador de vista de modelos)** .
+1. Active la casilla **Habilitar compilación en tiempo de ejecución de Razor** .
 
-# <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
+# <a name="net-core-cli"></a>[CLI de .NET Core](#tab/netcore-cli)
 
-`-rrc` Veya `--razor-runtime-compilation` şablon seçeneğini kullanın. Örneğin, aşağıdaki komut, çalışma zamanı derlemesi etkin leştirilmiş yeni bir Razor Pages projesi oluşturur:
+Use la `-rrc` opción `--razor-runtime-compilation` de plantilla o. Por ejemplo, el siguiente comando crea un nuevo proyecto de Razor Pages con la compilación en tiempo de ejecución habilitada:
 
 ```dotnetcli
 dotnet new webapp --razor-runtime-compilation
@@ -46,12 +35,12 @@ dotnet new webapp --razor-runtime-compilation
 
 ---
 
-## <a name="enable-runtime-compilation-in-an-existing-project"></a>Varolan bir projede çalışma zamanı derlemesini etkinleştirme
+## <a name="enable-runtime-compilation-in-an-existing-project"></a>Habilitar la compilación en tiempo de ejecución en un proyecto existente
 
-Varolan bir projedeki tüm ortamlar için çalışma zamanı derlemesini etkinleştirmek için:
+Para habilitar la compilación en tiempo de ejecución para todos los entornos de un proyecto existente:
 
-1. [Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/) NuGet paketini yükleyin.
-1. Bir çağrı içerecek `Startup.ConfigureServices` şekilde projenin yöntemini <xref:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation*>güncelleştirin. Örneğin:
+1. Instale [Microsoft. AspNetCore. Mvc.Razor. ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/)Paquete NuGet de RuntimeCompilation.
+1. Actualizar el método `Startup.ConfigureServices` del proyecto para incluir una llamada a <xref:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation*>. Por ejemplo:
 
     ```csharp
     public void ConfigureServices(IServiceCollection services)
@@ -63,40 +52,40 @@ Varolan bir projedeki tüm ortamlar için çalışma zamanı derlemesini etkinle
     }
     ```
 
-## <a name="conditionally-enable-runtime-compilation-in-an-existing-project"></a>Varolan bir projede koşullu olarak çalışma zamanı derlemesini etkinleştirin
+## <a name="conditionally-enable-runtime-compilation-in-an-existing-project"></a>Habilitar la compilación en tiempo de ejecución de forma condicional en un proyecto existente
 
-Çalışma zamanı derlemesi, yalnızca yerel geliştirme için kullanılabilecek şekilde etkinleştirilebilir. Bu şekilde koşullu olarak etkinleştirmek, yayımlanmış çıktının aşağıdakileri sağlamasını sağlar:
+La compilación en tiempo de ejecución se puede habilitar para que solo esté disponible para el desarrollo local. Este modo de habilitación condicional garantiza que la salida publicada:
 
-* Derlenmiş görünümleri kullanır.
-* Üretimde dosya izleyicilerine izin vermez.
+* Usa vistas precompiladas.
+* No habilita monitores de archivos en producción.
 
-Yalnızca Geliştirme ortamında çalışma zamanı derlemesini etkinleştirmek için:
+Para habilitar la compilación en tiempo de ejecución solo en el entorno de desarrollo:
 
-1. [Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/) NuGet paketini yükleyin.
-1. `environmentVariables` *launchSettings.json'daki başlatma*profili bölümünü değiştirin:
-    * Doğrula' `ASPNETCORE_ENVIRONMENT` `"Development"`ya ' olarak ayarlanır.
-    * `"Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation"`Ayarlayın. `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES`
+1. Instale [Microsoft. AspNetCore. Mvc.Razor. ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/)Paquete NuGet de RuntimeCompilation.
+1. Modifique la sección de `environmentVariables` Perfil de inicio de *launchSettings. JSON*:
+    * Compruebe `ASPNETCORE_ENVIRONMENT` que está establecido `"Development"`en.
+    * Establezca `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES` en `"Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation"`.
 
-Aşağıdaki örnekte, çalışma zamanı derlemesi geliştirme ortamında `IIS Express` `RazorPagesApp` ve başlatma profilleri için etkinleştirilir:
+En el ejemplo siguiente, la compilación en tiempo de ejecución está habilitada en `IIS Express` el `RazorPagesApp` entorno de desarrollo para los perfiles de inicio y:
 
 [!code-json[](~/mvc/views/view-compilation/samples/3.1/launchSettings.json?highlight=15-16,24-25)]
 
-Projenin `Startup` sınıfında kod değişikliği gerekmez. Çalışma zamanında, ASP.NET Core' da derleme düzeyinde bir `Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation` [HostingStartup özniteliği](xref:fundamentals/configuration/platform-specific-configuration#hostingstartup-attribute) arar. Öznitelik, `HostingStartup` yürütülecek uygulama başlangıç kodunu belirtir. Bu başlangıç kodu çalışma zamanı derlemesini sağlar.
+No se necesitan cambios en el código en la `Startup` clase del proyecto. En tiempo de ejecución, ASP.NET Core busca un [atributo HostingStartup de nivel de ensamblado](xref:fundamentals/configuration/platform-specific-configuration#hostingstartup-attribute) en `Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation`. El `HostingStartup` atributo especifica el código de inicio de la aplicación que se va a ejecutar. Ese código de inicio habilita la compilación en tiempo de ejecución.
 
-## <a name="enable-runtime-compilation-for-a-razor-class-library"></a>Razor Class Kitaplığı için çalışma zamanı derlemesini etkinleştirme
+## <a name="enable-runtime-compilation-for-a-razor-class-library"></a>Habilitar la compilación en tiempo Razor de ejecución para una biblioteca de clases
 
-Bir Razor Pages projesinin *MyClassLib*adlı [Bir Razor Class Library (RCL)](xref:razor-pages/ui-class) referansları bir senaryo düşünün. RCL, ekibinizin tüm MVC ve Razor Pages projelerinin tükettiği bir *_Layout.cshtml* dosyası içerir. Bu RCL'deki *_Layout.cshtml* dosyası için çalışma zamanı derlemesini etkinleştirmek istiyorsunuz. Razor Pages projesinde aşağıdaki değişiklikleri yapın:
+Considere un escenario en el que Razor un proyecto de páginas hace referencia a una [ Razor biblioteca de clases (RCL)](xref:razor-pages/ui-class) denominada *MyClassLib*. RCL contiene un archivo *_Layout. cshtml* que consumen todos los proyectos de MVC Razor y Pages de su equipo. Quiere habilitar la compilación en tiempo de ejecución para el archivo *_Layout. cshtml* en esa RCL. Realice los cambios siguientes en el Razor proyecto de páginas:
 
-1. Koşullu olarak [varolan bir projede çalışma zamanı derlemesini etkinleştirin.](#conditionally-enable-runtime-compilation-in-an-existing-project)
-1. Çalışma zamanı derleme seçeneklerini şu `Startup.ConfigureServices`şekilde yapılandırın:
+1. Habilite la compilación en tiempo de ejecución con las instrucciones [para habilitar de forma condicional la compilación en tiempo de ejecución en un proyecto existente](#conditionally-enable-runtime-compilation-in-an-existing-project).
+1. Configurar las opciones de compilación en `Startup.ConfigureServices`tiempo de ejecución en:
 
     [!code-csharp[](~/mvc/views/view-compilation/samples/3.1/Startup.cs?name=snippet_ConfigureServices&highlight=5-10)]
 
-    Önceki kodda, *MyClassLib* RCL için mutlak bir yol oluşturulur. [PhysicalFileProvider API,](xref:fundamentals/file-providers#physicalfileprovider) dizinleri ve dosyaları bu mutlak yolda bulmak için kullanılır. Son olarak, `PhysicalFileProvider` örnek, RCL'nin *.cshtml* dosyalarına erişim sağlayan bir dosya sağlayıcıları koleksiyonuna eklenir.
+    En el código anterior, se construye una ruta de acceso absoluta al RCL de *MyClassLib* . La [API de PhysicalFileProvider](xref:fundamentals/file-providers#physicalfileprovider) se usa para buscar directorios y archivos en esa ruta de acceso absoluta. Por último, `PhysicalFileProvider` la instancia se agrega a una colección de proveedores de archivos, que permite el acceso a los archivos *. cshtml* de RCL.
 
-## <a name="additional-resources"></a>Ek kaynaklar
+## <a name="additional-resources"></a>Recursos adicionales
 
-* [RazorCompileOnBuild ve RazorCompileOnPublish](xref:razor-pages/sdk#properties) özellikleri.
+* Propiedades [RazorCompileOnBuild y RazorCompileOnPublish](xref:razor-pages/sdk#properties) .
 * <xref:razor-pages/index>
 * <xref:mvc/views/overview>
 * <xref:razor-pages/sdk>
@@ -105,19 +94,19 @@ Bir Razor Pages projesinin *MyClassLib*adlı [Bir Razor Class Library (RCL)](xre
 
 ::: moniker range="= aspnetcore-3.0"
 
-*.cshtml* uzantılı razor [dosyaları, Razor SDK](xref:razor-pages/sdk)kullanılarak hem oluşturma hem de yayımlama zamanında derlenir. Çalışma süresi derlemesi, uygulamanızı yapılandırarak isteğe bağlı olarak etkinleştirilebilir.
+Razorlos archivos con una extensión *. cshtml* se compilan en el momento de la compilación y de la publicación mediante el [ Razor SDK](xref:razor-pages/sdk). La compilación en tiempo de ejecución se puede habilitar opcionalmente mediante la configuración de la aplicación
 
-## <a name="razor-compilation"></a>Jilet derlemesi
+## <a name="razor-compilation"></a>Razorprevia
 
-Razor dosyalarının oluşturma zamanı ve yayımlama zamanı derlemesi varsayılan olarak Razor SDK tarafından etkinleştirilir. Etkinleştirildiğinde, runtime derlemesi yapı zamanı derlemesini tamamlayarak Razor dosyalarının düzenlenirse güncelleştirilmesini sağlar.
+El SDK habilita de forma predeterminada la Razor Razor compilación de archivos en tiempo de compilación y en tiempo de publicación. Cuando está habilitada, la compilación en tiempo de ejecución complementa la Razor compilación en tiempo de compilación, lo que permite actualizar los archivos si se modifican.
 
-## <a name="runtime-compilation"></a>Çalışma zamanı derlemesi
+## <a name="runtime-compilation"></a>Compilación en tiempo de ejecución
 
-Tüm ortamlar ve yapılandırma modları için çalışma zamanı derlemesini etkinleştirmek için:
+Para habilitar la compilación en tiempo de ejecución para todos los entornos y modos de configuración:
 
-1. [Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/) NuGet paketini yükleyin.
+1. Instale [Microsoft. AspNetCore. Mvc.Razor. ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/)Paquete NuGet de RuntimeCompilation.
 
-1. Bir çağrı içerecek `Startup.ConfigureServices` şekilde projenin yöntemini <xref:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation*>güncelleştirin. Örneğin:
+1. Actualizar el método `Startup.ConfigureServices` del proyecto para incluir una llamada a <xref:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation*>. Por ejemplo:
 
     ```csharp
     public void ConfigureServices(IServiceCollection services)
@@ -129,54 +118,54 @@ Tüm ortamlar ve yapılandırma modları için çalışma zamanı derlemesini et
     }
     ```
 
-### <a name="conditionally-enable-runtime-compilation"></a>Koşullu etkinleştirme çalışma zamanı derlemesi
+### <a name="conditionally-enable-runtime-compilation"></a>Habilitación condicional de la compilación en tiempo de ejecución
 
-Çalışma zamanı derlemesi, yalnızca yerel geliştirme için kullanılabilecek şekilde etkinleştirilebilir. Bu şekilde koşullu olarak etkinleştirmek, yayımlanmış çıktının aşağıdakileri sağlamasını sağlar:
+La compilación en tiempo de ejecución se puede habilitar para que solo esté disponible para el desarrollo local. Este modo de habilitación condicional garantiza que la salida publicada:
 
-* Derlenmiş görünümleri kullanır.
-* Boyutu daha küçüktür.
-* Üretimde dosya izleyicilerine izin vermez.
+* Usa vistas precompiladas.
+* Tiene un tamaño inferior.
+* No habilita monitores de archivos en producción.
 
-Ortam ve yapılandırma moduna göre çalışma zamanı derlemesini etkinleştirmek için:
+Para habilitar la compilación en tiempo de ejecución basada en el modo de configuración y el entorno, deberá:
 
-1. Etkin `Configuration` değere dayalı [olarak Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/) paketine koşullu olarak başvurun:
+1. Haga referencia condicionalmente a [Microsoft. AspNetCore. MvcRazor.. Paquete RuntimeCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/) basado en el valor `Configuration` activo:
 
     ```xml
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.0" Condition="'$(Configuration)' == 'Debug'" />
     ```
 
-1. Bir çağrı içerecek `Startup.ConfigureServices` şekilde projenin yöntemini `AddRazorRuntimeCompilation`güncelleştirin. Koşullu `AddRazorRuntimeCompilation` olarak, `ASPNETCORE_ENVIRONMENT` yalnızca değişken ayarlandığında Hata Ayıklama `Development`modunda çalışır:
+1. Actualizar el método `Startup.ConfigureServices` del proyecto para incluir una llamada a `AddRazorRuntimeCompilation`. Ejecute `AddRazorRuntimeCompilation` de manera condicional de modo que solo se ejecute en modo de depuración cuando la variable `ASPNETCORE_ENVIRONMENT` esté establecida en `Development`:
 
     [!code-csharp[](~/mvc/views/view-compilation/samples/3.0/Startup.cs?name=snippet)]
 
-## <a name="additional-resources"></a>Ek kaynaklar
+## <a name="additional-resources"></a>Recursos adicionales
 
-* [RazorCompileOnBuild ve RazorCompileOnPublish](xref:razor-pages/sdk#properties) özellikleri.
+* Propiedades [RazorCompileOnBuild y RazorCompileOnPublish](xref:razor-pages/sdk#properties) .
 * <xref:razor-pages/index>
 * <xref:mvc/views/overview>
 * <xref:razor-pages/sdk>
-* Projeler arasında çalışma zamanı derleme çalışması yaptığını gösteren bir örnek için [GitHub'daki çalışma zamanı derleme örneğine](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/mvc/runtimecompilation) bakın.
+* Vea el [ejemplo de compilación en tiempo de ejecución en github](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/mvc/runtimecompilation) para obtener un ejemplo que muestra cómo se realiza el trabajo de compilación en tiempo de ejecución entre proyectos.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-İlgili Razor Page veya MVC görünümü çağrıldığı çalışma zamanında bir Razor dosyası derlenir. Razor [dosyaları, Razor SDK](xref:razor-pages/sdk)kullanılarak hem oluşturma hem de yayımlama zamanında derlenir.
+Un Razor archivo se compila en tiempo de ejecución, cuando Razor se invoca la vista de MVC o la página asociada. Razorlos archivos se compilan en el momento de la compilación y de la publicación mediante el [ Razor SDK](xref:razor-pages/sdk).
 
-## <a name="razor-compilation"></a>Jilet derlemesi
+## <a name="razor-compilation"></a>Razorprevia
 
-Razor dosyalarının oluşturma ve yayımlama zamanı derlemesi varsayılan olarak Razor SDK tarafından etkinleştirilir. Razor dosyalarının güncelleştirildikten sonra düzenlenmesi yapı zamanında desteklenir. Varsayılan olarak, yalnızca derlenmiş *Views.dll* ve razor dosyalarını derlemek için gereken *.cshtml* dosyaları veya referans derlemeleri uygulamanızla birlikte dağıtılır.
+El SDK habilita de forma predeterminada la Razor Razor compilación de archivos en tiempo de compilación y de publicación. La Razor edición de archivos tras su actualización se admite en tiempo de compilación. De forma predeterminada, solo las vistas compiladas *. dll* y los archivos *. cshtml* o los ensamblados de referencia necesarios para compilar Razor archivos se implementan con la aplicación.
 
 > [!IMPORTANT]
-> Precompilation aracı amortismana kaldırılmıştır ve Core 3.0 ASP.NET kaldırılacaktır. [Razor Sdk'ya](xref:razor-pages/sdk)göç etmenizi öneririz.
+> La herramienta de precompilación está en desuso y se eliminará en ASP.NET Core 3.0. Se recomienda migrar al [ Razor SDK](xref:razor-pages/sdk).
 >
-> Razor SDK, yalnızca proje dosyasında precompilation'a özgü özellikler ayarlanmadığında etkilidir. Örneğin, *.csproj* dosyasının `MvcRazorCompileOnPublish` özelliğini `true` Razor SDK'yı devre dışı kılabilir şekilde ayarlamak.
+> El Razor SDK solo es efectivo cuando no hay ninguna propiedad específica de precompilación establecida en el archivo de proyecto. Por ejemplo, al establecer la propiedad del `MvcRazorCompileOnPublish` archivo *. csproj* en, Razor se `true` deshabilita el SDK.
 
-## <a name="runtime-compilation"></a>Çalışma zamanı derlemesi
+## <a name="runtime-compilation"></a>Compilación en tiempo de ejecución
 
-Oluşturma zamanı derlemesi, Razor dosyalarının çalışma zamanı derlemesi ile desteklenir. ASP.NET Core MVC, *.cshtml* dosyasının içeriği değiştiğinde Razor dosyalarını yeniden derler.
+La compilación en tiempo de compilación se complementa por la compilación Razor en tiempo de ejecución de los archivos. ASP.NET Core MVC volverá a compilar Razor los archivos cuando cambie el contenido de un archivo *. cshtml* .
 
-## <a name="additional-resources"></a>Ek kaynaklar
+## <a name="additional-resources"></a>Recursos adicionales
 
 * <xref:razor-pages/index>
 * <xref:mvc/views/overview>

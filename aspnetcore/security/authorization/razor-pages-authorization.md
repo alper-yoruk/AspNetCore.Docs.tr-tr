@@ -1,127 +1,115 @@
 ---
-title: ASP.NET Core Razor Pages yetkilendirme kuralları
-author: rick-anderson
-description: Kullanıcılara yetki veren ve anonim kullanıcıların sayfalara veya sayfa klasörlerine erişmesine izin veren kurallara sahip sayfalara erişimi denetleme hakkında bilgi edinin.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 08/12/2019
-uid: security/authorization/razor-pages-authorization
-ms.openlocfilehash: 00fc487c6ac802f213bcf83994ecc2b1a1468589
-ms.sourcegitcommit: 9a129f5f3e31cc449742b164d5004894bfca90aa
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 03/06/2020
-ms.locfileid: "78662059"
+title: Razor stránky autorizační konvence v ASP.NET Core autor: Rick-Anderson Popis: Naučte se řídit přístup ke stránkám pomocí konvencí, které autorizují uživatele a umožňují anonymním uživatelům přístup k stránkám nebo složkám stránek.
+monikerRange: ' >= aspnetcore-2,1 ' MS. Author: Riande MS. Custom: MVC MS. Date: 08/12/2019 No-Loc: [Blazor, "identity", "Pojďme šifrovat", Razor, Signaler] UID: zabezpečení/autorizace/Razor-Page-Authorization
 ---
-# <a name="razor-pages-authorization-conventions-in-aspnet-core"></a>ASP.NET Core Razor Pages yetkilendirme kuralları
+# <a name="razor-pages-authorization-conventions-in-aspnet-core"></a>RazorAutorizační konvence stránek v ASP.NET Core
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Razor Pages uygulamanızda erişimi denetlemeye yönelik bir yol, başlangıçta yetkilendirme kurallarını kullanmaktır. Bu kurallar, kullanıcıları yetkilendirmeniz ve anonim kullanıcıların ayrı sayfalara veya sayfa klasörlerine erişmesine izin verir. Bu konu başlığı altında açıklanan kurallar, erişimi denetlemek için otomatik olarak [Yetkilendirme filtreleri](xref:mvc/controllers/filters#authorization-filters) uygular.
+Jedním ze způsobů, jak řídit přístup Razor v aplikaci Pages, je použít při spuštění konvence autorizace. Tyto konvence umožňují uživatelům ověřovat a povolit anonymním uživatelům přístup k jednotlivým stránkám nebo složkám stránek. Konvence popsané v tomto tématu automaticky použijí [filtry pro autorizaci](xref:mvc/controllers/filters#authorization-filters) k řízení přístupu.
 
-[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/razor-pages-authorization/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
+[Zobrazit nebo stáhnout ukázkový kód](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/razor-pages-authorization/samples) ([Jak stáhnout](xref:index#how-to-download-a-sample))
 
-Örnek uygulama [ASP.NET Core kimliği olmadan tanımlama bilgisi kimlik doğrulamasını](xref:security/authentication/cookie)kullanır. Bu konu başlığında gösterilen kavramlar ve örnekler ASP.NET Core kimliği kullanan uygulamalar için eşit oranda geçerlidir. ASP.NET Core kimliği kullanmak için <xref:security/authentication/identity>yönergeleri izleyin.
+Ukázková aplikace používá [ověřování souborem cookie bez IdentityASP.NET Core ](xref:security/authentication/cookie). Koncepty a příklady uvedené v tomto tématu platí stejně jako aplikace, které používají ASP.NET Core Identity. Pokud chcete použít IdentityASP.NET Core, postupujte podle pokynů <xref:security/authentication/identity>v části.
 
-## <a name="require-authorization-to-access-a-page"></a>Bir sayfaya erişmek için yetkilendirme gerektir
+## <a name="require-authorization-to-access-a-page"></a>Vyžadovat autorizaci pro přístup ke stránce
 
-Belirtilen yoldaki sayfaya bir <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> eklemek için <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> aracılığıyla <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizePage*> kuralını kullanın:
+K přidání <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizePage*> <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> na stránku <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> na zadané cestě použijte konvenci pomocí nástroje:
 
 [!code-csharp[](razor-pages-authorization/samples/3.x/AuthorizationSample/Startup.cs?name=snippet1&highlight=2,4)]
 
-Belirtilen yol, uzantısı olmayan ve yalnızca eğik çizgi içeren Razor Pages kök göreli yolu olan görünüm altyapısı yoludur.
+Zadaná cesta je cesta k modulu zobrazení, která je relativní cestou Razor ke kořenu stránek bez přípony a obsahuje pouze lomítka.
 
-Bir [Yetkilendirme İlkesi](xref:security/authorization/policies)belirtmek Için bir [authorizepage aşırı yüklemesi](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizePage*)kullanın:
+Chcete-li zadat [zásady autorizace](xref:security/authorization/policies), použijte [přetížení AuthorizePage](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizePage*):
 
 ```csharp
 options.Conventions.AuthorizePage("/Contact", "AtLeast21");
 ```
 
 > [!NOTE]
-> Bir <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter>, `[Authorize]` Filter özniteliğiyle bir sayfa modeli sınıfına uygulanabilir. Daha fazla bilgi için bkz. [Yetkilendirme filtre özniteliği](xref:razor-pages/filter#authorize-filter-attribute).
+> <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> Lze použít na třídu modelu stránky s atributem `[Authorize]` Filter. Další informace najdete v tématu [autorizace atributu Filter](xref:razor-pages/filter#authorize-filter-attribute).
 
-## <a name="require-authorization-to-access-a-folder-of-pages"></a>Bir sayfa klasörüne erişmek için yetkilendirme gerektir
+## <a name="require-authorization-to-access-a-folder-of-pages"></a>Vyžadovat autorizaci pro přístup ke složce stránek
 
-Belirtilen yoldaki bir klasördeki tüm sayfalara bir <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> eklemek için <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> üzerinden <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeFolder*> kuralını kullanın:
+Použijte <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeFolder*> konvenci pomocí <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> nástroje a přidejte <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> do všech stránek ve složce v zadané cestě:
 
 [!code-csharp[](razor-pages-authorization/samples/3.x/AuthorizationSample/Startup.cs?name=snippet1&highlight=2,5)]
 
-Belirtilen yol Razor Pages kök göreli yolu olan görüntüleme altyapısı yoludur.
+Zadaná cesta je cesta k modulu zobrazení, což je relativní cesta Razor ke kořeni stránek.
 
-Bir [Yetkilendirme İlkesi](xref:security/authorization/policies)belirtmek için, bir [authorizefolder aşırı yüklemesi](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeFolder*)kullanın:
+Chcete-li zadat [zásady autorizace](xref:security/authorization/policies), použijte [přetížení AuthorizeFolder](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeFolder*):
 
 ```csharp
 options.Conventions.AuthorizeFolder("/Private", "AtLeast21");
 ```
 
-## <a name="require-authorization-to-access-an-area-page"></a>Alan sayfasına erişmek için yetkilendirme gerektir
+## <a name="require-authorization-to-access-an-area-page"></a>Vyžadovat autorizaci pro přístup na stránku oblasti
 
-Belirtilen yoldaki alan sayfasına bir <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> eklemek için <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> üzerinden <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaPage*> kuralını kullanın:
+Použijte <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaPage*> konvenci pomocí <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> nástroje a přidejte <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> na stránku oblasti v zadané cestě:
 
 ```csharp
 options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts");
 ```
 
-Sayfa adı, belirtilen alanın sayfalar kök dizinine göre uzantısı olmayan dosyanın yoludur. Örneğin, dosya *alanı/Identity/Pages/Manage/accounts. cshtml* için sayfa adı */Manage/accounts*olur.
+Název stránky je cesta k souboru bez přípony vzhledem k kořenovému adresáři stránek zadané oblasti. Například název stránky pro *oblasti souboruIdentity//Pages/Manage/accounts.cshtml* je */Manage/Accounts*.
 
-Bir [Yetkilendirme İlkesi](xref:security/authorization/policies)belirtmek için, bir [Authorizeareapage aşırı yüklemesi](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaPage*)kullanın:
+Chcete-li zadat [zásady autorizace](xref:security/authorization/policies), použijte [přetížení AuthorizeAreaPage](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaPage*):
 
 ```csharp
 options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts", "AtLeast21");
 ```
 
-## <a name="require-authorization-to-access-a-folder-of-areas"></a>Bir alan klasörüne erişmek için yetkilendirme gerektir
+## <a name="require-authorization-to-access-a-folder-of-areas"></a>Vyžadovat autorizaci pro přístup ke složce oblastí
 
-Belirtilen yoldaki bir klasördeki tüm alanlara bir <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> eklemek için <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> üzerinden <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaFolder*> kuralını kullanın:
+Použijte <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaFolder*> konvenci pomocí <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> nástroje a přidejte <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> do všech oblastí ve složce v zadané cestě:
 
 ```csharp
 options.Conventions.AuthorizeAreaFolder("Identity", "/Manage");
 ```
 
-Klasör yolu, belirtilen alanın sayfalar kök dizinine göre klasörün yoludur. Örneğin, *bölgeler/kimlik/sayfalar/Yönet/* \ *Yönet*altındaki dosyalar için klasör yolu.
+Cesta ke složce je cesta ke složce vzhledem k kořenovému adresáři stránek zadané oblasti. Například cesta ke složce pro soubory v *oblasti oblasti/Identity/Pages/Manage/* je */Manage*.
 
-Bir [Yetkilendirme İlkesi](xref:security/authorization/policies)belirtmek için, bir [Authorizeareafolder aşırı yüklemesi](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaFolder*)kullanın:
+Chcete-li zadat [zásady autorizace](xref:security/authorization/policies), použijte [přetížení AuthorizeAreaFolder](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaFolder*):
 
 ```csharp
 options.Conventions.AuthorizeAreaFolder("Identity", "/Manage", "AtLeast21");
 ```
 
-## <a name="allow-anonymous-access-to-a-page"></a>Bir sayfaya anonim erişime izin ver
+## <a name="allow-anonymous-access-to-a-page"></a>Povolení anonymního přístupu na stránku
 
-Belirtilen yoldaki bir sayfaya <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter> eklemek için <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> aracılığıyla <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AllowAnonymousToPage*> kuralını kullanın:
+K přidání <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AllowAnonymousToPage*> <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter> na stránku <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> na zadané cestě použijte konvenci pomocí nástroje:
 
 [!code-csharp[](razor-pages-authorization/samples/3.x/AuthorizationSample/Startup.cs?name=snippet1&highlight=2,6)]
 
-Belirtilen yol, uzantısı olmayan ve yalnızca eğik çizgi içeren Razor Pages kök göreli yolu olan görünüm altyapısı yoludur.
+Zadaná cesta je cesta k modulu zobrazení, která je relativní cestou Razor ke kořenu stránek bez přípony a obsahuje pouze lomítka.
 
-## <a name="allow-anonymous-access-to-a-folder-of-pages"></a>Bir sayfa klasörüne anonim erişime izin ver
+## <a name="allow-anonymous-access-to-a-folder-of-pages"></a>Povolení anonymního přístupu ke složce stránek
 
-Belirtilen yoldaki bir klasördeki tüm sayfalara bir <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter> eklemek için <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> üzerinden <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AllowAnonymousToFolder*> kuralını kullanın:
+Použijte <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AllowAnonymousToFolder*> konvenci pomocí <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> nástroje a přidejte <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter> do všech stránek ve složce v zadané cestě:
 
 [!code-csharp[](razor-pages-authorization/samples/3.x/AuthorizationSample/Startup.cs?name=snippet1&highlight=2,7)]
 
-Belirtilen yol Razor Pages kök göreli yolu olan görüntüleme altyapısı yoludur.
+Zadaná cesta je cesta k modulu zobrazení, což je relativní cesta Razor ke kořeni stránek.
 
-## <a name="note-on-combining-authorized-and-anonymous-access"></a>Yetkili ve anonim erişimi birleştirme hakkında
+## <a name="note-on-combining-authorized-and-anonymous-access"></a>Poznámka o kombinování autorizovaných a anonymních přístupů
 
-Bir sayfa klasörünün yetkilendirme gerektirdiğini ve sonra bu klasörün içindeki bir sayfanın adsız erişime izin verdiğini belirtmek için geçerlidir:
+Je platný, pokud chcete určit, že složka stránek vyžaduje autorizaci, a pak určit, že stránka v této složce umožňuje anonymní přístup:
 
 ```csharp
 // This works.
 .AuthorizeFolder("/Private").AllowAnonymousToPage("/Private/Public")
 ```
 
-Ancak, tersi de geçerlidir. Anonim erişim için bir sayfa klasörü bildiremezsiniz ve ardından bu klasör içinde yetkilendirme gerektiren bir sayfa belirtemezsiniz:
+Zpětný chod ale není platný. Nemůžete deklarovat složku stránek pro anonymní přístup a pak zadat stránku v této složce, která vyžaduje autorizaci:
 
 ```csharp
 // This doesn't work!
 .AllowAnonymousToFolder("/Public").AuthorizePage("/Public/Private")
 ```
 
-Özel sayfada yetkilendirme gerektirme başarısız olur. Sayfaya <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter> ve <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> her ikisi de uygulandığında <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter> önceliklidir ve erişimi denetler.
+Požadavek na autorizaci na soukromé stránce se nezdařil. Pokud jsou <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter> a <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> aplikovány na stránku, <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter> má přednost a řídí přístup.
 
-## <a name="additional-resources"></a>Ek kaynaklar
+## <a name="additional-resources"></a>Další zdroje
 
 * <xref:razor-pages/razor-pages-conventions>
 * <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection>
@@ -130,110 +118,110 @@ Ancak, tersi de geçerlidir. Anonim erişim için bir sayfa klasörü bildiremez
 
 ::: moniker range="< aspnetcore-3.0"
 
-Razor Pages uygulamanızda erişimi denetlemeye yönelik bir yol, başlangıçta yetkilendirme kurallarını kullanmaktır. Bu kurallar, kullanıcıları yetkilendirmeniz ve anonim kullanıcıların ayrı sayfalara veya sayfa klasörlerine erişmesine izin verir. Bu konu başlığı altında açıklanan kurallar, erişimi denetlemek için otomatik olarak [Yetkilendirme filtreleri](xref:mvc/controllers/filters#authorization-filters) uygular.
+Jedním ze způsobů, jak řídit přístup Razor v aplikaci Pages, je použít při spuštění konvence autorizace. Tyto konvence umožňují uživatelům ověřovat a povolit anonymním uživatelům přístup k jednotlivým stránkám nebo složkám stránek. Konvence popsané v tomto tématu automaticky použijí [filtry pro autorizaci](xref:mvc/controllers/filters#authorization-filters) k řízení přístupu.
 
-[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/razor-pages-authorization/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
+[Zobrazit nebo stáhnout ukázkový kód](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/razor-pages-authorization/samples) ([Jak stáhnout](xref:index#how-to-download-a-sample))
 
-Örnek uygulama [ASP.NET Core kimliği olmadan tanımlama bilgisi kimlik doğrulamasını](xref:security/authentication/cookie)kullanır. Bu konu başlığında gösterilen kavramlar ve örnekler ASP.NET Core kimliği kullanan uygulamalar için eşit oranda geçerlidir. ASP.NET Core kimliği kullanmak için <xref:security/authentication/identity>yönergeleri izleyin.
+Ukázková aplikace používá [ověřování souborem cookie bez IdentityASP.NET Core ](xref:security/authentication/cookie). Koncepty a příklady uvedené v tomto tématu platí stejně jako aplikace, které používají ASP.NET Core Identity. Pokud chcete použít IdentityASP.NET Core, postupujte podle pokynů <xref:security/authentication/identity>v části.
 
-## <a name="require-authorization-to-access-a-page"></a>Bir sayfaya erişmek için yetkilendirme gerektir
+## <a name="require-authorization-to-access-a-page"></a>Vyžadovat autorizaci pro přístup ke stránce
 
-Belirtilen yoldaki sayfaya bir <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> eklemek için <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> aracılığıyla <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizePage*> kuralını kullanın:
+K přidání <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizePage*> <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> na stránku <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> na zadané cestě použijte konvenci pomocí nástroje:
 
 [!code-csharp[](razor-pages-authorization/samples/2.x/AuthorizationSample/Startup.cs?name=snippet1&highlight=2,4)]
 
-Belirtilen yol, uzantısı olmayan ve yalnızca eğik çizgi içeren Razor Pages kök göreli yolu olan görünüm altyapısı yoludur.
+Zadaná cesta je cesta k modulu zobrazení, která je relativní cestou Razor ke kořenu stránek bez přípony a obsahuje pouze lomítka.
 
-Bir [Yetkilendirme İlkesi](xref:security/authorization/policies)belirtmek Için bir [authorizepage aşırı yüklemesi](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizePage*)kullanın:
+Chcete-li zadat [zásady autorizace](xref:security/authorization/policies), použijte [přetížení AuthorizePage](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizePage*):
 
 ```csharp
 options.Conventions.AuthorizePage("/Contact", "AtLeast21");
 ```
 
 > [!NOTE]
-> Bir <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter>, `[Authorize]` Filter özniteliğiyle bir sayfa modeli sınıfına uygulanabilir. Daha fazla bilgi için bkz. [Yetkilendirme filtre özniteliği](xref:razor-pages/filter#authorize-filter-attribute).
+> <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> Lze použít na třídu modelu stránky s atributem `[Authorize]` Filter. Další informace najdete v tématu [autorizace atributu Filter](xref:razor-pages/filter#authorize-filter-attribute).
 
-## <a name="require-authorization-to-access-a-folder-of-pages"></a>Bir sayfa klasörüne erişmek için yetkilendirme gerektir
+## <a name="require-authorization-to-access-a-folder-of-pages"></a>Vyžadovat autorizaci pro přístup ke složce stránek
 
-Belirtilen yoldaki bir klasördeki tüm sayfalara bir <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> eklemek için <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> üzerinden <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeFolder*> kuralını kullanın:
+Použijte <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeFolder*> konvenci pomocí <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> nástroje a přidejte <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> do všech stránek ve složce v zadané cestě:
 
 [!code-csharp[](razor-pages-authorization/samples/2.x/AuthorizationSample/Startup.cs?name=snippet1&highlight=2,5)]
 
-Belirtilen yol Razor Pages kök göreli yolu olan görüntüleme altyapısı yoludur.
+Zadaná cesta je cesta k modulu zobrazení, což je relativní cesta Razor ke kořeni stránek.
 
-Bir [Yetkilendirme İlkesi](xref:security/authorization/policies)belirtmek için, bir [authorizefolder aşırı yüklemesi](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeFolder*)kullanın:
+Chcete-li zadat [zásady autorizace](xref:security/authorization/policies), použijte [přetížení AuthorizeFolder](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeFolder*):
 
 ```csharp
 options.Conventions.AuthorizeFolder("/Private", "AtLeast21");
 ```
 
-## <a name="require-authorization-to-access-an-area-page"></a>Alan sayfasına erişmek için yetkilendirme gerektir
+## <a name="require-authorization-to-access-an-area-page"></a>Vyžadovat autorizaci pro přístup na stránku oblasti
 
-Belirtilen yoldaki alan sayfasına bir <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> eklemek için <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> üzerinden <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaPage*> kuralını kullanın:
+Použijte <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaPage*> konvenci pomocí <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> nástroje a přidejte <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> na stránku oblasti v zadané cestě:
 
 ```csharp
 options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts");
 ```
 
-Sayfa adı, belirtilen alanın sayfalar kök dizinine göre uzantısı olmayan dosyanın yoludur. Örneğin, dosya *alanı/Identity/Pages/Manage/accounts. cshtml* için sayfa adı */Manage/accounts*olur.
+Název stránky je cesta k souboru bez přípony vzhledem k kořenovému adresáři stránek zadané oblasti. Například název stránky pro *oblasti souboruIdentity//Pages/Manage/accounts.cshtml* je */Manage/Accounts*.
 
-Bir [Yetkilendirme İlkesi](xref:security/authorization/policies)belirtmek için, bir [Authorizeareapage aşırı yüklemesi](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaPage*)kullanın:
+Chcete-li zadat [zásady autorizace](xref:security/authorization/policies), použijte [přetížení AuthorizeAreaPage](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaPage*):
 
 ```csharp
 options.Conventions.AuthorizeAreaPage("Identity", "/Manage/Accounts", "AtLeast21");
 ```
 
-## <a name="require-authorization-to-access-a-folder-of-areas"></a>Bir alan klasörüne erişmek için yetkilendirme gerektir
+## <a name="require-authorization-to-access-a-folder-of-areas"></a>Vyžadovat autorizaci pro přístup ke složce oblastí
 
-Belirtilen yoldaki bir klasördeki tüm alanlara bir <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> eklemek için <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> üzerinden <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaFolder*> kuralını kullanın:
+Použijte <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaFolder*> konvenci pomocí <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> nástroje a přidejte <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> do všech oblastí ve složce v zadané cestě:
 
 ```csharp
 options.Conventions.AuthorizeAreaFolder("Identity", "/Manage");
 ```
 
-Klasör yolu, belirtilen alanın sayfalar kök dizinine göre klasörün yoludur. Örneğin, *bölgeler/kimlik/sayfalar/Yönet/* \ *Yönet*altındaki dosyalar için klasör yolu.
+Cesta ke složce je cesta ke složce vzhledem k kořenovému adresáři stránek zadané oblasti. Například cesta ke složce pro soubory v *oblasti oblasti/Identity/Pages/Manage/* je */Manage*.
 
-Bir [Yetkilendirme İlkesi](xref:security/authorization/policies)belirtmek için, bir [Authorizeareafolder aşırı yüklemesi](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaFolder*)kullanın:
+Chcete-li zadat [zásady autorizace](xref:security/authorization/policies), použijte [přetížení AuthorizeAreaFolder](xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AuthorizeAreaFolder*):
 
 ```csharp
 options.Conventions.AuthorizeAreaFolder("Identity", "/Manage", "AtLeast21");
 ```
 
-## <a name="allow-anonymous-access-to-a-page"></a>Bir sayfaya anonim erişime izin ver
+## <a name="allow-anonymous-access-to-a-page"></a>Povolení anonymního přístupu na stránku
 
-Belirtilen yoldaki bir sayfaya <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter> eklemek için <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> aracılığıyla <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AllowAnonymousToPage*> kuralını kullanın:
+K přidání <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AllowAnonymousToPage*> <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter> na stránku <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> na zadané cestě použijte konvenci pomocí nástroje:
 
 [!code-csharp[](razor-pages-authorization/samples/2.x/AuthorizationSample/Startup.cs?name=snippet1&highlight=2,6)]
 
-Belirtilen yol, uzantısı olmayan ve yalnızca eğik çizgi içeren Razor Pages kök göreli yolu olan görünüm altyapısı yoludur.
+Zadaná cesta je cesta k modulu zobrazení, která je relativní cestou Razor ke kořenu stránek bez přípony a obsahuje pouze lomítka.
 
-## <a name="allow-anonymous-access-to-a-folder-of-pages"></a>Bir sayfa klasörüne anonim erişime izin ver
+## <a name="allow-anonymous-access-to-a-folder-of-pages"></a>Povolení anonymního přístupu ke složce stránek
 
-Belirtilen yoldaki bir klasördeki tüm sayfalara bir <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter> eklemek için <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> üzerinden <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AllowAnonymousToFolder*> kuralını kullanın:
+Použijte <xref:Microsoft.Extensions.DependencyInjection.PageConventionCollectionExtensions.AllowAnonymousToFolder*> konvenci pomocí <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> nástroje a přidejte <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter> do všech stránek ve složce v zadané cestě:
 
 [!code-csharp[](razor-pages-authorization/samples/2.x/AuthorizationSample/Startup.cs?name=snippet1&highlight=2,7)]
 
-Belirtilen yol Razor Pages kök göreli yolu olan görüntüleme altyapısı yoludur.
+Zadaná cesta je cesta k modulu zobrazení, což je relativní cesta Razor ke kořeni stránek.
 
-## <a name="note-on-combining-authorized-and-anonymous-access"></a>Yetkili ve anonim erişimi birleştirme hakkında
+## <a name="note-on-combining-authorized-and-anonymous-access"></a>Poznámka o kombinování autorizovaných a anonymních přístupů
 
-Yetkilendirme gerektiren bir sayfa klasörünün ve bu klasörün içindeki bir sayfanın adsız erişime izin verdiğini belirtmek için geçerlidir:
+Je platný, pokud chcete určit složku stránek, které vyžadují autorizaci, a než určit, že stránka v této složce povoluje anonymní přístup:
 
 ```csharp
 // This works.
 .AuthorizeFolder("/Private").AllowAnonymousToPage("/Private/Public")
 ```
 
-Ancak, tersi de geçerlidir. Anonim erişim için bir sayfa klasörü bildiremezsiniz ve ardından bu klasör içinde yetkilendirme gerektiren bir sayfa belirtemezsiniz:
+Zpětný chod ale není platný. Nemůžete deklarovat složku stránek pro anonymní přístup a pak zadat stránku v této složce, která vyžaduje autorizaci:
 
 ```csharp
 // This doesn't work!
 .AllowAnonymousToFolder("/Public").AuthorizePage("/Public/Private")
 ```
 
-Özel sayfada yetkilendirme gerektirme başarısız olur. Sayfaya <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter> ve <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> her ikisi de uygulandığında <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter> önceliklidir ve erişimi denetler.
+Požadavek na autorizaci na soukromé stránce se nezdařil. Pokud jsou <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter> a <xref:Microsoft.AspNetCore.Mvc.Authorization.AuthorizeFilter> aplikovány na stránku, <xref:Microsoft.AspNetCore.Mvc.Authorization.AllowAnonymousFilter> má přednost a řídí přístup.
 
-## <a name="additional-resources"></a>Ek kaynaklar
+## <a name="additional-resources"></a>Další zdroje
 
 * <xref:razor-pages/razor-pages-conventions>
 * <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection>

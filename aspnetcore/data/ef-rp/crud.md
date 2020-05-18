@@ -1,73 +1,63 @@
 ---
-title: ASP.NET Core'da EF Çekirdekli Jilet Sayfaları - CRUD - 2/8
-author: rick-anderson
-description: EF Core ile nasıl oluşturulup okunup güncelleştirilir, silinir.
-ms.author: riande
-ms.date: 07/22/2019
-uid: data/ef-rp/crud
-ms.openlocfilehash: 05519852fab22bd3ad5b77e3494b49191448286f
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "78665650"
+Título: Razor páginas com EF Core em ASP.NET Core-CRUD-2 de 8 autor: Rick-Anderson Descrição: mostra como criar, ler, atualizar, excluir com EF Core.
+MS. Author: Riande MS. Date: 07/22/2019 no-loc: [mais alto, "Identity", "Vamos criptografar", Razor, Signalr] UID: data/EF-RP/CRUD
 ---
-# <a name="razor-pages-with-ef-core-in-aspnet-core---crud---2-of-8"></a>ASP.NET Core'da EF Çekirdekli Jilet Sayfaları - CRUD - 2/8
+# <a name="razor-pages-with-ef-core-in-aspnet-core---crud---2-of-8"></a>RazorPáginas com EF Core em ASP.NET Core-CRUD-2 de 8
 
-Yazar: [Tom Dykstra](https://github.com/tdykstra), [Jon P Smith](https://twitter.com/thereformedprog), ve Rick [Anderson](https://twitter.com/RickAndMSFT)
+Por [Tom Dykstra](https://github.com/tdykstra), [Jon P Smith](https://twitter.com/thereformedprog) e [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 [!INCLUDE [about the series](~/includes/RP-EF/intro.md)]
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Bu öğreticide, iskeleye sarılmış CRUD (oluşturma, oku, güncelleme, silme) kodu gözden geçirilir ve özelleştirilmiştir.
+Neste tutorial, o código CRUD (criar, ler, atualizar e excluir) gerado por scaffolding é examinado e personalizado.
 
-## <a name="no-repository"></a>Depo yok
+## <a name="no-repository"></a>Nenhum repositório
 
-Bazı geliştiriciler, UI (Razor Pages) ve veri erişim katmanı arasında bir soyutlama katmanı oluşturmak için bir hizmet katmanı veya depo deseni kullanır. Bu öğretici bunu yapmaz. Karmaşıklığı en aza indirmek ve öğreticiyi EF Core'a odaklamak için, EF Core kodu doğrudan sayfa modeli sınıflarına eklenir. 
+Alguns desenvolvedores usam um padrão de camada de serviço ou repositório para criar uma camada de abstração entreRazor a interface do usuário (páginas) e a camada de acesso a dados. Este tutorial não faz isso. Para minimizar a complexidade e manter o tutorial focado em EF Core, o código do EF Core é adicionado diretamente às classes de modelo de página. 
 
-## <a name="update-the-details-page"></a>Ayrıntılar sayfasını güncelleştirin
+## <a name="update-the-details-page"></a>Atualizar a página Detalhes
 
-Öğrenciler sayfaları için iskele kodu kayıt verilerini içermez. Bu bölümde, Ayrıntılar sayfasına kayıt eklersiniz.
+O código com scaffold das páginas Alunos não inclui dados de registro. Nesta seção, você adiciona inscrições à página Detalhes.
 
-### <a name="read-enrollments"></a>Kayıtları okuma
+### <a name="read-enrollments"></a>Ler inscrições
 
-Bir öğrencinin kayıt verilerini sayfada görüntülemek için okumanız gerekir. *Sayfalar/Öğrenciler/Details.cshtml.cs'deki* iskele kodu, Kayıt verileri olmadan yalnızca Öğrenci verilerini okur:
+Para exibir os dados de registro de um aluno na página, você precisa lê-los. O código com scaffold em *Pages/estudantes/details.cshtml.cs* lê somente os dados do Aluno, sem os dados de Registro:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/2-crud/Pages/Students/Details1.cshtml.cs?name=snippet_OnGetAsync&highlight=8)]
 
-Seçilen `OnGetAsync` öğrencinin kayıt verilerini okumak için yöntemi aşağıdaki kodla değiştirin. Değişiklikler vurgulanır.
+Substitua o método `OnGetAsync` pelo código a seguir para ler os dados de registro para o aluno selecionado. As alterações são realçadas.
 
 [!code-csharp[Main](intro/samples/cu30/Pages/Students/Details.cshtml.cs?name=snippet_OnGetAsync&highlight=8-12)]
 
-Ekle ve [Sonra Ekle](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.theninclude#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_ThenInclude__3_Microsoft_EntityFrameworkCore_Query_IIncludableQueryable___0_System_Collections_Generic_IEnumerable___1___System_Linq_Expressions_Expression_System_Func___1___2___) yöntemleri bağlamın `Student.Enrollments` gezinti özelliğini yüklemesine `Enrollment.Course` ve her kayıt içinde gezinti özelliğine neden olur. [Include](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.include) Bu [yöntemler, Okuma ile ilgili veri](xref:data/ef-rp/read-related-data) öğretici ayrıntılı olarak incelenir.
+Os métodos [Include](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.include) e [ThenInclude](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.theninclude#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_ThenInclude__3_Microsoft_EntityFrameworkCore_Query_IIncludableQueryable___0_System_Collections_Generic_IEnumerable___1___System_Linq_Expressions_Expression_System_Func___1___2___) fazem com que o contexto carregue a propriedade de navegação `Student.Enrollments` e, dentro de cada registro, a propriedade de navegação `Enrollment.Course`. Esses métodos são examinados em detalhes no tutorial [Como ler dados relacionado](xref:data/ef-rp/read-related-data).
 
-[AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) yöntemi, döndürülen varlıkların geçerli bağlamda güncelleştirilemediğini senaryolarda performansı artırır. `AsNoTracking`daha sonra bu öğretici ele alınmıştır.
+O método [AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) melhora o desempenho em cenários em que as entidades retornadas não são atualizadas no contexto atual. `AsNoTracking` é abordado mais adiante neste tutorial.
 
-### <a name="display-enrollments"></a>Kayıtları görüntüleme
+### <a name="display-enrollments"></a>Exibir inscrições
 
-Kayıt listesini görüntülemek için *Sayfalar/Öğrenciler/Details.cshtml'deki* kodu aşağıdaki kodla değiştirin. Değişiklikler vurgulanır.
+Substitua o código em *Pages/Students/details.cshtml* pelo código a seguir para exibir uma lista de inscrições. As alterações são realçadas.
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Students/Details.cshtml?highlight=32-53)]
 
-Önceki kod, gezinti özelliğindeki varlıklar `Enrollments` arasında döngüler. Her kayıt için ders unvanını ve notu görüntüler. Kurs unvanı, Kayıtlar kuruluşunun `Course` navigasyon özelliğinde depolanan Kurs kuruluşundan alınır.
+O código anterior percorre as entidades na propriedade de navegação `Enrollments`. Para cada registro, ele exibe o nome do curso e a nota. O título do curso é recuperado da entidade Course, que é armazenada na propriedade de navegação `Course` da entidade Enrollments.
 
-Uygulamayı çalıştırın, **Öğrenciler** sekmesini seçin ve bir öğrenciiçin **Ayrıntılar** bağlantısını tıklatın. Seçilen öğrencinin ders ve notlistesi görüntülenir.
+Execute o aplicativo, selecione a guia **Alunos** e clique no link **Detalhes** de um aluno. A lista de cursos e notas do aluno selecionado é exibida.
 
-### <a name="ways-to-read-one-entity"></a>Bir varlığı okuma yolları
+### <a name="ways-to-read-one-entity"></a>Maneiras de ler uma entidade
 
-Oluşturulan kod, bir varlığı okumak için [FirstOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_) kullanır. Hiçbir şey bulunmazsa bu yöntem null döndürür; aksi takdirde, sorgu filtresi ölçütlerini karşılayan bulunan ilk satırı döndürür. `FirstOrDefaultAsync`genellikle aşağıdaki alternatiflerden daha iyi bir seçimdir:
+O código gerado usa [FirstOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_) para ler uma entidade. Esse método retornará null se nada for encontrado; caso contrário, retornará a primeira linha encontrada que atenda aos critérios de filtro de consulta. `FirstOrDefaultAsync` geralmente é uma opção melhor do que as seguintes alternativas:
 
-* [SingleOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.singleordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_SingleOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_) - Sorgu filtresini karşılayan birden fazla varlık varsa özel durum oluşturur. Sorgu tarafından birden fazla satır Döndürülebilir olup `SingleOrDefaultAsync` olmadığını belirlemek için, birden çok satır almaya çalışır. Sorgu, benzersiz bir anahtarda arama yaptığı gibi yalnızca bir varlık döndürebiliyorsa, bu ek çalışma gereksizdir.
-* [FindAsync](/dotnet/api/microsoft.entityframeworkcore.dbcontext.findasync#Microsoft_EntityFrameworkCore_DbContext_FindAsync_System_Type_System_Object___) - Birincil anahtara (PK) sahip bir varlık bulur. PK'lı bir varlık bağlam tarafından izleniyorsa, veritabanına istek olmadan döndürülür. Bu yöntem tek bir varlığı aramak için en iyi `Include` duruma `FindAsync`getirilmiş, ancak '' ile arayama  Yani ilgili veriler gerekiyorsa, `FirstOrDefaultAsync` daha iyi bir seçimdir.
+* [SingleOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.singleordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_SingleOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_) – gera uma exceção se houver mais de uma entidade que atenda ao filtro de consulta. Para determinar se mais de uma linha poderia ser retornada pela consulta, o `SingleOrDefaultAsync` tenta buscar várias linhas. Esse trabalho extra será desnecessário se a consulta só puder retornar uma entidade, como quando ela pesquisa em uma chave exclusiva.
+* [FindAsync](/dotnet/api/microsoft.entityframeworkcore.dbcontext.findasync#Microsoft_EntityFrameworkCore_DbContext_FindAsync_System_Type_System_Object___) – localiza uma entidade com a PK (chave primária). Se uma entidade com o PK estiver sendo controlada pelo contexto, ela será retornada sem uma solicitação para o banco de dados. Esse método é otimizado para pesquisar uma única entidade, mas você não pode chamar `Include` com `FindAsync`.  Portanto, se forem necessários dados relacionados, `FirstOrDefaultAsync` será a melhor opção.
 
-### <a name="route-data-vs-query-string"></a>Rota verileri ve sorgu dizesi
+### <a name="route-data-vs-query-string"></a>Rotear dados versus cadeia de consulta
 
-Ayrıntılar sayfasının URL'si `https://localhost:<port>/Students/Details?id=1`. Varlığın birincil anahtar değeri sorgu dizesindedir. Bazı geliştiriciler rota verilerindeki anahtar değeri `https://localhost:<port>/Students/Details/1`geçirmeyi tercih ediyor: . Daha fazla bilgi için [bkz.](xref:tutorials/razor-pages/da1#update-the-generated-code)
+A URL para a página Detalhes é `https://localhost:<port>/Students/Details?id=1`. O valor da chave primária da entidade está na cadeia de consulta. Alguns desenvolvedores preferem passar o valor da chave nos dados da rota: `https://localhost:<port>/Students/Details/1`. Para obter mais informações, confira [Atualizar o código gerado](xref:tutorials/razor-pages/da1#update-the-generated-code).
 
-## <a name="update-the-create-page"></a>Oluştur sayfasını güncelleştirin
+## <a name="update-the-create-page"></a>Atualizar a página Criar
 
-Oluştur sayfasının `OnPostAsync` iskele kodu [aşırıya katlamaya](#overposting)karşı savunmasızdır. `OnPostAsync` *Sayfalar/Öğrenciler/Create.cshtml.cs'deki* yöntemi aşağıdaki kodla değiştirin.
+O código `OnPostAsync` com scaffold para a página Criar é vulnerável à [sobreposição](#overposting). Substitua o método `OnPostAsync` em *Pages/Students/Create.cshtml.cs* com o seguinte código.
 
 [!code-csharp[Main](intro/samples/cu30/Pages/Students/Create.cshtml.cs?name=snippet_OnPostAsync)]
 
@@ -75,203 +65,203 @@ Oluştur sayfasının `OnPostAsync` iskele kodu [aşırıya katlamaya](#overpost
 
 ### <a name="tryupdatemodelasync"></a>TryUpdateModelAsync
 
-Önceki kod bir Öğrenci nesnesi oluşturur ve öğrenci nesnesinin özelliklerini güncelleştirmek için deftere nakledilen form alanlarını kullanır. [TryUpdateModelAsync](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.tryupdatemodelasync#Microsoft_AspNetCore_Mvc_ControllerBase_TryUpdateModelAsync_System_Object_System_Type_System_String_) yöntemi:
+O código anterior cria um objeto Student e, em seguida, usa campos de formulário postados para atualizar as propriedades do objeto Student. O método [TryUpdateModelAsync](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.tryupdatemodelasync#Microsoft_AspNetCore_Mvc_ControllerBase_TryUpdateModelAsync_System_Object_System_Type_System_String_):
 
-* [PageModel'deki](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel) [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_PageContext) özelliğinden gönderilen form değerlerini kullanır.
-* Yalnızca listelenen özellikleri`s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate`güncelleştirir ( ).
-* "Öğrenci" öneki olan form alanlarını arar. Örneğin, `Student.FirstMidName`. Bu vaka hassasiyeti değil.
-* Form [model binding](xref:mvc/models/model-binding) değerlerini dizeleri `Student` modeldeki türlere dönüştürmek için model bağlama sistemini kullanır. Örneğin, `EnrollmentDate` DateTime dönüştürülür gerekir.
+* Usa os valores de formulário postados da propriedade [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_PageContext) no [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel).
+* Atualiza apenas as propriedades listadas (`s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate`).
+* Procura campos de formulário com um prefixo "Student". Por exemplo, `Student.FirstMidName`. Não diferencia maiúsculas de minúsculas.
+* Usa o sistema de [model binding](xref:mvc/models/model-binding) para converter valores de formulário de cadeias de caracteres para os tipos no modelo `Student`. Por exemplo, `EnrollmentDate` deve ser convertido em DateTime.
 
-Uygulamayı çalıştırın ve Oluştur sayfasını test etmek için bir öğrenci varlığı oluşturun.
+Execute o aplicativo e crie uma entidade de aluno para testar a página Criar.
 
-## <a name="overposting"></a>Aşırı gönderme
+## <a name="overposting"></a>Excesso de postagem
 
-Alanları `TryUpdateModel` deftere nakledilen değerlerle güncelleştirmek için kullanmak, aşırı deftere nakil etmeyi önlediği için en iyi güvenlik uygulamasıdır. Örneğin, Öğrenci kuruluşunun bu `Secret` web sayfasının güncelleştirmemesi veya eklememesi gereken bir özellik içerdiğini varsayalım:
+O uso de `TryUpdateModel` para atualizar campos com valores postados é uma melhor prática de segurança porque ele impede o excesso de postagem. Por exemplo, suponha que a entidade Student inclua uma propriedade `Secret` que esta página da Web não deve atualizar nem adicionar:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/2-crud/Models/StudentZsecret.cs?name=snippet_Intro&highlight=7)]
 
-Uygulamanın Razor Page oluşturma `Secret` veya güncelleme alanında bir alanı olmasa bile, `Secret` bir bilgisayar korsanı aşırı yayılarak değeri ayarlayabilir. Bir bilgisayar korsanı, form değeri göndermek için Fiddler gibi `Secret` bir araç kullanabilir veya bazı JavaScript yazabilir. Özgün kod, model bağlayıcısının Öğrenci örneği oluştururken kullandığı alanları sınırlamaz.
+Mesmo que o aplicativo não tenha um `Secret` campo na página criar ou atualizar Razor , um hacker poderia definir o `Secret` valor sobrepostando. Um invasor pode usar uma ferramenta como o Fiddler ou escrever um JavaScript para postar um valor de formulário `Secret`. O código original não limita os campos que o associador de modelos usa quando ele cria uma instância Student.
 
-`Secret` Form alanı için belirtilen bilgisayar korsanı değeri veritabanında güncelleştirilir. Aşağıdaki resimde Fiddler aracı, `Secret` deftere nakledilen form değerlerine alanı ("OverPost" değeriyle) ekleyerek gösterir.
+Seja qual for o valor que o invasor especificou para o campo de formulário `Secret`, ele será atualizado no banco de dados. A imagem a seguir mostra a ferramenta Fiddler adicionando o campo `Secret` (com o valor "OverPost") aos valores de formulário postados.
 
-![Fiddler Gizli alan ekleme](../ef-mvc/crud/_static/fiddler.png)
+![Fiddler adicionando o campo Secreto](../ef-mvc/crud/_static/fiddler.png)
 
-"OverPost" değeri eklenen satırın `Secret` özelliğine başarıyla eklenir. Bu durum, uygulama tasarımcısı özelliğin `Secret` Oluştur sayfasıyla ayarlanmasını hiç istememiş olsa da gerçekleşir.
+O valor "OverPost" foi adicionado com êxito à propriedade `Secret` da linha inserida. Isso acontece embora o designer de aplicativo nunca tenha pretendido que a propriedade `Secret` fosse definida com a página Criar.
 
-### <a name="view-model"></a>Modeli görüntüle
+### <a name="view-model"></a>Modelo de exibição
 
-Görünüm modelleri, aşırı göndermeyi önlemek için alternatif bir yol sağlar.
+Os modelos de exibição fornecem uma maneira alternativa para impedir o excesso de postagem.
 
-Uygulama modeli genellikle etki alanı modeli olarak adlandırılır. Etki alanı modeli genellikle veritabanında ilgili varlık tarafından gerekli tüm özellikleri içerir. Görünüm modeli yalnızca ui için kullanılan özellikleri (örneğin, Oluştur sayfası) içerir.
+O modelo de aplicativo costuma ser chamado de modelo de domínio. O modelo de domínio normalmente contém todas as propriedades necessárias para a entidade correspondente no banco de dados. O modelo de exibição contém apenas as propriedades necessárias para a interface do usuário que é usada (por exemplo, a página Criar).
 
-Görünüm modeline ek olarak, bazı uygulamalar Razor Pages sayfa modeli sınıfı ile tarayıcı arasında veri aktarmak için bağlayıcı bir model veya giriş modeli kullanır. 
+Além do modelo de exibição, alguns aplicativos usam um modelo de associação ou um modelo de entrada para passar dados Razor entre a classe de modelo de página de páginas e o navegador. 
 
-Aşağıdaki `Student` görünüm modelini göz önünde bulundurun:
+Considere o seguinte modelo de exibição `Student`:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/2-crud/Models/StudentVM.cs)]
 
-Aşağıdaki kod, `StudentVM` yeni bir öğrenci oluşturmak için görünüm modelini kullanır:
+O seguinte código usa o modelo de exibição `StudentVM` para criar um novo aluno:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/2-crud/Pages/Students/CreateVM.cshtml.cs?name=snippet_OnPostAsync)]
 
-[SetValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues.setvalues#Microsoft_EntityFrameworkCore_ChangeTracking_PropertyValues_SetValues_System_Object_) yöntemi, başka bir [Özellik Değerleri](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues) nesnesinden değerleri okuyarak bu nesnenin değerlerini ayarlar. `SetValues`özellik adı eşleştirme kullanır. Görünüm modeli türü model türü ile ilgili olması gerekmez, sadece eşleşen özelliklere sahip olması gerekir.
+O método [SetValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues.setvalues#Microsoft_EntityFrameworkCore_ChangeTracking_PropertyValues_SetValues_System_Object_) define os valores desse objeto lendo os valores de outro objeto [PropertyValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues). `SetValues` usa a correspondência de nomes de propriedade. O tipo de modelo de exibição não precisa estar relacionado ao tipo de modelo, apenas precisa ter as propriedades correspondentes.
 
-Kullanmak, `StudentVM` [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu30snapshots/2-crud/Pages/Students/CreateVM.cshtml) yerine `StudentVM` kullanmak `Student`üzere güncelleştirilmelidir.
+Usar `StudentVM` requer atualizar [Create.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu30snapshots/2-crud/Pages/Students/CreateVM.cshtml) para usar `StudentVM` em vez de `Student`.
 
-## <a name="update-the-edit-page"></a>Edit sayfasını güncelleştir
+## <a name="update-the-edit-page"></a>Atualizar a página Editar
 
-*Sayfalar/Öğrenciler/Edit.cshtml.cs*olarak, `OnGetAsync` aşağıdaki `OnPostAsync` kod ile ve yöntemleri değiştirin.
+Em *Pages/Students/Edit.cshtml.cs*, substitua os métodos `OnGetAsync` e `OnPostAsync` pelo código a seguir.
 
 [!code-csharp[Main](intro/samples/cu30/Pages/Students/Edit.cshtml.cs?name=snippet_OnGetPost)]
 
-Kod değişiklikleri birkaç özel durum dışında Oluştur sayfasına benzer:
+As alterações de código são semelhantes à página Criar, com algumas exceções:
 
-* `FirstOrDefaultAsync`[FindAsync](/dotnet/api/microsoft.entityframeworkcore.dbset-1.findasync)ile değiştirildi. İlgili verileri eklemeniz gerekmediğinde, `FindAsync` daha verimlidir.
-* `OnPostAsync`bir `id` parametresi vardır.
-* Geçerli öğrenci boş bir öğrenci oluşturmak yerine veritabanından getirilir.
+* `FirstOrDefaultAsync` foi substituído por [FindAsync](/dotnet/api/microsoft.entityframeworkcore.dbset-1.findasync). Quando você não precisa incluir dados relacionados, `FindAsync` é mais eficiente.
+* `OnPostAsync` tem um parâmetro `id`.
+* O aluno atual é buscado do banco de dados, em vez de criar um aluno vazio.
 
-Uygulamayı çalıştırın ve bir öğrenci oluşturarak ve düzenleyerek test edin.
+Execute o aplicativo e teste-o criando e editando um aluno.
 
-## <a name="entity-states"></a>Taraf Devletleri
+## <a name="entity-states"></a>Estados da entidade
 
-Veritabanı bağlamı, bellekteki varlıkların veritabanındaki karşılık gelen satırlarla eşitlenip eşitolmadığını izler. Bu izleme [bilgileri, SaveChangesAsync](/dotnet/api/microsoft.entityframeworkcore.dbcontext.savechangesasync#Microsoft_EntityFrameworkCore_DbContext_SaveChangesAsync_System_Threading_CancellationToken_) çağrıldığında ne olacağını belirler. Örneğin, [addasync](/dotnet/api/microsoft.entityframeworkcore.dbcontext.addasync) yöntemine yeni bir varlık geçirildiğinde, bu varlığın durumu [Eklendi](/dotnet/api/microsoft.entityframeworkcore.entitystate#Microsoft_EntityFrameworkCore_EntityState_Added)olarak ayarlanır. Çağrıldığında, `SaveChangesAsync` veritabanı bağlamı bir SQL INSERT komutu yayınlar.
+O contexto de banco de dados controla se as entidades em memória estão em sincronia com suas linhas correspondentes no banco de dados. As informações de acompanhamento determinam o que acontece quando [SaveChangesAsync](/dotnet/api/microsoft.entityframeworkcore.dbcontext.savechangesasync#Microsoft_EntityFrameworkCore_DbContext_SaveChangesAsync_System_Threading_CancellationToken_) é chamado. Por exemplo, quando uma nova entidade é passada para o método [AddAsync](/dotnet/api/microsoft.entityframeworkcore.dbcontext.addasync), o estado da entidade é definido como [Added](/dotnet/api/microsoft.entityframeworkcore.entitystate#Microsoft_EntityFrameworkCore_EntityState_Added). Quando `SaveChangesAsync` é chamado, o contexto de banco de dados emite um comando SQL INSERT.
 
-Bir varlık [aşağıdaki durumlardan](/dotnet/api/microsoft.entityframeworkcore.entitystate)birinde olabilir:
+Uma entidade pode estar em um dos [seguintes estados](/dotnet/api/microsoft.entityframeworkcore.entitystate):
 
-* `Added`: Varlık henüz veritabanında yok. Yöntem `SaveChanges` bir INSERT deyimi yayınlar.
+* `Added`: A entidade ainda não existe no banco de dados. O método `SaveChanges` emite uma instrução INSERT.
 
-* `Unchanged`: Bu varlıkla birlikte kaydedilmesi gerekmez. Bir varlık veritabanından okunduğunda bu duruma sahiptir.
+* `Unchanged`: nenhuma alteração precisa ser salva com essa entidade. Uma entidade tem esse status quando é lida do banco de dados.
 
-* `Modified`: Varlığın özellik değerlerinin bir kısmı veya tamamı değiştirildi. Yöntem, `SaveChanges` UPDATE deyimini yayınlar.
+* `Modified`: alguns ou todos os valores de propriedade da entidade foram modificados. O método `SaveChanges` emite uma instrução UPDATE.
 
-* `Deleted`: Varlık silinmesi için işaretlenmiştir. Yöntem, `SaveChanges` DELETE deyimi ni yayınlar.
+* `Deleted`: a entidade foi marcada para exclusão. O método `SaveChanges` emite uma instrução DELETE.
 
-* `Detached`: Varlık veritabanı bağlamı tarafından izlenmiyor.
+* `Detached`: A entidade não está sendo rastreada pelo contexto do banco de dados.
 
-Bir masaüstü uygulamasında durum değişiklikleri genellikle otomatik olarak ayarlanır. Bir varlık okunur, değişiklikler yapılır ve varlık durumu otomatik `Modified`olarak ' olarak değiştirilir. Arama, `SaveChanges` yalnızca değiştirilen özellikleri güncelleştiren bir SQL UPDATE deyimi oluşturur.
+Em um aplicativo da área de trabalho, em geral, as alterações de estado são definidas automaticamente. Uma entidade é lida, as alterações são feitas e o estado da entidade é alterado automaticamente para `Modified`. A chamada a `SaveChanges` gera uma instrução SQL UPDATE que atualiza apenas as propriedades alteradas.
 
-Bir web uygulamasında, `DbContext` bir varlığı okur ve verileri görüntüler bir sayfa işlendikten sonra atılır. Bir sayfanın `OnPostAsync` yöntemi çağrıldığında, yeni bir web isteği yapılır `DbContext`ve yeni bir web örneği ile . Bu yeni bağlamda varlığı yeniden okumak masaüstü işleme benzetimi.
+Em um aplicativo Web, o `DbContext` que lê uma entidade e exibe os dados é descartado depois que uma página é renderizada. Quando o método `OnPostAsync` de uma página é chamado, é feita uma nova solicitação da Web e com uma nova instância do `DbContext`. A nova leitura da entidade nesse novo contexto simula o processamento da área de trabalho.
 
-## <a name="update-the-delete-page"></a>Sil sayfasını güncelleştir
+## <a name="update-the-delete-page"></a>Atualizar a página Excluir
 
-Bu bölümde, çağrı `SaveChanges` başarısız olduğunda özel bir hata iletisi uygularsınız.
+Nesta seção, você implementa uma mensagem de erro personalizada quando há falha na chamada a `SaveChanges`.
 
-*Sayfalar/Öğrenciler/Sil.cshtml.cs'deki* kodu aşağıdaki kodla değiştirin. Değişiklikler vurgulanır `using` (ifadelerin temizlenmesi dışında).
+Substitua o código em *Pages/Students/Delete.cshtml.cs* pelo código a seguir. As alterações são realçadas (além da limpeza de instruções `using`).
 
 [!code-csharp[Main](intro/samples/cu30/Pages/Students/Delete.cshtml.cs?name=snippet_All&highlight=20,22,30,38-41,53-71)]
 
-Önceki kod yöntem imzasına `saveChangesError` isteğe `OnGetAsync` bağlı parametre ekler. `saveChangesError`öğrenci nesnesinin silinmemesi üzerine yöntemin çağrılıp çağrılmadığını gösterir. Silme işlemi geçici ağ sorunları nedeniyle başarısız olabilir. Veritabanı bulutta olduğunda geçici ağ hataları daha olasıdır. `saveChangesError` Parametre, Kullanıcı Arabirimi'nden Delete sayfası `OnGetAsync` çağrıldığında yanlıştır. Tarafından `OnGetAsync` `OnPostAsync` çağrıldığında (silme işlemi başarısız `saveChangesError` olduğundan), parametre doğrudur.
+O código anterior adiciona o parâmetro `saveChangesError` opcional à assinatura do método `OnGetAsync`. `saveChangesError` indica se o método foi chamado após uma falha ao excluir o objeto de aluno. A operação de exclusão pode falhar devido a problemas de rede temporários. Erros de rede transitórios são mais prováveis quando o banco de dados está na nuvem. O parâmetro `saveChangesError` é falso quando a página Excluir `OnGetAsync` é chamada na interface do usuário. Quando `OnGetAsync` é chamado por `OnPostAsync` (devido à falha da operação de exclusão), o parâmetro `saveChangesError` é verdadeiro.
 
-Yöntem `OnPostAsync` seçili varlığı alır, sonra [Remove](/dotnet/api/microsoft.entityframeworkcore.dbcontext.remove#Microsoft_EntityFrameworkCore_DbContext_Remove_System_Object_) varlığın durumunu `Deleted`'da ayarlamak için Kaldır yöntemini çağırır. Çağrıldığında, `SaveChanges` bir SQL DELETE komutu oluşturulur. Başarısız `Remove` olursa:
+O método `OnPostAsync` recupera a entidade selecionada e, em seguida, chama o método [Remove](/dotnet/api/microsoft.entityframeworkcore.dbcontext.remove#Microsoft_EntityFrameworkCore_DbContext_Remove_System_Object_) para definir o status da entidade como `Deleted`. Quando `SaveChanges` é chamado, um comando SQL DELETE é gerado. Se `Remove` falhar:
 
-* Veritabanı özel durumu yakalanır.
-* Sayfaları `OnGetAsync` Sil yöntemi . `saveChangesError=true`
+* A exceção de banco de dados é capturada.
+* O método `OnGetAsync` das páginas Excluir é chamado com `saveChangesError=true`.
 
-Delete Razor Sayfasına hata iletisi ekleyin (*Sayfalar/Öğrenciler/Delete.cshtml):*
+Adicione uma mensagem de erro à página Razor excluir (*páginas/alunos/Delete. cshtml*):
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Students/Delete.cshtml?highlight=10)]
 
-Uygulamayı çalıştırın ve Sil sayfasını test etmek için bir öğrenciyi silin.
+Execute o aplicativo e exclua um aluno para testar a página Excluir.
 
-## <a name="next-steps"></a>Sonraki adımlar
+## <a name="next-steps"></a>Próximas etapas
 
 > [!div class="step-by-step"]
-> [Önceki öğretici](xref:data/ef-rp/intro)
-> [Sonraki öğretici](xref:data/ef-rp/sort-filter-page)
+> [Tutorial](xref:data/ef-rp/intro)
+> anterior[próximo tutorial](xref:data/ef-rp/sort-filter-page)
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-Bu öğreticide, iskeleye sarılmış CRUD (oluşturma, oku, güncelleme, silme) kodu gözden geçirilir ve özelleştirilmiştir.
+Neste tutorial, o código CRUD (criar, ler, atualizar e excluir) gerado por scaffolding é examinado e personalizado.
 
-Karmaşıklığı en aza indirmek ve bu öğreticileri EF Core'a odaklamak için sayfa modellerinde EF Core kodu kullanılır. Bazı geliştiriciler, UI (Razor Pages) ve veri erişim katmanı arasında bir soyutlama katmanı oluşturmak için bir hizmet katmanı veya depo deseni kullanır.
+Para minimizar a complexidade e manter o foco destes tutoriais no EF Core, o código do EF Core é usado nos modelos de página. Alguns desenvolvedores usam um padrão de camada de serviço ou repositório no para criar uma camada de abstração entreRazor a interface do usuário (páginas) e a camada de acesso a dados.
 
-Bu öğreticide, *Öğrenciler* klasöründeki Oluştur, Düzenle, Sil ve Ayrıntılar Jilet Sayfaları incelenmiştir.
+Neste tutorial, as páginas criar, editar, excluir e detalhes Razor na pasta *estudantes* são examinadas.
 
-İskele kodu, Sayfaları Oluştur, Düzenle ve Sil için aşağıdaki deseni kullanır:
+O código gerado por scaffolding usa o seguinte padrão para as páginas Criar, Editar e Excluir:
 
-* Http GET yöntemi `OnGetAsync`ile istenen verileri alın ve görüntüleyin.
-* HTTP POST yöntemi `OnPostAsync`yle verilerdeki değişiklikleri kaydedin.
+* Obtenha e exiba os dados solicitados com o método HTTP GET `OnGetAsync`.
+* Salve as alterações nos dados com o método HTTP POST `OnPostAsync`.
 
-Dizin ve Ayrıntılar sayfaları, istenen verileri HTTP GET yöntemiyle alır ve görüntüler`OnGetAsync`
+As páginas Índice e Detalhes obtêm e exibem os dados solicitados com o método HTTP GET `OnGetAsync`
 
 ## <a name="singleordefaultasync-vs-firstordefaultasync"></a>SingleOrDefaultAsync vs. FirstOrDefaultAsync
 
-Oluşturulan kod genellikle [SingleOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.singleordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_SingleOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_)üzerinde tercih edilir [FirstOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_)kullanır.
+O código gerado usa [FirstOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_), que geralmente é uma preferência em relação a [SingleOrDefaultAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.singleordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_SingleOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_).
 
- `FirstOrDefaultAsync`bir varlığı `SingleOrDefaultAsync` alma da daha verimlidir:
+ `FirstOrDefaultAsync` é mais eficiente que `SingleOrDefaultAsync` na busca de uma entidade:
 
-* Kodun sorgudan döndürülen birden fazla varlık olmadığını doğrulaması gerekmediği sürece.
-* `SingleOrDefaultAsync`daha fazla veri getirir ve gereksiz işler yapar.
-* `SingleOrDefaultAsync`filtre kısmına uyan birden fazla varlık varsa bir özel durum oluşturur.
-* `FirstOrDefaultAsync`filtre kısmına uyan birden fazla varlık varsa atmaz.
+* A menos que o código precise verificar se não há mais de uma entidade retornada da consulta.
+* `SingleOrDefaultAsync` busca mais dados e faz o trabalho desnecessário.
+* `SingleOrDefaultAsync` gera uma exceção se há mais de uma entidade que se ajusta à parte do filtro.
+* `FirstOrDefaultAsync` não gera uma exceção se há mais de uma entidade que se ajusta à parte do filtro.
 
 <a name="FindAsync"></a>
 
 ### <a name="findasync"></a>FindAsync
 
-İskele kodu çok, [FindAsync](/dotnet/api/microsoft.entityframeworkcore.dbcontext.findasync#Microsoft_EntityFrameworkCore_DbContext_FindAsync_System_Type_System_Object___) yerine `FirstOrDefaultAsync`kullanılabilir.
+Em grande parte do código gerado por scaffolding, [FindAsync](/dotnet/api/microsoft.entityframeworkcore.dbcontext.findasync#Microsoft_EntityFrameworkCore_DbContext_FindAsync_System_Type_System_Object___) pode ser usado no lugar de `FirstOrDefaultAsync`.
 
 `FindAsync`:
 
-* Birincil anahtara (PK) sahip bir varlık bulur. PK'lı bir varlık bağlam tarafından izleniyorsa, DB'ye istek tespül etmeden döndürülür.
-* Basit ve özlü.
-* Tek bir varlığı aramak için optimize edilsin.
-* Bazı durumlarda perf yararları olabilir, ancak bu nadiren tipik web uygulamaları için olur.
-* Implicitly [SingleAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_) yerine [FirstAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.singleasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_SingleAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_)kullanır.
+* Encontra uma entidade com o PK (chave primária). Se uma entidade com o PK está sendo controlada pelo contexto, ela é retornada sem uma solicitação para o BD.
+* É simples e conciso.
+* É otimizado para pesquisar uma única entidade.
+* Pode ter benefícios de desempenho em algumas situações, mas isso é raro em aplicativos Web.
+* Usa [FirstAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_) em vez de [SingleAsync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.singleasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_SingleAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_) de forma implícita.
 
-Ama diğer varlıklar `Include` istiyorsanız, o `FindAsync` zaman artık uygun değildir. Bu, uygulamanız ilerledikçe `FindAsync` bir sorgudan vazgeçmeniz ve bir sorguya geçmeniz gerekebileceği anlamına gelir.
+Mas se você deseja `Include` outras entidades, `FindAsync` não é mais apropriado. Isso significa que talvez seja necessário abandonar `FindAsync` e passar para uma consulta à medida que o aplicativo avança.
 
-## <a name="customize-the-details-page"></a>Ayrıntılar sayfasını özelleştirin
+## <a name="customize-the-details-page"></a>Personalizar a página Detalhes
 
-Sayfaya `Pages/Students` göz atın. **Düzenleme,** **Ayrıntılar**ve **Sil** *bağlantıları, Sayfalar/Öğrenciler/Index.cshtml* dosyasındaki [Çapa Etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) tarafından oluşturulur.
+Navegue para a página `Pages/Students`. Os links **Editar**, **Detalhes** e **Excluir** são gerados pelo [Auxiliar de Marcação de Âncora](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) no arquivo *Pages/Students/Index.cshtml*.
 
 [!code-cshtml[](intro/samples/cu21/Pages/Students/Index1.cshtml?name=snippet)]
 
-Uygulamayı çalıştırın ve **Ayrıntılar** bağlantısını seçin. URL formu `http://localhost:5000/Students/Details?id=2`. Öğrenci Kimliği bir sorgu dizesi kullanılarak geçirilir (`?id=2`).
+Execute o aplicativo e selecione o link **Detalhes**. A URL tem o formato `http://localhost:5000/Students/Details?id=2`. A ID do Aluno é passada com uma cadeia de caracteres de consulta (`?id=2`).
 
-Rota şablonunu kullanmak için Düzenle, `"{id:int}"` Ayrıntıları ve Jilet Sayfalarını Sil'i güncelleştirin. Bu sayfaların her biri için `@page` `@page "{id:int}"`sayfa yönergesini ' den ' e değiştirin
+Atualize as páginas editar, detalhes e excluir Razor para usar o modelo `"{id:int}"` de rota. Altere a diretiva de página de cada uma dessas páginas de `@page` para `@page "{id:int}"`.
 
-Tamsayı rota değeri **içermeyen** "{id:int}" rota şablonuna sahip sayfaya gelen bir istek, http 404 (bulunamadı) hatası döndürür. Örneğin, `http://localhost:5000/Students/Details` bir 404 hatası döndürür. Kimliği isteğe bağlı hale `?` getirmek için rota kısıtlamasına eklenen:
+Uma solicitação para a página com o modelo de rota "{id:int}" que **não** inclui um valor inteiro de rota retorna um erro HTTP 404 (não encontrado). Por exemplo, `http://localhost:5000/Students/Details` retorna um erro 404. Para tornar a ID opcional, acrescente `?` à restrição de rota:
 
  ```cshtml
 @page "{id:int?}"
 ```
 
-Uygulamayı çalıştırın, Ayrıntılar bağlantısını tıklayın ve URL'nin kimlikten rota`http://localhost:5000/Students/Details/2`verisi olarak geçtiğini doğrulayın ( ).
+Execute o aplicativo, clique em um link Detalhes e verifique se a URL está passando a ID como dados de rota (`http://localhost:5000/Students/Details/2`).
 
-Genel olarak ana `@page` `@page "{id:int}"`sayfaya ve sayfa oluşturmaya bağlantılar alabilme yitirmemeye.
+Não altere `@page` globalmente para `@page "{id:int}"`, pois isso desfaz os links para as páginas Início e Criar.
 
 <!-- See https://github.com/aspnet/Scaffolding/issues/590 -->
 
-### <a name="add-related-data"></a>İlgili verileri ekleme
+### <a name="add-related-data"></a>Adicionar dados relacionados
 
-Öğrenci Dizini sayfasının iskele kodu `Enrollments` özelliği içermez. Bu bölümde, koleksiyonun `Enrollments` içeriği Ayrıntılar sayfasında görüntülenir.
+O código gerado por scaffolding para a página Índice de Alunos não inclui a propriedade `Enrollments`. Nesta seção, o conteúdo da coleção `Enrollments` é exibido na página Detalhes.
 
-`OnGetAsync` *Sayfalar/Öğrenciler/Details.cshtml.cs* yöntemi tek `Student` `FirstOrDefaultAsync` bir varlığı almak için bu yöntemi kullanır. Aşağıdaki vurgulanan kodu ekleyin:
+O método `OnGetAsync` de *Pages/Students/Details.cshtml.cs* usa o método `FirstOrDefaultAsync` para recuperar uma única entidade `Student`. Adicione o seguinte código realçado:
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Details.cshtml.cs?name=snippet_Details&highlight=8-12)]
 
-Ekle ve [Sonra Ekle](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.theninclude#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_ThenInclude__3_Microsoft_EntityFrameworkCore_Query_IIncludableQueryable___0_System_Collections_Generic_IEnumerable___1___System_Linq_Expressions_Expression_System_Func___1___2___) yöntemleri bağlamın `Student.Enrollments` gezinti özelliğini yüklemesine `Enrollment.Course` ve her kayıt içinde gezinti özelliğine neden olur. [Include](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.include) Bu yöntemler okuma ile ilgili veri öğretici ayrıntılı olarak incelenir.
+Os métodos [Include](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.include) e [ThenInclude](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.theninclude#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_ThenInclude__3_Microsoft_EntityFrameworkCore_Query_IIncludableQueryable___0_System_Collections_Generic_IEnumerable___1___System_Linq_Expressions_Expression_System_Func___1___2___) fazem com que o contexto carregue a propriedade de navegação `Student.Enrollments` e, dentro de cada registro, a propriedade de navegação `Enrollment.Course`. Esses métodos são examinados em detalhes no tutorial de dados relacionado à leitura.
 
-[AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) yöntemi, döndürülen varlıklar geçerli bağlamda güncelleştirildiğinde senaryolarda performansı artırır. `AsNoTracking`daha sonra bu öğretici ele alınmıştır.
+O método [AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) melhora o desempenho em cenários em que as entidades retornadas não são atualizadas no contexto atual. `AsNoTracking` é abordado mais adiante neste tutorial.
 
-### <a name="display-related-enrollments-on-the-details-page"></a>Ayrıntılar sayfasında ilgili kayıtları görüntüleme
+### <a name="display-related-enrollments-on-the-details-page"></a>Exibir registros relacionados na página Detalhes
 
-*Sayfaları Aç/Öğrenci/Details.cshtml*. Bir kayıt listesini görüntülemek için aşağıdaki vurgulanmış kodu ekleyin:
+Abra *Pages/Students/Details.cshtml*. Adicione o seguinte código realçado para exibir uma lista de registros:
 
 [!code-cshtml[](intro/samples/cu21/Pages/Students/Details.cshtml?highlight=32-53)]
 
-Kod yapıştırıldıktan sonra kod girintisi yanlışsa, düzeltmek için CTRL-K-D tuşuna basın.
+Se o recuo do código estiver incorreto depois que o código for colado, pressione CTRL-K-D para corrigi-lo.
 
-Önceki kod, gezinti özelliğindeki varlıklar `Enrollments` arasında döngüler. Her kayıt için ders unvanını ve notu görüntüler. Kurs unvanı, Kayıtlar kuruluşunun `Course` navigasyon özelliğinde depolanan Kurs kuruluşundan alınır.
+O código anterior percorre as entidades na propriedade de navegação `Enrollments`. Para cada registro, ele exibe o nome do curso e a nota. O título do curso é recuperado da entidade Course, que é armazenada na propriedade de navegação `Course` da entidade Enrollments.
 
-Uygulamayı çalıştırın, **Öğrenciler** sekmesini seçin ve bir öğrenciiçin **Ayrıntılar** bağlantısını tıklatın. Seçilen öğrencinin ders ve notlistesi görüntülenir.
+Execute o aplicativo, selecione a guia **Alunos** e clique no link **Detalhes** de um aluno. A lista de cursos e notas do aluno selecionado é exibida.
 
-## <a name="update-the-create-page"></a>Oluştur sayfasını güncelleştirin
+## <a name="update-the-create-page"></a>Atualizar a página Criar
 
-`OnPostAsync` *Sayfalar/Öğrenciler/Create.cshtml.cs'deki* yöntemi aşağıdaki kodla güncelleştirin:
+Atualize o método `OnPostAsync` em *Pages/Students/Create.cshtml.cs* com o seguinte código:
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Create.cshtml.cs?name=snippet_OnPostAsync)]
 
@@ -279,142 +269,142 @@ Uygulamayı çalıştırın, **Öğrenciler** sekmesini seçin ve bir öğrencii
 
 ### <a name="tryupdatemodelasync"></a>TryUpdateModelAsync
 
-[TryUpdateModelAsync](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.tryupdatemodelasync#Microsoft_AspNetCore_Mvc_ControllerBase_TryUpdateModelAsync_System_Object_System_Type_System_String_) kodunu inceleyin:
+Examine o código [TryUpdateModelAsync](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.tryupdatemodelasync#Microsoft_AspNetCore_Mvc_ControllerBase_TryUpdateModelAsync_System_Object_System_Type_System_String_):
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Create.cshtml.cs?name=snippet_TryUpdateModelAsync)]
 
-Önceki `TryUpdateModelAsync<Student>` kodda, `emptyStudent` [PageModel'deki](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel) [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_PageContext) özelliğinden deftere nakledilen form değerlerini kullanarak nesneyi güncelleştirmeye çalışır. `TryUpdateModelAsync`yalnızca listelenen özellikleri`s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate`güncelleştirir ( ).
+No código anterior, `TryUpdateModelAsync<Student>` tenta atualizar o objeto `emptyStudent` usando os valores de formulário postados da propriedade [PageContext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_PageContext) no [PageModel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel). `TryUpdateModelAsync` atualiza apenas as propriedades listadas (`s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate`).
 
-Önceki örnekte:
+Na amostra anterior:
 
-* İkinci bağımsız`"student", // Prefix`değişken ( ) değerleri aramak için önek kullanır. Bu vaka hassasiyeti değil.
-* Deftere nakledilen form [değerleri,](xref:mvc/models/model-binding)model `Student` bağlama kullanılarak modeldeki türlere dönüştürülür.
+* O segundo argumento (`"student", // Prefix`) é o prefixo usado para pesquisar valores. Não diferencia maiúsculas de minúsculas.
+* Os valores de formulário postados são convertidos nos tipos no modelo `Student` usando o [model binding](xref:mvc/models/model-binding).
 
 <a id="overpost"></a>
 
-### <a name="overposting"></a>Aşırı gönderme
+### <a name="overposting"></a>Excesso de postagem
 
-Alanları `TryUpdateModel` deftere nakledilen değerlerle güncelleştirmek için kullanmak, aşırı deftere nakil etmeyi önlediği için en iyi güvenlik uygulamasıdır. Örneğin, Öğrenci kuruluşunun bu `Secret` web sayfasının güncelleştirmemesi veya eklememesi gereken bir özellik içerdiğini varsayalım:
+O uso de `TryUpdateModel` para atualizar campos com valores postados é uma melhor prática de segurança porque ele impede o excesso de postagem. Por exemplo, suponha que a entidade Student inclua uma propriedade `Secret` que esta página da Web não deve atualizar nem adicionar:
 
 [!code-csharp[](intro/samples/cu21/Models/StudentZsecret.cs?name=snippet_Intro&highlight=7)]
 
-Uygulamanın Oluşturma/Güncelle Jilet Sayfası'nda bir `Secret` alanı olmasa bile, `Secret` bir bilgisayar korsanı aşırı yayılarak değeri ayarlayabilir. Bir bilgisayar korsanı, form değeri göndermek için Fiddler gibi `Secret` bir araç kullanabilir veya bazı JavaScript yazabilir. Özgün kod, model bağlayıcısının Öğrenci örneği oluştururken kullandığı alanları sınırlamaz.
+Mesmo que o aplicativo não tenha um `Secret` campo na página Criar/atualizar Razor , um hacker poderia definir o `Secret` valor sobrepostando. Um invasor pode usar uma ferramenta como o Fiddler ou escrever um JavaScript para postar um valor de formulário `Secret`. O código original não limita os campos que o associador de modelos usa quando ele cria uma instância Student.
 
-`Secret` Form alanı için belirtilen bilgisayar korsanı değeri db'de güncelleştirilir. Aşağıdaki resimde Fiddler aracı, `Secret` deftere nakledilen form değerlerine alanı ("OverPost" değeriyle) ekleyerek gösterir.
+Seja qual for o valor que o invasor especificou para o campo de formulário `Secret`, ele será atualizado no BD. A imagem a seguir mostra a ferramenta Fiddler adicionando o campo `Secret` (com o valor "OverPost") aos valores de formulário postados.
 
-![Fiddler Gizli alan ekleme](../ef-mvc/crud/_static/fiddler.png)
+![Fiddler adicionando o campo Secreto](../ef-mvc/crud/_static/fiddler.png)
 
-"OverPost" değeri eklenen satırın `Secret` özelliğine başarıyla eklenir. Uygulama tasarımcısı özelliğin `Secret` Oluştur sayfasıyla ayarlanmasını asla amaçlamadınız.
+O valor "OverPost" foi adicionado com êxito à propriedade `Secret` da linha inserida. O designer do aplicativo nunca desejou que a propriedade `Secret` fosse definida com a página Criar.
 
 <a name="vm"></a>
 
-### <a name="view-model"></a>Modeli görüntüle
+### <a name="view-model"></a>Modelo de exibição
 
-Görünüm modeli genellikle uygulama tarafından kullanılan modele dahil özellikleribir alt kümesi içerir. Uygulama modeli genellikle etki alanı modeli olarak adlandırılır. Etki alanı modeli genellikle DB'deki ilgili varlığın gerektirdiği tüm özellikleri içerir. Görünüm modeli yalnızca UI katmanı için gereken özellikleri (örneğin, Oluştur sayfası) içerir. Görünüm modeline ek olarak, bazı uygulamalar Razor Pages sayfa modeli sınıfı ile tarayıcı arasında veri aktarmak için bağlayıcı bir model veya giriş modeli kullanır. Aşağıdaki `Student` görünüm modelini göz önünde bulundurun:
+Um modelo de exibição normalmente contém um subconjunto das propriedades incluídas no modelo usado pelo aplicativo. O modelo de aplicativo costuma ser chamado de modelo de domínio. O modelo de domínio normalmente contém todas as propriedades necessárias para a entidade correspondente no BD. O modelo de exibição contém apenas as propriedades necessárias para a camada de interface do usuário (por exemplo, a página Criar). Além do modelo de exibição, alguns aplicativos usam um modelo de associação ou um modelo de entrada para passar dados Razor entre a classe de modelo de página de páginas e o navegador. Considere o seguinte modelo de exibição `Student`:
 
 [!code-csharp[](intro/samples/cu21/Models/StudentVM.cs)]
 
-Görünüm modelleri, aşırı göndermeyi önlemek için alternatif bir yol sağlar. Görünüm modeli yalnızca görüntülenecek (görüntülenecek) veya güncellenecek özellikleri içerir.
+Os modelos de exibição fornecem uma maneira alternativa para impedir o excesso de postagem. O modelo de exibição contém apenas as propriedades a serem exibidas ou atualizadas.
 
-Aşağıdaki kod, `StudentVM` yeni bir öğrenci oluşturmak için görünüm modelini kullanır:
+O seguinte código usa o modelo de exibição `StudentVM` para criar um novo aluno:
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/CreateVM.cshtml.cs?name=snippet_OnPostAsync)]
 
-[SetValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues.setvalues#Microsoft_EntityFrameworkCore_ChangeTracking_PropertyValues_SetValues_System_Object_) yöntemi, başka bir [Özellik Değerleri](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues) nesnesinden değerleri okuyarak bu nesnenin değerlerini ayarlar. `SetValues`özellik adı eşleştirme kullanır. Görünüm modeli türü model türü ile ilgili olması gerekmez, sadece eşleşen özelliklere sahip olması gerekir.
+O método [SetValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues.setvalues#Microsoft_EntityFrameworkCore_ChangeTracking_PropertyValues_SetValues_System_Object_) define os valores desse objeto lendo os valores de outro objeto [PropertyValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues). `SetValues` usa a correspondência de nomes de propriedade. O tipo de modelo de exibição não precisa estar relacionado ao tipo de modelo, apenas precisa ter as propriedades correspondentes.
 
-Using `StudentVM` [createVM.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21/Pages/Students/CreateVM.cshtml) yerine `Student`kullanmak `StudentVM` için güncelleştirilmelidir.
+O uso de `StudentVM` exige a atualização de [CreateVM.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21/Pages/Students/CreateVM.cshtml) para usar `StudentVM` em vez de `Student`.
 
-Razor Pages'de `PageModel` türetilmiş sınıf görünüm modelidir.
+Em Razor páginas, a `PageModel` classe derivada é o modelo de exibição.
 
-## <a name="update-the-edit-page"></a>Edit sayfasını güncelleştir
+## <a name="update-the-edit-page"></a>Atualizar a página Editar
 
-Düzenleme sayfasının sayfa modelini güncelleştirin. Önemli değişiklikler vurgulanır:
+Atualize o modelo de página para a página de edição. As alterações principais são realçadas:
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Edit.cshtml.cs?name=snippet_OnPostAsync&highlight=20,36)]
 
-Kod değişiklikleri birkaç özel durum dışında Oluştur sayfasına benzer:
+As alterações de código são semelhantes à página Criar, com algumas exceções:
 
-* `OnPostAsync`isteğe `id` bağlı bir parametreye sahiptir.
-* Mevcut öğrenci boş bir öğrenci oluşturmak yerine DB'den getirilir.
-* `FirstOrDefaultAsync`[FindAsync](/dotnet/api/microsoft.entityframeworkcore.dbset-1.findasync)ile değiştirildi. `FindAsync`birincil anahtardan bir varlık seçerken iyi bir seçimdir. Daha fazla bilgi için [FindAsync'e](#FindAsync) bakın.
+* `OnPostAsync` tem um parâmetro `id` opcional.
+* O aluno atual é buscado do BD, em vez de criar um aluno vazio.
+* `FirstOrDefaultAsync` foi substituído por [FindAsync](/dotnet/api/microsoft.entityframeworkcore.dbset-1.findasync). `FindAsync` é uma boa opção ao selecionar uma entidade da chave primária. Consulte [FindAsync](#FindAsync) para obter mais informações.
 
-### <a name="test-the-edit-and-create-pages"></a>Sayfaları Daha Iyi Yap ve Oluştur'da Test Et
+### <a name="test-the-edit-and-create-pages"></a>Testar as páginas Editar e Criar
 
-Birkaç öğrenci varlığı oluşturun ve edinin.
+Crie e edite algumas entidades de aluno.
 
-## <a name="entity-states"></a>Taraf Devletleri
+## <a name="entity-states"></a>Estados da entidade
 
-DB bağlamı, bellekteki varlıkların DB'deki karşılık gelen satırlarıyla eşitlenip eşit olmadığını izler. DB bağlam eşitleme bilgileri [SaveChangesAsync](/dotnet/api/microsoft.entityframeworkcore.dbcontext.savechangesasync#Microsoft_EntityFrameworkCore_DbContext_SaveChangesAsync_System_Threading_CancellationToken_) çağrıldığında ne olacağını belirler. Örneğin, [addasync](/dotnet/api/microsoft.entityframeworkcore.dbcontext.addasync) yöntemine yeni bir varlık geçirildiğinde, bu varlığın durumu [Eklendi](/dotnet/api/microsoft.entityframeworkcore.entitystate#Microsoft_EntityFrameworkCore_EntityState_Added)olarak ayarlanır. Çağrıldığında, `SaveChangesAsync` DB bağlamı bir SQL INSERT komutu yayınlar.
+O contexto de BD controla se as entidades em memória estão em sincronia com suas linhas correspondentes no BD. As informações de sincronização de contexto do BD determinam o que acontece quando [SaveChangesAsync](/dotnet/api/microsoft.entityframeworkcore.dbcontext.savechangesasync#Microsoft_EntityFrameworkCore_DbContext_SaveChangesAsync_System_Threading_CancellationToken_) é chamado. Por exemplo, quando uma nova entidade é passada para o método [AddAsync](/dotnet/api/microsoft.entityframeworkcore.dbcontext.addasync), o estado da entidade é definido como [Added](/dotnet/api/microsoft.entityframeworkcore.entitystate#Microsoft_EntityFrameworkCore_EntityState_Added). Quando `SaveChangesAsync` é chamado, o contexto de BD emite um comando SQL INSERT.
 
-Bir varlık [aşağıdaki durumlardan](/dotnet/api/microsoft.entityframeworkcore.entitystate)birinde olabilir:
+Uma entidade pode estar em um dos [seguintes estados](/dotnet/api/microsoft.entityframeworkcore.entitystate):
 
-* `Added`: Varlık henüz DB'de yok. Yöntem `SaveChanges` bir INSERT deyimi yayınlar.
+* `Added`: a entidade ainda não existe no BD. O método `SaveChanges` emite uma instrução INSERT.
 
-* `Unchanged`: Bu varlıkla birlikte kaydedilmesi gerekmez. DB'den okunduğunda bir varlık bu duruma sahiptir.
+* `Unchanged`: nenhuma alteração precisa ser salva com essa entidade. Uma entidade tem esse status quando é lida do BD.
 
-* `Modified`: Varlığın özellik değerlerinin bir kısmı veya tamamı değiştirildi. Yöntem, `SaveChanges` UPDATE deyimini yayınlar.
+* `Modified`: alguns ou todos os valores de propriedade da entidade foram modificados. O método `SaveChanges` emite uma instrução UPDATE.
 
-* `Deleted`: Varlık silinmesi için işaretlenmiştir. Yöntem, `SaveChanges` DELETE deyimi ni yayınlar.
+* `Deleted`: a entidade foi marcada para exclusão. O método `SaveChanges` emite uma instrução DELETE.
 
-* `Detached`: Varlık DB bağlamı tarafından izlenmiyor.
+* `Detached`: a entidade não está sendo controlada pelo contexto de BD.
 
-Bir masaüstü uygulamasında durum değişiklikleri genellikle otomatik olarak ayarlanır. Bir varlık okunur, değişiklikler yapılır ve varlık durumu otomatik `Modified`olarak ' olarak değiştirilir. Arama, `SaveChanges` yalnızca değiştirilen özellikleri güncelleştiren bir SQL UPDATE deyimi oluşturur.
+Em um aplicativo da área de trabalho, em geral, as alterações de estado são definidas automaticamente. Uma entidade é lida, as alterações são feitas e o estado da entidade é alterado automaticamente para `Modified`. A chamada a `SaveChanges` gera uma instrução SQL UPDATE que atualiza apenas as propriedades alteradas.
 
-Bir web uygulamasında, `DbContext` bir varlığı okur ve verileri görüntüler bir sayfa işlendikten sonra atılır. Bir sayfanın `OnPostAsync` yöntemi çağrıldığında, yeni bir web isteği yapılır `DbContext`ve yeni bir web örneği ile . Varlığı bu yeni bağlamda yeniden okumak masaüstü işlemeyi simüle eder.
+Em um aplicativo Web, o `DbContext` que lê uma entidade e exibe os dados é descartado depois que uma página é renderizada. Quando o método `OnPostAsync` de uma página é chamado, é feita uma nova solicitação da Web e com uma nova instância do `DbContext`. A nova leitura da entidade nesse novo contexto simula o processamento da área de trabalho.
 
-## <a name="update-the-delete-page"></a>Sil sayfasını güncelleştir
+## <a name="update-the-delete-page"></a>Atualizar a página Excluir
 
-Bu bölümde, arama başarısız olduğunda özel bir hata `SaveChanges` iletisi uygulamak için kod eklenir. Olası hata iletilerini içerecek bir dize ekleyin:
+Nesta seção, o código é adicionado para implementar uma mensagem de erro personalizada quando há falha na chamada a `SaveChanges`. Adicione uma cadeia de caracteres para que ela contenha as possíveis mensagens de erro:
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Delete.cshtml.cs?name=snippet1&highlight=12)]
 
-`OnGetAsync` yöntemini aşağıdaki kod ile değiştirin:
+Substitua o método `OnGetAsync` pelo seguinte código:
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Delete.cshtml.cs?name=snippet_OnGetAsync&highlight=1,9,17-20)]
 
-Önceki kod isteğe bağlı `saveChangesError`parametreyi içerir. `saveChangesError`öğrenci nesnesinin silinmemesi üzerine yöntemin çağrılıp çağrılmadığını gösterir. Silme işlemi geçici ağ sorunları nedeniyle başarısız olabilir. Bulutta geçici ağ hataları daha olasıdır. `saveChangesError`Kullanıcı Arabirimi'nden `OnGetAsync` Delete sayfası çağrıldığında yanlıştır. Tarafından `OnGetAsync` `OnPostAsync` çağrıldığında (silme işlemi başarısız `saveChangesError` olduğundan), parametre doğrudur.
+O código anterior contém o parâmetro opcional `saveChangesError`. `saveChangesError` indica se o método foi chamado após uma falha ao excluir o objeto de aluno. A operação de exclusão pode falhar devido a problemas de rede temporários. Erros de rede transitórios serão mais prováveis de ocorrerem na nuvem. `saveChangesError` é falso quando a página Excluir `OnGetAsync` é chamada na interface do usuário. Quando `OnGetAsync` é chamado por `OnPostAsync` (devido à falha da operação de exclusão), o parâmetro `saveChangesError` é verdadeiro.
 
-### <a name="the-delete-pages-onpostasync-method"></a>Sayfaları Sil OnPostAsync yöntemi
+### <a name="the-delete-pages-onpostasync-method"></a>O método OnPostAsync nas páginas Excluir
 
-Aşağıdaki `OnPostAsync` kodu değiştirin:
+Substitua `OnPostAsync` pelo seguinte código:
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Delete.cshtml.cs?name=snippet_OnPostAsync)]
 
-Önceki kod seçili varlığı alır, sonra [Remove](/dotnet/api/microsoft.entityframeworkcore.dbcontext.remove#Microsoft_EntityFrameworkCore_DbContext_Remove_System_Object_) varlığın durumunu `Deleted`'da ayarlamak için Kaldır yöntemini çağırır. Çağrıldığında, `SaveChanges` bir SQL DELETE komutu oluşturulur. Başarısız `Remove` olursa:
+O código anterior recupera a entidade selecionada e, em seguida, chama o método [Remove](/dotnet/api/microsoft.entityframeworkcore.dbcontext.remove#Microsoft_EntityFrameworkCore_DbContext_Remove_System_Object_) para definir o status da entidade como `Deleted`. Quando `SaveChanges` é chamado, um comando SQL DELETE é gerado. Se `Remove` falhar:
 
-* DB özel durum yakalanır.
-* Sayfaları `OnGetAsync` Sil yöntemi . `saveChangesError=true`
+* A exceção de BD é capturada.
+* O método `OnGetAsync` das páginas Excluir é chamado com `saveChangesError=true`.
 
-### <a name="update-the-delete-razor-page"></a>Sil Jilet Sayfasını Güncelleştir
+### <a name="update-the-delete-razor-page"></a>Atualizar a página Razor excluir
 
-Jilet Sil Sayfasına aşağıdaki vurgulanan hata iletisini ekleyin.
+Adicione a seguinte mensagem de erro realçada Razor à página excluir.
 <!--
 [!code-cshtml[](intro/samples/cu21/Pages/Students/Delete.cshtml?name=snippet&highlight=11)]
 -->
 [!code-cshtml[](intro/samples/cu21/Pages/Students/Delete.cshtml?range=1-13&highlight=10)]
 
-Sil'i Test Edin.
+Exclusão de teste.
 
-## <a name="common-errors"></a>Sık karşılaşılan hatalar
+## <a name="common-errors"></a>Erros comuns
 
-Öğrenciler/Dizini veya diğer bağlantılar çalışmıyor:
+Alunos/Índice ou outros links não funcionam:
 
-Razor Page'in doğru `@page` yönergeleri içerdiğini doğrulayın. Örneğin, Öğrenciler/Dizin Jilet Sayfası bir rota şablonu **içermemelidir:**
+Verifique se Razor a página contém a `@page` diretiva correta. Por exemplo, a página estudantes/ Razor index **não** deve conter um modelo de rota:
 
 ```cshtml
 @page "{id:int}"
 ```
 
-Her Razor Page `@page` yönergeyi içermelidir.
+Cada Razor página deve incluir a `@page` diretiva.
 
 
 
-## <a name="additional-resources"></a>Ek kaynaklar
+## <a name="additional-resources"></a>Recursos adicionais
 
-* [Bu öğreticinin YouTube sürümü](https://www.youtube.com/watch?v=K4X1MT2jt6o)
+* [Versão do YouTube deste tutorial](https://www.youtube.com/watch?v=K4X1MT2jt6o)
 
 > [!div class="step-by-step"]
-> [Önceki](xref:data/ef-rp/intro)
-> [Sonraki](xref:data/ef-rp/sort-filter-page)
+> [Anterior](xref:data/ef-rp/intro)
+> [próximo](xref:data/ef-rp/sort-filter-page)
 
 ::: moniker-end

@@ -1,31 +1,20 @@
 ---
-title: ASP.NET Core'da Varlık Çerçeve Çekirdekli Jilet Sayfaları - 8'in 1'i Öğretici
-author: rick-anderson
-description: Entity Framework Core'u kullanarak Jilet Sayfaları uygulamasının nasıl oluşturuluruz olduğunu gösterir
-ms.author: riande
-ms.custom: mvc, seodec18
-ms.date: 09/26/2019
-uid: data/ef-rp/intro
-ms.openlocfilehash: 07faf5e596e7ea8b134d13caa0259c1e9d74ff1b
-ms.sourcegitcommit: 5547d920f322e5a823575c031529e4755ab119de
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 04/21/2020
-ms.locfileid: "81661624"
+title: Razor stránky s Entity Framework Core v ASP.NET Core – kurz 1 z 8 autor: Rick-Anderson Description: ukazuje, jak vytvořit aplikaci Razor Pages pomocí Entity Framework Core MS. Author: Riande MS. Custom: MVC, seodec18 "ms. Date: 09/26/2019 No-Loc: [Blazor," identity "," Pojďme šifrovat ", Razor, signaler] UID: data/EF-RP/Úvod
 ---
-# <a name="razor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>ASP.NET Core'da Varlık Çerçeve Çekirdekli Jilet Sayfaları - 8'in 1'i Öğretici
 
-Yazar: [Tom Dykstra](https://github.com/tdykstra) ve [Rick Anderson](https://twitter.com/RickAndMSFT)
+# <a name="razor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor Pages s Entity Framework Core v ASP.NET Core – kurz 1 z 8
+
+[Dykstra](https://github.com/tdykstra) a [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Bu, [ASP.NET Core Razor Pages](xref:razor-pages/index) uygulamasında Entity Framework (EF) Core'un nasıl kullanılacağını gösteren bir dizi öğreticinin ilkidir. Öğreticiler kurgusal bir Contoso Üniversitesi için bir web sitesi oluşturmak. Site, öğrenci kabulü, ders oluşturma ve eğitmen atamaları gibi işlevleri içerir. Öğretici kod ilk yaklaşım kullanır. Veritabanı ilk yaklaşımı kullanarak bu öğretici aşağıdaki hakkında bilgi için, [bu Github sorunu](https://github.com/dotnet/AspNetCore.Docs/issues/16897)bakın.
+Toto je první v sérii kurzů, které ukazují, jak používat Entity Framework (EF) jádro v aplikaci [ASP.NET Core Razor Pages](xref:razor-pages/index) . Kurzy vytvářejí web pro fiktivní univerzitě společnosti Contoso. Tato lokalita obsahuje funkce, jako je například využití studenta, vytváření kurzů a přiřazení instruktorů. Kurz používá první přístup ke kódu. Informace o tomto kurzu s použitím databáze prvního přístupu najdete v [tomto problému GitHubu](https://github.com/dotnet/AspNetCore.Docs/issues/16897).
 
-[Tamamlanan uygulamayı indirin veya görüntüleyin.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [Talimatları indirin.](xref:index#how-to-download-a-sample)
+[Stažení nebo zobrazení dokončené aplikace](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [Pokyny ke stažení](xref:index#how-to-download-a-sample).
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Požadavky
 
-* Razor Pages'de yeniyseniz, bu sayfaya başlamadan önce Razor Pages öğretici [serisiyle başlayın.](xref:tutorials/razor-pages/razor-pages-start)
+* Pokud s Razor Pages teprve začínáte, Projděte si kurz [Začínáme s Razor Pagesm](xref:tutorials/razor-pages/razor-pages-start) , než začnete s tímto.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -37,84 +26,84 @@ Bu, [ASP.NET Core Razor Pages](xref:razor-pages/index) uygulamasında Entity Fra
 
 ---
 
-## <a name="database-engines"></a>Veritabanı motorları
+## <a name="database-engines"></a>Databázové moduly
 
-Visual Studio yönergeleri, SQL Server Express'in yalnızca Windows'da çalışan bir sürümü olan [SQL Server LocalDB'ı](/sql/database-engine/configure-windows/sql-server-2016-express-localdb)kullanır.
+Pokyny pro Visual Studio používají [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb), verzi SQL Server Express, která se spouští jenom v systému Windows.
 
-Visual Studio Code yönergeleri, platformlar arası veritabanı motoru [olan SQLite'ı](https://www.sqlite.org/)kullanır.
+Pokyny pro [Visual Studio Code používají nástroj](https://www.sqlite.org/)pro databázový stroj pro různé platformy.
 
-SQLite'yi kullanmayı seçerseniz, [SQLite için DB Browser](https://sqlitebrowser.org/)gibi bir SQLite veritabanını yönetmek ve görüntülemek için üçüncü taraf bir araç indirin ve yükleyin.
+Pokud se rozhodnete použít SQLite, Stáhněte a nainstalujte nástroj třetí strany pro správu a zobrazení databáze SQLite, jako je například [prohlížeč databáze pro SQLite](https://sqlitebrowser.org/).
 
-## <a name="troubleshooting"></a>Sorun giderme
+## <a name="troubleshooting"></a>Řešení potíží
 
-Çözemediğiniz bir sorunla karşılaştıysanız, kodunuzu [tamamlanan projeyle](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples)karşılaştırın. Yardım almak için iyi bir yol StackOverflow.com için bir soru göndererek, [ASP.NET Core etiketi](https://stackoverflow.com/questions/tagged/asp.net-core) veya EF Core [etiketi](https://stackoverflow.com/questions/tagged/entity-framework-core)ni kullanarak.
+Pokud narazíte na problém, který nemůžete vyřešit, porovnejte kód s [dokončeným projektem](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples). Dobrý způsob, jak získat pomoc, je odeslání otázky do StackOverflow.com s použitím [značky ASP.NET Core](https://stackoverflow.com/questions/tagged/asp.net-core) nebo [značky EF Core](https://stackoverflow.com/questions/tagged/entity-framework-core).
 
-## <a name="the-sample-app"></a>Örnek uygulama
+## <a name="the-sample-app"></a>Ukázková aplikace
 
-Bu eğitimlerde yerleşik olan uygulama temel bir üniversite web sitesidir. Kullanıcılar öğrenci, kurs ve eğitmen bilgilerini görüntüleyebilir ve güncelleyebilir. Burada öğretici oluşturulan ekranlardan birkaçı vardır.
+Aplikace sestavená v těchto kurzech je základním webem na univerzitě. Uživatelé můžou zobrazit a aktualizovat informace o studentech, kurzech a instruktorech. Tady je několik obrazovek vytvořených v tomto kurzu.
 
-![Öğrenci Endeksi sayfası](intro/_static/students-index30.png)
+![Stránka indexu studentů](intro/_static/students-index30.png)
 
-![Öğrenciler Sayfayı Edit](intro/_static/student-edit30.png)
+![Stránka pro úpravy studentů](intro/_static/student-edit30.png)
 
-Bu sitenin UI stili yerleşik proje şablonlarını temel almaktadır. Öğreticinin odak noktası, UI'nin nasıl özelleştirilene değil, EF Core'un nasıl kullanılacağıdır.
+Styl uživatelského rozhraní tohoto webu je založen na předdefinovaných šablonách projektů. V tomto kurzu se naučíte, jak používat EF Core, nikoli způsob přizpůsobení uživatelského rozhraní.
 
-Tamamlanan projenin kaynak kodunu almak için sayfanın üst kısmındaki bağlantıyı izleyin. *Cu30* klasörü öğretici ASP.NET Core 3.0 sürümü için kod vardır. 1-7 öğreticiler için kodun durumunu yansıtan dosyalar *cu30snapshots* klasöründe bulunabilir.
+Pomocí odkazu v horní části stránky Získejte zdrojový kód dokončeného projektu. Složka *cu30* obsahuje kód pro verzi kurzu ASP.NET Core 3,0. Soubory, které reflektují stav kódu pro kurzy 1-7, najdete ve složce *cu30snapshots* .
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Tamamlanan projeyi indirdikten sonra uygulamayı çalıştırmak için:
+Spuštění aplikace po stažení dokončeného projektu:
 
-* Adında *SQLite* olan üç dosyayı ve bir klasörü silin.
-* Projeyi derleyin.
-* Paket Yöneticisi Konsolunda (PMC) aşağıdaki komutu çalıştırın:
+* Sestavte projekt.
+* V konzole správce balíčků (PMC) spusťte následující příkaz:
 
   ```powershell
   Update-Database
   ```
 
-* Veritabanıtohum için proje çalıştırın.
+* Spusťte projekt k osazení databáze.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Tamamlanan projeyi indirdikten sonra uygulamayı çalıştırmak için:
+Spuštění aplikace po stažení dokončeného projektu:
 
-* *ContosoUniversity.csproj*silin ve *ContosoUniversitySQLite.csproj* *ContosoUniversity.csproj*için yeniden adlandırmak .
-* *Startup.cs*silin ve *StartupSQLite.cs* *Startup.cs*olarak yeniden adlandırın.
-* *AppSettings.json'u*silin ve *appSettingsSQLite.json'ı* *appSettings.json*olarak yeniden adlandırın.
-* *Geçişler* klasörünü silin ve *MigrationsSQL'i* *Geçişler*klasörüne yeniden adlandırın.
-* Projeyi derleyin.
-* Proje klasöründeki bir komut isteminde aşağıdaki komutları çalıştırın:
+* Odstraňte *ContosoUniversity. csproj*a přejmenujte *ContosoUniversitySQLite. csproj* na *ContosoUniversity. csproj*.
+* Odstraňte *Startup.cs*a přejmenujte *StartupSQLite.cs* na *Startup.cs*.
+* Odstraňte *appSettings. JSON*a přejmenujte *appSettingsSQLite.* JSON na *appSettings. JSON*.
+* Odstraňte složku *migrace* a přejmenujte *MigrationsSQL* na *migrace*.
+* Proveďte globální hledání `#if SQLiteVersion` a odeberte `#if SQLiteVersion` příkaz a přidružený `#endif` příkaz.
+* Sestavte projekt.
+* Na příkazovém řádku ve složce projektu spusťte následující příkazy:
 
   ```dotnetcli
   dotnet tool install --global dotnet-ef
   dotnet ef database update
   ```
 
-* SQLite aracınızda aşağıdaki SQL deyimini çalıştırın:
+* V nástroji SQLite spusťte následující příkaz SQL:
 
   ```sql
   UPDATE Department SET RowVersion = randomblob(8)
   ```
 
-* Veritabanıtohum için proje çalıştırın.
+* Spusťte projekt k osazení databáze.
 
 ---
 
-## <a name="create-the-web-app-project"></a>Web uygulaması projesini oluşturma
+## <a name="create-the-web-app-project"></a>Vytvoření projektu webové aplikace
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Visual Studio **File** menüsünden **Yeni** > **Proje'yi**seçin.
-* **Core Web Uygulaması ASP.NET**seçin.
-* Proje *ContosoUniversity*adı . Büyük harf de dahil olmak üzere bu tam adı kullanmak önemlidir, böylece kod kopyalanıp yapıştırıldığında ad boşlukları eşleşir.
-* Açılan lar arasında **.NET Core** ve **ASP.NET Core 3.0'ı** seçin ve ardından **Web Uygulaması'nı**seçin.
+* V nabídce **soubor** sady Visual Studio vyberte **Nový** > **projekt**.
+* Vyberte **ASP.NET Core webové aplikace**.
+* Pojmenujte projekt *ContosoUniversity*. Je důležité použít tento přesný název, včetně velkých a malých písmen, aby se obory názvů shodovaly při zkopírování a vložení kódu.
+* V rozevíracích seznamech vyberte **.NET Core** a **ASP.NET Core 3,0** a potom vyberte **Webová aplikace**.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* Bir terminalde, proje klasörü oluşturulması gereken klasöre gidin.
+* V terminálu přejděte do složky, ve které by měla být vytvořena složka projektu.
 
-* Razor Pages projesi oluşturmak için aşağıdaki `cd` komutları çalıştırın ve yeni proje klasörüne:
+* Spuštěním následujících příkazů vytvořte projekt Razor Pages a `cd` do nové složky projektu:
 
   ```dotnetcli
   dotnet new webapp -o ContosoUniversity
@@ -123,101 +112,101 @@ Tamamlanan projeyi indirdikten sonra uygulamayı çalıştırmak için:
 
 ---
 
-## <a name="set-up-the-site-style"></a>Site stilini ayarlama
+## <a name="set-up-the-site-style"></a>Nastavení stylu webu
 
-*Sayfalar/Paylaşılan/_Layout.cshtml'i*güncelleyerek site üstbilgisini, altbilgisini ve menüsünü ayarlama:
+Pomocí aktualizace *stránek/Shared/_Layout. cshtml*nastavte záhlaví webu, zápatí a nabídku. cshtml:
 
-* "ContosoUniversity"in her oluşumunu "Contoso Üniversitesi" olarak değiştirin. Üç olay var.
+* Změňte všechny výskyty "ContosoUniversity" na "contoso University". Existují tři výskyty.
 
-* **Ev** ve **Gizlilik** menü girişlerini silin ve **Hakkında,** **Öğrenciler,** **Kurslar,** Eğitmenler ve **Bölümler**için **girişler**ekleyin.
+* Odstraňte položky nabídky **Domů** a **Ochrana osobních údajů** a přidejte záznamy **o o** **studentech**, **kurzech**, **instruktorech**a **odděleních**.
 
-Değişiklikler vurgulanır.
+Změny jsou zvýrazněny.
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Shared/_Layout.cshtml?highlight=6,14,21-35,49)]
 
-*Pages/Index.cshtml'de,* ASP.NET Core hakkındaki metni bu uygulamayla ilgili metinle değiştirmek için dosyanın içeriğini aşağıdaki kodla değiştirin:
+Na *stránce pages/index. cshtml*nahraďte obsah souboru následujícím kódem, který nahradí text o ASP.NET Core textem této aplikace:
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Index.cshtml)]
 
-Ana sayfanın görüntülenediğini doğrulamak için uygulamayı çalıştırın.
+Spusťte aplikaci, abyste ověřili, že se zobrazí domovská stránka.
 
-## <a name="the-data-model"></a>Veri modeli
+## <a name="the-data-model"></a>Datový model
 
-Aşağıdaki bölümlerde bir veri modeli oluşturulur:
+V následujících částech se vytvoří datový model:
 
-![Ders-Kayıt-Öğrenci veri modeli diyagramı](intro/_static/data-model-diagram.png)
+![Kurz – registrace – diagram datového modelu studenta](intro/_static/data-model-diagram.png)
 
-Bir öğrenci herhangi bir sayıda kursa kaydolabilir ve bir kursa herhangi bir sayıda öğrenci kaydolabilir.
+Student se může zaregistrovat v jakémkoli počtu kurzů a kurz může mít zaregistrovaný libovolný počet studentů.
 
-## <a name="the-student-entity"></a>Öğrenci varlığı
+## <a name="the-student-entity"></a>Entita studenta
 
-![Öğrenci varlık diyagramı](intro/_static/student-entity.png)
+![Diagram entity studenta](intro/_static/student-entity.png)
 
-* Proje klasöründe bir *Modeller* klasörü oluşturun. 
+* Vytvořte složku *modely* ve složce projektu. 
 
-* Aşağıdaki kodile *Modeller/Student.cs* oluşturun:
+* Vytvořte *modely/studenta. cs* pomocí následujícího kódu:
 
   [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Models/Student.cs)]
 
-Özellik, `ID` veritabanı tablosunun bu sınıfa karşılık gelen birincil anahtar sütunu olur. Varsayılan olarak, EF Core adlı veya `ID` `classnameID` birincil anahtar olarak bir özelliği yorumlar. Yani `Student` sınıf birincil anahtarı `StudentID`için otomatik olarak tanınan ad . Daha fazla bilgi için [BKZ.](/ef/core/modeling/keys?tabs=data-annotations)
+`ID` Vlastnost se zobrazí jako sloupec primárního klíče tabulky databáze, která odpovídá této třídě. Ve výchozím nastavení EF Core interpretuje vlastnost s názvem `ID` nebo `classnameID` jako primární klíč. Proto je `StudentID`alternativní automaticky rozpoznaný název pro primární `Student` klíč třídy. Další informace najdete v tématu [EF Core-Keys](/ef/core/modeling/keys?tabs=data-annotations).
 
-Özellik `Enrollments` bir [navigasyon özelliğidir.](/ef/core/modeling/relationships) Gezinti özellikleri, bu varlıkla ilişkili diğer varlıkları tutar. Bu durumda, `Enrollments` bir `Student` varlığın mülkiyeti, `Enrollment` o Öğrenci ile ilgili tüm varlıkları tutar. Örneğin, veritabanındaki bir Öğrenci satırında ilgili iki Kayıt `Enrollments` satırı varsa, gezinti özelliği bu iki Kayıt varlığını içerir. 
+`Enrollments` Vlastnost je [navigační vlastnost](/ef/core/modeling/relationships). Navigační vlastnosti obsahují další entity, které se vztahují k této entitě. V takovém případě `Enrollments` vlastnost `Student` entity obsahuje všechny `Enrollment` entity, které se vztahují k danému studentovi. Například pokud má řádek studenta v databázi dva související řádky registrace, `Enrollments` navigační vlastnost obsahuje tyto dvě entity registrace. 
 
-Veritabanında, Öğrenci Kimliği sütununda öğrencinin kimlik değeri varsa, Öğrenci satırı öğrenci satırıyla ilişkilidir. Örneğin, bir Öğrenci satırında ID=1 olduğunu varsayalım. İlgili Kayıt satırları StudentID = 1 olacaktır. StudentID, Kayıt tablosundaki yabancı bir *anahtardır.* 
+V databázi se řádek registrace vztahuje k řádku studenta, pokud jeho sloupec StudentID obsahuje hodnotu ID studenta. Předpokládejme například, že řádek studenta má ID = 1. Související řádky registrace budou mít StudentID = 1. StudentID je *cizí klíč* v tabulce zápisu. 
 
-Özellik, `Enrollments` birden `ICollection<Enrollment>` çok ilişkili Kayıt varlığı olabileceği için tanımlanır. Diğer koleksiyon türlerini kullanabilirsiniz, `HashSet<Enrollment>`örneğin. `List<Enrollment>` Kullanıldığında, `ICollection<Enrollment>` EF Core varsayılan `HashSet<Enrollment>` olarak bir koleksiyon oluşturur.
+`Enrollments` Vlastnost je definována tak, `ICollection<Enrollment>` že může existovat více souvisejících entit zápisu. Můžete použít jiné typy kolekce, například `List<Enrollment>` nebo. `HashSet<Enrollment>` Při `ICollection<Enrollment>` použití EF Core vytvoří ve výchozím nastavení `HashSet<Enrollment>` kolekci.
 
-## <a name="the-enrollment-entity"></a>Kayıt varlığı
+## <a name="the-enrollment-entity"></a>Entita registrace
 
-![Kayıt varlık diyagramı](intro/_static/enrollment-entity.png)
+![Diagram entity registrace](intro/_static/enrollment-entity.png)
 
-Aşağıdaki kodile *Modeller/Enrollment.cs* oluşturun:
+Vytvořte *modely/registrace. cs* s následujícím kódem:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Models/Enrollment.cs)]
 
-Özellik `EnrollmentID` birincil anahtardır; bu varlık `classnameID` kendi başına `ID` yerine deseni kullanır. Üretim veri modeli için bir desen seçin ve tutarlı bir şekilde kullanın. Bu öğretici sadece her iki iş göstermek için hem kullanır. `ID` Kullanmadan `classname` kullanmak, bazı veri modeli değişikliklerinin uygulanmasını kolaylaştırır.
+`EnrollmentID` Vlastnost je primární klíč; Tato entita používá `classnameID` vzor namísto `ID` samotného. Pro model produkčních dat vyberte jeden vzor a používejte ho konzistentně. Tento kurz používá pouze k ilustraci toho, jak funguje. Použití `ID` bez `classname` toho usnadňuje implementaci některých druhů změn datového modelu.
 
-Özellik `Grade` bir `enum`. Tür bildiriminden `Grade` sonraki soru işareti `Grade` özelliğin [geçersiz](https://docs.microsoft.com/dotnet/csharp/programming-guide/nullable-types/)olduğunu gösterir. Sıfır notu null'dan farklı olan&mdash;bir not, bir notun bilinmediği veya henüz atanmadığı anlamına gelir.
+`Grade` Vlastnost je `enum`. Otazník po deklaraci `Grade` typu označuje, že vlastnost může `Grade` [mít hodnotu null](https://docs.microsoft.com/dotnet/csharp/programming-guide/nullable-types/). Třídu, která má hodnotu null, se liší od nulové&mdash;třídy null znamená, že známka není známa nebo ještě nebyla přiřazena.
 
-Özellik `StudentID` yabancı bir anahtardır ve ilgili `Student`navigasyon özelliği . Bir `Enrollment` varlık tek `Student` bir varlıkla ilişkilidir, `Student` bu nedenle özellik tek bir varlık içerir.
+`StudentID` Vlastnost je cizí klíč a odpovídající navigační vlastnost je `Student`. `Enrollment` Entita je přidružená k jedné `Student` entitě, takže vlastnost obsahuje jednu `Student` entitu.
 
-Özellik `CourseID` yabancı bir anahtardır ve ilgili `Course`navigasyon özelliği . Bir `Enrollment` varlık tek `Course` bir varlıkla ilişkilidir.
+`CourseID` Vlastnost je cizí klíč a odpovídající navigační vlastnost je `Course`. `Enrollment` Entita je přidružená k jedné `Course` entitě.
 
-EF Core, bir özelliği yabancı `<navigation property name><primary key property name>`bir anahtar olarak yorumluyorsa. Örneğin,`StudentID` `Student` `Student` varlığın birincil anahtarı `ID`. Yabancı anahtar özellikleri de `<primary key property name>`adlandırılabilir. Örneğin, `CourseID` varlığın `Course` birincil anahtarı `CourseID`.
+EF Core interpretuje vlastnost jako cizí klíč, pokud má název `<navigation property name><primary key property name>`. Například`StudentID` je cizí klíč pro `Student` navigační vlastnost, protože primární klíč `Student` entity je. `ID` Lze také pojmenovat `<primary key property name>`vlastnosti cizího klíče. Například vzhledem k `CourseID` tomu, `Course` že primární klíč entity je `CourseID`.
 
-## <a name="the-course-entity"></a>Kurs varlığı
+## <a name="the-course-entity"></a>Entita kurzu
 
-![Ders varlık diyagramı](intro/_static/course-entity.png)
+![Diagram entity kurzu](intro/_static/course-entity.png)
 
-Aşağıdaki kodile *Modeller/Course.cs* oluşturun:
+Vytvořte *modely/Course. cs* s následujícím kódem:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Models/Course.cs)]
 
-Tesis `Enrollments` bir navigasyon özelliğidir. Bir `Course` varlık herhangi bir sayıda `Enrollment` varlıkla ilişkili olabilir.
+`Enrollments` Vlastnost je navigační vlastnost. `Course` Entita může souviset s libovolným počtem `Enrollment` entit.
 
-Öznitelik, `DatabaseGenerated` uygulamanın veritabanının oluşturması yerine birincil anahtarı belirtmesine olanak tanır.
+`DatabaseGenerated` Atribut umožňuje aplikaci určit primární klíč místo toho, aby ho databáze vygenerovala.
 
-Derleyici hatası olmadığını doğrulamak için projeyi oluşturun.
+Sestavte projekt, aby se ověřilo, že nejsou k dispozici žádné chyby kompilátoru.
 
-## <a name="scaffold-student-pages"></a>İskele Öğrenci sayfaları
+## <a name="scaffold-student-pages"></a>Stránky studenta pro generování uživatelského rozhraní
 
-Bu bölümde, oluşturmak için ASP.NET Core iskele aracını kullanırsınız:
+V této části použijete nástroj ASP.NET Core pro generování uživatelského rozhraní k vygenerování:
 
-* Bir EF Core *bağlam* sınıfı. Bağlam, belirli bir veri modeli için Varlık Çerçevesi işlevselliğini koordine eden ana sınıftır. Sınıftan `Microsoft.EntityFrameworkCore.DbContext` türetilmiştir.
-* `Student` Varlık için Oluştur, Oku, Güncelleştir ve Sil (CRUD) işlemlerini işleyen jilet sayfaları.
+* Třída *kontextu* EF Core. Kontext je hlavní třída, která koordinuje funkce Entity Framework pro daný datový model. Je odvozen z `Microsoft.EntityFrameworkCore.DbContext` třídy.
+* Stránky Razor, které zpracovávají operace vytvoření, čtení, aktualizace a odstranění (CRUD) pro `Student` entitu.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* *Sayfalar* klasöründe bir *Öğrenci* klasörü oluşturun.
-* **Çözüm Gezgini'nde,** *Sayfalar/Öğrenciler* klasörüne sağ tıklayın ve **Yeni İskele Öğesi** **Ekle'yi** > seçin.
-* İskele **Ekle** iletişim kutusunda, **Entity Framework (CRUD)** > **ADD**kullanarak Jilet Sayfaları'nı seçin.
-* Varlık **Çerçevesi (CRUD)** iletişim kutusunu kullanarak Jilet Sayfaları Ekle iletişim kutusunda:
-  * Model **sınıfı** açılır açılır, **Öğrenci (ContosoUniversity.Models)** seçin.
-  * Veri **bağlamı sınıf** satırında **+** (artı) işaretini seçin.
-  * *ContosoUniversity.Models.ContosoUniversityContext'den* *ContosoUniversity.Data.SchoolContext'a*veri bağlamı adını değiştirin.
-  * **Add (Ekle)** seçeneğini belirleyin.
+* Vytvořte složku *Students* ve složce *stránky* .
+* V **Průzkumník řešení**klikněte pravým tlačítkem myši na složku *Pages/Students* a vyberte **Přidat** > **novou vygenerované položky**.
+* V dialogovém okně **Přidat generování uživatelského rozhraní** vyberte možnost **Razor Pages pomocí Entity Framework (CRUD)** > **Přidat**.
+* V dialogovém okně **přidat Razor Pages pomocí Entity Framework (CRUD)** :
+  * V rozevíracím seznamu **třída modelu** vyberte **student (ContosoUniversity. Models)**.
+  * V řádku **třídy kontextu dat** vyberte znaménko **+** (plus).
+  * Změňte název kontextu dat z *ContosoUniversity. Models. ContosoUniversityContext* na *ContosoUniversity. data. SchoolContext*.
+  * Vyberte **Přidat**.
 
-Aşağıdaki paketler otomatik olarak yüklenir:
+Automaticky se nainstalují tyto balíčky:
 
 * `Microsoft.VisualStudio.Web.CodeGeneration.Design`
 * `Microsoft.EntityFrameworkCore.SqlServer`
@@ -226,7 +215,7 @@ Aşağıdaki paketler otomatik olarak yüklenir:
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* Gerekli NuGet paketlerini yüklemek için aşağıdaki .NET Core CLI komutlarını çalıştırın:
+* Spuštěním následujících příkazů .NET Core CLI nainstalujte požadované balíčky NuGet:
 <!-- TO DO  After testing, Replace with
 [!INCLUDE[](~/includes/includes/add-EF-NuGet-SQLite-CLI.md)]
 remove dotnet tool install --global  below
@@ -240,25 +229,25 @@ remove dotnet tool install --global  below
   dotnet add package Microsoft.Extensions.Logging.Debug
   ```
 
-  Microsoft.VisualStudio.Web.CodeGeneration.Design paketi iskele için gereklidir. Uygulama SQL Server kullanmasa da, iskele aracının SQL Server paketine ihtiyacı vardır.
+  Pro generování uživatelského rozhraní je vyžadován balíček Microsoft. VisualStudio. Web. strategii. Design. I když aplikace nebude používat SQL Server, nástroj pro generování uživatelského rozhraní potřebuje balíček SQL Server.
 
-* *Sayfalar/Öğrenciler* klasörü oluşturun.
+* Vytvořte složku *stránky/studenty* .
 
-* [Aspnet-codegenerator iskele aracını](xref:fundamentals/tools/dotnet-aspnet-codegenerator)yüklemek için aşağıdaki komutu çalıştırın.
+* Spusťte následující příkaz pro instalaci nástroje pro [generování uživatelského rozhraní ASPNET-CodeGenerator](xref:fundamentals/tools/dotnet-aspnet-codegenerator).
 
   ```dotnetcli
   dotnet tool install --global dotnet-aspnet-codegenerator
   ```
 
-* Öğrenci sayfalarını iskeleye aşağıdaki komutu çalıştırın.
+* Spusťte následující příkaz pro generování uživatelského rozhraní stránek studenta.
 
-  **Windows üzerinde**
+  **V systému Windows**
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Data.SchoolContext -udl -outDir Pages\Students --referenceScriptLibraries
   ```
 
-  **macOS veya Linux'ta**
+  **V systému macOS nebo Linux**
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Data.SchoolContext -udl -outDir Pages/Students --referenceScriptLibraries
@@ -266,113 +255,113 @@ remove dotnet tool install --global  below
 
 ---
 
-Önceki adımla ilgili bir sorununuz varsa, projeyi oluşturun ve iskele adımını yeniden deneyin.
+Pokud máte problém s předchozím krokem, sestavte projekt a opakujte krok generování uživatelského rozhraní.
 
-İskele işlemi:
+Proces generování uživatelského rozhraní:
 
-* *Sayfalar/Öğrenciler* klasöründe Jilet sayfaları oluşturur:
-  * *Create.cshtml* ve *Create.cshtml.cs*
-  * *Delete.cshtml* ve *Delete.cshtml.cs*
-  * *Ayrıntılar.cshtml* ve *Details.cshtml.cs*
-  * *Edit.cshtml* ve *Edit.cshtml.cs*
-  * *Index.cshtml* ve *Index.cshtml.cs*
-* *Veri/SchoolContext.cs*oluşturur.
-* *Startup.cs*bağımlılık enjeksiyonuna bağlam ekler.
-* *appsettings.json'a*veritabanı bağlantı dizesi ekler.
+* Vytvoří stránky Razor ve složce *Pages/Students* :
+  * *Vytvoření. cshtml* a *Create.cshtml.cs*
+  * *Odstranění. cshtml* a *DELETE.cshtml.cs*
+  * *Podrobnosti. cshtml* a *Details.cshtml.cs*
+  * *Upravit. cshtml* a *Edit.cshtml.cs*
+  * *Index. cshtml* a *index.cshtml.cs*
+* Vytvoří *data/SchoolContext. cs*.
+* Přidá kontext do injektáže závislosti v *Startup.cs*.
+* Přidá připojovací řetězec databáze do souboru *appSettings. JSON*.
 
-## <a name="database-connection-string"></a>Veritabanı bağlantı dizesi
+## <a name="database-connection-string"></a>Připojovací řetězec databáze
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Bağlantı dizesi [SQL Server LocalDB'yi](/sql/database-engine/configure-windows/sql-server-2016-express-localdb)belirtir. 
+Připojovací řetězec Určuje [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb). 
 
 [!code-json[Main](intro/samples/cu30/appsettings.json?highlight=11)]
 
-LocalDB, SQL Server Express Veritabanı Altyapısının hafif bir sürümüdür ve üretim kullanımı için değil, uygulama geliştirme için tasarlanmıştır. Varsayılan olarak, LocalDB `C:/Users/<user>` dizinde *.mdf* dosyaları oluşturur.
+LocalDB je zjednodušená verze databázového stroje SQL Server Express a je určena pro vývoj aplikací, nikoli za použití v produkčním prostředí. Ve výchozím nastavení LocalDB vytvoří soubory *. mdf* v `C:/Users/<user>` adresáři.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Bağlantı dizesini *CU.db*adlı bir SQLite veritabanı dosyasına işaret edecek şekilde değiştirin:
+Změňte připojovací řetězec tak, aby odkazoval na soubor databáze SQLite s názvem *cu. DB*:
 
 [!code-json[Main](intro/samples/cu30/appsettingsSQLite.json?highlight=11)]
 
 ---
 
-## <a name="update-the-database-context-class"></a>Veritabanı bağlam ı sınıfını güncelleştirme
+## <a name="update-the-database-context-class"></a>Aktualizuje třídu kontextu databáze.
 
-Belirli bir veri modeli için EF Core işlevini koordine eden ana sınıf veritabanı bağlam sınıfıdır. İçerik [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext)türetilmiştir. Bağlam, veri modeline hangi varlıkların dahil edildiğini belirtir. Bu projede sınıfadlandırılmış. `SchoolContext`
+Hlavní třída, která koordinuje funkce EF Core pro daný datový model, je třída kontextu databáze. Kontext je odvozen od třídy [Microsoft. EntityFrameworkCore. DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext). Kontext určuje, které entity jsou zahrnuty v datovém modelu. V tomto projektu je třída pojmenována `SchoolContext`.
 
-Aşağıdaki kodla *SchoolContext.cs* güncelleştirin:
+*SchoolContext.cs* aktualizujte pomocí následujícího kódu:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Data/SchoolContext.cs?highlight=13-22)]
 
-Vurgulanan kod, her varlık kümesi için bir [DbSet\<TEntity>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) özelliği oluşturur. EF Çekirdek terminolojisinde:
+Zvýrazněný kód vytvoří vlastnost [negenerickými\<TEntity>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) pro každou sadu entit. V terminologii EF Core:
 
-* Bir varlık kümesi genellikle bir veritabanı tablosuna karşılık gelir.
-* Bir varlık tablodaki bir satıra karşılık gelir.
+* Sada entit obvykle odpovídá databázové tabulce.
+* Entita odpovídá řádku v tabulce.
 
-Bir varlık kümesi birden çok varlık içerdiğinden, DBSet özellikleri çoğul adlar olmalıdır. İskele aracı bir`Student` DBSet oluşturduğundan, bu adım `Students`onu çoğul olarak değiştirir. 
+Vzhledem k tomu, že sada entit obsahuje více entit, musí mít vlastnosti Negenerickými plurální názvy. Vzhledem k tomu, že nástroj pro`Student` generování uživatelského rozhraní vytvořil negenerickými, tento krok `Students`změny změní na plural. 
 
-Razor Pages kodunun yeni DBSet adı ile eşleşmesini `_context.Student` sağlamak için, `_context.Students`tüm projede '' için küresel bir değişiklik yapın.  8 olay var.
+Chcete-li, aby kód Razor Pages odpovídal novému názvu Negenerickými, proveďte globální změnu v celém projektu `_context.Student` na. `_context.Students`  K dispozici je 8 výskytů.
 
-Derleyici hatası olmadığını doğrulamak için projeyi oluşturun.
+Sestavte projekt, aby se ověřilo, že nedošlo k chybám kompilátoru.
 
 ## <a name="startupcs"></a>Startup.cs
 
-ASP.NET Core [bağımlılık enjeksiyonu](xref:fundamentals/dependency-injection)ile inşa edilmiştir. Hizmetler (EF Core veritabanı bağlamı gibi) uygulama başlatma sırasında bağımlılık enjeksiyonu ile kaydedilir. Bu hizmetleri gerektiren bileşenlere (Jilet Sayfaları gibi) bu hizmetler yapıcı parametreler aracılığıyla sağlanır. Veritabanı bağlamı örneğini alan oluşturucu kodu daha sonra öğreticide gösterilir.
+ASP.NET Core je sestaven s [vkládáním závislostí](xref:fundamentals/dependency-injection). Služby (například kontext databáze EF Core) jsou registrovány pomocí injektáže závislosti při spuštění aplikace. Komponenty, které vyžadují tyto služby (například Razor Pages), poskytují tyto služby prostřednictvím parametrů konstruktoru. Kód konstruktoru, který získá instanci kontextu databáze, je uveden dále v tomto kurzu.
 
-İskele aracı, bağlam sınıfını bağımlılık enjeksiyon konteyneri ile otomatik olarak kaydetti.
+Nástroj pro generování uživatelského rozhraní automaticky zaregistroval třídu kontextu pomocí kontejneru vkládání závislostí.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* , `ConfigureServices`vurgulanan satırlar iskele tarafından eklendi:
+* V `ConfigureServices`byly zvýrazněné řádky přidány pomocí generátoru:
 
   [!code-csharp[Main](intro/samples/cu30/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* In `ConfigureServices`, iskele aramaları `UseSqlite`tarafından eklenen kodu emin olun.
+* V `ConfigureServices`nástroji se ujistěte, že kód přidaný voláním `UseSqlite`uživatelského rozhraní.
 
   [!code-csharp[Main](intro/samples/cu30/StartupSQLite.cs?name=snippet_ConfigureServices&highlight=5-6)]
 
 ---
 
-Bağlantı dizesinin adı, [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) nesnesindeki bir yöntem çağırılarak içeriğe aktarılır. Yerel geliştirme [için, ASP.NET Core yapılandırma sistemi](xref:fundamentals/configuration/index) *appsettings.json* dosyasından bağlantı dizesini okur.
+Název připojovacího řetězce je předán do kontextu voláním metody v objektu [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) . Pro místní vývoj načítá [konfigurační systém ASP.NET Core](xref:fundamentals/configuration/index) připojovací řetězec ze souboru *appSettings. JSON* .
 
-## <a name="create-the-database"></a>Veritabanını oluşturma
+## <a name="create-the-database"></a>Vytvoření databáze
 
-Veritabanı yoksa oluşturmak için *Program.cs* güncelleştirin:
+Aktualizujte *program.cs* , aby se vytvořila databáze, pokud neexistuje:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Program.cs?highlight=1-2,14-18,21-38)]
 
-İçerik için bir veritabanı [varsa, Oluşturulanları Sağlama](/dotnet/api/microsoft.entityframeworkcore.infrastructure.databasefacade.ensurecreated#Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_EnsureCreated) yöntemi hiçbir eylemde bulunmaz. Veritabanı yoksa, veritabanı ve şema oluşturur. `EnsureCreated`veri modeli değişikliklerini işlemek için aşağıdaki iş akışını sağlar:
+Metoda [EnsureCreated](/dotnet/api/microsoft.entityframeworkcore.infrastructure.databasefacade.ensurecreated#Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_EnsureCreated) neprovede žádnou akci, pokud existuje databáze pro kontext. Pokud žádná databáze neexistuje, vytvoří databázi a schéma. `EnsureCreated`povolí následující pracovní postup pro zpracování změn datového modelu:
 
-* Veritabanını silin. Varolan tüm veriler kaybolur.
-* Veri modelini değiştirin. Örneğin, bir `EmailAddress` alan ekleyin.
-* Uygulamayı çalıştırın.
-* `EnsureCreated`yeni şema ile bir veritabanı oluşturur.
+* Odstraňte databázi. Všechna existující data budou ztracena.
+* Změňte datový model. Například přidejte `EmailAddress` pole.
+* Spusťte aplikaci.
+* `EnsureCreated`vytvoří databázi s novým schématem.
 
-Bu iş akışı, verileri korumanız gerekmediğiniz sürece şema hızla geliştiğinde geliştirmede çok erken çalışır. Veritabanına girilen verilerin korunması gerektiğinde durum farklıdır. Bu durumda, geçişleri kullanın.
+Tento pracovní postup funguje dobře v rané fázi vývoje, když se schéma rychle vyvíjí, pokud nepotřebujete zachovat data. Tato situace se liší v případě, že data, která byla zadána do databáze, musí být zachována. V takovém případě použijte migrace.
 
-Öğretici serinin ilerleyen saatlerinde, oluşturulan `EnsureCreated` veritabanını siler ve bunun yerine geçişleri kullanırsınız. Geçişler kullanılarak `EnsureCreated` oluşturulan bir veritabanı güncelleştirilemez.
+Později v rámci série kurzů odstraníte databázi, kterou vytvořil, `EnsureCreated` a místo toho použijete migrace. Databázi vytvořenou nástrojem `EnsureCreated` nelze aktualizovat pomocí migrací.
 
-### <a name="test-the-app"></a>Uygulamayı test edin
+### <a name="test-the-app"></a>Otestování aplikace
 
-* Uygulamayı çalıştırın.
-* **Öğrenciler** bağlantısını seçin ve ardından Yeni Oluştur' seçeneğini **belirleyin.**
-* Düzenle, Ayrıntılar ve Sil bağlantılarını test edin.
+* Spusťte aplikaci.
+* Vyberte odkaz **Students** a pak **vytvořte nový**.
+* Otestujte odkazy Upravit, Podrobnosti a Odstranit.
 
-## <a name="seed-the-database"></a>Veritabanını tohumla
+## <a name="seed-the-database"></a>Dosazení databáze
 
-Yöntem `EnsureCreated` boş bir veritabanı oluşturur. Bu bölümde, veritabanını test verileriyle dolduran kod ekler.
+`EnsureCreated` Metoda vytvoří prázdnou databázi. V této části se přidá kód, který naplní databázi testovacími daty.
 
-Aşağıdaki kodile *Veri/DbInitializer.cs* oluşturun:
-
+Vytvořte *data/DbInitializer. cs* pomocí následujícího kódu:
+<!-- next update, keep this file in the project and surround with #if -->
   [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Data/DbInitializer.cs)]
 
-  Kod, veritabanında öğrenci olup olmadığını denetler. Öğrenci yoksa, veritabanına test verileri ekler. Performansı en iyi duruma getirmek için `List<T>` koleksiyonlar yerine diziler halinde test verilerini oluşturur.
+  Kód kontroluje, zda v databázi existují studenti. Pokud neexistují studenti, přidá testovací data do databáze. Vytvoří testovací data v polích, nikoli `List<T>` kolekce pro optimalizaci výkonu.
 
-* *Program.cs,* aramayı `EnsureCreated` bir `DbInitializer.Initialize` çağrıyla değiştirin:
+* V *program.cs*nahraďte `EnsureCreated` volání `DbInitializer.Initialize` voláním:
 
   ```csharp
   // context.Database.EnsureCreated();
@@ -381,7 +370,7 @@ Aşağıdaki kodile *Veri/DbInitializer.cs* oluşturun:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Çalışıyorsa uygulamayı durdurun ve **Paket Yöneticisi Konsolu'nda** (PMC) aşağıdaki komutu çalıştırın:
+Zastavte aplikaci, pokud je spuštěná, a spusťte následující příkaz v **konzole správce balíčků** (PMC):
 
 ```powershell
 Drop-Database
@@ -389,39 +378,39 @@ Drop-Database
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* Çalışıyorsa uygulamayı durdurun ve *CU.db* dosyasını silin.
+* Zastavte aplikaci, pokud je spuštěná, a odstraňte soubor *cu. DB* .
 
 ---
 
-* Uygulamayı yeniden başlatın.
+* Restartujte aplikaci.
 
-* Tohumlu verileri görmek için Öğrenciler sayfasını seçin.
+* Vyberte stránku Students a zobrazte si dosazený údaj.
 
-## <a name="view-the-database"></a>Veritabanını görüntüleme
+## <a name="view-the-database"></a>Zobrazení databáze
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Visual **Studio'daki** **Görünüm** menüsünden SQL Server Object Explorer'ı (SSOX) açın.
-* SSOX'ta **SchoolContext-{GUID} > (localdb)\MSSQLLocalDB > Databases'i**seçin. Veritabanı adı, daha önce sağladığınız bağlam adından artı bir tire ve guid'den oluşturulur.
-* **Tablolar** düğümlerini genişletin.
-* Oluşturulan sütunları ve tabloya eklenen satırları görmek için **Öğrenci** tablosuna sağ tıklayın ve **Verileri Görüntüle'yi** tıklatın.
-* **Modelin** tablo şemasını nasıl eşleştebildiğini `Student` görmek `Student` için Öğrenci tablosuna sağ tıklayın ve **Kodu Görüntüle'yi** tıklatın.
+* Otevřete **Průzkumník objektů systému SQL Server** (SSOX) z nabídky **Zobrazit** v aplikaci Visual Studio.
+* V SSOX vyberte **(LocalDB) \MSSQLLocalDB > databáze > SchoolContext-{GUID}**. Název databáze je vygenerován z dříve zadaného názvu kontextu plus pomlčka a identifikátor GUID.
+* Rozbalte uzel **tabulky** .
+* Klikněte pravým tlačítkem myši na tabulku **student** a kliknutím na **Zobrazit data** Zobrazte vytvořené sloupce a řádky vložené do tabulky.
+* Kliknutím pravým tlačítkem na tabulku **student** a kliknutím na **Zobrazit kód** zjistíte `Student` , jak se model `Student` mapuje na schéma tabulky.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Veritabanı şemasını ve tohumlu verileri görüntülemek için SQLite aracınızı kullanın. Veritabanı dosyası *CU.db* olarak adlandırılır ve proje klasöründe bulunur.
+Použijte nástroj SQLite k zobrazení schématu databáze a dat osazených daty. Databázový soubor má název *cu. DB* a je umístěn ve složce projektu.
 
 ---
 
-## <a name="asynchronous-code"></a>Asynchronous kodu
+## <a name="asynchronous-code"></a>Asynchronní kód
 
-Asynchronous programlama ASP.NET Core ve EF Core için varsayılan moddur.
+Asynchronní programování je výchozí režim pro ASP.NET Core a EF Core.
 
-Bir web sunucusunda sınırlı sayıda iş parçacığı vardır ve yüksek yük durumlarında kullanılabilir tüm iş parçacıkları kullanılıyor olabilir. Bu durumda, iş parçacıkları serbest bırakılıncaya kadar sunucu yeni istekleri işleyebilir. Senkron kodla, G/Ç'nin tamamlanmasını bekledikleri için birçok iş parçacığı aslında herhangi bir iş yapmasalar da bağlanabilir. Bir işlem G/Ç'nin tamamlanmasını beklerken, iş parçacığı sunucunun diğer istekleri işlemek için kullanması için serbest bırakılır. Sonuç olarak, eşzamanlı kod sunucu kaynaklarının daha verimli kullanılmasını sağlar ve sunucu gecikmeden daha fazla trafiği işleyebilir.
+Na webovém serveru je k dispozici omezený počet vláken a v situacích vysokého zatížení se mohou používat všechna dostupná vlákna. Pokud k tomu dojde, server nemůže zpracovat nové požadavky, dokud nebudou vlákna uvolněna. Pomocí synchronního kódu může být mnoho vláken svázáno s tím, že ve skutečnosti neprovádí žádnou práci, protože čeká na dokončení vstupně-výstupních operací. V případě asynchronního kódu, když proces čeká na dokončení vstupně-výstupních operací, je jeho vlákno uvolněno na server, který bude použit pro zpracování jiných požadavků. Výsledkem je, že asynchronní kód umožňuje efektivnější použití prostředků serveru a server může zpracovávat více provozu bez prodlev.
 
-Asynchronous kodu çalışma zamanında az miktarda ek yükü tanıtmak yok. Düşük trafik durumları için, performans isabet ihmal edilebilir, yüksek trafik durumlarda ise, potansiyel performans iyileştirme önemli.
+Asynchronní kód zavádí v době běhu malé množství režie. V situacích s nízkým provozem je dosaženo zanedbatelného výkonu, zatímco v situacích vysokého provozu je potenciální zlepšení výkonu značné.
 
-Aşağıdaki kodda, [async](/dotnet/csharp/language-reference/keywords/async) anahtar `Task<T>` kelime, `await` iade değeri, `ToListAsync` anahtar kelime ve yöntem kodu eşzamanlı olarak yürütmek olun.
+V následujícím kódu, klíčové slovo [Async](/dotnet/csharp/language-reference/keywords/async) , `Task<T>` návratová hodnota, `await` klíčové slovo a `ToListAsync` Metoda provede asynchronní spouštění kódu.
 
 ```csharp
 public async Task OnGetAsync()
@@ -430,37 +419,37 @@ public async Task OnGetAsync()
 }
 ```
 
-* Anahtar `async` kelime derleyiciye şunları söyler:
-  * Yöntem gövdesinin parçaları için geri arama lar oluşturun.
-  * Döndürülen [Görev](/dotnet/csharp/programming-guide/concepts/async/async-return-types#BKMK_TaskReturnType) nesnesini oluşturun.
-* İade `Task<T>` türü devam eden çalışmayı temsil eder.
-* Anahtar `await` kelime derleyicinin yöntemi iki bölüme bölmesine neden olur. İlk bölüm, eş zamanlı olarak başlatılan işlemle sona erer. İkinci bölüm, işlem tamamlandığında çağrılan bir geri arama yöntemine konur.
-* `ToListAsync`uzantı yönteminin `ToList` eşzamanlı sürümüdür.
+* `async` Klíčové slovo dává kompilátoru následující informace:
+  * Vygenerujte zpětná volání pro části těla metody.
+  * Vytvořte vrácený objekt [úkolu](/dotnet/csharp/programming-guide/concepts/async/async-return-types#BKMK_TaskReturnType) .
+* `Task<T>` Návratový typ představuje probíhající práci.
+* `await` Klíčové slovo způsobí, že kompilátor rozdělí metodu do dvou částí. První část končí asynchronně spuštěnou operací. Druhá část je vložena do metody zpětného volání, která je volána po dokončení operace.
+* `ToListAsync`je asynchronní verze metody `ToList` rozšíření.
 
-EF Core kullanan eşzamanlı kod yazarken dikkat edilmesi gereken bazı noktalar:
+Některé věci, které je potřeba znát při psaní asynchronního kódu, který používá EF Core:
 
-* Yalnızca sorguların veya komutların veritabanına gönderilmesine neden olan ifadeler eşsenkronize olarak yürütülür. Buna `ToListAsync`, `SingleOrDefaultAsync` `FirstOrDefaultAsync`, `SaveChangesAsync`, ve . Bu sadece bir `IQueryable`değiştirmek ifadeler içermez , `var students = context.Students.Where(s => s.LastName == "Davolio")`gibi .
-* EF Core bağlamı iş parçacığı güvenli değildir: paralel olarak birden çok işlem yapmaya çalışmayın.
-* Async kodunun performans avantajlarından yararlanmak için, kitaplık paketlerinin (sayfalama gibi) veritabanına sorgu gönderen EF Core yöntemlerini aramaları durumunda async kullandığını doğrulayın.
+* Asynchronně jsou spouštěny pouze příkazy, které způsobují odeslání dotazů nebo příkazů do databáze. To zahrnuje `ToListAsync`, `SingleOrDefaultAsync`, `FirstOrDefaultAsync`a `SaveChangesAsync`. Neobsahuje příkazy, které mění pouze `IQueryable`, například. `var students = context.Students.Where(s => s.LastName == "Davolio")`
+* Kontext EF Core není bezpečný pro přístup z více vláken: Nepokoušejte se současně provést více operací.
+* Chcete-li využít výhody z hlediska výkonu asynchronního kódu, ověřte, že balíčky knihoven (například pro stránkování) používají async, pokud volají EF Core metody, které odesílají dotazy do databáze.
 
-.NET'te asynchronous programlama hakkında daha fazla bilgi için [Async Genel Bakış](/dotnet/standard/async) ve [Asynchronous programlamaya](/dotnet/csharp/programming-guide/concepts/async/)bakın ve sizi bekliyor.
+Další informace o asynchronním programování v rozhraní .NET naleznete v tématu [Async Overview](/dotnet/standard/async) a [Asynchronous Programming with Async a await](/dotnet/csharp/programming-guide/concepts/async/).
 
-## <a name="next-steps"></a>Sonraki adımlar
+## <a name="next-steps"></a>Další kroky
 
 > [!div class="step-by-step"]
-> [Sonraki öğretici](xref:data/ef-rp/crud)
+> [Další kurz](xref:data/ef-rp/crud)
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-Contoso Üniversitesi örnek web uygulaması, Entity Framework (EF) Core kullanarak ASP.NET Core Razor Pages uygulamasının nasıl oluşturulabildiğini gösterir.
+Ukázková webová aplikace společnosti Contoso University ukazuje, jak vytvořit aplikaci ASP.NET Core Razor Pages pomocí jádra Entity Framework (EF).
 
-Örnek uygulama kurgusal bir Contoso Üniversitesi için bir web sitesidir. Öğrenci kabulü, ders oluşturma ve eğitmen atamaları gibi işlevleri içerir. Bu sayfa, Contoso Üniversitesi örnek uygulamasının nasıl inşa edilebildiğini açıklayan bir dizi öğreticinin ilkidir.
+Ukázková aplikace je web pro fiktivní univerzitě společnosti Contoso. Zahrnuje funkce, jako je například využití studenta, vytváření kurzu a přiřazení instruktora. Tato stránka je první v sérii kurzů, které vysvětlují, jak vytvořit ukázkovou aplikaci Contoso University.
 
-[Tamamlanan uygulamayı indirin veya görüntüleyin.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [Talimatları indirin.](xref:index#how-to-download-a-sample)
+[Stažení nebo zobrazení dokončené aplikace](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [Pokyny ke stažení](xref:index#how-to-download-a-sample).
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Požadavky
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -472,34 +461,34 @@ Contoso Üniversitesi örnek web uygulaması, Entity Framework (EF) Core kullana
 
 ---
 
-[Jilet Sayfaları](xref:razor-pages/index)ile Aşinalık . Yeni programcılar bu seriye başlamadan önce [Razor Pages ile başlayın](xref:tutorials/razor-pages/razor-pages-start) tamamlamalıdır.
+Znalost [Razor Pages](xref:razor-pages/index). Noví Programátori by měli před spuštěním této série dokončit [Začínáme s Razor Pages](xref:tutorials/razor-pages/razor-pages-start) .
 
-## <a name="troubleshooting"></a>Sorun giderme
+## <a name="troubleshooting"></a>Řešení potíží
 
-Çözemediğiniz bir sorunla karşınıza çıkarsa, kodunuzu [tamamlanan projeyle](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples)karşılaştırarak genellikle çözümü bulabilirsiniz. Yardım almak için iyi bir yol ASP.NET [Core](https://stackoverflow.com/questions/tagged/asp.net-core) veya [EF Core](https://stackoverflow.com/questions/tagged/entity-framework-core)için [StackOverflow.com](https://stackoverflow.com/questions/tagged/asp.net-core) için bir soru göndererek.
+Pokud narazíte na problém, který nelze vyřešit, můžete řešení obecně najít porovnáním kódu s [dokončeným projektem](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples). Dobrým způsobem, jak získat pomoc, je odeslání otázky do [StackOverflow.com](https://stackoverflow.com/questions/tagged/asp.net-core) pro [ASP.NET Core](https://stackoverflow.com/questions/tagged/asp.net-core) nebo [EF Core](https://stackoverflow.com/questions/tagged/entity-framework-core).
 
-## <a name="the-contoso-university-web-app"></a>Contoso Üniversitesi web uygulaması
+## <a name="the-contoso-university-web-app"></a>Webová aplikace společnosti Contoso University
 
-Bu eğitimlerde yerleşik olan uygulama temel bir üniversite web sitesidir.
+Aplikace sestavená v těchto kurzech je základním webem na univerzitě.
 
-Kullanıcılar öğrenci, kurs ve eğitmen bilgilerini görüntüleyebilir ve güncelleyebilir. Burada öğretici oluşturulan ekranlardan birkaçı vardır.
+Uživatelé můžou zobrazit a aktualizovat informace o studentech, kurzech a instruktorech. Tady je několik obrazovek vytvořených v tomto kurzu.
 
-![Öğrenci Endeksi sayfası](intro/_static/students-index.png)
+![Stránka indexu studentů](intro/_static/students-index.png)
 
-![Öğrenciler Sayfayı Edit](intro/_static/student-edit.png)
+![Stránka pro úpravy studentů](intro/_static/student-edit.png)
 
-Bu sitenin UI stili, yerleşik şablonlar tarafından oluşturulana yakındır. Öğretici odak Razor Pages ile EF Core değil, UI.
+Styl uživatelského rozhraní tohoto webu je blízko toho, co vygenerovaly předdefinované šablony. Tento kurz se zaměřuje na EF Core s Razor Pages, ne s uživatelským rozhraním.
 
-## <a name="create-the-contosouniversity-razor-pages-web-app"></a>ContosoUniversity Razor Pages web uygulamasını oluşturma
+## <a name="create-the-contosouniversity-razor-pages-web-app"></a>Vytvoření webové aplikace ContosoUniversity Razor Pages
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Visual Studio **File** menüsünden **Yeni** > **Proje'yi**seçin.
-* Yeni bir ASP.NET Core Web Uygulaması oluşturun. Proje **ContosoUniversity**adı . Kod kopyalandığında/yapıştırıldığında ad boşluklarının eşleşmesi için *projecontosoUniversity* adını vermek önemlidir.
-* Açılır ASP.NET **Core 2.1'i** seçin ve ardından **Web Uygulaması'nı**seçin.
+* V nabídce **soubor** sady Visual Studio vyberte **Nový** > **projekt**.
+* Vytvořte novou ASP.NET Core webovou aplikaci. Pojmenujte projekt **ContosoUniversity**. Je důležité pojmenovat projekt *ContosoUniversity* , aby se obory názvů shodovaly, když je kód zkopírován/vložen.
+* V rozevíracím seznamu vyberte **ASP.NET Core 2,1** a potom vyberte možnost **Webová aplikace**.
 
-Önceki adımların görüntüleri için [bkz.](xref:tutorials/razor-pages/razor-pages-start#create-a-razor-pages-web-app)
-Uygulamayı çalıştırın.
+Obrázky předchozích kroků najdete v tématu [Vytvoření webové aplikace Razor](xref:tutorials/razor-pages/razor-pages-start#create-a-razor-pages-web-app).
+Spusťte aplikaci.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -511,102 +500,102 @@ dotnet run
 
 ---
 
-## <a name="set-up-the-site-style"></a>Site stilini ayarlama
+## <a name="set-up-the-site-style"></a>Nastavení stylu webu
 
-Site menüsünü, düzeni ve ana sayfayı birkaç değişiklik ayarla. *Sayfaları/Paylaşılan/_Layout.cshtml'i* aşağıdaki değişikliklerle güncelleştirin:
+Několik změn nastaví nabídku webu, rozložení a domovskou stránku. Update *Pages/Shared/_Layout. cshtml* s následujícími změnami:
 
-* "ContosoUniversity"in her oluşumunu "Contoso Üniversitesi" olarak değiştirin. Üç olay var.
+* Změňte všechny výskyty "ContosoUniversity" na "contoso University". Existují tři výskyty.
 
-* **Öğrenciler,** **Kurslar,** Eğitmenler ve **Bölümler**için menü **girişlerini**ekleyin ve **İletişim** menüsü girişini silin.
+* Přidejte položky nabídky pro **studenty**, **kurzy**, **instruktory**a **oddělení**a odstraňte položku nabídky **kontakt** .
 
-Değişiklikler vurgulanır. (Tüm biçimlendirme *görüntülenmez.)*
+Změny jsou zvýrazněny. (Všechny *značky se nezobrazí* .)
 
 [!code-html[](intro/samples/cu21/Pages/Shared/_Layout.cshtml?highlight=6,29,35-38,50&name=snippet)]
 
-*Pages/Index.cshtml'de,* ASP.NET ve MVC hakkındaki metni bu uygulamayla ilgili metinle değiştirmek için dosyanın içeriğini aşağıdaki kodla değiştirin:
+Na *stránce pages/index. cshtml*nahraďte obsah souboru následujícím kódem, který nahradí text o ASP.NET a MVC textem o této aplikaci:
 
 [!code-html[](intro/samples/cu21/Pages/Index.cshtml)]
 
-## <a name="create-the-data-model"></a>Veri modelini oluşturma
+## <a name="create-the-data-model"></a>Vytvoření datového modelu
 
-Contoso Üniversitesi uygulaması için varlık sınıfları oluşturun. Aşağıdaki üç varlıkla başlayın:
+Vytvořte třídy entit pro aplikaci Contoso University. Začněte následujícími třemi entitami:
 
-![Ders-Kayıt-Öğrenci veri modeli diyagramı](intro/_static/data-model-diagram.png)
+![Kurz – registrace – diagram datového modelu studenta](intro/_static/data-model-diagram.png)
 
-Varlıklarla arasında `Student` `Enrollment` bir-çok ilişki vardır. Varlıklarla arasında `Course` `Enrollment` bir-çok ilişki vardır. Bir öğrenci herhangi bir sayıda kursa kaydolabilir. Bir kursa herhangi bir sayıda öğrenci kaydolabilir.
+Mezi `Student` entitami a `Enrollment` entitami je vztah 1: n. Mezi `Course` entitami a `Enrollment` entitami je vztah 1: n. Student se může zaregistrovat v jakémkoli počtu kurzů. Kurz může mít zaregistrovaný libovolný počet studentů.
 
-Aşağıdaki bölümlerde, bu varlıkların her biri için bir sınıf oluşturulur.
+V následujících oddílech je vytvořena třída pro každou z těchto entit.
 
-### <a name="the-student-entity"></a>Öğrenci varlığı
+### <a name="the-student-entity"></a>Entita studenta
 
-![Öğrenci varlık diyagramı](intro/_static/student-entity.png)
+![Diagram entity studenta](intro/_static/student-entity.png)
 
-*Modeller* klasörü oluşturun. *Modeller* klasöründe, aşağıdaki kodla *Student.cs* adlı bir sınıf dosyası oluşturun:
+Vytvořte složku *modelů* . Ve složce *modely* vytvořte soubor třídy s názvem *student.cs* s následujícím kódem:
 
 [!code-csharp[](intro/samples/cu21/Models/Student.cs?name=snippet_Intro)]
 
-Özellik, `ID` veritabanı (DB) tablosunun bu sınıfa karşılık gelen birincil anahtar sütunu olur. Varsayılan olarak, EF Core adlı veya `ID` `classnameID` birincil anahtar olarak bir özelliği yorumlar. In `classnameID` `classname` , sınıfın adıdır. Otomatik olarak tanınan birincil `StudentID` anahtar seçeneği yukarıdaki örnektedir.
+`ID` Vlastnost se zobrazí jako sloupec primárního klíče tabulky databáze (DB), která odpovídá této třídě. Ve výchozím nastavení EF Core interpretuje vlastnost s názvem `ID` nebo `classnameID` jako primární klíč. V `classnameID` `classname` je název třídy. Alternativní automaticky rozpoznaný primární klíč je `StudentID` v předchozím příkladu.
 
-Özellik `Enrollments` bir [navigasyon özelliğidir.](/ef/core/modeling/relationships) Gezinti özellikleri, bu varlıkla ilişkili diğer varlıklara bağlanır. Bu durumda, `Enrollments` bir `Student entity` özelliği ile ilgili `Enrollment` tüm varlıkların `Student`tutar. Örneğin, DB'deki bir Öğrenci satırında ilgili iki `Enrollments` Kayıt satırı varsa, gezinti özelliği bu iki `Enrollment` varlığı içerir. İlişkili `Enrollment` satır, `StudentID` sütundaki öğrencinin birincil anahtar değerini içeren bir satırdır. Örneğin, ID=1'e sahip öğrencinin `Enrollment` tabloda iki satırı olduğunu varsayalım. Tabloda `Enrollment` = 1 `StudentID` ile iki satır vardır. `StudentID``Student` tablodaki öğrenciyi `Enrollment` belirten yabancı bir anahtardır.
+`Enrollments` Vlastnost je [navigační vlastnost](/ef/core/modeling/relationships). Vlastnosti navigace odkazují na další entity, které se vztahují k této entitě. `Enrollments` V tomto případě `Student entity` vlastnost obsahuje všechny `Enrollment` entity, které jsou v relaci. `Student` Například pokud má řádek studenta v databázi dva související řádky registrace, `Enrollments` navigační vlastnost obsahuje tyto dvě `Enrollment` entity. Související `Enrollment` řádek je řádek, který obsahuje hodnotu primárního klíče tohoto studenta ve `StudentID` sloupci. Předpokládejme například, že student s ID = 1 má dva řádky v `Enrollment` tabulce. `Enrollment` Tabulka má dva řádky s `StudentID` = 1. `StudentID`je cizí klíč v `Enrollment` tabulce, který určuje studenta v `Student` tabulce.
 
-Bir gezinti özelliği birden çok varlık tutabiliyorsa, gezinti `ICollection<T>`özelliği ' nin liste türü olması gerekir. `ICollection<T>`belirtilebilir, ya da gibi `List<T>` `HashSet<T>`bir tür ya da . Kullanıldığında, `ICollection<T>` EF Core varsayılan `HashSet<T>` olarak bir koleksiyon oluşturur. Birden çok varlığı barındıran gezinti özellikleri, çok-çok ve bir-çok ilişkisinden gelir.
+Pokud navigační vlastnost může obsahovat více entit, musí být vlastnost navigace typu seznam, například `ICollection<T>`. `ICollection<T>`lze zadat nebo typ jako `List<T>` nebo. `HashSet<T>` Při `ICollection<T>` použití EF Core vytvoří ve výchozím nastavení `HashSet<T>` kolekci. Navigační vlastnosti, které obsahují více entit, přicházejí ze vztahů m:n a 1: n.
 
-### <a name="the-enrollment-entity"></a>Kayıt varlığı
+### <a name="the-enrollment-entity"></a>Entita registrace
 
-![Kayıt varlık diyagramı](intro/_static/enrollment-entity.png)
+![Diagram entity registrace](intro/_static/enrollment-entity.png)
 
-*Modeller* klasöründe, aşağıdaki kodla *Enrollment.cs* oluşturun:
+Ve složce *modely* vytvořte *Enrollment.cs* s následujícím kódem:
 
 [!code-csharp[](intro/samples/cu21/Models/Enrollment.cs?name=snippet_Intro)]
 
-Özellik `EnrollmentID` birincil anahtardır. Bu `Student` varlık, `classnameID` varlık `ID` gibi değil deseni kullanır. Genellikle geliştiriciler bir desen seçin ve veri modeli boyunca kullanabilirsiniz. Daha sonraki bir öğreticide, sınıf adı olmadan kimlik kullanılması, veri modelinde devralmayı daha kolay uygulamak için gösterilir.
+`EnrollmentID` Vlastnost je primární klíč. Tato entita používá `classnameID` vzor místo `ID` podobně jako `Student` entita. Vývojáři obvykle volí jeden model a používají ho v rámci datového modelu. V pozdějším kurzu se zobrazuje použití ID bez ClassName, které usnadňuje implementaci dědičnosti v datovém modelu.
 
-Özellik `Grade` bir `enum`. Tür bildiriminden `Grade` sonraki soru işareti `Grade` özelliğin geçersiz olduğunu gösterir. Sıfır notundan farklı olan bir not - null, bir notun bilinmediği veya henüz atanmadığı anlamına gelir.
+`Grade` Vlastnost je `enum`. Otazník po deklaraci `Grade` typu označuje, že vlastnost může `Grade` mít hodnotu null. Hodnota, která je null, se liší od nulové třídy – hodnota null znamená, že se nejedná o známku nebo ještě není přiřazená.
 
-Özellik `StudentID` yabancı bir anahtardır ve ilgili `Student`navigasyon özelliği . Bir `Enrollment` varlık tek `Student` bir varlıkla ilişkilidir, `Student` bu nedenle özellik tek bir varlık içerir. Varlık, `Student` birden çok `Student.Enrollments` `Enrollment` varlık içeren gezinti özelliğinden farklıdır.
+`StudentID` Vlastnost je cizí klíč a odpovídající navigační vlastnost je `Student`. `Enrollment` Entita je přidružená k jedné `Student` entitě, takže vlastnost obsahuje jednu `Student` entitu. `Student` Entita se liší od `Student.Enrollments` navigační vlastnosti, která obsahuje více `Enrollment` entit.
 
-Özellik `CourseID` yabancı bir anahtardır ve ilgili `Course`navigasyon özelliği . Bir `Enrollment` varlık tek `Course` bir varlıkla ilişkilidir.
+`CourseID` Vlastnost je cizí klíč a odpovídající navigační vlastnost je `Course`. `Enrollment` Entita je přidružená k jedné `Course` entitě.
 
-EF Core, bir özelliği yabancı `<navigation property name><primary key property name>`bir anahtar olarak yorumluyorsa. Örneğin,`StudentID` `Student` `Student` varlığın birincil anahtarı . `ID` Yabancı anahtar özellikleri de `<primary key property name>`adlandırılabilir. Örneğin, `CourseID` varlığın `Course` birincil anahtarı `CourseID`.
+EF Core interpretuje vlastnost jako cizí klíč, pokud má název `<navigation property name><primary key property name>`. Například`StudentID` pro vlastnost `Student` navigace, protože primární klíč `Student` entity je. `ID` Lze také pojmenovat `<primary key property name>`vlastnosti cizího klíče. Například vzhledem k `CourseID` tomu, `Course` že primární klíč entity je `CourseID`.
 
-### <a name="the-course-entity"></a>Kurs varlığı
+### <a name="the-course-entity"></a>Entita kurzu
 
-![Ders varlık diyagramı](intro/_static/course-entity.png)
+![Diagram entity kurzu](intro/_static/course-entity.png)
 
-*Modeller* klasöründe aşağıdaki kodla *Course.cs* oluşturun:
+Ve složce *modely* vytvořte *Course.cs* s následujícím kódem:
 
 [!code-csharp[](intro/samples/cu21/Models/Course.cs?name=snippet_Intro)]
 
-Tesis `Enrollments` bir navigasyon özelliğidir. Bir `Course` varlık herhangi bir sayıda `Enrollment` varlıkla ilişkili olabilir.
+`Enrollments` Vlastnost je navigační vlastnost. `Course` Entita může souviset s libovolným počtem `Enrollment` entit.
 
-Öznitelik, `DatabaseGenerated` uygulamanın DB'nin oluşturması yerine birincil anahtarı belirtmesine olanak tanır.
+`DatabaseGenerated` Atribut umožňuje aplikaci zadat primární klíč, a ne vytvořit databázi.
 
-## <a name="scaffold-the-student-model"></a>İskele öğrenci modeli
+## <a name="scaffold-the-student-model"></a>Generování uživatelského rozhraní modelu studenta
 
-Bu bölümde, öğrenci modeli iskeleli. Diğer bir zamanda, iskele aracı öğrenci modeli için Oluştur, Oku, Güncelleştir ve Sil (CRUD) işlemleri için sayfalar oluşturur.
+V této části je model studenta vygenerovaný jako generátor. To znamená, že nástroj pro generování uživatelského rozhraní vytváří stránky pro operace vytvoření, čtení, aktualizace a odstranění (CRUD) pro model studenta.
 
-* Projeyi derleyin.
-* *Sayfalar/Öğrenciler* klasörünü oluşturun.
+* Sestavte projekt.
+* Vytvořte složku *stránky/studenty* .
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **Solution Explorer'da,** Yeni **İskele**Öğesi **Ekle** > > *Sayfalar/Öğrenciler* klasörüne sağ tıklayın.
-* İskele **Ekle** iletişim kutusunda, **Entity Framework (CRUD)** > **ADD**kullanarak Jilet Sayfaları'nı seçin.
+* V **Průzkumník řešení**klikněte pravým tlačítkem myši na složku *Pages/Students* > **Přidat** > **novou vygenerované položky**.
+* V dialogovém okně **Přidat generování uživatelského rozhraní** vyberte možnost **Razor Pages pomocí Entity Framework (CRUD)** > **Přidat**.
 
-Varlık **Çerçevesi (CRUD)** iletişim kutusunu kullanarak Jilet Sayfaları Ekle'yi tamamlayın:
+Dokončete dialog **přidat Razor Pages pomocí Entity Framework (CRUD)** :
 
-* Model **sınıfı** açılır açılır, **Öğrenci (ContosoUniversity.Models)** seçin.
-* Veri **bağlamında sınıf** satırında(artı) işaretini **+** seçin ve oluşturulan adı **ContosoUniversity.Models.SchoolContext olarak değiştirin.**
-* Veri **bağlamında sınıf** açılır, **ContosoUniversity.Models.SchoolContext'ı** seçin
-* **Add (Ekle)** seçeneğini belirleyin.
+* V rozevíracím seznamu **třída modelu** vyberte **student (ContosoUniversity. Models)**.
+* V řádku **třídy kontextu dat** vyberte znaménko **+** (plus) a změňte vygenerovaný název na **ContosoUniversity. Models. SchoolContext**.
+* V rozevíracím seznamu **Třída kontextu dat** vyberte **ContosoUniversity. Models. SchoolContext.**
+* Vyberte **Přidat**.
 
-![CRUD iletişim kutusu](intro/_static/s1.png)
+![Dialogové okno CRUD](intro/_static/s1.png)
 
-Bir önceki adımla ilgili bir sorununvarsa [film modelini İskele'ye](xref:tutorials/razor-pages/model#scaffold-the-movie-model) bakın.
+Pokud máte problém s předchozím krokem, podívejte [se do části vygenerované modely filmů](xref:tutorials/razor-pages/model#scaffold-the-movie-model) .
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Öğrenci modelini iskeleye getirmek için aşağıdaki komutları çalıştırın.
+Spusťte následující příkazy pro generování uživatelského rozhraní modelu studenta.
 
 ```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design --version 2.1.0
@@ -616,100 +605,100 @@ dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Models.Sc
 
 ---
 
-İskele işlemi aşağıdaki dosyaları oluşturdu ve değiştirdi:
+Proces generování uživatelského rozhraní byl vytvořen a změnil následující soubory:
 
-### <a name="files-created"></a>Oluşturulan dosyalar
+### <a name="files-created"></a>Vytvořené soubory
 
-* *Sayfalar / Öğrenciler* Oluştur, Sil, Ayrıntılar, Düzenle, Dizin.
-* *Veri/SchoolContext.cs*
+* *Stránky/studenty* Vytvořit, odstranit, podrobnosti, upravit, index.
+* *Data/SchoolContext. cs*
 
-### <a name="file-updates"></a>Dosya güncellemeleri
+### <a name="file-updates"></a>Aktualizace souborů
 
-* *Startup.cs* : Bu dosyadaki değişiklikler sonraki bölümde ayrıntılı olarak açıklanmaktadır.
-* *appsettings.json* : Yerel bir veritabanına bağlanmak için kullanılan bağlantı dizesi eklenir.
+* *Startup.cs* : změny v tomto souboru jsou podrobně popsané v další části.
+* *appSettings. JSON* : Přidal se připojovací řetězec použitý k připojení k místní databázi.
 
-## <a name="examine-the-context-registered-with-dependency-injection"></a>Bağımlılık enjeksiyonu ile kayıtlı bağlamı inceleyin
+## <a name="examine-the-context-registered-with-dependency-injection"></a>Kontrola kontextu zaregistrovaného vkládáním závislostí
 
-ASP.NET Core [bağımlılık enjeksiyonu](xref:fundamentals/dependency-injection)ile inşa edilmiştir. Hizmetler (EF Core DB bağlamı gibi) uygulama başlatma sırasında bağımlılık enjeksiyonu ile kaydedilir. Bu hizmetleri gerektiren bileşenlere (Jilet Sayfaları gibi) bu hizmetler yapıcı parametreler aracılığıyla sağlanır. DB bağlam örneğini alan yapıcı kod daha sonra öğreticide gösterilir.
+ASP.NET Core je sestaven s [vkládáním závislostí](xref:fundamentals/dependency-injection). Služby (například kontext EF Core DB) jsou registrovány pomocí injektáže závislosti při spuštění aplikace. Komponenty, které vyžadují tyto služby (například Razor Pages), poskytují tyto služby prostřednictvím parametrů konstruktoru. Kód konstruktoru, který získá instanci kontextu databáze, je uveden dále v tomto kurzu.
 
-İskele aracı otomatik olarak bir DB Bağlamı oluşturdu ve bağımlılık enjeksiyon konteyneri ile kaydetti.
+Nástroj pro generování uživatelského rozhraní automaticky vytvořil kontext databáze a zaregistroval ho pomocí kontejneru pro vkládání závislostí.
 
-yöntemi Startup.cs inceleyin. *Startup.cs* `ConfigureServices` Vurgulanan satır iskele tarafından eklendi:
+Projděte `ConfigureServices` si metodu v *Startup.cs*. Zvýrazněný řádek byl přidán do modulu generování uživatelského rozhraní:
 
 [!code-csharp[](intro/samples/cu21/Startup.cs?name=snippet_SchoolContext&highlight=13-14)]
 
-Bağlantı dizesinin adı, [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) nesnesindeki bir yöntem çağırılarak içeriğe aktarılır. Yerel geliştirme [için, ASP.NET Core yapılandırma sistemi](xref:fundamentals/configuration/index) *appsettings.json* dosyasından bağlantı dizesini okur.
+Název připojovacího řetězce je předán do kontextu voláním metody v objektu [DbContextOptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) . Pro místní vývoj načítá [konfigurační systém ASP.NET Core](xref:fundamentals/configuration/index) připojovací řetězec ze souboru *appSettings. JSON* .
 
-## <a name="update-main"></a>Ana güncelleştirme
+## <a name="update-main"></a>Aktualizace Main
 
-*Program.cs,* `Main` aşağıdakileri yapmak için yöntemi değiştirin:
+V *program.cs*upravte `Main` metodu a proveďte následující:
 
-* Bağımlılık enjeksiyon kapsayıcısından bir DB bağlam örneği alın.
-* [EnsureCreated'ı](/dotnet/api/microsoft.entityframeworkcore.infrastructure.databasefacade.ensurecreated#Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_EnsureCreated)arayın.
-* Yöntem tamamlandığında bağlamı `EnsureCreated` atın.
+* Získá instanci kontextu databáze z kontejneru vkládání závislostí.
+* Zavolejte [EnsureCreated](/dotnet/api/microsoft.entityframeworkcore.infrastructure.databasefacade.ensurecreated#Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_EnsureCreated).
+* Vyřazení kontextu po dokončení `EnsureCreated` metody.
 
-Aşağıdaki kod güncelleştirilmiş *Program.cs* dosyasını gösterir.
+Následující kód ukazuje aktualizovaný soubor *program.cs* .
 
 [!code-csharp[](intro/samples/cu21/Program.cs?name=snippet)]
 
-`EnsureCreated`bağlam için veritabanının var olmasını sağlar. Varsa, hiçbir işlem yapılmaz. Yoksa, veritabanı ve tüm şema oluşturulur. `EnsureCreated`veritabanını oluşturmak için geçişler kullanmaz. Daha `EnsureCreated` sonra geçişler kullanılarak oluşturulan bir veritabanı güncelleştirilemez.
+`EnsureCreated`zajišťuje, aby databáze pro kontext existovala. Pokud existuje, není provedena žádná akce. Pokud neexistuje, vytvoří se databáze a všechny její schéma. `EnsureCreated`nepoužívá k vytvoření databáze migrace. Databázi, která je vytvořená `EnsureCreated` pomocí, se nedá později aktualizovat pomocí migrace.
 
-`EnsureCreated`aşağıdaki iş akışını sağlayan uygulama başlangıcında çağrılır:
+`EnsureCreated`se volá při spuštění aplikace, což umožňuje následující pracovní postup:
 
-* DB'yi silin.
-* DB şemasını değiştirin (örneğin, `EmailAddress` bir alan ekleyin).
-* Uygulamayı çalıştırın.
-* `EnsureCreated``EmailAddress` sütunile bir DB oluşturur.
+* Odstraňte databázi.
+* Změňte schéma databáze (například přidat `EmailAddress` pole).
+* Spusťte aplikaci.
+* `EnsureCreated`vytvoří databázi se`EmailAddress` sloupcem.
 
-`EnsureCreated`şema hızla geliştiğinde gelişmenin erken dönemlerinde uygundur. Daha sonra öğreticide DB silinir ve geçişler kullanılır.
+`EnsureCreated`je pohodlná v brzké fázi vývoje, když se schéma rychle vyvíjí. Později v kurzu se databáze odstraní a použijí se migrace.
 
-### <a name="test-the-app"></a>Uygulamayı test edin
+### <a name="test-the-app"></a>Otestování aplikace
 
-Uygulamayı çalıştırın ve çerez ilkesini kabul edin. Bu uygulama kişisel bilgileri saklamaz. Ab Genel Veri Koruma [Yönetmeliği (GDPR) desteğinde](xref:security/gdpr)çerez politikası hakkında bilgi edinebilirsiniz.
+Spusťte aplikaci a přijměte zásady souborů cookie. Tato aplikace neuchovává osobní údaje. Informace o zásadách souborů cookie najdete v tématu [Podpora pro EU obecné nařízení o ochraně osobních údajů (GDPR)](xref:security/gdpr).
 
-* **Öğrenciler** bağlantısını seçin ve ardından Yeni Oluştur' seçeneğini **belirleyin.**
-* Düzenle, Ayrıntılar ve Sil bağlantılarını test edin.
+* Vyberte odkaz **Students** a pak **vytvořte nový**.
+* Otestujte odkazy Upravit, Podrobnosti a Odstranit.
 
-## <a name="examine-the-schoolcontext-db-context"></a>SchoolContext DB bağlamını inceleyin
+## <a name="examine-the-schoolcontext-db-context"></a>Projděte si kontext SchoolContext DB.
 
-Belirli bir veri modeli için EF Core işlevini koordine eden ana sınıf DB bağlam sınıfıdır. Veri bağlamı [Microsoft.EntityFrameworkCore.DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext)türetilmiştir. Veri bağlamı, veri modeline hangi varlıkların dahil edildiğini belirtir. Bu projede sınıfadlandırılmış. `SchoolContext`
+Hlavní třída, která koordinuje funkce EF Core pro daný datový model, je třída kontextu databáze. Kontext dat je odvozen od třídy [Microsoft. EntityFrameworkCore. DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext). Kontext dat určuje, které entity jsou zahrnuty v datovém modelu. V tomto projektu je třída pojmenována `SchoolContext`.
 
-Aşağıdaki kodla *SchoolContext.cs* güncelleştirin:
+*SchoolContext.cs* aktualizujte pomocí následujícího kódu:
 
 [!code-csharp[](intro/samples/cu21/Data/SchoolContext.cs?name=snippet_Intro&highlight=12-14)]
 
-Vurgulanan kod, her varlık kümesi için bir [DbSet\<TEntity>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) özelliği oluşturur. EF Çekirdek terminolojisinde:
+Zvýrazněný kód vytvoří vlastnost [negenerickými\<TEntity>](/dotnet/api/microsoft.entityframeworkcore.dbset-1) pro každou sadu entit. V terminologii EF Core:
 
-* Bir varlık kümesi genellikle bir DB tablosuna karşılık gelir.
-* Bir varlık tablodaki bir satıra karşılık gelir.
+* Sada entit obvykle odpovídá tabulce databáze.
+* Entita odpovídá řádku v tabulce.
 
-`DbSet<Enrollment>`ve `DbSet<Course>` atlanabilir. `Student` VARLıK `Enrollment` varlığa, `Enrollment` varlık da `Course` varlığa atıfta bulunduğundan, EF Core bunları dolaylı olarak içerir. Bu öğretici için, `DbSet<Course>` tutmak `SchoolContext` `DbSet<Enrollment>` ve .
+`DbSet<Enrollment>`a `DbSet<Course>` může být vynecháno. EF Core je implicitně obsahuje, protože `Student` entita odkazuje na `Enrollment` entitu a `Enrollment` entita odkazuje na `Course` entitu. V tomto kurzu ponechejte `DbSet<Enrollment>` a `DbSet<Course>` v `SchoolContext`.
 
 ### <a name="sql-server-express-localdb"></a>SQL Server Express LocalDB
 
-Bağlantı dizesi [SQL Server LocalDB'yi](/sql/database-engine/configure-windows/sql-server-2016-express-localdb)belirtir. LocalDB, SQL Server Express Veritabanı Altyapısının hafif bir sürümüdür ve üretim kullanımı için değil, uygulama geliştirme için tasarlanmıştır. LocalDB isteğe bağlı olarak başlar ve kullanıcı modunda çalışır, bu nedenle karmaşık bir yapılandırma yoktur. Varsayılan olarak, LocalDB `C:/Users/<user>` dizinde *.mdf* DB dosyaları oluşturur.
+Připojovací řetězec Určuje [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb). LocalDB je zjednodušená verze databázového stroje SQL Server Express a je určena pro vývoj aplikací, nikoli za použití v produkčním prostředí. LocalDB se spustí na vyžádání a spustí se v uživatelském režimu, takže neexistuje složitá konfigurace. Ve výchozím nastavení LocalDB vytvoří soubory *. mdf* DB v `C:/Users/<user>` adresáři.
 
-## <a name="add-code-to-initialize-the-db-with-test-data"></a>Test verileriyle DB'yi başlatmaya kod ekleme
+## <a name="add-code-to-initialize-the-db-with-test-data"></a>Přidejte kód pro inicializaci databáze s testovacími daty
 
-EF Core boş bir DB oluşturur. Bu bölümde, `Initialize` test verileri ile doldurmak için bir yöntem yazılır.
+EF Core vytvoří prázdnou databázi. V této části je zapsána `Initialize` metoda pro naplnění testovacích dat.
 
-*Veri* *klasöründe, DbInitializer.cs* adında yeni bir sınıf dosyası oluşturun ve aşağıdaki kodu ekleyin:
+Ve složce *data* vytvořte nový soubor třídy s názvem *DbInitializer.cs* a přidejte následující kód:
 
 [!code-csharp[](intro/samples/cu21/Data/DbInitializer.cs?name=snippet_Intro)]
 
-Not: Önceki kod, `Models` `Data`ad alanı`namespace ContosoUniversity.Models`( ) yerine . `Models`iskele tarafından oluşturulan kodla tutarlıdır. Daha fazla bilgi için [bu GitHub iskele sorununa](https://github.com/aspnet/Scaffolding/issues/822)bakın.
+Poznámka: předchozí kód používá `Models` pro obor názvů (`namespace ContosoUniversity.Models`) spíše než. `Data` `Models`je konzistentní s kódem generovaným pomocí generování uživatelského rozhraní. Další informace najdete v [tomto problému s vygenerováním uživatelského rozhraní GitHub](https://github.com/aspnet/Scaffolding/issues/822).
 
-Kod, DB'de öğrenci olup olmadığını kontrol eder. DB'de öğrenci yoksa, DB test verileriyle başolarak başolarak başlatEdilir. Performansı en iyi duruma getirmek `List<T>` için test verilerini koleksiyonlar yerine dizilere yükler.
+Kód zkontroluje, jestli v databázi existují studenti. Pokud databáze neobsahuje žádné studenty, databáze se inicializuje s testovacími daty. Načte testovací data do polí, nikoli `List<T>` kolekce pro optimalizaci výkonu.
 
-Yöntem `EnsureCreated` otomatik olarak DB bağlamı için DB oluşturur. DB varsa, `EnsureCreated` DB'yi değiştirmeden döndürür.
+`EnsureCreated` Metoda automaticky vytvoří databázi pro kontext databáze. Pokud databáze existuje, `EnsureCreated` vrátí se beze změny databáze.
 
-Program.cs *Program.cs*yılında, `Main` aramak `Initialize`için yöntemi değiştirmek:
+V *program.cs*upravte `Main` metodu pro volání `Initialize`:
 
 [!code-csharp[](intro/samples/cu21/Program.cs?name=snippet2&highlight=14-15)]
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Çalışıyorsa uygulamayı durdurun ve **Paket Yöneticisi Konsolu'nda** (PMC) aşağıdaki komutu çalıştırın:
+Zastavte aplikaci, pokud je spuštěná, a spusťte následující příkaz v **konzole správce balíčků** (PMC):
 
 ```powershell
 Drop-Database
@@ -717,57 +706,57 @@ Drop-Database
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* Çalışıyorsa uygulamayı durdurun ve *CU.db* dosyasını silin.
+* Zastavte aplikaci, pokud je spuštěná, a odstraňte soubor *cu. DB* .
 
 ---
 
-## <a name="view-the-db"></a>DB'yi görüntüleyin
+## <a name="view-the-db"></a>Zobrazení databáze
 
-Veritabanı adı, daha önce sağladığınız bağlam adından artı bir tire ve guid'den oluşturulur. Böylece, veritabanı adı "SchoolContext-{GUID}" olacaktır. GUID her kullanıcı için farklı olacaktır.
-Visual **Studio'daki** **Görünüm** menüsünden SQL Server Object Explorer'ı (SSOX) açın.
-SSOX'ta **(localdb)\MSSQLLocalDB > Veritabanları > SchoolContext-{GUID}** seçeneğini tıklayın.
+Název databáze je vygenerován z dříve zadaného názvu kontextu plus pomlčka a identifikátor GUID. Proto bude název databáze "SchoolContext-{GUID}". Identifikátor GUID bude pro každého uživatele odlišný.
+Otevřete **Průzkumník objektů systému SQL Server** (SSOX) z nabídky **Zobrazit** v aplikaci Visual Studio.
+V SSOX klikněte na **(LocalDB) \MSSQLLocalDB > databáze > SchoolContext-{GUID}**.
 
-**Tablolar** düğümlerini genişletin.
+Rozbalte uzel **tabulky** .
 
-Oluşturulan sütunları ve tabloya eklenen satırları görmek için **Öğrenci** tablosuna sağ tıklayın ve **Verileri Görüntüle'yi** tıklatın.
+Klikněte pravým tlačítkem myši na tabulku **student** a kliknutím na **Zobrazit data** Zobrazte vytvořené sloupce a řádky vložené do tabulky.
 
-## <a name="asynchronous-code"></a>Asynchronous kodu
+## <a name="asynchronous-code"></a>Asynchronní kód
 
-Asynchronous programlama ASP.NET Core ve EF Core için varsayılan moddur.
+Asynchronní programování je výchozí režim pro ASP.NET Core a EF Core.
 
-Bir web sunucusunda sınırlı sayıda iş parçacığı vardır ve yüksek yük durumlarında kullanılabilir tüm iş parçacıkları kullanılıyor olabilir. Bu durumda, iş parçacıkları serbest bırakılıncaya kadar sunucu yeni istekleri işleyebilir. Senkron kodla, G/Ç'nin tamamlanmasını bekledikleri için birçok iş parçacığı aslında herhangi bir iş yapmasalar da bağlanabilir. Bir işlem G/Ç'nin tamamlanmasını beklerken, iş parçacığı sunucunun diğer istekleri işlemek için kullanması için serbest bırakılır. Sonuç olarak, eşzamanlı kod sunucu kaynaklarının daha verimli kullanılmasını sağlar ve sunucunun gecikmeden daha fazla trafiği işlemesi sağlanır.
+Na webovém serveru je k dispozici omezený počet vláken a v situacích vysokého zatížení se mohou používat všechna dostupná vlákna. Pokud k tomu dojde, server nemůže zpracovat nové požadavky, dokud nebudou vlákna uvolněna. Pomocí synchronního kódu může být mnoho vláken svázáno s tím, že ve skutečnosti neprovádí žádnou práci, protože čeká na dokončení vstupně-výstupních operací. V případě asynchronního kódu, když proces čeká na dokončení vstupně-výstupních operací, je jeho vlákno uvolněno na server, který bude použit pro zpracování jiných požadavků. Výsledkem je, že asynchronní kód umožňuje efektivnější použití prostředků serveru a server je povolen pro zpracování většího objemu dat bez prodlev.
 
-Asynchronous kodu çalışma zamanında az miktarda ek yükü tanıtmak yok. Düşük trafik durumları için, performans isabet ihmal edilebilir, yüksek trafik durumlarda ise, potansiyel performans iyileştirme önemli.
+Asynchronní kód zavádí v době běhu malé množství režie. V situacích s nízkým provozem je dosaženo zanedbatelného výkonu, zatímco v situacích vysokého provozu je potenciální zlepšení výkonu značné.
 
-Aşağıdaki kodda, [async](/dotnet/csharp/language-reference/keywords/async) anahtar `Task<T>` kelime, `await` iade değeri, `ToListAsync` anahtar kelime ve yöntem kodu eşzamanlı olarak yürütmek olun.
+V následujícím kódu, klíčové slovo [Async](/dotnet/csharp/language-reference/keywords/async) , `Task<T>` návratová hodnota, `await` klíčové slovo a `ToListAsync` Metoda provede asynchronní spouštění kódu.
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_ScaffoldedIndex)]
 
-* Anahtar `async` kelime derleyiciye şunları söyler:
-  * Yöntem gövdesinin parçaları için geri arama lar oluşturun.
-  * Döndürülen [Görev](/dotnet/api/system.threading.tasks.task) nesnesini otomatik olarak oluşturun. Daha fazla bilgi için [Görev İade Türü'ne](/dotnet/csharp/programming-guide/concepts/async/async-return-types#BKMK_TaskReturnType)bakın.
+* `async` Klíčové slovo dává kompilátoru následující informace:
+  * Vygenerujte zpětná volání pro části těla metody.
+  * Automaticky vytvořte vrácený objekt [úkolu](/dotnet/api/system.threading.tasks.task) . Další informace najdete v tématu [návratový typ úlohy](/dotnet/csharp/programming-guide/concepts/async/async-return-types#BKMK_TaskReturnType).
 
-* Örtük iade `Task` türü devam eden çalışmayı temsil eder.
-* Anahtar `await` kelime derleyicinin yöntemi iki bölüme bölmesine neden olur. İlk bölüm, eş zamanlı olarak başlatılan işlemle sona erer. İkinci bölüm, işlem tamamlandığında çağrılan bir geri arama yöntemine konur.
-* `ToListAsync`uzantı yönteminin `ToList` eşzamanlı sürümüdür.
+* Implicitní návratový typ `Task` představuje probíhající práci.
+* `await` Klíčové slovo způsobí, že kompilátor rozdělí metodu do dvou částí. První část končí asynchronně spuštěnou operací. Druhá část je vložena do metody zpětného volání, která je volána po dokončení operace.
+* `ToListAsync`je asynchronní verze metody `ToList` rozšíření.
 
-EF Core kullanan eşzamanlı kod yazarken dikkat edilmesi gereken bazı noktalar:
+Některé věci, které je potřeba znát při psaní asynchronního kódu, který používá EF Core:
 
-* Yalnızca Sorguların veya komutların DB'ye gönderilmesine neden olan ifadeler eşsenkronize olarak yürütülür. Buna `ToListAsync`, `SingleOrDefaultAsync`, `FirstOrDefaultAsync`, `SaveChangesAsync`ve . Bu sadece bir `IQueryable`değiştirmek ifadeler içermez , `var students = context.Students.Where(s => s.LastName == "Davolio")`gibi .
-* EF Core bağlamı iş parçacığı güvenli değildir: paralel olarak birden çok işlem yapmaya çalışmayın.
-* Async kodunun performans avantajlarından yararlanmak için, kitaplık paketlerinin (sayfalama gibi) DB'ye sorgu gönderen EF Core yöntemlerini aramaları durumunda async kullandığını doğrulayın.
+* Asynchronně jsou spouštěny pouze příkazy, které způsobují odeslání dotazů nebo příkazů do databáze. To zahrnuje, `ToListAsync`, `SingleOrDefaultAsync` `FirstOrDefaultAsync`, a `SaveChangesAsync`. Neobsahuje příkazy, které mění pouze `IQueryable`, například. `var students = context.Students.Where(s => s.LastName == "Davolio")`
+* Kontext EF Core není bezpečný pro přístup z více vláken: Nepokoušejte se současně provést více operací.
+* Chcete-li využít výhody z hlediska výkonu asynchronního kódu, ověřte, že balíčky knihoven (například pro stránkování) používají async, pokud volají EF Core metody, které odesílají dotazy do databáze.
 
-.NET'te asynchronous programlama hakkında daha fazla bilgi için [Async Genel Bakış](/dotnet/standard/async) ve [Asynchronous programlamaya](/dotnet/csharp/programming-guide/concepts/async/)bakın ve sizi bekliyor.
+Další informace o asynchronním programování v rozhraní .NET naleznete v tématu [Async Overview](/dotnet/standard/async) a [Asynchronous Programming with Async a await](/dotnet/csharp/programming-guide/concepts/async/).
 
-Bir sonraki öğreticide, temel CRUD (oluşturma, okuma, güncelleme, silme) işlemleri incelenir.
+V dalším kurzu se přezkoumávají základní operace CRUD (vytváření, čtení, aktualizace, odstranění).
 
 
 
-## <a name="additional-resources"></a>Ek kaynaklar
+## <a name="additional-resources"></a>Další materiály a zdroje informací
 
-* [Bu öğreticinin YouTube sürümü](https://www.youtube.com/watch?v=P7iTtQnkrNs)
+* [Verze YouTube tohoto kurzu](https://www.youtube.com/watch?v=P7iTtQnkrNs)
 
 > [!div class="step-by-step"]
-> [Sonraki](xref:data/ef-rp/crud)
+> [Další](xref:data/ef-rp/crud)
 
 ::: moniker-end

@@ -1,47 +1,35 @@
 ---
-title: SignalR HubContext
-author: bradygaster
-description: Bir hub dışında istemcilere bildirimleri gönderme için ASP.NET Core SignalR HubContext hizmetini kullanmayı öğrenin.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: bradyg
-ms.custom: mvc
-ms.date: 11/01/2018
-uid: signalr/hubcontext
-ms.openlocfilehash: 7ec52d4711fc191dcb83120cf54b1dc28c41f947
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64900695"
+Título: SignalR HubContext autor: bradygaster Descrição: saiba como usar o serviço ASP.NET Core SignalR HubContext para enviar notificações aos clientes de fora de um Hub.
+monikerRange: ' >= aspnetcore-2,1 ' MS. Author: bradyg MS. Custom: MVC MS. Date: 11/12/2019 no-loc: [mais alto, "Identity", "Vamos criptografar", Razor, Signalr] UID: signalr/hubcontext
 ---
-# <a name="send-messages-from-outside-a-hub"></a>Bir hub dışında ileti gönderme
+# <a name="send-messages-from-outside-a-hub"></a>Enviar mensagens de fora de um hub
 
-Tarafından [Mikael Mengistu](https://twitter.com/MikaelM_12)
+Por [Mikael Mengistu](https://twitter.com/MikaelM_12)
 
-SignalR hub'ı, SignalR sunucuya bağlı istemcilere ileti göndermek için çekirdek soyutlamadır. Diğer yerlerden uygulama kullanarak ileti göndermek mümkündür `IHubContext` hizmeti. Bu makalede, bir SignalR erişmeye açıklanmaktadır `IHubContext` hub dışında istemcilere bildirimleri göndermek için.
+O SignalR Hub é a abstração principal para o envio de mensagens aos clientes conectados ao SignalR servidor. Também é possível enviar mensagens de outros locais em seu aplicativo usando o `IHubContext` serviço. Este artigo explica como acessar um SignalR `IHubContext` para enviar notificações para clientes de fora de um Hub.
 
-[Görüntüleme veya indirme örnek kodu](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubcontext/sample/) [(karşıdan yükleme)](xref:index#how-to-download-a-sample)
+[Exibir ou baixar o código de exemplo](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubcontext/sample/) [(como baixar)](xref:index#how-to-download-a-sample)
 
-## <a name="get-an-instance-of-ihubcontext"></a>IHubContext örneğini al
+## <a name="get-an-instance-of-ihubcontext"></a>Obter uma instância de IHubContext
 
-ASP.NET Core SignalR öğesinde bir örneğini erişebileceğiniz `IHubContext` aracılığıyla bağımlılık ekleme. Örneği ekleyebilir `IHubContext` bir denetleyici, ara yazılım veya diğer DI hizmeti. İstemcilere göndermek için örneği kullanın.
+No ASP.NET Core SignalR , você pode acessar uma instância do `IHubContext` por meio de injeção de dependência. Você pode injetar uma instância do `IHubContext` em um controlador, middleware ou outro serviço de di. Use a instância do para enviar mensagens aos clientes.
 
 > [!NOTE]
-> Bu, ASP.NET tarafından farklıdır 4.x GlobalHost erişim sağlamak için kullanılan SignalR `IHubContext`. ASP.NET Core, bu genel tekil gereksinimini ortadan kaldırır, bir bağımlılık ekleme çerçeve vardır.
+> Isso difere do ASP.NET 4. x, SignalR que usava GlobalHost para fornecer acesso ao `IHubContext` . ASP.NET Core tem uma estrutura de injeção de dependência que elimina a necessidade desse singleton global.
 
-### <a name="inject-an-instance-of-ihubcontext-in-a-controller"></a>Bir denetleyici IHubContext örneğinde ekleme
+### <a name="inject-an-instance-of-ihubcontext-in-a-controller"></a>Injetar uma instância de IHubContext em um controlador
 
-Örneği ekleyebilir `IHubContext` , oluşturucuya ekleyerek bir denetleyici içinde:
+Você pode injetar uma instância do `IHubContext` em um controlador adicionando-a ao seu construtor:
 
 [!code-csharp[IHubContext](hubcontext/sample/Controllers/HomeController.cs?range=12-19,57)]
 
-Şimdi, örneğine erişimi olan `IHubContext`, hub içinde değilmiş gibi hub yöntemlerini çağırabilirsiniz.
+Agora, com acesso a uma instância do `IHubContext` , você pode chamar métodos de Hub como se estivesse no próprio Hub.
 
 [!code-csharp[IHubContext](hubcontext/sample/Controllers/HomeController.cs?range=21-25)]
 
-### <a name="get-an-instance-of-ihubcontext-in-middleware"></a>Ara yazılım IHubContext örneğinde Al
+### <a name="get-an-instance-of-ihubcontext-in-middleware"></a>Obter uma instância de IHubContext no middleware
 
-Erişim `IHubContext` ara yazılım ardışık düzenini içinde şu şekilde:
+Acesse o `IHubContext` no pipeline de middleware da seguinte forma:
 
 ```csharp
 app.Use(async (context, next) =>
@@ -49,15 +37,42 @@ app.Use(async (context, next) =>
     var hubContext = context.RequestServices
                             .GetRequiredService<IHubContext<MyHub>>();
     //...
+    
+    if (next != null)
+    {
+        await next.Invoke();
+    }
 });
 ```
 
 > [!NOTE]
-> Ne zaman hub yöntemleri çağrıldığında gelen dışında `Hub` çağırmayla ilgili hiçbir arayan olduğunda, sınıf. Bu nedenle, erişim yoktur `ConnectionId`, `Caller`, ve `Others` özellikleri.
+> Quando os métodos de Hub são chamados de fora da `Hub` classe, não há nenhum chamador associado à invocação. Portanto, não há acesso às `ConnectionId` `Caller` Propriedades, e `Others` .
 
-### <a name="inject-a-strongly-typed-hubcontext"></a>Kesin türü belirtilmiş bir HubContext ekleme
+### <a name="get-an-instance-of-ihubcontext-from-ihost"></a>Obter uma instância de IHubContext de IHost
 
-Hub'ınıza devraldığı kesin türü belirtilmiş bir HubContext eklemesine olun `Hub<T>`. Kullanarak ekleme `IHubContext<THub, T>` arabirimi yerine `IHubContext<THub>`.
+O acesso `IHubContext` a um do host da Web é útil para integração com áreas fora do ASP.NET Core, por exemplo, usando estruturas de injeção de dependência de terceiros:
+
+```csharp
+    public class Program
+    {
+        public static void Main(string[] args)
+        {
+            var host = CreateHostBuilder(args).Build();
+            var hubContext = host.Services.GetService(typeof(IHubContext<MyHub>));
+            host.Run();
+        }
+
+        public static IHostBuilder CreateHostBuilder(string[] args) =>
+            Host.CreateDefaultBuilder(args)
+                .ConfigureWebHostDefaults(webBuilder => {
+                    webBuilder.UseStartup<Startup>();
+                });
+    }
+```
+
+### <a name="inject-a-strongly-typed-hubcontext"></a>Injetar um HubContext fortemente tipado
+
+Para injetar um HubContext fortemente tipado, verifique se o seu hub é herdado de `Hub<T>` . Insira-o usando a `IHubContext<THub, T>` interface em vez de `IHubContext<THub>` .
 
 ```csharp
 public class ChatController : Controller
@@ -76,8 +91,8 @@ public class ChatController : Controller
 }
 ```
 
-## <a name="related-resources"></a>İlgili kaynaklar
+## <a name="related-resources"></a>Recursos relacionados
 
-* [Kullanmaya başlama](xref:tutorials/signalr)
-* [Merkezler](xref:signalr/hubs)
-* [Azure'a Yayımlama](xref:signalr/publish-to-azure-web-app)
+* [Introdução](xref:tutorials/signalr)
+* [Hubs](xref:signalr/hubs)
+* [Publicar no Azure](xref:signalr/publish-to-azure-web-app)
