@@ -367,6 +367,8 @@
           uid: blazor/debug
         - name: WebAssembly'den bir web API’sini çağırma
           uid: blazor/call-web-api
+        - name: WebAssembly performansı
+          uid: performance/blazor/webassembly-best-practices
         - name: Aşamalı Web Uygulamaları
           uid: blazor/progressive-web-app
         - name: Barındırma ve dağıtma
@@ -557,7 +559,7 @@
     - name: İstemciler
       displayName: signalr
       items:
-        - name: SignalR istemci özellikleri
+        - name: Genel Bakış
           uid: signalr/client-features
           displayName: signalr
         - name: .NET istemcisi
@@ -1180,6 +1182,8 @@
       uid: performance/diagnostic-tools
     - name: Yükleme ve stres testleri
       uid: test/loadtests
+    - name: Blazor WebAssembly
+      uid: performance/blazor/webassembly-best-practices
 - name: Genelleştirme ve yerelleştirme
   items:
     - name: Genel Bakış
