@@ -1,83 +1,71 @@
 ---
-title: SignalR API tasarım konuları
-author: anurse
-description: SignalR API'leri, uygulamanıza sürümleri arasında uyumluluk için tasarlamayı öğrenin.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: anurse
-ms.custom: mvc
-ms.date: 11/06/2018
-uid: signalr/api-design
-ms.openlocfilehash: 3f17bf055b793e8fc91fbcc15f668928ca261f77
-ms.sourcegitcommit: 5b0eca8c21550f95de3bb21096bd4fd4d9098026
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 04/27/2019
-ms.locfileid: "64903182"
+<span data-ttu-id="49741-101">제목: SignalR api 디자인 고려 사항 작성자: anurse 설명: 앱 버전 간 SignalR 호환성을 위해 api를 설계 하는 방법을 알아봅니다.</span><span class="sxs-lookup"><span data-stu-id="49741-101">title: SignalR API design considerations author: anurse description: Learn how to design SignalR APIs for compatibility across versions of your app.</span></span>
+<span data-ttu-id="49741-102">monikerRange: ' >= aspnetcore-2.1 ' ms. author: anurse. 사용자 지정: mvc ms. date: 11/12/2019 no loc: [Blazor, "Identity", "Let 's Encrypt", Razor, SignalR] uid: SignalR/api-디자인</span><span class="sxs-lookup"><span data-stu-id="49741-102">monikerRange: '>= aspnetcore-2.1' ms.author: anurse ms.custom: mvc ms.date: 11/12/2019 no-loc: [Blazor, "Identity", "Let's Encrypt", Razor, SignalR] uid: signalr/api-design</span></span>
 ---
-# <a name="signalr-api-design-considerations"></a><span data-ttu-id="8ebca-103">SignalR API tasarım konuları</span><span class="sxs-lookup"><span data-stu-id="8ebca-103">SignalR API design considerations</span></span>
+# <a name="signalr-api-design-considerations"></a>SignalR<span data-ttu-id="49741-103">API 디자인 고려 사항</span><span class="sxs-lookup"><span data-stu-id="49741-103"> API design considerations</span></span>
 
-<span data-ttu-id="8ebca-104">Tarafından [Andrew Stanton-Nurse](https://twitter.com/anurse)</span><span class="sxs-lookup"><span data-stu-id="8ebca-104">By [Andrew Stanton-Nurse](https://twitter.com/anurse)</span></span>
+<span data-ttu-id="49741-104">[Andrew Stanton-간호사](https://twitter.com/anurse)</span><span class="sxs-lookup"><span data-stu-id="49741-104">By [Andrew Stanton-Nurse](https://twitter.com/anurse)</span></span>
 
-<span data-ttu-id="8ebca-105">Bu makalede, SignalR tabanlı API'leri oluşturmaya yönelik rehberlik sağlar.</span><span class="sxs-lookup"><span data-stu-id="8ebca-105">This article provides guidance for building SignalR-based APIs.</span></span>
+<span data-ttu-id="49741-105">이 문서에서는 기반 Api를 SignalR빌드하기 위한 지침을 제공 합니다.</span><span class="sxs-lookup"><span data-stu-id="49741-105">This article provides guidance for building SignalR-based APIs.</span></span>
 
-## <a name="use-custom-object-parameters-to-ensure-backwards-compatibility"></a><span data-ttu-id="8ebca-106">Geriye dönük uyumluluk sağlamak için özel nesne parametreleri kullanma</span><span class="sxs-lookup"><span data-stu-id="8ebca-106">Use custom object parameters to ensure backwards-compatibility</span></span>
+## <a name="use-custom-object-parameters-to-ensure-backwards-compatibility"></a><span data-ttu-id="49741-106">사용자 지정 개체 매개 변수를 사용 하 여 이전 버전과의 호환성 보장</span><span class="sxs-lookup"><span data-stu-id="49741-106">Use custom object parameters to ensure backwards-compatibility</span></span>
 
-<span data-ttu-id="8ebca-107">Bir SignalR hub'yöntemini (istemci veya sunucu) parametreleri ekleyerek olan bir *değişiklik*.</span><span class="sxs-lookup"><span data-stu-id="8ebca-107">Adding parameters to a SignalR hub method (on either the client or the server) is a *breaking change*.</span></span> <span data-ttu-id="8ebca-108">Başka bir deyişle, eski istemciler/sunucuları parametreleri uygun sayıda olmayan bir yöntem çağırmak çalıştığınızda bir hata almazsınız.</span><span class="sxs-lookup"><span data-stu-id="8ebca-108">This means older clients/servers will get errors when they try to invoke the method without the appropriate number of parameters.</span></span> <span data-ttu-id="8ebca-109">Ancak, bir özel nesne parametresi için Özellikler ekleme olan **değil** bir değişiklik.</span><span class="sxs-lookup"><span data-stu-id="8ebca-109">However, adding properties to a custom object parameter is **not** a breaking change.</span></span> <span data-ttu-id="8ebca-110">Bu, istemci veya Sunucu'da değişikliklere dayanıklı uyumlu API'leri tasarlamak için kullanılabilir.</span><span class="sxs-lookup"><span data-stu-id="8ebca-110">This can be used to design compatible APIs that are resilient to changes on the client or the server.</span></span>
+<span data-ttu-id="49741-107">클라이언트 또는 서버에서 SignalR 허브 메서드에 매개 변수를 추가 하는 것은 *주요 변경 사항*입니다.</span><span class="sxs-lookup"><span data-stu-id="49741-107">Adding parameters to a SignalR hub method (on either the client or the server) is a *breaking change*.</span></span> <span data-ttu-id="49741-108">즉, 이전 클라이언트/서버에서 적절 한 수의 매개 변수를 사용 하지 않고 메서드를 호출 하려고 하면 오류가 발생 합니다.</span><span class="sxs-lookup"><span data-stu-id="49741-108">This means older clients/servers will get errors when they try to invoke the method without the appropriate number of parameters.</span></span> <span data-ttu-id="49741-109">그러나 사용자 지정 개체 매개 변수에 속성을 추가 하는 것은 주요 변경 사항이 **아닙니다** .</span><span class="sxs-lookup"><span data-stu-id="49741-109">However, adding properties to a custom object parameter is **not** a breaking change.</span></span> <span data-ttu-id="49741-110">이를 사용 하 여 클라이언트 또는 서버의 변경 내용에 대해 복원 력이 있는 호환 Api를 디자인할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="49741-110">This can be used to design compatible APIs that are resilient to changes on the client or the server.</span></span>
 
-<span data-ttu-id="8ebca-111">Örneğin, aşağıdaki gibi bir sunucu tarafı API göz önünde bulundurun:</span><span class="sxs-lookup"><span data-stu-id="8ebca-111">For example, consider a server-side API like the following:</span></span>
+<span data-ttu-id="49741-111">예를 들어 다음과 같은 서버 쪽 API를 살펴보겠습니다.</span><span class="sxs-lookup"><span data-stu-id="49741-111">For example, consider a server-side API like the following:</span></span>
 
 [!code-csharp[ParameterBasedOldVersion](api-design/sample/Samples.cs?name=ParameterBasedOldVersion)]
 
-<span data-ttu-id="8ebca-112">JavaScript istemcisi kullanarak bu yöntemi çağıran `invoke` gibi:</span><span class="sxs-lookup"><span data-stu-id="8ebca-112">The JavaScript client calls this method using `invoke` as follows:</span></span>
+<span data-ttu-id="49741-112">JavaScript 클라이언트는 다음과 같이를 사용 `invoke` 하 여이 메서드를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="49741-112">The JavaScript client calls this method using `invoke` as follows:</span></span>
 
 [!code-typescript[CallWithOneParameter](api-design/sample/Samples.ts?name=CallWithOneParameter)]
 
-<span data-ttu-id="8ebca-113">Eski istemciler, sunucu yöntemi daha sonra ikinci bir parametre ekleyin, bu parametre değeri sağlamaz.</span><span class="sxs-lookup"><span data-stu-id="8ebca-113">If you later add a second parameter to the server method, older clients won't provide this parameter value.</span></span> <span data-ttu-id="8ebca-114">Örneğin:</span><span class="sxs-lookup"><span data-stu-id="8ebca-114">For example:</span></span>
+<span data-ttu-id="49741-113">나중에 서버 메서드에 두 번째 매개 변수를 추가 하는 경우 이전 클라이언트는이 매개 변수 값을 제공 하지 않습니다.</span><span class="sxs-lookup"><span data-stu-id="49741-113">If you later add a second parameter to the server method, older clients won't provide this parameter value.</span></span> <span data-ttu-id="49741-114">예를 들어:</span><span class="sxs-lookup"><span data-stu-id="49741-114">For example:</span></span>
 
 [!code-csharp[ParameterBasedNewVersion](api-design/sample/Samples.cs?name=ParameterBasedNewVersion)]
 
-<span data-ttu-id="8ebca-115">Eski istemci, bu yöntem çağırmak çalıştığında, şunun gibi bir hata alırsınız:</span><span class="sxs-lookup"><span data-stu-id="8ebca-115">When the old client tries to invoke this method, it will get an error like this:</span></span>
+<span data-ttu-id="49741-115">이전 클라이언트에서이 메서드를 호출 하려고 하면 다음과 같은 오류가 발생 합니다.</span><span class="sxs-lookup"><span data-stu-id="49741-115">When the old client tries to invoke this method, it will get an error like this:</span></span>
 
 ```
 Microsoft.AspNetCore.SignalR.HubException: Failed to invoke 'GetTotalLength' due to an error on the server.
 ```
 
-<span data-ttu-id="8ebca-116">Sunucuda böyle bir günlük iletisi görürsünüz:</span><span class="sxs-lookup"><span data-stu-id="8ebca-116">On the server, you'll see a log message like this:</span></span>
+<span data-ttu-id="49741-116">서버에 다음과 같은 로그 메시지가 표시 됩니다.</span><span class="sxs-lookup"><span data-stu-id="49741-116">On the server, you'll see a log message like this:</span></span>
 
 ```
 System.IO.InvalidDataException: Invocation provides 1 argument(s) but target expects 2.
 ```
 
-<span data-ttu-id="8ebca-117">Eski istemci yalnızca bir parametreye gönderilen, ancak yeni sunucu API iki parametre gerekli.</span><span class="sxs-lookup"><span data-stu-id="8ebca-117">The old client only sent one parameter, but the newer server API required two parameters.</span></span> <span data-ttu-id="8ebca-118">Parametre olarak özel nesneler kullanarak daha fazla esneklik sağlar.</span><span class="sxs-lookup"><span data-stu-id="8ebca-118">Using custom objects as parameters gives you more flexibility.</span></span> <span data-ttu-id="8ebca-119">Şimdi yeniden tasarlamanız özgün API'yi özel bir nesne kullanın:</span><span class="sxs-lookup"><span data-stu-id="8ebca-119">Let's redesign the original API to use a custom object:</span></span>
+<span data-ttu-id="49741-117">이전 클라이언트는 매개 변수를 하나만 보냈지만 최신 서버 API에는 두 개의 매개 변수가 필요 합니다.</span><span class="sxs-lookup"><span data-stu-id="49741-117">The old client only sent one parameter, but the newer server API required two parameters.</span></span> <span data-ttu-id="49741-118">사용자 지정 개체를 매개 변수로 사용 하면 더 많은 유연성이 제공 됩니다.</span><span class="sxs-lookup"><span data-stu-id="49741-118">Using custom objects as parameters gives you more flexibility.</span></span> <span data-ttu-id="49741-119">사용자 지정 개체를 사용 하도록 원래 API를 다시 디자인 해 보겠습니다.</span><span class="sxs-lookup"><span data-stu-id="49741-119">Let's redesign the original API to use a custom object:</span></span>
 
 [!code-csharp[ObjectBasedOldVersion](api-design/sample/Samples.cs?name=ObjectBasedOldVersion)]
 
-<span data-ttu-id="8ebca-120">Şimdi, istemci yöntemini çağırmak için bir nesne kullanır:</span><span class="sxs-lookup"><span data-stu-id="8ebca-120">Now, the client uses an object to call the method:</span></span>
+<span data-ttu-id="49741-120">이제 클라이언트는 개체를 사용 하 여 메서드를 호출 합니다.</span><span class="sxs-lookup"><span data-stu-id="49741-120">Now, the client uses an object to call the method:</span></span>
 
 [!code-typescript[CallWithObject](api-design/sample/Samples.ts?name=CallWithObject)]
 
-<span data-ttu-id="8ebca-121">Bir parametre eklemek yerine, özellik eklemek `TotalLengthRequest` nesnesi:</span><span class="sxs-lookup"><span data-stu-id="8ebca-121">Instead of adding a parameter, add a property to the `TotalLengthRequest` object:</span></span>
+<span data-ttu-id="49741-121">매개 변수를 추가 하는 대신 `TotalLengthRequest` 개체에 속성을 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="49741-121">Instead of adding a parameter, add a property to the `TotalLengthRequest` object:</span></span>
 
 [!code-csharp[ObjectBasedNewVersion](api-design/sample/Samples.cs?name=ObjectBasedNewVersion&highlight=4,9-13)]
 
-<span data-ttu-id="8ebca-122">Eski istemci, tek bir parametre, ek gönderdiğinde `Param2` özellik sol `null`.</span><span class="sxs-lookup"><span data-stu-id="8ebca-122">When the old client sends a single parameter, the extra `Param2` property will be left `null`.</span></span> <span data-ttu-id="8ebca-123">Kontrol ederek daha eski bir istemci tarafından gönderilen bir iletinin algılayabilir `Param2` için `null` ve varsayılan değer geçerlidir.</span><span class="sxs-lookup"><span data-stu-id="8ebca-123">You can detect a message sent by an older client by checking the `Param2` for `null` and apply a default value.</span></span> <span data-ttu-id="8ebca-124">Yeni bir istemci, her iki parametre gönderebilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="8ebca-124">A new client can send both parameters.</span></span>
+<span data-ttu-id="49741-122">이전 클라이언트에서 단일 매개 변수를 보낼 때 추가 `Param2` 속성은 그대로 유지 `null`됩니다.</span><span class="sxs-lookup"><span data-stu-id="49741-122">When the old client sends a single parameter, the extra `Param2` property will be left `null`.</span></span> <span data-ttu-id="49741-123">를 확인 `Param2` 하 `null` 고 기본값을 적용 하 여 이전 클라이언트에서 보낸 메시지를 검색할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="49741-123">You can detect a message sent by an older client by checking the `Param2` for `null` and apply a default value.</span></span> <span data-ttu-id="49741-124">새 클라이언트는 두 매개 변수를 모두 보낼 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="49741-124">A new client can send both parameters.</span></span>
 
 [!code-typescript[CallWithObjectNew](api-design/sample/Samples.ts?name=CallWithObjectNew)]
 
-<span data-ttu-id="8ebca-125">İstemci üzerinde tanımlanan yöntemleri için aynı tekniği çalışır.</span><span class="sxs-lookup"><span data-stu-id="8ebca-125">The same technique works for methods defined on the client.</span></span> <span data-ttu-id="8ebca-126">Sunucu tarafındaki özel bir nesne gönderebilirsiniz:</span><span class="sxs-lookup"><span data-stu-id="8ebca-126">You can send a custom object from the server side:</span></span>
+<span data-ttu-id="49741-125">클라이언트에 정의 된 메서드에 대해 동일한 기술이 작동 합니다.</span><span class="sxs-lookup"><span data-stu-id="49741-125">The same technique works for methods defined on the client.</span></span> <span data-ttu-id="49741-126">서버 쪽에서 사용자 지정 개체를 보낼 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="49741-126">You can send a custom object from the server side:</span></span>
 
 [!code-csharp[ClientSideObjectBasedOld](api-design/sample/Samples.cs?name=ClientSideObjectBasedOld)]
 
-<span data-ttu-id="8ebca-127">İstemci tarafında size erişim `Message` bir parametre kullanmak yerine özelliği:</span><span class="sxs-lookup"><span data-stu-id="8ebca-127">On the client side, you access the `Message` property rather than using a parameter:</span></span>
+<span data-ttu-id="49741-127">클라이언트 쪽에서 매개 변수를 사용 하 `Message` 는 대신 속성에 액세스 합니다.</span><span class="sxs-lookup"><span data-stu-id="49741-127">On the client side, you access the `Message` property rather than using a parameter:</span></span>
 
 [!code-typescript[OnWithObjectOld](api-design/sample/Samples.ts?name=OnWithObjectOld)]
 
-<span data-ttu-id="8ebca-128">İletiyi gönderen yüküne eklemek üzere daha sonra karar verirseniz, nesnenin bir özellik ekleyin:</span><span class="sxs-lookup"><span data-stu-id="8ebca-128">If you later decide to add the sender of the message to the payload, add a property to the object:</span></span>
+<span data-ttu-id="49741-128">나중에 메시지 보낸 사람을 페이로드에 추가 하기로 결정 한 경우에는 개체에 속성을 추가 합니다.</span><span class="sxs-lookup"><span data-stu-id="49741-128">If you later decide to add the sender of the message to the payload, add a property to the object:</span></span>
 
 [!code-csharp[ClientSideObjectBasedNew](api-design/sample/Samples.cs?name=ClientSideObjectBasedNew&highlight=5)]
 
-<span data-ttu-id="8ebca-129">Eski istemciler bekleniyor olmaz `Sender` bunu yoksaymak şekilde değeri.</span><span class="sxs-lookup"><span data-stu-id="8ebca-129">The older clients won't be expecting the `Sender` value, so they'll ignore it.</span></span> <span data-ttu-id="8ebca-130">Yeni bir istemci yeni özelliği okunamıyor güncelleştirerek kabul edebilirsiniz:</span><span class="sxs-lookup"><span data-stu-id="8ebca-130">A new client can accept it by updating to read the new property:</span></span>
+<span data-ttu-id="49741-129">이전 클라이언트에는 `Sender` 값이 필요 하지 않으므로 무시 됩니다.</span><span class="sxs-lookup"><span data-stu-id="49741-129">The older clients won't be expecting the `Sender` value, so they'll ignore it.</span></span> <span data-ttu-id="49741-130">새 클라이언트는 새 속성을 읽도록 업데이트 하 여이를 수락할 수 있습니다.</span><span class="sxs-lookup"><span data-stu-id="49741-130">A new client can accept it by updating to read the new property:</span></span>
 
 [!code-typescript[OnWithObjectNew](api-design/sample/Samples.ts?name=OnWithObjectNew&highlight=2-5)]
 
-<span data-ttu-id="8ebca-131">Bu durumda, yeni istemci de sağlamaz eski bir sunucunun dayanıklıdır `Sender` değeri.</span><span class="sxs-lookup"><span data-stu-id="8ebca-131">In this case, the new client is also tolerant of an old server that doesn't provide the `Sender` value.</span></span> <span data-ttu-id="8ebca-132">Eski sunucu sağlamayacak beri `Sender` değeri, istemci erişmeden önce olup olmadığını görmek için denetler.</span><span class="sxs-lookup"><span data-stu-id="8ebca-132">Since the old server won't provide the `Sender` value, the client checks to see if it exists before accessing it.</span></span>
+<span data-ttu-id="49741-131">이 경우 새 클라이언트도 `Sender` 값을 제공 하지 않는 이전 서버를 허용 합니다.</span><span class="sxs-lookup"><span data-stu-id="49741-131">In this case, the new client is also tolerant of an old server that doesn't provide the `Sender` value.</span></span> <span data-ttu-id="49741-132">이전 서버는 `Sender` 값을 제공 하지 않으므로 클라이언트는 액세스 하기 전에 존재 하는지 확인 합니다.</span><span class="sxs-lookup"><span data-stu-id="49741-132">Since the old server won't provide the `Sender` value, the client checks to see if it exists before accessing it.</span></span>
