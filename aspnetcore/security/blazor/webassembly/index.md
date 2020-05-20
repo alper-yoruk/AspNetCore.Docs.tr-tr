@@ -1,45 +1,29 @@
 ---
-title: Weelsembly ASP.NET Core Blazor güvenli
-author: guardrex
-description: Webassemlby uygulamalarını tek sayfalı uygulamalar (maça 'Lar) olarak güvenli hale getirme Blazor hakkında bilgi edinin.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 04/24/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/blazor/webassembly/index
-ms.openlocfilehash: e8ea5e6b6d7e28906e6109e6730ac25f190b4191
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768006"
+Başlık: ' Secure ASP.NET Core Blazor webassembly ' Yazar: Açıklama: ', Blazor webassemlby uygulamalarını tek sayfalı uygulamalar (maça) olarak güvenli hale getirme hakkında bilgi edinin.
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
-# <a name="secure-aspnet-core-blazor-webassembly"></a>Weelsembly ASP.NET Core Blazor güvenli
+# <a name="secure-aspnet-core-blazor-webassembly"></a>BlazorWeelsembly ASP.NET Core güvenli
 
 Sağlayan [Javier Calvarro Nelson](https://github.com/javiercn)
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
-[!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
 BlazorWebAssembly uygulamaları, tek sayfalı uygulamalarla (maça) aynı şekilde güvenli hale getirilir. Kullanıcıların maça üzerinde kimlik doğrulaması için birkaç yaklaşım vardır, ancak en yaygın ve kapsamlı yaklaşım, [Open ID Connect (OıDC)](https://openid.net/connect/)gibi [OAuth 2,0 protokolüne](https://oauth.net/)dayalı bir uygulama kullanmaktır.
 
 ## <a name="authentication-library"></a>Kimlik doğrulama kitaplığı
 
-BlazorWebAssembly, `Microsoft.AspNetCore.Components.WebAssembly.Authentication` kitaplık aracılığıyla OIDC kullanarak uygulamaları kimlik doğrulama ve yetkilendirme işlemini destekler. Kitaplığı ASP.NET Core arka uçlara karşı sorunsuz kimlik doğrulama için bir dizi temel sağlar. Kitaplığı, [ Identity sunucu](https://identityserver.io/)üzerinde Identity oluşturulan API yetkilendirme desteğiyle ASP.NET Core tümleştirir. Kitaplık, OpenID sağlayıcıları (OP) olarak Identity adlandırılan OIDC 'yi destekleyen herhangi bir üçüncü taraf SAĞLAYıCıYA (IP) kimlik doğrulaması yapabilir.
+BlazorWebAssembly, kitaplık aracılığıyla OıDC kullanarak uygulamaları kimlik doğrulama ve yetkilendirme işlemini destekler `Microsoft.AspNetCore.Components.WebAssembly.Authentication` . Kitaplığı ASP.NET Core arka uçlara karşı sorunsuz kimlik doğrulama için bir dizi temel sağlar. Kitaplığı, Identity [ Identity sunucu](https://identityserver.io/)üzerinde oluşturulan API yetkilendirme desteğiyle ASP.NET Core tümleştirir. Kitaplık, Identity OpenID sağlayıcıları (OP) olarak adlandırılan OIDC 'yi destekleyen herhangi bir üçüncü taraf sağlayıcıya (IP) kimlik doğrulaması yapabilir.
 
-Webassembly içindeki Blazor kimlik doğrulama desteği, temeldeki kimlik doğrulama protokolü ayrıntılarını işlemek için kullanılan *oidc-Client. js* kitaplığının üzerine kurulmuştur.
+Webassembly içindeki kimlik doğrulama desteği, Blazor temeldeki kimlik doğrulama protokolü ayrıntılarını işlemek için kullanılan *oidc-Client. js* kitaplığının üzerine kurulmuştur.
 
-Benzer site tanımlama bilgilerinin kullanımı gibi, maça 'Ları doğrulamak için diğer seçenekler. Ancak, webassembly 'nin Blazor mühendislik tasarımı, Blazor webassembly uygulamalarında kimlik doğrulaması için en iyi seçenek olarak OAuth ve OIDC üzerinde kapatılmıştır. JSON Web belirteçlerini temel alan [belirteç tabanlı kimlik doğrulaması](xref:security/anti-request-forgery#token-based-authentication) [(jwts)](https://self-issued.info/docs/draft-ietf-oauth-json-web-token.html) , işlevsel ve güvenlik nedenleriyle [tanımlama bilgisi tabanlı kimlik doğrulaması](xref:security/anti-request-forgery#cookie-based-authentication) üzerinden seçilmiştir:
+Benzer site tanımlama bilgilerinin kullanımı gibi, maça 'Ları doğrulamak için diğer seçenekler. Ancak, webassembly 'nin mühendislik tasarımı, Blazor webassembly uygulamalarında kimlik doğrulaması için en iyi seçenek olarak OAuth ve OıDC üzerinde kapatılmıştır Blazor . JSON Web belirteçlerini temel alan [belirteç tabanlı kimlik doğrulaması](xref:security/anti-request-forgery#token-based-authentication) [(jwts)](https://self-issued.info/docs/draft-ietf-oauth-json-web-token.html) , işlevsel ve güvenlik nedenleriyle [tanımlama bilgisi tabanlı kimlik doğrulaması](xref:security/anti-request-forgery#cookie-based-authentication) üzerinden seçilmiştir:
 
 * Belirteç tabanlı bir protokol kullanmak, belirteçler tüm isteklerde gönderilmediğinden daha küçük bir saldırı yüzeyi alanı sunar.
-* Belirteçleri açıkça gönderildiğinden, sunucu uç noktaları [siteler arası Istek sahteciliği (CSRF)](xref:security/anti-request-forgery) için koruma gerektirmez. Bu, MVC veya Blazor Razor Pages uygulamalarıyla birlikte webassembly uygulamalarını barındırmanıza olanak tanır.
+* Belirteçleri açıkça gönderildiğinden, sunucu uç noktaları [siteler arası Istek sahteciliği (CSRF)](xref:security/anti-request-forgery) için koruma gerektirmez. Bu, Blazor MVC veya Pages uygulamalarıyla birlikte webassembly uygulamalarını barındırmanıza olanak tanır Razor .
 * Belirteçlerin tanımlama bilgilerinden daha dar izinleri vardır. Örneğin, belirteçler Kullanıcı hesabını yönetmek ya da bu işlevsellik açık bir şekilde uygulanmadığı takdirde kullanıcının parolasını değiştirmek için kullanılamaz.
 * Belirteçler, varsayılan olarak bir saat, saldırı penceresini sınırlayan kısa bir yaşam süresine sahiptir. Belirteçler de herhangi bir zamanda iptal edilebilir.
 * İstemci ve sunucu için kimlik doğrulama işlemiyle ilgili olarak kendi içinde bulunan JWTs teklifi garantisi. Örneğin, bir istemci, aldığı belirteçlerin meşru olduğunu ve belirli bir kimlik doğrulama işleminin bir parçası olarak yayıldığını tespit etmek ve doğrulamak anlamına gelir. Üçüncü bir taraf, kimlik doğrulama işleminin ortasında bir belirteci geçirmeyi denerse, istemci anahtarlamalı belirteci algılayabilir ve kullanmaktan kaçınabilir.
@@ -48,17 +32,31 @@ Benzer site tanımlama bilgilerinin kullanımı gibi, maça 'Ları doğrulamak i
 
 ## <a name="authentication-process-with-oidc"></a>OıDC ile kimlik doğrulama işlemi
 
-Kitaplık `Microsoft.AspNetCore.Components.WebAssembly.Authentication` , OIDC kullanarak kimlik doğrulaması ve yetkilendirme uygulamak için çeşitli temel olanaklar sunar. Büyük şartlar altında, kimlik doğrulaması aşağıdaki gibi çalışmaktadır:
+`Microsoft.AspNetCore.Components.WebAssembly.Authentication`Kitaplık, OıDC kullanarak kimlik doğrulaması ve yetkilendirme uygulamak için çeşitli temel olanaklar sunar. Büyük şartlar altında, kimlik doğrulaması aşağıdaki gibi çalışmaktadır:
 
-* Anonim Kullanıcı oturum açma düğmesini seçtiğinde veya [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) özniteliği uygulanmış bir sayfa istediğinde, kullanıcı uygulamanın oturum açma sayfasına (`/authentication/login`) yönlendirilir.
+* Anonim Kullanıcı oturum açma düğmesini seçtiğinde veya özniteliği uygulanmış bir sayfa istediğinde [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) , kullanıcı uygulamanın oturum açma sayfasına ( `/authentication/login` ) yönlendirilir.
 * Oturum açma sayfasında, kimlik doğrulama kitaplığı yetkilendirme uç noktasına yeniden yönlendirme hazırlar. Yetkilendirme uç noktası Blazor webassembly uygulamasının dışındadır ve ayrı bir kaynak üzerinde barındırılabilir. Uç nokta, kullanıcının kimliğinin yapılıp yapılmayacağını ve yanıt olarak bir veya daha fazla belirteç vermeyi belirlemekten sorumludur. Kimlik doğrulama kitaplığı, kimlik doğrulama yanıtını almak için bir oturum açma geri araması sağlar.
-  * Kullanıcının kimliği doğrulanmadıysa, Kullanıcı temel alınan kimlik doğrulama sistemine yönlendirilir ve genellikle ASP.NET Core Identity.
-  * Kullanıcının kimliği zaten doğrulandıktan sonra, yetkilendirme uç noktası uygun belirteçleri oluşturur ve tarayıcıyı, oturum açma geri çağırma uç noktasına (`/authentication/login-callback`) yeniden yönlendirir.
-* Blazor Webassembly uygulaması, oturum açma geri çağırma uç noktasını (`/authentication/login-callback`) yüklediğinde, kimlik doğrulama yanıtı işlenir.
+  * Kullanıcının kimliği doğrulanmadıysa, Kullanıcı temel alınan kimlik doğrulama sistemine yönlendirilir ve genellikle ASP.NET Core Identity .
+  * Kullanıcının kimliği zaten doğrulandıktan sonra, yetkilendirme uç noktası uygun belirteçleri oluşturur ve tarayıcıyı, oturum açma geri çağırma uç noktasına () yeniden yönlendirir `/authentication/login-callback` .
+* BlazorWebassembly uygulaması, oturum açma geri çağırma uç noktasını ( `/authentication/login-callback` ) yüklediğinde, kimlik doğrulama yanıtı işlenir.
   * Kimlik doğrulama işlemi başarıyla tamamlanırsa, kullanıcının kimliği doğrulanır ve isteğe bağlı olarak kullanıcının istediği özgün URL 'ye geri gönderilir.
-  * Kimlik doğrulama işlemi herhangi bir nedenle başarısız olursa, Kullanıcı oturum açma başarısız sayfasına (`/authentication/login-failed`) gönderilir ve bir hata görüntülenir.
+  * Kimlik doğrulama işlemi herhangi bir nedenle başarısız olursa, Kullanıcı oturum açma başarısız sayfasına ( `/authentication/login-failed` ) gönderilir ve bir hata görüntülenir.
+  
+## <a name="implementation-guidance"></a>Uygulama Kılavuzu
 
-## <a name="additional-resources"></a>Ek kaynaklar
+Bu *genel bakışın* altındaki makalelere, Blazor belirli sağlayıcılara karşı webassembly uygulamalarında kullanıcıların kimliğini doğrulama hakkında bilgi sağlanır.
 
-* Bu *genel bakışın* altındaki makalelere, Blazor belirli sağlayıcılara karşı webassembly uygulamalarında kullanıcıların kimliğini doğrulama hakkında bilgi sağlanır.
-* <xref:security/blazor/webassembly/additional-scenarios>
+Tek başına Blazor weelsembly uygulamaları:
+
+* [OıDC sağlayıcıları ve WebAssembly kimlik doğrulama kitaplığı için genel kılavuz](xref:security/blazor/webassembly/standalone-with-authentication-library)
+* [Microsoft Hesapları](xref:security/blazor/webassembly/standalone-with-microsoft-accounts)
+* [Azure Active Directory (AAD)](xref:security/blazor/webassembly/standalone-with-azure-active-directory)
+* [Azure Active Directory (AAD) B2C](xref:security/blazor/webassembly/standalone-with-azure-active-directory-b2c)
+
+Barındırılan Blazor webassembly uygulamaları:
+
+* [Azure Active Directory (AAD)](xref:security/blazor/webassembly/hosted-with-azure-active-directory)
+* [Azure Active Directory (AAD) B2C](xref:security/blazor/webassembly/hosted-with-azure-active-directory-b2c)
+* [IdentityServer](xref:security/blazor/webassembly/hosted-with-identity-server)
+
+Yapılandırma hakkında daha fazla bilgi için bkz <xref:security/blazor/webassembly/additional-scenarios> ..

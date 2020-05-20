@@ -1,45 +1,31 @@
 ---
-title: ASP.NET Core için bağlayıcı yapılandırmaBlazor
-author: guardrex
-description: Blazor Uygulama oluştururken ara DIL (IL) bağlayıcı denetimini nasıl denetleyeceğinizi öğrenin.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/04/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: host-and-deploy/blazor/configure-linker
-ms.openlocfilehash: b274752b375f68cca0c0a9adf9c146bc525d9eba
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775186"
+Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
-# <a name="configure-the-linker-for-aspnet-core-blazor"></a>ASP.NET Core Blazor için bağlayıcı yapılandırma
+# <a name="configure-the-linker-for-aspnet-core-blazor"></a>ASP.NET Core için bağlayıcı yapılandırmaBlazor
 
 [Luke Latham](https://github.com/guardrex) tarafından
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
-Blazor WebAssembly, uygulamanın çıkış derlemelerinden gereksiz Il 'yi kırpmak için bir derleme sırasında [ara dil (IL)](/dotnet/standard/managed-code#intermediate-language--execution) bağlamayı gerçekleştirir. Hata ayıklama yapılandırmasında oluşturulurken bağlayıcı devre dışı bırakıldı. Bağlayıcı etkinleştirmek için uygulamaların yayın yapılandırmasında derlenmesi gerekir. Blazor WebAssembly uygulamalarınızı dağıttığınızda yayında derleme yapmanız önerilir. 
+BlazorWebAssembly, uygulamanın çıkış derlemelerinden gereksiz Il 'yi kırpmak için bir derleme sırasında [ara dil (IL)](/dotnet/standard/managed-code#intermediate-language--execution) bağlamayı gerçekleştirir. Hata ayıklama yapılandırmasında oluşturulurken bağlayıcı devre dışı bırakıldı. Bağlayıcı etkinleştirmek için uygulamaların yayın yapılandırmasında derlenmesi gerekir. Webassembly uygulamalarınızı dağıttığınızda yayında derleme yapmanızı öneririz Blazor . 
 
 Uygulama bağlama boyutu için en iyi duruma getirir, ancak bu etkilere sebep olabilir. Bağlayıcı bu dinamik davranışı öğrenmediği ve çalışma zamanında yansıma için hangi türlerin gerekli olduğunu belirleyemediği için yansıma veya ilgili dinamik özellikleri kullanan uygulamalar kırpılmayabilir. Bu tür uygulamaları kırpmak için bağlayıcı, koddaki yansıma tarafından gerek duyulan herhangi bir tür ve uygulamanın bağımlı olduğu paketler veya çerçeveler hakkında bilgilendirmelidir. 
 
 Kırpılan uygulamanın dağıtıldıktan sonra düzgün çalıştığından emin olmak için, geliştirme sırasında uygulamanın yayın derlemelerini test etmek önemlidir.
 
-Blazor uygulamaları için bağlama, bu MSBuild özellikleri kullanılarak yapılandırılabilir:
+Uygulamalar için bağlama Blazor , bu MSBuild özellikleri kullanılarak yapılandırılabilir:
 
 * Bir [MSBuild özelliği](#control-linking-with-an-msbuild-property)ile genel olarak bağlamayı yapılandırın.
 * [Yapılandırma dosyası](#control-linking-with-a-configuration-file)ile derleme temelinde bağlama denetimi.
 
 ## <a name="control-linking-with-an-msbuild-property"></a>MSBuild özelliği ile bağlamayı denetleme
 
-Bir uygulama `Release` yapılandırmada derlenmediğinde bağlama etkinleştirilir. Bunu değiştirmek için, proje dosyasında `BlazorWebAssemblyEnableLinking` MSBuild özelliğini yapılandırın:
+Bir uygulama yapılandırmada derlenmediğinde bağlama etkinleştirilir `Release` . Bunu değiştirmek için, `BlazorWebAssemblyEnableLinking` Proje dosyasında MSBuild özelliğini yapılandırın:
 
 ```xml
 <PropertyGroup>
@@ -107,9 +93,9 @@ Aşağıdaki örnekte, *Linkerconfig. xml* dosyası, kitaplığın derlemesi ile
 
 ### <a name="configure-the-linker-for-internationalization"></a>Bağlayıcıyı uluslararası duruma getirme için yapılandırma
 
-Varsayılan olarak, Blazor 'in Blazor WebAssembly uygulamaları için bağlayıcı yapılandırması, açıkça istenen yerel ayarlar dışında uluslararası duruma getirme bilgilerini kaldırır. Bu derlemelerin kaldırılması uygulamanın boyutunu en aza indirir.
+Varsayılan olarak, Blazor Blazor webassembly uygulamaları için bağlayıcı yapılandırması, açıkça istenen yerel ayarlar dışında uluslararası duruma getirme bilgilerini şeritleri. Bu derlemelerin kaldırılması uygulamanın boyutunu en aza indirir.
 
-Hangi I18N derlemelerinin korunacağını denetlemek için, proje dosyasında `<BlazorWebAssemblyI18NAssemblies>` MSBuild özelliğini ayarlayın:
+Hangi I18N derlemelerinin korunacağını denetlemek için, `<BlazorWebAssemblyI18NAssemblies>` Proje dosyasında MSBuild özelliğini ayarlayın:
 
 ```xml
 <PropertyGroup>
@@ -118,15 +104,146 @@ Hangi I18N derlemelerinin korunacağını denetlemek için, proje dosyasında `<
 ```
 
 | Bölge değeri     | Mono bölgesi derlemesi    |
-| ---------------- | ----------------------- |
-| `all`            | Tüm derlemeler dahil |
-| `cjk`            | *I18N.CJK.dll*          |
-| `mideast`        | *I18N.MidEast.dll*      |
-| `none`varsayılanını | Hiçbiri                    |
-| `other`          | *I18N.Other.dll*        |
-| `rare`           | *I18N.Rare.dll*         |
-| `west`           | *I18N.West.dll*         |
+| ---
+Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
 
-Birden çok değeri ayırmak için virgül kullanın (örneğin, `mideast,west`).
+-
+Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-------- | ---title: ' ASP.NET Core için bağlayıcı yapılandırma: Blazor Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcı denetimini nasıl denetleyeceğinizi öğrenin Blazor . '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------------ | | `all`            | Tüm derlemeler dahil | | `cjk`             |  *I18N. ÇJK. dll* | | `mideast`         |  *I18N. MIDEAST. dll* | | `none`(varsayılan) | Hiçbiri | | `other`           |  *I18N. Diğer. dll* | | `rare`            |  *I18N. Nadir. dll* | | `west`            |  *I18N. Batı. dll*         |
+
+Birden çok değeri ayırmak için virgül kullanın (örneğin, `mideast,west` ).
 
 Daha fazla bilgi için bkz. [I18N: Pnetlib uluslararası duruma getirme çerçeve kitaplığı (Mono/Mono GitHub deposu)](https://github.com/mono/mono/tree/master/mcs/class/I18N).
+
+## <a name="additional-resources"></a>Ek kaynaklar
+
+* <xref:performance/blazor/webassembly-best-practices#intermediate-language-il-linking>

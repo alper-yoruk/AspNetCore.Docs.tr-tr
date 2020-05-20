@@ -1,32 +1,16 @@
 ---
-title: ASP.NET Core Blazor weelsembly ek güvenlik senaryoları
-author: guardrex
-description: BlazorWebassembly 'ın ek güvenlik senaryoları için nasıl yapılandırılacağını öğrenin.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/11/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/blazor/webassembly/additional-scenarios
-ms.openlocfilehash: d460f65e996f1f77136a426b03d6eb548d9e309e
-ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83153472"
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
-# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly ek güvenlik senaryoları
+# <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor weelsembly ek güvenlik senaryoları
 
 Sağlayan [Javier Calvarro Nelson](https://github.com/javiercn)
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
-[!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
 ## <a name="attach-tokens-to-outgoing-requests"></a>Giden isteklere belirteç iliştirme
 
@@ -52,7 +36,7 @@ builder.Services.AddTransient(sp =>
 });
 ```
 
-Kolaylık olması için, bir `BaseAddressAuthorizationMessageHandler` yetkılı URL olarak uygulama temel adresiyle önceden yapılandırılmış bir içerir. Kimlik doğrulaması etkinleştirilmiş Blazor WebAssembly şablonları artık <xref:System.Net.Http.IHttpClientFactory> sunucu API 'si projesinde şu şekilde bir ile ayarlamak için kullanır <xref:System.Net.Http.HttpClient> `BaseAddressAuthorizationMessageHandler` :
+Kolaylık olması için, bir `BaseAddressAuthorizationMessageHandler` yetkılı URL olarak uygulama temel adresiyle önceden yapılandırılmış bir içerir. Kimlik doğrulaması etkinleştirilmiş Blazor webassembly şablonları artık <xref:System.Net.Http.IHttpClientFactory> sunucu API 'si projesinde kullanarak bir <xref:System.Net.Http.HttpClient> ile birlikte ayarlanır `BaseAddressAuthorizationMessageHandler` :
 
 ```csharp
 using System.Net.Http;
@@ -176,7 +160,7 @@ builder.Services.AddHttpClient<WeatherForecastClient>(client => client.BaseAddre
 
 ## <a name="unauthenticated-or-unauthorized-web-api-requests-in-an-app-with-a-secure-default-client"></a>Güvenli bir varsayılan istemciyle bir uygulamada kimliği doğrulanmamış veya yetkilendirilmemiş Web API istekleri
 
-Blazor WebAssembly uygulaması genellikle güvenli bir varsayılan değer kullanıyorsa <xref:System.Net.Http.HttpClient> , uygulama, adlandırılmış bir yapılandırma yaparak kimliği doğrulanmamış veya yetkilendirilmemiş Web API istekleri de yapabilir <xref:System.Net.Http.HttpClient> .
+BlazorWeelsembly uygulaması genellikle güvenli bir varsayılan değer kullanıyorsa <xref:System.Net.Http.HttpClient> , uygulama, adlandırılmış bir yapılandırma yaparak kimliği doğrulanmamış veya YETKILENDIRILMEMIŞ Web API istekleri de yapabilir <xref:System.Net.Http.HttpClient> .
 
 `Program.Main`(*Program.cs*):
 
@@ -232,7 +216,7 @@ builder.Services.AddMsalAuthentication(options =>
 
 `IAccessTokenProvider.RequestToken`Yöntemi, bir uygulamanın belirli bir kapsam kümesiyle bir erişim belirteci sağlamasını sağlayan bir aşırı yükleme sağlar.
 
-Razor bileşeninde:
+Bir Razor bileşende:
 
 ```razor
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
@@ -260,7 +244,7 @@ if (tokenResult.TryGetToken(out var token))
 
 ## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>API istek seçeneklerini getiren HttpClient ve HttpRequestMessage
 
-Blazor WebAssembly uygulamasında WebAssembly üzerinde çalışırken, [HttpClient](xref:fundamentals/http-requests) ve <xref:System.Net.Http.HttpRequestMessage> istekleri özelleştirmek için kullanılabilir. Örneğin, HTTP yöntemini ve istek üst bilgilerini belirtebilirsiniz. Aşağıdaki bileşen, `POST` sunucuda Yapılacaklar LISTESI API uç noktası için bir istek yapar ve yanıt gövdesini gösterir:
+Weelsembly uygulamasında WebAssembly üzerinde çalışırken Blazor , [HttpClient](xref:fundamentals/http-requests) ve <xref:System.Net.Http.HttpRequestMessage> istekleri özelleştirmek için kullanılabilir. Örneğin, HTTP yöntemini ve istek üst bilgilerini belirtebilirsiniz. Aşağıdaki bileşen, `POST` sunucuda Yapılacaklar LISTESI API uç noktası için bir istek yapar ve yanıt gövdesini gösterir:
 
 ```razor
 @page "/todorequest"
@@ -327,15 +311,235 @@ Blazor WebAssembly uygulamasında WebAssembly üzerinde çalışırken, [HttpCli
 HTTP getirme isteği seçenekleri `HttpRequestMessage` , aşağıdaki tabloda gösterilen uzantı yöntemleriyle yapılandırılabilir.
 
 | `HttpRequestMessage`genişletme yöntemi | Fetch isteği özelliği |
-| ------------------------------------- | ---------------------- |
-| `SetBrowserRequestCredentials`        | [Credentials](https://developer.mozilla.org/docs/Web/API/Request/credentials) |
-| `SetBrowserRequestCache`              | [önbellek](https://developer.mozilla.org/docs/Web/API/Request/cache) |
-| `SetBrowserRequestMode`               | [modundaysa](https://developer.mozilla.org/docs/Web/API/Request/mode) |
-| `SetBrowserRequestIntegrity`          | [doğruluğunu](https://developer.mozilla.org/docs/Web/API/Request/integrity) |
+| ---
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------------------- | ---başlığı: ' ASP.NET Core Blazor webassembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+----------- | | `SetBrowserRequestCredentials`         |  [kimlik bilgileri](https://developer.mozilla.org/docs/Web/API/Request/credentials) | | `SetBrowserRequestCache`               |  [önbellek](https://developer.mozilla.org/docs/Web/API/Request/cache) | | `SetBrowserRequestMode`                |  [mod](https://developer.mozilla.org/docs/Web/API/Request/mode) | `SetBrowserRequestIntegrity` |           |  [bütünlük](https://developer.mozilla.org/docs/Web/API/Request/integrity) |
 
 Daha genel genişletme yöntemini kullanarak ek seçenekler ayarlayabilirsiniz `SetBrowserRequestOption` .
  
-HTTP yanıtı, yanıt içeriğindeki eşitleme okuma desteğini etkinleştirmek için tipik olarak bir Blazor WebAssembly uygulamasında arabelleğe kaydedilir. Yanıt akışı desteğini etkinleştirmek için `SetBrowserResponseStreamingEnabled` istekteki genişletme yöntemini kullanın.
+HTTP yanıtı, Blazor Yanıt içeriğindeki eşitleme okuma desteğini etkinleştirmek için genellikle webassembly uygulamasında arabelleğe kaydedilir. Yanıt akışı desteğini etkinleştirmek için `SetBrowserResponseStreamingEnabled` istekteki genişletme yöntemini kullanın.
 
 Kimlik bilgilerini bir çapraz kaynak isteğine dahil etmek için, `SetBrowserRequestCredentials` genişletme yöntemini kullanın:
 
@@ -366,7 +570,7 @@ Daha fazla bilgi için, bkz <xref:security/cors> . ve örnek UYGULAMANıN http I
 
 ## <a name="handle-token-request-errors"></a>Tanıtıcı belirteci isteği hataları
 
-Tek sayfalı uygulama (SPA), açma KIMLIĞI Connect (OıDC) kullanarak bir kullanıcının kimliğini doğruladığında, kimlik doğrulama durumu yerel olarak SPA 'da ve kimlik sağlayıcısı 'nda (IP) kimlik bilgilerini sunan kullanıcının bir sonucu olarak ayarlanmış bir oturum tanımlama bilgisi biçiminde tutulur.
+Tek sayfalı uygulama (SPA), açma KIMLIĞI Connect (OıDC) kullanarak bir kullanıcının kimliğini doğruladığında, kimlik doğrulama durumu yerel olarak SPA 'da ve Identity sağlayıcıda (IP), kimlik bilgilerini sağlayan kullanıcının bir sonucu olarak ayarlanmış bir oturum tanımlama bilgisi biçiminde tutulur.
 
 IP 'nin Kullanıcı için yaydığı belirteçler genellikle kısa süreler boyunca geçerlidir. bu nedenle, istemci uygulamanın düzenli olarak yeni belirteçler getirmesi gerekir. Aksi takdirde, Kullanıcı, verilen belirteçlerin süre dolduktan sonra günlüğe kaydedilir. Çoğu durumda, OıDC istemcileri kullanıcının kimlik doğrulaması durumunda veya IP içinde tutulan "oturum" için yeniden kimlik doğrulamasından geçmesini gerektirmeden yeni belirteçler sağlayabiliyor.
 
@@ -507,16 +711,141 @@ Bir kimlik doğrulama işlemi sırasında, tarayıcı IP 'ye yönlendirilmeden �
 Varsayılan olarak, `Microsoft.AspNetCore.Components.WebAssembly.Authentication` kitaplık, farklı kimlik doğrulama durumlarını temsil etmek için aşağıdaki tabloda gösterilen yolları kullanır.
 
 | Yol                            | Amaç |
-| -------------------------------- | ------- |
-| `authentication/login`           | Bir oturum açma işlemini tetikler. |
-| `authentication/login-callback`  | Herhangi bir oturum açma işleminin sonucunu işler. |
-| `authentication/login-failed`    | Bazı nedenlerle oturum açma işlemi başarısız olduğunda hata iletilerini görüntüler. |
-| `authentication/logout`          | Bir oturum kapatma işlemi tetikler. |
-| `authentication/logout-callback` | Bir oturum kapatma işleminin sonucunu işler. |
-| `authentication/logout-failed`   | Bir nedenden dolayı oturum kapatma işlemi başarısız olduğunda hata iletilerini görüntüler. |
-| `authentication/logged-out`      | Kullanıcının oturumu başarıyla sonlandırdığını gösterir. |
-| `authentication/profile`         | Kullanıcı profilini düzenlemek için bir işlem tetikler. |
-| `authentication/register`        | Yeni bir kullanıcıyı kaydetmek için bir işlem tetikler. |
+| ---
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+---------------- | ---başlığı: ' ASP.NET Core Blazor webassembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+---- | | `authentication/login`           | Bir oturum açma işlemini tetikler. | | `authentication/login-callback`  | Herhangi bir oturum açma işleminin sonucunu işler. | | `authentication/login-failed`    | Bazı nedenlerle oturum açma işlemi başarısız olduğunda hata iletilerini görüntüler. | | `authentication/logout`          | Bir oturum kapatma işlemi tetikler. | | `authentication/logout-callback` | Bir oturum kapatma işleminin sonucunu işler. | | `authentication/logout-failed`   | Bir nedenden dolayı oturum kapatma işlemi başarısız olduğunda hata iletilerini görüntüler. | | `authentication/logged-out`      | Kullanıcının oturumu başarıyla sonlandırdığını gösterir. | | `authentication/profile`         | Kullanıcı profilini düzenlemek için bir işlem tetikler. | | `authentication/register`        | Yeni bir kullanıcıyı kaydetmek için bir işlem tetikler. |
 
 Yukarıdaki tabloda gösterilen rotalar aracılığıyla yapılandırılabilir `RemoteAuthenticationOptions<TProviderOptions>.AuthenticationPaths` . Özel yollar sağlamak için seçenekleri ayarlarken, uygulamanın her yolu işleyen bir yolu olduğunu doğrulayın.
 
@@ -587,16 +916,213 @@ Bunu seçerseniz, Kullanıcı arabirimini farklı sayfalara bölmek için izin v
 , `RemoteAuthenticatorView` Aşağıdaki tabloda gösterilen kimlik doğrulama yolu başına kullanılabilecek bir parçaya sahiptir.
 
 | Yol                            | Parça                |
-| -------------------------------- | ----------------------- |
-| `authentication/login`           | `<LoggingIn>`           |
-| `authentication/login-callback`  | `<CompletingLoggingIn>` |
-| `authentication/login-failed`    | `<LogInFailed>`         |
-| `authentication/logout`          | `<LogOut>`              |
-| `authentication/logout-callback` | `<CompletingLogOut>`    |
-| `authentication/logout-failed`   | `<LogOutFailed>`        |
-| `authentication/logged-out`      | `<LogOutSucceeded>`     |
-| `authentication/profile`         | `<UserProfile>`         |
-| `authentication/register`        | `<Registering>`         |
+| ---
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+---------------- | ---başlığı: ' ASP.NET Core Blazor webassembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------------ | | `authentication/login`           | `<LoggingIn>`           | | `authentication/login-callback`  | `<CompletingLoggingIn>` | | `authentication/login-failed`    | `<LogInFailed>`         | | `authentication/logout`          | `<LogOut>`              | | `authentication/logout-callback` | `<CompletingLogOut>`    | | `authentication/logout-failed`   | `<LogOutFailed>`        | | `authentication/logged-out`      | `<LogOutSucceeded>`     | | `authentication/profile`         | `<UserProfile>`         | | `authentication/register`        | `<Registering>`         |
 
 ## <a name="customize-the-user"></a>Kullanıcıyı özelleştirme
 
@@ -829,3 +1355,31 @@ Bu yaklaşım, bir üçüncü taraf API çağrısı yapmak için sunucu aracıl�
 
 * Sunucu yenileme belirteçlerini saklayabilir ve uygulamanın üçüncü taraf kaynaklarına erişimi kaybetmemesini sağlayabilir.
 * Uygulama, daha hassas izinler içerebilen sunucudan erişim belirteçlerini sızıntısına neden olabilir.
+
+## <a name="use-open-id-connect-oidc-v20-endpoints"></a>Açık KIMLIK Connect (OıDC) v 2.0 uç noktalarını kullan
+
+Kimlik doğrulama kitaplığı ve Blazor şablonları Open ID Connect (OıDC) v 1.0 uç noktalarını kullanır. Bir v 2.0 uç noktası kullanmak için, JWT taşıyıcı <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> seçeneğini yapılandırın. Aşağıdaki örnekte,, özelliğine bir segment eklenerek AAD, v 2.0 için yapılandırılmıştır `v2.0` `Authority` :
+
+```csharp
+builder.Services.Configure<JwtBearerOptions>(
+    AzureADDefaults.JwtBearerAuthenticationScheme, 
+    options =>
+    {
+        options.Authority += "/v2.0";
+    });
+```
+
+Alternatif olarak, ayar uygulama ayarları (*appSettings. JSON*) dosyasında yapılabilir:
+
+```json
+{
+  "Local": {
+    "Authority": "https://login.microsoftonline.com/common/oauth2/v2.0/",
+    ...
+  }
+}
+```
+
+Bir kesimdeki bir kesimde yer alan herhangi bir uygulama, AAD olmayan sağlayıcılar gibi, uygulamanın OıDC sağlayıcısına uygun değilse, `Authority` özelliği doğrudan ayarlayın. `JwtBearerOptions`Uygulama ayarları dosyasındaki ya da özelliğini `Authority` anahtarıyla ayarlayın.
+
+KIMLIK belirtecindeki talepler listesi v 2.0 uç noktaları için değişir. Daha fazla bilgi için bkz. [Microsoft Identity platform (v 2.0) güncelleştirmesi nedir?](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison).

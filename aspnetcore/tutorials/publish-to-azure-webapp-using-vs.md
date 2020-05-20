@@ -1,23 +1,11 @@
 ---
-title: Visual Studio ile Azure 'da ASP.NET Core uygulaması yayımlama
-author: rick-anderson
-description: ASP.NET Core uygulamasının Visual Studio kullanarak Azure App Service nasıl yayımlanacağını öğrenin.
-ms.author: riande
-ms.custom: mvc
-ms.date: 07/10/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: tutorials/publish-to-azure-webapp-using-vs
-ms.openlocfilehash: 634fb821ef0478dbcf57fdbb991a2e8bbb9402f1
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777091"
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio"></a>Visual Studio ile Azure 'da ASP.NET Core uygulaması yayımlama
 
@@ -31,9 +19,9 @@ Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 MacOS 'ta çalışıyorsanız [Mac için Visual Studio kullanarak Azure App Service Için Web uygulaması yayımlama](https://docs.microsoft.com/visualstudio/mac/publish-app-svc?view=vsmac-2019) konusuna bakın.
 
-App Service dağıtım sorununu gidermek için, bkz <xref:test/troubleshoot-azure-iis>..
+App Service dağıtım sorununu gidermek için, bkz <xref:test/troubleshoot-azure-iis> ..
 
-## <a name="set-up"></a>Ayarlama
+## <a name="set-up"></a>Kurulum
 
 * Hesabınız yoksa [ücretsiz bir Azure hesabı](https://azure.microsoft.com/free/dotnet/) açın. 
 
@@ -45,23 +33,22 @@ Visual Studio başlangıç sayfasında **dosya > yeni > proje...** öğesini se�
 
 **Yeni proje** iletişim kutusunu doldurun:
 
-* Sol bölmede **.NET Core**' u seçin.
-* Orta bölmede **ASP.NET Core Web uygulaması**' nı seçin.
-* **Tamam**’ı seçin.
+* **ASP.NET Core Web uygulaması**' nı seçin.
+* **İleri**’yi seçin.
 
 ![Yeni Proje iletişim kutusu](publish-to-azure-webapp-using-vs/_static/new_prj.png)
 
 **Yeni ASP.NET Core Web uygulaması** iletişim kutusunda:
 
 * **Web uygulaması**' nı seçin.
-* **Kimlik doğrulamasını Değiştir**' i seçin.
+* Kimlik doğrulaması altında **Değiştir** ' i seçin.
 
-![Yeni Proje iletişim kutusu](publish-to-azure-webapp-using-vs/_static/new_prj_2.png)
+![Yeni ASP.NET Core Web iletişim kutusu](publish-to-azure-webapp-using-vs/_static/new_prj_2.png)
 
 **Kimlik doğrulamasını Değiştir** iletişim kutusu görüntülenir. 
 
 * **Bireysel kullanıcı hesapları**' nı seçin.
-* **Yeni ASP.NET Core Web uygulamasına**geri dönmek için **Tamam** ' ı seçin ve ardından yeniden **Tamam** ' ı seçin.
+* **Yeni ASP.NET Core Web uygulamasına**geri dönmek için **Tamam** ' ı seçin ve ardından **Oluştur**' u seçin.
 
 ![Yeni ASP.NET Core Web kimlik doğrulaması iletişim kutusu](publish-to-azure-webapp-using-vs/_static/new_prj_auth.png) 
 
@@ -70,7 +57,7 @@ Visual Studio çözümü oluşturur.
 ## <a name="run-the-app"></a>Uygulamayı çalıştırma
 
 * Projeyi çalıştırmak için CTRL + F5 tuşlarına basın.
-* **Hakkında** ve **iletişim** bağlantılarını test edin.
+* **Gizlilik** bağlantısını test edin.
 
 ![Web uygulaması, localhost üzerinde Microsoft Edge 'de açık](publish-to-azure-webapp-using-vs/_static/show.png)
 
@@ -78,14 +65,14 @@ Visual Studio çözümü oluşturur.
 
 * **Kaydet** ve yeni bir Kullanıcı Kaydet ' i seçin. Kurgusal bir e-posta adresi kullanabilirsiniz. Gönderdiğinizde, sayfada şu hata görüntülenir:
 
-    *"İç sunucu hatası: istek işlenirken bir veritabanı işlemi başarısız oldu. SQL özel durumu: veritabanı açılamıyor. Uygulama DB bağlamı için mevcut geçişleri uygulamak, bu sorunu çözebilir. "*
+    *"İstek işlenirken bir veritabanı işlemi başarısız oldu. Uygulama DB bağlamı için mevcut geçişleri uygulamak, bu sorunu çözebilir. "*
 * **Geçişleri Uygula** ' yı seçin ve sayfa güncelleştirildiğinde sayfayı yenileyin.
 
-![İç sunucu hatası: istek işlenirken bir veritabanı işlemi başarısız oldu. SQL özel durumu: veritabanı açılamıyor. Uygulama DB bağlamı için mevcut geçişleri uygulamak bu sorunu çözebilir.](publish-to-azure-webapp-using-vs/_static/mig.png)
+![İstek işlenirken bir veritabanı işlemi başarısız oldu. Uygulama DB bağlamı için mevcut geçişleri uygulamak bu sorunu çözebilir.](publish-to-azure-webapp-using-vs/_static/mig.png)
 
-Uygulama, Yeni Kullanıcı ve bir **Oturum çıkış** bağlantısı kaydetmek için kullanılan e-postayı görüntüler.
+Uygulama, yeni kullanıcıyı ve bir **oturum kapatma** bağlantısını kaydetmek için kullanılan e-postayı görüntüler.
 
-![Web uygulaması Microsoft Edge 'de açılır. Kayıt bağlantısı, Merhaba email@domain.commetinle değiştirilmiştir!](publish-to-azure-webapp-using-vs/_static/hello.png)
+![Web uygulaması Microsoft Edge 'de açılır. Kayıt bağlantısı, Merhaba metinle değiştirilmiştir user1@example.com !](publish-to-azure-webapp-using-vs/_static/hello.png)
 
 ## <a name="deploy-the-app-to-azure"></a>Uygulamayı Azure’da dağıtma
 
@@ -95,53 +82,76 @@ Uygulama, Yeni Kullanıcı ve bir **Oturum çıkış** bağlantısı kaydetmek i
 
 **Yayımla** iletişim kutusunda:
 
-* **Microsoft Azure App Service**seçin.
-* Dişli simgesini seçin ve ardından **Profil oluştur**' u seçin.
-* **Profil Oluştur**'u seçin.
+* **Azure**' u seçin.
+* **İleri**’yi seçin.
 
 ![Yayımla iletişim kutusu](publish-to-azure-webapp-using-vs/_static/maas1.png)
 
-### <a name="create-azure-resources"></a>Azure kaynakları oluşturma
+**Yayımla** iletişim kutusunda:
+
+* **Azure App Service (Linux)** öğesini seçin.
+* **İleri**’yi seçin.
+
+![Yayımla Iletişim kutusu: Azure hizmeti seçin](publish-to-azure-webapp-using-vs/_static/maas2.png)
+
+**Yayımla** iletişim kutusunda **yeni Azure App Service oluştur ' u seçin...**
+
+![Yayımla iletişim kutusu: Azure hizmet örneği seçin](publish-to-azure-webapp-using-vs/_static/maas3.png)
 
 **App Service oluştur** iletişim kutusu görüntülenir:
 
-* Aboneliğinizi girin.
 * **Uygulama adı**, **kaynak grubu**ve **App Service planı** giriş alanları doldurulur. Bu adları koruyabilir veya değiştirebilirsiniz.
+* **Oluştur**’u seçin.
 
-![App Service iletişim kutusu](publish-to-azure-webapp-using-vs/_static/newrg1.png)
+![App Service Oluştur iletişim kutusu](publish-to-azure-webapp-using-vs/_static/newrg1.png)
 
-* Yeni bir veritabanı oluşturmak için **Hizmetler** sekmesini seçin.
+Oluşturma işlemi tamamlandıktan sonra iletişim kutusu otomatik olarak kapatılır ve **Yayımla** iletişim kutusu odağı yeniden alır:
 
-* Yeni bir SQL **+** veritabanı oluşturmak için yeşil simgesini seçin
+* Yeni oluşturulan örnek otomatik olarak seçilir.
+* **Son**' u seçin.
 
-![Yeni SQL Veritabanı](publish-to-azure-webapp-using-vs/_static/sql.png)
+![Yayımla iletişim kutusu: App Service örneği seçin](publish-to-azure-webapp-using-vs/_static/select_as.png)
 
-* Yeni bir veritabanı oluşturmak için **SQL veritabanını Yapılandır** Iletişim kutusunda **yeni...** seçeneğini belirleyin.
+Daha sonra **profil Yayımlama Özeti** sayfasını görürsünüz. Visual Studio, bu uygulamanın SQL Server bir veritabanı gerektirdiğini algıladı ve bunu yapılandırmanızı istiyor. **Yapılandır**'ı seçin.
 
-![Yeni SQL veritabanı ve sunucu](publish-to-azure-webapp-using-vs/_static/conf.png)
+![Yayımlama profili Özet sayfası: SQL Server bağımlılığı yapılandırma](publish-to-azure-webapp-using-vs/_static/sql.png)
 
-**SQL Server Yapılandır** iletişim kutusu görüntülenir.
+**Bağımlılığı Yapılandır** iletişim kutusu görünür:
 
-* Bir Yönetici Kullanıcı adı ve parola girin ve **Tamam**' ı seçin. Varsayılan **sunucu adını**koruyabilirsiniz. 
+* **Azure SQL veritabanı**' nı seçin.
+* **İleri**’yi seçin.
 
-> [!NOTE]
-> Yönetici Kullanıcı adı olarak "admin" kullanımına izin verilmez.
+![SQL Server bağımlılığı iletişim kutusunu Yapılandır](publish-to-azure-webapp-using-vs/_static/sql1.png)
 
-![SQL Server iletişim kutusunu Yapılandır](publish-to-azure-webapp-using-vs/_static/conf_servername.png)
+**Azure SQL veritabanı 'Nı Yapılandır** ILETIŞIM kutusunda **SQL veritabanı oluştur** ' u seçin.
 
-* **Tamam**’ı seçin.
+![Azure SQL veritabanı 'nı yapılandırma iletişim kutusu](publish-to-azure-webapp-using-vs/_static/sql2.png)
 
-Visual Studio, **oluşturma App Service** iletişim kutusuna geri döner.
+**Azure SQL veritabanı oluştur** görüntülenir:
 
-* Oluştur **App Service** Iletişim kutusunda **Oluştur** ' u seçin.
+* **Veritabanı adı**, **kaynak grubu**, **veritabanı sunucusu** ve **App Service planı** giriş alanları doldurulur. Bu değerleri tutabilir veya değiştirebilirsiniz.
+* Seçili **veritabanı sunucusu** için **veritabanı yöneticisi Kullanıcı adı** ve **veritabanı yönetici parolasını** girin (kullandığınız hesabın, yeni Azure SQL veritabanı oluşturmak için gerekli izinlere sahip olması gerekir)
+* **Oluştur**’u seçin.
 
-![SQL veritabanını Yapılandır iletişim kutusu](publish-to-azure-webapp-using-vs/_static/conf_final.png)
+![Yeni Azure SQL veritabanı iletişim kutusu](publish-to-azure-webapp-using-vs/_static/sql_create.png)
 
-Visual Studio, Azure üzerinde Web uygulaması ve SQL Server oluşturur. Bu adım birkaç dakika sürebilir. Oluşturulan kaynaklar hakkında daha fazla bilgi için bkz. [ek kaynaklar](#additional-resources).
+Oluşturma işlemi tamamlandıktan sonra iletişim kutusu otomatik olarak kapatılır ve **Azure SQL veritabanı 'Nı Yapılandır** iletişim kutusu odağı yeniden alır:
 
-Dağıtım tamamlandığında **Ayarlar**' ı seçin:
+* Yeni oluşturulan örnek otomatik olarak seçilir.
+* **İleri**’yi seçin.
 
-![SQL Server iletişim kutusunu Yapılandır](publish-to-azure-webapp-using-vs/_static/set.png)
+![Azure SQL veritabanı 'nı yapılandırma iletişim kutusu](publish-to-azure-webapp-using-vs/_static/sql_select.png)
+
+**Azure SQL veritabanı yapılandırma** iletişim kutusunun sonraki adımında:
+
+* **Veritabanı bağlantısı Kullanıcı adı** ve **veritabanı bağlantısı parolası** alanlarını girin. Bunlar, uygulamanızın çalışma zamanında veritabanına bağlanmak için kullanacağı ayrıntılardır. En iyi yöntem, önceki adımda kullanılan yönetici Kullanıcı adı & parolasıyla aynı ayrıntıların kullanılmasını önmaktır.
+* **Son**' u seçin.
+
+![Azure SQL veritabanı iletişim kutusunu, bağlantı dizesi ayrıntılarını yapılandırma](publish-to-azure-webapp-using-vs/_static/sql_connection.png)
+
+**Profil Özeti Yayımla** sayfasında **Ayarlar**' ı seçin:
+
+![Yayımlama profili Özet sayfası: Ayarları Düzenle](publish-to-azure-webapp-using-vs/_static/pp_configured.png)
 
 **Yayımla** Iletişim kutusunun **Ayarlar** sayfasında:
 
@@ -150,27 +160,21 @@ Dağıtım tamamlandığında **Ayarlar**' ı seçin:
 
 * **Kaydet**’i seçin. Visual Studio **Yayımla** iletişim kutusuna geri döner. 
 
-![Yayımla iletişim kutusu: ayarlar paneli](publish-to-azure-webapp-using-vs/_static/pubs.png)
+![Yayımla iletişim kutusu: ayarlar paneli](publish-to-azure-webapp-using-vs/_static/pp_settings.png)
 
 **Yayımla**’ta tıklayın. Visual Studio, uygulamanızı Azure 'da yayımlar. Dağıtım tamamlandığında, uygulama bir tarayıcıda açılır.
 
-### <a name="test-your-app-in-azure"></a>Uygulamanızı Azure’da test edin
-
-* **Hakkında** ve **iletişim** bağlantılarını test edin
-
-* Yeni bir Kullanıcı Kaydet
-
-![Azure App Service üzerinde Microsoft Edge 'de açılan Web uygulaması](publish-to-azure-webapp-using-vs/_static/register.png)
+![Yayımla iletişim kutusu: ayarlar paneli](publish-to-azure-webapp-using-vs/_static/pp_publish.png)
 
 ### <a name="update-the-app"></a>Uygulamayı güncelleştirme
 
-* *Pages/about. cshtml* Razor sayfasını düzenleyin ve içeriğini değiştirin. Örneğin, paragrafı "Merhaba ASP.NET Core!" olacak şekilde değiştirebilirsiniz:
+* *Pages/Index. cshtml* Razor sayfasını düzenleyin ve içeriğini değiştirin. Örneğin, paragrafı "Merhaba ASP.NET Core!" olacak şekilde değiştirebilirsiniz:
 
-    [!code-html[About](publish-to-azure-webapp-using-vs/sample/about.cshtml?highlight=9&range=1-9)]
+    [!code-html[Index](publish-to-azure-webapp-using-vs/sample/index.cshtml?highlight=10&range=1-12)]
 
-* Projeye sağ tıklayın ve **Yayımla...** ' yı seçin.
+* **Profili Yayımla Özeti** sayfasından **Yayımla** ' yı seçin.
 
-![Yayımla bağlantısı vurgulanmış bağlamsal menü açık](publish-to-azure-webapp-using-vs/_static/pub.png)
+![Yayımlama profili Özet sayfası](publish-to-azure-webapp-using-vs/_static/pp_publish.png)
 
 * Uygulama yayımlandıktan sonra, yaptığınız değişikliklerin Azure 'da kullanılabilir olduğunu doğrulayın.
 

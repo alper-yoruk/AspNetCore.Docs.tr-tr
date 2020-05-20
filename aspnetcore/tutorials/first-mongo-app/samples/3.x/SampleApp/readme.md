@@ -1,6 +1,6 @@
 ---
 page_type: sample
-description: Bu öğretici, MongoDB NoSQL veritabanı nı kullanarak ASP.NET Core web API'sini nasıl oluşturacağımı gösterir.
+description: Bu öğreticide, MongoDB NoSQL veritabanı kullanarak ASP.NET Core Web API 'sinin nasıl oluşturulacağı gösterilmektedir.
 languages:
 - csharp
 products:
@@ -8,59 +8,59 @@ products:
 - aspnet-core
 - vs
 urlFragment: aspnetcore-webapi-mongodb
-ms.openlocfilehash: 09d73e25667822b8748a00cc76ad6d4f0e5fe290
-ms.sourcegitcommit: f7886fd2e219db9d7ce27b16c0dc5901e658d64e
+ms.openlocfilehash: 6f6022bee678af92066f45032b43b6b87e5f901e
+ms.sourcegitcommit: 7a42bc1e594de36c854fd4363c11821548a9efa7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 04/06/2020
-ms.locfileid: "79511411"
+ms.lasthandoff: 05/19/2020
+ms.locfileid: "83608674"
 ---
-# <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>ASP.NET Core ve MongoDB ile bir web API oluşturma
+# <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>ASP.NET Core ve MongoDB ile Web API 'SI oluşturma
 
-Bu öğretici, [MongoDB](https://www.mongodb.com/what-is-mongodb) NoSQL veritabanında Oluştur, Oku, Güncelleştir ve Sil (CRUD) işlemlerini gerçekleştiren bir web API'si oluşturur.
+Bu öğretici, bir [MongoDB](https://www.mongodb.com/what-is-mongodb) NoSQL veritabanında oluşturma, okuma, güncelleştirme ve SILME (CRUD) işlemlerini gerçekleştiren BIR Web API 'si oluşturur.
 
-Bu öğreticide şunların nasıl yapıldığını öğrenirsiniz:
+Bu öğreticide aşağıdakilerin nasıl yapılacağını öğreneceksiniz:
 
-* MongoDB'yi yapılandır
+* MongoDB 'yi yapılandırma
 * MongoDB veritabanı oluşturma
-* Bir MongoDB koleksiyonu ve şeması tanımlayın
-* Bir web API'den MongoDB CRUD işlemlerini gerçekleştirin
-* JSON serileştirmeyi özelleştir
+* MongoDB koleksiyonu ve şeması tanımlama
+* Web API 'sinden MongoDB CRUD işlemleri gerçekleştirme
+* JSON serileştirmesini özelleştirme
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * [.NET Core SDK 3.0 veya üzeri](https://dotnet.microsoft.com/download/dotnet-core)
-* [Visual Studio 2019](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=community&ch=pre&rel=16&utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019preview) **ASP.NET ve web geliştirme** iş yükü ile önizleme
+* **ASP.net ve Web geliştirme** iş yüküyle [Visual Studio 2019 Preview](https://visualstudio.microsoft.com/thank-you-downloading-visual-studio/?sku=community&ch=pre&rel=16&utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019preview)
 * [MongoDB](https://docs.mongodb.com/manual/tutorial/install-mongodb-on-windows/)
 
-## <a name="configure-mongodb"></a>MongoDB'yi yapılandır
+## <a name="configure-mongodb"></a>MongoDB 'yi yapılandırma
 
-Windows kullanıyorsanız, MongoDB varsayılan olarak *C:\\Program Files\\MongoDB'ye* yüklenir. *C ekle:\\\\Program\\Dosyaları MongoDB Server\\\<version_number>\\bin* çevre değişkenine. `Path` Bu değişiklik, geliştirme makinenizin herhangi bir yerinden MongoDB erişimine olanak tanır.
+Windows kullanıyorsanız MongoDB varsayılan olarak *C: \\ Program Files \\ MongoDB* konumunda yüklüdür. Ortam değişkenine *C: \\ Program Files \\ MongoDB \\ Server \\ \< Version_Number>\\ bin* ekleyin `Path` . Bu değişiklik geliştirme makinenizde her yerden MongoDB erişimine izin vermez.
 
-Bir veritabanı oluşturmak, koleksiyonlar oluşturmak ve belgeleri depolamak için aşağıdaki adımlardaki mongo Shell'i kullanın. Mongo Shell komutları hakkında daha fazla bilgi için [mongo Shell ile çalışma bilgisine](https://docs.mongodb.com/manual/mongo/#working-with-the-mongo-shell)bakın.
+Bir veritabanı oluşturmak, koleksiyonları yapmak ve belgeleri depolamak için aşağıdaki adımlarda Mongo kabuğunu kullanın. Mongo kabuğu komutları hakkında daha fazla bilgi için bkz. [Mongo kabuğu Ile çalışma](https://docs.mongodb.com/manual/mongo/#working-with-the-mongo-shell).
 
-1. Verileri depolamak için geliştirme makinenizde bir dizin seçin. Örneğin, *C:\\* Windows'da Kitaplar Verileri. Yoksa dizini oluşturun. Mongo Shell yeni dizinler yaratmaz.
-1. Komut kabuğunu açın. Varsayılan bağlantı noktası 27017'de MongoDB'ye bağlanmak için aşağıdaki komutu çalıştırın. Önceki adımda seçtiğiniz dizini değiştirmeyi `<data_directory_path>` unutmayın.
+1. Verileri depolamak için geliştirme makinenizde bir dizin seçin. Örneğin, *C: Windows üzerinde \\ booksdata* . Mevcut değilse dizini oluşturun. Mongo kabuğu yeni dizinler oluşturmaz.
+1. Bir komut kabuğu açın. Varsayılan bağlantı noktası 27017 ' de MongoDB 'ye bağlanmak için aşağıdaki komutu çalıştırın. `<data_directory_path>`Önceki adımda seçtiğiniz dizinle değiştirmeyi unutmayın.
 
     ```console
     mongod --dbpath <data_directory_path>
     ```
 
-1. Başka bir komut kabuğu örneği açın. Aşağıdaki komutu çalıştırarak varsayılan test veritabanına bağlanın:
+1. Başka bir komut kabuğu örneği açın. Aşağıdaki komutu çalıştırarak Varsayılan test veritabanına bağlanın:
 
     ```console
     mongo
     ```
 
-1. Aşağıdakileri bir komut kabuğunda çalıştırın:
+1. Komut kabuğu 'nda aşağıdakileri çalıştırın:
 
     ```console
     use BookstoreDb
     ```
 
-    Zaten yoksa, *BookstoreDb* adında bir veritabanı oluşturulur. Veritabanı varsa, bağlantısı hareketler için açılır.
+    Zaten mevcut değilse, *BookstoreDb* adlı bir veritabanı oluşturulur. Veritabanı mevcutsa, bağlantısı işlemler için açılır.
 
-1. Aşağıdaki `Books` komutu kullanarak bir koleksiyon oluşturun:
+1. `Books`Aşağıdaki komutu kullanarak bir koleksiyon oluşturun:
 
     ```console
     db.createCollection('Books')
@@ -91,9 +91,9 @@ Bir veritabanı oluşturmak, koleksiyonlar oluşturmak ve belgeleri depolamak i�
     ```
 
   > [!NOTE]
-  > Bu makalede gösterilen kimlik, bu örneği çalıştırdığınızda kimliklerle eşleşmez.
+  > Bu makalede gösterilen KIMLIK, bu örneği çalıştırdığınızda kimliklerle eşleşmeyecektir.
 
-1. Aşağıdaki komutu kullanarak veritabanındaki belgeleri görüntüleyin:
+1. Aşağıdaki komutu kullanarak veritabanında bulunan belgeleri görüntüleyin:
 
     ```console
     db.Books.find({}).pretty()
@@ -118,17 +118,17 @@ Bir veritabanı oluşturmak, koleksiyonlar oluşturmak ve belgeleri depolamak i�
     }
     ```
 
-    Şema, her belge `_id` için otomatik `ObjectId` olarak oluşturulmuş bir tür özelliği ekler.
+    Şema, `_id` her belge için türünde bir otomatik olarak oluşturulan özellik ekler `ObjectId` .
 
-Veritabanı hazır. ASP.NET Core web API'sini oluşturmaya başlayabilirsiniz.
+Veritabanı hazırlanıyor. ASP.NET Core Web API 'sini oluşturmaya başlayabilirsiniz.
 
-## <a name="create-the-aspnet-core-web-api-project"></a>ASP.NET Core web API projesini oluşturma
+## <a name="create-the-aspnet-core-web-api-project"></a>ASP.NET Core Web API projesi oluşturma
 
-1. **Dosya** > **Yeni** > **Proje**git.
-1. ASP.NET **Çekirdek Web Uygulaması** proje türünü seçin ve **İleri'yi**seçin.
-1. Proje *BooksApi*adını ve **Oluştur'u**seçin.
-1. **.NET Core** hedef çerçevesini seçin ve **Core 3.0'ASP.NET.** **API** proje şablonu seçin ve **Oluştur'u**seçin.
-1. MongoDB için .NET sürücüsünün en son kararlı sürümünü belirlemek için [NuGet Galerisi: MongoDB.Driver](https://www.nuget.org/packages/MongoDB.Driver/) adresini ziyaret edin. Paket **Yöneticisi Konsolu** penceresinde proje köküne gidin. MongoDB için .NET sürücüsünü yüklemek için aşağıdaki komutu çalıştırın:
+1. **Dosya**  >  **Yeni**  >  **Proje**' ye gidin.
+1. **ASP.NET Core Web uygulaması** proje türünü seçin ve **İleri**' yi seçin.
+1. Projeyi *Booksapı*olarak adlandırın ve **Oluştur**' u seçin.
+1. **.NET Core** hedef çerçevesini ve **3,0 ASP.NET Core**seçin. **API** proje şablonunu seçin ve **Oluştur**' u seçin.
+1. MongoDB için .NET sürücüsünün en son kararlı sürümünü öğrenmek üzere [NuGet galerisini ziyaret edin: MongoDB. Driver](https://www.nuget.org/packages/MongoDB.Driver/) . **Paket Yöneticisi konsol** penceresinde, proje köküne gidin. MongoDB için .NET sürücüsünü yüklemek üzere aşağıdaki komutu çalıştırın:
 
     ```powershell
     Install-Package MongoDB.Driver -Version {VERSION}
@@ -136,8 +136,8 @@ Veritabanı hazır. ASP.NET Core web API'sini oluşturmaya başlayabilirsiniz.
 
 ## <a name="add-an-entity-model"></a>Varlık modeli ekleme
 
-1. Proje köküne bir *Modeller* dizini ekleyin.
-1. Aşağıdaki `Book` kodla *Modeller* dizinine bir sınıf ekleyin:
+1. Proje köküne *modeller* dizini ekleyin.
+1. `Book` *Modeller* dizinine aşağıdaki kodla bir sınıf ekleyin:
 
     ```csharp
     using MongoDB.Bson;
@@ -163,17 +163,17 @@ Veritabanı hazır. ASP.NET Core web API'sini oluşturmaya başlayabilirsiniz.
     }
     ```
 
-    Önceki sınıfta, `Id` özellik:
+    Önceki sınıfta, `Id` özelliği:
 
-    * Ortak Dil Çalışma Zamanı (CLR) nesnesini MongoDB koleksiyonuyla eşlemek için gereklidir.
-    * Bu özelliği belgenin [`[BsonId]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonIdAttribute.htm) birincil anahtarı olarak belirlemek üzere açıklama yapılır.
-    * [ObjectId](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_ObjectId.htm) yapısı yerine [`[BsonRepresentation(BsonType.ObjectId)]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonRepresentationAttribute.htm) parametrenin türü `string` olarak geçirilmesine izin vermek için açıklama yapılır. Mongo dönüşüm `string` `ObjectId`yönetir.
+    * Ortak dil çalışma zamanı (CLR) nesnesini MongoDB koleksiyonuna eşlemek için gereklidir.
+    * , [`[BsonId]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonIdAttribute.htm) Bu özelliği belgenin birincil anahtarı olarak belirlemek için ile birlikte açıklanmış.
+    * , [`[BsonRepresentation(BsonType.ObjectId)]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonRepresentationAttribute.htm) Parametresinin `string` [ObjectID](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_ObjectId.htm) yapısı yerine tür olarak geçirilmesine izin vermek için ile birlikte açıklanmış. Mongo, ' den ' `string` ye dönüştürmeyi işler `ObjectId` .
 
-    Özellik `BookName` öznitelik ile [`[BsonElement]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonElementAttribute.htm) açıklamalı. Özniteliğin `Name` değeri MongoDB koleksiyonundaki özellik adını temsil eder.
+    `BookName`Özelliği özniteliğiyle açıklama eklenir [`[BsonElement]`](https://api.mongodb.com/csharp/current/html/T_MongoDB_Bson_Serialization_Attributes_BsonElementAttribute.htm) . Özniteliğinin değeri, `Name` MongoDB koleksiyonundaki özellik adını temsil eder.
 
 ## <a name="add-a-configuration-model"></a>Yapılandırma modeli ekleme
 
-1. *Appsettings.json'a*aşağıdaki veritabanı yapılandırma değerlerini ekleyin:
+1. Aşağıdaki veritabanı yapılandırma değerlerini *appSettings. JSON*öğesine ekleyin:
 
     ```javascript
     {
@@ -185,7 +185,7 @@ Veritabanı hazır. ASP.NET Core web API'sini oluşturmaya başlayabilirsiniz.
 
     ```
 
-1. *Modeller* dizinine aşağıdaki kodla *bir BookstoreDatabaseSettings.cs* dosyası ekleyin:
+1. *Modeller* dizinine aşağıdaki kodla bir *BookstoreDatabaseSettings.cs* dosyası ekleyin:
 
     ```csharp
     namespace BooksApi.Models
@@ -206,9 +206,9 @@ Veritabanı hazır. ASP.NET Core web API'sini oluşturmaya başlayabilirsiniz.
     }
     ```
 
-    Önceki `BookstoreDatabaseSettings` sınıf *appsettings.json* dosyasının `BookstoreDatabaseSettings` özellik değerlerini depolamak için kullanılır. JSON ve C# özellik adları eşleme işlemini kolaylaştırmak için aynı şekilde adlandırılır.
+    Yukarıdaki `BookstoreDatabaseSettings` sınıf, *appSettings. JSON* dosyasının özellik değerlerini depolamak için kullanılır `BookstoreDatabaseSettings` . JSON ve C# Özellik adları, eşleme sürecini kolaylaştırmak için aynı şekilde adlandırılır.
 
-1. Aşağıdaki vurgulanan kodu `Startup.ConfigureServices`ekleyin:
+1. Aşağıdaki Vurgulanan kodu öğesine ekleyin `Startup.ConfigureServices` :
 
     ```csharp
     public void ConfigureServices(IServiceCollection services)
@@ -225,19 +225,19 @@ Veritabanı hazır. ASP.NET Core web API'sini oluşturmaya başlayabilirsiniz.
 
     Yukarıdaki kodda:
 
-    * *Appsettings.json* dosyasının `BookstoreDatabaseSettings` bölümünün bağladığı yapılandırma örneği Bağımlılık Enjeksiyonu (DI) kapsayıcısında kaydedilir. Örneğin, bir `BookstoreDatabaseSettings` nesnenin `ConnectionString` özelliği `BookstoreDatabaseSettings:ConnectionString` *appsettings.json*özelliği ile doldurulur.
-    * Arabirim, `IBookstoreDatabaseSettings` singleton [hizmet ömrü](xref:fundamentals/dependency-injection#service-lifetimes)yle DI'de kayıtlıdır. Enjekte edildiğinde, arabirim örneği bir `BookstoreDatabaseSettings` nesneye giderilir.
+    * *AppSettings. JSON* dosyasının bölüm bağlandığı yapılandırma örneği, `BookstoreDatabaseSettings` bağımlılık ekleme (dı) kapsayıcısına kaydedilir. Örneğin, bir `BookstoreDatabaseSettings` nesnenin `ConnectionString` özelliği `BookstoreDatabaseSettings:ConnectionString` *appSettings. JSON*içindeki özelliği ile doldurulur.
+    * `IBookstoreDatabaseSettings`Arabirim, tek bir [hizmet ömrü](xref:fundamentals/dependency-injection#service-lifetimes)ile dı 'ye kaydedilir. Eklenen arabirim örneği bir nesne olarak çözümlenir `BookstoreDatabaseSettings` .
 
-1. Başvuruları ve `BookstoreDatabaseSettings` `IBookstoreDatabaseSettings` başvuruları çözmek için aşağıdaki kodu *Startup.cs* üst bölümüne ekleyin:
+1. Ve başvurularını çözümlemek için aşağıdaki kodu *Startup.cs* 'in en üstüne ekleyin `BookstoreDatabaseSettings` `IBookstoreDatabaseSettings` :
 
     ```csharp
     using BooksApi.Models;
     ```
 
-## <a name="add-a-crud-operations-service"></a>CRUD operasyon hizmeti ekleme
+## <a name="add-a-crud-operations-service"></a>CRUD işlemleri hizmeti ekleme
 
-1. Proje köküne *bir Hizmet* dizini ekleyin.
-1. Hizmetler `BookService` dizinine *Services* aşağıdaki kodla bir sınıf ekleyin:
+1. Proje köküne bir *Hizmetler* dizini ekleyin.
+1. `BookService` *Hizmetler* dizinine aşağıdaki kodla bir sınıf ekleyin:
 
     ```csharp
     using BooksApi.Models;
@@ -283,9 +283,9 @@ Veritabanı hazır. ASP.NET Core web API'sini oluşturmaya başlayabilirsiniz.
     }
     ```
 
-    Önceki kodda, bir `IBookstoreDatabaseSettings` örnek yapı oluşturucu enjeksiyon yoluyla DI alınır. Bu teknik, [yapılandırma modeli ekle](#add-a-configuration-model) bölümüne eklenen *appsettings.json* yapılandırma değerlerine erişim sağlar.
+    Yukarıdaki kodda, bir `IBookstoreDatabaseSettings` örnek oluşturucu ekleme yoluyla dı 'den alınır. Bu teknik, [yapılandırma modeli ekleme](#add-a-configuration-model) bölümüne eklenen *appSettings. JSON* yapılandırma değerlerine erişim sağlar.
 
-1. Aşağıdaki vurgulanan kodu `Startup.ConfigureServices`ekleyin:
+1. Aşağıdaki Vurgulanan kodu öğesine ekleyin `Startup.ConfigureServices` :
 
     ```csharp
     public void ConfigureServices(IServiceCollection services)
@@ -302,18 +302,18 @@ Veritabanı hazır. ASP.NET Core web API'sini oluşturmaya başlayabilirsiniz.
     }
     ```
 
-    Önceki kodda, `BookService` sınıf tüketen sınıflarda yapıcı enjeksiyonu desteklemek için DI'ye kaydedilir. Singleton hizmet ömrü en `BookService` uygundur, çünkü `MongoClient`doğrudan bir bağımlılık alır. Resmi [Mongo Müşteri yeniden](https://mongodb.github.io/mongo-csharp-driver/2.8/reference/driver/connecting/#re-use)yönergeleri `MongoClient` başına, di bir singleton hizmet ömrü ile kayıtlı olmalıdır.
+    Önceki kodda, `BookService` sınıfı, tüketen sınıflarda Oluşturucu ekleme işlemini desteklemek IÇIN dı ile kaydedilir. Tek hizmet ömrü en uygundur çünkü `BookService` doğrudan bir bağımlılık alır `MongoClient` . Resmi [Mongo istemci yeniden kullanım yönergelerine](https://mongodb.github.io/mongo-csharp-driver/2.8/reference/driver/connecting/#re-use)göre, `MongoClient` tek bir HIZMET ömrü ile dı 'ye kaydedilmelidir.
 
-1. Başvuruyu çözmek için Startup.cs üst bölümüne aşağıdaki kodu ekleyin: *Startup.cs* `BookService`
+1. Başvuruyu çözümlemek için aşağıdaki kodu *Startup.cs* 'in en üstüne ekleyin `BookService` :
 
 
     ```csharp
     using BooksApi.Services;
     ```
 
-Sınıf, `BookService` veritabanına `MongoDB.Driver` karşı CRUD işlemleri gerçekleştirmek için aşağıdaki üyeleri kullanır:
+`BookService`Sınıfı, `MongoDB.Driver` veritabanına karşı CRUD işlemlerini gerçekleştirmek için aşağıdaki üyeleri kullanır:
 
-* [MongoClient](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoClient.htm) &ndash; veritabanı işlemleri gerçekleştirmek için sunucu örneğini okur. Bu sınıfın oluşturucusu MongoDB bağlantı dizesi sağlanır:
+* [Mongoclient](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoClient.htm) &ndash; Veritabanı işlemlerini gerçekleştirmek için sunucu örneğini okur. Bu sınıfın oluşturucusuna MongoDB bağlantı dizesi verilmiştir:
 
     ```csharp
     public BookService(IBookstoreDatabaseSettings settings)
@@ -325,20 +325,20 @@ Sınıf, `BookService` veritabanına `MongoDB.Driver` karşı CRUD işlemleri ge
     }
     ```
 
-* [IMongoDatabase](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_IMongoDatabase.htm) &ndash; Işlemleri gerçekleştirmek için Mongo veritabanını temsil eder. Bu öğretici, belirli bir koleksiyondaki verilere erişmek için arabirimdeki genel [GetCollection\<TDocument>(toplama)](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoDatabase_GetCollection__1.htm) yöntemini kullanır. Bu yöntem çağrıldıktan sonra koleksiyona karşı CRUD işlemleri gerçekleştirin. Yöntem `GetCollection<TDocument>(collection)` aramasında:
+* [Imongodatabase](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_IMongoDatabase.htm) &ndash; İşlemleri gerçekleştirmek için Mongo veritabanını temsil eder. Bu öğretici, belirli bir koleksiyondaki verilere erişim kazanmak için arabirimdeki genel [GetCollection \< tdocument> (Collection)](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoDatabase_GetCollection__1.htm) yöntemini kullanır. Bu yöntem çağrıldıktan sonra, koleksiyonda CRUD işlemleri gerçekleştirin. `GetCollection<TDocument>(collection)`Yöntem çağrısında:
   * `collection`koleksiyon adını temsil eder.
-  * `TDocument`koleksiyonda depolanan CLR nesne türünü temsil eder.
+  * `TDocument`Koleksiyonda depolanan CLR nesne türünü temsil eder.
 
-`GetCollection<TDocument>(collection)`koleksiyonu temsil eden bir [MongoCollection](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoCollection.htm) nesnesi döndürür. Bu öğreticide, koleksiyonda aşağıdaki yöntemler çağrılır:
+`GetCollection<TDocument>(collection)`koleksiyonu temsil eden bir [Mongocollection](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoCollection.htm) nesnesi döndürür. Bu öğreticide, koleksiyonda aşağıdaki yöntemler çağrılır:
 
-* [DeleteOne](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_DeleteOne.htm) &ndash; Sağlanan arama ölçütleriyle eşleşen tek bir belgeyi siler.
-* [TBelgesi'ni\<bul>](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollectionExtensions_Find__1_1.htm) &ndash; Koleksiyondaki tüm belgeleri sağlanan arama ölçütleriyle eşleşen olarak döndürür.
-* [InsertOne,](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_InsertOne.htm) &ndash; sağlanan nesneyi koleksiyonda yeni bir belge olarak ekler.
-* [ReplaceOne,](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_ReplaceOne.htm) &ndash; sağlanan arama ölçütleriyle eşleşen tek belgeyi sağlanan nesneyle değiştirir.
+* [Deleteone](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_DeleteOne.htm) &ndash; Belirtilen arama ölçütleriyle eşleşen tek bir belgeyi siler.
+* [Bul \< TDocument>](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollectionExtensions_Find__1_1.htm) &ndash; , koleksiyonda belirtilen arama ölçütleriyle eşleşen tüm belgeleri döndürür.
+* [Insertone](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_InsertOne.htm) &ndash; Belirtilen nesneyi, koleksiyonda yeni bir belge olarak ekler.
+* [Replaceone](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_ReplaceOne.htm) &ndash; Belirtilen arama ölçütleriyle eşleşen tek belgeyi, belirtilen nesneyle değiştirir.
 
 ## <a name="add-a-controller"></a>Denetleyici ekleme
 
-Denetleyiciler `BooksController` dizinine *Controllers* aşağıdaki kodla bir sınıf ekleyin:
+`BooksController` *Controllers* dizinine aşağıdaki kodla bir sınıf ekleyin:
 
 ```csharp
 using BooksApi.Models;
@@ -417,17 +417,17 @@ namespace BooksApi.Controllers
 }
 ```
 
-Önceki web API denetleyicisi:
+Önceki Web API denetleyicisi:
 
-* CRUD `BookService` işlemlerini gerçekleştirmek için sınıfı kullanır.
-* GET, POST, PUT ve DELETE HTTP isteklerini desteklemek için eylem yöntemleri içerir.
-* Http <xref:System.Web.Http.ApiController.CreatedAtRoute*> [201](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) yanıtını döndürmek için eylem yöntemini `Create` çağırır. Durum kodu 201, sunucuda yeni bir kaynak oluşturan bir HTTP POST yönteminin standart yanıtıdır. `CreatedAtRoute`ayrıca yanıta bir `Location` üstbilgi ekler. Üstbilgi, `Location` yeni oluşturulan kitabın URI'sini belirtir.
+* `BookService`CRUD işlemleri gerçekleştirmek için sınıfını kullanır.
+* HTTP isteklerini al, gönder, koy ve SIL desteği için eylem yöntemleri içerir.
+* <xref:System.Web.Http.ApiController.CreatedAtRoute*> `Create` [Http 201](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) yanıtı döndürmek için eylem yöntemindeki çağrılar. Durum kodu 201, sunucuda yeni bir kaynak oluşturan HTTP POST yöntemi için standart yanıttır. `CreatedAtRoute`Ayrıca yanıta bir `Location` üst bilgi ekler. `Location`Üst bilgi, yeni oluşturulan KITABıN URI 'sini belirtir.
 
-## <a name="test-the-web-api"></a>Web API'sini test edin
+## <a name="test-the-web-api"></a>Web API 'sini test etme
 
 1. Uygulamayı derleyin ve çalıştırın.
 
-1. Denetleyicinin `http://localhost:<port>/api/books` parametresiz `Get` eylem yöntemini sınamak için gidin. Aşağıdaki JSON yanıtı görüntülenir:
+1. `http://localhost:<port>/api/books`Denetleyicinin parametresiz eylem yöntemini sınamak için öğesine gidin `Get` . Aşağıdaki JSON yanıtı görüntülenir:
 
     ```json
     [
@@ -448,7 +448,7 @@ namespace BooksApi.Controllers
     ]
     ```
 
-1. Denetleyicinin `http://localhost:<port>/api/books/{id here}` aşırı yüklenmiş `Get` eylem yöntemini sınamak için gidin. Aşağıdaki JSON yanıtı görüntülenir:
+1. `http://localhost:<port>/api/books/{id here}`Denetleyicinin aşırı yüklenmiş eylem yöntemini sınamak için öğesine gidin `Get` . Aşağıdaki JSON yanıtı görüntülenir:
 
     ```json
     {
@@ -462,16 +462,16 @@ namespace BooksApi.Controllers
 
 ## <a name="configure-json-serialization-options"></a>JSON serileştirme seçeneklerini yapılandırma
 
-[Test web API](#test-the-web-api) bölümünde döndürülen JSON yanıtları hakkında değiştirmek için iki ayrıntı vardır:
+[Web API 'Sini test](#test-the-web-api) etme bölümünde döndürülen JSON yanıtları hakkında iki ayrıntı vardır:
 
-* Özellik adlarının varsayılan deve gövdesi, CLR nesnesinin özellik adlarının Pascal kasasına uyacak şekilde değiştirilmelidir.
-* Özellik `bookName` olarak `Name`döndürülmelidir.
+* ' Varsayılan ortası büyük/küçük harf özelliği, CLR nesnesinin özellik adlarının Pascal büyük küçük harfleriyle eşleşecek şekilde değiştirilmelidir.
+* `bookName`Özelliği olarak döndürülmelidir `Name` .
 
 Önceki gereksinimleri karşılamak için aşağıdaki değişiklikleri yapın:
 
-1. JSON.NET paylaşılan ASP.NET çerçeveden kaldırıldı. [Microsoft.AspNetCore.Mvc.NewtonsoftJson](https://nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson)bir paket başvuru ekleyin.
+1. JSON.NET, ASP.NET paylaşılan çerçevesinden kaldırılmıştır. Öğesine bir paket başvurusu ekleyin [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson) .
 
-1. In `Startup.ConfigureServices`, `AddMvc` yöntem çağrısı üzerine aşağıdaki vurgulanan kodu zincir:
+1. ' De `Startup.ConfigureServices` , aşağıdaki vurgulanmış kodu yöntem çağrısına zincirle `AddMvc` :
 
     ```csharp
     public void ConfigureServices(IServiceCollection services)
@@ -489,9 +489,9 @@ namespace BooksApi.Controllers
     }
     ```
 
-    Önceki değişiklikle, web API'nin serileştirilmiş JSON yanıtındaki özellik adları CLR nesne türünde karşılık gelen özellik adlarıyla eşleşir. Örneğin, `Book` sınıfın `Author` özelliği olarak `Author`serileşir.
+    Önceki değişiklik ile, Web API 'sinin seri hale getirilmiş JSON yanıtındaki Özellik adları CLR nesne türündeki ilgili özellik adlarıyla eşleşir. Örneğin, `Book` sınıfın `Author` özelliği olarak serileştirir `Author` .
 
-1. *Modeller/Book.cs'* de, `BookName` özelliği aşağıdaki [`[JsonProperty]`](https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_JsonPropertyAttribute.htm) öznitelikle açıklama olarak belirtin:
+1. *Modeller/Book. cs*' de, `BookName` aşağıdaki özniteliğiyle özelliğe not ekleyin [`[JsonProperty]`](https://www.newtonsoft.com/json/help/html/T_Newtonsoft_Json_JsonPropertyAttribute.htm) :
 
     ```csharp
     [BsonElement("Name")]
@@ -499,19 +499,19 @@ namespace BooksApi.Controllers
     public string BookName { get; set; }
     ```
 
-    Özniteliğin `[JsonProperty]` `Name` değeri, web API'nin serileştirilmiş JSON yanıtındaki özellik adını temsil eder.
+    `[JsonProperty]`Özniteliğinin değeri, `Name` Web API 'SININ serileştirilmiş JSON yanıtında özellik adını temsil eder.
 
-1. Öznitelik başvurularını çözmek `[JsonProperty]` için *Modeller/Book.cs'nin* üst bölümüne aşağıdaki kodu ekleyin:
+1. Aşağıdaki kodu *modeller/Book. cs* ' nin üst kısmına ekleyerek `[JsonProperty]` öznitelik başvurusunu çözümleyin:
 
     ```csharp
     using Newtonsoft.Json;
     ```
 
-1. [Test web API](#test-the-web-api) bölümünde tanımlanan adımları yineleyin. JSON özellik adlarında farka dikkat edin.
+1. [Web API 'Sini test](#test-the-web-api) etme bölümünde tanımlanan adımları yineleyin. JSON Özellik adlarındaki farka dikkat edin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Core web API'ASP.NET leri oluşturma hakkında daha fazla bilgi için aşağıdaki kaynaklara bakın:
+ASP.NET Core Web API 'Leri oluşturma hakkında daha fazla bilgi için aşağıdaki kaynaklara bakın:
 
 * [Bu makalenin YouTube sürümü](https://www.youtube.com/watch?v=7uJt_sOenyo&feature=youtu.be)
-* [ASP.NET Core ile web API'leri oluşturma](https://docs.microsoft.com/aspnet/core/web-api/index?view=aspnetcore-3.0)
+* [ASP.NET Core ile web API’leri oluşturma](https://docs.microsoft.com/aspnet/core/web-api/index?view=aspnetcore-3.0)

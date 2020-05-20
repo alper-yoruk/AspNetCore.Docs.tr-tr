@@ -1,41 +1,27 @@
 ---
-title: ASP.NET Core Blazor durum yönetimi
-author: guardrex
-description: Blazor Sunucu uygulamalarında durumu kalıcı hale getirme hakkında bilgi edinin.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 03/17/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/state-management
-ms.openlocfilehash: 5e14a0697fbc98575970b93dfa12c68e9f561c56
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967421"
+Başlık: ' ASP.NET Core Blazor Durum Yönetimi ' Yazar: Açıklama: ' sunucu uygulamalarında durumu kalıcı hale getirme hakkında bilgi edinin Blazor . '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
 # <a name="aspnet-core-blazor-state-management"></a>ASP.NET Core Blazor durum yönetimi
 
 [Steve Sanderson](https://github.com/SteveSandersonMS) tarafından
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
 BlazorSunucu, durum bilgisi olan bir uygulama çerçevesidir. Çoğu zaman, uygulama sunucuya devam eden bir bağlantı sağlar. Kullanıcının durumu, sunucu belleğinde bir *devrende*tutulur. 
 
 Bir kullanıcının devresi için durum tutulan örnekler şunlardır:
 
-* İşlenmiş Kullanıcı arabirimi&mdash;bileşen örneklerinin hiyerarşisi ve en son işleme çıktısı.
+* İşlenmiş Kullanıcı arabirimi: bileşen örneklerinin hiyerarşisi ve en son işleme çıktısı.
 * Bileşen örneklerinde alanların ve özelliklerin değerleri.
 * Devre kapsamına alınan [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection) hizmet örneklerinde tutulan veriler.
 
 > [!NOTE]
-> Bu makale, Blazor sunucu uygulamalarında durum kalıcılığını ele alınmaktadır. BlazorWebAssembly uygulamaları [Tarayıcıda istemci tarafı durum kalıcılığından](#client-side-in-the-browser) yararlanabilir, ancak bu makalenin kapsamı dışında özel çözümler veya üçüncü taraf paketleri gerektirebilir.
+> Bu makale, sunucu uygulamalarında durum kalıcılığını ele alınmaktadır Blazor . BlazorWebAssembly uygulamaları [Tarayıcıda istemci tarafı durum kalıcılığından](#client-side-in-the-browser) yararlanabilir, ancak bu makalenin kapsamı dışında özel çözümler veya üçüncü taraf paketleri gerektirebilir.
 
 ## <a name="blazor-circuits"></a>Blazoruygulanıp
 
@@ -56,11 +42,11 @@ Bazı senaryolarda, devre genelinde durum koruma istenebilir. Bir uygulama, şu 
 
 Genel olarak, devrelerde durumu korumak, kullanıcıların zaten var olan verileri okurken değil, etkin bir şekilde veri oluşturmakta olduğu senaryolar için geçerlidir.
 
-Tek bir devrenin ötesinde durumu korumak için, *verileri yalnızca sunucunun belleğine depolamayın*. Uygulama, verileri başka bir depolama konumuna kalıcı hale vermelidir. Durum kalıcılığı otomatik&mdash;değil durum bilgisi olan veri kalıcılığını uygulamak üzere uygulamayı geliştirirken adımları uygulamanız gerekir.
+Tek bir devrenin ötesinde durumu korumak için, *verileri yalnızca sunucunun belleğine depolamayın*. Uygulama, verileri başka bir depolama konumuna kalıcı hale vermelidir. Durum kalıcılığı otomatik değildir. Durum bilgisi olan veri kalıcılığını uygulamak üzere uygulamayı geliştirirken adımları uygulamanız gerekir.
 
 Veri kalıcılığı genellikle yalnızca kullanıcıların oluşturma çabasında olduğu yüksek değerli durum için gereklidir. Aşağıdaki örneklerde, kalıcı durum ticari etkinliklerdeki zaman veya yardımlarını kaydeder:
 
-* Çok adımlı WebForm &ndash; , bir kullanıcının, durumları kaybedilmişse çok adımlı bir işlemin birkaç tamamlanmış adımı için verileri yeniden girmesi için zaman alan bir işlemdir. Kullanıcı, çok adımlı formdan uzaklaştıklarında ve daha sonra forma geri döndüğünüzde bu senaryodaki durumu kaybeder.
+* Çok adımlı WebForm, &ndash; bir kullanıcının, durumları kaybedilmişse çok adımlı bir işlemin birkaç tamamlanmış adımı için verileri yeniden girmesi için zaman alan bir işlemdir. Kullanıcı, çok adımlı formdan uzaklaştıklarında ve daha sonra forma geri döndüğünüzde bu senaryodaki durumu kaybeder.
 * Alışveriş sepeti &ndash; olası geliri temsil eden bir uygulamanın ticari olarak önemli bir bileşeni olabilir. Durumlarını kaybettikleri bir Kullanıcı ve bu nedenle alışveriş sepeti, siteye daha sonra geri döntiklerinde daha az ürün veya hizmet satın alabilir.
 
 Genellikle, gönderilmemiş bir oturum açma iletişim kutusuna girilen Kullanıcı adı gibi, kolayca yeniden oluşturulmuş durumu korumak gerekli değildir.
@@ -70,7 +56,7 @@ Genellikle, gönderilmemiş bir oturum açma iletişim kutusuna girilen Kullanı
 
 ## <a name="where-to-persist-state"></a>Durumun nerede kalıcı olduğu
 
-Blazor Sunucu uygulamasındaki kalıcı durum için üç ortak konum vardır. Her yaklaşım farklı senaryolara en iyi şekilde uygundur ve farklı uyarılar içerir:
+Sunucu uygulamasındaki kalıcı durum için üç ortak konum vardır Blazor . Her yaklaşım farklı senaryolara en iyi şekilde uygundur ve farklı uyarılar içerir:
 
 * [Veritabanında sunucu tarafı](#server-side-in-a-database)
 * [URL](#url)
@@ -89,7 +75,7 @@ Veriler veritabanına kaydedildikten sonra, bir kullanıcı tarafından herhangi
 
 Azure veri depolama seçenekleri hakkında daha fazla bilgi için bkz. [Azure depolama belgeleri](/azure/storage/) ve [Azure veritabanları](https://azure.microsoft.com/product-categories/databases/).
 
-### <a name="url"></a>URL'si
+### <a name="url"></a>URL
 
 Gezinti durumunu temsil eden geçici veriler için, verileri URL 'nin bir parçası olarak modelleyin. URL 'de modellenen durum örnekleri şunları içerir:
 
@@ -99,20 +85,20 @@ Gezinti durumunu temsil eden geçici veriler için, verileri URL 'nin bir parça
 Tarayıcının adres çubuğunun içeriği korunur:
 
 * Kullanıcı sayfayı el ile yeniden yükler.
-* Web sunucusu kullanılamaz&mdash;hale gelirse, Kullanıcı farklı bir sunucuya bağlanmak için sayfayı yeniden yüklemeye zorlanır.
+* Web sunucusu kullanılamaz hale gelirse ve Kullanıcı farklı bir sunucuya bağlanmak için sayfayı yeniden yüklemeye zorlanır.
 
-`@page` YÖNERGEYLE URL desenleri tanımlama hakkında bilgi için bkz <xref:blazor/routing>..
+Yönergeyle URL desenleri tanımlama hakkında bilgi için `@page` bkz <xref:blazor/routing> ..
 
 ### <a name="client-side-in-the-browser"></a>Tarayıcıda istemci tarafı
 
 Kullanıcının etkin şekilde oluşturmakta olduğu geçici veriler için, yaygın bir yedekleme deposu tarayıcının `localStorage` ve `sessionStorage` koleksiyonlarıdır. Devre dışı bırakılırsa, sunucu tarafı depolama alanının avantajlarından yararlanan uygulama, saklı durumu yönetmek veya temizlemek için gerekli değildir.
 
 > [!NOTE]
-> Bu bölümdeki "istemci tarafı", [ Blazor webassembly barındırma modelinde](xref:blazor/hosting-models#blazor-webassembly)değil, tarayıcıdaki istemci tarafı senaryolarına başvurur. `localStorage`ve `sessionStorage` yalnızca özel kod yazarak Blazor veya 3. taraf paketini kullanarak webassembly uygulamalarında kullanılabilir.
+> Bu bölümdeki "istemci tarafı", [ Blazor webassembly barındırma modelinde](xref:blazor/hosting-models#blazor-webassembly)değil, tarayıcıdaki istemci tarafı senaryolarına başvurur. `localStorage`ve `sessionStorage` Blazor yalnızca özel kod yazarak veya 3. taraf paketini kullanarak webassembly uygulamalarında kullanılabilir.
 
 `localStorage`ve `sessionStorage` aşağıdaki gibi farklılık gösterir:
 
-* `localStorage`, kullanıcının tarayıcısına kapsamlandırılır. Kullanıcı sayfayı yeniden yüklediğinde veya tarayıcıyı kapatıp yeniden açarsa durum devam ettirir. Kullanıcı birden çok tarayıcı sekmesi açarsa, durum sekmeler arasında paylaşılır. Veriler açık olarak `localStorage` temizlenene kadar içinde devam ediyor.
+* `localStorage`, kullanıcının tarayıcısına kapsamlandırılır. Kullanıcı sayfayı yeniden yüklediğinde veya tarayıcıyı kapatıp yeniden açarsa durum devam ettirir. Kullanıcı birden çok tarayıcı sekmesi açarsa, durum sekmeler arasında paylaşılır. Veriler `localStorage` Açık olarak temizlenene kadar içinde devam ediyor.
 * `sessionStorage`kullanıcının tarayıcı sekmesi kapsamıdır. Kullanıcı sekmeyi yeniden yüklediğinde durum devam ettirir. Kullanıcı sekmeyi veya tarayıcıyı kapatırsa durum kaybedilir. Kullanıcı birden çok tarayıcı sekmesi açarsa, her sekmenin kendi bağımsız bir veri sürümü vardır.
 
 Genellikle, `sessionStorage` kullanmak daha güvenlidir. `sessionStorage`bir kullanıcının birden çok sekme açmasını ve aşağıdaki gibi karşılaştığı riskleri önler:
@@ -126,34 +112,34 @@ Tarayıcı depolamayı kullanmaya yönelik uyarılar:
 
 * Sunucu tarafı veritabanının kullanımına benzer şekilde veri yükleme ve kaydetme zaman uyumsuzdur.
 * Sunucu tarafı veritabanının aksine, istenen sayfa prerendering aşamasında tarayıcıda bulunmadığından, depolama alanı prerendering sırasında kullanılamaz.
-* Birkaç kilobayt veri depolama alanı Blazor sunucu uygulamalarında kalıcı hale getiriyoruz. Birkaç kilobayt dışında, veriler ağ üzerinden yüklenip kaydedildiğinden performans etkilerini göz önünde bulundurmanız gerekir.
+* Birkaç kilobayt veri depolama alanı sunucu uygulamalarında kalıcı hale getiriyoruz Blazor . Birkaç kilobayt dışında, veriler ağ üzerinden yüklenip kaydedildiğinden performans etkilerini göz önünde bulundurmanız gerekir.
 * Kullanıcılar verileri görüntüleyebilir veya bunlarla karşılaşabilir. ASP.NET Core [veri koruma](xref:security/data-protection/introduction) riski azaltabilirler.
 
 ## <a name="third-party-browser-storage-solutions"></a>Üçüncü taraf tarayıcı depolama çözümleri
 
-Üçüncü taraf NuGet paketleri ve `localStorage` `sessionStorage`Ile çalışmaya yönelik API 'ler sağlar.
+Üçüncü taraf NuGet paketleri ve ile çalışmaya yönelik API 'Ler `localStorage` sağlar `sessionStorage` .
 
 ASP.NET Core [veri korumasını](xref:security/data-protection/introduction)saydam olarak kullanan bir paket seçmeyi düşünülüyor. ASP.NET Core veri koruma, depolanan verileri şifreler ve depolanan verilerle yapılan değişikliklere karşı olası riskleri azaltır. JSON seri hale getirilmiş veriler düz metin halinde depolanıyorsa, kullanıcılar tarayıcı geliştirici araçlarını kullanarak verileri görebilir ve depolanan verileri de değiştirebilir. Verilerin güvenliğini sağlamak her zaman bir sorun değildir çünkü veriler önemsiz olarak olabilir. Örneğin, bir kullanıcı ARABIRIMI öğesinin saklı rengini okumak veya değiştirmek, Kullanıcı veya kuruluş için önemli bir güvenlik riski değildir. Kullanıcıların *hassas verileri*incelemesine veya değiştirmesine izin vermeyi önleyin.
 
 ## <a name="protected-browser-storage-experimental-package"></a>Korumalı tarayıcı depolaması deneysel paket
 
-[Microsoft. AspNetCore. ProtectedBrowserStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)ve `localStorage` `sessionStorage` için [veri koruması](xref:security/data-protection/introduction) sağlayan bir NuGet paketi örneği.
+[Data Protection](xref:security/data-protection/introduction) `localStorage` `sessionStorage` [Microsoft. Aspnetcore. Protectedbrowserstorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)ve için veri koruması sağlayan bir NuGet paketi örneği.
 
 > [!WARNING]
 > `Microsoft.AspNetCore.ProtectedBrowserStorage`, şu anda üretim kullanımı için uygun olmayan, desteklenmeyen bir deneysel paket.
 
 ### <a name="installation"></a>Yükleme
 
-`Microsoft.AspNetCore.ProtectedBrowserStorage` Paketi yüklemek için:
+Paketi yüklemek için `Microsoft.AspNetCore.ProtectedBrowserStorage` :
 
-1. Blazor Sunucu uygulaması projesinde, [Microsoft. Aspnetcore. protectedbrowserstorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)öğesine bir paket başvurusu ekleyin.
+1. BlazorSunucu uygulaması projesinde, [Microsoft. aspnetcore. ProtectedBrowserStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)öğesine bir paket başvurusu ekleyin.
 1. Üst düzey HTML 'de (örneğin, varsayılan Proje şablonundaki *Pages/_Host. cshtml* dosyasında) aşağıdaki `<script>` etiketi ekleyin:
 
    ```html
    <script src="_content/Microsoft.AspNetCore.ProtectedBrowserStorage/protectedBrowserStorage.js"></script>
    ```
 
-1. `Startup.ConfigureServices` Yönteminde, hizmet koleksiyonuna Ekle `AddProtectedBrowserStorage` `localStorage` ve `sessionStorage` hizmetler ' i çağırın:
+1. `Startup.ConfigureServices`Yönteminde, `AddProtectedBrowserStorage` `localStorage` hizmet koleksiyonuna Ekle ve hizmetler ' i çağırın `sessionStorage` :
 
    ```csharp
    services.AddProtectedBrowserStorage();
@@ -161,7 +147,7 @@ ASP.NET Core [veri korumasını](xref:security/data-protection/introduction)sayd
 
 ### <a name="save-and-load-data-within-a-component"></a>Bir bileşen içindeki verileri kaydetme ve yükleme
 
-Tarayıcı depolamaya veri yüklemeyi veya kaydetmeyi gerektiren herhangi bir bileşende, aşağıdakilerden birinin bir [`@inject`](xref:blazor/dependency-injection#request-a-service-in-a-component) örneğini eklemek için kullanın:
+Tarayıcı depolamaya veri yüklemeyi veya kaydetmeyi gerektiren herhangi bir bileşende, [`@inject`](xref:blazor/dependency-injection#request-a-service-in-a-component) aşağıdakilerden birinin bir örneğini eklemek için kullanın:
 
 * `ProtectedLocalStorage`
 * `ProtectedSessionStorage`
@@ -173,9 +159,9 @@ Seçim, hangi yedekleme deposunu kullanmak istediğinize bağlıdır. Aşağıda
 @inject ProtectedSessionStorage ProtectedSessionStore
 ```
 
-`@using` İfade, bileşen yerine bir *_Imports. Razor* dosyasına yerleştirilebilir. *_Imports. Razor* dosyası kullanımı, ad alanını uygulamanın daha büyük kesimlerine veya uygulamanın tamamına kullanılabilir hale getirir.
+`@using`İfade, bileşen yerine bir *_Imports. Razor* dosyasına yerleştirilebilir. *_Imports. Razor* dosyası kullanımı, ad alanını uygulamanın daha büyük kesimlerine veya uygulamanın tamamına kullanılabilir hale getirir.
 
-`currentCount` Proje şablonunun `Counter` bileşenindeki değeri kalıcı hale getirmek için, kullanmak `IncrementCount` `ProtectedSessionStore.SetAsync`üzere yöntemi değiştirin:
+`currentCount`Proje şablonunun bileşenindeki değeri kalıcı hale getirmek için `Counter` , `IncrementCount` kullanmak üzere yöntemi değiştirin `ProtectedSessionStore.SetAsync` :
 
 ```csharp
 private async Task IncrementCount()
@@ -187,9 +173,9 @@ private async Task IncrementCount()
 
 Daha büyük, daha gerçekçi uygulamalar, tek tek alanların depolanması ise olası bir senaryodur. Uygulamalar karmaşık durum içeren tüm model nesnelerini depolamaya daha olasıdır. `ProtectedSessionStore`JSON verilerini otomatik olarak serileştirir ve seri hale getirir.
 
-Yukarıdaki kod örneğinde, `currentCount` veriler kullanıcının tarayıcısında olarak `sessionStorage['count']` depolanır. Veriler düz metin biçiminde depolanmaz, bunun yerine ASP.NET Core [veri koruma](xref:security/data-protection/introduction)kullanılarak korunur. Şifrelenmiş veriler, tarayıcının geliştirici konsolunda değerlendirildiğinde `sessionStorage['count']` görülebilir.
+Yukarıdaki kod örneğinde, `currentCount` veriler `sessionStorage['count']` kullanıcının tarayıcısında olarak depolanır. Veriler düz metin biçiminde depolanmaz, bunun yerine ASP.NET Core [veri koruma](xref:security/data-protection/introduction)kullanılarak korunur. Şifrelenmiş veriler, `sessionStorage['count']` tarayıcının geliştirici konsolunda değerlendirildiğinde görülebilir.
 
-Kullanıcı daha sonra `currentCount` `Counter` bileşene geri dönerse verileri kurtarmak için (tamamen yeni bir devrede olanlar dahil), şunu kullanın `ProtectedSessionStore.GetAsync`:
+`currentCount`Kullanıcı daha sonra bileşene geri dönerse verileri kurtarmak için `Counter` (tamamen yeni bir devrede olanlar dahil), şunu kullanın `ProtectedSessionStore.GetAsync` :
 
 ```csharp
 protected override async Task OnInitializedAsync()
@@ -198,7 +184,7 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-Bileşenin parametreleri gezinti durumu içeriyorsa, sonucunu çağırın `ProtectedSessionStore.GetAsync` ve ' de `OnParametersSetAsync`atayın. `OnInitializedAsync` `OnInitializedAsync`Yalnızca bileşenin ilk örneği oluşturulduğunda bir kez çağırılır. `OnInitializedAsync`Kullanıcı aynı sayfada kaldığında farklı bir URL 'ye gittiğinde daha sonra yeniden çağrılmaz. Daha fazla bilgi için bkz. <xref:blazor/lifecycle>.
+Bileşenin parametreleri gezinti durumu içeriyorsa, `ProtectedSessionStore.GetAsync` sonucunu çağırın ve ' de atayın `OnParametersSetAsync` `OnInitializedAsync` . `OnInitializedAsync`Yalnızca bileşenin ilk örneği oluşturulduğunda bir kez çağırılır. `OnInitializedAsync`Kullanıcı aynı sayfada kaldığında farklı bir URL 'ye gittiğinde daha sonra yeniden çağrılmaz. Daha fazla bilgi için bkz. <xref:blazor/lifecycle>.
 
 > [!WARNING]
 > Bu bölümdeki örnekler yalnızca sunucuda prerendering etkinleştirilmemişse çalışır. Prerendering etkinken şuna benzer bir hata oluşturulur:
@@ -211,7 +197,7 @@ Bileşenin parametreleri gezinti durumu içeriyorsa, sonucunu çağırın `Prote
 
 Tarayıcı depolaması zaman uyumsuz olduğundan (bir ağ bağlantısı üzerinden erişilir), veriler yüklenmeden ve bir bileşen tarafından kullanıma sunulmadan önce her zaman bir zaman dilimi vardır. En iyi sonuçlar için, yükleme sırasında, boş veya varsayılan verileri görüntülemek yerine bir yükleme durumu iletisi işleme devam ediyor.
 
-Bir yaklaşım, verilerin `null` (hala yükleme) olup olmadığını izlemedir. Varsayılan `Counter` bileşende, sayı bir `int`içinde tutulur. Türe `currentCount` (`?``int`) bir soru işareti () ekleyerek null yapılabilir yapın:
+Bir yaklaşım, verilerin `null` (hala yükleme) olup olmadığını izlemedir. Varsayılan `Counter` bileşende, sayı bir içinde tutulur `int` . `currentCount`Türe () bir soru işareti () ekleyerek null yapılabilir yapın `?` `int` :
 
 ```csharp
 private int? currentCount;
@@ -243,11 +229,11 @@ Prerendering sırasında:
 
 > JavaScript birlikte çalışabilirlik çağrıları şu an için verilemez. Bunun nedeni, bileşenin ön işlenmiş olmasından kaynaklanır.
 
-Hatayı çözmek için bir yol prerendering devre dışı bırakılır. Bu genellikle uygulama tarayıcı tabanlı depolamanın yoğun bir şekilde kullanımını yapıyorsa en iyi seçenektir. Prerendering karmaşıklık ekler ve uygulama, kullanılabilir olana kadar `localStorage` `sessionStorage` faydalı içeriğe gidemediği için uygulamaya yarar.
+Hatayı çözmek için bir yol prerendering devre dışı bırakılır. Bu genellikle uygulama tarayıcı tabanlı depolamanın yoğun bir şekilde kullanımını yapıyorsa en iyi seçenektir. Prerendering karmaşıklık ekler ve uygulama, kullanılabilir olana kadar faydalı içeriğe gidemediği için uygulamaya yarar `localStorage` `sessionStorage` .
 
-Prerendering 'yi devre dışı bırakmak için, *Pages/_Host. cshtml* dosyasını açın ve `render-mode` [bileşen etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) ' nı ile <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server>değiştirin.
+Prerendering 'yi devre dışı bırakmak için, *Pages/_Host. cshtml* dosyasını açın ve `render-mode` [bileşen etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) ' nı ile değiştirin <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> .
 
-Prerendering, veya `localStorage` `sessionStorage`kullanmayan diğer sayfalar için yararlı olabilir. Prerendering etkin tutmak için, tarayıcı devreye bağlanana kadar yükleme işlemini erteleyin. Aşağıda, bir sayaç değeri depolamak için bir örnek verilmiştir:
+Prerendering, veya kullanmayan diğer sayfalar için yararlı olabilir `localStorage` `sessionStorage` . Prerendering etkin tutmak için, tarayıcı devreye bağlanana kadar yükleme işlemini erteleyin. Aşağıda, bir sayaç değeri depolamak için bir örnek verilmiştir:
 
 ```razor
 @using Microsoft.AspNetCore.ProtectedBrowserStorage
@@ -326,9 +312,9 @@ else
 }
 ```
 
-`CounterStateProvider` Bileşen, yükleme tamamlanana kadar alt içeriğini işlemeden Yükleme aşamasını işler.
+`CounterStateProvider`Bileşen, yükleme tamamlanana kadar alt içeriğini işlemeden Yükleme aşamasını işler.
 
-`CounterStateProvider` Bileşeni kullanmak için, bileşenin bir örneğini sayaç durumuna erişimi gerektiren diğer tüm bileşenler etrafında sarmalayın. Durumu bir uygulamadaki tüm bileşenler için erişilebilir hale getirmek `CounterStateProvider` üzere bileşeni `Router` `App` bileşende (*app. Razor*) içine sarmalayın:
+Bileşeni kullanmak için `CounterStateProvider` , bileşenin bir örneğini sayaç durumuna erişimi gerektiren diğer tüm bileşenler etrafında sarmalayın. Durumu bir uygulamadaki tüm bileşenler için erişilebilir hale getirmek üzere bileşeni `CounterStateProvider` `Router` `App` bileşende (*app. Razor*) içine sarmalayın:
 
 ```razor
 <CounterStateProvider>
@@ -338,7 +324,7 @@ else
 </CounterStateProvider>
 ```
 
-Sarmalanan bileşenler, kalıcı sayaç durumunu alır ve değiştirebilir. Aşağıdaki bileşen `Counter` , bu kalıbı uygular:
+Sarmalanan bileşenler, kalıcı sayaç durumunu alır ve değiştirebilir. Aşağıdaki `Counter` Bileşen, bu kalıbı uygular:
 
 ```razor
 @page "/counter"
@@ -359,9 +345,9 @@ Sarmalanan bileşenler, kalıcı sayaç durumunu alır ve değiştirebilir. Aşa
 }
 ```
 
-Yukarıdaki bileşen, ile `ProtectedBrowserStorage`etkileşimde bulunmak veya bir "yükleme" aşaması ile uğraşmak için gerekli değildir.
+Yukarıdaki bileşen, ile etkileşimde bulunmak `ProtectedBrowserStorage` veya bir "yükleme" aşaması ile uğraşmak için gerekli değildir.
 
-Daha önce açıklandığı gibi prerendering ile başa çıkmak `CounterStateProvider` için, sayaç verilerini kullanan tüm bileşenlerin prerendering ile otomatik olarak çalışmasını sağlayacak şekilde değiştirilebilir. Ayrıntılar için bkz. [Handle prerendering](#handle-prerendering) bölümü.
+Daha önce açıklandığı gibi prerendering ile başa çıkmak için, `CounterStateProvider` sayaç verilerini kullanan tüm bileşenlerin prerendering ile otomatik olarak çalışmasını sağlayacak şekilde değiştirilebilir. Ayrıntılar için bkz. [Handle prerendering](#handle-prerendering) bölümü.
 
 Genel olarak, *durum sağlayıcısı üst bileşen* deseninin kullanılması önerilir:
 

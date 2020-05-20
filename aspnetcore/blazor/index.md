@@ -1,30 +1,18 @@
 ---
-title: ASP.NET Core girişBlazor
-author: guardrex
-description: ASP.NET Core uygulamasında Blazor.NET ile etkileşimli istemci tarafı Web Kullanıcı arabirimi oluşturmak için bir yol ASP.NET Core keşfedelim.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc, seoapril2019
-ms.date: 03/25/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/index
-ms.openlocfilehash: ced3e2cc0428fccf6f0b2eba7a3f045e07002234
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82771956"
+Başlık: ' ASP.NET Core giriş Blazor ' Yazar: Açıklama: ' ASP.NET Core araştırma Blazor , bir ASP.NET Core uygulamasında .NET ile etkileşimli istemci tarafı Web Kullanıcı arabirimi oluşturmanın bir yoludur. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
 # <a name="introduction-to-aspnet-core-blazor"></a>ASP.NET Core girişBlazor
 
 [Daniel Roth](https://github.com/danroth27) ve [Luke Latham](https://github.com/guardrex) tarafından
 
-*Hoş geldiniz Blazor!*
+*Hoş geldiniz Blazor !*
 
 Blazor, .NET ile etkileşimli istemci tarafı Web Kullanıcı arabirimi oluşturmaya yönelik bir çerçevedir:
 
@@ -44,7 +32,7 @@ Blazor, .NET ile etkileşimli istemci tarafı Web Kullanıcı arabirimi oluştur
 
 ## <a name="components"></a>Bileşenler
 
-Blazoruygulamalar *bileşenleri*temel alır. İçindeki Blazor bir bileşeni, bir sayfa, iletişim veya veri girişi formu gibi bir kullanıcı arabirimi öğesidir.
+Blazoruygulamalar *bileşenleri*temel alır. İçindeki bir bileşeni Blazor , bir sayfa, iletişim veya veri girişi formu gibi bir kullanıcı arabirimi öğesidir.
 
 Bileşenler, .NET Derlemeleriyle yerleşik olarak bulunan .NET sınıflarıdır:
 
@@ -53,7 +41,7 @@ Bileşenler, .NET Derlemeleriyle yerleşik olarak bulunan .NET sınıflarıdır:
 * İç içe ve yeniden kullanılabilir olabilir.
 * , [ Razor Sınıf kitaplıkları](xref:razor-pages/ui-class) veya [NuGet paketleri](/nuget/what-is-nuget)olarak paylaşılabilir ve dağıtılabilir.
 
-Bileşen sınıfı genellikle [Razor](xref:mvc/views/razor) *. Razor* dosya uzantısına sahip bir biçimlendirme sayfası biçiminde yazılır. İçindeki Blazor bileşenler, resmi olarak * Razor bileşen*olarak adlandırılır. Razor, HTML işaretlemesini geliştirici üretkenliği için tasarlanan C# kodu ile birleştirmek için bir sözdizimidir. Razor[IntelliSense](/visualstudio/ide/using-intellisense) desteğiyle aynı dosyada HTML Işaretlemesi ile C# arasında geçiş yapmanıza olanak sağlar. RazorSayfalar ve MVC de kullanır Razor. Bir Razor istek/yanıt modeli etrafında oluşturulan SAYFALARıN ve MVC 'nin aksine, bileşenler özellikle ISTEMCI tarafı UI mantığı ve bileşimi için kullanılır.
+Bileşen sınıfı genellikle [Razor](xref:mvc/views/razor) *. Razor* dosya uzantısına sahip bir biçimlendirme sayfası biçiminde yazılır. İçindeki bileşenler Blazor , resmi olarak * Razor bileşen*olarak adlandırılır. Razor, HTML işaretlemesini geliştirici üretkenliği için tasarlanan C# kodu ile birleştirmek için bir sözdizimidir. Razor[IntelliSense](/visualstudio/ide/using-intellisense) desteğiyle aynı dosyada HTML Işaretlemesi ile C# arasında geçiş yapmanıza olanak sağlar. RazorSayfalar ve MVC de kullanır Razor . RazorBir istek/yanıt modeli etrafında oluşturulan sayfaların ve MVC 'nin aksine, bileşenler özellikle istemci tarafı UI mantığı ve bileşimi için kullanılır.
 
 Aşağıdaki Razor biçimlendirme, başka bir bileşen içinde iç içe yerleştirilebileceğini bir bileşeni (*iletişim kutusu. Razor*) gösterir:
 
@@ -80,11 +68,11 @@ Aşağıdaki Razor biçimlendirme, başka bir bileşen içinde iç içe yerleşt
 }
 ```
 
-İletişim kutusunun gövde içeriği (`ChildContent`) ve başlığı (`Title`), bu bileşeni Kullanıcı arabiriminde kullanan bileşen tarafından sağlanır. `OnYes`, düğme `onclick` olayının tetiklediği bir C# yöntemidir.
+İletişim kutusunun gövde içeriği ( `ChildContent` ) ve başlığı ( `Title` ), bu bileşeni Kullanıcı arabiriminde kullanan bileşen tarafından sağlanır. `OnYes`, düğme olayının tetiklediği bir C# yöntemidir `onclick` .
 
 BlazorUI bileşimi için doğal HTML etiketleri kullanır. HTML öğeleri, bileşenleri belirtir ve bir etiketin öznitelikleri değerleri bir bileşenin özelliklerine iletir.
 
-Aşağıdaki örnekte `Index` bileşen `Dialog` bileşeni kullanır. `ChildContent`ve `Title` `<Dialog>` öğesi öznitelikleri ve içeriği tarafından ayarlanır.
+Aşağıdaki örnekte `Index` bileşen `Dialog` bileşeni kullanır. `ChildContent`ve `Title` öğesi öznitelikleri ve içeriği tarafından ayarlanır `<Dialog>` .
 
 *Index. Razor*:
 
@@ -110,8 +98,6 @@ Bileşenler, Kullanıcı arabirimini esnek ve verimli bir şekilde güncelleşti
 
 ## <a name="blazor-webassembly"></a>BlazorWebAssembly
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
 BlazorWebAssembly, .NET ile etkileşimli istemci tarafı Web uygulamaları oluşturmaya yönelik tek sayfalı bir uygulama çerçevesidir. BlazorWebAssembly, eklentiler veya Code transpilation olmadan açık Web standartları kullanır ve mobil tarayıcılar dahil tüm modern web tarayıcılarında kullanılabilir.
 
 Web tarayıcıları içinde .NET kodu çalıştırmak, [Webassembly](https://webassembly.org) *(kısaltılmış)* tarafından mümkün hale getirilir. WebAssembly hızlı indirme ve en yüksek yürütme hızı için iyileştirilmiş bir sıkıştırma kodu biçimidir. WebAssembly, açık bir web standardıdır ve eklentileri olmayan Web tarayıcılarında desteklenir.
@@ -124,7 +110,7 @@ Bir Blazor weelsembly uygulaması bir tarayıcıda oluşturulup çalıştırıld
 
 * C# kod dosyaları ve Razor dosyaları .net Derlemeleriyle derlenir.
 * Derlemeler ve .NET çalışma zamanı tarayıcıya indirilir.
-* BlazorWebAssembly, .NET çalışma zamanı önyükleme ve çalışma zamanını uygulamanın derlemelerini yükleyecek şekilde yapılandırır. Webassembly çalışma zamanı, Blazor DOM işleme ve tarayıcı API çağrılarını Işlemek için JavaScript birlikte çalışabilirliği kullanır.
+* BlazorWebAssembly, .NET çalışma zamanı önyükleme ve çalışma zamanını uygulamanın derlemelerini yükleyecek şekilde yapılandırır. BlazorWebassembly çalışma zamanı, DOM işleme ve tarayıcı API çağrılarını işlemek Için JavaScript birlikte çalışabilirliği kullanır.
 
 Yayınlanan uygulamanın boyutu, *Yük boyutu*, uygulamanın useyeteneğinin önemli bir performans etkendir. Büyük bir uygulamanın tarayıcıya indirmesi oldukça uzun sürer ve bu da Kullanıcı deneyimini azaltabilecek. BlazorWebAssembly indirme sürelerini azaltmak için yük boyutunu iyileştirir:
 
@@ -134,26 +120,26 @@ Yayınlanan uygulamanın boyutu, *Yük boyutu*, uygulamanın useyeteneğinin ön
 
 ## <a name="blazor-server"></a>BlazorServer
 
-BlazorKullanıcı arabirimi güncelleştirmelerinin uygulanma, bileşen işleme mantığını ayırır. BlazorSunucu, bir ASP.NET Core uygulamasındaki Razor sunucuda bileşenleri barındırmak için destek sağlar. Kullanıcı Arabirimi güncelleştirmeleri bir [SignalR](xref:signalr/introduction) bağlantı üzerinden işlenir.
+BlazorKullanıcı arabirimi güncelleştirmelerinin uygulanma, bileşen işleme mantığını ayırır. BlazorSunucu Razor , bir ASP.NET Core uygulamasındaki sunucuda bileşenleri barındırmak için destek sağlar. Kullanıcı Arabirimi güncelleştirmeleri bir bağlantı üzerinden işlenir [SignalR](xref:signalr/introduction) .
 
 Çalışma zamanı, tarayıcıdan sunucuya kullanıcı arabirimi olayları göndermeyi ve bileşenleri çalıştırdıktan sonra sunucu tarafından tarayıcıya geri gönderilen Kullanıcı arabirimi güncelleştirmelerini uygular.
 
-Sunucu tarafından Blazor tarayıcıyla iletişim kurmak için kullanılan bağlantı, JavaScript birlikte çalışma çağrılarını işlemek için de kullanılır.
+BlazorSunucu tarafından tarayıcıyla iletişim kurmak için kullanılan bağlantı, JavaScript birlikte çalışma çağrılarını işlemek için de kullanılır.
 
-![BlazorSunucu, sunucuda .NET kodu çalıştırır ve bir SignalR bağlantı üzerinden istemcideki belge nesne modeli etkileşime girer](index/_static/blazor-server.png)
+![BlazorSunucu, sunucuda .NET kodu çalıştırır ve bir bağlantı üzerinden istemcideki Belge Nesne Modeli etkileşime girer SignalR](index/_static/blazor-server.png)
 
 ## <a name="javascript-interop"></a>JavaScript ile birlikte çalışma
 
-Üçüncü taraf JavaScript kitaplıklarını ve tarayıcı API 'Lerine erişimi gerektiren uygulamalar için, bileşenler JavaScript ile birlikte çalışır. Bileşenler, JavaScript 'in kullanabileceği herhangi bir kitaplığı veya API kullanma yeteneğine sahiptir. C# kodu JavaScript kodunu çağırabilir ve JavaScript kodu C# koduna çağrı yapabilir. Daha fazla bilgi için aşağıdaki makalelere bakın:
+Üçüncü taraf JavaScript kitaplıklarını ve tarayıcı API 'Lerine erişimi gerektiren uygulamalar için, bileşenler JavaScript ile birlikte çalışır. Bileşenler, JavaScript 'in kullanabileceği herhangi bir kitaplığı veya API kullanma yeteneğine sahiptir. C# kodu JavaScript kodunu çağırabilir ve JavaScript kodu C# koduna çağrı yapabilir. Daha fazla bilgi için aşağıdaki makaleleri inceleyin:
 
 * <xref:blazor/call-javascript-from-dotnet>
 * <xref:blazor/call-dotnet-from-javascript>
 
 ## <a name="code-sharing-and-net-standard"></a>Kod paylaşımı ve .NET Standard
 
-Blazor[2,0 .NET Standard](/dotnet/standard/net-standard)uygular. .NET Standard, .NET uygulamaları genelinde ortak olan .NET API 'lerinin resmi bir belirtimidir. .NET Standard sınıf kitaplıkları Blazor, .NET Framework, .NET Core, Xamarin, mono ve Unity gibi farklı .net platformları arasında paylaşılabilir.
+Blazor[2,0 .NET Standard](/dotnet/standard/net-standard)uygular. .NET Standard, .NET uygulamaları genelinde ortak olan .NET API 'lerinin resmi bir belirtimidir. .NET Standard sınıf kitaplıkları Blazor , .NET Framework, .NET Core, Xamarin, mono ve Unity gibi farklı .net platformları arasında paylaşılabilir.
 
-Bir Web tarayıcısı içinde geçerli olmayan API 'Ler (örneğin, dosya sistemine erişmek, bir yuva açmak ve iş parçacığı açmak) bir <xref:System.PlatformNotSupportedException>oluşturur.
+Bir Web tarayıcısı içinde geçerli olmayan API 'Ler (örneğin, dosya sistemine erişmek, bir yuva açmak ve iş parçacığı açmak) bir oluşturur <xref:System.PlatformNotSupportedException> .
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
@@ -163,4 +149,4 @@ Bir Web tarayıcısı içinde geçerli olmayan API 'Ler (örneğin, dosya sistem
 * [C# Kılavuzu](/dotnet/csharp/)
 * <xref:mvc/views/razor>
 * [HTML](https://www.w3.org/html/)
-* [Başar Blazor ](https://github.com/AdrienTorris/awesome-blazor) topluluk bağlantıları
+* [Başar Blazor ](https://github.com/AdrienTorris/awesome-blazor) Topluluk bağlantıları

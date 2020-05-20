@@ -1,7 +1,7 @@
 ---
 title: ASP.NET Core Blazor yaşam döngüsü
 author: guardrex
-description: ASP.NET Core Blazor uygulamalarda bileşen yaşam Razor döngüsü yöntemlerini nasıl kullanacağınızı öğrenin.
+description: RazorASP.NET Core uygulamalarda bileşen yaşam döngüsü yöntemlerini nasıl kullanacağınızı öğrenin Blazor .
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -13,26 +13,26 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/lifecycle
-ms.openlocfilehash: 81699158a161d0e9c9621235840979ebcd634a7e
-ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
+ms.openlocfilehash: e4fcd86b6e6a84d9e34a83688f9fb80c6907e5f3
+ms.sourcegitcommit: e20653091c30e0768c4f960343e2c3dd658bba13
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82976707"
+ms.lasthandoff: 05/16/2020
+ms.locfileid: "83438921"
 ---
 # <a name="aspnet-core-blazor-lifecycle"></a>ASP.NET Core Blazor yaşam döngüsü
 
 , [Luke Latham](https://github.com/guardrex) ve [Daniel Roth](https://github.com/danroth27) tarafından
 
-Çerçeve Blazor , zaman uyumlu ve zaman uyumsuz yaşam döngüsü yöntemlerini içerir. Bileşen başlatma ve işleme sırasında bileşenlerde ek işlemler gerçekleştirmek için yaşam döngüsü yöntemlerini geçersiz kılın.
+BlazorÇerçeve, zaman uyumlu ve zaman uyumsuz yaşam döngüsü yöntemlerini içerir. Bileşen başlatma ve işleme sırasında bileşenlerde ek işlemler gerçekleştirmek için yaşam döngüsü yöntemlerini geçersiz kılın.
 
 ## <a name="lifecycle-methods"></a>Yaşam döngüsü yöntemleri
 
 ### <a name="component-initialization-methods"></a>Bileşen başlatma yöntemleri
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>ve <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized%2A> , bileşen ilk parametrelerini ana bileşeninden aldıktan sonra başlatıldığında çağrılır. Bileşen `OnInitializedAsync` zaman uyumsuz bir işlem gerçekleştirdiğinde ve işlem tamamlandığında yenilenmesi gerektiğinde kullanın.
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A>ve, <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitialized%2A> bileşen ilk parametrelerini ana bileşeninden aldıktan sonra başlatıldığında çağrılır. `OnInitializedAsync`Bileşen zaman uyumsuz bir işlem gerçekleştirdiğinde ve işlem tamamlandığında yenilenmesi gerektiğinde kullanın.
 
-Zaman uyumlu bir işlem için, `OnInitialized`geçersiz kılın:
+Zaman uyumlu bir işlem için, geçersiz kılın `OnInitialized` :
 
 ```csharp
 protected override void OnInitialized()
@@ -41,7 +41,7 @@ protected override void OnInitialized()
 }
 ```
 
-Zaman uyumsuz bir işlem gerçekleştirmek için, `OnInitializedAsync` işlem üzerinde `await` anahtar sözcüğünü geçersiz kılın ve kullanın:
+Zaman uyumsuz bir işlem gerçekleştirmek için, `OnInitializedAsync` `await` işlem üzerinde anahtar sözcüğünü geçersiz kılın ve kullanın:
 
 ```csharp
 protected override async Task OnInitializedAsync()
@@ -50,14 +50,14 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-Blazor[İçerik](xref:blazor/hosting-model-configuration#render-mode) araması `OnInitializedAsync` yapan sunucu uygulamaları **_iki kez_**.
+Blazor[İçerik](xref:blazor/hosting-model-configuration#render-mode) araması yapan sunucu uygulamaları `OnInitializedAsync` **_iki kez_**.
 
 * Bir kez, bileşen sayfanın bir parçası olarak başlangıçta statik olarak işlendiğinde.
 * Tarayıcı sunucuya geri bir bağlantı kurduğunda ikinci bir zaman.
 
-İçindeki `OnInitializedAsync` geliştirici kodunun iki kez çalıştırılmasını engellemek için [prerendering sonrasında durum bilgisi olan yeniden bağlanma](#stateful-reconnection-after-prerendering) bölümüne bakın.
+İçindeki geliştirici kodunun `OnInitializedAsync` iki kez çalıştırılmasını engellemek için [prerendering sonrasında durum bilgisi olan yeniden bağlanma](#stateful-reconnection-after-prerendering) bölümüne bakın.
 
-Blazor Sunucu uygulaması prerendering olsa da, tarayıcıyla bir bağlantı kurulmadığından, JavaScript 'e çağırma gibi bazı eylemler mümkün değildir. Bileşenler, ön işlenmiş olduğunda farklı şekilde işlenmesi gerekebilir. Daha fazla bilgi için bkz. [uygulamanın ne zaman prerendering](#detect-when-the-app-is-prerendering) bölümüne bakın.
+BlazorSunucu uygulaması prerendering olsa da, tarayıcıyla bir bağlantı kurulmadığından, JavaScript 'e çağırma gibi bazı eylemler mümkün değildir. Bileşenler, ön işlenmiş olduğunda farklı şekilde işlenmesi gerekebilir. Daha fazla bilgi için bkz. [uygulamanın ne zaman prerendering](#detect-when-the-app-is-prerendering) bölümüne bakın.
 
 Herhangi bir olay işleyicisi ayarlandıysa, bunların aktiften çıkarılmasını geri alır. Daha fazla bilgi için, [IDisposable Ile bileşen aktiften çıkarma](#component-disposal-with-idisposable) bölümüne bakın.
 
@@ -74,17 +74,17 @@ public override async Task SetParametersAsync(ParameterView parameters)
 }
 ```
 
-<xref:Microsoft.AspNetCore.Components.ParameterView>her çağrılışında `SetParametersAsync` parametre değerleri kümesinin tamamını içerir.
+<xref:Microsoft.AspNetCore.Components.ParameterView>her çağrılışında parametre değerleri kümesinin tamamını içerir `SetParametersAsync` .
 
-Varsayılan `SetParametersAsync` uygulama, `[Parameter]` `ParameterView`her bir özelliğin değerini içinde karşılık gelen bir değere sahip `[CascadingParameter]` veya özniteliğiyle ayarlar. İçinde `ParameterView` karşılık gelen bir değere sahip olmayan parametreler değişmeden bırakılır.
+Varsayılan uygulama `SetParametersAsync` , her bir özelliğin değerini `[Parameter]` `[CascadingParameter]` içinde karşılık gelen bir değere sahip veya özniteliğiyle ayarlar `ParameterView` . İçinde karşılık gelen bir değere sahip olmayan parametreler `ParameterView` değişmeden bırakılır.
 
-Çağrılmadıysa `base.SetParametersAync` , özel kod gelen parametreler değerini gerekli herhangi bir şekilde yorumlayabilir. Örneğin, sınıftaki özelliklere gelen parametreleri atama gereksinimi yoktur.
+`base.SetParametersAync`Çağrılmadıysa, özel kod gelen parametreler değerini gerekli herhangi bir şekilde yorumlayabilir. Örneğin, sınıftaki özelliklere gelen parametreleri atama gereksinimi yoktur.
 
 Herhangi bir olay işleyicisi ayarlandıysa, bunların aktiften çıkarılmasını geri alır. Daha fazla bilgi için, [IDisposable Ile bileşen aktiften çıkarma](#component-disposal-with-idisposable) bölümüne bakın.
 
 ### <a name="after-parameters-are-set"></a>Parametreler ayarlandıktan sonra
 
-<xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A>ve <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSet%2A> şu şekilde adlandırılır:
+<xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSetAsync%2A>ve <xref:Microsoft.AspNetCore.Components.ComponentBase.OnParametersSet%2A> Şu şekilde adlandırılır:
 
 * Bileşen başlatıldığında ve üst bileşeninden ilk parametre kümesini aldığında.
 * Üst bileşen yeniden oluşturup şunları sağlar:
@@ -99,7 +99,7 @@ protected override async Task OnParametersSetAsync()
 ```
 
 > [!NOTE]
-> `OnParametersSetAsync` Yaşam döngüsü olayında parametre ve özellik değerleri uygulanırken zaman uyumsuz iş olması gerekir.
+> Yaşam döngüsü olayında parametre ve özellik değerleri uygulanırken zaman uyumsuz iş olması gerekir `OnParametersSetAsync` .
 
 ```csharp
 protected override void OnParametersSet()
@@ -114,9 +114,9 @@ Herhangi bir olay işleyicisi ayarlandıysa, bunların aktiften çıkarılmasın
 
 <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRenderAsync%2A>ve <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> bir bileşen işlemeyi tamamladıktan sonra çağrılır. Öğe ve bileşen başvuruları bu noktada doldurulur. İşlenmiş DOM öğelerinde çalışan üçüncü taraf JavaScript kitaplıklarını etkinleştirme gibi, işlenmiş içeriği kullanarak ek başlatma adımları gerçekleştirmek için bu aşamayı kullanın.
 
-Ve `firstRender` `OnAfterRender`için `OnAfterRenderAsync` parametresi:
+`firstRender`Ve için parametresi `OnAfterRenderAsync` `OnAfterRender` :
 
-* , Bileşen örneği `true` ilk kez işlendiğinde olarak ayarlanır.
+* , `true` Bileşen örneği ilk kez işlendiğinde olarak ayarlanır.
 * Başlatma işinin yalnızca bir kez gerçekleştirildiğinden emin olmak için kullanılabilir.
 
 ```csharp
@@ -130,9 +130,9 @@ protected override async Task OnAfterRenderAsync(bool firstRender)
 ```
 
 > [!NOTE]
-> `OnAfterRenderAsync` Yaşam döngüsü olayında işleme hemen sonra zaman uyumsuz çalışma gerçekleşmelidir.
+> Yaşam döngüsü olayında işleme hemen sonra zaman uyumsuz çalışma gerçekleşmelidir `OnAfterRenderAsync` .
 >
-> Bir <xref:System.Threading.Tasks.Task> öğesinden `OnAfterRenderAsync`döndürseniz bile, çerçeve bu görev tamamlandıktan sonra bileşen için başka bir işleme çevrimi zamanlayamaz. Bu, sonsuz bir işleme döngüsünden kaçınmaktır. Diğer yaşam döngüsü yöntemlerinden farklı olduğundan, döndürülen görev tamamlandığında daha fazla işleme döngüsü zamanlayabilirsiniz.
+> Bir öğesinden döndürseniz bile <xref:System.Threading.Tasks.Task> `OnAfterRenderAsync` , çerçeve bu görev tamamlandıktan sonra bileşen için başka bir işleme çevrimi zamanlayamaz. Bu, sonsuz bir işleme döngüsünden kaçınmaktır. Diğer yaşam döngüsü yöntemlerinden farklı olduğundan, döndürülen görev tamamlandığında daha fazla işleme döngüsü zamanlayabilirsiniz.
 
 ```csharp
 protected override void OnAfterRender(bool firstRender)
@@ -150,7 +150,7 @@ Herhangi bir olay işleyicisi ayarlandıysa, bunların aktiften çıkarılmasın
 
 ### <a name="suppress-ui-refreshing"></a>UI yenilemeyi bastır
 
-UI <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> yenilemeyi gizlemek için geçersiz kılın. Uygulama döndürürse `true`, Kullanıcı arabirimi yenilenir:
+<xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A>UI yenilemeyi gizlemek için geçersiz kılın. Uygulama döndürürse `true` , Kullanıcı arabirimi yenilenir:
 
 ```csharp
 protected override bool ShouldRender()
@@ -163,7 +163,9 @@ protected override bool ShouldRender()
 
 `ShouldRender`bileşen her işlendiğinde çağrılır.
 
-`ShouldRender` Geçersiz kılınsa bile, bileşen her zaman ilk olarak işlenir.
+`ShouldRender`Geçersiz kılınsa bile, bileşen her zaman ilk olarak işlenir.
+
+Daha fazla bilgi için bkz. <xref:performance/blazor/webassembly-best-practices#avoid-unnecessary-component-renders>.
 
 ## <a name="state-changes"></a>Durum değişiklikleri
 
@@ -171,17 +173,17 @@ protected override bool ShouldRender()
 
 ## <a name="handle-incomplete-async-actions-at-render"></a>İşleme sırasında tamamlanmamış zaman uyumsuz eylemleri işle
 
-Yaşam döngüsü olaylarında gerçekleştirilen zaman uyumsuz eylemler, bileşen işlenmeden önce tamamlanmamış olabilir. Yaşam döngüsü yöntemi `null` yürütülürken nesneler, verilerle tamamen doldurulmuş olabilir. Nesnelerin başlatıldığını onaylamak için işleme mantığı sağlayın. Nesneler olduğunda `null`yer tutucu Kullanıcı arabirimi öğelerini (örneğin, bir yükleme iletisi) işleme.
+Yaşam döngüsü olaylarında gerçekleştirilen zaman uyumsuz eylemler, bileşen işlenmeden önce tamamlanmamış olabilir. `null`Yaşam döngüsü yöntemi yürütülürken nesneler, verilerle tamamen doldurulmuş olabilir. Nesnelerin başlatıldığını onaylamak için işleme mantığı sağlayın. Nesneler olduğunda yer tutucu Kullanıcı arabirimi öğelerini (örneğin, bir yükleme iletisi) işleme `null` .
 
-Blazor Şablonların `FetchData` bileşeninde, `OnInitializedAsync` Asychronously (`forecasts`) tahmin verileri almak için geçersiz kılınır. Ne `forecasts` zaman `null`olduğunda, kullanıcıya bir yükleme iletisi görüntülenir. İşlem `OnInitializedAsync` tamamlandıktan `Task` sonra, bileşen güncelleştirilmiş duruma geri döner.
+`FetchData` Blazor Şablonların bileşeninde, `OnInitializedAsync` Asychronously () tahmin verileri almak için geçersiz kılınır `forecasts` . Ne zaman olduğunda `forecasts` `null` , kullanıcıya bir yükleme iletisi görüntülenir. `Task` `OnInitializedAsync` İşlem tamamlandıktan sonra, bileşen güncelleştirilmiş duruma geri döner.
 
-Blazor Sunucu şablonunda *Pages/fetchdata. Razor* :
+Sunucu şablonunda *Pages/FetchData. Razor* Blazor :
 
 [!code-razor[](lifecycle/samples_snapshot/3.x/FetchData.razor?highlight=9,21,25)]
 
 ## <a name="component-disposal-with-idisposable"></a>IDisposable ile bileşen atma
 
-Bir bileşen uygularsa <xref:System.IDisposable>, bileşen kullanıcı arabiriminden kaldırıldığında [Dispose yöntemi](/dotnet/standard/garbage-collection/implementing-dispose) çağırılır. Aşağıdaki bileşen ve `Dispose` yöntemini `@implements IDisposable` kullanır:
+Bir bileşen uygularsa <xref:System.IDisposable> , bileşen kullanıcı arabiriminden kaldırıldığında [Dispose yöntemi](/dotnet/standard/garbage-collection/implementing-dispose) çağırılır. Aşağıdaki bileşen `@implements IDisposable` ve `Dispose` yöntemini kullanır:
 
 ```razor
 @using System
@@ -198,9 +200,9 @@ Bir bileşen uygularsa <xref:System.IDisposable>, bileşen kullanıcı arabirimi
 ```
 
 > [!NOTE]
-> ' <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> In `Dispose` çağrılması desteklenmez. `StateHasChanged`oluşturucuyu aşağı doğru olarak çağrılabilir, bu nedenle bu noktada UI güncelleştirmelerinin kullanılması desteklenmez.
+> <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>' In çağrılması `Dispose` desteklenmez. `StateHasChanged`oluşturucuyu aşağı doğru olarak çağrılabilir, bu nedenle bu noktada UI güncelleştirmelerinin kullanılması desteklenmez.
 
-.NET etkinliklerinden olay işleyicilerini kaldırma. Aşağıdaki [ Blazor form](xref:blazor/forms-validation) örnekleri, `Dispose` yönteminde bir olay işleyicisinin nasıl geri yükleneceğini göstermektedir:
+.NET etkinliklerinden olay işleyicilerini kaldırma. Aşağıdaki [ Blazor form](xref:blazor/forms-validation) örnekleri, yönteminde bir olay işleyicisinin nasıl geri yükleneceğini göstermektedir `Dispose` :
 
 * Özel alan ve lambda yaklaşımı
 
@@ -212,24 +214,24 @@ Bir bileşen uygularsa <xref:System.IDisposable>, bileşen kullanıcı arabirimi
 
 ## <a name="handle-errors"></a>Hataları işleme
 
-Yaşam döngüsü yöntemi yürütme sırasında hataları işleme hakkında bilgi için bkz <xref:blazor/handle-errors#lifecycle-methods>..
+Yaşam döngüsü yöntemi yürütme sırasında hataları işleme hakkında bilgi için bkz <xref:blazor/handle-errors#lifecycle-methods> ..
 
 ## <a name="stateful-reconnection-after-prerendering"></a>Prerendering sonrasında durum bilgisi olan yeniden bağlanma
 
-Bir Blazor sunucu `RenderMode` `ServerPrerendered`uygulamasında,, bileşen başlangıçta sayfanın bir parçası olarak statik olarak işlenir. Tarayıcı sunucuya geri bir bağlantı kurduğunda, bileşen *yeniden*işlenir ve bileşen artık etkileşimli olur. Bileşeni başlatmak için [Onbaşlatılmış {Async}](#component-initialization-methods) yaşam döngüsü yöntemi varsa, yöntem *iki kez*yürütülür:
+Bir sunucu uygulamasında,, Blazor `RenderMode` `ServerPrerendered` bileşen başlangıçta sayfanın bir parçası olarak statik olarak işlenir. Tarayıcı sunucuya geri bir bağlantı kurduğunda, bileşen *yeniden*işlenir ve bileşen artık etkileşimli olur. Bileşeni başlatmak için [Onbaşlatılmış {Async}](#component-initialization-methods) yaşam döngüsü yöntemi varsa, yöntem *iki kez*yürütülür:
 
 * Bileşen statik olarak önceden kullanılırken.
 * Sunucu bağlantısı kurulduktan sonra.
 
 Bu, bileşen son işlendiğinde Kullanıcı arabiriminde görünen verilerde fark edilebilir bir değişikliğe neden olabilir.
 
-Bir Blazor sunucu uygulamasında çift işleme senaryosunu önlemek için:
+Bir sunucu uygulamasında çift işleme senaryosunu önlemek için Blazor :
 
 * Prerendering sırasında durumu önbelleğe almak için kullanılabilecek bir tanımlayıcı geçirin ve uygulamayı yeniden başlattıktan sonra durumu alma.
 * Bileşen durumunu kaydetmek için prerendering sırasında tanımlayıcıyı kullanın.
 * Önbelleğe alınan durumu almak için prerendering öğesinden sonra tanımlayıcıyı kullanın.
 
-Aşağıdaki kod, bir şablon tabanlı `WeatherForecastService` Blazor sunucu uygulamasında, Çift işlemeyi engelleyen güncelleştirilmiş bir güncelleme göstermektedir:
+Aşağıdaki kod, bir `WeatherForecastService` şablon tabanlı Blazor sunucu uygulamasında, Çift işlemeyi engelleyen güncelleştirilmiş bir güncelleme göstermektedir:
 
 ```csharp
 public class WeatherForecastService
@@ -272,7 +274,7 @@ public class WeatherForecastService
 }
 ```
 
-Hakkında `RenderMode`daha fazla bilgi için bkz <xref:blazor/hosting-model-configuration#render-mode>..
+Hakkında daha fazla bilgi için `RenderMode` bkz <xref:blazor/hosting-model-configuration#render-mode> ..
 
 ## <a name="detect-when-the-app-is-prerendering"></a>Uygulamanın ne zaman prerendering olduğunu Algıla
 
@@ -280,7 +282,7 @@ Hakkında `RenderMode`daha fazla bilgi için bkz <xref:blazor/hosting-model-conf
 
 ## <a name="cancelable-background-work"></a>İptal edilebilen arka plan çalışması
 
-Bileşenler genellikle ağ çağrıları yapma (<xref:System.Net.Http.HttpClient>) ve veritabanlarıyla etkileşim kurma gibi uzun süre çalışan arka plan işleri gerçekleştirir. Çeşitli durumlarda sistem kaynaklarını korumak için arka plan işinin durdurulması istenebilir. Örneğin, bir Kullanıcı bir bileşenden uzaklaştığında arka planda zaman uyumsuz işlemler otomatik olarak durdurulur.
+Bileşenler genellikle ağ çağrıları yapma ( <xref:System.Net.Http.HttpClient> ) ve veritabanlarıyla etkileşim kurma gibi uzun süre çalışan arka plan işleri gerçekleştirir. Çeşitli durumlarda sistem kaynaklarını korumak için arka plan işinin durdurulması istenebilir. Örneğin, bir Kullanıcı bir bileşenden uzaklaştığında arka planda zaman uyumsuz işlemler otomatik olarak durdurulur.
 
 Arka plan iş öğelerinin iptal etme gerektirmesinin diğer nedenleri şunlardır:
 
@@ -292,14 +294,14 @@ Arka plan iş öğelerinin iptal etme gerektirmesinin diğer nedenleri şunlard�
 
 Bir bileşene iptal edilebilen bir arka plan çalışma deseninin uygulanması için:
 
-* <xref:System.Threading.CancellationTokenSource> Ve <xref:System.Threading.CancellationToken>kullanın.
+* Ve kullanın <xref:System.Threading.CancellationTokenSource> <xref:System.Threading.CancellationToken> .
 * [Bileşenin elden çıkarılmasında](#component-disposal-with-idisposable) ve herhangi bir noktada iptal işlemi, belirteci el ile iptal ederek istenir [CancellationTokenSource.Cancel](xref:System.Threading.CancellationTokenSource.Cancel%2A)
-* Zaman uyumsuz çağrı geri döndüğünde, belirteci <xref:System.Threading.CancellationToken.ThrowIfCancellationRequested%2A> çağırın.
+* Zaman uyumsuz çağrı geri döndüğünde, <xref:System.Threading.CancellationToken.ThrowIfCancellationRequested%2A> belirteci çağırın.
 
 Aşağıdaki örnekte:
 
 * `await Task.Delay(5000, cts.Token);`uzun süreli zaman uyumsuz arka plan çalışmasını temsil eder.
-* `BackgroundResourceMethod`yöntemi çağrılmadan önce atıldığı takdirde, `Resource` uzun süre çalışan bir arka plan yöntemini temsil eder.
+* `BackgroundResourceMethod`yöntemi çağrılmadan önce atıldığı takdirde, uzun süre çalışan bir arka plan yöntemini temsil eder `Resource` .
 
 ```razor
 @implements IDisposable

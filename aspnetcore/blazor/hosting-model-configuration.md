@@ -1,42 +1,28 @@
 ---
-title: ASP.NET Core Blazor barındırma modeli yapılandırması
-author: guardrex
-description: Bileşenleri Razor sayfalar Blazor ve MVC uygulamalarıyla tümleştirme Razor dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/04/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/hosting-model-configuration
-ms.openlocfilehash: 17ed43a12643f067da73658bec72400acbe1be43
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82772080"
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>ASP.NET Core Blazor barındırma modeli yapılandırması
 
 [Daniel Roth](https://github.com/danroth27) ve [Luke Latham](https://github.com/guardrex) tarafından
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
 Bu makalede barındırma modeli yapılandırması ele alınmaktadır.
 
-## <a name="blazor-webassembly"></a>Blazor WebAssembly
+## <a name="blazor-webassembly"></a>BlazorWebAssembly
 
 ### <a name="environment"></a>Ortam
 
 Bir uygulamayı yerel olarak çalıştırırken, ortam varsayılan olarak geliştirme aşamasındadır. Uygulama yayımlandığında, ortam varsayılan olarak üretim olur.
 
-Barındırılan bir Blazor WebAssembly uygulaması, `blazor-environment` üst bilgiyi ekleyerek ortamı tarayıcıya ileten bir ara yazılım aracılığıyla sunucudan ortamı seçer. Üstbilginin değeri ortamıdır. Barındırılan Blazor uygulaması ve sunucu uygulaması aynı ortamı paylaşır. Ortamın nasıl yapılandırılacağı dahil olmak üzere daha fazla bilgi için bkz <xref:fundamentals/environments>..
+Barındırılan Blazor webassembly uygulaması, üst bilgiyi ekleyerek ortamı tarayıcıya ileten bir ara yazılım aracılığıyla sunucudan alır `blazor-environment` . Üstbilginin değeri ortamıdır. Barındırılan Blazor uygulama ve sunucu uygulaması aynı ortamı paylaşır. Ortamın nasıl yapılandırılacağı dahil olmak üzere daha fazla bilgi için bkz <xref:fundamentals/environments> ..
 
-Yerel olarak çalışan tek başına bir uygulama için geliştirme sunucusu, geliştirme `blazor-environment` ortamını belirtmek için üst bilgi ekler. Diğer barındırma ortamlarının ortamını belirtmek için `blazor-environment` üst bilgiyi ekleyin.
+Yerel olarak çalışan tek başına bir uygulama için geliştirme sunucusu, `blazor-environment` geliştirme ortamını belirtmek için üst bilgi ekler. Diğer barındırma ortamlarının ortamını belirtmek için `blazor-environment` üst bilgiyi ekleyin.
 
 IIS için aşağıdaki örnekte, yayınlanan *Web. config* dosyasına özel üstbilgiyi ekleyin. *Web. config* dosyası *bin/Release/{Target Framework}/Publish* klasöründe bulunur:
 
@@ -57,9 +43,9 @@ IIS için aşağıdaki örnekte, yayınlanan *Web. config* dosyasına özel üst
 ```
 
 > [!NOTE]
-> Uygulama *Yayımlama* klasörüne yayımlandığında üzerine YAZıLMAYAN IIS için özel <xref:host-and-deploy/blazor/webassembly#use-a-custom-webconfig> *Web. config* dosyasını kullanmak için, bkz..
+> Uygulama *Yayımlama* klasörüne yayımlandığında üzerine YAZıLMAYAN IIS için özel *Web. config* dosyasını kullanmak için, bkz <xref:host-and-deploy/blazor/webassembly#use-a-custom-webconfig> ..
 
-Ekleme `IWebAssemblyHostEnvironment` tarafından bir bileşende uygulamanın ortamını edinin ve `Environment` özelliği okuyun:
+Ekleme tarafından bir bileşende uygulamanın ortamını edinin `IWebAssemblyHostEnvironment` ve `Environment` özelliği okuyun:
 
 ```razor
 @page "/"
@@ -71,7 +57,7 @@ Ekleme `IWebAssemblyHostEnvironment` tarafından bir bileşende uygulamanın ort
 <p>Environment: @HostEnvironment.Environment</p>
 ```
 
-Başlangıç sırasında, geliştiricilerin `WebAssemblyHostBuilder` kendi kodlarında `IWebAssemblyHostEnvironment` ortama özgü `HostEnvironment` mantığa sahip olmasını sağlayan özelliği aracılığıyla kullanıma sunar:
+Başlangıç sırasında, `WebAssemblyHostBuilder` `IWebAssemblyHostEnvironment` `HostEnvironment` geliştiricilerin kendi kodlarında ortama özgü mantığa sahip olmasını sağlayan özelliği aracılığıyla kullanıma sunar:
 
 ```csharp
 if (builder.HostEnvironment.Environment == "Custom")
@@ -99,21 +85,21 @@ if (builder.HostEnvironment.IsEnvironment("Custom"))
 };
 ```
 
-Özelliği `IWebAssemblyHostEnvironment.BaseAddress` , `NavigationManager` hizmet kullanılamadığında başlatma sırasında kullanılabilir.
+`IWebAssemblyHostEnvironment.BaseAddress`Özelliği, hizmet kullanılamadığında başlatma sırasında kullanılabilir `NavigationManager` .
 
 ### <a name="configuration"></a>Yapılandırma
 
-Blazor WebAssembly yapılandırmayı şuradan yükler:
+BlazorWebAssembly yapılandırmayı şuradan yükler:
 
 * Uygulama ayarları dosyaları varsayılan olarak:
   * *Wwwroot/appSettings. JSON*
   * *Wwwroot/appSettings. {ENVIRONMENT}. JSON*
-* Uygulama tarafından kaydedilen diğer [yapılandırma sağlayıcıları](xref:fundamentals/configuration/index) . Tüm sağlayıcılar Blazor WebAssembly uygulamalarına uygun değildir. Blazor WebAssembly için desteklenen sağlayıcıların açıklanması, Blazor pro5 [(DotNet/AspNetCore. Docs #18134) için yapılandırma sağlayıcıları açıklığa kavuşturarak](https://github.com/dotnet/AspNetCore.Docs/issues/18134)izlenir.
+* Uygulama tarafından kaydedilen diğer [yapılandırma sağlayıcıları](xref:fundamentals/configuration/index) . Tüm sağlayıcılar Blazor webassembly uygulamalarına uygun değildir. Wezsembly için desteklenen sağlayıcıların açıklanması Blazor , [ Blazor ısstream (DotNet/Aspnetcore. docs #18134) Için yapılandırma sağlayıcıları açıklığa kavuşturarak](https://github.com/dotnet/AspNetCore.Docs/issues/18134)izlenir.
 
 > [!WARNING]
-> Blazor WebAssembly uygulamasındaki yapılandırma kullanıcılar tarafından görülebilir. **Yapılandırma bölümünde uygulama gizli dizilerini veya kimlik bilgilerini depolamamayın.**
+> BlazorWebassembly uygulamasındaki yapılandırma kullanıcılar tarafından görülebilir. **Yapılandırma bölümünde uygulama gizli dizilerini veya kimlik bilgilerini depolamamayın.**
 
-Yapılandırma sağlayıcıları hakkında daha fazla bilgi için bkz <xref:fundamentals/configuration/index>..
+Yapılandırma sağlayıcıları hakkında daha fazla bilgi için bkz <xref:fundamentals/configuration/index> ..
 
 #### <a name="app-settings-configuration"></a>Uygulama ayarları yapılandırması
 
@@ -125,7 +111,7 @@ Yapılandırma sağlayıcıları hakkında daha fazla bilgi için bkz <xref:fund
 }
 ```
 
-Yapılandırma verilerine <xref:Microsoft.Extensions.Configuration.IConfiguration> erişmek için bileşene örnek ekleme:
+<xref:Microsoft.Extensions.Configuration.IConfiguration>Yapılandırma verilerine erişmek için bileşene örnek ekleme:
 
 ```razor
 @page "/"
@@ -139,7 +125,7 @@ Yapılandırma verilerine <xref:Microsoft.Extensions.Configuration.IConfiguratio
 
 #### <a name="provider-configuration"></a>Sağlayıcı yapılandırması
 
-Aşağıdaki örnek, ek yapılandırma <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> sağlamak için bir kullanır:
+Aşağıdaki örnek, <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> ek yapılandırma sağlamak için bir kullanır:
 
 `Program.Main`:
 
@@ -165,7 +151,7 @@ var memoryConfig = new MemoryConfigurationSource { InitialData = vehicleData };
 builder.Configuration.Add(memoryConfig);
 ```
 
-Yapılandırma verilerine <xref:Microsoft.Extensions.Configuration.IConfiguration> erişmek için bileşene örnek ekleme:
+<xref:Microsoft.Extensions.Configuration.IConfiguration>Yapılandırma verilerine erişmek için bileşene örnek ekleme:
 
 ```razor
 @page "/"
@@ -190,7 +176,7 @@ Yapılandırma verilerine <xref:Microsoft.Extensions.Configuration.IConfiguratio
 }
 ```
 
-*Wwwroot* klasöründeki diğer yapılandırma dosyalarını yapılandırmaya okumak için dosyanın içeriğini almak üzere bir `HttpClient` kullanın. Bu yaklaşım kullanıldığında, mevcut `HttpClient` hizmet kaydı, aşağıdaki örnekte gösterildiği gibi, dosyayı okumak için oluşturulan yerel istemciyi kullanabilir:
+*Wwwroot* klasöründeki diğer yapılandırma dosyalarını yapılandırmaya okumak için `HttpClient` dosyanın içeriğini almak üzere bir kullanın. Bu yaklaşım kullanıldığında, mevcut `HttpClient` hizmet kaydı, aşağıdaki örnekte gösterildiği gibi, dosyayı okumak için oluşturulan yerel istemciyi kullanabilir:
 
 *Wwwroot/otomobil. JSON*:
 
@@ -278,19 +264,19 @@ Yapılandırma dosyaları çevrimdışı kullanım için önbelleğe alınır. [
 * Kullanıcıların, kullanmaya devam ettikleri dosyaların önbelleğe alınmış sürümleri vardır.
 * PWA 'nın *Service-Worker. js* ve *Service-Worker-assets. js* dosyalarının derlemede yeniden oluşturulması gerekir. Bu, kullanıcının bir sonraki çevrimiçi sitesinde uygulamaya işaret eden uygulamanın yeniden dağıtıldığını belirten, derleme üzerinde yeniden oluşturulmalıdır.
 
-Arka plan güncelleştirmelerinin PWAs tarafından nasıl işlendiği hakkında daha fazla bilgi için bkz <xref:blazor/progressive-web-app#background-updates>..
+Arka plan güncelleştirmelerinin PWAs tarafından nasıl işlendiği hakkında daha fazla bilgi için bkz <xref:blazor/progressive-web-app#background-updates> ..
 
-### <a name="logging"></a>Günlüğe Kaydetme
+### <a name="logging"></a>Günlüğe kaydetme
 
-Blazor WebAssembly günlük desteği hakkında bilgi için bkz <xref:fundamentals/logging/index#create-logs-in-blazor>..
+BlazorWebassembly günlüğü desteği hakkında bilgi için bkz <xref:fundamentals/logging/index#create-logs-in-blazor> ..
 
-## <a name="blazor-server"></a>Blazor Server
+## <a name="blazor-server"></a>BlazorServer
 
 ### <a name="reflect-the-connection-state-in-the-ui"></a>Kullanıcı arabirimindeki bağlantı durumunu yansıtır
 
 İstemci bağlantının kaybolduğunu algıladığında, istemci yeniden bağlanmayı denediğinde kullanıcıya varsayılan bir kullanıcı arabirimi görüntülenir. Yeniden bağlantı başarısız olursa, kullanıcıya yeniden deneme seçeneği sağlanır.
 
-Kullanıcı arabirimini özelleştirmek için, *_Host. cshtml* Razor sayfasında `id` öğesinin `components-reconnect-modal` içeren `<body>` bir öğesi tanımlayın:
+Kullanıcı arabirimini özelleştirmek için, `id` `components-reconnect-modal` `<body>` *_Host. cshtml* sayfasında öğesinin içeren bir öğesi tanımlayın Razor :
 
 ```cshtml
 <div id="components-reconnect-modal">
@@ -298,18 +284,184 @@ Kullanıcı arabirimini özelleştirmek için, *_Host. cshtml* Razor sayfasında
 </div>
 ```
 
-Aşağıdaki tabloda `components-reconnect-modal` ÖĞESINE uygulanan CSS sınıfları açıklanmaktadır.
+Aşağıdaki tabloda öğesine uygulanan CSS sınıfları açıklanmaktadır `components-reconnect-modal` .
 
 | CSS sınıfı                       | Bildiren&hellip; |
-| ------------------------------- | ----------------- |
-| `components-reconnect-show`     | Kayıp bir bağlantı. İstemci yeniden bağlanmaya çalışıyor. Kalıcı olarak göster. |
-| `components-reconnect-hide`     | Etkin bir bağlantı sunucuya yeniden oluşturulur. Kalıcı olarak gizleyin. |
-| `components-reconnect-failed`   | Muhtemelen bir ağ hatasından dolayı yeniden bağlantı başarısız oldu. Yeniden bağlanmayı denemek için çağrısı `window.Blazor.reconnect()`yapın. |
-| `components-reconnect-rejected` | Yeniden bağlantı reddedildi. Sunucuya ulaşıldı ancak bağlantı reddedildi ve kullanıcının sunucudaki durumu kayboldu. Uygulamayı yeniden yüklemek için çağrısı `location.reload()`yapın. Bu bağlantı durumu şu durumlarda oluşabilir:<ul><li>Sunucu tarafında devre dışı bir kilitlenme oluşur.</li><li>Sunucunun kullanıcının durumunu bırakması için istemcinin bağlantısı yeterince uzun değil. Kullanıcının etkileşimde bulunduğu bileşenlerin örnekleri atıldı.</li><li>Sunucu yeniden başlatıldı veya uygulamanın çalışan işlemi geri dönüştürüldü.</li></ul> |
+| ---
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+---------------- | ---title: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+--------- | | `components-reconnect-show`     | Kayıp bir bağlantı. İstemci yeniden bağlanmaya çalışıyor. Kalıcı olarak göster. | | `components-reconnect-hide`     | Etkin bir bağlantı sunucuya yeniden oluşturulur. Kalıcı olarak gizleyin. | | `components-reconnect-failed`   | Muhtemelen bir ağ hatasından dolayı yeniden bağlantı başarısız oldu. Yeniden bağlanmayı denemek için çağrısı yapın `window.Blazor.reconnect()` . | | `components-reconnect-rejected` | Yeniden bağlantı reddedildi. Sunucuya ulaşıldı ancak bağlantı reddedildi ve kullanıcının sunucudaki durumu kayboldu. Uygulamayı yeniden yüklemek için çağrısı yapın `location.reload()` . Bu bağlantı durumu şu durumlarda oluşabilir:<ul><li>Sunucu tarafında devre dışı bir kilitlenme oluşur.</li><li>Sunucunun kullanıcının durumunu bırakması için istemcinin bağlantısı yeterince uzun değil. Kullanıcının etkileşimde bulunduğu bileşenlerin örnekleri atıldı.</li><li>Sunucu yeniden başlatıldı veya uygulamanın çalışan işlemi geri dönüştürüldü.</li></ul> |
 
 ### <a name="render-mode"></a>Oluşturma modu
 
-Blazor sunucu uygulamaları, sunucu bağlantısı oluşturulmadan önce sunucudaki kullanıcı arabirimini varsayılan olarak PreRender 'a ayarlar. Bu, *_Host. cshtml* Razor sayfasında ayarlanır:
+BlazorSunucu uygulamaları, sunucu bağlantısı kurumadan önce sunucudaki kullanıcı arabirimini varsayılan olarak PreRender 'a ayarlar. Bu, *_Host. cshtml* Razor sayfasında ayarlanır:
 
 ```cshtml
 <body>
@@ -324,24 +476,110 @@ Blazor sunucu uygulamaları, sunucu bağlantısı oluşturulmadan önce sunucuda
 `RenderMode`bileşenin şunları yapıp kullanmadığını yapılandırır:
 
 * , Sayfaya ön gönderilir.
-* , Sayfada statik HTML olarak veya Kullanıcı aracısından bir Blazor uygulamasını önyüklemek için gerekli bilgileri içeriyorsa.
+* , Sayfada statik HTML olarak veya Kullanıcı aracısından bir uygulamayı önyüklemek için gerekli bilgileri içeriyorsa Blazor .
 
 | `RenderMode`        | Açıklama |
-| ------------------- | ----------- |
-| `ServerPrerendered` | Bileşeni statik HTML olarak işler ve Blazor sunucu uygulaması için bir işaret içerir. Kullanıcı Aracısı başladığında, bu işaretleyici bir Blazor uygulamayı önyüklemek için kullanılır. |
-| `Server`            | Blazor Sunucu uygulaması için bir işaret oluşturur. Bileşen çıkışı dahil değildir. Kullanıcı Aracısı başladığında, bu işaretleyici bir Blazor uygulamayı önyüklemek için kullanılır. |
-| `Static`            | Bileşeni statik HTML olarak işler. |
+| ---
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+---------- | ---title: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------ | | `ServerPrerendered` | Bileşeni statik HTML olarak işler ve sunucu uygulaması için bir işaret içerir Blazor . Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . | | `Server`            | Sunucu uygulaması için bir işaret oluşturur Blazor . Bileşen çıkışı dahil değildir. Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . | | `Static`            | Bileşeni statik HTML olarak işler. |
 
 Statik HTML sayfasından sunucu bileşenleri işleme desteklenmiyor.
 
-### <a name="configure-the-signalr-client-for-blazor-server-apps"></a>Sunucu uygulamaları SignalR için Blazor istemciyi yapılandırma
+### <a name="configure-the-signalr-client-for-blazor-server-apps"></a>SignalRSunucu uygulamaları için istemciyi Blazor yapılandırma
 
-Bazen, sunucu uygulamaları tarafından SignalR Blazor kullanılan istemciyi yapılandırmanız gerekir. Örneğin, bir bağlantı sorununu tanılamak için SignalR istemcide günlüğe kaydetmeyi yapılandırmak isteyebilirsiniz.
+Bazen, SignalR sunucu uygulamaları tarafından kullanılan istemciyi yapılandırmanız gerekir Blazor . Örneğin, SignalR bir bağlantı sorununu tanılamak için istemcide günlüğe kaydetmeyi yapılandırmak isteyebilirsiniz.
 
-İstemciyi, SignalR *Pages/_Host. cshtml* dosyasında yapılandırmak için:
+SignalRİstemciyi, *Pages/_Host. cshtml* dosyasında yapılandırmak için:
 
-* Betiğin etiketine bir `autostart="false"` `<script>` `blazor.server.js` ekleyin.
-* Oluşturucuyu belirten bir yapılandırma nesnesi çağırın `Blazor.start` ve geçirin. SignalR
+* `autostart="false"`Betiğin etiketine bir öznitelik ekleyin `<script>` `blazor.server.js` .
+* `Blazor.start`Oluşturucuyu belirten bir yapılandırma nesnesi çağırın ve geçirin SignalR .
 
 ```html
 <script src="_framework/blazor.server.js" autostart="false"></script>
@@ -354,6 +592,6 @@ Bazen, sunucu uygulamaları tarafından SignalR Blazor kullanılan istemciyi yap
 </script>
 ```
 
-### <a name="logging"></a>Günlüğe Kaydetme
+### <a name="logging"></a>Günlüğe kaydetme
 
-Sunucu günlüğü desteği Blazor hakkında bilgi için bkz <xref:fundamentals/logging/index#create-logs-in-blazor>..
+BlazorSunucu günlüğü desteği hakkında bilgi için bkz <xref:fundamentals/logging/index#create-logs-in-blazor> ..

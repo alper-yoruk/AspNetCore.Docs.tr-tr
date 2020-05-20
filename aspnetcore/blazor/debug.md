@@ -1,30 +1,16 @@
 ---
-title: Hata ayıklama Blazor ASP.NET Core webassembly
-author: guardrex
-description: Uygulamalarda hata ayıklamayı Blazor öğrenin.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 04/16/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/debug
-ms.openlocfilehash: 9acbb8e7b122a8d527d16ce33af01c2e7e7608bf
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767544"
+Başlık: ' Debug ASP.NET Core Blazor webassembly ' Yazar: Açıklama: ' uygulamalarda hata ayıklamayı öğrenin Blazor . '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
-# <a name="debug-aspnet-core-blazor-webassembly"></a>Hata ayıklama Blazor ASP.NET Core webassembly
+# <a name="debug-aspnet-core-blazor-webassembly"></a>Hata ayıklama ASP.NET Core Blazor webassembly
 
 [Daniel Roth](https://github.com/danroth27)
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 BlazorKmıum tabanlı tarayıcılarda (Edge/Chrome) tarayıcı geliştirme araçları kullanılarak WebAssembly uygulamalarına hata ayıklanabilir.  Alternatif olarak, Visual Studio veya Visual Studio Code kullanarak uygulamanızda hata ayıklayabilirsiniz.
 
@@ -49,7 +35,7 @@ Kullanılabilir senaryolar şunlardır:
 
 Yaklaşan sürümlerde hata ayıklama deneyimini iyileştirmeye devam edeceğiz.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 Hata ayıklama aşağıdaki tarayıcılardan birini gerektirir:
 
@@ -58,9 +44,7 @@ Hata ayıklama aşağıdaki tarayıcılardan birini gerektirir:
 
 ## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Visual Studio ve Visual Studio Code için hata ayıklamayı etkinleştir
 
-Hata ayıklama, ASP.NET Core 3,2 Preview 3 veya sonraki Blazor bir webassembly proje şablonu kullanılarak oluşturulan yeni projeler için otomatik olarak etkinleştirilir ([geçerli sürüm 3,2 Preview 4 ' dir](xref:blazor/get-started)).
-
-Mevcut Blazor bir weelsembly uygulamasında hata ayıklamayı etkinleştirmek için, başlangıç projesindeki *launchsettings. JSON* dosyasını her bir başlatma profiline aşağıdaki `inspectUri` özelliği içerecek şekilde güncelleştirin:
+Mevcut bir weelsembly uygulamasında hata ayıklamayı etkinleştirmek için Blazor , başlangıç projesindeki *launchsettings. JSON* dosyasını her bir başlatma profiline aşağıdaki özelliği içerecek şekilde güncelleştirin `inspectUri` :
 
 ```json
 "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}"
@@ -70,38 +54,37 @@ Mevcut Blazor bir weelsembly uygulamasında hata ayıklamayı etkinleştirmek i�
 
 [!code-json[](debug/launchSettings.json?highlight=14,22)]
 
-`inspectUri` Özelliği:
+`inspectUri`Özelliği:
 
 * IDE 'nin uygulamanın bir Blazor webassembly uygulaması olduğunu algılamasını sağlar.
-* Betik hata ayıklama altyapısına, hata ayıklama proxy 'si aracılığıyla Blazortarayıcıya bağlanmasını söyler.
+* Betik hata ayıklama altyapısına, Blazor hata ayıklama proxy 'si aracılığıyla tarayıcıya bağlanmasını söyler.
 
 ## <a name="visual-studio"></a>Visual Studio
 
-Visual Studio 'da Blazor bir webassembly uygulamasında hata ayıklamak için:
+BlazorVisual Studio 'da bir webassembly uygulamasında hata ayıklamak için:
 
-1. Visual Studio 2019 16,6 ' nin (Preview 2 veya üzeri) [en son önizleme sürümünü yüklediğinizden](https://visualstudio.com/preview) emin olun.
 1. Yeni bir ASP.NET Core barındırılan Blazor webassembly uygulaması oluşturun.
 1. Uygulamayı hata ayıklayıcıda çalıştırmak için <kbd>F5</kbd> tuşuna basın.
-1. `IncrementCount` Yönteminde *Counter. Razor* içinde bir kesme noktası ayarlayın.
+1. Yönteminde *Counter. Razor* içinde bir kesme noktası ayarlayın `IncrementCount` .
 1. **Sayaç** sekmesine gidin ve kesme noktasına isabet eden düğmeyi seçin:
 
    ![Hata ayıklama sayacı](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-counter.png)
 
-1. Yereller penceresindeki `currentCount` alanın değerini gözden geçirin:
+1. `currentCount`Yereller penceresindeki alanın değerini gözden geçirin:
 
    ![Yerelleri görüntüle](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-locals.png)
 
 1. Yürütmeye devam etmek için <kbd>F5</kbd> tuşuna basın.
 
-Blazor Webassembly uygulamanızda hata ayıklarken, sunucu kodunuzda hata ayıklama de yapabilirsiniz:
+BlazorWebassembly uygulamanızda hata ayıklarken, sunucu kodunuzda hata ayıklama de yapabilirsiniz:
 
-1. İçindeki `OnInitializedAsync` *fetchdata. Razor* sayfasında bir kesme noktası ayarlayın.
-1. `Get` Eylem yönteminde içinde `WeatherForecastController` bir kesme noktası ayarlayın.
-1. Bir HTTP isteğini sunucuya vermeden önce, `FetchData` bileşendeki ilk kesme noktasına gitmek Için **verileri getir** sekmesine gidin:
+1. İçindeki *Fetchdata. Razor* sayfasında bir kesme noktası ayarlayın `OnInitializedAsync` .
+1. Eylem yönteminde içinde bir kesme noktası ayarlayın `WeatherForecastController` `Get` .
+1. Bir HTTP isteğini sunucuya vermeden önce, bileşendeki ilk kesme noktasına gitmek için **verileri getir** sekmesine gidin `FetchData` :
 
    ![Veri getirme verilerini ayıklama](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-fetch-data.png)
 
-1. Yürütmeye devam etmek için <kbd>F5</kbd> tuşuna basın ve ardından sunucusundaki kesme noktasına gidin `WeatherForecastController`:
+1. Yürütmeye devam etmek için <kbd>F5</kbd> tuşuna basın ve ardından sunucusundaki kesme noktasına gidin `WeatherForecastController` :
 
    ![Hata ayıklama sunucusu](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vs-debug-server.png)
 
@@ -111,15 +94,15 @@ Blazor Webassembly uygulamanızda hata ayıklarken, sunucu kodunuzda hata ayıkl
 
 ## <a name="visual-studio-code"></a>Visual Studio Code
 
-Visual Studio Code bir Blazor webassembly uygulamasında hata ayıklamak için:
+BlazorVisual Studio Code bir webassembly uygulamasında hata ayıklamak için:
  
-1. [C# uzantısını](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) ve [JavaScript hata ayıklayıcısı (gecelik)](https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly) uzantısını olarak `debug.javascript.usePreview` ayarlandığı şekilde `true`yükler.
+1. [C# uzantısını](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) ve [JavaScript hata ayıklayıcısı (gecelik)](https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly) uzantısını `debug.javascript.usePreview` olarak ayarlandığı şekilde yükler `true` .
 
-   ![Uzantıları](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-extensions.png)
+   ![Uzantılar](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-extensions.png)
 
    ![JS önizleme hata ayıklayıcısı](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-js-use-preview.png)
 
-1. Hata ayıklama etkinken Blazor mevcut bir webassembly uygulamasını açın.
+1. BlazorHata ayıklama etkinken mevcut bir webassembly uygulamasını açın.
 
    * Hata ayıklamayı etkinleştirmek için ek kurulum gerekli olduğunda aşağıdaki bildirime sahipseniz, doğru uzantıların yüklü olduğunu ve JavaScript önizlemesi hata ayıklamanın etkin olduğunu doğrulayın ve ardından pencereyi yeniden yükleyin:
 
@@ -131,11 +114,11 @@ Visual Studio Code bir Blazor webassembly uygulamasında hata ayıklamak için:
 
 1. Uygulamanın hata ayıklayıcıda başlatılması iki adımlı bir işlemdir:
 
-   1 \. **İlk**olarak, **.NET Core başlatma (Blazor tek başına)** başlatma yapılandırmasını kullanarak uygulamayı başlatın.
+   1 \. **İlk**olarak, **.NET Core başlatma ( Blazor tek başına)** başlatma yapılandırmasını kullanarak uygulamayı başlatın.
 
-   2 \. **Uygulama başladıktan sonra**, Chrome başlatma yapılandırmasındaki **.NET Core hata ayıklama Blazor Web derlemesini** kullanarak tarayıcıyı başlatın (Chrome gerekir). Chrome yerine Edge kullanmak için, *. vscode/Launch. JSON* içindeki başlatma yapılandırmasının öğesini `pwa-chrome` olarak `pwa-msedge`değiştirin. `type`
+   2 \. **Uygulama başladıktan sonra**, Chrome başlatma yapılandırmasındaki **.NET Core hata ayıklama Blazor Web derlemesini** kullanarak tarayıcıyı başlatın (Chrome gerekir). Chrome yerine Edge kullanmak için, `type` *. vscode/Launch. JSON* içindeki başlatma yapılandırmasının öğesini `pwa-chrome` olarak değiştirin `pwa-msedge` .
 
-1. `Counter` Bileşendeki `IncrementCount` yöntemde bir kesme noktası ayarlayın ve ardından kesme noktasına isabet eden düğmeyi seçin:
+1. Bileşendeki yöntemde bir kesme noktası ayarlayın `IncrementCount` `Counter` ve ardından kesme noktasına isabet eden düğmeyi seçin:
 
    ![VS Code hata ayıklama sayacı](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-debug-counter.png)
 
@@ -143,20 +126,20 @@ Visual Studio Code bir Blazor webassembly uygulamasında hata ayıklamak için:
 
 1. Geliştirme ortamında uygulamanın hata ayıklama derlemesini çalıştırın.
 
-1. <kbd>SHIFT</kbd>+<kbd>Alt</kbd>alt+<kbd>D</kbd>tuşuna basın.
+1. <kbd>SHIFT</kbd> + <kbd>alt</kbd> + <kbd>D</kbd>tuşuna basın.
 
-1. Tarayıcı, uzaktan hata ayıklama etkinken çalıştırılmalıdır. Uzaktan hata ayıklama devre dışıysa, **hata ayıklanabilir Browser sekmesi** hata sayfası oluşturulur. Hata sayfası, hata ayıklama proxy 'sinin uygulamaya bağlanabilmesi için hata ayıklama bağlantı noktası açıkken Blazor tarayıcıyı çalıştırmaya yönelik yönergeler içerir. *Tüm tarayıcı örneklerini kapatın* ve belirtildiği şekilde tarayıcıyı yeniden başlatın.
+1. Tarayıcı, uzaktan hata ayıklama etkinken çalıştırılmalıdır. Uzaktan hata ayıklama devre dışıysa, **hata ayıklanabilir Browser sekmesi** hata sayfası oluşturulur. Hata sayfası, hata ayıklama Blazor proxy 'sinin uygulamaya bağlanabilmesi için hata ayıklama bağlantı noktası açıkken tarayıcıyı çalıştırmaya yönelik yönergeler içerir. *Tüm tarayıcı örneklerini kapatın* ve belirtildiği şekilde tarayıcıyı yeniden başlatın.
 
-Tarayıcı uzaktan hata ayıklama etkinken çalışırken hata ayıklama klavye kısayolu yeni bir hata ayıklayıcı sekmesi açar. Bir süre sonra, **kaynaklar** sekmesi uygulamadaki .net derlemelerinin listesini gösterir. Her bir derlemeyi genişletin ve hata ayıklama için kullanılabilen *. cs*/*. Razor* kaynak dosyalarını bulun. Kesme noktaları ayarlayın, uygulamanın sekmesine geri dönün ve kod yürütüldüğünde kesme noktaları isabet edilir. Kesme noktası isabet ettikten sonra, kod üzerinden tek adımlı (<kbd>F10</kbd><kbd>) ve</kbd>kod yürütme işlemini normal şekilde yapın.
+Tarayıcı uzaktan hata ayıklama etkinken çalışırken hata ayıklama klavye kısayolu yeni bir hata ayıklayıcı sekmesi açar. Bir süre sonra, **kaynaklar** sekmesi uygulamadaki .net derlemelerinin listesini gösterir. Her bir derlemeyi genişletin ve hata ayıklama için kullanılabilen *. cs* / *. Razor* kaynak dosyalarını bulun. Kesme noktaları ayarlayın, uygulamanın sekmesine geri dönün ve kod yürütüldüğünde kesme noktaları isabet edilir. Kesme noktası isabet ettikten sonra, kod üzerinden tek adımlı (<kbd>F10</kbd><kbd>) ve</kbd>kod yürütme işlemini normal şekilde yapın.
 
-Blazor[Chrome DevTools protokolünü](https://chromedevtools.github.io/devtools-protocol/) uygulayan ve protokolünü ile genişlettiğini içeren bir hata ayıklama proxy 'si sağlar. NET 'e özgü bilgiler. Klavye kısayoluna hata ayıklama basıldığında, ara Blazor sunucu üzerindeki Chrome DevTools ' ı işaret eder. Proxy, hata ayıklama işlemini Aradığınız tarayıcı penceresine bağlanır (Bu nedenle, uzaktan hata ayıklamayı etkinleştirmeniz gerekir).
+Blazor[Chrome DevTools protokolünü](https://chromedevtools.github.io/devtools-protocol/) uygulayan ve protokolünü ile genişlettiğini içeren bir hata ayıklama proxy 'si sağlar. NET 'e özgü bilgiler. Klavye kısayoluna hata ayıklama basıldığında, Blazor Ara sunucu üzerindeki Chrome DevTools ' ı işaret eder. Proxy, hata ayıklama işlemini Aradığınız tarayıcı penceresine bağlanır (Bu nedenle, uzaktan hata ayıklamayı etkinleştirmeniz gerekir).
 
 ## <a name="browser-source-maps"></a>Tarayıcı kaynağı eşlemeleri
 
-Tarayıcı kaynak haritaları tarayıcının derlenmiş dosyaları özgün kaynak dosyalarına geri eşlemesine ve istemci tarafı hata ayıklama için yaygın olarak kullanılmasına izin verir. Ancak, Blazor Şu anda C# ' yi doğrudan JavaScript/te olarak eşleştirmez. Bunun yerine Blazor , tarayıcı içinde Il yorumu yapar, bu nedenle kaynak haritaları ilgili değildir.
+Tarayıcı kaynak haritaları tarayıcının derlenmiş dosyaları özgün kaynak dosyalarına geri eşlemesine ve istemci tarafı hata ayıklama için yaygın olarak kullanılmasına izin verir. Ancak, Blazor Şu anda C# ' yi doğrudan JavaScript/te olarak eşleştirmez. Bunun yerine, Blazor tarayıcı IÇINDE Il yorumu yapar, bu nedenle kaynak haritaları ilgili değildir.
 
 ## <a name="troubleshoot"></a>Sorun giderme
 
 Hatalar halinde çalıştırıyorsanız, aşağıdaki ipucu yardımcı olabilir:
 
-**Hata ayıklayıcı** sekmesinde, tarayıcınızda Geliştirici Araçları ' nı açın. Konsolunda, tüm kesme noktalarını `localStorage.clear()` kaldırmak için yürütün.
+**Hata ayıklayıcı** sekmesinde, tarayıcınızda Geliştirici Araçları ' nı açın. Konsolunda, `localStorage.clear()` tüm kesme noktalarını kaldırmak için yürütün.

@@ -1,32 +1,15 @@
 ---
-title: BlazorKimlik doğrulama kitaplığıyla ASP.NET Core webassembly tek başına uygulamasının güvenliğini sağlama
-author: guardrex
-description: ''
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/11/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/blazor/webassembly/standalone-with-authentication-library
-ms.openlocfilehash: 219364ef2e699ff1029536effd106a80ec02825c
-ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83153411"
+Başlık: ASP.NET Core ' Blazor kimlik doğrulama kitaplığıyla ' Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-standalone-app-with-the-authentication-library"></a>BlazorKimlik doğrulama kitaplığıyla ASP.NET Core webassembly tek başına uygulamasının güvenliğini sağlama
 
 , [Javier Calvarro Nelson](https://github.com/javiercn) ve [Luke Latham](https://github.com/guardrex) 'e göre
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
-[!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
 *Azure Active Directory (AAD) ve Azure Active Directory B2C (AAD B2C) için, bu konudaki yönergeleri izleyin. Bu içindekiler tablosu düğümündeki AAD ve AAD B2C konularına bakın.*
 
@@ -48,15 +31,13 @@ Bir uygulamaya kimlik doğrulaması ekliyorsanız, paketi uygulamanın proje dos
 
 ```xml
 <PackageReference 
-    Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" 
-    Version="{VERSION}" />
+  Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" 
+  Version="3.2.0" />
 ```
-
-`{VERSION}`Yukarıdaki paket başvurusunda, `Microsoft.AspNetCore.Blazor.Templates` makalede gösterilen paketin sürümüyle değiştirin <xref:blazor/get-started> .
 
 ## <a name="authentication-service-support"></a>Kimlik doğrulama hizmeti desteği
 
-Kullanıcıları kimlik doğrulama desteği, hizmet kapsayıcısında `AddOidcAuthentication` paket tarafından sağlanmış uzantı yöntemiyle kaydedilir `Microsoft.AspNetCore.Components.WebAssembly.Authentication` . Bu yöntem, uygulamanın Identity sağlayıcı (IP) ile etkileşim kurması için gereken tüm hizmetleri ayarlar.
+Kullanıcıları kimlik doğrulama desteği, hizmet kapsayıcısında `AddOidcAuthentication` paket tarafından sağlanmış uzantı yöntemiyle kaydedilir `Microsoft.AspNetCore.Components.WebAssembly.Authentication` . Bu yöntem, uygulamanın Identity sağlayıcı (IP) ile etkileşim kurması için gereken hizmetleri ayarlar.
 
 *Program.cs*:
 
@@ -92,18 +73,7 @@ builder.Services.AddOidcAuthentication(options =>
 });
 ```
 
-> [!NOTE]
-> Azure portal bir kapsam URI 'SI sağlıyorsa ve uygulama API 'den *401 Yetkisiz* bir yanıt aldığında **işlenmeyen bir özel durum oluşturursa** , düzeni ve Konağı içermeyen bir kapsam URI 'si kullanmayı deneyin. Örneğin, Azure portal aşağıdaki kapsam URI biçimlerinden birini verebilir:
->
-> * `https://{ORGANIZATION}.onmicrosoft.com/{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
-> * `api://{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
->
-> Kapsam URI 'sini düzen ve ana bilgisayar olmadan sağlayın:
->
-> ```csharp
-> options.ProviderOptions.DefaultScopes.Add(
->     "{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}");
-> ```
+[!INCLUDE[](~/includes/blazor-security/azure-scope.md)]
 
 Daha fazla bilgi için *ek senaryolar* makalesinin aşağıdaki bölümlerine bakın:
 
@@ -128,7 +98,39 @@ Daha fazla bilgi için *ek senaryolar* makalesinin aşağıdaki bölümlerine ba
 
 ## <a name="logindisplay-component"></a>LoginDisplay bileşeni
 
-[!INCLUDE[](~/includes/blazor-security/logindisplay-component.md)]
+`LoginDisplay`Bileşen (*paylaşılan/logindisplay.* Razor), `MainLayout` bileşende (*paylaşılan/mainlayout. Razor*) işlenir ve aşağıdaki davranışları yönetir:
+
+* Kimliği doğrulanmış kullanıcılar için:
+  * Geçerli Kullanıcı adını görüntüler.
+  * Uygulamanın oturumunu kapatmak için bir düğme sunar.
+* Anonim kullanıcılar için oturum açma seçeneğini sunar.
+
+```razor
+@using Microsoft.AspNetCore.Components.Authorization
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject NavigationManager Navigation
+@inject SignOutSessionStateManager SignOutManager
+
+<AuthorizeView>
+    <Authorized>
+        Hello, @context.User.Identity.Name!
+        <button class="nav-link btn btn-link" @onclick="BeginSignOut">
+            Log out
+        </button>
+    </Authorized>
+    <NotAuthorized>
+        <a href="authentication/login">Log in</a>
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    private async Task BeginSignOut(MouseEventArgs args)
+    {
+        await SignOutManager.SetSignOutState();
+        Navigation.NavigateTo("authentication/logout");
+    }
+}
+```
 
 ## <a name="authentication-component"></a>Kimlik doğrulama bileşeni
 

@@ -1,11 +1,11 @@
 ---
 title: ASP.NET Core Blazor sunucusu ek güvenlik senaryoları
 author: guardrex
-description: Daha fazla güvenlik senaryosu Blazor için sunucu yapılandırmayı öğrenin.
+description: Daha Blazor fazla güvenlik senaryosu için sunucu yapılandırmayı öğrenin.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/27/2020
+ms.date: 05/19/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/server/additional-scenarios
-ms.openlocfilehash: 95e9e57889fdbb5270f895874c9b8148ae4ca48d
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 9d26cde4d8964a8285241bb0158d8e6f8d5f8dbc
+ms.sourcegitcommit: 16b3abec1ed70f9a206f0cfa7cf6404eebaf693d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82772810"
+ms.lasthandoff: 05/17/2020
+ms.locfileid: "83444080"
 ---
 # <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>ASP.NET Core Blazor sunucusu ek güvenlik senaryoları
 
@@ -26,9 +26,9 @@ Sağlayan [Javier Calvarro Nelson](https://github.com/javiercn)
 
 ## <a name="pass-tokens-to-a-blazor-server-app"></a>Belirteçleri bir Blazor sunucu uygulamasına geçirme
 
-Bir Razor Blazor sunucu uygulamasındaki bileşenlerin dışında bulunan belirteçler, bu bölümde açıklanan yaklaşımla birlikte bileşenlere geçirilebilir. Örnek kod için, tam `Startup.ConfigureServices` bir örnek de dahil olmak üzere [belirteçleri sunucu tarafı Blazor uygulamasına geçirme](https://github.com/javiercn/blazor-server-aad-sample)konusuna bakın.
+RazorBir sunucu uygulamasındaki bileşenlerin dışında bulunan belirteçler, Blazor Bu bölümde açıklanan yaklaşımla birlikte bileşenlere geçirilebilir. Örnek kod için, tam bir örnek de dahil olmak üzere `Startup.ConfigureServices` [belirteçleri sunucu tarafı Blazor uygulamasına geçirme](https://github.com/javiercn/blazor-server-aad-sample)konusuna bakın.
 
-Blazor Sunucu uygulamasının kimliğini düzenli Razor sayfalar veya MVC uygulamasıyla yaptığınız gibi doğrulayın. Belirteçleri sağlama ve kimlik doğrulama tanımlama bilgisine kaydetme. Örneğin:
+BlazorSunucu uygulamasının kimliğini düzenli sayfalar veya MVC uygulamasıyla yaptığınız gibi doğrulayın Razor . Belirteçleri sağlama ve kimlik doğrulama tanımlama bilgisine kaydetme. Örnek:
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -56,7 +56,7 @@ public class InitialApplicationState
 }
 ```
 
-[Bağımlılık ekleme (dı)](xref:blazor/dependency-injection)içindeki belirteçleri çözümlemek için Blazor uygulama içinde kullanılabilecek bir **kapsamlı** belirteç sağlayıcısı hizmeti tanımlayın:
+**scoped** Blazor [Bağımlılık ekleme (dı)](xref:blazor/dependency-injection)içindeki belirteçleri çözümlemek için uygulama içinde kullanılabilecek bir kapsamlı belirteç sağlayıcısı hizmeti tanımlayın:
 
 ```csharp
 public class TokenProvider
@@ -66,7 +66,7 @@ public class TokenProvider
 }
 ```
 
-' `Startup.ConfigureServices`De, için hizmetler ekleyin:
+' De `Startup.ConfigureServices` , için hizmetler ekleyin:
 
 * `IHttpClientFactory`
 * `TokenProvider`
@@ -97,7 +97,7 @@ services.AddScoped<TokenProvider>();
 </app>
 ```
 
-`App` Bileşeninde (*app. Razor*), hizmeti çözümleyin ve bu parametreyi parametresindeki verilerle başlatın:
+`App`Bileşeninde (*app. Razor*), hizmeti çözümleyin ve bu parametreyi parametresindeki verilerle başlatın:
 
 ```razor
 @inject TokenProvider TokenProvider
@@ -147,3 +147,64 @@ public class WeatherForecastService
     }
 }
 ```
+
+## <a name="use-open-id-connect-oidc-v20-endpoints"></a>Açık KIMLIK Connect (OıDC) v 2.0 uç noktalarını kullan
+
+Kimlik doğrulama kitaplığı ve Blazor şablonları Open ID Connect (OıDC) v 1.0 uç noktalarını kullanır. Bir v 2.0 uç noktası kullanmak için, <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority?displayProperty=nameWithType> ' deki seçeneğini yapılandırın <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> :
+
+```csharp
+services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, 
+    options =>
+    {
+        options.Authority += "/v2.0";
+    }
+```
+
+Alternatif olarak, ayar uygulama ayarları (*appSettings. JSON*) dosyasında yapılabilir:
+
+```json
+{
+  "AzureAd": {
+    "Authority": "https://login.microsoftonline.com/common/oauth2/v2.0/",
+    ...
+  }
+}
+```
+
+Bir kesimdeki bir kesimde yer alan herhangi bir uygulama, AAD olmayan sağlayıcılar gibi, uygulamanın OıDC sağlayıcısına uygun değilse, `Authority` özelliği doğrudan ayarlayın. <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions>Uygulama ayarları dosyasındaki ya da özelliğini `Authority` anahtarıyla ayarlayın.
+
+### <a name="code-changes"></a>Kod değişiklikleri
+
+* KIMLIK belirtecindeki talepler listesi v 2.0 uç noktaları için değişir. Daha fazla bilgi için bkz. [neden Microsoft Identity platform (v 2.0) güncelleştirmesi?](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison) Azure belgelerine bakın.
+* Kaynaklar, v 2.0 uç noktaları için kapsam URI 'Lerinde belirtildiğinden, <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Resource?displayProperty=nameWithType> içindeki özellik ayarını kaldırın <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> :
+
+  ```csharp
+  services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, options => 
+      {
+          ...
+          options.Resource = "...";    // REMOVE THIS LINE
+          ...
+      }
+      ```
+
+  For more information, see [Scopes, not resources](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison#scopes-not-resources) in the Azure documentation.
+
+### App ID URI
+
+* When using v2.0 endpoints, APIs define an *App ID URI*, which is meant to represent a unique identifier for the API.
+* All scopes include the App ID URI as a prefix, and v2.0 endpoints emit access tokens with the App ID URI as the audience.
+* When using V2.0 endpoints, the client ID configured in the Server API changes from the API Application ID (Client ID) to the App ID URI.
+
+*appsettings.json*:
+
+```json
+{
+  "AzureAd": {
+    ...
+    "ClientId": "https://{TENANT}.onmicrosoft.com/{APP NAME}"
+    ...
+  }
+}
+```
+
+OıDC sağlayıcısı uygulama kaydı açıklamasında kullanılacak uygulama KIMLIĞI URI 'sini bulabilirsiniz.

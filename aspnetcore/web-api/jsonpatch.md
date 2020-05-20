@@ -1,24 +1,13 @@
 ---
-title: ASP.NET Core Web API 'sinde JsonPatch
-author: rick-anderson
-description: ASP.NET Core Web API 'sindeki JSON Patch isteklerini nasıl işleyeceğinizi öğrenin.
-ms.author: riande
-ms.custom: mvc
-ms.date: 04/02/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: web-api/jsonpatch
-ms.openlocfilehash: 3a78fa268cce8cff10fedf5814d61ce0e5faaf4b
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82766673"
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
+
 # <a name="jsonpatch-in-aspnet-core-web-api"></a>ASP.NET Core Web API 'sinde JsonPatch
 
 , [Tom Dykstra](https://github.com/tdykstra) ve [Kirk larkabağı](https://github.com/serpent5) tarafından
@@ -31,8 +20,8 @@ Bu makalede, ASP.NET Core Web API 'sinde JSON Patch isteklerinin nasıl işlenec
 
 Uygulamanızda JSON yama desteğini etkinleştirmek için aşağıdaki adımları izleyin:
 
-1. [Microsoft. AspNetCore. Mvc. NewtonsoftJson](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/) NuGet paketini yükler.
-1. Çağırmak `Startup.ConfigureServices` <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*>için projenin metodunu güncelleştirin. Örneğin:
+1. [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/)NuGet paketini yükler.
+1. `Startup.ConfigureServices`Çağırmak için projenin metodunu güncelleştirin <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> . Örnek:
 
     ```csharp
     services
@@ -48,7 +37,7 @@ Uygulamanızda JSON yama desteğini etkinleştirmek için aşağıdaki adımlar�
 
 ## <a name="json-patch-addnewtonsoftjson-and-systemtextjson"></a>JSON Patch, AddNewtonsoftJson ve System. Text. JSON
 
-`AddNewtonsoftJson``System.Text.Json` **Tüm** JSON içeriğini biçimlendirmek için kullanılan tabanlı giriş ve çıkış biçimlerini değiştirir. Kullanarak `Newtonsoft.Json`JSON Patch desteği eklemek için, diğer biçimleri değişmeden bırakarak, projenin `Startup.ConfigureServices` yöntemini aşağıdaki gibi güncelleştirin:
+`AddNewtonsoftJson``System.Text.Json` **Tüm** JSON içeriğini biçimlendirmek için kullanılan tabanlı giriş ve çıkış biçimlerini değiştirir. Kullanarak JSON Patch desteği eklemek için `Newtonsoft.Json` , diğer biçimleri değişmeden bırakarak, projenin `Startup.ConfigureServices` yöntemini aşağıdaki gibi güncelleştirin:
 
 [!code-csharp[](jsonpatch/samples/3.0/WebApp1/Startup.cs?name=snippet)]
 
@@ -76,9 +65,9 @@ PUT ve [Patch](https://tools.ietf.org/html/rfc5789) yöntemleri, var olan bir ka
 
 Önceki JSON 'da:
 
-* `op` Özelliği, işlem türünü gösterir.
-* `path` Özelliği güncelleştirilecek öğeyi gösterir.
-* `value` Özelliği yeni değeri sağlar.
+* `op`Özelliği, işlem türünü gösterir.
+* `path`Özelliği güncelleştirilecek öğeyi gösterir.
+* `value`Özelliği yeni değeri sağlar.
 
 ### <a name="resource-after-patch"></a>Düzeltme ekiyle sonra kaynak
 
@@ -110,20 +99,150 @@ Bir kaynak için bir JSON Patch belgesi uygulanarak yapılan değişiklikler ato
 
 Bir işlem nesnesinin [Path](https://tools.ietf.org/html/rfc6901) özelliği düzeyler arasında eğik çizgi içeriyor. Örneğin, `"/address/zipCode"`.
 
-Sıfır tabanlı dizinler, dizi öğelerini belirtmek için kullanılır. `addresses` Dizinin ilk öğesi `/addresses/0`. `add` Bir dizinin sonuna kadar, dizin numarası yerine bir tire (`-`) kullanın: `/addresses/-`.
+Sıfır tabanlı dizinler, dizi öğelerini belirtmek için kullanılır. Dizinin ilk öğesi `addresses` `/addresses/0` . `add`Bir dizinin sonuna kadar, `-` Dizin numarası yerine bir tire () kullanın: `/addresses/-` .
 
 ### <a name="operations"></a>İşlemler
 
 Aşağıdaki tabloda, [JSON Patch belirtiminde](https://tools.ietf.org/html/rfc6902)tanımlanan desteklenen işlemler gösterilmektedir:
 
 |İşlem  | Notlar |
-|-----------|--------------------------------|
-| `add`     | Bir özellik veya dizi öğesi ekleyin. Var olan özellik için: set değeri.|
-| `remove`  | Bir özellik veya dizi öğesi kaldırın. |
-| `replace` | Aynı konumdaki `remove` ve sonrasında `add` aynı. |
-| `move`    | `remove` Kaynaktaki değeri kullanarak kaynağından sonra `add` hedefle aynı. |
-| `copy`    | Kaynaktaki değeri `add` kullanarak hedefle aynı olacak şekilde aynı. |
-| `test`    | Değer: `path` belirtilmişse başarı durum kodu döndürür `value`.|
+|---
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------|---
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+----------------| | `add`     | Bir özellik veya dizi öğesi ekleyin. Mevcut özellik için: Set Value. | | `remove`  | Bir özellik veya dizi öğesi kaldırın. | | `replace` | Aynı `remove` konumdaki ve sonrasında aynı `add` . | | `move`    | Kaynaktaki `remove` `add` değeri kullanarak kaynağından sonra hedefle aynı. | | `copy`    | `add`Kaynaktaki değeri kullanarak hedefle aynı olacak şekilde aynı. | | `test`    | Değer = sağlanmışsa, başarı durum kodu döndürür `path` `value` . |
 
 ## <a name="json-patch-in-aspnet-core"></a>ASP.NET Core JSON yaması
 
@@ -133,15 +252,15 @@ JSON düzeltme ekinin ASP.NET Core uygulanması, [Microsoft. AspNetCore. JsonPat
 
 Bir API denetleyicisinde, JSON yaması için bir eylem yöntemi:
 
-* , `HttpPatch` Özniteliğiyle açıklama eklenir.
-* `JsonPatchDocument<T>`, Genellikle ile `[FromBody]`kabul eder.
-* Değişiklikleri `ApplyTo` uygulamak için düzeltme eki belgesindeki çağrılar.
+* , Özniteliğiyle açıklama eklenir `HttpPatch` .
+* `JsonPatchDocument<T>`, Genellikle ile kabul eder `[FromBody]` .
+* `ApplyTo`Değişiklikleri uygulamak için düzeltme eki belgesindeki çağrılar.
 
-Bir örneği aşağıda verilmiştir:
+İşte bir örnek:
 
 [!code-csharp[](jsonpatch/samples/2.2/Controllers/HomeController.cs?name=snippet_PatchAction&highlight=1,3,9)]
 
-Örnek uygulamadaki Bu kod aşağıdaki `Customer` modelle birlikte kullanılabilir:
+Örnek uygulamadaki Bu kod aşağıdaki modelle birlikte kullanılabilir `Customer` :
 
 [!code-csharp[](jsonpatch/samples/2.2/Models/Customer.cs?name=snippet_Customer)]
 
@@ -149,7 +268,7 @@ Bir örneği aşağıda verilmiştir:
 
 Örnek eylem yöntemi:
 
-* Bir `Customer`oluşturur.
+* Bir oluşturur `Customer` .
 * Düzeltme ekini uygular.
 * Yanıtın gövdesinde sonucu döndürür.
 
@@ -157,7 +276,7 @@ Gerçek bir uygulamada, kod veritabanı gibi bir mağazadan verileri alır ve d�
 
 ### <a name="model-state"></a>Model durumu
 
-Önceki eylem yöntemi örneği, parametrelerinden biri olarak model `ApplyTo` durumunu alan aşırı yüklemesini çağırır. Bu seçenekle, yanıtlardan hata iletileri alabilirsiniz. Aşağıdaki örnekte bir `test` işlem Için 400 hatalı istek yanıtının gövdesi gösterilmektedir:
+Önceki eylem yöntemi örneği, `ApplyTo` parametrelerinden biri olarak model durumunu alan aşırı yüklemesini çağırır. Bu seçenekle, yanıtlardan hata iletileri alabilirsiniz. Aşağıdaki örnekte bir işlem için 400 Hatalı Istek yanıtının gövdesi gösterilmektedir `test` :
 
 ```json
 {
@@ -175,69 +294,69 @@ Aşağıdaki eylem yöntemi örneği, dinamik bir nesneye nasıl düzeltme eki u
 
 ## <a name="the-add-operation"></a>Ekleme işlemi
 
-* Bir `path` dizi öğesine işaret ediyorsa: tarafından `path`belirtiden önce yeni bir öğe ekler.
-* Bir `path` özelliğe işaret ediyorsa: özellik değerini ayarlar.
-* Varolmayan `path` bir konuma işaret ediyorsa:
+* `path`Bir dizi öğesine işaret ediyorsa: tarafından belirtiden önce yeni bir öğe ekler `path` .
+* `path`Bir özelliğe işaret ediyorsa: özellik değerini ayarlar.
+* `path`Varolmayan bir konuma işaret ediyorsa:
   * Yama yapılacak kaynak dinamik bir nesnedir: bir özellik ekler.
   * Yama yapılacak kaynak statik bir nesnese: istek başarısız olur.
 
-Aşağıdaki örnek düzeltme eki belgesi değerini ayarlar `CustomerName` ve `Order` `Orders` dizinin sonuna bir nesnesi ekler.
+Aşağıdaki örnek düzeltme eki belgesi değerini ayarlar `CustomerName` ve `Order` dizinin sonuna bir nesnesi ekler `Orders` .
 
 [!code-json[](jsonpatch/samples/2.2/JSON/add.json)]
 
 ## <a name="the-remove-operation"></a>Kaldırma işlemi
 
-* Bir `path` dizi öğesine işaret ediyorsa: öğesini kaldırır.
-* Bir `path` özelliğe işaret ediyorsa:
+* `path`Bir dizi öğesine işaret ediyorsa: öğesini kaldırır.
+* `path`Bir özelliğe işaret ediyorsa:
   * Yayama kaynağı dinamik bir nesne ise: özelliğini kaldırır.
   * Yama yapılacak kaynak statik bir nesnese:
     * Özellik null atanabilir ise: null olarak ayarlar.
-    * Özellik null atanamaz ise, olarak `default<T>`ayarlar.
+    * Özellik null atanamaz ise, olarak ayarlar `default<T>` .
 
-Aşağıdaki örnek düzeltme eki belgesi null `CustomerName` ve siler `Orders[0]`olarak ayarlanır:
+Aşağıdaki örnek düzeltme eki belgesi `CustomerName` null ve siler olarak ayarlanır `Orders[0]` :
 
 [!code-json[](jsonpatch/samples/2.2/JSON/remove.json)]
 
 ## <a name="the-replace-operation"></a>Değiştirme işlemi
 
-Bu işlem, bir `remove` sonrasında bir `add`ile aynıdır.
+Bu işlem, bir `remove` sonrasında bir ile aynıdır `add` .
 
-Aşağıdaki örnek düzeltme eki belgesi değerini ayarlar `CustomerName` ve yeni `Orders[0]` `Order` bir nesneyle değiştirir:
+Aşağıdaki örnek düzeltme eki belgesi değerini ayarlar `CustomerName` ve `Orders[0]` Yeni bir `Order` nesneyle değiştirir:
 
 [!code-json[](jsonpatch/samples/2.2/JSON/replace.json)]
 
 ## <a name="the-move-operation"></a>Taşıma işlemi
 
-* Bir `path` dizi öğesinin işaret ediyorsa: öğesini öğesinin `from` konumuna `path` kopyalar, sonra `remove` `from` öğesi üzerinde bir işlem çalıştırır.
-* Bir `path` `from` özelliğe işaret ediyorsa: özelliğin değerini `path` özelliğine kopyalar ve sonra `remove` `from` özelliği üzerinde bir işlem çalıştırır.
-* Varolmayan `path` bir özelliğe işaret ediyorsa:
+* `path`Bir dizi öğesinin işaret ediyorsa: öğesini öğesinin `from` konumuna kopyalar `path` , sonra `remove` öğesi üzerinde bir işlem çalıştırır `from` .
+* `path`Bir özelliğe işaret ediyorsa: özelliğin değerini özelliğine kopyalar `from` `path` ve sonra `remove` özelliği üzerinde bir işlem çalıştırır `from` .
+* `path`Varolmayan bir özelliğe işaret ediyorsa:
   * Yama yapılacak kaynak statik bir nesnese: istek başarısız olur.
-  * Yaması gereken kaynak dinamik bir nesnedir: özelliği tarafından `from` `path`belirtilen konuma kopyalar, sonra `remove` `from` özellik üzerinde bir işlem çalıştırır.
+  * Yaması gereken kaynak dinamik bir nesnedir: `from` özelliği tarafından belirtilen konuma kopyalar `path` , sonra `remove` özellik üzerinde bir işlem çalıştırır `from` .
 
 Aşağıdaki örnek düzeltme eki belgesi:
 
-* Değerini `Orders[0].OrderName` olarak `CustomerName`kopyalar.
-* Null `Orders[0].OrderName` olarak ayarlar.
-* Öncesine `Orders[1]` `Orders[0]`gider.
+* Değerini `Orders[0].OrderName` olarak kopyalar `CustomerName` .
+* `Orders[0].OrderName`Null olarak ayarlar.
+* `Orders[1]`Öncesine gider `Orders[0]` .
 
 [!code-json[](jsonpatch/samples/2.2/JSON/move.json)]
 
 ## <a name="the-copy-operation"></a>Kopyalama işlemi
 
-Bu işlem, son `move` `remove` adım olmadan işlem ile aynı şekilde aynıdır.
+Bu işlem, `move` son adım olmadan işlem ile aynı şekilde aynıdır `remove` .
 
 Aşağıdaki örnek düzeltme eki belgesi:
 
-* Değerini `Orders[0].OrderName` olarak `CustomerName`kopyalar.
-* Daha `Orders[1]` önce `Orders[0]`bir kopyası ekler.
+* Değerini `Orders[0].OrderName` olarak kopyalar `CustomerName` .
+* Daha önce bir kopyası `Orders[1]` ekler `Orders[0]` .
 
 [!code-json[](jsonpatch/samples/2.2/JSON/copy.json)]
 
 ## <a name="the-test-operation"></a>Test işlemi
 
-Tarafından `path` belirtilen konumdaki değer içinde `value`belirtilen değerden farklıysa, istek başarısız olur. Bu durumda, yama belgesindeki diğer tüm işlemler başka bir şekilde başarılı olsa bile, tüm yama isteği başarısız olur.
+Tarafından belirtilen konumdaki değer `path` içinde belirtilen değerden farklıysa `value` , istek başarısız olur. Bu durumda, yama belgesindeki diğer tüm işlemler başka bir şekilde başarılı olsa bile, tüm yama isteği başarısız olur.
 
-İşlem `test` , bir eşzamanlılık çakışması olduğunda bir güncelleştirmeyi engellemek için yaygın olarak kullanılır.
+İşlem, bir `test` eşzamanlılık çakışması olduğunda bir güncelleştirmeyi engellemek için yaygın olarak kullanılır.
 
 Aşağıdaki örnek düzeltme eki belgesinin ilk değeri `CustomerName` "John" ise, test başarısız olursa hiçbir etkisi yoktur:
 
@@ -288,9 +407,9 @@ PUT ve [Patch](https://tools.ietf.org/html/rfc5789) yöntemleri, var olan bir ka
 
 Önceki JSON 'da:
 
-* `op` Özelliği, işlem türünü gösterir.
-* `path` Özelliği güncelleştirilecek öğeyi gösterir.
-* `value` Özelliği yeni değeri sağlar.
+* `op`Özelliği, işlem türünü gösterir.
+* `path`Özelliği güncelleştirilecek öğeyi gösterir.
+* `value`Özelliği yeni değeri sağlar.
 
 ### <a name="resource-after-patch"></a>Düzeltme ekiyle sonra kaynak
 
@@ -322,20 +441,150 @@ Bir kaynak için bir JSON Patch belgesi uygulanarak yapılan değişiklikler ato
 
 Bir işlem nesnesinin [Path](https://tools.ietf.org/html/rfc6901) özelliği düzeyler arasında eğik çizgi içeriyor. Örneğin, `"/address/zipCode"`.
 
-Sıfır tabanlı dizinler, dizi öğelerini belirtmek için kullanılır. `addresses` Dizinin ilk öğesi `/addresses/0`. `add` Bir dizinin sonuna kadar, dizin numarası yerine bir tire (-) kullanın: `/addresses/-`.
+Sıfır tabanlı dizinler, dizi öğelerini belirtmek için kullanılır. Dizinin ilk öğesi `addresses` `/addresses/0` . `add`Bir dizinin sonuna kadar, dizin numarası yerine bir tire (-) kullanın: `/addresses/-` .
 
 ### <a name="operations"></a>İşlemler
 
 Aşağıdaki tabloda, [JSON Patch belirtiminde](https://tools.ietf.org/html/rfc6902)tanımlanan desteklenen işlemler gösterilmektedir:
 
 |İşlem  | Notlar |
-|-----------|--------------------------------|
-| `add`     | Bir özellik veya dizi öğesi ekleyin. Var olan özellik için: set değeri.|
-| `remove`  | Bir özellik veya dizi öğesi kaldırın. |
-| `replace` | Aynı konumdaki `remove` ve sonrasında `add` aynı. |
-| `move`    | `remove` Kaynaktaki değeri kullanarak kaynağından sonra `add` hedefle aynı. |
-| `copy`    | Kaynaktaki değeri `add` kullanarak hedefle aynı olacak şekilde aynı. |
-| `test`    | Değer: `path` belirtilmişse başarı durum kodu döndürür `value`.|
+|---
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------|---
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+----------------| | `add`     | Bir özellik veya dizi öğesi ekleyin. Mevcut özellik için: Set Value. | | `remove`  | Bir özellik veya dizi öğesi kaldırın. | | `replace` | Aynı `remove` konumdaki ve sonrasında aynı `add` . | | `move`    | Kaynaktaki `remove` `add` değeri kullanarak kaynağından sonra hedefle aynı. | | `copy`    | `add`Kaynaktaki değeri kullanarak hedefle aynı olacak şekilde aynı. | | `test`    | Değer = sağlanmışsa, başarı durum kodu döndürür `path` `value` . |
 
 ## <a name="jsonpatch-in-aspnet-core"></a>ASP.NET Core 'de JsonPatch
 
@@ -345,15 +594,15 @@ JSON düzeltme ekinin ASP.NET Core uygulanması, [Microsoft. AspNetCore. JsonPat
 
 Bir API denetleyicisinde, JSON yaması için bir eylem yöntemi:
 
-* , `HttpPatch` Özniteliğiyle açıklama eklenir.
-* `JsonPatchDocument<T>`, Genellikle ile `[FromBody]`kabul eder.
-* Değişiklikleri `ApplyTo` uygulamak için düzeltme eki belgesindeki çağrılar.
+* , Özniteliğiyle açıklama eklenir `HttpPatch` .
+* `JsonPatchDocument<T>`, Genellikle ile kabul eder `[FromBody]` .
+* `ApplyTo`Değişiklikleri uygulamak için düzeltme eki belgesindeki çağrılar.
 
-Bir örneği aşağıda verilmiştir:
+İşte bir örnek:
 
 [!code-csharp[](jsonpatch/samples/2.2/Controllers/HomeController.cs?name=snippet_PatchAction&highlight=1,3,9)]
 
-Örnek uygulamadaki Bu kod aşağıdaki `Customer` modelle birlikte kullanılabilir.
+Örnek uygulamadaki Bu kod aşağıdaki modelle birlikte kullanılabilir `Customer` .
 
 [!code-csharp[](jsonpatch/samples/2.2/Models/Customer.cs?name=snippet_Customer)]
 
@@ -361,7 +610,7 @@ Bir örneği aşağıda verilmiştir:
 
 Örnek eylem yöntemi:
 
-* Bir `Customer`oluşturur.
+* Bir oluşturur `Customer` .
 * Düzeltme ekini uygular.
 * Yanıtın gövdesinde sonucu döndürür.
 
@@ -369,7 +618,7 @@ Bir örneği aşağıda verilmiştir:
 
 ### <a name="model-state"></a>Model durumu
 
-Önceki eylem yöntemi örneği, parametrelerinden biri olarak model `ApplyTo` durumunu alan aşırı yüklemesini çağırır. Bu seçenekle, yanıtlardan hata iletileri alabilirsiniz. Aşağıdaki örnekte bir `test` işlem Için 400 hatalı istek yanıtının gövdesi gösterilmektedir:
+Önceki eylem yöntemi örneği, `ApplyTo` parametrelerinden biri olarak model durumunu alan aşırı yüklemesini çağırır. Bu seçenekle, yanıtlardan hata iletileri alabilirsiniz. Aşağıdaki örnekte bir işlem için 400 Hatalı Istek yanıtının gövdesi gösterilmektedir `test` :
 
 ```json
 {
@@ -387,69 +636,69 @@ Aşağıdaki eylem yöntemi örneği, dinamik bir nesne için bir düzeltme ekin
 
 ## <a name="the-add-operation"></a>Ekleme işlemi
 
-* Bir `path` dizi öğesine işaret ediyorsa: tarafından `path`belirtiden önce yeni bir öğe ekler.
-* Bir `path` özelliğe işaret ediyorsa: özellik değerini ayarlar.
-* Varolmayan `path` bir konuma işaret ediyorsa:
+* `path`Bir dizi öğesine işaret ediyorsa: tarafından belirtiden önce yeni bir öğe ekler `path` .
+* `path`Bir özelliğe işaret ediyorsa: özellik değerini ayarlar.
+* `path`Varolmayan bir konuma işaret ediyorsa:
   * Yama yapılacak kaynak dinamik bir nesnedir: bir özellik ekler.
   * Yama yapılacak kaynak statik bir nesnese: istek başarısız olur.
 
-Aşağıdaki örnek düzeltme eki belgesi değerini ayarlar `CustomerName` ve `Order` `Orders` dizinin sonuna bir nesnesi ekler.
+Aşağıdaki örnek düzeltme eki belgesi değerini ayarlar `CustomerName` ve `Order` dizinin sonuna bir nesnesi ekler `Orders` .
 
 [!code-json[](jsonpatch/samples/2.2/JSON/add.json)]
 
 ## <a name="the-remove-operation"></a>Kaldırma işlemi
 
-* Bir `path` dizi öğesine işaret ediyorsa: öğesini kaldırır.
-* Bir `path` özelliğe işaret ediyorsa:
+* `path`Bir dizi öğesine işaret ediyorsa: öğesini kaldırır.
+* `path`Bir özelliğe işaret ediyorsa:
   * Yayama kaynağı dinamik bir nesne ise: özelliğini kaldırır.
   * Yama yapılacak kaynak statik bir nesnese:
     * Özellik null atanabilir ise: null olarak ayarlar.
-    * Özellik null atanamaz ise, olarak `default<T>`ayarlar.
+    * Özellik null atanamaz ise, olarak ayarlar `default<T>` .
 
-Aşağıdaki örnek düzeltme eki belgesi null `CustomerName` ve siler `Orders[0]`olarak ayarlanır.
+Aşağıdaki örnek düzeltme eki belgesi `CustomerName` null ve siler olarak ayarlanır `Orders[0]` .
 
 [!code-json[](jsonpatch/samples/2.2/JSON/remove.json)]
 
 ## <a name="the-replace-operation"></a>Değiştirme işlemi
 
-Bu işlem, bir `remove` sonrasında bir `add`ile aynıdır.
+Bu işlem, bir `remove` sonrasında bir ile aynıdır `add` .
 
-Aşağıdaki örnek düzeltme eki belgesi değerini ayarlar `CustomerName` ve yeni `Orders[0]` `Order` bir nesneyle değiştirir.
+Aşağıdaki örnek düzeltme eki belgesi değerini ayarlar `CustomerName` ve `Orders[0]` Yeni bir `Order` nesneyle değiştirir.
 
 [!code-json[](jsonpatch/samples/2.2/JSON/replace.json)]
 
 ## <a name="the-move-operation"></a>Taşıma işlemi
 
-* Bir `path` dizi öğesinin işaret ediyorsa: öğesini öğesinin `from` konumuna `path` kopyalar, sonra `remove` `from` öğesi üzerinde bir işlem çalıştırır.
-* Bir `path` `from` özelliğe işaret ediyorsa: özelliğin değerini `path` özelliğine kopyalar ve sonra `remove` `from` özelliği üzerinde bir işlem çalıştırır.
-* Varolmayan `path` bir özelliğe işaret ediyorsa:
+* `path`Bir dizi öğesinin işaret ediyorsa: öğesini öğesinin `from` konumuna kopyalar `path` , sonra `remove` öğesi üzerinde bir işlem çalıştırır `from` .
+* `path`Bir özelliğe işaret ediyorsa: özelliğin değerini özelliğine kopyalar `from` `path` ve sonra `remove` özelliği üzerinde bir işlem çalıştırır `from` .
+* `path`Varolmayan bir özelliğe işaret ediyorsa:
   * Yama yapılacak kaynak statik bir nesnese: istek başarısız olur.
-  * Yaması gereken kaynak dinamik bir nesnedir: özelliği tarafından `from` `path`belirtilen konuma kopyalar, sonra `remove` `from` özellik üzerinde bir işlem çalıştırır.
+  * Yaması gereken kaynak dinamik bir nesnedir: `from` özelliği tarafından belirtilen konuma kopyalar `path` , sonra `remove` özellik üzerinde bir işlem çalıştırır `from` .
 
 Aşağıdaki örnek düzeltme eki belgesi:
 
-* Değerini `Orders[0].OrderName` olarak `CustomerName`kopyalar.
-* Null `Orders[0].OrderName` olarak ayarlar.
-* Öncesine `Orders[1]` `Orders[0]`gider.
+* Değerini `Orders[0].OrderName` olarak kopyalar `CustomerName` .
+* `Orders[0].OrderName`Null olarak ayarlar.
+* `Orders[1]`Öncesine gider `Orders[0]` .
 
 [!code-json[](jsonpatch/samples/2.2/JSON/move.json)]
 
 ## <a name="the-copy-operation"></a>Kopyalama işlemi
 
-Bu işlem, son `move` `remove` adım olmadan işlem ile aynı şekilde aynıdır.
+Bu işlem, `move` son adım olmadan işlem ile aynı şekilde aynıdır `remove` .
 
 Aşağıdaki örnek düzeltme eki belgesi:
 
-* Değerini `Orders[0].OrderName` olarak `CustomerName`kopyalar.
-* Daha `Orders[1]` önce `Orders[0]`bir kopyası ekler.
+* Değerini `Orders[0].OrderName` olarak kopyalar `CustomerName` .
+* Daha önce bir kopyası `Orders[1]` ekler `Orders[0]` .
 
 [!code-json[](jsonpatch/samples/2.2/JSON/copy.json)]
 
 ## <a name="the-test-operation"></a>Test işlemi
 
-Tarafından `path` belirtilen konumdaki değer içinde `value`belirtilen değerden farklıysa, istek başarısız olur. Bu durumda, yama belgesindeki diğer tüm işlemler başka bir şekilde başarılı olsa bile, tüm yama isteği başarısız olur.
+Tarafından belirtilen konumdaki değer `path` içinde belirtilen değerden farklıysa `value` , istek başarısız olur. Bu durumda, yama belgesindeki diğer tüm işlemler başka bir şekilde başarılı olsa bile, tüm yama isteği başarısız olur.
 
-İşlem `test` , bir eşzamanlılık çakışması olduğunda bir güncelleştirmeyi engellemek için yaygın olarak kullanılır.
+İşlem, bir `test` eşzamanlılık çakışması olduğunda bir güncelleştirmeyi engellemek için yaygın olarak kullanılır.
 
 Aşağıdaki örnek düzeltme eki belgesinin ilk değeri `CustomerName` "John" ise, test başarısız olursa hiçbir etkisi yoktur:
 

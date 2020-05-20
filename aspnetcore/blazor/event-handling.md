@@ -1,7 +1,7 @@
 ---
 title: ASP.NET Core Blazor olay işleme
 author: guardrex
-description: Olay bağımsız Blazordeğişkeni türleri, olay geri çağırmaları ve varsayılan tarayıcı olaylarını yönetmek dahil olmak üzere olay işleme özellikleri hakkında bilgi edinin.
+description: Olay Blazor bağımsız değişkeni türleri, olay geri çağırmaları ve varsayılan tarayıcı olaylarını yönetmek dahil olmak üzere olay işleme özellikleri hakkında bilgi edinin.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -13,20 +13,20 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/event-handling
-ms.openlocfilehash: aa338bbe61eec14bc1e1b3606e11e26bfb0e6a09
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
+ms.openlocfilehash: 610cb9124f59ed07f1fe6193f92052b4513450c8
+ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967473"
+ms.lasthandoff: 05/15/2020
+ms.locfileid: "83424246"
 ---
 # <a name="aspnet-core-blazor-event-handling"></a>ASP.NET Core Blazor olay işleme
 
 , [Luke Latham](https://github.com/guardrex) ve [Daniel Roth](https://github.com/danroth27) tarafından
 
-Razor bileşenleri olay işleme özellikleri sağlar. Temsilci türü belirtilmiş bir değer ile [`@on{EVENT}`](xref:mvc/views/razor#onevent) ADLı bir HTML öğesi `@onclick`özniteliği için (örneğin,), Razor bileşeni öznitelik değerini bir olay işleyicisi olarak değerlendirir.
+Razor bileşenleri olay işleme özellikleri sağlar. [`@on{EVENT}`](xref:mvc/views/razor#onevent)Temsilci türü belirtilmiş bir değer ile adlı BIR HTML öğesi özniteliği için (örneğin, `@onclick` ), Razor bileşeni öznitelik değerini bir olay işleyicisi olarak değerlendirir.
 
-Aşağıdaki kod, Kullanıcı arabiriminde `UpdateHeading` düğme seçildiğinde yöntemini çağırır:
+Aşağıdaki kod, `UpdateHeading` Kullanıcı arabiriminde düğme seçildiğinde yöntemini çağırır:
 
 ```razor
 <button class="btn btn-primary" @onclick="UpdateHeading">
@@ -41,7 +41,7 @@ Aşağıdaki kod, Kullanıcı arabiriminde `UpdateHeading` düğme seçildiğind
 }
 ```
 
-Aşağıdaki kod, Kullanıcı arabiriminde `CheckChanged` onay kutusu değiştirildiğinde yöntemini çağırır:
+Aşağıdaki kod, `CheckChanged` Kullanıcı arabiriminde onay kutusu değiştirildiğinde yöntemini çağırır:
 
 ```razor
 <input type="checkbox" class="form-check-input" @onchange="CheckChanged" />
@@ -54,9 +54,9 @@ Aşağıdaki kod, Kullanıcı arabiriminde `CheckChanged` onay kutusu değiştir
 }
 ```
 
-Olay işleyicileri Ayrıca zaman uyumsuz olabilir ve döndürebilir <xref:System.Threading.Tasks.Task>. [Statehaschanged](xref:blazor/lifecycle#state-changes)el ile çağırmanız gerekmez. Özel durumlar oluştuğunda günlüğe kaydedilir.
+Olay işleyicileri Ayrıca zaman uyumsuz olabilir ve döndürebilir <xref:System.Threading.Tasks.Task> . [Statehaschanged](xref:blazor/lifecycle#state-changes)el ile çağırmanız gerekmez. Özel durumlar oluştuğunda günlüğe kaydedilir.
 
-Aşağıdaki örnekte, `UpdateHeading` düğme seçildiğinde zaman uyumsuz olarak çağrılır:
+Aşağıdaki örnekte, `UpdateHeading` Düğme seçildiğinde zaman uyumsuz olarak çağrılır:
 
 ```razor
 <button class="btn btn-primary" @onclick="UpdateHeading">
@@ -82,20 +82,20 @@ Desteklenir `EventArgs` , aşağıdaki tabloda gösterilmiştir.
 | Pano        | `ClipboardEventArgs` | `oncut`, `oncopy`, `onpaste` |
 | Sürükleyin             | `DragEventArgs`      | `ondrag`, `ondragstart`, `ondragenter`, `ondragleave`, `ondragover`, `ondrop`, `ondragend`<br><br>`DataTransfer`ve `DataTransferItem` öğe verilerini sürüklemiş tutun. |
 | Hata            | `ErrorEventArgs`     | `onerror` |
-| Olay            | `EventArgs`          | *Genel*<br>`onactivate`, `onbeforeactivate`, `onbeforedeactivate`, `ondeactivate`, `onended`, `onfullscreenchange`, `onfullscreenerror`, `onloadeddata`, `onloadedmetadata`, `onpointerlockchange`, `onpointerlockerror`, `onreadystatechange`, `onscroll`<br><br>*Yapıştırır*<br>`onbeforecut`, `onbeforecopy`, `onbeforepaste`<br><br>*Giriş*<br>`oninvalid`, `onreset`, `onselect`, `onselectionchange`, `onselectstart`, `onsubmit`<br><br>*Medya*<br>`oncanplay`, `oncanplaythrough`, `oncuechange`, `ondurationchange`, `onemptied`, `onpause`, `onplay`, `onplaying`, `onratechange`, `onseeked`, `onseeking`, `onstalled`, `onstop`, `onsuspend`, `ontimeupdate`, `onvolumechange`, `onwaiting` |
-| Çı            | `FocusEventArgs`     | `onfocus`, `onblur`, `onfocusin`, `onfocusout`<br><br>İçin `relatedTarget`destek içermez. |
+| Olay            | `EventArgs`          | *Genel*<br>`onactivate`, `onbeforeactivate`, `onbeforedeactivate`, `ondeactivate`, `onended`, `onfullscreenchange`, `onfullscreenerror`, `onloadeddata`, `onloadedmetadata`, `onpointerlockchange`, `onpointerlockerror`, `onreadystatechange`, `onscroll`<br><br>*Pano*<br>`onbeforecut`, `onbeforecopy`, `onbeforepaste`<br><br>*Giriş*<br>`oninvalid`, `onreset`, `onselect`, `onselectionchange`, `onselectstart`, `onsubmit`<br><br>*Medya*<br>`oncanplay`, `oncanplaythrough`, `oncuechange`, `ondurationchange`, `onemptied`, `onpause`, `onplay`, `onplaying`, `onratechange`, `onseeked`, `onseeking`, `onstalled`, `onstop`, `onsuspend`, `ontimeupdate`, `onvolumechange`, `onwaiting` |
+| Çı            | `FocusEventArgs`     | `onfocus`, `onblur`, `onfocusin`, `onfocusout`<br><br>İçin destek içermez `relatedTarget` . |
 | Giriş            | `ChangeEventArgs`    | `onchange`, `oninput` |
 | Klavye         | `KeyboardEventArgs`  | `onkeydown`, `onkeypress`, `onkeyup` |
 | Fare            | `MouseEventArgs`     | `onclick`, `oncontextmenu`, `ondblclick`, `onmousedown`, `onmouseup`, `onmouseover`, `onmousemove`, `onmouseout` |
 | Fare işaretçisi    | `PointerEventArgs`   | `onpointerdown`, `onpointerup`, `onpointercancel`, `onpointermove`, `onpointerover`, `onpointerout`, `onpointerenter`, `onpointerleave`, `ongotpointercapture`, `onlostpointercapture` |
 | Fare tekerleği      | `WheelEventArgs`     | `onwheel`, `onmousewheel` |
-| İlerleme durumu         | `ProgressEventArgs`  | `onabort`, `onload`, `onloadend`, `onloadstart`, `onprogress`, `ontimeout` |
+| İlerleme Durumu         | `ProgressEventArgs`  | `onabort`, `onload`, `onloadend`, `onloadstart`, `onprogress`, `ontimeout` |
 | Dokunma            | `TouchEventArgs`     | `ontouchstart`, `ontouchend`, `ontouchmove`, `ontouchenter`, `ontouchleave`, `ontouchcancel`<br><br>`TouchPoint`dokunarak duyarlı bir cihazdaki tek bir iletişim noktasını temsil eder. |
 
 Daha fazla bilgi için aşağıdaki kaynaklara bakın:
 
 * [ASP.NET Core başvuru kaynağındaki EventArgs sınıfları (DotNet/aspnetcore sürümü/3.1 dalı)](https://github.com/dotnet/aspnetcore/tree/release/3.1/src/Components/Web/src/Web).
-* [MDN Web belgeleri: GlobalEventHandlers](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers) &ndash; , hangi HTML öğelerinin her Dom olayını destekledikleri hakkında bilgiler içerir.
+* [MDN Web belgeleri: GlobalEventHandlers](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers) &ndash; Hangi HTML öğelerinin her DOM olayını destekledikleri hakkında bilgiler içerir.
 
 ## <a name="lambda-expressions"></a>Lambda ifadeleri
 
@@ -105,7 +105,7 @@ Daha fazla bilgi için aşağıdaki kaynaklara bakın:
 <button @onclick="@(e => Console.WriteLine("Hello, world!"))">Say hello</button>
 ```
 
-Genellikle, bir dizi öğe üzerinde yineleme yaparken olduğu gibi ek değerlerin üzerinde kapatılabilir. Aşağıdaki örnek, her biri `UpdateHeading` Kullanıcı arabiriminde seçildiğinde bir olay bağımsız değişkeni (`MouseEventArgs`) ve düğme numarası (`buttonNumber`) geçiren üç düğme oluşturur:
+Genellikle, bir dizi öğe üzerinde yineleme yaparken olduğu gibi ek değerlerin üzerinde kapatılabilir. Aşağıdaki örnek, her biri `UpdateHeading` Kullanıcı arabiriminde seçildiğinde bir olay bağımsız değişkeni ( `MouseEventArgs` ) ve düğme numarası () geçiren üç düğme oluşturur `buttonNumber` :
 
 ```razor
 <h2>@message</h2>
@@ -132,17 +132,17 @@ Genellikle, bir dizi öğe üzerinde yineleme yaparken olduğu gibi ek değerler
 ```
 
 > [!NOTE]
-> Döngü değişkenini (`i`) bir `for` döngüde doğrudan bir lambda ifadesinde kullanmayın. **not** Aksi halde, tüm lambda ifadeleri tarafından değeri tüm Lambdalar aynı olmasına neden olan `i`değişken aynı değişken kullanılır. Her zaman değerini yerel bir değişkende (`buttonNumber` önceki örnekte) yakalayın ve sonra kullanın.
+> Döngü **not** değişkenini ( `i` ) bir `for` döngüde doğrudan bir lambda ifadesinde kullanmayın. Aksi halde, tüm lambda ifadeleri tarafından `i` değeri tüm Lambdalar aynı olmasına neden olan değişken aynı değişken kullanılır. Her zaman değerini yerel bir değişkende ( `buttonNumber` Önceki örnekte) yakalayın ve sonra kullanın.
 
 ## <a name="eventcallback"></a>EventCallback
 
-İç içe bileşenler içeren yaygın bir senaryo, alt bileşen olayı&mdash;olduğunda bir üst bileşenin yöntemini, örneğin bir `onclick` olay gerçekleştiğinde bir olay oluştuğunda çalıştırmak için gereklidir. Olayları bileşenler genelinde göstermek için bir `EventCallback`kullanın. Bir üst bileşen bir alt bileşene geri çağırma yöntemi atayabilir `EventCallback`.
+İç içe bileşenler içeren yaygın bir senaryo, bir alt bileşen olayı gerçekleştiğinde bir üst bileşenin yöntemini çalıştırma yöntemidir. `onclick`Alt bileşende gerçekleşen bir olay yaygın kullanım durumdur. Olayları bileşenler genelinde göstermek için bir kullanın `EventCallback` . Bir üst bileşen bir alt bileşene geri çağırma yöntemi atayabilir `EventCallback` .
 
-Örnek `ChildComponent` uygulamada (*Bileşenler/childcomponent. Razor*), bir düğmenin `onclick` işleyicisinin örnekten bir `EventCallback` temsilci alacak şekilde nasıl ayarlandığını gösterir. `ParentComponent` `EventCallback` ,, Bir çevre `MouseEventArgs`cihazından bir `onclick` olay için uygun olan ile öğesine yazılır:
+`ChildComponent`Örnek uygulamada (*Bileşenler/childcomponent. Razor*), bir düğmenin `onclick` işleyicisinin örnekten bir temsilci alacak şekilde nasıl ayarlandığını gösterir `EventCallback` `ParentComponent` . ,, `EventCallback` `MouseEventArgs` `onclick` Bir çevre cihazından bir olay için uygun olan ile öğesine yazılır:
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/ChildComponent.razor?highlight=5-7,17-18)]
 
-, `ParentComponent` Alt öğenin `EventCallback<T>` (`OnClickCallback`) metodunu kendi `ShowMessage` yöntemine ayarlar.
+, `ParentComponent` Alt öğenin `EventCallback<T>` ( `OnClickCallback` ) metodunu kendi yöntemine ayarlar `ShowMessage` .
 
 *Pages/ParentComponent. Razor*:
 
@@ -169,10 +169,10 @@ Genellikle, bir dizi öğe üzerinde yineleme yaparken olduğu gibi ek değerler
 }
 ```
 
-Düğme ' de seçildiğinde `ChildComponent`:
+Düğme ' de seçildiğinde `ChildComponent` :
 
-* `ParentComponent`Öğesinin `ShowMessage` yöntemi çağrılır. `messageText`güncelleştirilir ve içinde görüntülenir `ParentComponent`.
-* Geri çağırma yönteminde (`ShowMessage`) [statehaschanged](xref:blazor/lifecycle#state-changes) çağrısı gerekli değildir. `StateHasChanged`alt olaylar, alt öğe içinde yürütülen `ParentComponent`olay işleyicilerinde bileşen rerendering tetiklenmesi için otomatik olarak çağrılır.
+* `ParentComponent`Öğesinin `ShowMessage` yöntemi çağrılır. `messageText`güncelleştirilir ve içinde görüntülenir `ParentComponent` .
+* Geri çağırma yönteminde () [Statehaschanged](xref:blazor/lifecycle#state-changes) çağrısı gerekli değildir `ShowMessage` . `StateHasChanged`alt `ParentComponent` Olaylar, alt öğe içinde yürütülen olay işleyicilerinde bileşen rerendering tetiklenmesi için otomatik olarak çağrılır.
 
 `EventCallback`ve `EventCallback<T>` zaman uyumsuz temsilcilere izin verir. `EventCallback<T>`kesin bir şekilde türdedir ve belirli bir bağımsız değişken türü gerektirir. `EventCallback`zayıf ve bağımsız değişken türüne izin veriyor.
 
@@ -181,21 +181,21 @@ Düğme ' de seçildiğinde `ChildComponent`:
     OnClickCallback="@(async () => { await Task.Yield(); messageText = "Blaze It!"; })" />
 ```
 
-Bir `EventCallback` veya `EventCallback<T>` ile `InvokeAsync` çağırın ve şunu bekler <xref:System.Threading.Tasks.Task>:
+Bir `EventCallback` veya `EventCallback<T>` ile çağırın `InvokeAsync` ve şunu bekler <xref:System.Threading.Tasks.Task> :
 
 ```csharp
 await callback.InvokeAsync(arg);
 ```
 
-Olay `EventCallback` işleme `EventCallback<T>` ve bağlama bileşeni parametreleri için ve kullanın.
+`EventCallback` `EventCallback<T>` Olay işleme ve bağlama bileşeni parametreleri için ve kullanın.
 
-Kesin olarak belirlenmiş `EventCallback<T>` türü tercih `EventCallback`edin. `EventCallback<T>`bileşenin kullanıcılarına daha iyi hata geri bildirimi sağlar. Diğer UI olay işleyicileriyle benzer şekilde, olay parametresini belirtmek isteğe bağlıdır. Geri `EventCallback` çağırmaya hiçbir değer geçirilmemişse kullanın.
+Kesin olarak belirlenmiş türü tercih edin `EventCallback<T>` `EventCallback` . `EventCallback<T>`bileşenin kullanıcılarına daha iyi hata geri bildirimi sağlar. Diğer UI olay işleyicileriyle benzer şekilde, olay parametresini belirtmek isteğe bağlıdır. `EventCallback`Geri çağırmaya hiçbir değer geçirilmemişse kullanın.
 
 ## <a name="prevent-default-actions"></a>Varsayılan eylemleri engelle
 
-Bir olayın [`@on{EVENT}:preventDefault`](xref:mvc/views/razor#oneventpreventdefault) varsayılan eylemini engellemek için Directive özniteliğini kullanın.
+[`@on{EVENT}:preventDefault`](xref:mvc/views/razor#oneventpreventdefault)Bir olayın varsayılan eylemini engellemek için Directive özniteliğini kullanın.
 
-Giriş cihazında bir anahtar seçildiğinde ve öğe odağı bir metin kutusunda olduğunda, bir tarayıcı normalde metin kutusunda anahtarın karakterini görüntüler. Aşağıdaki örnekte, `@onkeypress:preventDefault` Directive özniteliği belirtilerek varsayılan davranış engellenir. Sayaç artar ve **+** anahtar `<input>` öğenin değerine yakalanmaz:
+Giriş cihazında bir anahtar seçildiğinde ve öğe odağı bir metin kutusunda olduğunda, bir tarayıcı normalde metin kutusunda anahtarın karakterini görüntüler. Aşağıdaki örnekte, Directive özniteliği belirtilerek varsayılan davranış engellenir `@onkeypress:preventDefault` . Sayaç artar ve **+** anahtar `<input>` öğenin değerine yakalanmaz:
 
 ```razor
 <input value="@count" @onkeypress="KeyHandler" @onkeypress:preventDefault />
@@ -213,9 +213,9 @@ Giriş cihazında bir anahtar seçildiğinde ve öğe odağı bir metin kutusund
 }
 ```
 
-`@on{EVENT}:preventDefault` Özniteliği bir değer olmadan belirtmek ile `@on{EVENT}:preventDefault="true"`eşdeğerdir.
+`@on{EVENT}:preventDefault`Özniteliği bir değer olmadan belirtmek ile eşdeğerdir `@on{EVENT}:preventDefault="true"` .
 
-Özniteliğin değeri de bir ifade olabilir. `shouldPreventDefault` Aşağıdaki örnekte, `bool` ya `true` `false`da olarak ayarlanan bir alandır:
+Özniteliğin değeri de bir ifade olabilir. Aşağıdaki örnekte, `shouldPreventDefault` `bool` ya da olarak ayarlanan bir alandır `true` `false` :
 
 ```razor
 <input @onkeypress:preventDefault="shouldPreventDefault" />
@@ -225,9 +225,9 @@ Varsayılan eylemi engellemek için bir olay işleyicisi gerekli değildir. Olay
 
 ## <a name="stop-event-propagation"></a>Olay yaymayı durdur
 
-Olay yaymayı [`@on{EVENT}:stopPropagation`](xref:mvc/views/razor#oneventstoppropagation) durdurmak için Directive özniteliğini kullanın.
+[`@on{EVENT}:stopPropagation`](xref:mvc/views/razor#oneventstoppropagation)Olay yaymayı durdurmak için Directive özniteliğini kullanın.
 
-Aşağıdaki örnekte, onay kutusunun seçilmesi ikinci alt `<div>` öğeden üst `<div>`öğeye yayılan olay tıklamasını önler:
+Aşağıdaki örnekte, onay kutusunun seçilmesi ikinci alt öğeden üst öğeye yayılan olay tıklamasını önler `<div>` `<div>` :
 
 ```razor
 <label>

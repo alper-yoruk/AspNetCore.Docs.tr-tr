@@ -1,32 +1,15 @@
 ---
-title: Azure Active Directory B2C bir ASP.NET Core Blazor weelsembly barındırılan uygulamasının güvenliğini sağlama
-author: guardrex
-description: ''
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/11/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
-ms.openlocfilehash: e8b1a1f86becb1e9f0affe14a667253bd0ec16bf
-ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83153654"
+Başlık: ' Blazor Azure Active Directory B2C ' Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc ile barındırılan bir uygulamayı ASP.NET Core güvenli hale getirme:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>Azure Active Directory B2C bir ASP.NET Core Blazor weelsembly barındırılan uygulamasının güvenliğini sağlama
 
 , [Javier Calvarro Nelson](https://github.com/javiercn) ve [Luke Latham](https://github.com/guardrex) 'e göre
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
-[!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
 
 Bu makalede Blazor kimlik doğrulaması için [Azure ACTIVE DIRECTORY (AAD) B2C](/azure/active-directory-b2c/overview) kullanan bir webassembly tek başına uygulamasının nasıl oluşturulacağı açıklanır.
 
@@ -34,21 +17,29 @@ Bu makalede Blazor kimlik doğrulaması için [Azure ACTIVE DIRECTORY (AAD) B2C]
 
 ### <a name="create-a-tenant"></a>Kiracı oluşturma
 
-Öğreticideki yönergeleri izleyin: bir AAD B2C kiracı oluşturmak için [Azure Active Directory B2C kiracı oluşturun](/azure/active-directory-b2c/tutorial-create-tenant) ve aşağıdaki bilgileri kaydedin:
+Öğretici: AAD B2C kiracı oluşturmak için [Azure Active Directory B2C kiracı oluşturma](/azure/active-directory-b2c/tutorial-create-tenant) ' daki yönergeleri izleyin.
+
+Aşağıdaki bilgileri kaydedin:
 
 * AAD B2C örneği (örneğin, `https://contoso.b2clogin.com/` sonunda eğik çizgi içeren)
 * AAD B2C kiracı etki alanı (örneğin, `contoso.onmicrosoft.com` )
 
 ### <a name="register-a-server-api-app"></a>Sunucu API 'SI uygulaması kaydetme
 
-Eğitim bölümünde yer alan yönergeleri izleyin: *sunucu API uygulaması* için AAD uygulamasını Azure Portal **Azure Active Directory**uygulama kayıtları alanına kaydetmek için [Azure Active Directory B2C bir uygulamayı kaydedin](/azure/active-directory-b2c/tutorial-register-applications)  >  **App registrations** :
+Bir AAD uygulamasını *sunucu API uygulaması*için kaydetmek üzere [öğretici: Azure Active Directory B2C bir uygulamayı kaydetme öğreticisindeki](/azure/active-directory-b2c/tutorial-register-applications) yönergeleri izleyin:
 
-1. **Yeni kayıt**seçeneğini belirleyin.
+1. **Azure Active Directory**  >  **uygulama kayıtları** **Yeni kayıt**' ı seçin.
 1. Uygulama için bir **ad** sağlayın (örneğin, ** Blazor sunucu AAD B2C**).
-1. **Desteklenen hesap türleri**için **herhangi bir kuruluş dizininde veya herhangi bir kimlik sağlayıcısında hesaplar ' ı seçin. Azure AD B2C kullanıcıları kimlik doğrulaması için.** Bu deneyim için (çok kiracılı).
+1. **Desteklenen hesap türleri**için, birden çok kiracılı seçeneği seçin: **herhangi bir kuruluş dizinindeki hesaplar veya herhangi bir kimlik sağlayıcısı. Azure AD B2C kullanıcıları kimlik doğrulaması için.**
 1. *Sunucu API 'si uygulaması* Bu senaryoda **yeniden yönlendirme URI 'si** gerektirmez, bu nedenle açılan kutudan **Web** 'e ve yeniden yönlendirme URI 'si girmeyin.
 1. **İzinlerin**  >  ,**OpenID 'ye yönetici tarafından verildiğini ve offline_access izinleri** olduğunu onaylayın.
 1. **Kaydol**’u seçin.
+
+Aşağıdaki bilgileri kaydedin:
+
+* *Sunucu API 'si uygulaması* Uygulama KIMLIĞI (Istemci KIMLIĞI) (örneğin, `11111111-1111-1111-1111-111111111111` )
+* Dizin KIMLIĞI (kiracı KIMLIĞI) (örneğin, `222222222-2222-2222-2222-222222222222` )
+* AAD kiracı etki alanı (örneğin, `contoso.onmicrosoft.com` ) &ndash; etki alanı, kayıtlı uygulama Için Azure Portal **marka** dikey penceresinde **Yayımcı etki alanı** olarak kullanılabilir.
 
 **API 'Yi kullanıma**sunma bölümünde:
 
@@ -62,33 +53,31 @@ Eğitim bölümünde yer alan yönergeleri izleyin: *sunucu API uygulaması* iç
 
 Aşağıdaki bilgileri kaydedin:
 
-* *Sunucu API 'si uygulaması* Uygulama KIMLIĞI (Istemci KIMLIĞI) (örneğin, `11111111-1111-1111-1111-111111111111` )
 * Uygulama KIMLIĞI URI 'SI (örneğin, `https://contoso.onmicrosoft.com/11111111-1111-1111-1111-111111111111` , `api://11111111-1111-1111-1111-111111111111` veya belirttiğiniz özel değer)
-* Dizin KIMLIĞI (kiracı KIMLIĞI) (örneğin, `222222222-2222-2222-2222-222222222222` )
-* *Sunucu API 'si uygulaması* Uygulama KIMLIĞI URI 'SI (örneğin, `https://contoso.onmicrosoft.com/11111111-1111-1111-1111-111111111111` Azure Portal ISTEMCI kimliği için varsayılan değer olarak değişebilir)
 * Varsayılan kapsam (örneğin, `API.Access` )
 
 ### <a name="register-a-client-app"></a>İstemci uygulamasını kaydetme
 
-Eğitim bölümünde yer alan yönergeleri izleyin: Azure Portal **Azure Active Directory**uygulama kayıtları alanına *istemci uygulaması* için AAD uygulaması kaydetmek üzere [bir uygulamayı yeniden Azure Active Directory B2C kaydedin](/azure/active-directory-b2c/tutorial-register-applications)  >  **App registrations** :
+Eğitim bölümündeki yönergeleri izleyerek *istemci uygulaması*IÇIN bir AAD uygulaması kaydetmek üzere [Azure Active Directory B2C bir uygulamayı yeniden kaydedin](/azure/active-directory-b2c/tutorial-register-applications) :
 
-1. **Yeni kayıt**seçeneğini belirleyin.
+1. **Azure Active Directory**  >  **uygulama kayıtları** **Yeni kayıt**' ı seçin.
 1. Uygulama için bir **ad** sağlayın (örneğin, ** Blazor istemci AAD B2C**).
-1. **Desteklenen hesap türleri**için **herhangi bir kuruluş dizininde veya herhangi bir kimlik sağlayıcısında hesaplar ' ı seçin. Azure AD B2C kullanıcıları kimlik doğrulaması için.** Bu deneyim için (çok kiracılı).
-1. **Yeniden yönlendirme URI 'si** açılan listesini **Web**olarak ayarlayın ve BIR yeniden yönlendirme URI 'si sağlayın `https://localhost:5001/authentication/login-callback` .
+1. **Desteklenen hesap türleri**için, birden çok kiracılı seçeneği seçin: **herhangi bir kuruluş dizinindeki hesaplar veya herhangi bir kimlik sağlayıcısı. Azure AD B2C kullanıcıları kimlik doğrulaması için.**
+1. **Yeniden yönlendirme URI 'si** açılan öğesini **Web**olarak ayarlayın ve aşağıdaki yeniden yönlendirme URI 'sini sağlayın: `https://localhost:{PORT}/authentication/login-callback` . Kestrel üzerinde çalışan bir uygulamanın varsayılan bağlantı noktası 5001 ' dir. IIS Express için, rastgele oluşturulan bağlantı noktası, **hata ayıklama** panelinde sunucu uygulamasının özelliklerinde bulunabilir.
 1. **İzinlerin**  >  ,**OpenID 'ye yönetici tarafından verildiğini ve offline_access izinleri** olduğunu onaylayın.
 1. **Kaydol**’u seçin.
 
+Uygulama KIMLIĞINI (Istemci KIMLIĞI) kaydedin (örneğin, `11111111-1111-1111-1111-111111111111` ).
+
 **Kimlik doğrulama**  >  **platformu yapılandırması**  >  **Web**:
 
-1. **Yeniden YÖNLENDIRME URI** 'sinin `https://localhost:5001/authentication/login-callback` mevcut olduğunu onaylayın.
+1. **Yeniden YÖNLENDIRME URI** 'sinin `https://localhost:{PORT}/authentication/login-callback` mevcut olduğunu onaylayın.
 1. **Örtük izin**Için, **erişim belirteçleri** ve **Kimlik belirteçleri**onay kutularını seçin.
 1. Uygulamanın kalan varsayılan değerleri bu deneyim için kabul edilebilir.
 1. **Kaydet** düğmesini seçin.
 
 **API izinleri**:
 
-1. Uygulamanın **Microsoft Graph**  >  **User. Read** iznine sahip olduğunu doğrulayın.
 1. **Izin Ekle** ' yi ve ardından **API 'lerim**' i seçin.
 1. **Ad** SÜTUNUNDAN *sunucu API uygulamasını* seçin (örneğin, ** Blazor sunucu AAD B2C**).
 1. **API** listesini açın.
@@ -102,23 +91,22 @@ Eğitim bölümünde yer alan yönergeleri izleyin: Azure Portal **Azure Active 
 
 En azından, **Application claims**  >  **Display Name** `context.User.Identity.Name` `LoginDisplay` bileşende (*paylaşılan/logindisplay. Razor*) doldurmak için uygulama talepleri görünen adı Kullanıcı özniteliğini seçin.
 
-Aşağıdaki bilgileri kaydedin:
-
-* *İstemci* UYGULAMASı uygulama kimliğini (istemci kimliği) kaydedin (örneğin, `33333333-3333-3333-3333-333333333333` ).
-* Uygulama için oluşturulan kaydolma ve oturum açma Kullanıcı akış adını kaydedin (örneğin, `B2C_1_signupsignin` ).
+Uygulama için oluşturulan kaydolma ve oturum açma Kullanıcı akış adını kaydedin (örneğin, `B2C_1_signupsignin` ).
 
 ### <a name="create-the-app"></a>Uygulama oluşturma
 
 Aşağıdaki komutta yer tutucuları, daha önce kaydedilen bilgilerle değiştirin ve komutu bir komut kabuğu 'nda yürütün:
 
 ```dotnetcli
-dotnet new blazorwasm -au IndividualB2C --aad-b2c-instance "{AAD B2C INSTANCE}" --api-client-id "{SERVER API APP CLIENT ID}" --app-id-uri "{SERVER API APP ID URI}" --client-id "{CLIENT APP CLIENT ID}" --default-scope "{DEFAULT SCOPE}" --domain "{DOMAIN}" -ho -ssp "{SIGN UP OR SIGN IN POLICY}" --tenant-id "{TENANT ID}"
+dotnet new blazorwasm -au IndividualB2C --aad-b2c-instance "{AAD B2C INSTANCE}" --api-client-id "{SERVER API APP CLIENT ID}" --app-id-uri "{SERVER API APP ID URI}" --client-id "{CLIENT APP CLIENT ID}" --default-scope "{DEFAULT SCOPE}" --domain "{TENANT DOMAIN}" -ho -ssp "{SIGN UP OR SIGN IN POLICY}" --tenant-id "{TENANT ID}"
 ```
 
 Mevcut değilse bir proje klasörü oluşturan çıkış konumunu belirtmek için, komutuna bir yol ile çıkış seçeneğini ekleyin (örneğin, `-o BlazorSample` ). Klasör adı Ayrıca projenin adının bir parçası haline gelir.
 
 > [!NOTE]
 > Uygulama KIMLIĞI URI 'sini `app-id-uri` seçeneğe geçirin, ancak [erişim belirteci kapsamları](#access-token-scopes) bölümünde açıklanan istemci uygulamasında bir yapılandırma değişikliği gerekli olabilir.
+>
+> Ayrıca, barındırılan şablon tarafından ayarlanan kapsamda Blazor uygulama KIMLIĞI URI ana bilgisayarı yineleniyor olabilir. Koleksiyon için yapılandırılan kapsamın `DefaultAccessTokenScopes` `Program.Main` *istemci uygulamasının*(*program.cs*) içinde doğru olduğunu doğrulayın.
 
 ## <a name="server-app-configuration"></a>Sunucu uygulaması yapılandırması
 
@@ -130,7 +118,7 @@ ASP.NET Core Web API 'Lerine yönelik kimlik doğrulama ve yetkilendirme desteğ
 
 ```xml
 <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureADB2C.UI" 
-    Version="{VERSION}" />
+  Version="3.2.0" />
 ```
 
 ### <a name="authentication-service-support"></a>Kimlik doğrulama hizmeti desteği
@@ -159,6 +147,10 @@ Varsayılan olarak, `User.Identity.Name` doldurulmaz.
 Uygulamayı talep türünden değeri alacak şekilde yapılandırmak için, `name` Içindeki [Tokenvalidationparameters. NameClaimType](xref:Microsoft.IdentityModel.Tokens.TokenValidationParameters.NameClaimType) ' ı yapılandırın <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerOptions> `Startup.ConfigureServices` :
 
 ```csharp
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+
+...
+
 services.Configure<JwtBearerOptions>(
     AzureADB2CDefaults.JwtBearerAuthenticationScheme, options =>
     {
@@ -173,9 +165,9 @@ services.Configure<JwtBearerOptions>(
 ```json
 {
   "AzureAdB2C": {
-    "Instance": "https://{ORGANIZATION}.b2clogin.com/",
+    "Instance": "https://{TENANT}.b2clogin.com/",
     "ClientId": "{SERVER API APP CLIENT ID}",
-    "Domain": "{DOMAIN}",
+    "Domain": "{TENANT DOMAIN}",
     "SignUpSignInPolicyId": "{SIGN UP OR SIGN IN POLICY}"
   }
 }
@@ -227,10 +219,8 @@ Bir uygulamaya kimlik doğrulaması ekliyorsanız, paketi uygulamanın proje dos
 
 ```xml
 <PackageReference Include="Microsoft.Authentication.WebAssembly.Msal" 
-    Version="{VERSION}" />
+  Version="3.2.0" />
 ```
-
-`{VERSION}`Yukarıdaki paket başvurusunda, `Microsoft.AspNetCore.Blazor.Templates` makalede gösterilen paketin sürümüyle değiştirin <xref:blazor/get-started> .
 
 `Microsoft.Authentication.WebAssembly.Msal`Paket geçişli `Microsoft.AspNetCore.Components.WebAssembly.Authentication` olarak uygulamayı uygulamaya ekler.
 
@@ -242,14 +232,14 @@ Bir uygulamaya kimlik doğrulaması ekliyorsanız, paketi uygulamanın proje dos
 
 ```csharp
 builder.Services.AddHttpClient("{APP ASSEMBLY}.ServerAPI", client => 
-        client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
+    client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
     .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
 builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
     .CreateClient("{APP ASSEMBLY}.ServerAPI"));
 ```
 
-Kullanıcıları kimlik doğrulama desteği, hizmet kapsayıcısında `AddMsalAuthentication` paket tarafından sağlanmış uzantı yöntemiyle kaydedilir `Microsoft.Authentication.WebAssembly.Msal` . Bu yöntem, uygulamanın Identity sağlayıcı (IP) ile etkileşim kurması için gereken tüm hizmetleri ayarlar.
+Kullanıcıları kimlik doğrulama desteği, hizmet kapsayıcısında `AddMsalAuthentication` paket tarafından sağlanmış uzantı yöntemiyle kaydedilir `Microsoft.Authentication.WebAssembly.Msal` . Bu yöntem, uygulamanın Identity sağlayıcı (IP) ile etkileşim kurması için gereken hizmetleri ayarlar.
 
 *Program.cs*:
 
@@ -268,7 +258,7 @@ Yapılandırma *Wwwroot/appSettings. JSON* dosyası tarafından sağlanır:
 ```json
 {
   "AzureAdB2C": {
-    "Authority": "{AAD B2C INSTANCE}{DOMAIN}/{SIGN UP OR SIGN IN POLICY}",
+    "Authority": "{AAD B2C INSTANCE}{TENANT DOMAIN}/{SIGN UP OR SIGN IN POLICY}",
     "ClientId": "{CLIENT APP CLIENT ID}",
     "ValidateAuthority": false
   }
@@ -304,18 +294,7 @@ builder.Services.AddMsalAuthentication(options =>
 });
 ```
 
-> [!NOTE]
-> Azure portal bir kapsam URI 'SI sağlıyorsa ve uygulama API 'den *401 Yetkisiz* bir yanıt aldığında **işlenmeyen bir özel durum oluşturursa** , düzeni ve Konağı içermeyen bir kapsam URI 'si kullanmayı deneyin. Örneğin, Azure portal aşağıdaki kapsam URI biçimlerinden birini verebilir:
->
-> * `https://{ORGANIZATION}.onmicrosoft.com/{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
-> * `api://{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}`
->
-> Kapsam URI 'sini düzen ve ana bilgisayar olmadan sağlayın:
->
-> ```csharp
-> options.ProviderOptions.DefaultAccessTokenScopes.Add(
->     "{API CLIENT ID OR CUSTOM VALUE}/{SCOPE NAME}");
-> ```
+[!INCLUDE[](~/includes/blazor-security/azure-scope.md)]
 
 Daha fazla bilgi için *ek senaryolar* makalesinin aşağıdaki bölümlerine bakın:
 
@@ -353,7 +332,10 @@ Daha fazla bilgi için *ek senaryolar* makalesinin aşağıdaki bölümlerine ba
 
 ## <a name="run-the-app"></a>Uygulamayı çalıştırma
 
-Uygulamayı sunucu projesinden çalıştırın. Visual Studio 'Yu kullanırken **Çözüm Gezgini** ' de sunucu projesini seçin ve araç çubuğundaki **Çalıştır** düğmesini seçin veya uygulamayı **Hata Ayıkla** menüsünden başlatın.
+Uygulamayı sunucu projesinden çalıştırın. Visual Studio 'yu kullanırken şunlardan birini yapın:
+
+* Araç çubuğundaki **başlangıç projeleri** açılan listesini *sunucu API 'si uygulamasına* ayarlayın ve **Çalıştır** düğmesini seçin.
+* **Çözüm Gezgini** ' de sunucu projesini seçin ve araç çubuğundaki **Çalıştır** düğmesini seçin veya uygulamayı **Hata Ayıkla** menüsünden başlatın.
 
 <!-- HOLD
 [!INCLUDE[](~/includes/blazor-security/usermanager-signinmanager.md)]

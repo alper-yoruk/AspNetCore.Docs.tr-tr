@@ -1,4 +1,4 @@
-Bileşen (*paylaşılan/LoginDisplay.* Razor) `MainLayout` , bileşende (*paylaşılan/mainlayout. Razor*) işlenir ve aşağıdaki davranışları yönetir: `LoginDisplay`
+`LoginDisplay`Bileşen (*paylaşılan/logindisplay.* Razor), `MainLayout` bileşende (*paylaşılan/mainlayout. Razor*) işlenir ve aşağıdaki davranışları yönetir:
 
 * Kimliği doğrulanmış kullanıcılar için:
   * Geçerli Kullanıcı adını görüntüler.
@@ -14,7 +14,7 @@ Bileşen (*paylaşılan/LoginDisplay.* Razor) `MainLayout` , bileşende (*payla�
 <AuthorizeView>
     <Authorized>
         Hello, @context.User.Identity.Name!
-        <button class="nav-link btn btn-link" @onclick="BeginSignOut">
+        <button class="nav-link btn btn-link" @onclick="BeginLogout">
             Log out
         </button>
     </Authorized>
@@ -24,7 +24,7 @@ Bileşen (*paylaşılan/LoginDisplay.* Razor) `MainLayout` , bileşende (*payla�
 </AuthorizeView>
 
 @code {
-    private async Task BeginSignOut(MouseEventArgs args)
+    private async Task BeginLogout(MouseEventArgs args)
     {
         await SignOutManager.SetSignOutState();
         Navigation.NavigateTo("authentication/logout");
