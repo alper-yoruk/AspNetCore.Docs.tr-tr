@@ -1,24 +1,11 @@
 ---
-title: ASP.NET Core tümleştirme testleri
-author: rick-anderson
-description: Tümleştirme testlerinin, bir uygulamanın bileşenlerinin, veritabanı, dosya sistemi ve ağ dahil olmak üzere altyapı düzeyinde doğru şekilde çalışmasını nasıl sağladığını öğrenin.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/11/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: test/integration-tests
-ms.openlocfilehash: 5a11fd574baccba32f3224e47c01685c81c6d686
-ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83424211"
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
 # <a name="integration-tests-in-aspnet-core"></a>ASP.NET Core tümleştirme testleri
 
@@ -32,11 +19,11 @@ Bu konuda, birim testlerinin temel bir şekilde anlaşıldığı varsayılır. T
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-Örnek uygulama bir Razor Pages uygulamasıdır ve Razor Pages temel bir anlama sahip olduğunu varsayar. Razor Pages hakkında bilginiz yoksa, aşağıdaki konulara bakın:
+Örnek uygulama bir Razor Sayfalar uygulamasıdır ve sayfaların temel olarak anlaşıldığını varsayar Razor . Sayfalarla alışkın değilseniz Razor , aşağıdaki konulara bakın:
 
-* [Razor Pages’e giriş](xref:razor-pages/index)
-* [Razor Sayfaları kullanmaya başlama](xref:tutorials/razor-pages/razor-pages-start)
-* [Razor Pages birim testleri](xref:test/razor-pages-tests)
+* [Sayfalara giriş Razor](xref:razor-pages/index)
+* [Sayfalarla çalışmaya başlama Razor](xref:tutorials/razor-pages/razor-pages-start)
+* [RazorSayfalar birim testleri](xref:test/razor-pages-tests)
 
 > [!NOTE]
 > Maça 'Ları test etmek için, bir tarayıcıyı otomatikleştirebilen [Selenium](https://www.seleniumhq.org/)gibi bir araç öneririz.
@@ -103,7 +90,7 @@ Test Web Konağı ve bellek içi test sunucusu ([TestServer](/dotnet/api/microso
 > [!NOTE]
 > Bir uygulama için test projesi oluştururken, birim testlerini tümleştirme testlerinden farklı projelere ayırın. Bu, altyapı testi bileşenlerinin birim testlerine yanlışlıkla dahil olmamasını sağlamaya yardımcı olur. Birim ve tümleştirme testlerinin ayrımı, hangi test kümesinin çalıştırılmasına da izin verir.
 
-Razor Pages Apps ve MVC uygulamalarının testleri için yapılandırma arasında neredeyse fark yoktur. Tek fark testlerin adlandırılmasınlardır. Razor Pages uygulamasında, sayfa uç noktalarının testleri genellikle sayfa modeli sınıfından sonra (örneğin, `IndexPageTests` Dizin sayfasına yönelik bileşen tümleştirmesini test etmek için) adlandırılır. MVC uygulamasında, testler genellikle denetleyici sınıfları tarafından düzenlenir ve test ettikleri denetleyicilerde (örneğin, `HomeControllerTests` ana denetleyiciye yönelik bileşen tümleştirmesini test etmek için) adlandırılır.
+Uygulamaların ve MVC uygulamalarının testleri için yapılandırma arasında neredeyse fark yoktur Razor . Tek fark testlerin adlandırılmasınlardır. Bir Razor Sayfalar uygulamasında sayfa uç noktalarının testleri genellikle sayfa modeli sınıfından sonra (örneğin, `IndexPageTests` Dizin sayfasına yönelik bileşen tümleştirmesini test etmek için) adlandırılır. MVC uygulamasında, testler genellikle denetleyici sınıfları tarafından düzenlenir ve test ettikleri denetleyicilerde (örneğin, `HomeControllerTests` ana denetleyiciye yönelik bileşen tümleştirmesini test etmek için) adlandırılır.
 
 ## <a name="test-app-prerequisites"></a>Test uygulaması önkoşulları
 
@@ -121,7 +108,7 @@ Bu Önkoşullar [örnek uygulamada](https://github.com/dotnet/AspNetCore.Docs/tr
 Entity Framework Core, testlerde de kullanılır. Uygulama başvuru:
 
 * [Microsoft. AspNetCore. Diagnostics. EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore)
-* [Microsoft. AspNetCore. Identity. EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity.EntityFrameworkCore)
+* [Microsoft. AspNetCore. Identity . EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity.EntityFrameworkCore)
 * [Microsoft. EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore)
 * [Microsoft. EntityFrameworkCore. InMemory](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.InMemory)
 * [Microsoft. EntityFrameworkCore. Tools](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Tools)
@@ -155,6 +142,8 @@ Web ana bilgisayar yapılandırması, öğesinden devralarak `WebApplicationFact
    [Örnek uygulamadaki](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) veritabanı dengeli dağıtımı, yöntemi tarafından gerçekleştirilir `InitializeDbForTests` . Yöntemi, [tümleştirme testleri örneği: test uygulaması kuruluşu](#test-app-organization) bölümünde açıklanmaktadır.
 
    SUT 'un veritabanı bağlamı `Startup.ConfigureServices` yöntemine kaydedilir. Test uygulamasının `builder.ConfigureServices` geri çağırması, uygulamanın kodu yürütüldükten *sonra* yürütülür `Startup.ConfigureServices` . Yürütme sırası, [genel ana bilgisayar](xref:fundamentals/host/generic-host) için ASP.NET Core 3,0 sürümüne sahip bir son değişiklikten oluşur. Uygulamanın veritabanından farklı testler için farklı bir veritabanı kullanmak istiyorsanız, uygulamanın veritabanı bağlamı içinde değiştirilmelidir `builder.ConfigureServices` .
+
+   [Web Host} (XREF: temelleri/Host/Web-Host) kullanan sımlar için, test uygulamasının `builder.ConfigureServices` geri çağırması SUT kodundan *önce* yürütülür `Startup.ConfigureServices` . Test uygulamasının `builder.ConfigureTestServices` geri çağırması *sonra*yürütülür.
 
    Örnek uygulama, veritabanı bağlamı için hizmet tanımlayıcısını bulur ve hizmet kaydını kaldırmak için tanımlayıcıyı kullanır. Ardından, fabrika, `ApplicationDbContext` testler için bellek içi veritabanı kullanan yeni bir ekler.
 
@@ -213,11 +202,45 @@ Sınıftaki başka bir test `IndexPageTests` veritabanındaki tüm kayıtları s
 Aşağıdaki tabloda, örnek oluştururken kullanılabilen varsayılan [Webapplicationfactoryclientoptions](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions) gösterilmektedir `HttpClient` .
 
 | Seçenek | Açıklama | Varsayılan |
-| ------ | ----------- | ------- |
-| [Allowoto yeniden yönlendirme](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) | `HttpClient`Örneklerin otomatik olarak yeniden yönlendirme yanıtlarını izleyip izmeyeceğini alır veya ayarlar. | `true` |
-| [BaseAddress](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.baseaddress) | Örneklerin temel adresini alır veya ayarlar `HttpClient` . | `http://localhost` |
-| [HandleCookies](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.handlecookies) | `HttpClient`Örneklerin tanımlama bilgilerini işlemesinin gerekip gerekmediğini alır veya ayarlar. | `true` |
-| [Maxautomaticyönlendirmeler](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.maxautomaticredirections) | Örneklerin izlemesi gereken en fazla yeniden yönlendirme yanıtı sayısını alır veya ayarlar `HttpClient` . | 7 |
+| ---
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+--- | ---title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------ | ---title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+---- | | [Allowoto yeniden yönlendirme](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) | `HttpClient`Örneklerin otomatik olarak yeniden yönlendirme yanıtlarını izleyip izmeyeceğini alır veya ayarlar. | `true`| | [BaseAddress](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.baseaddress) | Örneklerin temel adresini alır veya ayarlar `HttpClient` . | `http://localhost`| | [Handlecookies](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.handlecookies) | `HttpClient`Örneklerin tanımlama bilgilerini işlemesinin gerekip gerekmediğini alır veya ayarlar. | `true`| | [Maxautomaticyönlendirmeler](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.maxautomaticredirections) | Örneklerin izlemesi gereken en fazla yeniden yönlendirme yanıtı sayısını alır veya ayarlar `HttpClient` . | 7 |
 
 Sınıfını oluşturun `WebApplicationFactoryClientOptions` ve [createclient](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.createclient) yöntemine geçirin (varsayılan değerler kod örneğinde gösterilir):
 
@@ -289,7 +312,7 @@ Testin yürütülmesi sırasında üretilen biçimlendirme tarafından sağlanan
 * Kimliği doğrulanmamış bir kullanıcıyı uygulamanın oturum açma sayfasına yönlendirir.
 * Kimliği doğrulanmış bir kullanıcı için içerik döndürür.
 
-SUT sayfasında, sayfada bir `/SecurePage` [Authorizefilter](/dotnet/api/microsoft.aspnetcore.mvc.authorization.authorizefilter) uygulamak için Bu sayfa bir [authorizepage](/dotnet/api/microsoft.extensions.dependencyinjection.pageconventioncollectionextensions.authorizepage) kuralı kullanır. Daha fazla bilgi için bkz. [Razor Pages yetkilendirme kuralları](xref:security/authorization/razor-pages-authorization#require-authorization-to-access-a-page).
+SUT sayfasında, sayfada bir `/SecurePage` [Authorizefilter](/dotnet/api/microsoft.aspnetcore.mvc.authorization.authorizefilter) uygulamak için Bu sayfa bir [authorizepage](/dotnet/api/microsoft.extensions.dependencyinjection.pageconventioncollectionextensions.authorizepage) kuralı kullanır. Daha fazla bilgi için bkz. [ Razor Sayfalar yetkilendirme kuralları](xref:security/authorization/razor-pages-authorization#require-authorization-to-access-a-page).
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/src/RazorPagesProject/Startup.cs?name=snippet1)]
 
@@ -358,9 +381,78 @@ Aşağıdaki içeriğe sahip test projesinin köküne *xUnit. Runner. JSON* dosy
 [Örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) iki uygulamalardan oluşur:
 
 | Uygulama | Proje dizini | Açıklama |
-| --- | ----------------- | ----------- |
-| İleti uygulaması (SUT) | *src/RazorPagesProject* | Bir kullanıcının, iletileri eklemesini, silmesini, silmesini ve analiz etmesini sağlar. |
-| Test uygulaması | *testler/RazorPagesProject. testler* | SUT test tümleştirmesi için kullanılır. |
+| --- | ---
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+--------- | ---title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------ | | İleti uygulaması (SUT) | *src/RazorPagesProject* | Bir kullanıcının, iletileri eklemesini, silmesini, silmesini ve analiz etmesini sağlar. | | Test uygulaması | *testler/RazorPagesProject. testler* | SUT test tümleştirmesi için kullanılır. |
 
 Testler, [Visual Studio](https://visualstudio.microsoft.com)gıbı bir IDE 'nin yerleşik test özellikleri kullanılarak çalıştırılabilir. [Visual Studio Code](https://code.visualstudio.com/) veya komut satırı kullanıyorsanız, *testler/RazorPagesProject. Tests* dizinindeki bir komut isteminde aşağıdaki komutu yürütün:
 
@@ -370,7 +462,7 @@ dotnet test
 
 ### <a name="message-app-sut-organization"></a>İleti uygulaması (SUT) kuruluşu
 
-SUT, aşağıdaki özelliklere sahip bir Razor Pages ileti sistemidir:
+SUT, Razor aşağıdaki özelliklere sahip bir sayfalar ileti sistemidir:
 
 * Uygulamanın (*Pages/Index. cshtml* ve *Pages/index. cshtml. cs*) dizin sayfası, iletilerin eklenmesi, silinmesini ve ANALIZINI denetlemek için bir UI ve sayfa modeli yöntemleri sağlar (ileti başına ortalama sözcük).
 * Bir ileti, `Message` sınıfı (*Data/Message. cs*) ile iki özelliği olan ( `Id` anahtar) ve `Text` (ileti) açıklanmaktadır. `Text`Özelliği gereklidir ve 200 karakterle sınırlıdır.
@@ -381,18 +473,93 @@ SUT, aşağıdaki özelliklere sahip bir Razor Pages ileti sistemidir:
 
 EF konusunda, [InMemory Ile Test](/ef/core/miscellaneous/testing/in-memory)&#8224;, MSTest ile testler için bellek içi bir veritabanının nasıl kullanılacağını açıklar. Bu konu [xUnit](https://xunit.github.io/) test çerçevesini kullanır. Farklı test çerçeveleri genelinde test kavramları ve test uygulamaları benzerdir ancak aynı değildir.
 
-Uygulama, depo desenini kullanmıyor ve [Iş birimi (UoW) düzeninin](https://martinfowler.com/eaaCatalog/unitOfWork.html)etkin bir örneği olmamasına karşın, Razor Pages bu geliştirme düzenlerini destekler. Daha fazla bilgi için bkz. [altyapı Kalıcılık katmanını tasarlama](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design) ve [Test denetleyicisi mantığı](/aspnet/core/mvc/controllers/testing) (örnek, depo modelini uygular).
+Uygulama, depo desenini kullanmıyor ve [Iş birimi (UoW) düzeninin](https://martinfowler.com/eaaCatalog/unitOfWork.html)etkin bir örneği olmamasına karşın, Razor Sayfalar bu geliştirme düzenlerini destekler. Daha fazla bilgi için bkz. [altyapı Kalıcılık katmanını tasarlama](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design) ve [Test denetleyicisi mantığı](/aspnet/core/mvc/controllers/testing) (örnek, depo modelini uygular).
 
 ### <a name="test-app-organization"></a>Test uygulaması kuruluşu
 
 Test uygulaması, *testler/RazorPagesProject. Tests* dizini içindeki bir konsol uygulamasıdır.
 
 | Uygulama dizinini test et | Açıklama |
-| ------------------ | ----------- |
-| *AuthTests* | İçin test yöntemleri içerir:<ul><li>Güvenli bir sayfaya, kimliği doğrulanmamış bir kullanıcıyla erişme.</li><li>Bir sahte ile kimliği doğrulanmış bir kullanıcı tarafından güvenli bir sayfaya erişme <xref:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1> .</li><li>GitHub kullanıcı profilini alma ve profilin Kullanıcı oturum açma bilgilerini denetleme.</li></ul> |
-| *BasicTests* | Yönlendirme ve içerik türü için bir test yöntemi içerir. |
-| *Tümleştirme Testleri* | Özel sınıf kullanan dizin sayfası için tümleştirme testlerini içerir `WebApplicationFactory` . |
-| *Yardımcılar/yardımcı programlar* | <ul><li>*Utilities.cs* , `InitializeDbForTests` veritabanını test verileriyle tohum için kullanılan yöntemi içerir.</li><li>*HtmlHelpers.cs* `IHtmlDocument` , test yöntemleri tarafından kullanılmak üzere anglesharp döndüren bir yöntem sağlar.</li><li>*HttpClientExtensions.cs* `SendAsync` , istekleri sut 'a göndermek için için aşırı yüklemeler sağlar.</li></ul> |
+| ---
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+--------- | ---title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------ | | *Authtests* | İçin test yöntemleri içerir:<ul><li>Güvenli bir sayfaya, kimliği doğrulanmamış bir kullanıcıyla erişme.</li><li>Bir sahte ile kimliği doğrulanmış bir kullanıcı tarafından güvenli bir sayfaya erişme <xref:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1> .</li><li>GitHub kullanıcı profilini alma ve profilin Kullanıcı oturum açma bilgilerini denetleme.</li></ul> | | *Basictests* | Yönlendirme ve içerik türü için bir test yöntemi içerir. | | *Integrationtests* | Özel sınıf kullanan dizin sayfası için tümleştirme testlerini içerir `WebApplicationFactory` . | | *Yardımcılar/yardımcı programlar* | <ul><li>*Utilities.cs* , `InitializeDbForTests` veritabanını test verileriyle tohum için kullanılan yöntemi içerir.</li><li>*HtmlHelpers.cs* `IHtmlDocument` , test yöntemleri tarafından kullanılmak üzere anglesharp döndüren bir yöntem sağlar.</li><li>*HttpClientExtensions.cs* `SendAsync` , istekleri sut 'a göndermek için için aşırı yüklemeler sağlar.</li></ul> |
 
 Test çerçevesi [xUnit](https://xunit.github.io/)' dir. Tümleştirme testleri, [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver)içeren [Microsoft. Aspnetcore. testhost](/dotnet/api/microsoft.aspnetcore.testhost)kullanılarak yürütülür. Test ana bilgisayarı ve test sunucusunu yapılandırmak için [Microsoft. AspNetCore. Mvc. Testing](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing) paketi kullanıldığından, ve paketleri test uygulamasındaki `TestHost` `TestServer` Proje dosyasında veya geliştirici yapılandırmasında doğrudan paket başvuruları gerektirmez.
 
@@ -406,6 +573,8 @@ Tümleştirme testleri genellikle veritabanında test yürütmeden önce küçü
 
 SUT 'un veritabanı bağlamı `Startup.ConfigureServices` yöntemine kaydedilir. Test uygulamasının `builder.ConfigureServices` geri çağırması, uygulamanın kodu yürütüldükten *sonra* yürütülür `Startup.ConfigureServices` . Testler için farklı bir veritabanı kullanmak istiyorsanız, uygulamanın veritabanı bağlamı içinde değiştirilmelidir `builder.ConfigureServices` . Daha fazla bilgi için, [WebApplicationFactory 'Yi özelleştirme](#customize-webapplicationfactory) bölümüne bakın.
 
+[Web Host} (XREF: temelleri/Host/Web-Host) kullanan sımlar için, test uygulamasının `builder.ConfigureServices` geri çağırması SUT kodundan *önce* yürütülür `Startup.ConfigureServices` . Test uygulamasının `builder.ConfigureTestServices` geri çağırması *sonra*yürütülür.
+
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
@@ -416,11 +585,11 @@ Bu konuda, birim testlerinin temel bir şekilde anlaşıldığı varsayılır. T
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-Örnek uygulama bir Razor Pages uygulamasıdır ve Razor Pages temel bir anlama sahip olduğunu varsayar. Razor Pages hakkında bilginiz yoksa, aşağıdaki konulara bakın:
+Örnek uygulama bir Razor Sayfalar uygulamasıdır ve sayfaların temel olarak anlaşıldığını varsayar Razor . Sayfalarla alışkın değilseniz Razor , aşağıdaki konulara bakın:
 
-* [Razor Pages’e giriş](xref:razor-pages/index)
-* [Razor Sayfaları kullanmaya başlama](xref:tutorials/razor-pages/razor-pages-start)
-* [Razor Pages birim testleri](xref:test/razor-pages-tests)
+* [Sayfalara giriş Razor](xref:razor-pages/index)
+* [Sayfalarla çalışmaya başlama Razor](xref:tutorials/razor-pages/razor-pages-start)
+* [RazorSayfalar birim testleri](xref:test/razor-pages-tests)
 
 > [!NOTE]
 > Maça 'Ları test etmek için, bir tarayıcıyı otomatikleştirebilen [Selenium](https://www.seleniumhq.org/)gibi bir araç öneririz.
@@ -487,7 +656,7 @@ Test Web Konağı ve bellek içi test sunucusu ([TestServer](/dotnet/api/microso
 > [!NOTE]
 > Bir uygulama için test projesi oluştururken, birim testlerini tümleştirme testlerinden farklı projelere ayırın. Bu, altyapı testi bileşenlerinin birim testlerine yanlışlıkla dahil olmamasını sağlamaya yardımcı olur. Birim ve tümleştirme testlerinin ayrımı, hangi test kümesinin çalıştırılmasına da izin verir.
 
-Razor Pages Apps ve MVC uygulamalarının testleri için yapılandırma arasında neredeyse fark yoktur. Tek fark testlerin adlandırılmasınlardır. Razor Pages uygulamasında, sayfa uç noktalarının testleri genellikle sayfa modeli sınıfından sonra (örneğin, `IndexPageTests` Dizin sayfasına yönelik bileşen tümleştirmesini test etmek için) adlandırılır. MVC uygulamasında, testler genellikle denetleyici sınıfları tarafından düzenlenir ve test ettikleri denetleyicilerde (örneğin, `HomeControllerTests` ana denetleyiciye yönelik bileşen tümleştirmesini test etmek için) adlandırılır.
+Uygulamaların ve MVC uygulamalarının testleri için yapılandırma arasında neredeyse fark yoktur Razor . Tek fark testlerin adlandırılmasınlardır. Bir Razor Sayfalar uygulamasında sayfa uç noktalarının testleri genellikle sayfa modeli sınıfından sonra (örneğin, `IndexPageTests` Dizin sayfasına yönelik bileşen tümleştirmesini test etmek için) adlandırılır. MVC uygulamasında, testler genellikle denetleyici sınıfları tarafından düzenlenir ve test ettikleri denetleyicilerde (örneğin, `HomeControllerTests` ana denetleyiciye yönelik bileşen tümleştirmesini test etmek için) adlandırılır.
 
 ## <a name="test-app-prerequisites"></a>Test uygulaması önkoşulları
 
@@ -526,7 +695,7 @@ Varsayılan olarak, [GDPR onay ilkesi](xref:security/gdpr) etkinleştirildiğind
 
 Web ana bilgisayar yapılandırması, öğesinden devralarak `WebApplicationFactory` bir veya daha fazla özel fabrika oluşturmak için test sınıflarından bağımsız olarak oluşturulabilir:
 
-1. `WebApplicationFactory` [Configurewebhost](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.configurewebhost)'ten devralma ve geçersiz kılma. [Iwebhostbuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder) , hizmet koleksiyonunun [ConfigureServices](/dotnet/api/microsoft.aspnetcore.hosting.istartup.configureservices)ile yapılandırılmasına izin verir:
+1. `WebApplicationFactory` [Configurewebhost](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.configurewebhost)'ten devralma ve geçersiz kılma. [Iwebhostbuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder) , uygulama öncesinde yürütülen [ConfigureServices](/dotnet/api/microsoft.aspnetcore.hosting.istartup.configureservices)ile hizmet koleksiyonu yapılandırmasına izin verir `Startup.ConfigureServices` . [Iwebhostbuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder) , [configuretestservices](/dotnet/api/microsoft.aspnetcore.testhost.webhostbuilderextensions.configuretestservices)ile hizmet koleksiyonundaki kayıtlı hizmetlerin üzerine yazma ve değiştirme olanağı sağlar:
 
    [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/CustomWebApplicationFactory.cs?name=snippet1)]
 
@@ -574,11 +743,45 @@ Sınıftaki başka bir test `IndexPageTests` veritabanındaki tüm kayıtları s
 Aşağıdaki tabloda, örnek oluştururken kullanılabilen varsayılan [Webapplicationfactoryclientoptions](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions) gösterilmektedir `HttpClient` .
 
 | Seçenek | Açıklama | Varsayılan |
-| ------ | ----------- | ------- |
-| [Allowoto yeniden yönlendirme](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) | `HttpClient`Örneklerin otomatik olarak yeniden yönlendirme yanıtlarını izleyip izmeyeceğini alır veya ayarlar. | `true` |
-| [BaseAddress](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.baseaddress) | Örneklerin temel adresini alır veya ayarlar `HttpClient` . | `http://localhost` |
-| [HandleCookies](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.handlecookies) | `HttpClient`Örneklerin tanımlama bilgilerini işlemesinin gerekip gerekmediğini alır veya ayarlar. | `true` |
-| [Maxautomaticyönlendirmeler](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.maxautomaticredirections) | Örneklerin izlemesi gereken en fazla yeniden yönlendirme yanıtı sayısını alır veya ayarlar `HttpClient` . | 7 |
+| ---
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+--- | ---title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------ | ---title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+---- | | [Allowoto yeniden yönlendirme](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.allowautoredirect) | `HttpClient`Örneklerin otomatik olarak yeniden yönlendirme yanıtlarını izleyip izmeyeceğini alır veya ayarlar. | `true`| | [BaseAddress](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.baseaddress) | Örneklerin temel adresini alır veya ayarlar `HttpClient` . | `http://localhost`| | [Handlecookies](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.handlecookies) | `HttpClient`Örneklerin tanımlama bilgilerini işlemesinin gerekip gerekmediğini alır veya ayarlar. | `true`| | [Maxautomaticyönlendirmeler](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactoryclientoptions.maxautomaticredirections) | Örneklerin izlemesi gereken en fazla yeniden yönlendirme yanıtı sayısını alır veya ayarlar `HttpClient` . | 7 |
 
 Sınıfını oluşturun `WebApplicationFactoryClientOptions` ve [createclient](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1.createclient) yöntemine geçirin (varsayılan değerler kod örneğinde gösterilir):
 
@@ -650,7 +853,7 @@ Testin yürütülmesi sırasında üretilen biçimlendirme tarafından sağlanan
 * Kimliği doğrulanmamış bir kullanıcıyı uygulamanın oturum açma sayfasına yönlendirir.
 * Kimliği doğrulanmış bir kullanıcı için içerik döndürür.
 
-SUT sayfasında, sayfada bir `/SecurePage` [Authorizefilter](/dotnet/api/microsoft.aspnetcore.mvc.authorization.authorizefilter) uygulamak için Bu sayfa bir [authorizepage](/dotnet/api/microsoft.extensions.dependencyinjection.pageconventioncollectionextensions.authorizepage) kuralı kullanır. Daha fazla bilgi için bkz. [Razor Pages yetkilendirme kuralları](xref:security/authorization/razor-pages-authorization#require-authorization-to-access-a-page).
+SUT sayfasında, sayfada bir `/SecurePage` [Authorizefilter](/dotnet/api/microsoft.aspnetcore.mvc.authorization.authorizefilter) uygulamak için Bu sayfa bir [authorizepage](/dotnet/api/microsoft.extensions.dependencyinjection.pageconventioncollectionextensions.authorizepage) kuralı kullanır. Daha fazla bilgi için bkz. [ Razor Sayfalar yetkilendirme kuralları](xref:security/authorization/razor-pages-authorization#require-authorization-to-access-a-page).
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/src/RazorPagesProject/Startup.cs?name=snippet1)]
 
@@ -747,9 +950,78 @@ Visual Studio kullanıyorsanız, dosyanın **Çıkış Dizinine Kopyala** özell
 [Örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples) iki uygulamalardan oluşur:
 
 | Uygulama | Proje dizini | Açıklama |
-| --- | ----------------- | ----------- |
-| İleti uygulaması (SUT) | *src/RazorPagesProject* | Bir kullanıcının, iletileri eklemesini, silmesini, silmesini ve analiz etmesini sağlar. |
-| Test uygulaması | *testler/RazorPagesProject. testler* | SUT test tümleştirmesi için kullanılır. |
+| --- | ---
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+--------- | ---title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------ | | İleti uygulaması (SUT) | *src/RazorPagesProject* | Bir kullanıcının, iletileri eklemesini, silmesini, silmesini ve analiz etmesini sağlar. | | Test uygulaması | *testler/RazorPagesProject. testler* | SUT test tümleştirmesi için kullanılır. |
 
 Testler, [Visual Studio](https://visualstudio.microsoft.com)gıbı bir IDE 'nin yerleşik test özellikleri kullanılarak çalıştırılabilir. [Visual Studio Code](https://code.visualstudio.com/) veya komut satırı kullanıyorsanız, *testler/RazorPagesProject. Tests* dizinindeki bir komut isteminde aşağıdaki komutu yürütün:
 
@@ -759,7 +1031,7 @@ dotnet test
 
 ### <a name="message-app-sut-organization"></a>İleti uygulaması (SUT) kuruluşu
 
-SUT, aşağıdaki özelliklere sahip bir Razor Pages ileti sistemidir:
+SUT, Razor aşağıdaki özelliklere sahip bir sayfalar ileti sistemidir:
 
 * Uygulamanın (*Pages/Index. cshtml* ve *Pages/index. cshtml. cs*) dizin sayfası, iletilerin eklenmesi, silinmesini ve ANALIZINI denetlemek için bir UI ve sayfa modeli yöntemleri sağlar (ileti başına ortalama sözcük).
 * Bir ileti, `Message` sınıfı (*Data/Message. cs*) ile iki özelliği olan ( `Id` anahtar) ve `Text` (ileti) açıklanmaktadır. `Text`Özelliği gereklidir ve 200 karakterle sınırlıdır.
@@ -770,18 +1042,93 @@ SUT, aşağıdaki özelliklere sahip bir Razor Pages ileti sistemidir:
 
 EF konusunda, [InMemory Ile Test](/ef/core/miscellaneous/testing/in-memory)&#8224;, MSTest ile testler için bellek içi bir veritabanının nasıl kullanılacağını açıklar. Bu konu [xUnit](https://xunit.github.io/) test çerçevesini kullanır. Farklı test çerçeveleri genelinde test kavramları ve test uygulamaları benzerdir ancak aynı değildir.
 
-Uygulama, depo desenini kullanmıyor ve [Iş birimi (UoW) düzeninin](https://martinfowler.com/eaaCatalog/unitOfWork.html)etkin bir örneği olmamasına karşın, Razor Pages bu geliştirme düzenlerini destekler. Daha fazla bilgi için bkz. [altyapı Kalıcılık katmanını tasarlama](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design) ve [Test denetleyicisi mantığı](/aspnet/core/mvc/controllers/testing) (örnek, depo modelini uygular).
+Uygulama, depo desenini kullanmıyor ve [Iş birimi (UoW) düzeninin](https://martinfowler.com/eaaCatalog/unitOfWork.html)etkin bir örneği olmamasına karşın, Razor Sayfalar bu geliştirme düzenlerini destekler. Daha fazla bilgi için bkz. [altyapı Kalıcılık katmanını tasarlama](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design) ve [Test denetleyicisi mantığı](/aspnet/core/mvc/controllers/testing) (örnek, depo modelini uygular).
 
 ### <a name="test-app-organization"></a>Test uygulaması kuruluşu
 
 Test uygulaması, *testler/RazorPagesProject. Tests* dizini içindeki bir konsol uygulamasıdır.
 
 | Uygulama dizinini test et | Açıklama |
-| ------------------ | ----------- |
-| *AuthTests* | İçin test yöntemleri içerir:<ul><li>Güvenli bir sayfaya, kimliği doğrulanmamış bir kullanıcıyla erişme.</li><li>Bir sahte ile kimliği doğrulanmış bir kullanıcı tarafından güvenli bir sayfaya erişme <xref:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1> .</li><li>GitHub kullanıcı profilini alma ve profilin Kullanıcı oturum açma bilgilerini denetleme.</li></ul> |
-| *BasicTests* | Yönlendirme ve içerik türü için bir test yöntemi içerir. |
-| *Tümleştirme Testleri* | Özel sınıf kullanan dizin sayfası için tümleştirme testlerini içerir `WebApplicationFactory` . |
-| *Yardımcılar/yardımcı programlar* | <ul><li>*Utilities.cs* , `InitializeDbForTests` veritabanını test verileriyle tohum için kullanılan yöntemi içerir.</li><li>*HtmlHelpers.cs* `IHtmlDocument` , test yöntemleri tarafından kullanılmak üzere anglesharp döndüren bir yöntem sağlar.</li><li>*HttpClientExtensions.cs* `SendAsync` , istekleri sut 'a göndermek için için aşırı yüklemeler sağlar.</li></ul> |
+| ---
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+--------- | ---title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------ | | *Authtests* | İçin test yöntemleri içerir:<ul><li>Güvenli bir sayfaya, kimliği doğrulanmamış bir kullanıcıyla erişme.</li><li>Bir sahte ile kimliği doğrulanmış bir kullanıcı tarafından güvenli bir sayfaya erişme <xref:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1> .</li><li>GitHub kullanıcı profilini alma ve profilin Kullanıcı oturum açma bilgilerini denetleme.</li></ul> | | *Basictests* | Yönlendirme ve içerik türü için bir test yöntemi içerir. | | *Integrationtests* | Özel sınıf kullanan dizin sayfası için tümleştirme testlerini içerir `WebApplicationFactory` . | | *Yardımcılar/yardımcı programlar* | <ul><li>*Utilities.cs* , `InitializeDbForTests` veritabanını test verileriyle tohum için kullanılan yöntemi içerir.</li><li>*HtmlHelpers.cs* `IHtmlDocument` , test yöntemleri tarafından kullanılmak üzere anglesharp döndüren bir yöntem sağlar.</li><li>*HttpClientExtensions.cs* `SendAsync` , istekleri sut 'a göndermek için için aşırı yüklemeler sağlar.</li></ul> |
 
 Test çerçevesi [xUnit](https://xunit.github.io/)' dir. Tümleştirme testleri, [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver)içeren [Microsoft. Aspnetcore. testhost](/dotnet/api/microsoft.aspnetcore.testhost)kullanılarak yürütülür. Test ana bilgisayarı ve test sunucusunu yapılandırmak için [Microsoft. AspNetCore. Mvc. Testing](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing) paketi kullanıldığından, ve paketleri test uygulamasındaki `TestHost` `TestServer` Proje dosyasında veya geliştirici yapılandırmasında doğrudan paket başvuruları gerektirmez.
 

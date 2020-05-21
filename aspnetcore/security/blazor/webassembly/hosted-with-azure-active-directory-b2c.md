@@ -63,7 +63,7 @@ Eğitim bölümündeki yönergeleri izleyerek *istemci uygulaması*IÇIN bir AAD
 1. **Azure Active Directory**  >  **uygulama kayıtları** **Yeni kayıt**' ı seçin.
 1. Uygulama için bir **ad** sağlayın (örneğin, ** Blazor istemci AAD B2C**).
 1. **Desteklenen hesap türleri**için, birden çok kiracılı seçeneği seçin: **herhangi bir kuruluş dizinindeki hesaplar veya herhangi bir kimlik sağlayıcısı. Azure AD B2C kullanıcıları kimlik doğrulaması için.**
-1. **Yeniden yönlendirme URI 'si** açılan öğesini **Web**olarak ayarlayın ve aşağıdaki yeniden yönlendirme URI 'sini sağlayın: `https://localhost:{PORT}/authentication/login-callback` . Kestrel üzerinde çalışan bir uygulamanın varsayılan bağlantı noktası 5001 ' dir. IIS Express için, rastgele oluşturulan bağlantı noktası, **hata ayıklama** panelinde sunucu uygulamasının özelliklerinde bulunabilir.
+1. **Yeniden yönlendirme URI 'si** açılan öğesini **Web** 'e ayarlı bırakın ve aşağıdaki yeniden yönlendirme URI 'sini sağlayın: `https://localhost:{PORT}/authentication/login-callback` . Kestrel üzerinde çalışan bir uygulamanın varsayılan bağlantı noktası 5001 ' dir. Uygulama farklı bir Kestrel bağlantı noktasında çalışıyorsa, uygulamanın bağlantı noktasını kullanın. IIS Express için, uygulama için rastgele oluşturulan bağlantı noktası, **hata ayıklama** panelinde sunucu uygulamasının özelliklerinde bulunabilir. Uygulama bu noktada mevcut olmadığından ve IIS Express bağlantı noktası bilinmediğinden, uygulama oluşturulduktan sonra bu adıma geri dönün ve yeniden yönlendirme URI 'sini güncelleştirin. [Uygulama oluştur](#create-the-app) bölümünde, kullanıcıların YENIDEN yönlendirme URI 'sini güncelleştirmesi IIS Express hatırlatmak için bir açıklama belirir.
 1. **İzinlerin**  >  ,**OpenID 'ye yönetici tarafından verildiğini ve offline_access izinleri** olduğunu onaylayın.
 1. **Kaydol**’u seçin.
 
@@ -108,6 +108,13 @@ Mevcut değilse bir proje klasörü oluşturan çıkış konumunu belirtmek içi
 >
 > Ayrıca, barındırılan şablon tarafından ayarlanan kapsamda Blazor uygulama KIMLIĞI URI ana bilgisayarı yineleniyor olabilir. Koleksiyon için yapılandırılan kapsamın `DefaultAccessTokenScopes` `Program.Main` *istemci uygulamasının*(*program.cs*) içinde doğru olduğunu doğrulayın.
 
+> [!NOTE]
+> Azure Portal, *istemci uygulamasının* **kimlik doğrulama**  >  **platformu yapılandırması**  >  **Web**  >  **yeniden yönlendirme URI 'si** , Kestrel sunucusunda varsayılan ayarlarla çalışan uygulamalar için bağlantı noktası 5001 için yapılandırılır.
+>
+> *İstemci uygulaması* rastgele bir IIS Express bağlantı noktasında çalışıyorsa, uygulamanın bağlantı noktası **hata ayıklama** panelinde *sunucu uygulamasının* özelliklerinde bulunabilir.
+>
+> Bağlantı noktası, *istemci uygulamasının* bilinen bağlantı noktasıyla daha önce yapılandırılmamışsa, Azure Portal *istemci uygulamanın* kaydına dönün ve yeniden yönlendirme URI 'sini doğru bağlantı noktasıyla güncelleştirin.
+
 ## <a name="server-app-configuration"></a>Sunucu uygulaması yapılandırması
 
 *Bu bölüm, çözümün **sunucu** uygulamasıyla ilgilidir.*
@@ -118,7 +125,7 @@ ASP.NET Core Web API 'Lerine yönelik kimlik doğrulama ve yetkilendirme desteğ
 
 ```xml
 <PackageReference Include="Microsoft.AspNetCore.Authentication.AzureADB2C.UI" 
-  Version="3.2.0" />
+  Version="3.1.4" />
 ```
 
 ### <a name="authentication-service-support"></a>Kimlik doğrulama hizmeti desteği
