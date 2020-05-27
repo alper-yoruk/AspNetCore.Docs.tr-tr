@@ -20,9 +20,9 @@ Bu makalede, JavaScript 'ten .NET yöntemlerini çağırma ele alınmaktadır. .
 
 ## <a name="static-net-method-call"></a>Statik .NET yöntemi çağrısı
 
-JavaScript 'ten statik bir .NET yöntemi çağırmak için `DotNet.invokeMethod` veya `DotNet.invokeMethodAsync` işlevlerini kullanın. Çağırmak istediğiniz statik metodun tanımlayıcısını, işlevi içeren derlemenin adını ve tüm bağımsız değişkenleri geçirin. Sunucu senaryolarını desteklemek için zaman uyumsuz sürüm tercih edilir Blazor . .NET yöntemi genel, statik ve `[JSInvokable]` özniteliği olmalıdır. Açık genel yöntemlerin çağrılması Şu anda desteklenmiyor.
+JavaScript 'ten statik bir .NET yöntemi çağırmak için `DotNet.invokeMethod` veya `DotNet.invokeMethodAsync` işlevlerini kullanın. Çağırmak istediğiniz statik metodun tanımlayıcısını, işlevi içeren derlemenin adını ve tüm bağımsız değişkenleri geçirin. Sunucu senaryolarını desteklemek için zaman uyumsuz sürüm tercih edilir Blazor . .NET yöntemi genel, statik ve [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) özniteliği olmalıdır. Açık genel yöntemlerin çağrılması Şu anda desteklenmiyor.
 
-Örnek uygulama, bir dizi döndürmek için C# yöntemi içerir `int` . `JSInvokable`Özniteliği yöntemine uygulanır.
+Örnek uygulama, bir dizi döndürmek için C# yöntemi içerir `int` . [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute)Özniteliği yöntemine uygulanır.
 
 *Pages/Jsınterop. Razor*:
 
@@ -57,7 +57,7 @@ Array(4) [ 1, 2, 3, 4 ]
 
 Dördüncü dizi değeri `data.push(4);` tarafından döndürülen diziye () gönderilir `ReturnArrayAsync` .
 
-Varsayılan olarak, yöntem tanımlayıcısı yöntem adıdır, ancak oluşturucuyu kullanarak farklı bir tanımlayıcı belirtebilirsiniz `JSInvokableAttribute` :
+Varsayılan olarak, yöntem tanımlayıcısı yöntem adıdır, ancak öznitelik oluşturucusunu kullanarak farklı bir tanımlayıcı belirtebilirsiniz [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) :
 
 ```csharp
 @code {
@@ -86,8 +86,8 @@ returnArrayAsyncJs: function () {
 JavaScript 'ten de .NET örnek yöntemlerini çağırabilirsiniz. JavaScript 'ten bir .NET örnek yöntemi çağırmak için:
 
 * .NET örneğini JavaScript 'e başvuruya göre geçirin:
-  * İçin statik bir çağrı yapın `DotNetObjectReference.Create` .
-  * Örneği bir örnek içinde sarın `DotNetObjectReference` ve `Create` örnek üzerinde çağırın `DotNetObjectReference` . Nesneleri atma `DotNetObjectReference` (Bu bölümün ilerleyen kısımlarında bir örnek görünür).
+  * İçin statik bir çağrı yapın <xref:Microsoft.JSInterop.DotNetObjectReference.Create%2A?displayProperty=nameWithType> .
+  * Örneği bir örnek içinde sarın <xref:Microsoft.JSInterop.DotNetObjectReference> ve <xref:Microsoft.JSInterop.DotNetObjectReference.Create%2A> örnek üzerinde çağırın <xref:Microsoft.JSInterop.DotNetObjectReference> . Nesneleri atma <xref:Microsoft.JSInterop.DotNetObjectReference> (Bu bölümün ilerleyen kısımlarında bir örnek görünür).
 * Or işlevlerini kullanarak örnekte .NET örnek yöntemlerini çağırın `invokeMethod` `invokeMethodAsync` . .NET örneği, JavaScript 'ten başka .NET yöntemleri çağrılırken bir bağımsız değişken olarak da geçirilebilir.
 
 > [!NOTE]
@@ -133,9 +133,9 @@ Tarayıcının Web geliştirici araçlarında konsol çıkışı:
 Hello, Blazor!
 ```
 
-Bir bellek sızıntısını önlemek ve oluşturan bir bileşende çöp toplamaya izin vermek için `DotNetObjectReference` aşağıdaki yaklaşımlardan birini benimseyin:
+Bir bellek sızıntısını önlemek ve oluşturan bir bileşende çöp toplamaya izin vermek için <xref:Microsoft.JSInterop.DotNetObjectReference> aşağıdaki yaklaşımlardan birini benimseyin:
 
-* Örneği oluşturan sınıftaki nesneyi atma `DotNetObjectReference` :
+* Örneği oluşturan sınıftaki nesneyi atma <xref:Microsoft.JSInterop.DotNetObjectReference> :
 
   ```csharp
   public class ExampleJsInterop : IDisposable
@@ -197,7 +197,7 @@ Bir bellek sızıntısını önlemek ve oluşturan bir bileşende çöp toplamay
   }
   ```
 
-* Bileşen veya sınıf öğesini atmazsa `DotNetObjectReference` , şunu çağırarak istemci üzerindeki nesnesini atın `.dispose()` :
+* Bileşen veya sınıf öğesini atmazsa <xref:Microsoft.JSInterop.DotNetObjectReference> , şunu çağırarak istemci üzerindeki nesnesini atın `.dispose()` :
 
   ```javascript
   window.myFunction = (dotnetHelper) => {
@@ -211,7 +211,7 @@ Bir bellek sızıntısını önlemek ve oluşturan bir bileşende çöp toplamay
 Bir bileşenin .NET yöntemlerini çağırmak için:
 
 * `invokeMethod` `invokeMethodAsync` Bileşene statik yöntem çağrısı yapmak için or işlevini kullanın.
-* Bileşenin static yöntemi, çağırma yöntemi olarak çağrılır `Action` .
+* Bileşenin static yöntemi, çağırma yöntemi olarak çağrılır <xref:System.Action> .
 
 İstemci tarafı JavaScript 'te:
 
@@ -257,11 +257,11 @@ function updateMessageCallerJS() {
 }
 ```
 
-Her biri çağrılacak örnek yöntemleri olan birkaç bileşen olduğunda, her bileşenin örnek yöntemlerini (as) çağırmak için bir yardımcı sınıfı kullanın `Action` .
+Her biri çağrılacak örnek yöntemleri olan birkaç bileşen olduğunda, her bileşenin örnek yöntemlerini (as) çağırmak için bir yardımcı sınıfı kullanın <xref:System.Action> .
 
 Aşağıdaki örnekte:
 
-* `JSInterop`Bileşen birkaç bileşen içerir `ListItem` .
+* `JSInteropExample`Bileşen birkaç bileşen içerir `ListItem` .
 * Her `ListItem` bileşen bir ileti ve bir düğmeden oluşur.
 * Bir `ListItem` bileşen düğmesi seçildiğinde, bu `ListItem` `UpdateMessage` Yöntem liste öğesi metnini değiştirir ve düğmeyi gizler.
 
@@ -332,10 +332,10 @@ window.updateMessageCallerJS = (dotnetHelper) => {
 }
 ```
 
-*Pages/Jsınterop. Razor*:
+*Pages/JSInteropExample. Razor*:
 
 ```razor
-@page "/JSInterop"
+@page "/JSInteropExample"
 
 <h1>List of components</h1>
 

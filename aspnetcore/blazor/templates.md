@@ -54,7 +54,7 @@ Aşağıdaki dosya ve klasörler Blazor bir şablondan oluşturulan bir uygulama
     * .NET çalışma zamanını, uygulamayı ve uygulamanın bağımlılıklarını indirir.
     * Uygulamayı çalıştırmak için çalışma zamanını başlatır.
 
-* *App. Razor* &ndash; bileşeni kullanarak istemci tarafı yönlendirmeyi ayarlayan uygulamanın kök bileşeni <xref:Microsoft.AspNetCore.Components.Routing.Router> . `Router`Bileşen tarayıcı gezintisini karşılar ve istenen adresle eşleşen sayfayı işler.
+* *App. Razor* &ndash; bileşeni kullanarak istemci tarafı yönlendirmeyi ayarlayan uygulamanın kök bileşeni <xref:Microsoft.AspNetCore.Components.Routing.Router> . <xref:Microsoft.AspNetCore.Components.Routing.Router>Bileşen tarayıcı gezintisini karşılar ve istenen adresle eşleşen sayfayı işler.
 
 * *Sayfalar* klasörü, &ndash; *.razor* Blazor Razor bir sunucu uygulamasının uygulamasını ve kök sayfasını oluşturan yönlendirilebilir bileşenleri/sayfaları (. Razor) içerir Blazor . Her sayfanın yolu, yönergesi kullanılarak belirtilir [`@page`](xref:mvc/views/razor#page) . Şablon şunları içerir:
   * *_Host. cshtml* ( Blazor sunucu) &ndash; bir sayfa olarak uygulanan uygulamanın kök sayfası Razor :
@@ -68,7 +68,7 @@ Aşağıdaki dosya ve klasörler Blazor bir şablondan oluşturulan bir uygulama
 
 * *Paylaşılan* klasör &ndash; , uygulama tarafından kullanılan diğer Kullanıcı Arabirimi bileşenlerini (*. Razor*) içerir:
   * `MainLayout`(*Mainlayout. Razor*) &ndash; uygulamanın Düzen bileşeni.
-  * `NavMenu`(*Navmenu. Razor*) &ndash; kenar çubuğu gezintisini uygular. Diğer bileşenlere yönelik gezinti bağlantılarını işleyen [Navlink bileşenini](xref:blazor/routing#navlink-component) ( <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ) içerir Razor . Bileşeni, `NavLink` bileşeni yüklendiği zaman otomatik olarak seçili durumu gösterir ve bu, kullanıcının hangi bileşenin görüntülenmekte olduğunu anlamasına yardımcı olur.
+  * `NavMenu`(*Navmenu. Razor*) &ndash; kenar çubuğu gezintisini uygular. Diğer bileşenlere yönelik gezinti bağlantılarını işleyen [Navlink bileşenini](xref:blazor/routing#navlink-component) ( <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ) içerir Razor . Bileşeni, <xref:Microsoft.AspNetCore.Components.Routing.NavLink> bileşeni yüklendiği zaman otomatik olarak seçili durumu gösterir ve bu, kullanıcının hangi bileşenin görüntülenmekte olduğunu anlamasına yardımcı olur.
 
 * *_Imports. Razor* &ndash; Razor, Ad alanları için yönergeler gibi uygulamanın bileşenlerine (*. Razor*) dahil etmek için ortak yönergeleri içerir [`@using`](xref:mvc/views/razor#using) .
 

@@ -1,24 +1,11 @@
 ---
-title: ASP.NET Core dosyaları karşıya yükleme
-author: rick-anderson
-description: ASP.NET Core MVC 'de dosyaları karşıya yüklemek için model bağlama ve akışı kullanma.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/03/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: mvc/models/file-uploads
-ms.openlocfilehash: b613ccd8df65e41b86793466a0ed5dc7bf7e8772
-ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82976759"
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
 # <a name="upload-files-in-aspnet-core"></a>ASP.NET Core dosyaları karşıya yükleme
 
@@ -30,7 +17,7 @@ ASP.NET Core, daha küçük dosyalar için arabellekli model bağlama ve daha b�
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="security-considerations"></a>Güvenlik konuları
+## <a name="security-considerations"></a>Güvenlikle ilgili dikkat edilmesi gerekenler
 
 Kullanıcılara bir sunucuya dosya yükleme yeteneği sağlarken dikkatli olun. Saldırganlar şunları deneyebilir:
 
@@ -42,7 +29,7 @@ Başarılı bir saldırının olasılığını azaltan güvenlik adımları şun
 
 * Dosyaları, tercihen sistem dışı bir sürücüye, özel bir dosya yükleme alanına yükleyin. Ayrılmış bir konum, karşıya yüklenen dosyalar üzerinde güvenlik kısıtlamaları yapmayı kolaylaştırır. Dosya yükleme konumunda yürütme izinlerini devre dışı bırakın.&dagger;
 * Karşıya yüklenen dosyaları uygulamayla aynı dizin **ağacında kalıcı hale** getirme.&dagger;
-* Uygulama tarafından belirlenen bir güvenli dosya adı kullanın. Kullanıcı tarafından belirtilen bir dosya adı veya karşıya yüklenen dosyanın güvenilmeyen dosya adı kullanmayın. &dagger; HTML, görüntüleme sırasında güvenilmeyen dosya adını kodlayamıyor. Örneğin, dosya adını günlüğe kaydetme veya Kullanıcı arabiriminde görüntüleme (Razor OTOMATIK olarak HTML kodlama çıktısı).
+* Uygulama tarafından belirlenen bir güvenli dosya adı kullanın. Kullanıcı tarafından belirtilen bir dosya adı veya karşıya yüklenen dosyanın güvenilmeyen dosya adı kullanmayın. &dagger; HTML, görüntüleme sırasında güvenilmeyen dosya adını kodlayamıyor. Örneğin, dosya adını günlüğe kaydetme veya Kullanıcı arabiriminde görüntüleme ( Razor otomatik olarak HTML kodlama çıktısı).
 * Uygulamanın tasarım belirtimi için yalnızca onaylanan dosya uzantılarına izin verin.&dagger; <!-- * Check the file format signature to prevent a user from uploading a masqueraded file.&dagger; For example, don't permit a user to upload an *.exe* file with a *.txt* extension. Add this back when we get instructions how to do this.  -->
 * Sunucuda istemci tarafı denetimlerinin gerçekleştirildiğinden emin olun. &dagger; İstemci tarafı denetimleri kolayca atmayı kolaylaştırır.
 * Karşıya yüklenen dosyanın boyutunu denetleyin. Büyük karşıya yüklemeleri engellemek için en büyük boyut sınırını ayarlayın.&dagger;
@@ -97,7 +84,7 @@ Dosyaları karşıya yüklemek için iki genel yaklaşım arabelleğe alınır v
 
 **Ara**
 
-Dosyanın tamamı <xref:Microsoft.AspNetCore.Http.IFormFile>, dosyayı işlemek veya kaydetmek için kullanılan dosyanın C# temsili olan öğesine okunurdur.
+Dosyanın tamamı <xref:Microsoft.AspNetCore.Http.IFormFile> , dosyayı işlemek veya kaydetmek için kullanılan dosyanın C# temsili olan öğesine okunurdur.
 
 Dosya karşıya yüklemeleri tarafından kullanılan kaynaklar (disk, bellek), eşzamanlı dosya karşıya yüklemelerinin sayısına ve boyutuna bağlıdır. Bir uygulama çok fazla karşıya yükleme arabelleğini denerse, bellek veya disk alanı tükenirse site çöker. Karşıya dosya yükleme boyutu veya sıklığı uygulama kaynaklarını tüketme ise, akış ' ı kullanın.
 
@@ -119,7 +106,7 @@ Akış büyük dosyaları [akış ile büyük dosyaları karşıya yükle](#uplo
 
 Küçük dosyaları karşıya yüklemek için, çok parçalı bir form kullanın veya JavaScript kullanarak bir POST isteği oluşturun.
 
-Aşağıdaki örnek, tek bir dosyayı karşıya yüklemek Razor için sayfalar formunun kullanımını gösterir (örnek uygulamada*Pages/Bufferedsinglefileuploadfiziksel. cshtml* ):
+Aşağıdaki örnek, Razor tek bir dosyayı karşıya yüklemek için sayfalar formunun kullanımını gösterir (örnek uygulamada*Pages/Bufferedsinglefileuploadfiziksel. cshtml* ):
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -207,20 +194,20 @@ Aşağıdaki örnek, önceki örneğe benzerdir, ancak şunları hariç:
   </script>
   ```
 
-Dosya yüklemelerini desteklemek için, HTML formları bir kodlama türü (`enctype`) belirtmelidir. `multipart/form-data`
+Dosya yüklemelerini desteklemek için, HTML formları bir kodlama türü ( `enctype` ) belirtmelidir `multipart/form-data` .
 
-Birden çok `files` dosyayı karşıya yüklemeyi destekleyen bir giriş öğesi için, `multiple` `<input>` öğesine özniteliği sağlar:
+`files`Birden çok dosyayı karşıya yüklemeyi destekleyen bir giriş öğesi için, `multiple` öğesine özniteliği sağlar `<input>` :
 
 ```cshtml
 <input asp-for="FileUpload.FormFiles" type="file" multiple>
 ```
 
-Sunucuya yüklenen tek dosyalara, kullanılarak <xref:Microsoft.AspNetCore.Http.IFormFile> [model bağlama](xref:mvc/models/model-binding) yoluyla erişilebilir. Örnek uygulama, veritabanı ve fiziksel depolama senaryoları için birden çok arabellekli dosya yüklemeyi gösterir.
+Sunucuya yüklenen tek dosyalara, kullanılarak [model bağlama](xref:mvc/models/model-binding) yoluyla erişilebilir <xref:Microsoft.AspNetCore.Http.IFormFile> . Örnek uygulama, veritabanı ve fiziksel depolama senaryoları için birden çok arabellekli dosya yüklemeyi gösterir.
 
 <a name="filename"></a>
 
 > [!WARNING]
-> Görüntüleme ve günlüğe kaydetme `FileName` için dışındaki <xref:Microsoft.AspNetCore.Http.IFormFile> **özelliğini kullanmayın.** Görüntüleme veya günlüğe kaydetme sırasında, HTML dosya adını kodlayın. Saldırgan, tam yollar veya göreli yollar dahil olmak üzere kötü amaçlı bir dosya adı sağlayabilir. Uygulamalar:
+> **not** `FileName` <xref:Microsoft.AspNetCore.Http.IFormFile> Görüntüleme ve günlüğe kaydetme için dışındaki özelliğini kullanmayın. Görüntüleme veya günlüğe kaydetme sırasında, HTML dosya adını kodlayın. Saldırgan, tam yollar veya göreli yollar dahil olmak üzere kötü amaçlı bir dosya adı sağlayabilir. Uygulamalar:
 >
 > * Kullanıcı tarafından sağlanan dosya adının yolunu kaldırın.
 > * Kullanıcı arabirimi veya günlüğe kaydetme için HTML kodlu, yol tarafından kaldırılan dosya adını kaydedin.
@@ -237,16 +224,16 @@ Sunucuya yüklenen tek dosyalara, kullanılarak <xref:Microsoft.AspNetCore.Http.
 > * [Güvenlik konuları](#security-considerations)
 > * [Doğrulama](#validation)
 
-Model bağlama kullanarak dosyaları karşıya yüklerken <xref:Microsoft.AspNetCore.Http.IFormFile>, eylem yöntemi kabul edebilir:
+Model bağlama kullanarak dosyaları karşıya yüklerken <xref:Microsoft.AspNetCore.Http.IFormFile> , eylem yöntemi kabul edebilir:
 
-* Tek <xref:Microsoft.AspNetCore.Http.IFormFile>bir.
+* Tek bir <xref:Microsoft.AspNetCore.Http.IFormFile> .
 * Birkaç dosyayı temsil eden aşağıdaki koleksiyonlardan herhangi biri:
   * <xref:Microsoft.AspNetCore.Http.IFormFileCollection>
   * <xref:System.Collections.IEnumerable>\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
   * [Listele](xref:System.Collections.Generic.List`1)\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
 
 > [!NOTE]
-> Bağlama, form dosyaları adına göre eşleşir. Örneğin, içindeki `name` `<input type="file" name="formFile">` HTML değeri C# parametresi/özelliği ile (`FormFile`) eşleşmelidir. Daha fazla bilgi için, [ad öznitelik DEĞERINI Post yönteminin parametre adına eşleştirin](#match-name-attribute-value-to-parameter-name-of-post-method) bölümüne bakın.
+> Bağlama, form dosyaları adına göre eşleşir. Örneğin, `name` IÇINDEKI HTML değeri `<input type="file" name="formFile">` C# parametresi/özelliği ile ( `FormFile` ) eşleşmelidir. Daha fazla bilgi için, [ad öznitelik DEĞERINI Post yönteminin parametre adına eşleştirin](#match-name-attribute-value-to-parameter-name-of-post-method) bölümüne bakın.
 
 Aşağıdaki örnek:
 
@@ -280,7 +267,7 @@ public async Task<IActionResult> OnPostUploadAsync(List<IFormFile> files)
 }
 ```
 
-Yol `Path.GetRandomFileName` olmadan bir dosya adı oluşturmak için kullanın. Aşağıdaki örnekte, yol yapılandırmadan alınır:
+`Path.GetRandomFileName`Yol olmadan bir dosya adı oluşturmak için kullanın. Aşağıdaki örnekte, yol yapılandırmadan alınır:
 
 ```csharp
 foreach (var formFile in files)
@@ -298,21 +285,21 @@ foreach (var formFile in files)
 }
 ```
 
-Öğesine <xref:System.IO.FileStream> geçirilen *yol, dosya adını içermelidir.* Dosya adı sağlanmazsa, çalışma zamanında bir <xref:System.UnauthorizedAccessException> oluşturulur.
+Öğesine geçirilen yol, <xref:System.IO.FileStream> *must* dosya adını içermelidir. Dosya adı sağlanmazsa, çalışma zamanında bir oluşturulur <xref:System.UnauthorizedAccessException> .
 
-Tekniği kullanılarak yüklenen dosyalar <xref:Microsoft.AspNetCore.Http.IFormFile> , işlemeden önce sunucuda veya diskte bellek halinde arabelleğe alınır. Eylem yönteminde, <xref:Microsoft.AspNetCore.Http.IFormFile> içeriğe bir <xref:System.IO.Stream>olarak erişilebilir. Yerel dosya sistemine ek olarak, dosyalar bir ağ paylaşımında veya [Azure Blob depolama](/azure/visual-studio/vs-storage-aspnet5-getting-started-blobs)gibi bir dosya depolama hizmetine kaydedilebilir.
+Tekniği kullanılarak yüklenen dosyalar, <xref:Microsoft.AspNetCore.Http.IFormFile> işlemeden önce sunucuda veya diskte bellek halinde arabelleğe alınır. Eylem yönteminde, <xref:Microsoft.AspNetCore.Http.IFormFile> içeriğe bir olarak erişilebilir <xref:System.IO.Stream> . Yerel dosya sistemine ek olarak, dosyalar bir ağ paylaşımında veya [Azure Blob depolama](/azure/visual-studio/vs-storage-aspnet5-getting-started-blobs)gibi bir dosya depolama hizmetine kaydedilebilir.
 
 Karşıya yüklemek için birden çok dosya üzerinde döngü yapan ve güvenli dosya adları kullanan başka bir örnek için, örnek uygulamadaki *Pages/Bufferedmultiplefileuploadfiziksel. cshtml. cs* dosyasına bakın.
 
 > [!WARNING]
-> [Path. GetTempFileName](xref:System.IO.Path.GetTempFileName*) , önceki <xref:System.IO.IOException> geçici dosyaları silmeden 65.535 ' den fazla dosya oluşturulduysa bir oluşturur. 65.535 dosya sınırının sunucu başına sınırı vardır. Windows işletim sistemi için bu sınır hakkında daha fazla bilgi için aşağıdaki konulara bakın:
+> [Path. GetTempFileName](xref:System.IO.Path.GetTempFileName*) <xref:System.IO.IOException> , önceki geçici dosyaları silmeden 65.535 ' den fazla dosya oluşturulduysa bir oluşturur. 65.535 dosya sınırının sunucu başına sınırı vardır. Windows işletim sistemi için bu sınır hakkında daha fazla bilgi için aşağıdaki konulara bakın:
 >
 > * [GetTempFileNameA işlevi](/windows/desktop/api/fileapi/nf-fileapi-gettempfilenamea#remarks)
 > * <xref:System.IO.Path.GetTempFileName*>
 
 ### <a name="upload-small-files-with-buffered-model-binding-to-a-database"></a>Bir veritabanına arabellekli model bağlamaya sahip küçük dosyaları karşıya yükleme
 
-İkili dosya verilerini [Entity Framework](/ef/core/index)kullanarak bir veritabanında depolamak için, varlıkta bir <xref:System.Byte> dizi özelliği tanımlayın:
+İkili dosya verilerini [Entity Framework](/ef/core/index)kullanarak bir veritabanında depolamak için, <xref:System.Byte> varlıkta bir dizi özelliği tanımlayın:
 
 ```csharp
 public class AppFile
@@ -322,7 +309,7 @@ public class AppFile
 }
 ```
 
-Sınıf için şunu içeren bir sayfa modeli özelliği belirtin <xref:Microsoft.AspNetCore.Http.IFormFile>:
+Sınıf için şunu içeren bir sayfa modeli özelliği belirtin <xref:Microsoft.AspNetCore.Http.IFormFile> :
 
 ```csharp
 public class BufferedSingleFileUploadDbModel : PageModel
@@ -362,7 +349,7 @@ public class BufferedSingleFileUploadDb
 </form>
 ```
 
-Form sunucuya gönderildiğinde, öğesini bir akışa kopyalayın <xref:Microsoft.AspNetCore.Http.IFormFile> ve veritabanına bir bayt dizisi olarak kaydedin. Aşağıdaki örnekte, `_dbContext` uygulamanın veritabanı bağlamını depolar:
+Form sunucuya gönderildiğinde, öğesini <xref:Microsoft.AspNetCore.Http.IFormFile> bir akışa kopyalayın ve veritabanına bir bayt dizisi olarak kaydedin. Aşağıdaki örnekte, `_dbContext` uygulamanın veritabanı bağlamını depolar:
 
 ```csharp
 public async Task<IActionResult> OnPostUploadAsync()
@@ -401,7 +388,7 @@ Yukarıdaki örnek, örnek uygulamada gösterilen senaryoya benzerdir:
 > [!WARNING]
 > İkili verileri ilişkisel veritabanlarında depolarken dikkatli olun, çünkü performansı olumsuz etkileyebilir.
 >
-> Doğrulaması `FileName` <xref:Microsoft.AspNetCore.Http.IFormFile> olmadan özelliğine güvenmeyin veya bu özelliğe güvenmeyin. `FileName` Özelliği yalnızca görüntüleme amacıyla ve yalnızca HTML kodlaması sonrasında kullanılmalıdır.
+> Doğrulaması olmadan özelliğine güvenmeyin veya bu `FileName` özelliğe güvenmeyin <xref:Microsoft.AspNetCore.Http.IFormFile> . `FileName`Özelliği yalnızca görüntüleme amacıyla ve yalnızca HTML kodlaması sonrasında kullanılmalıdır.
 >
 > Belirtilen örneklerde dikkate alınması gereken önemli noktalar. Ek bilgiler aşağıdaki bölümler ve [örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)tarafından sağlanır:
 >
@@ -410,23 +397,23 @@ Yukarıdaki örnek, örnek uygulamada gösterilen senaryoya benzerdir:
 
 ### <a name="upload-large-files-with-streaming"></a>Akışa sahip büyük dosyaları karşıya yükleme
 
-Aşağıdaki örnek, bir denetleyiciyi bir denetleyici eyleminde akışa almak için JavaScript 'in nasıl kullanılacağını gösterir. Dosyanın antiforgery belirteci özel bir filtre özniteliği kullanılarak oluşturulur ve istek gövdesi yerine istemci HTTP üst bilgilerine geçirilir. Eylem yöntemi karşıya yüklenen verileri doğrudan işlediğinden, form modeli bağlama başka bir özel filtre tarafından devre dışı bırakıldı. Eylem içinde formun içerikleri, her bir bireyi `MultipartReader` `MultipartSection`okuyan, dosyayı işleyen veya içeriği uygun şekilde depolayan bir kullanılarak okunur. Çok parçalı bölümler okunduktan sonra eylem kendi model bağlamasını gerçekleştirir.
+Aşağıdaki örnek, bir denetleyiciyi bir denetleyici eyleminde akışa almak için JavaScript 'in nasıl kullanılacağını gösterir. Dosyanın antiforgery belirteci özel bir filtre özniteliği kullanılarak oluşturulur ve istek gövdesi yerine istemci HTTP üst bilgilerine geçirilir. Eylem yöntemi karşıya yüklenen verileri doğrudan işlediğinden, form modeli bağlama başka bir özel filtre tarafından devre dışı bırakıldı. Eylem içinde formun içerikleri, `MultipartReader` her bir bireyi okuyan `MultipartSection` , dosyayı işleyen veya içeriği uygun şekilde depolayan bir kullanılarak okunur. Çok parçalı bölümler okunduktan sonra eylem kendi model bağlamasını gerçekleştirir.
 
-İlk sayfa yanıtı formu yükler ve bir tanımlama bilgisine ( `GenerateAntiforgeryTokenCookieAttribute` özniteliği aracılığıyla) bir antiforgery belirteci kaydeder. Öznitelik, bir istek belirtecine sahip bir tanımlama bilgisi ayarlamak için ASP.NET Core yerleşik [antiforgery desteğini](xref:security/anti-request-forgery) kullanır:
+İlk sayfa yanıtı formu yükler ve bir tanımlama bilgisine (özniteliği aracılığıyla) bir antiforgery belirteci kaydeder `GenerateAntiforgeryTokenCookieAttribute` . Öznitelik, bir istek belirtecine sahip bir tanımlama bilgisi ayarlamak için ASP.NET Core yerleşik [antiforgery desteğini](xref:security/anti-request-forgery) kullanır:
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Filters/Antiforgery.cs?name=snippet_GenerateAntiforgeryTokenCookieAttribute)]
 
-`DisableFormValueModelBindingAttribute` Model bağlamayı devre dışı bırakmak için kullanılır:
+`DisableFormValueModelBindingAttribute`Model bağlamayı devre dışı bırakmak için kullanılır:
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Filters/ModelBinding.cs?name=snippet_DisableFormValueModelBindingAttribute)]
 
-Örnek uygulamada `GenerateAntiforgeryTokenCookieAttribute` ve `DisableFormValueModelBindingAttribute` sayfa [ Razor kuralları](xref:razor-pages/razor-pages-conventions)kullanılarak `/StreamedSingleFileUploadDb` ve `/StreamedSingleFileUploadPhysical` içindeki `Startup.ConfigureServices` sayfa uygulama modellerine filtre olarak uygulanır:
+Örnek uygulamada `GenerateAntiforgeryTokenCookieAttribute` ve `DisableFormValueModelBindingAttribute` sayfa `/StreamedSingleFileUploadDb` `/StreamedSingleFileUploadPhysical` `Startup.ConfigureServices` [ Razor kuralları](xref:razor-pages/razor-pages-conventions)kullanılarak ve içindeki sayfa uygulama modellerine filtre olarak uygulanır:
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Startup.cs?name=snippet_AddRazorPages&highlight=8-11,17-20)]
 
-Model bağlama formu okumadığından formdan bağlanan parametreler bağlanamaz (sorgu, yol ve başlık çalışmaya devam eder). Action yöntemi doğrudan `Request` özelliği ile birlikte çalışabilir. `MultipartReader` Her bölümü okumak için kullanılır. Anahtar/değer verileri bir `KeyValueAccumulator`içinde depolanır. Çok parçalı bölümler okunduktan sonra, öğesinin `KeyValueAccumulator` içeriği form verilerini bir model türüne bağlamak için kullanılır.
+Model bağlama formu okumadığından formdan bağlanan parametreler bağlanamaz (sorgu, yol ve başlık çalışmaya devam eder). Action yöntemi doğrudan özelliği ile birlikte çalışabilir `Request` . `MultipartReader`Her bölümü okumak için kullanılır. Anahtar/değer verileri bir içinde depolanır `KeyValueAccumulator` . Çok parçalı bölümler okunduktan sonra, öğesinin içeriği `KeyValueAccumulator` form verilerini bir model türüne bağlamak için kullanılır.
 
-EF Core bir `StreamingController.UploadDatabase` veritabanına akış için tamamlanan Yöntem:
+`StreamingController.UploadDatabase`EF Core bir veritabanına akış için tamamlanan Yöntem:
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Controllers/StreamingController.cs?name=snippet_UploadDatabase)]
 
@@ -434,20 +421,20 @@ EF Core bir `StreamingController.UploadDatabase` veritabanına akış için tama
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Utilities/MultipartRequestHelper.cs)]
 
-Fiziksel bir `StreamingController.UploadPhysical` konuma akışa yönelik tüm Yöntem:
+`StreamingController.UploadPhysical`Fiziksel bir konuma akışa yönelik tüm Yöntem:
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Controllers/StreamingController.cs?name=snippet_UploadPhysical)]
 
-Örnek uygulamada, doğrulama denetimleri tarafından `FileHelpers.ProcessStreamedFile`işlenir.
+Örnek uygulamada, doğrulama denetimleri tarafından işlenir `FileHelpers.ProcessStreamedFile` .
 
 ## <a name="validation"></a>Doğrulama
 
-Örnek uygulamanın `FileHelpers` sınıfı, arabelleğe alınmış <xref:Microsoft.AspNetCore.Http.IFormFile> ve akış dosya yüklemeleri için birkaç denetim gösterir. Örnek uygulamada <xref:Microsoft.AspNetCore.Http.IFormFile> ara belleğe alınmış dosya yüklemelerini işlemek Için, `ProcessFormFile` *Utilities/fileyardımcılar. cs* dosyasındaki yöntemine bakın. Akış dosyalarını işlemek için aynı dosyadaki `ProcessStreamedFile` yöntemine bakın.
+Örnek uygulamanın sınıfı, `FileHelpers` arabelleğe alınmış <xref:Microsoft.AspNetCore.Http.IFormFile> ve akış dosya yüklemeleri için birkaç denetim gösterir. <xref:Microsoft.AspNetCore.Http.IFormFile>Örnek uygulamada ara belleğe alınmış dosya yüklemelerini işlemek için, `ProcessFormFile` *Utilities/fileyardımcılar. cs* dosyasındaki yöntemine bakın. Akış dosyalarını işlemek için `ProcessStreamedFile` aynı dosyadaki yöntemine bakın.
 
 > [!WARNING]
 > Örnek uygulamada gösterilen doğrulama işleme yöntemleri karşıya yüklenen dosyaların içeriğini taramaz. Çoğu üretim senaryosunda, dosyanın kullanıcılara veya diğer sistemlere kullanılabilir hale getirilmesi için dosya üzerinde bir virüs/kötü amaçlı yazılım tarayıcı API 'SI kullanılır.
 >
-> Konu örneği, doğrulama tekniklerine yönelik çalışan bir örnek sağlasa da, aşağıdakileri gerçekleştirmediğiniz takdirde `FileHelpers` sınıfı bir üretim uygulamasında uygulamaz:
+> Konu örneği, doğrulama tekniklerine yönelik çalışan bir örnek sağlasa da, `FileHelpers` aşağıdakileri gerçekleştirmediğiniz takdirde sınıfı bir üretim uygulamasında uygulamaz:
 >
 > * Uygulamayı tam olarak anlayın.
 > * Uygulamayı uygulamanın ortamı ve belirtimleri için uygun şekilde değiştirin.
@@ -520,7 +507,7 @@ RazorOtomatik HTML, görüntüleme için özellik değerlerini kodluyor. Aşağ�
 }
 ```
 
-Dışında Razor, her zaman <xref:System.Net.WebUtility.HtmlEncode*> bir kullanıcının isteğinden dosya adı içeriği.
+Dışında Razor , her zaman <xref:System.Net.WebUtility.HtmlEncode*> bir kullanıcının isteğinden dosya adı içeriği.
 
 Birçok uygulama, dosyanın var olduğunu bir denetim içermelidir; Aksi takdirde, dosyanın üzerine aynı ada sahip bir dosya yazılır. Uygulamanızın belirtimlerini karşılamak için ek mantık sağlayın.
 
@@ -563,17 +550,17 @@ if (formFile.Length > _fileSizeLimit)
 
 ### <a name="match-name-attribute-value-to-parameter-name-of-post-method"></a>Name öznitelik değerini POST yönteminin Parameter adı ile Eşleştir
 
-Form verileri oluşturanRazor veya JavaScript 'in `FormData` doğrudan kullandığı, form öğesinde belirtilen adın veya `FormData` denetleyicinin eyleminde parametrenin adıyla eşleşmesi gereken form olmayan formlar.
+RazorForm verileri oluşturan veya JavaScript 'in `FormData` doğrudan kullandığı, form öğesinde belirtilen adın veya `FormData` denetleyicinin eyleminde parametrenin adıyla eşleşmesi gereken form olmayan formlar.
 
 Aşağıdaki örnekte:
 
-* Bir `<input>` öğesi kullanılırken, `name` özniteliği değere `battlePlans`ayarlanır:
+* Bir öğesi kullanılırken `<input>` , `name` özniteliği değere ayarlanır `battlePlans` :
 
   ```html
   <input type="file" name="battlePlans" multiple>
   ```
 
-* JavaScript içinde `FormData` kullanırken, ad değerine `battlePlans`ayarlanır:
+* `FormData`JavaScript içinde kullanırken, ad değerine ayarlanır `battlePlans` :
 
   ```javascript
   var formData = new FormData();
@@ -583,9 +570,9 @@ Aşağıdaki örnekte:
   }
   ```
 
-C# yönteminin (`battlePlans`) parametresi için eşleşen bir ad kullanın:
+C# yönteminin () parametresi için eşleşen bir ad kullanın `battlePlans` :
 
-* Bir Razor sayfalar sayfa işleyici yöntemi için şunu `Upload`adlı:
+* Bir Razor sayfalar sayfa işleyici yöntemi için şunu `Upload` adlı:
 
   ```csharp
   public async Task<IActionResult> OnPostUploadAsync(List<IFormFile> battlePlans)
@@ -601,7 +588,7 @@ C# yönteminin (`battlePlans`) parametresi için eşleşen bir ad kullanın:
 
 ### <a name="multipart-body-length-limit"></a>Çok parçalı gövde uzunluğu sınırı
 
-<xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit>Her bir çok parçalı gövdenin uzunluk sınırını ayarlar. Bu sınırı aşan form bölümleri ayrıştırıldığında bir <xref:System.IO.InvalidDataException> oluşturur. Varsayılan değer 134.217.728 ' dir (128 MB). Sınırı, içindeki <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> `Startup.ConfigureServices`ayarı kullanarak özelleştirin:
+<xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit>Her bir çok parçalı gövdenin uzunluk sınırını ayarlar. Bu sınırı aşan form bölümleri <xref:System.IO.InvalidDataException> ayrıştırıldığında bir oluşturur. Varsayılan değer 134.217.728 ' dir (128 MB). Sınırı, <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> içindeki ayarı kullanarak özelleştirin `Startup.ConfigureServices` :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -614,9 +601,9 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-<xref:Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute>tek sayfa veya eylem <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> için ayarlamak için kullanılır.
+<xref:Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute><xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit>tek sayfa veya eylem için ayarlamak için kullanılır.
 
-Bir Razor sayfalar uygulamasında, filtresi içindeki `Startup.ConfigureServices`bir [kurala](xref:razor-pages/razor-pages-conventions) uygulayın:
+Bir Razor Sayfalar uygulamasında, filtresi içindeki bir [kurala](xref:razor-pages/razor-pages-conventions) uygulayın `Startup.ConfigureServices` :
 
 ```csharp
 services.AddRazorPages()
@@ -633,7 +620,7 @@ services.AddRazorPages()
     });
 ```
 
-Bir Razor sayfalar uygulamasında veya bir MVC uygulamasında, filtreyi sayfa modeline veya eylem yöntemine uygulayın:
+Bir Razor Sayfalar uygulamasında veya BIR MVC uygulamasında, filtreyi sayfa modeline veya eylem yöntemine uygulayın:
 
 ```csharp
 // Set the limit to 256 MB
@@ -651,20 +638,20 @@ Kestrel tarafından barındırılan uygulamalar için, varsayılan en büyük is
 ```csharp
 public static IHostBuilder CreateHostBuilder(string[] args) =>
     Host.CreateDefaultBuilder(args)
-        .ConfigureKestrel((context, options) =>
-        {
-            // Handle requests up to 50 MB
-            options.Limits.MaxRequestBodySize = 52428800;
-        })
         .ConfigureWebHostDefaults(webBuilder =>
         {
-            webBuilder.UseStartup<Startup>();
+            webBuilder.ConfigureKestrel((context, options) =>
+            {
+                // Handle requests up to 50 MB
+                options.Limits.MaxRequestBodySize = 52428800;
+            })
+            .UseStartup<Startup>();
         });
 ```
 
 <xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute>, tek sayfa veya eylem için [MaxRequestBodySize](xref:fundamentals/servers/kestrel#maximum-request-body-size) ayarlamak üzere kullanılır.
 
-Bir Razor sayfalar uygulamasında, filtresi içindeki `Startup.ConfigureServices`bir [kurala](xref:razor-pages/razor-pages-conventions) uygulayın:
+Bir Razor Sayfalar uygulamasında, filtresi içindeki bir [kurala](xref:razor-pages/razor-pages-conventions) uygulayın `Startup.ConfigureServices` :
 
 ```csharp
 services.AddRazorPages()
@@ -681,7 +668,7 @@ services.AddRazorPages()
     });
 ```
 
-Bir Razor sayfalar uygulamasında veya bir MVC uygulamasında, filtreyi sayfa işleyici sınıfına veya eylem yöntemine uygulayın:
+Bir Razor Sayfalar uygulamasında veya BIR MVC uygulamasında, filtreyi sayfa işleyici sınıfına veya eylem yöntemine uygulayın:
 
 ```csharp
 // Handle requests up to 50 MB
@@ -692,7 +679,7 @@ public class BufferedSingleFileUploadPhysicalModel : PageModel
 }
 ```
 
-, `RequestSizeLimitAttribute` Razor Yönergesi kullanılarak [`@attribute`](xref:mvc/views/razor#attribute) da uygulanabilir:
+, `RequestSizeLimitAttribute` Yönergesi kullanılarak da uygulanabilir [`@attribute`](xref:mvc/views/razor#attribute) Razor :
 
 ```cshtml
 @attribute [RequestSizeLimitAttribute(52428800)]
@@ -707,7 +694,7 @@ Kestrel tarafından barındırılan uygulamalar için diğer Kestrel limitleri d
 
 ### <a name="iis-content-length-limit"></a>IIS içerik uzunluğu sınırı
 
-Varsayılan istek sınırı (`maxAllowedContentLength`), YAKLAŞıK 28.6 mb olan 30.000.000 bayttır. *Web. config* dosyasında sınırı özelleştirin:
+Varsayılan istek sınırı ( `maxAllowedContentLength` ), yaklaşık 28.6 MB olan 30.000.000 bayttır. *Web. config* dosyasında sınırı özelleştirin:
 
 ```xml
 <system.webServer>
@@ -720,7 +707,7 @@ Varsayılan istek sınırı (`maxAllowedContentLength`), YAKLAŞıK 28.6 mb olan
 </system.webServer>
 ```
 
-Bu ayar yalnızca IIS için geçerlidir. Kestrel üzerinde barındırırken davranış varsayılan olarak gerçekleşmez. Daha fazla bilgi için bkz. [Istek \<sınırları requestLimits>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/).
+Bu ayar yalnızca IIS için geçerlidir. Kestrel üzerinde barındırırken davranış varsayılan olarak gerçekleşmez. Daha fazla bilgi için bkz. [Istek sınırları \< requestLimits>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/).
 
 ASP.NET Core modülündeki sınırlamalar veya IIS Istek filtreleme modülünün varlığı, karşıya yüklemeleri 2 veya 4 GB ile sınırlandırabilir. Daha fazla bilgi için bkz. [2 GB 'tan büyük dosya karşıya yüklenemiyor (DotNet/AspNetCore #2711)](https://github.com/dotnet/AspNetCore/issues/2711).
 
@@ -745,11 +732,11 @@ Bir bağlantı hatası ve bir sıfırlama sunucu bağlantısı büyük olasılı
 
 ### <a name="null-reference-exception-with-iformfile"></a>Iformfile ile null başvuru özel durumu
 
-<xref:Microsoft.AspNetCore.Http.IFormFile> Denetleyici karşıya yüklenen dosyaları kullanarak kabul edilirse, ancak değer Ise `null`, HTML formunun bir `enctype` değerini belirtmesini onaylayın. `multipart/form-data` Bu öznitelik `<form>` öğesinde ayarlanmamışsa, dosya karşıya yükleme gerçekleşmez ve herhangi bir bağlı <xref:Microsoft.AspNetCore.Http.IFormFile> bağımsız değişken. `null` Ayrıca, [form verilerinde karşıya yükleme adlandırmasının uygulamanın adlandırmayla eşleştiğinden](#match-name-attribute-value-to-parameter-name-of-post-method)emin olun.
+Denetleyici karşıya yüklenen dosyaları kullanarak kabul edilirse, <xref:Microsoft.AspNetCore.Http.IFormFile> ancak değer ise `null` , HTML formunun bir değerini belirtmesini onaylayın `enctype` `multipart/form-data` . Bu öznitelik `<form>` öğesinde ayarlanmamışsa, dosya karşıya yükleme gerçekleşmez ve herhangi bir bağlı <xref:Microsoft.AspNetCore.Http.IFormFile> bağımsız değişken `null` . Ayrıca, [form verilerinde karşıya yükleme adlandırmasının uygulamanın adlandırmayla eşleştiğinden](#match-name-attribute-value-to-parameter-name-of-post-method)emin olun.
 
 ### <a name="stream-was-too-long"></a>Akış çok uzun
 
-Bu konudaki örnekler karşıya yüklenen dosyanın içeriğini <xref:System.IO.MemoryStream> tutmak için kullanır. Bir `MemoryStream` öğesinin boyut sınırı `int.MaxValue`. Uygulamanın dosya yükleme senaryosu, dosya içeriğinin 50 MB 'tan büyük olmasını gerektiriyorsa, karşıya yüklenen bir dosyanın içeriğini tutmak için tek başına `MemoryStream` olmayan alternatif bir yaklaşım kullanın.
+Bu konudaki örnekler <xref:System.IO.MemoryStream> karşıya yüklenen dosyanın içeriğini tutmak için kullanır. Bir öğesinin boyut sınırı `MemoryStream` `int.MaxValue` . Uygulamanın dosya yükleme senaryosu, dosya içeriğinin 50 MB 'tan büyük olmasını gerektiriyorsa, `MemoryStream` karşıya yüklenen bir dosyanın içeriğini tutmak için tek başına olmayan alternatif bir yaklaşım kullanın.
 
 ::: moniker-end
 
@@ -759,7 +746,7 @@ ASP.NET Core, daha küçük dosyalar için arabellekli model bağlama ve daha b�
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="security-considerations"></a>Güvenlik konuları
+## <a name="security-considerations"></a>Güvenlikle ilgili dikkat edilmesi gerekenler
 
 Kullanıcılara bir sunucuya dosya yükleme yeteneği sağlarken dikkatli olun. Saldırganlar şunları deneyebilir:
 
@@ -771,7 +758,7 @@ Başarılı bir saldırının olasılığını azaltan güvenlik adımları şun
 
 * Dosyaları, tercihen sistem dışı bir sürücüye, özel bir dosya yükleme alanına yükleyin. Ayrılmış bir konum, karşıya yüklenen dosyalar üzerinde güvenlik kısıtlamaları yapmayı kolaylaştırır. Dosya yükleme konumunda yürütme izinlerini devre dışı bırakın.&dagger;
 * Karşıya yüklenen dosyaları uygulamayla aynı dizin **ağacında kalıcı hale** getirme.&dagger;
-* Uygulama tarafından belirlenen bir güvenli dosya adı kullanın. Kullanıcı tarafından belirtilen bir dosya adı veya karşıya yüklenen dosyanın güvenilmeyen dosya adı kullanmayın. &dagger; HTML, görüntüleme sırasında güvenilmeyen dosya adını kodlayamıyor. Örneğin, dosya adını günlüğe kaydetme veya Kullanıcı arabiriminde görüntüleme (Razor OTOMATIK olarak HTML kodlama çıktısı).
+* Uygulama tarafından belirlenen bir güvenli dosya adı kullanın. Kullanıcı tarafından belirtilen bir dosya adı veya karşıya yüklenen dosyanın güvenilmeyen dosya adı kullanmayın. &dagger; HTML, görüntüleme sırasında güvenilmeyen dosya adını kodlayamıyor. Örneğin, dosya adını günlüğe kaydetme veya Kullanıcı arabiriminde görüntüleme ( Razor otomatik olarak HTML kodlama çıktısı).
 * Uygulamanın tasarım belirtimi için yalnızca onaylanan dosya uzantılarına izin verin.&dagger; <!-- * Check the file format signature to prevent a user from uploading a masqueraded file.&dagger; For example, don't permit a user to upload an *.exe* file with a *.txt* extension. Add this back when we get instructions how to do this.  -->
 * Sunucuda istemci tarafı denetimlerinin gerçekleştirildiğinden emin olun. &dagger; İstemci tarafı denetimleri kolayca atmayı kolaylaştırır.
 * Karşıya yüklenen dosyanın boyutunu denetleyin. Büyük karşıya yüklemeleri engellemek için en büyük boyut sınırını ayarlayın.&dagger;
@@ -818,7 +805,7 @@ Dosyalar için ortak depolama seçenekleri şunlardır:
   * Hizmetler genellikle tek hata noktalarına tabi olan şirket içi çözümler üzerinde geliştirilmiş ölçeklenebilirlik ve esneklik sunar.
   * Hizmetler büyük depolama altyapısı senaryolarında düşük maliyetlidir.
 
-  Daha fazla bilgi için bkz. [hızlı başlangıç: nesne depolamada blob oluşturmak için .NET kullanma](/azure/storage/blobs/storage-quickstart-blobs-dotnet). Konu başlığı altında <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromFileAsync*>, <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromStreamAsync*> ile çalışırken bir <xref:System.IO.FileStream> BLOB depolama alanına kaydetmek için kullanılabilir. <xref:System.IO.Stream>
+  Daha fazla bilgi için bkz. [hızlı başlangıç: nesne depolamada blob oluşturmak için .NET kullanma](/azure/storage/blobs/storage-quickstart-blobs-dotnet). Konu başlığı altında <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromFileAsync*> , <xref:Microsoft.Azure.Storage.File.CloudFile.UploadFromStreamAsync*> <xref:System.IO.FileStream> ile çalışırken bir BLOB depolama alanına kaydetmek için kullanılabilir <xref:System.IO.Stream> .
 
 ## <a name="file-upload-scenarios"></a>Karşıya dosya yükleme senaryoları
 
@@ -826,7 +813,7 @@ Dosyaları karşıya yüklemek için iki genel yaklaşım arabelleğe alınır v
 
 **Ara**
 
-Dosyanın tamamı <xref:Microsoft.AspNetCore.Http.IFormFile>, dosyayı işlemek veya kaydetmek için kullanılan dosyanın C# temsili olan öğesine okunurdur.
+Dosyanın tamamı <xref:Microsoft.AspNetCore.Http.IFormFile> , dosyayı işlemek veya kaydetmek için kullanılan dosyanın C# temsili olan öğesine okunurdur.
 
 Dosya karşıya yüklemeleri tarafından kullanılan kaynaklar (disk, bellek), eşzamanlı dosya karşıya yüklemelerinin sayısına ve boyutuna bağlıdır. Bir uygulama çok fazla karşıya yükleme arabelleğini denerse, bellek veya disk alanı tükenirse site çöker. Karşıya dosya yükleme boyutu veya sıklığı uygulama kaynaklarını tüketme ise, akış ' ı kullanın.
 
@@ -848,7 +835,7 @@ Akış büyük dosyaları [akış ile büyük dosyaları karşıya yükle](#uplo
 
 Küçük dosyaları karşıya yüklemek için, çok parçalı bir form kullanın veya JavaScript kullanarak bir POST isteği oluşturun.
 
-Aşağıdaki örnek, tek bir dosyayı karşıya yüklemek Razor için sayfalar formunun kullanımını gösterir (örnek uygulamada*Pages/Bufferedsinglefileuploadfiziksel. cshtml* ):
+Aşağıdaki örnek, Razor tek bir dosyayı karşıya yüklemek için sayfalar formunun kullanımını gösterir (örnek uygulamada*Pages/Bufferedsinglefileuploadfiziksel. cshtml* ):
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -936,20 +923,20 @@ Aşağıdaki örnek, önceki örneğe benzerdir, ancak şunları hariç:
   </script>
   ```
 
-Dosya yüklemelerini desteklemek için, HTML formları bir kodlama türü (`enctype`) belirtmelidir. `multipart/form-data`
+Dosya yüklemelerini desteklemek için, HTML formları bir kodlama türü ( `enctype` ) belirtmelidir `multipart/form-data` .
 
-Birden çok `files` dosyayı karşıya yüklemeyi destekleyen bir giriş öğesi için, `multiple` `<input>` öğesine özniteliği sağlar:
+`files`Birden çok dosyayı karşıya yüklemeyi destekleyen bir giriş öğesi için, `multiple` öğesine özniteliği sağlar `<input>` :
 
 ```cshtml
 <input asp-for="FileUpload.FormFiles" type="file" multiple>
 ```
 
-Sunucuya yüklenen tek dosyalara, kullanılarak <xref:Microsoft.AspNetCore.Http.IFormFile> [model bağlama](xref:mvc/models/model-binding) yoluyla erişilebilir. Örnek uygulama, veritabanı ve fiziksel depolama senaryoları için birden çok arabellekli dosya yüklemeyi gösterir.
+Sunucuya yüklenen tek dosyalara, kullanılarak [model bağlama](xref:mvc/models/model-binding) yoluyla erişilebilir <xref:Microsoft.AspNetCore.Http.IFormFile> . Örnek uygulama, veritabanı ve fiziksel depolama senaryoları için birden çok arabellekli dosya yüklemeyi gösterir.
 
 <a name="filename2"></a>
 
 > [!WARNING]
-> Görüntüleme ve günlüğe kaydetme `FileName` için dışındaki <xref:Microsoft.AspNetCore.Http.IFormFile> **özelliğini kullanmayın.** Görüntüleme veya günlüğe kaydetme sırasında, HTML dosya adını kodlayın. Saldırgan, tam yollar veya göreli yollar dahil olmak üzere kötü amaçlı bir dosya adı sağlayabilir. Uygulamalar:
+> **not** `FileName` <xref:Microsoft.AspNetCore.Http.IFormFile> Görüntüleme ve günlüğe kaydetme için dışındaki özelliğini kullanmayın. Görüntüleme veya günlüğe kaydetme sırasında, HTML dosya adını kodlayın. Saldırgan, tam yollar veya göreli yollar dahil olmak üzere kötü amaçlı bir dosya adı sağlayabilir. Uygulamalar:
 >
 > * Kullanıcı tarafından sağlanan dosya adının yolunu kaldırın.
 > * Kullanıcı arabirimi veya günlüğe kaydetme için HTML kodlu, yol tarafından kaldırılan dosya adını kaydedin.
@@ -966,16 +953,16 @@ Sunucuya yüklenen tek dosyalara, kullanılarak <xref:Microsoft.AspNetCore.Http.
 > * [Güvenlik konuları](#security-considerations)
 > * [Doğrulama](#validation)
 
-Model bağlama kullanarak dosyaları karşıya yüklerken <xref:Microsoft.AspNetCore.Http.IFormFile>, eylem yöntemi kabul edebilir:
+Model bağlama kullanarak dosyaları karşıya yüklerken <xref:Microsoft.AspNetCore.Http.IFormFile> , eylem yöntemi kabul edebilir:
 
-* Tek <xref:Microsoft.AspNetCore.Http.IFormFile>bir.
+* Tek bir <xref:Microsoft.AspNetCore.Http.IFormFile> .
 * Birkaç dosyayı temsil eden aşağıdaki koleksiyonlardan herhangi biri:
   * <xref:Microsoft.AspNetCore.Http.IFormFileCollection>
   * <xref:System.Collections.IEnumerable>\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
   * [Listele](xref:System.Collections.Generic.List`1)\<<xref:Microsoft.AspNetCore.Http.IFormFile>>
 
 > [!NOTE]
-> Bağlama, form dosyaları adına göre eşleşir. Örneğin, içindeki `name` `<input type="file" name="formFile">` HTML değeri C# parametresi/özelliği ile (`FormFile`) eşleşmelidir. Daha fazla bilgi için, [ad öznitelik DEĞERINI Post yönteminin parametre adına eşleştirin](#match-name-attribute-value-to-parameter-name-of-post-method) bölümüne bakın.
+> Bağlama, form dosyaları adına göre eşleşir. Örneğin, `name` IÇINDEKI HTML değeri `<input type="file" name="formFile">` C# parametresi/özelliği ile ( `FormFile` ) eşleşmelidir. Daha fazla bilgi için, [ad öznitelik DEĞERINI Post yönteminin parametre adına eşleştirin](#match-name-attribute-value-to-parameter-name-of-post-method) bölümüne bakın.
 
 Aşağıdaki örnek:
 
@@ -1009,7 +996,7 @@ public async Task<IActionResult> OnPostUploadAsync(List<IFormFile> files)
 }
 ```
 
-Yol `Path.GetRandomFileName` olmadan bir dosya adı oluşturmak için kullanın. Aşağıdaki örnekte, yol yapılandırmadan alınır:
+`Path.GetRandomFileName`Yol olmadan bir dosya adı oluşturmak için kullanın. Aşağıdaki örnekte, yol yapılandırmadan alınır:
 
 ```csharp
 foreach (var formFile in files)
@@ -1027,21 +1014,21 @@ foreach (var formFile in files)
 }
 ```
 
-Öğesine <xref:System.IO.FileStream> geçirilen *yol, dosya adını içermelidir.* Dosya adı sağlanmazsa, çalışma zamanında bir <xref:System.UnauthorizedAccessException> oluşturulur.
+Öğesine geçirilen yol, <xref:System.IO.FileStream> *must* dosya adını içermelidir. Dosya adı sağlanmazsa, çalışma zamanında bir oluşturulur <xref:System.UnauthorizedAccessException> .
 
-Tekniği kullanılarak yüklenen dosyalar <xref:Microsoft.AspNetCore.Http.IFormFile> , işlemeden önce sunucuda veya diskte bellek halinde arabelleğe alınır. Eylem yönteminde, <xref:Microsoft.AspNetCore.Http.IFormFile> içeriğe bir <xref:System.IO.Stream>olarak erişilebilir. Yerel dosya sistemine ek olarak, dosyalar bir ağ paylaşımında veya [Azure Blob depolama](/azure/visual-studio/vs-storage-aspnet5-getting-started-blobs)gibi bir dosya depolama hizmetine kaydedilebilir.
+Tekniği kullanılarak yüklenen dosyalar, <xref:Microsoft.AspNetCore.Http.IFormFile> işlemeden önce sunucuda veya diskte bellek halinde arabelleğe alınır. Eylem yönteminde, <xref:Microsoft.AspNetCore.Http.IFormFile> içeriğe bir olarak erişilebilir <xref:System.IO.Stream> . Yerel dosya sistemine ek olarak, dosyalar bir ağ paylaşımında veya [Azure Blob depolama](/azure/visual-studio/vs-storage-aspnet5-getting-started-blobs)gibi bir dosya depolama hizmetine kaydedilebilir.
 
 Karşıya yüklemek için birden çok dosya üzerinde döngü yapan ve güvenli dosya adları kullanan başka bir örnek için, örnek uygulamadaki *Pages/Bufferedmultiplefileuploadfiziksel. cshtml. cs* dosyasına bakın.
 
 > [!WARNING]
-> [Path. GetTempFileName](xref:System.IO.Path.GetTempFileName*) , önceki <xref:System.IO.IOException> geçici dosyaları silmeden 65.535 ' den fazla dosya oluşturulduysa bir oluşturur. 65.535 dosya sınırının sunucu başına sınırı vardır. Windows işletim sistemi için bu sınır hakkında daha fazla bilgi için aşağıdaki konulara bakın:
+> [Path. GetTempFileName](xref:System.IO.Path.GetTempFileName*) <xref:System.IO.IOException> , önceki geçici dosyaları silmeden 65.535 ' den fazla dosya oluşturulduysa bir oluşturur. 65.535 dosya sınırının sunucu başına sınırı vardır. Windows işletim sistemi için bu sınır hakkında daha fazla bilgi için aşağıdaki konulara bakın:
 >
 > * [GetTempFileNameA işlevi](/windows/desktop/api/fileapi/nf-fileapi-gettempfilenamea#remarks)
 > * <xref:System.IO.Path.GetTempFileName*>
 
 ### <a name="upload-small-files-with-buffered-model-binding-to-a-database"></a>Bir veritabanına arabellekli model bağlamaya sahip küçük dosyaları karşıya yükleme
 
-İkili dosya verilerini [Entity Framework](/ef/core/index)kullanarak bir veritabanında depolamak için, varlıkta bir <xref:System.Byte> dizi özelliği tanımlayın:
+İkili dosya verilerini [Entity Framework](/ef/core/index)kullanarak bir veritabanında depolamak için, <xref:System.Byte> varlıkta bir dizi özelliği tanımlayın:
 
 ```csharp
 public class AppFile
@@ -1051,7 +1038,7 @@ public class AppFile
 }
 ```
 
-Sınıf için şunu içeren bir sayfa modeli özelliği belirtin <xref:Microsoft.AspNetCore.Http.IFormFile>:
+Sınıf için şunu içeren bir sayfa modeli özelliği belirtin <xref:Microsoft.AspNetCore.Http.IFormFile> :
 
 ```csharp
 public class BufferedSingleFileUploadDbModel : PageModel
@@ -1091,7 +1078,7 @@ public class BufferedSingleFileUploadDb
 </form>
 ```
 
-Form sunucuya gönderildiğinde, öğesini bir akışa kopyalayın <xref:Microsoft.AspNetCore.Http.IFormFile> ve veritabanına bir bayt dizisi olarak kaydedin. Aşağıdaki örnekte, `_dbContext` uygulamanın veritabanı bağlamını depolar:
+Form sunucuya gönderildiğinde, öğesini <xref:Microsoft.AspNetCore.Http.IFormFile> bir akışa kopyalayın ve veritabanına bir bayt dizisi olarak kaydedin. Aşağıdaki örnekte, `_dbContext` uygulamanın veritabanı bağlamını depolar:
 
 ```csharp
 public async Task<IActionResult> OnPostUploadAsync()
@@ -1130,7 +1117,7 @@ Yukarıdaki örnek, örnek uygulamada gösterilen senaryoya benzerdir:
 > [!WARNING]
 > İkili verileri ilişkisel veritabanlarında depolarken dikkatli olun, çünkü performansı olumsuz etkileyebilir.
 >
-> Doğrulaması `FileName` <xref:Microsoft.AspNetCore.Http.IFormFile> olmadan özelliğine güvenmeyin veya bu özelliğe güvenmeyin. `FileName` Özelliği yalnızca görüntüleme amacıyla ve yalnızca HTML kodlaması sonrasında kullanılmalıdır.
+> Doğrulaması olmadan özelliğine güvenmeyin veya bu `FileName` özelliğe güvenmeyin <xref:Microsoft.AspNetCore.Http.IFormFile> . `FileName`Özelliği yalnızca görüntüleme amacıyla ve yalnızca HTML kodlaması sonrasında kullanılmalıdır.
 >
 > Belirtilen örneklerde dikkate alınması gereken önemli noktalar. Ek bilgiler aşağıdaki bölümler ve [örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)tarafından sağlanır:
 >
@@ -1139,23 +1126,23 @@ Yukarıdaki örnek, örnek uygulamada gösterilen senaryoya benzerdir:
 
 ### <a name="upload-large-files-with-streaming"></a>Akışa sahip büyük dosyaları karşıya yükleme
 
-Aşağıdaki örnek, bir denetleyiciyi bir denetleyici eyleminde akışa almak için JavaScript 'in nasıl kullanılacağını gösterir. Dosyanın antiforgery belirteci özel bir filtre özniteliği kullanılarak oluşturulur ve istek gövdesi yerine istemci HTTP üst bilgilerine geçirilir. Eylem yöntemi karşıya yüklenen verileri doğrudan işlediğinden, form modeli bağlama başka bir özel filtre tarafından devre dışı bırakıldı. Eylem içinde formun içerikleri, her bir bireyi `MultipartReader` `MultipartSection`okuyan, dosyayı işleyen veya içeriği uygun şekilde depolayan bir kullanılarak okunur. Çok parçalı bölümler okunduktan sonra eylem kendi model bağlamasını gerçekleştirir.
+Aşağıdaki örnek, bir denetleyiciyi bir denetleyici eyleminde akışa almak için JavaScript 'in nasıl kullanılacağını gösterir. Dosyanın antiforgery belirteci özel bir filtre özniteliği kullanılarak oluşturulur ve istek gövdesi yerine istemci HTTP üst bilgilerine geçirilir. Eylem yöntemi karşıya yüklenen verileri doğrudan işlediğinden, form modeli bağlama başka bir özel filtre tarafından devre dışı bırakıldı. Eylem içinde formun içerikleri, `MultipartReader` her bir bireyi okuyan `MultipartSection` , dosyayı işleyen veya içeriği uygun şekilde depolayan bir kullanılarak okunur. Çok parçalı bölümler okunduktan sonra eylem kendi model bağlamasını gerçekleştirir.
 
-İlk sayfa yanıtı formu yükler ve bir tanımlama bilgisine ( `GenerateAntiforgeryTokenCookieAttribute` özniteliği aracılığıyla) bir antiforgery belirteci kaydeder. Öznitelik, bir istek belirtecine sahip bir tanımlama bilgisi ayarlamak için ASP.NET Core yerleşik [antiforgery desteğini](xref:security/anti-request-forgery) kullanır:
+İlk sayfa yanıtı formu yükler ve bir tanımlama bilgisine (özniteliği aracılığıyla) bir antiforgery belirteci kaydeder `GenerateAntiforgeryTokenCookieAttribute` . Öznitelik, bir istek belirtecine sahip bir tanımlama bilgisi ayarlamak için ASP.NET Core yerleşik [antiforgery desteğini](xref:security/anti-request-forgery) kullanır:
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Filters/Antiforgery.cs?name=snippet_GenerateAntiforgeryTokenCookieAttribute)]
 
-`DisableFormValueModelBindingAttribute` Model bağlamayı devre dışı bırakmak için kullanılır:
+`DisableFormValueModelBindingAttribute`Model bağlamayı devre dışı bırakmak için kullanılır:
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Filters/ModelBinding.cs?name=snippet_DisableFormValueModelBindingAttribute)]
 
-Örnek uygulamada `GenerateAntiforgeryTokenCookieAttribute` ve `DisableFormValueModelBindingAttribute` sayfa [ Razor kuralları](xref:razor-pages/razor-pages-conventions)kullanılarak `/StreamedSingleFileUploadDb` ve `/StreamedSingleFileUploadPhysical` içindeki `Startup.ConfigureServices` sayfa uygulama modellerine filtre olarak uygulanır:
+Örnek uygulamada `GenerateAntiforgeryTokenCookieAttribute` ve `DisableFormValueModelBindingAttribute` sayfa `/StreamedSingleFileUploadDb` `/StreamedSingleFileUploadPhysical` `Startup.ConfigureServices` [ Razor kuralları](xref:razor-pages/razor-pages-conventions)kullanılarak ve içindeki sayfa uygulama modellerine filtre olarak uygulanır:
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Startup.cs?name=snippet_AddMvc&highlight=8-11,17-20)]
 
-Model bağlama formu okumadığından formdan bağlanan parametreler bağlanamaz (sorgu, yol ve başlık çalışmaya devam eder). Action yöntemi doğrudan `Request` özelliği ile birlikte çalışabilir. `MultipartReader` Her bölümü okumak için kullanılır. Anahtar/değer verileri bir `KeyValueAccumulator`içinde depolanır. Çok parçalı bölümler okunduktan sonra, öğesinin `KeyValueAccumulator` içeriği form verilerini bir model türüne bağlamak için kullanılır.
+Model bağlama formu okumadığından formdan bağlanan parametreler bağlanamaz (sorgu, yol ve başlık çalışmaya devam eder). Action yöntemi doğrudan özelliği ile birlikte çalışabilir `Request` . `MultipartReader`Her bölümü okumak için kullanılır. Anahtar/değer verileri bir içinde depolanır `KeyValueAccumulator` . Çok parçalı bölümler okunduktan sonra, öğesinin içeriği `KeyValueAccumulator` form verilerini bir model türüne bağlamak için kullanılır.
 
-EF Core bir `StreamingController.UploadDatabase` veritabanına akış için tamamlanan Yöntem:
+`StreamingController.UploadDatabase`EF Core bir veritabanına akış için tamamlanan Yöntem:
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Controllers/StreamingController.cs?name=snippet_UploadDatabase)]
 
@@ -1163,20 +1150,20 @@ EF Core bir `StreamingController.UploadDatabase` veritabanına akış için tama
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Utilities/MultipartRequestHelper.cs)]
 
-Fiziksel bir `StreamingController.UploadPhysical` konuma akışa yönelik tüm Yöntem:
+`StreamingController.UploadPhysical`Fiziksel bir konuma akışa yönelik tüm Yöntem:
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Controllers/StreamingController.cs?name=snippet_UploadPhysical)]
 
-Örnek uygulamada, doğrulama denetimleri tarafından `FileHelpers.ProcessStreamedFile`işlenir.
+Örnek uygulamada, doğrulama denetimleri tarafından işlenir `FileHelpers.ProcessStreamedFile` .
 
 ## <a name="validation"></a>Doğrulama
 
-Örnek uygulamanın `FileHelpers` sınıfı, arabelleğe alınmış <xref:Microsoft.AspNetCore.Http.IFormFile> ve akış dosya yüklemeleri için birkaç denetim gösterir. Örnek uygulamada <xref:Microsoft.AspNetCore.Http.IFormFile> ara belleğe alınmış dosya yüklemelerini işlemek Için, `ProcessFormFile` *Utilities/fileyardımcılar. cs* dosyasındaki yöntemine bakın. Akış dosyalarını işlemek için aynı dosyadaki `ProcessStreamedFile` yöntemine bakın.
+Örnek uygulamanın sınıfı, `FileHelpers` arabelleğe alınmış <xref:Microsoft.AspNetCore.Http.IFormFile> ve akış dosya yüklemeleri için birkaç denetim gösterir. <xref:Microsoft.AspNetCore.Http.IFormFile>Örnek uygulamada ara belleğe alınmış dosya yüklemelerini işlemek için, `ProcessFormFile` *Utilities/fileyardımcılar. cs* dosyasındaki yöntemine bakın. Akış dosyalarını işlemek için `ProcessStreamedFile` aynı dosyadaki yöntemine bakın.
 
 > [!WARNING]
 > Örnek uygulamada gösterilen doğrulama işleme yöntemleri karşıya yüklenen dosyaların içeriğini taramaz. Çoğu üretim senaryosunda, dosyanın kullanıcılara veya diğer sistemlere kullanılabilir hale getirilmesi için dosya üzerinde bir virüs/kötü amaçlı yazılım tarayıcı API 'SI kullanılır.
 >
-> Konu örneği, doğrulama tekniklerine yönelik çalışan bir örnek sağlasa da, aşağıdakileri gerçekleştirmediğiniz takdirde `FileHelpers` sınıfı bir üretim uygulamasında uygulamaz:
+> Konu örneği, doğrulama tekniklerine yönelik çalışan bir örnek sağlasa da, `FileHelpers` aşağıdakileri gerçekleştirmediğiniz takdirde sınıfı bir üretim uygulamasında uygulamaz:
 >
 > * Uygulamayı tam olarak anlayın.
 > * Uygulamayı uygulamanın ortamı ve belirtimleri için uygun şekilde değiştirin.
@@ -1249,7 +1236,7 @@ RazorOtomatik HTML, görüntüleme için özellik değerlerini kodluyor. Aşağ�
 }
 ```
 
-Dışında Razor, her zaman <xref:System.Net.WebUtility.HtmlEncode*> bir kullanıcının isteğinden dosya adı içeriği.
+Dışında Razor , her zaman <xref:System.Net.WebUtility.HtmlEncode*> bir kullanıcının isteğinden dosya adı içeriği.
 
 Birçok uygulama, dosyanın var olduğunu bir denetim içermelidir; Aksi takdirde, dosyanın üzerine aynı ada sahip bir dosya yazılır. Uygulamanızın belirtimlerini karşılamak için ek mantık sağlayın.
 
@@ -1292,17 +1279,17 @@ if (formFile.Length > _fileSizeLimit)
 
 ### <a name="match-name-attribute-value-to-parameter-name-of-post-method"></a>Name öznitelik değerini POST yönteminin Parameter adı ile Eşleştir
 
-Form verileri oluşturanRazor veya JavaScript 'in `FormData` doğrudan kullandığı, form öğesinde belirtilen adın veya `FormData` denetleyicinin eyleminde parametrenin adıyla eşleşmesi gereken form olmayan formlar.
+RazorForm verileri oluşturan veya JavaScript 'in `FormData` doğrudan kullandığı, form öğesinde belirtilen adın veya `FormData` denetleyicinin eyleminde parametrenin adıyla eşleşmesi gereken form olmayan formlar.
 
 Aşağıdaki örnekte:
 
-* Bir `<input>` öğesi kullanılırken, `name` özniteliği değere `battlePlans`ayarlanır:
+* Bir öğesi kullanılırken `<input>` , `name` özniteliği değere ayarlanır `battlePlans` :
 
   ```html
   <input type="file" name="battlePlans" multiple>
   ```
 
-* JavaScript içinde `FormData` kullanırken, ad değerine `battlePlans`ayarlanır:
+* `FormData`JavaScript içinde kullanırken, ad değerine ayarlanır `battlePlans` :
 
   ```javascript
   var formData = new FormData();
@@ -1312,9 +1299,9 @@ Aşağıdaki örnekte:
   }
   ```
 
-C# yönteminin (`battlePlans`) parametresi için eşleşen bir ad kullanın:
+C# yönteminin () parametresi için eşleşen bir ad kullanın `battlePlans` :
 
-* Bir Razor sayfalar sayfa işleyici yöntemi için şunu `Upload`adlı:
+* Bir Razor sayfalar sayfa işleyici yöntemi için şunu `Upload` adlı:
 
   ```csharp
   public async Task<IActionResult> OnPostUploadAsync(List<IFormFile> battlePlans)
@@ -1330,7 +1317,7 @@ C# yönteminin (`battlePlans`) parametresi için eşleşen bir ad kullanın:
 
 ### <a name="multipart-body-length-limit"></a>Çok parçalı gövde uzunluğu sınırı
 
-<xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit>Her bir çok parçalı gövdenin uzunluk sınırını ayarlar. Bu sınırı aşan form bölümleri ayrıştırıldığında bir <xref:System.IO.InvalidDataException> oluşturur. Varsayılan değer 134.217.728 ' dir (128 MB). Sınırı, içindeki <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> `Startup.ConfigureServices`ayarı kullanarak özelleştirin:
+<xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit>Her bir çok parçalı gövdenin uzunluk sınırını ayarlar. Bu sınırı aşan form bölümleri <xref:System.IO.InvalidDataException> ayrıştırıldığında bir oluşturur. Varsayılan değer 134.217.728 ' dir (128 MB). Sınırı, <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> içindeki ayarı kullanarak özelleştirin `Startup.ConfigureServices` :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -1343,9 +1330,9 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-<xref:Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute>tek sayfa veya eylem <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> için ayarlamak için kullanılır.
+<xref:Microsoft.AspNetCore.Mvc.RequestFormLimitsAttribute><xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit>tek sayfa veya eylem için ayarlamak için kullanılır.
 
-Bir Razor sayfalar uygulamasında, filtresi içindeki `Startup.ConfigureServices`bir [kurala](xref:razor-pages/razor-pages-conventions) uygulayın:
+Bir Razor Sayfalar uygulamasında, filtresi içindeki bir [kurala](xref:razor-pages/razor-pages-conventions) uygulayın `Startup.ConfigureServices` :
 
 ```csharp
 services.AddMvc()
@@ -1363,7 +1350,7 @@ services.AddMvc()
     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 ```
 
-Bir Razor sayfalar uygulamasında veya bir MVC uygulamasında, filtreyi sayfa modeline veya eylem yöntemine uygulayın:
+Bir Razor Sayfalar uygulamasında veya BIR MVC uygulamasında, filtreyi sayfa modeline veya eylem yöntemine uygulayın:
 
 ```csharp
 // Set the limit to 256 MB
@@ -1391,7 +1378,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 
 <xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute>, tek sayfa veya eylem için [MaxRequestBodySize](xref:fundamentals/servers/kestrel#maximum-request-body-size) ayarlamak üzere kullanılır.
 
-Bir Razor sayfalar uygulamasında, filtresi içindeki `Startup.ConfigureServices`bir [kurala](xref:razor-pages/razor-pages-conventions) uygulayın:
+Bir Razor Sayfalar uygulamasında, filtresi içindeki bir [kurala](xref:razor-pages/razor-pages-conventions) uygulayın `Startup.ConfigureServices` :
 
 ```csharp
 services.AddMvc()
@@ -1409,7 +1396,7 @@ services.AddMvc()
     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 ```
 
-Bir Razor sayfalar uygulamasında veya bir MVC uygulamasında, filtreyi sayfa işleyici sınıfına veya eylem yöntemine uygulayın:
+Bir Razor Sayfalar uygulamasında veya BIR MVC uygulamasında, filtreyi sayfa işleyici sınıfına veya eylem yöntemine uygulayın:
 
 ```csharp
 // Handle requests up to 50 MB
@@ -1429,7 +1416,7 @@ Kestrel tarafından barındırılan uygulamalar için diğer Kestrel limitleri d
 
 ### <a name="iis-content-length-limit"></a>IIS içerik uzunluğu sınırı
 
-Varsayılan istek sınırı (`maxAllowedContentLength`), YAKLAŞıK 28.6 mb olan 30.000.000 bayttır. *Web. config* dosyasında sınırı özelleştirin:
+Varsayılan istek sınırı ( `maxAllowedContentLength` ), yaklaşık 28.6 MB olan 30.000.000 bayttır. *Web. config* dosyasında sınırı özelleştirin:
 
 ```xml
 <system.webServer>
@@ -1442,7 +1429,7 @@ Varsayılan istek sınırı (`maxAllowedContentLength`), YAKLAŞıK 28.6 mb olan
 </system.webServer>
 ```
 
-Bu ayar yalnızca IIS için geçerlidir. Kestrel üzerinde barındırırken davranış varsayılan olarak gerçekleşmez. Daha fazla bilgi için bkz. [Istek \<sınırları requestLimits>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/).
+Bu ayar yalnızca IIS için geçerlidir. Kestrel üzerinde barındırırken davranış varsayılan olarak gerçekleşmez. Daha fazla bilgi için bkz. [Istek sınırları \< requestLimits>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/).
 
 ASP.NET Core modülündeki sınırlamalar veya IIS Istek filtreleme modülünün varlığı, karşıya yüklemeleri 2 veya 4 GB ile sınırlandırabilir. Daha fazla bilgi için bkz. [2 GB 'tan büyük dosya karşıya yüklenemiyor (DotNet/AspNetCore #2711)](https://github.com/dotnet/AspNetCore/issues/2711).
 
@@ -1467,11 +1454,11 @@ Bir bağlantı hatası ve bir sıfırlama sunucu bağlantısı büyük olasılı
 
 ### <a name="null-reference-exception-with-iformfile"></a>Iformfile ile null başvuru özel durumu
 
-<xref:Microsoft.AspNetCore.Http.IFormFile> Denetleyici karşıya yüklenen dosyaları kullanarak kabul edilirse, ancak değer Ise `null`, HTML formunun bir `enctype` değerini belirtmesini onaylayın. `multipart/form-data` Bu öznitelik `<form>` öğesinde ayarlanmamışsa, dosya karşıya yükleme gerçekleşmez ve herhangi bir bağlı <xref:Microsoft.AspNetCore.Http.IFormFile> bağımsız değişken. `null` Ayrıca, [form verilerinde karşıya yükleme adlandırmasının uygulamanın adlandırmayla eşleştiğinden](#match-name-attribute-value-to-parameter-name-of-post-method)emin olun.
+Denetleyici karşıya yüklenen dosyaları kullanarak kabul edilirse, <xref:Microsoft.AspNetCore.Http.IFormFile> ancak değer ise `null` , HTML formunun bir değerini belirtmesini onaylayın `enctype` `multipart/form-data` . Bu öznitelik `<form>` öğesinde ayarlanmamışsa, dosya karşıya yükleme gerçekleşmez ve herhangi bir bağlı <xref:Microsoft.AspNetCore.Http.IFormFile> bağımsız değişken `null` . Ayrıca, [form verilerinde karşıya yükleme adlandırmasının uygulamanın adlandırmayla eşleştiğinden](#match-name-attribute-value-to-parameter-name-of-post-method)emin olun.
 
 ### <a name="stream-was-too-long"></a>Akış çok uzun
 
-Bu konudaki örnekler karşıya yüklenen dosyanın içeriğini <xref:System.IO.MemoryStream> tutmak için kullanır. Bir `MemoryStream` öğesinin boyut sınırı `int.MaxValue`. Uygulamanın dosya yükleme senaryosu, dosya içeriğinin 50 MB 'tan büyük olmasını gerektiriyorsa, karşıya yüklenen bir dosyanın içeriğini tutmak için tek başına `MemoryStream` olmayan alternatif bir yaklaşım kullanın.
+Bu konudaki örnekler <xref:System.IO.MemoryStream> karşıya yüklenen dosyanın içeriğini tutmak için kullanır. Bir öğesinin boyut sınırı `MemoryStream` `int.MaxValue` . Uygulamanın dosya yükleme senaryosu, dosya içeriğinin 50 MB 'tan büyük olmasını gerektiriyorsa, `MemoryStream` karşıya yüklenen bir dosyanın içeriğini tutmak için tek başına olmayan alternatif bir yaklaşım kullanın.
 
 ::: moniker-end
 

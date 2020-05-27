@@ -39,7 +39,7 @@ Aşağıdakileri ekleyin:
 * Uygulamanın proje dosyasına [Microsoft. AspNetCore. components. Authorization](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.Authorization/) için bir paket başvurusu.
 * `Microsoft.AspNetCore.Components.Authorization`Uygulamanın *_Imports. Razor* dosyasının ad alanı.
 
-Kimlik doğrulamasını işlemek için, yerleşik veya özel bir `AuthenticationStateProvider` hizmetin uygulanması aşağıdaki bölümlerde ele alınmıştır.
+Kimlik doğrulamasını işlemek için, yerleşik veya özel bir <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> hizmetin uygulanması aşağıdaki bölümlerde ele alınmıştır.
 
 Uygulama ve yapılandırma oluşturma hakkında daha fazla bilgi için bkz <xref:security/blazor/webassembly/index> ..
 
@@ -51,13 +51,13 @@ Uygulama ve yapılandırma oluşturma hakkında daha fazla bilgi için bkz <xref
 
 ## <a name="authenticationstateprovider-service"></a>AuthenticationStateProvider hizmeti
 
-Yerleşik `AuthenticationStateProvider` hizmet ASP.NET Core ' den kimlik doğrulama durumu verileri alır `HttpContext.User` . Kimlik doğrulama durumu, mevcut ASP.NET Core kimlik doğrulama mekanizmalarıyla tümleştirilir.
+Yerleşik <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> hizmet ASP.NET Core ' den kimlik doğrulama durumu verileri alır `HttpContext.User` . Kimlik doğrulama durumu, mevcut ASP.NET Core kimlik doğrulama mekanizmalarıyla tümleştirilir.
 
-`AuthenticationStateProvider`, `AuthorizeView` bileşen ve `CascadingAuthenticationState` bileşen tarafından kimlik doğrulama durumunu almak için kullanılan temel hizmettir.
+<xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider>, <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> bileşen ve <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState> bileşen tarafından kimlik doğrulama durumunu almak için kullanılan temel hizmettir.
 
-Genellikle doğrudan kullanmazsınız `AuthenticationStateProvider` . Bu makalenin ilerleyen kısımlarında açıklanan [Authorizeview bileşenini](#authorizeview-component) veya [görev \< authenticationstate>](#expose-the-authentication-state-as-a-cascading-parameter) yaklaşımlarını kullanın. Doğrudan kullanmanın ana dezavantajı, `AuthenticationStateProvider` temeldeki kimlik doğrulama durumu verileri değişirse bileşen tarafından otomatik olarak bildirilmemektedir.
+Genellikle doğrudan kullanmazsınız <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> . Bu makalenin ilerleyen kısımlarında açıklanan [Authorizeview bileşenini](#authorizeview-component) veya [görev \< authenticationstate>](#expose-the-authentication-state-as-a-cascading-parameter) yaklaşımlarını kullanın. Doğrudan kullanmanın ana dezavantajı, <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> temeldeki kimlik doğrulama durumu verileri değişirse bileşen tarafından otomatik olarak bildirilmemektedir.
 
-`AuthenticationStateProvider`Hizmet, <xref:System.Security.Claims.ClaimsPrincipal> Aşağıdaki örnekte gösterildiği gibi geçerli kullanıcının verilerini sağlayabilir:
+<xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider>Hizmet, <xref:System.Security.Claims.ClaimsPrincipal> Aşağıdaki örnekte gösterildiği gibi geçerli kullanıcının verilerini sağlayabilir:
 
 ```razor
 @page "/"
@@ -114,7 +114,7 @@ Bağımlılık ekleme (dı) ve hizmetleri hakkında daha fazla bilgi için bkz <
 
 ## <a name="implement-a-custom-authenticationstateprovider"></a>Özel bir AuthenticationStateProvider uygulama
 
-Uygulama için özel bir sağlayıcı gerekiyorsa, uygulayın `AuthenticationStateProvider` ve geçersiz kılın `GetAuthenticationStateAsync` :
+Uygulama için özel bir sağlayıcı gerekiyorsa, uygulayın <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> ve geçersiz kılın `GetAuthenticationStateAsync` :
 
 ```csharp
 using System.Security.Claims;
@@ -161,7 +161,7 @@ services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 
 ## <a name="expose-the-authentication-state-as-a-cascading-parameter"></a>Kimlik doğrulama durumunu basamaklı bir parametre olarak kullanıma sunma
 
-Kullanıcı tarafından tetiklenen bir eylem gerçekleştirilirken gibi yordamsal mantık için kimlik doğrulama durumu verileri gerekliyse, türü geçişli bir parametre tanımlayarak kimlik doğrulama durumu verilerini alın `Task<AuthenticationState>` :
+Kullanıcı tarafından tetiklenen bir eylem gerçekleştirilirken gibi yordamsal mantık için kimlik doğrulama durumu verileri gerekliyse, türü geçişli bir parametre tanımlayarak kimlik doğrulama durumu verilerini alın `Task<` <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState> `>` :
 
 ```razor
 @page "/"
@@ -195,7 +195,7 @@ Kullanıcı tarafından tetiklenen bir eylem gerçekleştirilirken gibi yordamsa
 
 `user.Identity.IsAuthenticated`İse `true` , talepler, değerlendirilen roller içinde numaralandırılabilir ve üyelenebilir.
 
-`Task<AuthenticationState>` `AuthorizeRouteView` Bileşen içindeki ve bileşenlerini kullanarak basamaklı parametreyi ayarlayın `CascadingAuthenticationState` `App` (*app. Razor*):
+`Task<` <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState> `>` <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView> Bileşen içindeki ve bileşenlerini kullanarak basamaklı parametreyi ayarlayın <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState> `App` (*app. Razor*):
 
 ```razor
 <Router AppAssembly="@typeof(Program).Assembly">
@@ -236,9 +236,9 @@ Bu kavramların her biri, ASP.NET Core MVC veya Pages uygulamasındaki ile aynı
 
 ## <a name="authorizeview-component"></a>AuthorizeView bileşeni
 
-`AuthorizeView`Bileşen Kullanıcı tarafından görme yetkisine sahip olup olmadığına bağlı olarak Kullanıcı arabirimini seçmeli olarak görüntüler. Bu yaklaşım yalnızca Kullanıcı için veri *görüntülemesi* gerektiğinde ve Kullanıcı kimliğini yordamsal mantığda kullanmanıza gerek olmadığında yararlıdır.
+<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView>Bileşen Kullanıcı tarafından görme yetkisine sahip olup olmadığına bağlı olarak Kullanıcı arabirimini seçmeli olarak görüntüler. Bu yaklaşım yalnızca Kullanıcı için veri *görüntülemesi* gerektiğinde ve Kullanıcı kimliğini yordamsal mantığda kullanmanıza gerek olmadığında yararlıdır.
 
-Bileşeni, `context` `AuthenticationState` oturum açmış kullanıcıyla ilgili bilgilere erişmek için kullanabileceğiniz türünde bir değişken kullanıma sunar:
+Bileşeni, `context` <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState> oturum açmış kullanıcıyla ilgili bilgilere erişmek için kullanabileceğiniz türünde bir değişken kullanıma sunar:
 
 ```razor
 <AuthorizeView>
@@ -262,22 +262,22 @@ Kullanıcının kimliği doğrulanmadıysa, görüntülenmek üzere farklı içe
 </AuthorizeView>
 ```
 
-`AuthorizeView`Bileşen, `NavMenu` bir liste öğesi () göstermek için bileşende (*Shared/navmenu. Razor*) kullanılabilir `<li>...</li>` `NavLink` , ancak bu yaklaşımın yalnızca liste öğesini işlenen çıktıdan kaldırdığını unutmayın. Kullanıcının bileşene gitmesini engellemez.
+<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView>Bileşen, `NavMenu` bir gezinti bağlantısı bileşeni () için bir liste öğesi () göstermek üzere bileşende (*paylaşılan/navmenu. Razor*) kullanılabilir `<li>...</li>` [NavLink component](xref:blazor/routing#navlink-component) <xref:Microsoft.AspNetCore.Components.Routing.NavLink> , ancak bu yaklaşımın yalnızca liste öğesini işlenen çıktıdan kaldırdığını unutmayın. Kullanıcının bileşene gitmesini engellemez.
 
 `<Authorized>`Ve `<NotAuthorized>` etiketlerinin içeriği, diğer etkileşimli bileşenler gibi rastgele öğeler içerebilir.
 
 Kullanıcı arabirimi seçeneklerini veya erişimini denetleyen roller veya ilkeler gibi yetkilendirme koşulları, [Yetkilendirme](#authorization) bölümünde ele alınmıştır.
 
-Yetkilendirme koşulları belirtilmemişse, `AuthorizeView` varsayılan bir ilke kullanır ve şu şekilde davranır:
+Yetkilendirme koşulları belirtilmemişse, <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> varsayılan bir ilke kullanır ve şu şekilde davranır:
 
 * Kimliği doğrulanmış (oturum açmış) kullanıcılar yetkili olarak.
 * Kimliği doğrulanmamış (oturumu açılmış) kullanıcılar yetkilendirilmemiş.
 
 ### <a name="role-based-and-policy-based-authorization"></a>Rol tabanlı ve ilke tabanlı yetkilendirme
 
-`AuthorizeView`Bileşen *rol tabanlı* veya *ilke tabanlı* yetkilendirmeyi destekler.
+<xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView>Bileşen *rol tabanlı* veya *ilke tabanlı* yetkilendirmeyi destekler.
 
-Rol tabanlı yetkilendirme için `Roles` parametresini kullanın:
+Rol tabanlı yetkilendirme için <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Roles> parametresini kullanın:
 
 ```razor
 <AuthorizeView Roles="admin, superuser">
@@ -287,7 +287,7 @@ Rol tabanlı yetkilendirme için `Roles` parametresini kullanın:
 
 Daha fazla bilgi için bkz. <xref:security/authorization/roles>.
 
-İlke tabanlı yetkilendirme için `Policy` parametresini kullanın:
+İlke tabanlı yetkilendirme için <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Policy> parametresini kullanın:
 
 ```razor
 <AuthorizeView Policy="content-editor">
@@ -299,13 +299,13 @@ Talep tabanlı yetkilendirme, ilke tabanlı yetkilendirme için özel bir durumd
 
 Bu API 'Ler, Blazor sunucuda ya da Blazor webassembly uygulamalarında kullanılabilir.
 
-Ne `Roles` de `Policy` belirtilmemişse, `AuthorizeView` varsayılan ilkeyi kullanır.
+Ne <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Roles> de <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Policy> belirtilmemişse, <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> varsayılan ilkeyi kullanır.
 
 ### <a name="content-displayed-during-asynchronous-authentication"></a>Zaman uyumsuz kimlik doğrulaması sırasında görünen içerik
 
 Blazorkimlik doğrulaması durumunun *zaman uyumsuz*olarak belirlenmesine izin verir. Bu yaklaşım için birincil senaryo, Blazor kimlik doğrulaması için bir dış uç noktaya istek yapan webassembly uygulamalarında bulunur.
 
-Kimlik doğrulama devam ederken, `AuthorizeView` Varsayılan olarak içerik görüntülemez. Kimlik doğrulaması sırasında içeriği göstermek için `<Authorizing>` öğesini kullanın:
+Kimlik doğrulama devam ederken, <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> Varsayılan olarak içerik görüntülemez. Kimlik doğrulaması sırasında içeriği göstermek için `<Authorizing>` öğesini kullanın:
 
 ```razor
 <AuthorizeView>
@@ -320,11 +320,11 @@ Kimlik doğrulama devam ederken, `AuthorizeView` Varsayılan olarak içerik gör
 </AuthorizeView>
 ```
 
-Bu yaklaşım normalde sunucu uygulamaları için geçerli değildir Blazor . BlazorSunucu uygulamaları, durum belirlenir oluşturmaz kimlik doğrulama durumunu bilir. `Authorizing`içerik bir Blazor sunucu uygulamasının `AuthorizeView` bileşeninde bulunabilir, ancak içerik hiçbir şekilde gösterilmez.
+Bu yaklaşım normalde sunucu uygulamaları için geçerli değildir Blazor . BlazorSunucu uygulamaları, durum belirlenir oluşturmaz kimlik doğrulama durumunu bilir. <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.Authorizing>içerik bir Blazor sunucu uygulamasının <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> bileşeninde bulunabilir, ancak içerik hiçbir şekilde gösterilmez.
 
 ## <a name="authorize-attribute"></a>[Yetkilendir] özniteliği
 
-`[Authorize]`Özniteliği, Razor bileşenlerinde kullanılabilir:
+[`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)Özniteliği, Razor bileşenlerinde kullanılabilir:
 
 ```razor
 @page "/"
@@ -334,9 +334,9 @@ You can only see this if you're signed in.
 ```
 
 > [!IMPORTANT]
-> Yalnızca `[Authorize]` `@page` yönlendirici üzerinden ulaşılan bileşenlerde kullanın Blazor . Yetkilendirme yalnızca, bir sayfada işlenen alt bileşenler için *değil* , yönlendirmenin bir yönü olarak gerçekleştirilir. Bir sayfa içindeki belirli parçaların görüntülenmesini yetkilendirmek için, `AuthorizeView` bunun yerine kullanın.
+> Yalnızca [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) `@page` yönlendirici üzerinden ulaşılan bileşenlerde kullanın Blazor . Yetkilendirme yalnızca, bir sayfada işlenen alt bileşenler için *değil* , yönlendirmenin bir yönü olarak gerçekleştirilir. Bir sayfa içindeki belirli parçaların görüntülenmesini yetkilendirmek için, <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> bunun yerine kullanın.
 
-`[Authorize]`Özniteliği rol tabanlı veya ilke tabanlı yetkilendirmeyi de destekler. Rol tabanlı yetkilendirme için `Roles` parametresini kullanın:
+[`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)Özniteliği rol tabanlı veya ilke tabanlı yetkilendirmeyi de destekler. Rol tabanlı yetkilendirme için <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute.Roles> parametresini kullanın:
 
 ```razor
 @page "/"
@@ -345,7 +345,7 @@ You can only see this if you're signed in.
 <p>You can only see this if you're in the 'admin' or 'superuser' role.</p>
 ```
 
-İlke tabanlı yetkilendirme için `Policy` parametresini kullanın:
+İlke tabanlı yetkilendirme için <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute.Policy> parametresini kullanın:
 
 ```razor
 @page "/"
@@ -354,17 +354,17 @@ You can only see this if you're signed in.
 <p>You can only see this if you satisfy the 'content-editor' policy.</p>
 ```
 
-`Roles`Ya da `Policy` belirtilmemişse `[Authorize]` varsayılan ilkeyi kullanır, varsayılan olarak şu şekilde değerlendirilir:
+<xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute.Roles>Ya da <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute.Policy> belirtilmemişse [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) varsayılan ilkeyi kullanır, varsayılan olarak şu şekilde değerlendirilir:
 
 * Kimliği doğrulanmış (oturum açmış) kullanıcılar yetkili olarak.
 * Kimliği doğrulanmamış (oturumu açılmış) kullanıcılar yetkilendirilmemiş.
 
 ## <a name="customize-unauthorized-content-with-the-router-component"></a>Yönlendirici bileşeniyle yetkisiz içeriği özelleştirme
 
-Bileşen `Router` ile birlikte bileşeni, uygulamanın şu `AuthorizeRouteView` durumlarda özel içerik belirtmesini sağlar:
+Bileşen <xref:Microsoft.AspNetCore.Components.Routing.Router> ile birlikte bileşeni, uygulamanın şu <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView> durumlarda özel içerik belirtmesini sağlar:
 
 * İçerik bulunamadı.
-* Kullanıcı, `[Authorize]` bileşene uygulanan bir koşulla başarısız olur. Özniteliği, `[Authorize]` [ `[Authorize]` öznitelik](#authorize-attribute) bölümünde ele alınmıştır.
+* Kullanıcı, [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) bileşene uygulanan bir koşulla başarısız olur. Özniteliği, [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) [ `[Authorize]` öznitelik](#authorize-attribute) bölümünde ele alınmıştır.
 * Zaman uyumsuz kimlik doğrulama devam ediyor.
 
 Varsayılan Blazor sunucu projesi şablonunda, `App` bileşen (*app. Razor*) özel içerik ayarlamayı gösterir:
@@ -397,7 +397,7 @@ Varsayılan Blazor sunucu projesi şablonunda, `App` bileşen (*app. Razor*) öz
 
 `<NotFound>`, `<NotAuthorized>` Ve etiketlerinin içeriği, `<Authorizing>` diğer etkileşimli bileşenler gibi rastgele öğeler içerebilir.
 
-`<NotAuthorized>`Öğesi belirtilmemişse, `AuthorizeRouteView` aşağıdaki geri dönüş iletisini kullanır:
+`<NotAuthorized>`Öğesi belirtilmemişse, <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView> aşağıdaki geri dönüş iletisini kullanır:
 
 ```html
 Not authorized.
@@ -405,11 +405,11 @@ Not authorized.
 
 ## <a name="notification-about-authentication-state-changes"></a>Kimlik doğrulama durumu değişiklikleri hakkında bildirim
 
-Uygulama, temeldeki kimlik doğrulama durumu verilerinin değiştiğini belirlerse (örneğin, Kullanıcı oturumu kapattığından veya başka bir kullanıcı rollerini değiştirdiği için), [özel bir AuthenticationStateProvider](#implement-a-custom-authenticationstateprovider) isteğe bağlı olarak `NotifyAuthenticationStateChanged` `AuthenticationStateProvider` temel sınıfta yöntemi çağırabilir. Bu, yeni verileri kullanarak yeniden kimlik doğrulama durumu verilerini (örneğin,) tüketicilere bildirir `AuthorizeView` .
+Uygulama, temeldeki kimlik doğrulama durumu verilerinin değiştiğini belirlerse (örneğin, Kullanıcı oturumu kapattığından veya başka bir kullanıcı rollerini değiştirdiği için), [özel bir AuthenticationStateProvider](#implement-a-custom-authenticationstateprovider) isteğe bağlı olarak <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider.NotifyAuthenticationStateChanged%2A> <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> temel sınıfta yöntemi çağırabilir. Bu, yeni verileri kullanarak yeniden kimlik doğrulama durumu verilerini (örneğin,) tüketicilere bildirir <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> .
 
 ## <a name="procedural-logic"></a>Yordamsal mantık
 
-Uygulama, yordamsal mantığın bir parçası olarak yetkilendirme kurallarını denetmek için gerekliyse, `Task<AuthenticationState>` Kullanıcı tarafından elde etmek için türünde basamaklı bir parametre kullanın <xref:System.Security.Claims.ClaimsPrincipal> . `Task<AuthenticationState>``IAuthorizationService`, ilkeleri değerlendirmek için gibi diğer hizmetlerle birleştirilebilir.
+Uygulama, yordamsal mantığın bir parçası olarak yetkilendirme kurallarını denetmek için gerekliyse, `Task<` <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState> `>` Kullanıcı tarafından elde etmek için türünde basamaklı bir parametre kullanın <xref:System.Security.Claims.ClaimsPrincipal> . `Task<`<xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState>`>``IAuthorizationService`, ilkeleri değerlendirmek için gibi diğer hizmetlerle birleştirilebilir.
 
 ```razor
 @using Microsoft.AspNetCore.Authorization
@@ -446,7 +446,7 @@ Uygulama, yordamsal mantığın bir parçası olarak yetkilendirme kurallarını
 ```
 
 > [!NOTE]
-> BlazorWebassembly uygulama bileşeninde, `Microsoft.AspNetCore.Authorization` ve `Microsoft.AspNetCore.Components.Authorization` ad alanlarını ekleyin:
+> BlazorWebassembly uygulama bileşeninde, <xref:Microsoft.AspNetCore.Authorization> ve <xref:Microsoft.AspNetCore.Components.Authorization> ad alanlarını ekleyin:
 >
 > ```razor
 > @using Microsoft.AspNetCore.Authorization
@@ -481,7 +481,7 @@ Projenin Blazor kimlik doğrulaması etkin bir sunucu şablonu kullanılarak olu
 </CascadingAuthenticationState>
 ```
 
-, `CascadingAuthenticationState` `Task<AuthenticationState>` Temel alınan dı hizmetinden aldığı geçişli parametreyi sağlar `AuthenticationStateProvider` .
+, <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState> `Task<` <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState> `>` Temel alınan dı hizmetinden aldığı geçişli parametreyi sağlar <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> .
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

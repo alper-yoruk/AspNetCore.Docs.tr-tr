@@ -1,15 +1,15 @@
-`FetchData` Bileşen şunları gösterir:
+`FetchData`Bileşen şunları gösterir:
 
 * Erişim belirteci sağlayın.
 * *Sunucu* uygulamasında korumalı bir kaynak API 'si çağırmak için erişim belirtecini kullanın.
 
-`@attribute [Authorize]` Yönerge, kullanıcının bu bileşeni ziyaret etmek için yetkilendirilmiş olması gereken Blazor WebAssembly yetkilendirme sistemine işaret ediyor. *İstemci* uygulamasındaki özniteliğin varlığı, sunucudaki API 'nin doğru kimlik bilgileri olmadan çağrılmasına engel olmaz. *Sunucu* uygulamasının aynı zamanda uygun uç `[Authorize]` noktalar üzerinde doğru korunması için kullanması gerekir.
+[`@attribute [Authorize]`](xref:mvc/views/razor#attribute)Yönerge, kullanıcının bu bileşeni ziyaret etmek için yetkilendirilmiş olması gereken Blazor WebAssembly yetkilendirme sistemine işaret ediyor. *İstemci* uygulamasındaki özniteliğin varlığı, sunucudaki API 'nin doğru kimlik bilgileri olmadan çağrılmasına engel olmaz. *Sunucu* uygulamasının aynı zamanda `[Authorize]` uygun uç noktalar üzerinde doğru korunması için kullanması gerekir.
 
-`IAccessTokenProvider.RequestAccessToken();`API 'yi çağırmak için isteğe eklenebilen bir erişim belirteci isteme işlemini gerçekleştirir. Belirteç önbelleğe alınmışsa veya hizmet Kullanıcı etkileşimi olmadan yeni bir erişim belirteci sağlayabiliyor ise, belirteç isteği başarılı olur. Aksi takdirde, belirteç isteği bir `AccessTokenNotAvailableException` `try-catch` bildirimde yakalanabilecek bir hata ile başarısız olur.
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider.RequestAccessToken%2A?displayProperty=nameWithType>API 'yi çağırmak için isteğe eklenebilen bir erişim belirteci isteme işlemini gerçekleştirir. Belirteç önbelleğe alınmışsa veya hizmet Kullanıcı etkileşimi olmadan yeni bir erişim belirteci sağlayabiliyor ise, belirteç isteği başarılı olur. Aksi halde, belirteç isteği bir <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) ifadesinde yakalanan bir ile başarısız olur.
 
-İsteğe dahil edilecek gerçek belirteci almak için, uygulamanın çağırarak `tokenResult.TryGetToken(out var token)`isteğin başarılı olduğunu denetlemesi gerekir. 
+İsteğe dahil edilecek gerçek belirteci almak için, uygulamanın [Tokenresult. TryGetToken (out var belirtecini)](xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.TryGetToken%2A)çağırarak isteğin başarılı olduğunu denetlemesi gerekir.
 
-İstek başarılı olduysa, belirteç değişkeni erişim belirteciyle doldurulur. Belirtecin `Value` özelliği, `Authorization` istek üstbilgisine dahil etmek için sabit dizeyi gösterir.
+İstek başarılı olduysa, belirteç değişkeni erişim belirteciyle doldurulur. <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessToken.Value?displayProperty=nameWithType>Belirtecin özelliği, istek üstbilgisine dahil etmek için sabit dizeyi gösterir `Authorization` .
 
 Belirteç Kullanıcı etkileşimi olmadan sağlanamadığından istek başarısız olduysa, belirteç sonucu bir yeniden yönlendirme URL 'SI içerir. Bu URL 'ye gidildiğinde, Kullanıcı oturum açma sayfasına geçer ve başarılı bir kimlik doğrulamasından sonra geçerli sayfaya geri dönün.
 

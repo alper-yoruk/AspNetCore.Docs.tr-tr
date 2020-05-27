@@ -1,32 +1,20 @@
 ---
-title: ASP.NET Core Blazor gelişmiş senaryolar
-author: guardrex
-description: "' Deki Blazorgelişmiş senaryolar, El Ile RenderTreeBuilder mantığını bir uygulamaya nasıl dahil leyeceğinizi öğrenin."
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 02/18/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/advanced-scenarios
-ms.openlocfilehash: b47e7b1d7ff148bb5a8d299d3d2089999f017863
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967343"
+Başlık: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığını bir uygulamaya nasıl dahil etmek de dahildir. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
-# <a name="aspnet-core-blazor-advanced-scenarios"></a>ASP.NET Core Blazor gelişmiş senaryolar
+# <a name="aspnet-core-blazor-advanced-scenarios"></a>ASP.NET Core Blazor Gelişmiş senaryolar
 
 , [Luke Latham](https://github.com/guardrex) ve [Daniel Roth](https://github.com/danroth27) tarafından
 
-## <a name="blazor-server-circuit-handler"></a>Blazor sunucusu devre işleyicisi
+## <a name="blazor-server-circuit-handler"></a>BlazorSunucu devre işleyicisi
 
-Blazor sunucusu kodun bir Kullanıcı devresi durumunda değişiklikler üzerinde kod çalıştırmaya izin veren bir *devhandler*tanımlamasına olanak tanır. Devre işleyici, uygulamanın hizmet kapsayıcısındaki sınıfından türeterek ve kayıt işleminden `CircuitHandler` uygulanır. Aşağıdaki bir devre işleyicinin örneği açık SignalR bağlantılarını izler:
+BlazorSunucu, kodun bir Kullanıcı devresi durumunda değişiklikler üzerinde kod çalıştırmaya izin veren bir *devhandler*tanımlamasına olanak tanır. Devre işleyici, `CircuitHandler` uygulamanın hizmet kapsayıcısındaki sınıfından türeterek ve kayıt işleminden uygulanır. Bir devre işleyicinin aşağıdaki örneği açık SignalR bağlantıları izler:
 
 ```csharp
 using System.Collections.Generic;
@@ -58,7 +46,7 @@ public class TrackingCircuitHandler : CircuitHandler
 }
 ```
 
-Devre işleyicileri DI kullanılarak kaydedilir. Kapsamlı örnekler, bir devrenin örneği başına oluşturulur. `TrackingCircuitHandler` Önceki örnekte kullanılarak, tüm devrelerin durumu izlenmelidir çünkü bir tek hizmet oluşturulur:
+Devre işleyicileri DI kullanılarak kaydedilir. Kapsamlı örnekler, bir devrenin örneği başına oluşturulur. `TrackingCircuitHandler`Önceki örnekte kullanılarak, tüm devrelerin durumu izlenmelidir çünkü bir tek hizmet oluşturulur:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -68,16 +56,16 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Özel bir devre işleyicisindeki Yöntemler işlenmeyen bir özel durum oluşturuyorsam, özel durum Blazor Server devresi için önemli olur. Bir işleyicinin kodundaki veya yöntemleri çağrılan özel durumlara tolerans sağlamak için kodu bir veya daha fazla [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) deyiminde hata işleme ve günlüğe kaydetme ile sarın.
+Özel bir devre işleyicinin yöntemleri işlenmeyen bir özel durum oluşturuyorsam, özel durum sunucu devresi için önemli olur Blazor . Bir işleyicinin kodundaki veya yöntemleri çağrılan özel durumlara tolerans sağlamak için kodu bir veya daha fazla [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) deyiminde hata işleme ve günlüğe kaydetme ile sarın.
 
-Bir kullanıcının bağlantısı kesilmediği ve Framework devre durumunu temizlemede bir devre dışı bırakıldığında, çerçeve devre dışı bırakıldı. Kapsamı elden atılırken, uygulayan <xref:System.IDisposable?displayProperty=fullName>hiçbir devre kapsamlı dı hizmeti yok. Herhangi bir DI hizmeti, elden çıkarma sırasında işlenmeyen bir özel durum oluşturursa, çerçeve özel durumu günlüğe kaydeder.
+Bir kullanıcının bağlantısı kesilmediği ve Framework devre durumunu temizlemede bir devre dışı bırakıldığında, çerçeve devre dışı bırakıldı. Kapsamı elden atılırken, uygulayan hiçbir devre kapsamlı dı hizmeti yok <xref:System.IDisposable?displayProperty=fullName> . Herhangi bir DI hizmeti, elden çıkarma sırasında işlenmeyen bir özel durum oluşturursa, çerçeve özel durumu günlüğe kaydeder.
 
 ## <a name="manual-rendertreebuilder-logic"></a>El ile RenderTreeBuilder mantığı
 
-`Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder`bileşenleri ve öğeleri düzenlemek için yöntemler sağlar. bu sayede bileşenleri C# kodunda el ile oluşturma da dahil olmak üzere.
+<xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder>bileşenleri ve öğeleri düzenlemek için yöntemler sağlar. bu sayede bileşenleri C# kodunda el ile oluşturma da dahil olmak üzere.
 
 > [!NOTE]
-> Bileşenlerini oluşturmak `RenderTreeBuilder` için kullanımı gelişmiş bir senaryodur. Hatalı biçimlendirilmiş bir bileşen (örneğin, kapatılmamış bir biçimlendirme etiketi) tanımsız davranışa neden olabilir.
+> <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder>Bileşenlerini oluşturmak için kullanımı gelişmiş bir senaryodur. Hatalı biçimlendirilmiş bir bileşen (örneğin, kapatılmamış bir biçimlendirme etiketi) tanımsız davranışa neden olabilir.
 
 Aşağıdaki `PetDetails` bileşeni, başka bir bileşende el ile yerleşik olarak kullanılabilecek şekilde göz önünde bulundurun:
 
@@ -93,7 +81,7 @@ Aşağıdaki `PetDetails` bileşeni, başka bir bileşende el ile yerleşik olar
 }
 ```
 
-Aşağıdaki örnekte, `CreateComponent` yöntemindeki döngü üç `PetDetails` bileşen oluşturur. Bileşenleri ( `RenderTreeBuilder` `OpenComponent` ve `AddAttribute`) oluşturmak için yöntemler çağrılırken, dizi numaraları kaynak kodu satır numaralarıdır. Blazor fark algoritması, ayrı çağrı etkinleştirmeleri değil ayrı kod satırlarına karşılık gelen sıra numaralarına dayanır. Yöntemler içeren `RenderTreeBuilder` bir bileşen oluştururken, dizi numaralarına yönelik bağımsız değişkenleri kod olarak kodlayın. **Sıra numarasını oluşturmak için bir hesaplama veya sayaç kullanmak kötü performansa neden olabilir.** Daha fazla bilgi için bkz. [kod satırı numaralarıyla Ilgili sıra numaraları ve yürütme sırası çalışmıyor](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order) bölümü.
+Aşağıdaki örnekte, `CreateComponent` yöntemindeki döngü üç `PetDetails` bileşen oluşturur. <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder>Bileşenleri (ve) oluşturmak için yöntemler çağrılırken `OpenComponent` `AddAttribute` , dizi numaraları kaynak kodu satır numaralarıdır. BlazorFark algoritması, ayrı çağrı etkinleştirmeleri değil ayrı kod satırlarına karşılık gelen sıra numaralarına dayanır. Yöntemler içeren bir bileşen oluştururken <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> , dizi numaralarına yönelik bağımsız değişkenleri kod olarak kodlayın. **Sıra numarasını oluşturmak için bir hesaplama veya sayaç kullanmak kötü performansa neden olabilir.** Daha fazla bilgi için bkz. [kod satırı numaralarıyla Ilgili sıra numaraları ve yürütme sırası çalışmıyor](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order) bölümü.
 
 `BuiltContent`bileşeninde
 
@@ -129,15 +117,15 @@ Aşağıdaki örnekte, `CreateComponent` yöntemindeki döngü üç `PetDetails`
 ```
 
 > [!WARNING]
-> İçindeki `Microsoft.AspNetCore.Components.RenderTree` türler, işleme işlemlerinin *sonuçlarının* işlenmesine izin verir. Bunlar, Blazor Framework uygulamasının iç ayrıntılardır. Bu türlerin *dengesizleşilmesi* ve gelecekteki sürümlerde değişikliğe tabi olması gerekir.
+> İçindeki türler, <xref:Microsoft.AspNetCore.Components.RenderTree> işleme işlemlerinin *sonuçlarının* işlenmesine izin verir. Bunlar, çerçeve uygulamasının iç ayrıntılardır Blazor . Bu türlerin *dengesizleşilmesi* ve gelecekteki sürümlerde değişikliğe tabi olması gerekir.
 
 ### <a name="sequence-numbers-relate-to-code-line-numbers-and-not-execution-order"></a>Sıra numaraları, kod satırı numaralarıyla ilgilidir ve yürütme sırası değildir
 
-Razor bileşen dosyaları (*. Razor*) her zaman derlenir. Derleme adımı, çalışma zamanında uygulama performansını geliştiren bilgileri eklemek için kullanılabilir olduğundan, kod yorumlanması üzerinde olası bir avantajdır.
+Razorbileşen dosyaları (*. Razor*) her zaman derlenir. Derleme adımı, çalışma zamanında uygulama performansını geliştiren bilgileri eklemek için kullanılabilir olduğundan, kod yorumlanması üzerinde olası bir avantajdır.
 
 Bu geliştirmelerin önemli bir örneği, *sıra numaraları*içerir. Sıra numaraları, hangi çıkışların ayrı ve sıralı kod satırlarından geldiğini çalışma zamanına işaret ediyor. Çalışma zamanı, doğrusal bir zamanda, genel ağaç farkı algoritması için genellikle mümkün olandan çok daha hızlı olan etkili ağaç SLA 'ları oluşturmak için bu bilgileri kullanır.
 
-Aşağıdaki Razor bileşeni (*. Razor*) dosyasını göz önünde bulundurun:
+Aşağıdaki Razor bileşen (*. Razor*) dosyasını göz önünde bulundurun:
 
 ```razor
 @if (someFlag)
@@ -159,20 +147,78 @@ if (someFlag)
 builder.AddContent(1, "Second");
 ```
 
-Kod ilk kez `someFlag` `true`çalıştırıldığında, Oluşturucu şunları alır:
+Kod ilk kez çalıştırıldığında, `someFlag` `true` Oluşturucu şunları alır:
 
 | Sequence | Tür      | Veriler   |
-| :------: | --------- | :----: |
-| 0        | Metin düğümü | İlk  |
-| 1        | Metin düğümü | Saniye |
+| :---
+Başlık: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığını bir uygulamaya nasıl dahil etmek de dahildir. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
 
-Olduğunu `someFlag` `false`düşünün ve biçimlendirme yeniden işlenir. Bu kez, Oluşturucu şunları alır:
+---: | ---title: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığının bir uygulamaya nasıl dahil edilmesi de dahildir. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığını bir uygulamaya nasıl dahil etmek de dahildir. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+----- | :----: | | 0 | Metin düğümü | İlk | | 1 | Metin düğümü | İkinci |
+
+Olduğunu düşünün `someFlag` `false` ve biçimlendirme yeniden işlenir. Bu kez, Oluşturucu şunları alır:
 
 | Sequence | Tür       | Veriler   |
-| :------: | ---------- | :----: |
-| 1        | Metin düğümü  | Saniye |
+| :---
+Başlık: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığını bir uygulamaya nasıl dahil etmek de dahildir. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
 
-Çalışma zamanı bir fark gerçekleştirdiğinde, sıradaki `0` öğenin kaldırıldığını görür, bu nedenle aşağıdaki önemsiz *düzenleme betiğini*oluşturur:
+---: | ---title: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığının bir uygulamaya nasıl dahil edilmesi de dahildir. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığını bir uygulamaya nasıl dahil etmek de dahildir. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığını bir uygulamaya nasıl dahil etmek de dahildir. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+----- | :----: | | 1 | Metin düğümü | İkinci |
+
+Çalışma zamanı bir fark gerçekleştirdiğinde, sıradaki öğenin `0` kaldırıldığını görür, bu nedenle aşağıdaki önemsiz *düzenleme betiğini*oluşturur:
 
 * İlk metin düğümünü kaldırın.
 
@@ -194,19 +240,76 @@ builder.AddContent(seq++, "Second");
 Şimdi ilk çıktı:
 
 | Sequence | Tür      | Veriler   |
-| :------: | --------- | :----: |
-| 0        | Metin düğümü | İlk  |
-| 1        | Metin düğümü | Saniye |
+| :---
+Başlık: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığını bir uygulamaya nasıl dahil etmek de dahildir. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
 
-Bu sonuç önceki bir durum ile aynıdır, bu nedenle olumsuz bir sorun yoktur. `someFlag``false` ikinci işleme ve çıktı:
+---: | ---title: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığının bir uygulamaya nasıl dahil edilmesi de dahildir. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığını bir uygulamaya nasıl dahil etmek de dahildir. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+----- | :----: | | 0 | Metin düğümü | İlk | | 1 | Metin düğümü | İkinci |
+
+Bu sonuç önceki bir durum ile aynıdır, bu nedenle olumsuz bir sorun yoktur. `someFlag``false`ikinci işleme ve çıktı:
 
 | Sequence | Tür      | Veriler   |
-| :------: | --------- | ------ |
-| 0        | Metin düğümü | Saniye |
+| :---
+Başlık: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığını bir uygulamaya nasıl dahil etmek de dahildir. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+---: | ---title: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığının bir uygulamaya nasıl dahil edilmesi de dahildir. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığını bir uygulamaya nasıl dahil etmek de dahildir. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+----- | ---title: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığının bir uygulamaya nasıl dahil edilmesi de dahildir. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+--- | | 0 | Metin düğümü | İkinci |
 
 Bu kez, fark algoritması *iki* değişikliğin oluştuğunu görür ve algoritma aşağıdaki düzenleme betiğini üretir:
 
-* İlk metin düğümünün değerini olarak `Second`değiştirin.
+* İlk metin düğümünün değerini olarak değiştirin `Second` .
 * İkinci metin düğümünü kaldırın.
 
 Sıra numaralarının oluşturulması, `if/else` dal ve döngülerin orijinal kodda bulunduğu yer hakkındaki tüm yararlı bilgileri kaybetti. Bu, daha önce olduğu gibi bir fark **ile iki kez** sonuçlanır.
@@ -217,20 +320,20 @@ Bu, önemsiz bir örnektir. Karmaşık ve derin iç içe yapıları ve özellikl
 
 * Sıra numaraları dinamik olarak oluşturulursa uygulama performansı de vardır.
 * Altyapı, derleme zamanında yakalanmadığı takdirde gerekli bilgiler bulunmadığından, çalışma zamanında kendi sıra numaralarını otomatik olarak oluşturamaz.
-* El ile uygulanan `RenderTreeBuilder` mantık uzun blokları yazmayın. *. Razor* dosyalarını tercih edin ve derleyicinin sıra numaralarıyla uğraşmak için izin verin. El ile `RenderTreeBuilder` mantığın olmaması durumunda, uzun kod bloklarını `OpenRegion` / `CloseRegion` çağrılarında kaydırılmış küçük parçalara ayırın. Her bölge kendi ayrı dizi numaralarına sahiptir, bu nedenle her bölge içinde sıfırdan (veya herhangi bir rastgele sayıdan) yeniden başlatabilirsiniz.
+* El ile uygulanan mantık uzun blokları yazmayın <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> . *. Razor* dosyalarını tercih edin ve derleyicinin sıra numaralarıyla uğraşmak için izin verin. El ile <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> mantığın olmaması durumunda, uzun kod bloklarını çağrılarında kaydırılmış küçük parçalara ayırın <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.OpenRegion%2A> / <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder.CloseRegion%2A> . Her bölge kendi ayrı dizi numaralarına sahiptir, bu nedenle her bölge içinde sıfırdan (veya herhangi bir rastgele sayıdan) yeniden başlatabilirsiniz.
 * Dizi numaraları sabit kodluysa, fark algoritması yalnızca değer değerinde sıra numaralarının artırılmasını gerektirir. İlk değer ve boşluklar ilgisiz. Tek bir seçenek, kod satırı numarasını sıra numarası olarak kullanmak veya sıfırdan başlayıp bir ya da yüzlerce (ya da tercih edilen aralığa) artırmak için kullanılır. 
 * Blazorsıra numaralarını kullanır, diğer ağaç dağıtma Kullanıcı arabirimi çerçeveleri bunları kullanmaz. Dizi numaraları kullanıldığında, yayılma çok daha hızlıdır ve Blazor bir derleme adımından yararlanarak *. Razor* dosyaları yazan geliştiriciler için otomatik olarak sıra numaralarıyla ilgilenen bir derleme adımının avantajı vardır.
 
-## <a name="perform-large-data-transfers-in-blazor-server-apps"></a>Blazor Sunucu uygulamalarında büyük veri aktarımları gerçekleştirin
+## <a name="perform-large-data-transfers-in-blazor-server-apps"></a>Sunucu uygulamalarında büyük veri aktarımları gerçekleştirin Blazor
 
-Bazı senaryolarda, JavaScript ve Blazorarasında büyük miktarlarda veri aktarılmalıdır. Genellikle, büyük veri aktarımları şu durumlarda oluşur:
+Bazı senaryolarda, JavaScript ve arasında büyük miktarlarda veri aktarılmalıdır Blazor . Genellikle, büyük veri aktarımları şu durumlarda oluşur:
 
 * Tarayıcı dosya sistemi API 'Leri bir dosyayı karşıya yüklemek veya indirmek için kullanılır.
 * Üçüncü taraf kitaplığı ile birlikte çalışma gerekir.
 
-Blazor Sunucuda, performans sorunlarına neden olabilecek tek büyük mesajların geçirilmesini engellemek için bir sınırlama vardır.
+BlazorSunucuda, performans sorunlarına neden olabilecek tek büyük mesajların geçirilmesini engellemek için bir sınırlama vardır.
 
-JavaScript arasında veri aktaran kodu geliştirirken aşağıdaki kılavuzu göz önünde bulundurun Blazor:
+JavaScript arasında veri aktaran kodu geliştirirken aşağıdaki kılavuzu göz önünde bulundurun Blazor :
 
 * Verileri daha küçük parçalara dilimleyin ve tüm veriler sunucu tarafından alınana kadar veri segmentlerini sırayla gönderin.
 * JavaScript ve C# kodunda büyük nesneler ayırmayın.
@@ -335,16 +438,16 @@ public class FileUploader : IDisposable
 
 Yukarıdaki örnekte:
 
-* , ' A ayarlanır, ' den `maxBase64SegmentSize = segmentSize * 4 / 3`hesaplanır. `8192` `maxBase64SegmentSize`
-* Düşük düzey .NET Core bellek yönetimi API 'Leri, bellek kesimlerini içindeki `uploadedSegments`sunucuda depolamak için kullanılır.
+* , `maxBase64SegmentSize` ' A ayarlanır `8192` , ' den hesaplanır `maxBase64SegmentSize = segmentSize * 4 / 3` .
+* Düşük düzey .NET Core bellek yönetimi API 'Leri, bellek kesimlerini içindeki sunucuda depolamak için kullanılır `uploadedSegments` .
 * Bir `ReceiveFile` Yöntem, JS birlikte çalışması aracılığıyla karşıya yüklemeyi işlemek için kullanılır:
-  * Dosya boyutu, ile `jsRuntime.InvokeAsync<FileInfo>('getFileSize', selector)`js birlikte çalışma üzerinden bayt olarak belirlenir.
-  * Alacak segmentlerin sayısı ' de `numberOfSegments`hesaplanıp depolanır.
-  * Kesimleri, ile `jsRuntime.InvokeAsync<string>('receiveSegment', i, selector)`js birlikte çalışma `for` aracılığıyla bir döngüde istenir. Tüm kesimler ancak son, kod çözmede önce 8.192 bayt olmalıdır. İstemci verileri verimli bir şekilde gönderilmeye zorlanır.
-  * Alınan her segment için, ile <xref:System.Convert.TryFromBase64String%2A>kod çözme işleminden önce denetimler gerçekleştirilir.
-  * Karşıya yükleme tamamlandıktan sonra verileri içeren bir akış New <xref:System.IO.Stream> (`SegmentedStream`) olarak döndürülür.
+  * Dosya boyutu, ile JS birlikte çalışma üzerinden bayt olarak belirlenir `jsRuntime.InvokeAsync<FileInfo>('getFileSize', selector)` .
+  * Alacak segmentlerin sayısı ' de hesaplanıp depolanır `numberOfSegments` .
+  * Kesimleri, `for` Ile js birlikte çalışma aracılığıyla bir döngüde istenir `jsRuntime.InvokeAsync<string>('receiveSegment', i, selector)` . Tüm kesimler ancak son, kod çözmede önce 8.192 bayt olmalıdır. İstemci verileri verimli bir şekilde gönderilmeye zorlanır.
+  * Alınan her segment için, ile kod çözme işleminden önce denetimler gerçekleştirilir <xref:System.Convert.TryFromBase64String%2A> .
+  * Karşıya yükleme tamamlandıktan sonra verileri içeren bir akış New <xref:System.IO.Stream> () olarak döndürülür `SegmentedStream` .
 
-Kesimli akış sınıfı, kesim listesini ReadOnly olmayan salt okunur olarak kullanıma sunar <xref:System.IO.Stream>:
+Kesimli akış sınıfı, kesim listesini ReadOnly olmayan salt okunur olarak kullanıma sunar <xref:System.IO.Stream> :
 
 ```csharp
 using System;

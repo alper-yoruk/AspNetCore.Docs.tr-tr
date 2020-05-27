@@ -69,11 +69,11 @@ Bir bileşeni, bir HTML söz dizimini kullanarak başka bir bileşene ekleyin.
 
 ## <a name="component-parameters"></a>Bileşen parametreleri
 
-Bileşenler de parametrelere sahip olabilir. Bileşen parametreleri, bileşen sınıfında özniteliğiyle birlikte ortak özellikler kullanılarak tanımlanır `[Parameter]` . Biçimlendirme içindeki bir bileşenin bağımsız değişkenlerini belirtmek için öznitelikleri kullanın.
+Bileşenler de parametrelere sahip olabilir. Bileşen parametreleri, bileşen sınıfında özniteliğiyle birlikte ortak özellikler kullanılarak tanımlanır [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) . Biçimlendirme içindeki bir bileşenin bağımsız değişkenlerini belirtmek için öznitelikleri kullanın.
 
 1. Bileşenin `@code` C# kodunu aşağıdaki gibi güncelleştirin:
 
-   * `IncrementAmount`Özniteliği ile ortak bir özellik ekleyin `[Parameter]` .
+   * `IncrementAmount`Özniteliği ile ortak bir özellik ekleyin [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) .
    * `IncrementCount` `IncrementAmount` Değerini artırdığınızda özelliğini kullanmak için yöntemini değiştirin `currentCount` .
 
    *Pages/Counter. Razor*:
@@ -105,7 +105,7 @@ Sunucu uygulamasıyla çalışıyorsanız Blazor , `WeatherForecastService` hizm
 
 [!code-csharp[](build-your-first-blazor-app/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
-`@inject`Yönergesi, hizmet örneğini bileşene eklemek için kullanılır `WeatherForecastService` `FetchData` .
+[`@inject`](xref:mvc/views/razor#inject)Yönergesi, hizmet örneğini bileşene eklemek için kullanılır `WeatherForecastService` `FetchData` .
 
 *Pages/FetchData. Razor*:
 
@@ -117,7 +117,7 @@ Sunucu uygulamasıyla çalışıyorsanız Blazor , `WeatherForecastService` hizm
 
 ### <a name="blazor-webassembly-experience"></a>BlazorWebAssembly deneyimi
 
-BlazorWebassembly uygulamasıyla çalışıyorsanız, `HttpClient` *Wwwroot/Sample-Data* klasöründeki *Hava durumu. JSON* dosyasından Hava durumu tahmin verileri almak için eklenir.
+BlazorWebassembly uygulamasıyla çalışıyorsanız, <xref:System.Net.Http.HttpClient> *Wwwroot/Sample-Data* klasöründeki *Hava durumu. JSON* dosyasından Hava durumu tahmin verileri almak için eklenir.
 
 *Pages/FetchData. Razor*:
 

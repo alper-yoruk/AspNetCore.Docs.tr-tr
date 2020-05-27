@@ -1,24 +1,12 @@
 ---
-title: ASP.NET Core Blazor düzenleri
-author: guardrex
-description: Uygulamalar için yeniden kullanılabilir düzen bileşenleri oluşturmayı öğrenin Blazor .
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 02/12/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/layouts
-ms.openlocfilehash: 09cca9c4af23c35fdbc2ee92169913c960b0a68d
-ms.sourcegitcommit: 69e1a79a572b0af17d08e81af12c594b7316f2e1
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 05/15/2020
-ms.locfileid: "83424329"
+Başlık: ' ASP.NET Core Blazor düzenleri ' Yazar: Açıklama: ' uygulamalar için yeniden kullanılabilir düzen bileşenleri oluşturmayı öğrenin Blazor . '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
 # <a name="aspnet-core-blazor-layouts"></a>ASP.NET Core Blazor düzenleri
 
@@ -30,10 +18,10 @@ Teknik olarak, düzen yalnızca başka bir bileşendir. Düzen bir Razor şablon
 
 Bir *bileşeni* bir *düzene*dönüştürmek için bileşen:
 
-* `LayoutComponentBase` `Body` Düzen içindeki işlenmiş içerik için bir özellik tanımlayan öğesinden devralır.
+* <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> <xref:Microsoft.AspNetCore.Components.LayoutComponentBase.Body> Düzen içindeki işlenmiş içerik için bir özellik tanımlayan öğesinden devralır.
 * Razor `@Body` İçeriğin işlendiği yerleşim biçimlendirmesinde konumu belirtmek için söz dizimini kullanır.
 
-Aşağıdaki kod örneğinde Razor , *mainlayout. Razor*olan bir düzen bileşeninin şablonu gösterilmektedir. Düzen, `LayoutComponentBase` `@Body` Gezinti çubuğu ve alt bilgi arasında devralır ve Ayarlar:
+Aşağıdaki kod örneğinde Razor , *mainlayout. Razor*olan bir düzen bileşeninin şablonu gösterilmektedir. Düzen, <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> `@Body` Gezinti çubuğu ve alt bilgi arasında devralır ve Ayarlar:
 
 [!code-razor[](layouts/sample_snapshot/3.x/MainLayout.razor?highlight=1,13)]
 
@@ -41,21 +29,21 @@ Uygulama şablonlarından birini temel alan bir uygulamada Blazor , `MainLayout`
 
 ## <a name="default-layout"></a>Varsayılan düzen
 
-`Router`Uygulamanın App *. Razor* dosyasındaki bileşende varsayılan uygulama yerleşimini belirtin. `Router`Varsayılan Şablonlar tarafından belirtilen aşağıdaki bileşen, Blazor bileşene varsayılan düzeni ayarlar `MainLayout` :
+<xref:Microsoft.AspNetCore.Components.Routing.Router>Uygulamanın App *. Razor* dosyasındaki bileşende varsayılan uygulama yerleşimini belirtin. <xref:Microsoft.AspNetCore.Components.Routing.Router>Varsayılan Şablonlar tarafından belirtilen aşağıdaki bileşen, Blazor bileşene varsayılan düzeni ayarlar `MainLayout` :
 
 [!code-razor[](layouts/sample_snapshot/3.x/App1.razor?highlight=3)]
 
-İçerik için varsayılan bir düzen sağlamak üzere `NotFound` bir içerik belirtin `LayoutView` `NotFound` :
+İçerik için varsayılan bir düzen sağlamak üzere <xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound> bir içerik belirtin <xref:Microsoft.AspNetCore.Components.LayoutView> <xref:Microsoft.AspNetCore.Components.Routing.Router.NotFound> :
 
 [!code-razor[](layouts/sample_snapshot/3.x/App2.razor?highlight=6-9)]
 
-Bileşen hakkında daha fazla bilgi için `Router` bkz <xref:blazor/routing> ..
+Bileşen hakkında daha fazla bilgi için <xref:Microsoft.AspNetCore.Components.Routing.Router> bkz <xref:blazor/routing> ..
 
 Düzen bir varsayılan düzen olarak belirtildiğinde, bileşen başına veya klasör temelinde geçersiz kılınabileceğinden, yararlı bir uygulamadır. En genel teknik olduğundan, uygulamanın varsayılan yerleşimini ayarlamak için yönlendiriciyi kullanmayı tercih edin.
 
 ## <a name="specify-a-layout-in-a-component"></a>Bir bileşende düzen belirtme
 
-Razor `@layout` Bir bileşene düzen uygulamak için yönergesini kullanın. Derleyici, `@layout` `LayoutAttribute` bileşen sınıfına uygulanan öğesine dönüştürür.
+Razor `@layout` Bir bileşene düzen uygulamak için yönergesini kullanın. Derleyici, `@layout` <xref:Microsoft.AspNetCore.Components.LayoutAttribute> bileşen sınıfına uygulanan öğesine dönüştürür.
 
 Aşağıdaki `MasterList` bileşenin içeriği konumuna öğesine eklenir `MasterLayout` `@Body` :
 

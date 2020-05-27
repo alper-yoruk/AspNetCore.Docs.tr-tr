@@ -143,7 +143,7 @@ Web ana bilgisayar yapılandırması, öğesinden devralarak `WebApplicationFact
 
    SUT 'un veritabanı bağlamı `Startup.ConfigureServices` yöntemine kaydedilir. Test uygulamasının `builder.ConfigureServices` geri çağırması, uygulamanın kodu yürütüldükten *sonra* yürütülür `Startup.ConfigureServices` . Yürütme sırası, [genel ana bilgisayar](xref:fundamentals/host/generic-host) için ASP.NET Core 3,0 sürümüne sahip bir son değişiklikten oluşur. Uygulamanın veritabanından farklı testler için farklı bir veritabanı kullanmak istiyorsanız, uygulamanın veritabanı bağlamı içinde değiştirilmelidir `builder.ConfigureServices` .
 
-   [Web Host} (XREF: temelleri/Host/Web-Host) kullanan sımlar için, test uygulamasının `builder.ConfigureServices` geri çağırması SUT kodundan *önce* yürütülür `Startup.ConfigureServices` . Test uygulamasının `builder.ConfigureTestServices` geri çağırması *sonra*yürütülür.
+   Hala [Web ana bilgisayarını](xref:fundamentals/host/web-host)kullanan sımlar için, test uygulamasının `builder.ConfigureServices` geri çağırması sut kodundan *önce* yürütülür `Startup.ConfigureServices` . Test uygulamasının `builder.ConfigureTestServices` geri çağırması *sonra*yürütülür.
 
    Örnek uygulama, veritabanı bağlamı için hizmet tanımlayıcısını bulur ve hizmet kaydını kaldırmak için tanımlayıcıyı kullanır. Ardından, fabrika, `ApplicationDbContext` testler için bellek içi veritabanı kullanan yeni bir ekler.
 
@@ -573,7 +573,7 @@ Tümleştirme testleri genellikle veritabanında test yürütmeden önce küçü
 
 SUT 'un veritabanı bağlamı `Startup.ConfigureServices` yöntemine kaydedilir. Test uygulamasının `builder.ConfigureServices` geri çağırması, uygulamanın kodu yürütüldükten *sonra* yürütülür `Startup.ConfigureServices` . Testler için farklı bir veritabanı kullanmak istiyorsanız, uygulamanın veritabanı bağlamı içinde değiştirilmelidir `builder.ConfigureServices` . Daha fazla bilgi için, [WebApplicationFactory 'Yi özelleştirme](#customize-webapplicationfactory) bölümüne bakın.
 
-[Web Host} (XREF: temelleri/Host/Web-Host) kullanan sımlar için, test uygulamasının `builder.ConfigureServices` geri çağırması SUT kodundan *önce* yürütülür `Startup.ConfigureServices` . Test uygulamasının `builder.ConfigureTestServices` geri çağırması *sonra*yürütülür.
+Hala [Web ana bilgisayarını](xref:fundamentals/host/web-host)kullanan sımlar için, test uygulamasının `builder.ConfigureServices` geri çağırması sut kodundan *önce* yürütülür `Startup.ConfigureServices` . Test uygulamasının `builder.ConfigureTestServices` geri çağırması *sonra*yürütülür.
 
 ::: moniker-end
 

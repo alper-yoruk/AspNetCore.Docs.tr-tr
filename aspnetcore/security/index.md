@@ -1,23 +1,11 @@
 ---
-title: ASP.NET Core güvenliğine genel bakış
-author: rick-anderson
-description: ASP.NET Core 'da kimlik doğrulama, yetkilendirme ve güvenlik temelleri hakkında bilgi edinin.
-ms.author: riande
-ms.custom: mvc
-ms.date: 10/24/2018
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/index
-ms.openlocfilehash: b507832e34ac850d2bd4e80bab3066e73ea2ad95
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776519"
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
 # <a name="overview-of-aspnet-core-security"></a>ASP.NET Core güvenliğine genel bakış
 
@@ -25,7 +13,7 @@ ASP.NET Core, geliştiricilerin uygulamaları için güvenliği kolayca yapılan
 
 ## <a name="aspnet-core-security-features"></a>ASP.NET Core güvenlik özellikleri
 
-ASP.NET Core, uygulamalarınızı güvenli hale getirmek için yerleşik Identity sağlayıcılar dahil olmak üzere birçok araç ve kitaplık sağlar, ancak Facebook, Twitter veya LinkedIn gibi üçüncü taraf kimlik hizmetlerini de kullanabilirsiniz. ASP.NET Core ile, uygulama gizli dizilerini kolayca yönetebilirsiniz. Bu, özel bilgileri kodda kullanıma sunmak zorunda kalmadan depolamanın ve kullanmanın bir yoludur.
+ASP.NET Core, uygulamalarınızı güvenli hale getirmek için yerleşik kimlik sağlayıcıları da dahil olmak üzere birçok araç ve kitaplık sağlar, ancak Facebook, Twitter ve LinkedIn gibi üçüncü taraf kimlik hizmetlerini de kullanabilirsiniz. ASP.NET Core ile, uygulama gizli dizilerini kolayca yönetebilirsiniz. Bu, özel bilgileri kodda kullanıma sunmak zorunda kalmadan depolamanın ve kullanmanın bir yoludur.
 
 ## <a name="authentication-vs-authorization"></a>Kimlik doğrulama ve yetkilendirme karşılaştırması
 

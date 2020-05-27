@@ -1,24 +1,12 @@
 ---
-title: ASP.NET Core Blazor webassembly performansı en iyi yöntemleri
-author: pranavkm
-description: ASP.NET Core Blazor weelsembly uygulamalarında performansı artırmaya yönelik ipuçları ve sık karşılaşılan performans sorunlarını önleme.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/13/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: performance/blazor/webassembly-best-practices
-ms.openlocfilehash: 9e9b166cb9ce9870a8ff275b72bb12f04b84751b
-ms.sourcegitcommit: e20653091c30e0768c4f960343e2c3dd658bba13
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 05/16/2020
-ms.locfileid: "83439439"
+Başlık: ' ASP.NET Core Blazor webassembly performansı en iyi yöntemleri ' Yazar: Açıklama: ' ASP.NET Core Blazor weelsembly uygulamalarında performansı artırma ve genel performans sorunlarından kaçınma ipuçları. '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
 # <a name="aspnet-core-blazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor webassembly performansı en iyi yöntemleri
 
@@ -28,9 +16,9 @@ Bu makalede, Blazor weelsembly performans en iyi uygulamaları ASP.NET Core içi
 
 ## <a name="avoid-unnecessary-component-renders"></a>Gereksiz bileşen işlediğini önleyin
 
-Blazor, bir bileşenin, bileşenin değiştirmediğinden rerendering bir bileşeni dağıtma algoritması bir bileşeni engeller. Bileşen işleme üzerinde ayrıntılı denetim için [Componentbase. ShouldRender](xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A) 'ı geçersiz kılın.
+Blazor, bir bileşenin, bileşenin değiştirmediğinden rerendering bir bileşeni dağıtma algoritması bir bileşeni engeller. <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A?displayProperty=nameWithType>Bileşen işleme üzerinde ayrıntılı denetim için geçersiz kılın.
 
-İlk işleme sonrasında hiçbir şekilde hiçbir değişiklik olmayan bir UI bileşeni yazıyorsanız, şunu `ShouldRender` döndürecek şekilde yapılandırın `false` :
+İlk işleme sonrasında hiçbir şekilde hiçbir değişiklik olmayan bir UI bileşeni yazıyorsanız, şunu <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> döndürecek şekilde yapılandırın `false` :
 
 ```razor
 @code {
@@ -42,9 +30,9 @@ Blazor, bir bileşenin, bileşenin değiştirmediğinden rerendering bir bileşe
 
 Aşağıdaki örnekte:
 
-* <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A>geçersiz kılınır ve `shouldRender` Bu, bileşen yüklendiğinde başlangıçta olan değerine ayarlanır `false` .
-* Düğme seçildiğinde, `shouldRender` olarak ayarlanır ve `true` bileşen güncelleştirilmiş ile yeniden başlamaya zorlar `currentCount` .
-* Rerendering hemen sonra, <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> `shouldRender` `false` düğmenin bir sonraki seçilene kadar daha fazla rerendering 'yi engellemek için, geri değerini olarak ayarlayın.
+* <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A>geçersiz kılınır ve <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> Bu, bileşen yüklendiğinde başlangıçta olan değerine ayarlanır `false` .
+* Düğme seçildiğinde, <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> olarak ayarlanır ve `true` bileşen güncelleştirilmiş ile yeniden başlamaya zorlar `currentCount` .
+* Rerendering hemen sonra, <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> `false` düğmenin bir sonraki seçilene kadar daha fazla rerendering 'yi engellemek için, geri değerini olarak ayarlayın.
 
 ```razor
 <p>Current count: @currentCount</p>

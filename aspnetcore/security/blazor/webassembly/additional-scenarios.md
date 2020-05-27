@@ -14,9 +14,9 @@ Sağlayan [Javier Calvarro Nelson](https://github.com/javiercn)
 
 ## <a name="attach-tokens-to-outgoing-requests"></a>Giden isteklere belirteç iliştirme
 
-`AuthorizationMessageHandler`Hizmeti, `HttpClient` giden isteklere erişim belirteçleri eklemek için ile birlikte kullanılabilir. Belirteçler, mevcut hizmet kullanılarak alınır `IAccessTokenProvider` . Bir belirteç alınamadığından, bir oluşturulur `AccessTokenNotAvailableException` . `AccessTokenNotAvailableException``Redirect`, yeni bir belirteç almak için kullanıcıdan kimlik sağlayıcısına gitmek üzere kullanılabilecek bir yönteme sahiptir. , `AuthorizationMessageHandler` Yöntemi kullanılarak yetkili URL 'ler, kapsamlar ve dönüş URL 'si ile yapılandırılabilir `ConfigureHandler` .
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>Hizmeti, <xref:System.Net.Http.HttpClient> giden isteklere erişim belirteçleri eklemek için ile birlikte kullanılabilir. Belirteçler, mevcut hizmet kullanılarak alınır <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> . Bir belirteç alınamadığından, bir oluşturulur <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> . <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A>, yeni bir belirteç almak için kullanıcıdan kimlik sağlayıcısına gitmek üzere kullanılabilecek bir yönteme sahiptir. , <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> Yöntemi kullanılarak yetkili URL 'ler, kapsamlar ve dönüş URL 'si ile yapılandırılabilir <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> .
 
-Aşağıdaki örnekte, `AuthorizationMessageHandler` `HttpClient` içinde bir `Program.Main` (*program.cs*) yapılandırır:
+Aşağıdaki örnekte, <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> <xref:System.Net.Http.HttpClient> içinde bir `Program.Main` (*program.cs*) yapılandırır:
 
 ```csharp
 using System.Net.Http;
@@ -36,7 +36,7 @@ builder.Services.AddTransient(sp =>
 });
 ```
 
-Kolaylık olması için, bir `BaseAddressAuthorizationMessageHandler` yetkılı URL olarak uygulama temel adresiyle önceden yapılandırılmış bir içerir. Kimlik doğrulaması etkinleştirilmiş Blazor webassembly şablonları artık <xref:System.Net.Http.IHttpClientFactory> sunucu API 'si projesinde kullanarak bir <xref:System.Net.Http.HttpClient> ile birlikte ayarlanır `BaseAddressAuthorizationMessageHandler` :
+Kolaylık olması için, bir <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> yetkılı URL olarak uygulama temel adresiyle önceden yapılandırılmış bir içerir. Kimlik doğrulaması etkinleştirilmiş Blazor webassembly şablonları artık <xref:System.Net.Http.IHttpClientFactory> sunucu API 'si projesinde kullanarak bir <xref:System.Net.Http.HttpClient> ile birlikte ayarlanır <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> :
 
 ```csharp
 using System.Net.Http;
@@ -52,9 +52,9 @@ builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
     .CreateClient("BlazorWithIdentity.ServerAPI"));
 ```
 
-Önceki örnekte istemci oluşturulduğu yerde `CreateClient` , <xref:System.Net.Http.HttpClient> sunucu projesine istek yaparken erişim belirteçlerini içeren örnekler sağlanır.
+Önceki örnekte istemci oluşturulduğu yerde <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A> , <xref:System.Net.Http.HttpClient> sunucu projesine istek yaparken erişim belirteçlerini içeren örnekler sağlanır.
 
-<xref:System.Net.Http.HttpClient>Daha sonra, yapılandırılmış bir basit model kullanarak yetkili istekler oluşturmak için kullanılır `try-catch` .
+<xref:System.Net.Http.HttpClient>Daha sonra, yapılandırılmış bir basit [try-catch](/dotnet/csharp/language-reference/keywords/try-catch) deseninin kullanıldığı yetkili istekleri yapmak için kullanılır.
 
 `FetchData`bileşen (*Pages/FetchData. Razor*):
 
@@ -237,7 +237,7 @@ if (tokenResult.TryGetToken(out var token))
 }
 ```
 
-`TryGetToken`döndürdüğü
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.TryGetToken%2A?displayProperty=nameWithType>döndürdüğü
 
 * `true`' i `token` kullanın.
 * `false`belirteç alınmadıysa.
@@ -306,242 +306,22 @@ Weelsembly uygulamasında WebAssembly üzerinde çalışırken Blazor , [HttpCli
 }
 ```
 
-.NET WebAssembly 'ın uygulanması, `HttpClient` [Windoworworkerglobalscope. Fetch ()](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch)kullanır. Getirme, [isteğe özgü birkaç seçeneği](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters)yapılandırmaya olanak tanır. 
+.NET WebAssembly 'ın uygulanması, <xref:System.Net.Http.HttpClient> [Windoworworkerglobalscope. Fetch ()](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch)kullanır. Getirme, [isteğe özgü birkaç seçeneği](https://developer.mozilla.org/docs/Web/API/WindowOrWorkerGlobalScope/fetch#Parameters)yapılandırmaya olanak tanır. 
 
-HTTP getirme isteği seçenekleri `HttpRequestMessage` , aşağıdaki tabloda gösterilen uzantı yöntemleriyle yapılandırılabilir.
+HTTP getirme isteği seçenekleri <xref:System.Net.Http.HttpRequestMessage> , aşağıdaki tabloda gösterilen uzantı yöntemleriyle yapılandırılabilir.
 
-| `HttpRequestMessage`genişletme yöntemi | Fetch isteği özelliği |
-| ---
-Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
+| Genişletme yöntemi | Fetch isteği özelliği |
+| --- | --- |
+| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> | [Credentials](https://developer.mozilla.org/docs/Web/API/Request/credentials) |
+| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCache%2A> | [önbellek](https://developer.mozilla.org/docs/Web/API/Request/cache) |
+| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestMode%2A> | [modundaysa](https://developer.mozilla.org/docs/Web/API/Request/mode) |
+| <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestIntegrity%2A> | [doğruluğunu](https://developer.mozilla.org/docs/Web/API/Request/integrity) |
 
--
-Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
-------------------- | ---başlığı: ' ASP.NET Core Blazor webassembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Yazar: Açıklama: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
------------ | | `SetBrowserRequestCredentials`         |  [kimlik bilgileri](https://developer.mozilla.org/docs/Web/API/Request/credentials) | | `SetBrowserRequestCache`               |  [önbellek](https://developer.mozilla.org/docs/Web/API/Request/cache) | | `SetBrowserRequestMode`                |  [mod](https://developer.mozilla.org/docs/Web/API/Request/mode) | `SetBrowserRequestIntegrity` |           |  [bütünlük](https://developer.mozilla.org/docs/Web/API/Request/integrity) |
-
-Daha genel genişletme yöntemini kullanarak ek seçenekler ayarlayabilirsiniz `SetBrowserRequestOption` .
+Daha genel genişletme yöntemini kullanarak ek seçenekler ayarlayabilirsiniz <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestOption%2A> .
  
-HTTP yanıtı, Blazor Yanıt içeriğindeki eşitleme okuma desteğini etkinleştirmek için genellikle webassembly uygulamasında arabelleğe kaydedilir. Yanıt akışı desteğini etkinleştirmek için `SetBrowserResponseStreamingEnabled` istekteki genişletme yöntemini kullanın.
+HTTP yanıtı, Blazor Yanıt içeriğindeki eşitleme okuma desteğini etkinleştirmek için genellikle webassembly uygulamasında arabelleğe kaydedilir. Yanıt akışı desteğini etkinleştirmek için <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserResponseStreamingEnabled%2A> istekteki genişletme yöntemini kullanın.
 
-Kimlik bilgilerini bir çapraz kaynak isteğine dahil etmek için, `SetBrowserRequestCredentials` genişletme yöntemini kullanın:
+Kimlik bilgilerini bir çapraz kaynak isteğine dahil etmek için, <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> genişletme yöntemini kullanın:
 
 ```csharp
 requestMessage.SetBrowserRequestCredentials(BrowserRequestCredentials.Include);
@@ -590,7 +370,7 @@ Uygulama bir belirteç istediğinde, olası iki sonuç vardır:
 
 Bir belirteç isteği başarısız olduğunda, yeniden yönlendirme gerçekleştirmeden önce geçerli durumu kaydetmek isteyip istemediğinize karar vermeniz gerekir. Artan karmaşıklık düzeylerinde birkaç yaklaşım mevcuttur:
 
-* Geçerli sayfa durumunu oturum depolama alanında depolayın. Sırasında `OnInitializeAsync` , devam etmeden önce durumun geri yüklenebildiğinden emin olun.
+* Geçerli sayfa durumunu oturum depolama alanında depolayın. [Onınitializedadsync yaşam döngüsü olayı](xref:blazor/lifecycle#component-initialization-methods) ( <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> ) sırasında, devam etmeden önce durumun geri yüklenip yüklenemeyeceğini denetleyin.
 * Bir sorgu dizesi parametresi ekleyin ve bunu, uygulamayı daha önce kaydedilen durumu yeniden doldurma ihtiyacı olduğunu bildirmek için bir yol olarak kullanın.
 * Bir sorgu dizesi parametresini, verileri oturum depolamada diğer öğelerle riskli olmayan bir şekilde depolamak için benzersiz bir tanımlayıcıya ekleyin.
 
@@ -708,7 +488,7 @@ Bir kimlik doğrulama işlemi sırasında, tarayıcı IP 'ye yönlendirilmeden �
 
 ## <a name="customize-app-routes"></a>Uygulama yollarını özelleştirme
 
-Varsayılan olarak, `Microsoft.AspNetCore.Components.WebAssembly.Authentication` kitaplık, farklı kimlik doğrulama durumlarını temsil etmek için aşağıdaki tabloda gösterilen yolları kullanır.
+Varsayılan olarak, [Microsoft. AspNetCore. components. WebAssembly. Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) kitaplığı, farklı kimlik doğrulama durumlarını temsil etmek için aşağıdaki tabloda gösterilen yolları kullanır.
 
 | Yol                            | Amaç |
 | ---
@@ -847,7 +627,7 @@ monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
 
 ---- | | `authentication/login`           | Bir oturum açma işlemini tetikler. | | `authentication/login-callback`  | Herhangi bir oturum açma işleminin sonucunu işler. | | `authentication/login-failed`    | Bazı nedenlerle oturum açma işlemi başarısız olduğunda hata iletilerini görüntüler. | | `authentication/logout`          | Bir oturum kapatma işlemi tetikler. | | `authentication/logout-callback` | Bir oturum kapatma işleminin sonucunu işler. | | `authentication/logout-failed`   | Bir nedenden dolayı oturum kapatma işlemi başarısız olduğunda hata iletilerini görüntüler. | | `authentication/logged-out`      | Kullanıcının oturumu başarıyla sonlandırdığını gösterir. | | `authentication/profile`         | Kullanıcı profilini düzenlemek için bir işlem tetikler. | | `authentication/register`        | Yeni bir kullanıcıyı kaydetmek için bir işlem tetikler. |
 
-Yukarıdaki tabloda gösterilen rotalar aracılığıyla yapılandırılabilir `RemoteAuthenticationOptions<TProviderOptions>.AuthenticationPaths` . Özel yollar sağlamak için seçenekleri ayarlarken, uygulamanın her yolu işleyen bir yolu olduğunu doğrulayın.
+Yukarıdaki tabloda gösterilen rotalar aracılığıyla yapılandırılabilir <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticationOptions%601.AuthenticationPaths%2A?displayProperty=nameWithType> . Özel yollar sağlamak için seçenekleri ayarlarken, uygulamanın her yolu işleyen bir yolu olduğunu doğrulayın.
 
 Aşağıdaki örnekte, tüm yollar ön ekine sahiptir `/security` .
 
@@ -881,7 +661,7 @@ builder.Services.AddApiAuthorization(options => {
 });
 ```
 
-Gereksinim tamamen farklı yollar çağırırsa, daha önce açıklandığı gibi yolları ayarlayın ve öğesini `RemoteAuthenticatorView` açık bir eylem parametresiyle işleme yapın:
+Gereksinim tamamen farklı yollar çağırırsa, daha önce açıklandığı gibi yolları ayarlayın ve öğesini <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> açık bir eylem parametresiyle işleme yapın:
 
 ```razor
 @page "/register"
@@ -893,7 +673,7 @@ Bunu seçerseniz, Kullanıcı arabirimini farklı sayfalara bölmek için izin v
 
 ## <a name="customize-the-authentication-user-interface"></a>Kimlik doğrulama kullanıcı arabirimini özelleştirme
 
-`RemoteAuthenticatorView`Her kimlik doğrulama durumu için varsayılan bir UI parçaları kümesi içerir. Her durum, özel olarak geçirerek özelleştirilebilir `RenderFragment` . İlk oturum açma işlemi sırasında görüntülenecek metni özelleştirmek için `RemoteAuthenticatorView` aşağıdaki gibi değiştirebilir.
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView>Her kimlik doğrulama durumu için varsayılan bir UI parçaları kümesi içerir. Her durum, özel olarak geçirerek özelleştirilebilir <xref:Microsoft.AspNetCore.Components.RenderFragment> . İlk oturum açma işlemi sırasında görüntülenecek metni özelleştirmek için <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> aşağıdaki gibi değiştirebilir.
 
 `Authentication`bileşen (*Sayfalar/Authentication. Razor*):
 
@@ -913,7 +693,7 @@ Bunu seçerseniz, Kullanıcı arabirimini farklı sayfalara bölmek için izin v
 }
 ```
 
-, `RemoteAuthenticatorView` Aşağıdaki tabloda gösterilen kimlik doğrulama yolu başına kullanılabilecek bir parçaya sahiptir.
+, <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> Aşağıdaki tabloda gösterilen kimlik doğrulama yolu başına kullanılabilecek bir parçaya sahiptir.
 
 | Yol                            | Parça                |
 | ---
@@ -1128,7 +908,7 @@ monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
 
 Uygulamayla bağlantılı kullanıcılar özelleştirilebilir. Aşağıdaki örnekte, tüm kimliği doğrulanmış kullanıcılar `amr` kullanıcının kimlik doğrulama yöntemlerinin her biri için bir talep alır.
 
-Sınıfı genişleten bir sınıf oluşturun `RemoteUserAccount` :
+Sınıfı genişleten bir sınıf oluşturun <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> :
 
 ```csharp
 using System.Text.Json.Serialization;
@@ -1141,7 +921,7 @@ public class CustomUserAccount : RemoteUserAccount
 }
 ```
 
-Şunu genişleten bir fabrika oluşturun `AccountClaimsPrincipalFactory<TAccount>` :
+Şunu genişleten bir fabrika oluşturun <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccountClaimsPrincipalFactory%601> :
 
 ```csharp
 using System.Security.Claims;
@@ -1179,7 +959,7 @@ public class CustomAccountFactory
 
 `CustomAccountFactory`Kullanılan kimlik doğrulama sağlayıcısına kaydolun. Aşağıdaki kayıtlardan herhangi biri geçerlidir: 
 
-* `AddOidcAuthentication`:
+* <xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddOidcAuthentication%2A>:
 
   ```csharp
   using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
@@ -1195,7 +975,7 @@ public class CustomAccountFactory
       CustomUserAccount, CustomAccountFactory>();
   ```
 
-* `AddMsalAuthentication`:
+* <xref:Microsoft.Extensions.DependencyInjection.MsalWebAssemblyServiceCollectionExtensions.AddMsalAuthentication%2A>:
 
   ```csharp
   using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
@@ -1211,7 +991,7 @@ public class CustomAccountFactory
       CustomUserAccount, CustomAccountFactory>();
   ```
   
-* `AddApiAuthorization`:
+* <xref:Microsoft.Extensions.DependencyInjection.WebAssemblyAuthenticationServiceCollectionExtensions.AddApiAuthorization%2A>:
 
   ```csharp
   using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
@@ -1283,7 +1063,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Sunucu uygulamasının `Startup.Configure` yönteminde, `endpoints.MapFallbackToFile("index.html")` ile değiştirin `endpoints.MapFallbackToPage("/_Host")` :
+Sunucu uygulamasının `Startup.Configure` yönteminde, [uç noktaları değiştirin. Son noktalarla MapFallbackToFile ("index. html")](xref:Microsoft.AspNetCore.Builder.StaticFilesEndpointRouteBuilderExtensions.MapFallbackToFile%2A) [. MapFallbackToPage ("/_Host")](xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapFallbackToPage%2A):
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -1358,7 +1138,7 @@ Bu yaklaşım, bir üçüncü taraf API çağrısı yapmak için sunucu aracıl�
 
 ## <a name="use-open-id-connect-oidc-v20-endpoints"></a>Açık KIMLIK Connect (OıDC) v 2.0 uç noktalarını kullan
 
-Kimlik doğrulama kitaplığı ve Blazor şablonları Open ID Connect (OıDC) v 1.0 uç noktalarını kullanır. Bir v 2.0 uç noktası kullanmak için, JWT taşıyıcı <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> seçeneğini yapılandırın. Aşağıdaki örnekte,, özelliğine bir segment eklenerek AAD, v 2.0 için yapılandırılmıştır `v2.0` `Authority` :
+Kimlik doğrulama kitaplığı ve Blazor şablonları Open ID Connect (OıDC) v 1.0 uç noktalarını kullanır. Bir v 2.0 uç noktası kullanmak için, JWT taşıyıcı <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority?displayProperty=nameWithType> seçeneğini yapılandırın. Aşağıdaki örnekte,, özelliğine bir segment eklenerek AAD, v 2.0 için yapılandırılmıştır `v2.0` <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions.Authority> :
 
 ```csharp
 builder.Services.Configure<JwtBearerOptions>(
@@ -1380,6 +1160,6 @@ Alternatif olarak, ayar uygulama ayarları (*appSettings. JSON*) dosyasında yap
 }
 ```
 
-Bir kesimdeki bir kesimde yer alan herhangi bir uygulama, AAD olmayan sağlayıcılar gibi, uygulamanın OıDC sağlayıcısına uygun değilse, `Authority` özelliği doğrudan ayarlayın. `JwtBearerOptions`Uygulama ayarları dosyasındaki ya da özelliğini `Authority` anahtarıyla ayarlayın.
+Bir kesimdeki bir kesimde yer alan herhangi bir uygulama, AAD olmayan sağlayıcılar gibi, uygulamanın OıDC sağlayıcısına uygun değilse, <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority> özelliği doğrudan ayarlayın. <xref:Microsoft.AspNetCore.Builder.JwtBearerOptions>Ya da uygulama ayarları dosyasındaki (*appSettings. JSON*) özelliğini `Authority` anahtarıyla ayarlayın.
 
 KIMLIK belirtecindeki talepler listesi v 2.0 uç noktaları için değişir. Daha fazla bilgi için bkz. [Microsoft Identity platform (v 2.0) güncelleştirmesi nedir?](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison).

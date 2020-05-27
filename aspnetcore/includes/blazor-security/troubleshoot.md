@@ -30,5 +30,9 @@ Kalan tanımlama bilgilerinin ve site verilerinin test ve sorun giderme konusund
 Barındırılan bir Blazor uygulamasını test etmek ve sorunlarını giderirken, uygulamayı **sunucu** projesinden çalıştırdığınızdan emin olun. Örneğin, Visual Studio 'da aşağıdaki yaklaşımlardan biriyle uygulamaya başlamadan önce sunucu projesinin **Çözüm Gezgini** vurgulandığını doğrulayın:
 
 * **Çalıştır** düğmesini seçin.
-*  > Menüden hata**ayıklamayı Başlat komutunu** kullanın. **Debug**
+* Menüden **hata**  >  **ayıklamayı Başlat komutunu** kullanın.
 * <kbd>F5</kbd>tuşuna basın.
+
+### <a name="inspect-the-content-of-a-json-web-token-jwt"></a>JSON Web Token (JWT) içeriğini İnceleme
+
+Bir JSON Web Token (JWT) kodunu çözmek için Microsoft 'un [JWT.MS](https://jwt.ms/) aracını kullanın. Kullanıcı arabirimindeki değerler hiçbir şekilde tarayıcınızdan bırakmayın.

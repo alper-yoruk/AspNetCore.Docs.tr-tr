@@ -1,26 +1,13 @@
 ---
-title: Şablonlu bileşenleri ASP.NET Core Blazor
-author: guardrex
-description: Şablonlu bileşenlerin bir veya daha fazla kullanıcı arabirimi şablonunu parametre olarak kabul edip etmesinin, daha sonra bileşenin işleme mantığının bir parçası olarak kullanılabileceği hakkında bilgi edinin.
-monikerRange: '>= aspnetcore-3.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 03/18/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: blazor/templated-components
-ms.openlocfilehash: de603d3520c124b278312e5167a2f8bad14cf6e9
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82771073"
+Başlık: ' ASP.NET Core Blazor şablonlu bileşenleri Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
-# <a name="aspnet-core-blazor-templated-components"></a>Şablonlu bileşenleri ASP.NET Core Blazor
+# <a name="aspnet-core-blazor-templated-components"></a>BlazorŞablonlu bileşenleri ASP.NET Core
 
 , [Luke Latham](https://github.com/guardrex) ve [Daniel Roth](https://github.com/danroth27) tarafından
 
@@ -31,13 +18,13 @@ ms.locfileid: "82771073"
 
 ## <a name="template-parameters"></a>Şablon parametreleri
 
-Şablonlu bir bileşen, veya `RenderFragment` `RenderFragment<T>`türünde bir veya daha fazla bileşen parametresi belirtilerek tanımlanır. Bir işleme parçası, işlenecek Kullanıcı arabiriminin bir kesimini temsil eder. `RenderFragment<T>`işleme parçası çağrıldığında belirtilebildiği bir tür parametresi alır.
+Şablonlu bir bileşen, veya türünde bir veya daha fazla bileşen parametresi belirtilerek <xref:Microsoft.AspNetCore.Components.RenderFragment> tanımlanır <xref:Microsoft.AspNetCore.Components.RenderFragment%601> . Bir işleme parçası, işlenecek Kullanıcı arabiriminin bir kesimini temsil eder. <xref:Microsoft.AspNetCore.Components.RenderFragment%601>işleme parçası çağrıldığında belirtilebildiği bir tür parametresi alır.
 
 `TableTemplate`bileşeninde
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/TableTemplate.razor)]
 
-Şablonlu bir bileşen kullanırken, şablon parametreleri parametrelerin adlarıyla (`TableHeader` ve `RowTemplate` aşağıdaki örnekte) eşleşen alt öğeler kullanılarak belirtilebilir:
+Şablonlu bir bileşen kullanırken, şablon parametreleri parametrelerin adlarıyla ( `TableHeader` ve aşağıdaki örnekte) eşleşen alt öğeler kullanılarak belirtilebilir `RowTemplate` :
 
 ```razor
 <TableTemplate Items="pets">
@@ -57,7 +44,7 @@ ms.locfileid: "82771073"
 
 ## <a name="template-context-parameters"></a>Şablon bağlam parametreleri
 
-Öğe olarak geçirilmiş türdeki `RenderFragment<T>` bileşen bağımsız değişkenleri adlı `context` örtük bir parametreye sahiptir (örneğin, `@context.PetId`Yukarıdaki kod örneğinden), ancak alt öğe üzerindeki `Context` özniteliğini kullanarak parametre adını değiştirebilirsiniz. Aşağıdaki örnekte, `RowTemplate` öğesinin `Context` özniteliği `pet` parametresini belirtir:
+Öğe olarak geçirilmiş türdeki bileşen bağımsız değişkenleri <xref:Microsoft.AspNetCore.Components.RenderFragment%601> adlı örtük bir parametreye sahiptir `context` (örneğin, yukarıdaki kod örneğinden `@context.PetId` ), ancak `Context` alt öğe üzerindeki özniteliğini kullanarak parametre adını değiştirebilirsiniz. Aşağıdaki örnekte, `RowTemplate` öğesinin `Context` özniteliği `pet` parametresini belirtir:
 
 ```razor
 <TableTemplate Items="pets">
@@ -72,7 +59,7 @@ ms.locfileid: "82771073"
 </TableTemplate>
 ```
 
-Alternatif olarak, bileşen öğesi üzerinde `Context` özniteliğini de belirtebilirsiniz. Belirtilen `Context` öznitelik, belirtilen tüm şablon parametreleri için geçerlidir. Bu, örtük alt içerik (herhangi bir sarmalama alt öğesi olmadan) için içerik parametre adını belirtmek istediğinizde yararlı olabilir. Aşağıdaki örnekte, `Context` özniteliği `TableTemplate` öğesinde görünür ve tüm şablon parametreleri için geçerlidir:
+Alternatif olarak, `Context` bileşen öğesi üzerinde özniteliğini de belirtebilirsiniz. Belirtilen `Context` öznitelik, belirtilen tüm şablon parametreleri için geçerlidir. Bu, örtük alt içerik (herhangi bir sarmalama alt öğesi olmadan) için içerik parametre adını belirtmek istediğinizde yararlı olabilir. Aşağıdaki örnekte, `Context` özniteliği `TableTemplate` öğesinde görünür ve tüm şablon parametreleri için geçerlidir:
 
 ```razor
 <TableTemplate Items="pets" Context="pet">
@@ -89,7 +76,7 @@ Alternatif olarak, bileşen öğesi üzerinde `Context` özniteliğini de belirt
 
 ## <a name="generic-typed-components"></a>Genel olarak yazılmış bileşenler
 
-Şablonlu bileşenler çoğunlukla genel olarak türdedir. Örneğin, değerleri işlemek `ListViewTemplate` `IEnumerable<T>` için genel bir bileşen kullanılabilir. Genel bir bileşen tanımlamak için, tür parametrelerini [`@typeparam`](xref:mvc/views/razor#typeparam) belirtmek için yönergesini kullanın:
+Şablonlu bileşenler çoğunlukla genel olarak türdedir. Örneğin, `ListViewTemplate` değerleri işlemek için genel bir bileşen kullanılabilir `IEnumerable<T>` . Genel bir bileşen tanımlamak için, [`@typeparam`](xref:mvc/views/razor#typeparam) tür parametrelerini belirtmek için yönergesini kullanın:
 
 [!code-razor[](common/samples/3.x/BlazorWebAssemblySample/Components/ListViewTemplate.razor)]
 

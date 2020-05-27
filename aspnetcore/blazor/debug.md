@@ -25,17 +25,12 @@ Kullanılabilir senaryolar şunlardır:
 
 Şimdilik şunları *yapamazsınız*:
 
-* Dizileri inceleyin.
-* Üyeleri incelemek için üzerine gelin.
-* Yönetilen kodun içine veya dışına hata ayıklama adımı.
-* Değer türlerini incelemek için tam destek vardır.
 * İşlenmemiş özel durumların üzerine bölün.
 * Uygulamanın başlatılması sırasında isabet kesme noktaları.
-* Hizmet çalışanıyla bir uygulamada hata ayıklama.
 
 Yaklaşan sürümlerde hata ayıklama deneyimini iyileştirmeye devam edeceğiz.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 Hata ayıklama aşağıdaki tarayıcılardan birini gerektirir:
 
@@ -78,7 +73,7 @@ BlazorVisual Studio 'da bir webassembly uygulamasında hata ayıklamak için:
 
 BlazorWebassembly uygulamanızda hata ayıklarken, sunucu kodunuzda hata ayıklama de yapabilirsiniz:
 
-1. İçindeki *Fetchdata. Razor* sayfasında bir kesme noktası ayarlayın `OnInitializedAsync` .
+1. İçindeki *Fetchdata. Razor* sayfasında bir kesme noktası ayarlayın <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> .
 1. Eylem yönteminde içinde bir kesme noktası ayarlayın `WeatherForecastController` `Get` .
 1. Bir HTTP isteğini sunucuya vermeden önce, bileşendeki ilk kesme noktasına gitmek için **verileri getir** sekmesine gidin `FetchData` :
 

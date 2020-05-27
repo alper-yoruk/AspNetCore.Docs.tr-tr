@@ -1,22 +1,11 @@
 ---
-title: ASP.NET Core Genelleştirme ve yerelleştirme
-author: rick-anderson
-description: ASP.NET Core farklı diller ve kültürlere içerik yerelleştirilmesi için nasıl hizmet ve ara yazılım sağladığını öğrenin.
-ms.author: riande
-ms.date: 11/30/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: fundamentals/localization
-ms.openlocfilehash: 6a6179baedbb6e737335886457e9012ad463a2ba
-ms.sourcegitcommit: 1250c90c8d87c2513532be5683640b65bfdf9ddb
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 05/12/2020
-ms.locfileid: "83153951"
+Başlık: Yazar: Açıklama: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>ASP.NET Core Genelleştirme ve yerelleştirme
 
@@ -40,7 +29,7 @@ Uygulama yerelleştirmesi şunları içerir:
 
 ## <a name="make-the-apps-content-localizable"></a>Uygulamanın içeriğini yerelleştirilebilir yapın
 
-<xref:Microsoft.Extensions.Localization.IStringLocalizer>` and <xref:Microsoft.Extensions.Localization.IStringLocalizer`1>, yerelleştirilmiş uygulamalar geliştirilirken üretkenliği artırmak için tasarlanmıştır. `IStringLocalizer`çalışma zamanında kültüre özgü kaynaklar sağlamak için [ResourceManager](/dotnet/api/system.resources.resourcemanager) ve [ResourceReader](/dotnet/api/system.resources.resourcereader) kullanır. Arabirimin bir Dizin Oluşturucusu ve `IEnumerable` yerelleştirilmiş dizeleri döndürmesi için bir. `IStringLocalizer`, varsayılan dil dizelerinin bir kaynak dosyasında depolanmasını gerektirmez. Yerelleştirmeye yönelik bir uygulama geliştirebilir ve geliştirmede erken kaynak dosyaları oluşturmaya gerek yoktur. Aşağıdaki kod, yerelleştirme için "başlık hakkında" dizesinin nasıl sarılacağı gösterilmektedir.
+<xref:Microsoft.Extensions.Localization.IStringLocalizer>` and <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> were architected to improve productivity when developing localized apps. `Itringlocalizer ` uses the [ResourceManager](/dotnet/api/system.resources.resourcemanager) and [ResourceReader](/dotnet/api/system.resources.resourcereader) to provide culture-specific resources at run time. The interface has an indexer and an ` IEnumerable ` for returning localized strings. ` ıtringlocalizer ', varsayılan dil dizelerinin bir kaynak dosyasında depolanmasını gerektirmez. Yerelleştirmeye yönelik bir uygulama geliştirebilir ve geliştirmede erken kaynak dosyaları oluşturmaya gerek yoktur. Aşağıdaki kod, yerelleştirme için "başlık hakkında" dizesinin nasıl sarılacağı gösterilmektedir.
 
 [!code-csharp[](localization/sample/Localization/Controllers/AboutController.cs)]
 
@@ -72,7 +61,7 @@ Bazı geliştiriciler, `Startup` genel veya paylaşılan dizeler içeren sınıf
 
 [!code-cshtml[](localization/sample/Localization/Views/Home/About.cshtml)]
 
-Varsayılan uygulama, `IViewLocalizer` görünümün dosya adına göre kaynak dosyasını bulur. Genel paylaşılan kaynak dosyası kullanma seçeneği yoktur. `ViewLocalizer`kullanarak yorumdur 'ı uygular `IHtmlLocalizer` , bu yüzden Razor, yerelleştirilmiş dize olarak HTML kodlaması yapmaz. Kaynak dizelerini parametreleştirebilirsiniz ve `IViewLocalizer` kaynak dizesini değil, PARAMETRELERI HTML olarak kodlayabilirsiniz. Aşağıdaki Razor işaretlemesini göz önünde bulundurun:
+Varsayılan uygulama, `IViewLocalizer` görünümün dosya adına göre kaynak dosyasını bulur. Genel paylaşılan kaynak dosyası kullanma seçeneği yoktur. `ViewLocalizer`, kullanarak yerelleştirici uygular `IHtmlLocalizer` , bu nedenle Razor YERELLEŞTIRILMIŞ dizeyi HTML olarak kodlamaz. Kaynak dizelerini parametreleştirebilirsiniz ve `IViewLocalizer` kaynak dizesini değil, PARAMETRELERI HTML olarak kodlayabilirsiniz. Aşağıdaki biçimlendirmeyi göz önünde bulundurun Razor :
 
 ```cshtml
 @Localizer["<i>Hello</i> <b>{0}!</b>", UserManager.GetUserName(User)]
@@ -81,8 +70,15 @@ Varsayılan uygulama, `IViewLocalizer` görünümün dosya adına göre kaynak d
 Bir Fransızca kaynak dosyası şunları içerebilir:
 
 | Anahtar | Değer |
-| ----- | ------ |
-| `<i>Hello</i> <b>{0}!</b>` | `<i>Bonjour</i> <b>{0} !</b>` |
+| ----- | ---
+Başlık: Yazar: Açıklama: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+--- | | `<i>Hello</i> <b>{0}!</b>` | `<i>Bonjour</i> <b>{0} !</b>` |
 
 İşlenmiş görünüm, kaynak dosyasındaki HTML işaretlemesini içerir.
 
@@ -155,12 +151,72 @@ Kaynaklar, sınıfının tam tür adı için derleme adı eksi olarak adlandır�
 Örnek projede, `ConfigureServices` yöntemi `ResourcesPath` "resources" olarak ayarlıyor, bu nedenle ana denetleyicinin Fransızca kaynak dosyasının proje göreli yolu *Resources/Controllers. HomeController. fr. resx*olur. Alternatif olarak, kaynak dosyalarını düzenlemek için klasörleri de kullanabilirsiniz. Ana denetleyici için yol *kaynaklar/denetleyiciler/HomeController. fr. resx*olacaktır. `ResourcesPath`Seçeneğini kullanmazsanız, *. resx* dosyası proje temel dizinine gidecek. İçin kaynak dosyası, `HomeController` *Controllers. HomeController. fr. resx*olarak adlandırılır. Nokta veya yol adlandırma kuralını kullanma seçeneği, kaynak dosyalarınızı nasıl düzenlemek istediğinize bağlıdır.
 
 | Kaynak adı | Nokta veya yol adlandırma |
-| ------------   | ------------- |
-| Kaynaklar/denetleyiciler. HomeController. fr. resx | Nokta  |
-| Kaynaklar/denetleyiciler/HomeController. fr. resx  | Yol |
-|    |     |
+| ---
+Başlık: Yazar: Açıklama: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
 
-Razor görünümlerinde kullanılan kaynak dosyaları `@inject IViewLocalizer` benzer bir düzene uyar. Bir görünüm için kaynak dosyası, nokta adlandırması veya yol adlandırması kullanılarak adlandırılabilir. Razor görünümü kaynak dosyaları, ilişkili görünüm dosyalarının yolunu taklit. `ResourcesPath`"Resources" olarak belirlediğimiz varsayılarak, *Görünümler/Home/about. cshtml* görünümü ile ilişkili Fransızca kaynak dosyası aşağıdakilerden biri olabilir:
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------   | ---title: Yazar: Açıklama: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------- | | Kaynaklar/denetleyiciler. HomeController. fr. resx | Nokta | | Kaynaklar/denetleyiciler/HomeController. fr. resx | Yol | |    |     |
+
+Görünümlerde kullanılan kaynak `@inject IViewLocalizer` dosyaları Razor benzer bir model izler. Bir görünüm için kaynak dosyası, nokta adlandırması veya yol adlandırması kullanılarak adlandırılabilir. Razorkaynak dosyalarını görüntüleme, ilişkili görünüm dosyalarının yolunu taklit eden. `ResourcesPath`"Resources" olarak belirlediğimiz varsayılarak, *Görünümler/Home/about. cshtml* görünümü ile ilişkili Fransızca kaynak dosyası aşağıdakilerden biri olabilir:
 
 * Kaynaklar/görünümler/giriş/about. fr. resx
 
@@ -326,7 +382,7 @@ services.Configure<RequestLocalizationOptions>(options =>
 
 [!code-csharp[](localization/sample/Localization/Controllers/HomeController.cs?range=57-67)]
 
-Bu proje için örnek koda *_SelectLanguagePartial. cshtml* 'yi ekleyemezsiniz. [GitHub](https://github.com/aspnet/entropy) 'daki **Yerelleştirme. starterweb** projesi, `RequestLocalizationOptions` [bağımlılık ekleme](dependency-injection.md) kapsayıcısı aracılığıyla bir Razor kısmi öğesine Flow koduna sahiptir.
+Bu proje için örnek koda *_SelectLanguagePartial. cshtml* 'yi ekleyemezsiniz. [GitHub](https://github.com/aspnet/entropy) 'daki **Yerelleştirme. starterweb** projesi, `RequestLocalizationOptions` Razor [bağımlılık ekleme](dependency-injection.md) kapsayıcısına kısmi bir şekilde akışı için kod içerir.
 
 ## <a name="model-binding-route-data-and-query-strings"></a>Model bağlama yolu verileri ve sorgu dizeleri
 
@@ -388,7 +444,7 @@ Uygulama yerelleştirmesi şunları içerir:
 
 ## <a name="make-the-apps-content-localizable"></a>Uygulamanın içeriğini yerelleştirilebilir yapın
 
-<xref:Microsoft.Extensions.Localization.IStringLocalizer>` and <xref:Microsoft.Extensions.Localization.IStringLocalizer`1>, yerelleştirilmiş uygulamalar geliştirilirken üretkenliği artırmak için tasarlanmıştır. `IStringLocalizer`çalışma zamanında kültüre özgü kaynaklar sağlamak için [ResourceManager](/dotnet/api/system.resources.resourcemanager) ve [ResourceReader](/dotnet/api/system.resources.resourcereader) kullanır. Arabirimin bir Dizin Oluşturucusu ve `IEnumerable` yerelleştirilmiş dizeleri döndürmesi için bir. `IStringLocalizer`, varsayılan dil dizelerinin bir kaynak dosyasında depolanmasını gerektirmez. Yerelleştirmeye yönelik bir uygulama geliştirebilir ve geliştirmede erken kaynak dosyaları oluşturmaya gerek yoktur. Aşağıdaki kod, yerelleştirme için "başlık hakkında" dizesinin nasıl sarılacağı gösterilmektedir.
+<xref:Microsoft.Extensions.Localization.IStringLocalizer>` and <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> were architected to improve productivity when developing localized apps. `Itringlocalizer ` uses the [ResourceManager](/dotnet/api/system.resources.resourcemanager) and [ResourceReader](/dotnet/api/system.resources.resourcereader) to provide culture-specific resources at run time. The interface has an indexer and an ` IEnumerable ` for returning localized strings. ` ıtringlocalizer ', varsayılan dil dizelerinin bir kaynak dosyasında depolanmasını gerektirmez. Yerelleştirmeye yönelik bir uygulama geliştirebilir ve geliştirmede erken kaynak dosyaları oluşturmaya gerek yoktur. Aşağıdaki kod, yerelleştirme için "başlık hakkında" dizesinin nasıl sarılacağı gösterilmektedir.
 
 [!code-csharp[](localization/sample/Localization/Controllers/AboutController.cs)]
 
@@ -420,7 +476,7 @@ Bazı geliştiriciler, `Startup` genel veya paylaşılan dizeler içeren sınıf
 
 [!code-cshtml[](localization/sample/Localization/Views/Home/About.cshtml)]
 
-Varsayılan uygulama, `IViewLocalizer` görünümün dosya adına göre kaynak dosyasını bulur. Genel paylaşılan kaynak dosyası kullanma seçeneği yoktur. `ViewLocalizer`kullanarak yorumdur 'ı uygular `IHtmlLocalizer` , bu yüzden Razor, yerelleştirilmiş dize olarak HTML kodlaması yapmaz. Kaynak dizelerini parametreleştirebilirsiniz ve `IViewLocalizer` kaynak dizesini değil, PARAMETRELERI HTML olarak kodlayabilirsiniz. Aşağıdaki Razor işaretlemesini göz önünde bulundurun:
+Varsayılan uygulama, `IViewLocalizer` görünümün dosya adına göre kaynak dosyasını bulur. Genel paylaşılan kaynak dosyası kullanma seçeneği yoktur. `ViewLocalizer`, kullanarak yerelleştirici uygular `IHtmlLocalizer` , bu nedenle Razor YERELLEŞTIRILMIŞ dizeyi HTML olarak kodlamaz. Kaynak dizelerini parametreleştirebilirsiniz ve `IViewLocalizer` kaynak dizesini değil, PARAMETRELERI HTML olarak kodlayabilirsiniz. Aşağıdaki biçimlendirmeyi göz önünde bulundurun Razor :
 
 ```cshtml
 @Localizer["<i>Hello</i> <b>{0}!</b>", UserManager.GetUserName(User)]
@@ -429,8 +485,15 @@ Varsayılan uygulama, `IViewLocalizer` görünümün dosya adına göre kaynak d
 Bir Fransızca kaynak dosyası şunları içerebilir:
 
 | Anahtar | Değer |
-| ----- | ------ |
-| `<i>Hello</i> <b>{0}!</b>` | `<i>Bonjour</i> <b>{0} !</b>` |
+| ----- | ---
+Başlık: Yazar: Açıklama: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+--- | | `<i>Hello</i> <b>{0}!</b>` | `<i>Bonjour</i> <b>{0} !</b>` |
 
 İşlenmiş görünüm, kaynak dosyasındaki HTML işaretlemesini içerir.
 
@@ -503,12 +566,72 @@ Kaynaklar, sınıfının tam tür adı için derleme adı eksi olarak adlandır�
 Örnek projede, `ConfigureServices` yöntemi `ResourcesPath` "resources" olarak ayarlıyor, bu nedenle ana denetleyicinin Fransızca kaynak dosyasının proje göreli yolu *Resources/Controllers. HomeController. fr. resx*olur. Alternatif olarak, kaynak dosyalarını düzenlemek için klasörleri de kullanabilirsiniz. Ana denetleyici için yol *kaynaklar/denetleyiciler/HomeController. fr. resx*olacaktır. `ResourcesPath`Seçeneğini kullanmazsanız, *. resx* dosyası proje temel dizinine gidecek. İçin kaynak dosyası, `HomeController` *Controllers. HomeController. fr. resx*olarak adlandırılır. Nokta veya yol adlandırma kuralını kullanma seçeneği, kaynak dosyalarınızı nasıl düzenlemek istediğinize bağlıdır.
 
 | Kaynak adı | Nokta veya yol adlandırma |
-| ------------   | ------------- |
-| Kaynaklar/denetleyiciler. HomeController. fr. resx | Nokta  |
-| Kaynaklar/denetleyiciler/HomeController. fr. resx  | Yol |
-|    |     |
+| ---
+Başlık: Yazar: Açıklama: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
 
-Razor görünümlerinde kullanılan kaynak dosyaları `@inject IViewLocalizer` benzer bir düzene uyar. Bir görünüm için kaynak dosyası, nokta adlandırması veya yol adlandırması kullanılarak adlandırılabilir. Razor görünümü kaynak dosyaları, ilişkili görünüm dosyalarının yolunu taklit. `ResourcesPath`"Resources" olarak belirlediğimiz varsayılarak, *Görünümler/Home/about. cshtml* görünümü ile ilişkili Fransızca kaynak dosyası aşağıdakilerden biri olabilir:
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------   | ---title: Yazar: Açıklama: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------- | | Kaynaklar/denetleyiciler. HomeController. fr. resx | Nokta | | Kaynaklar/denetleyiciler/HomeController. fr. resx | Yol | |    |     |
+
+Görünümlerde kullanılan kaynak `@inject IViewLocalizer` dosyaları Razor benzer bir model izler. Bir görünüm için kaynak dosyası, nokta adlandırması veya yol adlandırması kullanılarak adlandırılabilir. Razorkaynak dosyalarını görüntüleme, ilişkili görünüm dosyalarının yolunu taklit eden. `ResourcesPath`"Resources" olarak belirlediğimiz varsayılarak, *Görünümler/Home/about. cshtml* görünümü ile ilişkili Fransızca kaynak dosyası aşağıdakilerden biri olabilir:
 
 * Kaynaklar/görünümler/giriş/about. fr. resx
 
@@ -674,7 +797,7 @@ services.Configure<RequestLocalizationOptions>(options =>
 
 [!code-csharp[](localization/sample/Localization/Controllers/HomeController.cs?range=57-67)]
 
-Bu proje için örnek koda *_SelectLanguagePartial. cshtml* 'yi ekleyemezsiniz. [GitHub](https://github.com/aspnet/entropy) 'daki **Yerelleştirme. starterweb** projesi, `RequestLocalizationOptions` [bağımlılık ekleme](dependency-injection.md) kapsayıcısı aracılığıyla bir Razor kısmi öğesine Flow koduna sahiptir.
+Bu proje için örnek koda *_SelectLanguagePartial. cshtml* 'yi ekleyemezsiniz. [GitHub](https://github.com/aspnet/entropy) 'daki **Yerelleştirme. starterweb** projesi, `RequestLocalizationOptions` Razor [bağımlılık ekleme](dependency-injection.md) kapsayıcısına kısmi bir şekilde akışı için kod içerir.
 
 ## <a name="model-binding-route-data-and-query-strings"></a>Model bağlama yolu verileri ve sorgu dizeleri
 
@@ -735,7 +858,7 @@ Uygulama yerelleştirmesi şunları içerir:
 
 ## <a name="make-the-apps-content-localizable"></a>Uygulamanın içeriğini yerelleştirilebilir yapın
 
-<xref:Microsoft.Extensions.Localization.IStringLocalizer>` and <xref:Microsoft.Extensions.Localization.IStringLocalizer`1>, yerelleştirilmiş uygulamalar geliştirilirken üretkenliği artırmak için tasarlanmıştır. `IStringLocalizer`çalışma zamanında kültüre özgü kaynaklar sağlamak için [ResourceManager](/dotnet/api/system.resources.resourcemanager) ve [ResourceReader](/dotnet/api/system.resources.resourcereader) kullanır. Arabirimin bir Dizin Oluşturucusu ve `IEnumerable` yerelleştirilmiş dizeleri döndürmesi için bir. `IStringLocalizer`, varsayılan dil dizelerinin bir kaynak dosyasında depolanmasını gerektirmez. Yerelleştirmeye yönelik bir uygulama geliştirebilir ve geliştirmede erken kaynak dosyaları oluşturmaya gerek yoktur. Aşağıdaki kod, yerelleştirme için "başlık hakkında" dizesinin nasıl sarılacağı gösterilmektedir.
+<xref:Microsoft.Extensions.Localization.IStringLocalizer>` and <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> were architected to improve productivity when developing localized apps. `Itringlocalizer ` uses the [ResourceManager](/dotnet/api/system.resources.resourcemanager) and [ResourceReader](/dotnet/api/system.resources.resourcereader) to provide culture-specific resources at run time. The interface has an indexer and an ` IEnumerable ` for returning localized strings. ` ıtringlocalizer ', varsayılan dil dizelerinin bir kaynak dosyasında depolanmasını gerektirmez. Yerelleştirmeye yönelik bir uygulama geliştirebilir ve geliştirmede erken kaynak dosyaları oluşturmaya gerek yoktur. Aşağıdaki kod, yerelleştirme için "başlık hakkında" dizesinin nasıl sarılacağı gösterilmektedir.
 
 [!code-csharp[](localization/sample/Localization/Controllers/AboutController.cs)]
 
@@ -767,7 +890,7 @@ Bazı geliştiriciler, `Startup` genel veya paylaşılan dizeler içeren sınıf
 
 [!code-cshtml[](localization/sample/Localization/Views/Home/About.cshtml)]
 
-Varsayılan uygulama, `IViewLocalizer` görünümün dosya adına göre kaynak dosyasını bulur. Genel paylaşılan kaynak dosyası kullanma seçeneği yoktur. `ViewLocalizer`kullanarak yorumdur 'ı uygular `IHtmlLocalizer` , bu yüzden Razor, yerelleştirilmiş dize olarak HTML kodlaması yapmaz. Kaynak dizelerini parametreleştirebilirsiniz ve `IViewLocalizer` kaynak dizesini değil, PARAMETRELERI HTML olarak kodlayabilirsiniz. Aşağıdaki Razor işaretlemesini göz önünde bulundurun:
+Varsayılan uygulama, `IViewLocalizer` görünümün dosya adına göre kaynak dosyasını bulur. Genel paylaşılan kaynak dosyası kullanma seçeneği yoktur. `ViewLocalizer`, kullanarak yerelleştirici uygular `IHtmlLocalizer` , bu nedenle Razor YERELLEŞTIRILMIŞ dizeyi HTML olarak kodlamaz. Kaynak dizelerini parametreleştirebilirsiniz ve `IViewLocalizer` kaynak dizesini değil, PARAMETRELERI HTML olarak kodlayabilirsiniz. Aşağıdaki biçimlendirmeyi göz önünde bulundurun Razor :
 
 ```cshtml
 @Localizer["<i>Hello</i> <b>{0}!</b>", UserManager.GetUserName(User)]
@@ -776,8 +899,15 @@ Varsayılan uygulama, `IViewLocalizer` görünümün dosya adına göre kaynak d
 Bir Fransızca kaynak dosyası şunları içerebilir:
 
 | Anahtar | Değer |
-| ----- | ------ |
-| `<i>Hello</i> <b>{0}!</b>` | `<i>Bonjour</i> <b>{0} !</b>` |
+| ----- | ---
+Başlık: Yazar: Açıklama: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+--- | | `<i>Hello</i> <b>{0}!</b>` | `<i>Bonjour</i> <b>{0} !</b>` |
 
 İşlenmiş görünüm, kaynak dosyasındaki HTML işaretlemesini içerir.
 
@@ -850,10 +980,70 @@ Kaynaklar, sınıfının tam tür adı için derleme adı eksi olarak adlandır�
 Örnek projede, `ConfigureServices` yöntemi `ResourcesPath` "resources" olarak ayarlıyor, bu nedenle ana denetleyicinin Fransızca kaynak dosyasının proje göreli yolu *Resources/Controllers. HomeController. fr. resx*olur. Alternatif olarak, kaynak dosyalarını düzenlemek için klasörleri de kullanabilirsiniz. Ana denetleyici için yol *kaynaklar/denetleyiciler/HomeController. fr. resx*olacaktır. `ResourcesPath`Seçeneğini kullanmazsanız, *. resx* dosyası proje temel dizinine gidecek. İçin kaynak dosyası, `HomeController` *Controllers. HomeController. fr. resx*olarak adlandırılır. Nokta veya yol adlandırma kuralını kullanma seçeneği, kaynak dosyalarınızı nasıl düzenlemek istediğinize bağlıdır.
 
 | Kaynak adı | Nokta veya yol adlandırma |
-| ------------   | ------------- |
-| Kaynaklar/denetleyiciler. HomeController. fr. resx | Nokta  |
-| Kaynaklar/denetleyiciler/HomeController. fr. resx  | Yol |
-|    |     |
+| ---
+Başlık: Yazar: Açıklama: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------   | ---title: Yazar: Açıklama: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: Yazar: Açıklama: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------- | | Kaynaklar/denetleyiciler. HomeController. fr. resx | Nokta | | Kaynaklar/denetleyiciler/HomeController. fr. resx | Yol | |    |     |
 
 Görünümlerde kullanılan kaynak `@inject IViewLocalizer` dosyaları Razor benzer bir model izler. Bir görünüm için kaynak dosyası, nokta adlandırması veya yol adlandırması kullanılarak adlandırılabilir. Razorkaynak dosyalarını görüntüleme, ilişkili görünüm dosyalarının yolunu taklit eden. `ResourcesPath`"Resources" olarak belirlediğimiz varsayılarak, *Görünümler/Home/about. cshtml* görünümü ile ilişkili Fransızca kaynak dosyası aşağıdakilerden biri olabilir:
 
