@@ -1,30 +1,30 @@
 ---
-<span data-ttu-id="e69f6-101">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-101">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-102">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-102">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-103">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-103">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-104">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-104">'Identity'</span></span>
-- <span data-ttu-id="e69f6-105">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-105">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-106">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-106">'Razor'</span></span>
-- <span data-ttu-id="e69f6-107">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-107">'SignalR' uid:</span></span> 
+<span data-ttu-id="dbfc7-101">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="dbfc7-101">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
+<span data-ttu-id="dbfc7-102">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-102">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="dbfc7-103">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-103">'Blazor'</span></span>
+- <span data-ttu-id="dbfc7-104">'Identity'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-104">'Identity'</span></span>
+- <span data-ttu-id="dbfc7-105">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-105">'Let's Encrypt'</span></span>
+- <span data-ttu-id="dbfc7-106">'Razor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-106">'Razor'</span></span>
+- <span data-ttu-id="dbfc7-107">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-107">'SignalR' uid:</span></span> 
 
 ---
-# <a name="aspnet-core-blazor-hosting-model-configuration"></a><span data-ttu-id="e69f6-108">ASP.NET Core Blazor barındırma modeli yapılandırması</span><span class="sxs-lookup"><span data-stu-id="e69f6-108">ASP.NET Core Blazor hosting model configuration</span></span>
+# <a name="aspnet-core-blazor-hosting-model-configuration"></a><span data-ttu-id="dbfc7-108">ASP.NET Core Blazor barındırma modeli yapılandırması</span><span class="sxs-lookup"><span data-stu-id="dbfc7-108">ASP.NET Core Blazor hosting model configuration</span></span>
 
-<span data-ttu-id="e69f6-109">[Daniel Roth](https://github.com/danroth27) ve [Luke Latham](https://github.com/guardrex) tarafından</span><span class="sxs-lookup"><span data-stu-id="e69f6-109">By [Daniel Roth](https://github.com/danroth27) and [Luke Latham](https://github.com/guardrex)</span></span>
+<span data-ttu-id="dbfc7-109">[Daniel Roth](https://github.com/danroth27) ve [Luke Latham](https://github.com/guardrex) tarafından</span><span class="sxs-lookup"><span data-stu-id="dbfc7-109">By [Daniel Roth](https://github.com/danroth27) and [Luke Latham](https://github.com/guardrex)</span></span>
 
-<span data-ttu-id="e69f6-110">Bu makalede barındırma modeli yapılandırması ele alınmaktadır.</span><span class="sxs-lookup"><span data-stu-id="e69f6-110">This article covers hosting model configuration.</span></span>
+<span data-ttu-id="dbfc7-110">Bu makalede barındırma modeli yapılandırması ele alınmaktadır.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-110">This article covers hosting model configuration.</span></span>
 
-## <a name="blazor-webassembly"></a>Blazor<span data-ttu-id="e69f6-111">WebAssembly</span><span class="sxs-lookup"><span data-stu-id="e69f6-111"> WebAssembly</span></span>
+## <a name="blazor-webassembly"></a>Blazor<span data-ttu-id="dbfc7-111">WebAssembly</span><span class="sxs-lookup"><span data-stu-id="dbfc7-111"> WebAssembly</span></span>
 
-### <a name="environment"></a><span data-ttu-id="e69f6-112">Ortam</span><span class="sxs-lookup"><span data-stu-id="e69f6-112">Environment</span></span>
+### <a name="environment"></a><span data-ttu-id="dbfc7-112">Ortam</span><span class="sxs-lookup"><span data-stu-id="dbfc7-112">Environment</span></span>
 
-<span data-ttu-id="e69f6-113">Bir uygulamayı yerel olarak çalıştırırken, ortam varsayılan olarak geliştirme aşamasındadır.</span><span class="sxs-lookup"><span data-stu-id="e69f6-113">When running an app locally, the environment defaults to Development.</span></span> <span data-ttu-id="e69f6-114">Uygulama yayımlandığında, ortam varsayılan olarak üretim olur.</span><span class="sxs-lookup"><span data-stu-id="e69f6-114">When the app is published, the environment defaults to Production.</span></span>
+<span data-ttu-id="dbfc7-113">Bir uygulamayı yerel olarak çalıştırırken, ortam varsayılan olarak geliştirme aşamasındadır.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-113">When running an app locally, the environment defaults to Development.</span></span> <span data-ttu-id="dbfc7-114">Uygulama yayımlandığında, ortam varsayılan olarak üretim olur.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-114">When the app is published, the environment defaults to Production.</span></span>
 
-<span data-ttu-id="e69f6-115">Barındırılan Blazor webassembly uygulaması, üst bilgiyi ekleyerek ortamı tarayıcıya ileten bir ara yazılım aracılığıyla sunucudan alır `blazor-environment` .</span><span class="sxs-lookup"><span data-stu-id="e69f6-115">A hosted Blazor WebAssembly app picks up the environment from the server via a middleware that communicates the environment to the browser by adding the `blazor-environment` header.</span></span> <span data-ttu-id="e69f6-116">Üstbilginin değeri ortamıdır.</span><span class="sxs-lookup"><span data-stu-id="e69f6-116">The value of the header is the environment.</span></span> <span data-ttu-id="e69f6-117">Barındırılan Blazor uygulama ve sunucu uygulaması aynı ortamı paylaşır.</span><span class="sxs-lookup"><span data-stu-id="e69f6-117">The hosted Blazor app and the server app share the same environment.</span></span> <span data-ttu-id="e69f6-118">Ortamın nasıl yapılandırılacağı dahil olmak üzere daha fazla bilgi için bkz <xref:fundamentals/environments> ..</span><span class="sxs-lookup"><span data-stu-id="e69f6-118">For more information, including how to configure the environment, see <xref:fundamentals/environments>.</span></span>
+<span data-ttu-id="dbfc7-115">Barındırılan Blazor webassembly uygulaması, üst bilgiyi ekleyerek ortamı tarayıcıya ileten bir ara yazılım aracılığıyla sunucudan alır `blazor-environment` .</span><span class="sxs-lookup"><span data-stu-id="dbfc7-115">A hosted Blazor WebAssembly app picks up the environment from the server via a middleware that communicates the environment to the browser by adding the `blazor-environment` header.</span></span> <span data-ttu-id="dbfc7-116">Üstbilginin değeri ortamıdır.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-116">The value of the header is the environment.</span></span> <span data-ttu-id="dbfc7-117">Barındırılan Blazor uygulama ve sunucu uygulaması aynı ortamı paylaşır.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-117">The hosted Blazor app and the server app share the same environment.</span></span> <span data-ttu-id="dbfc7-118">Ortamın nasıl yapılandırılacağı dahil olmak üzere daha fazla bilgi için bkz <xref:fundamentals/environments> ..</span><span class="sxs-lookup"><span data-stu-id="dbfc7-118">For more information, including how to configure the environment, see <xref:fundamentals/environments>.</span></span>
 
-<span data-ttu-id="e69f6-119">Yerel olarak çalışan tek başına bir uygulama için geliştirme sunucusu, `blazor-environment` geliştirme ortamını belirtmek için üst bilgi ekler.</span><span class="sxs-lookup"><span data-stu-id="e69f6-119">For a standalone app running locally, the development server adds the `blazor-environment` header to specify the Development environment.</span></span> <span data-ttu-id="e69f6-120">Diğer barındırma ortamlarının ortamını belirtmek için `blazor-environment` üst bilgiyi ekleyin.</span><span class="sxs-lookup"><span data-stu-id="e69f6-120">To specify the environment for other hosting environments, add the `blazor-environment` header.</span></span>
+<span data-ttu-id="dbfc7-119">Yerel olarak çalışan tek başına bir uygulama için geliştirme sunucusu, `blazor-environment` geliştirme ortamını belirtmek için üst bilgi ekler.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-119">For a standalone app running locally, the development server adds the `blazor-environment` header to specify the Development environment.</span></span> <span data-ttu-id="dbfc7-120">Diğer barındırma ortamlarının ortamını belirtmek için `blazor-environment` üst bilgiyi ekleyin.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-120">To specify the environment for other hosting environments, add the `blazor-environment` header.</span></span>
 
-<span data-ttu-id="e69f6-121">IIS için aşağıdaki örnekte, yayınlanan *Web. config* dosyasına özel üstbilgiyi ekleyin.</span><span class="sxs-lookup"><span data-stu-id="e69f6-121">In the following example for IIS, add the custom header to the published *web.config* file.</span></span> <span data-ttu-id="e69f6-122">*Web. config* dosyası *bin/Release/{Target Framework}/Publish* klasöründe bulunur:</span><span class="sxs-lookup"><span data-stu-id="e69f6-122">The *web.config* file is located in the *bin/Release/{TARGET FRAMEWORK}/publish* folder:</span></span>
+<span data-ttu-id="dbfc7-121">IIS için aşağıdaki örnekte, yayınlanan *Web. config* dosyasına özel üstbilgiyi ekleyin.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-121">In the following example for IIS, add the custom header to the published *web.config* file.</span></span> <span data-ttu-id="dbfc7-122">*Web. config* dosyası *bin/Release/{Target Framework}/Publish* klasöründe bulunur:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-122">The *web.config* file is located in the *bin/Release/{TARGET FRAMEWORK}/publish* folder:</span></span>
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -43,9 +43,9 @@
 ```
 
 > [!NOTE]
-> <span data-ttu-id="e69f6-123">Uygulama *Yayımlama* klasörüne yayımlandığında üzerine YAZıLMAYAN IIS için özel *Web. config* dosyasını kullanmak için, bkz <xref:host-and-deploy/blazor/webassembly#use-a-custom-webconfig> ..</span><span class="sxs-lookup"><span data-stu-id="e69f6-123">To use a custom *web.config* file for IIS that isn't overwritten when the app is published to the *publish* folder, see <xref:host-and-deploy/blazor/webassembly#use-a-custom-webconfig>.</span></span>
+> <span data-ttu-id="dbfc7-123">Uygulama *Yayımlama* klasörüne yayımlandığında üzerine YAZıLMAYAN IIS için özel *Web. config* dosyasını kullanmak için, bkz <xref:host-and-deploy/blazor/webassembly#use-a-custom-webconfig> ..</span><span class="sxs-lookup"><span data-stu-id="dbfc7-123">To use a custom *web.config* file for IIS that isn't overwritten when the app is published to the *publish* folder, see <xref:host-and-deploy/blazor/webassembly#use-a-custom-webconfig>.</span></span>
 
-<span data-ttu-id="e69f6-124">Ekleme tarafından bir bileşende uygulamanın ortamını edinin `IWebAssemblyHostEnvironment` ve `Environment` özelliği okuyun:</span><span class="sxs-lookup"><span data-stu-id="e69f6-124">Obtain the app's environment in a component by injecting `IWebAssemblyHostEnvironment` and reading the `Environment` property:</span></span>
+<span data-ttu-id="dbfc7-124">Ekleme tarafından bir bileşende uygulamanın ortamını edinin <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> ve <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.Environment> özelliği okuyun:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-124">Obtain the app's environment in a component by injecting <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> and reading the <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.Environment> property:</span></span>
 
 ```razor
 @page "/"
@@ -57,7 +57,7 @@
 <p>Environment: @HostEnvironment.Environment</p>
 ```
 
-<span data-ttu-id="e69f6-125">Başlangıç sırasında, `WebAssemblyHostBuilder` `IWebAssemblyHostEnvironment` `HostEnvironment` geliştiricilerin kendi kodlarında ortama özgü mantığa sahip olmasını sağlayan özelliği aracılığıyla kullanıma sunar:</span><span class="sxs-lookup"><span data-stu-id="e69f6-125">During startup, the `WebAssemblyHostBuilder` exposes the `IWebAssemblyHostEnvironment` through the `HostEnvironment` property, which enables developers to have environment-specific logic in their code:</span></span>
+<span data-ttu-id="dbfc7-125">Başlangıç sırasında, <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder> <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.HostEnvironment> geliştiricilerin kendi kodlarında ortama özgü mantığa sahip olmasını sağlayan özelliği aracılığıyla kullanıma sunar:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-125">During startup, the <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder> exposes the <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> through the <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.WebAssemblyHostBuilder.HostEnvironment> property, which enables developers to have environment-specific logic in their code:</span></span>
 
 ```csharp
 if (builder.HostEnvironment.Environment == "Custom")
@@ -66,12 +66,12 @@ if (builder.HostEnvironment.Environment == "Custom")
 };
 ```
 
-<span data-ttu-id="e69f6-126">Aşağıdaki kullanışlı uzantı yöntemleri, geliştirme, üretim, hazırlama ve özel ortam adları için geçerli ortamı denetlemeye izin verir:</span><span class="sxs-lookup"><span data-stu-id="e69f6-126">The following convenience extension methods permit checking the current environment for Development, Production, Staging, and custom environment names:</span></span>
+<span data-ttu-id="dbfc7-126">Aşağıdaki kullanışlı uzantı yöntemleri, geliştirme, üretim, hazırlama ve özel ortam adları için geçerli ortamı denetlemeye izin verir:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-126">The following convenience extension methods permit checking the current environment for Development, Production, Staging, and custom environment names:</span></span>
 
 * `IsDevelopment()`
 * `IsProduction()`
 * `IsStaging()`
-* <span data-ttu-id="e69f6-127">' Isenvironment ("{ortam adı}")</span><span class="sxs-lookup"><span data-stu-id="e69f6-127">\`IsEnvironment("{ENVIRONMENT NAME}")</span></span>
+* `IsEnvironment("{ENVIRONMENT NAME}")`
 
 ```csharp
 if (builder.HostEnvironment.IsStaging())
@@ -85,25 +85,25 @@ if (builder.HostEnvironment.IsEnvironment("Custom"))
 };
 ```
 
-<span data-ttu-id="e69f6-128">`IWebAssemblyHostEnvironment.BaseAddress`Özelliği, hizmet kullanılamadığında başlatma sırasında kullanılabilir `NavigationManager` .</span><span class="sxs-lookup"><span data-stu-id="e69f6-128">The `IWebAssemblyHostEnvironment.BaseAddress` property can be used during startup when the `NavigationManager` service isn't available.</span></span>
+<span data-ttu-id="dbfc7-127"><xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType>Özelliği, hizmet kullanılamadığında başlatma sırasında kullanılabilir <xref:Microsoft.AspNetCore.Components.NavigationManager> .</span><span class="sxs-lookup"><span data-stu-id="dbfc7-127">The <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> property can be used during startup when the <xref:Microsoft.AspNetCore.Components.NavigationManager> service isn't available.</span></span>
 
-### <a name="configuration"></a><span data-ttu-id="e69f6-129">Yapılandırma</span><span class="sxs-lookup"><span data-stu-id="e69f6-129">Configuration</span></span>
+### <a name="configuration"></a><span data-ttu-id="dbfc7-128">Yapılandırma</span><span class="sxs-lookup"><span data-stu-id="dbfc7-128">Configuration</span></span>
 
-Blazor<span data-ttu-id="e69f6-130">WebAssembly yapılandırmayı şuradan yükler:</span><span class="sxs-lookup"><span data-stu-id="e69f6-130"> WebAssembly loads configuration from:</span></span>
+Blazor<span data-ttu-id="dbfc7-129">WebAssembly yapılandırmayı şuradan yükler:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-129"> WebAssembly loads configuration from:</span></span>
 
-* <span data-ttu-id="e69f6-131">Uygulama ayarları dosyaları varsayılan olarak:</span><span class="sxs-lookup"><span data-stu-id="e69f6-131">App settings files by default:</span></span>
-  * <span data-ttu-id="e69f6-132">*Wwwroot/appSettings. JSON*</span><span class="sxs-lookup"><span data-stu-id="e69f6-132">*wwwroot/appsettings.json*</span></span>
-  * <span data-ttu-id="e69f6-133">*Wwwroot/appSettings. {ENVIRONMENT}. JSON*</span><span class="sxs-lookup"><span data-stu-id="e69f6-133">*wwwroot/appsettings.{ENVIRONMENT}.json*</span></span>
-* <span data-ttu-id="e69f6-134">Uygulama tarafından kaydedilen diğer [yapılandırma sağlayıcıları](xref:fundamentals/configuration/index) .</span><span class="sxs-lookup"><span data-stu-id="e69f6-134">Other [configuration providers](xref:fundamentals/configuration/index) registered by the app.</span></span> <span data-ttu-id="e69f6-135">Tüm sağlayıcılar Blazor webassembly uygulamalarına uygun değildir.</span><span class="sxs-lookup"><span data-stu-id="e69f6-135">Not all providers are appropriate for Blazor WebAssembly apps.</span></span> <span data-ttu-id="e69f6-136">Wezsembly için desteklenen sağlayıcıların açıklanması Blazor , [ Blazor ısstream (DotNet/Aspnetcore. docs #18134) Için yapılandırma sağlayıcıları açıklığa kavuşturarak](https://github.com/dotnet/AspNetCore.Docs/issues/18134)izlenir.</span><span class="sxs-lookup"><span data-stu-id="e69f6-136">Clarification on which providers are supported for Blazor WebAssembly is tracked by [Clarify configuration providers for Blazor WASM (dotnet/AspNetCore.Docs #18134)](https://github.com/dotnet/AspNetCore.Docs/issues/18134).</span></span>
+* <span data-ttu-id="dbfc7-130">Uygulama ayarları dosyaları varsayılan olarak:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-130">App settings files by default:</span></span>
+  * <span data-ttu-id="dbfc7-131">*Wwwroot/appSettings. JSON*</span><span class="sxs-lookup"><span data-stu-id="dbfc7-131">*wwwroot/appsettings.json*</span></span>
+  * <span data-ttu-id="dbfc7-132">*Wwwroot/appSettings. {ENVIRONMENT}. JSON*</span><span class="sxs-lookup"><span data-stu-id="dbfc7-132">*wwwroot/appsettings.{ENVIRONMENT}.json*</span></span>
+* <span data-ttu-id="dbfc7-133">Uygulama tarafından kaydedilen diğer [yapılandırma sağlayıcıları](xref:fundamentals/configuration/index) .</span><span class="sxs-lookup"><span data-stu-id="dbfc7-133">Other [configuration providers](xref:fundamentals/configuration/index) registered by the app.</span></span> <span data-ttu-id="dbfc7-134">Tüm sağlayıcılar Blazor webassembly uygulamalarına uygun değildir.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-134">Not all providers are appropriate for Blazor WebAssembly apps.</span></span> <span data-ttu-id="dbfc7-135">Wezsembly için desteklenen sağlayıcıların açıklanması Blazor , [ Blazor ısstream (DotNet/Aspnetcore. docs #18134) Için yapılandırma sağlayıcıları açıklığa kavuşturarak](https://github.com/dotnet/AspNetCore.Docs/issues/18134)izlenir.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-135">Clarification on which providers are supported for Blazor WebAssembly is tracked by [Clarify configuration providers for Blazor WASM (dotnet/AspNetCore.Docs #18134)](https://github.com/dotnet/AspNetCore.Docs/issues/18134).</span></span>
 
 > [!WARNING]
-> <span data-ttu-id="e69f6-137">BlazorWebassembly uygulamasındaki yapılandırma kullanıcılar tarafından görülebilir.</span><span class="sxs-lookup"><span data-stu-id="e69f6-137">Configuration in a Blazor WebAssembly app is visible to users.</span></span> <span data-ttu-id="e69f6-138">**Yapılandırma bölümünde uygulama gizli dizilerini veya kimlik bilgilerini depolamamayın.**</span><span class="sxs-lookup"><span data-stu-id="e69f6-138">**Don't store app secrets or credentials in configuration.**</span></span>
+> <span data-ttu-id="dbfc7-136">BlazorWebassembly uygulamasındaki yapılandırma kullanıcılar tarafından görülebilir.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-136">Configuration in a Blazor WebAssembly app is visible to users.</span></span> <span data-ttu-id="dbfc7-137">**Yapılandırma bölümünde uygulama gizli dizilerini veya kimlik bilgilerini depolamamayın.**</span><span class="sxs-lookup"><span data-stu-id="dbfc7-137">**Don't store app secrets or credentials in configuration.**</span></span>
 
-<span data-ttu-id="e69f6-139">Yapılandırma sağlayıcıları hakkında daha fazla bilgi için bkz <xref:fundamentals/configuration/index> ..</span><span class="sxs-lookup"><span data-stu-id="e69f6-139">For more information on configuration providers, see <xref:fundamentals/configuration/index>.</span></span>
+<span data-ttu-id="dbfc7-138">Yapılandırma sağlayıcıları hakkında daha fazla bilgi için bkz <xref:fundamentals/configuration/index> ..</span><span class="sxs-lookup"><span data-stu-id="dbfc7-138">For more information on configuration providers, see <xref:fundamentals/configuration/index>.</span></span>
 
-#### <a name="app-settings-configuration"></a><span data-ttu-id="e69f6-140">Uygulama ayarları yapılandırması</span><span class="sxs-lookup"><span data-stu-id="e69f6-140">App settings configuration</span></span>
+#### <a name="app-settings-configuration"></a><span data-ttu-id="dbfc7-139">Uygulama ayarları yapılandırması</span><span class="sxs-lookup"><span data-stu-id="dbfc7-139">App settings configuration</span></span>
 
-<span data-ttu-id="e69f6-141">*Wwwroot/appSettings. JSON*:</span><span class="sxs-lookup"><span data-stu-id="e69f6-141">*wwwroot/appsettings.json*:</span></span>
+<span data-ttu-id="dbfc7-140">*Wwwroot/appSettings. JSON*:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-140">*wwwroot/appsettings.json*:</span></span>
 
 ```json
 {
@@ -111,7 +111,7 @@ Blazor<span data-ttu-id="e69f6-130">WebAssembly yapılandırmayı şuradan yükl
 }
 ```
 
-<span data-ttu-id="e69f6-142"><xref:Microsoft.Extensions.Configuration.IConfiguration>Yapılandırma verilerine erişmek için bileşene örnek ekleme:</span><span class="sxs-lookup"><span data-stu-id="e69f6-142">Inject an <xref:Microsoft.Extensions.Configuration.IConfiguration> instance into a component to access the configuration data:</span></span>
+<span data-ttu-id="dbfc7-141"><xref:Microsoft.Extensions.Configuration.IConfiguration>Yapılandırma verilerine erişmek için bileşene örnek ekleme:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-141">Inject an <xref:Microsoft.Extensions.Configuration.IConfiguration> instance into a component to access the configuration data:</span></span>
 
 ```razor
 @page "/"
@@ -123,11 +123,11 @@ Blazor<span data-ttu-id="e69f6-130">WebAssembly yapılandırmayı şuradan yükl
 <p>Message: @Configuration["message"]</p>
 ```
 
-#### <a name="provider-configuration"></a><span data-ttu-id="e69f6-143">Sağlayıcı yapılandırması</span><span class="sxs-lookup"><span data-stu-id="e69f6-143">Provider configuration</span></span>
+#### <a name="provider-configuration"></a><span data-ttu-id="dbfc7-142">Sağlayıcı yapılandırması</span><span class="sxs-lookup"><span data-stu-id="dbfc7-142">Provider configuration</span></span>
 
-<span data-ttu-id="e69f6-144">Aşağıdaki örnek, <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> ek yapılandırma sağlamak için bir kullanır:</span><span class="sxs-lookup"><span data-stu-id="e69f6-144">The following example uses a <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> to supply additional configuration:</span></span>
+<span data-ttu-id="dbfc7-143">Aşağıdaki örnek, <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> ek yapılandırma sağlamak için bir kullanır:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-143">The following example uses a <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> to supply additional configuration:</span></span>
 
-<span data-ttu-id="e69f6-145">`Program.Main`:</span><span class="sxs-lookup"><span data-stu-id="e69f6-145">`Program.Main`:</span></span>
+<span data-ttu-id="dbfc7-144">`Program.Main`:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-144">`Program.Main`:</span></span>
 
 ```csharp
 using Microsoft.Extensions.Configuration.Memory;
@@ -151,7 +151,7 @@ var memoryConfig = new MemoryConfigurationSource { InitialData = vehicleData };
 builder.Configuration.Add(memoryConfig);
 ```
 
-<span data-ttu-id="e69f6-146"><xref:Microsoft.Extensions.Configuration.IConfiguration>Yapılandırma verilerine erişmek için bileşene örnek ekleme:</span><span class="sxs-lookup"><span data-stu-id="e69f6-146">Inject an <xref:Microsoft.Extensions.Configuration.IConfiguration> instance into a component to access the configuration data:</span></span>
+<span data-ttu-id="dbfc7-145"><xref:Microsoft.Extensions.Configuration.IConfiguration>Yapılandırma verilerine erişmek için bileşene örnek ekleme:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-145">Inject an <xref:Microsoft.Extensions.Configuration.IConfiguration> instance into a component to access the configuration data:</span></span>
 
 ```razor
 @page "/"
@@ -176,9 +176,9 @@ builder.Configuration.Add(memoryConfig);
 }
 ```
 
-<span data-ttu-id="e69f6-147">*Wwwroot* klasöründeki diğer yapılandırma dosyalarını yapılandırmaya okumak için `HttpClient` dosyanın içeriğini almak üzere bir kullanın.</span><span class="sxs-lookup"><span data-stu-id="e69f6-147">To read other configuration files from the *wwwroot* folder into configuration, use an `HttpClient` to obtain the file's content.</span></span> <span data-ttu-id="e69f6-148">Bu yaklaşım kullanıldığında, mevcut `HttpClient` hizmet kaydı, aşağıdaki örnekte gösterildiği gibi, dosyayı okumak için oluşturulan yerel istemciyi kullanabilir:</span><span class="sxs-lookup"><span data-stu-id="e69f6-148">When using this approach, the existing `HttpClient` service registration can use the local client created to read the file, as the following example shows:</span></span>
+<span data-ttu-id="dbfc7-146">*Wwwroot* klasöründeki diğer yapılandırma dosyalarını yapılandırmaya okumak için <xref:System.Net.Http.HttpClient> dosyanın içeriğini almak üzere bir kullanın.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-146">To read other configuration files from the *wwwroot* folder into configuration, use an <xref:System.Net.Http.HttpClient> to obtain the file's content.</span></span> <span data-ttu-id="dbfc7-147">Bu yaklaşım kullanıldığında, mevcut <xref:System.Net.Http.HttpClient> hizmet kaydı, aşağıdaki örnekte gösterildiği gibi, dosyayı okumak için oluşturulan yerel istemciyi kullanabilir:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-147">When using this approach, the existing <xref:System.Net.Http.HttpClient> service registration can use the local client created to read the file, as the following example shows:</span></span>
 
-<span data-ttu-id="e69f6-149">*Wwwroot/otomobil. JSON*:</span><span class="sxs-lookup"><span data-stu-id="e69f6-149">*wwwroot/cars.json*:</span></span>
+<span data-ttu-id="dbfc7-148">*Wwwroot/otomobil. JSON*:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-148">*wwwroot/cars.json*:</span></span>
 
 ```json
 {
@@ -186,7 +186,7 @@ builder.Configuration.Add(memoryConfig);
 }
 ```
 
-<span data-ttu-id="e69f6-150">`Program.Main`:</span><span class="sxs-lookup"><span data-stu-id="e69f6-150">`Program.Main`:</span></span>
+<span data-ttu-id="dbfc7-149">`Program.Main`:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-149">`Program.Main`:</span></span>
 
 ```csharp
 using Microsoft.Extensions.Configuration;
@@ -206,9 +206,9 @@ using var stream = await response.Content.ReadAsStreamAsync();
 builder.Configuration.AddJsonStream(stream);
 ```
 
-#### <a name="authentication-configuration"></a><span data-ttu-id="e69f6-151">Kimlik doğrulama yapılandırması</span><span class="sxs-lookup"><span data-stu-id="e69f6-151">Authentication configuration</span></span>
+#### <a name="authentication-configuration"></a><span data-ttu-id="dbfc7-150">Kimlik doğrulama yapılandırması</span><span class="sxs-lookup"><span data-stu-id="dbfc7-150">Authentication configuration</span></span>
 
-<span data-ttu-id="e69f6-152">*Wwwroot/appSettings. JSON*:</span><span class="sxs-lookup"><span data-stu-id="e69f6-152">*wwwroot/appsettings.json*:</span></span>
+<span data-ttu-id="dbfc7-151">*Wwwroot/appSettings. JSON*:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-151">*wwwroot/appsettings.json*:</span></span>
 
 ```json
 {
@@ -219,16 +219,16 @@ builder.Configuration.AddJsonStream(stream);
 }
 ```
 
-<span data-ttu-id="e69f6-153">`Program.Main`:</span><span class="sxs-lookup"><span data-stu-id="e69f6-153">`Program.Main`:</span></span>
+<span data-ttu-id="dbfc7-152">`Program.Main`:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-152">`Program.Main`:</span></span>
 
 ```csharp
 builder.Services.AddOidcAuthentication(options =>
     builder.Configuration.Bind("AzureAD", options);
 ```
 
-#### <a name="logging-configuration"></a><span data-ttu-id="e69f6-154">Günlüğe kaydetme yapılandırması</span><span class="sxs-lookup"><span data-stu-id="e69f6-154">Logging configuration</span></span>
+#### <a name="logging-configuration"></a><span data-ttu-id="dbfc7-153">Günlüğe kaydetme yapılandırması</span><span class="sxs-lookup"><span data-stu-id="dbfc7-153">Logging configuration</span></span>
 
-<span data-ttu-id="e69f6-155">*Wwwroot/appSettings. JSON*:</span><span class="sxs-lookup"><span data-stu-id="e69f6-155">*wwwroot/appsettings.json*:</span></span>
+<span data-ttu-id="dbfc7-154">*Wwwroot/appSettings. JSON*:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-154">*wwwroot/appsettings.json*:</span></span>
 
 ```json
 {
@@ -242,41 +242,41 @@ builder.Services.AddOidcAuthentication(options =>
 }
 ```
 
-<span data-ttu-id="e69f6-156">`Program.Main`:</span><span class="sxs-lookup"><span data-stu-id="e69f6-156">`Program.Main`:</span></span>
+<span data-ttu-id="dbfc7-155">`Program.Main`:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-155">`Program.Main`:</span></span>
 
 ```csharp
 builder.Logging.AddConfiguration(
     builder.Configuration.GetSection("Logging"));
 ```
 
-#### <a name="host-builder-configuration"></a><span data-ttu-id="e69f6-157">Konak Oluşturucu yapılandırması</span><span class="sxs-lookup"><span data-stu-id="e69f6-157">Host builder configuration</span></span>
+#### <a name="host-builder-configuration"></a><span data-ttu-id="dbfc7-156">Konak Oluşturucu yapılandırması</span><span class="sxs-lookup"><span data-stu-id="dbfc7-156">Host builder configuration</span></span>
 
-<span data-ttu-id="e69f6-158">`Program.Main`:</span><span class="sxs-lookup"><span data-stu-id="e69f6-158">`Program.Main`:</span></span>
+<span data-ttu-id="dbfc7-157">`Program.Main`:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-157">`Program.Main`:</span></span>
 
 ```csharp
 var hostname = builder.Configuration["HostName"];
 ```
 
-#### <a name="cached-configuration"></a><span data-ttu-id="e69f6-159">Önbelleğe alınmış yapılandırma</span><span class="sxs-lookup"><span data-stu-id="e69f6-159">Cached configuration</span></span>
+#### <a name="cached-configuration"></a><span data-ttu-id="dbfc7-158">Önbelleğe alınmış yapılandırma</span><span class="sxs-lookup"><span data-stu-id="dbfc7-158">Cached configuration</span></span>
 
-<span data-ttu-id="e69f6-160">Yapılandırma dosyaları çevrimdışı kullanım için önbelleğe alınır.</span><span class="sxs-lookup"><span data-stu-id="e69f6-160">Configuration files are cached for offline use.</span></span> <span data-ttu-id="e69f6-161">[Aşamalı Web uygulamaları (PWAs)](xref:blazor/progressive-web-app)ile, yalnızca yeni bir dağıtım oluştururken yapılandırma dosyalarını güncelleştirebilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="e69f6-161">With [Progressive Web Applications (PWAs)](xref:blazor/progressive-web-app), you can only update configuration files when creating a new deployment.</span></span> <span data-ttu-id="e69f6-162">Yapılandırma dosyalarının dağıtımlar arasında düzenlenmesinin hiçbir etkisi yoktur çünkü:</span><span class="sxs-lookup"><span data-stu-id="e69f6-162">Editing configuration files between deployments has no effect because:</span></span>
+<span data-ttu-id="dbfc7-159">Yapılandırma dosyaları çevrimdışı kullanım için önbelleğe alınır.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-159">Configuration files are cached for offline use.</span></span> <span data-ttu-id="dbfc7-160">[Aşamalı Web uygulamaları (PWAs)](xref:blazor/progressive-web-app)ile, yalnızca yeni bir dağıtım oluştururken yapılandırma dosyalarını güncelleştirebilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-160">With [Progressive Web Applications (PWAs)](xref:blazor/progressive-web-app), you can only update configuration files when creating a new deployment.</span></span> <span data-ttu-id="dbfc7-161">Yapılandırma dosyalarının dağıtımlar arasında düzenlenmesinin hiçbir etkisi yoktur çünkü:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-161">Editing configuration files between deployments has no effect because:</span></span>
 
-* <span data-ttu-id="e69f6-163">Kullanıcıların, kullanmaya devam ettikleri dosyaların önbelleğe alınmış sürümleri vardır.</span><span class="sxs-lookup"><span data-stu-id="e69f6-163">Users have cached versions of the files that they continue to use.</span></span>
-* <span data-ttu-id="e69f6-164">PWA 'nın *Service-Worker. js* ve *Service-Worker-assets. js* dosyalarının derlemede yeniden oluşturulması gerekir. Bu, kullanıcının bir sonraki çevrimiçi sitesinde uygulamaya işaret eden uygulamanın yeniden dağıtıldığını belirten, derleme üzerinde yeniden oluşturulmalıdır.</span><span class="sxs-lookup"><span data-stu-id="e69f6-164">The PWA's *service-worker.js* and *service-worker-assets.js* files must be rebuilt on compilation, which signal to the app on the user's next online visit that the app has been redeployed.</span></span>
+* <span data-ttu-id="dbfc7-162">Kullanıcıların, kullanmaya devam ettikleri dosyaların önbelleğe alınmış sürümleri vardır.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-162">Users have cached versions of the files that they continue to use.</span></span>
+* <span data-ttu-id="dbfc7-163">PWA 'nın *Service-Worker. js* ve *Service-Worker-assets. js* dosyalarının derlemede yeniden oluşturulması gerekir. Bu, kullanıcının bir sonraki çevrimiçi sitesinde uygulamaya işaret eden uygulamanın yeniden dağıtıldığını belirten, derleme üzerinde yeniden oluşturulmalıdır.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-163">The PWA's *service-worker.js* and *service-worker-assets.js* files must be rebuilt on compilation, which signal to the app on the user's next online visit that the app has been redeployed.</span></span>
 
-<span data-ttu-id="e69f6-165">Arka plan güncelleştirmelerinin PWAs tarafından nasıl işlendiği hakkında daha fazla bilgi için bkz <xref:blazor/progressive-web-app#background-updates> ..</span><span class="sxs-lookup"><span data-stu-id="e69f6-165">For more information on how background updates are handled by PWAs, see <xref:blazor/progressive-web-app#background-updates>.</span></span>
+<span data-ttu-id="dbfc7-164">Arka plan güncelleştirmelerinin PWAs tarafından nasıl işlendiği hakkında daha fazla bilgi için bkz <xref:blazor/progressive-web-app#background-updates> ..</span><span class="sxs-lookup"><span data-stu-id="dbfc7-164">For more information on how background updates are handled by PWAs, see <xref:blazor/progressive-web-app#background-updates>.</span></span>
 
-### <a name="logging"></a><span data-ttu-id="e69f6-166">Günlüğe kaydetme</span><span class="sxs-lookup"><span data-stu-id="e69f6-166">Logging</span></span>
+### <a name="logging"></a><span data-ttu-id="dbfc7-165">Günlüğe kaydetme</span><span class="sxs-lookup"><span data-stu-id="dbfc7-165">Logging</span></span>
 
-<span data-ttu-id="e69f6-167">BlazorWebassembly günlüğü desteği hakkında bilgi için bkz <xref:fundamentals/logging/index#create-logs-in-blazor> ..</span><span class="sxs-lookup"><span data-stu-id="e69f6-167">For information on Blazor WebAssembly logging support, see <xref:fundamentals/logging/index#create-logs-in-blazor>.</span></span>
+<span data-ttu-id="dbfc7-166">BlazorWebassembly günlüğü desteği hakkında bilgi için bkz <xref:fundamentals/logging/index#create-logs-in-blazor> ..</span><span class="sxs-lookup"><span data-stu-id="dbfc7-166">For information on Blazor WebAssembly logging support, see <xref:fundamentals/logging/index#create-logs-in-blazor>.</span></span>
 
-## <a name="blazor-server"></a>Blazor<span data-ttu-id="e69f6-168">Server</span><span class="sxs-lookup"><span data-stu-id="e69f6-168"> Server</span></span>
+## <a name="blazor-server"></a>Blazor<span data-ttu-id="dbfc7-167">Server</span><span class="sxs-lookup"><span data-stu-id="dbfc7-167"> Server</span></span>
 
-### <a name="reflect-the-connection-state-in-the-ui"></a><span data-ttu-id="e69f6-169">Kullanıcı arabirimindeki bağlantı durumunu yansıtır</span><span class="sxs-lookup"><span data-stu-id="e69f6-169">Reflect the connection state in the UI</span></span>
+### <a name="reflect-the-connection-state-in-the-ui"></a><span data-ttu-id="dbfc7-168">Kullanıcı arabirimindeki bağlantı durumunu yansıtır</span><span class="sxs-lookup"><span data-stu-id="dbfc7-168">Reflect the connection state in the UI</span></span>
 
-<span data-ttu-id="e69f6-170">İstemci bağlantının kaybolduğunu algıladığında, istemci yeniden bağlanmayı denediğinde kullanıcıya varsayılan bir kullanıcı arabirimi görüntülenir.</span><span class="sxs-lookup"><span data-stu-id="e69f6-170">When the client detects that the connection has been lost, a default UI is displayed to the user while the client attempts to reconnect.</span></span> <span data-ttu-id="e69f6-171">Yeniden bağlantı başarısız olursa, kullanıcıya yeniden deneme seçeneği sağlanır.</span><span class="sxs-lookup"><span data-stu-id="e69f6-171">If reconnection fails, the user is provided the option to retry.</span></span>
+<span data-ttu-id="dbfc7-169">İstemci bağlantının kaybolduğunu algıladığında, istemci yeniden bağlanmayı denediğinde kullanıcıya varsayılan bir kullanıcı arabirimi görüntülenir.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-169">When the client detects that the connection has been lost, a default UI is displayed to the user while the client attempts to reconnect.</span></span> <span data-ttu-id="dbfc7-170">Yeniden bağlantı başarısız olursa, kullanıcıya yeniden deneme seçeneği sağlanır.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-170">If reconnection fails, the user is provided the option to retry.</span></span>
 
-<span data-ttu-id="e69f6-172">Kullanıcı arabirimini özelleştirmek için, `id` `components-reconnect-modal` `<body>` *_Host. cshtml* sayfasında öğesinin içeren bir öğesi tanımlayın Razor :</span><span class="sxs-lookup"><span data-stu-id="e69f6-172">To customize the UI, define an element with an `id` of `components-reconnect-modal` in the `<body>` of the *_Host.cshtml* Razor page:</span></span>
+<span data-ttu-id="dbfc7-171">Kullanıcı arabirimini özelleştirmek için, `id` `components-reconnect-modal` `<body>` *_Host. cshtml* sayfasında öğesinin içeren bir öğesi tanımlayın Razor :</span><span class="sxs-lookup"><span data-stu-id="dbfc7-171">To customize the UI, define an element with an `id` of `components-reconnect-modal` in the `<body>` of the *_Host.cshtml* Razor page:</span></span>
 
 ```cshtml
 <div id="components-reconnect-modal">
@@ -284,184 +284,184 @@ var hostname = builder.Configuration["HostName"];
 </div>
 ```
 
-<span data-ttu-id="e69f6-173">Aşağıdaki tabloda öğesine uygulanan CSS sınıfları açıklanmaktadır `components-reconnect-modal` .</span><span class="sxs-lookup"><span data-stu-id="e69f6-173">The following table describes the CSS classes applied to the `components-reconnect-modal` element.</span></span>
+<span data-ttu-id="dbfc7-172">Aşağıdaki tabloda öğesine uygulanan CSS sınıfları açıklanmaktadır `components-reconnect-modal` .</span><span class="sxs-lookup"><span data-stu-id="dbfc7-172">The following table describes the CSS classes applied to the `components-reconnect-modal` element.</span></span>
 
-| <span data-ttu-id="e69f6-174">CSS sınıfı</span><span class="sxs-lookup"><span data-stu-id="e69f6-174">CSS class</span></span>                       | <span data-ttu-id="e69f6-175">Bildiren&hellip;</span><span class="sxs-lookup"><span data-stu-id="e69f6-175">Indicates&hellip;</span></span> |
+| <span data-ttu-id="dbfc7-173">CSS sınıfı</span><span class="sxs-lookup"><span data-stu-id="dbfc7-173">CSS class</span></span>                       | <span data-ttu-id="dbfc7-174">Bildiren&hellip;</span><span class="sxs-lookup"><span data-stu-id="dbfc7-174">Indicates&hellip;</span></span> |
 | ---
-<span data-ttu-id="e69f6-176">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-176">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-177">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-177">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-178">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-178">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-179">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-179">'Identity'</span></span>
-- <span data-ttu-id="e69f6-180">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-180">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-181">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-181">'Razor'</span></span>
-- <span data-ttu-id="e69f6-182">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-182">'SignalR' uid:</span></span> 
+<span data-ttu-id="dbfc7-175">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="dbfc7-175">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
+<span data-ttu-id="dbfc7-176">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-176">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="dbfc7-177">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-177">'Blazor'</span></span>
+- <span data-ttu-id="dbfc7-178">'Identity'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-178">'Identity'</span></span>
+- <span data-ttu-id="dbfc7-179">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-179">'Let's Encrypt'</span></span>
+- <span data-ttu-id="dbfc7-180">'Razor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-180">'Razor'</span></span>
+- <span data-ttu-id="dbfc7-181">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-181">'SignalR' uid:</span></span> 
 
 -
-<span data-ttu-id="e69f6-183">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-183">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-184">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-184">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-185">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-185">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-186">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-186">'Identity'</span></span>
-- <span data-ttu-id="e69f6-187">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-187">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-188">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-188">'Razor'</span></span>
-- <span data-ttu-id="e69f6-189">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-189">'SignalR' uid:</span></span> 
+<span data-ttu-id="dbfc7-182">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="dbfc7-182">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
+<span data-ttu-id="dbfc7-183">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-183">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="dbfc7-184">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-184">'Blazor'</span></span>
+- <span data-ttu-id="dbfc7-185">'Identity'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-185">'Identity'</span></span>
+- <span data-ttu-id="dbfc7-186">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-186">'Let's Encrypt'</span></span>
+- <span data-ttu-id="dbfc7-187">'Razor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-187">'Razor'</span></span>
+- <span data-ttu-id="dbfc7-188">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-188">'SignalR' uid:</span></span> 
 
 -
-<span data-ttu-id="e69f6-190">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-190">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-191">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-191">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-192">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-192">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-193">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-193">'Identity'</span></span>
-- <span data-ttu-id="e69f6-194">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-194">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-195">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-195">'Razor'</span></span>
-- <span data-ttu-id="e69f6-196">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-196">'SignalR' uid:</span></span> 
+<span data-ttu-id="dbfc7-189">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="dbfc7-189">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
+<span data-ttu-id="dbfc7-190">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-190">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="dbfc7-191">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-191">'Blazor'</span></span>
+- <span data-ttu-id="dbfc7-192">'Identity'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-192">'Identity'</span></span>
+- <span data-ttu-id="dbfc7-193">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-193">'Let's Encrypt'</span></span>
+- <span data-ttu-id="dbfc7-194">'Razor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-194">'Razor'</span></span>
+- <span data-ttu-id="dbfc7-195">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-195">'SignalR' uid:</span></span> 
 
 -
-<span data-ttu-id="e69f6-197">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-197">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-198">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-198">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-199">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-199">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-200">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-200">'Identity'</span></span>
-- <span data-ttu-id="e69f6-201">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-201">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-202">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-202">'Razor'</span></span>
-- <span data-ttu-id="e69f6-203">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-203">'SignalR' uid:</span></span> 
+<span data-ttu-id="dbfc7-196">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="dbfc7-196">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
+<span data-ttu-id="dbfc7-197">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-197">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="dbfc7-198">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-198">'Blazor'</span></span>
+- <span data-ttu-id="dbfc7-199">'Identity'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-199">'Identity'</span></span>
+- <span data-ttu-id="dbfc7-200">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-200">'Let's Encrypt'</span></span>
+- <span data-ttu-id="dbfc7-201">'Razor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-201">'Razor'</span></span>
+- <span data-ttu-id="dbfc7-202">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-202">'SignalR' uid:</span></span> 
 
 -
-<span data-ttu-id="e69f6-204">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-204">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-205">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-205">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-206">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-206">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-207">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-207">'Identity'</span></span>
-- <span data-ttu-id="e69f6-208">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-208">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-209">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-209">'Razor'</span></span>
-- <span data-ttu-id="e69f6-210">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-210">'SignalR' uid:</span></span> 
+<span data-ttu-id="dbfc7-203">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="dbfc7-203">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
+<span data-ttu-id="dbfc7-204">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-204">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="dbfc7-205">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-205">'Blazor'</span></span>
+- <span data-ttu-id="dbfc7-206">'Identity'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-206">'Identity'</span></span>
+- <span data-ttu-id="dbfc7-207">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-207">'Let's Encrypt'</span></span>
+- <span data-ttu-id="dbfc7-208">'Razor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-208">'Razor'</span></span>
+- <span data-ttu-id="dbfc7-209">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-209">'SignalR' uid:</span></span> 
 
 -
-<span data-ttu-id="e69f6-211">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-211">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-212">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-212">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-213">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-213">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-214">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-214">'Identity'</span></span>
-- <span data-ttu-id="e69f6-215">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-215">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-216">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-216">'Razor'</span></span>
-- <span data-ttu-id="e69f6-217">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-217">'SignalR' uid:</span></span> 
+<span data-ttu-id="dbfc7-210">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="dbfc7-210">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
+<span data-ttu-id="dbfc7-211">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-211">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="dbfc7-212">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-212">'Blazor'</span></span>
+- <span data-ttu-id="dbfc7-213">'Identity'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-213">'Identity'</span></span>
+- <span data-ttu-id="dbfc7-214">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-214">'Let's Encrypt'</span></span>
+- <span data-ttu-id="dbfc7-215">'Razor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-215">'Razor'</span></span>
+- <span data-ttu-id="dbfc7-216">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-216">'SignalR' uid:</span></span> 
 
 -
-<span data-ttu-id="e69f6-218">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-218">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-219">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-219">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-220">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-220">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-221">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-221">'Identity'</span></span>
-- <span data-ttu-id="e69f6-222">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-222">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-223">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-223">'Razor'</span></span>
-- <span data-ttu-id="e69f6-224">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-224">'SignalR' uid:</span></span> 
+<span data-ttu-id="dbfc7-217">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="dbfc7-217">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
+<span data-ttu-id="dbfc7-218">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-218">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="dbfc7-219">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-219">'Blazor'</span></span>
+- <span data-ttu-id="dbfc7-220">'Identity'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-220">'Identity'</span></span>
+- <span data-ttu-id="dbfc7-221">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-221">'Let's Encrypt'</span></span>
+- <span data-ttu-id="dbfc7-222">'Razor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-222">'Razor'</span></span>
+- <span data-ttu-id="dbfc7-223">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-223">'SignalR' uid:</span></span> 
 
 -
-<span data-ttu-id="e69f6-225">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-225">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-226">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-226">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-227">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-227">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-228">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-228">'Identity'</span></span>
-- <span data-ttu-id="e69f6-229">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-229">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-230">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-230">'Razor'</span></span>
-- <span data-ttu-id="e69f6-231">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-231">'SignalR' uid:</span></span> 
+<span data-ttu-id="dbfc7-224">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="dbfc7-224">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
+<span data-ttu-id="dbfc7-225">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-225">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="dbfc7-226">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-226">'Blazor'</span></span>
+- <span data-ttu-id="dbfc7-227">'Identity'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-227">'Identity'</span></span>
+- <span data-ttu-id="dbfc7-228">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-228">'Let's Encrypt'</span></span>
+- <span data-ttu-id="dbfc7-229">'Razor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-229">'Razor'</span></span>
+- <span data-ttu-id="dbfc7-230">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-230">'SignalR' uid:</span></span> 
 
 -
-<span data-ttu-id="e69f6-232">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-232">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-233">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-233">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-234">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-234">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-235">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-235">'Identity'</span></span>
-- <span data-ttu-id="e69f6-236">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-236">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-237">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-237">'Razor'</span></span>
-- <span data-ttu-id="e69f6-238">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-238">'SignalR' uid:</span></span> 
+<span data-ttu-id="dbfc7-231">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="dbfc7-231">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
+<span data-ttu-id="dbfc7-232">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-232">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="dbfc7-233">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-233">'Blazor'</span></span>
+- <span data-ttu-id="dbfc7-234">'Identity'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-234">'Identity'</span></span>
+- <span data-ttu-id="dbfc7-235">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-235">'Let's Encrypt'</span></span>
+- <span data-ttu-id="dbfc7-236">'Razor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-236">'Razor'</span></span>
+- <span data-ttu-id="dbfc7-237">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-237">'SignalR' uid:</span></span> 
 
 -
-<span data-ttu-id="e69f6-239">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-239">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-240">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-240">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-241">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-241">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-242">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-242">'Identity'</span></span>
-- <span data-ttu-id="e69f6-243">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-243">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-244">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-244">'Razor'</span></span>
-- <span data-ttu-id="e69f6-245">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-245">'SignalR' uid:</span></span> 
+<span data-ttu-id="dbfc7-238">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="dbfc7-238">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
+<span data-ttu-id="dbfc7-239">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-239">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="dbfc7-240">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-240">'Blazor'</span></span>
+- <span data-ttu-id="dbfc7-241">'Identity'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-241">'Identity'</span></span>
+- <span data-ttu-id="dbfc7-242">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-242">'Let's Encrypt'</span></span>
+- <span data-ttu-id="dbfc7-243">'Razor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-243">'Razor'</span></span>
+- <span data-ttu-id="dbfc7-244">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-244">'SignalR' uid:</span></span> 
 
 -
-<span data-ttu-id="e69f6-246">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-246">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-247">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-247">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-248">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-248">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-249">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-249">'Identity'</span></span>
-- <span data-ttu-id="e69f6-250">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-250">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-251">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-251">'Razor'</span></span>
-- <span data-ttu-id="e69f6-252">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-252">'SignalR' uid:</span></span> 
+<span data-ttu-id="dbfc7-245">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="dbfc7-245">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
+<span data-ttu-id="dbfc7-246">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-246">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="dbfc7-247">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-247">'Blazor'</span></span>
+- <span data-ttu-id="dbfc7-248">'Identity'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-248">'Identity'</span></span>
+- <span data-ttu-id="dbfc7-249">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-249">'Let's Encrypt'</span></span>
+- <span data-ttu-id="dbfc7-250">'Razor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-250">'Razor'</span></span>
+- <span data-ttu-id="dbfc7-251">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-251">'SignalR' uid:</span></span> 
 
 -
-<span data-ttu-id="e69f6-253">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-253">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-254">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-254">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-255">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-255">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-256">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-256">'Identity'</span></span>
-- <span data-ttu-id="e69f6-257">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-257">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-258">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-258">'Razor'</span></span>
-- <span data-ttu-id="e69f6-259">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-259">'SignalR' uid:</span></span> 
+<span data-ttu-id="dbfc7-252">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="dbfc7-252">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
+<span data-ttu-id="dbfc7-253">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-253">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="dbfc7-254">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-254">'Blazor'</span></span>
+- <span data-ttu-id="dbfc7-255">'Identity'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-255">'Identity'</span></span>
+- <span data-ttu-id="dbfc7-256">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-256">'Let's Encrypt'</span></span>
+- <span data-ttu-id="dbfc7-257">'Razor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-257">'Razor'</span></span>
+- <span data-ttu-id="dbfc7-258">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-258">'SignalR' uid:</span></span> 
 
 -
-<span data-ttu-id="e69f6-260">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-260">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-261">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-261">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-262">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-262">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-263">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-263">'Identity'</span></span>
-- <span data-ttu-id="e69f6-264">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-264">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-265">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-265">'Razor'</span></span>
-- <span data-ttu-id="e69f6-266">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-266">'SignalR' uid:</span></span> 
+<span data-ttu-id="dbfc7-259">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="dbfc7-259">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
+<span data-ttu-id="dbfc7-260">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-260">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="dbfc7-261">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-261">'Blazor'</span></span>
+- <span data-ttu-id="dbfc7-262">'Identity'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-262">'Identity'</span></span>
+- <span data-ttu-id="dbfc7-263">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-263">'Let's Encrypt'</span></span>
+- <span data-ttu-id="dbfc7-264">'Razor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-264">'Razor'</span></span>
+- <span data-ttu-id="dbfc7-265">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-265">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="e69f6-267">---------------- | ---title: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-267">---------------- | --- title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-268">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-268">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-269">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-269">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-270">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-270">'Identity'</span></span>
-- <span data-ttu-id="e69f6-271">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-271">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-272">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-272">'Razor'</span></span>
-- <span data-ttu-id="e69f6-273">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-273">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="e69f6-274">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-274">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-275">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-275">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-276">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-276">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-277">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-277">'Identity'</span></span>
-- <span data-ttu-id="e69f6-278">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-278">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-279">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-279">'Razor'</span></span>
-- <span data-ttu-id="e69f6-280">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-280">'SignalR' uid:</span></span> 
+<span data-ttu-id="dbfc7-266">---------------- | ---title: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="dbfc7-266">---------------- | --- title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
+<span data-ttu-id="dbfc7-267">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-267">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="dbfc7-268">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-268">'Blazor'</span></span>
+- <span data-ttu-id="dbfc7-269">'Identity'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-269">'Identity'</span></span>
+- <span data-ttu-id="dbfc7-270">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-270">'Let's Encrypt'</span></span>
+- <span data-ttu-id="dbfc7-271">'Razor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-271">'Razor'</span></span>
+- <span data-ttu-id="dbfc7-272">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-272">'SignalR' uid:</span></span> 
 
 -
-<span data-ttu-id="e69f6-281">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-281">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-282">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-282">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-283">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-283">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-284">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-284">'Identity'</span></span>
-- <span data-ttu-id="e69f6-285">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-285">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-286">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-286">'Razor'</span></span>
-- <span data-ttu-id="e69f6-287">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-287">'SignalR' uid:</span></span> 
+<span data-ttu-id="dbfc7-273">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="dbfc7-273">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
+<span data-ttu-id="dbfc7-274">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-274">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="dbfc7-275">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-275">'Blazor'</span></span>
+- <span data-ttu-id="dbfc7-276">'Identity'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-276">'Identity'</span></span>
+- <span data-ttu-id="dbfc7-277">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-277">'Let's Encrypt'</span></span>
+- <span data-ttu-id="dbfc7-278">'Razor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-278">'Razor'</span></span>
+- <span data-ttu-id="dbfc7-279">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-279">'SignalR' uid:</span></span> 
 
 -
-<span data-ttu-id="e69f6-288">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-288">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-289">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-289">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-290">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-290">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-291">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-291">'Identity'</span></span>
-- <span data-ttu-id="e69f6-292">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-292">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-293">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-293">'Razor'</span></span>
-- <span data-ttu-id="e69f6-294">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-294">'SignalR' uid:</span></span> 
+<span data-ttu-id="dbfc7-280">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="dbfc7-280">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
+<span data-ttu-id="dbfc7-281">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-281">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="dbfc7-282">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-282">'Blazor'</span></span>
+- <span data-ttu-id="dbfc7-283">'Identity'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-283">'Identity'</span></span>
+- <span data-ttu-id="dbfc7-284">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-284">'Let's Encrypt'</span></span>
+- <span data-ttu-id="dbfc7-285">'Razor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-285">'Razor'</span></span>
+- <span data-ttu-id="dbfc7-286">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-286">'SignalR' uid:</span></span> 
 
 -
-<span data-ttu-id="e69f6-295">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-295">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-296">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-296">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-297">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-297">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-298">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-298">'Identity'</span></span>
-- <span data-ttu-id="e69f6-299">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-299">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-300">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-300">'Razor'</span></span>
-- <span data-ttu-id="e69f6-301">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-301">'SignalR' uid:</span></span> 
+<span data-ttu-id="dbfc7-287">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="dbfc7-287">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
+<span data-ttu-id="dbfc7-288">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-288">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="dbfc7-289">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-289">'Blazor'</span></span>
+- <span data-ttu-id="dbfc7-290">'Identity'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-290">'Identity'</span></span>
+- <span data-ttu-id="dbfc7-291">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-291">'Let's Encrypt'</span></span>
+- <span data-ttu-id="dbfc7-292">'Razor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-292">'Razor'</span></span>
+- <span data-ttu-id="dbfc7-293">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-293">'SignalR' uid:</span></span> 
 
 -
-<span data-ttu-id="e69f6-302">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-302">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-303">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-303">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-304">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-304">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-305">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-305">'Identity'</span></span>
-- <span data-ttu-id="e69f6-306">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-306">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-307">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-307">'Razor'</span></span>
-- <span data-ttu-id="e69f6-308">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-308">'SignalR' uid:</span></span> 
+<span data-ttu-id="dbfc7-294">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="dbfc7-294">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
+<span data-ttu-id="dbfc7-295">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-295">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="dbfc7-296">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-296">'Blazor'</span></span>
+- <span data-ttu-id="dbfc7-297">'Identity'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-297">'Identity'</span></span>
+- <span data-ttu-id="dbfc7-298">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-298">'Let's Encrypt'</span></span>
+- <span data-ttu-id="dbfc7-299">'Razor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-299">'Razor'</span></span>
+- <span data-ttu-id="dbfc7-300">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-300">'SignalR' uid:</span></span> 
 
-<span data-ttu-id="e69f6-309">--------- | | `components-reconnect-show`     | Kayıp bir bağlantı.</span><span class="sxs-lookup"><span data-stu-id="e69f6-309">--------- | | `components-reconnect-show`     | A lost connection.</span></span> <span data-ttu-id="e69f6-310">İstemci yeniden bağlanmaya çalışıyor.</span><span class="sxs-lookup"><span data-stu-id="e69f6-310">The client is attempting to reconnect.</span></span> <span data-ttu-id="e69f6-311">Kalıcı olarak göster.</span><span class="sxs-lookup"><span data-stu-id="e69f6-311">Show the modal.</span></span> <span data-ttu-id="e69f6-312">| | `components-reconnect-hide`     | Etkin bir bağlantı sunucuya yeniden oluşturulur.</span><span class="sxs-lookup"><span data-stu-id="e69f6-312">| | `components-reconnect-hide`     | An active connection is re-established to the server.</span></span> <span data-ttu-id="e69f6-313">Kalıcı olarak gizleyin.</span><span class="sxs-lookup"><span data-stu-id="e69f6-313">Hide the modal.</span></span> <span data-ttu-id="e69f6-314">| | `components-reconnect-failed`   | Muhtemelen bir ağ hatasından dolayı yeniden bağlantı başarısız oldu.</span><span class="sxs-lookup"><span data-stu-id="e69f6-314">| | `components-reconnect-failed`   | Reconnection failed, probably due to a network failure.</span></span> <span data-ttu-id="e69f6-315">Yeniden bağlanmayı denemek için çağrısı yapın `window.Blazor.reconnect()` .</span><span class="sxs-lookup"><span data-stu-id="e69f6-315">To attempt reconnection, call `window.Blazor.reconnect()`.</span></span> <span data-ttu-id="e69f6-316">| | `components-reconnect-rejected` | Yeniden bağlantı reddedildi.</span><span class="sxs-lookup"><span data-stu-id="e69f6-316">| | `components-reconnect-rejected` | Reconnection rejected.</span></span> <span data-ttu-id="e69f6-317">Sunucuya ulaşıldı ancak bağlantı reddedildi ve kullanıcının sunucudaki durumu kayboldu.</span><span class="sxs-lookup"><span data-stu-id="e69f6-317">The server was reached but refused the connection, and the user's state on the server is lost.</span></span> <span data-ttu-id="e69f6-318">Uygulamayı yeniden yüklemek için çağrısı yapın `location.reload()` .</span><span class="sxs-lookup"><span data-stu-id="e69f6-318">To reload the app, call `location.reload()`.</span></span> <span data-ttu-id="e69f6-319">Bu bağlantı durumu şu durumlarda oluşabilir:</span><span class="sxs-lookup"><span data-stu-id="e69f6-319">This connection state may result when:</span></span><ul><li><span data-ttu-id="e69f6-320">Sunucu tarafında devre dışı bir kilitlenme oluşur.</span><span class="sxs-lookup"><span data-stu-id="e69f6-320">A crash in the server-side circuit occurs.</span></span></li><li><span data-ttu-id="e69f6-321">Sunucunun kullanıcının durumunu bırakması için istemcinin bağlantısı yeterince uzun değil.</span><span class="sxs-lookup"><span data-stu-id="e69f6-321">The client is disconnected long enough for the server to drop the user's state.</span></span> <span data-ttu-id="e69f6-322">Kullanıcının etkileşimde bulunduğu bileşenlerin örnekleri atıldı.</span><span class="sxs-lookup"><span data-stu-id="e69f6-322">Instances of the components that the user is interacting with are disposed.</span></span></li><li><span data-ttu-id="e69f6-323">Sunucu yeniden başlatıldı veya uygulamanın çalışan işlemi geri dönüştürüldü.</span><span class="sxs-lookup"><span data-stu-id="e69f6-323">The server is restarted, or the app's worker process is recycled.</span></span></li></ul> |
+-
+<span data-ttu-id="dbfc7-301">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="dbfc7-301">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
+<span data-ttu-id="dbfc7-302">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-302">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
+- <span data-ttu-id="dbfc7-303">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-303">'Blazor'</span></span>
+- <span data-ttu-id="dbfc7-304">'Identity'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-304">'Identity'</span></span>
+- <span data-ttu-id="dbfc7-305">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-305">'Let's Encrypt'</span></span>
+- <span data-ttu-id="dbfc7-306">'Razor'</span><span class="sxs-lookup"><span data-stu-id="dbfc7-306">'Razor'</span></span>
+- <span data-ttu-id="dbfc7-307">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-307">'SignalR' uid:</span></span> 
 
-### <a name="render-mode"></a><span data-ttu-id="e69f6-324">Oluşturma modu</span><span class="sxs-lookup"><span data-stu-id="e69f6-324">Render mode</span></span>
+<span data-ttu-id="dbfc7-308">--------- | | `components-reconnect-show`     | Kayıp bir bağlantı.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-308">--------- | | `components-reconnect-show`     | A lost connection.</span></span> <span data-ttu-id="dbfc7-309">İstemci yeniden bağlanmaya çalışıyor.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-309">The client is attempting to reconnect.</span></span> <span data-ttu-id="dbfc7-310">Kalıcı olarak göster.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-310">Show the modal.</span></span> <span data-ttu-id="dbfc7-311">| | `components-reconnect-hide`     | Etkin bir bağlantı sunucuya yeniden oluşturulur.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-311">| | `components-reconnect-hide`     | An active connection is re-established to the server.</span></span> <span data-ttu-id="dbfc7-312">Kalıcı olarak gizleyin.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-312">Hide the modal.</span></span> <span data-ttu-id="dbfc7-313">| | `components-reconnect-failed`   | Muhtemelen bir ağ hatasından dolayı yeniden bağlantı başarısız oldu.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-313">| | `components-reconnect-failed`   | Reconnection failed, probably due to a network failure.</span></span> <span data-ttu-id="dbfc7-314">Yeniden bağlanmayı denemek için çağrısı yapın `window.Blazor.reconnect()` .</span><span class="sxs-lookup"><span data-stu-id="dbfc7-314">To attempt reconnection, call `window.Blazor.reconnect()`.</span></span> <span data-ttu-id="dbfc7-315">| | `components-reconnect-rejected` | Yeniden bağlantı reddedildi.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-315">| | `components-reconnect-rejected` | Reconnection rejected.</span></span> <span data-ttu-id="dbfc7-316">Sunucuya ulaşıldı ancak bağlantı reddedildi ve kullanıcının sunucudaki durumu kayboldu.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-316">The server was reached but refused the connection, and the user's state on the server is lost.</span></span> <span data-ttu-id="dbfc7-317">Uygulamayı yeniden yüklemek için çağrısı yapın `location.reload()` .</span><span class="sxs-lookup"><span data-stu-id="dbfc7-317">To reload the app, call `location.reload()`.</span></span> <span data-ttu-id="dbfc7-318">Bu bağlantı durumu şu durumlarda oluşabilir:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-318">This connection state may result when:</span></span><ul><li><span data-ttu-id="dbfc7-319">Sunucu tarafında devre dışı bir kilitlenme oluşur.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-319">A crash in the server-side circuit occurs.</span></span></li><li><span data-ttu-id="dbfc7-320">Sunucunun kullanıcının durumunu bırakması için istemcinin bağlantısı yeterince uzun değil.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-320">The client is disconnected long enough for the server to drop the user's state.</span></span> <span data-ttu-id="dbfc7-321">Kullanıcının etkileşimde bulunduğu bileşenlerin örnekleri atıldı.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-321">Instances of the components that the user is interacting with are disposed.</span></span></li><li><span data-ttu-id="dbfc7-322">Sunucu yeniden başlatıldı veya uygulamanın çalışan işlemi geri dönüştürüldü.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-322">The server is restarted, or the app's worker process is recycled.</span></span></li></ul> |
 
-Blazor<span data-ttu-id="e69f6-325">Sunucu uygulamaları, sunucu bağlantısı kurumadan önce sunucudaki kullanıcı arabirimini varsayılan olarak PreRender 'a ayarlar.</span><span class="sxs-lookup"><span data-stu-id="e69f6-325"> Server apps are set up by default to prerender the UI on the server before the client connection to the server is established.</span></span> <span data-ttu-id="e69f6-326">Bu, *_Host. cshtml* Razor sayfasında ayarlanır:</span><span class="sxs-lookup"><span data-stu-id="e69f6-326">This is set up in the *_Host.cshtml* Razor page:</span></span>
+### <a name="render-mode"></a><span data-ttu-id="dbfc7-323">Oluşturma modu</span><span class="sxs-lookup"><span data-stu-id="dbfc7-323">Render mode</span></span>
+
+Blazor<span data-ttu-id="dbfc7-324">Sunucu uygulamaları, sunucu bağlantısı kurumadan önce sunucudaki kullanıcı arabirimini varsayılan olarak PreRender 'a ayarlar.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-324"> Server apps are set up by default to prerender the UI on the server before the client connection to the server is established.</span></span> <span data-ttu-id="dbfc7-325">Bu, *_Host. cshtml* Razor sayfasında ayarlanır:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-325">This is set up in the *_Host.cshtml* Razor page:</span></span>
 
 ```cshtml
 <body>
@@ -473,113 +473,27 @@ Blazor<span data-ttu-id="e69f6-325">Sunucu uygulamaları, sunucu bağlantısı k
 </body>
 ```
 
-<span data-ttu-id="e69f6-327">`RenderMode`bileşenin şunları yapıp kullanmadığını yapılandırır:</span><span class="sxs-lookup"><span data-stu-id="e69f6-327">`RenderMode` configures whether the component:</span></span>
+<span data-ttu-id="dbfc7-326"><xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode>bileşenin şunları yapıp kullanmadığını yapılandırır:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-326"><xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> configures whether the component:</span></span>
 
-* <span data-ttu-id="e69f6-328">, Sayfaya ön gönderilir.</span><span class="sxs-lookup"><span data-stu-id="e69f6-328">Is prerendered into the page.</span></span>
-* <span data-ttu-id="e69f6-329">, Sayfada statik HTML olarak veya Kullanıcı aracısından bir uygulamayı önyüklemek için gerekli bilgileri içeriyorsa Blazor .</span><span class="sxs-lookup"><span data-stu-id="e69f6-329">Is rendered as static HTML on the page or if it includes the necessary information to bootstrap a Blazor app from the user agent.</span></span>
+* <span data-ttu-id="dbfc7-327">, Sayfaya ön gönderilir.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-327">Is prerendered into the page.</span></span>
+* <span data-ttu-id="dbfc7-328">, Sayfada statik HTML olarak veya Kullanıcı aracısından bir uygulamayı önyüklemek için gerekli bilgileri içeriyorsa Blazor .</span><span class="sxs-lookup"><span data-stu-id="dbfc7-328">Is rendered as static HTML on the page or if it includes the necessary information to bootstrap a Blazor app from the user agent.</span></span>
 
-| `RenderMode`        | <span data-ttu-id="e69f6-330">Açıklama</span><span class="sxs-lookup"><span data-stu-id="e69f6-330">Description</span></span> |
-| ---
-<span data-ttu-id="e69f6-331">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-331">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-332">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-332">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-333">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-333">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-334">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-334">'Identity'</span></span>
-- <span data-ttu-id="e69f6-335">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-335">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-336">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-336">'Razor'</span></span>
-- <span data-ttu-id="e69f6-337">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-337">'SignalR' uid:</span></span> 
+| <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> | <span data-ttu-id="dbfc7-329">Açıklama</span><span class="sxs-lookup"><span data-stu-id="dbfc7-329">Description</span></span> |
+| --- | --- |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | <span data-ttu-id="dbfc7-330">Bileşeni statik HTML olarak işler ve sunucu uygulaması için bir işaret içerir Blazor .</span><span class="sxs-lookup"><span data-stu-id="dbfc7-330">Renders the component into static HTML and includes a marker for a Blazor Server app.</span></span> <span data-ttu-id="dbfc7-331">Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor .</span><span class="sxs-lookup"><span data-stu-id="dbfc7-331">When the user-agent starts, this marker is used to bootstrap a Blazor app.</span></span> |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | <span data-ttu-id="dbfc7-332">Sunucu uygulaması için bir işaret oluşturur Blazor .</span><span class="sxs-lookup"><span data-stu-id="dbfc7-332">Renders a marker for a Blazor Server app.</span></span> <span data-ttu-id="dbfc7-333">Bileşen çıkışı dahil değildir.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-333">Output from the component isn't included.</span></span> <span data-ttu-id="dbfc7-334">Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor .</span><span class="sxs-lookup"><span data-stu-id="dbfc7-334">When the user-agent starts, this marker is used to bootstrap a Blazor app.</span></span> |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | <span data-ttu-id="dbfc7-335">Bileşeni statik HTML olarak işler.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-335">Renders the component into static HTML.</span></span> |
 
--
-<span data-ttu-id="e69f6-338">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-338">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-339">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-339">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-340">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-340">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-341">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-341">'Identity'</span></span>
-- <span data-ttu-id="e69f6-342">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-342">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-343">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-343">'Razor'</span></span>
-- <span data-ttu-id="e69f6-344">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-344">'SignalR' uid:</span></span> 
+<span data-ttu-id="dbfc7-336">Statik HTML sayfasından sunucu bileşenleri işleme desteklenmiyor.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-336">Rendering server components from a static HTML page isn't supported.</span></span>
 
--
-<span data-ttu-id="e69f6-345">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-345">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-346">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-346">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-347">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-347">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-348">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-348">'Identity'</span></span>
-- <span data-ttu-id="e69f6-349">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-349">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-350">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-350">'Razor'</span></span>
-- <span data-ttu-id="e69f6-351">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-351">'SignalR' uid:</span></span> 
+### <a name="configure-the-signalr-client-for-blazor-server-apps"></a><span data-ttu-id="dbfc7-337">SignalRSunucu uygulamaları için istemciyi Blazor yapılandırma</span><span class="sxs-lookup"><span data-stu-id="dbfc7-337">Configure the SignalR client for Blazor Server apps</span></span>
 
--
-<span data-ttu-id="e69f6-352">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-352">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-353">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-353">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-354">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-354">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-355">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-355">'Identity'</span></span>
-- <span data-ttu-id="e69f6-356">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-356">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-357">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-357">'Razor'</span></span>
-- <span data-ttu-id="e69f6-358">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-358">'SignalR' uid:</span></span> 
+<span data-ttu-id="dbfc7-338">Bazen, SignalR sunucu uygulamaları tarafından kullanılan istemciyi yapılandırmanız gerekir Blazor .</span><span class="sxs-lookup"><span data-stu-id="dbfc7-338">Sometimes, you need to configure the SignalR client used by Blazor Server apps.</span></span> <span data-ttu-id="dbfc7-339">Örneğin, SignalR bir bağlantı sorununu tanılamak için istemcide günlüğe kaydetmeyi yapılandırmak isteyebilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="dbfc7-339">For example, you might want to configure logging on the SignalR client to diagnose a connection issue.</span></span>
 
--
-<span data-ttu-id="e69f6-359">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-359">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-360">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-360">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-361">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-361">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-362">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-362">'Identity'</span></span>
-- <span data-ttu-id="e69f6-363">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-363">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-364">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-364">'Razor'</span></span>
-- <span data-ttu-id="e69f6-365">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-365">'SignalR' uid:</span></span> 
+<span data-ttu-id="dbfc7-340">SignalRİstemciyi, *Pages/_Host. cshtml* dosyasında yapılandırmak için:</span><span class="sxs-lookup"><span data-stu-id="dbfc7-340">To configure the SignalR client in the *Pages/_Host.cshtml* file:</span></span>
 
--
-<span data-ttu-id="e69f6-366">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-366">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-367">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-367">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-368">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-368">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-369">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-369">'Identity'</span></span>
-- <span data-ttu-id="e69f6-370">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-370">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-371">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-371">'Razor'</span></span>
-- <span data-ttu-id="e69f6-372">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-372">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="e69f6-373">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-373">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-374">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-374">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-375">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-375">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-376">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-376">'Identity'</span></span>
-- <span data-ttu-id="e69f6-377">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-377">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-378">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-378">'Razor'</span></span>
-- <span data-ttu-id="e69f6-379">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-379">'SignalR' uid:</span></span> 
-
-<span data-ttu-id="e69f6-380">---------- | ---title: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-380">---------- | --- title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-381">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-381">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-382">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-382">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-383">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-383">'Identity'</span></span>
-- <span data-ttu-id="e69f6-384">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-384">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-385">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-385">'Razor'</span></span>
-- <span data-ttu-id="e69f6-386">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-386">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="e69f6-387">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-387">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-388">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-388">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-389">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-389">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-390">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-390">'Identity'</span></span>
-- <span data-ttu-id="e69f6-391">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-391">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-392">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-392">'Razor'</span></span>
-- <span data-ttu-id="e69f6-393">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-393">'SignalR' uid:</span></span> 
-
--
-<span data-ttu-id="e69f6-394">Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '</span><span class="sxs-lookup"><span data-stu-id="e69f6-394">title: 'ASP.NET Core Blazor hosting model configuration' author: description: 'Learn about Blazor hosting model configuration, including how to integrate Razor components into Razor Pages and MVC apps.'</span></span>
-<span data-ttu-id="e69f6-395">monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:</span><span class="sxs-lookup"><span data-stu-id="e69f6-395">monikerRange: ms.author: ms.custom: ms.date: no-loc:</span></span>
-- <span data-ttu-id="e69f6-396">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-396">'Blazor'</span></span>
-- <span data-ttu-id="e69f6-397">'Identity'</span><span class="sxs-lookup"><span data-stu-id="e69f6-397">'Identity'</span></span>
-- <span data-ttu-id="e69f6-398">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="e69f6-398">'Let's Encrypt'</span></span>
-- <span data-ttu-id="e69f6-399">'Razor'</span><span class="sxs-lookup"><span data-stu-id="e69f6-399">'Razor'</span></span>
-- <span data-ttu-id="e69f6-400">' SignalR ' uid:</span><span class="sxs-lookup"><span data-stu-id="e69f6-400">'SignalR' uid:</span></span> 
-
-<span data-ttu-id="e69f6-401">------ | | `ServerPrerendered` | Bileşeni statik HTML olarak işler ve sunucu uygulaması için bir işaret içerir Blazor .</span><span class="sxs-lookup"><span data-stu-id="e69f6-401">------ | | `ServerPrerendered` | Renders the component into static HTML and includes a marker for a Blazor Server app.</span></span> <span data-ttu-id="e69f6-402">Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor .</span><span class="sxs-lookup"><span data-stu-id="e69f6-402">When the user-agent starts, this marker is used to bootstrap a Blazor app.</span></span> <span data-ttu-id="e69f6-403">| | `Server`            | Sunucu uygulaması için bir işaret oluşturur Blazor .</span><span class="sxs-lookup"><span data-stu-id="e69f6-403">| | `Server`            | Renders a marker for a Blazor Server app.</span></span> <span data-ttu-id="e69f6-404">Bileşen çıkışı dahil değildir.</span><span class="sxs-lookup"><span data-stu-id="e69f6-404">Output from the component isn't included.</span></span> <span data-ttu-id="e69f6-405">Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor .</span><span class="sxs-lookup"><span data-stu-id="e69f6-405">When the user-agent starts, this marker is used to bootstrap a Blazor app.</span></span> <span data-ttu-id="e69f6-406">| | `Static`            | Bileşeni statik HTML olarak işler.</span><span class="sxs-lookup"><span data-stu-id="e69f6-406">| | `Static`            | Renders the component into static HTML.</span></span> |
-
-<span data-ttu-id="e69f6-407">Statik HTML sayfasından sunucu bileşenleri işleme desteklenmiyor.</span><span class="sxs-lookup"><span data-stu-id="e69f6-407">Rendering server components from a static HTML page isn't supported.</span></span>
-
-### <a name="configure-the-signalr-client-for-blazor-server-apps"></a><span data-ttu-id="e69f6-408">SignalRSunucu uygulamaları için istemciyi Blazor yapılandırma</span><span class="sxs-lookup"><span data-stu-id="e69f6-408">Configure the SignalR client for Blazor Server apps</span></span>
-
-<span data-ttu-id="e69f6-409">Bazen, SignalR sunucu uygulamaları tarafından kullanılan istemciyi yapılandırmanız gerekir Blazor .</span><span class="sxs-lookup"><span data-stu-id="e69f6-409">Sometimes, you need to configure the SignalR client used by Blazor Server apps.</span></span> <span data-ttu-id="e69f6-410">Örneğin, SignalR bir bağlantı sorununu tanılamak için istemcide günlüğe kaydetmeyi yapılandırmak isteyebilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="e69f6-410">For example, you might want to configure logging on the SignalR client to diagnose a connection issue.</span></span>
-
-<span data-ttu-id="e69f6-411">SignalRİstemciyi, *Pages/_Host. cshtml* dosyasında yapılandırmak için:</span><span class="sxs-lookup"><span data-stu-id="e69f6-411">To configure the SignalR client in the *Pages/_Host.cshtml* file:</span></span>
-
-* <span data-ttu-id="e69f6-412">`autostart="false"`Betiğin etiketine bir öznitelik ekleyin `<script>` `blazor.server.js` .</span><span class="sxs-lookup"><span data-stu-id="e69f6-412">Add an `autostart="false"` attribute to the `<script>` tag for the `blazor.server.js` script.</span></span>
-* <span data-ttu-id="e69f6-413">`Blazor.start`Oluşturucuyu belirten bir yapılandırma nesnesi çağırın ve geçirin SignalR .</span><span class="sxs-lookup"><span data-stu-id="e69f6-413">Call `Blazor.start` and pass in a configuration object that specifies the SignalR builder.</span></span>
+* <span data-ttu-id="dbfc7-341">`autostart="false"`Betiğin etiketine bir öznitelik ekleyin `<script>` `blazor.server.js` .</span><span class="sxs-lookup"><span data-stu-id="dbfc7-341">Add an `autostart="false"` attribute to the `<script>` tag for the `blazor.server.js` script.</span></span>
+* <span data-ttu-id="dbfc7-342">`Blazor.start`Oluşturucuyu belirten bir yapılandırma nesnesi çağırın ve geçirin SignalR .</span><span class="sxs-lookup"><span data-stu-id="dbfc7-342">Call `Blazor.start` and pass in a configuration object that specifies the SignalR builder.</span></span>
 
 ```html
 <script src="_framework/blazor.server.js" autostart="false"></script>
@@ -592,6 +506,6 @@ Blazor<span data-ttu-id="e69f6-325">Sunucu uygulamaları, sunucu bağlantısı k
 </script>
 ```
 
-### <a name="logging"></a><span data-ttu-id="e69f6-414">Günlüğe kaydetme</span><span class="sxs-lookup"><span data-stu-id="e69f6-414">Logging</span></span>
+### <a name="logging"></a><span data-ttu-id="dbfc7-343">Günlüğe kaydetme</span><span class="sxs-lookup"><span data-stu-id="dbfc7-343">Logging</span></span>
 
-<span data-ttu-id="e69f6-415">BlazorSunucu günlüğü desteği hakkında bilgi için bkz <xref:fundamentals/logging/index#create-logs-in-blazor> ..</span><span class="sxs-lookup"><span data-stu-id="e69f6-415">For information on Blazor Server logging support, see <xref:fundamentals/logging/index#create-logs-in-blazor>.</span></span>
+<span data-ttu-id="dbfc7-344">BlazorSunucu günlüğü desteği hakkında bilgi için bkz <xref:fundamentals/logging/index#create-logs-in-blazor> ..</span><span class="sxs-lookup"><span data-stu-id="dbfc7-344">For information on Blazor Server logging support, see <xref:fundamentals/logging/index#create-logs-in-blazor>.</span></span>
