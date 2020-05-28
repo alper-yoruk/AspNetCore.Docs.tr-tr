@@ -220,8 +220,8 @@ Dı sistemi ASP.NET Core içindeki DI sistemini temel alır. Daha fazla bilgi i�
 
 Hizmetler hizmet koleksiyonuna eklendikten sonra, [ \@ ekleme](xref:mvc/views/razor#inject) yönergesini kullanarak hizmetleri bileşenlere ekleyin Razor . [`@inject`](xref:mvc/views/razor#inject)iki parametreye sahiptir:
 
-* &ndash;Eklenecek hizmetin türünü yazın.
-* Özelliği &ndash; eklenen App Service 'i alan özelliğin adı. Özelliği el ile oluşturma gerektirmez. Derleyici özelliği oluşturur.
+* Tür: eklenecek hizmetin türü.
+* Özellik: eklenen App Service 'i alan özelliğin adı. Özelliği el ile oluşturma gerektirmez. Derleyici özelliği oluşturur.
 
 Daha fazla bilgi için bkz. <xref:mvc/views/dependency-injection>.
 

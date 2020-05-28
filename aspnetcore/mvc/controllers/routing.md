@@ -92,7 +92,7 @@ endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}"
 > Yönlendirme, <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting*> ve <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> ara yazılımı kullanılarak yapılandırılır. Denetleyicileri kullanmak için:
 >
 > * <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*> `UseEndpoints` [Öznitelik yönlendirmeli](#ar) denetleyicileri eşlemek için içinde çağırın.
-> * <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> [Genel olarak yönlendirmeli](#cr) denetleyicileri eşlemek için veya çağrısı yapın.
+> * <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> Hem [genel olarak yönlendirmeli](#cr) denetleyicileri hem de [öznitelik yönlendirmeli](#ar) denetleyicileri eşlemek için veya öğesini çağırın.
 
 <a name="routing-conventional-ref-label"></a>
 <a name="crd"></a>
@@ -257,7 +257,7 @@ REST API 'Leri, uygulamanın işlevselliğini [http fiilleri](#verb)tarafından 
 
 Öznitelik yönlendirme eylemleri doğrudan yönlendirme şablonlarına eşlemek için bir öznitelik kümesi kullanır. Aşağıdaki `StartUp.Configure` kod, bir REST API için tipik bir sonraki örnekte kullanılır:
 
-[!code-csharp[](routing/samples/3.x/main/StartupApi.cs?name=snippet)]
+[!code-csharp[](routing/samples/3.x/main/StartupAPI.cs?name=snippet)]
 
 Önceki kodda, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*> `UseEndpoints` öznitelik yönlendirmeli denetleyicileri eşlemek için içinde çağırılır.
 
@@ -272,10 +272,7 @@ Eylem,, `HomeController.Index` veya URL yollarından herhangi biri için çalı�
 
 Bu örnek, öznitelik yönlendirme ve [geleneksel yönlendirme](#cr)arasında bir temel programlama farkı vurgulamaktadır. Öznitelik yönlendirme için bir yol belirtmek için daha fazla giriş gerekir. Geleneksel varsayılan yol, yönlendirmeleri daha succinctly işler. Ancak, öznitelik yönlendirme izin verir ve her [eyleme](#action)hangi rota şablonlarının uygulanacağını kesin olarak denetler.
 
-Aşağıdaki kodda:
-
-* Denetleyici adı ve eylem adları, eylem ile eşleşen **hiçbir** rol oynar.
-* Önceki örnekle aynı URL 'Lerle eşleşir:
+Öznitelik yönlendirme ile, denetleyici ve eylem adları, [belirteç değiştirme](#routing-token-replacement-templates-ref-label) kullanılmadığı takdirde, eylemin eşleştirildiği hiçbir parçasını oynar. Aşağıdaki örnek, önceki örnekle aynı URL 'Lerle eşleşir:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/MyDemoController.cs?name=snippet)]
 
@@ -655,8 +652,6 @@ Eylemlerde birden çok yolun kullanılması yararlı ve güçlü görünebilir, 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet8&highlight=3)]
 
 Yukarıdaki kodda, `[HttpPost("product/{id:int}")]` bir yol kısıtlaması uygular. `ProductsController.ShowProduct`Eylem yalnızca, gıbı URL yollarıyla eşleştirilir `/product/3` . Yol şablonu bölümü, `{id:int}` Bu segmenti yalnızca tamsayılarla kısıtlar.
-
-[!code-csharp[](routing/samples/3.x/main/Controllers/HomeController.cs?name=snippet24)]
 
 Yol şablonu sözdiziminin ayrıntılı açıklaması için bkz. [route Template Reference](xref:fundamentals/routing#route-template-reference) .
 

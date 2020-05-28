@@ -1,23 +1,11 @@
 ---
-title: gRPC hizmetlerini HTTP API’leriyle karşılaştırma
-author: jamesnk
-description: GRPC 'nin HTTP API 'Leri ile nasıl Karşılaştırıldığı ve bu senaryonun önerdiğimiz ne olduğunu öğrenin.
-monikerRange: '>= aspnetcore-3.0'
-ms.author: jamesnk
-ms.date: 12/05/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: grpc/comparison
-ms.openlocfilehash: ab103adc20c5332f71d5f6e3348d0b14c69fce34
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774710"
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
 # <a name="compare-grpc-services-with-http-apis"></a>gRPC hizmetlerini HTTP API’leriyle karşılaştırma
 
@@ -30,15 +18,333 @@ Bu makalede, [GRPC HIZMETLERININ](https://grpc.io/docs/guides/) JSON Ile HTTP AP
 Aşağıdaki tabloda, gRPC ve HTTP API 'Leri arasında JSON ile yüksek düzeyde bir karşılaştırma sunulmaktadır.
 
 | Özellik          | gRPC                                               | JSON ile HTTP API 'Leri           |
-| ---------------- | -------------------------------------------------- | ----------------------------- |
-| Sözleşme         | Gerekli (*. proto*)                                | İsteğe bağlı (Openapı)            |
-| Protokol         | HTTP/2                                             | HTTP                          |
-| Te          | [Prototip (küçük, ikili)](#performance)           | JSON (büyük, insan tarafından okunabilir)  |
-| Dikkatli olun | [Katı belirtim](#strict-specification)      | Miş. Herhangi bir HTTP geçerlidir.     |
-| Akış        | [İstemci, sunucu, iki yönlü](#streaming)       | İstemci, sunucu                |
-| Tarayıcı desteği  | [Hayır (GRPC-Web gerektirir)](#limited-browser-support) | Yes                           |
-| Güvenlik         | Taşıma (TLS)                                    | Taşıma (TLS)               |
-| İstemci kod oluşturma | [Evet](#code-generation)                      | Openapı + üçüncü taraf araçları |
+| ---
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-------- | ---başlığı: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------------------------- | ---başlığı: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+--------------- | | Sözleşme | Gerekli (*. proto*) | İsteğe bağlı (Openapı) | | Protokol | HTTP/2 | HTTP | | Yük | [Prototip (küçük, ikili)](#performance) | JSON (büyük, insan okunabilir) | | Öngörülebilirlik | [Katı belirtim](#strict-specification) | Miş. Herhangi bir HTTP geçerlidir.     | | Akış | [İstemci, sunucu, iki yönlü](#streaming) | İstemci, sunucu | | Tarayıcı desteği | [Hayır (GRPC gerektirir-Web)](#limited-browser-support) | Evet | | Güvenlik | Taşıma (TLS) | Taşıma (TLS) | | İstemci kod üretimi | [Evet](#code-generation) | Openapı + üçüncü taraf araçları |
 
 ## <a name="grpc-strengths"></a>gRPC güçleri
 
@@ -86,10 +392,10 @@ Son tarihi ve iptali alt gRPC çağrıları aracılığıyla yayın, kaynak kull
 
 gRPC aşağıdaki senaryolara uygundur:
 
-* **Mikro hizmetler** &ndash; GRPC, düşük gecikme süresi ve yüksek işleme iletişimi için tasarlanmıştır. gRPC, verimlilik açısından kritik olan hafif mikro hizmetler için harika.
-* **Noktadan noktaya gerçek zamanlı iletişim** &ndash; GRPC, iki yönlü akış için mükemmel destek içerir. gRPC Hizmetleri, yoklama yapmadan iletileri gerçek zamanlı olarak gönderebilir.
-* **Çok yönlü ortamları** &ndash; GRPC araçları, tüm popüler geliştirme dillerini destekler ve GRPC 'yi çok dilli ortamlar için iyi bir seçenek yapar.
-* **Ağ kısıtlı ortamları** &ndash; GRPC iletileri, hafif bir ileti biçimi olan prototip ile serileştirilir. GRPC iletisi her zaman denk bir JSON iletisinden daha küçüktür.
+* **Mikro hizmetler**: GRPC, düşük gecikme süresi ve yüksek işleme iletişimi için tasarlanmıştır. gRPC, verimlilik açısından kritik olan hafif mikro hizmetler için harika.
+* **Noktadan noktaya gerçek zamanlı iletişim**: GRPC, iki yönlü akış için harika desteğe sahiptir. gRPC Hizmetleri, yoklama yapmadan iletileri gerçek zamanlı olarak gönderebilir.
+* **Çok yönlü ortamları**: GRPC araçları, tüm popüler geliştirme dillerini destekler ve bu da GRPC 'yi çok dilli ortamlar için iyi bir seçenek yapar.
+* **Ağ kısıtlamalı ortamlar**: GRPC iletileri, hafif bir ileti biçimi olan protoarabellek ile serileştirilir. GRPC iletisi her zaman denk bir JSON iletisinden daha küçüktür.
 
 ## <a name="grpc-weaknesses"></a>gRPC zayıflığı
 
@@ -102,7 +408,7 @@ Doğrudan bir tarayıcıda bir gRPC hizmetini doğrudan çağırmak olanaksızd�
 GRPC 'nin özelliklerinin hepsi gRPC-Web tarafından desteklenmez. İstemci ve iki yönlü akış desteklenmez ve sunucu akışı için sınırlı destek vardır.
 
 > [!TIP]
-> .NET Core 'da gRPC-Web için deneysel destek vardır. Daha <xref:grpc/browser> fazla bilgi için ziyaret edin.
+> .NET Core 'da gRPC-Web için deneysel destek vardır. <xref:grpc/browser>Daha fazla bilgi için ziyaret edin.
 
 ### <a name="not-human-readable"></a>Okunabilir değil
 
@@ -116,9 +422,9 @@ gRPC iletileri varsayılan olarak Protodeğer ile kodlanır. Protoarabellek gön
 
 Aşağıdaki senaryolarda gRPC üzerinden diğer çerçeveler önerilir:
 
-* **Tarayıcıda erişilebilir API 'ler** &ndash; GRPC, tarayıcıda tam olarak desteklenmez. gRPC-Web tarayıcı desteği sunabilir, ancak sınırlamaları vardır ve sunucu proxy 'sini tanıtır.
-* **Yayın gerçek zamanlı iletişim** &ndash; GRPC, akış aracılığıyla gerçek zamanlı iletişimi destekler, ancak kayıtlı bağlantılara bir ileti yayınlama kavramı mevcut değildir. Örneğin, sohbet odasındaki tüm istemcilere yeni sohbet iletilerinin gönderilmesi gereken bir sohbet odası senaryosunda her bir gRPC çağrısı, istemciye yeni sohbet iletilerini tek tek akışa almak için gereklidir. [SignalR](xref:signalr/introduction)Bu senaryo için kullanışlı bir çerçevedir. SignalR, sürekli bağlantılar ve yayın iletileri için yerleşik destek kavramıdır.
-* İşlem **arası iletişim** &ndash; bir işlem, gelen GRPC çağrılarını kabul etmek için bir http/2 sunucusunu barındırmalıdır. Windows için, işlemler arası iletişim [kanalları](/dotnet/standard/io/pipe-operations) hızlı ve hafif bir iletişim yöntemidir.
+* **Tarayıcıda erişilebilen API 'ler**: GRPC tarayıcıda tam olarak desteklenmez. gRPC-Web tarayıcı desteği sunabilir, ancak sınırlamaları vardır ve sunucu proxy 'sini tanıtır.
+* **Gerçek zamanlı Iletişim yayınlama**: GRPC akış aracılığıyla gerçek zamanlı iletişimi destekler, ancak kayıtlı bağlantılara bir ileti yayınlama kavramı mevcut değildir. Örneğin, sohbet odasındaki tüm istemcilere yeni sohbet iletilerinin gönderilmesi gereken bir sohbet odası senaryosunda her bir gRPC çağrısı, istemciye yeni sohbet iletilerini tek tek akışa almak için gereklidir. [SignalR](xref:signalr/introduction)Bu senaryo için kullanışlı bir çerçevedir. SignalR, sürekli bağlantılar ve yayın iletileri için yerleşik destek kavramıdır.
+* İşlemler **arası iletişim**: bir işlemin, gelen GRPC çağrılarını kabul etmek IÇIN bir http/2 sunucusunu barındırması gerekir. Windows için, işlemler arası iletişim [kanalları](/dotnet/standard/io/pipe-operations) hızlı ve hafif bir iletişim yöntemidir.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

@@ -119,7 +119,7 @@ SUT [ortamı](xref:fundamentals/environments) ayarlanmamışsa, ortam varsayıla
 
 ## <a name="basic-tests-with-the-default-webapplicationfactory"></a>Varsayılan WebApplicationFactory ile temel testler
 
-[Webapplicationfactory \< TEntryPoint>](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) , tümleştirme testleri için bir [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) oluşturmak üzere kullanılır. `TEntryPoint`, genellikle sınıfının, SUT 'ın giriş noktası sınıfıdır `Startup` .
+[Webapplicationfactory \<TEntryPoint> ](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) , tümleştirme testleri için bir [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) oluşturmak için kullanılır. `TEntryPoint`, genellikle sınıfının, SUT 'ın giriş noktası sınıfıdır `Startup` .
 
 Test sınıfları sınıfı testlerin içerdiğini göstermek ve sınıftaki testler arasında paylaşılan nesne örnekleri sağlamak için bir *sınıf armatürü* arabirimi ([ıssfixture](https://xunit.github.io/docs/shared-context#class-fixture)) uygular.
 
@@ -178,7 +178,7 @@ SUT 'a yönelik herhangi bir POST isteği, uygulamanın [veri koruma antiforgery
 
 `SendAsync`Örnek uygulamadaki yardımcı uzantı yöntemleri (*yardımcılar/Httpclienconversionsions. cs*) ve `GetDocumentAsync` yardımcı yöntemi (*yardımcılar/htmlyardımcıları. cs*), aşağıdaki [sample app](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/) yöntemlerle Antiforgery denetimini işlemek için [anglesharp](https://anglesharp.github.io/) ayrıştırıcısını kullanır:
 
-* `GetDocumentAsync`&ndash; [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) 'ı alır ve döndürür `IHtmlDocument` . `GetDocumentAsync`, orijinalin temelinde bir *sanal yanıt* hazırlayan bir fabrika kullanır `HttpResponseMessage` . Daha fazla bilgi için bkz. [Anglesharp belgeleri](https://github.com/AngleSharp/AngleSharp#documentation).
+* `GetDocumentAsync`: [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) 'ı alır ve döndürür `IHtmlDocument` . `GetDocumentAsync`, orijinalin temelinde bir *sanal yanıt* hazırlayan bir fabrika kullanır `HttpResponseMessage` . Daha fazla bilgi için bkz. [Anglesharp belgeleri](https://github.com/AngleSharp/AngleSharp#documentation).
 * `SendAsync``HttpClient`bir [HttpRequestMessage](/dotnet/api/system.net.http.httprequestmessage) oluşturun ve istekleri sut 'A göndermek Için [Sendadsync (HttpRequestMessage)](/dotnet/api/system.net.http.httpclient.sendasync#System_Net_Http_HttpClient_SendAsync_System_Net_Http_HttpRequestMessage_) çağrısı yapın. `SendAsync`HTML biçimini kabul etmek için aşırı yüklemeler ( `IHtmlFormElement` ) ve şunları yapın:
   * Formun () Gönder düğmesi `IHtmlElement`
   * Form değerleri koleksiyonu ( `IEnumerable<KeyValuePair<string, string>>` )
@@ -679,7 +679,7 @@ SUT [ortamı](xref:fundamentals/environments) ayarlanmamışsa, ortam varsayıla
 
 ## <a name="basic-tests-with-the-default-webapplicationfactory"></a>Varsayılan WebApplicationFactory ile temel testler
 
-[Webapplicationfactory \< TEntryPoint>](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) , tümleştirme testleri için bir [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) oluşturmak üzere kullanılır. `TEntryPoint`, genellikle sınıfının, SUT 'ın giriş noktası sınıfıdır `Startup` .
+[Webapplicationfactory \<TEntryPoint> ](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) , tümleştirme testleri için bir [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) oluşturmak için kullanılır. `TEntryPoint`, genellikle sınıfının, SUT 'ın giriş noktası sınıfıdır `Startup` .
 
 Test sınıfları sınıfı testlerin içerdiğini göstermek ve sınıftaki testler arasında paylaşılan nesne örnekleri sağlamak için bir *sınıf armatürü* arabirimi ([ıssfixture](https://xunit.github.io/docs/shared-context#class-fixture)) uygular.
 
@@ -719,7 +719,7 @@ SUT 'a yönelik herhangi bir POST isteği, uygulamanın [veri koruma antiforgery
 
 `SendAsync`Örnek uygulamadaki yardımcı uzantı yöntemleri (*yardımcılar/Httpclienconversionsions. cs*) ve `GetDocumentAsync` yardımcı yöntemi (*yardımcılar/htmlyardımcıları. cs*), aşağıdaki [sample app](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/) yöntemlerle Antiforgery denetimini işlemek için [anglesharp](https://anglesharp.github.io/) ayrıştırıcısını kullanır:
 
-* `GetDocumentAsync`&ndash; [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) 'ı alır ve döndürür `IHtmlDocument` . `GetDocumentAsync`, orijinalin temelinde bir *sanal yanıt* hazırlayan bir fabrika kullanır `HttpResponseMessage` . Daha fazla bilgi için bkz. [Anglesharp belgeleri](https://github.com/AngleSharp/AngleSharp#documentation).
+* `GetDocumentAsync`: [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) 'ı alır ve döndürür `IHtmlDocument` . `GetDocumentAsync`, orijinalin temelinde bir *sanal yanıt* hazırlayan bir fabrika kullanır `HttpResponseMessage` . Daha fazla bilgi için bkz. [Anglesharp belgeleri](https://github.com/AngleSharp/AngleSharp#documentation).
 * `SendAsync``HttpClient`bir [HttpRequestMessage](/dotnet/api/system.net.http.httprequestmessage) oluşturun ve istekleri sut 'A göndermek Için [Sendadsync (HttpRequestMessage)](/dotnet/api/system.net.http.httpclient.sendasync#System_Net_Http_HttpClient_SendAsync_System_Net_Http_HttpRequestMessage_) çağrısı yapın. `SendAsync`HTML biçimini kabul etmek için aşırı yüklemeler ( `IHtmlFormElement` ) ve şunları yapın:
   * Formun () Gönder düğmesi `IHtmlElement`
   * Form değerleri koleksiyonu ( `IEnumerable<KeyValuePair<string, string>>` )

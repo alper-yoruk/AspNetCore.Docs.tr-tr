@@ -69,8 +69,8 @@ Razoruygulamalardaki bileşenler Blazor yaygın olarak Razor söz dizimini kulla
 
 Söz dizimi üzerindeki içeriğe erişirken Razor , aşağıdaki bölümlere özel bir dikkat ödeyin:
 
-* [Yönergeler](xref:mvc/views/razor#directives) &ndash; `@`-ön ek ayrılmış anahtar sözcükler genellikle bileşen biçimlendirmesinin ayrıştırılma veya işlev şeklini değiştirir.
-* [Yönerge öznitelikleri](xref:mvc/views/razor#directive-attributes) &ndash; `@`-ön ek ayrılmış anahtar sözcükler genellikle bileşen öğelerinin ayrıştırılıp veya işlevin şeklini değiştirir.
+* [Yönergeler](xref:mvc/views/razor#directives): `@` -genellikle bileşen biçimlendirmesinin ayrıştırılma veya işlev şeklini değiştiren ayrılmış anahtar sözcükler.
+* [Yönerge öznitelikleri](xref:mvc/views/razor#directive-attributes): `@` -önek olarak bileşen öğelerinin ayrıştırılma veya işlev şeklini değiştiren ayrılmış anahtar sözcükler.
 
 ## <a name="static-assets"></a>Statik varlıklar
 
@@ -136,7 +136,7 @@ Bileşenler, yönergede belirtilen yol şablonundan rota parametreleri alabilir 
 
 ### <a name="component-parameters"></a>Bileşen parametreleri
 
-Bileşenler, bileşen *component parameters*sınıfında [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) ] (XREF: Microsoft. Aspnetcore. components. ParameterAttribute) özniteliğiyle ortak özellikler kullanılarak tanımlanan bileşen parametrelerine sahip olabilir. Biçimlendirme içindeki bir bileşenin bağımsız değişkenlerini belirtmek için öznitelikleri kullanın.
+Bileşenler, bileşen sınıfında özniteliği ile ortak özellikler kullanılarak tanımlanan *bileşen parametrelerine*sahip olabilir [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) . Biçimlendirme içindeki bir bileşenin bağımsız değişkenlerini belirtmek için öznitelikleri kullanın.
 
 *Bileşenler/ChildComponent. Razor*:
 
@@ -974,7 +974,7 @@ Ancak, satır içi SVG işaretlemesi tüm senaryolarda desteklenmez. Bir `<svg>`
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* <xref:security/blazor/server/threat-mitigation>&ndash;Oluşturma Blazor hakkında rehberlik içerir Kaynak tükenmesi ile çekişmelidir sunucu uygulamaları.
+* <xref:security/blazor/server/threat-mitigation>: Blazor Kaynak tükenmesi ile Çekişmek zorunda olması gereken sunucu uygulamaları oluşturmaya yönelik yönergeler içerir.
 
 <!--Reference links in article-->
 [1]: <xref:mvc/views/razor#code>

@@ -1,24 +1,11 @@
 ---
-title: Web çiftliğinde ASP.NET Core ana bilgisayar
-author: rick-anderson
-description: Bir ASP.NET Core uygulamasının birden çok örneğini bir Web grubu ortamında paylaşılan kaynaklarla nasıl barındıracağınızı öğrenin.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 01/13/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: host-and-deploy/web-farm
-ms.openlocfilehash: 3474b6b1d85774a15a912efcb37ec8f206695eaf
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776363"
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>Web çiftliğinde ASP.NET Core ana bilgisayar
 
@@ -26,10 +13,10 @@ ms.locfileid: "82776363"
 
 Bir *Web grubu* , bir uygulamanın birden çok örneğini barındıran iki veya daha fazla Web sunucusu (veya *düğüm*) grubudur. Kullanıcılardan gelen istekler bir Web grubuna ulaştığında, *yük dengeleyici* istekleri Web grubunun düğümlerine dağıtır. Web gruplarının geliştirilmesi:
 
-* **Güvenilirlik/kullanılabilirlik** &ndash; bir veya daha fazla düğüm başarısız olduğunda, yük dengeleyici istekleri işlemeye devam etmek için istekleri diğer çalışan düğümlere yönlendirebilir.
-* **Kapasite/performans** &ndash; birden çok düğüm, tek bir sunucudan daha fazla istek işleyebilir. Yük dengeleyici istekleri düğümlere dağıtarak iş yükünü dengeler.
-* **Ölçeklenebilirlik** &ndash; daha fazla veya daha az kapasite gerektiğinde, etkin düğümlerin sayısı artırılabilir veya iş yüküne uyacak şekilde azalabilir. [Azure App Service](https://azure.microsoft.com/services/app-service/)gibi Web grubu platformu teknolojileri, Sistem Yöneticisi isteğine otomatik olarak veya insan müdahalesi olmadan otomatik olarak düğüm ekleyebilir veya kaldırabilir.
-* Bir Web grubunun **bakım** &ndash; düğümleri, daha kolay sistem yönetimi ile sonuçlanan bir dizi paylaşılan hizmete bağlı olabilir. Örneğin, bir Web grubunun düğümleri tek bir veritabanı sunucusunu ve görüntüler ve indirilebilir dosyalar gibi statik kaynaklar için ortak bir ağ konumunu temel alabilir.
+* **Güvenilirlik/kullanılabilirlik**: bir veya daha fazla düğüm başarısız olduğunda, yük dengeleyici istekleri işlemeye devam etmek için istekleri diğer çalışan düğümlere yönlendirebilir.
+* **Kapasite/performans**: birden çok düğüm, tek bir sunucudan daha fazla istek işleyebilir. Yük dengeleyici istekleri düğümlere dağıtarak iş yükünü dengeler.
+* **Ölçeklenebilirlik**: daha fazla veya daha az kapasite gerektiğinde, etkin düğümlerin sayısı artılarak iş yüküne uyacak şekilde artırılabilir veya azaltılabilir. [Azure App Service](https://azure.microsoft.com/services/app-service/)gibi Web grubu platformu teknolojileri, Sistem Yöneticisi isteğine otomatik olarak veya insan müdahalesi olmadan otomatik olarak düğüm ekleyebilir veya kaldırabilir.
+* Bakım **: bir**Web grubunun düğümleri, daha kolay sistem yönetimi ile sonuçlanan bir dizi paylaşılan hizmete bağlı olabilir. Örneğin, bir Web grubunun düğümleri tek bir veritabanı sunucusunu ve görüntüler ve indirilebilir dosyalar gibi statik kaynaklar için ortak bir ağ konumunu temel alabilir.
 
 Bu konuda, paylaşılan kaynaklara bağlı bir Web çiftliğinde barındırılan ASP.NET Core uygulamaları için yapılandırma ve bağımlılıklar açıklanmaktadır.
 
@@ -54,7 +41,7 @@ Veri koruma ve önbelleğe alma, bir Web grubuna dağıtılan uygulamalar için 
 
 ### <a name="data-protection"></a>Veri Koruma
 
-[ASP.NET Core Data Protection sistemi](xref:security/data-protection/introduction) , uygulamalar tarafından verileri korumak için kullanılır. Veri koruma, *anahtar halkaında*depolanan bir şifreleme anahtarı kümesini temel alır. Veri koruma sistemi başlatıldığında, anahtar halkasını yerel olarak depolayan [varsayılan ayarları](xref:security/data-protection/configuration/default-settings) uygular. Varsayılan yapılandırma altında, Web grubunun her bir düğümüne benzersiz bir anahtar halkası depolanır. Sonuç olarak, her Web grubu düğümü diğer düğümlerde bir uygulama tarafından şifrelenen verilerin şifresini çözemez. Varsayılan yapılandırma, uygulamaları bir Web grubunda barındırmak için genellikle uygun değildir. Paylaşılan anahtar halkasını uygulamaya bir alternatif, her zaman kullanıcı isteklerini aynı düğüme yönlendirkullanmaktır. Web grubu dağıtımları için veri koruma sistem yapılandırması hakkında daha fazla bilgi için bkz <xref:security/data-protection/configuration/overview>..
+[ASP.NET Core Data Protection sistemi](xref:security/data-protection/introduction) , uygulamalar tarafından verileri korumak için kullanılır. Veri koruma, *anahtar halkaında*depolanan bir şifreleme anahtarı kümesini temel alır. Veri koruma sistemi başlatıldığında, anahtar halkasını yerel olarak depolayan [varsayılan ayarları](xref:security/data-protection/configuration/default-settings) uygular. Varsayılan yapılandırma altında, Web grubunun her bir düğümüne benzersiz bir anahtar halkası depolanır. Sonuç olarak, her Web grubu düğümü diğer düğümlerde bir uygulama tarafından şifrelenen verilerin şifresini çözemez. Varsayılan yapılandırma, uygulamaları bir Web grubunda barındırmak için genellikle uygun değildir. Paylaşılan anahtar halkasını uygulamaya bir alternatif, her zaman kullanıcı isteklerini aynı düğüme yönlendirkullanmaktır. Web grubu dağıtımları için veri koruma sistem yapılandırması hakkında daha fazla bilgi için bkz <xref:security/data-protection/configuration/overview> ..
 
 ### <a name="caching"></a>Önbelleğe alma
 
@@ -65,12 +52,78 @@ Bir Web grubu ortamında, önbelleğe alma mekanizması, önbelleğe alınmış 
 Aşağıdaki senaryolar ek yapılandırma gerektirmez, ancak Web grupları için yapılandırma gerektiren teknolojilere bağımlıdır.
 
 | Senaryo | Bağlı&hellip; |
-| -------- | ------------------- |
-| Kimlik Doğrulaması | Veri koruma (bkz <xref:security/data-protection/configuration/overview>.).<br><br>Daha fazla bilgi için <xref:security/authentication/cookie> ve <xref:security/cookie-sharing> bölümlerine bakın. |
-| Identity | Kimlik doğrulama ve veritabanı yapılandırması.<br><br>Daha fazla bilgi için bkz. <xref:security/authentication/identity>. |
-| Oturum | Veri koruma (şifreli tanımlama bilgileri) ( <xref:security/data-protection/configuration/overview>bkz.) ve önbelleğe <xref:performance/caching/distributed>alma (bkz.).<br><br>Daha fazla bilgi için bkz. [oturum ve durum yönetimi: oturum durumu](xref:fundamentals/app-state#session-state). |
-| TempData | Veri koruma (şifreli tanımlama bilgileri) ( <xref:security/data-protection/configuration/overview>bkz. [oturum ve durum yönetimi: oturum durumu](xref:fundamentals/app-state#session-state)).<br><br>Daha fazla bilgi için bkz. [oturum ve durum yönetimi: TempData](xref:fundamentals/app-state#tempdata). |
-| Korsanlığa karşı koruma | Veri koruma (bkz <xref:security/data-protection/configuration/overview>.).<br><br>Daha fazla bilgi için bkz. <xref:security/anti-request-forgery>. |
+| ---
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+---- | ---title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+---------- | | Kimlik doğrulaması | Veri koruma (bkz <xref:security/data-protection/configuration/overview> .).<br><br>Daha fazla bilgi için <xref:security/authentication/cookie> ve <xref:security/cookie-sharing> bölümlerine bakın. | | Identity | Kimlik doğrulama ve veritabanı yapılandırması.<br><br>Daha fazla bilgi için bkz. <xref:security/authentication/identity>. | | Oturum | Veri koruma (şifreli tanımlama bilgileri) (bkz <xref:security/data-protection/configuration/overview> .) ve önbelleğe alma (bkz <xref:performance/caching/distributed> .).<br><br>Daha fazla bilgi için bkz. [oturum ve durum yönetimi: oturum durumu](xref:fundamentals/app-state#session-state). | | TempData | Veri koruma (şifreli tanımlama bilgileri) (bkz <xref:security/data-protection/configuration/overview> . [oturum ve durum yönetimi: oturum durumu](xref:fundamentals/app-state#session-state)).<br><br>Daha fazla bilgi için bkz. [oturum ve durum yönetimi: TempData](xref:fundamentals/app-state#tempdata). | | Anti-forma | Veri koruma (bkz <xref:security/data-protection/configuration/overview> .).<br><br>Daha fazla bilgi için bkz. <xref:security/anti-request-forgery>. |
 
 ## <a name="troubleshoot"></a>Sorun giderme
 
@@ -82,21 +135,21 @@ Tanımlama bilgisi kimlik doğrulaması kullanarak uygulamada oturum açan bir k
 
 Aşağıdaki belirtilerden herhangi biri **zaman zaman**meydana geldiğinde, sorun genellikle hatalı veri korumasına veya bir Web grubu ortamı için önbelleğe alma yapılandırmasına göre izlenmelidir:
 
-* Kimlik doğrulama &ndash; , kimlik doğrulama tanımlama bilgisi yanlış yapılandırılmış veya şifresi çözülemiyor. OAuth (Facebook, Microsoft, Twitter) veya Openıdconnect oturumları "bağıntı başarısız oldu" hatasıyla başarısız oluyor.
-* Yetkilendirme kesmeleri &ndash; Identity kaybedilir.
+* Kimlik doğrulama sonları: kimlik doğrulama tanımlama bilgisi yanlış yapılandırılmış veya şifresi çözülemiyor. OAuth (Facebook, Microsoft, Twitter) veya Openıdconnect oturumları "bağıntı başarısız oldu" hatasıyla başarısız oluyor.
+* Yetkilendirme sonları: Identity kaybedildi.
 * Oturum durumu verileri kaybeder.
 * Önbelleğe alınan öğeler kaybolur.
 * TempData başarısız olur.
-* Gönderimler &ndash; başarısız olursa, koruma denetimi başarısız olur.
+* Gönderi başarısız: koruma denetimi başarısız olur.
 
-Web grubu dağıtımları için veri koruma yapılandırması hakkında daha fazla bilgi için bkz <xref:security/data-protection/configuration/overview>.. Web grubu dağıtımları için önbelleğe alma yapılandırması hakkında daha fazla bilgi için <xref:performance/caching/distributed>bkz..
+Web grubu dağıtımları için veri koruma yapılandırması hakkında daha fazla bilgi için bkz <xref:security/data-protection/configuration/overview> .. Web grubu dağıtımları için önbelleğe alma yapılandırması hakkında daha fazla bilgi için bkz <xref:performance/caching/distributed> ..
 
 ## <a name="obtain-data-from-apps"></a>Uygulamalardan veri alma
 
-Web grubu uygulamalarının isteklere yanıt verme yeteneği varsa, Terminal satır içi ara yazılım kullanarak uygulamalardan istek, bağlantı ve ek verileri alın. Daha fazla bilgi ve örnek kod için bkz <xref:test/troubleshoot#obtain-data-from-an-app>..
+Web grubu uygulamalarının isteklere yanıt verme yeteneği varsa, Terminal satır içi ara yazılım kullanarak uygulamalardan istek, bağlantı ve ek verileri alın. Daha fazla bilgi ve örnek kod için bkz <xref:test/troubleshoot#obtain-data-from-an-app> ..
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* &ndash; [Windows için özel Betik uzantısı](/azure/virtual-machines/extensions/custom-script-windows) , Azure sanal makinelerinde dağıtım sonrası yapılandırma ve yazılım yüklemesi için yararlı olan betikleri indirir ve yürütür.
+* [Windows Için özel Betik uzantısı](/azure/virtual-machines/extensions/custom-script-windows): dağıtım sonrası yapılandırma ve yazılım yüklemesi için yararlı olan Azure sanal makinelerinde betikleri indirir ve yürütür.
 * <xref:host-and-deploy/proxy-load-balancer>
  

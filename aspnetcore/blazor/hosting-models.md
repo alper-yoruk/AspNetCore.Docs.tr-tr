@@ -95,7 +95,7 @@ BlazorUygulama, *bileşen*olarak adlandırılan Kullanıcı arabiriminin yeniden
 * HTML metnine açıldı (prerendering sırasında &dagger; ).
 * Düzenli işleme sırasında biçimlendirmeyi verimli bir şekilde güncelleştirmek için kullanılır.
 
-&dagger;*Prerendering* &ndash; İstenen Razor Bileşen, sunucuda STATIK HTML 'ye derlenir ve istemciye gönderilir ve Kullanıcı tarafından işlenir. İstemci ve sunucu arasında bağlantı kurulduktan sonra, bileşenin statik ön işlenmiş öğeleri etkileşimli öğelerle değiştirilmiştir. Prerendering, uygulamanın kullanıcıya daha fazla yanıt vermesini sağlar.
+&dagger;*Prerendering*: istenen Razor Bileşen, sunucuda statik HTML 'ye derlendi ve istemciye gönderildiğinde, kullanıcıya işlendiğinde. İstemci ve sunucu arasında bağlantı kurulduktan sonra, bileşenin statik ön işlenmiş öğeleri etkileşimli öğelerle değiştirilmiştir. Prerendering, uygulamanın kullanıcıya daha fazla yanıt vermesini sağlar.
 
 İçindeki bir kullanıcı arabirimi güncelleştirmesi Blazor tarafından tetiklenir:
 

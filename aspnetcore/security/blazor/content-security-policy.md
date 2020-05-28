@@ -28,14 +28,14 @@ CSP, Chrome, Edge, Firefox, Opera ve Safari dahil olmak üzere çoğu modern mas
 
 En düşük düzeyde, uygulamalar için aşağıdaki yönergeleri ve kaynakları belirtin Blazor . Gerektiğinde ek yönergeler ve kaynaklar ekleyin. Aşağıdaki yönergeler, bu makalenin [Ilkeyi Uygula](#apply-the-policy) bölümünde, burada Blazor webassembly ve Server için güvenlik ilkelerinin sağlandığı durumlarda kullanılır Blazor :
 
-* [taban URI 'si](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/base-uri) &ndash; Bir sayfa etiketinin URL 'Lerini kısıtlar `<base>` . `self`Uygulamanın kaynağının, düzen ve bağlantı noktası numarası dahil olmak üzere geçerli bir kaynak olduğunu belirtmek için belirtin.
-* [Engelle-tümünü-karışık-içerik](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content) &ndash; Karışık HTTP ve HTTPS içeriğini yüklemeyi engeller.
-* [varsayılan-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/default-src) &ndash; İlke tarafından açıkça belirtilmeyen kaynak yönergeleri için bir geri dönüş gösterir. `self`Uygulamanın kaynağının, düzen ve bağlantı noktası numarası dahil olmak üzere geçerli bir kaynak olduğunu belirtmek için belirtin.
-* [img-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/img-src) &ndash; Görüntüler için geçerli kaynakları gösterir.
+* [Base-URI](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/base-uri): bir sayfanın etiketinin URL 'lerini kısıtlar `<base>` . `self`Uygulamanın kaynağının, düzen ve bağlantı noktası numarası dahil olmak üzere geçerli bir kaynak olduğunu belirtmek için belirtin.
+* [Engelle-tümü-karışık-içerik](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content): karışık http ve HTTPS içeriğini yüklemeyi engeller.
+* [varsayılan-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/default-src): ilke tarafından açıkça belirtilmeyen kaynak yönergeleri için bir geri dönüş gösterir. `self`Uygulamanın kaynağının, düzen ve bağlantı noktası numarası dahil olmak üzere geçerli bir kaynak olduğunu belirtmek için belirtin.
+* [img-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/img-src): görüntüler için geçerli kaynakları gösterir.
   * `data:`URL 'lerden görüntü yüklemeye izin vermek için belirtin `data:` .
   * `https:`Https uç noktalarından görüntülerin yüklenmesine izin vermek için belirtin.
-* [nesne-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/object-src) &ndash; `<object>`, Ve etiketleri için geçerli kaynakları gösterir `<embed>` `<applet>` . `none`Tüm URL kaynaklarını engellemek için belirtin.
-* [betik-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/script-src) &ndash; Betikler için geçerli kaynakları gösterir.
+* [Object-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/object-src): `<object>` ,, ve etiketleri için geçerli kaynakları gösterir `<embed>` `<applet>` . `none`Tüm URL kaynaklarını engellemek için belirtin.
+* [Script-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/script-src): betikler için geçerli kaynakları gösterir.
   * `https://stackpath.bootstrapcdn.com/`Önyükleme betikleri için konak kaynağını belirtin.
   * `self`Uygulamanın kaynağının, düzen ve bağlantı noktası numarası dahil olmak üzere geçerli bir kaynak olduğunu belirtmek için belirtin.
   * BlazorWebassembly uygulamasında:
@@ -45,11 +45,11 @@ En düşük düzeyde, uygulamalar için aşağıdaki yönergeleri ve kaynakları
       * `sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=`
     * `unsafe-eval`' In kullanılacağını `eval()` ve dizelerden kod oluşturma yöntemlerini belirtin.
   * Bir Blazor sunucu uygulamasında, `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` stil sayfaları için geri dönüş algılamayı gerçekleştiren satır içi betiğin karmasını belirtin.
-* [Stil-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/style-src) &ndash; Stil sayfaları için geçerli kaynakları gösterir.
+* [Style-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/style-src): stil sayfaları için geçerli kaynakları gösterir.
   * `https://stackpath.bootstrapcdn.com/`Önyükleme stil sayfaları için konak kaynağını belirtin.
   * `self`Uygulamanın kaynağının, düzen ve bağlantı noktası numarası dahil olmak üzere geçerli bir kaynak olduğunu belirtmek için belirtin.
   * `unsafe-inline`Satır içi stillerin kullanılmasına izin vermek için belirtin. Blazorİstemci ve sunucunun ilk istekten sonra yeniden bağlanması için sunucu uygulamalarındaki Kullanıcı arabirimi için satır içi bildirimi gerekir. Gelecekteki bir sürümde, artık gerekli olmaması için satır içi stillendirme kaldırılmış olabilir `unsafe-inline` .
-* [yükseltme-güvenli olmayan istekler](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests) &ndash; Güvenli olmayan (HTTP) kaynaklardaki içerik URL 'Lerinin HTTPS üzerinden güvenli bir şekilde alınması gerektiğini gösterir.
+* [yükseltme-güvenli olmayan-istekler](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests): güvenli olmayan (http) kaynaklardaki Içerik URL 'lerinin https üzerinden güvenli bir şekilde alınması gerektiğini gösterir.
 
 Yukarıdaki yönergeler, Microsoft Internet Explorer hariç tüm tarayıcılar tarafından desteklenir.
 

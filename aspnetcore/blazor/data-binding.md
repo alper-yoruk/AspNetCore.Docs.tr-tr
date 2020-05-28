@@ -72,7 +72,10 @@ Parametre içeren bir özniteliği de ekleyerek diğer olaylardaki bir özelliğ
 }
 ```
 
-Öznitelik bağlama büyük/küçük harfe duyarlıdır. Örneğin, [`@bind`](xref:mvc/views/razor#bind) geçerlidir ve [`@bind`](xref:mvc/views/razor#bind) geçersizdir.
+Öznitelik bağlama büyük/küçük harfe duyarlıdır:
+
+* `@bind`geçerli.
+* `@Bind`ve `@BIND` geçersiz.
 
 ## <a name="unparsable-values"></a>Ayrıştırılamayan değerler
 

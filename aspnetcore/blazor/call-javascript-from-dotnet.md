@@ -70,8 +70,8 @@ Aşağıdaki bileşen:
 
 Bu konuya eşlik eden istemci tarafı örnek uygulamada, Kullanıcı girişi almak ve bir hoş geldiniz iletisi göstermek üzere DOM ile etkileşime geçen uygulama için iki JavaScript işlevi mevcuttur:
 
-* `showPrompt`&ndash;Kullanıcı girişini kabul etmek için bir istem üretir (kullanıcının adı) ve arayan adına adı döndürür.
-* `displayWelcome`' A &ndash; sahip BIR DOM nesnesine çağırandan bir hoş geldiniz iletisi atar `id` `welcome` .
+* `showPrompt`: Kullanıcı girişini kabul etmek için bir istem üretir (kullanıcının adı) ve arayan adına adı döndürür.
+* `displayWelcome`: Çağıran bir DOM nesnesine çağırandan bir hoş geldiniz iletisi atar `id` `welcome` .
 
 *Wwwroot/Examplejsınterop. js*:
 

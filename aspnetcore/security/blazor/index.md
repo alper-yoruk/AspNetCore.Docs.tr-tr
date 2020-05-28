@@ -55,7 +55,7 @@ Yerleşik <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStat
 
 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider>, <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> bileşen ve <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState> bileşen tarafından kimlik doğrulama durumunu almak için kullanılan temel hizmettir.
 
-Genellikle doğrudan kullanmazsınız <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> . Bu makalenin ilerleyen kısımlarında açıklanan [Authorizeview bileşenini](#authorizeview-component) veya [görev \< authenticationstate>](#expose-the-authentication-state-as-a-cascading-parameter) yaklaşımlarını kullanın. Doğrudan kullanmanın ana dezavantajı, <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> temeldeki kimlik doğrulama durumu verileri değişirse bileşen tarafından otomatik olarak bildirilmemektedir.
+Genellikle doğrudan kullanmazsınız <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> . Bu makalenin ilerleyen kısımlarında açıklanan [Authorizeview bileşenini](#authorizeview-component) veya [görev \<AuthenticationState> ](#expose-the-authentication-state-as-a-cascading-parameter) yaklaşımlarını kullanın. Doğrudan kullanmanın ana dezavantajı, <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> temeldeki kimlik doğrulama durumu verileri değişirse bileşen tarafından otomatik olarak bildirilmemektedir.
 
 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider>Hizmet, <xref:System.Security.Claims.ClaimsPrincipal> Aşağıdaki örnekte gösterildiği gibi geçerli kullanıcının verilerini sağlayabilir:
 
@@ -76,7 +76,7 @@ Genellikle doğrudan kullanmazsınız <xref:Microsoft.AspNetCore.Components.Auth
     <ul>
         @foreach (var claim in _claims)
         {
-            <li>@claim.Type &ndash; @claim.Value</li>
+            <li>@claim.Type: @claim.Value</li>
         }
     </ul>
 }
@@ -467,7 +467,7 @@ Daha fazla bilgi için, altındaki makalelere bakın <xref:security/blazor/webas
 
 Yaygın hatalar:
 
-* **Yetkilendirme, görev authenticationstate> türünde bir geçişli parametre gerektirir \< . Bunu sağlamak için basamaklı Dingauthenticationstate kullanmayı göz önünde bulundurun.**
+* **Yetkilendirme, görev türünde basamaklı bir parametre gerektirir \<AuthenticationState> . Bunu sağlamak için basamaklı Dingauthenticationstate kullanmayı göz önünde bulundurun.**
 
 * **`null`için değer alındı`authenticationStateTask`**
 

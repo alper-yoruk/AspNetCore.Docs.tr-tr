@@ -1,23 +1,11 @@
 ---
-title: ASP.NET Core ile Visual Studio kapsayıcı araçları
-author: spboyer
-description: Visual Studio Araçları 'nı kullanmayı öğrenin ve bir ASP.NET Core uygulamasını kapsayıleştirmek için Docker for Windows.
-ms.author: scaddie
-ms.custom: mvc
-ms.date: 09/12/2018
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: host-and-deploy/docker/visual-studio-tools-for-docker
-ms.openlocfilehash: 8b62e27033bf0b7c05a70050807970fe0c74e2f8
-ms.sourcegitcommit: 84b46594f57608f6ac4f0570172c7051df507520
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82967577"
+Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
 # <a name="visual-studio-container-tools-with-aspnet-core"></a>ASP.NET Core ile Visual Studio kapsayıcı araçları
 
@@ -60,7 +48,7 @@ Hedef çerçeve .NET Core ise, **Işletim sistemi** açılır listesi bir kapsay
 .NET Core 'u hedefleyen ASP.NET Core projeleri için, araç aracılığıyla Docker desteği eklemenin iki seçeneği vardır. Visual Studio 'da projeyi açın ve aşağıdaki seçeneklerden birini belirleyin:
 
 * **Proje** menüsünden **Docker desteği** ' ni seçin.
-* **Çözüm Gezgini** projeye sağ tıklayın ve**Docker desteği** **Ekle** > ' yi seçin.
+* **Çözüm Gezgini** projeye sağ tıklayın ve **Add**  >  **Docker desteği**Ekle ' yi seçin.
 
 Visual Studio kapsayıcı araçları, .NET Framework hedefleme ASP.NET Core var olan bir projeye Docker eklemeyi desteklemez.
 
@@ -88,9 +76,9 @@ Yukarıdaki *Dockerfile* , [Microsoft/aspnetcore](https://hub.docker.com/r/micro
 
 ## <a name="add-container-orchestrator-support-to-an-app"></a>Bir uygulamaya kapsayıcı Orchestrator desteği ekleme
 
-Visual Studio 2017, tek kapsayıcı düzenleme çözümü olarak [Docker Compose](https://docs.docker.com/compose/overview/) 15,7 veya önceki bir sürümü destekler. Docker Compose yapıtlar,**Docker desteği** **Ekle** > aracılığıyla eklenir.
+Visual Studio 2017, tek kapsayıcı düzenleme çözümü olarak [Docker Compose](https://docs.docker.com/compose/overview/) 15,7 veya önceki bir sürümü destekler. Docker Compose yapıtlar, **Add**  >  **Docker desteği**Ekle aracılığıyla eklenir.
 
-Visual Studio 2017 sürümleri 15,8 veya üzeri bir düzenleme çözümünü yalnızca sorulduğunda ekleyin. **Çözüm Gezgini** ' de projeye sağ tıklayın ve**kapsayıcı Orchestrator desteği** **Ekle** > ' yi seçin. Aşağıdaki seçenekler kullanılabilir: 
+Visual Studio 2017 sürümleri 15,8 veya üzeri bir düzenleme çözümünü yalnızca sorulduğunda ekleyin. **Çözüm Gezgini** ' de projeye sağ tıklayın ve **Add**  >  **kapsayıcı Orchestrator desteği**Ekle ' yi seçin. Aşağıdaki seçenekler kullanılabilir: 
 
 * [Docker Compose](#docker-compose)
 * [Service Fabric](#service-fabric)
@@ -100,18 +88,18 @@ Visual Studio 2017 sürümleri 15,8 veya üzeri bir düzenleme çözümünü yal
 
 Visual Studio kapsayıcı araçları, aşağıdaki dosyalarla çözüme bir *Docker-Compose* projesi ekler:
 
-* *Docker-Compose. dcproj* &ndash; projeyi temsil eden dosya. Kullanılacak işletim `<DockerTargetOS>` sistemini belirleyen bir öğesi içerir.
-* *. dockerıgnore* &ndash; , derleme bağlamı oluştururken dışlanacak dosya ve Dizin düzenlerini listeler.
-* *Docker-Compose. yıml* &ndash; , sırasıyla [Docker Compose](https://docs.docker.com/compose/overview/) ve `docker-compose build` `docker-compose run`ile oluşturulan ve çalıştıran görüntülerin koleksiyonunu tanımlamak için kullanılan temel Docker Compose dosyasıdır.
-* *Docker-Compose. override. yıml* &ndash; isteğe bağlı bir dosya, Docker Compose tarafından okunan hizmetler için yapılandırma geçersiz kılmalarıyla. Visual Studio bu `docker-compose -f "docker-compose.yml" -f "docker-compose.override.yml"` dosyaları birleştirmek için yürütülür.
+* *Docker-Compose. dcproj*: projeyi temsil eden dosya. `<DockerTargetOS>`Kullanılacak işletim sistemini belirleyen bir öğesi içerir.
+* *. dockerıgnore*: derleme bağlamı oluşturulurken dışlanacak dosya ve Dizin düzenlerini listeler.
+* *Docker-Compose. yml*: sırasıyla ve ile oluşturulan ve çalıştıran görüntülerin koleksiyonunu tanımlamak için kullanılan temel [Docker Compose](https://docs.docker.com/compose/overview/) dosyası `docker-compose build` `docker-compose run` .
+* *Docker-Compose. override. yml*: isteğe bağlı bir dosya, Docker Compose tarafından okunan hizmetler için yapılandırma geçersiz kılmalarıyla. Visual Studio `docker-compose -f "docker-compose.yml" -f "docker-compose.override.yml"` Bu dosyaları birleştirmek için yürütülür.
 
 *Docker-Compose. yml* dosyası, proje çalışırken oluşturulan görüntünün adına başvurur:
 
 [!code-yaml[](visual-studio-tools-for-docker/samples/2.0/docker-compose.yml?highlight=5)]
 
-Yukarıdaki örnekte, `image: hellodockertools` uygulama **hata ayıklama** modunda çalıştırıldığında `hellodockertools:dev` görüntüyü oluşturur. Uygulama `hellodockertools:latest` **yayın** modunda çalıştığında görüntü oluşturulur.
+Yukarıdaki örnekte, `image: hellodockertools` `hellodockertools:dev` uygulama **hata ayıklama** modunda çalıştırıldığında görüntüyü oluşturur. `hellodockertools:latest`Uygulama **yayın** modunda çalıştığında görüntü oluşturulur.
 
-Görüntü kayıt defterine itilse, görüntü adını [Docker Hub](https://hub.docker.com/) Kullanıcı adı `dockerhubusername/hellodockertools`(örneğin,) ile önek yapın. Alternatif olarak, yapılandırmaya bağlı olarak, görüntü adını özel kayıt defteri URL 'sini (örneğin `privateregistry.domain.com/hellodockertools`,) içerecek şekilde değiştirin.
+Görüntü kayıt defterine itilse, görüntü adını [Docker Hub](https://hub.docker.com/) Kullanıcı adı (örneğin,) ile önek yapın `dockerhubusername/hellodockertools` . Alternatif olarak, yapılandırmaya bağlı olarak, görüntü adını özel kayıt defteri URL 'sini (örneğin,) içerecek şekilde değiştirin `privateregistry.domain.com/hellodockertools` .
 
 Yapı yapılandırmasına (örneğin, hata ayıklama veya sürüm) göre farklı davranışlar istiyorsanız, yapılandırmaya özgü *Docker-Compose* dosyaları ekleyin. Dosyalar derleme yapılandırmasına göre adlandırılmalıdır (örneğin, *Docker-Compose. vs. Debug. yıml* ve *Docker-Compose. vs. Release. yıml*) ve *Docker-Compose-override. yıml* dosyasıyla aynı konuma yerleştirildi. 
 
@@ -130,12 +118,12 @@ Service Fabric, Windows 'da yerel geliştirme kümesinde Linux kapsayıcıları 
 
 Visual Studio kapsayıcı araçları aşağıdaki görevleri yapılır:
 
-* Çözüme bir * &lt;Project_Name&gt;uygulaması* **Service Fabric uygulama** projesi ekler.
+* Çözüme bir * &lt; project_name &gt; uygulaması* **Service Fabric uygulama** projesi ekler.
 * ASP.NET Core projesine bir *dockerfile* ve *. dockerıgnore* dosyası ekler. ASP.NET Core projesinde zaten bir *Dockerfile* varsa, *dockerfile. orijinal*olarak yeniden adlandırılır. Aşağıdakine benzer yeni bir *Dockerfile*oluşturulur:
 
     [!code-dockerfile[](visual-studio-tools-for-docker/samples/2.1/HelloDockerTools/Dockerfile)]
 
-* ASP.NET Core projenin `<IsServiceFabricServiceProject>` *. csproj* dosyasına bir öğe ekler:
+* `<IsServiceFabricServiceProject>`ASP.NET Core projenin *. csproj* dosyasına bir öğe ekler:
 
     [!code-xml[](visual-studio-tools-for-docker/samples/2.1/HelloDockerTools/HelloDockerTools.csproj?name=snippet_IsServiceFabricServiceProject)]
 
@@ -150,12 +138,12 @@ Araç çubuğundaki hata ayıklama açılır listesinden **Docker** ' ı seçin 
 ::: moniker range=">= aspnetcore-2.1"
 
 * *Microsoft/DotNet* çalışma zamanı görüntüsünün *2,1-aspnetcore-Runtime* etiketi elde edilir (zaten önbellekte değilse). Görüntüde ASP.NET Core ve .NET Core çalışma zamanları ile ilişkili Kitaplıklar yüklenir. Üretimde ASP.NET Core uygulamaları çalıştırmak için en iyi duruma getirilmiştir.
-* `ASPNETCORE_ENVIRONMENT` Ortam değişkeni kapsayıcı içinde olarak `Development` ayarlanır.
+* `ASPNETCORE_ENVIRONMENT`Ortam değişkeni kapsayıcı içinde olarak ayarlanır `Development` .
 * Dinamik olarak atanan iki bağlantı noktası sunulur: bir HTTP ve diğeri HTTPS için. Localhost 'a atanan bağlantı noktası `docker ps` komutla sorgulanabilir.
 * Uygulama kapsayıcıya kopyalanır.
 * Varsayılan tarayıcı, dinamik olarak atanan bağlantı noktası kullanılarak kapsayıcıya eklenmiş hata ayıklayıcı ile başlatılır.
 
-Uygulamanın elde edilen Docker görüntüsü *dev*olarak etiketlendi. Görüntü, *Microsoft/DotNet* temel görüntüsünün *2,1-aspnetcore-Runtime* etiketine dayalıdır. `docker images` Komutunu **Paket Yöneticisi konsolu** (PMC) penceresinde çalıştırın. Makinedeki görüntüler görüntülenir:
+Uygulamanın elde edilen Docker görüntüsü *dev*olarak etiketlendi. Görüntü, *Microsoft/DotNet* temel görüntüsünün *2,1-aspnetcore-Runtime* etiketine dayalıdır. `docker images`Komutunu **Paket Yöneticisi konsolu** (PMC) penceresinde çalıştırın. Makinedeki görüntüler görüntülenir:
 
 ```console
 REPOSITORY        TAG                     IMAGE ID      CREATED         SIZE
@@ -168,12 +156,12 @@ microsoft/dotnet  2.1-aspnetcore-runtime  fcc3887985bb  6 days ago      255MB
 ::: moniker range="<= aspnetcore-2.0"
 
 * *Microsoft/aspnetcore* çalışma zamanı görüntüsü alındı (zaten önbellekte yoksa).
-* `ASPNETCORE_ENVIRONMENT` Ortam değişkeni kapsayıcı içinde olarak `Development` ayarlanır.
+* `ASPNETCORE_ENVIRONMENT`Ortam değişkeni kapsayıcı içinde olarak ayarlanır `Development` .
 * 80 numaralı bağlantı noktası, localhost için dinamik olarak atanmış bir bağlantı noktasıyla gösterilir ve eşleştirilir. Bağlantı noktası Docker ana bilgisayarı tarafından belirlenir ve `docker ps` komutla sorgulanabilir.
 * Uygulama kapsayıcıya kopyalanır.
 * Varsayılan tarayıcı, dinamik olarak atanan bağlantı noktası kullanılarak kapsayıcıya eklenmiş hata ayıklayıcı ile başlatılır.
 
-Uygulamanın elde edilen Docker görüntüsü *dev*olarak etiketlendi. Görüntü, *Microsoft/aspnetcore* temel görüntüsünü temel alır. `docker images` Komutunu **Paket Yöneticisi konsolu** (PMC) penceresinde çalıştırın. Makinedeki görüntüler görüntülenir:
+Uygulamanın elde edilen Docker görüntüsü *dev*olarak etiketlendi. Görüntü, *Microsoft/aspnetcore* temel görüntüsünü temel alır. `docker images`Komutunu **Paket Yöneticisi konsolu** (PMC) penceresinde çalıştırın. Makinedeki görüntüler görüntülenir:
 
 ```console
 REPOSITORY            TAG  IMAGE ID      CREATED        SIZE
@@ -186,7 +174,7 @@ microsoft/aspnetcore  2.0  c69d39472da9  13 days ago    347MB
 > [!NOTE]
 > **Hata ayıklama** yapılandırmalarının, yinelemeli deneyim sağlamak için birim bağlama kullanması nedeniyle *geliştirme* görüntüsünde uygulama içeriği eksik. Bir görüntüyü göndermek için **yayın** yapılandırmasını kullanın.
 
-`docker ps` Komutu PMC 'de çalıştırın. Uygulamanın, kapsayıcıyı kullanarak çalıştığını unutmayın:
+`docker ps`Komutu PMC 'de çalıştırın. Uygulamanın, kapsayıcıyı kullanarak çalıştığını unutmayın:
 
 ```console
 CONTAINER ID        IMAGE                  COMMAND                   CREATED             STATUS              PORTS                   NAMES
@@ -195,9 +183,9 @@ baf9a678c88d        hellodockertools:dev   "C:\\remote_debugge..."   21 seconds 
 
 ## <a name="edit-and-continue"></a>Düzenle ve devam et
 
-Statik dosya ve Razor görünümlerde yapılan değişiklikler, derleme adımına gerek kalmadan otomatik olarak güncelleştirilir. Güncelleştirmeyi görüntülemek için değişikliği yapıp tarayıcıyı kaydedin ve yenileyin.
+Statik dosya ve görünümlerde yapılan değişiklikler Razor , derleme adımına gerek kalmadan otomatik olarak güncelleştirilir. Güncelleştirmeyi görüntülemek için değişikliği yapıp tarayıcıyı kaydedin ve yenileyin.
 
-Kod dosyası değişiklikleri derleme gerektirir ve kapsayıcı içinde Kestrel yeniden başlatılır. Değişikliği yaptıktan sonra, işlemi gerçekleştirmek `CTRL+F5` ve uygulamayı kapsayıcı içinde başlatmak için öğesini kullanın. Docker kapsayıcısı yeniden derlenmez veya durdurulmaz. `docker ps` Komutu PMC 'de çalıştırın. Özgün kapsayıcının 10 dakikadan önce çalışmaya devam ettiğini fark edin:
+Kod dosyası değişiklikleri derleme gerektirir ve kapsayıcı içinde Kestrel yeniden başlatılır. Değişikliği yaptıktan sonra, `CTRL+F5` işlemi gerçekleştirmek ve uygulamayı kapsayıcı içinde başlatmak için öğesini kullanın. Docker kapsayıcısı yeniden derlenmez veya durdurulmaz. `docker ps`Komutu PMC 'de çalıştırın. Özgün kapsayıcının 10 dakikadan önce çalışmaya devam ettiğini fark edin:
 
 ```console
 CONTAINER ID        IMAGE                  COMMAND                   CREATED             STATUS              PORTS                   NAMES
@@ -208,7 +196,7 @@ baf9a678c88d        hellodockertools:dev   "C:\\remote_debugge..."   10 minutes 
 
 Uygulamanın geliştirme ve hata ayıklama döngüsünü tamamladıktan sonra, Visual Studio kapsayıcı araçları uygulamanın üretim görüntüsünü oluşturmaya yardımcı olur. Yapılandırma açılır öğesini değiştirerek uygulamayı **serbest bırakın** ve oluşturun. Araç, Docker Hub 'dan (zaten önbellekte değilse) derleme/yayımlama görüntüsünü alır. Bir görüntü, özel kayıt defterine veya Docker Hub 'ına gönderilebilecek *en son* etiketle oluşturulur.
 
-Görüntülerin listesini `docker images` görmek için bu komutu PMC 'de çalıştırın. Aşağıdakine benzer bir çıktı görüntülenir:
+`docker images`Görüntülerin listesini görmek için bu komutu PMC 'de çalıştırın. Aşağıdakine benzer bir çıktı görüntülenir:
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -232,12 +220,12 @@ microsoft/aspnetcore-build  2.0     7fed40fbb647  13 days ago     2.02GB
 microsoft/aspnetcore        2.0     c69d39472da9  13 days ago     347MB
 ```
 
-Önceki `microsoft/aspnetcore-build` çıktıda `microsoft/aspnetcore` listelenen ve görüntüleri .NET Core 2,1 ' deki `microsoft/dotnet` görüntülerle değiştirilmiştir. Daha fazla bilgi için bkz. [Docker depoları geçiş duyurusu](https://github.com/aspnet/Announcements/issues/298).
+`microsoft/aspnetcore-build` `microsoft/aspnetcore` Önceki çıktıda listelenen ve görüntüleri `microsoft/dotnet` .NET Core 2,1 ' deki görüntülerle değiştirilmiştir. Daha fazla bilgi için bkz. [Docker depoları geçiş duyurusu](https://github.com/aspnet/Announcements/issues/298).
 
 ::: moniker-end
 
 > [!NOTE]
-> Komut `docker images` , havuz adları ve etiketleri (Yukarıda listelenmeyen) * \<>* olarak tanımlanmış (yukarıda listelenmemiş) bir Aracı görüntüleri döndürür. Bu adlandırılmamış görüntüler, [çok aşamalı derleme](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) *dockerfile*tarafından üretilir. Son görüntünün&mdash;oluşturulması verimliliği artırır ancak değişiklikler gerçekleştiğinde yalnızca gerekli katmanlar yeniden oluşturulur. Ara görüntülere artık gerek kalmadığında [Docker rmi](https://docs.docker.com/engine/reference/commandline/rmi/) komutunu kullanarak bunları silin.
+> `docker images`Komut, havuz adları ve etiketleri *\<none>* (Yukarıda listelenmeyen) ile tanımlanmış olan aracı görüntülerini döndürür. Bu adlandırılmamış görüntüler, [çok aşamalı derleme](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) *dockerfile*tarafından üretilir. Son görüntünün oluşturulması verimliliği artırır &mdash; ancak değişiklikler gerçekleştiğinde yalnızca gerekli katmanlar yeniden oluşturulur. Ara görüntülere artık gerek kalmadığında [Docker rmi](https://docs.docker.com/engine/reference/commandline/rmi/) komutunu kullanarak bunları silin.
 
 *Geliştirme* görüntüsüne kıyasla üretim veya yayın görüntüsünün boyutunun daha küçük olması için bir beklentisi olabilir. Birim eşleme nedeniyle, hata ayıklayıcı ve uygulama, kapsayıcıda değil, yerel makineden çalıştırılıyor. *En son* görüntü, uygulamayı bir konak makinesinde çalıştırmak için gerekli uygulama kodunu paketlendi. Bu nedenle, Delta uygulama kodunun boyutudur.
 

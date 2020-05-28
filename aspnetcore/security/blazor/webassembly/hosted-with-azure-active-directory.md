@@ -34,7 +34,7 @@ Aşağıdaki bilgileri kaydedin:
 
 * *Sunucu API 'si uygulaması* Uygulama KIMLIĞI (Istemci KIMLIĞI) (örneğin, `11111111-1111-1111-1111-111111111111` )
 * Dizin KIMLIĞI (kiracı KIMLIĞI) (örneğin, `222222222-2222-2222-2222-222222222222` )
-* AAD kiracı etki alanı (örneğin, `contoso.onmicrosoft.com` ) &ndash; etki alanı, kayıtlı uygulama Için Azure Portal **marka** dikey penceresinde **Yayımcı etki alanı** olarak kullanılabilir.
+* AAD kiracı etki alanı (örneğin, `contoso.onmicrosoft.com` ): etki alanı, kayıtlı uygulama için Azure Portal **marka** dikey penceresinde **Yayımcı etki alanı** olarak kullanılabilir.
 
 **API izinlerinde**, **Microsoft Graph**  >  uygulama oturum açma veya Kullanıcı profili erişimi gerektirmediğinden Microsoft Graph**User. Read** iznini kaldırın.
 

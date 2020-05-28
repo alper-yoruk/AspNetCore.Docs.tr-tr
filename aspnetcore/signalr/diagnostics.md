@@ -1,44 +1,32 @@
 ---
-title: ASP.NET Core 'de günlüğe kaydetme ve tanılamaSignalR
-author: anurse
-description: ASP.NET Core uygulamanızdan tanılamayı nasıl toplayacağınızı öğrenin SignalR .
-monikerRange: '>= aspnetcore-2.1'
-ms.author: anurse
-ms.custom: signalr
-ms.date: 11/12/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: signalr/diagnostics
-ms.openlocfilehash: 0dda4fb55b1e2275d9cdb2af0b55824b12121dee
-ms.sourcegitcommit: 16b3abec1ed70f9a206f0cfa7cf6404eebaf693d
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 05/17/2020
-ms.locfileid: "83444223"
+Başlık: ' ASP.NET Core ' de günlüğe kaydetme ve tanılama SignalR : Açıklama: ' ASP.NET Core uygulamanızdan tanılamayı nasıl toplayacağınızı öğrenin SignalR . '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
-# <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>ASP.NET Core SignalR 'de günlüğe kaydetme ve tanılama
+# <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>ASP.NET Core 'de günlüğe kaydetme ve tanılamaSignalR
 
 , [Andrew Stanton-nurte](https://twitter.com/anurse)
 
-Bu makalede, sorunları gidermeye yardımcı olmak üzere ASP.NET Core SignalR uygulamanızdan tanılama toplamaya yönelik rehberlik sunulmaktadır.
+Bu makalede, SignalR sorunları gidermeye yardımcı olmak için ASP.NET Core uygulamanızdan tanılama toplamaya yönelik rehberlik sunulmaktadır.
 
 ## <a name="server-side-logging"></a>Sunucu tarafında günlüğe kaydetme
 
 > [!WARNING]
 > Sunucu tarafı günlükleri, uygulamanızdan önemli bilgiler içerebilir. Ham günlükleri **hiçbir** şekilde üretim uygulamalarından GitHub gibi genel forumlara nakletmeyin.
 
-SignalR ASP.NET Core bir parçası olduğundan, ASP.NET Core günlük sistemini kullanır. Varsayılan yapılandırmada, SignalR çok az bilgiyi günlüğe kaydeder, ancak bu yapılandırılabilir. ASP.NET Core günlüğü yapılandırma hakkında ayrıntılar için [ASP.NET Core günlüğe kaydetme](xref:fundamentals/logging/index#configuration) hakkındaki belgelere bakın.
+SignalRASP.NET Core bir parçası olduğundan, ASP.NET Core günlük sistemini kullanır. Varsayılan yapılandırmada SignalR çok az bilgi günlüğe kaydedilir, ancak bu yapılandırılabilir. ASP.NET Core günlüğü yapılandırma hakkında ayrıntılar için [ASP.NET Core günlüğe kaydetme](xref:fundamentals/logging/index#configuration) hakkındaki belgelere bakın.
 
-SignalR iki günlükçü kategorisi kullanır:
+SignalRİki Günlükçü kategorisi kullanır:
 
-* `Microsoft.AspNetCore.SignalR`&ndash;Merkez protokolleriyle ilgili Günlükler için, hub 'ları etkinleştirme, yöntemleri çağırma ve hub ile ilgili diğer etkinlikler için.
-* `Microsoft.AspNetCore.Http.Connections`&ndash;WebSockets, uzun yoklama ve sunucu tarafından gönderilen olaylar ve alt düzey SignalR altyapısı gibi aktarımlarıyla ilgili Günlükler için.
+* `Microsoft.AspNetCore.SignalR`: Merkez protokolleriyle ilgili Günlükler için, hub 'Ları etkinleştirme, yöntemleri çağırma ve hub ile ilgili diğer etkinlikler için.
+* `Microsoft.AspNetCore.Http.Connections`: WebSockets, uzun yoklama, sunucu tarafından gönderilen olaylar ve alt düzey altyapı gibi aktarımlarıyla ilgili Günlükler için SignalR .
 
-SignalR 'den ayrıntılı günlükleri etkinleştirmek için, `Debug` aşağıdaki öğeleri içindeki alt bölümüne ekleyerek, yukarıdaki ön ekleri *appSettings. JSON* dosyanızdaki düzeye yapılandırın `LogLevel` `Logging` :
+Ayrıntılı günlükleri ' den etkinleştirmek için SignalR , `Debug` aşağıdaki öğeleri içindeki alt bölümüne ekleyerek, yukarıdaki ön ekleri *appSettings. JSON* dosyanızdaki düzeye yapılandırın `LogLevel` `Logging` :
 
 [!code-json[](diagnostics/logging-config.json?highlight=7-8)]
 
@@ -61,7 +49,7 @@ Sunucu tarafı günlüklerine erişme, çalıştırdığınız ortama bağlıdı
 
 ### <a name="as-a-console-app-outside-iis"></a>IIS dışında bir konsol uygulaması olarak
 
-Konsol uygulamasında çalıştırıyorsanız, [konsol günlükçüsü](xref:fundamentals/logging/index#console) varsayılan olarak etkinleştirilmelidir. SignalR günlükleri konsolunda görünür.
+Konsol uygulamasında çalıştırıyorsanız, [konsol günlükçüsü](xref:fundamentals/logging/index#console) varsayılan olarak etkinleştirilmelidir. SignalRGünlükler konsolunda görünür.
 
 ### <a name="within-iis-express-from-visual-studio"></a>Visual Studio 'dan IIS Express içinde
 
@@ -89,18 +77,38 @@ Günlüğe kaydetmeyi tamamen devre dışı bırakmak için `signalR.LogLevel.No
 Aşağıdaki tabloda JavaScript istemcisi için kullanılabilir olan günlük düzeyleri gösterilmektedir. Günlük düzeyinin bu değerlerden birine ayarlanması, bu düzeyde ve tabloda üzerindeki tüm düzeylerde günlüğe kaydetmeyi sağlar.
 
 | Düzey | Açıklama |
-| ----- | ----------- |
-| `None` | Hiçbir ileti günlüğe kaydedilmez. |
-| `Critical` | Uygulamanın tamamında bir hata olduğunu gösteren mesajlar. |
-| `Error` | Geçerli işlemdeki bir hatayı gösteren mesajlar. |
-| `Warning` | Önemli olmayan bir sorunu belirten mesajlar. |
-| `Information` | Bilgi iletileri. |
-| `Debug` | Tanılama iletileri hata ayıklama için yararlıdır. |
-| `Trace` | Belirli sorunları tanılamak için tasarlanan çok ayrıntılı tanılama iletileri. |
+| ----- | ---
+Başlık: ' ASP.NET Core ' de günlüğe kaydetme ve tanılama SignalR : Açıklama: ' ASP.NET Core uygulamanızdan tanılamayı nasıl toplayacağınızı öğrenin SignalR . '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core ' de günlüğe kaydetme ve tanılama SignalR : Açıklama: ' ASP.NET Core uygulamanızdan tanılamayı nasıl toplayacağınızı öğrenin SignalR . '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+Başlık: ' ASP.NET Core ' de günlüğe kaydetme ve tanılama SignalR : Açıklama: ' ASP.NET Core uygulamanızdan tanılamayı nasıl toplayacağınızı öğrenin SignalR . '
+monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------ | | `None` | Hiçbir ileti günlüğe kaydedilmez. | | `Critical` | Uygulamanın tamamında bir hata olduğunu gösteren mesajlar. | | `Error` | Geçerli işlemdeki bir hatayı gösteren mesajlar. | | `Warning` | Önemli olmayan bir sorunu belirten mesajlar. | | `Information` | Bilgi iletileri. | | `Debug` | Tanılama iletileri hata ayıklama için yararlıdır. | | `Trace` | Belirli sorunları tanılamak için tasarlanan çok ayrıntılı tanılama iletileri. |
 
 Ayrıntı düzeyini yapılandırdıktan sonra, Günlükler tarayıcı konsoluna yazılır (veya bir NodeJS uygulamasında standart çıkış).
 
-Günlükleri özel bir günlüğe kaydetme sistemine göndermek istiyorsanız, arabirimini uygulayan bir JavaScript nesnesi sağlayabilirsiniz `ILogger` . Uygulanması gereken tek yöntem `log` , olay düzeyini ve olayla ilişkili iletiyi alır. Örnek:
+Günlükleri özel bir günlüğe kaydetme sistemine göndermek istiyorsanız, arabirimini uygulayan bir JavaScript nesnesi sağlayabilirsiniz `ILogger` . Uygulanması gereken tek yöntem `log` , olay düzeyini ve olayla ilişkili iletiyi alır. Örneğin:
 
 [!code-typescript[](diagnostics/custom-logger.ts?highlight=3-7,13)]
 

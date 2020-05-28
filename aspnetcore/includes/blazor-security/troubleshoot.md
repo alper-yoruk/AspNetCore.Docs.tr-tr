@@ -18,8 +18,8 @@ Kalan tanımlama bilgilerinin ve site verilerinin test ve sorun giderme konusund
   * **Ekle** düğmesini seçin.
   * **Program** alanında tarayıcınızın yolunu belirtin.
   * **Bağımsız değişkenler** alanında, tarayıcının ınbilito veya Private modunda açmak için kullandığı komut satırı seçeneğini ve uygulamanın URL 'sini belirtin. Örneğin:
-    * Google Chrome &ndash;`--incognito --new-window https://localhost:5001`
-    * Mozilla Firefox &ndash;`-private -url https://localhost:5001`
+    * Google Chrome:`--incognito --new-window https://localhost:5001`
+    * Mozilla Firefox:`-private -url https://localhost:5001`
   * **Kolay ad** alanına bir ad girin. Örneğin, `Firefox Auth Testing`.
   * **Tamam** düğmesini seçin.
   * Her bir uygulamayla test yinelemesi için tarayıcı profilini seçmek zorunda kalmamak için, profili varsayılan olarak **Ayarla** düğmesi ile varsayılan olarak ayarlayın.

@@ -1,24 +1,11 @@
 ---
-title: ASP.NET Core uygulama dağıtımı için Visual Studio yayımlama profilleri (. pubxml)
-author: rick-anderson
-description: Visual Studio 'da yayımlama profilleri oluşturmayı ve bunları çeşitli hedeflere ASP.NET Core uygulama dağıtımlarını yönetmek için kullanmayı öğrenin.
-monikerRange: '>= aspnetcore-2.1'
-ms.author: riande
-ms.custom: mvc
-ms.date: 05/14/2020
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: host-and-deploy/visual-studio-publish-profiles
-ms.openlocfilehash: 42d790ad4942ea238fb3bbe56cb92ae4a26ddc2d
-ms.sourcegitcommit: e20653091c30e0768c4f960343e2c3dd658bba13
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 05/16/2020
-ms.locfileid: "83439012"
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
 ---
 # <a name="visual-studio-publish-profiles-pubxml-for-aspnet-core-app-deployment"></a>ASP.NET Core uygulama dağıtımı için Visual Studio yayımlama profilleri (. pubxml)
 
@@ -26,7 +13,7 @@ ms.locfileid: "83439012"
 
 Bu belge, yayımlama profillerinin oluşturulması ve kullanılması için Visual Studio 2019 veya sonraki bir sürümü kullanılarak odaklanmıştır. Visual Studio ile oluşturulan yayımlama profilleri MSBuild ve Visual Studio ile birlikte kullanılabilir. Azure 'da yayımlama yönergeleri için bkz <xref:tutorials/publish-to-azure-webapp-using-vs> ..
 
-`dotnet new mvc`Komut, aşağıdaki kök düzeyi [ \< Proje> öğesini](/visualstudio/msbuild/project-element-msbuild)içeren bir proje dosyası üretir:
+`dotnet new mvc`Komut aşağıdaki kök düzeyi [ \<Project> öğeyi](/visualstudio/msbuild/project-element-msbuild)içeren bir proje dosyası üretir:
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
@@ -36,7 +23,7 @@ Bu belge, yayımlama profillerinin oluşturulması ve kullanılması için Visua
 
 Önceki `<Project>` öğenin özniteliği, `Sdk` sırasıyla *$ (msbuildsdkspath) \Microsoft.net.SDK.Web\Sdk\Sdk.props* ve *$ (msbuildsdkspath) \Microsoft.net.SDK.Web\Sdk\Sdk.targets*öğesinden MSBuild [özelliklerini](/visualstudio/msbuild/msbuild-properties) ve [hedeflerini](/visualstudio/msbuild/msbuild-targets) içeri aktarır. İçin varsayılan konum `$(MSBuildSDKsPath)` (Visual Studio 2019 Enterprise ile) *% ProgramFiles (x86)% \ Microsoft Visual Studio\2019\enterprise\msbuild\sdk* klasörüdür.
 
-`Microsoft.NET.Sdk.Web`([Web SDK](xref:razor-pages/web-sdk)) `Microsoft.NET.Sdk` ([.NET Core SDK](/dotnet/core/project-sdk/msbuild-props)) ve `Microsoft.NET.Sdk.Razor` ([Razor SDK](xref:razor-pages/sdk)) dahil diğer SDK 'lara bağlıdır. Her bağımlı SDK ile ilişkili MSBuild özellikleri ve hedefleri içeri aktarılır. Yayımlama hedefleri, kullanılan Yayımla yöntemine göre uygun hedef kümesini içeri aktarır.
+`Microsoft.NET.Sdk.Web`([Web SDK](xref:razor-pages/web-sdk)) `Microsoft.NET.Sdk` ([.NET Core SDK](/dotnet/core/project-sdk/msbuild-props)) ve `Microsoft.NET.Sdk.Razor` ([ Razor SDK](xref:razor-pages/sdk)) dahil diğer SDK 'lara bağlıdır. Her bağımlı SDK ile ilişkili MSBuild özellikleri ve hedefleri içeri aktarılır. Yayımlama hedefleri, kullanılan Yayımla yöntemine göre uygun hedef kümesini içeri aktarır.
 
 MSBuild veya Visual Studio bir projeyi yüklediğinde, aşağıdaki üst düzey eylemler gerçekleşir:
 
@@ -52,13 +39,13 @@ Proje yüklendiğinde, [MSBuild proje öğeleri](/visualstudio/msbuild/common-ms
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[Web SDK 'Sı](xref:razor-pages/web-sdk) [Razor SDK 'sını](xref:razor-pages/sdk)içeri aktarır. Sonuç olarak, desenlerle eşleşen dosyalar `**\*.cshtml` ve `**\*.razor` `Content` öğe listesine de dahildir.
+[Web SDK](xref:razor-pages/web-sdk) [ Razor 'sı SDK 'yı](xref:razor-pages/sdk)içeri aktarır. Sonuç olarak, desenlerle eşleşen dosyalar `**\*.cshtml` ve `**\*.razor` `Content` öğe listesine de dahildir.
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1 <= aspnetcore-2.2"
 
-[Web SDK 'Sı](xref:razor-pages/web-sdk) [Razor SDK 'sını](xref:razor-pages/sdk)içeri aktarır. Sonuç olarak, düzeniyle eşleşen dosyalar `**\*.cshtml` da `Content` öğe listesine dahil edilir.
+[Web SDK](xref:razor-pages/web-sdk) [ Razor 'sı SDK 'yı](xref:razor-pages/sdk)içeri aktarır. Sonuç olarak, düzeniyle eşleşen dosyalar `**\*.cshtml` da `Content` öğe listesine dahil edilir.
 
 ::: moniker-end
 
@@ -76,7 +63,7 @@ Proje dosyasına bir ASP.NET Core projesi başvurduğunda `Microsoft.NET.Sdk.Web
 
 ## <a name="basic-command-line-publishing"></a>Temel komut satırı yayımlama
 
-Komut satırı yayımlama, .NET Core tarafından desteklenen tüm platformlarda çalışmaktadır ve Visual Studio 'Yu gerektirmez. Aşağıdaki örneklerde .NET Core CLI [DotNet Publish](/dotnet/core/tools/dotnet-publish) komutu proje dizininden çalıştırılır ( *. csproj* dosyasını içerir). Proje klasörü geçerli çalışma dizini değilse, proje dosyası yolunda açıkça geçiş yapın. Örnek:
+Komut satırı yayımlama, .NET Core tarafından desteklenen tüm platformlarda çalışmaktadır ve Visual Studio 'Yu gerektirmez. Aşağıdaki örneklerde .NET Core CLI [DotNet Publish](/dotnet/core/tools/dotnet-publish) komutu proje dizininden çalıştırılır ( *. csproj* dosyasını içerir). Proje klasörü geçerli çalışma dizini değilse, proje dosyası yolunda açıkça geçiş yapın. Örneğin:
 
 ```dotnetcli
 dotnet publish C:\Webs\Web1
@@ -309,10 +296,10 @@ msbuild {PATH}
     /p:Password={PASSWORD}
 ```
 
-* {PATH} &ndash; Uygulamanın proje dosyasının yolu.
-* {PROFILE} &ndash; Yayımlama profilinin adı.
-* {USERNAME} &ndash; MSDeploy Kullanıcı adı. {USERNAME}, yayımlama profilinde bulunabilir.
-* {PASSWORD} &ndash; MSDeploy parolası. {PROFILE} öğesinden {PASSWORD} öğesini edinin *. PublishSettings* dosyası. ' Nı indirin *. PublishSettings* dosyası şunlardan biri:
+* {PATH}: uygulamanın proje dosyasının yolu.
+* {PROFILE}: yayımlama profilinin adı.
+* {USERNAME}: MSDeploy Kullanıcı adı. {USERNAME}, yayımlama profilinde bulunabilir.
+* {PASSWORD}: MSDeploy parolası. {PROFILE} öğesinden {PASSWORD} öğesini edinin *. PublishSettings* dosyası. ' Nı indirin *. PublishSettings* dosyası şunlardan biri:
   * **Çözüm Gezgini**: **View**  >  **bulut Gezginini**görüntüle ' yi seçin. Azure aboneliğinize bağlanın. **Uygulama hizmetleri**'ni açın. Uygulamaya sağ tıklayın. **Yayımlama profilini indir**' i seçin.
   * Azure portal: Web uygulamasının **genel bakış** panelinde **Yayımlama profilini al** ' ı seçin.
 
@@ -471,7 +458,7 @@ Aşağıdaki örnekte vurgulanan biçimlendirme şunları göstermektedir:
 
 [!code-xml[](visual-studio-publish-profiles/samples/Web1.pubxml?highlight=18-23)]
 
-Yukarıdaki örnek, `ResolvedFileToPublish` varsayılan davranışı özniteliğinde belirtilen dosyaları her zaman yayımlanan siteye kopyalamak için olan öğesini kullanır `Include` . `<CopyToPublishDirectory>`Ya da ' ın iç metniyle bir alt öğe ekleyerek varsayılan davranışı geçersiz kılın `Never` `PreserveNewest` . Örnek:
+Yukarıdaki örnek, `ResolvedFileToPublish` varsayılan davranışı özniteliğinde belirtilen dosyaları her zaman yayımlanan siteye kopyalamak için olan öğesini kullanır `Include` . `<CopyToPublishDirectory>`Ya da ' ın iç metniyle bir alt öğe ekleyerek varsayılan davranışı geçersiz kılın `Never` `PreserveNewest` . Örneğin:
 
 ```xml
 <ResolvedFileToPublish Include="..\ReadMe2.md">
@@ -507,12 +494,177 @@ Yerleşik `BeforePublish` ve `AfterPublish` hedefler, yayımlama hedefinden önc
 
 ## <a name="the-kudu-service"></a>Kudu hizmeti
 
-Azure App Service Web uygulaması dağıtımında dosyaları görüntülemek için [kudu hizmetini](https://github.com/projectkudu/kudu/wiki/Accessing-the-kudu-service)kullanın. `scm`Belirteci Web uygulaması adına ekleyin. Örnek:
+Azure App Service Web uygulaması dağıtımında dosyaları görüntülemek için [kudu hizmetini](https://github.com/projectkudu/kudu/wiki/Accessing-the-kudu-service)kullanın. `scm`Belirteci Web uygulaması adına ekleyin. Örneğin:
 
 | URL                                    | Sonuç       |
-| -------------------------------------- | ------------ |
-| `http://mysite.azurewebsites.net/`     | Web App      |
-| `http://mysite.scm.azurewebsites.net/` | Kudu hizmeti |
+| ---
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------------------- | ---title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+-
+title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: 
+
+------ | | `http://mysite.azurewebsites.net/`     | Web uygulaması | | `http://mysite.scm.azurewebsites.net/` | Kudu hizmeti |
 
 Dosyaları görüntülemek, düzenlemek, silmek veya eklemek için [hata ayıklama konsolu](https://github.com/projectkudu/kudu/wiki/Kudu-console) menü öğesini seçin.
 

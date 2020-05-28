@@ -1495,7 +1495,7 @@ Hassas yapılandırma verilerini güvenli hale getirmek için aşağıdaki uygul
 Daha fazla bilgi edinmek için aşağıdaki kaynaklara bakın:
 
 * <xref:fundamentals/environments>
-* <xref:security/app-secrets>&ndash;Hassas verileri depolamak için ortam değişkenlerini kullanma hakkında öneriler içerir. Gizli dizi Yöneticisi, Kullanıcı gizli dizilerini yerel sistemdeki bir JSON dosyasında depolamak için dosya yapılandırma sağlayıcısını kullanır. Dosya yapılandırma sağlayıcısı, bu konunun ilerleyen kısımlarında açıklanmıştır.
+* <xref:security/app-secrets>: Hassas verileri depolamak için ortam değişkenlerini kullanma hakkında öneriler içerir. Gizli dizi Yöneticisi, Kullanıcı gizli dizilerini yerel sistemdeki bir JSON dosyasında depolamak için dosya yapılandırma sağlayıcısını kullanır. Dosya yapılandırma sağlayıcısı, bu konunun ilerleyen kısımlarında açıklanmıştır.
 
 [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) ASP.NET Core uygulamalar için uygulama gizli dizilerini güvenli bir şekilde depolar. Daha fazla bilgi için bkz. <xref:security/key-vault-configuration>.
 
@@ -1825,7 +1825,7 @@ ASP.NET Core şablonlarına dayalı uygulamalar için, `AddCommandLine` tarafın
 })
 ```
 
-**Örneğinde**
+**Örnek**
 
 Örnek uygulama, `CreateDefaultBuilder` ' a çağrı içeren konağı oluşturmak için statik kolaylık yönteminden yararlanır <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*> .
 
@@ -2341,7 +2341,7 @@ Ek ortam değişkenlerinden uygulama yapılandırması sağlamak için, uygulama
 
 `AddEnvironmentVariables`Diğer sağlayıcılardan gelen değerleri geçersiz kılmak için verilen öneke sahip ortam değişkenlerine izin vermek için son ' a çağırın.
 
-**Örneğinde**
+**Örnek**
 
 Örnek uygulama, `CreateDefaultBuilder` ' a çağrı içeren konağı oluşturmak için statik kolaylık yönteminden yararlanır `AddEnvironmentVariables` .
 
@@ -2944,12 +2944,12 @@ title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc
 
 ---------------------------------------- | | `CUSTOMCONNSTR_{KEY} `   | `ConnectionStrings:{KEY}`   | Yapılandırma girişi oluşturulmamış.                                                | | `MYSQLCONNSTR_{KEY}`     | `ConnectionStrings:{KEY}`   | Anahtar: `ConnectionStrings:{KEY}_ProviderName` :<br>Değer: `MySql.Data.MySqlClient` | | `SQLAZURECONNSTR_{KEY}`   |  `ConnectionStrings:{KEY}`   | Anahtar: `ConnectionStrings:{KEY}_ProviderName` :<br>Değer: `System.Data.SqlClient` | | `SQLCONNSTR_{KEY}`        |  `ConnectionStrings:{KEY}`   | Anahtar: `ConnectionStrings:{KEY}_ProviderName` :<br>Deeri`System.Data.SqlClient`  |
 
-**Örneğinde**
+**Örnek**
 
 Sunucuda özel bir bağlantı dizesi ortam değişkeni oluşturulur:
 
-* Ad &ndash;`CUSTOMCONNSTR_ReleaseDB`
-* Değer &ndash;`Data Source=ReleaseSQLServer;Initial Catalog=MyReleaseDB;Integrated Security=True`
+* Ada`CUSTOMCONNSTR_ReleaseDB`
+* Değer:`Data Source=ReleaseSQLServer;Initial Catalog=MyReleaseDB;Integrated Security=True`
 
 `IConfiguration`Eklenmiş ve adlı bir alana atanmışsa `_config` , şu değeri okuyun:
 
@@ -3028,8 +3028,8 @@ Aşırı yüklemeler belirtmeye izin ver:
 
 `AddJsonFile`, ile yeni bir ana bilgisayar Oluşturucu başlatıldığında otomatik olarak iki kez çağrılır `CreateDefaultBuilder` . Yöntemi, yapılandırmayı şuradan yüklemek için çağrılır:
 
-* *appSettings. JSON* &ndash; Bu dosya ilk kez okundu. Dosyanın ortam sürümü, *appSettings. JSON* dosyası tarafından belirtilen değerleri geçersiz kılabilir.
-* *appSettings. {Environment}. JSON* &ndash; dosyanın ortam sürümü [ıhostingenvironment. environmentname](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*)temel alınarak yüklenir.
+* *appSettings. JSON*: Bu dosya ilk kez okundu. Dosyanın ortam sürümü, *appSettings. JSON* dosyası tarafından belirtilen değerleri geçersiz kılabilir.
+* *appSettings. {Environment}. JSON*: dosyanın ortam sürümü [ıhostingenvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*)temel alınarak yüklenir.
 
 Daha fazla bilgi için [varsayılan yapılandırma](#default-configuration) bölümüne bakın.
 
@@ -3051,7 +3051,7 @@ JSON yapılandırma sağlayıcısı önce oluşturulur. Bu nedenle, Kullanıcı 
 })
 ```
 
-**Örneğinde**
+**Örnek**
 
 Örnek uygulama, `CreateDefaultBuilder` için iki çağrı içeren konağı oluşturmak için statik kolaylık yönteminden yararlanır `AddJsonFile` :
 

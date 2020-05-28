@@ -32,8 +32,8 @@ IIS *Web. config* sıkıştırma yapılandırması için [IIS: Brotli ve gzip s�
 
 Webassembly uygulamasındaki sayfa bileşenlerine yönelik yönlendirme istekleri Blazor Blazor , sunucuda, barındırılan bir uygulamada yönlendirme istekleri kadar basittir. Blazorİki bileşeni olan bir webassembly uygulaması düşünün:
 
-* *Main. Razor* , &ndash; uygulamanın köküne yüklenir ve `About` bileşene () bir bağlantı içerir `href="About"` .
-* *. Razor* &ndash; `About` bileşeni hakkında.
+* *Main. Razor*: uygulamanın köküne yükler ve `About` bileşene () bir bağlantı içerir `href="About"` .
+* *. Razor*: `About` bileşeni hakkında.
 
 Uygulamanın varsayılan belgesi, tarayıcının adres çubuğu kullanılarak istendiğinde (örneğin, `https://www.contoso.com/` ):
 
@@ -83,11 +83,11 @@ Yayımlanan varlıklar */BIN/Release/{Target Framework}/Publish* klasöründe ol
 Bir Blazor Proje yayımlandığında, AŞAĞıDAKI IIS yapılandırmasıyla bir *Web. config* dosyası oluşturulur:
 
 * MIME türleri aşağıdaki dosya uzantıları için ayarlanır:
-  * *. dll* &ndash;`application/octet-stream`
-  * *. JSON* &ndash;`application/json`
-  * *.* &ndash;`application/wasm`
-  * *. WOFF* &ndash;`application/font-woff`
-  * *. woff2* &ndash;`application/font-woff`
+  * *. dll*:`application/octet-stream`
+  * *. JSON*:`application/json`
+  * *...*:`application/wasm`
+  * *. WOFF*:`application/font-woff`
+  * *. woff2*:`application/font-woff`
 * Aşağıdaki MIME türleri için HTTP sıkıştırması etkindir:
   * `application/octet-stream`
   * `application/wasm`
@@ -155,7 +155,7 @@ IIS, *Web. config* aracılığıyla Brotli veya gzip sıkıştırılan varlıkla
 
 IIS ile dağıtım sorunlarını giderme hakkında daha fazla bilgi için bkz <xref:test/troubleshoot-azure-iis> ..
 
-### <a name="azure-storage"></a>Azure Depolama
+### <a name="azure-storage"></a>Azure Storage
 
 [Azure depolama](/azure/storage/) statik dosya barındırma, sunucusuz Blazor uygulama barındırmayı sağlar. Özel etki alanı adları, Azure Content Delivery Network (CDN) ve HTTPS desteklenir.
 

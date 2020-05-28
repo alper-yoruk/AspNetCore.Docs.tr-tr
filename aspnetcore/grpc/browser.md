@@ -11,16 +11,6 @@ title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
 
 , [James bAyKiNg](https://twitter.com/jamesnk)
 
-> [!IMPORTANT]
-> **gRPC-.NET 'teki Web desteği deneysel**
->
-> gRPC-.NET için Web, kaydedilmiş bir ürün değil, deneysel bir projem projem. Şunları yapmak istiyoruz:
->
-> * GRPC-Web ' i uygulamaya yönelik yaklaşımımızı test edin.
-> * Bu yaklaşım .NET geliştiricileri için, bir ara sunucu aracılığıyla gRPC-Web ayarlamanın geleneksel bir yolu ile karşılaştırıldığında yararlı olup olmadığını hakkında geri bildirim alın.
->
-> [https://github.com/grpc/grpc-dotnet](https://github.com/grpc/grpc-dotnet)Geliştiricilerin, ve ile üretken olduğu bir şey oluşturduğumdan emin olmak için lütfen geri bildirimde bulunun.
-
 Tarayıcı tabanlı bir uygulamadan HTTP/2 gRPC hizmetini çağırmak mümkün değildir. [GRPC-Web](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-WEB.md) , tarayıcı JavaScript ve Blazor uygulamalarının GRPC hizmetlerini çağırmasını sağlayan bir protokoldür. Bu makalede, .NET Core 'da gRPC-Web ' i kullanma açıklanmaktadır.
 
 ## <a name="grpc-web-in-aspnet-core-vs-envoy"></a>gRPC-Web 'de ASP.NET Core ve Envoy 'ye karşı

@@ -46,7 +46,7 @@ NPM *node_modules \\ @aspnet\signalr\dist\browser * klasöre paket içeriğini y
 
 ::: moniker-end
 
-SignalRÖğesindeki JavaScript istemcisine başvurun `<script>` . Örnek:
+SignalRÖğesindeki JavaScript istemcisine başvurun `<script>` . Örneğin:
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -54,7 +54,7 @@ SignalRÖğesindeki JavaScript istemcisine başvurun `<script>` . Örnek:
 
 ### <a name="use-a-content-delivery-network-cdn"></a>Content Delivery Network kullanma (CDN)
 
-İstemci kitaplığını NPM önkoşulu olmadan kullanmak için, istemci kitaplığının CDN ile barındırılan bir kopyasına başvurun. Örnek:
+İstemci kitaplığını NPM önkoşulu olmadan kullanmak için, istemci kitaplığının CDN ile barındırılan bir kopyasına başvurun. Örneğin:
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.3/signalr.min.js"></script>
@@ -141,10 +141,10 @@ SignalRve ' de tanımlanan bağımsız değişkenlerle, hangi istemci yöntemini
 
 Bağlantı yapıldığında günlüğe bir günlükçü ve olay türü geçirerek istemci tarafı günlük izlemeyi ayarlayın. İletiler, belirtilen günlük düzeyi ve daha yükseği ile günlüğe kaydedilir. Kullanılabilir günlük düzeyleri aşağıdaki gibidir:
 
-* `signalR.LogLevel.Error`&ndash;Hata iletileri. `Error`Yalnızca iletileri günlüğe kaydeder.
-* `signalR.LogLevel.Warning`&ndash;Olası hatalar hakkında uyarı iletileri. Günlükler `Warning` ve `Error` mesajlar.
-* `signalR.LogLevel.Information`&ndash;Hatasız durum iletileri. Günlükler `Information` , `Warning` ve `Error` iletileri.
-* `signalR.LogLevel.Trace`&ndash;İzleme iletileri. Hub ve istemci arasında taşınan veriler de dahil olmak üzere her şeyi günlüğe kaydeder.
+* `signalR.LogLevel.Error`: Hata iletileri. `Error`Yalnızca iletileri günlüğe kaydeder.
+* `signalR.LogLevel.Warning`: Olası hatalarla ilgili uyarı iletileri. Günlükler `Warning` ve `Error` mesajlar.
+* `signalR.LogLevel.Information`: Hata olmayan durum iletileri. Günlükler `Information` , `Warning` ve `Error` iletileri.
+* `signalR.LogLevel.Trace`: Trace iletileri. Hub ve istemci arasında taşınan veriler de dahil olmak üzere her şeyi günlüğe kaydeder.
 
 Günlük düzeyini yapılandırmak için [Hubconnectionbuilder](/javascript/api/%40aspnet/signalr/hubconnectionbuilder) üzerinde [configurelogging](/javascript/api/%40aspnet/signalr/hubconnectionbuilder#configurelogging) yöntemini kullanın. İletiler tarayıcı konsoluna kaydedilir.
 

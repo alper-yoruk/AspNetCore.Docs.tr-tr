@@ -56,9 +56,9 @@ BlazorSunucu uygulaması <xref:System.Net.Http.HttpClient> Varsayılan olarak bi
 
 Aşağıdaki örneklerde, bir Todo Web API 'SI oluşturma, okuma, güncelleştirme ve silme (CRUD) işlemlerini işler. Örnekler `TodoItem` şunları depolayan bir sınıfa dayalıdır:
 
-* Öğenin kimliği ( `Id` , `long` ) &ndash; benzersiz kimliği.
-* Öğenin adı ( `Name` , `string` ) &ndash; .
-* `IsComplete` `bool` Todo öğesi tamamlandığında durum (,) &ndash; göstergesi.
+* KIMLIK ( `Id` , `long` ): ÖĞENIN benzersiz kimliği.
+* Ad ( `Name` , `string` ): öğenin adı.
+* Durum ( `IsComplete` , `bool` ): Todo öğesinin tamamlanıp bitmediğini belirtir.
 
 ```csharp
 private class TodoItem
@@ -71,7 +71,7 @@ private class TodoItem
 
 JSON yardımcı yöntemleri bir URI 'ye (aşağıdaki örneklerde bir Web API 'si) istek gönderir ve yanıtı işler:
 
-* <xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A>&ndash;BIR http get isteği gönderir ve bir nesne oluşturmak IÇIN JSON yanıt gövdesini ayrıştırır.
+* <xref:System.Net.Http.Json.HttpClientJsonExtensions.GetFromJsonAsync%2A>: Bir HTTP GET isteği gönderir ve bir nesne oluşturmak için JSON yanıt gövdesini ayrıştırır.
 
   Aşağıdaki kodda,, `todoItems` bileşeni tarafından görüntülenir. `GetTodoItems`Yöntemi, bileşen işlemeyi tamamladığında tetiklenir ([Onınitializedadsync](xref:blazor/lifecycle#component-initialization-methods)). Örnek uygulamaya bkz. örnek uygulama.
 
@@ -87,7 +87,7 @@ JSON yardımcı yöntemleri bir URI 'ye (aşağıdaki örneklerde bir Web API 's
   }
   ```
 
-* <xref:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync%2A>&ndash;JSON kodlu içerik dahil olmak üzere BIR http post isteği gönderir ve bir nesne oluşturmak IÇIN JSON yanıt gövdesini ayrıştırır.
+* <xref:System.Net.Http.Json.HttpClientJsonExtensions.PostAsJsonAsync%2A>: JSON kodlu içerik dahil bir HTTP POST isteği gönderir ve bir nesne oluşturmak için JSON yanıt gövdesini ayrıştırır.
 
   Aşağıdaki kodda, `newItemName` bileşenin bağlantılı bir öğesi tarafından sağlanır. `AddItem`Yöntemi bir öğesi seçilerek tetiklenir `<button>` . Örnek uygulamaya bkz. örnek uygulama.
 
@@ -115,7 +115,7 @@ JSON yardımcı yöntemleri bir URI 'ye (aşağıdaki örneklerde bir Web API 's
   var content = response.Content.ReadFromJsonAsync<WeatherForecast>();
   ```
 
-* <xref:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync%2A>&ndash;JSON kodlu içerik dahil olmak üzere BIR http put isteği gönderir.
+* <xref:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync%2A>: JSON kodlu içerik dahil bir HTTP PUT isteği gönderir.
 
   Aşağıdaki kodda, `editItem` `Name` ve değerleri `IsCompleted` bileşenin bağlantılı öğelerine göre sağlanır. Öğe, `Id` Kullanıcı arabiriminin başka bir bölümünde seçildiğinde ayarlanır ve `EditItem` çağrılır. `SaveItem`Yöntemi, Kaydet öğesi seçilerek tetiklenir `<button>` . Örnek uygulamaya bkz. örnek uygulama.
 
@@ -301,7 +301,7 @@ Diğer sitelerin uygulamanıza çıkış noktaları arası kaynak paylaşımı (
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* <xref:security/blazor/webassembly/additional-scenarios>&ndash; <xref:System.Net.Http.HttpClient> GÜVENLI Web API istekleri yapmak için kullanımı ile ilgili kapsamı içerir.
+* <xref:security/blazor/webassembly/additional-scenarios>: <xref:System.Net.Http.HttpClient> Güvenli Web API istekleri yapmak için kullanımı ile ilgili kapsamı içerir.
 * <xref:fundamentals/http-requests>
 * <xref:security/enforcing-ssl>
 * [Kestrel HTTPS uç noktası yapılandırması](xref:fundamentals/servers/kestrel#endpoint-configuration)
