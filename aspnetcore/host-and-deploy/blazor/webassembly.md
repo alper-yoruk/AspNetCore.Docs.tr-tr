@@ -164,6 +164,16 @@ Blob hizmeti bir depolama hesabında barındırılan statik Web sitesi için etk
 * **Dizin belgesi adını** olarak ayarlayın `index.html` .
 * **Hata belge yolunu** olarak ayarlayın `index.html` . Razorbileşenler ve diğer dosya olmayan uç noktaları, blob hizmeti tarafından depolanan statik içerikte fiziksel yollarda yer vermez. Yönlendiricinin işlemesi gereken bu kaynaklardan birine yönelik bir istek alındığında Blazor , blob hizmeti tarafından oluşturulan *404-bulunamayan* hata, isteği **hata belge yoluna**yönlendirir. *İndex. html* blobu döndürülür ve Blazor yönlendirici yolu yükler ve işler.
 
+Dosyalar ' üst bilgilerinde uygunsuz MIME türleri nedeniyle çalışma zamanında dosya yüklenmemişse `Content-Type` , aşağıdaki eylemlerden birini gerçekleştirin:
+
+* Araçlar, dosyalar dağıtıldığında doğru MIME türlerini (üstbilgiler) ayarlamak üzere yapılandırın `Content-Type` .
+* `Content-Type`Uygulama dağıtıldıktan sonra dosyalar IÇIN MIME türlerini (üstbilgiler) değiştirin.
+
+  Her dosya için Depolama Gezgini (Azure portal):
+  
+  1. Dosyaya sağ tıklayın ve **Özellikler**' i seçin.
+  1. **ContentType** ' ı ayarlayın ve **Kaydet** düğmesini seçin.
+
 Daha fazla bilgi için bkz. [Azure Storage 'Da statik Web sitesi barındırma](/azure/storage/blobs/storage-blob-static-website).
 
 ### <a name="nginx"></a>Nginx
