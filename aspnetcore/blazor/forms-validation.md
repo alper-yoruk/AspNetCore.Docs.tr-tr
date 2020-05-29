@@ -621,3 +621,15 @@ Yukarıdaki örnekte, şu şekilde ayarlayın `formInvalid` `false` :
     }
 }
 ```
+
+## <a name="troubleshoot"></a>Sorun giderme
+
+> InvalidOperationException: EditForm bir model parametresi veya bir EditContext parametresi gerektiriyor, ancak her ikisini de içermemelidir.
+
+Veya olduğunu doğrulayın <xref:Microsoft.AspNetCore.Components.Forms.EditForm> <xref:Microsoft.AspNetCore.Components.Forms.EditForm.Model> <xref:Microsoft.AspNetCore.Components.Forms.EditContext> .
+
+Forma atama yaparken <xref:Microsoft.AspNetCore.Components.Forms.EditForm.Model> , aşağıdaki örnekte gösterildiği gibi model türünün örneği oluşturulmuş olduğunu doğrulayın:
+
+```csharp
+private ExampleModel exampleModel = new ExampleModel();
+```
