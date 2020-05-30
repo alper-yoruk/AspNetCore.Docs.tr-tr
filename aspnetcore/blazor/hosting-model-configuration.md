@@ -1,11 +1,11 @@
 ---
-Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Author: guardrex açıklaması: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
+monikerRange: ' >= aspnetcore-3,1 ' MS. Author: Riande MS. Custom: MVC MS. Date: 05/28/2020 No-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ' SignalR ' uid: blazor/Hosting-model-yapılandırma
 
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>ASP.NET Core Blazor barındırma modeli yapılandırması
@@ -228,6 +228,12 @@ builder.Services.AddOidcAuthentication(options =>
 
 #### <a name="logging-configuration"></a>Günlüğe kaydetme yapılandırması
 
+[Microsoft. Extensions. Logging. Configuration](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration/)için bir paket başvurusu ekleyin:
+
+```xml
+<PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="{VERSION}" />
+```
+
 *Wwwroot/appSettings. JSON*:
 
 ```json
@@ -245,6 +251,10 @@ builder.Services.AddOidcAuthentication(options =>
 `Program.Main`:
 
 ```csharp
+using Microsoft.Extensions.Logging;
+
+...
+
 builder.Logging.AddConfiguration(
     builder.Configuration.GetSection("Logging"));
 ```
@@ -287,177 +297,11 @@ Kullanıcı arabirimini özelleştirmek için, `id` `components-reconnect-modal`
 Aşağıdaki tabloda öğesine uygulanan CSS sınıfları açıklanmaktadır `components-reconnect-modal` .
 
 | CSS sınıfı                       | Bildiren&hellip; |
-| ---
-Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
----------------- | ---title: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Yazar: Açıklama: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
---------- | | `components-reconnect-show`     | Kayıp bir bağlantı. İstemci yeniden bağlanmaya çalışıyor. Kalıcı olarak göster. | | `components-reconnect-hide`     | Etkin bir bağlantı sunucuya yeniden oluşturulur. Kalıcı olarak gizleyin. | | `components-reconnect-failed`   | Muhtemelen bir ağ hatasından dolayı yeniden bağlantı başarısız oldu. Yeniden bağlanmayı denemek için çağrısı yapın `window.Blazor.reconnect()` . | | `components-reconnect-rejected` | Yeniden bağlantı reddedildi. Sunucuya ulaşıldı ancak bağlantı reddedildi ve kullanıcının sunucudaki durumu kayboldu. Uygulamayı yeniden yüklemek için çağrısı yapın `location.reload()` . Bu bağlantı durumu şu durumlarda oluşabilir:<ul><li>Sunucu tarafında devre dışı bir kilitlenme oluşur.</li><li>Sunucunun kullanıcının durumunu bırakması için istemcinin bağlantısı yeterince uzun değil. Kullanıcının etkileşimde bulunduğu bileşenlerin örnekleri atıldı.</li><li>Sunucu yeniden başlatıldı veya uygulamanın çalışan işlemi geri dönüştürüldü.</li></ul> |
+| ------------------------------- | ----------------- |
+| `components-reconnect-show`     | Kayıp bir bağlantı. İstemci yeniden bağlanmaya çalışıyor. Kalıcı olarak göster. |
+| `components-reconnect-hide`     | Etkin bir bağlantı sunucuya yeniden oluşturulur. Kalıcı olarak gizleyin. |
+| `components-reconnect-failed`   | Muhtemelen bir ağ hatasından dolayı yeniden bağlantı başarısız oldu. Yeniden bağlanmayı denemek için çağrısı yapın `window.Blazor.reconnect()` . |
+| `components-reconnect-rejected` | Yeniden bağlantı reddedildi. Sunucuya ulaşıldı ancak bağlantı reddedildi ve kullanıcının sunucudaki durumu kayboldu. Uygulamayı yeniden yüklemek için çağrısı yapın `location.reload()` . Bu bağlantı durumu şu durumlarda oluşabilir:<ul><li>Sunucu tarafında devre dışı bir kilitlenme oluşur.</li><li>Sunucunun kullanıcının durumunu bırakması için istemcinin bağlantısı yeterince uzun değil. Kullanıcının etkileşimde bulunduğu bileşenlerin örnekleri atıldı.</li><li>Sunucu yeniden başlatıldı veya uygulamanın çalışan işlemi geri dönüştürüldü.</li></ul> |
 
 ### <a name="render-mode"></a>Oluşturma modu
 

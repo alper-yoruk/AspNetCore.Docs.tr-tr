@@ -1,18 +1,18 @@
 ---
-Başlık: ' Debug ASP.NET Core Blazor webassembly ' Yazar: Açıklama: ' uygulamalarda hata ayıklamayı öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+Başlık: ' Debug ASP.NET Core Blazor webassembly ' Author: guardrex açıklaması: ' uygulamalarda hata ayıklamayı öğrenin Blazor . '
+monikerRange: ' >= aspnetcore-3,1 ' MS. Author: Riande MS. Custom: MVC MS. Date: 05/29/2020 No-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ' SignalR ' uid: blazor/Debug
 
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>Hata ayıklama ASP.NET Core Blazor webassembly
 
 [Daniel Roth](https://github.com/danroth27)
 
-BlazorKmıum tabanlı tarayıcılarda (Edge/Chrome) tarayıcı geliştirme araçları kullanılarak WebAssembly uygulamalarına hata ayıklanabilir.  Alternatif olarak, Visual Studio veya Visual Studio Code kullanarak uygulamanızda hata ayıklayabilirsiniz.
+BlazorKmıum tabanlı tarayıcılarda (Edge/Chrome) tarayıcı geliştirme araçları kullanılarak WebAssembly uygulamalarına hata ayıklanabilir. Alternatif olarak, Visual Studio veya Visual Studio Code kullanarak uygulamanızda hata ayıklaması yapabilirsiniz.
 
 Kullanılabilir senaryolar şunlardır:
 
@@ -53,6 +53,8 @@ Mevcut bir weelsembly uygulamasında hata ayıklamayı etkinleştirmek için Bla
 
 * IDE 'nin uygulamanın bir Blazor webassembly uygulaması olduğunu algılamasını sağlar.
 * Betik hata ayıklama altyapısına, Blazor hata ayıklama proxy 'si aracılığıyla tarayıcıya bağlanmasını söyler.
+
+`wsProtocol`Başlatılan tarayıcıda () WebSockets Protokolü (), ana bilgisayar ( `url.hostname` ), bağlantı noktası () `url.port` ve Inspector URI 'si için yer tutucu değerleri `browserInspectUri` , Framework tarafından sağlanır.
 
 ## <a name="visual-studio"></a>Visual Studio
 
@@ -135,6 +137,7 @@ Tarayıcı kaynak haritaları tarayıcının derlenmiş dosyaları özgün kayna
 
 ## <a name="troubleshoot"></a>Sorun giderme
 
-Hatalar halinde çalıştırıyorsanız, aşağıdaki ipucu yardımcı olabilir:
+Hatalar halinde çalıştırıyorsanız, aşağıdaki ipuçları yardımcı olabilir:
 
-**Hata ayıklayıcı** sekmesinde, tarayıcınızda Geliştirici Araçları ' nı açın. Konsolunda, `localStorage.clear()` tüm kesme noktalarını kaldırmak için yürütün.
+* **Hata ayıklayıcı** sekmesinde, tarayıcınızda Geliştirici Araçları ' nı açın. Konsolunda, `localStorage.clear()` tüm kesme noktalarını kaldırmak için yürütün.
+* ASP.NET Core HTTPS geliştirme sertifikasını yüklediğinizden ve güvendiğini doğrulayın. Daha fazla bilgi için bkz. <xref:security/enforcing-ssl#troubleshoot-certificate-problems>.

@@ -1,10 +1,10 @@
 ---
-Başlık: ' Blazor Azure Active Directory B2C ' Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc ile barındırılan bir uygulamayı ASP.NET Core güvenli hale getirme:
+Başlık: ASP.NET Core ' Blazor Azure Active Directory B2C ' Author: guardrex açıklaması: monikerRange: ' >= aspnetcore-3,1 ' MS. Author: Riande MS. Custom: MVC MS. Date: 05/19/2020 No-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ' SignalR ' uid: Security/blazor/webassembly/hosted-with-Azure-Active-Directory-B2C
 
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>Azure Active Directory B2C bir ASP.NET Core Blazor weelsembly barındırılan uygulamasının güvenliğini sağlama
@@ -26,7 +26,7 @@ Aşağıdaki bilgileri kaydedin:
 
 ### <a name="register-a-server-api-app"></a>Sunucu API 'SI uygulaması kaydetme
 
-Bir AAD uygulamasını *sunucu API uygulaması*için kaydetmek üzere [öğretici: Azure Active Directory B2C bir uygulamayı kaydetme öğreticisindeki](/azure/active-directory-b2c/tutorial-register-applications) yönergeleri izleyin:
+Eğitim bölümündeki yönergeleri izleyin: *sunucu API uygulaması* IÇIN bir AAD uygulaması kaydetmek üzere [Azure Active Directory B2C bir uygulamayı kaydetme](/azure/active-directory-b2c/tutorial-register-applications) ve ardından aşağıdakileri yapın:
 
 1. **Azure Active Directory**  >  **uygulama kayıtları** **Yeni kayıt**' ı seçin.
 1. Uygulama için bir **ad** sağlayın (örneğin, ** Blazor sunucu AAD B2C**).
@@ -58,7 +58,7 @@ Aşağıdaki bilgileri kaydedin:
 
 ### <a name="register-a-client-app"></a>İstemci uygulamasını kaydetme
 
-Eğitim bölümündeki yönergeleri izleyerek *istemci uygulaması*IÇIN bir AAD uygulaması kaydetmek üzere [Azure Active Directory B2C bir uygulamayı yeniden kaydedin](/azure/active-directory-b2c/tutorial-register-applications) :
+Eğitim bölümündeki yönergeleri izleyin: *istemci uygulaması* için AAD uygulamasını kaydetmek üzere [Azure Active Directory B2C bir uygulamayı yeniden kaydedin](/azure/active-directory-b2c/tutorial-register-applications) ve ardından aşağıdakileri yapın:
 
 1. **Azure Active Directory**  >  **uygulama kayıtları** **Yeni kayıt**' ı seçin.
 1. Uygulama için bir **ad** sağlayın (örneğin, ** Blazor istemci AAD B2C**).

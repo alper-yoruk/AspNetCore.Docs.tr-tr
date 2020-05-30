@@ -1,10 +1,10 @@
 ---
-Başlık: ' Blazor Azure Active Directory ' Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-Loc ile barındırılan bir uygulamayı ASP.NET Core güvenli hale getirme:
+Başlık: ASP.NET Core ' Blazor Azure Active Directory ' Author: guardrex açıklaması: monikerRange: ' >= aspnetcore-3,1 ' MS. Author: Riande MS. Custom: MVC MS. Date: 05/19/2020 No-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ' SignalR ' uid: Security/blazor/webassembly/hosted-with-Azure-Active-Directory
 
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory"></a>Azure Active Directory bir ASP.NET Core Blazor weelsembly barındırılan uygulamasının güvenliğini sağlama
@@ -21,7 +21,7 @@ Hızlı başlangıç: AAD 'de kiracı oluşturmak için [bir kiracı ayarlama](/
 
 ### <a name="register-a-server-api-app"></a>Sunucu API 'SI uygulaması kaydetme
 
-*Sunucu API uygulaması*IÇIN bir AAD uygulaması kaydetmek üzere [hızlı başlangıç: Microsoft Identity platformu ve sonraki Azure AAD Ile bir uygulamayı kaydetme](/azure/active-directory/develop/quickstart-register-app) bölümündeki yönergeleri izleyin:
+Hızlı Başlangıç bölümündeki yönergeleri izleyin: *sunucu API uygulaması* IÇIN bir AAD uygulaması kaydetmek üzere Microsoft Identity platformu ve sonrakı Azure AAD konularıyla [bir uygulama kaydetme](/azure/active-directory/develop/quickstart-register-app) ve ardından aşağıdakileri yapın:
 
 1. **Azure Active Directory**  >  **uygulama kayıtları** **Yeni kayıt**' ı seçin.
 1. Uygulama için bir **ad** sağlayın (örneğin, ** Blazor sunucu AAD**).
@@ -55,7 +55,7 @@ Aşağıdaki bilgileri kaydedin:
 
 ### <a name="register-a-client-app"></a>İstemci uygulamasını kaydetme
 
-*İstemci uygulaması*IÇIN bir AAD uygulaması kaydetmek üzere [hızlı başlangıç: Microsoft Identity platformu ve sonraki Azure AAD Ile bir uygulamayı kaydetme](/azure/active-directory/develop/quickstart-register-app) bölümündeki yönergeleri izleyin:
+[Hızlı başlangıç: bir uygulamayı Microsoft Identity platformu Ile kaydetme](/azure/active-directory/develop/quickstart-register-app) ve sonrakı Azure AAD konularındaki yönergeleri izleyerek *istemci UYGULAMASı* için bir AAD uygulaması kaydedin ve aşağıdakileri yapın:
 
 1. **Azure Active Directory**  >  **uygulama kayıtları** **Yeni kayıt**' ı seçin.
 1. Uygulama için bir **ad** sağlayın (örneğin, ** Blazor istemci AAD**).

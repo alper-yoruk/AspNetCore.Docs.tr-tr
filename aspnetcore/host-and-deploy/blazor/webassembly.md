@@ -1,11 +1,11 @@
 ---
-Başlık: ' ana bilgisayar ve dağıtım ASP.NET Core Blazor webassembly ' Yazar: Açıklama: ' Blazor ASP.NET Core, Içerik teslim AĞLARı (CDN), dosya sunucuları ve GitHub sayfalarını kullanarak bir uygulamayı nasıl barındırılacağını ve dağıtacağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+Başlık: ' konak ve dağıtım ASP.NET Core Blazor webassembly ' Author: guardrex açıklaması: ' Blazor ASP.NET Core, Içerik teslim AĞLARı (CDN), dosya sunucuları ve GitHub sayfalarını kullanarak bir uygulamayı nasıl barındırılacağını ve dağıtacağınızı öğrenin. '
+monikerRange: ' >= aspnetcore-3,1 ' MS. Author: Riande MS. Custom: MVC MS. Date: 05/28/2020 No-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ' SignalR ' uid: Host-and-Deploy/blazor/webassembly
 
 ---
 # <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>ASP.NET Core webassembly 'ı barındırma ve dağıtma Blazor
@@ -22,9 +22,20 @@ Aşağıdaki dağıtım stratejileri desteklenir:
 * BlazorUygulama, bir ASP.NET Core uygulaması tarafından sunulur. Bu strateji [ASP.NET Core bölümünde barındırılan dağıtımda](#hosted-deployment-with-aspnet-core) ele alınmıştır.
 * BlazorUygulama, bir statik barındırma Web sunucusuna veya hizmetine yerleştirilir, burada .NET uygulamayı sunmak için kullanılmaz Blazor . Bu strateji [tek başına dağıtım](#standalone-deployment) bölümünde ele alınmıştır. Bu, bir Blazor WEBASSEMBLY uygulamasını bir IIS alt uygulaması olarak barındırma hakkında bilgiler içerir.
 
-## <a name="brotli-precompression"></a>Brotli ön sıkıştırma
+## <a name="precompression"></a>Ön sıkıştırma
 
-BlazorWebassembly uygulaması yayımlandığında, çıkış en yüksek düzeydeki [Brotli sıkıştırma algoritması](https://tools.ietf.org/html/rfc7932) kullanılarak, uygulama boyutunu azaltmak ve çalışma zamanı sıkıştırması gereksinimini kaldırmak için önceden sıkıştırılır.
+BlazorWebassembly uygulaması yayımlandığında, çıkış, uygulamanın boyutunu azaltmak ve çalışma zamanı sıkıştırması gereksinimini ortadan kaldırmak için önceden sıkıştırılır. Aşağıdaki sıkıştırma algoritmaları kullanılır:
+
+* [Brotli](https://tools.ietf.org/html/rfc7932) (en yüksek düzey)
+* [Gzip](https://tools.ietf.org/html/rfc1952))
+
+Sıkıştırmayı devre dışı bırakmak için `BlazorEnableCompression` uygulamanın proje dosyasına MSBuild özelliğini ekleyin ve değeri şu şekilde ayarlayın `false` :
+
+```xml
+<PropertyGroup>
+  <BlazorEnableCompression>false</BlazorEnableCompression>
+</PropertyGroup>
+```
 
 IIS *Web. config* sıkıştırma yapılandırması için [IIS: Brotli ve gzip sıkıştırma](#brotli-and-gzip-compression) bölümüne bakın.
 
@@ -155,7 +166,7 @@ IIS, *Web. config* aracılığıyla Brotli veya gzip sıkıştırılan varlıkla
 
 IIS ile dağıtım sorunlarını giderme hakkında daha fazla bilgi için bkz <xref:test/troubleshoot-azure-iis> ..
 
-### <a name="azure-storage"></a>Azure Storage
+### <a name="azure-storage"></a>Azure Depolama
 
 [Azure depolama](/azure/storage/) statik dosya barındırma, sunucusuz Blazor uygulama barındırmayı sağlar. Özel etki alanı adları, Azure Content Delivery Network (CDN) ve HTTPS desteklenir.
 
@@ -350,69 +361,11 @@ Blazor `loadBootResource` Yerleşik önyükleme kaynağı yükleme mekanizmasın
 `loadBootResource`Parametreler aşağıdaki tabloda görüntülenir.
 
 | Parametre    | Açıklama |
-| ---
-Başlık: ' ana bilgisayar ve dağıtım ASP.NET Core Blazor webassembly ' Yazar: Açıklama: ' Blazor ASP.NET Core, Içerik teslim AĞLARı (CDN), dosya sunucuları ve GitHub sayfalarını kullanarak bir uygulamayı nasıl barındırılacağını ve dağıtacağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ana bilgisayar ve dağıtım ASP.NET Core Blazor webassembly ' Yazar: Açıklama: ' Blazor ASP.NET Core, Içerik teslim AĞLARı (CDN), dosya sunucuları ve GitHub sayfalarını kullanarak bir uygulamayı nasıl barındırılacağını ve dağıtacağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ana bilgisayar ve dağıtım ASP.NET Core Blazor webassembly ' Yazar: Açıklama: ' Blazor ASP.NET Core, Içerik teslim AĞLARı (CDN), dosya sunucuları ve GitHub sayfalarını kullanarak bir uygulamayı nasıl barındırılacağını ve dağıtacağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ana bilgisayar ve dağıtım ASP.NET Core Blazor webassembly ' Yazar: Açıklama: ' Blazor ASP.NET Core, Içerik teslim AĞLARı (CDN), dosya sunucuları ve GitHub sayfalarını kullanarak bir uygulamayı nasıl barındırılacağını ve dağıtacağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
------- | ---title: ' ana bilgisayar ve dağıtım ASP.NET Core Blazor webassembly ' Yazar: Açıklama: ' Blazor ASP.NET Core, Içerik teslim AĞLARı (CDN), dosya sunucuları ve GitHub sayfalarını kullanarak bir uygulamayı nasıl barındırılacağını ve dağıtacağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ana bilgisayar ve dağıtım ASP.NET Core Blazor webassembly ' Yazar: Açıklama: ' Blazor ASP.NET Core, Içerik teslim AĞLARı (CDN), dosya sunucuları ve GitHub sayfalarını kullanarak bir uygulamayı nasıl barındırılacağını ve dağıtacağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ana bilgisayar ve dağıtım ASP.NET Core Blazor webassembly ' Yazar: Açıklama: ' Blazor ASP.NET Core, Içerik teslim AĞLARı (CDN), dosya sunucuları ve GitHub sayfalarını kullanarak bir uygulamayı nasıl barındırılacağını ve dağıtacağınızı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
------- | | `type`       | Kaynağın türü. İzinleri olan türler: `assembly` , `pdb` , `dotnetjs` , `dotnetwasm` , `timezonedata` | | `name`       | Kaynağın adı. | | `defaultUri` | Kaynağın göreli veya mutlak URI 'SI. | | `integrity`  | Yanıtta beklenen içeriği temsil eden bütünlük dizesi. |
+| ------------ | ----------- |
+| `type`       | Kaynağın türü. İzinleri olan türler: `assembly` , `pdb` , `dotnetjs` , `dotnetwasm` ,`timezonedata` |
+| `name`       | Kaynağın adı. |
+| `defaultUri` | Kaynağın göreli veya mutlak URI 'SI. |
+| `integrity`  | Yanıtta beklenen içeriği temsil eden bütünlük dizesi. |
 
 `loadBootResource`yükleme işlemini geçersiz kılmak için aşağıdakilerden herhangi birini döndürür:
 

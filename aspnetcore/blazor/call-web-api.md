@@ -1,11 +1,11 @@
 ---
-title: ' ASP.NET Core webassembly öğesinden bir Web API 'SI çağırma Blazor "Yazar: ' Blazor çıkış noktaları arası kaynak PAYLAŞıMı (CORS) istekleri yapma da dahil olmak üzere JSON yardımcıları kullanarak webassembly uygulamasından BIR Web API 'Si çağırmayı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+title: ' ASP.NET Core webassembly 'dan bir Web API 'SI çağırma Blazor ' Yazar: guardrex açıklaması: ' çıkış noktaları kullanarak bir webassembly uygulamasından bir Web API 'sini çağırmayı öğrenin Blazor (örneğin, çıkış noktaları arası kaynak PAYLAŞıMı (CORS) istekleri). '
+monikerRange: ' >= aspnetcore-3,1 ' MS. Author: Riande MS. Custom: MVC MS. Date: 05/28/2020 No-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ' SignalR ' uid: blazor/Call-Web-API
 
 ---
 # <a name="call-a-web-api-from-aspnet-core-blazor"></a>ASP.NET Core bir Web API 'SI çağırmaBlazor
@@ -168,6 +168,8 @@ Aşağıdaki kodda, Delete `<button>` öğesi `DeleteItem` yöntemini çağırı
 ## <a name="named-httpclient-with-ihttpclientfactory"></a>Ihttpclientfactory ile adlandırılmış HttpClient
 
 <xref:System.Net.Http.IHttpClientFactory>Hizmetler ve bir adlandırılmış yapılandırma <xref:System.Net.Http.HttpClient> desteklenir.
+
+Proje dosyasındaki [Microsoft. Extensions. http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) NuGet paketine başvurun.
 
 `Program.Main`(*Program.cs*):
 
