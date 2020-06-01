@@ -27,7 +27,7 @@ Aşağıdaki dağıtım stratejileri desteklenir:
 BlazorWebassembly uygulaması yayımlandığında, çıkış, uygulamanın boyutunu azaltmak ve çalışma zamanı sıkıştırması gereksinimini ortadan kaldırmak için önceden sıkıştırılır. Aşağıdaki sıkıştırma algoritmaları kullanılır:
 
 * [Brotli](https://tools.ietf.org/html/rfc7932) (en yüksek düzey)
-* [Gzip](https://tools.ietf.org/html/rfc1952))
+* [Gzip](https://tools.ietf.org/html/rfc1952)
 
 Sıkıştırmayı devre dışı bırakmak için `BlazorEnableCompression` uygulamanın proje dosyasına MSBuild özelliğini ekleyin ve değeri şu şekilde ayarlayın `false` :
 
