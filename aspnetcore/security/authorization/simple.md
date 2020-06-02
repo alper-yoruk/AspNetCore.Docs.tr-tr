@@ -1,30 +1,20 @@
 ---
-title: ASP.NET Core basit yetkilendirme
-author: rick-anderson
-description: ASP.NET Core denetleyicilerine ve eylemlerine erişimi kısıtlamak için yetkilendir özniteliğini nasıl kullanacağınızı öğrenin.
-ms.author: riande
-ms.date: 10/14/2016
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/authorization/simple
-ms.openlocfilehash: f273c3e9db74fa63de85c65d94223d0ef7326036
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775641"
+<span data-ttu-id="c8203-101">Başlık: ASP.NET Core Yazar: Rick-Anderson Description içinde basit yetkilendirme: yetkilendirme özniteliğini, erişimi ASP.NET Core denetleyicilerine ve eylemlerine kısıtlamak için nasıl kullanacağınızı öğrenin.</span><span class="sxs-lookup"><span data-stu-id="c8203-101">title: Simple authorization in ASP.NET Core author: rick-anderson description: Learn how to use the Authorize attribute to restrict access to ASP.NET Core controllers and actions.</span></span>
+<span data-ttu-id="c8203-102">MS. Author: Riande MS. Date: 10/14/2016 No-loc:</span><span class="sxs-lookup"><span data-stu-id="c8203-102">ms.author: riande ms.date: 10/14/2016 no-loc:</span></span>
+- <span data-ttu-id="c8203-103">'Blazor'</span><span class="sxs-lookup"><span data-stu-id="c8203-103">'Blazor'</span></span>
+- <span data-ttu-id="c8203-104">'Identity'</span><span class="sxs-lookup"><span data-stu-id="c8203-104">'Identity'</span></span>
+- <span data-ttu-id="c8203-105">'Let's Encrypt'</span><span class="sxs-lookup"><span data-stu-id="c8203-105">'Let's Encrypt'</span></span>
+- <span data-ttu-id="c8203-106">'Razor'</span><span class="sxs-lookup"><span data-stu-id="c8203-106">'Razor'</span></span>
+- <span data-ttu-id="c8203-107">' SignalR ' uid: güvenlik/yetkilendirme/basit</span><span class="sxs-lookup"><span data-stu-id="c8203-107">'SignalR' uid: security/authorization/simple</span></span>
+
 ---
-# <a name="simple-authorization-in-aspnet-core"></a><span data-ttu-id="6e37d-103">ASP.NET Core basit yetkilendirme</span><span class="sxs-lookup"><span data-stu-id="6e37d-103">Simple authorization in ASP.NET Core</span></span>
+# <a name="simple-authorization-in-aspnet-core"></a><span data-ttu-id="c8203-108">ASP.NET Core basit yetkilendirme</span><span class="sxs-lookup"><span data-stu-id="c8203-108">Simple authorization in ASP.NET Core</span></span>
 
 <a name="security-authorization-simple"></a>
 
-<span data-ttu-id="6e37d-104">MVC 'de yetkilendirme, `AuthorizeAttribute` özniteliği ve çeşitli parametreleri aracılığıyla denetlenir.</span><span class="sxs-lookup"><span data-stu-id="6e37d-104">Authorization in MVC is controlled through the `AuthorizeAttribute` attribute and its various parameters.</span></span> <span data-ttu-id="6e37d-105">En basit noktada, bir denetleyiciye `AuthorizeAttribute` veya eyleme olan erişimi, kimliği doğrulanmış herhangi bir kullanıcı için denetleyiciye veya eyleme uygulama kısıtlar.</span><span class="sxs-lookup"><span data-stu-id="6e37d-105">At its simplest, applying the `AuthorizeAttribute` attribute to a controller or action limits access to the controller or action to any authenticated user.</span></span>
+<span data-ttu-id="c8203-109">ASP.NET Core yetkilendirme, <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ve çeşitli parametreleriyle denetlenir.</span><span class="sxs-lookup"><span data-stu-id="c8203-109">Authorization in ASP.NET Core is controlled with <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> and its various parameters.</span></span> <span data-ttu-id="c8203-110">En basit biçiminde, `[Authorize]` özniteliği bir denetleyiciye, eyleme veya Razor sayfaya uygulayarak, bu bileşene erişimi kimliği doğrulanmış herhangi bir kullanıcıyla sınırlandırır.</span><span class="sxs-lookup"><span data-stu-id="c8203-110">In its simplest form, applying the `[Authorize]` attribute to a controller, action, or Razor Page, limits access to that component to any authenticated user.</span></span>
 
-<span data-ttu-id="6e37d-106">Örneğin, aşağıdaki kod kimliği doğrulanmış herhangi bir kullanıcıya erişimi `AccountController` kısıtlar.</span><span class="sxs-lookup"><span data-stu-id="6e37d-106">For example, the following code limits access to the `AccountController` to any authenticated user.</span></span>
+<span data-ttu-id="c8203-111">Örneğin, aşağıdaki kod `AccountController` kimliği doğrulanmış herhangi bir kullanıcıya erişimi kısıtlar.</span><span class="sxs-lookup"><span data-stu-id="c8203-111">For example, the following code limits access to the `AccountController` to any authenticated user.</span></span>
 
 ```csharp
 [Authorize]
@@ -40,7 +30,7 @@ public class AccountController : Controller
 }
 ```
 
-<span data-ttu-id="6e37d-107">Denetleyici yerine bir eyleme yetkilendirme uygulamak istiyorsanız, bu `AuthorizeAttribute` özniteliği eyleme uygulayın:</span><span class="sxs-lookup"><span data-stu-id="6e37d-107">If you want to apply authorization to an action rather than the controller, apply the `AuthorizeAttribute` attribute to the action itself:</span></span>
+<span data-ttu-id="c8203-112">Denetleyici yerine bir eyleme yetkilendirme uygulamak istiyorsanız, bu `AuthorizeAttribute` özniteliği eyleme uygulayın:</span><span class="sxs-lookup"><span data-stu-id="c8203-112">If you want to apply authorization to an action rather than the controller, apply the `AuthorizeAttribute` attribute to the action itself:</span></span>
 
 ```csharp
 public class AccountController : Controller
@@ -56,9 +46,9 @@ public class AccountController : Controller
 }
 ```
 
-<span data-ttu-id="6e37d-108">Artık yalnızca kimliği doğrulanmış kullanıcılar `Logout` işleve erişebilir.</span><span class="sxs-lookup"><span data-stu-id="6e37d-108">Now only authenticated users can access the `Logout` function.</span></span>
+<span data-ttu-id="c8203-113">Artık yalnızca kimliği doğrulanmış kullanıcılar işleve erişebilir `Logout` .</span><span class="sxs-lookup"><span data-stu-id="c8203-113">Now only authenticated users can access the `Logout` function.</span></span>
 
-<span data-ttu-id="6e37d-109">Ayrıca, `AllowAnonymous` kimliği doğrulanmamış kullanıcıların tek tek eylemlere erişimine izin vermek için özniteliğini de kullanabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="6e37d-109">You can also use the `AllowAnonymous` attribute to allow access by non-authenticated users to individual actions.</span></span> <span data-ttu-id="6e37d-110">Örneğin:</span><span class="sxs-lookup"><span data-stu-id="6e37d-110">For example:</span></span>
+<span data-ttu-id="c8203-114">Ayrıca, `AllowAnonymous` kimliği doğrulanmamış kullanıcıların tek tek eylemlere erişimine izin vermek için özniteliğini de kullanabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="c8203-114">You can also use the `AllowAnonymous` attribute to allow access by non-authenticated users to individual actions.</span></span> <span data-ttu-id="c8203-115">Örneğin:</span><span class="sxs-lookup"><span data-stu-id="c8203-115">For example:</span></span>
 
 ```csharp
 [Authorize]
@@ -75,7 +65,7 @@ public class AccountController : Controller
 }
 ```
 
-<span data-ttu-id="6e37d-111">Bu, kimliği doğrulanmış veya kimliği doğrulanmamış/ `AccountController`anonim durumundan bağımsız olarak `Login` herkes tarafından erişilebilen, yalnızca kimliği doğrulanmış kullanıcıların öğesine izin verir.</span><span class="sxs-lookup"><span data-stu-id="6e37d-111">This would allow only authenticated users to the `AccountController`, except for the `Login` action, which is accessible by everyone, regardless of their authenticated or unauthenticated / anonymous status.</span></span>
+<span data-ttu-id="c8203-116">Bu, `AccountController` `Login` kimliği doğrulanmış veya kimliği doğrulanmamış/anonim durumundan bağımsız olarak herkes tarafından erişilebilen, yalnızca kimliği doğrulanmış kullanıcıların öğesine izin verir.</span><span class="sxs-lookup"><span data-stu-id="c8203-116">This would allow only authenticated users to the `AccountController`, except for the `Login` action, which is accessible by everyone, regardless of their authenticated or unauthenticated / anonymous status.</span></span>
 
 > [!WARNING]
-> <span data-ttu-id="6e37d-112">`[AllowAnonymous]`Tüm yetkilendirme deyimlerini atlar.</span><span class="sxs-lookup"><span data-stu-id="6e37d-112">`[AllowAnonymous]` bypasses all authorization statements.</span></span> <span data-ttu-id="6e37d-113">Ve herhangi bir `[AllowAnonymous]` `[Authorize]` özniteliği birleştirirseniz, `[Authorize]` öznitelikler yok sayılır.</span><span class="sxs-lookup"><span data-stu-id="6e37d-113">If you combine `[AllowAnonymous]` and any `[Authorize]` attribute, the `[Authorize]` attributes are ignored.</span></span> <span data-ttu-id="6e37d-114">Örneğin, denetleyici düzeyinde uygularsanız `[AllowAnonymous]` , aynı denetleyicideki (veya `[Authorize]` içindeki herhangi bir eylemde) tüm öznitelikler yok sayılır.</span><span class="sxs-lookup"><span data-stu-id="6e37d-114">For example if you apply `[AllowAnonymous]` at the controller level, any `[Authorize]` attributes on the same controller (or on any action within it) is ignored.</span></span>
+> <span data-ttu-id="c8203-117">`[AllowAnonymous]`Tüm yetkilendirme deyimlerini atlar.</span><span class="sxs-lookup"><span data-stu-id="c8203-117">`[AllowAnonymous]` bypasses all authorization statements.</span></span> <span data-ttu-id="c8203-118">`[AllowAnonymous]`Ve herhangi bir özniteliği birleştirirseniz `[Authorize]` , `[Authorize]` öznitelikler yok sayılır.</span><span class="sxs-lookup"><span data-stu-id="c8203-118">If you combine `[AllowAnonymous]` and any `[Authorize]` attribute, the `[Authorize]` attributes are ignored.</span></span> <span data-ttu-id="c8203-119">Örneğin, `[AllowAnonymous]` Denetleyici düzeyinde uygularsanız, `[Authorize]` aynı denetleyicideki (veya içindeki herhangi bir eylemde) tüm öznitelikler yok sayılır.</span><span class="sxs-lookup"><span data-stu-id="c8203-119">For example if you apply `[AllowAnonymous]` at the controller level, any `[Authorize]` attributes on the same controller (or on any action within it) is ignored.</span></span>
