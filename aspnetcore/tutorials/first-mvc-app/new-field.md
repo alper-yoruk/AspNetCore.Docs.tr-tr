@@ -57,19 +57,19 @@ Komut ⌘ + B
 
 ------
 
-`Movie` Sınıfa yeni bir alan eklediyseniz, bu yeni özelliğin dahil edilmesini sağlamak için bağlama beyaz listesini güncelleştirmeniz gerekir. *MoviesController.cs*içinde `[Bind]` , `Create` `Rating` özelliği dahil etmek için hem hem de `Edit` eylem yöntemlerinin özniteliğini güncelleştirin:
+Sınıfa yeni bir alan eklediyseniz `Movie` , bu yeni özelliğin dahil edilmesini sağlamak için bağlama beyaz listesini güncelleştirmeniz gerekir. *MoviesController.cs*içinde, `[Bind]` `Create` `Edit` özelliği dahil etmek için hem hem de eylem yöntemlerinin özniteliğini güncelleştirin `Rating` :
 
 ```csharp
 [Bind("Id,Title,ReleaseDate,Genre,Price,Rating")]
    ```
 
-Yeni `Rating` özelliği tarayıcı görünümünde görüntülemek, oluşturmak ve düzenlemek için görünüm şablonlarını güncelleştirin.
+Yeni özelliği tarayıcı görünümünde görüntülemek, oluşturmak ve düzenlemek için görünüm şablonlarını güncelleştirin `Rating` .
 
-*/Views/movies/Index.cshtml* dosyasını düzenleyin ve bir `Rating` alan ekleyin:
+*/Views/movies/Index.cshtml* dosyasını düzenleyin ve bir alan ekleyin `Rating` :
 
 [!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexGenreRating.cshtml?highlight=16,38&range=24-64)]
 
-*/Views/movies/Create.cshtml* ile bir `Rating` alanı güncelleştirin.
+*/Views/movies/Create.cshtml* ile bir alanı güncelleştirin `Rating` .
 
 # <a name="visual-studio--visual-studio-for-mac"></a>[Visual Studio/Mac için Visual Studio](#tab/visual-studio+visual-studio-mac)
 
@@ -85,7 +85,7 @@ Yeni `Rating` özelliği tarayıcı görünümünde görüntülemek, oluşturmak
 
 Kalan şablonları güncelleştirin.
 
-`SeedData` Sınıfını yeni sütun için bir değer sağlayacak şekilde güncelleştirin. Aşağıda örnek bir değişiklik gösterilmektedir, ancak her biri `new Movie`için bu değişikliği yapmak isteyeceksiniz.
+`SeedData`Sınıfını yeni sütun için bir değer sağlayacak şekilde güncelleştirin. Aşağıda örnek bir değişiklik gösterilmektedir, ancak her biri için bu değişikliği yapmak isteyeceksiniz `new Movie` .
 
 [!code-csharp[](start-mvc/sample/MvcMovie/Models/SeedDataRating.cs?name=snippet1&highlight=6)]
 
@@ -93,7 +93,7 @@ VERITABANı yeni alanı içerecek şekilde güncelleştirilene kadar uygulama ç
 
 `SqlException: Invalid column name 'Rating'.`
 
-Bu hata, güncelleştirilmiş film modeli sınıfı varolan veritabanının film tablosunun şemasından farklı olduğu için oluşur. (Veritabanı tablosunda sütun `Rating` yok.)
+Bu hata, güncelleştirilmiş film modeli sınıfı varolan veritabanının film tablosunun şemasından farklı olduğu için oluşur. ( `Rating` Veritabanı tablosunda sütun yok.)
 
 Hatayı çözmek için birkaç yaklaşım vardır:
 
@@ -118,7 +118,7 @@ Add-Migration Rating
 Update-Database
 ```
 
-Bu `Add-Migration` komut, geçiş çerçevesinin geçerli `Movie` `Movie` DB şemasıyla geçerli modeli incelemesini ve veritabanını yeni modele geçirmek için gerekli kodu oluşturmasını söyler.
+Bu `Add-Migration` komut, geçiş çerçevesinin geçerli `Movie` DB şemasıyla geçerli modeli INCELEMESINI `Movie` ve veritabanını yeni modele geçirmek için gerekli kodu oluşturmasını söyler.
 
 "Derecelendirme" adı rastgele olur ve geçiş dosyasını adlandırmak için kullanılır. Geçiş dosyası için anlamlı bir ad kullanılması yararlı olur.
 
@@ -137,11 +137,11 @@ dotnet ef database update
 ---
 <!-- End of VS tabs -->
 
-Uygulamayı çalıştırın ve bir alan ile film oluşturabileceğiniz, düzenleyebileceğiniz ve görüntüleyebilen bir `Rating` doğrulama yapabilirsiniz. Uygulamayı güncelleştirin:
+Uygulamayı çalıştırın ve bir alan ile film oluşturabileceğiniz, düzenleyebileceğiniz ve görüntüleyebilen bir doğrulama yapabilirsiniz `Rating` . Uygulamayı güncelleştirin:
 
-* `Rating` Alanı `Edit`, `Details`, ve `Delete` görüntüleme şablonlarına ekleyin.
-* ' Nin düzenleme eylemi yönteminde bağlamayı güncelleştirin `MoviesController`.
+* `Rating`Alanı `Edit` ,, `Details` ve `Delete` görüntüleme şablonlarına ekleyin.
+* ' Nin düzenleme eylemi yönteminde bağlamayı güncelleştirin `MoviesController` .
 
 > [!div class="step-by-step"]
-> [Önceki](search.md)
-> [İleri](validation.md)
+> [Önceki](search.md) 
+>  [Sonraki](validation.md)

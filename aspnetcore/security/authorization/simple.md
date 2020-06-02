@@ -1,30 +1,20 @@
 ---
-title: ASP.NET Core basit yetkilendirme
-author: rick-anderson
-description: ASP.NET Core denetleyicilerine ve eylemlerine erişimi kısıtlamak için yetkilendir özniteliğini nasıl kullanacağınızı öğrenin.
-ms.author: riande
-ms.date: 10/14/2016
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: security/authorization/simple
-ms.openlocfilehash: f273c3e9db74fa63de85c65d94223d0ef7326036
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775641"
+Başlık: ASP.NET Core Yazar: Rick-Anderson Description içinde basit yetkilendirme: yetkilendirme özniteliğini, erişimi ASP.NET Core denetleyicilerine ve eylemlerine kısıtlamak için nasıl kullanacağınızı öğrenin.
+MS. Author: Riande MS. Date: 10/14/2016 No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: güvenlik/yetkilendirme/basit
+
 ---
 # <a name="simple-authorization-in-aspnet-core"></a>ASP.NET Core basit yetkilendirme
 
 <a name="security-authorization-simple"></a>
 
-MVC 'de yetkilendirme, `AuthorizeAttribute` özniteliği ve çeşitli parametreleri aracılığıyla denetlenir. En basit noktada, bir denetleyiciye `AuthorizeAttribute` veya eyleme olan erişimi, kimliği doğrulanmış herhangi bir kullanıcı için denetleyiciye veya eyleme uygulama kısıtlar.
+ASP.NET Core yetkilendirme, <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ve çeşitli parametreleriyle denetlenir. En basit biçiminde, `[Authorize]` özniteliği bir denetleyiciye, eyleme veya Razor sayfaya uygulayarak, bu bileşene erişimi kimliği doğrulanmış herhangi bir kullanıcıyla sınırlandırır.
 
-Örneğin, aşağıdaki kod kimliği doğrulanmış herhangi bir kullanıcıya erişimi `AccountController` kısıtlar.
+Örneğin, aşağıdaki kod `AccountController` kimliği doğrulanmış herhangi bir kullanıcıya erişimi kısıtlar.
 
 ```csharp
 [Authorize]
@@ -56,7 +46,7 @@ public class AccountController : Controller
 }
 ```
 
-Artık yalnızca kimliği doğrulanmış kullanıcılar `Logout` işleve erişebilir.
+Artık yalnızca kimliği doğrulanmış kullanıcılar işleve erişebilir `Logout` .
 
 Ayrıca, `AllowAnonymous` kimliği doğrulanmamış kullanıcıların tek tek eylemlere erişimine izin vermek için özniteliğini de kullanabilirsiniz. Örneğin:
 
@@ -75,7 +65,7 @@ public class AccountController : Controller
 }
 ```
 
-Bu, kimliği doğrulanmış veya kimliği doğrulanmamış/ `AccountController`anonim durumundan bağımsız olarak `Login` herkes tarafından erişilebilen, yalnızca kimliği doğrulanmış kullanıcıların öğesine izin verir.
+Bu, `AccountController` `Login` kimliği doğrulanmış veya kimliği doğrulanmamış/anonim durumundan bağımsız olarak herkes tarafından erişilebilen, yalnızca kimliği doğrulanmış kullanıcıların öğesine izin verir.
 
 > [!WARNING]
-> `[AllowAnonymous]`Tüm yetkilendirme deyimlerini atlar. Ve herhangi bir `[AllowAnonymous]` `[Authorize]` özniteliği birleştirirseniz, `[Authorize]` öznitelikler yok sayılır. Örneğin, denetleyici düzeyinde uygularsanız `[AllowAnonymous]` , aynı denetleyicideki (veya `[Authorize]` içindeki herhangi bir eylemde) tüm öznitelikler yok sayılır.
+> `[AllowAnonymous]`Tüm yetkilendirme deyimlerini atlar. `[AllowAnonymous]`Ve herhangi bir özniteliği birleştirirseniz `[Authorize]` , `[Authorize]` öznitelikler yok sayılır. Örneğin, `[AllowAnonymous]` Denetleyici düzeyinde uygularsanız, `[Authorize]` aynı denetleyicideki (veya içindeki herhangi bir eylemde) tüm öznitelikler yok sayılır.

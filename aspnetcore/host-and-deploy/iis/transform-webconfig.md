@@ -33,7 +33,7 @@ Tarafından [Vijay Oymakrishnan](https://github.com/vijayrkn)
 
 Bu dönüşümler aşağıdaki *Web. config* oluşturma senaryolarından biri için oluşur:
 
-* `Microsoft.NET.Sdk.Web` SDK tarafından otomatik olarak oluşturulur.
+* SDK tarafından otomatik olarak oluşturulur `Microsoft.NET.Sdk.Web` .
 * Uygulamanın [içerik kökünde](xref:fundamentals/index#content-root) geliştirici tarafından sağlanmaktadır.
 
 ## <a name="build-configuration"></a>Yapı yapılandırması
@@ -68,7 +68,7 @@ Yapılandırma *yayın*olarak ayarlandığında dönüşüm uygulanır:
 dotnet publish --configuration Release
 ```
 
-Yapılandırma için MSBuild özelliği `$(Configuration)`.
+Yapılandırma için MSBuild özelliği `$(Configuration)` .
 
 ## <a name="profile"></a>Profil
 
@@ -102,7 +102,7 @@ Profil *Folderprofile*olduğunda dönüştürme uygulanır:
 dotnet publish --configuration Release /p:PublishProfile=FolderProfile
 ```
 
-Profil adı için MSBuild özelliği `$(PublishProfile)`.
+Profil adı için MSBuild özelliği `$(PublishProfile)` .
 
 Hiçbir profil geçirilmemişse, varsayılan profil adı **dosya sistemi** ve Web olur *. *Dosya uygulamanın içerik kökünde mevcutsa FileSystem. config uygulanır.
 
@@ -138,11 +138,11 @@ Dönüşüm, ortam *Üretim*olduğunda uygulanır:
 dotnet publish --configuration Release /p:EnvironmentName=Production
 ```
 
-Ortamın MSBuild özelliği `$(EnvironmentName)`.
+Ortamın MSBuild özelliği `$(EnvironmentName)` .
 
-Visual Studio 'dan yayımlama ve bir yayımlama profili kullanma sırasında, bkz <xref:host-and-deploy/visual-studio-publish-profiles#set-the-environment>..
+Visual Studio 'dan yayımlama ve bir yayımlama profili kullanma sırasında, bkz <xref:host-and-deploy/visual-studio-publish-profiles#set-the-environment> ..
 
-`ASPNETCORE_ENVIRONMENT` Ortam değişkeni, ortam adı belirtildiğinde *Web. config* dosyasına otomatik olarak eklenir.
+Ortam `ASPNETCORE_ENVIRONMENT` değişkeni, ortam adı belirtildiğinde *Web. config* dosyasına otomatik olarak eklenir.
 
 ## <a name="custom"></a>Özel
 
@@ -176,11 +176,11 @@ Dönüşüm, `CustomTransformFileName` özellik [DotNet Publish](/dotnet/core/to
 dotnet publish --configuration Release /p:CustomTransformFileName=custom.transform
 ```
 
-Profil adı için MSBuild özelliği `$(CustomTransformFileName)`.
+Profil adı için MSBuild özelliği `$(CustomTransformFileName)` .
 
 ## <a name="prevent-webconfig-transformation"></a>Web. config dönüşümünü engelle
 
-*Web. config* dosyasının dönüştürmelerini engellemek için MSBuild özelliğini `$(IsWebConfigTransformDisabled)`ayarlayın:
+*Web. config* dosyasının dönüştürmelerini engellemek için MSBuild özelliğini ayarlayın `$(IsWebConfigTransformDisabled)` :
 
 ```dotnetcli
 dotnet publish /p:IsWebConfigTransformDisabled=true

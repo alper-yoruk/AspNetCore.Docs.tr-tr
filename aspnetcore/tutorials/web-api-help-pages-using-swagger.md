@@ -37,7 +37,7 @@ Swagger, [rest](https://en.wikipedia.org/wiki/Representational_state_transfer) A
 
 ## <a name="swagger-specification-swaggerjson"></a>Swagger belirtimi (Swagger. JSON)
 
-Swagger akışının çekirdeği, Swagger *. JSON*adlı bir belge&mdash;olan varsayılan olarak Swagger belirtimidir. Bu, hizmetinize bağlı olarak Swagger araç zinciri (veya bunun üçüncü taraf uygulamaları) tarafından oluşturulmuştur. API 'nizin yeteneklerini ve HTTP ile nasıl erişebileceğinizi açıklar. Swagger Kullanıcı arabirimini yürütür ve araç zinciri tarafından keşif ve istemci kodu oluşturmayı etkinleştirmek için kullanılır. Aşağıda, breçekimi için azaltılmış bir Swagger belirtimi örneği verilmiştir:
+Swagger akışının çekirdeği, Swagger &mdash; *. JSON*adlı bir belge olan varsayılan olarak Swagger belirtimidir. Bu, hizmetinize bağlı olarak Swagger araç zinciri (veya bunun üçüncü taraf uygulamaları) tarafından oluşturulmuştur. API 'nizin yeteneklerini ve HTTP ile nasıl erişebileceğinizi açıklar. Swagger Kullanıcı arabirimini yürütür ve araç zinciri tarafından keşif ve istemci kodu oluşturmayı etkinleştirmek için kullanılır. Aşağıda, breçekimi için azaltılmış bir Swagger belirtimi örneği verilmiştir:
 
 ```json
 {

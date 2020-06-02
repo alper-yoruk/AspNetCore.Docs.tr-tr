@@ -35,7 +35,7 @@ dotnet run
 ```
 
 > [!NOTE]
-> Çalıştırmak için bir `dotnet run --project <PROJECT>` proje belirtmek üzere ' i kullanabilirsiniz. Örneğin, örnek uygulamanın `dotnet run --project WebApp` kökünden çalıştırıldığında *WebApp* projesi de çalıştırılır.
+> `dotnet run --project <PROJECT>`Çalıştırmak için bir proje belirtmek üzere ' i kullanabilirsiniz. Örneğin, `dotnet run --project WebApp` örnek uygulamanın kökünden çalıştırıldığında *WebApp* projesi de çalıştırılır.
 
 Konsol çıktısı aşağıdakine benzer iletileri gösterir (uygulamanın çalıştığını ve istekleri beklediğini gösterir):
 
@@ -47,15 +47,15 @@ Now listening on: http://localhost:5000
 Application started. Press Ctrl+C to shut down.
 ```
 
-Bir web tarayıcısında `http://localhost:<port number>/api/math/sum?a=4&b=5` sayfasına gidin. Sonucunu görmeniz gerekir `9`.
+Bir web tarayıcısında `http://localhost:<port number>/api/math/sum?a=4&b=5` sayfasına gidin. Sonucunu görmeniz gerekir `9` .
 
-Ürün API 'sine (`http://localhost:<port number>/api/math/product?a=4&b=5`) gidin. Beklenmez `9`değil `20` , döndürür. Bu sorun öğreticide daha sonra düzeltildi.
+Ürün API 'sine () gidin `http://localhost:<port number>/api/math/product?a=4&b=5` . `9`Beklenmez değil, döndürür `20` . Bu sorun öğreticide daha sonra düzeltildi.
 
 ::: moniker range="<= aspnetcore-2.0"
 
-## <a name="add-dotnet-watch-to-a-project"></a>Projeye `dotnet watch` ekleme
+## <a name="add-dotnet-watch-to-a-project"></a>`dotnet watch`Projeye ekleme
 
-`dotnet watch` Dosya İzleyici aracı, .NET Core SDK sürüm 2.1.300 eklenir. .NET Core SDK önceki bir sürümü kullanılırken aşağıdaki adımlar gereklidir.
+`dotnet watch`Dosya İzleyici Aracı, .NET Core SDK sürüm 2.1.300 eklenir. .NET Core SDK önceki bir sürümü kullanılırken aşağıdaki adımlar gereklidir.
 
 1. `Microsoft.DotNet.Watcher.Tools` *. Csproj* dosyasına bir paket başvurusu ekleyin:
 
@@ -65,7 +65,7 @@ Bir web tarayıcısında `http://localhost:<port number>/api/math/sum?a=4&b=5` s
     </ItemGroup>
     ```
 
-1. Aşağıdaki komutu `Microsoft.DotNet.Watcher.Tools` çalıştırarak paketi yüklemelisiniz:
+1. `Microsoft.DotNet.Watcher.Tools`Aşağıdaki komutu çalıştırarak paketi yüklemelisiniz:
 
     ```dotnetcli
     dotnet restore
@@ -75,7 +75,7 @@ Bir web tarayıcısında `http://localhost:<port number>/api/math/sum?a=4&b=5` s
 
 ## <a name="run-net-core-cli-commands-using-dotnet-watch"></a>Kullanarak .NET Core CLI komutları çalıştırma`dotnet watch`
 
-Tüm [.NET Core CLI komutları](/dotnet/core/tools#cli-commands) ile `dotnet watch`çalıştırılabilir. Örneğin:
+Tüm [.NET Core CLI komutları](/dotnet/core/tools#cli-commands) ile çalıştırılabilir `dotnet watch` . Örneğin:
 
 | Komut | İzle komutu |
 | ---- | ----- |
@@ -84,14 +84,14 @@ Tüm [.NET Core CLI komutları](/dotnet/core/tools#cli-commands) ile `dotnet wat
 | DotNet Run-f netcoreapp 2.0----arg1 | DotNet Watch-f netcoreapp 2.0----arg1 |
 | dotnet test | DotNet izleme testi |
 
-WEBAPP `dotnet watch run` klasöründe çalıştırın *WebApp* . Konsol çıktısı başladığını gösterir `watch` .
+`dotnet watch run` *WebApp* klasöründe çalıştırın. Konsol çıktısı başladığını gösterir `watch` .
 
 > [!NOTE]
-> İzlenecek projeyi belirtmek `dotnet watch --project <PROJECT>` için kullanabilirsiniz. Örneğin, örnek uygulamanın `dotnet watch --project WebApp run` kökünden çalıştırılması Ayrıca *WebApp* projesini de çalıştırır ve bu uygulamayı izleyebilir.
+> `dotnet watch --project <PROJECT>`İzlenecek projeyi belirtmek için kullanabilirsiniz. Örneğin, `dotnet watch --project WebApp run` örnek uygulamanın kökünden çalıştırılması Ayrıca *WebApp* projesini de çalıştırır ve bu uygulamayı izleyebilir.
 
 ## <a name="make-changes-with-dotnet-watch"></a>İle değişiklik yap`dotnet watch`
 
-Çalıştığından emin `dotnet watch` olun.
+Çalıştığından emin olun `dotnet watch` .
 
 `Product` *MathController.cs* yöntemindeki hatayı düzelttikten sonra, ürünü döndürür ve toplamı değil:
 
@@ -102,13 +102,13 @@ public static int Product(int a, int b)
 }
 ```
 
-Dosyayı kaydedin. Konsol çıktısı bir dosya değişikliği `dotnet watch` olduğunu algıladı ve uygulamayı yeniden başlatın.
+Dosyayı kaydedin. Konsol çıktısı `dotnet watch` bir dosya değişikliği olduğunu algıladı ve uygulamayı yeniden başlatın.
 
 Verify `http://localhost:<port number>/api/math/product?a=4&b=5` doğru sonucu döndürür.
 
 ## <a name="run-tests-using-dotnet-watch"></a>Kullanarak testleri çalıştırma`dotnet watch`
 
-1. Toplamı döndürmek `Product` için *MathController.cs* yöntemini geri değiştirin. Dosyayı kaydedin.
+1. `Product`Toplamı döndürmek için *MathController.cs* yöntemini geri değiştirin. Dosyayı kaydedin.
 1. Bir komut kabuğunda *Webapptests* klasörüne gidin.
 1. [DotNet restore](/dotnet/core/tools/dotnet-restore)çalıştırın.
 1. `dotnet watch test` öğesini çalıştırın. Çıktısı bir testin başarısız olduğunu ve izleyicinin dosya değişikliklerini beklediğini gösterir:
@@ -118,7 +118,7 @@ Verify `http://localhost:<port number>/api/math/product?a=4&b=5` doğru sonucu d
      Test Run Failed.
      ```
 
-1. Yöntem kodunu `Product` , ürünü geri döndürdüğünden düzeltir. Dosyayı kaydedin.
+1. `Product`Yöntem kodunu, ürünü geri döndürdüğünden düzeltir. Dosyayı kaydedin.
 
 `dotnet watch`dosya değişikliğini algılar ve testleri yeniden çalıştırır. Konsol çıktısı, geçirilen testleri belirtir.
 

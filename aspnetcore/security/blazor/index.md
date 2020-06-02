@@ -1,11 +1,11 @@
 ---
-Başlık: ' ASP.NET Core Blazor kimlik doğrulaması ve yetkilendirme ' Yazar: Açıklama: ' Blazor kimlik doğrulama ve yetkilendirme senaryoları hakkında bilgi edinin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+Başlık: ' ASP.NET Core Blazor kimlik doğrulaması ve yetkilendirme ' Author: guardrex açıklaması: ' Blazor kimlik doğrulama ve yetkilendirme senaryoları hakkında bilgi edinin. '
+monikerRange: ' >= aspnetcore-3,1 ' MS. Author: Riande MS. Custom: MVC MS. Date: 05/19/2020 No-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ' SignalR ' uid: Security/blazor/index
 
 ---
 # <a name="aspnet-core-blazor-authentication-and-authorization"></a>ASP.NET Core Blazor kimlik doğrulaması ve yetkilendirme
@@ -26,7 +26,7 @@ BlazorWebAssembly uygulamaları istemcide çalışır. Yetkilendirme *yalnızca*
 > [!NOTE]
 > <xref:Microsoft.AspNetCore.Identity.SignInManager%601>ve <xref:Microsoft.AspNetCore.Identity.UserManager%601> Razor bileşenlerde desteklenmez.
 
-## <a name="authentication"></a>Kimlik Doğrulaması
+## <a name="authentication"></a>Kimlik doğrulaması
 
 Blazor, kullanıcının kimliğini kurmak için mevcut ASP.NET Core kimlik doğrulama mekanizmalarını kullanır. Tam mekanizma Blazor , uygulamanın nasıl barındırıldığını, Blazor webassembly veya Server 'a bağlıdır Blazor .
 
@@ -454,14 +454,6 @@ Uygulama, yordamsal mantığın bir parçası olarak yetkilendirme kurallarını
 > ```
 >
 > Bu ad alanları, uygulamanın *_Imports. Razor* dosyasına eklenerek Global olarak sağlanıyor.
-
-## <a name="authorization-in-blazor-webassembly-apps"></a>BlazorWebassembly uygulamalarında yetkilendirme
-
-BlazorWebassembly uygulamalarında, tüm istemci tarafı kodlar kullanıcılar tarafından değiştirilemediği için yetkilendirme denetimleri atlanabilir. Aynı, JavaScript SPA çerçeveleri veya herhangi bir işletim sistemi için yerel uygulamalar dahil olmak üzere tüm istemci tarafı uygulama teknolojileri için de geçerlidir.
-
-**İstemci tarafı uygulamanız tarafından erişilen tüm API uç noktalarında sunucuda her zaman yetkilendirme denetimleri gerçekleştirin.**
-
-Daha fazla bilgi için, altındaki makalelere bakın <xref:security/blazor/webassembly/index> .
 
 ## <a name="troubleshoot-errors"></a>Sorun giderme hataları
 

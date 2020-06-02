@@ -32,7 +32,7 @@ Tepki verme projesi şablonu, sunucu tarafı işleme (SSR) için tasarlanmamış
 
 ASP.NET Core 2,1 yüklüyse, tepki verme projesi şablonunu yüklemeniz gerekmez.
 
-Boş bir dizinde komutunu `dotnet new react` kullanarak komut isteminden yeni bir proje oluşturun. Örneğin, aşağıdaki komutlar uygulamayı *Yeni bir uygulama* dizininde oluşturur ve bu dizine geçer:
+Boş bir dizinde komutunu kullanarak komut isteminden yeni bir proje oluşturun `dotnet new react` . Örneğin, aşağıdaki komutlar uygulamayı *Yeni bir uygulama* dizininde oluşturur ve bu dizine geçer:
 
 ```dotnetcli
 dotnet new react -o my-new-app
@@ -49,7 +49,7 @@ Yapı işlemi ilk çalıştırmada NPM bağımlılıklarını geri yükler ve bu
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-Değeri ile çağrılan `ASPNETCORE_Environment` bir ortam değişkenine sahip olduğunuzdan emin olun `Development`. Windows 'ta (PowerShell olmayan istemler ' de), `SET ASPNETCORE_Environment=Development`öğesini çalıştırın. Linux veya macOS üzerinde öğesini çalıştırın `export ASPNETCORE_Environment=Development`.
+Değeri ile çağrılan bir ortam değişkenine sahip olduğunuzdan emin olun `ASPNETCORE_Environment` `Development` . Windows 'ta (PowerShell olmayan istemler ' de), öğesini çalıştırın `SET ASPNETCORE_Environment=Development` . Linux veya macOS üzerinde öğesini çalıştırın `export ASPNETCORE_Environment=Development` .
 
 Uygulamanızın doğru derlemelerinizi doğrulamak için [DotNet derlemesini](/dotnet/core/tools/dotnet-build) çalıştırın. İlk çalıştırmada, derleme işlemi NPM bağımlılıklarını geri yükler ve bu işlem birkaç dakika sürebilir. Sonraki derlemeler çok daha hızlıdır.
 

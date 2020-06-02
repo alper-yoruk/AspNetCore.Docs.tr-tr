@@ -25,7 +25,7 @@ ms.locfileid: "82775966"
 
 ASP.NET Core, .NET için açık Web arabirimi 'Ni (OWıN) destekler. OWIN, Web uygulamalarının Web sunucularından ayrılmasıyla izin verir. Bu işlem, ara yazılım için istekleri ve ilişkili yanıtları işlemek üzere bir ardışık düzende kullanılması için standart bir yol tanımlar. ASP.NET Core uygulamalar ve ara yazılım, OWıN tabanlı uygulamalar, sunucular ve ara yazılım ile birlikte çalışabilir.
 
-OWIN, farklı nesne modellerinin birlikte kullanılmasına izin veren bir ayrılmış katman sağlar. `Microsoft.AspNetCore.Owin` Paket iki bağdaştırıcı uygulaması sağlar:
+OWIN, farklı nesne modellerinin birlikte kullanılmasına izin veren bir ayrılmış katman sağlar. `Microsoft.AspNetCore.Owin`Paket iki bağdaştırıcı uygulaması sağlar:
 
 * OWıN 'a ASP.NET Core 
 * ASP.NET Core için OWıN
@@ -39,9 +39,9 @@ Bu, ASP.NET Core bir OWIN uyumlu sunucu/konak üzerinde barındırılmasına vey
 
 ## <a name="running-owin-middleware-in-the-aspnet-core-pipeline"></a>ASP.NET Core ardışık düzeninde OWıN ara yazılımı çalıştırma
 
-ASP.NET Core 'nin OWıN desteği `Microsoft.AspNetCore.Owin` paketin bir parçası olarak dağıtılır. Bu paketi yükleyerek, OWıN desteğini projenize aktarabilirsiniz.
+ASP.NET Core 'nin OWıN desteği paketin bir parçası olarak dağıtılır `Microsoft.AspNetCore.Owin` . Bu paketi yükleyerek, OWıN desteğini projenize aktarabilirsiniz.
 
-OWıN ara yazılımı, bir `Func<IDictionary<string, object>, Task>` arabirim gerektiren [owın belirtimine](https://owin.org/spec/spec/owin-1.0.0.html)ve belirli anahtarların ayarlanmasını sağlar (örneğin, `owin.ResponseBody`). Aşağıdaki basit OWıN ara yazılımı "Merhaba Dünya" görüntüler:
+OWıN ara yazılımı, bir arabirim gerektiren [owın belirtimine](https://owin.org/spec/spec/owin-1.0.0.html) `Func<IDictionary<string, object>, Task>` ve belirli anahtarların ayarlanmasını sağlar (örneğin, `owin.ResponseBody` ). Aşağıdaki basit OWıN ara yazılımı "Merhaba Dünya" görüntüler:
 
 ```csharp
 public Task OwinHello(IDictionary<string, object> environment)
@@ -60,9 +60,9 @@ public Task OwinHello(IDictionary<string, object> environment)
 }
 ```
 
-Örnek imza bir `Task` döndürür ve Owin için `IDictionary<string, object>` gereken bir şekilde kabul eder.
+Örnek imza bir döndürür `Task` ve `IDictionary<string, object>` Owin için gereken bir şekilde kabul eder.
 
-Aşağıdaki kod, `UseOwin` genişletme yöntemi ile ASP.NET Core işlem `OwinHello` hattına ara yazılım ekleme (yukarıda gösterilen) gösterilmektedir.
+Aşağıdaki kod, `OwinHello` genişletme yöntemi ile ASP.NET Core işlem hattına ara yazılım ekleme (yukarıda gösterilen) gösterilmektedir `UseOwin` .
 
 ```csharp
 public void Configure(IApplicationBuilder app)
@@ -80,7 +80,7 @@ OWıN ardışık düzeninde gerçekleşecek diğer eylemleri yapılandırabilirs
 > Yanıt üst bilgileri yalnızca yanıt akışına ilk yazmaya başlamadan önce değiştirilmelidir.
 
 > [!NOTE]
-> Performans nedenleriyle birden `UseOwin` çok çağrısı önerilmez. OWIN bileşenleri, birlikte gruplandırılmışsa en iyi şekilde çalışır.
+> Performans nedenleriyle birden çok çağrısı `UseOwin` önerilmez. OWIN bileşenleri, birlikte gruplandırılmışsa en iyi şekilde çalışır.
 
 ```csharp
 app.UseOwin(pipeline =>
@@ -101,15 +101,15 @@ app.UseOwin(pipeline =>
 
 ## <a name="using-aspnet-core-hosting-on-an-owin-based-server"></a>OWIN tabanlı bir sunucuda barındırma ASP.NET Core kullanma
 
-OWIN tabanlı sunucular ASP.NET Core uygulamaları barındırabilirler. Bu tür bir sunucu, .NET OWıN Web sunucusu olan [Nowin](https://github.com/Bobris/Nowin)'dir. Bu makalenin örneğinde, Nowin 'a başvuran bir proje ekledik ve bunu kendi kendine barındırma ASP.NET Core özellikli bir `IServer` özelliği oluşturmak için kullanır.
+OWIN tabanlı sunucular ASP.NET Core uygulamaları barındırabilirler. Bu tür bir sunucu, .NET OWıN Web sunucusu olan [Nowin](https://github.com/Bobris/Nowin)'dir. Bu makalenin örneğinde, Nowin 'a başvuran bir proje ekledik ve bunu `IServer` kendi kendine barındırma ASP.NET Core özellikli bir özelliği oluşturmak için kullanır.
 
 [!code-csharp[](owin/sample/src/NowinSample/Program.cs?highlight=15)]
 
-`IServer`, bir `Features` özellik ve `Start` yöntem gerektiren bir arabirimdir.
+`IServer`, bir `Features` özellik ve yöntem gerektiren bir arabirimdir `Start` .
 
-`Start`, sunucuyu yapılandırmadan ve başlatmaktan sorumludur; bu durumda, ıveraddressesözelliğinden ayrıştırılmış adresleri belirleyen bir dizi Fluent API çağrısı aracılığıyla yapılır. `_builder` Değişkenin akıcı yapılandırmasının, isteklerin metotta daha önce `appFunc` tanımlanan tarafından işleneceğini belirtir. Bu `Func` , gelen istekleri işlemek için her istekte çağrılır.
+`Start`, sunucuyu yapılandırmadan ve başlatmaktan sorumludur; bu durumda, ıveraddressesözelliğinden ayrıştırılmış adresleri belirleyen bir dizi Fluent API çağrısı aracılığıyla yapılır. Değişkenin akıcı yapılandırmasının, `_builder` isteklerin `appFunc` metotta daha önce tanımlanan tarafından işleneceğini belirtir. Bu `Func` , gelen istekleri işlemek için her istekte çağrılır.
 
-Nowin sunucusunu eklemeyi ve `IWebHostBuilder` yapılandırmayı kolaylaştırmak için de bir uzantı ekleyeceğiz.
+`IWebHostBuilder`Nowin sunucusunu eklemeyi ve yapılandırmayı kolaylaştırmak için de bir uzantı ekleyeceğiz.
 
 ```csharp
 using System;
@@ -223,13 +223,13 @@ public class Startup
 }
 ```
 
-Bu [örnek](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/owin/sample) , öncekiyle aynı `NowinServer` kullanılarak yapılandırılmış ve tek fark, uygulamanın `Configure` yönteminde nasıl yapılandırıldığı ile aynıdır. [Basit bir WebSocket istemcisi](https://chrome.google.com/webstore/detail/simple-websocket-client/pfdhoblngboilpfeibdedpjgfnlcodoo?hl=en) kullanan bir test, uygulamayı gösterir:
+Bu [örnek](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/owin/sample) , öncekiyle aynı kullanılarak yapılandırılmış ve `NowinServer` tek fark, uygulamanın yönteminde nasıl yapılandırıldığı ile aynıdır `Configure` . [Basit bir WebSocket istemcisi](https://chrome.google.com/webstore/detail/simple-websocket-client/pfdhoblngboilpfeibdedpjgfnlcodoo?hl=en) kullanan bir test, uygulamayı gösterir:
 
 ![Web yuvası test Istemcisi](owin/_static/websocket-test.png)
 
 ## <a name="owin-environment"></a>OWıN ortamı
 
-Kullanarak bir OWıN ortamı oluşturabilirsiniz `HttpContext`.
+Kullanarak bir OWıN ortamı oluşturabilirsiniz `HttpContext` .
 
 ```csharp
 
@@ -239,7 +239,7 @@ Kullanarak bir OWıN ortamı oluşturabilirsiniz `HttpContext`.
 
 ## <a name="owin-keys"></a>OWıN tuşları
 
-OWIN, bir HTTP `IDictionary<string,object>` Isteği/yanıt değişimi boyunca bilgi iletmek için bir nesneye bağımlıdır. ASP.NET Core aşağıda listelenen anahtarları uygular. Bkz. [birincil belirtim, uzantılar](https://owin.org/#spec)ve [Owın anahtar kılavuzları ve ortak anahtarlar](https://owin.org/spec/spec/CommonKeys.html).
+OWIN, `IDictionary<string,object>` BIR http isteği/yanıt değişimi boyunca bilgi iletmek için bir nesneye bağımlıdır. ASP.NET Core aşağıda listelenen anahtarları uygular. Bkz. [birincil belirtim, uzantılar](https://owin.org/#spec)ve [Owın anahtar kılavuzları ve ortak anahtarlar](https://owin.org/spec/spec/CommonKeys.html).
 
 ### <a name="request-data-owin-v100"></a>İstek verileri (OWıN v 1.0.0)
 

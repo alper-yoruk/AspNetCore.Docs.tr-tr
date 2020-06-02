@@ -1,11 +1,11 @@
 ---
-Başlık: ' Secure ASP.NET Core Blazor webassembly ' Yazar: Açıklama: ', Blazor webassemlby uygulamalarını tek sayfalı uygulamalar (maça) olarak güvenli hale getirme hakkında bilgi edinin.
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+Başlık: ' Secure ASP.NET Core Blazor webassembly ' Author: guardrex açıklaması: ', Blazor webassemlby uygulamalarının tek sayfalı uygulamalar (maça) olarak nasıl güvenli hale alınacağını öğrenin.
+monikerRange: ' >= aspnetcore-3,1 ' MS. Author: Riande MS. Custom: MVC MS. Date: 06/01/2020 No-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ' SignalR ' uid: Security/blazor/webassembly/index
 
 ---
 # <a name="secure-aspnet-core-blazor-webassembly"></a>BlazorWeelsembly ASP.NET Core güvenli
@@ -41,7 +41,19 @@ Benzer site tanımlama bilgilerinin kullanımı gibi, maça 'Ları doğrulamak i
 * BlazorWebassembly uygulaması, oturum açma geri çağırma uç noktasını ( `/authentication/login-callback` ) yüklediğinde, kimlik doğrulama yanıtı işlenir.
   * Kimlik doğrulama işlemi başarıyla tamamlanırsa, kullanıcının kimliği doğrulanır ve isteğe bağlı olarak kullanıcının istediği özgün URL 'ye geri gönderilir.
   * Kimlik doğrulama işlemi herhangi bir nedenle başarısız olursa, Kullanıcı oturum açma başarısız sayfasına ( `/authentication/login-failed` ) gönderilir ve bir hata görüntülenir.
-  
+
+## <a name="authorization"></a>Yetkilendirme
+
+BlazorWebassembly uygulamalarında, tüm istemci tarafı kodlar kullanıcılar tarafından değiştirilemediği için yetkilendirme denetimleri atlanabilir. Aynı, JavaScript SPA çerçeveleri veya herhangi bir işletim sistemi için yerel uygulamalar dahil olmak üzere tüm istemci tarafı uygulama teknolojileri için de geçerlidir.
+
+**İstemci tarafı uygulamanız tarafından erişilen tüm API uç noktalarında sunucuda her zaman yetkilendirme denetimleri gerçekleştirin.**
+
+## <a name="refresh-tokens"></a>Belirteçleri Yenile
+
+Belirteçleri Yenile, Blazor webassembly uygulamalarında güvenli istemci tarafı olamaz. Bu nedenle, doğrudan kullanım için yenileme belirteçleri uygulamaya gönderilmez.
+
+Yenileme belirteçleri, Blazor üçüncü taraf API 'lerine erişmek Için barındırılan webassembly çözümünde sunucu tarafı uygulama tarafından korunabilir ve kullanılabilir. Daha fazla bilgi için bkz. <xref:security/blazor/webassembly/additional-scenarios#authenticate-users-with-a-third-party-provider-and-call-protected-apis-on-the-host-server-and-the-third-party>.
+
 ## <a name="implementation-guidance"></a>Uygulama Kılavuzu
 
 Bu *genel bakışın* altındaki makalelere, Blazor belirli sağlayıcılara karşı webassembly uygulamalarında kullanıcıların kimliğini doğrulama hakkında bilgi sağlanır.

@@ -1,10 +1,11 @@
 ---
-title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+Başlık: ASP.NET Core Yazar: Rick-Anderson açıklaması: barındırılan hizmetler ile arka plan görevleri, ASP.NET Core barındırılan hizmetlerle arka plan görevlerinin nasıl uygulanacağını öğrenin.
+monikerRange: ' >= aspnetcore-2,1 ' MS. Author: Riande MS. Custom: MVC MS. Date: 02/10/2020 No-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ' SignalR ' uid: temel bilgiler/konak/barındırılan-hizmetler
 
 ---
 # <a name="background-tasks-with-hosted-services-in-aspnet-core"></a>ASP.NET Core içinde barındırılan hizmetlerle arka plan görevleri
@@ -134,7 +135,7 @@ Hizmetler ' de kaydedilir `IHostBuilder.ConfigureServices` (*program.cs*). Barı
 
 ## <a name="queued-background-tasks"></a>Sıraya alınan arka plan görevleri
 
-Arka plan görev kuyruğu, .NET 4. x 'i temel alır <xref:System.Web.Hosting.HostingEnvironment.QueueBackgroundWorkItem*> ([ASP.NET Core için isteğe](https://github.com/aspnet/Hosting/issues/1280)bağlı olarak zamanlanmış olarak zamanlandı):
+Arka plan görev kuyruğu, .NET 4. x 'i temel alır <xref:System.Web.Hosting.HostingEnvironment.QueueBackgroundWorkItem*> :
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/BackgroundTaskQueue.cs?name=snippet1)]
 

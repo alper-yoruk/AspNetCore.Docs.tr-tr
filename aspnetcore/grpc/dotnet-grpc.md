@@ -41,22 +41,22 @@ dotnet tool install -g dotnet-grpc
 <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
 ```
 
-Prototip başvuruları, C# istemcisi ve/veya sunucu varlıklarını oluşturmak için kullanılır. `dotnet-grpc` Araç şunları yapabilir:
+Prototip başvuruları, C# istemcisi ve/veya sunucu varlıklarını oluşturmak için kullanılır. `dotnet-grpc`Araç şunları yapabilir:
 
 * Diskteki yerel dosyalardan Prototipsiz başvuru oluştur.
 * Bir URL ile belirtilen uzak dosyadan Protobir başvuru oluştur.
 * Projeye doğru gRPC paket bağımlılıklarının eklendiğinden emin olun.
 
-Örneğin, `Grpc.AspNetCore` paket bir Web uygulamasına eklenir. `Grpc.AspNetCore`gRPC sunucusu ve istemci kitaplıklarını ve araç desteğini içerir. `Grpc.Net.Client`Alternatif olarak, `Grpc.Tools` ve `Google.Protobuf` yalnızca GRPC istemci kitaplıklarını ve araç desteğini içeren paketleri konsol uygulamasına eklenir.
+Örneğin, `Grpc.AspNetCore` paket bir Web uygulamasına eklenir. `Grpc.AspNetCore`gRPC sunucusu ve istemci kitaplıklarını ve araç desteğini içerir. Alternatif olarak, `Grpc.Net.Client` `Grpc.Tools` ve `Google.Protobuf` yalnızca GRPC istemci kitaplıklarını ve araç desteğini içeren paketleri konsol uygulamasına eklenir.
 
 ### <a name="add-file"></a>Dosya ekle
 
-Komut `add-file` , disk üzerindeki yerel dosyaları prototip başvuruları olarak eklemek için kullanılır. Belirtilen dosya yolları:
+`add-file`Komut, disk üzerindeki yerel dosyaları prototip başvuruları olarak eklemek için kullanılır. Belirtilen dosya yolları:
 
 * Geçerli dizin veya mutlak yollarla göreli olabilir.
 * , [Glob](https://wikipedia.org/wiki/Glob_(programming))model tabanlı dosya için joker karakterler içerebilir.
 
-Herhangi bir dosya proje dizininin dışındaysa, dosyayı Visual Studio `Link` 'daki klasörü `Protos` altında göstermek için bir öğe eklenir.
+Herhangi bir dosya proje dizininin dışındaysa, `Link` dosyayı `Protos` Visual Studio 'daki klasörü altında göstermek için bir öğe eklenir.
 
 ### <a name="usage"></a>Kullanım
 
@@ -64,7 +64,7 @@ Herhangi bir dosya proje dizininin dışındaysa, dosyayı Visual Studio `Link` 
 dotnet grpc add-file [options] <files>...
 ```
 
-#### <a name="arguments"></a>Bağımsız Değişkenler
+#### <a name="arguments"></a>Arguments
 
 | Bağımsız Değişken | Açıklama |
 |-|-|
@@ -75,13 +75,13 @@ dotnet grpc add-file [options] <files>...
 | Short seçeneği | Long seçeneği | Açıklama |
 |-|-|-|
 | -p | --Proje | Üzerinde çalışılacak proje dosyasının yolu. Bir dosya belirtilmemişse, komut geçerli dizinde bir arama yapar.
-| -s | --Hizmetler | Oluşturulması gereken gRPC Hizmetleri türü. `Default` Belirtilmişse, `Both` Web projeleri için kullanılır ve `Client` Web dışı projeler için kullanılır. Kabul edilen değerler `Both`, `Client` `Default` `None`,,, `Server`.
+| -s | --Hizmetler | Oluşturulması gereken gRPC Hizmetleri türü. `Default`Belirtilmişse, `Both` Web projeleri için kullanılır ve `Client` Web dışı projeler için kullanılır. Kabul edilen değerler,,,, `Both` `Client` `Default` `None` `Server` .
 | -i | --ek-içeri aktarma-Dizin | Prototip dosyaları için içeri aktarmalar çözümlenirken kullanılacak ek dizinler. Bu, yolların noktalı virgülle ayrılmış listesidir.
-| | --erişim | Oluşturulan C# sınıfları için kullanılacak erişim değiştiricisi. Varsayılan değer: `Public`. Kabul edilen değerler `Internal` şunlardır `Public`.
+| | --erişim | Oluşturulan C# sınıfları için kullanılacak erişim değiştiricisi. Varsayılan değer: `Public`. Kabul edilen değerler `Internal` şunlardır `Public` .
 
 ### <a name="add-url"></a>URL Ekle
 
-Komut `add-url` , kaynak URL tarafından belirtilen bir uzak dosyayı prototipde başvuru olarak eklemek için kullanılır. Uzak dosyanın nereye indirileceği belirtmek için bir dosya yolu belirtilmelidir. Dosya yolu, geçerli dizin veya mutlak bir yol ile ilişkili olabilir. Dosya yolu proje dizininin dışındaysa, dosyayı Visual Studio 'daki sanal `Link` klasör `Protos` altında göstermek için bir öğe eklenir.
+`add-url`Komut, kaynak URL tarafından belirtilen bir uzak dosyayı prototipde başvuru olarak eklemek için kullanılır. Uzak dosyanın nereye indirileceği belirtmek için bir dosya yolu belirtilmelidir. Dosya yolu, geçerli dizin veya mutlak bir yol ile ilişkili olabilir. Dosya yolu proje dizininin dışındaysa, `Link` dosyayı `Protos` Visual Studio 'daki sanal klasör altında göstermek için bir öğe eklenir.
 
 ### <a name="usage"></a>Kullanım
 
@@ -89,7 +89,7 @@ Komut `add-url` , kaynak URL tarafından belirtilen bir uzak dosyayı prototipde
 dotnet-grpc add-url [options] <url>
 ```
 
-#### <a name="arguments"></a>Bağımsız Değişkenler
+#### <a name="arguments"></a>Arguments
 
 | Bağımsız Değişken | Açıklama |
 |-|-|
@@ -101,13 +101,13 @@ dotnet-grpc add-url [options] <url>
 |-|-|-|
 | -o | --output | Uzak protoarabellek dosyası için indirme yolunu belirtir. Bu gerekli bir seçenektir.
 | -p | --Proje | Üzerinde çalışılacak proje dosyasının yolu. Bir dosya belirtilmemişse, komut geçerli dizinde bir arama yapar.
-| -s | --Hizmetler | Oluşturulması gereken gRPC Hizmetleri türü. `Default` Belirtilmişse, `Both` Web projeleri için kullanılır ve `Client` Web dışı projeler için kullanılır. Kabul edilen değerler `Both`, `Client` `Default` `None`,,, `Server`.
+| -s | --Hizmetler | Oluşturulması gereken gRPC Hizmetleri türü. `Default`Belirtilmişse, `Both` Web projeleri için kullanılır ve `Client` Web dışı projeler için kullanılır. Kabul edilen değerler,,,, `Both` `Client` `Default` `None` `Server` .
 | -i | --ek-içeri aktarma-Dizin | Prototip dosyaları için içeri aktarmalar çözümlenirken kullanılacak ek dizinler. Bu, yolların noktalı virgülle ayrılmış listesidir.
-| | --erişim | Oluşturulan C# sınıfları için kullanılacak erişim değiştiricisi. Varsayılan değer `Public`. Kabul edilen değerler `Internal` şunlardır `Public`.
+| | --erişim | Oluşturulan C# sınıfları için kullanılacak erişim değiştiricisi. Varsayılan değer `Public` . Kabul edilen değerler `Internal` şunlardır `Public` .
 
 ## <a name="remove"></a>Kaldır
 
-`remove` Komut, *. csproj* dosyasından prototipsiz başvuruları kaldırmak için kullanılır. Komut bağımsız değişken olarak yol bağımsız değişkenlerini ve kaynak URL 'Lerini kabul eder. Araç:
+`remove`Komut, *. csproj* dosyasından prototipsiz başvuruları kaldırmak için kullanılır. Komut bağımsız değişken olarak yol bağımsız değişkenlerini ve kaynak URL 'Lerini kabul eder. Araç:
 
 * Yalnızca Prototipsiz başvuruyu kaldırır.
 * , İlk olarak uzak bir URL 'den indirilse bile, *. proto* dosyasını silmez.
@@ -118,7 +118,7 @@ dotnet-grpc add-url [options] <url>
 dotnet-grpc remove [options] <references>...
 ```
 
-### <a name="arguments"></a>Bağımsız Değişkenler
+### <a name="arguments"></a>Arguments
 
 | Bağımsız Değişken | Açıklama |
 |-|-|
@@ -132,7 +132,7 @@ dotnet-grpc remove [options] <references>...
 
 ## <a name="refresh"></a>Yenile
 
-`refresh` Komut, kaynak URL 'den en son içerikle uzak bir başvuruyu güncelleştirmek için kullanılır. Yalnızca indirme dosyası yolu ve kaynak URL 'SI, güncellenmek üzere olan başvuruyu belirtmek için kullanılabilir. Not:
+`refresh`Komut, kaynak URL 'den en son içerikle uzak bir başvuruyu güncelleştirmek için kullanılır. Yalnızca indirme dosyası yolu ve kaynak URL 'SI, güncellenmek üzere olan başvuruyu belirtmek için kullanılabilir. Not:
 
 * Dosya içeriğinin karmaları yerel dosyanın güncelleştirilip güncelleştirilmediğini belirleme ile karşılaştırılır.
 * Zaman damgası bilgisi karşılaştırılmaz.
@@ -145,7 +145,7 @@ Bir güncelleştirme gerekiyorsa araç her zaman yerel dosyayı uzak dosya ile d
 dotnet-grpc refresh [options] [<references>...]
 ```
 
-### <a name="arguments"></a>Bağımsız Değişkenler
+### <a name="arguments"></a>Arguments
 
 | Bağımsız Değişken | Açıklama |
 |-|-|
@@ -160,7 +160,7 @@ dotnet-grpc refresh [options] [<references>...]
 
 ## <a name="list"></a>Liste
 
-`list` Komut, proje dosyasındaki tüm prototipsiz başvuruları göstermek için kullanılır. Bir sütunun tüm değerleri varsayılan değerler ise, sütun atlanabilir.
+`list`Komut, proje dosyasındaki tüm prototipsiz başvuruları göstermek için kullanılır. Bir sütunun tüm değerleri varsayılan değerler ise, sütun atlanabilir.
 
 ### <a name="usage"></a>Kullanım
 

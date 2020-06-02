@@ -26,13 +26,13 @@ HTTP istekleri ve yanıtları ile ilgili Web sunucusu uygulama ayrıntıları ar
 
 ## <a name="feature-interfaces"></a>Özellik arabirimleri
 
-ASP.NET Core, `Microsoft.AspNetCore.Http.Features` sunucularının destekledikleri özellikleri tanımlamak için kullandıkları BIR dizi http özelliği arabirimini tanımlar. Aşağıdaki özellik arabirimleri istekleri ve dönüş yanıtlarını işler:
+ASP.NET Core, `Microsoft.AspNetCore.Http.Features` sunucularının destekledikleri özellikleri tanımlamak için kullandıkları bir dızı http özelliği arabirimini tanımlar. Aşağıdaki özellik arabirimleri istekleri ve dönüş yanıtlarını işler:
 
 `IHttpRequestFeature`Protokol, yol, sorgu dizesi, üst bilgiler ve gövde dahil olmak üzere bir HTTP isteğinin yapısını tanımlar.
 
 `IHttpResponseFeature`Durum kodu, üst bilgiler ve yanıtın gövdesi dahil olmak üzere bir HTTP yanıtının yapısını tanımlar.
 
-`IHttpAuthenticationFeature`, Ve bir `ClaimsPrincipal` kimlik doğrulama işleyicisi belirterek kullanıcıları tanımlama desteğini tanımlar.
+`IHttpAuthenticationFeature``ClaimsPrincipal`, Ve bir kimlik doğrulama işleyicisi belirterek kullanıcıları tanımlama desteğini tanımlar.
 
 `IHttpUpgradeFeature`Sunucu, protokolleri değiştirmek isterse, istemcinin kullanmak istediğiniz ek protokolleri belirtmesini sağlayan [http yükseltmeleri](https://tools.ietf.org/html/rfc2616.html#section-14.42)için desteği tanımlar.
 
@@ -48,7 +48,7 @@ ASP.NET Core, `Microsoft.AspNetCore.Http.Features` sunucularının destekledikle
 
 `IHttpRequestIdentifierFeature`İstekleri benzersiz şekilde tanımlamak için uygulanabilecek bir özellik ekler.
 
-`ISessionFeature`Kullanıcı `ISessionFactory` oturumlarını `ISession` desteklemek için tanımlar ve soyutlamalar tanımlar.
+`ISessionFeature``ISessionFactory` `ISession` Kullanıcı oturumlarını desteklemek için tanımlar ve soyutlamalar tanımlar.
 
 `ITlsConnectionFeature`İstemci sertifikalarını almak için bir API tanımlar.
 
@@ -59,11 +59,11 @@ ASP.NET Core, `Microsoft.AspNetCore.Http.Features` sunucularının destekledikle
 
 ## <a name="feature-collections"></a>Özellik koleksiyonları
 
-Özelliği `Features` , geçerli `HttpContext` istek için kullanılabilir http özelliklerini almak ve ayarlamak için bir arabirim sağlar. Özellik koleksiyonu bir istek bağlamı içinde bile değişebilir olduğundan, ara yazılım, koleksiyonu değiştirmek ve ek özellikler için destek eklemek üzere kullanılabilir.
+`Features`Özelliği, `HttpContext` geçerli istek IÇIN kullanılabilir http özelliklerini almak ve ayarlamak için bir arabirim sağlar. Özellik koleksiyonu bir istek bağlamı içinde bile değişebilir olduğundan, ara yazılım, koleksiyonu değiştirmek ve ek özellikler için destek eklemek üzere kullanılabilir.
 
 ## <a name="middleware-and-request-features"></a>Ara yazılım ve istek özellikleri
 
-Sunucular Özellik koleksiyonu oluşturmaktan sorumludur, ancak ara yazılım bu koleksiyona ekleyebilir ve koleksiyondaki özellikleri kullanabilir. Örneğin, `StaticFileMiddleware` `IHttpSendFileFeature` özelliğine erişir. Özellik varsa, istenen statik dosyayı fiziksel yolundan göndermek için kullanılır. Aksi takdirde, dosyayı göndermek için daha yavaş bir alternatif yöntem kullanılır. Kullanılabilir olduğunda, işletim `IHttpSendFileFeature` sisteminin dosyayı açmasına ve ağ kartına doğrudan bir çekirdek modu kopyalaması gerçekleştirmesine izin verir.
+Sunucular Özellik koleksiyonu oluşturmaktan sorumludur, ancak ara yazılım bu koleksiyona ekleyebilir ve koleksiyondaki özellikleri kullanabilir. Örneğin, `StaticFileMiddleware` `IHttpSendFileFeature` özelliğine erişir. Özellik varsa, istenen statik dosyayı fiziksel yolundan göndermek için kullanılır. Aksi takdirde, dosyayı göndermek için daha yavaş bir alternatif yöntem kullanılır. Kullanılabilir olduğunda, `IHttpSendFileFeature` işletim sisteminin dosyayı açmasına ve ağ kartına doğrudan bir çekirdek modu kopyalaması gerçekleştirmesine izin verir.
 
 Ayrıca, ara yazılım, sunucu tarafından belirlenen özellik koleksiyonuna eklenebilir. Mevcut özellikler, ara yazılım tarafından da değiştirilebilir ve bu da ara yazılım, sunucunun işlevselliğini artırabilir. Koleksiyona eklenen özellikler, daha sonra istek ardışık düzeninde bulunan diğer ara yazılım veya temeldeki uygulamanın kendisi için de kullanılabilir.
 

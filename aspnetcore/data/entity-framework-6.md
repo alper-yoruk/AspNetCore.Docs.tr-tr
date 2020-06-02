@@ -53,11 +53,11 @@ EF6 içeriğiniz parametresiz bir oluşturucuya sahip olmadığından, EF6 proje
 
 [!code-csharp[](entity-framework-6/sample/EF6/SchoolContextFactory.cs?name=snippet_IDbContextFactory)]
 
-Bu örnek kodda, `IDbContextFactory` uygulama sabit kodlanmış bir bağlantı dizesinde geçirilir. Bu, komut satırı araçlarının kullanacağı bağlantı dizesidir. Sınıf kitaplığının çağıran uygulamanın kullandığı bağlantı dizesini kullandığından emin olmak için bir strateji uygulamak isteyeceksiniz. Örneğin, her iki projedeki bir ortam değişkeninden değeri alabilirsiniz.
+Bu örnek kodda, `IDbContextFactory` Uygulama sabit kodlanmış bir bağlantı dizesinde geçirilir. Bu, komut satırı araçlarının kullanacağı bağlantı dizesidir. Sınıf kitaplığının çağıran uygulamanın kullandığı bağlantı dizesini kullandığından emin olmak için bir strateji uygulamak isteyeceksiniz. Örneğin, her iki projedeki bir ortam değişkeninden değeri alabilirsiniz.
 
 ## <a name="set-up-dependency-injection-in-the-aspnet-core-project"></a>ASP.NET Core projesine bağımlılık ekleme işlemini ayarlama
 
-Çekirdek projenin *Startup.cs* dosyasında, içindeki `ConfigureServices`bağımlılık ekleme (dı) için EF6 bağlamını ayarlayın. EF bağlam nesneleri, istek başına ömür için kapsamı belirlenmiş olmalıdır.
+Çekirdek projenin *Startup.cs* dosyasında, içindeki bağımlılık ekleme (dı) için EF6 bağlamını ayarlayın `ConfigureServices` . EF bağlam nesneleri, istek başına ömür için kapsamı belirlenmiş olmalıdır.
 
 [!code-csharp[](entity-framework-6/sample/MVCCore/Startup.cs?name=snippet_ConfigureServices&highlight=5)]
 
@@ -73,16 +73,16 @@ Bu örnek, Visual Studio 'da aşağıdaki adımlarla sıfırdan oluşturulabilir
 
 * Bir çözüm oluşturun.
 
-* **Add** > **Yeni**Project > **Web**Web > **ASP.NET Core Web uygulaması** Ekle
+* **Ekle**  >  **Yeni proje**  >  **Web**  >  **ASP.NET Core Web uygulaması**
   * Proje şablonu seçimi iletişim kutusunda, açılan menüde API ve .NET Framework seçin
 
-* **Add** > **Yeni**proje > Ekle**Windows Masaüstü** > **sınıf kitaplığı (.NET Framework)**
+* **Ekle**  >  **Yeni proje**  >  **Windows Masaüstü**  >  **Sınıf kitaplığı (.NET Framework)**
 
-* Her iki proje için de **Paket Yöneticisi konsolunda** (PMC) komutunu `Install-Package Entityframework`çalıştırın.
+* Her iki proje için de **Paket Yöneticisi konsolunda** (PMC) komutunu çalıştırın `Install-Package Entityframework` .
 
-* Sınıf kitaplığı projesinde, veri modeli sınıfları ve bağlam sınıfı ve uygulamasını oluşturun `IDbContextFactory`.
+* Sınıf kitaplığı projesinde, veri modeli sınıfları ve bağlam sınıfı ve uygulamasını oluşturun `IDbContextFactory` .
 
-* Sınıf kitaplığı projesi için PMC 'de, ve `Enable-Migrations` `Add-Migration Initial`komutlarını çalıştırın. ASP.NET Core projesini başlangıç projesi olarak ayarladıysanız, bu komutlara ekleyin `-StartupProjectName EF6` .
+* Sınıf kitaplığı projesi için PMC 'de, ve komutlarını çalıştırın `Enable-Migrations` `Add-Migration Initial` . ASP.NET Core projesini başlangıç projesi olarak ayarladıysanız, `-StartupProjectName EF6` Bu komutlara ekleyin.
 
 * Çekirdek projede, sınıf kitaplığı projesine bir proje başvurusu ekleyin.
 

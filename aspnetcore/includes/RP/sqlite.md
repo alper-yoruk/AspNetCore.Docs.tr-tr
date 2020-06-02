@@ -1,9 +1,9 @@
 ## <a name="sqlite"></a>SQLite
 
-[SQLite](https://www.sqlite.org/) web sitesi devletler:
+[SQLite](https://www.sqlite.org/) Web sitesi şunları belirtir:
 
-> SQLite bağımsız, yüksek güvenilirlikli, gömülü, tam özellikli, kamu malı, SQL veritabanı motorudur. SQLite dünyada en çok kullanılan veritabanı motorudur.
+> SQLite, kendinden bağımsız, yüksek güvenilirlik, gömülü, tam özellikli, genel etki alanı, SQL veritabanı altyapısı. SQLite, dünyanın en çok kullanılan veritabanı altyapısıdır.
 
-Bir SQLite veritabanını yönetmek ve görüntülemek için indirebileceğiniz birçok üçüncü taraf aracı vardır. Aşağıdaki resim [SQLite için DB Tarayıcı](https://sqlitebrowser.org/)dan. Sık kullanılan bir SQLite aracınız varsa, bu konuda ne gibi bir yorum bırakın.
+Bir SQLite veritabanını yönetmek ve görüntülemek için indirebileceğiniz birçok üçüncü taraf araç vardır. Aşağıdaki görüntü, [SQLite Için veritabanı tarayıcısıdır](https://sqlitebrowser.org/). En sevdiğiniz bir SQLite aracınız varsa, onunla ilgili olarak istediğiniz gibi bir yorum bırakın.
 
-![Film db gösteren SQLite için DB Tarayıcı](~/tutorials/first-mvc-app-xplat/working-with-sql/_static/dbb.png)
+![Film DB 'yi gösteren SQLite için DB tarayıcısı](~/tutorials/first-mvc-app-xplat/working-with-sql/_static/dbb.png)

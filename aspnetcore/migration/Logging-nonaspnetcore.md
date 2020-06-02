@@ -1,31 +1,21 @@
 ---
-title: Microsoft. Extensions. Logging 2,2 2,1 veya 3,0 ' den geçiş yapın
-author: pakrym
-description: 2,1 ' den 2,2 ' e veya 3,0 ' de Microsoft. Extensions. Logging kullanarak bir non-ASP.NET Core uygulamasını geçirmeyi öğrenin.
-ms.author: pakrym
-ms.custom: mvc
-ms.date: 01/04/2019
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: migration/logging-nonaspnetcore
-ms.openlocfilehash: 3a84d53cb925a518f6c3e244dd342a3228a1fe17
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777065"
+Başlık: Microsoft. Extensions 'dan geçiş yapın. Logging 2,1, 2,2 veya 3,0 Author: pakronym Description: Microsoft. Extensions. 2,1 ' ten 2,2 veya 3,0 ' a günlük kaydı kullanan bir non-ASP.NET Core uygulamasını geçirmeyi öğrenin.
+MS. Author: pakronym MS. Custom: MVC MS. Date: 01/04/2019 No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: geçiş/günlüğe kaydetme-aspnetcore
+
 ---
+
 # <a name="migrate-from-microsoftextensionslogging-21-to-22-or-30"></a>Microsoft. Extensions. Logging 2,2 2,1 veya 3,0 ' den geçiş yapın
 
-Bu makalede, 2,1 ' den 2,2 ' e veya 3,0 ' ye kadar `Microsoft.Extensions.Logging` kullanan bir non-ASP.NET Core uygulamasını geçirmeye yönelik yaygın adımlar özetlenmektedir.
+Bu makalede, `Microsoft.Extensions.Logging` 2,1 ' den 2,2 ' e veya 3,0 ' ye kadar kullanan bir non-ASP.NET Core uygulamasını geçirmeye yönelik yaygın adımlar özetlenmektedir.
 
 ## <a name="21-to-22"></a>2.1’den 2.2’ye
 
-El ile `ServiceCollection` oluşturun ve `AddLogging`çağırın.
+El ile oluşturun `ServiceCollection` ve çağırın `AddLogging` .
 
 2,1 örnek:
 
@@ -53,7 +43,7 @@ using (var loggerFactory = serviceProvider.GetService<ILoggerFactory>())
 
 ## <a name="21-to-30"></a>2,1 3,0
 
-3,0 ' de kullanın `LoggingFactory.Create`.
+3,0 ' de kullanın `LoggingFactory.Create` .
 
 2,1 örnek:
 
@@ -77,4 +67,5 @@ using (var loggerFactory = LoggerFactory.Create(builder => builder.AddConsole())
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-<xref:fundamentals/logging/index>
+* [Microsoft. Extensions. Logging. Console NuGet paketi](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Console/).
+* <xref:fundamentals/logging/index>

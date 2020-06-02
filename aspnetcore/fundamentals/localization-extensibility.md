@@ -31,7 +31,7 @@ Bu makalede:
 
 ## <a name="extensible-points-in-localization-apis"></a>Yerelleştirme API 'Lerinde Genişletilebilir noktaları
 
-ASP.NET Core yerelleştirme API 'Leri genişletilebilir olacak şekilde oluşturulmuştur. Genişletilebilirlik, geliştiricilerin gereksinimlerine göre yerelleştirmeyi özelleştirmesini sağlar. Örneğin, [Orchardcore](https://github.com/orchardCMS/OrchardCore/) bir `POStringLocalizer`. `POStringLocalizer`Yerelleştirme kaynaklarını depolamak üzere dosyaları kullanmak `PO` Için [Taşınabilir nesne yerelleştirmesini](xref:fundamentals/portable-object-localization) kullanma hakkında ayrıntılı bilgi sağlar.
+ASP.NET Core yerelleştirme API 'Leri genişletilebilir olacak şekilde oluşturulmuştur. Genişletilebilirlik, geliştiricilerin gereksinimlerine göre yerelleştirmeyi özelleştirmesini sağlar. Örneğin, [Orchardcore](https://github.com/orchardCMS/OrchardCore/) bir `POStringLocalizer` . `POStringLocalizer`Yerelleştirme kaynaklarını depolamak üzere dosyaları kullanmak için [Taşınabilir nesne yerelleştirmesini](xref:fundamentals/portable-object-localization) kullanma hakkında ayrıntılı bilgi sağlar `PO` .
 
 Bu makalede, yerelleştirme API 'Lerinin sağladığı iki ana genişletilebilirlik noktası listelenmektedir: 
 
@@ -51,7 +51,7 @@ ASP.NET Core yerelleştirme API 'Leri, yürütülen bir isteğin geçerli kült�
 
 ### <a name="use-customrequestcultureprovider"></a>CustomRequestCultureProvider kullanma
 
-<xref:Microsoft.AspNetCore.Localization.CustomRequestCultureProvider>geçerli yerelleştirme kültürünü <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> belirlemede basit bir temsilci kullanan özel bir sağlar:
+<xref:Microsoft.AspNetCore.Localization.CustomRequestCultureProvider><xref:Microsoft.AspNetCore.Localization.RequestCultureProvider>geçerli yerelleştirme kültürünü belirlemede basit bir temsilci kullanan özel bir sağlar:
 
 ::: moniker range="< aspnetcore-3.0"
 ```csharp
@@ -97,9 +97,9 @@ options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(async 
 
 ### <a name="use-a-new-implemetation-of-requestcultureprovider"></a>RequestCultureProvider 'in yeni bir ımplemei kullanın
 
-Özel bir kaynaktan istek <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> kültür bilgilerini belirleyen yeni bir uygulama oluşturulabilir. Örneğin, özel kaynak bir yapılandırma dosyası veya veritabanı olabilir.
+<xref:Microsoft.AspNetCore.Localization.RequestCultureProvider>Özel bir kaynaktan istek kültür bilgilerini belirleyen yeni bir uygulama oluşturulabilir. Örneğin, özel kaynak bir yapılandırma dosyası veya veritabanı olabilir.
 
-Aşağıdaki örnekte, *appSettings. JSON*' dan <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> gelen istek kültür bilgilerini belirleyen öğesini genişleten gösterilmektedir `AppSettingsRequestCultureProvider`:
+Aşağıdaki örnekte, `AppSettingsRequestCultureProvider` <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> *appSettings. JSON*' dan gelen istek kültür bilgilerini belirleyen öğesini genişleten gösterilmektedir:
 
 ```csharp
 public class AppSettingsRequestCultureProvider : RequestCultureProvider
@@ -143,11 +143,11 @@ public class AppSettingsRequestCultureProvider : RequestCultureProvider
 
 ## <a name="localization-resources"></a>Yerelleştirme kaynakları
 
-ASP.NET Core yerelleştirme sağlar <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer>. <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer>, Yerelleştirme kaynaklarını depolamak <xref:Microsoft.Extensions.Localization.IStringLocalizer> için kullanılan `resx` bir uygulamasıdır.
+ASP.NET Core yerelleştirme sağlar <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer> . <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer>, <xref:Microsoft.Extensions.Localization.IStringLocalizer> `resx` Yerelleştirme kaynaklarını depolamak için kullanılan bir uygulamasıdır.
 
-Dosya kullanma `resx` sınırlı değilsiniz. Uygulama `IStringLocalized`, herhangi bir veri kaynağı kullanılabilir.
+Dosya kullanma sınırlı değilsiniz `resx` . Uygulama `IStringLocalized` , herhangi bir veri kaynağı kullanılabilir.
 
-Aşağıdaki örnek projeler şunları uygular <xref:Microsoft.Extensions.Localization.IStringLocalizer>: 
+Aşağıdaki örnek projeler şunları uygular <xref:Microsoft.Extensions.Localization.IStringLocalizer> : 
 
 * [EFStringLocalizer](https://github.com/aspnet/Entropy/tree/master/samples/Localization.EntityFramework)
 * [JsonStringLocalizer](https://github.com/hishamco/My.Extensions.Localization.Json)

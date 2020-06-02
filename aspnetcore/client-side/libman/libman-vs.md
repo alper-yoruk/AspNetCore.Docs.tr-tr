@@ -28,11 +28,11 @@ Visual Studio, aşağıdakiler dahil olmak üzere ASP.NET Core projelerinde [Lib
 * Derlemede LibMan geri yükleme işlemlerini yapılandırma ve çalıştırma desteği.
 * LibMan geri yükleme ve temizleme işlemlerini tetikleyen menü öğeleri.
 * Kitaplıkları bulmak ve dosyaları bir projeye eklemek için arama iletişim kutusu.
-* *Libman. JSON*&mdash;ile Libman bildirim dosyası için Düzen desteği.
+* *Libman. JSON*Ile &mdash; Libman bildirim dosyası için Düzen desteği.
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/client-side/libman/samples/) [(nasıl indirileceği)](xref:index#how-to-download-a-sample)
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * **ASP.net ve Web geliştirme** iş yüküyle [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
 
@@ -47,7 +47,7 @@ Kitaplık dosyaları, ASP.NET Core projesine iki farklı şekilde eklenebilir:
 
 İstemci tarafı kitaplığı yüklemek için şu adımları izleyin:
 
-* **Çözüm Gezgini**, dosyaların eklenmesi gereken proje klasörüne sağ tıklayın. **İstemci tarafı kitaplığı** **Ekle** > ' yi seçin. **Istemci tarafı kitaplığı Ekle** iletişim kutusu görünür:
+* **Çözüm Gezgini**, dosyaların eklenmesi gereken proje klasörüne sağ tıklayın. **Add**  >  **İstemci tarafı kitaplığı**Ekle ' yi seçin. **Istemci tarafı kitaplığı Ekle** iletişim kutusu görünür:
 
   ![Istemci tarafı kitaplığı Ekle iletişim kutusu](_static/add-library-dialog.png)
 
@@ -98,15 +98,15 @@ Düzenlenecek *Libman. JSON* ' u açmak için aşağıdaki seçenekler mevcuttur
 * **Çözüm Gezgini** ' de projeye sağ tıklayın ve **Istemci tarafı kitaplıklarını yönet**' i seçin. **&#8224;**
 * Visual Studio **Proje** menüsünden **Istemci tarafı kitaplıklarını yönet** ' i seçin. **&#8224;**
 
-**&#8224;** *Libman. JSON* dosyası proje kökünde zaten mevcut değilse, varsayılan öğe şablonu içeriğiyle oluşturulur.
+**& #8224;** *Libman. JSON* dosyası proje kökünde zaten mevcut değilse, varsayılan öğe şablonu içeriğiyle oluşturulur.
 
-Visual Studio, renklendirme, biçimlendirme, IntelliSense ve şema doğrulaması gibi zengin JSON düzenlemesi desteği sunar. LibMan bildiriminin JSON şeması konumunda [https://json.schemastore.org/libman](https://json.schemastore.org/libman)bulunur.
+Visual Studio, renklendirme, biçimlendirme, IntelliSense ve şema doğrulaması gibi zengin JSON düzenlemesi desteği sunar. LibMan bildiriminin JSON şeması konumunda bulunur [https://json.schemastore.org/libman](https://json.schemastore.org/libman) .
 
-Aşağıdaki bildirim dosyası ile LibMan, `libraries` özelliğinde tanımlanan yapılandırma başına dosya alır. Aşağıdaki içinde `libraries` tanımlanan nesne sabit değerlerinin açıklaması:
+Aşağıdaki bildirim dosyası ile LibMan, özelliğinde tanımlanan yapılandırma başına dosya alır `libraries` . Aşağıdaki içinde tanımlanan nesne sabit değerlerinin açıklaması `libraries` :
 
-* [JQuery](https://jquery.com/) sürüm 3.3.1 'nin bir alt kümesi CDNJS sağlayıcısından alınmıştır. `files` Alt küme&mdash;*jQuery. min. js*, *jQuery. js*ve *jQuery. min. Map*özelliğinde tanımlanmıştır. Dosyalar projenin *Wwwroot/lib/jQuery* klasörüne yerleştirilir.
+* [JQuery](https://jquery.com/) sürüm 3.3.1 'nin bir alt kümesi CDNJS sağlayıcısından alınmıştır. Alt küme `files` &mdash; *jQuery. min. js*, *jQuery. js*ve *jQuery. min. Map*özelliğinde tanımlanmıştır. Dosyalar projenin *Wwwroot/lib/jQuery* klasörüne yerleştirilir.
 * [Önyükleme](https://getbootstrap.com/) sürümü 4.1.3 tamamen alınır ve bir *Wwwroot/LIB/Bootstrap* klasörüne yerleştirilir. Nesne sabit değerinin `provider` özelliği `defaultProvider` özellik değerini geçersiz kılar. LibMan, önyükleme dosyalarını unpkg sağlayıcısından alır.
-* [Lodash](https://lodash.com/) alt kümesi, kuruluş içindeki bir yöneten gövde tarafından onaylandı. *Lodash. js* ve *lodash. min. js* dosyaları, *C:\\temp\\lodash\\*konumundaki yerel dosya sisteminden alınır. Dosyalar projenin *Wwwroot/LIB/lodash* klasörüne kopyalanır.
+* [Lodash](https://lodash.com/) alt kümesi, kuruluş içindeki bir yöneten gövde tarafından onaylandı. *Lodash. js* ve *lodash. min. js* dosyaları, *C: \\ Temp \\ lodash \\ *konumundaki yerel dosya sisteminden alınır. Dosyalar projenin *Wwwroot/LIB/lodash* klasörüne kopyalanır.
 
 [!code-json[](samples/LibManSample/libman.json)]
 
@@ -133,7 +133,7 @@ Derleme sonrası geri yükleme davranışını etkinleştirmek ve test etmek iç
 
   [!code-xml[](samples/LibManSample/LibManSample.csproj?name=snippet_RestoreOnBuildPackage)]
 
-* LibMan dosyasının geri yükleme işlemini onaylamak için projeyi derleyin. `Microsoft.Web.LibraryManager.Build` Paket, projenin derleme Işlemi sırasında Libman çalıştıran bir MSBuild hedefini çıkarır.
+* LibMan dosyasının geri yükleme işlemini onaylamak için projeyi derleyin. `Microsoft.Web.LibraryManager.Build`Paket, projenin derleme işlemi sırasında LibMan çalıştıran bir MSBuild hedefini çıkarır.
 * Bir LibMan etkinlik günlüğü için **Çıkış** penceresinin **derleme** akışını gözden geçirin:
 
   ```console
@@ -207,7 +207,7 @@ Kitaplık dosyalarını kaldırmak için:
 
 * *Libman. JSON*öğesini açın.
 * Giriş işaretini karşılık gelen `libraries` nesne değişmez değerinin içine konumlandırın.
-* Sol kenar boşluğunda görüntülenen ampul simgesine tıklayın ve **Library_name Kaldır \<' ı seçin>\<@ library_version>**:
+* Sol kenar boşluğunda görüntülenen ampul simgesine tıklayın ve library_name Kaldır ' ı seçin ** \<> @ \< library_version>**:
 
   ![Kitaplığı Kaldır bağlam menü seçeneği](_static/uninstall-menu-option.png)
 
