@@ -1,22 +1,12 @@
 ---
-title: ASP.NET Core taşınabilir nesne yerelleştirmesini yapılandırma
-author: sebastienros
-description: Bu makale, taşınabilir nesne dosyalarını tanıtır ve bunları Orchard Core çerçevesiyle ASP.NET Core bir uygulamada kullanmaya yönelik adımları özetler.
-ms.author: scaddie
-ms.date: 09/26/2017
-no-loc:
-- Blazor
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
-uid: fundamentals/portable-object-localization
-ms.openlocfilehash: 1e544b0f504c2776c678c51bff598cf011b52610
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
-ms.translationtype: MT
-ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776057"
+Başlık: taşınabilir nesne yerelleştirmesini yapılandırma ASP.NET Core Yazar: sebastıenros açıklaması: Bu makale, taşınabilir nesne dosyalarını tanıtır ve bunları Orchard Core çerçevesiyle bir ASP.NET Core uygulamasında kullanmaya yönelik adımları özetler.
+MS. Author: scadzar MS. Date: 09/26/2017 No-loc:
+- 'Blazor'
+- 'Identity'
+- 'Let's Encrypt'
+- 'Razor'
+- ' SignalR ' uid: temel bilgiler/taşınabilir-nesne-yerelleştirme
+
 ---
 # <a name="configure-portable-object-localization-in-aspnet-core"></a>ASP.NET Core taşınabilir nesne yerelleştirmesini yapılandırma
 
@@ -73,41 +63,41 @@ Bu örnek, Visual Studio 2017 proje şablonundan oluşturulan ASP.NET Core MVC u
 
 ### <a name="referencing-the-package"></a>Pakete başvurma
 
-`OrchardCore.Localization.Core` NuGet paketine başvuru ekleyin. Aşağıdaki paket kaynağında [Myget](https://www.myget.org/) üzerinde kullanılabilir:https://www.myget.org/F/orchardcore-preview/api/v3/index.json
+`OrchardCore.Localization.Core`NuGet paketine başvuru ekleyin. Aşağıdaki paket kaynağında [Myget](https://www.myget.org/) üzerinde kullanılabilir:https://www.myget.org/F/orchardcore-preview/api/v3/index.json
 
 *. Csproj* dosyası artık aşağıdakine benzer bir satır içerir (sürüm numarası farklılık gösterebilir):
 
-[!code-xml[](localization/sample/POLocalization/POLocalization.csproj?range=9)]
+[!code-xml[](localization/sample/2.x/POLocalization/POLocalization.csproj?range=9)]
 
 ### <a name="registering-the-service"></a>Hizmet kaydediliyor
 
 Gerekli Hizmetleri `ConfigureServices` *Startup.cs*yöntemine ekleyin:
 
-[!code-csharp[](localization/sample/POLocalization/Startup.cs?name=snippet_ConfigureServices&highlight=4-21)]
+[!code-csharp[](localization/sample/2.x/POLocalization/Startup.cs?name=snippet_ConfigureServices&highlight=4-21)]
 
 Gerekli ara yazılımı `Configure` *Startup.cs*yöntemine ekleyin:
 
-[!code-csharp[](localization/sample/POLocalization/Startup.cs?name=snippet_Configure&highlight=15)]
+[!code-csharp[](localization/sample/2.x/POLocalization/Startup.cs?name=snippet_Configure&highlight=15)]
 
-Aşağıdaki kodu tercih ettiğiniz Razor görünüme ekleyin. Bu örnekte *. cshtml hakkında* kullanılır.
+Aşağıdaki kodu tercih ettiğiniz görünüme ekleyin Razor . Bu örnekte *. cshtml hakkında* kullanılır.
 
-[!code-cshtml[](localization/sample/POLocalization/Views/Home/About.cshtml)]
+[!code-cshtml[](localization/sample/2.x/POLocalization/Views/Home/About.cshtml)]
 
-" `IViewLocalizer` Hello World!" metnini dönüştürmek için bir örnek eklenmiş ve kullanılır.
+`IViewLocalizer`"Hello World!" metnini dönüştürmek için bir örnek eklenmiş ve kullanılır.
 
 ### <a name="creating-a-po-file"></a>PO dosyası oluşturma
 
-Uygulama kök klasörünüzde * \<kültür kodu>. Po* adlı bir dosya oluşturun. Bu örnekte, Fransızca dili kullanıldığından dosya adı *fr. Po* olur:
+Uygulama kök klasörünüzde * \<culture code> . Po* adlı bir dosya oluşturun. Bu örnekte, Fransızca dili kullanıldığından dosya adı *fr. Po* olur:
 
-[!code-text[](localization/sample/POLocalization/fr.po)]
+[!code-text[](localization/sample/2.x/POLocalization/fr.po)]
 
-Bu dosya, hem çevrilecek dizeyi hem de Fransızca çevrilmiş dizeyi depolar. Çevirileri, gerekirse üst kültürüne döndürülür. Bu örnekte, istenen kültür veya `fr-FR` `fr-CA`ise *fr. Po* dosyası kullanılır.
+Bu dosya, hem çevrilecek dizeyi hem de Fransızca çevrilmiş dizeyi depolar. Çevirileri, gerekirse üst kültürüne döndürülür. Bu örnekte, istenen kültür veya ise *fr. Po* dosyası kullanılır `fr-FR` `fr-CA` .
 
 ### <a name="testing-the-application"></a>Uygulamayı test etme
 
-Uygulamanızı çalıştırın ve URL `/Home/About`'ye gidin. **Merhaba Dünya metni!** görüntülenir.
+Uygulamanızı çalıştırın ve URL 'ye gidin `/Home/About` . **Merhaba Dünya metni!** görüntülenir.
 
-URL `/Home/About?culture=fr-FR`'ye gidin. **Bonjour Le Monde metni!** görüntülenir.
+URL 'ye gidin `/Home/About?culture=fr-FR` . **Bonjour Le Monde metni!** görüntülenir.
 
 ## <a name="pluralization"></a>Çoğullaştırma
 
@@ -134,11 +124,11 @@ Bu örnekteki her girdinin ne olduğunu gösteren bir açıklama için bkz. [po 
 
 Dillerin hepsi aynı kuralları paylaşmaz. Bu, üç plural formu bulunan Çekçe dil ile gösterilmiştir.
 
-`cs.po` Dosyayı aşağıdaki gibi oluşturun ve plurun üç farklı çeviriyi nasıl ihtiyacı olduğunu aklınızda yapın:
+`cs.po`Dosyayı aşağıdaki gibi oluşturun ve plurun üç farklı çeviriyi nasıl ihtiyacı olduğunu aklınızda yapın:
 
-[!code-text[](localization/sample/POLocalization/cs.po)]
+[!code-text[](localization/sample/2.x/POLocalization/cs.po)]
 
-Çekçe yerelleştirmeleri kabul etmek için, `"cs"` `ConfigureServices` yönteminde desteklenen kültürlerin listesine ekleyin:
+Çekçe yerelleştirmeleri kabul etmek için, `"cs"` yönteminde desteklenen kültürlerin listesine ekleyin `ConfigureServices` :
 
 ```csharp
 var supportedCultures = new List<CultureInfo>
@@ -193,11 +183,11 @@ Existuje 5 položek.
 
 ### <a name="contextualizing-strings"></a>Contextualleme dizeleri
 
-Uygulamalar genellikle birkaç yerde çevrilecek dizeleri içerir. Aynı dize bir uygulama içindeki belirli konumlarda farklı bir çeviriye sahip olabilir (Razor görünümler veya sınıf dosyaları). Bir PO dosyası, temsil edilen dizeyi kategorilere ayırmak için kullanılabilecek bir dosya bağlamı kavramını destekler. Dosya bağlamını kullanarak, dosya bağlamına (veya bir dosya bağlamının olmamasından) bağlı olarak bir dize farklı şekilde çevrilebilir.
+Uygulamalar genellikle birkaç yerde çevrilecek dizeleri içerir. Aynı dize bir uygulama içindeki belirli konumlarda farklı bir çeviriye sahip olabilir ( Razor görünümler veya sınıf dosyaları). Bir PO dosyası, temsil edilen dizeyi kategorilere ayırmak için kullanılabilecek bir dosya bağlamı kavramını destekler. Dosya bağlamını kullanarak, dosya bağlamına (veya bir dosya bağlamının olmamasından) bağlı olarak bir dize farklı şekilde çevrilebilir.
 
-PO yerelleştirme hizmetleri, tam sınıfın veya bir dize çevrilirken kullanılan görünümün adını kullanır. Bu, `msgctxt` girişteki değer ayarlanarak gerçekleştirilir.
+PO yerelleştirme hizmetleri, tam sınıfın veya bir dize çevrilirken kullanılan görünümün adını kullanır. Bu, girişteki değer ayarlanarak gerçekleştirilir `msgctxt` .
 
-Önceki *fr. Po* örneğine küçük bir ek göz önünde bulundurun. *Görünümler/Home/about. cshtml* 'de bulunan bir `msgctxt` Razor görünüm, ayrılmış girdinin değeri ayarlanarak dosya bağlamı olarak tanımlanabilir:
+Önceki *fr. Po* örneğine küçük bir ek göz önünde bulundurun. Razor *Görünümler/Home/about. cshtml* 'de bulunan bir görünüm, ayrılmış girdinin değeri ayarlanarak dosya bağlamı olarak tanımlanabilir `msgctxt` :
 
 ```text
 msgctxt "Views.Home.About"
@@ -205,15 +195,15 @@ msgid "Hello world!"
 msgstr "Bonjour le monde!"
 ```
 
-Bu şekilde `msgctxt` ayarlandığında, ' ye `/Home/About?culture=fr-FR`gidildiğinde metin çevirisi oluşur. Çeviri, ' a gidildiğinde gerçekleşmez `/Home/Contact?culture=fr-FR`.
+`msgctxt`Bu şekilde ayarlandığında, ' ye gidildiğinde metin çevirisi oluşur `/Home/About?culture=fr-FR` . Çeviri, ' a gidildiğinde gerçekleşmez `/Home/Contact?culture=fr-FR` .
 
 Belirli bir giriş belirli bir dosya bağlamıyla eşleşmediğinde, Orchard Core 'un geri dönüş mekanizması bağlam olmadan uygun bir PO dosyası arar. *Görünümler/Home/Contact. cshtml*için tanımlanan belirli bir dosya bağlamı olmadığı varsayılarak, gezinmek IÇIN `/Home/Contact?culture=fr-FR` bir PO dosyası yükler:
 
-[!code-text[](localization/sample/POLocalization/fr.po)]
+[!code-text[](localization/sample/2.x/POLocalization/fr.po)]
 
 ### <a name="changing-the-location-of-po-files"></a>PO dosyalarının konumunu değiştirme
 
-PO dosyalarının varsayılan konumu ' de `ConfigureServices`değiştirilebilir:
+PO dosyalarının varsayılan konumu ' de değiştirilebilir `ConfigureServices` :
 
 ```csharp
 services.AddPortableObjectLocalization(options => options.ResourcesPath = "Localization");
@@ -227,6 +217,6 @@ PO dosyalarını bulmak için daha karmaşık mantık gerektiğinde, `OrchardCor
 
 ### <a name="using-a-different-default-pluralized-language"></a>Farklı bir varsayılan plurar dili kullanma
 
-Paket, iki plural `Plural` formlarına özgü bir genişletme yöntemi içerir. Daha fazla çoğul biçim gerektiren diller için bir genişletme yöntemi oluşturun. Uzantı yöntemiyle, varsayılan dil &mdash; için herhangi bir yerelleştirme dosyası sağlamanız gerekmez, özgün dizeler doğrudan kodda zaten kullanılabilir.
+Paket, `Plural` iki plural formlarına özgü bir genişletme yöntemi içerir. Daha fazla çoğul biçim gerektiren diller için bir genişletme yöntemi oluşturun. Uzantı yöntemiyle, varsayılan dil için herhangi bir yerelleştirme dosyası sağlamanız gerekmez, &mdash; özgün dizeler doğrudan kodda zaten kullanılabilir.
 
-Çevirilerin dize dizisini kabul eden daha `Plural(int count, string[] pluralForms, params object[] arguments)` genel aşırı yüklemeyi kullanabilirsiniz.
+`Plural(int count, string[] pluralForms, params object[] arguments)`Çevirilerin dize dizisini kabul eden daha genel aşırı yüklemeyi kullanabilirsiniz.

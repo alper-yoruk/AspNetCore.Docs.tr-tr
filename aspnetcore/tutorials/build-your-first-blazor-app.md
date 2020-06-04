@@ -1,11 +1,11 @@
 ---
-Başlık: ' ilk uygulamanızı derleme Blazor ' Yazar: Açıklama: ' Blazor uygulama oluşturma adım adım. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+Başlık: ' ilk uygulamanızı derleme Blazor ' Yazar: guardrex açıklaması: ' Blazor uygulama oluşturma adım adım. '
+monikerRange: ' >= aspnetcore-3,0 ' MS. Author: Riande MS. Custom: MVC MS. Date: 05/19/2020 No-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ' SignalR ' uid: Öğreticiler/First-blazor-App
 
 ---
 # <a name="build-your-first-blazor-app"></a>İlk uygulamanızı oluşturma Blazor
@@ -131,7 +131,7 @@ Bir [`@foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) döngü,
 
 Uygulamaya basit bir yapılacaklar listesi uygulayan yeni bir bileşen ekleyin.
 
-1. `Todo` Razor *Sayfalar* klasöründe uygulamaya yeni bir bileşen ekleyin. Visual Studio 'da **Sayfalar** klasörüne sağ tıklayın ve **Add**  >  **Yeni öğe** Ekle  >  ** Razor bileşeni**' ni seçin. Bileşenin dosya *Todo. Razor*olarak adlandırın. Diğer geliştirme ortamlarında, *Todo. Razor*adlı **Sayfalar** klasörüne boş bir dosya ekleyin.
+1. `Todo` Razor *Sayfalar* klasöründe uygulamaya yeni bir bileşen ekleyin. Visual Studio kullanıyorsanız, **Sayfalar** klasörüne sağ tıklayın ve **Add**  >  **Yeni öğe** Ekle  >  ** Razor bileşeni**' ni seçin. Bileşenin dosya *Todo. Razor*olarak adlandırın. Diğer geliştirme ortamlarında, *Todo. Razor*adlı **Sayfalar** klasörüne boş bir dosya ekleyin.
 
 1. Bileşen için ilk biçimlendirmeyi belirtin:
 
