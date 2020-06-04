@@ -1,11 +1,11 @@
 ---
-title: ' ' SignalR Yazar: Açıklama: ' içinde kullanıcıları ve grupları yönetme ASP.NET Core SignalR Kullanıcı ve grup yönetimine genel bakış. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+Başlık: ' ' SignalR Yazar: bradygaster açıklaması: ' içindeki kullanıcıları ve grupları yönetme ASP.NET Core SignalR Kullanıcı ve grup yönetimine genel bakış. '
+monikerRange: ' >= aspnetcore-2,1 ' MS. Author: bradyg MS. Custom: MVC MS. Date: 05/17/2020 No-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ' SignalR ' uid: SignalR/gruplar
 
 ---
 
