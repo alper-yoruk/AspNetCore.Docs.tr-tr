@@ -1,7 +1,7 @@
 ---
 title: Güvenli ASP.NET Core Blazor Server uygulamaları
 author: guardrex
-description: Sunucu uygulamalarının ASP.NET Core uygulamalar Blazor olarak nasıl güvenli hale alınacağını öğrenin.
+description: BlazorSunucu uygulamalarının ASP.NET Core uygulamalar olarak nasıl güvenli hale alınacağını öğrenin.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
@@ -13,56 +13,56 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/server/index
-ms.openlocfilehash: bbd8b6fcd357b8929bf097450854d98fbea2570e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 5ba7bbde49bfc232795d375a1ec644825a0dee1e
+ms.sourcegitcommit: 67eadd7bf28eae0b8786d85e90a7df811ffe5904
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82772641"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84454642"
 ---
 # <a name="secure-aspnet-core-blazor-server-apps"></a>Güvenli ASP.NET Core Blazor Server uygulamaları
 
 [Luke Latham](https://github.com/guardrex) tarafından
 
-## <a name="blazor-server-project-template"></a>Blazor sunucusu proje şablonu
+## <a name="blazor-server-project-template"></a>BlazorSunucu projesi şablonu
 
-Blazor sunucusu proje şablonu, proje oluşturulduğunda kimlik doğrulama için yapılandırılabilir.
+BlazorProje oluşturulduğunda sunucu projesi şablonu kimlik doğrulama için yapılandırılabilir.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Kimlik doğrulama mekanizması ile yeni bir Blazor <xref:blazor/get-started> Server projesi oluşturmak Için makalesindeki Visual Studio kılavuzunu izleyin.
+<xref:blazor/get-started> Blazor Kimlik doğrulama mekanizmasına sahip yeni bir sunucu projesi oluşturmak Için makalesindeki Visual Studio kılavuzunu izleyin.
 
-**Yeni ASP.NET Core Web uygulaması oluştur** Iletişim kutusunda **Blazor Server uygulama** şablonunu seçtikten sonra, **kimlik doğrulaması**altında **Değiştir** ' i seçin.
+**Yeni bir ASP.NET Core Web uygulaması oluştur** iletişim kutusunda ** Blazor sunucu uygulama** şablonunu seçtikten sonra, **kimlik doğrulaması**altında **Değiştir** ' i seçin.
 
 Diğer ASP.NET Core projelerine yönelik aynı kimlik doğrulama mekanizması kümesini sunmak için bir iletişim kutusu açılır:
 
 * **Kimlik Doğrulaması Yok**
-* **Bireysel kullanıcı hesapları** &ndash; Kullanıcı hesapları depolanabilir:
-  * ASP.NET Core [kimlik](xref:security/authentication/identity) sistemini kullanarak uygulama içinde.
+* **Bireysel kullanıcı hesapları**: Kullanıcı hesapları depolanabilir:
+  * ASP.NET Core sistemi kullanılarak uygulama içinde [Identity](xref:security/authentication/identity) .
   * [Azure AD B2C](xref:security/authentication/azure-ad-b2c).
 * **İş veya okul hesapları**
 * **Windows Kimlik Doğrulaması**
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Kimlik doğrulama mekanizması ile yeni bir <xref:blazor/get-started> Blazor Server projesi oluşturmak için makalesindeki Visual Studio Code kılavuzunu izleyin:
+<xref:blazor/get-started> Blazor Kimlik doğrulama mekanizmasına sahip yeni bir sunucu projesi oluşturmak için makalesindeki Visual Studio Code kılavuzunu izleyin:
 
 ```dotnetcli
 dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 ```
 
-İzin verilen kimlik doğrulama`{AUTHENTICATION}`değerleri () aşağıdaki tabloda gösterilmiştir.
+İzin verilen kimlik doğrulama değerleri ( `{AUTHENTICATION}` ) aşağıdaki tabloda gösterilmiştir.
 
 | Kimlik doğrulama mekanizması | Açıklama |
 | ------------------------ | ----------- |
 | `None`varsayılanını         | Kimlik doğrulaması yok |
-| `Individual`             | Uygulamada ASP.NET Core kimlikle depolanan kullanıcılar |
+| `Individual`             | ASP.NET Core ile uygulamada depolanan kullanıcılarIdentity |
 | `IndividualB2C`          | [Azure AD B2C](xref:security/authentication/azure-ad-b2c) depolanan kullanıcılar |
 | `SingleOrg`              | Tek bir kiracı için kuruluş kimlik doğrulaması |
 | `MultiOrg`               | Birden çok kiracı için kuruluş kimlik doğrulaması |
 | `Windows`                | Windows Kimlik Doğrulaması |
 
-Bu `-o|--output` seçeneği kullanarak, komut `{APP NAME}` yer tutucusu için belirtilen değeri kullanır:
+Bu `-o|--output` seçeneği kullanarak, komut yer tutucusu için belirtilen değeri kullanır `{APP NAME}` :
 
 * Proje için bir klasör oluşturun.
 * Projeyi adlandırın.
@@ -71,32 +71,32 @@ Daha fazla bilgi için .NET Core kılavuzundaki [DotNet New](/dotnet/core/tools/
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-1. <xref:blazor/get-started> Makalesindeki Mac için Visual Studio kılavuzunu izleyin.
+1. Makalesindeki Mac için Visual Studio kılavuzunu izleyin <xref:blazor/get-started> .
 
-1. **Yeni Blazor Server uygulamanızı yapılandırın** adımında **kimlik doğrulaması** açılan listesinden **bağımsız kimlik doğrulaması (uygulama içi)** seçeneğini belirleyin.
+1. **Yeni Blazor sunucu uygulamanızı yapılandırın** adımında **kimlik doğrulaması** açılan listesinden **bağımsız kimlik doğrulaması (uygulama içi)** seçeneğini belirleyin.
 
-1. Uygulama, ASP.NET Core kimlik ile uygulamada depolanan bireysel kullanıcılar için oluşturulur.
+1. Uygulama, ASP.NET Core uygulamada depolanan bireysel kullanıcılar için oluşturulur Identity .
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
-Kimlik doğrulama mekanizması ile yeni bir <xref:blazor/get-started> Blazor Server projesi oluşturmak için makalesindeki .NET Core CLI kılavuzunu izleyin:
+<xref:blazor/get-started> Blazor Kimlik doğrulama mekanizmasına sahip yeni bir sunucu projesi oluşturmak için makalesindeki .NET Core CLI kılavuzunu izleyin:
 
 ```dotnetcli
 dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 ```
 
-İzin verilen kimlik doğrulama`{AUTHENTICATION}`değerleri () aşağıdaki tabloda gösterilmiştir.
+İzin verilen kimlik doğrulama değerleri ( `{AUTHENTICATION}` ) aşağıdaki tabloda gösterilmiştir.
 
 | Kimlik doğrulama mekanizması | Açıklama |
 | ------------------------ | ----------- |
 | `None`varsayılanını         | Kimlik doğrulaması yok |
-| `Individual`             | Uygulamada ASP.NET Core kimlikle depolanan kullanıcılar |
+| `Individual`             | ASP.NET Core ile uygulamada depolanan kullanıcılarIdentity |
 | `IndividualB2C`          | [Azure AD B2C](xref:security/authentication/azure-ad-b2c) depolanan kullanıcılar |
 | `SingleOrg`              | Tek bir kiracı için kuruluş kimlik doğrulaması |
 | `MultiOrg`               | Birden çok kiracı için kuruluş kimlik doğrulaması |
 | `Windows`                | Windows Kimlik Doğrulaması |
 
-Bu `-o|--output` seçeneği kullanarak, komut `{APP NAME}` yer tutucusu için belirtilen değeri kullanır:
+Bu `-o|--output` seçeneği kullanarak, komut yer tutucusu için belirtilen değeri kullanır `{APP NAME}` :
 
 * Proje için bir klasör oluşturun.
 * Projeyi adlandırın.
@@ -107,4 +107,11 @@ Daha fazla bilgi için .NET Core kılavuzundaki [DotNet New](/dotnet/core/tools/
 
 ## <a name="secure-an-existing-app"></a>Mevcut bir uygulamanın güvenliğini sağlama
 
-BlazorSunucu uygulamaları güvenlik için ASP.NET Core uygulamalarla aynı şekilde yapılandırılır. Daha fazla bilgi için, altındaki <xref:security/index>makalelere bakın.
+BlazorSunucu uygulamaları güvenlik için ASP.NET Core uygulamalarla aynı şekilde yapılandırılır. Daha fazla bilgi için, altındaki makalelere bakın <xref:security/index> .
+
+## <a name="scaffold-identity"></a>İskeleIdentity
+
+IdentitySunucu projesine bir yapı iskelesi ekleyin Blazor :
+
+* [Mevcut yetkilendirme olmadan](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-without-existing-authorization).
+* [Yetkilendirme ile](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-with-authorization).

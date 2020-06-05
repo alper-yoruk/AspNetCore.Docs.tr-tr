@@ -1,11 +1,11 @@
 ---
 title: ASP.NET Core barındırma ve dağıtmaBlazor
 author: guardrex
-description: Uygulamaları nasıl barındırılacağını ve dağıtacağınızı Blazor öğrenin.
+description: Uygulamaları nasıl barındırılacağını ve dağıtacağınızı öğrenin Blazor .
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/30/2020
+ms.date: 05/19/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,18 +13,16 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/blazor/index
-ms.openlocfilehash: 9d57b81cd813d02a65b6d3a39c7f1a1aa8a069c7
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 482b066d347c2c572b0ffb78ccab1ac391195823
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775173"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452245"
 ---
-# <a name="host-and-deploy-aspnet-core-blazor"></a>ASP.NET Core Blazor barındırma ve dağıtma
+# <a name="host-and-deploy-aspnet-core-blazor"></a>ASP.NET Core barındırma ve dağıtmaBlazor
 
 , [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com)ve [Daniel Roth](https://github.com/danroth27) tarafından
-
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
 
 ## <a name="publish-the-app"></a>Uygulamayı yayımlama
 
@@ -32,13 +30,13 @@ Uygulamalar yayın yapılandırmasında dağıtım için yayımlanır.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. Gezinti çubuğundan **Build** > **Publish {APPLICATION}** öğesini seçin.
+1. Gezinti çubuğundan **Build**  >  **Publish {APPLICATION}** öğesini seçin.
 1. *Yayımla hedefini*seçin. Yerel olarak yayımlamak için **klasör**' ü seçin.
 1. **Klasör seçin** alanında varsayılan konumu kabul edin veya farklı bir konum belirtin. **Yayımla** düğmesini seçin.
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-1. **Derleme** > **yayımlama klasörü**' nü seçin.
+1. **Derleme**  >  **yayımlama klasörü**' nü seçin.
 1. Yayınlanan varlıkların alınacağı klasörü onaylayın ve **Yayımla**' yı seçin.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
@@ -56,56 +54,56 @@ Uygulamanın yayımlanması, projenin bağımlılıklarını [geri yüklemeyi](/
 Yayımlama konumları:
 
 * BlazorWebAssembly
-  * Tek &ndash; başına uygulama */bin/Release/{Target Framework}/Publish/Wwwroot* klasöründe yayımlanır. Uygulamayı statik bir site olarak dağıtmak için *Wwwroot* klasörünün içeriğini statik site konağına kopyalayın.
-  * İstemci &ndash; Blazor webassembly uygulaması barındırılan sunucu uygulamasının diğer statik Web varlıklarıyla bırlıkte sunucu uygulamasının */bin/Release/{Target Framework}/Publish/Wwwroot* klasöründe yayımlanır. *Yayımla* klasörünün içeriğini konağa dağıtın.
-* BlazorUygulama &ndash; , */bin/Release/{Target Framework}/Publish* klasöründe yayımlanır. *Yayımla* klasörünün içeriğini konağa dağıtın.
+  * Tek başına: uygulama */BIN/Release/{Target Framework}/Publish/Wwwroot* klasörüne yayımlanır. Uygulamayı statik bir site olarak dağıtmak için *Wwwroot* klasörünün içeriğini statik site konağına kopyalayın.
+  * Barındırılan: istemci Blazor webassembly uygulaması sunucu uygulamasının */bin/Release/{Target Framework}/Publish/Wwwroot* klasöründe, sunucu uygulamasının diğer statik Web varlıklarıyla birlikte yayımlanır. *Yayımla* klasörünün içeriğini konağa dağıtın.
+* BlazorSunucu: uygulama */BIN/Release/{Target Framework}/Publish* klasörüne yayımlandı. *Yayımla* klasörünün içeriğini konağa dağıtın.
 
 Klasördeki varlıklar Web sunucusuna dağıtılır. Dağıtım, kullanımdaki geliştirme araçlarına bağlı olarak el ile veya otomatik bir süreç olabilir.
 
 ## <a name="app-base-path"></a>Uygulama temel yolu
 
-*Uygulama temel yolu* , UYGULAMANıN kök URL yoludur. Aşağıdaki ASP.NET Core uygulamayı ve Blazor alt uygulamayı göz önünde bulundurun:
+*Uygulama temel yolu* , UYGULAMANıN kök URL yoludur. Aşağıdaki ASP.NET Core uygulamayı ve alt uygulamayı göz önünde bulundurun Blazor :
 
-* ASP.NET Core uygulaması şu şekilde adlandırılır `MyApp`:
+* ASP.NET Core uygulaması şu şekilde adlandırılır `MyApp` :
   * Uygulama fiziksel olarak *d:/MyApp*konumunda bulunur.
-  * İstekleri tarihinde `https://www.contoso.com/{MYAPP RESOURCE}`alınır.
-* Adlı Blazor `CoolApp` bir uygulama, öğesinin `MyApp`bir alt uygulamasıdır:
+  * İstekleri tarihinde alınır `https://www.contoso.com/{MYAPP RESOURCE}` .
+* BlazorAdlı bir uygulama `CoolApp` , öğesinin bir alt uygulamasıdır `MyApp` :
   * Alt uygulama fiziksel olarak *d:/MyApp/CoolApp*konumunda bulunur.
-  * İstekleri tarihinde `https://www.contoso.com/CoolApp/{COOLAPP RESOURCE}`alınır.
+  * İstekleri tarihinde alınır `https://www.contoso.com/CoolApp/{COOLAPP RESOURCE}` .
 
-İçin `CoolApp`ek yapılandırma belirtmeden, Bu senaryodaki alt uygulama, sunucuda nerede bulunduğu konusunda bilgi sahibi değildir. Örneğin, uygulama ilgili URL yolunda `/CoolApp/`bulunduğunu bilmeden kaynaklarına doğru göreli URL 'ler oluşturamıyoruz.
+İçin ek yapılandırma belirtmeden `CoolApp` , Bu senaryodaki alt uygulama, sunucuda nerede bulunduğu konusunda bilgi sahibi değildir. Örneğin, uygulama ilgili URL yolunda bulunduğunu bilmeden kaynaklarına doğru göreli URL 'Ler oluşturamıyoruz `/CoolApp/` .
 
-Blazor `https://www.contoso.com/CoolApp/`Uygulamanın temel yolu için yapılandırma sağlamak üzere, `<base>` etiketin `href` özniteliği *Pages/_Host. cshtml* dosyasında (Blazor sunucu) veya *Wwwroot/index.html* dosyasında (Blazor webassembly) göreli kök yoluna ayarlanır:
+Uygulamanın temel yolu için yapılandırma sağlamak üzere Blazor `https://www.contoso.com/CoolApp/` , `<base>` etiketin `href` özniteliği *Pages/_Host. cshtml* dosyasında ( Blazor sunucu) veya *Wwwroot/index.html* dosyasında ( Blazor webassembly) göreli kök yoluna ayarlanır:
 
 ```html
 <base href="/CoolApp/">
 ```
 
-BlazorSunucu uygulamaları Ayrıca, uygulamanın istek ardışık düzeninde çağırarak <xref:Microsoft.AspNetCore.Builder.UsePathBaseExtensions.UsePathBase*> sunucu tarafı taban yolunu ayarlar: `Startup.Configure`
+BlazorSunucu uygulamaları Ayrıca, <xref:Microsoft.AspNetCore.Builder.UsePathBaseExtensions.UsePathBase*> uygulamanın istek ardışık düzeninde çağırarak sunucu tarafı taban yolunu ayarlar `Startup.Configure` :
 
 ```csharp
 app.UsePathBase("/CoolApp");
 ```
 
-Göreli URL yolunu sağlayarak, kök dizinde olmayan bir bileşen, uygulamanın kök yoluna göre URL 'Ler oluşturabilir. Farklı dizin yapısı düzeylerindeki bileşenler, uygulama genelinde konumlardaki diğer kaynakların bağlantılarını oluşturabilir. Uygulama temel yolu, bağlantının `href` hedefinin uygulama temel yolu URI alanı içinde olduğu seçili köprüleri ele almak için de kullanılır. Blazor Yönlendirici iç gezinmeyi işler.
+Göreli URL yolunu sağlayarak, kök dizinde olmayan bir bileşen, uygulamanın kök yoluna göre URL 'Ler oluşturabilir. Farklı dizin yapısı düzeylerindeki bileşenler, uygulama genelinde konumlardaki diğer kaynakların bağlantılarını oluşturabilir. Uygulama temel yolu, `href` bağlantının hedefinin uygulama temel yolu URI alanı içinde olduğu seçili köprüleri ele almak için de kullanılır. BlazorYönlendirici iç gezinmeyi işler.
 
-Birçok barındırma senaryosunda, uygulamanın göreli URL yolu uygulamanın köküdür. Bu durumlarda, uygulamanın göreli URL taban yolu, bir`<base href="/" />` Blazor uygulamanın varsayılan yapılandırması olan bir eğik çizgi () olur. GitHub sayfaları ve IIS alt uygulamaları gibi diğer barındırma senaryolarında, uygulama temel yolu, sunucunun uygulamanın göreli URL 'SI yolu olarak ayarlanmalıdır.
+Birçok barındırma senaryosunda, uygulamanın göreli URL yolu uygulamanın köküdür. Bu durumlarda, uygulamanın göreli URL taban yolu `<base href="/" />` , bir uygulamanın varsayılan yapılandırması olan bir eğik çizgi () olur Blazor . GitHub sayfaları ve IIS alt uygulamaları gibi diğer barındırma senaryolarında, uygulama temel yolu, sunucunun uygulamanın göreli URL 'SI yolu olarak ayarlanmalıdır.
 
-Uygulamanın temel yolunu ayarlamak için, *sayfa/_Host. cshtml* Blazor dosyası ( `<head>` sunucu) veya *Wwwroot/index.html* dosyasının (Blazor webassembly) etiket öğeleri içindeki `<base>` etiketi güncelleştirin. `href` Öznitelik değerini olarak `/{RELATIVE URL PATH}/` ayarlayın (sondaki eğik çizgi gereklidir), burada `{RELATIVE URL PATH}` uygulamanın tam göreli URL yoludur.
+Uygulamanın temel yolunu ayarlamak için, `<base>` `<head>` *sayfa/_Host. cshtml* dosyası ( Blazor sunucu) veya *Wwwroot/index.html* dosyasının (webassembly) etiket öğeleri içindeki etiketi güncelleştirin Blazor . `href`Öznitelik değerini olarak ayarlayın `/{RELATIVE URL PATH}/` (sondaki eğik çizgi gereklidir), burada `{RELATIVE URL PATH}` UYGULAMANıN tam göreli URL yoludur.
 
-Kök olmayan Blazor göreli URL yoluna (örneğin, `<base href="/CoolApp/">`) sahip bir webassembly uygulaması için, uygulama *yerel olarak çalıştırıldığında*kaynaklarını bulamaz. Yerel geliştirme ve test sırasında bu sorunu aşmak için, çalışma zamanında `href` `<base>` etiketinin değeriyle eşleşen bir *yol temel* bağımsız değişkeni sağlayabilirsiniz. Sondaki eğik çizgi eklemeyin. Uygulamayı yerel olarak çalıştırırken yol temel bağımsız değişkenini geçirmek için, `dotnet run` komutu uygulamanın dizininden çalıştırın, `--pathbase` seçeneği:
+BlazorKök olmayan GÖRELI URL yoluna (örneğin,) sahip bir webassembly uygulaması için `<base href="/CoolApp/">` , uygulama *yerel olarak çalıştırıldığında*kaynaklarını bulamaz. Yerel geliştirme ve test sırasında bu sorunu aşmak için, *path base* `href` `<base>` çalışma zamanında etiketinin değeriyle eşleşen bir yol temel bağımsız değişkeni sağlayabilirsiniz. Sondaki eğik çizgi eklemeyin. Uygulamayı yerel olarak çalıştırırken yol temel bağımsız değişkenini geçirmek için, `dotnet run` komutu uygulamanın dizininden çalıştırın, `--pathbase` seçeneği:
 
 ```dotnetcli
 dotnet run --pathbase=/{RELATIVE URL PATH (no trailing slash)}
 ```
 
-Göreli URL Blazor yolu `/CoolApp/` (`<base href="/CoolApp/">`) olan bir webassembly uygulaması için, komut şu şekilde olur:
+BlazorGÖRELI URL yolu () olan bir webassembly uygulaması için `/CoolApp/` , `<base href="/CoolApp/">` komut şu şekilde olur:
 
 ```dotnetcli
 dotnet run --pathbase=/CoolApp
 ```
 
-Blazor Webassembly uygulaması tarihinde `http://localhost:port/CoolApp`yerel olarak yanıt verir.
+BlazorWebassembly uygulaması tarihinde yerel olarak yanıt verir `http://localhost:port/CoolApp` .
 
 ## <a name="deployment"></a>Dağıtım
 

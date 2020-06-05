@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core Razor sayfasına doğrulama ekleme
+title: ASP.NET Core sayfasına doğrulama ekleme Razor
 author: rick-anderson
-description: ASP.NET Core bir Razor sayfaya doğrulamanın nasıl ekleneceğini öğrenin.
+description: ASP.NET Core bir sayfaya doğrulamanın nasıl ekleneceğini öğrenin Razor .
 ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
@@ -12,14 +12,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: 91f0ac5fcd607f2423f9fc4647413b2bbb2336fc
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 7aeb77e836ce0546766d88f2c52f37aaf75c12c4
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773781"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84452050"
 ---
-# <a name="add-validation-to-an-aspnet-core-razor-page"></a>ASP.NET Core Razor sayfasına doğrulama ekleme
+# <a name="add-validation-to-an-aspnet-core-razor-page"></a>ASP.NET Core sayfasına doğrulama ekleme Razor
 
 Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -27,41 +27,41 @@ Bu bölümde, doğrulama mantığı `Movie` modele eklenir. Doğrulama kurallar�
 
 ## <a name="validation"></a>Doğrulama
 
-Yazılım geliştirmeye yönelik temel bir temel [kuru](https://wikipedia.org/wiki/Don%27t_repeat_yourself) ("**D**on't **R**epeon **Y**ourself") olarak adlandırılır. Razor Pages, işlevselliği bir kez belirtildiğinde geliştirme ve uygulama genelinde yansıtılmıştır. Kuru şu şekilde yardımcı olabilir:
+Yazılım geliştirmeye yönelik temel bir temel [kuru](https://wikipedia.org/wiki/Don%27t_repeat_yourself) ("**D**on't **R**epeon **Y**ourself") olarak adlandırılır. RazorSayfalar, işlevlerin bir kez belirtildiği ve uygulama genelinde yansıtıldığı durumlarda geliştirmeyi teşvik eder. Kuru şu şekilde yardımcı olabilir:
 
 * Uygulamadaki kod miktarını azaltın.
 * Kodu daha az hata haline getirin ve test ve bakım yapmayı kolaylaştırın.
 
-Razor Pages ve Entity Framework tarafından sunulan doğrulama desteği, Kuru ilkesine iyi bir örnektir. Doğrulama kuralları tek bir yerde (model sınıfında) bildirimli olarak belirtilir ve kurallar uygulamada her yerde zorlanır.
+Sayfalar ve Entity Framework tarafından sunulan doğrulama desteği, Razor kurutma ilkesine iyi bir örnektir. Doğrulama kuralları tek bir yerde (model sınıfında) bildirimli olarak belirtilir ve kurallar uygulamada her yerde zorlanır.
 
 ## <a name="add-validation-rules-to-the-movie-model"></a>Film modeline doğrulama kuralları ekleme
 
-Dataaçıklamalarda ad alanı, bir sınıfa veya özelliğe bildirimli olarak uygulanan bir yerleşik doğrulama öznitelikleri kümesi sağlar. Dataaçıklamalarda, biçimlendirme ile ilgili Yardım `DataType` ve herhangi bir doğrulama sağlamayan gibi biçimlendirme öznitelikleri de bulunur.
+Dataaçıklamalarda ad alanı, bir sınıfa veya özelliğe bildirimli olarak uygulanan bir yerleşik doğrulama öznitelikleri kümesi sağlar. Dataaçıklamalarda, `DataType` biçimlendirme ile ilgili yardım ve herhangi bir doğrulama sağlamayan gibi biçimlendirme öznitelikleri de bulunur.
 
-`Movie` Yerleşik `Required`, `StringLength`, `RegularExpression`ve `Range` doğrulama özniteliklerinden yararlanmak için sınıfı güncelleştirin.
+`Movie`Yerleşik `Required` , `StringLength` , `RegularExpression` ve doğrulama özniteliklerinden yararlanmak için sınıfı güncelleştirin `Range` .
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Models/MovieDateRatingDA.cs?name=snippet1)]
 
 Doğrulama öznitelikleri, uygulanan model özellikleri üzerinde zorlamak istediğiniz davranışı belirtir:
 
-* `Required` Ve `MinimumLength` öznitelikleri bir özelliğin bir değere sahip olması gerektiğini belirtir; Ancak hiçbir şey, kullanıcının bu doğrulamayı karşılamak için boşluk girmesini engeller.
-* `RegularExpression` Öznitelik, hangi karakterlerin girişi yapabileceğini sınırlamak için kullanılır. Yukarıdaki kodda, "tarz":
+* `Required`Ve `MinimumLength` öznitelikleri bir özelliğin bir değere sahip olması gerektiğini belirtir; ancak hiçbir şey, bir kullanıcının bu doğrulamayı karşılamak için boşluk girmesini engeller.
+* `RegularExpression`Öznitelik, hangi karakterlerin girişi yapabileceğini sınırlamak için kullanılır. Yukarıdaki kodda, "tarz":
 
   * Yalnızca harfler kullanılmalıdır.
   * İlk harfin büyük harfle olması gerekir. Boşluk, sayı ve özel karakterlere izin verilmez.
 
-* `RegularExpression` "Derecelendirme":
+* `RegularExpression`"Derecelendirme":
 
   * İlk karakterin büyük harf olmasını gerektirir.
   * Sonraki boşlukların içindeki özel karakter ve sayılara izin verir. "PG-13" bir derecelendirme için geçerlidir, ancak bir "tarz" için başarısız olur.
 
 * `Range` özniteliği, bir değeri belirtilen bir aralık içinde kısıtlar.
-* `StringLength` Özniteliği, bir dize özelliğinin en büyük uzunluğunu ve isteğe bağlı olarak en düşük uzunluğunu ayarlamanıza olanak sağlar.
-* Değer türleri (örneğin, `decimal`, `int`, `float` `DateTime`), doğal olarak gereklidir ve `[Required]` özniteliğe gerek kalmaz.
+* `StringLength`Özniteliği, bir dize özelliğinin en büyük uzunluğunu ve isteğe bağlı olarak en düşük uzunluğunu ayarlamanıza olanak sağlar.
+* Değer türleri (örneğin,,, `decimal` `int` ), doğal olarak `float` `DateTime` gereklidir ve özniteliğe gerek kalmaz `[Required]` .
 
 Doğrulama kurallarının otomatik olarak uygulanmasını ASP.NET Core uygulamanızın daha sağlam olmasına yardımcı olur. Ayrıca, bir şeyi doğrulamayı unutmanızı ve veritabanına yanlışlıkla veri vermemesini de sağlar.
 
-### <a name="validation-error-ui-in-razor-pages"></a>Razor Pages 'de doğrulama hatası Kullanıcı arabirimi
+### <a name="validation-error-ui-in-razor-pages"></a>Sayfalarda doğrulama hatası Kullanıcı arabirimi Razor
 
 Uygulamayı çalıştırın ve sayfalar/Filmler ' e gidin.
 
@@ -73,11 +73,11 @@ Uygulamayı çalıştırın ve sayfalar/Filmler ' e gidin.
 
 Formun geçersiz bir değer içeren her alanda otomatik olarak bir doğrulama hata iletisi nasıl oluşturulduğuna dikkat edin. Hatalar hem istemci tarafında (JavaScript ve jQuery kullanılarak) hem de sunucu tarafında (bir Kullanıcı JavaScript devre dışı bırakıldığında) zorlanır.
 
-Önemli bir avantaj, oluşturma veya düzenleme sayfalarında **hiçbir** kod değişikliği gerekli değildir. Veri ek açıklamaları modele uygulandıktan sonra, doğrulama kullanıcı arabirimi etkinleştirilmiştir. Bu öğreticide oluşturulan Razor Pages, otomatik olarak doğrulama kurallarını ( `Movie` model sınıfının özelliklerinde doğrulama özniteliklerini kullanarak) otomatik olarak çekti. Düzenleme sayfasını kullanarak doğrulama testi, aynı doğrulama uygulanır.
+Önemli bir avantaj, oluşturma veya düzenleme sayfalarında **hiçbir** kod değişikliği gerekli değildir. Veri ek açıklamaları modele uygulandıktan sonra, doğrulama kullanıcı arabirimi etkinleştirilmiştir. RazorBu öğreticide oluşturulan sayfalar otomatik olarak doğrulama kurallarını (model sınıfının özelliklerinde doğrulama özniteliklerini kullanarak `Movie` ) alır. Düzenleme sayfasını kullanarak doğrulama testi, aynı doğrulama uygulanır.
 
 Form verileri, istemci tarafı doğrulama hatası kalmayana kadar sunucuya nakledilmez. Form verilerinin aşağıdaki yaklaşımlardan bir veya daha fazlası tarafından nakledilmediğinden emin olun:
 
-* `OnPostAsync` Yöntemine bir kesme noktası koyun. Formu gönder ( **Oluştur** veya **Kaydet**' i seçin). Kesme noktası hiçbir şekilde isabet ettirilmez.
+* Yöntemine bir kesme noktası koyun `OnPostAsync` . Formu gönder ( **Oluştur** veya **Kaydet**' i seçin). Kesme noktası hiçbir şekilde isabet ettirilmez.
 * [Fiddler aracını](https://www.telerik.com/fiddler)kullanın.
 * Ağ trafiğini izlemek için tarayıcı Geliştirici Araçları ' nı kullanın.
 
@@ -88,7 +88,7 @@ Tarayıcıda JavaScript devre dışı bırakıldığında, formun hatalarla gön
 İsteğe bağlı, test sunucusu-tarafı doğrulaması:
 
 * Tarayıcıda JavaScript 'ı devre dışı bırakın. Tarayıcının geliştirici araçlarını kullanarak JavaScript 'ı devre dışı bırakabilirsiniz. Tarayıcıda JavaScript 'ı devre dışı bırakadıysanız başka bir tarayıcı deneyin.
-* Oluşturma veya düzenleme sayfasının `OnPostAsync` yönteminde bir kesme noktası ayarlayın.
+* `OnPostAsync`Oluşturma veya düzenleme sayfasının yönteminde bir kesme noktası ayarlayın.
 * Geçersiz verilerle form gönderme.
 * Model durumunun geçersiz olduğunu doğrulayın:
 
@@ -107,40 +107,40 @@ Aşağıdaki kod, öğreticide daha önce *Create. cshtml* sayfa scafkatın bir 
 
 [Giriş etiketi Yardımcısı](xref:mvc/views/working-with-forms) , [dataaçıklamaların](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) özniteliklerini kullanır ve istemci tarafında jQuery doğrulaması için gerekli HTML özniteliklerini üretir. [Doğrulama etiketi Yardımcısı](xref:mvc/views/working-with-forms#the-validation-tag-helpers) doğrulama hatalarını görüntüler. Daha fazla bilgi için bkz. [doğrulama](xref:mvc/models/validation) .
 
-Oluşturma ve düzenleme sayfalarında hiçbir doğrulama kuralı yoktur. Doğrulama kuralları ve hata dizeleri yalnızca `Movie` sınıfında belirtilmiştir. Bu doğrulama kuralları, `Movie` modeli düzenlediğiniz Razor Pages otomatik olarak uygulanır.
+Oluşturma ve düzenleme sayfalarında hiçbir doğrulama kuralı yoktur. Doğrulama kuralları ve hata dizeleri yalnızca `Movie` sınıfında belirtilmiştir. Bu doğrulama kuralları Razor , modeli düzenlediğiniz sayfalara otomatik olarak uygulanır `Movie` .
 
 Doğrulama mantığının değişmesi gerektiğinde, yalnızca modelde yapılır. Doğrulama, uygulamanın tamamında tutarlı bir şekilde uygulanır (doğrulama mantığı tek bir yerde tanımlanır). Tek bir yerde doğrulama, kodun temiz kalmasına yardımcı olur ve bakım ve güncelleştirme işlemlerini kolaylaştırır.
 
 ## <a name="using-datatype-attributes"></a>DataType özniteliklerini kullanma
 
-`Movie` Sınıfını inceleyin. Ad `System.ComponentModel.DataAnnotations` alanı, yerleşik doğrulama öznitelikleri kümesine ek olarak biçimlendirme öznitelikleri sağlar. `DataType` özniteliği `ReleaseDate` ve `Price` özelliklerine uygulanır.
+Sınıfını inceleyin `Movie` . `System.ComponentModel.DataAnnotations`Ad alanı, yerleşik doğrulama öznitelikleri kümesine ek olarak biçimlendirme öznitelikleri sağlar. `DataType` özniteliği `ReleaseDate` ve `Price` özelliklerine uygulanır.
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie/Models/MovieDateRatingDA.cs?highlight=2,6&name=snippet2)]
 
-`DataType` Öznitelikler yalnızca görünüm altyapısının verileri biçimlendirmek için ipuçları sağlar (ve URL 'ler ve `<a href="mailto:EmailAddress.com">` e-posta için gibi `<a>` öznitelikleri sağlar). Veri biçimini `RegularExpression` doğrulamak için özniteliğini kullanın. `DataType` Özniteliği, veritabanı iç türünden daha belirgin bir veri türü belirtmek için kullanılır. `DataType`Öznitelikler, doğrulama öznitelikleri değildir. Örnek uygulamada, yalnızca tarih ve saat olmadan görüntülenir.
+`DataType`Öznitelikler yalnızca görünüm altyapısının verileri biçimlendirmek için ipuçları sağlar (ve `<a>` URL 'ler ve e-posta için gibi öznitelikleri sağlar `<a href="mailto:EmailAddress.com">` ). `RegularExpression`Veri biçimini doğrulamak için özniteliğini kullanın. `DataType`Özniteliği, veritabanı iç türünden daha belirgin bir veri türü belirtmek için kullanılır. `DataType`Öznitelikler, doğrulama öznitelikleri değildir. Örnek uygulamada, yalnızca tarih ve saat olmadan görüntülenir.
 
-`DataType` Sabit listesi, tarih, saat, PhoneNumber, para birimi, emaadresi gibi birçok veri türünü sağlar. `DataType` Özniteliği Ayrıca uygulamanın türe özgü özellikleri otomatik olarak sağlamasını da sağlayabilir. Örneğin, için `DataType.EmailAddress`bir `mailto:` bağlantı oluşturulabilir. HTML5 'i destekleyen tarayıcılarda için `DataType.Date` bir tarih seçici sağlanmış olabilir. `DataType` Öznitelikler HTML 5 TARAYıCıLARıNıN kullandığı `data-` HTML 5 (bir veri Dash) özniteliklerini yayar. `DataType` Öznitelikler herhangi bir **doğrulama sağlamaz.**
+`DataType`Sabit listesi, tarih, saat, PhoneNumber, para birimi, Emaadresi gibi birçok veri türünü sağlar. `DataType`Özniteliği Ayrıca uygulamanın türe özgü özellikleri otomatik olarak sağlamasını da sağlayabilir. Örneğin, için bir `mailto:` bağlantı oluşturulabilir `DataType.EmailAddress` . HTML5 'i destekleyen tarayıcılarda için bir tarih seçici sağlanmış olabilir `DataType.Date` . `DataType`Öznitelikler HTML `data-` 5 TARAYıCıLARıNıN kullandığı HTML 5 (bir veri Dash) özniteliklerini yayar. `DataType`Öznitelikler herhangi bir **not** doğrulama sağlamaz.
 
-`DataType.Date`görüntülenen tarihin biçimini belirtmez. Varsayılan olarak, veri alanı sunucu ' a göre varsayılan biçimlere göre görüntülenir `CultureInfo`.
+`DataType.Date`görüntülenen tarihin biçimini belirtmez. Varsayılan olarak, veri alanı sunucu ' a göre varsayılan biçimlere göre görüntülenir `CultureInfo` .
 
-Entity Framework Core `[Column(TypeName = "decimal(18, 2)")]` veri ek açıklaması gerekir, bu nedenle veritabanında para `Price` birimiyle doğru şekilde eşleşebilirler. Daha fazla bilgi için bkz. [veri türleri](/ef/core/modeling/relational/data-types).
+`[Column(TypeName = "decimal(18, 2)")]`Entity Framework Core veri ek açıklaması gerekir, bu nedenle `Price` veritabanında para birimiyle doğru şekilde eşleşebilirler. Daha fazla bilgi için bkz. [veri türleri](/ef/core/modeling/relational/data-types).
 
-`DisplayFormat` Öznitelik, tarih biçimini açıkça belirtmek için kullanılır:
+`DisplayFormat`Öznitelik, tarih biçimini açıkça belirtmek için kullanılır:
 
 ```csharp
 [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
 public DateTime ReleaseDate { get; set; }
 ```
 
-`ApplyFormatInEditMode` Ayar, değer düzenlenmek üzere görüntülendiğinde biçimlendirmenin uygulanacağını belirtir. Bazı alanlar için bu davranışı istemiyor olabilirsiniz. Örneğin, para birimi değerlerinde, büyük olasılıkla düzenleme kullanıcı arabirimindeki para birimi sembolünü istemezsiniz.
+`ApplyFormatInEditMode`Ayar, değer düzenlenmek üzere görüntülendiğinde biçimlendirmenin uygulanacağını belirtir. Bazı alanlar için bu davranışı istemiyor olabilirsiniz. Örneğin, para birimi değerlerinde, büyük olasılıkla düzenleme kullanıcı arabirimindeki para birimi sembolünü istemezsiniz.
 
-`DisplayFormat` Özniteliği kendisi tarafından kullanılabilir, ancak genellikle `DataType` özniteliği kullanmak iyi bir fikir olabilir. `DataType` Özniteliği, bir ekranda nasıl işlenirim aksine, verilerin semantiğini alır ve DisplayFormat ile elde olmadığınız avantajları sağlar:
+`DisplayFormat`Özniteliği kendisi tarafından kullanılabilir, ancak genellikle özniteliği kullanmak iyi bir fikir olabilir `DataType` . `DataType`Özniteliği, bir ekranda nasıl işlenirim aksine, verilerin semantiğini alır ve DisplayFormat ile elde olmadığınız avantajları sağlar:
 
 * Tarayıcı HTML5 özelliklerini etkinleştirebilir (örneğin, bir Takvim denetimini, yerel ayara uygun para birimi sembolünü, e-posta bağlantılarını vb. göstermek için)
 * Varsayılan olarak tarayıcı, verileri yerel ayarınızı temel alarak doğru biçimi kullanarak işleyebilir.
-* `DataType` Öznitelik, ASP.NET Core çerçevesinin verileri işlemek için doğru alan şablonunu seçmesini sağlayabilir. Kendisi `DisplayFormat` tarafından kullanılıyorsa, dize şablonunu kullanır.
+* `DataType`Öznitelik, ASP.NET Core çerçevesinin verileri işlemek için doğru alan şablonunu seçmesini sağlayabilir. `DisplayFormat`Kendisi tarafından kullanılıyorsa, dize şablonunu kullanır.
 
-Note: jQuery doğrulaması, `Range` ve `DateTime`özniteliğiyle çalışmaz. Örneğin, aşağıdaki kod, tarih belirtilen aralıkta olduğunda bile her zaman bir istemci tarafı doğrulama hatası görüntüler:
+Note: jQuery doğrulaması, `Range` ve özniteliğiyle çalışmaz `DateTime` . Örneğin, aşağıdaki kod, tarih belirtilen aralıkta olduğunda bile her zaman bir istemci tarafı doğrulama hatası görüntüler:
 
 ```csharp
 [Range(typeof(DateTime), "1/1/1966", "1/1/2020")]
@@ -152,20 +152,20 @@ Aşağıdaki kod, öznitelikleri tek bir satırda birleştirmeyi gösterir:
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/MovieDateRatingDAmult.cs?name=snippet1)]
 
-[Razor Pages kullanmaya başlayın ve EF Core](xref:data/ef-rp/intro) gelişmiş EF Core işlemlerini Razor Pages gösterir.
+[Kullanmaya Razor başlayın Sayfalar ve EF Core](xref:data/ef-rp/intro) sayfalar ile gelişmiş EF Core işlemlerini gösterir Razor .
 
 ### <a name="apply-migrations"></a>Geçişleri Uygula
 
-Sınıfa uygulanan Dataek açıklamaları şemayı değiştirir. Örneğin, `Title` alanına uygulanan veri ek açıklamaları:
+Sınıfa uygulanan Datanot açıklamaları şemayı değiştirir. Örneğin, alanına uygulanan veri ek açıklamaları `Title` :
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/MovieDateRatingDA.cs?name=snippet11)]
 
 * Karakterleri 60 olarak sınırlandırır.
-* Bir `null` değere izin vermez.
+* Bir değere izin vermez `null` .
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-`Movie` Tabloda Şu anda aşağıdaki şema vardır:
+`Movie`Tabloda Şu anda aşağıdaki şema vardır:
 
 ```sql
 CREATE TABLE [dbo].[Movie] (
@@ -189,7 +189,7 @@ Add-Migration New_DataAnnotations
 Update-Database
 ```
 
-`Update-Database``New_DataAnnotations` sınıfının `Up` yöntemlerini çalıştırır. `Up` Yöntemi inceleyin:
+`Update-Database``Up`sınıfının yöntemlerini çalıştırır `New_DataAnnotations` . Yöntemi inceleyin `Up` :
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Migrations/20190724163003_New_DataAnnotations.cs?name=snippet)]
 
@@ -217,7 +217,7 @@ SQLite için geçişler gerekli değildir.
 
 Azure 'a dağıtma hakkında bilgi için bkz. [öğretici: Azure 'DA SQL veritabanı ile ASP.NET Core uygulama oluşturma](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb).
 
-Bu Razor sayfalara giriş tamamlanırken teşekkürler. [Sayfalarla çalışmaya başlayın ve EF Core Bu öğreticiye harika bir izleme. Razor ](xref:data/ef-rp/intro)
+Bu sayfalara giriş tamamlanırken teşekkürler Razor . [Kullanmaya Razor başlayın Sayfalar ve EF Core](xref:data/ef-rp/intro) Bu öğreticiye harika bir izdir.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
