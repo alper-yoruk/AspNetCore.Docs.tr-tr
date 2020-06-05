@@ -1168,7 +1168,7 @@
       uid: performance/performance-best-practices
     - name: Bellek ve GC
       uid: performance/memory
-    - name: Yanıtları Önbelleğe Alma
+    - name: Önbelleğe Alma
       items:
         - name: Genel Bakış
           uid: performance/caching/response
