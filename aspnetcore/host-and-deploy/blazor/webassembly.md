@@ -1,12 +1,24 @@
 ---
-Başlık: ' konak ve dağıtım ASP.NET Core Blazor webassembly ' Author: guardrex açıklaması: ' Blazor ASP.NET Core, Içerik teslim AĞLARı (CDN), dosya sunucuları ve GitHub sayfalarını kullanarak bir uygulamayı nasıl barındırılacağını ve dağıtacağınızı öğrenin. '
-monikerRange: ' >= aspnetcore-3,1 ' MS. Author: Riande MS. Custom: MVC MS. Date: 05/28/2020 No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: Host-and-Deploy/blazor/webassembly
-
+title: ASP.NET Core webassembly 'ı barındırma ve dağıtma Blazor
+author: guardrex
+description: BlazorASP.NET Core, Içerik teslim ağları (CDN), dosya sunucuları ve GitHub sayfalarını kullanarak bir uygulamayı nasıl barındırılacağını ve dağıtacağınızı öğrenin.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/28/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: host-and-deploy/blazor/webassembly
+ms.openlocfilehash: 09f74edaa3d1cb0d51e0ce8d0209383885b81f5f
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84239387"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>ASP.NET Core webassembly 'ı barındırma ve dağıtma Blazor
 
@@ -166,7 +178,7 @@ IIS, *Web. config* aracılığıyla Brotli veya gzip sıkıştırılan varlıkla
 
 IIS ile dağıtım sorunlarını giderme hakkında daha fazla bilgi için bkz <xref:test/troubleshoot-azure-iis> ..
 
-### <a name="azure-storage"></a>Azure Depolama
+### <a name="azure-storage"></a>Azure Storage
 
 [Azure depolama](/azure/storage/) statik dosya barındırma, sunucusuz Blazor uygulama barındırmayı sağlar. Özel etki alanı adları, Azure Content Delivery Network (CDN) ve HTTPS desteklenir.
 

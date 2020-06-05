@@ -1,12 +1,24 @@
 ---
-Başlık: ' ASP.NET Core Blazor Genelleştirme ve yerelleştirme ' Author: guardrex açıklaması: ' Razor , bileşenlerin birden fazla kültürde veya dilde kullanıcılara nasıl erişilebilir hale yapılacağını öğrenin. '
-monikerRange: ' >= aspnetcore-3,1 ' MS. Author: Riande MS. Custom: MVC MS. Date: 06/04/2020 No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: blazor/Genelleştirme-yerelleştirme
-
+title: BlazorGenelleştirme ve yerelleştirme ASP.NET Core
+author: guardrex
+description: RazorBirden çok kültürde veya dilde kullanıcıların kullanıcılar için erişilebilir hale getirme hakkında bilgi edinin.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 06/04/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/globalization-localization
+ms.openlocfilehash: 94faaa57cc6dd3df9e4a7c3c090fe01527399658
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84419742"
 ---
 # <a name="aspnet-core-blazor-globalization-and-localization"></a>BlazorGenelleştirme ve yerelleştirme ASP.NET Core
 

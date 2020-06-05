@@ -1,12 +1,24 @@
 ---
-title: ' ASP.NET Core webassembly 'dan bir Web API 'SI çağırma Blazor ' Yazar: guardrex açıklaması: ' çıkış noktaları kullanarak bir webassembly uygulamasından bir Web API 'sini çağırmayı öğrenin Blazor (örneğin, çıkış noktaları arası kaynak PAYLAŞıMı (CORS) istekleri). '
-monikerRange: ' >= aspnetcore-3,1 ' MS. Author: Riande MS. Custom: MVC MS. Date: 05/28/2020 No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: blazor/Call-Web-API
-
+title: ASP.NET Core webassembly 'ten bir Web API 'SI çağırma Blazor
+author: guardrex
+description: BlazorÇıkış noktaları arası kaynak paylaşımı (CORS) istekleri yapma dahil olmak üzere, JSON yardımcıları kullanarak webassembly uygulamasından bir Web API 'si çağırmayı öğrenin.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/28/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/call-web-api
+ms.openlocfilehash: 4f3fd1fca075098a94756757474b2cad3cc99775
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84214772"
 ---
 # <a name="call-a-web-api-from-aspnet-core-blazor"></a>ASP.NET Core bir Web API 'SI çağırmaBlazor
 

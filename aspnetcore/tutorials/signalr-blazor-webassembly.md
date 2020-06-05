@@ -1,11 +1,11 @@
 ---
-title: SignalR Webassembly Blazor ile ASP.NET Core kullanma
+title: SignalR Blazor Webassembly ile ASP.NET Core kullanma
 author: guardrex
-description: Webassembly ile SignalR Blazor ASP.NET Core kullanan bir sohbet uygulaması oluşturun.
+description: Webassembly ile ASP.NET Core kullanan bir sohbet uygulaması oluşturun SignalR Blazor .
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/30/2020
+ms.date: 05/19/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,37 +13,36 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: 1579b92dbc9db08bfdc5572e5d4245bd18d50590
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: d3ce11606b4193d5c2938b5996d8dcd1cb99a731
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773794"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84451894"
 ---
-# <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>Blazor WebAssembly ile ASP.NET Core SignalR kullanma
+# <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>SignalR Blazor Webassembly ile ASP.NET Core kullanma
 
 [Daniel Roth](https://github.com/danroth27) ve [Luke Latham](https://github.com/guardrex) tarafından
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
-Bu öğreticide, Blazor WebAssembly ile SignalR kullanarak gerçek zamanlı bir uygulama oluşturmanın temelleri öğretilir. Aşağıdakileri nasıl yapacağınızı öğrenirsiniz:
+Bu öğreticide, SignalR webassembly ile kullanarak gerçek zamanlı bir uygulama oluşturmanın temelleri öğretilir Blazor . Aşağıdakileri nasıl yapacağınızı öğrenirsiniz:
 
 > [!div class="checklist"]
-> * Blazor WebAssembly barındırılan uygulama projesi oluşturma
-> * SignalR istemci kitaplığını ekleme
-> * SignalR hub 'ı ekleme
-> * SignalR hub 'ı için SignalR Hizmetleri ve uç nokta ekleme
-> * Sohbet için Razor bileşeni kodu ekleme
+> * BlazorWebassembly barındırılan uygulama projesi oluşturma
+> * SignalRİstemci kitaplığını ekleme
+> * Hub ekleme SignalR
+> * SignalRHub için hizmetler ve uç nokta ekleme SignalR
+> * RazorSohbet için bileşen kodu ekle
 
 Bu öğreticinin sonunda, çalışan bir sohbet uygulamanız olacaktır.
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/signalr-blazor-webassembly/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-[!INCLUDE[](~/includes/net-core-prereqs-vs-3.1.md)]
+* **ASP.net ve Web geliştirme** iş yüküyle [Visual Studio 2019 16,6 veya üzeri](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
+* [!INCLUDE [.NET Core 3.1 SDK](~/includes/3.1-SDK.md)]
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -51,7 +50,8 @@ Bu öğreticinin sonunda, çalışan bir sohbet uygulamanız olacaktır.
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-[!INCLUDE[](~/includes/net-core-prereqs-mac-3.1.md)]
+* [Mac için Visual Studio Sürüm 8,6 veya üzeri](https://visualstudio.microsoft.com/vs/mac/)
+* [!INCLUDE [.NET Core 3.1 SDK](~/includes/3.1-SDK.md)]
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
@@ -59,32 +59,29 @@ Bu öğreticinin sonunda, çalışan bir sohbet uygulamanız olacaktır.
 
 ---
 
-## <a name="create-a-hosted-blazor-webassembly-app-project"></a>Barındırılan Blazor WebAssembly uygulama projesi oluşturma
-
-Visual Studio sürüm 16,6 Preview 2 veya sonraki bir sürümü kullanmadığınız durumlarda, [Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) şablonunu ' nı yükledikten sonra. [Microsoft. AspNetCore. components. WebAssembly. Templates](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Templates/) paketinin önizleme sürümü vardır, ancak Blazor WebAssembly önizlemededir. Bir komut kabuğunda, aşağıdaki komutu yürütün:
-
-```dotnetcli
-dotnet new -i Microsoft.AspNetCore.Components.WebAssembly.Templates::3.2.0-rc1.20223.4
-```
+## <a name="create-a-hosted-blazor-webassembly-app-project"></a>Barındırılan Blazor webassembly uygulama projesi oluşturma
 
 Araç seçiminiz için yönergeleri izleyin:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
+> [!NOTE]
+> Visual Studio 16,6 veya üzeri ve .NET Core SDK 3.1.300 veya üzeri gereklidir.
+
 1. Yeni bir proje oluşturma.
 
-1. **Blazor uygulamasını** seçin ve **İleri ' yi**seçin.
+1. ** Blazor Uygulama** ' yı seçin ve **İleri ' yi**seçin.
 
-1. **Proje adı** alanına "BlazorSignalRApp" yazın. **Konum** girişinin doğru olduğunu onaylayın veya proje için bir konum belirtin. **Oluştur**’u seçin.
+1. **Proje adı** alanına "BlazorSignalRApp" yazın. **Konum** girişinin doğru olduğunu onaylayın veya proje için bir konum belirtin. **Oluştur**'u seçin.
 
-1. **Blazor WebAssembly uygulama** şablonunu seçin.
+1. ** Blazor Webassembly uygulama** şablonunu seçin.
 
 1. **Gelişmiş**' in altında, **ASP.NET Core barındırılan** onay kutusunu seçin.
 
-1. **Oluştur**’u seçin.
+1. **Oluştur**'u seçin.
 
 > [!NOTE]
-> Visual Studio 'nun yeni bir sürümünü yükselttiyseniz veya yüklediyseniz ve Blazor WebAssembly şablonu VS Kullanıcı arabiriminde görünmüyorsa, daha önce gösterilen `dotnet new` komutu kullanarak şablonu yeniden yükleyin.
+> Visual Studio 'nun yeni bir sürümünü yükselttiyseniz veya yüklediyseniz ve Blazor webassembly şablonu vs Kullanıcı arabiriminde görünmüyorsa, `dotnet new` daha önce gösterilen komutu kullanarak şablonu yeniden yükleyin.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -100,13 +97,28 @@ Araç seçiminiz için yönergeleri izleyin:
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-1. Bir komut kabuğunda, aşağıdaki komutu yürütün:
+1. En son [Mac için Visual Studio](https://visualstudio.microsoft.com/vs/mac/) sürümünü yükleyip aşağıdaki adımları gerçekleştirin:
 
-   ```dotnetcli
-   dotnet new blazorwasm --hosted --output BlazorSignalRApp
-   ```
+1. **Dosya**  >  **yeni çözüm** ' ı seçin veya **Başlangıç penceresinden** **Yeni** bir proje oluşturun.
 
-1. Mac için Visual Studio, proje klasörüne gidip projenin çözüm dosyasını (*. sln*) açarak projeyi açın.
+1. Yan çubukta **Web ve konsol**  >  **uygulaması**' nı seçin.
+
+1. ** Blazor Webassembly uygulama** şablonunu seçin. **İleri**’yi seçin.
+
+   Aşağıdaki konfigürasyonları onaylayın:
+
+   * **Hedef Framework** , **.NET Core 3,1**olarak ayarlandı.
+   * **Kimlik doğrulaması** **yok**olarak ayarlandı.
+
+   **Barındırılan ASP.NET Core** onay kutusunu seçin.
+
+   **İleri**’yi seçin.
+
+1. **Proje adı** alanında, uygulamayı adlandırın `BlazorSignalRApp` . **Oluştur**'u seçin.
+
+   Geliştirme sertifikasına güvenmek için bir istem görünürse, sertifikaya güvenin ve devam edin. Sertifikaya güvenmek için Kullanıcı ve anahtarlık parolaların olması gerekir.
+
+1. Proje klasörüne gidip projenin çözüm dosyasını (*. sln*) açarak projeyi açın.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
@@ -118,7 +130,7 @@ dotnet new blazorwasm --hosted --output BlazorSignalRApp
 
 ---
 
-## <a name="add-the-signalr-client-library"></a>SignalR istemci kitaplığını ekleme
+## <a name="add-the-signalr-client-library"></a>SignalRİstemci kitaplığını ekleme
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio/)
 
@@ -126,9 +138,9 @@ dotnet new blazorwasm --hosted --output BlazorSignalRApp
 
 1. **NuGet Paketlerini Yönet** iletişim kutusunda, **paket kaynağının** *NuGet.org*olarak ayarlandığını doğrulayın.
 
-1. Araştır **seçiliyken,** arama kutusuna "Microsoft. aspnetcore. SignalR. Client" yazın.
+1. Seçili **Araştır** seçiliyken "Microsoft. aspnetcore.. yazın. SignalR İstemci "ifadesini arayın.
 
-1. Arama sonuçlarında, `Microsoft.AspNetCore.SignalR.Client` paketi seçin ve ardından **Install**' ı seçin.
+1. Arama sonuçlarında [Microsoft. AspNetCore.. öğesini seçin. SignalR İstemci](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) paketini ve **yüklemeyi**seçin.
 
 1. **Değişiklikleri Önizle** iletişim kutusu görüntülenirse **Tamam**' ı seçin.
 
@@ -136,7 +148,7 @@ dotnet new blazorwasm --hosted --output BlazorSignalRApp
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code/)
 
-**Tümleşik terminalde** (araç çubuğundan**Görünüm** > **terminali** ) aşağıdaki komutları yürütün:
+**Tümleşik terminalde** (araç çubuğundan**Görünüm**  >  **terminali** ) aşağıdaki komutları yürütün:
 
 ```dotnetcli
 dotnet add Client package Microsoft.AspNetCore.SignalR.Client
@@ -148,9 +160,9 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. **NuGet Paketlerini Yönet** iletişim kutusunda, kaynak açılan kutusunun *NuGet.org*olarak ayarlandığını doğrulayın.
 
-1. Araştır **seçiliyken,** arama kutusuna "Microsoft. aspnetcore. SignalR. Client" yazın.
+1. Seçili **Araştır** seçiliyken "Microsoft. aspnetcore.. yazın. SignalR İstemci "ifadesini arayın.
 
-1. Arama sonuçlarında, `Microsoft.AspNetCore.SignalR.Client` paketin yanındaki onay kutusunu Işaretleyin ve **paket Ekle**' yi seçin.
+1. Arama sonuçlarında, [Microsoft. AspNetCore ' un yanındaki onay kutusunu SignalR işaretleyin. İstemci](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) paketini ve **paket Ekle**' yi seçin.
 
 1. **Lisans kabulü** iletişim kutusu görüntülenirse, lisans şartlarını kabul ediyorsanız **kabul et** ' i seçin.
 
@@ -165,31 +177,34 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 ---
 
-## <a name="add-a-signalr-hub"></a>SignalR hub 'ı ekleme
+## <a name="add-a-signalr-hub"></a>Hub ekleme SignalR
 
 **BlazorSignalRApp. Server** projesinde, bir *hub* (plural) klasörü oluşturun ve aşağıdaki `ChatHub` sınıfı (*hub/ChatHub. cs*) ekleyin:
 
 [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Hubs/ChatHub.cs)]
 
-## <a name="add-services-and-an-endpoint-for-the-signalr-hub"></a>SignalR hub 'ı için hizmetler ve uç nokta ekleme
+## <a name="add-services-and-an-endpoint-for-the-signalr-hub"></a>Hub için hizmetler ve uç nokta ekleme SignalR
 
 1. **BlazorSignalRApp. Server** projesinde, *Startup.cs* dosyasını açın.
 
-1. `ChatHub` Sınıfın ad alanını dosyanın en üstüne ekleyin:
+1. Sınıfın ad alanını `ChatHub` dosyanın en üstüne ekleyin:
 
    ```csharp
    using BlazorSignalRApp.Server.Hubs;
    ```
 
-1. SignalR ve yanıt sıkıştırma ara yazılım hizmetlerini şu `Startup.ConfigureServices`şekilde ekleyin:
+1. SignalRSıkıştırma ara yazılım hizmetlerini ekleme ve yanıtlama `Startup.ConfigureServices` :
 
    [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_ConfigureServices&highlight=3,5-9)]
 
-1. Denetleyiciler `Startup.Configure` ve istemci tarafı geri dönüş uç noktaları arasında, Hub için bir uç nokta ekleyin:
+1. `Startup.Configure` içinde:
 
-   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_UseEndpoints&highlight=4)]
+   * İşlem ardışık düzeninin yapılandırmasının en üstünde yanıt sıkıştırma ara yazılımı ' nı kullanın.
+   * Denetleyiciler ve istemci tarafı geri dönüş uç noktaları arasında merkez için bir uç nokta ekleyin.
 
-## <a name="add-razor-component-code-for-chat"></a>Sohbet için Razor bileşeni kodu ekleme
+   [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_Configure&highlight=3,25)]
+
+## <a name="add-razor-component-code-for-chat"></a>RazorSohbet için bileşen kodu ekle
 
 1. **BlazorSignalRApp. Client** projesinde *Pages/Index. Razor* dosyasını açın.
 
@@ -203,45 +218,45 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-1. **Çözüm Gezgini**, **BlazorSignalRApp. Server** projesini seçin. Uygulamayı hata ayıklama olmadan çalıştırmak için <kbd>F5</kbd> tuşuna basın veya uygulamayı hata ayıklamadan çalıştırmak için <kbd>CTRL</kbd>+<kbd>F5</kbd> tuşuna basın.
+1. **Çözüm Gezgini**, **BlazorSignalRApp. Server** projesini seçin. Uygulamayı hata ayıklama olmadan çalıştırmak için <kbd>F5</kbd> tuşuna basın veya uygulamayı hata ayıklamadan çalıştırmak için <kbd>CTRL</kbd> + <kbd>F5</kbd> tuşuna basın.
 
 1. Adres çubuğundan URL 'yi kopyalayın, başka bir tarayıcı örneği veya sekme açın ve adres çubuğuna URL 'YI yapıştırın.
 
 1. Tarayıcı ' yı seçin, bir ad ve ileti girin ve **Gönder** düğmesini seçin. Ad ve ileti her iki sayfada da anında görüntülenir:
 
-   ![SignalR Blazor WebAssembly örnek uygulaması, değiştirilen iletileri gösteren iki tarayıcı penceresinde açılır.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   ![SignalRBlazorWebassembly örnek uygulaması, değiştirilen iletileri gösteren iki tarayıcı penceresinde açılır.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
-   Alıntılar: *yıldız Trek VI: bulunan ülke* &copy;1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
+   Alıntılar: *yıldız Trek VI: bulunan ülke* &copy; 1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-1. VS Code, sunucu uygulaması (*. vscode/Launch. JSON*) için bir başlatma profili oluşturmak üzere teklif edildiğinde, `program` uygulamanın derlemesini (`{APPLICATION NAME}.Server.dll`) göstermek için aşağıdakine benzer şekilde görünür:
+1. VS Code, sunucu uygulaması (*. vscode/Launch. JSON*) için bir başlatma profili oluşturmak üzere teklif edildiğinde, `program` uygulamanın derlemesini () göstermek için aşağıdakine benzer şekilde görünür `{APPLICATION NAME}.Server.dll` :
 
    ```json
    "program": "${workspaceFolder}/Server/bin/Debug/netcoreapp3.1/{APPLICATION NAME}.Server.dll"
    ```
 
-1. Uygulamayı hata ayıklama olmadan çalıştırmak için <kbd>F5</kbd> tuşuna basın veya uygulamayı hata ayıklamadan çalıştırmak için <kbd>CTRL</kbd>+<kbd>F5</kbd> tuşuna basın.
+1. Uygulamayı hata ayıklama olmadan çalıştırmak için <kbd>F5</kbd> tuşuna basın veya uygulamayı hata ayıklamadan çalıştırmak için <kbd>CTRL</kbd> + <kbd>F5</kbd> tuşuna basın.
 
 1. Adres çubuğundan URL 'yi kopyalayın, başka bir tarayıcı örneği veya sekme açın ve adres çubuğuna URL 'YI yapıştırın.
 
 1. Tarayıcı ' yı seçin, bir ad ve ileti girin ve **Gönder** düğmesini seçin. Ad ve ileti her iki sayfada da anında görüntülenir:
 
-   ![SignalR Blazor WebAssembly örnek uygulaması, değiştirilen iletileri gösteren iki tarayıcı penceresinde açılır.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   ![SignalRBlazorWebassembly örnek uygulaması, değiştirilen iletileri gösteren iki tarayıcı penceresinde açılır.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
-   Alıntılar: *yıldız Trek VI: bulunan ülke* &copy;1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
+   Alıntılar: *yıldız Trek VI: bulunan ülke* &copy; 1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-1. **Çözüm** kenar çubuğunda **BlazorSignalRApp. Server** projesini seçin. Uygulamayı hata ayıklamadan çalıştırmak için hata ayıklama veya <kbd>⌥</kbd>+<kbd>⌘</kbd>+<kbd>↩</kbd> ile çalıştırmak için <kbd>⌘</kbd>+<kbd>↩</kbd>* * tuşlarına basın.
+1. **Çözüm** kenar çubuğunda **BlazorSignalRApp. Server** projesini seçin. Uygulamayı <kbd>⌘</kbd>hata + <kbd>↩</kbd> <kbd>⌥</kbd> + <kbd>⌘</kbd> + ayıklamadan çalıştırmak için hata ayıklama veya ⌥ ⌘<kbd>↩</kbd> ile uygulamayı çalıştırmak için ⌘ ↩ tuşuna basın.
 
 1. Adres çubuğundan URL 'yi kopyalayın, başka bir tarayıcı örneği veya sekme açın ve adres çubuğuna URL 'YI yapıştırın.
 
 1. Tarayıcı ' yı seçin, bir ad ve ileti girin ve **Gönder** düğmesini seçin. Ad ve ileti her iki sayfada da anında görüntülenir:
 
-   ![SignalR Blazor WebAssembly örnek uygulaması, değiştirilen iletileri gösteren iki tarayıcı penceresinde açılır.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   ![SignalRBlazorWebassembly örnek uygulaması, değiştirilen iletileri gösteren iki tarayıcı penceresinde açılır.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
-   Alıntılar: *yıldız Trek VI: bulunan ülke* &copy;1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
+   Alıntılar: *yıldız Trek VI: bulunan ülke* &copy; 1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
@@ -256,9 +271,9 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. Tarayıcı ' yı seçin, bir ad ve ileti girin ve **Gönder** düğmesini seçin. Ad ve ileti her iki sayfada da anında görüntülenir:
 
-   ![SignalR Blazor WebAssembly örnek uygulaması, değiştirilen iletileri gösteren iki tarayıcı penceresinde açılır.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   ![SignalRBlazorWebassembly örnek uygulaması, değiştirilen iletileri gösteren iki tarayıcı penceresinde açılır.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
-   Alıntılar: *yıldız Trek VI: bulunan ülke* &copy;1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
+   Alıntılar: *yıldız Trek VI: bulunan ülke* &copy; 1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
 ---
 
@@ -267,13 +282,13 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 Bu öğreticide, şunların nasıl yapıldığını öğrendiniz:
 
 > [!div class="checklist"]
-> * Blazor Webassembly barındırılan uygulama projesi oluşturma
-> * SignalR İstemci kitaplığını ekleme
-> * SignalR Hub ekleme
-> * Hub için hizmetler ve uç nokta ekleme SignalR SignalR
-> * Sohbet Razor için bileşen kodu ekle
+> * BlazorWebassembly barındırılan uygulama projesi oluşturma
+> * SignalRİstemci kitaplığını ekleme
+> * Hub ekleme SignalR
+> * SignalRHub için hizmetler ve uç nokta ekleme SignalR
+> * RazorSohbet için bileşen kodu ekle
 
-Uygulama oluşturma Blazor hakkında daha fazla bilgi edinmek için Blazor belgelere bakın:
+Uygulama oluşturma hakkında daha fazla bilgi edinmek için Blazor Blazor belgelere bakın:
 
 > [!div class="nextstepaction"]
 > <xref:blazor/index>

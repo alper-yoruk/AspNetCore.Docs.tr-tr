@@ -1,12 +1,24 @@
 ---
-Başlık: ' ASP.NET Core Server 'ı barındırmak ve dağıt Blazor ' Author: guardrex açıklaması: ' Blazor ASP.NET Core kullanarak bir sunucu uygulamasını nasıl barındırılacağını ve dağıtacağınızı öğrenin.
-monikerRange: ' >= aspnetcore-3,1 ' MS. Author: Riande MS. Custom: MVC MS. Date: 06/04/2020 No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: konak-ve-Deploy/blazor/Server
-
+title: ASP.NET Core sunucusu barındırma ve dağıtma Blazor
+author: guardrex
+description: ASP.NET Core kullanarak sunucu uygulamasını nasıl barındırılacağını ve dağıtacağınızı öğrenin Blazor .
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 06/04/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: host-and-deploy/blazor/server
+ms.openlocfilehash: 8c06d3a4d0d75a3e2fd9f699af38a23833fa8bce
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84419950"
 ---
 # <a name="host-and-deploy-blazor-server"></a>Sunucu barındırma ve dağıtma Blazor
 

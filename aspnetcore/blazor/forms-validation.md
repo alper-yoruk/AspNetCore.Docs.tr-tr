@@ -1,12 +1,24 @@
 ---
-Başlık: ' ASP.NET Core Blazor form ve doğrulama ' Yazar: Açıklama: ' içinde formları ve alan doğrulama senaryolarını kullanmayı öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
+title: BlazorForms ve doğrulama ASP.NET Core
+author: guardrex
+description: İçindeki form ve alan doğrulama senaryolarını nasıl kullanacağınızı öğrenin Blazor .
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/27/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/forms-validation
+ms.openlocfilehash: 557ccf45fb88a743158d18046789ed6776efb28c
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84145362"
 ---
 # <a name="aspnet-core-blazor-forms-and-validation"></a>BlazorForms ve doğrulama ASP.NET Core
 
@@ -62,114 +74,13 @@ Yukarıdaki örnekte:
 Kullanıcı girişini almak ve doğrulamak için yerleşik bir giriş bileşenleri kümesi vardır. Girişler değiştirildiklerinde ve bir form gönderildiğinde onaylanır. Kullanılabilir giriş bileşenleri aşağıdaki tabloda gösterilmiştir.
 
 | Giriş bileşeni | Olarak işlendi&hellip; |
-| ---
-Başlık: ' ASP.NET Core Blazor form ve doğrulama ' Yazar: Açıklama: ' içinde formları ve alan doğrulama senaryolarını kullanmayı öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor form ve doğrulama ' Yazar: Açıklama: ' içinde formları ve alan doğrulama senaryolarını kullanmayı öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor form ve doğrulama ' Yazar: Açıklama: ' içinde formları ve alan doğrulama senaryolarını kullanmayı öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor form ve doğrulama ' Yazar: Açıklama: ' içinde formları ve alan doğrulama senaryolarını kullanmayı öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor form ve doğrulama ' Yazar: Açıklama: ' içinde formları ve alan doğrulama senaryolarını kullanmayı öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--------- | ---title: ' ASP.NET Core Blazor form ve doğrulama ' Yazar: Açıklama: ' içinde formları ve alan doğrulama senaryolarını kullanmayı öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor form ve doğrulama ' Yazar: Açıklama: ' içinde formları ve alan doğrulama senaryolarını kullanmayı öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor form ve doğrulama ' Yazar: Açıklama: ' içinde formları ve alan doğrulama senaryolarını kullanmayı öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor form ve doğrulama ' Yazar: Açıklama: ' içinde formları ve alan doğrulama senaryolarını kullanmayı öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor form ve doğrulama ' Yazar: Açıklama: ' içinde formları ve alan doğrulama senaryolarını kullanmayı öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor form ve doğrulama ' Yazar: Açıklama: ' içinde formları ve alan doğrulama senaryolarını kullanmayı öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor form ve doğrulama ' Yazar: Açıklama: ' içinde formları ve alan doğrulama senaryolarını kullanmayı öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
----------- | | <xref:Microsoft.AspNetCore.Components.Forms.InputText> | `<input>` | | <xref:Microsoft.AspNetCore.Components.Forms.InputTextArea> | `<textarea>` | | <xref:Microsoft.AspNetCore.Components.Forms.InputSelect%601> | `<select>` | | <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> | `<input type="number">` | | <xref:Microsoft.AspNetCore.Components.Forms.InputCheckbox> | `<input type="checkbox">` | | <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> | `<input type="date">` |
+| --------------- | ------------------- |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputText> | `<input>` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputTextArea> | `<textarea>` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputSelect%601> | `<select>` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> | `<input type="number">` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputCheckbox> | `<input type="checkbox">` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> | `<input type="date">` |
 
 Dahil olmak üzere tüm giriş bileşenleri, <xref:Microsoft.AspNetCore.Components.Forms.EditForm> rastgele öznitelikleri destekler. Bir bileşen parametresiyle eşleşmeyen herhangi bir öznitelik işlenmiş HTML öğesine eklenir.
 

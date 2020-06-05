@@ -1,12 +1,24 @@
 ---
-Başlık: ' ASP.NET Core Blazor weelsembly ek güvenlik senaryoları ' Author: guardrex açıklaması: ' Blazor ek güvenlik senaryoları için webassembly 'ı nasıl yapılandıracağınızı öğrenin. '
-monikerRange: ' >= aspnetcore-3,1 ' MS. Author: Riande MS. Custom: MVC MS. Date: 06/01/2020 No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: Security/blazor/webassembly/ek senaryolar
-
+title: ASP.NET Core Blazor weelsembly ek güvenlik senaryoları
+author: guardrex
+description: BlazorWebassembly 'ın ek güvenlik senaryoları için nasıl yapılandırılacağını öğrenin.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 06/01/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/blazor/webassembly/additional-scenarios
+ms.openlocfilehash: de752eb180767bbb269107ebc478a4422448f968
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84272040"
 ---
 # <a name="aspnet-core-blazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor weelsembly ek güvenlik senaryoları
 

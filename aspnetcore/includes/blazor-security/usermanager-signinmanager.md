@@ -2,17 +2,21 @@
 
 Bir sunucu uygulaması gerektirdiğinde Kullanıcı tanımlayıcısı talep türünü ayarlayın:
 
-* <xref:Microsoft.AspNetCore.Identity.UserManager%601>ya <xref:Microsoft.AspNetCore.Identity.SignInManager%601> da bir API uç noktasında.
+* <xref:Microsoft.AspNetCore.Identity.UserManager%601>ya da <xref:Microsoft.AspNetCore.Identity.SignInManager%601> BIR API uç noktasında.
 * <xref:Microsoft.AspNetCore.Identity.IdentityUser>kullanıcının adı, e-posta adresi veya kilitleme bitiş saati gibi ayrıntılar.
 
 `Startup.ConfigureServices` içinde:
 
 ```csharp
+using System.Security.Claims;
+
+...
+
 services.Configure<IdentityOptions>(options => 
     options.ClaimsIdentity.UserIdClaimType = ClaimTypes.NameIdentifier);
 ```
 
-Aşağıdaki `WeatherForecastController` , `Get` yöntemi çağrıldığında <xref:Microsoft.AspNetCore.Identity.IdentityUser%601.UserName> günlüğe kaydedilir:
+Aşağıdaki, `WeatherForecastController` <xref:Microsoft.AspNetCore.Identity.IdentityUser%601.UserName> yöntemi çağrıldığında günlüğe kaydedilir `Get` :
 
 ```csharp
 using System;
@@ -33,7 +37,7 @@ namespace {APP NAMESPACE}.Server.Controllers
     [Route("[controller]")]
     public class WeatherForecastController : ControllerBase
     {
-        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<ApplicationUser> userManager;
 
         private static readonly string[] Summaries = new[]
         {
@@ -47,7 +51,7 @@ namespace {APP NAMESPACE}.Server.Controllers
             UserManager<ApplicationUser> userManager)
         {
             this.logger = logger;
-            _userManager = userManager;
+            this.userManager = userManager;
         }
 
         [HttpGet]
@@ -55,7 +59,7 @@ namespace {APP NAMESPACE}.Server.Controllers
         {
             var rng = new Random();
 
-            var user = await _userManager.GetUserAsync(User);
+            var user = await userManager.GetUserAsync(User);
 
             if (user != null)
             {

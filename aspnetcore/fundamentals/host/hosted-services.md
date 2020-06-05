@@ -1,12 +1,24 @@
 ---
-Başlık: ASP.NET Core Yazar: Rick-Anderson açıklaması: barındırılan hizmetler ile arka plan görevleri, ASP.NET Core barındırılan hizmetlerle arka plan görevlerinin nasıl uygulanacağını öğrenin.
-monikerRange: ' >= aspnetcore-2,1 ' MS. Author: Riande MS. Custom: MVC MS. Date: 02/10/2020 No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: temel bilgiler/konak/barındırılan-hizmetler
-
+title: ASP.NET Core içinde barındırılan hizmetlerle arka plan görevleri
+author: rick-anderson
+description: ASP.NET Core içinde barındırılan hizmetlerle arka plan görevlerinin nasıl uygulanacağını öğrenin.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 02/10/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: fundamentals/host/hosted-services
+ms.openlocfilehash: 47d0bdda7249232af22ec1c97e7baa710310caed
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84253688"
 ---
 # <a name="background-tasks-with-hosted-services-in-aspnet-core"></a>ASP.NET Core içinde barındırılan hizmetlerle arka plan görevleri
 

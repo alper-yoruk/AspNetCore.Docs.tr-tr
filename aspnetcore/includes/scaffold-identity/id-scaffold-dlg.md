@@ -2,22 +2,25 @@ Identity scaffolder öğesini çalıştırın:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **Çözüm Gezgini**, projeye sağ tıklayıp **Yeni > Iskli öğe** **ekleyin** >.
-* **Yapı Iskelesi Ekle** iletişim kutusunun sol bölmesinde **kimlik** > **Ekle**' yi seçin.
+* **Çözüm Gezgini**, projeye sağ tıklayıp **Add**  >  **Yeni iskli öğe**Ekle >.
+* **Yeni yapı iskelesi öğesi Ekle** iletişim kutusunun sol bölmesinde, **kimlik**  >  **Ekle**' yi seçin.
 * **Kimlik Ekle** iletişim kutusunda istediğiniz seçenekleri belirleyin.
-  * Var olan düzen sayfanızı seçin veya Düzen dosyanızın üzerine yanlış biçimlendirme uygulanır. Örneğin, MVC projeleri için Razor Pages `~/Views/Shared/_Layout.cshtml` `~/Pages/Shared/_Layout.cshtml`
-  * Yeni bir **veri bağlamı sınıfı**oluşturmak için **+** düğmesini seçin.
-* **Ekle**' yi seçin.
+  * Var olan düzen sayfanızı seçin veya Düzen dosyanızın üzerine yanlış biçimlendirme uygulanır:
+    * `~/Pages/Shared/_Layout.cshtml`Razor Pages için
+    * `~/Views/Shared/_Layout.cshtml`MVC projeleri için
+    * Blazor Server şablonundan oluşturulan Blazor Server uygulamaları, `blazorserver` Varsayılan olarak Razor Pages veya MVC için yapılandırılmamıştır. Düzen sayfası girişini boş bırakın.
+  * **+** Yeni bir **veri bağlamı sınıfı**oluşturmak için düğmeyi seçin. Varsayılan değeri kabul edin veya bir sınıf belirtin (örneğin, `MyApplication.Data.ApplicationDbContext` ).
+* **Add (Ekle)** seçeneğini belirleyin.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-ASP.NET Core iskele kurucu daha önce yüklemediyseniz şimdi yükleyin:
+ASP.NET Core scaffolder ' ı daha önce yüklemediyseniz, şimdi yükleyebilirsiniz:
 
 ```dotnetcli
 dotnet tool install -g dotnet-aspnet-codegenerator
 ```
 
-Gerekli NuGet paket başvurularını proje (\*. csproj) dosyasına ekleyin. Proje dizininde aşağıdaki komutu çalıştırın:
+Proje dosyasına (*. csproj*) gerekli NuGet paket başvurularını ekleyin. Proje dizininde aşağıdaki komutları çalıştırın:
 
 ```dotnetcli
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
@@ -28,7 +31,7 @@ dotnet add package Microsoft.EntityFrameworkCore.SqlServer
 dotnet add package Microsoft.EntityFrameworkCore.Tools
 ```
 
-Kimlik destek seçeneklerini listelemek için aşağıdaki komutu çalıştırın:
+Identity desteği seçeneklerini listelemek için aşağıdaki komutu çalıştırın:
 
 ```dotnetcli
 dotnet aspnet-codegenerator identity -h

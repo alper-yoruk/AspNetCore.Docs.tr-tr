@@ -1,12 +1,22 @@
 ---
-Başlık: taşınabilir nesne yerelleştirmesini yapılandırma ASP.NET Core Yazar: sebastıenros açıklaması: Bu makale, taşınabilir nesne dosyalarını tanıtır ve bunları Orchard Core çerçevesiyle bir ASP.NET Core uygulamasında kullanmaya yönelik adımları özetler.
-MS. Author: scadzar MS. Date: 09/26/2017 No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: temel bilgiler/taşınabilir-nesne-yerelleştirme
-
+title: ASP.NET Core taşınabilir nesne yerelleştirmesini yapılandırma
+author: sebastienros
+description: Bu makale, taşınabilir nesne dosyalarını tanıtır ve bunları Orchard Core çerçevesiyle ASP.NET Core bir uygulamada kullanmaya yönelik adımları özetler.
+ms.author: scaddie
+ms.date: 09/26/2017
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: fundamentals/portable-object-localization
+ms.openlocfilehash: 57498cc2a773e5147b6eda653cc89d303f238b78
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84355090"
 ---
 # <a name="configure-portable-object-localization-in-aspnet-core"></a>ASP.NET Core taşınabilir nesne yerelleştirmesini yapılandırma
 

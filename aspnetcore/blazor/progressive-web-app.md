@@ -1,11 +1,11 @@
 ---
-title: ASP.NET Core Blazor weelsembly Ile aşamalı Web uygulamaları oluşturun
+title: ASP.NET Core weelsembly ile aşamalı Web uygulamaları oluşturun Blazor
 author: guardrex
-description: Masaüstü uygulaması gibi davranması Blazoriçin modern tarayıcı özelliklerini kullanan bir tabanlı aşamalı Web UYGULAMASı (PWA) oluşturmayı öğrenin.
+description: BlazorMasaüstü uygulaması gibi davranması için modern tarayıcı özelliklerini kullanan bir tabanlı aşamalı Web uygulaması (PWA) oluşturmayı öğrenin.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/23/2020
+ms.date: 05/19/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,22 +13,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: cf31c91ddc073498d882b111b597c546e788cc98
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 274516014c027972166402abc70d22fa801898de
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82771565"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84451855"
 ---
-# <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>ASP.NET Core Blazor WebAssembly ile aşamalı Web uygulamaları oluşturun
+# <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>ASP.NET Core weelsembly ile aşamalı Web uygulamaları oluşturun Blazor
 
 [Steve Sanderson](https://github.com/SteveSandersonMS) tarafından
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
-[!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
-
-Aşamalı bir Web uygulaması (PWA), masaüstü uygulaması gibi davranması için modern tarayıcı API 'Leri ve özellikleri kullanan tek sayfalı bir uygulamadır (SPA). Blazor WebAssembly, standartlara dayalı bir istemci tarafı Web uygulaması platformudur, bu nedenle aşağıdaki yetenekler için gereken PWA API 'Leri de dahil olmak üzere herhangi bir tarayıcı API 'sini kullanabilir:
+Aşamalı bir Web uygulaması (PWA), masaüstü uygulaması gibi davranması için modern tarayıcı API 'Leri ve özellikleri kullanan tek sayfalı bir uygulamadır (SPA). BlazorWebAssembly, standartlara dayalı bir istemci tarafı Web uygulaması platformudur, bu nedenle aşağıdaki yetenekler için gereken PWA API 'Leri de dahil olmak üzere herhangi bir tarayıcı API 'sini kullanabilir:
 
 * Ağ hızından bağımsız olarak çevrimdışı çalışma ve anında yükleme.
 * Yalnızca bir tarayıcı penceresi değil kendi uygulama penceresinde çalışıyor.
@@ -45,7 +41,7 @@ Aşamalı bir Web uygulaması (PWA), masaüstü uygulaması gibi davranması iç
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Yeni bir **proje oluştur** iletişim kutusunda yeni bir **Blazor Webassembly uygulaması** oluştururken **ilerleme durumu Web uygulaması** onay kutusunu seçin:
+Yeni bir **proje oluştur** iletişim kutusunda yeni bir ** Blazor Webassembly uygulaması** oluştururken, **aşamalı Web uygulaması** onay kutusunu seçin:
 
 ![Visual Studio yeni proje iletişim kutusunda ' aşamalı Web uygulaması ' onay kutusu seçilidir.](progressive-web-app/_static/image1.png)
 
@@ -57,7 +53,7 @@ Yeni bir **proje oluştur** iletişim kutusunda yeni bir **Blazor Webassembly uy
 
 # <a name="visual-studio-code--net-core-cli"></a>[Visual Studio Code/.NET Core CLI](#tab/visual-studio-code+netcore-cli)
 
-`--pwa` Anahtarla bir komut KABUĞUNDA bir PWA projesi oluşturun:
+Anahtarla bir komut kabuğunda bir PWA projesi oluşturun `--pwa` :
 
 ```dotnetcli
 dotnet new blazorwasm -o MyNewProject --pwa
@@ -89,7 +85,7 @@ Varsayılan olarak, PWA şablonu seçeneği kullanılarak oluşturulan uygulamal
 > Geliştirme desteği, değişiklik yapma ve test etme işlemleri için olağan geliştirme döngüsünü kesintiye uğratıyor. Bu nedenle, çevrimdışı destek yalnızca *yayımlanan* uygulamalar için etkinleştirilmiştir. 
 
 > [!WARNING]
-> Çevrimdışı etkin bir PWA dağıtmak istiyorsanız, [bazı önemli uyarılar ve uyarılar](#caveats-for-offline-pwas)vardır. Bu senaryolar, ' ye Blazorözgü olmayan çevrimdışı PWAs 'a ait değildir. Çevrimdışı etkin uygulamanızın nasıl çalıştığı hakkında varsayımlar yapmadan önce bu uyarıları okuduğunuzdan ve anladığınızdan emin olun.
+> Çevrimdışı etkin bir PWA dağıtmak istiyorsanız, [bazı önemli uyarılar ve uyarılar](#caveats-for-offline-pwas)vardır. Bu senaryolar, ' ye özgü olmayan çevrimdışı PWAs 'a ait değildir Blazor . Çevrimdışı etkin uygulamanızın nasıl çalıştığı hakkında varsayımlar yapmadan önce bu uyarıları okuduğunuzdan ve anladığınızdan emin olun.
 
 Çevrimdışı desteğin nasıl çalıştığını görmek için:
 
@@ -110,7 +106,7 @@ Varsayılan olarak, PWA şablonu seçeneği kullanılarak oluşturulan uygulamal
 
    ![Tarayıcı modu açılan, ' çevrimiçi ' iken ' Çevrimdışı ' olarak değiştirilen Google Chrome Geliştirici Araçları ' Ağı ' sekmesi.](progressive-web-app/_static/image6.png)
 
-Hizmet çalışanı kullanan çevrimdışı destek, için Blazorözel olmayan bir web standardıdır. Hizmet çalışanları hakkında daha fazla bilgi için bkz. [MDN Web docs: Service Worker API](https://developer.mozilla.org/docs/Web/API/Service_Worker_API). Hizmet çalışanları için ortak kullanım desenleri hakkında daha fazla bilgi için bkz. [Google Web: hizmet çalışanı yaşam döngüsü](https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle).
+Hizmet çalışanı kullanan çevrimdışı destek, için özel olmayan bir web standardıdır Blazor . Hizmet çalışanları hakkında daha fazla bilgi için bkz. [MDN Web docs: Service Worker API](https://developer.mozilla.org/docs/Web/API/Service_Worker_API). Hizmet çalışanları için ortak kullanım desenleri hakkında daha fazla bilgi için bkz. [Google Web: hizmet çalışanı yaşam döngüsü](https://developers.google.com/web/fundamentals/primers/service-workers/lifecycle).
 
 Blazoröğesinin PWA şablonu iki hizmet çalışanı dosyası üretir:
 
@@ -128,20 +124,20 @@ Yerleşik *Service-Worker. yayımlanmış. js* hizmet çalışanı, istekleri bi
 
 Önbellek-ilk strateji, şu nedenle değerlidir:
 
-* **Güvenilirlik sağlar.** &ndash;Ağ erişimi Boolean bir durum değil. Kullanıcı yalnızca çevrimiçi veya çevrimdışı değildir:
+* **Güvenilirlik sağlar.** Ağ erişimi Boolean bir durum değil. Kullanıcı yalnızca çevrimiçi veya çevrimdışı değildir:
 
   * Kullanıcının cihazı çevrimiçi olduğunu varsayabilir, ancak ağ bu kadar yavaş olabilir.
   * Ağ, bazı istekleri engelleyen veya yeniden yönlendirmekte olan bir açıklamalı WIFI portalı olduğunda olduğu gibi belirli URL 'Ler için geçersiz sonuçlar döndürebilir.
   
   Bunun nedeni tarayıcının `navigator.onLine` API 'sinin güvenilir olmaması ve bağımlı olmaması gerekir.
 
-* **Doğruluk sağlar.** &ndash;Bir çevrimdışı kaynak önbelleği oluştururken hizmet çalışanı, kaynakların tek bir anında tam ve otomatik tutarlı bir anlık görüntüsünü döndürüldüğünü güvence altına almak için içerik karmaını kullanır. Bu önbellek daha sonra atomik birim olarak kullanılır. Yalnızca daha önce önbelleğe alınmış olan sürümler olduğundan, ağı yeni kaynaklar için soran bir nokta yoktur. Diğer risk tutarsızlığı ve uyumsuzluk (örneğin, birlikte derlenmeyen .NET derlemelerinin sürümlerini kullanmaya çalışmak).
+* **Doğruluk sağlar.** Bir çevrimdışı kaynak önbelleği oluştururken hizmet çalışanı, kaynakların tek bir anında tam ve otomatik tutarlı bir anlık görüntüsünü döndürüldüğünü güvence altına almak için içerik karmaını kullanır. Bu önbellek daha sonra atomik birim olarak kullanılır. Yalnızca daha önce önbelleğe alınmış olan sürümler olduğundan, ağı yeni kaynaklar için soran bir nokta yoktur. Diğer risk tutarsızlığı ve uyumsuzluk (örneğin, birlikte derlenmeyen .NET derlemelerinin sürümlerini kullanmaya çalışmak).
 
 ### <a name="background-updates"></a>Arka plan güncelleştirmeleri
 
 Bir akıl modeli olarak, yüklenebilen bir mobil uygulama gibi davranan bir çevrimdışı ilk PWA 'yı düşünebilirsiniz. Uygulama, ağ bağlantısından bağımsız olarak hemen başlatılır, ancak yüklü uygulama mantığı, en son sürüm olmayan bir noktadan itibaren anlık görüntüden gelir.
 
-Blazor PWA şablonu, Kullanıcı her ziyaret ettiğinde ve çalışan bir ağ bağlantısı olduğunda kendiliğinden otomatik olarak güncelleştirmeyi deneyen uygulamalar üretir. Bu şekilde çalışma şekli şöyledir:
+BlazorPWA şablonu, Kullanıcı her ziyaret ettiğinde ve çalışan bir ağ bağlantısı olduğunda kendiliğinden otomatik olarak güncelleştirmeyi deneyen uygulamalar üretir. Bu şekilde çalışma şekli şöyledir:
 
 * Derleme sırasında, proje bir *hizmet çalışanı varlık bildirimi*oluşturur. Varsayılan olarak bu, *Service-Worker-assets. js*olarak adlandırılır. Bildirim, uygulamanın, içerik karmaları dahil .NET derlemeleri, JavaScript dosyaları ve CSS gibi çevrimdışı çalışması için gereken tüm statik kaynakları listeler. Kaynak listesi, hangi kaynakların önbellekte olduğunu bilmesi için hizmet çalışanı tarafından yüklenir.
 * Kullanıcı uygulamayı her ziyaret ettiğinde, tarayıcı arka planda *Service-Worker. js* ve *Service-Worker-assets. js* ' yi yeniden ister. Dosyalar, mevcut yüklü hizmet çalışanı ile bayt için bayt olarak karşılaştırılır. Sunucu, bu dosyalardan herhangi biri için değiştirilen içerik döndürürse, hizmet çalışanı kendi yeni bir sürümünü yüklemeye çalışır.
@@ -149,24 +145,24 @@ Blazor PWA şablonu, Kullanıcı her ziyaret ettiğinde ve çalışan bir ağ ba
 * Tüm kaynaklar hatasız olarak yüklendiğinde ve tüm içerik karmalarının eşleşmesi durumunda işlem başarıyla tamamlanır. Başarılı olursa, yeni hizmet çalışanı *etkinleştirme durumunu bekliyor* olarak girer. Kullanıcı uygulamayı kapatır (uygulama sekmeleri veya pencereler olmadan), yeni hizmet çalışanı *etkin* hale gelir ve sonraki uygulama ziyaretleri için kullanılır. Eski hizmet çalışanı ve önbelleği silinir.
 * İşlem başarıyla tamamlanmazsa, yeni hizmet çalışanı örneği atılır. İstemci, istekleri tamamlayabildikleri daha iyi bir ağ bağlantısına sahip olduğunda, bu güncelleştirme işlemi kullanıcının sonraki ziyaretinin üzerinde yeniden denenir.
 
-Bu işlemi, hizmet çalışan mantığını düzenleyerek özelleştirin. Önceki davranışın hiçbiri öğesine Blazor özgü değildir ancak yalnızca PWA şablonu seçeneği tarafından belirtilen varsayılan deneyimdir. Daha fazla bilgi için bkz. [MDN Web belgeleri: hizmet çalışanı API 'si](https://developer.mozilla.org/docs/Web/API/Service_Worker_API).
+Bu işlemi, hizmet çalışan mantığını düzenleyerek özelleştirin. Önceki davranışın hiçbiri öğesine özgü değildir Blazor ancak yalnızca PWA şablonu seçeneği tarafından belirtilen varsayılan deneyimdir. Daha fazla bilgi için bkz. [MDN Web belgeleri: hizmet çalışanı API 'si](https://developer.mozilla.org/docs/Web/API/Service_Worker_API).
 
 ### <a name="how-requests-are-resolved"></a>İsteklerin çözümlenmesi
 
 [Önbellek-ilk getirme stratejisi](#cache-first-fetch-strategy) bölümünde açıklandığı gibi, varsayılan hizmet çalışanı bir *ön uç* stratejisi kullanır, yani kullanılabilir olduğunda önbelleğe alınmış içeriklere hizmet vermeye çalışır. Belirli bir URL için önbelleğe alınmış içerik yoksa (örneğin, arka uç API 'sinden veri istenirken), hizmet çalışanı normal bir ağ isteğine geri döner. Sunucu ulaşılabilir olduğunda ağ isteği başarılı olur. Bu mantık, `onFetch` *Service-Worker. yayınlanmış. js*içinde işlevin içinde uygulanır.
 
-Uygulamanın Razor bileşenleri, arka uç API 'lerinden veri istemeyi ve ağ kullanım dışı nedenlerle başarısız istekler için kolay bir kullanıcı deneyimi sağlamak istiyorsanız, uygulamanın bileşenleri içinde Logic uygulayın. Örneğin, istekleri etrafında `try/catch` `HttpClient` kullanın.
+Uygulamanın Razor bileşenleri, arka uç API 'lerinden veri istemeyi ve ağ kullanım dışı nedenlerle başarısız istekler için kolay bir kullanıcı deneyimi sağlamak istiyorsanız, uygulamanın bileşenleri içinde Logic uygulayın. Örneğin, `try/catch` istekleri etrafında kullanın <xref:System.Net.Http.HttpClient> .
 
 ### <a name="support-server-rendered-pages"></a>Sunucu tarafından işlenen sayfaları destekleme
 
-Kullanıcı, `/counter` veya gıbı bir URL 'ye ilk kez gittiğinde ne olacağını göz önünde bulundurun. Bu gibi durumlarda, olarak `/counter`önbelleğe alınmış içeriği döndürmek istemezsiniz, bunun yerine, `/index.html` Blazor ısbassembly uygulamanızı başlatmak için tarayıcıya önbelleğe alınmış içeriği yüklemesi gerekir. Bu ilk istekler, şu şekilde *Gezinti* istekleri olarak bilinir:
+Kullanıcı, veya gibi bir URL 'ye ilk kez gittiğinde ne olacağını göz önünde bulundurun `/counter` . Bu gibi durumlarda, olarak önbelleğe alınmış içeriği döndürmek istemezsiniz `/counter` , bunun yerine, `/index.html` ısbassembly uygulamanızı başlatmak için tarayıcıya önbelleğe alınmış içeriği yüklemesi gerekir Blazor . Bu ilk istekler, şu şekilde *Gezinti* istekleri olarak bilinir:
 
 * görüntüler, stil sayfaları veya diğer dosyalar için *alt kaynak* istekleri.
 * API verileri için *Fetch/XHR* istekleri.
 
-Varsayılan hizmet çalışanı, gezinti istekleri için özel durum mantığı içerir. Hizmet çalışanı, istenen URL 'den bağımsız olarak, için `/index.html`önbelleğe alınmış içeriği döndürerek istekleri çözer. Bu mantık, `onFetch` *Service-Worker. yayınlanmış. js*içindeki işlevde uygulanır.
+Varsayılan hizmet çalışanı, gezinti istekleri için özel durum mantığı içerir. Hizmet çalışanı, istenen URL 'den bağımsız olarak, için önbelleğe alınmış içeriği döndürerek istekleri çözer `/index.html` . Bu mantık, `onFetch` *Service-Worker. yayınlanmış. js*içindeki işlevde uygulanır.
 
-Uygulamanızda sunucu tarafından işlenmiş HTML döndürmesi gereken belirli URL 'Ler varsa ve önbellekten hizmet `/index.html` vermezse, hizmet çalışanınızdaki mantığı düzenlemeniz gerekir. İçeren `/Identity/` tüm URL 'lerin sunucuya düzenli olarak yalnızca çevrimiçi istekleri olarak işlenmesi gerekiyorsa, *Service-Worker. yayınlanmış. js* `onFetch` mantığını değiştirin. Aşağıdaki kodu bulun:
+Uygulamanızda sunucu tarafından işlenmiş HTML döndürmesi gereken belirli URL 'Ler varsa ve önbellekten hizmet vermezse `/index.html` , hizmet çalışanınızdaki mantığı düzenlemeniz gerekir. İçeren tüm URL 'Lerin `/Identity/` sunucuya düzenli olarak yalnızca çevrimiçi istekleri olarak işlenmesi gerekiyorsa, *Service-Worker. yayınlanmış. js* `onFetch` mantığını değiştirin. Aşağıdaki kodu bulun:
 
 ```javascript
 const shouldServeIndexHtml = event.request.mode === 'navigate';
@@ -179,26 +175,26 @@ const shouldServeIndexHtml = event.request.mode === 'navigate'
     && !event.request.url.includes('/Identity/');
 ```
 
-Bunu yapmazsanız, ağ bağlantısından bağımsız olarak, hizmet çalışanı bu tür URL 'Ler için istekleri karşılar ve bunları kullanarak `/index.html`çözer.
+Bunu yapmazsanız, ağ bağlantısından bağımsız olarak, hizmet çalışanı bu tür URL 'Ler için istekleri karşılar ve bunları kullanarak çözer `/index.html` .
 
 ### <a name="control-asset-caching"></a>Varlık önbelleğe alma denetimi
 
-Projeniz `ServiceWorkerAssetsManifest` MSBuild özelliğini tanımlarsa, derleme araçları Blazor, belirtilen ada sahip bir hizmet çalışanı varlık bildirimi oluşturur. Varsayılan PWA şablonu, aşağıdaki özelliği içeren bir proje dosyası üretir:
+Projeniz MSBuild özelliğini tanımlarsa `ServiceWorkerAssetsManifest` , Blazor derleme araçları, belirtilen ada sahip bir hizmet çalışanı varlık bildirimi oluşturur. Varsayılan PWA şablonu, aşağıdaki özelliği içeren bir proje dosyası üretir:
 
 ```xml
 <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
 ```
 
-Dosya *Wwwroot* çıkış dizinine yerleştirilir, bu nedenle tarayıcı bu dosyayı isteyerek `/service-worker-assets.js`alabilir. Bu dosyanın içeriğini görmek için bir metin düzenleyicisinde */BIN/Debug/{Target Framework}/Wwwroot/Service-Worker-assets.js* dosyasını açın. Ancak, her bir derlemede yeniden oluşturulduğundan dosyayı düzenlemeyin.
+Dosya *Wwwroot* çıkış dizinine yerleştirilir, bu nedenle tarayıcı bu dosyayı isteyerek alabilir `/service-worker-assets.js` . Bu dosyanın içeriğini görmek için bir metin düzenleyicisinde */BIN/Debug/{Target Framework}/Wwwroot/Service-Worker-assets.js* dosyasını açın. Ancak, her bir derlemede yeniden oluşturulduğundan dosyayı düzenlemeyin.
 
 Varsayılan olarak, bu bildirim şunları listeler:
 
-* .NET Blazorderlemeleri ve .net WebAssembly çalışma zamanı dosyaları gibi, çevrimdışı çalışmak için gerekli olan herhangi bir yönetilen kaynak.
+* Blazor.NET derlemeleri ve .net WebAssembly çalışma zamanı dosyaları gibi, çevrimdışı çalışmak için gerekli olan herhangi bir yönetilen kaynak.
 * Dış projeler ve NuGet paketleri tarafından sağlanan statik Web varlıkları dahil olmak üzere, uygulamanın *Wwwroot* dizinine yayımlama için tüm kaynaklar (örneğin, resimler, stil sayfaları ve JavaScript dosyaları).
 
-`onInstall` *Service-Worker. yayımlandı. js*' de içindeki mantığı düzenleyerek, bu kaynakların hangilerinin hizmet çalışanı tarafından alınıp önbelleğe alınacağını denetleyebilirsiniz. Varsayılan olarak, hizmet çalışanı *. html*, *. css*, *. js*ve *.* TDA gibi tipik Web dosya adı uzantılarına (. Blazor *DLL*, *. pdb*) özgü dosya türleri ile eşleşen dosyaları getirir ve önbelleğe alır.
+`onInstall` *Service-Worker. yayımlandı. js*' de içindeki mantığı düzenleyerek, bu kaynakların hangilerinin hizmet çalışanı tarafından alınıp önbelleğe alınacağını denetleyebilirsiniz. Varsayılan olarak, hizmet çalışanı *. html*, *. css*, *. js*ve *.* TDA gibi tipik Web dosya adı uzantılarına Blazor (.*DLL*, *. pdb*) özgü dosya türleri ile eşleşen dosyaları getirir ve önbelleğe alır.
 
-Uygulamanın *Wwwroot* dizininde bulunmayan ek kaynakları dahil etmek için, aşağıdaki örnekte gösterildiği gibi ek MSBuild `ItemGroup` girişleri tanımlayın:
+Uygulamanın *Wwwroot* dizininde bulunmayan ek kaynakları dahil etmek için, `ItemGroup` Aşağıdaki örnekte gösterildiği gibi ek MSBuild girişleri tanımlayın:
 
 ```xml
 <ItemGroup>
@@ -207,18 +203,18 @@ Uygulamanın *Wwwroot* dizininde bulunmayan ek kaynakları dahil etmek için, a�
 </ItemGroup>
 ```
 
-`AssetUrl` Meta veriler, tarayıcının önbelleğe kaynağı getirilirken kullanması gereken temel göreli URL 'yi belirtir. Bu, diskteki özgün kaynak dosya adından bağımsız olabilir.
+`AssetUrl`Meta veriler, tarayıcının önbelleğe kaynağı getirilirken kullanması gereken temel göreli URL 'yi belirtir. Bu, diskteki özgün kaynak dosya adından bağımsız olabilir.
 
 > [!IMPORTANT]
-> `ServiceWorkerAssetsManifestItem` Eklemek, dosyanın uygulamanın *Wwwroot* dizininde yayımlanmasına neden olmaz. Yayımlama çıkışı ayrı olarak denetlenmelidir. `ServiceWorkerAssetsManifestItem` Yalnızca hizmet çalışanı varlıkları bildiriminde ek bir girdinin görünmesine neden olur.
+> Eklemek `ServiceWorkerAssetsManifestItem` , dosyanın uygulamanın *Wwwroot* dizininde yayımlanmasına neden olmaz. Yayımlama çıkışı ayrı olarak denetlenmelidir. `ServiceWorkerAssetsManifestItem`Yalnızca hizmet çalışanı varlıkları bildiriminde ek bir girdinin görünmesine neden olur.
 
 ## <a name="push-notifications"></a>Anında iletme bildirimleri
 
 Diğer herhangi bir PWA gibi, Blazor webassembly PWA, arka uç sunucusundan anında iletme bildirimleri alabilir. Sunucu, uygulamayı etkin bir şekilde kullanmıyor olsa bile, herhangi bir zamanda anında iletme bildirimleri gönderebilir. Örneğin, farklı bir Kullanıcı ilgili bir eylem gerçekleştirdiğinde anında iletme bildirimleri gönderilebilir.
 
-Anında iletme bildirimi gönderme mekanizması, her türlü teknolojiyi kullanan arka Blazor uç sunucusu tarafından uygulandığından, webassembly 'dan tamamen bağımsızdır. Bir ASP.NET Core sunucusundan anında iletme bildirimleri göndermek istiyorsanız, [güçlendirme, pizza Atölyesi Workshop ' de gerçekleştirilen yaklaşıma benzer bir teknik kullanmayı](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#sending-push-notifications)düşünün.
+Anında iletme bildirimi gönderme mekanizması Blazor , her türlü teknolojiyi kullanan arka uç sunucusu tarafından uygulandığından, webassembly 'dan tamamen bağımsızdır. Bir ASP.NET Core sunucusundan anında iletme bildirimleri göndermek istiyorsanız, [güçlendirme, pizza Atölyesi Workshop ' de gerçekleştirilen yaklaşıma benzer bir teknik kullanmayı](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#sending-push-notifications)düşünün.
 
-İstemci üzerinde anında iletme bildirimi alma ve görüntüleme mekanizması, hizmet çalışanı JavaScript dosyasında uygulandığından Blazor webassembly ' den bağımsızdır. Bir örnek için bkz. [güçlendirme pizza 'da kullanılan yaklaşım](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#displaying-notifications).
+İstemci üzerinde anında iletme bildirimi alma ve görüntüleme mekanizması Blazor , hizmet çalışanı JavaScript dosyasında uygulandığından webassembly ' den bağımsızdır. Bir örnek için bkz. [güçlendirme pizza 'da kullanılan yaklaşım](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#displaying-notifications).
 
 ## <a name="caveats-for-offline-pwas"></a>Çevrimdışı PDI uyarıları
 
@@ -226,7 +222,7 @@ Tüm uygulamalar çevrimdışı kullanımı desteklemeyi denememelidir. Çevrimd
 
 Çevrimdışı destek genellikle ilgilidir:
 
-* Birincil veri deposu tarayıcıya yereldir. Örneğin, yaklaşım, verileri veya [IndexedDB](https://developer.mozilla.org/docs/Web/API/IndexedDB_API)'yi `localStorage` depolayan bir [IoT](https://en.wikipedia.org/wiki/Internet_of_things) cihazına yönelik kullanıcı arabirimine sahip bir uygulama ile ilgilidir.
+* Birincil veri deposu tarayıcıya yereldir. Örneğin, yaklaşım, verileri [IoT](https://en.wikipedia.org/wiki/Internet_of_things) `localStorage` veya [IndexedDB](https://developer.mozilla.org/docs/Web/API/IndexedDB_API)'yi depolayan bir IoT cihazına yönelik kullanıcı arabirimine sahip bir uygulama ile ilgilidir.
 * Uygulama, her kullanıcıyla ilgili arka uç API verisini getirmek ve önbelleğe almak için önemli miktarda iş gerçekleştiriyorsa, bu sayede verileri çevrimdışı olarak gezinebilirler. Uygulamanın düzenlemesini desteklemesi gerekiyorsa, değişiklikleri izlemeye yönelik bir sistem, arka uca veri eşitlemesi oluşturulmalıdır.
 * Hedef ise, ağ koşullarından bağımsız olarak uygulamanın hemen yüklendiğini güvence altına almak için kullanılır. İsteklerin ilerlemesini göstermek için arka uç API 'SI isteklerinde uygun bir kullanıcı deneyimi uygulayın ve ağ kullanılamamasından kaynaklanan istekler başarısız olduğunda düzgün bir şekilde davranır.
 
@@ -234,7 +230,7 @@ Ayrıca, çevrimdışı yetenekli PWAs bir dizi ek karmaşıklıklarla uğraşma
 
 ### <a name="offline-support-only-when-published"></a>Yalnızca yayımlandığında çevrimdışı destek
 
-Geliştirme sırasında, genellikle her bir değişikliğin bir arka plan güncelleştirme işlemine geçmeden hemen tarayıcıda yansıtıldığını görmek istersiniz. Bu nedenle Blazor, PWA şablonu yalnızca yayımlandığında çevrimdışı desteğe izin vermez.
+Geliştirme sırasında, genellikle her bir değişikliğin bir arka plan güncelleştirme işlemine geçmeden hemen tarayıcıda yansıtıldığını görmek istersiniz. Bu nedenle, Blazor PWA şablonu yalnızca yayımlandığında çevrimdışı desteğe izin vermez.
 
 Çevrimdışı özellikli bir uygulama oluştururken uygulamayı geliştirme ortamında test etmek yeterli değildir. Farklı ağ koşullarına nasıl yanıt verdiğini anlamak için uygulamayı yayımlanmış durumunda test etmeniz gerekir.
 
@@ -242,7 +238,7 @@ Geliştirme sırasında, genellikle her bir değişikliğin bir arka plan günce
 
 Kullanıcılar uygulamadan tüm sekmelerde gezinene kadar güncelleştirmeler tamamlanmaz. [Arka plan güncelleştirmeleri](#background-updates) bölümünde açıklandığı gibi, uygulamaya bir güncelleştirme dağıttıktan sonra, tarayıcı güncelleştirme işlemini başlatmak için güncelleştirilmiş hizmet çalışanı dosyalarını getirir.
 
-Birçok geliştirici, bu güncelleştirme tamamlandığında bile Kullanıcı tüm sekmelerde gezinene kadar **etkili olmaz.** Uygulamayı görüntüleyen tek sekme olsa bile, uygulamayı görüntüleyen sekmenin yenilenmesi yeterli **değildir** . Uygulamanız tamamen kapanana kadar, yeni hizmet çalışanı durumu *Etkinleştirme bekleniyor* durumunda kalır. **Bu öğesine Blazorözgü değildir, ancak standart bir Web platformu davranışı olur.**
+Birçok geliştirici, bu güncelleştirme tamamlandığında bile Kullanıcı tüm sekmelerde gezinene kadar **etkili olmaz.** Uygulamayı görüntüleyen tek sekme olsa bile, uygulamayı görüntüleyen sekmenin yenilenmesi yeterli **değildir** . Uygulamanız tamamen kapanana kadar, yeni hizmet çalışanı durumu *Etkinleştirme bekleniyor* durumunda kalır. **Bu öğesine özgü değildir Blazor , ancak standart bir Web platformu davranışı olur.**
 
 Bu, yaygın olarak çalışan geliştiricilerin hizmet çalışanlarına veya Çevrimdışı önbelleğe alınmış kaynaklara yönelik güncelleştirmeleri test kurmaya çalışıyor. Tarayıcının geliştirici araçlarını iade ederseniz aşağıdakine benzer bir şey görebilirsiniz:
 
@@ -264,7 +260,7 @@ Mümkünse, arka uç API 'lerinize son değişiklikleri dağıtmayın. Bunu yapm
 
 ### <a name="interference-with-server-rendered-pages"></a>Sunucu tarafından işlenmiş sayfalarla girişim
 
-[Sunucu tarafından işlenen sayfalar](#support-server-rendered-pages) bölümünde açıklandığı gibi, hizmet çalışanının tüm gezinti istekleri için içerik döndürme `/index.html` davranışını atlamak istiyorsanız, hizmet çalışanınızdaki mantığı düzenleyin.
+[Sunucu tarafından işlenen sayfalar](#support-server-rendered-pages) bölümünde açıklandığı gibi, hizmet çalışanının `/index.html` Tüm gezinti istekleri için içerik döndürme davranışını atlamak istiyorsanız, hizmet çalışanınızdaki mantığı düzenleyin.
 
 ### <a name="all-service-worker-asset-manifest-contents-are-cached-by-default"></a>Tüm hizmet çalışanı varlık bildirimi içerikleri varsayılan olarak önbelleğe alınır
 

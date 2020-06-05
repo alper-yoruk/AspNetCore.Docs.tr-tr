@@ -1,12 +1,22 @@
 ---
-Başlık: ASP.NET Core Yazar: Rick-Anderson Description içinde basit yetkilendirme: yetkilendirme özniteliğini, erişimi ASP.NET Core denetleyicilerine ve eylemlerine kısıtlamak için nasıl kullanacağınızı öğrenin.
-MS. Author: Riande MS. Date: 10/14/2016 No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: güvenlik/yetkilendirme/basit
-
+title: ASP.NET Core basit yetkilendirme
+author: rick-anderson
+description: ASP.NET Core denetleyicilerine ve eylemlerine erişimi kısıtlamak için yetkilendir özniteliğini nasıl kullanacağınızı öğrenin.
+ms.author: riande
+ms.date: 10/14/2016
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/authorization/simple
+ms.openlocfilehash: 4ec31354d7fe11af75fd3a0045b4045f83721cb5
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84272131"
 ---
 # <a name="simple-authorization-in-aspnet-core"></a>ASP.NET Core basit yetkilendirme
 

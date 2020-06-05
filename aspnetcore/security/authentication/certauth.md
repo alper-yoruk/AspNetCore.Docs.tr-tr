@@ -1,17 +1,29 @@
 ---
-title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
+title: ASP.NET Core sertifika kimlik doğrulamasını yapılandırma
+author: blowdart
+description: IIS ve HTTP. sys için ASP.NET Core sertifika kimlik doğrulamasını nasıl yapılandıracağınızı öğrenin.
+monikerRange: '>= aspnetcore-3.0'
+ms.author: bdorrans
+ms.date: 01/02/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/authentication/certauth
+ms.openlocfilehash: 4511e253ea9487c5739162b9b0180e39eb3a1b9c
+ms.sourcegitcommit: 67eadd7bf28eae0b8786d85e90a7df811ffe5904
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84454616"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core sertifika kimlik doğrulamasını yapılandırma
 
 `Microsoft.AspNetCore.Authentication.Certificate`ASP.NET Core için [sertifika kimlik doğrulamasına](https://tools.ietf.org/html/rfc5246#section-7.4.4) benzer bir uygulama içerir. Sertifika kimlik doğrulaması TLS düzeyinde gerçekleşir ve bu süre ASP.NET Core. Daha doğru, bu, sertifikayı doğrulayan bir kimlik doğrulama işleyicisidir ve bu sertifikayı bir ' a çözebileceğiniz bir olay verir `ClaimsPrincipal` . 
 
-[Ana bilgisayarınızı](#configure-your-host-to-require-certificates) sertifika kimlik doğrulaması için yapılandırın, BT IIS, Kestrel, Azure Web Apps veya kullandığınız başka herhangi bir şeydir.
+[Sunucunuzu](#configure-your-server-to-require-certificates) sertifika kimlik doğrulaması için yapılandırın, BT IIS, Kestrel, Azure Web Apps veya kullandığınız başka herhangi bir şeydir.
 
 ## <a name="proxy-and-load-balancer-scenarios"></a>Proxy ve yük dengeleyici senaryoları
 
@@ -24,7 +36,7 @@ Proxy 'lerin ve yük dengeleyicilerin kullanıldığı ortamlarda sertifika kiml
 
 ## <a name="get-started"></a>başlarken
 
-Bir HTTPS sertifikası alın, uygulayın ve [ana bilgisayarınızı](#configure-your-host-to-require-certificates) sertifika gerektirecek şekilde yapılandırın.
+HTTPS sertifikası alın, uygulayın ve sunucunuzu sertifika gerektirecek şekilde [yapılandırın](#configure-your-server-to-require-certificates) .
 
 Web uygulamanızda pakete bir başvuru ekleyin `Microsoft.AspNetCore.Authentication.Certificate` . Daha sonra `Startup.ConfigureServices` yönteminde, isteklerle birlikte `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(...);` `OnCertificateValidated` gönderilen istemci sertifikasında herhangi bir destek doğrulaması yapmak için bir temsilci sağlayan seçeneklerinizde çağrı yapın. Bu bilgileri bir öğesine dönüştürün `ClaimsPrincipal` ve özelliği üzerinde ayarlayın `context.Principal` .
 
@@ -183,7 +195,7 @@ services.AddAuthentication(
 
 Kavramsal olarak, sertifikanın doğrulanması bir yetkilendirme konusudur. Örneğin, bir yetkilendirme ilkesindeki bir veren veya parmak izi gibi bir denetim eklemek, `OnCertificateValidated` mükemmel bir kabul edilebilir.
 
-## <a name="configure-your-host-to-require-certificates"></a>Ana bilgisayarınızı sertifika gerektirecek şekilde yapılandırma
+## <a name="configure-your-server-to-require-certificates"></a>Sunucunuzu sertifika gerektirecek şekilde yapılandırma
 
 ### <a name="kestrel"></a>Kestrel
 

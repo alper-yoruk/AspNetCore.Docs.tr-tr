@@ -1,14 +1,24 @@
 ---
-Başlık: Microsoft. Extensions 'dan geçiş yapın. Logging 2,1, 2,2 veya 3,0 Author: pakronym Description: Microsoft. Extensions. 2,1 ' ten 2,2 veya 3,0 ' a günlük kaydı kullanan bir non-ASP.NET Core uygulamasını geçirmeyi öğrenin.
-MS. Author: pakronym MS. Custom: MVC MS. Date: 01/04/2019 No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: geçiş/günlüğe kaydetme-aspnetcore
-
+title: Microsoft. Extensions. Logging 2,2 2,1 veya 3,0 ' den geçiş yapın
+author: pakrym
+description: 2,1 ' den 2,2 ' e veya 3,0 ' de Microsoft. Extensions. Logging kullanarak bir non-ASP.NET Core uygulamasını geçirmeyi öğrenin.
+ms.author: pakrym
+ms.custom: mvc
+ms.date: 01/04/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: migration/logging-nonaspnetcore
+ms.openlocfilehash: 2fd738ed0e0a06d0793e3c624d40a13725b53cd8
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84274238"
 ---
-
 # <a name="migrate-from-microsoftextensionslogging-21-to-22-or-30"></a>Microsoft. Extensions. Logging 2,2 2,1 veya 3,0 ' den geçiş yapın
 
 Bu makalede, `Microsoft.Extensions.Logging` 2,1 ' den 2,2 ' e veya 3,0 ' ye kadar kullanan bir non-ASP.NET Core uygulamasını geçirmeye yönelik yaygın adımlar özetlenmektedir.

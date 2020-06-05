@@ -1,11 +1,23 @@
 ---
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
+title: ASP.NET Web API 'sinden ASP.NET Core 'e geçiş
+author: ardalis
+description: ASP.NET 4. x Web API 'sinden bir Web API uygulamasını ASP.NET Core MVC 'ye geçirmeyi öğrenin.
+ms.author: scaddie
+ms.custom: mvc
+ms.date: 05/26/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: migration/webapi
+ms.openlocfilehash: 3c8bf27a97de92a42817d4af625976a4920001aa
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84145557"
 ---
 # <a name="migrate-from-aspnet-web-api-to-aspnet-core"></a>ASP.NET Web API 'sinden ASP.NET Core 'e geçiş
 
@@ -47,7 +59,7 @@ Visual Studio 'da yeni bir boş çözüm oluşturun ve geçirilecek ASP.NET 4. x
 
 1. **Dosya** menüsünden **Yeni** > **Proje**' yi seçin.
 1. **Boş çözüm** şablonunu seçin ve Ileri ' **yi**seçin.
-1. Çözümü *WebAPIMigration*olarak adlandırın. **Oluştur**’u seçin.
+1. Çözümü *WebAPIMigration*olarak adlandırın. **Oluştur**'u seçin.
 1. Varolan *Productsapp* projesini çözüme ekleyin.
 
 Geçirilecek yeni bir API projesi ekleyin:

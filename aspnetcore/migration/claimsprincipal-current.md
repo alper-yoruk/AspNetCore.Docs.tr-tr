@@ -1,11 +1,23 @@
 ---
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
+title: ClaimsPrincipal. Current öğesinden geçir
+author: mjrousos
+description: Geçerli kimliği doğrulanmış kullanıcının kimliğini ve ASP.NET Core taleplerini almak için ClaimsPrincipal. Current ' dan uzağa geçiş yapmayı öğrenin.
+ms.author: scaddie
+ms.custom: mvc
+ms.date: 03/26/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: migration/claimsprincipal-current
+ms.openlocfilehash: 4bcbaa1854016d7393d019a9c275bc8221974d7a
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84145622"
 ---
 # <a name="migrate-from-claimsprincipalcurrent"></a>ClaimsPrincipal. Current öğesinden geçir
 

@@ -1,12 +1,22 @@
 ---
-Başlık: ASP.NET Core Yazar: Rick-Anderson Description içinde Genelleştirme ve yerelleştirme: ASP.NET Core içeriği farklı diller ve kültürlere yerelleştirme hakkında nasıl hizmet ve ara yazılım sağladığını öğrenin.
-MS. Author: Riande MS. Date: 11/30/2019 No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: temel bilgiler/yerelleştirme
-
+title: ASP.NET Core Genelleştirme ve yerelleştirme
+author: rick-anderson
+description: ASP.NET Core farklı diller ve kültürlere içerik yerelleştirilmesi için nasıl hizmet ve ara yazılım sağladığını öğrenin.
+ms.author: riande
+ms.date: 11/30/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: fundamentals/localization
+ms.openlocfilehash: e3b73a7a559d2f4a0803dc26dd42257c60fab884
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84356966"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>ASP.NET Core Genelleştirme ve yerelleştirme
 

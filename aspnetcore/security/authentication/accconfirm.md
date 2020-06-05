@@ -11,12 +11,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: b7856a3004cfc76acfb485ff8f1fadf87f5aa904
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: d5e0e3865702fe4e5cbe49e7f452f367a8a53de9
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777117"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84451751"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>ASP.NET Core hesap onaylama ve parola kurtarma
 
@@ -25,7 +25,7 @@ By [Rick Anderson](https://twitter.com/RickAndMSFT), [Ponant](https://github.com
 Bu öğreticide, e-posta onayı ve parola sıfırlama ile bir ASP.NET Core uygulamasının nasıl oluşturulacağı gösterilmektedir. Bu öğretici bir başlangıç konusu **değildir** . Şunu tanımanız gerekir:
 
 * [ASP.NET Core](xref:tutorials/razor-pages/razor-pages-start)
-* [Kimlik doğrulaması](xref:security/authentication/identity)
+* [Kimlik Doğrulaması](xref:security/authentication/identity)
 * [Entity Framework Core](xref:data/ef-mvc/intro)
 
 <!-- see C:/Dropbox/wrk/Code/SendGridConsole/Program.cs -->
@@ -38,7 +38,7 @@ ASP.NET Core 1,1 sürümü için [Bu PDF dosyasına](https://webpifeed.blob.core
 
 ::: moniker range="> aspnetcore-2.2"
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 [.NET Core 3,0 SDK veya üzeri](https://dotnet.microsoft.com/download/dotnet-core/3.0)
 
@@ -52,16 +52,18 @@ cd WebPWrecover
 dotnet run
 ```
 
-Uygulamayı çalıştırın, **Kaydet** bağlantısını seçin ve bir Kullanıcı kaydedin. Kaydolduktan sonra, e-posta onayı benzetimi `/Identity/Account/RegisterConfirmation` için bir bağlantı içeren to sayfasına yönlendirilirsiniz:
+Uygulamayı çalıştırın, **Kaydet** bağlantısını seçin ve bir Kullanıcı kaydedin. Kaydolduktan sonra, `/Identity/Account/RegisterConfirmation` e-posta onayı benzetimi için bir bağlantı içeren to sayfasına yönlendirilirsiniz:
 
-* `Click here to confirm your account` Bağlantıyı seçin.
+* Bağlantıyı seçin `Click here to confirm your account` .
 * **Oturum açma** bağlantısını seçin ve aynı kimlik bilgileriyle oturum açın.
-* Sizi `/Identity/Account/Manage/PersonalData` sayfaya `Hello YourEmail@provider.com!` yönlendiren bağlantıyı seçin.
+* `Hello YourEmail@provider.com!`Sizi sayfaya yönlendiren bağlantıyı seçin `/Identity/Account/Manage/PersonalData` .
 * Sol taraftaki **kişisel veri** sekmesini seçin ve **Sil**' i seçin.
 
 ### <a name="configure-an-email-provider"></a>E-posta sağlayıcısı yapılandırma
 
 Bu öğreticide, [SendGrid](https://sendgrid.com) e-posta göndermek için kullanılır. E-posta göndermek için bir SendGrid hesabına ve anahtarına ihtiyacınız vardır. Diğer e-posta sağlayıcılarını kullanabilirsiniz. E-posta göndermek için SendGrid veya başka bir e-posta hizmeti kullanmanızı öneririz. Güvenli hale getirmek ve düzgün şekilde ayarlamak zordur.
+
+SendGrid hesabı için [bir gönderici ekleme](https://sendgrid.com/docs/ui/sending-email/senders/)gerekiyor.
 
 Güvenli e-posta anahtarını getirmek için bir sınıf oluşturun. Bu örnek için *Hizmetler/Authiletienderoptions. cs*oluşturun:
 
@@ -69,7 +71,7 @@ Güvenli e-posta anahtarını getirmek için bir sınıf oluşturun. Bu örnek i
 
 #### <a name="configure-sendgrid-user-secrets"></a>SendGrid Kullanıcı gizli dizilerini yapılandırma
 
-`SendGridUser` Ve `SendGridKey` öğesini [gizli-Manager aracı](xref:security/app-secrets)ile ayarlayın. Örneğin:
+Ve öğesini `SendGridUser` `SendGridKey` [gizli-Manager aracı](xref:security/app-secrets)ile ayarlayın. Örneğin:
 
 ```dotnetcli
 dotnet user-secrets set SendGridUser RickAndMSFT
@@ -78,9 +80,9 @@ dotnet user-secrets set SendGridKey <key>
 Successfully saved SendGridUser = RickAndMSFT to the secret store.
 ```
 
-Windows 'da, gizli dizi Anahtarlar/değer çiftlerini `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` dizindeki bir *gizlilikler. JSON* dosyasında depolar.
+Windows 'da, gizli dizi Anahtarlar/değer çiftlerini dizindeki bir *gizlilikler. JSON* dosyasında depolar `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` .
 
-*Gizli dizileri. JSON* dosyasının içeriği şifrelenmez. Aşağıdaki biçimlendirme, *gizlilikler. JSON* dosyasını gösterir. `SendGridKey` Değer kaldırılmıştır.
+*Gizli dizileri. JSON* dosyasının içeriği şifrelenmez. Aşağıdaki biçimlendirme, *gizlilikler. JSON* dosyasını gösterir. `SendGridKey`Değer kaldırılmıştır.
 
 ```json
 {
@@ -95,7 +97,7 @@ Daha fazla bilgi için bkz. [Options model](xref:fundamentals/configuration/opti
 
 Bu öğretici, [SendGrid](https://sendgrid.com/)aracılığıyla e-posta bildirimlerinin nasıl ekleneceğini gösterir, ancak SMTP ve diğer mekanizmaları kullanarak e-posta gönderebilirsiniz.
 
-`SendGrid` NuGet paketini yükler:
+`SendGrid`NuGet paketini yükler:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -119,7 +121,7 @@ dotnet add package SendGrid
 
 ### <a name="implement-iemailsender"></a>Iemailsender uygulama
 
-Uygulamak `IEmailSender`için, aşağıdakine benzer bir kodla *Hizmetler/emailsender. cs* oluşturun:
+Uygulamak için `IEmailSender` , aşağıdakine benzer bir kodla *Hizmetler/emailsender. cs* oluşturun:
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/Services/EmailSender.cs)]
 
@@ -127,8 +129,8 @@ Uygulamak `IEmailSender`için, aşağıdakine benzer bir kodla *Hizmetler/emails
 
 Aşağıdaki kodu `ConfigureServices` *Startup.cs* dosyasındaki yöntemine ekleyin:
 
-* Geçici `EmailSender` hizmet olarak ekleyin.
-* `AuthMessageSenderOptions` Yapılandırma örneğini kaydedin.
+* `EmailSender`Geçici hizmet olarak ekleyin.
+* `AuthMessageSenderOptions`Yapılandırma örneğini kaydedin.
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/Startup.cs?name=snippet1&highlight=11-15)]
 
@@ -161,13 +163,13 @@ Aşağıdaki kod tüm veri koruma belirteçleri zaman aşımı süresini 3 saate
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/StartupAllTokens.cs?name=snippet1&highlight=11-12)]
 
-Yerleşik kimlik Kullanıcı belirteçleri (bkz [. Aspnetcore/src/Identity/Extensions. Core/src/TokenOptions. cs](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) ) bir [gün zaman aşımı](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs).
+Yerleşik Identity Kullanıcı belirteçleri (bkz. [aspnetcore/src/ Identity /Extensions.Core/src/TokenOptions.cs](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) ) bir [gün zaman aşımı](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs).
 
 ### <a name="change-the-email-token-lifespan"></a>E-posta belirtecini değiştir kullanım ömrü
 
-[Kimlik Kullanıcı belirteçlerinin](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) varsayılan belirteç kullanım ömrü [bir gündür](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs). Bu bölümde, eespan e-posta belirtecinin nasıl değiştirileceği gösterilmektedir.
+[ Identity Kullanıcı belirteçlerinin](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) varsayılan belirteç kullanım ömrü [bir gündür](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs). Bu bölümde, eespan e-posta belirtecinin nasıl değiştirileceği gösterilmektedir.
 
-Özel bir [veri korunabilir\<>](/dotnet/api/microsoft.aspnetcore.identity.dataprotectortokenprovider-1) ve <xref:Microsoft.AspNetCore.Identity.DataProtectionTokenProviderOptions>ekleyin:
+Özel bir [veri korunabilir \<TUser> ](/dotnet/api/microsoft.aspnetcore.identity.dataprotectortokenprovider-1) ve ekleyin <xref:Microsoft.AspNetCore.Identity.DataProtectionTokenProviderOptions> :
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/TokenProviders/CustomTokenProvider.cs?name=snippet1)]
 
@@ -185,8 +187,8 @@ Yerleşik kimlik Kullanıcı belirteçleri (bkz [. Aspnetcore/src/Identity/Exten
 
 E-posta ile çalışmayı alamazsanız:
 
-* Doğrulamak `EmailSender.Execute` `SendGridClient.SendEmailAsync` için içinde bir kesme noktası ayarlayın.
-* Benzer kod kullanarak [e-posta göndermek için bir konsol uygulaması](https://sendgrid.com/docs/Integrate/Code_Examples/v2_Mail/csharp.html) oluşturun `EmailSender.Execute`.
+* Doğrulamak için içinde bir kesme noktası ayarlayın `EmailSender.Execute` `SendGridClient.SendEmailAsync` .
+* Benzer kod kullanarak [e-posta göndermek için bir konsol uygulaması](https://sendgrid.com/docs/Integrate/Code_Examples/v2_Mail/csharp.html) oluşturun `EmailSender.Execute` .
 * [E-posta etkinlik](https://sendgrid.com/docs/User_Guide/email_activity.html) sayfasını gözden geçirin.
 * İstenmeyen posta klasörünüzü kontrol edin.
 * Farklı bir e-posta sağlayıcısında (Microsoft, Yahoo, Gmail vb.) başka bir e-posta diğer adı deneyin
@@ -198,7 +200,7 @@ E-posta ile çalışmayı alamazsanız:
 
 Bu bölümü gerçekleştirmek için önce bir dış kimlik doğrulama sağlayıcısı etkinleştirmeniz gerekir. Bkz. [Facebook, Google ve dış sağlayıcı kimlik doğrulaması](xref:security/authentication/social/index).
 
-E-posta bağlantısına tıklayarak Yerel ve sosyal hesapları birleştirebilirsiniz. Aşağıdaki dizide, "RickAndMSFT@gmail.com" ilk olarak yerel bir oturum açma olarak oluşturulur; Bununla birlikte, önce hesabı önce sosyal oturum açma olarak oluşturabilir, ardından yerel bir oturum açma ekleyebilirsiniz.
+E-posta bağlantısına tıklayarak Yerel ve sosyal hesapları birleştirebilirsiniz. Aşağıdaki dizide, " RickAndMSFT@gmail.com " ilk olarak yerel bir oturum açma olarak oluşturulur; ancak, önce hesabı önce sosyal oturum açma olarak oluşturabilir, ardından yerel bir oturum açma ekleyebilirsiniz.
 
 ![Web uygulaması: RickAndMSFT@gmail.com kullanıcının kimliği doğrulandı](accconfirm/_static/rick.png)
 
@@ -223,11 +225,11 @@ Kullanıcılara bir sitede hesap onayını etkinleştirmek, mevcut tüm kullanı
 
 ::: moniker range="> aspnetcore-2.0 < aspnetcore-3.0"
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 [.NET Core 2,2 SDK veya üzeri](https://dotnet.microsoft.com/download/dotnet-core)
 
-## <a name="create-a-web--app-and-scaffold-identity"></a>Web uygulaması ve yapı iskelesi kimliği oluşturma
+## <a name="create-a-web--app-and-scaffold-identity"></a>Web uygulaması ve yapı iskelesi oluşturmaIdentity
 
 Kimlik doğrulamasıyla bir Web uygulaması oluşturmak için aşağıdaki komutları çalıştırın.
 
@@ -249,7 +251,7 @@ Uygulamayı çalıştırın, **Kaydet** bağlantısını seçin ve bir Kullanıc
 
 [!INCLUDE[](~/includes/view-identity-db.md)]
 
-Tablonun `EmailConfirmed` alanının olduğunu `False`aklınızda edin.
+Tablonun `EmailConfirmed` alanının olduğunu aklınızda edin `False` .
 
 Uygulama bir onay e-postası gönderdiğinde bir sonraki adımda bu e-postayı yeniden kullanmak isteyebilirsiniz. Satıra sağ tıklayın ve **Sil**' i seçin. E-posta diğer adını silmek aşağıdaki adımlarda daha kolay hale gelir.
 
@@ -257,11 +259,11 @@ Uygulama bir onay e-postası gönderdiğinde bir sonraki adımda bu e-postayı y
 
 ## <a name="require-email-confirmation"></a>E-posta onayı gerektir
 
-Yeni bir Kullanıcı kaydının e-postasını onaylamak en iyi uygulamadır. E-posta onayı, başkalarının taklit etmeyeceğinden emin olmaya yardımcı olur (diğer bir deyişle, başka birinin e-postasına kaydolmamaları). Bir tartışma forumuna sahip olduğunuzu ve "" öğesini "yli@example.comnolivetto@contoso.com" olarak kaydolmasını engellemek istediğinizi varsayalım. E-posta onayı olmadannolivetto@contoso.com, "" uygulamanızdan istenmeyen e-posta alabilir. Kullanıcının yanlışlıkla "ylo@example.com" olarak kaydolduğunu ve "yıllı" hatası olduğunu fark edelim. Uygulamanın doğru e-postası olmadığından parola kurtarma kullanamayacak. E-posta onayı, robotlardan sınırlı koruma sağlar. E-posta onayı çok sayıda e-posta hesabına sahip kötü amaçlı kullanıcılardan koruma sağlamaz.
+Yeni bir Kullanıcı kaydının e-postasını onaylamak en iyi uygulamadır. E-posta onayı, başkalarının taklit etmeyeceğinden emin olmaya yardımcı olur (diğer bir deyişle, başka birinin e-postasına kaydolmamaları). Bir tartışma forumuna sahip olduğunuzu ve "" öğesini yli@example.com "" olarak kaydolmasını engellemek istediğinizi varsayalım nolivetto@contoso.com . E-posta onayı olmadan, " nolivetto@contoso.com " uygulamanızdan istenmeyen e-posta alabilir. Kullanıcının yanlışlıkla "" olarak kaydolduğunu ylo@example.com ve "yıllı" hatası olduğunu fark edelim. Uygulamanın doğru e-postası olmadığından parola kurtarma kullanamayacak. E-posta onayı, robotlardan sınırlı koruma sağlar. E-posta onayı çok sayıda e-posta hesabına sahip kötü amaçlı kullanıcılardan koruma sağlamaz.
 
 Genellikle yeni kullanıcıların, onaylanan bir e-posta almadan önce Web sitenize veri almasını engellemek istersiniz.
 
-Onaylanan `Startup.ConfigureServices` bir e-posta gerektirecek şekilde güncelleştir:
+`Startup.ConfigureServices`Onaylanan bir e-posta gerektirecek şekilde güncelleştir:
 
 [!code-csharp[](accconfirm/sample/WebPWrecover22/Startup.cs?name=snippet1&highlight=8-11)]
 
@@ -269,7 +271,7 @@ Onaylanan `Startup.ConfigureServices` bir e-posta gerektirecek şekilde güncell
 
 ### <a name="configure-email-provider"></a>E-posta sağlayıcısını Yapılandır
 
-Bu öğreticide, [SendGrid](https://sendgrid.com) e-posta göndermek için kullanılır. E-posta göndermek için bir SendGrid hesabına ve anahtarına ihtiyacınız vardır. Diğer e-posta sağlayıcılarını kullanabilirsiniz. ASP.NET Core 2. x içerir `System.Net.Mail`. Bu, uygulamanızdan e-posta göndermenize olanak tanır. E-posta göndermek için SendGrid veya başka bir e-posta hizmeti kullanmanızı öneririz. Güvenli hale getirmek ve düzgün şekilde ayarlamak zordur.
+Bu öğreticide, [SendGrid](https://sendgrid.com) e-posta göndermek için kullanılır. E-posta göndermek için bir SendGrid hesabına ve anahtarına ihtiyacınız vardır. Diğer e-posta sağlayıcılarını kullanabilirsiniz. ASP.NET Core 2. x içerir `System.Net.Mail` . Bu, uygulamanızdan e-posta göndermenize olanak tanır. E-posta göndermek için SendGrid veya başka bir e-posta hizmeti kullanmanızı öneririz. Güvenli hale getirmek ve düzgün şekilde ayarlamak zordur.
 
 Güvenli e-posta anahtarını getirmek için bir sınıf oluşturun. Bu örnek için *Hizmetler/Authiletienderoptions. cs*oluşturun:
 
@@ -277,16 +279,16 @@ Güvenli e-posta anahtarını getirmek için bir sınıf oluşturun. Bu örnek i
 
 #### <a name="configure-sendgrid-user-secrets"></a>SendGrid Kullanıcı gizli dizilerini yapılandırma
 
-`SendGridUser` Ve `SendGridKey` öğesini [gizli-Manager aracı](xref:security/app-secrets)ile ayarlayın. Örneğin:
+Ve öğesini `SendGridUser` `SendGridKey` [gizli-Manager aracı](xref:security/app-secrets)ile ayarlayın. Örneğin:
 
 ```console
 C:/WebAppl>dotnet user-secrets set SendGridUser RickAndMSFT
 info: Successfully saved SendGridUser = RickAndMSFT to the secret store.
 ```
 
-Windows 'da, gizli dizi Anahtarlar/değer çiftlerini `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` dizindeki bir *gizlilikler. JSON* dosyasında depolar.
+Windows 'da, gizli dizi Anahtarlar/değer çiftlerini dizindeki bir *gizlilikler. JSON* dosyasında depolar `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` .
 
-*Gizli dizileri. JSON* dosyasının içeriği şifrelenmez. Aşağıdaki biçimlendirme, *gizlilikler. JSON* dosyasını gösterir. `SendGridKey` Değer kaldırılmıştır.
+*Gizli dizileri. JSON* dosyasının içeriği şifrelenmez. Aşağıdaki biçimlendirme, *gizlilikler. JSON* dosyasını gösterir. `SendGridKey`Değer kaldırılmıştır.
 
 ```json
 {
@@ -301,7 +303,7 @@ Daha fazla bilgi için bkz. [Options model](xref:fundamentals/configuration/opti
 
 Bu öğretici, [SendGrid](https://sendgrid.com/)aracılığıyla e-posta bildirimlerinin nasıl ekleneceğini gösterir, ancak SMTP ve diğer mekanizmaları kullanarak e-posta gönderebilirsiniz.
 
-`SendGrid` NuGet paketini yükler:
+`SendGrid`NuGet paketini yükler:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -325,7 +327,7 @@ dotnet add package SendGrid
 
 ### <a name="implement-iemailsender"></a>Iemailsender uygulama
 
-Uygulamak `IEmailSender`için, aşağıdakine benzer bir kodla *Hizmetler/emailsender. cs* oluşturun:
+Uygulamak için `IEmailSender` , aşağıdakine benzer bir kodla *Hizmetler/emailsender. cs* oluşturun:
 
 [!code-csharp[](accconfirm/sample/WebPWrecover22/Services/EmailSender.cs)]
 
@@ -333,14 +335,14 @@ Uygulamak `IEmailSender`için, aşağıdakine benzer bir kodla *Hizmetler/emails
 
 Aşağıdaki kodu `ConfigureServices` *Startup.cs* dosyasındaki yöntemine ekleyin:
 
-* Geçici `EmailSender` hizmet olarak ekleyin.
-* `AuthMessageSenderOptions` Yapılandırma örneğini kaydedin.
+* `EmailSender`Geçici hizmet olarak ekleyin.
+* `AuthMessageSenderOptions`Yapılandırma örneğini kaydedin.
 
 [!code-csharp[](accconfirm/sample/WebPWrecover22/Startup.cs?name=snippet1&highlight=15-99)]
 
 ## <a name="enable-account-confirmation-and-password-recovery"></a>Hesap onaylama ve parola kurtarmayı etkinleştirme
 
-Şablonda hesap onaylama ve parola kurtarma için kod bulunur. `OnPostAsync` Yöntemini */Identity/Pages/Account/Register.cshtml.cs*içinde bulun.
+Şablonda hesap onaylama ve parola kurtarma için kod bulunur. `OnPostAsync`Yöntemini */ Identity /Pages/Account/Register.cshtml.cs*içinde bulun.
 
 Yeni kayıtlı kullanıcıların aşağıdaki satırı açıklama ekleyerek otomatik olarak oturum açmasını engelleyin:
 
@@ -364,7 +366,7 @@ Web uygulamasını çalıştırın ve hesap onaylama ve parola kurtarma akışı
 
 ### <a name="view-the-manage-page"></a>Yönet sayfasını görüntüle
 
-Kullanıcı adınızı tarayıcıda seçin: ![tarayıcı penceresinde Kullanıcı adı](accconfirm/_static/un.png)
+Kullanıcı adınızı tarayıcıda seçin: ![ tarayıcı penceresinde Kullanıcı adı](accconfirm/_static/un.png)
 
 Yönet sayfası, **profil** sekmesi seçili olarak görüntülenir. **E** -postada, e-postanın onaylandığını belirten bir onay kutusu gösterilir.
 
@@ -387,13 +389,13 @@ Aşağıdaki kod tüm veri koruma belirteçleri zaman aşımı süresini 3 saate
 
 [!code-csharp[](accconfirm/sample/WebPWrecover22/StartupAllTokens.cs?name=snippet1&highlight=15-16)]
 
-Yerleşik Identity Kullanıcı belirteçleri (bkz. [aspnetcore/src/Identity/Extensions.Core/src/TokenOptions.cs](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) ) bir [gün zaman aşımı](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs).
+Yerleşik Identity Kullanıcı belirteçleri (bkz. [aspnetcore/src/ Identity /Extensions.Core/src/TokenOptions.cs](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) ) bir [gün zaman aşımı](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs).
 
 ### <a name="change-the-email-token-lifespan"></a>E-posta belirtecini değiştir kullanım ömrü
 
-Kullanıcı belirteçlerinin varsayılan belirteç kullanım ömrü [bir gündür](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs). [ Identity ](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) Bu bölümde, eespan e-posta belirtecinin nasıl değiştirileceği gösterilmektedir.
+[ Identity Kullanıcı belirteçlerinin](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Extensions.Core/src/TokenOptions.cs) varsayılan belirteç kullanım ömrü [bir gündür](https://github.com/dotnet/AspNetCore/blob/v2.2.2/src/Identity/Core/src/DataProtectionTokenProviderOptions.cs). Bu bölümde, eespan e-posta belirtecinin nasıl değiştirileceği gösterilmektedir.
 
-Özel bir [veri korunabilir\<>](/dotnet/api/microsoft.aspnetcore.identity.dataprotectortokenprovider-1) ve <xref:Microsoft.AspNetCore.Identity.DataProtectionTokenProviderOptions>ekleyin:
+Özel bir [veri korunabilir \<TUser> ](/dotnet/api/microsoft.aspnetcore.identity.dataprotectortokenprovider-1) ve ekleyin <xref:Microsoft.AspNetCore.Identity.DataProtectionTokenProviderOptions> :
 
 [!code-csharp[](accconfirm/sample/WebPWrecover22/TokenProviders/CustomTokenProvider.cs?name=snippet1)]
 
@@ -411,8 +413,8 @@ Kullanıcı belirteçlerinin varsayılan belirteç kullanım ömrü [bir gündü
 
 E-posta ile çalışmayı alamazsanız:
 
-* Doğrulamak `EmailSender.Execute` `SendGridClient.SendEmailAsync` için içinde bir kesme noktası ayarlayın.
-* Benzer kod kullanarak [e-posta göndermek için bir konsol uygulaması](https://sendgrid.com/docs/Integrate/Code_Examples/v2_Mail/csharp.html) oluşturun `EmailSender.Execute`.
+* Doğrulamak için içinde bir kesme noktası ayarlayın `EmailSender.Execute` `SendGridClient.SendEmailAsync` .
+* Benzer kod kullanarak [e-posta göndermek için bir konsol uygulaması](https://sendgrid.com/docs/Integrate/Code_Examples/v2_Mail/csharp.html) oluşturun `EmailSender.Execute` .
 * [E-posta etkinlik](https://sendgrid.com/docs/User_Guide/email_activity.html) sayfasını gözden geçirin.
 * İstenmeyen posta klasörünüzü kontrol edin.
 * Farklı bir e-posta sağlayıcısında (Microsoft, Yahoo, Gmail vb.) başka bir e-posta diğer adı deneyin
@@ -424,7 +426,7 @@ E-posta ile çalışmayı alamazsanız:
 
 Bu bölümü gerçekleştirmek için önce bir dış kimlik doğrulama sağlayıcısı etkinleştirmeniz gerekir. Bkz. [Facebook, Google ve dış sağlayıcı kimlik doğrulaması](xref:security/authentication/social/index).
 
-E-posta bağlantısına tıklayarak Yerel ve sosyal hesapları birleştirebilirsiniz. Aşağıdaki dizide, "RickAndMSFT@gmail.com" ilk olarak yerel bir oturum açma olarak oluşturulur; Bununla birlikte, önce hesabı önce sosyal oturum açma olarak oluşturabilir, ardından yerel bir oturum açma ekleyebilirsiniz.
+E-posta bağlantısına tıklayarak Yerel ve sosyal hesapları birleştirebilirsiniz. Aşağıdaki dizide, " RickAndMSFT@gmail.com " ilk olarak yerel bir oturum açma olarak oluşturulur; ancak, önce hesabı önce sosyal oturum açma olarak oluşturabilir, ardından yerel bir oturum açma ekleyebilirsiniz.
 
 ![Web uygulaması: RickAndMSFT@gmail.com kullanıcının kimliği doğrulandı](accconfirm/_static/rick.png)
 

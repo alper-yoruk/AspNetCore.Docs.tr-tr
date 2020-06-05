@@ -1,12 +1,24 @@
 ---
-Başlık: ' ASP.NET Core Blazor barındırma modeli yapılandırması ' Author: guardrex açıklaması: ' Blazor Razor BILEŞENLERI Razor sayfalarla ve MVC uygulamalarına tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin. '
-monikerRange: ' >= aspnetcore-3,1 ' MS. Author: Riande MS. Custom: MVC MS. Date: 05/28/2020 No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: blazor/Hosting-model-yapılandırma
-
+title: ASP.NET Core Blazor barındırma modeli yapılandırması
+author: guardrex
+description: Blazor Razor Bileşenleri Razor Sayfalar ve MVC uygulamalarıyla tümleştirme dahil olmak üzere barındırma modeli yapılandırması hakkında bilgi edinin.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/28/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/hosting-model-configuration
+ms.openlocfilehash: e3b8b91a570210e77f307c49f7be21eeab714daa
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84355116"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>ASP.NET Core Blazor barındırma modeli yapılandırması
 
@@ -276,7 +288,7 @@ Yapılandırma dosyaları çevrimdışı kullanım için önbelleğe alınır. [
 
 Arka plan güncelleştirmelerinin PWAs tarafından nasıl işlendiği hakkında daha fazla bilgi için bkz <xref:blazor/progressive-web-app#background-updates> ..
 
-### <a name="logging"></a>Günlüğe kaydetme
+### <a name="logging"></a>Günlüğe Kaydetme
 
 BlazorWebassembly günlüğü desteği hakkında bilgi için bkz <xref:fundamentals/logging/index#create-logs-in-blazor> ..
 
@@ -322,7 +334,7 @@ BlazorSunucu uygulamaları, sunucu bağlantısı kurumadan önce sunucudaki kull
 * , Sayfaya ön gönderilir.
 * , Sayfada statik HTML olarak veya Kullanıcı aracısından bir uygulamayı önyüklemek için gerekli bilgileri içeriyorsa Blazor .
 
-| <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> | Description |
+| <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> | Açıklama |
 | --- | --- |
 | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Bileşeni statik HTML olarak işler ve sunucu uygulaması için bir işaret içerir Blazor . Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . |
 | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Sunucu uygulaması için bir işaret oluşturur Blazor . Bileşen çıkışı dahil değildir. Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . |
@@ -350,6 +362,6 @@ SignalRİstemciyi, *Pages/_Host. cshtml* dosyasında yapılandırmak için:
 </script>
 ```
 
-### <a name="logging"></a>Günlüğe kaydetme
+### <a name="logging"></a>Günlüğe Kaydetme
 
 BlazorSunucu günlüğü desteği hakkında bilgi için bkz <xref:fundamentals/logging/index#create-logs-in-blazor> ..

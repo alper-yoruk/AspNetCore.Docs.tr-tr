@@ -1,12 +1,24 @@
 ---
-Başlık: ' Debug ASP.NET Core Blazor webassembly ' Author: guardrex açıklaması: ' uygulamalarda hata ayıklamayı öğrenin Blazor . '
-monikerRange: ' >= aspnetcore-3,1 ' MS. Author: Riande MS. Custom: MVC MS. Date: 05/31/2020 No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: blazor/Debug
-
+title: Hata ayıklama ASP.NET Core Blazor webassembly
+author: guardrex
+description: Uygulamalarda hata ayıklamayı öğrenin Blazor .
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/31/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/debug
+ms.openlocfilehash: 193dc656c2ee0154f0ae534bc00f8dc29bab3258
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84239224"
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>Hata ayıklama ASP.NET Core Blazor webassembly
 
@@ -30,7 +42,7 @@ Kullanılabilir senaryolar şunlardır:
 
 Yaklaşan sürümlerde hata ayıklama deneyimini iyileştirmeye devam edeceğiz.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 Hata ayıklama aşağıdaki tarayıcılardan birini gerektirir:
 

@@ -1,14 +1,25 @@
 ---
-Başlık: ' ' SignalR Yazar: bradygaster açıklaması: ' içindeki kullanıcıları ve grupları yönetme ASP.NET Core SignalR Kullanıcı ve grup yönetimine genel bakış. '
-monikerRange: ' >= aspnetcore-2,1 ' MS. Author: bradyg MS. Custom: MVC MS. Date: 05/17/2020 No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: SignalR/gruplar
-
+title: İçindeki kullanıcıları ve grupları yönetmeSignalR
+author: bradygaster
+description: ASP.NET Core SignalR Kullanıcı ve grup yönetimine genel bakış.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: bradyg
+ms.custom: mvc
+ms.date: 05/17/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: signalr/groups
+ms.openlocfilehash: dfa989654069bc85f0a936751dbabe384c63e917
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "83550004"
 ---
-
 # <a name="manage-users-and-groups-in-signalr"></a>İçindeki kullanıcıları ve grupları yönetmeSignalR
 
 [Brennan Conroy](https://github.com/BrennanConroy) tarafından
@@ -45,6 +56,6 @@ Grupları kullanırken kaynaklara erişimi korumak için ASP.NET Core [kimlik do
 
 ## <a name="related-resources"></a>İlgili kaynaklar
 
-* [Kullanmaya başlayın](xref:tutorials/signalr)
+* [başlarken](xref:tutorials/signalr)
 * [Merkezler](xref:signalr/hubs)
 * [Azure’da Yayımlama](xref:signalr/publish-to-azure-web-app)

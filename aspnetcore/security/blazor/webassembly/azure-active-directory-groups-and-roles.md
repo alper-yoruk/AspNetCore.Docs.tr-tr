@@ -1,11 +1,11 @@
 ---
-title: Azure Active Directory Blazor grupları ve rolleri ASP.NET Core weelsembly
+title: BlazorAzure Active Directory grupları ve rolleri ASP.NET Core weelsembly
 author: guardrex
-description: Azure Active Directory grupları ve rolleri Blazor kullanmak için webassembly 'ı nasıl yapılandıracağınızı öğrenin.
+description: BlazorAzure Active Directory grupları ve rolleri kullanmak için webassembly 'ı nasıl yapılandıracağınızı öğrenin.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/08/2020
+ms.date: 05/19/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,22 +13,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/aad-groups-roles
-ms.openlocfilehash: afdb5ddc4d4ed08d0f1ecaf7158af283dda6b302
-ms.sourcegitcommit: 363e3a2a035f4082cb92e7b75ed150ba304258b3
+ms.openlocfilehash: 3ed06cca7e20da381b870e642a6c616b2578cd0a
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/08/2020
-ms.locfileid: "82976899"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84451881"
 ---
 # <a name="azure-ad-groups-administrative-roles-and-user-defined-roles"></a>Azure AD grupları, yönetim rolleri ve Kullanıcı tanımlı roller
 
 Sağlayan, [Luke Latham](https://github.com/guardrex) ve [Javier Calvarro Nelson](https://github.com/javiercn)
 
-[!INCLUDE[](~/includes/blazorwasm-preview-notice.md)]
-
-[!INCLUDE[](~/includes/blazorwasm-3.2-template-article-notice.md)]
-
-Azure Active Directory (AAD) ASP.NET Core kimliğiyle birleştirilebilecek çeşitli yetkilendirme yaklaşımları sağlar:
+Azure Active Directory (AAD), ASP.NET Core birleştirilebilecek çeşitli yetkilendirme yaklaşımları sağlar Identity :
 
 * Kullanıcı tanımlı gruplar
   * Güvenlik
@@ -38,7 +34,7 @@ Azure Active Directory (AAD) ASP.NET Core kimliğiyle birleştirilebilecek çeş
   * Yerleşik yönetim rolleri
   * Kullanıcı tanımlı roller
 
-Bu makaledeki kılavuz, aşağıdaki konularda açıklanan Blazor WebAssembly AAD dağıtım senaryolarına yöneliktir:
+Bu makaledeki kılavuz, Blazor aşağıdaki konularda açıklanan webassembly AAD dağıtım senaryolarına yöneliktir:
 
 * [Microsoft Hesapları ile bağımsız](xref:security/blazor/webassembly/standalone-with-microsoft-accounts)
 * [AAD ile bağımsız](xref:security/blazor/webassembly/standalone-with-azure-active-directory)
@@ -46,16 +42,16 @@ Bu makaledeki kılavuz, aşağıdaki konularda açıklanan Blazor WebAssembly AA
 
 ### <a name="user-defined-groups-and-built-in-administrative-roles"></a>Kullanıcı tanımlı gruplar ve yerleşik yönetim rolleri
 
-Azure portal bir `groups` üyelik talebi sağlamak üzere uygulamayı yapılandırmak Için aşağıdaki Azure makalelerine bakın. Kullanıcıları Kullanıcı tanımlı AAD gruplarına ve yerleşik yönetici rollerine atayın.
+Azure portal bir üyelik talebi sağlamak üzere uygulamayı yapılandırmak için `groups` aşağıdaki Azure makalelerine bakın. Kullanıcıları Kullanıcı tanımlı AAD gruplarına ve yerleşik yönetici rollerine atayın.
 
 * [Azure AD güvenlik gruplarını kullanan roller](/azure/architecture/multitenant-identity/app-roles#roles-using-azure-ad-security-groups)
 * [Groupmembershipclaim özniteliği](/azure/active-directory/develop/reference-app-manifest#groupmembershipclaims-attribute)
 
 Aşağıdaki örneklerde, bir kullanıcının AAD yerleşik *Faturalama yöneticisi* rolüne atandığını varsayılır.
 
-AAD tarafından `groups` gönderilen tek talep, kullanıcının gruplarını ve ROLLERINI bir JSON dizisinde nesne kimlikleri (GUID 'ler) olarak sunar. Uygulamanın, bir grup ve rol JSON dizisini, uygulamanın [ilke](xref:security/authorization/policies) derleyebilir `group` ayrı talepler olarak dönüştürmesi gerekir.
+`groups`AAD tarafından gönderilen tek talep, kullanıcının gruplarını ve rollerini BIR JSON dizisinde nesne kimlikleri (GUID 'ler) olarak sunar. Uygulamanın, bir grup ve rol JSON dizisini, `group` uygulamanın [ilke](xref:security/authorization/policies) derleyebilir ayrı talepler olarak dönüştürmesi gerekir.
 
-Gruplar `RemoteUserAccount` ve roller için dizi özelliklerini içerecek şekilde genişletin.
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount>Gruplar ve roller için dizi özelliklerini içerecek şekilde genişletin.
 
 *CustomUserAccount.cs*:
 
@@ -73,7 +69,7 @@ public class CustomUserAccount : RemoteUserAccount
 }
 ```
 
-Barındırılan bir çözümün tek başına uygulamasında veya Istemci uygulamasında özel bir Kullanıcı fabrikası oluşturun. Aşağıdaki fabrika Ayrıca, [Kullanıcı tanımlı roller](#user-defined-roles) bölümünde `roles` kapsanan talep dizilerini işleyecek şekilde yapılandırılmıştır:
+Barındırılan bir çözümün tek başına uygulamasında veya Istemci uygulamasında özel bir Kullanıcı fabrikası oluşturun. Aşağıdaki fabrika Ayrıca `roles` , [Kullanıcı tanımlı roller](#user-defined-roles) bölümünde kapsanan talep dizilerini işleyecek şekilde yapılandırılmıştır:
 
 ```csharp
 using System.Security.Claims;
@@ -117,9 +113,9 @@ public class CustomUserFactory
 }
 ```
 
-Çerçeve tarafından otomatik olarak kaldırıldığı için özgün `groups` talebi kaldırmak üzere kod sağlamanız gerekmez.
+Çerçeve tarafından otomatik olarak kaldırıldığı için özgün talebi kaldırmak üzere kod sağlamanız gerekmez `groups` .
 
-Bir barındırılan çözümün tek `Program.Main` başına uygulamasının veya istemci uygulamasının fabrika konumunu (*program.cs*) kaydedin:
+`Program.Main`Bir barındırılan çözümün tek başına uygulamasının veya istemci uygulamasının fabrika konumunu (*program.cs*) kaydedin:
 
 ```csharp
 builder.Services.AddMsalAuthentication<RemoteAuthenticationState, 
@@ -135,7 +131,7 @@ builder.Services.AddMsalAuthentication<RemoteAuthenticationState,
     CustomUserFactory>();
 ```
 
-İçindeki `Program.Main`her grup veya rol için bir [ilke](xref:security/authorization/policies) oluşturun. Aşağıdaki örnek, AAD yerleşik *faturalandırma Yöneticisi* rolü için bir ilke oluşturur:
+İçindeki her grup veya rol için bir [ilke](xref:security/authorization/policies) oluşturun `Program.Main` . Aşağıdaki örnek, AAD yerleşik *faturalandırma Yöneticisi* rolü için bir ilke oluşturur:
 
 ```csharp
 builder.Services.AddAuthorizationCore(options =>
@@ -168,7 +164,7 @@ Aşağıdaki örneklerde, uygulama kullanıcıyı yetkilendirmek için yukarıda
 </AuthorizeView>
 ```
 
-Bir bileşenin tamamına erişim, [ `[Authorize]` öznitelik yönerge](xref:security/blazor/index#authorize-attribute) yönergesini kullanarak ilkeyi temel alabilir:
+Bir bileşenin tamamına erişim [] öznitelik yönergesini kullanarak ilkeyi temel alabilir `[Authorize]` ] (XREF: Security/blazor/index # Yetkilendir-Attribute) ( <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ):
 
 ```razor
 @page "/"
@@ -220,7 +216,7 @@ Bir ilke denetimi, [yordamsal mantığa kodunda de gerçekleştirilebilir](xref:
 
 AAD ile kaydedilen bir uygulama, Kullanıcı tanımlı rolleri kullanmak için de yapılandırılabilir.
 
-Azure portal bir `roles` üyelik talebi sağlamak üzere uygulamayı yapılandırmak için, bkz. [nasıl yapılır: uygulamanıza uygulama rolleri ekleme ve bunları Azure belgelerindeki belirteçte alma](/azure/active-directory/develop/howto-add-app-roles-in-azure-ad-apps) .
+Azure portal bir üyelik talebi sağlamak üzere uygulamayı yapılandırmak için `roles` , bkz. [nasıl yapılır: uygulamanıza uygulama rolleri ekleme ve bunları Azure belgelerindeki belirteçte alma](/azure/active-directory/develop/howto-add-app-roles-in-azure-ad-apps) .
 
 Aşağıdaki örnek, bir uygulamanın iki rolle yapılandırıldığını varsayar:
 
@@ -228,15 +224,15 @@ Aşağıdaki örnek, bir uygulamanın iki rolle yapılandırıldığını varsay
 * `developer`
 
 > [!NOTE]
-> Azure AD Premium hesabı olmadan güvenlik gruplarına roller atayamasanız da, kullanıcıları rollere atayabilir ve standart bir Azure hesabı olan kullanıcılar için `roles` bir talep alabilirsiniz. Bu bölümdeki kılavuz bir Azure AD Premium hesabı gerektirmez.
+> Azure AD Premium hesabı olmadan güvenlik gruplarına roller atayamasanız da, kullanıcıları rollere atayabilir ve `roles` Standart bir Azure hesabı olan kullanıcılar için bir talep alabilirsiniz. Bu bölümdeki kılavuz bir Azure AD Premium hesabı gerektirmez.
 >
 > Her ek rol ataması için **_bir kullanıcıyı yeniden ekleyerek_** Azure Portal birden çok rol atanır.
 
-AAD tarafından `roles` gönderilen tek talep, Kullanıcı tanımlı ROLLERI bir JSON dizisinde `appRoles` `value`öğeleri olarak sunar. Uygulama, rollerin JSON dizisini bağımsız `role` taleplerine dönüştürmelidir.
+`roles`AAD tarafından gönderilen tek talep, Kullanıcı tanımlı rolleri `appRoles` `value` bir JSON dizisinde öğeleri olarak sunar. Uygulama, rollerin JSON dizisini bağımsız taleplerine dönüştürmelidir `role` .
 
-`CustomUserFactory` [Kullanıcı TANıMLı gruplar ve AAD yerleşik yönetim rolleri](#user-defined-groups-and-built-in-administrative-roles) bölümünde gösterilen bir JSON dizi değeri olan bir `roles` talep üzerinde işlem yapacak şekilde ayarlanır. `CustomUserFactory` [Kullanıcı TANıMLı gruplar ve AAD yerleşik yönetici rolleri](#user-defined-groups-and-built-in-administrative-roles) bölümünde gösterildiği gibi barındırılan bir çözümün tek başına uygulamasını veya istemci uygulamasını ekleyin ve kaydedin. Çerçeve tarafından otomatik olarak kaldırıldığı için özgün `roles` talebi kaldırmak üzere kod sağlamanız gerekmez.
+`CustomUserFactory` [Kullanıcı tanımlı gruplar ve AAD yerleşik yönetim rolleri](#user-defined-groups-and-built-in-administrative-roles) bölümünde gösterilen bir `roles` JSON dizi değeri olan bir talep üzerinde işlem yapacak şekilde ayarlanır. `CustomUserFactory` [Kullanıcı tanımlı gruplar ve AAD yerleşik yönetici rolleri](#user-defined-groups-and-built-in-administrative-roles) bölümünde gösterildiği gibi barındırılan bir çözümün tek başına uygulamasını veya istemci uygulamasını ekleyin ve kaydedin. Çerçeve tarafından otomatik olarak kaldırıldığı için özgün talebi kaldırmak üzere kod sağlamanız gerekmez `roles` .
 
-Barındırılan `Program.Main` bir çözümün tek başına uygulamasında veya istemci uygulamasında, rol talebi olarak "`role`" adlı talebi belirtin:
+`Program.Main`Barındırılan bir çözümün tek başına uygulamasında veya istemci uygulamasında, rol talebi olarak "" adlı talebi belirtin `role` :
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>
@@ -247,11 +243,11 @@ builder.Services.AddMsalAuthentication(options =>
 });
 ```
 
-Bu noktada bileşen yetkilendirme yaklaşımları işlevseldir. Bileşenlerdeki yetkilendirme mekanizmalarının herhangi biri, kullanıcıyı yetkilendirmek `admin` için rolünü kullanabilir:
+Bu noktada bileşen yetkilendirme yaklaşımları işlevseldir. Bileşenlerdeki yetkilendirme mekanizmalarının herhangi biri, `admin` kullanıcıyı yetkilendirmek için rolünü kullanabilir:
 
-* [Authorizeview bileşeni](xref:security/blazor/index#authorizeview-component) (örnek: `<AuthorizeView Roles="admin">`)
-* Attribute yönergesi (örnek: `@attribute [Authorize(Roles = "admin")]`) [ `[Authorize]` ](xref:security/blazor/index#authorize-attribute)
-* [Yordamsal Logic](xref:security/blazor/index#procedural-logic) (örnek: `if (user.IsInRole("admin")) { ... }`)
+* [Authorizeview bileşeni](xref:security/blazor/index#authorizeview-component) (örnek: `<AuthorizeView Roles="admin">` )
+* [ `[Authorize]` ] öznitelik yönergesi] (XREF: Security/blazor/index # Yetkilendir-Attribute) ( <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ) (Örnek: `@attribute [Authorize(Roles = "admin")]` )
+* [Yordamsal Logic](xref:security/blazor/index#procedural-logic) (örnek: `if (user.IsInRole("admin")) { ... }` )
 
   Birden çok rol testi desteklenir:
 
@@ -264,7 +260,7 @@ Bu noktada bileşen yetkilendirme yaklaşımları işlevseldir. Bileşenlerdeki 
 
 ## <a name="aad-adminstrative-role-group-ids"></a>AAD yönetim rolü grup kimlikleri
 
-Aşağıdaki tabloda sunulan nesne kimlikleri, talepler için `group` [ilkeler](xref:security/authorization/policies) oluşturmak üzere kullanılır. İlkeler, bir uygulamanın bir uygulamadaki çeşitli etkinlikler için kullanıcıları yetkilendirmesine izin verir. Daha fazla bilgi için [Kullanıcı tanımlı gruplar ve AAD yerleşik yönetim rolleri](#user-defined-groups-and-built-in-administrative-roles) bölümüne bakın.
+Aşağıdaki tabloda sunulan nesne kimlikleri, talepler için [ilkeler](xref:security/authorization/policies) oluşturmak üzere kullanılır `group` . İlkeler, bir uygulamanın bir uygulamadaki çeşitli etkinlikler için kullanıcıları yetkilendirmesine izin verir. Daha fazla bilgi için [Kullanıcı tanımlı gruplar ve AAD yerleşik yönetim rolleri](#user-defined-groups-and-built-in-administrative-roles) bölümüne bakın.
 
 AAD yönetim rolü | Nesne Kimliği
 --- | ---
@@ -296,7 +292,7 @@ Konuk davetci | 4c730a1d-cc22-44af-8f9f-4eec635c7502
 Yardım Masası Yöneticisi | 108678c8-6628-44e1-8d01-caf598a6a5f5
 Intune yöneticisi | 79950741-23fa-4189-b2cb-46640601c497
 Kaizala Yöneticisi | d6322af2-48e7-42e0-8c68-0bbe31af3412
-Lisans Yöneticisi | 3355458a-E423-44bf-8b98-4ac5e572begin' 5
+Lisans yöneticisi | 3355458a-E423-44bf-8b98-4ac5e572begin' 5
 İleti Merkezi Gizlilik okuyucusu | 6395db95-9fb8-42b9-b1ed-30a2405eee6f
 İleti Merkezi okuyucusu | fd5d37b8-4e24-434b-9e63-70ed3b759a16
 Office uygulamaları Yöneticisi | 5f3870cd-b042-4f93-86d7-c9d77c664dc7
@@ -318,7 +314,7 @@ Takımlar Iletişim Yöneticisi | 2393e455-6e13-4743-9f52-63fcec2b6a9c
 Takımlar Iletişimleri Destek Mühendisi | 802dd94e-d717-46F6-AF98-b9167071e9fc
 Takımlar Iletişim uzmanı | ef547281-cf46-4cc6-bcaa-f5eac3f030c9
 Takımlar Hizmet Yöneticisi | 8846a0be-197b-443A-b13c-11192691fa24
-Kullanıcı Yöneticisi | 1f6eed58-7dd3-460B-a298-666f975427a1
+Kullanıcı yöneticisi | 1f6eed58-7dd3-460B-a298-666f975427a1
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

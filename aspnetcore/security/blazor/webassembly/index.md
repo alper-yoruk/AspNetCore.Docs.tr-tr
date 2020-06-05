@@ -1,12 +1,24 @@
 ---
-Başlık: ' Secure ASP.NET Core Blazor webassembly ' Author: guardrex açıklaması: ', Blazor webassemlby uygulamalarının tek sayfalı uygulamalar (maça) olarak nasıl güvenli hale alınacağını öğrenin.
-monikerRange: ' >= aspnetcore-3,1 ' MS. Author: Riande MS. Custom: MVC MS. Date: 06/01/2020 No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: Security/blazor/webassembly/index
-
+title: BlazorWeelsembly ASP.NET Core güvenli
+author: guardrex
+description: BlazorWebassemlby uygulamalarını tek sayfalı uygulamalar (maça 'lar) olarak güvenli hale getirme hakkında bilgi edinin.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 06/01/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/blazor/webassembly/index
+ms.openlocfilehash: ce780afe3e69d2526698cf3694fe70394fc17847
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84253480"
 ---
 # <a name="secure-aspnet-core-blazor-webassembly"></a>BlazorWeelsembly ASP.NET Core güvenli
 

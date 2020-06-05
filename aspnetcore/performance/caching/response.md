@@ -1,12 +1,23 @@
 ---
-Başlık: ASP.NET Core Yazar: Rick-Anderson açıklaması: yanıt önbelleğe alma, bant genişliği gereksinimlerini düşürmek ve ASP.NET Core uygulamaların performansını artırmak için nasıl kullanacağınızı öğrenin.
-monikerRange: ' >= aspnetcore-2,1 ' MS. Author: Riande MS. Date: 11/04/2019 No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: performans/önbelleğe alma/yanıt
-
+title: ASP.NET Core 'de yanıt önbelleğe alma
+author: rick-anderson
+description: Bant genişliği gereksinimlerini düşürmek ve ASP.NET Core uygulamalarının performansını artırmak için yanıt önbelleğe almayı nasıl kullanacağınızı öğrenin.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.date: 11/04/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: performance/caching/response
+ms.openlocfilehash: 87ff2633ded612eba2c996583b4a6cf997fe8e18
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84105772"
 ---
 # <a name="response-caching-in-aspnet-core"></a>ASP.NET Core 'de yanıt önbelleğe alma
 

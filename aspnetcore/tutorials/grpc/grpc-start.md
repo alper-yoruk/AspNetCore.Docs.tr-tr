@@ -11,12 +11,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/grpc/grpc-start
-ms.openlocfilehash: 0541a85756e0084f4a420a0742ad923d732a9365
-ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
+ms.openlocfilehash: a4676803361d71a3199b2cd1232d0ced8c93db5f
+ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82850558"
+ms.lasthandoff: 06/05/2020
+ms.locfileid: "84451948"
 ---
 # <a name="tutorial-create-a-grpc-client-and-server-in-aspnet-core"></a>Öğretici: ASP.NET Core bir gRPC istemcisi ve sunucusu oluşturma
 
@@ -55,21 +55,21 @@ Bu öğreticide şunları yaptınız:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Visual Studio 'Yu başlatın ve **Yeni proje oluştur**' u seçin. Alternatif olarak, Visual Studio **Dosya** menüsünden **Yeni** > **Proje**' yi seçin.
+* Visual Studio 'Yu başlatın ve **Yeni proje oluştur**' u seçin. Alternatif olarak, Visual Studio **Dosya** menüsünden **Yeni**  >  **Proje**' yi seçin.
 * **Yeni proje oluştur** Iletişim kutusunda **GRPC hizmeti** ' ni seçin ve **İleri**' yi seçin:
 
   ![Yeni proje iletişim kutusu oluştur](~/tutorials/grpc/grpc-start/static/cnp.png)
 
 * Projeyi **Grpcgreeter**olarak adlandırın. Kodu kopyalayıp yapıştırdığınızda ad alanlarının eşleşmesi için, proje *Grpcgreeter* adında bir ad vermek önemlidir.
-* **Oluştur**’u seçin.
+* **Oluştur**'u seçin.
 * **Yeni bir gRPC hizmeti oluştur** iletişim kutusunda:
   * **GRPC hizmeti** şablonu seçilidir.
-  * **Oluştur**’u seçin.
+  * **Oluştur**'u seçin.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * [Tümleşik terminali](https://code.visualstudio.com/docs/editor/integrated-terminal)açın.
-* Dizinleri (`cd`), projeyi içerecek bir klasöre değiştirin.
+* Dizinleri ( `cd` ), projeyi içerecek bir klasöre değiştirin.
 * Aşağıdaki komutları çalıştırın:
 
   ```dotnetcli
@@ -77,8 +77,8 @@ Bu öğreticide şunları yaptınız:
   code -r GrpcGreeter
   ```
 
-  * `dotnet new` Komut *grpcgreeter* klasöründe yeni bir GRPC hizmeti oluşturur.
-  * `code` Komut, Visual Studio Code yeni bir örneğinde *grpcgreeter* klasörünü açar.
+  * `dotnet new`Komut *Grpcgreeter* klasöründe yeni bir GRPC hizmeti oluşturur.
+  * `code`Komut, Visual Studio Code yeni bir örneğinde *Grpcgreeter* klasörünü açar.
 
   **Gerekli varlıkların derlenmesi ve hata ayıklaması için ' GrpcGreeter ' içinde eksik bir iletişim kutusu görüntülenir. Bunları ekleyin mi?**
 * **Evet**' i seçin.
@@ -96,7 +96,7 @@ Yukarıdaki komutlar, gRPC hizmeti oluşturmak için [.NET Core CLI](/dotnet/cor
 
 ### <a name="open-the-project"></a>Projeyi açın
 
-Visual Studio 'da **Dosya** > **Aç**' ı seçin ve ardından *grpcgreeter. csproj* dosyasını seçin.
+Visual Studio 'da **Dosya**  >  **Aç**' ı seçin ve ardından *grpcgreeter. csproj* dosyasını seçin.
 
 ---
 
@@ -104,7 +104,7 @@ Visual Studio 'da **Dosya** > **Aç**' ı seçin ve ardından *grpcgreeter. cspr
 
   [!INCLUDE[](~/includes/run-the-app.md)]
 
-Günlükler hizmeti dinlediği hizmetini gösterir `https://localhost:5001`.
+Günlükler hizmeti dinlediği hizmetini gösterir `https://localhost:5001` .
 
 ```console
 info: Microsoft.Hosting.Lifetime[0]
@@ -124,11 +124,11 @@ info: Microsoft.Hosting.Lifetime[0]
 
 *Grpcgreeter* proje dosyaları:
 
-* *Greet. proto* &ndash; *prototips/Greet. proto* dosyası `Greeter` GRPC 'yi tanımlar ve GRPC sunucu varlıklarını oluşturmak için kullanılır. Daha fazla bilgi için bkz. [gRPC 'ye giriş](xref:grpc/index).
-* *Hizmetler* klasörü: `Greeter` hizmetin uygulamasını içerir.
-* *appSettings. JSON* &ndash; , Kestrel tarafından kullanılan protokol gibi yapılandırma verilerini içerir. Daha fazla bilgi için bkz. <xref:fundamentals/configuration/index>.
-* *Program.cs* &ndash; , GRPC hizmeti için giriş noktasını içerir. Daha fazla bilgi için bkz. <xref:fundamentals/host/generic-host>.
-* *Startup.cs* &ndash; , uygulama davranışını yapılandıran kodu içerir. Daha fazla bilgi için bkz. [uygulama başlatma](xref:fundamentals/startup).
+* *Greet. proto*: *prototips/Greet. proto* dosyası `Greeter` gRPC 'yi tanımlar ve GRPC sunucu varlıklarını oluşturmak için kullanılır. Daha fazla bilgi için bkz. [gRPC 'ye giriş](xref:grpc/index).
+* *Hizmetler* klasörü: hizmetin uygulamasını içerir `Greeter` .
+* *appSettings. JSON*: Kestrel tarafından kullanılan protokol gibi yapılandırma verilerini içerir. Daha fazla bilgi için bkz. <xref:fundamentals/configuration/index>.
+* *Program.cs*: GRPC hizmeti için giriş noktasını içerir. Daha fazla bilgi için bkz. <xref:fundamentals/host/generic-host>.
+* *Startup.cs*: uygulama davranışını yapılandıran kodu içerir. Daha fazla bilgi için bkz. [uygulama başlatma](xref:fundamentals/startup).
 
 ## <a name="create-the-grpc-client-in-a-net-console-app"></a>Bir .NET konsol uygulamasında gRPC istemcisini oluşturma
 
@@ -141,7 +141,7 @@ info: Microsoft.Hosting.Lifetime[0]
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * [Tümleşik terminali](https://code.visualstudio.com/docs/editor/integrated-terminal)açın.
-* Dizinleri (`cd`), projeyi içerecek bir klasöre değiştirin.
+* Dizinleri ( `cd` ), projeyi içerecek bir klasöre değiştirin.
 * Aşağıdaki komutları çalıştırın:
 
   ```dotnetcli
@@ -161,7 +161,7 @@ GRPC istemci projesi aşağıdaki paketleri gerektirir:
 
 * .NET Core istemcisini içeren [GRPC .net. Client](https://www.nuget.org/packages/Grpc.Net.Client).
 * C# için prototipsiz ileti API 'Leri içeren [Google. Protoarabellek](https://www.nuget.org/packages/Google.Protobuf/).
-* Prototipleme dosyaları için C# araçları desteği içeren [GRPC. Tools](https://www.nuget.org/packages/Grpc.Tools/). Araç çalışma zamanında gerekli değildir, bu nedenle bağımlılık ile `PrivateAssets="All"`işaretlenir.
+* Prototipleme dosyaları için C# araçları desteği içeren [GRPC. Tools](https://www.nuget.org/packages/Grpc.Tools/). Araç çalışma zamanında gerekli değildir, bu nedenle bağımlılık ile işaretlenir `PrivateAssets="All"` .
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -169,8 +169,8 @@ Paket Yöneticisi Konsolu (PMC) veya NuGet Paketlerini Yönet ' i kullanarak pak
 
 #### <a name="pmc-option-to-install-packages"></a>Paket yüklemek için PMC seçeneği
 
-* Visual Studio 'da **Araçlar** > **NuGet Paket Yöneticisi** > **Paket Yöneticisi konsolu** ' nu seçin.
-* **Paket Yöneticisi konsol** penceresinde, dizini `cd GrpcGreeterClient` *Grpcgreeterclient. csproj* dosyalarını içeren klasöre değiştirmek için komutunu çalıştırın.
+* Visual Studio 'da **Araçlar**  >  **NuGet Paket Yöneticisi**  >  **Paket Yöneticisi konsolu** ' nu seçin.
+* **Paket Yöneticisi konsol** penceresinde, `cd GrpcGreeterClient` dizini *Grpcgreeterclient. csproj* dosyalarını içeren klasöre değiştirmek için komutunu çalıştırın.
 * Aşağıdaki komutları çalıştırın:
 
   ```powershell
@@ -181,11 +181,11 @@ Paket Yöneticisi Konsolu (PMC) veya NuGet Paketlerini Yönet ' i kullanarak pak
 
 #### <a name="manage-nuget-packages-option-to-install-packages"></a>Paket yüklemek için NuGet Paketlerini Yönet seçeneği
 
-* **Çözüm Gezgini** > **NuGet Paketlerini Yönet** ' de projeye sağ tıklayın
+* **Çözüm Gezgini**  >  **NuGet Paketlerini Yönet** ' de projeye sağ tıklayın
 * **Gözat** sekmesini seçin.
 * Arama kutusuna **GRPC .net. Client** girin.
 * **Araştır** sekmesinden **GRPC .net. Client** paketini seçin ve ardından **Install**' ı seçin.
-* Ve `Grpc.Tools`için `Google.Protobuf` tekrarlayın.
+* Ve için `Google.Protobuf` tekrarlayın `Grpc.Tools` .
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -199,10 +199,10 @@ dotnet add GrpcGreeterClient.csproj package Grpc.Tools
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-* **Solution Pad**Çözüm bölmesi > **paket Ekle** ' de **paketler** klasörüne sağ tıklayın
+* **Packages** **Çözüm bölmesi**  >  **paket Ekle** ' de paketler klasörüne sağ tıklayın
 * Arama kutusuna **GRPC .net. Client** girin.
 * Sonuçlar bölmesinden **GRPC .net. Client** paketini seçin ve **paket Ekle** ' yi seçin.
-* Ve `Grpc.Tools`için `Google.Protobuf` tekrarlayın.
+* Ve için `Google.Protobuf` tekrarlayın `Grpc.Tools` .
 
 ---
 
@@ -222,11 +222,11 @@ dotnet add GrpcGreeterClient.csproj package Grpc.Tools
 
   # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-  Projeye sağ tıklayın ve **Araçlar** > **Dosya Düzenle**' yi seçin.
+  Projeye sağ tıklayın ve **Araçlar**  >  **Dosya Düzenle**' yi seçin.
 
   ---
 
-* *Greet. proto* dosyasına başvuran `<Protobuf>` bir öğesi olan bir öğe grubu ekleyin:
+* `<Protobuf>` *Greet. proto* dosyasına başvuran bir öğesi olan bir öğe grubu ekleyin:
 
   ```xml
   <ItemGroup>
@@ -236,7 +236,7 @@ dotnet add GrpcGreeterClient.csproj package Grpc.Tools
 
 ### <a name="create-the-greeter-client"></a>Greeter istemcisini oluşturma
 
-`GrpcGreeter` Ad alanındaki türleri oluşturmak için projeyi derleyin. `GrpcGreeter` Türler yapı işlemi tarafından otomatik olarak oluşturulur.
+Ad alanındaki türleri oluşturmak için projeyi derleyin `GrpcGreeter` . `GrpcGreeter`Türler yapı işlemi tarafından otomatik olarak oluşturulur.
 
 GRPC Client *program.cs* dosyasını aşağıdaki kodla güncelleştirin:
 
@@ -246,12 +246,12 @@ GRPC Client *program.cs* dosyasını aşağıdaki kodla güncelleştirin:
 
 Greeter istemcisi şu şekilde oluşturulur:
 
-* GRPC `GrpcChannel` hizmetine bağlantı oluşturmak için bilgileri içeren bir örneği oluşturma.
-* Greeter istemcisini `GrpcChannel` oluşturmak için kullanarak:
+* `GrpcChannel`GRPC hizmetine bağlantı oluşturmak için bilgileri içeren bir örneği oluşturma.
+* `GrpcChannel`Greeter istemcisini oluşturmak için kullanarak:
 
 [!code-csharp[](~/tutorials/grpc/grpc-start/sample/GrpcGreeterClient/Program.cs?name=snippet&highlight=3-5)]
 
-Greeter istemcisi zaman uyumsuz `SayHello` yöntemi çağırır. `SayHello` Çağrının sonucu görüntülenir:
+Greeter istemcisi zaman uyumsuz yöntemi çağırır `SayHello` . `SayHello`Çağrının sonucu görüntülenir:
 
 [!code-csharp[](~/tutorials/grpc/grpc-start/sample/GrpcGreeterClient/Program.cs?name=snippet&highlight=6-8)]
 
@@ -259,8 +259,8 @@ Greeter istemcisi zaman uyumsuz `SayHello` yöntemi çağırır. `SayHello` Ça�
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Greeter hizmetinde, hata ayıklayıcı olmadan `Ctrl+F5` sunucuyu başlatmak için tuşuna basın.
-* `GrpcGreeterClient` Projede, hata ayıklayıcı olmadan `Ctrl+F5` istemcisini başlatmak için tuşuna basın.
+* Greeter hizmetinde, `Ctrl+F5` hata ayıklayıcı olmadan sunucuyu başlatmak için tuşuna basın.
+* `GrpcGreeterClient`Projede, `Ctrl+F5` hata ayıklayıcı olmadan istemcisini başlatmak için tuşuna basın.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -304,7 +304,7 @@ info: Microsoft.AspNetCore.Hosting.Diagnostics[2]
 ```
 
 > [!NOTE]
-> Bu makaledeki kod, gRPC hizmetini güvenli hale getirmek için ASP.NET Core HTTPS geliştirme sertifikası gerektirir. .NET gRPC istemcisi iletiyle `The remote certificate is invalid according to the validation procedure.` başarısız olursa veya `The SSL connection could not be established.`geliştirme sertifikası güvenilir olmaz. Bu sorunu onarmak için bkz. [Güvenilmeyen/geçersiz sertifikayla gRPC hizmeti çağırma](xref:grpc/troubleshoot#call-a-grpc-service-with-an-untrustedinvalid-certificate).
+> Bu makaledeki kod, gRPC hizmetini güvenli hale getirmek için ASP.NET Core HTTPS geliştirme sertifikası gerektirir. .NET gRPC istemcisi iletiyle başarısız olursa `The remote certificate is invalid according to the validation procedure.` veya `The SSL connection could not be established.` geliştirme sertifikası güvenilir olmaz. Bu sorunu onarmak için bkz. [Güvenilmeyen/geçersiz sertifikayla gRPC hizmeti çağırma](xref:grpc/troubleshoot#call-a-grpc-service-with-an-untrustedinvalid-certificate).
 
 [!INCLUDE[](~/includes/gRPCazure.md)]
 
