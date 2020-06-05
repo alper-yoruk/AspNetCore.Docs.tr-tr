@@ -26,7 +26,7 @@ Uygulama yerelleştirmesi şunları içerir:
 1. Destekettiğiniz diller ve kültürler için yerelleştirilmiş kaynaklar sağlayın
 1. Her istek için dil/kültür seçmek üzere bir strateji uygulayın
 
-[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/Localization) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
+[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/3.x/Localization) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
 ## <a name="make-the-apps-content-localizable"></a>Uygulamanın içeriğini yerelleştirilebilir yapın
 
@@ -721,7 +721,7 @@ Uygulama yerelleştirmesi şunları içerir:
 1. Destekettiğiniz diller ve kültürler için yerelleştirilmiş kaynaklar sağlayın
 1. Her istek için dil/kültür seçmek üzere bir strateji uygulayın
 
-[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/Localization) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
+[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/2.x/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
 ## <a name="make-the-apps-content-localizable"></a>Uygulamanın içeriğini yerelleştirilebilir yapın
 

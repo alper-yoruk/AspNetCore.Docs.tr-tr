@@ -1,11 +1,11 @@
 ---
-Başlık: ' ASP.NET Core Blazor Genelleştirme ve yerelleştirme ' yazarı: Description: ' Razor birden fazla kültürde veya dilde kullanıcılar için bileşen erişimi yapmayı öğrenin. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
+Başlık: ' ASP.NET Core Blazor Genelleştirme ve yerelleştirme ' Author: guardrex açıklaması: ' Razor , bileşenlerin birden fazla kültürde veya dilde kullanıcılara nasıl erişilebilir hale yapılacağını öğrenin. '
+monikerRange: ' >= aspnetcore-3,1 ' MS. Author: Riande MS. Custom: MVC MS. Date: 06/04/2020 No-loc:
 - 'Blazor'
 - 'Identity'
 - 'Let's Encrypt'
 - 'Razor'
-- ' SignalR ' uid: 
+- ' SignalR ' uid: blazor/Genelleştirme-yerelleştirme
 
 ---
 # <a name="aspnet-core-blazor-globalization-and-localization"></a>BlazorGenelleştirme ve yerelleştirme ASP.NET Core
@@ -49,7 +49,7 @@ Aşağıdaki alan türleri belirli biçimlendirme gereksinimlerine sahiptir ve �
 
 [`@bind`](xref:mvc/views/razor#bind), bir `@bind:culture` <xref:System.Globalization.CultureInfo?displayProperty=fullName> değeri ayrıştırmak ve biçimlendirmek için bir parametresini destekler. `date`Ve alan türleri kullanılırken bir kültürün belirtilmesi önerilmez `number` . `date`ve `number` Blazor gerekli kültürü sağlayan yerleşik desteğe sahiptir.
 
-## <a name="localization"></a>Localization (Yerelleştirme)
+## <a name="localization"></a>Yerelleştirme
 
 ### <a name="blazor-webassembly"></a>BlazorWebAssembly
 
@@ -74,34 +74,39 @@ Daha fazla bilgi ve örnek için bkz <xref:fundamentals/localization> ..
 
 #### <a name="cookies"></a>Tanımlama bilgileri
 
-Yerelleştirme kültürü tanımlama bilgisi kullanıcının kültürünü kalıcı hale getirebilirler. Tanımlama bilgisi, `OnGet` uygulamanın ana bilgisayar sayfası (*Pages/Host. cshtml. cs*) yöntemi tarafından oluşturulur. Yerelleştirme ara yazılımı, sonraki isteklerde Kullanıcı kültürünü ayarlamak için tanımlama bilgilerini okur. 
+Yerelleştirme kültürü tanımlama bilgisi kullanıcının kültürünü kalıcı hale getirebilirler. Yerelleştirme ara yazılımı, sonraki isteklerde Kullanıcı kültürünü ayarlamak için tanımlama bilgilerini okur. 
 
 Tanımlama bilgisinin kullanımı, WebSocket bağlantısının kültürü doğru şekilde yaymasını sağlar. Yerelleştirme şemaları URL yolunu veya sorgu dizesini temel alıyorsa, düzen WebSockets ile çalışmayabilir, bu nedenle kültürü kalıcı hale getiremeyebilir. Bu nedenle, yerelleştirme kültürü tanımlama bilgisinin kullanılması önerilen yaklaşımdır.
 
 Kültür bir yerelleştirme tanımlama bilgisinde kalıcı hale getirilir kültür atamak için herhangi bir teknik kullanılabilir. Uygulamanın zaten sunucu tarafı ASP.NET Core için bir yerelleştirme şeması varsa, uygulamanın var olan yerelleştirme altyapısını kullanmaya devam edin ve uygulamanın şeması içinde yerelleştirme kültür tanımlama bilgisini ayarlayın.
 
-Aşağıdaki örnekte, yerelleştirme ara yazılımı tarafından okunabilen bir tanımlama bilgisinde geçerli kültürün nasıl ayarlanacağı gösterilmektedir. Sunucu uygulamasında aşağıdaki içeriklerle bir *Pages/_Host. cshtml. cs* dosyası oluşturun Blazor :
+Aşağıdaki örnekte, yerelleştirme ara yazılımı tarafından okunabilen bir tanımlama bilgisinde geçerli kültürün nasıl ayarlanacağı gösterilmektedir. Razor *Pages/_Host. cshtml* dosyasında açılış etiketinin hemen içinde bir ifade oluşturun `<body>` :
 
-```csharp
-public class HostModel : PageModel
-{
-    public void OnGet()
-    {
-        HttpContext.Response.Cookies.Append(
+```cshtml
+@using System.Globalization
+@using Microsoft.AspNetCore.Localization
+
+...
+
+<body>
+    @{
+        this.HttpContext.Response.Cookies.Append(
             CookieRequestCultureProvider.DefaultCookieName,
             CookieRequestCultureProvider.MakeCookieValue(
                 new RequestCulture(
                     CultureInfo.CurrentCulture,
                     CultureInfo.CurrentUICulture)));
     }
-}
+
+    ...
+</body>
 ```
 
 Yerelleştirme, uygulama tarafından aşağıdaki olay dizisinde işlenir:
 
 1. Tarayıcı, uygulamaya bir ilk HTTP isteği gönderir.
 1. Kültür, yerelleştirme ara yazılımı tarafından atanır.
-1. `OnGet` *_Host. cshtml. cs* içindeki yöntemi, yanıtın bir parçası olarak bir tanımlama bilgisinde kültürü devam ettirir.
+1. Razor `_Host` Sayfadaki ifade (*_Host. cshtml*), yanıtın bir parçası olarak bir tanımlama bilgisinde kültürü devam ettirir.
 1. Tarayıcı, etkileşimli bir sunucu oturumu oluşturmak için bir WebSocket bağlantısı açar Blazor .
 1. Yerelleştirme ara yazılımı tanımlama bilgisini okur ve kültürü atar.
 1. BlazorSunucu oturumu doğru kültür ile başlar.
@@ -135,6 +140,25 @@ public class CultureController : Controller
 
 > [!WARNING]
 > <xref:Microsoft.AspNetCore.Mvc.ControllerBase.LocalRedirect%2A>Açık yeniden yönlendirme saldırılarını engellemek için eylem sonucunu kullanın. Daha fazla bilgi için bkz. <xref:security/preventing-open-redirects>.
+
+Uygulama, denetleyici eylemlerini işlemek üzere yapılandırılmamışsa:
+
+* ' Deki hizmet koleksiyonuna MVC hizmetleri ekleyin `Startup.ConfigureServices` :
+
+  ```csharp
+  services.AddControllers();
+  ```
+
+* Denetleyici uç noktası yönlendirmesi ekleme `Startup.Configure` :
+
+  ```csharp
+  app.UseEndpoints(endpoints =>
+  {
+      endpoints.MapControllers();
+      endpoints.MapBlazorHub();
+      endpoints.MapFallbackToPage("/_Host");
+  });
+  ```
 
 Aşağıdaki bileşen, Kullanıcı bir kültür seçtiğinde ilk yeniden yönlendirmenin nasıl gerçekleştirileceği hakkında bir örnek göstermektedir:
 
