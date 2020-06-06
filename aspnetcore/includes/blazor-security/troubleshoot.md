@@ -16,8 +16,12 @@ Kalan tanımlama bilgilerinin ve site verilerinin test ve sorun giderme konusund
 * Visual Studio 'da veya özel modda tarayıcı açmak için özel bir komut kullanın:
   * Visual Studio 'nun **Çalıştır** düğmesinden iletişim **kutusunu açın.**
   * **Ekle** düğmesini seçin.
-  * **Program** alanında tarayıcınızın yolunu belirtin.
-  * **Bağımsız değişkenler** alanında, tarayıcının ınbilito veya Private modunda açmak için kullandığı komut satırı seçeneğini ve uygulamanın URL 'sini belirtin. Örneğin:
+  * **Program** alanında tarayıcınızın yolunu belirtin. Aşağıdaki yürütülebilir yollar Windows 10 için tipik yükleme konumlarıdır. Tarayıcınız farklı bir konuma yüklenirse veya Windows 10 kullanmıyorsanız, tarayıcının yürütülebilir dosyasının yolunu belirtin.
+    * Microsoft Edge:`C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe`
+    * Google Chrome:`C:\Program Files (x86)\Google\Chrome\Application\chrome.exe`
+    * Mozilla Firefox:`C:\Program Files\Mozilla Firefox\firefox.exe`
+  * **Bağımsız değişkenler** alanında, tarayıcının ınbilito veya Private modunda açmak için kullandığı komut satırı seçeneğini belirtin. Bazı tarayıcılar uygulamanın URL 'sini gerektirir.
+    * Microsoft Edge:`-inprivate`
     * Google Chrome:`--incognito --new-window https://localhost:5001`
     * Mozilla Firefox:`-private -url https://localhost:5001`
   * **Kolay ad** alanına bir ad girin. Örneğin, `Firefox Auth Testing`.
