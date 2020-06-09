@@ -5,7 +5,7 @@ description: BlazorASP.NET Core, Içerik teslim ağları (CDN), dosya sunucular�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/28/2020
+ms.date: 06/07/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/blazor/webassembly
-ms.openlocfilehash: 09f74edaa3d1cb0d51e0ce8d0209383885b81f5f
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 005ec9af9a93bfc4be06d06588fd61a6367b1e47
+ms.sourcegitcommit: 74d80a36103fdbd54baba0118535a4647f511913
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84239387"
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84529551"
 ---
 # <a name="host-and-deploy-aspnet-core-blazor-webassembly"></a>ASP.NET Core webassembly 'ı barındırma ve dağıtma Blazor
 
@@ -34,13 +34,47 @@ Aşağıdaki dağıtım stratejileri desteklenir:
 * BlazorUygulama, bir ASP.NET Core uygulaması tarafından sunulur. Bu strateji [ASP.NET Core bölümünde barındırılan dağıtımda](#hosted-deployment-with-aspnet-core) ele alınmıştır.
 * BlazorUygulama, bir statik barındırma Web sunucusuna veya hizmetine yerleştirilir, burada .NET uygulamayı sunmak için kullanılmaz Blazor . Bu strateji [tek başına dağıtım](#standalone-deployment) bölümünde ele alınmıştır. Bu, bir Blazor WEBASSEMBLY uygulamasını bir IIS alt uygulaması olarak barındırma hakkında bilgiler içerir.
 
-## <a name="precompression"></a>Ön sıkıştırma
+## <a name="compression"></a>Sıkıştırma
 
-BlazorWebassembly uygulaması yayımlandığında, çıkış, uygulamanın boyutunu azaltmak ve çalışma zamanı sıkıştırması gereksinimini ortadan kaldırmak için önceden sıkıştırılır. Aşağıdaki sıkıştırma algoritmaları kullanılır:
+Bir Blazor weelsembly uygulaması yayımlandığında, çıkış sırasında, uygulamanın boyutunu azaltmak ve çalışma zamanı sıkıştırması için ek yükü kaldırmak üzere çıkış sırasında statik olarak sıkıştırılır. Aşağıdaki sıkıştırma algoritmaları kullanılır:
 
 * [Brotli](https://tools.ietf.org/html/rfc7932) (en yüksek düzey)
 * [Gzip](https://tools.ietf.org/html/rfc1952)
 
+Blazor, uygun sıkıştırılmış dosyaları sunacak ana bilgisayarı kullanır. ASP.NET Core barındırılan bir proje kullanırken, konak proje içerik anlaşması yapabilir ve statik olarak sıkıştırılmış dosyalara hizmet verebilir. BlazorWebassembly tek başına uygulamasını barındırırken, statik olarak sıkıştırılmış dosyaların sunulmasını sağlamak için ek çalışma gerekebilir:
+
+* IIS *Web. config* sıkıştırma yapılandırması için [IIS: Brotli ve gzip sıkıştırma](#brotli-and-gzip-compression) bölümüne bakın. 
+* GitHub sayfaları gibi statik olarak sıkıştırılmış dosya içeriği anlaşmasını desteklemeyen statik barındırma çözümlerinde barındırırken, Brotli sıkıştırılan dosyaları getirmek ve kodunu çözmek üzere uygulamayı yapılandırmayı düşünün:
+
+  * Uygulamadaki [Google/Brotli GitHub deposundan](https://github.com/google/brotli/) Brotli kod çözücüsüne başvurun.
+  * Kod çözücüyü kullanmak için uygulamayı güncelleştirin. `<body>` *Wwwroot/index.html* içindeki kapatma etiketinin içindeki biçimlendirmeyi aşağıdaki şekilde değiştirin:
+  
+    ```html
+    <script src="brotli.decode.min.js"></script>
+    <script src="_framework/blazor.webassembly.js" autostart="false"></script>
+    <script>
+    Blazor.start({
+      loadBootResource: function (type, name, defaultUri, integrity) {
+        if (type !== 'dotnetjs' && location.hostname !== 'localhost') {
+          return (async function () {
+            const response = await fetch(defaultUri + '.br', { cache: 'no-cache' });
+            if (!response.ok) {
+              throw new Error(response.statusText);
+            }
+            const originalResponseBuffer = await response.arrayBuffer();
+            const originalResponseArray = new Int8Array(originalResponseBuffer);
+            const decompressedResponseArray = BrotliDecode(originalResponseArray);
+            const contentType = type === 
+          'dotnetwasm' ? 'application/wasm' : 'application/octet-stream';
+            return new Response(decompressedResponseArray, 
+          { headers: { 'content-type': contentType } });
+          })();
+        }
+      }
+    });
+  </script>
+  ```
+   
 Sıkıştırmayı devre dışı bırakmak için `BlazorEnableCompression` uygulamanın proje dosyasına MSBuild özelliğini ekleyin ve değeri şu şekilde ayarlayın `false` :
 
 ```xml
@@ -48,8 +82,6 @@ Sıkıştırmayı devre dışı bırakmak için `BlazorEnableCompression` uygula
   <BlazorEnableCompression>false</BlazorEnableCompression>
 </PropertyGroup>
 ```
-
-IIS *Web. config* sıkıştırma yapılandırması için [IIS: Brotli ve gzip sıkıştırma](#brotli-and-gzip-compression) bölümüne bakın.
 
 ## <a name="rewrite-urls-for-correct-routing"></a>Doğru yönlendirme için URL 'Leri yeniden yazın
 
@@ -178,7 +210,7 @@ IIS, *Web. config* aracılığıyla Brotli veya gzip sıkıştırılan varlıkla
 
 IIS ile dağıtım sorunlarını giderme hakkında daha fazla bilgi için bkz <xref:test/troubleshoot-azure-iis> ..
 
-### <a name="azure-storage"></a>Azure Storage
+### <a name="azure-storage"></a>Azure Depolama
 
 [Azure depolama](/azure/storage/) statik dosya barındırma, sunucusuz Blazor uygulama barındırmayı sağlar. Özel etki alanı adları, Azure Content Delivery Network (CDN) ve HTTPS desteklenir.
 

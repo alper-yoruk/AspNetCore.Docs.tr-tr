@@ -12,24 +12,24 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-3.1
-ms.openlocfilehash: 67fc972676549a02265035c129c513f11d303d51
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 5b6ae8173ca3d968e220faa4a060e1b42b14f8bb
+ms.sourcegitcommit: 05490855e0c70565f0c4b509d392b0828bcfd141
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774053"
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84507250"
 ---
 # <a name="whats-new-in-aspnet-core-31"></a>ASP.NET Core 3,1 ' deki yenilikler
 
 Bu makalede, ASP.NET Core 3,1 ' deki en önemli değişiklikler ilgili belgelerin bağlantılarıyla vurgulanır.
 
-## <a name="partial-class-support-for-razor-components"></a>Bileşenler için Razor kısmi sınıf desteği
+## <a name="partial-class-support-for-razor-components"></a>Bileşenler için kısmi sınıf desteği Razor
 
-Razorbileşenler artık kısmi sınıflar olarak oluşturulmuştur. Bir Razor bileşenin kodu, tek bir dosyada bileşen için tüm kodu tanımlamak yerine kısmi bir sınıf olarak tanımlanmış bir arka plan kod dosyası kullanılarak yazılabilir. Daha fazla bilgi için bkz. [kısmi sınıf desteği](xref:blazor/components#partial-class-support).
+Razorbileşenler artık kısmi sınıflar olarak oluşturulmuştur. Bir bileşenin kodu, Razor tek bir dosyada bileşen için tüm kodu tanımlamak yerine kısmi bir sınıf olarak tanımlanmış bir arka plan kod dosyası kullanılarak yazılabilir. Daha fazla bilgi için bkz. [kısmi sınıf desteği](xref:blazor/components#partial-class-support).
 
 ## <a name="blazor-component-tag-helper-and-pass-parameters-to-top-level-components"></a>BlazorBileşen etiketi Yardımcısı ve parametreleri en üst düzey bileşenlere geçir
 
-ASP.NET Core Blazor 3,0 ' de, bileşenler HTML Yardımcısı (`Html.RenderComponentAsync`) kullanılarak sayfalar ve görünümler halinde işlenmiştir. ASP.NET Core 3,1 ' de, yeni bileşen etiketi Yardımcısı ile bir sayfadan veya görünümden bir bileşeni işleme:
+BlazorASP.NET Core 3,0 ' de, BILEŞENLER HTML Yardımcısı () kullanılarak sayfalar ve görünümler halinde işlenmiştir `Html.RenderComponentAsync` . ASP.NET Core 3,1 ' de, yeni bileşen etiketi Yardımcısı ile bir sayfadan veya görünümden bir bileşeni işleme:
 
 ```cshtml
 <component type="typeof(Counter)" render-mode="ServerPrerendered" />
@@ -37,16 +37,16 @@ ASP.NET Core Blazor 3,0 ' de, bileşenler HTML Yardımcısı (`Html.RenderCompon
 
 HTML Yardımcısı ASP.NET Core 3,1 ' de desteklenmeye devam eder, ancak bileşen etiketi Yardımcısı önerilir.
 
-BlazorSunucu uygulamaları artık ilk işleme sırasında parametreleri en üst düzey bileşenlere geçirebilir. Daha önce, parametreleri yalnızca [RenderMode. static](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static)olan en üst düzey bileşene geçirebilirsiniz. Bu sürümle birlikte, hem [RenderMode. Server](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server) hem de [Rendermodel. Serverprerenimli](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered) desteklenir. Belirtilen parametre değerleri JSON olarak serileştirilir ve başlangıç yanıtına dahil edilir.
+BlazorSunucu uygulamaları artık ilk işleme sırasında parametreleri en üst düzey bileşenlere geçirebilir. Daha önce, parametreleri yalnızca [RenderMode. static](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static)olan en üst düzey bileşene geçirebilirsiniz. Bu sürümle birlikte, hem [RenderMode. Server](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server) hem de [RenderMode. Serverprerenimli](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered) desteklenir. Belirtilen parametre değerleri JSON olarak serileştirilir ve başlangıç yanıtına dahil edilir.
 
-Örneğin, artış miktarı ( `Counter` `IncrementAmount`) olan bir bileşen için:
+Örneğin, `Counter` artış miktarı () olan bir bileşen için `IncrementAmount` :
 
 ```cshtml
 <component type="typeof(Counter)" render-mode="ServerPrerendered" 
     param-IncrementAmount="10" />
 ```
 
-Daha fazla bilgi için bkz. [bileşenleri Razor sayfalar ve MVC uygulamaları ile tümleştirme](xref:blazor/integrate-components).
+Daha fazla bilgi için bkz. [bileşenleri Razor Sayfalar ve MVC uygulamaları ile tümleştirme](xref:blazor/integrate-components).
 
 ## <a name="support-for-shared-queues-in-httpsys"></a>HTTP. sys dosyasındaki paylaşılan sıralar için destek
 
@@ -58,9 +58,9 @@ Daha fazla bilgi için bkz. [bileşenleri Razor sayfalar ve MVC uygulamaları il
 
 SameSite tanımlama bilgilerinin davranışı yaklaşan tarayıcı değişikliklerini yansıtacak şekilde değiştirilmiştir. Bu, AzureAd, Openıdconnect veya WsFederation gibi kimlik doğrulama senaryolarını etkileyebilir. Daha fazla bilgi için bkz. <xref:security/samesite>.
 
-## <a name="prevent-default-actions-for-events-in-blazor-apps"></a>Blazor Uygulamalardaki olaylar için varsayılan eylemleri engelleme
+## <a name="prevent-default-actions-for-events-in-blazor-apps"></a>Uygulamalardaki olaylar için varsayılan eylemleri engelleme Blazor
 
-Bir olayın `@on{EVENT}:preventDefault` varsayılan eylemini engellemek için Directive özniteliğini kullanın. Aşağıdaki örnekte, metin kutusunda anahtarın karakterini görüntülemenin varsayılan eylemi engellenir:
+`@on{EVENT}:preventDefault`Bir olayın varsayılan eylemini engellemek için Directive özniteliğini kullanın. Aşağıdaki örnekte, metin kutusunda anahtarın karakterini görüntülemenin varsayılan eylemi engellenir:
 
 ```razor
 <input value="@_count" @onkeypress="KeyHandler" @onkeypress:preventDefault />
@@ -68,9 +68,9 @@ Bir olayın `@on{EVENT}:preventDefault` varsayılan eylemini engellemek için Di
 
 Daha fazla bilgi için bkz. [varsayılan eylemleri engelleme](xref:blazor/event-handling#prevent-default-actions).
 
-## <a name="stop-event-propagation-in-blazor-apps"></a>Blazor Uygulamalarda olay yaymayı durdur
+## <a name="stop-event-propagation-in-blazor-apps"></a>Uygulamalarda olay yaymayı Durdur Blazor
 
-Olay yaymayı `@on{EVENT}:stopPropagation` durdurmak için Directive özniteliğini kullanın. Aşağıdaki örnekte, onay kutusunun seçilmesi alt öğeden üst öğeye `<div>` `<div>`yayılmalarını önler:
+`@on{EVENT}:stopPropagation`Olay yaymayı durdurmak için Directive özniteliğini kullanın. Aşağıdaki örnekte, onay kutusunun seçilmesi alt öğeden `<div>` üst öğeye yayılmalarını önler `<div>` :
 
 ```razor
 <input @bind="_stopPropagation" type="checkbox" />
@@ -88,9 +88,9 @@ Olay yaymayı `@on{EVENT}:stopPropagation` durdurmak için Directive özniteliğ
 
 Daha fazla bilgi için bkz. [olay yaymayı durdurma](xref:blazor/event-handling#stop-event-propagation).
 
-## <a name="detailed-errors-during-blazor-app-development"></a>Uygulama geliştirme sırasında Blazor ayrıntılı hatalar
+## <a name="detailed-errors-during-blazor-app-development"></a>Uygulama geliştirme sırasında ayrıntılı hatalar Blazor
 
-Geliştirme sırasında Blazor bir uygulama düzgün çalışmadığı zaman, uygulamanın ayrıntılı hata bilgilerini alma sorunu gidermeye ve soruna yardımcı olur. Bir hata oluştuğunda, Blazor uygulamalar ekranın alt kısmında altın bir çubuk görüntüler:
+BlazorGeliştirme sırasında bir uygulama düzgün çalışmadığı zaman, uygulamanın ayrıntılı hata bilgilerini alma sorunu gidermeye ve soruna yardımcı olur. Bir hata oluştuğunda, Blazor uygulamalar ekranın alt kısmında altın bir çubuk görüntüler:
 
 * Geliştirme sırasında altın çubuk, özel durumu görebileceğiniz tarayıcı konsoluna yönlendirir.
 * Üretimde, altın çubuk kullanıcıya bir hata oluştuğunu bildirir ve tarayıcıyı yenilemeyi önerir.

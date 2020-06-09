@@ -1,12 +1,24 @@
 ---
-Başlık: ' ASP.NET Core Blazor webassembly performansı en iyi yöntemleri ' Yazar: Açıklama: ' ASP.NET Core Blazor weelsembly uygulamalarında performansı artırma ve genel performans sorunlarından kaçınma ipuçları. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
+title: ASP.NET Core Blazor webassembly performansı en iyi yöntemleri
+author: pranavkm
+description: ASP.NET Core Blazor weelsembly uygulamalarında performansı artırmaya yönelik ipuçları ve sık karşılaşılan performans sorunlarını önleme.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 06/08/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: performance/blazor/webassembly-best-practices
+ms.openlocfilehash: 950d87a6f09e998e47e96c93c5d68bb3f19ddafb
+ms.sourcegitcommit: 74d80a36103fdbd54baba0118535a4647f511913
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84529638"
 ---
 # <a name="aspnet-core-blazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor webassembly performansı en iyi yöntemleri
 
@@ -131,6 +143,12 @@ BlazorWebAssembly <xref:Microsoft.JSInterop.IJSRuntime> , sunucu uygulamaları i
 ```dotnetcli
 dotnet publish -c Release
 ```
+
+### <a name="compression"></a>Sıkıştırma
+
+Bir Blazor weelsembly uygulaması yayımlandığında, çıkış sırasında, uygulamanın boyutunu azaltmak ve çalışma zamanı sıkıştırması için ek yükü kaldırmak üzere çıkış sırasında statik olarak sıkıştırılır. Blazor, içerik eklemek için sunucuyu kullanır ve statik olarak sıkıştırılan dosyaları sunar.
+
+Bir uygulama dağıtıldıktan sonra uygulamanın sıkıştırılmış dosyalara hizmet ettiğini doğrulayın. Tarayıcının Geliştirici Araçları ağ sekmesini inceleyin ve dosyaların veya ile birlikte sunulduğunu doğrulayın `Content-Encoding: br` `Content-Encoding: gz` . Ana bilgisayar sıkıştırılmış dosyalara hizmet vermemişse, içindeki yönergeleri izleyin <xref:host-and-deploy/blazor/webassembly#compression> .
 
 ### <a name="disable-unused-features"></a>Kullanılmayan özellikleri devre dışı bırak
 

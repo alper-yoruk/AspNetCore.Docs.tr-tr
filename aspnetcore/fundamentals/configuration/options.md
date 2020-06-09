@@ -1,12 +1,25 @@
 ---
-title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
---- 
+title: ASP.NET Core için seçenek kalıbı
+author: rick-anderson
+description: ASP.NET Core uygulamalarında ilgili ayarların gruplarını temsil etmek için seçenekler deseninin nasıl kullanılacağını öğrenin.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/20/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: fundamentals/configuration/options
+ms.openlocfilehash: 9a9febba060cca591f2cbcdc03cb4c35edcfdda7
+ms.sourcegitcommit: 74d80a36103fdbd54baba0118535a4647f511913
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84529669"
+---
 # <a name="options-pattern-in-aspnet-core"></a>ASP.NET Core için seçenek kalıbı
 
 ::: moniker range=">= aspnetcore-3.0"
@@ -158,9 +171,14 @@ Aşağıdaki sınıf `"MyConfig"` yapılandırma bölümüne bağlanır ve birka
 
 [!code-csharp[](options/samples/3.x/OptionsValidationSample/Configuration/MyConfigOptions.cs?name=snippet)]
 
-Aşağıdaki kod, <xref:Microsoft.Extensions.DependencyInjection.OptionsServiceCollectionExtensions.AddOptions%2A> sınıfa bağlanan ve doğrulamayı sağlayan bir [SeçenekKodu Oluşturucusu \<TOptions> ](xref:Microsoft.Extensions.Options.OptionsBuilder`1) almak için çağırır `MyConfigOptions` `DataAnnotations` :
+Aşağıdaki kod:
+
+* <xref:Microsoft.Extensions.DependencyInjection.OptionsServiceCollectionExtensions.AddOptions%2A>Sınıfına bağlanan bir [seçenekoluşturucu Oluşturucu \<TOptions> ](xref:Microsoft.Extensions.Options.OptionsBuilder`1) almak için çağırır `MyConfigOptions` .
+* <xref:Microsoft.Extensions.DependencyInjection.OptionsBuilderDataAnnotationsExtensions.ValidateDataAnnotations%2A>Kullanarak doğrulamayı etkinleştirmek için çağırır `DataAnnotations` .
 
 [!code-csharp[](options/samples/3.x/OptionsValidationSample/Startup.cs?name=snippet)]
+
+`ValidateDataAnnotations`Genişletme yöntemi, [Microsoft. Extensions. Options. dataaçıklamalarda](https://www.nuget.org/packages/Microsoft.Extensions.Options.DataAnnotations) NuGet paketinde tanımlanmıştır. SDK kullanan Web uygulamaları için `Microsoft.NET.Sdk.Web` Bu pakete, dolaylı olarak paylaşılan çerçeveden başvurulur.
 
 Aşağıdaki kod yapılandırma değerlerini veya doğrulama hatalarını görüntüler:
 

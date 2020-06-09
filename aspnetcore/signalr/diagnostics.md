@@ -1,12 +1,24 @@
 ---
-Başlık: ' ASP.NET Core ' de günlüğe kaydetme ve tanılama SignalR : Açıklama: ' ASP.NET Core uygulamanızdan tanılamayı nasıl toplayacağınızı öğrenin SignalR . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
+title: ASP.NET Core 'de günlüğe kaydetme ve tanılamaSignalR
+author: anurse
+description: ASP.NET Core uygulamanızdan tanılamayı nasıl toplayacağınızı öğrenin SignalR .
+monikerRange: '>= aspnetcore-2.1'
+ms.author: anurse
+ms.custom: signalr
+ms.date: 06/08/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: signalr/diagnostics
+ms.openlocfilehash: 22e1d24bc9fed5fd8588c852e07f5ca935946596
+ms.sourcegitcommit: 05490855e0c70565f0c4b509d392b0828bcfd141
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/08/2020
+ms.locfileid: "84507322"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>ASP.NET Core 'de günlüğe kaydetme ve tanılamaSignalR
 
@@ -76,35 +88,15 @@ Günlüğe kaydetmeyi tamamen devre dışı bırakmak için `signalR.LogLevel.No
 
 Aşağıdaki tabloda JavaScript istemcisi için kullanılabilir olan günlük düzeyleri gösterilmektedir. Günlük düzeyinin bu değerlerden birine ayarlanması, bu düzeyde ve tabloda üzerindeki tüm düzeylerde günlüğe kaydetmeyi sağlar.
 
-| Düzey | Açıklama |
-| ----- | ---
-Başlık: ' ASP.NET Core ' de günlüğe kaydetme ve tanılama SignalR : Açıklama: ' ASP.NET Core uygulamanızdan tanılamayı nasıl toplayacağınızı öğrenin SignalR . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core ' de günlüğe kaydetme ve tanılama SignalR : Açıklama: ' ASP.NET Core uygulamanızdan tanılamayı nasıl toplayacağınızı öğrenin SignalR . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core ' de günlüğe kaydetme ve tanılama SignalR : Açıklama: ' ASP.NET Core uygulamanızdan tanılamayı nasıl toplayacağınızı öğrenin SignalR . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
------- | | `None` | Hiçbir ileti günlüğe kaydedilmez. | | `Critical` | Uygulamanın tamamında bir hata olduğunu gösteren mesajlar. | | `Error` | Geçerli işlemdeki bir hatayı gösteren mesajlar. | | `Warning` | Önemli olmayan bir sorunu belirten mesajlar. | | `Information` | Bilgi iletileri. | | `Debug` | Tanılama iletileri hata ayıklama için yararlıdır. | | `Trace` | Belirli sorunları tanılamak için tasarlanan çok ayrıntılı tanılama iletileri. |
+| Düzey | Description |
+| ----- | ----------- |
+| `None` | Hiçbir ileti günlüğe kaydedilmez. |
+| `Critical` | Uygulamanın tamamında bir hata olduğunu gösteren mesajlar. |
+| `Error` | Geçerli işlemdeki bir hatayı gösteren mesajlar. |
+| `Warning` | Önemli olmayan bir sorunu belirten mesajlar. |
+| `Information` | Bilgi iletileri. |
+| `Debug` | Tanılama iletileri hata ayıklama için yararlıdır. |
+| `Trace` | Belirli sorunları tanılamak için tasarlanan çok ayrıntılı tanılama iletileri. |
 
 Ayrıntı düzeyini yapılandırdıktan sonra, Günlükler tarayıcı konsoluna yazılır (veya bir NodeJS uygulamasında standart çıkış).
 
@@ -217,6 +209,39 @@ Tanılama dosyalarını, bir uzantıya sahip olacak şekilde yeniden adlandırar
 > Lütfen günlük dosyalarının veya ağ izlemelerinin içeriğini bir GitHub sorununa yapıştırmayın. Bu Günlükler ve izlemeler oldukça büyük olabilir ve GitHub genellikle bunları keser.
 
 ![Günlük dosyalarını bir GitHub sorununa sürükleme](diagnostics/attaching-diagnostics-files.png)
+
+## <a name="metrics"></a>Ölçümler
+
+Ölçümler, zaman aralıklarıyla veri ölçümlerinin bir gösterimidir. Örneğin, saniye başına istek. Ölçüm verileri, yüksek düzeyde bir uygulamanın durumunun gözlemde yapılmasına izin verir. .NET gRPC ölçümleri kullanılarak dağıtılır <xref:System.Diagnostics.Tracing.EventCounter> .
+
+### <a name="signalr-server-metrics"></a>SignalRSunucu ölçümleri
+
+SignalRSunucu ölçümleri <xref:Microsoft.AspNetCore.Http.Connections> olay kaynağında raporlanır.
+
+| Name                    | Description                 |
+|-------------------------|-----------------------------|
+| `connections-started`   | Toplam bağlantı sayısı   |
+| `connections-stopped`   | Durdurulan toplam bağlantı sayısı   |
+| `connections-timed-out` | Zaman aşımına uğrayan toplam bağlantı sayısı |
+| `current-connections`   | Geçerli bağlantılar         |
+| `connections-duration`  | Ortalama bağlantı süresi |
+
+### <a name="observe-metrics"></a>Ölçümleri gözlemleyin
+
+[DotNet sayaçları](/dotnet/core/diagnostics/dotnet-counters) , geçici sistem durumu izleme ve ilk düzey performans araştırması için bir performans izleme aracıdır. Sağlayıcı adı olarak bir .NET uygulamasını izleyin `Microsoft.AspNetCore.Http.Connections` . Örneğin:
+
+```console
+> dotnet-counters monitor --process-id 37016 Microsoft.AspNetCore.Http.Connections
+
+Press p to pause, r to resume, q to quit.
+    Status: Running
+[Microsoft.AspNetCore.Http.Connections]
+    Average Connection Duration (ms)       16,040.56
+    Current Connections                         1
+    Total Connections Started                   8
+    Total Connections Stopped                   7
+    Total Connections Timed Out                 0
+```
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
