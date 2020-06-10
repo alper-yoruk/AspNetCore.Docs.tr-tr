@@ -75,7 +75,7 @@
               uid: tutorials/first-mvc-app/new-field
             - name: Doğrulama ekleme
               uid: tutorials/first-mvc-app/validation
-            - name: Details ve Delete yöntemlerini inceleme
+            - name: Ayrıntıları İnceleme ve Silme
               uid: tutorials/first-mvc-app/details
         - name: Blazor
           displayName: tutorial
