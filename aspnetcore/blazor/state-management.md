@@ -1,12 +1,24 @@
 ---
-Başlık: ' ASP.NET Core Blazor Durum Yönetimi ' Yazar: Açıklama: ' sunucu uygulamalarında durumu kalıcı hale getirme hakkında bilgi edinin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
+title: ASP.NET Core Blazor durum yönetimi
+author: guardrex
+description: Sunucu uygulamalarında durumu kalıcı hale getirme hakkında bilgi edinin Blazor .
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/19/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/state-management
+ms.openlocfilehash: cfc2867baa03cbc0bedc9ad4a90244ec007094d6
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84105668"
 ---
 # <a name="aspnet-core-blazor-state-management"></a>ASP.NET Core Blazor durum yönetimi
 

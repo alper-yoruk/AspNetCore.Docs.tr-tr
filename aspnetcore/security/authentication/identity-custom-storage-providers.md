@@ -1,12 +1,23 @@
 ---
-Başlık: ' ASP.NET Core için özel depolama sağlayıcıları Identity ' Yazar: Açıklama: ' ASP.NET Core için özel depolama sağlayıcıları yapılandırmayı öğrenin Identity . '
-MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
+title: ASP.NET Core için özel depolama sağlayıcılarıIdentity
+author: ardalis
+description: ASP.NET Core için özel depolama sağlayıcıları yapılandırma hakkında bilgi edinin Identity .
+ms.author: riande
+ms.custom: mvc
+ms.date: 07/23/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/authentication/identity-custom-storage-providers
+ms.openlocfilehash: 792a9e5f776e345fbee5726b676fe148ecaf1657
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106591"
 ---
 # <a name="custom-storage-providers-for-aspnet-core-identity"></a>ASP.NET Core için özel depolama sağlayıcılarıIdentity
 
@@ -18,7 +29,7 @@ ASP.NET Core Identity , özel bir depolama sağlayıcısı oluşturup uygulaman�
 
 ## <a name="introduction"></a>Giriş
 
-Varsayılan olarak, ASP.NET Core Identity Sistem Kullanıcı bilgilerini Entity Framework Core kullanarak SQL Server veritabanında depolar. Birçok uygulama için bu yaklaşım iyi bir sonuç verir. Ancak, farklı bir Kalıcılık mekanizması veya veri şeması kullanmayı tercih edebilirsiniz. Örneğin:
+Varsayılan olarak, ASP.NET Core Identity Sistem Kullanıcı bilgilerini Entity Framework Core kullanarak SQL Server veritabanında depolar. Birçok uygulama için bu yaklaşım iyi bir sonuç verir. Ancak, farklı bir Kalıcılık mekanizması veya veri şeması kullanmayı tercih edebilirsiniz. Örnek:
 
 * [Azure Tablo depolama](/azure/storage/) veya başka bir veri deposu kullanıyorsunuz.
 * Veritabanı tablolarınız farklı bir yapıya sahip. 
@@ -164,7 +175,7 @@ Sınıfı içinde `UserStore` , işlemleri gerçekleştirmek için oluşturduğu
 * **Iqueryableuserstore**  
  [Iqueryableuserstore &lt; Tuser &gt; ](/dotnet/api/microsoft.aspnetcore.identity.iqueryableuserstore-1) arabirimi, bir sorgulanabilir kullanıcı deposu sağlamak için uyguladığınız üyeleri tanımlar.
 
-Yalnızca uygulamanızda gerekli olan arabirimleri uygulayabilirsiniz. Örneğin:
+Yalnızca uygulamanızda gerekli olan arabirimleri uygulayabilirsiniz. Örnek:
 
 ```csharp
 public class UserStore : IUserStore<IdentityUser>,

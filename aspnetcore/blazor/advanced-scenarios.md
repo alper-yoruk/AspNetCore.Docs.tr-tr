@@ -1,12 +1,24 @@
 ---
-Başlık: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığını bir uygulamaya nasıl dahil etmek de dahildir. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
+title: ASP.NET Core Blazor Gelişmiş senaryolar
+author: guardrex
+description: "' Deki gelişmiş senaryolar Blazor , El Ile RenderTreeBuilder mantığını bir uygulamaya nasıl dahil leyeceğinizi öğrenin."
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 02/18/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/advanced-scenarios
+ms.openlocfilehash: 3345f545e230ada78e6c66fc9eb049060d5794d6
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "83851165"
 ---
 # <a name="aspnet-core-blazor-advanced-scenarios"></a>ASP.NET Core Blazor Gelişmiş senaryolar
 
@@ -150,73 +162,15 @@ builder.AddContent(1, "Second");
 Kod ilk kez çalıştırıldığında, `someFlag` `true` Oluşturucu şunları alır:
 
 | Sequence | Tür      | Veriler   |
-| :---
-Başlık: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığını bir uygulamaya nasıl dahil etmek de dahildir. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
----: | ---title: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığının bir uygulamaya nasıl dahil edilmesi de dahildir. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığını bir uygulamaya nasıl dahil etmek de dahildir. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
------ | :----: | | 0 | Metin düğümü | İlk | | 1 | Metin düğümü | İkinci |
+| :------: | --------- | :----: |
+| 0        | Metin düğümü | İlk  |
+| 1        | Metin düğümü | Saniye |
 
 Olduğunu düşünün `someFlag` `false` ve biçimlendirme yeniden işlenir. Bu kez, Oluşturucu şunları alır:
 
 | Sequence | Tür       | Veriler   |
-| :---
-Başlık: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığını bir uygulamaya nasıl dahil etmek de dahildir. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
----: | ---title: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığının bir uygulamaya nasıl dahil edilmesi de dahildir. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığını bir uygulamaya nasıl dahil etmek de dahildir. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığını bir uygulamaya nasıl dahil etmek de dahildir. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
------ | :----: | | 1 | Metin düğümü | İkinci |
+| :------: | ---------- | :----: |
+| 1        | Metin düğümü  | Saniye |
 
 Çalışma zamanı bir fark gerçekleştirdiğinde, sıradaki öğenin `0` kaldırıldığını görür, bu nedenle aşağıdaki önemsiz *düzenleme betiğini*oluşturur:
 
@@ -240,72 +194,15 @@ builder.AddContent(seq++, "Second");
 Şimdi ilk çıktı:
 
 | Sequence | Tür      | Veriler   |
-| :---
-Başlık: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığını bir uygulamaya nasıl dahil etmek de dahildir. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
----: | ---title: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığının bir uygulamaya nasıl dahil edilmesi de dahildir. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığını bir uygulamaya nasıl dahil etmek de dahildir. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
------ | :----: | | 0 | Metin düğümü | İlk | | 1 | Metin düğümü | İkinci |
+| :------: | --------- | :----: |
+| 0        | Metin düğümü | İlk  |
+| 1        | Metin düğümü | Saniye |
 
 Bu sonuç önceki bir durum ile aynıdır, bu nedenle olumsuz bir sorun yoktur. `someFlag``false`ikinci işleme ve çıktı:
 
 | Sequence | Tür      | Veriler   |
-| :---
-Başlık: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığını bir uygulamaya nasıl dahil etmek de dahildir. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
----: | ---title: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığının bir uygulamaya nasıl dahil edilmesi de dahildir. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığını bir uygulamaya nasıl dahil etmek de dahildir. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
------ | ---title: ' ASP.NET Core Blazor Gelişmiş senaryolar ' Yazar: Açıklama: ' içindeki gelişmiş senaryolar hakkında bilgi edinin Blazor , El Ile RenderTreeBuilder mantığının bir uygulamaya nasıl dahil edilmesi de dahildir. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
---- | | 0 | Metin düğümü | İkinci |
+| :------: | --------- | ------ |
+| 0        | Metin düğümü | Saniye |
 
 Bu kez, fark algoritması *iki* değişikliğin oluştuğunu görür ve algoritma aşağıdaki düzenleme betiğini üretir:
 

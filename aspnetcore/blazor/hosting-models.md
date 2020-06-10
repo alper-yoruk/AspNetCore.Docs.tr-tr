@@ -1,12 +1,24 @@
 ---
-Başlık: ' ASP.NET Core Blazor barındırma modellerini yazma: Açıklama: ' Blazor webassembly ve Blazor sunucu barındırma modellerini anlayın. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
+title: BlazorBarındırma modellerini ASP.NET Core
+author: guardrex
+description: BlazorWebassembly ve Blazor sunucu barındırma modellerini anlayın.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/19/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/hosting-models
+ms.openlocfilehash: 9556fea5319956ce4ae4f4faf90cb405784c733c
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84105499"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>BlazorBarındırma modellerini ASP.NET Core
 

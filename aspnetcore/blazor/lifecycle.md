@@ -1,12 +1,24 @@
 ---
-Başlık: ' ASP.NET Core Blazor yaşam döngüsü ' Yazar: Açıklama: ' Razor ASP.NET Core uygulamalarda bileşen yaşam döngüsü yöntemlerini kullanmayı öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
+title: ASP.NET Core Blazor yaşam döngüsü
+author: guardrex
+description: RazorASP.NET Core uygulamalarda bileşen yaşam döngüsü yöntemlerini nasıl kullanacağınızı öğrenin Blazor .
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/07/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/lifecycle
+ms.openlocfilehash: 9dcbb2ca21cc689063198e1ccc90583db4229183
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "83864598"
 ---
 # <a name="aspnet-core-blazor-lifecycle"></a>ASP.NET Core Blazor yaşam döngüsü
 

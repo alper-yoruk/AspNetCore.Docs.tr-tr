@@ -1,11 +1,24 @@
 ---
-title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
+title: ASP.NET Core dosyaları karşıya yükleme
+author: rick-anderson
+description: ASP.NET Core MVC 'de dosyaları karşıya yüklemek için model bağlama ve akışı kullanma.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/03/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: mvc/models/file-uploads
+ms.openlocfilehash: 632cc9fafc5daf2923997f0113adee52491acdcc
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "83838324"
 ---
 # <a name="upload-files-in-aspnet-core"></a>ASP.NET Core dosyaları karşıya yükleme
 
@@ -94,7 +107,7 @@ Dosya karşıya yüklemeleri tarafından kullanılan kaynaklar (disk, bellek), e
 Dosya arabelleğe alma, bu konunun aşağıdaki bölümlerinde ele alınmıştır:
 
 * [Fiziksel depolama alanı](#upload-small-files-with-buffered-model-binding-to-physical-storage)
-* [Veritabanınızı](#upload-small-files-with-buffered-model-binding-to-a-database)
+* [Veritabanı](#upload-small-files-with-buffered-model-binding-to-a-database)
 
 **Akış**
 
@@ -176,7 +189,7 @@ Aşağıdaki örnek, önceki örneğe benzerdir, ancak şunları hariç:
 [Fetch API 'sini desteklemeyen](https://caniuse.com/#feat=fetch)istemcilerde form gönderisini JavaScript 'te gerçekleştirmek için aşağıdaki yaklaşımlardan birini kullanın:
 
 * Fetch Polyfill kullanın (örneğin, [Window. Fetch (GitHub/fetch)](https://github.com/github/fetch)).
-* `XMLHttpRequest` adresini kullanın. Örneğin:
+* `XMLHttpRequest` adresini kullanın. Örnek:
 
   ```javascript
   <script>
@@ -221,8 +234,8 @@ Sunucuya yüklenen tek dosyalara, kullanılarak [model bağlama](xref:mvc/models
 >
 > Bu nedenle, şu ana kadar dikkate alınması gereken örnekler aşağıda verilmiştir. Ek bilgiler aşağıdaki bölümler ve [örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)tarafından sağlanır:
 >
-> * [Güvenlik konuları](#security-considerations)
-> * [Doğrulama](#validation)
+> * [Güvenlikle ilgili dikkat edilmesi gerekenler](#security-considerations)
+> * [Doğrulamasına](#validation)
 
 Model bağlama kullanarak dosyaları karşıya yüklerken <xref:Microsoft.AspNetCore.Http.IFormFile> , eylem yöntemi kabul edebilir:
 
@@ -392,8 +405,8 @@ Yukarıdaki örnek, örnek uygulamada gösterilen senaryoya benzerdir:
 >
 > Belirtilen örneklerde dikkate alınması gereken önemli noktalar. Ek bilgiler aşağıdaki bölümler ve [örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)tarafından sağlanır:
 >
-> * [Güvenlik konuları](#security-considerations)
-> * [Doğrulama](#validation)
+> * [Güvenlikle ilgili dikkat edilmesi gerekenler](#security-considerations)
+> * [Doğrulamasına](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>Akışa sahip büyük dosyaları karşıya yükleme
 
@@ -449,7 +462,7 @@ Dosyaları tarama, yüksek hacimli senaryolarda sunucu kaynaklarında yoğun bir
 
 ### <a name="file-extension-validation"></a>Dosya Uzantısı doğrulaması
 
-Karşıya yüklenen dosyanın uzantısı izin verilen uzantılar listesine göre denetlenmelidir. Örneğin:
+Karşıya yüklenen dosyanın uzantısı izin verilen uzantılar listesine göre denetlenmelidir. Örnek:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -707,7 +720,7 @@ Varsayılan istek sınırı ( `maxAllowedContentLength` ), yaklaşık 28.6 MB ol
 </system.webServer>
 ```
 
-Bu ayar yalnızca IIS için geçerlidir. Kestrel üzerinde barındırırken davranış varsayılan olarak gerçekleşmez. Daha fazla bilgi için bkz. [Istek sınırları \< requestLimits>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/).
+Bu ayar yalnızca IIS için geçerlidir. Kestrel üzerinde barındırırken davranış varsayılan olarak gerçekleşmez. Daha fazla bilgi için bkz. [Istek \<requestLimits> sınırları ](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/).
 
 ASP.NET Core modülündeki sınırlamalar veya IIS Istek filtreleme modülünün varlığı, karşıya yüklemeleri 2 veya 4 GB ile sınırlandırabilir. Daha fazla bilgi için bkz. [2 GB 'tan büyük dosya karşıya yüklenemiyor (DotNet/AspNetCore #2711)](https://github.com/dotnet/AspNetCore/issues/2711).
 
@@ -823,7 +836,7 @@ Dosya karşıya yüklemeleri tarafından kullanılan kaynaklar (disk, bellek), e
 Dosya arabelleğe alma, bu konunun aşağıdaki bölümlerinde ele alınmıştır:
 
 * [Fiziksel depolama alanı](#upload-small-files-with-buffered-model-binding-to-physical-storage)
-* [Veritabanınızı](#upload-small-files-with-buffered-model-binding-to-a-database)
+* [Veritabanı](#upload-small-files-with-buffered-model-binding-to-a-database)
 
 **Akış**
 
@@ -905,7 +918,7 @@ Aşağıdaki örnek, önceki örneğe benzerdir, ancak şunları hariç:
 [Fetch API 'sini desteklemeyen](https://caniuse.com/#feat=fetch)istemcilerde form gönderisini JavaScript 'te gerçekleştirmek için aşağıdaki yaklaşımlardan birini kullanın:
 
 * Fetch Polyfill kullanın (örneğin, [Window. Fetch (GitHub/fetch)](https://github.com/github/fetch)).
-* `XMLHttpRequest` adresini kullanın. Örneğin:
+* `XMLHttpRequest` adresini kullanın. Örnek:
 
   ```javascript
   <script>
@@ -950,8 +963,8 @@ Sunucuya yüklenen tek dosyalara, kullanılarak [model bağlama](xref:mvc/models
 >
 > Bu nedenle, şu ana kadar dikkate alınması gereken örnekler aşağıda verilmiştir. Ek bilgiler aşağıdaki bölümler ve [örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)tarafından sağlanır:
 >
-> * [Güvenlik konuları](#security-considerations)
-> * [Doğrulama](#validation)
+> * [Güvenlikle ilgili dikkat edilmesi gerekenler](#security-considerations)
+> * [Doğrulamasına](#validation)
 
 Model bağlama kullanarak dosyaları karşıya yüklerken <xref:Microsoft.AspNetCore.Http.IFormFile> , eylem yöntemi kabul edebilir:
 
@@ -1121,8 +1134,8 @@ Yukarıdaki örnek, örnek uygulamada gösterilen senaryoya benzerdir:
 >
 > Belirtilen örneklerde dikkate alınması gereken önemli noktalar. Ek bilgiler aşağıdaki bölümler ve [örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)tarafından sağlanır:
 >
-> * [Güvenlik konuları](#security-considerations)
-> * [Doğrulama](#validation)
+> * [Güvenlikle ilgili dikkat edilmesi gerekenler](#security-considerations)
+> * [Doğrulamasına](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>Akışa sahip büyük dosyaları karşıya yükleme
 
@@ -1178,7 +1191,7 @@ Dosyaları tarama, yüksek hacimli senaryolarda sunucu kaynaklarında yoğun bir
 
 ### <a name="file-extension-validation"></a>Dosya Uzantısı doğrulaması
 
-Karşıya yüklenen dosyanın uzantısı izin verilen uzantılar listesine göre denetlenmelidir. Örneğin:
+Karşıya yüklenen dosyanın uzantısı izin verilen uzantılar listesine göre denetlenmelidir. Örnek:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -1429,7 +1442,7 @@ Varsayılan istek sınırı ( `maxAllowedContentLength` ), yaklaşık 28.6 MB ol
 </system.webServer>
 ```
 
-Bu ayar yalnızca IIS için geçerlidir. Kestrel üzerinde barındırırken davranış varsayılan olarak gerçekleşmez. Daha fazla bilgi için bkz. [Istek sınırları \< requestLimits>](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/).
+Bu ayar yalnızca IIS için geçerlidir. Kestrel üzerinde barındırırken davranış varsayılan olarak gerçekleşmez. Daha fazla bilgi için bkz. [Istek \<requestLimits> sınırları ](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/).
 
 ASP.NET Core modülündeki sınırlamalar veya IIS Istek filtreleme modülünün varlığı, karşıya yüklemeleri 2 veya 4 GB ile sınırlandırabilir. Daha fazla bilgi için bkz. [2 GB 'tan büyük dosya karşıya yüklenemiyor (DotNet/AspNetCore #2711)](https://github.com/dotnet/AspNetCore/issues/2711).
 

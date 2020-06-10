@@ -1,11 +1,23 @@
 ---
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
+title: ASP.NET Core 'de çıkış noktaları arası Istekleri (CORS) etkinleştirme
+author: rick-anderson
+description: ASP.NET Core uygulamasında çapraz kaynak isteklerini izin vermek veya reddetmek için CORS 'nin nasıl standart olduğunu öğrenin.
+ms.author: riande
+ms.custom: mvc
+ms.date: 04/17/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/cors
+ms.openlocfilehash: a78aff2d2e16f36ed034e6af110d7ed763271583
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84105759"
 ---
 # <a name="enable-cross-origin-requests-cors-in-aspnet-core"></a>ASP.NET Core 'de çıkış noktaları arası Istekleri (CORS) etkinleştirme
 
@@ -352,7 +364,7 @@ User-Agent: Mozilla/5.0
 
 Konsol uygulaması, F12 araçlarını kullanarak tarayıcıya bağlı olarak aşağıdakilerden birine benzer bir hata gösterir:
 
-* Firefox: çapraz kaynak Isteği engellendi: aynı kaynak Ilkesi, konumundaki uzak kaynağı okumaktan izin vermez `https://cors1.azurewebsites.net/api/TodoItems1/MyDelete2/5` . (Neden: CORS isteği başarılı olmadı). [Daha Fazla Bilgi Edinin](https://developer.mozilla.org/docs/Web/HTTP/CORS/Errors/CORSDidNotSucceed)
+* Firefox: çapraz kaynak Isteği engellendi: aynı kaynak Ilkesi, konumundaki uzak kaynağı okumaktan izin vermez `https://cors1.azurewebsites.net/api/TodoItems1/MyDelete2/5` . (Neden: CORS isteği başarılı olmadı). [Daha Fazla Bilgi](https://developer.mozilla.org/docs/Web/HTTP/CORS/Errors/CORSDidNotSucceed)
 * Kmıum tabanlı: ' ' kaynağından ' ' konumundaki getirme erişimi https://cors1.azurewebsites.net/api/TodoItems1/MyDelete2/5 https://cors3.azurewebsites.net CORS ilkesi tarafından engellendi: ön kontrol Isteğine verilen yanıt erişim denetimi denetimine geçti: İstenen kaynakta ' Access-Control-Allow-Origin ' üst bilgisi yok. Donuk bir yanıt ihtiyaçlarınıza hizmet veriyorsa, isteği CORS devre dışı olarak getirmek için isteğin modunu ' No-CORS ' olarak ayarlayın.
 
 Belirli üstbilgilere izin vermek için şunu arayın <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*> :
@@ -970,7 +982,7 @@ Yanıt `Access-Control-Allow-Origin` üstbilgiyi içermiyorsa, çapraz kaynak is
 CORS 'yi sınamak için:
 
 1. [BIR API projesi oluşturun](xref:tutorials/first-web-api). Alternatif olarak, [örneği de indirebilirsiniz](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/sample/Cors).
-1. Bu belgedeki yaklaşımlardan birini kullanarak CORS 'yi etkinleştirin. Örneğin:
+1. Bu belgedeki yaklaşımlardan birini kullanarak CORS 'yi etkinleştirin. Örnek:
 
   [!code-csharp[](cors/sample/Cors/WebAPI/StartupTest.cs?name=snippet2&highlight=13-18)]
 

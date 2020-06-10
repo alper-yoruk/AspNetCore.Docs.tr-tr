@@ -1,11 +1,24 @@
 ---
-title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
+title: Web çiftliğinde ASP.NET Core ana bilgisayar
+author: rick-anderson
+description: Bir ASP.NET Core uygulamasının birden çok örneğini bir Web grubu ortamında paylaşılan kaynaklarla nasıl barındıracağınızı öğrenin.
+monikerRange: '>= aspnetcore-2.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 01/13/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: host-and-deploy/web-farm
+ms.openlocfilehash: 37a50fa2939eb31e66925fa907212d54577bd20b
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106578"
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>Web çiftliğinde ASP.NET Core ana bilgisayar
 
@@ -52,78 +65,12 @@ Bir Web grubu ortamında, önbelleğe alma mekanizması, önbelleğe alınmış 
 Aşağıdaki senaryolar ek yapılandırma gerektirmez, ancak Web grupları için yapılandırma gerektiren teknolojilere bağımlıdır.
 
 | Senaryo | Bağlı&hellip; |
-| ---
-title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
----- | ---title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
----------- | | Kimlik doğrulaması | Veri koruma (bkz <xref:security/data-protection/configuration/overview> .).<br><br>Daha fazla bilgi için <xref:security/authentication/cookie> ve <xref:security/cookie-sharing> bölümlerine bakın. | | Identity | Kimlik doğrulama ve veritabanı yapılandırması.<br><br>Daha fazla bilgi için bkz. <xref:security/authentication/identity>. | | Oturum | Veri koruma (şifreli tanımlama bilgileri) (bkz <xref:security/data-protection/configuration/overview> .) ve önbelleğe alma (bkz <xref:performance/caching/distributed> .).<br><br>Daha fazla bilgi için bkz. [oturum ve durum yönetimi: oturum durumu](xref:fundamentals/app-state#session-state). | | TempData | Veri koruma (şifreli tanımlama bilgileri) (bkz <xref:security/data-protection/configuration/overview> . [oturum ve durum yönetimi: oturum durumu](xref:fundamentals/app-state#session-state)).<br><br>Daha fazla bilgi için bkz. [oturum ve durum yönetimi: TempData](xref:fundamentals/app-state#tempdata). | | Anti-forma | Veri koruma (bkz <xref:security/data-protection/configuration/overview> .).<br><br>Daha fazla bilgi için bkz. <xref:security/anti-request-forgery>. |
+| -------- | ------------------- |
+| Kimlik Doğrulaması | Veri koruma (bkz <xref:security/data-protection/configuration/overview> .).<br><br>Daha fazla bilgi için <xref:security/authentication/cookie> ve <xref:security/cookie-sharing> bölümlerine bakın. |
+| Identity | Kimlik doğrulama ve veritabanı yapılandırması.<br><br>Daha fazla bilgi için bkz. <xref:security/authentication/identity>. |
+| Oturum | Veri koruma (şifreli tanımlama bilgileri) (bkz <xref:security/data-protection/configuration/overview> .) ve önbelleğe alma (bkz <xref:performance/caching/distributed> .).<br><br>Daha fazla bilgi için bkz. [oturum ve durum yönetimi: oturum durumu](xref:fundamentals/app-state#session-state). |
+| TempData | Veri koruma (şifreli tanımlama bilgileri) (bkz <xref:security/data-protection/configuration/overview> . [oturum ve durum yönetimi: oturum durumu](xref:fundamentals/app-state#session-state)).<br><br>Daha fazla bilgi için bkz. [oturum ve durum yönetimi: TempData](xref:fundamentals/app-state#tempdata). |
+| Korsanlığa karşı koruma | Veri koruma (bkz <xref:security/data-protection/configuration/overview> .).<br><br>Daha fazla bilgi için bkz. <xref:security/anti-request-forgery>. |
 
 ## <a name="troubleshoot"></a>Sorun giderme
 

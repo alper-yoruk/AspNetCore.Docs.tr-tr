@@ -1,12 +1,24 @@
 ---
-title: ' ASP.NET Core ' yazarın .NET metotlarından JavaScript işlevlerini çağırma Blazor : Açıklama: ' uygulamalarda .net metotlarından JavaScript işlevlerinin nasıl çağrılacağını öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
+title: ASP.NET Core .NET metotlarından JavaScript işlevlerini çağırınBlazor
+author: guardrex
+description: Uygulamalarda .NET metotlarından JavaScript işlevlerini çağırmayı öğrenin Blazor .
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/19/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/call-javascript-from-dotnet
+ms.openlocfilehash: 26202c45e49e64117d35fe6f1e9a65c4acc170fb
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84105096"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-blazor"></a>ASP.NET Core .NET metotlarından JavaScript işlevlerini çağırınBlazor
 

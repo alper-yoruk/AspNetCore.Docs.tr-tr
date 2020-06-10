@@ -1,12 +1,24 @@
 ---
-Başlık: ' ASP.NET Core SignalR JavaScript istemcisi ' Yazar: Açıklama: ' ASP.NET Core SignalR JavaScript Istemcisine genel bakış. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
+title: SignalRJavaScript istemcisi ASP.NET Core
+author: bradygaster
+description: JavaScript istemcisine ASP.NET Core genel bakış SignalR .
+monikerRange: '>= aspnetcore-2.1'
+ms.author: bradyg
+ms.custom: mvc
+ms.date: 04/08/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: signalr/javascript-client
+ms.openlocfilehash: 4b3a4b2323b7f221d9cd1aab1c56d1d9828eb916
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106461"
 ---
 # <a name="aspnet-core-signalr-javascript-client"></a>SignalRJavaScript istemcisi ASP.NET Core
 
@@ -46,7 +58,7 @@ NPM *node_modules \\ @aspnet\signalr\dist\browser * klasöre paket içeriğini y
 
 ::: moniker-end
 
-SignalRÖğesindeki JavaScript istemcisine başvurun `<script>` . Örneğin:
+SignalRÖğesindeki JavaScript istemcisine başvurun `<script>` . Örnek:
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -54,7 +66,7 @@ SignalRÖğesindeki JavaScript istemcisine başvurun `<script>` . Örneğin:
 
 ### <a name="use-a-content-delivery-network-cdn"></a>Content Delivery Network kullanma (CDN)
 
-İstemci kitaplığını NPM önkoşulu olmadan kullanmak için, istemci kitaplığının CDN ile barındırılan bir kopyasına başvurun. Örneğin:
+İstemci kitaplığını NPM önkoşulu olmadan kullanmak için, istemci kitaplığının CDN ile barındırılan bir kopyasına başvurun. Örnek:
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.3/signalr.min.js"></script>

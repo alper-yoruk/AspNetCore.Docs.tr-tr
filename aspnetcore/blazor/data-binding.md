@@ -1,12 +1,24 @@
 ---
-Başlık: ' ASP.NET Core Blazor veri bağlama ' Yazar: Açıklama: ' Apps 'teki bileşenler ve DOM öğeleri için veri bağlama özellikleri hakkında bilgi edinin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
+title: ASP.NET Core Blazor veri bağlama
+author: guardrex
+description: Uygulamalardaki bileşenler ve DOM öğeleri için veri bağlama özellikleri hakkında bilgi edinin Blazor .
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 03/26/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/data-binding
+ms.openlocfilehash: 3b419b4738bd3f434cf4a9d8ccdf3b3af86ba1d5
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "83998503"
 ---
 # <a name="aspnet-core-blazor-data-binding"></a>ASP.NET Core Blazor veri bağlama
 

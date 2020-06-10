@@ -1,11 +1,24 @@
 ---
-title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
+title: .NET için gRPC yapılandırması
+author: jamesnk
+description: GRPC 'yi .NET uygulamaları için nasıl yapılandıracağınızı öğrenin.
+monikerRange: '>= aspnetcore-3.0'
+ms.author: jamesnk
+ms.custom: mvc
+ms.date: 05/26/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: grpc/configuration
+ms.openlocfilehash: a90735c6cd99de30f168fb1498e705de2d6887ca
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84106123"
 ---
 # <a name="grpc-for-net-configuration"></a>.NET için gRPC yapılandırması
 
@@ -14,69 +27,15 @@ title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc
 gRPC Hizmetleri, `AddGrpc` *Startup.cs*içinde ile yapılandırılır. Aşağıdaki tabloda, gRPC hizmetlerini yapılandırma seçenekleri açıklanmaktadır:
 
 | Seçenek | Varsayılan değer | Açıklama |
-| ---
-title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
---- | ---title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
-------- | ---title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
------- | | MaxSendMessageSize | `null` | Sunucudan gönderilebilecek en büyük ileti boyutu (bayt). Yapılandırılan en büyük ileti boyutunu aşan bir ileti gönderilmeye çalışılıyor, bir özel durumla sonuçlanır. Olarak ayarlandığında `null` , ileti boyutu sınırsızdır. | | MaxReceiveMessageSize | 4 MB | Sunucu tarafından alınabilecek, bayt olarak en büyük ileti boyutu. Sunucu bu sınırı aşan bir ileti alırsa bir özel durum oluşturur. Bu değeri artırmak, sunucunun daha büyük iletiler almasına izin verir, ancak bellek tüketimini olumsuz etkileyebilir. Olarak ayarlandığında `null` , ileti boyutu sınırsızdır. | | EnableDetailedErrors | `false` | İse `true` , bir hizmet yönteminde özel durum oluştuğunda istemcilere ayrıntılı özel durum iletileri döndürülür. Varsayılan değer: `false`. `EnableDetailedErrors`İçin ayarı `true` , hassas bilgileri sızdırabilir. | | CompressionProviders | gzip | İletileri sıkıştırmak ve açmak için kullanılan bir sıkıştırma sağlayıcıları koleksiyonu. Özel sıkıştırma sağlayıcıları oluşturulup koleksiyona eklenebilir. Varsayılan yapılandırılmış sağlayıcılar **gzip** sıkıştırmasını destekler. | | <span style="word-break:normal;word-wrap:normal">Responsecompressionalgorithm</span>  |  `null` | Sunucudan gönderilen iletileri sıkıştırmak için kullanılan sıkıştırma algoritması. Algoritmanın içindeki bir sıkıştırma sağlayıcısıyla eşleşmesi gerekir `CompressionProviders` . Bir yanıtı sıkıştırmaya yönelik algoritma için, istemci, **GRPC-Accept-Encoding** üstbilgisine göndererek algoritmayı desteklediğini göstermelidir. | | ResponseCompressionLevel | `null` | Sunucudan gönderilen iletileri sıkıştırmak için kullanılan sıkıştırma düzeyi. | | Yakalayıcılar | Hiçbiri | Her gRPC çağrısıyla çalıştırılan bir dinleyici koleksiyonu. Yakalayıcılar kayıtlı oldukları sırada çalıştırılır. Küresel olarak yapılandırılan yakalayıcılar, tek bir hizmet için yapılandırmadan önce çalıştırılır. GRPC yakalayıcılar hakkında daha fazla bilgi için bkz. [GRPC yakalayıcılar Ile ara yazılım karşılaştırması](xref:grpc/migration#grpc-interceptors-vs-middleware). | | Ignoreunknownservices | `false` | `true`, Bilinmeyen hizmetlere ve yöntemlere yapılan çağrılar **uygulanmayan** bir durum döndürmez ve istek ASP.NET Core sonraki kayıtlı ara yazılıma geçer. |
+| ------ | ------------- | ----------- |
+| MaxSendMessageSize | `null` | Sunucudan gönderilebilecek en büyük ileti boyutu (bayt). Yapılandırılan en büyük ileti boyutunu aşan bir ileti gönderilmeye çalışılıyor, bir özel durumla sonuçlanır. Olarak ayarlandığında `null` , ileti boyutu sınırsızdır. |
+| MaxReceiveMessageSize | 4 MB | Sunucu tarafından alınabilecek, bayt olarak en büyük ileti boyutu. Sunucu bu sınırı aşan bir ileti alırsa bir özel durum oluşturur. Bu değeri artırmak, sunucunun daha büyük iletiler almasına izin verir, ancak bellek tüketimini olumsuz etkileyebilir. Olarak ayarlandığında `null` , ileti boyutu sınırsızdır. |
+| EnableDetailedErrors | `false` | İse `true` , bir hizmet yönteminde özel durum oluştuğunda istemcilere ayrıntılı özel durum iletileri döndürülür. Varsayılan değer: `false`. `EnableDetailedErrors`İçin ayarı `true` , hassas bilgileri sızdırabilir. |
+| CompressionProviders | gzip | İletileri sıkıştırmak ve açmak için kullanılan bir sıkıştırma sağlayıcıları koleksiyonu. Özel sıkıştırma sağlayıcıları oluşturulup koleksiyona eklenebilir. Varsayılan yapılandırılmış sağlayıcılar **gzip** sıkıştırmasını destekler. |
+| <span style="word-break:normal;word-wrap:normal">ResponseCompressionAlgorithm</span> | `null` | Sunucudan gönderilen iletileri sıkıştırmak için kullanılan sıkıştırma algoritması. Algoritmanın içindeki bir sıkıştırma sağlayıcısıyla eşleşmesi gerekir `CompressionProviders` . Bir yanıtı sıkıştırmaya yönelik algoritma için, istemci, **GRPC-Accept-Encoding** üstbilgisine göndererek algoritmayı desteklediğini göstermelidir. |
+| ResponseCompressionLevel | `null` | Sunucudan gönderilen iletileri sıkıştırmak için kullanılan sıkıştırma düzeyi. |
+| Durdurucular | Yok | Her gRPC çağrısıyla çalıştırılan bir dinleyici koleksiyonu. Yakalayıcılar kayıtlı oldukları sırada çalıştırılır. Küresel olarak yapılandırılan yakalayıcılar, tek bir hizmet için yapılandırmadan önce çalıştırılır. GRPC yakalayıcılar hakkında daha fazla bilgi için bkz. [GRPC yakalayıcılar Ile ara yazılım karşılaştırması](xref:grpc/migration#grpc-interceptors-vs-middleware). |
+| Ignoreunknownservices | `false` | `true`, Bilinmeyen hizmetlere ve yöntemlere yapılan çağrılar **uygulanmayan** bir durum döndürmez ve istek ASP.NET Core sonraki kayıtlı ara yazılıma geçer. |
 
 Seçenekler, içindeki çağrıya bir seçenek temsilcisi sağlayarak tüm hizmetler için yapılandırılabilir `AddGrpc` `Startup.ConfigureServices` :
 
@@ -91,69 +50,15 @@ Tek bir hizmetin seçenekleri ' de belirtilen genel seçenekleri geçersiz kıla
 gRPC istemci yapılandırması üzerinde ayarlanır `GrpcChannelOptions` . Aşağıdaki tabloda, gRPC kanallarını yapılandırma seçenekleri açıklanmaktadır:
 
 | Seçenek | Varsayılan değer | Açıklama |
-| ---
-title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
---- | ---title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
-------- | ---title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-title: Yazar: Açıklama: monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
------- | | HttpHandler | Yeni örnek | `HttpMessageHandler`GRPC çağrısı yapmak için kullanılır. İstemci `HttpClientHandler` , gRPC çağrılarına YÖNELIK http işlem hattına özel bir yapılandırma veya ek işleyiciler ekleme şeklinde ayarlanabilir. Hayır `HttpMessageHandler` belirtilirse `HttpClientHandler` kanal için otomatik elden çıkarmada yeni bir örnek oluşturulur. | | HttpClient | `null` | `HttpClient`GRPC çağrısı yapmak için kullanılır. Bu ayar, için bir alternatiftir `HttpHandler` . | | DisposeHttpClient | `false` | `true`Ve bir veya belirtilirse,,,,,,,,,, `HttpMessageHandler` `HttpClient` `HttpHandler` `HttpClient` bırakıldığında `GrpcChannel` ,,,,,,,,,,,,, | | LoggerFactory | `null` | `LoggerFactory`İstemci tarafından gRPC çağrıları hakkındaki bilgileri günlüğe kaydetmek için kullanılır. `LoggerFactory`Örnek, kullanılarak bağımlılık ekleme veya oluşturma öğesinden çözülebilir `LoggerFactory.Create` . Günlüğe kaydetmeyi yapılandırma örnekleri için bkz <xref:grpc/diagnostics#grpc-client-logging> .. | | MaxSendMessageSize | `null` | İstemciden gönderilebilecek en büyük ileti boyutu (bayt). Yapılandırılan en büyük ileti boyutunu aşan bir ileti gönderilmeye çalışılıyor, bir özel durumla sonuçlanır. Olarak ayarlandığında `null` , ileti boyutu sınırsızdır. | | <span style="word-break:normal;word-wrap:normal">MaxReceiveMessageSize</span> | 4 MB | İstemci tarafından alınabilecek, bayt olarak en büyük ileti boyutu. İstemci bu sınırı aşan bir ileti alırsa bir özel durum oluşturur. Bu değeri artırmak, istemcinin daha büyük iletiler almasına izin verir, ancak bellek tüketimini olumsuz etkileyebilir. Olarak ayarlandığında `null` , ileti boyutu sınırsızdır. | | Kimlik bilgileri | `null` | Bir `ChannelCredentials` örnek. Kimlik bilgileri, gRPC çağrılarına kimlik doğrulama meta verileri eklemek için kullanılır. | | CompressionProviders | gzip | İletileri sıkıştırmak ve açmak için kullanılan bir sıkıştırma sağlayıcıları koleksiyonu. Özel sıkıştırma sağlayıcıları oluşturulup koleksiyona eklenebilir. Varsayılan yapılandırılmış sağlayıcılar **gzip** sıkıştırmasını destekler. |
+| ------ | ------------- | ----------- |
+| HttpHandler | Yeni örnek | `HttpMessageHandler`GRPC çağrısı yapmak için kullanılır. İstemci `HttpClientHandler` , gRPC çağrılarına YÖNELIK http işlem hattına özel bir yapılandırma veya ek işleyiciler ekleme şeklinde ayarlanabilir. Hayır `HttpMessageHandler` belirtilirse `HttpClientHandler` kanal için otomatik elden çıkarmada yeni bir örnek oluşturulur. |
+| HttpClient | `null` | `HttpClient`GRPC çağrısı yapmak için kullanılır. Bu ayar, için bir alternatiftir `HttpHandler` . |
+| DisposeHttpClient | `false` | `true`Ve bir veya belirtilirse,,,,,,,,,, `HttpMessageHandler` `HttpClient` `HttpHandler` `HttpClient` bırakıldığında `GrpcChannel` ,,,,,,,,,,,,, |
+| LoggerFactory | `null` | `LoggerFactory`İstemci tarafından gRPC çağrıları hakkındaki bilgileri günlüğe kaydetmek için kullanılır. `LoggerFactory`Örnek, kullanılarak bağımlılık ekleme veya oluşturma öğesinden çözülebilir `LoggerFactory.Create` . Günlüğe kaydetmeyi yapılandırma örnekleri için bkz <xref:grpc/diagnostics#grpc-client-logging> .. |
+| MaxSendMessageSize | `null` | İstemciden gönderilebilecek en büyük ileti boyutu (bayt). Yapılandırılan en büyük ileti boyutunu aşan bir ileti gönderilmeye çalışılıyor, bir özel durumla sonuçlanır. Olarak ayarlandığında `null` , ileti boyutu sınırsızdır. |
+| <span style="word-break:normal;word-wrap:normal">MaxReceiveMessageSize</span> | 4 MB | İstemci tarafından alınabilecek, bayt olarak en büyük ileti boyutu. İstemci bu sınırı aşan bir ileti alırsa bir özel durum oluşturur. Bu değeri artırmak, istemcinin daha büyük iletiler almasına izin verir, ancak bellek tüketimini olumsuz etkileyebilir. Olarak ayarlandığında `null` , ileti boyutu sınırsızdır. |
+| Kimlik bilgileri | `null` | Bir `ChannelCredentials` örnek. Kimlik bilgileri, gRPC çağrılarına kimlik doğrulama meta verileri eklemek için kullanılır. |
+| CompressionProviders | gzip | İletileri sıkıştırmak ve açmak için kullanılan bir sıkıştırma sağlayıcıları koleksiyonu. Özel sıkıştırma sağlayıcıları oluşturulup koleksiyona eklenebilir. Varsayılan yapılandırılmış sağlayıcılar **gzip** sıkıştırmasını destekler. |
 
 Aşağıdaki kod:
 

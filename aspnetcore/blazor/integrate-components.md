@@ -1,12 +1,24 @@
 ---
-title: ' ASP.NET Core Razor bileşenleri sayfalarla tümleştirin Razor ve MVC Apps ' Author: Açıklama: ' uygulamalar içindeki BILEŞENLER ve DOM öğeleri için veri bağlama senaryoları hakkında bilgi edinin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
+title: ASP.NET Core Razor bileşenlerini Razor Sayfalar ve MVC uygulamalarıyla tümleştirme
+author: guardrex
+description: Uygulamalarda bileşenler ve DOM öğeleri için veri bağlama senaryoları hakkında bilgi edinin Blazor .
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 04/25/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/integrate-components
+ms.openlocfilehash: 97515ec519c4bedb0478f510ec9ed739b5d76e4f
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "84105252"
 ---
 # <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>ASP.NET Core Razor bileşenlerini Razor Sayfalar ve MVC uygulamalarıyla tümleştirme
 
@@ -117,60 +129,10 @@ RazorSayfalar uygulamalarında yönlendirilebilir bileşenleri desteklemek için
    * , Sayfada statik HTML olarak veya Kullanıcı aracısından bir uygulamayı önyüklemek için gerekli bilgileri içeriyorsa Blazor .
 
    | Oluşturma modu | Açıklama |
-   | ---
-title: ' ASP.NET Core Razor bileşenleri sayfalarla tümleştirin Razor ve MVC Apps ' Author: Açıklama: ' uygulamalar içindeki BILEŞENLER ve DOM öğeleri için veri bağlama senaryoları hakkında bilgi edinin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-title: ' ASP.NET Core Razor bileşenleri sayfalarla tümleştirin Razor ve MVC Apps ' Author: Açıklama: ' uygulamalar içindeki BILEŞENLER ve DOM öğeleri için veri bağlama senaryoları hakkında bilgi edinin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-title: ' ASP.NET Core Razor bileşenleri sayfalarla tümleştirin Razor ve MVC Apps ' Author: Açıklama: ' uygulamalar içindeki BILEŞENLER ve DOM öğeleri için veri bağlama senaryoları hakkında bilgi edinin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
------- | ---title: ' ASP.NET Core Razor bileşenlerini sayfalarla tümleştirin Razor ve MVC Apps ' Yazar: Açıklama: ' uygulamalardaki BILEŞENLER ve DOM öğeleri için veri bağlama senaryoları hakkında bilgi edinin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-title: ' ASP.NET Core Razor bileşenleri sayfalarla tümleştirin Razor ve MVC Apps ' Author: Açıklama: ' uygulamalar içindeki BILEŞENLER ve DOM öğeleri için veri bağlama senaryoları hakkında bilgi edinin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-title: ' ASP.NET Core Razor bileşenleri sayfalarla tümleştirin Razor ve MVC Apps ' Author: Açıklama: ' uygulamalar içindeki BILEŞENLER ve DOM öğeleri için veri bağlama senaryoları hakkında bilgi edinin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
------- | | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | `App`Bileşeni STATIK HTML olarak işler ve sunucu uygulaması için bir işaret içerir Blazor . Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . | | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Sunucu uygulaması için bir işaret oluşturur Blazor . `App`Bileşen çıkışı dahil değildir. Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . | | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | `App`Bileşeni STATIK HTML olarak işler. |
+   | ----------- | ----------- |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | `App`Bileşeni STATIK HTML olarak işler ve sunucu uygulaması için bir işaret içerir Blazor . Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Sunucu uygulaması için bir işaret oluşturur Blazor . `App`Bileşen çıkışı dahil değildir. Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | `App`Bileşeni STATIK HTML olarak işler. |
 
    Bileşen etiketi Yardımcısı hakkında daha fazla bilgi için bkz <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper> ..
 
@@ -185,7 +147,7 @@ monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
    });
    ```
 
-1. Uygulamaya yönlendirilebilir bileşenler ekleyin. Örneğin:
+1. Uygulamaya yönlendirilebilir bileşenler ekleyin. Örnek:
 
    ```razor
    @page "/counter"
@@ -241,60 +203,10 @@ RazorMVC uygulamalarında yönlendirilebilir bileşenleri desteklemek için:
    * , Sayfada statik HTML olarak veya Kullanıcı aracısından bir uygulamayı önyüklemek için gerekli bilgileri içeriyorsa Blazor .
 
    | Oluşturma modu | Açıklama |
-   | ---
-title: ' ASP.NET Core Razor bileşenleri sayfalarla tümleştirin Razor ve MVC Apps ' Author: Açıklama: ' uygulamalar içindeki BILEŞENLER ve DOM öğeleri için veri bağlama senaryoları hakkında bilgi edinin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-title: ' ASP.NET Core Razor bileşenleri sayfalarla tümleştirin Razor ve MVC Apps ' Author: Açıklama: ' uygulamalar içindeki BILEŞENLER ve DOM öğeleri için veri bağlama senaryoları hakkında bilgi edinin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-title: ' ASP.NET Core Razor bileşenleri sayfalarla tümleştirin Razor ve MVC Apps ' Author: Açıklama: ' uygulamalar içindeki BILEŞENLER ve DOM öğeleri için veri bağlama senaryoları hakkında bilgi edinin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
------- | ---title: ' ASP.NET Core Razor bileşenlerini sayfalarla tümleştirin Razor ve MVC Apps ' Yazar: Açıklama: ' uygulamalardaki BILEŞENLER ve DOM öğeleri için veri bağlama senaryoları hakkında bilgi edinin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-title: ' ASP.NET Core Razor bileşenleri sayfalarla tümleştirin Razor ve MVC Apps ' Author: Açıklama: ' uygulamalar içindeki BILEŞENLER ve DOM öğeleri için veri bağlama senaryoları hakkında bilgi edinin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-title: ' ASP.NET Core Razor bileşenleri sayfalarla tümleştirin Razor ve MVC Apps ' Author: Açıklama: ' uygulamalar içindeki BILEŞENLER ve DOM öğeleri için veri bağlama senaryoları hakkında bilgi edinin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
------- | | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | `App`Bileşeni STATIK HTML olarak işler ve sunucu uygulaması için bir işaret içerir Blazor . Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . | | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Sunucu uygulaması için bir işaret oluşturur Blazor . `App`Bileşen çıkışı dahil değildir. Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . | | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | `App`Bileşeni STATIK HTML olarak işler. |
+   | ----------- | ----------- |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | `App`Bileşeni STATIK HTML olarak işler ve sunucu uygulaması için bir işaret içerir Blazor . Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Sunucu uygulaması için bir işaret oluşturur Blazor . `App`Bileşen çıkışı dahil değildir. Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . |
+   | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | `App`Bileşeni STATIK HTML olarak işler. |
 
    Bileşen etiketi Yardımcısı hakkında daha fazla bilgi için bkz <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper> ..
 
@@ -318,7 +230,7 @@ monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
    });
    ```
 
-1. Bir *Sayfalar* klasörü oluşturun ve uygulamaya yönlendirilebilir bileşenler ekleyin. Örneğin:
+1. Bir *Sayfalar* klasörü oluşturun ve uygulamaya yönlendirilebilir bileşenler ekleyin. Örnek:
 
    ```razor
    @page "/counter"

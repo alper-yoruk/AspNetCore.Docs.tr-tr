@@ -1,12 +1,24 @@
 ---
-Başlık: ' ASP.NET Core sunucusu için tehdit azaltma Kılavuzu Blazor ' Yazar: Açıklama: ' sunucu uygulamalarına yönelik güvenlik tehditlerini nasıl azaltacağınızı öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
+title: ASP.NET Core sunucusu için tehdit azaltma Kılavuzu Blazor
+author: guardrex
+description: Sunucu uygulamalarına yönelik güvenlik tehditlerini nasıl azaltacağınızı öğrenin Blazor .
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/05/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/blazor/server/threat-mitigation
+ms.openlocfilehash: 06f9cc2d70367ea90a519ddd508a156e88adcb61
+ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/09/2020
+ms.locfileid: "83864637"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>ASP.NET Core sunucusu için tehdit azaltma Kılavuzu Blazor
 
@@ -144,7 +156,7 @@ JavaScript 'e yönelik çağrılara .NET yöntemlerine güvenmeyin. JavaScript '
 
 Olaylar, bir sunucu uygulamasına giriş noktası sağlar Blazor . Web Apps 'teki uç noktaları koruma için aynı kurallar, sunucu uygulamalarında olay işleme için geçerlidir Blazor . Kötü amaçlı bir istemci, istediği verileri bir olay için yük olarak gönderebilirler.
 
-Örneğin:
+Örnek:
 
 * Bir için değişiklik olayı `<select>` , uygulamanın istemciye sunulan seçenekler içinde olmayan bir değer gönderebilir.
 * `<input>`Sunucu, istemci tarafı doğrulamayı atlayarak herhangi bir metin verisi gönderebilir.
