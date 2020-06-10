@@ -1,447 +1,462 @@
 ---
-title:ASP.NET Core 中的 Razor Pages 和 EF Core - 更新相关数据 - 第 7 个教程（共 8 个）author: rick-anderson description:本教程将通过更新外键字段和导航属性来更新相关数据。
-ms.author: riande ms.date:07/22/2019 no-loc: [Blazor, "Identity", "Let's Encrypt", Razor, SignalR] uid: data/ef-rp/update-related-data
+title: Bölüm 7, Razor ASP.NET Core EF Core olan sayfalar-Ilgili verileri güncelleştir
+author: rick-anderson
+description: Sayfaların Bölüm 7 Razor ve Entity Framework öğretici serisi.
+ms.author: riande
+ms.date: 07/22/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: data/ef-rp/update-related-data
+ms.openlocfilehash: d86e57d50c414e4baabd00ca9675aa66266342ca
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652605"
 ---
+# <a name="part-7-razor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>Bölüm 7, Razor ASP.NET Core EF Core olan sayfalar-Ilgili verileri güncelleştir
 
-# <a name="razor-pages-with-ef-core-in-aspnet-core---update-related-data---7-of-8"></a>ASP.NET Core 中的 Razor Pages 和 EF Core - 更新相关数据 - 第 7 个教程（共 8 个）
-
-作者：[Tom Dykstra](https://github.com/tdykstra) 和 [Rick Anderson](https://twitter.com/RickAndMSFT)
+, [Tom Dykstra](https://github.com/tdykstra)ve [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 [!INCLUDE [about the series](../../includes/RP-EF/intro.md)]
 
 ::: moniker range=">= aspnetcore-3.0"
 
-本教程将介绍如何更新相关数据。 下图显示了部分已完成页面。
+Bu öğreticide ilgili verileri güncelleştirme gösterilmektedir. Aşağıdaki çizimler tamamlanan sayfalardan bazılarını göstermektedir.
 
-![课程“编辑”页](update-related-data/_static/course-edit30.png)
-![讲师”编辑”页](update-related-data/_static/instructor-edit-courses30.png)
+![Kurs düzenleme sayfası ](update-related-data/_static/course-edit30.png)
+ ![ eğitmeni düzenleme sayfası](update-related-data/_static/instructor-edit-courses30.png)
 
-## <a name="update-the-course-create-and-edit-pages"></a>更新课程“创建”和“编辑”页
+## <a name="update-the-course-create-and-edit-pages"></a>Kurs oluşturma ve düzenleme sayfalarını güncelleştirme
 
-课程“创建”和“编辑”页的基架搭建代码具有显示院系 ID（整数）的“院系”下拉列表。 下拉列表应显示院系名称，因此这两个页面都需要院系名称列表。 若要提供该列表，请使用“创建”和“编辑”页的基类。
+Kurs oluşturma ve düzenleme sayfaları için yapı iskelesi kodu, departman KIMLIĞI (tamsayı) gösteren bir departman açılan listesi içerir. Açılan listede bölüm adı gösterilmeli, bu nedenle her iki sayfanın da bir departman adları listesi olması gerekir. Bu listeyi sağlamak için, oluşturma ve düzenleme sayfaları için bir temel sınıf kullanın.
 
-### <a name="create-a-base-class-for-course-create-and-edit"></a>创建课程“创建”和“编辑”的基类
+### <a name="create-a-base-class-for-course-create-and-edit"></a>Kurs oluşturma ve düzenleme için bir temel sınıf oluşturun
 
-使用以下代码创建 Pages/Courses/DepartmentNamePageModel.cs 文件  ：
+Aşağıdaki kodla bir *Pages/kurslar/DepartmentNamePageModel. cs* dosyası oluşturun:
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/DepartmentNamePageModel.cs)]
 
-上面的代码创建 [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist?view=aspnetcore-2.0) 以包含系名称列表。 如果指定了 `selectedDepartment`，可在 `SelectList` 中选择该系。
+Yukarıdaki kod, bölüm adlarının listesini içeren bir [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist?view=aspnetcore-2.0) oluşturur. `selectedDepartment`Belirtilmişse, bu departman öğesinde seçilir `SelectList` .
 
-“创建”和“编辑”页模型类将派生自 `DepartmentNamePageModel`。
+Oluşturma ve düzenleme sayfa modeli sınıfları öğesinden türetilir `DepartmentNamePageModel` .
 
-### <a name="update-the-course-create-page-model"></a>更新课程“创建”页模型
+### <a name="update-the-course-create-page-model"></a>Kursu güncelleştirme sayfa modeli oluşturma
 
-课程分配给院系。 “创建”和“编辑”页的基类提供 `SelectList`，用于选择院系。 采用 `SelectList` 的下拉列表设置 `Course.DepartmentID` 外键 (FK) 属性。 EF Core 使用 `Course.DepartmentID` FK 加载 `Department` 导航属性。
+Bir kurs bir departmana atanır. Oluşturma ve düzenleme sayfaları için temel sınıf, `SelectList` departmanı seçmek için bir sağlar. `SelectList` `Course.DepartmentID` Yabancı anahtar (FK) özelliğini kullanan açılan liste. EF Core, `Course.DepartmentID` gezinti özelliğini yüklemek için FK kullanır `Department` .
 
-![创建课程](update-related-data/_static/ddl30.png)
+![Kurs oluştur](update-related-data/_static/ddl30.png)
 
-使用以下代码更新 Pages/Courses/Create.cshtml.cs  ：
+*Sayfaları/kursları/oluşturma. cshtml. cs* dosyasını şu kodla güncelleştirin:
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/Create.cshtml.cs?highlight=7,18,27-41)]
 
 [!INCLUDE[about the series](~/includes/code-comments-loc.md)]
 
-前面的代码：
+Yukarıdaki kod:
 
-* 派生自 `DepartmentNamePageModel`。
-* 使用 `TryUpdateModelAsync` 防止[过多发布](xref:data/ef-rp/crud#overposting)。
-* 删除 `ViewData["DepartmentID"]`。 基类中的 `DepartmentNameSL` 是强类型模型，将用于 Razor 页面。 建议使用强类型而非弱类型。 有关详细信息，请参阅[弱类型数据（ViewData 和 ViewBag）](xref:mvc/views/overview#VD_VB)。
+* Türetiliyor `DepartmentNamePageModel` .
+* `TryUpdateModelAsync` [Aşırı nakletmeyi](xref:data/ef-rp/crud#overposting)engellemek için kullanır.
+* Kaldırır `ViewData["DepartmentID"]` . `DepartmentNameSL`temel sınıftan türü kesin belirlenmiş bir modeldir ve sayfa tarafından kullanılır Razor . Kesin olarak belirlenmiş modeller, kesin olarak yazılan zayıf bir şekilde tercih edilir. Daha fazla bilgi için bkz. [zayıf yazılmış veriler (ViewData ve ViewBag)](xref:mvc/views/overview#VD_VB).
 
-### <a name="update-the-course-create-razor-page"></a>更新“课程创建”Razor 页面
+### <a name="update-the-course-create-razor-page"></a>Kurs oluşturma sayfasını güncelleştirme Razor
 
-使用以下代码更新 Pages/Courses/Create.cshtml  ：
+*Sayfaları/kursları/Create. cshtml* 'yi aşağıdaki kodla güncelleştirin:
 
 [!code-cshtml[](intro/samples/cu30/Pages/Courses/Create.cshtml?highlight=29-34)]
 
-上面的代码执行以下更改：
+Yukarıdaki kod aşağıdaki değişiklikleri yapar:
 
-* 将标题从“DepartmentID”更改为“Department”   。
-* 将 `"ViewBag.DepartmentID"` 替换为 `DepartmentNameSL`（来自基类）。
-* 添加“选择系”选项。 如果尚未选择院系（而不是已选中首个院系），此更改将在下拉列表中显示“选择院系”。
-* 在未选择系时添加验证消息。
+* **DepartmentID** etiketini **departmana**dönüştürür.
+* `"ViewBag.DepartmentID"`İle değiştirir `DepartmentNameSL` (taban sınıfından).
+* "Departmanı Seç" seçeneğini ekler. Bu değişiklik, ilk departman yerine henüz bir departman seçilmedikçe açılan kutuda "departmanı Seç" i işler.
+* Departman seçili olmadığında bir doğrulama iletisi ekler.
 
-Razor 页面使用[选择标记帮助程序](xref:mvc/views/working-with-forms#the-select-tag-helper)：
+RazorSayfa, [seçme etiketi yardımcısını](xref:mvc/views/working-with-forms#the-select-tag-helper)kullanır:
 
 [!code-cshtml[](intro/samples/cu/Pages/Courses/Create.cshtml?range=28-35&highlight=3-6)]
 
-测试“创建”页。 “创建”页显示系名称，而不是系 ID。
+Oluştur sayfasını test edin. Oluştur sayfası departman KIMLIĞI yerine departman adını görüntüler.
 
-### <a name="update-the-course-edit-page-model"></a>更新课程“编辑”页模型
+### <a name="update-the-course-edit-page-model"></a>Kurs düzenleme sayfası modelini güncelleştirme
 
-使用以下代码更新 Pages/Courses/Edit.cshtml.cs  ：
+*Pages/kurslar/Edit. cshtml. cs* dosyasını aşağıdaki kodla güncelleştirin:
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/Edit.cshtml.cs?highlight=8,28,35,36,40-66)]
 
-这些更改与在“创建”页模型中所做的更改相似。 在上面的代码中，`PopulateDepartmentsDropDownList` 在院系 ID 中传递并将在下拉列表中选择该院系。
+Değişiklikler, oluşturma sayfası modelinde yapılanlarla benzerdir. Yukarıdaki kodda, `PopulateDepartmentsDropDownList` Bu departmanı açılan listede seçen departman kimliği ' nde geçirilir.
 
-### <a name="update-the-course-edit-razor-page"></a>更新“课程编辑”Razor 页面
+### <a name="update-the-course-edit-razor-page"></a>Kurs düzenleme sayfasını güncelleştirme Razor
 
-使用以下代码更新 Pages/Courses/Edit.cshtml  ：
+*Pages/kurslar/Edit. cshtml* dosyasını aşağıdaki kodla güncelleştirin:
 
 [!code-cshtml[](intro/samples/cu30/Pages/Courses/Edit.cshtml?highlight=17-20,32-35)]
 
-上面的代码执行以下更改：
+Yukarıdaki kod aşağıdaki değişiklikleri yapar:
 
-* 显示课程 ID。 通常不显示实体的主键 (PK)。 PK 对用户不具有任何意义。 在这种情况下，PK 就是课程编号。
-* 将“院系”下拉列表的标题从“DepartmentID”更改为“Department”   。
-* 将 `"ViewBag.DepartmentID"` 替换为 `DepartmentNameSL`（来自基类）。
+* Kurs KIMLIĞINI görüntüler. Genellikle bir varlığın birincil anahtarı (PK) gösterilmez. PKs 'ler genellikle kullanıcılara daha az anlamlı olur. Bu durumda, PK kurs numarasıdır.
+* Bölüm açılan başlığını **DepartmentID** ' dan **departmana**dönüştürür.
+* `"ViewBag.DepartmentID"`İle değiştirir `DepartmentNameSL` (taban sınıfından).
 
-该页面包含课程编号的隐藏域 (`<input type="hidden">`)。 添加具有 `asp-for="Course.CourseID"` 的 `<label>` 标记帮助器也同样需要隐藏域。 用户单击“保存”时，需要 `<input type="hidden">` ，以便在已发布的数据中包括课程编号。
+Sayfa `<input type="hidden">` , kurs numarası için gizli bir alan () içerir. `<label>`Etiket Yardımcısı ekleme, `asp-for="Course.CourseID"` gizli alan gereksinimini ortadan kaldırmaz. `<input type="hidden">`Kullanıcı **Kaydet**' e tıkladığında, gönderilen veriler için kurs numarasının dahil olması gerekir.
 
-## <a name="update-the-course-details-and-delete-pages"></a>更新课程“详细信息”和“删除”页
+## <a name="update-the-course-details-and-delete-pages"></a>Kurs ayrıntılarını güncelleştirme ve sayfaları silme
 
-[AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking?view=efcore-2.0#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) 可以在不需要跟踪时提高性能。
+[Anotracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking?view=efcore-2.0#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) , izleme gerekli olmadığında performansı iyileştirebilir.
 
-### <a name="update-the-course-page-models"></a>更新“课程”页模型
+### <a name="update-the-course-page-models"></a>Kurs sayfası modellerini güncelleştirme
 
-使用以下代码更新 Pages/Courses/Delete.cshtml.cs 以添加 `AsNoTracking` ：
+*Sayfa/kurslar/delete. cshtml. cs* öğesini aşağıdaki kodla güncelleştirin `AsNoTracking` :
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/Delete.cshtml.cs?highlight=29)]
 
-在 Pages/Courses/Details.cshtml.cs 文件中进行相同的更改  ：
+*Sayfalar/kurslar/details. cshtml. cs* dosyasında aynı değişikliği yapın:
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/Details.cshtml.cs?highlight=28)]
 
-### <a name="update-the-course-razor-pages"></a>更新“课程”Razor 页面
+### <a name="update-the-course-razor-pages"></a>Kurs sayfalarını güncelleştirme Razor
 
-使用以下代码更新 Pages/Courses/Delete.cshtml  ：
+*Pages/kurslar/delete. cshtml* dosyasını aşağıdaki kodla güncelleştirin:
 
 [!code-cshtml[](intro/samples/cu30/Pages/Courses/Delete.cshtml?highlight=15-20,37)]
 
-对“详细信息”页执行相同更改。
+Ayrıntılar sayfasında aynı değişiklikleri yapın.
 
 [!code-cshtml[](intro/samples/cu30/Pages/Courses/Details.cshtml?highlight=14-19,36)]
 
-## <a name="test-the-course-pages"></a>测试“课程”页
+## <a name="test-the-course-pages"></a>Kurs sayfalarını test etme
 
-测试“创建”、“编辑”、“详细信息”和“删除”页面。
+Oluşturma, düzenleme, ayrıntıları ve silme sayfalarını test edin.
 
-## <a name="update-the-instructor-create-and-edit-pages"></a>更新讲师“创建”和“编辑”页
+## <a name="update-the-instructor-create-and-edit-pages"></a>Eğitmen oluşturma ve düzenleme sayfalarını güncelleştirme
 
-讲师可能教授任意数量的课程。 下图显示包含一系列课程复选框的讲师“编辑”页。
+Eğitmenler, istediğiniz sayıda kurs öğretebilir. Aşağıdaki görüntüde, bir dizi kurs onay kutusu ile eğitmen düzenleme sayfası gösterilmektedir.
 
-![带课程信息的讲师“编辑”页](update-related-data/_static/instructor-edit-courses30.png)
+![Kurslar ile eğitmen düzenleme sayfası](update-related-data/_static/instructor-edit-courses30.png)
 
-通过复选框可对分配给讲师的课程进行更改。 数据库中的每一门课程均有对应显示的复选框。 已分配给讲师的课程将会被选中。 用户可以通过选择或清除复选框来更改课程分配。 如果课程数过多，另一个 UI 的使用效果可能更好。 但此处所示的用于管理多对多关系的方法不会发生变化。 若要创建或删除关系，则需要使用联接实体。
+Onay kutuları, bir eğitmenin atandığı kurslara değişiklikler sağlar. Veritabanındaki her kurs için bir onay kutusu görüntülenir. Eğitmenin atandığı kurslar seçilidir. Kullanıcı kurs atamalarını değiştirmek için onay kutularını seçebilir veya temizleyebilir. Kurs sayısı çok büyükse, farklı bir kullanıcı arabirimi daha iyi çalışabilir. Ancak burada gösterilen çoktan çoğa ilişkiyi yönetme yöntemi değişmez. İlişki oluşturmak veya silmek için bir JOIN varlığını işlersiniz.
 
-### <a name="create-a-class-for-assigned-courses-data"></a>为已分配的课程数据创建类
+### <a name="create-a-class-for-assigned-courses-data"></a>Atanan kurslar verileri için bir sınıf oluşturma
 
-使用以下代码创建 SchoolViewModels/AssignedCourseData.cs  ：
+Aşağıdaki kodla *SchoolViewModels/AssignedCourseData. cs* oluşturun:
 
 [!code-csharp[](intro/samples/cu30/Models/SchoolViewModels/AssignedCourseData.cs)]
 
-`AssignedCourseData` 类包含的数据可用于为已分配给讲师的课程创建复选框。
+`AssignedCourseData`Sınıfı, bir eğitmene atanan kurslar için onay kutularını oluşturmak üzere verileri içerir.
 
-### <a name="create-an-instructor-page-model-base-class"></a>创建“讲师”页模型基类
+### <a name="create-an-instructor-page-model-base-class"></a>Bir eğitmen sayfa modeli temel sınıfı oluşturma
 
-创建 Pages/Instructors/InstructorCoursesPageModel.cs 基类  ：
+*Pages/eğitmenler/Komutctorcoursespagemodel. cs* temel sınıfını oluşturun:
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/InstructorCoursesPageModel.cs?name=snippet_All)]
 
-`InstructorCoursesPageModel` 是将用于“编辑”和“创建”页模型的基类。 `PopulateAssignedCourseData` 读取所有 `Course` 实体以填充 `AssignedCourseDataList`。 该代码将设置每门课程的 `CourseID` 和标题，并决定是否为讲师分配该课程。 [HashSet](/dotnet/api/system.collections.generic.hashset-1) 用于高效查找。
+, `InstructorCoursesPageModel` Düzenleme ve oluşturma sayfa modelleri için kullanacağınız temel sınıftır. `PopulateAssignedCourseData``Course`doldurmak için tüm varlıkları okur `AssignedCourseDataList` . Her kurs için kod, `CourseID` başlığı ve eğitmenin kursa atanıp atanmadığını belirler. Bir [diyez kümesi](/dotnet/api/system.collections.generic.hashset-1) etkili aramalar için kullanılır.
 
-Razor 页面没有 Course 实体的集合，因此模型绑定器无法自动更新 `CourseAssignments` 导航属性。 可在新的 `UpdateInstructorCourses` 方法中更新 `CourseAssignments` 导航属性，而不必使用模型绑定器。 为此，需要从模型绑定中排除 `CourseAssignments` 属性。 此操作无需对调用 `TryUpdateModel` 的代码进行任何更改，因为使用的是允许列表重载，并且 `CourseAssignments` 不包括在该列表中。
+RazorSayfada bir kurs varlıkları koleksiyonu olmadığından, model Bağlayıcısı gezinti özelliğini otomatik olarak güncelleştiremez `CourseAssignments` . Gezinti özelliğini güncelleştirmek için model cildi kullanmak yerine `CourseAssignments` , bunu yeni yöntemde yapmanız gerekir `UpdateInstructorCourses` . Bu nedenle, `CourseAssignments` özelliği model bağlamadan hariç bırakmanız gerekir. Bu, `TryUpdateModel` beyaz liste aşırı yüklemesini kullandığınız ve içerme listesinde olmadığı için çağıran kodda herhangi bir değişiklik yapılmasını gerektirmez `CourseAssignments` .
 
-如果未选中任何复选框，则 `UpdateInstructorCourses` 中的代码将使用空集合初始化 `CourseAssignments` 导航属性，并返回以下内容：
+Hiçbir onay kutusu seçili değilse, içindeki kod `UpdateInstructorCourses` `CourseAssignments` gezinti özelliğini boş bir koleksiyonla başlatır ve döndürür:
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/InstructorCoursesPageModel.cs?name=snippet_IfNull)]
 
-之后，代码会循环访问数据库中的所有课程，并逐一检查当前分配给讲师的课程和页面中处于选中状态的课程。 为便于高效查找，后两个集合存储在 `HashSet` 对象中。
+Kod daha sonra, veritabanındaki tüm kurslardan geçer ve bu her kursu, sayfada seçili olanlar ile ilgili olarak, eğitmene atanmış olanlara karşı denetler. Etkili aramaları kolaylaştırmak için, ikinci iki koleksiyon `HashSet` nesnelerde depolanır.
 
-如果某课程的复选框处于选中状态，但该课程不在 `Instructor.CourseAssignments` 导航属性中，则会将该课程添加到导航属性中的集合中。
+Kurs onay kutusu seçilmişse ancak kurs, `Instructor.CourseAssignments` Gezinti özelliğinde değilse kurs, Gezinti özelliğindeki koleksiyona eklenir.
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/InstructorCoursesPageModel.cs?name=snippet_UpdateCourses)]
 
-如果某课程的复选框未处于选中状态，但该课程存在 `Instructor.CourseAssignments` 导航属性中，则会从导航属性中删除该课程。
+Kurs onay kutusu seçili değilse, ancak kurs `Instructor.CourseAssignments` gezinti özelliği ise, kurs, gezinti özelliğinden kaldırılır.
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/InstructorCoursesPageModel.cs?name=snippet_UpdateCoursesElse)]
 
-### <a name="handle-office-location"></a>处理办公室位置
+### <a name="handle-office-location"></a>Office konumunu işle
 
-“编辑”页必须处理的另一个关系是 Instructor 实体与 `OfficeAssignment` 实体之间的一对零或一对一关系。 讲师编辑代码必须处理以下场景： 
+Düzenleme sayfasının işlemesi gereken başka bir ilişki ise, eğitmen varlığının varlığa sahip olduğu bire sıfır veya-bir ilişkidir `OfficeAssignment` . Eğitmen düzenleme kodu aşağıdaki senaryoları işlemelidir: 
 
-* 如果用户清除办公室分配，则需删除 `OfficeAssignment` 实体。
-* 如果用户输入办公室分配，且办公室分配原本为空，则需创建一个新 `OfficeAssignment` 实体。
-* 如果用户更改办公室分配，则需更新 `OfficeAssignment` 实体。
+* Kullanıcı Office atamasını temizlediğinde `OfficeAssignment` varlığı silin.
+* Kullanıcı bir Office ataması girerse ve boşsa, yeni bir `OfficeAssignment` varlık oluşturun.
+* Kullanıcı Office atamasını değiştirirse `OfficeAssignment` varlığı güncelleştirin.
 
-### <a name="update-the-instructor-edit-page-model"></a>更新讲师“编辑”页模型
+### <a name="update-the-instructor-edit-page-model"></a>Eğitmen düzenleme sayfası modelini güncelleştirme
 
-使用以下代码更新 Pages/Instructors/Edit.cshtml.cs  ：
+*Pages/eğitmenler/Edit. cshtml. cs* dosyasını aşağıdaki kodla güncelleştirin:
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/Edit.cshtml.cs?name=snippet_All&highlight=9,28-32,38,42-77)]
 
-前面的代码：
+Yukarıdaki kod:
 
-* 使用 `OfficeAssignment`、`CourseAssignment` 和 `CourseAssignment.Course` 导航属性的预先加载从数据库获取当前的 `Instructor` 实体。
-* 用模型绑定器中的值更新检索到的 `Instructor` 实体。 `TryUpdateModel` 可防止[过多发布](xref:data/ef-rp/crud#overposting)。
-* 如果办公室位置为空，则将 `Instructor.OfficeAssignment` 设置为 null。 当 `Instructor.OfficeAssignment` 为 null 时，`OfficeAssignment` 表中的相关行将会删除。
-* 调用 `OnGetAsync` 中的 `PopulateAssignedCourseData`，使用 `AssignedCourseData` 视图模型类为复选框提供信息。
-* 调用 `OnPostAsync` 中的 `UpdateInstructorCourses`，将复选框中的信息应用于将要编辑的 Instructor 实体。
-* 如果 `TryUpdateModel` 失败，则调用 `OnPostAsync` 中的 `PopulateAssignedCourseData` 和 `UpdateInstructorCourses`。 这些方法调用将在页面重新显示错误消息时还原页面上所输入的已分配课程数据。
+* `Instructor` `OfficeAssignment` , `CourseAssignment` , Ve gezinme özellikleri için Eager yükleme kullanarak geçerli varlığı veritabanından alır `CourseAssignment.Course` .
+* Alınan `Instructor` varlığı model Ciltçideki değerlerle güncelleştirir. `TryUpdateModel`[fazla nakletmeyi](xref:data/ef-rp/crud#overposting)önler.
+* Office konumu boşsa, `Instructor.OfficeAssignment` null olarak ayarlar. `Instructor.OfficeAssignment`Null olduğunda, tablodaki ilgili satır `OfficeAssignment` silinir.
+* `PopulateAssignedCourseData` `OnGetAsync` Görüntüleme modeli sınıfını kullanarak onay kutuları için bilgi sağlamak üzere ' de çağırır `AssignedCourseData` .
+* `UpdateInstructorCourses` `OnPostAsync` Onay kutularından düzenlenmekte olan eğitmen varlığına bilgi uygulamak için ' de çağırır.
+* Başarısız olursa, `PopulateAssignedCourseData` ve `UpdateInstructorCourses` ' de çağırır `OnPostAsync` `TryUpdateModel` . Bu yöntem çağrıları, bir hata iletisiyle yeniden görüntülendiğinde sayfaya girilen atanan kurs verilerini geri yükler.
 
-### <a name="update-the-instructor-edit-razor-page"></a>更新“讲师编辑”Razor 页面
+### <a name="update-the-instructor-edit-razor-page"></a>Eğitmen düzenleme sayfasını güncelleştirme Razor
 
-使用以下代码更新 Pages/Instructors/Edit.cshtml  ：
+*Pages/eğitmenler/Edit. cshtml* dosyasını aşağıdaki kodla güncelleştirin:
 
 [!code-cshtml[](intro/samples/cu30/Pages/Instructors/Edit.cshtml?highlight=29-59)]
 
-上面的代码将创建一个具有三列的 HTML 表。 每列均具有一个复选框和包含课程编号及标题的标题。 所有复选框均具有相同的名称（“selectedCourses”）。 使用相同名称可指示模型绑定器将它们视为一个组。 每个复选框的值特性都设置为 `CourseID`。 发布页面时，模型绑定器会传递一个数组，该数组只包括所选复选框的 `CourseID` 值。
+Yukarıdaki kod, üç sütun içeren bir HTML tablosu oluşturur. Her sütunda, kurs numarasını ve başlığını içeren bir CheckBox ve bir açıklamalı alt yazı vardır. Onay kutularının hepsi aynı ada ("Selectedkurslar") sahiptir. Aynı adı kullanmak model cildi bir grup olarak kabul etmek üzere bilgilendirir. Her onay kutusunun değer özniteliği olarak ayarlanır `CourseID` . Sayfa gönderildiğinde, model Ciltçi `CourseID` yalnızca seçili onay kutularının değerlerinden oluşan bir dizi geçirir.
 
-初次呈现复选框时，分配给讲师的课程均已选中。
+Onay kutuları başlangıçta işlendiğinde, eğitmen 'e atanan kurslar seçilir.
 
-注意：此处所使用的编辑讲师课程数据的方法适用于数量有限的课程。 对于规模远大于此的集合，则使用不同的 UI 和不同的更新方法会更实用和更高效。
+Note: Eğitmen Kursu verilerini düzenlemek için buradaki yaklaşım, sınırlı sayıda kurs olduğunda iyi bir şekilde gerçekleştirilir. Çok daha büyük olan koleksiyonlar için, farklı bir kullanıcı arabirimi ve farklı bir güncelleştirme yöntemi daha erişilebilir ve verimli olacaktır.
 
-运行应用并测试更新的讲师“编辑”页。 更改某些课程分配。 这些更改将反映在“索引”页上。
+Uygulamayı çalıştırın ve güncelleştirilmiş eğitmenler düzenleme sayfasını test edin. Bazı kurs atamalarını değiştirin. Değişiklikler Dizin sayfasında yansıtılır.
 
-### <a name="update-the-instructor-create-page"></a>更新讲师“创建”页
+### <a name="update-the-instructor-create-page"></a>Eğitmen oluştur sayfasını güncelleştirme
 
-使用类似于“编辑”页面的代码更新“讲师创建”页面模型和 Razor 页面：
+, Düzenleme sayfasına benzer şekilde, eğitmen sayfa modeli ve kod oluştur sayfasını güncelleştirin Razor :
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/Create.cshtml.cs)]
 
 [!code-cshtml[](intro/samples/cu30/Pages/Instructors/Create.cshtml)]
 
-测试讲师“创建”页。
+Eğitmen oluşturma sayfasını test edin.
 
-## <a name="update-the-instructor-delete-page"></a>更新讲师“删除”页
+## <a name="update-the-instructor-delete-page"></a>Eğitmen silme sayfasını Güncelleştir
 
-使用以下代码更新 Pages/Instructors/Delete.cshtml.cs  ：
+*Sayfaları/eğitmenler/delete. cshtml. cs* dosyasını şu kodla güncelleştirin:
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/Delete.cshtml.cs?highlight=45-61)]
 
-上面的代码执行以下更改：
+Yukarıdaki kod aşağıdaki değişiklikleri yapar:
 
-* 对 `CourseAssignments` 导航属性使用预先加载。 必须包含 `CourseAssignments`，否则删除讲师时将不会删除课程。 为避免阅读它们，可以在数据库中配置级联删除。
+* Gezinti özelliği için Eager yüklemesi kullanır `CourseAssignments` . `CourseAssignments`eğitmen silindiğinde, dahil edilmiş veya silinmemelidir. Bunları okumaktan kaçınmak için, veritabanında basamaklı silme 'yı yapılandırın.
 
-* 如果要删除的讲师被指派为任何系的管理员，则需从这些系中删除该讲师分配。
+* Silinecek eğitmen herhangi bir departmanların Yöneticisi olarak atanırsa, bu departmanlardan eğitmen atamasını kaldırır.
 
-运行应用并测试“删除”页。
+Uygulamayı çalıştırın ve silme sayfasını test edin.
 
-## <a name="next-steps"></a>后续步骤
+## <a name="next-steps"></a>Sonraki adımlar
 
 > [!div class="step-by-step"]
-> [上一个教程](xref:data/ef-rp/read-related-data)
-> [下一个教程](xref:data/ef-rp/concurrency)
+> [Önceki öğretici](xref:data/ef-rp/read-related-data) 
+>  [Sonraki öğretici](xref:data/ef-rp/concurrency)
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-本教程演示如何更新相关数据。 如果遇到无法解决的问题，请[下载或查看已完成的应用](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples)。 [下载说明](xref:index#how-to-download-a-sample)。
+Bu öğreticide ilgili verilerin güncelleştirilmesi gösterilmektedir. Sorun yaşıyorsanız, bu [uygulamayı indiremez veya görüntüleyemezsiniz.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [Yönergeleri indirin](xref:index#how-to-download-a-sample).
 
-下图显示了部分已完成页面。
+Aşağıdaki çizimler tamamlanan sayfalardan bazılarını göstermektedir.
 
-![课程“编辑”页](update-related-data/_static/course-edit.png)
-![讲师”编辑”页](update-related-data/_static/instructor-edit-courses.png)
+![Kurs düzenleme sayfası ](update-related-data/_static/course-edit.png)
+ ![ eğitmeni düzenleme sayfası](update-related-data/_static/instructor-edit-courses.png)
 
-查看并测试“创建”和“编辑”课程页。 创建新课程。 系按其主键（一个整数）进行选择，而不是按名称。 编辑新课程。 完成测试后，请删除新课程。
+Kurs oluşturma ve düzenleme sayfalarını inceleyin ve test edin. Yeni bir kurs oluşturun. Departman, adı değil, birincil anahtarı (bir tamsayı) tarafından seçilir. Yeni kursu düzenleyin. Sınamayı bitirdiğinizde yeni kursu silin.
 
-## <a name="create-a-base-class-to-share-common-code"></a>创建基类以共享通用代码
+## <a name="create-a-base-class-to-share-common-code"></a>Ortak kod paylaşmak için bir temel sınıf oluşturun
 
-“课程/创建”和“课程/编辑”页分别需要一个系名称列表。 针对“创建”和“编辑”页创建 Pages/Courses/DepartmentNamePageModel.cshtml.cs 基类  ：
+Kurslar/oluştur ve kurslar/Düzenle sayfaları, her birinin departman adları listesine ihtiyacı vardır. Oluşturma ve düzenleme sayfaları için *Pages/kurslar/DepartmentNamePageModel. cshtml. cs* temel sınıfını oluşturun:
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/DepartmentNamePageModel.cshtml.cs?highlight=9,11,20-21)]
 
-上面的代码创建 [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist?view=aspnetcore-2.0) 以包含系名称列表。 如果指定了 `selectedDepartment`，可在 `SelectList` 中选择该系。
+Yukarıdaki kod, bölüm adlarının listesini içeren bir [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist?view=aspnetcore-2.0) oluşturur. `selectedDepartment`Belirtilmişse, bu departman öğesinde seçilir `SelectList` .
 
-“创建”和“编辑”页模型类将派生自 `DepartmentNamePageModel`。
+Oluşturma ve düzenleme sayfa modeli sınıfları öğesinden türetilir `DepartmentNamePageModel` .
 
-## <a name="customize-the-courses-pages"></a>自定义课程页
+## <a name="customize-the-courses-pages"></a>Kurslar sayfalarını özelleştirme
 
-创建新的课程实体时，新实体必须与现有院系有关系。 若要在创建课程的同时添加系，则“创建”和“编辑”的基类必须包含用于选择系的下拉列表。 该下拉列表设置 `Course.DepartmentID` 外键 (FK) 属性。 EF Core 使用 `Course.DepartmentID` FK 加载 `Department` 导航属性。
+Yeni bir kurs varlığı oluşturulduğunda, mevcut bir departmanla bir ilişkisi olmalıdır. Bir kurs oluştururken bir departman eklemek için, oluşturma ve düzenleme için temel sınıf, departmanı seçmeye yönelik bir açılan liste içerir. Açılan liste, `Course.DepartmentID` yabancı anahtar (FK) özelliğini ayarlar. EF Core, `Course.DepartmentID` gezinti özelliğini yüklemek için FK kullanır `Department` .
 
-![创建课程](update-related-data/_static/ddl.png)
+![Kurs oluştur](update-related-data/_static/ddl.png)
 
-使用以下代码更新“创建”页模型：
+Oluşturma sayfası modelini aşağıdaki kodla güncelleştirin:
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/Create.cshtml.cs?highlight=7,18,32-999)]
 
-前面的代码：
+Yukarıdaki kod:
 
-* 派生自 `DepartmentNamePageModel`。
-* 使用 `TryUpdateModelAsync` 防止[过多发布](xref:data/ef-rp/crud#overposting)。
-* 将 `ViewData["DepartmentID"]` 替换为 `DepartmentNameSL`（来自基类）。
+* Türetiliyor `DepartmentNamePageModel` .
+* `TryUpdateModelAsync` [Aşırı nakletmeyi](xref:data/ef-rp/crud#overposting)engellemek için kullanır.
+* `ViewData["DepartmentID"]`İle değiştirir `DepartmentNameSL` (taban sınıfından).
 
-`ViewData["DepartmentID"]` 将替换为强类型 `DepartmentNameSL`。 建议使用强类型而非弱类型。 有关详细信息，请参阅[弱类型数据（ViewData 和 ViewBag）](xref:mvc/views/overview#VD_VB)。
+`ViewData["DepartmentID"]`, türü kesin belirlenmiş olan ile değiştirilmiştir `DepartmentNameSL` . Kesin olarak belirlenmiş modeller, kesin olarak yazılan zayıf bir şekilde tercih edilir. Daha fazla bilgi için bkz. [zayıf yazılmış veriler (ViewData ve ViewBag)](xref:mvc/views/overview#VD_VB).
 
-### <a name="update-the-courses-create-page"></a>更新“课程创建”页
+### <a name="update-the-courses-create-page"></a>Kurslar oluşturma sayfasını güncelleştirme
 
-使用以下代码更新 Pages/Courses/Create.cshtml  ：
+*Sayfaları/kursları/Create. cshtml* 'yi aşağıdaki kodla güncelleştirin:
 
 [!code-cshtml[](intro/samples/cu/Pages/Courses/Create.cshtml?highlight=29-34)]
 
-上述标记进行以下更改：
+Yukarıdaki biçimlendirme aşağıdaki değişiklikleri yapar:
 
-* 将标题从“DepartmentID”更改为“Department”   。
-* 将 `"ViewBag.DepartmentID"` 替换为 `DepartmentNameSL`（来自基类）。
-* 添加“选择系”选项。 此更改将导致呈现“选择系”而不是第一个系。
-* 在未选择系时添加验证消息。
+* **DepartmentID** etiketini **departmana**dönüştürür.
+* `"ViewBag.DepartmentID"`İle değiştirir `DepartmentNameSL` (taban sınıfından).
+* "Departmanı Seç" seçeneğini ekler. Bu değişiklik, ilk departman yerine "departmanı Seç" i işler.
+* Departman seçili olmadığında bir doğrulama iletisi ekler.
 
-Razor 页面使用[选择标记帮助程序](xref:mvc/views/working-with-forms#the-select-tag-helper)：
+RazorSayfa, [seçme etiketi yardımcısını](xref:mvc/views/working-with-forms#the-select-tag-helper)kullanır:
 
 [!code-cshtml[](intro/samples/cu/Pages/Courses/Create.cshtml?range=28-35&highlight=3-6)]
 
-测试“创建”页。 “创建”页显示系名称，而不是系 ID。
+Oluştur sayfasını test edin. Oluştur sayfası departman KIMLIĞI yerine departman adını görüntüler.
 
-### <a name="update-the-courses-edit-page"></a>更新“课程编辑”页。
+### <a name="update-the-courses-edit-page"></a>Kurslar düzenleme sayfasını güncelleştirin.
 
-使用以下代码替换 Pages/Courses/Edit.cshtml.cs 中的代码  ：
+*Pages/kurslar/Edit. cshtml. cs* dosyasındaki kodu aşağıdaki kodla değiştirin:
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/Edit.cshtml.cs?highlight=8,28,35,36,40,47-999)]
 
-这些更改与在“创建”页模型中所做的更改相似。 在上面的代码中，`PopulateDepartmentsDropDownList` 在系 ID 中传递并将选择下拉列表中指定的系。
+Değişiklikler, oluşturma sayfası modelinde yapılanlarla benzerdir. Yukarıdaki kodda, `PopulateDepartmentsDropDownList` açılan listede belirtilen departmanı belirleyen departman kimliği ' nde geçirilir.
 
-使用以下标记更新 Pages/Courses/Edit.cshtml  ：
+*Pages/kurslar/Edit. cshtml* 'yi şu biçimlendirmeyle güncelleştirin:
 
 [!code-cshtml[](intro/samples/cu/Pages/Courses/Edit.cshtml?highlight=17-20,32-35)]
 
-上述标记进行以下更改：
+Yukarıdaki biçimlendirme aşağıdaki değişiklikleri yapar:
 
-* 显示课程 ID。 通常不显示实体的主键 (PK)。 PK 对用户不具有任何意义。 在这种情况下，PK 就是课程编号。
-* 将标题从“DepartmentID”更改为“Department”   。
-* 将 `"ViewBag.DepartmentID"` 替换为 `DepartmentNameSL`（来自基类）。
+* Kurs KIMLIĞINI görüntüler. Genellikle bir varlığın birincil anahtarı (PK) gösterilmez. PKs 'ler genellikle kullanıcılara daha az anlamlı olur. Bu durumda, PK kurs numarasıdır.
+* **DepartmentID** etiketini **departmana**dönüştürür.
+* `"ViewBag.DepartmentID"`İle değiştirir `DepartmentNameSL` (taban sınıfından).
 
-该页面包含课程编号的隐藏域 (`<input type="hidden">`)。 添加具有 `asp-for="Course.CourseID"` 的 `<label>` 标记帮助器也同样需要隐藏域。 用户单击“保存”时，需要 `<input type="hidden">` ，以便在已发布的数据中包括课程编号。
+Sayfa `<input type="hidden">` , kurs numarası için gizli bir alan () içerir. `<label>`Etiket Yardımcısı ekleme, `asp-for="Course.CourseID"` gizli alan gereksinimini ortadan kaldırmaz. `<input type="hidden">`Kullanıcı **Kaydet**' e tıkladığında, gönderilen veriler için kurs numarasının dahil olması gerekir.
 
-测试更新的代码。 创建、编辑和删除课程。
+Güncelleştirilmiş kodu test edin. Kurs oluşturun, düzenleyin ve silin.
 
-## <a name="add-asnotracking-to-the-details-and-delete-page-models"></a>将 AsNoTracking 添加到“详细信息”和“删除”页模型
+## <a name="add-asnotracking-to-the-details-and-delete-page-models"></a>Ayrıntılara AsNoTracking ekleme ve sayfa modellerini silme
 
-[AsNoTracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking?view=efcore-2.0#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) 可以在不需要跟踪时提高性能。 将 `AsNoTracking` 添加到“删除”和“详细信息”页模型。 下面的代码显示更新的“删除”页模型：
+[Anotracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking?view=efcore-2.0#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) , izleme gerekli olmadığında performansı iyileştirebilir. `AsNoTracking`Sil ve Ayrıntılar sayfa modeline ekleyin. Aşağıdaki kod, güncelleştirilmiş silme sayfası modelini göstermektedir:
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/Delete.cshtml.cs?name=snippet&highlight=21,23,40,41)]
 
-在 Pages/Courses/Details.cshtml.cs 文件中更新 `OnGetAsync` 方法  ：
+`OnGetAsync` *Pages/kurslar/details. cshtml. cs* dosyasındaki yöntemi güncelleştirin:
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/Details.cshtml.cs?name=snippet)]
 
-### <a name="modify-the-delete-and-details-pages"></a>修改“删除”和“详细信息”页
+### <a name="modify-the-delete-and-details-pages"></a>Silme ve Ayrıntılar sayfalarını değiştirme
 
-使用以下标记更新“删除”Razor 页面：
+Silme Razor sayfasını aşağıdaki biçimlendirmeyle güncelleştirin:
 
 [!code-cshtml[](intro/samples/cu/Pages/Courses/Delete.cshtml?highlight=15-20)]
 
-对“详细信息”页执行相同更改。
+Ayrıntılar sayfasında aynı değişiklikleri yapın.
 
-### <a name="test-the-course-pages"></a>测试“课程”页
+### <a name="test-the-course-pages"></a>Kurs sayfalarını test etme
 
-测试“创建”、“编辑”、“详细信息”和“删除”。
+Test oluşturma, düzenleme, Ayrıntılar ve silme.
 
-## <a name="update-the-instructor-pages"></a>更新“讲师”页
+## <a name="update-the-instructor-pages"></a>Eğitmen sayfalarını güncelleştirme
 
-以下各部分介绍更新“讲师”页。
+Aşağıdaki bölümlerde, eğitmen sayfaları günceldir.
 
-### <a name="add-office-location"></a>添加办公室位置
+### <a name="add-office-location"></a>Office konumu Ekle
 
-编辑讲师记录时，可能希望更新讲师的办公室分配。 `Instructor` 实体与 `OfficeAssignment` 实体是一对零或一关系。 讲师代码必须处理：
+Bir eğitmen kaydını düzenlediğinizde, eğitmenin Office atamasını güncelleştirmek isteyebilirsiniz. `Instructor`Varlığın varlıkla bire sıfır veya-bir ilişkisi vardır `OfficeAssignment` . Eğitmen kodu şu şekilde olmalıdır:
 
-* 如果用户清除办公室分配，则需删除 `OfficeAssignment` 实体。
-* 如果用户输入办公室分配，且办公室分配原本为空，则需创建一个新 `OfficeAssignment` 实体。
-* 如果用户更改办公室分配，则需更新 `OfficeAssignment` 实体。
+* Kullanıcı Office atamasını temizlediğinde `OfficeAssignment` varlığı silin.
+* Kullanıcı bir Office ataması girerse ve boşsa, yeni bir `OfficeAssignment` varlık oluşturun.
+* Kullanıcı Office atamasını değiştirirse `OfficeAssignment` varlığı güncelleştirin.
 
-使用以下代码更新讲师“编辑”页模型：
+Eğitmenler düzenleme sayfası modelini aşağıdaki kodla güncelleştirin:
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Edit1.cshtml.cs?name=snippet&highlight=20-23,32,39-999)]
 
-前面的代码：
+Yukarıdaki kod:
 
-* 使用 `OfficeAssignment` 导航属性的预先加载从数据库获取当前的 `Instructor` 实体。
-* 用模型绑定器中的值更新检索到的 `Instructor` 实体。 `TryUpdateModel` 可防止[过多发布](xref:data/ef-rp/crud#overposting)。
-* 如果办公室位置为空，则将 `Instructor.OfficeAssignment` 设置为 null。 当 `Instructor.OfficeAssignment` 为 null 时，`OfficeAssignment` 表中的相关行将会删除。
+* `Instructor`Gezinti özelliği için Eager yüklemesini kullanarak geçerli varlığı veritabanından alır `OfficeAssignment` .
+* Alınan `Instructor` varlığı model Ciltçideki değerlerle güncelleştirir. `TryUpdateModel`[fazla nakletmeyi](xref:data/ef-rp/crud#overposting)önler.
+* Office konumu boşsa, `Instructor.OfficeAssignment` null olarak ayarlar. `Instructor.OfficeAssignment`Null olduğunda, tablodaki ilgili satır `OfficeAssignment` silinir.
 
-### <a name="update-the-instructor-edit-page"></a>更新讲师“编辑”页
+### <a name="update-the-instructor-edit-page"></a>Eğitmen düzenleme sayfasını güncelleştirme
 
-使用办公室位置更新 Pages/Instructors/Edit.cshtml  ：
+*Sayfaları/eğitmenler/Edit. cshtml* dosyasını Office konumuyla güncelleştirin:
 
 [!code-cshtml[](intro/samples/cu/Pages/Instructors/Edit1.cshtml?highlight=29-33)]
 
-验证是否可以更改讲师办公室位置。
+Bir eğitmenler ofis konumunu değiştirebildiğinizi doğrulayın.
 
-## <a name="add-course-assignments-to-the-instructor-edit-page"></a>向“讲师编辑”页添加课程分配
+## <a name="add-course-assignments-to-the-instructor-edit-page"></a>Eğitmen düzenleme sayfasına kurs atamaları ekleme
 
-讲师可能教授任意数量的课程。 本部分将添加更改课程分配的功能。 下图显示更新的讲师“编辑”页：
+Eğitmenler, istediğiniz sayıda kurs öğretebilir. Bu bölümde kurs atamalarını değiştirme olanağını eklersiniz. Aşağıdaki görüntüde güncelleştirilmiş eğitmen düzenleme sayfası gösterilmektedir:
 
-![带课程信息的讲师“编辑”页](update-related-data/_static/instructor-edit-courses.png)
+![Kurslar ile eğitmen düzenleme sayfası](update-related-data/_static/instructor-edit-courses.png)
 
-`Course` 和 `Instructor` 具有多对多关系。 若要添加和删除关系，可以从 `CourseAssignments` 联接实体集中添加和删除实体。
+`Course`ve `Instructor` çoktan çoğa ilişkisine sahiptir. İlişki eklemek ve kaldırmak için, JOIN varlık kümesinden varlık ekleyin ve kaldırın `CourseAssignments` .
 
-通过复选框可对分配给讲师的课程进行更改。 数据库中的每一门课程均有对应显示的复选框。 已分配给讲师的课程将会被勾选。 用户可以通过选择或清除复选框来更改课程分配。 如果课程数量过多：
+Onay kutuları, bir eğitmenin atandığı kurslara değişiklikler sağlar. Veritabanındaki her kurs için bir onay kutusu görüntülenir. Eğitmenin atandığı kurslar denetlenir. Kullanıcı kurs atamalarını değiştirmek için onay kutularını seçebilir veya temizleyebilir. Kurs sayısı çok fazlaysa:
 
-* 可以使用其他用户界面显示课程。
-* 使用联接实体创建或删除关系的方法不会发生更改。
+* Kursları göstermek için büyük olasılıkla farklı bir kullanıcı arabirimi kullanıyorsunuz.
+* İlişki oluşturmak veya silmek için bir JOIN varlığını düzenleme yöntemi değişmez.
 
-### <a name="add-classes-to-support-create-and-edit-instructor-pages"></a>添加类以支持“创建”和“编辑”讲师页
+### <a name="add-classes-to-support-create-and-edit-instructor-pages"></a>Eğitmen sayfaları oluşturma ve düzenleme desteğini desteklemek için sınıflar ekleme
 
-使用以下代码创建 SchoolViewModels/AssignedCourseData.cs  ：
+Aşağıdaki kodla *SchoolViewModels/AssignedCourseData. cs* oluşturun:
 
 [!code-csharp[](intro/samples/cu/Models/SchoolViewModels/AssignedCourseData.cs)]
 
-`AssignedCourseData` 类包含的数据可用于为讲师已分配的课程创建复选框。
+`AssignedCourseData`Sınıfı, bir eğitmen tarafından atanan kurslar için onay kutularını oluşturacak verileri içerir.
 
-创建 Pages/Instructors/InstructorCoursesPageModel.cshtml.cs 基类  ：
+*Pages/eğitmenler/Komutctorcoursespagemodel. cshtml. cs* temel sınıfını oluşturun:
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/InstructorCoursesPageModel.cshtml.cs)]
 
-`InstructorCoursesPageModel` 是将用于“编辑”和“创建”页模型的基类。 `PopulateAssignedCourseData` 读取所有 `Course` 实体以填充 `AssignedCourseDataList`。 该代码将设置每门课程的 `CourseID` 和标题，并决定是否为讲师分配该课程。 [HashSet](/dotnet/api/system.collections.generic.hashset-1) 用于创建高效查找。
+, `InstructorCoursesPageModel` Düzenleme ve oluşturma sayfa modelleri için kullanacağınız temel sınıftır. `PopulateAssignedCourseData``Course`doldurmak için tüm varlıkları okur `AssignedCourseDataList` . Her kurs için kod, `CourseID` başlığı ve eğitmenin kursa atanıp atanmadığını belirler. Bir [diyez kümesi](/dotnet/api/system.collections.generic.hashset-1) , verimli aramalar oluşturmak için kullanılır.
 
-### <a name="instructors-edit-page-model"></a>讲师“编辑”页模型
+### <a name="instructors-edit-page-model"></a>Eğitmenler sayfa modelini Düzenle
 
-使用以下代码更新讲师“编辑”页模型：
+Eğitmen düzenleme sayfası modelini aşağıdaki kodla güncelleştirin:
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Edit.cshtml.cs?name=snippet&highlight=1,20-24,30,34,41-999)]
 
-上面的代码处理办公室分配更改。
+Yukarıdaki kod, Office atama değişikliklerini işler.
 
-更新讲师 Razor 视图：
+Eğitmen görünümünü güncelleştirin Razor :
 
 [!code-cshtml[](intro/samples/cu/Pages/Instructors/Edit.cshtml?highlight=34-59)]
 
 <a id="notepad"></a>
 > [!NOTE]
-> 将代码粘贴到 Visual Studio 中时，换行符会发生更改，其更改方式会导致代码中断。 按 Ctrl+Z 一次可撤消自动格式设置。 按 Ctrl+Z 可以修复换行符，使其看起来如此处所示。 缩进不一定要呈现完美形式，但 `@:</tr><tr>`、`@:<td>`、`@:</td>` 和 `@:</tr>` 行必须各成一行（如下所示）。 选中新的代码块后，按 Tab 三次，使新代码与现有代码对齐。 [通过此链接](https://developercommunity.visualstudio.com/content/problem/147795/razor-editor-malforms-pasted-markup-and-creates-in.html)投票或查看此 bug 的状态。
+> Kodu Visual Studio 'Ya yapıştırdığınızda, satır sonları kodu kesen bir şekilde değiştirilir. Otomatik biçimlendirmeyi geri almak için CTRL + Z bir kez tuşuna basın. CTRL + Z, burada gördüğünüz gibi görünmeleri için satır sonlarını düzeltir. Girintide kusursuz olması gerekmez, ancak,, `@:</tr><tr>` `@:<td>` `@:</td>` ve `@:</tr>` çizgilerinin her biri gösterildiği gibi tek bir satırda olması gerekir. Yeni kod bloğu seçiliyken, yeni kodu mevcut kodla hizalamak için üç kez Tab tuşuna basın. Bu [bağlantı ile](https://developercommunity.visualstudio.com/content/problem/147795/razor-editor-malforms-pasted-markup-and-creates-in.html)bu hatanın durumunu oylayın veya gözden geçirin.
 
-上面的代码将创建一个具有三列的 HTML 表。 每列均具有一个复选框和包含课程编号及标题的标题。 所有复选框均具有相同的名称（“selectedCourses”）。 使用相同名称可指示模型绑定器将它们视为一个组。 每个复选框的值特性都设置为 `CourseID`。 发布页面时，模型绑定器会传递一个数组，该数组只包括所选复选框的 `CourseID` 值。
+Yukarıdaki kod, üç sütun içeren bir HTML tablosu oluşturur. Her sütunda bir onay kutusu ve kurs numarasını ve başlığını içeren bir açıklamalı alt yazı vardır. Onay kutularının hepsi aynı ada ("Selectedkurslar") sahiptir. Aynı adı kullanmak model cildi bir grup olarak kabul etmek üzere bilgilendirir. Her onay kutusunun değer özniteliği olarak ayarlanır `CourseID` . Sayfa gönderildiğinde, model Ciltçi `CourseID` yalnızca seçili onay kutularının değerlerinden oluşan bir dizi geçirir.
 
-初次呈现复选框时，分配给讲师的课程具有已勾选的特性。
+Onay kutuları başlangıçta işlendiğinde, eğitmenin atandığı kursların denetlenen öznitelikleri vardır.
 
-运行应用并测试更新的讲师“编辑”页。 更改某些课程分配。 这些更改将反映在“索引”页上。
+Uygulamayı çalıştırın ve güncelleştirilmiş eğitmenler düzenleme sayfasını test edin. Bazı kurs atamalarını değiştirin. Değişiklikler Dizin sayfasında yansıtılır.
 
-注意：此处所使用的编辑讲师课程数据的方法适用于数量有限的课程。 对于规模远大于此的集合，则使用不同的 UI 和不同的更新方法会更实用和更高效。
+Note: Eğitmen Kursu verilerini düzenlemek için buradaki yaklaşım, sınırlı sayıda kurs olduğunda iyi bir şekilde gerçekleştirilir. Çok daha büyük olan koleksiyonlar için, farklı bir kullanıcı arabirimi ve farklı bir güncelleştirme yöntemi daha erişilebilir ve verimli olacaktır.
 
-### <a name="update-the-instructors-create-page"></a>更新讲师“创建”页
+### <a name="update-the-instructors-create-page"></a>Eğitmenler oluştur sayfasını güncelleştirme
 
-使用以下代码更新讲师“创建”页模型：
+Aşağıdaki kodla, eğitmen sayfa modeli oluştur sayfasını güncelleştirin:
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Create.cshtml.cs)]
 
-前面的代码与 Pages/Instructors/Edit.cshtml.cs 代码类似  。
+Yukarıdaki kod, *Pages/eğitmenler/Edit. cshtml. cs* koduna benzerdir.
 
-使用以下标记更新“讲师创建”Razor 页面：
+Eğitmen oluştur Razor sayfasını aşağıdaki biçimlendirmeyle güncelleştirin:
 
 [!code-cshtml[](intro/samples/cu/Pages/Instructors/Create.cshtml?highlight=32-62)]
 
-测试讲师“创建”页。
+Eğitmen oluşturma sayfasını test edin.
 
-## <a name="update-the-delete-page"></a>更新“删除”页
+## <a name="update-the-delete-page"></a>Silme sayfasını Güncelleştir
 
-使用以下代码更新“删除”页模型：
+Silme sayfası modelini aşağıdaki kodla güncelleştirin:
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Delete.cshtml.cs?highlight=5,40-999)]
 
-上面的代码执行以下更改：
+Yukarıdaki kod aşağıdaki değişiklikleri yapar:
 
-* 对 `CourseAssignments` 导航属性使用预先加载。 必须包含 `CourseAssignments`，否则删除讲师时将不会删除课程。 为避免阅读它们，可以在数据库中配置级联删除。
+* Gezinti özelliği için Eager yüklemesi kullanır `CourseAssignments` . `CourseAssignments`eğitmen silindiğinde, dahil edilmiş veya silinmemelidir. Bunları okumaktan kaçınmak için, veritabanında basamaklı silme 'yı yapılandırın.
 
-* 如果要删除的讲师被指派为任何系的管理员，则需从这些系中删除该讲师分配。
+* Silinecek eğitmen herhangi bir departmanların Yöneticisi olarak atanırsa, bu departmanlardan eğitmen atamasını kaldırır.
 
-## <a name="additional-resources"></a>其他资源
+## <a name="additional-resources"></a>Ek kaynaklar
 
-* [本教程的 YouTube 版本（第 1 部分）](https://www.youtube.com/watch?v=Csh6gkmwc9E)
-* [本教程的 YouTube 版本（第 2 部分）](https://www.youtube.com/watch?v=mOAankB_Zgc)
+* [Bu öğreticinin YouTube sürümü (Bölüm 1)](https://www.youtube.com/watch?v=Csh6gkmwc9E)
+* [Bu öğreticinin YouTube sürümü (Bölüm 2)](https://www.youtube.com/watch?v=mOAankB_Zgc)
 
 > [!div class="step-by-step"]
-> [上一页](xref:data/ef-rp/read-related-data)
-> [下一页](xref:data/ef-rp/concurrency)
+> [Önceki](xref:data/ef-rp/read-related-data) 
+>  [Sonraki](xref:data/ef-rp/concurrency)
 
 ::: moniker-end

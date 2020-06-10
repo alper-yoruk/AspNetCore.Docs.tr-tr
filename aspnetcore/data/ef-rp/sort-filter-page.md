@@ -1,530 +1,546 @@
 ---
-title:ASP.NET Core の Razor Pages と EF Core - 並べ替え、フィルター、ページング - 3/8 author: rick-anderson description: このチュートリアルでは、ASP.NET Core および Entity Framework Core を使用して並べ替え、フィルター、ページング機能を Razor ページに追加します。
-ms.author: riande ms.custom: mvc ms.date: 2019/07/22 no-loc: [Blazor, "Identity", "Let's Encrypt", Razor, SignalR] uid: data/ef-rp/sort-filter-page
+title: Bölüm 3, Razor ASP.NET Core sıralama, filtreleme, sayfalama EF Core olan sayfalar
+author: rick-anderson
+description: RazorSayfaların 3. bölümü ve Entity Framework öğretici serisi.
+ms.author: riande
+ms.custom: mvc
+ms.date: 07/22/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: data/ef-rp/sort-filter-page
+ms.openlocfilehash: 99b14c99cb99d106604f1a4edacf1da0a2d6125c
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652594"
 ---
+# <a name="part-3-razor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>Bölüm 3, Razor ASP.NET Core sıralama, filtreleme, sayfalama EF Core olan sayfalar
 
-# <a name="razor-pages-with-ef-core-in-aspnet-core---sort-filter-paging---3-of-8"></a>ASP.NET Core の Razor Pages と EF Core - 並べ替え、フィルター、ページング - 3/8
-
-作成者: [Tom Dykstra](https://github.com/tdykstra)、[Rick Anderson](https://twitter.com/RickAndMSFT)、[Jon P Smith](https://twitter.com/thereformedprog)
+By [Tom Dykstra](https://github.com/tdykstra), [Rick Anderson](https://twitter.com/RickAndMSFT)ve [Jon P Smith](https://twitter.com/thereformedprog)
 
 [!INCLUDE [about the series](~/includes/RP-EF/intro.md)]
 
 ::: moniker range=">= aspnetcore-3.0"
 
-このチュートリアルでは、Students ページに並べ替え、フィルター、ページング機能を追加します。
+Bu öğretici, öğrenciler sayfalarına sıralama, filtreleme ve sayfalama işlevselliği ekler.
 
-次の図は、完成したページを示しています。 列見出しはクリックできるリンクとなっており、クリックすると列が並べ替えられます。 列見出しを繰り返しクリックすると、昇順と降順の並べ替え順序が切り替えられます。
+Aşağıdaki çizimde tamamlanmış bir sayfa gösterilmektedir. Sütun başlıkları sütunu sıralamak için tıklatılabilir bağlantılardır. Artan ve azalan sıralama düzeni arasında geçiş yapmak için bir sütun başlığına tekrar tekrar tıklayın.
 
-![Students インデックス ページ](sort-filter-page/_static/paging30.png)
+![Öğrenciler Dizin sayfası](sort-filter-page/_static/paging30.png)
 
-## <a name="add-sorting"></a>並べ替えの追加
+## <a name="add-sorting"></a>Sıralama Ekle
 
-*Pages/Students/Index.cshtml.cs* のコードを次のコードに置き換え、並べ替えを追加します。
+*Pages/öğrenciler/Index. cshtml. cs* içindeki kodu, sıralama eklemek için aşağıdaki kodla değiştirin.
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_All&highlight=21-24,26,28-52)]
 
-上記のコードでは次の操作が行われます。
+Yukarıdaki kod:
 
-* プロパティを追加して、並べ替えパラメーターを含めます。
-* `Student` プロパティの名前を `Students` に変更します。
-* `OnGetAsync` メソッドのコードを置き換えます。
+* Sıralama parametrelerini içeren özellikleri ekler.
+* `Student`Özelliğin adını olarak değiştirir `Students` .
+* Yöntemindeki kodu değiştirir `OnGetAsync` .
 
-`OnGetAsync` メソッドでは、URL 内のクエリ文字列から `sortOrder` パラメーターを受け取ります。 (クエリ文字列を含む) URL が[アンカー タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)によって生成されます。
+`OnGetAsync`Yöntemi, `sortOrder` URL 'deki sorgu dizesinden bir parametre alır. URL (sorgu dizesi dahil), [tutturucu etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)tarafından oluşturulur.
 
-`sortOrder` パラメーターは "Name" または "Date" です。 `sortOrder` パラメーターの後に必要に応じて "_desc" を続け、降順を指定します。 既定の並べ替え順序は昇順です。
+`sortOrder`Parametre "ad" ya da "Tarih" dır. `sortOrder`Parametre, isteğe bağlı olarak azalan sıra belirtmek için "_DESC" tarafından izlenir. Varsayılan sıralama düzeni artan.
 
-インデックス ページが、**Students** リンクから要求された場合、クエリ文字列はありません。 学生は、姓の昇順で表示されます。 `switch` ステートメントでは姓の昇順が既定値 (フォールスルー ケース) です。 ユーザーが列見出しリンクをクリックすると、適切な `sortOrder` 値がクエリ文字列値で提供されます。
+**Öğrenciler** bağlantısından Dizin sayfası istendiğinde sorgu dizesi yoktur. Öğrenciler, son ada göre artan sırada görüntülenir. Son ada göre artan sıralama, deyimindeki varsayılan (gelen durumdur) `switch` . Kullanıcı bir sütun başlığı bağlantısına tıkladığında, `sortOrder` sorgu dizesi değerinde uygun değer sağlanır.
 
-`NameSort` および `DateSort` は、Razor Page で、適切なクエリ文字列値を持つ列見出しのハイパーリンクを構成するために使用されます。
+`NameSort`ve `DateSort` Razor sütun başlığı köprülerini uygun sorgu dizesi değerleriyle yapılandırmak için kullanılır:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_Ternary)]
 
-このコードでは、C# の条件演算子 [?:](/dotnet/csharp/language-reference/operators/conditional-operator) を使用します。 `?:` 演算子は三項演算子です (3 つのオペランドを受け取ります)。 最初の行は、`sortOrder` が null または空の場合に、`NameSort` を "name_desc" に設定することを指定します。 `sortOrder` が null または空**ではない**場合、`NameSort` は空の文字列に設定されます。
+Kod C# koşullu işlecini kullanır [?:](/dotnet/csharp/language-reference/operators/conditional-operator). `?:`İşleci üçlü bir işleçtir (üç işlenen alır). İlk satır, `sortOrder` null veya boş olduğunu belirtir, `NameSort` "name_desc" olarak ayarlanır. `sortOrder`Null veya **not** boş değilse `NameSort` boş bir dize olarak ayarlanır.
 
-これらの 2 つのステートメントを使用して、次のようにページで列見出しのハイパーリンクを設定することができます。
+Bu iki deyim, sayfanın sütun başlığı köprülerini şu şekilde ayarlamanızı sağlar:
 
-| 既定の並べ替え順   | 姓のハイパーリンク | 日付のハイパーリンク |
+| Geçerli sıralama düzeni   | Son ad Köprüsü | Tarih Köprüsü |
 |:--------------------:|:-------------------:|:--------------:|
-| 姓の昇順  | descending          | ascending      |
-| 姓の降順 | ascending           | ascending      |
-| 日付の昇順       | ascending           | descending     |
-| 日付の降順      | ascending           | ascending      |
+| Artan son ad  | descending          | ascending      |
+| Azalan son ad | ascending           | ascending      |
+| Artan Tarih       | ascending           | descending     |
+| Azalan Tarih      | ascending           | ascending      |
 
-このメソッドは、並べ替える列を指定するのに LINQ to Entities を使用します。 このコードは、switch ステートメントの前に `IQueryable<Student>` を初期化し、switch ステートメントでそれを変更します。
+Yöntemi, sıralama yapılacak sütunu belirtmek için LINQ to Entities kullanır. Kod, `IQueryable<Student>` Switch ifadesinden önce bir başlatır ve Switch ifadesinde onu değiştirir:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_IQueryable)]
 
-`IQueryable` が作成または変更されるときには、クエリは、データベースに送信されません。 クエリは、`IQueryable` オブジェクトがコレクションに変換されるまで実行されません。 `IQueryable` は、`ToListAsync` などのメソッドを呼び出すことで、コレクションに変換されます。 そのため、`IQueryable` コードの結果として、次のステートメントまで実行されない 1 つのクエリになります。
+Bir `IQueryable` oluşturulduğunda veya değiştirildiğinde, veritabanına hiçbir sorgu gönderilmez. `IQueryable`Nesne bir koleksiyona dönüştürülene kadar sorgu yürütülmez. `IQueryable`, gibi bir yöntemi çağırarak bir koleksiyona dönüştürülür `ToListAsync` . Bu nedenle, `IQueryable` kod, aşağıdaki deyime kadar yürütülemeyen tek bir sorgu ile sonuçlanır:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_SortOnlyRtn)]
 
-並べ替え可能な列が多数ある場合、`OnGetAsync` は冗長になる可能性があります。 この機能をコーディングする別の方法については、このチュートリアル シリーズの MVC バージョンの「[動的な LINQ を使ってコードを簡略化する](xref:data/ef-mvc/advanced#dynamic-linq)」を参照してください。
+`OnGetAsync`çok sayıda sıralanabilir sütunla ayrıntı alabilir. Bu işlevi kodun alternatif bir yolu hakkında daha fazla bilgi için, bu öğretici serisinin MVC sürümünde [kodu basitleştirmek için dınamık LINQ kullanma](xref:data/ef-mvc/advanced#dynamic-linq) konusuna bakın.
 
-### <a name="add-column-heading-hyperlinks-to-the-student-index-page"></a>列見出しハイパーリンクを Student インデックス ページに追加する
+### <a name="add-column-heading-hyperlinks-to-the-student-index-page"></a>Öğrenci dizini sayfasına sütun başlığı köprüleri ekleme
 
-*Students/Index.cshtml* のコードを次のコードに置き換えます。 変更が強調表示されます。
+*Öğrenciler/Index. cshtml*içindeki kodu aşağıdaki kodla değiştirin. Değişiklikler vurgulanır.
 
 [!code-cshtml[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml?highlight=5,8,17-19,22,25-27,33)]
 
-上記のコードでは次の操作が行われます。
+Yukarıdaki kod:
 
-* `LastName` と `EnrollmentDate` 列見出しにハイパーリンクを追加します。
-* この情報を `NameSort` および `DateSort` で使用して、現在の並べ替えの値を含むハイパーリンクを設定します。
-* ページ見出しを Index から Students に変更します。
-* `Model.Student` を `Model.Students` に変更します。
+* `LastName`Ve sütun başlıklarına köprüler ekler `EnrollmentDate` .
+* , Ve içindeki bilgileri `NameSort` kullanarak `DateSort` geçerli sıralama düzeni değerleriyle köprüler ayarlar.
+* Sayfa başlığını dizinden öğrencilerle değiştirir.
+* Üzerinde yapılan değişiklikler `Model.Student` `Model.Students` .
 
-並べ替えが動作することを確認するには
+Sıralamanın çalıştığını doğrulamak için:
 
-* アプリを実行し、 **[Students]** タブを選択します。
-* 列見出しをクリックします。
+* Uygulamayı çalıştırın ve **öğrenciler** sekmesini seçin.
+* Sütun başlıklarına tıklayın.
 
-## <a name="add-filtering"></a>フィルターの追加
+## <a name="add-filtering"></a>Filtre ekleme
 
-Students インデックス ページにフィルターを追加するには
+Öğrenciler dizin sayfasına filtre eklemek için:
 
-* テキスト ボックスと [送信] ボタンが、Razor Page に追加されます。 テキスト ボックスは、名と姓で検索文字列を指定します。
-* テキスト ボックスの値を使用するようにページ モデルが更新されます。
+* Sayfaya bir metin kutusu ve bir Gönder düğmesi eklenir Razor . Metin kutusu, ad veya soyadı üzerinde bir arama dizesi sağlar.
+* Sayfa modeli metin kutusu değerini kullanacak şekilde güncelleştirilir.
 
-### <a name="update-the-ongetasync-method"></a>OnGetAsync メソッドの更新
+### <a name="update-the-ongetasync-method"></a>OnGetAsync yöntemini güncelleştirme
 
-*Students/Index.cshtml.cs* のコードを次のコードに置き換え、フィルターを追加します。
+*Öğrenciler/Index. cshtml. cs* dosyasındaki kodu, filtreleme eklemek için aşağıdaki kodla değiştirin:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index2.cshtml.cs?name=snippet_All&highlight=28,33,37-41)]
 
-上記のコードでは次の操作が行われます。
+Yukarıdaki kod:
 
-* `searchString` パラメーターを `OnGetAsync` メソッドに追加し、`CurrentFilter` プロパティのパラメーター値を保存します。 次のセクションで追加されるテキスト ボックスから検索する文字列値を受け取ります。
-* LINQ ステートメントに `Where` 句を追加します。 `Where` 句は、名または姓に検索文字列が含まれている学生のみを選択します。 検索する値がある場合にのみ LINQ ステートメントを実行します。
+* `searchString`Yöntemine parametresini ekler `OnGetAsync` ve parametre değerini `CurrentFilter` özelliğine kaydeder. Arama dizesi değeri bir sonraki bölüme eklenen bir metin kutusundan alınır.
+* LINQ deyimi a `Where` yan tümcesine ekler. `Where`Yan tümce yalnızca adı veya soyadı arama dizesini içeren öğrencileri seçer. LINQ deyimleri yalnızca aranacak bir değer varsa yürütülür.
 
-### <a name="iqueryable-vs-ienumerable"></a>IQueryable/IEnumerable
+### <a name="iqueryable-vs-ienumerable"></a>IQueryable vs. IEnumerable
 
-このコードでは、`IQueryable` オブジェクトに対して `Where` メソッドを呼び出し、フィルターがサーバーで処理されます。 一部のシナリオでは、アプリが `Where` メソッドをメモリ内コレクションの拡張メソッドとして呼び出す場合があります。 たとえば、`_context.Students` が EF Core `DbSet` から `IEnumerable` コレクションを返すリポジトリ メソッドに変更されるとします 結果は、通常同じになりますが、場合によっては異なる場合があります。
+Kod, `Where` yöntemi bir nesne üzerinde çağırır `IQueryable` ve filtre sunucuda işlenir. Bazı senaryolarda, uygulama `Where` bir bellek içi koleksiyonda bir genişletme yöntemi olarak yöntemi çağırıyor olabilir. Örneğin, `_context.Students` EF Core 'den `DbSet` bir koleksiyonu döndüren bir depo yöntemine yapılan değişiklikleri varsayın `IEnumerable` . Sonuç normalde aynı olur, ancak bazı durumlarda farklı olabilir.
 
-たとえば、.NET Framework の `Contains` の実装では、既定では大文字小文字を区別する比較を実行します。 SQL Server で、`Contains` の大文字小文字の区別は、SQL Server インスタンスの照合順序の設定によって決まります。 SQL Server は、既定では大文字小文字を区別しません。 SQLite では、既定で大文字と小文字が区別されます。 `ToUpper` を呼び出して、テストを明示的に大文字小文字を区別しないようにすることができます。
+Örneğin, uygulamasının .NET Framework uygulanması `Contains` Varsayılan olarak büyük/küçük harfe duyarlı bir karşılaştırma gerçekleştirir. SQL Server, `Contains` büyük/küçük harf duyarlılığı SQL Server örneğinin harmanlama ayarına göre belirlenir. SQL Server varsayılan olarak büyük/küçük harfe duyarlı değildir. SQLite, büyük/küçük harfe duyarlı olur. `ToUpper`testi açık büyük/küçük harfe duyarsız hale getirmek için çağrılabilir:
 
 ```csharp
 Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())`
 ```
 
-上記のコードでは、`Where` メソッドが `IEnumerable` で呼び出された場合でも、SQLite で実行された場合でも、フィルターの大文字と小文字が確実に区別されないようにします。
+Yukarıdaki kod, `Where` yöntemin bir veya bir SQLite üzerinde çağrılması durumunda bile filtrenin büyük/küçük harf duyarsız olmasını güvence altına `IEnumerable` alır.
 
-`Contains` が `IEnumerable` コレクションで呼び出されたときには、.NET Core の実装が使用されます。 `Contains` が `IQueryable` オブジェクトで呼び出されたときには、データベースの実装が使用されます。
+`Contains`Bir koleksiyon üzerinde çağrıldığında `IEnumerable` .NET Core uygulamasını kullanır. `Contains`Bir nesne üzerinde çağrıldığında `IQueryable` , veritabanı uygulamasını kullanır.
 
-通常、パフォーマンス上の理由から、`IQueryable` での `Contains` の呼び出しをお勧めします。 `IQueryable` では、データベース サーバーによってフィルター処理が行われます。 最初に `IEnumerable` を作成する場合は、すべての行がデータベース サーバーから返される必要があります。
+`Contains`Bir üzerinde çağırmak `IQueryable` , genellikle performans nedenleriyle tercih edilir. İle `IQueryable` , filtreleme veritabanı sunucusu tarafından yapılır. Önce bir `IEnumerable` oluşturulduysa, tüm satırların veritabanı sunucusundan döndürülmesi gerekir.
 
-`ToUpper` を呼び出すとパフォーマンスが低下します。 `ToUpper` コードは、TSQL SELECT ステートメントの WHERE 句に関数を追加します。 関数が追加されると、オプティマイザーがインデックスを使用できなくなります。 大文字小文字を区別しないように SQL がインストールされている場合、不要な場合は `ToUpper` を呼び出さないようにすることをお勧めします。
+Çağırmak için bir performans cezası vardır `ToUpper` . `ToUpper`Kod, TSQL Select IFADESININ WHERE yan tümcesine bir işlev ekler. Eklenen işlev, iyileştiricinin bir dizin kullanmasını önler. SQL, büyük/küçük harfe duyarsız olarak yüklendiği için, gerekli olmadığında çağrının önüne geçmek en iyisidir `ToUpper` .
 
-詳細については、「[Sqlite プロバイダーで大文字と小文字を区別しないクエリを使用する方法](https://github.com/aspnet/EntityFrameworkCore/issues/11414)」を参照してください。
+Daha fazla bilgi için bkz. [SQLite sağlayıcı ile büyük/küçük harfe duyarsız sorgu kullanma](https://github.com/aspnet/EntityFrameworkCore/issues/11414).
 
-### <a name="update-the-razor-page"></a>Razor Page の更新
+### <a name="update-the-razor-page"></a>Sayfayı Güncelleştir Razor
 
-*Pages/Students/Index.cshtml* のコードを置き換えて、 **[検索]** ボタンと類別されたクロムを作成します。
+*Sayfalar/öğrenciler/Index. cshtml* içindeki kodu, bir **arama** düğmesi ve assıralanan Chrome oluşturmak için değiştirin.
 
 [!code-cshtml[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index2.cshtml?highlight=14-23)]
 
-前のコードは、`<form>` [タグ ヘルパー](xref:mvc/views/tag-helpers/intro)を使用して、検索テキスト ボックスとボタンを追加します。 既定では、`<form>` タグ ヘルパーが POST を使用してフォーム データを送信します。 POST を使用すると、URL ではなく HTTP メッセージの本文でパラメーターが渡されます。 HTTP GET を使用すると、フォームのデータはクエリ文字列として URL で渡されます。 クエリ文字列を使用してデータを渡すことにより、ユーザーが URL にブックマークを設定できます。 アクションの結果として更新されない場合、[W3C のガイドライン](https://www.w3.org/2001/tag/doc/whenToUseGet.html)では、Get の使用が推奨されています。
+Yukarıdaki kod, `<form>` Arama metin kutusu ve düğme eklemek için [etiket yardımcısını](xref:mvc/views/tag-helpers/intro) kullanır. Varsayılan olarak, `<form>` etiket Yardımcısı form verilerini BIR gönderiyle gönderir. POST ile parametreler, URL 'de değil HTTP ileti gövdesine geçirilir. HTTP GET kullanıldığında, form verileri URL 'ye sorgu dizeleri olarak geçirilir. Verilerin sorgu dizelerine geçirilmesi, kullanıcıların URL 'YI yer işaretine eklemesini sağlar. [W3C yönergeleri](https://www.w3.org/2001/tag/doc/whenToUseGet.html) , eylem bir güncelleştirme ile SONUÇLANMAZSA, Get 'in kullanılması önerilir.
 
-アプリをテストします。
+Uygulamayı test etme:
 
-* **[Students]** タブを選択し、検索文字列を入力します。 SQLite を使用している場合、前に示したオプションの `ToUpper` コードを実装した場合にのみ、フィルターの大文字と小文字が区別されません。
+* **Öğrenciler** sekmesini seçin ve bir arama dizesi girin. SQLite kullanıyorsanız, filtre yalnızca daha önce gösterilen isteğe bağlı kodu uyguladıysanız, büyük/küçük harfe duyarlıdır `ToUpper` .
 
-* **[Search]** を選択します。
+* **Ara**' yı seçin.
 
-URL に検索文字列が含まれることに注意してください。 次に例を示します。
+URL 'nin arama dizesini içerdiğine dikkat edin. Örnek:
 
 ```
 https://localhost:<port>/Students?SearchString=an
 ```
 
-ブックマークがブックマークに設定されている場合、ブックマークにページの URL と `SearchString` クエリ文字列が含まれます。 `form` タグ内に `method="get"` があると、クエリ文字列が生成されます。
+Sayfa yer işaretiyle, yer işareti sayfanın URL 'sini ve `SearchString` sorgu dizesini içerir. `method="get"` `form` Etiketi, sorgu dizesinin oluşturulmasına neden oldu.
 
-現時点では、列見出しの並べ替えリンクを選択すると、フィルター値が **[Search]** ボックスから失われます。 次のセクションでは、失われたフィルター値は修正されます。
+Şu anda, bir sütun başlığı sıralama bağlantısı seçildiğinde, **arama** kutusundaki filtre değeri kaybedilir. Kayıp filtre değeri bir sonraki bölümde düzeltilir.
 
-## <a name="add-paging"></a>ページングの追加
+## <a name="add-paging"></a>Sayfalama Ekle
 
-このセクションでは、ページングをサポートする `PaginatedList` クラスを作成します。 `PaginatedList` クラスは、`Skip` と `Take` ステートメントを使用して、テーブルのすべての行を取得する代わりに、サーバー上のデータをフィルター処理します。 ページング ボタンを次の図に示します。
+Bu bölümde, `PaginatedList` sayfalama desteği için bir sınıf oluşturulur. `PaginatedList`Sınıfı, `Skip` `Take` tablodaki tüm satırları almak yerine, sunucudaki verileri filtrelemek için ve deyimlerini kullanır. Aşağıdaki çizimde sayfalama düğmeleri gösterilmektedir.
 
-![ページング リンクを含む Students インデックス ページ](sort-filter-page/_static/paging30.png)
+![Sayfa bağlantılarıyla öğrenciler Dizin sayfası](sort-filter-page/_static/paging30.png)
 
-### <a name="create-the-paginatedlist-class"></a>PaginatedList クラスの作成
+### <a name="create-the-paginatedlist-class"></a>Sayfalı liste sınıfını oluşturma
 
-プロジェクト フォルダーに、次のコードを使用して `PaginatedList.cs` を作成します。
+Proje klasöründe `PaginatedList.cs` aşağıdaki kodla oluşturun:
 
 [!code-csharp[Main](intro/samples/cu30/PaginatedList.cs)]
 
-前のコードの `CreateAsync` メソッドは、ページ サイズとページ番号を受け取り、適切な `Skip` および `Take` ステートメントを `IQueryable` に適用します。 `IQueryable` で `ToListAsync` が呼び出されると、要求されたページのみを含むリストを返します。 プロパティ `HasPreviousPage` および `HasNextPage` を使用して、 **[Previous]** および **[Next]** ページング ボタンを有効または無効にします。
+`CreateAsync`Yukarıdaki koddaki yöntemi sayfa boyutunu ve sayfa numarasını alır ve ' a uygun `Skip` ve `Take` deyimlerini uygular `IQueryable` . `ToListAsync`Üzerinde çağrıldığında `IQueryable` , yalnızca istenen sayfayı Içeren bir liste döndürür. Özellikler `HasPreviousPage` ve `HasNextPage` **önceki** ve **sonraki** sayfalama düğmelerini etkinleştirmek veya devre dışı bırakmak için kullanılır.
 
-`CreateAsync` メソッドを使用して `PaginatedList<T>` を作成します。 コンストラクターでは `PaginatedList<T>` オブジェクトを作成できません。コンストラクターでは非同期コードを実行できません。
+`CreateAsync`Yöntemi oluşturmak için kullanılır `PaginatedList<T>` . Oluşturucu `PaginatedList<T>` nesneyi oluşturamıyor; oluşturucular zaman uyumsuz kod çalıştıramıyor.
 
-### <a name="add-paging-to-the-pagemodel-class"></a>PageModel クラスへのページングの追加
+### <a name="add-paging-to-the-pagemodel-class"></a>PageModel sınıfına sayfalama ekleme
 
-*Students/Index.cshtml.cs* のコードを置き換えて、ページングを追加します。
+*Öğrenciler/Index. cshtml. cs* ' deki kodu, sayfalama eklemek için değiştirin.
 
 [!code-csharp[Main](intro/samples/cu30/Pages/Students/Index.cshtml.cs?name=snippet_All&highlight=26,28-29,31,34-41,68-70)]
 
-上記のコードでは次の操作が行われます。
+Yukarıdaki kod:
 
-* `Students` プロパティの型を `IList<Student>` から `PaginatedList<Student>` に変更します。
-* ページ インデックス、現在の `sortOrder`、`currentFilter` を `OnGetAsync` メソッド シグネチャに追加します。
-* 並べ替え順序を CurrentSort プロパティに保存します。
-* 新しい検索文字列がある場合に、ページ インデックスを 1 にリセットします。
-* `PaginatedList` クラスを使用して、Student エンティティを取得します。
+* `Students`Özelliğinin türünü `IList<Student>` olarak değiştirir `PaginatedList<Student>` .
+* Sayfa dizinini, geçerli `sortOrder` ve öğesini `currentFilter` `OnGetAsync` Yöntem imzasına ekler.
+* Sıralama düzenini CurrentSort özelliğine kaydeder.
+* Yeni bir arama dizesi olduğunda sayfa dizinini 1 olarak sıfırlar.
+* `PaginatedList`Öğrenci varlıklarını almak için sınıfını kullanır.
 
-`OnGetAsync` で受け取るパラメーターはすべて、次の場合に null になります。
+`OnGetAsync`Şu durumlarda alan tüm parametreler null:
 
-* **Students** リンクからページが呼び出されます。
-* ユーザーは、ページングまたは並べ替えのリンクをクリックしていません。
+* Sayfa **öğrenciler** bağlantısından çağrılır.
+* Kullanıcı bir sayfalama veya sıralama bağlantısına tıklamadı.
 
-ページングのリンクをクリックすると、ページ インデックス変数に表示するページ番号が含まれます。
+Bir sayfalama bağlantısına tıklandığında, sayfa dizin değişkeni görüntülenecek sayfa numarasını içerir.
 
-`CurrentSort` プロパティでは、現在の並べ替え順序を含む Razor Page を提供します。 ページングの中に並べ替え順序を保持するために、ページングリンクに、現在の並べ替え順序を含まれている必要があります。
+`CurrentSort`Özelliği, sayfa için Razor geçerli sıralama düzenini sağlar. Disk belleği sırasında sıralama düzenini korumak için geçerli sıralama düzeni, sayfalama bağlantılarına eklenmelidir.
 
-`CurrentFilter` プロパティでは、現在のフィルター文字列を含む Razor Page を提供します。 `CurrentFilter` 値:
+`CurrentFilter`Özelliği, Razor sayfayı geçerli filtre dizesiyle birlikte sağlar. `CurrentFilter`Değer:
 
-* ページングの中に、フィルターの設定を維持するために、ページング リンクに含まれている必要があります。
-* ページがリダイレクトされるときに、テキスト ボックスに復元される必要があります。
+* Disk belleği sırasında filtre ayarlarını korumak için disk belleği bağlantılarına eklenmelidir.
+* Sayfa yeniden görüntülendiğinde metin kutusuna geri yüklenmelidir.
 
-ページングの中に検索文字列を変更する場合は、ページが 1 にリセットされます。 新しいフィルターのために別のデータが表示されるため、ページを 1 にリセットする必要があります。 検索値が入力され、 **[Submit]** が選択された場合:
+Sayfalama sırasında arama dizesi değiştirilirse sayfa 1 ' e sıfırlanır. Yeni filtre farklı verilerin görüntülenmesini sağladığından sayfanın 1 olarak sıfırlanması. Bir arama değeri girildiğinde ve **Gönder** seçildiğinde:
 
-  * 検索文字列が変更されます。
-  * `searchString` パラメーターは null ではありません。
+  * Arama dizesi değiştirildi.
+  * `searchString`Parametre null değil.
 
-  `PaginatedList.CreateAsync` メソッドが、ページングをサポートするコレクション型の学生の 1 つのページに学生クエリを変換します。 その 1 つの学生のページが Razor Page に渡されます。
+  `PaginatedList.CreateAsync`Yöntemi, öğrenci sorgusunu, sayfalama destekleyen bir koleksiyon türündeki tek bir öğrenci sayfasına dönüştürür. Bu tek öğrenci sayfası Razor sayfaya geçirilir.
 
-  `PaginatedList.CreateAsync` 呼び出しの `pageIndex` の後の 2 つの疑問符は、[null 合体演算子](/dotnet/csharp/language-reference/operators/null-conditional-operator)を表します。 Null 合体演算子は、null 許容型の既定値を定義します。 式 `(pageIndex ?? 1)` は、値がある場合に、`pageIndex` の値を返すことを意味します。 `pageIndex` に値がない場合は、1 を返します。
+  Çağrıdan sonraki iki soru işareti, `pageIndex` `PaginatedList.CreateAsync` [null birleşim işlecini](/dotnet/csharp/language-reference/operators/null-conditional-operator)temsil eder. Null birleşim işleci, null yapılabilir bir tür için varsayılan değeri tanımlar. İfade, `(pageIndex ?? 1)` bir değer içeriyorsa değerini döndürür anlamına gelir `pageIndex` . `pageIndex`Değer yoksa 1 döndürün.
 
-### <a name="add-paging-links-to-the-razor-page"></a>Razor Page にページングのリンクを追加する
+### <a name="add-paging-links-to-the-razor-page"></a>Sayfaya sayfalama bağlantıları ekleyin Razor
 
-*Students/Index.cshtml* のコードを次のコードに置き換えます。 変更が強調表示されています。
+*Öğrenciler/Index. cshtml* içindeki kodu aşağıdaki kodla değiştirin. Değişiklikler vurgulanır:
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Students/Index.cshtml?highlight=29-32,38-41,69-87)]
 
-列ヘッダー リンクでは、クエリ文字列を使用して現在の検索文字列を `OnGetAsync` メソッドに渡します。
+Sütun üst bilgisi bağlantıları, geçerli arama dizesini yönteme geçirmek için sorgu dizesini kullanır `OnGetAsync` :
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Students/Index.cshtml?range=29-32)]
 
-タグ ヘルパーによってページング ボタンが表示されます。
+Sayfalama düğmeleri etiket yardımcıları tarafından görüntülenir:
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Students/Index.cshtml?range=73-87)]
 
-アプリを実行して [Students] ページに移動します。
+Uygulamayı çalıştırın ve öğrenciler sayfasına gidin.
 
-* 異なる並べ替え順でページングのリンクをクリックし、ページングが機能することを確認します。
-* 検索文字列を入力して、ページングを試し、並べ替えとフィルター処理を使用してもページングが正しく機能することを確認します。
+* Sayfalama 'nin çalıştığından emin olmak için, farklı sıralama emirlerindeki disk belleği bağlantılarına tıklayın.
+* Disk belleğinin sıralama ve filtreleme ile düzgün çalıştığını doğrulamak için bir arama dizesi girin ve sayfalama yapmayı deneyin.
 
-![ページング リンクを含む Students インデックス ページ](sort-filter-page/_static/paging30.png)
+![sayfa bağlantılarıyla öğrenciler Dizin sayfası](sort-filter-page/_static/paging30.png)
 
-## <a name="add-grouping"></a>グループの追加
+## <a name="add-grouping"></a>Gruplama ekle
 
-このセクションでは、登録日ごとに何人の学生が登録したかを表示する About ページを作成します。 更新では、グループ化を使用し、次の手順が含まれています。
+Bu bölüm, her kayıt tarihi için kaç öğrenciye kaydolduğunu görüntüleyen bir hakkında sayfası oluşturur. Güncelleştirme gruplamayı kullanır ve aşağıdaki adımları içerir:
 
-* **About** ページで使用されるデータのビュー モデルを作成します。
-* ビュー モデルを使用するように About ページを更新します。
+* **Hakkında** sayfasında kullanılan veriler için bir görünüm modeli oluşturun.
+* Görünüm modelini kullanmak için hakkında sayfasını güncelleştirin.
 
-### <a name="create-the-view-model"></a>ビュー モデルを作成する
+### <a name="create-the-view-model"></a>Görünüm modeli oluşturma
 
-*Models/SchoolViewModels* フォルダーを作成します。
+*Modeller/SchoolViewModels* klasörü oluşturun.
 
-次のコードを使用して、*SchoolViewModels/EnrollmentDateGroup.cs* を作成します。
+Aşağıdaki kodla *SchoolViewModels/kayıtlarını Mentdategroup. cs* oluşturun:
 
 [!code-csharp[Main](intro/samples/cu30/Models/SchoolViewModels/EnrollmentDateGroup.cs)]
 
-### <a name="create-the-razor-page"></a>Razor Page の作成
+### <a name="create-the-razor-page"></a>Sayfayı oluşturun Razor
 
-次のコードを使用して、*Pages/About.cshtml* ファイルを作成します。
+Aşağıdaki kodla bir *Pages/about. cshtml* dosyası oluşturun:
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/About.cshtml)]
 
-### <a name="create-the-page-model"></a>ページ モデルの作成
+### <a name="create-the-page-model"></a>Sayfa modelini oluşturma
 
-次のコードを使用して、*Pages/About.cshtml.cs* ファイルを作成します。
+Aşağıdaki kodla bir *Pages/about. cshtml. cs* dosyası oluşturun:
 
 [!code-csharp[Main](intro/samples/cu30/Pages/About.cshtml.cs)]
 
-LINQ ステートメントは、登録日で受講者エンティティをグループ化し、各グループ内のエンティティの数を計算して、結果を `EnrollmentDateGroup` ビュー モデル オブジェクトのコレクションに格納します。
+LINQ beyanı, öğrenci varlıklarını kayıt tarihine göre gruplandırır, her bir gruptaki varlıkların sayısını hesaplar ve sonuçları bir `EnrollmentDateGroup` görünüm modeli nesneleri koleksiyonunda depolar.
 
-アプリを実行して [About] ページに移動します。 登録の日付ごとの学生の数が、テーブルに表示されます。
+Uygulamayı çalıştırın ve hakkında sayfasına gidin. Her kayıt tarihi için öğrenci sayısı bir tabloda görüntülenir.
 
-![About ページ](sort-filter-page/_static/about30.png)
+![Sayfa hakkında](sort-filter-page/_static/about30.png)
 
-## <a name="next-steps"></a>次の手順
+## <a name="next-steps"></a>Sonraki adımlar
 
-次のチュートリアルでは、アプリは移行を使用してデータ モデルを更新します。
+Sonraki öğreticide, uygulama, veri modelini güncelleştirmek için geçişleri kullanır.
 
 > [!div class="step-by-step"]
-> [前のチュートリアル](xref:data/ef-rp/crud)
-> [次のチュートリアル](xref:data/ef-rp/migrations)
+> [Önceki öğretici](xref:data/ef-rp/crud) 
+>  [Sonraki öğretici](xref:data/ef-rp/migrations)
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-このチュートリアルでは、並べ替え、フィルター処理、グループ化、ページング、機能が追加されます。
+Bu öğreticide sıralama, filtreleme, gruplama ve sayfalama işlevleri eklenmiştir.
 
-次の図は、完成したページを示しています。 列見出しはクリックできるリンクとなっており、クリックすると列が並べ替えられます。 列見出しを繰り返しクリックすると、昇順と降順の並べ替え順序が切り替えられます。
+Aşağıdaki çizimde tamamlanmış bir sayfa gösterilmektedir. Sütun başlıkları sütunu sıralamak için tıklatılabilir bağlantılardır. Sütun başlığına tıklanması, artan ve azalan sıralama düzeni arasında sürekli olarak geçiş yapar.
 
-![Students インデックス ページ](sort-filter-page/_static/paging.png)
+![Öğrenciler Dizin sayfası](sort-filter-page/_static/paging.png)
 
-解決できない問題が発生した場合は、[完成したアプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples)をダウンロードしてください。
+Çözemediğiniz sorunlarla karşılaşırsanız, [Tamamlanmış uygulamayı](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples)indirin.
 
-## <a name="add-sorting-to-the-index-page"></a>インデックス ページに並べ替えを追加する
+## <a name="add-sorting-to-the-index-page"></a>Dizin sayfasına sıralama Ekle
 
-*Students/Index.cshtml.cs* `PageModel` に文字列を追加し、並べ替えのパラメーターを格納します。
+Sıralama parametrelerini içerecek şekilde *öğrenciler/Index. cshtml. cs* öğesine dizeler ekleyin `PageModel` :
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet1&highlight=10-13)]
 
-*Students/Index.cshtml.cs* `OnGetAsync` を次のコードで更新します。
+*Öğrenciler/Index. cshtml. cs* ' i `OnGetAsync` aşağıdaki kodla güncelleştirin:
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortOnly)]
 
-前のコードは、URL 内のクエリ文字列から `sortOrder` パラメーターを受け取ります。 (クエリ文字列を含む) URL が[アンカー タグ ヘルパー](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-)によって生成されます。
+Yukarıdaki kod, `sortOrder` URL 'deki sorgu dizesinden bir parametre alır. URL (sorgu dizesi dahil), [tutturucu etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper
+) tarafından oluşturulur
 
-`sortOrder` パラメーターは "Name" または "Date" です。 `sortOrder` パラメーターの後に必要に応じて "_desc" を続け、降順を指定します。 既定の並べ替え順序は昇順です。
+`sortOrder`Parametre "ad" ya da "Tarih" dır. `sortOrder`Parametre, isteğe bağlı olarak azalan sıra belirtmek için "_DESC" tarafından izlenir. Varsayılan sıralama düzeni artan.
 
-インデックス ページが、**Students** リンクから要求された場合、クエリ文字列はありません。 学生は、姓の昇順で表示されます。 `switch` ステートメントでは姓の昇順が既定値 (フォールスルー ケース) です。 ユーザーが列見出しリンクをクリックすると、適切な `sortOrder` 値がクエリ文字列値で提供されます。
+**Öğrenciler** bağlantısından Dizin sayfası istendiğinde sorgu dizesi yoktur. Öğrenciler, son ada göre artan sırada görüntülenir. Son ada göre artan sıralama, deyimindeki varsayılan (gelen durumdur) `switch` . Kullanıcı bir sütun başlığı bağlantısına tıkladığında, `sortOrder` sorgu dizesi değerinde uygun değer sağlanır.
 
-`NameSort` および `DateSort` は、Razor Page で、適切なクエリ文字列値を持つ列見出しのハイパーリンクを構成するために使用されます。
+`NameSort`ve `DateSort` Razor sütun başlığı köprülerini uygun sorgu dizesi değerleriyle yapılandırmak için kullanılır:
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortOnly&highlight=3-4)]
 
-次のコードは、C# の条件演算子 [?:](/dotnet/csharp/language-reference/operators/conditional-operator) を含んでいます。
+Aşağıdaki kod C# koşullu [?: işlecini](/dotnet/csharp/language-reference/operators/conditional-operator)içerir:
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_Ternary)]
 
-最初の行は、`sortOrder` が null または空の場合に、`NameSort` を "name_desc" に設定することを指定します。 `sortOrder` が null または空**ではない**場合、`NameSort` は空の文字列に設定されます。
+İlk satır, `sortOrder` null veya boş olduğunu belirtir, `NameSort` "name_desc" olarak ayarlanır. `sortOrder`Null veya **not** boş değilse `NameSort` boş bir dize olarak ayarlanır.
 
-`?: operator` は三項演算子とも呼ばれます。
+, `?: operator` Üçlü işleç olarak da bilinir.
 
-これらの 2 つのステートメントを使用して、次のようにページで列見出しのハイパーリンクを設定することができます。
+Bu iki deyim, sayfanın sütun başlığı köprülerini şu şekilde ayarlamanızı sağlar:
 
-| 既定の並べ替え順 | 姓のハイパーリンク | 日付のハイパーリンク |
+| Geçerli sıralama düzeni | Son ad Köprüsü | Tarih Köprüsü |
 |:--------------------:|:-------------------:|:--------------:|
-| 姓の昇順 | descending        | ascending      |
-| 姓の降順 | ascending           | ascending      |
-| 日付の昇順       | ascending           | descending     |
-| 日付の降順      | ascending           | ascending      |
+| Artan son ad | descending        | ascending      |
+| Azalan son ad | ascending           | ascending      |
+| Artan Tarih       | ascending           | descending     |
+| Azalan Tarih      | ascending           | ascending      |
 
-このメソッドは、並べ替える列を指定するのに LINQ to Entities を使用します。 このコードは、switch ステートメントの前に `IQueryable<Student>` を初期化し、switch ステートメントでそれを変更します。
+Yöntemi, sıralama yapılacak sütunu belirtmek için LINQ to Entities kullanır. Kod, `IQueryable<Student>` Switch ifadesinden önce bir başlatır ve Switch ifadesinde onu değiştirir:
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortOnly&highlight=6-999)]
 
- `IQueryable` が作成または変更されるときには、クエリは、データベースに送信されません。 クエリは、`IQueryable` オブジェクトがコレクションに変換されるまで実行されません。 `IQueryable` は、`ToListAsync` などのメソッドを呼び出すことで、コレクションに変換されます。 そのため、`IQueryable` コードの結果として、次のステートメントまで実行されない 1 つのクエリになります。
+ Bir `IQueryable` oluşturulduğunda veya değiştirildiğinde, veritabanına hiçbir sorgu gönderilmez. `IQueryable`Nesne bir koleksiyona dönüştürülene kadar sorgu yürütülmez. `IQueryable`, gibi bir yöntemi çağırarak bir koleksiyona dönüştürülür `ToListAsync` . Bu nedenle, `IQueryable` kod, aşağıdaki deyime kadar yürütülemeyen tek bir sorgu ile sonuçlanır:
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortOnlyRtn)]
 
-並べ替え可能な列が多数ある場合、`OnGetAsync` は冗長になる可能性があります。
+`OnGetAsync`çok sayıda sıralanabilir sütunla ayrıntı alabilir.
 
-### <a name="add-column-heading-hyperlinks-to-the-student-index-page"></a>列見出しハイパーリンクを Student インデックス ページに追加する
+### <a name="add-column-heading-hyperlinks-to-the-student-index-page"></a>Öğrenci dizini sayfasına sütun başlığı köprüleri ekleme
 
-*Students/Index.cshtml* のコードを次の強調表示されたコードに置き換えます。
+*Öğrenciler/Index. cshtml*içindeki kodu aşağıdaki vurgulanmış kodla değiştirin:
 
 [!code-html[](intro/samples/cu21/Pages/Students/Index2.cshtml?highlight=17-19,25-27)]
 
-上記のコードでは次の操作が行われます。
+Yukarıdaki kod:
 
-* `LastName` と `EnrollmentDate` 列見出しにハイパーリンクを追加します。
-* この情報を `NameSort` および `DateSort` で使用して、現在の並べ替えの値を含むハイパーリンクを設定します。
+* `LastName`Ve sütun başlıklarına köprüler ekler `EnrollmentDate` .
+* , Ve içindeki bilgileri `NameSort` kullanarak `DateSort` geçerli sıralama düzeni değerleriyle köprüler ayarlar.
 
-並べ替えが動作することを確認するには
+Sıralamanın çalıştığını doğrulamak için:
 
-* アプリを実行し、 **[Students]** タブを選択します。
-* **[Last Name]** をクリックします。
-* **[Enrollment Date]** をクリックします。
+* Uygulamayı çalıştırın ve **öğrenciler** sekmesini seçin.
+* **Son ad**' a tıklayın.
+* **Kayıt tarihi**' ne tıklayın.
 
-コードの理解を深めるために、次の手順を実行します。
+Kodu daha iyi anlamak için:
 
-* *Students/Index.cshtml.cs* で、`switch (sortOrder)` にブレークポイントを設定します。
-* `NameSort` と `DateSort` のウォッチを追加します。
-* *Students/Index.cshtml* で、`@Html.DisplayNameFor(model => model.Student[0].LastName)` にブレークポイントを設定します。
+* *Öğrenciler/Index. cshtml. cs*dosyasında, üzerinde bir kesme noktası ayarlayın `switch (sortOrder)` .
+* Ve için bir izleme `NameSort` ekleyin `DateSort` .
+* *Öğrenciler/Index. cshtml*'de, üzerinde bir kesme noktası ayarlayın `@Html.DisplayNameFor(model => model.Student[0].LastName)` .
 
-デバッガーの手順を実行します。
+Hata ayıklayıcıda adım adım.
 
-## <a name="add-a-search-box-to-the-students-index-page"></a>Students インデックス ページに [検索] ボックスを追加する
+## <a name="add-a-search-box-to-the-students-index-page"></a>Öğrenciler dizin sayfasına bir arama kutusu ekleyin
 
-Students インデックス ページにフィルターを追加するには
+Öğrenciler dizin sayfasına filtre eklemek için:
 
-* テキスト ボックスと [送信] ボタンが、Razor ページに追加されます。 テキスト ボックスは、名と姓で検索文字列を指定します。
-* テキスト ボックスの値を使用するようにページ モデルが更新されます。
+* Sayfaya bir metin kutusu ve bir Gönder düğmesi eklenir Razor . Metin kutusu, ad veya soyadı üzerinde bir arama dizesi sağlar.
+* Sayfa modeli metin kutusu değerini kullanacak şekilde güncelleştirilir.
 
-### <a name="add-filtering-functionality-to-the-index-method"></a>Index メソッドにフィルター機能を追加する
+### <a name="add-filtering-functionality-to-the-index-method"></a>Dizin yöntemine filtreleme işlevi ekleme
 
-*Students/Index.cshtml.cs* `OnGetAsync` を次のコードで更新します。
+*Öğrenciler/Index. cshtml. cs* ' i `OnGetAsync` aşağıdaki kodla güncelleştirin:
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortFilter&highlight=1,5,9-13)]
 
-上記のコードでは次の操作が行われます。
+Yukarıdaki kod:
 
-* `searchString` パラメーターを `OnGetAsync` メソッドに追加します。 次のセクションで追加されるテキスト ボックスから検索する文字列値を受け取ります。
-* LINQ ステートメントに `Where` 句を追加します。 `Where` 句は、名または姓に検索文字列が含まれている学生のみを選択します。 検索する値がある場合にのみ LINQ ステートメントを実行します。
+* `searchString`Yöntemine parametresini ekler `OnGetAsync` . Arama dizesi değeri bir sonraki bölüme eklenen bir metin kutusundan alınır.
+* LINQ deyimi bir `Where` yan tümcesine eklendi. `Where`Yan tümce yalnızca adı veya soyadı arama dizesini içeren öğrencileri seçer. LINQ deyimleri yalnızca aranacak bir değer varsa yürütülür.
 
-メモ:前のコードは、`IQueryable` オブジェクトに対して `Where` メソッドを呼び出し、フィルターがサーバーで処理されます。 一部のシナリオでは、アプリが `Where` メソッドをメモリ内コレクションの拡張メソッドとして呼び出す場合があります。 たとえば、`_context.Students` が EF Core `DbSet` から `IEnumerable` コレクションを返すリポジトリ メソッドに変更されるとします 結果は、通常同じになりますが、場合によっては異なる場合があります。
+Note: Yukarıdaki kod, `Where` metodu bir nesne üzerinde çağırır `IQueryable` ve filtre sunucuda işlenir. Bazı senaryolarda, uygulama `Where` bir bellek içi koleksiyonda bir genişletme yöntemi olarak yöntemi çağırıyor olabilir. Örneğin, `_context.Students` EF Core 'den `DbSet` bir koleksiyonu döndüren bir depo yöntemine yapılan değişiklikleri varsayın `IEnumerable` . Sonuç normalde aynı olur, ancak bazı durumlarda farklı olabilir.
 
-たとえば、.NET Framework の `Contains` の実装では、既定では大文字小文字を区別する比較を実行します。 SQL Server で、`Contains` の大文字小文字の区別は、SQL Server インスタンスの照合順序の設定によって決まります。 SQL Server は、既定では大文字小文字を区別しません。 `ToUpper` を呼び出して、テストを明示的に大文字小文字を区別しないようにすることができます。
+Örneğin, uygulamasının .NET Framework uygulanması `Contains` Varsayılan olarak büyük/küçük harfe duyarlı bir karşılaştırma gerçekleştirir. SQL Server, `Contains` büyük/küçük harf duyarlılığı SQL Server örneğinin harmanlama ayarına göre belirlenir. SQL Server varsayılan olarak büyük/küçük harfe duyarlı değildir. `ToUpper`testi açık büyük/küçük harfe duyarsız hale getirmek için çağrılabilir:
 
 `Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())`
 
-上記のコードは、コードが `IEnumerable` を使用するように変更された場合、結果で大文字小文字が区別されないようにします。 `Contains` が `IEnumerable` コレクションで呼び出されたときには、.NET Core の実装が使用されます。 `Contains` が `IQueryable` オブジェクトで呼び出されたときには、データベースの実装が使用されます。 リポジトリから `IEnumerable` を返すと、パフォーマンスが大幅に低下する可能性があります。
+Yukarıdaki kod, kodun kullanım için değişiklik yaptığı durumlarda sonuçların büyük/küçük harf duyarsız olmasını sağlar `IEnumerable` . `Contains`Bir koleksiyon üzerinde çağrıldığında `IEnumerable` .NET Core uygulamasını kullanır. `Contains`Bir nesne üzerinde çağrıldığında `IQueryable` , veritabanı uygulamasını kullanır. `IEnumerable`Bir depodan döndürmek önemli bir performans cezasına sahip olabilir:
 
-1. DB サーバーからすべての行が返されます。
-1. アプリケーションで返されたすべての行にフィルターが適用されます。
+1. Tüm satırlar DB sunucusundan döndürülür.
+1. Filtre, uygulamadaki tüm döndürülen satırlara uygulanır.
 
-`ToUpper` を呼び出すとパフォーマンスが低下します。 `ToUpper` コードは、TSQL SELECT ステートメントの WHERE 句に関数を追加します。 関数が追加されると、オプティマイザーがインデックスを使用できなくなります。 大文字小文字を区別しないように SQL がインストールされている場合、不要な場合は `ToUpper` を呼び出さないようにすることをお勧めします。
+Çağırmak için bir performans cezası vardır `ToUpper` . `ToUpper`Kod, TSQL Select IFADESININ WHERE yan tümcesine bir işlev ekler. Eklenen işlev, iyileştiricinin bir dizin kullanmasını önler. SQL, büyük/küçük harfe duyarsız olarak yüklendiği için, gerekli olmadığında çağrının önüne geçmek en iyisidir `ToUpper` .
 
-### <a name="add-a-search-box-to-the-student-index-page"></a>Students インデックス ページに [検索] ボックスを追加する
+### <a name="add-a-search-box-to-the-student-index-page"></a>Öğrenci dizin sayfasına bir arama kutusu ekleyin
 
-*Pages/Students/Index.cshtml* で、次の強調表示されたコードを追加し、 **[検索]** ボタンと各種のクロムを追加します。
+*Sayfalar/öğrenciler/Index. cshtml*' de, bir **arama** düğmesi ve asi grafik Chrome oluşturmak için aşağıdaki vurgulanmış kodu ekleyin.
 
 [!code-html[](intro/samples/cu21/Pages/Students/Index3.cshtml?highlight=14-23&range=1-25)]
 
-前のコードは、`<form>` [タグ ヘルパー](xref:mvc/views/tag-helpers/intro)を使用して、検索テキスト ボックスとボタンを追加します。 既定では、`<form>` タグ ヘルパーが POST を使用してフォーム データを送信します。 POST を使用すると、URL ではなく HTTP メッセージの本文でパラメーターが渡されます。 HTTP GET を使用すると、フォームのデータはクエリ文字列として URL で渡されます。 クエリ文字列を使用してデータを渡すことにより、ユーザーが URL にブックマークを設定できます。 アクションの結果として更新されない場合、[W3C のガイドライン](https://www.w3.org/2001/tag/doc/whenToUseGet.html)では、Get の使用が推奨されています。
+Yukarıdaki kod, `<form>` Arama metin kutusu ve düğme eklemek için [etiket yardımcısını](xref:mvc/views/tag-helpers/intro) kullanır. Varsayılan olarak, `<form>` etiket Yardımcısı form verilerini BIR gönderiyle gönderir. POST ile parametreler, URL 'de değil HTTP ileti gövdesine geçirilir. HTTP GET kullanıldığında, form verileri URL 'ye sorgu dizeleri olarak geçirilir. Verilerin sorgu dizelerine geçirilmesi, kullanıcıların URL 'YI yer işaretine eklemesini sağlar. [W3C yönergeleri](https://www.w3.org/2001/tag/doc/whenToUseGet.html) , eylem bir güncelleştirme ile SONUÇLANMAZSA, Get 'in kullanılması önerilir.
 
-アプリをテストします。
+Uygulamayı test etme:
 
-* **[Students]** タブを選択し、検索文字列を入力します。
-* **[Search]** を選択します。
+* **Öğrenciler** sekmesini seçin ve bir arama dizesi girin.
+* **Ara**' yı seçin.
 
-URL に検索文字列が含まれることに注意してください。
+URL 'nin arama dizesini içerdiğine dikkat edin.
 
 ```html
 http://localhost:5000/Students?SearchString=an
 ```
 
-ブックマークがブックマークに設定されている場合、ブックマークにページの URL と `SearchString` クエリ文字列が含まれます。 `form` タグ内に `method="get"` があると、クエリ文字列が生成されます。
+Sayfa yer işaretiyle, yer işareti sayfanın URL 'sini ve `SearchString` sorgu dizesini içerir. `method="get"` `form` Etiketi, sorgu dizesinin oluşturulmasına neden oldu.
 
-現時点では、列見出しの並べ替えリンクを選択すると、フィルター値が **[Search]** ボックスから失われます。 次のセクションでは、失われたフィルター値は修正されます。
+Şu anda, bir sütun başlığı sıralama bağlantısı seçildiğinde, **arama** kutusundaki filtre değeri kaybedilir. Kayıp filtre değeri bir sonraki bölümde düzeltilir.
 
-## <a name="add-paging-functionality-to-the-students-index-page"></a>Students インデックス ページにページング機能を追加する
+## <a name="add-paging-functionality-to-the-students-index-page"></a>Öğrenciler dizin sayfasına sayfalama işlevselliği ekleme
 
-このセクションでは、ページングをサポートする `PaginatedList` クラスを作成します。 `PaginatedList` クラスは、`Skip` と `Take` ステートメントを使用して、テーブルのすべての行を取得する代わりに、サーバー上のデータをフィルター処理します。 ページング ボタンを次の図に示します。
+Bu bölümde, `PaginatedList` sayfalama desteği için bir sınıf oluşturulur. `PaginatedList`Sınıfı, `Skip` `Take` tablodaki tüm satırları almak yerine, sunucudaki verileri filtrelemek için ve deyimlerini kullanır. Aşağıdaki çizimde sayfalama düğmeleri gösterilmektedir.
 
-![ページング リンクを含む Students インデックス ページ](sort-filter-page/_static/paging.png)
+![Sayfa bağlantılarıyla öğrenciler Dizin sayfası](sort-filter-page/_static/paging.png)
 
-プロジェクト フォルダーに、次のコードを使用して `PaginatedList.cs` を作成します。
+Proje klasöründe `PaginatedList.cs` aşağıdaki kodla oluşturun:
 
 [!code-csharp[](intro/samples/cu21/PaginatedList.cs)]
 
-前のコードの `CreateAsync` メソッドは、ページ サイズとページ番号を受け取り、適切な `Skip` および `Take` ステートメントを `IQueryable` に適用します。 `IQueryable` で `ToListAsync` が呼び出されると、要求されたページのみを含むリストを返します。 プロパティ `HasPreviousPage` および `HasNextPage` を使用して、 **[Previous]** および **[Next]** ページング ボタンを有効または無効にします。
+`CreateAsync`Yukarıdaki koddaki yöntemi sayfa boyutunu ve sayfa numarasını alır ve ' a uygun `Skip` ve `Take` deyimlerini uygular `IQueryable` . `ToListAsync`Üzerinde çağrıldığında `IQueryable` , yalnızca istenen sayfayı Içeren bir liste döndürür. Özellikler `HasPreviousPage` ve `HasNextPage` **önceki** ve **sonraki** sayfalama düğmelerini etkinleştirmek veya devre dışı bırakmak için kullanılır.
 
-`CreateAsync` メソッドを使用して `PaginatedList<T>` を作成します。 コンストラクターは、`PaginatedList<T>` オブジェクトを作成できません。コンストラクターは、非同期コードを実行できません。
+`CreateAsync`Yöntemi oluşturmak için kullanılır `PaginatedList<T>` . Bir Oluşturucu `PaginatedList<T>` nesneyi oluşturamaz, oluşturucular zaman uyumsuz kod çalıştıramıyorum.
 
-## <a name="add-paging-functionality-to-the-index-method"></a>Index メソッドにページング機能を追加する
+## <a name="add-paging-functionality-to-the-index-method"></a>Dizin yöntemine sayfalama işlevselliği ekleme
 
-*Students/Index.cshtml.cs* で、`Student` の型を `IList<Student>` から `PaginatedList<Student>` に更新します。
+*Öğrenciler/Index. cshtml. cs*dosyasında, türünü `Student` ile arasında güncelleştirin `IList<Student>` `PaginatedList<Student>` :
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortFilterPageType)]
 
-*Students/Index.cshtml.cs* `OnGetAsync` を次のコードで更新します。
+*Öğrenciler/Index. cshtml. cs* ' i `OnGetAsync` aşağıdaki kodla güncelleştirin:
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortFilterPage&highlight=1-4,7-14,41-999)]
 
-上記のコードは、ページ インデックス、現在の `sortOrder`、および `currentFilter` をメソッド シグネチャに追加します。
+Yukarıdaki kod, sayfa dizinini, geçerli `sortOrder` ve öğesini `currentFilter` Yöntem imzasına ekler.
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortFilterPage2)]
 
-すべてのパラメーターは、次のような場合に null になります。
+Şu durumlarda tüm parametreler null:
 
-* **Students** リンクからページが呼び出されます。
-* ユーザーは、ページングまたは並べ替えのリンクをクリックしていません。
+* Sayfa **öğrenciler** bağlantısından çağrılır.
+* Kullanıcı bir sayfalama veya sıralama bağlantısına tıklamadı.
 
-ページングのリンクをクリックすると、ページ インデックス変数に表示するページ番号が含まれます。
+Bir sayfalama bağlantısına tıklandığında, sayfa dizin değişkeni görüntülenecek sayfa numarasını içerir.
 
-`CurrentSort` は、現在の並べ替え順序を含む Razor ページを提供します。 ページングの中に並べ替え順序を保持するために、ページングリンクに、現在の並べ替え順序を含まれている必要があります。
+`CurrentSort`Razorgeçerli sıralama düzeninde sayfa sağlar. Disk belleği sırasında sıralama düzenini korumak için geçerli sıralama düzeni, sayfalama bağlantılarına eklenmelidir.
 
-`CurrentFilter` は、現在のフィルター文字列を含む Razor ページを提供します。 `CurrentFilter` 値:
+`CurrentFilter`Razorgeçerli Filtre dizesinin bulunduğu sayfayı sağlar. `CurrentFilter`Değer:
 
-* ページングの中に、フィルターの設定を維持するために、ページング リンクに含まれている必要があります。
-* ページがリダイレクトされるときに、テキスト ボックスに復元される必要があります。
+* Disk belleği sırasında filtre ayarlarını korumak için disk belleği bağlantılarına eklenmelidir.
+* Sayfa yeniden görüntülendiğinde metin kutusuna geri yüklenmelidir.
 
-ページングの中に検索文字列を変更する場合は、ページが 1 にリセットされます。 新しいフィルターのために別のデータが表示されるため、ページを 1 にリセットする必要があります。 検索値が入力され、 **[Submit]** が選択された場合:
+Sayfalama sırasında arama dizesi değiştirilirse sayfa 1 ' e sıfırlanır. Yeni filtre farklı verilerin görüntülenmesini sağladığından sayfanın 1 olarak sıfırlanması. Bir arama değeri girildiğinde ve **Gönder** seçildiğinde:
 
-* 検索文字列が変更されます。
-* `searchString` パラメーターは null ではありません。
+* Arama dizesi değiştirildi.
+* `searchString`Parametre null değil.
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortFilterPage3)]
 
-`PaginatedList.CreateAsync` メソッドが、ページングをサポートするコレクション型の学生の 1 つのページに学生クエリを変換します。 その 1 つの学生のページが Razor ページに渡されます。
+`PaginatedList.CreateAsync`Yöntemi, öğrenci sorgusunu, sayfalama destekleyen bir koleksiyon türündeki tek bir öğrenci sayfasına dönüştürür. Bu tek öğrenci sayfası Razor sayfaya geçirilir.
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortFilterPage4)]
 
-`PaginatedList.CreateAsync` の 2 つの疑問符は、[null 合体演算子](/dotnet/csharp/language-reference/operators/null-conditional-operator)を表します。 Null 合体演算子は、null 許容型の既定値を定義します。 式 `(pageIndex ?? 1)` は、値がある場合に、`pageIndex` の値を返すことを意味します。 `pageIndex` に値がない場合は、1 を返します。
+İçindeki iki soru işareti `PaginatedList.CreateAsync` , [null birleşim işlecini](/dotnet/csharp/language-reference/operators/null-conditional-operator)temsil eder. Null birleşim işleci, null yapılabilir bir tür için varsayılan değeri tanımlar. İfade, `(pageIndex ?? 1)` bir değer içeriyorsa değerini döndürür anlamına gelir `pageIndex` . `pageIndex`Değer yoksa 1 döndürün.
 
-## <a name="add-paging-links-to-the-student-razor-page"></a>学生の Razor ページにページングのリンクを追加する
+## <a name="add-paging-links-to-the-student-razor-page"></a>Öğrenci sayfasına sayfalama bağlantıları ekleme Razor
 
-*Students/Index.cshtml* 内のマークアップを更新する 変更が強調表示されています。
+*Öğrenciler/Index. cshtml*'de biçimlendirmeyi güncelleştirin. Değişiklikler vurgulanır:
 
 [!code-html[](intro/samples/cu21/Pages/Students/Index.cshtml?highlight=28-31,37-40,68-999)]
 
-列ヘッダー リンクは、ユーザーがフィルターの結果内で並べ替えられるように、クエリ文字列を使用して現在の検索文字列を `OnGetAsync` メソッドに渡します。
+Sütun üst bilgisi bağlantıları, `OnGetAsync` kullanıcının filtre sonuçları içinde sıralama yapabilmesi için geçerli arama dizesini yöntemine geçirmek üzere sorgu dizesini kullanır:
 
 [!code-html[](intro/samples/cu21/Pages/Students/Index.cshtml?range=28-31)]
 
-タグ ヘルパーによってページング ボタンが表示されます。
+Sayfalama düğmeleri etiket yardımcıları tarafından görüntülenir:
 
 [!code-html[](intro/samples/cu21/Pages/Students/Index.cshtml?range=72-)]
 
-アプリを実行して [Students] ページに移動します。
+Uygulamayı çalıştırın ve öğrenciler sayfasına gidin.
 
-* 異なる並べ替え順でページングのリンクをクリックし、ページングが機能することを確認します。
-* 検索文字列を入力して、ページングを試し、並べ替えとフィルター処理を使用してもページングが正しく機能することを確認します。
+* Sayfalama 'nin çalıştığından emin olmak için, farklı sıralama emirlerindeki disk belleği bağlantılarına tıklayın.
+* Disk belleğinin sıralama ve filtreleme ile düzgün çalıştığını doğrulamak için bir arama dizesi girin ve sayfalama yapmayı deneyin.
 
-![ページング リンクを含む Students インデックス ページ](sort-filter-page/_static/paging.png)
+![sayfa bağlantılarıyla öğrenciler Dizin sayfası](sort-filter-page/_static/paging.png)
 
-コードの理解を深めるために、次の手順を実行します。
+Kodu daha iyi anlamak için:
 
-* *Students/Index.cshtml.cs* で、`switch (sortOrder)` にブレークポイントを設定します。
-* `NameSort`、`DateSort`、`CurrentSort`、`Model.Student.PageIndex` のウォッチを追加します。
-* *Students/Index.cshtml* で、`@Html.DisplayNameFor(model => model.Student[0].LastName)` にブレークポイントを設定します。
+* *Öğrenciler/Index. cshtml. cs*dosyasında, üzerinde bir kesme noktası ayarlayın `switch (sortOrder)` .
+* ,, Ve için bir izleme ekleyin `NameSort` `DateSort` `CurrentSort` `Model.Student.PageIndex` .
+* *Öğrenciler/Index. cshtml*'de, üzerinde bir kesme noktası ayarlayın `@Html.DisplayNameFor(model => model.Student[0].LastName)` .
 
-デバッガーの手順を実行します。
+Hata ayıklayıcıda adım adım.
 
-## <a name="update-the-about-page-to-show-student-statistics"></a>学生の統計情報を表示するように [About] ページを更新します。
+## <a name="update-the-about-page-to-show-student-statistics"></a>Öğrenci istatistiklerini göstermek için hakkında sayfasını güncelleştirin
 
-このステップで、*Pages/About.cshtml* が更新され、登録日付ごとに登録した学生の数を表示します。 更新では、グループ化を使用し、次の手順が含まれています。
+Bu adımda, *Sayfalar/about. cshtml* , her bir kayıt tarihi için kaç öğrenciye kaydolduğunu görüntüleyecek şekilde güncelleştirilir. Güncelleştirme gruplamayı kullanır ve aşağıdaki adımları içerir:
 
-* **About** ページで使用されるデータのビュー モデルを作成します。
-* ビュー モデルを使用するように About ページを更新します。
+* **Hakkında** sayfasında kullanılan veriler için bir görünüm modeli oluşturun.
+* Görünüm modelini kullanmak için hakkında sayfasını güncelleştirin.
 
-### <a name="create-the-view-model"></a>ビュー モデルを作成する
+### <a name="create-the-view-model"></a>Görünüm modeli oluşturma
 
-*SchoolViewModels* フォルダーを *Models* フォルダー内に作成します。
+*Modeller* klasöründe bir *SchoolViewModels* klasörü oluşturun.
 
-次のコードを使用して、*SchoolViewModels* フォルダー内に *EnrollmentDateGroup.cs* を追加します。
+*SchoolViewModels* klasöründe aşağıdaki kodla bir *EnrollmentDateGroup.cs* ekleyin:
 
 [!code-csharp[](intro/samples/cu21/Models/SchoolViewModels/EnrollmentDateGroup.cs)]
 
-### <a name="update-the-about-page-model"></a>About ページ モデルを更新する
+### <a name="update-the-about-page-model"></a>Hakkında sayfa modelini Güncelleştir
 
-ASP.NET Core 2.2 の Web テンプレートには、About ページが含まれていません。 ASP.NET Core 2.2 を使っている場合は、About Razor ページを作成します。
+ASP.NET Core 2,2 ' deki Web şablonları hakkında sayfasını içermez. ASP.NET Core 2,2 kullanıyorsanız hakkında Razor sayfasını oluşturun.
 
-次のコードを使用して、*Pages/About.cshtml.cs* を更新します。
+*Pages/about. cshtml. cs* dosyasını aşağıdaki kodla güncelleştirin:
 
 [!code-csharp[](intro/samples/cu21/Pages/About.cshtml.cs)]
 
-LINQ ステートメントは、登録日で受講者エンティティをグループ化し、各グループ内のエンティティの数を計算して、結果を `EnrollmentDateGroup` ビュー モデル オブジェクトのコレクションに格納します。
+LINQ beyanı, öğrenci varlıklarını kayıt tarihine göre gruplandırır, her bir gruptaki varlıkların sayısını hesaplar ve sonuçları bir `EnrollmentDateGroup` görünüm modeli nesneleri koleksiyonunda depolar.
 
-### <a name="modify-the-about-razor-page"></a>About Razor ページを変更する
+### <a name="modify-the-about-razor-page"></a>Hakkında sayfasını değiştirme Razor
 
-*Pages/About.cshtml* ファイルのコードを次のコードに置き換えます。
+*Pages/about. cshtml* dosyasındaki kodu aşağıdaki kodla değiştirin:
 
 [!code-html[](intro/samples/cu21/Pages/About.cshtml)]
 
-アプリを実行して [About] ページに移動します。 登録の日付ごとの学生の数が、テーブルに表示されます。
+Uygulamayı çalıştırın ve hakkında sayfasına gidin. Her kayıt tarihi için öğrenci sayısı bir tabloda görüntülenir.
 
-解決できない問題が発生した場合は、[このステージの完成したアプリ](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/StageSnapShots/cu-part3-sorting)をダウンロードしてください。
+Çözemediğiniz sorunlarla karşılaşırsanız, [Bu aşama için tamamlanmış uygulamayı](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/StageSnapShots/cu-part3-sorting)indirin.
 
-![About ページ](sort-filter-page/_static/about.png)
+![Sayfa hakkında](sort-filter-page/_static/about.png)
 
-## <a name="additional-resources"></a>その他の技術情報
+## <a name="additional-resources"></a>Ek kaynaklar
 
-* [ASP.NET Core 2.x ソースのデバッグ](https://github.com/dotnet/AspNetCore.Docs/issues/4155)
-* [このチュートリアルの YouTube バージョン](https://www.youtube.com/watch?v=MDs7PFpoMqI)
+* [2. x kaynağı ASP.NET Core hata ayıklaması](https://github.com/dotnet/AspNetCore.Docs/issues/4155)
+* [Bu öğreticinin YouTube sürümü](https://www.youtube.com/watch?v=MDs7PFpoMqI)
 
-次のチュートリアルでは、アプリは移行を使用してデータ モデルを更新します。
+Sonraki öğreticide, uygulama, veri modelini güncelleştirmek için geçişleri kullanır.
 
 > [!div class="step-by-step"]
-> [前へ](xref:data/ef-rp/crud)
-> [次へ](xref:data/ef-rp/migrations)
+> [Önceki](xref:data/ef-rp/crud) 
+>  [Sonraki](xref:data/ef-rp/migrations)
 
 ::: moniker-end
 

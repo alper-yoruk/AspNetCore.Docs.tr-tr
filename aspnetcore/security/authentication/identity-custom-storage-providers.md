@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-custom-storage-providers
-ms.openlocfilehash: 792a9e5f776e345fbee5726b676fe148ecaf1657
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 567529adc520c3fb152afae7284d31b87ec1df0a
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106591"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652997"
 ---
 # <a name="custom-storage-providers-for-aspnet-core-identity"></a>ASP.NET Core için özel depolama sağlayıcılarıIdentity
 
@@ -25,7 +25,7 @@ ms.locfileid: "84106591"
 
 ASP.NET Core Identity , özel bir depolama sağlayıcısı oluşturup uygulamanıza bağlayabilmenizi sağlayan genişletilebilir bir sistemdir. Bu konuda, ASP.NET Core için özelleştirilmiş bir depolama sağlayıcısının nasıl oluşturulacağı açıklanmaktadır Identity . Kendi depolama sağlayıcınızı oluşturmaya yönelik önemli kavramları ele alır, ancak adım adım bir adım adım değildir.
 
-[GitHub 'dan örnek görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample).
+[GitHub 'dan örnek görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity-custom-storage-providers/sample/CustomIdentityProviderSample).
 
 ## <a name="introduction"></a>Giriş
 

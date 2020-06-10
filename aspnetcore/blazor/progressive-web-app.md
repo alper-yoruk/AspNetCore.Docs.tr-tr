@@ -5,7 +5,7 @@ description: BlazorMasaüstü uygulaması gibi davranması için modern tarayıc
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 06/09/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: 274516014c027972166402abc70d22fa801898de
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: ef73cbb928fb442c73acce6f5facac33236abd67
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84451855"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652407"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>ASP.NET Core weelsembly ile aşamalı Web uygulamaları oluşturun Blazor
 
@@ -272,8 +272,23 @@ Bu liste, dış paketler ve projeler tarafından sağlanan içerik dahil olmak �
 
 ### <a name="interaction-with-authentication"></a>Kimlik doğrulamasıyla etkileşim
 
-PWA şablonu seçeneğini kimlik doğrulama seçenekleriyle birlikte kullanmak mümkündür. Çevrimdışı özellikli bir PWA, kullanıcının ağ bağlantısı olduğunda kimlik doğrulamasını da destekleyebilir.
+PWA şablonu, kimlik doğrulamasıyla birlikte kullanılabilir. Çevrimdışı özellikli bir PWA, kullanıcının ilk ağ bağlantısı olduğunda kimlik doğrulamasını da destekleyebilir.
 
-Bir kullanıcının ağ bağlantısı yoksa, kimlik doğrulaması yapamaz veya erişim belirteçleri elde etmez. Varsayılan olarak, ağ erişimi olmadan oturum açma sayfasını ziyaret etme girişimi, "ağ hatası" iletisiyle sonuçlanır.
+Bir kullanıcının ağ bağlantısı yoksa, kimlik doğrulaması yapamaz veya erişim belirteçleri elde etmez. Varsayılan olarak, ağ erişimi olmadan oturum açma sayfasını ziyaret etme girişimi, "ağ hatası" iletisiyle sonuçlanır. Kullanıcının kimliğini doğrulamaya veya erişim belirteçleri almaya çalışmadan, kullanıcının çevrimdışıyken yararlı görevler gerçekleştirmesini sağlayan bir UI akışı tasarlamanız gerekir. Alternatif olarak, ağ kullanılamadığında, uygulamayı düzgün bir şekilde başarısız olacak şekilde tasarlayabilirsiniz. Uygulama bu senaryoları işleyecek şekilde tasarlanamaz, çevrimdışı desteği etkinleştirmek istemeyebilirsiniz.
 
-Kullanıcının kimlik doğrulaması yapmaya veya erişim belirteçlerine gerek kalmadan çevrimdışıyken yararlı işlemler yapmasını sağlayan bir UI akışı tasarlamanız gerekir. Alternatif olarak, ağ kullanılabilir olmadığında, uygulamayı düzgün bir şekilde başarısız olacak şekilde tasarlayabilirsiniz. Uygulamanızda bu mümkün değilse, çevrimdışı desteği etkinleştirmek istemeyebilirsiniz.
+Çevrimiçi ve çevrimdışı kullanım için tasarlanan bir uygulama yeniden çevrimiçi olduğunda:
+
+* Uygulamanın yeni bir erişim belirteci sağlaması gerekebilir.
+* Uygulamanın, çevrimdışıyken gerçekleştirilen kullanıcı hesabına işlem uygulayabilmesi için farklı bir kullanıcının hizmette oturum açmış olup olmadığını algılaması gerekir.
+
+Kimlik doğrulamasıyla etkileşime sahip bir çevrimdışı PWA uygulaması oluşturmak için:
+
+* ' Nı, <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccountClaimsPrincipalFactory%601> son oturum açan kullanıcıyı depolayan ve uygulama çevrimdışıyken depolanan kullanıcıyı kullanan bir fabrika ile değiştirin.
+* Uygulama çevrimdışıyken sıraya alma işlemleri yapın ve uygulama çevrimiçi olarak geri döndüğünde bunları uygulayın.
+* Oturumu kapatma sırasında, depolanan kullanıcıyı temizleyin.
+
+[Carchecker](https://github.com/SteveSandersonMS/CarChecker) örnek uygulaması, önceki yaklaşımları gösterir. Uygulamanın aşağıdaki bölümlerine bakın:
+
+* `OfflineAccountClaimsPrincipalFactory`(*İstemci/veri/OfflineAccountClaimsPrincipalFactory. cs*)
+* `LocalVehiclesStore`(*İstemci/veri/LocalVehiclesStore. cs*)
+* `LoginStatus`bileşen (*istemci/paylaşılan/LoginStatus. Razor*)

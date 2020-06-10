@@ -1,31 +1,46 @@
 ---
-title : Razor Pages avec EF Core dans ASP.net Core-migrations-4 sur 8 Author : Rick-Anderson Description : dans ce didacticiel, vous allez commencer à utiliser la fonctionnalité de migrations EF Core pour la gestion des modifications de modèle de données dans une application ASP.net Core Mvc.
-ms. Author : Riande ms. Date : 07/22/2019 No-Loc : [éblouissant, « Identity », « Reverse », Razor, Signalr] UID : Data/EF-RP/migrations
+title: Bölüm 4, Razor ASP.NET Core geçişlerde EF Core olan sayfalar
+author: rick-anderson
+description: RazorSayfaların 4. bölümü ve Entity Framework öğretici serisi.
+ms.author: riande
+ms.date: 07/22/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: data/ef-rp/migrations
+ms.openlocfilehash: 74fe8771718647c3adf8288a72b11c30fb097a63
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652623"
 ---
+# <a name="part-4-razor-pages-with-ef-core-migrations-in-aspnet-core"></a>Bölüm 4, Razor ASP.NET Core EF Core geçişleri olan sayfalar
 
-# <a name="razor-pages-with-ef-core-in-aspnet-core---migrations---4-of-8"></a>Pages Razor avec EF Core dans ASP.NET Core - Migrations - 4 sur 8
-
-Par [Tom Dykstra](https://github.com/tdykstra), [Jon P Smith](https://twitter.com/thereformedprog) et [Rick Anderson](https://twitter.com/RickAndMSFT)
+, [Tom Dykstra](https://github.com/tdykstra), [Jon P Smith](https://twitter.com/thereformedprog)ve [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 [!INCLUDE [about the series](~/includes/RP-EF/intro.md)]
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Ce tutoriel présente la fonctionnalité de migrations EF Core pour gérer les modifications du modèle de données.
+Bu öğreticide, veri modeli değişikliklerini yönetmek için EF Core geçişleri özelliği tanıtılmıştır.
 
-Quand une nouvelle application est développée, le modèle de données change fréquemment. Chaque fois que le modèle change, il est désynchronisé avec la base de données. Cette série de tutoriels a commencé par la configuration d’Entity Framework pour créer la base de données si elle n’existait pas. Chaque fois que le modèle de données change, vous devez supprimer la base de données. À l’exécution suivante de l’application, l’appel à `EnsureCreated` a pour effet de recréer la base de données en fonction du nouveau modèle de données. La classe `DbInitializer` s’exécute ensuite pour amorcer la nouvelle base de données.
+Yeni bir uygulama geliştirildiğinde, veri modeli sıklıkla değişir. Modelin her değiştirilişinde, model veritabanıyla eşitlenmemiş olur. Bu öğretici serisi, mevcut değilse veritabanını oluşturmak için Entity Framework yapılandırılarak başlatılır. Veri modelinin her değiştirilişinde veritabanını bırakmalısınız. Uygulamanın bir sonraki çalıştırılışında, `EnsureCreated` Yeni veri modeliyle eşleşecek şekilde veritabanını yeniden oluşturur. `DbInitializer`Daha sonra sınıfı yeni veritabanını temel alarak çalışır.
 
-Cette approche consistant à maintenir la base de données synchronisée avec le modèle de données fonctionne bien tant que vous ne déployez pas l’application en production. Quand l’application s’exécute en production, elle stocke généralement des données qui doivent être tenues à jour. L’application ne peut pas démarrer avec une base de données de test chaque fois qu’une modification est apportée (comme l’ajout d’une nouvelle colonne). La fonctionnalité Migrations d’EF Core résout ce problème en permettant à EF Core de mettre à jour le schéma de base de données au lieu de créer une nouvelle base de données.
+Veritabanını veri modeliyle eşitlenmiş halde tutmaya yönelik bu yaklaşım, uygulamayı üretime dağıtana kadar iyi çalışır. Uygulama üretimde çalıştığında genellikle saklanması gereken verileri depolar. Uygulama her değişiklik yapıldığında (yeni sütun ekleme gibi) bir test veritabanıyla başlayamaz. EF Core geçişleri özelliği, yeni bir veritabanı oluşturmak yerine EF Core veritabanı şemasını güncelleştirmesine olanak sağlayarak bu sorunu çözer.
 
-Au lieu de supprimer et de recréer la base de données quand le modèle de données change, les migrations mettent à jour le schéma et conservent les données existantes.
+Veri modeli değiştiğinde veritabanını bırakıp yeniden oluşturmak yerine, geçişler şemayı güncelleştirir ve var olan verileri korur.
 
 [!INCLUDE[](~/includes/sqlite-warn.md)]
 
-## <a name="drop-the-database"></a>Supprimer la base de données
+## <a name="drop-the-database"></a>Veritabanını bırak
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Utilisez l’**Explorateur d’objets SQL Server** (SSOX) pour supprimer la base de données ou exécutez la commande suivante dans la **console du Gestionnaire de package** (PMC) :
+Veritabanını silmek için **SQL Server Nesne Gezgini** (ssox) kullanın veya **Paket Yöneticisi konsolunda** (PMC) şu komutu çalıştırın:
 
 ```powershell
 Drop-Database
@@ -33,15 +48,15 @@ Drop-Database
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* Exécutez la commande suivante à l’invite de commandes pour installer l’interface de ligne de commande EF :
+* EF CLı 'yi yüklemek için komut isteminde aşağıdaki komutu çalıştırın:
 
   ```dotnetcli
   dotnet tool install --global dotnet-ef
   ```
 
-* Dans l’invite de commandes, accédez au dossier du projet. Le dossier du projet contient le fichier *ContosoUniversity.csproj*.
+* Komut isteminde proje klasörüne gidin. Proje klasörü *Contosouniversity. csproj* dosyasını içerir.
 
-* Supprimez le fichier *CU.db* ou exécutez la commande suivante :
+* *Cu. db* dosyasını silin veya şu komutu çalıştırın:
 
   ```dotnetcli
   dotnet ef database drop --force
@@ -49,11 +64,11 @@ Drop-Database
 
 ---
 
-## <a name="create-an-initial-migration"></a>Créer une migration initiale
+## <a name="create-an-initial-migration"></a>İlk geçiş oluşturma
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Exécutez les commandes suivantes dans PMC :
+PMC 'de şu komutları çalıştırın:
 
 ```powershell
 Add-Migration InitialCreate
@@ -62,7 +77,7 @@ Update-Database
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Vérifiez que l’invite de commandes se trouve dans le dossier du projet et exécutez les commandes suivantes :
+Komut isteminin proje klasöründe olduğundan emin olun ve aşağıdaki komutları çalıştırın:
 
 ```dotnetcli
 dotnet ef migrations add InitialCreate
@@ -71,57 +86,57 @@ dotnet ef database update
 
 ---
 
-## <a name="up-and-down-methods"></a>Méthodes Up et Down
+## <a name="up-and-down-methods"></a>Yukarı ve aşağı Yöntemler
 
-La commande EF Core `migrations add` a généré du code pour créer la base de données. Ce code de migrations se trouve dans le fichier *Migrations\<horodatage> _InitialCreate.cs*. La méthode `Up` de la classe `InitialCreate` crée les tables de base de données qui correspondent aux jeux d’entités du modèle de données. La méthode `Down` les supprime, comme indiqué dans l’exemple suivant :
+EF Core `migrations add` komutu veritabanını oluşturmak için kod oluşturdu. Bu geçiş kodu *geçişlerde \<timestamp> _InitialCreate. cs* dosyasında bulunur. `Up`Sınıfının yöntemi, `InitialCreate` veri modeli varlık kümelerine karşılık gelen veritabanı tablolarını oluşturur. `Down`Yöntemi, aşağıdaki örnekte gösterildiği gibi bunları siler:
 
 [!code-csharp[](intro/samples/cu30/Migrations/20190731193522_InitialCreate.cs)]
 
-Le code précédent concerne la migration initiale. Le code :
+Önceki kod ilk geçişe yöneliktir. Kod:
 
-* A été généré par la commande `migrations add InitialCreate`. 
-* Est exécuté par la commande `database update`.
-* Crée une base de données pour le modèle de données spécifié par la classe du contexte de base de données.
+* Komut tarafından oluşturuldu `migrations add InitialCreate` . 
+* Komutu tarafından yürütülür `database update` .
+* Veritabanı bağlamı sınıfı tarafından belirtilen veri modeli için bir veritabanı oluşturur.
 
-Le paramètre de nom de migration (« InitialCreate » dans l’exemple) est utilisé comme nom de fichier. Le nom de la migration peut être n’importe quel nom de fichier valide. Nous vous conseillons néanmoins de choisir un mot ou une expression qui résume ce qui est effectué dans la migration. Par exemple, une migration ajoutant une table de département pourrait se nommer « TableAjoutDépartement ».
+Dosya adı için geçiş adı parametresi (örnekteki "ınitialcreate") kullanılır. Geçiş adı herhangi bir geçerli dosya adı olabilir. Geçiş sırasında nelerin yapıldığını özetleyen bir sözcük veya tümcecik seçmek en iyisidir. Örneğin, bir departman tablosu ekleyen bir geçişe "AddDepartmentTable" adı verilir.
 
-## <a name="the-migrations-history-table"></a>Table d’historique des migrations
+## <a name="the-migrations-history-table"></a>Geçişler geçmiş tablosu
 
-* Utilisez SSOX ou votre outil SQLite pour inspecter la base de données.
-* Notez l’ajout d’une table `__EFMigrationsHistory`. La table `__EFMigrationsHistory` effectue le suivi des migrations qui ont été appliquées à la base de données.
-* Examinez les données contenues dans la table `__EFMigrationsHistory`. Elle présente une ligne pour la première migration.
+* Veritabanını incelemek için SSOX veya SQLite aracınızı kullanın.
+* Tablo ekleme hakkında dikkat edin `__EFMigrationsHistory` . `__EFMigrationsHistory`Tablo, hangi geçişlerin veritabanına uygulandığını izler.
+* Tablodaki verileri görüntüleyin `__EFMigrationsHistory` . İlk geçiş için bir satır gösterir.
 
-## <a name="the-data-model-snapshot"></a>Capture instantanée du modèle de données
+## <a name="the-data-model-snapshot"></a>Veri modeli anlık görüntüsü
 
-Les migrations créent une *capture instantanée* du modèle de données actif dans *Migrations/SchoolContextModelSnapshot.cs*. Quand vous ajoutez une migration, EF détermine ce qui a changé en comparant le modèle de données actif au fichier de capture instantanée.
+Geçişler, *geçiş/SchoolContextModelSnapshot. cs*içindeki geçerli veri modelinin *anlık görüntüsünü* oluşturur. Bir geçiş eklediğinizde, EF geçerli veri modelini Snapshot dosyası ile karşılaştırarak nelerin değiştirildiğini belirler.
 
-Comme le fichier de capture instantané suit l’état du modèle de données, vous ne pouvez pas supprimer une migration en supprimant le fichier `<timestamp>_<migrationname>.cs`. Pour annuler la migration la plus récente, vous devez utiliser la commande `migrations remove`. Cette commande supprime la migration et vérifie que la capture instantanée est correctement réinitialisée. Pour plus d’informations, voir [migrations dotnet EF supprimer](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove).
+Anlık görüntü dosyası veri modelinin durumunu izlediğinden, dosyayı silerek bir geçişi silemezsiniz `<timestamp>_<migrationname>.cs` . En son geçişi geri yüklemek için komutunu kullanmanız gerekir `migrations remove` . Bu komut, geçişi siler ve anlık görüntünün doğru şekilde sıfırlanmasını sağlar. Daha fazla bilgi için bkz. [DotNet EF geçişleri kaldır](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove).
 
-## <a name="remove-ensurecreated"></a>Supprimer EnsureCreated
+## <a name="remove-ensurecreated"></a>Yeniden oluşturulmasını kaldır
 
-Cette série de tutoriels a commencé en utilisant `EnsureCreated`. La méthode `EnsureCreated` ne crée pas de table d’historique des migrations et ne peut donc pas être utilisée avec les migrations. Elle est destinée à effectuer des tests et un prototypage rapide, où la base de données est supprimée et recréée fréquemment.
+Bu öğretici serisi kullanılarak başlatıldı `EnsureCreated` . `EnsureCreated`geçişler geçmişi tablosu oluşturmaz ve geçişler ile kullanılamaz. Bu, veritabanının düşürülme ve sıklıkla yeniden oluşturulduğu test veya hızlı prototip oluşturma için tasarlanmıştır.
 
-À partir de là, les tutoriels utilisent des migrations.
+Bu noktadan sonra öğreticiler, geçişleri kullanacaktır.
 
-Dans *Data/DBInitializer. cs*, commentez la ligne suivante :
+*Data/Dbınınitializer. cs*dosyasında aşağıdaki satırı açıklama olarak inceleyin:
 
 ```csharp
 context.Database.EnsureCreated();
 ```
-Exécutez l’application et vérifiez que la base de données est amorcée.
+Uygulamayı çalıştırın ve veritabanının çalıştığını doğrulayın.
 
-## <a name="applying-migrations-in-production"></a>Application de migrations en production
+## <a name="applying-migrations-in-production"></a>Üretimde geçişleri uygulama
 
-Nous **déconseillons** l’appel de [Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) dans les applications de production pendant leur démarrage. `Migrate` ne doit pas être appelé à partir d’une application déployée sur une batterie de serveurs. Si un scale-out de plusieurs instances de serveur a lieu sur l’application, il est difficile de vérifier que les mises à jour du schéma de base de données ne se produisent pas à partir de plusieurs serveurs ou qu’elles ne sont pas en conflit avec un accès en lecture/écriture.
+Uygulama başlangıcında, üretim uygulamalarının [Database. Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) **olarak çağırmalarını** öneririz. `Migrate`sunucu grubuna dağıtılan bir uygulamadan çağrılmamalıdır. Uygulama birden çok sunucu örneğine ölçekleniyorsa, veritabanı şeması güncelleştirmelerinin birden çok sunucudan oluşmaması veya okuma/yazma erişimiyle çakışmamasını sağlamak zordur.
 
-La migration de base de données doit être effectuée dans le cadre du déploiement et de manière contrôlée. Parmi les approches de migration de base de données de production, citons :
+Veritabanı geçişi, dağıtımın bir parçası olarak ve denetimli bir şekilde yapılmalıdır. Üretim veritabanı geçiş yaklaşımları şunları içerir:
 
-* L’utilisation de migrations pour créer des scripts SQL et l’utilisation de scripts SQL dans le déploiement
-* L’exécution de `dotnet ef database update` à partir d’un environnement contrôlé
+* SQL betikleri oluşturmak ve dağıtımda SQL betikleri kullanmak için geçişleri kullanma.
+* `dotnet ef database update`Denetlenen bir ortamdan çalıştırma.
 
-## <a name="troubleshooting"></a>Dépannage
+## <a name="troubleshooting"></a>Sorun giderme
 
-Si l’application utilise la Base de données locale SQL Server et affiche l’exception suivante :
+Uygulama SQL Server LocalDB kullanıyorsa ve aşağıdaki özel durumu görüntülüyorsa:
 
 ```text
 SqlException: Cannot open database "ContosoUniversity" requested by the login.
@@ -129,59 +144,59 @@ The login failed.
 Login failed for user 'user name'.
 ```
 
-La solution peut consister à exécuter `dotnet ef database update` à partir d’une invite de commandes.
+Çözüm, `dotnet ef database update` bir komut isteminde çalıştırılabilir.
 
-### <a name="additional-resources"></a>Ressources supplémentaires
+### <a name="additional-resources"></a>Ek kaynaklar
 
-* [CLI EF Core](/ef/core/miscellaneous/cli/dotnet)
-* [Console du Gestionnaire de package (Visual Studio)](/ef/core/miscellaneous/cli/powershell)
+* [Clı EF Core](/ef/core/miscellaneous/cli/dotnet).
+* [Paket Yöneticisi Konsolu (Visual Studio)](/ef/core/miscellaneous/cli/powershell)
 
-## <a name="next-steps"></a>Étapes suivantes
+## <a name="next-steps"></a>Sonraki adımlar
 
-Le tutoriel suivant crée le modèle de données en ajoutant des propriétés d’entité et de nouvelles entités.
+Sonraki öğreticide, veri modeli, varlık özellikleri ve yeni varlıklar eklenerek oluşturulur.
 
 > [!div class="step-by-step"]
-> [Didacticiel précédent](xref:data/ef-rp/sort-filter-page)-didacticiel[suivant](xref:data/ef-rp/complex-data-model) 
-> 
+> [Önceki öğretici](xref:data/ef-rp/sort-filter-page) 
+>  [Sonraki öğretici](xref:data/ef-rp/complex-data-model)
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-Dans ce didacticiel, nous allons utiliser la fonctionnalité de migrations EF Core pour gérer les modifications du modèle de données.
+Bu öğreticide, veri modeli değişikliklerini yönetmek için EF Core geçişleri özelliği kullanılır.
 
-Si vous rencontrez des problèmes que vous ne pouvez pas résoudre, téléchargez [l’application terminée](
-https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples).
+Çözemediğiniz sorunlarla karşılaşırsanız, [Tamamlanmış uygulamayı](
+https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples)indirin.
 
-Quand une nouvelle application est développée, le modèle de données change fréquemment. Chaque fois que le modèle change, il est désynchronisé avec la base de données. Ce didacticiel commence par configurer Entity Framework pour créer la base de données si elle n’existe pas. Chaque fois que le modèle de données change :
+Yeni bir uygulama geliştirildiğinde, veri modeli sıklıkla değişir. Modelin her değiştirilişinde, model veritabanıyla eşitlenmemiş olur. Bu öğretici, mevcut değilse veritabanını oluşturmak için Entity Framework yapılandırılarak başlatılır. Veri modelinin her değiştirilişinde:
 
-* La base de données est supprimée
-* EF crée une nouvelle base de données qui correspond au modèle
-* L’application amorce la base de données avec des données de test
+* DB bırakılır.
+* EF, modelle eşleşen yeni bir tane oluşturur.
+* Uygulama, DB 'yi test verileriyle birlikte oluşturur.
 
-Cette approche pour conserver la synchronisation de la base de données avec le modèle de données fonctionne bien jusqu’à ce que vous déployiez l’application en production. Quand l’application s’exécute en production, elle stocke généralement des données qui doivent être tenues à jour. L’application ne peut pas commencer avec une base de données de test chaque fois qu’une modification est apportée (par exemple en cas d’ajout d’une nouvelle colonne). La fonctionnalité Migrations d’EF Core résout ce problème en permettant à EF Core de mettre à jour le schéma de base de données au lieu de créer une nouvelle base de données.
+Bu yaklaşım, VERITABANıNı veri modeliyle eşitlenmiş halde tutmak, uygulamayı üretime dağıtana kadar iyi çalışır. Uygulama üretimde çalıştığında genellikle saklanması gereken verileri depolar. Uygulama her değişiklik yapıldığında (yeni sütun ekleme gibi) bir test DB ile başlayamaz. EF Core geçişleri özelliği, yeni bir VERITABANı oluşturmak yerine EF Core DB şemasını güncelleştirmesine olanak sağlayarak bu sorunu çözer.
 
-Plutôt que de supprimer et de recréer la base de données quand le modèle de données change, les migrations mettent à jour le schéma et conservent les données existantes.
+Veri modeli değiştiğinde VERITABANıNı bırakıp yeniden oluşturmak yerine, geçişler şemayı güncelleştirir ve mevcut verileri korur.
 
-## <a name="drop-the-database"></a>Supprimer la base de données
+## <a name="drop-the-database"></a>Veritabanını bırak
 
-Utilisez **l’Explorateur d’objets SQL Server** (SSOX) ou la commande `database drop` :
+**SQL Server Nesne Gezgini** (ssox) veya komutunu kullanın `database drop` :
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Dans la **console du Gestionnaire de package**, exécutez la commande suivante :
+**Paket Yöneticisi konsolunda** (PMC), aşağıdaki komutu çalıştırın:
 
 ```powershell
 Drop-Database
 ```
 
-Exécutez `Get-Help about_EntityFrameworkCore` à partir de la console du Gestionnaire de package pour obtenir des informations d’aide.
+`Get-Help about_EntityFrameworkCore`Yardım bilgileri almak IÇIN PMC 'den çalıştırın.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Ouvrez une fenêtre de commande et accédez au dossier du projet. Le dossier du projet contient le fichier *Startup.cs*.
+Bir komut penceresi açın ve proje klasörüne gidin. Proje klasörü *Startup.cs* dosyasını içerir.
 
-Entrez ce qui suit dans la fenêtre de commande :
+Komut penceresine şunu girin:
 
  ```dotnetcli
  dotnet ef database drop
@@ -189,11 +204,11 @@ Entrez ce qui suit dans la fenêtre de commande :
 
 ---
 
-## <a name="create-an-initial-migration-and-update-the-db"></a>Créer une migration initiale et mettre à jour la base de données
+## <a name="create-an-initial-migration-and-update-the-db"></a>İlk geçiş oluşturma ve VERITABANıNı güncelleştirme
 
-Générez le projet et créez la première migration.
+Projeyi derleyin ve ilk geçişi oluşturun.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 ```powershell
 Add-Migration InitialCreate
@@ -209,34 +224,34 @@ dotnet ef database update
 
 ---
 
-### <a name="examine-the-up-and-down-methods"></a>Examiner les méthodes Up et Down
+### <a name="examine-the-up-and-down-methods"></a>Yukarı ve aşağı yöntemlerini inceleyin
 
-La commande EF Core `migrations add` a généré du code pour créer la base de données. Ce code de migrations se trouve dans le fichier *Migrations\<horodatage> _InitialCreate.cs*. La méthode `Up` de la classe `InitialCreate` crée les tables de base de données qui correspondent aux jeux d’entités du modèle de données. La méthode `Down` les supprime, comme indiqué dans l’exemple suivant :
+EF Core `migrations add` komutu veritabanını oluşturmak için kodu oluşturdu. Bu geçiş kodu *geçişlerde \<timestamp> _InitialCreate. cs* dosyasında bulunur. `Up`Sınıfının yöntemi, `InitialCreate` veri modeli varlık kümelerine KARŞıLıK gelen DB tablolarını oluşturur. `Down`Yöntemi, aşağıdaki örnekte gösterildiği gibi bunları siler:
 
 [!code-csharp[](intro/samples/cu21/Migrations/20180626224812_InitialCreate.cs?range=7-24,77-88)]
 
-La fonctionnalité Migrations appelle la méthode `Up` pour implémenter les modifications du modèle de données pour une migration. Quand vous entrez une commande pour restaurer la mise à jour, les migrations appellent la méthode `Down`.
+Geçişler, `Up` geçiş için veri modeli değişikliklerini uygulamak üzere yöntemini çağırır. Güncelleştirmeyi geri almak için bir komut girdiğinizde, geçişler `Down` yöntemini çağırır.
 
-Le code précédent concerne la migration initiale. Ce code a été créé quand la commande `migrations add InitialCreate` a été exécutée. Le paramètre de nom de migration (« InitialCreate » dans l’exemple) est utilisé comme nom de fichier. Le nom de la migration peut être n’importe quel nom de fichier valide. Nous vous conseillons néanmoins de choisir un mot ou une expression qui résume ce qui est effectué dans la migration. Par exemple, une migration ajoutant une table de département pourrait se nommer « TableAjoutDépartement ».
+Önceki kod ilk geçişe yöneliktir. Bu kod, `migrations add InitialCreate` komut çalıştırıldığında oluşturulmuştur. Dosya adı için geçiş adı parametresi (örnekteki "ınitialcreate") kullanılır. Geçiş adı herhangi bir geçerli dosya adı olabilir. Geçiş sırasında nelerin yapıldığını özetleyen bir sözcük veya tümcecik seçmek en iyisidir. Örneğin, bir departman tablosu ekleyen bir geçişe "AddDepartmentTable" adı verilir.
 
-Si la migration initiale est créée et que la base de données existe :
+İlk geçiş oluşturulur ve VERITABANı varsa:
 
-* Le code de création de base de données est généré
-* Le code de création de base de données n’a pas besoin de s’exécuter, car la base de données correspond déjà au modèle de données. Si le code de création de base de données est exécuté, il n’apporte aucune modification, car la base de données correspond déjà au modèle de données.
+* DB oluşturma kodu oluşturulur.
+* DB, veri modeliyle zaten eşleştiğinden, DB oluşturma kodunun çalıştırılması gerekmiyor. DB oluşturma kodu çalıştırılsa, VERITABANı veri modeliyle zaten eşleştiğinden hiçbir değişiklik yapmaz.
 
-Quand l’application est déployée sur un nouvel environnement, vous devez exécuter le code de création de base de données pour créer la base de données.
+Uygulama yeni bir ortama dağıtıldığında, DB oluşturmak için DB oluşturma kodunun çalıştırılması gerekir.
 
-Comme la base de données a été supprimée et n’existe pas, les migrations créent une autre base de données.
+Daha önce VERITABANı bırakılmıştı ve mevcut olmadığından geçişler yeni DB 'yi oluşturur.
 
-### <a name="the-data-model-snapshot"></a>Capture instantanée du modèle de données
+### <a name="the-data-model-snapshot"></a>Veri modeli anlık görüntüsü
 
-Les migrations créent un *instantané* du schéma de base de données actuel dans *Migrations/SchoolContextModelSnapshot.cs*. Quand vous ajoutez une migration, EF détermine ce qui a changé en comparant le modèle de données au fichier de capture instantanée.
+Geçişler *geçişlerde/SchoolContextModelSnapshot. cs*' de geçerli veritabanı şemasının *anlık görüntüsünü* oluşturur. Bir geçiş eklediğinizde EF, veri modeli Snapshot dosyası ile karşılaştırılarak nelerin değiştirildiğini belirler.
 
-Pour supprimer une migration, utilisez la commande suivante :
+Bir geçişi silmek için aşağıdaki komutu kullanın:
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Remove-Migration
+Geçişi Kaldır
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -244,52 +259,52 @@ Remove-Migration
 dotnet ef migrations remove
 ```
 
-Pour plus d’informations, voir [migrations dotnet EF supprimer](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove).
+Daha fazla bilgi için bkz. [DotNet EF geçişleri kaldır](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove).
 
 ---
 
-Pour supprimer les migrations, la commande supprime la migration et garantit que l’instantané est correctement réinitialisé.
+Geçişleri Kaldır komutu geçişi siler ve anlık görüntünün doğru şekilde sıfırlanmasını sağlar.
 
-### <a name="remove-ensurecreated-and-test-the-app"></a>Supprimer EnsureCreated et tester l’application
+### <a name="remove-ensurecreated-and-test-the-app"></a>Uygulamayı kaldırın ve uygulamayı test edin
 
-Dans les phases initiales de développement, nous avons utilisé `EnsureCreated`. Dans ce tutoriel, nous utilisons des migrations. La commande `EnsureCreated` a les limitations suivantes :
+Erken geliştirme için `EnsureCreated` kullanıldı. Bu öğreticide geçişler kullanılır. `EnsureCreated`aşağıdaki sınırlamalara sahiptir:
 
-* Elle ignore les migrations et crée la base de données et le schéma
-* Elle ne crée pas de table de migrations
-* Elle ne peut *pas* être utilisée avec des migrations
-* Elle est conçue pour effectuer des tests et un prototypage rapide, où la base de données est supprimée et recréée fréquemment.
+* Geçişleri atlar ve DB ve şema oluşturur.
+* Geçişler tablosu oluşturmaz.
+* Geçişlerle *kullanılamaz.*
+* , DB 'nin bıraktığı ve sıklıkla yeniden oluşturulduğu test veya hızlı prototipleme için tasarlanmıştır.
 
-Supprimez `EnsureCreated` :
+Kaldır `EnsureCreated` :
 
 ```csharp
 context.Database.EnsureCreated();
 ```
 
-Exécutez l’application et vérifiez que la base de données est amorcée.
+Uygulamayı çalıştırın ve DB 'nin çalıştığını doğrulayın.
 
-### <a name="inspect-the-database"></a>Inspecter la base de données
+### <a name="inspect-the-database"></a>Veritabanını inceleyin
 
-Utilisez **l’Explorateur d’objets SQL Server** pour inspecter la base de données. Notez l’ajout d’une table `__EFMigrationsHistory`. La table `__EFMigrationsHistory` effectue le suivi des migrations qui ont été appliquées à la base de données. Visualisez les données dans la table `__EFMigrationsHistory` ; elle affiche une ligne pour la première migration. Le dernier journal dans l’exemple de sortie CLI précédent montre l’instruction INSERT qui crée cette ligne.
+DB 'yi denetlemek için **SQL Server Nesne Gezgini** kullanın. Tablo ekleme hakkında dikkat edin `__EFMigrationsHistory` . `__EFMigrationsHistory`Tablo, hangi GEÇIŞLERIN veritabanına uygulandığını izler. Tablodaki verileri görüntüleme `__EFMigrationsHistory` , ilk geçiş için bir satır gösterir. Önceki CLı çıkış örneğinde yer alan son oturum, bu satırı oluşturan INSERT ifadesini gösterir.
 
-Exécutez l’application et vérifiez que tout fonctionne.
+Uygulamayı çalıştırın ve her şeyin çalıştığını doğrulayın.
 
-## <a name="applying-migrations-in-production"></a>Application de migrations en production
+## <a name="applying-migrations-in-production"></a>Üretimde geçişleri uygulama
 
-Nous vous recommandons de faire en sorte que les applications de production n’appellent **pas**[Database.Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) au démarrage de l’application. `Migrate` ne doit pas être appelée à partir d’une application dans la batterie de serveurs, par exemple si l’application a été déployée dans le cloud avec montée en puissance parallèle (plusieurs instances de l’application sont en cours d’exécution).
+Uygulama başlangıcında, üretim uygulamalarının [Database. Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) **çağrısını yapmanızı** öneririz. `Migrate`sunucu grubundaki bir uygulamadan çağrılmamalıdır. Örneğin, uygulama bulutu genişleme ile dağıtılmışsa (uygulamanın birden çok örneği çalışır).
 
-La migration de base de données doit être effectuée dans le cadre du déploiement et de manière contrôlée. Parmi les approches de migration de base de données de production, citons :
+Veritabanı geçişi, dağıtımın bir parçası olarak ve denetimli bir şekilde yapılmalıdır. Üretim veritabanı geçiş yaklaşımları şunları içerir:
 
-* L’utilisation de migrations pour créer des scripts SQL et l’utilisation de scripts SQL dans le déploiement
-* L’exécution de `dotnet ef database update` à partir d’un environnement contrôlé
+* SQL betikleri oluşturmak ve dağıtımda SQL betikleri kullanmak için geçişleri kullanma.
+* `dotnet ef database update`Denetlenen bir ortamdan çalıştırma.
 
-EF Core utilise la table `__MigrationsHistory` pour voir si des migrations doivent s’exécuter. Si la base de données est à jour, aucune migration n’est exécutée.
+EF Core, `__MigrationsHistory` herhangi bir geçişin çalıştırılması gerektiğini görmek için tabloyu kullanır. DB güncel değilse, hiçbir geçiş çalıştırılmaz.
 
-## <a name="troubleshooting"></a>Dépannage
+## <a name="troubleshooting"></a>Sorun giderme
 
-Téléchargez [l’application terminée](
-https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21snapshots/cu-part4-migrations).
+[Tamamlanmış uygulamayı](
+https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21snapshots/cu-part4-migrations)indirin.
 
-L’application génère l’exception suivante :
+Uygulama aşağıdaki özel durumu oluşturur:
 
 ```text
 SqlException: Cannot open database "ContosoUniversity" requested by the login.
@@ -297,19 +312,19 @@ The login failed.
 Login failed for user 'user name'.
 ```
 
-Solution : Exécutez `dotnet ef database update`.
+Çözüm: Çalıştır`dotnet ef database update`
 
-### <a name="additional-resources"></a>Ressources supplémentaires
+### <a name="additional-resources"></a>Ek kaynaklar
 
-* [Version YouTube de ce tutoriel](https://www.youtube.com/watch?v=OWSUuMLKTJo)
-* [CLI .net Core](/ef/core/miscellaneous/cli/dotnet).
-* [Console du Gestionnaire de package (Visual Studio)](/ef/core/miscellaneous/cli/powershell)
+* [Bu öğreticinin YouTube sürümü](https://www.youtube.com/watch?v=OWSUuMLKTJo)
+* [.NET Core CLI](/ef/core/miscellaneous/cli/dotnet).
+* [Paket Yöneticisi Konsolu (Visual Studio)](/ef/core/miscellaneous/cli/powershell)
 
 
 
 > [!div class="step-by-step"]
-> [Précédent](xref:data/ef-rp/sort-filter-page)
-> [suivant](xref:data/ef-rp/complex-data-model)
+> [Önceki](xref:data/ef-rp/sort-filter-page) 
+>  [Sonraki](xref:data/ef-rp/complex-data-model)
 
 ::: moniker-end
 

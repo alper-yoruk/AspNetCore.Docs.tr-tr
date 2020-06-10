@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core MVC uygulamasına denetleyici ekleme
+title: 2. bölüm, ASP.NET Core MVC uygulamasına denetleyici ekleme
 author: rick-anderson
-description: Basit bir ASP.NET Core MVC uygulamasına denetleyici eklemeyi öğrenin.
+description: ASP.NET Core MVC 'deki öğretici serisinin 2. bölümü.
 ms.author: riande
 ms.date: 08/05/2017
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-controller
-ms.openlocfilehash: ce6248854c738733f75c40ed8ec6100f35ab4971
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 1bb2d96d7b58bdd88ce9c2266c33f6e7de9e9209
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776317"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84653036"
 ---
-# <a name="add-a-controller-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC uygulamasına denetleyici ekleme
+# <a name="part-2-add-a-controller-to-an-aspnet-core-mvc-app"></a>2. bölüm, ASP.NET Core MVC uygulamasına denetleyici ekleme
 
 Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -40,8 +40,8 @@ Bu kavramları, bu öğretici serisinde ele alınmaktadır ve bir film uygulamas
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **Çözüm Gezgini**, denetleyiciler öğesine sağ tıklayın **> > denetleyicisi**
-  ![bağlamsal menü ekleyin](adding-controller/_static/add_controller.png)
+* **Çözüm Gezgini**, denetleyiciler öğesine sağ tıklayın **> > denetleyicisi** 
+   ![ bağlamsal menü ekleyin](adding-controller/_static/add_controller.png)
 
 * **Yapı Iskelesi Ekle** iletişim kutusunda, **MVC denetleyicisi-boş** seçeneğini belirleyin
 
@@ -72,13 +72,13 @@ Denetleyiciyi **Merhaba Dünya denetleyicisine**adlandırın.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_1)]
 
-Bir `public` denetleyicideki her yöntem bir HTTP uç noktası olarak çağrılabilir. Yukarıdaki örnekte her iki yöntem de bir dize döndürür. Her yöntemden önceki açıklamalara göz önüne alın.
+`public`Bir denetleyicideki her yöntem BIR HTTP uç noktası olarak çağrılabilir. Yukarıdaki örnekte her iki yöntem de bir dize döndürür. Her yöntemden önceki açıklamalara göz önüne alın.
 
-HTTP uç noktası, `https://localhost:5001/HelloWorld`gibi Web uygulamasındaki bir hedeflenebilir URL 'sidir ve kullanılan `HTTPS`protokolü, Web sunucusunun ağ konumunu (TCP bağlantı noktası dahil): `localhost:5001` ve hedef URI `HelloWorld`'yi birleştirir.
+HTTP uç noktası, gibi Web uygulamasındaki bir hedeflenebilir URL 'sidir `https://localhost:5001/HelloWorld` ve kullanılan protokolü, `HTTPS` Web sunucusunun ağ konumunu (TCP bağlantı noktası dahil): `localhost:5001` ve hedef URI 'yi birleştirir `HelloWorld` .
 
-İlk açıklama bu, temel URL 'ye eklenerek `/HelloWorld/` çağrılan BIR [http get](https://www.w3schools.com/tags/ref_httpmethods.asp) yöntemi olduğunu belirtir. İkinci açıklama URL 'ye eklenerek `/HelloWorld/Welcome/` çağrılan BIR [http get](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) yöntemini belirtir. Öğreticide daha sonra, verileri güncelleştiren Yöntemler oluşturmak `HTTP POST` için scafkatlama altyapısı kullanılır.
+İlk açıklama bu, temel URL 'ye eklenerek çağrılan bir [http get](https://www.w3schools.com/tags/ref_httpmethods.asp) yöntemi olduğunu belirtir `/HelloWorld/` . İkinci açıklama URL 'ye eklenerek çağrılan bir [http get](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) yöntemini belirtir `/HelloWorld/Welcome/` . Öğreticide daha sonra, verileri güncelleştiren Yöntemler oluşturmak için scafkatlama altyapısı kullanılır `HTTP POST` .
 
-Uygulamayı hata ayıklama modunda çalıştırın ve adres çubuğundaki yola "HelloWorld" ekleyin. `Index` Yöntemi bir dize döndürür.
+Uygulamayı hata ayıklama modunda çalıştırın ve adres çubuğundaki yola "HelloWorld" ekleyin. `Index`Yöntemi bir dize döndürür.
 
 ![Bu varsayılan eylemm olan uygulama yanıtını gösteren tarayıcı penceresi](~/tutorials/first-mvc-app/adding-controller/_static/hell1.png)
 
@@ -92,31 +92,31 @@ Yönlendirme biçimi `Configure` *Startup.cs* dosyasındaki yönteminde ayarlan�
 
 Uygulamaya gözatıp hiçbir URL kesimini sağlamadığınızda, varsayılan olarak "giriş" denetleyicisi ve yukarıda vurgulanan şablon satırında belirtilen "Dizin" yöntemi varsayılan olarak belirtilir.
 
-İlk URL segmenti, çalıştırılacak denetleyici sınıfını belirler. Bu `localhost:{PORT}/HelloWorld` nedenle **HelloWorld**Controller sınıfıyla eşlenir. URL segmentinin ikinci bölümü, sınıfındaki Action metodunu belirler. Bu `localhost:{PORT}/HelloWorld/Index` nedenle, `HelloWorldController` sınıfın `Index` yönteminin çalışmasına neden olur. Yalnızca göz atmanızı `localhost:{PORT}/HelloWorld` ve `Index` yönteme varsayılan olarak çağrıldığına dikkat edin. Bunun nedeni `Index` , açıkça bir yöntem adı belirtilmemişse bir denetleyicide çağrılacak varsayılan yöntemdir. URL segmentinin ( `id`) üçüncü bölümü rota verileri içindir. Rota verileri öğreticide daha sonra açıklanmaktadır.
+İlk URL segmenti, çalıştırılacak denetleyici sınıfını belirler. Bu nedenle `localhost:{PORT}/HelloWorld` **HelloWorld**Controller sınıfıyla eşlenir. URL segmentinin ikinci bölümü, sınıfındaki Action metodunu belirler. Bu nedenle, `localhost:{PORT}/HelloWorld/Index` `Index` sınıfın yönteminin çalışmasına neden olur `HelloWorldController` . Yalnızca göz atmanızı `localhost:{PORT}/HelloWorld` ve `Index` yönteme varsayılan olarak çağrıldığına dikkat edin. Bunun nedeni `Index` , açıkça bir yöntem adı belirtilmemişse bir denetleyicide çağrılacak varsayılan yöntemdir. URL segmentinin () üçüncü bölümü `id` Rota verileri içindir. Rota verileri öğreticide daha sonra açıklanmaktadır.
 
-`https://localhost:{PORT}/HelloWorld/Welcome` adresine gidin. `Welcome` Yöntemi çalışır ve dizeyi `This is the Welcome action method...`döndürür. Bu URL için denetleyici, `HelloWorld` ve `Welcome` eylem yöntemidir. URL 'nin bir `[Parameters]` bölümünü henüz kullanmadınız.
+`https://localhost:{PORT}/HelloWorld/Welcome` adresine gidin. `Welcome`Yöntemi çalışır ve dizeyi döndürür `This is the Welcome action method...` . Bu URL için denetleyici, `HelloWorld` ve `Welcome` eylem yöntemidir. `[Parameters]`URL 'nin bir bölümünü henüz kullanmadınız.
 
 ![Uygulamanın uygulama yanıtını gösteren tarayıcı penceresi, hoş geldiniz eylemi yöntemidir](~/tutorials/first-mvc-app/adding-controller/_static/welcome.png)
 
-URL 'den denetleyiciye bazı parametre bilgilerini geçirmek için kodu değiştirin. Örneğin, `/HelloWorld/Welcome?name=Rick&numtimes=4`. `Welcome` Yöntemi aşağıdaki kodda gösterildiği gibi iki parametre içerecek şekilde değiştirin.
+URL 'den denetleyiciye bazı parametre bilgilerini geçirmek için kodu değiştirin. Örneğin, `/HelloWorld/Welcome?name=Rick&numtimes=4`. `Welcome`Yöntemi aşağıdaki kodda gösterildiği gibi iki parametre içerecek şekilde değiştirin.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_2)]
 
 Yukarıdaki kod:
 
-* Bu parametre için hiçbir değer geçirilmemişse `numTimes` parametrenin varsayılan olarak 1 ' e ait olduğunu belirtmek Için C# isteğe bağlı parametresi özelliğini kullanır. <!-- remove for simplified -->
-* Uygulamayı `HtmlEncoder.Default.Encode` kötü amaçlı girişten korumak için kullanır (yani JavaScript).
-* `$"Hello {name}, NumTimes is: {numTimes}"`Içinde [enterpolasyonlu dizeler](/dotnet/articles/csharp/language-reference/keywords/interpolated-strings) kullanır. <!-- remove for simplified -->
+* `numTimes`Bu parametre için hiçbir değer geçirilmemişse parametrenin varsayılan olarak 1 ' e ait olduğunu belirtmek Için C# isteğe bağlı parametresi özelliğini kullanır. <!-- remove for simplified -->
+* `HtmlEncoder.Default.Encode`Uygulamayı kötü amaçlı girişten korumak için kullanır (yani JavaScript).
+* İçinde [enterpolasyonlu dizeler](/dotnet/articles/csharp/language-reference/keywords/interpolated-strings) kullanır `$"Hello {name}, NumTimes is: {numTimes}"` . <!-- remove for simplified -->
 
 Uygulamayı çalıştırın ve şu konuma gidin:
 
    `https://localhost:{PORT}/HelloWorld/Welcome?name=Rick&numtimes=4`
 
-(Bağlantı `{PORT}` noktası numaranız ile değiştirin.) URL 'de ve `name` `numtimes` için farklı değerler deneyebilirsiniz. MVC [model bağlama](xref:mvc/models/model-binding) sistemi, adlandırılmış parametreleri adres çubuğundaki sorgu dizesinden yöntemdeki parametrelere otomatik olarak eşler. Daha fazla bilgi için bkz. [model bağlama](xref:mvc/models/model-binding) .
+( `{PORT}` Bağlantı noktası numaranız ile değiştirin.) URL 'de ve için farklı değerler `name` deneyebilirsiniz `numtimes` . MVC [model bağlama](xref:mvc/models/model-binding) sistemi, adlandırılmış parametreleri adres çubuğundaki sorgu dizesinden yöntemdeki parametrelere otomatik olarak eşler. Daha fazla bilgi için bkz. [model bağlama](xref:mvc/models/model-binding) .
 
-![Hello Rick uygulama yanıtını gösteren tarayıcı penceresi, NumTimes 4 ' dir\:](~/tutorials/first-mvc-app/adding-controller/_static/rick4.png)
+![Hello Rick uygulama yanıtını gösteren tarayıcı penceresi, NumTimes 4 ' dir \:](~/tutorials/first-mvc-app/adding-controller/_static/rick4.png)
 
-Yukarıdaki görüntüde`Parameters`, URL segmenti () kullanılmaz, `name` ve `numTimes` parametreleri [sorgu dizesine](https://wikipedia.org/wiki/Query_string)geçirilir. Yukarıdaki `?` URL 'deki (soru işareti) bir ayırıcı ve sorgu dizesi aşağıdaki gibidir. Karakter `&` , alan-değer çiftlerini ayırır.
+Yukarıdaki görüntüde, URL segmenti ( `Parameters` ) kullanılmaz, `name` ve `numTimes` parametreleri [sorgu dizesine](https://wikipedia.org/wiki/Query_string)geçirilir. `?`YUKARıDAKI URL 'deki (soru işareti) bir ayırıcı ve sorgu dizesi aşağıdaki gibidir. `&`Karakter, alan-değer çiftlerini ayırır.
 
 `Welcome` yöntemini aşağıdaki kod ile değiştirin:
 
@@ -124,15 +124,15 @@ Yukarıdaki görüntüde`Parameters`, URL segmenti () kullanılmaz, `name` ve `n
 
 Uygulamayı çalıştırın ve aşağıdaki URL 'YI girin:`https://localhost:{PORT}/HelloWorld/Welcome/3?name=Rick`
 
-Bu kez, üçüncü URL segmenti rota parametresiyle `id`eşleşti. `Welcome` Yöntemi, `MapControllerRoute` yöntemindeki URL şablonuyla `id` eşleşen bir parametre içerir. Sondaki `?` (içinde `id?`) `id` parametresinin isteğe bağlı olduğunu gösterir.
+Bu kez, üçüncü URL segmenti rota parametresiyle eşleşti `id` . `Welcome`Yöntemi, `id` yöntemindeki URL şablonuyla eşleşen bir parametre içerir `MapControllerRoute` . Sondaki `?` (içinde `id?` ) `id` parametresinin isteğe bağlı olduğunu gösterir.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_1&highlight=5)]
 
-Bu örneklerde, denetleyici MVC 'nin "VC" bölümünü (yani, **V**IEW ve **C**) çalışır. Denetleyici HTML 'i doğrudan döndürüyor. Genellikle, bu, kod ve bakım için çok daha fazla hale geldiği için denetleyicilerin doğrudan HTML döndürmesini istemezsiniz. Bunun yerine, genellikle HTML yanıtı oluşturmak için ayrı bir Razor görünümü şablon dosyası kullanırsınız. Bunu bir sonraki öğreticide yapabilirsiniz.
+Bu örneklerde, denetleyici MVC 'nin "VC" bölümünü (yani, **V**IEW ve **C**) çalışır. Denetleyici HTML 'i doğrudan döndürüyor. Genellikle, bu, kod ve bakım için çok daha fazla hale geldiği için denetleyicilerin doğrudan HTML döndürmesini istemezsiniz. Bunun yerine Razor , genellıkle HTML yanıtı oluşturmak için ayrı bir görünüm şablonu dosyası kullanırsınız. Bunu bir sonraki öğreticide yapabilirsiniz.
 
 > [!div class="step-by-step"]
-> [Önceki](start-mvc.md)
-> [İleri](adding-view.md)
+> [Önceki](start-mvc.md) 
+>  [Sonraki](adding-view.md)
 
 ::: moniker-end
 
@@ -154,8 +154,8 @@ Bu kavramları, bu öğretici serisinde ele alınmaktadır ve bir film uygulamas
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **Çözüm Gezgini**, denetleyiciler öğesine sağ tıklayın **> > denetleyicisi**
-  ![bağlamsal menü ekleyin](adding-controller/_static/add_controller.png)
+* **Çözüm Gezgini**, denetleyiciler öğesine sağ tıklayın **> > denetleyicisi** 
+   ![ bağlamsal menü ekleyin](adding-controller/_static/add_controller.png)
 
 * **Yapı Iskelesi Ekle** iletişim kutusunda, **MVC denetleyicisi-boş** seçeneğini belirleyin
 
@@ -186,13 +186,13 @@ Denetleyiciyi **Merhaba Dünya denetleyicisine**adlandırın.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_1)]
 
-Bir `public` denetleyicideki her yöntem bir HTTP uç noktası olarak çağrılabilir. Yukarıdaki örnekte her iki yöntem de bir dize döndürür. Her yöntemden önceki açıklamalara göz önüne alın.
+`public`Bir denetleyicideki her yöntem BIR HTTP uç noktası olarak çağrılabilir. Yukarıdaki örnekte her iki yöntem de bir dize döndürür. Her yöntemden önceki açıklamalara göz önüne alın.
 
-HTTP uç noktası, `https://localhost:5001/HelloWorld`gibi Web uygulamasındaki bir hedeflenebilir URL 'sidir ve kullanılan `HTTPS`protokolü, Web sunucusunun ağ konumunu (TCP bağlantı noktası dahil): `localhost:5001` ve hedef URI `HelloWorld`'yi birleştirir.
+HTTP uç noktası, gibi Web uygulamasındaki bir hedeflenebilir URL 'sidir `https://localhost:5001/HelloWorld` ve kullanılan protokolü, `HTTPS` Web sunucusunun ağ konumunu (TCP bağlantı noktası dahil): `localhost:5001` ve hedef URI 'yi birleştirir `HelloWorld` .
 
-İlk açıklama bu, temel URL 'ye eklenerek `/HelloWorld/` çağrılan BIR [http get](https://www.w3schools.com/tags/ref_httpmethods.asp) yöntemi olduğunu belirtir. İkinci açıklama URL 'ye eklenerek `/HelloWorld/Welcome/` çağrılan BIR [http get](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) yöntemini belirtir. Öğreticide daha sonra, verileri güncelleştiren Yöntemler oluşturmak `HTTP POST` için scafkatlama altyapısı kullanılır.
+İlk açıklama bu, temel URL 'ye eklenerek çağrılan bir [http get](https://www.w3schools.com/tags/ref_httpmethods.asp) yöntemi olduğunu belirtir `/HelloWorld/` . İkinci açıklama URL 'ye eklenerek çağrılan bir [http get](https://www.w3.org/Protocols/rfc2616/rfc2616-sec9.html) yöntemini belirtir `/HelloWorld/Welcome/` . Öğreticide daha sonra, verileri güncelleştiren Yöntemler oluşturmak için scafkatlama altyapısı kullanılır `HTTP POST` .
 
-Uygulamayı hata ayıklama modunda çalıştırın ve adres çubuğundaki yola "HelloWorld" ekleyin. `Index` Yöntemi bir dize döndürür.
+Uygulamayı hata ayıklama modunda çalıştırın ve adres çubuğundaki yola "HelloWorld" ekleyin. `Index`Yöntemi bir dize döndürür.
 
 ![Bu varsayılan eylemm olan uygulama yanıtını gösteren tarayıcı penceresi](~/tutorials/first-mvc-app/adding-controller/_static/hell1.png)
 
@@ -211,31 +211,31 @@ Remove link for simplified tutorial.
 
 Uygulamaya gözatıp hiçbir URL kesimini sağlamadığınızda, varsayılan olarak "giriş" denetleyicisi ve yukarıda vurgulanan şablon satırında belirtilen "Dizin" yöntemi varsayılan olarak belirtilir.
 
-İlk URL segmenti, çalıştırılacak denetleyici sınıfını belirler. Bu `localhost:{PORT}/HelloWorld` nedenle, `HelloWorldController` sınıfıyla eşlenir. URL segmentinin ikinci bölümü, sınıfındaki Action metodunu belirler. Bu `localhost:{PORT}/HelloWorld/Index` nedenle, `HelloWorldController` sınıfın `Index` yönteminin çalışmasına neden olur. Yalnızca göz atmanızı `localhost:{PORT}/HelloWorld` ve `Index` yönteme varsayılan olarak çağrıldığına dikkat edin. Bunun nedeni `Index` , açıkça bir yöntem adı belirtilmemişse bir denetleyicide çağrılacak varsayılan yöntemdir. URL segmentinin ( `id`) üçüncü bölümü rota verileri içindir. Rota verileri öğreticide daha sonra açıklanmaktadır.
+İlk URL segmenti, çalıştırılacak denetleyici sınıfını belirler. Bu nedenle `localhost:{PORT}/HelloWorld` , `HelloWorldController` sınıfıyla eşlenir. URL segmentinin ikinci bölümü, sınıfındaki Action metodunu belirler. Bu nedenle, `localhost:{PORT}/HelloWorld/Index` `Index` sınıfın yönteminin çalışmasına neden olur `HelloWorldController` . Yalnızca göz atmanızı `localhost:{PORT}/HelloWorld` ve `Index` yönteme varsayılan olarak çağrıldığına dikkat edin. Bunun nedeni, `Index` açıkça bir yöntem adı belirtilmemişse bir denetleyicide çağrılacak varsayılan yöntemdir. URL segmentinin () üçüncü bölümü `id` Rota verileri içindir. Rota verileri öğreticide daha sonra açıklanmaktadır.
 
-`https://localhost:{PORT}/HelloWorld/Welcome` adresine gidin. `Welcome` Yöntemi çalışır ve dizeyi `This is the Welcome action method...`döndürür. Bu URL için denetleyici, `HelloWorld` ve `Welcome` eylem yöntemidir. URL 'nin bir `[Parameters]` bölümünü henüz kullanmadınız.
+`https://localhost:{PORT}/HelloWorld/Welcome` adresine gidin. `Welcome`Yöntemi çalışır ve dizeyi döndürür `This is the Welcome action method...` . Bu URL için denetleyici, `HelloWorld` ve `Welcome` eylem yöntemidir. `[Parameters]`URL 'nin bir bölümünü henüz kullanmadınız.
 
 ![Uygulamanın uygulama yanıtını gösteren tarayıcı penceresi, hoş geldiniz eylemi yöntemidir](~/tutorials/first-mvc-app/adding-controller/_static/welcome.png)
 
-URL 'den denetleyiciye bazı parametre bilgilerini geçirmek için kodu değiştirin. Örneğin, `/HelloWorld/Welcome?name=Rick&numtimes=4`. `Welcome` Yöntemi aşağıdaki kodda gösterildiği gibi iki parametre içerecek şekilde değiştirin.
+URL 'den denetleyiciye bazı parametre bilgilerini geçirmek için kodu değiştirin. Örneğin, `/HelloWorld/Welcome?name=Rick&numtimes=4`. `Welcome`Yöntemi aşağıdaki kodda gösterildiği gibi iki parametre içerecek şekilde değiştirin.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_2)]
 
 Yukarıdaki kod:
 
-* Bu parametre için hiçbir değer geçirilmemişse `numTimes` parametrenin varsayılan olarak 1 ' e ait olduğunu belirtmek Için C# isteğe bağlı parametresi özelliğini kullanır. <!-- remove for simplified -->
-* Uygulamayı `HtmlEncoder.Default.Encode` kötü amaçlı girişten korumak için kullanır (yani JavaScript).
-* `$"Hello {name}, NumTimes is: {numTimes}"`Içinde [enterpolasyonlu dizeler](/dotnet/articles/csharp/language-reference/keywords/interpolated-strings) kullanır. <!-- remove for simplified -->
+* `numTimes`Bu parametre için hiçbir değer geçirilmemişse parametrenin varsayılan olarak 1 ' e ait olduğunu belirtmek Için C# isteğe bağlı parametresi özelliğini kullanır. <!-- remove for simplified -->
+* `HtmlEncoder.Default.Encode`Uygulamayı kötü amaçlı girişten korumak için kullanır (yani JavaScript).
+* İçinde [enterpolasyonlu dizeler](/dotnet/articles/csharp/language-reference/keywords/interpolated-strings) kullanır `$"Hello {name}, NumTimes is: {numTimes}"` . <!-- remove for simplified -->
 
 Uygulamayı çalıştırın ve şu konuma gidin:
 
    `https://localhost:{PORT}/HelloWorld/Welcome?name=Rick&numtimes=4`
 
-(Bağlantı `{PORT}` noktası numaranız ile değiştirin.) URL 'de ve `name` `numtimes` için farklı değerler deneyebilirsiniz. MVC [model bağlama](xref:mvc/models/model-binding) sistemi, adlandırılmış parametreleri adres çubuğundaki sorgu dizesinden yöntemdeki parametrelere otomatik olarak eşler. Daha fazla bilgi için bkz. [model bağlama](xref:mvc/models/model-binding) .
+( `{PORT}` Bağlantı noktası numaranız ile değiştirin.) URL 'de ve için farklı değerler `name` deneyebilirsiniz `numtimes` . MVC [model bağlama](xref:mvc/models/model-binding) sistemi, adlandırılmış parametreleri adres çubuğundaki sorgu dizesinden yöntemdeki parametrelere otomatik olarak eşler. Daha fazla bilgi için bkz. [model bağlama](xref:mvc/models/model-binding) .
 
-![Hello Rick uygulama yanıtını gösteren tarayıcı penceresi, NumTimes 4 ' dir\:](~/tutorials/first-mvc-app/adding-controller/_static/rick4.png)
+![Hello Rick uygulama yanıtını gösteren tarayıcı penceresi, NumTimes 4 ' dir \:](~/tutorials/first-mvc-app/adding-controller/_static/rick4.png)
 
-Yukarıdaki görüntüde`Parameters`, URL segmenti () kullanılmaz, `name` ve `numTimes` parametreleri [sorgu dizesine](https://wikipedia.org/wiki/Query_string)geçirilir. Yukarıdaki `?` URL 'deki (soru işareti) bir ayırıcı ve sorgu dizesi aşağıdaki gibidir. Karakter `&` , alan-değer çiftlerini ayırır.
+Yukarıdaki görüntüde, URL segmenti ( `Parameters` ) kullanılmaz, `name` ve `numTimes` parametreleri [sorgu dizesine](https://wikipedia.org/wiki/Query_string)geçirilir. `?`YUKARıDAKI URL 'deki (soru işareti) bir ayırıcı ve sorgu dizesi aşağıdaki gibidir. `&`Karakter, alan-değer çiftlerini ayırır.
 
 `Welcome` yöntemini aşağıdaki kod ile değiştirin:
 
@@ -243,14 +243,14 @@ Yukarıdaki görüntüde`Parameters`, URL segmenti () kullanılmaz, `name` ve `n
 
 Uygulamayı çalıştırın ve aşağıdaki URL 'YI girin:`https://localhost:{PORT}/HelloWorld/Welcome/3?name=Rick`
 
-Bu kez, üçüncü URL segmenti rota parametresiyle `id`eşleşti. `Welcome` Yöntemi, `MapRoute` yöntemindeki URL şablonuyla `id` eşleşen bir parametre içerir. Sondaki `?` (içinde `id?`) `id` parametresinin isteğe bağlı olduğunu gösterir.
+Bu kez, üçüncü URL segmenti rota parametresiyle eşleşti `id` . `Welcome`Yöntemi, `id` yöntemindeki URL şablonuyla eşleşen bir parametre içerir `MapRoute` . Sondaki `?` (içinde `id?` ) `id` parametresinin isteğe bağlı olduğunu gösterir.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Startup.cs?name=snippet_1&highlight=5)]
 
-Bu örneklerde, denetleyici MVC 'nin "VC" bölümünü (yani, görünüm ve denetleyici çalışır) yapıyor. Denetleyici HTML 'i doğrudan döndürüyor. Genellikle, bu, kod ve bakım için çok daha fazla hale geldiği için denetleyicilerin doğrudan HTML döndürmesini istemezsiniz. Bunun yerine, genellikle HTML yanıtı Razor oluşturmaya yardımcı olması için ayrı bir görünüm şablonu dosyası kullanırsınız. Bunu bir sonraki öğreticide yapabilirsiniz.
+Bu örneklerde, denetleyici MVC 'nin "VC" bölümünü (yani, görünüm ve denetleyici çalışır) yapıyor. Denetleyici HTML 'i doğrudan döndürüyor. Genellikle, bu, kod ve bakım için çok daha fazla hale geldiği için denetleyicilerin doğrudan HTML döndürmesini istemezsiniz. Bunun yerine Razor , genellıkle HTML yanıtı oluşturmaya yardımcı olması için ayrı bir görünüm şablonu dosyası kullanırsınız. Bunu bir sonraki öğreticide yapabilirsiniz.
 
 > [!div class="step-by-step"]
-> [Önceki](start-mvc.md)
-> [İleri](adding-view.md)
+> [Önceki](start-mvc.md) 
+>  [Sonraki](adding-view.md)
 
 ::: moniker-end

@@ -1,85 +1,101 @@
 ---
-title:ASP.NET Core 中的 Razor Pages 和 EF Core - 读取相关数据 - 第 6 个教程（共 8 个）author: rick-anderson description:在本教程中，将读取并显示相关数据 - 即 Entity Framework 加载到导航属性中的数据。
-ms.author: riande ms.custom: mvc ms.date:09/28/2019 no-loc: [Blazor, "Identity", "Let's Encrypt", Razor, SignalR] uid: data/ef-rp/read-related-data
+title: Bölüm 6, Razor ASP.NET Core EF Core olan sayfalar-Ilgili verileri oku
+author: rick-anderson
+description: RazorSayfaların 6. bölümü ve Entity Framework öğretici serisi.
+ms.author: riande
+ms.custom: mvc
+ms.date: 09/28/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: data/ef-rp/read-related-data
+ms.openlocfilehash: e67738015f64ca7077c2f87a8f7eabe722aac9d8
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652622"
 ---
+# <a name="part-6-razor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>Bölüm 6, Razor ASP.NET Core EF Core olan sayfalar-Ilgili verileri oku
 
-# <a name="razor-pages-with-ef-core-in-aspnet-core---read-related-data---6-of-8"></a>ASP.NET Core 中的 Razor 页面和 EF Core - 读取相关数据 - 第 6 个教程（共 8 个）
-
-作者：[Tom Dykstra](https://github.com/tdykstra)、[Jon P Smith](https://twitter.com/thereformedprog) 和 [Rick Anderson](https://twitter.com/RickAndMSFT)
+, [Tom Dykstra](https://github.com/tdykstra), [Jon P Smith](https://twitter.com/thereformedprog)ve [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 [!INCLUDE [about the series](../../includes/RP-EF/intro.md)]
 
 ::: moniker range=">= aspnetcore-3.0"
 
-本教程介绍如何读取和显示相关数据。 相关数据为 EF Core 加载到导航属性中的数据。
+Bu öğreticide, ilgili verilerin nasıl okunacağı ve görüntüleneceği gösterilmektedir. İlgili veriler, EF Core gezinti özelliklerine yüklediği veri.
 
-下图显示了本教程中已完成的页面：
+Aşağıdaki çizimler, Bu öğreticinin tamamlanan sayfalarını göstermektedir:
 
-![“课程索引”页](read-related-data/_static/courses-index30.png)
+![Kurslar Dizin sayfası](read-related-data/_static/courses-index30.png)
 
-![“讲师索引”页](read-related-data/_static/instructors-index30.png)
+![Eğitmenler Dizin sayfası](read-related-data/_static/instructors-index30.png)
 
-## <a name="eager-explicit-and-lazy-loading"></a>预先加载、显式加载和延迟加载
+## <a name="eager-explicit-and-lazy-loading"></a>Eager, açık ve yavaş yükleme
 
-EF Core 可采用多种方式将相关数据加载到实体的导航属性中：
+EF Core bir varlığın gezinti özelliklerine ilgili verileri yükleyebilmenin birkaç yolu vardır:
 
-* [预先加载](/ef/core/querying/related-data#eager-loading)。 预先加载是指对查询某类型的实体时一并加载相关实体。 读取实体时，会检索其相关数据。 此时通常会出现单一联接查询，检索所有必需数据。 EF Core 将针对预先加载的某些类型发出多个查询。 发布多个查询可能比发布大型的单个查询更为有效。 预先加载通过 `Include` 和 `ThenInclude` 方法进行指定。
+* [Eager yükleniyor](/ef/core/querying/related-data#eager-loading). Ekip yükleme, bir varlık türü için bir sorgu aynı zamanda ilgili varlıkları de yüklediğinde oluşur. Bir varlık okunmadığınızda ilgili veriler alınır. Bu, genellikle gereken tüm verileri alan tek bir JOIN sorgusuna neden olur. EF Core, bazı Eager yükleme türleri için birden çok sorgu yayımlayacak. Birden çok sorgu verme, çok büyük paketlerini tek sorgusundan daha verimli olabilir. Eager yüklemesi ve yöntemleriyle birlikte belirtilir `Include` `ThenInclude` .
 
-  ![预先加载示例](read-related-data/_static/eager-loading.png)
+  ![Eager yükleme örneği](read-related-data/_static/eager-loading.png)
  
-  当包含集合导航时，预先加载会发送多个查询：
+  Bir koleksiyon gezintisi eklendiğinde Eager yüklemesi birden çok sorgu gönderir:
 
-  * 一个查询用于主查询 
-  * 一个查询用于加载树中每个集合“边缘”。
+  * Ana sorgu için bir sorgu 
+  * Yükleme ağacındaki her koleksiyon "Edge" için bir sorgu.
 
-* 使用 `Load` 的单独查询：可在单独的查询中检索数据，EF Core 会“修复”导航属性。 “修复”是指 EF Core 自动填充导航属性。 使用 `Load` 单独查询比预先加载更像是显式加载。
+* Sorguları ile ayır `Load` : veriler ayrı sorgularda alınabilir ve gezinti özellikleri EF Core "düzeltir". "Düzeltmeler", EF Core gezinti özelliklerini otomatik olarak dolduran anlamına gelir. İle ayrı sorgular `Load` , ek yükleme Eager yüklemeden daha benzer.
 
-  ![单独查询示例](read-related-data/_static/separate-queries.png)
+  ![Ayrı sorgular örneği](read-related-data/_static/separate-queries.png)
 
-  注意：EF Core 会将导航属性自动“修复”为之前加载到上下文实例中的任何其他实体。 即使导航属性的数据非显式包含在内  ，但如果先前加载了部分或所有相关实体，则仍可能填充该属性。
+  Note: EF Core, daha önce bağlam örneğine yüklenmiş olan diğer varlıklar için gezinti özelliklerini otomatik olarak düzeltir. Bir gezinti özelliği için veriler açıkça dahil *edilmese* bile, ilgili varlıkların bazıları veya tümü daha önce yüklenmişse Özellik yine de doldurulabilir.
 
-* [显式加载](/ef/core/querying/related-data#explicit-loading)。 首次读取实体时，不检索相关数据。 必须编写代码才能在需要时检索相关数据。 使用单独查询进行显式加载时，会向数据库发送多个查询。 该代码通过显式加载指定要加载的导航属性。 使用 `Load` 方法进行显式加载。 例如：
+* [Açık yükleme](/ef/core/querying/related-data#explicit-loading). Varlık ilk kez okunmadıysa ilgili veriler alınmadı. Gerektiğinde ilgili verileri almak için kodun yazılması gerekir. Ayrı sorgularla açık yükleme, veritabanına birden çok sorgu gönderilmesine neden olur. Açık yükleme ile kod, yüklenecek gezinti özelliklerini belirtir. `Load`Açık yükleme yapmak için yöntemini kullanın. Örnek:
 
-  ![显式加载示例](read-related-data/_static/explicit-loading.png)
+  ![Açık yükleme örneği](read-related-data/_static/explicit-loading.png)
 
-* [延迟加载](/ef/core/querying/related-data#lazy-loading)。 [延迟加载已添加到版本 2.1 中的 EF Core](/ef/core/querying/related-data#lazy-loading)。 首次读取实体时，不检索相关数据。 首次访问导航属性时，会自动检索该导航属性所需的数据。 首次访问导航属性时，都会向数据库发送一个查询。
+* [Yavaş yükleme](/ef/core/querying/related-data#lazy-loading). [Sürüm 2,1 ' de EF Core geç yükleme eklendi](/ef/core/querying/related-data#lazy-loading). Varlık ilk kez okunmadıysa ilgili veriler alınmadı. Gezinti özelliğine ilk kez erişildiğinde, bu gezinti özelliği için gereken veriler otomatik olarak alınır. Bir gezinti özelliğine ilk kez erişildiğinde bir sorgu veritabanına gönderilir.
 
-## <a name="create-course-pages"></a>创建“课程”页
+## <a name="create-course-pages"></a>Kurs sayfaları oluşturma
 
-`Course` 实体包括一个带相关 `Department` 实体的导航属性。
+`Course`Varlık, ilgili varlığı içeren bir gezinti özelliği içerir `Department` .
 
-![Course.Department](read-related-data/_static/dep-crs.png)
+![Kurs. Departmanı](read-related-data/_static/dep-crs.png)
 
-若要显示课程的已分配院系的名称，请执行以下操作：
+Bir kurs için atanan departmanın adını göstermek için:
 
-* 将相关的 `Department` 实体加载到 `Course.Department` 导航属性。
-* 获取 `Department` 实体的 `Name` 属性中的名称。
+* İlgili `Department` varlığı `Course.Department` gezinti özelliğine yükleyin.
+* `Department`Varlığın özelliğinden adı alın `Name` .
 
 <a name="scaffold"></a>
 
-### <a name="scaffold-course-pages"></a>搭建“课程”页的基架
+### <a name="scaffold-course-pages"></a>Yapı iskelesi kurs sayfaları
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 遵循[搭建“学生”页的基架](xref:data/ef-rp/intro#scaffold-student-pages)中的说明，但以下情况除外：
+* Aşağıdaki özel durumlarla birlikte [Yapı Fkatlama öğrenci sayfalarındaki](xref:data/ef-rp/intro#scaffold-student-pages) yönergeleri izleyin:
 
-  * 创建“Pages/Courses”文件夹  。
-  * 将 `Course` 用于模型类。
-  * 使用现有的上下文类，而不是新建上下文类。
+  * Bir *Sayfalar/kurslar* klasörü oluşturun.
+  * `Course`Model sınıfı için kullanın.
+  * Yeni bir tane oluşturmak yerine var olan bağlam sınıfını kullanın.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* 创建“Pages/Courses”文件夹  。
+* Bir *Sayfalar/kurslar* klasörü oluşturun.
 
-* 运行以下命令，搭建“课程”页的基架。
+* Kurs sayfalarını iskele almak için aşağıdaki komutu çalıştırın.
 
-  在 Windows 上： 
+  **Windows 'da:**
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Course -dc SchoolContext -udl -outDir Pages\Courses --referenceScriptLibraries
   ```
 
-  **在 Linux 或 macOS 上：**
+  **Linux veya macOS 'ta:**
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Course -dc SchoolContext -udl -outDir Pages/Courses --referenceScriptLibraries
@@ -87,98 +103,98 @@ EF Core 可采用多种方式将相关数据加载到实体的导航属性中：
 
 ---
 
-* 打开 Pages/Courses/Index.cshtml.cs  并检查 `OnGetAsync` 方法。 基架引擎为 `Department` 导航属性指定了预先加载。 `Include` 方法指定预先加载。
+* *Pages/kurslar/Index. cshtml. cs* dosyasını açın ve `OnGetAsync` metodunu inceleyin. Yapı iskelesi altyapısı, gezinti özelliği için belirtilen Eager 'yi belirtti `Department` . `Include`Yöntemi Eager yüklemeyi belirtir.
 
-* 运行应用并选择“课程”链接  。 院系列显示 `DepartmentID`（该项无用）。
+* Uygulamayı çalıştırın ve **Kurslar** bağlantısını seçin. Departman sütunu, `DepartmentID` yararlı olmayan öğesini görüntüler.
 
-### <a name="display-the-department-name"></a>显示院系名称
+### <a name="display-the-department-name"></a>Departmanın adını görüntüleme
 
-使用以下代码更新 Pages/Courses/Index.cshtml.cs：
+Pages/kurslar/Index. cshtml. cs dosyasını aşağıdaki kodla güncelleştirin:
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/Index.cshtml.cs?highlight=18,22,24)]
 
-上述代码将 `Course` 属性更改为 `Courses`，然后添加 `AsNoTracking`。 由于未跟踪返回的实体，因此 `AsNoTracking` 提升了性能。 无需跟踪实体，因为未在当前的上下文中更新这些实体。
+Önceki kod, `Course` özelliği olarak değiştirir `Courses` ve ekler `AsNoTracking` . `AsNoTracking`Döndürülen varlıklar izlenmediğinden performansı geliştirir. Varlıkların geçerli bağlamda güncelleştirilmediği için izlenmesi gerekmez.
 
-使用以下代码更新 Pages/Courses/Index.cshtml  。
+*Pages/kurslar/Index. cshtml* 'yi aşağıdaki kodla güncelleştirin.
 
 [!code-cshtml[](intro/samples/cu30/Pages/Courses/Index.cshtml?highlight=5,8,16-18,20,23,26,32,35-37,45)]
 
-对基架代码进行了以下更改：
+Yapı iskelesi kodunda aşağıdaki değişiklikler yapılmıştır:
 
-* 将 `Course` 属性名称更改为了 `Courses`。
-* 添加了显示 `CourseID` 属性值的“数字”列  。 默认情况下，不针对主键进行架构，因为对最终用户而言，它们通常没有意义。 但在此情况下主键是有意义的。
-* 更改“院系”列，显示院系名称  。 该代码显示已加载到 `Department` 导航属性中的 `Department` 实体的 `Name` 属性：
+* `Course`Özellik adı olarak değiştirildi `Courses` .
+* Özellik değerini gösteren bir **sayı** sütunu eklendi `CourseID` . Birincil anahtarlar, genellikle son kullanıcılara anlamlı olduklarından, varsayılan olarak yapı iskelesi göstermemektedir. Ancak, bu durumda birincil anahtar anlamlı olur.
+* Departman adını göstermek için **Departman** sütunu değiştirildi. Kod, `Name` `Department` gezinti özelliğine yüklenen varlığın özelliğini görüntüler `Department` :
 
   ```html
   @Html.DisplayFor(modelItem => item.Department.Name)
   ```
 
-运行应用并选择“课程”选项卡，查看包含系名称的列表  。
+Uygulamayı çalıştırın ve bölüm adlarıyla listeyi görmek için **Kurslar** sekmesini seçin.
 
-![“课程索引”页](read-related-data/_static/courses-index30.png)
+![Kurslar Dizin sayfası](read-related-data/_static/courses-index30.png)
 
 <a name="select"></a>
 
-### <a name="loading-related-data-with-select"></a>使用 Select 加载相关数据
+### <a name="loading-related-data-with-select"></a>Select ile ilgili verileri yükleme
 
-`OnGetAsync` 方法使用 `Include` 方法加载相关数据。 `Select` 方法是只加载所需相关数据的替代方法。 对于单个项（如 `Department.Name`），它使用 SQL INNER JOIN。 对于集合，它使用另一个数据库访问，但集合上的 `Include` 运算符也是如此。
+`OnGetAsync`Yöntemi, yöntemiyle ilgili verileri yükler `Include` . `Select`Yöntemi, yalnızca gerekli ilgili verileri yükleyen bir alternatiftir. Tek öğeler için, örneğin `Department.Name` BIR SQL Iç birleşimi kullanır. Koleksiyonlar için başka bir veritabanı erişimi kullanır, ancak `Include` koleksiyonlar üzerindeki işleci bu şekilde yapar.
 
-以下代码使用 `Select` 方法加载相关数据：
+Aşağıdaki kod, yöntemiyle ilgili verileri yükler `Select` :
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Pages/Courses/IndexSelect.cshtml.cs?name=snippet_RevisedIndexMethod&highlight=6)]
 
-上述代码不会返回任何实体类型，因此不进行任何跟踪。 有关 EF 跟踪的详细信息，请参阅 [跟踪查询与非跟踪查询](/ef/core/querying/tracking)。
+Yukarıdaki kod hiçbir varlık türü döndürmez, bu nedenle hiçbir izleme yapılmaz. EF izleme hakkında daha fazla bilgi için bkz. [izleme ve Izleme sorguları karşılaştırması](/ef/core/querying/tracking).
 
-`CourseViewModel`：
+`CourseViewModel`Şunları yapın:
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Models/SchoolViewModels/CourseViewModel.cs?name=snippet)]
 
-有关完整示例的信息，请参阅 [IndexSelect.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu30snapshots/6-related/Pages/Courses/IndexSelect.cshtml) 和 [IndexSelect.cshtml.cs](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu30snapshots/6-related/Pages/Courses/IndexSelect.cshtml.cs)。
+Tüm örnek için bkz. [ındexselect. cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu30snapshots/6-related/Pages/Courses/IndexSelect.cshtml) ve [IndexSelect.cshtml.cs](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu30snapshots/6-related/Pages/Courses/IndexSelect.cshtml.cs) .
 
-## <a name="create-instructor-pages"></a>创建“讲师”页
+## <a name="create-instructor-pages"></a>Eğitmen sayfaları oluşturma
 
-本节搭建“讲师”页的基架，并向讲师“索引”页添加相关“课程”和“注册”。
+Bu bölüm, eğitmen sayfalarını derler ve ilgili Kurslar ve kayıtları eğitmenler dizin sayfasına ekler.
 
 <a name="IP"></a>
-![“讲师索引”页](read-related-data/_static/instructors-index30.png)
+![Eğitmenler Dizin sayfası](read-related-data/_static/instructors-index30.png)
 
-该页面通过以下方式读取和显示相关数据：
+Bu sayfa aşağıdaki yollarla ilgili verileri okur ve görüntüler:
 
-* 讲师列表显示 `OfficeAssignment` 实体（上图中的办公室）的相关数据。 `Instructor` 和 `OfficeAssignment` 实体之间存在一对零或一的关系。 预先加载适用于 `OfficeAssignment` 实体。 需要显示相关数据时，预先加载通常更高效。 在此情况下，会显示讲师的办公室分配。
-* 用户选择一名讲师时，显示相关 `Course` 实体。 `Instructor` 和 `Course` 实体之间存在多对多关系。 对 `Course` 实体及其相关的 `Department` 实体使用预先加载。 这种情况下，单独查询可能更有效，因为仅需显示所选讲师的课程。 此示例演示如何在位于导航实体内的实体中预先加载这些导航实体。
-* 用户选择一门课程时，会显示 `Enrollments` 实体的相关数据。 上图中显示了学生姓名和成绩。 `Course` 和 `Enrollment` 实体之间存在一对多的关系。
+* Eğitmenler listesi, varlıktaki ilgili verileri `OfficeAssignment` (önceki görüntüde Office) görüntüler. `Instructor`Ve `OfficeAssignment` varlıkları bire sıfır veya-bir ilişkidir. Varlıklar için Eager yüklemesi kullanılır `OfficeAssignment` . Eager yüklemesi, ilgili verilerin görüntülenmesi gerektiğinde genellikle daha etkilidir. Bu durumda, Eğitmenler için Office atamaları görüntülenir.
+* Kullanıcı bir eğitmen seçtiğinde ilgili `Course` varlıklar görüntülenir. `Instructor`Ve `Course` varlıkları çoktan çoğa bir ilişkidir. Eager yüklemesi, `Course` varlıklar ve ilgili varlıklar için kullanılır `Department` . Bu durumda, yalnızca seçili eğitmen için kurslar gerektiğinden ayrı sorgular daha verimli olabilir. Bu örnek, gezinti özelliklerinde olan varlıklarda gezinti özellikleri için Eager yükleme 'nin nasıl kullanılacağını gösterir.
+* Kullanıcı bir kurs seçtiğinde, varlıktaki ilgili veriler `Enrollments` görüntülenir. Önceki görüntüde öğrenci adı ve sınıf görüntülenir. `Course`Ve `Enrollment` varlıkları bire çok ilişkidir.
 
-### <a name="create-a-view-model"></a>创建视图模型
+### <a name="create-a-view-model"></a>Görünüm modeli oluşturma
 
-“讲师”页显示来自三个不同表格的数据。 需要一个视图模型，该模型中包含表示三个表格的三个属性。
+Eğitmenler sayfasında, üç farklı tablodan alınan veriler gösterilir. Üç tabloyu temsil eden üç özellik içeren bir görünüm modeli gerekir.
 
-使用以下代码创建 SchoolViewModels/InstructorIndexData.cs  ：
+Aşağıdaki kodla *SchoolViewModels/ıncpctorındexdata. cs* oluşturun:
 
 [!code-csharp[](intro/samples/cu30/Models/SchoolViewModels/InstructorIndexData.cs)]
 
-### <a name="scaffold-instructor-pages"></a>搭建“讲师”页的基架
+### <a name="scaffold-instructor-pages"></a>Yapı iskelesi eğitmeni sayfaları
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* 遵循[搭建“学生”页的基架](xref:data/ef-rp/intro#scaffold-student-pages)中的说明，但以下情况除外：
+* Öğrenci sayfalarını aşağıdaki özel durumlarla birlikte [Scaffold](xref:data/ef-rp/intro#scaffold-student-pages) içindeki yönergeleri izleyin:
 
-  * 创建“Pages/Instructors”文件夹  。
-  * 将 `Instructor` 用于模型类。
-  * 使用现有的上下文类，而不是新建上下文类。
+  * Bir *sayfa/eğitmenler* klasörü oluşturun.
+  * `Instructor`Model sınıfı için kullanın.
+  * Yeni bir tane oluşturmak yerine var olan bağlam sınıfını kullanın.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* 创建“Pages/Instructors”文件夹  。
+* Bir *sayfa/eğitmenler* klasörü oluşturun.
 
-* 运行以下命令，搭建“讲师”页的基架。
+* Eğitmen sayfalarını iskele almak için aşağıdaki komutu çalıştırın.
 
-  在 Windows 上： 
+  **Windows 'da:**
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Instructor -dc SchoolContext -udl -outDir Pages\Instructors --referenceScriptLibraries
   ```
 
-  **在 Linux 或 macOS 上：**
+  **Linux veya macOS 'ta:**
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Instructor -dc SchoolContext -udl -outDir Pages/Instructors --referenceScriptLibraries
@@ -186,19 +202,19 @@ EF Core 可采用多种方式将相关数据加载到实体的导航属性中：
 
 ---
 
-若要在更新之前查看已搭建基架的页面的外观，则运行应用并导航到“讲师”页。
+Yapı iskelesi sayfasının güncelleştirmeden önce nasıl göründüğünü görmek için, uygulamayı çalıştırın ve eğitmenler sayfasına gidin.
 
-使用以下代码更新 Pages/Instructors/Index.cshtml.cs  ：
+*Pages/eğitmenler/Index. cshtml. cs* dosyasını aşağıdaki kodla güncelleştirin:
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Pages/Instructors/Index1.cshtml.cs?name=snippet_all&highlight=2,19-53)]
 
-`OnGetAsync` 方法接受所选讲师 ID 的可选路由数据。
+`OnGetAsync`Yöntemi, seçilen EĞITMENIN kimliği için isteğe bağlı rota verilerini kabul eder.
 
-检查 Pages/Instructors/Index.cshtml.cs 文件中的查询  ：
+*Pages/eğitmenler/Index. cshtml. cs* dosyasındaki sorguyu inceleyin:
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Pages/Instructors/Index1.cshtml.cs?name=snippet_EagerLoading)]
 
-代码指定以下导航属性的预先加载：
+Kod, aşağıdaki gezinti özellikleri için Eager yüklemeyi belirtir:
 
 * `Instructor.OfficeAssignment`
 * `Instructor.CourseAssignments`
@@ -207,41 +223,41 @@ EF Core 可采用多种方式将相关数据加载到实体的导航属性中：
     * `Course.Enrollments`
       * `Enrollment.Student`
 
-注意 `CourseAssignments` 和 `Course` 对 `Include` 和 `ThenInclude` 方法的重复使用。 若要指定 `Course` 实体的两个导航属性的预先加载，则这种重复使用是必要的。
+Ve `Include` `ThenInclude` için ve yöntemlerinin yinelendiğine dikkat `CourseAssignments` edin `Course` . Bu yineleme, varlığın iki gezinti özelliği için Eager yüklemesi belirtmek için gereklidir `Course` .
 
-选择讲师时 (`id != null`)，将执行以下代码。
+Aşağıdaki kod, bir eğitmen seçildiğinde ( `id != null` ) yürütülür.
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Pages/Instructors/Index1.cshtml.cs?name=snippet_SelectInstructor)]
 
-从视图模型中的讲师列表检索所选讲师。 向视图模型的 `Courses` 属性加载来自讲师 `CourseAssignments` 导航属性的 `Course` 实体。
+Seçilen eğitmen, görünüm modelindeki eğitmenler listesinden alınır. Görünüm modelinin özelliği, `Courses` `Course` bu eğitmenin gezinti özelliğinden alınan varlıklarla birlikte yüklenir `CourseAssignments` .
 
-`Where` 方法返回一个集合。 但在本例中，筛选器将选择单个实体。 因此，调用 `Single` 方法将集合转换为单个 `Instructor` 实体。 `Instructor` 实体提供对 `CourseAssignments` 属性的访问。 `CourseAssignments` 提供对相关 `Course` 实体的访问。
+`Where`Yöntemi bir koleksiyon döndürür. Ancak bu durumda filtre tek bir varlık seçer. Bu nedenle, `Single` yöntemi koleksiyonu tek bir varlığa dönüştürmek için çağırılır `Instructor` . `Instructor`Varlık, özelliğine erişim sağlar `CourseAssignments` . `CourseAssignments`ilgili varlıklara erişim sağlar `Course` .
 
-![讲师-课程 m:M](complex-data-model/_static/courseassignment.png)
+![Eğitmenden kurslar M:d](complex-data-model/_static/courseassignment.png)
 
-当集合仅包含一个项时，集合使用 `Single` 方法。 如果集合为空或包含多个项，`Single` 方法会引发异常。 还可使用 `SingleOrDefault`，该方式在集合为空时返回默认值（本例中为 null）。
+`Single`Koleksiyonda yalnızca bir öğe olduğunda yöntem bir koleksiyonda kullanılır. `Single`Koleksiyon boşsa veya birden fazla öğe varsa Yöntem bir özel durum oluşturur. `SingleOrDefault`Koleksiyon boşsa varsayılan bir değer (Bu durumda null) döndüren alternatif bir alternatiftir.
 
-选中课程时，视图模型的 `Enrollments` 属性将填充以下代码：
+Aşağıdaki kod, `Enrollments` bir kurs seçildiğinde görünüm modelinin özelliğini doldurur:
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Pages/Instructors/Index1.cshtml.cs?name=snippet_SelectCourse)]
 
-### <a name="update-the-instructors-index-page"></a>更新“讲师索引”页
+### <a name="update-the-instructors-index-page"></a>Eğitmenler Dizin sayfasını Güncelleştir
 
-使用以下代码更新 Pages/Instructors/Index.cshtml  。
+*Pages/eğitmenler/Index. cshtml* dosyasını aşağıdaki kodla güncelleştirin.
 
 [!code-cshtml[](intro/samples/cu30/Pages/Instructors/Index.cshtml?highlight=1,5,8,16-21,25-32,43-57,67-102,104-126)]
 
-上面的代码执行以下更改：
+Yukarıdaki kod aşağıdaki değişiklikleri yapar:
 
-* 将 `page` 指令从 `@page` 更新为 `@page "{id:int?}"`。 `"{id:int?}"` 是一个路由模板。 路由模板将 URL 中的整数查询字符串更改为路由数据。 例如，单击仅具有 `@page` 指令的讲师的“选择”链接将生成如下 URL  ：
+* `page`İçindeki yönergesini ' a `@page` güncelleştirir `@page "{id:int?}"` . `"{id:int?}"`bir yol şablonudur. Yol şablonu, verileri yönlendirmek için URL 'deki tamsayı Sorgu dizelerini değiştirir. Örneğin, yalnızca yönergeyle bir eğitmenin **Select** bağlantısına tıklanması `@page` AŞAĞıDAKINE benzer bir URL oluşturur:
 
   `https://localhost:5001/Instructors?id=2`
 
-  如果页面指令为 `@page "{id:int?}"` 时，则 URL 为：
+  Sayfa yönergesi olduğunda `@page "{id:int?}"` URL şu şekilde olur:
 
   `https://localhost:5001/Instructors/2`
 
-* 添加仅在 `item.OfficeAssignment` 不为 null 时才显示 `item.OfficeAssignment.Location` 的“办公室”列  。 由于这是一对零或一的关系，因此可能没有相关的 OfficeAssignment 实体。
+* Yalnızca null değilse görüntülenen bir **Office** sütunu ekler `item.OfficeAssignment.Location` `item.OfficeAssignment` . Bu bire sıfır veya-bir ilişki olduğundan ilgili bir OfficeAssignment varlığı bulunmayabilir.
 
   ```html
   @if (item.OfficeAssignment != null)
@@ -250,9 +266,9 @@ EF Core 可采用多种方式将相关数据加载到实体的导航属性中：
   }
   ```
 
-* 添加显示每位讲师所授课程的“课程”列  。 有关此 razor 语法的详细信息，请参阅[显式行转换](xref:mvc/views/razor#explicit-line-transition)。
+* Her bir eğitmen tarafından taders kurslarını görüntüleyen bir **Kurslar** sütunu ekler. Bu Razor sözdizimi hakkında daha fazla bilgi için bkz. [açık hat geçişi](xref:mvc/views/razor#explicit-line-transition) .
 
-* 添加向所选讲师和课程的 `tr` 元素中动态添加 `class="success"` 的代码。 此时会使用 Bootstrap 类为所选行设置背景色。
+* `class="success"` `tr` Seçilen eğitmenin ve kursun öğesine dinamik olarak ekleyen kodu ekler. Bu, bir önyükleme sınıfı kullanarak seçili satır için bir arka plan rengi ayarlar.
 
   ```html
   string selectedRow = "";
@@ -263,124 +279,124 @@ EF Core 可采用多种方式将相关数据加载到实体的导航属性中：
   <tr class="@selectedRow">
   ```
 
-* 添加标记为“选择”的新的超链接  。 该链接将所选讲师的 ID 发送给 `Index` 方法并设置背景色。
+* **Select**etiketli yeni bir köprü ekler. Bu bağlantı, seçilen eğitmenin KIMLIĞINI `Index` yönteme gönderir ve bir arka plan rengi ayarlar.
 
   ```html
   <a asp-action="Index" asp-route-id="@item.ID">Select</a> |
   ```
 
-* 添加所选讲师的课程表。
+* Seçili eğitmen için bir kurs tablosu ekler.
 
-* 添加所选课程的学生注册表。
+* Seçili kurs için bir öğrenci kayıtları tablosu ekler.
 
-运行应用并选择“讲师”选项卡  。该页显示来自相关 `OfficeAssignment` 实体的 `Location`（办公室）。 如果 `OfficeAssignment` 为 NULL，则显示空白表格单元格。
+Uygulamayı çalıştırın ve **eğitmenler** sekmesini seçin. Sayfa, `Location` ilgili varlıktaki (Office) öğesini görüntüler `OfficeAssignment` . `OfficeAssignment`Null ise boş bir tablo hücresi görüntülenir.
 
-单击“选择”链接，选择讲师  。 显示行样式更改和分配给该讲师的课程。
+Bir eğitmenin **Seç** bağlantısına tıklayın. Bu eğitmenin atandığı satır stili değişiklikleri ve kurslar görüntülenir.
 
-选择一门课程，查看已注册的学生及其成绩列表。
+Kayıtlı öğrenciler ve bunların onların listesini görmek için bir kurs seçin.
 
-![已选择“讲师索引”页中的讲师和课程](read-related-data/_static/instructors-index30.png)
+![Eğitmenler Dizin sayfası eğitmeni ve kursu seçildi](read-related-data/_static/instructors-index30.png)
 
-## <a name="using-single"></a>使用 Single 方法
+## <a name="using-single"></a>Tek kullanımı
 
-`Single` 方法可在 `Where` 条件中进行传递，无需分别调用 `Where` 方法：
+`Single`Yöntemi `Where` yöntemi ayrı çağırmak yerine koşulu geçirebilir `Where` :
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Pages/Instructors/IndexSingle.cshtml.cs?name=snippet_single&highlight=21-22,30-31)]
 
-`Single` 与 Where 条件的配合使用与个人偏好相关。 相较于使用 `Where` 方法，它没有提供任何优势。
+`Single`Bir Where koşulunun kullanımı, kişisel tercihden bağımsız olarak kullanılır. Yöntemi kullanılarak herhangi bir avantaj sağlamaz `Where` .
 
-## <a name="explicit-loading"></a>显式加载
+## <a name="explicit-loading"></a>Açık yükleme
 
-当前代码为 `Enrollments` 和 `Students` 指定预先加载：
+Geçerli kod ve için Eager yüklemeyi belirtir `Enrollments` `Students` :
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Pages/Instructors/Index1.cshtml.cs?name=snippet_EagerLoading&highlight=6-9)]
 
-假设用户几乎不希望课程中显示注册情况。 在此情况下，可仅在请求时加载注册数据进行优化。 在本部分中，会更新 `OnGetAsync` 以使用 `Enrollments` 和 `Students` 的显式加载。
+Kullanıcıların bir kursa kayıtları nadiren görmek istediğini varsayalım. Bu durumda, bir iyileştirme yalnızca isteniyorsa kayıt verilerini yüklemek olacaktır. Bu bölümde, ve ' `OnGetAsync` nin açık yüklemesini kullanacak şekilde güncelleştirilir `Enrollments` `Students` .
 
-使用以下代码更新 Pages/Instructors/Index.cshtml.cs  。
+*Pages/eğitmenler/Index. cshtml. cs* dosyasını aşağıdaki kodla güncelleştirin.
 
 [!code-csharp[](intro/samples/cu30/Pages/Instructors/Index.cshtml.cs?highlight=31-35,52-56)]
 
-上述代码取消针对注册和学生数据的 ThenInclude 方法调用  。 如果已选中课程，则显式加载的代码会检索：
+Yukarıdaki kod, kayıt ve öğrenci verileri için *Thenınclude* Yöntem çağrılarını bırakır. Bir kurs seçilirse, açık yükleme kodu alır:
 
-* 所选课程的 `Enrollment` 实体。
-* 每个 `Enrollment` 的 `Student` 实体。
+* `Enrollment`Seçili kurs için varlıklar.
+* `Student`Her biri için varlıklar `Enrollment` .
 
-注意，上述代码注释掉了 `.AsNoTracking()`。 对于跟踪的实体，仅可显式加载导航属性。
+Yukarıdaki kodun yorumdığına dikkat edin `.AsNoTracking()` . Gezinti özellikleri yalnızca izlenen varlıklar için açık bir şekilde yüklenebilir.
 
-测试应用。 对用户而言，该应用的行为与上一版本相同。
+Uygulamayı test etme. Bir kullanıcının perspektifinden, uygulama önceki sürümle aynı şekilde davranır.
 
-## <a name="next-steps"></a>后续步骤
+## <a name="next-steps"></a>Sonraki adımlar
 
-下一个教程将介绍如何更新相关数据。
+Sonraki öğreticide ilgili verileri güncelleştirme gösterilmektedir.
 
 >[!div class="step-by-step"]
->[上一个教程](xref:data/ef-rp/complex-data-model)
->[下一个教程](xref:data/ef-rp/update-related-data)
+>[Önceki öğretici](xref:data/ef-rp/complex-data-model) 
+> [Sonraki öğretici](xref:data/ef-rp/update-related-data)
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-在本教程中，将读取和显示相关数据。 相关数据为 EF Core 加载到导航属性中的数据。
+Bu öğreticide ilgili veriler okundu ve görüntülenir. İlgili veriler, EF Core gezinti özelliklerine yüklediği veri.
 
-如果遇到无法解决的问题，请[下载或查看已完成的应用](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples)。 [下载说明](xref:index#how-to-download-a-sample)。
+Sorun yaşıyorsanız, bu [uygulamayı indiremez veya görüntüleyemezsiniz.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [Yönergeleri indirin](xref:index#how-to-download-a-sample).
 
-下图显示了本教程中已完成的页面：
+Aşağıdaki çizimler, Bu öğreticinin tamamlanan sayfalarını göstermektedir:
 
-![“课程索引”页](read-related-data/_static/courses-index.png)
+![Kurslar Dizin sayfası](read-related-data/_static/courses-index.png)
 
-![“讲师索引”页](read-related-data/_static/instructors-index.png)
+![Eğitmenler Dizin sayfası](read-related-data/_static/instructors-index.png)
 
-## <a name="eager-explicit-and-lazy-loading-of-related-data"></a>相关数据的预先加载、显式加载和延迟加载
+## <a name="eager-explicit-and-lazy-loading-of-related-data"></a>İlgili verilerin Eager, açık ve geç yüklemesi
 
-EF Core 可采用多种方式将相关数据加载到实体的导航属性中：
+EF Core bir varlığın gezinti özelliklerine ilgili verileri yükleyebilmenin birkaç yolu vardır:
 
-* [预先加载](/ef/core/querying/related-data#eager-loading)。 预先加载是指对查询某类型的实体时一并加载相关实体。 读取实体时，会检索其相关数据。 此时通常会出现单一联接查询，检索所有必需数据。 EF Core 将针对预先加载的某些类型发出多个查询。 与存在单一查询的 EF6 中的某些查询相比，发出多个查询可能更有效。 预先加载通过 `Include` 和 `ThenInclude` 方法进行指定。
+* [Eager yükleniyor](/ef/core/querying/related-data#eager-loading). Ekip yükleme, bir varlık türü için bir sorgu aynı zamanda ilgili varlıkları de yüklediğinde oluşur. Varlık okunmadığınızda ilgili veriler alınır. Bu, genellikle gereken tüm verileri alan tek bir JOIN sorgusuna neden olur. EF Core, bazı Eager yükleme türleri için birden çok sorgu yayımlayacak. Birden çok sorgu verilmesi, EF6 içindeki bazı sorgular için tek bir sorgunun bulunduğu durumda daha verimli olabilir. Eager yüklemesi ve yöntemleriyle birlikte belirtilir `Include` `ThenInclude` .
 
-  ![预先加载示例](read-related-data/_static/eager-loading.png)
+  ![Eager yükleme örneği](read-related-data/_static/eager-loading.png)
  
-  当包含集合导航时，预先加载会发送多个查询：
+  Bir koleksiyon gezintisi eklendiğinde Eager yüklemesi birden çok sorgu gönderir:
 
-  * 一个查询用于主查询 
-  * 一个查询用于加载树中每个集合“边缘”。
+  * Ana sorgu için bir sorgu 
+  * Yükleme ağacındaki her koleksiyon "Edge" için bir sorgu.
 
-* 使用 `Load` 的单独查询：可在单独的查询中检索数据，EF Core 会“修复”导航属性。 “修复”是指 EF Core 自动填充导航属性。 使用 `Load` 单独查询比预先加载更像是显式加载。
+* Sorguları ile ayır `Load` : veriler ayrı sorgularda alınabilir ve gezinti özellikleri EF Core "düzeltir". "düzeltmeler", EF Core gezinti özelliklerini otomatik olarak dolduran anlamına gelir. İle ayrı sorgular `Load` , ek yükleme Eager yüklemeden daha benzer.
 
-  ![单独查询示例](read-related-data/_static/separate-queries.png)
+  ![Ayrı sorgular örneği](read-related-data/_static/separate-queries.png)
 
-  注意：EF Core 会将导航属性自动“修复”为之前加载到上下文实例中的任何其他实体。 即使导航属性的数据非显式包含在内  ，但如果先前加载了部分或所有相关实体，则仍可能填充该属性。
+  Note: EF Core, daha önce bağlam örneğine yüklenmiş olan diğer varlıklar için gezinti özelliklerini otomatik olarak düzeltir. Bir gezinti özelliği için veriler açıkça dahil *edilmese* bile, ilgili varlıkların bazıları veya tümü daha önce yüklenmişse Özellik yine de doldurulabilir.
 
-* [显式加载](/ef/core/querying/related-data#explicit-loading)。 首次读取实体时，不检索相关数据。 必须编写代码才能在需要时检索相关数据。 使用单独查询进行显式加载时，会向数据库发送多个查询。 该代码通过显式加载指定要加载的导航属性。 使用 `Load` 方法进行显式加载。 例如：
+* [Açık yükleme](/ef/core/querying/related-data#explicit-loading). Varlık ilk kez okunmadıysa ilgili veriler alınmadı. Gerektiğinde ilgili verileri almak için kodun yazılması gerekir. Ayrı sorgularla açık yükleme, VERITABANıNA birden çok sorgu gönderilmesine neden olur. Açık yükleme ile kod, yüklenecek gezinti özelliklerini belirtir. `Load`Açık yükleme yapmak için yöntemini kullanın. Örnek:
 
-  ![显式加载示例](read-related-data/_static/explicit-loading.png)
+  ![Açık yükleme örneği](read-related-data/_static/explicit-loading.png)
 
-* [延迟加载](/ef/core/querying/related-data#lazy-loading)。 [延迟加载已添加到版本 2.1 中的 EF Core](/ef/core/querying/related-data#lazy-loading)。 首次读取实体时，不检索相关数据。 首次访问导航属性时，会自动检索该导航属性所需的数据。 首次访问导航属性时，都会向数据库发送一个查询。
+* [Yavaş yükleme](/ef/core/querying/related-data#lazy-loading). [Sürüm 2,1 ' de EF Core geç yükleme eklendi](/ef/core/querying/related-data#lazy-loading). Varlık ilk kez okunmadıysa ilgili veriler alınmadı. Gezinti özelliğine ilk kez erişildiğinde, bu gezinti özelliği için gereken veriler otomatik olarak alınır. Bir gezinti özelliğine ilk kez erişildiğinde bir sorgu VERITABANıNA gönderilir.
 
-* `Select` 运算符仅加载所需的相关数据。
+* `Select`İşleci yalnızca gerekli ilgili verileri yükler.
 
-## <a name="create-a-course-page-that-displays-department-name"></a>创建显示院系名称的“课程”页
+## <a name="create-a-course-page-that-displays-department-name"></a>Bölüm adını görüntüleyen bir kurs sayfası oluşturma
 
-课程实体包括一个带 `Department` 实体的导航属性。 `Department` 实体包含要分配课程的院系。
+Kurs varlığı, varlığı içeren bir gezinti özelliği içerir `Department` . `Department`Varlık, kursun atandığı departmanı içerir.
 
-要在课程列表中显示已分配院系的名称：
+Bir kurs listesinde atanan departmanın adını göstermek için:
 
-* 从 `Department` 实体中获取 `Name` 属性。
-* `Department` 实体来自于 `Course.Department` 导航属性。
+* `Name`Varlıktaki özelliği alın `Department` .
+* `Department`Varlık, `Course.Department` Gezinti özelliğinden gelir.
 
-![Course.Department](read-related-data/_static/dep-crs.png)
+![Kurs. Departmanı](read-related-data/_static/dep-crs.png)
 
 <a name="scaffold"></a>
 
-### <a name="scaffold-the-course-model"></a>为课程模型创建基架
+### <a name="scaffold-the-course-model"></a>Kurs modelini temklesi
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio) 
 
-按照[为“学生”模型搭建基架](xref:data/ef-rp/intro#scaffold-the-student-model)中的说明操作，并对模型类使用 `Course`。
+[Öğrenci modelini Scafkatlama](xref:data/ef-rp/intro#scaffold-the-student-model) ve `Course` model sınıfı için kullanma bölümündeki yönergeleri izleyin.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
- 运行下面的命令：
+ Şu komutu çalıştırın:
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Course -dc SchoolContext -udl -outDir Pages\Courses --referenceScriptLibraries
@@ -388,86 +404,86 @@ EF Core 可采用多种方式将相关数据加载到实体的导航属性中：
 
 ---
 
-上述命令为 `Course` 模型创建基架。 在 Visual Studio 中打开项目。
+Yukarıdaki komut, modeli bir daha yasaklıyor `Course` . Projeyi Visual Studio'da açın.
 
-打开 Pages/Courses/Index.cshtml.cs  并检查 `OnGetAsync` 方法。 基架引擎为 `Department` 导航属性指定了预先加载。 `Include` 方法指定预先加载。
+*Pages/kurslar/Index. cshtml. cs* dosyasını açın ve `OnGetAsync` metodunu inceleyin. Yapı iskelesi altyapısı, gezinti özelliği için belirtilen Eager 'yi belirtti `Department` . `Include`Yöntemi Eager yüklemeyi belirtir.
 
-运行应用并选择“课程”链接  。 院系列显示 `DepartmentID`（该项无用）。
+Uygulamayı çalıştırın ve **Kurslar** bağlantısını seçin. Departman sütunu, `DepartmentID` yararlı olmayan öğesini görüntüler.
 
-使用以下代码更新 `OnGetAsync` 方法：
+`OnGetAsync`Yöntemi aşağıdaki kodla güncelleştirin:
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/Index.cshtml.cs?name=snippet_RevisedIndexMethod)]
 
-上述代码添加了 `AsNoTracking`。 由于未跟踪返回的实体，因此 `AsNoTracking` 提升了性能。 未跟踪实体，因为未在当前上下文中更新这些实体。
+Yukarıdaki kod ekler `AsNoTracking` . `AsNoTracking`Döndürülen varlıklar izlenmediğinden performansı geliştirir. Geçerli bağlamda güncelleştirilmemiş oldukları için varlıklar izlenmiyor.
 
-使用以下突出显示的标记更新 Pages/Courses/Index.cshtml  ：
+*Pages/kurslar/Index. cshtml* 'yi aşağıdaki vurgulanmış işaretlerle güncelleştirin:
 
 [!code-html[](intro/samples/cu/Pages/Courses/Index.cshtml?highlight=4,7,15-17,34-36,44)]
 
-对基架代码进行了以下更改：
+Yapı iskelesi kodunda aşağıdaki değişiklikler yapılmıştır:
 
-* 将标题从“索引”更改为“课程”。
-* 添加了显示 `CourseID` 属性值的“数字”列  。 默认情况下，不针对主键进行架构，因为对最终用户而言，它们通常没有意义。 但在此情况下主键是有意义的。
-* 更改“院系”列，显示院系名称  。 该代码显示已加载到 `Department` 导航属性中的 `Department` 实体的 `Name` 属性：
+* Başlık dizinden kurslar olarak değiştirildi.
+* Özellik değerini gösteren bir **sayı** sütunu eklendi `CourseID` . Birincil anahtarlar, genellikle son kullanıcılara anlamlı olduklarından, varsayılan olarak yapı iskelesi göstermemektedir. Ancak, bu durumda birincil anahtar anlamlı olur.
+* Departman adını göstermek için **Departman** sütunu değiştirildi. Kod, `Name` `Department` gezinti özelliğine yüklenen varlığın özelliğini görüntüler `Department` :
 
   ```html
   @Html.DisplayFor(modelItem => item.Department.Name)
   ```
 
-运行应用并选择“课程”选项卡，查看包含系名称的列表  。
+Uygulamayı çalıştırın ve bölüm adlarıyla listeyi görmek için **Kurslar** sekmesini seçin.
 
-![“课程索引”页](read-related-data/_static/courses-index.png)
+![Kurslar Dizin sayfası](read-related-data/_static/courses-index.png)
 
 <a name="select"></a>
 
-### <a name="loading-related-data-with-select"></a>使用 Select 加载相关数据
+### <a name="loading-related-data-with-select"></a>Select ile ilgili verileri yükleme
 
-`OnGetAsync` 方法使用 `Include` 方法加载相关数据：
+`OnGetAsync`Yöntemi, yöntemiyle ilgili verileri yükler `Include` :
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/Index.cshtml.cs?name=snippet_RevisedIndexMethod&highlight=4)]
 
-`Select` 运算符仅加载所需的相关数据。 对于单个项（如 `Department.Name`），它使用 SQL INNER JOIN。 对于集合，它使用另一个数据库访问，但集合上的 `Include` 运算符也是如此。
+`Select`İşleci yalnızca gerekli ilgili verileri yükler. Tek öğeler için, örneğin `Department.Name` BIR SQL Iç birleşimi kullanır. Koleksiyonlar için başka bir veritabanı erişimi kullanır, ancak `Include` koleksiyonlar üzerindeki işleci bu şekilde yapar.
 
-以下代码使用 `Select` 方法加载相关数据：
+Aşağıdaki kod, yöntemiyle ilgili verileri yükler `Select` :
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/IndexSelect.cshtml.cs?name=snippet_RevisedIndexMethod&highlight=4)]
 
-`CourseViewModel`：
+`CourseViewModel`Şunları yapın:
 
 [!code-csharp[](intro/samples/cu/Models/SchoolViewModels/CourseViewModel.cs?name=snippet)]
 
-有关完整示例的信息，请参阅 [IndexSelect.cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu/Pages/Courses/IndexSelect.cshtml) 和 [IndexSelect.cshtml.cs](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu/Pages/Courses/IndexSelect.cshtml.cs)。
+Tüm örnek için bkz. [ındexselect. cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu/Pages/Courses/IndexSelect.cshtml) ve [IndexSelect.cshtml.cs](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu/Pages/Courses/IndexSelect.cshtml.cs) .
 
-## <a name="create-an-instructors-page-that-shows-courses-and-enrollments"></a>创建显示“课程”和“注册”的“讲师”页
+## <a name="create-an-instructors-page-that-shows-courses-and-enrollments"></a>Kurslar ve kayıtları gösteren bir eğitmenler sayfası oluşturun
 
-在本部分中，将创建“讲师”页。
+Bu bölümde, Eğitmenler sayfası oluşturulur.
 
 <a name="IP"></a>
-![“讲师索引”页](read-related-data/_static/instructors-index.png)
+![Eğitmenler Dizin sayfası](read-related-data/_static/instructors-index.png)
 
-该页面通过以下方式读取和显示相关数据：
+Bu sayfa aşağıdaki yollarla ilgili verileri okur ve görüntüler:
 
-* 讲师列表显示 `OfficeAssignment` 实体（上图中的办公室）的相关数据。 `Instructor` 和 `OfficeAssignment` 实体之间存在一对零或一的关系。 预先加载适用于 `OfficeAssignment` 实体。 需要显示相关数据时，预先加载通常更高效。 在此情况下，会显示讲师的办公室分配。
-* 当用户选择一名讲师（上图中的 Harui）时，显示相关的 `Course` 实体。 `Instructor` 和 `Course` 实体之间存在多对多关系。 对 `Course` 实体及其相关的 `Department` 实体使用预先加载。 这种情况下，单独查询可能更有效，因为仅需显示所选讲师的课程。 此示例演示如何在位于导航实体内的实体中预先加载这些导航实体。
-* 当用户选择一门课程（上图中的化学）时，显示 `Enrollments` 实体的相关数据。 上图中显示了学生姓名和成绩。 `Course` 和 `Enrollment` 实体之间存在一对多的关系。
+* Eğitmenler listesi, varlıktaki ilgili verileri `OfficeAssignment` (önceki görüntüde Office) görüntüler. `Instructor`Ve `OfficeAssignment` varlıkları bire sıfır veya-bir ilişkidir. Varlıklar için Eager yüklemesi kullanılır `OfficeAssignment` . Eager yüklemesi, ilgili verilerin görüntülenmesi gerektiğinde genellikle daha etkilidir. Bu durumda, Eğitmenler için Office atamaları görüntülenir.
+* Kullanıcı bir eğitmen (önceki görüntüde Haruı) seçtiğinde ilgili `Course` varlıklar görüntülenir. `Instructor`Ve `Course` varlıkları çoktan çoğa bir ilişkidir. Eager yüklemesi, `Course` varlıklar ve ilgili varlıklar için kullanılır `Department` . Bu durumda, yalnızca seçili eğitmen için kurslar gerektiğinden ayrı sorgular daha verimli olabilir. Bu örnek, gezinti özelliklerinde olan varlıklarda gezinti özellikleri için Eager yükleme 'nin nasıl kullanılacağını gösterir.
+* Kullanıcı bir kurs seçtiğinde (önceki görüntüde Chemistry), varlıktaki ilgili veriler `Enrollments` görüntülenir. Önceki görüntüde öğrenci adı ve sınıf görüntülenir. `Course`Ve `Enrollment` varlıkları bire çok ilişkidir.
 
-### <a name="create-a-view-model-for-the-instructor-index-view"></a>创建“讲师索引”视图的视图模型
+### <a name="create-a-view-model-for-the-instructor-index-view"></a>Eğitmen dizini görünümü için bir görünüm modeli oluşturun
 
-“讲师”页显示来自三个不同表格的数据。 创建一个视图模型，该模型中包含表示三个表格的三个实体。
+Eğitmenler sayfasında, üç farklı tablodan alınan veriler gösterilir. Üç tabloyu temsil eden üç varlığı içeren bir görünüm modeli oluşturulur.
 
-在 SchoolViewModels  文件夹中，使用以下代码创建 InstructorIndexData.cs  ：
+*SchoolViewModels* klasöründe, aşağıdaki kodla *InstructorIndexData.cs* oluşturun:
 
 [!code-csharp[](intro/samples/cu/Models/SchoolViewModels/InstructorIndexData.cs)]
 
-### <a name="scaffold-the-instructor-model"></a>为讲师模型创建基架
+### <a name="scaffold-the-instructor-model"></a>Eğitmen modelini scafkatlama
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio) 
 
-按照[为“学生”模型搭建基架](xref:data/ef-rp/intro#scaffold-the-student-model)中的说明操作，并对模型类使用 `Instructor`。
+[Öğrenci modelini Scafkatlama](xref:data/ef-rp/intro#scaffold-the-student-model) ve `Instructor` model sınıfı için kullanma bölümündeki yönergeleri izleyin.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
- 运行下面的命令：
+ Şu komutu çalıştırın:
 
   ```dotnetcli
   dotnet aspnet-codegenerator razorpage -m Instructor -dc SchoolContext -udl -outDir Pages\Instructors --referenceScriptLibraries
@@ -475,42 +491,42 @@ EF Core 可采用多种方式将相关数据加载到实体的导航属性中：
 
 ---
 
-上述命令为 `Instructor` 模型创建基架。 
-运行应用并导航到“讲师”页。
+Yukarıdaki komut, modeli bir daha yasaklıyor `Instructor` . 
+Uygulamayı çalıştırın ve eğitmenler sayfasına gidin.
 
-将 Pages/Instructors/Index.cshtml.cs  替换为以下代码：
+*Pages/eğitmenler/Index. cshtml. cs* öğesini şu kodla değiştirin:
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index1.cshtml.cs?name=snippet_all&highlight=2,18-99)]
 
-`OnGetAsync` 方法接受所选讲师 ID 的可选路由数据。
+`OnGetAsync`Yöntemi, seçilen EĞITMENIN kimliği için isteğe bağlı rota verilerini kabul eder.
 
-检查 Pages/Instructors/Index.cshtml.cs 文件中的查询  ：
+*Pages/eğitmenler/Index. cshtml. cs* dosyasındaki sorguyu inceleyin:
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index1.cshtml.cs?name=snippet_ThenInclude)]
 
-查询包括两项内容：
+Sorgunun iki içerme vardır:
 
-* `OfficeAssignment`：在[讲师视图](#IP)中显示。
-* `CourseAssignments`：课程的教学内容。
+* `OfficeAssignment`: [Eğitmenler görünümünde](#IP)görüntülenir.
+* `CourseAssignments`: Kurslar taöğretme.
 
-### <a name="update-the-instructors-index-page"></a>更新“讲师索引”页
+### <a name="update-the-instructors-index-page"></a>Eğitmenler Dizin sayfasını Güncelleştir
 
-使用以下标记更新 Pages/Instructors/Index.cshtml  ：
+*Sayfaları/eğitmenler/Index. cshtml* 'yi şu biçimlendirmeyle güncelleştirin:
 
 [!code-html[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=1-65&highlight=1,5,8,16-21,25-32,43-57)]
 
-上述标记进行以下更改：
+Yukarıdaki biçimlendirme aşağıdaki değişiklikleri yapar:
 
-* 将 `page` 指令从 `@page` 更新为 `@page "{id:int?}"`。 `"{id:int?}"` 是一个路由模板。 路由模板将 URL 中的整数查询字符串更改为路由数据。 例如，单击仅具有 `@page` 指令的讲师的“选择”链接将生成如下 URL  ：
+* `page`İçindeki yönergesini ' a `@page` güncelleştirir `@page "{id:int?}"` . `"{id:int?}"`bir yol şablonudur. Yol şablonu, verileri yönlendirmek için URL 'deki tamsayı Sorgu dizelerini değiştirir. Örneğin, yalnızca yönergeyle bir eğitmenin **Select** bağlantısına tıklanması `@page` AŞAĞıDAKINE benzer bir URL oluşturur:
 
   `http://localhost:1234/Instructors?id=2`
 
-  当页面指令是 `@page "{id:int?}"` 时，之前的 URL 为：
+  Sayfa yönergesi olduğunda `@page "{id:int?}"` , ÖNCEKI URL şu şekilde olur:
 
   `http://localhost:1234/Instructors/2`
 
-* 页标题为“讲师”  。
-* 添加了仅在 `item.OfficeAssignment` 不为 null 时才显示 `item.OfficeAssignment.Location` 的“办公室”列  。 由于这是一对零或一的关系，因此可能没有相关的 OfficeAssignment 实体。
+* Sayfa başlığı **eğitmenler**' dir.
+* Yalnızca null olmaması halinde görüntülenen bir **Office** sütunu eklendi `item.OfficeAssignment.Location` `item.OfficeAssignment` . Bu bire sıfır veya-bir ilişki olduğundan ilgili bir OfficeAssignment varlığı bulunmayabilir.
 
   ```html
   @if (item.OfficeAssignment != null)
@@ -519,9 +535,9 @@ EF Core 可采用多种方式将相关数据加载到实体的导航属性中：
   }
   ```
 
-* 添加了显示每位讲师所授课程的“课程”列  。 有关此 razor 语法的详细信息，请参阅[显式行转换](xref:mvc/views/razor#explicit-line-transition)。
+* Her bir eğitmen tarafından taders kurslarını görüntüleyen bir **Kurslar** sütunu eklendi. Bu Razor sözdizimi hakkında daha fazla bilgi için bkz. [açık hat geçişi](xref:mvc/views/razor#explicit-line-transition) .
 
-* 添加了向所选讲师的 `tr` 元素中动态添加 `class="success"` 的代码。 此时会使用 Bootstrap 类为所选行设置背景色。
+* `class="success"`Seçilen eğitmenin öğesine dinamik olarak ekleyen kod eklendi `tr` . Bu, bir önyükleme sınıfı kullanarak seçili satır için bir arka plan rengi ayarlar.
 
   ```html
   string selectedRow = "";
@@ -532,113 +548,113 @@ EF Core 可采用多种方式将相关数据加载到实体的导航属性中：
   <tr class="@selectedRow">
   ```
 
-* 添加了标记为“选择”的新的超链接  。 该链接将所选讲师的 ID 发送给 `Index` 方法并设置背景色。
+* **Select**etiketli yeni bir köprü eklendi. Bu bağlantı, seçilen eğitmenin KIMLIĞINI `Index` yönteme gönderir ve bir arka plan rengi ayarlar.
 
   ```html
   <a asp-action="Index" asp-route-id="@item.ID">Select</a> |
   ```
 
-运行应用并选择“讲师”选项卡  。该页显示来自相关 `OfficeAssignment` 实体的 `Location`（办公室）。 如果 OfficeAssignment` 为 NULL，则显示空白表格单元格。
+Uygulamayı çalıştırın ve **eğitmenler** sekmesini seçin. Sayfa, `Location` ilgili varlıktaki (Office) öğesini görüntüler `OfficeAssignment` . Eğer OfficeAssignment ' null ise boş bir tablo hücresi görüntülenir.
 
-单击“选择”  链接。 随即更改行样式。
+**Seç** bağlantısına tıklayın. Satır stili değişir.
 
-### <a name="add-courses-taught-by-selected-instructor"></a>添加由所选讲师教授的课程
+### <a name="add-courses-taught-by-selected-instructor"></a>Seçili eğitmen 'e göre kurslar ekleyin
 
-将 Pages/Instructors/Index.cshtml.cs  中的 `OnGetAsync` 方法替换为以下代码：
+`OnGetAsync` *Pages/eğitmenler/Index. cshtml. cs* dosyasındaki yöntemi aşağıdaki kodla güncelleştirin:
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index2.cshtml.cs?name=snippet_OnGetAsync&highlight=1,8,16-999)]
 
-添加 `public int CourseID { get; set; }`
+Ekleyemiyorum`public int CourseID { get; set; }`
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index2.cshtml.cs?name=snippet_1&highlight=12)]
 
-检查更新后的查询：
+Güncelleştirilmiş sorguyu inceleyin:
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index2.cshtml.cs?name=snippet_ThenInclude)]
 
-先前查询添加了 `Department` 实体。
+Önceki sorgu `Department` varlıkları ekler.
 
-选择讲师时 (`id != null`)，将执行以下代码。 从视图模型中的讲师列表检索所选讲师。 向视图模型的 `Courses` 属性加载来自讲师 `CourseAssignments` 导航属性的 `Course` 实体。
+Aşağıdaki kod, bir eğitmen seçildiğinde ( `id != null` ) yürütülür. Seçilen eğitmen, görünüm modelindeki eğitmenler listesinden alınır. Görünüm modelinin özelliği, `Courses` `Course` bu eğitmenin gezinti özelliğinden alınan varlıklarla birlikte yüklenir `CourseAssignments` .
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index2.cshtml.cs?name=snippet_ID)]
 
-`Where` 方法返回一个集合。 在前面的 `Where` 方法中，仅返回单个 `Instructor` 实体。 `Single` 方法将集合转换为单个 `Instructor` 实体。 `Instructor` 实体提供对 `CourseAssignments` 属性的访问。 `CourseAssignments` 提供对相关 `Course` 实体的访问。
+`Where`Yöntemi bir koleksiyon döndürür. Önceki `Where` yöntemde yalnızca tek bir `Instructor` varlık döndürülür. `Single`Yöntemi, koleksiyonu tek bir `Instructor` varlığa dönüştürür. `Instructor`Varlık, özelliğine erişim sağlar `CourseAssignments` . `CourseAssignments`ilgili varlıklara erişim sağlar `Course` .
 
-![讲师-课程 m:M](complex-data-model/_static/courseassignment.png)
+![Eğitmenden kurslar M:d](complex-data-model/_static/courseassignment.png)
 
-当集合仅包含一个项时，集合使用 `Single` 方法。 如果集合为空或包含多个项，`Single` 方法会引发异常。 还可使用 `SingleOrDefault`，该方式在集合为空时返回默认值（本例中为 null）。 在空集合上使用 `SingleOrDefault`：
+`Single`Koleksiyonda yalnızca bir öğe olduğunda yöntem bir koleksiyonda kullanılır. `Single`Koleksiyon boşsa veya birden fazla öğe varsa Yöntem bir özel durum oluşturur. `SingleOrDefault`Koleksiyon boşsa varsayılan bir değer (Bu durumda null) döndüren alternatif bir alternatiftir. `SingleOrDefault`Boş bir koleksiyonda kullanma:
 
-* 引发异常（因为尝试在空引用上找到 `Courses` 属性）。
-* 异常信息不太能清楚指出问题原因。
+* Bir özel durum sonucu oluşur ( `Courses` null başvuru üzerinde bir özellik bulmaya çalışırken).
+* Özel durum iletisi sorunun nedenini daha az gösterir.
 
-选中课程时，视图模型的 `Enrollments` 属性将填充以下代码：
+Aşağıdaki kod, `Enrollments` bir kurs seçildiğinde görünüm modelinin özelliğini doldurur:
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index2.cshtml.cs?name=snippet_courseID)]
 
-在 Pages/Instructors/Index.cshtml Razor 页面末尾添加以下标记  ：
+*Pages/eğitmenler/Index. cshtml* sayfasının sonuna aşağıdaki biçimlendirmeyi ekleyin Razor :
 
 [!code-html[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=60-102&highlight=7-999)]
 
-上述标记显示选中某讲师时与该讲师相关的课程列表。
+Yukarıdaki biçimlendirme, bir eğitmen seçildiğinde bir eğitmenin ilgili kursların bir listesini görüntüler.
 
-测试应用。 单击讲师页面上的“选择”  链接。
+Uygulamayı test etme. Eğitmenler sayfasında bir **seçme** bağlantısına tıklayın.
 
-### <a name="show-student-data"></a>显示学生数据
+### <a name="show-student-data"></a>Öğrenci verilerini göster
 
-在本部分中，更新应用以显示所选课程的学生数据。
+Bu bölümde, uygulama seçili bir kurs için öğrenci verilerini gösterecek şekilde güncelleştirilir.
 
-使用以下代码在 Pages/Instructors/Index.cshtml.cs  中更新 `OnGetAsync` 方法中的查询：
+`OnGetAsync` *Pages/eğitmenler/Index. cshtml. cs* içindeki yöntemdeki sorguyu aşağıdaki kodla güncelleştirin:
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index.cshtml.cs?name=snippet_ThenInclude&highlight=6-9)]
 
-更新 Pages/Instructors/Index.cshtml  。 在文件末尾添加以下标记：
+Güncelleştirme *sayfaları/eğitmenler/Index. cshtml*. Aşağıdaki biçimlendirmeyi dosyanın sonuna ekleyin:
 
 [!code-html[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=103-)]
 
-上述标记显示已注册所选课程的学生列表。
+Yukarıdaki biçimlendirme, seçili kursa kayıtlı öğrencilerin bir listesini görüntüler.
 
-刷新页面并选择讲师。 选择一门课程，查看已注册的学生及其成绩列表。
+Sayfayı yenileyin ve bir eğitmen seçin. Kayıtlı öğrenciler ve bunların onların listesini görmek için bir kurs seçin.
 
-![已选择“讲师索引”页中的讲师和课程](read-related-data/_static/instructors-index.png)
+![Eğitmenler Dizin sayfası eğitmeni ve kursu seçildi](read-related-data/_static/instructors-index.png)
 
-## <a name="using-single"></a>使用 Single 方法
+## <a name="using-single"></a>Tek kullanımı
 
-`Single` 方法可在 `Where` 条件中进行传递，无需分别调用 `Where` 方法：
+`Single`Yöntemi `Where` yöntemi ayrı çağırmak yerine koşulu geçirebilir `Where` :
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/IndexSingle.cshtml.cs?name=snippet_single&highlight=21-22,30-31)]
 
-使用 `Where` 时，前面的 `Single` 方法不适用。 一些开发人员更喜欢 `Single` 方法样式。
+Yukarıdaki `Single` yaklaşım, kullanarak herhangi bir avantaj sağlamaz `Where` . Bazı geliştiriciler `Single` yaklaşım stilini tercih eder.
 
-## <a name="explicit-loading"></a>显式加载
+## <a name="explicit-loading"></a>Açık yükleme
 
-当前代码为 `Enrollments` 和 `Students` 指定预先加载：
+Geçerli kod ve için Eager yüklemeyi belirtir `Enrollments` `Students` :
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index.cshtml.cs?name=snippet_ThenInclude&highlight=6-9)]
 
-假设用户几乎不希望课程中显示注册情况。 在此情况下，可仅在请求时加载注册数据进行优化。 在本部分中，会更新 `OnGetAsync` 以使用 `Enrollments` 和 `Students` 的显式加载。
+Kullanıcıların bir kursa kayıtları nadiren görmek istediğini varsayalım. Bu durumda, bir iyileştirme yalnızca isteniyorsa kayıt verilerini yüklemek olacaktır. Bu bölümde, ve ' `OnGetAsync` nin açık yüklemesini kullanacak şekilde güncelleştirilir `Enrollments` `Students` .
 
-使用以下代码更新 `OnGetAsync`：
+`OnGetAsync`Aşağıdaki kodla güncelleştirin:
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/IndexXp.cshtml.cs?name=snippet_OnGetAsync&highlight=9-13,29-35)]
 
-上述代码取消针对注册和学生数据的 ThenInclude 方法调用  。 如果已选中课程，则突出显示的代码会检索：
+Yukarıdaki kod, kayıt ve öğrenci verileri için *Thenınclude* Yöntem çağrılarını bırakır. Bir kurs seçilirse vurgulanan kod şunu alır:
 
-* 所选课程的 `Enrollment` 实体。
-* 每个 `Enrollment` 的 `Student` 实体。
+* `Enrollment`Seçili kurs için varlıklar.
+* `Student`Her biri için varlıklar `Enrollment` .
 
-请注意，上述代码为 `.AsNoTracking()` 加上注释。 对于跟踪的实体，仅可显式加载导航属性。
+Yukarıdaki kod açıklamalarının olduğunu fark edin `.AsNoTracking()` . Gezinti özellikleri yalnızca izlenen varlıklar için açık bir şekilde yüklenebilir.
 
-测试应用。 对用户而言，该应用的行为与上一版本相同。
+Uygulamayı test etme. Bir kullanıcının perspektifinden, uygulama önceki sürümle aynı şekilde davranır.
 
-下一个教程将介绍如何更新相关数据。
+Sonraki öğreticide ilgili verileri güncelleştirme gösterilmektedir.
 
-## <a name="additional-resources"></a>其他资源
+## <a name="additional-resources"></a>Ek kaynaklar
 
-* [本教程的 YouTube 版本（第 1 部分）](https://www.youtube.com/watch?v=PzKimUDmrvE)
-* [本教程的 YouTube 版本（第 2 部分）](https://www.youtube.com/watch?v=xvDDrIHv5ko)
+* [Bu öğreticinin YouTube sürümü (part1)](https://www.youtube.com/watch?v=PzKimUDmrvE)
+* [Bu öğreticinin YouTube sürümü (part2)](https://www.youtube.com/watch?v=xvDDrIHv5ko)
 
 >[!div class="step-by-step"]
->[上一页](xref:data/ef-rp/complex-data-model)
->[下一页](xref:data/ef-rp/update-related-data)
+>[Önceki](xref:data/ef-rp/complex-data-model) 
+> [Sonraki](xref:data/ef-rp/update-related-data)
 
 ::: moniker-end

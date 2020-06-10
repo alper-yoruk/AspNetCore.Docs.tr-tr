@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core MVC uygulamasına görünüm ekleme
+title: Bölüm 3, ASP.NET Core MVC uygulamasına bir görünüm ekleme
 author: rick-anderson
-description: Basit bir ASP.NET Core MVC uygulamasına görünüm ekleme
+description: ASP.NET Core MVC 'de öğretici serisinin 3. bölümü.
 ms.author: riande
 ms.date: 8/04/2019
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: 233d6cc060481c7b2efc9a1babc12f60f457a075
-ms.sourcegitcommit: 05490855e0c70565f0c4b509d392b0828bcfd141
+ms.openlocfilehash: 3976ecba1a6bbf30c3147bf1cef78c5ced5bec62
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/08/2020
-ms.locfileid: "84507341"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84652831"
 ---
-# <a name="add-a-view-to-an-aspnet-core-mvc-app"></a>ASP.NET Core MVC uygulamasına görünüm ekleme
+# <a name="part-3-add-a-view-to-an-aspnet-core-mvc-app"></a>Bölüm 3, ASP.NET Core MVC uygulamasına bir görünüm ekleme
 
 Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 

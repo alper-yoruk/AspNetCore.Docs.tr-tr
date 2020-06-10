@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core uygulamasının Ayrıntılar ve silme yöntemlerini inceleyin
+title: 10. kısım, ASP.NET Core uygulamasının ayrıntılarını ve silme yöntemlerini inceleyin
 author: rick-anderson
-description: Ayrıntılar denetleyicisi yöntemi ve temel ASP.NET Core MVC uygulamasında görünüm hakkında bilgi edinin.
+description: ASP.NET Core MVC 'de öğretici serisinin Bölüm 10 ' dur.
 ms.author: riande
 ms.date: 12/13/2018
 no-loc:
@@ -11,14 +11,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/details
-ms.openlocfilehash: cff8bc0d3506210879974f711a4e665c8549051d
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 722112b6fba611e980931ffd3bc4ddf43bc08468
+ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777560"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84653010"
 ---
-# <a name="examine-the-details-and-delete-methods-of-an-aspnet-core-app"></a>ASP.NET Core uygulamasının Ayrıntılar ve silme yöntemlerini inceleyin
+# <a name="part-10-examine-the-details-and-delete-methods-of-an-aspnet-core-app"></a>10. kısım, ASP.NET Core uygulamasının ayrıntılarını ve silme yöntemlerini inceleyin
 
 Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
