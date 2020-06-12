@@ -5,7 +5,7 @@ description: Blazor Razor Bileşenleri Razor Sayfalar ve MVC uygulamalarıyla t�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/28/2020
+ms.date: 06/10/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-model-configuration
-ms.openlocfilehash: e3b8b91a570210e77f307c49f7be21eeab714daa
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 3cef67806ce0e2e045122bdc962e93795be68572
+ms.sourcegitcommit: 6371114344a5f4fbc5d4a119b0be1ad3762e0216
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84355116"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84679585"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>ASP.NET Core Blazor barındırma modeli yapılandırması
 
@@ -36,7 +36,7 @@ Barındırılan Blazor webassembly uygulaması, üst bilgiyi ekleyerek ortamı t
 
 Yerel olarak çalışan tek başına bir uygulama için geliştirme sunucusu, `blazor-environment` geliştirme ortamını belirtmek için üst bilgi ekler. Diğer barındırma ortamlarının ortamını belirtmek için `blazor-environment` üst bilgiyi ekleyin.
 
-IIS için aşağıdaki örnekte, yayınlanan *Web. config* dosyasına özel üstbilgiyi ekleyin. *Web. config* dosyası *bin/Release/{Target Framework}/Publish* klasöründe bulunur:
+IIS için aşağıdaki örnekte, yayımlanan *web.config* dosyasına özel üst bilgiyi ekleyin. *web.config* dosyası *bin/Release/{Target Framework}/Publish* klasöründe bulunur:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -55,7 +55,7 @@ IIS için aşağıdaki örnekte, yayınlanan *Web. config* dosyasına özel üst
 ```
 
 > [!NOTE]
-> Uygulama *Yayımlama* klasörüne yayımlandığında üzerine YAZıLMAYAN IIS için özel *Web. config* dosyasını kullanmak için, bkz <xref:host-and-deploy/blazor/webassembly#use-a-custom-webconfig> ..
+> Uygulama *Yayımlama* klasörüne yayımlandığında üzerine YAZıLMAYAN IIS için özel bir *web.config* dosyası kullanmak için, bkz <xref:host-and-deploy/blazor/webassembly#use-a-custom-webconfig> ..
 
 Ekleme tarafından bir bileşende uygulamanın ortamını edinin <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment> ve <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.Environment> özelliği okuyun:
 
@@ -104,9 +104,9 @@ if (builder.HostEnvironment.IsEnvironment("Custom"))
 BlazorWebAssembly yapılandırmayı şuradan yükler:
 
 * Uygulama ayarları dosyaları varsayılan olarak:
-  * *Wwwroot/appSettings. JSON*
+  * *Wwwroot/appsettings.jsaçık*
   * *Wwwroot/appSettings. {ENVIRONMENT}. JSON*
-* Uygulama tarafından kaydedilen diğer [yapılandırma sağlayıcıları](xref:fundamentals/configuration/index) . Tüm sağlayıcılar Blazor webassembly uygulamalarına uygun değildir. Wezsembly için desteklenen sağlayıcıların açıklanması Blazor , [ Blazor ısstream (DotNet/Aspnetcore. docs #18134) Için yapılandırma sağlayıcıları açıklığa kavuşturarak](https://github.com/dotnet/AspNetCore.Docs/issues/18134)izlenir.
+* Uygulama tarafından kaydedilen diğer [yapılandırma sağlayıcıları](xref:fundamentals/configuration/index) . Tüm sağlayıcılar Blazor webassembly uygulamalarına uygun değildir. Wezsembly için desteklenen sağlayıcıların açıklanması Blazor , [ISG için yapılandırma sağlayıcıları Blazor (DotNet/AspNetCore.Docs #18134) açıklığa kavuşturarak](https://github.com/dotnet/AspNetCore.Docs/issues/18134)izlenir.
 
 > [!WARNING]
 > BlazorWebassembly uygulamasındaki yapılandırma kullanıcılar tarafından görülebilir. **Yapılandırma bölümünde uygulama gizli dizilerini veya kimlik bilgilerini depolamamayın.**
@@ -115,7 +115,7 @@ Yapılandırma sağlayıcıları hakkında daha fazla bilgi için bkz <xref:fund
 
 #### <a name="app-settings-configuration"></a>Uygulama ayarları yapılandırması
 
-*Wwwroot/appSettings. JSON*:
+*Wwwroot/appsettings.js*:
 
 ```json
 {
@@ -190,7 +190,7 @@ builder.Configuration.Add(memoryConfig);
 
 *Wwwroot* klasöründeki diğer yapılandırma dosyalarını yapılandırmaya okumak için <xref:System.Net.Http.HttpClient> dosyanın içeriğini almak üzere bir kullanın. Bu yaklaşım kullanıldığında, mevcut <xref:System.Net.Http.HttpClient> hizmet kaydı, aşağıdaki örnekte gösterildiği gibi, dosyayı okumak için oluşturulan yerel istemciyi kullanabilir:
 
-*Wwwroot/otomobil. JSON*:
+*Wwwroot/cars.js*:
 
 ```json
 {
@@ -220,7 +220,7 @@ builder.Configuration.AddJsonStream(stream);
 
 #### <a name="authentication-configuration"></a>Kimlik doğrulama yapılandırması
 
-*Wwwroot/appSettings. JSON*:
+*Wwwroot/appsettings.js*:
 
 ```json
 {
@@ -240,13 +240,13 @@ builder.Services.AddOidcAuthentication(options =>
 
 #### <a name="logging-configuration"></a>Günlüğe kaydetme yapılandırması
 
-[Microsoft. Extensions. Logging. Configuration](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration/)için bir paket başvurusu ekleyin:
+[Microsoft.Extensions.Logging.Configurlama](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration/)için bir paket başvurusu ekleyin:
 
 ```xml
 <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="{VERSION}" />
 ```
 
-*Wwwroot/appSettings. JSON*:
+*Wwwroot/appsettings.js*:
 
 ```json
 {
@@ -284,13 +284,44 @@ var hostname = builder.Configuration["HostName"];
 Yapılandırma dosyaları çevrimdışı kullanım için önbelleğe alınır. [Aşamalı Web uygulamaları (PWAs)](xref:blazor/progressive-web-app)ile, yalnızca yeni bir dağıtım oluştururken yapılandırma dosyalarını güncelleştirebilirsiniz. Yapılandırma dosyalarının dağıtımlar arasında düzenlenmesinin hiçbir etkisi yoktur çünkü:
 
 * Kullanıcıların, kullanmaya devam ettikleri dosyaların önbelleğe alınmış sürümleri vardır.
-* PWA 'nın *Service-Worker. js* ve *Service-Worker-assets. js* dosyalarının derlemede yeniden oluşturulması gerekir. Bu, kullanıcının bir sonraki çevrimiçi sitesinde uygulamaya işaret eden uygulamanın yeniden dağıtıldığını belirten, derleme üzerinde yeniden oluşturulmalıdır.
+* PWA 'nın *service-worker.js* ve *service-worker-assets.js* dosyalarının derlemede yeniden oluşturulması gerekir. Bu, kullanıcının bir sonraki çevrimiçi üzerinde uygulamaya işaret eden, uygulamanın yeniden dağıtıldığını belirten bir daha ziyaret etmelidir.
 
 Arka plan güncelleştirmelerinin PWAs tarafından nasıl işlendiği hakkında daha fazla bilgi için bkz <xref:blazor/progressive-web-app#background-updates> ..
 
 ### <a name="logging"></a>Günlüğe Kaydetme
 
 BlazorWebassembly günlüğü desteği hakkında bilgi için bkz <xref:fundamentals/logging/index#create-logs-in-blazor> ..
+
+### <a name="signalr-cross-origin-negotiation-for-authentication"></a>SignalRkimlik doğrulaması için çıkış noktaları arası anlaşma
+
+SignalRTemel alınan istemciyi tanımlama bilgileri veya http kimlik doğrulama üstbilgileri gibi kimlik bilgilerini gönderecek şekilde yapılandırmak için:
+
+* <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.BrowserRequestCredentials.Include> Çıkış noktaları arası [getirme](https://developer.mozilla.org/docs/Web/API/Fetch_API/Using_Fetch) isteklerini ayarlamak için kullanın:
+
+  ```csharp
+  public class IncludeRequestCredentialsMessagHandler : DelegatingHandler
+  {
+      protected override Task<HttpResponseMessage> SendAsync(
+          HttpRequestMessage request, CancellationToken cancellationToken)
+      {
+          request.SetBrowserRequestCredentials(BrowserRequestCredentials.Include);
+          return base.SendAsync(request, cancellationToken);
+      }
+  }
+  ```
+
+* <xref:System.Net.Http.HttpMessageHandler> <xref:Microsoft.AspNetCore.Http.Connections.Client.HttpConnectionOptions.HttpMessageHandlerFactory> Seçeneğini seçeneğe atayın:
+
+  ```csharp
+  var client = new HubConnectionBuilder()
+      .WithUrl(new Uri("http://signalr.example.com"), options =>
+      {
+          options.HttpMessageHandlerFactory = innerHandler => 
+              new IncludeRequestCredentialsMessagHandler { InnerHandler = innerHandler };
+      }).Build();
+  ```
+
+Daha fazla bilgi için bkz. <xref:signalr/configuration#configure-additional-options>.
 
 ## <a name="blazor-server"></a>BlazorServer
 
@@ -334,7 +365,7 @@ BlazorSunucu uygulamaları, sunucu bağlantısı kurumadan önce sunucudaki kull
 * , Sayfaya ön gönderilir.
 * , Sayfada statik HTML olarak veya Kullanıcı aracısından bir uygulamayı önyüklemek için gerekli bilgileri içeriyorsa Blazor .
 
-| <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> | Açıklama |
+| <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> | Description |
 | --- | --- |
 | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Bileşeni statik HTML olarak işler ve sunucu uygulaması için bir işaret içerir Blazor . Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . |
 | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Sunucu uygulaması için bir işaret oluşturur Blazor . Bileşen çıkışı dahil değildir. Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . |

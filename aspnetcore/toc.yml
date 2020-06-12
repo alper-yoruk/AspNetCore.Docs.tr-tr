@@ -560,6 +560,9 @@
         - name: API tasarımı etkenleri
           uid: signalr/api-design
           displayName: signalr
+        - name: Merkez filtreleri
+          uid: signalr/hub-filters
+          displayName: signalr
     - name: İstemciler
       displayName: signalr
       items:

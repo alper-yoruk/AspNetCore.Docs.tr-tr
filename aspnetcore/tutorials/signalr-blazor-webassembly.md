@@ -5,7 +5,7 @@ description: Webassembly ile ASP.NET Core kullanan bir sohbet uygulaması oluşt
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 06/10/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: d3ce11606b4193d5c2938b5996d8dcd1cb99a731
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 720f534426cc0e2b32778e49050c7f7d75ecd60d
+ms.sourcegitcommit: 6371114344a5f4fbc5d4a119b0be1ad3762e0216
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84451894"
+ms.lasthandoff: 06/10/2020
+ms.locfileid: "84679598"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>SignalR Blazor Webassembly ile ASP.NET Core kullanma
 
@@ -37,7 +37,7 @@ Bu öğreticinin sonunda, çalışan bir sohbet uygulamanız olacaktır.
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/signalr-blazor-webassembly/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -93,7 +93,7 @@ Araç seçiminiz için yönergeleri izleyin:
 
 1. Visual Studio Code, uygulamanın proje klasörünü açın.
 
-1. Uygulamayı derlemek ve hata ayıklamak için varlık Ekle iletişim kutusu göründüğünde **Evet**' i seçin. Visual Studio Code, *. vscode* klasörünü oluşturulan *Launch. JSON* ve *Tasks. JSON* dosyaları ile otomatik olarak ekler.
+1. Uygulamayı derlemek ve hata ayıklamak için varlık Ekle iletişim kutusu göründüğünde **Evet**' i seçin. Visual Studio Code, *launch.js* oluşturulan *. vscode* klasörünü ve dosyaları *üzerindetasks.js* otomatik olarak ekler.
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
@@ -230,7 +230,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-1. VS Code, sunucu uygulaması (*. vscode/Launch. JSON*) için bir başlatma profili oluşturmak üzere teklif edildiğinde, `program` uygulamanın derlemesini () göstermek için aşağıdakine benzer şekilde görünür `{APPLICATION NAME}.Server.dll` :
+1. VS Code, sunucu uygulaması (*. vscode/launch.json*) için bir başlatma profili oluşturmak istediğinizde, `program` uygulamanın derlemesine () işaret etmek için giriş aşağıdakine benzer şekilde görünür `{APPLICATION NAME}.Server.dll` :
 
    ```json
    "program": "${workspaceFolder}/Server/bin/Debug/netcoreapp3.1/{APPLICATION NAME}.Server.dll"
@@ -296,3 +296,4 @@ Uygulama oluşturma hakkında daha fazla bilgi edinmek için Blazor Blazor belge
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * <xref:signalr/introduction>
+* [SignalRkimlik doğrulaması için çıkış noktaları arası anlaşma](xref:blazor/hosting-model-configuration#signalr-cross-origin-negotiation-for-authentication)

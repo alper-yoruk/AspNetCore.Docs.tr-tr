@@ -5,7 +5,7 @@ description: BlazorMasaüstü uygulaması gibi davranması için modern tarayıc
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/09/2020
+ms.date: 06/10/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: ef73cbb928fb442c73acce6f5facac33236abd67
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: c935f326afb77de5e083829c0bc2494efb20fec3
+ms.sourcegitcommit: 6371114344a5f4fbc5d4a119b0be1ad3762e0216
 ms.translationtype: MT
 ms.contentlocale: tr-TR
 ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652407"
+ms.locfileid: "84679624"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>ASP.NET Core weelsembly ile aşamalı Web uygulamaları oluşturun Blazor
 
@@ -75,7 +75,7 @@ Yüklendikten sonra uygulama, adres çubuğu olmadan kendi penceresinde görün�
 
 ![' MyBlazorPwa ' uygulaması, bir adres çubuğu olmadan Google Chrome 'da çalışır.](progressive-web-app/_static/image3.png)
 
-Pencerenin başlığını, renk şemasını, simgesini veya diğer ayrıntıları özelleştirmek için projenin *Wwwroot* dizinindeki *manifest. JSON* dosyasına bakın. Bu dosyanın şeması Web standartları tarafından tanımlanır. Daha fazla bilgi için bkz. [MDN Web belgeleri: Web uygulaması bildirimi](https://developer.mozilla.org/docs/Web/Manifest).
+Pencerenin başlığını, renk şemasını, simgesini veya diğer ayrıntıları özelleştirmek için projenin *Wwwroot* dizinindeki *manifest.js* dosyasına bakın. Bu dosyanın şeması Web standartları tarafından tanımlanır. Daha fazla bilgi için bkz. [MDN Web belgeleri: Web uygulaması bildirimi](https://developer.mozilla.org/docs/Web/Manifest).
 
 ## <a name="offline-support"></a>Çevrimdışı destek
 
@@ -110,8 +110,8 @@ Hizmet çalışanı kullanan çevrimdışı destek, için özel olmayan bir web 
 
 Blazoröğesinin PWA şablonu iki hizmet çalışanı dosyası üretir:
 
-* geliştirme sırasında kullanılan *Wwwroot/Service-Worker. js*.
-* Uygulama yayımlandıktan sonra kullanılan *Wwwroot/Service-Worker. yayınlanan. js*.
+* geliştirme sırasında kullanılan *Wwwroot/service-worker.js*.
+* Uygulama yayımlandıktan sonra kullanılan *Wwwroot/service-worker.published.js*.
 
 İki hizmet çalışanı dosyası arasındaki mantığı paylaşmak için aşağıdaki yaklaşımı göz önünde bulundurun:
 
@@ -120,7 +120,7 @@ Blazoröğesinin PWA şablonu iki hizmet çalışanı dosyası üretir:
 
 ### <a name="cache-first-fetch-strategy"></a>Cache-ilk getirme stratejisi
 
-Yerleşik *Service-Worker. yayımlanmış. js* hizmet çalışanı, istekleri bir *Cache-First* stratejisi kullanarak çözer. Bu, kullanıcının ağ erişimi mi yoksa daha yeni içerik mi olduğunu bağımsız olarak, hizmet çalışanının önbelleğe alınmış içeriği döndürmeyi tercih ettiği anlamına gelir.
+Yerleşik *service-worker.published.js* hizmet çalışanı istekleri *önbelleğe alma* stratejisi kullanarak çözer. Bu, kullanıcının ağ erişimi mi yoksa daha yeni içerik mi olduğunu bağımsız olarak, hizmet çalışanının önbelleğe alınmış içeriği döndürmeyi tercih ettiği anlamına gelir.
 
 Önbellek-ilk strateji, şu nedenle değerlidir:
 
@@ -139,9 +139,9 @@ Bir akıl modeli olarak, yüklenebilen bir mobil uygulama gibi davranan bir çev
 
 BlazorPWA şablonu, Kullanıcı her ziyaret ettiğinde ve çalışan bir ağ bağlantısı olduğunda kendiliğinden otomatik olarak güncelleştirmeyi deneyen uygulamalar üretir. Bu şekilde çalışma şekli şöyledir:
 
-* Derleme sırasında, proje bir *hizmet çalışanı varlık bildirimi*oluşturur. Varsayılan olarak bu, *Service-Worker-assets. js*olarak adlandırılır. Bildirim, uygulamanın, içerik karmaları dahil .NET derlemeleri, JavaScript dosyaları ve CSS gibi çevrimdışı çalışması için gereken tüm statik kaynakları listeler. Kaynak listesi, hangi kaynakların önbellekte olduğunu bilmesi için hizmet çalışanı tarafından yüklenir.
-* Kullanıcı uygulamayı her ziyaret ettiğinde, tarayıcı arka planda *Service-Worker. js* ve *Service-Worker-assets. js* ' yi yeniden ister. Dosyalar, mevcut yüklü hizmet çalışanı ile bayt için bayt olarak karşılaştırılır. Sunucu, bu dosyalardan herhangi biri için değiştirilen içerik döndürürse, hizmet çalışanı kendi yeni bir sürümünü yüklemeye çalışır.
-* Yeni bir sürümü yüklenirken, hizmet çalışanı çevrimdışı kaynaklar için yeni, ayrı bir önbellek oluşturur ve önbelleği *Service-Worker-assets. js*' de listelenen kaynaklarla doldurmaya başlar. Bu mantık, `onInstall` *Service-Worker. yayınlanmış. js*içindeki işlevde uygulanır.
+* Derleme sırasında, proje bir *hizmet çalışanı varlık bildirimi*oluşturur. Varsayılan olarak, bu *service-worker-assets.js*olarak adlandırılır. Bildirim, uygulamanın, içerik karmaları dahil .NET derlemeleri, JavaScript dosyaları ve CSS gibi çevrimdışı çalışması için gereken tüm statik kaynakları listeler. Kaynak listesi, hangi kaynakların önbellekte olduğunu bilmesi için hizmet çalışanı tarafından yüklenir.
+* Kullanıcı uygulamayı her ziyaret ettiğinde, tarayıcı *service-worker.js* ve *service-worker-assets.js* arka planda yeniden ister. Dosyalar, mevcut yüklü hizmet çalışanı ile bayt için bayt olarak karşılaştırılır. Sunucu, bu dosyalardan herhangi biri için değiştirilen içerik döndürürse, hizmet çalışanı kendi yeni bir sürümünü yüklemeye çalışır.
+* Yeni bir sürümü yüklenirken, hizmet çalışanı çevrimdışı kaynaklar için yeni, ayrı bir önbellek oluşturur ve *service-worker-assets.js*' de listelenen kaynaklarla önbelleğin doldurulmasına başlar. Bu mantık `onInstall` *service-worker.published.js*içindeki işlevde uygulanır.
 * Tüm kaynaklar hatasız olarak yüklendiğinde ve tüm içerik karmalarının eşleşmesi durumunda işlem başarıyla tamamlanır. Başarılı olursa, yeni hizmet çalışanı *etkinleştirme durumunu bekliyor* olarak girer. Kullanıcı uygulamayı kapatır (uygulama sekmeleri veya pencereler olmadan), yeni hizmet çalışanı *etkin* hale gelir ve sonraki uygulama ziyaretleri için kullanılır. Eski hizmet çalışanı ve önbelleği silinir.
 * İşlem başarıyla tamamlanmazsa, yeni hizmet çalışanı örneği atılır. İstemci, istekleri tamamlayabildikleri daha iyi bir ağ bağlantısına sahip olduğunda, bu güncelleştirme işlemi kullanıcının sonraki ziyaretinin üzerinde yeniden denenir.
 
@@ -149,7 +149,7 @@ Bu işlemi, hizmet çalışan mantığını düzenleyerek özelleştirin. Öncek
 
 ### <a name="how-requests-are-resolved"></a>İsteklerin çözümlenmesi
 
-[Önbellek-ilk getirme stratejisi](#cache-first-fetch-strategy) bölümünde açıklandığı gibi, varsayılan hizmet çalışanı bir *ön uç* stratejisi kullanır, yani kullanılabilir olduğunda önbelleğe alınmış içeriklere hizmet vermeye çalışır. Belirli bir URL için önbelleğe alınmış içerik yoksa (örneğin, arka uç API 'sinden veri istenirken), hizmet çalışanı normal bir ağ isteğine geri döner. Sunucu ulaşılabilir olduğunda ağ isteği başarılı olur. Bu mantık, `onFetch` *Service-Worker. yayınlanmış. js*içinde işlevin içinde uygulanır.
+[Önbellek-ilk getirme stratejisi](#cache-first-fetch-strategy) bölümünde açıklandığı gibi, varsayılan hizmet çalışanı bir *ön uç* stratejisi kullanır, yani kullanılabilir olduğunda önbelleğe alınmış içeriklere hizmet vermeye çalışır. Belirli bir URL için önbelleğe alınmış içerik yoksa (örneğin, arka uç API 'sinden veri istenirken), hizmet çalışanı normal bir ağ isteğine geri döner. Sunucu ulaşılabilir olduğunda ağ isteği başarılı olur. Bu mantık `onFetch` *service-worker.published.js*içinde işlevin içinde uygulanır.
 
 Uygulamanın Razor bileşenleri, arka uç API 'lerinden veri istemeyi ve ağ kullanım dışı nedenlerle başarısız istekler için kolay bir kullanıcı deneyimi sağlamak istiyorsanız, uygulamanın bileşenleri içinde Logic uygulayın. Örneğin, `try/catch` istekleri etrafında kullanın <xref:System.Net.Http.HttpClient> .
 
@@ -160,9 +160,9 @@ Kullanıcı, veya gibi bir URL 'ye ilk kez gittiğinde ne olacağını göz ön�
 * görüntüler, stil sayfaları veya diğer dosyalar için *alt kaynak* istekleri.
 * API verileri için *Fetch/XHR* istekleri.
 
-Varsayılan hizmet çalışanı, gezinti istekleri için özel durum mantığı içerir. Hizmet çalışanı, istenen URL 'den bağımsız olarak, için önbelleğe alınmış içeriği döndürerek istekleri çözer `/index.html` . Bu mantık, `onFetch` *Service-Worker. yayınlanmış. js*içindeki işlevde uygulanır.
+Varsayılan hizmet çalışanı, gezinti istekleri için özel durum mantığı içerir. Hizmet çalışanı, istenen URL 'den bağımsız olarak, için önbelleğe alınmış içeriği döndürerek istekleri çözer `/index.html` . Bu mantık `onFetch` *service-worker.published.js*içindeki işlevde uygulanır.
 
-Uygulamanızda sunucu tarafından işlenmiş HTML döndürmesi gereken belirli URL 'Ler varsa ve önbellekten hizmet vermezse `/index.html` , hizmet çalışanınızdaki mantığı düzenlemeniz gerekir. İçeren tüm URL 'Lerin `/Identity/` sunucuya düzenli olarak yalnızca çevrimiçi istekleri olarak işlenmesi gerekiyorsa, *Service-Worker. yayınlanmış. js* `onFetch` mantığını değiştirin. Aşağıdaki kodu bulun:
+Uygulamanızda sunucu tarafından işlenmiş HTML döndürmesi gereken belirli URL 'Ler varsa ve önbellekten hizmet vermezse `/index.html` , hizmet çalışanınızdaki mantığı düzenlemeniz gerekir. İçeren tüm URL 'Lerin `/Identity/` sunucuya düzenli olarak yalnızca çevrimiçi istekleri olarak işlenmesi gerekiyorsa *service-worker.published.js* `onFetch` mantığını değiştirin. Aşağıdaki kodu bulun:
 
 ```javascript
 const shouldServeIndexHtml = event.request.mode === 'navigate';
@@ -185,14 +185,14 @@ Projeniz MSBuild özelliğini tanımlarsa `ServiceWorkerAssetsManifest` , Blazor
 <ServiceWorkerAssetsManifest>service-worker-assets.js</ServiceWorkerAssetsManifest>
 ```
 
-Dosya *Wwwroot* çıkış dizinine yerleştirilir, bu nedenle tarayıcı bu dosyayı isteyerek alabilir `/service-worker-assets.js` . Bu dosyanın içeriğini görmek için bir metin düzenleyicisinde */BIN/Debug/{Target Framework}/Wwwroot/Service-Worker-assets.js* dosyasını açın. Ancak, her bir derlemede yeniden oluşturulduğundan dosyayı düzenlemeyin.
+Dosya *Wwwroot* çıkış dizinine yerleştirilir, bu nedenle tarayıcı bu dosyayı isteyerek alabilir `/service-worker-assets.js` . Bu dosyanın içeriğini görmek için, bir metin düzenleyicisinde */BIN/Debug/{Target Framework}/Wwwroot/service-worker-assets.js* açın. Ancak, her bir derlemede yeniden oluşturulduğundan dosyayı düzenlemeyin.
 
 Varsayılan olarak, bu bildirim şunları listeler:
 
 * Blazor.NET derlemeleri ve .net WebAssembly çalışma zamanı dosyaları gibi, çevrimdışı çalışmak için gerekli olan herhangi bir yönetilen kaynak.
 * Dış projeler ve NuGet paketleri tarafından sağlanan statik Web varlıkları dahil olmak üzere, uygulamanın *Wwwroot* dizinine yayımlama için tüm kaynaklar (örneğin, resimler, stil sayfaları ve JavaScript dosyaları).
 
-`onInstall` *Service-Worker. yayımlandı. js*' de içindeki mantığı düzenleyerek, bu kaynakların hangilerinin hizmet çalışanı tarafından alınıp önbelleğe alınacağını denetleyebilirsiniz. Varsayılan olarak, hizmet çalışanı *. html*, *. css*, *. js*ve *.* TDA gibi tipik Web dosya adı uzantılarına Blazor (.*DLL*, *. pdb*) özgü dosya türleri ile eşleşen dosyaları getirir ve önbelleğe alır.
+service-worker.published.jsiçindeki mantığı düzenleyerek, bu kaynakların hangisinin hizmet çalışanı tarafından alınıp önbelleğe alınacağını denetleyebilirsiniz `onInstall` . * * Varsayılan olarak, hizmet çalışanı *. html*, *. css*, *. js*ve *.* TDA gibi tipik Web dosya adı uzantılarına Blazor (.*DLL*, *. pdb*) özgü dosya türleri ile eşleşen dosyaları getirir ve önbelleğe alır.
 
 Uygulamanın *Wwwroot* dizininde bulunmayan ek kaynakları dahil etmek için, `ItemGroup` Aşağıdaki örnekte gösterildiği gibi ek MSBuild girişleri tanımlayın:
 
@@ -264,11 +264,11 @@ Mümkünse, arka uç API 'lerinize son değişiklikleri dağıtmayın. Bunu yapm
 
 ### <a name="all-service-worker-asset-manifest-contents-are-cached-by-default"></a>Tüm hizmet çalışanı varlık bildirimi içerikleri varsayılan olarak önbelleğe alınır
 
-[Denetim varlığı önbelleğe alma](#control-asset-caching) bölümünde açıklandığı gibi, *Service-Worker-assets. js* dosyası derleme sırasında oluşturulur ve hizmet çalışanının getirmesi ve önbelleğe alınması gereken tüm varlıkları listeler.
+[Denetim varlığı önbelleğe alma](#control-asset-caching) bölümünde açıklandığı gibi, derleme sırasında dosya *service-worker-assets.js* oluşturulur ve hizmet çalışanının getirmesi ve önbelleğe alınması gereken tüm varlıkları listeler.
 
 Bu liste, dış paketler ve projeler tarafından sağlanan içerik dahil olmak üzere *Wwwroot*'a yayılan her şeyi içerdiğinden, orada çok fazla içerik yerleştirmemeye dikkat etmeniz gerekir. *Wwwroot* dizini milyonlarca görüntü içeriyorsa, hizmet çalışanı, yoğun bant genişliğine sahip ve büyük olasılıkla başarıyla tamamlanmayan bir şekilde bunları alıp önbelleğe almaya çalışır.
 
-`onInstall` *Service-Worker. yayınlanmış. js*' de işlev düzenlenerek bildirim içeriğinin hangi alt kümesinin alınacağını ve önbelleğe alınacağını denetlemek için rastgele mantık uygulayın.
+`onInstall` *service-worker.published.js*içindeki işlevi düzenleyerek bildirim içeriğinin hangi alt kümesinin alınacağını ve önbelleğe alınacağını denetlemek için rastgele mantık uygulayın.
 
 ### <a name="interaction-with-authentication"></a>Kimlik doğrulamasıyla etkileşim
 
@@ -292,3 +292,7 @@ Kimlik doğrulamasıyla etkileşime sahip bir çevrimdışı PWA uygulaması olu
 * `OfflineAccountClaimsPrincipalFactory`(*İstemci/veri/OfflineAccountClaimsPrincipalFactory. cs*)
 * `LocalVehiclesStore`(*İstemci/veri/LocalVehiclesStore. cs*)
 * `LoginStatus`bileşen (*istemci/paylaşılan/LoginStatus. Razor*)
+
+## <a name="additional-resources"></a>Ek kaynaklar
+
+* [SignalRkimlik doğrulaması için çıkış noktaları arası anlaşma](xref:blazor/hosting-model-configuration#signalr-cross-origin-negotiation-for-authentication)
