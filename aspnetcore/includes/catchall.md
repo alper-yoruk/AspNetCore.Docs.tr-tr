@@ -7,12 +7,13 @@
 >
 > Bu hataya vurmakta olan örnekler için GitHub hataları [18677](https://github.com/dotnet/aspnetcore/issues/18677) ve [16579](https://github.com/dotnet/aspnetcore/issues/16579) bakın.
 >
-> Bu hata için bir katılım çözümü planlanmaktadır. Bu belge, düzeltme eki serbest bırakıldığında güncelleştirilir. Düzeltme Eki bırakıldığında, aşağıdaki kod bu hatayı düzelten bir iç anahtar ayarlar:
+> Bu hata için bir katılım çözümü [.NET Core 3.1.301 SDK ve sonraki sürümlerde](https://dotnet.microsoft.com/download/dotnet-core/3.1)bulunur. Aşağıdaki kod, bu hatayı düzelten bir iç anahtar ayarlar:
 >
 >```
 >public static void Main(string[] args)
 >{
->    AppContext.SetSwitch("Microsoft.AspNetCore.Routing.UseCorrectCatchAllBehavior", true);
+>    AppContext.SetSwitch("Microsoft.AspNetCore.Routing.UseCorrectCatchAllBehavior", 
+>                          true);
 >    CreateHostBuilder(args).Build().Run();
 >}
 >// Remaining code removed for brevity.

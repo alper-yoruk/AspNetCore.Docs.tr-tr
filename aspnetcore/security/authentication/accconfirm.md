@@ -11,12 +11,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: d5e0e3865702fe4e5cbe49e7f452f367a8a53de9
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 8d4488b3953a8c87033d3a092b656409a0c6a52d
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84451751"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724373"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>ASP.NET Core hesap onaylama ve parola kurtarma
 
@@ -63,7 +63,7 @@ Uygulamayı çalıştırın, **Kaydet** bağlantısını seçin ve bir Kullanıc
 
 Bu öğreticide, [SendGrid](https://sendgrid.com) e-posta göndermek için kullanılır. E-posta göndermek için bir SendGrid hesabına ve anahtarına ihtiyacınız vardır. Diğer e-posta sağlayıcılarını kullanabilirsiniz. E-posta göndermek için SendGrid veya başka bir e-posta hizmeti kullanmanızı öneririz. Güvenli hale getirmek ve düzgün şekilde ayarlamak zordur.
 
-SendGrid hesabı için [bir gönderici ekleme](https://sendgrid.com/docs/ui/sending-email/senders/)gerekiyor.
+SendGrid hesabı, [gönderici ekleme](https://sendgrid.com/docs/ui/sending-email/senders/)gerektirebilir.
 
 Güvenli e-posta anahtarını getirmek için bir sınıf oluşturun. Bu örnek için *Hizmetler/Authiletienderoptions. cs*oluşturun:
 
@@ -71,7 +71,7 @@ Güvenli e-posta anahtarını getirmek için bir sınıf oluşturun. Bu örnek i
 
 #### <a name="configure-sendgrid-user-secrets"></a>SendGrid Kullanıcı gizli dizilerini yapılandırma
 
-Ve öğesini `SendGridUser` `SendGridKey` [gizli-Manager aracı](xref:security/app-secrets)ile ayarlayın. Örneğin:
+Ve öğesini `SendGridUser` `SendGridKey` [gizli-Manager aracı](xref:security/app-secrets)ile ayarlayın. Örnek:
 
 ```dotnetcli
 dotnet user-secrets set SendGridUser RickAndMSFT
@@ -80,9 +80,9 @@ dotnet user-secrets set SendGridKey <key>
 Successfully saved SendGridUser = RickAndMSFT to the secret store.
 ```
 
-Windows 'da, gizli dizi Anahtarlar/değer çiftlerini dizindeki bir *gizlilikler. JSON* dosyasında depolar `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` .
+Windows 'da gizli dizi, anahtar/değer çiftlerini dizindeki bir *secrets.js* bir dosyada depolar `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` .
 
-*Gizli dizileri. JSON* dosyasının içeriği şifrelenmez. Aşağıdaki biçimlendirme, *gizlilikler. JSON* dosyasını gösterir. `SendGridKey`Değer kaldırılmıştır.
+Dosyadaki *secrets.js* içeriği şifrelenmedi. Aşağıdaki biçimlendirme dosyadaki *secrets.js* gösterir. `SendGridKey`Değer kaldırılmıştır.
 
 ```json
 {
@@ -279,16 +279,16 @@ Güvenli e-posta anahtarını getirmek için bir sınıf oluşturun. Bu örnek i
 
 #### <a name="configure-sendgrid-user-secrets"></a>SendGrid Kullanıcı gizli dizilerini yapılandırma
 
-Ve öğesini `SendGridUser` `SendGridKey` [gizli-Manager aracı](xref:security/app-secrets)ile ayarlayın. Örneğin:
+Ve öğesini `SendGridUser` `SendGridKey` [gizli-Manager aracı](xref:security/app-secrets)ile ayarlayın. Örnek:
 
 ```console
 C:/WebAppl>dotnet user-secrets set SendGridUser RickAndMSFT
 info: Successfully saved SendGridUser = RickAndMSFT to the secret store.
 ```
 
-Windows 'da, gizli dizi Anahtarlar/değer çiftlerini dizindeki bir *gizlilikler. JSON* dosyasında depolar `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` .
+Windows 'da gizli dizi, anahtar/değer çiftlerini dizindeki bir *secrets.js* bir dosyada depolar `%APPDATA%/Microsoft/UserSecrets/<WebAppName-userSecretsId>` .
 
-*Gizli dizileri. JSON* dosyasının içeriği şifrelenmez. Aşağıdaki biçimlendirme, *gizlilikler. JSON* dosyasını gösterir. `SendGridKey`Değer kaldırılmıştır.
+Dosyadaki *secrets.js* içeriği şifrelenmedi. Aşağıdaki biçimlendirme dosyadaki *secrets.js* gösterir. `SendGridKey`Değer kaldırılmıştır.
 
 ```json
 {

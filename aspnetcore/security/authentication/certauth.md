@@ -1,7 +1,7 @@
 ---
 title: ASP.NET Core sertifika kimlik doğrulamasını yapılandırma
 author: blowdart
-description: IIS ve HTTP. sys için ASP.NET Core sertifika kimlik doğrulamasını nasıl yapılandıracağınızı öğrenin.
+description: IIS ve HTTP.sys için ASP.NET Core sertifika kimlik doğrulamasını nasıl yapılandıracağınızı öğrenin.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
 ms.date: 01/02/2020
@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 4511e253ea9487c5739162b9b0180e39eb3a1b9c
-ms.sourcegitcommit: 67eadd7bf28eae0b8786d85e90a7df811ffe5904
+ms.openlocfilehash: cf80f7009334f49d877d2bd296b512e23f7fded8
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84454616"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724256"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core sertifika kimlik doğrulamasını yapılandırma
 
@@ -42,7 +42,7 @@ Web uygulamanızda pakete bir başvuru ekleyin `Microsoft.AspNetCore.Authenticat
 
 Kimlik doğrulaması başarısız olursa, bu işleyici `403 (Forbidden)` `401 (Unauthorized)` , bekleolabileceğiniz gibi bir yanıt döndürür. Bu durum, kimlik doğrulamanın ilk TLS bağlantısı sırasında gerçekleşme nedendir. İşleyiciye ulaştığında, çok geç olur. Anonim bir bağlantıyla bir sertifikayla bir bağlantıyı yükseltmenin bir yolu yoktur.
 
-Yöntemine de ekleyin `app.UseAuthentication();` `Startup.Configure` . Aksi takdirde, `HttpContext.User` sertifika, sertifikadan oluşturulacak şekilde ayarlanmayacak `ClaimsPrincipal` . Örneğin:
+Yöntemine de ekleyin `app.UseAuthentication();` `Startup.Configure` . Aksi takdirde, `HttpContext.User` sertifika, sertifikadan oluşturulacak şekilde ayarlanmayacak `ClaimsPrincipal` . Örnek:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -557,3 +557,36 @@ namespace AspNetCoreCertificateAuthApi
     }
 }
 ```
+
+<a name="occ"></a>
+
+## <a name="optional-client-certificates"></a>İsteğe bağlı istemci sertifikaları
+
+Bu bölüm, bir sertifika ile uygulamanın bir alt kümesini koruması gereken uygulamalar için bilgiler sağlar. Örneğin, uygulamadaki bir Razor sayfa veya denetleyici istemci sertifikaları gerektirebilir. Bu, zorlukları istemci sertifikaları olarak gösterir:
+  
+* , HTTP özelliği değil, bir TLS özelliğidir.
+* , Bağlantı başına anlaşma yapılır ve herhangi bir HTTP verisi kullanılabilir olmadan önce bağlantının başlangıcında anlaşılıp verilmelidir. Bağlantının başlangıcında yalnızca Sunucu Adı Belirtme (SNı) &dagger; bilinirdi. İstemci ve sunucu sertifikaları, bir bağlantı üzerindeki ilk istekten önce görüşülür ve istekler genellikle yeniden anlaşma yapamaz. HTTP/2 ' de yeniden anlaşmaya izin verilmez.
+
+ASP.NET Core 5 Preview 4 ve üzeri, isteğe bağlı istemci sertifikaları için daha kolay destek ekler. Daha fazla bilgi için bkz. [Isteğe bağlı sertifikalar örneği](https://github.com/dotnet/aspnetcore/tree/9ce4a970a21bace3fb262da9591ed52359309592/src/Security/Authentication/Certificate/samples/Certificate.Optional.Sample).
+
+Aşağıdaki yaklaşım isteğe bağlı istemci sertifikalarını destekler:
+
+* Etki alanı ve alt etki alanı için bağlamayı ayarlama:
+  * Örneğin, ve üzerinde bağlamaları ayarlayın `contoso.com` `myClient.contoso.com` . `contoso.com`Konakta istemci sertifikası gerekmez `myClient.contoso.com` , ancak bunu yapar.
+  * Daha fazla bilgi için bkz.
+    * [Kestrel](/fundamentals/servers/kestrel):
+      * [ListenOptions. UseHttps](xref:fundamentals/servers/kestrel#listenoptionsusehttps)
+      * <xref:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.ClientCertificateMode>
+      * Not Kestrel Şu anda tek bir bağlamada birden fazla TLS yapılandırmasını desteklemez, benzersiz IP 'Ler veya bağlantı noktalarıyla iki bağlama gerekecektir. Bkz. https://github.com/dotnet/runtime/issues/31097
+    * IIS
+      * [IIS barındırma](xref:host-and-deploy/iis/index#create-the-iis-site)
+      * [IIS 'de güvenliği yapılandırma](/iis/manage/configuring-security/how-to-set-up-ssl-on-iis#configure-ssl-settings-2)
+    * Http.Sys: [Windows Server 'ı yapılandırma](xref:fundamentals/servers/httpsys#configure-windows-server)
+* İstemci sertifikası gerektiren ve bir tane olmayan Web uygulamasına yönelik istekler için:
+  * İstemci sertifikası korumalı alt etki alanını kullanarak aynı sayfaya yönlendirin.
+  * Örneğin, öğesine yönlendirin `myClient.contoso.com/requestedPage` . İsteği `myClient.contoso.com/requestedPage` öğesinden farklı bir ana bilgisayar adı olduğundan `contoso.com/requestedPage` , istemci farklı bir bağlantı oluşturur ve istemci sertifikası sağlanır.
+  * Daha fazla bilgi için bkz. <xref:security/authorization/introduction>.
+
+[Bu GitHub tartışma](https://github.com/dotnet/AspNetCore.Docs/issues/18720) sorununa yönelik isteğe bağlı istemci sertifikalarıyla ilgili soruları, açıklamaları ve diğer geri bildirimleri bırakın.
+
+&dagger;Sunucu Adı Belirtme (SNı), SSL anlaşmasının bir parçası olarak sanal etki alanı dahil etmek için bir TLS uzantısıdır. Bu, sanal etki alanı adının veya ana bilgisayar adının ağ uç noktasını tanımlamak için kullanılabileceği anlamına gelir.

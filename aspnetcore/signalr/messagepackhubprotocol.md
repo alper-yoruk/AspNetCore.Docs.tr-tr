@@ -1,7 +1,7 @@
 ---
-title: ASP.NET Core için ' de SignalR MessagePack hub protokolünü kullanın
+title: ASP.NET Core için ' de MessagePack hub protokolünü kullanın SignalR
 author: bradygaster
-description: ASP.NET Core SignalRIçin MessagePack hub protokolünü ekleyin.
+description: ASP.NET Core için MessagePack hub protokolünü ekleyin SignalR .
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
@@ -13,14 +13,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/messagepackhubprotocol
-ms.openlocfilehash: 8db7598d978848f13bf5b21a873340b38154e9a8
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 79a8c98d276738f687ef484795818897f18ceded
+ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777208"
+ms.lasthandoff: 06/13/2020
+ms.locfileid: "84755813"
 ---
-# <a name="use-messagepack-hub-protocol-in-signalr-for-aspnet-core"></a>ASP.NET Core için ' de SignalR MessagePack hub protokolünü kullanın
+# <a name="use-messagepack-hub-protocol-in-signalr-for-aspnet-core"></a>ASP.NET Core için ' de MessagePack hub protokolünü kullanın SignalR
 
 ::: moniker range=">= aspnetcore-5.0"
 
@@ -32,7 +32,7 @@ Bu makalede, okuyucunun [Başlarken](xref:tutorials/signalr)bölümünde ele al�
 
 ## <a name="configure-messagepack-on-the-server"></a>Sunucuda MessagePack 'i yapılandırma
 
-Sunucuda MessagePack hub protokolünü etkinleştirmek için, `Microsoft.AspNetCore.SignalR.Protocols.MessagePack` paketi uygulamanıza takın. `Startup.ConfigureServices` Yönteminde, sunucuda MessagePack `AddMessagePackProtocol` desteğini etkinleştirmek `AddSignalR` için çağrıya ekleyin.
+Sunucuda MessagePack hub protokolünü etkinleştirmek için, `Microsoft.AspNetCore.SignalR.Protocols.MessagePack` paketi uygulamanıza takın. `Startup.ConfigureServices`Yönteminde, `AddMessagePackProtocol` `AddSignalR` sunucuda MessagePack desteğini etkinleştirmek için çağrıya ekleyin.
 
 > [!NOTE]
 > JSON varsayılan olarak etkindir. MessagePack eklemek, hem JSON hem de MessagePack istemcileri için destek sunar.
@@ -55,7 +55,7 @@ services.AddSignalR()
 ```
 
 > [!WARNING]
-> [CVE-2020-5234](https://github.com/neuecc/MessagePack-CSharp/security/advisories/GHSA-7q36-4xx7-xcxf) ' i gözden geçirmeyi ve önerilen düzeltme eklerini uygulamayı kesinlikle öneririz. Örneğin, öğesini değiştirirken `.WithSecurity(MessagePackSecurity.UntrustedData)` çağırma `SerializerOptions`.
+> [CVE-2020-5234](https://github.com/neuecc/MessagePack-CSharp/security/advisories/GHSA-7q36-4xx7-xcxf) ' i gözden geçirmeyi ve önerilen düzeltme eklerini uygulamayı kesinlikle öneririz. Örneğin, öğesini `.WithSecurity(MessagePackSecurity.UntrustedData)` değiştirirken çağırma `SerializerOptions` .
 
 ## <a name="configure-messagepack-on-the-client"></a>İstemcide MessagePack 'i yapılandırma
 
@@ -64,11 +64,11 @@ services.AddSignalR()
 
 ### <a name="net-client"></a>.NET istemcisi
 
-.NET Istemcisinde MessagePack 'i etkinleştirmek için `Microsoft.AspNetCore.SignalR.Protocols.MessagePack` paketini yükleyip üzerine `AddMessagePackProtocol` `HubConnectionBuilder`çağırın.
+.NET Istemcisinde MessagePack 'i etkinleştirmek için `Microsoft.AspNetCore.SignalR.Protocols.MessagePack` paketini yükleyip `AddMessagePackProtocol` üzerine çağırın `HubConnectionBuilder` .
 
 ```csharp
 var hubConnection = new HubConnectionBuilder()
-                        .WithUrl("/chatHub")
+                        .WithUrl("/chathub")
                         .AddMessagePackProtocol()
                         .Build();
 ```
@@ -88,10 +88,10 @@ NPM paketini yükledikten sonra modül, doğrudan bir JavaScript Modül Yükleyi
 
 *node_modules\\@microsoft\signalr-protocol-msgpack\dist\browser\signalr-protocol-msgpack.js* 
 
-Bir tarayıcıda, `msgpack5` kitaplığa da başvurulmalıdır. Başvuru oluşturmak `<script>` için bir etiket kullanın. Kitaplık, *node_modules \msgpack5\dist\msgpack5,JS*konumunda bulunabilir.
+Bir tarayıcıda, `msgpack5` Kitaplığa da başvurulmalıdır. `<script>`Başvuru oluşturmak için bir etiket kullanın. Kitaplık *node_modules\msgpack5\dist\msgpack5.js*bulunabilir.
 
 > [!NOTE]
-> `<script>` Öğesi kullanılırken, sıra önemlidir. *SignalR-Protocol-msgpack. js* ' *msgpack5. js*' den önce başvuruluyorsa, MessagePack ile bağlantı kurmaya çalışırken bir hata oluşur. *SignalR. js* , *SignalR-Protocol-msgpack. js*' den önce de gereklidir.
+> `<script>`Öğesi kullanılırken, sıra önemlidir. *msgpack5.js*önce *signalr-protocol-msgpack.js* başvuruluyorsa, MessagePack ile bağlantı kurmaya çalışırken bir hata oluşur. *signalr-protocol-msgpack.js*önce de *signalr.js* gerekir.
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -99,11 +99,11 @@ Bir tarayıcıda, `msgpack5` kitaplığa da başvurulmalıdır. Başvuru oluştu
 <script src="~/lib/signalr/signalr-protocol-msgpack.js"></script>
 ```
 
-Uygulamasına `.withHubProtocol(new signalR.protocols.msgpack.MessagePackHubProtocol())` `HubConnectionBuilder` eklemek, Istemcisini bir sunucuya bağlanırken MessagePack protokolünü kullanacak şekilde yapılandırır.
+`.withHubProtocol(new signalR.protocols.msgpack.MessagePackHubProtocol())`Uygulamasına eklemek, `HubConnectionBuilder` istemcisini bir sunucuya bağlanırken MessagePack protokolünü kullanacak şekilde yapılandırır.
 
 ```javascript
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl("/chatHub")
+    .withUrl("/chathub")
     .withHubProtocol(new signalR.protocols.msgpack.MessagePackHubProtocol())
     .build();
 ```
@@ -127,33 +127,33 @@ public class ChatMessage
 }
 ```
 
-JavaScript istemcisinden gönderirken, büyük/küçük harf C# sınıfıyla `PascalCased` tam olarak eşleşmesi gerektiğinden özellik adlarını kullanmanız gerekir. Örneğin:
+JavaScript istemcisinden gönderirken, büyük/ `PascalCased` küçük harf C# sınıfıyla tam olarak eşleşmesi gerektiğinden özellik adlarını kullanmanız gerekir. Örnek:
 
 ```javascript
 connection.invoke("SomeMethod", { Sender: "Sally", Message: "Hello!" });
 ```
 
-Adların `camelCased` kullanılması C# sınıfına düzgün şekilde bağlanmaz. MessagePack özelliği için farklı bir ad belirtmek `Key` üzere özniteliğini kullanarak bu soruna geçici bir çözüm bulabilirsiniz. Daha fazla bilgi için bkz. [MessagePack-CSharp belgeleri](https://github.com/neuecc/MessagePack-CSharp#object-serialization).
+`camelCased`Adların kullanılması C# sınıfına düzgün şekilde bağlanmaz. `Key`MessagePack özelliği için farklı bir ad belirtmek üzere özniteliğini kullanarak bu soruna geçici bir çözüm bulabilirsiniz. Daha fazla bilgi için bkz. [MessagePack-CSharp belgeleri](https://github.com/neuecc/MessagePack-CSharp#object-serialization).
 
 ### <a name="datetimekind-is-not-preserved-when-serializingdeserializing"></a>Seri hale getirme/seri durumdan çıkarma sırasında DateTime. Kind korunmaz
 
-MessagePack protokolü, öğesinin `Kind` değerini kodlamak için bir yol sağlamaz. `DateTime` Sonuç olarak, bir tarihin serisi kaldırılırken MessagePack hub Protokolü UTC biçimine `DateTime.Kind` dönüştürülür, `DateTimeKind.Local` Aksi takdirde, zaman içinde dokunmaz ve olduğu gibi geçireceğiz. `DateTime` Değerlerle çalışıyorsanız, göndermeden önce UTC 'ye dönüştürmeniz önerilir. Bunları aldığınızda UTC 'den yerel saate dönüştürün.
+MessagePack protokolü, öğesinin değerini kodlamak için bir yol sağlamaz `Kind` `DateTime` . Sonuç olarak, bir tarihin serisi kaldırılırken MessagePack hub Protokolü UTC biçimine dönüştürülür, `DateTime.Kind` `DateTimeKind.Local` Aksi takdirde, zaman içinde dokunmaz ve olduğu gibi geçireceğiz. `DateTime`Değerlerle çalışıyorsanız, göndermeden önce UTC 'ye dönüştürmeniz önerilir. Bunları aldığınızda UTC 'den yerel saate dönüştürün.
 
 ### <a name="datetimeminvalue-is-not-supported-by-messagepack-in-javascript"></a>DateTime. MinValue, JavaScript 'te MessagePack tarafından desteklenmiyor
 
-JavaScript istemcisi tarafından kullanılan [msgpack5](https://github.com/mcollina/msgpack5) kitaplığı MessagePack içindeki `timestamp96` türü desteklemiyor. SignalR Bu tür, çok büyük tarih değerlerini kodlamak için kullanılır (daha önce geçmişte veya daha önce bir süre içinde çok erken). `DateTime.MinValue` Değeri `January 1, 0001`, bir `timestamp96` değerde kodlanmalıdır. Bu nedenle, JavaScript istemcisine `DateTime.MinValue` gönderme desteklenmez. `DateTime.MinValue` JavaScript istemcisi tarafından alındığında, aşağıdaki hata oluşur:
+JavaScript istemcisi tarafından kullanılan [msgpack5](https://github.com/mcollina/msgpack5) Kitaplığı SignalR `timestamp96` MessagePack içindeki türü desteklemiyor. Bu tür, çok büyük tarih değerlerini kodlamak için kullanılır (daha önce geçmişte veya daha önce bir süre içinde çok erken). Değeri `DateTime.MinValue` `January 1, 0001` , bir değerde kodlanmalıdır `timestamp96` . Bu nedenle, `DateTime.MinValue` JavaScript istemcisine gönderme desteklenmez. `DateTime.MinValue`JavaScript istemcisi tarafından alındığında, aşağıdaki hata oluşur:
 
 ```
 Uncaught Error: unable to find ext type 255 at decoder.js:427
 ```
 
-Genellikle, `DateTime.MinValue` "eksik" veya `null` değeri kodlamak için kullanılır. Bu değeri MessagePack 'te kodlamak gerekirse, null yapılabilir `DateTime` bir değer (`DateTime?`) kullanın veya tarihin mevcut olup olmadığını belirten `bool` ayrı bir değer kodlayın.
+Genellikle, `DateTime.MinValue` "eksik" veya değeri kodlamak için kullanılır `null` . Bu değeri MessagePack 'te kodlamak gerekirse, null yapılabilir bir `DateTime` değer ( `DateTime?` ) kullanın veya `bool` tarihin mevcut olup olmadığını belirten ayrı bir değer kodlayın.
 
-Bu sınırlama hakkında daha fazla bilgi için bkz. GitHub sorun [ASPNETSignalR/#2228](https://github.com/aspnet/SignalR/issues/2228).
+Bu sınırlama hakkında daha fazla bilgi için bkz. GitHub sorun [ASPNET/ SignalR #2228](https://github.com/aspnet/SignalR/issues/2228).
 
 ### <a name="messagepack-support-in-ahead-of-time-compilation-environment"></a>"Zamanında" derleme ortamında MessagePack desteği
 
-.NET istemcisi ve sunucusu tarafından kullanılan [MessagePack-CSharp](https://github.com/neuecc/MessagePack-CSharp/tree/v2.1.90) kitaplığı, serileştirme işlemini iyileştirmek için kod oluşturmayı kullanır. Sonuç olarak, "güncel olmayan" derleme (Xamarin iOS veya Unity gibi) kullanan ortamlarda varsayılan olarak desteklenmez. Seri hale getirici/seri hale getirici kodunu "önceden oluşturma" yoluyla bu ortamlarda MessagePack kullanmak mümkündür. Daha fazla bilgi için bkz. [MessagePack-CSharp belgeleri](https://github.com/neuecc/MessagePack-CSharp/tree/v2.1.90#aot-code-generation-to-support-unityxamarin). Serileştiriciler önceden oluşturulduktan sonra, geçirilen yapılandırma temsilcisini kullanarak bunları kaydedebilirsiniz `AddMessagePackProtocol`:
+.NET istemcisi ve sunucusu tarafından kullanılan [MessagePack-CSharp](https://github.com/neuecc/MessagePack-CSharp/tree/v2.1.90) kitaplığı, serileştirme işlemini iyileştirmek için kod oluşturmayı kullanır. Sonuç olarak, "güncel olmayan" derleme (Xamarin iOS veya Unity gibi) kullanan ortamlarda varsayılan olarak desteklenmez. Seri hale getirici/seri hale getirici kodunu "önceden oluşturma" yoluyla bu ortamlarda MessagePack kullanmak mümkündür. Daha fazla bilgi için bkz. [MessagePack-CSharp belgeleri](https://github.com/neuecc/MessagePack-CSharp/tree/v2.1.90#aot-code-generation-to-support-unityxamarin). Serileştiriciler önceden oluşturulduktan sonra, geçirilen yapılandırma temsilcisini kullanarak bunları kaydedebilirsiniz `AddMessagePackProtocol` :
 
 ```csharp
 services.AddSignalR()
@@ -171,17 +171,17 @@ services.AddSignalR()
 
 ### <a name="type-checks-are-more-strict-in-messagepack"></a>Tür denetimleri MessagePack 'te daha sıkı
 
-JSON hub 'ı protokolü, seri durumdan çıkarma sırasında tür dönüştürmeleri gerçekleştirecek. Örneğin, gelen nesnenin bir sayı olan (`{ foo: 42 }`) bir özellik değeri varsa, ancak .net sınıfındaki özelliği tür `string`ise, değer dönüştürülür. Ancak, MessagePack bu dönüştürmeyi gerçekleştirmez ve sunucu tarafı günlüklerinde (ve konsolunda) görünebileceğini bir özel durum oluşturur:
+JSON hub 'ı protokolü, seri durumdan çıkarma sırasında tür dönüştürmeleri gerçekleştirecek. Örneğin, gelen nesnenin bir sayı olan () bir özellik değeri varsa `{ foo: 42 }` , ancak .net sınıfındaki özelliği tür ise `string` , değer dönüştürülür. Ancak, MessagePack bu dönüştürmeyi gerçekleştirmez ve sunucu tarafı günlüklerinde (ve konsolunda) görünebileceğini bir özel durum oluşturur:
 
 ```
 InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
 ```
 
-Bu sınırlama hakkında daha fazla bilgi için bkz. GitHub sorun [ASPNETSignalR/#2937](https://github.com/aspnet/SignalR/issues/2937).
+Bu sınırlama hakkında daha fazla bilgi için bkz. GitHub sorun [ASPNET/ SignalR #2937](https://github.com/aspnet/SignalR/issues/2937).
 
 ## <a name="related-resources"></a>İlgili kaynaklar
 
-* [Kullanmaya başlayın](xref:tutorials/signalr)
+* [Başlarken](xref:tutorials/signalr)
 * [.NET istemcisi](xref:signalr/dotnet-client)
 * [JavaScript istemcisi](xref:signalr/javascript-client)
 
@@ -197,7 +197,7 @@ Bu makalede, okuyucunun [Başlarken](xref:tutorials/signalr)bölümünde ele al�
 
 ## <a name="configure-messagepack-on-the-server"></a>Sunucuda MessagePack 'i yapılandırma
 
-Sunucuda MessagePack hub protokolünü etkinleştirmek için, `Microsoft.AspNetCore.SignalR.Protocols.MessagePack` paketi uygulamanıza takın. `Startup.ConfigureServices` Yönteminde, sunucuda MessagePack `AddMessagePackProtocol` desteğini etkinleştirmek `AddSignalR` için çağrıya ekleyin.
+Sunucuda MessagePack hub protokolünü etkinleştirmek için, `Microsoft.AspNetCore.SignalR.Protocols.MessagePack` paketi uygulamanıza takın. `Startup.ConfigureServices`Yönteminde, `AddMessagePackProtocol` `AddSignalR` sunucuda MessagePack desteğini etkinleştirmek için çağrıya ekleyin.
 
 > [!NOTE]
 > JSON varsayılan olarak etkindir. MessagePack eklemek, hem JSON hem de MessagePack istemcileri için destek sunar.
@@ -221,7 +221,7 @@ services.AddSignalR()
 ```
 
 > [!WARNING]
-> [CVE-2020-5234](https://github.com/neuecc/MessagePack-CSharp/security/advisories/GHSA-7q36-4xx7-xcxf) ' i gözden geçirmeyi ve önerilen düzeltme eklerini uygulamayı kesinlikle öneririz. Örneğin, `MessagePackSecurity.Active` statik özelliği olarak `MessagePackSecurity.UntrustedData`ayarlanıyor. Öğesinin ayarlanması `MessagePackSecurity.Active` Için [MessagePack 'in bir 1.9. x sürümünün](https://www.nuget.org/packages/MessagePack/1.9.3)el ile yüklenmesi gerekir. Sürümün `MessagePack` SignalR kullandığı 1.9. x yükseltmeleri yükleniyor. `MessagePackSecurity.Active` , Olarak `MessagePackSecurity.UntrustedData`ayarlanmamışsa kötü amaçlı bir istemci hizmet reddine neden olabilir. Aşağıdaki `MessagePackSecurity.Active` kodda `Program.Main`gösterildiği gibi içinde ayarlanır:
+> [CVE-2020-5234](https://github.com/neuecc/MessagePack-CSharp/security/advisories/GHSA-7q36-4xx7-xcxf) ' i gözden geçirmeyi ve önerilen düzeltme eklerini uygulamayı kesinlikle öneririz. Örneğin, `MessagePackSecurity.Active` statik özelliği olarak ayarlanıyor `MessagePackSecurity.UntrustedData` . Öğesinin ayarlanması için `MessagePackSecurity.Active` [MessagePack 'in bir 1.9. x sürümünün](https://www.nuget.org/packages/MessagePack/1.9.3)el ile yüklenmesi gerekir. `MessagePack`Sürümün kullandığı 1.9. x yükseltmeleri yükleniyor SignalR . `MessagePackSecurity.Active`, Olarak ayarlanmamışsa `MessagePackSecurity.UntrustedData` kötü amaçlı bir istemci hizmet reddine neden olabilir. `MessagePackSecurity.Active` `Program.Main` Aşağıdaki kodda gösterildiği gibi içinde ayarlanır:
 
 ```csharp
 public static void Main(string[] args)
@@ -239,11 +239,11 @@ public static void Main(string[] args)
 
 ### <a name="net-client"></a>.NET istemcisi
 
-.NET Istemcisinde MessagePack 'i etkinleştirmek için `Microsoft.AspNetCore.SignalR.Protocols.MessagePack` paketini yükleyip üzerine `AddMessagePackProtocol` `HubConnectionBuilder`çağırın.
+.NET Istemcisinde MessagePack 'i etkinleştirmek için `Microsoft.AspNetCore.SignalR.Protocols.MessagePack` paketini yükleyip `AddMessagePackProtocol` üzerine çağırın `HubConnectionBuilder` .
 
 ```csharp
 var hubConnection = new HubConnectionBuilder()
-                        .WithUrl("/chatHub")
+                        .WithUrl("/chathub")
                         .AddMessagePackProtocol()
                         .Build();
 ```
@@ -263,10 +263,10 @@ NPM paketini yükledikten sonra modül, doğrudan bir JavaScript Modül Yükleyi
 
 *node_modules\\@microsoft\signalr-protocol-msgpack\dist\browser\signalr-protocol-msgpack.js* 
 
-Bir tarayıcıda, `msgpack5` kitaplığa da başvurulmalıdır. Başvuru oluşturmak `<script>` için bir etiket kullanın. Kitaplık, *node_modules \msgpack5\dist\msgpack5,JS*konumunda bulunabilir.
+Bir tarayıcıda, `msgpack5` Kitaplığa da başvurulmalıdır. `<script>`Başvuru oluşturmak için bir etiket kullanın. Kitaplık *node_modules\msgpack5\dist\msgpack5.js*bulunabilir.
 
 > [!NOTE]
-> `<script>` Öğesi kullanılırken, sıra önemlidir. *SignalR-Protocol-msgpack. js* ' *msgpack5. js*' den önce başvuruluyorsa, MessagePack ile bağlantı kurmaya çalışırken bir hata oluşur. *SignalR. js* , *SignalR-Protocol-msgpack. js*' den önce de gereklidir.
+> `<script>`Öğesi kullanılırken, sıra önemlidir. *msgpack5.js*önce *signalr-protocol-msgpack.js* başvuruluyorsa, MessagePack ile bağlantı kurmaya çalışırken bir hata oluşur. *signalr-protocol-msgpack.js*önce de *signalr.js* gerekir.
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -274,11 +274,11 @@ Bir tarayıcıda, `msgpack5` kitaplığa da başvurulmalıdır. Başvuru oluştu
 <script src="~/lib/signalr/signalr-protocol-msgpack.js"></script>
 ```
 
-Uygulamasına `.withHubProtocol(new signalR.protocols.msgpack.MessagePackHubProtocol())` `HubConnectionBuilder` eklemek, Istemcisini bir sunucuya bağlanırken MessagePack protokolünü kullanacak şekilde yapılandırır.
+`.withHubProtocol(new signalR.protocols.msgpack.MessagePackHubProtocol())`Uygulamasına eklemek, `HubConnectionBuilder` istemcisini bir sunucuya bağlanırken MessagePack protokolünü kullanacak şekilde yapılandırır.
 
 ```javascript
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl("/chatHub")
+    .withUrl("/chathub")
     .withHubProtocol(new signalR.protocols.msgpack.MessagePackHubProtocol())
     .build();
 ```
@@ -302,35 +302,35 @@ public class ChatMessage
 }
 ```
 
-JavaScript istemcisinden gönderirken, büyük/küçük harf C# sınıfıyla `PascalCased` tam olarak eşleşmesi gerektiğinden özellik adlarını kullanmanız gerekir. Örneğin:
+JavaScript istemcisinden gönderirken, büyük/ `PascalCased` küçük harf C# sınıfıyla tam olarak eşleşmesi gerektiğinden özellik adlarını kullanmanız gerekir. Örnek:
 
 ```javascript
 connection.invoke("SomeMethod", { Sender: "Sally", Message: "Hello!" });
 ```
 
-Adların `camelCased` kullanılması C# sınıfına düzgün şekilde bağlanmaz. MessagePack özelliği için farklı bir ad belirtmek `Key` üzere özniteliğini kullanarak bu soruna geçici bir çözüm bulabilirsiniz. Daha fazla bilgi için bkz. [MessagePack-CSharp belgeleri](https://github.com/neuecc/MessagePack-CSharp#object-serialization).
+`camelCased`Adların kullanılması C# sınıfına düzgün şekilde bağlanmaz. `Key`MessagePack özelliği için farklı bir ad belirtmek üzere özniteliğini kullanarak bu soruna geçici bir çözüm bulabilirsiniz. Daha fazla bilgi için bkz. [MessagePack-CSharp belgeleri](https://github.com/neuecc/MessagePack-CSharp#object-serialization).
 
 ### <a name="datetimekind-is-not-preserved-when-serializingdeserializing"></a>Seri hale getirme/seri durumdan çıkarma sırasında DateTime. Kind korunmaz
 
-MessagePack protokolü, öğesinin `Kind` değerini kodlamak için bir yol sağlamaz. `DateTime` Sonuç olarak, bir tarih serisi kaldırılırken, MessagePack hub protokolü gelen tarihin UTC biçiminde olduğunu varsayar. Yerel saat içinde `DateTime` değerlerle çalışıyorsanız, göndermeden önce UTC 'ye dönüştürmeniz önerilir. Bunları aldığınızda UTC 'den yerel saate dönüştürün.
+MessagePack protokolü, öğesinin değerini kodlamak için bir yol sağlamaz `Kind` `DateTime` . Sonuç olarak, bir tarih serisi kaldırılırken, MessagePack hub protokolü gelen tarihin UTC biçiminde olduğunu varsayar. `DateTime`Yerel saat içinde değerlerle çalışıyorsanız, göndermeden önce UTC 'ye dönüştürmeniz önerilir. Bunları aldığınızda UTC 'den yerel saate dönüştürün.
 
-Bu sınırlama hakkında daha fazla bilgi için bkz. GitHub sorun [ASPNETSignalR/#2632](https://github.com/aspnet/SignalR/issues/2632).
+Bu sınırlama hakkında daha fazla bilgi için bkz. GitHub sorun [ASPNET/ SignalR #2632](https://github.com/aspnet/SignalR/issues/2632).
 
 ### <a name="datetimeminvalue-is-not-supported-by-messagepack-in-javascript"></a>DateTime. MinValue, JavaScript 'te MessagePack tarafından desteklenmiyor
 
-JavaScript istemcisi tarafından kullanılan [msgpack5](https://github.com/mcollina/msgpack5) kitaplığı MessagePack içindeki `timestamp96` türü desteklemiyor. SignalR Bu tür, çok büyük tarih değerlerini kodlamak için kullanılır (daha önce geçmişte veya daha önce bir süre içinde çok erken). `DateTime.MinValue` Değeri `January 1, 0001`, bir `timestamp96` değerde kodlanmalıdır. Bu nedenle, JavaScript istemcisine `DateTime.MinValue` gönderme desteklenmez. `DateTime.MinValue` JavaScript istemcisi tarafından alındığında, aşağıdaki hata oluşur:
+JavaScript istemcisi tarafından kullanılan [msgpack5](https://github.com/mcollina/msgpack5) Kitaplığı SignalR `timestamp96` MessagePack içindeki türü desteklemiyor. Bu tür, çok büyük tarih değerlerini kodlamak için kullanılır (daha önce geçmişte veya daha önce bir süre içinde çok erken). Değeri `DateTime.MinValue` `January 1, 0001` , bir değerde kodlanmalıdır `timestamp96` . Bu nedenle, `DateTime.MinValue` JavaScript istemcisine gönderme desteklenmez. `DateTime.MinValue`JavaScript istemcisi tarafından alındığında, aşağıdaki hata oluşur:
 
 ```
 Uncaught Error: unable to find ext type 255 at decoder.js:427
 ```
 
-Genellikle, `DateTime.MinValue` "eksik" veya `null` değeri kodlamak için kullanılır. Bu değeri MessagePack 'te kodlamak gerekirse, null yapılabilir `DateTime` bir değer (`DateTime?`) kullanın veya tarihin mevcut olup olmadığını belirten `bool` ayrı bir değer kodlayın.
+Genellikle, `DateTime.MinValue` "eksik" veya değeri kodlamak için kullanılır `null` . Bu değeri MessagePack 'te kodlamak gerekirse, null yapılabilir bir `DateTime` değer ( `DateTime?` ) kullanın veya `bool` tarihin mevcut olup olmadığını belirten ayrı bir değer kodlayın.
 
-Bu sınırlama hakkında daha fazla bilgi için bkz. GitHub sorun [ASPNETSignalR/#2228](https://github.com/aspnet/SignalR/issues/2228).
+Bu sınırlama hakkında daha fazla bilgi için bkz. GitHub sorun [ASPNET/ SignalR #2228](https://github.com/aspnet/SignalR/issues/2228).
 
 ### <a name="messagepack-support-in-ahead-of-time-compilation-environment"></a>"Zamanında" derleme ortamında MessagePack desteği
 
-.NET istemcisi ve sunucusu tarafından kullanılan [MessagePack-CSharp](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80) kitaplığı, serileştirme işlemini iyileştirmek için kod oluşturmayı kullanır. Sonuç olarak, "güncel olmayan" derleme (Xamarin iOS veya Unity gibi) kullanan ortamlarda varsayılan olarak desteklenmez. Seri hale getirici/seri hale getirici kodunu "önceden oluşturma" yoluyla bu ortamlarda MessagePack kullanmak mümkündür. Daha fazla bilgi için bkz. [MessagePack-CSharp belgeleri](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80#pre-code-generationunityxamarin-supports). Serileştiriciler önceden oluşturulduktan sonra, geçirilen yapılandırma temsilcisini kullanarak bunları kaydedebilirsiniz `AddMessagePackProtocol`:
+.NET istemcisi ve sunucusu tarafından kullanılan [MessagePack-CSharp](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80) kitaplığı, serileştirme işlemini iyileştirmek için kod oluşturmayı kullanır. Sonuç olarak, "güncel olmayan" derleme (Xamarin iOS veya Unity gibi) kullanan ortamlarda varsayılan olarak desteklenmez. Seri hale getirici/seri hale getirici kodunu "önceden oluşturma" yoluyla bu ortamlarda MessagePack kullanmak mümkündür. Daha fazla bilgi için bkz. [MessagePack-CSharp belgeleri](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80#pre-code-generationunityxamarin-supports). Serileştiriciler önceden oluşturulduktan sonra, geçirilen yapılandırma temsilcisini kullanarak bunları kaydedebilirsiniz `AddMessagePackProtocol` :
 
 ```csharp
 services.AddSignalR()
@@ -346,17 +346,17 @@ services.AddSignalR()
 
 ### <a name="type-checks-are-more-strict-in-messagepack"></a>Tür denetimleri MessagePack 'te daha sıkı
 
-JSON hub 'ı protokolü, seri durumdan çıkarma sırasında tür dönüştürmeleri gerçekleştirecek. Örneğin, gelen nesnenin bir sayı olan (`{ foo: 42 }`) bir özellik değeri varsa, ancak .net sınıfındaki özelliği tür `string`ise, değer dönüştürülür. Ancak, MessagePack bu dönüştürmeyi gerçekleştirmez ve sunucu tarafı günlüklerinde (ve konsolunda) görünebileceğini bir özel durum oluşturur:
+JSON hub 'ı protokolü, seri durumdan çıkarma sırasında tür dönüştürmeleri gerçekleştirecek. Örneğin, gelen nesnenin bir sayı olan () bir özellik değeri varsa `{ foo: 42 }` , ancak .net sınıfındaki özelliği tür ise `string` , değer dönüştürülür. Ancak, MessagePack bu dönüştürmeyi gerçekleştirmez ve sunucu tarafı günlüklerinde (ve konsolunda) görünebileceğini bir özel durum oluşturur:
 
 ```
 InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
 ```
 
-Bu sınırlama hakkında daha fazla bilgi için bkz. GitHub sorun [ASPNETSignalR/#2937](https://github.com/aspnet/SignalR/issues/2937).
+Bu sınırlama hakkında daha fazla bilgi için bkz. GitHub sorun [ASPNET/ SignalR #2937](https://github.com/aspnet/SignalR/issues/2937).
 
 ## <a name="related-resources"></a>İlgili kaynaklar
 
-* [Kullanmaya başlayın](xref:tutorials/signalr)
+* [Başlarken](xref:tutorials/signalr)
 * [.NET istemcisi](xref:signalr/dotnet-client)
 * [JavaScript istemcisi](xref:signalr/javascript-client)
 
@@ -372,7 +372,7 @@ Bu makalede, okuyucunun [Başlarken](xref:tutorials/signalr)bölümünde ele al�
 
 ## <a name="configure-messagepack-on-the-server"></a>Sunucuda MessagePack 'i yapılandırma
 
-Sunucuda MessagePack hub protokolünü etkinleştirmek için, `Microsoft.AspNetCore.SignalR.Protocols.MessagePack` paketi uygulamanıza takın. `Startup.ConfigureServices` Yönteminde, sunucuda MessagePack `AddMessagePackProtocol` desteğini etkinleştirmek `AddSignalR` için çağrıya ekleyin.
+Sunucuda MessagePack hub protokolünü etkinleştirmek için, `Microsoft.AspNetCore.SignalR.Protocols.MessagePack` paketi uygulamanıza takın. `Startup.ConfigureServices`Yönteminde, `AddMessagePackProtocol` `AddSignalR` sunucuda MessagePack desteğini etkinleştirmek için çağrıya ekleyin.
 
 > [!NOTE]
 > JSON varsayılan olarak etkindir. MessagePack eklemek, hem JSON hem de MessagePack istemcileri için destek sunar.
@@ -396,7 +396,7 @@ services.AddSignalR()
 ```
 
 > [!WARNING]
-> [CVE-2020-5234](https://github.com/neuecc/MessagePack-CSharp/security/advisories/GHSA-7q36-4xx7-xcxf) ' i gözden geçirmeyi ve önerilen düzeltme eklerini uygulamayı kesinlikle öneririz. Örneğin, `MessagePackSecurity.Active` statik özelliği olarak `MessagePackSecurity.UntrustedData`ayarlanıyor. Öğesinin ayarlanması `MessagePackSecurity.Active` Için [MessagePack 'in bir 1.9. x sürümünün](https://www.nuget.org/packages/MessagePack/1.9.3)el ile yüklenmesi gerekir. Sürümün `MessagePack` SignalR kullandığı 1.9. x yükseltmeleri yükleniyor. `MessagePackSecurity.Active` , Olarak `MessagePackSecurity.UntrustedData`ayarlanmamışsa kötü amaçlı bir istemci hizmet reddine neden olabilir. Aşağıdaki `MessagePackSecurity.Active` kodda `Program.Main`gösterildiği gibi içinde ayarlanır:
+> [CVE-2020-5234](https://github.com/neuecc/MessagePack-CSharp/security/advisories/GHSA-7q36-4xx7-xcxf) ' i gözden geçirmeyi ve önerilen düzeltme eklerini uygulamayı kesinlikle öneririz. Örneğin, `MessagePackSecurity.Active` statik özelliği olarak ayarlanıyor `MessagePackSecurity.UntrustedData` . Öğesinin ayarlanması için `MessagePackSecurity.Active` [MessagePack 'in bir 1.9. x sürümünün](https://www.nuget.org/packages/MessagePack/1.9.3)el ile yüklenmesi gerekir. `MessagePack`Sürümün kullandığı 1.9. x yükseltmeleri yükleniyor SignalR . `MessagePackSecurity.Active`, Olarak ayarlanmamışsa `MessagePackSecurity.UntrustedData` kötü amaçlı bir istemci hizmet reddine neden olabilir. `MessagePackSecurity.Active` `Program.Main` Aşağıdaki kodda gösterildiği gibi içinde ayarlanır:
 
 ```csharp
 public static void Main(string[] args)
@@ -414,11 +414,11 @@ public static void Main(string[] args)
 
 ### <a name="net-client"></a>.NET istemcisi
 
-.NET Istemcisinde MessagePack 'i etkinleştirmek için `Microsoft.AspNetCore.SignalR.Protocols.MessagePack` paketini yükleyip üzerine `AddMessagePackProtocol` `HubConnectionBuilder`çağırın.
+.NET Istemcisinde MessagePack 'i etkinleştirmek için `Microsoft.AspNetCore.SignalR.Protocols.MessagePack` paketini yükleyip `AddMessagePackProtocol` üzerine çağırın `HubConnectionBuilder` .
 
 ```csharp
 var hubConnection = new HubConnectionBuilder()
-                        .WithUrl("/chatHub")
+                        .WithUrl("/chathub")
                         .AddMessagePackProtocol()
                         .Build();
 ```
@@ -438,10 +438,10 @@ NPM paketini yükledikten sonra modül, doğrudan bir JavaScript Modül Yükleyi
 
 *node_modules\\@aspnet\signalr-protocol-msgpack\dist\browser\signalr-protocol-msgpack.js*
 
-Bir tarayıcıda, `msgpack5` kitaplığa da başvurulmalıdır. Başvuru oluşturmak `<script>` için bir etiket kullanın. Kitaplık, *node_modules \msgpack5\dist\msgpack5,JS*konumunda bulunabilir.
+Bir tarayıcıda, `msgpack5` Kitaplığa da başvurulmalıdır. `<script>`Başvuru oluşturmak için bir etiket kullanın. Kitaplık *node_modules\msgpack5\dist\msgpack5.js*bulunabilir.
 
 > [!NOTE]
-> `<script>` Öğesi kullanılırken, sıra önemlidir. *SignalR-Protocol-msgpack. js* ' *msgpack5. js*' den önce başvuruluyorsa, MessagePack ile bağlantı kurmaya çalışırken bir hata oluşur. *SignalR. js* , *SignalR-Protocol-msgpack. js*' den önce de gereklidir.
+> `<script>`Öğesi kullanılırken, sıra önemlidir. *msgpack5.js*önce *signalr-protocol-msgpack.js* başvuruluyorsa, MessagePack ile bağlantı kurmaya çalışırken bir hata oluşur. *signalr-protocol-msgpack.js*önce de *signalr.js* gerekir.
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -449,11 +449,11 @@ Bir tarayıcıda, `msgpack5` kitaplığa da başvurulmalıdır. Başvuru oluştu
 <script src="~/lib/signalr/signalr-protocol-msgpack.js"></script>
 ```
 
-Uygulamasına `.withHubProtocol(new signalR.protocols.msgpack.MessagePackHubProtocol())` `HubConnectionBuilder` eklemek, Istemcisini bir sunucuya bağlanırken MessagePack protokolünü kullanacak şekilde yapılandırır.
+`.withHubProtocol(new signalR.protocols.msgpack.MessagePackHubProtocol())`Uygulamasına eklemek, `HubConnectionBuilder` istemcisini bir sunucuya bağlanırken MessagePack protokolünü kullanacak şekilde yapılandırır.
 
 ```javascript
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl("/chatHub")
+    .withUrl("/chathub")
     .withHubProtocol(new signalR.protocols.msgpack.MessagePackHubProtocol())
     .build();
 ```
@@ -477,35 +477,35 @@ public class ChatMessage
 }
 ```
 
-JavaScript istemcisinden gönderirken, büyük/küçük harf C# sınıfıyla `PascalCased` tam olarak eşleşmesi gerektiğinden özellik adlarını kullanmanız gerekir. Örneğin:
+JavaScript istemcisinden gönderirken, büyük/ `PascalCased` küçük harf C# sınıfıyla tam olarak eşleşmesi gerektiğinden özellik adlarını kullanmanız gerekir. Örnek:
 
 ```javascript
 connection.invoke("SomeMethod", { Sender: "Sally", Message: "Hello!" });
 ```
 
-Adların `camelCased` kullanılması C# sınıfına düzgün şekilde bağlanmaz. MessagePack özelliği için farklı bir ad belirtmek `Key` üzere özniteliğini kullanarak bu soruna geçici bir çözüm bulabilirsiniz. Daha fazla bilgi için bkz. [MessagePack-CSharp belgeleri](https://github.com/neuecc/MessagePack-CSharp#object-serialization).
+`camelCased`Adların kullanılması C# sınıfına düzgün şekilde bağlanmaz. `Key`MessagePack özelliği için farklı bir ad belirtmek üzere özniteliğini kullanarak bu soruna geçici bir çözüm bulabilirsiniz. Daha fazla bilgi için bkz. [MessagePack-CSharp belgeleri](https://github.com/neuecc/MessagePack-CSharp#object-serialization).
 
 ### <a name="datetimekind-is-not-preserved-when-serializingdeserializing"></a>Seri hale getirme/seri durumdan çıkarma sırasında DateTime. Kind korunmaz
 
-MessagePack protokolü, öğesinin `Kind` değerini kodlamak için bir yol sağlamaz. `DateTime` Sonuç olarak, bir tarih serisi kaldırılırken, MessagePack hub protokolü gelen tarihin UTC biçiminde olduğunu varsayar. Yerel saat içinde `DateTime` değerlerle çalışıyorsanız, göndermeden önce UTC 'ye dönüştürmeniz önerilir. Bunları aldığınızda UTC 'den yerel saate dönüştürün.
+MessagePack protokolü, öğesinin değerini kodlamak için bir yol sağlamaz `Kind` `DateTime` . Sonuç olarak, bir tarih serisi kaldırılırken, MessagePack hub protokolü gelen tarihin UTC biçiminde olduğunu varsayar. `DateTime`Yerel saat içinde değerlerle çalışıyorsanız, göndermeden önce UTC 'ye dönüştürmeniz önerilir. Bunları aldığınızda UTC 'den yerel saate dönüştürün.
 
-Bu sınırlama hakkında daha fazla bilgi için bkz. GitHub sorun [ASPNETSignalR/#2632](https://github.com/aspnet/SignalR/issues/2632).
+Bu sınırlama hakkında daha fazla bilgi için bkz. GitHub sorun [ASPNET/ SignalR #2632](https://github.com/aspnet/SignalR/issues/2632).
 
 ### <a name="datetimeminvalue-is-not-supported-by-messagepack-in-javascript"></a>DateTime. MinValue, JavaScript 'te MessagePack tarafından desteklenmiyor
 
-JavaScript istemcisi tarafından kullanılan [msgpack5](https://github.com/mcollina/msgpack5) kitaplığı MessagePack içindeki `timestamp96` türü desteklemiyor. SignalR Bu tür, çok büyük tarih değerlerini kodlamak için kullanılır (daha önce geçmişte veya daha önce bir süre içinde çok erken). Değeri `DateTime.MinValue` `January 1, 0001` , bir `timestamp96` değerde kodlanmalıdır. Bu nedenle, JavaScript istemcisine `DateTime.MinValue` gönderme desteklenmez. `DateTime.MinValue` JavaScript istemcisi tarafından alındığında, aşağıdaki hata oluşur:
+JavaScript istemcisi tarafından kullanılan [msgpack5](https://github.com/mcollina/msgpack5) Kitaplığı SignalR `timestamp96` MessagePack içindeki türü desteklemiyor. Bu tür, çok büyük tarih değerlerini kodlamak için kullanılır (daha önce geçmişte veya daha önce bir süre içinde çok erken). Değeri, `DateTime.MinValue` `January 1, 0001` bir değerde kodlanmalıdır `timestamp96` . Bu nedenle, `DateTime.MinValue` JavaScript istemcisine gönderme desteklenmez. `DateTime.MinValue`JavaScript istemcisi tarafından alındığında, aşağıdaki hata oluşur:
 
 ```
 Uncaught Error: unable to find ext type 255 at decoder.js:427
 ```
 
-Genellikle, `DateTime.MinValue` "eksik" veya `null` değeri kodlamak için kullanılır. Bu değeri MessagePack 'te kodlamak gerekirse, null yapılabilir `DateTime` bir değer (`DateTime?`) kullanın veya tarihin mevcut olup olmadığını belirten `bool` ayrı bir değer kodlayın.
+Genellikle, `DateTime.MinValue` "eksik" veya değeri kodlamak için kullanılır `null` . Bu değeri MessagePack 'te kodlamak gerekirse, null yapılabilir bir `DateTime` değer ( `DateTime?` ) kullanın veya `bool` tarihin mevcut olup olmadığını belirten ayrı bir değer kodlayın.
 
-Bu sınırlama hakkında daha fazla bilgi için bkz. GitHub sorun [ASPNETSignalR/#2228](https://github.com/aspnet/SignalR/issues/2228).
+Bu sınırlama hakkında daha fazla bilgi için bkz. GitHub sorun [ASPNET/ SignalR #2228](https://github.com/aspnet/SignalR/issues/2228).
 
 ### <a name="messagepack-support-in-ahead-of-time-compilation-environment"></a>"Zamanında" derleme ortamında MessagePack desteği
 
-.NET istemcisi ve sunucusu tarafından kullanılan [MessagePack-CSharp](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80) kitaplığı, serileştirme işlemini iyileştirmek için kod oluşturmayı kullanır. Sonuç olarak, "güncel olmayan" derleme (Xamarin iOS veya Unity gibi) kullanan ortamlarda varsayılan olarak desteklenmez. Seri hale getirici/seri hale getirici kodunu "önceden oluşturma" yoluyla bu ortamlarda MessagePack kullanmak mümkündür. Daha fazla bilgi için bkz. [MessagePack-CSharp belgeleri](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80#pre-code-generationunityxamarin-supports). Serileştiriciler önceden oluşturulduktan sonra, geçirilen yapılandırma temsilcisini kullanarak bunları kaydedebilirsiniz `AddMessagePackProtocol`:
+.NET istemcisi ve sunucusu tarafından kullanılan [MessagePack-CSharp](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80) kitaplığı, serileştirme işlemini iyileştirmek için kod oluşturmayı kullanır. Sonuç olarak, "güncel olmayan" derleme (Xamarin iOS veya Unity gibi) kullanan ortamlarda varsayılan olarak desteklenmez. Seri hale getirici/seri hale getirici kodunu "önceden oluşturma" yoluyla bu ortamlarda MessagePack kullanmak mümkündür. Daha fazla bilgi için bkz. [MessagePack-CSharp belgeleri](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80#pre-code-generationunityxamarin-supports). Serileştiriciler önceden oluşturulduktan sonra, geçirilen yapılandırma temsilcisini kullanarak bunları kaydedebilirsiniz `AddMessagePackProtocol` :
 
 ```csharp
 services.AddSignalR()
@@ -521,17 +521,17 @@ services.AddSignalR()
 
 ### <a name="type-checks-are-more-strict-in-messagepack"></a>Tür denetimleri MessagePack 'te daha sıkı
 
-JSON hub 'ı protokolü, seri durumdan çıkarma sırasında tür dönüştürmeleri gerçekleştirecek. Örneğin, gelen nesnenin bir sayı olan (`{ foo: 42 }`) bir özellik değeri varsa, ancak .net sınıfındaki özelliği tür `string`ise, değer dönüştürülür. Ancak, MessagePack bu dönüştürmeyi gerçekleştirmez ve sunucu tarafı günlüklerinde (ve konsolunda) görünebileceğini bir özel durum oluşturur:
+JSON hub 'ı protokolü, seri durumdan çıkarma sırasında tür dönüştürmeleri gerçekleştirecek. Örneğin, gelen nesnenin bir sayı olan () bir özellik değeri varsa `{ foo: 42 }` , ancak .net sınıfındaki özelliği tür ise `string` , değer dönüştürülür. Ancak, MessagePack bu dönüştürmeyi gerçekleştirmez ve sunucu tarafı günlüklerinde (ve konsolunda) görünebileceğini bir özel durum oluşturur:
 
 ```
 InvalidDataException: Error binding arguments. Make sure that the types of the provided values match the types of the hub method being invoked.
 ```
 
-Bu sınırlama hakkında daha fazla bilgi için bkz. GitHub sorun [ASPNETSignalR/#2937](https://github.com/aspnet/SignalR/issues/2937).
+Bu sınırlama hakkında daha fazla bilgi için bkz. GitHub sorun [ASPNET/ SignalR #2937](https://github.com/aspnet/SignalR/issues/2937).
 
 ## <a name="related-resources"></a>İlgili kaynaklar
 
-* [Kullanmaya başlayın](xref:tutorials/signalr)
+* [Başlarken](xref:tutorials/signalr)
 * [.NET istemcisi](xref:signalr/dotnet-client)
 * [JavaScript istemcisi](xref:signalr/javascript-client)
 

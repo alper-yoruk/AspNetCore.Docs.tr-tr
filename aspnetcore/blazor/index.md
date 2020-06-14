@@ -1,12 +1,24 @@
 ---
-Başlık: ' ASP.NET Core giriş Blazor ' Yazar: Açıklama: ' ASP.NET Core araştırma Blazor , bir ASP.NET Core uygulamasında .NET ile etkileşimli istemci tarafı Web Kullanıcı arabirimi oluşturmanın bir yoludur. '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
+title: ASP.NET Core girişBlazor
+author: guardrex
+description: ASP.NET Core uygulamasında Blazor .NET ile etkileşimli istemci tarafı Web Kullanıcı arabirimi oluşturmak için bir yol ASP.NET Core keşfedelim.
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc, seoapril2019
+ms.date: 05/19/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: blazor/index
+ms.openlocfilehash: eb8a6d2ddbd3e8f61626566878a7af5f5a2525d8
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "83608193"
 ---
 # <a name="introduction-to-aspnet-core-blazor"></a>ASP.NET Core girişBlazor
 

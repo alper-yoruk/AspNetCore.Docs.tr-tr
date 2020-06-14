@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/new-field
-ms.openlocfilehash: 2dfaba166617c5d0a224f4b47028c141e59ce47f
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: d56be93c4dd46b4712fe793ccd453807517a2022
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652920"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724340"
 ---
 # <a name="part-8-add-a-new-field-to-an-aspnet-core-mvc-app"></a>8. bölüm, ASP.NET Core MVC uygulamasına yeni bir alan ekleyin
 
@@ -137,10 +137,7 @@ dotnet ef database update
 ---
 <!-- End of VS tabs -->
 
-Uygulamayı çalıştırın ve bir alan ile film oluşturabileceğiniz, düzenleyebileceğiniz ve görüntüleyebilen bir doğrulama yapabilirsiniz `Rating` . Uygulamayı güncelleştirin:
-
-* `Rating`Alanı `Edit` ,, `Details` ve `Delete` görüntüleme şablonlarına ekleyin.
-* ' Nin düzenleme eylemi yönteminde bağlamayı güncelleştirin `MoviesController` .
+Uygulamayı çalıştırın ve bir alan ile film oluşturabileceğiniz, düzenleyebileceğiniz ve görüntüleyebilen bir doğrulama yapabilirsiniz `Rating` .
 
 > [!div class="step-by-step"]
 > [Önceki](search.md) 

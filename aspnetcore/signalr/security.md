@@ -1,7 +1,7 @@
 ---
 title: ASP.NET Core güvenlik konularıSignalR
 author: bradygaster
-description: ASP.NET Core SignalR'da kimlik doğrulama ve yetkilendirmeyi nasıl kullanacağınızı öğrenin.
+description: ASP.NET Core 'da kimlik doğrulama ve yetkilendirmeyi nasıl kullanacağınızı öğrenin SignalR .
 monikerRange: '>= aspnetcore-2.1'
 ms.author: anurse
 ms.custom: mvc
@@ -13,27 +13,27 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/security
-ms.openlocfilehash: 2b049d9d8131c6c95b2f768620c984d0f67f92cc
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b80ece8c74c0f1d4d8518f0da16a91db9687336c
+ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775329"
+ms.lasthandoff: 06/13/2020
+ms.locfileid: "84755893"
 ---
 # <a name="security-considerations-in-aspnet-core-signalr"></a>ASP.NET Core güvenlik konularıSignalR
 
 , [Andrew Stanton-nurte](https://twitter.com/anurse)
 
-Bu makalede, güvenliğini sağlama SignalRhakkında bilgi sağlanır.
+Bu makalede, güvenliğini sağlama hakkında bilgi sağlanır SignalR .
 
 ## <a name="cross-origin-resource-sharing"></a>Çıkış noktaları arası kaynak paylaşma
 
-[Çapraz kaynak kaynak paylaşımı (CORS)](https://www.w3.org/TR/cors/) , tarayıcıda çapraz kaynak SignalR bağlantılarına izin vermek için kullanılabilir. JavaScript kodu SignalR uygulamadan farklı bir etki alanında barındırılıyorsa, JavaScript 'in SignalR uygulamaya bağlanmasına izin vermek için [CORS ara yazılımı](xref:security/cors) etkinleştirilmelidir. Yalnızca güvendiğiniz veya denetlediğiniz etki alanlarından çıkış noktaları arası isteklere izin verin. Örneğin:
+[Çapraz kaynak kaynak paylaşımı (CORS)](https://www.w3.org/TR/cors/) , tarayıcıda çapraz kaynak bağlantılarına izin vermek için kullanılabilir SignalR . JavaScript kodu uygulamadan farklı bir etki alanında barındırılıyorsa SignalR , JavaScript 'in uygulamaya bağlanmasına izin vermek Için [CORS ara yazılımı](xref:security/cors) etkinleştirilmelidir SignalR . Yalnızca güvendiğiniz veya denetlediğiniz etki alanlarından çıkış noktaları arası isteklere izin verin. Örnek:
 
 * Siteniz üzerinde barındırılıyor`http://www.example.com`
-* SignalR Uygulamanız üzerinde barındırılıyor`http://signalr.example.com`
+* SignalRUygulamanız üzerinde barındırılıyor`http://signalr.example.com`
 
-CORS, SignalR uygulamada yalnızca kaynağa `www.example.com`izin verecek şekilde yapılandırılmalıdır.
+CORS SignalR , uygulamada yalnızca kaynağa izin verecek şekilde yapılandırılmalıdır `www.example.com` .
 
 CORS 'yi yapılandırma hakkında daha fazla bilgi için bkz. [çıkış noktaları arası istekleri (CORS) etkinleştirme](xref:security/cors). SignalRAşağıdaki CORS ilkelerini **gerektirir** :
 
@@ -48,7 +48,7 @@ Kimlik bilgilerini kullanma seçeneği yalnızca %100 kimlik bilgileri gibi kiml
 
 ::: moniker-end
 
-Örneğin, SignalR aşağıdaki CORS ilkesi üzerinde barındırılan bir tarayıcı istemcisinin `https://example.com` üzerinde barındırılan SignalR uygulamaya erişmesine izin verir: `https://signalr.example.com`
+Örneğin, aşağıdaki CORS ilkesi üzerinde barındırılan bir SignalR tarayıcı istemcisinin üzerinde `https://example.com` barındırılan uygulamaya erişmesine izin verir SignalR `https://signalr.example.com` :
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -71,7 +71,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
     app.UseEndpoints(endpoints =>
     {
-        endpoints.MapHub<ChatHub>("/chatHub");
+        endpoints.MapHub<ChatHub>("/chathub");
     });
 
     // ... other middleware ...
@@ -99,33 +99,33 @@ CORS tarafından sunulan korumalar WebSockets için geçerlidir. WebSockets üze
 CORS tarafından sunulan korumalar WebSockets için geçerlidir. Tarayıcılar şunları **desteklemez**:
 
 * CORS ön uçuş istekleri gerçekleştirin.
-* WebSocket istekleri yapılırken `Access-Control` üst bilgilerde belirtilen kısıtlamalara saygı.
+* `Access-Control`WebSocket istekleri yapılırken üst bilgilerde belirtilen kısıtlamalara saygı.
 
-Ancak, tarayıcılar WebSocket istekleri verirken `Origin` üstbilgiyi gönderir. Yalnızca beklenen kaynaklardan gelen WebSockets izin verildiğinden emin olmak için uygulamalar bu üstbilgileri doğrulamak üzere yapılandırılmalıdır.
+Ancak, tarayıcılar `Origin` WebSocket istekleri verirken üstbilgiyi gönderir. Yalnızca beklenen kaynaklardan gelen WebSockets izin verildiğinden emin olmak için uygulamalar bu üstbilgileri doğrulamak üzere yapılandırılmalıdır.
 
-ASP.NET Core 2,1 ve üzeri sürümlerde, daha önce `Configure` ** `UseSignalR`** yerleştirilmiş özel bir ara yazılım ve içindeki kimlik doğrulama ara yazılımı kullanılarak üst bilgi doğrulaması elde edilebilir:
+ASP.NET Core 2,1 ve üzeri sürümlerde, daha önce yerleştirilmiş özel bir ara yazılım ** `UseSignalR` ve içindeki kimlik doğrulama ara yazılımı** kullanılarak üst bilgi doğrulaması elde edilebilir `Configure` :
 
 [!code-csharp[Main](security/sample/Startup.cs?name=snippet2)]
 
 > [!NOTE]
-> `Origin` Üst bilgi istemci tarafından denetlenir ve `Referer` üst bilgi gibi erişilebilir. Bu üst bilgiler bir kimlik doğrulama mekanizması **olarak kullanılmamalıdır.**
+> `Origin`Üst bilgi istemci tarafından denetlenir ve `Referer` üst bilgi gibi erişilebilir. Bu üst bilgiler bir kimlik doğrulama mekanizması **olarak kullanılmamalıdır.**
 
 ::: moniker-end
 
 ## <a name="connectionid"></a>ConnectionID
 
-Sunucu veya istemci ASP.NET Core sürümü 2,2 veya daha önceki bir sürümdeyse, kullanıma sunma `ConnectionId` kötü amaçlı kimliğe bürünmeye yol açabilir. SignalR SignalR Sunucu ve istemci sürümü ASP.NET Core 3,0 veya üzeri ise, `ConnectionToken` bunun yerine gizli tutulması `ConnectionId` gerekir. , `ConnectionToken` Özellikle HERHANGI bir API 'de gösterilmez.  Eski SignalR istemcilerin sunucuya bağlanmadığından emin olmak zor olabilir, bu nedenle SignalR sunucu sürümünüz ASP.NET Core 3,0 veya sonraki bir sürümse bile `ConnectionId` gösterilmemelidir.
+`ConnectionId` SignalR Sunucu veya istemci ASP.NET Core sürümü 2,2 veya daha önceki bir sürümdeyse, kullanıma sunma kötü amaçlı kimliğe bürünmeye yol açabilir. SignalRSunucu ve istemci sürümü ASP.NET Core 3,0 veya üzeri ise, `ConnectionToken` bunun yerine `ConnectionId` gizli tutulması gerekir. , Özellikle `ConnectionToken` herhangi BIR API 'de gösterilmez.  Eski SignalR istemcilerin sunucuya bağlanmadığından emin olmak zor olabilir, bu nedenle SignalR sunucu sürümünüz ASP.NET Core 3,0 veya sonraki bir sürümse bile `ConnectionId` gösterilmemelidir.
 
 ## <a name="access-token-logging"></a>Erişim belirteci günlüğe kaydetme
 
-WebSockets veya sunucu tarafından gönderilen olaylar kullanılırken, tarayıcı istemcisi erişim belirtecini sorgu dizesinde gönderir. Sorgu dizesi aracılığıyla erişim belirtecinin alınması genellikle standart `Authorization` üst bilgi kullanılarak güvenlidir. İstemci ve sunucu arasında güvenli bir uçtan uca bağlantı sağlamak için her zaman HTTPS kullanın. Birçok Web sunucusu, sorgu dizesi dahil olmak üzere her bir isteğin URL 'sini günlüğe kaydeder. URL 'Leri günlüğe kaydetme erişim belirtecini günlüğe alabilir. ASP.NET Core, her isteğin URL 'sini varsayılan olarak günlüğe kaydeder ve bu sorgu dizesini içerir. Örneğin:
+WebSockets veya sunucu tarafından gönderilen olaylar kullanılırken, tarayıcı istemcisi erişim belirtecini sorgu dizesinde gönderir. Sorgu dizesi aracılığıyla erişim belirtecinin alınması genellikle standart `Authorization` üst bilgi kullanılarak güvenlidir. İstemci ve sunucu arasında güvenli bir uçtan uca bağlantı sağlamak için her zaman HTTPS kullanın. Birçok Web sunucusu, sorgu dizesi dahil olmak üzere her bir isteğin URL 'sini günlüğe kaydeder. URL 'Leri günlüğe kaydetme erişim belirtecini günlüğe alabilir. ASP.NET Core, her isteğin URL 'sini varsayılan olarak günlüğe kaydeder ve bu sorgu dizesini içerir. Örnek:
 
 ```
 info: Microsoft.AspNetCore.Hosting.Internal.WebHost[1]
-      Request starting HTTP/1.1 GET http://localhost:5000/myhub?access_token=1234
+      Request starting HTTP/1.1 GET http://localhost:5000/chathub?access_token=1234
 ```
 
-Bu verilerin sunucu günlüklerinizi günlüğe kaydetmekle ilgili endişeleriniz varsa, `Microsoft.AspNetCore.Hosting` günlükçü 'yi `Warning` düzeye veya yukarıya yapılandırarak (Bu iletiler `Info` düzeyinde yazılır) bu günlüğü tamamen devre dışı bırakabilirsiniz. Daha fazla bilgi için bkz. [günlük filtreleme](xref:fundamentals/logging/index#log-filtering) . Hala belirli istek bilgilerini günlüğe kaydetmek istiyorsanız, ihtiyacınız olan verileri günlüğe kaydetmek için [bir ara yazılım yazabilir](xref:fundamentals/middleware/write) ve `access_token` sorgu dizesi değerini (varsa) filtreleyebilirsiniz.
+Bu verilerin sunucu günlüklerinizi günlüğe kaydetmekle ilgili endişeleriniz varsa, `Microsoft.AspNetCore.Hosting` günlükçü 'yi `Warning` düzeye veya yukarıya yapılandırarak (Bu iletiler düzeyinde yazılır) bu günlüğü tamamen devre dışı bırakabilirsiniz `Info` . Daha fazla bilgi için bkz. [günlük filtreleme](xref:fundamentals/logging/index#log-filtering) . Hala belirli istek bilgilerini günlüğe kaydetmek istiyorsanız, ihtiyacınız olan verileri günlüğe kaydetmek için [bir ara yazılım yazabilir](xref:fundamentals/middleware/write) ve `access_token` sorgu dizesi değerini (varsa) filtreleyebilirsiniz.
 
 ## <a name="exceptions"></a>Özel durumlar
 
@@ -133,7 +133,7 @@ Bu verilerin sunucu günlüklerinizi günlüğe kaydetmekle ilgili endişelerini
 
 ## <a name="buffer-management"></a>Arabellek Yönetimi
 
-SignalRgelen ve giden iletileri yönetmek için bağlantı başına arabellekleri kullanır. Varsayılan olarak, SignalR bu ARABELLEKLERI 32 KB ile sınırlandırır. Bir istemcinin veya sunucunun gönderecan en büyük ileti 32 KB 'tır. İleti bağlantısı tarafından tüketilen maksimum bellek 32 KB 'tır. İletileriniz her zaman 32 KB 'den küçükse, sınırı azaltabilirsiniz ve şunları yapabilirsiniz:
+SignalRgelen ve giden iletileri yönetmek için bağlantı başına arabellekleri kullanır. Varsayılan olarak, SignalR Bu arabellekleri 32 KB ile sınırlandırır. Bir istemcinin veya sunucunun gönderecan en büyük ileti 32 KB 'tır. İleti bağlantısı tarafından tüketilen maksimum bellek 32 KB 'tır. İletileriniz her zaman 32 KB 'den küçükse, sınırı azaltabilirsiniz ve şunları yapabilirsiniz:
 
 * Bir istemcinin daha büyük bir ileti gönderebilmesini engeller.
 * Sunucu, iletileri kabul etmek için hiçbir şekilde büyük arabellekler ayırmayı gerektirmez.
@@ -143,9 +143,9 @@ SignalRgelen ve giden iletileri yönetmek için bağlantı başına arabellekler
 * İstemci, sunucunun büyük bellek arabellekleri ayırmasına neden olabilir.
 * Büyük arabelleklerin sunucu ayırması, eşzamanlı bağlantı sayısını azaltabilir.
 
-Gelen ve giden iletiler için, her ikisi de yapılandırılan [Httpconnectiondispatcheroptions](xref:signalr/configuration#configure-server-options) nesnesinde yapılandırılabilir `MapHub`:
+Gelen ve giden iletiler için, her ikisi de yapılandırılan [Httpconnectiondispatcheroptions](xref:signalr/configuration#configure-server-options) nesnesinde yapılandırılabilir `MapHub` :
 
 * `ApplicationMaxBufferSize`istemciden sunucunun arabelleğe aldığı en fazla bayt sayısını temsil eder. İstemci bu sınırdan daha büyük bir ileti göndermemeyi denerse bağlantı kapatılabilir.
 * `TransportMaxBufferSize`sunucunun gönderemediği en fazla bayt sayısını temsil eder. Sunucu, bu sınırdan daha büyük bir ileti (hub metotlarından dönüş değerleri dahil) gönderilmeye çalışırsa, bir özel durum oluşturulur.
 
-Limit ayarı sınırı `0` devre dışı bırakır. Sınırı kaldırmak, bir istemcinin herhangi bir boyutta ileti göndermesini sağlar. Büyük iletiler gönderen kötü amaçlı istemciler fazla belleğin ayrılmasına neden olabilir. Aşırı bellek kullanımı, eşzamanlı bağlantı sayısını önemli ölçüde azaltabilir.
+Limit ayarı `0` sınırı devre dışı bırakır. Sınırı kaldırmak, bir istemcinin herhangi bir boyutta ileti göndermesini sağlar. Büyük iletiler gönderen kötü amaçlı istemciler fazla belleğin ayrılmasına neden olabilir. Aşırı bellek kullanımı, eşzamanlı bağlantı sayısını önemli ölçüde azaltabilir.

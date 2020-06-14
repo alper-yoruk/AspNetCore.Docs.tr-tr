@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: 38a75e9577bab6bbdb5accf161659e8e301947b1
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: f2588665c26887a6e3864866425b887e97e656d5
+ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105941"
+ms.lasthandoff: 06/13/2020
+ms.locfileid: "84755878"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3,0 ' deki yenilikler
 
@@ -84,13 +84,13 @@ Daha fazla bilgi için bkz. <xref:grpc/index>.
 
 ## SignalR
 
-Bkz. geçiş yönergeleri için [ SignalR kodu güncelleştirme](xref:migration/22-to-30#signalr) . SignalRArtık `System.Text.Json` JSON iletilerini seri hale getirmek/seri durumdan çıkarmak için kullanır. Tabanlı serileştiriciyi geri yükleme yönergeleri için bkz. [Newtonsoft. JSON öğesine geçme](xref:migration/22-to-30#switch-to-newtonsoftjson) `Newtonsoft.Json` .
+Bkz. geçiş yönergeleri için [ SignalR kodu güncelleştirme](xref:migration/22-to-30#signalr) . SignalRArtık `System.Text.Json` JSON iletilerini seri hale getirmek/seri durumdan çıkarmak için kullanır. Tabanlı seri hale getirici 'yi geri yükleme yönergeleri için bkz. [Newtonsoft.Js'ye geçme](xref:migration/22-to-30#switch-to-newtonsoftjson) `Newtonsoft.Json` .
 
 İçin JavaScript ve .NET Istemcilerinde SignalR , otomatik yeniden bağlanma için destek eklenmiştir. Varsayılan olarak, istemci hemen yeniden bağlanmaya çalışır ve gerekirse 2, 10 ve 30 saniye sonra yeniden dener. İstemci başarıyla yeniden bağlanırsa, yeni bir bağlantı KIMLIĞI alır. Otomatik yeniden bağlanma kabul etme:
 
 ```javascript
 const connection = new signalR.HubConnectionBuilder()
-    .withUrl("/chatHub")
+    .withUrl("/chathub")
     .withAutomaticReconnect()
     .build();
 ```
@@ -316,7 +316,7 @@ ASP.NET Core 3,0 artık <xref:System.Text.Json> JSON serileştirme için varsay�
 * UTF-8 metni için iyileştirilmiştir.
 * Genellikle daha yüksek performans `Newtonsoft.Json` .
 
-ASP.NET Core 3,0 ' ye Json.NET eklemek için bkz. [Newtonsoft. JSON tabanlı JSON biçimi desteği ekleme](xref:web-api/advanced/formatting#add-newtonsoftjson-based-json-format-support).
+ASP.NET Core 3,0 ' ye Json.NET eklemek için bkz. [Newtonsoft.Jstabanlı JSON biçimi desteği ekleme](xref:web-api/advanced/formatting#add-newtonsoftjson-based-json-format-support).
 
 ## <a name="new-razor-directives"></a>Yeni Razor yönergeler
 
@@ -401,7 +401,7 @@ Daha fazla bilgi için bkz. <xref:security/authentication/windowsauth>.
 Web UI şablonları ( Razor Sayfalar, denetleyici ve GÖRÜNÜMLERLE Mvc) aşağıdaki gibi kaldırılmıştır:
 
 * Tanımlama bilgisi onayı Kullanıcı arabirimi artık dahil değildir. ASP.NET Core 3,0 şablon tarafından oluşturulan bir uygulamada tanımlama bilgisi onay özelliğini etkinleştirmek için, bkz <xref:security/gdpr> ..
-* Betiklerin ve ilgili statik varlıkların artık CDNs kullanmak yerine yerel dosyalar olarak başvuruluyor. Daha fazla bilgi için, bkz. [betiklerin ve ilgili statik varlıkların artık geçerli ortama göre CDNs kullanmak yerine yerel dosyalar olarak başvuruluyor (ASPNET/AspNetCore. Docs #14350)](https://github.com/dotnet/AspNetCore.Docs/issues/14350).
+* Betiklerin ve ilgili statik varlıkların artık CDNs kullanmak yerine yerel dosyalar olarak başvuruluyor. Daha fazla bilgi için, bkz. [betikler ve ilgili statik varlıklar artık geçerli ortama (ASPNET/AspNetCore.Docs #14350) göre CDNs kullanmak yerine yerel dosyalar olarak başvuruluyor](https://github.com/dotnet/AspNetCore.Docs/issues/14350).
 
 Angular şablonu, angular 8 ' i kullanacak şekilde güncelleştirildi.
 
@@ -437,7 +437,7 @@ Daha fazla bilgi için bkz. <xref:migration/22-to-30#kestrel>.
 
 ## <a name="http2-enabled-by-default"></a>Varsayılan olarak etkin HTTP/2
 
-HTTP/2, HTTPS uç noktaları için Kestrel içinde varsayılan olarak etkindir. IIS veya HTTP. sys için HTTP/2 desteği, işletim sistemi tarafından desteklendikleri zaman etkindir.
+HTTP/2, HTTPS uç noktaları için Kestrel içinde varsayılan olarak etkindir. IIS veya HTTP.sys için HTTP/2 desteği, işletim sistemi tarafından desteklendikleri zaman etkindir.
 
 ## <a name="eventcounters-on-request"></a>İstek üzerine EventCounters
 
@@ -507,7 +507,7 @@ Daha fazla bilgi için bkz.
 
 Bu senaryo ASP.NET Core 3,0 ' de düzeltilmiştir. Ortam değişkeni olarak ayarlandığında, ana bilgisayar [Iletilen üstbilgiler ara yazılımını](xref:host-and-deploy/proxy-load-balancer#forwarded-headers-middleware-options) sağlar `ASPNETCORE_FORWARDEDHEADERS_ENABLED` `true` . `ASPNETCORE_FORWARDEDHEADERS_ENABLED`, `true` kapsayıcı görüntülerimizde olarak ayarlanır.
 
-## <a name="performance-improvements"></a>Performans iyileştirmeleri
+## <a name="performance-improvements"></a>Performans geliştirmeleri
 
 ASP.NET Core 3,0, bellek kullanımını azaltan ve üretilen işi geliştiren birçok geliştirme içerir:
 
@@ -536,7 +536,7 @@ Geçiş bilgileri için bkz. [kodunuzu .NET Core 'a .NET Framework](/dotnet/core
 
 ASP.NET Core 3,0 paylaşılan çerçevesinden çıkarılan en önemli derlemeler şunlardır:
 
-* [Newtonsoft. JSON](https://www.nuget.org/packages/Newtonsoft.Json/) (JSON.net). ASP.NET Core 3,0 ' ye Json.NET eklemek için bkz. [Newtonsoft. JSON tabanlı JSON biçimi desteği ekleme](xref:web-api/advanced/formatting#add-newtonsoftjson-based-json-format-support). ASP.NET Core 3,0 `System.Text.Json` , JSON okuma ve yazma için tanıtılmıştır. Daha fazla bilgi için bu belgede [yenı JSON serileştirmesi](#new-json-serialization) bölümüne bakın.
+* [Newtonsoft.Js](https://www.nuget.org/packages/Newtonsoft.Json/) (JSON.net). ASP.NET Core 3,0 ' ye Json.NET eklemek için bkz. [Newtonsoft.Jstabanlı JSON biçimi desteği ekleme](xref:web-api/advanced/formatting#add-newtonsoftjson-based-json-format-support). ASP.NET Core 3,0 `System.Text.Json` , JSON okuma ve yazma için tanıtılmıştır. Daha fazla bilgi için bu belgede [yenı JSON serileştirmesi](#new-json-serialization) bölümüne bakın.
 * [Entity Framework Core](/ef/core/)
 
 Paylaşılan çerçeveden kaldırılan derlemelerin tamamen listesi için bkz [. Microsoft. AspNetCore. App 3,0 ' den kaldırılan derlemeler](https://github.com/dotnet/AspNetCore/issues/3755). Bu değişiklik için mosyon hakkında daha fazla bilgi için bkz. [3,0 'de Microsoft. AspNetCore. app 'e yönelik son değişiklikler](https://github.com/aspnet/Announcements/issues/325) ve [ASP.NET Core 3,0 ' de gelen değişikliklere ilk bakış](https://devblogs.microsoft.com/aspnet/a-first-look-at-changes-coming-in-asp-net-core-3-0/).

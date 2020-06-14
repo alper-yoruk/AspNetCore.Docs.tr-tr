@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-web-api
-ms.openlocfilehash: 2fcfd46057935cadac76c558a78729a1c096ffc0
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 71ab0fc0a679acf540fa53fa2a9c8ba893b34edf
+ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84451842"
+ms.lasthandoff: 06/12/2020
+ms.locfileid: "84724360"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Öğretici: ASP.NET Core bir Web API 'SI oluşturma
 
@@ -27,7 +27,7 @@ Bu öğreticide, ASP.NET Core ile Web API 'SI oluşturmanın temelleri öğretil
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
+Bu öğreticide aşağıdakilerin nasıl yapılacağını öğreneceksiniz:
 
 > [!div class="checklist"]
 > * Bir Web API projesi oluşturun.
@@ -42,7 +42,7 @@ Sonunda, bir veritabanında depolanan "yapılacaklar" öğelerini yönetebilmek 
 
 Bu öğretici aşağıdaki API 'YI oluşturur:
 
-|API | Açıklama | İstek gövdesi | Yanıt gövdesi |
+|API | Description | İstek gövdesi | Yanıt gövdesi |
 |--- | ---- | ---- | ---- |
 |`GET /api/TodoItems` | Tüm yapılacaklar öğelerini Al | Yok | Yapılacaklar öğeleri dizisi|
 |`GET /api/TodoItems/{id}` | KIMLIĞE göre öğe al | Yok | Yapılacaklar öğesi|
@@ -281,7 +281,7 @@ Yukarıdaki kod:
 
   * **Model sınıfında** **TodoItem (TodoApi. modeller)** öğesini seçin.
   * **Veri bağlamı sınıfında** **TodoContext (TodoApi. modeller)** öğesini seçin.
-  * **Add (Ekle)** seçeneğini belirleyin.
+  * **Ekle**'yi seçin.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
@@ -380,7 +380,7 @@ Bu yöntemler iki al uç noktası uygular:
 * `GET /api/TodoItems`
 * `GET /api/TodoItems/{id}`
 
-Tarayıcıdan veya Postman 'dan iki uç noktayı çağırarak uygulamayı test edin. Örneğin:
+Tarayıcıdan veya Postman 'dan iki uç noktayı çağırarak uygulamayı test edin. Örnek:
 
 * `https://localhost:5001/api/TodoItems`
 * `https://localhost:5001/api/TodoItems/1`
@@ -512,7 +512,7 @@ Bkz. [öğretici: JavaScript ile ASP.NET Core Web API 'Si çağırma](xref:tutor
 
 ::: moniker range="< aspnetcore-3.0"
 
-Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
+Bu öğreticide aşağıdakilerin nasıl yapılacağını öğreneceksiniz:
 
 > [!div class="checklist"]
 > * Bir Web API projesi oluşturun.
@@ -530,7 +530,7 @@ Sonunda, ilişkisel bir veritabanında depolanan "yapılacaklar" öğelerini yö
 
 Bu öğretici aşağıdaki API 'YI oluşturur:
 
-|API | Açıklama | İstek gövdesi | Yanıt gövdesi |
+|API | Description | İstek gövdesi | Yanıt gövdesi |
 |--- | ---- | ---- | ---- |
 |/Api/TodoItems al | Tüm yapılacaklar öğelerini Al | Yok | Yapılacaklar öğeleri dizisi|
 |/Api/TodoItems/{id} al | KIMLIĞE göre öğe al | Yok | Yapılacaklar öğesi|
@@ -737,7 +737,7 @@ Bu yöntemler iki al uç noktası uygular:
 
 Hala çalışıyorsa uygulamayı durdurun. Ardından, en son değişiklikleri dahil etmek için yeniden çalıştırın.
 
-Bir tarayıcıdan iki uç noktayı çağırarak uygulamayı test edin. Örneğin:
+Bir tarayıcıdan iki uç noktayı çağırarak uygulamayı test edin. Örnek:
 
 * `https://localhost:<port>/api/todo`
 * `https://localhost:<port>/api/todo/1`
@@ -913,18 +913,18 @@ Uygulamayı [statik dosyalara sunacak](/dotnet/api/microsoft.aspnetcore.builder.
 
 Proje dizininde bir *Wwwroot* klasörü oluşturun.
 
-*Wwwroot* dizinine *index. HTML* adlı bir HTML dosyası ekleyin. İçeriğini aşağıdaki biçimlendirmeyle değiştirin:
+*Wwwroot* dizinine *index.html* adlı bir HTML dosyası ekleyin. İçeriğini aşağıdaki biçimlendirmeyle değiştirin:
 
 [!code-html[](first-web-api/samples/2.2/TodoApi/wwwroot/index.html)]
 
-*Wwwroot* dizinine *site. js* adlı bir JavaScript dosyası ekleyin. İçeriğini şu kodla değiştirin:
+*Wwwroot* dizinine *site.js* adlı bir JavaScript dosyası ekleyin. İçeriğini şu kodla değiştirin:
 
 [!code-javascript[](first-web-api/samples/2.2/TodoApi/wwwroot/site.js?name=snippet_SiteJs)]
 
 HTML sayfasını yerel olarak test etmek için ASP.NET Core projesinin başlatma ayarlarındaki bir değişikliğin yapılması gerekebilir:
 
-* *Properties\launchSettings.JSON*'i açın.
-* `launchUrl`Uygulamanın varsayılan dosyasını *index. html*dizininde açılmasını zorlamak için özelliği kaldırın &mdash; .
+* *ÜzerindeProperties\launchSettings.js*açın.
+* `launchUrl`Uygulamayı projenin varsayılan dosyasında *index.html*'de açmaya zorlamak için özelliği kaldırın &mdash; .
 
 Bu örnek, Web API 'sinin tüm CRUD yöntemlerini çağırır. API çağrılarının açıklamaları aşağıda verilmiştir.
 

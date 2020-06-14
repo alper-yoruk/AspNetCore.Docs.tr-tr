@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/blazor/webassembly/aad-groups-roles
-ms.openlocfilehash: 3ed06cca7e20da381b870e642a6c616b2578cd0a
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 87cdf02a6f6babc869d90658e6a7cd54db73bb68
+ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84451881"
+ms.lasthandoff: 06/13/2020
+ms.locfileid: "84756034"
 ---
 # <a name="azure-ad-groups-administrative-roles-and-user-defined-roles"></a>Azure AD grupları, yönetim rolleri ve Kullanıcı tanımlı roller
 
@@ -164,7 +164,7 @@ Aşağıdaki örneklerde, uygulama kullanıcıyı yetkilendirmek için yukarıda
 </AuthorizeView>
 ```
 
-Bir bileşenin tamamına erişim [] öznitelik yönergesini kullanarak ilkeyi temel alabilir `[Authorize]` ] (XREF: Security/blazor/index # Yetkilendir-Attribute) ( <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ):
+Bir bileşenin tamamına erişim, [ `[Authorize]` öznitelik yönergesini](xref:security/blazor/index#authorize-attribute) () kullanarak ilkeye bağlı olabilir <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> :
 
 ```razor
 @page "/"
@@ -246,7 +246,7 @@ builder.Services.AddMsalAuthentication(options =>
 Bu noktada bileşen yetkilendirme yaklaşımları işlevseldir. Bileşenlerdeki yetkilendirme mekanizmalarının herhangi biri, `admin` kullanıcıyı yetkilendirmek için rolünü kullanabilir:
 
 * [Authorizeview bileşeni](xref:security/blazor/index#authorizeview-component) (örnek: `<AuthorizeView Roles="admin">` )
-* [ `[Authorize]` ] öznitelik yönergesi] (XREF: Security/blazor/index # Yetkilendir-Attribute) ( <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ) (Örnek: `@attribute [Authorize(Roles = "admin")]` )
+* [ `[Authorize]` Attribute yönergesi](xref:security/blazor/index#authorize-attribute) ( <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ) (örnek: `@attribute [Authorize(Roles = "admin")]` )
 * [Yordamsal Logic](xref:security/blazor/index#procedural-logic) (örnek: `if (user.IsInRole("admin")) { ... }` )
 
   Birden çok rol testi desteklenir:
