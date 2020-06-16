@@ -13,18 +13,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: c935f326afb77de5e083829c0bc2494efb20fec3
-ms.sourcegitcommit: 6371114344a5f4fbc5d4a119b0be1ad3762e0216
+ms.openlocfilehash: ffdc329d813dcbfffe2216dc58bbc4150f7cf786
+ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84679624"
+ms.lasthandoff: 06/15/2020
+ms.locfileid: "84776429"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>ASP.NET Core weelsembly ile aşamalı Web uygulamaları oluşturun Blazor
 
 [Steve Sanderson](https://github.com/SteveSandersonMS) tarafından
 
-Aşamalı bir Web uygulaması (PWA), masaüstü uygulaması gibi davranması için modern tarayıcı API 'Leri ve özellikleri kullanan tek sayfalı bir uygulamadır (SPA). BlazorWebAssembly, standartlara dayalı bir istemci tarafı Web uygulaması platformudur, bu nedenle aşağıdaki yetenekler için gereken PWA API 'Leri de dahil olmak üzere herhangi bir tarayıcı API 'sini kullanabilir:
+Aşamalı bir Web uygulaması (PWA) genellikle modern tarayıcı API 'Leri ve masaüstü uygulaması gibi davranmaya yönelik yetenekler kullanan tek sayfalı bir uygulamadır (SPA). BlazorWebAssembly, standartlara dayalı bir istemci tarafı Web uygulaması platformudur, bu nedenle aşağıdaki yetenekler için gereken PWA API 'Leri de dahil olmak üzere herhangi bir tarayıcı API 'sini kullanabilir:
 
 * Ağ hızından bağımsız olarak çevrimdışı çalışma ve anında yükleme.
 * Yalnızca bir tarayıcı penceresi değil kendi uygulama penceresinde çalışıyor.
