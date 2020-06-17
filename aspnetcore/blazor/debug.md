@@ -14,10 +14,10 @@ no-loc:
 - SignalR
 uid: blazor/debug
 ms.openlocfilehash: 193dc656c2ee0154f0ae534bc00f8dc29bab3258
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/05/2020
+ms.lasthandoff: 06/16/2020
 ms.locfileid: "84239224"
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>Hata ayıklama ASP.NET Core Blazor webassembly
@@ -51,13 +51,13 @@ Hata ayıklama aşağıdaki tarayıcılardan birini gerektirir:
 
 ## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Visual Studio ve Visual Studio Code için hata ayıklamayı etkinleştir
 
-Mevcut bir weelsembly uygulamasında hata ayıklamayı etkinleştirmek için Blazor , başlangıç projesindeki *launchsettings. JSON* dosyasını her bir başlatma profiline aşağıdaki özelliği içerecek şekilde güncelleştirin `inspectUri` :
+Varolan bir weelsembly uygulamasında hata ayıklamayı etkinleştirmek için Blazor , başlangıç projesindeki dosya *launchSettings.js* `inspectUri` her bir başlatma profiline aşağıdaki özelliği içerecek şekilde güncelleştirin:
 
 ```json
 "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}"
 ```
 
-' Yi güncelleştirdikten sonra, *Launchsettings. JSON* dosyası aşağıdaki örneğe benzer şekilde görünmelidir:
+Güncelleştirildikten sonra, dosyadaki *launchSettings.js* aşağıdaki örneğe benzer şekilde görünmelidir:
 
 [!code-json[](debug/launchSettings.json?highlight=14,22)]
 
@@ -145,11 +145,11 @@ BlazorVisual Studio Code bir webassembly uygulamasında hata ayıklamak için:
 
 1. Seçim penceresinde barındırılan çözüm içinde *sunucu* projesini seçin.
 
-Hata ayıklayıcıyı başlatmak için başlatma yapılandırması ile bir *Launch. JSON* dosyası oluşturulur.
+Hata ayıklayıcıyı başlatmak için başlatma yapılandırması ile dosyada bir *launch.js* oluşturulur.
 
 ### <a name="attach-to-an-existing-debugging-session"></a>Varolan bir hata ayıklama oturumuna Ekle
 
-Çalışan bir uygulamaya eklemek için Blazor aşağıdaki yapılandırmaya sahip bir *Launch. JSON* dosyası oluşturun:
+Çalışan bir uygulamaya eklemek için Blazor aşağıdaki yapılandırmaya sahip bir *launch.js* dosya oluşturun:
 
 ```json
 {

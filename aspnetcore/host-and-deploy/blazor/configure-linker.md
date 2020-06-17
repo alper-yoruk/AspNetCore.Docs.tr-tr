@@ -1,12 +1,24 @@
 ---
-Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
+title: ASP.NET Core için bağlayıcı yapılandırmaBlazor
+author: guardrex
+description: Uygulama oluştururken ara dil (IL) bağlayıcı denetimini nasıl denetleyeceğinizi öğrenin Blazor .
+monikerRange: '>= aspnetcore-3.1'
+ms.author: riande
+ms.custom: mvc
+ms.date: 05/19/2020
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: host-and-deploy/blazor/configure-linker
+ms.openlocfilehash: fd8dc118b8ed9c9e7c0d43e67b14ef4affa09d48
+ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/16/2020
+ms.locfileid: "83608635"
 ---
 # <a name="configure-the-linker-for-aspnet-core-blazor"></a>ASP.NET Core için bağlayıcı yapılandırmaBlazor
 
@@ -43,7 +55,7 @@ Bir XML yapılandırma dosyası sağlayarak ve dosyayı proje dosyasında MSBuil
 </ItemGroup>
 ```
 
-*Linkerconfig. xml*:
+*LinkerConfig.xml*:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -81,7 +93,7 @@ Daha fazla bilgi ve örnek için bkz. [veri biçimleri (mono/bağlayıcı GitHub
 
 Bağlayıcıyı belirli bir kitaplık için yapılandırmak için, kitaplığa katıştırılmış kaynak olarak bir XML bağlayıcı yapılandırma dosyası ekleyin. Katıştırılmış kaynak, derlemeyle aynı ada sahip olmalıdır.
 
-Aşağıdaki örnekte, *Linkerconfig. xml* dosyası, kitaplığın derlemesi ile aynı ada sahip gömülü bir kaynak olarak belirtilir:
+Aşağıdaki örnekte *LinkerConfig.xml* dosyası, kitaplığın derlemesi ile aynı ada sahip gömülü bir kaynak olarak belirtilir:
 
 ```xml
 <ItemGroup>
@@ -104,141 +116,14 @@ Hangi I18N derlemelerinin korunacağını denetlemek için, `<BlazorWebAssemblyI
 ```
 
 | Bölge değeri     | Mono bölgesi derlemesi    |
-| ---
-Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--------- | ---title: ' ASP.NET Core için bağlayıcı yapılandırma: Blazor Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcı denetimini nasıl denetleyeceğinizi öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: ' ASP.NET Core için bağlayıcıyı yapılandırın Blazor ' Yazar: Açıklama: ' bir uygulama oluştururken ara dil (IL) bağlayıcının nasıl kontrol Leyeceğinizi öğrenin Blazor . '
-monikerRange: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
------------- | | `all`            | Tüm derlemeler dahil | | `cjk`             |  *I18N. ÇJK. dll* | | `mideast`         |  *I18N. MIDEAST. dll* | | `none`(varsayılan) | Hiçbiri | | `other`           |  *I18N. Diğer. dll* | | `rare`            |  *I18N. Nadir. dll* | | `west`            |  *I18N. Batı. dll*         |
+| ---------------- | ----------------------- |
+| `all`            | Tüm derlemeler dahil |
+| `cjk`            | *I18N.CJK.dll*          |
+| `mideast`        | *I18N.MidEast.dll*      |
+| `none`varsayılanını | Yok                    |
+| `other`          | *I18N.Other.dll*        |
+| `rare`           | *I18N.Rare.dll*         |
+| `west`           | *I18N.West.dll*         |
 
 Birden çok değeri ayırmak için virgül kullanın (örneğin, `mideast,west` ).
 
