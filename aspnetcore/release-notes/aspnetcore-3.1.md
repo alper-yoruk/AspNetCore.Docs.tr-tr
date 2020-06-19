@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-3.1
-ms.openlocfilehash: 5b6ae8173ca3d968e220faa4a060e1b42b14f8bb
-ms.sourcegitcommit: 05490855e0c70565f0c4b509d392b0828bcfd141
+ms.openlocfilehash: 6a03e35495e2ae545dc0a3cdd38578b433d8df6b
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/08/2020
-ms.locfileid: "84507250"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102586"
 ---
 # <a name="whats-new-in-aspnet-core-31"></a>ASP.NET Core 3,1 ' deki yenilikler
 
@@ -25,7 +25,7 @@ Bu makalede, ASP.NET Core 3,1 ' deki en önemli değişiklikler ilgili belgeleri
 
 ## <a name="partial-class-support-for-razor-components"></a>Bileşenler için kısmi sınıf desteği Razor
 
-Razorbileşenler artık kısmi sınıflar olarak oluşturulmuştur. Bir bileşenin kodu, Razor tek bir dosyada bileşen için tüm kodu tanımlamak yerine kısmi bir sınıf olarak tanımlanmış bir arka plan kod dosyası kullanılarak yazılabilir. Daha fazla bilgi için bkz. [kısmi sınıf desteği](xref:blazor/components#partial-class-support).
+Razorbileşenler artık kısmi sınıflar olarak oluşturulmuştur. Bir bileşenin kodu, Razor tek bir dosyada bileşen için tüm kodu tanımlamak yerine kısmi bir sınıf olarak tanımlanmış bir arka plan kod dosyası kullanılarak yazılabilir. Daha fazla bilgi için bkz. [kısmi sınıf desteği](xref:blazor/components/index#partial-class-support).
 
 ## <a name="blazor-component-tag-helper-and-pass-parameters-to-top-level-components"></a>BlazorBileşen etiketi Yardımcısı ve parametreleri en üst düzey bileşenlere geçir
 
@@ -46,11 +46,11 @@ BlazorSunucu uygulamaları artık ilk işleme sırasında parametreleri en üst 
     param-IncrementAmount="10" />
 ```
 
-Daha fazla bilgi için bkz. [bileşenleri Razor Sayfalar ve MVC uygulamaları ile tümleştirme](xref:blazor/integrate-components).
+Daha fazla bilgi için bkz. [bileşenleri Razor Sayfalar ve MVC uygulamaları ile tümleştirme](xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps).
 
-## <a name="support-for-shared-queues-in-httpsys"></a>HTTP. sys dosyasındaki paylaşılan sıralar için destek
+## <a name="support-for-shared-queues-in-httpsys"></a>HTTP.sys 'de paylaşılan sıralar için destek
 
-[Http. sys](xref:fundamentals/servers/httpsys) , anonim istek kuyrukları oluşturmayı destekler. ASP.NET Core 3,1 ' de, var olan bir HTTP. sys istek kuyruğunu oluşturma veya ekleme yeteneğine ekledik. Var olan adlandırılmış bir HTTP. sys istek kuyruğunu oluşturma veya iliştirme, sıranın sahibi olan HTTP. sys denetleyici işleminin dinleyici işleminden bağımsız olduğu senaryolara olanak sağlar. Bu bağımsızlık, var olan bağlantıları ve dinleyici işlemi yeniden başlatmalar arasında sıraya alınmış istekleri korumayı mümkün kılar:
+[HTTP.sys](xref:fundamentals/servers/httpsys) anonim istek kuyrukları oluşturmayı destekler. ASP.NET Core 3,1 ' de, var olan adlandırılmış HTTP.sys isteği kuyruğu oluşturma veya ekleme yeteneğine ekledik. Mevcut bir adlandırılmış HTTP.sys isteği kuyruğu oluşturmak veya eklemek, sıranın sahibi olan HTTP.sys denetleyicisi işleminin dinleyici işleminden bağımsız olduğu senaryolara olanak sağlar. Bu bağımsızlık, var olan bağlantıları ve dinleyici işlemi yeniden başlatmalar arasında sıraya alınmış istekleri korumayı mümkün kılar:
 
 [!code-csharp[](sample/Program.cs?name=snippet)]
 
@@ -66,7 +66,7 @@ SameSite tanımlama bilgilerinin davranışı yaklaşan tarayıcı değişiklikl
 <input value="@_count" @onkeypress="KeyHandler" @onkeypress:preventDefault />
 ```
 
-Daha fazla bilgi için bkz. [varsayılan eylemleri engelleme](xref:blazor/event-handling#prevent-default-actions).
+Daha fazla bilgi için bkz. [varsayılan eylemleri engelleme](xref:blazor/components/event-handling#prevent-default-actions).
 
 ## <a name="stop-event-propagation-in-blazor-apps"></a>Uygulamalarda olay yaymayı Durdur Blazor
 
@@ -86,7 +86,7 @@ Daha fazla bilgi için bkz. [varsayılan eylemleri engelleme](xref:blazor/event-
 }
 ```
 
-Daha fazla bilgi için bkz. [olay yaymayı durdurma](xref:blazor/event-handling#stop-event-propagation).
+Daha fazla bilgi için bkz. [olay yaymayı durdurma](xref:blazor/components/event-handling#stop-event-propagation).
 
 ## <a name="detailed-errors-during-blazor-app-development"></a>Uygulama geliştirme sırasında ayrıntılı hatalar Blazor
 
@@ -95,4 +95,4 @@ BlazorGeliştirme sırasında bir uygulama düzgün çalışmadığı zaman, uyg
 * Geliştirme sırasında altın çubuk, özel durumu görebileceğiniz tarayıcı konsoluna yönlendirir.
 * Üretimde, altın çubuk kullanıcıya bir hata oluştuğunu bildirir ve tarayıcıyı yenilemeyi önerir.
 
-Daha fazla bilgi için bkz. [geliştirme sırasında ayrıntılı hatalar](xref:blazor/handle-errors#detailed-errors-during-development).
+Daha fazla bilgi için bkz. [geliştirme sırasında ayrıntılı hatalar](xref:blazor/fundamentals/handle-errors#detailed-errors-during-development).

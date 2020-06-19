@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/get-started
-ms.openlocfilehash: 08229283882928c4cc733de19840d25872846c97
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: c90c3bf7ccef420101c66fe04d579920209b066c
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84452037"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102340"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>ASP.NET Core kullanmaya başlayınBlazor
 
@@ -54,7 +54,7 @@ Kullanmaya başlamak için Blazor , araç seçiminiz için yönergeleri izleyin:
 
 1. En son [C# for Visual Studio Code uzantısını](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) ve [JavaScript hata ayıklayıcısı (gecelik)](https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly) uzantısını ' a `debug.javascript.usePreview` ayarlayın `true` .
 
-  `debug.javascript.usePreview` `true` Vs Code Kullanıcı arabirimini kullanmak üzere ayarlamak için, **Dosya**  >  **tercihleri**  >  **ayarları** ' nı açın ve arama yapın `debug javascript use preview` . **Node. js ve Chrome için yeni bir önizleme Içindeki JavaScript hata ayıklayıcısını kullan**onay kutusunu işaretleyin.
+  `debug.javascript.usePreview` `true` Vs Code Kullanıcı arabirimini kullanmak üzere ayarlamak için, **Dosya**  >  **tercihleri**  >  **ayarları** ' nı açın ve arama yapın `debug javascript use preview` . **Node.js ve Chrome için yeni bir önizleme Içindeki JavaScript hata ayıklayıcısını kullan**onay kutusunu işaretleyin.
 
 1. Bir Blazor weelsembly deneyimi için komut kabuğu 'nda aşağıdaki komutu yürütün:
 
@@ -162,7 +162,7 @@ HTML sözdizimini kullanarak başka bir bileşene bileşen ekleyin. Örneğin, b
 
 Uygulamayı çalıştırın. Giriş sayfası, bileşen tarafından sağlanmış kendi sayacıdır `Counter` .
 
-Bileşen parametreleri, alt bileşende özellikler ayarlamanıza olanak tanıyan öznitelikler veya [alt içerik](xref:blazor/components#child-content)kullanılarak belirtilir. Bileşene bir parametre eklemek için `Counter` bileşenin `@code` bloğunu güncelleştirin:
+Bileşen parametreleri, alt bileşende özellikler ayarlamanıza olanak tanıyan öznitelikler veya [alt içerik](xref:blazor/components/index#child-content)kullanılarak belirtilir. Bileşene bir parametre eklemek için `Counter` bileşenin `@code` bloğunu güncelleştirin:
 
 * Özniteliği ile için bir public özelliği ekleyin `IncrementAmount` [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) .
 * `IncrementCount` `IncrementAmount` Değerini değerini artırdığınızda kullanmak için yöntemini değiştirin `currentCount` .

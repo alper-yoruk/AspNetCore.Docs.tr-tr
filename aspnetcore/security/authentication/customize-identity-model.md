@@ -1,68 +1,84 @@
 ---
-title: Identity dostosowanie modelu w ASP.NET Core autor: Opis ajcvickers: w tym artykule opisano sposób dostosowywania bazowego Entity Framework Core modelu danych dla ASP.NET Core Identity.
-MS. Author: avickers MS. Date: 07/01/2019 No-Loc: [Blazor, "Identity", "Zaszyfruj", Razor, Signaler] UID: Security/Authentication/customize_identity_model
+title: IdentityASP.NET Core model özelleştirmesi
+author: ajcvickers
+description: Bu makalede, ASP.NET Core için temel Entity Framework Core veri modelinin nasıl özelleştirileceği açıklanır Identity .
+ms.author: avickers
+ms.date: 07/01/2019
+no-loc:
+- Blazor
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: security/authentication/customize_identity_model
+ms.openlocfilehash: 96ee703da4ced69c5d9c703139e33b76b5dcdff1
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074150"
 ---
-# <a name="identity-model-customization-in-aspnet-core"></a>Dostosowywanie modelu tożsamości w ASP.NET Core
+# <a name="identity-model-customization-in-aspnet-core"></a>IdentityASP.NET Core model özelleştirmesi
 
-Autor [Arthur Vickers](https://github.com/ajcvickers)
+[Arthur Vicranlar](https://github.com/ajcvickers) tarafından
 
-ASP.NET Core Identity oferuje strukturę służącą do zarządzania kontami użytkowników w aplikacjach ASP.NET Core i ich przechowywania. Tożsamość jest dodawana do projektu w przypadku wybrania jako mechanizmu uwierzytelniania **poszczególnych kont użytkowników** . Domyślnie tożsamość wykorzystuje podstawowy model danych Entity Framework (EF). W tym artykule opisano sposób dostosowywania modelu tożsamości.
+ASP.NET Core Identity , ASP.NET Core uygulamalarda Kullanıcı hesaplarını yönetmek ve depolamak için bir çerçeve sağlar. Identity, kimlik doğrulama mekanizması olarak **bireysel kullanıcı hesapları** seçildiğinde projenize eklenir. Varsayılan olarak, Identity Entity Framework (EF) temel veri modelini kullanır. Bu makalede, modelin nasıl özelleştirileceği açıklanır Identity .
 
-## <a name="identity-and-ef-core-migrations"></a>Tożsamość i migracje EF Core
+## <a name="identity-and-ef-core-migrations"></a>Identityve EF Core geçişleri
 
-Przed badaniem modelu warto zrozumieć, jak tożsamość współpracuje z [EF Core migracji](/ef/core/managing-schemas/migrations/) , aby utworzyć i zaktualizować bazę danych. Na najwyższego poziomu proces jest:
+Modeli incelemeden önce, Identity bir veritabanı oluşturmak ve güncelleştirmek için [EF Core geçişlerle](/ef/core/managing-schemas/migrations/) nasıl çalıştığını anlamak yararlı olur. En üst düzeyde, işlem şu şekilde yapılır:
 
-1. Zdefiniuj lub zaktualizuj [model danych w kodzie](/ef/core/modeling/).
-1. Dodaj migrację, aby przetłumaczyć ten model na zmiany, które można zastosować do bazy danych programu.
-1. Sprawdź, czy migracja jest poprawnie reprezentowana przez zamiary.
-1. Zastosuj migrację, aby zaktualizować bazę danych do synchronizacji z modelem.
-1. Powtórz kroki od 1 do 4, aby udoskonalić model i zachować synchronizację bazy danych.
+1. [Kodda bir veri modeli](/ef/core/modeling/)tanımlayın veya güncelleştirin.
+1. Bu modeli veritabanına uygulanabilecek değişikliklere dönüştürmek için bir geçiş ekleyin.
+1. Geçişin, amaclarınızı doğru şekilde temsil ettiğini denetleyin.
+1. Veritabanını modeliyle eşitlenmiş olacak şekilde güncelleştirmek için geçişi uygulayın.
+1. Modeli daha belirginleştirmek ve veritabanını eşitlenmiş halde tutmak için 1 ile 4 arasındaki adımları tekrarlayın.
 
-Aby dodać i zastosować migracje, należy użyć jednej z następujących metod:
+Geçişleri eklemek ve uygulamak için aşağıdaki yaklaşımlardan birini kullanın:
 
-* Okno **konsoli Menedżera pakietów** (PMC), jeśli jest używany program Visual Studio. Aby uzyskać więcej informacji, zobacz [EF Core PMC Tools](/ef/core/miscellaneous/cli/powershell).
-* Interfejs wiersza polecenia platformy .NET Core w przypadku używania wiersza polecenia. Aby uzyskać więcej informacji, zobacz [EF Core narzędzia wiersza polecenia platformy .NET](/ef/core/miscellaneous/cli/dotnet).
-* Po uruchomieniu aplikacji kliknij przycisk **Zastosuj migracje** na stronie błędu.
+* Visual Studio kullanıyorsanız **Paket Yöneticisi konsolu** (PMC) penceresi. Daha fazla bilgi için bkz. [EF Core PMC araçları](/ef/core/miscellaneous/cli/powershell).
+* Komut satırı kullanılıyorsa .NET Core CLI. Daha fazla bilgi için bkz. [.NET komut satırı araçları EF Core](/ef/core/miscellaneous/cli/dotnet).
+* Uygulama çalıştırıldığında hata sayfasındaki **geçişleri Uygula** düğmesine tıklanın.
 
-ASP.NET Core ma program obsługi stron błędów czasu projektowania. Program obsługi może zastosować migracje, gdy aplikacja jest uruchomiona. Aplikacje produkcyjne zwykle generują skrypty SQL z migracji i wdrażają zmiany w bazie danych w ramach kontrolowanego wdrożenia aplikacji i bazy danych.
+ASP.NET Core bir geliştirme zamanı hata sayfası işleyicisine sahiptir. İşleyici, uygulama çalıştırıldığında geçişleri uygulayabilir. Üretim uygulamaları tipik olarak geçişlerden SQL betikleri oluşturur ve veritabanı değişiklikleri denetimli bir uygulama ve veritabanı dağıtımının bir parçası olarak dağıtılır.
 
-Po utworzeniu nowej aplikacji używającej tożsamości, kroki 1 i 2 powyżej zostały już ukończone. Oznacza to, że początkowy model danych już istnieje, a migracja początkowa została dodana do projektu. Migracja początkowa nadal musi zostać zastosowana do bazy danych programu. Migrację początkową można zastosować przy użyciu jednej z następujących metod:
+Kullanılarak yeni bir uygulama Identity oluşturulduğunda, yukarıdaki 1. ve 2. adım zaten tamamlanmıştır. Diğer bir deyişle, ilk veri modeli zaten var ve ilk geçiş projeye eklendi. İlk geçişin hala veritabanına uygulanması gerekir. İlk geçiş aşağıdaki yaklaşımlardan biri aracılığıyla uygulanabilir:
 
-* Uruchamiany `Update-Database` w PMC.
-* Uruchom `dotnet ef database update` w powłoce poleceń.
-* Po uruchomieniu aplikacji kliknij przycisk **Zastosuj migracje** na stronie błędu.
+* `Update-Database`PMC 'de çalıştırın.
+* `dotnet ef database update`Komut kabuğu 'nda çalıştırın.
+* Uygulama çalıştırıldığında hata sayfasında **geçişleri Uygula** düğmesine tıklayın.
 
-Powtórz powyższe kroki, ponieważ wprowadzono zmiany w modelu.
+Modelde değişiklikler yapıldığından önceki adımları yineleyin.
 
-## <a name="the-identity-model"></a>Model tożsamości
+## <a name="the-identity-model"></a>IdentityModel
 
-### <a name="entity-types"></a>Typy jednostek
+### <a name="entity-types"></a>Varlık türleri
 
-Model tożsamości składa się z następujących typów jednostek.
+IdentityModel aşağıdaki varlık türlerinden oluşur.
 
-|Typ jednostki|Opis                                                  |
+|Varlık türü|Açıklama                                                  |
 |-----------|-------------------------------------------------------------|
-|`User`     |Reprezentuje użytkownika.                                         |
-|`Role`     |Reprezentuje rolę.                                           |
-|`UserClaim`|Reprezentuje stwierdzenie, że użytkownik posiada.                    |
-|`UserToken`|Reprezentuje token uwierzytelniania dla użytkownika.               |
-|`UserLogin`|Kojarzy użytkownika z logowaniem.                              |
-|`RoleClaim`|Reprezentuje zastrzeżenie przyznane wszystkim użytkownikom w ramach roli.|
-|`UserRole` |Jednostka sprzężenia, która kojarzy użytkowników i role.               |
+|`User`     |Kullanıcıyı temsil eder.                                         |
+|`Role`     |Bir rolü temsil eder.                                           |
+|`UserClaim`|Bir kullanıcının sahip olduğu talebi temsil eder.                    |
+|`UserToken`|Bir kullanıcı için kimlik doğrulama belirtecini temsil eder.               |
+|`UserLogin`|Kullanıcıyı bir oturum ile ilişkilendirir.                              |
+|`RoleClaim`|Bir rol içindeki tüm kullanıcılara verilen bir talebi temsil eder.|
+|`UserRole` |Kullanıcıları ve rolleri ilişkilendiren bir JOIN varlığı.               |
 
-### <a name="entity-type-relationships"></a>Relacje typu jednostki
+### <a name="entity-type-relationships"></a>Varlık türü ilişkileri
 
-[Typy jednostek](#entity-types) są powiązane ze sobą w następujący sposób:
+[Varlık türleri](#entity-types) , aşağıdaki yollarla birbirleriyle ilişkilidir:
 
-* Każdy `User` z nich może `UserClaims`mieć wiele.
-* Każdy `User` z nich może `UserLogins`mieć wiele.
-* Każdy `User` z nich może `UserTokens`mieć wiele.
-* Każdy `Role` z nich może mieć `RoleClaims`wiele skojarzonych.
-* Każdy `User` z nich może mieć `Roles`wiele skojarzonych, `Role` a każda z nich może `Users`być skojarzona z wieloma. Jest to relacja wiele do wielu, która wymaga tabeli sprzężenia w bazie danych. Tabela sprzężenia jest reprezentowana przez `UserRole` jednostkę.
+* Her birinin `User` çok sayıda olabilir `UserClaims` .
+* Her birinin `User` çok sayıda olabilir `UserLogins` .
+* Her birinin `User` çok sayıda olabilir `UserTokens` .
+* Her birinin `Role` birden çok ilişkili olabilir `RoleClaims` .
+* Her biri `User` birden çok ilişkili olabilir `Roles` ve her biri `Role` birçok ile ilişkilendirilebilir `Users` . Bu, veritabanında bir JOIN tablosu gerektiren çoktan çoğa bir ilişkidir. JOIN tablosu varlıkla temsil edilir `UserRole` .
 
-### <a name="default-model-configuration"></a>Domyślna konfiguracja modelu
+### <a name="default-model-configuration"></a>Varsayılan model yapılandırması
 
-Identitydefiniuje wiele *klas kontekstu* , które dziedziczą z [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) , aby skonfigurować model i korzystać z niego. Ta konfiguracja odbywa się przy użyciu [interfejsu API EF Core Code First Fluent](/ef/core/modeling/) w metodzie [OnModelCreating](/dotnet/api/microsoft.entityframeworkcore.dbcontext.onmodelcreating) klasy Context. Domyślna konfiguracja to:
+Identitymodeli yapılandırmak ve kullanmak için [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) 'ten devraldığı birçok *bağlam sınıfını* tanımlar. Bu yapılandırma, bağlam sınıfının [Onmodeloluþturma](/dotnet/api/microsoft.entityframeworkcore.dbcontext.onmodelcreating) yönteminde [EF Core Code First floent API 'si](/ef/core/modeling/) kullanılarak yapılır. Varsayılan yapılandırma:
 
 ```csharp
 builder.Entity<TUser>(b =>
@@ -185,9 +201,9 @@ builder.Entity<TUserRole>(b =>
 });
 ```
 
-### <a name="model-generic-types"></a>Typy ogólne modelu
+### <a name="model-generic-types"></a>Model genel türleri
 
-Identitydefiniuje domyślne typy [środowiska uruchomieniowego języka wspólnego](/dotnet/standard/glossary#clr) (CLR) dla każdego z wymienionych powyżej typów jednostek. Wszystkie te typy są poprzedzone prefiksem *Identity*:
+IdentityYukarıda listelenen her varlık türü için varsayılan [ortak dil çalışma zamanı](/dotnet/standard/glossary#clr) (CLR) türlerini tanımlar. Bu türlerin öneki *Identity* :
 
 * `IdentityUser`
 * `IdentityRole`
@@ -197,9 +213,9 @@ Identitydefiniuje domyślne typy [środowiska uruchomieniowego języka wspólneg
 * `IdentityRoleClaim`
 * `IdentityUserRole`
 
-Zamiast bezpośrednio używać tych typów, typy mogą służyć jako klasy bazowe dla własnych typów aplikacji. `DbContext` Klasy zdefiniowane przez Identity są ogólne, w taki sposób, aby można było używać różnych typów CLR dla co najmniej jednego typu jednostki w modelu. Te typy ogólne umożliwiają zmianę typu `User` danych klucza podstawowego (PK).
+Bu türleri doğrudan kullanmak yerine, türler uygulamanın kendi türleri için temel sınıflar olarak kullanılabilir. `DbContext`Tarafından tanımlanan sınıflar Identity geneldir, örneğin, modeldeki bir veya daha fazla varlık türü IÇIN farklı clr türleri kullanılabilir. Bu genel türler Ayrıca `User` birincil anahtar (PK) veri türünün değiştirilmesine izin verir.
 
-W przypadku Identity używania z obsługą ról, <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> należy użyć klasy. Przykład:
+IdentityRol desteğiyle birlikte kullanıldığında bir <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> sınıf kullanılmalıdır. Örneğin:
 
 ```csharp
 // Uses all the built-in Identity types
@@ -243,7 +259,7 @@ public abstract class IdentityDbContext<
          where TUserToken : IdentityUserToken<TKey>
 ```
 
-Jest również możliwe użycie Identity bez ról (tylko oświadczenia), w którym przypadku należy użyć <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserContext%601> klasy:
+Ayrıca Identity , bir <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserContext%601> sınıf kullanılması gereken roller (yalnızca talepler) olmadan da kullanılabilir:
 
 ```csharp
 // Uses the built-in non-role Identity types except with a custom User type
@@ -277,18 +293,18 @@ public abstract class IdentityUserContext<
 }
 ```
 
-## <a name="customize-the-model"></a>Dostosowywanie modelu
+## <a name="customize-the-model"></a>Modeli özelleştirme
 
-Punktem początkowym dostosowywania modelu jest wychodzenie z odpowiedniego typu kontekstu. Zapoznaj się z sekcją [typy ogólne modelu](#model-generic-types) . Ten typ kontekstu jest zazwyczaj wywoływany `ApplicationDbContext` i jest tworzony przez szablony ASP.NET Core.
+Model özelleştirmesi için başlangıç noktası uygun bağlam türünden türetilmelidir. [Model genel türler](#model-generic-types) bölümüne bakın. Bu bağlam türü geleneksel çağırılır `ApplicationDbContext` ve ASP.NET Core şablonları tarafından oluşturulur.
 
-Kontekst służy do konfigurowania modelu na dwa sposoby:
+Bağlam, modeli iki şekilde yapılandırmak için kullanılır:
 
-* Dostarczanie typów jednostek i kluczy dla parametrów typu ogólnego.
-* Zastępowanie `OnModelCreating` w celu zmodyfikowania mapowania tych typów.
+* Genel tür parametreleri için varlık ve anahtar türleri sağlama.
+* `OnModelCreating`Bu türlerin eşlemesini değiştirmek için geçersiz kılma.
 
-W przypadku `OnModelCreating`przesłaniania należy najpierw wywołać polecenie `base.OnModelCreating` . nadrzędna konfiguracja powinna być wywoływana dalej. EF Core zwykle ma zasady dotyczące ostatniego skonfigurowania usługi WINS. Na przykład jeśli `ToTable` Metoda dla typu jednostki jest wywoływana jako pierwsza z jedną nazwą tabeli, a następnie ponownie później z inną nazwą tabeli, używana jest nazwa tabeli w drugim wywołaniu.
+Geçersiz kıldığınızda `OnModelCreating` , `base.OnModelCreating` ilk olarak çağrılmalıdır; geçersiz kılma yapılandırması daha sonra çağrılmalıdır. EF Core, yapılandırma için genellikle son bir WINS ilkesine sahiptir. Örneğin, bir `ToTable` varlık türünün yöntemi ilk olarak bir tablo adı ve daha sonra farklı bir tablo adıyla çağrılırsa ikinci çağrıda tablo adı kullanılır.
 
-### <a name="custom-user-data"></a>Niestandardowe dane użytkownika
+### <a name="custom-user-data"></a>Özel Kullanıcı verileri
 
 <!--
 set projNam=WebApp1
@@ -300,7 +316,7 @@ dotnet ef migrations add CreateIdentitySchema
 dotnet ef database update
  -->
 
-[Niestandardowe dane użytkownika](xref:security/authentication/add-user-data) są obsługiwane przez dziedziczenie z `IdentityUser`. Nazwa tego typu `ApplicationUser`jest niestandardowa:
+[Özel Kullanıcı verileri](xref:security/authentication/add-user-data) , öğesinden devralınırken desteklenir `IdentityUser` . Bu tür için ad vermek önemlidir `ApplicationUser` :
 
 ```csharp
 public class ApplicationUser : IdentityUser
@@ -309,7 +325,7 @@ public class ApplicationUser : IdentityUser
 }
 ```
 
-Użyj `ApplicationUser` typu jako argumentu ogólnego dla kontekstu:
+`ApplicationUser`Türü bağlam için genel bir bağımsız değişken olarak kullanın:
 
 ```csharp
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -326,9 +342,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 }
 ```
 
-Nie ma potrzeby przesłonięcia `OnModelCreating` `ApplicationDbContext` klasy. EF Core mapuje `CustomTag` Właściwość według Konwencji. Bazę danych należy jednak zaktualizować, aby utworzyć nową `CustomTag` kolumnę. Aby utworzyć kolumnę, Dodaj migrację, a następnie zaktualizuj bazę danych zgodnie z opisem w [ Identity temacie i EF Core migracji](#identity-and-ef-core-migrations).
+Sınıfında geçersiz kılınmasına gerek yoktur `OnModelCreating` `ApplicationDbContext` . EF Core, `CustomTag` özelliği kuralına göre eşler. Ancak, veritabanının yeni bir sütun oluşturmak için güncelleştirilmesi gerekir `CustomTag` . Sütunu oluşturmak için bir geçiş ekleyin ve sonra, [ Identity ve EF Core geçişleri](#identity-and-ef-core-migrations)içinde açıklandığı gibi veritabanını güncelleştirin.
 
-Aktualizowanie *stron/Shared/_LoginPartial. cshtml* i `IdentityUser` zastępowanie `ApplicationUser`:
+*Sayfaları/paylaşılan/_LoginPartial. cshtml* 'yi güncelleştirin ve `IdentityUser` ile değiştirin `ApplicationUser` :
 
 ```cshtml
 @using Microsoft.AspNetCore.Identity
@@ -337,28 +353,28 @@ Aktualizowanie *stron/Shared/_LoginPartial. cshtml* i `IdentityUser` zastępowan
 @inject UserManager<ApplicationUser> UserManager
 ```
 
-Zaktualizuj *obszary/Identity/IdentityHostingStartup.cs* lub `Startup.ConfigureServices` Zastąp `IdentityUser` ciąg `ApplicationUser`.
+*Alanı güncelleştirin/ Identity /IdentityHostingStartup.cs* veya `Startup.ConfigureServices` ile değiştirin `IdentityUser` `ApplicationUser` .
 
 ```csharp
-services.AddDefaultIdentity<ApplicationUser>()
+services.AddIdentity<ApplicationUser>()
         .AddEntityFrameworkStores<ApplicationDbContext>()
         .AddDefaultUI();
 ```
 
-W ASP.NET Core 2,1 lub nowszej Identity jest dostarczany jako biblioteka Razor klas. Aby uzyskać więcej informacji, zobacz <xref:security/authentication/scaffold-identity>. W związku z tym poprzedzający kod wymaga wywołania <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>. Jeśli Identity szkielet został użyty do dodawania Identity plików do projektu, Usuń wywołanie do. `AddDefaultUI` Aby uzyskać więcej informacji, zobacz:
+ASP.NET Core 2,1 veya sonraki sürümlerde Identity bir sınıf kitaplığı olarak sağlanır Razor . Daha fazla bilgi için bkz. <xref:security/authentication/scaffold-identity>. Sonuç olarak, yukarıdaki kod için bir çağrısı gerektirir <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> . IdentityProjeye dosya eklemek için desteği kullanılmışsa Identity , çağrısını kaldırın `AddDefaultUI` . Daha fazla bilgi için bkz.
 
-* [FunkcjaIdentity](xref:security/authentication/scaffold-identity)
-* [Dodawanie, pobieranie i usuwanie niestandardowych danych użytkownika do programuIdentity](xref:security/authentication/add-user-data)
+* [İskeleIdentity](xref:security/authentication/scaffold-identity)
+* [İçin özel kullanıcı verisi ekleme, indirme ve silmeIdentity](xref:security/authentication/add-user-data)
 
-### <a name="change-the-primary-key-type"></a>Zmień typ klucza podstawowego
+### <a name="change-the-primary-key-type"></a>Birincil anahtar türünü değiştirme
 
-Zmiana typu danych kolumny klucza podstawowego jest nieproblemowa w wielu systemach baz danych. Zmiana klucza PK zazwyczaj obejmuje porzucenie i ponowne utworzenie tabeli. W związku z tym typy kluczy należy określić podczas początkowej migracji podczas tworzenia bazy danych.
+Veritabanı oluşturulduktan sonra PK sütununun veri türünün bir değişikliği birçok veritabanı sisteminde sorunlu olur. PK 'nin değiştirilmesi genellikle tabloyu bırakmayı ve yeniden oluşturmayı içerir. Bu nedenle, veritabanı oluşturulduğunda ilk geçişte anahtar türleri belirtilmelidir.
 
-Wykonaj następujące kroki, aby zmienić typ klucza PK:
+PK türünü değiştirmek için şu adımları izleyin:
 
-1. Jeśli baza danych została utworzona przed zmianą PK, uruchom `Drop-Database` polecenie (PMC) `dotnet ef database drop` lub (interfejs wiersza polecenia platformy .NET Core), aby je usunąć.
-2. Po potwierdzeniu usunięcia bazy danych Usuń migrację początkową z `Remove-Migration` (PMC) lub `dotnet ef migrations remove` (interfejs wiersza polecenia platformy .NET Core).
-3. Zaktualizuj klasę `ApplicationDbContext` , aby dziedziczyć <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext%603>z. Określ nowy typ klucza `TKey`. Na przykład, aby użyć typu `Guid` klucza:
+1. Veritabanı PK değişikliğinden önce oluşturulduysa, `Drop-Database` dosyayı silmek için (PMC) veya `dotnet ef database drop` (.NET Core CLI) çalıştırın.
+2. Veritabanını silme işlemini onayladıktan sonra, `Remove-Migration` (PMC) veya `dotnet ef migrations remove` (.NET Core CLI) ile ilk geçişi kaldırın.
+3. `ApplicationDbContext`Türeten türetilmiş sınıfı güncelleştirin <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext%603> . İçin yeni anahtar türünü belirtin `TKey` . Örneğin, bir `Guid` anahtar türü kullanmak için:
 
     ```csharp
     public class ApplicationDbContext
@@ -373,24 +389,23 @@ Wykonaj następujące kroki, aby zmienić typ klucza PK:
 
     ::: moniker range=">= aspnetcore-2.0"
 
-    W poprzednim kodzie klasy <xref:Microsoft.AspNetCore.Identity.IdentityUser%601> generyczne i <xref:Microsoft.AspNetCore.Identity.IdentityRole%601> muszą być określone do użycia nowego typu klucza.
+    Önceki kodda, genel sınıflar <xref:Microsoft.AspNetCore.Identity.IdentityUser%601> ve <xref:Microsoft.AspNetCore.Identity.IdentityRole%601> Yeni anahtar türünü kullanmak için belirtilmelidir.
 
     ::: moniker-end
 
     ::: moniker range="<= aspnetcore-1.1"
 
-    W poprzednim kodzie klasy <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUser%601> generyczne i <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole%601> muszą być określone do użycia nowego typu klucza.
+    Önceki kodda, genel sınıflar <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUser%601> ve <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole%601> Yeni anahtar türünü kullanmak için belirtilmelidir.
 
     ::: moniker-end
 
-    `Startup.ConfigureServices`Aby można było używać użytkownika generycznego, należy go zaktualizować:
+    `Startup.ConfigureServices`Genel kullanıcıyı kullanacak şekilde güncelleştirilmeleri gerekir:
 
     ::: moniker range=">= aspnetcore-2.1"
 
     ```csharp
     services.AddDefaultIdentity<IdentityUser<Guid>>()
-            .AddEntityFrameworkStores<ApplicationDbContext>()
-            .AddDefaultTokenProviders();
+            .AddEntityFrameworkStores<ApplicationDbContext>();
     ```
 
     ::: moniker-end
@@ -415,7 +430,7 @@ Wykonaj następujące kroki, aby zmienić typ klucza PK:
 
     ::: moniker-end
 
-4. Jeśli jest używana `ApplicationUser` Klasa niestandardowa, zaktualizuj klasę, aby dziedziczyć `IdentityUser`. Przykład:
+4. Özel bir `ApplicationUser` sınıf kullanılıyorsa, öğesinden devralacak olan sınıfı güncelleştirin `IdentityUser` . Örneğin:
 
     ::: moniker range="<= aspnetcore-1.1"
 
@@ -429,7 +444,7 @@ Wykonaj następujące kroki, aby zmienić typ klucza PK:
 
     ::: moniker-end
 
-    Aktualizuj `ApplicationDbContext` , aby odwołać `ApplicationUser` się do klasy niestandardowej:
+    `ApplicationDbContext`Özel sınıfa başvurmak için Güncelleştir `ApplicationUser` :
 
     ```csharp
     public class ApplicationDbContext
@@ -442,20 +457,20 @@ Wykonaj następujące kroki, aby zmienić typ klucza PK:
     }
     ```
 
-    Zarejestrowanie niestandardowej klasy kontekstu bazy danych podczas dodawania Identity usługi w `Startup.ConfigureServices`programie:
+    Hizmeti eklerken özel veritabanı bağlam sınıfını Kaydet Identity `Startup.ConfigureServices` :
 
     ::: moniker range=">= aspnetcore-2.1"
 
     ```csharp
-    services.AddDefaultIdentity<ApplicationUser>()
+    services.AddIdentity<ApplicationUser>()
             .AddEntityFrameworkStores<ApplicationDbContext>()
             .AddDefaultUI()
             .AddDefaultTokenProviders();
     ```
 
-    Typ danych klucza podstawowego jest wywnioskowany przez analizowanie obiektu [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) .
+    Birincil anahtarın veri türü, [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) nesnesi analiz edilirken algılanır.
 
-    W ASP.NET Core 2,1 lub nowszej Identity jest dostarczany jako biblioteka Razor klas. Aby uzyskać więcej informacji, zobacz <xref:security/authentication/scaffold-identity>. W związku z tym poprzedzający kod wymaga wywołania <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>. Jeśli Identity szkielet został użyty do dodawania Identity plików do projektu, Usuń wywołanie do. `AddDefaultUI`
+    ASP.NET Core 2,1 veya sonraki sürümlerde Identity bir sınıf kitaplığı olarak sağlanır Razor . Daha fazla bilgi için bkz. <xref:security/authentication/scaffold-identity>. Sonuç olarak, yukarıdaki kod için bir çağrısı gerektirir <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> . IdentityProjeye dosya eklemek için desteği kullanılmışsa Identity , çağrısını kaldırın `AddDefaultUI` .
 
     ::: moniker-end
 
@@ -467,7 +482,7 @@ Wykonaj następujące kroki, aby zmienić typ klucza PK:
             .AddDefaultTokenProviders();
     ```
 
-    Typ danych klucza podstawowego jest wywnioskowany przez analizowanie obiektu [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) .
+    Birincil anahtarın veri türü, [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) nesnesi analiz edilirken algılanır.
 
     ::: moniker-end
 
@@ -479,27 +494,27 @@ Wykonaj następujące kroki, aby zmienić typ klucza PK:
             .AddDefaultTokenProviders();
     ```
 
-    <xref:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores*> Metoda akceptuje `TKey` typ wskazujący typ danych klucza podstawowego.
+    <xref:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores*>Yöntemi, `TKey` birincil anahtarın veri türünü gösteren bir türü kabul eder.
 
     ::: moniker-end
 
-5. Jeśli jest używana `ApplicationRole` Klasa niestandardowa, zaktualizuj klasę, aby dziedziczyć `IdentityRole<TKey>`. Przykład:
+5. Özel bir `ApplicationRole` sınıf kullanılıyorsa, öğesinden devralacak olan sınıfı güncelleştirin `IdentityRole<TKey>` . Örneğin:
 
     [!code-csharp[](customize-identity-model/samples/2.1/RazorPagesSampleApp/Data/ApplicationRole.cs?name=snippet_ApplicationRole&highlight=4)]
 
-    Zaktualizuj `ApplicationDbContext` , aby odwołać `ApplicationRole` się do klasy niestandardowej. Na przykład następująca Klasa odwołuje się do niestandardowego `ApplicationUser` i niestandardowego `ApplicationRole`:
+    `ApplicationDbContext`Özel sınıfa başvurmak için güncelleştirin `ApplicationRole` . Örneğin, aşağıdaki sınıf özel ve özel bir öğesine başvurur `ApplicationUser` `ApplicationRole` :
 
     ::: moniker range=">= aspnetcore-2.1"
 
     [!code-csharp[](customize-identity-model/samples/2.1/RazorPagesSampleApp/Data/ApplicationDbContext.cs?name=snippet_ApplicationDbContext&highlight=5-6)]
 
-    Zarejestrowanie niestandardowej klasy kontekstu bazy danych podczas dodawania Identity usługi w `Startup.ConfigureServices`programie:
+    Hizmeti eklerken özel veritabanı bağlam sınıfını Kaydet Identity `Startup.ConfigureServices` :
 
     [!code-csharp[](customize-identity-model/samples/2.1/RazorPagesSampleApp/Startup.cs?name=snippet_ConfigureServices&highlight=13-16)]
 
-    Typ danych klucza podstawowego jest wywnioskowany przez analizowanie obiektu [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) .
+    Birincil anahtarın veri türü, [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) nesnesi analiz edilirken algılanır.
 
-    W ASP.NET Core 2,1 lub nowszej Identity jest dostarczany jako biblioteka Razor klas. Aby uzyskać więcej informacji, zobacz <xref:security/authentication/scaffold-identity>. W związku z tym poprzedzający kod wymaga wywołania <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>. Jeśli Identity szkielet został użyty do dodawania Identity plików do projektu, Usuń wywołanie do. `AddDefaultUI`
+    ASP.NET Core 2,1 veya sonraki sürümlerde Identity bir sınıf kitaplığı olarak sağlanır Razor . Daha fazla bilgi için bkz. <xref:security/authentication/scaffold-identity>. Sonuç olarak, yukarıdaki kod için bir çağrısı gerektirir <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> . IdentityProjeye dosya eklemek için desteği kullanılmışsa Identity , çağrısını kaldırın `AddDefaultUI` .
 
     ::: moniker-end
 
@@ -507,11 +522,11 @@ Wykonaj następujące kroki, aby zmienić typ klucza PK:
 
     [!code-csharp[](customize-identity-model/samples/2.0/RazorPagesSampleApp/Data/ApplicationDbContext.cs?name=snippet_ApplicationDbContext&highlight=5-6)]
 
-    Zarejestrowanie niestandardowej klasy kontekstu bazy danych podczas dodawania Identity usługi w `Startup.ConfigureServices`programie:
+    Hizmeti eklerken özel veritabanı bağlam sınıfını Kaydet Identity `Startup.ConfigureServices` :
 
     [!code-csharp[](customize-identity-model/samples/2.0/RazorPagesSampleApp/Startup.cs?name=snippet_ConfigureServices&highlight=7-9)]
 
-    Typ danych klucza podstawowego jest wywnioskowany przez analizowanie obiektu [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) .
+    Birincil anahtarın veri türü, [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) nesnesi analiz edilirken algılanır.
 
     ::: moniker-end
 
@@ -519,17 +534,17 @@ Wykonaj następujące kroki, aby zmienić typ klucza PK:
 
     [!code-csharp[](customize-identity-model/samples/1.1/MvcSampleApp/Data/ApplicationDbContext.cs?name=snippet_ApplicationDbContext&highlight=5-6)]
 
-    Zarejestrowanie niestandardowej klasy kontekstu bazy danych podczas dodawania Identity usługi w `Startup.ConfigureServices`programie:
+    Hizmeti eklerken özel veritabanı bağlam sınıfını Kaydet Identity `Startup.ConfigureServices` :
 
     [!code-csharp[](customize-identity-model/samples/1.1/MvcSampleApp/Startup.cs?name=snippet_ConfigureServices&highlight=7-9)]
 
-    <xref:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores*> Metoda akceptuje `TKey` typ wskazujący typ danych klucza podstawowego.
+    <xref:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores*>Yöntemi, `TKey` birincil anahtarın veri türünü gösteren bir türü kabul eder.
 
     ::: moniker-end
 
-### <a name="add-navigation-properties"></a>Dodawanie właściwości nawigacji
+### <a name="add-navigation-properties"></a>Gezinti özellikleri ekle
 
-Zmiana konfiguracji modelu dla relacji może być trudniejsza niż wprowadzanie innych zmian. Należy zwrócić uwagę, aby zastąpić istniejące relacje zamiast tworzyć nowe, dodatkowe relacje. W szczególności zmieniona relacja musi określać tę samą właściwość klucza obcego (FK) jak istniejąca relacja. Na przykład relacja między `Users` i `UserClaims` jest domyślnie określona w następujący sposób:
+İlişkiler için model yapılandırmasının değiştirilmesi, başka değişiklikler yapmaktan daha zor olabilir. Yeni, ek ilişkiler oluşturmak yerine var olan ilişkilerin yerini almak için dikkatli olunmalıdır. Özellikle, değiştirilen ilişki var olan ilişki olarak aynı yabancı anahtar (FK) özelliğini belirtmelidir. Örneğin, ve arasındaki ilişki `Users` `UserClaims` Varsayılan olarak, aşağıdaki şekilde belirtilir:
 
 ```csharp
 builder.Entity<TUser>(b =>
@@ -542,9 +557,9 @@ builder.Entity<TUser>(b =>
 });
 ```
 
-OBCY dla tej relacji jest określony jako `UserClaim.UserId` właściwość. `HasMany`i `WithOne` są wywoływane bez argumentów, aby utworzyć relację bez właściwości nawigacji.
+Bu ilişki için FK özellik olarak belirtilir `UserClaim.UserId` . `HasMany`ve, ' ın `WithOne` Gezinti özellikleri olmadan ilişki oluşturmak için bağımsız değişken olmadan çağırılır.
 
-Dodaj właściwość nawigacji do `ApplicationUser` , która umożliwia `UserClaims` odwołanie od użytkownika:
+`ApplicationUser`Kullanıcıdan ilişkili olmasına izin veren bir gezinti özelliği ekleyin `UserClaims` :
 
 ```csharp
 public class ApplicationUser : IdentityUser
@@ -553,9 +568,9 @@ public class ApplicationUser : IdentityUser
 }
 ```
 
-Wartość `TKey` dla `IdentityUserClaim<TKey>` jest typu określonego dla klucza PK dla użytkowników. W tym przypadku jest `TKey` to `string` spowodowane tym, że są używane wartości domyślne. To **nie** jest typ PK dla typu `UserClaim` jednostki.
+`TKey`İçin, `IdentityUserClaim<TKey>` Kullanıcı PK için belirtilen türdür. Bu durumda, `TKey` Varsayılan olarak `string` kullanılıyor. Varlık türü için PK türü **değildir** `UserClaim` .
 
-Teraz, gdy istnieje właściwość nawigacji, należy ją skonfigurować w `OnModelCreating`:
+Artık gezinti özelliği var olduğuna göre, bu, ' de yapılandırılması gerekir `OnModelCreating` :
 
 ```csharp
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -581,13 +596,13 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 }
 ```
 
-Należy zauważyć, że relacja jest konfigurowana dokładnie tak, jak była wcześniej, tylko z właściwością nawigacji określoną `HasMany`w wywołaniu.
+İlişkinin yalnızca ' de olduğu gibi, yalnızca çağrısında belirtilen bir gezinti özelliği ile yapılandırıldığından emin olun `HasMany` .
 
-Właściwości nawigacji istnieją tylko w modelu EF, a nie w bazie danych. Ponieważ obcy dla relacji nie uległ zmianie, ten rodzaj zmiany modelu nie wymaga aktualizacji bazy danych. Można to sprawdzić przez dodanie migracji po dokonaniu zmiany. Metody `Up` i `Down` są puste.
+Gezinti özellikleri, veritabanında değil yalnızca EF modelinde bulunur. İlişki için FK değişmediğinden, bu tür bir model değişikliği veritabanının güncelleştirilmesini gerektirmez. Bu, değişiklik yapıldıktan sonra bir geçiş eklenerek denetlenebilir. `Up`Ve `Down` yöntemleri boş.
 
-### <a name="add-all-user-navigation-properties"></a>Dodaj wszystkie właściwości nawigacji użytkownika
+### <a name="add-all-user-navigation-properties"></a>Tüm kullanıcı gezinti özelliklerini Ekle
 
-Korzystając z powyższej sekcji jako wskazówki, Poniższy przykład konfiguruje jednokierunkowe właściwości nawigacji dla wszystkich relacji na użytkowniku:
+Aşağıdaki örnek, kılavuz olarak yukarıdaki bölümü kullanarak, Kullanıcı üzerindeki tüm ilişkiler için tek yönlü gezinti özelliklerini yapılandırır:
 
 ```csharp
 public class ApplicationUser : IdentityUser
@@ -641,9 +656,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 }
 ```
 
-### <a name="add-user-and-role-navigation-properties"></a>Dodawanie właściwości nawigacji użytkownika i roli
+### <a name="add-user-and-role-navigation-properties"></a>Kullanıcı ve rol gezinti özellikleri ekleme
 
-Korzystając z powyższej sekcji jako wskazówki, Poniższy przykład konfiguruje właściwości nawigacji dla wszystkich relacji dla użytkownika i roli:
+Aşağıdaki örnek, kılavuz olarak yukarıdaki bölümü kullanarak, Kullanıcı ve roldeki tüm ilişkiler için gezinti özelliklerini yapılandırır:
 
 ```csharp
 public class ApplicationUser : IdentityUser
@@ -722,15 +737,15 @@ public class ApplicationDbContext
 }
 ```
 
-Uwagi:
+Notlar:
 
-* Ten przykład zawiera również jednostkę `UserRole` join, która jest wymagana do nawigowania po relacji wiele-do-wielu od użytkowników do ról.
-* Pamiętaj, aby zmienić typy właściwości nawigacji, aby odzwierciedlić, `ApplicationXxx` że typy są teraz używane zamiast `IdentityXxx` typów.
-* Należy pamiętać, `ApplicationXxx` aby użyć w definicji `ApplicationContext` generycznej.
+* Bu örnek ayrıca `UserRole` , kullanıcılardan rollere kadar çoktan çoğa ilişkiye gitmek için gereken JOIN varlığını içerir.
+* Gezinti özelliklerinin türlerini, türlerin türler yerine kullanılmakta olduğunu yansıtacak şekilde değiştirmeyi unutmayın `ApplicationXxx` `IdentityXxx` .
+* Öğesini `ApplicationXxx` genel tanımda kullanmayı unutmayın `ApplicationContext` .
 
-### <a name="add-all-navigation-properties"></a>Dodaj wszystkie właściwości nawigacji
+### <a name="add-all-navigation-properties"></a>Tüm gezinti özelliklerini Ekle
 
-Korzystając z powyższej sekcji jako wskazówki, Poniższy przykład konfiguruje właściwości nawigacji dla wszystkich relacji dla wszystkich typów jednostek:
+Aşağıdaki örnek, kılavuz olarak yukarıdaki bölümü kullanarak tüm varlık türlerindeki tüm ilişkiler için gezinti özelliklerini yapılandırır:
 
 ```csharp
 public class ApplicationUser : IdentityUser
@@ -835,13 +850,13 @@ public class ApplicationDbContext
 }
 ```
 
-### <a name="use-composite-keys"></a>Użyj kluczy złożonych
+### <a name="use-composite-keys"></a>Bileşik anahtarlar kullanın
 
-Poprzednie sekcje przedstawiają zmianę typu klucza używanego w Identity modelu. Zmiana modelu Identity kluczy na używanie kluczy złożonych nie jest obsługiwana lub zalecana. Użycie klucza złożonego z Identity wymaga zmiany sposobu, Identity w jaki kod Menedżera współdziała z modelem. To dostosowanie wykracza poza zakres tego dokumentu.
+Önceki bölümlerde, modelde kullanılan anahtarın türünü değiştirme gösterilmiştir Identity . IdentityAnahtar modelinin bileşik anahtarları kullanacak şekilde değiştirilmesi desteklenmez veya önerilmez. İle bileşik anahtar kullanılması Identity , Identity yönetici kodunun modelle nasıl etkileşime gireceğini içerir. Bu özelleştirme, bu belgenin kapsamı dışındadır.
 
-### <a name="change-tablecolumn-names-and-facets"></a>Zmiana nazw tabel/kolumn i aspektów
+### <a name="change-tablecolumn-names-and-facets"></a>Tablo/sütun adlarını ve modelleri değiştirme
 
-Aby zmienić nazwy tabel i kolumn, wywołaj `base.OnModelCreating`. Następnie Dodaj konfigurację, aby zastąpić dowolne ustawienia domyślne. Na przykład, aby zmienić nazwę wszystkich Identity tabel:
+Tablo ve sütun adlarını değiştirmek için çağrısı yapın `base.OnModelCreating` . Ardından, varsayılan ayarları geçersiz kılmak için yapılandırma ekleyin. Örneğin, tüm tabloların adını değiştirmek için Identity :
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -885,9 +900,9 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-Te przykłady używają typów domyślnych Identity . Jeśli używasz typu aplikacji, takiego jak `ApplicationUser`, skonfiguruj ten typ zamiast typu domyślnego.
+Bu örnekler varsayılan türleri kullanır Identity . Gibi bir uygulama türü kullanıyorsanız `ApplicationUser` , varsayılan tür yerine bu türü yapılandırın.
 
-Poniższy przykład zmienia nazwy niektórych kolumn:
+Aşağıdaki örnek bazı sütun adlarını değiştirir:
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -907,7 +922,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-Niektóre typy kolumn bazy danych można skonfigurować przy użyciu określonych *aspektów* (na przykład maksymalnej `string` dozwolonej długości). Poniższy przykład ustawia maksymalną długość kolumny dla kilku `string` właściwości w modelu:
+Bazı veritabanı sütunları bazı tür bazı *modellerle* yapılandırılabilir (örneğin, `string` izin verilen en fazla uzunluk). Aşağıdaki örnek, modeldeki çeşitli özellikler için en fazla sütun uzunluğunu ayarlar `string` :
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -930,9 +945,9 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-### <a name="map-to-a-different-schema"></a>Mapuj na inny schemat
+### <a name="map-to-a-different-schema"></a>Farklı bir şemaya eşleme
 
-Schematy mogą działać inaczej niż dostawcy baz danych. W przypadku SQL Server wartością domyślną jest utworzenie wszystkich tabel w schemacie *dbo* . Tabele można tworzyć w innym schemacie. Przykład:
+Şemalar, veritabanı sağlayıcıları genelinde farklı davranabilir. SQL Server için varsayılan, *dbo* şemasında tüm tabloları oluşturmaktır. Tablolar farklı bir şemada oluşturulabilir. Örneğin:
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -945,17 +960,17 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 ::: moniker range=">= aspnetcore-2.1"
 
-### <a name="lazy-loading"></a>Ładowanie z opóźnieniem
+### <a name="lazy-loading"></a>Geç yükleme
 
-W tej sekcji zostanie dodana obsługa serwerów proxy ładowania opóźnionego w Identity modelu. Ładowanie z opóźnieniem jest przydatne, ponieważ umożliwia korzystanie z właściwości nawigacji bez uprzedniego załadowania.
+Bu bölümde, modeldeki yavaş yükleme proxy 'leri için destek Identity eklenmiştir. Yavaş yükleme, gezinti özelliklerinin önce yüklendiklerinden emin olmadan kullanılmasına izin verdiğinden yararlıdır.
 
-Typy jednostek mogą być odpowiednie do ładowania z opóźnieniem na kilka sposobów, zgodnie z opisem w [dokumentacji EF Core](/ef/core/querying/related-data#lazy-loading). Dla uproszczenia Użyj serwerów proxy ładowania z opóźnieniem, które wymagają:
+Varlık türleri, [EF Core belgelerinde](/ef/core/querying/related-data#lazy-loading)açıklandığı gibi çeşitli yollarla yavaş yükleme için uygun hale getirilebilir. Basitlik için, aşağıdakileri gerektiren yavaş yükleme proxy 'leri kullanın:
 
-* Instalacja pakietu [Microsoft. EntityFrameworkCore. proxy](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/) .
-* Wywołanie <xref:Microsoft.EntityFrameworkCore.ProxiesExtensions.UseLazyLoadingProxies*> wewnątrz [\<AddDbContext TContext>](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext).
-* Publiczne typy jednostek z `public virtual` właściwościami nawigacji.
+* [Microsoft. EntityFrameworkCore. proxy](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/) paketi yüklemesi.
+* <xref:Microsoft.EntityFrameworkCore.ProxiesExtensions.UseLazyLoadingProxies*> [Adddbcontext \<TContext> ](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext)içinde bir çağrı.
+* Gezinti özelliklerine sahip ortak varlık türleri `public virtual` .
 
-Poniższy przykład ilustruje wywoływanie `UseLazyLoadingProxies` w `Startup.ConfigureServices`:
+Aşağıdaki örnekte çağırma gösterilmektedir `UseLazyLoadingProxies` `Startup.ConfigureServices` :
 
 ```csharp
 services
@@ -966,9 +981,9 @@ services
     .AddEntityFrameworkStores<ApplicationDbContext>();
 ```
 
-Zapoznaj się z powyższymi przykładami, aby uzyskać wskazówki dotyczące dodawania właściwości nawigacji do typów jednostek.
+Varlık türlerine gezinti özellikleri ekleme hakkında rehberlik için yukarıdaki örneklere bakın.
 
-## <a name="additional-resources"></a>Zasoby dodatkowe
+## <a name="additional-resources"></a>Ek kaynaklar
 
 * <xref:security/authentication/scaffold-identity>
 

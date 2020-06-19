@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/templates
-ms.openlocfilehash: f582e8201a3393b848cf3f2c21ce3a7df5554100
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 3a491e43aec8291fcf03696b53240bd33e0deda1
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105538"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102488"
 ---
 # <a name="aspnet-core-blazor-templates"></a>ASP.NET Core Blazor şablonları
 
@@ -80,7 +80,7 @@ Aşağıdaki dosya ve klasörler Blazor bir şablondan oluşturulan bir uygulama
 
 * *Paylaşılan* klasör: uygulama tarafından kullanılan diğer Kullanıcı Arabirimi bileşenlerini (*. Razor*) içerir:
   * `MainLayout`(*Mainlayout. Razor*): uygulamanın Düzen bileşeni.
-  * `NavMenu`(*Navmenu. Razor*): kenar çubuğu gezintisini uygular. Diğer bileşenlere yönelik gezinti bağlantılarını işleyen [Navlink bileşenini](xref:blazor/routing#navlink-component) ( <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ) içerir Razor . Bileşeni, <xref:Microsoft.AspNetCore.Components.Routing.NavLink> bileşeni yüklendiği zaman otomatik olarak seçili durumu gösterir ve bu, kullanıcının hangi bileşenin görüntülenmekte olduğunu anlamasına yardımcı olur.
+  * `NavMenu`(*Navmenu. Razor*): kenar çubuğu gezintisini uygular. Diğer bileşenlere yönelik gezinti bağlantılarını işleyen [Navlink bileşenini](xref:blazor/fundamentals/routing#navlink-component) ( <xref:Microsoft.AspNetCore.Components.Routing.NavLink> ) içerir Razor . Bileşeni, <xref:Microsoft.AspNetCore.Components.Routing.NavLink> bileşeni yüklendiği zaman otomatik olarak seçili durumu gösterir ve bu, kullanıcının hangi bileşenin görüntülenmekte olduğunu anlamasına yardımcı olur.
 
 * *_Imports. Razor*: Razor ad alanları için yönergeler gibi uygulamanın bileşenlerine (*. Razor*) dahil etmek için ortak yönergeleri içerir [`@using`](xref:mvc/views/razor#using) .
 
@@ -88,4 +88,4 @@ Aşağıdaki dosya ve klasörler Blazor bir şablondan oluşturulan bir uygulama
 
 * *Wwwroot*: uygulamanın ortak statik varlıklarını Içeren uygulamanın [Web kök](xref:fundamentals/index#web-root) klasörü.
 
-* *appSettings. JSON* ( Blazor sunucu): uygulamanın yapılandırma ayarları.
+* *appsettings.js* ( Blazor sunucu): uygulamanın yapılandırma ayarları.

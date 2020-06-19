@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: d26bb71a8ae06764b58a094b28d5e6f9eb581ecd
-ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
+ms.openlocfilehash: 7d7ea0fe69f258c01177c7755eaee61ab42400ce
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2020
-ms.locfileid: "84755969"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102952"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>ASP.NET Core 'de günlüğe kaydetme ve tanılamaSignalR
 
@@ -88,7 +88,7 @@ Günlüğe kaydetmeyi tamamen devre dışı bırakmak için `signalR.LogLevel.No
 
 Aşağıdaki tabloda JavaScript istemcisi için kullanılabilir olan günlük düzeyleri gösterilmektedir. Günlük düzeyinin bu değerlerden birine ayarlanması, bu düzeyde ve tabloda üzerindeki tüm düzeylerde günlüğe kaydetmeyi sağlar.
 
-| Düzey | Description |
+| Düzey | Açıklama |
 | ----- | ----------- |
 | `None` | Hiçbir ileti günlüğe kaydedilmez. |
 | `Critical` | Uygulamanın tamamında bir hata olduğunu gösteren mesajlar. |
@@ -100,7 +100,7 @@ Aşağıdaki tabloda JavaScript istemcisi için kullanılabilir olan günlük d�
 
 Ayrıntı düzeyini yapılandırdıktan sonra, Günlükler tarayıcı konsoluna yazılır (veya bir NodeJS uygulamasında standart çıkış).
 
-Günlükleri özel bir günlüğe kaydetme sistemine göndermek istiyorsanız, arabirimini uygulayan bir JavaScript nesnesi sağlayabilirsiniz `ILogger` . Uygulanması gereken tek yöntem `log` , olay düzeyini ve olayla ilişkili iletiyi alır. Örnek:
+Günlükleri özel bir günlüğe kaydetme sistemine göndermek istiyorsanız, arabirimini uygulayan bir JavaScript nesnesi sağlayabilirsiniz `ILogger` . Uygulanması gereken tek yöntem `log` , olay düzeyini ve olayla ilişkili iletiyi alır. Örneğin:
 
 [!code-typescript[](diagnostics/custom-logger.ts?highlight=3-7,13)]
 
@@ -111,7 +111,7 @@ Günlükleri özel bir günlüğe kaydetme sistemine göndermek istiyorsanız, a
 
 .NET istemcisinden günlükleri almak için, `ConfigureLogging` üzerinde yöntemini kullanabilirsiniz `HubConnectionBuilder` . Bu, `ConfigureLogging` ve üzerindeki yöntemiyle aynı şekilde çalışmaktadır `WebHostBuilder` `HostBuilder` . ASP.NET Core ' de kullandığınız günlük sağlayıcılarını yapılandırabilirsiniz. Ancak, bireysel günlük sağlayıcıları için NuGet paketlerini el ile yükleyip etkinleştirmeniz gerekir.
 
-Webassembly uygulamasına .NET istemci günlüğü eklemek için Blazor bkz <xref:fundamentals/logging/index#blazor-webassembly-signalr-net-client-logging> ..
+Webassembly uygulamasına .NET istemci günlüğü eklemek için Blazor bkz <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging> ..
 
 ### <a name="console-logging"></a>Konsol günlüğü
 
@@ -220,7 +220,7 @@ Tanılama dosyalarını, bir uzantıya sahip olacak şekilde yeniden adlandırar
 
 SignalRSunucu ölçümleri <xref:Microsoft.AspNetCore.Http.Connections> olay kaynağında raporlanır.
 
-| Name                    | Description                 |
+| Name                    | Açıklama                 |
 |-------------------------|-----------------------------|
 | `connections-started`   | Toplam bağlantı sayısı   |
 | `connections-stopped`   | Durdurulan toplam bağlantı sayısı   |
@@ -230,7 +230,7 @@ SignalRSunucu ölçümleri <xref:Microsoft.AspNetCore.Http.Connections> olay kay
 
 ### <a name="observe-metrics"></a>Ölçümleri gözlemleyin
 
-[DotNet sayaçları](/dotnet/core/diagnostics/dotnet-counters) , geçici sistem durumu izleme ve ilk düzey performans araştırması için bir performans izleme aracıdır. Sağlayıcı adı olarak bir .NET uygulamasını izleyin `Microsoft.AspNetCore.Http.Connections` . Örnek:
+[DotNet sayaçları](/dotnet/core/diagnostics/dotnet-counters) , geçici sistem durumu izleme ve ilk düzey performans araştırması için bir performans izleme aracıdır. Sağlayıcı adı olarak bir .NET uygulamasını izleyin `Microsoft.AspNetCore.Http.Connections` . Örneğin:
 
 ```console
 > dotnet-counters monitor --process-id 37016 Microsoft.AspNetCore.Http.Connections

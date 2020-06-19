@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/target-aspnetcore
-ms.openlocfilehash: 85c0d850922b7118b101126c09b208b0db420f7e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 70a445d109a1a9553178e94d79df87cd373e6b06
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776493"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85103030"
 ---
 # <a name="use-aspnet-core-apis-in-a-class-library"></a>Bir sınıf kitaplığında ASP.NET Core API 'Leri kullanma
 
@@ -36,27 +36,27 @@ ASP.NET Core önizleme sürümleri kullanılabilir hale getirilirse, [ASPNET/Duy
 
 ## <a name="use-the-aspnet-core-shared-framework"></a>ASP.NET Core paylaşılan çerçevesini kullanma
 
-.NET Core 3,0 sürümü sayesinde, birçok ASP.NET Core derlemesi artık NuGet 'e paket olarak yayımlanmamıştır. Bunun yerine, derlemeler .NET Core SDK ve çalışma zamanı `Microsoft.AspNetCore.App` yükleyicilerle birlikte yüklenen paylaşılan çerçeveye dahil edilmiştir. Artık yayımlanmayan paketlerin listesi için bkz. [artık kullanılmayan paket başvurularını kaldır](xref:migration/22-to-30#remove-obsolete-package-references).
+.NET Core 3,0 sürümü sayesinde, birçok ASP.NET Core derlemesi artık NuGet 'e paket olarak yayımlanmamıştır. Bunun yerine, derlemeler `Microsoft.AspNetCore.App` .NET Core SDK ve çalışma zamanı yükleyicilerle birlikte yüklenen paylaşılan çerçeveye dahil edilmiştir. Artık yayımlanmayan paketlerin listesi için bkz. [artık kullanılmayan paket başvurularını kaldır](xref:migration/22-to-30#remove-obsolete-package-references).
 
-.NET Core 3,0 itibariyle, `Microsoft.NET.Sdk.Web` MSBuild SDK 'sını kullanan projeler, paylaşılan çerçeveye örtük olarak başvurur. `Microsoft.NET.Sdk` Veya `Microsoft.NET.Sdk.Razor` SDK kullanan projeler, paylaşılan çerçevede ASP.NET Core apı 'leri kullanmak için ASP.NET Core başvurmalıdır.
+.NET Core 3,0 itibariyle, `Microsoft.NET.Sdk.Web` MSBuild SDK 'sını kullanan projeler, paylaşılan çerçeveye örtük olarak başvurur. Veya SDK kullanan projeler, `Microsoft.NET.Sdk` `Microsoft.NET.Sdk.Razor` paylaşılan çerçevede ASP.NET Core API 'leri kullanmak için ASP.NET Core başvurmalıdır.
 
-ASP.NET Core başvurmak için, proje dosyanıza aşağıdaki `<FrameworkReference>` öğeyi ekleyin:
+ASP.NET Core başvurmak için, `<FrameworkReference>` proje dosyanıza aşağıdaki öğeyi ekleyin:
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-basic-library.csproj?highlight=8)]
 
 ASP.NET Core buna bu şekilde başvurulması yalnızca .NET Core 3. x 'i hedefleyen projeler için desteklenir.
 
-## <a name="include-blazor-extensibility"></a>Blazor genişletilebilirliği Ekle
+## <a name="include-blazor-extensibility"></a>Genişletilebilirlik dahil et Blazor
 
-Blazor, WebAssembly (ıSSTREAM) ve sunucu [barındırma modellerini](xref:blazor/hosting-models)destekler. Belirli bir neden olmadığı müddetçe, [Razor bileşenleri](xref:blazor/components) Kitaplığı hem barındırma modellerini desteklemelidir. Razor bileşenleri Kitaplığı [Microsoft. net. SDK. Razor SDK 'sını](xref:razor-pages/sdk)kullanmalıdır.
+BlazorWebAssembly (ıSSTREAM) ve sunucu [barındırma modellerini](xref:blazor/hosting-models)destekler. Belirli bir neden olmadığı müddetçe, bir [ Razor bileşen](xref:blazor/components/index) Kitaplığı hem barındırma modellerini desteklemelidir. Bir Razor Bileşen kitaplığı [MICROSOFT. net. SDK kullanmalıdır. Razor SDK](xref:razor-pages/sdk).
 
 ### <a name="support-both-hosting-models"></a>Barındırma modellerini destekler
 
-Hem [Blazor Server](xref:blazor/hosting-models#blazor-server) hem de [Blazor InStream](xref:blazor/hosting-models#blazor-webassembly) projelerinden Razor bileşeni tüketimini desteklemek için, düzenleyiciniz için aşağıdaki yönergeleri kullanın.
+RazorHem [ Blazor sunucu](xref:blazor/hosting-models#blazor-server) hem de bulunan projelerden bileşen kullanımını [ Blazor ](xref:blazor/hosting-models#blazor-webassembly) desteklemek için, düzenleyiciniz için aşağıdaki yönergeleri kullanın.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-**Razor sınıf kitaplığı** proje şablonunu kullanın. Şablonun **destek sayfaları ve görünümleri** onay kutusu seçili olmalıdır.
+** Razor Sınıf kitaplığı** proje şablonunu kullanın. Şablonun **destek sayfaları ve görünümleri** onay kutusu seçili olmalıdır.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -68,14 +68,14 @@ dotnet new razorclasslib
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-**Razor sınıf kitaplığı** proje şablonunu kullanın.
+** Razor Sınıf kitaplığı** proje şablonunu kullanın.
 
 ---
 
 Şablondan oluşturulan proje aşağıdaki işlemleri yapar:
 
 * 2,0 .NET Standard hedefler.
-* `RazorLangVersion` Özelliğini olarak `3.0`ayarlar. `3.0`, .NET Core 3. x için varsayılan değerdir.
+* `RazorLangVersion`Özelliğini olarak ayarlar `3.0` . `3.0`, .NET Core 3. x için varsayılan değerdir.
 * Aşağıdaki paket başvurularını ekler:
   * [Microsoft. AspNetCore. Components](https://www.nuget.org/packages/Microsoft.AspNetCore.Components)
   * [Microsoft. AspNetCore. components. Web](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.Web)
@@ -86,41 +86,41 @@ dotnet new razorclasslib
 
 ### <a name="support-a-specific-hosting-model"></a>Belirli bir barındırma modelini destekleme
 
-Tek bir Blazor barındırma modelini desteklemek çok daha az yaygındır. Örnek olarak, yalnızca [Blazor Server](xref:blazor/hosting-models#blazor-server) projelerinden gelen Razor bileşeni tüketimini desteklemek için:
+Tek bir barındırma modelini desteklemek çok daha az yaygındır Blazor . Örnek olarak, Razor yalnızca [ Blazor sunucu](xref:blazor/hosting-models#blazor-server) projelerinden gelen bileşen kullanımını desteklemek için:
 
 * Hedef .NET Core 3. x.
-* Paylaşılan çerçeve `<FrameworkReference>` için bir öğe ekleyin.
+* `<FrameworkReference>`Paylaşılan çerçeve için bir öğe ekleyin.
 
 Örneğin:
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-razor-components-library.csproj)]
 
-Razor bileşenleri içeren kitaplıklar hakkında daha fazla bilgi için bkz. [ASP.NET Core Razor bileşenleri sınıf kitaplıkları](xref:blazor/class-libraries).
+Bileşenleri içeren kitaplıklar hakkında daha fazla bilgi için Razor bkz. [ASP.NET Core Razor Components sınıf kitaplıkları](xref:blazor/components/class-libraries).
 
 ## <a name="include-mvc-extensibility"></a>MVC genişletilebilirliği Ekle
 
 Bu bölümde şunları içeren kitaplıklara ilişkin öneriler özetlenmektedir:
 
-* [Razor görünümleri veya Razor Pages](#razor-views-or-razor-pages)
+* [Razorgörünümler veya Razor Sayfalar](#razor-views-or-razor-pages)
 * [Etiket Yardımcıları](#tag-helpers)
 * [Görünüm bileşenleri](#view-components)
 
 Bu bölüm, MVC 'nin birden çok sürümünü desteklemek için Çoklu hedefleme ile açıklanmamaktadır. Birden çok ASP.NET Core sürümünün desteklenmesi hakkında rehberlik için bkz. [çoklu ASP.NET Core sürümlerini](#support-multiple-aspnet-core-versions)destekleme.
 
-### <a name="razor-views-or-razor-pages"></a>Razor görünümleri veya Razor Pages
+### <a name="razor-views-or-razor-pages"></a>Razorgörünümler veya Razor Sayfalar
 
-[Razor görünümlerini](xref:mvc/views/overview) veya [Razor Pages](xref:razor-pages/index) Içeren bir proje, [Microsoft. net. SDK. Razor SDK 'sını](xref:razor-pages/sdk)kullanmalıdır.
+[ Razor Görünümler](xref:mvc/views/overview) veya [ Razor Sayfalar](xref:razor-pages/index) içeren bir projenin [Microsoft. net. SDK kullanması gerekir. Razor SDK](xref:razor-pages/sdk).
 
 Proje .NET Core 3. x 'i hedefliyorsa şunları gerektirir:
 
-* Olarak `AddRazorSupportForMvc` `true`ayarlanan MSBuild özelliği.
-* Paylaşılan `<FrameworkReference>` çerçeve için bir öğe.
+* `AddRazorSupportForMvc`Olarak ayarlanan MSBuild özelliği `true` .
+* `<FrameworkReference>`Paylaşılan çerçeve için bir öğe.
 
-**Razor sınıf kitaplığı** proje şablonu, .NET Core 3. x 'i hedefleyen projeler için önceki gereksinimleri karşılar. Düzenleyiciniz için aşağıdaki yönergeleri kullanın.
+** Razor Sınıf kitaplığı** proje şablonu, .NET Core 3. x 'i hedefleyen projeler için önceki gereksinimleri karşılar. Düzenleyiciniz için aşağıdaki yönergeleri kullanın.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-**Razor sınıf kitaplığı** proje şablonunu kullanın. Şablonun **destek sayfaları ve görünümleri** onay kutusu seçilmelidir.
+** Razor Sınıf kitaplığı** proje şablonunu kullanın. Şablonun **destek sayfaları ve görünümleri** onay kutusu seçilmelidir.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -140,27 +140,27 @@ dotnet new razorclasslib -s
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-razor-views-pages-library.csproj)]
 
-Proje bunun yerine .NET Standard hedefliyorsa, bir [Microsoft. AspNetCore. Mvc](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc) paket başvurusu gerekir. `Microsoft.AspNetCore.Mvc` Paket ASP.NET Core 3,0 ' de paylaşılan çerçeveye taşındı ve bu nedenle artık yayımlanmamıştır. Örneğin:
+Proje bunun yerine .NET Standard hedefliyorsa, bir [Microsoft. AspNetCore. Mvc](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc) paket başvurusu gerekir. `Microsoft.AspNetCore.Mvc`Paket ASP.NET Core 3,0 ' de paylaşılan çerçeveye taşındı ve bu nedenle artık yayımlanmamıştır. Örneğin:
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netstandard2.0-razor-views-pages-library.csproj?highlight=8)]
 
 ### <a name="tag-helpers"></a>Etiket Yardımcıları
 
-[Etiket Yardımcıları](xref:mvc/views/tag-helpers/intro) içeren bir projenin `Microsoft.NET.Sdk` SDK kullanması gerekir. .NET Core 3. x ' i hedefliyorsanız, `<FrameworkReference>` paylaşılan çerçeve için bir öğe ekleyin. Örneğin:
+[Etiket Yardımcıları](xref:mvc/views/tag-helpers/intro) içeren bir projenin SDK kullanması gerekir `Microsoft.NET.Sdk` . .NET Core 3. x ' i hedefliyorsanız, `<FrameworkReference>` paylaşılan çerçeve için bir öğe ekleyin. Örneğin:
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-basic-library.csproj)]
 
-.NET Standard hedefliyorsanız (ASP.NET Core 3. x sürümünden önceki sürümleri desteklemek için), [Microsoft. AspNetCore. MvcRazor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor)öğesine bir paket başvurusu ekleyin. `Microsoft.AspNetCore.Mvc.Razor` Paket, paylaşılan çerçeveye taşındı ve bu nedenle artık yayınlanmadı. Örneğin:
+.NET Standard hedefliyorsanız (ASP.NET Core 3. x sürümünden önceki sürümleri desteklemek için), [Microsoft. AspNetCore. Mvc Razor ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor)öğesine bir paket başvurusu ekleyin. `Microsoft.AspNetCore.Mvc.Razor`Paket, paylaşılan çerçeveye taşındı ve bu nedenle artık yayınlanmadı. Örneğin:
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netstandard2.0-tag-helpers-library.csproj)]
 
 ### <a name="view-components"></a>Görünüm bileşenleri
 
-[Görünüm bileşenlerini](xref:mvc/views/view-components) içeren bir projenin `Microsoft.NET.Sdk` SDK kullanması gerekir. .NET Core 3. x ' i hedefliyorsanız, `<FrameworkReference>` paylaşılan çerçeve için bir öğe ekleyin. Örneğin:
+[Görünüm bileşenlerini](xref:mvc/views/view-components) içeren bir projenin SDK kullanması gerekir `Microsoft.NET.Sdk` . .NET Core 3. x ' i hedefliyorsanız, `<FrameworkReference>` paylaşılan çerçeve için bir öğe ekleyin. Örneğin:
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netcoreapp3.0-basic-library.csproj)]
 
-.NET Standard hedefliyorsanız (ASP.NET Core 3. x sürümünden önceki sürümleri desteklemek için), [Microsoft. AspNetCore. Mvc. ViewFeatures](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.ViewFeatures)öğesine bir paket başvurusu ekleyin. `Microsoft.AspNetCore.Mvc.ViewFeatures` Paket, paylaşılan çerçeveye taşındı ve bu nedenle artık yayınlanmadı. Örneğin:
+.NET Standard hedefliyorsanız (ASP.NET Core 3. x sürümünden önceki sürümleri desteklemek için), [Microsoft. AspNetCore. Mvc. ViewFeatures](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.ViewFeatures)öğesine bir paket başvurusu ekleyin. `Microsoft.AspNetCore.Mvc.ViewFeatures`Paket, paylaşılan çerçeveye taşındı ve bu nedenle artık yayınlanmadı. Örneğin:
 
 [!code-xml[](target-aspnetcore/samples/single-tfm/netstandard2.0-view-components-library.csproj)]
 
@@ -172,15 +172,15 @@ ASP.NET Core birden çok çeşidini destekleyen bir kitaplığı yazmak için Ç
 * .NET Core 2. x 'i hedefleyen 2. x ASP.NET Core
 * ASP.NET Core 3. x .NET Core 3. x 'i hedefleme
 
-Aşağıdaki proje dosyası bu değişkenleri `TargetFrameworks` özelliği aracılığıyla destekler:
+Aşağıdaki proje dosyası bu değişkenleri özelliği aracılığıyla destekler `TargetFrameworks` :
 
 [!code-xml[](target-aspnetcore/samples/multi-tfm/recommended-tag-helpers-library.csproj)]
 
 Önceki proje dosyası ile:
 
-* `Markdig` Paket tüm tüketiciler için eklenir.
-* [Microsoft. AspNetCore. MvcRazor ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor) öğesine bir başvuru. .NET Framework 4.6.1 veya üzeri ya da .NET Core 2. x ' i hedefleyen tüketiciler için eklenmiştir. Paketin 2.1.0 sürümü, geriye dönük uyumluluk nedeniyle ASP.NET Core 2,2 ile birlikte çalışmaktadır.
-* Paylaşılan çerçeveye .NET Core 3. x 'i hedefleyen tüketiciler için başvurulur. `Microsoft.AspNetCore.Mvc.Razor` Paket, paylaşılan çerçeveye dahildir.
+* `Markdig`Paket tüm tüketiciler için eklenir.
+* [Microsoft. AspNetCore. Mvc Razor ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor) öğesine bir başvuru. .NET Framework 4.6.1 veya üzeri ya da .NET Core 2. x ' i hedefleyen tüketiciler için eklenmiştir. Paketin 2.1.0 sürümü, geriye dönük uyumluluk nedeniyle ASP.NET Core 2,2 ile birlikte çalışmaktadır.
+* Paylaşılan çerçeveye .NET Core 3. x 'i hedefleyen tüketiciler için başvurulur. `Microsoft.AspNetCore.Mvc.Razor`Paket, paylaşılan çerçeveye dahildir.
 
 Alternatif olarak, .NET Standard 2,0 hem .NET Core 2,1 hem de .NET Framework 4.6.1 hedeflemek yerine hedeflenebilir:
 
@@ -209,7 +209,7 @@ Kitaplığı yeniden yazabilmeniz için bunu yapın ve paket başvurularıyla da
 Kitaplığı yeniden yazamıyoruz aşağıdaki adımları uygulayın:
 
 * .NET Core 3,0 için bir hedef ekleyin.
-* Paylaşılan çerçeve `<FrameworkReference>` için bir öğe ekleyin.
+* `<FrameworkReference>`Paylaşılan çerçeve için bir öğe ekleyin.
 * Kodu koşullu olarak derlemek için uygun hedef çerçeve simgesiyle [#if Önişlemci yönergesini](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-if) kullanın.
 
 Örneğin, HTTP istek ve yanıt akışlarındaki zaman uyumlu okuma ve yazma işlemleri, ASP.NET Core 3,0 itibariyle varsayılan olarak devre dışıdır. ASP.NET Core 2,2, varsayılan olarak zaman uyumlu davranışı destekler. Zaman uyumlu okuma ve yazma işlemlerinin, g/ç 'nin gerçekleştiği durumlarda etkinleştirilmesi gereken bir ara yazılım kitaplığı düşünün. Kitaplık, uygun Önişlemci yönergesinde zaman uyumlu özellikleri etkinleştirmek için kodu içermelidir. Örneğin:
@@ -226,15 +226,15 @@ ASP.NET Core 3,0 ' de tanıtılan ASP.NET Core bir API kullanmak istediğinizi d
 Kitaplık işlevi için API gerekiyorsa ve bu, alt düzey uygulamanın bir yolu yoktur:
 
 * Yalnızca .NET Core 3. x 'i hedefleyin.
-* Paylaşılan çerçeve `<FrameworkReference>` için bir öğe ekleyin.
+* `<FrameworkReference>`Paylaşılan çerçeve için bir öğe ekleyin.
 
 Kitaplık, özelliği farklı bir şekilde uygulayabilirler:
 
 * .NET Core 3. x ' i hedef çerçeve olarak ekleyin.
-* Paylaşılan çerçeve `<FrameworkReference>` için bir öğe ekleyin.
+* `<FrameworkReference>`Paylaşılan çerçeve için bir öğe ekleyin.
 * Kodu koşullu olarak derlemek için uygun hedef çerçeve simgesiyle [#if Önişlemci yönergesini](/dotnet/csharp/language-reference/preprocessor-directives/preprocessor-if) kullanın.
 
-Örneğin, aşağıdaki etiket Yardımcısı ASP.NET Core 3,0 ' de <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> tanıtılan arabirimi kullanır. .NET Core 3,0 ' i hedefleyen tüketiciler, `NETCOREAPP3_0` hedef çerçeve sembolü tarafından tanımlanan kod yolunu yürütür. Etiket Yardımcısı 'nın Oluşturucu parametre türü, .NET Core <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment> 2,1 ve .NET Framework 4.6.1 tüketicileri için olarak değişir. Bu değişiklik gereklidir çünkü ASP.NET Core 3,0 eski olarak `IHostingEnvironment` işaretlendi ve değiştirme olarak `IWebHostEnvironment` önerilmişti.
+Örneğin, aşağıdaki etiket Yardımcısı <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> ASP.NET Core 3,0 ' de tanıtılan arabirimi kullanır. .NET Core 3,0 ' i hedefleyen tüketiciler, hedef çerçeve sembolü tarafından tanımlanan kod yolunu yürütür `NETCOREAPP3_0` . Etiket Yardımcısı 'nın Oluşturucu parametre türü, <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment> .NET Core 2,1 ve .NET Framework 4.6.1 tüketicileri için olarak değişir. Bu değişiklik gereklidir çünkü ASP.NET Core 3,0 `IHostingEnvironment` eski olarak işaretlendi ve `IWebHostEnvironment` değiştirme olarak önerilmişti.
 
 ```csharp
 [HtmlTargetElement("script", Attributes = "asp-inline")]
@@ -286,6 +286,6 @@ Paylaşılan çerçeveden kaldırılmış bir ASP.NET Core derlemesi kullanmak i
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * <xref:razor-pages/ui-class>
-* <xref:blazor/class-libraries>
+* <xref:blazor/components/class-libraries>
 * [.NET uygulama desteği](/dotnet/standard/net-standard#net-implementation-support)
 * [.NET destek ilkeleri](https://dotnet.microsoft.com/platform/support/policy)

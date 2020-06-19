@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: ce3f20f7ee4ccfa73afc5f80a4429d9f4fe05591
-ms.sourcegitcommit: 05490855e0c70565f0c4b509d392b0828bcfd141
+ms.openlocfilehash: 0b9854b3848a204b28d0427bef08364be0139069
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/08/2020
-ms.locfileid: "84507263"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102861"
 ---
 # <a name="build-your-first-blazor-app"></a>İlk uygulamanızı oluşturma Blazor
 
@@ -129,7 +129,7 @@ Sunucu uygulamasıyla çalışıyorsanız Blazor , `WeatherForecastService` hizm
 
 ### <a name="blazor-webassembly-experience"></a>BlazorWebAssembly deneyimi
 
-BlazorWebassembly uygulamasıyla çalışıyorsanız, <xref:System.Net.Http.HttpClient> *Wwwroot/Sample-Data* klasöründeki *Hava durumu. JSON* dosyasından Hava durumu tahmin verileri almak için eklenir.
+BlazorWebassembly uygulamasıyla çalışıyorsanız, <xref:System.Net.Http.HttpClient> *Wwwroot/Sample-Data* klasöründeki *weather.js* dosyadaki Hava durumu tahmin verileri almak için,
 
 *Pages/FetchData. Razor*:
 
@@ -233,4 +233,4 @@ Bu öğreticide, şunların nasıl yapıldığını öğrendiniz:
 Bileşenleri derlemeyi ve kullanmayı öğrenin:
 
 > [!div class="nextstepaction"]
-> <xref:blazor/components>
+> <xref:blazor/components/index>

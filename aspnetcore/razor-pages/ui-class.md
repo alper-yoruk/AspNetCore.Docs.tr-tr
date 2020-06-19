@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/ui-class
-ms.openlocfilehash: 32aa1cdab0e552a1255c01b5135e9a82a0e37c77
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: adfcc281f285892583ab8a21c014d6fcb120af9c
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84451907"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102851"
 ---
 # <a name="create-reusable-ui-using-the-razor-class-library-project-in-aspnet-core"></a>RazorASP.NET Core içindeki sınıf kitaplığı projesini kullanarak yeniden kullanılabilir kullanıcı arabirimi oluşturma
 
@@ -25,7 +25,7 @@ Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Razorgörünümler, sayfalar, denetleyiciler, sayfa modelleri, [ Razor Bileşenler](xref:blazor/class-libraries), [Görünüm bileşenleri](xref:mvc/views/view-components)ve veri modelleri bir Razor sınıf kitaplığı (RCL) halinde oluşturulabilir. RCL paketlenebilir ve yeniden kullanılabilir. Uygulamalar RCL 'yi içerebilir ve içerdiği görünümleri ve sayfaları geçersiz kılabilir. Hem Web uygulamasında hem de RCL 'de bir görünüm, kısmi görünüm veya Razor sayfa bulunduğunda, Razor Web uygulamasındaki biçimlendirme (*. cshtml* dosyası) öncelik kazanır.
+Razorgörünümler, sayfalar, denetleyiciler, sayfa modelleri, [ Razor Bileşenler](xref:blazor/components/class-libraries), [Görünüm bileşenleri](xref:mvc/views/view-components)ve veri modelleri bir Razor sınıf kitaplığı (RCL) halinde oluşturulabilir. RCL paketlenebilir ve yeniden kullanılabilir. Uygulamalar RCL 'yi içerebilir ve içerdiği görünümleri ve sayfaları geçersiz kılabilir. Hem Web uygulamasında hem de RCL 'de bir görünüm, kısmi görünüm veya Razor sayfa bulunduğunda, Razor Web uygulamasındaki biçimlendirme (*. cshtml* dosyası) öncelik kazanır.
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
@@ -98,7 +98,7 @@ Yardımcı varlıkları RCL 'nin bir parçası olarak dahil etmek için, sınıf
 
 RCL 'yi paketleyerek, *Wwwroot* klasöründeki tüm yardımcı varlıklar pakete otomatik olarak eklenir.
 
-`dotnet pack`NuGet. exe sürümü yerine komutunu kullanın `nuget pack` .
+`dotnet pack`NuGet.exe sürümü yerine komutunu kullanın `nuget pack` .
 
 ### <a name="exclude-static-assets"></a>Statik varlıkları hariç tut
 
@@ -192,7 +192,7 @@ Uygulama yayımlandığında, tüm başvurulan projeler ve paketlerin yardımcı
 
 ::: moniker range="< aspnetcore-3.0"
 
-Razorgörünümler, sayfalar, denetleyiciler, sayfa modelleri, [ Razor Bileşenler](xref:blazor/class-libraries), [Görünüm bileşenleri](xref:mvc/views/view-components)ve veri modelleri bir Razor sınıf kitaplığı (RCL) halinde oluşturulabilir. RCL paketlenebilir ve yeniden kullanılabilir. Uygulamalar RCL 'yi içerebilir ve içerdiği görünümleri ve sayfaları geçersiz kılabilir. Hem Web uygulamasında hem de RCL 'de bir görünüm, kısmi görünüm veya Razor sayfa bulunduğunda, Razor Web uygulamasındaki biçimlendirme (*. cshtml* dosyası) öncelik kazanır.
+Razorgörünümler, sayfalar, denetleyiciler, sayfa modelleri, [ Razor Bileşenler](xref:blazor/components/class-libraries), [Görünüm bileşenleri](xref:mvc/views/view-components)ve veri modelleri bir Razor sınıf kitaplığı (RCL) halinde oluşturulabilir. RCL paketlenebilir ve yeniden kullanılabilir. Uygulamalar RCL 'yi içerebilir ve içerdiği görünümleri ve sayfaları geçersiz kılabilir. Hem Web uygulamasında hem de RCL 'de bir görünüm, kısmi görünüm veya Razor sayfa bulunduğunda, Razor Web uygulamasındaki biçimlendirme (*. cshtml* dosyası) öncelik kazanır.
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
@@ -322,7 +322,7 @@ dotnet new viewstart -o RazorUIClassLib/Areas/MyFeature/Pages
   dotnet build RazorUIClassLib
   ```
 
-Derleme çıkışı *RazorUIClassLib. dll* ve *RazorUIClassLib. views. dll*içerir. *RazorUIClassLib. views. dll* , derlenen Razor içeriği içerir.
+Derleme çıktısı *RazorUIClassLib.dll* ve *RazorUIClassLib.Views.dll*içerir. *RazorUIClassLib.Views.dll* derlenen içeriği içerir Razor .
 
 ### <a name="use-the-razor-ui-library-from-a-razor-pages-project"></a>RazorBir sayfalar projesinden UI kitaplığını kullanma Razor
 
@@ -398,4 +398,4 @@ RCL içeriğine, Web uygulamasının *Sayfalar* klasörünün bir parçası olma
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* <xref:blazor/class-libraries>
+* <xref:blazor/components/class-libraries>

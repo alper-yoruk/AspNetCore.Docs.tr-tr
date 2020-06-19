@@ -11,18 +11,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/claims
-ms.openlocfilehash: de8ab915e6a8529c7401f89fad067ec33d5d0713
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 41e19896e9c43ca67aa8b1af1c6c88c9c9c20373
+ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774424"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85074484"
 ---
 # <a name="claims-based-authorization-in-aspnet-core"></a>ASP.NET Core 'de talep tabanlı yetkilendirme
 
 <a name="security-authorization-claims-based"></a>
 
-Bir kimlik oluşturulduğunda, güvenilen bir taraf tarafından verilen bir veya daha fazla talep atanabilir. Talep, konunun ne yapabileceğini temsil eden bir ad değer çiftidir. Örneğin, bir yerel bir itici lisans yetkilisi tarafından verilen bir sürücü lisansına sahip olabilirsiniz. Sürücünüzün lisansının, bu tarihte Doğum tarihi vardır. Bu durumda, talep adı olacaktır `DateOfBirth`; örneğin `8th June 1970` , talep değeri Doğum tarihidir ve veren lisans yetkilisi olur. Talep tabanlı yetkilendirme, en basit, bir talebin değerini denetler ve bu değere göre bir kaynağa erişim sağlar. Örneğin, gece kulübünün erişim istiyorsanız yetkilendirme süreci şu olabilir:
+Bir kimlik oluşturulduğunda, güvenilen bir taraf tarafından verilen bir veya daha fazla talep atanabilir. Talep, konunun ne yapabileceğini temsil eden bir ad değer çiftidir. Örneğin, bir yerel bir itici lisans yetkilisi tarafından verilen bir sürücü lisansına sahip olabilirsiniz. Sürücünüzün lisansının, bu tarihte Doğum tarihi vardır. Bu durumda, talep adı olacaktır `DateOfBirth` ; Örneğin, talep değeri Doğum tarihidir `8th June 1970` ve veren lisans yetkilisi olur. Talep tabanlı yetkilendirme, en basit, bir talebin değerini denetler ve bu değere göre bir kaynağa erişim sağlar. Örneğin, gece kulübünün erişim istiyorsanız yetkilendirme süreci şu olabilir:
 
 Kapılı güvenlik müdürü, Doğum talepinizin tarihini ve erişim izni vermeden önce veren (itici lisans yetkilisi) tarafından güvenip güvenmeyeceğini değerlendirir.
 
@@ -34,7 +34,7 @@ Talep tabanlı yetkilendirme denetimleri bildirime dayalı-geliştirici, bunlar�
 
 En basit talep ilkesi türü bir talep olup olmadığını arar ve değeri denetlemez.
 
-Önce ilkeyi oluşturmanız ve kaydetmeniz gerekir. Bu, normalde `ConfigureServices()` *Startup.cs* dosyanızda bir parçası olan yetkilendirme hizmeti yapılandırmasının bir parçası olarak gerçekleşir.
+Önce ilkeyi oluşturmanız ve kaydetmeniz gerekir. Bu, normalde Startup.cs dosyanızda bir parçası olan yetkilendirme hizmeti yapılandırmasının bir parçası olarak gerçekleşir `ConfigureServices()` . *Startup.cs*
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -69,9 +69,9 @@ public void ConfigureServices(IServiceCollection services)
 
 ::: moniker-end
 
-Bu durumda, `EmployeeOnly` ilke geçerli kimlik üzerinde bir `EmployeeNumber` talep olup olmadığını denetler.
+Bu durumda, `EmployeeOnly` ilke `EmployeeNumber` geçerli kimlik üzerinde bir talep olup olmadığını denetler.
 
-Ardından ilkeyi, ilke adını belirtmek için `Policy` `AuthorizeAttribute` özniteliği üzerinde özelliğini kullanarak uygularsınız.
+Ardından ilkeyi, `Policy` `AuthorizeAttribute` ilke adını belirtmek için özniteliği üzerinde özelliğini kullanarak uygularsınız.
 
 ```csharp
 [Authorize(Policy = "EmployeeOnly")]
@@ -81,7 +81,7 @@ public IActionResult VacationBalance()
 }
 ```
 
-`AuthorizeAttribute` Özniteliği bir denetleyicinin tamamına uygulanabilir, bu örnekte yalnızca ilkeyle eşleşen kimlikler denetleyicideki herhangi bir eyleme erişime izin verilir.
+`AuthorizeAttribute`Özniteliği bir denetleyicinin tamamına uygulanabilir, bu örnekte yalnızca ilkeyle eşleşen kimlikler denetleyicideki herhangi bir eyleme erişime izin verilir.
 
 ```csharp
 [Authorize(Policy = "EmployeeOnly")]
@@ -93,7 +93,7 @@ public class VacationController : Controller
 }
 ```
 
-`AuthorizeAttribute` Özniteliği tarafından korunan bir denetleyicsahipseniz, ancak belirli eylemlere anonim erişime izin vermek istiyorsanız, `AllowAnonymousAttribute` özniteliği uygularsınız.
+Özniteliği tarafından korunan bir denetleyicsahipseniz `AuthorizeAttribute` , ancak belirli eylemlere anonim erişime izin vermek istiyorsanız, `AllowAnonymousAttribute` özniteliği uygularsınız.
 
 ```csharp
 [Authorize(Policy = "EmployeeOnly")]
@@ -148,7 +148,7 @@ public void ConfigureServices(IServiceCollection services)
 ::: moniker-end
 ### <a name="add-a-generic-claim-check"></a>Genel talep denetimi ekleme
 
-Talep değeri tek bir değer değilse veya bir dönüşüm gerekliyse, [Requireassertion](/dotnet/api/microsoft.aspnetcore.authorization.authorizationpolicybuilder.requireassertion)kullanın. Daha fazla bilgi için bkz. bir [ilkeyi yerine getirmek için bir Func kullanma](xref:security/authorization/policies#using-a-func-to-fulfill-a-policy).
+Talep değeri tek bir değer değilse veya bir dönüşüm gerekliyse, [Requireassertion](/dotnet/api/microsoft.aspnetcore.authorization.authorizationpolicybuilder.requireassertion)kullanın. Daha fazla bilgi için bkz. bir [ilkeyi yerine getirmek için bir Func kullanma](xref:security/authorization/policies#use-a-func-to-fulfill-a-policy).
 
 ## <a name="multiple-policy-evaluation"></a>Birden çok Ilke değerlendirmesi
 
@@ -169,6 +169,6 @@ public class SalaryController : Controller
 }
 ```
 
-Yukarıdaki örnekte, `EmployeeOnly` ilkeyi karşılayan herhangi bir kimlik, denetleyicide ilke zorlandığından `Payslip` eyleme erişebilir. Ancak, `UpdateSalary` eylemi çağırmak için kimlik *hem* `EmployeeOnly` ilkeyi hem de `HumanResources` ilkeyi yerine getirmelidir.
+Yukarıdaki örnekte, ilkeyi karşılayan herhangi bir kimlik, `EmployeeOnly` `Payslip` denetleyicide ilke zorlandığından eyleme erişebilir. Ancak, eylemi çağırmak için `UpdateSalary` kimlik hem ilkeyi hem *de* ilkeyi yerine getirmelidir `EmployeeOnly` `HumanResources` .
 
 Doğum talebinde bulunmak gibi daha karmaşık ilkeler isterseniz, bu tarihten itibaren bir yaşı hesaplamak, daha sonra yaşı 21 veya daha eski bir tarihte denetlemek için [özel ilke işleyicileri](xref:security/authorization/policies)yazmanız gerekir.

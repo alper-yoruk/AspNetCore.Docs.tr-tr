@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: ffdc329d813dcbfffe2216dc58bbc4150f7cf786
-ms.sourcegitcommit: b0062f29cba2e5c21b95cf89eaf435ba830d11a3
+ms.openlocfilehash: b55619889c294a0cd6ab98ffdf228d86ee60cd7c
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/15/2020
-ms.locfileid: "84776429"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102307"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>ASP.NET Core weelsembly ile aşamalı Web uygulamaları oluşturun Blazor
 
@@ -89,7 +89,7 @@ Varsayılan olarak, PWA şablonu seçeneği kullanılarak oluşturulan uygulamal
 
 Çevrimdışı desteğin nasıl çalıştığını görmek için:
 
-1. Uygulamayı yayımlayın. Daha fazla bilgi için bkz. <xref:host-and-deploy/blazor/index#publish-the-app>.
+1. Uygulamayı yayımlayın. Daha fazla bilgi için bkz. <xref:blazor/host-and-deploy/index#publish-the-app>.
 1. Uygulamayı HTTPS 'yi destekleyen bir sunucuya dağıtın ve uygulamayı güvenli HTTPS adresinde bir tarayıcıda erişin.
 1. Tarayıcının geliştirme araçlarını açın ve **uygulama** sekmesinde bir *hizmet çalışanının* konak için kayıtlı olduğunu doğrulayın:
 
@@ -295,4 +295,4 @@ Kimlik doğrulamasıyla etkileşime sahip bir çevrimdışı PWA uygulaması olu
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [SignalRkimlik doğrulaması için çıkış noktaları arası anlaşma](xref:blazor/hosting-model-configuration#signalr-cross-origin-negotiation-for-authentication)
+* [SignalRkimlik doğrulaması için çıkış noktaları arası anlaşma](xref:blazor/fundamentals/additional-scenarios#signalr-cross-origin-negotiation-for-authentication)

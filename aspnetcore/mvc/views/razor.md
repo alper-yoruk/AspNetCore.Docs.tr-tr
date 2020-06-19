@@ -11,18 +11,18 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: 53ca2a650eb6a3be0ff137953df5a546e9f0b282
-ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
+ms.openlocfilehash: e85c9d384361f9169035e6a3ab8770e1a96b8650
+ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2020
-ms.locfileid: "84756138"
+ms.lasthandoff: 06/19/2020
+ms.locfileid: "85102721"
 ---
 # <a name="razor-syntax-reference-for-aspnet-core"></a>RazorASP.NET Core için sözdizimi başvurusu
 
 By [Rick Anderson](https://twitter.com/RickAndMSFT), [Taylor Mullen](https://twitter.com/ntaylormullen)ve [dan vicarel](https://github.com/Rabadash8820)
 
-Razor, Web sayfalarına sunucu tabanlı kod eklemeye yönelik biçimlendirme sözdizimidir. RazorSöz dizimi, Razor biçimlendirme, C# ve HTML 'den oluşur. Genellikle içeren dosyaların Razor *. cshtml* dosya uzantısı vardır. RazorAyrıca, [ Razor Bileşenler](xref:blazor/components) dosyalarında (*. Razor*) bulunur.
+Razor, Web sayfalarına sunucu tabanlı kod eklemeye yönelik biçimlendirme sözdizimidir. RazorSöz dizimi, Razor biçimlendirme, C# ve HTML 'den oluşur. Genellikle içeren dosyaların Razor *. cshtml* dosya uzantısı vardır. RazorAyrıca, [ Razor Bileşenler](xref:blazor/components/index) dosyalarında (*. Razor*) bulunur.
 
 ## <a name="rendering-html"></a>HTML işleniyor
 
@@ -465,7 +465,7 @@ Bu makalenin ilerleyen kısımlarında, [ Razor bir görünüm için oluşturula
 
 *Bu senaryo yalnızca Razor Bileşenler (. Razor) için geçerlidir.*
 
-`@code`Blok, bir bileşenin [ Razor ](xref:blazor/components) bir bileşene C# üyeleri (alanlar, Özellikler ve Yöntemler) eklemesini sağlar:
+`@code`Blok, bir bileşenin [ Razor ](xref:blazor/components/index) bir bileşene C# üyeleri (alanlar, Özellikler ve Yöntemler) eklemesini sağlar:
 
 ```razor
 @code {
@@ -489,11 +489,11 @@ RazorBileşenler için `@code` bir diğer addır [`@functions`](#functions) ve �
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[ Razor Bileşenler](xref:blazor/components)' de `@code` `@functions` C# üyelerini eklemek için ' i kullanın.
+[ Razor Bileşenler](xref:blazor/components/index)' de `@code` `@functions` C# üyelerini eklemek için ' i kullanın.
 
 ::: moniker-end
 
-Örnek:
+Örneğin:
 
 [!code-cshtml[](razor/sample/Views/Home/Contact6.cshtml)]
 
@@ -683,7 +683,7 @@ Yukarıdaki örnekteki *evente Pages* klasöründe bir içeri aktarmalar dosyas�
 `@page`Yönergesinin, göründüğü dosyanın türüne bağlı olarak farklı etkileri vardır. Yönergesi:
 
 * İçindeki bir *. cshtml* dosyasında, dosyanın bir sayfa olduğunu gösterir Razor . Daha fazla bilgi için bkz. [özel rotalar](xref:razor-pages/index#custom-routes) ve <xref:razor-pages/index> .
-* Bir Razor bileşenin istekleri doğrudan işlemesi gerektiğini belirtir. Daha fazla bilgi için bkz. <xref:blazor/routing>.
+* Bir Razor bileşenin istekleri doğrudan işlemesi gerektiğini belirtir. Daha fazla bilgi için bkz. <xref:blazor/fundamentals/routing>.
 
 ::: moniker-end
 
@@ -707,7 +707,7 @@ Yukarıdaki örnekteki *evente Pages* klasöründe bir içeri aktarmalar dosyas�
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[ Razor Bileşenlerinde](xref:blazor/components), `@using` hangi bileşenlerin kapsamda olduğunu da denetler.
+[ Razor Bileşenlerinde](xref:blazor/components/index), `@using` hangi bileşenlerin kapsamda olduğunu da denetler.
 
 ::: moniker-end
 
@@ -721,19 +721,19 @@ Razoryönerge öznitelikleri, simgeyi izleyen ayrılmış anahtar sözcüklerle 
 
 *Bu senaryo yalnızca Razor Bileşenler (. Razor) için geçerlidir.*
 
-`@attributes`bir bileşenin bildirilmeyen öznitelikleri işlemesini sağlar. Daha fazla bilgi için bkz. <xref:blazor/components#attribute-splatting-and-arbitrary-parameters>.
+`@attributes`bir bileşenin bildirilmeyen öznitelikleri işlemesini sağlar. Daha fazla bilgi için bkz. <xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters>.
 
 ### `@bind`
 
 *Bu senaryo yalnızca Razor Bileşenler (. Razor) için geçerlidir.*
 
-Bileşenlerdeki veri bağlama, `@bind` özniteliğiyle gerçekleştirilir. Daha fazla bilgi için bkz. <xref:blazor/data-binding>.
+Bileşenlerdeki veri bağlama, `@bind` özniteliğiyle gerçekleştirilir. Daha fazla bilgi için bkz. <xref:blazor/components/data-binding>.
 
 ### `@on{EVENT}`
 
 *Bu senaryo yalnızca Razor Bileşenler (. Razor) için geçerlidir.*
 
-Razorbileşenler için olay işleme özellikleri sağlar. Daha fazla bilgi için bkz. <xref:blazor/event-handling>.
+Razorbileşenler için olay işleme özellikleri sağlar. Daha fazla bilgi için bkz. <xref:blazor/components/event-handling>.
 
 ::: moniker-end
 
@@ -759,19 +759,19 @@ Olay için olay yaymayı sonlandırır.
 
 *Bu senaryo yalnızca Razor Bileşenler (. Razor) için geçerlidir.*
 
-`@key`Directive özniteliği, anahtar değerine göre öğelerin veya bileşenlerin korunmasını güvence altına almak için bileşenlerin algoritma almasına neden olur. Daha fazla bilgi için bkz. <xref:blazor/components#use-key-to-control-the-preservation-of-elements-and-components>.
+`@key`Directive özniteliği, anahtar değerine göre öğelerin veya bileşenlerin korunmasını güvence altına almak için bileşenlerin algoritma almasına neden olur. Daha fazla bilgi için bkz. <xref:blazor/components/index#use-key-to-control-the-preservation-of-elements-and-components>.
 
 ### `@ref`
 
 *Bu senaryo yalnızca Razor Bileşenler (. Razor) için geçerlidir.*
 
-Bileşen başvuruları ( `@ref` ) bir bileşen örneğine başvurmak için bir yol sağlar, böylece bu örneğe komut verebilirsiniz. Daha fazla bilgi için bkz. <xref:blazor/components#capture-references-to-components>.
+Bileşen başvuruları ( `@ref` ) bir bileşen örneğine başvurmak için bir yol sağlar, böylece bu örneğe komut verebilirsiniz. Daha fazla bilgi için bkz. <xref:blazor/components/index#capture-references-to-components>.
 
 ### `@typeparam`
 
 *Bu senaryo yalnızca Razor Bileşenler (. Razor) için geçerlidir.*
 
-`@typeparam`Yönergesi, oluşturulan bileşen sınıfı için genel bir tür parametresi bildirir. Daha fazla bilgi için bkz. <xref:blazor/templated-components#generic-typed-components>.
+`@typeparam`Yönergesi, oluşturulan bileşen sınıfı için genel bir tür parametresi bildirir. Daha fazla bilgi için bkz. <xref:blazor/components/templated-components#generic-typed-components>.
 
 ::: moniker-end
 
