@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/event-handling
-ms.openlocfilehash: 32f7595cffc2c31116c8d876c9f9526b84c52f14
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: d15d8355b321c2938d68a109c5115db78280f6b6
+ms.sourcegitcommit: 77729ba225d5143c0e3954db005906f4a5c7da95
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103888"
+ms.lasthandoff: 06/20/2020
+ms.locfileid: "85122093"
 ---
 # <a name="aspnet-core-blazor-event-handling"></a>ASP.NET Core Blazor olay işleme
 
@@ -73,7 +73,14 @@ Aşağıdaki örnekte, `UpdateHeading` Düğme seçildiğinde zaman uyumsuz olar
 
 ## <a name="event-argument-types"></a>Olay bağımsız değişken türleri
 
-Bazı olaylar için olay bağımsız değişkeni türlerine izin verilir. Yöntem çağrısında bir olay türü belirtmek yalnızca, olay türü yönteminde kullanılıyorsa gereklidir.
+Bazı olaylar için olay bağımsız değişkeni türlerine izin verilir. Olay yöntemi tanımında bir olay parametresi belirtmek isteğe bağlıdır ve yalnızca yöntemde olay türü kullanılıyorsa gereklidir. Aşağıdaki örnekte, `MouseEventArgs` olay bağımsız değişkeni `ShowMessage` yöntemde ileti metnini ayarlamak için kullanılır:
+
+```csharp
+private void ShowMessage(MouseEventArgs e)
+{
+    messageText = $"The mouse is at coordinates: {e.ScreenX}:{e.ScreenY}";
+}
+```
 
 Desteklenir <xref:System.EventArgs> , aşağıdaki tabloda gösterilmiştir.
 

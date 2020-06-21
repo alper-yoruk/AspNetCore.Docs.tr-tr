@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: f72edda54d4201915e2494b75b4d49ec6c9c6d75
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: ff44b4b80385ffbd1a6659b2684ef2a8055ee2d0
+ms.sourcegitcommit: 77729ba225d5143c0e3954db005906f4a5c7da95
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652841"
+ms.lasthandoff: 06/20/2020
+ms.locfileid: "85122119"
 ---
 # <a name="part-8-add-validation-to-an-aspnet-core-razor-page"></a>8. bölüm, ASP.NET Core sayfasına doğrulama ekleme Razor
 
@@ -119,7 +119,7 @@ Sınıfını inceleyin `Movie` . `System.ComponentModel.DataAnnotations`Ad alan�
 
 `DataType`Öznitelikler yalnızca görünüm altyapısının verileri biçimlendirmek için ipuçları sağlar (ve `<a>` URL 'ler ve e-posta için gibi öznitelikleri sağlar `<a href="mailto:EmailAddress.com">` ). `RegularExpression`Veri biçimini doğrulamak için özniteliğini kullanın. `DataType`Özniteliği, veritabanı iç türünden daha belirgin bir veri türü belirtmek için kullanılır. `DataType`Öznitelikler, doğrulama öznitelikleri değildir. Örnek uygulamada, yalnızca tarih ve saat olmadan görüntülenir.
 
-`DataType`Sabit listesi, tarih, saat, PhoneNumber, para birimi, Emaadresi gibi birçok veri türünü sağlar. `DataType`Özniteliği Ayrıca uygulamanın türe özgü özellikleri otomatik olarak sağlamasını da sağlayabilir. Örneğin, için bir `mailto:` bağlantı oluşturulabilir `DataType.EmailAddress` . HTML5 'i destekleyen tarayıcılarda için bir tarih seçici sağlanmış olabilir `DataType.Date` . `DataType`Öznitelikler HTML `data-` 5 TARAYıCıLARıNıN kullandığı HTML 5 (bir veri Dash) özniteliklerini yayar. `DataType`Öznitelikler herhangi bir **not** doğrulama sağlamaz.
+`DataType`Sabit listesi, tarih, saat, PhoneNumber, para birimi, Emaadresi gibi birçok veri türünü sağlar. `DataType`Özniteliği Ayrıca uygulamanın türe özgü özellikleri otomatik olarak sağlamasını da sağlayabilir. Örneğin, için bir `mailto:` bağlantı oluşturulabilir `DataType.EmailAddress` . HTML5 'i destekleyen tarayıcılarda için bir tarih seçici sağlanmış olabilir `DataType.Date` . Öznitelikler HTML 5 `DataType` `data-` TARAYıCıLARıNıN kullandığı HTML 5 (bir veri Dash) özniteliklerini yayar. `DataType`Öznitelikler herhangi bir **not** doğrulama sağlamaz.
 
 `DataType.Date`görüntülenen tarihin biçimini belirtmez. Varsayılan olarak, veri alanı sunucu ' a göre varsayılan biçimlere göre görüntülenir `CultureInfo` .
 
@@ -140,7 +140,7 @@ public DateTime ReleaseDate { get; set; }
 * Varsayılan olarak tarayıcı, verileri yerel ayarınızı temel alarak doğru biçimi kullanarak işleyebilir.
 * `DataType`Öznitelik, ASP.NET Core çerçevesinin verileri işlemek için doğru alan şablonunu seçmesini sağlayabilir. `DisplayFormat`Kendisi tarafından kullanılıyorsa, dize şablonunu kullanır.
 
-Note: jQuery doğrulaması, `Range` ve özniteliğiyle çalışmaz `DateTime` . Örneğin, aşağıdaki kod, tarih belirtilen aralıkta olduğunda bile her zaman bir istemci tarafı doğrulama hatası görüntüler:
+**Note:** jQuery doğrulaması, `Range` ve özniteliğiyle çalışmaz `DateTime` . Örneğin, aşağıdaki kod, tarih belirtilen aralıkta olduğunda bile her zaman bir istemci tarafı doğrulama hatası görüntüler:
 
 ```csharp
 [Range(typeof(DateTime), "1/1/1966", "1/1/2020")]

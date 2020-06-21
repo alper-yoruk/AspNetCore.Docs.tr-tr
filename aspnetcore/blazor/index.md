@@ -5,7 +5,7 @@ description: ASP.NET Core uygulamasında Blazor .NET ile etkileşimli istemci ta
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc, seoapril2019
-ms.date: 05/19/2020
+ms.date: 06/19/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: feca504a39624282961fbc6405876e970a20b5d4
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 086629f88ad04faed812bd16683e7d073f3e8ede
+ms.sourcegitcommit: 77729ba225d5143c0e3954db005906f4a5c7da95
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102279"
+ms.lasthandoff: 06/20/2020
+ms.locfileid: "85122080"
 ---
 # <a name="introduction-to-aspnet-core-blazor"></a>ASP.NET Core girişBlazor
 
@@ -149,7 +149,7 @@ BlazorSunucu tarafından tarayıcıyla iletişim kurmak için kullanılan bağla
 
 ## <a name="code-sharing-and-net-standard"></a>Kod paylaşımı ve .NET Standard
 
-Blazor[2,0 .NET Standard](/dotnet/standard/net-standard)uygular. .NET Standard, .NET uygulamaları genelinde ortak olan .NET API 'lerinin resmi bir belirtimidir. .NET Standard sınıf kitaplıkları Blazor , .NET Framework, .NET Core, Xamarin, mono ve Unity gibi farklı .net platformları arasında paylaşılabilir.
+Blazor[.NET Standard 2,1](/dotnet/standard/net-standard)uygular ve bu sayede Blazor Projeler .NET Standard 2,1 veya daha önceki belirtimlere uygun kitaplıklara başvurabilir. .NET Standard, .NET uygulamaları genelinde ortak olan .NET API 'lerinin resmi bir belirtimidir. .NET Standard sınıf kitaplıkları Blazor , .NET Framework, .NET Core, Xamarin, mono ve Unity gibi farklı .net platformları arasında paylaşılabilir.
 
 Bir Web tarayıcısı içinde geçerli olmayan API 'Ler (örneğin, dosya sistemine erişmek, bir yuva açmak ve iş parçacığı açmak) bir oluşturur <xref:System.PlatformNotSupportedException> .
 
