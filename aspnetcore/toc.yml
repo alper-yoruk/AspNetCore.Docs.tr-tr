@@ -297,94 +297,134 @@
               uid: tutorials/signalr-blazor-webassembly
         - name: Şablonlar
           uid: blazor/templates
+        - name: Temeller
+          items:
+            - name: Yönlendirme
+              uid: blazor/fundamentals/routing
+            - name: Yapılandırma
+              uid: blazor/fundamentals/configuration
+            - name: Bağımlılık ekleme
+              uid: blazor/fundamentals/dependency-injection
+            - name: Ortamlar
+              uid: blazor/fundamentals/environments
+            - name: Günlüğe Kaydetme
+              uid: blazor/fundamentals/logging
+            - name: Hataları işleme
+              uid: blazor/fundamentals/handle-errors
+            - name: İlave senaryolar
+              uid: blazor/fundamentals/additional-scenarios
         - name: Bileşenler
-          uid: blazor/components
-        - name: Veri bağlama
-          uid: blazor/data-binding
-        - name: Olay işleme
-          uid: blazor/event-handling
-        - name: Yaşam döngüsü
-          uid: blazor/lifecycle
-        - name: Şablonlu bileşenler
-          uid: blazor/templated-components
-        - name: Bileşenleri tümleştirme
-          uid: blazor/integrate-components
+          items:
+            - name: Genel Bakış
+              uid: blazor/components/index
+            - name: Yerleşik bileşenler
+              items:
+                - name: Uygulama
+                  uid: blazor/templates
+                - name: Kimlik doğrulaması
+                  uid: blazor/security/webassembly/additional-scenarios
+                - name: AuthorizeView
+                  uid: blazor/security/index
+                - name: InputCheckbox
+                  uid: blazor/forms-validation
+                - name: InputDate
+                  uid: blazor/forms-validation
+                - name: InputNumber
+                  uid: blazor/forms-validation
+                - name: InputSelect
+                  uid: blazor/forms-validation
+                - name: InputText
+                  uid: blazor/forms-validation
+                - name: InputTextArea
+                  uid: blazor/forms-validation
+                - name: MainLayout
+                  uid: blazor/layouts
+                - name: NavLink
+                  uid: blazor/fundamentals/routing
+                - name: NavMenu
+                  uid: blazor/fundamentals/routing
+                - name: Yönlendirici
+                  uid: blazor/fundamentals/routing
+            - name: Değerleri ve parametreleri basamaklandırma
+              uid: blazor/components/cascading-values-and-parameters
+            - name: Veri bağlama
+              uid: blazor/components/data-binding
+            - name: Olay işleme
+              uid: blazor/components/event-handling
+            - name: Yaşam döngüsü
+              uid: blazor/components/lifecycle
+            - name: Şablonlu bileşenler
+              uid: blazor/components/templated-components
+            - name: Bileşenleri tümleştirme
+              uid: blazor/components/integrate-components-into-razor-pages-and-mvc-apps
+            - name: Bileşen kitaplıkları
+              uid: blazor/components/class-libraries
         - name: Genelleştirme ve yerelleştirme
           uid: blazor/globalization-localization
         - name: Düzenler
           uid: blazor/layouts
         - name: Formlar ve doğrulama
           uid: blazor/forms-validation
-        - name: Bağımlılık ekleme
-          uid: blazor/dependency-injection
-        - name: Yönlendirme
-          uid: blazor/routing
         - name: .NET’ten JavaScript’i çağırma
           uid: blazor/call-javascript-from-dotnet
         - name: JavaScript’ten .NET’i çağırma
           uid: blazor/call-dotnet-from-javascript
-        - name: Barındırma modeli yapılandırması
-          uid: blazor/hosting-model-configuration
-        - name: Bileşen kitaplıkları
-          uid: blazor/class-libraries
         - name: Güvenlik ve Kimlik
           items:
             - name: Genel Bakış
-              uid: security/blazor/index
+              uid: blazor/security/index
             - name: Blazor WebAssembly
               items:
                 - name: Genel Bakış
-                  uid: security/blazor/webassembly/index
+                  uid: blazor/security/webassembly/index
                 - name: Kimlik doğrulaması kitaplığı ile bağımsız
-                  uid: security/blazor/webassembly/standalone-with-authentication-library
+                  uid: blazor/security/webassembly/standalone-with-authentication-library
                 - name: Microsoft Hesapları ile bağımsız
-                  uid: security/blazor/webassembly/standalone-with-microsoft-accounts
+                  uid: blazor/security/webassembly/standalone-with-microsoft-accounts
                 - name: AAD ile bağımsız
-                  uid: security/blazor/webassembly/standalone-with-azure-active-directory
+                  uid: blazor/security/webassembly/standalone-with-azure-active-directory
                 - name: AAD B2C ile bağımsız
-                  uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
+                  uid: blazor/security/webassembly/standalone-with-azure-active-directory-b2c
                 - name: AAD ile barındırılan
-                  uid: security/blazor/webassembly/hosted-with-azure-active-directory
+                  uid: blazor/security/webassembly/hosted-with-azure-active-directory
                 - name: AAD B2C ile barındırılan
-                  uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
+                  uid: blazor/security/webassembly/hosted-with-azure-active-directory-b2c
                 - name: Kimlik Sunucusu ile barındırılan
-                  uid: security/blazor/webassembly/hosted-with-identity-server
+                  uid: blazor/security/webassembly/hosted-with-identity-server
                 - name: İlave senaryolar
-                  uid: security/blazor/webassembly/additional-scenarios
+                  uid: blazor/security/webassembly/additional-scenarios
                 - name: AAD grupları ve rolleri
-                  uid: security/blazor/webassembly/aad-groups-roles
+                  uid: blazor/security/webassembly/aad-groups-roles
             - name: Blazor Server
               items:
                 - name: Genel Bakış
-                  uid: security/blazor/server/index
+                  uid: blazor/security/server/index
                 - name: Tehdit azaltma
-                  uid: security/blazor/server/threat-mitigation
+                  uid: blazor/security/server/threat-mitigation
                 - name: İlave senaryolar
-                  uid: security/blazor/server/additional-scenarios
+                  uid: blazor/security/server/additional-scenarios
             - name: İçerik Güvenliği İlkesi
-              uid: security/blazor/content-security-policy
+              uid: blazor/security/content-security-policy
         - name: Durum yönetimi
           uid: blazor/state-management
-        - name: Hataları işleme
-          uid: blazor/handle-errors
         - name: WebAssembly hata ayıklaması
           uid: blazor/debug
         - name: WebAssembly'den bir web API’sini çağırma
           uid: blazor/call-web-api
         - name: WebAssembly performansı
-          uid: performance/blazor/webassembly-best-practices
+          uid: blazor/webassembly-performance-best-practices
         - name: Aşamalı Web Uygulamaları
           uid: blazor/progressive-web-app
         - name: Barındırma ve dağıtma
           items:
             - name: Genel Bakış
-              uid: host-and-deploy/blazor/index
+              uid: blazor/host-and-deploy/index
             - name: Blazor WebAssembly
-              uid: host-and-deploy/blazor/webassembly
+              uid: blazor/host-and-deploy/webassembly
             - name: Blazor Server
-              uid: host-and-deploy/blazor/server
+              uid: blazor/host-and-deploy/server
             - name: Bağlayıcıyı yapılandırma
-              uid: host-and-deploy/blazor/configure-linker
+              uid: blazor/host-and-deploy/configure-linker
         - name: Gelişmiş senaryolar
           uid: blazor/advanced-scenarios
     - name: İstemci tarafı geliştirme
@@ -445,15 +485,15 @@
             - name: Ortam
               uid: mvc/views/tag-helpers/builtin-th/environment-tag-helper
             - name: Form
-              href: 'mvc/views/working-with-forms.md#the-form-tag-helper'
+              href: mvc/views/working-with-forms.md#the-form-tag-helper
             - name: Form Eylemi
-              href: 'mvc/views/working-with-forms.md#the-form-action-tag-helper'
+              href: mvc/views/working-with-forms.md#the-form-action-tag-helper
             - name: Görüntü
               uid: mvc/views/tag-helpers/builtin-th/image-tag-helper
             - name: Giriş
-              href: 'mvc/views/working-with-forms.md#the-input-tag-helper'
+              href: mvc/views/working-with-forms.md#the-input-tag-helper
             - name: Etiketle
-              href: 'mvc/views/working-with-forms.md#the-label-tag-helper'
+              href: mvc/views/working-with-forms.md#the-label-tag-helper
             - name: Bağlantı
               uid: mvc/views/tag-helpers/builtin-th/link-tag-helper
             - name: Kısmi
@@ -461,13 +501,13 @@
             - name: Komut Dosyası
               uid: mvc/views/tag-helpers/builtin-th/script-tag-helper
             - name: Seçim
-              href: 'mvc/views/working-with-forms.md#the-select-tag-helper'
+              href: mvc/views/working-with-forms.md#the-select-tag-helper
             - name: Metin Alanı
-              href: 'mvc/views/working-with-forms.md#the-textarea-tag-helper'
+              href: mvc/views/working-with-forms.md#the-textarea-tag-helper
             - name: Doğrulama İletisi
-              href: 'mvc/views/working-with-forms.md#the-validation-message-tag-helper'
+              href: mvc/views/working-with-forms.md#the-validation-message-tag-helper
             - name: Doğrulama Özeti
-              href: 'mvc/views/working-with-forms.md#the-validation-summary-tag-helper'
+              href: mvc/views/working-with-forms.md#the-validation-summary-tag-helper
     - name: Gelişmiş
       items:
         - name: Uygulama bölümleri
@@ -640,7 +680,7 @@
       items:
         - name: gRPC hizmetini kullanmaya başlama
           uid: tutorials/grpc/grpc-start
-    - name: 'C# içeren gRPC hizmetleri'
+    - name: C# içeren gRPC hizmetleri
       uid: grpc/basics
     - name: ASP.NET Core içeren gRPC Hizmetleri
       uid: grpc/aspnetcore
@@ -890,13 +930,13 @@
     - name: Blazor
       items:
         - name: Genel Bakış
-          uid: host-and-deploy/blazor/index
+          uid: blazor/host-and-deploy/index
         - name: Blazor WebAssembly
-          uid: host-and-deploy/blazor/webassembly
+          uid: blazor/host-and-deploy/webassembly
         - name: Blazor Server
-          uid: host-and-deploy/blazor/server
+          uid: blazor/host-and-deploy/server
         - name: Bağlayıcıyı yapılandırma
-          uid: host-and-deploy/blazor/configure-linker
+          uid: blazor/host-and-deploy/configure-linker
 - name: Güvenlik ve Kimlik
   displayName: 'authentication, authorization'
   items:
@@ -1132,39 +1172,39 @@
     - name: Blazor
       items:
         - name: Genel Bakış
-          uid: security/blazor/index
+          uid: blazor/security/index
         - name: Blazor WebAssembly
           items:
             - name: Genel Bakış
-              uid: security/blazor/webassembly/index
+              uid: blazor/security/webassembly/index
             - name: Kimlik doğrulaması kitaplığı ile bağımsız
-              uid: security/blazor/webassembly/standalone-with-authentication-library
+              uid: blazor/security/webassembly/standalone-with-authentication-library
             - name: Microsoft Hesapları ile bağımsız
-              uid: security/blazor/webassembly/standalone-with-microsoft-accounts
+              uid: blazor/security/webassembly/standalone-with-microsoft-accounts
             - name: AAD ile bağımsız
-              uid: security/blazor/webassembly/standalone-with-azure-active-directory
+              uid: blazor/security/webassembly/standalone-with-azure-active-directory
             - name: AAD B2C ile bağımsız
-              uid: security/blazor/webassembly/standalone-with-azure-active-directory-b2c
+              uid: blazor/security/webassembly/standalone-with-azure-active-directory-b2c
             - name: AAD ile barındırılan
-              uid: security/blazor/webassembly/hosted-with-azure-active-directory
+              uid: blazor/security/webassembly/hosted-with-azure-active-directory
             - name: AAD B2C ile barındırılan
-              uid: security/blazor/webassembly/hosted-with-azure-active-directory-b2c
+              uid: blazor/security/webassembly/hosted-with-azure-active-directory-b2c
             - name: Kimlik Sunucusu ile barındırılan
-              uid: security/blazor/webassembly/hosted-with-identity-server
+              uid: blazor/security/webassembly/hosted-with-identity-server
             - name: İlave senaryolar
-              uid: security/blazor/webassembly/additional-scenarios
+              uid: blazor/security/webassembly/additional-scenarios
             - name: AAD grupları ve rolleri
-              uid: security/blazor/webassembly/aad-groups-roles
+              uid: blazor/security/webassembly/aad-groups-roles
         - name: Blazor Server
           items:
             - name: Genel Bakış
-              uid: security/blazor/server/index
+              uid: blazor/security/server/index
             - name: Tehdit azaltma
-              uid: security/blazor/server/threat-mitigation
+              uid: blazor/security/server/threat-mitigation
             - name: İlave senaryolar
-              uid: security/blazor/server/additional-scenarios
+              uid: blazor/security/server/additional-scenarios
         - name: İçerik Güvenliği İlkesi
-          uid: security/blazor/content-security-policy
+          uid: blazor/security/content-security-policy
 - name: Performans
   items:
     - name: Genel Bakış
@@ -1190,7 +1230,7 @@
     - name: Yükleme ve stres testleri
       uid: test/loadtests
     - name: Blazor WebAssembly
-      uid: performance/blazor/webassembly-best-practices
+      uid: blazor/webassembly-performance-best-practices
 - name: Genelleştirme ve yerelleştirme
   items:
     - name: Genel Bakış
