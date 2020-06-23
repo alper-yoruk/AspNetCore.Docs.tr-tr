@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/state-management
-ms.openlocfilehash: 3cc75406a1680dff4727527153a62856a594c8c7
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 59adcce972b503a6aa6e596bc9bff63225961f84
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102498"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243206"
 ---
 # <a name="aspnet-core-blazor-state-management"></a>ASP.NET Core Blazor durum yönetimi
 
@@ -135,7 +135,7 @@ ASP.NET Core [veri korumasını](xref:security/data-protection/introduction)sayd
 
 ## <a name="protected-browser-storage-experimental-package"></a>Korumalı tarayıcı depolaması deneysel paket
 
-[Data Protection](xref:security/data-protection/introduction) `localStorage` `sessionStorage` [Microsoft. Aspnetcore. Protectedbrowserstorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)ve için veri koruması sağlayan bir NuGet paketi örneği.
+Ve için [veri koruması](xref:security/data-protection/introduction) sağlayan bir NuGet paketi örneği `localStorage` `sessionStorage` [`Microsoft.AspNetCore.ProtectedBrowserStorage`](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage) .
 
 > [!WARNING]
 > `Microsoft.AspNetCore.ProtectedBrowserStorage`, şu anda üretim kullanımı için uygun olmayan, desteklenmeyen bir deneysel paket.
@@ -144,8 +144,8 @@ ASP.NET Core [veri korumasını](xref:security/data-protection/introduction)sayd
 
 Paketi yüklemek için `Microsoft.AspNetCore.ProtectedBrowserStorage` :
 
-1. BlazorSunucu uygulaması projesinde, [Microsoft. aspnetcore. ProtectedBrowserStorage](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage)öğesine bir paket başvurusu ekleyin.
-1. Üst düzey HTML 'de (örneğin, varsayılan Proje şablonundaki *Pages/_Host. cshtml* dosyasında) aşağıdaki `<script>` etiketi ekleyin:
+1. BlazorSunucu uygulaması projesinde, öğesine bir paket başvurusu ekleyin [`Microsoft.AspNetCore.ProtectedBrowserStorage`](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage) .
+1. Üst düzey HTML 'de (örneğin, `Pages/_Host.cshtml` varsayılan Proje şablonundaki dosyasında) aşağıdaki `<script>` etiketi ekleyin:
 
    ```html
    <script src="_content/Microsoft.AspNetCore.ProtectedBrowserStorage/protectedBrowserStorage.js"></script>
@@ -171,7 +171,7 @@ Seçim, hangi yedekleme deposunu kullanmak istediğinize bağlıdır. Aşağıda
 @inject ProtectedSessionStorage ProtectedSessionStore
 ```
 
-`@using`İfade, bileşen yerine bir *_Imports. Razor* dosyasına yerleştirilebilir. *_Imports. Razor* dosyası kullanımı, ad alanını uygulamanın daha büyük kesimlerine veya uygulamanın tamamına kullanılabilir hale getirir.
+`@using`İfade, `_Imports.razor` bileşen yerine bir dosyaya yerleştirilebilir. `_Imports.razor`Dosya kullanımı, ad alanını uygulamanın daha büyük kesimlerine veya uygulamanın tamamına kullanılabilir hale getirir.
 
 `currentCount`Proje şablonunun bileşenindeki değeri kalıcı hale getirmek için `Counter` , `IncrementCount` kullanmak üzere yöntemi değiştirin `ProtectedSessionStore.SetAsync` :
 
@@ -215,7 +215,7 @@ Bir yaklaşım, verilerin `null` (hala yükleme) olup olmadığını izlemedir. 
 private int? currentCount;
 ```
 
-Sayı ve **artış** düğmesini koşullu olarak görüntülemediğinizden, bu öğeleri yalnızca veriler yüklenmişse görüntülemeyi seçin:
+Count ve Button öğesinin Koşullu olarak görüntülenmesi yerine **`Increment`** , bu öğeleri yalnızca veriler yüklenmişse görüntülemeyi seçin:
 
 ```razor
 @if (currentCount.HasValue)
@@ -243,7 +243,7 @@ Prerendering sırasında:
 
 Hatayı çözmek için bir yol prerendering devre dışı bırakılır. Bu genellikle uygulama tarayıcı tabanlı depolamanın yoğun bir şekilde kullanımını yapıyorsa en iyi seçenektir. Prerendering karmaşıklık ekler ve uygulama, kullanılabilir olana kadar faydalı içeriğe gidemediği için uygulamaya yarar `localStorage` `sessionStorage` .
 
-Prerendering 'yi devre dışı bırakmak için, *Pages/_Host. cshtml* dosyasını açın ve `render-mode` [bileşen etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) ' nı ile değiştirin <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> .
+Prerendering devre dışı bırakmak için, `Pages/_Host.cshtml` dosyasını açın ve `render-mode` [bileşen etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) ' nı olarak değiştirin <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> .
 
 Prerendering, veya kullanmayan diğer sayfalar için yararlı olabilir `localStorage` `sessionStorage` . Prerendering etkin tutmak için, tarayıcı devreye bağlanana kadar yükleme işlemini erteleyin. Aşağıda, bir sayaç değeri depolamak için bir örnek verilmiştir:
 
@@ -326,7 +326,7 @@ else
 
 `CounterStateProvider`Bileşen, yükleme tamamlanana kadar alt içeriğini işlemeden Yükleme aşamasını işler.
 
-Bileşeni kullanmak için `CounterStateProvider` , bileşenin bir örneğini sayaç durumuna erişimi gerektiren diğer tüm bileşenler etrafında sarmalayın. Durumu bir uygulamadaki tüm bileşenler için erişilebilir hale getirmek üzere bileşeni `CounterStateProvider` <xref:Microsoft.AspNetCore.Components.Routing.Router> `App` bileşende (*app. Razor*) içine sarmalayın:
+Bileşeni kullanmak için `CounterStateProvider` , bileşenin bir örneğini sayaç durumuna erişimi gerektiren diğer tüm bileşenler etrafında sarmalayın. Durumu bir uygulamadaki tüm bileşenler için erişilebilir hale getirmek üzere bileşeni `CounterStateProvider` <xref:Microsoft.AspNetCore.Components.Routing.Router> `App` bileşenin () etrafında sarmalayın `App.razor` :
 
 ```razor
 <CounterStateProvider>

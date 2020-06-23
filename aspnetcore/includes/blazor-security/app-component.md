@@ -1,4 +1,4 @@
-`App`Bileşen (*app. Razor*) `App` Blazor Server uygulamalarında bulunan bileşene benzerdir:
+`App`Bileşen ( `App.razor` ), `App` Blazor Server uygulamalarında bulunan bileşene benzerdir:
 
 * <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState>Bileşen, <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationState> uygulamanın geri kalanına yönelik olarak ortaya çıkarmayı yönetir.
 * <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeRouteView>Bileşen, geçerli kullanıcının belirli bir sayfaya erişmek için yetkilendirilmiş olduğundan emin olur veya başka bir şekilde bileşeni işler `RedirectToLogin` .

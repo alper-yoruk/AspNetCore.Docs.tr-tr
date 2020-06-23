@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: fe35645aafe29838818dcaaf7c2b42ed428ac6cc
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 6103a2e8173ccbb78372e01bd799d1bb47da4fa2
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102256"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243063"
 ---
 # <a name="aspnet-core-blazor-layouts"></a>ASP.NET Core Blazor düzenleri
 
@@ -33,15 +33,15 @@ Bir *bileşeni* bir *düzene*dönüştürmek için bileşen:
 * <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> <xref:Microsoft.AspNetCore.Components.LayoutComponentBase.Body> Düzen içindeki işlenmiş içerik için bir özellik tanımlayan öğesinden devralır.
 * Razor `@Body` İçeriğin işlendiği yerleşim biçimlendirmesinde konumu belirtmek için söz dizimini kullanır.
 
-Aşağıdaki kod örneğinde Razor , *mainlayout. Razor*olan bir düzen bileşeninin şablonu gösterilmektedir. Düzen, <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> `@Body` Gezinti çubuğu ve alt bilgi arasında devralır ve Ayarlar:
+Aşağıdaki kod örneği Razor , bir düzen bileşeninin şablonunu gösterir `MainLayout.razor` . Düzen, <xref:Microsoft.AspNetCore.Components.LayoutComponentBase> `@Body` Gezinti çubuğu ve alt bilgi arasında devralır ve Ayarlar:
 
 [!code-razor[](layouts/sample_snapshot/3.x/MainLayout.razor?highlight=1,13)]
 
-Uygulama şablonlarından birini temel alan bir uygulamada Blazor , `MainLayout` bileşen (*mainlayout. Razor*) uygulamanın *paylaşılan* klasöründedir.
+Uygulama şablonlarından birini temel alan bir uygulamada Blazor , `MainLayout` bileşen ( `MainLayout.razor` ) uygulamanın `Shared` klasörüdür.
 
 ## <a name="default-layout"></a>Varsayılan düzen
 
-<xref:Microsoft.AspNetCore.Components.Routing.Router>Uygulamanın App *. Razor* dosyasındaki bileşende varsayılan uygulama yerleşimini belirtin. <xref:Microsoft.AspNetCore.Components.Routing.Router>Varsayılan Şablonlar tarafından belirtilen aşağıdaki bileşen, Blazor bileşene varsayılan düzeni ayarlar `MainLayout` :
+Uygulamanın dosyasındaki varsayılan uygulama yerleşimini belirtin <xref:Microsoft.AspNetCore.Components.Routing.Router> `App.razor` . <xref:Microsoft.AspNetCore.Components.Routing.Router>Varsayılan Şablonlar tarafından belirtilen aşağıdaki bileşen, Blazor bileşene varsayılan düzeni ayarlar `MainLayout` :
 
 [!code-razor[](layouts/sample_snapshot/3.x/App1.razor?highlight=3)]
 
@@ -61,13 +61,13 @@ Aşağıdaki `MasterList` bileşenin içeriği konumuna öğesine eklenir `Maste
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterList.razor?highlight=1)]
 
-Düzen doğrudan bir bileşen içinde belirtildiğinde, yönlendiricide ayarlanan *varsayılan bir düzen* veya `@layout` *_Imports. Razor*'den içeri aktarılan bir yönerge geçersiz kılınır.
+Düzen doğrudan bir bileşen içinde belirtildiğinde, yönlendirici veya *default layout* ' `@layout` den içe aktarılan bir yönergede ayarlanan varsayılan bir düzen geçersiz kılınır `_Imports.razor` .
 
 ## <a name="centralized-layout-selection"></a>Merkezi düzen seçimi
 
-Bir uygulamanın her klasörü, isteğe bağlı olarak *_Imports. Razor*adlı bir şablon dosyası içerebilir. Derleyici, içeri aktarmalar dosyasında belirtilen yönergeleri Razor aynı klasörde ve özyinelemeli olarak tüm alt klasörlerinde bulunan tüm şablonlarda içerir. Bu nedenle, içeren bir *_Imports. Razor* dosyası, `@layout MyCoolLayout` bir klasördeki tüm bileşenlerin kullanımını sağlar `MyCoolLayout` . `@layout MyCoolLayout`Klasör ve alt klasörlerdeki tüm *. Razor* dosyalarına tekrar tekrar ekleme gereksinimi yoktur. `@using`yönergeler aynı zamanda bileşenlere aynı şekilde uygulanır.
+Bir uygulamanın her klasörü, isteğe bağlı olarak adlı bir şablon dosyası içerebilir `_Imports.razor` . Derleyici, içeri aktarmalar dosyasında belirtilen yönergeleri Razor aynı klasörde ve özyinelemeli olarak tüm alt klasörlerinde bulunan tüm şablonlarda içerir. Bu nedenle, `_Imports.razor` içeren bir dosya, `@layout MyCoolLayout` bir klasördeki tüm bileşenlerin kullanımını sağlar `MyCoolLayout` . `@layout MyCoolLayout` `.razor` Klasöre ve alt klasörlerde bulunan tüm dosyalara tekrar tekrar eklemeniz gerekmez. `@using`yönergeler aynı zamanda bileşenlere aynı şekilde uygulanır.
 
-Aşağıdaki *_Imports. Razor* dosyası içeri aktarmaları:
+Aşağıdaki `_Imports.razor` Dosya içeri aktarmalar:
 
 * `MyCoolLayout`.
 * RazorAynı klasörde ve tüm alt klasörlerde bulunan tüm bileşenler.
@@ -75,23 +75,23 @@ Aşağıdaki *_Imports. Razor* dosyası içeri aktarmaları:
  
 [!code-razor[](layouts/sample_snapshot/3.x/_Imports.razor)]
 
-*_Imports. Razor* dosyası, [ Razor görünümler ve sayfalar için _ViewImports. cshtml dosyasına](xref:mvc/views/layout#importing-shared-directives) benzerdir, ancak özellikle Razor bileşen dosyalarına uygulanır.
+`_Imports.razor`Dosya, [ Razor görünümler ve sayfalar için _ViewImports. cshtml dosyasına](xref:mvc/views/layout#importing-shared-directives) benzerdir, ancak özellikle Razor bileşen dosyalarına uygulanır.
 
-_Imports bir düzen belirtme *. Razor* , yönlendiricinin *varsayılan düzeni*olarak belirtilen bir düzeni geçersiz kılar.
+İçinde bir düzen belirtildiğinde, `_Imports.razor` yönlendiricinin *varsayılan düzeni*olarak belirtilen bir düzen geçersiz kılınır.
 
 ## <a name="nested-layouts"></a>İç içe düzenleri
 
 Uygulamalar iç içe düzenleri içerebilir. Bir bileşen, daha sonra başka bir düzene başvuruda bulunan bir düzene başvurabilir. Örneğin, iç içe düzenleri çok düzeyli bir menü yapısı oluşturmak için kullanılır.
 
-Aşağıdaki örnek, iç içe düzenleri nasıl kullanacağınızı gösterir. *Epısodescomponent. Razor* dosyası görüntülenecek bileşendir. Bileşen öğesine başvurur `MasterListLayout` :
+Aşağıdaki örnek, iç içe düzenleri nasıl kullanacağınızı gösterir. `EpisodesComponent.razor`Dosya görüntülenecek bileşendir. Bileşen öğesine başvurur `MasterListLayout` :
 
 [!code-razor[](layouts/sample_snapshot/3.x/EpisodesComponent.razor?highlight=1)]
 
-*Masterlistlayout. Razor* dosyası sağlar `MasterListLayout` . Düzen, nerede işlendiği başka bir düzene başvurur `MasterLayout` . `EpisodesComponent`, görüntülendiği yerde işlenir `@Body` :
+`MasterListLayout.razor`Dosyası sağlar `MasterListLayout` . Düzen, nerede işlendiği başka bir düzene başvurur `MasterLayout` . `EpisodesComponent`, görüntülendiği yerde işlenir `@Body` :
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterListLayout.razor?highlight=1,9)]
 
-Son olarak `MasterLayout` , *masterlayout. Razor* içinde üstbilgi, ana menü ve altbilgi gibi en üst düzey düzen öğelerini içerir. `MasterListLayout`ile birlikte `EpisodesComponent` işlendiğinde, şu şekilde `@Body` görünür:
+Son olarak, `MasterLayout` içinde `MasterLayout.razor` üstbilgi, ana menü ve altbilgi gibi en üst düzey düzen öğelerini içerir. `MasterListLayout`ile birlikte `EpisodesComponent` işlendiğinde, şu şekilde `@Body` görünür:
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterLayout.razor?highlight=6)]
 

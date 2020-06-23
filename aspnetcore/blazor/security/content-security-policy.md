@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/content-security-policy
-ms.openlocfilehash: 63359260766846ccf14ececfae82bf02cc598cf9
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 360fff9383e25a6b5b9308cfebd397f7f4ee31a6
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103786"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242985"
 ---
 # <a name="enforce-a-content-security-policy-for-aspnet-core-blazor"></a>ASP.NET Core için bir Içerik Güvenlik Ilkesi zorlaBlazor
 
@@ -85,7 +85,7 @@ Aşağıdaki bölümlerde Blazor webassembly ve Server için örnek ilkeler gös
 
 ### <a name="blazor-webassembly"></a>BlazorWebAssembly
 
-`<head>` *Wwwroot/index.html* ana bilgisayar Içeriği sayfasında, [ilke yönergeleri](#policy-directives) bölümünde açıklanan yönergeleri uygulayın:
+`<head>` `wwwroot/index.html` Konak sayfasının Içeriğinde, [ilke yönergeleri](#policy-directives) bölümünde açıklanan yönergeleri uygulayın:
 
 ```html
 <meta http-equiv="Content-Security-Policy" 
@@ -108,7 +108,7 @@ Aşağıdaki bölümlerde Blazor webassembly ve Server için örnek ilkeler gös
 
 ### <a name="blazor-server"></a>BlazorServer
 
-`<head>` *Pages/_Host. cshtml* ana bilgisayar sayfasındaki Içerik sayfasında, [ilke yönergeleri](#policy-directives) bölümünde açıklanan yönergeleri uygulayın:
+`<head>` `Pages/_Host.cshtml` Konak sayfasının Içeriğinde, [ilke yönergeleri](#policy-directives) bölümünde açıklanan yönergeleri uygulayın:
 
 ```cshtml
 <meta http-equiv="Content-Security-Policy" 

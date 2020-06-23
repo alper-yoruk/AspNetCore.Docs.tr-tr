@@ -24,7 +24,7 @@ Tarayıcı bağlantısı kurulana kadar JavaScript birlikte çalışma çağrıl
 }
 ```
 
-Yukarıdaki örnek kod için, `setElementText` `<head>` *Wwwroot/index.html* (Blazor Webassembly) veya *Pages/_Host. cshtml* (Blazor Server) öğesi içinde bir JavaScript işlevi sağlayın. İşlevi ile çağrılır <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> ve bir değer döndürmez:
+Yukarıdaki örnek kod için, `setElementText` `<head>` `wwwroot/index.html` (Blazor webassembly) veya `Pages/_Host.cshtml` (Blazor Server) öğesi içinde bir JavaScript işlevi sağlayın. İşlevi ile çağrılır <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> ve bir değer döndürmez:
 
 ```html
 <script>
@@ -72,7 +72,7 @@ Set value via JS interop call:
 }
 ```
 
-Yukarıdaki örnek kod için, `setElementText` `<head>` *Wwwroot/index.html* (Blazor Webassembly) veya *Pages/_Host. cshtml* (Blazor Server) öğesi içinde bir JavaScript işlevi sağlayın. İşlevi ile çağrılır <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> ve bir değer döndürür:
+Yukarıdaki örnek kod için, `setElementText` `<head>` `wwwroot/index.html` (Blazor webassembly) veya `Pages/_Host.cshtml` (Blazor Server) öğesi içinde bir JavaScript işlevi sağlayın. İşlevi ile çağrılır <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> ve bir değer döndürür:
 
 ```html
 <script>

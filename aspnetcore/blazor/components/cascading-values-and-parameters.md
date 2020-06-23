@@ -13,16 +13,16 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/cascading-values-and-parameters
-ms.openlocfilehash: 70f379b3b0e48dbb340f319f3346bbbf44588740
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 43fbaa6284fa45dee46a693ed858ed06130600b6
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103906"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242389"
 ---
 # <a name="aspnet-core-blazor-cascading-values-and-parameters"></a>BlazorBasamaklı değerleri ve parametreleri ASP.NET Core
 
-## <a name="cascading-values-and-parameters"></a>Değerleri ve parametreleri basamaklama
+## <a name="cascading-values-and-parameters"></a>Değerleri ve parametreleri basamaklandırma
 
 Bazı senaryolarda, özellikle birden çok bileşen katmanı olduğunda, [bileşen parametreleri](xref:blazor/components/index#component-parameters)kullanarak bir üst bileşenden bir alt bileşene veri akışı yapmak uygun değildir. Değerleri ve parametreleri basamaklama, bir üst bileşenin tüm alt bileşenlerine değer sağlaması için kullanışlı bir yol sağlayarak bu sorunu çözebilir. Basamaklı değerler ve parametreler, bileşenlerin koordinasyonu için bir yaklaşım sağlar.
 
@@ -30,7 +30,7 @@ Bazı senaryolarda, özellikle birden çok bileşen katmanı olduğunda, [bileş
 
 Örnek uygulamadan aşağıdaki örnekte, `ThemeInfo` sınıfı, uygulamanın belirli bir bölümündeki tüm düğmelerin aynı stili paylaştığı şekilde bileşen hiyerarşisinin akışını yapmak için tema bilgilerini belirtir.
 
-*Uıthemeclasses/Themeınfo. cs*:
+`UIThemeClasses/ThemeInfo.cs`:
 
 ```csharp
 public class ThemeInfo
@@ -144,7 +144,7 @@ Alt bileşende, basamaklı parametreler değerlerini, üst bileşendeki ilgili b
 
 ### <a name="tabset-example"></a>TabSet örneği
 
-Basamaklı parametreler, bileşenlerin bileşen hiyerarşisinde işbirliği yapmasına de olanak tanır. Örneğin, örnek uygulamada aşağıdaki *Tabset* örneğini göz önünde bulundurun.
+Basamaklı parametreler, bileşenlerin bileşen hiyerarşisinde işbirliği yapmasına de olanak tanır. Örneğin, örnek uygulamada aşağıdaki örneği göz önünde bulundurun `TabSet` .
 
 Örnek uygulamada, `ITab` sekmelerin uygulandığı bir arabirim vardır:
 

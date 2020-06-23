@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/ObjectPool
-ms.openlocfilehash: f29d15fc1e2d2ad84526598be14638110f08614e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 004ca5724517bf3fbf6512c0b9653793f4e0f702
+ms.sourcegitcommit: dd2a1542a4a377123490034153368c135fdbd09e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774788"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85241005"
 ---
 # <a name="object-reuse-with-objectpool-in-aspnet-core"></a>ASP.NET Core içinde ObjectPool ile nesne yeniden kullanımı
 
@@ -31,7 +31,7 @@ Yönetilebilecek nesneler şunları içeriyorsa, nesne havuzunu kullanmak isteye
 - Sınırlı bir kaynağı temsil eder.
 - Tahmin edilebilir ve sık kullanılır.
 
-Örneğin, ASP.NET Core Framework örnekleri yeniden kullanmak <xref:System.Text.StringBuilder> için bazı yerlerde nesne havuzunu kullanır. `StringBuilder`karakter verilerini tutmak için kendi arabelleğini ayırır ve yönetir. ASP.NET Core özellikler uygulamak `StringBuilder` için düzenli olarak kullanımlar ve bunları yeniden kullanmak bir performans avantajı sağlar.
+Örneğin, ASP.NET Core Framework örnekleri yeniden kullanmak için bazı yerlerde nesne havuzunu kullanır <xref:System.Text.StringBuilder> . `StringBuilder`karakter verilerini tutmak için kendi arabelleğini ayırır ve yönetir. ASP.NET Core `StringBuilder` Özellikler uygulamak için düzenli olarak kullanımlar ve bunları yeniden kullanmak bir performans avantajı sağlar.
 
 Nesne havuzu her zaman performansı iyileştirmez:
 
@@ -40,7 +40,7 @@ Nesne havuzu her zaman performansı iyileştirmez:
 
 Yalnızca uygulamanız veya kitaplığınız için gerçekçi senaryolar kullanarak performans verilerini topladıktan sonra nesne havuzunu kullanın.
 
-**Uyarı: `ObjectPool` uygulamaz `IDisposable`. Bunu, aktiften çıkarma gerektiren türlerle kullanmanızı önermiyoruz.**
+**Uyarı: `ObjectPool` uygulamaz `IDisposable` . Bunu, aktiften çıkarma gerektiren türlerle kullanmanızı önermiyoruz.**
 
 **UNUTMAYıN: ObjectPool, ayırabilecek nesne sayısına bir sınır yerleştirmez, saklanacak nesne sayısına bir sınır koyar.**
 
@@ -61,18 +61,20 @@ ObjectPool bir uygulamada birden çok şekilde kullanılabilir:
 
 ## <a name="how-to-use-objectpool"></a>ObjectPool kullanma
 
-Bir <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1> nesne almak ve <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1.Return*> nesneyi döndürmek için çağırın.  Her nesneyi döndürmenizde gereksinim yoktur. Bir nesne döndürmezseniz atık olarak toplanacaktır.
+<xref:Microsoft.Extensions.ObjectPool.ObjectPool`1>Bir nesne almak ve <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1.Return*> nesneyi döndürmek için çağırın.  Her nesneyi döndürmenizde gereksinim yoktur. Bir nesne döndürmezseniz atık olarak toplanacaktır.
 
 ## <a name="objectpool-sample"></a>ObjectPool örneği
 
 Aşağıdaki kod:
 
 * `ObjectPoolProvider` [Bağımlılık ekleme](xref:fundamentals/dependency-injection) (dı) kapsayıcısına ekler.
-* Dı kapsayıcısına ekler `ObjectPool<StringBuilder>` ve yapılandırır.
-* Öğesini ekler `BirthdayMiddleware`.
+* Dı kapsayıcısına ekler ve yapılandırır `ObjectPool<StringBuilder>` .
+* Öğesini ekler `BirthdayMiddleware` .
 
 [!code-csharp[](ObjectPool/ObjectPoolSample/Startup.cs?name=snippet)]
 
 Aşağıdaki kod şunu uygular`BirthdayMiddleware`
 
 [!code-csharp[](ObjectPool/ObjectPoolSample/BirthdayMiddleware.cs?name=snippet)]
+
+[!INCLUDE[request localized comments](~/includes/code-comments-loc.md)]

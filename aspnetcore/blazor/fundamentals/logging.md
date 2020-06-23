@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/logging
-ms.openlocfilehash: b0448d5f6e5e16a726eb2274dcacb4dfa8314b5d
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 841c4021d9217312b2601b0e775542c6455cca82
+ms.sourcegitcommit: dd2a1542a4a377123490034153368c135fdbd09e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103840"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85240877"
 ---
 # <a name="aspnet-core-blazor-logging"></a>BlazorGünlüğe kaydetme ASP.NET Core
 
@@ -39,7 +39,7 @@ builder.Logging.AddProvider(new CustomLoggingProvider());
 
 `Logging`Özelliği türündedir <xref:Microsoft.Extensions.Logging.ILoggingBuilder> , bu nedenle tüm uzantı yöntemleri <xref:Microsoft.Extensions.Logging.ILoggingBuilder> üzerinde de kullanılabilir `Logging` .
 
-Günlüğe kaydetme yapılandırması, uygulama ayarları dosyalarından yüklenebilir. Daha fazla bilgi için bkz. <xref:blazor/fundamentals/logging>.
+Günlüğe kaydetme yapılandırması, uygulama ayarları dosyalarından yüklenebilir. Daha fazla bilgi için bkz. <xref:blazor/fundamentals/configuration#logging-configuration>.
 
 ## <a name="blazor-server"></a>BlazorServer
 

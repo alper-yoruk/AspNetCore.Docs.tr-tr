@@ -31,7 +31,7 @@ Kalan tanımlama bilgilerinin ve site verilerinin test ve sorun giderme konusund
 
 ### <a name="run-the-server-app"></a>Sunucu uygulamasını çalıştırma
 
-Barındırılan bir Blazor uygulamasını test etmek ve sorunlarını giderirken, uygulamayı **sunucu** projesinden çalıştırdığınızdan emin olun. Örneğin, Visual Studio 'da aşağıdaki yaklaşımlardan biriyle uygulamaya başlamadan önce sunucu projesinin **Çözüm Gezgini** vurgulandığını doğrulayın:
+Barındırılan bir Blazor uygulamasını test etmek ve sorunlarını giderirken, uygulamayı projeden çalıştırdığınızdan emin olun **`Server`** . Örneğin, Visual Studio 'da aşağıdaki yaklaşımlardan biriyle uygulamaya başlamadan önce sunucu projesinin **Çözüm Gezgini** vurgulandığını doğrulayın:
 
 * **Çalıştır** düğmesini seçin.
 * Menüden **hata**  >  **ayıklamayı Başlat komutunu** kullanın.

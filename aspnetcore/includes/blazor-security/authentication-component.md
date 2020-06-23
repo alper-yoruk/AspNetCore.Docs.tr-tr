@@ -1,8 +1,8 @@
-Bileşen tarafından üretilen sayfa `Authentication` (*Sayfalar/Authentication. Razor*), farklı kimlik doğrulama aşamalarını işlemek için gereken yolları tanımlar.
+`Authentication`Bileşen () tarafından üretilen sayfa, `Pages/Authentication.razor` farklı kimlik doğrulama aşamalarını işlemek için gerekli olan yolları tanımlar.
 
 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView>Bileşen:
 
-* , [Microsoft. AspNetCore. components. WebAssembly. Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) paketi tarafından sağlanır.
+* , Paket tarafından sağlanır [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) .
 * Her kimlik doğrulama aşamasında uygun eylemlerin gerçekleştirilmesini yönetir.
 
 ```razor

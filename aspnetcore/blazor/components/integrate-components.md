@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/integrate-components-into-razor-pages-and-mvc-apps
-ms.openlocfilehash: 78d524bc0271fd2640302bb0de78571ab688bef5
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 1c71067528fb34ab141bb1ee846716834204ee40
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103907"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242465"
 ---
 # <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>ASP.NET Core Razor bileşenlerini Razor Sayfalar ve MVC uygulamalarıyla tümleştirme
 
@@ -37,7 +37,7 @@ Razorbileşenler, Razor sayfalarla ve MVC uygulamalarıyla tümleştirilebilir. 
 
 Mevcut Razor Sayfalar ve MVC uygulamaları, Razor bileşenleri sayfalar ve görünümler ile tümleştirilebilir:
 
-1. Uygulamanın düzen dosyasında (*_Layout. cshtml*):
+1. Uygulamanın düzen dosyasında ( `_Layout.cshtml` ):
 
    * Aşağıdaki `<base>` etiketi `<head>` öğesine ekleyin:
 
@@ -47,7 +47,7 @@ Mevcut Razor Sayfalar ve MVC uygulamaları, Razor bileşenleri sayfalar ve gör�
 
      `href`Yukarıdaki örnekte yer alan değer ( *uygulama temel yolu*), uygulamanın kök URL yolunda () bulunduğunu varsayar `/` . Uygulama bir alt uygulama ise, makalenin *uygulama temel yolu* bölümündeki yönergeleri izleyin <xref:blazor/host-and-deploy/index#app-base-path> .
 
-     *_Layout. cshtml* dosyası, bir MVC uygulamasında sayfalar uygulaması veya görünümler/paylaşılan klasöründe *Sayfalar/paylaşılan* klasöründe bulunur Razor . *Views/Shared*
+     `_Layout.cshtml`Dosya, BIR MVC uygulamasında sayfalar uygulaması veya görünümler/paylaşılan klasöründe *Sayfalar/paylaşılan* klasöründe bulunur Razor . *Views/Shared*
 
    * `<script>`Kapanış etiketinden hemen önce *blazor.server.js* betiği için bir etiket ekleyin `</body>` :
 
@@ -57,7 +57,7 @@ Mevcut Razor Sayfalar ve MVC uygulamaları, Razor bileşenleri sayfalar ve gör�
 
      Framework *blazor.server.js* betiği uygulamaya ekler. Betiği uygulamaya el ile eklemeniz gerekmez.
 
-1. Aşağıdaki içerikle projenin kök klasörüne bir *_Imports. Razor* dosyası ekleyin (son ad alanını `MyAppNamespace` uygulamanın ad alanına değiştirin):
+1. `_Imports.razor`Aşağıdaki içeriğe sahip projenin kök klasörüne bir dosya ekleyin (son ad alanını `MyAppNamespace` uygulamanın ad alanına değiştirin):
 
    ```razor
    @using System.Net.Http
@@ -92,7 +92,7 @@ RazorSayfalar uygulamalarında yönlendirilebilir bileşenleri desteklemek için
 
 1. [Uygulamayı hazırlama](#prepare-the-app) bölümündeki yönergeleri izleyin.
 
-1. Aşağıdaki içeriğe sahip proje köküne bir *app. Razor* dosyası ekleyin:
+1. `App.razor`Aşağıdaki içeriğe sahip proje köküne bir dosya ekleyin:
 
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
@@ -108,7 +108,7 @@ RazorSayfalar uygulamalarında yönlendirilebilir bileşenleri desteklemek için
    </Router>
    ```
 
-1. *Sayfalar* klasörüne aşağıdaki içeriğe sahip bir *_Host. cshtml* dosyası ekleyin:
+1. `_Host.cshtml` `Pages` Klasöre aşağıdaki içeriğe sahip bir dosya ekleyin:
 
    ```cshtml
    @page "/blazor"
@@ -121,14 +121,14 @@ RazorSayfalar uygulamalarında yönlendirilebilir bileşenleri desteklemek için
    </app>
    ```
 
-   Bileşenler, düzeni için paylaşılan *_Layout. cshtml* dosyasını kullanır.
+   Bileşenler, `_Layout.cshtml` düzen için paylaşılan dosyayı kullanır.
 
    <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>bileşenin şunları yapıp kullanmadığını yapılandırır `App` :
 
    * , Sayfaya ön gönderilir.
    * , Sayfada statik HTML olarak veya Kullanıcı aracısından bir uygulamayı önyüklemek için gerekli bilgileri içeriyorsa Blazor .
 
-   | Oluşturma modu | Açıklama |
+   | Oluşturma modu | Description |
    | ----------- | ----------- |
    | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | `App`Bileşeni STATIK HTML olarak işler ve sunucu uygulaması için bir işaret içerir Blazor . Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . |
    | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Sunucu uygulaması için bir işaret oluşturur Blazor . `App`Bileşen çıkışı dahil değildir. Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . |
@@ -136,7 +136,7 @@ RazorSayfalar uygulamalarında yönlendirilebilir bileşenleri desteklemek için
 
    Bileşen etiketi Yardımcısı hakkında daha fazla bilgi için bkz <xref:mvc/views/tag-helpers/builtin-th/component-tag-helper> ..
 
-1. *_Host. cshtml* sayfasına yönelik düşük öncelikli bir yolu, içindeki uç nokta yapılandırmasına ekleyin `Startup.Configure` :
+1. `_Host.cshtml`İçindeki uç nokta yapılandırmasına sayfanın düşük öncelikli bir yolunu ekleyin `Startup.Configure` :
 
    ```csharp
    app.UseEndpoints(endpoints =>
@@ -167,7 +167,7 @@ RazorMVC uygulamalarında yönlendirilebilir bileşenleri desteklemek için:
 
 1. [Uygulamayı hazırlama](#prepare-the-app) bölümündeki yönergeleri izleyin.
 
-1. Aşağıdaki içeriğe sahip projenin köküne bir *app. Razor* dosyası ekleyin:
+1. `App.razor`Aşağıdaki içeriğe sahip projenin köküne bir dosya ekleyin:
 
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
@@ -183,7 +183,7 @@ RazorMVC uygulamalarında yönlendirilebilir bileşenleri desteklemek için:
    </Router>
    ```
 
-1. Aşağıdaki içeriğe sahip *Görünümler/giriş* klasörüne bir *_Host. cshtml* dosyası ekleyin:
+1. `_Host.cshtml` `Views/Home` Klasöre aşağıdaki içeriğe sahip bir dosya ekleyin:
 
    ```cshtml
    @{
@@ -195,14 +195,14 @@ RazorMVC uygulamalarında yönlendirilebilir bileşenleri desteklemek için:
    </app>
    ```
 
-   Bileşenler, düzeni için paylaşılan *_Layout. cshtml* dosyasını kullanır.
+   Bileşenler, `_Layout.cshtml` düzen için paylaşılan dosyayı kullanır.
    
    <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode>bileşenin şunları yapıp kullanmadığını yapılandırır `App` :
 
    * , Sayfaya ön gönderilir.
    * , Sayfada statik HTML olarak veya Kullanıcı aracısından bir uygulamayı önyüklemek için gerekli bilgileri içeriyorsa Blazor .
 
-   | Oluşturma modu | Açıklama |
+   | Oluşturma modu | Description |
    | ----------- | ----------- |
    | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | `App`Bileşeni STATIK HTML olarak işler ve sunucu uygulaması için bir işaret içerir Blazor . Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . |
    | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Sunucu uygulaması için bir işaret oluşturur Blazor . `App`Bileşen çıkışı dahil değildir. Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . |
@@ -219,7 +219,7 @@ RazorMVC uygulamalarında yönlendirilebilir bileşenleri desteklemek için:
    }
    ```
 
-1. İçindeki uç nokta yapılandırmasına *_Host. cshtml* görünümünü döndüren denetleyici eylemi için düşük öncelikli bir yol ekleyin `Startup.Configure` :
+1. `_Host.cshtml`' Deki uç nokta yapılandırmasına görünümü döndüren denetleyici eylemi için düşük öncelikli bir yol ekleyin `Startup.Configure` :
 
    ```csharp
    app.UseEndpoints(endpoints =>
@@ -230,7 +230,7 @@ RazorMVC uygulamalarında yönlendirilebilir bileşenleri desteklemek için:
    });
    ```
 
-1. Bir *Sayfalar* klasörü oluşturun ve uygulamaya yönlendirilebilir bileşenler ekleyin. Örneğin:
+1. Bir `Pages` klasör oluşturun ve uygulamaya yönlendirilebilir bileşenler ekleyin. Örneğin:
 
    ```razor
    @page "/counter"
@@ -299,7 +299,7 @@ Daha fazla bilgi için bkz. <xref:mvc/views/tag-helpers/builtin-th/component-tag
 
 ## <a name="component-namespaces"></a>Bileşen ad alanları
 
-Uygulamanın bileşenlerini tutmak için özel bir klasör kullanırken, klasörü/görünümü veya *_ViewImports. cshtml* dosyasını temsil eden ad alanını ekleyin. Aşağıdaki örnekte:
+Uygulamanın bileşenlerini tutmak için özel bir klasör kullanırken, klasörü/görünümü ya da dosyaya veya dosyayı temsil eden ad alanını ekleyin `_ViewImports.cshtml` . Aşağıdaki örnekte:
 
 * `MyAppNamespace`Uygulamanın ad alanına geçin.
 * Bileşenleri tutmak için *bileşen* adlı bir klasör kullanılmazsa, bileşenlerin bulunduğu klasöre geçin `Components` .
@@ -308,6 +308,6 @@ Uygulamanın bileşenlerini tutmak için özel bir klasör kullanırken, klasör
 @using MyAppNamespace.Components
 ```
 
-*_ViewImports. cshtml* dosyası bir Pages uygulamasının *Pages* klasöründe Razor veya bir MVC uygulamasının *views* klasöründe bulunur.
+`_ViewImports.cshtml`Dosya, `Pages` bir Razor Sayfalar uygulamasının KLASÖRÜNDE veya `Views` bir MVC uygulamasının klasöründe bulunur.
 
 Daha fazla bilgi için bkz. <xref:blazor/components/index#namespaces>.

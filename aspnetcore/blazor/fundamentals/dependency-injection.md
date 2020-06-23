@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/dependency-injection
-ms.openlocfilehash: b4ac0dbc6dabdeff4689544f2e11278b8302c553
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 24cd5ae837eeb4c89a15bab2948dde2eface0c0d
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103853"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242803"
 ---
 # <a name="aspnet-core-blazor-dependency-injection"></a>ASP.NET Core Blazor bağımlılığı ekleme
 
@@ -35,7 +35,7 @@ DI, merkezi bir konumda yapılandırılmış hizmetlere erişmek için bir tekni
 
 Varsayılan hizmetler, uygulamanın hizmet koleksiyonuna otomatik olarak eklenir.
 
-| Hizmet | Ömür | Açıklama |
+| Hizmet | Ömür | Description |
 | ------- | -------- | ----------- |
 | <xref:System.Net.Http.HttpClient> | Larsa | HTTP istekleri göndermek ve bir URI tarafından tanımlanan bir kaynaktan HTTP yanıtlarını almak için yöntemler sağlar.<br><br><xref:System.Net.Http.HttpClient> Blazor Webassembly uygulamasındaki örneği, arka planda HTTP trafiğini işlemek için tarayıcıyı kullanır.<br><br>BlazorSunucu uygulamaları <xref:System.Net.Http.HttpClient> Varsayılan olarak yapılandırılmış bir hizmet olarak yapılandırma içermez. Bir <xref:System.Net.Http.HttpClient> Blazor sunucu uygulamasına bir sağlar.<br><br>Daha fazla bilgi için bkz. <xref:blazor/call-web-api>. |
 | <xref:Microsoft.JSInterop.IJSRuntime> | Singleton ( Blazor webassembly)<br>Kapsamlı ( Blazor sunucu) | JavaScript çağrılarının dağıtıldığı bir JavaScript çalışma zamanının örneğini temsil eder. Daha fazla bilgi için bkz. <xref:blazor/call-javascript-from-dotnet>. |
@@ -47,7 +47,7 @@ Varsayılan hizmetler, uygulamanın hizmet koleksiyonuna otomatik olarak eklenir
 
 ### <a name="blazor-webassembly"></a>BlazorWebAssembly
 
-Program.cs yönteminde uygulamanın hizmet koleksiyonu için Hizmetleri yapılandırın `Main` . *Program.cs* Aşağıdaki örnekte, `MyDependency` uygulama için kaydedilir `IMyDependency` :
+Uygulamasındaki uygulamasının hizmet koleksiyonu için Hizmetleri yapılandırın `Main` `Program.cs` . Aşağıdaki örnekte, `MyDependency` uygulama için kaydedilir `IMyDependency` :
 
 ```csharp
 public class Program
@@ -84,7 +84,7 @@ public class Program
 }
 ```
 
-Konak, uygulama için bir merkezi yapılandırma örneği de sağlar. Yukarıdaki örnekte derleme yaparken, hava durumu hizmetinin URL 'SI varsayılan bir yapılandırma kaynağından geçirilir (örneğin, *appsettings.js*) `InitializeWeatherAsync` :
+Konak, uygulama için bir merkezi yapılandırma örneği de sağlar. Yukarıdaki örnekte derleme yaparken, hava durumu hizmetinin URL 'SI varsayılan bir yapılandırma kaynağından geçirilir (örneğin, `appsettings.json` ) `InitializeWeatherAsync` :
 
 ```csharp
 public class Program
@@ -130,7 +130,7 @@ public void ConfigureServices(IServiceCollection services)
 
 Hizmetler, aşağıdaki tabloda gösterilen ömürlerle yapılandırılabilir.
 
-| Ömür | Açıklama |
+| Ömür | Description |
 | -------- | ----------- |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | BlazorWebAssembly uygulamalarında Şu anda bir dı kapsamları kavramı yoktur. `Scoped`-kayıtlı hizmetler hizmetler gibi davranır `Singleton` . Ancak, Blazor sunucu barındırma modeli `Scoped` yaşam süresini destekler. BlazorSunucu uygulamalarında, kapsamlı bir hizmet kaydı *bağlantının*kapsamına alınır. Bu nedenle, geçerli amaç tarayıcıda istemci tarafı çalıştırmak olsa bile, kapsama alınmış hizmetlerin kullanılması geçerli kullanıcı kapsamında olması gereken hizmetler için tercih edilir. |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton%2A> | Dı, hizmetin *tek bir örneğini* oluşturur. Hizmet gerektiren tüm bileşenler `Singleton` aynı hizmetin bir örneğini alır. |
@@ -193,7 +193,7 @@ public class DataAccess : IDataAccess
 Oluşturucu Ekleme önkoşulları:
 
 * Bağımsız değişkenlerinin tümü DI tarafından yerine getirilme için tek bir Oluşturucu bulunmalıdır. Varsayılan değerleri belirttiklerinde, DI tarafından kapsanmayan ek parametrelere izin verilir.
-* Uygulanabilir Oluşturucu *ortak*olmalıdır.
+* Uygulanabilir Oluşturucu olmalıdır `public` .
 * Uygulanabilir bir Oluşturucu var olmalıdır. Belirsizlik söz konusu olduğunda, bir özel durum oluşturur.
 
 ## <a name="utility-base-component-classes-to-manage-a-di-scope"></a>Bir dı kapsamını yönetmek için yardımcı program temel bileşen sınıfları
@@ -346,5 +346,5 @@ Tek bir bileşen eşzamanlı olarak kullanılabilir <xref:Microsoft.EntityFramew
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * <xref:fundamentals/dependency-injection>
-* [Geçici ve paylaşılan örnekler için IDisposable Kılavuzu](xref:fundamentals/dependency-injection#idisposable-guidance-for-transient-and-shared-instances)
+* [`IDisposable`Geçici ve paylaşılan örnekler için rehberlik](xref:fundamentals/dependency-injection#idisposable-guidance-for-transient-and-shared-instances)
 * <xref:mvc/views/dependency-injection>

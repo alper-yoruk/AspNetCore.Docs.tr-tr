@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/class-libraries
-ms.openlocfilehash: ecc9873d7f652f27767df98196786d12789518c9
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 0c6f1330a5bac8ab37c957c5ed4e81678fe1f27d
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103900"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242517"
 ---
 # <a name="aspnet-core-razor-components-class-libraries"></a>ASP.NET Core Razor bileşenleri sınıf kitaplıkları
 
@@ -45,13 +45,13 @@ Bileşenler normal .NET türleri olduğu gibi, bir RCL tarafından sunulan bile�
 1. RCL 'yi bir çözüme ekleyin:
    1. Çözüme sağ tıklayın. **Add**  >  **Varolan proje**Ekle ' yi seçin.
    1. RCL 'nin proje dosyasına gidin.
-   1. RCL 'nin proje dosyasını (*. csproj*) seçin.
+   1. RCL 'nin proje dosyasını () seçin `.csproj` .
 1. Uygulamadan RCL 'ye bir başvuru ekleyin:
    1. Uygulama projesine sağ tıklayın. Başvuru **Ekle**' yi seçin  >  **Reference**.
    1. RCL projesini seçin. **Tamam**’ı seçin.
 
 > [!NOTE]
-> Şablondan RCL oluşturulurken **destek sayfaları ve görünümler** onay kutusu işaretliyse, bileşen yazma özelliğini etkinleştirmek için aşağıdaki içeriklerle oluşturulan projenin köküne bir *_Imports. Razor* dosyası da ekleyin Razor :
+> Şablondan RCL oluşturulurken **destek sayfaları ve görünümler** onay kutusu işaretliyse, `_Imports.razor` bileşen yazmayı etkinleştirmek için aşağıdaki içeriğe sahip oluşturulan projenin köküne da bir dosya ekleyin Razor :
 >
 > ```razor
 > @using Microsoft.AspNetCore.Components.Web
@@ -61,14 +61,14 @@ Bileşenler normal .NET türleri olduğu gibi, bir RCL tarafından sunulan bile�
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-1. Komut kabuğunda DotNet New komutuyla ** Razor sınıf kitaplığı** şablonunu ( `razorclasslib` ) kullanın. [dotnet new](/dotnet/core/tools/dotnet-new) Aşağıdaki örnekte adlı bir RCL oluşturulur `MyComponentLib1` . Komut yürütüldüğünde, tutan klasör `MyComponentLib1` otomatik olarak oluşturulur:
+1. Komut kabuğunda komutuyla ** Razor sınıf kitaplığı** şablonu ( `razorclasslib` ) kullanın [`dotnet new`](/dotnet/core/tools/dotnet-new) . Aşağıdaki örnekte adlı bir RCL oluşturulur `MyComponentLib1` . Komut yürütüldüğünde, tutan klasör `MyComponentLib1` otomatik olarak oluşturulur:
 
    ```dotnetcli
    dotnet new razorclasslib -o MyComponentLib1
    ```
 
    > [!NOTE]
-   > `-s|--support-pages-and-views`Şablondan RCL oluşturulurken anahtar kullanılıyorsa, bileşen yazmayı etkinleştirmek için aşağıdaki içeriklerle oluşturulan projenin köküne bir *_Imports. Razor* dosyası da ekleyin Razor :
+   > `-s|--support-pages-and-views`Şablondan RCL oluşturulurken anahtar kullanılıyorsa, `_Imports.razor` bileşen yazmayı etkinleştirmek için aşağıdaki içeriğe sahip oluşturulan projenin köküne bir dosya ekleyin Razor :
    >
    > ```razor
    > @using Microsoft.AspNetCore.Components.Web
@@ -76,7 +76,7 @@ Bileşenler normal .NET türleri olduğu gibi, bir RCL tarafından sunulan bile�
    >
    > Dosyayı oluşturulan projenin köküne el ile ekleyin.
 
-1. Kitaplığı var olan bir projeye eklemek için, bir komut kabuğunda [DotNet Add Reference](/dotnet/core/tools/dotnet-add-reference) komutunu kullanın. Aşağıdaki örnekte, RCL uygulamaya eklenir. Uygulamanın proje klasöründen, kitaplığın yolunu kullanarak aşağıdaki komutu yürütün:
+1. Kitaplığı var olan bir projeye eklemek için komut [`dotnet add reference`](/dotnet/core/tools/dotnet-add-reference) kabuğu 'nda komutunu kullanın. Aşağıdaki örnekte, RCL uygulamaya eklenir. Uygulamanın proje klasöründen, kitaplığın yolunu kullanarak aşağıdaki komutu yürütün:
 
    ```dotnetcli
    dotnet add reference {PATH TO LIBRARY}
@@ -115,7 +115,7 @@ Welcome to your new app.
 <SalesReport />
 ```
 
-`@using MyComponentLib1`Kitaplığın bileşenlerini bir projenin tamamına kullanılabilir hale getirmek için üst düzey *_Import. Razor* dosyasına yönergesini ekleyin. Ad alanını tek bir sayfaya veya bir klasör içindeki sayfa kümesine uygulamak için herhangi bir düzeydeki bir *_Import. Razor* dosyasına yönergesini ekleyin.
+`@using MyComponentLib1` `_Import.razor` Kitaplığın bileşenlerini bir projenin tamamına kullanılabilir hale getirmek için, en üst düzey dosyaya yönergesini ekleyin. `_Import.razor`Ad alanını tek bir sayfaya veya bir klasör içindeki sayfa kümesine uygulamak için herhangi bir düzeydeki bir dosyaya yönerge ekleyin.
 
 ## <a name="create-a-razor-components-class-library-with-static-assets"></a>RazorStatik varlıklar içeren bir bileşen sınıfı kitaplığı oluşturma
 
@@ -123,13 +123,13 @@ RCL statik varlıkları içerebilir. Statik varlıklar, kitaplığı kullanan t�
 
 ## <a name="build-pack-and-ship-to-nuget"></a>NuGet 'i derleyin, paketleyebilir ve iade edin
 
-Bileşen kitaplıkları standart .NET kitaplıkları olduğundan, paketlemeden ve tüm kitaplıkları NuGet 'e dağıtmadan farklı değildir. Paketleme, bir komut kabuğu 'nda [DotNet Pack](/dotnet/core/tools/dotnet-pack) komutu kullanılarak gerçekleştirilir:
+Bileşen kitaplıkları standart .NET kitaplıkları olduğundan, paketlemeden ve tüm kitaplıkları NuGet 'e dağıtmadan farklı değildir. Paketleme, komut [`dotnet pack`](/dotnet/core/tools/dotnet-pack) kabuğu 'nda komutu kullanılarak gerçekleştirilir:
 
 ```dotnetcli
 dotnet pack
 ```
 
-Bir komut kabuğunda [DotNet NuGet Push](/dotnet/core/tools/dotnet-nuget-push) komutunu kullanarak paketi NuGet 'e yükleyin.
+Komut kabuğunda komutunu kullanarak paketi NuGet 'e yükleyin [`dotnet nuget push`](/dotnet/core/tools/dotnet-nuget-push) .
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

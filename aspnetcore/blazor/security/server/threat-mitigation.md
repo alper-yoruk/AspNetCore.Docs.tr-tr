@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/threat-mitigation
-ms.openlocfilehash: 073a2a85369a100352a163693c5cba907203059e
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: a94dcd818c3f4e19ace57fad6390a84e704192bd
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103798"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242972"
 ---
 # <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>ASP.NET Core sunucusu için tehdit azaltma Kılavuzu Blazor
 
@@ -101,7 +101,7 @@ Varsayılan olarak, bir sunucu uygulaması için Kullanıcı başına bağlantı
 
 Hizmet reddi (DoS) saldırıları, istemcinin bir veya daha fazla kaynağın bir veya daha fazla uygulamayı tüketmesine neden olan bir istemciyi içerir. BlazorSunucu uygulamaları, bazı varsayılan limitleri içerir ve SignalR açık olan DOS saldırılarına karşı korumak için diğer ASP.NET Core ve limitlere güvenir <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions> .
 
-| BlazorSunucu uygulaması sınırı | Açıklama | Varsayılan |
+| BlazorSunucu uygulaması sınırı | Description | Varsayılan |
 | --- | --- | --- |
 | <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitMaxRetained> | Belirli bir sunucunun bellekte tek seferde tuttuğu bağlantı kesilen en fazla bağlantı sayısı. | 100 |
 | <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DisconnectedCircuitRetentionPeriod> | Bağlantısı kesilmiş bir devre dışı bırakılmadan önce bellekte tutulan en fazla süre. | 3 dakika |
@@ -110,7 +110,7 @@ Hizmet reddi (DoS) saldırıları, istemcinin bir veya daha fazla kaynağın bir
 
 Tek bir gelen hub iletisinin en büyük ileti boyutunu ile ayarlayın <xref:Microsoft.AspNetCore.SignalR.HubConnectionContextOptions> .
 
-| SignalRve ASP.NET Core sınırı | Açıklama | Varsayılan |
+| SignalRve ASP.NET Core sınırı | Description | Varsayılan |
 | --- | --- | --- |
 | <xref:Microsoft.AspNetCore.SignalR.HubConnectionContextOptions.MaximumReceiveMessageSize?displayProperty=nameWithType> | Tek bir ileti için ileti boyutu. | 32 KB |
 
@@ -134,7 +134,7 @@ Tek bir gelen hub iletisinin en büyük ileti boyutunu ile ayarlayın <xref:Micr
 
 Yukarıdaki senaryolara karşı koruma için aşağıdaki önlemleri alın:
 
-* [Try-catch](/dotnet/csharp/language-reference/keywords/try-catch) DEYIMLERI içindeki js birlikte çalışabilirlik çağrılarını, çağırma sırasında oluşabilecek hataları hesaba eklemek için kaydırın. Daha fazla bilgi için bkz. <xref:blazor/fundamentals/handle-errors#javascript-interop>.
+* [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch)Çağırma sırasında oluşabilecek hataları hesaba eklemek için DEYIMLERDEKI js birlikte çalışma çağrılarını sarın. Daha fazla bilgi için bkz. <xref:blazor/fundamentals/handle-errors#javascript-interop>.
 * Herhangi bir işlem yapmadan önce, hata iletileri de dahil olmak üzere JS birlikte çalışma çağırmaları tarafından döndürülen verileri doğrulayın.
 
 ### <a name="net-methods-invoked-from-the-browser"></a>Tarayıcıdan çağrılan .NET yöntemleri
@@ -302,7 +302,7 @@ Sunucuda bir hata oluştuğunda, çerçeve istemciye bildirir ve oturumu kapatı
 JavaScript 'te ayrıntılı hataları etkinleştir:
 
 * <xref:Microsoft.AspNetCore.Components.Server.CircuitOptions.DetailedErrors?displayProperty=nameWithType>.
-* `DetailedErrors`Olarak ayarlanan yapılandırma anahtarı `true` , uygulama ayarları dosyasında (*appsettings.jsüzerinde*) ayarlanabilir. Anahtar, `ASPNETCORE_DETAILEDERRORS` bir değeri olan ortam değişkeni kullanılarak da ayarlanabilir `true` .
+* `DetailedErrors`Olarak ayarlanan yapılandırma anahtarı `true` , uygulama ayarları dosyasında ( `appsettings.json` ) ayarlanabilir. Anahtar, `ASPNETCORE_DETAILEDERRORS` bir değeri olan ortam değişkeni kullanılarak da ayarlanabilir `true` .
 
 > [!WARNING]
 > Internet 'teki istemcilere hata bilgilerini ortaya çıkarmak her zaman kaçınılması gereken bir güvenlik riskidir.
@@ -348,7 +348,7 @@ Framework 'ün uyguladığı korumalarına ek olarak, tehditlere karşı korumak
 * JS birlikte çalışma çağrılarında, JavaScript ve .NET yöntemleri arasında her iki yönde de girişe güvenmeyin.
 * Bağımsız değişkenlerin veya sonuçların doğru şekilde seri durumdan çıkarılsa bile, uygulama bağımsız değişkenlerin ve sonuçların içeriğinin geçerli olduğunu doğrulamaktan sorumludur.
 
-Bir XSS Güvenlik açığının mevcut olması için, uygulamanın işlenen sayfada Kullanıcı girişini içermesi gerekir. BlazorSunucu bileşenleri, bir *. Razor* dosyasındaki biçimlendirmenin yordamsal C# mantığına dönüştürülebileceği bir derleme zamanı adımı yürütür. Çalışma zamanında C# mantığı öğeleri, metni ve alt bileşenleri açıklayan bir *işleme ağacı* oluşturur. Bu, tarayıcı DOM 'a bir JavaScript yönergeleri dizisi aracılığıyla uygulanır (veya prerendering durumunda HTML olarak serileştirilir):
+Bir XSS Güvenlik açığının mevcut olması için, uygulamanın işlenen sayfada Kullanıcı girişini içermesi gerekir. BlazorSunucu bileşenleri, bir `.razor` dosyadaki biçimlendirmenin yordamsal C# mantığına dönüştürülebileceği bir derleme zamanı adımı yürütür. Çalışma zamanında C# mantığı öğeleri, metni ve alt bileşenleri açıklayan bir *işleme ağacı* oluşturur. Bu, tarayıcı DOM 'a bir JavaScript yönergeleri dizisi aracılığıyla uygulanır (veya prerendering durumunda HTML olarak serileştirilir):
 
 * Normal sözdizimi aracılığıyla işlenen Kullanıcı girişi Razor (örneğin, `@someStringValue` ), Razor sözdizimi yalnızca metin YAZABILECEĞINDEN komutlar aracılığıyla Dom 'A eklendiğinden bir XSS Güvenlik Açığı sunmaz. Değer HTML biçimlendirmesi içerse bile, değer statik metin olarak görüntülenir. Prerendering olduğunda çıktı HTML kodlamalı olur ve bu da içeriği statik metin olarak görüntüler.
 * Betik etiketlerine izin verilmez ve uygulamanın bileşen işleme ağacına dahil edilmemelidir. Bir komut dosyası etiketi bir bileşenin biçimlendirmesinde yer alıyorsa, derleme zamanı hatası oluşturulur.

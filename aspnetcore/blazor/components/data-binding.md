@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: c901ba0cbcd79bb14cb32a6a56a2595d159f8678
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 1654c0ce40d44ad4cc679c151ef99f155e31b514
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103889"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242504"
 ---
 # <a name="aspnet-core-blazor-data-binding"></a>ASP.NET Core Blazor veri bağlama
 
@@ -240,10 +240,10 @@ Yaygın bir senaryo, bir veri bağlama parametresini bileşen çıkışında bir
 
 Bir zincir bağlama [`@bind`](xref:mvc/views/razor#bind) , sayfanın öğesinde sözdizimi ile uygulanamaz. Olay işleyicisi ve değeri ayrı olarak belirtilmelidir. Ancak, bir üst bileşen, bir [`@bind`](xref:mvc/views/razor#bind) sözdizimi bileşenin parametresiyle birlikte kullanabilir.
 
-Aşağıdaki `PasswordField` bileşen (*passwordfield. Razor*):
+Aşağıdaki `PasswordField` bileşen ( `PasswordField.razor` ):
 
 * Bir `<input>` öğenin değerini bir `Password` özelliğe ayarlar.
-* Özellik değişikliklerini bir `Password` [eventcallback](xref:blazor/components/event-handling#eventcallback)ile üst bileşene gösterir.
+* `Password`Özelliği ile bir üst bileşen arasındaki değişiklikleri gösterir [`EventCallback`](xref:blazor/components/event-handling#eventcallback) .
 * , `onclick` Yöntemini tetiklemek için kullanılan olayını kullanır `ToggleShowPassword` . Daha fazla bilgi için bkz. <xref:blazor/components/event-handling>.
 
 ```razor

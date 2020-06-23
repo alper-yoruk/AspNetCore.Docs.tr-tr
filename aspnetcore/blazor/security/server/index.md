@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: a8604ca6ea60386bb3c54c950205ee695d37c689
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 2bdd2f256f456cbf474181021fafc6830bfd68f4
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103792"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85242933"
 ---
 # <a name="secure-aspnet-core-blazor-server-apps"></a>Güvenli ASP.NET Core Blazor Server uygulamaları
 
@@ -53,7 +53,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 İzin verilen kimlik doğrulama değerleri ( `{AUTHENTICATION}` ) aşağıdaki tabloda gösterilmiştir.
 
-| Kimlik doğrulama mekanizması | Açıklama |
+| Kimlik doğrulama mekanizması | Description |
 | ------------------------ | ----------- |
 | `None`varsayılanını         | Kimlik doğrulaması yok |
 | `Individual`             | ASP.NET Core ile uygulamada depolanan kullanıcılarIdentity |
@@ -67,7 +67,7 @@ Bu `-o|--output` seçeneği kullanarak, komut yer tutucusu için belirtilen değ
 * Proje için bir klasör oluşturun.
 * Projeyi adlandırın.
 
-Daha fazla bilgi için .NET Core kılavuzundaki [DotNet New](/dotnet/core/tools/dotnet-new) komutuna bakın.
+Daha fazla bilgi için [`dotnet new`](/dotnet/core/tools/dotnet-new) .NET Core kılavuzundaki komutuna bakın.
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
@@ -87,7 +87,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 İzin verilen kimlik doğrulama değerleri ( `{AUTHENTICATION}` ) aşağıdaki tabloda gösterilmiştir.
 
-| Kimlik doğrulama mekanizması | Açıklama |
+| Kimlik doğrulama mekanizması | Description |
 | ------------------------ | ----------- |
 | `None`varsayılanını         | Kimlik doğrulaması yok |
 | `Individual`             | ASP.NET Core ile uygulamada depolanan kullanıcılarIdentity |
@@ -101,7 +101,7 @@ Bu `-o|--output` seçeneği kullanarak, komut yer tutucusu için belirtilen değ
 * Proje için bir klasör oluşturun.
 * Projeyi adlandırın.
 
-Daha fazla bilgi için .NET Core kılavuzundaki [DotNet New](/dotnet/core/tools/dotnet-new) komutuna bakın.
+Daha fazla bilgi için [`dotnet new`](/dotnet/core/tools/dotnet-new) .NET Core kılavuzundaki komutuna bakın.
 
 ---
 

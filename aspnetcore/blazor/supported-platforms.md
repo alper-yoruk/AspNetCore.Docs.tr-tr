@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/supported-platforms
-ms.openlocfilehash: c10132c87c93346af89c548363e786967609f3da
-ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
+ms.openlocfilehash: 99f14486711c2dd2a634bc51b27a8e3891deee1a
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "83607985"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243232"
 ---
 # <a name="aspnet-core-blazor-supported-platforms"></a>BlazorDesteklenen platformları ASP.NET Core
 
@@ -48,7 +48,7 @@ ms.locfileid: "83607985"
 | İOS dahil Safari            | Geçerli    |
 | Microsoft Internet Explorer      | üst&dagger; |
 
-&dagger;Ek polydolgular gereklidir (örneğin, [Polyfill.io](https://polyfill.io/v3/) bir paket aracılığıyla taahhüt eklenebilir).
+&dagger;Ek polydolgular gereklidir (örneğin, bu, bir paket ile eklenebilir [`Polyfill.io`](https://polyfill.io/v3/) ).
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
