@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/configure-linker
-ms.openlocfilehash: efac62c325b03b5ee19cae58abb5227f3d300b69
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 76af450df70fe666ea1b951cb4b41696057c5e67
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103822"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243583"
 ---
 # <a name="configure-the-linker-for-aspnet-core-blazor"></a>ASP.NET Core için bağlayıcı yapılandırmaBlazor
 
@@ -55,7 +55,7 @@ Bir XML yapılandırma dosyası sağlayarak ve dosyayı proje dosyasında MSBuil
 </ItemGroup>
 ```
 
-*LinkerConfig.xml*:
+`LinkerConfig.xml`:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8" ?>
@@ -93,7 +93,7 @@ Daha fazla bilgi ve örnek için bkz. [veri biçimleri (mono/bağlayıcı GitHub
 
 Bağlayıcıyı belirli bir kitaplık için yapılandırmak için, kitaplığa katıştırılmış kaynak olarak bir XML bağlayıcı yapılandırma dosyası ekleyin. Katıştırılmış kaynak, derlemeyle aynı ada sahip olmalıdır.
 
-Aşağıdaki örnekte *LinkerConfig.xml* dosyası, kitaplığın derlemesi ile aynı ada sahip gömülü bir kaynak olarak belirtilir:
+Aşağıdaki örnekte, `LinkerConfig.xml` Dosya, kitaplığın derlemesi ile aynı ada sahip gömülü bir kaynak olarak belirtilir:
 
 ```xml
 <ItemGroup>
@@ -118,12 +118,12 @@ Hangi I18N derlemelerinin korunacağını denetlemek için, `<BlazorWebAssemblyI
 | Bölge değeri     | Mono bölgesi derlemesi    |
 | ---------------- | ----------------------- |
 | `all`            | Tüm derlemeler dahil |
-| `cjk`            | *I18N.CJK.dll*          |
-| `mideast`        | *I18N.MidEast.dll*      |
+| `cjk`            | `I18N.CJK.dll`          |
+| `mideast`        | `I18N.MidEast.dll`      |
 | `none`varsayılanını | Yok                    |
-| `other`          | *I18N.Other.dll*        |
-| `rare`           | *I18N.Rare.dll*         |
-| `west`           | *I18N.West.dll*         |
+| `other`          | `I18N.Other.dll`        |
+| `rare`           | `I18N.Rare.dll`         |
+| `west`           | `I18N.West.dll`         |
 
 Birden çok değeri ayırmak için virgül kullanın (örneğin, `mideast,west` ).
 

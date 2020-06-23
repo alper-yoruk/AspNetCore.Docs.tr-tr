@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/get-started
-ms.openlocfilehash: c90c3bf7ccef420101c66fe04d579920209b066c
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 63fee0b6a3152640a5483c2a682eec7d04742145
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102340"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243609"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>ASP.NET Core kullanmaya başlayınBlazor
 
@@ -70,7 +70,7 @@ Kullanmaya başlamak için Blazor , araç seçiminiz için yönergeleri izleyin:
 
    İki Blazor barındırma modeli, * Blazor webassembly* ve * Blazor sunucu*hakkında bilgi için bkz <xref:blazor/hosting-models> ..
 
-1. Visual Studio Code 'de *WebApplication1* klasörünü açın.
+1. `WebApplication1`Visual Studio Code klasörü açın.
 
 1. IDE, projeyi derlemek ve hatalarını ayıklamak için varlık eklemenizi ister. **Evet**' i seçin.
 
@@ -137,15 +137,15 @@ Kenar çubuğu 'ndaki sekmelerde birden çok sayfa mevcuttur:
 * Sayaç
 * Verileri getir
 
-Sayaç sayfasında, bir sayfa yenilemesi olmadan sayacı artırmak için **bana tıklama** düğmesini seçin. Bir Web sayfasındaki sayacı normal şekilde artırma, JavaScript yazmayı gerektirir, ancak ile Blazor C# kullanabilirsiniz.
+Sayaç sayfasında, bir sayfa yenileme olmadan sayacı artırmak için düğmeyi seçin. Bir Web sayfasındaki sayacı normal şekilde artırma, JavaScript yazmayı gerektirir, ancak ile Blazor C# kullanabilirsiniz.
 
-*Pages/Counter. Razor*:
+`Pages/Counter.razor`:
 
 [!code-razor[](get-started/samples_snapshot/3.x/Counter1.razor?highlight=7,12-15)]
 
 `/counter`En üstteki yönergeyle belirtilen şekilde tarayıcıda için bir istek `@page` , `Counter` bileşenin içeriğini işlemesine neden olur. Bileşenler, daha sonra, Kullanıcı arabirimini esnek ve verimli bir şekilde güncelleştirmek için kullanılabilen işleme ağacının bellek içi gösterimine işlenir.
 
-**Bana tıklama** düğmesi her seçildiğinde:
+Düğme her seçildiğinde:
 
 * `onclick`Olay tetiklenir.
 * `IncrementCount`Yöntemi çağrılır.
@@ -156,7 +156,7 @@ Sayaç sayfasında, bir sayfa yenilemesi olmadan sayacı artırmak için **bana 
 
 HTML sözdizimini kullanarak başka bir bileşene bileşen ekleyin. Örneğin, bileşene `Counter` bir öğe ekleyerek bileşeni uygulamanın giriş sayfasına ekleyin `<Counter />` `Index` .
 
-*Pages/Index. Razor*:
+`Pages/Index.razor`:
 
 [!code-razor[](get-started/samples_snapshot/3.x/Index1.razor?highlight=7)]
 
@@ -167,17 +167,17 @@ Bileşen parametreleri, alt bileşende özellikler ayarlamanıza olanak tanıyan
 * Özniteliği ile için bir public özelliği ekleyin `IncrementAmount` [`[Parameter]`](xref:Microsoft.AspNetCore.Components.ParameterAttribute) .
 * `IncrementCount` `IncrementAmount` Değerini değerini artırdığınızda kullanmak için yöntemini değiştirin `currentCount` .
 
-*Pages/Counter. Razor*:
+`Pages/Counter.razor`:
 
 [!code-razor[](get-started/samples_snapshot/3.x/Counter2.razor?highlight=12-13,17)]
 
 `IncrementAmount` `Index` `<Counter>` Özniteliği kullanarak bileşenin öğesinde öğesini belirtin.
 
-*Pages/Index. Razor*:
+`Pages/Index.razor`:
 
 [!code-razor[](get-started/samples_snapshot/3.x/Index2.razor?highlight=7)]
 
-Uygulamayı çalıştırın. `Index`Bileşenin, **bana tıklama** düğmesi seçildiğinde her seferinde on ile artan kendi sayacı vardır. ' `Counter` De bileşen (*Counter. Razor*), `/counter` bir tane tarafından arttırmaya devam eder.
+Uygulamayı çalıştırın. `Index`Bileşenin, düğmenin her seçililişinde on ile artan kendi sayacı vardır. İçindeki `Counter` bileşen ( `Pages/Counter.razor` ), `/counter` bir tane tarafından arttırmaya devam eder.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

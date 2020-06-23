@@ -1,4 +1,4 @@
-`RedirectToLogin` Bileşen (*Shared/redirecttologin. Razor*):
+`RedirectToLogin`Bileşen ( `Shared/RedirectToLogin.razor` ):
 
 * Yetkisiz kullanıcıların oturum açma sayfasına yeniden yönlendirildiğini yönetir.
 * Kimlik doğrulaması başarılı olursa bu sayfaya döndürülmeleri için kullanıcının erişmeye çalışan geçerli URL 'YI korur.

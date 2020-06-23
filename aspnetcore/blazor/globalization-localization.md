@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 42b61c9af0c1809ecb7d9a45ec8edfa815e2df22
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 5050d99e5304c7edaf6faa43f05298b69882521d
+ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102327"
+ms.lasthandoff: 06/23/2020
+ms.locfileid: "85243596"
 ---
 # <a name="aspnet-core-blazor-globalization-and-localization"></a>BlazorGenelleştirme ve yerelleştirme ASP.NET Core
 
@@ -71,7 +71,7 @@ Kültürü açıkça yapılandırmak için, <xref:System.Globalization.CultureIn
 
 Varsayılan olarak, Blazor Blazor webassembly uygulamaları için bağlayıcı yapılandırması, açıkça istenen yerel ayarlar dışında uluslararası duruma getirme bilgilerini şeritleri. Bağlayıcının davranışını denetleme hakkında daha fazla bilgi ve yönergeler için bkz <xref:blazor/host-and-deploy/configure-linker#configure-the-linker-for-internationalization> ..
 
-BlazorVarsayılan olarak seçen kültür çoğu kullanıcı için yeterli olabilir, ancak kullanıcıların tercih ettiği yerel ayarlarını belirtmelerini sağlayan bir yol sunmayı göz önünde bulundurun. BlazorKültür seçiciyle webassembly örnek uygulaması için bkz. [locsample](https://github.com/pranavkm/LocSample) yerelleştirme örnek uygulaması.
+BlazorVarsayılan olarak seçen kültür çoğu kullanıcı için yeterli olabilir, ancak kullanıcıların tercih ettiği yerel ayarlarını belirtmelerini sağlayan bir yol sunmayı göz önünde bulundurun. BlazorKültür seçiciyle webassembly örnek uygulaması için bkz [`LocSample`](https://github.com/pranavkm/LocSample) . yerelleştirme örnek uygulaması.
 
 ### <a name="blazor-server"></a>BlazorServer
 
@@ -92,7 +92,7 @@ Tanımlama bilgisinin kullanımı, WebSocket bağlantısının kültürü doğru
 
 Kültür bir yerelleştirme tanımlama bilgisinde kalıcı hale getirilir kültür atamak için herhangi bir teknik kullanılabilir. Uygulamanın zaten sunucu tarafı ASP.NET Core için bir yerelleştirme şeması varsa, uygulamanın var olan yerelleştirme altyapısını kullanmaya devam edin ve uygulamanın şeması içinde yerelleştirme kültür tanımlama bilgisini ayarlayın.
 
-Aşağıdaki örnekte, yerelleştirme ara yazılımı tarafından okunabilen bir tanımlama bilgisinde geçerli kültürün nasıl ayarlanacağı gösterilmektedir. Razor *Pages/_Host. cshtml* dosyasında açılış etiketinin hemen içinde bir ifade oluşturun `<body>` :
+Aşağıdaki örnekte, yerelleştirme ara yazılımı tarafından okunabilen bir tanımlama bilgisinde geçerli kültürün nasıl ayarlanacağı gösterilmektedir. Razor `Pages/_Host.cshtml` Dosyada açılış etiketinin hemen içinde bir ifade oluşturun `<body>` :
 
 ```cshtml
 @using System.Globalization
@@ -118,7 +118,7 @@ Yerelleştirme, uygulama tarafından aşağıdaki olay dizisinde işlenir:
 
 1. Tarayıcı, uygulamaya bir ilk HTTP isteği gönderir.
 1. Kültür, yerelleştirme ara yazılımı tarafından atanır.
-1. Razor `_Host` Sayfadaki ifade (*_Host. cshtml*), yanıtın bir parçası olarak bir tanımlama bilgisinde kültürü devam ettirir.
+1. Razor `_Host` Sayfadaki ifade (), `_Host.cshtml` yanıtın bir parçası olarak bir tanımlama bilgisinde kültürü devam ettirir.
 1. Tarayıcı, etkileşimli bir sunucu oturumu oluşturmak için bir WebSocket bağlantısı açar Blazor .
 1. Yerelleştirme ara yazılımı tanımlama bilgisini okur ve kültürü atar.
 1. BlazorSunucu oturumu doğru kültür ile başlar.
