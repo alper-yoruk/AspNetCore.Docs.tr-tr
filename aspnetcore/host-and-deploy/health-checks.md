@@ -5,7 +5,7 @@ description: Uygulamalar ve veritabanları gibi ASP.NET Core altyapısı için s
 monikerRange: '>= aspnetcore-2.2'
 ms.author: riande
 ms.custom: mvc
-ms.date: 12/15/2019
+ms.date: 06/22/2020
 no-loc:
 - Blazor
 - Identity
@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/health-checks
-ms.openlocfilehash: 00b2697a6b916718d9d0e01d1ea9f922eb2b5706
-ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
+ms.openlocfilehash: ca5540b4920bc92e968dcbc22a9407453041b01c
+ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85074437"
+ms.lasthandoff: 06/24/2020
+ms.locfileid: "85292704"
 ---
 # <a name="health-checks-in-aspnet-core"></a>ASP.NET Core durum denetimleri
 
@@ -38,7 +38,7 @@ Sistem durumu denetimleri, bir uygulama tarafından HTTP uç noktaları olarak g
 
 Örnek uygulama, bu konuda açıklanan senaryoların örneklerini içerir. Örnek uygulamayı belirli bir senaryo için çalıştırmak için, bir komut kabuğunda projenin klasöründen [DotNet Run](/dotnet/core/tools/dotnet-run) komutunu kullanın. Örnek uygulamayı kullanma hakkında ayrıntılı bilgi için bu konudaki örnek uygulamanın *README.MD* dosyasına ve senaryo açıklamalarına bakın.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 Durum denetimleri, genellikle bir uygulamanın durumunu denetlemek için bir dış izleme hizmeti veya kapsayıcı Orchestrator ile birlikte kullanılır. Bir uygulamaya sistem durumu denetimleri eklemeden önce, hangi izleme sisteminin kullanılacağını belirleyin. İzleme sistemi ne tür bir sistem durumu denetimi oluşturulacağını ve bunların uç noktalarını nasıl yapılandıracağınızı belirler.
 
@@ -442,10 +442,10 @@ Unhealthy
 
 Bazı barındırma senaryolarında iki uygulama durumunu ayırt eden bir çift sistem durumu denetimi kullanılır:
 
-* Uygulama çalışıyor ancak henüz istekleri almaya hazırlanma. Bu durum, uygulamanın *hazır olma*durumu.
-* Uygulama çalışır ve isteklere yanıt verir. Bu durum, uygulamanın kullanım *koşullarına*göre yapılır.
+* *Hazırlık* , uygulamanın normal çalışıp çalışmadığını ancak istekleri almaya hazır olmadığını gösterir.
+* *Lida* bir uygulamanın kilitlenip yeniden başlatılması gerekip gerekmediğini gösterir.
 
-Hazırlık denetimi genellikle uygulamanın tüm alt sistemlerinin ve kaynaklarının kullanılabilir olup olmadığını belirlemede daha kapsamlı ve zaman alıcı denetim kümesi gerçekleştirir. Bir onay işareti yalnızca uygulamanın istekleri işlemek için kullanılabilir olup olmadığını belirlemede hızlı bir denetim gerçekleştirir. Uygulama hazırlık denetimini geçirdikten sonra, pahalı hazırlık denetimleri kümesi daha fazla denetim sağlamak için uygulamayı daha fazla denetleme gereksinimi yoktur &mdash; .
+Aşağıdaki örneği göz önünde bulundurun: bir uygulamanın istekleri işlemeye hazırlanmadan önce büyük bir yapılandırma dosyasını indirmesi gerekir. Uygulamanın dosyayı birkaç kez indirmeyi yeniden denemesini sağladığından, ilk indirme işlemi başarısız olursa uygulamanın yeniden başlatılmasını istemiyoruz. İşlemin desteklerini betimleyen, ek denetimler gerçekleştirilmeyen bir *araştırma* kullanıyoruz. Yapılandırma dosyası indirmesi başarılı olmadan önce isteklerin uygulamaya gönderilmesini de engellemek istiyoruz. İndirme başarılı olana ve uygulama istekleri almaya hazır olana kadar "hazır değil" durumunu göstermek için bir *hazırlık araştırması* kullanıyoruz.
 
 Örnek uygulama, [barındırılan bir hizmette](xref:fundamentals/host/hosted-services)uzun süre çalışan başlatma görevinin tamamlandığını raporlamak için bir sistem durumu denetimi içerir. , `StartupHostedServiceHealthCheck` `StartupTaskCompleted` Barındırılan hizmetin uzun süre çalışan görevi bittiğinde olarak ayarlayabilmesini sağlayan bir özelliği sunar `true` (*StartupHostedServiceHealthCheck.cs*):
 
@@ -807,7 +807,7 @@ Sistem durumu denetimleri, bir uygulama tarafından HTTP uç noktaları olarak g
 
 Örnek uygulama, bu konuda açıklanan senaryoların örneklerini içerir. Örnek uygulamayı belirli bir senaryo için çalıştırmak için, bir komut kabuğunda projenin klasöründen [DotNet Run](/dotnet/core/tools/dotnet-run) komutunu kullanın. Örnek uygulamayı kullanma hakkında ayrıntılı bilgi için bu konudaki örnek uygulamanın *README.MD* dosyasına ve senaryo açıklamalarına bakın.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 Durum denetimleri, genellikle bir uygulamanın durumunu denetlemek için bir dış izleme hizmeti veya kapsayıcı Orchestrator ile birlikte kullanılır. Bir uygulamaya sistem durumu denetimleri eklemeden önce, hangi izleme sisteminin kullanılacağını belirleyin. İzleme sistemi ne tür bir sistem durumu denetimi oluşturulacağını ve bunların uç noktalarını nasıl yapılandıracağınızı belirler.
 
@@ -1155,10 +1155,10 @@ Unhealthy
 
 Bazı barındırma senaryolarında iki uygulama durumunu ayırt eden bir çift sistem durumu denetimi kullanılır:
 
-* Uygulama çalışıyor ancak henüz istekleri almaya hazırlanma. Bu durum, uygulamanın *hazır olma*durumu.
-* Uygulama çalışır ve isteklere yanıt verir. Bu durum, uygulamanın kullanım *koşullarına*göre yapılır.
+* *Hazırlık* , uygulamanın normal çalışıp çalışmadığını ancak istekleri almaya hazır olmadığını gösterir.
+* *Lida* bir uygulamanın kilitlenip yeniden başlatılması gerekip gerekmediğini gösterir.
 
-Hazırlık denetimi genellikle uygulamanın tüm alt sistemlerinin ve kaynaklarının kullanılabilir olup olmadığını belirlemede daha kapsamlı ve zaman alıcı denetim kümesi gerçekleştirir. Bir onay işareti yalnızca uygulamanın istekleri işlemek için kullanılabilir olup olmadığını belirlemede hızlı bir denetim gerçekleştirir. Uygulama hazırlık denetimini geçirdikten sonra, pahalı hazırlık denetimleri kümesi daha fazla denetim sağlamak için uygulamayı daha fazla denetleme gereksinimi yoktur &mdash; .
+Aşağıdaki örneği göz önünde bulundurun: bir uygulamanın istekleri işlemeye hazırlanmadan önce büyük bir yapılandırma dosyasını indirmesi gerekir. Uygulamanın dosyayı birkaç kez indirmeyi yeniden denemesini sağladığından, ilk indirme işlemi başarısız olursa uygulamanın yeniden başlatılmasını istemiyoruz. İşlemin desteklerini betimleyen, ek denetimler gerçekleştirilmeyen bir *araştırma* kullanıyoruz. Yapılandırma dosyası indirmesi başarılı olmadan önce isteklerin uygulamaya gönderilmesini de engellemek istiyoruz. İndirme başarılı olana ve uygulama istekleri almaya hazır olana kadar "hazır değil" durumunu göstermek için bir *hazırlık araştırması* kullanıyoruz.
 
 Örnek uygulama, [barındırılan bir hizmette](xref:fundamentals/host/hosted-services)uzun süre çalışan başlatma görevinin tamamlandığını raporlamak için bir sistem durumu denetimi içerir. , `StartupHostedServiceHealthCheck` `StartupTaskCompleted` Barındırılan hizmetin uzun süre çalışan görevi bittiğinde olarak ayarlayabilmesini sağlayan bir özelliği sunar `true` (*StartupHostedServiceHealthCheck.cs*):
 

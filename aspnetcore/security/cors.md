@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cors
-ms.openlocfilehash: a78aff2d2e16f36ed034e6af110d7ed763271583
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 1a52a2425eeba2bc62253e96fe6d2465562c154e
+ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105759"
+ms.lasthandoff: 06/24/2020
+ms.locfileid: "85292769"
 ---
 # <a name="enable-cross-origin-requests-cors-in-aspnet-core"></a>ASP.NET Core 'de çıkış noktaları arası Istekleri (CORS) etkinleştirme
 
@@ -64,6 +64,9 @@ CORS 'yi etkinleştirmenin üç yolu vardır:
 
 Adlandırılmış ilkeyle [[Enablecors]](#attr) ÖZNITELIĞINI kullanmak CORS 'yi destekleyen uç noktaları sınırlayan en yoğun denetimi sağlar.
 
+> [!WARNING]
+> <xref:Owin.CorsExtensions.UseCors%2A>, kullanılmadan önce çağrılmalıdır <xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseResponseCaching%2A> `UseResponseCaching` .
+
 Her yaklaşım aşağıdaki bölümlerde ayrıntılı olarak verilmiştir.
 
 <a name="np"></a>
@@ -72,7 +75,7 @@ Her yaklaşım aşağıdaki bölümlerde ayrıntılı olarak verilmiştir.
 
 CORS ara yazılımı, çıkış noktaları arası istekleri işler. Aşağıdaki kod, belirtilen kaynakları kullanarak tüm uygulamanın uç noktalarına bir CORS ilkesi uygular:
 
-[!code-csharp[](cors/3.1sample/Cors/WebAPI/Startup.cs?name=snippet&highlight=3,9,31)]
+[!code-csharp[](cors/3.1sample/Cors/WebAPI/Startup.cs?name=snippet&highlight=3,9,32)]
 
 Yukarıdaki kod:
 
@@ -80,6 +83,7 @@ Yukarıdaki kod:
 * <xref:Microsoft.AspNetCore.Builder.CorsMiddlewareExtensions.UseCors*>Uzantı yöntemini çağırır ve `_myAllowSpecificOrigins` CORS ilkesini belirtir. `UseCors`CORS ara yazılımını ekler. Çağrısının `UseCors` sonra `UseRouting` , öncesi yerleştirilmesi gerekir `UseAuthorization` . Daha fazla bilgi için bkz. [Ara yazılım sırası](xref:fundamentals/middleware/index#middleware-order).
 * <xref:Microsoft.Extensions.DependencyInjection.CorsServiceCollectionExtensions.AddCors*> [Lambda ifadesi](/dotnet/csharp/programming-guide/statements-expressions-operators/lambda-expressions)ile çağrılar. Lambda bir nesnesi alır <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder> . Gibi [yapılandırma seçenekleri](#cors-policy-options), `WithOrigins` Bu makalenin ilerleyen kısımlarında açıklanmıştır.
 * `_myAllowSpecificOrigins`Tüm denetleyici uç noktaları için CORS ilkesini etkinleştirilir. Belirli uç noktalara bir CORS ilkesi uygulamak için bkz. [Endpoint Routing](#ecors) .
+* [Yanıt önbelleğe alma ara yazılımını](xref:performance/caching/middleware)kullanırken, daha <xref:Owin.CorsExtensions.UseCors%2A> önce çağırın <xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseResponseCaching%2A> .
 
 Endpoint Routing ile **CORS ara yazılımı** , ve çağrıları arasında yürütülecek şekilde yapılandırılmalıdır `UseRouting` `UseEndpoints` .
 
@@ -551,7 +555,7 @@ Aşağıdakiler, `ValuesController` test için uç noktaları sağlar:
 
 [!code-csharp[](cors/3.1sample/Cors/WebAPI/Controllers/ValuesController.cs?name=snippet)]
 
-[Mydisplayrouteınfo](https://github.com/Rick-Anderson/RouteInfo/blob/master/Microsoft.Docs.Samples.RouteInfo/ControllerContextExtensions.cs) , [Rick. docs. Samples. routeınfo](https://www.nuget.org/packages/Rick.Docs.Samples.RouteInfo) NuGet paketi tarafından sağlanır ve rota bilgilerini görüntüler.
+[Mydisplayrouteınfo](https://github.com/Rick-Anderson/RouteInfo/blob/master/Microsoft.Docs.Samples.RouteInfo/ControllerContextExtensions.cs) , [Rick.Docs. Samples. routeınfo](https://www.nuget.org/packages/Rick.Docs.Samples.RouteInfo) NuGet paketi tarafından sağlanır ve rota bilgilerini görüntüler.
 
 Aşağıdaki yaklaşımlardan birini kullanarak önceki örnek kodu test edin:
 
@@ -982,7 +986,7 @@ Yanıt `Access-Control-Allow-Origin` üstbilgiyi içermiyorsa, çapraz kaynak is
 CORS 'yi sınamak için:
 
 1. [BIR API projesi oluşturun](xref:tutorials/first-web-api). Alternatif olarak, [örneği de indirebilirsiniz](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/sample/Cors).
-1. Bu belgedeki yaklaşımlardan birini kullanarak CORS 'yi etkinleştirin. Örnek:
+1. Bu belgedeki yaklaşımlardan birini kullanarak CORS 'yi etkinleştirin. Örneğin:
 
   [!code-csharp[](cors/sample/Cors/WebAPI/StartupTest.cs?name=snippet2&highlight=13-18)]
 

@@ -12,12 +12,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/ws-federation
-ms.openlocfilehash: fede3887ad7dacd40cf3bb5d1b785392a9bc1480
-ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
+ms.openlocfilehash: 62b8e33d8b7eb17a65a7a54df2a9aa298acdfe36
+ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82850467"
+ms.lasthandoff: 06/24/2020
+ms.locfileid: "85292832"
 ---
 # <a name="authenticate-users-with-ws-federation-in-aspnet-core"></a>ASP.NET Core 'de WS-Federation ile kullanıcıların kimliğini doğrulama
 
@@ -28,7 +28,7 @@ ASP.NET Core uygulamalar için, [Microsoft. AspNetCore. Authentication. WSFedera
 Varsayılan olarak, yeni ara yazılım:
 
 * , İstenmeyen oturum açma işlemlerine izin vermez. WS-Federation protokolünün bu özelliği XSRF saldırılarına karşı savunmasızdır. Ancak, `AllowUnsolicitedLogins` seçeneğiyle etkinleştirilebilir.
-* Oturum açma iletileri için her form gönderisini denetlemez. Yalnızca öğesine yapılan istekler `CallbackPath` , oturum açma işlemleri için denetlenir. `CallbackPath` varsayılan olarak `/signin-wsfed` , ancak [WsFederationOptions](/dotnet/api/microsoft.aspnetcore.authentication.wsfederation.wsfederationoptions) sınıfının devralınmış [remoteauthenticationoptions. callbackpath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) özelliği aracılığıyla değiştirilebilir. Bu yol, [Skipunrecognizedrequests](/dotnet/api/microsoft.aspnetcore.authentication.wsfederation.wsfederationoptions.skipunrecognizedrequests) seçeneği etkinleştirilerek diğer kimlik doğrulama sağlayıcılarıyla paylaşılabilir.
+* Oturum açma iletileri için her form gönderisini denetlemez. Yalnızca öğesine yapılan istekler, `CallbackPath` oturum açma işlemleri için denetlenir. `CallbackPath` Varsayılan olarak, `/signin-wsfed` ancak [WsFederationOptions](/dotnet/api/microsoft.aspnetcore.authentication.wsfederation.wsfederationoptions) sınıfının devralınmış [remoteauthenticationoptions. callbackpath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) özelliği aracılığıyla değiştirilebilir. Bu yol, [Skipunrecognizedrequests](/dotnet/api/microsoft.aspnetcore.authentication.wsfederation.wsfederationoptions.skipunrecognizedrequests) seçeneği etkinleştirilerek diğer kimlik doğrulama sağlayıcılarıyla paylaşılabilir.
 
 ## <a name="register-the-app-with-active-directory"></a>Uygulamayı Active Directory kaydetme
 
@@ -57,7 +57,7 @@ Varsayılan olarak, yeni ara yazılım:
 
 * Sihirbazın geri kalanında **İleri** ' ye tıklayın ve sonda da **kapatın** .
 
-* ASP.NET Core Identity BIR **ad kimliği** talebi gerektiriyor. **Talep kurallarını Düzenle** iletişim kutusundan bir tane ekleyin:
+* ASP.NET Core Identity bir **ad kimliği** talebi gerektiriyor. **Talep kurallarını Düzenle** iletişim kutusundan bir tane ekleyin:
 
 ![Talep kurallarını Düzenle](ws-federation/_static/EditClaimRules.png)
 
@@ -65,7 +65,7 @@ Varsayılan olarak, yeni ara yazılım:
 
 ![Dönüşüm talep kuralı ekleme Sihirbazı: talep kuralını yapılandırma](ws-federation/_static/AddTransformClaimRule.png)
 
-*  >  **Talep kurallarını Düzenle** penceresinde**Tamam** **' a**tıklayın.
+* **Finish**  >  **Talep kurallarını Düzenle** penceresinde**Tamam** ' a tıklayın.
 
 ### <a name="azure-active-directory"></a>Azure Active Directory
 
@@ -78,17 +78,17 @@ Varsayılan olarak, yeni ara yazılım:
 
 ![Azure Active Directory: uygulama kaydı oluşturma](ws-federation/_static/AadCreateAppRegistration.png)
 
-* **Uç noktalar** ' a tıklayın ve **Federasyon meta veri belgesi** URL 'sine göz önünde Bu, WS-Federation ara yazılımı ' `MetadataAddress`dır:
+* **Uç noktalar** ' a tıklayın ve **Federasyon meta veri belgesi** URL 'sine göz önünde Bu, WS-Federation ara yazılımı ' dır `MetadataAddress` :
 
 ![Azure Active Directory: uç noktalar](ws-federation/_static/AadFederationMetadataDocument.png)
 
-* Yeni uygulama kaydına gidin. **Ayarlar** > **Özellikler** ' e tıklayın ve **uygulama kimliği URI**'sini unutmayın. Bu, WS-Federation ara yazılımı ' `Wtrealm`dır:
+* Yeni uygulama kaydına gidin. **BIR API 'Yi kullanıma**sunma ' ya tıklayın. Uygulama kimliği URI 'si **ayarlama**  >  **Kaydet**' e tıklayın. **Uygulama KIMLIĞI URI**'sini bir yere getirin. Bu, WS-Federation ara yazılımı ' dır `Wtrealm` :
 
 ![Azure Active Directory: uygulama kaydı özellikleri](ws-federation/_static/AadAppIdUri.png)
 
 ## <a name="use-ws-federation-without-aspnet-core-identity"></a>ASP.NET Core olmadan WS-Federation kullanınIdentity
 
-WS-Federation ara yazılımı, olmadan Identitykullanılabilir. Örneğin:
+WS-Federation ara yazılımı, olmadan kullanılabilir Identity . Örneğin:
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](ws-federation/samples/StartupNon31.cs?name=snippet)]
 ::: moniker-end
@@ -100,7 +100,7 @@ WS-Federation ara yazılımı, olmadan Identitykullanılabilir. Örneğin:
 ## <a name="add-ws-federation-as-an-external-login-provider-for-aspnet-core-identity"></a>WS-Federation ' i ASP.NET Core için dış oturum açma sağlayıcısı olarak ekleyinIdentity
 
 * Projeye [Microsoft. AspNetCore. Authentication. WsFederation](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation) bağımlılığı ekleyin.
-* WS-Federation Ekle `Startup.ConfigureServices`:
+* WS-Federation Ekle `Startup.ConfigureServices` :
 
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](ws-federation/samples/Startup31.cs?name=snippet)]
@@ -114,10 +114,10 @@ WS-Federation ara yazılımı, olmadan Identitykullanılabilir. Örneğin:
 
 ### <a name="log-in-with-ws-federation"></a>WS-Federation ile oturum açma
 
-Uygulamaya gidin ve NAV üstbilgisindeki **oturum aç** bağlantısına tıklayın. WsFederation: ![oturum açma sayfasında oturum açma seçeneği vardır](ws-federation/_static/WsFederationButton.png)
+Uygulamaya gidin ve NAV üstbilgisindeki **oturum aç** bağlantısına tıklayın. WsFederation: oturum açma sayfasında oturum açma seçeneği vardır ![](ws-federation/_static/WsFederationButton.png)
 
-Sağlayıcı olarak ADFS ile, düğme bir ADFS oturum açma sayfasına yönlendirir: ![ADFS oturum açma sayfası](ws-federation/_static/AdfsLoginPage.png)
+Sağlayıcı olarak ADFS ile, düğme bir ADFS oturum açma sayfasına yönlendirir: ![ ADFS oturum açma sayfası](ws-federation/_static/AdfsLoginPage.png)
 
-Sağlayıcı olarak Azure Active Directory, düğme bir AAD oturum açma sayfasına yeniden yönlendirir: ![AAD oturum açma sayfası](ws-federation/_static/AadSignIn.png)
+Sağlayıcı olarak Azure Active Directory, düğme bir AAD oturum açma sayfasına yeniden yönlendirir: ![ AAD oturum açma sayfası](ws-federation/_static/AadSignIn.png)
 
-Yeni bir kullanıcı için başarılı bir oturum açma işlemi, uygulamanın kullanıcı kayıt sayfasına yeniden yönlendiriliyor: ![kayıt sayfası](ws-federation/_static/Register.png)
+Yeni bir kullanıcı için başarılı bir oturum açma işlemi, uygulamanın kullanıcı kayıt sayfasına yeniden yönlendiriliyor: ![ kayıt sayfası](ws-federation/_static/Register.png)

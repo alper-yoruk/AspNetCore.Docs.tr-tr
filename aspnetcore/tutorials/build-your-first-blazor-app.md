@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: 2de33deccbb86bd810c4337f5aa105118de4d9b4
-ms.sourcegitcommit: 77729ba225d5143c0e3954db005906f4a5c7da95
+ms.openlocfilehash: 892663a533a207df84b0fce9af259a7dc212bc9b
+ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2020
-ms.locfileid: "85122158"
+ms.lasthandoff: 06/24/2020
+ms.locfileid: "85292782"
 ---
 # <a name="build-your-first-blazor-app"></a>İlk uygulamanızı oluşturma Blazor
 
@@ -143,7 +143,7 @@ Bir [`@foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) döngü,
 
 Uygulamaya basit bir yapılacaklar listesi uygulayan yeni bir bileşen ekleyin.
 
-1. `Todo` Razor Klasördeki uygulamaya yeni bir bileşen ekleyin `Pages` . Visual Studio kullanıyorsanız, klasöre sağ tıklayın `Pages` ve **Add**  >  **Yeni öğe** Ekle  >  ** Razor bileşeni**' ni seçin. Bileşenin dosyasını adlandırın `Todo.razor` . Diğer geliştirme ortamlarında adlı klasöre boş bir dosya ekleyin `Pages` `Todo.razor` .
+1. `Todo` Razor Klasördeki uygulamaya yeni bir bileşen ekleyin `Pages` . Visual Studio kullanıyorsanız, klasöre sağ tıklayın `Pages` ve **Add**  >  **Yeni öğe** Ekle  >  ** Razor bileşeni**' ni seçin. Bileşenin dosyasını adlandırın `Todo.razor` . Diğer geliştirme ortamlarında adlı klasöre boş bir dosya ekleyin `Pages` `Todo.razor` . Razorbileşen dosyası adları, büyük harfle bir ilk harf gerektirir, bu nedenle `Todo` bileşen dosyası adının büyük harfle başlatıldığını onaylayın `T` .
 
 1. Bileşen için ilk biçimlendirmeyi belirtin:
 

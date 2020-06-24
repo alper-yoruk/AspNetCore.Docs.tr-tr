@@ -13,16 +13,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: 2bdd2f256f456cbf474181021fafc6830bfd68f4
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: 2811e08fd2f6c66112ffa0bb40f474158f4c7a59
+ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242933"
+ms.lasthandoff: 06/24/2020
+ms.locfileid: "85292691"
 ---
 # <a name="secure-aspnet-core-blazor-server-apps"></a>Güvenli ASP.NET Core Blazor Server uygulamaları
 
 [Luke Latham](https://github.com/guardrex) tarafından
+
+BlazorSunucu uygulamaları güvenlik için ASP.NET Core uygulamalarla aynı şekilde yapılandırılır. Daha fazla bilgi için, altındaki makalelere bakın <xref:security/index> . Bu genel bakış altındaki konular sunucuya özel olarak uygulanır Blazor . 
 
 ## <a name="blazor-server-project-template"></a>BlazorSunucu projesi şablonu
 
@@ -104,10 +106,6 @@ Bu `-o|--output` seçeneği kullanarak, komut yer tutucusu için belirtilen değ
 Daha fazla bilgi için [`dotnet new`](/dotnet/core/tools/dotnet-new) .NET Core kılavuzundaki komutuna bakın.
 
 ---
-
-## <a name="secure-an-existing-app"></a>Mevcut bir uygulamanın güvenliğini sağlama
-
-BlazorSunucu uygulamaları güvenlik için ASP.NET Core uygulamalarla aynı şekilde yapılandırılır. Daha fazla bilgi için, altındaki makalelere bakın <xref:security/index> .
 
 ## <a name="scaffold-identity"></a>İskeleIdentity
 

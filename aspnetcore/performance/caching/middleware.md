@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/middleware
-ms.openlocfilehash: 2ee75b1af9ffc23ff9ae1763059364de3ec8f426
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 93ac4e7e159f2b1f031e48a44c2297a741ba7b1c
+ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106513"
+ms.lasthandoff: 06/24/2020
+ms.locfileid: "85292652"
 ---
 # <a name="response-caching-middleware-in-aspnet-core"></a>ASP.NET Core 'de yanıt önbelleğe alma ara yazılımı
 
@@ -40,7 +40,10 @@ Yanıt önbelleğe alma ara yazılımı, paylaşılan Framework aracılığıyla
 
 Uygulamayı, <xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseResponseCaching*> içindeki istek işleme işlem hattına bir ara yazılım ekleyen uzantı yöntemiyle ara yazılımı kullanacak şekilde yapılandırın `Startup.Configure` :
 
-[!code-csharp[](middleware/samples/3.x/ResponseCachingMiddleware/Startup.cs?name=snippet2&highlight=16)]
+[!code-csharp[](middleware/samples/3.x/ResponseCachingMiddleware/Startup.cs?name=snippet2&highlight=17)]
+
+> [!WARNING]
+> <xref:Owin.CorsExtensions.UseCors%2A><xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseResponseCaching%2A> [CORS ara yazılımı](xref:security/cors)kullanılmadan önce çağrılmalıdır.
 
 Örnek uygulama, sonraki isteklerde önbelleğe almayı denetlemek için üstbilgiler ekler:
 
@@ -62,7 +65,7 @@ Yanıt önbelleğe alma ara yazılımı yalnızca 200 (Tamam) durum kodu ile son
 
 Yanıt önbelleğe alma seçenekleri aşağıdaki tabloda gösterilmiştir.
 
-| Seçenek | Açıklama |
+| Seçenek | Description |
 | ------ | ----------- |
 | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.MaximumBodySize> | Yanıt gövdesi için bayt cinsinden en büyük önbelleklenebilir boyut. Varsayılan değer `64 * 1024 * 1024` (64 MB). |
 | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.SizeLimit> | Yanıt önbelleği ara yazılımı için bayt cinsinden boyut sınırı. Varsayılan değer `100 * 1024 * 1024` (100 MB). |
@@ -206,7 +209,7 @@ Yanıt önbelleğe alma ara yazılımı yalnızca 200 (Tamam) durum kodu ile son
 
 Yanıt önbelleğe alma seçenekleri aşağıdaki tabloda gösterilmiştir.
 
-| Seçenek | Açıklama |
+| Seçenek | Description |
 | ------ | ----------- |
 | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.MaximumBodySize> | Yanıt gövdesi için bayt cinsinden en büyük önbelleklenebilir boyut. Varsayılan değer `64 * 1024 * 1024` (64 MB). |
 | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.SizeLimit> | Yanıt önbelleği ara yazılımı için bayt cinsinden boyut sınırı. Varsayılan değer `100 * 1024 * 1024` (100 MB). |
