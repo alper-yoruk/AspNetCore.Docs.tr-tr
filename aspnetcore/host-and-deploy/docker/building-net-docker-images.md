@@ -7,134 +7,136 @@ ms.custom: mvc
 ms.date: 05/12/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: host-and-deploy/docker/building-net-docker-images
-ms.openlocfilehash: 7394cba07109fce5a8718998b4e2a3b5bf752b0b
-ms.sourcegitcommit: e87dfa08fec0be1008249b1be678e5f79dcc5acb
+ms.openlocfilehash: 2b77b4fbb960a8d2dbcb67c3f4f32ba9d9459d78
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83382523"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408090"
 ---
-# <a name="docker-images-for-aspnet-core"></a><span data-ttu-id="56ea9-104">ASP.NET Core için Docker görüntüleri</span><span class="sxs-lookup"><span data-stu-id="56ea9-104">Docker images for ASP.NET Core</span></span>
+# <a name="docker-images-for-aspnet-core"></a><span data-ttu-id="df6ab-104">ASP.NET Core için Docker görüntüleri</span><span class="sxs-lookup"><span data-stu-id="df6ab-104">Docker images for ASP.NET Core</span></span>
 
-<span data-ttu-id="56ea9-105">Bu öğreticide, Docker kapsayıcılarında ASP.NET Core uygulamasının nasıl çalıştırılacağı gösterilmektedir.</span><span class="sxs-lookup"><span data-stu-id="56ea9-105">This tutorial shows how to run an ASP.NET Core app in Docker containers.</span></span>
+<span data-ttu-id="df6ab-105">Bu öğreticide, Docker kapsayıcılarında ASP.NET Core uygulamasının nasıl çalıştırılacağı gösterilmektedir.</span><span class="sxs-lookup"><span data-stu-id="df6ab-105">This tutorial shows how to run an ASP.NET Core app in Docker containers.</span></span>
 
-<span data-ttu-id="56ea9-106">Bu öğreticide şunları yaptınız:</span><span class="sxs-lookup"><span data-stu-id="56ea9-106">In this tutorial, you:</span></span>
+<span data-ttu-id="df6ab-106">Bu öğreticide şunları yaptınız:</span><span class="sxs-lookup"><span data-stu-id="df6ab-106">In this tutorial, you:</span></span>
 > [!div class="checklist"]
-> * <span data-ttu-id="56ea9-107">Microsoft .NET Core Docker görüntüleri hakkında bilgi edinin</span><span class="sxs-lookup"><span data-stu-id="56ea9-107">Learn about Microsoft .NET Core Docker images</span></span>
-> * <span data-ttu-id="56ea9-108">ASP.NET Core örnek uygulaması indirin</span><span class="sxs-lookup"><span data-stu-id="56ea9-108">Download an ASP.NET Core sample app</span></span>
-> * <span data-ttu-id="56ea9-109">Örnek uygulamayı yerel olarak çalıştırma</span><span class="sxs-lookup"><span data-stu-id="56ea9-109">Run the sample app locally</span></span>
-> * <span data-ttu-id="56ea9-110">Linux kapsayıcılarında örnek uygulamayı çalıştırma</span><span class="sxs-lookup"><span data-stu-id="56ea9-110">Run the sample app in Linux containers</span></span>
-> * <span data-ttu-id="56ea9-111">Örnek uygulamayı Windows kapsayıcılarında çalıştırma</span><span class="sxs-lookup"><span data-stu-id="56ea9-111">Run the sample app in Windows containers</span></span>
-> * <span data-ttu-id="56ea9-112">El ile derleyin ve dağıtın</span><span class="sxs-lookup"><span data-stu-id="56ea9-112">Build and deploy manually</span></span>
+> * <span data-ttu-id="df6ab-107">Microsoft .NET Core Docker görüntüleri hakkında bilgi edinin</span><span class="sxs-lookup"><span data-stu-id="df6ab-107">Learn about Microsoft .NET Core Docker images</span></span>
+> * <span data-ttu-id="df6ab-108">ASP.NET Core örnek uygulaması indirin</span><span class="sxs-lookup"><span data-stu-id="df6ab-108">Download an ASP.NET Core sample app</span></span>
+> * <span data-ttu-id="df6ab-109">Örnek uygulamayı yerel olarak çalıştırma</span><span class="sxs-lookup"><span data-stu-id="df6ab-109">Run the sample app locally</span></span>
+> * <span data-ttu-id="df6ab-110">Linux kapsayıcılarında örnek uygulamayı çalıştırma</span><span class="sxs-lookup"><span data-stu-id="df6ab-110">Run the sample app in Linux containers</span></span>
+> * <span data-ttu-id="df6ab-111">Örnek uygulamayı Windows kapsayıcılarında çalıştırma</span><span class="sxs-lookup"><span data-stu-id="df6ab-111">Run the sample app in Windows containers</span></span>
+> * <span data-ttu-id="df6ab-112">El ile derleyin ve dağıtın</span><span class="sxs-lookup"><span data-stu-id="df6ab-112">Build and deploy manually</span></span>
 
-## <a name="aspnet-core-docker-images"></a><span data-ttu-id="56ea9-113">Docker görüntülerini ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="56ea9-113">ASP.NET Core Docker images</span></span>
+## <a name="aspnet-core-docker-images"></a><span data-ttu-id="df6ab-113">Docker görüntülerini ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="df6ab-113">ASP.NET Core Docker images</span></span>
 
-<span data-ttu-id="56ea9-114">Bu öğreticide, ASP.NET Core örnek bir uygulama indirir ve Docker kapsayıcılarında çalıştırırsınız.</span><span class="sxs-lookup"><span data-stu-id="56ea9-114">For this tutorial, you download an ASP.NET Core sample app and run it in Docker containers.</span></span> <span data-ttu-id="56ea9-115">Örnek, hem Linux hem de Windows kapsayıcılarıyla birlikte çalışmaktadır.</span><span class="sxs-lookup"><span data-stu-id="56ea9-115">The sample works with both Linux and Windows containers.</span></span>
+<span data-ttu-id="df6ab-114">Bu öğreticide, ASP.NET Core örnek bir uygulama indirir ve Docker kapsayıcılarında çalıştırırsınız.</span><span class="sxs-lookup"><span data-stu-id="df6ab-114">For this tutorial, you download an ASP.NET Core sample app and run it in Docker containers.</span></span> <span data-ttu-id="df6ab-115">Örnek, hem Linux hem de Windows kapsayıcılarıyla birlikte çalışmaktadır.</span><span class="sxs-lookup"><span data-stu-id="df6ab-115">The sample works with both Linux and Windows containers.</span></span>
 
-<span data-ttu-id="56ea9-116">Örnek Dockerfile, farklı kapsayıcılarda derlemek ve çalıştırmak için [Docker Multi-Stage derleme özelliğini](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) kullanır.</span><span class="sxs-lookup"><span data-stu-id="56ea9-116">The sample Dockerfile uses the [Docker multi-stage build feature](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) to build and run in different containers.</span></span> <span data-ttu-id="56ea9-117">Derleme ve çalıştırma kapsayıcıları, Docker Hub 'ında Microsoft tarafından sunulan görüntülerden oluşturulur:</span><span class="sxs-lookup"><span data-stu-id="56ea9-117">The build and run containers are created from images that are provided in Docker Hub by Microsoft:</span></span>
+<span data-ttu-id="df6ab-116">Örnek Dockerfile, farklı kapsayıcılarda derlemek ve çalıştırmak için [Docker Multi-Stage derleme özelliğini](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) kullanır.</span><span class="sxs-lookup"><span data-stu-id="df6ab-116">The sample Dockerfile uses the [Docker multi-stage build feature](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) to build and run in different containers.</span></span> <span data-ttu-id="df6ab-117">Derleme ve çalıştırma kapsayıcıları, Docker Hub 'ında Microsoft tarafından sunulan görüntülerden oluşturulur:</span><span class="sxs-lookup"><span data-stu-id="df6ab-117">The build and run containers are created from images that are provided in Docker Hub by Microsoft:</span></span>
 
 * `dotnet/core/sdk`
 
-  <span data-ttu-id="56ea9-118">Örnek, uygulamayı oluşturmak için bu görüntüyü kullanır.</span><span class="sxs-lookup"><span data-stu-id="56ea9-118">The sample uses this image for building the app.</span></span> <span data-ttu-id="56ea9-119">Görüntü, komut satırı araçlarını (CLı) içeren .NET Core SDK içerir.</span><span class="sxs-lookup"><span data-stu-id="56ea9-119">The image contains the .NET Core SDK, which includes the Command Line Tools (CLI).</span></span> <span data-ttu-id="56ea9-120">Görüntü yerel geliştirme, hata ayıklama ve birim testi için iyileştirilmiştir.</span><span class="sxs-lookup"><span data-stu-id="56ea9-120">The image is optimized for local development, debugging, and unit testing.</span></span> <span data-ttu-id="56ea9-121">Geliştirme ve derleme için yüklenen araçlar bunu görece büyük bir görüntü haline getirir.</span><span class="sxs-lookup"><span data-stu-id="56ea9-121">The tools installed for development and compilation make this a relatively large image.</span></span> 
+  <span data-ttu-id="df6ab-118">Örnek, uygulamayı oluşturmak için bu görüntüyü kullanır.</span><span class="sxs-lookup"><span data-stu-id="df6ab-118">The sample uses this image for building the app.</span></span> <span data-ttu-id="df6ab-119">Görüntü, komut satırı araçlarını (CLı) içeren .NET Core SDK içerir.</span><span class="sxs-lookup"><span data-stu-id="df6ab-119">The image contains the .NET Core SDK, which includes the Command Line Tools (CLI).</span></span> <span data-ttu-id="df6ab-120">Görüntü yerel geliştirme, hata ayıklama ve birim testi için iyileştirilmiştir.</span><span class="sxs-lookup"><span data-stu-id="df6ab-120">The image is optimized for local development, debugging, and unit testing.</span></span> <span data-ttu-id="df6ab-121">Geliştirme ve derleme için yüklenen araçlar bunu görece büyük bir görüntü haline getirir.</span><span class="sxs-lookup"><span data-stu-id="df6ab-121">The tools installed for development and compilation make this a relatively large image.</span></span> 
 
 * `dotnet/core/aspnet`
 
-   <span data-ttu-id="56ea9-122">Örnek, uygulamayı çalıştırmak için bu görüntüyü kullanır.</span><span class="sxs-lookup"><span data-stu-id="56ea9-122">The sample uses this image for running the app.</span></span> <span data-ttu-id="56ea9-123">Görüntü, ASP.NET Core çalışma zamanını ve kitaplıklarını içerir ve üretimde uygulamaları çalıştırmak için iyileştirilmiştir.</span><span class="sxs-lookup"><span data-stu-id="56ea9-123">The image contains the ASP.NET Core runtime and libraries and is optimized for running apps in production.</span></span> <span data-ttu-id="56ea9-124">Dağıtım ve uygulama başlatma hızı için tasarlanan görüntü görece küçüktür, bu nedenle Docker kayıt defterinden Docker ana bilgisayarına ağ performansı en iyi duruma getirilmiştir.</span><span class="sxs-lookup"><span data-stu-id="56ea9-124">Designed for speed of deployment and app startup, the image is relatively small, so network performance from Docker Registry to Docker host is optimized.</span></span> <span data-ttu-id="56ea9-125">Yalnızca bir uygulamayı çalıştırmak için gereken ikili dosyalar ve içerikler kapsayıcıya kopyalanır.</span><span class="sxs-lookup"><span data-stu-id="56ea9-125">Only the binaries and content needed to run an app are copied to the container.</span></span> <span data-ttu-id="56ea9-126">İçerik çalıştırılmaya hazırlanmaya, en hızlı süreyi uygulama başlatmaya kadar etkinleştirir `Docker run` .</span><span class="sxs-lookup"><span data-stu-id="56ea9-126">The contents are ready to run, enabling the fastest time from `Docker run` to app startup.</span></span> <span data-ttu-id="56ea9-127">Docker modelinde dinamik kod derlemesi gerekli değildir.</span><span class="sxs-lookup"><span data-stu-id="56ea9-127">Dynamic code compilation isn't needed in the Docker model.</span></span>
+   <span data-ttu-id="df6ab-122">Örnek, uygulamayı çalıştırmak için bu görüntüyü kullanır.</span><span class="sxs-lookup"><span data-stu-id="df6ab-122">The sample uses this image for running the app.</span></span> <span data-ttu-id="df6ab-123">Görüntü, ASP.NET Core çalışma zamanını ve kitaplıklarını içerir ve üretimde uygulamaları çalıştırmak için iyileştirilmiştir.</span><span class="sxs-lookup"><span data-stu-id="df6ab-123">The image contains the ASP.NET Core runtime and libraries and is optimized for running apps in production.</span></span> <span data-ttu-id="df6ab-124">Dağıtım ve uygulama başlatma hızı için tasarlanan görüntü görece küçüktür, bu nedenle Docker kayıt defterinden Docker ana bilgisayarına ağ performansı en iyi duruma getirilmiştir.</span><span class="sxs-lookup"><span data-stu-id="df6ab-124">Designed for speed of deployment and app startup, the image is relatively small, so network performance from Docker Registry to Docker host is optimized.</span></span> <span data-ttu-id="df6ab-125">Yalnızca bir uygulamayı çalıştırmak için gereken ikili dosyalar ve içerikler kapsayıcıya kopyalanır.</span><span class="sxs-lookup"><span data-stu-id="df6ab-125">Only the binaries and content needed to run an app are copied to the container.</span></span> <span data-ttu-id="df6ab-126">İçerik çalıştırılmaya hazırlanmaya, en hızlı süreyi uygulama başlatmaya kadar etkinleştirir `Docker run` .</span><span class="sxs-lookup"><span data-stu-id="df6ab-126">The contents are ready to run, enabling the fastest time from `Docker run` to app startup.</span></span> <span data-ttu-id="df6ab-127">Docker modelinde dinamik kod derlemesi gerekli değildir.</span><span class="sxs-lookup"><span data-stu-id="df6ab-127">Dynamic code compilation isn't needed in the Docker model.</span></span>
 
-## <a name="prerequisites"></a><span data-ttu-id="56ea9-128">Ön koşullar</span><span class="sxs-lookup"><span data-stu-id="56ea9-128">Prerequisites</span></span>
+## <a name="prerequisites"></a><span data-ttu-id="df6ab-128">Ön koşullar</span><span class="sxs-lookup"><span data-stu-id="df6ab-128">Prerequisites</span></span>
 ::: moniker range="< aspnetcore-3.0"
 
-* [<span data-ttu-id="56ea9-129">.NET Core 2,2 SDK</span><span class="sxs-lookup"><span data-stu-id="56ea9-129">.NET Core 2.2 SDK</span></span>](https://dotnet.microsoft.com/download/dotnet-core)
+* [<span data-ttu-id="df6ab-129">.NET Core 2,2 SDK</span><span class="sxs-lookup"><span data-stu-id="df6ab-129">.NET Core 2.2 SDK</span></span>](https://dotnet.microsoft.com/download/dotnet-core)
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-3.0"
 
-* [<span data-ttu-id="56ea9-130">.NET Core SDK 3,0</span><span class="sxs-lookup"><span data-stu-id="56ea9-130">.NET Core SDK 3.0</span></span>](https://dotnet.microsoft.com/download)
+* [<span data-ttu-id="df6ab-130">.NET Core SDK 3,0</span><span class="sxs-lookup"><span data-stu-id="df6ab-130">.NET Core SDK 3.0</span></span>](https://dotnet.microsoft.com/download)
 
 ::: moniker-end
 
-* <span data-ttu-id="56ea9-131">Docker Client 18,03 veya üzeri</span><span class="sxs-lookup"><span data-stu-id="56ea9-131">Docker client 18.03 or later</span></span>
+* <span data-ttu-id="df6ab-131">Docker Client 18,03 veya üzeri</span><span class="sxs-lookup"><span data-stu-id="df6ab-131">Docker client 18.03 or later</span></span>
 
-  * <span data-ttu-id="56ea9-132">Linux dağıtımları</span><span class="sxs-lookup"><span data-stu-id="56ea9-132">Linux distributions</span></span>
-    * [<span data-ttu-id="56ea9-133">CentOS</span><span class="sxs-lookup"><span data-stu-id="56ea9-133">CentOS</span></span>](https://docs.docker.com/install/linux/docker-ce/centos/)
-    * [<span data-ttu-id="56ea9-134">Debian</span><span class="sxs-lookup"><span data-stu-id="56ea9-134">Debian</span></span>](https://docs.docker.com/install/linux/docker-ce/debian/)
-    * [<span data-ttu-id="56ea9-135">Fedora</span><span class="sxs-lookup"><span data-stu-id="56ea9-135">Fedora</span></span>](https://docs.docker.com/install/linux/docker-ce/fedora/)
-    * [<span data-ttu-id="56ea9-136">Ubuntu</span><span class="sxs-lookup"><span data-stu-id="56ea9-136">Ubuntu</span></span>](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
-  * [<span data-ttu-id="56ea9-137">macOS</span><span class="sxs-lookup"><span data-stu-id="56ea9-137">macOS</span></span>](https://docs.docker.com/docker-for-mac/install/)
-  * [<span data-ttu-id="56ea9-138">Windows</span><span class="sxs-lookup"><span data-stu-id="56ea9-138">Windows</span></span>](https://docs.docker.com/docker-for-windows/install/)
+  * <span data-ttu-id="df6ab-132">Linux dağıtımları</span><span class="sxs-lookup"><span data-stu-id="df6ab-132">Linux distributions</span></span>
+    * [<span data-ttu-id="df6ab-133">CentOS</span><span class="sxs-lookup"><span data-stu-id="df6ab-133">CentOS</span></span>](https://docs.docker.com/install/linux/docker-ce/centos/)
+    * [<span data-ttu-id="df6ab-134">Debian</span><span class="sxs-lookup"><span data-stu-id="df6ab-134">Debian</span></span>](https://docs.docker.com/install/linux/docker-ce/debian/)
+    * [<span data-ttu-id="df6ab-135">Fedora</span><span class="sxs-lookup"><span data-stu-id="df6ab-135">Fedora</span></span>](https://docs.docker.com/install/linux/docker-ce/fedora/)
+    * [<span data-ttu-id="df6ab-136">Ubuntu</span><span class="sxs-lookup"><span data-stu-id="df6ab-136">Ubuntu</span></span>](https://docs.docker.com/install/linux/docker-ce/ubuntu/)
+  * [<span data-ttu-id="df6ab-137">macOS</span><span class="sxs-lookup"><span data-stu-id="df6ab-137">macOS</span></span>](https://docs.docker.com/docker-for-mac/install/)
+  * [<span data-ttu-id="df6ab-138">Windows</span><span class="sxs-lookup"><span data-stu-id="df6ab-138">Windows</span></span>](https://docs.docker.com/docker-for-windows/install/)
 
-* [<span data-ttu-id="56ea9-139">Git</span><span class="sxs-lookup"><span data-stu-id="56ea9-139">Git</span></span>](https://git-scm.com/download)
+* [<span data-ttu-id="df6ab-139">Git</span><span class="sxs-lookup"><span data-stu-id="df6ab-139">Git</span></span>](https://git-scm.com/download)
 
-## <a name="download-the-sample-app"></a><span data-ttu-id="56ea9-140">Örnek uygulamayı indirme</span><span class="sxs-lookup"><span data-stu-id="56ea9-140">Download the sample app</span></span>
+## <a name="download-the-sample-app"></a><span data-ttu-id="df6ab-140">Örnek uygulamayı indirme</span><span class="sxs-lookup"><span data-stu-id="df6ab-140">Download the sample app</span></span>
 
-* <span data-ttu-id="56ea9-141">[.NET Core Docker deposunu](https://github.com/dotnet/dotnet-docker)kopyalayarak örneği indirin:</span><span class="sxs-lookup"><span data-stu-id="56ea9-141">Download the sample by cloning the [.NET Core Docker repository](https://github.com/dotnet/dotnet-docker):</span></span> 
+* <span data-ttu-id="df6ab-141">[.NET Core Docker deposunu](https://github.com/dotnet/dotnet-docker)kopyalayarak örneği indirin:</span><span class="sxs-lookup"><span data-stu-id="df6ab-141">Download the sample by cloning the [.NET Core Docker repository](https://github.com/dotnet/dotnet-docker):</span></span> 
 
   ```console
   git clone https://github.com/dotnet/dotnet-docker
   ```
 
-## <a name="run-the-app-locally"></a><span data-ttu-id="56ea9-142">Uygulamayı yerel olarak çalıştırma</span><span class="sxs-lookup"><span data-stu-id="56ea9-142">Run the app locally</span></span>
+## <a name="run-the-app-locally"></a><span data-ttu-id="df6ab-142">Uygulamayı yerel olarak çalıştırma</span><span class="sxs-lookup"><span data-stu-id="df6ab-142">Run the app locally</span></span>
 
-* <span data-ttu-id="56ea9-143">*DotNet-Docker/Samples/aspnetapp/aspnetapp*konumundaki proje klasörüne gidin.</span><span class="sxs-lookup"><span data-stu-id="56ea9-143">Navigate to the project folder at *dotnet-docker/samples/aspnetapp/aspnetapp*.</span></span>
+* <span data-ttu-id="df6ab-143">*DotNet-Docker/Samples/aspnetapp/aspnetapp*konumundaki proje klasörüne gidin.</span><span class="sxs-lookup"><span data-stu-id="df6ab-143">Navigate to the project folder at *dotnet-docker/samples/aspnetapp/aspnetapp*.</span></span>
 
-* <span data-ttu-id="56ea9-144">Uygulamayı yerel olarak derlemek ve çalıştırmak için aşağıdaki komutu çalıştırın:</span><span class="sxs-lookup"><span data-stu-id="56ea9-144">Run the following command to build and run the app locally:</span></span>
+* <span data-ttu-id="df6ab-144">Uygulamayı yerel olarak derlemek ve çalıştırmak için aşağıdaki komutu çalıştırın:</span><span class="sxs-lookup"><span data-stu-id="df6ab-144">Run the following command to build and run the app locally:</span></span>
 
   ```dotnetcli
   dotnet run
   ```
 
-* <span data-ttu-id="56ea9-145">`http://localhost:5000`Uygulamayı test etmek için bir tarayıcıda adresine gidin.</span><span class="sxs-lookup"><span data-stu-id="56ea9-145">Go to `http://localhost:5000` in a browser to test the app.</span></span>
+* <span data-ttu-id="df6ab-145">`http://localhost:5000`Uygulamayı test etmek için bir tarayıcıda adresine gidin.</span><span class="sxs-lookup"><span data-stu-id="df6ab-145">Go to `http://localhost:5000` in a browser to test the app.</span></span>
 
-* <span data-ttu-id="56ea9-146">Uygulamayı durdurmak için komut isteminde CTRL + C tuşlarına basın.</span><span class="sxs-lookup"><span data-stu-id="56ea9-146">Press Ctrl+C at the command prompt to stop the app.</span></span>
+* <span data-ttu-id="df6ab-146">Uygulamayı durdurmak için komut isteminde CTRL + C tuşlarına basın.</span><span class="sxs-lookup"><span data-stu-id="df6ab-146">Press Ctrl+C at the command prompt to stop the app.</span></span>
 
-## <a name="run-in-a-linux-container"></a><span data-ttu-id="56ea9-147">Linux kapsayıcısında çalıştırma</span><span class="sxs-lookup"><span data-stu-id="56ea9-147">Run in a Linux container</span></span>
+## <a name="run-in-a-linux-container"></a><span data-ttu-id="df6ab-147">Linux kapsayıcısında çalıştırma</span><span class="sxs-lookup"><span data-stu-id="df6ab-147">Run in a Linux container</span></span>
 
-* <span data-ttu-id="56ea9-148">Docker istemcisinde Linux kapsayıcıları ' na geçin.</span><span class="sxs-lookup"><span data-stu-id="56ea9-148">In the Docker client, switch to Linux containers.</span></span>
+* <span data-ttu-id="df6ab-148">Docker istemcisinde Linux kapsayıcıları ' na geçin.</span><span class="sxs-lookup"><span data-stu-id="df6ab-148">In the Docker client, switch to Linux containers.</span></span>
 
-* <span data-ttu-id="56ea9-149">*DotNet-Docker/Samples/aspnetapp*konumundaki Dockerfile klasörüne gidin.</span><span class="sxs-lookup"><span data-stu-id="56ea9-149">Navigate to the Dockerfile folder at *dotnet-docker/samples/aspnetapp*.</span></span>
+* <span data-ttu-id="df6ab-149">*DotNet-Docker/Samples/aspnetapp*konumundaki Dockerfile klasörüne gidin.</span><span class="sxs-lookup"><span data-stu-id="df6ab-149">Navigate to the Dockerfile folder at *dotnet-docker/samples/aspnetapp*.</span></span>
 
-* <span data-ttu-id="56ea9-150">Örneği Docker 'da derlemek ve çalıştırmak için aşağıdaki komutları çalıştırın:</span><span class="sxs-lookup"><span data-stu-id="56ea9-150">Run the following commands to build and run the sample in Docker:</span></span>
+* <span data-ttu-id="df6ab-150">Örneği Docker 'da derlemek ve çalıştırmak için aşağıdaki komutları çalıştırın:</span><span class="sxs-lookup"><span data-stu-id="df6ab-150">Run the following commands to build and run the sample in Docker:</span></span>
 
   ```console
   docker build -t aspnetapp .
   docker run -it --rm -p 5000:80 --name aspnetcore_sample aspnetapp
   ```
 
-  <span data-ttu-id="56ea9-151">`build`Komut bağımsız değişkenleri:</span><span class="sxs-lookup"><span data-stu-id="56ea9-151">The `build` command arguments:</span></span>
-  * <span data-ttu-id="56ea9-152">Görüntüyü aspnetapp olarak adlandırın.</span><span class="sxs-lookup"><span data-stu-id="56ea9-152">Name the image aspnetapp.</span></span>
-  * <span data-ttu-id="56ea9-153">Geçerli klasörde Dockerfile dosyasını arayın (sonundaki süre).</span><span class="sxs-lookup"><span data-stu-id="56ea9-153">Look for the Dockerfile in the current folder (the period at the end).</span></span>
+  <span data-ttu-id="df6ab-151">`build`Komut bağımsız değişkenleri:</span><span class="sxs-lookup"><span data-stu-id="df6ab-151">The `build` command arguments:</span></span>
+  * <span data-ttu-id="df6ab-152">Görüntüyü aspnetapp olarak adlandırın.</span><span class="sxs-lookup"><span data-stu-id="df6ab-152">Name the image aspnetapp.</span></span>
+  * <span data-ttu-id="df6ab-153">Geçerli klasörde Dockerfile dosyasını arayın (sonundaki süre).</span><span class="sxs-lookup"><span data-stu-id="df6ab-153">Look for the Dockerfile in the current folder (the period at the end).</span></span>
 
-  <span data-ttu-id="56ea9-154">Run komutu bağımsız değişkenleri:</span><span class="sxs-lookup"><span data-stu-id="56ea9-154">The run command arguments:</span></span>
-  * <span data-ttu-id="56ea9-155">Bir sözde TTY ayırın ve ekli olmasa bile açık tutun.</span><span class="sxs-lookup"><span data-stu-id="56ea9-155">Allocate a pseudo-TTY and keep it open even if not attached.</span></span> <span data-ttu-id="56ea9-156">(İle aynı efekt `--interactive --tty` )</span><span class="sxs-lookup"><span data-stu-id="56ea9-156">(Same effect as `--interactive --tty`.)</span></span>
-  * <span data-ttu-id="56ea9-157">Kapsayıcıyı çıkış sırasında otomatik olarak kaldır.</span><span class="sxs-lookup"><span data-stu-id="56ea9-157">Automatically remove the container when it exits.</span></span>
-  * <span data-ttu-id="56ea9-158">Yerel makinedeki 5000 numaralı bağlantı noktasını kapsayıcıda 80 numaralı bağlantı noktasına eşleyin.</span><span class="sxs-lookup"><span data-stu-id="56ea9-158">Map port 5000 on the local machine to port 80 in the container.</span></span>
-  * <span data-ttu-id="56ea9-159">Kapsayıcının aspnetcore_sample adı.</span><span class="sxs-lookup"><span data-stu-id="56ea9-159">Name the container aspnetcore_sample.</span></span>
-  * <span data-ttu-id="56ea9-160">Aspnetapp görüntüsünü belirtin.</span><span class="sxs-lookup"><span data-stu-id="56ea9-160">Specify the aspnetapp image.</span></span>
+  <span data-ttu-id="df6ab-154">Run komutu bağımsız değişkenleri:</span><span class="sxs-lookup"><span data-stu-id="df6ab-154">The run command arguments:</span></span>
+  * <span data-ttu-id="df6ab-155">Bir sözde TTY ayırın ve ekli olmasa bile açık tutun.</span><span class="sxs-lookup"><span data-stu-id="df6ab-155">Allocate a pseudo-TTY and keep it open even if not attached.</span></span> <span data-ttu-id="df6ab-156">(İle aynı efekt `--interactive --tty` )</span><span class="sxs-lookup"><span data-stu-id="df6ab-156">(Same effect as `--interactive --tty`.)</span></span>
+  * <span data-ttu-id="df6ab-157">Kapsayıcıyı çıkış sırasında otomatik olarak kaldır.</span><span class="sxs-lookup"><span data-stu-id="df6ab-157">Automatically remove the container when it exits.</span></span>
+  * <span data-ttu-id="df6ab-158">Yerel makinedeki 5000 numaralı bağlantı noktasını kapsayıcıda 80 numaralı bağlantı noktasına eşleyin.</span><span class="sxs-lookup"><span data-stu-id="df6ab-158">Map port 5000 on the local machine to port 80 in the container.</span></span>
+  * <span data-ttu-id="df6ab-159">Kapsayıcının aspnetcore_sample adı.</span><span class="sxs-lookup"><span data-stu-id="df6ab-159">Name the container aspnetcore_sample.</span></span>
+  * <span data-ttu-id="df6ab-160">Aspnetapp görüntüsünü belirtin.</span><span class="sxs-lookup"><span data-stu-id="df6ab-160">Specify the aspnetapp image.</span></span>
 
-* <span data-ttu-id="56ea9-161">`http://localhost:5000`Uygulamayı test etmek için bir tarayıcıda adresine gidin.</span><span class="sxs-lookup"><span data-stu-id="56ea9-161">Go to `http://localhost:5000` in a browser to test the app.</span></span>
+* <span data-ttu-id="df6ab-161">`http://localhost:5000`Uygulamayı test etmek için bir tarayıcıda adresine gidin.</span><span class="sxs-lookup"><span data-stu-id="df6ab-161">Go to `http://localhost:5000` in a browser to test the app.</span></span>
 
-## <a name="run-in-a-windows-container"></a><span data-ttu-id="56ea9-162">Bir Windows kapsayıcısında Çalıştır</span><span class="sxs-lookup"><span data-stu-id="56ea9-162">Run in a Windows container</span></span>
+## <a name="run-in-a-windows-container"></a><span data-ttu-id="df6ab-162">Bir Windows kapsayıcısında Çalıştır</span><span class="sxs-lookup"><span data-stu-id="df6ab-162">Run in a Windows container</span></span>
 
-* <span data-ttu-id="56ea9-163">Docker istemcisinde Windows kapsayıcıları ' na geçin.</span><span class="sxs-lookup"><span data-stu-id="56ea9-163">In the Docker client, switch to Windows containers.</span></span>
+* <span data-ttu-id="df6ab-163">Docker istemcisinde Windows kapsayıcıları ' na geçin.</span><span class="sxs-lookup"><span data-stu-id="df6ab-163">In the Docker client, switch to Windows containers.</span></span>
 
-<span data-ttu-id="56ea9-164">Konumundaki Docker dosya klasörüne gidin `dotnet-docker/samples/aspnetapp` .</span><span class="sxs-lookup"><span data-stu-id="56ea9-164">Navigate to the docker file folder at `dotnet-docker/samples/aspnetapp`.</span></span>
+<span data-ttu-id="df6ab-164">Konumundaki Docker dosya klasörüne gidin `dotnet-docker/samples/aspnetapp` .</span><span class="sxs-lookup"><span data-stu-id="df6ab-164">Navigate to the docker file folder at `dotnet-docker/samples/aspnetapp`.</span></span>
 
-* <span data-ttu-id="56ea9-165">Örneği Docker 'da derlemek ve çalıştırmak için aşağıdaki komutları çalıştırın:</span><span class="sxs-lookup"><span data-stu-id="56ea9-165">Run the following commands to build and run the sample in Docker:</span></span>
+* <span data-ttu-id="df6ab-165">Örneği Docker 'da derlemek ve çalıştırmak için aşağıdaki komutları çalıştırın:</span><span class="sxs-lookup"><span data-stu-id="df6ab-165">Run the following commands to build and run the sample in Docker:</span></span>
 
   ```console
   docker build -t aspnetapp .
   docker run -it --rm --name aspnetcore_sample aspnetapp
   ```
 
-* <span data-ttu-id="56ea9-166">Windows kapsayıcıları için kapsayıcının IP adresi gerekir (Bu işe göz atma `http://localhost:5000` çalışmayacak):</span><span class="sxs-lookup"><span data-stu-id="56ea9-166">For Windows containers, you need the IP address of the container (browsing to `http://localhost:5000` won't work):</span></span>
-  * <span data-ttu-id="56ea9-167">Başka bir komut istemi açın.</span><span class="sxs-lookup"><span data-stu-id="56ea9-167">Open up another command prompt.</span></span>
-  * <span data-ttu-id="56ea9-168">`docker ps`Çalışan kapsayıcıları görmek için ' i çalıştırın.</span><span class="sxs-lookup"><span data-stu-id="56ea9-168">Run `docker ps` to see the running containers.</span></span> <span data-ttu-id="56ea9-169">"Aspnetcore_sample" kapsayıcısının orada olduğunu doğrulayın.</span><span class="sxs-lookup"><span data-stu-id="56ea9-169">Verify that the "aspnetcore_sample" container is there.</span></span>
-  * <span data-ttu-id="56ea9-170">`docker exec aspnetcore_sample ipconfig`KAPSAYıCıNıN IP adresini göstermek için öğesini çalıştırın.</span><span class="sxs-lookup"><span data-stu-id="56ea9-170">Run `docker exec aspnetcore_sample ipconfig` to display the IP address of the container.</span></span> <span data-ttu-id="56ea9-171">Komutun çıktısı şu örneğe benzer şekilde görünür:</span><span class="sxs-lookup"><span data-stu-id="56ea9-171">The output from the command looks like this example:</span></span>
+* <span data-ttu-id="df6ab-166">Windows kapsayıcıları için kapsayıcının IP adresi gerekir (Bu işe göz atma `http://localhost:5000` çalışmayacak):</span><span class="sxs-lookup"><span data-stu-id="df6ab-166">For Windows containers, you need the IP address of the container (browsing to `http://localhost:5000` won't work):</span></span>
+  * <span data-ttu-id="df6ab-167">Başka bir komut istemi açın.</span><span class="sxs-lookup"><span data-stu-id="df6ab-167">Open up another command prompt.</span></span>
+  * <span data-ttu-id="df6ab-168">`docker ps`Çalışan kapsayıcıları görmek için ' i çalıştırın.</span><span class="sxs-lookup"><span data-stu-id="df6ab-168">Run `docker ps` to see the running containers.</span></span> <span data-ttu-id="df6ab-169">"Aspnetcore_sample" kapsayıcısının orada olduğunu doğrulayın.</span><span class="sxs-lookup"><span data-stu-id="df6ab-169">Verify that the "aspnetcore_sample" container is there.</span></span>
+  * <span data-ttu-id="df6ab-170">`docker exec aspnetcore_sample ipconfig`KAPSAYıCıNıN IP adresini göstermek için öğesini çalıştırın.</span><span class="sxs-lookup"><span data-stu-id="df6ab-170">Run `docker exec aspnetcore_sample ipconfig` to display the IP address of the container.</span></span> <span data-ttu-id="df6ab-171">Komutun çıktısı şu örneğe benzer şekilde görünür:</span><span class="sxs-lookup"><span data-stu-id="df6ab-171">The output from the command looks like this example:</span></span>
 
     ```console
     Ethernet adapter Ethernet:
@@ -146,41 +148,41 @@ ms.locfileid: "83382523"
        Default Gateway . . . . . . . . . : 172.29.240.1
     ```
 
-* <span data-ttu-id="56ea9-172">Kapsayıcı IPv4 adresini (örneğin, 172.29.245.43) kopyalayın ve uygulamayı test etmek için tarayıcı adres çubuğuna yapıştırın.</span><span class="sxs-lookup"><span data-stu-id="56ea9-172">Copy the container IPv4 address (for example, 172.29.245.43) and paste into the browser address bar to test the app.</span></span>
+* <span data-ttu-id="df6ab-172">Kapsayıcı IPv4 adresini (örneğin, 172.29.245.43) kopyalayın ve uygulamayı test etmek için tarayıcı adres çubuğuna yapıştırın.</span><span class="sxs-lookup"><span data-stu-id="df6ab-172">Copy the container IPv4 address (for example, 172.29.245.43) and paste into the browser address bar to test the app.</span></span>
 
-## <a name="build-and-deploy-manually"></a><span data-ttu-id="56ea9-173">El ile derleyin ve dağıtın</span><span class="sxs-lookup"><span data-stu-id="56ea9-173">Build and deploy manually</span></span>
+## <a name="build-and-deploy-manually"></a><span data-ttu-id="df6ab-173">El ile derleyin ve dağıtın</span><span class="sxs-lookup"><span data-stu-id="df6ab-173">Build and deploy manually</span></span>
 
-<span data-ttu-id="56ea9-174">Bazı senaryolarda, çalışma zamanında gerekli olan uygulama dosyalarını kopyalayarak bir kapsayıcıya uygulama dağıtmak isteyebilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="56ea9-174">In some scenarios, you might want to deploy an app to a container by copying to it the application files that are needed at run time.</span></span> <span data-ttu-id="56ea9-175">Bu bölümde nasıl el ile dağıtım yapılacağı gösterilmektedir.</span><span class="sxs-lookup"><span data-stu-id="56ea9-175">This section shows how to deploy manually.</span></span>
+<span data-ttu-id="df6ab-174">Bazı senaryolarda, çalışma zamanında gerekli olan uygulama dosyalarını kopyalayarak bir kapsayıcıya uygulama dağıtmak isteyebilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="df6ab-174">In some scenarios, you might want to deploy an app to a container by copying to it the application files that are needed at run time.</span></span> <span data-ttu-id="df6ab-175">Bu bölümde nasıl el ile dağıtım yapılacağı gösterilmektedir.</span><span class="sxs-lookup"><span data-stu-id="df6ab-175">This section shows how to deploy manually.</span></span>
 
-* <span data-ttu-id="56ea9-176">*DotNet-Docker/Samples/aspnetapp/aspnetapp*konumundaki proje klasörüne gidin.</span><span class="sxs-lookup"><span data-stu-id="56ea9-176">Navigate to the project folder at *dotnet-docker/samples/aspnetapp/aspnetapp*.</span></span>
+* <span data-ttu-id="df6ab-176">*DotNet-Docker/Samples/aspnetapp/aspnetapp*konumundaki proje klasörüne gidin.</span><span class="sxs-lookup"><span data-stu-id="df6ab-176">Navigate to the project folder at *dotnet-docker/samples/aspnetapp/aspnetapp*.</span></span>
 
-* <span data-ttu-id="56ea9-177">[DotNet Publish](/dotnet/core/tools/dotnet-publish) komutunu çalıştırın:</span><span class="sxs-lookup"><span data-stu-id="56ea9-177">Run the [dotnet publish](/dotnet/core/tools/dotnet-publish) command:</span></span>
+* <span data-ttu-id="df6ab-177">[DotNet Publish](/dotnet/core/tools/dotnet-publish) komutunu çalıştırın:</span><span class="sxs-lookup"><span data-stu-id="df6ab-177">Run the [dotnet publish](/dotnet/core/tools/dotnet-publish) command:</span></span>
 
   ```dotnetcli
   dotnet publish -c Release -o published
   ```
 
-  <span data-ttu-id="56ea9-178">Komut bağımsız değişkenleri:</span><span class="sxs-lookup"><span data-stu-id="56ea9-178">The command arguments:</span></span>
-  * <span data-ttu-id="56ea9-179">Uygulamayı yayın modunda (varsayılan olarak hata ayıklama modu) oluşturun.</span><span class="sxs-lookup"><span data-stu-id="56ea9-179">Build the application in release mode (the default is debug mode).</span></span>
-  * <span data-ttu-id="56ea9-180">*Yayımlanan* klasörde dosyaları oluşturun.</span><span class="sxs-lookup"><span data-stu-id="56ea9-180">Create the files in the *published* folder.</span></span>
+  <span data-ttu-id="df6ab-178">Komut bağımsız değişkenleri:</span><span class="sxs-lookup"><span data-stu-id="df6ab-178">The command arguments:</span></span>
+  * <span data-ttu-id="df6ab-179">Uygulamayı yayın modunda (varsayılan olarak hata ayıklama modu) oluşturun.</span><span class="sxs-lookup"><span data-stu-id="df6ab-179">Build the application in release mode (the default is debug mode).</span></span>
+  * <span data-ttu-id="df6ab-180">*Yayımlanan* klasörde dosyaları oluşturun.</span><span class="sxs-lookup"><span data-stu-id="df6ab-180">Create the files in the *published* folder.</span></span>
 
-* <span data-ttu-id="56ea9-181">Uygulamayı çalıştırın.</span><span class="sxs-lookup"><span data-stu-id="56ea9-181">Run the application.</span></span>
+* <span data-ttu-id="df6ab-181">Uygulamayı çalıştırın.</span><span class="sxs-lookup"><span data-stu-id="df6ab-181">Run the application.</span></span>
 
-  * <span data-ttu-id="56ea9-182">Windows:</span><span class="sxs-lookup"><span data-stu-id="56ea9-182">Windows:</span></span>
+  * <span data-ttu-id="df6ab-182">Windows:</span><span class="sxs-lookup"><span data-stu-id="df6ab-182">Windows:</span></span>
 
     ```dotnetcli
     dotnet published\aspnetapp.dll
     ```
 
-  * <span data-ttu-id="56ea9-183">Linux:</span><span class="sxs-lookup"><span data-stu-id="56ea9-183">Linux:</span></span>
+  * <span data-ttu-id="df6ab-183">Linux:</span><span class="sxs-lookup"><span data-stu-id="df6ab-183">Linux:</span></span>
 
     ```dotnetcli
     dotnet published/aspnetapp.dll
     ```
 
-* <span data-ttu-id="56ea9-184">`http://localhost:5000`Giriş sayfasını görmek için öğesine gidin.</span><span class="sxs-lookup"><span data-stu-id="56ea9-184">Browse to `http://localhost:5000` to see the home page.</span></span>
+* <span data-ttu-id="df6ab-184">`http://localhost:5000`Giriş sayfasını görmek için öğesine gidin.</span><span class="sxs-lookup"><span data-stu-id="df6ab-184">Browse to `http://localhost:5000` to see the home page.</span></span>
 
-<span data-ttu-id="56ea9-185">El ile yayınlanan uygulamayı bir Docker kapsayıcısı içinde kullanmak için yeni bir Dockerfile oluşturun ve `docker build .` kapsayıcıyı derlemek için komutunu kullanın.</span><span class="sxs-lookup"><span data-stu-id="56ea9-185">To use the manually published application within a Docker container, create a new Dockerfile and use the `docker build .` command to build the container.</span></span>
+<span data-ttu-id="df6ab-185">El ile yayınlanan uygulamayı bir Docker kapsayıcısı içinde kullanmak için yeni bir Dockerfile oluşturun ve `docker build .` kapsayıcıyı derlemek için komutunu kullanın.</span><span class="sxs-lookup"><span data-stu-id="df6ab-185">To use the manually published application within a Docker container, create a new Dockerfile and use the `docker build .` command to build the container.</span></span>
 
 ::: moniker range="< aspnetcore-3.0"
 
@@ -191,9 +193,9 @@ COPY published/aspnetapp.dll ./
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 ```
 
-### <a name="the-dockerfile"></a><span data-ttu-id="56ea9-186">Dockerfile</span><span class="sxs-lookup"><span data-stu-id="56ea9-186">The Dockerfile</span></span>
+### <a name="the-dockerfile"></a><span data-ttu-id="df6ab-186">Dockerfile</span><span class="sxs-lookup"><span data-stu-id="df6ab-186">The Dockerfile</span></span>
 
-<span data-ttu-id="56ea9-187">Daha önce çalıştırdığınız komut tarafından kullanılan *Dockerfile* aşağıda verilmiştir `docker build` .</span><span class="sxs-lookup"><span data-stu-id="56ea9-187">Here's the *Dockerfile* used by the `docker build` command you ran earlier.</span></span>  <span data-ttu-id="56ea9-188">`dotnet publish`Bu bölümde derlemek ve dağıtmak için kullandığınız şekilde aynı şekilde kullanılır.</span><span class="sxs-lookup"><span data-stu-id="56ea9-188">It uses `dotnet publish` the same way you did in this section to build and deploy.</span></span>  
+<span data-ttu-id="df6ab-187">Daha önce çalıştırdığınız komut tarafından kullanılan *Dockerfile* aşağıda verilmiştir `docker build` .</span><span class="sxs-lookup"><span data-stu-id="df6ab-187">Here's the *Dockerfile* used by the `docker build` command you ran earlier.</span></span>  <span data-ttu-id="df6ab-188">`dotnet publish`Bu bölümde derlemek ve dağıtmak için kullandığınız şekilde aynı şekilde kullanılır.</span><span class="sxs-lookup"><span data-stu-id="df6ab-188">It uses `dotnet publish` the same way you did in this section to build and deploy.</span></span>  
 
 ```dockerfile
 FROM mcr.microsoft.com/dotnet/core/sdk:2.2 AS build
@@ -226,9 +228,9 @@ COPY published/aspnetapp.dll ./
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 ```
 
-### <a name="the-dockerfile"></a><span data-ttu-id="56ea9-189">Dockerfile</span><span class="sxs-lookup"><span data-stu-id="56ea9-189">The Dockerfile</span></span>
+### <a name="the-dockerfile"></a><span data-ttu-id="df6ab-189">Dockerfile</span><span class="sxs-lookup"><span data-stu-id="df6ab-189">The Dockerfile</span></span>
 
-<span data-ttu-id="56ea9-190">Daha önce çalıştırdığınız komut tarafından kullanılan *Dockerfile* aşağıda verilmiştir `docker build` .</span><span class="sxs-lookup"><span data-stu-id="56ea9-190">Here's the *Dockerfile* used by the `docker build` command you ran earlier.</span></span>  <span data-ttu-id="56ea9-191">`dotnet publish`Bu bölümde derlemek ve dağıtmak için kullandığınız şekilde aynı şekilde kullanılır.</span><span class="sxs-lookup"><span data-stu-id="56ea9-191">It uses `dotnet publish` the same way you did in this section to build and deploy.</span></span>  
+<span data-ttu-id="df6ab-190">Daha önce çalıştırdığınız komut tarafından kullanılan *Dockerfile* aşağıda verilmiştir `docker build` .</span><span class="sxs-lookup"><span data-stu-id="df6ab-190">Here's the *Dockerfile* used by the `docker build` command you ran earlier.</span></span>  <span data-ttu-id="df6ab-191">`dotnet publish`Bu bölümde derlemek ve dağıtmak için kullandığınız şekilde aynı şekilde kullanılır.</span><span class="sxs-lookup"><span data-stu-id="df6ab-191">It uses `dotnet publish` the same way you did in this section to build and deploy.</span></span>  
 
 ```dockerfile
 FROM mcr.microsoft.com/dotnet/core/sdk:3.0 AS build
@@ -250,23 +252,23 @@ COPY --from=build /app/aspnetapp/out ./
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 ```
 
-<span data-ttu-id="56ea9-192">Önceki Dockerfile içinde belirtildiği gibi, `*.csproj` dosyalar ayrı *Katmanlar*olarak kopyalanır ve geri yüklenir.</span><span class="sxs-lookup"><span data-stu-id="56ea9-192">As noted in the preceding Dockerfile, the `*.csproj` files are copied and restored as distinct *layers*.</span></span> <span data-ttu-id="56ea9-193">`docker build`Komut bir görüntü oluşturduğunda, yerleşik bir önbellek kullanır.</span><span class="sxs-lookup"><span data-stu-id="56ea9-193">When the `docker build` command builds an image, it uses a built-in cache.</span></span> <span data-ttu-id="56ea9-194">`*.csproj`Komutun son çalıştırılmasından bu yana dosyalar değiştirilmediyse `docker build` , `dotnet restore` komutun yeniden çalıştırılması gerekmez.</span><span class="sxs-lookup"><span data-stu-id="56ea9-194">If the `*.csproj` files haven't changed since the `docker build` command last ran, the `dotnet restore` command doesn't need to run again.</span></span> <span data-ttu-id="56ea9-195">Bunun yerine, karşılık gelen katman için yerleşik önbellek `dotnet restore` yeniden kullanılır.</span><span class="sxs-lookup"><span data-stu-id="56ea9-195">Instead, the built-in cache for the corresponding `dotnet restore` layer is reused.</span></span> <span data-ttu-id="56ea9-196">Daha fazla bilgi için bkz. [Dockerfiles yazmak Için en iyi uygulamalar](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache).</span><span class="sxs-lookup"><span data-stu-id="56ea9-196">For more information, see [Best practices for writing Dockerfiles](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache).</span></span>
+<span data-ttu-id="df6ab-192">Önceki Dockerfile içinde belirtildiği gibi, `*.csproj` dosyalar ayrı *Katmanlar*olarak kopyalanır ve geri yüklenir.</span><span class="sxs-lookup"><span data-stu-id="df6ab-192">As noted in the preceding Dockerfile, the `*.csproj` files are copied and restored as distinct *layers*.</span></span> <span data-ttu-id="df6ab-193">`docker build`Komut bir görüntü oluşturduğunda, yerleşik bir önbellek kullanır.</span><span class="sxs-lookup"><span data-stu-id="df6ab-193">When the `docker build` command builds an image, it uses a built-in cache.</span></span> <span data-ttu-id="df6ab-194">`*.csproj`Komutun son çalıştırılmasından bu yana dosyalar değiştirilmediyse `docker build` , `dotnet restore` komutun yeniden çalıştırılması gerekmez.</span><span class="sxs-lookup"><span data-stu-id="df6ab-194">If the `*.csproj` files haven't changed since the `docker build` command last ran, the `dotnet restore` command doesn't need to run again.</span></span> <span data-ttu-id="df6ab-195">Bunun yerine, karşılık gelen katman için yerleşik önbellek `dotnet restore` yeniden kullanılır.</span><span class="sxs-lookup"><span data-stu-id="df6ab-195">Instead, the built-in cache for the corresponding `dotnet restore` layer is reused.</span></span> <span data-ttu-id="df6ab-196">Daha fazla bilgi için bkz. [Dockerfiles yazmak Için en iyi uygulamalar](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache).</span><span class="sxs-lookup"><span data-stu-id="df6ab-196">For more information, see [Best practices for writing Dockerfiles](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache).</span></span>
 
 ::: moniker-end
 
-## <a name="additional-resources"></a><span data-ttu-id="56ea9-197">Ek kaynaklar</span><span class="sxs-lookup"><span data-stu-id="56ea9-197">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="df6ab-197">Ek kaynaklar</span><span class="sxs-lookup"><span data-stu-id="df6ab-197">Additional resources</span></span>
 
-* [<span data-ttu-id="56ea9-198">Docker derleme komutu</span><span class="sxs-lookup"><span data-stu-id="56ea9-198">Docker build command</span></span>](https://docs.docker.com/engine/reference/commandline/build)
-* [<span data-ttu-id="56ea9-199">Docker Run komutu</span><span class="sxs-lookup"><span data-stu-id="56ea9-199">Docker run command</span></span>](https://docs.docker.com/engine/reference/commandline/run)
-* <span data-ttu-id="56ea9-200">[Docker örneğine ASP.NET Core](https://github.com/dotnet/dotnet-docker) (Bu öğreticide kullanılan bir tane).</span><span class="sxs-lookup"><span data-stu-id="56ea9-200">[ASP.NET Core Docker sample](https://github.com/dotnet/dotnet-docker) (The one used in this tutorial.)</span></span>
-* [<span data-ttu-id="56ea9-201">Proxy sunucularıyla ve yük dengeleyicilerle çalışacak ASP.NET Core yapılandırma</span><span class="sxs-lookup"><span data-stu-id="56ea9-201">Configure ASP.NET Core to work with proxy servers and load balancers</span></span>](/aspnet/core/host-and-deploy/proxy-load-balancer)
-* [<span data-ttu-id="56ea9-202">Visual Studio Docker araçlarıyla çalışma</span><span class="sxs-lookup"><span data-stu-id="56ea9-202">Working with Visual Studio Docker Tools</span></span>](https://docs.microsoft.com/aspnet/core/publishing/visual-studio-tools-for-docker)
-* [<span data-ttu-id="56ea9-203">Visual Studio Code ile hata ayıklama</span><span class="sxs-lookup"><span data-stu-id="56ea9-203">Debugging with Visual Studio Code</span></span>](https://code.visualstudio.com/docs/nodejs/debugging-recipes#_debug-nodejs-in-docker-containers)
-* [<span data-ttu-id="56ea9-204">Docker ve küçük kapsayıcılar kullanılarak GC</span><span class="sxs-lookup"><span data-stu-id="56ea9-204">GC using Docker and small containers</span></span>](xref:performance/memory#sc)
+* [<span data-ttu-id="df6ab-198">Docker derleme komutu</span><span class="sxs-lookup"><span data-stu-id="df6ab-198">Docker build command</span></span>](https://docs.docker.com/engine/reference/commandline/build)
+* [<span data-ttu-id="df6ab-199">Docker Run komutu</span><span class="sxs-lookup"><span data-stu-id="df6ab-199">Docker run command</span></span>](https://docs.docker.com/engine/reference/commandline/run)
+* <span data-ttu-id="df6ab-200">[Docker örneğine ASP.NET Core](https://github.com/dotnet/dotnet-docker) (Bu öğreticide kullanılan bir tane).</span><span class="sxs-lookup"><span data-stu-id="df6ab-200">[ASP.NET Core Docker sample](https://github.com/dotnet/dotnet-docker) (The one used in this tutorial.)</span></span>
+* [<span data-ttu-id="df6ab-201">Proxy sunucularıyla ve yük dengeleyicilerle çalışacak ASP.NET Core yapılandırma</span><span class="sxs-lookup"><span data-stu-id="df6ab-201">Configure ASP.NET Core to work with proxy servers and load balancers</span></span>](/aspnet/core/host-and-deploy/proxy-load-balancer)
+* [<span data-ttu-id="df6ab-202">Visual Studio Docker araçlarıyla çalışma</span><span class="sxs-lookup"><span data-stu-id="df6ab-202">Working with Visual Studio Docker Tools</span></span>](https://docs.microsoft.com/aspnet/core/publishing/visual-studio-tools-for-docker)
+* [<span data-ttu-id="df6ab-203">Visual Studio Code ile hata ayıklama</span><span class="sxs-lookup"><span data-stu-id="df6ab-203">Debugging with Visual Studio Code</span></span>](https://code.visualstudio.com/docs/nodejs/debugging-recipes#_debug-nodejs-in-docker-containers)
+* [<span data-ttu-id="df6ab-204">Docker ve küçük kapsayıcılar kullanılarak GC</span><span class="sxs-lookup"><span data-stu-id="df6ab-204">GC using Docker and small containers</span></span>](xref:performance/memory#sc)
 
-## <a name="next-steps"></a><span data-ttu-id="56ea9-205">Sonraki adımlar</span><span class="sxs-lookup"><span data-stu-id="56ea9-205">Next steps</span></span>
+## <a name="next-steps"></a><span data-ttu-id="df6ab-205">Sonraki adımlar</span><span class="sxs-lookup"><span data-stu-id="df6ab-205">Next steps</span></span>
 
-<span data-ttu-id="56ea9-206">Örnek uygulamayı içeren git deposu, belgeleri de içerir.</span><span class="sxs-lookup"><span data-stu-id="56ea9-206">The Git repository that contains the sample app also includes documentation.</span></span> <span data-ttu-id="56ea9-207">Depodaki kullanılabilir kaynaklara genel bir bakış için [Readme dosyasına](https://github.com/dotnet/dotnet-docker/blob/master/samples/aspnetapp/README.md)bakın.</span><span class="sxs-lookup"><span data-stu-id="56ea9-207">For an overview of the resources available in the repository, see [the README file](https://github.com/dotnet/dotnet-docker/blob/master/samples/aspnetapp/README.md).</span></span> <span data-ttu-id="56ea9-208">Özellikle, HTTPS 'yi uygulamayı öğrenin:</span><span class="sxs-lookup"><span data-stu-id="56ea9-208">In particular, learn how to implement HTTPS:</span></span>
+<span data-ttu-id="df6ab-206">Örnek uygulamayı içeren git deposu, belgeleri de içerir.</span><span class="sxs-lookup"><span data-stu-id="df6ab-206">The Git repository that contains the sample app also includes documentation.</span></span> <span data-ttu-id="df6ab-207">Depodaki kullanılabilir kaynaklara genel bir bakış için [Readme dosyasına](https://github.com/dotnet/dotnet-docker/blob/master/samples/aspnetapp/README.md)bakın.</span><span class="sxs-lookup"><span data-stu-id="df6ab-207">For an overview of the resources available in the repository, see [the README file](https://github.com/dotnet/dotnet-docker/blob/master/samples/aspnetapp/README.md).</span></span> <span data-ttu-id="df6ab-208">Özellikle, HTTPS 'yi uygulamayı öğrenin:</span><span class="sxs-lookup"><span data-stu-id="df6ab-208">In particular, learn how to implement HTTPS:</span></span>
 
 > [!div class="nextstepaction"]
-> [<span data-ttu-id="56ea9-209">HTTPS üzerinden Docker ile ASP.NET Core uygulamaları geliştirme</span><span class="sxs-lookup"><span data-stu-id="56ea9-209">Developing ASP.NET Core Applications with Docker over HTTPS</span></span>](https://github.com/dotnet/dotnet-docker/blob/master/samples/run-aspnetcore-https-development.md)
+> [<span data-ttu-id="df6ab-209">HTTPS üzerinden Docker ile ASP.NET Core uygulamaları geliştirme</span><span class="sxs-lookup"><span data-stu-id="df6ab-209">Developing ASP.NET Core Applications with Docker over HTTPS</span></span>](https://github.com/dotnet/dotnet-docker/blob/master/samples/run-aspnetcore-https-development.md)
