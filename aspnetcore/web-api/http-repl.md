@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 05/20/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: 4c42ad56bbdb7b66824b290cd118903cbe4311e8
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: ead745ae8843173bb25b94672005cc6ce295db2e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84452219"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403384"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>HTTP REPL ile Web API 'Lerini test etme
 
@@ -371,10 +373,10 @@ pref set editor.command.default.arguments "--disable-extensions --new-window"
 
 Varsayılan olarak, HTTP REPL, komutu seçeneği olmadan yürütürken Swagger belgesini bulmak için kullandığı bir göreli yollar kümesine sahiptir `connect` `--swagger` . Bu göreli yollar, komutta belirtilen kök ve taban yollarla birleştirilir `connect` . Varsayılan göreli yollar şunlardır:
 
-- *Swagger. JSON*
-- *Swagger/v1/Swagger. JSON*
-- */swagger.json*
-- */swagger/v1/swagger.json*
+- *Üzerindeswagger.js*
+- *Swagger/v1/swagger.jsaçık*
+- */swagger.js*
+- */Swagger/v1/swagger.js*
 
 Ortamınızda farklı bir arama yolları kümesi kullanmak için `swagger.searchPaths` tercihi ayarlayın. Değer, göreli yolların kanal ile ayrılmış bir listesi olmalıdır. Örneğin:
 
@@ -978,7 +980,7 @@ Request echoing is off
 
 Aynı HTTP REPL komutları kümesini sıklıkla yürütüyorsanız bunları bir metin dosyasında depolamayı göz önünde bulundurun. Dosyadaki komutlar, komut satırında el ile çalıştıranlarla aynı formu alır. Komutlar, komutu kullanılarak toplanmış bir biçimde yürütülebilir `run` . Örneğin:
 
-1. Yeni satır için ayrılmış komutlar kümesini içeren bir metin dosyası oluşturun. Göstermek için aşağıdaki komutları içeren bir *People-Script. txt* dosyası düşünün:
+1. Yeni satır için ayrılmış komutlar kümesini içeren bir metin dosyası oluşturun. Göstermek için aşağıdaki komutları içeren bir *people-script.txt* dosyası göz önünde bulundurun:
 
     ```text
     set base https://localhost:5001

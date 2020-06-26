@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core weelsembly ile aşamalı Web uygulamaları oluşturun Blazor
+title: ASP.NET Core ile aşamalı Web uygulamaları oluşturmaBlazor WebAssembly
 author: guardrex
 description: BlazorMasaüstü uygulaması gibi davranması için modern tarayıcı özelliklerini kullanan bir tabanlı aşamalı Web uygulaması (PWA) oluşturmayı öğrenin.
 monikerRange: '>= aspnetcore-3.1'
@@ -8,23 +8,25 @@ ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: f56fb0f09845ded6ef6907221a27f71621a155d1
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: 237a8fceb75ba724625f018cf94c8d5bc5acfdad
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242816"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402591"
 ---
-# <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>ASP.NET Core weelsembly ile aşamalı Web uygulamaları oluşturun Blazor
+# <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>ASP.NET Core ile aşamalı Web uygulamaları oluşturmaBlazor WebAssembly
 
 [Steve Sanderson](https://github.com/SteveSandersonMS) tarafından
 
-Aşamalı bir Web uygulaması (PWA) genellikle modern tarayıcı API 'Leri ve masaüstü uygulaması gibi davranmaya yönelik yetenekler kullanan tek sayfalı bir uygulamadır (SPA). BlazorWebAssembly, standartlara dayalı bir istemci tarafı Web uygulaması platformudur, bu nedenle aşağıdaki yetenekler için gereken PWA API 'Leri de dahil olmak üzere herhangi bir tarayıcı API 'sini kullanabilir:
+Aşamalı bir Web uygulaması (PWA) genellikle modern tarayıcı API 'Leri ve masaüstü uygulaması gibi davranmaya yönelik yetenekler kullanan tek sayfalı bir uygulamadır (SPA). Blazor WebAssembly, standartlara dayalı bir istemci tarafı Web uygulaması platformudur, bu nedenle aşağıdaki yetenekler için gereken PWA API 'Leri de dahil olmak üzere herhangi bir tarayıcı API 'sini kullanabilir:
 
 * Ağ hızından bağımsız olarak çevrimdışı çalışma ve anında yükleme.
 * Yalnızca bir tarayıcı penceresi değil kendi uygulama penceresinde çalışıyor.
@@ -41,7 +43,7 @@ Aşamalı bir Web uygulaması (PWA) genellikle modern tarayıcı API 'Leri ve ma
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Yeni bir **proje oluştur** iletişim kutusunda yeni bir ** Blazor Webassembly uygulaması** oluştururken, **aşamalı Web uygulaması** onay kutusunu seçin:
+Yeni bir **proje oluştur** iletişim kutusunda yeni bir ** Blazor WebAssembly uygulama** oluştururken, **aşamalı Web uygulaması** onay kutusunu seçin:
 
 ![Visual Studio yeni proje iletişim kutusunda ' aşamalı Web uygulaması ' onay kutusu seçilidir.](progressive-web-app/_static/image1.png)
 
@@ -155,7 +157,7 @@ Uygulamanın Razor bileşenleri, arka uç API 'lerinden veri istemeyi ve ağ kul
 
 ### <a name="support-server-rendered-pages"></a>Sunucu tarafından işlenen sayfaları destekleme
 
-Kullanıcı, veya gibi bir URL 'ye ilk kez gittiğinde ne olacağını göz önünde bulundurun `/counter` . Bu gibi durumlarda, olarak önbelleğe alınmış içeriği döndürmek istemezsiniz `/counter` , bunun yerine, `/index.html` ısbassembly uygulamanızı başlatmak için tarayıcıya önbelleğe alınmış içeriği yüklemesi gerekir Blazor . Bu ilk istekler, şu şekilde *Gezinti* istekleri olarak bilinir:
+Kullanıcı, veya gibi bir URL 'ye ilk kez gittiğinde ne olacağını göz önünde bulundurun `/counter` . Bu durumlarda, olarak önbelleğe alınmış içeriği döndürmek istemezsiniz `/counter` , bunun yerine `/index.html` uygulamanızı başlatmak için tarayıcıda önbelleğe alınmış içeriği yüklemesi gerekir Blazor WebAssembly . Bu ilk istekler, şu şekilde *Gezinti* istekleri olarak bilinir:
 
 * `subresource`görüntüler, stil sayfaları veya diğer dosyalar için istekler.
 * `fetch/XHR`API verisi istekleri.
@@ -192,7 +194,7 @@ Varsayılan olarak, bu bildirim şunları listeler:
 * Blazor.NET derlemeleri ve .net WebAssembly çalışma zamanı dosyaları gibi, çevrimdışı çalışmak için gerekli olan herhangi bir yönetilen kaynak.
 * `wwwroot`Dış projeler ve NuGet paketleri tarafından sağlanan statik Web varlıkları da dahil olmak üzere, uygulamanın dizinine (resimler, stil sayfaları ve JavaScript dosyaları) yayımlama için tüm kaynaklar.
 
-İçindeki içindeki mantığı düzenleyerek, bu kaynakların hangisinin hizmet çalışanı tarafından alındığını ve önbelleğe alınacağını denetleyebilirsiniz `onInstall` `service-worker.published.js` . Varsayılan olarak, hizmet çalışanı,,, ve gibi tipik Web dosya adı uzantılarına ve `.html` `.css` `.js` `.wasm` Blazor webassembly (,) öğesine özgü dosya türleri `.dll` `.pdb` ile eşleşen dosyaları getirir ve önbelleğe alır.
+İçindeki içindeki mantığı düzenleyerek, bu kaynakların hangisinin hizmet çalışanı tarafından alındığını ve önbelleğe alınacağını denetleyebilirsiniz `onInstall` `service-worker.published.js` . Varsayılan olarak, hizmet çalışanı,,, ve gibi tipik Web dosya adı uzantılarına ve `.html` `.css` `.js` `.wasm` Blazor WebAssembly (,) öğesine özgü dosya türleri `.dll` `.pdb` ile eşleşen dosyaları getirir ve önbelleğe alır.
 
 Uygulamanın dizininde bulunmayan ek kaynakları dahil etmek için, `wwwroot` `ItemGroup` Aşağıdaki örnekte gösterildiği gibi ek MSBuild girişleri tanımlayın:
 
@@ -210,11 +212,11 @@ Uygulamanın dizininde bulunmayan ek kaynakları dahil etmek için, `wwwroot` `I
 
 ## <a name="push-notifications"></a>Anında iletme bildirimleri
 
-Diğer herhangi bir PWA gibi, Blazor webassembly PWA, arka uç sunucusundan anında iletme bildirimleri alabilir. Sunucu, uygulamayı etkin bir şekilde kullanmıyor olsa bile, herhangi bir zamanda anında iletme bildirimleri gönderebilir. Örneğin, farklı bir Kullanıcı ilgili bir eylem gerçekleştirdiğinde anında iletme bildirimleri gönderilebilir.
+Diğer herhangi bir PWA gibi, bir Blazor WebAssembly PWA arka uç sunucusundan anında iletme bildirimleri alabilir. Sunucu, uygulamayı etkin bir şekilde kullanmıyor olsa bile, herhangi bir zamanda anında iletme bildirimleri gönderebilir. Örneğin, farklı bir Kullanıcı ilgili bir eylem gerçekleştirdiğinde anında iletme bildirimleri gönderilebilir.
 
-Anında iletme bildirimi gönderme mekanizması Blazor , her türlü teknolojiyi kullanan arka uç sunucusu tarafından uygulandığından, webassembly 'dan tamamen bağımsızdır. Bir ASP.NET Core sunucusundan anında iletme bildirimleri göndermek istiyorsanız, [güçlendirme, pizza Atölyesi Workshop ' de gerçekleştirilen yaklaşıma benzer bir teknik kullanmayı](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#sending-push-notifications)düşünün.
+Anında iletme bildirimi gönderme mekanizması Blazor WebAssembly , herhangi bir teknolojiyi kullanan arka uç sunucu tarafından uygulandığından tamamen bağımsızdır. Bir ASP.NET Core sunucusundan anında iletme bildirimleri göndermek istiyorsanız, [güçlendirme, pizza Atölyesi Workshop ' de gerçekleştirilen yaklaşıma benzer bir teknik kullanmayı](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#sending-push-notifications)düşünün.
 
-İstemci üzerinde anında iletme bildirimi alma ve görüntüleme mekanizması Blazor , hizmet çalışanı JavaScript dosyasında uygulandığından webassembly ' den bağımsızdır. Bir örnek için bkz. [güçlendirme pizza 'da kullanılan yaklaşım](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#displaying-notifications).
+Blazor WebAssemblyHizmet çalışanı JavaScript dosyasında uygulandığından, istemcide anında iletme bildirimi alma ve görüntüleme mekanizması da bağımsızdır. Bir örnek için bkz. [güçlendirme pizza 'da kullanılan yaklaşım](https://github.com/dotnet-presentations/blazor-workshop/blob/master/docs/09-progressive-web-app.md#displaying-notifications).
 
 ## <a name="caveats-for-offline-pwas"></a>Çevrimdışı PDI uyarıları
 

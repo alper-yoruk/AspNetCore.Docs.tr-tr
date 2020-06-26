@@ -8,17 +8,19 @@ ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/facebook-logins
-ms.openlocfilehash: 11ddc7314a694446d488da6ef1b2e3423bf7241a
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: df91b6f324de70b8492ccf0aef74c9264c3e9711
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777039"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403956"
 ---
 # <a name="facebook-external-login-setup-in-aspnet-core"></a>ASP.NET Core 'da Facebook dış oturum açma kurulumu
 
@@ -55,16 +57,16 @@ Kod örnekleri ile bu öğreticide, kullanıcılarınızın [önceki sayfada](xr
 
   ![İstemci OAuth ayarları sayfası](index/_static/FBOAuthSetup.png)
 
-* **Geçerli OAuth yeniden yönlendirme URI 'leri** alanına `https://localhost:44320/signin-facebook` */SignIn-Facebook* eklenmiş olan geliştirme URI 'nizi girin (örneğin:). Bu öğreticide daha sonra yapılandırılan Facebook kimlik doğrulaması, OAuth akışını uygulamak için */SignIn-Facebook* rotasındaki istekleri otomatik olarak işleymeyecektir.
+* **Geçerli OAuth yeniden yönlendirme URI 'leri** alanına */SignIn-Facebook* eklenmiş olan geliştirme URI 'nizi girin (örneğin: `https://localhost:44320/signin-facebook` ). Bu öğreticide daha sonra yapılandırılan Facebook kimlik doğrulaması, OAuth akışını uygulamak için */SignIn-Facebook* rotasındaki istekleri otomatik olarak işleymeyecektir.
 
 > [!NOTE]
 > URI */SignIn-Facebook* , Facebook kimlik doğrulama sağlayıcısı 'nın varsayılan geri çağırması olarak ayarlanır. Facebook kimlik doğrulama ara yazılımını, çok [yönlü önyükleme](/dotnet/api/microsoft.aspnetcore.authentication.facebook.facebookoptions) sınıfının devralınan [remoteauthenticationoptions. callbackpath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) özelliği aracılığıyla YAPıLANDıRıRKEN varsayılan geri çağırma URI 'sini değiştirebilirsiniz.
 
 * **Değişiklikleri Kaydet**’e tıklayın.
 
-* Sol gezinti bölmesinde **Ayarlar** > **temel** bağlantısı ' na tıklayın.
+* **Settings**  >  Sol gezinti bölmesinde ayarlar**temel** bağlantısı ' na tıklayın.
 
-  Bu sayfada, `App ID` ve bilgilerinizi bir yere unutmayın `App Secret`. Bir sonraki bölümde ASP.NET Core uygulamanıza her ikisini de ekleyeceksiniz:
+  Bu sayfada, ve bilgilerinizi bir yere unutmayın `App ID` `App Secret` . Bir sonraki bölümde ASP.NET Core uygulamanıza her ikisini de ekleyeceksiniz:
 
 * Siteyi dağıttığınızda **Facebook oturum açma** kurulumu sayfasını yeniden ziyaret etmeniz ve yeni BIR ortak URI kaydetmeniz gerekir.
 
@@ -73,7 +75,7 @@ Kod örnekleri ile bu öğreticide, kullanıcılarınızın [önceki sayfada](xr
 Facebook uygulama KIMLIĞI ve gizli anahtar değerleri gibi hassas ayarları [gizli bir yöneticiye](xref:security/app-secrets)depolayın. Bu örnek için aşağıdaki adımları kullanın:
 
 1. [Gizli depolamayı etkinleştirme](xref:security/app-secrets#enable-secret-storage)konusundaki yönergeler temelinde projeyi gizli depolama için başlatın.
-1. Gizli anahtar ayarlarını gizli anahtarlar ve `Authentication:Facebook:AppId` `Authentication:Facebook:AppSecret`gizli anahtarlar ile yerel gizli dizi deposunda depolayın:
+1. Gizli anahtar ayarlarını gizli anahtarlar ve gizli anahtarlar ile yerel gizli dizi deposunda `Authentication:Facebook:AppId` depolayın `Authentication:Facebook:AppSecret` :
 
     ```dotnetcli
     dotnet user-secrets set "Authentication:Facebook:AppId" "<app-id>"
@@ -112,11 +114,11 @@ Artık Facebook kimlik bilgilerinizi kullanarak oturumunuz açıldı:
 
 <xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.AccessDeniedPath>Kullanıcı İstenen Yetkilendirme talebini onaylamazsa kullanıcı aracısına yeniden yönlendirme yolu sağlayabilir.
 
-Aşağıdaki kod öğesini `AccessDeniedPath` olarak `"/AccessDeniedPathInfo"`ayarlar:
+Aşağıdaki kod öğesini olarak ayarlar `AccessDeniedPath` `"/AccessDeniedPathInfo"` :
 
 [!code-csharp[](~/security/authentication/social/social-code/StartupAccessDeniedPath.cs?name=snippetFB)]
 
-`AccessDeniedPath` Sayfada aşağıdaki bilgileri içermesi önerilir:
+`AccessDeniedPath`Sayfada aşağıdaki bilgileri içermesi önerilir:
 
 *  Uzaktan kimlik doğrulama iptal edildi.
 * Bu uygulama kimlik doğrulaması gerektiriyor.
@@ -141,13 +143,13 @@ Facebook kimlik doğrulaması tarafından desteklenen yapılandırma seçenekler
 
 ## <a name="troubleshooting"></a>Sorun giderme
 
-* **Yalnızca 2. x ASP.NET Core:** Identity ' De `services.AddIdentity` `ConfigureServices`çağırarak yapılandırılmamışsa, kimlik doğrulamaya çalışmak ArgumentException Ile sonuçlanır *: ' signınscheme ' seçeneği sağlanmalıdır*. Bu öğreticide kullanılan proje şablonu bunun yapılmasını sağlar.
+* **Yalnızca 2. x ASP.NET Core:** Identity `services.AddIdentity` ' De çağırarak yapılandırılmamışsa `ConfigureServices` , kimlik doğrulamaya çalışmak ArgumentException ile sonuçlanır *: ' signınscheme ' seçeneği sağlanmalıdır*. Bu öğreticide kullanılan proje şablonu bunun yapılmasını sağlar.
 * Site veritabanı ilk geçiş uygulanarak oluşturulmadıysa, *istek hatasını Işlerken bir veritabanı işlemi başarısız oldu* . Veritabanını oluşturmak için **geçişleri Uygula** ' ya dokunun ve hatanın ötesinde devam etmek için yenileyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 * Bu makalede Facebook ile kimlik doğrulaması yapabilirsiniz. [Önceki sayfada](xref:security/authentication/social/index)listelenen diğer sağlayıcılarla kimlik doğrulaması yapmak için benzer bir yaklaşımı izleyebilirsiniz.
 
-* Web sitenizi Azure Web App 'e yayımladığınızda, `AppSecret` Facebook Geliştirici portalındaki ' ı sıfırlamanız gerekir.
+* Web sitenizi Azure Web App 'e yayımladığınızda, Facebook Geliştirici portalındaki ' ı sıfırlamanız gerekir `AppSecret` .
 
-* `Authentication:Facebook:AppId` Ve `Authentication:Facebook:AppSecret` Azure Portal uygulama ayarları olarak ayarlayın. Yapılandırma sistemi, ortam değişkenlerinden anahtarları okumak üzere ayarlanır.
+* `Authentication:Facebook:AppId`Ve `Authentication:Facebook:AppSecret` Azure Portal uygulama ayarları olarak ayarlayın. Yapılandırma sistemi, ortam değişkenlerinden anahtarları okumak üzere ayarlanır.

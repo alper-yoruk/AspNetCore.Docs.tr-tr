@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 3/22/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: migration/identity
-ms.openlocfilehash: 0474d0d4f430d587acac5fdd8f391220f825ccee
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 995de894bc77c4db5e5683b36e691b0c5a3463d3
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775537"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403761"
 ---
 # <a name="migrate-authentication-and-identity-to-aspnet-core"></a>Kimlik doğrulamasını ve Identity ASP.NET Core geçir
 
@@ -26,7 +28,7 @@ ms.locfileid: "82775537"
 
 ## <a name="configure-identity-and-membership"></a>Yapılandırma Identity ve üyelik
 
-ASP.NET MVC 'de, kimlik doğrulama ve kimlik özellikleri *App_Start* klasöründe bulunan Identity *Startup.auth.cs* ve *IdentityConfig.cs*ile ASP.NET kullanılarak yapılandırılır. ASP.NET Core MVC 'de, bu özellikler *Startup.cs*' de yapılandırılır.
+ASP.NET MVC 'de, kimlik doğrulama ve kimlik özellikleri Identity *App_Start* klasöründe bulunan *Startup.Auth.cs* ve *IdentityConfig.cs*ile ASP.NET kullanılarak yapılandırılır. ASP.NET Core MVC 'de, bu özellikler *Startup.cs*' de yapılandırılır.
 
 Aşağıdaki NuGet paketlerini yükler:
 
@@ -34,7 +36,7 @@ Aşağıdaki NuGet paketlerini yükler:
 * `Microsoft.AspNetCore.Authentication.Cookies`
 * `Microsoft.EntityFrameworkCore.SqlServer`
 
-*Startup.cs*' de, Entity Framework `Startup.ConfigureServices` ve Identity hizmetlerini kullanmak için yöntemi güncelleştirin:
+*Startup.cs*' de, `Startup.ConfigureServices` Entity Framework ve hizmetlerini kullanmak için yöntemi güncelleştirin Identity :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -51,7 +53,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Bu noktada, yukarıdaki kodda henüz ASP.NET MVC projesinden geçirdiğimiz iki tür vardır: `ApplicationDbContext` ve. `ApplicationUser` ASP.NET Core projesinde yeni *modeller* klasörü oluşturun ve bu türlere karşılık gelen kendisine iki sınıf ekleyin. Bu sınıfların ASP.NET MVC sürümlerini */models/ıdentitymodels.cs*içinde bulacaksınız, ancak geçirilen projede sınıf başına bir dosya kullanacağız çünkü bu daha net bir şekilde yapılır.
+Bu noktada, yukarıdaki kodda henüz ASP.NET MVC projesinden geçirdiğimiz iki tür vardır: `ApplicationDbContext` ve `ApplicationUser` . ASP.NET Core projesinde yeni *modeller* klasörü oluşturun ve bu türlere karşılık gelen kendisine iki sınıf ekleyin. Bu sınıfların ASP.NET MVC sürümlerini */models/ıdentitymodels.cs*içinde bulacaksınız, ancak geçirilen projede sınıf başına bir dosya kullanacağız çünkü bu daha net bir şekilde yapılır.
 
 *ApplicationUser.cs*:
 
@@ -92,9 +94,9 @@ namespace NewMvcProject.Models
 }
 ```
 
-ASP.NET Core MVC Başlatıcı Web projesi, kullanıcıların çok fazla özelleştirmesini veya ' i içermez `ApplicationDbContext`. Gerçek bir uygulamayı geçirirken uygulamanızın kullanıcı ve `DbContext` sınıflarının tüm özel özelliklerini ve yöntemlerini, uygulamanızın de tüm diğer model sınıflarını geçirmeniz gerekir. Örneğin `DbContext` , varsa `DbSet<Album>`, `Album` sınıfı geçirmeniz gerekir.
+ASP.NET Core MVC Başlatıcı Web projesi, kullanıcıların çok fazla özelleştirmesini veya ' i içermez `ApplicationDbContext` . Gerçek bir uygulamayı geçirirken uygulamanızın kullanıcı ve sınıflarının tüm özel özelliklerini ve yöntemlerini `DbContext` , uygulamanızın de tüm diğer model sınıflarını geçirmeniz gerekir. Örneğin, varsa `DbContext` `DbSet<Album>` , sınıfı geçirmeniz gerekir `Album` .
 
-Bu dosyalar söz konusu olduğunda, *Startup.cs* dosyası `using` deyimlerini güncelleştirerek derleme yapmak için kullanılabilir:
+Bu dosyalar söz konusu olduğunda, *Startup.cs* dosyası deyimlerini güncelleştirerek derleme yapmak için kullanılabilir `using` :
 
 ```csharp
 using Microsoft.AspNetCore.Builder;
@@ -105,11 +107,11 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 ```
 
-Uygulamamız artık kimlik doğrulama ve Identity Hizmetleri desteklemeye hazırdır. Yalnızca bu özelliklerin kullanıcılara açık olması gerekir.
+Uygulamamız artık kimlik doğrulama ve Hizmetleri desteklemeye hazırdır Identity . Yalnızca bu özelliklerin kullanıcılara açık olması gerekir.
 
 ## <a name="migrate-registration-and-login-logic"></a>Kayıt ve oturum açma mantığını geçirme
 
-Uygulama Identity için yapılandırılmış hizmetler ve Entity Framework ve SQL Server kullanılarak yapılandırılmış veri erişimi sayesinde, kayıt ve uygulamaya oturum açma desteği eklemeye hazırız. [Daha önce geçiş sürecinde,](xref:migration/mvc#migrate-the-layout-file) *_Layout. cshtml*içindeki *_LoginPartial* bir başvuruyu yorumlayacağız. Artık bu koda geri dönmeli, bu kodun açıklamasını kaldırın ve oturum açma işlevlerini desteklemek için gerekli denetleyiciler ve görünümlerde ekleme zamanı vardır.
+IdentityUygulama için yapılandırılmış hizmetler ve Entity Framework ve SQL Server kullanılarak yapılandırılmış veri erişimi sayesinde, kayıt ve uygulamaya oturum açma desteği eklemeye hazırız. [Daha önce geçiş sürecinde,](xref:migration/mvc#migrate-the-layout-file) *_Layout. cshtml*içindeki *_LoginPartial* bir başvuruyu yorumlayacağız. Artık bu koda geri dönmeli, bu kodun açıklamasını kaldırın ve oturum açma işlevlerini desteklemek için gerekli denetleyiciler ve görünümlerde ekleme zamanı vardır.
 
 `@Html.Partial` *_Layout. cshtml*içindeki satırın açıklamasını kaldırın:
 
@@ -155,4 +157,4 @@ Bu noktada, tarayıcıda siteyi yenileyebilmelisiniz.
 
 ## <a name="summary"></a>Özet
 
-ASP.NET Core, ASP.NET Identity özelliklerinde yapılan değişiklikleri tanıtır. Bu makalede, ASP.NET Identity 'in kimlik doğrulama ve Kullanıcı yönetimi özelliklerinin ASP.NET Core 'e nasıl geçirileceğiyle karşılaşmış olursunuz.
+ASP.NET Core, ASP.NET özelliklerinde yapılan değişiklikleri tanıtır Identity . Bu makalede, ASP.NET 'in kimlik doğrulama ve Kullanıcı Yönetimi özelliklerinin ASP.NET Core 'e nasıl geçirileceğiyle karşılaşmış olursunuz Identity .

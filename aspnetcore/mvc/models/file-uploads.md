@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 05/03/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/models/file-uploads
-ms.openlocfilehash: 632cc9fafc5daf2923997f0113adee52491acdcc
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 055dc7295aad67f92fe5f4e8271a1543262257b5
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "83838324"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404606"
 ---
 # <a name="upload-files-in-aspnet-core"></a>ASP.NET Core dosyaları karşıya yükleme
 
@@ -189,7 +191,7 @@ Aşağıdaki örnek, önceki örneğe benzerdir, ancak şunları hariç:
 [Fetch API 'sini desteklemeyen](https://caniuse.com/#feat=fetch)istemcilerde form gönderisini JavaScript 'te gerçekleştirmek için aşağıdaki yaklaşımlardan birini kullanın:
 
 * Fetch Polyfill kullanın (örneğin, [Window. Fetch (GitHub/fetch)](https://github.com/github/fetch)).
-* `XMLHttpRequest` adresini kullanın. Örnek:
+* `XMLHttpRequest` adresini kullanın. Örneğin:
 
   ```javascript
   <script>
@@ -235,7 +237,7 @@ Sunucuya yüklenen tek dosyalara, kullanılarak [model bağlama](xref:mvc/models
 > Bu nedenle, şu ana kadar dikkate alınması gereken örnekler aşağıda verilmiştir. Ek bilgiler aşağıdaki bölümler ve [örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)tarafından sağlanır:
 >
 > * [Güvenlikle ilgili dikkat edilmesi gerekenler](#security-considerations)
-> * [Doğrulamasına](#validation)
+> * [Doğrulama](#validation)
 
 Model bağlama kullanarak dosyaları karşıya yüklerken <xref:Microsoft.AspNetCore.Http.IFormFile> , eylem yöntemi kabul edebilir:
 
@@ -406,7 +408,7 @@ Yukarıdaki örnek, örnek uygulamada gösterilen senaryoya benzerdir:
 > Belirtilen örneklerde dikkate alınması gereken önemli noktalar. Ek bilgiler aşağıdaki bölümler ve [örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)tarafından sağlanır:
 >
 > * [Güvenlikle ilgili dikkat edilmesi gerekenler](#security-considerations)
-> * [Doğrulamasına](#validation)
+> * [Doğrulama](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>Akışa sahip büyük dosyaları karşıya yükleme
 
@@ -462,7 +464,7 @@ Dosyaları tarama, yüksek hacimli senaryolarda sunucu kaynaklarında yoğun bir
 
 ### <a name="file-extension-validation"></a>Dosya Uzantısı doğrulaması
 
-Karşıya yüklenen dosyanın uzantısı izin verilen uzantılar listesine göre denetlenmelidir. Örnek:
+Karşıya yüklenen dosyanın uzantısı izin verilen uzantılar listesine göre denetlenmelidir. Örneğin:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -528,7 +530,7 @@ Birçok uygulama, dosyanın var olduğunu bir denetim içermelidir; Aksi takdird
 
 Karşıya yüklenen dosyaların boyutunu sınırlayın.
 
-Örnek uygulamada, dosyanın boyutu 2 MB ile sınırlıdır (bayt cinsinden gösterilir). Sınır, *appSettings. JSON* dosyasındaki [yapılandırma](xref:fundamentals/configuration/index) yoluyla sağlanır:
+Örnek uygulamada, dosyanın boyutu 2 MB ile sınırlıdır (bayt cinsinden gösterilir). Sınır, dosyadaki *appsettings.js* [yapılandırma](xref:fundamentals/configuration/index) yoluyla sağlanır:
 
 ```json
 {
@@ -707,7 +709,7 @@ Kestrel tarafından barındırılan uygulamalar için diğer Kestrel limitleri d
 
 ### <a name="iis-content-length-limit"></a>IIS içerik uzunluğu sınırı
 
-Varsayılan istek sınırı ( `maxAllowedContentLength` ), yaklaşık 28.6 MB olan 30.000.000 bayttır. *Web. config* dosyasında sınırı özelleştirin:
+Varsayılan istek sınırı ( `maxAllowedContentLength` ), yaklaşık 28.6 MB olan 30.000.000 bayttır. *web.config* dosyasında sınırı özelleştirin:
 
 ```xml
 <system.webServer>
@@ -918,7 +920,7 @@ Aşağıdaki örnek, önceki örneğe benzerdir, ancak şunları hariç:
 [Fetch API 'sini desteklemeyen](https://caniuse.com/#feat=fetch)istemcilerde form gönderisini JavaScript 'te gerçekleştirmek için aşağıdaki yaklaşımlardan birini kullanın:
 
 * Fetch Polyfill kullanın (örneğin, [Window. Fetch (GitHub/fetch)](https://github.com/github/fetch)).
-* `XMLHttpRequest` adresini kullanın. Örnek:
+* `XMLHttpRequest` adresini kullanın. Örneğin:
 
   ```javascript
   <script>
@@ -964,7 +966,7 @@ Sunucuya yüklenen tek dosyalara, kullanılarak [model bağlama](xref:mvc/models
 > Bu nedenle, şu ana kadar dikkate alınması gereken örnekler aşağıda verilmiştir. Ek bilgiler aşağıdaki bölümler ve [örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)tarafından sağlanır:
 >
 > * [Güvenlikle ilgili dikkat edilmesi gerekenler](#security-considerations)
-> * [Doğrulamasına](#validation)
+> * [Doğrulama](#validation)
 
 Model bağlama kullanarak dosyaları karşıya yüklerken <xref:Microsoft.AspNetCore.Http.IFormFile> , eylem yöntemi kabul edebilir:
 
@@ -1135,7 +1137,7 @@ Yukarıdaki örnek, örnek uygulamada gösterilen senaryoya benzerdir:
 > Belirtilen örneklerde dikkate alınması gereken önemli noktalar. Ek bilgiler aşağıdaki bölümler ve [örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)tarafından sağlanır:
 >
 > * [Güvenlikle ilgili dikkat edilmesi gerekenler](#security-considerations)
-> * [Doğrulamasına](#validation)
+> * [Doğrulama](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>Akışa sahip büyük dosyaları karşıya yükleme
 
@@ -1191,7 +1193,7 @@ Dosyaları tarama, yüksek hacimli senaryolarda sunucu kaynaklarında yoğun bir
 
 ### <a name="file-extension-validation"></a>Dosya Uzantısı doğrulaması
 
-Karşıya yüklenen dosyanın uzantısı izin verilen uzantılar listesine göre denetlenmelidir. Örnek:
+Karşıya yüklenen dosyanın uzantısı izin verilen uzantılar listesine göre denetlenmelidir. Örneğin:
 
 ```csharp
 private string[] permittedExtensions = { ".txt", ".pdf" };
@@ -1257,7 +1259,7 @@ Birçok uygulama, dosyanın var olduğunu bir denetim içermelidir; Aksi takdird
 
 Karşıya yüklenen dosyaların boyutunu sınırlayın.
 
-Örnek uygulamada, dosyanın boyutu 2 MB ile sınırlıdır (bayt cinsinden gösterilir). Sınır, *appSettings. JSON* dosyasındaki [yapılandırma](xref:fundamentals/configuration/index) yoluyla sağlanır:
+Örnek uygulamada, dosyanın boyutu 2 MB ile sınırlıdır (bayt cinsinden gösterilir). Sınır, dosyadaki *appsettings.js* [yapılandırma](xref:fundamentals/configuration/index) yoluyla sağlanır:
 
 ```json
 {
@@ -1429,7 +1431,7 @@ Kestrel tarafından barındırılan uygulamalar için diğer Kestrel limitleri d
 
 ### <a name="iis-content-length-limit"></a>IIS içerik uzunluğu sınırı
 
-Varsayılan istek sınırı ( `maxAllowedContentLength` ), yaklaşık 28.6 MB olan 30.000.000 bayttır. *Web. config* dosyasında sınırı özelleştirin:
+Varsayılan istek sınırı ( `maxAllowedContentLength` ), yaklaşık 28.6 MB olan 30.000.000 bayttır. *web.config* dosyasında sınırı özelleştirin:
 
 ```xml
 <system.webServer>

@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 07/11/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/gdpr
-ms.openlocfilehash: 2e21f54ebfcb55be2b97da217b92a39843b5d702
-ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
+ms.openlocfilehash: 0fef14388f83d8b4c708194954f2b75b2164b746
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/09/2020
-ms.locfileid: "83003206"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404502"
 ---
 # <a name="eu-general-data-protection-regulation-gdpr-support-in-aspnet-core"></a>ASP.NET Core içinde AB Genel Veri Koruma Yönetmeliği (GDPR) desteği
 
@@ -32,8 +34,8 @@ ASP.NET Core, bazı [ab genel veri koruma yönetmeliği (GDPR)](https://ec.europ
 
 ASP.NET Core 3,0 şablonu tarafından oluşturulan bir uygulamada ASP.NET Core 2,2 şablonlarında bulunan gibi varsayılan tanımlama bilgisi onayı özelliğini etkinleştirmek için:
 
-* Using `using Microsoft.AspNetCore.Http` yönergeleri listesine ekleyin.
-* Şunları yapmak için `Startup.Configure`ve [Usemapolimapolicy](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyappbuilderextensions.usecookiepolicy) 'e `Startup.ConfigureServices` ilişkin [ıepolicyoptions](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions) ekleyin:
+* `using Microsoft.AspNetCore.Http`Using yönergeleri listesine ekleyin.
+* [CookiePolicyOptions](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions) `Startup.ConfigureServices` Şunları yapmak için ve [Usemapolimapolicy](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyappbuilderextensions.usecookiepolicy) 'e ilişkin ıepolicyoptions ekleyin `Startup.Configure` :
 
   [!code-csharp[Main](gdpr/sample/RP3.0/Startup.cs?name=snippet1&highlight=12-19,38)]
 
@@ -41,7 +43,7 @@ ASP.NET Core 3,0 şablonu tarafından oluşturulan bir uygulamada ASP.NET Core 2
 
   [!code-cshtml[Main](gdpr/sample/RP3.0/Pages/Shared/_Layout.cshtml?name=snippet&highlight=4)]
 
-* Bu projeye * \_pişirme ıeconsentpartial. cshtml* dosyasını ekleyin:
+* Bu projeye * \_ pişirme ıeconsentpartial. cshtml* dosyasını ekleyin:
 
   [!code-cshtml[Main](gdpr/sample/RP3.0/Pages/Shared/_CookieConsentPartial.cshtml)]
 
@@ -52,10 +54,10 @@ ASP.NET Core 3,0 şablonu tarafından oluşturulan bir uygulamada ASP.NET Core 2
 ::: moniker range="= aspnetcore-2.2"
 
 * Proje şablonları, gizlilik ve tanımlama bilgisi kullanım ilkenize göre değiştireceğiniz uzantı noktalarını ve saplaması işaretlemesini içerir.
-* Bir tanımlama bilgisi onayı özelliği, kişisel bilgileri depolamak için kullanıcılarınıza izin vermenizi (ve izlemenizi) sağlar. Bir kullanıcı veri toplamaya ayrılmamışsa ve uygulamada [Checkconsentgerekliyse](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions.checkconsentneeded) `true`, temel olmayan tanımlama bilgileri tarayıcıya gönderilmez.
+* Bir tanımlama bilgisi onayı özelliği, kişisel bilgileri depolamak için kullanıcılarınıza izin vermenizi (ve izlemenizi) sağlar. Bir kullanıcı veri toplamaya ayrılmamışsa ve uygulamada [Checkconsentgerekliyse](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions.checkconsentneeded) `true` , temel olmayan tanımlama bilgileri tarayıcıya gönderilmez.
 * Tanımlama bilgileri, temel olarak işaretlenebilir. Kullanıcı onaylı değil ve izleme devre dışı bırakılmış olsa bile, temel tanımlama bilgileri tarayıcıya gönderilir.
 * İzleme devre dışı bırakıldığında [TempData ve oturum tanımlama bilgileri](#tempdata) işlevsel değildir.
-* [Kimlik yönetimi](#pd) sayfası, Kullanıcı verilerini indirmek ve silmek için bir bağlantı sağlar.
+* [ Identity Yönet](#pd) sayfası, Kullanıcı verilerini indirmek ve silmek için bir bağlantı sağlar.
 
 [Örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/gdpr/sample) , ASP.NET Core 2,1 ŞABLONLARıNA eklenen GDPR uzantı noktalarının ve API 'lerin çoğunu test etmenize olanak tanır. Test yönergeleri için [Benioku](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/gdpr/sample) dosyasına bakın.
 
@@ -63,33 +65,33 @@ ASP.NET Core 3,0 şablonu tarafından oluşturulan bir uygulamada ASP.NET Core 2
 
 ## <a name="aspnet-core-gdpr-support-in-template-generated-code"></a>Şablon tarafından üretilen kodda ASP.NET Core GDPR desteği
 
-Proje Şablonlarıyla oluşturulan Razor Pages ve MVC projeleri aşağıdaki GDPR desteğini içerir:
+RazorProje Şablonlarıyla oluşturulan sayfalar ve MVC projeleri aşağıdaki GDPR desteğini içerir:
 
-* Bir sınıfında, tanımlama, `Startup` [ıepolicyoptions](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions) ve [useınte ıepolicy](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyappbuilderextensions.usecookiepolicy) ayarlanır.
-* Pişirme [partial view](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper) *ıeconsentpartial. cshtml kısmi \_* görünümü. Bu dosyaya bir **kabul** düğmesi dahildir. Kullanıcı **kabul et** düğmesine tıkladığında, tanımlama bilgilerini depolamak için onay sağlanır.
-* *Sayfalar/gizlilik. cshtml* sayfası veya *Görünümler/Home/privacy. cshtml* görünümü sitenizin gizlilik ilkesini ayrıntılandırmakta olan bir sayfa sağlar. Pişirme ıeconsentpartial. cshtml dosyası gizlilik sayfasına bir bağlantı oluşturur. * \_*
+* Bir sınıfında, [tanımlama, ıepolicyoptions](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions) ve [Useınte ıepolicy](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyappbuilderextensions.usecookiepolicy) ayarlanır `Startup` .
+* * \_ Pişirme ıeconsentpartial. cshtml* [kısmi görünümü](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper). Bu dosyaya bir **kabul** düğmesi dahildir. Kullanıcı **kabul et** düğmesine tıkladığında, tanımlama bilgilerini depolamak için onay sağlanır.
+* *Sayfalar/gizlilik. cshtml* sayfası veya *Görünümler/Home/privacy. cshtml* görünümü sitenizin gizlilik ilkesini ayrıntılandırmakta olan bir sayfa sağlar. * \_ Pişirme ıeconsentpartial. cshtml* dosyası gizlilik sayfasına bir bağlantı oluşturur.
 * Bireysel kullanıcı hesaplarıyla oluşturulan uygulamalarda, Yönet sayfası [kişisel kullanıcı verilerini](#pd)indirmek ve silmek için bağlantılar sağlar.
 
 ### <a name="cookiepolicyoptions-and-usecookiepolicy"></a>Tanımlama, ıepolicyoptions ve Usepişiriepolicy
 
-[Pişirme ıepolicyoptions](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions) şu şekilde `Startup.ConfigureServices`başlatılır:
+[Pişirme ıepolicyoptions](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions) şu şekilde başlatılır `Startup.ConfigureServices` :
 
 [!code-csharp[Main](gdpr/sample/Startup.cs?name=snippet1&highlight=14-20)]
 
-[Usepişiriepolicy](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyappbuilderextensions.usecookiepolicy) şu şekilde `Startup.Configure`çağrılır:
+[Usepişiriepolicy](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyappbuilderextensions.usecookiepolicy) şu şekilde çağrılır `Startup.Configure` :
 
 [!code-csharp[](gdpr/sample/Startup.cs?name=snippet1&highlight=51)]
 
 ### <a name="_cookieconsentpartialcshtml-partial-view"></a>\_Pişirme ıeconsentpartial. cshtml kısmi görünümü
 
-Pişirme ıeconsentpartial. cshtml kısmi görünümü: * \_*
+* \_ Pişirme ıeconsentpartial. cshtml* kısmi görünümü:
 
 [!code-html[](gdpr/sample/RP2.2/Pages/Shared/_CookieConsentPartial.cshtml)]
 
 Bu kısmi:
 
-* Kullanıcı için izleme durumunu alır. Uygulama onay gerektirecek şekilde yapılandırıldıysa, tanımlama bilgilerinin izlenmemesi için kullanıcının onayı gerekir. İzin gerekliyse, tanımlama bilgisi onay paneli * \_düzen. cshtml* dosyası tarafından oluşturulan gezinti çubuğunun üstünde düzeltilir.
-* Gizlilik ve tanımlama `<p>` bilgisi kullanım ilkenizi özetlemek IÇIN bir HTML öğesi sağlar.
+* Kullanıcı için izleme durumunu alır. Uygulama onay gerektirecek şekilde yapılandırıldıysa, tanımlama bilgilerinin izlenmemesi için kullanıcının onayı gerekir. İzin gerekliyse, tanımlama bilgisi onay paneli * \_ Düzen. cshtml* dosyası tarafından oluşturulan gezinti çubuğunun üstünde düzeltilir.
+* `<p>`Gizlilik ve tanımlama bilgisi kullanım ilkenizi özetlemek için BIR HTML öğesi sağlar.
 * Gizlilik sayfasına bir bağlantı sağlar veya sitenizin gizlilik ilkesini ayrıntılandırınızın ne olduğunu görebilirsiniz.
 
 ## <a name="essential-cookies"></a>Temel tanımlama bilgileri
@@ -102,7 +104,7 @@ Tanımlama bilgilerini depolamak için izin sağlanmazsa, tarayıcıya yalnızca
 
 ### <a name="tempdata-provider-and-session-state-cookies-arent-essential"></a>TempData sağlayıcısı ve oturum durumu tanımlama bilgileri gerekli değildir
 
-[TempData sağlayıcısı](xref:fundamentals/app-state#tempdata) tanımlama bilgisi gerekli değildir. İzleme devre dışıysa, TempData sağlayıcısı işlevsel değildir. İzleme devre dışı bırakıldığında TempData sağlayıcısını etkinleştirmek için, TempData tanımlama bilgisini ' de `Startup.ConfigureServices`gerekli olarak işaretleyin:
+[TempData sağlayıcısı](xref:fundamentals/app-state#tempdata) tanımlama bilgisi gerekli değildir. İzleme devre dışıysa, TempData sağlayıcısı işlevsel değildir. İzleme devre dışı bırakıldığında TempData sağlayıcısını etkinleştirmek için, TempData tanımlama bilgisini ' de gerekli olarak işaretleyin `Startup.ConfigureServices` :
 
 [!code-csharp[Main](gdpr/sample/RP2.2/Startup.cs?name=snippet1)]
 
@@ -122,9 +124,9 @@ Kullanıcı adını seçin ve **kişisel veriler**' i seçin:
 
 Notlar:
 
-* `Account/Manage` Kodu oluşturmak için bkz. [Yapı iskelesi kimliği](xref:security/authentication/scaffold-identity).
-* **Silme** ve **indirme** bağlantıları yalnızca varsayılan kimlik verilerinde işlem görür. Özel Kullanıcı verileri oluşturan uygulamalar, özel kullanıcı verilerini silmek/indirmek için genişletilmelidir. Daha fazla bilgi için bkz. [Özel Kullanıcı verilerini kimlik Ile ekleme, indirme ve silme](xref:security/authentication/add-user-data).
-* Kimlik veritabanı tablosunda `AspNetUserTokens` depolanan kullanıcının kaydedilmiş belirteçleri, Kullanıcı [yabancı anahtar](https://github.com/aspnet/Identity/blob/release/2.1/src/EF/IdentityUserContext.cs#L152)nedeniyle basamaklı silme davranışı aracılığıyla silindiğinde silinir.
+* Kodu oluşturmak için `Account/Manage` bkz. [ Identity Yapı iskelesi ](xref:security/authentication/scaffold-identity).
+* **Silme** ve **indirme** bağlantıları yalnızca varsayılan kimlik verilerinde işlem görür. Özel Kullanıcı verileri oluşturan uygulamalar, özel kullanıcı verilerini silmek/indirmek için genişletilmelidir. Daha fazla bilgi için bkz. [Özel Kullanıcı verilerini Identity ekleme, indirme ve silme ](xref:security/authentication/add-user-data).
+* Veritabanı tablosunda depolanan kullanıcının kaydedilmiş belirteçleri, Identity `AspNetUserTokens` Kullanıcı [yabancı anahtar](https://github.com/aspnet/Identity/blob/release/2.1/src/EF/IdentityUserContext.cs#L152)nedeniyle basamaklı silme davranışı aracılığıyla silindiğinde silinir.
 * Facebook ve Google gibi [dış sağlayıcı kimlik doğrulaması](xref:security/authentication/social/index), tanımlama bilgisi İlkesi kabul edilmeden önce kullanılamaz.
 
 ::: moniker-end

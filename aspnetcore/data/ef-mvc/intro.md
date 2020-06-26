@@ -8,21 +8,23 @@ ms.date: 02/06/2019
 ms.topic: tutorial
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: data/ef-mvc/intro
-ms.openlocfilehash: 7f17352d2e7e3f4239b338ec961120ab3088c77a
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 3a42ce1773bef74fab35884025765d147c534dd2
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773555"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403228"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Öğretici: bir ASP.NET MVC web uygulamasında EF Core kullanmaya başlama
 
-Bu öğretici 3,0 **not** ASP.NET Core güncelleştirilmedi. Sayfalar sürümü güncelleştirildi. [ Razor ](xref:data/ef-rp/intro) Kodun büyük bir çoğunluğu, Bu öğreticinin ASP.NET Core 3,0 ve sonraki bir sürümü için değişir:
+Bu öğretici 3,0 **not** ASP.NET Core güncelleştirilmedi. [ Razor Sayfalar sürümü](xref:data/ef-rp/intro) güncelleştirildi. Kodun büyük bir çoğunluğu, Bu öğreticinin ASP.NET Core 3,0 ve sonraki bir sürümü için değişir:
 
 * *Startup.cs* ve *program.cs* dosyalarıdır.
 * , [ Razor Sayfalar sürümünde](xref:data/ef-rp/intro)bulunabilir. 
@@ -48,7 +50,7 @@ Bu öğreticide şunları yaptınız:
 > * Denetleyici ve görünüm oluşturma
 > * Veritabanını görüntüleme
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [.NET Core SDK 2,2](https://dotnet.microsoft.com/download)
 * Aşağıdaki iş yükleriyle [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) :
@@ -122,7 +124,7 @@ Projeyi çalıştırmak için CTRL + F5 tuşlarına basın veya menüden **hata 
 
 Bir projeye EF Core destek eklemek için hedeflemek istediğiniz veritabanı sağlayıcısını yükleyebilirsiniz. Bu öğretici SQL Server kullanır ve sağlayıcı paketi [Microsoft. EntityFrameworkCore. SqlServer](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.SqlServer/)' dır. Bu paket [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app)içinde bulunur, bu nedenle pakete başvurmanız gerekmez.
 
-EF SQL Server paketi ve bağımlılıkları (`Microsoft.EntityFrameworkCore` ve `Microsoft.EntityFrameworkCore.Relational`) EF için çalışma zamanı desteği sağlar. [Geçiş](migrations.md) öğreticisinde daha sonra bir araç paketi ekleyeceksiniz.
+EF SQL Server paketi ve bağımlılıkları ( `Microsoft.EntityFrameworkCore` ve `Microsoft.EntityFrameworkCore.Relational` ) EF için çalışma zamanı desteği sağlar. [Geçiş](migrations.md) öğreticisinde daha sonra bir araç paketi ekleyeceksiniz.
 
 Entity Framework Core için kullanılabilen diğer veritabanı sağlayıcıları hakkında daha fazla bilgi için bkz. [veritabanı sağlayıcıları](/ef/core/providers/).
 
@@ -132,7 +134,7 @@ Daha sonra Contoso Üniversitesi uygulaması için varlık sınıfları oluştur
 
 ![Kurs-kayıt-öğrenci veri modeli diyagramı](intro/_static/data-model-diagram.png)
 
-Ve `Student` `Enrollment` varlıkları arasında bire çok ilişki vardır ve ile `Course` `Enrollment` varlıklar arasında bire çok ilişki vardır. Diğer bir deyişle, bir öğrenci herhangi bir sayıda kursa kaydedilebilir ve bir kurs, kayıtlı sayıda öğrenciye sahip olabilir.
+Ve varlıkları arasında bire çok ilişki vardır `Student` `Enrollment` ve ile varlıklar arasında bire çok ilişki vardır `Course` `Enrollment` . Diğer bir deyişle, bir öğrenci herhangi bir sayıda kursa kaydedilebilir ve bir kurs, kayıtlı sayıda öğrenciye sahip olabilir.
 
 Aşağıdaki bölümlerde, bu varlıkların her biri için bir sınıf oluşturacaksınız.
 
@@ -144,11 +146,11 @@ Aşağıdaki bölümlerde, bu varlıkların her biri için bir sınıf oluştura
 
 [!code-csharp[](intro/samples/cu/Models/Student.cs?name=snippet_Intro)]
 
-Özelliği `ID` , bu sınıfa karşılık gelen veritabanı tablosunun birincil anahtar sütunu olacak. Varsayılan olarak Entity Framework, `ID` veya `classnameID` olarak adlandırılan özellikleri birincil anahtar olarak algılar.
+`ID`Özelliği, bu sınıfa karşılık gelen veritabanı tablosunun birincil anahtar sütunu olacak. Varsayılan olarak Entity Framework, `ID` veya `classnameID` olarak adlandırılan özellikleri birincil anahtar olarak algılar.
 
-`Enrollments` Özelliği bir [Gezinti özelliğidir](/ef/core/modeling/relationships). Gezinti özellikleri, bu varlıkla ilgili diğer varlıkları tutar. Bu durumda `Enrollments` , öğesinin özelliği bu `Student entity` `Enrollment` `Student` varlıkla ilgili varlıkların tümünü tutacaktır. Diğer bir deyişle, veritabanında verilen bir öğrenci satırında iki ilişkili kayıt satırı varsa (bu öğrencinin birincil anahtar değerini kendi Studentitıd yabancı anahtar sütununda içeren satırlar) varsa, söz konusu `Student` varlığın `Enrollments` gezinti özelliği bu iki `Enrollment` varlığı içerecektir.
+`Enrollments`Özelliği bir [Gezinti özelliğidir](/ef/core/modeling/relationships). Gezinti özellikleri, bu varlıkla ilgili diğer varlıkları tutar. Bu durumda, `Enrollments` öğesinin özelliği bu `Student entity` `Enrollment` varlıkla ilgili varlıkların tümünü tutacaktır `Student` . Diğer bir deyişle, veritabanında verilen bir öğrenci satırında iki ilişkili kayıt satırı varsa (bu öğrencinin birincil anahtar değerini kendi Studentitıd yabancı anahtar sütununda içeren satırlar) varsa, söz konusu `Student` varlığın `Enrollments` gezinti özelliği bu iki `Enrollment` varlığı içerecektir.
 
-Bir gezinti özelliği birden çok varlığı tutabileceiyorsa (çok-çok veya bire çok ilişkilerde olduğu gibi), türü girişlerin eklenebileceği, silinebileceği ve güncelleştirilemeyebilir bir liste olmalıdır `ICollection<T>`. Veya gibi bir `ICollection<T>` tür `List<T>` belirtebilirsiniz `HashSet<T>`. Belirtirseniz `ICollection<T>`, EF varsayılan olarak bir `HashSet<T>` koleksiyon oluşturur.
+Bir gezinti özelliği birden çok varlığı tutabileceiyorsa (çok-çok veya bire çok ilişkilerde olduğu gibi), türü girişlerin eklenebileceği, silinebileceği ve güncelleştirilemeyebilir bir liste olmalıdır `ICollection<T>` . Veya gibi `ICollection<T>` bir tür belirtebilirsiniz `List<T>` `HashSet<T>` . Belirtirseniz `ICollection<T>` , EF `HashSet<T>` Varsayılan olarak bir koleksiyon oluşturur.
 
 ### <a name="the-enrollment-entity"></a>Kayıt varlığı
 
@@ -158,15 +160,15 @@ Bir gezinti özelliği birden çok varlığı tutabileceiyorsa (çok-çok veya b
 
 [!code-csharp[](intro/samples/cu/Models/Enrollment.cs?name=snippet_Intro)]
 
-`EnrollmentID` Özelliği birincil anahtar olacaktır; Bu varlık, `classnameID` `Student` varlıkta gördüğünüz gibi kendi `ID` başına bir model kullanır. Normalde tek bir model seçip veri modeliniz genelinde kullanabilirsiniz. Burada, değişim, her iki stili de kullanabileceğinizi gösterir. [Daha sonraki bir öğreticide](inheritance.md), ID 'yi ClassName olmadan kullanarak, veri modelinde devralma uygulamayı daha kolay hale getirir.
+`EnrollmentID`Özelliği birincil anahtar olacaktır; bu varlık, `classnameID` `ID` varlıkta gördüğünüz gibi kendi başına bir model kullanır `Student` . Normalde tek bir model seçip veri modeliniz genelinde kullanabilirsiniz. Burada, değişim, her iki stili de kullanabileceğinizi gösterir. [Daha sonraki bir öğreticide](inheritance.md), ID 'yi ClassName olmadan kullanarak, veri modelinde devralma uygulamayı daha kolay hale getirir.
 
-`Grade` Özelliği bir `enum`. `Grade` Tür bildiriminden sonraki soru işareti, `Grade` özelliğin null yapılabilir olduğunu gösterir. Null olan bir sınıf sıfır bir sınıf ile farklıdır--null, henüz bir sınıf bilinmediğini veya henüz atanmadığını belirtir.
+`Grade`Özelliği bir `enum` . Tür bildiriminden sonraki soru işareti, `Grade` `Grade` özelliğin null yapılabilir olduğunu gösterir. Null olan bir sınıf sıfır bir sınıf ile farklıdır--null, henüz bir sınıf bilinmediğini veya henüz atanmadığını belirtir.
 
-`StudentID` Özelliği bir yabancı anahtardır ve karşılık gelen gezinti özelliği ' dir `Student`. `Enrollment` `Student` Bir varlık bir varlıkla ilişkilendirilir, bu nedenle özellik yalnızca `Student` tek bir varlığı tutabilir (daha önce gördüğünüz `Student.Enrollments` gezinti özelliğinden farklı olarak, birden çok `Enrollment` varlık tutabilir).
+`StudentID`Özelliği bir yabancı anahtardır ve karşılık gelen gezinti özelliği ' dir `Student` . Bir varlık `Enrollment` bir `Student` varlıkla ilişkilendirilir, bu nedenle özellik yalnızca tek bir varlığı tutabilir `Student` ( `Student.Enrollments` daha önce gördüğünüz gezinti özelliğinden farklı olarak, birden çok `Enrollment` varlık tutabilir).
 
-`CourseID` Özelliği bir yabancı anahtardır ve karşılık gelen gezinti özelliği ' dir `Course`. Bir `Enrollment` varlık bir `Course` varlıkla ilişkilendirilir.
+`CourseID`Özelliği bir yabancı anahtardır ve karşılık gelen gezinti özelliği ' dir `Course` . Bir `Enrollment` varlık bir `Course` varlıkla ilişkilendirilir.
 
-Entity Framework, bir özelliği bir yabancı `<navigation property name><primary key property name>` anahtar özelliği olarak (örneğin, `StudentID` `Student` `Student` varlığın birincil anahtarından bu yana gezinti özelliği için `ID`) olarak yorumlar. Yabancı anahtar `<primary key property name>` özellikleri de yalnızca adlandırılmış olabilir (örneğin, `CourseID` `Course` varlığın birincil anahtarı olduğundan `CourseID`).
+Entity Framework, bir özelliği bir yabancı anahtar özelliği olarak `<navigation property name><primary key property name>` (örneğin, `StudentID` `Student` varlığın birincil anahtarından bu yana gezinti özelliği için) olarak yorumlar `Student` `ID` . Yabancı anahtar özellikleri de yalnızca adlandırılmış olabilir `<primary key property name>` (örneğin, `CourseID` `Course` varlığın birincil anahtarı olduğundan `CourseID` ).
 
 ### <a name="the-course-entity"></a>Kurs varlığı
 
@@ -176,13 +178,13 @@ Entity Framework, bir özelliği bir yabancı `<navigation property name><primar
 
 [!code-csharp[](intro/samples/cu/Models/Course.cs?name=snippet_Intro)]
 
-`Enrollments` Özelliği bir gezinti özelliğidir. Bir `Course` varlık herhangi bir sayıda `Enrollment` varlıkla ilişkili olabilir.
+`Enrollments`Özelliği bir gezinti özelliğidir. Bir `Course` varlık herhangi bir sayıda varlıkla ilişkili olabilir `Enrollment` .
 
-Bu serinin sonraki bir `DatabaseGenerated` [öğreticide](complex-data-model.md) özniteliği hakkında daha fazla bilgi edineceksiniz. Temel olarak bu öznitelik, veritabanının oluşturması yerine kursa ait birincil anahtarı girmenize olanak sağlar.
+`DatabaseGenerated`Bu serinin [sonraki bir öğreticide](complex-data-model.md) özniteliği hakkında daha fazla bilgi edineceksiniz. Temel olarak bu öznitelik, veritabanının oluşturması yerine kursa ait birincil anahtarı girmenize olanak sağlar.
 
 ## <a name="create-the-database-context"></a>Veritabanı bağlamını oluşturma
 
-Belirli bir veri modeli için Entity Framework işlevselliğini koordine eden ana sınıf veritabanı bağlamı sınıfıdır. `Microsoft.EntityFrameworkCore.DbContext` Sınıfından türeterek bu sınıfı oluşturursunuz. Kodunuzda, veri modeline hangi varlıkların ekleneceğini belirtirsiniz. Ayrıca, belirli Entity Framework davranışlarını özelleştirebilirsiniz. Bu projede, sınıfı olarak adlandırılır `SchoolContext`.
+Belirli bir veri modeli için Entity Framework işlevselliğini koordine eden ana sınıf veritabanı bağlamı sınıfıdır. Sınıfından türeterek bu sınıfı oluşturursunuz `Microsoft.EntityFrameworkCore.DbContext` . Kodunuzda, veri modeline hangi varlıkların ekleneceğini belirtirsiniz. Ayrıca, belirli Entity Framework davranışlarını özelleştirebilirsiniz. Bu projede, sınıfı olarak adlandırılır `SchoolContext` .
 
 Proje klasöründe, *veri*adlı bir klasör oluşturun.
 
@@ -190,11 +192,11 @@ Proje klasöründe, *veri*adlı bir klasör oluşturun.
 
 [!code-csharp[](intro/samples/cu/Data/SchoolContext.cs?name=snippet_Intro)]
 
-Bu kod, her `DbSet` bir varlık kümesi için bir özellik oluşturur. Entity Framework terimlerinde, genellikle bir varlık kümesi bir veritabanı tablosuna karşılık gelir ve bir varlık tablodaki bir satıra karşılık gelir.
+Bu kod, `DbSet` her bir varlık kümesi için bir özellik oluşturur. Entity Framework terimlerinde, genellikle bir varlık kümesi bir veritabanı tablosuna karşılık gelir ve bir varlık tablodaki bir satıra karşılık gelir.
 
-`DbSet<Enrollment>` Ve `DbSet<Course>` deyimlerini atlamış olabilirsiniz ve aynı şekilde çalışır. Entity Framework, `Student` varlık `Enrollment` varlığa başvurduğundan ve `Enrollment` varlık varlığa başvurduğundan `Course` bunları örtülü olarak içerebilir.
+Ve deyimlerini atlamış olabilirsiniz `DbSet<Enrollment>` `DbSet<Course>` ve aynı şekilde çalışır. Entity Framework, `Student` varlık varlığa başvurduğundan ve varlık varlığa başvurduğundan bunları örtülü olarak içerebilir `Enrollment` `Enrollment` `Course` .
 
-Veritabanı oluşturulduğunda EF, `DbSet` Özellik adlarıyla aynı adlara sahip tablolar oluşturur. Koleksiyonlar için özellik adları genellikle plural (öğrenci yerine öğrenciler), ancak geliştiriciler tablo adlarının plurulululmasını kabul etmez. Bu öğreticiler için DbContext içinde tekil tablo adları belirterek varsayılan davranışı geçersiz kılarsınız. Bunu yapmak için, son DbSet özelliğinden sonra aşağıdaki vurgulanmış kodu ekleyin.
+Veritabanı oluşturulduğunda EF, özellik adlarıyla aynı adlara sahip tablolar oluşturur `DbSet` . Koleksiyonlar için özellik adları genellikle plural (öğrenci yerine öğrenciler), ancak geliştiriciler tablo adlarının plurulululmasını kabul etmez. Bu öğreticiler için DbContext içinde tekil tablo adları belirterek varsayılan davranışı geçersiz kılarsınız. Bunu yapmak için, son DbSet özelliğinden sonra aşağıdaki vurgulanmış kodu ekleyin.
 
 [!code-csharp[](intro/samples/cu/Data/SchoolContext.cs?name=snippet_TableNames&highlight=16-21)]
 
@@ -202,23 +204,23 @@ Veritabanı oluşturulduğunda EF, `DbSet` Özellik adlarıyla aynı adlara sahi
 
 ASP.NET Core, varsayılan olarak [bağımlılık ekleme](../../fundamentals/dependency-injection.md) işlemini uygular. Hizmetler (EF veritabanı bağlamı gibi) uygulama başlatma sırasında bağımlılık ekleme ile kaydedilir. Bu hizmetleri gerektiren bileşenler (MVC denetleyicileri gibi) bu hizmetleri Oluşturucu parametreleri aracılığıyla sağlamaktadır. Bu öğreticide daha sonra bir bağlam örneği alan denetleyici Oluşturucu kodunu görürsünüz.
 
-Hizmet olarak `SchoolContext` kaydetmek için *Startup.cs*açın ve vurgulanan satırları `ConfigureServices` yöntemine ekleyin.
+`SchoolContext`Hizmet olarak kaydetmek için *Startup.cs*açın ve vurgulanan satırları `ConfigureServices` yöntemine ekleyin.
 
 [!code-csharp[](intro/samples/cu/Startup.cs?name=snippet_SchoolContext&highlight=9-10)]
 
-Bağlantı dizesinin adı bir `DbContextOptionsBuilder` nesne üzerinde bir yöntem çağırarak bağlama geçirilir. Yerel geliştirme için [ASP.NET Core yapılandırma sistemi](xref:fundamentals/configuration/index) , *appSettings. JSON* dosyasından bağlantı dizesini okur.
+Bağlantı dizesinin adı bir nesne üzerinde bir yöntem çağırarak bağlama geçirilir `DbContextOptionsBuilder` . Yerel geliştirme için [ASP.NET Core yapılandırma sistemi](xref:fundamentals/configuration/index) dosyadaki *appsettings.js* bağlantı dizesini okur.
 
-Ve `using` `Microsoft.EntityFrameworkCore` ad alanları `ContosoUniversity.Data` için deyimler ekleyin ve ardından projeyi derleyin.
+`using` `ContosoUniversity.Data` Ve ad alanları için deyimler ekleyin `Microsoft.EntityFrameworkCore` ve ardından projeyi derleyin.
 
 [!code-csharp[](intro/samples/cu/Startup.cs?name=snippet_Usings)]
 
-*AppSettings. JSON* dosyasını açın ve aşağıdaki örnekte gösterildiği gibi bir bağlantı dizesi ekleyin.
+appsettings.jsdosya *üzerinde* açın ve aşağıdaki örnekte gösterildiği gibi bir bağlantı dizesi ekleyin.
 
 [!code-json[](./intro/samples/cu/appsettings1.json?highlight=2-4)]
 
 ### <a name="sql-server-express-localdb"></a>SQL Server Express LocalDB
 
-Bağlantı dizesi bir SQL Server LocalDB veritabanı belirtir. LocalDB, SQL Server Express veritabanı altyapısının hafif bir sürümüdür ve üretim kullanımı için değil uygulama geliştirmeye yöneliktir. LocalDB, istek üzerine başlar ve kullanıcı modunda çalışır, bu nedenle karmaşık bir yapılandırma yoktur. Varsayılan olarak, LocalDB `C:/Users/<user>` dizinde *. mdf* veritabanı dosyaları oluşturur.
+Bağlantı dizesi bir SQL Server LocalDB veritabanı belirtir. LocalDB, SQL Server Express veritabanı altyapısının hafif bir sürümüdür ve üretim kullanımı için değil uygulama geliştirmeye yöneliktir. LocalDB, istek üzerine başlar ve kullanıcı modunda çalışır, bu nedenle karmaşık bir yapılandırma yoktur. Varsayılan olarak, LocalDB dizinde *. mdf* veritabanı dosyaları oluşturur `C:/Users/<user>` .
 
 ## <a name="initialize-db-with-test-data"></a>Test verileriyle VERITABANıNı başlatma
 
@@ -230,9 +232,9 @@ Burada, `EnsureCreated` veritabanını otomatik olarak oluşturmak için yöntem
 
 [!code-csharp[](intro/samples/cu/Data/DbInitializer.cs?name=snippet_Intro)]
 
-Kod, veritabanında herhangi bir öğrenci olup olmadığını denetler ve yoksa, veritabanının yeni olduğunu ve test verileriyle hazırlanması gerektiğini varsayar. Performansı iyileştirmek için test verilerini `List<T>` koleksiyonlar yerine dizilere yükler.
+Kod, veritabanında herhangi bir öğrenci olup olmadığını denetler ve yoksa, veritabanının yeni olduğunu ve test verileriyle hazırlanması gerektiğini varsayar. Performansı iyileştirmek için test verilerini koleksiyonlar yerine dizilere yükler `List<T>` .
 
-*Program.cs*' de, uygulama `Main` başlangıcında aşağıdakini yapmak için yöntemini değiştirin:
+*Program.cs*' de, `Main` Uygulama başlangıcında aşağıdakini yapmak için yöntemini değiştirin:
 
 * Bağımlılık ekleme kapsayıcısından bir veritabanı bağlamı örneği alın.
 * Temel yöntemi çağırın ve bu yönteme geçerek bağlamı geçer.
@@ -240,11 +242,11 @@ Kod, veritabanında herhangi bir öğrenci olup olmadığını denetler ve yoksa
 
 [!code-csharp[](intro/samples/cu/Program.cs?name=snippet_Seed&highlight=3-20)]
 
-Deyim `using` ekle:
+`using`Deyim Ekle:
 
 [!code-csharp[](intro/samples/cu/Program.cs?name=snippet_Usings)]
 
-Eski öğreticilerde, `Configure` *Startup.cs*içinde yönteminde benzer bir kod görebilirsiniz. `Configure` Yöntemini yalnızca istek ardışık düzenini ayarlamak için kullanmanızı öneririz. Uygulama başlangıç kodu `Main` yöntemine aittir.
+Eski öğreticilerde, `Configure` *Startup.cs*içinde yönteminde benzer bir kod görebilirsiniz. `Configure`Yöntemini yalnızca istek ardışık düzenini ayarlamak için kullanmanızı öneririz. Uygulama başlangıç kodu `Main` yöntemine aittir.
 
 Uygulamayı ilk kez çalıştırdığınızda veritabanı oluşturulur ve test verileriyle birlikte gösterilir. Veri modelinizi her değiştirdiğinizde, veritabanını silebilir, çekirdek yönteminizi güncelleştirebilir ve yeni bir veritabanıyla aynı şekilde bir baştan başlatabilirsiniz. Sonraki öğreticilerde, veri modeli değiştiğinde ve yeniden oluşturmadan veritabanını nasıl değiştireceğiniz hakkında bilgi edineceksiniz.
 
@@ -276,13 +278,13 @@ CRUD eylem yöntemlerinin ve görünümlerinin otomatik olarak oluşturulması, 
 
 (Yapı iskelesi altyapısı, daha önce Bu öğreticide yaptığınız gibi, daha önce el ile oluşturmazsanız, sizin için veritabanı bağlamını de oluşturabilir. **Veri bağlam sınıfının**sağ tarafındaki artı Işaretine tıklayarak **Denetleyici Ekle** kutusunda yeni bir bağlam sınıfı belirtebilirsiniz.  Daha sonra, Visual Studio `DbContext` sınıfınızın yanı sıra denetleyiciyi ve görünümleri de oluşturacaktır.)
 
-Denetleyicinin bir `SchoolContext` Oluşturucu parametresi olarak aldığını fark edeceksiniz.
+Denetleyicinin bir oluşturucu parametresi olarak aldığını fark edeceksiniz `SchoolContext` .
 
 [!code-csharp[](intro/samples/cu/Controllers/StudentsController.cs?name=snippet_Context&highlight=5,7,9)]
 
-ASP.NET Core bağımlılığı ekleme, denetleyiciye bir örneğini `SchoolContext` geçirme işlemini gerçekleştirir. Bunu *Startup.cs* dosyasında daha önce yapılandırdınız.
+ASP.NET Core bağımlılığı ekleme, denetleyiciye bir örneğini geçirme işlemini gerçekleştirir `SchoolContext` . Bunu *Startup.cs* dosyasında daha önce yapılandırdınız.
 
-Denetleyici, veritabanındaki tüm `Index` öğrencileri görüntüleyen bir Action yöntemi içerir. Yöntemi, veritabanı bağlamı örneğinin `Students` özelliğini okuyarak öğrenciler varlık kümesinden öğrencilerin bir listesini alır:
+Denetleyici, `Index` veritabanındaki tüm öğrencileri görüntüleyen bir Action yöntemi içerir. Yöntemi, `Students` veritabanı bağlamı örneğinin özelliğini okuyarak öğrenciler varlık kümesinden öğrencilerin bir listesini alır:
 
 [!code-csharp[](intro/samples/cu/Controllers/StudentsController.cs?name=snippet_ScaffoldedIndex&highlight=3)]
 
@@ -294,7 +296,7 @@ Denetleyici, veritabanındaki tüm `Index` öğrencileri görüntüleyen bir Act
 
 Projeyi çalıştırmak için CTRL + F5 tuşlarına basın veya menüden **hata ayıklama > Başlat** ' ı seçin.
 
-`DbInitializer.Initialize` Metodun eklendiği test verilerini görmek için öğrenciler sekmesine tıklayın. Tarayıcı pencerenizin ne kadar dar olduğuna bağlı olarak sayfanın en üstünde `Students` sekme bağlantısını görürsünüz veya bağlantıyı görmek için sağ üst köşedeki gezinti simgesine tıklamanız gerekir.
+Metodun eklendiği test verilerini görmek için öğrenciler sekmesine tıklayın `DbInitializer.Initialize` . Tarayıcı pencerenizin ne kadar dar olduğuna bağlı olarak `Students` sayfanın en üstünde sekme bağlantısını görürsünüz veya bağlantıyı görmek için sağ üst köşedeki gezinti simgesine tıklamanız gerekir.
 
 ![Contoso Üniversitesi giriş sayfası dar](intro/_static/home-page-narrow.png)
 
@@ -302,13 +304,13 @@ Projeyi çalıştırmak için CTRL + F5 tuşlarına basın veya menüden **hata 
 
 ## <a name="view-the-database"></a>Veritabanını görüntüleme
 
-Uygulamayı başlattığınızda, `DbInitializer.Initialize` yöntemi çağırır `EnsureCreated`. EF, bir veritabanı olmadığını ve bu nedenle bir tane oluşturduğunu gördük, daha sonra `Initialize` Yöntem kodunun geri kalanı veritabanını verilerle doldurmuş. Visual Studio 'da veritabanını görüntülemek için **SQL Server Nesne Gezgini** (ssox) kullanabilirsiniz.
+Uygulamayı başlattığınızda, `DbInitializer.Initialize` yöntemi çağırır `EnsureCreated` . EF, bir veritabanı olmadığını ve bu nedenle bir tane oluşturduğunu gördük, daha sonra `Initialize` Yöntem kodunun geri kalanı veritabanını verilerle doldurmuş. Visual Studio 'da veritabanını görüntülemek için **SQL Server Nesne Gezgini** (ssox) kullanabilirsiniz.
 
 Tarayıcıyı kapatın.
 
 SSOX penceresi henüz açık değilse, Visual Studio 'daki **Görünüm** menüsünden bunu seçin.
 
-SSOX 'te **(LocalDB) \MSSQLLocalDB > veritabanları**' na tıklayın ve ardından *appSettings. JSON* dosyanızdaki bağlantı dizesinde bulunan veritabanı adı için girişe tıklayın.
+SSOX 'te **(LocalDB) \MSSQLLocalDB > veritabanları**' na tıklayın ve ardından *appsettings.jsüzerindeki* bağlantı dizesinde bulunan veritabanı adı için girişe tıklayın.
 
 Veritabanınızdaki tabloları görmek için **Tablolar** düğümünü genişletin.
 
@@ -318,21 +320,21 @@ Oluşturulan sütunları ve tabloya eklenmiş satırları görmek için **öğre
 
 ![SSOX 'te öğrenci tablosu](intro/_static/ssox-student-table.png)
 
-*. Mdf* ve *. ldf* veritabanı dosyaları, *\\\<C:\Users YourUserName>* klasöründedir.
+*. Mdf* ve *. ldf* veritabanı dosyaları * \\ \<yourusername> C:\Users* klasöründedir.
 
-Uygulama başlatma sırasında çalışan `EnsureCreated` Başlatıcı metodunu çağırırken, artık `Student` sınıfta bir değişiklik yapabilir, veritabanını silebilir, uygulamayı yeniden çalıştırabilirsiniz ve veritabanı, değişikliklerinizi eşleştirmek için otomatik olarak yeniden oluşturulur. Örneğin, `EmailAddress` `Student` sınıfa bir özellik eklerseniz, yeniden oluşturulan tabloda yeni `EmailAddress` bir sütun görürsünüz.
+`EnsureCreated`Uygulama başlatma sırasında çalışan Başlatıcı metodunu çağırırken, artık sınıfta bir değişiklik yapabilir, `Student` veritabanını silebilir, uygulamayı yeniden çalıştırabilirsiniz ve veritabanı, değişikliklerinizi eşleştirmek için otomatik olarak yeniden oluşturulur. Örneğin, `EmailAddress` sınıfa bir özellik eklerseniz `Student` , `EmailAddress` yeniden oluşturulan tabloda yeni bir sütun görürsünüz.
 
 ## <a name="conventions"></a>Kurallar
 
 Entity Framework, kuralların kullanımı veya Entity Framework varsayımlarıyla ilgili olarak en az bir veritabanı oluşturabilmesini sağlamak için yazmanız gereken kod miktarı.
 
-* `DbSet` Özelliklerin adları tablo adı olarak kullanılır. Bir `DbSet` özellik tarafından başvurulmayan varlıklar için, varlık sınıfı adları tablo adı olarak kullanılır.
+* `DbSet`Özelliklerin adları tablo adı olarak kullanılır. Bir özellik tarafından başvurulmayan varlıklar için `DbSet` , varlık sınıfı adları tablo adı olarak kullanılır.
 
 * Varlık özelliği adları, sütun adları için kullanılır.
 
 * ID veya Classnameıd olarak adlandırılan varlık özellikleri, birincil anahtar özellikleri olarak tanınır.
 
-* Bir özellik, * \< \<gezinti özelliği adı>birincil anahtar özellik adı>* (örneğin, `StudentID` `Student` `Student` varlığın birincil anahtarı olduğundan `ID`gezinti özelliği için) olarak adlandırılmışsa, yabancı anahtar özelliği olarak yorumlanır. Yabancı anahtar özelliklerine de yalnızca * \<birincil anahtar özellik adı>* (örneğin, `EnrollmentID` `Enrollment` varlığın birincil anahtarı olduğu `EnrollmentID`için) adlandırılmış olabilir.
+* Bir özellik, adlandırılmış ise yabancı anahtar özelliği olarak yorumlanır *\<navigation property name>\<primary key property name>* (örneğin, `StudentID` `Student` `Student` varlığın birincil anahtarı olduğundan gezinti özelliği için `ID` ). Yabancı anahtar özellikleri de yalnızca adlandırılmış olabilir *\<primary key property name>* (örneğin, `EnrollmentID` `Enrollment` varlığın birincil anahtarı olduğundan `EnrollmentID` ).
 
 Geleneksel davranış geçersiz kılınabilir. Örneğin, bu öğreticide daha önce gördüğünüz gibi tablo adlarını açıkça belirtebilirsiniz. Ayrıca, bu serinin [sonraki bir öğreticide](complex-data-model.md) göreceğiniz gibi, sütun adlarını ayarlayabilir ve herhangi bir özelliği birincil anahtar veya yabancı anahtar olarak ayarlayabilirsiniz.
 
@@ -344,21 +346,21 @@ Web sunucusunda sınırlı sayıda iş parçacığı bulunur ve yüksek yük dur
 
 Zaman uyumsuz kod, çalışma zamanında az miktarda yük getirir, ancak düşük trafik durumlarında performans artışı göz ardı edilebilir, ancak yüksek trafik durumları için olası performans iyileştirmesi oldukça önemlidir.
 
-Aşağıdaki `async` kodda, anahtar sözcüğü, return değeri `Task<T>` , `await` anahtar sözcüğü ve `ToListAsync` yöntemi kodu zaman uyumsuz olarak yürütür.
+Aşağıdaki kodda, `async` anahtar sözcüğü, `Task<T>` return değeri, `await` anahtar sözcüğü ve `ToListAsync` yöntemi kodu zaman uyumsuz olarak yürütür.
 
 [!code-csharp[](intro/samples/cu/Controllers/StudentsController.cs?name=snippet_ScaffoldedIndex)]
 
-* `async` Anahtar sözcüğü, derleyiciye Yöntem gövdesinin parçaları için geri çağrılar oluşturmasını ve döndürülen `Task<IActionResult>` nesneyi otomatik olarak oluşturmasını söyler.
+* `async`Anahtar sözcüğü, derleyiciye Yöntem gövdesinin parçaları için geri çağrılar oluşturmasını ve döndürülen nesneyi otomatik olarak oluşturmasını söyler `Task<IActionResult>` .
 
-* Dönüş türü `Task<IActionResult>` , türünde `IActionResult`bir sonuçla devam eden işi temsil eder.
+* Dönüş türü, `Task<IActionResult>` türünde bir sonuçla devam eden işi temsil eder `IActionResult` .
 
-* `await` Anahtar sözcüğü, derleyicinin yöntemi iki parçaya böetmesine neden olur. İlk bölüm, zaman uyumsuz olarak başlatılan işlemle biter. İkinci bölüm, işlem tamamlandığında çağrılan bir geri çağırma yöntemine konur.
+* `await`Anahtar sözcüğü, derleyicinin yöntemi iki parçaya böetmesine neden olur. İlk bölüm, zaman uyumsuz olarak başlatılan işlemle biter. İkinci bölüm, işlem tamamlandığında çağrılan bir geri çağırma yöntemine konur.
 
-* `ToListAsync`, `ToList` Uzantı yönteminin zaman uyumsuz sürümüdür.
+* `ToListAsync`, Uzantı yönteminin zaman uyumsuz sürümüdür `ToList` .
 
 Entity Framework kullanan zaman uyumsuz kod yazarken dikkat edilmesi gereken bazı şeyler:
 
-* Yalnızca sorguları veya komutlarının veritabanına gönderilmesine neden olan deyimler zaman uyumsuz olarak yürütülür. Bu, örneğin `ToListAsync` `SingleOrDefaultAsync`,, ve `SaveChangesAsync`içerir. Örneğin, gibi yalnızca bir `IQueryable`değiştiren deyimler içermez. `var students = context.Students.Where(s => s.LastName == "Davolio")`
+* Yalnızca sorguları veya komutlarının veritabanına gönderilmesine neden olan deyimler zaman uyumsuz olarak yürütülür. Bu, örneğin,, `ToListAsync` ve içerir `SingleOrDefaultAsync` `SaveChangesAsync` . Örneğin, gibi yalnızca bir değiştiren deyimler içermez `IQueryable` `var students = context.Students.Where(s => s.LastName == "Davolio")` .
 
 * EF bağlamı iş parçacığı açısından güvenli değildir: paralel olarak birden çok işlem yapmayı denemeyin. Herhangi bir zaman uyumsuz EF yöntemini çağırdığınızda, her zaman `await` anahtar sözcüğünü kullanın.
 

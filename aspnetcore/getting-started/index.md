@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 01/07/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: getting-started
-ms.openlocfilehash: 565cde233d6fc5f085ae1709e167e73980d5c3c2
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b88460cdff5d8c30c6a28afdb4f67e8e0b6b819c
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776239"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403371"
 ---
 # <a name="tutorial-get-started-with-aspnet-core"></a>Öğretici: ASP.NET Core kullanmaya başlayın
 
@@ -29,13 +31,13 @@ Bu öğreticide, .NET Core CLI kullanılarak ASP.NET Core bir Web uygulamasını
 > * Bir Web uygulaması projesi oluşturun.
 > * Geliştirme sertifikasına güvenin.
 > * Uygulamayı çalıştırın.
-> * Razor sayfasını düzenleyin.
+> * Bir Razor sayfayı düzenleyin.
 
 Sonunda, yerel makinenizde çalışan bir çalışan Web uygulamanız olacaktır.
 
 ![Web uygulaması giriş sayfası](_static/home-page.png)
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 [!INCLUDE[](~/includes/3.1-SDK.md)]
 
@@ -50,7 +52,7 @@ dotnet new webapp -o aspnetcoreapp
 Yukarıdaki komut:
 
 * Yeni bir Web uygulaması oluşturur.  
-* `-o aspnetcoreapp` Parametresi, uygulama için kaynak dosyalarla *aspnetcoreapp* adlı bir dizin oluşturur.
+* `-o aspnetcoreapp`Parametresi, uygulama için kaynak dosyalarla *aspnetcoreapp* adlı bir dizin oluşturur.
 
 ### <a name="trust-the-development-certificate"></a>Geliştirme sertifikasına güven
 
@@ -68,7 +70,7 @@ Yukarıdaki komutta aşağıdaki iletişim kutusu görüntülenir:
 
 Geliştirme sertifikasına güvenmeyi kabul ediyorsanız **Evet** ' i seçin.
 
-# <a name="macos"></a>[Mac OS](#tab/macos)
+# <a name="macos"></a>[macOS](#tab/macos)
 
 ```dotnetcli
 dotnet dev-certs https --trust
@@ -97,15 +99,15 @@ cd aspnetcoreapp
 dotnet watch run
 ```
 
-Komut kabuğu, uygulamanın başlatıldığını gösteriyorsa, öğesine `https://localhost:5001`gidin.
+Komut kabuğu, uygulamanın başlatıldığını gösteriyorsa, öğesine gidin `https://localhost:5001` .
 
-## <a name="edit-a-razor-page"></a>Razor Sayfa düzenleme
+## <a name="edit-a-razor-page"></a>Sayfa düzenleme Razor
 
 *Pages/Index. cshtml* dosyasını açın ve sayfayı aşağıdaki vurgulanmış işaretlerle değiştirin ve kaydedin:
 
 [!code-cshtml[](sample/index.cshtml?highlight=9)]
 
-Sayfasına gidin `https://localhost:5001`, sayfayı yenileyin ve değişikliklerin görüntülendiğini doğrulayın.
+Sayfasına gidin `https://localhost:5001` , sayfayı yenileyin ve değişikliklerin görüntülendiğini doğrulayın.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

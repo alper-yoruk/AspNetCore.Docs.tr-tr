@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/websockets
-ms.openlocfilehash: da713f22582cf17f60a4deda1b689662a4e4ae06
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: e2aff39db621ea6e71dce1f1560b1aa70fa865f0
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775446"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404099"
 ---
 # <a name="websockets-support-in-aspnet-core"></a>ASP.NET Core desteği WebSockets
 
@@ -28,13 +30,13 @@ Bu makalede, ASP.NET Core ' de WebSockets ile çalışmaya başlama açıklanmak
 
 [Örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/websockets/samples) ([nasıl indirilir](xref:index#how-to-download-a-sample)). [Nasıl çalıştırılır?](#sample-app)
 
-## <a name="signalr"></a>SignalR
+## SignalR
 
-[ASP.NET Core SignalR](xref:signalr/introduction) , uygulamalara gerçek zamanlı Web işlevselliği eklemeyi kolaylaştıran bir kitaplıktır. Mümkün olduğunda WebSockets kullanır.
+[ASP.NET Core SignalR ](xref:signalr/introduction) , uygulamalara gerçek zamanlı Web işlevselliği eklemeyi kolaylaştıran bir kitaplıktır. Mümkün olduğunda WebSockets kullanır.
 
-Çoğu uygulama için ham WebSockets üzerinden SignalR önerilir. SignalR, WebSockets 'in kullanılamadığı ortamlar için taşıma geri dönüşü sağlar. Ayrıca, basit bir uzak yordam çağrısı uygulama modeli sağlar. Birçok senaryoda, SignalR 'nin ham WebSockets kullanmaya kıyasla önemli bir performans dezavantajı yoktur.
+Çoğu uygulama için SignalR Ham WebSockets üzerinde önerilir. SignalRWebSockets ' nin kullanılamadığı ortamlar için taşıma geri dönüşü sağlar. Ayrıca, basit bir uzak yordam çağrısı uygulama modeli sağlar. Ve çoğu senaryoda SignalR Ham WebSockets kullanmaya kıyasla önemli bir performans olumsuz yanı yoktur.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * ASP.NET Core 1,1 veya üzeri
 * ASP.NET Core destekleyen herhangi bir işletim sistemi:
@@ -49,11 +51,11 @@ Bu makalede, ASP.NET Core ' de WebSockets ile çalışmaya başlama açıklanmak
   * IIS 8/IIS 8 Express
   * WebSockets etkinleştirilmelidir ( [IIS/IIS Express destek](#iisiis-express-support) bölümüne bakın.).
   
-* Uygulama [http. sys](xref:fundamentals/servers/httpsys)üzerinde çalışıyorsa:
+* Uygulama [HTTP.sys](xref:fundamentals/servers/httpsys)üzerinde çalışıyorsa:
 
   * Windows 8/Windows Server 2012 veya üzeri
 
-* Desteklenen tarayıcılar için bkz https://caniuse.com/#feat=websockets..
+* Desteklenen tarayıcılar için bkz https://caniuse.com/#feat=websockets ..
 
 ::: moniker range="< aspnetcore-2.1"
 
@@ -66,7 +68,7 @@ Bu makalede, ASP.NET Core ' de WebSockets ile çalışmaya başlama açıklanmak
 ## <a name="configure-the-middleware"></a>Ara yazılımı yapılandırma
 
 
-WebSockets ara yazılımını `Configure` `Startup` sınıfının yöntemine ekleyin:
+WebSockets ara yazılımını `Configure` sınıfının yöntemine ekleyin `Startup` :
 
 [!code-csharp[](websockets/samples/2.x/WebSocketsSample/Startup.cs?name=UseWebSockets)]
 
@@ -99,7 +101,7 @@ Aşağıdaki örnek daha sonra `Configure` yönteminde verilmiştir:
 
 [!code-csharp[](websockets/samples/2.x/WebSocketsSample/Startup.cs?name=AcceptWebSocket&highlight=7)]
 
-Herhangi bir URL 'de bir WebSocket isteği gelebilir, ancak bu örnek kod yalnızca için `/ws`istekleri kabul eder.
+Herhangi bir URL 'de bir WebSocket isteği gelebilir, ancak bu örnek kod yalnızca için istekleri kabul eder `/ws` .
 
 WebSocket kullanırken, bağlantı süresince ara yazılım işlem hattını çalışır durumda tutmanız **gerekir** . Ara yazılım ardışık düzeni bittikten sonra bir WebSocket iletisi göndermeye veya almaya çalışırsanız, aşağıdaki gibi bir özel durum alabilirsiniz:
 
@@ -108,7 +110,7 @@ System.Net.WebSockets.WebSocketException (0x80004005): The remote party closed t
 Object name: 'HttpResponseStream'.
 ```
 
-WebSocket 'e veri yazmak için bir arka plan hizmeti kullanıyorsanız, ara yazılım ardışık düzenini çalışır durumda tutmanız gerekir. Bunu kullanarak yapın <xref:System.Threading.Tasks.TaskCompletionSource%601>. `TaskCompletionSource` ' İ arka plan hizmetinize geçirin ve WebSocket ile bitirdiğinizde <xref:System.Threading.Tasks.TaskCompletionSource%601.TrySetResult%2A> bu hizmete çağrı yapın. Ardından `await` , <xref:System.Threading.Tasks.TaskCompletionSource%601.Task> aşağıdaki örnekte gösterildiği gibi istek sırasında özelliği:
+WebSocket 'e veri yazmak için bir arka plan hizmeti kullanıyorsanız, ara yazılım ardışık düzenini çalışır durumda tutmanız gerekir. Bunu kullanarak yapın <xref:System.Threading.Tasks.TaskCompletionSource%601> . `TaskCompletionSource`' İ arka plan hizmetinize geçirin ve WebSocket ile bitirdiğinizde bu hizmete çağrı yapın <xref:System.Threading.Tasks.TaskCompletionSource%601.TrySetResult%2A> . Ardından `await` , <xref:System.Threading.Tasks.TaskCompletionSource%601.Task> Aşağıdaki örnekte gösterildiği gibi istek sırasında özelliği:
 
 ```csharp
 app.Use(async (context, next) => {
@@ -122,11 +124,11 @@ app.Use(async (context, next) => {
 ```
 Bir eylem yönteminden çok yakında döndürüyseniz, WebSocket kapalı özel durumu da oluşabilir. Bir eylem yönteminde bir yuvayı kabul ediyorsanız, işlem yönteminden dönmeden önce yuva kullanan kodun tamamlanmasını bekleyin.
 
-Önemli iş `Task.Wait()`parçacığı `Task.Result`sorunlarına neden olabileceği için, yuvanın tamamlanmasını beklemek için hiçbir şekilde, veya benzer engelleme çağrılarını kullanmayın. Her zaman `await`kullanın.
+`Task.Wait()` `Task.Result` Önemli iş parçacığı sorunlarına neden olabileceği için, yuvanın tamamlanmasını beklemek için hiçbir şekilde, veya benzer engelleme çağrılarını kullanmayın. Her zaman kullanın `await` .
 
 ## <a name="send-and-receive-messages"></a>İleti alma ve gönderme
 
-`AcceptWebSocketAsync` YÖNTEMI, TCP bağlantısını bir WebSocket bağlantısıyla yükseltir ve bir [WebSocket](/dotnet/core/api/system.net.websockets.websocket) nesnesi sağlar. İleti göndermek `WebSocket` ve almak için nesnesini kullanın.
+`AcceptWebSocketAsync`Yöntemi, TCP bağlantısını bir WebSocket bağlantısıyla yükseltir ve bir [WebSocket](/dotnet/core/api/system.net.websockets.websocket) nesnesi sağlar. `WebSocket`İleti göndermek ve almak için nesnesini kullanın.
 
 WebSocket isteğini kabul eden daha önce gösterilen kod, `WebSocket` nesneyi bir `Echo` yönteme geçirir. Kod bir ileti alır ve hemen aynı iletiyi geri gönderir. İletiler, istemci bağlantıyı kapatana kadar bir döngüde gönderilir ve alınır:
 
@@ -140,23 +142,23 @@ Döngüye başlamadan önce WebSocket bağlantısı kabul edildiğinde, ara yaz�
 
 İstemci bağlantı kaybı nedeniyle bağlantısı kesildiğinde sunucu otomatik olarak bilgilendirilmedi. Sunucu, yalnızca istemci gönderirse, internet bağlantısı kaybedilmişse gerçekleştirilemez bir bağlantı kesme iletisi alır. Bu durumda bazı işlemleri gerçekleştirmek istiyorsanız, belirli bir zaman penceresinde istemciden hiçbir şey alınmadığında bir zaman aşımı ayarlayın.
 
-İstemci her zaman ileti göndermiyor ve bağlantı boşta kaldığı için zaman aşımına uğramasını istemiyorsanız, istemcinin her X saniyede bir ping iletisi göndermesi için bir Zamanlayıcı kullanmasını sağlamak için bir Zamanlayıcı kullanmasını sağlayabilirsiniz. Sunucusunda, bir ileti öncekinden sonra 2\*X saniye içinde gelmediyse, bağlantıyı sonlandırın ve istemcinin bağlantısının kesildiğini bildirin. Beklenen zaman aralığının iki kez, ping iletisini tutabilecek Ağ gecikmeleri için ek süre kalmasını bekleyin.
+İstemci her zaman ileti göndermiyor ve bağlantı boşta kaldığı için zaman aşımına uğramasını istemiyorsanız, istemcinin her X saniyede bir ping iletisi göndermesi için bir Zamanlayıcı kullanmasını sağlamak için bir Zamanlayıcı kullanmasını sağlayabilirsiniz. Sunucusunda, bir ileti \* öncekinden sonra 2 X saniye içinde gelmediyse, bağlantıyı sonlandırın ve istemcinin bağlantısının kesildiğini bildirin. Beklenen zaman aralığının iki kez, ping iletisini tutabilecek Ağ gecikmeleri için ek süre kalmasını bekleyin.
 
 ## <a name="websocket-origin-restriction"></a>WebSocket kaynak kısıtlaması
 
 CORS tarafından sunulan korumalar WebSockets için geçerlidir. Tarayıcılar şunları **desteklemez**:
 
 * CORS ön uçuş istekleri gerçekleştirin.
-* WebSocket istekleri yapılırken `Access-Control` üst bilgilerde belirtilen kısıtlamalara saygı.
+* `Access-Control`WebSocket istekleri yapılırken üst bilgilerde belirtilen kısıtlamalara saygı.
 
-Ancak, tarayıcılar WebSocket istekleri verirken `Origin` üstbilgiyi gönderir. Yalnızca beklenen kaynaklardan gelen WebSockets izin verildiğinden emin olmak için uygulamalar bu üstbilgileri doğrulamak üzere yapılandırılmalıdır.
+Ancak, tarayıcılar `Origin` WebSocket istekleri verirken üstbilgiyi gönderir. Yalnızca beklenen kaynaklardan gelen WebSockets izin verildiğinden emin olmak için uygulamalar bu üstbilgileri doğrulamak üzere yapılandırılmalıdır.
 
-Sunucunuzu "https://server.com" üzerinde barındırıyorsanız ve istemcinizi "https://client.com" üzerinde barındırıyorsanız, doğrulamak için WebSocketshttps://client.com `AllowedOrigins` listesine "" ekleyin.
+Sunucunuzu "" üzerinde barındırıyorsanız https://server.com ve istemcinizi "" üzerinde barındırıyorsanız https://client.com , https://client.com `AllowedOrigins` doğrulamak için WebSockets listesine "" ekleyin.
 
 [!code-csharp[](websockets/samples/2.x/WebSocketsSample/Startup.cs?name=UseWebSocketsOptionsAO&highlight=6-7)]
 
 > [!NOTE]
-> `Origin` Üst bilgi istemci tarafından denetlenir ve `Referer` üst bilgi gibi erişilebilir. Bu üst bilgileri kimlik doğrulama mekanizması **olarak kullanmayın.**
+> `Origin`Üst bilgi istemci tarafından denetlenir ve `Referer` üst bilgi gibi erişilebilir. Bu üst bilgileri kimlik doğrulama mekanizması **olarak kullanmayın.**
 
 ::: moniker-end
 
@@ -180,7 +182,7 @@ Windows Server 2012 veya sonraki sürümlerde WebSocket protokolü desteğini et
 1. **Roller** ağacında **Web sunucusu (IIS)** öğesini genişletin, **Web sunucusu**' nu genişletin ve ardından **uygulama geliştirme**' yi genişletin.
 1. **WebSocket protokolünü**seçin. **İleri**’yi seçin.
 1. Ek özellikler gerekmiyorsa, **İleri**' yi seçin.
-1. **Yükle**’yi seçin.
+1. **Yükle**'yi seçin.
 1. Yükleme tamamlandığında sihirbazdan çıkmak için **Kapat** ' ı seçin.
 
 Windows 8 veya sonraki sürümlerde WebSocket protokolü desteğini etkinleştirmek için:
@@ -188,13 +190,13 @@ Windows 8 veya sonraki sürümlerde WebSocket protokolü desteğini etkinleştir
 > [!NOTE]
 > IIS Express kullanılırken bu adımlar gerekli değildir
 
-1. **Denetim Masası** > **programları** > **Programlar ve Özellikler** > **Windows özelliklerini aç veya kapat** (ekranın sol tarafında).
-1. Şu düğümleri açın: **Internet Information Services** > **World Wide Web Services** > **uygulama geliştirme özellikleri**.
+1. **Denetim Masası**  >  **programları**  >  **Programlar ve Özellikler**  >  **Windows özelliklerini aç veya kapat** (ekranın sol tarafında).
+1. Şu düğümleri açın: **Internet Information Services**  >  **World Wide Web Services**  >  **uygulama geliştirme özellikleri**.
 1. **WebSocket protokolü** özelliğini seçin. **Tamam**’ı seçin.
 
-### <a name="disable-websocket-when-using-socketio-on-nodejs"></a>Node. js üzerinde socket.io kullanırken WebSocket 'i devre dışı bırakma
+### <a name="disable-websocket-when-using-socketio-on-nodejs"></a>Node.js üzerinde socket.io kullanırken WebSocket 'i devre dışı bırak
 
-[Socket.io](https://socket.io/) içindeki WebSocket desteğini [Node. js](https://nodejs.org/)üzerinde kullanıyorsanız, `webSocket` *Web. config* veya *ApplicationHost. config*içindeki öğesini kullanarak varsayılan IIS WebSocket modülünü devre dışı bırakın. Bu adım gerçekleştirilmemişse, IIS WebSocket modülü Node. js ve uygulama yerine WebSocket iletişimini işlemeye çalışır.
+[Node.js](https://nodejs.org/)üzerinde [Socket.io](https://socket.io/) ' de WebSocket DESTEĞINI kullanıyorsanız, varsayılan IIS WebSocket modülünü `webSocket` *web.config* veya *applicationHost.config*öğesini kullanarak devre dışı bırakın. Bu adım gerçekleştirilmemişse, IIS WebSocket modülü Node.js ve uygulama yerine WebSocket iletişimini işlemeye çalışır.
 
 ```xml
 <system.webServer>
@@ -204,7 +206,7 @@ Windows 8 veya sonraki sürümlerde WebSocket protokolü desteğini etkinleştir
 
 ## <a name="sample-app"></a>Örnek uygulama
 
-Bu makaleye eşlik eden [örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/websockets/samples) bir Echo uygulamasıdır. WebSocket bağlantısı yapan bir Web sayfasına sahiptir ve sunucu istemciye geri aldığı tüm iletileri daha sonra sonlandırır. Uygulamayı bir komut isteminden çalıştırın (IIS Express ile Visual Studio 'dan çalışacak şekilde ayarlanmamış) ve adresine http://localhost:5000gidin. Web sayfası, sol üstteki bağlantı durumunu gösterir:
+Bu makaleye eşlik eden [örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/websockets/samples) bir Echo uygulamasıdır. WebSocket bağlantısı yapan bir Web sayfasına sahiptir ve sunucu istemciye geri aldığı tüm iletileri daha sonra sonlandırır. Uygulamayı bir komut isteminden çalıştırın (IIS Express ile Visual Studio 'dan çalışacak şekilde ayarlanmamış) ve adresine gidin http://localhost:5000 . Web sayfası, sol üstteki bağlantı durumunu gösterir:
 
 ![Web sayfasının ilk durumu](websockets/_static/start.png)
 

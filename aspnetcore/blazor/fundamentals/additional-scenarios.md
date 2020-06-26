@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: 72a8b59b06e40f6f85abe41217ae564f82c8d89c
-ms.sourcegitcommit: 1833870ad0845326fb764fef1b530a07b9b5b099
+ms.openlocfilehash: 236dffd829bcd7c30ae1145242ce07cd8e9857e6
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/25/2020
-ms.locfileid: "85347079"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402955"
 ---
 # <a name="aspnet-core-blazor-hosting-model-configuration"></a>ASP.NET Core Blazor barındırma modeli yapılandırması
 
@@ -28,7 +30,7 @@ Bu makalede barındırma modeli yapılandırması ele alınmaktadır.
 
 ### <a name="signalr-cross-origin-negotiation-for-authentication"></a>SignalRkimlik doğrulaması için çıkış noktaları arası anlaşma
 
-*Bu bölüm Blazor webassembly için geçerlidir.*
+*Bu bölüm için geçerlidir Blazor WebAssembly .*
 
 SignalRTemel alınan istemciyi tanımlama bilgileri veya http kimlik doğrulama üstbilgileri gibi kimlik bilgilerini gönderecek şekilde yapılandırmak için:
 
@@ -61,7 +63,7 @@ Daha fazla bilgi için bkz. <xref:signalr/configuration#configure-additional-opt
 
 ## <a name="reflect-the-connection-state-in-the-ui"></a>Kullanıcı arabirimindeki bağlantı durumunu yansıtır
 
-*Bu bölüm sunucu için geçerlidir Blazor .*
+*Bu bölüm için geçerlidir Blazor Server .*
 
 İstemci bağlantının kaybolduğunu algıladığında, istemci yeniden bağlanmayı denediğinde kullanıcıya varsayılan bir kullanıcı arabirimi görüntülenir. Yeniden bağlantı başarısız olursa, kullanıcıya yeniden deneme seçeneği sağlanır.
 
@@ -84,9 +86,9 @@ Aşağıdaki tabloda öğesine uygulanan CSS sınıfları açıklanmaktadır `co
 
 ## <a name="render-mode"></a>Oluşturma modu
 
-*Bu bölüm sunucu için geçerlidir Blazor .*
+*Bu bölüm için geçerlidir Blazor Server .*
 
-BlazorSunucu uygulamaları, sunucu bağlantısı kurumadan önce sunucudaki kullanıcı arabirimini varsayılan olarak PreRender 'a ayarlar. Bu, `_Host.cshtml` Razor sayfada ayarlanır:
+Blazor Serveruygulamalar, sunucu bağlantısı oluşturulmadan önce sunucudaki kullanıcı arabirimini varsayılan olarak PreRender 'a ayarlar. Bu, `_Host.cshtml` Razor sayfada ayarlanır:
 
 ```cshtml
 <body>
@@ -103,19 +105,19 @@ BlazorSunucu uygulamaları, sunucu bağlantısı kurumadan önce sunucudaki kull
 * , Sayfaya ön gönderilir.
 * , Sayfada statik HTML olarak veya Kullanıcı aracısından bir uygulamayı önyüklemek için gerekli bilgileri içeriyorsa Blazor .
 
-| <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> | Description |
+| <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> | Açıklama |
 | --- | --- |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Bileşeni statik HTML olarak işler ve sunucu uygulaması için bir işaret içerir Blazor . Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . |
-| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Sunucu uygulaması için bir işaret oluşturur Blazor . Bileşen çıkışı dahil değildir. Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Bileşeni statik HTML olarak işler ve uygulama için bir işaret içerir Blazor Server . Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . |
+| <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Bir uygulama için işaretleyici işler Blazor Server . Bileşen çıkışı dahil değildir. Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . |
 | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static> | Bileşeni statik HTML olarak işler. |
 
 Statik HTML sayfasından sunucu bileşenleri işleme desteklenmiyor.
 
-## <a name="configure-the-signalr-client-for-blazor-server-apps"></a>SignalRSunucu uygulamaları için istemciyi Blazor yapılandırma
+## <a name="configure-the-signalr-client-for-blazor-server-apps"></a>SignalRUygulamalar için istemciyi yapılandırma Blazor Server
 
-*Bu bölüm sunucu için geçerlidir Blazor .*
+*Bu bölüm için geçerlidir Blazor Server .*
 
-Bazen, SignalR sunucu uygulamaları tarafından kullanılan istemciyi yapılandırmanız gerekir Blazor . Örneğin, SignalR bir bağlantı sorununu tanılamak için istemcide günlüğe kaydetmeyi yapılandırmak isteyebilirsiniz.
+Bazen, SignalR uygulamalar tarafından kullanılan istemciyi yapılandırmanız gerekir Blazor Server . Örneğin, SignalR bir bağlantı sorununu tanılamak için istemcide günlüğe kaydetmeyi yapılandırmak isteyebilirsiniz.
 
 SignalRİstemcisini dosyada yapılandırmak için `Pages/_Host.cshtml` :
 

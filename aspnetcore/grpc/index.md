@@ -1,11 +1,25 @@
 ---
-title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
+title: .NET Core 'da gRPC 'ye giriş
+author: juntaoluo
+description: Kestrel Server ve ASP.NET Core Stack ile gRPC hizmetleri hakkında bilgi edinin.
+monikerRange: '>= aspnetcore-3.0'
+ms.author: johluo
+ms.date: 09/20/2019
+no-loc:
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: grpc/index
+ms.openlocfilehash: 9f3a2041059c1d890ce72ce5f2a88151253d9bd9
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404190"
 ---
 # <a name="introduction-to-grpc-on-net-core"></a>.NET Core 'da gRPC 'ye giriş
 
@@ -13,12 +27,12 @@ title: Yazar: Açıklama: monikerRange: MS. Author: MS. Date: No-loc:
 
 [GRPC](https://grpc.io/docs/guides/) , dilden bağımsız, yüksek performanslı bir uzak yordam ÇAĞRıSı (RPC) çerçevesidir.
 
-GRPC 'nin başlıca avantajları şunlardır:
+gRPC’nin başlıca avantajları şunlardır:
 * Modern, yüksek performanslı, hafif RPC çerçevesi.
-* Sözleşme-ilk API geliştirmesi, varsayılan olarak protokol arabellekleri kullanarak, dilden bağımsız uygulamalar için izin verir.
-* Birçok dilde araç, kesin türü belirtilmiş sunucu ve istemciler oluşturmak için kullanılabilir.
-* İstemci, sunucu ve iki yönlü akış çağrılarını destekler.
-* Protoarabelleğe ikili serileştirme ile azaltılmış ağ kullanımı.
+* Varsayılan olarak Protokol Arabellekleri kullanan, dilden bağımsız uygulamalara olanak veren Sözleşme öncelikli API geliştirme.
+* Kesin tür belirtilmiş sunucular ve istemciler oluşturmak için çok sayıda dilde kullanılabilen araçlar.
+* İstemci, sunucu ve iki yönlü akış çağrılarına yönelik destek.
+* Protobuf ikili serileştirme ile azaltılmış ağ kullanımı.
 
 Bu avantajlar, gRPC 'yi ideal hale getirir:
 * Verimlilik açısından kritik olan hafif mikro hizmetler.

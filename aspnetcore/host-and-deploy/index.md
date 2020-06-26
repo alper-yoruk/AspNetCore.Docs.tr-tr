@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: host-and-deploy/index
-ms.openlocfilehash: 796d7da76da6723ea996b57510da9c45ab21b3e7
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 79022af0e6ee1294e12c21492bc81bc40482a3fb
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775927"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403969"
 ---
 # <a name="host-and-deploy-aspnet-core"></a>ASP.NET Core barındırma ve dağıtma
 
@@ -57,7 +59,7 @@ ASP.NET Core uygulaması, bir sunucu önyüklendiğinde ve kilitlenirse yeniden 
 
 Uygulama [Kestrel](xref:fundamentals/servers/kestrel) sunucusunu kullanıyorsa, [NGINX](xref:host-and-deploy/linux-nginx), [Apache](xref:host-and-deploy/linux-apache)veya [IIS](xref:host-and-deploy/iis/index) bir ters proxy sunucusu olarak kullanılabilir. Ters proxy sunucusu, Internet 'ten gelen HTTP isteklerini alır ve Kestrel 'e iletir.
 
-Ters ara&mdash;sunucu sunucusu&mdash;olan veya olmayan yapılandırma, desteklenen bir barındırma yapılandırması. Daha fazla bilgi için bkz. [Kestrel to Use a ters proxy](xref:fundamentals/servers/kestrel#when-to-use-kestrel-with-a-reverse-proxy).
+&mdash;Ters ara sunucu sunucusu olan veya olmayan yapılandırma &mdash; , desteklenen bir barındırma yapılandırması. Daha fazla bilgi için bkz. [Kestrel to Use a ters proxy](xref:fundamentals/servers/kestrel#when-to-use-kestrel-with-a-reverse-proxy).
 
 ## <a name="proxy-server-and-load-balancer-scenarios"></a>Proxy sunucusu ve yük dengeleyici senaryoları
 
@@ -71,7 +73,7 @@ Web 'i [Yayımla özelliğini](xref:tutorials/publish-to-azure-webapp-using-vs) 
 
 ## <a name="publish-to-azure"></a>Azure’da Yayımlama
 
-Visual <xref:tutorials/publish-to-azure-webapp-using-vs> Studio kullanarak Azure 'da uygulama yayımlama hakkında yönergeler için bkz.. [Azure 'da bir ASP.NET Core Web uygulaması](/azure/app-service/app-service-web-get-started-dotnet)oluşturarak ek bir örnek sağlanır.
+<xref:tutorials/publish-to-azure-webapp-using-vs>Visual Studio kullanarak Azure 'da uygulama yayımlama hakkında yönergeler için bkz.. [Azure 'da bir ASP.NET Core Web uygulaması](/azure/app-service/app-service-web-get-started-dotnet)oluşturarak ek bir örnek sağlanır.
 
 ## <a name="publish-with-msdeploy-on-windows"></a>Windows 'ta MSDeploy ile Yayımla
 
@@ -79,11 +81,11 @@ Bir <xref:host-and-deploy/visual-studio-publish-profiles> Windows komut istemind
 
 ## <a name="internet-information-services-iis"></a>Internet Information Services (IIS)
 
-*Web. config* dosyası tarafından sunulan yapılandırmaya sahip Internet INFORMATION SERVICES (IIS) dağıtımları için, altındaki <xref:host-and-deploy/iis/index>makalelere bakın.
+*web.config* dosyası tarafından sağlanmış yapılandırma ile Internet INFORMATION SERVICES (IIS) dağıtımları için, altındaki makalelere bakın <xref:host-and-deploy/iis/index> .
 
 ## <a name="host-in-a-web-farm"></a>Web grubunda barındırma
 
-Bir Web grubu ortamında uygulamaları ASP.NET Core barındırmak için yapılandırma hakkında bilgi için (örneğin, uygulamanızın ölçeklenebilirlik için birden çok örneğinin dağıtılması), bkz <xref:host-and-deploy/web-farm>..
+Bir Web grubu ortamında uygulamaları ASP.NET Core barındırmak için yapılandırma hakkında bilgi için (örneğin, uygulamanızın ölçeklenebilirlik için birden çok örneğinin dağıtılması), bkz <xref:host-and-deploy/web-farm> ..
 
 ## <a name="host-on-docker"></a>Docker 'da barındırma
 
@@ -135,7 +137,7 @@ ASP.NET Core uygulaması, bir sunucu önyüklendiğinde ve kilitlenirse yeniden 
 
 Uygulama [Kestrel](xref:fundamentals/servers/kestrel) sunucusunu kullanıyorsa, [NGINX](xref:host-and-deploy/linux-nginx), [Apache](xref:host-and-deploy/linux-apache)veya [IIS](xref:host-and-deploy/iis/index) bir ters proxy sunucusu olarak kullanılabilir. Ters proxy sunucusu, Internet 'ten gelen HTTP isteklerini alır ve Kestrel 'e iletir.
 
-Ters ara&mdash;sunucu sunucusu&mdash;olan veya olmayan yapılandırma, desteklenen bir barındırma yapılandırması. Daha fazla bilgi için bkz. [Kestrel to Use a ters proxy](xref:fundamentals/servers/kestrel#when-to-use-kestrel-with-a-reverse-proxy).
+&mdash;Ters ara sunucu sunucusu olan veya olmayan yapılandırma &mdash; , desteklenen bir barındırma yapılandırması. Daha fazla bilgi için bkz. [Kestrel to Use a ters proxy](xref:fundamentals/servers/kestrel#when-to-use-kestrel-with-a-reverse-proxy).
 
 ## <a name="proxy-server-and-load-balancer-scenarios"></a>Proxy sunucusu ve yük dengeleyici senaryoları
 
@@ -149,7 +151,7 @@ Web 'i [Yayımla özelliğini](xref:tutorials/publish-to-azure-webapp-using-vs) 
 
 ## <a name="publish-to-azure"></a>Azure’da Yayımlama
 
-Visual <xref:tutorials/publish-to-azure-webapp-using-vs> Studio kullanarak Azure 'da uygulama yayımlama hakkında yönergeler için bkz.. [Azure 'da bir ASP.NET Core Web uygulaması](/azure/app-service/app-service-web-get-started-dotnet)oluşturarak ek bir örnek sağlanır.
+<xref:tutorials/publish-to-azure-webapp-using-vs>Visual Studio kullanarak Azure 'da uygulama yayımlama hakkında yönergeler için bkz.. [Azure 'da bir ASP.NET Core Web uygulaması](/azure/app-service/app-service-web-get-started-dotnet)oluşturarak ek bir örnek sağlanır.
 
 ## <a name="publish-with-msdeploy-on-windows"></a>Windows 'ta MSDeploy ile Yayımla
 
@@ -157,11 +159,11 @@ Bir <xref:host-and-deploy/visual-studio-publish-profiles> Windows komut istemind
 
 ## <a name="internet-information-services-iis"></a>Internet Information Services (IIS)
 
-*Web. config* dosyası tarafından sunulan yapılandırmaya sahip Internet INFORMATION SERVICES (IIS) dağıtımları için, altındaki <xref:host-and-deploy/iis/index>makalelere bakın.
+*web.config* dosyası tarafından sağlanmış yapılandırma ile Internet INFORMATION SERVICES (IIS) dağıtımları için, altındaki makalelere bakın <xref:host-and-deploy/iis/index> .
 
 ## <a name="host-in-a-web-farm"></a>Web grubunda barındırma
 
-Bir Web grubu ortamında uygulamaları ASP.NET Core barındırmak için yapılandırma hakkında bilgi için (örneğin, uygulamanızın ölçeklenebilirlik için birden çok örneğinin dağıtılması), bkz <xref:host-and-deploy/web-farm>..
+Bir Web grubu ortamında uygulamaları ASP.NET Core barındırmak için yapılandırma hakkında bilgi için (örneğin, uygulamanızın ölçeklenebilirlik için birden çok örneğinin dağıtılması), bkz <xref:host-and-deploy/web-farm> ..
 
 ## <a name="host-on-docker"></a>Docker 'da barındırma
 

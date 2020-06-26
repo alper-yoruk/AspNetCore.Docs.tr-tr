@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: client-side/bundling-and-minification
-ms.openlocfilehash: 4523ba299d5c5e50a442f84acadf06bf57c69c5d
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: de7c155189008e1f78bfb1eba062fcc86f9e4839
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82770959"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401915"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>ASP.NET Core statik varlıkları paketleyin ve azın
 
@@ -69,29 +71,29 @@ Tarayıcılar HTTP istek üst bilgileriyle ilgili oldukça ayrıntılıdır. Gö
 
 ## <a name="choose-a-bundling-and-minification-strategy"></a>Bir paketleme ve küçültmeye karşı bir strateji seçin
 
-MVC ve Razor Pages proje şablonları, bir JSON yapılandırma dosyasından oluşan paketleme ve küçültmeye yönelik bir çözüm sağlar. [Grdalar](xref:client-side/using-grunt) görev Çalıştırıcısı gibi üçüncü taraf araçlar, aynı görevleri biraz daha karmaşıklıkla yerine getirmiş. Geliştirme iş akışınız, bağlama ve görüntü iyileştirmesi&mdash;gibi paket oluşturma ve küçültmeye karşı işleme gerektirdiğinde, üçüncü taraf bir araç harika bir araçtır. Tasarım zamanı paketleme ve küçültme kullanarak, küçültülmüş dosyalar uygulamanın dağıtımından önce oluşturulur. Dağıtımdan önce paketleme ve küçültme, azaltılmış sunucu yükünün avantajlarından faydalanabilmenizi sağlar. Bununla birlikte, tasarım zamanı paketleme ve küçültme, derleme karmaşıklığını artırır ve yalnızca statik dosyalarla birlikte kullanılabilir.
+MVC ve Razor Pages proje şablonları, BIR JSON yapılandırma dosyasından oluşan paketleme ve küçültmeye yönelik bir çözüm sağlar. [Grdalar](xref:client-side/using-grunt) görev Çalıştırıcısı gibi üçüncü taraf araçlar, aynı görevleri biraz daha karmaşıklıkla yerine getirmiş. Geliştirme iş akışınız, bağlama ve görüntü iyileştirmesi gibi paket oluşturma ve küçültmeye karşı işleme gerektirdiğinde, üçüncü taraf bir araç harika bir araçtır &mdash; . Tasarım zamanı paketleme ve küçültme kullanarak, küçültülmüş dosyalar uygulamanın dağıtımından önce oluşturulur. Dağıtımdan önce paketleme ve küçültme, azaltılmış sunucu yükünün avantajlarından faydalanabilmenizi sağlar. Bununla birlikte, tasarım zamanı paketleme ve küçültme, derleme karmaşıklığını artırır ve yalnızca statik dosyalarla birlikte kullanılabilir.
 
 ## <a name="configure-bundling-and-minification"></a>Paketlemeyi ve küçültmeye göre yapılandırma
 
 ::: moniker range="<= aspnetcore-2.0"
 
-ASP.NET Core 2,0 veya önceki sürümlerde, MVC ve Razor Pages proje şablonları her bir paket için seçenekleri tanımlayan bir *paketleme liconfig. JSON* yapılandırma dosyası sağlar:
+ASP.NET Core 2,0 veya önceki sürümlerde, MVC ve Razor Sayfalar proje şablonları, her bir paket için seçenekleri tanımlayan yapılandırma dosyasında bir *bundleconfig.js* sağlar:
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1"
 
-ASP.NET Core 2,1 veya sonraki sürümlerde, MVC veya Razor Pages proje köküne *paketleme liconfig. JSON*adlı yenı bir JSON dosyası ekleyin. Aşağıdaki JSON 'yi bir başlangıç noktası olarak bu dosyaya ekleyin:
+ASP.NET Core 2,1 veya üzeri sürümlerde, MVC veya Pages proje köküne *bundleconfig.js*adlı yenı bir JSON dosyası ekleyin Razor . Aşağıdaki JSON 'yi bir başlangıç noktası olarak bu dosyaya ekleyin:
 
 ::: moniker-end
 
 [!code-json[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/bundleconfig.json)]
 
-*Paketleme liconfig. JSON* dosyası her bir paket için seçenekleri tanımlar. Yukarıdaki örnekte, özel JavaScript (*Wwwroot/js/site. js*) ve stil sayfası (*Wwwroot/CSS/site. css*) dosyaları için tek bir paket yapılandırması tanımlanmıştır.
+Dosyadaki *bundleconfig.js* her bir paket için seçenekleri tanımlar. Yukarıdaki örnekte, özel JavaScript (*Wwwroot/js/site.js*) ve stil sayfası (*Wwwroot/CSS/site. css*) dosyaları için tek bir paket yapılandırması tanımlanmıştır.
 
 Yapılandırma seçenekleri şunlardır:
 
-* `outputFileName`: Çıkış yapılacak paket dosyasının adı. , *Paketleme liconfig. JSON* dosyasından göreli bir yol içerebilir. **Gerekli**
+* `outputFileName`: Çıkış yapılacak paket dosyasının adı. Dosyadaki *bundleconfig.js* göreli bir yol içerebilir. **Gerekli**
 * `inputFiles`: Birlikte paketedilecek dosya dizisi. Bunlar yapılandırma dosyasına yönelik göreli yollardır. **isteğe bağlı*** boş bir değer boş bir çıktı dosyasıyla sonuçlanır. [Glob](https://www.tldp.org/LDP/abs/html/globbingref.html) desenleri desteklenir.
 * `minify`: Çıkış türü için minbirleşme seçenekleri. **isteğe bağlı**, *varsayılan `minify: { enabled: true }` -*
   * Yapılandırma seçenekleri çıkış dosyası türü başına kullanılabilir.
@@ -108,7 +110,7 @@ Aşağıdakilere benzer bir ek *özel. css* dosyası eklendiğini bir örnek dü
 
 [!code-css[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/wwwroot/css/custom.css)]
 
-*Custom. css* dosyasını küçültmeye ve *site. css* ' yi bir *site. min. css* dosyasına paketlemek için, ilgili yolu *paketleme liconfig. JSON*öğesine ekleyin:
+*Custom. css* dosyasını küçültmeye ve *site. css* ' yi bir *site. min. css* dosyasına paketleyip, göreli yolu *üzerinebundleconfig.js*ekleyin:
 
 [!code-json[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/bundleconfig2.json?highlight=6)]
 
@@ -129,7 +131,7 @@ En iyi uygulama olarak, uygulamanızın paketlenmiş ve küçültülmüş dosyal
 
 Görünümlerinizde [ortam etiketi yardımcısını](xref:mvc/views/tag-helpers/builtin-th/environment-tag-helper) kullanarak sayfalarınıza hangi dosyaların ekleneceğini belirleyin. Ortam etiketi Yardımcısı yalnızca belirli [ortamlarda](xref:fundamentals/environments)çalışırken içeriğini işler.
 
-Aşağıdaki `environment` etiket, `Development` ortamda çalışırken işlenmemiş CSS dosyalarını işler:
+Aşağıdaki `environment` etiket, ortamda çalışırken IŞLENMEMIŞ CSS dosyalarını işler `Development` :
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -143,7 +145,7 @@ Aşağıdaki `environment` etiket, `Development` ortamda çalışırken işlenme
 
 ::: moniker-end
 
-Aşağıdaki `environment` etiket, dışında `Development`bir ortamda çalışırken paketlenmiş ve küçültülmüş CSS dosyalarını işler. Örneğin, içinde `Production` çalışan veya `Staging` bu stil sayfalarını işlemeyi tetikleyen:
+Aşağıdaki `environment` etiket, dışında bir ortamda çalışırken paketlenmiş ve KÜÇÜLTÜLMÜŞ CSS dosyalarını işler `Development` . Örneğin, içinde çalışan `Production` veya `Staging` Bu stil sayfalarını işlemeyi tetikleyen:
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -157,20 +159,20 @@ Aşağıdaki `environment` etiket, dışında `Development`bir ortamda çalış�
 
 ::: moniker-end
 
-## <a name="consume-bundleconfigjson-from-gulp"></a>Gulp adresinden paketleme liconfig. JSON kullanın
+## <a name="consume-bundleconfigjson-from-gulp"></a>Gulp 'dan bundleconfig.jskullanma
 
 Uygulamanın paketleme ve küçültmeye yönelik iş akışının ek işlem gerektirdiği durumlar vardır. Örnek görüntü iyileştirmesi, önbellek performansı ve CDN varlık işleme sayılabilir. Bu gereksinimleri karşılamak için, paketleme ve küçültmeye yönelik iş akışını Gulp kullanacak şekilde dönüştürebilirsiniz.
 
 ### <a name="manually-convert-the-bundling-and-minification-workflow-to-use-gulp"></a>Gulp kullanmak için paketleme ve küçültmeye yönelik iş akışını el ile dönüştürün
 
-Aşağıdaki `devDependencies`gibi, proje köküne bir *Package. JSON* dosyası ekleyin:
+Aşağıdaki gibi, proje köküne bir dosya *package.js* ekleyin `devDependencies` :
 
 > [!WARNING]
-> `gulp-uglify` Modül ECMASCRIPT (ES) 2015/ES6 ve üstünü desteklemez. ES2015/ES6 veya üstünü kullanmak `gulp-uglify` için yerine [Gulp-Terser](https://www.npmjs.com/package/gulp-terser) 'yi yükler.
+> `gulp-uglify`Modül ECMAScript (es) 2015/ES6 ve üstünü desteklemez. ES2015/ES6 veya üstünü kullanmak için yerine [Gulp-Terser](https://www.npmjs.com/package/gulp-terser) 'yi yükler `gulp-uglify` .
 
 [!code-json[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/package.json?range=5-13)]
 
-Aşağıdaki komutu *Package. JSON*ile aynı düzeyde çalıştırarak bağımlılıkları yükler:
+Aşağıdaki komutu *package.js*ile aynı düzeyde çalıştırarak bağımlılıkları yükler:
 
 ```console
 npm i
@@ -182,7 +184,7 @@ Gulp CLı 'yı genel bağımlılık olarak yükler:
 npm i -g gulp-cli
 ```
 
-Aşağıdaki *gulpfile. js* dosyasını proje köküne kopyalayın:
+Aşağıdaki *gulpfile.js* dosyasını proje köküne kopyalayın:
 
 [!code-javascript[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/gulpfile.js?range=1-11,14-)]
 
@@ -192,7 +194,7 @@ Proje Visual Studio 'da yapılandırmadan önce Gulp minbirleşme görevini teti
 
 [!code-xml[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/BuildBundlerMinifierApp.csproj?range=14-16)]
 
-Bu örnekte, `MyPreCompileTarget` hedef içinde tanımlanan tüm görevler önceden tanımlanmış `Build` hedeften önce çalışır. Visual Studio 'nun çıkış penceresinde aşağıdakine benzer bir çıktı görüntülenir:
+Bu örnekte, hedef içinde tanımlanan tüm görevler `MyPreCompileTarget` önceden tanımlanmış hedeften önce çalışır `Build` . Visual Studio 'nun çıkış penceresinde aşağıdakine benzer bir çıktı görüntülenir:
 
 ```console
 1>------ Build started: Project: BuildBundlerMinifierApp, Configuration: Debug Any CPU ------

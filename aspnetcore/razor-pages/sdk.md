@@ -8,17 +8,19 @@ ms.custom: mvc, seodec18
 ms.date: 03/26/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: razor-pages/sdk
-ms.openlocfilehash: 555965b96b0d4d541c70f8a137d4f098dc06a4d6
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 56b4d4c13023918a4ac25c8c5d8ad1ee2c346ac6
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106630"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403046"
 ---
 # <a name="aspnet-core-razor-sdk"></a>ASP.NET Core Razor SDK
 
@@ -46,7 +48,7 @@ RazorSDK, `Content` `Include` Glob düzenine ayarlanmış bir özniteliği olan 
 
 ::: moniker-end
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 [!INCLUDE[](~/includes/2.1-SDK.md)]
 
@@ -109,12 +111,12 @@ Aşağıdaki tablodaki Özellikler ve öğeler, SDK 'ya giriş ve çıkış yap�
 
 ::: moniker-end
 
-| Öğeleri | Açıklama |
+| Öğeler | Açıklama |
 | ----- | ----------- |
 | `RazorGenerate` | Kod oluşturmaya giriş olan öğe öğeleri (*. cshtml* dosyaları). |
 | `RazorComponent` | Bileşen kodu oluşturmaya giriş olan öğe öğeleri (*. Razor* dosyaları) Razor . |
 | `RazorCompile` | Derleme hedeflerine giriş olan öğe öğeleri (*. cs* dosyaları) Razor . `ItemGroup`Derlemeye derlenecek ek dosyaları belirtmek için bunu kullanın Razor . |
-| `RazorTargetAssemblyAttribute` | Derleme için öznitelikleri oluşturmak için kullanılan öğe öğeleri Razor . Örnek:  <br>`RazorAssemblyAttribute`<br>`Include="System.Reflection.AssemblyMetadataAttribute"`<br>`_Parameter1="BuildSource" _Parameter2="https://docs.microsoft.com/">` |
+| `RazorTargetAssemblyAttribute` | Derleme için öznitelikleri oluşturmak için kullanılan öğe öğeleri Razor . Örneğin:  <br>`RazorAssemblyAttribute`<br>`Include="System.Reflection.AssemblyMetadataAttribute"`<br>`_Parameter1="BuildSource" _Parameter2="https://docs.microsoft.com/">` |
 | `RazorEmbeddedResource` | Oluşturulan derlemeye gömülü kaynaklar olarak eklenen öğe öğeleri Razor . |
 
 ::: moniker range=">= aspnetcore-3.0"
@@ -124,7 +126,7 @@ Aşağıdaki tablodaki Özellikler ve öğeler, SDK 'ya giriş ve çıkış yap�
 | `RazorTargetName` | Tarafından üretilen derlemenin dosya adı (uzantısı olmadan) Razor . |
 | `RazorOutputPath` | RazorÇıkış dizini. |
 | `RazorCompileToolset` | Derlemeyi derlemek için kullanılan araç takımını tespit etmek için kullanılır Razor . Geçerli değerler `Implicit` , `RazorSDK` , ve `PrecompilationTool` . |
-| [Enabledefaultcontentıtems](https://github.com/aspnet/websdk/blob/rel-2.0.0/src/ProjectSystem/Microsoft.NET.Sdk.Web.ProjectSystem.Targets/netstandard1.0/Microsoft.NET.Sdk.Web.ProjectSystem.targets#L21) | `true` varsayılan değerdir. Ne zaman `true` , *Web. config*, *. JSON*ve *. cshtml* dosyalarını projeye içerik olarak ekler. Aracılığıyla başvurulduğunda `Microsoft.NET.Sdk.Web` , *Wwwroot* ve yapılandırma dosyaları altındaki dosyalar da dahil edilmiştir. |
+| [Enabledefaultcontentıtems](https://github.com/aspnet/websdk/blob/rel-2.0.0/src/ProjectSystem/Microsoft.NET.Sdk.Web.ProjectSystem.Targets/netstandard1.0/Microsoft.NET.Sdk.Web.ProjectSystem.targets#L21) | `true` varsayılan değerdir. Ne zaman `true` , *web.config*, *. JSON*ve *. cshtml* dosyalarını projede içerik olarak içerir. Aracılığıyla başvurulduğunda `Microsoft.NET.Sdk.Web` , *Wwwroot* ve yapılandırma dosyaları altındaki dosyalar da dahil edilmiştir. |
 | `EnableDefaultRazorGenerateItems` | Ne zaman `true` , öğelerdeki öğelerden *. cshtml* dosyalarını içerir `Content` `RazorGenerate` . |
 | `GenerateRazorTargetAssemblyInfo` | Ne zaman `true` , tarafından belirtilen öznitelikleri içeren bir *. cs* dosyası oluşturur `RazorAssemblyAttribute` ve derleme çıkışında dosyasını içerir. |
 | `EnableDefaultRazorTargetAssemblyInfoAttributes` | Ne zaman `true` , ' a bir varsayılan derleme öznitelikleri kümesi ekler `RazorAssemblyAttribute` . |
@@ -148,7 +150,7 @@ Aşağıdaki tablodaki Özellikler ve öğeler, SDK 'ya giriş ve çıkış yap�
 | `RazorTargetName` | Tarafından üretilen derlemenin dosya adı (uzantısı olmadan) Razor . |
 | `RazorOutputPath` | RazorÇıkış dizini. |
 | `RazorCompileToolset` | Derlemeyi derlemek için kullanılan araç takımını tespit etmek için kullanılır Razor . Geçerli değerler `Implicit` , `RazorSDK` , ve `PrecompilationTool` . |
-| [Enabledefaultcontentıtems](https://github.com/aspnet/websdk/blob/rel-2.0.0/src/ProjectSystem/Microsoft.NET.Sdk.Web.ProjectSystem.Targets/netstandard1.0/Microsoft.NET.Sdk.Web.ProjectSystem.targets#L21) | `true` varsayılan değerdir. Ne zaman `true` , *Web. config*, *. JSON*ve *. cshtml* dosyalarını projeye içerik olarak ekler. Aracılığıyla başvurulduğunda `Microsoft.NET.Sdk.Web` , *Wwwroot* ve yapılandırma dosyaları altındaki dosyalar da dahil edilmiştir. |
+| [Enabledefaultcontentıtems](https://github.com/aspnet/websdk/blob/rel-2.0.0/src/ProjectSystem/Microsoft.NET.Sdk.Web.ProjectSystem.Targets/netstandard1.0/Microsoft.NET.Sdk.Web.ProjectSystem.targets#L21) | `true` varsayılan değerdir. Ne zaman `true` , *web.config*, *. JSON*ve *. cshtml* dosyalarını projede içerik olarak içerir. Aracılığıyla başvurulduğunda `Microsoft.NET.Sdk.Web` , *Wwwroot* ve yapılandırma dosyaları altındaki dosyalar da dahil edilmiştir. |
 | `EnableDefaultRazorGenerateItems` | Ne zaman `true` , öğelerdeki öğelerden *. cshtml* dosyalarını içerir `Content` `RazorGenerate` . |
 | `GenerateRazorTargetAssemblyInfo` | Ne zaman `true` , tarafından belirtilen öznitelikleri içeren bir *. cs* dosyası oluşturur `RazorAssemblyAttribute` ve derleme çıkışında dosyasını içerir. |
 | `EnableDefaultRazorTargetAssemblyInfoAttributes` | Ne zaman `true` , ' a bir varsayılan derleme öznitelikleri kümesi ekler `RazorAssemblyAttribute` . |
@@ -196,4 +198,4 @@ Razordil sürümü, için oluşturulduğu çalışma zamanının sürümü ile s
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * [.NET Core için csproj biçimine eklemeler](/dotnet/core/tools/csproj)
-* [Ortak MSBuild proje öğeleri](/visualstudio/msbuild/common-msbuild-project-items)
+* [Yaygın MSBuild proje öğeleri](/visualstudio/msbuild/common-msbuild-project-items)

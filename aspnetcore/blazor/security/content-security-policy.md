@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/security/content-security-policy
-ms.openlocfilehash: 360fff9383e25a6b5b9308cfebd397f7f4ee31a6
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: 5c53ac64d3ae1b365b40c519eb119f913d58cad1
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242985"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402448"
 ---
 # <a name="enforce-a-content-security-policy-for-aspnet-core-blazor"></a>ASP.NET Core için bir Içerik Güvenlik Ilkesi zorlaBlazor
 
@@ -38,7 +40,7 @@ CSP, Chrome, Edge, Firefox, Opera ve Safari dahil olmak üzere çoğu modern mas
 
 ## <a name="policy-directives"></a>İlke yönergeleri
 
-En düşük düzeyde, uygulamalar için aşağıdaki yönergeleri ve kaynakları belirtin Blazor . Gerektiğinde ek yönergeler ve kaynaklar ekleyin. Aşağıdaki yönergeler, bu makalenin [Ilkeyi Uygula](#apply-the-policy) bölümünde, burada Blazor webassembly ve Server için güvenlik ilkelerinin sağlandığı durumlarda kullanılır Blazor :
+En düşük düzeyde, uygulamalar için aşağıdaki yönergeleri ve kaynakları belirtin Blazor . Gerektiğinde ek yönergeler ve kaynaklar ekleyin. Aşağıdaki yönergeler, ve için güvenlik ilkelerinin sağlandığı Bu makalenin [Ilkeyi Uygula](#apply-the-policy) bölümünde kullanılır Blazor WebAssembly Blazor Server :
 
 * [Base-URI](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/base-uri): bir sayfanın etiketinin URL 'lerini kısıtlar `<base>` . `self`Uygulamanın kaynağının, düzen ve bağlantı noktası numarası dahil olmak üzere geçerli bir kaynak olduğunu belirtmek için belirtin.
 * [Engelle-tümü-karışık-içerik](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/block-all-mixed-content): karışık http ve HTTPS içeriğini yüklemeyi engeller.
@@ -50,17 +52,17 @@ En düşük düzeyde, uygulamalar için aşağıdaki yönergeleri ve kaynakları
 * [Script-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/script-src): betikler için geçerli kaynakları gösterir.
   * `https://stackpath.bootstrapcdn.com/`Önyükleme betikleri için konak kaynağını belirtin.
   * `self`Uygulamanın kaynağının, düzen ve bağlantı noktası numarası dahil olmak üzere geçerli bir kaynak olduğunu belirtmek için belirtin.
-  * BlazorWebassembly uygulamasında:
-    * Gerekli Blazor webassembly satır içi betiklerinin yüklenmesine izin vermek için aşağıdaki karmaları belirtin:
+  * Bir Blazor WebAssembly uygulamada:
+    * Gerekli satır içi betiklerin yüklenmesine izin vermek için aşağıdaki karmaları belirtin Blazor WebAssembly :
       * `sha256-v8ZC9OgMhcnEQ/Me77/R9TlJfzOBqrMTW8e1KuqLaqc=`
       * `sha256-If//FtbPc03afjLezvWHnC3Nbu4fDM04IIzkPaf3pH0=`
       * `sha256-v8v3RKRPmN4odZ1CWM5gw80QKPCCWMcpNeOmimNL2AA=`
     * `unsafe-eval`' In kullanılacağını `eval()` ve dizelerden kod oluşturma yöntemlerini belirtin.
-  * Bir Blazor sunucu uygulamasında, `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` stil sayfaları için geri dönüş algılamayı gerçekleştiren satır içi betiğin karmasını belirtin.
+  * Bir Blazor Server uygulamada, `sha256-34WLX60Tw3aG6hylk0plKbZZFXCuepeQ6Hu7OqRf8PI=` stil sayfaları için geri dönüş algılamayı gerçekleştiren satır içi betiğin karmasını belirtin.
 * [Style-src](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/style-src): stil sayfaları için geçerli kaynakları gösterir.
   * `https://stackpath.bootstrapcdn.com/`Önyükleme stil sayfaları için konak kaynağını belirtin.
   * `self`Uygulamanın kaynağının, düzen ve bağlantı noktası numarası dahil olmak üzere geçerli bir kaynak olduğunu belirtmek için belirtin.
-  * `unsafe-inline`Satır içi stillerin kullanılmasına izin vermek için belirtin. Blazorİstemci ve sunucunun ilk istekten sonra yeniden bağlanması için sunucu uygulamalarındaki Kullanıcı arabirimi için satır içi bildirimi gerekir. Gelecekteki bir sürümde, artık gerekli olmaması için satır içi stillendirme kaldırılmış olabilir `unsafe-inline` .
+  * `unsafe-inline`Satır içi stillerin kullanılmasına izin vermek için belirtin. Blazor Serverİlk istekten sonra istemciyi ve sunucuyu yeniden bağlamaya yönelik uygulamalardaki kullanıcı arabirimi için satır içi bildirimi gerekir. Gelecekteki bir sürümde, artık gerekli olmaması için satır içi stillendirme kaldırılmış olabilir `unsafe-inline` .
 * [yükseltme-güvenli olmayan-istekler](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Security-Policy/upgrade-insecure-requests): güvenli olmayan (http) kaynaklardaki Içerik URL 'lerinin https üzerinden güvenli bir şekilde alınması gerektiğini gösterir.
 
 Yukarıdaki yönergeler, Microsoft Internet Explorer hariç tüm tarayıcılar tarafından desteklenir.
@@ -81,9 +83,9 @@ Içerik Güvenlik Ilkesi düzey 2 tarayıcı desteği matrisi için bkz. [Içeri
 * Yönergeleri `content` öznitelik değerine yerleştirin. Yönergeleri noktalı virgül () ile ayırın `;` .
 * Etiketi her zaman `meta` `<head>` içeriğe yerleştirin.
 
-Aşağıdaki bölümlerde Blazor webassembly ve Server için örnek ilkeler gösterilmektedir Blazor . Bu örnekler, uygulamasının her sürümü için bu makalede sürümü oluşturulur Blazor . Sürümünüze uygun bir sürümü kullanmak için bu Web sayfasında **Sürüm** açılan Seçicisi seçiciyle birlikte belge sürümü ' nü seçin.
+Aşağıdaki bölümlerde ve için örnek ilkeler gösterilmektedir Blazor WebAssembly Blazor Server . Bu örnekler, uygulamasının her sürümü için bu makalede sürümü oluşturulur Blazor . Sürümünüze uygun bir sürümü kullanmak için bu Web sayfasında **Sürüm** açılan Seçicisi seçiciyle birlikte belge sürümü ' nü seçin.
 
-### <a name="blazor-webassembly"></a>BlazorWebAssembly
+### Blazor WebAssembly
 
 `<head>` `wwwroot/index.html` Konak sayfasının Içeriğinde, [ilke yönergeleri](#policy-directives) bölümünde açıklanan yönergeleri uygulayın:
 
@@ -106,7 +108,7 @@ Aşağıdaki bölümlerde Blazor webassembly ve Server için örnek ilkeler gös
                upgrade-insecure-requests;">
 ```
 
-### <a name="blazor-server"></a>BlazorServer
+### Blazor Server
 
 `<head>` `Pages/_Host.cshtml` Konak sayfasının Içeriğinde, [ilke yönergeleri](#policy-directives) bölümünde açıklanan yönergeleri uygulayın:
 

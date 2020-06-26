@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: client-side/libman/libman-cli
-ms.openlocfilehash: 1a42d162e28d4bb4cce284b8b5e37f1be6ff64c6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: ed5dffb83a2f1a40f3d6596d23135c0fa5b6791f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82770558"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85403189"
 ---
 # <a name="use-the-libman-cli-with-aspnet-core"></a>ASP.NET Core ile LibMan CLı kullanın
 
@@ -98,7 +100,7 @@ Aşağıdaki bölümlerde kullanılabilir CLı komutları ana hatlarıyla verilm
 
 ## <a name="initialize-libman-in-the-project"></a>Projedeki LibMan 'ı Başlat
 
-Bu `libman init` komut, yoksa bir *Libman. JSON* dosyası oluşturur. Dosya varsayılan öğe şablonu içeriğiyle oluşturulur.
+`libman init`Bir dosya yoksa, komut dosyada bir *libman.js* oluşturur. Dosya varsayılan öğe şablonu içeriğiyle oluşturulur.
 
 ### <a name="synopsis"></a>Özeti
 
@@ -113,11 +115,11 @@ Komutu için aşağıdaki seçenekler kullanılabilir `libman init` :
 
 * `-d|--default-destination <PATH>`
 
-  Geçerli klasöre göreli bir yol. `destination` *Libman. JSON*içindeki bir kitaplık için hiçbir özellik tanımlanmazsa kitaplık dosyaları bu konuma yüklenir. `<PATH>`Değer, `defaultDestination` *Libman. JSON*özelliğine yazılır.
+  Geçerli klasöre göreli bir yol. Kitaplık dosyaları, `destination` *üzerindelibman.js*bir kitaplık için tanımlı bir özellik yoksa bu konuma yüklenir. `<PATH>`Değer, `defaultDestination` *üzerindelibman.js*özelliğine yazılır.
 
 * `-p|--default-provider <PROVIDER>`
 
-  Belirli bir kitaplık için hiçbir sağlayıcı tanımlanmamışsa kullanılacak sağlayıcı. `<PROVIDER>`Değer, `defaultProvider` *Libman. JSON*özelliğine yazılır. `<PROVIDER>`Aşağıdaki değerlerden biriyle değiştirin:
+  Belirli bir kitaplık için hiçbir sağlayıcı tanımlanmamışsa kullanılacak sağlayıcı. `<PROVIDER>`Değer, `defaultProvider` *üzerindelibman.js*özelliğine yazılır. `<PROVIDER>`Aşağıdaki değerlerden biriyle değiştirin:
 
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
@@ -125,7 +127,7 @@ Komutu için aşağıdaki seçenekler kullanılabilir `libman init` :
 
 ### <a name="examples"></a>Örnekler
 
-ASP.NET Core projesinde bir *Libman. JSON* dosyası oluşturmak için:
+Bir ASP.NET Core projesindeki dosyada *libman.js* oluşturmak için:
 
 * Proje köküne gidin.
 * Şu komutu çalıştırın:
@@ -140,7 +142,7 @@ ASP.NET Core projesinde bir *Libman. JSON* dosyası oluşturmak için:
 
   ![Libman başlatma komutu-varsayılan sağlayıcı](_static/libman-init-provider.png)
 
-Aşağıdaki içeriğe sahip proje köküne bir *Libman. JSON* dosyası eklenir:
+Aşağıdaki içeriğe sahip proje köküne bir *libman.js* dosyası eklenir:
 
 ```json
 {
@@ -152,7 +154,7 @@ Aşağıdaki içeriğe sahip proje köküne bir *Libman. JSON* dosyası eklenir:
 
 ## <a name="add-library-files"></a>Kitaplık dosyaları Ekle
 
-`libman install`Komutu, kitaplık dosyalarını indirir ve projeye yükler. Bir *Libman. JSON* dosyası yoksa eklenir. *Libman. JSON* dosyası kitaplık dosyaları için yapılandırma ayrıntılarını depolayacak şekilde değiştirilir.
+`libman install`Komutu, kitaplık dosyalarını indirir ve projeye yükler. Bir *libman.js* dosya yoksa eklenir. Dosyadaki *libman.js* , kitaplık dosyaları için yapılandırma ayrıntılarını depolayacak şekilde değiştirilir.
 
 ### <a name="synopsis"></a>Özeti
 
@@ -173,7 +175,7 @@ Komutu için aşağıdaki seçenekler kullanılabilir `libman install` :
 
 * `-d|--destination <PATH>`
 
-  Kitaplığın yükleneceği konum. Belirtilmemişse, varsayılan konum kullanılır. `defaultDestination` *Libman. JSON*içinde hiçbir özellik belirtilmemişse, bu seçenek gereklidir.
+  Kitaplığın yükleneceği konum. Belirtilmemişse, varsayılan konum kullanılır. `defaultDestination` *Üzerindelibman.js*hiçbir özellik belirtilmemişse, bu seçenek gereklidir.
 
 * `--files <FILE>`
 
@@ -185,13 +187,13 @@ Komutu için aşağıdaki seçenekler kullanılabilir `libman install` :
   
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
-  Belirtilmemişse, `defaultProvider` *Libman. JSON* içindeki özelliği kullanılır. `defaultProvider` *Libman. JSON*içinde hiçbir özellik belirtilmemişse, bu seçenek gereklidir.
+  Belirtilmemişse, `defaultProvider` *libman.json* özelliği kullanılır. `defaultProvider` *Üzerindelibman.js*hiçbir özellik belirtilmemişse, bu seçenek gereklidir.
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
 ### <a name="examples"></a>Örnekler
 
-Aşağıdaki *Libman. JSON* dosyasını göz önünde bulundurun:
+Dosyasında aşağıdaki *libman.js* göz önünde bulundurun:
 
 ```json
 {
@@ -201,13 +203,13 @@ Aşağıdaki *Libman. JSON* dosyasını göz önünde bulundurun:
 }
 ```
 
-JQuery sürümü 3.2.1 *jQuery. min. js* dosyasını CDNJS sağlayıcısını kullanarak *Wwwroot/Scripts/jQuery* klasörüne yüklemek için:
+JQuery sürüm 3.2.1 *jquery.min.js* dosyasını CDNJS sağlayıcısını kullanarak *Wwwroot/Scripts/jQuery* klasörüne yüklemek için:
 
 ```console
 libman install jquery@3.2.1 --provider cdnjs --destination wwwroot/scripts/jquery --files jquery.min.js
 ```
 
-*Libman. JSON* dosyası şuna benzer:
+Dosyadaki *libman.js* aşağıdakine benzer:
 
 ```json
 {
@@ -225,7 +227,7 @@ libman install jquery@3.2.1 --provider cdnjs --destination wwwroot/scripts/jquer
 }
 ```
 
-Dosya sistemi sağlayıcısını kullanarak *C: \\ Temp \\ \\ contosocalendar* konumundaki *Calendar. js* ve *Calendar. css* dosyalarını yüklemek için:
+Dosya sistemi sağlayıcısını kullanarak *C: \\ Temp \\ \\ contosocalendar* öğesinden *calendar.js* ve *Calendar. css* dosyalarını yüklemek için:
 
   ```console
   libman install C:\temp\contosoCalendar\ --provider filesystem --files calendar.js --files calendar.css
@@ -233,12 +235,12 @@ Dosya sistemi sağlayıcısını kullanarak *C: \\ Temp \\ \\ contosocalendar* k
 
 Aşağıdaki istem iki nedenden dolayı görünür:
 
-* *Libman. JSON* dosyası bir `defaultDestination` özellik içermiyor.
+* Dosyadaki *libman.js* bir `defaultDestination` özellik içermiyor.
 * `libman install`Komut, `-d|--destination` seçeneğini içermez.
 
 ![Libman Install komut-hedef](_static/libman-install-destination.png)
 
-Varsayılan hedefi kabul ettikten sonra, *Libman. JSON* dosyası şuna benzer:
+Varsayılan hedefi kabul ettikten sonra, dosyadaki *libman.js* aşağıdakine benzer:
 
 ```json
 {
@@ -267,11 +269,11 @@ Varsayılan hedefi kabul ettikten sonra, *Libman. JSON* dosyası şuna benzer:
 
 ## <a name="restore-library-files"></a>Kitaplık dosyalarını geri yükleme
 
-`libman restore`Komut, *Libman. JSON*içinde tanımlanan kitaplık dosyalarını yüklüyor. Aşağıdaki kurallar geçerlidir:
+`libman restore`Komut, *üzerindelibman.js*tanımlı kitaplık dosyalarını yüklüyor. Aşağıdaki kurallar geçerlidir:
 
-* Proje kökünde bir *Libman. JSON* dosyası yoksa bir hata döndürülür.
-* Bir kitaplık bir sağlayıcıyı belirtiyorsa, `defaultProvider` *Libman. JSON* içindeki özelliği yok sayılır.
-* Bir kitaplık bir hedef belirtiyorsa, `defaultDestination` *Libman. JSON* içindeki özelliği yok sayılır.
+* Proje kökünde *libman.js* dosya varsa, bir hata döndürülür.
+* Bir kitaplık bir sağlayıcıyı belirtiyorsa, `defaultProvider` *libman.json* özelliği yok sayılır.
+* Bir kitaplık bir hedef belirtiyorsa, `defaultDestination` *libman.json* özelliği yok sayılır.
 
 ### <a name="synopsis"></a>Özeti
 
@@ -288,7 +290,7 @@ Komutu için aşağıdaki seçenekler kullanılabilir `libman restore` :
 
 ### <a name="examples"></a>Örnekler
 
-*Libman. JSON*' da tanımlanan kitaplık dosyalarını geri yüklemek için:
+*Üzerindelibman.js*tanımlanan kitaplık dosyalarını geri yüklemek için:
 
 ```console
 libman restore
@@ -296,7 +298,7 @@ libman restore
 
 ## <a name="delete-library-files"></a>Kitaplık dosyalarını sil
 
-`libman clean`Komut daha önce LibMan aracılığıyla geri yüklenen kitaplık dosyalarını siler. Bu işlemden sonra boş olacak klasörler silinir. `libraries` *Libman. JSON* özelliğindeki kitaplık dosyalarının ilişkili yapılandırması kaldırılmaz.
+`libman clean`Komut daha önce LibMan aracılığıyla geri yüklenen kitaplık dosyalarını siler. Bu işlemden sonra boş olacak klasörler silinir. `libraries` *Üzerindelibman.js* özelliğindeki kitaplık dosyalarının ilişkili yapılandırma kaldırılmamıştır.
 
 ### <a name="synopsis"></a>Özeti
 
@@ -323,12 +325,12 @@ libman clean
 
 `libman uninstall`Komut:
 
-* Belirtilen kitaplıkla ilişkili tüm dosyaları *Libman. JSON*dosyasındaki hedefle siler.
-* *Libman. JSON*' dan ilişkili kitaplık yapılandırmasını kaldırır.
+* Belirtilen kitaplıkla ilişkili tüm dosyaları, *libman.jsüzerindeki*hedefle siler.
+* *Üzerindelibman.js*ilişkili kitaplık yapılandırmasını kaldırır.
 
 Şu durumlarda bir hata oluşur:
 
-* Proje kökünde *Libman. JSON* dosyası yok.
+* Proje kökünde dosya *libman.js* yok.
 * Belirtilen kitaplık yok.
 
 Aynı ada sahip birden fazla kitaplık yüklüyse, bir tane seçmeniz istenir.
@@ -354,7 +356,7 @@ Komutu için aşağıdaki seçenekler kullanılabilir `libman uninstall` :
 
 ### <a name="examples"></a>Örnekler
 
-Aşağıdaki *Libman. JSON* dosyasını göz önünde bulundurun:
+Dosyasında aşağıdaki *libman.js* göz önünde bulundurun:
 
 [!code-json[](samples/LibManSample/libman.json)]
 
@@ -380,7 +382,7 @@ Aşağıdaki *Libman. JSON* dosyasını göz önünde bulundurun:
 
 Şu durumlarda bir hata oluşur:
 
-* Proje kökünde *Libman. JSON* dosyası yok.
+* Proje kökünde dosya *libman.js* yok.
 * Belirtilen kitaplık yok.
 
 Aynı ada sahip birden fazla kitaplık yüklüyse, bir tane seçmeniz istenir.

@@ -1,30 +1,32 @@
 ---
 title: ASP.NET Core Blazor durum yönetimi
 author: guardrex
-description: Sunucu uygulamalarında durumu kalıcı hale getirme hakkında bilgi edinin Blazor .
+description: Uygulamalarda durumu kalıcı hale getirme hakkında bilgi edinin Blazor Server .
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/state-management
-ms.openlocfilehash: 59adcce972b503a6aa6e596bc9bff63225961f84
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: a6c646425145855538f408ec6cafdb151cd24b86
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85243206"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401954"
 ---
 # <a name="aspnet-core-blazor-state-management"></a>ASP.NET Core Blazor durum yönetimi
 
 [Steve Sanderson](https://github.com/SteveSandersonMS) tarafından
 
-BlazorSunucu, durum bilgisi olan bir uygulama çerçevesidir. Çoğu zaman, uygulama sunucuya devam eden bir bağlantı sağlar. Kullanıcının durumu, sunucu belleğinde bir *devrende*tutulur. 
+Blazor Serverdurum bilgisi olan bir uygulama çerçevesidir. Çoğu zaman, uygulama sunucuya devam eden bir bağlantı sağlar. Kullanıcının durumu, sunucu belleğinde bir *devrende*tutulur. 
 
 Bir kullanıcının devresi için durum tutulan örnekler şunlardır:
 
@@ -33,7 +35,7 @@ Bir kullanıcının devresi için durum tutulan örnekler şunlardır:
 * Devre kapsamına alınan [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection) hizmet örneklerinde tutulan veriler.
 
 > [!NOTE]
-> Bu makale, sunucu uygulamalarında durum kalıcılığını ele alınmaktadır Blazor . BlazorWebAssembly uygulamaları [Tarayıcıda istemci tarafı durum kalıcılığından](#client-side-in-the-browser) yararlanabilir, ancak bu makalenin kapsamı dışında özel çözümler veya üçüncü taraf paketleri gerektirebilir.
+> Bu makale, uygulamalarda durum kalıcılığını ele alınmaktadır Blazor Server . Blazor WebAssemblyuygulamalar [, tarayıcıda istemci tarafı durum kalıcılığından](#client-side-in-the-browser) yararlanabilir, ancak bu makalenin kapsamı dışında özel çözümler veya üçüncü taraf paketleri gerektirebilir.
 
 ## <a name="blazor-circuits"></a>Blazoruygulanıp
 
@@ -68,7 +70,7 @@ Genellikle, gönderilmemiş bir oturum açma iletişim kutusuna girilen Kullanı
 
 ## <a name="where-to-persist-state"></a>Durumun nerede kalıcı olduğu
 
-Sunucu uygulamasındaki kalıcı durum için üç ortak konum vardır Blazor . Her yaklaşım farklı senaryolara en iyi şekilde uygundur ve farklı uyarılar içerir:
+Bir uygulamadaki kalıcı durum için üç ortak konum vardır Blazor Server . Her yaklaşım farklı senaryolara en iyi şekilde uygundur ve farklı uyarılar içerir:
 
 * [Veritabanında sunucu tarafı](#server-side-in-a-database)
 * [URL](#url)
@@ -106,7 +108,7 @@ Yönergeyle URL desenleri tanımlama hakkında bilgi için `@page` bkz <xref:bla
 Kullanıcının etkin şekilde oluşturmakta olduğu geçici veriler için, yaygın bir yedekleme deposu tarayıcının `localStorage` ve `sessionStorage` koleksiyonlarıdır. Devre dışı bırakılırsa, sunucu tarafı depolama alanının avantajlarından yararlanan uygulama, saklı durumu yönetmek veya temizlemek için gerekli değildir.
 
 > [!NOTE]
-> Bu bölümdeki "istemci tarafı", [ Blazor webassembly barındırma modelinde](xref:blazor/hosting-models#blazor-webassembly)değil, tarayıcıdaki istemci tarafı senaryolarına başvurur. `localStorage`ve `sessionStorage` Blazor yalnızca özel kod yazarak veya 3. taraf paketini kullanarak webassembly uygulamalarında kullanılabilir.
+> Bu bölümdeki "istemci tarafı", [ Blazor WebAssembly barındırma modelinde](xref:blazor/hosting-models#blazor-webassembly)değil, tarayıcıdaki istemci tarafı senaryolarına başvurur. `localStorage`ve `sessionStorage` Blazor WebAssembly yalnızca özel kod yazarak veya 3. taraf paketini kullanarak uygulamalarda kullanılabilir.
 
 `localStorage`ve `sessionStorage` aşağıdaki gibi farklılık gösterir:
 
@@ -124,7 +126,7 @@ Tarayıcı depolamayı kullanmaya yönelik uyarılar:
 
 * Sunucu tarafı veritabanının kullanımına benzer şekilde veri yükleme ve kaydetme zaman uyumsuzdur.
 * Sunucu tarafı veritabanının aksine, istenen sayfa prerendering aşamasında tarayıcıda bulunmadığından, depolama alanı prerendering sırasında kullanılamaz.
-* Birkaç kilobayt veri depolama alanı sunucu uygulamalarında kalıcı hale getiriyoruz Blazor . Birkaç kilobayt dışında, veriler ağ üzerinden yüklenip kaydedildiğinden performans etkilerini göz önünde bulundurmanız gerekir.
+* Birkaç kilobayt veri depolaması, uygulamalar için kalıcı hale getirilmesi mantıklıdır Blazor Server . Birkaç kilobayt dışında, veriler ağ üzerinden yüklenip kaydedildiğinden performans etkilerini göz önünde bulundurmanız gerekir.
 * Kullanıcılar verileri görüntüleyebilir veya bunlarla karşılaşabilir. ASP.NET Core [veri koruma](xref:security/data-protection/introduction) riski azaltabilirler.
 
 ## <a name="third-party-browser-storage-solutions"></a>Üçüncü taraf tarayıcı depolama çözümleri
@@ -144,7 +146,7 @@ Ve için [veri koruması](xref:security/data-protection/introduction) sağlayan 
 
 Paketi yüklemek için `Microsoft.AspNetCore.ProtectedBrowserStorage` :
 
-1. BlazorSunucu uygulaması projesinde, öğesine bir paket başvurusu ekleyin [`Microsoft.AspNetCore.ProtectedBrowserStorage`](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage) .
+1. Blazor ServerUygulama projesinde, öğesine bir paket başvurusu ekleyin [`Microsoft.AspNetCore.ProtectedBrowserStorage`](https://www.nuget.org/packages/Microsoft.AspNetCore.ProtectedBrowserStorage) .
 1. Üst düzey HTML 'de (örneğin, `Pages/_Host.cshtml` varsayılan Proje şablonundaki dosyasında) aşağıdaki `<script>` etiketi ekleyin:
 
    ```html

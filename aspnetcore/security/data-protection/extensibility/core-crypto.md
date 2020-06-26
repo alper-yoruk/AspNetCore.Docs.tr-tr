@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 08/11/2017
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/extensibility/core-crypto
-ms.openlocfilehash: c63cc124e1893f23c18581841194fa66848a2a1e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: de34968f21eec28cf375ee9f75d3cb8b212c7e70
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776428"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404281"
 ---
 # <a name="core-cryptography-extensibility-in-aspnet-core"></a>ASP.NET Core temel şifreleme genişletilebilirliği
 
@@ -126,10 +128,10 @@ Iauthenticatedencryptor ve ıauthenticatedencryptordescriptor arasındaki birinc
 
 Tanımlayıcı, ExportToXml yordamı aracılığıyla seri hale getirilebilir. Bu yordam iki özellik içeren bir Xmlserializeddescriptorınfo döndürür: Descriptor 'ın XElement temsili ve bu tanımlayıcıyı ilgili XElement 'e geri döndürmek için kullanılabilecek bir [ıauthenticatedencryptordescriptordeserializer](xref:security/data-protection/extensibility/core-crypto#data-protection-extensibility-core-crypto-iauthenticatedencryptordescriptordeserializer) temsil eden tür.
 
-Serileştirilmiş tanımlayıcı, şifreleme anahtar malzemesi gibi hassas bilgiler içerebilir. Veri koruma sistemi, depolama alanına kalıcı olmadan önce bilgileri şifrelemek için yerleşik desteğe sahiptir. Bu özelliğin avantajlarından yararlanabilmek için tanımlayıcı, "requiresEncryption" (xmlns "<http://schemas.asp.net/2015/03/dataProtection>") öznitelik adı, "true" özniteliği ile hassas bilgiler içeren öğeyi işaretlemelidir.
+Serileştirilmiş tanımlayıcı, şifreleme anahtar malzemesi gibi hassas bilgiler içerebilir. Veri koruma sistemi, depolama alanına kalıcı olmadan önce bilgileri şifrelemek için yerleşik desteğe sahiptir. Bu özelliğin avantajlarından yararlanabilmek için tanımlayıcı, "requiresEncryption" (xmlns " <http://schemas.asp.net/2015/03/dataProtection> ") öznitelik adı, "true" özniteliği ile hassas bilgiler içeren öğeyi işaretlemelidir.
 
 >[!TIP]
-> Bu özniteliği ayarlamak için yardımcı bir API vardır. Microsoft. AspNetCore. DataProtection. AuthenticatedEncryption. ConfigurationModel ad alanında bulunan XElement. Markasrequiresencryptıon () uzantı yöntemini çağırın.
+> Bu özniteliği ayarlamak için yardımcı bir API vardır. Ad alanı Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel içinde bulunan XElement. Markasrequiresencryptıon () uzantı yöntemini çağırın.
 
 Ayrıca, serileştirilmiş tanımlayıcının gizli bilgiler içermediği durumlar da olabilir. Bir HSM 'de depolanan bir şifreleme anahtarının durumunu yeniden deneyin. HSM, malzemeyi düz metin biçiminde kullanıma sunmayadıklarından, tanımlayıcı, kendisini serileştirilirken anahtar malzemesini yazamaz. Bunun yerine, tanımlayıcı, anahtarın anahtar Sarmalanan sürümünü yazabilir (HSM bu şekilde dışarı aktarmaya izin veriyorsa) veya HSM 'nin anahtar için kendi benzersiz tanımlayıcısıdır.
 

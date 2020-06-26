@@ -1,37 +1,39 @@
 ---
 title: Web.config’i dönüştürme
 author: rick-anderson
-description: ASP.NET Core uygulamasını yayımlarken Web. config dosyasını dönüştürmeyi öğrenin.
+description: ASP.NET Core uygulamasını yayımlarken web.config dosyasını dönüştürmeyi öğrenin.
 monikerRange: '>= aspnetcore-2.2'
 ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: host-and-deploy/iis/transform-webconfig
-ms.openlocfilehash: f7e1fb0adc669b4bffa02e6688231c8f1447bd98
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: bebba7a72012b8be6257b14642bf130613627778
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775940"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404008"
 ---
 # <a name="transform-webconfig"></a>Web.config’i dönüştürme
 
 Tarafından [Vijay Oymakrishnan](https://github.com/vijayrkn)
 
-*Web. config* dosyasına dönüşümler, bir uygulama temel alınarak yayımlandığında otomatik olarak uygulanabilir:
+*web.config* dosyaya dönüşümler, bir uygulama temel alınarak yayımlandığında otomatik olarak uygulanabilir:
 
 * [Yapı yapılandırması](#build-configuration)
 * [Profil](#profile)
 * [Ortam](#environment)
 * [Özel](#custom)
 
-Bu dönüşümler aşağıdaki *Web. config* oluşturma senaryolarından biri için oluşur:
+Bu dönüşümler aşağıdaki *web.config* oluşturma senaryolarından biri için oluşur:
 
 * SDK tarafından otomatik olarak oluşturulur `Microsoft.NET.Sdk.Web` .
 * Uygulamanın [içerik kökünde](xref:fundamentals/index#content-root) geliştirici tarafından sağlanmaktadır.
@@ -40,9 +42,9 @@ Bu dönüşümler aşağıdaki *Web. config* oluşturma senaryolarından biri i�
 
 Derleme yapılandırma dönüştürmeleri önce çalıştırılır.
 
-Bir *Web ekleyin. { Her derleme yapılandırması için CONFIGURATION}. config* dosyası [(Hata Ayıkla | Yayın)](/dotnet/core/tools/dotnet-publish#options) bir *Web. config* dönüştürmesi gerektirir.
+Bir *Web ekleyin. { Her derleme yapılandırması için CONFIGURATION}. config* dosyası [(Hata Ayıkla | Yayın)](/dotnet/core/tools/dotnet-publish#options) *web.config* dönüştürmesi gerektirir.
 
-Aşağıdaki örnekte, Web 'de yapılandırmaya özgü bir ortam değişkeni ayarlanır *. Release. config*:
+Aşağıdaki örnekte, yapılandırmaya özgü bir ortam değişkeni *web.Release.config*olarak ayarlanır:
 
 ```xml
 <?xml version="1.0"?>
@@ -74,9 +76,9 @@ Yapılandırma için MSBuild özelliği `$(Configuration)` .
 
 Profil dönüştürmeleri, [Derleme yapılandırması](#build-configuration) dönüşümlerinden sonra ikinci çalıştırılır.
 
-Bir *Web ekleyin. { *Bir *Web. config* dönüşümü gerektiren her PROFIL yapılandırması için profile}. config dosyası.
+Bir *Web ekleyin. { *Her profil yapılandırması için bir *web.config* dönüşümü gerektiren profile}. config dosyası.
 
-Aşağıdaki örnekte, Web 'de profile özgü bir ortam değişkeni ayarlanır *. *Bir klasör yayımlama profili Için folderprofile. config:
+Aşağıdaki örnekte, bir klasör yayımlama profili için *web.FolderProfile.config* profile özgü bir ortam değişkeni ayarlanır:
 
 ```xml
 <?xml version="1.0"?>
@@ -104,15 +106,15 @@ dotnet publish --configuration Release /p:PublishProfile=FolderProfile
 
 Profil adı için MSBuild özelliği `$(PublishProfile)` .
 
-Hiçbir profil geçirilmemişse, varsayılan profil adı **dosya sistemi** ve Web olur *. *Dosya uygulamanın içerik kökünde mevcutsa FileSystem. config uygulanır.
+Hiçbir profil geçirilmemişse, varsayılan profil adı dosya **sistemi** olur ve dosya uygulamanın içerik kökünde mevcutsa *web.FileSystem.config* uygulanır.
 
 ## <a name="environment"></a>Ortam
 
 Ortam dönüştürmeleri, [Derleme yapılandırması](#build-configuration) ve [profil](#profile) dönüşümleri sonrasında üçüncü olarak çalıştırılır.
 
-Bir *Web ekleyin. { *Bir *Web. config* dönüştürmesi gerektiren her [ortam](xref:fundamentals/environments) için Environment}. config dosyası.
+Bir *Web ekleyin. { ORTAM}. yapılandırma* dosyası *web.config* dönüşüm gerektiren her [ortam](xref:fundamentals/environments) için.
 
-Aşağıdaki örnekte, ortama özgü bir ortam değişkeni Web 'de ayarlanır *. Üretim ortamı için Production. config* :
+Aşağıdaki örnekte, ortama özgü bir ortam değişkeni, üretim ortamı için *web.Production.config* ayarlanır:
 
 ```xml
 <?xml version="1.0"?>
@@ -142,13 +144,13 @@ Ortamın MSBuild özelliği `$(EnvironmentName)` .
 
 Visual Studio 'dan yayımlama ve bir yayımlama profili kullanma sırasında, bkz <xref:host-and-deploy/visual-studio-publish-profiles#set-the-environment> ..
 
-Ortam `ASPNETCORE_ENVIRONMENT` değişkeni, ortam adı belirtildiğinde *Web. config* dosyasına otomatik olarak eklenir.
+Ortam `ASPNETCORE_ENVIRONMENT` değişkeni, ortam adı belirtildiğinde *web.config* dosyasına otomatik olarak eklenir.
 
 ## <a name="custom"></a>Özel
 
 Özel dönüştürmeler son olarak, [Derleme yapılandırması](#build-configuration), [profil](#profile)ve [ortam](#environment) dönüşümlerinden sonra çalıştırılır.
 
-Bir *Web. config* dönüştürmesi gerektiren her özel yapılandırma için bir *{CUSTOM_NAME}. Transform* dosyası ekleyin.
+*web.config* dönüştürmesi gerektiren her özel yapılandırma için bir *{CUSTOM_NAME}. Transform* dosyası ekleyin.
 
 Aşağıdaki örnekte, özel bir Transform ortam değişkeni *Custom. Transform*olarak ayarlanır:
 
@@ -178,9 +180,9 @@ dotnet publish --configuration Release /p:CustomTransformFileName=custom.transfo
 
 Profil adı için MSBuild özelliği `$(CustomTransformFileName)` .
 
-## <a name="prevent-webconfig-transformation"></a>Web. config dönüşümünü engelle
+## <a name="prevent-webconfig-transformation"></a>web.config dönüştürmeyi engelle
 
-*Web. config* dosyasının dönüştürmelerini engellemek için MSBuild özelliğini ayarlayın `$(IsWebConfigTransformDisabled)` :
+*web.config* dosyasının dönüştürmelerini engellemek için MSBuild özelliğini ayarlayın `$(IsWebConfigTransformDisabled)` :
 
 ```dotnetcli
 dotnet publish /p:IsWebConfigTransformDisabled=true
@@ -188,5 +190,5 @@ dotnet publish /p:IsWebConfigTransformDisabled=true
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [Web uygulaması proje dağıtımı için Web. config dönüştürme sözdizimi](/previous-versions/dd465326(v=vs.100))
-* [Visual Studio kullanarak Web proje dağıtımı için Web. config dönüştürme sözdizimi](/previous-versions/aspnet/dd465326(v=vs.110))
+* [Web uygulaması proje dağıtımı içinWeb.config dönüştürme sözdizimi](/previous-versions/dd465326(v=vs.100))
+* [Visual Studio kullanarak Web proje dağıtımı içinWeb.config dönüştürme sözdizimi](/previous-versions/aspnet/dd465326(v=vs.110))

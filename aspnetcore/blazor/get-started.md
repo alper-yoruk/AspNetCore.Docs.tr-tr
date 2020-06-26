@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 05/31/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/get-started
-ms.openlocfilehash: 63fee0b6a3152640a5483c2a682eec7d04742145
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: 1eabc35175d1b696de99488981b1382d231f5544
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85243609"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402786"
 ---
 # <a name="get-started-with-aspnet-core-blazor"></a>ASP.NET Core kullanmaya başlayınBlazor
 
@@ -36,9 +38,9 @@ Kullanmaya başlamak için Blazor , araç seçiminiz için yönergeleri izleyin:
 
 1. **Proje adı** alanında bir proje adı girin veya varsayılan proje adını kabul edin. **Konum** girişinin doğru olduğunu onaylayın veya proje için bir konum belirtin. **Oluştur**'u seçin.
 
-1. BlazorWebassembly deneyimi için ** Blazor Webassembly uygulama** şablonunu seçin. BlazorSunucu deneyimi için ** Blazor sunucu uygulaması** şablonunu seçin. **Oluştur**'u seçin.
+1. Bir Blazor WebAssembly deneyim için ** Blazor WebAssembly uygulama** şablonunu seçin. Bir Blazor Server deneyim için ** Blazor Server uygulama** şablonunu seçin. **Oluştur**'u seçin.
 
-   İki Blazor barındırma modeli, * Blazor webassembly* ve * Blazor sunucu*hakkında bilgi için bkz <xref:blazor/hosting-models> ..
+   İki barındırma modeli hakkında daha fazla bilgi için, Blazor *Blazor WebAssembly* *Blazor Server* bkz <xref:blazor/hosting-models> ..
 
 1. <kbd>Ctrl</kbd> + Uygulamayı çalıştırmak için CTRL<kbd>F5</kbd> tuşuna basın.
 
@@ -56,19 +58,19 @@ Kullanmaya başlamak için Blazor , araç seçiminiz için yönergeleri izleyin:
 
   `debug.javascript.usePreview` `true` Vs Code Kullanıcı arabirimini kullanmak üzere ayarlamak için, **Dosya**  >  **tercihleri**  >  **ayarları** ' nı açın ve arama yapın `debug javascript use preview` . **Node.js ve Chrome için yeni bir önizleme Içindeki JavaScript hata ayıklayıcısını kullan**onay kutusunu işaretleyin.
 
-1. Bir Blazor weelsembly deneyimi için komut kabuğu 'nda aşağıdaki komutu yürütün:
+1. Bir Blazor WebAssembly deneyim için komut kabuğu 'nda aşağıdaki komutu yürütün:
 
    ```dotnetcli
    dotnet new blazorwasm -o WebApplication1
    ```
 
-   Bir Blazor sunucu deneyimi için komut kabuğu 'nda aşağıdaki komutu yürütün:
+   Bir Blazor Server deneyim için komut kabuğu 'nda aşağıdaki komutu yürütün:
 
    ```dotnetcli
    dotnet new blazorserver -o WebApplication1
    ```
 
-   İki Blazor barındırma modeli, * Blazor webassembly* ve * Blazor sunucu*hakkında bilgi için bkz <xref:blazor/hosting-models> ..
+   İki barındırma modeli hakkında daha fazla bilgi için, Blazor *Blazor WebAssembly* *Blazor Server* bkz <xref:blazor/hosting-models> ..
 
 1. `WebApplication1`Visual Studio Code klasörü açın.
 
@@ -84,9 +86,9 @@ Kullanmaya başlamak için Blazor , araç seçiminiz için yönergeleri izleyin:
 
 1. Yan çubukta **Web ve konsol**  >  **uygulaması**' nı seçin.
 
-   BlazorWebassembly deneyimi için ** Blazor Webassembly uygulama** şablonunu seçin. BlazorSunucu deneyimi için ** Blazor sunucu uygulaması** şablonunu seçin. **İleri**’yi seçin.
+   Bir Blazor WebAssembly deneyim için ** Blazor WebAssembly uygulama** şablonunu seçin. Bir Blazor Server deneyim için ** Blazor Server uygulama** şablonunu seçin. **İleri**’yi seçin.
 
-   İki Blazor barındırma modeli, * Blazor webassembly* ve * Blazor sunucu*hakkında bilgi için bkz <xref:blazor/hosting-models> ..
+   İki barındırma modeli hakkında daha fazla bilgi için, Blazor *Blazor WebAssembly* *Blazor Server* bkz <xref:blazor/hosting-models> ..
 
 1. Aşağıdaki konfigürasyonları onaylayın:
 
@@ -109,7 +111,7 @@ Geliştirme sertifikasına güvenmek için bir istem görünürse, sertifikaya g
    dotnet --version
    ```
 
-1. Bir Blazor weelsembly deneyimi için aşağıdaki komutları bir komut kabuğunda yürütün:
+1. Bir Blazor WebAssembly deneyim için komut kabuğu 'nda aşağıdaki komutları yürütün:
 
    ```dotnetcli
    dotnet new blazorwasm -o WebApplication1
@@ -117,7 +119,7 @@ Geliştirme sertifikasına güvenmek için bir istem görünürse, sertifikaya g
    dotnet run
    ```
 
-   Bir Blazor sunucu deneyimi için aşağıdaki komutları bir komut kabuğunda yürütün:
+   Bir Blazor Server deneyim için komut kabuğu 'nda aşağıdaki komutları yürütün:
 
    ```dotnetcli
    dotnet new blazorserver -o WebApplication1
@@ -125,7 +127,7 @@ Geliştirme sertifikasına güvenmek için bir istem görünürse, sertifikaya g
    dotnet run
    ```
 
-   İki Blazor barındırma modeli, * Blazor webassembly* ve * Blazor sunucu*hakkında bilgi için bkz <xref:blazor/hosting-models> ..
+   İki barındırma modeli hakkında daha fazla bilgi için, Blazor *Blazor WebAssembly* *Blazor Server* bkz <xref:blazor/hosting-models> ..
 
 1. Bir tarayıcıda öğesine gidin `https://localhost:5001` .
 

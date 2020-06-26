@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 12/06/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/enforcing-ssl
-ms.openlocfilehash: 26e6fb38cf31b5a2d5c88c19347c867641eb55df
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 8247d66900a0c15b3b386dca021c5c5922d26e71
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84451738"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404568"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>ASP.NET Core 'de HTTPS 'yi zorla
 
@@ -108,7 +110,7 @@ Aşağıdaki yaklaşımlardan herhangi birini kullanarak HTTPS bağlantı noktas
 
   * Konak yapılandırmasında.
   * `ASPNETCORE_HTTPS_PORT`Ortam değişkenini ayarlayarak.
-  * *AppSettings. JSON*içine bir üst düzey girişi ekleyerek:
+  * *Üzerindeappsettings.js*en üst düzey bir giriş ekleyerek:
 
     [!code-json[](enforcing-ssl/sample-snapshot/3.x/appsettings.json?highlight=2)]
 
@@ -122,7 +124,7 @@ Aşağıdaki yaklaşımlardan herhangi birini kullanarak HTTPS bağlantı noktas
 
   * Konak yapılandırmasında.
   * `ASPNETCORE_HTTPS_PORT`Ortam değişkenini ayarlayarak.
-  * *AppSettings. JSON*içine bir üst düzey girişi ekleyerek:
+  * *Üzerindeappsettings.js*en üst düzey bir giriş ekleyerek:
 
     [!code-json[](enforcing-ssl/sample-snapshot/2.x/appsettings.json?highlight=2)]
 
@@ -130,16 +132,16 @@ Aşağıdaki yaklaşımlardan herhangi birini kullanarak HTTPS bağlantı noktas
 
 ::: moniker-end
 
-* Geliştirme aşamasında, *launchsettings. JSON*dosyasında bir https URL 'si ayarlayın. IIS Express kullanıldığında HTTPS 'yi etkinleştirin.
+* Geliştirme aşamasında, *üzerindelaunchsettings.js*bir https URL 'si ayarlayın. IIS Express kullanıldığında HTTPS 'yi etkinleştirin.
 
-* [Kestrel](xref:fundamentals/servers/kestrel) Server veya [http. sys](xref:fundamentals/servers/httpsys) sunucusu için genel kullanıma yönelik BIR uç dağıtımı için https URL uç noktası yapılandırın. Uygulama tarafından yalnızca **BIR HTTPS bağlantı noktası** kullanılır. Ara yazılım, ile bağlantı noktasını bulur <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> .
+* [Kestrel](xref:fundamentals/servers/kestrel) server veya [HTTP.sys](xref:fundamentals/servers/httpsys) Server 'ın herkese açık BIR uç dağıtımı için https URL uç noktası yapılandırın. Uygulama tarafından yalnızca **BIR HTTPS bağlantı noktası** kullanılır. Ara yazılım, ile bağlantı noktasını bulur <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> .
 
 > [!NOTE]
 > Bir uygulama ters proxy yapılandırmasında çalıştırıldığında, <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> kullanılabilir değildir. Bu bölümde açıklanan diğer yaklaşımlardan birini kullanarak bağlantı noktasını ayarlayın.
 
 ### <a name="edge-deployments"></a>Edge dağıtımları 
 
-Kestrel veya HTTP. sys, herkese açık bir uç sunucu olarak kullanıldığında, Kestrel veya HTTP. sys ' nin her ikisini de dinlemek üzere yapılandırılması gerekir:
+Kestrel veya HTTP.sys, herkese açık bir uç sunucu olarak kullanıldığında, Kestrel veya HTTP.sys her ikisini de dinlemek için yapılandırılmış olmalıdır:
 
 * İstemcinin yeniden yönlendirildiği güvenli bağlantı noktası (genellikle üretim ortamında 443 ve geliştirme sırasında 5001).
 * Güvenli olmayan bağlantı noktası (genellikle üretim ortamında 80 ve geliştirme sırasında 5000).
@@ -283,7 +285,7 @@ Aşağıdaki kod:
 ::: moniker-end
 
 
-* Üstbilginin preload parametresini ayarlar `Strict-Transport-Security` . Önyükleme, [RFC HSTS belirtiminin](https://tools.ietf.org/html/rfc6797)bir parçası değildir, ancak Web tarayıcıları tarafından Yeni yüklemede HSTS sitelerini önceden yüklemek için desteklenir. Daha fazla bilgi için bkz [https://hstspreload.org/](https://hstspreload.org/) ..
+* Üstbilginin preload parametresini ayarlar `Strict-Transport-Security` . Önyükleme, [RFC HSTS belirtiminin](https://tools.ietf.org/html/rfc6797)bir parçası değildir, ancak Web tarayıcıları tarafından Yeni yüklemede HSTS sitelerini önceden yüklemek için desteklenir. Daha fazla bilgi için bkz. [https://hstspreload.org/](https://hstspreload.org/).
 * SSTS ilkesini konak alt etki alanlarını barındıracak şekilde uygulayan [ıncludealt etki alanını](https://tools.ietf.org/html/rfc6797#section-6.1.2)sağlar.
 * `max-age`Üstbilginin parametresini 60 güne açık olarak ayarlar `Strict-Transport-Security` . Ayarlanmazsa, varsayılan olarak 30 gün olur. Daha fazla bilgi için bkz. [Maksimum yaş yönergesi](https://tools.ietf.org/html/rfc6797#section-6.1.1).
 * `example.com`Dışlanacak konaklar listesine ekler.

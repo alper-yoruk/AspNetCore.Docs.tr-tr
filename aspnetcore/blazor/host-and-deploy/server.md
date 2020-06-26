@@ -1,44 +1,46 @@
 ---
-title: ASP.NET Core sunucusu barındırma ve dağıtma Blazor
+title: ASP.NET Core barındırma ve dağıtmaBlazor Server
 author: guardrex
-description: ASP.NET Core kullanarak sunucu uygulamasını nasıl barındırılacağını ve dağıtacağınızı öğrenin Blazor .
+description: ASP.NET Core kullanarak bir uygulamayı nasıl barındırılacağını ve dağıtacağınızı öğrenin Blazor Server .
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 06/04/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/server
-ms.openlocfilehash: c02d005aa5e37bc359e1c104a19c387f1c16fa34
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: e59579046ecbfdbb4cca79bfb0e39d299e26913c
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85243557"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85402604"
 ---
-# <a name="host-and-deploy-blazor-server"></a>Sunucu barındırma ve dağıtma Blazor
+# <a name="host-and-deploy-blazor-server"></a>Barındırma ve dağıtmaBlazor Server
 
 , [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com)ve [Daniel Roth](https://github.com/danroth27) tarafından
 
 ## <a name="host-configuration-values"></a>Ana bilgisayar yapılandırma değerleri
 
-[ Blazor Sunucu uygulamaları](xref:blazor/hosting-models#blazor-server) [genel ana bilgisayar yapılandırma değerlerini](xref:fundamentals/host/generic-host#host-configuration)kabul edebilir.
+[ Blazor Server uygulamalar](xref:blazor/hosting-models#blazor-server) [genel ana bilgisayar yapılandırma değerlerini](xref:fundamentals/host/generic-host#host-configuration)kabul edebilir.
 
 ## <a name="deployment"></a>Dağıtım
 
-[ Blazor Sunucu barındırma modelinin](xref:blazor/hosting-models#blazor-server)kullanımı, Blazor sunucuda bir ASP.NET Core uygulamasının içinden yürütülür. Kullanıcı Arabirimi güncelleştirmeleri, olay işleme ve JavaScript çağrıları bir bağlantı üzerinden işlenir [SignalR](xref:signalr/introduction) .
+[ Blazor Server Barındırma modelinin](xref:blazor/hosting-models#blazor-server)kullanımı, Blazor sunucuda bir ASP.NET Core uygulamasının içinden yürütülür. Kullanıcı Arabirimi güncelleştirmeleri, olay işleme ve JavaScript çağrıları bir bağlantı üzerinden işlenir [SignalR](xref:signalr/introduction) .
 
-ASP.NET Core uygulaması barındırabilen bir Web sunucusu gerekiyor. Visual Studio, ** Blazor sunucu uygulaması** proje şablonunu ( `blazorserverside` komut kullanılırken şablon) içerir [`dotnet new`](/dotnet/core/tools/dotnet-new) .
+ASP.NET Core uygulaması barındırabilen bir Web sunucusu gerekiyor. Visual Studio, ** Blazor Server uygulama** proje şablonunu içerir ( `blazorserverside` komutunu kullanırken şablon [`dotnet new`](/dotnet/core/tools/dotnet-new) ).
 
 ## <a name="scalability"></a>Ölçeklenebilirlik
 
-Bir sunucu uygulaması için kullanılabilir altyapıyı en iyi şekilde kullanmasını sağlamak üzere bir dağıtım planlayın Blazor . Sunucu uygulaması ölçeklenebilirliğini karşılamak için aşağıdaki kaynaklara bakın Blazor :
+Bir uygulama için kullanılabilir altyapıyı en iyi şekilde kullanmasını sağlamak üzere bir dağıtım planlayın Blazor Server . Uygulama ölçeklenebilirliğini karşılamak için aşağıdaki kaynaklara bakın Blazor Server :
 
-* [BlazorSunucu uygulamalarının temelleri](xref:blazor/hosting-models#blazor-server)
+* [Uygulamaların temelleri Blazor Server](xref:blazor/hosting-models#blazor-server)
 * <xref:blazor/security/server/threat-mitigation>
 
 ### <a name="deployment-server"></a>Dağıtım sunucusu
@@ -54,13 +56,13 @@ Her bağlantı hattı en düşük *Merhaba Dünya*stilinde bir uygulama için YA
 
 ### <a name="signalr-configuration"></a>SignalRyapılandırmada
 
-BlazorSunucu uygulamaları SignalR , tarayıcıyla iletişim kurmak için ASP.NET Core kullanır. [ SignalR uygulamasının barındırma ve ölçeklendirme koşulları](xref:signalr/publish-to-azure-web-app) için Blazor geçerlidir Sunucu uygulamaları.
+Blazor Serveruygulamalar SignalR tarayıcıyla iletişim kurmak için ASP.NET Core kullanır. [ SignalR uygulamasının barındırma ve ölçeklendirme koşulları](xref:signalr/publish-to-azure-web-app) uygulamalar için geçerlidir Blazor Server .
 
 BlazorSignalRdaha düşük gecikme süresi, güvenilirlik ve [güvenlik](xref:signalr/security)nedeniyle taşıma olarak WebSockets kullanırken en iyi şekilde işe yarar. Uzun yoklama, SignalR WebSockets kullanılamadığında veya uygulama açıkça uzun yoklamayı kullanacak şekilde yapılandırıldığında kullanılır. Azure App Service dağıtım sırasında, uygulamayı hizmetin Azure portal ayarları içinde kullanmak üzere yapılandırın. Azure App Service için uygulamayı yapılandırma hakkında ayrıntılı bilgi için bkz. [ SignalR yayımlama yönergeleri](xref:signalr/publish-to-azure-web-app).
 
 #### <a name="azure-signalr-service"></a>Azure SignalR hizmeti
 
-Sunucu uygulamaları için [Azure SignalR hizmetini](/azure/azure-signalr) kullanmanızı öneririz Blazor . Hizmet, bir Blazor sunucu uygulamasının ölçeğini çok sayıda eşzamanlı bağlantıya ölçeklendirmeye olanak tanır SignalR . Ayrıca, SignalR hizmetin küresel erişim ve yüksek performanslı veri merkezleri Coğrafya nedeniyle gecikme süresini azaltmaya önemli ölçüde yardımcı olur. Azure hizmetini bir uygulamayı yapılandırmak (ve isteğe bağlı olarak sağlamak) için SignalR :
+Uygulamalar için [Azure SignalR hizmetini](/azure/azure-signalr) kullanmanızı öneririz Blazor Server . Hizmet, bir Blazor Server uygulamayı çok sayıda eşzamanlı bağlantıya ölçeklendirmeye olanak tanır SignalR . Ayrıca, SignalR hizmetin küresel erişim ve yüksek performanslı veri merkezleri Coğrafya nedeniyle gecikme süresini azaltmaya önemli ölçüde yardımcı olur. Azure hizmetini bir uygulamayı yapılandırmak (ve isteğe bağlı olarak sağlamak) için SignalR :
 
 1. [Prerendering sırasında istemciler aynı sunucuya geri yönlendirildiği](xref:blazor/hosting-models#connection-to-the-server) *yapışkan oturumları*desteklemek için hizmeti etkinleştirin. `ServerStickyMode`Seçeneğini veya yapılandırma değerini olarak ayarlayın `Required` . Genellikle, bir uygulama aşağıdaki yaklaşımlardan **birini** kullanarak yapılandırmayı oluşturur:
 
@@ -84,7 +86,7 @@ Sunucu uygulamaları için [Azure SignalR hizmetini](/azure/azure-signalr) kulla
 
      * App Service 'in **Configuration**  >  Azure Portal (**ad**:, değer:) yapılandırma**uygulaması ayarları** `Azure:SignalR:ServerStickyMode` **Value** `Required` .
 
-1. Sunucu uygulaması için Visual Studio 'da bir Azure Apps yayımlama profili oluşturun Blazor .
+1. Uygulama için Visual Studio 'da bir Azure Apps yayımlama profili oluşturun Blazor Server .
 1. **Azure SignalR hizmet** bağımlılığını profile ekleyin. Azure aboneliğinin uygulamaya atanacak önceden mevcut bir Azure SignalR hizmeti örneği yoksa, yeni bir hizmet örneği sağlamak için **Yeni bir Azure SignalR hizmet örneği oluştur** ' u seçin.
 1. Uygulamayı Azure’da yayımlama.
 
