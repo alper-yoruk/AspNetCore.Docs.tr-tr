@@ -1,32 +1,34 @@
 ---
 title: ASP.NET Core YapılandırIdentity
 author: AdrienTorris
-description: ASP.NET Core Identity varsayılan değerlerini anlayın ve özellikleri özel değerleri kullanacak Identity şekilde yapılandırmayı öğrenin.
+description: ASP.NET Core Identity varsayılan değerlerini anlayın ve Identity özellikleri özel değerleri kullanacak şekilde yapılandırmayı öğrenin.
 ms.author: riande
 ms.date: 02/11/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/identity-configuration
-ms.openlocfilehash: b88f2627eabc536f2d3b8e677020a67bfd1a40ba
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 95c19b671602b45ba217dcb551110854cbbee359
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775654"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408974"
 ---
-# <a name="configure-aspnet-core-identity"></a>ASP.NET Core kimliğini yapılandırma
+# <a name="configure-aspnet-core-identity"></a>ASP.NET Core YapılandırIdentity
 
-ASP.NET Core kimlik, parola ilkesi, kilitleme ve tanımlama bilgisi yapılandırması gibi ayarların varsayılan değerlerini kullanır. Bu ayarlar `Startup` sınıfında geçersiz kılınabilir.
+ASP.NET Core Identity parola ilkesi, kilitleme ve tanımlama bilgisi yapılandırması gibi ayarların varsayılan değerlerini kullanır. Bu ayarlar sınıfında geçersiz kılınabilir `Startup` .
 
-## <a name="identity-options"></a>Kimlik seçenekleri
+## <a name="identity-options"></a>IdentitySeçenekler
 
-[Identityoptions](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) sınıfı, kimlik sistemini yapılandırmak için kullanılabilen seçenekleri temsil eder. `IdentityOptions`veya çağrıldıktan sonra ayarlanması gerekir. **after** `AddIdentity` `AddDefaultIdentity`
+[Identityoptions](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) sınıfı, sistemi yapılandırmak için kullanılabilen seçenekleri temsil eder Identity . `IdentityOptions`veya çağrıldıktan **sonra** ayarlanması gerekir `AddIdentity` `AddDefaultIdentity` .
 
-### <a name="claims-identity"></a>Talep kimliği
+### <a name="claims-identity"></a>BelirtIdentity
 
 [Identityoptions. ClaimsIdentity](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.claimsidentity) , aşağıdaki tabloda gösterilen özelliklerle [Claimsıdentityoptions](/dotnet/api/microsoft.aspnetcore.identity.claimsidentityoptions) 'ı belirtir.
 
@@ -43,9 +45,9 @@ ASP.NET Core kimlik, parola ilkesi, kilitleme ve tanımlama bilgisi yapılandır
 
 [!code-csharp[](identity-configuration/sample/Areas/Identity/Pages/Account/Login.cshtml.cs?name=snippet&highlight=9)]
 
-Yukarıdaki kod, `Login` kimlik şablonunu temel alır. 
+Yukarıdaki kod, şablonu temel alır `Login` Identity . 
 
-Kilitleme seçenekleri şu şekilde `StartUp.ConfigureServices`ayarlanır:
+Kilitleme seçenekleri şu şekilde ayarlanır `StartUp.ConfigureServices` :
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_lock)]
 
@@ -63,7 +65,7 @@ Başarılı bir kimlik doğrulaması başarısız erişim denemesi sayısını s
 
 ### <a name="password"></a>Parola
 
-Varsayılan olarak, kimlik, parolaların büyük harf, küçük harf, rakam ve alfasayısal olmayan bir karakter içermesini gerektirir. Parolalar en az altı karakter uzunluğunda olmalıdır. [Passwordoseçenekleri](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions) içinde `Startup.ConfigureServices`ayarlanabilir.
+Varsayılan olarak, Identity Parolaların büyük harf, küçük harf karakter, rakam ve alfasayısal olmayan bir karakter içermesini gerektirir. Parolalar en az altı karakter uzunluğunda olmalıdır. [Passwordoseçenekleri](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions) içinde ayarlanabilir `Startup.ConfigureServices` .
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -112,7 +114,7 @@ Varsayılan olarak, kimlik, parolaların büyük harf, küçük harf, rakam ve a
 
 ### <a name="sign-in"></a>Oturum açma
 
-Aşağıdaki kod `SignIn` ayarları ayarlar (varsayılan değerlere göre):
+Aşağıdaki kod ayarları ayarlar `SignIn` (varsayılan değerlere göre):
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -139,11 +141,11 @@ Aşağıdaki kod `SignIn` ayarları ayarlar (varsayılan değerlere göre):
 
 |                                                        Özellik                                                         |                                                                                      Açıklama                                                                                      |
 |-------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|     [Kimlik doğrulayan Tortokenprovider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.authenticatortokenprovider)     |                                       İki öğeli oturum açma `AuthenticatorTokenProvider` işlemlerini kimlik doğrulayıcı ile doğrulamak için kullanılan öğesini alır veya ayarlar.                                       |
-|       [ChangeEmailTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changeemailtokenprovider)       |                                     E-posta değişiklik `ChangeEmailTokenProvider` onayı e-postalarında kullanılan belirteçleri oluşturmak için kullanılır veya ayarlar.                                     |
-| [ChangePhoneNumberTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changephonenumbertokenprovider) |                                      Telefon numaralarını değiştirirken kullanılan `ChangePhoneNumberTokenProvider` belirteçler oluşturmak için kullanılan belirteçleri alır veya ayarlar.                                      |
+|     [Kimlik doğrulayan Tortokenprovider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.authenticatortokenprovider)     |                                       `AuthenticatorTokenProvider`İki öğeli oturum açma işlemlerini kimlik doğrulayıcı ile doğrulamak için kullanılan öğesini alır veya ayarlar.                                       |
+|       [ChangeEmailTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changeemailtokenprovider)       |                                     `ChangeEmailTokenProvider`E-posta değişiklik onayı e-postalarında kullanılan belirteçleri oluşturmak için kullanılır veya ayarlar.                                     |
+| [ChangePhoneNumberTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changephonenumbertokenprovider) |                                      `ChangePhoneNumberTokenProvider`Telefon numaralarını değiştirirken kullanılan belirteçler oluşturmak için kullanılan belirteçleri alır veya ayarlar.                                      |
 | [EmailConfirmationTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.emailconfirmationtokenprovider) |                                             Hesap onaylama e-postalarında kullanılan belirteçleri oluşturmak için kullanılan belirteç sağlayıcısını alır veya ayarlar.                                              |
-|     [PasswordResetTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.passwordresettokenprovider)     | Parola sıfırlama e-postalarında kullanılan belirteçleri oluşturmak için kullanılan [ıusertwofactortokenprovider\<Tuser>](/dotnet/api/microsoft.aspnetcore.identity.iusertwofactortokenprovider-1) alır veya ayarlar. |
+|     [PasswordResetTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.passwordresettokenprovider)     | Parola sıfırlama e-postalarında kullanılan belirteçleri oluşturmak için kullanılan [ıusertwofactortokenprovider \<TUser> ](/dotnet/api/microsoft.aspnetcore.identity.iusertwofactortokenprovider-1) değerini alır veya ayarlar. |
 |                    [ProviderMap](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.providermap)                    |                Sağlayıcının adı olarak kullanılan anahtarla bir [Kullanıcı belirteci sağlayıcısı](/dotnet/api/microsoft.aspnetcore.identity.tokenproviderdescriptor) oluşturmak için kullanılır.                 |
 
 ### <a name="user"></a>Kullanıcı
@@ -159,7 +161,7 @@ Aşağıdaki kod `SignIn` ayarları ayarlar (varsayılan değerlere göre):
 
 ### <a name="cookie-settings"></a>Tanımlama bilgisi ayarları
 
-Uygulamanın tanımlama bilgisini ' de `Startup.ConfigureServices`yapılandırın. `AddIdentity` Veya `AddDefaultIdentity`çağrıldıktan **sonra** [configureapplicationcookie](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__) çağrılmalıdır.
+Uygulamanın tanımlama bilgisini ' de yapılandırın `Startup.ConfigureServices` . Veya çağrıldıktan **sonra** [configureapplicationcookie](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__) çağrılmalıdır `AddIdentity` `AddDefaultIdentity` .
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -187,10 +189,10 @@ Daha fazla bilgi için bkz. [tanımlama, ıeauthenticationoptions](/dotnet/api/m
 
 | Seçenek | Açıklama |
 | ------ | ----------- |
-| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> | Yeni parolalar Karma oluşturulurken kullanılan uyumluluk modu. Varsayılan olarak <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3>olur. Karma parolanın *Biçim işaretleyicisi*olarak adlandırılan ilk baytı, parolayı karma olarak kullanılan karma algoritmanın sürümünü belirtir. Bir karmaya karşı bir parola doğrulanırken, <xref:Microsoft.AspNetCore.Identity.PasswordHasher`1.VerifyHashedPassword*> yöntem ilk bayta göre doğru algoritmayı seçer. Bir istemci, parolayı karma hale almak için hangi algoritma sürümünün kullanıldığına bakılmaksızın kimlik doğrulaması yapabilir. Uyumluluk modunun ayarlanması *yeni parolaların*karmasını etkiler. |
-| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> | PBKDF2 kullanarak parolaları karmalama sırasında kullanılan yineleme sayısı. Bu değer yalnızca, <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> olarak <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3>ayarlandığında kullanılır. Değer pozitif bir tamsayı olmalı ve varsayılan olarak olarak `10000`ayarlanmalıdır. |
+| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> | Yeni parolalar Karma oluşturulurken kullanılan uyumluluk modu. Varsayılan olarak olur <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3> . Karma parolanın *Biçim işaretleyicisi*olarak adlandırılan ilk baytı, parolayı karma olarak kullanılan karma algoritmanın sürümünü belirtir. Bir karmaya karşı bir parola doğrulanırken, <xref:Microsoft.AspNetCore.Identity.PasswordHasher`1.VerifyHashedPassword*> Yöntem ilk bayta göre doğru algoritmayı seçer. Bir istemci, parolayı karma hale almak için hangi algoritma sürümünün kullanıldığına bakılmaksızın kimlik doğrulaması yapabilir. Uyumluluk modunun ayarlanması *yeni parolaların*karmasını etkiler. |
+| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> | PBKDF2 kullanarak parolaları karmalama sırasında kullanılan yineleme sayısı. Bu değer yalnızca, <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> olarak ayarlandığında kullanılır <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3> . Değer pozitif bir tamsayı olmalı ve varsayılan olarak olarak ayarlanmalıdır `10000` . |
 
-Aşağıdaki örnekte <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> , `12000` içinde `Startup.ConfigureServices`olarak ayarlanır:
+Aşağıdaki örnekte, <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> içinde olarak ayarlanır `12000` `Startup.ConfigureServices` :
 
 ```csharp
 // using Microsoft.AspNetCore.Identity;

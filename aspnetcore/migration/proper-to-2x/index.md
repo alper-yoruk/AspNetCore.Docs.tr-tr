@@ -6,17 +6,19 @@ ms.author: scaddie
 ms.date: 10/18/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: migration/proper-to-2x/index
-ms.openlocfilehash: 985c08e0994314cec8d52a6651681c93aca96514
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 59c513038d41779a4cf56a70045f9e72f8008d28
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82766517"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407726"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core"></a>ASP.NET 'den ASP.NET Core 'e geçiş
 
@@ -34,7 +36,7 @@ ASP.NET Core projeler, geliştiricilere .NET Core, .NET Framework veya her ikisi
 
 .NET Framework hedeflenirken, projelerin ayrı NuGet paketlerine başvurması gerekir.
 
-.NET Core 'u hedeflemek, ASP.NET Core [metapackage](xref:fundamentals/metapackage-app)sayesinde çok sayıda açık paket başvurularını ortadan kaldırmanıza olanak tanır. `Microsoft.AspNetCore.App` Meta paketini projenize yükler:
+.NET Core 'u hedeflemek, ASP.NET Core [metapackage](xref:fundamentals/metapackage-app)sayesinde çok sayıda açık paket başvurularını ortadan kaldırmanıza olanak tanır. `Microsoft.AspNetCore.App`Meta paketini projenize yükler:
 
 ```xml
 <ItemGroup>
@@ -60,17 +62,17 @@ ASP.NET Core, bir uygulamayı önyüklemeden yeni bir mekanizma getirmiştir. AS
 
 [!code-csharp[](samples/globalasax-sample.cs)]
 
-Bu yaklaşım, uygulamayı ve dağıtıldığı sunucuyu uygulamayı kesintiye uğratan bir şekilde bağar. Bağımsız olarak, [Owin](https://owin.org/) , birden çok çerçeveyi birlikte kullanmanın bir temizleyici yolunu sağlamak için sunulmuştur. OWIN yalnızca gereken modülleri eklemek için bir işlem hattı sağlar. Barındırma ortamı, hizmetleri ve uygulamanın istek ardışık düzenini yapılandırmak için bir [Başlangıç](xref:fundamentals/startup) işlevi alır. `Startup`uygulamayla bir ara yazılım kümesini kaydeder. Her istek için, uygulama bir ara yazılım bileşeninin her birini bağlantılı listenin baş işaretçisi ile mevcut bir işleyici kümesine çağırır. Her bir ara yazılım bileşeni, istek işleme ardışık düzenine bir veya daha fazla işleyici ekleyebilir. Bu, listenin yeni başlığı olan işleyiciye bir başvuru döndürülerek gerçekleştirilir. Her işleyici, listedeki bir sonraki işleyiciyi hatırlayıp çağırmaktan sorumludur. ASP.NET Core, bir uygulamaya giriş noktası olur `Startup`ve artık *Global. asax*' a bağımlılığı yoktur. .NET Framework ile OWIN kullanırken, işlem hattı olarak aşağıdaki gibi bir şey kullanın:
+Bu yaklaşım, uygulamayı ve dağıtıldığı sunucuyu uygulamayı kesintiye uğratan bir şekilde bağar. Bağımsız olarak, [Owin](https://owin.org/) , birden çok çerçeveyi birlikte kullanmanın bir temizleyici yolunu sağlamak için sunulmuştur. OWIN yalnızca gereken modülleri eklemek için bir işlem hattı sağlar. Barındırma ortamı, hizmetleri ve uygulamanın istek ardışık düzenini yapılandırmak için bir [Başlangıç](xref:fundamentals/startup) işlevi alır. `Startup`uygulamayla bir ara yazılım kümesini kaydeder. Her istek için, uygulama bir ara yazılım bileşeninin her birini bağlantılı listenin baş işaretçisi ile mevcut bir işleyici kümesine çağırır. Her bir ara yazılım bileşeni, istek işleme ardışık düzenine bir veya daha fazla işleyici ekleyebilir. Bu, listenin yeni başlığı olan işleyiciye bir başvuru döndürülerek gerçekleştirilir. Her işleyici, listedeki bir sonraki işleyiciyi hatırlayıp çağırmaktan sorumludur. ASP.NET Core, bir uygulamaya giriş noktası olur `Startup` ve artık *Global. asax*' a bağımlılığı yoktur. .NET Framework ile OWIN kullanırken, işlem hattı olarak aşağıdaki gibi bir şey kullanın:
 
 [!code-csharp[](samples/webapi-owin.cs)]
 
 Bu, varsayılan rotalarınızı yapılandırır ve varsayılan olarak JSON üzerinden XmlSerialization olur. Gerektiğinde bu işlem hattına başka bir ara yazılım ekleyin (Yükleme Hizmetleri, yapılandırma ayarları, statik dosyalar vb.).
 
-ASP.NET Core benzer bir yaklaşım kullanır, ancak girişi işlemek için OWıN 'u kullanmaz. Bunun yerine, *program.cs* `Main` yöntemi aracılığıyla yapılır (konsol uygulamalarına benzer) ve `Startup` bunlar üzerinden yüklenir.
+ASP.NET Core benzer bir yaklaşım kullanır, ancak girişi işlemek için OWıN 'u kullanmaz. Bunun yerine, Program.cs yöntemi aracılığıyla yapılır *Program.cs* `Main` (konsol uygulamalarına benzer) ve bunlar `Startup` üzerinden yüklenir.
 
 [!code-csharp[](samples/program.cs)]
 
-`Startup`bir `Configure` yöntem içermelidir. ' `Configure`De, gerekli ara yazılımı ardışık düzene ekleyin. Aşağıdaki örnekte (varsayılan Web sitesi şablonundan), uzantı yöntemleri işlem hattını aşağıdakiler için desteğiyle yapılandırır:
+`Startup`bir yöntem içermelidir `Configure` . ' De `Configure` , gerekli ara yazılımı ardışık düzene ekleyin. Aşağıdaki örnekte (varsayılan Web sitesi şablonundan), uzantı yöntemleri işlem hattını aşağıdakiler için desteğiyle yapılandırır:
 
 - Hata sayfaları
 - HTTP katı aktarım güvenliği
@@ -86,23 +88,23 @@ Ana bilgisayar ve uygulama, gelecekte farklı bir platforma geçme esnekliği sa
 
 ## <a name="store-configurations"></a>Mağaza yapılandırması
 
-ASP.NET, ayarları depolamayı destekler. Bu ayar, örneğin, uygulamaların dağıtıldığı ortamı desteklemek için kullanılır. Genel bir uygulama, `<appSettings>` *Web. config* dosyasının bölümünde tüm özel anahtar-değer çiftlerini depolandı:
+ASP.NET, ayarları depolamayı destekler. Bu ayar, örneğin, uygulamaların dağıtıldığı ortamı desteklemek için kullanılır. Ortak bir uygulama, tüm özel anahtar-değer çiftlerini `<appSettings>` *Web.config* dosyasının bölümünde depolandı:
 
 [!code-xml[](samples/webconfig-sample.xml)]
 
-Uygulamalar `ConfigurationManager.AppSettings` `System.Configuration` ad alanındaki koleksiyonu kullanarak bu ayarları okur:
+Uygulamalar `ConfigurationManager.AppSettings` ad alanındaki koleksiyonu kullanarak bu ayarları okur `System.Configuration` :
 
 [!code-csharp[](samples/read-webconfig.cs)]
 
-ASP.NET Core, uygulama için yapılandırma verilerini herhangi bir dosyada depolayıp ara yazılım önyükleme 'nin bir parçası olarak yükleyebilir. Proje şablonlarında kullanılan varsayılan dosya *appSettings. JSON*' dır:
+ASP.NET Core, uygulama için yapılandırma verilerini herhangi bir dosyada depolayıp ara yazılım önyükleme 'nin bir parçası olarak yükleyebilir. Proje şablonlarında kullanılan varsayılan dosya *appsettings.js*:
 
 [!code-json[](samples/appsettings-sample.json)]
 
-Bu dosyayı uygulamanızın `IConfiguration` içindeki bir örneğine yüklemek *Startup.cs*içinde yapılır:
+Bu dosyayı uygulamanızın içindeki bir örneğine yüklemek `IConfiguration` *Startup.cs*içinde yapılır:
 
 [!code-csharp[](samples/startup-builder.cs)]
 
-Uygulama, ayarları almak `Configuration` için öğesinden okur:
+Uygulama, `Configuration` ayarları almak için öğesinden okur:
 
 [!code-csharp[](samples/read-appsettings.cs)]
 
@@ -122,15 +124,15 @@ Büyük, ölçeklenebilir uygulamalar, bileşenlerin ve hizmetlerin gevşek bağ
 
 ASP.NET uygulamalarında, geliştiriciler bağımlılık ekleme işlemini uygulamak için bir üçüncü taraf kitaplığı kullanır. Bu tür bir kitaplık [, Microsoft](https://github.com/unitycontainer/unity)düzenleri & uygulamalar tarafından sağlanır.
 
-Unity `IDependencyResolver` Ile bağımlılık ekleme ayarlamayı bir örnek şunu sarmalayan bir `UnityContainer`örnektir:
+Unity ile bağımlılık ekleme ayarlamayı bir örnek şunu `IDependencyResolver` sarmalayan bir örnektir `UnityContainer` :
 
 [!code-csharp[](samples/sample8.cs)]
 
-Bir örneği oluşturun `UnityContainer`, hizmetinizi kaydedin ve bağımlılık çözümleyicisini `HttpConfiguration` kapsayıcının yeni örneğine `UnityResolver` ayarlayın:
+Bir örneği oluşturun `UnityContainer` , hizmetinizi kaydedin ve bağımlılık çözümleyicisini `HttpConfiguration` kapsayıcının yeni örneğine ayarlayın `UnityResolver` :
 
 [!code-csharp[](samples/sample9.cs)]
 
-Gerektiğinde `IProductRepository` ekle:
+`IProductRepository`Gerektiğinde ekle:
 
 [!code-csharp[](samples/sample5.cs)]
 
@@ -149,14 +151,14 @@ Web geliştirmenin önemli bir bölümü, statik, istemci tarafı varlıkları s
 
 ASP.NET ' de statik dosyalar çeşitli dizinlerde depolanır ve görünümlerde başvurulur.
 
-ASP.NET Core, statik dosyalar, aksi belirtilmedikçe "Web kökünde" (*&lt;içerik kökü&gt;/Wwwroot*) içinde depolanır. Dosyalar, şuradan `UseStaticFiles` `Startup.Configure`genişletme yöntemi çağrılarak istek ardışık düzenine yüklenir:
+ASP.NET Core, statik dosyalar, aksi belirtilmedikçe "Web kökünde" (* &lt; içerik kökü &gt; /Wwwroot*) içinde depolanır. Dosyalar, şuradan genişletme yöntemi çağrılarak istek ardışık düzenine yüklenir `UseStaticFiles` `Startup.Configure` :
 
 [!code-csharp[](../../fundamentals/static-files/samples/1x/StartupStaticFiles.cs?highlight=3&name=snippet_ConfigureMethod)]
 
 > [!NOTE]
-> .NET Framework hedefliyorsanız, NuGet paketini `Microsoft.AspNetCore.StaticFiles`yükler.
+> .NET Framework hedefliyorsanız, NuGet paketini yükler `Microsoft.AspNetCore.StaticFiles` .
 
-Örneğin, *Wwwroot/görüntüler* klasöründeki bir görüntü varlığı, tarayıcı tarafından gibi `http://<app>/images/<imageFileName>`bir konumda erişilebilir.
+Örneğin, *Wwwroot/görüntüler* klasöründeki bir görüntü varlığı, tarayıcı tarafından gibi bir konumda erişilebilir `http://<app>/images/<imageFileName>` .
 
 > [!NOTE]
 > ASP.NET Core içinde statik dosyalar sunma konusunda daha ayrıntılı bir başvuru için bkz. [statik dosyalar](xref:fundamentals/static-files).
@@ -167,7 +169,7 @@ ASP.NET Core 'de [çok değerli tanımlama bilgileri](xref:System.Web.HttpCookie
 
 ## <a name="partial-app-migration"></a>Kısmi uygulama geçişi
 
-Kısmi uygulama geçişine yönelik bir yaklaşım, bir IIS alt uygulaması oluşturmaktır ve yalnızca ASP.NET 4. x adresinden ASP.NET Core, uygulamanın URL yapısını korurken yalnızca belirli yolları. Örneğin, *ApplicationHost. config* DOSYASıNDAN uygulamanın URL yapısını göz önünde bulundurun:
+Kısmi uygulama geçişine yönelik bir yaklaşım, bir IIS alt uygulaması oluşturmaktır ve yalnızca ASP.NET 4. x adresinden ASP.NET Core, uygulamanın URL yapısını korurken yalnızca belirli yolları. Örneğin, *applicationHost.config* DOSYASıNDAN uygulamanın URL yapısını göz önünde bulundurun:
 
 ```xml
 <sites>

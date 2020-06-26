@@ -7,17 +7,19 @@ ms.author: riande
 ms.date: 04/06/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: e83019a0f905fa9cd0f0c39960b787bc5b13b64f
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 15f3ce5a8e8d47ac567acaadcdc4bf8ba738b2ff
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775394"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408181"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core performans En Iyi yöntemleri
 
@@ -49,9 +51,9 @@ ASP.NET Core uygulamalarda yaygın bir performans sorunu, zaman uyumsuz olabilec
 
 * [Etkin kod yollarını](#understand-hot-code-paths) zaman uyumsuz yapın.
 * Zaman uyumsuz bir API kullanılabiliyorsa veri erişimi, g/ç ve uzun süre çalışan işlem API 'Lerini çağrı zaman uyumsuz olarak çağırın. Bir synchronus API 'SI zaman uyumsuz yapmak için [Task. Run](/dotnet/api/system.threading.tasks.task.run) **kullanmayın.**
-* Denetleyici/Razor sayfa eylemlerini zaman uyumsuz yapın. [Zaman uyumsuz/await](/dotnet/csharp/programming-guide/concepts/async/) desenlerinden faydalanmak için tüm çağrı yığını zaman uyumsuzdur.
+* Denetleyici/ Razor sayfa eylemlerini zaman uyumsuz yapın. [Zaman uyumsuz/await](/dotnet/csharp/programming-guide/concepts/async/) desenlerinden faydalanmak için tüm çağrı yığını zaman uyumsuzdur.
 
-[Iş parçacığı havuzuna](/windows/desktop/procthread/thread-pools)sık sık eklenen iş parçacıklarını bulmak Için [PerfView](https://github.com/Microsoft/perfview)gibi bir profil oluşturucu kullanılabilir. `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start` Olay, iş parçacığı havuzuna eklenen bir iş parçacığını gösterir. <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc)  -->
+[Iş parçacığı havuzuna](/windows/desktop/procthread/thread-pools)sık sık eklenen iş parçacıklarını bulmak Için [PerfView](https://github.com/Microsoft/perfview)gibi bir profil oluşturucu kullanılabilir. `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start`Olay, iş parçacığı havuzuna eklenen bir iş parçacığını gösterir. <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc)  -->
 
 ## <a name="minimize-large-object-allocations"></a>Büyük nesne ayırmalarını en aza indir
 
@@ -60,7 +62,7 @@ ASP.NET Core uygulamalarda yaygın bir performans sorunu, zaman uyumsuz olabilec
 Öneri
 
 * Sık kullanılan büyük nesneleri önbelleğe **almayı düşünün.** Büyük nesnelerin önbelleğe alınması pahalı ayırmaları önler.
-* Büyük dizileri depolamak için [arraypool\<T>](/dotnet/api/system.buffers.arraypool-1) kullanarak havuz arabellekleri **yapın** .
+* Büyük dizileri depolamak için [Arraypool \<T> ](/dotnet/api/system.buffers.arraypool-1) kullanarak havuz arabellekleri **yapın** .
 * [Sık erişimli kod yollarında](#understand-hot-code-paths)çok sayıda, kısa süreli büyük **nesneler ayırmayın** .
 
 Yukarıdaki gibi bellek sorunları, [PerfView](https://github.com/Microsoft/perfview) ve İnceleme içindeki çöp toplama (GC) istatistiklerini inceleyerek tanılanabilir:
@@ -82,7 +84,7 @@ Veri deposuna ve diğer uzak hizmetlere sahip etkileşimler genellikle ASP.NET C
 * Güncel olmayan veriler kabul edilebilir ise, bir veritabanından veya uzak hizmetten alınan sık erişilen verileri önbelleğe **almayı düşünün.** Senaryoya bağlı olarak, bir [MemoryCache](xref:performance/caching/memory) veya [DistributedCache](xref:performance/caching/distributed)kullanın. Daha fazla bilgi için bkz. <xref:performance/caching/response>.
 * Ağ gidiş dönüşlerini **en aza** indirir. Amaç, birkaç çağrı yerine, gerekli verileri tek bir çağrıda almak olur.
 * Salt okuma amacıyla verilere erişirken Entity Framework Core [izleme sorguları](/ef/core/querying/tracking#no-tracking-queries) **kullanmayın.** EF Core, hiçbir izleme sorgusunun sonuçlarını daha verimli bir şekilde döndürebilir.
-* **Filtrenin veritabanı** `.Where`tarafından gerçekleştirilmesi için, `.Select`LINQ sorgularını filtreleyin ve toplayın `.Sum` (örneğin, veya deyimleri ile).
+* **Filtrenin** `.Where` veritabanı tarafından GERÇEKLEŞTIRILMESI için, LINQ sorgularını filtreleyin ve toplayın ( `.Select` Örneğin, veya `.Sum` deyimleri ile).
 * EF Core, istemci üzerindeki bazı sorgu işleçlerini çözdüğünü, bu da verimsiz sorgu yürütmeye neden **olabileceğini göz önünde** bulundurun. Daha fazla bilgi için bkz. [istemci değerlendirmesi performans sorunları](/ef/core/querying/client-eval#client-evaluation-performance-issues).
 * Koleksiyonlar üzerinde İzdüşüm sorguları kullanmayın ve bu, "N + 1" SQL sorgularının **yürütülmeleriyle** sonuçlanabilir. Daha fazla bilgi için bkz. [bağıntılı alt sorguları iyileştirme](/ef/core/what-is-new/ef-core-2.1#optimization-of-correlated-subqueries).
 
@@ -97,16 +99,16 @@ Sorgu sorunları, [Application Insights](/azure/application-insights/app-insight
 
 ## <a name="pool-http-connections-with-httpclientfactory"></a>HttpClientFactory ile HTTP bağlantılarını havuz
 
-[HttpClient](/dotnet/api/system.net.http.httpclient) `IDisposable` arabirimini uyguluyor olsa da, yeniden kullanım için tasarlanmıştır. Kapalı `HttpClient` örnekler, `TIME_WAIT` yuvaları kısa bir süre için durumunda açık bırakır. `HttpClient` Nesneleri oluşturan ve kaldırdık bir kod yolu sık sık kullanılırsa, uygulama kullanılabilir yuvaları tüketebilir. [Httpclientfactory](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests) , bu soruna çözüm olarak ASP.NET Core 2,1 ' de tanıtılmıştı. Performansı ve güvenilirliği iyileştirmek için havuz HTTP bağlantılarını işler.
+[HttpClient](/dotnet/api/system.net.http.httpclient) arabirimini uyguluyor olsa da `IDisposable` , yeniden kullanım için tasarlanmıştır. Kapalı `HttpClient` örnekler, yuvaları `TIME_WAIT` kısa bir süre için durumunda açık bırakır. Nesneleri oluşturan ve kaldırdık bir kod yolu `HttpClient` sık sık kullanılırsa, uygulama kullanılabilir yuvaları tüketebilir. [Httpclientfactory](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests) , bu soruna çözüm olarak ASP.NET Core 2,1 ' de tanıtılmıştı. Performansı ve güvenilirliği iyileştirmek için havuz HTTP bağlantılarını işler.
 
 Öneri
 
-* Örnekleri doğrudan oluşturma ve atma. **Do not** `HttpClient`
-* Örnek almak `HttpClient` Için [httpclientfactory](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests) **kullanın.** Daha fazla bilgi için bkz. [Esnek http isteklerini uygulamak Için HttpClientFactory kullanma](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests).
+* Örnekleri doğrudan **oluşturma ve** atma `HttpClient` .
+* **Do** Örnek almak Için [httpclientfactory](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests) kullanın `HttpClient` . Daha fazla bilgi için bkz. [Esnek http isteklerini uygulamak Için HttpClientFactory kullanma](/dotnet/standard/microservices-architecture/implement-resilient-applications/use-httpclientfactory-to-implement-resilient-http-requests).
 
 ## <a name="keep-common-code-paths-fast"></a>Ortak kod yollarını hızlı tutun
 
-Tüm kodunuzun hızlı olmasını istiyorsunuz. Yaygın olarak çağrılan kod yolları en kritik öneme sahiptir. Bunlar:
+Tüm kodunuzun hızlı olmasını istiyorsunuz. Yaygın olarak çağrılan kod yolları en kritik öneme sahiptir. Bu güncelleştirmeler şunlardır:
 
 * Uygulamanın istek işleme ardışık düzeninde bulunan ara yazılım bileşenleri, özellikle de ara yazılım ardışık düzende çalışır. Bu bileşenlerin performansı üzerinde büyük bir etkisi vardır.
 * Her istek için veya istek başına birden çok kez yürütülen kod. Örneğin, özel günlük kaydı, yetkilendirme işleyicileri veya geçici Hizmetleri başlatma.
@@ -124,7 +126,7 @@ ASP.NET Core uygulamasına yönelik çoğu istek, gerekli Hizmetleri çağıran 
 
 * Olağan HTTP istek işlemenin bir parçası olarak uzun süre çalışan görevlerin **tamamlanmasını beklememe** .
 * [Arka plan hizmetleri](xref:fundamentals/host/hosted-services) ile uzun süreli istekleri işlemeyi veya bir [Azure işlevi](/azure/azure-functions/)ile işlem dışı **bırakmayı düşünün.** İşlem dışı iş tamamlama, özellikle CPU yoğun görevler için faydalıdır.
-* İstemcilerle zaman uyumsuz iletişim kurmak için gibi gerçek zamanlı iletişim [SignalR](xref:signalr/introduction) **seçenekleri kullanın.**
+* İstemcilerle zaman uyumsuz iletişim kurmak için gibi gerçek zamanlı iletişim **seçenekleri kullanın** [SignalR](xref:signalr/introduction) .
 
 ## <a name="minify-client-assets"></a>İstemci varlıklarını küçültmeye yönelik
 
@@ -144,7 +146,7 @@ Karmaşık ön uçları olan ASP.NET Core uygulamalar sıklıkla birçok JavaScr
 
 ## <a name="use-the-latest-aspnet-core-release"></a>En son ASP.NET Core sürümü kullan
 
-ASP.NET Core her yeni sürümü performans iyileştirmeleri içerir. .NET Core ve ASP.NET Core iyileştirmeler, daha yeni sürümlerin genellikle eski sürümlerin genel olarak gerçekleştirdiği anlamına gelir. Örneğin, .NET Core 2,1, derlenmiş normal ifadeler ve benefitted 'den [\<T>](https://msdn.microsoft.com/magazine/mt814808.aspx)için destek eklendi. ASP.NET Core 2,2 HTTP/2 desteği eklendi. ASP.NET Core 3,0, bellek kullanımını azaltan ve üretilen işi geliştiren [birçok geliştirme ekler](xref:aspnetcore-3.0) . Performans bir önceliktir, ASP.NET Core güncel sürümüne yükseltmeyi göz önünde bulundurun.
+ASP.NET Core her yeni sürümü performans iyileştirmeleri içerir. .NET Core ve ASP.NET Core iyileştirmeler, daha yeni sürümlerin genellikle eski sürümlerin genel olarak gerçekleştirdiği anlamına gelir. Örneğin, .NET Core 2,1, derlenmiş normal ifadeler ve [benefitted 'dan gelen \<T> ](https://msdn.microsoft.com/magazine/mt814808.aspx)destek eklendi. ASP.NET Core 2,2 HTTP/2 desteği eklendi. ASP.NET Core 3,0, bellek kullanımını azaltan ve üretilen işi geliştiren [birçok geliştirme ekler](xref:aspnetcore-3.0) . Performans bir önceliktir, ASP.NET Core güncel sürümüne yükseltmeyi göz önünde bulundurun.
 
 ## <a name="minimize-exceptions"></a>Özel durumları Küçült
 
@@ -164,16 +166,16 @@ Aşağıdaki bölümlerde performans ipuçları ve bilinen güvenilirlik sorunla
 
 ## <a name="avoid-synchronous-read-or-write-on-httprequesthttpresponse-body"></a>HttpRequest/HttpResponse gövdesinde zaman uyumlu okuma veya yazma yapmaktan kaçının
 
-ASP.NET Core tüm g/ç zaman uyumsuzdur. Sunucular, hem `Stream` zaman uyumlu hem de zaman uyumsuz aşırı yüklemeleri olan arabirimini uygular. İş parçacığı havuzu iş parçacıklarını engellemeyi önlemek için zaman uyumsuz olanlar tercih edilmelidir. İş parçacıklarını engelleme, iş parçacığı havuzunda ortaya çıkmasına neden olabilir.
+ASP.NET Core tüm g/ç zaman uyumsuzdur. Sunucular `Stream` , hem zaman uyumlu hem de zaman uyumsuz aşırı yüklemeleri olan arabirimini uygular. İş parçacığı havuzu iş parçacıklarını engellemeyi önlemek için zaman uyumsuz olanlar tercih edilmelidir. İş parçacıklarını engelleme, iş parçacığı havuzunda ortaya çıkmasına neden olabilir.
 
-Bunu **yapın:** Aşağıdaki örnek öğesini kullanır <xref:System.IO.StreamReader.ReadToEnd*>. Sonuç için beklemek üzere geçerli iş parçacığını engeller. Bu, [zaman uyumsuz olarak eşitleme](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#warning-sync-over-async
+Bunu **yapın:** Aşağıdaki örnek öğesini kullanır <xref:System.IO.StreamReader.ReadToEnd*> . Sonuç için beklemek üzere geçerli iş parçacığını engeller. Bu, [zaman uyumsuz olarak eşitleme](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#warning-sync-over-async
 )örneğidir.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/MyFirstController.cs?name=snippet1)]
 
-Yukarıdaki kodda, HTTP istek `Get` gövdesinin tamamını belleğe eşzamanlı olarak okur. İstemci yavaş karşıya yüklendikten sonra, uygulama zaman uyumsuz olarak eşitlenir. Kestrel zaman uyumlu **okumaları desteklemediğinden,** uygulama zaman uyumsuz olarak eşitlenir.
+Yukarıdaki kodda, `Get` http istek gövdesinin tamamını belleğe eşzamanlı olarak okur. İstemci yavaş karşıya yüklendikten sonra, uygulama zaman uyumsuz olarak eşitlenir. Kestrel zaman uyumlu **okumaları desteklemediğinden,** uygulama zaman uyumsuz olarak eşitlenir.
 
-**Bunu yapın:** Aşağıdaki örnek <xref:System.IO.StreamReader.ReadToEndAsync*> , okurken iş parçacığını engellemez.
+**Bunu yapın:** Aşağıdaki örnek, <xref:System.IO.StreamReader.ReadToEndAsync*> okurken iş parçacığını engellemez.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/MyFirstController.cs?name=snippet2)]
 
@@ -190,18 +192,18 @@ Yukarıdaki kod, istek gövdesini bir C# nesnesine zaman uyumsuz olarak serileş
 
 ## <a name="prefer-readformasync-over-requestform"></a>Istek üzerinde ReadFormAsync tercih et. form
 
-Yerine `HttpContext.Request.ReadFormAsync` kullanın `HttpContext.Request.Form`.
+`HttpContext.Request.ReadFormAsync`Yerine kullanın `HttpContext.Request.Form` .
 `HttpContext.Request.Form`yalnızca aşağıdaki koşullara göre güvenle okunabilir:
 
-* Form `ReadFormAsync`, bir çağrısıyla okundu ve
+* Form, bir çağrısıyla okundu `ReadFormAsync` ve
 * Önbelleğe alınan form değeri şu kullanılarak okunmakta`HttpContext.Request.Form`
 
-Bunu **yapın:** Aşağıdaki örnek kullanılmıştır `HttpContext.Request.Form`.  `HttpContext.Request.Form`, [zaman uyumsuz olarak eşitleme](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#warning-sync-over-async
+Bunu **yapın:** Aşağıdaki örnek kullanılmıştır `HttpContext.Request.Form` .  `HttpContext.Request.Form`, [zaman uyumsuz olarak eşitleme](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#warning-sync-over-async
 ) kullanır ve iş parçacığı havuzunda ortaya çıkmasına neden olabilir.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/MySecondController.cs?name=snippet1)]
 
-**Bunu yapın:** Aşağıdaki örnek, form `HttpContext.Request.ReadFormAsync` gövdesini zaman uyumsuz olarak okumak için kullanır.
+**Bunu yapın:** Aşağıdaki örnek, `HttpContext.Request.ReadFormAsync` form gövdesini zaman uyumsuz olarak okumak için kullanır.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/MySecondController.cs?name=snippet2)]
 
@@ -218,7 +220,7 @@ Bu [blog gönderisi](https://adamsitnik.com/Array-Pool/#the-problem) succinctly 
 
 > Büyük bir nesne ayrıldığında, Gen 2 nesnesi olarak işaretlenir. Küçük nesneler için Gen 0 değildir. Sonuçlar LOH 'de bellek tükeniyorsa, GC yalnızca LOH değil, yönetilen yığının tamamını temizler. Bu nedenle, LOH dahil olmak üzere Gen 0, Gen 1 ve Gen 2 ' yi temizler. Bu, tam atık toplama olarak adlandırılır ve en çok kullanılan çöp toplamadır. Birçok uygulama için kabul edilebilir. Ancak, ortalama bir web isteğini işlemek için çok büyük bellek arabelleklerinin (bir yuvadan okunan, sıkıştırmayı açık olan JSON & daha fazla kod çözme) gerekli olduğu yüksek performanslı Web sunucuları için kesinlikle değildir.
 
-Büyük bir isteği veya Yanıt gövdesini tek `byte[]` bir veya ' a bir veya `string`daha fazla depolama:
+Büyük bir isteği veya Yanıt gövdesini tek bir veya ' a bir veya daha fazla depolama `byte[]` `string` :
 
 * LOH 'de hızlı bir şekilde boş alan tükenmenize neden olabilir.
 * Çalıştıran tam GC 'Ler nedeniyle uygulama için performans sorunlarına neden olabilir.
@@ -236,28 +238,28 @@ ASP.NET Core 3,0, <xref:System.Text.Json> JSON serileştirme için varsayılan o
 
 * JSON 'yi zaman uyumsuz olarak okur ve yazar.
 * UTF-8 metni için iyileştirilmiştir.
-* Genellikle daha yüksek performans `Newtonsoft.Json`.
+* Genellikle daha yüksek performans `Newtonsoft.Json` .
 
 ## <a name="do-not-store-ihttpcontextaccessorhttpcontext-in-a-field"></a>Bir alanda ıhttpcontextaccessor. HttpContext depolamayın
 
-[Ihttpcontextaccessor. HttpContext](xref:Microsoft.AspNetCore.Http.IHttpContextAccessor.HttpContext) , istek iş `HttpContext` parçacığından erişildiğinde etkin isteğin ' i döndürür. , `IHttpContextAccessor.HttpContext` Bir alan veya değişkende **depolanmamalıdır.**
+[Ihttpcontextaccessor. HttpContext](xref:Microsoft.AspNetCore.Http.IHttpContextAccessor.HttpContext) , `HttpContext` istek iş parçacığından erişildiğinde etkin isteğin ' i döndürür. , `IHttpContextAccessor.HttpContext` Bir **not** alan veya değişkende depolanmamalıdır.
 
-Bunu **yapın:** Aşağıdaki örnek öğesini bir alanında `HttpContext` depolar ve daha sonra kullanmaya çalışır.
+Bunu **yapın:** Aşağıdaki örnek `HttpContext` öğesini bir alanında depolar ve daha sonra kullanmaya çalışır.
 
 [!code-csharp[](performance-best-practices/samples/3.0/MyType.cs?name=snippet1)]
 
-Yukarıdaki kod, oluşturucuda genellikle null veya yanlış `HttpContext` yakalar.
+Yukarıdaki kod, oluşturucuda genellikle null veya yanlış yakalar `HttpContext` .
 
 **Bunu yapın:** Aşağıdaki örnek:
 
-* <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> Alanını bir alanında depolar.
-* `HttpContext` Alanı doğru zamanda kullanır ve kontrol eder `null`.
+* <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor>Alanını bir alanında depolar.
+* `HttpContext`Alanı doğru zamanda kullanır ve kontrol eder `null` .
 
 [!code-csharp[](performance-best-practices/samples/3.0/MyType.cs?name=snippet2)]
 
 ## <a name="do-not-access-httpcontext-from-multiple-threads"></a>Birden çok iş parçacığından HttpContext 'e erişme
 
-`HttpContext`, iş parçacığı açısından güvenli *değildir* . Paralel `HttpContext` olarak birden çok iş parçacığından erişilmesi, askıda kalma, kilitlenme ve veri bozulması gibi tanımsız davranışlara neden olabilir.
+`HttpContext`, iş parçacığı açısından güvenli *değildir* . `HttpContext`Paralel olarak birden çok iş parçacığından erişilmesi, askıda kalma, kilitlenme ve veri bozulması gibi tanımsız davranışlara neden olabilir.
 
 Bunu **yapın:** Aşağıdaki örnek üç paralel istek yapar ve giden HTTP isteğinden önce ve sonra gelen istek yolunu günlüğe kaydeder. İstek yoluna, potansiyel olarak paralel olarak birden çok iş parçacığından erişilir.
 
@@ -269,26 +271,26 @@ Bunu **yapın:** Aşağıdaki örnek üç paralel istek yapar ve giden HTTP iste
 
 ## <a name="do-not-use-the-httpcontext-after-the-request-is-complete"></a>İstek tamamlandıktan sonra HttpContext 'i kullanma
 
-`HttpContext`yalnızca ASP.NET Core işlem hattında etkin bir HTTP isteği olduğu sürece geçerlidir. Tüm ASP.NET Core işlem hattı, her isteği yürüten zaman uyumsuz temsilciler zinciridir. Bu zincirden `Task` döndürülen `HttpContext` işlem tamamlandığında, geri dönüştürülür.
+`HttpContext`yalnızca ASP.NET Core işlem hattında etkin bir HTTP isteği olduğu sürece geçerlidir. Tüm ASP.NET Core işlem hattı, her isteği yürüten zaman uyumsuz temsilciler zinciridir. `Task`Bu zincirden döndürülen işlem tamamlandığında, geri dönüştürülür `HttpContext` .
 
-Bunu **yapın:** Aşağıdaki örnek `async void` , ilk kez `await` ulaşıldığında http isteğinin tamamlanmasını sağlar:
+Bunu **yapın:** Aşağıdaki örnek, `async void` ilk kez ULAŞıLDıĞıNDA http isteğinin tamamlanmasını sağlar `await` :
 
 * ASP.NET Core uygulamalarda bu **her zaman** hatalı bir uygulamadır.
-* HTTP isteği `HttpResponse` tamamlandıktan sonra öğesine erişir.
+* `HttpResponse`Http isteği tamamlandıktan sonra öğesine erişir.
 * İşlemi çöker.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/AsyncBadVoidController.cs?name=snippet1)]
 
-**Bunu yapın:** Aşağıdaki örnek çerçevesine bir `Task` döndürür, bu nedenle http isteği eylem tamamlanana kadar tamamlanmaz.
+**Bunu yapın:** Aşağıdaki örnek çerçevesine bir döndürür `Task` , bu nedenle http isteği eylem tamamlanana kadar tamamlanmaz.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/AsyncSecondController.cs?name=snippet1)]
 
 ## <a name="do-not-capture-the-httpcontext-in-background-threads"></a>Arka plan iş parçacıklarında HttpContext 'i yakalama
 
-Bunu **yapın:** Aşağıdaki örnekte, `HttpContext` bir kapanışın `Controller` özelliğinden yakalanırken bir kapanış gösterilmektedir. Bu kötü bir uygulamadır çünkü iş öğesi şu şekilde olabilir:
+Bunu **yapın:** Aşağıdaki örnekte, bir kapanışın özelliğinden yakalanırken bir kapanış gösterilmektedir `HttpContext` `Controller` . Bu kötü bir uygulamadır çünkü iş öğesi şu şekilde olabilir:
 
 * İstek kapsamının dışında çalıştırın.
-* Yanlış `HttpContext`okuma girişimi.
+* Yanlış okuma girişimi `HttpContext` .
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/FireAndForgetFirstController.cs?name=snippet1)]
 
@@ -303,23 +305,23 @@ Arka plan görevleri barındırılan hizmet olarak uygulanmalıdır. Daha fazla 
 
 ## <a name="do-not-capture-services-injected-into-the-controllers-on-background-threads"></a>Arka plan iş parçacıklarında denetleyicilere eklenen Hizmetleri yakalama
 
-Bunu **yapın:** Aşağıdaki örnek, `DbContext` bir kapanışın `Controller` eylem parametresinden yakalama işlemini gösterir. Bu kötü bir uygulamadır.  İş öğesi, istek kapsamı dışında çalıştırılabilir. , `ContosoDbContext` İstek kapsamına alınır ve buna yol açar `ObjectDisposedException`.
+Bunu **yapın:** Aşağıdaki örnek, bir kapanışın `DbContext` `Controller` eylem parametresinden yakalama işlemini gösterir. Bu kötü bir uygulamadır.  İş öğesi, istek kapsamı dışında çalıştırılabilir. , `ContosoDbContext` İstek kapsamına alınır ve buna yol açar `ObjectDisposedException` .
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/FireAndForgetSecondController.cs?name=snippet1)]
 
 **Bunu yapın:** Aşağıdaki örnek:
 
-* Arka plan iş <xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory> öğesinde bir kapsam oluşturmak için bir oluşturur. `IServiceScopeFactory`tek bir.
+* <xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory>Arka plan iş öğesinde bir kapsam oluşturmak için bir oluşturur. `IServiceScopeFactory`tek bir.
 * Arka plan iş parçacığında yeni bir bağımlılık ekleme kapsamı oluşturur.
 * Denetleyiciden hiçbir şeye başvurmuyor.
-* Gelen istekten yakalanmaz `ContosoDbContext` .
+* `ContosoDbContext`Gelen istekten yakalanmaz.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/FireAndForgetSecondController.cs?name=snippet2)]
 
 Aşağıdaki vurgulanan kod:
 
 * Arka plan işleminin yaşam süresi boyunca bir kapsam oluşturur ve Hizmetleri bundan çözer.
-* Doğru `ContosoDbContext` kapsamdan kullanır.
+* `ContosoDbContext`Doğru kapsamdan kullanır.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/FireAndForgetSecondController.cs?name=snippet2&highlight=9-16)]
 
@@ -334,13 +336,13 @@ Bunu **yapın:** Aşağıdaki kod, yanıt önceden başlatıldıktan sonra yanı
 
 [!code-csharp[](performance-best-practices/samples/3.0/Startup22.cs?name=snippet1)]
 
-Önceki kodda, `context.Response.Headers["test"] = "test value";` yanıta yazılmışsa bir özel durum `next()` oluşturur.
+Önceki kodda, `context.Response.Headers["test"] = "test value";` yanıta yazılmışsa bir özel durum oluşturur `next()` .
 
 **Bunu yapın:** Aşağıdaki örnek, üst bilgileri değiştirmeden önce HTTP yanıtının başlatılıp başlatılmadığını denetler.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Startup22.cs?name=snippet2)]
 
-**Bunu yapın:** Aşağıdaki örnek, yanıt `HttpResponse.OnStarting` üst bilgileri istemciye temizlenmeden önce üst bilgileri ayarlamak için kullanır.
+**Bunu yapın:** Aşağıdaki örnek, `HttpResponse.OnStarting` yanıt üst bilgileri istemciye temizlenmeden önce üst bilgileri ayarlamak için kullanır.
 
 Yanıtın başlatılmamış olup olmadığı denetleniyor yanıt üst bilgileri yazılmadan önce çağrılacak geri aramanın kaydedilmesini sağlar. Yanıtın başlatılmamış olup olmadığı denetleniyor:
 

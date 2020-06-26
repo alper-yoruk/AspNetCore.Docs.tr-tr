@@ -8,17 +8,19 @@ ms.date: 09/22/2018
 ms.custom: mvc, seodec18
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/2fa
-ms.openlocfilehash: e33f22356de983c8c4e0211822d5027a33b48de6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 032650296cfdcc4fef632c6a6a9ce2b56db6a6df
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775836"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408584"
 ---
 # <a name="two-factor-authentication-with-sms-in-aspnet-core"></a>ASP.NET Core 'de SMS ile iki öğeli kimlik doğrulama
 
@@ -33,7 +35,7 @@ Bu öğreticide, SMS kullanılarak iki öğeli kimlik doğrulamasının (2FA) na
 
 ## <a name="create-a-new-aspnet-core-project"></a>Yeni bir ASP.NET Core projesi oluştur
 
-Bireysel kullanıcı hesaplarıyla adlı `Web2FA` yeni bir ASP.NET Core Web uygulaması oluşturun. HTTPS 'yi ayarlamak ve <xref:security/enforcing-ssl> istemek için içindeki yönergeleri izleyin.
+Bireysel kullanıcı hesaplarıyla adlı yeni bir ASP.NET Core Web uygulaması oluşturun `Web2FA` . <xref:security/enforcing-ssl>Https 'yi ayarlamak ve istemek için içindeki yönergeleri izleyin.
 
 ### <a name="create-an-sms-account"></a>SMS hesabı oluşturma
 
@@ -49,7 +51,7 @@ Twilio hesabınızın Pano sekmesinden **Hesap SID** 'Sini ve **kimlik doğrulam
 
 Hesap ayarlarınızda **userKey** ' e gidin ve **parolanızla**birlikte kopyalayın.
 
-Bu değerleri daha sonra anahtarlar `SMSAccountIdentification` içindeki gizli-Manager aracıyla birlikte depolayacağız. `SMSAccountPassword`
+Bu değerleri daha sonra anahtarlar içindeki gizli-Manager aracıyla birlikte depolayacağız `SMSAccountIdentification` `SMSAccountPassword` .
 
 #### <a name="specifying-senderid--originator"></a>SenderId/oluşturana belirtme
 
@@ -57,7 +59,7 @@ Bu değerleri daha sonra anahtarlar `SMSAccountIdentification` içindeki gizli-M
 
 **Aspsms:** Kilit açma/kaldırma menüsünde, bir veya daha fazla kaynaktan yararlanın veya alfasayısal bir kaynağı (tüm ağlar tarafından desteklenmez) seçin.
 
-Bu değeri daha sonra anahtar `SMSAccountFrom`içinde gizli-Manager aracıyla depolayacağız.
+Bu değeri daha sonra anahtar içinde gizli-Manager aracıyla depolayacağız `SMSAccountFrom` .
 
 ### <a name="provide-credentials-for-the-sms-service"></a>SMS hizmeti için kimlik bilgilerini belirtin
 
@@ -67,7 +69,7 @@ Kullanıcı hesabına ve anahtar ayarlarına erişmek için [Seçenekler modelin
 
 [!code-csharp[](2fa/sample/Web2FA/Services/SMSoptions.cs)]
 
-`SMSAccountIdentification`, Ve `SMSAccountFrom` öğesini `SMSAccountPassword` [gizli-Manager aracı](xref:security/app-secrets)ile ayarlayın. Örneğin:
+`SMSAccountIdentification`, Ve öğesini `SMSAccountPassword` `SMSAccountFrom` [gizli-Manager aracı](xref:security/app-secrets)ile ayarlayın. Örneğin:
 
 ```none
 C:/Web2FA/src/WebApp1>dotnet user-secrets set SMSAccountIdentification 12345
@@ -94,13 +96,13 @@ info: Successfully saved SMSAccountIdentification = 12345 to the secret store.
 
 ### <a name="configure-startup-to-use-smsoptions"></a>Başlangıç 'yi kullanacak şekilde yapılandırma`SMSoptions`
 
-Startup.cs `SMSoptions` içindeki `ConfigureServices` yönteminde hizmet kapsayıcısına ekleyin: *Startup.cs*
+`SMSoptions` `ConfigureServices` *Startup.cs*içindeki yönteminde hizmet kapsayıcısına ekleyin:
 
 [!code-csharp[](2fa/sample/Web2FA/Startup.cs?name=snippet1&highlight=4)]
 
 ### <a name="enable-two-factor-authentication"></a>İki öğeli kimlik doğrulamayı etkinleştirme
 
-*Views/Manage/Index. cshtml* Razor görünüm dosyasını açın ve açıklama karakterlerini kaldırın (Bu nedenle biçimlendirme yok).
+*Views/Manage/Index. cshtml* Razor Görünüm dosyasını açın ve açıklama karakterlerini kaldırın (Bu nedenle biçimlendirme yok).
 
 ## <a name="log-in-with-two-factor-authentication"></a>İki öğeli kimlik doğrulama ile oturum açma
 
@@ -108,7 +110,7 @@ Startup.cs `SMSoptions` içindeki `ConfigureServices` yönteminde hizmet kapsay�
 
 ![Web uygulaması kayıt görünümü Microsoft Edge 'de açık](2fa/_static/login2fa1.png)
 
-* Kullanıcı adına dokunarak, yönetim denetleyicisindeki `Index` eylem yöntemini etkinleştirir. Ardından telefon numarası **Ekle** bağlantısına dokunun.
+* Kullanıcı adına dokunarak, `Index` Yönetim denetleyicisindeki eylem yöntemini etkinleştirir. Ardından telefon numarası **Ekle** bağlantısına dokunun.
 
 ![Yönetme görünümü-"Ekle" bağlantısına dokunun](2fa/_static/login2fa2.png)
 
@@ -152,7 +154,7 @@ Hesap kilitleme, 2FA ile önerilir. Bir kullanıcı yerel bir hesap veya sosyal 
 
 [!code-csharp[](2fa/sample/Web2FA/Startup.cs?name=snippet2&highlight=13-17)]
 
-[Passwordsignınasync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.passwordsigninasync) kümelerinin `lockoutOnFailure` şu şekilde `true`olduğunu onaylayın:
+[Passwordsignınasync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.passwordsigninasync) kümelerinin şu şekilde olduğunu onaylayın `lockoutOnFailure` `true` :
 
 ```csharp
 var result = await _signInManager.PasswordSignInAsync(

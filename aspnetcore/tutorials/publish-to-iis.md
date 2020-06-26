@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 10/03/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/publish-to-iis
-ms.openlocfilehash: aa79ce604539b4f09d6f17d4f43da28a6b615f53
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 837a66ef36f1394df87d56132e146ef23a5d5659
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774580"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407895"
 ---
 # <a name="publish-an-aspnet-core-app-to-iis"></a>IIS 'de ASP.NET Core uygulaması yayımlama
 
@@ -67,7 +69,7 @@ Aşağıdaki bağlantıyı kullanarak yükleyiciyi indirin:
 
 ## <a name="create-an-aspnet-core-razor-pages-app"></a>ASP.NET Core Razor Pages uygulaması oluşturma
 
-<xref:getting-started>Razor Pages uygulaması oluşturmak için öğreticiyi izleyin.
+<xref:getting-started>Bir sayfalar uygulaması oluşturmak için öğreticiyi izleyin Razor .
 
 ## <a name="publish-and-deploy-the-app"></a>Uygulamayı yayımlama ve dağıtma
 

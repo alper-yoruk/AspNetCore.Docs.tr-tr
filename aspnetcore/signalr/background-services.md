@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/background-services
-ms.openlocfilehash: 7bc3b9535055e3fccf23ffa4638bd29676910348
-ms.sourcegitcommit: e87dfa08fec0be1008249b1be678e5f79dcc5acb
+ms.openlocfilehash: bf5fff213b2cd7db0b3227922a8c5babba2fc904
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/13/2020
-ms.locfileid: "83382575"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85409091"
 ---
 # <a name="host-aspnet-core-signalr-in-background-services"></a>SignalRArka plan hizmetlerinde ana bilgisayar ASP.NET Core
 
@@ -62,7 +64,7 @@ SignalRArka plan çalışan işleminin bağlamında ASP.NET Core hub 'ların bar
 Türü kesin belirlenmiş hub 'Lar hakkında daha fazla bilgi için bkz. [ SignalR ASP.NET Core için hub 'ları kullanma](xref:signalr/hubs#strongly-typed-hubs).
 
 > [!NOTE]
-> Bu işlevsellik, [hub \< t>](xref:Microsoft.AspNetCore.SignalR.Hub`1) sınıfıyla sınırlı değildir. [Dynamichub](xref:Microsoft.AspNetCore.SignalR.DynamicHub)gibi [hub](xref:Microsoft.AspNetCore.SignalR.Hub)'dan devralan herhangi bir sınıf, işe yarar.
+> Bu işlev, [hub \<T> ](xref:Microsoft.AspNetCore.SignalR.Hub`1) sınıfıyla sınırlı değildir. [Dynamichub](xref:Microsoft.AspNetCore.SignalR.DynamicHub)gibi [hub](xref:Microsoft.AspNetCore.SignalR.Hub)'dan devralan herhangi bir sınıf, işe yarar.
 
 ::: moniker range=">= aspnetcore-3.0"
 

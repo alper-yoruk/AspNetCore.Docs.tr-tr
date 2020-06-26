@@ -1,24 +1,26 @@
 ---
 title: ASP.NET Core Web sunucusu uygulamaları
 author: rick-anderson
-description: ASP.NET Core için Kestrel ve HTTP. sys Web sunucularını bulun. Sunucu seçme ve ters proxy sunucusu ne zaman kullanılacağı hakkında bilgi edinin.
+description: Kestrel için Web sunucularını bulun ve ASP.NET Core HTTP.sys. Sunucu seçme ve ters proxy sunucusu ne zaman kullanılacağı hakkında bilgi edinin.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 11/07/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/servers/index
-ms.openlocfilehash: 9d57fcd5883a869c5421b88321d4a279f3f938c9
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 6ddb786b8f03a7256aeca6605c48467a297b0855
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84452154"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408753"
 ---
 # <a name="web-server-implementations-in-aspnet-core"></a>ASP.NET Core Web sunucusu uygulamaları
 
@@ -52,7 +54,7 @@ ASP.NET Core aşağıdakiler ile birlikte gelir:
 
 * [Kestrel sunucusu](xref:fundamentals/servers/kestrel) varsayılan, platformlar arası http sunucu uygulamasıdır.
 * IIS HTTP sunucusu, IIS için bir [işlem içi sunucusudur](#hosting-models) .
-* [Http. sys sunucusu](xref:fundamentals/servers/httpsys) , [http. sys çekırdek sürücüsünü ve http sunucusu API](/windows/desktop/Http/http-api-start-page)'sini temel alan bir yalnızca Windows HTTP sunucusudur.
+* [HTTP.sys sunucusu](xref:fundamentals/servers/httpsys) , [HTTP.sys çekırdek sürücüsünü ve http sunucusu API](/windows/desktop/Http/http-api-start-page)'sini temel alan bir yalnızca Windows HTTP sunucusudur.
 
 [IIS](/iis/get-started/introduction-to-iis/introduction-to-iis-architecture) veya [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)kullanırken, uygulama şu şekilde çalışır:
 
@@ -91,7 +93,7 @@ ASP.NET Core, varsayılan, platformlar arası HTTP sunucusu olan [Kestrel Server
 ASP.NET Core aşağıdakiler ile birlikte gelir:
 
 * [Kestrel sunucusu](xref:fundamentals/servers/kestrel) , platformlar arası varsayılan HTTP sunucusudur.
-* [Http. sys sunucusu](xref:fundamentals/servers/httpsys) , [http. sys çekırdek sürücüsünü ve http sunucusu API](/windows/desktop/Http/http-api-start-page)'sini temel alan bir yalnızca Windows HTTP sunucusudur.
+* [HTTP.sys sunucusu](xref:fundamentals/servers/httpsys) , [HTTP.sys çekırdek sürücüsünü ve http sunucusu API](/windows/desktop/Http/http-api-start-page)'sini temel alan bir yalnızca Windows HTTP sunucusudur.
 
 [IIS](/iis/get-started/introduction-to-iis/introduction-to-iis-architecture) veya [IIS Express](/iis/extensions/introduction-to-iis-express/iis-express-overview)kullanırken, uygulama IIS çalışan işleminden (*işlem dışı*) [Kestrel sunucusu](#kestrel)ile ayrı bir işlemde çalışır.
 
@@ -101,7 +103,7 @@ Aşağıdaki diyagramda IIS, ASP.NET Core modülü ve işlem dışı barındır�
 
 ![ASP.NET Core Modülü](_static/ancm-outofprocess.png)
 
-İstekler Web 'den çekirdek modu HTTP. sys sürücüsüne ulaşır. Sürücü, istekleri Web sitesinin yapılandırılmış bağlantı noktasında IIS 'ye yönlendirir, genellikle 80 (HTTP) veya 443 (HTTPS). Modül, 80 veya 443 numaralı bağlantı noktası olmayan uygulama için rastgele bir bağlantı noktasında istekleri Kestrel 'e iletir.
+İstekler Web 'den çekirdek modu HTTP.sys sürücüsüne ulaşır. Sürücü, istekleri Web sitesinin yapılandırılmış bağlantı noktasında IIS 'ye yönlendirir, genellikle 80 (HTTP) veya 443 (HTTPS). Modül, 80 veya 443 numaralı bağlantı noktası olmayan uygulama için rastgele bir bağlantı noktasında istekleri Kestrel 'e iletir.
 
 Modül, başlangıç sırasında bir ortam değişkeni aracılığıyla bağlantı noktasını belirtir ve [IIS tümleştirme ara yazılımı](xref:host-and-deploy/iis/index#enable-the-iisintegration-components) sunucuyu dinleyecek şekilde yapılandırır `http://localhost:{port}` . Ek denetimler gerçekleştirilir ve modülünden kaynaklanmayan istekler reddedilir. Modül HTTPS iletmeyi desteklemez, bu nedenle istekler HTTPS üzerinden IIS tarafından alınsa bile HTTP üzerinden iletilir.
 
@@ -134,19 +136,19 @@ Linux üzerinde Apache 'yi Kestrel için ters proxy sunucusu olarak kullanma hak
 
 ## <a name="httpsys"></a>HTTP.sys
 
-ASP.NET Core uygulamalar Windows üzerinde çalışıyorsa, HTTP. sys, Kestrel için bir alternatiftir. Kestrel genellikle en iyi performans için önerilir. HTTP. sys, uygulamanın Internet 'e açık olduğu senaryolarda ve gerekli yetenekler HTTP. sys tarafından desteklenir, ancak Kestrel değildir. Daha fazla bilgi için bkz. <xref:fundamentals/servers/httpsys>.
+ASP.NET Core uygulamalar Windows üzerinde çalışıyorsa HTTP.sys, Kestrel için bir alternatiftir. Kestrel genellikle en iyi performans için önerilir. HTTP.sys, uygulamanın Internet 'e sunulabileceği senaryolarda ve gerekli yetenekler, HTTP.sys tarafından desteklenmediği durumlarda kullanılabilir. Daha fazla bilgi için bkz. <xref:fundamentals/servers/httpsys>.
 
-![HTTP. sys doğrudan Internet ile iletişim kurar](httpsys/_static/httpsys-to-internet.png)
+![HTTP.sys doğrudan Internet ile iletişim kurar](httpsys/_static/httpsys-to-internet.png)
 
-HTTP. sys, yalnızca bir iç ağa açık olan uygulamalar için de kullanılabilir.
+HTTP.sys, yalnızca bir iç ağa açık olan uygulamalar için de kullanılabilir.
 
-![HTTP. sys doğrudan iç ağla iletişim kurar](httpsys/_static/httpsys-to-internal.png)
+![HTTP.sys doğrudan iç ağla iletişim kurar](httpsys/_static/httpsys-to-internal.png)
 
-HTTP. sys yapılandırma kılavuzu için bkz <xref:fundamentals/servers/httpsys> ..
+HTTP.sys yapılandırma kılavuzu için bkz <xref:fundamentals/servers/httpsys> ..
 
 ## <a name="aspnet-core-server-infrastructure"></a>ASP.NET Core Server altyapısı
 
-<xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> `Startup.Configure` Yönteminde bulunan <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ServerFeatures> özelliği türünün özelliğini kullanıma sunar <xref:Microsoft.AspNetCore.Http.Features.IFeatureCollection> . Kestrel ve HTTP. sys her biri yalnızca tek bir özelliği kullanıma sunar <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> , ancak farklı sunucu uygulamaları ek işlevsellik sergilede gösterebilir.
+<xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> `Startup.Configure` Yönteminde bulunan <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ServerFeatures> özelliği türünün özelliğini kullanıma sunar <xref:Microsoft.AspNetCore.Http.Features.IFeatureCollection> . Kestrel ve HTTP.sys her biri yalnızca tek bir özellik sunar, <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> ancak farklı sunucu uygulamaları ek işlevsellik sergilede gösterebilir.
 
 `IServerAddressesFeature`sunucu uygulamasının çalışma zamanında hangi bağlantı noktasını bağladığına ilişkin bilgi edinmek için kullanılabilir.
 
@@ -162,9 +164,9 @@ Tümleşik geliştirme ortamı (IDE) veya düzenleyici uygulamayı başlattığ�
 * [Visual Studio Code](https://code.visualstudio.com/): uygulama ve sunucu [Omnisharp](https://github.com/OmniSharp/omnisharp-vscode)tarafından başlatılır ve bu, CoreCLR hata ayıklayıcısını etkinleştirir.
 * [Mac için Visual Studio](https://visualstudio.microsoft.com/vs/mac/): uygulama ve sunucu [mono geçici modda hata ayıklayıcı](https://www.mono-project.com/docs/advanced/runtime/docs/soft-debugger/)tarafından başlatılır.
 
-Uygulamanın, projenin klasöründeki bir komut isteminden başlatılması sırasında [DotNet Run](/dotnet/core/tools/dotnet-run) uygulamayı ve sunucuyu (yalnızca Kestrel ve http. sys) başlatır. Yapılandırma `-c|--configuration` seçeneğiyle belirtilir, `Debug` (varsayılan) veya olarak ayarlanır `Release` .
+Uygulamanın, projenin klasöründeki bir komut isteminden başlatılması sırasında [DotNet Run](/dotnet/core/tools/dotnet-run) uygulamayı ve sunucuyu başlatır (yalnızca Kestrel ve HTTP.sys). Yapılandırma `-c|--configuration` seçeneğiyle belirtilir, `Debug` (varsayılan) veya olarak ayarlanır `Release` .
 
-*Launchsettings. JSON* dosyası `dotnet run` , Visual Studio gibi araçlar içinde yerleşik bir hata ayıklayıcı ile veya bir uygulama başlatırken yapılandırma sağlar. Başlatma profilleri bir *Launchsettings. JSON* dosyasında varsa, `--launch-profile {PROFILE NAME}` komutuyla seçeneğini kullanın `dotnet run` veya Visual Studio 'da profili seçin. Daha fazla bilgi için bkz. [DotNet Run](/dotnet/core/tools/dotnet-run) ve [.NET Core Distribution paketleme](/dotnet/core/build/distribution-packaging).
+Dosyadaki bir *launchSettings.js* `dotnet run` , Visual Studio gibi araç ile yerleşik bir hata ayıklayıcı ile veya bir uygulama başlatırken yapılandırma sağlar. Bir *launchSettings.jsdosya üzerinde* başlatma profilleri varsa, `--launch-profile {PROFILE NAME}` komutuyla seçeneğini kullanın `dotnet run` veya Visual Studio 'da profili seçin. Daha fazla bilgi için bkz. [DotNet Run](/dotnet/core/tools/dotnet-run) ve [.NET Core Distribution paketleme](/dotnet/core/build/distribution-packaging).
 
 ## <a name="http2-support"></a>HTTP/2 desteği
 
@@ -180,7 +182,7 @@ Uygulamanın, projenin klasöründeki bir komut isteminden başlatılması sıra
   * Hedef Framework: .NET Core 2,2 veya üzeri
 * [HTTP.sys](xref:fundamentals/servers/httpsys#http2-support)
   * Windows Server 2016/Windows 10 veya üzeri
-  * Hedef Framework: HTTP. sys dağıtımları için geçerli değildir.
+  * Hedef Framework: HTTP.sys dağıtımlar için geçerli değildir.
 * [IIS (işlem içi)](xref:host-and-deploy/iis/index#http2-support)
   * Windows Server 2016/Windows 10 veya üzeri; IIS 10 veya üzeri
   * Hedef Framework: .NET Core 2,2 veya üzeri
@@ -197,7 +199,7 @@ Uygulamanın, projenin klasöründeki bir komut isteminden başlatılması sıra
 
 * [HTTP.sys](xref:fundamentals/servers/httpsys#http2-support)
   * Windows Server 2016/Windows 10 veya üzeri
-  * Hedef Framework: HTTP. sys dağıtımları için geçerli değildir.
+  * Hedef Framework: HTTP.sys dağıtımlar için geçerli değildir.
 * [IIS (işlem dışı)](xref:host-and-deploy/iis/index#http2-support)
   * Windows Server 2016/Windows 10 veya üzeri; IIS 10 veya üzeri
   * Herkese açık uç sunucu bağlantıları HTTP/2 kullanır, ancak Kestrel ile ters proxy bağlantısı HTTP/1.1 kullanır.

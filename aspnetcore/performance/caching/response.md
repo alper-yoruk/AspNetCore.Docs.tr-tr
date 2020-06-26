@@ -7,17 +7,19 @@ ms.author: riande
 ms.date: 11/04/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: performance/caching/response
-ms.openlocfilehash: 87ff2633ded612eba2c996583b4a6cf997fe8e18
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 25d6bdae0fce7821ec7b9195817dc07ef9aed40f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84105772"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408194"
 ---
 # <a name="response-caching-in-aspnet-core"></a>ASP.NET Core 'de yanıt önbelleğe alma
 
@@ -39,7 +41,7 @@ Ortak `Cache-Control` yönergeler aşağıdaki tabloda gösterilmiştir.
 
 | Deki                                                       | Eylem |
 | --------------------------------------------------------------- | ------ |
-| [public](https://tools.ietf.org/html/rfc7234#section-5.2.2.5)   | Önbellek, yanıtı saklayabilir. |
+| [geneldir](https://tools.ietf.org/html/rfc7234#section-5.2.2.5)   | Önbellek, yanıtı saklayabilir. |
 | [private](https://tools.ietf.org/html/rfc7234#section-5.2.2.6)  | Yanıtın paylaşılan bir önbellek tarafından depolanması gerekir. Özel bir önbellek, yanıtı depolayıp yeniden kullanabilir. |
 | [Maksimum yaş](https://tools.ietf.org/html/rfc7234#section-5.2.1.1)  | İstemci, yaşı belirtilen saniyeden daha büyük olan bir yanıtı kabul etmez. Örnekler: `max-age=60` (60 saniye), `max-age=2592000` (1 ay) |
 | [önbellek yok](https://tools.ietf.org/html/rfc7234#section-5.2.1.4) | **İsteklerde**: bir önbellek, isteği karşılamak için depolanan bir yanıt kullanmamalıdır. Kaynak sunucu, istemcinin yanıtını yeniden oluşturur ve ara yazılım, depolanan yanıtı önbelleğinde güncelleştirir.<br><br>**Yanıtlar**: yanıt, kaynak sunucuda doğrulamadan sonraki bir istek için kullanılmamalıdır. |

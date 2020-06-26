@@ -7,17 +7,19 @@ ms.author: johluo
 ms.date: 09/25/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: grpc/migration
-ms.openlocfilehash: 1846195cc43aec703333e69f66380ddcabcf2ad4
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 2f0cd5f224453ee7be16f8a1d10e383de2a0d426
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82768828"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407258"
 ---
 # <a name="migrating-grpc-services-from-c-core-to-aspnet-core"></a>GRPC hizmetlerini C Core 'dan ASP.NET Core geçirme
 
@@ -35,7 +37,7 @@ Kapsamlı ömür, hizmet uygulamasının kapsamlı ömürlerle diğer hizmetleri
 * Uygulama türündeki örnek üyeleri aracılığıyla istekler arasında durum paylaşmak mümkün değildir.
 * Beklentisi, paylaşılan durumları dı kapsayıcısında tek bir hizmette depobir biçimde depokadır. Depolanan paylaşılan durumlar, gRPC hizmet uygulamasının oluşturucusunda çözümlenir.
 
-Hizmet yaşam süreleri hakkında daha fazla bilgi için <xref:fundamentals/dependency-injection#service-lifetimes>bkz..
+Hizmet yaşam süreleri hakkında daha fazla bilgi için bkz <xref:fundamentals/dependency-injection#service-lifetimes> ..
 
 ### <a name="add-a-singleton-service"></a>Tek bir hizmet ekleyin
 
@@ -53,9 +55,9 @@ Ancak, tek bir yaşam süresine sahip bir hizmet uygulamasının kapsamı, kapsa
 
 ## <a name="configure-grpc-services-options"></a>GRPC Hizmetleri seçeneklerini yapılandırma
 
-C Core tabanlı uygulamalarda `grpc.max_receive_message_length` , ve `grpc.max_send_message_length` gibi ayarlar `ChannelOption` [sunucu örneği oluşturulurken](https://grpc.io/grpc/csharp/api/Grpc.Core.Server.html#Grpc_Core_Server__ctor_System_Collections_Generic_IEnumerable_Grpc_Core_ChannelOption__)ile yapılandırılır.
+C Core tabanlı uygulamalarda, ve gibi ayarlar `grpc.max_receive_message_length` `grpc.max_send_message_length` `ChannelOption` [sunucu örneği oluşturulurken](https://grpc.io/grpc/csharp/api/Grpc.Core.Server.html#Grpc_Core_Server__ctor_System_Collections_Generic_IEnumerable_Grpc_Core_ChannelOption__)ile yapılandırılır.
 
-ASP.NET Core, gRPC, `GrpcServiceOptions` tür aracılığıyla yapılandırma sağlar. Örneğin, gRPC hizmetinin en büyük gelen ileti boyutu ile `AddGrpc`yapılandırılabilir. Aşağıdaki örnek 4 MB ile 16 `MaxReceiveMessageSize` MB arasında varsayılan değer değiştirir:
+ASP.NET Core, gRPC, tür aracılığıyla yapılandırma sağlar `GrpcServiceOptions` . Örneğin, gRPC hizmetinin en büyük gelen ileti boyutu ile yapılandırılabilir `AddGrpc` . Aşağıdaki örnek `MaxReceiveMessageSize` 4 MB ile 16 MB arasında varsayılan değer değiştirir:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -67,7 +69,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Yapılandırma hakkında daha fazla bilgi için bkz <xref:grpc/configuration>..
+Yapılandırma hakkında daha fazla bilgi için bkz <xref:grpc/configuration> ..
 
 ## <a name="logging"></a>Günlüğe Kaydetme
 
@@ -92,9 +94,9 @@ ASP.NET Core [Ara yazılım](xref:fundamentals/middleware/index) , C çekirdekli
 
 * , Bir gRPC isteğini işleyen bir işlem hattı oluşturmak için kullanılır.
 * İşlem hattındaki bir sonraki bileşenden önce veya sonra iş gerçekleştirilmesine izin verin.
-* Erişim sağla `HttpContext`:
-  * Ara yazılım `HttpContext` ' de bir parametredir.
-  * Yakalayıcılar içinde, `HttpContext` `ServerCallContext` `ServerCallContext.GetHttpContext` uzantı yöntemiyle parametresi kullanılarak erişilebilir. Bu özelliğin ASP.NET Core ' de çalışan yakalayıcılar için özel olduğunu unutmayın.
+* Erişim sağla `HttpContext` :
+  * Ara yazılım ' de `HttpContext` bir parametredir.
+  * Yakalayıcılar içinde, `HttpContext` `ServerCallContext` uzantı yöntemiyle parametresi kullanılarak erişilebilir `ServerCallContext.GetHttpContext` . Bu özelliğin ASP.NET Core ' de çalışan yakalayıcılar için özel olduğunu unutmayın.
 
 gRPC yakalayıcısı ASP.NET Core ara yazılım farklılıkları:
 

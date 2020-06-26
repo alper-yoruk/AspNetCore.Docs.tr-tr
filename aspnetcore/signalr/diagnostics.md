@@ -8,17 +8,19 @@ ms.custom: signalr
 ms.date: 06/12/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: 7d7ea0fe69f258c01177c7755eaee61ab42400ce
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: f2b864d47c98a031872be676a68143bd79f49829
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85102952"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85409104"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-signalr"></a>ASP.NET Core 'de günlüğe kaydetme ve tanılamaSignalR
 
@@ -111,7 +113,7 @@ Günlükleri özel bir günlüğe kaydetme sistemine göndermek istiyorsanız, a
 
 .NET istemcisinden günlükleri almak için, `ConfigureLogging` üzerinde yöntemini kullanabilirsiniz `HubConnectionBuilder` . Bu, `ConfigureLogging` ve üzerindeki yöntemiyle aynı şekilde çalışmaktadır `WebHostBuilder` `HostBuilder` . ASP.NET Core ' de kullandığınız günlük sağlayıcılarını yapılandırabilirsiniz. Ancak, bireysel günlük sağlayıcıları için NuGet paketlerini el ile yükleyip etkinleştirmeniz gerekir.
 
-Webassembly uygulamasına .NET istemci günlüğü eklemek için Blazor bkz <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging> ..
+Bir uygulamaya .NET istemci günlüğü eklemek için Blazor WebAssembly , bkz <xref:blazor/fundamentals/logging#blazor-webassembly-signalr-net-client-logging> ..
 
 ### <a name="console-logging"></a>Konsol günlüğü
 
@@ -220,7 +222,7 @@ Tanılama dosyalarını, bir uzantıya sahip olacak şekilde yeniden adlandırar
 
 SignalRSunucu ölçümleri <xref:Microsoft.AspNetCore.Http.Connections> olay kaynağında raporlanır.
 
-| Name                    | Açıklama                 |
+| Adı                    | Açıklama                 |
 |-------------------------|-----------------------------|
 | `connections-started`   | Toplam bağlantı sayısı   |
 | `connections-stopped`   | Durdurulan toplam bağlantı sayısı   |

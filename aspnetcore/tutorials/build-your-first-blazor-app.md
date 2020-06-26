@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/first-blazor-app
-ms.openlocfilehash: 892663a533a207df84b0fce9af259a7dc212bc9b
-ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
+ms.openlocfilehash: f791dae5915c87d4c36f23419961e3c53e888743
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85292782"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85409078"
 ---
 # <a name="build-your-first-blazor-app"></a>İlk uygulamanızı oluşturma Blazor
 
@@ -71,7 +73,7 @@ Bir bileşeni, bir HTML söz dizimini kullanarak başka bir bileşene ekleyin.
 
 1. Bileşene `Counter` `Index` bir öğe ekleyerek bileşeni uygulamanın bileşenine ekleyin `<Counter />` `Index` ( `Index.razor` ).
 
-   BlazorBu deneyim için webassembly kullanıyorsanız bileşen `SurveyPrompt` tarafından bir bileşen kullanılır `Index` . `<SurveyPrompt>`Öğesini bir `<Counter />` öğesiyle değiştirin. BlazorBu deneyim için bir sunucu uygulaması kullanıyorsanız, `<Counter />` öğesini `Index` bileşene ekleyin:
+   Blazor WebAssemblyBu deneyim için kullanıyorsanız, bileşen `SurveyPrompt` tarafından bir bileşen kullanılır `Index` . `<SurveyPrompt>`Öğesini bir `<Counter />` öğesiyle değiştirin. Blazor ServerBu deneyim için bir uygulama kullanıyorsanız, `<Counter />` öğesini `Index` bileşene ekleyin:
 
    `Pages/Index.razor`:
 
@@ -111,9 +113,9 @@ Bileşenler de parametrelere sahip olabilir. Bileşen parametreleri, bileşen s�
 
 ## <a name="dependency-injection"></a>Bağımlılık ekleme
 
-### <a name="blazor-server-experience"></a>BlazorSunucu deneyimi
+### <a name="blazor-server-experience"></a>Blazor Serverdeneyimleri
 
-Sunucu uygulamasıyla çalışıyorsanız Blazor , `WeatherForecastService` hizmet [tek](xref:fundamentals/dependency-injection#service-lifetimes) bir olarak kaydedilir `Startup.ConfigureServices` . Uygulamanın tamamında [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection)yoluyla hizmetin bir örneği mevcuttur:
+Bir uygulamayla birlikte çalışıyorsa Blazor Server , `WeatherForecastService` hizmet [tek](xref:fundamentals/dependency-injection#service-lifetimes) bir olarak kaydedilir `Startup.ConfigureServices` . Uygulamanın tamamında [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection)yoluyla hizmetin bir örneği mevcuttur:
 
 [!code-csharp[](build-your-first-blazor-app/samples_snapshot/3.x/Startup.cs?highlight=5)]
 
@@ -127,9 +129,9 @@ Sunucu uygulamasıyla çalışıyorsanız Blazor , `WeatherForecastService` hizm
 
 [!code-razor[](build-your-first-blazor-app/samples_snapshot/3.x/FetchData2.razor?highlight=6)]
 
-### <a name="blazor-webassembly-experience"></a>BlazorWebAssembly deneyimi
+### <a name="blazor-webassembly-experience"></a>Blazor WebAssemblydeneyimleri
 
-BlazorWebassembly uygulamasıyla çalışıyorsanız, <xref:System.Net.Http.HttpClient> klasördeki dosyadan Hava durumu tahmin verileri elde etmek için eklenmiş olur `weather.json` `wwwroot/sample-data` .
+Bir uygulamayla birlikte çalışıyorsa Blazor WebAssembly , <xref:System.Net.Http.HttpClient> klasördeki dosyadan Hava durumu tahmin verileri almak için eklenmiş olur `weather.json` `wwwroot/sample-data` .
 
 `Pages/FetchData.razor`:
 

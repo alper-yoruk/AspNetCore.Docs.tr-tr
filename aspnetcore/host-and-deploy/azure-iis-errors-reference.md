@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: host-and-deploy/azure-iis-errors-reference
-ms.openlocfilehash: 19e8fd1ed390a160df8646a83a66d251ba6d92d8
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 1b0402ceccde0f2410ac29e9c6a251110c81eafa
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105044"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408142"
 ---
 # <a name="common-errors-reference-for-azure-app-service-and-iis-with-aspnet-core"></a>ASP.NET Core ile Azure App Service ve IIS için ortak hatalar başvurusu
 
@@ -48,7 +50,7 @@ Bu konudaki hataların listesi ayrıntılı değildir. Burada listelenmeyen bir 
 
 ## <a name="os-upgrade-removed-the-32-bit-aspnet-core-module"></a>İşletim sistemi yükseltmesi 32-bit ASP.NET Core modülünü kaldırdı
 
-**Uygulama günlüğü:** **C:\windows\system32\inetsrv\aspnetcore.dll** modül dll 'si yüklenemedi. Veriler hatadır.
+**Uygulama günlüğü:** Modül DLL **C:\WINDOWS\system32\inetsrv\aspnetcore.dll** yüklenemedi. Veriler hatadır.
 
 Sorun Giderme:
 
@@ -173,7 +175,7 @@ Sorun Giderme:
 
 * **Uygulama havuzu** > **işlem modelinin** > **Identity** **applicationpokaydentity** olarak ayarlandığından veya özel kimliğin uygulamanın dağıtım klasörüne erişmek için doğru izinlere sahip olduğundan emin olun.
 
-* ASP.NET Core barındırma paketini kaldırdıysanız ve barındırma paketinin önceki bir sürümünü yüklediyseniz *ApplicationHost. config* dosyası ASP.NET Core modülü için bir bölüm içermez. *ApplicationHost. config* dosyasını *% windir%/system32/inetsrv/config* konumunda açın ve `<configuration><configSections><sectionGroup name="system.webServer">` bölüm grubunu bulun. Bölüm grubunda ASP.NET Core modülünün bölümü eksikse, Bölüm öğesini ekleyin:
+* ASP.NET Core barındırma paketini kaldırdıysanız ve barındırma paketinin önceki bir sürümünü yüklediyseniz, *applicationHost.config* dosyası ASP.NET Core modülü için bir bölüm içermez. *% Windir%/system32/inetsrv/config* konumundaki *applicationHost.config* açın ve `<configuration><configSections><sectionGroup name="system.webServer">` bölüm grubunu bulun. Bölüm grubunda ASP.NET Core modülünün bölümü eksikse, Bölüm öğesini ekleyin:
 
   ```xml
   <section name="aspNetCore" overrideModeDefault="Allow" />
@@ -181,7 +183,7 @@ Sorun Giderme:
 
   Alternatif olarak, ASP.NET Core barındıran paketin en son sürümünü de yüklersiniz. En son sürüm, desteklenen ASP.NET Core uygulamalarla geriye dönük olarak uyumludur.
 
-## <a name="incorrect-processpath-missing-path-variable-hosting-bundle-not-installed-systemiis-not-restarted-vc-redistributable-not-installed-or-dotnetexe-access-violation"></a>Hatalı processPath, eksik yol değişkeni, barındırma paketi yüklü değil, sistem/IIS yeniden başlatılmadı, VC + + yeniden dağıtılabilir yüklü değil veya DotNet. exe erişim ihlali
+## <a name="incorrect-processpath-missing-path-variable-hosting-bundle-not-installed-systemiis-not-restarted-vc-redistributable-not-installed-or-dotnetexe-access-violation"></a>Hatalı processPath, eksik yol değişkeni, barındırma paketi yüklü değil, sistem/IIS yeniden başlatılmadı, VC + + yeniden dağıtılabilir yüklü değil veya dotnet.exe erişim ihlali
 
 * **Tarayıcı:** HTTP hatası 500,0-Işlem Içi Işleyici yükleme hatası
 
@@ -195,11 +197,11 @@ Sorun Giderme:
 
 * Uygulamanın Kestrel üzerinde yerel olarak çalıştığını doğrulayın. İşlem hatası, uygulamanın içindeki bir sorunun sonucu olabilir. Daha fazla bilgi için bkz. <xref:test/troubleshoot-azure-iis>.
 
-* *processPath* `<aspNetCore>` Bir çerçeveye bağımlı dağıtım (FDD) veya *web.config* `dotnet` `.\{ASSEMBLY}.exe` [kendi kendine ait dağıtım (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd)Için olduğunu doğrulamak üzere Web. config dosyasındaki öğesindeki processPath özniteliğini denetleyin.
+* *processPath* `<aspNetCore>` *web.config* `dotnet` Çerçeveye bağlı bir dağıtım (FDD) veya `.\{ASSEMBLY}.exe` [kendi kendine ait dağıtım (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd)için olduğunu doğrulamak üzereweb.configöğesinde öğesindeki processPath özniteliğini denetleyin.
 
-* FDD için, *DotNet. exe* ' nin yol ayarları aracılığıyla erişilebilir olmayabilir. *C:\Program Files\dotnet \\ * dosyasının sistem yolu ayarlarında bulunduğunu onaylayın.
+* FDD için *dotnet.exe* yol ayarları aracılığıyla erişilebilir olmayabilir. *C:\Program Files\dotnet \\ * dosyasının sistem yolu ayarlarında bulunduğunu onaylayın.
 
-* FDD için, *DotNet. exe* ' yi uygulama havuzunun Kullanıcı kimliği için erişilebilir olmayabilir. Uygulama havuzu Kullanıcı kimliğinin *C:\Program Files\dotnet* dizinine erişimi olduğunu doğrulayın. *C:\Program Files\dotnet* ve uygulama dizinlerindeki uygulama havuzu Kullanıcı kimliği için yapılandırılmış reddetme kuralı olmadığını doğrulayın.
+* FDD için, uygulama havuzunun Kullanıcı kimliği için *dotnet.exe* erişilebilir olmayabilir. Uygulama havuzu Kullanıcı kimliğinin *C:\Program Files\dotnet* dizinine erişimi olduğunu doğrulayın. *C:\Program Files\dotnet* ve uygulama dizinlerindeki uygulama havuzu Kullanıcı kimliği için yapılandırılmış reddetme kuralı olmadığını doğrulayın.
 
 * Bir FDD dağıtılmış ve IIS 'nin yeniden başlatılmasına gerek kalmadan .NET Core yüklenmiş olabilir. Bir komut isteminden net **stop was/y** ve ardından **net start w3svc** ' i yürüterek sunucuyu YENIDEN başlatın ya da IIS 'yi yeniden başlatın.
 
@@ -225,7 +227,7 @@ Sorun Giderme:
 
 * Uygulamanın Kestrel üzerinde yerel olarak çalıştığını doğrulayın. İşlem hatası, uygulamanın içindeki bir sorunun sonucu olabilir. Daha fazla bilgi için bkz. <xref:test/troubleshoot-azure-iis>.
 
-* Web. config dosyasındaki *bağımsız değişkenler* özniteliğini inceleyerek, bir `<aspNetCore>` *web.config* `.\{ASSEMBLY}.dll` çerçeveye bağımlı dağıtım (FDD) veya (b) yok, boş bir dize ( `arguments=""` ) veya bağımsız `arguments="{ARGUMENT_1}, {ARGUMENT_2}, ... {ARGUMENT_X}"` bir dağıtım (SCD) için uygulamanın bağımsız değişkenlerinin bir listesini () doğrulayın.
+* Bir *arguments* `<aspNetCore>` *web.config* `.\{ASSEMBLY}.dll` çerçeveye bağımlı dağıtım (FDD) veya (b) yok, boş bir dize ( `arguments=""` ) veya bağımsız `arguments="{ARGUMENT_1}, {ARGUMENT_2}, ... {ARGUMENT_X}"` bir dağıtım (SCD) için uygulamanın bağımsız değişkenlerinin bir listesini () doğrulamak üzereweb.configöğesinde öğesindeki arguments özniteliğini inceleyin.
 
 ## <a name="missing-net-core-shared-framework"></a>Eksik .NET Core paylaşılan çerçevesi
 
@@ -269,23 +271,23 @@ Uygulama havuzunun *durdurulmuş* durumda olmadığını onaylayın.
 
 Sorun Giderme:
 
-Alt uygulamanın *Web. config* dosyasının bir `<handlers>` bölüm içermediğinden veya alt uygulamanın üst uygulamanın işleyicilerini almadığından emin olun.
+Alt uygulamanın *web.config* dosyanın bir `<handlers>` bölüm içermediğinden veya alt uygulamanın üst uygulamanın işleyicilerini almadığından emin olun.
 
-`<system.webServer>` *Web. config* dosyasının üst uygulamanın bölümü bir öğesinin içine yerleştirilir `<location>` . <xref:System.Configuration.SectionInformation.InheritInChildApplications*>Özelliği, `false` öğesi içinde belirtilen ayarların [\<location>](/iis/manage/managing-your-configuration-settings/understanding-iis-configuration-delegation#the-concept-of-location) üst uygulamanın bir alt dizininde bulunan uygulamalar tarafından devralınmadığını belirtmek için olarak ayarlanır. Daha fazla bilgi için bkz. <xref:host-and-deploy/aspnet-core-module>.
+Üst uygulamanın `<system.webServer>` *web.config* bölümü bir öğesi içine yerleştirilir `<location>` . <xref:System.Configuration.SectionInformation.InheritInChildApplications*>Özelliği, `false` öğesi içinde belirtilen ayarların [\<location>](/iis/manage/managing-your-configuration-settings/understanding-iis-configuration-delegation#the-concept-of-location) üst uygulamanın bir alt dizininde bulunan uygulamalar tarafından devralınmadığını belirtmek için olarak ayarlanır. Daha fazla bilgi için bkz. <xref:host-and-deploy/aspnet-core-module>.
 
 ## <a name="stdout-log-path-incorrect"></a>stdout günlük yolu yanlış
 
 * **Tarayıcı:** Uygulama normal olarak yanıt verir.
 
-* **Uygulama günlüğü:** C:\Program Files\IIS\Asp.Net Core Module\v2\aspnetcorev2.dll' de stdout yeniden yönlendirmesi başlatılamadı. Özel durum iletisi: {PATH} \aspnetcoremodulev2\commonlib\fileoutputmanager.cpp: 84 konumunda HRESULT 0x80070005 döndürüldü. C:\Program Files\IIS\Asp.Net Core Module\v2\aspnetcorev2.dll' de stdout yeniden yönlendirmesi durdurulamadı. Özel durum iletisi: HRESULT 0x80070002 {PATH} konumunda döndürüldü. {PATH} \ aspnetcorev2_inprocess. dll içinde stdout yeniden yönlendirmesi başlatılamadı.
+* **Uygulama günlüğü:** C:\Program Files\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll içinde stdout yeniden yönlendirmesi başlatılamadı. Özel durum iletisi: {PATH} \aspnetcoremodulev2\commonlib\fileoutputmanager.cpp: 84 konumunda HRESULT 0x80070005 döndürüldü. C:\Program Files\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll içinde stdout yeniden yönlendirmesi durdurulamadı. Özel durum iletisi: HRESULT 0x80070002 {PATH} konumunda döndürüldü. {PATH} \aspnetcorev2_inprocess.dll içinde stdout yeniden yönlendirmesi başlatılamadı.
 
 * **ASP.NET Core modülü stdout günlüğü:** Günlük dosyası oluşturulmaz.
 
-* **ASP.NET Core modülü hata ayıklama günlüğü:** C:\Program Files\IIS\Asp.Net Core Module\v2\aspnetcorev2.dll' de stdout yeniden yönlendirmesi başlatılamadı. Özel durum iletisi: {PATH} \aspnetcoremodulev2\commonlib\fileoutputmanager.cpp: 84 konumunda HRESULT 0x80070005 döndürüldü. C:\Program Files\IIS\Asp.Net Core Module\v2\aspnetcorev2.dll' de stdout yeniden yönlendirmesi durdurulamadı. Özel durum iletisi: HRESULT 0x80070002 {PATH} konumunda döndürüldü. {PATH} \ aspnetcorev2_inprocess. dll içinde stdout yeniden yönlendirmesi başlatılamadı.
+* **ASP.NET Core modülü hata ayıklama günlüğü:** C:\Program Files\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll içinde stdout yeniden yönlendirmesi başlatılamadı. Özel durum iletisi: {PATH} \aspnetcoremodulev2\commonlib\fileoutputmanager.cpp: 84 konumunda HRESULT 0x80070005 döndürüldü. C:\Program Files\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll içinde stdout yeniden yönlendirmesi durdurulamadı. Özel durum iletisi: HRESULT 0x80070002 {PATH} konumunda döndürüldü. {PATH} \aspnetcorev2_inprocess.dll içinde stdout yeniden yönlendirmesi başlatılamadı.
 
 Sorun Giderme:
 
-* `stdoutLogFile` `<aspNetCore>` *Web. config* öğesinin öğesinde belirtilen yol yok. Daha fazla bilgi için bkz. [ASP.NET Core modülü: günlük oluşturma ve yeniden yönlendirme](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection).
+* `stdoutLogFile` `<aspNetCore>` *web.config* öğesinde belirtilen yol yok. Daha fazla bilgi için bkz. [ASP.NET Core modülü: günlük oluşturma ve yeniden yönlendirme](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection).
 
 * Uygulama havuzu kullanıcısının stdout günlük yoluna yazma erişimi yok.
 
@@ -336,7 +338,7 @@ Bu konudaki hataların listesi ayrıntılı değildir. Burada listelenmeyen bir 
 
 ## <a name="os-upgrade-removed-the-32-bit-aspnet-core-module"></a>İşletim sistemi yükseltmesi 32-bit ASP.NET Core modülünü kaldırdı
 
-**Uygulama günlüğü:** **C:\windows\system32\inetsrv\aspnetcore.dll** modül dll 'si yüklenemedi. Veriler hatadır.
+**Uygulama günlüğü:** Modül DLL **C:\WINDOWS\system32\inetsrv\aspnetcore.dll** yüklenemedi. Veriler hatadır.
 
 Sorun Giderme:
 
@@ -451,7 +453,7 @@ Sorun Giderme:
 
 * **Uygulama havuzu** > **işlem modelinin** > **Identity** **applicationpokaydentity** olarak ayarlandığından veya özel kimliğin uygulamanın dağıtım klasörüne erişmek için doğru izinlere sahip olduğundan emin olun.
 
-* ASP.NET Core barındırma paketini kaldırdıysanız ve barındırma paketinin önceki bir sürümünü yüklediyseniz *ApplicationHost. config* dosyası ASP.NET Core modülü için bir bölüm içermez. *ApplicationHost. config* dosyasını *% windir%/system32/inetsrv/config* konumunda açın ve `<configuration><configSections><sectionGroup name="system.webServer">` bölüm grubunu bulun. Bölüm grubunda ASP.NET Core modülünün bölümü eksikse, Bölüm öğesini ekleyin:
+* ASP.NET Core barındırma paketini kaldırdıysanız ve barındırma paketinin önceki bir sürümünü yüklediyseniz, *applicationHost.config* dosyası ASP.NET Core modülü için bir bölüm içermez. *% Windir%/system32/inetsrv/config* konumundaki *applicationHost.config* açın ve `<configuration><configSections><sectionGroup name="system.webServer">` bölüm grubunu bulun. Bölüm grubunda ASP.NET Core modülünün bölümü eksikse, Bölüm öğesini ekleyin:
 
   ```xml
   <section name="aspNetCore" overrideModeDefault="Allow" />
@@ -459,7 +461,7 @@ Sorun Giderme:
 
   Alternatif olarak, ASP.NET Core barındıran paketin en son sürümünü de yüklersiniz. En son sürüm, desteklenen ASP.NET Core uygulamalarla geriye dönük olarak uyumludur.
 
-## <a name="incorrect-processpath-missing-path-variable-hosting-bundle-not-installed-systemiis-not-restarted-vc-redistributable-not-installed-or-dotnetexe-access-violation"></a>Hatalı processPath, eksik yol değişkeni, barındırma paketi yüklü değil, sistem/IIS yeniden başlatılmadı, VC + + yeniden dağıtılabilir yüklü değil veya DotNet. exe erişim ihlali
+## <a name="incorrect-processpath-missing-path-variable-hosting-bundle-not-installed-systemiis-not-restarted-vc-redistributable-not-installed-or-dotnetexe-access-violation"></a>Hatalı processPath, eksik yol değişkeni, barındırma paketi yüklü değil, sistem/IIS yeniden başlatılmadı, VC + + yeniden dağıtılabilir yüklü değil veya dotnet.exe erişim ihlali
 
 * **Tarayıcı:** HTTP hatası 502,5-Işlem hatası
 
@@ -471,11 +473,11 @@ Sorun Giderme:
 
 * Uygulamanın Kestrel üzerinde yerel olarak çalıştığını doğrulayın. İşlem hatası, uygulamanın içindeki bir sorunun sonucu olabilir. Daha fazla bilgi için bkz. <xref:test/troubleshoot-azure-iis>.
 
-* *processPath* `<aspNetCore>` Bir çerçeveye bağımlı dağıtım (FDD) veya *web.config* `dotnet` `.\{ASSEMBLY}.exe` [kendi kendine ait dağıtım (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd)Için olduğunu doğrulamak üzere Web. config dosyasındaki öğesindeki processPath özniteliğini denetleyin.
+* *processPath* `<aspNetCore>` *web.config* `dotnet` Çerçeveye bağlı bir dağıtım (FDD) veya `.\{ASSEMBLY}.exe` [kendi kendine ait dağıtım (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd)için olduğunu doğrulamak üzereweb.configöğesinde öğesindeki processPath özniteliğini denetleyin.
 
-* FDD için, *DotNet. exe* ' nin yol ayarları aracılığıyla erişilebilir olmayabilir. *C:\Program Files\dotnet \\ * dosyasının sistem yolu ayarlarında bulunduğunu onaylayın.
+* FDD için *dotnet.exe* yol ayarları aracılığıyla erişilebilir olmayabilir. *C:\Program Files\dotnet \\ * dosyasının sistem yolu ayarlarında bulunduğunu onaylayın.
 
-* FDD için, *DotNet. exe* ' yi uygulama havuzunun Kullanıcı kimliği için erişilebilir olmayabilir. Uygulama havuzu Kullanıcı kimliğinin *C:\Program Files\dotnet* dizinine erişimi olduğunu doğrulayın. *C:\Program Files\dotnet* ve uygulama dizinlerindeki uygulama havuzu Kullanıcı kimliği için yapılandırılmış reddetme kuralı olmadığını doğrulayın.
+* FDD için, uygulama havuzunun Kullanıcı kimliği için *dotnet.exe* erişilebilir olmayabilir. Uygulama havuzu Kullanıcı kimliğinin *C:\Program Files\dotnet* dizinine erişimi olduğunu doğrulayın. *C:\Program Files\dotnet* ve uygulama dizinlerindeki uygulama havuzu Kullanıcı kimliği için yapılandırılmış reddetme kuralı olmadığını doğrulayın.
 
 * Bir FDD dağıtılmış ve IIS 'nin yeniden başlatılmasına gerek kalmadan .NET Core yüklenmiş olabilir. Bir komut isteminden net **stop was/y** ve ardından **net start w3svc** ' i yürüterek sunucuyu YENIDEN başlatın ya da IIS 'yi yeniden başlatın.
 
@@ -499,7 +501,7 @@ Sorun Giderme:
 
 * Uygulamanın Kestrel üzerinde yerel olarak çalıştığını doğrulayın. İşlem hatası, uygulamanın içindeki bir sorunun sonucu olabilir. Daha fazla bilgi için bkz. <xref:test/troubleshoot-azure-iis>.
 
-* Web. config dosyasındaki *bağımsız değişkenler* özniteliğini inceleyerek, bir `<aspNetCore>` *web.config* `.\{ASSEMBLY}.dll` çerçeveye bağımlı dağıtım (FDD) veya (b) yok, boş bir dize ( `arguments=""` ) veya bağımsız `arguments="{ARGUMENT_1}, {ARGUMENT_2}, ... {ARGUMENT_X}"` bir dağıtım (SCD) için uygulamanın bağımsız değişkenlerinin bir listesini () doğrulayın.
+* Bir *arguments* `<aspNetCore>` *web.config* `.\{ASSEMBLY}.dll` çerçeveye bağımlı dağıtım (FDD) veya (b) yok, boş bir dize ( `arguments=""` ) veya bağımsız `arguments="{ARGUMENT_1}, {ARGUMENT_2}, ... {ARGUMENT_X}"` bir dağıtım (SCD) için uygulamanın bağımsız değişkenlerinin bir listesini () doğrulamak üzereweb.configöğesinde öğesindeki arguments özniteliğini inceleyin.
 
 Sorun Giderme:
 
@@ -527,7 +529,7 @@ Uygulama havuzunun *durdurulmuş* durumda olmadığını onaylayın.
 
 Sorun Giderme:
 
-Alt uygulamanın *Web. config* dosyasının bir bölüm içermediğinden emin olun `<handlers>` .
+Alt uygulamanın *web.config* dosyasının bir bölüm içermediğinden emin olun `<handlers>` .
 
 ## <a name="stdout-log-path-incorrect"></a>stdout günlük yolu yanlış
 
@@ -539,7 +541,7 @@ Alt uygulamanın *Web. config* dosyasının bir bölüm içermediğinden emin ol
 
 Sorun Giderme:
 
-* `stdoutLogFile` `<aspNetCore>` *Web. config* öğesinin öğesinde belirtilen yol yok. Daha fazla bilgi için bkz. [ASP.NET Core modülü: günlük oluşturma ve yeniden yönlendirme](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection).
+* `stdoutLogFile` `<aspNetCore>` *web.config* öğesinde belirtilen yol yok. Daha fazla bilgi için bkz. [ASP.NET Core modülü: günlük oluşturma ve yeniden yönlendirme](xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection).
 
 * Uygulama havuzu kullanıcısının stdout günlük yoluna yazma erişimi yok.
 

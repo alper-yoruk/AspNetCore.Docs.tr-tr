@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authorization/simple
-ms.openlocfilehash: b5f97038145ed479c315af50a35d6c64d85425a7
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: 497103a14591476f3167602631b6b011264f5086
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652954"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408337"
 ---
 # <a name="simple-authorization-in-aspnet-core"></a>ASP.NET Core basit yetkilendirme
 
@@ -58,7 +60,7 @@ public class AccountController : Controller
 
 Artık yalnızca kimliği doğrulanmış kullanıcılar işleve erişebilir `Logout` .
 
-Ayrıca, `AllowAnonymous` kimliği doğrulanmamış kullanıcıların tek tek eylemlere erişimine izin vermek için özniteliğini de kullanabilirsiniz. Örnek:
+Ayrıca, `AllowAnonymous` kimliği doğrulanmamış kullanıcıların tek tek eylemlere erişimine izin vermek için özniteliğini de kullanabilirsiniz. Örneğin:
 
 ```csharp
 [Authorize]
@@ -84,7 +86,7 @@ Bu, `AccountController` `Login` kimliği doğrulanmış veya kimliği doğrulanm
 
 ## <a name="authorize-attribute-and-razor-pages"></a>Özniteliği ve Razor sayfaları yetkilendir
 
-<xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ***not*** Razor Sayfa işleyicilerine uygulanamıyor. Örneğin,, `[Authorize]` `OnGet` `OnPost` veya diğer sayfa işleyicisine uygulanamaz.
+<xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ***not*** Razor Sayfa işleyicilerine uygulanamıyor. Örneğin,, `[Authorize]` `OnGet` `OnPost` veya diğer sayfa işleyicisine uygulanamaz. Farklı işleyiciler için farklı yetkilendirme gereksinimlerine sahip sayfalar için ASP.NET Core MVC denetleyicisi kullanmayı göz önünde bulundurun.
 
 Aşağıdaki iki yaklaşım, sayfa işleyici yöntemlerine yetkilendirme uygulamak için kullanılabilir Razor :
 

@@ -8,23 +8,25 @@ ms.custom: mvc
 ms.date: 4/17/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: 268c507ee35c9c0432c3dd2da2a389308531b9f1
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: eb0797a26393ce425d07ea9a97109b7fe8983f91
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775602"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407882"
 ---
 # <a name="net-generic-host"></a>.NET genel ana bilgisayar
 
 ::: moniker range=">= aspnetcore-3.0 <= aspnetcore-3.1"
 
-ASP.NET Core şablonları bir .NET Core genel ana bilgisayarı oluşturur <xref:Microsoft.Extensions.Hosting.HostBuilder>.
+ASP.NET Core şablonları bir .NET Core genel ana bilgisayarı oluşturur <xref:Microsoft.Extensions.Hosting.HostBuilder> .
 
 ## <a name="host-definition"></a>Ana bilgisayar tanımı
 
@@ -35,16 +37,16 @@ ASP.NET Core şablonları bir .NET Core genel ana bilgisayarı oluşturur <xref:
 * Yapılandırma
 * `IHostedService`uygulamalarını
 
-Bir konak başlatıldığında, bu uygulamanın, `IHostedService.StartAsync` dı kapsayıcısında bulduğu her <xref:Microsoft.Extensions.Hosting.IHostedService> bir uygulamasına çağrı yapılır. Bir Web uygulamasında, `IHostedService` uygulamalardan biri [http sunucu uygulaması](xref:fundamentals/index#servers)Başlatan bir Web hizmetidir.
+Bir konak başlatıldığında, bu uygulamanın, `IHostedService.StartAsync` dı kapsayıcısında bulduğu her bir uygulamasına çağrı yapılır <xref:Microsoft.Extensions.Hosting.IHostedService> . Bir Web uygulamasında, `IHostedService` uygulamalardan biri [http sunucu uygulaması](xref:fundamentals/index#servers)Başlatan bir Web hizmetidir.
 
 Uygulamanın tüm birbirine bağlı kaynaklarını tek bir nesnede dahil etmek için başlıca neden, yaşam süresi yönetimi: uygulama başlatma ve düzgün kapanma üzerinde denetim.
 
 ## <a name="set-up-a-host"></a>Konak ayarlama
 
-Ana bilgisayar genellikle `Program` sınıfında kodla yapılandırılır, oluşturulur ve çalıştırılır. `Main` Yöntemi:
+Ana bilgisayar genellikle sınıfında kodla yapılandırılır, oluşturulur ve çalıştırılır `Program` . `Main`Yöntemi:
 
-* Bir Oluşturucu `CreateHostBuilder` nesnesi oluşturmak ve yapılandırmak için bir yöntem çağırır.
-* Oluşturucu `Build` nesnesindeki `Run` çağrılar ve Yöntemler.
+* `CreateHostBuilder`Bir Oluşturucu nesnesi oluşturmak ve yapılandırmak için bir yöntem çağırır.
+* `Build` `Run` Oluşturucu nesnesindeki çağrılar ve Yöntemler.
 
 ASP.NET Core Web şablonları, genel bir konak oluşturmak için aşağıdaki kodu oluşturur:
 
@@ -65,7 +67,7 @@ public class Program
 }
 ```
 
-Aşağıdaki kod, HTTP olmayan iş yükünü kullanan genel bir konak oluşturur. `IHostedService` Uygulama, dı kapsayıcısına eklenir:
+Aşağıdaki kod, HTTP olmayan iş yükünü kullanan genel bir konak oluşturur. `IHostedService`Uygulama, dı kapsayıcısına eklenir:
 
 ```csharp
 public class Program
@@ -84,7 +86,7 @@ public class Program
 }
 ```
 
-Bir HTTP iş yükü için `Main` yöntem aynıdır ancak `CreateHostBuilder` çağrılır: `ConfigureWebHostDefaults`
+Bir HTTP iş yükü için `Main` yöntem aynıdır ancak çağrılır `CreateHostBuilder` `ConfigureWebHostDefaults` :
 
 ```csharp
 public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -97,20 +99,20 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 Yukarıdaki kod ASP.NET Core şablonları tarafından oluşturulur.
 
-Uygulama Entity Framework Core kullanıyorsa, `CreateHostBuilder` yöntemin adını veya imzasını değiştirmeyin. [Entity Framework Core araçları](/ef/core/miscellaneous/cli/) , uygulamayı çalıştırmadan Konağı yapılandıran `CreateHostBuilder` bir yöntem bulmayı bekler. Daha fazla bilgi için bkz. [Tasarım zamanı DbContext oluşturma](/ef/core/miscellaneous/cli/dbcontext-creation).
+Uygulama Entity Framework Core kullanıyorsa, yöntemin adını veya imzasını değiştirmeyin `CreateHostBuilder` . [Entity Framework Core araçları](/ef/core/miscellaneous/cli/) , `CreateHostBuilder` uygulamayı çalıştırmadan Konağı yapılandıran bir yöntem bulmayı bekler. Daha fazla bilgi için bkz. [Tasarım zamanı DbContext oluşturma](/ef/core/miscellaneous/cli/dbcontext-creation).
 
 ## <a name="default-builder-settings"></a>Varsayılan Oluşturucu ayarları
 
-<xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> Yöntemi:
+<xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*>Yöntemi:
 
-* [İçerik kökünü](xref:fundamentals/index#content-root) tarafından <xref:System.IO.Directory.GetCurrentDirectory*>döndürülen yola ayarlar.
+* [İçerik kökünü](xref:fundamentals/index#content-root) tarafından döndürülen yola ayarlar <xref:System.IO.Directory.GetCurrentDirectory*> .
 * Ana bilgisayar yapılandırmasını şuradan yükler:
-  * Ön eki olan `DOTNET_`ortam değişkenleri.
+  * Ön eki olan ortam değişkenleri `DOTNET_` .
   * Komut satırı bağımsız değişkenleri.
 * Uygulama yapılandırmasını şuradan yükler:
-  * *appSettings. JSON*.
+  * *Üzerindeappsettings.js*.
   * *appSettings. {Environment}. JSON*.
-  * [Secret Manager](xref:security/app-secrets) Uygulama `Development` ortamda çalıştığında gizli dizi Yöneticisi.
+  * Uygulama ortamda çalıştığında [gizli dizi Yöneticisi](xref:security/app-secrets) `Development` .
   * Ortam değişkenleri.
   * Komut satırı bağımsız değişkenleri.
 * Aşağıdaki [günlük](xref:fundamentals/logging/index) sağlayıcılarını ekler:
@@ -120,13 +122,13 @@ Uygulama Entity Framework Core kullanıyorsa, `CreateHostBuilder` yöntemin adı
   * Olay günlüğü (yalnızca Windows üzerinde çalışırken)
 * Ortam geliştirme sırasında [kapsam doğrulaması](xref:fundamentals/dependency-injection#scope-validation) ve [bağımlılık doğrulaması](xref:Microsoft.Extensions.DependencyInjection.ServiceProviderOptions.ValidateOnBuild) etkinleştirilir.
 
-`ConfigureWebHostDefaults` Yöntemi:
+`ConfigureWebHostDefaults`Yöntemi:
 
-* Ön ekli ortam değişkenlerinden ana bilgisayar yapılandırmasını yükler `ASPNETCORE_`.
-* [Kestrel](xref:fundamentals/servers/kestrel) sunucusunu Web sunucusu olarak ayarlar ve uygulamanın barındırma yapılandırma sağlayıcılarını kullanarak yapılandırır. Kestrel sunucusunun varsayılan seçenekleri için bkz <xref:fundamentals/servers/kestrel#kestrel-options>..
+* Ön ekli ortam değişkenlerinden ana bilgisayar yapılandırmasını yükler `ASPNETCORE_` .
+* [Kestrel](xref:fundamentals/servers/kestrel) sunucusunu Web sunucusu olarak ayarlar ve uygulamanın barındırma yapılandırma sağlayıcılarını kullanarak yapılandırır. Kestrel sunucusunun varsayılan seçenekleri için bkz <xref:fundamentals/servers/kestrel#kestrel-options> ..
 * [Ana bilgisayar filtreleme ara yazılımı](xref:fundamentals/servers/kestrel#host-filtering)ekler.
-* `ASPNETCORE_FORWARDEDHEADERS_ENABLED` Eşitse `true`, [iletilen üstbilgiler ara yazılımı](xref:host-and-deploy/proxy-load-balancer#forwarded-headers) ekler.
-* IIS tümleştirmesini etkinleştirilir. IIS varsayılan seçenekleri için bkz <xref:host-and-deploy/iis/index#iis-options>..
+* Eşitse, [Iletilen üstbilgiler ara yazılımı](xref:host-and-deploy/proxy-load-balancer#forwarded-headers) ekler `ASPNETCORE_FORWARDEDHEADERS_ENABLED` `true` .
+* IIS tümleştirmesini etkinleştirilir. IIS varsayılan seçenekleri için bkz <xref:host-and-deploy/iis/index#iis-options> ..
 
 Bu makalenin ilerleyen kısımlarında [Web Apps bölümlerine yönelik](#settings-for-web-apps) [tüm uygulama türleri](#settings-for-all-app-types) ve ayarlarının ayarları, varsayılan Oluşturucu ayarlarının nasıl geçersiz kılınacağını göstermektedir.
 
@@ -138,44 +140,44 @@ Aşağıdaki hizmetler otomatik olarak kaydedilir:
 * [Ihostlifetime](#ihostlifetime)
 * [Ihostenvironment/ıwebhostenvironment](#ihostenvironment)
 
-Framework tarafından sunulan hizmetler hakkında daha fazla bilgi için bkz <xref:fundamentals/dependency-injection#framework-provided-services>..
+Framework tarafından sunulan hizmetler hakkında daha fazla bilgi için bkz <xref:fundamentals/dependency-injection#framework-provided-services> ..
 
 ## <a name="ihostapplicationlifetime"></a>Ihostapplicationlifetime
 
-Başlatma sonrası <xref:Microsoft.Extensions.Hosting.IHostApplicationLifetime> ve düzgün `IApplicationLifetime`kapanma görevlerini işlemek için herhangi bir sınıfa (eski adıyla) hizmetini ekleyin. Arabirimdeki üç özellik, uygulama başlatma ve uygulama durdurma olay işleyicisi yöntemlerini kaydetmek için kullanılan iptal belirteçleridir. Arabirim Ayrıca bir `StopApplication` yöntemi içerir.
+<xref:Microsoft.Extensions.Hosting.IHostApplicationLifetime> `IApplicationLifetime` Başlatma sonrası ve düzgün kapanma görevlerini işlemek için herhangi bir sınıfa (eski adıyla) hizmetini ekleyin. Arabirimdeki üç özellik, uygulama başlatma ve uygulama durdurma olay işleyicisi yöntemlerini kaydetmek için kullanılan iptal belirteçleridir. Arabirim Ayrıca bir yöntemi içerir `StopApplication` .
 
-Aşağıdaki örnek, olayları kaydeden `IHostedService` `IHostApplicationLifetime` bir uygulamasıdır:
+Aşağıdaki örnek, `IHostedService` olayları kaydeden bir uygulamasıdır `IHostApplicationLifetime` :
 
 [!code-csharp[](generic-host/samples-snapshot/3.x/LifetimeEventsHostedService.cs?name=snippet_LifetimeEvents)]
 
 ## <a name="ihostlifetime"></a>Ihostlifetime
 
-<xref:Microsoft.Extensions.Hosting.IHostLifetime> Uygulama, ana bilgisayar başladığında ve durdurulduğunda denetler. Kaydedilen son uygulama kullanılır.
+<xref:Microsoft.Extensions.Hosting.IHostLifetime>Uygulama, ana bilgisayar başladığında ve durdurulduğunda denetler. Kaydedilen son uygulama kullanılır.
 
 `Microsoft.Extensions.Hosting.Internal.ConsoleLifetime`Varsayılan `IHostLifetime` uygulama. `ConsoleLifetime`:
 
-* <kbd>CTRL</kbd>+<kbd>C</kbd>/sigint veya sigterm 'i dinler ve kapalı <xref:Microsoft.Extensions.Hosting.IHostApplicationLifetime.StopApplication*> işlemini başlatmak için çağırır.
+* <kbd>CTRL</kbd> + <kbd>C</kbd>/sigint veya sigterm 'i dinler ve <xref:Microsoft.Extensions.Hosting.IHostApplicationLifetime.StopApplication*> kapalı işlemini başlatmak için çağırır.
 * [RunAsync](#runasync) ve [Waitforshutdownasync](#waitforshutdownasync)gibi uzantıları kaldırır.
 
 ## <a name="ihostenvironment"></a>Ihostenvironment
 
-Aşağıdaki ayarlarla <xref:Microsoft.Extensions.Hosting.IHostEnvironment> ilgili bilgi almak için hizmeti bir sınıfa ekleyin:
+<xref:Microsoft.Extensions.Hosting.IHostEnvironment>Aşağıdaki ayarlarla ilgili bilgi almak için hizmeti bir sınıfa ekleyin:
 
 * [ApplicationName](#applicationname)
 * [EnvironmentName](#environmentname)
 * [Contentrootyolu](#contentroot)
 
-Web Apps, `IWebHostEnvironment` [WebRootPath](#webroot)öğesini devralan `IHostEnvironment` ve ekleyen arabirimini uygular.
+Web Apps, `IWebHostEnvironment` WebRootPath öğesini devralan `IHostEnvironment` ve ekleyen arabirimini uygular. [WebRootPath](#webroot)
 
 ## <a name="host-configuration"></a>Konak yapılandırması
 
-Ana bilgisayar yapılandırması, <xref:Microsoft.Extensions.Hosting.IHostEnvironment> uygulamanın özellikleri için kullanılır.
+Ana bilgisayar yapılandırması, uygulamanın özellikleri için kullanılır <xref:Microsoft.Extensions.Hosting.IHostEnvironment> .
 
-Konak yapılandırması, içinde <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*> [Hostbuildercontext. Configuration](xref:Microsoft.Extensions.Hosting.HostBuilderContext.Configuration) içinden kullanılabilir. Sonra `ConfigureAppConfiguration`, `HostBuilderContext.Configuration` uygulama yapılandırması ile değiştirilmiştir.
+Ana Bilgisayar Yapılandırması içinde [HostBuilderContext.Configurlama](xref:Microsoft.Extensions.Hosting.HostBuilderContext.Configuration) tarafından kullanılabilir <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*> . Sonra `ConfigureAppConfiguration` , `HostBuilderContext.Configuration` uygulama yapılandırması ile değiştirilmiştir.
 
-Konak yapılandırması eklemek için üzerinde <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureHostConfiguration*> `IHostBuilder`öğesini çağırın. `ConfigureHostConfiguration`, eklenebilir sonuçlarla birden çok kez çağrılabilir. Ana bilgisayar, belirli bir anahtardaki bir değeri en son belirleyen seçeneği kullanır.
+Konak yapılandırması eklemek için üzerinde öğesini <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureHostConfiguration*> çağırın `IHostBuilder` . `ConfigureHostConfiguration`, eklenebilir sonuçlarla birden çok kez çağrılabilir. Ana bilgisayar, belirli bir anahtardaki bir değeri en son belirleyen seçeneği kullanır.
 
-Ön ek `DOTNET_` ve komut satırı bağımsız değişkenlerine sahip ortam değişkeni sağlayıcısı tarafından `CreateDefaultBuilder`dahildir. Web Apps için, ön ekine `ASPNETCORE_` sahip ortam değişkeni sağlayıcısı eklenir. Ortam değişkenleri okurken ön ek kaldırılır. Örneğin, için `ASPNETCORE_ENVIRONMENT` ortam değişkeni değeri, `environment` anahtar için ana bilgisayar yapılandırma değeri olur.
+Ön ek `DOTNET_` ve komut satırı bağımsız değişkenlerine sahip ortam değişkeni sağlayıcısı tarafından dahildir `CreateDefaultBuilder` . Web Apps için, ön ekine sahip ortam değişkeni sağlayıcısı `ASPNETCORE_` eklenir. Ortam değişkenleri okurken ön ek kaldırılır. Örneğin, için ortam değişkeni değeri, `ASPNETCORE_ENVIRONMENT` anahtar için ana bilgisayar yapılandırma değeri olur `environment` .
 
 Aşağıdaki örnek ana bilgisayar yapılandırması oluşturur:
 
@@ -183,15 +185,15 @@ Aşağıdaki örnek ana bilgisayar yapılandırması oluşturur:
 
 ## <a name="app-configuration"></a>Uygulama yapılandırması
 
-Uygulama yapılandırması, üzerinde <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*> `IHostBuilder`çağırarak oluşturulur. `ConfigureAppConfiguration`, eklenebilir sonuçlarla birden çok kez çağrılabilir. Uygulama, belirli bir anahtardaki bir değeri en son belirleyen seçeneği kullanır. 
+Uygulama yapılandırması, üzerinde çağırarak oluşturulur <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*> `IHostBuilder` . `ConfigureAppConfiguration`, eklenebilir sonuçlarla birden çok kez çağrılabilir. Uygulama, belirli bir anahtardaki bir değeri en son belirleyen seçeneği kullanır. 
 
-Tarafından `ConfigureAppConfiguration` oluşturulan yapılandırma, sonraki Işlemler ve dı hizmeti olarak, [hostbuildercontext. Configuration](xref:Microsoft.Extensions.Hosting.HostBuilderContext.Configuration*) konumunda kullanılabilir. Konak yapılandırması, uygulama yapılandırmasına de eklenir.
+Tarafından oluşturulan yapılandırma, `ConfigureAppConfiguration` sonraki işlemler ve dı hizmeti olarak [HostBuilderContext.Config](xref:Microsoft.Extensions.Hosting.HostBuilderContext.Configuration*) bir hizmet olarak sunulmaktadır. Konak yapılandırması, uygulama yapılandırmasına de eklenir.
 
 Daha fazla bilgi için [ASP.NET Core yapılandırma](xref:fundamentals/configuration/index#configureappconfiguration)konusuna bakın.
 
 ## <a name="settings-for-all-app-types"></a>Tüm uygulama türleri için ayarlar
 
-Bu bölüm, hem HTTP hem de HTTP olmayan iş yükleri için uygulanan konak ayarlarını listeler. Varsayılan olarak, bu ayarları yapılandırmak için kullanılan ortam değişkenlerinin bir `DOTNET_` veya `ASPNETCORE_` öneki olabilir.
+Bu bölüm, hem HTTP hem de HTTP olmayan iş yükleri için uygulanan konak ayarlarını listeler. Varsayılan olarak, bu ayarları yapılandırmak için kullanılan ortam değişkenlerinin bir `DOTNET_` veya öneki olabilir `ASPNETCORE_` .
 
 <!-- In the following sections, two spaces at end of line are used to force line breaks in the rendered page. -->
 
@@ -215,7 +217,7 @@ Bu değeri ayarlamak için ortam değişkenini kullanın.
 **Varsayılan**: uygulama derlemesinin bulunduğu klasör.  
 **Ortam değişkeni**:`<PREFIX_>CONTENTROOT`
 
-Bu değeri ayarlamak için, ortam değişkenini kullanın veya üzerinde `UseContentRoot` `IHostBuilder`arama yapın:
+Bu değeri ayarlamak için, ortam değişkenini kullanın veya üzerinde arama `UseContentRoot` yapın `IHostBuilder` :
 
 ```csharp
 Host.CreateDefaultBuilder(args)
@@ -230,14 +232,14 @@ Daha fazla bilgi için bkz.
 
 ### <a name="environmentname"></a>EnvironmentName
 
-[Ihostenvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostEnvironment.EnvironmentName*) özelliği herhangi bir değere ayarlanabilir. Çerçeve tanımlı değerler, `Development` `Staging`, ve `Production`içerir. Değerler büyük/küçük harfe duyarlı değildir.
+[Ihostenvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostEnvironment.EnvironmentName*) özelliği herhangi bir değere ayarlanabilir. Çerçeve tanımlı değerler,, `Development` `Staging` ve içerir `Production` . Değerler büyük/küçük harfe duyarlı değildir.
 
 **Anahtar**:`environment`  
 **Şunu yazın**:`string`  
 **Varsayılan**:`Production`  
 **Ortam değişkeni**:`<PREFIX_>ENVIRONMENT`
 
-Bu değeri ayarlamak için, ortam değişkenini kullanın veya üzerinde `UseEnvironment` `IHostBuilder`arama yapın:
+Bu değeri ayarlamak için, ortam değişkenini kullanın veya üzerinde arama `UseEnvironment` yapın `IHostBuilder` :
 
 ```csharp
 Host.CreateDefaultBuilder(args)
@@ -247,7 +249,7 @@ Host.CreateDefaultBuilder(args)
 
 ### <a name="shutdowntimeout"></a>ShutdownTimeout
 
-[Hostoptions. ShutdownTimeout](xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*) , için <xref:Microsoft.Extensions.Hosting.IHost.StopAsync*>zaman aşımını ayarlar. Varsayılan değer beş saniyedir.  Zaman aşımı süresi boyunca ana bilgisayar:
+[Hostoptions. ShutdownTimeout](xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*) , için zaman aşımını ayarlar <xref:Microsoft.Extensions.Hosting.IHost.StopAsync*> . Varsayılan değer beş saniyedir.  Zaman aşımı süresi boyunca ana bilgisayar:
 
 * [Ihostapplicationlifetime. Applicationdurduruluyor](/dotnet/api/microsoft.extensions.hosting.ihostapplicationlifetime.applicationstopping)tetikler.
 * Üzerinde durmayacak hizmetler için barındırılan Hizmetleri durdurma ve hataları günlüğe kaydetme girişimleri.
@@ -259,15 +261,15 @@ Tüm barındırılan hizmetler durmadan önce zaman aşımı süresi dolarsa, uy
 **Varsayılan**: 5 saniye  
 **Ortam değişkeni**:`<PREFIX_>SHUTDOWNTIMEOUTSECONDS`
 
-Bu değeri ayarlamak için, ortam değişkenini kullanın veya yapılandırın `HostOptions`. Aşağıdaki örnek, zaman aşımını 20 saniye olarak ayarlar:
+Bu değeri ayarlamak için, ortam değişkenini kullanın veya yapılandırın `HostOptions` . Aşağıdaki örnek, zaman aşımını 20 saniye olarak ayarlar:
 
 [!code-csharp[](generic-host/samples-snapshot/3.x/Program.cs?name=snippet_HostOptions)]
 
 ## <a name="settings-for-web-apps"></a>Web Apps ayarları
 
-Bazı konak ayarları yalnızca HTTP iş yükleri için geçerlidir. Varsayılan olarak, bu ayarları yapılandırmak için kullanılan ortam değişkenlerinin bir `DOTNET_` veya `ASPNETCORE_` öneki olabilir.
+Bazı konak ayarları yalnızca HTTP iş yükleri için geçerlidir. Varsayılan olarak, bu ayarları yapılandırmak için kullanılan ortam değişkenlerinin bir `DOTNET_` veya öneki olabilir `ASPNETCORE_` .
 
-Üzerinde `IWebHostBuilder` uzantı yöntemleri bu ayarlar için kullanılabilir. Aşağıdaki örnekte olduğu gibi, ' nin `webBuilder` `IWebHostBuilder`bir örneği olduğunu belirten uzantı yöntemlerinin nasıl çağrılacağını gösteren kod örnekleri:
+Üzerinde uzantı yöntemleri `IWebHostBuilder` Bu ayarlar için kullanılabilir. `webBuilder` `IWebHostBuilder` Aşağıdaki örnekte olduğu gibi, ' nin bir örneği olduğunu belirten uzantı yöntemlerinin nasıl çağrılacağını gösteren kod örnekleri:
 
 ```csharp
 public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -281,14 +283,14 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 ### <a name="capturestartuperrors"></a>CaptureStartupErrors
 
-Ne `false`zaman, başlatma sırasında oluşan hata, ana bilgisayardan çıkılıyor. Ne `true`zaman, ana bilgisayar başlangıç sırasında özel durumları yakalar ve sunucuyu başlatmaya çalışır.
+Ne zaman `false` , başlatma sırasında oluşan hata, ana bilgisayardan çıkılıyor. Ne zaman `true` , ana bilgisayar başlangıç sırasında özel durumları yakalar ve sunucuyu başlatmaya çalışır.
 
 **Anahtar**:`captureStartupErrors`  
-**Tür**: `bool` (`true` veya `1`)  
-**Varsayılan**: uygulamanın IIS `false` arkasındaki Kestrel, varsayılan olarak olduğu `true`durumlar dışında çalışır.  
+**Tür**: `bool` ( `true` veya `1` )  
+**Varsayılan**: `false` uygulamanın IIS arkasındaki Kestrel, varsayılan olarak olduğu durumlar dışında çalışır `true` .  
 **Ortam değişkeni**:`<PREFIX_>CAPTURESTARTUPERRORS`
 
-Bu değeri ayarlamak için yapılandırma veya çağırma `CaptureStartupErrors`kullanın:
+Bu değeri ayarlamak için yapılandırma veya çağırma kullanın `CaptureStartupErrors` :
 
 ```csharp
 webBuilder.CaptureStartupErrors(true);
@@ -296,14 +298,14 @@ webBuilder.CaptureStartupErrors(true);
 
 ### <a name="detailederrors"></a>DetailedErrors
 
-Etkinleştirildiğinde veya ortam `Development`olduğunda, uygulama ayrıntılı hataları yakalar.
+Etkinleştirildiğinde veya ortam olduğunda, `Development` uygulama ayrıntılı hataları yakalar.
 
 **Anahtar**:`detailedErrors`  
-**Tür**: `bool` (`true` veya `1`)  
+**Tür**: `bool` ( `true` veya `1` )  
 **Varsayılan**:`false`  
 **Ortam değişkeni**:`<PREFIX_>_DETAILEDERRORS`
 
-Bu değeri ayarlamak için yapılandırma veya çağırma `UseSetting`kullanın:
+Bu değeri ayarlamak için yapılandırma veya çağırma kullanın `UseSetting` :
 
 ```csharp
 webBuilder.UseSetting(WebHostDefaults.DetailedErrorsKey, "true");
@@ -318,7 +320,7 @@ Başlangıçta yüklenecek başlangıç derlemelerinin barındırılması için 
 **Varsayılan**: boş dize  
 **Ortam değişkeni**:`<PREFIX_>_HOSTINGSTARTUPASSEMBLIES`
 
-Bu değeri ayarlamak için yapılandırma veya çağırma `UseSetting`kullanın:
+Bu değeri ayarlamak için yapılandırma veya çağırma kullanın `UseSetting` :
 
 ```csharp
 webBuilder.UseSetting(WebHostDefaults.HostingStartupAssembliesKey, "assembly1;assembly2");
@@ -333,7 +335,7 @@ Başlangıçta dışlamak üzere başlangıç derlemelerinin barındırılması 
 **Varsayılan**: boş dize  
 **Ortam değişkeni**:`<PREFIX_>_HOSTINGSTARTUPEXCLUDEASSEMBLIES`
 
-Bu değeri ayarlamak için yapılandırma veya çağırma `UseSetting`kullanın:
+Bu değeri ayarlamak için yapılandırma veya çağırma kullanın `UseSetting` :
 
 ```csharp
 webBuilder.UseSetting(WebHostDefaults.HostingStartupExcludeAssembliesKey, "assembly1;assembly2");
@@ -348,7 +350,7 @@ HTTPS yeniden yönlendirme bağlantı noktası. [Https zorlama](xref:security/en
 **Varsayılan**: varsayılan değer ayarlı değildir.  
 **Ortam değişkeni**:`<PREFIX_>HTTPS_PORT`
 
-Bu değeri ayarlamak için yapılandırma veya çağırma `UseSetting`kullanın:
+Bu değeri ayarlamak için yapılandırma veya çağırma kullanın `UseSetting` :
 
 ```csharp
 webBuilder.UseSetting("https_port", "8080");
@@ -356,14 +358,14 @@ webBuilder.UseSetting("https_port", "8080");
 
 ### <a name="preferhostingurls"></a>Tercih Hostingurl 'Leri
 
-Konağın `IWebHostBuilder` `IServer` uygulamayla yapılandırılmış URL 'Ler yerine ile yapılandırılan URL 'lerde dinleme yapıp kullanmayacağını belirtir.
+Konağın uygulamayla yapılandırılmış URL 'Ler yerine ile yapılandırılan URL 'lerde dinleme yapıp kullanmayacağını belirtir `IWebHostBuilder` `IServer` .
 
 **Anahtar**:`preferHostingUrls`  
-**Tür**: `bool` (`true` veya `1`)  
+**Tür**: `bool` ( `true` veya `1` )  
 **Varsayılan**:`true`  
 **Ortam değişkeni**:`<PREFIX_>_PREFERHOSTINGURLS`
 
-Bu değeri ayarlamak için, ortam değişkenini veya çağrısını `PreferHostingUrls`kullanın:
+Bu değeri ayarlamak için, ortam değişkenini veya çağrısını kullanın `PreferHostingUrls` :
 
 ```csharp
 webBuilder.PreferHostingUrls(false);
@@ -374,11 +376,11 @@ webBuilder.PreferHostingUrls(false);
 Uygulamanın derlemesi tarafından yapılandırılan başlatma derlemelerinin barındırılması dahil olmak üzere, barındırma başlangıç derlemelerinin otomatik yüklenmesini engeller. Daha fazla bilgi için bkz. <xref:fundamentals/configuration/platform-specific-configuration>.
 
 **Anahtar**:`preventHostingStartup`  
-**Tür**: `bool` (`true` veya `1`)  
+**Tür**: `bool` ( `true` veya `1` )  
 **Varsayılan**:`false`  
 **Ortam değişkeni**:`<PREFIX_>_PREVENTHOSTINGSTARTUP`
 
-Bu değeri ayarlamak için, ortam değişkenini veya çağrısını `UseSetting` kullanın:
+Bu değeri ayarlamak için, ortam değişkenini veya çağrısını kullanın `UseSetting` :
 
 ```csharp
 webBuilder.UseSetting(WebHostDefaults.PreventHostingStartupKey, "true");
@@ -386,14 +388,14 @@ webBuilder.UseSetting(WebHostDefaults.PreventHostingStartupKey, "true");
 
 ### <a name="startupassembly"></a>StartupAssembly
 
-`Startup` Sınıfı aramak için bütünleştirilmiş kod.
+Sınıfı aramak için bütünleştirilmiş kod `Startup` .
 
 **Anahtar**:`startupAssembly`  
 **Şunu yazın**:`string`  
 **Varsayılan**: uygulamanın derlemesi  
 **Ortam değişkeni**:`<PREFIX_>STARTUPASSEMBLY`
 
-Bu değeri ayarlamak için, ortam değişkenini veya çağrısını `UseStartup`kullanın. `UseStartup`bir derleme adı (`string`) veya bir tür (`TStartup`) alabilir. Birden çok `UseStartup` yöntem çağrılırsa, son bir öncelik alır.
+Bu değeri ayarlamak için, ortam değişkenini veya çağrısını kullanın `UseStartup` . `UseStartup`bir derleme adı ( `string` ) veya bir tür () alabilir `TStartup` . Birden çok `UseStartup` yöntem çağrılırsa, son bir öncelik alır.
 
 ```csharp
 webBuilder.UseStartup("StartupAssemblyName");
@@ -405,14 +407,14 @@ webBuilder.UseStartup<Startup>();
 
 ### <a name="urls"></a>URL’ler
 
-Sunucu istekleri için dinlemesi gereken bağlantı noktaları ve protokollerle, noktalı virgülle ayrılmış IP adresleri listesi veya ana bilgisayar adresleri. Örneğin, `http://localhost:123`. Sunucunun belirtilen\*bağlantı noktasını ve Protokolü (örneğin, `http://*:5000`) kullanarak herhangi bir IP adresi veya ana bilgisayar için istekleri dinlemesi gerektiğini belirtmek için "" kullanın. Protokol (`http://` veya `https://`) her URL 'ye dahil edilmiş olmalıdır. Desteklenen biçimler sunucular arasında farklılık gösterir.
+Sunucu istekleri için dinlemesi gereken bağlantı noktaları ve protokollerle, noktalı virgülle ayrılmış IP adresleri listesi veya ana bilgisayar adresleri. Örneğin, `http://localhost:123`. \*Sunucunun belirtilen bağlantı noktasını ve Protokolü (örneğin,) kullanarak herhangi BIR IP adresi veya ana bilgisayar için istekleri dinlemesi gerektiğini belirtmek için "" kullanın `http://*:5000` . Protokol ( `http://` veya `https://` ) her URL 'ye dahil edilmiş olmalıdır. Desteklenen biçimler sunucular arasında farklılık gösterir.
 
 **Anahtar**:`urls`  
 **Şunu yazın**:`string`  
 **Varsayılan**: `http://localhost:5000` ve`https://localhost:5001`  
 **Ortam değişkeni**:`<PREFIX_>URLS`
 
-Bu değeri ayarlamak için, ortam değişkenini veya çağrısını `UseUrls`kullanın:
+Bu değeri ayarlamak için, ortam değişkenini veya çağrısını kullanın `UseUrls` :
 
 ```csharp
 webBuilder.UseUrls("http://*:5000;http://localhost:5001;https://hostname:5002");
@@ -426,10 +428,10 @@ Kestrel kendi uç nokta yapılandırması API 'sine sahiptir. Daha fazla bilgi i
 
 **Anahtar**:`webroot`  
 **Şunu yazın**:`string`  
-**Varsayılan**: varsayılan `wwwroot`. *{Content root}/Wwwroot* yolu var olmalıdır.  
+**Varsayılan**: varsayılan `wwwroot` . *{Content root}/Wwwroot* yolu var olmalıdır.  
 **Ortam değişkeni**:`<PREFIX_>WEBROOT`
 
-Bu değeri ayarlamak için, ortam değişkenini kullanın veya üzerinde `UseWebRoot` `IWebHostBuilder`arama yapın:
+Bu değeri ayarlamak için, ortam değişkenini kullanın veya üzerinde arama `UseWebRoot` yapın `IWebHostBuilder` :
 
 ```csharp
 webBuilder.UseWebRoot("public");
@@ -442,29 +444,29 @@ Daha fazla bilgi için bkz.
 
 ## <a name="manage-the-host-lifetime"></a>Konak ömrünü yönetme
 
-Uygulamayı başlatmak ve durdurmak için <xref:Microsoft.Extensions.Hosting.IHost> oluşturulan uygulamadaki Yöntemleri çağırın. Bu yöntemler, hizmet <xref:Microsoft.Extensions.Hosting.IHostedService> kapsayıcısına kayıtlı tüm uygulamaları etkiler.
+<xref:Microsoft.Extensions.Hosting.IHost>Uygulamayı başlatmak ve durdurmak için oluşturulan uygulamadaki Yöntemleri çağırın. Bu yöntemler <xref:Microsoft.Extensions.Hosting.IHostedService> , hizmet kapsayıcısına kayıtlı tüm uygulamaları etkiler.
 
-### <a name="run"></a>Çalıştırın
+### <a name="run"></a>Çalıştır
 
 <xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run*>uygulamayı çalıştırır ve ana bilgisayarı kapatıncaya kadar çağıran iş parçacığını engeller.
 
 ### <a name="runasync"></a>RunAsync
 
-<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync*>uygulamayı çalıştırır ve iptal belirteci veya <xref:System.Threading.Tasks.Task> kapanışı tetiklendiğinde tamamlanmış bir döndürür.
+<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync*>uygulamayı çalıştırır ve <xref:System.Threading.Tasks.Task> iptal belirteci veya kapanışı tetiklendiğinde tamamlanmış bir döndürür.
 
 ### <a name="runconsoleasync"></a>RunConsoleAsync
 
-<xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.RunConsoleAsync*>Konsol desteğini sağlar, Konağı oluşturur ve başlatır ve <kbd>CTRL</kbd>+<kbd>C</kbd>/sigint veya sigterm 'in kapatılmasını bekler.
+<xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.RunConsoleAsync*>Konsol desteğini sağlar, Konağı oluşturur ve başlatır ve <kbd>CTRL</kbd> + <kbd>C</kbd>/sigint veya sigterm 'in kapatılmasını bekler.
 
-### <a name="start"></a>Başlat
+### <a name="start"></a>Başlangıç
 
 <xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Start*>Konağı zaman uyumlu olarak başlatır.
 
 ### <a name="startasync"></a>StartAsync
 
-<xref:Microsoft.Extensions.Hosting.IHost.StartAsync*>Konağı başlatır ve iptal belirteci ya <xref:System.Threading.Tasks.Task> da kapatması tetiklendiğinde tamamlanmış bir döndürür. 
+<xref:Microsoft.Extensions.Hosting.IHost.StartAsync*>Konağı başlatır ve <xref:System.Threading.Tasks.Task> iptal belirteci ya da kapatması tetiklendiğinde tamamlanmış bir döndürür. 
 
-<xref:Microsoft.Extensions.Hosting.IHostLifetime.WaitForStartAsync*>, ' nin `StartAsync`başlangıcında çağrılır ve devam etmeden önce tamamlanana kadar bekler. Bu, bir dış olay tarafından sinyallene kadar başlatmayı geciktirmek için kullanılabilir.
+<xref:Microsoft.Extensions.Hosting.IHostLifetime.WaitForStartAsync*>, ' nin başlangıcında çağrılır `StartAsync` ve devam etmeden önce tamamlanana kadar bekler. Bu, bir dış olay tarafından sinyallene kadar başlatmayı geciktirmek için kullanılabilir.
 
 ### <a name="stopasync"></a>StopAsync
 
@@ -472,11 +474,11 @@ Uygulamayı başlatmak ve durdurmak için <xref:Microsoft.Extensions.Hosting.IHo
 
 ### <a name="waitforshutdown"></a>Waitforkapatması
 
-<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.WaitForShutdown*>, <kbd>CTRL</kbd>+<kbd>C</kbd>/sigint veya sigterm gibi bir ıhostlifetime tarafından tetiklenene kadar çağıran iş parçacığını engeller.
+<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.WaitForShutdown*>, <kbd>CTRL</kbd> + <kbd>C</kbd>/sigint veya sigterm gibi bir ıhostlifetime tarafından tetiklenene kadar çağıran iş parçacığını engeller.
 
 ### <a name="waitforshutdownasync"></a>WaitForShutdownAsync
 
-<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.WaitForShutdownAsync*>verilen belirteç <xref:System.Threading.Tasks.Task> ve çağrılar <xref:Microsoft.Extensions.Hosting.IHost.StopAsync*>aracılığıyla kapatılma tetiklendiğinde tamamlanan bir döndürür.
+<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.WaitForShutdownAsync*><xref:System.Threading.Tasks.Task>verilen belirteç ve çağrılar aracılığıyla kapatılma tetiklendiğinde tamamlanan bir döndürür <xref:Microsoft.Extensions.Hosting.IHost.StopAsync*> .
 
 ### <a name="external-control"></a>Dış denetim
 
@@ -514,7 +516,7 @@ public class Program
 
 ASP.NET Core uygulamalar bir konağı yapılandırıp başlatır. Ana bilgisayar, uygulama başlatma ve ömür yönetiminden sorumludur.
 
-Bu makalede, HTTP isteklerini işlemeyecek uygulamalar<xref:Microsoft.Extensions.Hosting.HostBuilder>Için kullanılan genel ana bilgisayar () ASP.NET Core ele alınmaktadır.
+Bu makalede <xref:Microsoft.Extensions.Hosting.HostBuilder> , http isteklerini işlemeyecek uygulamalar için kullanılan genel ana bilgisayar () ASP.NET Core ele alınmaktadır.
 
 Genel konağın amacı, daha geniş bir konak senaryolarını etkinleştirmek üzere Web ana bilgisayar API 'sinden HTTP işlem hattını ayırmak için kullanılır. Yapılandırma, bağımlılık ekleme (dı) ve günlüğe kaydetme gibi çapraz kesme özelliğinden genel ana bilgisayar avantajı temel alınarak mesajlaşma, arka plan görevleri ve diğer HTTP olmayan iş yükleri.
 
@@ -522,18 +524,18 @@ Genel ana bilgisayar ASP.NET Core 2,1 ' de yenidir ve Web barındırma senaryola
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/generic-host/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-Örnek uygulamayı [Visual Studio Code](https://code.visualstudio.com/)' de çalıştırırken, *dış veya tümleşik bir Terminal*kullanın. Örneği bir `internalConsole`içinde çalıştırmayın.
+Örnek uygulamayı [Visual Studio Code](https://code.visualstudio.com/)' de çalıştırırken, *dış veya tümleşik bir Terminal*kullanın. Örneği bir içinde çalıştırmayın `internalConsole` .
 
 Konsolu Visual Studio Code ayarlamak için:
 
-1. *. Vscode/Launch. JSON* dosyasını açın.
-1. **.NET Core başlatma (konsol)** yapılandırmasında **konsol** girişini bulun. Değeri ya da `externalTerminal` olarak ayarlayın `integratedTerminal`.
+1. Dosyasında *. vscode/launch.js* açın.
+1. **.NET Core başlatma (konsol)** yapılandırmasında **konsol** girişini bulun. Değeri ya da olarak ayarlayın `externalTerminal` `integratedTerminal` .
 
 ## <a name="introduction"></a>Giriş
 
-Genel konak Kitaplığı <xref:Microsoft.Extensions.Hosting> ad alanında kullanılabilir ve [Microsoft. Extensions. Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting/) paketi tarafından sağlanır. `Microsoft.Extensions.Hosting` Paket, [Microsoft. Aspnetcore. app metapackage](xref:fundamentals/metapackage-app) 'e dahildir (ASP.NET Core 2,1 veya üzeri).
+Genel konak kitaplığı ad alanında kullanılabilir <xref:Microsoft.Extensions.Hosting> ve [Microsoft. Extensions. Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting/) paketi tarafından sağlanır. `Microsoft.Extensions.Hosting`Paket, [Microsoft. aspnetcore. app metapackage](xref:fundamentals/metapackage-app) 'e dahildir (ASP.NET Core 2,1 veya üzeri).
 
-<xref:Microsoft.Extensions.Hosting.IHostedService>, kod yürütmeye yönelik giriş noktasıdır. Her <xref:Microsoft.Extensions.Hosting.IHostedService> uygulama, [ConfigureServices içinde hizmet kaydı](#configureservices)sırasında yürütülür. <xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync*>, konak başlatıldığında çağrılır <xref:Microsoft.Extensions.Hosting.IHostedService> ve <xref:Microsoft.Extensions.Hosting.IHostedService.StopAsync*> ana bilgisayar düzgün bir şekilde kapandığında ters kayıt sırasında çağrılır.
+<xref:Microsoft.Extensions.Hosting.IHostedService>, kod yürütmeye yönelik giriş noktasıdır. Her <xref:Microsoft.Extensions.Hosting.IHostedService> uygulama, [ConfigureServices içinde hizmet kaydı](#configureservices)sırasında yürütülür. <xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync*>, <xref:Microsoft.Extensions.Hosting.IHostedService> konak başlatıldığında çağrılır ve <xref:Microsoft.Extensions.Hosting.IHostedService.StopAsync*> ana bilgisayar düzgün bir şekilde kapandığında ters kayıt sırasında çağrılır.
 
 ## <a name="set-up-a-host"></a>Konak ayarlama
 
@@ -543,13 +545,13 @@ Genel konak Kitaplığı <xref:Microsoft.Extensions.Hosting> ad alanında kullan
 
 ## <a name="options"></a>Seçenekler
 
-<xref:Microsoft.Extensions.Hosting.HostOptions>için seçenekleri yapılandırın <xref:Microsoft.Extensions.Hosting.IHost>.
+<xref:Microsoft.Extensions.Hosting.HostOptions>için seçenekleri yapılandırın <xref:Microsoft.Extensions.Hosting.IHost> .
 
 ### <a name="shutdown-timeout"></a>Kapatılma zaman aşımı
 
-<xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*>zaman aşımını ayarlar <xref:Microsoft.Extensions.Hosting.IHost.StopAsync*>. Varsayılan değer beş saniyedir.
+<xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*>zaman aşımını ayarlar <xref:Microsoft.Extensions.Hosting.IHost.StopAsync*> . Varsayılan değer beş saniyedir.
 
-İçindeki `Program.Main` aşağıdaki seçenek yapılandırması, varsayılan beş saniyelik kapatılma zaman aşımını 20 saniyeye yükseltir:
+İçindeki aşağıdaki seçenek yapılandırması, `Program.Main` varsayılan beş saniyelik kapatılma zaman aşımını 20 saniyeye yükseltir:
 
 ```csharp
 var host = new HostBuilder()
@@ -567,21 +569,21 @@ var host = new HostBuilder()
 
 Aşağıdaki hizmetler konak başlatma sırasında kaydedilir:
 
-* [Ortam](xref:fundamentals/environments) (<xref:Microsoft.Extensions.Hosting.IHostingEnvironment>)
+* [Ortam](xref:fundamentals/environments) ( <xref:Microsoft.Extensions.Hosting.IHostingEnvironment> )
 * <xref:Microsoft.Extensions.Hosting.HostBuilderContext>
-* [Yapılandırma](xref:fundamentals/configuration/index) (<xref:Microsoft.Extensions.Configuration.IConfiguration>)
+* [Yapılandırma](xref:fundamentals/configuration/index) ( <xref:Microsoft.Extensions.Configuration.IConfiguration> )
 * <xref:Microsoft.Extensions.Hosting.IApplicationLifetime> (`Microsoft.Extensions.Hosting.Internal.ApplicationLifetime`)
 * <xref:Microsoft.Extensions.Hosting.IHostLifetime> (`Microsoft.Extensions.Hosting.Internal.ConsoleLifetime`)
 * <xref:Microsoft.Extensions.Hosting.IHost>
-* [Seçenekler](xref:fundamentals/configuration/options) (<xref:Microsoft.Extensions.DependencyInjection.OptionsServiceCollectionExtensions.AddOptions*>)
-* [Günlüğe kaydetme](xref:fundamentals/logging/index) (<xref:Microsoft.Extensions.DependencyInjection.LoggingServiceCollectionExtensions.AddLogging*>)
+* [Seçenekler](xref:fundamentals/configuration/options) ( <xref:Microsoft.Extensions.DependencyInjection.OptionsServiceCollectionExtensions.AddOptions*> )
+* [Günlüğe kaydetme](xref:fundamentals/logging/index) ( <xref:Microsoft.Extensions.DependencyInjection.LoggingServiceCollectionExtensions.AddLogging*> )
 
 ## <a name="host-configuration"></a>Konak yapılandırması
 
 Ana bilgisayar yapılandırması şu şekilde oluşturulur:
 
 * <xref:Microsoft.Extensions.Hosting.IHostBuilder> [İçerik kökünü](#content-root) ve [ortamı](#environment)ayarlamak için uzantı yöntemleri çağrılıyor.
-* İçindeki <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureHostConfiguration*>yapılandırma sağlayıcılarından yapılandırma okunuyor.
+* İçindeki yapılandırma sağlayıcılarından yapılandırma okunuyor <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureHostConfiguration*> .
 
 ### <a name="extension-methods"></a>Genişletme yöntemleri
 
@@ -593,7 +595,7 @@ Ana bilgisayar yapılandırması şu şekilde oluşturulur:
 **Şunu yazın**:`string`  
 **Varsayılan**: uygulamanın giriş noktasını içeren derlemenin adı.  
 Şunu **kullanarak ayarla**:`HostBuilderContext.HostingEnvironment.ApplicationName`  
-**Ortam değişkeni**: `<PREFIX_>APPLICATIONNAME` (`<PREFIX_>` [isteğe bağlı ve Kullanıcı tanımlı](#configurehostconfiguration))
+**Ortam değişkeni**: `<PREFIX_>APPLICATIONNAME` ( `<PREFIX_>` [isteğe bağlı ve Kullanıcı tanımlı](#configurehostconfiguration))
 
 ### <a name="content-root"></a>İçerik kökü
 
@@ -603,7 +605,7 @@ Bu ayar, konağın içerik dosyalarını aramaya başladığı yeri belirler.
 **Şunu yazın**:`string`  
 **Varsayılan**: uygulama derlemesinin bulunduğu klasörü varsayılan olarak belirler.  
 Şunu **kullanarak ayarla**:`UseContentRoot`  
-**Ortam değişkeni**: `<PREFIX_>CONTENTROOT` (`<PREFIX_>` [isteğe bağlı ve Kullanıcı tanımlı](#configurehostconfiguration))
+**Ortam değişkeni**: `<PREFIX_>CONTENTROOT` ( `<PREFIX_>` [isteğe bağlı ve Kullanıcı tanımlı](#configurehostconfiguration))
 
 Yol yoksa, ana bilgisayar başlatılamaz.
 
@@ -619,66 +621,66 @@ Uygulamanın [ortamını](xref:fundamentals/environments)ayarlar.
 **Şunu yazın**:`string`  
 **Varsayılan**:`Production`  
 Şunu **kullanarak ayarla**:`UseEnvironment`  
-**Ortam değişkeni**: `<PREFIX_>ENVIRONMENT` (`<PREFIX_>` [isteğe bağlı ve Kullanıcı tanımlı](#configurehostconfiguration))
+**Ortam değişkeni**: `<PREFIX_>ENVIRONMENT` ( `<PREFIX_>` [isteğe bağlı ve Kullanıcı tanımlı](#configurehostconfiguration))
 
-Ortam herhangi bir değere ayarlanabilir. Çerçeve tanımlı değerler, `Development` `Staging`, ve `Production`içerir. Değerler büyük/küçük harfe duyarlı değildir.
+Ortam herhangi bir değere ayarlanabilir. Çerçeve tanımlı değerler,, `Development` `Staging` ve içerir `Production` . Değerler büyük/küçük harfe duyarlı değildir.
 
 [!code-csharp[](generic-host/samples-snapshot/2.x/GenericHostSample/Program.cs?name=snippet_UseEnvironment)]
 
 ### <a name="configurehostconfiguration"></a>ConfigureHostConfiguration
 
-<xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureHostConfiguration*>konak <xref:Microsoft.Extensions.Configuration.IConfiguration> için <xref:Microsoft.Extensions.Configuration.IConfigurationBuilder> oluşturmak üzere bir kullanır. Konak yapılandırması, <xref:Microsoft.Extensions.Hosting.IHostingEnvironment> uygulamanın derleme sürecinde kullanılmak üzere başlatmak için kullanılır.
+<xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureHostConfiguration*><xref:Microsoft.Extensions.Configuration.IConfigurationBuilder>konak için oluşturmak üzere bir kullanır <xref:Microsoft.Extensions.Configuration.IConfiguration> . Konak yapılandırması, <xref:Microsoft.Extensions.Hosting.IHostingEnvironment> uygulamanın derleme sürecinde kullanılmak üzere başlatmak için kullanılır.
 
 <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureHostConfiguration*>, eklenebilir sonuçlarla birden çok kez çağrılabilir. Ana bilgisayar, belirli bir anahtardaki bir değeri en son belirleyen seçeneği kullanır.
 
-Varsayılan olarak hiçbir sağlayıcı dahil değildir. Uygulamanın gerektirdiği her türlü yapılandırma sağlayıcısını açık bir şekilde belirtmeniz gerekir <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureHostConfiguration*>, örneğin:
+Varsayılan olarak hiçbir sağlayıcı dahil değildir. Uygulamanın gerektirdiği her türlü yapılandırma sağlayıcısını açık bir şekilde belirtmeniz gerekir <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureHostConfiguration*> , örneğin:
 
-* Dosya yapılandırması (örneğin, *HostSettings. JSON* dosyasından).
+* Dosya yapılandırması (örneğin, dosyadaki bir *hostsettings.js* ).
 * Ortam değişkeni yapılandırması.
 * Komut satırı bağımsız değişken yapılandırması.
 * Diğer tüm gerekli yapılandırma sağlayıcıları.
 
-Konağın dosya yapılandırması, uygulamanın temel yolu ve `SetBasePath` ardından [dosya yapılandırma sağlayıcılarından](xref:fundamentals/configuration/index#file-configuration-provider)birine yapılan bir çağrı tarafından belirtilerek etkinleştirilir. Örnek uygulama, bir JSON dosyası, *HostSettings. JSON*ve dosyanın ana bilgisayar <xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*> yapılandırma ayarlarını kullanmak için çağrılar kullanır.
+Konağın dosya yapılandırması, uygulamanın temel yolu ve `SetBasePath` ardından [dosya yapılandırma sağlayıcılarından](xref:fundamentals/configuration/index#file-configuration-provider)birine yapılan bir çağrı tarafından belirtilerek etkinleştirilir. Örnek uygulama, *üzerindehostsettings.js*bir JSON dosyası ve <xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*> dosyanın ana bilgisayar yapılandırma ayarlarını kullanmak için çağrılar kullanır.
 
-Konağın [ortam değişkeni yapılandırmasını](xref:fundamentals/configuration/index#environment-variables-configuration-provider) eklemek için konak Oluşturucu ' ya <xref:Microsoft.Extensions.Configuration.EnvironmentVariablesExtensions.AddEnvironmentVariables*> çağrı yapın. `AddEnvironmentVariables`Kullanıcı tanımlı isteğe bağlı bir ön eki kabul eder. Örnek uygulama, öneki kullanır `PREFIX_`. Ortam değişkenleri okurken ön ek kaldırılır. Örnek uygulamanın ana bilgisayarı yapılandırıldığında, için `PREFIX_ENVIRONMENT` ortam değişkeni değeri `environment` anahtar için ana bilgisayar yapılandırma değeri olur.
+Konağın [ortam değişkeni yapılandırmasını](xref:fundamentals/configuration/index#environment-variables-configuration-provider) eklemek için konak Oluşturucu ' ya çağrı yapın <xref:Microsoft.Extensions.Configuration.EnvironmentVariablesExtensions.AddEnvironmentVariables*> . `AddEnvironmentVariables`Kullanıcı tanımlı isteğe bağlı bir ön eki kabul eder. Örnek uygulama, öneki kullanır `PREFIX_` . Ortam değişkenleri okurken ön ek kaldırılır. Örnek uygulamanın ana bilgisayarı yapılandırıldığında, için ortam değişkeni değeri `PREFIX_ENVIRONMENT` anahtar için ana bilgisayar yapılandırma değeri olur `environment` .
 
-[Visual Studio](https://visualstudio.microsoft.com) kullanırken veya ile `dotnet run`bir uygulama çalıştırırken geliştirme sırasında, *Özellikler/launchsettings. JSON* dosyasında ortam değişkenleri ayarlanabilir. [Visual Studio Code](https://code.visualstudio.com/), geliştirme sırasında *. vscode/Launch. JSON* dosyasında ortam değişkenleri ayarlanabilir. Daha fazla bilgi için bkz. <xref:fundamentals/environments>.
+[Visual Studio](https://visualstudio.microsoft.com) kullanırken veya ile bir uygulama çalıştırırken geliştirme sırasında `dotnet run` , ortam değişkenleri dosyadaki *Özellikler/launchSettings.js* ayarlanabilir. [Visual Studio Code](https://code.visualstudio.com/), geliştirme sırasında dosya *üzerinde. vscode/launch.js* içinde ortam değişkenleri ayarlanabilir. Daha fazla bilgi için bkz. <xref:fundamentals/environments>.
 
-[Komut satırı yapılandırması](xref:fundamentals/configuration/index#command-line-configuration-provider) çağırarak <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*>eklenir. Komut satırı yapılandırması, önceki yapılandırma sağlayıcıları tarafından belirtilen yapılandırmayı geçersiz kılmak için komut satırı bağımsız değişkenlerine izin vermek üzere en son eklenir.
+[Komut satırı yapılandırması](xref:fundamentals/configuration/index#command-line-configuration-provider) çağırarak eklenir <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*> . Komut satırı yapılandırması, önceki yapılandırma sağlayıcıları tarafından belirtilen yapılandırmayı geçersiz kılmak için komut satırı bağımsız değişkenlerine izin vermek üzere en son eklenir.
 
-*HostSettings. JSON*:
+*hostsettings.js*:
 
 [!code-csharp[](generic-host/samples/2.x/GenericHostSample/hostsettings.json)]
 
 Ek yapılandırma [ApplicationName](#application-key-name) ve [contentroot](#content-root) anahtarlarıyla birlikte etkinleştirilebilir.
 
-Kullanarak `HostBuilder` <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureHostConfiguration*>örnek yapılandırma:
+`HostBuilder`Kullanarak örnek yapılandırma <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureHostConfiguration*> :
 
 [!code-csharp[](generic-host/samples-snapshot/2.x/GenericHostSample/Program.cs?name=snippet_ConfigureHostConfiguration)]
 
 ## <a name="configureappconfiguration"></a>ConfigureAppConfiguration
 
-Uygulama yapılandırması, <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*> <xref:Microsoft.Extensions.Hosting.IHostBuilder> uygulama çağrısı yaparak oluşturulur. <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*>uygulama <xref:Microsoft.Extensions.Configuration.IConfiguration> için <xref:Microsoft.Extensions.Configuration.IConfigurationBuilder> oluşturmak üzere bir kullanır. <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*>, eklenebilir sonuçlarla birden çok kez çağrılabilir. Uygulama, belirli bir anahtardaki bir değeri en son belirleyen seçeneği kullanır. Tarafından <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*> oluşturulan yapılandırma, sonraki işlemler ve Içinde <xref:Microsoft.Extensions.Hosting.IHost.Services*>, [hostbuildercontext. Configuration](xref:Microsoft.Extensions.Hosting.HostBuilderContext.Configuration*) konumunda kullanılabilir.
+Uygulama yapılandırması, uygulama çağrısı yaparak oluşturulur <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*> <xref:Microsoft.Extensions.Hosting.IHostBuilder> . <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*><xref:Microsoft.Extensions.Configuration.IConfigurationBuilder>uygulama için oluşturmak üzere bir kullanır <xref:Microsoft.Extensions.Configuration.IConfiguration> . <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*>, eklenebilir sonuçlarla birden çok kez çağrılabilir. Uygulama, belirli bir anahtardaki bir değeri en son belirleyen seçeneği kullanır. Tarafından oluşturulan yapılandırma, <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*> sonraki işlemler ve içinde [HostBuilderContext.Configurlama](xref:Microsoft.Extensions.Hosting.HostBuilderContext.Configuration*) bölümünde mevcuttur <xref:Microsoft.Extensions.Hosting.IHost.Services*> .
 
 Uygulama yapılandırması, [Configurehostconfiguration](#configurehostconfiguration)tarafından belirtilen konak yapılandırmasını otomatik olarak alır.
 
-Kullanarak <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*>örnek uygulama yapılandırması:
+Kullanarak örnek uygulama yapılandırması <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*> :
 
 [!code-csharp[](generic-host/samples-snapshot/2.x/GenericHostSample/Program.cs?name=snippet_ConfigureAppConfiguration)]
 
-*appSettings. JSON*:
+*appsettings.js*:
 
 [!code-csharp[](generic-host/samples/2.x/GenericHostSample/appsettings.json)]
 
-*appSettings. Development. JSON*:
+*appsettings.Development.js*:
 
 [!code-csharp[](generic-host/samples/2.x/GenericHostSample/appsettings.Development.json)]
 
-*appSettings. Production. JSON*:
+*appsettings.Production.js*:
 
 [!code-csharp[](generic-host/samples/2.x/GenericHostSample/appsettings.Production.json)]
 
-Ayar dosyalarını çıkış dizinine taşımak için, ayarlar dosyalarını proje dosyasında [MSBuild proje öğeleri](/visualstudio/msbuild/common-msbuild-project-items) olarak belirtin. Örnek uygulama, JSON uygulama ayarları dosyalarını ve *HostSettings. JSON* dosyasını şu `<Content>` öğe ile taşıdıkça:
+Ayar dosyalarını çıkış dizinine taşımak için, ayarlar dosyalarını proje dosyasında [MSBuild proje öğeleri](/visualstudio/msbuild/common-msbuild-project-items) olarak belirtin. Örnek uygulama, JSON uygulama ayarları dosyalarını ve *hostsettings.js* aşağıdaki öğeyle taşıdıkça `<Content>` :
 
 ```xml
 <ItemGroup>
@@ -688,33 +690,33 @@ Ayar dosyalarını çıkış dizinine taşımak için, ayarlar dosyalarını pro
 ```
 
 > [!NOTE]
-> Ve gibi yapılandırma uzantısı yöntemleri, örneğin [Microsoft. Extensions. Configuration. JSON](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.Json) ve [Microsoft. Extensions. Configuration. EnvironmentVariables](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.EnvironmentVariables)gibi ek NuGet paketleri gerektirir. <xref:Microsoft.Extensions.Configuration.EnvironmentVariablesExtensions.AddEnvironmentVariables*> <xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*> Uygulama [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app)'i kullanmadığı takdirde, bu paketlerin temel [Microsoft. Extensions. Configuration](https://www.nuget.org/packages/Microsoft.Extensions.Configuration) paketine ek olarak projeye eklenmesi gerekir. Daha fazla bilgi için bkz. <xref:fundamentals/configuration/index>.
+> Ve gibi yapılandırma uzantısı yöntemleri, <xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*> <xref:Microsoft.Extensions.Configuration.EnvironmentVariablesExtensions.AddEnvironmentVariables*> [Microsoft.Extensions.Configuration.Js](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.Json) veMicrosoft.Extensions.Configuration gibi ek NuGet paketleri gerektirir [. EnvironmentVariables](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.EnvironmentVariables). Uygulama [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app)'i kullanmadıkça, bu paketlerin çekirdek [Microsoft.Extensions.Configurlama](https://www.nuget.org/packages/Microsoft.Extensions.Configuration) paketine ek olarak projeye eklenmesi gerekir. Daha fazla bilgi için bkz. <xref:fundamentals/configuration/index>.
 
 ## <a name="configureservices"></a>ConfigureServices
 
 <xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.ConfigureServices*>uygulamanın [bağımlılık ekleme](xref:fundamentals/dependency-injection) kapsayıcısına hizmet ekler. <xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.ConfigureServices*>, eklenebilir sonuçlarla birden çok kez çağrılabilir.
 
-Barındırılan hizmet, <xref:Microsoft.Extensions.Hosting.IHostedService> arabirimi uygulayan bir arka plan görevi mantığı olan bir sınıftır. Daha fazla bilgi için bkz. <xref:fundamentals/host/hosted-services>.
+Barındırılan hizmet, arabirimi uygulayan bir arka plan görevi mantığı olan bir sınıftır <xref:Microsoft.Extensions.Hosting.IHostedService> . Daha fazla bilgi için bkz. <xref:fundamentals/host/hosted-services>.
 
-[Örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/generic-host/samples/) , yaşam süresi `AddHostedService` olayları, `LifetimeEventsHostedService`ve zamanlanan bir arka plan görevi `TimedHostedService`için uygulamaya bir hizmet eklemek için genişletme yöntemini kullanır:
+[Örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/generic-host/samples/) , `AddHostedService` yaşam süresi olayları, `LifetimeEventsHostedService` ve zamanlanan bir arka plan görevi için uygulamaya bir hizmet eklemek için genişletme yöntemini kullanır `TimedHostedService` :
 
 [!code-csharp[](generic-host/samples-snapshot/2.x/GenericHostSample/Program.cs?name=snippet_ConfigureServices)]
 
 ## <a name="configurelogging"></a>ConfigureLogging
 
-<xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.ConfigureLogging*>Belirtilen <xref:Microsoft.Extensions.Logging.ILoggingBuilder>yapılandırmayı yapılandırmak için bir temsilci ekler. <xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.ConfigureLogging*>, eklenebilir sonuçlarla birden çok kez çağrılabilir.
+<xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.ConfigureLogging*>belirtilen yapılandırmayı yapılandırmak için bir temsilci ekler <xref:Microsoft.Extensions.Logging.ILoggingBuilder> . <xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.ConfigureLogging*>, eklenebilir sonuçlarla birden çok kez çağrılabilir.
 
 [!code-csharp[](generic-host/samples-snapshot/2.x/GenericHostSample/Program.cs?name=snippet_ConfigureLogging)]
 
 ### <a name="useconsolelifetime"></a>UseConsoleLifetime
 
-<xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.UseConsoleLifetime*><kbd>CTRL</kbd>+<kbd>C</kbd>/sigint veya sigterm 'i dinler ve kapalı <xref:Microsoft.Extensions.Hosting.IApplicationLifetime.StopApplication*> işlemini başlatmak için çağırır. <xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.UseConsoleLifetime*>[RunAsync](#runasync) ve [Waitforshutdownasync](#waitforshutdownasync)gibi uzantıları kaldırır. `Microsoft.Extensions.Hosting.Internal.ConsoleLifetime`Varsayılan yaşam süresi uygulamasına önceden kaydedilir. Kaydedilen son yaşam süresi kullanılır.
+<xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.UseConsoleLifetime*><kbd>CTRL</kbd> + <kbd>C</kbd>/sigint veya sigterm 'i dinler ve <xref:Microsoft.Extensions.Hosting.IApplicationLifetime.StopApplication*> kapalı işlemini başlatmak için çağırır. <xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.UseConsoleLifetime*>[RunAsync](#runasync) ve [Waitforshutdownasync](#waitforshutdownasync)gibi uzantıları kaldırır. `Microsoft.Extensions.Hosting.Internal.ConsoleLifetime`Varsayılan yaşam süresi uygulamasına önceden kaydedilir. Kaydedilen son yaşam süresi kullanılır.
 
 [!code-csharp[](generic-host/samples-snapshot/2.x/GenericHostSample/Program.cs?name=snippet_UseConsoleLifetime)]
 
 ## <a name="container-configuration"></a>Kapsayıcı yapılandırması
 
-Diğer kapsayıcıları takmayı desteklemek için ana bilgisayar bir <xref:Microsoft.Extensions.DependencyInjection.IServiceProviderFactory%601>kabul edebilir. Fabrika sağlamak, dı kapsayıcı kaydının bir parçası değildir, ancak bunun yerine somut dı kapsayıcısını oluşturmak için kullanılan bir konak iç sıdır. [Useserviceproviderfactory (ıvıceproviderfactory&lt;tcontainerbuilder&gt;)](xref:Microsoft.Extensions.Hosting.HostBuilder.UseServiceProviderFactory*) , uygulamanın hizmet sağlayıcısını oluşturmak için kullanılan varsayılan fabrikası geçersiz kılar.
+Diğer kapsayıcıları takmayı desteklemek için ana bilgisayar bir kabul edebilir <xref:Microsoft.Extensions.DependencyInjection.IServiceProviderFactory%601> . Fabrika sağlamak, dı kapsayıcı kaydının bir parçası değildir, ancak bunun yerine somut dı kapsayıcısını oluşturmak için kullanılan bir konak iç sıdır. [Useserviceproviderfactory (ıvıceproviderfactory &lt; tcontainerbuilder &gt; )](xref:Microsoft.Extensions.Hosting.HostBuilder.UseServiceProviderFactory*) , uygulamanın hizmet sağlayıcısını oluşturmak için kullanılan varsayılan fabrikası geçersiz kılar.
 
 Özel kapsayıcı yapılandırması <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureContainer*> yöntemiyle yönetilir. <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureContainer*>temel ana bilgisayar API 'sinin üstünde kapsayıcıyı yapılandırmak için kesin olarak belirlenmiş bir deneyim sağlar. <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureContainer*>, eklenebilir sonuçlarla birden çok kez çağrılabilir.
 
@@ -732,7 +734,7 @@ Fabrika 'yi kullanın ve uygulama için özel hizmet kapsayıcısını yapıland
 
 ## <a name="extensibility"></a>Genişletilebilirlik
 
-Konak genişletilebilirliği, üzerindeki <xref:Microsoft.Extensions.Hosting.IHostBuilder>genişletme yöntemleriyle gerçekleştirilir. Aşağıdaki örnek, bir genişletme yönteminin ' de <xref:Microsoft.Extensions.Hosting.IHostBuilder> <xref:fundamentals/host/hosted-services>gösterilen [timedhostedservice](xref:fundamentals/host/hosted-services#timed-background-tasks) örneği ile bir uygulamayı nasıl genişlettiğini gösterir.
+Konak genişletilebilirliği, üzerindeki genişletme yöntemleriyle gerçekleştirilir <xref:Microsoft.Extensions.Hosting.IHostBuilder> . Aşağıdaki örnek, bir genişletme yönteminin <xref:Microsoft.Extensions.Hosting.IHostBuilder> ' de gösterilen [Timedhostedservice](xref:fundamentals/host/hosted-services#timed-background-tasks) örneği ile bir uygulamayı nasıl genişlettiğini gösterir <xref:fundamentals/host/hosted-services> .
 
 ```csharp
 var host = new HostBuilder()
@@ -742,7 +744,7 @@ var host = new HostBuilder()
 await host.StartAsync();
 ```
 
-Uygulama, geçirilen barındırılan `UseHostedService` hizmeti kaydetmek için uzantı yöntemi oluşturur `T`:
+Uygulama, `UseHostedService` geçirilen barındırılan hizmeti kaydetmek için uzantı yöntemi oluşturur `T` :
 
 ```csharp
 using System;
@@ -762,9 +764,9 @@ public static class Extensions
 
 ## <a name="manage-the-host"></a>Konağı yönetme
 
-<xref:Microsoft.Extensions.Hosting.IHost> Uygulama, hizmet kapsayıcısında kayıtlı olan <xref:Microsoft.Extensions.Hosting.IHostedService> uygulamaları başlatıp durdurmaktan sorumludur.
+<xref:Microsoft.Extensions.Hosting.IHost>Uygulama, <xref:Microsoft.Extensions.Hosting.IHostedService> hizmet kapsayıcısında kayıtlı olan uygulamaları başlatıp durdurmaktan sorumludur.
 
-### <a name="run"></a>Çalıştırın
+### <a name="run"></a>Çalıştır
 
 <xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run*>uygulamayı çalıştırır ve konak kapanana kadar çağıran iş parçacığını engeller:
 
@@ -783,7 +785,7 @@ public class Program
 
 ### <a name="runasync"></a>RunAsync
 
-<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync*>uygulamayı çalıştırır ve iptal belirteci veya <xref:System.Threading.Tasks.Task> kapanışı tetiklendiğinde tamamlanmış bir döndürür:
+<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync*>uygulamayı çalıştırır ve <xref:System.Threading.Tasks.Task> iptal belirteci veya kapanışı tetiklendiğinde tamamlanmış bir döndürür:
 
 ```csharp
 public class Program
@@ -800,7 +802,7 @@ public class Program
 
 ### <a name="runconsoleasync"></a>RunConsoleAsync
 
-<xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.RunConsoleAsync*>Konsol desteğini sağlar, Konağı oluşturur ve başlatır ve <kbd>CTRL</kbd>+<kbd>C</kbd>/sigint veya sigterm 'in kapatılmasını bekler.
+<xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.RunConsoleAsync*>Konsol desteğini sağlar, Konağı oluşturur ve başlatır ve <kbd>CTRL</kbd> + <kbd>C</kbd>/sigint veya sigterm 'in kapatılmasını bekler.
 
 ```csharp
 public class Program
@@ -864,7 +866,7 @@ public class Program
 
 ### <a name="waitforshutdown"></a>Waitforkapatması
 
-<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.WaitForShutdown*>`Microsoft.Extensions.Hosting.Internal.ConsoleLifetime` , (örneğin, <xref:Microsoft.Extensions.Hosting.IHostLifetime> <kbd>CTRL</kbd>+<kbd>C</kbd>/sigint veya sigterim dinler) ile tetiklenir. <xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.WaitForShutdown*>çağırır <xref:Microsoft.Extensions.Hosting.IHost.StopAsync*>.
+<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.WaitForShutdown*>, (örneğin, <xref:Microsoft.Extensions.Hosting.IHostLifetime> `Microsoft.Extensions.Hosting.Internal.ConsoleLifetime` <kbd>CTRL</kbd> + <kbd>C</kbd>/sigint veya sigterim dinler) ile tetiklenir. <xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.WaitForShutdown*>çağırır <xref:Microsoft.Extensions.Hosting.IHost.StopAsync*> .
 
 ```csharp
 public class Program
@@ -886,7 +888,7 @@ public class Program
 
 ### <a name="waitforshutdownasync"></a>WaitForShutdownAsync
 
-<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.WaitForShutdownAsync*>verilen belirteç <xref:System.Threading.Tasks.Task> ve çağrılar <xref:Microsoft.Extensions.Hosting.IHost.StopAsync*>aracılığıyla kapatılma tetiklendiğinde tamamlanan bir döndürür.
+<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.WaitForShutdownAsync*><xref:System.Threading.Tasks.Task>verilen belirteç ve çağrılar aracılığıyla kapatılma tetiklendiğinde tamamlanan bir döndürür <xref:Microsoft.Extensions.Hosting.IHost.StopAsync*> .
 
 ```csharp
 public class Program
@@ -937,11 +939,11 @@ public class Program
 }
 ```
 
-<xref:Microsoft.Extensions.Hosting.IHostLifetime.WaitForStartAsync*>, ' nin <xref:Microsoft.Extensions.Hosting.IHost.StartAsync*>başlangıcında çağrılır ve devam etmeden önce tamamlanana kadar bekler. Bu, bir dış olay tarafından sinyallene kadar başlatmayı geciktirmek için kullanılabilir.
+<xref:Microsoft.Extensions.Hosting.IHostLifetime.WaitForStartAsync*>, ' nin başlangıcında çağrılır <xref:Microsoft.Extensions.Hosting.IHost.StartAsync*> ve devam etmeden önce tamamlanana kadar bekler. Bu, bir dış olay tarafından sinyallene kadar başlatmayı geciktirmek için kullanılabilir.
 
 ## <a name="ihostingenvironment-interface"></a>Ihostingenvironment arabirimi
 
-<xref:Microsoft.Extensions.Hosting.IHostingEnvironment>uygulamanın barındırma ortamı hakkında bilgi sağlar. Özelliklerini ve uzantı yöntemlerini kullanmak üzere <xref:Microsoft.Extensions.Hosting.IHostingEnvironment> sağlamak için [Oluşturucu Ekleme](xref:fundamentals/dependency-injection) özelliğini kullanın:
+<xref:Microsoft.Extensions.Hosting.IHostingEnvironment>uygulamanın barındırma ortamı hakkında bilgi sağlar. Özelliklerini ve uzantı yöntemlerini kullanmak üzere sağlamak için [Oluşturucu Ekleme](xref:fundamentals/dependency-injection) özelliğini kullanın <xref:Microsoft.Extensions.Hosting.IHostingEnvironment> :
 
 ```csharp
 public class MyClass
@@ -964,7 +966,7 @@ Daha fazla bilgi için bkz. <xref:fundamentals/environments>.
 
 ## <a name="iapplicationlifetime-interface"></a>Iapplicationlifetime arabirimi
 
-<xref:Microsoft.Extensions.Hosting.IApplicationLifetime>düzgün kapanma istekleri de dahil olmak üzere başlatma sonrası ve kapanma etkinliklerine izin verir. Arabirimdeki üç özellik, başlangıç ve kapalı olayları tanımlayan yöntemleri kaydetmek <xref:System.Action> için kullanılan iptal belirteçleridir.
+<xref:Microsoft.Extensions.Hosting.IApplicationLifetime>düzgün kapanma istekleri de dahil olmak üzere başlatma sonrası ve kapanma etkinliklerine izin verir. Arabirimdeki üç özellik, <xref:System.Action> Başlangıç ve kapalı olayları tanımlayan yöntemleri kaydetmek için kullanılan iptal belirteçleridir.
 
 | İptal belirteci | &#8230; tetiklendi |
 | ------------------ | --------------------- |
@@ -972,13 +974,13 @@ Daha fazla bilgi için bkz. <xref:fundamentals/environments>.
 | <xref:Microsoft.Extensions.Hosting.IApplicationLifetime.ApplicationStopped*> | Ana bilgisayar düzgün kapanma işlemini tamamlıyor. Tüm isteklerin işlenmesi gerekir. Bu olay tamamlanana kadar kapalı bloklar. |
 | <xref:Microsoft.Extensions.Hosting.IApplicationLifetime.ApplicationStopping*> | Ana bilgisayar düzgün bir şekilde kapanma gerçekleştiriyor. İstekler hala işliyor olabilir. Bu olay tamamlanana kadar kapalı bloklar. |
 
-Constructor- <xref:Microsoft.Extensions.Hosting.IApplicationLifetime> hizmeti herhangi bir sınıfa ekleyin. [Örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/generic-host/samples/) , olayları kaydetmek için bir `LifetimeEventsHostedService` sınıfa (bir <xref:Microsoft.Extensions.Hosting.IHostedService> uygulama) ekleme oluşturucusunu kullanır.
+Constructor- <xref:Microsoft.Extensions.Hosting.IApplicationLifetime> hizmeti herhangi bir sınıfa ekleyin. [Örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/generic-host/samples/) , `LifetimeEventsHostedService` olayları kaydetmek için bir sınıfa (bir uygulama) ekleme oluşturucusunu kullanır <xref:Microsoft.Extensions.Hosting.IHostedService> .
 
 *LifetimeEventsHostedService.cs*:
 
 [!code-csharp[](generic-host/samples/2.x/GenericHostSample/LifetimeEventsHostedService.cs?name=snippet1)]
 
-<xref:Microsoft.Extensions.Hosting.IApplicationLifetime.StopApplication*>uygulamanın sonlandırılmasını ister. Aşağıdaki sınıf, sınıfın <xref:Microsoft.Extensions.Hosting.IApplicationLifetime.StopApplication*> `Shutdown` yöntemi çağrıldığında bir uygulamayı düzgün bir şekilde kapatmak için kullanır:
+<xref:Microsoft.Extensions.Hosting.IApplicationLifetime.StopApplication*>uygulamanın sonlandırılmasını ister. Aşağıdaki sınıf, <xref:Microsoft.Extensions.Hosting.IApplicationLifetime.StopApplication*> sınıfın yöntemi çağrıldığında bir uygulamayı düzgün bir şekilde kapatmak için kullanır `Shutdown` :
 
 ```csharp
 public class MyClass
@@ -1001,7 +1003,7 @@ public class MyClass
 
 ::: moniker range=">= aspnetcore-5.0"
 
-ASP.NET Core şablonları bir .NET Core genel Konağı (<xref:Microsoft.Extensions.Hosting.HostBuilder>) oluşturur.
+ASP.NET Core şablonları bir .NET Core genel Konağı () oluşturur <xref:Microsoft.Extensions.Hosting.HostBuilder> .
 
 ## <a name="host-definition"></a>Ana bilgisayar tanımı
 
@@ -1012,16 +1014,16 @@ ASP.NET Core şablonları bir .NET Core genel Konağı (<xref:Microsoft.Extensio
 * Yapılandırma
 * `IHostedService`uygulamalarını
 
-Bir konak başlatıldığında, bu uygulamanın, `IHostedService.StartAsync` dı kapsayıcısında bulduğu her <xref:Microsoft.Extensions.Hosting.IHostedService> bir uygulamasına çağrı yapılır. Bir Web uygulamasında, `IHostedService` uygulamalardan biri [http sunucu uygulaması](xref:fundamentals/index#servers)Başlatan bir Web hizmetidir.
+Bir konak başlatıldığında, bu uygulamanın, `IHostedService.StartAsync` dı kapsayıcısında bulduğu her bir uygulamasına çağrı yapılır <xref:Microsoft.Extensions.Hosting.IHostedService> . Bir Web uygulamasında, `IHostedService` uygulamalardan biri [http sunucu uygulaması](xref:fundamentals/index#servers)Başlatan bir Web hizmetidir.
 
 Uygulamanın tüm birbirine bağlı kaynaklarını tek bir nesnede dahil etmek için başlıca neden, yaşam süresi yönetimi: uygulama başlatma ve düzgün kapanma üzerinde denetim.
 
 ## <a name="set-up-a-host"></a>Konak ayarlama
 
-Ana bilgisayar genellikle `Program` sınıfında kodla yapılandırılır, oluşturulur ve çalıştırılır. `Main` Yöntemi:
+Ana bilgisayar genellikle sınıfında kodla yapılandırılır, oluşturulur ve çalıştırılır `Program` . `Main`Yöntemi:
 
-* Bir Oluşturucu `CreateHostBuilder` nesnesi oluşturmak ve yapılandırmak için bir yöntem çağırır.
-* Oluşturucu `Build` nesnesindeki `Run` çağrılar ve Yöntemler.
+* `CreateHostBuilder`Bir Oluşturucu nesnesi oluşturmak ve yapılandırmak için bir yöntem çağırır.
+* `Build` `Run` Oluşturucu nesnesindeki çağrılar ve Yöntemler.
 
 ASP.NET Core Web şablonları, bir konak oluşturmak için aşağıdaki kodu oluşturur:
 
@@ -1042,7 +1044,7 @@ public class Program
 }
 ```
 
-Aşağıdaki kod, dı kapsayıcısına eklenen bir `IHostedService` uygulamayla http olmayan bir iş yükü oluşturur.
+Aşağıdaki kod, dı kapsayıcısına eklenen bir uygulamayla HTTP olmayan bir iş yükü oluşturur `IHostedService` .
 
 ```csharp
 public class Program
@@ -1061,7 +1063,7 @@ public class Program
 }
 ```
 
-Bir HTTP iş yükü için `Main` yöntem aynıdır ancak `CreateHostBuilder` çağrılır: `ConfigureWebHostDefaults`
+Bir HTTP iş yükü için `Main` yöntem aynıdır ancak çağrılır `CreateHostBuilder` `ConfigureWebHostDefaults` :
 
 ```csharp
 public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -1072,20 +1074,20 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
         });
 ```
 
-Uygulama Entity Framework Core kullanıyorsa, `CreateHostBuilder` yöntemin adını veya imzasını değiştirmeyin. [Entity Framework Core araçları](/ef/core/miscellaneous/cli/) , uygulamayı çalıştırmadan Konağı yapılandıran `CreateHostBuilder` bir yöntem bulmayı bekler. Daha fazla bilgi için bkz. [Tasarım zamanı DbContext oluşturma](/ef/core/miscellaneous/cli/dbcontext-creation).
+Uygulama Entity Framework Core kullanıyorsa, yöntemin adını veya imzasını değiştirmeyin `CreateHostBuilder` . [Entity Framework Core araçları](/ef/core/miscellaneous/cli/) , `CreateHostBuilder` uygulamayı çalıştırmadan Konağı yapılandıran bir yöntem bulmayı bekler. Daha fazla bilgi için bkz. [Tasarım zamanı DbContext oluşturma](/ef/core/miscellaneous/cli/dbcontext-creation).
 
 ## <a name="default-builder-settings"></a>Varsayılan Oluşturucu ayarları
 
-<xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> Yöntemi:
+<xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*>Yöntemi:
 
-* [İçerik kökünü](xref:fundamentals/index#content-root) tarafından <xref:System.IO.Directory.GetCurrentDirectory*>döndürülen yola ayarlar.
+* [İçerik kökünü](xref:fundamentals/index#content-root) tarafından döndürülen yola ayarlar <xref:System.IO.Directory.GetCurrentDirectory*> .
 * Ana bilgisayar yapılandırmasını şuradan yükler:
-  * Ön eki olan `DOTNET_`ortam değişkenleri.
+  * Ön eki olan ortam değişkenleri `DOTNET_` .
   * Komut satırı bağımsız değişkenleri.
 * Uygulama yapılandırmasını şuradan yükler:
-  * *appSettings. JSON*.
+  * *Üzerindeappsettings.js*.
   * *appSettings. {Environment}. JSON*.
-  * [Secret Manager](xref:security/app-secrets) Uygulama `Development` ortamda çalıştığında gizli dizi Yöneticisi.
+  * Uygulama ortamda çalıştığında [gizli dizi Yöneticisi](xref:security/app-secrets) `Development` .
   * Ortam değişkenleri.
   * Komut satırı bağımsız değişkenleri.
 * Aşağıdaki [günlük](xref:fundamentals/logging/index) sağlayıcılarını ekler:
@@ -1095,13 +1097,13 @@ Uygulama Entity Framework Core kullanıyorsa, `CreateHostBuilder` yöntemin adı
   * Olay günlüğü (yalnızca Windows üzerinde çalışırken)
 * Ortam geliştirme sırasında [kapsam doğrulaması](xref:fundamentals/dependency-injection#scope-validation) ve [bağımlılık doğrulaması](xref:Microsoft.Extensions.DependencyInjection.ServiceProviderOptions.ValidateOnBuild) etkinleştirilir.
 
-`ConfigureWebHostDefaults` Yöntemi:
+`ConfigureWebHostDefaults`Yöntemi:
 
-* Ön ekli ortam değişkenlerinden ana bilgisayar yapılandırmasını yükler `ASPNETCORE_`.
-* [Kestrel](xref:fundamentals/servers/kestrel) sunucusunu Web sunucusu olarak ayarlar ve uygulamanın barındırma yapılandırma sağlayıcılarını kullanarak yapılandırır. Kestrel sunucusunun varsayılan seçenekleri için bkz <xref:fundamentals/servers/kestrel#kestrel-options>..
+* Ön ekli ortam değişkenlerinden ana bilgisayar yapılandırmasını yükler `ASPNETCORE_` .
+* [Kestrel](xref:fundamentals/servers/kestrel) sunucusunu Web sunucusu olarak ayarlar ve uygulamanın barındırma yapılandırma sağlayıcılarını kullanarak yapılandırır. Kestrel sunucusunun varsayılan seçenekleri için bkz <xref:fundamentals/servers/kestrel#kestrel-options> ..
 * [Ana bilgisayar filtreleme ara yazılımı](xref:fundamentals/servers/kestrel#host-filtering)ekler.
-* `ASPNETCORE_FORWARDEDHEADERS_ENABLED` Eşitse `true`, [iletilen üstbilgiler ara yazılımı](xref:host-and-deploy/proxy-load-balancer#forwarded-headers) ekler.
-* IIS tümleştirmesini etkinleştirilir. IIS varsayılan seçenekleri için bkz <xref:host-and-deploy/iis/index#iis-options>..
+* Eşitse, [Iletilen üstbilgiler ara yazılımı](xref:host-and-deploy/proxy-load-balancer#forwarded-headers) ekler `ASPNETCORE_FORWARDEDHEADERS_ENABLED` `true` .
+* IIS tümleştirmesini etkinleştirilir. IIS varsayılan seçenekleri için bkz <xref:host-and-deploy/iis/index#iis-options> ..
 
 Bu makalenin ilerleyen kısımlarında [Web Apps bölümlerine yönelik](#settings-for-web-apps) [tüm uygulama türleri](#settings-for-all-app-types) ve ayarlarının ayarları, varsayılan Oluşturucu ayarlarının nasıl geçersiz kılınacağını göstermektedir.
 
@@ -1113,44 +1115,44 @@ Aşağıdaki hizmetler otomatik olarak kaydedilir:
 * [Ihostlifetime](#ihostlifetime)
 * [Ihostenvironment/ıwebhostenvironment](#ihostenvironment)
 
-Framework tarafından sunulan hizmetler hakkında daha fazla bilgi için bkz <xref:fundamentals/dependency-injection#framework-provided-services>..
+Framework tarafından sunulan hizmetler hakkında daha fazla bilgi için bkz <xref:fundamentals/dependency-injection#framework-provided-services> ..
 
 ## <a name="ihostapplicationlifetime"></a>Ihostapplicationlifetime
 
-Başlatma sonrası <xref:Microsoft.Extensions.Hosting.IHostApplicationLifetime> ve düzgün `IApplicationLifetime`kapanma görevlerini işlemek için herhangi bir sınıfa (eski adıyla) hizmetini ekleyin. Arabirimdeki üç özellik, uygulama başlatma ve uygulama durdurma olay işleyicisi yöntemlerini kaydetmek için kullanılan iptal belirteçleridir. Arabirim Ayrıca bir `StopApplication` yöntemi içerir.
+<xref:Microsoft.Extensions.Hosting.IHostApplicationLifetime> `IApplicationLifetime` Başlatma sonrası ve düzgün kapanma görevlerini işlemek için herhangi bir sınıfa (eski adıyla) hizmetini ekleyin. Arabirimdeki üç özellik, uygulama başlatma ve uygulama durdurma olay işleyicisi yöntemlerini kaydetmek için kullanılan iptal belirteçleridir. Arabirim Ayrıca bir yöntemi içerir `StopApplication` .
 
-Aşağıdaki örnek, olayları kaydeden `IHostedService` `IHostApplicationLifetime` bir uygulamasıdır:
+Aşağıdaki örnek, `IHostedService` olayları kaydeden bir uygulamasıdır `IHostApplicationLifetime` :
 
 [!code-csharp[](generic-host/samples-snapshot/3.x/LifetimeEventsHostedService.cs?name=snippet_LifetimeEvents)]
 
 ## <a name="ihostlifetime"></a>Ihostlifetime
 
-<xref:Microsoft.Extensions.Hosting.IHostLifetime> Uygulama, ana bilgisayar başladığında ve durdurulduğunda denetler. Kaydedilen son uygulama kullanılır.
+<xref:Microsoft.Extensions.Hosting.IHostLifetime>Uygulama, ana bilgisayar başladığında ve durdurulduğunda denetler. Kaydedilen son uygulama kullanılır.
 
 `Microsoft.Extensions.Hosting.Internal.ConsoleLifetime`Varsayılan `IHostLifetime` uygulama. `ConsoleLifetime`:
 
-* <kbd>CTRL</kbd>+<kbd>C</kbd>/sigint veya sigterm 'i dinler ve kapalı <xref:Microsoft.Extensions.Hosting.IHostApplicationLifetime.StopApplication*> işlemini başlatmak için çağırır.
+* <kbd>CTRL</kbd> + <kbd>C</kbd>/sigint veya sigterm 'i dinler ve <xref:Microsoft.Extensions.Hosting.IHostApplicationLifetime.StopApplication*> kapalı işlemini başlatmak için çağırır.
 * [RunAsync](#runasync) ve [Waitforshutdownasync](#waitforshutdownasync)gibi uzantıları kaldırır.
 
 ## <a name="ihostenvironment"></a>Ihostenvironment
 
-Aşağıdaki ayarlarla <xref:Microsoft.Extensions.Hosting.IHostEnvironment> ilgili bilgi almak için hizmeti bir sınıfa ekleyin:
+<xref:Microsoft.Extensions.Hosting.IHostEnvironment>Aşağıdaki ayarlarla ilgili bilgi almak için hizmeti bir sınıfa ekleyin:
 
 * [ApplicationName](#applicationname)
 * [EnvironmentName](#environmentname)
 * [Contentrootyolu](#contentroot)
 
-Web Apps, `IWebHostEnvironment` [WebRootPath](#webroot)öğesini devralan `IHostEnvironment` ve ekleyen arabirimini uygular.
+Web Apps, `IWebHostEnvironment` WebRootPath öğesini devralan `IHostEnvironment` ve ekleyen arabirimini uygular. [WebRootPath](#webroot)
 
 ## <a name="host-configuration"></a>Konak yapılandırması
 
-Ana bilgisayar yapılandırması, <xref:Microsoft.Extensions.Hosting.IHostEnvironment> uygulamanın özellikleri için kullanılır.
+Ana bilgisayar yapılandırması, uygulamanın özellikleri için kullanılır <xref:Microsoft.Extensions.Hosting.IHostEnvironment> .
 
-Konak yapılandırması, içinde <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*> [Hostbuildercontext. Configuration](xref:Microsoft.Extensions.Hosting.HostBuilderContext.Configuration) içinden kullanılabilir. Sonra `ConfigureAppConfiguration`, `HostBuilderContext.Configuration` uygulama yapılandırması ile değiştirilmiştir.
+Ana Bilgisayar Yapılandırması içinde [HostBuilderContext.Configurlama](xref:Microsoft.Extensions.Hosting.HostBuilderContext.Configuration) tarafından kullanılabilir <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*> . Sonra `ConfigureAppConfiguration` , `HostBuilderContext.Configuration` uygulama yapılandırması ile değiştirilmiştir.
 
-Konak yapılandırması eklemek için üzerinde <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureHostConfiguration*> `IHostBuilder`öğesini çağırın. `ConfigureHostConfiguration`, eklenebilir sonuçlarla birden çok kez çağrılabilir. Ana bilgisayar, belirli bir anahtardaki bir değeri en son belirleyen seçeneği kullanır.
+Konak yapılandırması eklemek için üzerinde öğesini <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureHostConfiguration*> çağırın `IHostBuilder` . `ConfigureHostConfiguration`, eklenebilir sonuçlarla birden çok kez çağrılabilir. Ana bilgisayar, belirli bir anahtardaki bir değeri en son belirleyen seçeneği kullanır.
 
-Ön ek `DOTNET_` ve komut satırı bağımsız değişkenlerine sahip ortam değişkeni sağlayıcısı tarafından `CreateDefaultBuilder`dahildir. Web Apps için, ön ekine `ASPNETCORE_` sahip ortam değişkeni sağlayıcısı eklenir. Ortam değişkenleri okurken ön ek kaldırılır. Örneğin, için `ASPNETCORE_ENVIRONMENT` ortam değişkeni değeri, `environment` anahtar için ana bilgisayar yapılandırma değeri olur.
+Ön ek `DOTNET_` ve komut satırı bağımsız değişkenlerine sahip ortam değişkeni sağlayıcısı tarafından dahildir `CreateDefaultBuilder` . Web Apps için, ön ekine sahip ortam değişkeni sağlayıcısı `ASPNETCORE_` eklenir. Ortam değişkenleri okurken ön ek kaldırılır. Örneğin, için ortam değişkeni değeri, `ASPNETCORE_ENVIRONMENT` anahtar için ana bilgisayar yapılandırma değeri olur `environment` .
 
 Aşağıdaki örnek ana bilgisayar yapılandırması oluşturur:
 
@@ -1158,15 +1160,15 @@ Aşağıdaki örnek ana bilgisayar yapılandırması oluşturur:
 
 ## <a name="app-configuration"></a>Uygulama yapılandırması
 
-Uygulama yapılandırması, üzerinde <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*> `IHostBuilder`çağırarak oluşturulur. `ConfigureAppConfiguration`, eklenebilir sonuçlarla birden çok kez çağrılabilir. Uygulama, belirli bir anahtardaki bir değeri en son belirleyen seçeneği kullanır. 
+Uygulama yapılandırması, üzerinde çağırarak oluşturulur <xref:Microsoft.Extensions.Hosting.HostBuilder.ConfigureAppConfiguration*> `IHostBuilder` . `ConfigureAppConfiguration`, eklenebilir sonuçlarla birden çok kez çağrılabilir. Uygulama, belirli bir anahtardaki bir değeri en son belirleyen seçeneği kullanır. 
 
-Tarafından `ConfigureAppConfiguration` oluşturulan yapılandırma, sonraki Işlemler ve dı hizmeti olarak, [hostbuildercontext. Configuration](xref:Microsoft.Extensions.Hosting.HostBuilderContext.Configuration*) konumunda kullanılabilir. Konak yapılandırması, uygulama yapılandırmasına de eklenir.
+Tarafından oluşturulan yapılandırma, `ConfigureAppConfiguration` sonraki işlemler ve dı hizmeti olarak [HostBuilderContext.Config](xref:Microsoft.Extensions.Hosting.HostBuilderContext.Configuration*) bir hizmet olarak sunulmaktadır. Konak yapılandırması, uygulama yapılandırmasına de eklenir.
 
 Daha fazla bilgi için [ASP.NET Core yapılandırma](xref:fundamentals/configuration/index#configureappconfiguration)konusuna bakın.
 
 ## <a name="settings-for-all-app-types"></a>Tüm uygulama türleri için ayarlar
 
-Bu bölüm, hem HTTP hem de HTTP olmayan iş yükleri için uygulanan konak ayarlarını listeler. Varsayılan olarak, bu ayarları yapılandırmak için kullanılan ortam değişkenlerinin bir `DOTNET_` veya `ASPNETCORE_` öneki olabilir.
+Bu bölüm, hem HTTP hem de HTTP olmayan iş yükleri için uygulanan konak ayarlarını listeler. Varsayılan olarak, bu ayarları yapılandırmak için kullanılan ortam değişkenlerinin bir `DOTNET_` veya öneki olabilir `ASPNETCORE_` .
 
 <!-- In the following sections, two spaces at end of line are used to force line breaks in the rendered page. -->
 
@@ -1190,7 +1192,7 @@ Bu değeri ayarlamak için ortam değişkenini kullanın.
 **Varsayılan**: uygulama derlemesinin bulunduğu klasör.  
 **Ortam değişkeni**:`<PREFIX_>CONTENTROOT`
 
-Bu değeri ayarlamak için, ortam değişkenini kullanın veya üzerinde `UseContentRoot` `IHostBuilder`arama yapın:
+Bu değeri ayarlamak için, ortam değişkenini kullanın veya üzerinde arama `UseContentRoot` yapın `IHostBuilder` :
 
 ```csharp
 Host.CreateDefaultBuilder(args)
@@ -1205,14 +1207,14 @@ Daha fazla bilgi için bkz.
 
 ### <a name="environmentname"></a>EnvironmentName
 
-[Ihostenvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostEnvironment.EnvironmentName*) özelliği herhangi bir değere ayarlanabilir. Çerçeve tanımlı değerler, `Development` `Staging`, ve `Production`içerir. Değerler büyük/küçük harfe duyarlı değildir.
+[Ihostenvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostEnvironment.EnvironmentName*) özelliği herhangi bir değere ayarlanabilir. Çerçeve tanımlı değerler,, `Development` `Staging` ve içerir `Production` . Değerler büyük/küçük harfe duyarlı değildir.
 
 **Anahtar**:`environment`  
 **Şunu yazın**:`string`  
 **Varsayılan**:`Production`  
 **Ortam değişkeni**:`<PREFIX_>ENVIRONMENT`
 
-Bu değeri ayarlamak için, ortam değişkenini kullanın veya üzerinde `UseEnvironment` `IHostBuilder`arama yapın:
+Bu değeri ayarlamak için, ortam değişkenini kullanın veya üzerinde arama `UseEnvironment` yapın `IHostBuilder` :
 
 ```csharp
 Host.CreateDefaultBuilder(args)
@@ -1222,7 +1224,7 @@ Host.CreateDefaultBuilder(args)
 
 ### <a name="shutdowntimeout"></a>ShutdownTimeout
 
-[Hostoptions. ShutdownTimeout](xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*) , için <xref:Microsoft.Extensions.Hosting.IHost.StopAsync*>zaman aşımını ayarlar. Varsayılan değer beş saniyedir.  Zaman aşımı süresi boyunca ana bilgisayar:
+[Hostoptions. ShutdownTimeout](xref:Microsoft.Extensions.Hosting.HostOptions.ShutdownTimeout*) , için zaman aşımını ayarlar <xref:Microsoft.Extensions.Hosting.IHost.StopAsync*> . Varsayılan değer beş saniyedir.  Zaman aşımı süresi boyunca ana bilgisayar:
 
 * [Ihostapplicationlifetime. Applicationdurduruluyor](/dotnet/api/microsoft.extensions.hosting.ihostapplicationlifetime.applicationstopping)tetikler.
 * Üzerinde durmayacak hizmetler için barındırılan Hizmetleri durdurma ve hataları günlüğe kaydetme girişimleri.
@@ -1234,28 +1236,28 @@ Tüm barındırılan hizmetler durmadan önce zaman aşımı süresi dolarsa, uy
 **Varsayılan**: 5 saniye  
 **Ortam değişkeni**:`<PREFIX_>SHUTDOWNTIMEOUTSECONDS`
 
-Bu değeri ayarlamak için, ortam değişkenini kullanın veya yapılandırın `HostOptions`. Aşağıdaki örnek, zaman aşımını 20 saniye olarak ayarlar:
+Bu değeri ayarlamak için, ortam değişkenini kullanın veya yapılandırın `HostOptions` . Aşağıdaki örnek, zaman aşımını 20 saniye olarak ayarlar:
 
 [!code-csharp[](generic-host/samples-snapshot/3.x/Program.cs?name=snippet_HostOptions)]
 
 ### <a name="disable-app-configuration-reload-on-change"></a>Değişiklik sırasında uygulama yapılandırması yeniden yüklemeyi devre dışı bırak
 
-[Varsayılan](xref:fundamentals/configuration/index#default)olarak, *appSettings. JSON* ve *appSettings. { Ortam}. JSON* , dosya değiştiğinde yeniden yüklenir. ASP.NET Core 5,0 Preview 3 veya sonraki bir sürümde bu yeniden yükleme davranışını devre dışı bırakmak `hostBuilder:reloadConfigOnChange` için anahtarı `false`olarak ayarlayın.
+[Varsayılan](xref:fundamentals/configuration/index#default)olarak, *appsettings.json* ve appSettingsappsettings.js *. { Ortam}. JSON* , dosya değiştiğinde yeniden yüklenir. ASP.NET Core 5,0 Preview 3 veya sonraki bir sürümde bu yeniden yükleme davranışını devre dışı bırakmak için `hostBuilder:reloadConfigOnChange` anahtarı olarak ayarlayın `false` .
 
 **Anahtar**:`hostBuilder:reloadConfigOnChange`  
-**Tür**: `bool` (`true` veya `1`)  
+**Tür**: `bool` ( `true` veya `1` )  
 **Varsayılan**:`true`  
 **Komut satırı bağımsız değişkeni**:`hostBuilder:reloadConfigOnChange`  
 **Ortam değişkeni**:`<PREFIX_>hostBuilder:reloadConfigOnChange`
 
 > [!WARNING]
-> İki nokta (`:`) ayırıcısı tüm platformlarda ortam değişkeni hiyerarşik anahtarlarla birlikte çalışmaz. Daha fazla bilgi için bkz. [ortam değişkenleri](xref:fundamentals/configuration/index#environment-variables).
+> İki nokta ( `:` ) ayırıcısı tüm platformlarda ortam değişkeni hiyerarşik anahtarlarla birlikte çalışmaz. Daha fazla bilgi için bkz. [ortam değişkenleri](xref:fundamentals/configuration/index#environment-variables).
 
 ## <a name="settings-for-web-apps"></a>Web Apps ayarları
 
-Bazı konak ayarları yalnızca HTTP iş yükleri için geçerlidir. Varsayılan olarak, bu ayarları yapılandırmak için kullanılan ortam değişkenlerinin bir `DOTNET_` veya `ASPNETCORE_` öneki olabilir.
+Bazı konak ayarları yalnızca HTTP iş yükleri için geçerlidir. Varsayılan olarak, bu ayarları yapılandırmak için kullanılan ortam değişkenlerinin bir `DOTNET_` veya öneki olabilir `ASPNETCORE_` .
 
-Üzerinde `IWebHostBuilder` uzantı yöntemleri bu ayarlar için kullanılabilir. Aşağıdaki örnekte olduğu gibi, ' nin `webBuilder` `IWebHostBuilder`bir örneği olduğunu belirten uzantı yöntemlerinin nasıl çağrılacağını gösteren kod örnekleri:
+Üzerinde uzantı yöntemleri `IWebHostBuilder` Bu ayarlar için kullanılabilir. `webBuilder` `IWebHostBuilder` Aşağıdaki örnekte olduğu gibi, ' nin bir örneği olduğunu belirten uzantı yöntemlerinin nasıl çağrılacağını gösteren kod örnekleri:
 
 ```csharp
 public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -1269,14 +1271,14 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 
 ### <a name="capturestartuperrors"></a>CaptureStartupErrors
 
-Ne `false`zaman, başlatma sırasında oluşan hata, ana bilgisayardan çıkılıyor. Ne `true`zaman, ana bilgisayar başlangıç sırasında özel durumları yakalar ve sunucuyu başlatmaya çalışır.
+Ne zaman `false` , başlatma sırasında oluşan hata, ana bilgisayardan çıkılıyor. Ne zaman `true` , ana bilgisayar başlangıç sırasında özel durumları yakalar ve sunucuyu başlatmaya çalışır.
 
 **Anahtar**:`captureStartupErrors`  
-**Tür**: `bool` (`true` veya `1`)  
-**Varsayılan**: uygulamanın IIS `false` arkasındaki Kestrel, varsayılan olarak olduğu `true`durumlar dışında çalışır.  
+**Tür**: `bool` ( `true` veya `1` )  
+**Varsayılan**: `false` uygulamanın IIS arkasındaki Kestrel, varsayılan olarak olduğu durumlar dışında çalışır `true` .  
 **Ortam değişkeni**:`<PREFIX_>CAPTURESTARTUPERRORS`
 
-Bu değeri ayarlamak için yapılandırma veya çağırma `CaptureStartupErrors`kullanın:
+Bu değeri ayarlamak için yapılandırma veya çağırma kullanın `CaptureStartupErrors` :
 
 ```csharp
 webBuilder.CaptureStartupErrors(true);
@@ -1284,14 +1286,14 @@ webBuilder.CaptureStartupErrors(true);
 
 ### <a name="detailederrors"></a>DetailedErrors
 
-Etkinleştirildiğinde veya ortam `Development`olduğunda, uygulama ayrıntılı hataları yakalar.
+Etkinleştirildiğinde veya ortam olduğunda, `Development` uygulama ayrıntılı hataları yakalar.
 
 **Anahtar**:`detailedErrors`  
-**Tür**: `bool` (`true` veya `1`)  
+**Tür**: `bool` ( `true` veya `1` )  
 **Varsayılan**:`false`  
 **Ortam değişkeni**:`<PREFIX_>_DETAILEDERRORS`
 
-Bu değeri ayarlamak için yapılandırma veya çağırma `UseSetting`kullanın:
+Bu değeri ayarlamak için yapılandırma veya çağırma kullanın `UseSetting` :
 
 ```csharp
 webBuilder.UseSetting(WebHostDefaults.DetailedErrorsKey, "true");
@@ -1306,7 +1308,7 @@ Başlangıçta yüklenecek başlangıç derlemelerinin barındırılması için 
 **Varsayılan**: boş dize  
 **Ortam değişkeni**:`<PREFIX_>_HOSTINGSTARTUPASSEMBLIES`
 
-Bu değeri ayarlamak için yapılandırma veya çağırma `UseSetting`kullanın:
+Bu değeri ayarlamak için yapılandırma veya çağırma kullanın `UseSetting` :
 
 ```csharp
 webBuilder.UseSetting(WebHostDefaults.HostingStartupAssembliesKey, "assembly1;assembly2");
@@ -1321,7 +1323,7 @@ Başlangıçta dışlamak üzere başlangıç derlemelerinin barındırılması 
 **Varsayılan**: boş dize  
 **Ortam değişkeni**:`<PREFIX_>_HOSTINGSTARTUPEXCLUDEASSEMBLIES`
 
-Bu değeri ayarlamak için yapılandırma veya çağırma `UseSetting`kullanın:
+Bu değeri ayarlamak için yapılandırma veya çağırma kullanın `UseSetting` :
 
 ```csharp
 webBuilder.UseSetting(WebHostDefaults.HostingStartupExcludeAssembliesKey, "assembly1;assembly2");
@@ -1336,7 +1338,7 @@ HTTPS yeniden yönlendirme bağlantı noktası. [Https zorlama](xref:security/en
 **Varsayılan**: varsayılan değer ayarlı değildir.  
 **Ortam değişkeni**:`<PREFIX_>HTTPS_PORT`
 
-Bu değeri ayarlamak için yapılandırma veya çağırma `UseSetting`kullanın:
+Bu değeri ayarlamak için yapılandırma veya çağırma kullanın `UseSetting` :
 
 ```csharp
 webBuilder.UseSetting("https_port", "8080");
@@ -1344,14 +1346,14 @@ webBuilder.UseSetting("https_port", "8080");
 
 ### <a name="preferhostingurls"></a>Tercih Hostingurl 'Leri
 
-Konağın `IWebHostBuilder` `IServer` uygulamayla yapılandırılmış URL 'Ler yerine ile yapılandırılan URL 'lerde dinleme yapıp kullanmayacağını belirtir.
+Konağın uygulamayla yapılandırılmış URL 'Ler yerine ile yapılandırılan URL 'lerde dinleme yapıp kullanmayacağını belirtir `IWebHostBuilder` `IServer` .
 
 **Anahtar**:`preferHostingUrls`  
-**Tür**: `bool` (`true` veya `1`)  
+**Tür**: `bool` ( `true` veya `1` )  
 **Varsayılan**:`true`  
 **Ortam değişkeni**:`<PREFIX_>_PREFERHOSTINGURLS`
 
-Bu değeri ayarlamak için, ortam değişkenini veya çağrısını `PreferHostingUrls`kullanın:
+Bu değeri ayarlamak için, ortam değişkenini veya çağrısını kullanın `PreferHostingUrls` :
 
 ```csharp
 webBuilder.PreferHostingUrls(false);
@@ -1362,11 +1364,11 @@ webBuilder.PreferHostingUrls(false);
 Uygulamanın derlemesi tarafından yapılandırılan başlatma derlemelerinin barındırılması dahil olmak üzere, barındırma başlangıç derlemelerinin otomatik yüklenmesini engeller. Daha fazla bilgi için bkz. <xref:fundamentals/configuration/platform-specific-configuration>.
 
 **Anahtar**:`preventHostingStartup`  
-**Tür**: `bool` (`true` veya `1`)  
+**Tür**: `bool` ( `true` veya `1` )  
 **Varsayılan**:`false`  
 **Ortam değişkeni**:`<PREFIX_>_PREVENTHOSTINGSTARTUP`
 
-Bu değeri ayarlamak için, ortam değişkenini veya çağrısını `UseSetting` kullanın:
+Bu değeri ayarlamak için, ortam değişkenini veya çağrısını kullanın `UseSetting` :
 
 ```csharp
 webBuilder.UseSetting(WebHostDefaults.PreventHostingStartupKey, "true");
@@ -1374,14 +1376,14 @@ webBuilder.UseSetting(WebHostDefaults.PreventHostingStartupKey, "true");
 
 ### <a name="startupassembly"></a>StartupAssembly
 
-`Startup` Sınıfı aramak için bütünleştirilmiş kod.
+Sınıfı aramak için bütünleştirilmiş kod `Startup` .
 
 **Anahtar**:`startupAssembly`  
 **Şunu yazın**:`string`  
 **Varsayılan**: uygulamanın derlemesi  
 **Ortam değişkeni**:`<PREFIX_>STARTUPASSEMBLY`
 
-Bu değeri ayarlamak için, ortam değişkenini veya çağrısını `UseStartup`kullanın. `UseStartup`bir derleme adı (`string`) veya bir tür (`TStartup`) alabilir. Birden çok `UseStartup` yöntem çağrılırsa, son bir öncelik alır.
+Bu değeri ayarlamak için, ortam değişkenini veya çağrısını kullanın `UseStartup` . `UseStartup`bir derleme adı ( `string` ) veya bir tür () alabilir `TStartup` . Birden çok `UseStartup` yöntem çağrılırsa, son bir öncelik alır.
 
 ```csharp
 webBuilder.UseStartup("StartupAssemblyName");
@@ -1393,14 +1395,14 @@ webBuilder.UseStartup<Startup>();
 
 ### <a name="urls"></a>URL’ler
 
-Sunucu istekleri için dinlemesi gereken bağlantı noktaları ve protokollerle, noktalı virgülle ayrılmış IP adresleri listesi veya ana bilgisayar adresleri. Örneğin, `http://localhost:123`. Sunucunun belirtilen\*bağlantı noktasını ve Protokolü (örneğin, `http://*:5000`) kullanarak herhangi bir IP adresi veya ana bilgisayar için istekleri dinlemesi gerektiğini belirtmek için "" kullanın. Protokol (`http://` veya `https://`) her URL 'ye dahil edilmiş olmalıdır. Desteklenen biçimler sunucular arasında farklılık gösterir.
+Sunucu istekleri için dinlemesi gereken bağlantı noktaları ve protokollerle, noktalı virgülle ayrılmış IP adresleri listesi veya ana bilgisayar adresleri. Örneğin, `http://localhost:123`. \*Sunucunun belirtilen bağlantı noktasını ve Protokolü (örneğin,) kullanarak herhangi BIR IP adresi veya ana bilgisayar için istekleri dinlemesi gerektiğini belirtmek için "" kullanın `http://*:5000` . Protokol ( `http://` veya `https://` ) her URL 'ye dahil edilmiş olmalıdır. Desteklenen biçimler sunucular arasında farklılık gösterir.
 
 **Anahtar**:`urls`  
 **Şunu yazın**:`string`  
 **Varsayılan**: `http://localhost:5000` ve`https://localhost:5001`  
 **Ortam değişkeni**:`<PREFIX_>URLS`
 
-Bu değeri ayarlamak için, ortam değişkenini veya çağrısını `UseUrls`kullanın:
+Bu değeri ayarlamak için, ortam değişkenini veya çağrısını kullanın `UseUrls` :
 
 ```csharp
 webBuilder.UseUrls("http://*:5000;http://localhost:5001;https://hostname:5002");
@@ -1414,10 +1416,10 @@ Kestrel kendi uç nokta yapılandırması API 'sine sahiptir. Daha fazla bilgi i
 
 **Anahtar**:`webroot`  
 **Şunu yazın**:`string`  
-**Varsayılan**: varsayılan `wwwroot`. *{Content root}/Wwwroot* yolu var olmalıdır.  
+**Varsayılan**: varsayılan `wwwroot` . *{Content root}/Wwwroot* yolu var olmalıdır.  
 **Ortam değişkeni**:`<PREFIX_>WEBROOT`
 
-Bu değeri ayarlamak için, ortam değişkenini kullanın veya üzerinde `UseWebRoot` `IWebHostBuilder`arama yapın:
+Bu değeri ayarlamak için, ortam değişkenini kullanın veya üzerinde arama `UseWebRoot` yapın `IWebHostBuilder` :
 
 ```csharp
 webBuilder.UseWebRoot("public");
@@ -1430,29 +1432,29 @@ Daha fazla bilgi için bkz.
 
 ## <a name="manage-the-host-lifetime"></a>Konak ömrünü yönetme
 
-Uygulamayı başlatmak ve durdurmak için <xref:Microsoft.Extensions.Hosting.IHost> oluşturulan uygulamadaki Yöntemleri çağırın. Bu yöntemler, hizmet <xref:Microsoft.Extensions.Hosting.IHostedService> kapsayıcısına kayıtlı tüm uygulamaları etkiler.
+<xref:Microsoft.Extensions.Hosting.IHost>Uygulamayı başlatmak ve durdurmak için oluşturulan uygulamadaki Yöntemleri çağırın. Bu yöntemler <xref:Microsoft.Extensions.Hosting.IHostedService> , hizmet kapsayıcısına kayıtlı tüm uygulamaları etkiler.
 
-### <a name="run"></a>Çalıştırın
+### <a name="run"></a>Çalıştır
 
 <xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Run*>uygulamayı çalıştırır ve ana bilgisayarı kapatıncaya kadar çağıran iş parçacığını engeller.
 
 ### <a name="runasync"></a>RunAsync
 
-<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync*>uygulamayı çalıştırır ve iptal belirteci veya <xref:System.Threading.Tasks.Task> kapanışı tetiklendiğinde tamamlanmış bir döndürür.
+<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.RunAsync*>uygulamayı çalıştırır ve <xref:System.Threading.Tasks.Task> iptal belirteci veya kapanışı tetiklendiğinde tamamlanmış bir döndürür.
 
 ### <a name="runconsoleasync"></a>RunConsoleAsync
 
-<xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.RunConsoleAsync*>Konsol desteğini sağlar, Konağı oluşturur ve başlatır ve <kbd>CTRL</kbd>+<kbd>C</kbd>/sigint veya sigterm 'in kapatılmasını bekler.
+<xref:Microsoft.Extensions.Hosting.HostingHostBuilderExtensions.RunConsoleAsync*>Konsol desteğini sağlar, Konağı oluşturur ve başlatır ve <kbd>CTRL</kbd> + <kbd>C</kbd>/sigint veya sigterm 'in kapatılmasını bekler.
 
-### <a name="start"></a>Başlat
+### <a name="start"></a>Başlangıç
 
 <xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.Start*>Konağı zaman uyumlu olarak başlatır.
 
 ### <a name="startasync"></a>StartAsync
 
-<xref:Microsoft.Extensions.Hosting.IHost.StartAsync*>Konağı başlatır ve iptal belirteci ya <xref:System.Threading.Tasks.Task> da kapatması tetiklendiğinde tamamlanmış bir döndürür. 
+<xref:Microsoft.Extensions.Hosting.IHost.StartAsync*>Konağı başlatır ve <xref:System.Threading.Tasks.Task> iptal belirteci ya da kapatması tetiklendiğinde tamamlanmış bir döndürür. 
 
-<xref:Microsoft.Extensions.Hosting.IHostLifetime.WaitForStartAsync*>, ' nin `StartAsync`başlangıcında çağrılır ve devam etmeden önce tamamlanana kadar bekler. Bu, bir dış olay tarafından sinyallene kadar başlatmayı geciktirmek için kullanılabilir.
+<xref:Microsoft.Extensions.Hosting.IHostLifetime.WaitForStartAsync*>, ' nin başlangıcında çağrılır `StartAsync` ve devam etmeden önce tamamlanana kadar bekler. Bu, bir dış olay tarafından sinyallene kadar başlatmayı geciktirmek için kullanılabilir.
 
 ### <a name="stopasync"></a>StopAsync
 
@@ -1460,11 +1462,11 @@ Uygulamayı başlatmak ve durdurmak için <xref:Microsoft.Extensions.Hosting.IHo
 
 ### <a name="waitforshutdown"></a>Waitforkapatması
 
-<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.WaitForShutdown*>, <kbd>CTRL</kbd>+<kbd>C</kbd>/sigint veya sigterm gibi bir ıhostlifetime tarafından tetiklenene kadar çağıran iş parçacığını engeller.
+<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.WaitForShutdown*>, <kbd>CTRL</kbd> + <kbd>C</kbd>/sigint veya sigterm gibi bir ıhostlifetime tarafından tetiklenene kadar çağıran iş parçacığını engeller.
 
 ### <a name="waitforshutdownasync"></a>WaitForShutdownAsync
 
-<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.WaitForShutdownAsync*>verilen belirteç <xref:System.Threading.Tasks.Task> ve çağrılar <xref:Microsoft.Extensions.Hosting.IHost.StopAsync*>aracılığıyla kapatılma tetiklendiğinde tamamlanan bir döndürür.
+<xref:Microsoft.Extensions.Hosting.HostingAbstractionsHostExtensions.WaitForShutdownAsync*><xref:System.Threading.Tasks.Task>verilen belirteç ve çağrılar aracılığıyla kapatılma tetiklendiğinde tamamlanan bir döndürür <xref:Microsoft.Extensions.Hosting.IHost.StopAsync*> .
 
 ### <a name="external-control"></a>Dış denetim
 

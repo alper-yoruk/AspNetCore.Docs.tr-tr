@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 05/20/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/configuration/options
-ms.openlocfilehash: 9a9febba060cca591f2cbcdc03cb4c35edcfdda7
-ms.sourcegitcommit: 74d80a36103fdbd54baba0118535a4647f511913
+ms.openlocfilehash: 300b26c198e6ea07fe83af8fb9ae967e814396fb
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/08/2020
-ms.locfileid: "84529669"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408363"
 ---
 # <a name="options-pattern-in-aspnet-core"></a>ASP.NET Core için seçenek kalıbı
 
@@ -116,7 +118,7 @@ Adlandırılmış seçenekler:
 * Aynı özelliklere birden çok yapılandırma bölümü bağlandığı zaman faydalıdır.
 * Büyük/küçük harfe duyarlıdır.
 
-Aşağıdaki *appSettings. JSON* dosyasını göz önünde bulundurun:
+Dosyasında aşağıdaki *appsettings.js* göz önünde bulundurun:
 
 [!code-json[](~/fundamentals/configuration/options/samples/3.x/OptionsSample/appsettings.NO.json)]
 
@@ -163,7 +165,7 @@ Bir hizmetin oluşturulması daha karmaşık olduğundan, [yapılandırmak](xref
 
 Seçenekler doğrulaması seçenek değerlerinin doğrulanmasını sağlar.
 
-Aşağıdaki *appSettings. JSON* dosyasını göz önünde bulundurun:
+Dosyasında aşağıdaki *appsettings.js* göz önünde bulundurun:
 
 [!code-json[](~/fundamentals/configuration/options/samples/3.x/OptionsValidationSample/appsettings.Dev2.json)]
 
@@ -269,9 +271,9 @@ public void Configure(IApplicationBuilder app,
 
 <xref:Microsoft.Extensions.Options.IOptions%601>Veya içinde kullanmayın <xref:Microsoft.Extensions.Options.IOptionsMonitor%601> `Startup.ConfigureServices` . Hizmet kayıtlarının sıralaması nedeniyle tutarsız bir seçenek durumu var olabilir.
 
-## <a name="optionsconfigurationextensions-nuget-package"></a>Options. ConfigurationExtensions NuGet paketi
+## <a name="optionsconfigurationextensions-nuget-package"></a>Options.ConfigurationExtensions NuGet paketi
 
-[Microsoft. Extensions. Options. ConfigurationExtensions](https://www.nuget.org/packages/Microsoft.Extensions.Options.ConfigurationExtensions/) paketine ASP.NET Core uygulamalarında örtük olarak başvurulur.
+[Microsoft.Extensions.Options.ConfigurationExtensions](https://www.nuget.org/packages/Microsoft.Extensions.Options.ConfigurationExtensions/) paketine ASP.NET Core uygulamalarda örtülü olarak başvurulur.
 
 ::: moniker-end
 
@@ -288,7 +290,7 @@ Seçenekler Ayrıca yapılandırma verilerini doğrulamaya yönelik bir mekanizm
 
 ## <a name="prerequisites"></a>Ön koşullar
 
-Microsoft. [AspNetCore. app metapackage](xref:fundamentals/metapackage-app) 'e başvurun veya [Microsoft. Extensions. Options. configurationextensions](https://www.nuget.org/packages/Microsoft.Extensions.Options.ConfigurationExtensions/) paketine bir paket başvurusu ekleyin.
+[Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app) 'e başvurun veya [Microsoft.Extensions.Options.Configurationextensions](https://www.nuget.org/packages/Microsoft.Extensions.Options.ConfigurationExtensions/) paketine bir paket başvurusu ekleyin.
 
 ## <a name="options-interfaces"></a>Seçenekler arabirimleri
 
@@ -329,7 +331,7 @@ Aşağıdaki sayfa modeli, ayarlarına erişmek için [Oluşturucu bağımlılı
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?name=snippet_Example1)]
 
-Örneğin *appSettings. JSON* dosyası ve değerlerini belirtir `option1` `option2` :
+Örneğin dosyadaki *appsettings.js* , ve değerlerini belirtir `option1` `option2` :
 
 [!code-json[](options/samples/2.x/OptionsSample/appsettings.json?highlight=2-3)]
 
@@ -375,7 +377,7 @@ Aşağıdaki kodda, hizmet kapsayıcısına ikinci bir <xref:Microsoft.Extension
 
 Birden çok yapılandırma sağlayıcısı ekleyebilirsiniz. Yapılandırma sağlayıcıları NuGet paketlerinde kullanılabilir ve kayıtlı oldukları sırayla uygulanır. Daha fazla bilgi için bkz. <xref:fundamentals/configuration/index>.
 
-Her bir çağrı <xref:Microsoft.Extensions.Options.IConfigureOptions%601.Configure*> <xref:Microsoft.Extensions.Options.IConfigureOptions%601> , hizmet kapsayıcısına bir hizmet ekler. Yukarıdaki örnekte, `Option1` ve değerleri `Option2` *appSettings. JSON*içinde belirtilmiştir, ancak değerleri `Option1` ve `Option2` yapılandırılmış temsilci tarafından geçersiz kılınır.
+Her bir çağrı <xref:Microsoft.Extensions.Options.IConfigureOptions%601.Configure*> <xref:Microsoft.Extensions.Options.IConfigureOptions%601> , hizmet kapsayıcısına bir hizmet ekler. Yukarıdaki örnekte, `Option1` ve değerlerinin `Option2` her ikisi de *appsettings.js*' de belirtilmiştir, ancak `Option1` ve değerleri `Option2` yapılandırılan temsilci tarafından geçersiz kılınır.
 
 Birden fazla yapılandırma hizmeti etkinleştirildiğinde, son yapılandırma kaynağı *WINS* ' i ve yapılandırma değerini ayarlar. Uygulama çalıştırıldığında, sayfa modelinin `OnGet` metodu, seçenek sınıfı değerlerini gösteren bir dize döndürür:
 
@@ -389,15 +391,15 @@ Alt seçenekler yapılandırması örnek uygulamada 3 örnek olarak gösterilmi�
 
 Uygulamalar, uygulamadaki belirli senaryo gruplarına (sınıflar) ait seçenek sınıfları oluşturmamalıdır. Uygulamanın yapılandırma değerleri gerektiren bölümlerinin yalnızca kullandıkları yapılandırma değerlerine erişimi olmalıdır.
 
-Seçenekleri yapılandırmaya bağlama sırasında, seçenek türündeki her bir özellik, formun bir yapılandırma anahtarına bağlanır `property[:sub-property:]` . Örneğin, `MyOptions.Option1` özelliği `Option1` `option1` *appSettings. JSON*içindeki özelliğinden okunan anahtara bağlanır.
+Seçenekleri yapılandırmaya bağlama sırasında, seçenek türündeki her bir özellik, formun bir yapılandırma anahtarına bağlanır `property[:sub-property:]` . Örneğin, özelliği, `MyOptions.Option1` `Option1` `option1` *üzerindeappsettings.js*özelliğinden okunan anahtara bağlıdır.
 
-Aşağıdaki kodda, hizmet kapsayıcısına üçüncü bir <xref:Microsoft.Extensions.Options.IConfigureOptions%601> hizmet eklenir. `MySubOptions` `subsection` *AppSettings. JSON* dosyasının bölümüne bağlanır:
+Aşağıdaki kodda, hizmet kapsayıcısına üçüncü bir <xref:Microsoft.Extensions.Options.IConfigureOptions%601> hizmet eklenir. `MySubOptions` `subsection` Dosyadaki *appsettings.js* bölümüne bağlanır:
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Startup.cs?name=snippet_Example3)]
 
 `GetSection`Yöntemi için <xref:Microsoft.Extensions.Configuration?displayProperty=fullName> ad alanı gerekir.
 
-Örnek *appSettings. JSON* dosyası `subsection` ve için anahtarlar içeren bir üyeyi tanımlar `suboption1` `suboption2` :
+Örneğin dosyasındaki *appsettings.js* , `subsection` ve için anahtarlar içeren bir üyeyi tanımlar `suboption1` `suboption2` :
 
 [!code-json[](options/samples/2.x/OptionsSample/appsettings.json?highlight=4-7)]
 
@@ -455,7 +457,7 @@ Ve arasındaki fark `IOptionsMonitor` `IOptionsSnapshot` şudur:
 * `IOptionsMonitor`, özellikle tek bağımlılıklarda yararlı olan herhangi bir zamanda geçerli seçenek değerlerini alan bir [tek hizmettir](xref:fundamentals/dependency-injection#singleton) .
 * `IOptionsSnapshot`kapsamlı bir [hizmettir](xref:fundamentals/dependency-injection#scoped) ve nesnenin oluşturulduğu sırada seçeneklerin anlık görüntüsünü sağlar `IOptionsSnapshot<T>` . Seçenekler anlık görüntüleri geçici ve kapsamlı bağımlılıklarla kullanılmak üzere tasarlanmıştır.
 
-Aşağıdaki örnek, <xref:Microsoft.Extensions.Options.IOptionsSnapshot%601> *appSettings. JSON* değişikliklerinden sonra yeni bir oluşturma Işlemi gösterir (*Pages/Index. cshtml. cs*). Sunucu için birden çok istek, dosya değiştirilene ve yapılandırma yeniden yükleninceye kadar *appSettings. JSON* dosyası tarafından belirtilen sabit değerler döndürüyor.
+Aşağıdaki örnek, <xref:Microsoft.Extensions.Options.IOptionsSnapshot%601> değişiklikler *üzerindeappsettings.js* sonrasında yeni bir oluşturma Işlemi gösterir (*sayfa/dizin. cshtml. cs*). Sunucu için birden çok istek, dosya değiştirilene ve yapılandırma yeniden yükleninceye kadar dosyadaki *appsettings.js* tarafından belirtilen sabit değerler döndürür.
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=12)]
 
@@ -463,13 +465,13 @@ Aşağıdaki örnek, <xref:Microsoft.Extensions.Options.IOptionsSnapshot%601> *a
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?name=snippet_Example5)]
 
-Aşağıdaki görüntüde, `option1` `option2` *appSettings. JSON* dosyasından yüklenen ilk ve değerler gösterilmektedir:
+Aşağıdaki görüntüde `option1` `option2` *appsettings.jsdosya üzerinde* yüklenen ilk ve değerler gösterilmektedir:
 
 ```html
 snapshot option1 = value1_from_json, snapshot option2 = -1
 ```
 
-*AppSettings. JSON* dosyasındaki değerleri `value1_from_json UPDATED` ve ile değiştirin `200` . *AppSettings. JSON* dosyasını kaydedin. Seçenekler değerlerinin güncelleştirildiğini görmek için tarayıcıyı yenileyin:
+Dosyadaki *appsettings.js* değerlerini `value1_from_json UPDATED` ve ile değiştirin `200` . *appsettings.js* dosyaya kaydedin. Seçenekler değerlerinin güncelleştirildiğini görmek için tarayıcıyı yenileyin:
 
 ```html
 snapshot option1 = value1_from_json UPDATED, snapshot option2 = 200
@@ -479,7 +481,7 @@ snapshot option1 = value1_from_json UPDATED, snapshot option2 = 200
 
 İle adlandırılmış seçenek desteği <xref:Microsoft.Extensions.Options.IConfigureNamedOptions%601> örnek uygulamada 6 örnek olarak gösterilmiştir.
 
-Adlandırılmış seçenekler desteği, uygulamanın adlandırılmış seçenek yapılandırmalarının ayırt etmesine izin verir. Örnek uygulamada, adlandırılmış Seçenekler [OptionsServiceCollectionExtensions. configure](xref:Microsoft.Extensions.DependencyInjection.OptionsServiceCollectionExtensions.Configure*)ile bildirilmiştir ve bu yapılandırma, [yapılandırılaenamedooptıons ' i çağırır \<TOptions> . ](xref:Microsoft.Extensions.Options.ConfigureNamedOptions`1.Configure*)Uzantı yöntemini yapılandırın. Adlandırılmış seçenekler büyük/küçük harfe duyarlıdır.
+Adlandırılmış seçenekler desteği, uygulamanın adlandırılmış seçenek yapılandırmalarının ayırt etmesine izin verir. Örnek uygulamada, adlandırılmış seçenekler, Yapılandırılaenamedolarını çağıran [OptionsServiceCollectionExtensions.Configure](xref:Microsoft.Extensions.DependencyInjection.OptionsServiceCollectionExtensions.Configure*)ile bildirilmiştir [ \<TOptions> . ](xref:Microsoft.Extensions.Options.ConfigureNamedOptions`1.Configure*)Uzantı yöntemini yapılandırın. Adlandırılmış seçenekler büyük/küçük harfe duyarlıdır.
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Startup.cs?name=snippet_Example6)]
 
@@ -498,7 +500,7 @@ named_options_1: option1 = value1_from_json, option2 = -1
 named_options_2: option1 = named_options_2_value1_from_action, option2 = 5
 ```
 
-`named_options_1`değerler, *appSettings. JSON* dosyasından yüklenen yapılandırmadan sağlanır. `named_options_2`değerleri tarafından sağlanır:
+`named_options_1`değerler, *appsettings.js* dosyadan yüklenen yapılandırmadan sağlanır. `named_options_2`değerleri tarafından sağlanır:
 
 * `named_options_2`İçin içindeki temsilci `ConfigureServices` `Option1` .
 * `Option2`Sınıfı tarafından sağlanacak varsayılan değer `MyOptions` .
@@ -710,7 +712,7 @@ Seçenekler Ayrıca yapılandırma verilerini doğrulamaya yönelik bir mekanizm
 
 ## <a name="prerequisites"></a>Ön koşullar
 
-Microsoft. [AspNetCore. app metapackage](xref:fundamentals/metapackage-app) 'e başvurun veya [Microsoft. Extensions. Options. configurationextensions](https://www.nuget.org/packages/Microsoft.Extensions.Options.ConfigurationExtensions/) paketine bir paket başvurusu ekleyin.
+[Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app) 'e başvurun veya [Microsoft.Extensions.Options.Configurationextensions](https://www.nuget.org/packages/Microsoft.Extensions.Options.ConfigurationExtensions/) paketine bir paket başvurusu ekleyin.
 
 ## <a name="options-interfaces"></a>Seçenekler arabirimleri
 
@@ -751,7 +753,7 @@ Aşağıdaki sayfa modeli, ayarlarına erişmek için [Oluşturucu bağımlılı
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?name=snippet_Example1)]
 
-Örneğin *appSettings. JSON* dosyası ve değerlerini belirtir `option1` `option2` :
+Örneğin dosyadaki *appsettings.js* , ve değerlerini belirtir `option1` `option2` :
 
 [!code-json[](options/samples/2.x/OptionsSample/appsettings.json?highlight=2-3)]
 
@@ -797,7 +799,7 @@ Aşağıdaki kodda, hizmet kapsayıcısına ikinci bir <xref:Microsoft.Extension
 
 Birden çok yapılandırma sağlayıcısı ekleyebilirsiniz. Yapılandırma sağlayıcıları NuGet paketlerinde kullanılabilir ve kayıtlı oldukları sırayla uygulanır. Daha fazla bilgi için bkz. <xref:fundamentals/configuration/index>.
 
-Her bir çağrı <xref:Microsoft.Extensions.Options.IConfigureOptions%601.Configure*> <xref:Microsoft.Extensions.Options.IConfigureOptions%601> , hizmet kapsayıcısına bir hizmet ekler. Yukarıdaki örnekte, `Option1` ve değerleri `Option2` *appSettings. JSON*içinde belirtilmiştir, ancak değerleri `Option1` ve `Option2` yapılandırılmış temsilci tarafından geçersiz kılınır.
+Her bir çağrı <xref:Microsoft.Extensions.Options.IConfigureOptions%601.Configure*> <xref:Microsoft.Extensions.Options.IConfigureOptions%601> , hizmet kapsayıcısına bir hizmet ekler. Yukarıdaki örnekte, `Option1` ve değerlerinin `Option2` her ikisi de *appsettings.js*' de belirtilmiştir, ancak `Option1` ve değerleri `Option2` yapılandırılan temsilci tarafından geçersiz kılınır.
 
 Birden fazla yapılandırma hizmeti etkinleştirildiğinde, son yapılandırma kaynağı *WINS* ' i ve yapılandırma değerini ayarlar. Uygulama çalıştırıldığında, sayfa modelinin `OnGet` metodu, seçenek sınıfı değerlerini gösteren bir dize döndürür:
 
@@ -811,15 +813,15 @@ Alt seçenekler yapılandırması örnek uygulamada 3 örnek olarak gösterilmi�
 
 Uygulamalar, uygulamadaki belirli senaryo gruplarına (sınıflar) ait seçenek sınıfları oluşturmamalıdır. Uygulamanın yapılandırma değerleri gerektiren bölümlerinin yalnızca kullandıkları yapılandırma değerlerine erişimi olmalıdır.
 
-Seçenekleri yapılandırmaya bağlama sırasında, seçenek türündeki her bir özellik, formun bir yapılandırma anahtarına bağlanır `property[:sub-property:]` . Örneğin, `MyOptions.Option1` özelliği `Option1` `option1` *appSettings. JSON*içindeki özelliğinden okunan anahtara bağlanır.
+Seçenekleri yapılandırmaya bağlama sırasında, seçenek türündeki her bir özellik, formun bir yapılandırma anahtarına bağlanır `property[:sub-property:]` . Örneğin, özelliği, `MyOptions.Option1` `Option1` `option1` *üzerindeappsettings.js*özelliğinden okunan anahtara bağlıdır.
 
-Aşağıdaki kodda, hizmet kapsayıcısına üçüncü bir <xref:Microsoft.Extensions.Options.IConfigureOptions%601> hizmet eklenir. `MySubOptions` `subsection` *AppSettings. JSON* dosyasının bölümüne bağlanır:
+Aşağıdaki kodda, hizmet kapsayıcısına üçüncü bir <xref:Microsoft.Extensions.Options.IConfigureOptions%601> hizmet eklenir. `MySubOptions` `subsection` Dosyadaki *appsettings.js* bölümüne bağlanır:
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Startup.cs?name=snippet_Example3)]
 
 `GetSection`Yöntemi için <xref:Microsoft.Extensions.Configuration?displayProperty=fullName> ad alanı gerekir.
 
-Örnek *appSettings. JSON* dosyası `subsection` ve için anahtarlar içeren bir üyeyi tanımlar `suboption1` `suboption2` :
+Örneğin dosyasındaki *appsettings.js* , `subsection` ve için anahtarlar içeren bir üyeyi tanımlar `suboption1` `suboption2` :
 
 [!code-json[](options/samples/2.x/OptionsSample/appsettings.json?highlight=4-7)]
 
@@ -869,7 +871,7 @@ Yapılandırma verilerini ile <xref:Microsoft.Extensions.Options.IOptionsSnapsho
 
 Seçenekler erişildiğinde ve isteğin ömrü boyunca önbelleğe alındığında her istek için bir kez hesaplanır.
 
-Aşağıdaki örnek, <xref:Microsoft.Extensions.Options.IOptionsSnapshot%601> *appSettings. JSON* değişikliklerinden sonra yeni bir oluşturma Işlemi gösterir (*Pages/Index. cshtml. cs*). Sunucu için birden çok istek, dosya değiştirilene ve yapılandırma yeniden yükleninceye kadar *appSettings. JSON* dosyası tarafından belirtilen sabit değerler döndürüyor.
+Aşağıdaki örnek, <xref:Microsoft.Extensions.Options.IOptionsSnapshot%601> değişiklikler *üzerindeappsettings.js* sonrasında yeni bir oluşturma Işlemi gösterir (*sayfa/dizin. cshtml. cs*). Sunucu için birden çok istek, dosya değiştirilene ve yapılandırma yeniden yükleninceye kadar dosyadaki *appsettings.js* tarafından belirtilen sabit değerler döndürür.
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?range=12)]
 
@@ -877,13 +879,13 @@ Aşağıdaki örnek, <xref:Microsoft.Extensions.Options.IOptionsSnapshot%601> *a
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Pages/Index.cshtml.cs?name=snippet_Example5)]
 
-Aşağıdaki görüntüde, `option1` `option2` *appSettings. JSON* dosyasından yüklenen ilk ve değerler gösterilmektedir:
+Aşağıdaki görüntüde `option1` `option2` *appsettings.jsdosya üzerinde* yüklenen ilk ve değerler gösterilmektedir:
 
 ```html
 snapshot option1 = value1_from_json, snapshot option2 = -1
 ```
 
-*AppSettings. JSON* dosyasındaki değerleri `value1_from_json UPDATED` ve ile değiştirin `200` . *AppSettings. JSON* dosyasını kaydedin. Seçenekler değerlerinin güncelleştirildiğini görmek için tarayıcıyı yenileyin:
+Dosyadaki *appsettings.js* değerlerini `value1_from_json UPDATED` ve ile değiştirin `200` . *appsettings.js* dosyaya kaydedin. Seçenekler değerlerinin güncelleştirildiğini görmek için tarayıcıyı yenileyin:
 
 ```html
 snapshot option1 = value1_from_json UPDATED, snapshot option2 = 200
@@ -893,7 +895,7 @@ snapshot option1 = value1_from_json UPDATED, snapshot option2 = 200
 
 İle adlandırılmış seçenek desteği <xref:Microsoft.Extensions.Options.IConfigureNamedOptions%601> örnek uygulamada 6 örnek olarak gösterilmiştir.
 
-Adlandırılmış seçenekler desteği, uygulamanın adlandırılmış seçenek yapılandırmalarının ayırt etmesine izin verir. Örnek uygulamada, adlandırılmış Seçenekler [OptionsServiceCollectionExtensions. configure](xref:Microsoft.Extensions.DependencyInjection.OptionsServiceCollectionExtensions.Configure*)ile bildirilmiştir ve bu yapılandırma, [yapılandırılaenamedooptıons ' i çağırır \<TOptions> . ](xref:Microsoft.Extensions.Options.ConfigureNamedOptions`1.Configure*)Uzantı yöntemini yapılandırın. Adlandırılmış seçenekler büyük/küçük harfe duyarlıdır.
+Adlandırılmış seçenekler desteği, uygulamanın adlandırılmış seçenek yapılandırmalarının ayırt etmesine izin verir. Örnek uygulamada, adlandırılmış seçenekler, Yapılandırılaenamedolarını çağıran [OptionsServiceCollectionExtensions.Configure](xref:Microsoft.Extensions.DependencyInjection.OptionsServiceCollectionExtensions.Configure*)ile bildirilmiştir [ \<TOptions> . ](xref:Microsoft.Extensions.Options.ConfigureNamedOptions`1.Configure*)Uzantı yöntemini yapılandırın. Adlandırılmış seçenekler büyük/küçük harfe duyarlıdır.
 
 [!code-csharp[](options/samples/2.x/OptionsSample/Startup.cs?name=snippet_Example6)]
 
@@ -912,7 +914,7 @@ named_options_1: option1 = value1_from_json, option2 = -1
 named_options_2: option1 = named_options_2_value1_from_action, option2 = 5
 ```
 
-`named_options_1`değerler, *appSettings. JSON* dosyasından yüklenen yapılandırmadan sağlanır. `named_options_2`değerleri tarafından sağlanır:
+`named_options_1`değerler, *appsettings.js* dosyadan yüklenen yapılandırmadan sağlanır. `named_options_2`değerleri tarafından sağlanır:
 
 * `named_options_2`İçin içindeki temsilci `ConfigureServices` `Option1` .
 * `Option2`Sınıfı tarafından sağlanacak varsayılan değer `MyOptions` .

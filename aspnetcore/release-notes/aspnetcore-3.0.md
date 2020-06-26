@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: f2588665c26887a6e3864866425b887e97e656d5
-ms.sourcegitcommit: a423e8fcde4b6181a3073ed646a603ba20bfa5f9
+ms.openlocfilehash: 6e31a8f49ca535f98f4e073af13896386a4a0feb
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/13/2020
-ms.locfileid: "84755878"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408220"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3,0 ' deki yenilikler
 
@@ -43,13 +45,13 @@ Blazorçerçeve tarafından desteklenen senaryolar:
 
 Daha fazla bilgi için bkz. <xref:blazor/index>.
 
-### <a name="blazor-server"></a>BlazorServer
+### Blazor Server
 
-BlazorKullanıcı arabirimi güncelleştirmelerinin uygulanma, bileşen işleme mantığını ayırır. BlazorSunucu Razor , bir ASP.NET Core uygulamasındaki sunucuda bileşenleri barındırmak için destek sağlar. Kullanıcı Arabirimi güncelleştirmeleri bir bağlantı üzerinden işlenir SignalR . BlazorSunucu ASP.NET Core 3,0 ' de desteklenir.
+BlazorKullanıcı arabirimi güncelleştirmelerinin uygulanma, bileşen işleme mantığını ayırır. Blazor ServerASP.NET Core uygulamasında sunucuda barındırma bileşenleri için destek sağlar Razor . Kullanıcı Arabirimi güncelleştirmeleri bir bağlantı üzerinden işlenir SignalR . Blazor ServerASP.NET Core 3,0 ' de desteklenir.
 
-### <a name="blazor-webassembly-preview"></a>BlazorWebAssembly (Önizleme)
+### <a name="blazor-webassembly-preview"></a>Blazor WebAssemblyÖnizle
 
-Blazoruygulamalar, bir WebAssembly tabanlı .NET çalışma zamanı kullanarak doğrudan tarayıcıda da çalıştırılabilir. BlazorWebAssembly Önizleme *aşamasındadır ve ASP.NET Core 3,0 ' de* desteklenmez. BlazorWebAssembly ASP.NET Core gelecek bir sürümünde desteklenecektir.
+Blazoruygulamalar, bir WebAssembly tabanlı .NET çalışma zamanı kullanarak doğrudan tarayıcıda da çalıştırılabilir. Blazor WebAssemblyönizlemededir *ve ASP.NET Core 3,0 ' de* desteklenmez. Blazor WebAssemblyASP.NET Core gelecek bir sürümünde desteklenecektir.
 
 ### <a name="razor-components"></a>Razorbileşenleri
 

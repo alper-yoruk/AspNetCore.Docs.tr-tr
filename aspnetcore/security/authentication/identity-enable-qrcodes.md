@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 08/14/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/identity-enable-qrcodes
-ms.openlocfilehash: 42ddddeaa329ac5ff5b2b40cbf9ebffa68f6d4cf
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 4ed5a550b5d3ca00179ae0492bf61e7fe91e324c
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774437"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408779"
 ---
 # <a name="enable-qr-code-generation-for-totp-authenticator-apps-in-aspnet-core"></a>ASP.NET Core 'daki TOTP Authenticator uygulamaları için QR kodu oluşturmayı etkinleştirme
 
@@ -36,22 +38,22 @@ ASP.NET Core Web uygulaması şablonları, kimlik doğrulayıcılar destekler, a
 
 ## <a name="adding-qr-codes-to-the-2fa-configuration-page"></a>2FA yapılandırma sayfasına QR kodları ekleme
 
-Bu yönergeler depodaki https://davidshimjs.github.io/qrcodejs/ *QRCode. js* ' i kullanır.
+Bu yönergeler depoyu *qrcode.js* kullanır https://davidshimjs.github.io/qrcodejs/ .
 
-* [QRCode. js JavaScript kitaplığını](https://davidshimjs.github.io/qrcodejs/) projenizdeki `wwwroot\lib` klasöre indirin.
+* [qrcode.js JavaScript kitaplığını](https://davidshimjs.github.io/qrcodejs/) `wwwroot\lib` projenizdeki klasöre indirin.
 
 ::: moniker-end
 
 ::: moniker range=">= aspnetcore-2.1"
 
-* */Areas/Identity/Pages/Account/Manage/enabledoğru* [ Identity ](xref:security/authentication/scaffold-identity)
-* */Areas/Identity/Pages/Account/Manage/enabledoğrulayıcısı Tor.exe*içinde, dosyanın sonundaki `Scripts` bölümü bulun:
+* */Areas/ Identity /Pages/Account/Manage/enabledoğru* [ Identity ](xref:security/authentication/scaffold-identity)
+* */Areas/ Identity /Pages/Account/Manage/enabledoğrulayıcısı Tor.exe*içinde, `Scripts` dosyanın sonundaki bölümü bulun:
 
 ::: moniker-end
 
 ::: moniker range="= aspnetcore-2.0"
 
-* *Sayfalar/hesap/Yönet/enableauthenticator. cshtml* (Razor sayfalar) veya *Görünümler/Yönet/enableauthenticator. cshtml* (MVC) içinde, dosyanın sonundaki `Scripts` bölümü bulun:
+* *Sayfalar/hesap/Yönet/EnableAuthenticator. cshtml* ( Razor Sayfalar) veya *Görünümler/Yönet/enableauthenticator. cshtml* (MVC) içinde, `Scripts` dosyanın sonundaki bölümü bulun:
 
 ::: moniker-end
 
@@ -63,7 +65,7 @@ Bu yönergeler depodaki https://davidshimjs.github.io/qrcodejs/ *QRCode. js* ' i
 }
 ```
 
-* Eklediğiniz `qrcodejs` kitaplığa `Scripts` bir başvuru ve QR kodu oluşturma çağrısı eklemek için bölümü güncelleştirin. Aşağıdaki gibi görünmelidir:
+* `Scripts` `qrcodejs` Eklediğiniz kitaplığa bir başvuru ve QR kodu oluşturma çağrısı eklemek için bölümü güncelleştirin. Aşağıdaki gibi görünmelidir:
 
 ```cshtml
 @section Scripts {
@@ -91,13 +93,13 @@ Uygulamanızı çalıştırın ve QR kodunu taramanızı ve kimlik doğrulayıc�
 
 ::: moniker range=">= aspnetcore-2.1"
 
-QR kodundaki site adı, projenizi ilk kez oluştururken seçtiğiniz proje adından alınır. `GenerateQrCodeUri(string email, string unformattedKey)` */Areas/Identity/Pages/Account/Manage/EnableAuthenticator.cshtml.cs*içindeki yöntemi arayarak bunu değiştirebilirsiniz.
+QR kodundaki site adı, projenizi ilk kez oluştururken seçtiğiniz proje adından alınır. `GenerateQrCodeUri(string email, string unformattedKey)` */Areas/ Identity /Pages/Account/Manage/EnableAuthenticator.cshtml.cs*içindeki yöntemi arayarak bunu değiştirebilirsiniz.
 
 ::: moniker-end
 
 ::: moniker range="= aspnetcore-2.0"
 
-QR kodundaki site adı, projenizi ilk kez oluştururken seçtiğiniz proje adından alınır. `GenerateQrCodeUri(string email, string unformattedKey)` Bunu, *Pages/Account/Manage/enableauthenticator. cshtml. cs* (Razor Pages) dosyasında ya da *Controllers/managecontroller. cs* (MVC) dosyasındaki yöntemine bakarak değiştirebilirsiniz.
+QR kodundaki site adı, projenizi ilk kez oluştururken seçtiğiniz proje adından alınır. Bunu, `GenerateQrCodeUri(string email, string unformattedKey)` *Pages/Account/Manage/enableauthenticator. cshtml. cs* ( Razor Pages) dosyasında ya da *Controllers/managecontroller. cs* (MVC) dosyasındaki yöntemine bakarak değiştirebilirsiniz.
 
 ::: moniker-end
 
@@ -116,16 +118,16 @@ private string GenerateQrCodeUri(string email, string unformattedKey)
 }
 ```
 
-Çağrısındaki `string.Format` ikinci parametre, çözüm adından alınan sitenizin adıdır. Herhangi bir değere değiştirilebilir, ancak her zaman URL kodlamalı olmalıdır.
+Çağrısındaki ikinci parametre `string.Format` , çözüm adından alınan sitenizin adıdır. Herhangi bir değere değiştirilebilir, ancak her zaman URL kodlamalı olmalıdır.
 
 ## <a name="using-a-different-qr-code-library"></a>Farklı bir QR kod kitaplığı kullanma
 
-QR kod kitaplığı 'nı tercih ettiğiniz kitaplıkla değiştirebilirsiniz. HTML, kitaplığınızın sağladığı `qrCode` MEKANIZMAYA bir QR kodu yerleştirebileceğiniz bir öğesi içerir.
+QR kod kitaplığı 'nı tercih ettiğiniz kitaplıkla değiştirebilirsiniz. HTML, `qrCode` kitaplığınızın sağladığı mekanizmaya BIR QR kodu yerleştirebileceğiniz bir öğesi içerir.
 
 QR kodu için doğru şekilde biçimlendirilen URL şu şekilde kullanılabilir:
 
 * `AuthenticatorUri`Model özelliği.
-* `data-url``qrCodeData` öğesinde özelliği.
+* `data-url``qrCodeData`öğesinde özelliği.
 
 ## <a name="totp-client-and-server-time-skew"></a>TOTP istemci ve sunucu saati eğriltme
 

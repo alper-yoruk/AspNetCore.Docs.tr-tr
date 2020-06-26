@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 10/14/2016
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/implementation/subkeyderivation
-ms.openlocfilehash: c4b4076d532e33b48b3438f842507a8cda2d71b6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: f373c37a5ea4dab91463d011d3ecd6799ae6d014
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776857"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408038"
 ---
 # <a name="subkey-derivation-and-authenticated-encryption-in-aspnet-core"></a>ASP.NET Core 'de alt anahtar türetme ve kimliği doğrulanmış şifreleme
 
@@ -25,21 +27,21 @@ ms.locfileid: "82776857"
 Anahtar halkasındaki çoğu anahtar, bir tür entropi içerir ve "CBC-Mode ENCRYPTION + HMAC doğrulaması" veya "GCM Encryption + doğrulaması" belirten algoritmik bilgilerine sahip olur. Bu gibi durumlarda, bu anahtar için ana anahtar malzemesi (veya KM) olarak katıştırılmış entropi 'ye başvurduk ve gerçek şifreleme işlemleri için kullanılacak anahtarları türetmek için bir anahtar türetme işlevi gerçekleştirdik.
 
 > [!NOTE]
-> Anahtarlar soyuttur ve özel bir uygulama aşağıda belirtildiği gibi davranmayabilir. Anahtar yerleşik fabrikalarımızın birini kullanmak `IAuthenticatedEncryptor` yerine kendi uygulamasını sağlıyorsa, bu bölümde açıklanan mekanizma artık geçerli değildir.
+> Anahtarlar soyuttur ve özel bir uygulama aşağıda belirtildiği gibi davranmayabilir. Anahtar `IAuthenticatedEncryptor` yerleşik fabrikalarımızın birini kullanmak yerine kendi uygulamasını sağlıyorsa, bu bölümde açıklanan mekanizma artık geçerli değildir.
 
 <a name="data-protection-implementation-subkey-derivation-aad"></a>
 
 ## <a name="additional-authenticated-data-and-subkey-derivation"></a>Ek kimliği doğrulanmış veriler ve alt anahtar türetme
 
-Arabirim `IAuthenticatedEncryptor` , tüm kimliği doğrulanmış şifreleme işlemleri için çekirdek arabirim işlevi görür. `Encrypt` Yöntemi iki ara bellek alır: düz metin ve Adtionalaıditeddata (AAD). Düz metin içeriği, öğesine `IDataProtector.Protect`yapılan çağrıyı değiştirmez, ancak AAD sistem tarafından oluşturulur ve üç bileşenden oluşur:
+`IAuthenticatedEncryptor`Arabirim, tüm kimliği doğrulanmış şifreleme işlemleri için çekirdek arabirim işlevi görür. `Encrypt`Yöntemi iki ara bellek alır: düz metin ve Adtionalaıditeddata (AAD). Düz metin içeriği, öğesine yapılan çağrıyı değiştirmez `IDataProtector.Protect` , ancak AAD sistem tarafından oluşturulur ve üç bileşenden oluşur:
 
 1. Veri koruma sisteminin bu sürümünü tanımlayan 32-bit Magic Header 09 F0 C9 F0.
 
 2. 128 bitlik anahtar kimliği.
 
-3. Bu işlemi gerçekleştiren, `IDataProtector` oluşturan amaç zincirinden oluşturulmuş değişken uzunluklu bir dize.
+3. Bu işlemi gerçekleştiren, oluşturan amaç zincirinden oluşturulmuş değişken uzunluklu bir dize `IDataProtector` .
 
-AAD, üç bileşenin de kayıt düzeni için benzersiz olduğundan, bunu, şifreleme işlemlerimizin tümünde KM 'yi kullanmak yerine, KM 'den yeni anahtar türetmede kullanabiliriz. Her çağrısı `IAuthenticatedEncryptor.Encrypt`için aşağıdaki anahtar türetme süreci gerçekleşir:
+AAD, üç bileşenin de kayıt düzeni için benzersiz olduğundan, bunu, şifreleme işlemlerimizin tümünde KM 'yi kullanmak yerine, KM 'den yeni anahtar türetmede kullanabiliriz. Her çağrısı için `IAuthenticatedEncryptor.Encrypt` aşağıdaki anahtar türetme süreci gerçekleşir:
 
 (K_E, K_H) = SP800_108_CTR_HMACSHA512 (K_M, AAD, contextHeader | | keyModifier)
 
@@ -53,7 +55,7 @@ Burada, (bkz. [NıST SP800-108](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nist
 
 * bağlam = contextHeader | | keyModifier
 
-Bağlam üst bilgisi değişken uzunluktadır ve temelde K_E ve K_H türettiğimiz algoritmaların bir parmak izi olarak görev yapar. Anahtar değiştirici, her bir çağrı için rastgele oluşturulan 128 bitlik bir dizedir `Encrypt` ve bu belirli kimlik doğrulama şifreleme işlemi IÇIN, KDF 'ye yapılan diğer tüm girişler sabit olsa bıle, ke ve KH 'nin bu belirli kimlik doğrulama şifreleme işlemi için benzersiz olmasını sağlar.
+Bağlam üst bilgisi değişken uzunluktadır ve temelde K_E ve K_H türettiğimiz algoritmaların bir parmak izi olarak görev yapar. Anahtar değiştirici, her bir çağrı için rastgele oluşturulan 128 bitlik bir dizedir `Encrypt` ve bu belirli kimlik doğrulama şifreleme işlemi için, KDF 'ye yapılan diğer tüm girişler sabit olsa bile, ke ve KH 'nin bu belirli kimlik doğrulama şifreleme işlemi için benzersiz olmasını sağlar.
 
 CBC modu şifreleme + HMAC doğrulama işlemleri için | K_E | , simetrik blok şifre anahtarının uzunluğu ve | K_H | HMAC yordamının Özet boyutudur. GCM şifreleme + doğrulama işlemleri için | K_H | = 0.
 
@@ -66,7 +68,7 @@ Yukarıdaki mekanizma aracılığıyla K_E oluşturulduktan sonra rastgele bir b
 *Çıkış: = keyModifier | | IV | | E_cbc (K_E, IV, veri) | | HMAC (K_H, IV | | E_cbc (K_E, IV, veri))*
 
 > [!NOTE]
-> `IDataProtector.Protect` Uygulama, bir [MAGIC üst bilgisini ve anahtar kimliğini](xref:security/data-protection/implementation/authenticated-encryption-details) çağırana döndürmeden önce çıktıya alacak. Sihirli üstbilgi ve anahtar kimliği, [AAD](xref:security/data-protection/implementation/subkeyderivation#data-protection-implementation-subkey-derivation-aad)'nin örtük bir parçası olduğundan ve anahtar değiştiricisi KDF 'ye giriş olarak beslendiği için, bu, son döndürülen yükün her bir BAYTıNıN Mac tarafından doğrulanması anlamına gelir.
+> `IDataProtector.Protect`Uygulama, bir [MAGIC üst bilgisini ve anahtar kimliğini](xref:security/data-protection/implementation/authenticated-encryption-details) çağırana döndürmeden önce çıktıya alacak. Sihirli üstbilgi ve anahtar kimliği, [AAD](xref:security/data-protection/implementation/subkeyderivation#data-protection-implementation-subkey-derivation-aad)'nin örtük bir parçası olduğundan ve anahtar değiştiricisi KDF 'ye giriş olarak beslendiği için, bu, son döndürülen yükün her bir BAYTıNıN Mac tarafından doğrulanması anlamına gelir.
 
 ## <a name="galoiscounter-mode-encryption--validation"></a>Galoa/sayaç modu şifreleme + doğrulama
 

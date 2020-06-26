@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 2/25/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/first-web-api
-ms.openlocfilehash: 71ab0fc0a679acf540fa53fa2a9c8ba893b34edf
-ms.sourcegitcommit: d243fadeda20ad4f142ea60301ae5f5e0d41ed60
+ms.openlocfilehash: 63f91086a7e9d71add7f7a5d58d96f46fa76353c
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/12/2020
-ms.locfileid: "84724360"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407791"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Öğretici: ASP.NET Core bir Web API 'SI oluşturma
 
@@ -27,7 +29,7 @@ Bu öğreticide, ASP.NET Core ile Web API 'SI oluşturmanın temelleri öğretil
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Bu öğreticide aşağıdakilerin nasıl yapılacağını öğreneceksiniz:
+Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 > [!div class="checklist"]
 > * Bir Web API projesi oluşturun.
@@ -42,13 +44,13 @@ Sonunda, bir veritabanında depolanan "yapılacaklar" öğelerini yönetebilmek 
 
 Bu öğretici aşağıdaki API 'YI oluşturur:
 
-|API | Description | İstek gövdesi | Yanıt gövdesi |
+|API | Açıklama | İstek gövdesi | Yanıt gövdesi |
 |--- | ---- | ---- | ---- |
-|`GET /api/TodoItems` | Tüm yapılacaklar öğelerini Al | Yok | Yapılacaklar öğeleri dizisi|
-|`GET /api/TodoItems/{id}` | KIMLIĞE göre öğe al | Yok | Yapılacaklar öğesi|
+|`GET /api/TodoItems` | Tüm yapılacaklar öğelerini Al | Hiçbiri | Yapılacaklar öğeleri dizisi|
+|`GET /api/TodoItems/{id}` | KIMLIĞE göre öğe al | Hiçbiri | Yapılacaklar öğesi|
 |`POST /api/TodoItems` | Yeni öğe Ekle | Yapılacaklar öğesi | Yapılacaklar öğesi |
-|`PUT /api/TodoItems/{id}` | Mevcut bir öğeyi güncelleştir&nbsp; | Yapılacaklar öğesi | Yok |
-|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | Öğe &nbsp; silme&nbsp; | Yok | Yok|
+|`PUT /api/TodoItems/{id}` | Mevcut bir öğeyi güncelleştir&nbsp; | Yapılacaklar öğesi | Hiçbiri |
+|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | Öğe &nbsp; silme&nbsp; | Hiçbiri | Hiçbiri|
 
 Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
@@ -380,7 +382,7 @@ Bu yöntemler iki al uç noktası uygular:
 * `GET /api/TodoItems`
 * `GET /api/TodoItems/{id}`
 
-Tarayıcıdan veya Postman 'dan iki uç noktayı çağırarak uygulamayı test edin. Örnek:
+Tarayıcıdan veya Postman 'dan iki uç noktayı çağırarak uygulamayı test edin. Örneğin:
 
 * `https://localhost:5001/api/TodoItems`
 * `https://localhost:5001/api/TodoItems/1`
@@ -512,7 +514,7 @@ Bkz. [öğretici: JavaScript ile ASP.NET Core Web API 'Si çağırma](xref:tutor
 
 ::: moniker range="< aspnetcore-3.0"
 
-Bu öğreticide aşağıdakilerin nasıl yapılacağını öğreneceksiniz:
+Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 > [!div class="checklist"]
 > * Bir Web API projesi oluşturun.
@@ -530,13 +532,13 @@ Sonunda, ilişkisel bir veritabanında depolanan "yapılacaklar" öğelerini yö
 
 Bu öğretici aşağıdaki API 'YI oluşturur:
 
-|API | Description | İstek gövdesi | Yanıt gövdesi |
+|API | Açıklama | İstek gövdesi | Yanıt gövdesi |
 |--- | ---- | ---- | ---- |
-|/Api/TodoItems al | Tüm yapılacaklar öğelerini Al | Yok | Yapılacaklar öğeleri dizisi|
-|/Api/TodoItems/{id} al | KIMLIĞE göre öğe al | Yok | Yapılacaklar öğesi|
+|/Api/TodoItems al | Tüm yapılacaklar öğelerini Al | Hiçbiri | Yapılacaklar öğeleri dizisi|
+|/Api/TodoItems/{id} al | KIMLIĞE göre öğe al | Hiçbiri | Yapılacaklar öğesi|
 |POST/api/TodoItems | Yeni öğe Ekle | Yapılacaklar öğesi | Yapılacaklar öğesi |
-|/Api/TodoItems/{id} koy | Mevcut bir öğeyi güncelleştir&nbsp; | Yapılacaklar öğesi | Yok |
-|/Api/TodoItems/{id} &nbsp; Sil&nbsp; | Öğe &nbsp; silme&nbsp; | Yok | Yok|
+|/Api/TodoItems/{id} koy | Mevcut bir öğeyi güncelleştir&nbsp; | Yapılacaklar öğesi | Hiçbiri |
+|/Api/TodoItems/{id} &nbsp; Sil&nbsp; | Öğe &nbsp; silme&nbsp; | Hiçbiri | Hiçbiri|
 
 Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
@@ -737,7 +739,7 @@ Bu yöntemler iki al uç noktası uygular:
 
 Hala çalışıyorsa uygulamayı durdurun. Ardından, en son değişiklikleri dahil etmek için yeniden çalıştırın.
 
-Bir tarayıcıdan iki uç noktayı çağırarak uygulamayı test edin. Örnek:
+Bir tarayıcıdan iki uç noktayı çağırarak uygulamayı test edin. Örneğin:
 
 * `https://localhost:<port>/api/todo`
 * `https://localhost:<port>/api/todo/1`

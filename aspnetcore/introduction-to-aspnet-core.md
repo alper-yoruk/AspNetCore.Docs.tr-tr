@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 04/17/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: index
-ms.openlocfilehash: 7f46051193681ecac59428b77ca1e36830c7bb63
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: f58c25ec8b47b2bd8d425d0bfd0d52df9bbc2655
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776337"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408207"
 ---
 # <a name="introduction-to-aspnet-core"></a>ASP.NET Core’a Giriş
 
@@ -43,16 +45,16 @@ Milyonlarca geliştirici, Web uygulamaları oluşturmak için [ASP.NET 4. x](/as
 ASP.NET Core MVC, [web API’leri](xref:tutorials/first-web-api) ve [web uygulamaları](xref:tutorials/razor-pages/index) oluşturmaya yönelik özellikler sağlar:
 
 * [Model-View-Controller (MVC) modeli](xref:mvc/overview) , Web API 'lerinizi ve Web uygulamalarınızı test etmenize yardımcı olur.
-* [Razor Pages](xref:razor-pages/index), web kullanıcı arabirimi oluşturmayı daha kolay ve üretken bir hale getiren, sayfa tabanlı bir programlama modelidir.
-* [Razor işaretlemesi](xref:mvc/views/razor), [Razor Sayfaları](xref:razor-pages/index) ve [MVC görünümleri](xref:mvc/views/overview) için üretken bir söz dizimi sağlar.
-* [Etiket Yardımcıları](xref:mvc/views/tag-helpers/intro), Razor dosyalarında HTML öğelerinin oluşturulmasına ve işlenmesine sunucu tarafı kodun katılmasını etkinleştir.
+* [ Razor Sayfalar](xref:razor-pages/index) , Web Kullanıcı arabirimi oluşturmayı daha kolay ve daha üretken hale getiren sayfa tabanlı bir programlama modelidir.
+* [ Razor biçimlendirme](xref:mvc/views/razor) , [ Razor Sayfalar](xref:razor-pages/index) ve [MVC görünümleri](xref:mvc/views/overview)için üretken bir sözdizimi sağlar.
+* [Etiket Yardımcıları](xref:mvc/views/tag-helpers/intro) , sunucu tarafı kodun dosyalarda HTML öğeleri oluşturma ve işlemeye katılmasını sağlar Razor .
 * [Birden çok veri biçimi ve içerik anlaşması](xref:web-api/advanced/formatting) için sunulan yerleşik destek, web API'lerinizin tarayıcılar ve mobil cihazlar dahil olmak üzere birçok çeşit istemciye ulaşmasına imkan tanır.
 * [Model bağlama](xref:mvc/models/model-binding), HTTP isteklerinden alınan verileri otomatik olarak eylem metodu parametreleriyle eşleştirir.
 * [Model doğrulama](xref:mvc/models/validation), otomatik olarak istemci ve sunucu tarafı doğrulama gerçekleştirir.
 
 ## <a name="client-side-development"></a>İstemci tarafı geliştirme
 
-ASP.NET Core, [Blazor](xref:blazor/index), [angular](xref:spa/angular), [tepki](xref:spa/react)verme ve [önyükleme](https://getbootstrap.com/)gibi popüler istemci tarafı çerçeveleri ve kitaplıkları ile sorunsuz bir şekilde tümleşir. Daha fazla bilgi için bkz <xref:blazor/index> . *istemci tarafı geliştirme*altındaki ilgili konular.
+ASP.NET Core [Blazor](xref:blazor/index) , [angular](xref:spa/angular), [tepki](xref:spa/react)verme ve [önyükleme](https://getbootstrap.com/)gibi popüler istemci tarafı çerçeveleri ve kitaplıkları ile sorunsuz bir şekilde tümleşir. Daha fazla bilgi için bkz <xref:blazor/index> . *istemci tarafı geliştirme*altındaki ilgili konular.
 
 <a name="target-framework"></a>
 
@@ -74,20 +76,20 @@ ASP.NET Core uygulamalar geliştirmeye giriş için aşağıdaki öğretici dizi
 
 1. Geliştirmek veya sürdürmek istediğiniz uygulama türü için bir öğreticiyi izleyin.
 
-   |Uygulama türü  |Senaryo  |Eğitmen  |
+   |Uygulama türü  |Senaryo  |Öğretici  |
    |----------|----------|----------|
-   |Web uygulaması                   | Yeni sunucu tarafı Web UI geliştirmesi |[Razor Sayfaları kullanmaya başlama](xref:tutorials/razor-pages/razor-pages-start) |
+   |Web uygulaması                   | Yeni sunucu tarafı Web UI geliştirmesi |[Sayfalarla çalışmaya başlama Razor](xref:tutorials/razor-pages/razor-pages-start) |
    |Web uygulaması                   | MVC uygulamasını sürdürme |[MVC ile çalışmaya başlama](xref:tutorials/first-mvc-app/start-mvc)|
-   |Web uygulaması                   | İstemci tarafı Web UI geliştirmesi |[Blazor kullanmaya başlama](xref:tutorials/first-blazor-app) |
+   |Web uygulaması                   | İstemci tarafı Web UI geliştirmesi |[Kullanmaya başlayınBlazor](xref:tutorials/first-blazor-app) |
    |Web API                   | Yeniden takip eden HTTP Hizmetleri |[Web API 'SI oluşturma](xref:tutorials/first-web-api)&dagger; |
    |Uzak yordam çağrısı uygulaması | Sözleşme-protokol arabellekleri kullanan ilk hizmetler |[gRPC hizmetini kullanmaya başlama](xref:tutorials/grpc/grpc-start) |
-   |Gerçek zamanlı uygulama             | Sunucular ve bağlı istemciler arasında çift yönlü iletişim |[SignalR ile çalışmaya başlama](xref:tutorials/signalr) |
+   |Gerçek zamanlı uygulama             | Sunucular ve bağlı istemciler arasında çift yönlü iletişim |[Kullanmaya başlayınSignalR](xref:tutorials/signalr) |
 
 1. Temel veri erişiminin nasıl yapılacağını gösteren bir öğreticiyi izleyin.
 
-   |Senaryo  |Eğitmen  |
+   |Senaryo  |Öğretici  |
    |----------|----------|
-   |Yeni geliştirme        |[Entity Framework Core ile Razor Pages](xref:data/ef-rp/intro) |
+   |Yeni geliştirme        |[RazorEntity Framework Core olan sayfalar](xref:data/ef-rp/intro) |
    |MVC uygulamasını sürdürme |[Entity Framework Core ile MVC](xref:data/ef-mvc/intro) |
 
 1. Tüm uygulama türleri için uygulanan ASP.NET Core [temelleri](xref:fundamentals/index) hakkında genel bakış makalesini okuyun.
@@ -98,7 +100,7 @@ ASP.NET Core uygulamalar geliştirmeye giriş için aşağıdaki öğretici dizi
 
 ## <a name="migrate-from-net-framework"></a>.NET Framework geçir
 
-ASP.NET 4. x uygulamalarını ASP.NET Core 'e geçirmeye yönelik bir başvuru kılavuzu için, bkz <xref:migration/proper-to-2x/index>..
+ASP.NET 4. x uygulamalarını ASP.NET Core 'e geçirmeye yönelik bir başvuru kılavuzu için, bkz <xref:migration/proper-to-2x/index> ..
 
 ::: moniker-end
 
@@ -122,16 +124,16 @@ Milyonlarca geliştirici, Web uygulamaları oluşturmak için [ASP.NET 4. x](/as
 ASP.NET Core MVC, [web API’leri](xref:tutorials/first-web-api) ve [web uygulamaları](xref:tutorials/razor-pages/index) oluşturmaya yönelik özellikler sağlar:
 
 * [Model-View-Controller (MVC) modeli](xref:mvc/overview) , Web API 'lerinizi ve Web uygulamalarınızı test etmenize yardımcı olur.
-* [Razor Pages](xref:razor-pages/index), web kullanıcı arabirimi oluşturmayı daha kolay ve üretken bir hale getiren, sayfa tabanlı bir programlama modelidir.
-* [Razor işaretlemesi](xref:mvc/views/razor), [Razor Sayfaları](xref:razor-pages/index) ve [MVC görünümleri](xref:mvc/views/overview) için üretken bir söz dizimi sağlar.
-* [Etiket Yardımcıları](xref:mvc/views/tag-helpers/intro), Razor dosyalarında HTML öğelerinin oluşturulmasına ve işlenmesine sunucu tarafı kodun katılmasını etkinleştir.
+* [ Razor Sayfalar](xref:razor-pages/index) , Web Kullanıcı arabirimi oluşturmayı daha kolay ve daha üretken hale getiren sayfa tabanlı bir programlama modelidir.
+* [ Razor biçimlendirme](xref:mvc/views/razor) , [ Razor Sayfalar](xref:razor-pages/index) ve [MVC görünümleri](xref:mvc/views/overview)için üretken bir sözdizimi sağlar.
+* [Etiket Yardımcıları](xref:mvc/views/tag-helpers/intro) , sunucu tarafı kodun dosyalarda HTML öğeleri oluşturma ve işlemeye katılmasını sağlar Razor .
 * [Birden çok veri biçimi ve içerik anlaşması](xref:web-api/advanced/formatting) için sunulan yerleşik destek, web API'lerinizin tarayıcılar ve mobil cihazlar dahil olmak üzere birçok çeşit istemciye ulaşmasına imkan tanır.
 * [Model bağlama](xref:mvc/models/model-binding), HTTP isteklerinden alınan verileri otomatik olarak eylem metodu parametreleriyle eşleştirir.
 * [Model doğrulama](xref:mvc/models/validation), otomatik olarak istemci ve sunucu tarafı doğrulama gerçekleştirir.
 
 ## <a name="client-side-development"></a>İstemci tarafı geliştirme
 
-ASP.NET Core, [Blazor](xref:blazor/index), [angular](xref:spa/angular), [tepki](xref:spa/react)verme ve [önyükleme](https://getbootstrap.com/)gibi popüler istemci tarafı çerçeveleri ve kitaplıkları ile sorunsuz bir şekilde tümleşir. Daha fazla bilgi için bkz <xref:blazor/index> . *istemci tarafı geliştirme*altındaki ilgili konular.
+ASP.NET Core [Blazor](xref:blazor/index) , [angular](xref:spa/angular), [tepki](xref:spa/react)verme ve [önyükleme](https://getbootstrap.com/)gibi popüler istemci tarafı çerçeveleri ve kitaplıkları ile sorunsuz bir şekilde tümleşir. Daha fazla bilgi için bkz <xref:blazor/index> . *istemci tarafı geliştirme*altındaki ilgili konular.
 
 <a name="target-framework"></a>
 
@@ -162,16 +164,16 @@ ASP.NET Core uygulamaları geliştirmeye başlamak için şu öğreticileri ve m
 
 1. Geliştirmek veya sürdürmek istediğiniz uygulama türü için bir öğreticiyi izleyin.
 
-   |Uygulama türü  |Senaryo  |Eğitmen  |
+   |Uygulama türü  |Senaryo  |Öğretici  |
    |----------|----------|----------|
-   |Web uygulaması                   | Yeni proje geliştirmek için        |[Razor Sayfaları kullanmaya başlama](xref:tutorials/razor-pages/razor-pages-start) |
+   |Web uygulaması                   | Yeni proje geliştirmek için        |[Sayfalarla çalışmaya başlama Razor](xref:tutorials/razor-pages/razor-pages-start) |
    |Web uygulaması                   | MVC uygulaması yönetmek için |[MVC ile çalışmaya başlama](xref:tutorials/first-mvc-app/start-mvc)|
    |Web API                   |                            |[Web API 'SI oluşturma](xref:tutorials/first-web-api)&dagger; |
-   |Gerçek zamanlı uygulama             |                            |[SignalR ile çalışmaya başlama](xref:tutorials/signalr) |
+   |Gerçek zamanlı uygulama             |                            |[Kullanmaya başlayınSignalR](xref:tutorials/signalr) |
 
 1. Temel veri erişiminin nasıl yapılacağını gösteren bir öğreticiyi izleyin.
 
-   |Senaryo  |Eğitmen  |
+   |Senaryo  |Öğretici  |
    |----------|----------|
    | Yeni proje geliştirmek için        |[RazorEntity Framework Core olan sayfalar](xref:data/ef-rp/intro) |
    | MVC uygulaması yönetmek için |[Entity Framework Core ile MVC](xref:data/ef-mvc/intro) |
@@ -184,7 +186,7 @@ ASP.NET Core uygulamaları geliştirmeye başlamak için şu öğreticileri ve m
 
 ## <a name="migrate-from-net-framework"></a>.NET Framework geçir
 
-ASP.NET uygulamalarını ASP.NET Core geçirmeye yönelik bir başvuru kılavuzu için, bkz <xref:migration/proper-to-2x/index>..
+ASP.NET uygulamalarını ASP.NET Core geçirmeye yönelik bir başvuru kılavuzu için, bkz <xref:migration/proper-to-2x/index> ..
 
 ::: moniker-end
 
@@ -198,7 +200,7 @@ ASP.NET uygulamalarını ASP.NET Core geçirmeye yönelik bir başvuru kılavuzu
 
 ### <a name="preprocessor-directives-in-sample-code"></a>Örnek kodda ön işlemci yönergeleri
 
-Birden çok senaryoyu göstermek için örnek uygulamalar, örnek `#define` kodun `#if-#else/#elif-#endif` farklı bölümlerini seçmeli olarak derlemek ve çalıştırmak için ve ön işlemci yönergelerini kullanır. Bu yaklaşımı kullanan örnekler için, C# dosyalarının en üstündeki `#define` yönergesini, çalıştırmak istediğiniz senaryoyla ilişkili sembolü tanımlamak için ayarlayın. Bazı örnekler, bir senaryoyu çalıştırmak için birden fazla dosyanın en üstünde sembolün tanımlanmasını gerektirir.
+Birden çok senaryoyu göstermek için örnek uygulamalar, `#define` `#if-#else/#elif-#endif` örnek kodun farklı bölümlerini seçmeli olarak derlemek ve çalıştırmak için ve ön işlemci yönergelerini kullanır. Bu yaklaşımı kullanan örnekler için, `#define` C# dosyalarının en üstündeki yönergesini, çalıştırmak istediğiniz senaryoyla ilişkili sembolü tanımlamak için ayarlayın. Bazı örnekler, bir senaryoyu çalıştırmak için birden fazla dosyanın en üstünde sembolün tanımlanmasını gerektirir.
 
 Örneğin, aşağıdaki simge listesi `#define` dört senaryonun kullanılabilir olduğunu gösterir (her simge için bir senaryo). Geçerli örnek yapılandırması `TemplateCode` senaryosunu çalıştırır:
 
@@ -236,7 +238,7 @@ Host.CreateDefaultBuilder(args)
 [!code-csharp[](sample/SampleApp/Program.cs?name=snippet_WebHostDefaults)]
 ```
 
-Kodu çevreleyen `#region` ve `#endregion` yönergeleri güvenli bir şekilde yoksayabilir (veya kaldırabilirsiniz). Konusunda açıklanan örnek senaryoları çalıştırmayı planlıyorsanız, bu yönergelerin içindeki kodu değiştirmeyin. Başka senaryolarla denemeler yaparken kodu rahatça değiştirebilirsiniz.
+`#region`Kodu çevreleyen ve yönergeleri güvenli bir şekilde yoksayabilir (veya kaldırabilirsiniz) `#endregion` . Konusunda açıklanan örnek senaryoları çalıştırmayı planlıyorsanız, bu yönergelerin içindeki kodu değiştirmeyin. Başka senaryolarla denemeler yaparken kodu rahatça değiştirebilirsiniz.
 
 Daha fazla bilgi için bkz. [ASP.NET belgelerine katkıda bulunma: Kod parçacıkları](https://github.com/dotnet/AspNetCore.Docs/blob/master/CONTRIBUTING.md#code-snippets).
 

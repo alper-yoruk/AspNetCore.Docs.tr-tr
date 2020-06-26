@@ -8,17 +8,19 @@ ms.custom: mvc, seodec18
 ms.date: 08/17/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/first-mongo-app
-ms.openlocfilehash: 46607fc92670bb46a155ddf3248bc8a36b600a4a
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 831479f04551441b079d3f34d043c7486bad7ac0
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84452258"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85409026"
 ---
 # <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>ASP.NET Core ve MongoDB ile Web API 'SI oluşturma
 
@@ -234,7 +236,7 @@ Veritabanı hazırlanıyor. ASP.NET Core Web API 'sini oluşturmaya başlayabili
 
 ## <a name="add-a-configuration-model"></a>Yapılandırma modeli ekleme
 
-1. Aşağıdaki veritabanı yapılandırma değerlerini *appSettings. JSON*öğesine ekleyin:
+1. *appsettings.js*için aşağıdaki veritabanı yapılandırma değerlerini ekleyin:
 
    [!code-json[](first-mongo-app/samples/3.x/SampleApp/appsettings.json?highlight=2-6)]
 
@@ -242,7 +244,7 @@ Veritabanı hazırlanıyor. ASP.NET Core Web API 'sini oluşturmaya başlayabili
 
    [!code-csharp[](first-mongo-app/samples/3.x/SampleApp/Models/BookstoreDatabaseSettings.cs)]
 
-   Yukarıdaki `BookstoreDatabaseSettings` sınıf, *appSettings. JSON* dosyasının özellik değerlerini depolamak için kullanılır `BookstoreDatabaseSettings` . JSON ve C# Özellik adları, eşleme sürecini kolaylaştırmak için aynı şekilde adlandırılır.
+   Önceki `BookstoreDatabaseSettings` sınıf, *appsettings.js* dosyanın özellik değerlerinde depolamak için kullanılır `BookstoreDatabaseSettings` . JSON ve C# Özellik adları, eşleme sürecini kolaylaştırmak için aynı şekilde adlandırılır.
 
 1. Aşağıdaki Vurgulanan kodu öğesine ekleyin `Startup.ConfigureServices` :
 
@@ -250,7 +252,7 @@ Veritabanı hazırlanıyor. ASP.NET Core Web API 'sini oluşturmaya başlayabili
 
    Yukarıdaki kodda:
 
-   * *AppSettings. JSON* dosyasının bölüm bağlandığı yapılandırma örneği, `BookstoreDatabaseSettings` bağımlılık ekleme (dı) kapsayıcısına kaydedilir. Örneğin, bir `BookstoreDatabaseSettings` nesnenin `ConnectionString` özelliği `BookstoreDatabaseSettings:ConnectionString` *appSettings. JSON*içindeki özelliği ile doldurulur.
+   * Dosya bölümünün bağlandığı *appsettings.js* yapılandırma örneği, `BookstoreDatabaseSettings` bağımlılık ekleme (dı) kapsayıcısına kaydedilir. Örneğin, bir `BookstoreDatabaseSettings` nesnenin `ConnectionString` özelliği `BookstoreDatabaseSettings:ConnectionString` *appsettings.jsüzerindeki*özelliği ile doldurulur.
    * `IBookstoreDatabaseSettings`Arabirim, tek bir [hizmet ömrü](xref:fundamentals/dependency-injection#service-lifetimes)ile dı 'ye kaydedilir. Eklenen arabirim örneği bir nesne olarak çözümlenir `BookstoreDatabaseSettings` .
 
 1. Ve başvurularını çözümlemek için aşağıdaki kodu *Startup.cs* 'in en üstüne ekleyin `BookstoreDatabaseSettings` `IBookstoreDatabaseSettings` :
@@ -264,7 +266,7 @@ Veritabanı hazırlanıyor. ASP.NET Core Web API 'sini oluşturmaya başlayabili
 
    [!code-csharp[](first-mongo-app/samples/3.x/SampleApp/Services/BookService.cs?name=snippet_BookServiceClass)]
 
-   Yukarıdaki kodda, bir `IBookstoreDatabaseSettings` örnek oluşturucu ekleme yoluyla dı 'den alınır. Bu teknik, [yapılandırma modeli ekleme](#add-a-configuration-model) bölümüne eklenen *appSettings. JSON* yapılandırma değerlerine erişim sağlar.
+   Yukarıdaki kodda, bir `IBookstoreDatabaseSettings` örnek oluşturucu ekleme yoluyla dı 'den alınır. Bu teknik, [yapılandırma modeli ekleme](#add-a-configuration-model) bölümüne eklenen yapılandırma değerlerinde *appsettings.js* erişim sağlar.
 
 1. Aşağıdaki Vurgulanan kodu öğesine ekleyin `Startup.ConfigureServices` :
 
@@ -584,7 +586,7 @@ Veritabanı hazırlanıyor. ASP.NET Core Web API 'sini oluşturmaya başlayabili
 
 ## <a name="add-a-configuration-model"></a>Yapılandırma modeli ekleme
 
-1. Aşağıdaki veritabanı yapılandırma değerlerini *appSettings. JSON*öğesine ekleyin:
+1. *appsettings.js*için aşağıdaki veritabanı yapılandırma değerlerini ekleyin:
 
    [!code-json[](first-mongo-app/samples/2.x/SampleApp/appsettings.json?highlight=2-6)]
 
@@ -592,7 +594,7 @@ Veritabanı hazırlanıyor. ASP.NET Core Web API 'sini oluşturmaya başlayabili
 
    [!code-csharp[](first-mongo-app/samples/2.x/SampleApp/Models/BookstoreDatabaseSettings.cs)]
 
-   Yukarıdaki `BookstoreDatabaseSettings` sınıf, *appSettings. JSON* dosyasının özellik değerlerini depolamak için kullanılır `BookstoreDatabaseSettings` . JSON ve C# Özellik adları, eşleme sürecini kolaylaştırmak için aynı şekilde adlandırılır.
+   Önceki `BookstoreDatabaseSettings` sınıf, *appsettings.js* dosyanın özellik değerlerinde depolamak için kullanılır `BookstoreDatabaseSettings` . JSON ve C# Özellik adları, eşleme sürecini kolaylaştırmak için aynı şekilde adlandırılır.
 
 1. Aşağıdaki Vurgulanan kodu öğesine ekleyin `Startup.ConfigureServices` :
 
@@ -600,7 +602,7 @@ Veritabanı hazırlanıyor. ASP.NET Core Web API 'sini oluşturmaya başlayabili
 
    Yukarıdaki kodda:
 
-   * *AppSettings. JSON* dosyasının bölüm bağlandığı yapılandırma örneği, `BookstoreDatabaseSettings` bağımlılık ekleme (dı) kapsayıcısına kaydedilir. Örneğin, bir `BookstoreDatabaseSettings` nesnenin `ConnectionString` özelliği `BookstoreDatabaseSettings:ConnectionString` *appSettings. JSON*içindeki özelliği ile doldurulur.
+   * Dosya bölümünün bağlandığı *appsettings.js* yapılandırma örneği, `BookstoreDatabaseSettings` bağımlılık ekleme (dı) kapsayıcısına kaydedilir. Örneğin, bir `BookstoreDatabaseSettings` nesnenin `ConnectionString` özelliği `BookstoreDatabaseSettings:ConnectionString` *appsettings.jsüzerindeki*özelliği ile doldurulur.
    * `IBookstoreDatabaseSettings`Arabirim, tek bir [hizmet ömrü](xref:fundamentals/dependency-injection#service-lifetimes)ile dı 'ye kaydedilir. Eklenen arabirim örneği bir nesne olarak çözümlenir `BookstoreDatabaseSettings` .
 
 1. Ve başvurularını çözümlemek için aşağıdaki kodu *Startup.cs* 'in en üstüne ekleyin `BookstoreDatabaseSettings` `IBookstoreDatabaseSettings` :
@@ -614,7 +616,7 @@ Veritabanı hazırlanıyor. ASP.NET Core Web API 'sini oluşturmaya başlayabili
 
    [!code-csharp[](first-mongo-app/samples/2.x/SampleApp/Services/BookService.cs?name=snippet_BookServiceClass)]
 
-   Yukarıdaki kodda, bir `IBookstoreDatabaseSettings` örnek oluşturucu ekleme yoluyla dı 'den alınır. Bu teknik, [yapılandırma modeli ekleme](#add-a-configuration-model) bölümüne eklenen *appSettings. JSON* yapılandırma değerlerine erişim sağlar.
+   Yukarıdaki kodda, bir `IBookstoreDatabaseSettings` örnek oluşturucu ekleme yoluyla dı 'den alınır. Bu teknik, [yapılandırma modeli ekleme](#add-a-configuration-model) bölümüne eklenen yapılandırma değerlerinde *appsettings.js* erişim sağlar.
 
 1. Aşağıdaki Vurgulanan kodu öğesine ekleyin `Startup.ConfigureServices` :
 

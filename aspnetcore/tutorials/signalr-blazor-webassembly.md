@@ -1,33 +1,35 @@
 ---
-title: SignalR Blazor Webassembly ile ASP.NET Core kullanma
+title: İle ASP.NET Core kullanma SignalRBlazor WebAssembly
 author: guardrex
-description: Webassembly ile ASP.NET Core kullanan bir sohbet uygulaması oluşturun SignalR Blazor .
+description: İle ASP.NET Core kullanan bir sohbet uygulaması oluşturun SignalR Blazor WebAssembly .
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: 3f8aeec1e0471bab5034d1dcc8a42023f6b13c0d
-ms.sourcegitcommit: 77729ba225d5143c0e3954db005906f4a5c7da95
+ms.openlocfilehash: 5a58e7ae28842e2e8a0f3bae8f47e252839903fe
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/20/2020
-ms.locfileid: "85122106"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408883"
 ---
-# <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>SignalR Blazor Webassembly ile ASP.NET Core kullanma
+# <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>İle ASP.NET Core kullanma SignalRBlazor WebAssembly
 
 [Daniel Roth](https://github.com/danroth27) ve [Luke Latham](https://github.com/guardrex) tarafından
 
-Bu öğreticide, SignalR webassembly ile kullanarak gerçek zamanlı bir uygulama oluşturmanın temelleri öğretilir Blazor . Aşağıdakileri nasıl yapacağınızı öğrenirsiniz:
+Bu öğretici ile kullanarak gerçek zamanlı bir uygulama oluşturma hakkında temel bilgileri öğretir SignalR Blazor WebAssembly . Aşağıdakileri nasıl yapacağınızı öğrenirsiniz:
 
 > [!div class="checklist"]
-> * BlazorWebassembly barındırılan uygulama projesi oluşturma
+> * Blazor WebAssemblyBarındırılan uygulama projesi oluşturma
 > * SignalRİstemci kitaplığını ekleme
 > * Hub ekleme SignalR
 > * SignalRHub için hizmetler ve uç nokta ekleme SignalR
@@ -59,7 +61,7 @@ Bu öğreticinin sonunda, çalışan bir sohbet uygulamanız olacaktır.
 
 ---
 
-## <a name="create-a-hosted-blazor-webassembly-app-project"></a>Barındırılan Blazor webassembly uygulama projesi oluşturma
+## <a name="create-a-hosted-blazor-webassembly-app-project"></a>Barındırılan Blazor WebAssembly uygulama projesi oluşturma
 
 Araç seçiminiz için yönergeleri izleyin:
 
@@ -74,7 +76,7 @@ Araç seçiminiz için yönergeleri izleyin:
 
 1. `BlazorSignalRApp` **Proje adı** alanına yazın. **Konum** girişinin doğru olduğunu onaylayın veya proje için bir konum belirtin. **Oluştur**'u seçin.
 
-1. ** Blazor Webassembly uygulama** şablonunu seçin.
+1. ** Blazor WebAssembly Uygulama** şablonunu seçin.
 
 1. **Gelişmiş**' in altında, **ASP.NET Core barındırılan** onay kutusunu seçin.
 
@@ -100,7 +102,7 @@ Araç seçiminiz için yönergeleri izleyin:
 
 1. Yan çubukta **Web ve konsol**  >  **uygulaması**' nı seçin.
 
-1. ** Blazor Webassembly uygulama** şablonunu seçin. **İleri**’yi seçin.
+1. ** Blazor WebAssembly Uygulama** şablonunu seçin. **İleri**’yi seçin.
 
    Aşağıdaki konfigürasyonları onaylayın:
 
@@ -221,7 +223,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. Tarayıcı ' yı seçin, bir ad ve ileti girin ve iletiyi göndermek için düğmeyi seçin. Ad ve ileti her iki sayfada da anında görüntülenir:
 
-   ![SignalRBlazorWebassembly örnek uygulaması, değiştirilen iletileri gösteren iki tarayıcı penceresinde açılır.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   ![SignalRBlazor WebAssemblyörnek uygulama, değiştirilen iletileri gösteren iki tarayıcı penceresinde açılır.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
    Alıntılar: *yıldız Trek VI: bulunan ülke* &copy; 1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
@@ -239,7 +241,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. Tarayıcı ' yı seçin, bir ad ve ileti girin ve iletiyi göndermek için düğmeyi seçin. Ad ve ileti her iki sayfada da anında görüntülenir:
 
-   ![SignalRBlazorWebassembly örnek uygulaması, değiştirilen iletileri gösteren iki tarayıcı penceresinde açılır.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   ![SignalRBlazor WebAssemblyörnek uygulama, değiştirilen iletileri gösteren iki tarayıcı penceresinde açılır.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
    Alıntılar: *yıldız Trek VI: bulunan ülke* &copy; 1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
@@ -251,7 +253,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. Tarayıcı ' yı seçin, bir ad ve ileti girin ve iletiyi göndermek için düğmeyi seçin. Ad ve ileti her iki sayfada da anında görüntülenir:
 
-   ![SignalRBlazorWebassembly örnek uygulaması, değiştirilen iletileri gösteren iki tarayıcı penceresinde açılır.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   ![SignalRBlazor WebAssemblyörnek uygulama, değiştirilen iletileri gösteren iki tarayıcı penceresinde açılır.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
    Alıntılar: *yıldız Trek VI: bulunan ülke* &copy; 1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
@@ -268,7 +270,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. Tarayıcı ' yı seçin, bir ad ve ileti girin ve iletiyi göndermek için düğmeyi seçin. Ad ve ileti her iki sayfada da anında görüntülenir:
 
-   ![SignalRBlazorWebassembly örnek uygulaması, değiştirilen iletileri gösteren iki tarayıcı penceresinde açılır.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
+   ![SignalRBlazor WebAssemblyörnek uygulama, değiştirilen iletileri gösteren iki tarayıcı penceresinde açılır.](signalr-blazor-webassembly/_static/3.x/signalr-blazor-webassembly-finished.png)
 
    Alıntılar: *yıldız Trek VI: bulunan ülke* &copy; 1991 [Paramount](https://www.paramountmovies.com/movies/star-trek-vi-the-undiscovered-country)
 
@@ -279,7 +281,7 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 Bu öğreticide, şunların nasıl yapıldığını öğrendiniz:
 
 > [!div class="checklist"]
-> * BlazorWebassembly barındırılan uygulama projesi oluşturma
+> * Blazor WebAssemblyBarındırılan uygulama projesi oluşturma
 > * SignalRİstemci kitaplığını ekleme
 > * Hub ekleme SignalR
 > * SignalRHub için hizmetler ve uç nokta ekleme SignalR

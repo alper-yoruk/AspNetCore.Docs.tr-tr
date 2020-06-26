@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 02/24/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/controllers/dependency-injection
-ms.openlocfilehash: a7df6a5fa2d49efc332c4684ea8192f143cdebf5
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 67861b2cdb946f7cd630770507181ee853b7fbfd
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775706"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408428"
 ---
 # <a name="dependency-injection-into-controllers-in-aspnet-core"></a>ASP.NET Core denetleyicilere bağımlılık ekleme
 
@@ -30,7 +32,7 @@ ASP.NET Core MVC denetleyicileri, oluşturucular aracılığıyla bağımlılık
 
 ## <a name="constructor-injection"></a>Oluşturucu Ekleme
 
-Hizmetler bir oluşturucu parametresi olarak eklenir ve çalışma zamanı hizmeti hizmet kapsayıcısından çözer. Hizmetler genellikle arabirimler kullanılarak tanımlanır. Örneğin, geçerli zamanı gerektiren bir uygulamayı düşünün. Aşağıdaki arabirim `IDateTime` hizmeti kullanıma sunar:
+Hizmetler bir oluşturucu parametresi olarak eklenir ve çalışma zamanı hizmeti hizmet kapsayıcısından çözer. Hizmetler genellikle arabirimler kullanılarak tanımlanır. Örneğin, geçerli zamanı gerektiren bir uygulamayı düşünün. Aşağıdaki Arabirim hizmeti kullanıma sunar `IDateTime` :
 
 [!code-csharp[](dependency-injection/sample/ControllerDI/Interfaces/IDateTime.cs?name=snippet)]
 
@@ -42,7 +44,7 @@ Hizmeti hizmet kapsayıcısına ekleyin:
 
 [!code-csharp[](dependency-injection/sample/ControllerDI/Startup1.cs?name=snippet&highlight=3)]
 
-Hakkında <xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton*>daha fazla bilgi için bkz. [dı hizmeti yaşam süreleri](xref:fundamentals/dependency-injection#service-lifetimes).
+Hakkında daha fazla bilgi için <xref:Microsoft.Extensions.DependencyInjection.ServiceCollectionServiceExtensions.AddSingleton*> bkz. [dı hizmeti yaşam süreleri](xref:fundamentals/dependency-injection#service-lifetimes).
 
 Aşağıdaki kod, günün saatine göre kullanıcıya bir karşılama görüntüler:
 
@@ -58,7 +60,7 @@ Uygulamayı çalıştırın ve zamana göre bir ileti görüntülenir.
 
 ## <a name="access-settings-from-a-controller"></a>Denetleyiciden erişim ayarları
 
-Bir denetleyici içinden uygulama veya yapılandırma ayarlarına erişmek ortak bir modeldir. ' <xref:fundamentals/configuration/options> Da açıklanan *Seçenekler deseninin* ayarları yönetmek için tercih edilen yaklaşım vardır. Genellikle, bir denetleyiciye doğrudan <xref:Microsoft.Extensions.Configuration.IConfiguration> eklemeyin.
+Bir denetleyici içinden uygulama veya yapılandırma ayarlarına erişmek ortak bir modeldir. ' Da açıklanan *Seçenekler deseninin* <xref:fundamentals/configuration/options> ayarları yönetmek için tercih edilen yaklaşım vardır. Genellikle, <xref:Microsoft.Extensions.Configuration.IConfiguration> bir denetleyiciye doğrudan eklemeyin.
 
 Seçenekleri temsil eden bir sınıf oluşturun. Örneğin:
 
@@ -72,12 +74,12 @@ Bir JSON biçimli dosyadan ayarları okumak için uygulamayı yapılandırın:
 
 [!code-csharp[](dependency-injection/sample/ControllerDI/Program.cs?name=snippet&range=10-15)]
 
-Aşağıdaki kod, hizmet kapsayıcısından `IOptions<SampleWebSettings>` ayarları ister ve bu `Index` yöntemleri kullanarak kullanır:
+Aşağıdaki kod, `IOptions<SampleWebSettings>` hizmet kapsayıcısından ayarları ister ve bu yöntemleri kullanarak kullanır `Index` :
 
 [!code-csharp[](dependency-injection/sample/ControllerDI/Controllers/SettingsController.cs?name=snippet)]
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* Denetleyicilerde açıkça bağımlılıklar isteyerek kodu daha kolay test etme hakkında bilgi edinmek için bkz <xref:mvc/controllers/testing> ..
+* <xref:mvc/controllers/testing>Denetleyicilerde açıkça bağımlılıklar isteyerek kodu daha kolay test etme hakkında bilgi edinmek için bkz..
 
 * [Varsayılan bağımlılık ekleme kapsayıcısını üçüncü taraf bir uygulamayla değiştirin](xref:fundamentals/dependency-injection#default-service-container-replacement).

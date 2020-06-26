@@ -1,11 +1,25 @@
 ---
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
+title: Visual Studio ile Azure 'da ASP.NET Core uygulaması yayımlama
+author: rick-anderson
+description: ASP.NET Core uygulamasının Visual Studio kullanarak Azure App Service nasıl yayımlanacağını öğrenin.
+ms.author: riande
+ms.custom: mvc
+ms.date: 07/10/2019
+no-loc:
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: tutorials/publish-to-azure-webapp-using-vs
+ms.openlocfilehash: d805d57fd1e2d83d0148900993e4bf6108a13028
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408415"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio"></a>Visual Studio ile Azure 'da ASP.NET Core uygulaması yayımlama
 
@@ -101,14 +115,14 @@ Uygulama, yeni kullanıcıyı ve bir **oturum kapatma** bağlantısını kaydetm
 **App Service oluştur** iletişim kutusu görüntülenir:
 
 * **Uygulama adı**, **kaynak grubu**ve **App Service planı** giriş alanları doldurulur. Bu adları koruyabilir veya değiştirebilirsiniz.
-* **Oluştur**’u seçin.
+* **Oluştur**'u seçin.
 
 ![App Service Oluştur iletişim kutusu](publish-to-azure-webapp-using-vs/_static/newrg1.png)
 
 Oluşturma işlemi tamamlandıktan sonra iletişim kutusu otomatik olarak kapatılır ve **Yayımla** iletişim kutusu odağı yeniden alır:
 
 * Yeni oluşturulan örnek otomatik olarak seçilir.
-* **Son**' u seçin.
+* **Son**'u seçin.
 
 ![Yayımla iletişim kutusu: App Service örneği seçin](publish-to-azure-webapp-using-vs/_static/select_as.png)
 
@@ -131,7 +145,7 @@ Daha sonra **profil Yayımlama Özeti** sayfasını görürsünüz. Visual Studi
 
 * **Veritabanı adı**, **kaynak grubu**, **veritabanı sunucusu** ve **App Service planı** giriş alanları doldurulur. Bu değerleri tutabilir veya değiştirebilirsiniz.
 * Seçili **veritabanı sunucusu** için **veritabanı yöneticisi Kullanıcı adı** ve **veritabanı yönetici parolasını** girin (kullandığınız hesabın, yeni Azure SQL veritabanı oluşturmak için gerekli izinlere sahip olması gerekir)
-* **Oluştur**’u seçin.
+* **Oluştur**'u seçin.
 
 ![Yeni Azure SQL veritabanı iletişim kutusu](publish-to-azure-webapp-using-vs/_static/sql_create.png)
 
@@ -145,7 +159,7 @@ Oluşturma işlemi tamamlandıktan sonra iletişim kutusu otomatik olarak kapat�
 **Azure SQL veritabanı yapılandırma** iletişim kutusunun sonraki adımında:
 
 * **Veritabanı bağlantısı Kullanıcı adı** ve **veritabanı bağlantısı parolası** alanlarını girin. Bunlar, uygulamanızın çalışma zamanında veritabanına bağlanmak için kullanacağı ayrıntılardır. En iyi yöntem, önceki adımda kullanılan yönetici Kullanıcı adı & parolasıyla aynı ayrıntıların kullanılmasını önmaktır.
-* **Son**' u seçin.
+* **Son**'u seçin.
 
 ![Azure SQL veritabanı iletişim kutusunu, bağlantı dizesi ayrıntılarını yapılandırma](publish-to-azure-webapp-using-vs/_static/sql_connection.png)
 

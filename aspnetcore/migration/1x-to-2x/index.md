@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: migration/1x-to-2x/index
-ms.openlocfilehash: 1b7b89b130f66c851bf01d0eb6d643e4b3676a1e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 97fe2f36aed4a2ac60a7ffc30ede5e682a838e5e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774229"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85408701"
 ---
 # <a name="migrate-from-aspnet-core-1x-to-20"></a>ASP.NET Core 1. x ile 2,0 arasında geçiş yapın
 
@@ -29,7 +31,7 @@ Mevcut ASP.NET Core 1. x uygulamaları sürüme özgü proje şablonlarını tem
 
 <a name="prerequisites"></a>
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 Bkz. [ASP.NET Core kullanmaya başlama](xref:getting-started).
 
@@ -37,24 +39,24 @@ Bkz. [ASP.NET Core kullanmaya başlama](xref:getting-started).
 
 ## <a name="update-target-framework-moniker-tfm"></a>Hedef Framework bilinen adını güncelleştir (tfd)
 
-.NET Core 'un hedeflediği projeler, .NET Core 2,0 ' den büyük veya buna eşit bir sürümün [tfd](/dotnet/standard/frameworks) 'sini kullanmalıdır. *. Csproj* `netcoreapp2.0`dosyasında `<TargetFramework>` düğümünü arayın ve iç metnini ile değiştirin:
+.NET Core 'un hedeflediği projeler, .NET Core 2,0 ' den büyük veya buna eşit bir sürümün [tfd](/dotnet/standard/frameworks) 'sini kullanmalıdır. `<TargetFramework>` *. Csproj* dosyasında düğümünü arayın ve iç metnini ile değiştirin `netcoreapp2.0` :
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App.csproj?range=3)]
 
-.NET Framework hedefleyen projeler, .NET Framework 4.6.1 daha büyük veya buna eşit bir sürümün tfd 'sini kullanmalıdır. *. Csproj* `net461`dosyasında `<TargetFramework>` düğümünü arayın ve iç metnini ile değiştirin:
+.NET Framework hedefleyen projeler, .NET Framework 4.6.1 daha büyük veya buna eşit bir sürümün tfd 'sini kullanmalıdır. `<TargetFramework>` *. Csproj* dosyasında düğümünü arayın ve iç metnini ile değiştirin `net461` :
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App.csproj?range=4)]
 
 > [!NOTE]
 > .NET Core 2,0, .NET Core 1. x ' ten çok daha büyük bir yüzey alanı sunar. .NET Core 1. x içinde eksik API 'Ler nedeniyle yalnızca .NET Framework hedefliyorsanız, .NET Core 2,0 ' i hedeflemek büyük olasılıkla işe çalışabilmektedir.
 
-Proje dosyası içeriyorsa `<RuntimeFrameworkVersion>1.{sub-version}</RuntimeFrameworkVersion>`, [Bu GitHub sorununa](https://github.com/dotnet/AspNetCore/issues/3221#issuecomment-413094268)bakın.
+Proje dosyası içeriyorsa `<RuntimeFrameworkVersion>1.{sub-version}</RuntimeFrameworkVersion>` , [Bu GitHub sorununa](https://github.com/dotnet/AspNetCore/issues/3221#issuecomment-413094268)bakın.
 
 <a name="global-json"></a>
 
-## <a name="update-net-core-sdk-version-in-globaljson"></a>Global. JSON içinde .NET Core SDK sürümü güncelleştirme
+## <a name="update-net-core-sdk-version-in-globaljson"></a>global.jsüzerinde .NET Core SDK sürümü Güncelleştir
 
-Çözümünüz belirli bir .NET Core SDK sürümünü hedeflemek için bir [Global. JSON](/dotnet/core/tools/global-json) dosyası kullanıyorsa, `version` özelliğini makinenizde yüklü 2,0 sürümünü kullanacak şekilde güncelleştirin:
+Çözümünüz belirli bir .NET Core SDK sürümünü hedeflemek için dosyadaki bir [global.js](/dotnet/core/tools/global-json) kullanıyorsa, `version` özelliğini makinenizde yüklü 2,0 sürümünü kullanacak şekilde güncelleştirin:
 
 [!code-json[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/global.json?highlight=3)]
 
@@ -70,9 +72,9 @@ Proje dosyası içeriyorsa `<RuntimeFrameworkVersion>1.{sub-version}</RuntimeFra
 
 ASP.NET Core 2,0 ve Entity Framework Core 2,0 ' nin tüm özellikleri metapackage 'e dahildir.
 
-.NET Framework hedefleyen ASP.NET Core 2,0 projeleri bireysel NuGet paketlerine başvurmasına devam etmelidir. Her `<PackageReference />` düğümün `Version` özniteliğini 2.0.0 olarak güncelleştirin.
+.NET Framework hedefleyen ASP.NET Core 2,0 projeleri bireysel NuGet paketlerine başvurmasına devam etmelidir. `Version`Her `<PackageReference />` düğümün özniteliğini 2.0.0 olarak güncelleştirin.
 
-Örneğin, tipik bir ASP.NET Core 2,0 proje hedefleme `<PackageReference />` .NET Framework için kullanılan düğümlerin listesi aşağıda verilmiştir:
+Örneğin, `<PackageReference />` tipik bir ASP.NET Core 2,0 proje hedefleme .NET Framework için kullanılan düğümlerin listesi aşağıda verilmiştir:
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App.csproj?range=9-22)]
 
@@ -80,7 +82,7 @@ ASP.NET Core 2,0 ve Entity Framework Core 2,0 ' nin tüm özellikleri metapackag
 
 ## <a name="update-net-core-cli-tools"></a>.NET Core CLI araçlarını Güncelleştir
 
-*. Csproj* dosyasında, her `Version` `<DotNetCliToolReference />` bir düğümün özniteliğini 2.0.0 olarak güncelleştirin.
+*. Csproj* dosyasında, `Version` her bir `<DotNetCliToolReference />` düğümün özniteliğini 2.0.0 olarak güncelleştirin.
 
 Örneğin, .NET Core 2,0 ' i hedefleyen tipik bir ASP.NET Core 2,0 projesinde kullanılan CLı araçlarının listesi aşağıda verilmiştir:
 
@@ -94,7 +96,7 @@ Bir 1. x projesinin *. csproj* dosyası bir `PackageTargetFallback` düğüm ve 
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App.csproj?range=5)]
 
-Hem node hem de değişkenini olarak `AssetTargetFallback`yeniden adlandırın:
+Hem node hem de değişkenini olarak yeniden adlandırın `AssetTargetFallback` :
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App.csproj?range=4)]
 
@@ -120,21 +122,21 @@ Unable to create an object of type '<Context>'. Add an implementation of 'IDesig
 
 ## <a name="add-configuration-providers"></a>Yapılandırma sağlayıcıları Ekle
 
-1. x projelerinde, bir uygulamaya yapılandırma sağlayıcıları eklemek `Startup` Oluşturucu aracılığıyla gerçekleştirildi. Öğesinin bir örneğini oluşturma `ConfigurationBuilder`, ilgili sağlayıcıları yükleme (ortam değişkenleri, uygulama ayarları vb.) ve bir üyesini başlatma adımları. `IConfigurationRoot`
+1. x projelerinde, bir uygulamaya yapılandırma sağlayıcıları eklemek Oluşturucu aracılığıyla gerçekleştirildi `Startup` . Öğesinin bir örneğini oluşturma `ConfigurationBuilder` , ilgili sağlayıcıları yükleme (ortam değişkenleri, uygulama ayarları vb.) ve bir üyesini başlatma adımları `IConfigurationRoot` .
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Startup.cs?name=snippet_1xStartup)]
 
-Yukarıdaki örnek, `Configuration` üyeyi *appSettings. JSON* ' dan ve herhangi bir appSettings 'ten yapılandırma ayarları ile yükler *.\< Özelliğiyle eşleşen EnvironmentName\>. JSON* dosyası. `IHostingEnvironment.EnvironmentName` Bu dosyaların konumu *Startup.cs*ile aynı yoldur.
+Yukarıdaki örnek, `Configuration` üyeyiappsettings.jsve tüm appSettings *'teki* yapılandırma ayarlarıyla yükler *. \<EnvironmentName\> *özelliği ile eşleşen JSON dosyası `IHostingEnvironment.EnvironmentName` . Bu dosyaların konumu *Startup.cs*ile aynı yoldur.
 
-2,0 projesinde, 1. x projelerine devralınan ortak yapılandırma kodu, arka planda çalışır. Örneğin, ortam değişkenleri ve uygulama ayarları başlangıçta yüklenir. Denk *Startup.cs* kodu, eklenen örnekle başlatılacak `IConfiguration` şekilde azaltılır:
+2,0 projesinde, 1. x projelerine devralınan ortak yapılandırma kodu, arka planda çalışır. Örneğin, ortam değişkenleri ve uygulama ayarları başlangıçta yüklenir. Denk *Startup.cs* kodu, `IConfiguration` eklenen örnekle başlatılacak şekilde azaltılır:
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/Startup.cs?name=snippet_2xStartup)]
 
-Tarafından `WebHostBuilder.CreateDefaultBuilder`eklenen varsayılan sağlayıcıları kaldırmak için, içindeki `Clear` `IConfigurationBuilder.Sources` özelliğindeki yöntemi çağırın. `ConfigureAppConfiguration` Sağlayıcıları geri eklemek için `ConfigureAppConfiguration` *program.cs*içindeki yöntemi kullanın:
+Tarafından eklenen varsayılan sağlayıcıları kaldırmak için `WebHostBuilder.CreateDefaultBuilder` , `Clear` `IConfigurationBuilder.Sources` içindeki özelliğindeki yöntemi çağırın `ConfigureAppConfiguration` . Sağlayıcıları geri eklemek için `ConfigureAppConfiguration` *program.cs*içindeki yöntemi kullanın:
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/Program.cs?name=snippet_ProgramMainConfigProviders&highlight=9-14)]
 
-Önceki kod parçacığında `CreateDefaultBuilder` yöntemi tarafından kullanılan yapılandırma [burada](https://github.com/aspnet/MetaPackages/blob/rel/2.0.0/src/Microsoft.AspNetCore/WebHost.cs#L152)görülebilir.
+`CreateDefaultBuilder`Önceki kod parçacığında yöntemi tarafından kullanılan yapılandırma [burada](https://github.com/aspnet/MetaPackages/blob/rel/2.0.0/src/Microsoft.AspNetCore/WebHost.cs#L152)görülebilir.
 
 Daha fazla bilgi için [ASP.NET Core yapılandırma](xref:fundamentals/configuration/index)konusuna bakın.
 
@@ -142,15 +144,15 @@ Daha fazla bilgi için [ASP.NET Core yapılandırma](xref:fundamentals/configura
 
 ## <a name="move-database-initialization-code"></a>Veritabanı başlatma kodunu taşı
 
-EF Core 1. x kullanan 1. x projelerinde, gibi bir komut şunları `dotnet ef migrations add` yapar:
+EF Core 1. x kullanan 1. x projelerinde, gibi bir komut `dotnet ef migrations add` şunları yapar:
 
 1. Bir `Startup` örneği başlatır
-1. Bağımlılık ekleme `ConfigureServices` (türler dahil `DbContext` ) tüm hizmetleri kaydetmek için yöntemini çağırır
+1. `ConfigureServices`Bağımlılık ekleme (türler dahil) tüm hizmetleri kaydetmek için yöntemini çağırır `DbContext`
 1. Önkoşul görevlerini gerçekleştirir
 
-EF Core 2,0 `Program.BuildWebHost` kullanan 2,0 projesinde uygulama hizmetleri elde etmek için çağrılır. 1. x aksine, bu, çağırma `Startup.Configure`için ek yan etkiye sahiptir. 1. x uygulamanız `Configure` yönteminde veritabanı başlatma kodu çağırırdı, beklenmeyen sorunlar meydana gelebilir. Örneğin, veritabanı henüz yoksa, dengeli dağıtım kodu EF Core geçiş komutu yürütmeden önce çalışır. Bu sorun, veritabanı `dotnet ef migrations list` henüz yoksa bir komutun başarısız olmasına neden olur.
+EF Core 2,0 kullanan 2,0 projesinde `Program.BuildWebHost` uygulama hizmetleri elde etmek için çağrılır. 1. x aksine, bu, çağırma için ek yan etkiye sahiptir `Startup.Configure` . 1. x uygulamanız yönteminde veritabanı başlatma kodu çağırırdı `Configure` , beklenmeyen sorunlar meydana gelebilir. Örneğin, veritabanı henüz yoksa, dengeli dağıtım kodu EF Core geçiş komutu yürütmeden önce çalışır. Bu sorun `dotnet ef migrations list` , veritabanı henüz yoksa bir komutun başarısız olmasına neden olur.
 
-`Configure` *Startup.cs*yönteminde aşağıdaki 1. x çekirdek başlatma kodunu göz önünde bulundurun:
+Startup.cs yönteminde aşağıdaki 1. x çekirdek başlatma kodunu göz önünde bulundurun `Configure` : *Startup.cs*
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Startup.cs?name=snippet_ConfigureSeedData&highlight=8)]
 
@@ -158,17 +160,17 @@ EF Core 2,0 `Program.BuildWebHost` kullanan 2,0 projesinde uygulama hizmetleri e
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Program2.cs?name=snippet_Main2Code&highlight=10)]
 
-2,0 itibariyle, Web konağını derleme ve yapılandırma dışında içinde `BuildWebHost` herhangi bir şey yapmak hatalı bir uygulamadır. Uygulamayı çalıştırmaya ilişkin her şey, `BuildWebHost` &mdash; genellikle `Main` *program.cs*yönteminde dışında işlenmelidir.
+2,0 itibariyle, `BuildWebHost` Web konağını derleme ve yapılandırma dışında içinde herhangi bir şey yapmak hatalı bir uygulamadır. Uygulamayı çalıştırmaya ilişkin her şey, `BuildWebHost` &mdash; genellikle `Main` *program.cs*yönteminde dışında işlenmelidir.
 
 <a name="view-compilation"></a>
 
-## <a name="review-razor-view-compilation-setting"></a>Görünüm Razor derleme ayarını gözden geçir
+## <a name="review-razor-view-compilation-setting"></a>RazorGörünüm derleme ayarını gözden geçir
 
-Daha hızlı uygulama başlangıç süresi ve daha küçük yayımlanmış paketleri size en önemli öneme sahiptir. Bu nedenlerden dolayı, [ Razor ](xref:mvc/views/view-compilation) ASP.NET Core 2,0 ' de derleme görünümü varsayılan olarak etkinleştirilmiştir.
+Daha hızlı uygulama başlangıç süresi ve daha küçük yayımlanmış paketleri size en önemli öneme sahiptir. Bu nedenlerden dolayı, ASP.NET Core 2,0 ' de [ Razor derleme görünümü](xref:mvc/views/view-compilation) varsayılan olarak etkinleştirilmiştir.
 
-`MvcRazorCompileOnPublish` Özelliği true olarak ayarlamak artık gerekli değildir. Görünümü derlemeyi devre dışı bırakmadığınız takdirde, özelliği *. csproj* dosyasından kaldırılabilir.
+`MvcRazorCompileOnPublish`Özelliği true olarak ayarlamak artık gerekli değildir. Görünümü derlemeyi devre dışı bırakmadığınız takdirde, özelliği *. csproj* dosyasından kaldırılabilir.
 
-.NET Framework hedeflenirken, yine de [Microsoft. AspNetCore. Mvc öğesine açıkça başvurmanız gerekirRazor. ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.ViewCompilation) *. Csproj* dosyanızdaki viewcompilation NuGet paketi:
+.NET Framework hedeflenirken, yine de [Microsoft. AspNetCore. Mvc öğesine açıkça başvurmanız gerekir. Razor ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.ViewCompilation) *. Csproj* dosyanızdaki viewcompilation NuGet paketi:
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App.csproj?range=15)]
 
@@ -196,9 +198,9 @@ Application Insights SDK 'Yı doğrudan kullanıyorsanız, bunu yapmaya devam ed
 
 <a name="auth-and-identity"></a>
 
-## <a name="adopt-authenticationidentity-improvements"></a>Kimlik doğrulaması/Identity iyileştirmeleri benimseyin
+## <a name="adopt-authenticationidentity-improvements"></a>Kimlik doğrulaması/ Identity iyileştirmeleri benimseyin
 
-ASP.NET Core 2,0 ' de yeni bir kimlik doğrulama modeli ve ASP.NET Core Identitybirçok önemli değişiklik vardır. Projenizi ayrı ayrı kullanıcı hesaplarıyla oluşturduysanız veya el ile kimlik doğrulaması eklediyseniz veya Identity [ASP.NET Core 2,0 ' Identity ye](xref:migration/1x-to-2x/identity-2x)bakın.
+ASP.NET Core 2,0 ' de yeni bir kimlik doğrulama modeli ve ASP.NET Core birçok önemli değişiklik vardır Identity . Projenizi ayrı ayrı kullanıcı hesaplarıyla oluşturduysanız veya el ile kimlik doğrulaması eklediyseniz veya Identity [ Identity ASP.NET Core 2,0 ' ye](xref:migration/1x-to-2x/identity-2x)bakın.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
