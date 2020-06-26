@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 12/06/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: host-and-deploy/azure-apps/azure-continuous-deployment
-ms.openlocfilehash: 0b9f5f15403c7d18d68a41baa2a59582cf039f44
-ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
+ms.openlocfilehash: 97da88b6fb79944d99b69c92eb611dd0e4e39454
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82850571"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400173"
 ---
 # <a name="continuous-deployment-to-azure-with-visual-studio-and-git-with-aspnet-core"></a>ASP.NET Core ile Visual Studio ve Git kullanarak Azure’a sürekli dağıtım
 
@@ -88,7 +90,7 @@ Aşağıdaki adımlar Azure portalında bir Web uygulaması oluşturur:
 
    Ayrıca, **Web uygulaması** dikey penceresinde, mevcut bir **App Service planı/konumu** seçin veya yeni bir tane oluşturun. Yeni bir plan oluşturuyorsanız, fiyatlandırma katmanını, konumunu ve diğer seçenekleri seçin. App Service planları hakkında daha fazla bilgi için bkz. [Azure App Service planlar ayrıntılı genel bakış](/azure/app-service/azure-web-sites-web-hosting-plans-in-depth-overview).
 
-1. **Oluştur**’u seçin. Azure, Web uygulamasını sağlayacak ve başlatacak.
+1. **Oluştur**'u seçin. Azure, Web uygulamasını sağlayacak ve başlatacak.
 
    ![Azure portalı: örnek Web uygulaması tanıtımı 01 Essentials dikey penceresi](azure-continuous-deployment/_static/07-azure-webappblade.png)
 

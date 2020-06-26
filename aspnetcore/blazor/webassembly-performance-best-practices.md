@@ -1,30 +1,32 @@
 ---
-title: ASP.NET Core Blazor webassembly performansı en iyi yöntemleri
+title: ASP.NET Core Blazor WebAssembly performans en iyi yöntemleri
 author: pranavkm
-description: ASP.NET Core Blazor weelsembly uygulamalarında performansı artırmaya yönelik ipuçları ve sık karşılaşılan performans sorunlarını önleme.
+description: ASP.NET Core uygulamalarında performansı artırma Blazor WebAssembly ve sık karşılaşılan performans sorunlarından kaçınmaya yönelik ipuçları.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/08/2020
+ms.date: 06/25/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: 2b6d4e706856cb28f26c2502feca4f959ca4abac
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: f7bd0d356030e6ddb95c77d7376995320e3ec40e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85243037"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401889"
 ---
-# <a name="aspnet-core-blazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor webassembly performansı en iyi yöntemleri
+# <a name="aspnet-core-blazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly performans en iyi yöntemleri
 
 By [Pranav Krishnamoorthy](https://github.com/pranavkm)
 
-Bu makalede, Blazor weelsembly performans en iyi uygulamaları ASP.NET Core için yönergeler sağlanmaktadır.
+Bu makalede ASP.NET Core Blazor WebAssembly performans en iyi uygulamalarına yönelik yönergeler sunulmaktadır.
 
 ## <a name="avoid-unnecessary-component-renders"></a>Gereksiz bileşen işlediğini önleyin
 
@@ -38,7 +40,7 @@ Blazor, bir bileşenin, bileşenin değiştirmediğinden rerendering bir bileşe
 }
 ```
 
-Çoğu uygulama ayrıntılı denetim gerektirmez, ancak bir <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> Kullanıcı arabirimi olayına yanıt veren bir bileşeni seçmeli olarak işlemek için de kullanılabilir.
+Çoğu uygulama ayrıntılı denetim gerektirmez, ancak bir <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> Kullanıcı arabirimi olayına yanıt veren bir bileşeni seçmeli olarak işlemek için kullanılabilir. Kullanmak <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> çok sayıda bileşenin işlendiği senaryolarda de önemli olabilir. Kılavuzdaki kılavuz <xref:Microsoft.AspNetCore.Components.EventCallback> çağrılarının bir hücresinde tek bir bileşende kullanıldığı bir kılavuz düşünün <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> . Çağırma <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> , her alt bileşenin yeniden işlenmesine neden olur. Yalnızca az sayıda hücre rerendering gerektiriyorsa, <xref:Microsoft.AspNetCore.Components.ComponentBase.ShouldRender%2A> gereksiz sıra performans cezasından kaçınmak için kullanın.
 
 Aşağıdaki örnekte:
 
@@ -83,7 +85,7 @@ Bileşenler, kod ve biçimlendirme için yeniden kullanılabilir parçalar üret
 
 ## <a name="avoid-javascript-interop-to-marshal-data"></a>Verileri sıralamak için JavaScript birlikte çalışabiliri önleyin
 
-BlazorWebassembly 'de, bir JavaScript (js) birlikte çalışma çağrısının webassembly-js sınırını geçmesi gerekir. İki bağlamda içeriğin serileştirilmesi ve serisini kaldırma, uygulama için işleme yükünü oluşturur. Sık kullanılan JS birlikte çalışma çağrıları performansı olumsuz etkiler. Verilerin sınır genelinde sıralanmasını azaltmak için, uygulamanın birçok küçük yükü tek bir büyük yük içinde birleştirip birleştireceğini, WebAssembly ve JS arasında yüksek hacimli bağlam geçişi yapmaktan kaçının.
+Blazor WebAssembly' De, bir JavaScript (js) birlikte çalışma çağrısının WebAssembly-js sınırını geçmesi gerekir. İki bağlamda içeriğin serileştirilmesi ve serisini kaldırma, uygulama için işleme yükünü oluşturur. Sık kullanılan JS birlikte çalışma çağrıları performansı olumsuz etkiler. Verilerin sınır genelinde sıralanmasını azaltmak için, uygulamanın birçok küçük yükü tek bir büyük yük içinde birleştirip birleştireceğini, WebAssembly ve JS arasında yüksek hacimli bağlam geçişi yapmaktan kaçının.
 
 ## <a name="use-systemtextjson"></a>Üzerinde System.Text.Jskullan
 
@@ -93,7 +95,7 @@ Geçiş Kılavuzu için, bkz. ' [den `Newtonsoft.Json` `System.Text.Json` ' ye g
 
 ## <a name="use-synchronous-and-unmarshalled-js-interop-apis-where-appropriate"></a>Uygun yerlerde eşzamanlı ve unmarshalled JS birlikte çalışma API 'Lerini kullanın
 
-BlazorWebAssembly <xref:Microsoft.JSInterop.IJSRuntime> , sunucu uygulamaları için kullanılabilen tek sürümün iki ek sürümünü sunmaktadır Blazor :
+Blazor WebAssembly, <xref:Microsoft.JSInterop.IJSRuntime> uygulamalar için kullanılabilen tek sürümün iki ek sürümünü sunar Blazor Server :
 
 * <xref:Microsoft.JSInterop.IJSInProcessRuntime>, zaman uyumsuz sürümlerden daha az ek yük olan, JS birlikte çalışabilirlik çağrılarının zaman uyumlu olarak yüklenmesine izin verir:
 
@@ -138,7 +140,7 @@ BlazorWebAssembly <xref:Microsoft.JSInterop.IJSRuntime> , sunucu uygulamaları i
 
 ### <a name="intermediate-language-il-linking"></a>Ara dil (IL) bağlama
 
-[Bağlama Blazor WebAssembly uygulaması](xref:blazor/host-and-deploy/configure-linker) , uygulamanın ikili dosyalarında kullanılmayan kodu kırparak uygulamanın boyutunu azaltır. Varsayılan olarak, bağlayıcı yalnızca yapılandırmada oluşturulurken etkin olur `Release` . Bu özellikten yararlanmak için, [`dotnet publish`](/dotnet/core/tools/dotnet-publish) [-c |--yapılandırma](/dotnet/core/tools/dotnet-publish#options) seçeneği olarak ayarlanan komutunu kullanarak uygulamayı dağıtım için yayımlayın `Release` :
+Uygulamanın [bağlanması Blazor WebAssembly ](xref:blazor/host-and-deploy/configure-linker) , uygulamanın ikili dosyalarında kullanılmayan kodu kırparak uygulamanın boyutunu azaltır. Varsayılan olarak, bağlayıcı yalnızca yapılandırmada oluşturulurken etkin olur `Release` . Bu özellikten yararlanmak için, [`dotnet publish`](/dotnet/core/tools/dotnet-publish) [-c |--yapılandırma](/dotnet/core/tools/dotnet-publish#options) seçeneği olarak ayarlanan komutunu kullanarak uygulamayı dağıtım için yayımlayın `Release` :
 
 ```dotnetcli
 dotnet publish -c Release
@@ -146,13 +148,13 @@ dotnet publish -c Release
 
 ### <a name="compression"></a>Sıkıştırma
 
-Bir Blazor weelsembly uygulaması yayımlandığında, çıkış sırasında, uygulamanın boyutunu azaltmak ve çalışma zamanı sıkıştırması için ek yükü kaldırmak üzere çıkış sırasında statik olarak sıkıştırılır. Blazor, içerik eklemek için sunucuyu kullanır ve statik olarak sıkıştırılan dosyaları sunar.
+Bir Blazor WebAssembly uygulama yayımlandığında, çıkış sırasında uygulamanın boyutunu azaltmak ve çalışma zamanı sıkıştırması için ek yükü kaldırmak üzere çıkış sırasında statik olarak sıkıştırılır. Blazor, içerik eklemek için sunucuyu kullanır ve statik olarak sıkıştırılan dosyaları sunar.
 
 Bir uygulama dağıtıldıktan sonra uygulamanın sıkıştırılmış dosyalara hizmet ettiğini doğrulayın. Tarayıcının Geliştirici Araçları ağ sekmesini inceleyin ve dosyaların veya ile birlikte sunulduğunu doğrulayın `Content-Encoding: br` `Content-Encoding: gz` . Ana bilgisayar sıkıştırılmış dosyalara hizmet vermemişse, içindeki yönergeleri izleyin <xref:blazor/host-and-deploy/webassembly#compression> .
 
 ### <a name="disable-unused-features"></a>Kullanılmayan özellikleri devre dışı bırak
 
-BlazorWebAssembly çalışma zamanı, uygulamanın daha küçük bir yük boyutu için gerektirmemesi durumunda devre dışı bırakılabilen aşağıdaki .NET özelliklerini içerir:
+Blazor WebAssemblyçalışma zamanı, uygulamanın daha küçük bir yük boyutu için gerektirmemesi durumunda devre dışı bırakılabilen aşağıdaki .NET özelliklerini içerir:
 
 * Saat dilimi bilgilerinin doğru olması için bir veri dosyası dahildir. Uygulama bu özelliği gerektirmiyorsa, `BlazorEnableTimeZoneSupport` uygulamanın proje dosyasındaki MSBuild özelliğini şu şekilde ayarlayarak devre dışı bırakmayı göz önünde bulundurun `false` :
 

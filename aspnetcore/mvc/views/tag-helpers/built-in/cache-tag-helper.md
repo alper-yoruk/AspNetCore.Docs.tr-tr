@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 10/10/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/cache-tag-helper
-ms.openlocfilehash: ced10a7b7b221188fdac2a4e3c54f66292110ece
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 65d8bbcdaed76a308b924ba024219e8f520bb585
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773948"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399289"
 ---
 # <a name="cache-tag-helper-in-aspnet-core-mvc"></a>ASP.NET Core MVC 'de önbellek etiketi Yardımcısı
 
@@ -25,9 +27,9 @@ By [Peter Kellner](https://peterkellner.net)
 
 Önbellek etiketi Yardımcısı, içeriğini dahili ASP.NET Core önbellek sağlayıcısına önbelleğe alarak ASP.NET Core uygulamanızın performansını iyileştirebilme olanağı sağlar.
 
-Etiket Yardımcıları hakkında genel bilgi için bkz <xref:mvc/views/tag-helpers/intro>..
+Etiket Yardımcıları hakkında genel bilgi için bkz <xref:mvc/views/tag-helpers/intro> ..
 
-Şu Razor işaretlemesi geçerli tarihi önbelleğe alır:
+Aşağıdaki Razor biçimlendirme geçerli tarihi önbelleğe alır:
 
 ```cshtml
 <cache>@DateTime.Now</cache>
@@ -43,7 +45,7 @@ Etiket Yardımcısını içeren sayfanın ilk isteği geçerli tarihi görüntü
 | --------------- | --------------- | ------- |
 | Boole         | `true`, `false` | `true`  |
 
-`enabled`Önbellek etiketi Yardımcısı tarafından eklenen içeriğin önbelleğe alınıp alınmayacağını belirler. Varsayılan değer: `true`. Olarak `false`ayarlanırsa, işlenen çıktı önbelleğe **alınmaz** .
+`enabled`Önbellek etiketi Yardımcısı tarafından eklenen içeriğin önbelleğe alınıp alınmayacağını belirler. Varsayılan değer: `true`. Olarak ayarlanırsa `false` , işlenen çıktı önbelleğe **alınmaz** .
 
 Örnek:
 
@@ -85,7 +87,7 @@ Aşağıdaki örnek, 29 Ocak 2025 ' de 5:02 PM 'e kadar önbellek etiketi Yardı
 </cache>
 ```
 
-Razor Görünüm altyapısı varsayılan `expires-after` değeri yirmi dakika olarak ayarlar.
+RazorGörünüm altyapısı varsayılan `expires-after` değeri yirmi dakika olarak ayarlar.
 
 ### <a name="expires-sliding"></a>süre sonu-kayan
 
@@ -111,7 +113,7 @@ Değerine erişilmediyse önbellek girişinin çıkarılme süresini ayarlar.
 
 `vary-by-header`değişiklik yaparken önbellek yenilemeyi tetikleyen üst bilgi değerlerinin virgülle ayrılmış listesini kabul eder.
 
-Aşağıdaki örnek, üst bilgi değerini `User-Agent`izler. Örnek, Web sunucusuna sunulan her farklı `User-Agent` için içeriği önbelleğe alır:
+Aşağıdaki örnek, üst bilgi değerini izler `User-Agent` . Örnek, Web sunucusuna sunulan her farklı için içeriği önbelleğe alır `User-Agent` :
 
 ```cshtml
 <cache vary-by-header="User-Agent">
@@ -125,9 +127,9 @@ Aşağıdaki örnek, üst bilgi değerini `User-Agent`izler. Örnek, Web sunucus
 | -------------- | -------------------- |
 | Dize         | `Make`, `Make,Model` |
 
-`vary-by-query`listelenen herhangi bir anahtarın değeri değiştiğinde önbellek <xref:Microsoft.AspNetCore.Http.IQueryCollection.Keys*> yenilemeyi tetikleyen bir sorgu dizesinde<xref:Microsoft.AspNetCore.Http.HttpRequest.Query*>(), virgülle ayrılmış bir listesini kabul eder.
+`vary-by-query`<xref:Microsoft.AspNetCore.Http.IQueryCollection.Keys*> <xref:Microsoft.AspNetCore.Http.HttpRequest.Query*> listelenen herhangi bir anahtarın değeri değiştiğinde önbellek yenilemeyi tetikleyen bir sorgu dizesinde (), virgülle ayrılmış bir listesini kabul eder.
 
-Aşağıdaki örnek, `Make` ve `Model`değerlerini izler. Örnek, içeriği her farklı `Make` ve `Model` Web sunucusuna sunulan her bir için önbelleğe alır:
+Aşağıdaki örnek, ve değerlerini izler `Make` `Model` . Örnek, içeriği her farklı `Make` ve Web sunucusuna sunulan her bir için önbelleğe alır `Model` :
 
 ```cshtml
 <cache vary-by-query="Make,Model">
@@ -169,7 +171,7 @@ routes.MapRoute(
 
 `vary-by-cookie`tanımlama bilgisi değerleri değiştiğinde önbellek yenilemeyi tetikleyen tanımlama bilgisi adlarının virgülle ayrılmış listesini kabul eder.
 
-Aşağıdaki örnek ASP.NET Core kimlikle ilişkili tanımlama bilgisini izler. Bir kullanıcının kimliği doğrulandığında, kimlik tanımlama bilgisindeki bir değişiklik önbellek yenilemeyi tetikler:
+Aşağıdaki örnek, ASP.NET Core ilişkili tanımlama bilgisini izler Identity . Bir kullanıcının kimliği doğrulandığında, Identity tanımlama bilgisindeki bir değişiklik önbellek yenilemeyi tetikler:
 
 ```cshtml
 <cache vary-by-cookie=".AspNetCore.Identity.Application">
@@ -183,7 +185,7 @@ Aşağıdaki örnek ASP.NET Core kimlikle ilişkili tanımlama bilgisini izler. 
 | --------------- | --------------- | ------- |
 | Boole         | `true`, `false` | `true`  |
 
-`vary-by-user`oturum açan kullanıcı (veya bağlam sorumlusu) değiştiğinde önbelleğin sıfırlanıp sıfırlanmayacağını belirtir. Geçerli Kullanıcı, Istek bağlamı sorumlusu olarak da bilinir ve başvurarak `@User.Identity.Name`Razor görünümünde görüntülenebilir.
+`vary-by-user`oturum açan kullanıcı (veya bağlam sorumlusu) değiştiğinde önbelleğin sıfırlanıp sıfırlanmayacağını belirtir. Geçerli Kullanıcı, Istek bağlamı sorumlusu olarak da bilinir ve Razor başvuru yaparak bir görünümde görüntülenebilir `@User.Identity.Name` .
 
 Aşağıdaki örnek, bir önbellek yenilemeyi tetiklemek için geçerli oturum açan kullanıcıyı izler:
 
@@ -193,7 +195,7 @@ Aşağıdaki örnek, bir önbellek yenilemeyi tetiklemek için geçerli oturum a
 </cache>
 ```
 
-Bu özniteliğin kullanılması, oturum açma ve oturum kapatma döngüsüyle önbellekteki içerikleri saklar. Değer olarak `true`ayarlandığında, bir kimlik doğrulama çevrimi kimliği doğrulanmış kullanıcı için önbelleği geçersiz kılar. Bir kullanıcının kimliği doğrulandığında yeni bir benzersiz tanımlama bilgisi değeri oluşturulduğundan önbellek geçersiz kılındı. Bir tanımlama bilgisi yoksa veya tanımlama bilgisinin süresi dolduğunda önbellek, anonim durum için korunur. Kullanıcının kimliği **doğrulanmıyorsa** , önbellek korunur.
+Bu özniteliğin kullanılması, oturum açma ve oturum kapatma döngüsüyle önbellekteki içerikleri saklar. Değer olarak ayarlandığında `true` , bir kimlik doğrulama çevrimi kimliği doğrulanmış kullanıcı için önbelleği geçersiz kılar. Bir kullanıcının kimliği doğrulandığında yeni bir benzersiz tanımlama bilgisi değeri oluşturulduğundan önbellek geçersiz kılındı. Bir tanımlama bilgisi yoksa veya tanımlama bilgisinin süresi dolduğunda önbellek, anonim durum için korunur. Kullanıcının kimliği **doğrulanmıyorsa** , önbellek korunur.
 
 ### <a name="vary-by"></a>değişiklik ölçütü-
 
@@ -203,7 +205,7 @@ Bu özniteliğin kullanılması, oturum açma ve oturum kapatma döngüsüyle ö
 
 `vary-by`önbelleğe alınan verilerin özelleştirilmesine izin verir. Özniteliğin dize değeri tarafından başvurulan nesne değiştiğinde, önbellek etiketi Yardımcısı 'nın içeriği güncelleştirilir. Genellikle, model değerlerinin dize birleştirmesi bu özniteliğe atanır. Etkin olarak, bu, herhangi bir birleştirilmiş değerden bir güncelleştirmenin önbelleği geçersiz hale getirildiği bir senaryoya neden olur.
 
-Aşağıdaki örnek, görünümü işleyen denetleyici yönteminin, iki yol parametrelerinin `myParam1` `myParam2`tamsayı değerini toplamasını ve ve toplamı tek model özelliği olarak döndürdüğünü varsayar. Bu toplam değiştiğinde, önbellek etiketi Yardımcısı 'nın içeriği işlenir ve yeniden önbelleğe alınır.  
+Aşağıdaki örnek, görünümü işleyen denetleyici yönteminin, iki yol parametrelerinin tamsayı değerini toplamasını ve ve `myParam1` `myParam2` toplamı tek model özelliği olarak döndürdüğünü varsayar. Bu toplam değiştiğinde, önbellek etiketi Yardımcısı 'nın içeriği işlenir ve yeniden önbelleğe alınır.  
 
 Eylem:
 
@@ -232,7 +234,7 @@ public IActionResult Index(string myParam1, string myParam2, string myParam3)
 | ------------------- | -------------------------------------- | -------- |
 | `CacheItemPriority` | `High`, `Low`, `NeverRemove`, `Normal` | `Normal` |
 
-`priority`yerleşik önbellek sağlayıcısına önbellek çıkarma kılavuzu sağlar. Web sunucusu, bellek baskısı `Low` altında olduğunda ön belleği önbelleğe alabilir.
+`priority`yerleşik önbellek sağlayıcısına önbellek çıkarma kılavuzu sağlar. Web sunucusu, `Low` bellek baskısı altında olduğunda ön belleği önbelleğe alabilir.
 
 Örnek:
 
@@ -242,7 +244,7 @@ public IActionResult Index(string myParam1, string myParam2, string myParam3)
 </cache>
 ```
 
-`priority` Özniteliği belirli bir önbellek saklama düzeyini garanti etmez. `CacheItemPriority`yalnızca bir öneridir. Bu özniteliğin olarak `NeverRemove` ayarlanması, önbelleğe alınmış öğelerin her zaman korunmamasını garanti etmez. Daha fazla bilgi için [ek kaynaklar](#additional-resources) bölümündeki konulara bakın.
+`priority`Özniteliği belirli bir önbellek saklama düzeyini garanti etmez. `CacheItemPriority`yalnızca bir öneridir. Bu özniteliğin olarak ayarlanması `NeverRemove` , önbelleğe alınmış öğelerin her zaman korunmamasını garanti etmez. Daha fazla bilgi için [ek kaynaklar](#additional-resources) bölümündeki konulara bakın.
 
 Önbellek etiketi Yardımcısı, [bellek önbelleği hizmetine](xref:performance/caching/memory)bağımlıdır. Önbellek etiketi Yardımcısı eklenmemişse hizmeti ekler.
 

@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 5/1/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: f3314458a504af7f44dcdc276de890fa9485a2b3
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 155bdfbeea06022d35bbb551d5b2d0ee5a51a093
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103041"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400823"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>ASP.NET Core projelerinde yapı iskelesi Identity
 
@@ -178,7 +180,7 @@ dotnet aspnet-codegenerator identity -dc MvcAuth.Data.ApplicationDbContext  --fi
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
-## <a name="scaffold-identity-into-a-blazor-server-project-without-existing-authorization"></a>Identity Blazor Var olan yetkilendirme olmadan bir sunucu projesinde yapı iskelesi yapın
+## <a name="scaffold-identity-into-a-blazor-server-project-without-existing-authorization"></a>Identity Blazor Server Var olan yetkilendirme olmadan bir projeye yapı iskelesi yapın
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
@@ -289,11 +291,11 @@ TokenProvider.XsrfToken = InitialState.XsrfToken;
 
 ### <a name="style-authentication-endpoints"></a>Stil kimlik doğrulama uç noktaları
 
-BlazorSunucu Razor sayfa sayfalarını kullandığından Identity , bir ziyaretçi Identity Sayfalar ve bileşenler arasında gezinse Kullanıcı arabiriminin stili değişir. Uyumsuz stillere yönelik iki seçeneğiniz vardır:
+Blazor Server Razor Sayfa sayfalarını kullandığından Identity , bir ziyaretçi sayfalar ve bileşenler arasında gezinse Kullanıcı arabiriminin stili değişir Identity . Uyumsuz stillere yönelik iki seçeneğiniz vardır:
 
 #### <a name="build-identity-components"></a>Derleme Identity bileşenleri
 
-Bileşenler oluşturmak için bileşenleri kullanmanın bir yaklaşımı Identity , Identity bileşenleri oluşturmaktır. `SignInManager` `UserManager` Razor Bileşenlerinde desteklenmediğinden, Blazor Kullanıcı hesabı eylemlerini IŞLEMEK için sunucu uygulamasındaki API uç noktalarını kullanın.
+Bileşenler oluşturmak için bileşenleri kullanmanın bir yaklaşımı Identity , Identity bileşenleri oluşturmaktır. `SignInManager` `UserManager` Razor Bileşenlerinde desteklenmediğinden, Blazor Server Kullanıcı hesabı EYLEMLERINI işlemek için uygulamadaki API uç noktalarını kullanın.
 
 #### <a name="use-a-custom-layout-with-blazor-app-styles"></a>Uygulama stilleriyle özel düzen kullanma Blazor
 
@@ -360,7 +362,7 @@ Yeni bir `NavMenu_IdentityLayout` bileşen oluşturun (*paylaşılan/NavMenu_Ide
   <script src="_framework/blazor.server.js"></script>
   ```
 
-## <a name="scaffold-identity-into-a-blazor-server-project-with-authorization"></a>Identity Blazor Yetkilendirmeyle bir sunucu projesine dolandırın
+## <a name="scaffold-identity-into-a-blazor-server-project-with-authorization"></a>Identity Blazor Server Yetkilendirmeyle bir projeye yapı
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 

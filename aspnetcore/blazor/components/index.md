@@ -5,20 +5,22 @@ description: RazorVerileri bağlama, olayları işleme ve bileşen yaşam döng�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/11/2020
+ms.date: 06/25/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: e1778d865edcfed8f5f45f4f53a57f1b3a3bd9aa
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: 02e3f7f5442a5abde0b13b7bba14d9d0f29c1de7
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242451"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399094"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core bileşenleri oluşturma ve kullanma Razor
 
@@ -427,11 +429,24 @@ Bileşen başvurularını yakalama, [öğe başvurularını yakalamak](xref:blaz
 > [!NOTE]
 > Alt bileşenlerin durumunu bulunmamalıdır için bileşen **başvurularını kullanmayın.** Bunun yerine, alt bileşenlere veri geçirmek için normal bildirime dayalı parametreleri kullanın. Normal bildirime dayalı parametrelerin kullanımı, otomatik olarak doğru zamanların yeniden yönlendirmesi için alt bileşenlerde oluşur.
 
-## <a name="invoke-component-methods-externally-to-update-state"></a>Durumu güncelleştirmek için bileşen yöntemlerini dışarıdan çağır
+## <a name="synchronization-context"></a>Eşitleme bağlamı
 
 Blazor<xref:System.Threading.SynchronizationContext>yürütmenin tek bir mantıksal iş parçacığını zorlamak için bir eşitleme bağlamı () kullanır. Bir bileşenin [yaşam döngüsü yöntemleri](xref:blazor/components/lifecycle) ve tarafından oluşturulan tüm olay geri çağırmaları Blazor eşitleme bağlamında yürütülür.
 
-BlazorSunucunun eşitleme bağlamı, tek iş parçacıklı bir ortamı öykünmeye çalışır ve bu sayede tek iş parçacıklı olan tarayıcıdaki WebAssembly modeliyle yakından eşleşir. Belirli bir zamanda, iş, tek bir mantıksal iş parçacığının izlenimi vererek tam olarak bir iş parçacığında gerçekleştirilir. Aynı anda iki işlem yürütülmez.
+Blazor Server, tek iş parçacıklı bir ortamı öykünmeye çalışır ve bu sayede tek iş parçacıklı bir tarayıcıda WebAssembly modeliyle yakından eşleşir. Belirli bir zamanda, iş, tek bir mantıksal iş parçacığının izlenimi vererek tam olarak bir iş parçacığında gerçekleştirilir. Aynı anda iki işlem yürütülmez.
+
+### <a name="avoid-thread-blocking-calls"></a>İş parçacığı engelleme çağrılarını önleyin
+
+Genellikle, aşağıdaki yöntemleri çağırmayın. Aşağıdaki yöntemler iş parçacığını engeller ve bu nedenle, temel tamamlanana kadar uygulamanın çalışmaya devam ettirilmesi engellenir <xref:System.Threading.Tasks.Task> :
+
+* <xref:System.Threading.Tasks.Task%601.Result%2A>
+* <xref:System.Threading.Tasks.Task.Wait%2A>
+* <xref:System.Threading.Tasks.Task.WaitAny%2A>
+* <xref:System.Threading.Tasks.Task.WaitAll%2A>
+* <xref:System.Threading.Thread.Sleep%2A>
+* <xref:System.Runtime.CompilerServices.TaskAwaiter.GetResult%2A>
+
+### <a name="invoke-component-methods-externally-to-update-state"></a>Durumu güncelleştirmek için bileşen yöntemlerini dışarıdan çağır
 
 Bir bileşenin, Zamanlayıcı veya diğer bildirimler gibi bir dış olay temel alınarak güncellenmesi gerekir, bu `InvokeAsync` yöntemi, Blazor eşitleme bağlamına dağımakta olan yöntemini kullanın. Örneğin, güncelleştirilmiş durumdaki herhangi bir dinleme bileşenine bildirimde bulunan bir *bildirim hizmeti* düşünün:
 
@@ -453,13 +468,13 @@ public class NotifierService
 
 `NotifierService`Bir tekın olarak kaydolun:
 
-* BlazorWebassembly ' de hizmeti hizmetine kaydedin `Program.Main` :
+* İçinde Blazor WebAssembly , hizmetini hizmetine kaydedin `Program.Main` :
 
   ```csharp
   builder.Services.AddSingleton<NotifierService>();
   ```
 
-* BlazorSunucusunda, hizmetini hizmetine kaydedin `Startup.ConfigureServices` :
+* İçinde Blazor Server , hizmetini hizmetine kaydedin `Startup.ConfigureServices` :
 
   ```csharp
   services.AddScoped<NotifierService>();
@@ -798,7 +813,7 @@ Ancak, satır içi SVG işaretlemesi tüm senaryolarda desteklenmez. Bir `<svg>`
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* <xref:blazor/security/server/threat-mitigation>: Blazor Kaynak tükenmesi ile Çekişmek zorunda olması gereken sunucu uygulamaları oluşturmaya yönelik yönergeler içerir.
+* <xref:blazor/security/server/threat-mitigation>: Blazor Server Kaynak tükenmesi ile Çekişmek zorunda olan uygulamalar oluşturmaya yönelik yönergeler içerir.
 
 <!--Reference links in article-->
 [1]: <xref:mvc/views/razor#code>

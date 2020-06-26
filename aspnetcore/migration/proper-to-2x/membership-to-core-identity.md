@@ -1,57 +1,59 @@
 ---
 title: ASP.NET üyelik kimlik doğrulamasından ASP.NET Core 2,0 ' ye geçişIdentity
 author: isaac2004
-description: ASP.NET Core 2,0 Identity' ye üyelik kimlik doğrulaması kullanarak mevcut ASP.NET uygulamalarını geçirmeyi öğrenin.
+description: ASP.NET Core 2,0 ' ye üyelik kimlik doğrulaması kullanarak mevcut ASP.NET uygulamalarını geçirmeyi öğrenin Identity .
 ms.author: scaddie
 ms.custom: mvc
 ms.date: 01/10/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: migration/proper-to-2x/membership-to-core-identity
-ms.openlocfilehash: b5205ef69943f3744bba8381701008369dd0843c
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: f039772f4276d0e8bcec2629350eba2ec0e7418c
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774515"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399692"
 ---
-# <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-identity"></a>ASP.NET üyelik kimlik doğrulamasından ASP.NET Core 2,0 kimliği 'ne geçiş
+# <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-identity"></a>ASP.NET üyelik kimlik doğrulamasından ASP.NET Core 2,0 ' ye geçişIdentity
 
 İle [Isaac Levi](https://isaaclevin.com) tarafından
 
-Bu makalede üyelik kimlik doğrulamasını kullanarak ASP.NET uygulamaları için veritabanı şemasının ASP.NET Core 2,0 kimliğine geçirilmesi gösterilmektedir.
+Bu makalede üyelik kimlik doğrulaması kullanılarak ASP.NET uygulamaları için veritabanı şemasının ASP.NET Core 2,0 ' ye geçirilmesi gösterilmektedir Identity .
 
 > [!NOTE]
-> Bu belge, ASP.NET üyelik tabanlı uygulamalar için veritabanı şemasını ASP.NET Core kimliği için kullanılan veritabanı şemasına geçirmek için gereken adımları sağlar. ASP.NET üyelik tabanlı kimlik doğrulamasından ASP.NET Identity geçirme hakkında daha fazla bilgi için bkz. [SQL üyeliğinden mevcut bir uygulamayı ASP.NET Identity geçirme](/aspnet/identity/overview/migrations/migrating-an-existing-website-from-sql-membership-to-aspnet-identity). ASP.NET Core kimliği hakkında daha fazla bilgi için bkz. [ASP.NET Core kimliğe giriş](xref:security/authentication/identity).
+> Bu belge, ASP.NET üyelik tabanlı uygulamalar için veritabanı şemasını ASP.NET Core için kullanılan veritabanı şemasına geçirmek için gereken adımları sağlar Identity . ASP.NET üyelik tabanlı kimlik doğrulamasından ASP.NET 'e geçiş hakkında daha fazla bilgi için Identity bkz. [SQL üyeliğinden mevcut bir uygulamayı ASP.net Identity 'ye geçirme ](/aspnet/identity/overview/migrations/migrating-an-existing-website-from-sql-membership-to-aspnet-identity). ASP.NET Core hakkında daha fazla bilgi için Identity bkz. [ Identity ASP.NET Core 'ye giriş](xref:security/authentication/identity).
 
 ## <a name="review-of-membership-schema"></a>Üyelik şemasının incelenmesi
 
-ASP.NET 2,0 ' den önce, geliştiriciler, uygulamaları için tüm kimlik doğrulama ve yetkilendirme sürecini oluşturmaya eklendi. ASP.NET 2,0 ile üyelik tanıtılmıştı ve ASP.NET Apps içindeki güvenliği işlemek için ortak bir çözüm sağlar. Geliştiriciler, bir şemayı, [aspnet_regsql. exe](https://msdn.microsoft.com/library/ms229862.aspx) komutuyla bir SQL Server veritabanına önyükleyebiliyor. Bu komutu çalıştırdıktan sonra, veritabanında aşağıdaki tablolar oluşturulmuştur.
+ASP.NET 2,0 ' den önce, geliştiriciler, uygulamaları için tüm kimlik doğrulama ve yetkilendirme sürecini oluşturmaya eklendi. ASP.NET 2,0 ile üyelik tanıtılmıştı ve ASP.NET Apps içindeki güvenliği işlemek için ortak bir çözüm sağlar. Geliştiriciler artık [aspnet_regsql.exe](https://msdn.microsoft.com/library/ms229862.aspx) komutuyla bir şemayı SQL Server veritabanına önyükleyebiliyor. Bu komutu çalıştırdıktan sonra, veritabanında aşağıdaki tablolar oluşturulmuştur.
 
   ![Üyelik tabloları](identity/_static/membership-tables.png)
 
-Mevcut uygulamaları ASP.NET Core 2,0 kimliğine geçirmek için, bu tablolardaki verilerin yeni kimlik şeması tarafından kullanılan tablolara geçirilmesi gerekir.
+Mevcut uygulamaları ASP.NET Core 2,0 ' ye geçirmek için Identity , bu tablolardaki verilerin yeni şema tarafından kullanılan tablolara geçirilmesi gerekir Identity .
 
 ## <a name="aspnet-core-identity-20-schema"></a>ASP.NET Core Identity 2,0 şeması
 
-ASP.NET Core 2,0, ASP.NET 4,5 ' de tanıtılan [kimlik](/aspnet/identity/index) ilkesini izler. İlke paylaşılsa da, çerçeveler arasındaki uygulama, ASP.NET Core sürümleri arasında bile farklıdır (bkz. [kimlik doğrulama ve kimliği ASP.NET Core 2,0 ' e geçirme](xref:migration/1x-to-2x/index)).
+ASP.NET Core 2,0, [Identity](/aspnet/identity/index) ASP.NET 4,5 ' de tanıtılan prensibi izler. İlke paylaşılsa da, çerçeveler arasındaki uygulama, ASP.NET Core sürümleri arasında bile farklıdır (bkz. [kimlik doğrulamasını geçirme ve Identity ASP.NET Core 2,0](xref:migration/1x-to-2x/index)).
 
-ASP.NET Core 2,0 kimliği için şemayı görüntülemenin en hızlı yolu, yeni bir ASP.NET Core 2,0 uygulaması oluşturmaktır. Visual Studio 2017 'de şu adımları izleyin:
+ASP.NET Core 2,0 şemasını görüntülemenin en hızlı yolu, Identity Yeni bir ASP.NET Core 2,0 uygulaması oluşturmaktır. Visual Studio 2017 'de şu adımları izleyin:
 
-1. **Dosya** > **New**yeni > **Proje**' yi seçin.
+1. **Dosya**  >  **Yeni**  >  **Proje**' yi seçin.
 1. *Coreıdentitysample*adlı yeni bir **ASP.NET Core Web uygulaması** projesi oluşturun.
-1. Açılan listede **ASP.NET Core 2,0** ' i seçin ve ardından **Web uygulaması**' nı seçin. Bu şablon bir [Razor Pages](xref:razor-pages/index) uygulaması oluşturur. **Tamam**' a tıklamadan önce **kimlik doğrulamasını Değiştir**' e tıklayın.
-1. Kimlik şablonları için **bireysel kullanıcı hesapları** seçin. Son olarak **Tamam**' a ve ardından **Tamam**' a tıklayın. Visual Studio ASP.NET Core Identity şablonunu kullanarak bir proje oluşturur.
-1. **Paket Yöneticisi konsolu** (PMC) penceresini açmak için **Araçlar** > **NuGet Paket Yöneticisi** > **Paket Yöneticisi konsolu** ' nu seçin.
+1. Açılan listede **ASP.NET Core 2,0** ' i seçin ve ardından **Web uygulaması**' nı seçin. Bu şablon bir [ Razor Sayfalar](xref:razor-pages/index) uygulaması oluşturur. **Tamam**' a tıklamadan önce **kimlik doğrulamasını Değiştir**' e tıklayın.
+1. Şablonlar için **bireysel kullanıcı hesapları** seçin Identity . Son olarak **Tamam**' a ve ardından **Tamam**' a tıklayın. Visual Studio ASP.NET Core şablonunu kullanarak bir proje oluşturur Identity .
+1. **Tools**  >  Paket Yöneticisi Konsolu (PMC) penceresini açmak için Araçlar**NuGet Paket Yöneticisi**  >  **Paket Yöneticisi konsolu** **Package Manager Console** ' nu seçin.
 1. PMC 'de Proje köküne gidin ve [Entity Framework (EF) Core](/ef/core) `Update-Database` komutunu çalıştırın.
 
-    ASP.NET Core 2,0 kimliği, kimlik doğrulama verilerini depolayan veritabanıyla etkileşime geçmek için EF Core kullanır. Yeni oluşturulan uygulamanın çalışması için, bu verileri depolamak üzere bir veritabanı olması gerekir. Yeni bir uygulama oluşturduktan sonra, bir veritabanı ortamında şemayı incelemenize en hızlı yol, [EF Core geçişlerini](/ef/core/managing-schemas/migrations/)kullanarak veritabanını oluşturmaktır. Bu işlem, yerel olarak veya başka bir yerde, bu şemayı taklit eden bir veritabanı oluşturur. Daha fazla bilgi için önceki belgeleri gözden geçirin.
+    ASP.NET Core 2,0, Identity kimlik doğrulama verilerini depolayan veritabanıyla etkileşime geçmek için EF Core kullanır. Yeni oluşturulan uygulamanın çalışması için, bu verileri depolamak üzere bir veritabanı olması gerekir. Yeni bir uygulama oluşturduktan sonra, bir veritabanı ortamında şemayı incelemenize en hızlı yol, [EF Core geçişlerini](/ef/core/managing-schemas/migrations/)kullanarak veritabanını oluşturmaktır. Bu işlem, yerel olarak veya başka bir yerde, bu şemayı taklit eden bir veritabanı oluşturur. Daha fazla bilgi için önceki belgeleri gözden geçirin.
 
-    EF Core komutları *appSettings. JSON*içinde belirtilen veritabanı için bağlantı dizesini kullanır. Aşağıdaki bağlantı dizesi, *ASP-NET-Core-Identity*adlı *localhost* üzerinde bir veritabanını hedefler. Bu ayarda, EF Core `DefaultConnection` bağlantı dizesini kullanacak şekilde yapılandırılır.
+    EF Core komutları *üzerindeappsettings.js*belirtilen veritabanı için bağlantı dizesini kullanır. Aşağıdaki bağlantı dizesi, *ASP-NET-Core-Identity*adlı *localhost* üzerinde bir veritabanını hedefler. Bu ayarda, EF Core bağlantı dizesini kullanacak şekilde yapılandırılır `DefaultConnection` .
 
     ```json
     {
@@ -61,19 +63,19 @@ ASP.NET Core 2,0 kimliği için şemayı görüntülemenin en hızlı yolu, yeni
     }
     ```
 
-1. SQL Server Nesne Gezgini **görüntüle** > **SQL Server Object Explorer**' yi seçin. `ConnectionStrings:DefaultConnection` *AppSettings. JSON*özelliğinde belirtilen veritabanı adına karşılık gelen düğümü genişletin.
+1. SQL Server Nesne Gezgini **görüntüle**' yi seçin  >  **SQL Server Object Explorer**. `ConnectionStrings:DefaultConnection` *appsettings.json*özelliğinde belirtilen veritabanı adına karşılık gelen düğümü genişletin.
 
-    `Update-Database` Komut, şema ile belirtilen veritabanını ve uygulama başlatma için gereken tüm verileri oluşturdu. Aşağıdaki görüntüde, önceki adımlarla oluşturulan tablo yapısı gösterilmektedir.
+    `Update-Database`Komut, şema ile belirtilen veritabanını ve uygulama başlatma için gereken tüm verileri oluşturdu. Aşağıdaki görüntüde, önceki adımlarla oluşturulan tablo yapısı gösterilmektedir.
 
-    ![Kimlik tabloları](identity/_static/identity-tables.png)
+    ![IdentityTakvimleri](identity/_static/identity-tables.png)
 
 ## <a name="migrate-the-schema"></a>Şemayı geçirme
 
-Hem üyelik hem de ASP.NET Core kimlik için tablo yapılarında ve alanlarında hafif farklar vardır. Bu model, ASP.NET ve ASP.NET Core uygulamalarıyla kimlik doğrulama/yetkilendirme için önemli ölçüde değiştirilmiştir. Kimlik ile hala kullanılan önemli nesneler, *Kullanıcılar* ve *rollerdir*. *Kullanıcılar*, *Roller*ve Kullanıcı *rolleri*için eşleme tabloları aşağıda verilmiştir.
+Hem üyelik hem de ASP.NET Core için tablo yapılarında ve alanlarında hafif farklar vardır Identity . Bu model, ASP.NET ve ASP.NET Core uygulamalarıyla kimlik doğrulama/yetkilendirme için önemli ölçüde değiştirilmiştir. İle hala kullanılan temel nesneler Identity *Kullanıcılar* ve *rollerdir*. *Kullanıcılar*, *Roller*ve Kullanıcı *rolleri*için eşleme tabloları aşağıda verilmiştir.
 
 ### <a name="users"></a>Kullanıcılar
 
-|*Identity<br>(dbo. AspNetUsers)*        ||*Üyelik<br>(dbo. aspnet_Users/dbo. aspnet_Membership)*||
+|*Identity<br>dbo. AspNetUsers)*        ||*Üyelik <br> (dbo. aspnet_Users/dbo. aspnet_Membership)*||
 |----------------------------------------|-----------------------------------------------------------|
 |**Alan adı**                 |**Tür**|**Alan adı**                                    |**Tür**|
 |`Id`                           |string  |`aspnet_Users.UserId`                             |string  |
@@ -85,11 +87,11 @@ Hem üyelik hem de ASP.NET Core kimlik için tablo yapılarında ve alanlarında
 |`LockoutEnabled`               |bit     |`aspnet_Membership.IsLockedOut`                   |bit     |
 
 > [!NOTE]
-> Alan eşlemelerinin hepsi, ASP.NET Core kimlik üyeliğinden bire bir ilişkiye benzemez. Yukarıdaki tablo, varsayılan üyelik kullanıcı şemasını alır ve ASP.NET Core Identity şeması ile eşler. Üyelik için kullanılan diğer özel alanların el ile eşlenmesi gerekir. Bu eşlemede, parola ölçütü ve parola salları iki arasında geçiş yapmadan, parola için bir eşleme yoktur. **Parolayı null olarak bırakmanız ve kullanıcılardan parolalarını sıfırlamalarını istemek için önerilir.** Kullanıcı kilitlenmişse, `LockoutEnd` ASP.NET Core kimlik ' de gelecekte bir tarih olarak ayarlanmalıdır. Bu, geçiş komut dosyasında gösterilmiştir.
+> Alan eşlemelerinin hepsi, ASP.NET Core üyeliğinden bire bir ilişkiye benzemez Identity . Yukarıdaki tablo, varsayılan üyelik kullanıcı şemasını alır ve ASP.NET Core şeması ile eşler Identity . Üyelik için kullanılan diğer özel alanların el ile eşlenmesi gerekir. Bu eşlemede, parola ölçütü ve parola salları iki arasında geçiş yapmadan, parola için bir eşleme yoktur. **Parolayı null olarak bırakmanız ve kullanıcılardan parolalarını sıfırlamalarını istemek için önerilir.** ASP.NET Core Identity , `LockoutEnd` Kullanıcı kilitli ise gelecekte bir tarih olarak ayarlanmalıdır. Bu, geçiş komut dosyasında gösterilmiştir.
 
 ### <a name="roles"></a>Roller
 
-|*Identity<br>(dbo. AspNetRoles)*        ||*Üyelik<br>(dbo. aspnet_Roles)*||
+|*Identity<br>dbo. AspNetRoles)*        ||*Üyelik <br> (dbo. aspnet_Roles)*||
 |----------------------------------------|-----------------------------------|
 |**Alan adı**                 |**Tür**|**Alan adı**   |**Tür**         |
 |`Id`                           |string  |`RoleId`         | string          |
@@ -98,7 +100,7 @@ Hem üyelik hem de ASP.NET Core kimlik için tablo yapılarında ve alanlarında
 
 ### <a name="user-roles"></a>Kullanıcı Rolleri
 
-|*Identity<br>(dbo. AspNetUserRoles)*||*Üyelik<br>(dbo. aspnet_UsersInRoles)*||
+|*Identity<br>dbo. AspNetUserRoles)*||*Üyelik <br> (dbo. aspnet_UsersInRoles)*||
 |------------------------------------|------------------------------------------|
 |**Alan adı**           |**Tür**  |**Alan adı**|**Tür**                   |
 |`RoleId`                 |string    |`RoleId`      |string                     |
@@ -193,10 +195,10 @@ IF @@ERROR <> 0
 COMMIT TRANSACTION MigrateUsersAndRoles
 ```
 
-Önceki betiği tamamladıktan sonra, daha önce oluşturulan ASP.NET Core Identity uygulaması, üyelik kullanıcıları ile doldurulur. Kullanıcıların oturum açmadan önce parolalarını değiştirmesi gerekir.
+Önceki betiği tamamladıktan sonra, Identity daha önce oluşturulan ASP.NET Core uygulaması, üyelik kullanıcıları ile doldurulur. Kullanıcıların oturum açmadan önce parolalarını değiştirmesi gerekir.
 
 > [!NOTE]
-> Üyelik sisteminde kullanıcılara, e-posta adresiyle eşleşmeyen Kullanıcı adları varsa, bu, daha önce oluşturulan uygulamanın buna uyum sağlaması için değişiklikler yapmanız gerekir. Varsayılan şablon, ve `UserName` `Email` için aynı olmasını bekler. Farklı oldukları durumlar için, oturum açma işleminin yerine kullanılacak `UserName` şekilde değiştirilmesi gerekir. `Email`
+> Üyelik sisteminde kullanıcılara, e-posta adresiyle eşleşmeyen Kullanıcı adları varsa, bu, daha önce oluşturulan uygulamanın buna uyum sağlaması için değişiklikler yapmanız gerekir. Varsayılan şablon `UserName` `Email` , ve için aynı olmasını bekler. Farklı oldukları durumlar için, oturum açma işleminin yerine kullanılacak şekilde değiştirilmesi gerekir `UserName` `Email` .
 
 `PageModel` *Pages\Account\Login.cshtml.cs*adresinde bulunan oturum açma sayfasında, `[EmailAddress]` *e-posta* özelliğinden özniteliği kaldırın. *Kullanıcı adı*olarak yeniden adlandırın. Bu, `EmailAddress` *Görünüm* ve *pagemodel*içinde bahsedilen her yerde bir değişiklik yapılmasını gerektirir. Sonuç aşağıdakine benzer:
 
@@ -204,4 +206,4 @@ COMMIT TRANSACTION MigrateUsersAndRoles
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
-Bu öğreticide, SQL üyeliğinden ASP.NET Core 2,0 Identity' ye kadar olan kullanıcıların bağlantı noktası oluşturmayı öğrendiniz. ASP.NET Core Identityhakkında daha fazla bilgi için bkz. [giriş Identity ](xref:security/authentication/identity).
+Bu öğreticide, SQL üyeliğinden ASP.NET Core 2,0 ' ye kadar olan kullanıcıların bağlantı noktası oluşturmayı öğrendiniz Identity . ASP.NET Core hakkında daha fazla bilgi için Identity bkz. [giriş Identity ](xref:security/authentication/identity).

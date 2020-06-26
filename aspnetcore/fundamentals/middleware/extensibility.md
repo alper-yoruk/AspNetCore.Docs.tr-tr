@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 09/22/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/middleware/extensibility
-ms.openlocfilehash: 108d7d343a08bff8b5665df7b149f7f952220459
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 893dce119328acaa4ffd3087b94328017f5915ca
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774463"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399913"
 ---
 # <a name="factory-based-middleware-activation-in-aspnet-core"></a>ASP.NET Core 'de fabrika tabanlı ara yazılım etkinleştirmesi
 
@@ -26,7 +28,7 @@ ms.locfileid: "82774463"
 
 <xref:Microsoft.AspNetCore.Http.IMiddlewareFactory>/<xref:Microsoft.AspNetCore.Http.IMiddleware>, [Ara yazılım](xref:fundamentals/middleware/index) etkinleştirme için bir genişletilebilirlik noktasıdır.
 
-<xref:Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.UseMiddleware*>Uzantı yöntemleri bir ara yazılımın kayıtlı türünün uygulayıp uygulamadığını <xref:Microsoft.AspNetCore.Http.IMiddleware>denetler. Bu durumda, kapsayıcıya kaydedilen <xref:Microsoft.AspNetCore.Http.IMiddlewareFactory> örnek, kural tabanlı ara yazılım etkinleştirme mantığını kullanmak yerine <xref:Microsoft.AspNetCore.Http.IMiddleware> , uygulamayı çözmek için kullanılır. Ara yazılım, uygulamanın hizmet kapsayıcısında [kapsamlı veya geçici bir hizmet](xref:fundamentals/dependency-injection#service-lifetimes) olarak kaydedilir.
+<xref:Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.UseMiddleware*>Uzantı yöntemleri bir ara yazılımın kayıtlı türünün uygulayıp uygulamadığını denetler <xref:Microsoft.AspNetCore.Http.IMiddleware> . Bu durumda, <xref:Microsoft.AspNetCore.Http.IMiddlewareFactory> kapsayıcıya kaydedilen örnek, <xref:Microsoft.AspNetCore.Http.IMiddleware> kural tabanlı ara yazılım etkinleştirme mantığını kullanmak yerine, uygulamayı çözmek için kullanılır. Ara yazılım, uygulamanın hizmet kapsayıcısında [kapsamlı veya geçici bir hizmet](xref:fundamentals/dependency-injection#service-lifetimes) olarak kaydedilir.
 
 Avantajlar:
 
@@ -39,13 +41,13 @@ Avantajlar:
 
 ## <a name="imiddleware"></a>Imıddliware
 
-<xref:Microsoft.AspNetCore.Http.IMiddleware>uygulamanın istek ardışık düzeni için ara yazılımı tanımlar. [InvokeAsync (HttpContext, RequestDelegate)](xref:Microsoft.AspNetCore.Http.IMiddleware.InvokeAsync*) yöntemi istekleri işler ve ara yazılım yürütmesini <xref:System.Threading.Tasks.Task> temsil eden bir döndürür.
+<xref:Microsoft.AspNetCore.Http.IMiddleware>uygulamanın istek ardışık düzeni için ara yazılımı tanımlar. [InvokeAsync (HttpContext, RequestDelegate)](xref:Microsoft.AspNetCore.Http.IMiddleware.InvokeAsync*) yöntemi istekleri işler ve <xref:System.Threading.Tasks.Task> Ara yazılım yürütmesini temsil eden bir döndürür.
 
 Kurala göre etkinleştirilen ara yazılım:
 
 [!code-csharp[](extensibility/samples/3.x/MiddlewareExtensibilitySample/Middleware/ConventionalMiddleware.cs?name=snippet1)]
 
-Etkinleştirilen ara yazılım <xref:Microsoft.AspNetCore.Http.MiddlewareFactory>:
+Etkinleştirilen ara yazılım <xref:Microsoft.AspNetCore.Http.MiddlewareFactory> :
 
 [!code-csharp[](extensibility/samples/3.x/MiddlewareExtensibilitySample/Middleware/FactoryActivatedMiddleware.cs?name=snippet1)]
 
@@ -53,7 +55,7 @@ Middlewares için Uzantılar oluşturulur:
 
 [!code-csharp[](extensibility/samples/3.x/MiddlewareExtensibilitySample/Middleware/MiddlewareExtensions.cs?name=snippet1)]
 
-Nesneleri fabrikada etkinleştirilen bir ara yazılıma geçirmek mümkün değildir <xref:Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.UseMiddleware*>:
+Nesneleri fabrikada etkinleştirilen bir ara yazılıma geçirmek mümkün değildir <xref:Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.UseMiddleware*> :
 
 ```csharp
 public static IApplicationBuilder UseFactoryActivatedMiddleware(
@@ -64,11 +66,11 @@ public static IApplicationBuilder UseFactoryActivatedMiddleware(
 }
 ```
 
-Fabrikada etkinleştirilen ara yazılım, içindeki `Startup.ConfigureServices`yerleşik kapsayıcıya eklenir:
+Fabrikada etkinleştirilen ara yazılım, içindeki yerleşik kapsayıcıya eklenir `Startup.ConfigureServices` :
 
 [!code-csharp[](extensibility/samples/3.x/MiddlewareExtensibilitySample/Startup.cs?name=snippet1&highlight=6)]
 
-Her iki middlewares de `Startup.Configure`istek işleme ardışık düzeninde kaydedilir:
+Her iki middlewares de istek işleme ardışık düzeninde kaydedilir `Startup.Configure` :
 
 [!code-csharp[](extensibility/samples/3.x/MiddlewareExtensibilitySample/Startup.cs?name=snippet2&highlight=12-13)]
 
@@ -76,7 +78,7 @@ Her iki middlewares de `Startup.Configure`istek işleme ardışık düzeninde ka
 
 <xref:Microsoft.AspNetCore.Http.IMiddlewareFactory>ara yazılım oluşturmak için yöntemler sağlar. Ara yazılım Fabrikası Uygulama, kapsayıcıda kapsamlı bir hizmet olarak kaydedilir.
 
-Varsayılan <xref:Microsoft.AspNetCore.Http.IMiddlewareFactory> uygulama <xref:Microsoft.AspNetCore.Http.MiddlewareFactory>, [Microsoft. aspnetcore. http](https://www.nuget.org/packages/Microsoft.AspNetCore.Http/) paketinde bulunur.
+Varsayılan <xref:Microsoft.AspNetCore.Http.IMiddlewareFactory> uygulama, <xref:Microsoft.AspNetCore.Http.MiddlewareFactory> [Microsoft. Aspnetcore. http](https://www.nuget.org/packages/Microsoft.AspNetCore.Http/) paketinde bulunur.
 
 ::: moniker-end
 
@@ -84,7 +86,7 @@ Varsayılan <xref:Microsoft.AspNetCore.Http.IMiddlewareFactory> uygulama <xref:M
 
 <xref:Microsoft.AspNetCore.Http.IMiddlewareFactory>/<xref:Microsoft.AspNetCore.Http.IMiddleware>, [Ara yazılım](xref:fundamentals/middleware/index) etkinleştirme için bir genişletilebilirlik noktasıdır.
 
-<xref:Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.UseMiddleware*>Uzantı yöntemleri bir ara yazılımın kayıtlı türünün uygulayıp uygulamadığını <xref:Microsoft.AspNetCore.Http.IMiddleware>denetler. Bu durumda, kapsayıcıya kaydedilen <xref:Microsoft.AspNetCore.Http.IMiddlewareFactory> örnek, kural tabanlı ara yazılım etkinleştirme mantığını kullanmak yerine <xref:Microsoft.AspNetCore.Http.IMiddleware> , uygulamayı çözmek için kullanılır. Ara yazılım, uygulamanın hizmet kapsayıcısında [kapsamlı veya geçici bir hizmet](xref:fundamentals/dependency-injection#service-lifetimes) olarak kaydedilir.
+<xref:Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.UseMiddleware*>Uzantı yöntemleri bir ara yazılımın kayıtlı türünün uygulayıp uygulamadığını denetler <xref:Microsoft.AspNetCore.Http.IMiddleware> . Bu durumda, <xref:Microsoft.AspNetCore.Http.IMiddlewareFactory> kapsayıcıya kaydedilen örnek, <xref:Microsoft.AspNetCore.Http.IMiddleware> kural tabanlı ara yazılım etkinleştirme mantığını kullanmak yerine, uygulamayı çözmek için kullanılır. Ara yazılım, uygulamanın hizmet kapsayıcısında [kapsamlı veya geçici bir hizmet](xref:fundamentals/dependency-injection#service-lifetimes) olarak kaydedilir.
 
 Avantajlar:
 
@@ -97,13 +99,13 @@ Avantajlar:
 
 ## <a name="imiddleware"></a>Imıddliware
 
-<xref:Microsoft.AspNetCore.Http.IMiddleware>uygulamanın istek ardışık düzeni için ara yazılımı tanımlar. [InvokeAsync (HttpContext, RequestDelegate)](xref:Microsoft.AspNetCore.Http.IMiddleware.InvokeAsync*) yöntemi istekleri işler ve ara yazılım yürütmesini <xref:System.Threading.Tasks.Task> temsil eden bir döndürür.
+<xref:Microsoft.AspNetCore.Http.IMiddleware>uygulamanın istek ardışık düzeni için ara yazılımı tanımlar. [InvokeAsync (HttpContext, RequestDelegate)](xref:Microsoft.AspNetCore.Http.IMiddleware.InvokeAsync*) yöntemi istekleri işler ve <xref:System.Threading.Tasks.Task> Ara yazılım yürütmesini temsil eden bir döndürür.
 
 Kurala göre etkinleştirilen ara yazılım:
 
 [!code-csharp[](extensibility/samples/2.x/MiddlewareExtensibilitySample/Middleware/ConventionalMiddleware.cs?name=snippet1)]
 
-Etkinleştirilen ara yazılım <xref:Microsoft.AspNetCore.Http.MiddlewareFactory>:
+Etkinleştirilen ara yazılım <xref:Microsoft.AspNetCore.Http.MiddlewareFactory> :
 
 [!code-csharp[](extensibility/samples/2.x/MiddlewareExtensibilitySample/Middleware/FactoryActivatedMiddleware.cs?name=snippet1)]
 
@@ -111,7 +113,7 @@ Middlewares için Uzantılar oluşturulur:
 
 [!code-csharp[](extensibility/samples/2.x/MiddlewareExtensibilitySample/Middleware/MiddlewareExtensions.cs?name=snippet1)]
 
-Nesneleri fabrikada etkinleştirilen bir ara yazılıma geçirmek mümkün değildir <xref:Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.UseMiddleware*>:
+Nesneleri fabrikada etkinleştirilen bir ara yazılıma geçirmek mümkün değildir <xref:Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.UseMiddleware*> :
 
 ```csharp
 public static IApplicationBuilder UseFactoryActivatedMiddleware(
@@ -122,11 +124,11 @@ public static IApplicationBuilder UseFactoryActivatedMiddleware(
 }
 ```
 
-Fabrikada etkinleştirilen ara yazılım, içindeki `Startup.ConfigureServices`yerleşik kapsayıcıya eklenir:
+Fabrikada etkinleştirilen ara yazılım, içindeki yerleşik kapsayıcıya eklenir `Startup.ConfigureServices` :
 
 [!code-csharp[](extensibility/samples/2.x/MiddlewareExtensibilitySample/Startup.cs?name=snippet1&highlight=6)]
 
-Her iki middlewares de `Startup.Configure`istek işleme ardışık düzeninde kaydedilir:
+Her iki middlewares de istek işleme ardışık düzeninde kaydedilir `Startup.Configure` :
 
 [!code-csharp[](extensibility/samples/2.x/MiddlewareExtensibilitySample/Startup.cs?name=snippet2&highlight=13-14)]
 
@@ -134,7 +136,7 @@ Her iki middlewares de `Startup.Configure`istek işleme ardışık düzeninde ka
 
 <xref:Microsoft.AspNetCore.Http.IMiddlewareFactory>ara yazılım oluşturmak için yöntemler sağlar. Ara yazılım Fabrikası Uygulama, kapsayıcıda kapsamlı bir hizmet olarak kaydedilir.
 
-Varsayılan <xref:Microsoft.AspNetCore.Http.IMiddlewareFactory> uygulama <xref:Microsoft.AspNetCore.Http.MiddlewareFactory>, [Microsoft. aspnetcore. http](https://www.nuget.org/packages/Microsoft.AspNetCore.Http/) paketinde bulunur.
+Varsayılan <xref:Microsoft.AspNetCore.Http.IMiddlewareFactory> uygulama, <xref:Microsoft.AspNetCore.Http.MiddlewareFactory> [Microsoft. Aspnetcore. http](https://www.nuget.org/packages/Microsoft.AspNetCore.Http/) paketinde bulunur.
 
 ::: moniker-end
 

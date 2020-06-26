@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 07/07/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: grpc/security
-ms.openlocfilehash: 8bbe198087f8ba80abfe6b518f8223c719801a85
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: f06e239054b1c4edf126d1cf974dff1ca36ee56a
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774961"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400134"
 ---
 # <a name="security-considerations-in-grpc-for-aspnet-core"></a>ASP.NET Core için gRPC 'de güvenlik konuları
 
@@ -45,7 +47,7 @@ GRPC istemcilerine ve hizmetlerine gelen iletiler belleğe yüklenir. İleti boy
 
 gRPC gelen ve giden iletileri yönetmek için ileti başına boyut sınırlarını kullanır. Varsayılan olarak, gRPC gelen iletileri 4 MB ile sınırlandırır. Giden iletilerde sınır yoktur.
 
-Sunucusunda, gRPC ileti limitleri bir uygulamadaki tüm hizmetler için ile `AddGrpc`yapılandırılabilir:
+Sunucusunda, gRPC ileti limitleri bir uygulamadaki tüm hizmetler için ile yapılandırılabilir `AddGrpc` :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -58,7 +60,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Ayrıca, kullanılarak `AddServiceOptions<TService>`tek bir hizmet için sınırlamalar da yapılandırılabilir. İleti boyutu sınırlarını yapılandırma hakkında daha fazla bilgi için bkz. [GRPC yapılandırması](xref:grpc/configuration).
+Ayrıca, kullanılarak tek bir hizmet için sınırlamalar da yapılandırılabilir `AddServiceOptions<TService>` . İleti boyutu sınırlarını yapılandırma hakkında daha fazla bilgi için bkz. [GRPC yapılandırması](xref:grpc/configuration).
 
 ## <a name="client-certificate-validation"></a>İstemci sertifikası doğrulaması
 

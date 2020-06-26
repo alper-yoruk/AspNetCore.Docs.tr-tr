@@ -8,17 +8,19 @@ ms.custom: H1Hack27Feb2017
 ms.date: 09/06/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: client-side/spa-services
-ms.openlocfilehash: 65bd5157bb3909f8352debcb1a6dfa7d888eec0e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 05f76a7d341fc5c55b8234b6ff6d2be5aa61d6fd
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82769929"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401837"
 ---
 # <a name="use-javascript-services-to-create-single-page-applications-in-aspnet-core"></a>ASP.NET Core içinde tek sayfalı uygulamalar oluşturmak için JavaScript hizmetlerini kullanın
 
@@ -67,7 +69,7 @@ Toplu olarak, bu altyapı bileşenleri hem geliştirme iş akışını hem de ç
 
 SpaServices ile çalışmak için aşağıdakileri yüklemelisiniz:
 
-* NPM ile [Node. js](https://nodejs.org/) (sürüm 6 veya üzeri)
+* NPM ile [Node.js](https://nodejs.org/) (sürüm 6 veya üzeri)
 
   * Bu bileşenlerin yüklendiğini doğrulamak ve bulunabilir olması için komut satırından aşağıdakileri çalıştırın:
 
@@ -75,7 +77,7 @@ SpaServices ile çalışmak için aşağıdakileri yüklemelisiniz:
     node -v && npm -v
     ```
 
-  * Bir Azure Web sitesine dağıtım yapıyorsanız hiçbir işlem gerekli değildir &mdash; . js, sunucu ortamlarında yüklenir ve kullanılabilir.
+  * Bir Azure Web sitesine dağıtım yapıyorsanız, &mdash; sunucu ortamlarında yüklü ve kullanılabilirNode.js herhangi bir eylem gerekmez.
 
 * [!INCLUDE [](~/includes/net-core-sdk-download-link.md)]
 
@@ -85,7 +87,7 @@ SpaServices ile çalışmak için aşağıdakileri yüklemelisiniz:
 
 ## <a name="server-side-prerendering"></a>Sunucu tarafı prerendering
 
-Evrensel (isomorphic olarak da bilinir) uygulaması, hem sunucu hem de istemci üzerinde çalışan bir JavaScript uygulamasıdır. Angular, tepki verme ve diğer popüler çerçeveler, bu uygulama geliştirme stili için evrensel bir platform sağlar. Fikir, önce Node. js aracılığıyla sunucuda çerçeve bileşenlerini işlemek ve ardından istemciye daha fazla yürütme devretmek.
+Evrensel (isomorphic olarak da bilinir) uygulaması, hem sunucu hem de istemci üzerinde çalışan bir JavaScript uygulamasıdır. Angular, tepki verme ve diğer popüler çerçeveler, bu uygulama geliştirme stili için evrensel bir platform sağlar. Fikir, öncelikle sunucu üzerinde Node.js aracılığıyla çerçeve bileşenlerini işlemek ve ardından istemciye daha fazla yürütme devretmek.
 
 SpaServices tarafından sunulan ASP.NET Core [Etiket Yardımcıları](xref:mvc/views/tag-helpers/intro) , sunucuda JavaScript işlevlerini çağırarak sunucu tarafı prerendering 'in uygulanmasını basitleştirir.
 
@@ -103,23 +105,23 @@ Etiket Yardımcıları, projenin *_ViewImports. cshtml* dosyasında ad alanı ka
 
 [!code-cshtml[](../client-side/spa-services/sample/SpaServicesSampleApp/Views/_ViewImports.cshtml?highlight=3)]
 
-Bu etiket yardımcıları, Razor görünümü içinde HTML benzeri bir söz dizimini kullanarak doğrudan alt düzey API 'lerle iletişim kurmanın karmaşık özelliklerini soyutlar.
+Bu etiket yardımcıları, görünümün içindeki HTML benzeri bir söz dizimini kullanarak doğrudan alt düzey API 'lerle iletişim kurmanın karmaşık özelliklerini soyutlar Razor .
 
 [!code-cshtml[](../client-side/spa-services/sample/SpaServicesSampleApp/Views/Home/Index.cshtml?range=5)]
 
 ### <a name="asp-prerender-module-tag-helper"></a>ASP-PreRender-Module etiketi Yardımcısı
 
-`asp-prerender-module`Yukarıdaki kod örneğinde kullanılan etiket Yardımcısı, Node. js aracılığıyla sunucuda *clientapp/Dist/Main-Server. js* ' yi yürütür. Netme 'nin sake, *Main-Server. js* dosyası, [WebPack](https://webpack.github.io/) derleme sürecinde TypeScript-to-JavaScript transpilation görevinin yapıtı. WebPack, bir giriş noktası diğer adını tanımlar `main-server` ; ve, bu diğer ad için bağımlılık grafiğinin çapraz geçişi *clientapp/Boot-Server. TS* dosyasında başlar:
+`asp-prerender-module`Yukarıdaki kod örneğinde kullanılan etiket Yardımcısı, sunucu üzerinde *clientapp/dist/main-server.js* ' ı Node.js aracılığıyla yürütür. Netlik için *main-server.js* dosyası, [WebPack](https://webpack.github.io/) derleme sürecinde TypeScript-to-JavaScript transpilation görevinin yapıtı. WebPack, bir giriş noktası diğer adını tanımlar `main-server` ; ve, bu diğer ad için bağımlılık grafiğinin çapraz geçişi *clientapp/Boot-Server. TS* dosyasında başlar:
 
 [!code-javascript[](../client-side/spa-services/sample/SpaServicesSampleApp/webpack.config.js?range=53)]
 
-Aşağıdaki angular örneğinde, *clientapp/Boot-Server. TS* dosyası, `createServerRenderer` `RenderResult` `aspnet-prerendering` Node. js aracılığıyla sunucu işlemesini yapılandırmak için NPM paketinin işlevini ve türünü kullanır. Sunucu tarafı işlemeye yönelik HTML biçimlendirmesi, kesin türü belirtilmiş bir JavaScript nesnesine Sarmalanan bir Resolve işlev çağrısına geçirilir `Promise` . `Promise`Nesnenin önemi, Dom 'ın yer tutucu öğesine ekleme için sayfaya HTML işaretlemesini zaman uyumsuz olarak sağlar.
+Aşağıdaki angular örneğinde, *clientapp/Boot-Server. TS* dosyası, `createServerRenderer` `RenderResult` `aspnet-prerendering` Node.js aracılığıyla sunucu işlemesini yapılandırmak için NPM paketinin işlevini ve türünü kullanır. Sunucu tarafı işlemeye yönelik HTML biçimlendirmesi, kesin türü belirtilmiş bir JavaScript nesnesine Sarmalanan bir Resolve işlev çağrısına geçirilir `Promise` . `Promise`Nesnenin önemi, Dom 'ın yer tutucu öğesine ekleme için sayfaya HTML işaretlemesini zaman uyumsuz olarak sağlar.
 
 [!code-typescript[](../client-side/spa-services/sample/SpaServicesSampleApp/ClientApp/boot-server.ts?range=6,10-34,79-)]
 
 ### <a name="asp-prerender-data-tag-helper"></a>ASP-PreRender-veri etiketi Yardımcısı
 
-Etiket Yardımcısı ile birlikte kullanıldığında `asp-prerender-module` , `asp-prerender-data` Razor görünümündeki bağlama bilgilerini sunucu tarafı JavaScript 'e geçirmek Için etiket Yardımcısı kullanılabilir. Örneğin, aşağıdaki biçimlendirme Kullanıcı verilerini `main-server` modüle geçirir:
+Etiket Yardımcısı ile birlikte kullanıldığında `asp-prerender-module` , `asp-prerender-data` bağlam bilgilerini Razor görünümden sunucu tarafı JavaScript 'e geçirmek için etiket Yardımcısı kullanılabilir. Örneğin, aşağıdaki biçimlendirme Kullanıcı verilerini `main-server` modüle geçirir:
 
 [!code-cshtml[](../client-side/spa-services/sample/SpaServicesSampleApp/Views/Home/Index.cshtml?range=9-12)]
 
@@ -139,7 +141,7 @@ Yukarıdaki kod örneğini genişletmek için, işlevine verilen özelliği hibi
 
 ## <a name="webpack-dev-middleware"></a>Web paketi geliştirme ara yazılımı
 
-[Web paketi geliştirme ara yazılımı](https://webpack.js.org/guides/development/#using-webpack-dev-middleware) , Web paketinin kaynakları isteğe bağlı olarak oluşturmakta olan kolaylaştırılmış bir geliştirme iş akışı Yazılım, tarayıcıda bir sayfa yeniden yüklendiğinde istemci tarafı kaynaklarını otomatik olarak derler ve sunar. Alternatif yaklaşım, üçüncü taraf bir bağımlılık veya özel kod değiştiğinde, projenin NPM derleme betiği aracılığıyla WebPack 'i el ile çağırmalıdır. *Package. JSON* dosyasındaki NPM derleme betiği aşağıdaki örnekte gösterilmiştir:
+[Web paketi geliştirme ara yazılımı](https://webpack.js.org/guides/development/#using-webpack-dev-middleware) , Web paketinin kaynakları isteğe bağlı olarak oluşturmakta olan kolaylaştırılmış bir geliştirme iş akışı Yazılım, tarayıcıda bir sayfa yeniden yüklendiğinde istemci tarafı kaynaklarını otomatik olarak derler ve sunar. Alternatif yaklaşım, üçüncü taraf bir bağımlılık veya özel kod değiştiğinde, projenin NPM derleme betiği aracılığıyla WebPack 'i el ile çağırmalıdır. *package.js* dosyadaki bir NPM derleme betiği aşağıdaki örnekte gösterilmiştir:
 
 ```json
 "build": "npm run build:vendor && npm run build:custom",
@@ -161,7 +163,7 @@ Web paketi geliştirme ara yazılımı, *Startup.cs* dosyasının yönteminde a�
 
 Uzantı yöntemi `UseWebpackDevMiddleware` aracılığıyla [statik dosya barındırma](xref:fundamentals/static-files) kaydedilmeden önce genişletme yöntemi çağrılmalıdır `UseStaticFiles` . Güvenlik nedenleriyle, yalnızca uygulama geliştirme modunda çalışırken ara yazılımı kaydedin.
 
-*WebPack. config. js* dosyasının `output.publicPath` özelliği, ara yazılımlar için klasörü değişiklikleri izlemesini söyler `dist` :
+*webpack.config.js* dosyanın `output.publicPath` özelliği, ara yazılımlar için klasörü değişiklikleri izlemesini söyler `dist` :
 
 [!code-javascript[](../client-side/spa-services/sample/SpaServicesSampleApp/webpack.config.js?range=6,13-16)]
 
@@ -189,7 +191,7 @@ app.UseWebpackDevMiddleware(new WebpackDevMiddlewareOptions {
 
 [Web paketi geliştirme ara yazılımı](#webpack-dev-middleware)ile doğru olduğu için, genişletme yönteminin `UseWebpackDevMiddleware` uzantı yönteminden önce çağrılması gerekir `UseStaticFiles` . Güvenlik nedenleriyle, yalnızca uygulama geliştirme modunda çalışırken ara yazılımı kaydedin.
 
-*Web paketi. config. js* dosyası `plugins` boş bırakılmış olsa bile bir dizi tanımlamalıdır:
+*webpack.config.js* `plugins` Boş bırakılmış olsa bilewebpack.config.jsdosyası bir dizi tanımlamalıdır:
 
 [!code-javascript[](../client-side/spa-services/sample/SpaServicesSampleApp/webpack.config.js?range=6,25)]
 
@@ -234,8 +236,8 @@ Kullanılabilir SPA şablonlarının listesi görüntülenir:
 | Şablonlar                                 | Kısa Ad | Dil | Etiketler        |
 | ------------------------------------------| :--------: | :------: | :---------: |
 | Angular ile MVC ASP.NET Core             | Angular    | Þ     | Web/MVC/SPA |
-| ASP.NET Core, tepki verme. js ile MVC            | tıkla      | Þ     | Web/MVC/SPA |
-| ASP.NET Core, yanıt verme. js ve Redux ile MVC  | reactredux | Þ     | Web/MVC/SPA |
+| React.js ile MVC ASP.NET Core            | tıkla      | Þ     | Web/MVC/SPA |
+| React.js ve Redux ile MVC ASP.NET Core  | reactredux | Þ     | Web/MVC/SPA |
 
 SPA şablonlarından birini kullanarak yeni bir proje oluşturmak için, [DotNet New](/dotnet/core/tools/dotnet-new) komutuna şablonun **kısa adını** ekleyin. Aşağıdaki komut, sunucu tarafı için yapılandırılmış ASP.NET Core MVC ile bir angular uygulaması oluşturur:
 
@@ -290,7 +292,7 @@ Angular uygulamasını örnek olarak kullanarak, `CounterComponent` *Counter. Co
 npm test
 ```
 
-Betik, *karma. conf. js* dosyasında tanımlanan ayarları okuyan karma Test Çalıştırıcısı 'nı başlatır. Diğer ayarların yanı sıra, *karma. conf. js* kendi dizisi aracılığıyla yürütülecek test dosyalarını tanımlar `files` :
+Betik, *karma.conf.js* dosyasında tanımlanan ayarları okuyan karma Test Çalıştırıcısı 'nı başlatır. Diğer ayarlar arasında *karma.conf.js* , kendi dizisi aracılığıyla yürütülecek test dosyalarını tanımlar `files` :
 
 [!code-javascript[](../client-side/spa-services/sample/SpaServicesSampleApp/ClientApp/test/karma.conf.js?range=4-5,8-11)]
 

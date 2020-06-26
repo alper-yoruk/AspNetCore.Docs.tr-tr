@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 08/26/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/logging/loggermessage
-ms.openlocfilehash: f2ae734a3f40f8f31842b937ebf8bf4a7f5b0f4b
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: dc90c6cdbcea7c36079bcb4a032014998056b56d
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84105018"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401174"
 ---
 # <a name="high-performance-logging-with-loggermessage-in-aspnet-core"></a>ASP.NET Core 'de LoggerMessage ile yüksek performanslı günlüğe kaydetme
 
@@ -149,7 +151,7 @@ Yöntemini kullanarak bir dizi günlük mesajı için uygulanacak [günlük kaps
 
 Örnek uygulamanın, veritabanındaki tüm teklifleri silmek için **Tümünü Temizle** düğmesi vardır. Tırnak işaretleri tek seferde kaldırılarak silinir. Bir teklifin her silindiği her seferinde `QuoteDeleted` yöntemi günlükçü üzerinde çağrılır. Bu günlük iletilerine bir günlük kapsamı eklenir.
 
-`IncludeScopes` *AppSettings. JSON*konsol günlükçü bölümünde etkinleştirin:
+`IncludeScopes` *Üzerindeappsettings.js*konsol günlükçüsü bölümünde etkinleştirin:
 
 [!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/appsettings.json?highlight=3-5)]
 
@@ -317,7 +319,7 @@ Yöntemini kullanarak bir dizi günlük mesajı için uygulanacak [günlük kaps
 
 Örnek uygulamanın, veritabanındaki tüm teklifleri silmek için **Tümünü Temizle** düğmesi vardır. Tırnak işaretleri tek seferde kaldırılarak silinir. Bir teklifin her silindiği her seferinde `QuoteDeleted` yöntemi günlükçü üzerinde çağrılır. Bu günlük iletilerine bir günlük kapsamı eklenir.
 
-`IncludeScopes` *AppSettings. JSON*konsol günlükçü bölümünde etkinleştirin:
+`IncludeScopes` *Üzerindeappsettings.js*konsol günlükçüsü bölümünde etkinleştirin:
 
 [!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/appsettings.json?highlight=3-5)]
 

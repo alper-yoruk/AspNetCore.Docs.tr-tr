@@ -8,23 +8,25 @@ ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: data/ef-mvc/inheritance
-ms.openlocfilehash: 4883c697e950cac298dec961b4cd5a5096d8e946
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: cea19044294482adf834d998b75e0f3fc386cc46
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773581"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400537"
 ---
 # <a name="tutorial-implement-inheritance---aspnet-mvc-with-ef-core"></a>Öğretici: EF Core devralma-ASP.NET MVC uygulama
 
 Önceki öğreticide eşzamanlılık özel durumlarını ele alırsınız. Bu öğretici, veri modelinde devralmayı nasıl uygulayacağınızı gösterir.
 
-Nesne odaklı programlamada, kod yeniden kullanımını kolaylaştırmak için devralmayı kullanabilirsiniz. Bu `Instructor` öğreticide, ve `Student` sınıflarını, hem Eğitmenler hem de öğrenciler için ortak olan gibi `Person` özellikleri `LastName` içeren bir temel sınıftan türetireceğiz şekilde değiştireceksiniz. Herhangi bir Web sayfası eklemez veya değiştirmezsiniz, ancak koddan bazılarını değiştireceksiniz ve bu değişiklikler otomatik olarak veritabanına yansıtılacaktır.
+Nesne odaklı programlamada, kod yeniden kullanımını kolaylaştırmak için devralmayı kullanabilirsiniz. Bu öğreticide, `Instructor` ve `Student` sınıflarını, `Person` `LastName` hem Eğitmenler hem de öğrenciler için ortak olan gibi özellikleri içeren bir temel sınıftan türetireceğiz şekilde değiştireceksiniz. Herhangi bir Web sayfası eklemez veya değiştirmezsiniz, ancak koddan bazılarını değiştireceksiniz ve bu değişiklikler otomatik olarak veritabanına yansıtılacaktır.
 
 Bu öğreticide şunları yaptınız:
 
@@ -42,11 +44,11 @@ Bu öğreticide şunları yaptınız:
 
 ## <a name="map-inheritance-to-database"></a>Devralmayı veritabanına eşle
 
-Okul `Instructor` veri `Student` modelindeki ve sınıflarının özdeş birçok özelliği vardır:
+`Instructor` `Student` Okul veri modelindeki ve sınıflarının özdeş birçok özelliği vardır:
 
 ![Öğrenci ve eğitmen sınıfları](inheritance/_static/no-inheritance.png)
 
-`Instructor` Ve `Student` varlıkları tarafından paylaşılan özellikler için gereksiz kodu ortadan kaldırmak istediğinizi varsayalım. Ya da adın bir eğitmenden veya bir öğrenciye ait olup olmadığına bakılmaksızın adları biçimlendirmeden bir hizmet yazmak isteyebilirsiniz. Yalnızca bu paylaşılan özellikleri `Person` içeren bir temel sınıf oluşturabilir `Instructor` ve sonra aşağıdaki çizimde gösterildiği gibi, ve `Student` sınıflarının bu temel sınıftan devralmasını sağlayabilirsiniz:
+Ve varlıkları tarafından paylaşılan özellikler için gereksiz kodu ortadan kaldırmak istediğinizi varsayalım `Instructor` `Student` . Ya da adın bir eğitmenden veya bir öğrenciye ait olup olmadığına bakılmaksızın adları biçimlendirmeden bir hizmet yazmak isteyebilirsiniz. `Person`Yalnızca bu paylaşılan özellikleri içeren bir temel sınıf oluşturabilir `Instructor` ve sonra `Student` Aşağıdaki çizimde gösterildiği gibi, ve sınıflarının bu temel sınıftan devralmasını sağlayabilirsiniz:
 
 ![Kişi sınıfından türetilen öğrenci ve eğitmen sınıfları](inheritance/_static/inheritance.png)
 
@@ -66,7 +68,7 @@ Başka bir seçenek de Özet olmayan tüm türleri tek tek tablolarla eşlemeniz
 
 TPC ve TPH devralma desenleri genellikle TPT devralma desenlerinden daha iyi performans sağlar, çünkü TPT desenleri karmaşık JOIN sorgularına yol açabilir.
 
-Bu öğreticide, TPH devralmanın nasıl uygulanacağı gösterilmektedir. TPH Entity Framework Core desteklediği tek devralma modelidir.  Ne `Person` yapacaklarınız bir sınıf oluşturur, ' den `Instructor` `Student` `Person`türetmek için ve sınıflarını değiştirin, yeni sınıfını öğesine `DbContext`ekleyin ve bir geçiş oluşturun.
+Bu öğreticide, TPH devralmanın nasıl uygulanacağı gösterilmektedir. TPH Entity Framework Core desteklediği tek devralma modelidir.  Ne yapacaklarınız bir sınıf oluşturur `Person` , ' `Instructor` `Student` den türetmek için ve sınıflarını değiştirin `Person` , yeni sınıfını öğesine ekleyin `DbContext` ve bir geçiş oluşturun.
 
 > [!TIP]
 > Aşağıdaki değişiklikleri yapmadan önce projenin bir kopyasını kaydetmeyi göz önünde bulundurun.  Daha sonra sorunlarla karşılaşırsanız ve baştan başlamak gerekirse, bu öğretici için yapılan adımları tersine çevirme veya tüm serinin başlangıcına geri dönme yerine kaydedilen projeden başlamak daha kolay olacaktır.
@@ -103,9 +105,9 @@ Değişikliklerinizi kaydedin ve projeyi derleyin. Ardından proje klasöründe 
 dotnet ef migrations add Inheritance
 ```
 
-`database update` Komutu henüz çalıştırmayın. Bu komut, eğitmen tablosunu bırakacak ve öğrenci tablosunu kişi olarak yeniden adlandırdığı için kayıp veri oluşmasına neden olur. Varolan verileri korumak için özel kod sağlamanız gerekir.
+`database update`Komutu henüz çalıştırmayın. Bu komut, eğitmen tablosunu bırakacak ve öğrenci tablosunu kişi olarak yeniden adlandırdığı için kayıp veri oluşmasına neden olur. Varolan verileri korumak için özel kod sağlamanız gerekir.
 
-*Geçişleri/\<zaman damgasını>_Inheritance. cs* açın ve `Up` yöntemi aşağıdaki kodla değiştirin:
+*Geçişler/ \<timestamp> _Inheritance. cs* ' i açın ve `Up` yöntemi aşağıdaki kodla değiştirin:
 
 [!code-csharp[](intro/samples/cu/Migrations/20170216215525_Inheritance.cs?name=snippet_Up)]
 
@@ -137,7 +139,7 @@ Bu kod aşağıdaki veritabanı güncelleştirme görevlerini gerçekleştirir:
 dotnet ef database update
 ```
 
-(Bir üretim sisteminde, önceki veritabanı sürümüne geri dönmek için bunu `Down` kullanmanız durumunda bu yöntemde ilgili değişiklikleri yapmanız gerekir. Bu öğreticide, `Down` yöntemini kullanmayacağız.)
+(Bir üretim sisteminde, `Down` önceki veritabanı sürümüne geri dönmek için bunu kullanmanız durumunda bu yöntemde ilgili değişiklikleri yapmanız gerekir. Bu öğreticide, yöntemini kullanmayacağız `Down` .)
 
 > [!NOTE]
 > Varolan verileri içeren bir veritabanında şema değişiklikleri yaparken başka hatalar almak mümkündür. Çözemiyoruz geçiş hataları alırsanız, bağlantı dizesindeki veritabanı adını değiştirebilir veya veritabanını silebilirsiniz. Yeni bir veritabanı ile geçirilecek veri yoktur ve Update-Database komutunun hatasız tamamlanabilmesi daha olasıdır. Veritabanını silmek için, SSOX kullanın veya `database drop` CLI komutunu çalıştırın.

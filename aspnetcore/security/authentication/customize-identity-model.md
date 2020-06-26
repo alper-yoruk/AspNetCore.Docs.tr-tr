@@ -6,17 +6,19 @@ ms.author: avickers
 ms.date: 07/01/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/customize_identity_model
-ms.openlocfilehash: 96ee703da4ced69c5d9c703139e33b76b5dcdff1
-ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
+ms.openlocfilehash: 3a5bac0e3e34602b1f8a85a7bcde1ba92b372607
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85074150"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399172"
 ---
 # <a name="identity-model-customization-in-aspnet-core"></a>IdentityASP.NET Core model özelleştirmesi
 

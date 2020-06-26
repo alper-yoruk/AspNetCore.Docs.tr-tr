@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 4/1/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: f4bba10f7ce0b5a95c2aed8644aed18fa0637457
-ms.sourcegitcommit: 4437f4c149f1ef6c28796dcfaa2863b4c088169c
+ms.openlocfilehash: 7ac6dc983454153792610a07c1df01fbc38c8d67
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85074515"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400836"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core yönlendirme
 
@@ -569,8 +571,8 @@ Yönlendirmelerde kullanılan normal ifadeler, genellikle karakteriyle başlar `
 | `[a-z]{2}`   | 123abc456 | Yes   | Alt dize eşleşmeleri     |
 | `[a-z]{2}`   | MZ        | Yes   | Eşleşen ifadesi    |
 | `[a-z]{2}`   | MZ        | Yes   | Büyük/küçük harfe duyarlı değil    |
-| `^[a-z]{2}$` | hello     | Hayır    | Bkz. `^` ve `$` üzeri |
-| `^[a-z]{2}$` | 123abc456 | Hayır    | Bkz. `^` ve `$` üzeri |
+| `^[a-z]{2}$` | hello     | No    | Bkz. `^` ve `$` üzeri |
+| `^[a-z]{2}$` | 123abc456 | No    | Bkz. `^` ve `$` üzeri |
 
 Normal ifade sözdizimi hakkında daha fazla bilgi için bkz. [.NET Framework normal ifadeler](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
@@ -1490,8 +1492,8 @@ Yönlendirmelerde kullanılan normal ifadeler, genellikle giriş işareti `^` ka
 | `[a-z]{2}`   | 123abc456 | Yes   | Alt dize eşleşmeleri     |
 | `[a-z]{2}`   | MZ        | Yes   | Eşleşen ifadesi    |
 | `[a-z]{2}`   | MZ        | Yes   | Büyük/küçük harfe duyarlı değil    |
-| `^[a-z]{2}$` | hello     | Hayır    | Bkz. `^` ve `$` üzeri |
-| `^[a-z]{2}$` | 123abc456 | Hayır    | Bkz. `^` ve `$` üzeri |
+| `^[a-z]{2}$` | hello     | No    | Bkz. `^` ve `$` üzeri |
+| `^[a-z]{2}$` | 123abc456 | No    | Bkz. `^` ve `$` üzeri |
 
 Normal ifade sözdizimi hakkında daha fazla bilgi için bkz. [.NET Framework normal ifadeler](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
@@ -1934,8 +1936,8 @@ Yönlendirmelerde kullanılan normal ifadeler, genellikle şapka işareti ( `^` 
 | `[a-z]{2}`   | 123abc456 | Yes   | Alt dize eşleşmeleri     |
 | `[a-z]{2}`   | MZ        | Yes   | Eşleşen ifadesi    |
 | `[a-z]{2}`   | MZ        | Yes   | Büyük/küçük harfe duyarlı değil    |
-| `^[a-z]{2}$` | hello     | Hayır    | Bkz. `^` ve `$` üzeri |
-| `^[a-z]{2}$` | 123abc456 | Hayır    | Bkz. `^` ve `$` üzeri |
+| `^[a-z]{2}$` | hello     | No    | Bkz. `^` ve `$` üzeri |
+| `^[a-z]{2}$` | 123abc456 | No    | Bkz. `^` ve `$` üzeri |
 
 Normal ifade sözdizimi hakkında daha fazla bilgi için bkz. [.NET Framework normal ifadeler](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 

@@ -8,17 +8,19 @@ ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: data/ef-mvc/complex-data-model
-ms.openlocfilehash: 10d6f0bd6f6b95efbe868e4bc21513460e1f0b67
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: 2264ed6f67d2394d17a79e28d1ee4a1273af73cd
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652467"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401642"
 ---
 # <a name="tutorial-create-a-complex-data-model---aspnet-mvc-with-ef-core"></a>Öğretici: EF Core ile karmaşık veri modeli oluşturma-ASP.NET MVC
 
@@ -44,7 +46,7 @@ Bu öğreticide şunları yaptınız:
 > * Bağlantı dizesini değiştirme
 > * Veritabanını güncelleştirme
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [EF Core geçişleri kullanma](migrations.md)
 
@@ -476,7 +478,7 @@ Değişikliklerinizi kaydedin ve projeyi derleyin.
 
 ## <a name="change-the-connection-string"></a>Bağlantı dizesini değiştirme
 
-Artık `DbInitializer` sınıfta yeni varlıklar için tohum verilerini boş bir veritabanına ekleyen yeni kodunuz var. EF 'in yeni boş bir veritabanı oluşturmasını sağlamak için *appSettings. JSON* içindeki bağlantı dizesinde veritabanının adını ContosoUniversity3 veya kullandığınız bilgisayarda kullanmadığınız başka bir adla değiştirin.
+Artık `DbInitializer` sınıfta yeni varlıklar için tohum verilerini boş bir veritabanına ekleyen yeni kodunuz var. EF 'in yeni boş bir veritabanı oluşturmasını sağlamak için, *appsettings.jsüzerindeki* bağlantı dizesinde veritabanının adını ContosoUniversity3 veya kullandığınız bilgisayarda kullanmadığınız başka bir adla değiştirin.
 
 ```json
 {
@@ -485,7 +487,7 @@ Artık `DbInitializer` sınıfta yeni varlıklar için tohum verilerini boş bir
   },
 ```
 
-Değişiklerinizi *appSettings. JSON*' da kaydedin.
+*appsettings.js*değişikliklerinizi kaydedin.
 
 > [!NOTE]
 > Veritabanı adını değiştirmeye alternatif olarak, veritabanını silebilirsiniz. **SQL Server Nesne Gezgini** (ssox) veya `database drop` CLI komutunu kullanın:

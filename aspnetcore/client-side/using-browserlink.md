@@ -7,17 +7,19 @@ ms.custom: H1Hack27Feb2017
 ms.date: 01/09/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: client-side/using-browserlink
-ms.openlocfilehash: 619d19ba90298b2455d4a558fea138c86a751f07
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 95ddf379d7cab336356cbfd3853311cb0911552a
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773663"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401720"
 ---
 # <a name="browser-link-in-aspnet-core"></a>ASP.NET Core tarayıcı bağlantısı
 
@@ -29,7 +31,7 @@ Tarayıcı bağlantısı, bir Visual Studio özelliğidir. Geliştirme ortamı i
 
 ::: moniker range=">= aspnetcore-3.0"
 
-[Microsoft. VisualStudio. Web. BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) paketini projenize ekleyin. ASP.NET Core Razor sayfaları veya MVC projeleri için, ' Razor <xref:mvc/views/view-compilation>de açıklandığı gibi (*. cshtml*) dosyaları için çalışma zamanı derlemesini de etkinleştirin. Razorsöz dizimi değişiklikleri yalnızca çalışma zamanı derlemesi etkinleştirildiğinde uygulanır.
+[Microsoft. VisualStudio. Web. BrowserLink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) paketini projenize ekleyin. ASP.NET Core Razor sayfaları veya MVC projeleri için, Razor ' de açıklandığı gibi (*. cshtml*) dosyaları için çalışma zamanı derlemesini de etkinleştirin <xref:mvc/views/view-compilation> . Razorsöz dizimi değişiklikleri yalnızca çalışma zamanı derlemesi etkinleştirildiğinde uygulanır.
 
 ::: moniker-end
 
@@ -41,25 +43,25 @@ ASP.NET Core 2,0 projesi ASP.NET Core 2,1 ' e dönüştürülürken ve [Microsof
 
 ::: moniker range="= aspnetcore-2.0"
 
-ASP.NET Core 2,0 **Web uygulaması**, **Empty**ve **Web API** proje şablonları, [Microsoft. VisualStudio. Web. browserlink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/)Için bir paket başvurusu içeren [Microsoft. aspnetcore. All meta paketini](xref:fundamentals/metapackage)kullanır. Bu nedenle, `Microsoft.AspNetCore.All` metapackage 'In kullanılması tarayıcı bağlantısının kullanılabilir olmasını sağlamak için başka bir eylem gerektirmez.
+ASP.NET Core 2,0 **Web uygulaması**, **Empty**ve **Web API** proje şablonları, [Microsoft. VisualStudio. Web. browserlink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/)Için bir paket başvurusu içeren [Microsoft. aspnetcore. All meta paketini](xref:fundamentals/metapackage)kullanır. Bu nedenle, `Microsoft.AspNetCore.All` metapackage 'in kullanılması tarayıcı bağlantısının kullanılabilir olmasını sağlamak için başka bir eylem gerektirmez.
 
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-1.1"
 
-ASP.NET Core 1. x **Web uygulaması** proje şablonunda, [Microsoft. VisualStudio. Web. browserlink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) paketi için bir paket başvurusu vardır. Diğer proje türleri için `Microsoft.VisualStudio.Web.BrowserLink`bir paket başvurusu eklemenizi gerektirir.
+ASP.NET Core 1. x **Web uygulaması** proje şablonunda, [Microsoft. VisualStudio. Web. browserlink](https://www.nuget.org/packages/Microsoft.VisualStudio.Web.BrowserLink/) paketi için bir paket başvurusu vardır. Diğer proje türleri için bir paket başvurusu eklemenizi gerektirir `Microsoft.VisualStudio.Web.BrowserLink` .
 
 ::: moniker-end
 
 ### <a name="configuration"></a>Yapılandırma
 
-`Startup.Configure` Yöntemi çağırın: `UseBrowserLink`
+`UseBrowserLink` `Startup.Configure` Yöntemi çağırın:
 
 ```csharp
 app.UseBrowserLink();
 ```
 
-`UseBrowserLink` Çağrı genellikle geliştirme ortamında tarayıcının bağlantısını sağlayan `if` bir bloğun içine yerleştirilir. Örneğin:
+`UseBrowserLink`Çağrı genellikle `if` geliştirme ortamında tarayıcının bağlantısını sağlayan bir bloğun içine yerleştirilir. Örneğin:
 
 ```csharp
 if (env.IsDevelopment())
@@ -134,7 +136,7 @@ CSS otomatik eşitleme etkinleştirildiğinde, CSS dosyalarında herhangi bir de
 
 ## <a name="how-it-works"></a>Nasıl çalışır?
 
-Tarayıcı bağlantısı, [SignalR](xref:signalr/introduction) Visual Studio ile tarayıcı arasında bir iletişim kanalı oluşturmak için kullanır. Tarayıcı bağlantısı etkinleştirildiğinde, Visual Studio birden çok istemcinin (tarayıcının SignalR ) bağlanabileceği bir sunucu gibi davranır. Tarayıcı bağlantısı ayrıca ASP.NET Core isteği ardışık düzenine bir ara yazılım bileşeni kaydeder. Bu bileşen, sunucudan her `<script>` sayfa isteğine özel başvurular çıkarır. Tarayıcıda **Görünüm kaynağı** ' nı seçerek komut dosyası başvurularını görebilir ve `<body>` etiket içeriğinin sonuna kadar kaydırma yapabilirsiniz:
+Tarayıcı bağlantısı [SignalR](xref:signalr/introduction) , Visual Studio ile tarayıcı arasında bir iletişim kanalı oluşturmak için kullanır. Tarayıcı bağlantısı etkinleştirildiğinde, Visual Studio SignalR birden çok istemcinin (tarayıcının) bağlanabileceği bir sunucu gibi davranır. Tarayıcı bağlantısı ayrıca ASP.NET Core isteği ardışık düzenine bir ara yazılım bileşeni kaydeder. Bu bileşen `<script>` , sunucudan her sayfa isteğine özel başvurular çıkarır. Tarayıcıda **Görünüm kaynağı** ' nı seçerek komut dosyası başvurularını görebilir ve etiket içeriğinin sonuna kadar kaydırma yapabilirsiniz `<body>` :
 
 ```html
     <!-- Visual Studio Browser Link -->
@@ -148,4 +150,4 @@ Tarayıcı bağlantısı, [SignalR](xref:signalr/introduction) Visual Studio ile
 
 Kaynak dosyalarınız değiştirilmez. Ara yazılım bileşeni, betik başvurularını dinamik olarak çıkarır.
 
-Tarayıcı tarafı kodu tüm JavaScript olduğundan, tarayıcı eklentisi gerekmeden SignalR desteklenen tüm tarayıcılarda çalışıyor olur.
+Tarayıcı tarafı kodu tüm JavaScript olduğundan, SignalR tarayıcı eklentisi gerekmeden desteklenen tüm tarayıcılarda çalışıyor olur.

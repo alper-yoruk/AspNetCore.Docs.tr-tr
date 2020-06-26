@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 12/16/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/target-aspnetcore
-ms.openlocfilehash: 70a445d109a1a9553178e94d79df87cd373e6b06
-ms.sourcegitcommit: 490434a700ba8c5ed24d849bd99d8489858538e3
+ms.openlocfilehash: 1c794092b856a916a318956d7cfb357d46a22d1d
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/19/2020
-ms.locfileid: "85103030"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399653"
 ---
 # <a name="use-aspnet-core-apis-in-a-class-library"></a>Bir sınıf kitaplığında ASP.NET Core API 'Leri kullanma
 
@@ -52,7 +54,7 @@ BlazorWebAssembly (ıSSTREAM) ve sunucu [barındırma modellerini](xref:blazor/h
 
 ### <a name="support-both-hosting-models"></a>Barındırma modellerini destekler
 
-RazorHem [ Blazor sunucu](xref:blazor/hosting-models#blazor-server) hem de bulunan projelerden bileşen kullanımını [ Blazor ](xref:blazor/hosting-models#blazor-webassembly) desteklemek için, düzenleyiciniz için aşağıdaki yönergeleri kullanın.
+Hem hem Razor de olan projelerden gelen bileşen tüketimini desteklemek için [Blazor Server](xref:blazor/hosting-models#blazor-server) , düzenleyiciniz için aşağıdaki yönergeleri kullanın. [ Blazor ](xref:blazor/hosting-models#blazor-webassembly)
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -86,7 +88,7 @@ dotnet new razorclasslib
 
 ### <a name="support-a-specific-hosting-model"></a>Belirli bir barındırma modelini destekleme
 
-Tek bir barındırma modelini desteklemek çok daha az yaygındır Blazor . Örnek olarak, Razor yalnızca [ Blazor sunucu](xref:blazor/hosting-models#blazor-server) projelerinden gelen bileşen kullanımını desteklemek için:
+Tek bir barındırma modelini desteklemek çok daha az yaygındır Blazor . Örnek olarak, Razor yalnızca projeden bileşen kullanımını desteklemek için [Blazor Server](xref:blazor/hosting-models#blazor-server) :
 
 * Hedef .NET Core 3. x.
 * `<FrameworkReference>`Paylaşılan çerçeve için bir öğe ekleyin.

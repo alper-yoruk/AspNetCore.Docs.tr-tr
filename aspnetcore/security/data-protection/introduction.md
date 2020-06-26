@@ -7,23 +7,25 @@ ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/data-protection/introduction
-ms.openlocfilehash: db2c22454fc6c7e663ca603e9d70b6c12ce31af4
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 60cf659c720012d05bb2a6f1433c18d347469462
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775810"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399536"
 ---
 # <a name="aspnet-core-data-protection"></a>ASP.NET Core veri koruma
 
 Web uygulamalarının genellikle güvenliğe duyarlı verileri depolaması gerekir. Windows Masaüstü uygulamaları için DPAPI sağlar, ancak bu Web uygulamaları için uygun değildir. ASP.NET Core veri koruma yığını, bir geliştiricinin anahtar yönetimi ve döndürme dahil olmak üzere verileri korumak için kullanabileceği basit ve kullanımı kolay bir şifreleme API 'SI sağlar.
 
-ASP.NET Core veri koruma yığını, ASP.NET 1. x-4. x içindeki &lt;machineKey&gt; öğesi için uzun süreli değiştirme işlevi görecek şekilde tasarlanmıştır. Bu, eski şifreleme yığınının birçok eksikine yönelik olarak tasarlanmıştır ve bu da çoğu kullanım durumunda Modern uygulamaların karşılaştığı büyük bir çözüm sunar.
+ASP.NET Core veri koruma yığını, &lt; &gt; ASP.NET 1. x-4. x içindeki machineKey öğesi için uzun süreli değiştirme işlevi görecek şekilde tasarlanmıştır. Bu, eski şifreleme yığınının birçok eksikine yönelik olarak tasarlanmıştır ve bu da çoğu kullanım durumunda Modern uygulamaların karşılaştığı büyük bir çözüm sunar.
 
 ## <a name="problem-statement"></a>Sorun bildirimi
 
@@ -73,13 +75,13 @@ Veri koruma sistemi beş ana pakete bölünmüştür. Bu API 'lerin çeşitli y�
 
 Veri koruma yığını beş paketten oluşur.
 
-* [Microsoft. AspNetCore. DataProtection. soyutlamalar](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Abstractions/) , <xref:Microsoft.AspNetCore.DataProtection.IDataProtectionProvider> veri koruma <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> hizmetleri oluşturmak için ve arabirimlerini içerir. Ayrıca, bu türlerle çalışmak için yararlı genişletme yöntemleri içerir (örneğin, [ıdataprotector. Protect](xref:Microsoft.AspNetCore.DataProtection.DataProtectionCommonExtensions.Protect*)). Veri koruma sisteminin başka bir yerde örneği varsa ve API, başvuru `Microsoft.AspNetCore.DataProtection.Abstractions`kullanıyorsanız.
+* [Microsoft. AspNetCore. DataProtection. soyutlamalar](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Abstractions/) , <xref:Microsoft.AspNetCore.DataProtection.IDataProtectionProvider> <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> veri koruma hizmetleri oluşturmak için ve arabirimlerini içerir. Ayrıca, bu türlerle çalışmak için yararlı genişletme yöntemleri içerir (örneğin, [ıdataprotector. Protect](xref:Microsoft.AspNetCore.DataProtection.DataProtectionCommonExtensions.Protect*)). Veri koruma sisteminin başka bir yerde örneği varsa ve API, başvuru kullanıyorsanız `Microsoft.AspNetCore.DataProtection.Abstractions` .
 
-* [Microsoft. aspnetcore. DataProtection](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection/) , temel şifreleme işlemleri, anahtar yönetimi, yapılandırma ve genişletilebilirlik dahil olmak üzere veri koruma sisteminin temel uygulamasını içerir. Veri koruma sisteminin örneğini oluşturmak (örneğin, bir <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection>öğesine eklemek) veya davranışını değiştirmek ya da uzatmak için başvuru. `Microsoft.AspNetCore.DataProtection`
+* [Microsoft. aspnetcore. DataProtection](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection/) , temel şifreleme işlemleri, anahtar yönetimi, yapılandırma ve genişletilebilirlik dahil olmak üzere veri koruma sisteminin temel uygulamasını içerir. Veri koruma sisteminin örneğini oluşturmak (örneğin, bir öğesine eklemek <xref:Microsoft.Extensions.DependencyInjection.IServiceCollection> ) veya davranışını değiştirmek ya da uzatmak için başvuru `Microsoft.AspNetCore.DataProtection` .
 
-* [Microsoft. AspNetCore. DataProtection. Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/) , geliştiricilerin yararlı bulabileceği ancak çekirdek pakete ait olmayan ek API 'leri içerir. Örneğin, bu paket, anahtarları bağımlılık ekleme (bkz <xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider>.) olmadan dosya sistemindeki bir konumda depolamak için veri koruma sisteminin örneğini oluşturmaya yönelik Fabrika yöntemleri içerir. Ayrıca, korumalı yüklerin ömrünü kısıtlamak için uzantı yöntemleri de içerir (bkz <xref:Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector>.).
+* [Microsoft. AspNetCore. DataProtection. Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/) , geliştiricilerin yararlı bulabileceği ancak çekirdek pakete ait olmayan ek API 'leri içerir. Örneğin, bu paket, anahtarları bağımlılık ekleme (bkz.) olmadan dosya sistemindeki bir konumda depolamak için veri koruma sisteminin örneğini oluşturmaya yönelik Fabrika yöntemleri içerir <xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider> . Ayrıca, korumalı yüklerin ömrünü kısıtlamak için uzantı yöntemleri de içerir (bkz <xref:Microsoft.AspNetCore.DataProtection.ITimeLimitedDataProtector> .).
 
-* [Microsoft. AspNetCore. DataProtection. SystemWeb](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.SystemWeb/) , yeni ASP.NET Core veri koruma yığınını kullanmak üzere `<machineKey>` işlemlerini yeniden yönlendirmek için mevcut bir ASP.NET 4. x uygulamasına yüklenebilir. Daha fazla bilgi için bkz. <xref:security/data-protection/compatibility/replacing-machinekey>.
+* [Microsoft.AspNetCore.DataProtection.SystemWeb](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.SystemWeb/) , `<machineKey>` Yeni ASP.NET Core Data Protection yığınını kullanmak üzere işlemlerini yeniden yönlendirmek için mevcut bir ASP.NET 4. x uygulamasına yüklenebilir. Daha fazla bilgi için bkz. <xref:security/data-protection/compatibility/replacing-machinekey>.
 
 * [Microsoft. AspNetCore. Cryptography. Keytüretme](https://www.nuget.org/packages/Microsoft.AspNetCore.Cryptography.KeyDerivation/) , PBKDF2 Password karma yordamının bir uygulamasını sağlar ve Kullanıcı parolalarını güvenli bir şekilde işlemesi gereken sistemler tarafından kullanılabilir. Daha fazla bilgi için bkz. <xref:security/data-protection/consumer-apis/password-hashing>.
 

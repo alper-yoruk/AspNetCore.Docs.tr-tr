@@ -7,17 +7,19 @@ ms.custom: mvc, seodec18
 ms.date: 07/10/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: azure/devops/monitor
-ms.openlocfilehash: 3af36a37124968e13952e8bf5de1b643265a4a5b
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: a94b1e0b5ce2a24cf22eb665c9bcd03c25ffa67f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82766894"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400381"
 ---
 # <a name="monitor-and-debug"></a>İzleme ve hata ayıklama
 
@@ -37,7 +39,7 @@ Bu bölümde, aşağıdaki görevleri tamamlayacaksınız:
 
 App Service Web Apps gerçek zamanlı olarak kolayca izlenir. Azure portal ölçümleri kolay anlaşılır grafikler ve grafiklerde işler.
 
-1. [Azure Portal](https://portal.azure.com)açın ve *MyWebApp\<unique_number\> * App Service gidin.
+1. [Azure Portal](https://portal.azure.com)açın ve ardından *MyWebApp \<unique_number\> * App Service gidin.
 
 1. **Genel bakış** sekmesi, son ölçümleri görüntüleyen grafikler dahil yararlı "bir bakışta" bilgileri görüntüler.
 
@@ -65,7 +67,7 @@ App Service Web Apps gerçek zamanlı olarak kolayca izlenir. Azure portal ölç
 
 [Application Insights](/azure/application-insights/app-insights-overview) , Web uygulamalarının performansını ve kararlılığını ve kullanıcıların bunları nasıl kullandığını analiz eden bir Azure hizmetidir. Application Insights veriler Azure Izleyici 'den daha geniş ve daha ayrıntılı. Veriler geliştiricilere ve yöneticilere uygulamaları iyileştirmek için önemli bilgiler sağlayabilir. Application Insights, kod değişikliği olmadan bir Azure App Service kaynağına eklenebilir.
 
-1. [Azure Portal](https://portal.azure.com)açın ve *MyWebApp\<unique_number\> * App Service gidin.
+1. [Azure Portal](https://portal.azure.com)açın ve ardından *MyWebApp \<unique_number\> * App Service gidin.
 1. **Genel bakış** sekmesinden **Application Insights** kutucuğuna tıklayın.
 
     ![Application Insights kutucuğu](./media/monitoring/app-insights.png)
@@ -90,7 +92,7 @@ Application Insights, ek yapılandırma olmadan yararlı sunucu tarafı bilgiler
 
 Web sunucusu ve uygulama günlükleri Azure App Service ' de varsayılan olarak devre dışıdır. Aşağıdaki adımlarla günlükleri etkinleştirin:
 
-1. [Azure Portal](https://portal.azure.com)açın ve *MyWebApp\<unique_number\> * App Service gidin.
+1. [Azure Portal](https://portal.azure.com)açın ve *MyWebApp \<unique_number\> * App Service gidin.
 1. Soldaki menüde, **izleme** bölümüne gidin. **Tanılama günlükleri**' ni seçin.
 
     ![Tanılama günlükleri bağlantısı](./media/monitoring/logging.png)
@@ -106,7 +108,7 @@ Web uygulaması için ASP.NET Core ve Web sunucusu (App Service) günlükleri ol
 
 Uygulama ve Web sunucusu günlükleri, Portal aracılığıyla gerçek zamanlı olarak akışla eklenebilir.
 
-1. [Azure Portal](https://portal.azure.com)açın ve *MyWebApp\<unique_number\> * App Service gidin.
+1. [Azure Portal](https://portal.azure.com)açın ve *MyWebApp \<unique_number\> * App Service gidin.
 1. Soldaki menüde, **izleme** bölümüne gidin ve **günlük akışı**' nı seçin.
 
     ![Günlük akışı bağlantısını gösteren ekran görüntüsü](./media/monitoring/log-stream.png)

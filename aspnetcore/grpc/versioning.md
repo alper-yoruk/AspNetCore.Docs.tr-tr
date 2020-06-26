@@ -7,17 +7,19 @@ ms.author: jamesnk
 ms.date: 01/09/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: grpc/versioning
-ms.openlocfilehash: dcf089f1e5f27639d048e91ee3aa42c7da6d8398
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: af8c6cac621ed073fc34e2afe0402e640c2c5727
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775368"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400017"
 ---
 # <a name="versioning-grpc-services"></a>gRPC hizmetlerinin sürümünü oluşturma
 
@@ -54,7 +56,7 @@ Aşağıdaki değişiklikler bir gRPC protokol düzeyinde kırılmamış, ancak 
 
 * Kaldırılan bir alandan **alan değerlerinin kaldırılması** , iletinin [Bilinmeyen alanlarına](https://developers.google.com/protocol-buffers/docs/proto3#unknowns)seri durumdan çıkarılır. Bu bir gRPC protokol bölünmesi değişikliği değildir, ancak en son sözleşmeye yükseltiyorsa istemcinin güncelleştirilmesi gerekir. Kaldırılmış bir alan numarasının gelecekte yanlışlıkla yeniden kullanılması önemlidir. Bunun gerçekleşmediğinden emin olmak için, Protoarabelleğe ait [ayrılmış](https://developers.google.com/protocol-buffers/docs/proto3#reserved) anahtar sözcüğünü kullanarak, silinen alan numaralarını ve iletideki adları belirtin.
 * **Iletiyi yeniden adlandırma** -ileti adları genellikle ağ üzerinde gönderilmemektedir, bu nedenle bu bir GRPC protokol bölünmesi değişikliği değildir. En son sözleşmeye yükseltiyorsa istemcinin güncelleştirilmeleri gerekir. İleti **adlarının ağ** üzerinde gönderildiği bir durum, ileti adının ileti türünü tanımlamak için [kullanıldığı bir durumdur](https://developers.google.com/protocol-buffers/docs/proto3#any) .
-* **Csharp_namespace** `csharp_namespace` değiştirme değiştirmek, oluşturulan .net türlerinin ad alanını değiştirecek. Bu bir gRPC protokol bölünmesi değişikliği değildir, ancak en son sözleşmeye yükseltiyorsa istemcinin güncelleştirilmesi gerekir.
+* **Csharp_namespace** değiştirme değiştirmek `csharp_namespace` , oluşturulan .net türlerinin ad alanını değiştirecek. Bu bir gRPC protokol bölünmesi değişikliği değildir, ancak en son sözleşmeye yükseltiyorsa istemcinin güncelleştirilmesi gerekir.
 
 ### <a name="protocol-breaking-changes"></a>Protokol bölünmesi değişiklikleri
 
@@ -79,7 +81,7 @@ Davranış uyumluluğu, uygulamaya özgü kodunuz tarafından belirlenir.
 
 Hizmetler, eski istemcilerle geriye dönük olarak uyumlu kalacak şekilde çalışır. Uygulamanızda yapılan değişiklikler, son değişiklikleri gerektirebilir. Eski istemcileri bozun ve hizmetinize birlikte güncelleştirilmesini zorluyor, iyi bir kullanıcı deneyimi değildir. Geriye dönük uyumluluğu sağlamanın bir yolu, büyük değişiklikler yapılırken bir hizmetin birden çok sürümünü yayımlamaktır.
 
-gRPC, .NET ad alanı gibi işlev gören isteğe bağlı bir [paket](https://developers.google.com/protocol-buffers/docs/proto3#packages) tanımlayıcısını destekler. Aslında, `package` *. proto* dosyasında ayarlanmamışsa, oluşturulan .net türleri `option csharp_namespace` için .net ad alanı olarak kullanılır. Paket, hizmetiniz ve iletileri için bir sürüm numarası belirtmek için kullanılabilir:
+gRPC, .NET ad alanı gibi işlev gören isteğe bağlı bir [paket](https://developers.google.com/protocol-buffers/docs/proto3#packages) tanımlayıcısını destekler. Aslında, `package` `option csharp_namespace` *. proto* dosyasında ayarlanmamışsa, oluşturulan .net türleri için .net ad alanı olarak kullanılır. Paket, hizmetiniz ve iletileri için bir sürüm numarası belirtmek için kullanılabilir:
 
 [!code-protobuf[](versioning/sample/greet.v1.proto?highlight=3)]
 

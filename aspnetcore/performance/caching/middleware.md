@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: performance/caching/middleware
-ms.openlocfilehash: 93ac4e7e159f2b1f031e48a44c2297a741ba7b1c
-ms.sourcegitcommit: 5e462c3328c70f95969d02adce9c71592049f54c
+ms.openlocfilehash: 0d13c44b5538f617343a89a441856d4a3f0cc7f1
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/24/2020
-ms.locfileid: "85292652"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399952"
 ---
 # <a name="response-caching-middleware-in-aspnet-core"></a>ASP.NET Core 'de yanıt önbelleğe alma ara yazılımı
 
@@ -65,7 +67,7 @@ Yanıt önbelleğe alma ara yazılımı yalnızca 200 (Tamam) durum kodu ile son
 
 Yanıt önbelleğe alma seçenekleri aşağıdaki tabloda gösterilmiştir.
 
-| Seçenek | Description |
+| Seçenek | Açıklama |
 | ------ | ----------- |
 | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.MaximumBodySize> | Yanıt gövdesi için bayt cinsinden en büyük önbelleklenebilir boyut. Varsayılan değer `64 * 1024 * 1024` (64 MB). |
 | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.SizeLimit> | Yanıt önbelleği ara yazılımı için bayt cinsinden boyut sınırı. Varsayılan değer `100 * 1024 * 1024` (100 MB). |
@@ -209,7 +211,7 @@ Yanıt önbelleğe alma ara yazılımı yalnızca 200 (Tamam) durum kodu ile son
 
 Yanıt önbelleğe alma seçenekleri aşağıdaki tabloda gösterilmiştir.
 
-| Seçenek | Description |
+| Seçenek | Açıklama |
 | ------ | ----------- |
 | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.MaximumBodySize> | Yanıt gövdesi için bayt cinsinden en büyük önbelleklenebilir boyut. Varsayılan değer `64 * 1024 * 1024` (64 MB). |
 | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.SizeLimit> | Yanıt önbelleği ara yazılımı için bayt cinsinden boyut sınırı. Varsayılan değer `100 * 1024 * 1024` (100 MB). |

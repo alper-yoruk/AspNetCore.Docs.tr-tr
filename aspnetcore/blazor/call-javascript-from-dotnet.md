@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: f39a1a3b78d8017738f83f4d191c7f11c7a6c9e6
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: 8a2df6ca55985a1cff49abb09113e49bfeae6829
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242556"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400524"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-blazor"></a>ASP.NET Core .NET metotlarından JavaScript işlevlerini çağırınBlazor
 
@@ -32,11 +34,11 @@ Bu makalede, .NET 'ten JavaScript işlevlerini çağırma ele alınmaktadır. Ja
 
 .NET 'ten JavaScript 'e çağrı yapmak için <xref:Microsoft.JSInterop.IJSRuntime> soyutlamayı kullanın. JS birlikte çalışma çağrıları vermek için, bu <xref:Microsoft.JSInterop.IJSRuntime> soyutlamayı bileşeninizdeki ekler. <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A>herhangi bir sayıda JSON seri hale getirilebilir bağımsız değişkenle birlikte çağırmak istediğiniz JavaScript işlevi için bir tanımlayıcı alır. İşlev tanımlayıcısı genel kapsama ( `window` ) göredir. Çağırmak isterseniz `window.someScope.someFunction` , tanımlayıcı olur `someScope.someFunction` . Çağrılmadan önce işlevi kaydetmeniz gerekmez. Dönüş türünün `T` de JSON seri hale getirilebilir olması gerekir. `T`döndürülen JSON türüyle en iyi eşleşen .NET türüyle eşleşmelidir.
 
-BlazorPrerendering özellikli sunucu uygulamaları için, ilk prerendering sırasında JavaScript 'e çağrı yapılamaz. JavaScript birlikte çalışma çağrılarının, tarayıcıyla bağlantı kurulana kadar ertelenmesi gerekir. Daha fazla bilgi için bkz. [ Blazor sunucu uygulamasının ne zaman prerendering olduğunu Algıla](#detect-when-a-blazor-server-app-is-prerendering) bölümü.
+Blazor ServerPrerendering etkin olan uygulamalar için, ilk prerendering sırasında JavaScript 'e çağrı yapılamaz. JavaScript birlikte çalışma çağrılarının, tarayıcıyla bağlantı kurulana kadar ertelenmesi gerekir. Daha fazla bilgi için bkz. [bir uygulamanın ne zaman Blazor Server prerendering](#detect-when-a-blazor-server-app-is-prerendering) bölümüne bakın.
 
 Aşağıdaki örnek [`TextDecoder`](https://developer.mozilla.org/docs/Web/API/TextDecoder) , JavaScript tabanlı bir kod çözücüsünü temel alır. Örnek, geliştirici koddan mevcut bir JavaScript API 'sine bir gereksinimi boşaltan bir C# yönteminden JavaScript işlevinin nasıl çağrılacağını gösterir. JavaScript işlevi bir C# yönteminden bir bayt dizisi kabul eder, dizinin kodunu çözer ve görüntülenecek metni bileşene döndürür.
 
-`<head>` `wwwroot/index.html` ( Blazor Webassembly) veya `Pages/_Host.cshtml` (sunucu) öğesi içinde Blazor , geçirilen bir dizinin kodunu çözmek için kullanılan bir JavaScript işlevi sağlayın `TextDecoder` ve kodu çözülen değeri döndürün:
+`<head>` `wwwroot/index.html` ( Blazor WebAssembly ) Veya () öğesinin içinde `Pages/_Host.cshtml` Blazor Server , geçirilen bir dizinin kodunu çözmek için kullanılan bir JavaScript işlevi sağlayın `TextDecoder` ve kodu çözülen değeri döndürün:
 
 [!code-html[](call-javascript-from-dotnet/samples_snapshot/index-script-convertarray.html)]
 
@@ -61,7 +63,7 @@ Aşağıdaki bileşen:
 
   [!code-razor[](call-javascript-from-dotnet/samples_snapshot/inject-abstraction.razor?highlight=1)]
 
-  `<head>` `wwwroot/index.html` ( Blazor Webassembly) veya `Pages/_Host.cshtml` (sunucu) öğesi içinde Blazor bir `handleTickerChanged` JavaScript işlevi sağlar. İşlevi ile çağrılır <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> ve bir değer döndürmez:
+  `<head>` `wwwroot/index.html` ( Blazor WebAssembly ) Veya () öğesinin içinde `Pages/_Host.cshtml` Blazor Server bir `handleTickerChanged` JavaScript işlevi sağlar. İşlevi ile çağrılır <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> ve bir değer döndürmez:
 
   [!code-html[](call-javascript-from-dotnet/samples_snapshot/index-script-handleTickerChanged1.html)]
 
@@ -69,7 +71,7 @@ Aşağıdaki bileşen:
 
   [!code-csharp[](call-javascript-from-dotnet/samples_snapshot/inject-abstraction-class.cs?highlight=5)]
 
-  `<head>` `wwwroot/index.html` ( Blazor Webassembly) veya `Pages/_Host.cshtml` (sunucu) öğesi içinde Blazor bir `handleTickerChanged` JavaScript işlevi sağlar. İşlevi ile çağrılır `JSRuntime.InvokeAsync` ve bir değer döndürür:
+  `<head>` `wwwroot/index.html` ( Blazor WebAssembly ) Veya () öğesinin içinde `Pages/_Host.cshtml` Blazor Server bir `handleTickerChanged` JavaScript işlevi sağlar. İşlevi ile çağrılır `JSRuntime.InvokeAsync` ve bir değer döndürür:
 
   [!code-html[](call-javascript-from-dotnet/samples_snapshot/index-script-handleTickerChanged2.html)]
 
@@ -89,13 +91,13 @@ Bu konuya eşlik eden istemci tarafı örnek uygulamada, Kullanıcı girişi alm
 
 [!code-javascript[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/exampleJsInterop.js?highlight=2-7)]
 
-`<script>`Dosyadaki JavaScript dosyasına ( `wwwroot/index.html` Blazor webassembly) veya `Pages/_Host.cshtml` dosyaya ( Blazor sunucu) başvuran etiketi yerleştirin.
+`<script>` `wwwroot/index.html` Dosyadaki ( Blazor WebAssembly ) veya `Pages/_Host.cshtml` dosyadaki () JavaScript dosyasına başvuran etiketi yerleştirin Blazor Server .
 
-`wwwroot/index.html`( Blazor Webassembly):
+`wwwroot/index.html` (Blazor WebAssembly):
 
 [!code-html[](./common/samples/3.x/BlazorWebAssemblySample/wwwroot/index.html?highlight=22)]
 
-`Pages/_Host.cshtml`( Blazor Sunucu):
+`Pages/_Host.cshtml` (Blazor Server):
 
 [!code-cshtml[](./common/samples/3.x/BlazorServerSample/Pages/_Host.cshtml?highlight=35)]
 
@@ -103,7 +105,7 @@ Bu konuya eşlik eden istemci tarafı örnek uygulamada, Kullanıcı girişi alm
 
 .NET yöntemleri, çağırarak dosyadaki JavaScript işlevleriyle birlikte çalışır `exampleJsInterop.js` <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> .
 
-<xref:Microsoft.JSInterop.IJSRuntime>Soyutlama, sunucu senaryolarına izin vermek için zaman uyumsuzdur Blazor . Uygulama bir Blazor webassembly uygulaması ise ve bir JavaScript işlevini eşzamanlı olarak çağırmak istiyorsanız bunun yerine alt türe çevirme yapın <xref:Microsoft.JSInterop.IJSInProcessRuntime> ve çağırın <xref:Microsoft.JSInterop.IJSInProcessRuntime.Invoke%2A> . Çoğu JS birlikte çalışma kitaplıklarının, kitaplıkların tüm senaryolarda kullanılabilir olmasını sağlamak için zaman uyumsuz API 'Leri kullanmasını öneririz.
+<xref:Microsoft.JSInterop.IJSRuntime>Soyutlama, senaryolara izin vermek için zaman uyumsuzdur Blazor Server . Uygulama bir Blazor WebAssembly uygulama ise ve bir JavaScript işlevini zaman uyumlu olarak çağırmak istiyorsanız, bunun yerine alt türe çevirme yapın <xref:Microsoft.JSInterop.IJSInProcessRuntime> ve çağırın <xref:Microsoft.JSInterop.IJSInProcessRuntime.Invoke%2A> . Çoğu JS birlikte çalışma kitaplıklarının, kitaplıkların tüm senaryolarda kullanılabilir olmasını sağlamak için zaman uyumsuz API 'Leri kullanmasını öneririz.
 
 Örnek uygulama, JS birlikte çalışabilirliği göstermek için bir bileşeni içerir. Bileşen:
 
@@ -150,7 +152,7 @@ Bu konuya eşlik eden istemci tarafı örnek uygulamada, Kullanıcı girişi alm
 
 [Void (0)/void 0](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void) veya [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined) döndüren JavaScript işlevleri ile çağırılır <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> .
 
-## <a name="detect-when-a-blazor-server-app-is-prerendering"></a>BlazorSunucu uygulamasının ne zaman prerendering olduğunu Algıla
+## <a name="detect-when-a-blazor-server-app-is-prerendering"></a>Bir uygulamanın ne zaman Blazor Server prerendering olduğunu Algıla
  
 [!INCLUDE[](~/includes/blazor-prerendering.md)]
 
@@ -248,7 +250,7 @@ Bir üst bileşen için bir öğe başvurusunu diğer bileşenlere kullanılabil
 * Alt bileşenlerin geri çağırmaları kaydetmesine izin ver.
 * Geçirilen öğe başvurusuyla olay sırasında kayıtlı geri çağırmaları çağırın <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> . Bu yaklaşım dolaylı olarak, alt bileşenlerin üst öğenin öğe başvurusuyla etkileşime geçmesini sağlar.
 
-Aşağıdaki Blazor webassembly örneğinde yaklaşım gösterilmektedir.
+Aşağıdaki Blazor WebAssembly örnekte yaklaşım gösterilmektedir.
 
 İçinde `<head>` `wwwroot/index.html` :
 
@@ -443,7 +445,7 @@ namespace BlazorSample.Shared
 
 ## <a name="harden-js-interop-calls"></a>Harden JS birlikte çalışma çağrıları
 
-JS birlikte çalışması, ağ hataları nedeniyle başarısız olabilir ve güvenilmez olarak değerlendirilmelidir. Varsayılan olarak, bir Blazor sunucu uygulaması, bir dakika sonra sunucu üzerinde bir kez js birlikte çalışabilirlik çağrısı çağırır. Bir uygulama daha agresif zaman aşımına uğrayedebiliyorsanız, aşağıdaki yaklaşımlardan birini kullanarak zaman aşımını ayarlayın:
+JS birlikte çalışması, ağ hataları nedeniyle başarısız olabilir ve güvenilmez olarak değerlendirilmelidir. Varsayılan olarak, bir Blazor Server uygulama bir dakika sonra sunucu üzerinde bir kez js birlikte çalışabilirlik çağrısı çağırır. Bir uygulama daha agresif zaman aşımına uğrayedebiliyorsanız, aşağıdaki yaklaşımlardan birini kullanarak zaman aşımını ayarlayın:
 
 * İçinde genel olarak `Startup.ConfigureServices` , zaman aşımını belirtin:
 
@@ -479,4 +481,4 @@ Daha fazla bilgi için aşağıdaki konulara bakın:
 
 * <xref:blazor/call-dotnet-from-javascript>
 * [InteropComponent. Razor örneği (DotNet/AspNetCore GitHub deposu, 3,1 yayın dalı)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
-* [Sunucu uygulamalarında büyük veri aktarımları gerçekleştirin Blazor](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)
+* [Uygulamalarda büyük veri aktarımları gerçekleştirme Blazor Server](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)

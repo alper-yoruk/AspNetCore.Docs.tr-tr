@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 03/07/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: spa/react
-ms.openlocfilehash: 1dd352f1a00d30df915fe1936d7dcb34af1b6634
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: d5185a80895423bdd60309509ab4d1dad4dad12f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773682"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401733"
 ---
 # <a name="use-the-react-project-template-with-aspnet-core"></a>ASP.NET Core ile tepki verme proje şablonunu kullanın
 
@@ -26,9 +28,9 @@ Güncelleştirilmiş tepki verme projesi şablonu, zengin, istemci tarafı Kulla
 
 Şablon, API arka ucu olarak davranacak bir ASP.NET Core projesi ve bir kullanıcı arabirimi olarak görev yapacak standart CRA tepki veren bir proje oluşturmaya eşdeğerdir, ancak her ikisini de tek bir birim olarak oluşturulup yayımlanabilen tek bir uygulama projesinde barındırmanın rahatlığını sağlar.
 
-Tepki verme projesi şablonu, sunucu tarafı işleme (SSR) için tasarlanmamıştır. Yanıt verme ve Node. js ile SSR için, [Next. js](https://github.com/zeit/next.js/) veya [rampale](https://github.com/jaredpalmer/razzle)'yı göz önünde bulundurun.
+Tepki verme projesi şablonu, sunucu tarafı işleme (SSR) için tasarlanmamıştır. Yanıt verme ve Node.js ile SSR için, [Next.js](https://github.com/zeit/next.js/) veya [kzzle](https://github.com/jaredpalmer/razzle)göz önünde bulundurun.
 
-## <a name="create-a-new-app"></a>Yeni bir uygulama oluşturma
+## <a name="create-a-new-app"></a>Yeni uygulama oluşturma
 
 ASP.NET Core 2,1 yüklüyse, tepki verme projesi şablonunu yüklemeniz gerekmez.
 
@@ -78,7 +80,7 @@ npm install --save <package_name>
 
 Geliştirme aşamasında uygulama, geliştirici kolaylığı için iyileştirilmiş bir modda çalışır. Örneğin, JavaScript demeti kaynak eşlemeleri içerir (hata ayıklarken, özgün kaynak kodunuzu görebilirsiniz). Uygulama JavaScript, HTML ve CSS dosya değişikliklerini diskte izler ve bu dosya değişikliğini gördüğünde otomatik olarak yeniden derlenir ve yeniden yükler.
 
-Üretimde, uygulamanızın performans için iyileştirilmiş bir sürümünü sunar. Bu otomatik olarak gerçekleşecek şekilde yapılandırılmıştır. Yayımladığınızda, derleme yapılandırması, istemci tarafı kodunuzun küçültülmüş, transpiled derlemesini yayar. Geliştirme derlemesinin aksine, üretim derlemesi için Node. js ' nin sunucuya yüklenmesi gerekmez.
+Üretimde, uygulamanızın performans için iyileştirilmiş bir sürümünü sunar. Bu otomatik olarak gerçekleşecek şekilde yapılandırılmıştır. Yayımladığınızda, derleme yapılandırması, istemci tarafı kodunuzun küçültülmüş, transpiled derlemesini yayar. Geliştirme derlemesinin aksine, üretim derlemesi sunucuya Node.js yüklenmesini gerektirmez.
 
 Standart [ASP.NET Core barındırma ve dağıtım yöntemleri](xref:host-and-deploy/index)kullanabilirsiniz.
 

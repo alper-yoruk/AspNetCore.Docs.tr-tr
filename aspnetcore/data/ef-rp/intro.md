@@ -7,17 +7,19 @@ ms.custom: mvc, seodec18
 ms.date: 09/26/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: a6915da23124b7ed4bfaa982692635f9fc75f96a
-ms.sourcegitcommit: 726b8c5cf92e6f6a4d0205787b19307e889d6240
+ms.openlocfilehash: 79cfe50f7e074954291c88689940c3263b68e151
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "82967525"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85401363"
 ---
 # <a name="razor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>RazorASP.NET Core Entity Framework Core olan sayfalar-öğretici 1/8
 
@@ -29,7 +31,7 @@ Bu, bir [ASP.NET Core Razor sayfaları](xref:razor-pages/index) UYGULAMASıNDA E
 
 [Tamamlanmış uygulamayı indirin veya görüntüleyin.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [Yönergeleri indirin](xref:index#how-to-download-a-sample).
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * Sayfalarla yeni başladıysanız Razor , bunu başlatmadan önce [ Razor sayfalarla çalışmaya başlama](xref:tutorials/razor-pages/razor-pages-start) öğreticisini izleyin.
 
@@ -466,7 +468,7 @@ Contoso Üniversitesi örnek Web uygulaması, Razor Entity Framework (EF) Core k
 
 [Tamamlanmış uygulamayı indirin veya görüntüleyin.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [Yönergeleri indirin](xref:index#how-to-download-a-sample).
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 

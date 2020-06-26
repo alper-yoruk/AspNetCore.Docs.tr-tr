@@ -8,25 +8,27 @@ ms.custom: mvc
 ms.date: 02/18/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/advanced-scenarios
-ms.openlocfilehash: d4ebab0d8fc2ee48fa4d9c8b1f1b8e5cbf43cab9
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: bdea9f2fe5c552b56414bb49588733c8dc2a34db
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242452"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400225"
 ---
 # <a name="aspnet-core-blazor-advanced-scenarios"></a>ASP.NET Core Blazor Gelişmiş senaryolar
 
 , [Luke Latham](https://github.com/guardrex) ve [Daniel Roth](https://github.com/danroth27) tarafından
 
-## <a name="blazor-server-circuit-handler"></a>BlazorSunucu devre işleyicisi
+## <a name="blazor-server-circuit-handler"></a>Blazor Serverdevre işleyici
 
-BlazorSunucu, kodun bir Kullanıcı devresi durumunda değişiklikler üzerinde kod çalıştırmaya izin veren bir *devhandler*tanımlamasına olanak tanır. Devre işleyici, `CircuitHandler` uygulamanın hizmet kapsayıcısındaki sınıfından türeterek ve kayıt işleminden uygulanır. Bir devre işleyicinin aşağıdaki örneği açık SignalR bağlantıları izler:
+Blazor Serverkodun bir Kullanıcı devresi durumunda değişiklikler üzerinde kod çalıştırmaya izin veren bir *devhandler*tanımlamasına olanak tanır. Devre işleyici, `CircuitHandler` uygulamanın hizmet kapsayıcısındaki sınıfından türeterek ve kayıt işleminden uygulanır. Bir devre işleyicinin aşağıdaki örneği açık SignalR bağlantıları izler:
 
 ```csharp
 using System.Collections.Generic;
@@ -68,7 +70,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Özel bir devre işleyicinin yöntemleri işlenmeyen bir özel durum oluşturuyorsam, özel durum sunucu devresi için önemli olur Blazor . Bir işleyicinin kodundaki veya yöntemleri çağrılan özel durumlara tolerans sağlamak için kodu bir veya daha fazla [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) deyimde hata işleme ve günlüğe kaydetme ile sarın.
+Özel bir devre işleyicisindeki Yöntemler işlenmeyen bir özel durum oluşturuyorsam, özel durum devre için önemli olur Blazor Server . Bir işleyicinin kodundaki veya yöntemleri çağrılan özel durumlara tolerans sağlamak için kodu bir veya daha fazla [`try-catch`](/dotnet/csharp/language-reference/keywords/try-catch) deyimde hata işleme ve günlüğe kaydetme ile sarın.
 
 Bir kullanıcının bağlantısı kesilmediği ve Framework devre durumunu temizlemede bir devre dışı bırakıldığında, çerçeve devre dışı bırakıldı. Kapsamı elden atılırken, uygulayan hiçbir devre kapsamlı dı hizmeti yok <xref:System.IDisposable?displayProperty=fullName> . Herhangi bir DI hizmeti, elden çıkarma sırasında işlenmeyen bir özel durum oluşturursa, çerçeve özel durumu günlüğe kaydeder.
 
@@ -161,14 +163,14 @@ builder.AddContent(1, "Second");
 
 Kod ilk kez çalıştırıldığında, `someFlag` `true` Oluşturucu şunları alır:
 
-| Sequence | Tür      | Veriler   |
+| Sequence | Tür      | Veri   |
 | :------: | --------- | :----: |
 | 0        | Metin düğümü | İlk  |
 | 1        | Metin düğümü | Saniye |
 
 Olduğunu düşünün `someFlag` `false` ve biçimlendirme yeniden işlenir. Bu kez, Oluşturucu şunları alır:
 
-| Sequence | Tür       | Veriler   |
+| Sequence | Tür       | Veri   |
 | :------: | ---------- | :----: |
 | 1        | Metin düğümü  | Saniye |
 
@@ -193,14 +195,14 @@ builder.AddContent(seq++, "Second");
 
 Şimdi ilk çıktı:
 
-| Sequence | Tür      | Veriler   |
+| Sequence | Tür      | Veri   |
 | :------: | --------- | :----: |
 | 0        | Metin düğümü | İlk  |
 | 1        | Metin düğümü | Saniye |
 
 Bu sonuç önceki bir durum ile aynıdır, bu nedenle olumsuz bir sorun yoktur. `someFlag``false`ikinci işleme ve çıktı:
 
-| Sequence | Tür      | Veriler   |
+| Sequence | Tür      | Veri   |
 | :------: | --------- | ------ |
 | 0        | Metin düğümü | Saniye |
 
@@ -221,14 +223,14 @@ Bu, önemsiz bir örnektir. Karmaşık ve derin iç içe yapıları ve özellikl
 * Dizi numaraları sabit kodluysa, fark algoritması yalnızca değer değerinde sıra numaralarının artırılmasını gerektirir. İlk değer ve boşluklar ilgisiz. Tek bir seçenek, kod satırı numarasını sıra numarası olarak kullanmak veya sıfırdan başlayıp bir ya da yüzlerce (ya da tercih edilen aralığa) artırmak için kullanılır. 
 * Blazorsıra numaralarını kullanır, diğer ağaç dağıtma Kullanıcı arabirimi çerçeveleri bunları kullanmaz. Dizi numaraları kullanıldığında, yayılma işlemi daha hızlı bir şekilde yapılır ve Blazor geliştiricilerin yazma dosyaları için otomatik olarak sıra numaralarıyla ilgilenen bir derleme adımının avantajına sahiptir `.razor` .
 
-## <a name="perform-large-data-transfers-in-blazor-server-apps"></a>Sunucu uygulamalarında büyük veri aktarımları gerçekleştirin Blazor
+## <a name="perform-large-data-transfers-in-blazor-server-apps"></a>Uygulamalarda büyük veri aktarımları gerçekleştirme Blazor Server
 
 Bazı senaryolarda, JavaScript ve arasında büyük miktarlarda veri aktarılmalıdır Blazor . Genellikle, büyük veri aktarımları şu durumlarda oluşur:
 
 * Tarayıcı dosya sistemi API 'Leri bir dosyayı karşıya yüklemek veya indirmek için kullanılır.
 * Üçüncü taraf kitaplığı ile birlikte çalışma gerekir.
 
-BlazorSunucuda, performans sorunlarına neden olabilecek tek büyük mesajların geçirilmesini engellemek için bir sınırlama vardır.
+' De Blazor Server , performans sorunlarına neden olabilecek tek büyük mesajların geçirilmesini engellemek için bir sınırlama vardır.
 
 JavaScript arasında veri aktaran kodu geliştirirken aşağıdaki kılavuzu göz önünde bulundurun Blazor :
 

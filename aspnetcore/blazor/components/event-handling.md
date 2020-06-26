@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 06/04/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/components/event-handling
-ms.openlocfilehash: 4ac7b82d734f078cf50901d02e7d0c4eb8bb45bb
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: 2fce394202be5df9af67e8afca27a0914f410402
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242426"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85399042"
 ---
 # <a name="aspnet-core-blazor-event-handling"></a>ASP.NET Core Blazor olay işleme
 
@@ -139,7 +141,7 @@ Genellikle, bir dizi öğe üzerinde yineleme yaparken olduğu gibi ek değerler
 ```
 
 > [!NOTE]
-> Döngü **not** değişkenini, `i` önceki `for` döngü örneğinde veya bir döngüde başvuru değişkeni gibi bir lambda ifadesinde doğrudan kullanmayın `foreach` . Aksi halde, aynı değişken tüm lambda ifadeleri tarafından kullanılır ve tüm Lambdalar için aynı değerin kullanılmasına neden olur. Değişkenin değerini her zaman yerel bir değişkende yakala ve sonra kullanın. Önceki örnekte, Loop değişkeni `i` öğesine atanır `buttonNumber` .
+> Bir **not** Loop değişkenini, `i` Yukarıdaki döngü örneğinde olduğu gibi doğrudan bir lambda ifadesinde kullanmayın `for` . Aksi halde, aynı değişken tüm lambda ifadeleri tarafından kullanılır ve tüm Lambdalar için aynı değerin kullanılmasına neden olur. Değişkenin değerini her zaman yerel bir değişkende yakala ve sonra kullanın. Önceki örnekte, Loop değişkeni `i` öğesine atanır `buttonNumber` .
 
 ## <a name="eventcallback"></a>EventCallback
 

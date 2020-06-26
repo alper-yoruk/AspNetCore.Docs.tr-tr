@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 06/01/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: 61c1dc383728f42c5dac6742fd19d1d22c988913
-ms.sourcegitcommit: 066d66ea150f8aab63f9e0e0668b06c9426296fd
+ms.openlocfilehash: 312a265dd251eadf876b4252e3d9f9858adcde1b
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/23/2020
-ms.locfileid: "85242699"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85400992"
 ---
 # <a name="aspnet-core-blazor-lifecycle"></a>ASP.NET Core Blazor yaşam döngüsü
 
@@ -73,14 +75,14 @@ protected override async Task OnInitializedAsync()
 }
 ```
 
-Blazor[İçerik](xref:blazor/fundamentals/additional-scenarios#render-mode) araması yapan sunucu uygulamaları <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> **_iki kez_**.
+Blazor Server[içerik](xref:blazor/fundamentals/additional-scenarios#render-mode) araması yapan uygulamalar <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> **_iki kez_** yapılır:
 
 * Bir kez, bileşen sayfanın bir parçası olarak başlangıçta statik olarak işlendiğinde.
 * Tarayıcı sunucuya geri bir bağlantı kurduğunda ikinci bir zaman.
 
 İçindeki geliştirici kodunun <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> iki kez çalıştırılmasını engellemek için [prerendering sonrasında durum bilgisi olan yeniden bağlanma](#stateful-reconnection-after-prerendering) bölümüne bakın.
 
-BlazorSunucu uygulaması prerendering olsa da, tarayıcıyla bir bağlantı kurulmadığından, JavaScript 'e çağırma gibi bazı eylemler mümkün değildir. Bileşenler, ön işlenmiş olduğunda farklı şekilde işlenmesi gerekebilir. Daha fazla bilgi için bkz. [uygulamanın ne zaman prerendering](#detect-when-the-app-is-prerendering) bölümüne bakın.
+Bir uygulama prerendering olsa da, Blazor Server tarayıcıyla bir bağlantı kurulmadığı Için JavaScript 'e çağırma gibi bazı eylemler mümkün değildir. Bileşenler, ön işlenmiş olduğunda farklı şekilde işlenmesi gerekebilir. Daha fazla bilgi için bkz. [uygulamanın ne zaman prerendering](#detect-when-the-app-is-prerendering) bölümüne bakın.
 
 Herhangi bir olay işleyicisi ayarlandıysa, bunların aktiften çıkarılmasını geri alır. Daha fazla bilgi için bkz. [bileşen aktiften çıkarma `IDisposable` ](#component-disposal-with-idisposable) bölümü.
 
@@ -179,7 +181,7 @@ Yaşam döngüsü olaylarında gerçekleştirilen zaman uyumsuz eylemler, bileş
 
 `FetchData` Blazor Şablonların bileşeninde, <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> Asychronously () tahmin verileri almak için geçersiz kılınır `forecasts` . Ne zaman olduğunda `forecasts` `null` , kullanıcıya bir yükleme iletisi görüntülenir. `Task` <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> İşlem tamamlandıktan sonra, bileşen güncelleştirilmiş duruma geri döner.
 
-`Pages/FetchData.razor`Blazorsunucu şablonunda:
+`Pages/FetchData.razor`Blazor Serverşablonda:
 
 [!code-razor[](lifecycle/samples_snapshot/3.x/FetchData.razor?highlight=9,21,25)]
 
@@ -220,20 +222,20 @@ Yaşam döngüsü yöntemi yürütme sırasında hataları işleme hakkında bil
 
 ## <a name="stateful-reconnection-after-prerendering"></a>Prerendering sonrasında durum bilgisi olan yeniden bağlanma
 
-Bir sunucu uygulamasında,, Blazor <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> bileşen başlangıçta sayfanın bir parçası olarak statik olarak işlenir. Tarayıcı sunucuya geri bir bağlantı kurduğunda, bileşen *yeniden*işlenir ve bileşen artık etkileşimli olur. [`OnInitialized{Async}`](#component-initialization-methods)Bileşeni başlatmak için yaşam döngüsü yöntemi mevcutsa, yöntemi *iki kez*yürütülür:
+Bir Blazor Server uygulamada <xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> , bileşen başlangıçta sayfanın bir parçası olarak statik olarak işlenir. Tarayıcı sunucuya geri bir bağlantı kurduğunda, bileşen *yeniden*işlenir ve bileşen artık etkileşimli olur. [`OnInitialized{Async}`](#component-initialization-methods)Bileşeni başlatmak için yaşam döngüsü yöntemi mevcutsa, yöntemi *iki kez*yürütülür:
 
 * Bileşen statik olarak önceden kullanılırken.
 * Sunucu bağlantısı kurulduktan sonra.
 
 Bu, bileşen son işlendiğinde Kullanıcı arabiriminde görünen verilerde fark edilebilir bir değişikliğe neden olabilir.
 
-Bir sunucu uygulamasında çift işleme senaryosunu önlemek için Blazor :
+Bir uygulamadaki çift işleme senaryosunu önlemek için Blazor Server :
 
 * Prerendering sırasında durumu önbelleğe almak için kullanılabilecek bir tanımlayıcı geçirin ve uygulamayı yeniden başlattıktan sonra durumu alma.
 * Bileşen durumunu kaydetmek için prerendering sırasında tanımlayıcıyı kullanın.
 * Önbelleğe alınan durumu almak için prerendering öğesinden sonra tanımlayıcıyı kullanın.
 
-Aşağıdaki kod, bir `WeatherForecastService` şablon tabanlı Blazor sunucu uygulamasında, Çift işlemeyi engelleyen güncelleştirilmiş bir güncelleme göstermektedir:
+Aşağıdaki kod, bir `WeatherForecastService` şablon tabanlı Blazor Server uygulamada, Çift işlemeyi engelleyen güncelleştirilmiş bir güncelleme göstermektedir:
 
 ```csharp
 public class WeatherForecastService
