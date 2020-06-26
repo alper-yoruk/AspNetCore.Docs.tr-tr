@@ -7,17 +7,19 @@ ms.author: jamesnk
 ms.date: 05/26/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: grpc/browser
-ms.openlocfilehash: 6f66a94b41e6e13550396e2e19fdf48f9dc63d46
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 37932e755a0ef2149fb2336d2dcef87d3347d1a4
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106604"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404762"
 ---
 # <a name="use-grpc-in-browser-apps"></a>Tarayıcı uygulamalarında gRPC kullanma
 
@@ -55,9 +57,9 @@ Alternatif olarak, gRPC-Web ara yazılımı, tüm hizmetlerin varsayılan olarak
 [!code-csharp[](~/grpc/browser/sample/AllServicesSupportExample_Startup.cs?name=snippet_1&highlight=12)]
 
 > [!NOTE]
-> .NET Core 3. x içinde [http. sys tarafından barındırılırken](xref:fundamentals/servers/httpsys) GRPC-Web ' i, başarısız olmasına neden olan bilinen bir sorun vardır.
+> .NET Core 3. x içinde [Http.systarafından barındırılırken](xref:fundamentals/servers/httpsys) GRPC-Web ' i, başarısız olmasına neden olan bilinen bir sorun vardır.
 >
-> GRPC 'yi almaya yönelik bir geçici çözüm olan http. sys üzerinde Web 'de çalışmaya [buradan](https://github.com/grpc/grpc-dotnet/issues/853#issuecomment-610078202)ulaşabilirsiniz.
+> GRPC 'yi (Http.sys Web üzerinde çalışmaya yönelik bir geçici çözüm) [buradan](https://github.com/grpc/grpc-dotnet/issues/853#issuecomment-610078202)edinebilirsiniz.
 
 ### <a name="grpc-web-and-cors"></a>gRPC-Web ve CORS
 
@@ -87,7 +89,7 @@ Bir JavaScript gRPC-Web istemcisi vardır. JavaScript 'ten gRPC-Web kullanma hak
 
 ### <a name="configure-grpc-web-with-the-net-grpc-client"></a>.NET gRPC istemcisiyle gRPC-Web yapılandırma
 
-.NET gRPC istemcisi, gRPC-Web çağrıları yapmak için yapılandırılabilir. Bu, tarayıcıda barındırılan ve JavaScript koduyla aynı HTTP kısıtlamalarına sahip olan [ Blazor webassembly](xref:blazor/index#blazor-webassembly) uygulamaları için kullanışlıdır. Bir .NET istemcisiyle gRPC-Web ' i çağırmak [http/2 gRPC ile aynıdır](xref:grpc/client). Tek değişiklik, kanalın oluşturulma şekli olur.
+.NET gRPC istemcisi, gRPC-Web çağrıları yapmak için yapılandırılabilir. Bu, [Blazor WebAssembly](xref:blazor/index#blazor-webassembly) tarayıcıda barındırılan ve JavaScript koduyla aynı http kısıtlamalarına sahip olan uygulamalar için yararlıdır. Bir .NET istemcisiyle gRPC-Web ' i çağırmak [http/2 gRPC ile aynıdır](xref:grpc/client). Tek değişiklik, kanalın oluşturulma şekli olur.
 
 GRPC-Web kullanmak için:
 
@@ -111,7 +113,7 @@ Yukarıdaki kod:
 * **HttpVersion**: `Version` TEMELDEKI GRPC http isteğindeki [HttpRequestMessage. Version](xref:System.Net.Http.HttpRequestMessage.Version) öğesini ayarlamak için kullanılan http protokolü. gRPC-Web belirli bir sürüm gerektirmez ve belirtilmediği takdirde varsayılanı geçersiz kılmaz.
 
 > [!IMPORTANT]
-> Oluşturulan gRPC istemcilerinin birli yöntemleri çağırmak için eşitleme ve zaman uyumsuz yöntemleri vardır. Örneğin, `SayHello` eşitlenir ve `SayHelloAsync` zaman uyumsuz olur. Bir webassembly uygulamasında bir Sync yönteminin çağrılması Blazor uygulamanın yanıt vermemeye başlamasına neden olur. Zaman uyumsuz yöntemlerin her zaman Blazor webassembly içinde kullanılması gerekir.
+> Oluşturulan gRPC istemcilerinin birli yöntemleri çağırmak için eşitleme ve zaman uyumsuz yöntemleri vardır. Örneğin, `SayHello` eşitlenir ve `SayHelloAsync` zaman uyumsuz olur. Bir uygulamada eşitleme yönteminin çağrılması Blazor WebAssembly uygulamanın yanıt vermemeye başlamasına neden olur. Zaman uyumsuz yöntemlerin içinde her zaman kullanılması gerekir Blazor WebAssembly .
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

@@ -1,13 +1,26 @@
 ---
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
+title: ASP.NET Core Web API 'sinde JsonPatch
+author: rick-anderson
+description: ASP.NET Core Web API 'sindeki JSON Patch isteklerini nasıl işleyeceğinizi öğrenin.
+ms.author: riande
+ms.custom: mvc
+ms.date: 04/02/2020
+no-loc:
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
+uid: web-api/jsonpatch
+ms.openlocfilehash: 08ae366859c4466e6957592f78dda813d6670bb4
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.translationtype: MT
+ms.contentlocale: tr-TR
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405035"
 ---
-
 # <a name="jsonpatch-in-aspnet-core-web-api"></a>ASP.NET Core Web API 'sinde JsonPatch
 
 , [Tom Dykstra](https://github.com/tdykstra) ve [Kirk larkabağı](https://github.com/serpent5) tarafından
@@ -21,7 +34,7 @@ Bu makalede, ASP.NET Core Web API 'sinde JSON Patch isteklerinin nasıl işlenec
 Uygulamanızda JSON yama desteğini etkinleştirmek için aşağıdaki adımları izleyin:
 
 1. [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/)NuGet paketini yükler.
-1. `Startup.ConfigureServices`Çağırmak için projenin metodunu güncelleştirin <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> . Örnek:
+1. `Startup.ConfigureServices`Çağırmak için projenin metodunu güncelleştirin <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> . Örneğin:
 
     ```csharp
     services
@@ -35,7 +48,7 @@ Uygulamanızda JSON yama desteğini etkinleştirmek için aşağıdaki adımlar�
 * <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddControllersWithViews*>
 * <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddControllers*>
 
-## <a name="json-patch-addnewtonsoftjson-and-systemtextjson"></a>JSON Patch, AddNewtonsoftJson ve System. Text. JSON
+## <a name="json-patch-addnewtonsoftjson-and-systemtextjson"></a>JSON Patch, AddNewtonsoftJson ve System.Text.Js
 
 `AddNewtonsoftJson``System.Text.Json` **Tüm** JSON içeriğini biçimlendirmek için kullanılan tabanlı giriş ve çıkış biçimlerini değiştirir. Kullanarak JSON Patch desteği eklemek için `Newtonsoft.Json` , diğer biçimleri değişmeden bırakarak, projenin `Startup.ConfigureServices` yöntemini aşağıdaki gibi güncelleştirin:
 
@@ -101,152 +114,22 @@ Bir işlem nesnesinin [Path](https://tools.ietf.org/html/rfc6901) özelliği dü
 
 Sıfır tabanlı dizinler, dizi öğelerini belirtmek için kullanılır. Dizinin ilk öğesi `addresses` `/addresses/0` . `add`Bir dizinin sonuna kadar, `-` Dizin numarası yerine bir tire () kullanın: `/addresses/-` .
 
-### <a name="operations"></a>İşlemler
+### <a name="operations"></a>Operations
 
 Aşağıdaki tabloda, [JSON Patch belirtiminde](https://tools.ietf.org/html/rfc6902)tanımlanan desteklenen işlemler gösterilmektedir:
 
-|İşlem  | Notlar |
-|---
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
-------|---
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
-----------------| | `add`     | Bir özellik veya dizi öğesi ekleyin. Mevcut özellik için: Set Value. | | `remove`  | Bir özellik veya dizi öğesi kaldırın. | | `replace` | Aynı `remove` konumdaki ve sonrasında aynı `add` . | | `move`    | Kaynaktaki `remove` `add` değeri kullanarak kaynağından sonra hedefle aynı. | | `copy`    | `add`Kaynaktaki değeri kullanarak hedefle aynı olacak şekilde aynı. | | `test`    | Değer = sağlanmışsa, başarı durum kodu döndürür `path` `value` . |
+|Çalışma  | Notlar |
+|-----------|--------------------------------|
+| `add`     | Bir özellik veya dizi öğesi ekleyin. Var olan özellik için: set değeri.|
+| `remove`  | Bir özellik veya dizi öğesi kaldırın. |
+| `replace` | Aynı `remove` konumdaki ve sonrasında aynı `add` . |
+| `move`    | Kaynaktaki `remove` `add` değeri kullanarak kaynağından sonra hedefle aynı. |
+| `copy`    | `add`Kaynaktaki değeri kullanarak hedefle aynı olacak şekilde aynı. |
+| `test`    | Değer: belirtilmişse başarı durum kodu döndürür `path` `value` .|
 
 ## <a name="json-patch-in-aspnet-core"></a>ASP.NET Core JSON yaması
 
-JSON düzeltme ekinin ASP.NET Core uygulanması, [Microsoft. AspNetCore. JsonPatch](https://www.nuget.org/packages/microsoft.aspnetcore.jsonpatch/) NuGet paketinde sunulmaktadır.
+JSON düzeltme ekinin ASP.NET Core uygulanması [Microsoft.AspNetCore.JsonPatch](https://www.nuget.org/packages/microsoft.aspnetcore.jsonpatch/) NuGet paketinde sunulmaktadır.
 
 ## <a name="action-method-code"></a>Eylem yöntemi kodu
 
@@ -443,152 +326,22 @@ Bir işlem nesnesinin [Path](https://tools.ietf.org/html/rfc6901) özelliği dü
 
 Sıfır tabanlı dizinler, dizi öğelerini belirtmek için kullanılır. Dizinin ilk öğesi `addresses` `/addresses/0` . `add`Bir dizinin sonuna kadar, dizin numarası yerine bir tire (-) kullanın: `/addresses/-` .
 
-### <a name="operations"></a>İşlemler
+### <a name="operations"></a>Operations
 
 Aşağıdaki tabloda, [JSON Patch belirtiminde](https://tools.ietf.org/html/rfc6902)tanımlanan desteklenen işlemler gösterilmektedir:
 
-|İşlem  | Notlar |
-|---
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
-------|---
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
--
-Başlık: Yazar: Açıklama: MS. Author: MS. Custom: MS. Date: No-loc:
-- 'Blazor'
-- 'Identity'
-- 'Let's Encrypt'
-- 'Razor'
-- ' SignalR ' uid: 
-
-----------------| | `add`     | Bir özellik veya dizi öğesi ekleyin. Mevcut özellik için: Set Value. | | `remove`  | Bir özellik veya dizi öğesi kaldırın. | | `replace` | Aynı `remove` konumdaki ve sonrasında aynı `add` . | | `move`    | Kaynaktaki `remove` `add` değeri kullanarak kaynağından sonra hedefle aynı. | | `copy`    | `add`Kaynaktaki değeri kullanarak hedefle aynı olacak şekilde aynı. | | `test`    | Değer = sağlanmışsa, başarı durum kodu döndürür `path` `value` . |
+|Çalışma  | Notlar |
+|-----------|--------------------------------|
+| `add`     | Bir özellik veya dizi öğesi ekleyin. Var olan özellik için: set değeri.|
+| `remove`  | Bir özellik veya dizi öğesi kaldırın. |
+| `replace` | Aynı `remove` konumdaki ve sonrasında aynı `add` . |
+| `move`    | Kaynaktaki `remove` `add` değeri kullanarak kaynağından sonra hedefle aynı. |
+| `copy`    | `add`Kaynaktaki değeri kullanarak hedefle aynı olacak şekilde aynı. |
+| `test`    | Değer: belirtilmişse başarı durum kodu döndürür `path` `value` .|
 
 ## <a name="jsonpatch-in-aspnet-core"></a>ASP.NET Core 'de JsonPatch
 
-JSON düzeltme ekinin ASP.NET Core uygulanması, [Microsoft. AspNetCore. JsonPatch](https://www.nuget.org/packages/microsoft.aspnetcore.jsonpatch/) NuGet paketinde sunulmaktadır. Paket, [Microsoft. AspnetCore. app](xref:fundamentals/metapackage-app) metapackage 'e dahildir.
+JSON düzeltme ekinin ASP.NET Core uygulanması [Microsoft.AspNetCore.JsonPatch](https://www.nuget.org/packages/microsoft.aspnetcore.jsonpatch/) NuGet paketinde sunulmaktadır. Paket, [Microsoft. AspnetCore. app](xref:fundamentals/metapackage-app) metapackage 'e dahildir.
 
 ## <a name="action-method-code"></a>Eylem yöntemi kodu
 

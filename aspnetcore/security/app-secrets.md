@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 4/20/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/app-secrets
-ms.openlocfilehash: 7508aebcda4e14812140f13ece635428908a4abb
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: a12262d182ce84a326086935627b55d2edc4885e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776688"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407011"
 ---
 # <a name="safe-storage-of-app-secrets-in-development-in-aspnet-core"></a>ASP.NET Core sürümünde geliştirme sırasında uygulama gizli dizileri güvenli depolama
 
@@ -33,7 +35,7 @@ Bu belgede, bir geliştirme makinesinde ASP.NET Core uygulamasının geliştiril
 
 Ortam değişkenleri, kodda veya yerel yapılandırma dosyalarında uygulama gizli dizileri depolanmasını önlemek için kullanılır. Ortam değişkenleri, daha önce belirtilen tüm yapılandırma kaynakları için yapılandırma değerlerini geçersiz kılar.
 
-**Bireysel kullanıcı hesapları** güvenliğinin etkinleştirildiği bir ASP.NET Core Web uygulaması düşünün. Varsayılan bir veritabanı bağlantı dizesi, anahtarına `DefaultConnection`sahip projenin *appSettings. JSON* dosyasına dahildir. Varsayılan bağlantı dizesi, kullanıcı modunda çalışan ve parola gerektirmeyen LocalDB içindir. Uygulama dağıtımı sırasında, `DefaultConnection` anahtar değeri bir ortam değişkeninin değeri ile geçersiz kılınabilir. Ortam değişkeni, tüm bağlantı dizesini hassas kimlik bilgileriyle saklayabilir.
+**Bireysel kullanıcı hesapları** güvenliğinin etkinleştirildiği bir ASP.NET Core Web uygulaması düşünün. Varsayılan bir veritabanı bağlantı dizesi, anahtar ile projenin *appsettings.js* dosyasına dahildir `DefaultConnection` . Varsayılan bağlantı dizesi, kullanıcı modunda çalışan ve parola gerektirmeyen LocalDB içindir. Uygulama dağıtımı sırasında, `DefaultConnection` anahtar değeri bir ortam değişkeninin değeri ile geçersiz kılınabilir. Ortam değişkeni, tüm bağlantı dizesini hassas kimlik bilgileriyle saklayabilir.
 
 > [!WARNING]
 > Ortam değişkenleri genellikle düz, şifresiz metin olarak depolanır. Makinenin veya işlemin güvenliği tehlikeye atılırsa, ortam değişkenlerine güvenilmeyen taraflar tarafından erişilebilir. Kullanıcı gizliliklerinin açıklanmasını önlemeye yönelik ek ölçüler gerekebilir.
@@ -65,7 +67,7 @@ Dosya sistemi yolu:
 
 ---
 
-Yukarıdaki dosya yollarında, *. csproj* dosyasında `<user_secrets_id>` belirtilen `UserSecretsId` değerle değiştirin.
+Yukarıdaki dosya yollarında, `<user_secrets_id>` `UserSecretsId` *. csproj* dosyasında belirtilen değerle değiştirin.
 
 Gizli dizi yöneticisi aracıyla kaydedilen verilerin konumuna veya biçimine bağlı olarak kod yazma. Bu uygulama ayrıntıları değişebilir. Örneğin, gizli değerler şifrelenmez, ancak gelecekte olabilir.
 
@@ -73,27 +75,27 @@ Gizli dizi yöneticisi aracıyla kaydedilen verilerin konumuna veya biçimine ba
 
 Gizli dizi Yöneticisi Aracı, Kullanıcı profilinizde depolanan projeye özgü yapılandırma ayarları üzerinde çalışır.
 
-Gizli dizi Yöneticisi Aracı, .NET Core SDK `init` 3.0.100 veya sonraki sürümlerde bir komut içerir. Kullanıcı gizli dizilerini kullanmak için, proje dizininde aşağıdaki komutu çalıştırın:
+Gizli dizi Yöneticisi Aracı, `init` .NET Core SDK 3.0.100 veya sonraki sürümlerde bir komut içerir. Kullanıcı gizli dizilerini kullanmak için, proje dizininde aşağıdaki komutu çalıştırın:
 
 ```dotnetcli
 dotnet user-secrets init
 ```
 
-Önceki komut, `UserSecretsId` *. csproj* dosyasının içindeki bir `PropertyGroup` öğesi ekler. Varsayılan olarak, iç metni bir GUID `UserSecretsId` 'dir. İç metin rastgele, ancak proje için benzersizdir.
+Önceki komut, `UserSecretsId` `PropertyGroup` *. csproj* dosyasının içindeki bir öğesi ekler. Varsayılan olarak, iç metni `UserSecretsId` BIR GUID 'dir. İç metin rastgele, ancak proje için benzersizdir.
 
 [!code-xml[](app-secrets/samples/3.x/UserSecrets/UserSecrets.csproj?name=snippet_PropertyGroup&highlight=3)]
 
-Visual Studio 'da Çözüm Gezgini projeye sağ tıklayın ve bağlam menüsünden **Kullanıcı gizli dizilerini Yönet** ' i seçin. Bu hareket, `UserSecretsId` *. csproj* dosyasına bir GUID ile doldurulmuş bir öğe ekler.
+Visual Studio 'da Çözüm Gezgini projeye sağ tıklayın ve bağlam menüsünden **Kullanıcı gizli dizilerini Yönet** ' i seçin. Bu hareket `UserSecretsId` , *. csproj* dosyasına bir GUID ile doldurulmuş bir öğe ekler.
 
 ## <a name="set-a-secret"></a>Gizli dizi ayarla
 
-Anahtar ve değerini içeren bir uygulama gizli anahtarı tanımlayın. Gizli dizi, projenin `UserSecretsId` değeri ile ilişkilendirilir. Örneğin, *. csproj* dosyasının bulunduğu dizinden aşağıdaki komutu çalıştırın:
+Anahtar ve değerini içeren bir uygulama gizli anahtarı tanımlayın. Gizli dizi, projenin değeri ile ilişkilendirilir `UserSecretsId` . Örneğin, *. csproj* dosyasının bulunduğu dizinden aşağıdaki komutu çalıştırın:
 
 ```dotnetcli
 dotnet user-secrets set "Movies:ServiceApiKey" "12345"
 ```
 
-Yukarıdaki örnekte, iki nokta üst üste bir `Movies` `ServiceApiKey` özelliği olan bir nesne sabit değeri olduğunu gösterir.
+Yukarıdaki örnekte, iki nokta üst üste `Movies` bir özelliği olan bir nesne sabit değeri olduğunu gösterir `ServiceApiKey` .
 
 Gizli dizi Yöneticisi Aracı diğer dizinlerden de kullanılabilir. `--project` *. Csproj* dosyasının bulunduğu dosya sistemi yolunu sağlamak için seçeneğini kullanın. Örneğin:
 
@@ -103,7 +105,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 
 ### <a name="json-structure-flattening-in-visual-studio"></a>Visual Studio 'da JSON yapısı düzleştirme
 
-Visual Studio 'nun **Kullanıcı gizli dizilerini Yönet** hareketi metin düzenleyicisinde bir *gizli dizi. JSON* dosyası açar. *Gizlilikler. JSON* içeriğini depolanacak anahtar-değer çiftleriyle değiştirin. Örneğin:
+Visual Studio 'nun **Kullanıcı gizli dizilerini Yönet** hareketi metin düzenleyicisinde bir *secrets.js* dosya açar. *Üzerindesecrets.js* içeriğini, saklanacak anahtar-değer çiftleriyle değiştirin. Örneğin:
 
 ```json
 {
@@ -114,7 +116,7 @@ Visual Studio 'nun **Kullanıcı gizli dizilerini Yönet** hareketi metin düzen
 }
 ```
 
-JSON yapısı, veya `dotnet user-secrets remove` `dotnet user-secrets set`ile yapılan değişikliklerden sonra düzleştirilir. Örneğin, çalışıyor `dotnet user-secrets remove "Movies:ConnectionString"` `Movies` nesne değişmez değerini daraltır. Değiştirilen dosya şuna benzer:
+JSON yapısı, veya ile yapılan değişikliklerden sonra düzleştirilir `dotnet user-secrets remove` `dotnet user-secrets set` . Örneğin, çalışıyor `dotnet user-secrets remove "Movies:ConnectionString"` `Movies` nesne değişmez değerini daraltır. Değiştirilen dosya şuna benzer:
 
 ```json
 {
@@ -124,7 +126,7 @@ JSON yapısı, veya `dotnet user-secrets remove` `dotnet user-secrets set`ile ya
 
 ## <a name="set-multiple-secrets"></a>Birden çok gizli dizi ayarla
 
-Bir dizi gizli dizi, `set` JSON ile komutuna ayırarak ayarlanabilir. Aşağıdaki örnekte, *input. JSON* dosyasının içeriği `set` komutuna yöneldir.
+Bir dizi gizli dizi, JSON ile komutuna ayırarak ayarlanabilir `set` . Aşağıdaki örnekte, dosyanın içeriğindeki *input.js* `set` komutuna verilmez.
 
 # <a name="windows"></a>[Windows](#tab/windows)
 
@@ -148,15 +150,15 @@ Bir komut kabuğu açın ve şu komutu yürütün:
 
 [ASP.NET Core Configuration API 'si](xref:fundamentals/configuration/index) , gizli yönetici sırları için erişim sağlar.
 
-Kullanıcı gizli dizileri yapılandırma kaynağı, proje, önceden yapılandırılmış varsayılanlar ile konağın yeni bir <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder%2A> örneğini başlatmak için çağırdığında geliştirme moduna otomatik olarak eklenir. `CreateDefaultBuilder`<xref:Microsoft.Extensions.Hosting.IHostEnvironment.EnvironmentName> şu <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> <xref:Microsoft.Extensions.Hosting.EnvironmentName.Development>olduğunda çağırır:
+Kullanıcı gizli dizileri yapılandırma kaynağı, proje, <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder%2A> önceden yapılandırılmış varsayılanlar ile konağın yeni bir örneğini başlatmak için çağırdığında geliştirme moduna otomatik olarak eklenir. `CreateDefaultBuilder`<xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A>Şu olduğunda çağırır <xref:Microsoft.Extensions.Hosting.IHostEnvironment.EnvironmentName> <xref:Microsoft.Extensions.Hosting.EnvironmentName.Development> :
 
 [!code-csharp[](app-secrets/samples/3.x/UserSecrets/Program.cs?name=snippet_CreateHostBuilder&highlight=2)]
 
-`CreateDefaultBuilder` Çağrılmıyorsa, çağırarak <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A>Kullanıcı gizli dizi yapılandırma kaynağını açıkça ekleyin. Aşağıdaki `AddUserSecrets` örnekte gösterildiği gibi, yalnızca uygulama geliştirme ortamında çalıştırıldığında çağırın:
+`CreateDefaultBuilder`Çağrılmıyorsa, çağırarak Kullanıcı gizli dizi yapılandırma kaynağını açıkça ekleyin <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> . `AddUserSecrets`Aşağıdaki örnekte gösterildiği gibi, yalnızca uygulama geliştirme ortamında çalıştırıldığında çağırın:
 
 [!code-csharp[](app-secrets/samples/3.x/UserSecrets/Program2.cs?name=snippet_Host&highlight=6-9)]
 
-Kullanıcı gizli dizileri `Configuration` API aracılığıyla alınabilir:
+Kullanıcı gizli dizileri API aracılığıyla alınabilir `Configuration` :
 
 [!code-csharp[](app-secrets/samples/3.x/UserSecrets/Startup.cs?name=snippet_StartupClass&highlight=14)]
 
@@ -166,17 +168,17 @@ Bir nesne sabit değerinin tamamını bir POCO 'ya eşleme (özelliklerle basit 
 
 [!INCLUDE[secrets.json file](~/includes/app-secrets/secrets-json-file-and-text.md)]
 
-Önceki gizli dizileri bir POCO 'ya eşlemek için, `Configuration` API 'nin [nesne grafiği bağlama](xref:fundamentals/configuration/index#bind-to-an-object-graph) özelliğini kullanın. Aşağıdaki kod, özel `MovieSettings` bir poco 'a bağlanır ve `ServiceApiKey` özellik değerine erişir:
+Önceki gizli dizileri bir POCO 'ya eşlemek için, `Configuration` API 'nin [nesne grafiği bağlama](xref:fundamentals/configuration/index#bind-to-an-object-graph) özelliğini kullanın. Aşağıdaki kod, özel bir `MovieSettings` poco 'a bağlanır ve `ServiceApiKey` özellik değerine erişir:
 
 [!code-csharp[](app-secrets/samples/3.x/UserSecrets/Startup3.cs?name=snippet_BindToObjectGraph)]
 
-Ve `Movies:ConnectionString` `Movies:ServiceApiKey` gizli dizileri, içindeki `MovieSettings`ilgili özelliklerle eşlenir:
+`Movies:ConnectionString`Ve gizli dizileri, `Movies:ServiceApiKey` içindeki ilgili özelliklerle eşlenir `MovieSettings` :
 
 [!code-csharp[](app-secrets/samples/3.x/UserSecrets/Models/MovieSettings.cs?name=snippet_MovieSettingsClass)]
 
 ## <a name="string-replacement-with-secrets"></a>Gizli dizileri olan dize değiştirme
 
-Parolaların düz metin olarak depolanması güvenli değildir. Örneğin, *appSettings. JSON* içinde depolanan bir veritabanı bağlantı dizesi, belirtilen kullanıcı için bir parola içerebilir:
+Parolaların düz metin olarak depolanması güvenli değildir. Örneğin, *üzerindeappsettings.js* depolanan bir veritabanı bağlantı dizesi, belirtilen kullanıcı için bir parola içerebilir:
 
 [!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
@@ -186,11 +188,11 @@ Daha güvenli bir yaklaşım, parolayı gizli olarak depolanmalıdır. Örneğin
 dotnet user-secrets set "DbPassword" "pass123"
 ```
 
-`Password` Anahtar-değer çiftini *appSettings. JSON*içindeki bağlantı dizesinden kaldırın. Örneğin:
+`Password`Anahtar-değer çiftini *appsettings.jsüzerindeki*bağlantı dizesinden kaldırın. Örneğin:
 
 [!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings.json?highlight=3)]
 
-Gizli dizi değeri, bağlantı dizesinin tamamlanabilmesi için bir <xref:System.Data.SqlClient.SqlConnectionStringBuilder> nesnenin <xref:System.Data.SqlClient.SqlConnectionStringBuilder.Password%2A> özelliğinde ayarlanabilir:
+Gizli dizi değeri, <xref:System.Data.SqlClient.SqlConnectionStringBuilder> <xref:System.Data.SqlClient.SqlConnectionStringBuilder.Password%2A> bağlantı dizesinin tamamlanabilmesi için bir nesnenin özelliğinde ayarlanabilir:
 
 [!code-csharp[](app-secrets/samples/3.x/UserSecrets/Startup2.cs?name=snippet_StartupClass&highlight=14-17)]
 
@@ -211,7 +213,7 @@ Movies:ConnectionString = Server=(localdb)\mssqllocaldb;Database=Movie-1;Trusted
 Movies:ServiceApiKey = 12345
 ```
 
-Yukarıdaki örnekte, anahtar adlarındaki bir iki nokta üst üste *gizli dizi. JSON*içindeki nesne hiyerarşisini gösterir.
+Yukarıdaki örnekte, anahtar adlarındaki bir iki nokta üst üste *secrets.js*içindeki nesne hiyerarşisini gösterir.
 
 ## <a name="remove-a-single-secret"></a>Tek bir parolayı kaldır
 
@@ -223,7 +225,7 @@ Yukarıdaki örnekte, anahtar adlarındaki bir iki nokta üst üste *gizli dizi.
 dotnet user-secrets remove "Movies:ConnectionString"
 ```
 
-Bu `MoviesConnectionString` anahtarla ilişkili anahtar-değer çiftini kaldırmak için uygulamanın *gizli dizi. JSON* dosyası değiştirildi:
+Uygulamanın dosyada *secrets.js* , anahtarla ilişkili anahtar-değer çiftini kaldırmak için değiştirilmiştir `MoviesConnectionString` :
 
 ```json
 {
@@ -249,7 +251,7 @@ Movies:ServiceApiKey = 12345
 dotnet user-secrets clear
 ```
 
-Uygulamanın tüm Kullanıcı gizli dizileri, *gizlilikler. JSON* dosyasından silindi:
+Uygulama için tüm Kullanıcı gizli dizileri, dosyadaki *secrets.js* silindi:
 
 ```json
 {}
@@ -281,7 +283,7 @@ Bu belgede, bir geliştirme makinesinde ASP.NET Core uygulamasının geliştiril
 
 Ortam değişkenleri, kodda veya yerel yapılandırma dosyalarında uygulama gizli dizileri depolanmasını önlemek için kullanılır. Ortam değişkenleri, daha önce belirtilen tüm yapılandırma kaynakları için yapılandırma değerlerini geçersiz kılar.
 
-**Bireysel kullanıcı hesapları** güvenliğinin etkinleştirildiği bir ASP.NET Core Web uygulaması düşünün. Varsayılan bir veritabanı bağlantı dizesi, anahtarına `DefaultConnection`sahip projenin *appSettings. JSON* dosyasına dahildir. Varsayılan bağlantı dizesi, kullanıcı modunda çalışan ve parola gerektirmeyen LocalDB içindir. Uygulama dağıtımı sırasında, `DefaultConnection` anahtar değeri bir ortam değişkeninin değeri ile geçersiz kılınabilir. Ortam değişkeni, tüm bağlantı dizesini hassas kimlik bilgileriyle saklayabilir.
+**Bireysel kullanıcı hesapları** güvenliğinin etkinleştirildiği bir ASP.NET Core Web uygulaması düşünün. Varsayılan bir veritabanı bağlantı dizesi, anahtar ile projenin *appsettings.js* dosyasına dahildir `DefaultConnection` . Varsayılan bağlantı dizesi, kullanıcı modunda çalışan ve parola gerektirmeyen LocalDB içindir. Uygulama dağıtımı sırasında, `DefaultConnection` anahtar değeri bir ortam değişkeninin değeri ile geçersiz kılınabilir. Ortam değişkeni, tüm bağlantı dizesini hassas kimlik bilgileriyle saklayabilir.
 
 > [!WARNING]
 > Ortam değişkenleri genellikle düz, şifresiz metin olarak depolanır. Makinenin veya işlemin güvenliği tehlikeye atılırsa, ortam değişkenlerine güvenilmeyen taraflar tarafından erişilebilir. Kullanıcı gizliliklerinin açıklanmasını önlemeye yönelik ek ölçüler gerekebilir.
@@ -313,7 +315,7 @@ Dosya sistemi yolu:
 
 ---
 
-Yukarıdaki dosya yollarında, *. csproj* dosyasında `<user_secrets_id>` belirtilen `UserSecretsId` değerle değiştirin.
+Yukarıdaki dosya yollarında, `<user_secrets_id>` `UserSecretsId` *. csproj* dosyasında belirtilen değerle değiştirin.
 
 Gizli dizi yöneticisi aracıyla kaydedilen verilerin konumuna veya biçimine bağlı olarak kod yazma. Bu uygulama ayrıntıları değişebilir. Örneğin, gizli değerler şifrelenmez, ancak gelecekte olabilir.
 
@@ -321,22 +323,22 @@ Gizli dizi yöneticisi aracıyla kaydedilen verilerin konumuna veya biçimine ba
 
 Gizli dizi Yöneticisi Aracı, Kullanıcı profilinizde depolanan projeye özgü yapılandırma ayarları üzerinde çalışır.
 
-Kullanıcı gizli dizilerini kullanmak için `UserSecretsId` *. csproj* dosyasının içindeki `PropertyGroup` bir öğesi tanımlayın. İç metni `UserSecretsId` rastgele, ancak proje için benzersizdir. Geliştiriciler, `UserSecretsId`genellikle IÇIN bir GUID oluşturur.
+Kullanıcı gizli dizilerini kullanmak için `UserSecretsId` `PropertyGroup` *. csproj* dosyasının içindeki bir öğesi tanımlayın. İç metni `UserSecretsId` rastgele, ancak proje için benzersizdir. Geliştiriciler, genellikle için bir GUID oluşturur `UserSecretsId` .
 
 [!code-xml[](app-secrets/samples/2.x/UserSecrets/UserSecrets.csproj?name=snippet_PropertyGroup&highlight=3)]
 
 > [!TIP]
-> Visual Studio 'da Çözüm Gezgini projeye sağ tıklayın ve bağlam menüsünden **Kullanıcı gizli dizilerini Yönet** ' i seçin. Bu hareket, `UserSecretsId` *. csproj* dosyasına bir GUID ile doldurulmuş bir öğe ekler.
+> Visual Studio 'da Çözüm Gezgini projeye sağ tıklayın ve bağlam menüsünden **Kullanıcı gizli dizilerini Yönet** ' i seçin. Bu hareket `UserSecretsId` , *. csproj* dosyasına bir GUID ile doldurulmuş bir öğe ekler.
 
 ## <a name="set-a-secret"></a>Gizli dizi ayarla
 
-Anahtar ve değerini içeren bir uygulama gizli anahtarı tanımlayın. Gizli dizi, projenin `UserSecretsId` değeri ile ilişkilendirilir. Örneğin, *. csproj* dosyasının bulunduğu dizinden aşağıdaki komutu çalıştırın:
+Anahtar ve değerini içeren bir uygulama gizli anahtarı tanımlayın. Gizli dizi, projenin değeri ile ilişkilendirilir `UserSecretsId` . Örneğin, *. csproj* dosyasının bulunduğu dizinden aşağıdaki komutu çalıştırın:
 
 ```dotnetcli
 dotnet user-secrets set "Movies:ServiceApiKey" "12345"
 ```
 
-Yukarıdaki örnekte, iki nokta üst üste bir `Movies` `ServiceApiKey` özelliği olan bir nesne sabit değeri olduğunu gösterir.
+Yukarıdaki örnekte, iki nokta üst üste `Movies` bir özelliği olan bir nesne sabit değeri olduğunu gösterir `ServiceApiKey` .
 
 Gizli dizi Yöneticisi Aracı diğer dizinlerden de kullanılabilir. `--project` *. Csproj* dosyasının bulunduğu dosya sistemi yolunu sağlamak için seçeneğini kullanın. Örneğin:
 
@@ -346,7 +348,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 
 ### <a name="json-structure-flattening-in-visual-studio"></a>Visual Studio 'da JSON yapısı düzleştirme
 
-Visual Studio 'nun **Kullanıcı gizli dizilerini Yönet** hareketi metin düzenleyicisinde bir *gizli dizi. JSON* dosyası açar. *Gizlilikler. JSON* içeriğini depolanacak anahtar-değer çiftleriyle değiştirin. Örneğin:
+Visual Studio 'nun **Kullanıcı gizli dizilerini Yönet** hareketi metin düzenleyicisinde bir *secrets.js* dosya açar. *Üzerindesecrets.js* içeriğini, saklanacak anahtar-değer çiftleriyle değiştirin. Örneğin:
 
 ```json
 {
@@ -357,7 +359,7 @@ Visual Studio 'nun **Kullanıcı gizli dizilerini Yönet** hareketi metin düzen
 }
 ```
 
-JSON yapısı, veya `dotnet user-secrets remove` `dotnet user-secrets set`ile yapılan değişikliklerden sonra düzleştirilir. Örneğin, çalışıyor `dotnet user-secrets remove "Movies:ConnectionString"` `Movies` nesne değişmez değerini daraltır. Değiştirilen dosya şuna benzer:
+JSON yapısı, veya ile yapılan değişikliklerden sonra düzleştirilir `dotnet user-secrets remove` `dotnet user-secrets set` . Örneğin, çalışıyor `dotnet user-secrets remove "Movies:ConnectionString"` `Movies` nesne değişmez değerini daraltır. Değiştirilen dosya şuna benzer:
 
 ```json
 {
@@ -367,7 +369,7 @@ JSON yapısı, veya `dotnet user-secrets remove` `dotnet user-secrets set`ile ya
 
 ## <a name="set-multiple-secrets"></a>Birden çok gizli dizi ayarla
 
-Bir dizi gizli dizi, `set` JSON ile komutuna ayırarak ayarlanabilir. Aşağıdaki örnekte, *input. JSON* dosyasının içeriği `set` komutuna yöneldir.
+Bir dizi gizli dizi, JSON ile komutuna ayırarak ayarlanabilir `set` . Aşağıdaki örnekte, dosyanın içeriğindeki *input.js* `set` komutuna verilmez.
 
 # <a name="windows"></a>[Windows](#tab/windows)
 
@@ -391,17 +393,17 @@ Bir komut kabuğu açın ve şu komutu yürütün:
 
 [ASP.NET Core Configuration API 'si](xref:fundamentals/configuration/index) , gizli yönetici sırları için erişim sağlar.
 
-Projeniz .NET Framework hedefliyorsa [Microsoft. Extensions. Configuration. Usergizlilikler](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.UserSecrets) NuGet paketini yükler.
+Projeniz .NET Framework hedefliyorsa [Microsoft.Extensions.Configbir para birimi kullanın. Usergizlilikler](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.UserSecrets) NuGet paketi.
 
-ASP.NET Core 2,0 veya sonraki bir sürümde, proje önceden yapılandırılmış varsayılanlar ile konağın yeni bir örneğini başlatmak için çağırdığında <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> , Kullanıcı gizli dizileri yapılandırma kaynağı geliştirme moduna otomatik olarak eklenir. `CreateDefaultBuilder`<xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName> şu <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> <xref:Microsoft.AspNetCore.Hosting.EnvironmentName.Development>olduğunda çağırır:
+ASP.NET Core 2,0 veya sonraki bir sürümde, proje <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> önceden yapılandırılmış varsayılanlar ile konağın yeni bir örneğini başlatmak için çağırdığında, Kullanıcı gizli dizileri yapılandırma kaynağı geliştirme moduna otomatik olarak eklenir. `CreateDefaultBuilder`<xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A>Şu olduğunda çağırır <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.EnvironmentName> <xref:Microsoft.AspNetCore.Hosting.EnvironmentName.Development> :
 
 [!code-csharp[](app-secrets/samples/2.x/UserSecrets/Program.cs?name=snippet_CreateWebHostBuilder&highlight=2)]
 
-`CreateDefaultBuilder` Çağrılmıyorsa, <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> `Startup` oluşturucuda çağırarak Kullanıcı gizli dizi yapılandırma kaynağını açıkça ekleyin. Aşağıdaki `AddUserSecrets` örnekte gösterildiği gibi, yalnızca uygulama geliştirme ortamında çalıştırıldığında çağırın:
+`CreateDefaultBuilder`Çağrılmıyorsa, oluşturucuda çağırarak Kullanıcı gizli dizi yapılandırma kaynağını açıkça ekleyin <xref:Microsoft.Extensions.Configuration.UserSecretsConfigurationExtensions.AddUserSecrets%2A> `Startup` . `AddUserSecrets`Aşağıdaki örnekte gösterildiği gibi, yalnızca uygulama geliştirme ortamında çalıştırıldığında çağırın:
 
 [!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup3.cs?name=snippet_StartupConstructor&highlight=12)]
 
-Kullanıcı gizli dizileri `Configuration` API aracılığıyla alınabilir:
+Kullanıcı gizli dizileri API aracılığıyla alınabilir `Configuration` :
 
 [!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup.cs?name=snippet_StartupClass&highlight=14)]
 
@@ -411,17 +413,17 @@ Bir nesne sabit değerinin tamamını bir POCO 'ya eşleme (özelliklerle basit 
 
 [!INCLUDE[secrets.json file](~/includes/app-secrets/secrets-json-file-and-text.md)]
 
-Önceki gizli dizileri bir POCO 'ya eşlemek için, `Configuration` API 'nin [nesne grafiği bağlama](xref:fundamentals/configuration/index#bind-to-an-object-graph) özelliğini kullanın. Aşağıdaki kod, özel `MovieSettings` bir poco 'a bağlanır ve `ServiceApiKey` özellik değerine erişir:
+Önceki gizli dizileri bir POCO 'ya eşlemek için, `Configuration` API 'nin [nesne grafiği bağlama](xref:fundamentals/configuration/index#bind-to-an-object-graph) özelliğini kullanın. Aşağıdaki kod, özel bir `MovieSettings` poco 'a bağlanır ve `ServiceApiKey` özellik değerine erişir:
 
 [!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup3.cs?name=snippet_BindToObjectGraph)]
 
-Ve `Movies:ConnectionString` `Movies:ServiceApiKey` gizli dizileri, içindeki `MovieSettings`ilgili özelliklerle eşlenir:
+`Movies:ConnectionString`Ve gizli dizileri, `Movies:ServiceApiKey` içindeki ilgili özelliklerle eşlenir `MovieSettings` :
 
 [!code-csharp[](app-secrets/samples/2.x/UserSecrets/Models/MovieSettings.cs?name=snippet_MovieSettingsClass)]
 
 ## <a name="string-replacement-with-secrets"></a>Gizli dizileri olan dize değiştirme
 
-Parolaların düz metin olarak depolanması güvenli değildir. Örneğin, *appSettings. JSON* içinde depolanan bir veritabanı bağlantı dizesi, belirtilen kullanıcı için bir parola içerebilir:
+Parolaların düz metin olarak depolanması güvenli değildir. Örneğin, *üzerindeappsettings.js* depolanan bir veritabanı bağlantı dizesi, belirtilen kullanıcı için bir parola içerebilir:
 
 [!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
@@ -431,11 +433,11 @@ Daha güvenli bir yaklaşım, parolayı gizli olarak depolanmalıdır. Örneğin
 dotnet user-secrets set "DbPassword" "pass123"
 ```
 
-`Password` Anahtar-değer çiftini *appSettings. JSON*içindeki bağlantı dizesinden kaldırın. Örneğin:
+`Password`Anahtar-değer çiftini *appsettings.jsüzerindeki*bağlantı dizesinden kaldırın. Örneğin:
 
 [!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings.json?highlight=3)]
 
-Gizli dizi değeri, bağlantı dizesinin tamamlanabilmesi için bir <xref:System.Data.SqlClient.SqlConnectionStringBuilder> nesnenin <xref:System.Data.SqlClient.SqlConnectionStringBuilder.Password%2A> özelliğinde ayarlanabilir:
+Gizli dizi değeri, <xref:System.Data.SqlClient.SqlConnectionStringBuilder> <xref:System.Data.SqlClient.SqlConnectionStringBuilder.Password%2A> bağlantı dizesinin tamamlanabilmesi için bir nesnenin özelliğinde ayarlanabilir:
 
 [!code-csharp[](app-secrets/samples/2.x/UserSecrets/Startup2.cs?name=snippet_StartupClass&highlight=14-17)]
 
@@ -456,7 +458,7 @@ Movies:ConnectionString = Server=(localdb)\mssqllocaldb;Database=Movie-1;Trusted
 Movies:ServiceApiKey = 12345
 ```
 
-Yukarıdaki örnekte, anahtar adlarındaki bir iki nokta üst üste *gizli dizi. JSON*içindeki nesne hiyerarşisini gösterir.
+Yukarıdaki örnekte, anahtar adlarındaki bir iki nokta üst üste *secrets.js*içindeki nesne hiyerarşisini gösterir.
 
 ## <a name="remove-a-single-secret"></a>Tek bir parolayı kaldır
 
@@ -468,7 +470,7 @@ Yukarıdaki örnekte, anahtar adlarındaki bir iki nokta üst üste *gizli dizi.
 dotnet user-secrets remove "Movies:ConnectionString"
 ```
 
-Bu `MoviesConnectionString` anahtarla ilişkili anahtar-değer çiftini kaldırmak için uygulamanın *gizli dizi. JSON* dosyası değiştirildi:
+Uygulamanın dosyada *secrets.js* , anahtarla ilişkili anahtar-değer çiftini kaldırmak için değiştirilmiştir `MoviesConnectionString` :
 
 ```json
 {
@@ -494,7 +496,7 @@ Movies:ServiceApiKey = 12345
 dotnet user-secrets clear
 ```
 
-Uygulamanın tüm Kullanıcı gizli dizileri, *gizlilikler. JSON* dosyasından silindi:
+Uygulama için tüm Kullanıcı gizli dizileri, dosyadaki *secrets.js* silindi:
 
 ```json
 {}

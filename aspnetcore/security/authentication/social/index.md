@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 01/23/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/social/index
-ms.openlocfilehash: 880aeea4dce5f5ae6533a3293067d89f98587e72
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: a2c068df85290a59d45432cb168b2c882b59405b
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777156"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405373"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>ASP.NET Core Facebook, Google ve dış sağlayıcı kimlik doğrulaması
 
@@ -40,7 +42,7 @@ Sosyal oturumların trafik ve müşteri dönüştürmelerini nasıl ve ne şekil
 
 * Yeni bir proje oluşturma.
 * **ASP.NET Core Web uygulaması** ' nı ve **İleri ' yi**seçin.
-* Bir **Proje adı** girin ve **konumu**onaylayın veya değiştirin. **Oluştur**’u seçin.
+* Bir **Proje adı** girin ve **konumu**onaylayın veya değiştirin. **Oluştur**'u seçin.
 * Açılan kutuda ASP.NET Core en son sürümünü (**ASP.NET Core {X. Y}**) seçin ve ardından **Web uygulaması**' nı seçin.
 * **Kimlik doğrulaması**altında **Değiştir** ' i seçin ve kimlik doğrulamasını **bireysel kullanıcı hesapları**olarak ayarlayın. **Tamam**’ı seçin.
 * **Yeni ASP.NET Core Web uygulaması oluştur** penceresinde **Oluştur**' u seçin.
@@ -49,7 +51,7 @@ Sosyal oturumların trafik ve müşteri dönüştürmelerini nasıl ve ne şekil
 
 * Terminali açın.  Visual Studio Code için [Tümleşik Terminal](https://code.visualstudio.com/docs/editor/integrated-terminal)' i açabilirsiniz.
 
-* Dizinleri (`cd`), projeyi içerecek bir klasöre değiştirin.
+* Dizinleri ( `cd` ), projeyi içerecek bir klasöre değiştirin.
 
 * Windows için şu komutu çalıştırın:
 
@@ -63,10 +65,10 @@ Sosyal oturumların trafik ve müşteri dönüştürmelerini nasıl ve ne şekil
   dotnet new webapp -o WebApp1 -au Individual
   ```
 
-  * `dotnet new` Komut *WebApp1* klasöründe yeni bir Razor Pages projesi oluşturur.
+  * `dotnet new`Komut WebApp1 klasöründe yeni bir Razor Sayfalar projesi oluşturur. *WebApp1*
   * `-au Individual`Tek kimlik doğrulaması için kodu oluşturur.
-  * `-uld`Windows için SQL Server Express basit bir sürümü olan LocalDB 'yi kullanır. SQLite `-uld` kullanmak için atlayın.
-  * `code` Komutu, Visual Studio Code yeni bir örneğinde *WebApp1* klasörünü açar.
+  * `-uld`Windows için SQL Server Express basit bir sürümü olan LocalDB 'yi kullanır. `-uld`SQLite kullanmak için atlayın.
+  * `code`Komutu, Visual Studio Code yeni bir örneğinde *WebApp1* klasörünü açar.
 
 ---
 
@@ -80,7 +82,7 @@ Sosyal oturumların trafik ve müşteri dönüştürmelerini nasıl ve ne şekil
 
 ## <a name="use-secretmanager-to-store-tokens-assigned-by-login-providers"></a>Oturum açma sağlayıcıları tarafından atanan belirteçleri depolamak için SecretManager kullanın
 
-Sosyal oturum açma sağlayıcıları, kayıt işlemi sırasında **uygulama kimliği** ve **uygulama gizli** belirteçleri atar. Tam belirteç adları sağlayıcıya göre farklılık gösterir. Bu belirteçler, uygulamanızın API 'lerine erişmek için kullandığı kimlik bilgilerini temsil eder. Belirteçler, [gizli yöneticinin](xref:security/app-secrets#secret-manager)yardımıyla uygulama yapılandırmanızla bağlantılı olabilecek "gizli dizileri" oluşturur. Gizli dizi, belirteçleri *appSettings. JSON*gibi bir yapılandırma dosyasında depolamanın daha güvenli bir alternatifidir.
+Sosyal oturum açma sağlayıcıları, kayıt işlemi sırasında **uygulama kimliği** ve **uygulama gizli** belirteçleri atar. Tam belirteç adları sağlayıcıya göre farklılık gösterir. Bu belirteçler, uygulamanızın API 'lerine erişmek için kullandığı kimlik bilgilerini temsil eder. Belirteçler, [gizli yöneticinin](xref:security/app-secrets#secret-manager)yardımıyla uygulama yapılandırmanızla bağlantılı olabilecek "gizli dizileri" oluşturur. Gizli dizi, belirteçleri *appsettings.js*gibi bir yapılandırma dosyasında depolamanın daha güvenli bir alternatifidir.
 
 > [!IMPORTANT]
 > Gizli yönetici yalnızca geliştirme amaçlıdır. [Azure Key Vault yapılandırma sağlayıcısıyla](xref:security/key-vault-configuration)Azure test ve üretim gizli dizilerini saklayabilir ve koruyabilirsiniz.
@@ -105,7 +107,7 @@ Bir dış oturum açma sağlayıcısına kaydolduysanız, uygulamaya kayıtlı b
 
 Bir parola oluşturmak ve dış sağlayıcılar ile oturum açma işlemi sırasında ayarladığınız e-postanızı kullanarak oturum açmak için:
 
-* **Yönet** görünümüne gitmek için sağ üst köşedeki **Merhaba &lt;e-&gt; posta diğer adı** bağlantısını seçin.
+* **Yönet** görünümüne gitmek için sağ üst köşedeki **Merhaba &lt; e-posta diğer adı &gt; ** bağlantısını seçin.
 
 ![Web uygulaması yönetme görünümü](index/_static/pass1a.png)
 

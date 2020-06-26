@@ -7,17 +7,19 @@ ms.author: jamesnk
 ms.date: 09/23/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: grpc/diagnostics
-ms.openlocfilehash: 33b2ee29830cd3012ff791c949c3a7c23a2e98c7
-ms.sourcegitcommit: 16b3abec1ed70f9a206f0cfa7cf6404eebaf693d
+ms.openlocfilehash: ca87ba5b03e7657132e5ebaba72370bde85c85d4
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/17/2020
-ms.locfileid: "83444353"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406777"
 ---
 # <a name="logging-and-diagnostics-in-grpc-on-net"></a>.NET üzerinde gRPC 'de günlüğe kaydetme ve tanılama
 
@@ -29,7 +31,7 @@ Bu makale, sorunları gidermeye yardımcı olmak için bir gRPC uygulamasından 
 * **İzleme** -ve kullanılarak yazılmış bir işlemle ilgili olaylar `DiaganosticSource` `Activity` . Tanılama kaynağından alınan izlemeler, [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-core) ve [opentelemetri](https://github.com/open-telemetry/opentelemetry-dotnet)gibi kitaplıklara göre uygulama telemetrisini toplamak için yaygın olarak kullanılır.
 * **Ölçümler** -saniye başına isteklerin zaman aralıklarıyla veri ölçülerinin temsili. Ölçümler kullanılarak dağıtılır `EventCounter` ve [DotNet-Counters](https://docs.microsoft.com/dotnet/core/diagnostics/dotnet-counters) komut satırı aracı kullanılarak veya [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters)ile gözlemlenebilir.
 
-## <a name="logging"></a>Günlüğe kaydetme
+## <a name="logging"></a>Günlüğe Kaydetme
 
 gRPC Hizmetleri ve gRPC istemcisi [.NET Core günlüğü](xref:fundamentals/logging/index)kullanarak yazma günlükleri. Günlüklerde, uygulamalarınızda beklenmeyen davranışa hata ayıklamanız gerektiğinde başlamak için iyi bir yerdir.
 
@@ -40,7 +42,7 @@ gRPC Hizmetleri ve gRPC istemcisi [.NET Core günlüğü](xref:fundamentals/logg
 
 GRPC Hizmetleri ASP.NET Core üzerinde barındırıldığından, bu, ASP.NET Core günlük sistemini kullanır. Varsayılan yapılandırmada, gRPC çok az bilgiyi günlüğe kaydeder, ancak bu yapılandırılabilir. ASP.NET Core günlüğü yapılandırma hakkında ayrıntılar için [ASP.NET Core günlüğe kaydetme](xref:fundamentals/logging/index#configuration) hakkındaki belgelere bakın.
 
-gRPC, kategori altına Günlükler ekler `Grpc` . GRPC 'den ayrıntılı günlükleri etkinleştirmek için, `Grpc` `Debug` aşağıdaki öğeleri içindeki alt bölümüne ekleyerek, ön ekleri *appSettings. JSON* dosyanızdaki düzeye yapılandırın `LogLevel` `Logging` :
+gRPC, kategori altına Günlükler ekler `Grpc` . GRPC 'den ayrıntılı günlükleri etkinleştirmek için, `Grpc` `Debug` aşağıdaki öğeleri içindeki alt bölümüne ekleyerek, ön ekleri dosyadaki *appsettings.js* düzeyine yapılandırın `LogLevel` `Logging` :
 
 [!code-json[](diagnostics/sample/logging-config.json?highlight=7)]
 
@@ -171,7 +173,7 @@ Kullanmanın en kolay yolu, `DiagnosticSource` uygulamanızda [Application Insig
 
 gRPC sunucu ölçümleri `Grpc.AspNetCore.Server` olay kaynağında raporlanır.
 
-| Name                      | Açıklama                   |
+| Adı                      | Açıklama                   |
 | --------------------------|-------------------------------|
 | `total-calls`             | Toplam çağrı sayısı                   |
 | `current-calls`           | Geçerli çağrılar                 |
@@ -187,7 +189,7 @@ ASP.NET Core Ayrıca olay kaynağı üzerinde kendi ölçümlerini de sağlar `M
 
 gRPC istemci ölçümleri `Grpc.Net.Client` olay kaynağında raporlanır.
 
-| Name                      | Açıklama                   |
+| Adı                      | Açıklama                   |
 | --------------------------|-------------------------------|
 | `total-calls`             | Toplam çağrı sayısı                   |
 | `current-calls`           | Geçerli çağrılar                 |

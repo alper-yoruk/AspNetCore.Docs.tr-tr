@@ -1,30 +1,32 @@
 ---
-title: Desteklenen SignalR platformları ASP.NET Core
+title: SignalRDesteklenen platformları ASP.NET Core
 author: bradygaster
-description: ASP.NET Core SignalRiçin desteklenen platformlar hakkında bilgi edinin.
+description: ASP.NET Core için desteklenen platformlar hakkında bilgi edinin SignalR .
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/supported-platforms
-ms.openlocfilehash: 70a05dabb95aaf561aa78d5c8b24b430c51bd973
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 9d7dd946ae5cf83b76a83ba1faeed0bb3fc31cef
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82772611"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405828"
 ---
-# <a name="aspnet-core-signalr-supported-platforms"></a>ASP.NET Core SignalR desteklenen platformlar
+# <a name="aspnet-core-signalr-supported-platforms"></a>SignalRDesteklenen platformları ASP.NET Core
 
 ## <a name="server-system-requirements"></a>Sunucu sistem gereksinimleri
 
-ASP.NET Core için SignalR, ASP.NET Core desteklediği tüm sunucu platformunu destekler.
+SignalRASP.NET Core için ASP.NET Core desteklediği tüm sunucu platformunu destekler.
 
 ## <a name="javascript-client"></a>JavaScript istemcisi
 

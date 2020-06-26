@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/streaming
-ms.openlocfilehash: 4d6461bc85573776ccdbe81bf3c74145a9cf7ed6
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: c7a3c7bb88230d84025bdf02deb98b51a2d1f92a
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82773896"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406179"
 ---
 # <a name="use-streaming-in-aspnet-core-signalr"></a>ASP.NET Core 'da akış kullanmaSignalR
 
@@ -42,13 +44,13 @@ ASP.NET Core SignalR , sunucu yöntemlerinin akış dönüş değerlerini destek
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Hub <xref:System.Collections.Generic.IAsyncEnumerable`1>yöntemi, <xref:System.Threading.Channels.ChannelReader%601> `Task<IAsyncEnumerable<T>>`,, veya `Task<ChannelReader<T>>`döndürdüğünde otomatik olarak akış hub yöntemi haline gelir.
+Hub yöntemi,,, veya döndürdüğünde otomatik olarak akış hub yöntemi haline gelir <xref:System.Collections.Generic.IAsyncEnumerable`1> <xref:System.Threading.Channels.ChannelReader%601> `Task<IAsyncEnumerable<T>>` `Task<ChannelReader<T>>` .
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-Bir hub yöntemi, bir <xref:System.Threading.Channels.ChannelReader%601> veya döndürdüğünde otomatik olarak akış hub yöntemi haline gelir. `Task<ChannelReader<T>>`
+Bir hub yöntemi, bir veya döndürdüğünde otomatik olarak akış hub yöntemi haline gelir <xref:System.Threading.Channels.ChannelReader%601> `Task<ChannelReader<T>>` .
 
 ::: moniker-end
 
@@ -56,7 +58,7 @@ Bir hub yöntemi, bir <xref:System.Threading.Channels.ChannelReader%601> veya d�
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Akış hub 'ı yöntemleri, `IAsyncEnumerable<T>` öğesine `ChannelReader<T>`ek olarak dönebilir. ' `IAsyncEnumerable<T>` In en basit yolu, aşağıdaki örnekte gösterildiği gibi, hub yöntemini zaman uyumsuz bir yineleyici yöntemi yaparak kullanmaktır. Hub zaman uyumsuz Yineleyici yöntemleri, istemci `CancellationToken` akıştan aboneliği kaldırdığında tetiklenen bir parametreyi kabul edebilir. Zaman uyumsuz Yineleyici yöntemleri, kanallarla ortak olan sorunları önlemek için `ChannelReader` <xref:System.Threading.Channels.ChannelWriter`1>, yeterince erken dönmemek veya yönteminden çıkmak gibi.
+Akış hub 'ı yöntemleri, `IAsyncEnumerable<T>` öğesine ek olarak dönebilir `ChannelReader<T>` . ' In en basit yolu, `IAsyncEnumerable<T>` Aşağıdaki örnekte gösterildiği gibi, hub yöntemini zaman uyumsuz bir yineleyici yöntemi yaparak kullanmaktır. Hub zaman uyumsuz Yineleyici yöntemleri, `CancellationToken` istemci akıştan aboneliği kaldırdığında tetiklenen bir parametreyi kabul edebilir. Zaman uyumsuz Yineleyici yöntemleri, kanallarla ortak olan sorunları önlemek `ChannelReader` için, yeterince erken dönmemek veya yönteminden çıkmak gibi <xref:System.Threading.Channels.ChannelWriter`1> .
 
 [!INCLUDE[](~/includes/csharp-8-required.md)]
 
@@ -64,12 +66,12 @@ Akış hub 'ı yöntemleri, `IAsyncEnumerable<T>` öğesine `ChannelReader<T>`ek
 
 ::: moniker-end
 
-Aşağıdaki örnekte, kanalları kullanarak istemciye veri akışı hakkında temel bilgiler gösterilmektedir. Nesnesine bir nesne yazıldığında <xref:System.Threading.Channels.ChannelWriter%601>, nesne hemen istemciye gönderilir. Sonunda `ChannelWriter` , istemciye akışın kapalı olduğunu bildirmek için tamamlanır.
+Aşağıdaki örnekte, kanalları kullanarak istemciye veri akışı hakkında temel bilgiler gösterilmektedir. Nesnesine bir nesne yazıldığında <xref:System.Threading.Channels.ChannelWriter%601> , nesne hemen istemciye gönderilir. Sonunda, `ChannelWriter` istemciye akışın kapalı olduğunu bildirmek için tamamlanır.
 
 > [!NOTE]
-> Arka plan iş `ChannelWriter<T>` parçacığında öğesine yazın ve mümkün olan en `ChannelReader` kısa sürede geri döndürün. Diğer Merkez çağırmaları `ChannelReader` , döndürülünceye kadar engellenir.
+> `ChannelWriter<T>`Arka plan iş parçacığında öğesine yazın ve mümkün olan en `ChannelReader` kısa sürede geri döndürün. Diğer Merkez çağırmaları `ChannelReader` , döndürülünceye kadar engellenir.
 >
-> İçindeki mantığı sarın `try ... catch`. Hub yöntemi `Channel` çağrısının doğru `catch` şekilde tamamlandığından emin `catch` olmak için içindeki ve dışındaki içindeki öğesini doldurun.
+> İçindeki mantığı sarın `try ... catch` . `Channel` `catch` `catch` Hub yöntemi çağrısının doğru şekilde tamamlandığından emin olmak için içindeki ve dışındaki içindeki öğesini doldurun.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -91,7 +93,7 @@ Aşağıdaki örnekte, kanalları kullanarak istemciye veri akışı hakkında t
 
 ::: moniker range=">= aspnetcore-2.2"
 
-Sunucudan istemciye akış hub 'ı yöntemleri, istemci akıştan aboneliği kaldırdığında tetiklenen bir `CancellationToken` parametreyi kabul edebilir. Sunucu işlemini durdurmak ve istemci akışın sonundan önce bağlantıyı kestiğinde tüm kaynakları serbest bırakmak için bu belirteci kullanın.
+Sunucudan istemciye akış hub 'ı yöntemleri, `CancellationToken` istemci akıştan aboneliği kaldırdığında tetiklenen bir parametreyi kabul edebilir. Sunucu işlemini durdurmak ve istemci akışın sonundan önce bağlantıyı kestiğinde tüm kaynakları serbest bırakmak için bu belirteci kullanın.
 
 ::: moniker-end
 
@@ -99,11 +101,11 @@ Sunucudan istemciye akış hub 'ı yöntemleri, istemci akıştan aboneliği kal
 
 ### <a name="client-to-server-streaming"></a>İstemciden sunucuya akış
 
-Hub yöntemi, veya <xref:System.Threading.Channels.ChannelReader%601> <xref:System.Collections.Generic.IAsyncEnumerable%601>türünde bir veya daha fazla nesne kabul ettiğinde, istemci-sunucu akış hub yöntemi otomatik olarak olur. Aşağıdaki örnek, istemciden gönderilen akış verilerini okumayla ilgili temel bilgileri gösterir. İstemci öğesine her yazdığında <xref:System.Threading.Channels.ChannelWriter%601>, veriler hub yönteminin okuduğu sunucuda `ChannelReader` üzerine yazılır.
+Hub yöntemi, veya türünde bir veya daha fazla nesne kabul ettiğinde, istemci-sunucu akış hub yöntemi otomatik olarak olur <xref:System.Threading.Channels.ChannelReader%601> <xref:System.Collections.Generic.IAsyncEnumerable%601> . Aşağıdaki örnek, istemciden gönderilen akış verilerini okumayla ilgili temel bilgileri gösterir. İstemci öğesine her yazdığında <xref:System.Threading.Channels.ChannelWriter%601> , veriler `ChannelReader` hub yönteminin okuduğu sunucuda üzerine yazılır.
 
 [!code-csharp[Streaming upload hub method](streaming/samples/3.0/Hubs/StreamHub.cs?name=snippet2)]
 
-Yönteminin <xref:System.Collections.Generic.IAsyncEnumerable%601> bir sürümü aşağıda verilmiştir.
+<xref:System.Collections.Generic.IAsyncEnumerable%601>Yönteminin bir sürümü aşağıda verilmiştir.
 
 [!INCLUDE[](~/includes/csharp-8-required.md)]
 
@@ -126,9 +128,9 @@ public async Task UploadStream(IAsyncEnumerable<string> stream)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Ve `StreamAsync` `StreamAsChannelAsync` üzerindeki `HubConnection` yöntemleri, sunucudan istemciye akış yöntemlerini çağırmak için kullanılır. Hub yöntemi `StreamAsync` veya hub metodunda tanımlanan bağımsız değişkenleri ya `StreamAsChannelAsync`da ' a geçirin. Ve `StreamAsync<T>` `StreamAsChannelAsync<T>` üzerindeki genel parametresi, akış yöntemi tarafından döndürülen nesne türünü belirtir. Veya `IAsyncEnumerable<T>` `ChannelReader<T>` türündeki bir nesne, akış çağrısından döndürülür ve istemcideki akışı temsil eder.
+`StreamAsync`Ve `StreamAsChannelAsync` üzerindeki yöntemleri, `HubConnection` sunucudan istemciye akış yöntemlerini çağırmak için kullanılır. Hub yöntemi veya hub metodunda tanımlanan bağımsız değişkenleri ya da ' a geçirin `StreamAsync` `StreamAsChannelAsync` . Ve üzerindeki genel parametresi `StreamAsync<T>` , `StreamAsChannelAsync<T>` akış yöntemi tarafından döndürülen nesne türünü belirtir. Veya türündeki bir nesne `IAsyncEnumerable<T>` , `ChannelReader<T>` akış çağrısından döndürülür ve istemcideki akışı temsil eder.
 
-Şunu `StreamAsync` döndüren `IAsyncEnumerable<int>`bir örnek:
+Şunu `StreamAsync` döndüren bir örnek `IAsyncEnumerable<int>` :
 
 ```csharp
 // Call "Cancel" on this CancellationTokenSource to send a cancellation message to
@@ -145,7 +147,7 @@ await foreach (var count in stream)
 Console.WriteLine("Streaming completed");
 ```
 
-Şunu döndüren `StreamAsChannelAsync` `ChannelReader<int>`karşılık gelen bir örnek:
+Şunu döndüren karşılık gelen bir `StreamAsChannelAsync` örnek `ChannelReader<int>` :
 
 ```csharp
 // Call "Cancel" on this CancellationTokenSource to send a cancellation message to
@@ -171,7 +173,7 @@ Console.WriteLine("Streaming completed");
 
 ::: moniker range=">= aspnetcore-2.2"
 
-Üzerinde `StreamAsChannelAsync` `HubConnection` yöntemi, sunucudan istemciye akış yöntemini çağırmak için kullanılır. Hub yöntemi içinde tanımlanan bağımsız değişkenleri ve hub metodunu geçirin `StreamAsChannelAsync`. Üzerinde `StreamAsChannelAsync<T>` genel parametresi, akış yöntemi tarafından döndürülen nesne türünü belirtir. Bir `ChannelReader<T>` akış çağrısından döndürülür ve istemcideki akışı temsil eder.
+`StreamAsChannelAsync`Üzerinde yöntemi, `HubConnection` sunucudan istemciye akış yöntemini çağırmak için kullanılır. Hub yöntemi içinde tanımlanan bağımsız değişkenleri ve hub metodunu geçirin `StreamAsChannelAsync` . Üzerinde genel parametresi, `StreamAsChannelAsync<T>` akış yöntemi tarafından döndürülen nesne türünü belirtir. Bir `ChannelReader<T>` akış çağrısından döndürülür ve istemcideki akışı temsil eder.
 
 ```csharp
 // Call "Cancel" on this CancellationTokenSource to send a cancellation message to
@@ -197,7 +199,7 @@ Console.WriteLine("Streaming completed");
 
 ::: moniker range="= aspnetcore-2.1"
 
-Üzerinde `StreamAsChannelAsync` `HubConnection` yöntemi, sunucudan istemciye akış yöntemini çağırmak için kullanılır. Hub yöntemi içinde tanımlanan bağımsız değişkenleri ve hub metodunu geçirin `StreamAsChannelAsync`. Üzerinde `StreamAsChannelAsync<T>` genel parametresi, akış yöntemi tarafından döndürülen nesne türünü belirtir. Bir `ChannelReader<T>` akış çağrısından döndürülür ve istemcideki akışı temsil eder.
+`StreamAsChannelAsync`Üzerinde yöntemi, `HubConnection` sunucudan istemciye akış yöntemini çağırmak için kullanılır. Hub yöntemi içinde tanımlanan bağımsız değişkenleri ve hub metodunu geçirin `StreamAsChannelAsync` . Üzerinde genel parametresi, `StreamAsChannelAsync<T>` akış yöntemi tarafından döndürülen nesne türünü belirtir. Bir `ChannelReader<T>` akış çağrısından döndürülür ve istemcideki akışı temsil eder.
 
 ```csharp
 var channel = await hubConnection
@@ -222,11 +224,11 @@ Console.WriteLine("Streaming completed");
 
 ### <a name="client-to-server-streaming"></a>İstemciden sunucuya akış
 
-.NET istemcisinden istemciden sunucuya akış hub 'ı yöntemini çağırmak için iki yol vardır. Çağrılan hub yöntemine bağlı olarak, `IAsyncEnumerable<T>` veya bir `ChannelReader` bağımsız değişken olarak bir `SendAsync`ya `InvokeAsync`da bir `StreamAsChannelAsync`bağımsız değişken olarak geçirebilirsiniz.
+.NET istemcisinden istemciden sunucuya akış hub 'ı yöntemini çağırmak için iki yol vardır. `IAsyncEnumerable<T>` `ChannelReader` `SendAsync` `InvokeAsync` `StreamAsChannelAsync` Çağrılan hub yöntemine bağlı olarak, veya bir bağımsız değişken olarak bir ya da bir bağımsız değişken olarak geçirebilirsiniz.
 
-Veriler `IAsyncEnumerable` veya `ChannelWriter` nesnesine her yazıldığında, sunucudaki hub yöntemi istemciden alınan verilerle yeni bir öğe alır.
+Veriler `IAsyncEnumerable` veya nesnesine her yazıldığında `ChannelWriter` , sunucudaki hub yöntemi istemciden alınan verilerle yeni bir öğe alır.
 
-Bir `IAsyncEnumerable` nesne kullanılıyorsa, akış öğeleri döndüren yöntem çıktıktan sonra akış sonlanır.
+Bir nesne kullanılıyorsa `IAsyncEnumerable` , akış öğeleri döndüren yöntem çıktıktan sonra akış sonlanır.
 
 [!INCLUDE[](~/includes/csharp-8-required.md)]
 
@@ -244,7 +246,7 @@ async IAsyncEnumerable<string> clientStreamData()
 await connection.SendAsync("UploadStream", clientStreamData());
 ```
 
-Ya da kullanıyorsanız `ChannelWriter`, şu ile `channel.Writer.Complete()`kanalı tamamlıyoruz:
+Ya da kullanıyorsanız `ChannelWriter` , şu ile kanalı tamamlıyoruz `channel.Writer.Complete()` :
 
 ```csharp
 var channel = Channel.CreateBounded<string>(10);
@@ -260,18 +262,18 @@ channel.Writer.Complete();
 
 ### <a name="server-to-client-streaming"></a>Sunucudan istemciye akış
 
-JavaScript istemcileri, ile `connection.stream`hub 'larda sunucudan istemciye akış yöntemlerini çağırır. `stream` Yöntemi iki bağımsız değişkeni kabul eder:
+JavaScript istemcileri, ile hub 'larda sunucudan istemciye akış yöntemlerini çağırır `connection.stream` . `stream`Yöntemi iki bağımsız değişkeni kabul eder:
 
-* Hub yönteminin adı. Aşağıdaki örnekte, hub yöntemi adı `Counter`.
+* Hub yönteminin adı. Aşağıdaki örnekte, hub yöntemi adı `Counter` .
 * Hub yönteminde tanımlanan bağımsız değişkenler. Aşağıdaki örnekte, bağımsız değişkenler alacak akış öğesi sayısı ve akış öğeleri arasındaki gecikme için bir sayıdır.
 
-`connection.stream`bir `subscribe` yöntemi `IStreamResult`içeren bir döndürür. `IStreamSubscriber` `subscribe` `stream` ' A geçirin ve çağrıdan bildirim almak için, `complete` ve geri çağırmaları ayarlayın. `error` `next`
+`connection.stream``IStreamResult`bir yöntemi içeren bir döndürür `subscribe` . ' A `IStreamSubscriber` geçirin `subscribe` ve `next` `error` `complete` çağrıdan bildirim almak için, ve geri çağırmaları ayarlayın `stream` .
 
 ::: moniker range=">= aspnetcore-2.2"
 
 [!code-javascript[Streaming javascript](streaming/samples/2.2/wwwroot/js/stream.js?range=19-36)]
 
-Akışı istemciden sonlandırmak için, `dispose` `ISubscription` `subscribe` yönteminden döndürülen üzerinde yöntemi çağırın. Bu yöntemi çağırmak, bir tane sağladıysanız hub yönteminin `CancellationToken` parametresinin iptal edilmesine neden olur.
+Akışı istemciden sonlandırmak için, `dispose` yönteminden döndürülen üzerinde yöntemi çağırın `ISubscription` `subscribe` . Bu yöntemi çağırmak `CancellationToken` , bir tane sağladıysanız hub yönteminin parametresinin iptal edilmesine neden olur.
 
 ::: moniker-end
 
@@ -279,7 +281,7 @@ Akışı istemciden sonlandırmak için, `dispose` `ISubscription` `subscribe` y
 
 [!code-javascript[Streaming javascript](streaming/samples/2.1/wwwroot/js/stream.js?range=19-36)]
 
-Akışı istemciden sonlandırmak için, `dispose` `ISubscription` `subscribe` yönteminden döndürülen üzerinde yöntemi çağırın.
+Akışı istemciden sonlandırmak için, `dispose` yönteminden döndürülen üzerinde yöntemi çağırın `ISubscription` `subscribe` .
 
 ::: moniker-end
 
@@ -287,19 +289,19 @@ Akışı istemciden sonlandırmak için, `dispose` `ISubscription` `subscribe` y
 
 ### <a name="client-to-server-streaming"></a>İstemciden sunucuya akış
 
-`Subject` JavaScript istemcileri `send`, `invoke`çağrılan hub yöntemine bağlı olarak, veya `stream`olarak bir bağımsız değişken olarak geçirerek hub 'larda istemciden sunucuya akış yöntemlerini çağırır. , `Subject` Gibi görünen bir sınıftır `Subject`. Örneğin, RxJS ' de, bu kitaplıktaki [Konu](https://rxjs-dev.firebaseapp.com/api/index/class/Subject) sınıfını kullanabilirsiniz.
+JavaScript istemcileri `Subject` `send` , `invoke` `stream` çağrılan hub yöntemine bağlı olarak, veya olarak bir bağımsız değişken olarak geçirerek hub 'larda istemciden sunucuya akış yöntemlerini çağırır. , `Subject` Gibi görünen bir sınıftır `Subject` . Örneğin, RxJS ' de, bu kitaplıktaki [Konu](https://rxjs-dev.firebaseapp.com/api/index/class/Subject) sınıfını kullanabilirsiniz.
 
 [!code-javascript[Upload javascript](streaming/samples/3.0/wwwroot/js/stream.js?range=41-51)]
 
-Bir `subject.next(item)` öğeyle çağırmak öğeyi akışa yazar ve hub yöntemi sunucudaki öğeyi alır.
+`subject.next(item)`Bir öğeyle çağırmak öğeyi akışa yazar ve hub yöntemi sunucudaki öğeyi alır.
 
-Akışı sonlandırmak için çağırın `subject.complete()`.
+Akışı sonlandırmak için çağırın `subject.complete()` .
 
 ## <a name="java-client"></a>Java istemcisi
 
 ### <a name="server-to-client-streaming"></a>Sunucudan istemciye akış
 
-SignalR Java istemcisi, akış yöntemlerini `stream` çağırmak için yöntemini kullanır. `stream`üç veya daha fazla bağımsız değişken kabul eder:
+SignalRJava istemcisi, `stream` akış yöntemlerini çağırmak için yöntemini kullanır. `stream`üç veya daha fazla bağımsız değişken kabul eder:
 
 * Akış öğelerinin beklenen türü.
 * Hub yönteminin adı.
@@ -313,7 +315,7 @@ hubConnection.stream(String.class, "ExampleStreamingHubMethod", "Arg1")
         () -> {/* Define your onCompleted handler here. */});
 ```
 
-Üzerindeki `stream` `HubConnection` yöntemi, akış öğesi türü için bir observable döndürür. Observable türünün `subscribe` yöntemi nerede `onNext`, `onError` ve `onCompleted` işleyiciler tanımlanmıştır.
+`stream`Üzerindeki yöntemi, `HubConnection` akış öğesi türü Için bir observable döndürür. Observable türünün `subscribe` yöntemi nerede `onNext` , `onError` ve `onCompleted` işleyiciler tanımlanmıştır.
 
 ::: moniker-end
 

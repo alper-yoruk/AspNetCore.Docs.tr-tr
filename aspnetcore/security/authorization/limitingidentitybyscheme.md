@@ -7,17 +7,19 @@ ms.author: riande
 ms.date: 11/08/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authorization/limitingidentitybyscheme
-ms.openlocfilehash: 69b6412f249355573faa785743b124a67ecb8b9e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 042b22a220d961773437e9d85d5f0c5782e29bea
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82777520"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406023"
 ---
 # <a name="authorize-with-a-specific-scheme-in-aspnet-core"></a>ASP.NET Core belirli bir şemayla yetkilendir
 
@@ -44,11 +46,11 @@ public void ConfigureServices(IServiceCollection services)
 Yukarıdaki kodda iki kimlik doğrulama işleyicisi eklenmiştir: biri tanımlama bilgileri ve bir taşıyıcı için bir tane.
 
 >[!NOTE]
->Varsayılan düzenin belirtilmesi, `HttpContext.User` özelliğin bu kimliğe ayarlanmakta olması sonucunu sağlar. Bu davranış istenmiyorsa, parametresiz formunu çağırarak devre dışı bırakın `AddAuthentication`.
+>Varsayılan düzenin belirtilmesi, `HttpContext.User` özelliğin bu kimliğe ayarlanmakta olması sonucunu sağlar. Bu davranış istenmiyorsa, parametresiz formunu çağırarak devre dışı bırakın `AddAuthentication` .
 
 ## <a name="selecting-the-scheme-with-the-authorize-attribute"></a>Yetkilendir özniteliğiyle düzeni seçme
 
-Uygulama, yetkilendirme noktasında kullanılacak işleyiciyi gösterir. Virgülle ayrılmış bir kimlik doğrulama şeması listesini öğesine `[Authorize]`geçirerek uygulamanın yetkilendirdiği işleyiciyi seçin. `[Authorize]` Öznitelik, varsayılan olarak yapılandırılıp yapılandırılmadığını ne olursa olsun, kullanılacak kimlik doğrulama düzenini veya düzenlerini belirtir. Örneğin:
+Uygulama, yetkilendirme noktasında kullanılacak işleyiciyi gösterir. Virgülle ayrılmış bir kimlik doğrulama şeması listesini öğesine geçirerek uygulamanın yetkilendirdiği işleyiciyi seçin `[Authorize]` . `[Authorize]`Öznitelik, varsayılan olarak yapılandırılıp yapılandırılmadığını ne olursa olsun, kullanılacak kimlik doğrulama düzenini veya düzenlerini belirtir. Örneğin:
 
 ```csharp
 [Authorize(AuthenticationSchemes = AuthSchemes)]
@@ -73,7 +75,7 @@ Yukarıdaki kodda yalnızca "taşıyıcı" düzenine sahip işleyici çalışır
 
 ## <a name="selecting-the-scheme-with-policies"></a>İlkeleri olan düzeni seçme
 
-[İlkede](xref:security/authorization/policies)istenen şemaları belirtmeyi tercih ediyorsanız, ilkenizi eklerken `AuthenticationSchemes` koleksiyonu ayarlayabilirsiniz:
+[İlkede](xref:security/authorization/policies)istenen şemaları belirtmeyi tercih ediyorsanız, `AuthenticationSchemes` ilkenizi eklerken koleksiyonu ayarlayabilirsiniz:
 
 ```csharp
 services.AddAuthorization(options =>
@@ -87,7 +89,7 @@ services.AddAuthorization(options =>
 });
 ```
 
-Yukarıdaki örnekte, "Over18" ilkesi yalnızca "taşıyıcı" işleyicisi tarafından oluşturulan kimliğe göre çalışır. `[Authorize]` Özniteliğin `Policy` özelliğini ayarlayarak ilkeyi kullanın:
+Yukarıdaki örnekte, "Over18" ilkesi yalnızca "taşıyıcı" işleyicisi tarafından oluşturulan kimliğe göre çalışır. Özniteliğin özelliğini ayarlayarak ilkeyi kullanın `[Authorize]` `Policy` :
 
 ```csharp
 [Authorize(Policy = "Over18")]
@@ -100,7 +102,7 @@ public class RegistrationController : Controller
 
 Bazı uygulamaların birden çok tür kimlik doğrulamasını desteklemesi gerekebilir. Örneğin, uygulamanız Azure Active Directory kullanıcıların kimliğini ve bir kullanıcılar veritabanından kimlik doğrulaması yapabilir. Diğer bir örnek, hem Active Directory Federasyon Hizmetleri (AD FS) hem de Azure Active Directory B2C kullanıcıların kimliğini doğrulayan bir uygulamadır. Bu durumda, uygulamanın birkaç verenler tarafından bir JWT taşıyıcı belirtecini kabul etmesi gerekir.
 
-Kabul etmek istediğiniz tüm kimlik doğrulama düzenlerini ekleyin. Örneğin, aşağıdaki kod farklı verenler ile `Startup.ConfigureServices` iki JWT taşıyıcı kimlik doğrulama şeması ekler:
+Kabul etmek istediğiniz tüm kimlik doğrulama düzenlerini ekleyin. Örneğin, aşağıdaki kod `Startup.ConfigureServices` farklı verenler ile ıkı JWT taşıyıcı kimlik doğrulama şeması ekler:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -122,7 +124,7 @@ public void ConfigureServices(IServiceCollection services)
 ```
 
 > [!NOTE]
-> Varsayılan kimlik doğrulama düzenine `JwtBearerDefaults.AuthenticationScheme`yalnızca bir JWT taşıyıcı kimlik doğrulaması kaydedilir. Ek kimlik doğrulaması, benzersiz bir kimlik doğrulama şemasına kaydedilmelidir.
+> Varsayılan kimlik doğrulama düzenine yalnızca bir JWT taşıyıcı kimlik doğrulaması kaydedilir `JwtBearerDefaults.AuthenticationScheme` . Ek kimlik doğrulaması, benzersiz bir kimlik doğrulama şemasına kaydedilmelidir.
 
 Bir sonraki adım, varsayılan yetkilendirme ilkesini her iki kimlik doğrulama şemasını kabul edecek şekilde güncelleştirmesidir. Örneğin:
 

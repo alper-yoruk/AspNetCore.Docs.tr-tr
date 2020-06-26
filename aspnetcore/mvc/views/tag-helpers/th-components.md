@@ -7,17 +7,19 @@ ms.author: scaddie
 ms.date: 06/12/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/th-components
-ms.openlocfilehash: df118cdc8346b99e4e5c60c9f0441c963543f4b4
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 58781880764b26a67d71e70c225ab4ed4e5da109
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82767518"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406712"
 ---
 # <a name="tag-helper-components-in-aspnet-core"></a>ASP.NET Core içindeki etiket Yardımcısı bileşenleri
 
@@ -25,7 +27,7 @@ ms.locfileid: "82767518"
 
 Etiket Yardımcısı bileşeni, sunucu tarafı kodundan HTML öğelerini koşullu olarak değiştirmenize veya eklemenize olanak sağlayan bir etiket yardımcıdır. Bu özellik ASP.NET Core 2,0 veya üzeri sürümlerde kullanılabilir.
 
-ASP.NET Core iki yerleşik etiket Yardımcısı bileşeni içerir: `head` ve. `body` Bunlar <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers> ad alanında bulunur ve hem MVC hem Razor de sayfalarında kullanılabilir. Etiket Yardımcısı bileşenleri *_ViewImports. cshtml*'de uygulamayla kayıt gerektirmez.
+ASP.NET Core iki yerleşik etiket Yardımcısı bileşeni içerir: `head` ve `body` . Bunlar <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers> ad alanında bulunur ve hem MVC hem de Razor sayfalarında kullanılabilir. Etiket Yardımcısı bileşenleri *_ViewImports. cshtml*'de uygulamayla kayıt gerektirmez.
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/th-components/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
@@ -33,98 +35,98 @@ ASP.NET Core iki yerleşik etiket Yardımcısı bileşeni içerir: `head` ve. `b
 
 Etiket Yardımcısı bileşenlerinin iki yaygın kullanım durumu şunlardır:
 
-1. [İçine a `<link>` ekleme `<head>`.](#inject-into-html-head-element)
-1. [İçine a `<script>` ekleme `<body>`.](#inject-into-html-body-element)
+1. [İçine a ekleme `<link>` `<head>` .](#inject-into-html-head-element)
+1. [İçine a ekleme `<script>` `<body>` .](#inject-into-html-body-element)
 
 Aşağıdaki bölümlerde bu kullanım durumları açıklanır.
 
 ### <a name="inject-into-html-head-element"></a>HTML Head öğesine Ekle
 
-HTML `<head>` öğesinin IÇINDE, CSS dosyaları genellikle HTML `<link>` öğesiyle içeri aktarılır. Aşağıdaki kod, `<link>` `head` etiket Yardımcısı bileşenini kullanarak öğesi öğesine `<head>` bir öğesi çıkarır:
+HTML öğesinin içinde `<head>` , CSS dosyaları genellıkle HTML öğesiyle içeri aktarılır `<link>` . Aşağıdaki kod, `<link>` `<head>` etiket Yardımcısı bileşenini kullanarak öğesi öğesine bir öğesi çıkarır `head` :
 
 [!code-csharp[](th-components/samples/RazorPagesSample/TagHelpers/AddressStyleTagHelperComponent.cs)]
 
 Yukarıdaki kodda:
 
-* `AddressStyleTagHelperComponent`uygular <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent>. Soyutlama:
-  * İle sınıfının başlatılmasına izin verir <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext>.
+* `AddressStyleTagHelperComponent`uygular <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent> . Soyutlama:
+  * İle sınıfının başlatılmasına izin verir <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext> .
   * HTML öğeleri eklemek veya değiştirmek için etiket Yardımcısı bileşenlerinin kullanılmasını sağlar.
-* <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent.Order*> Özelliği, bileşenlerin işlendiği sırayı tanımlar. `Order`bir uygulamada etiket Yardımcısı bileşenlerinin birden çok kullanımı olduğunda gereklidir.
-* <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent.ProcessAsync*>yürütme bağlamının <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext.TagName*> özellik değerini olarak `head`karşılaştırır. Karşılaştırma true olarak değerlendirilirse, `_style` ALANıN içeriği HTML `<head>` öğesine eklenir.
+* <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent.Order*>Özelliği, bileşenlerin işlendiği sırayı tanımlar. `Order`bir uygulamada etiket Yardımcısı bileşenlerinin birden çok kullanımı olduğunda gereklidir.
+* <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent.ProcessAsync*>yürütme bağlamının <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext.TagName*> özellik değerini olarak karşılaştırır `head` . Karşılaştırma true olarak değerlendirilirse, `_style` alanın IÇERIĞI HTML `<head>` öğesine eklenir.
 
 ### <a name="inject-into-html-body-element"></a>HTML Body öğesine Ekle
 
-`body` Etiket Yardımcısı bileşeni, `<script>` `<body>` öğesine bir öğesi ekleyebilir. Aşağıdaki kod bu tekniği göstermektedir:
+`body`Etiket Yardımcısı bileşeni, `<script>` öğesine bir öğesi ekleyebilir `<body>` . Aşağıdaki kod bu tekniği göstermektedir:
 
 [!code-csharp[](th-components/samples/RazorPagesSample/TagHelpers/AddressScriptTagHelperComponent.cs)]
 
-`<script>` Öğesini depolamak için ayrı bir HTML dosyası kullanılır. HTML dosyası, kod temizleyici ve daha sürdürülebilir hale gelir. Önceki kod *TagHelpers/Templates/AddressToolTipScript.html* içeriğini okur ve etiket Yardımcısı çıktısına ekler. *Addresstooltipscript. html* dosyası aşağıdaki biçimlendirmeyi içerir:
+Öğesini depolamak için ayrı bir HTML dosyası kullanılır `<script>` . HTML dosyası, kod temizleyici ve daha sürdürülebilir hale gelir. Önceki kod, *Taghelmakacıları/şablonları/AddressToolTipScript.html* içeriğini okur ve etiket Yardımcısı çıktısına ekler. *AddressToolTipScript.html* dosyası aşağıdaki biçimlendirmeyi içerir:
 
 [!code-html[](th-components/samples/RazorPagesSample/TagHelpers/Templates/AddressToolTipScript.html)]
 
-Yukarıdaki kod, bir [önyükleme araç ipucu pencere öğesini](https://getbootstrap.com/docs/3.3/javascript/#tooltips) bir `<address>` `printable` özniteliği içeren herhangi bir öğeye bağlar. Bir fare işaretçisi öğenin üzerine geldiğinde efekt görünür.
+Yukarıdaki kod, bir [önyükleme araç ipucu pencere öğesini](https://getbootstrap.com/docs/3.3/javascript/#tooltips) `<address>` bir özniteliği içeren herhangi bir öğeye bağlar `printable` . Bir fare işaretçisi öğenin üzerine geldiğinde efekt görünür.
 
 ## <a name="register-a-component"></a>Bir bileşeni kaydetme
 
 Uygulamanın etiket Yardımcısı bileşenleri koleksiyonuna bir etiket Yardımcısı bileşeni eklenmelidir. Koleksiyona eklemenin üç yolu vardır:
 
 * [Hizmetler kapsayıcısı aracılığıyla kayıt](#registration-via-services-container)
-* [Dosya üzerinden Razor kayıt](#registration-via-razor-file)
+* [Dosya üzerinden kayıt Razor](#registration-via-razor-file)
 * [Sayfa modeli veya denetleyici aracılığıyla kaydolma](#registration-via-page-model-or-controller)
 
 ### <a name="registration-via-services-container"></a>Hizmetler kapsayıcısı aracılığıyla kayıt
 
-Etiket Yardımcısı bileşen sınıfı ile <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.ITagHelperComponentManager>yönetilmemişse, [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection) sistemine kaydedilmelidir. Aşağıdaki `Startup.ConfigureServices` kod, `AddressStyleTagHelperComponent` ve `AddressScriptTagHelperComponent` sınıflarını geçici bir [yaşam süresine](xref:fundamentals/dependency-injection#lifetime-and-registration-options)kaydeder:
+Etiket Yardımcısı bileşen sınıfı ile yönetilmemişse <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.ITagHelperComponentManager> , [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection) sistemine kaydedilmelidir. Aşağıdaki `Startup.ConfigureServices` kod, `AddressStyleTagHelperComponent` ve `AddressScriptTagHelperComponent` sınıflarını [geçici bir yaşam süresine](xref:fundamentals/dependency-injection#lifetime-and-registration-options)kaydeder:
 
 [!code-csharp[](th-components/samples/RazorPagesSample/Startup.cs?name=snippet_ConfigureServices&highlight=12-15)]
 
-### <a name="registration-via-razor-file"></a>Dosya üzerinden Razor kayıt
+### <a name="registration-via-razor-file"></a>Dosya üzerinden kayıt Razor
 
-Etiket Yardımcısı bileşeni, DI ile kayıtlı değilse, bir Razor sayfalar sayfasından veya bir MVC görünümünden kayıt olabilir. Bu teknik, eklenen işaretlemeyi ve bileşen yürütme sırasını bir Razor dosyadan denetlemek için kullanılır.
+Etiket Yardımcısı bileşeni, DI ile kayıtlı değilse, bir Razor Sayfalar sayfasından veya BIR MVC görünümünden kayıt olabilir. Bu teknik, eklenen işaretlemeyi ve bileşen yürütme sırasını bir dosyadan denetlemek için kullanılır Razor .
 
-`ITagHelperComponentManager`Etiket Yardımcısı bileşenleri eklemek veya uygulamadan kaldırmak için kullanılır. Aşağıdaki kod bu tekniği ile `AddressTagHelperComponent`göstermektedir:
+`ITagHelperComponentManager`Etiket Yardımcısı bileşenleri eklemek veya uygulamadan kaldırmak için kullanılır. Aşağıdaki kod bu tekniği ile göstermektedir `AddressTagHelperComponent` :
 
 [!code-cshtml[](th-components/samples/RazorPagesSample/Pages/Contact.cshtml?name=snippet_ITagHelperComponentManager)]
 
 Yukarıdaki kodda:
 
-* `@inject` Yönergesi bir örneği sağlar `ITagHelperComponentManager`. Örnek, Razor dosyadaki aşağı akış erişimi için adlı `manager` bir değişkene atanır.
-* Bir örneği `AddressTagHelperComponent` , uygulamanın etiket Yardımcısı bileşenleri koleksiyonuna eklenir.
+* `@inject`Yönergesi bir örneği sağlar `ITagHelperComponentManager` . Örnek, `manager` dosyadaki aşağı akış erişimi için adlı bir değişkene atanır Razor .
+* Bir örneği, `AddressTagHelperComponent` uygulamanın etiket Yardımcısı bileşenleri koleksiyonuna eklenir.
 
-`AddressTagHelperComponent`, `markup` ve `order` parametrelerini kabul eden bir oluşturucuya uyacak şekilde değiştirilmiştir:
+`AddressTagHelperComponent`, ve parametrelerini kabul eden bir oluşturucuya uyacak şekilde `markup` değiştirilmiştir `order` :
 
 [!code-csharp[](th-components/samples/RazorPagesSample/TagHelpers/AddressTagHelperComponent.cs?name=snippet_Constructor)]
 
-Belirtilen `markup` parametresi, aşağıdaki gibi ' `ProcessAsync` de kullanılır:
+Belirtilen `markup` parametresi, aşağıdaki gibi ' de kullanılır `ProcessAsync` :
 
 [!code-csharp[](th-components/samples/RazorPagesSample/TagHelpers/AddressTagHelperComponent.cs?name=snippet_ProcessAsync&highlight=10-11)]
 
 ### <a name="registration-via-page-model-or-controller"></a>Sayfa modeli veya denetleyici aracılığıyla kaydolma
 
-Etiket Yardımcısı bileşeni, DI ile kayıtlı değilse, bir Razor sayfalar sayfa modelinden veya bir MVC denetleyicisinden kaydedilebilir. Bu teknik, C# mantığını Razor dosyalardan ayırmak için yararlıdır.
+Etiket Yardımcısı bileşeni, DI ile kayıtlı değilse, bir Razor sayfalar sayfa modelinden veya BIR MVC denetleyicisinden kaydedilebilir. Bu teknik, C# mantığını dosyalardan ayırmak için yararlıdır Razor .
 
-Bir örneğine erişmek için Oluşturucu ekleme kullanılır `ITagHelperComponentManager`. Etiket Yardımcısı bileşeni, örneğin etiket Yardımcısı bileşenleri koleksiyonuna eklenir. Aşağıdaki Razor sayfalar sayfa modelinde bu teknik gösterilmektedir `AddressTagHelperComponent`:
+Bir örneğine erişmek için Oluşturucu ekleme kullanılır `ITagHelperComponentManager` . Etiket Yardımcısı bileşeni, örneğin etiket Yardımcısı bileşenleri koleksiyonuna eklenir. Aşağıdaki Razor sayfalar sayfa modelinde bu teknik gösterilmektedir `AddressTagHelperComponent` :
 
 [!code-csharp[](th-components/samples/RazorPagesSample/Pages/Index.cshtml.cs?name=snippet_IndexModelClass)]
 
 Yukarıdaki kodda:
 
-* Bir örneğine erişmek için Oluşturucu ekleme kullanılır `ITagHelperComponentManager`.
-* Bir örneği `AddressTagHelperComponent` , uygulamanın etiket Yardımcısı bileşenleri koleksiyonuna eklenir.
+* Bir örneğine erişmek için Oluşturucu ekleme kullanılır `ITagHelperComponentManager` .
+* Bir örneği, `AddressTagHelperComponent` uygulamanın etiket Yardımcısı bileşenleri koleksiyonuna eklenir.
 
 ## <a name="create-a-component"></a>Bileşen oluşturma
 
 Özel bir etiket Yardımcısı bileşeni oluşturmak için:
 
-* Öğesinden türeten <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.TagHelperComponentTagHelper>bir ortak sınıf oluşturun.
+* Öğesinden türeten bir ortak sınıf oluşturun <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.TagHelperComponentTagHelper> .
 * Sınıfına bir [`[HtmlTargetElement]`](xref:Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute) öznitelik uygulayın. Hedef HTML öğesinin adını belirtin.
-* *Isteğe bağlı*: türün [`[EditorBrowsable(EditorBrowsableState.Never)]`](xref:System.ComponentModel.EditorBrowsableAttribute) IntelliSense 'de görüntülenmesini engellemek için sınıfa bir öznitelik uygulayın.
+* *Isteğe bağlı*: [`[EditorBrowsable(EditorBrowsableState.Never)]`](xref:System.ComponentModel.EditorBrowsableAttribute) türün IntelliSense 'de görüntülenmesini engellemek için sınıfa bir öznitelik uygulayın.
 
-Aşağıdaki kod, `<address>` HTML öğesini hedefleyen özel bir etiket Yardımcısı bileşeni oluşturur:
+Aşağıdaki kod, HTML öğesini hedefleyen özel bir etiket Yardımcısı bileşeni oluşturur `<address>` :
 
 [!code-csharp[](th-components/samples/RazorPagesSample/TagHelpers/AddressTagHelperComponentTagHelper.cs)]
 
-HTML işaretlemesini aşağıdaki `address` gibi eklemek için özel etiket Yardımcısı bileşenini kullanın:
+`address`HTML işaretlemesini aşağıdaki gibi eklemek için özel etiket Yardımcısı bileşenini kullanın:
 
 ```csharp
 public class AddressTagHelperComponent : TagHelperComponent
@@ -152,12 +154,12 @@ public class AddressTagHelperComponent : TagHelperComponent
 }
 ```
 
-Önceki `ProcessAsync` Yöntem, eşleşen <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContent.SetHtmlContent*> `<address>` öğeye için belirtilen HTML 'yi çıkartır. Ekleme şu durumlarda oluşur:
+Önceki `ProcessAsync` Yöntem, eşleşen öğeye için BELIRTILEN HTML 'yi çıkartır <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContent.SetHtmlContent*> `<address>` . Ekleme şu durumlarda oluşur:
 
-* Yürütme bağlamının `TagName` Özellik değeri eşittir `address`.
+* Yürütme bağlamının `TagName` özellik değeri eşittir `address` .
 * Karşılık gelen `<address>` öğenin bir `printable` özniteliği vardır.
 
-Örneğin, aşağıdaki `<address>` öğeyi `if` işlerken ifade true olarak değerlendirilir:
+Örneğin, `if` aşağıdaki öğeyi işlerken ifade true olarak değerlendirilir `<address>` :
 
 [!code-cshtml[](th-components/samples/RazorPagesSample/Pages/Contact.cshtml?name=snippet_AddressPrintable)]
 

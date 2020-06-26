@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 09/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/cookie-sharing
-ms.openlocfilehash: a6aac53008e634e87b18bd34b3d2babdad74ae50
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: b8de5ea1da47c7813aac0137719989959d4c8ce4
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776148"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85407037"
 ---
 # <a name="share-authentication-cookies-among-aspnet-apps"></a>ASP.NET uygulamaları arasında kimlik doğrulama tanımlama bilgilerini paylaşma
 
@@ -28,13 +30,13 @@ Web siteleri genellikle birlikte çalışan ayrı Web uygulamalarından oluşur.
 
 Aşağıdaki örneklerde:
 
-* Kimlik doğrulama tanımlama bilgisi adı, ortak bir değerine ayarlanır `.AspNet.SharedCookie`.
-* , `AuthenticationType` Açıkça ya `Identity.Application` da varsayılan olarak ayarlanır.
-* Veri koruma sisteminin veri koruma anahtarlarını (`SharedCookieApp`) paylaşmasını sağlamak için ortak bir uygulama adı kullanılır.
+* Kimlik doğrulama tanımlama bilgisi adı, ortak bir değerine ayarlanır `.AspNet.SharedCookie` .
+* , `AuthenticationType` `Identity.Application` Açıkça ya da varsayılan olarak ayarlanır.
+* Veri koruma sisteminin veri koruma anahtarlarını () paylaşmasını sağlamak için ortak bir uygulama adı kullanılır `SharedCookieApp` .
 * `Identity.Application`, kimlik doğrulama düzeni olarak kullanılır. Hangi düzenin kullanıldığı, her ne kadar paylaşılan tanımlama bilgisi *uygulamalarında, varsayılan* düzen olarak, ya da açıkça ayarlanarak kullanılması gerekir. Şema, tanımlama bilgilerini şifrelerken ve şifresini çözerken kullanılır, bu nedenle uygulamalar arasında tutarlı bir düzenin kullanılması gerekir.
 * Ortak bir [veri koruma anahtarı](xref:security/data-protection/implementation/key-management) depolama konumu kullanılır.
   * ASP.NET Core uygulamalarda, <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.PersistKeysToFileSystem*> anahtar depolama konumunu ayarlamak için kullanılır.
-  * .NET Framework uygulamalarda, tanımlama bilgisi kimlik doğrulama ara yazılımı, uygulamasının <xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider>bir uygulamasını kullanır. `DataProtectionProvider`kimlik doğrulama tanımlama bilgisi yük verilerinin şifrelenmesi ve şifresinin çözülmesi için veri koruma hizmetleri sağlar. `DataProtectionProvider` Örnek, uygulamanın diğer bölümleri tarafından kullanılan veri koruma sisteminden yalıtılmıştır. [DataProtectionProvider. Create (System. ıO. DirectoryInfo, Action\<ıdataprotectionbuilder>),](xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider.Create*) veri <xref:System.IO.DirectoryInfo> koruma anahtarı depolamanın konumunu belirtmek için bir değerini kabul eder.
+  * .NET Framework uygulamalarda, tanımlama bilgisi kimlik doğrulama ara yazılımı, uygulamasının bir uygulamasını kullanır <xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider> . `DataProtectionProvider`kimlik doğrulama tanımlama bilgisi yük verilerinin şifrelenmesi ve şifresinin çözülmesi için veri koruma hizmetleri sağlar. `DataProtectionProvider`Örnek, uygulamanın diğer bölümleri tarafından kullanılan veri koruma sisteminden yalıtılmıştır. [Dataprotectionprovider. Create (System. IO. DirectoryInfo, Action \<IDataProtectionBuilder> ),](xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider.Create*) <xref:System.IO.DirectoryInfo> veri koruma anahtar depolaması konumunu belirtmek için bir değerini kabul eder.
 * `DataProtectionProvider`[Microsoft. AspNetCore. DataProtection. Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/) NuGet paketini gerektirir:
   * ASP.NET Core 2. x uygulamalarında [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app)öğesine başvurun.
   * .NET Framework uygulamalar ' da [Microsoft. AspNetCore. DataProtection. Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/)'a bir paket başvurusu ekleyin.
@@ -42,11 +44,11 @@ Aşağıdaki örneklerde:
 
 ## <a name="share-authentication-cookies-with-aspnet-core-identity"></a>Kimlik doğrulama tanımlama bilgilerini ASP.NET Core ile paylaşmaIdentity
 
-ASP.NET Core Identitykullanırken:
+ASP.NET Core kullanırken Identity :
 
-* Veri koruma anahtarlarının ve uygulama adının uygulamalar arasında paylaşılması gerekir. Aşağıdaki örneklerde <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.PersistKeysToFileSystem*> yöntemine ortak bir anahtar depolama konumu verilmiştir. Ortak <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.SetApplicationName*> bir paylaşılan uygulama adı yapılandırmak için kullanın (`SharedCookieApp` aşağıdaki örneklerde). Daha fazla bilgi için bkz. <xref:security/data-protection/configuration/overview>.
-* Tanımlama bilgileri <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionExtensions.ConfigureApplicationCookie*> için veri koruma hizmetini ayarlamak üzere genişletme yöntemini kullanın.
-* Varsayılan kimlik doğrulama türü `Identity.Application`.
+* Veri koruma anahtarlarının ve uygulama adının uygulamalar arasında paylaşılması gerekir. Aşağıdaki örneklerde yöntemine ortak bir anahtar depolama konumu verilmiştir <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.PersistKeysToFileSystem*> . <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.SetApplicationName*>Ortak bir paylaşılan uygulama adı yapılandırmak için kullanın ( `SharedCookieApp` Aşağıdaki örneklerde). Daha fazla bilgi için bkz. <xref:security/data-protection/configuration/overview>.
+* <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionExtensions.ConfigureApplicationCookie*>Tanımlama bilgileri için veri koruma hizmetini ayarlamak üzere genişletme yöntemini kullanın.
+* Varsayılan kimlik doğrulama türü `Identity.Application` .
 
 `Startup.ConfigureServices` içinde:
 
@@ -62,7 +64,7 @@ services.ConfigureApplicationCookie(options => {
 
 ## <a name="share-authentication-cookies-without-aspnet-core-identity"></a>Kimlik doğrulama tanımlama bilgilerini ASP.NET Core olmadan paylaşmaIdentity
 
-Tanımlama bilgilerini doğrudan ASP.NET Core Identityolmadan kullanırken, ' de `Startup.ConfigureServices`veri korumayı ve kimlik doğrulamasını yapılandırın. Aşağıdaki örnekte, kimlik doğrulama türü olarak `Identity.Application`ayarlanır:
+Tanımlama bilgilerini doğrudan ASP.NET Core olmadan kullanırken Identity , ' de veri korumayı ve kimlik doğrulamasını yapılandırın `Startup.ConfigureServices` . Aşağıdaki örnekte, kimlik doğrulama türü olarak ayarlanır `Identity.Application` :
 
 ```csharp
 services.AddDataProtection()
@@ -93,7 +95,7 @@ services.ConfigureApplicationCookie(options => {
 
 ## <a name="share-cookies-across-subdomains"></a>Alt etki alanları genelinde tanımlama bilgilerini paylaşma
 
-Etki alanları arasında tanımlama bilgilerini paylaşan uygulamalar barındırırken, [Cookie. Domain](xref:Microsoft.AspNetCore.Http.CookieBuilder.Domain) özelliğinde ortak bir etki alanı belirtin. `first_subdomain.contoso.com` Ve `second_subdomain.contoso.com`gibi `Cookie.Domain` uygulamalar `contoso.com`arasında tanımlama bilgilerini paylaşmak için şunu belirtin `.contoso.com`:
+Etki alanları arasında tanımlama bilgilerini paylaşan uygulamalar barındırırken, [Cookie. Domain](xref:Microsoft.AspNetCore.Http.CookieBuilder.Domain) özelliğinde ortak bir etki alanı belirtin. Ve gibi uygulamalar arasında tanımlama bilgilerini paylaşmak için şunu `contoso.com` `first_subdomain.contoso.com` `second_subdomain.contoso.com` belirtin `Cookie.Domain` `.contoso.com` :
 
 ```csharp
 options.Cookie.Domain = ".contoso.com";
@@ -101,7 +103,7 @@ options.Cookie.Domain = ".contoso.com";
 
 ## <a name="encrypt-data-protection-keys-at-rest"></a>Bekleyen veri koruma anahtarlarını şifreleyin
 
-Üretim dağıtımları için, ' yi `DataProtectionProvider` , geri kalan anahtarları DPAPI veya X509Certificate ile şifrelemek üzere yapılandırın. Daha fazla bilgi için bkz. <xref:security/data-protection/implementation/key-encryption-at-rest>. Aşağıdaki örnekte, için <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.ProtectKeysWithCertificate*>bir sertifika parmak izi sağlanır:
+Üretim dağıtımları için, ' yi, `DataProtectionProvider` geri kalan anahtarları DPAPI veya X509Certificate ile şifrelemek üzere yapılandırın. Daha fazla bilgi için bkz. <xref:security/data-protection/implementation/key-encryption-at-rest>. Aşağıdaki örnekte, için bir sertifika parmak izi sağlanır <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.ProtectKeysWithCertificate*> :
 
 ```csharp
 services.AddDataProtection()
@@ -112,7 +114,7 @@ services.AddDataProtection()
 
 Katana tanımlama bilgisi kimlik doğrulama ara yazılımı kullanan ASP.NET 4. x uygulamaları ASP.NET Core tanımlama bilgisi kimlik doğrulama ara yazılımı ile uyumlu kimlik doğrulama tanımlama bilgileri oluşturacak şekilde yapılandırılabilir. Bu, site genelinde sorunsuz bir SSO deneyimi sağlarken, büyük bir sitenin ayrı uygulamalarının çeşitli adımlarda yükseltilmesini sağlar.
 
-Bir uygulama, Katana tanımlama bilgisi kimlik doğrulama ara yazılımı kullandığında `UseCookieAuthentication` , projenin *Startup.auth.cs* dosyasında çağırır. Visual Studio 2013 ve sonraki sürümlerde oluşturulan ASP.NET 4. x Web uygulaması projeleri varsayılan olarak Katana tanımlama bilgisi kimlik doğrulama ara yazılımını kullanır. ASP.NET Core `UseCookieAuthentication` uygulamalar için artık kullanılmıyor ve desteklenmese de, `UseCookieAuthentication` Katana tanımlama bilgisi kimlik doğrulama ara yazılımı kullanan bir ASP.NET 4. x uygulamasında çağırma geçerlidir.
+Bir uygulama, Katana tanımlama bilgisi kimlik doğrulama ara yazılımı kullandığında, `UseCookieAuthentication` projenin *Startup.auth.cs* dosyasında çağırır. Visual Studio 2013 ve sonraki sürümlerde oluşturulan ASP.NET 4. x Web uygulaması projeleri varsayılan olarak Katana tanımlama bilgisi kimlik doğrulama ara yazılımını kullanır. `UseCookieAuthentication`ASP.NET Core uygulamalar için artık kullanılmıyor ve desteklenmese de, `UseCookieAuthentication` Katana tanımlama bilgisi kimlik doğrulama ara yazılımı kullanan bir ASP.NET 4. x uygulamasında çağırma geçerlidir.
 
 ASP.NET 4. x uygulaması .NET Framework 4.5.1 veya üstünü hedeflemelidir. Aksi takdirde, gerekli NuGet paketleri yüklenemeyebilir.
 
@@ -120,14 +122,14 @@ Bir ASP.NET 4. x uygulaması ve bir ASP.NET Core uygulaması arasında kimlik do
 
 Uygulamanın paketlerinin en son sürümlere güncelleştirildiğinden emin olun. [Microsoft. Owin. Security. Interop](https://www.nuget.org/packages/Microsoft.Owin.Security.Interop/) paketini her bir ASP.NET 4. x uygulamasına yükler.
 
-Çağrısını bulun ve değiştirin `UseCookieAuthentication`:
+Çağrısını bulun ve değiştirin `UseCookieAuthentication` :
 
-* Tanımlama bilgisi adını ASP.NET Core tanımlama bilgisi kimlik doğrulama ara yazılımı (`.AspNet.SharedCookie` örnekteki) tarafından kullanılan adla eşleşecek şekilde değiştirin.
-* Aşağıdaki örnekte, kimlik doğrulama türü olarak `Identity.Application`ayarlanır.
-* Başlatılmış bir `DataProtectionProvider` örneğini ortak veri koruma anahtarı depolama konumu olarak belirtin.
-* Uygulama adının, kimlik doğrulama tanımlama bilgilerini paylaşan tüm uygulamalar tarafından kullanılan ortak uygulama adına ayarlandığını onaylayın (`SharedCookieApp` örnekte).
+* Tanımlama bilgisi adını ASP.NET Core tanımlama bilgisi kimlik doğrulama ara yazılımı (örnekteki) tarafından kullanılan adla eşleşecek şekilde değiştirin `.AspNet.SharedCookie` .
+* Aşağıdaki örnekte, kimlik doğrulama türü olarak ayarlanır `Identity.Application` .
+* Başlatılmış bir örneğini `DataProtectionProvider` ortak veri koruma anahtarı depolama konumu olarak belirtin.
+* Uygulama adının, kimlik doğrulama tanımlama bilgilerini paylaşan tüm uygulamalar tarafından kullanılan ortak uygulama adına ayarlandığını onaylayın ( `SharedCookieApp` örnekte).
 
-Ve `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier` `http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider`ayarlamadıysanız, benzersiz kullanıcıları <xref:System.Web.Helpers.AntiForgeryConfig.UniqueClaimTypeIdentifier> ayırt eden bir talep olarak ayarlayın.
+Ve ayarlamadıysanız `http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier` `http://schemas.microsoft.com/accesscontrolservice/2010/07/claims/identityprovider` , <xref:System.Web.Helpers.AntiForgeryConfig.UniqueClaimTypeIdentifier> benzersiz kullanıcıları ayırt eden bir talep olarak ayarlayın.
 
 *App_Start/Startup.auth.cs*:
 
@@ -162,7 +164,7 @@ System.Web.Helpers.AntiForgeryConfig.UniqueClaimTypeIdentifier =
     "http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name";
 ```
 
-Bir kullanıcı kimliği oluştururken, kimlik doğrulama`Identity.Application`türü (), içinde tanımlı *App_Start/Startup.auth.cs* `UseCookieAuthentication` içinde tanımlanan `AuthenticationType` türle eşleşmelidir.
+Bir kullanıcı kimliği oluştururken, kimlik doğrulama türü (), içinde `Identity.Application` tanımlı `AuthenticationType` `UseCookieAuthentication` *App_Start/Startup.auth.cs*içinde tanımlanan türle eşleşmelidir.
 
 *Modeller/ıdentitymodeller. cs*:
 
@@ -186,9 +188,9 @@ public class ApplicationUser : IdentityUser
 
 ## <a name="use-a-common-user-database"></a>Ortak bir kullanıcı veritabanı kullan
 
-Uygulamalar aynı Identity şemayı (sürümünü Identity) kullandıklarında, her uygulama Identity sisteminin aynı kullanıcı veritabanına işaret ettiği konusunda emin olun. Aksi halde kimlik sistemi, kimlik doğrulama tanımlama bilgisindeki bilgileri veritabanındaki bilgilere göre eşleştirmeye çalıştığında çalışma zamanında hatalara neden olur.
+Uygulamalar aynı Identity şemayı (sürümünü Identity ) kullandıklarında, Identity her uygulama sisteminin aynı kullanıcı veritabanına işaret ettiği konusunda emin olun. Aksi halde kimlik sistemi, kimlik doğrulama tanımlama bilgisindeki bilgileri veritabanındaki bilgilere göre eşleştirmeye çalıştığında çalışma zamanında hatalara neden olur.
 
-Identity Şema uygulamalar arasında farklı olduğunda, genellikle uygulamalar farklı Identity sürümler kullandığından, en son sürümünü temel alan ortak bir veritabanının paylaşılması, yeniden eşleştirmeden ve Identity diğer uygulamanın Identity şemalarında sütun eklemeden mümkün değildir. Ortak bir veritabanının uygulamalar tarafından paylaşılabilmesi için diğer uygulamaları en son Identity sürümü kullanmak üzere yükseltmek genellikle daha etkilidir.
+IdentityŞema uygulamalar arasında farklı olduğunda, genellikle uygulamalar farklı Identity sürümler kullandığından, en son sürümünü temel alan ortak bir veritabanının paylaşılması, Identity yeniden eşleştirmeden ve diğer uygulamanın şemalarında sütun eklemeden mümkün değildir Identity . IdentityOrtak bir veritabanının uygulamalar tarafından paylaşılabilmesi için diğer uygulamaları en son sürümü kullanmak üzere yükseltmek genellikle daha etkilidir.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

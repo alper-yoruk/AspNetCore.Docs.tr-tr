@@ -7,17 +7,19 @@ ms.author: jamesnk
 ms.date: 04/21/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: grpc/client
-ms.openlocfilehash: c554ce9702a9f2b2efeabbfdf0d1319ca4161a1c
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 9ebe36cdb17e858fd82216b090e3e89169197101
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774736"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406192"
 ---
 # <a name="call-grpc-services-with-the-net-client"></a>.NET istemcisiyle gRPC hizmetlerini çağırma
 
@@ -28,16 +30,16 @@ ms.locfileid: "82774736"
 
 ## <a name="configure-grpc-client"></a>GRPC istemcisini yapılandırma
 
-GRPC istemcileri [ * \*. proto* dosyalarından oluşturulan](xref:grpc/basics#generated-c-assets)somut istemci türleridir. Somut GRPC istemcisinde * \*. proto* dosyasındaki GRPC hizmetine çeviren yöntemler vardır.
+gRPC istemcileri [ * \* . proto* dosyalarından oluşturulan](xref:grpc/basics#generated-c-assets)somut istemci türleridir. Somut gRPC istemcisinde * \* . proto* dosyasındaki GRPC hizmetine çeviren yöntemler vardır.
 
-Bir kanaldan gRPC istemcisi oluşturulur. ' I kullanarak `GrpcChannel.ForAddress` bir kanal oluşturun ve ardından bir GRPC istemcisi oluşturmak için kanalı kullanın:
+Bir kanaldan gRPC istemcisi oluşturulur. `GrpcChannel.ForAddress`' I kullanarak bir kanal oluşturun ve ardından bir gRPC istemcisi oluşturmak için kanalı kullanın:
 
 ```csharp
 var channel = GrpcChannel.ForAddress("https://localhost:5001");
 var client = new Greet.GreeterClient(channel);
 ```
 
-Kanal, gRPC hizmetine uzun süreli bir bağlantıyı temsil eder. Bir kanal oluşturulduğunda, hizmet çağırma ile ilgili seçeneklerle yapılandırılır. Örneğin, çağrı yapmak `HttpClient` için kullanılan, en fazla ileti ve alma iletisi boyutu, ve ' de üzerinde `GrpcChannelOptions` günlüğe kaydetme belirlenebilir. `GrpcChannel.ForAddress` Seçeneklerin tamamı listesi için bkz. [istemci yapılandırma seçenekleri](xref:grpc/configuration#configure-client-options).
+Kanal, gRPC hizmetine uzun süreli bir bağlantıyı temsil eder. Bir kanal oluşturulduğunda, hizmet çağırma ile ilgili seçeneklerle yapılandırılır. Örneğin, `HttpClient` çağrı yapmak için kullanılan, en fazla ileti ve alma iletisi boyutu, ve ' de üzerinde günlüğe kaydetme belirlenebilir `GrpcChannelOptions` `GrpcChannel.ForAddress` . Seçeneklerin tamamı listesi için bkz. [istemci yapılandırma seçenekleri](xref:grpc/configuration#configure-client-options).
 
 ```csharp
 var channel = GrpcChannel.ForAddress("https://localhost:5001");
@@ -56,13 +58,13 @@ Kanal ve istemci performansı ve kullanımı:
 * Kanaldan oluşturulan bir kanal ve istemciler, birden çok iş parçacığı tarafından güvenli bir şekilde kullanılabilir.
 * Kanaldan oluşturulan istemciler birden çok eş zamanlı çağrı yapabilir.
 
-`GrpcChannel.ForAddress`gRPC istemcisi oluşturmak için tek seçenek değildir. GRPC hizmetlerini bir ASP.NET Core uygulamasından çağırmak için, [GRPC istemci fabrikası tümleştirmesini](xref:grpc/clientfactory)göz önünde bulundurun. ile gRPC tümleştirmesi `HttpClientFactory` , GRPC istemcileri oluşturmaya yönelik merkezi bir alternatif sunar.
+`GrpcChannel.ForAddress`gRPC istemcisi oluşturmak için tek seçenek değildir. GRPC hizmetlerini bir ASP.NET Core uygulamasından çağırmak için, [GRPC istemci fabrikası tümleştirmesini](xref:grpc/clientfactory)göz önünde bulundurun. ile gRPC tümleştirmesi, `HttpClientFactory` GRPC istemcileri oluşturmaya yönelik merkezi bir alternatif sunar.
 
 > [!NOTE]
 > [.Net istemcisiyle güvenli olmayan gRPC hizmetlerini çağırmak](xref:grpc/troubleshoot#call-insecure-grpc-services-with-net-core-client)için ek yapılandırma gerekir.
 
 > [!NOTE]
-> İle `Grpc.Net.Client` http/2 üzerinden GRPC çağırma, Xamarin üzerinde şu anda desteklenmiyor. Gelecek bir Xamarin sürümünde HTTP/2 desteğini geliştirmek için çalışıyoruz. [GRPC. Core](https://www.nuget.org/packages/Grpc.Core) ve [GRPC-Web](xref:grpc/browser) , bugün çalışan önemli alternatiflerdir.
+> İle HTTP/2 üzerinden gRPC çağırma `Grpc.Net.Client` , Xamarin üzerinde şu anda desteklenmiyor. Gelecek bir Xamarin sürümünde HTTP/2 desteğini geliştirmek için çalışıyoruz. [GRPC. Core](https://www.nuget.org/packages/Grpc.Core) ve [GRPC-Web](xref:grpc/browser) , bugün çalışan önemli alternatiflerdir.
 
 ## <a name="make-grpc-calls"></a>GRPC çağrıları yapma
 
@@ -70,7 +72,7 @@ Bir gRPC çağrısı, istemcideki bir yöntem çağırarak başlatılır. GRPC i
 
 gRPC farklı türde yöntemlere sahiptir. İstemcisinin bir gRPC çağrısını yapmak için nasıl kullanıldığı, çağrılan yöntemin türüne bağlıdır. GRPC Yöntem türleri şunlardır:
 
-* Li
+* Birli
 * Sunucu akışı
 * İstemci akışı
 * İki yönlü akış
@@ -87,14 +89,14 @@ Console.WriteLine("Greeting: " + response.Message);
 // Greeting: Hello World
 ```
 
-. Proto dosyasındaki her birli hizmet yöntemi, yöntemi çağırmak için somut GRPC istemci türünde iki .NET yöntemi oluşmasına neden olur: zaman uyumsuz bir yöntem ve engelleyici bir yöntem. * \** Örneğin, iki çağırma `GreeterClient` `SayHello`yöntemi vardır:
+* \* . Proto* dosyasındaki her birli hizmet yöntemi, yöntemi çağırmak Için somut GRPC istemci türünde iki .NET yöntemi oluşmasına neden olur: zaman uyumsuz bir yöntem ve engelleyici bir yöntem. Örneğin, `GreeterClient` iki çağırma yöntemi vardır `SayHello` :
 
-* `GreeterClient.SayHelloAsync`-hizmeti `Greeter.SayHello` zaman uyumsuz olarak çağırır. Beklenmiş olabilir.
-* `GreeterClient.SayHello`-tamamlanana `Greeter.SayHello` kadar hizmeti ve blokları çağırır. Zaman uyumsuz kodda kullanmayın.
+* `GreeterClient.SayHelloAsync`- `Greeter.SayHello` hizmeti zaman uyumsuz olarak çağırır. Beklenmiş olabilir.
+* `GreeterClient.SayHello`- `Greeter.SayHello` tamamlanana kadar hizmeti ve blokları çağırır. Zaman uyumsuz kodda kullanmayın.
 
 ### <a name="server-streaming-call"></a>Sunucu akışı çağrısı
 
-Sunucu akış çağrısı, istemci isteği iletisi gönderen ile başlar. `ResponseStream.MoveNext()`hizmetten akan iletileri okur. ' İ `ResponseStream.MoveNext()` döndüğünde `false`sunucu akış çağrısı tamamlanmıştır.
+Sunucu akış çağrısı, istemci isteği iletisi gönderen ile başlar. `ResponseStream.MoveNext()`hizmetten akan iletileri okur. ' İ döndüğünde sunucu akış çağrısı tamamlanmıştır `ResponseStream.MoveNext()` `false` .
 
 ```csharp
 var client = new Greet.GreeterClient(channel);
@@ -107,7 +109,7 @@ while (await call.ResponseStream.MoveNext())
 }
 ```
 
-C# 8 veya sonraki bir sürümünü kullanırken, `await foreach` söz dizimi iletileri okumak için kullanılabilir. `IAsyncStreamReader<T>.ReadAllAsync()` Uzantı yöntemi, yanıt akışından gelen tüm iletileri okur:
+C# 8 veya sonraki bir sürümünü kullanırken, `await foreach` söz dizimi iletileri okumak için kullanılabilir. `IAsyncStreamReader<T>.ReadAllAsync()`Uzantı yöntemi, yanıt akışından gelen tüm iletileri okur:
 
 ```csharp
 var client = new Greet.GreeterClient(channel);
@@ -122,7 +124,7 @@ await foreach (var response in call.ResponseStream.ReadAllAsync())
 
 ### <a name="client-streaming-call"></a>İstemci akışı çağrısı
 
-İstemci akış *çağrısı, istemci* İleti göndermeden başlatılır. İstemci, ile `RequestStream.WriteAsync`ileti göndermek için seçim yapabilir. İstemci ileti göndermeyi bitirdiğinde, `RequestStream.CompleteAsync` hizmete bildirmek için çağrılmalıdır. Hizmet bir yanıt iletisi döndürdüğünde çağrı tamamlanır.
+İstemci akış *çağrısı, istemci* İleti göndermeden başlatılır. İstemci, ile ileti göndermek için seçim yapabilir `RequestStream.WriteAsync` . İstemci ileti göndermeyi bitirdiğinde, `RequestStream.CompleteAsync` hizmete bildirmek için çağrılmalıdır. Hizmet bir yanıt iletisi döndürdüğünde çağrı tamamlanır.
 
 ```csharp
 var client = new Counter.CounterClient(channel);
@@ -141,7 +143,7 @@ Console.WriteLine($"Count: {response.Count}");
 
 ### <a name="bi-directional-streaming-call"></a>İki yönlü akış çağrısı
 
-Çift yönlü bir akış *çağrısı, istemci* bir ileti göndermeden başlatılır. İstemci, ile `RequestStream.WriteAsync`ileti göndermek için seçim yapabilir. Hizmetten akışa alınan iletilere veya `ResponseStream.MoveNext()` `ResponseStream.ReadAllAsync()`ile erişilebilir. İki yönlü akış çağrısı, `ResponseStream` daha fazla ileti olmadığında tamamlanır.
+Çift yönlü bir akış *çağrısı, istemci* bir ileti göndermeden başlatılır. İstemci, ile ileti göndermek için seçim yapabilir `RequestStream.WriteAsync` . Hizmetten akışa alınan iletilere veya ile erişilebilir `ResponseStream.MoveNext()` `ResponseStream.ReadAllAsync()` . İki yönlü akış çağrısı, `ResponseStream` daha fazla ileti olmadığında tamamlanır.
 
 ```csharp
 var client = new Echo.EchoClient(channel);
@@ -181,9 +183,9 @@ await readTask;
 
 gRPC çağrıları gRPC fragme döndürebilir. gRPC fragmanları, bir çağrı hakkında ad/değer meta verileri sağlamak için kullanılır. Treylik, HTTP üst bilgilerine benzer işlevler sağlar, ancak çağrının sonunda alınır.
 
-gRPC tanıtımlarına kullanılarak `GetTrailers()`erişilebilir ve bu, meta veri koleksiyonu döndürür. Yanıt tamamlandıktan sonra tanıtımları döndürülür, bu nedenle, tanıtıma erişmeden önce tüm yanıt iletilerini beklemelidir.
+gRPC tanıtımlarına kullanılarak erişilebilir `GetTrailers()` ve bu, meta veri koleksiyonu döndürür. Yanıt tamamlandıktan sonra tanıtımları döndürülür, bu nedenle, tanıtıma erişmeden önce tüm yanıt iletilerini beklemelidir.
 
-Tek birli ve istemci akış çağrıları çağrılmadan `ResponseAsync` `GetTrailers()`önce await olmalıdır:
+Tek birli ve istemci akış çağrıları `ResponseAsync` çağrılmadan önce await olmalıdır `GetTrailers()` :
 
 ```csharp
 var client = new Greet.GreeterClient(channel);
@@ -197,7 +199,7 @@ var trailers = call.GetTrailers();
 var myValue = trailers.First(e => e.Key == "my-trailer-name");
 ```
 
-Sunucu ve çift yönlü akış çağrılarının, çağrılmadan `GetTrailers()`önce yanıt akışını beklemesi gerekir:
+Sunucu ve çift yönlü akış çağrılarının, çağrılmadan önce yanıt akışını beklemesi gerekir `GetTrailers()` :
 
 ```csharp
 var client = new Greet.GreeterClient(channel);
@@ -213,7 +215,7 @@ var trailers = call.GetTrailers();
 var myValue = trailers.First(e => e.Key == "my-trailer-name");
 ```
 
-gRPC tanıtımlarına da adresinden `RpcException`erişilebilir. Bir hizmet, tamam olmayan bir gRPC durumuyla birlikte Treyi döndürebilir. Bu durumda, daha sonra gRPC istemcisi tarafından oluşturulan özel durumdan tanıtımları alınır:
+gRPC tanıtımlarına da adresinden erişilebilir `RpcException` . Bir hizmet, tamam olmayan bir gRPC durumuyla birlikte Treyi döndürebilir. Bu durumda, daha sonra gRPC istemcisi tarafından oluşturulan özel durumdan tanıtımları alınır:
 
 ```csharp
 var client = new Greet.GreeterClient(channel);

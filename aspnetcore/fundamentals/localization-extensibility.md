@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 08/03/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/localization-extensibility
-ms.openlocfilehash: 152146992f1ea3cace14a2e702762af942a6c289
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 6f3007637200b375730c970ca9186436629cbcf7
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774346"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406608"
 ---
 # <a name="localization-extensibility"></a>Yerelleştirme genişletilebilirliği
 
@@ -99,7 +101,7 @@ options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(async 
 
 <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider>Özel bir kaynaktan istek kültür bilgilerini belirleyen yeni bir uygulama oluşturulabilir. Örneğin, özel kaynak bir yapılandırma dosyası veya veritabanı olabilir.
 
-Aşağıdaki örnekte, `AppSettingsRequestCultureProvider` <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> *appSettings. JSON*' dan gelen istek kültür bilgilerini belirleyen öğesini genişleten gösterilmektedir:
+Aşağıdaki örnekte gösterildiği `AppSettingsRequestCultureProvider` gibi, <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> *üzerindeappsettings.js*istek kültür bilgilerini belirleyen ' i genişleten gösterilmektedir:
 
 ```csharp
 public class AppSettingsRequestCultureProvider : RequestCultureProvider

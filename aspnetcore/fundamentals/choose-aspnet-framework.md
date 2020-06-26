@@ -7,23 +7,25 @@ ms.custom: mvc, seodec18
 ms.date: 02/12/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/choose-between-aspnet-and-aspnetcore
-ms.openlocfilehash: 1fb81d5a54cf332ca473af8fbe1841813a127be7
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 73495ea851cdfe5d3588b347e75f0af6adacc02e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775888"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404944"
 ---
 # <a name="choose-between-aspnet-4x-and-aspnet-core"></a>ASP.NET 4. x ve ASP.NET Core arasında seçim yapın
 
 ASP.NET Core, ASP.NET 4. x ' in bir tasarlayadır. Bu makalede aralarındaki farklar listelenir.
 
-## <a name="aspnet-core"></a>ASP.NET Çekirdeği
+## <a name="aspnet-core"></a>ASP.NET Core
 
 ASP.NET Core, Windows, macOS veya Linux 'ta modern, bulut tabanlı Web uygulamaları oluşturmaya yönelik açık kaynaklı, platformlar arası bir çerçevedir.
 
@@ -37,10 +39,10 @@ ASP.NET 4. x, Windows 'ta kurumsal düzeyde, sunucu tabanlı Web uygulamaları o
 
 Aşağıdaki tabloda ASP.NET Core ASP.NET 4. x ile karşılaştırılır.
 
-| ASP.NET Çekirdeği | ASP.NET 4.x |
+| ASP.NET Core | ASP.NET 4.x |
 |---|---|
 |Windows, macOS veya Linux için derleme|Windows için derleme|
-|Sayfalar, ASP.NET Core 2. x itibariyle bir Web Kullanıcı arabirimi oluşturmak için önerilen yaklaşımdır. [ Razor ](xref:razor-pages/index) Ayrıca bkz. [MVC](xref:mvc/overview), [Web API 'si](xref:tutorials/first-web-api)ve [SignalR](xref:signalr/introduction).|[Web Forms](/aspnet/web-forms), [SignalR](/aspnet/signalr), [MVC](/aspnet/mvc), [Web API](/aspnet/web-api/), Web [kancaları](/aspnet/webhooks/)veya [Web sayfaları](/aspnet/web-pages) kullanın|
+|[ Razor Sayfalar](xref:razor-pages/index) , ASP.NET Core 2. x itibariyle bir Web Kullanıcı arabirimi oluşturmak için önerilen yaklaşımdır. Ayrıca bkz. [MVC](xref:mvc/overview), [Web API 'si](xref:tutorials/first-web-api)ve [SignalR](xref:signalr/introduction) .|[Web Forms](/aspnet/web-forms), [SignalR](/aspnet/signalr) , [MVC](/aspnet/mvc), [Web API](/aspnet/web-api/), Web [kancaları](/aspnet/webhooks/)veya [Web sayfaları](/aspnet/web-pages) kullanın|
 |Makine başına birden çok sürüm|Makine başına bir sürüm|
 |C# veya F kullanarak [Visual Studio](https://visualstudio.microsoft.com/vs/), [Mac için Visual Studio](https://visualstudio.microsoft.com/vs/mac/)veya [Visual Studio Code](https://code.visualstudio.com/) ile geliştirme #|C#, VB veya F kullanarak [Visual Studio](https://visualstudio.microsoft.com/vs/) ile geliştirme #|
 |ASP.NET 4. x 'ten daha yüksek performans|İyi performans|

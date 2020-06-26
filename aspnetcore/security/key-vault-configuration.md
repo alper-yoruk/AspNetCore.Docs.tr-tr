@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/key-vault-configuration
-ms.openlocfilehash: 4a5689af9ffea175838a869e92752de889cbb227
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: 47172339f1c82a572a8a2c5d4ba49e4906e30b29
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106682"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406881"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>ASP.NET Core Azure Key Vault yapılandırma sağlayıcısı
 
@@ -35,7 +37,7 @@ Bu belgede, Azure Key Vault gizliliklerden uygulama yapılandırma değerlerini 
 
 ## <a name="packages"></a>Paketler
 
-[Microsoft. Extensions. Configuration. AzureKeyVault](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/) paketine bir paket başvurusu ekleyin.
+Microsoft.Extensions.Configyönlendirmeye bir paket başvurusu ekleyin [. AzureKeyVault](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/) paketi.
 
 ## <a name="sample-app"></a>Örnek uygulama
 
@@ -129,7 +131,7 @@ Hızlı başlangıç tarafından sunulan yönergeler [: Azure CLI kullanarak Azu
    1. Azure AD 'de uygulamayı seçin.
    1. **Sertifikalar & gizli**dizi sayfasına gidin.
    1. Ortak anahtarı içeren sertifikayı karşıya yüklemek için **sertifikayı karşıya yükle** ' yi seçin. *. Cer*, *. pek*veya *. CRT* sertifikası kabul edilebilir.
-1. Anahtar Kasası adı, uygulama KIMLIĞI ve sertifika parmak izini uygulamanın *appSettings. JSON* dosyasında depolayın.
+1. Anahtar Kasası adı, uygulama KIMLIĞI ve sertifika parmak izini, uygulamanın *appsettings.js* dosyada depolayın.
 1. Azure portal **ana** kasaları ' ne gidin.
 1. Azure Key Vault bölümünde, [üretim ortamındaki gizli dizi deposunda](#secret-storage-in-the-production-environment-with-azure-key-vault) oluşturduğunuz anahtar kasasını seçin.
 1. **Erişim ilkeleri**'ni seçin.
@@ -137,7 +139,7 @@ Hızlı başlangıç tarafından sunulan yönergeler [: Azure CLI kullanarak Azu
 1. **Gizli izinleri** açın ve uygulamaya **Get** ve **list** izinleri sağlayın.
 1. **Sorumlu Seç** ' i seçin ve kayıtlı uygulamayı ada göre seçin. **Seç** düğmesini seçin.
 1. **Tamam**’ı seçin.
-1. **Kaydet**'i seçin.
+1. **Kaydet**’i seçin.
 1. Uygulamayı dağıtın.
 
 `Certificate`Örnek uygulama, yapılandırma değerlerini, `IConfigurationRoot` parola adı ile aynı adla alır:
@@ -147,7 +149,7 @@ Hızlı başlangıç tarafından sunulan yönergeler [: Azure CLI kullanarak Azu
   * `config["Section:SecretName"]`
   * `config.GetSection("Section")["SecretName"]`
 
-X. 509.440 sertifikası işletim sistemi tarafından yönetiliyor. Uygulama, <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> *appSettings. JSON* dosyası tarafından sağlanan değerlerle çağırır:
+X. 509.440 sertifikası işletim sistemi tarafından yönetiliyor. Uygulama, <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> *appsettings.js* dosya tarafından sağlanan değerlerle çağırır:
 
 [!code-csharp[](key-vault-configuration/samples/3.x/SampleApp/Program.cs?name=snippet1&highlight=20-23)]
 
@@ -157,7 +159,7 @@ X. 509.440 sertifikası işletim sistemi tarafından yönetiliyor. Uygulama, <xr
 * Uygulama KIMLIĞI:`627e911e-43cc-61d4-992e-12db9c81b413`
 * Sertifika parmak izi:`fe14593dd66b2406c5269d742d04b6e1ab03adb1`
 
-*appSettings. JSON*:
+*appsettings.js*:
 
 [!code-json[](key-vault-configuration/samples/3.x/SampleApp/appsettings.json?highlight=10-12)]
 
@@ -169,7 +171,7 @@ Azure **'a dağıtılan bir uygulama** , [Azure kaynakları için yönetilen kim
 
 Örnek uygulama, `#define` *program.cs* dosyasının en üstündeki Ifade olarak ayarlandığında Azure kaynakları için Yönetilen kimlikler kullanır `Managed` .
 
-Uygulamanın *appSettings. JSON* dosyasına kasa adını girin. Örnek uygulama sürüme ayarlandığında bir uygulama KIMLIĞI ve parola (Istemci gizli anahtarı) gerektirmez `Managed` , bu nedenle bu yapılandırma girişlerini yoksayabilirsiniz. Uygulama Azure 'a dağıtılır ve Azure, yalnızca *appSettings. JSON* dosyasında depolanan kasa adını kullanarak Azure Key Vault erişmek için uygulamanın kimliğini doğrular.
+Dosyanın *üzerine uygulamanınappsettings.js* kasa adını girin. Örnek uygulama sürüme ayarlandığında bir uygulama KIMLIĞI ve parola (Istemci gizli anahtarı) gerektirmez `Managed` , bu nedenle bu yapılandırma girişlerini yoksayabilirsiniz. Uygulama Azure 'a dağıtılır ve Azure, yalnızca *appsettings.json* dosyasında depolanan kasa adını kullanarak Azure Key Vault erişmek için uygulamanın kimliğini doğrular.
 
 Azure App Service için örnek uygulamayı dağıtın.
 
@@ -193,7 +195,7 @@ Azure CLı, PowerShell veya Azure portal kullanarak **uygulamayı yeniden başla
 
 Anahtar Kasası adı örnek değeri:`contosovault`
     
-*appSettings. JSON*:
+*appsettings.js*:
 
 ```json
 {
@@ -381,7 +383,7 @@ Bu belgede, Azure Key Vault gizliliklerden uygulama yapılandırma değerlerini 
 
 ## <a name="packages"></a>Paketler
 
-[Microsoft. Extensions. Configuration. AzureKeyVault](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/) paketine bir paket başvurusu ekleyin.
+Microsoft.Extensions.Configyönlendirmeye bir paket başvurusu ekleyin [. AzureKeyVault](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/) paketi.
 
 ## <a name="sample-app"></a>Örnek uygulama
 
@@ -475,7 +477,7 @@ Hızlı başlangıç tarafından sunulan yönergeler [: Azure CLI kullanarak Azu
    1. Azure AD 'de uygulamayı seçin.
    1. **Sertifikalar & gizli**dizi sayfasına gidin.
    1. Ortak anahtarı içeren sertifikayı karşıya yüklemek için **sertifikayı karşıya yükle** ' yi seçin. *. Cer*, *. pek*veya *. CRT* sertifikası kabul edilebilir.
-1. Anahtar Kasası adı, uygulama KIMLIĞI ve sertifika parmak izini uygulamanın *appSettings. JSON* dosyasında depolayın.
+1. Anahtar Kasası adı, uygulama KIMLIĞI ve sertifika parmak izini, uygulamanın *appsettings.js* dosyada depolayın.
 1. Azure portal **ana** kasaları ' ne gidin.
 1. Azure Key Vault bölümünde, [üretim ortamındaki gizli dizi deposunda](#secret-storage-in-the-production-environment-with-azure-key-vault) oluşturduğunuz anahtar kasasını seçin.
 1. **Erişim ilkeleri**'ni seçin.
@@ -483,7 +485,7 @@ Hızlı başlangıç tarafından sunulan yönergeler [: Azure CLI kullanarak Azu
 1. **Gizli izinleri** açın ve uygulamaya **Get** ve **list** izinleri sağlayın.
 1. **Sorumlu Seç** ' i seçin ve kayıtlı uygulamayı ada göre seçin. **Seç** düğmesini seçin.
 1. **Tamam**’ı seçin.
-1. **Kaydet**'i seçin.
+1. **Kaydet**’i seçin.
 1. Uygulamayı dağıtın.
 
 `Certificate`Örnek uygulama, yapılandırma değerlerini, `IConfigurationRoot` parola adı ile aynı adla alır:
@@ -493,7 +495,7 @@ Hızlı başlangıç tarafından sunulan yönergeler [: Azure CLI kullanarak Azu
   * `config["Section:SecretName"]`
   * `config.GetSection("Section")["SecretName"]`
 
-X. 509.440 sertifikası işletim sistemi tarafından yönetiliyor. Uygulama, <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> *appSettings. JSON* dosyası tarafından sağlanan değerlerle çağırır:
+X. 509.440 sertifikası işletim sistemi tarafından yönetiliyor. Uygulama, <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> *appsettings.js* dosya tarafından sağlanan değerlerle çağırır:
 
 [!code-csharp[](key-vault-configuration/samples/2.x/SampleApp/Program.cs?name=snippet1&highlight=20-23)]
 
@@ -503,7 +505,7 @@ X. 509.440 sertifikası işletim sistemi tarafından yönetiliyor. Uygulama, <xr
 * Uygulama KIMLIĞI:`627e911e-43cc-61d4-992e-12db9c81b413`
 * Sertifika parmak izi:`fe14593dd66b2406c5269d742d04b6e1ab03adb1`
 
-*appSettings. JSON*:
+*appsettings.js*:
 
 [!code-json[](key-vault-configuration/samples/2.x/SampleApp/appsettings.json?highlight=10-12)]
 
@@ -515,7 +517,7 @@ Azure **'a dağıtılan bir uygulama** , [Azure kaynakları için yönetilen kim
 
 Örnek uygulama, `#define` *program.cs* dosyasının en üstündeki Ifade olarak ayarlandığında Azure kaynakları için Yönetilen kimlikler kullanır `Managed` .
 
-Uygulamanın *appSettings. JSON* dosyasına kasa adını girin. Örnek uygulama sürüme ayarlandığında bir uygulama KIMLIĞI ve parola (Istemci gizli anahtarı) gerektirmez `Managed` , bu nedenle bu yapılandırma girişlerini yoksayabilirsiniz. Uygulama Azure 'a dağıtılır ve Azure, yalnızca *appSettings. JSON* dosyasında depolanan kasa adını kullanarak Azure Key Vault erişmek için uygulamanın kimliğini doğrular.
+Dosyanın *üzerine uygulamanınappsettings.js* kasa adını girin. Örnek uygulama sürüme ayarlandığında bir uygulama KIMLIĞI ve parola (Istemci gizli anahtarı) gerektirmez `Managed` , bu nedenle bu yapılandırma girişlerini yoksayabilirsiniz. Uygulama Azure 'a dağıtılır ve Azure, yalnızca *appsettings.json* dosyasında depolanan kasa adını kullanarak Azure Key Vault erişmek için uygulamanın kimliğini doğrular.
 
 Azure App Service için örnek uygulamayı dağıtın.
 
@@ -539,7 +541,7 @@ Azure CLı, PowerShell veya Azure portal kullanarak **uygulamayı yeniden başla
 
 Anahtar Kasası adı örnek değeri:`contosovault`
     
-*appSettings. JSON*:
+*appsettings.js*:
 
 ```json
 {

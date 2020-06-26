@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 07/23/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/identity-custom-storage-providers
-ms.openlocfilehash: 567529adc520c3fb152afae7284d31b87ec1df0a
-ms.sourcegitcommit: fa67462abdf0cc4051977d40605183c629db7c64
+ms.openlocfilehash: 137b73529a6c3d2a1dece201ebd8a7a5a96da349
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/10/2020
-ms.locfileid: "84652997"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404749"
 ---
 # <a name="custom-storage-providers-for-aspnet-core-identity"></a>ASP.NET Core için özel depolama sağlayıcılarıIdentity
 
@@ -29,7 +31,7 @@ ASP.NET Core Identity , özel bir depolama sağlayıcısı oluşturup uygulaman�
 
 ## <a name="introduction"></a>Giriş
 
-Varsayılan olarak, ASP.NET Core Identity Sistem Kullanıcı bilgilerini Entity Framework Core kullanarak SQL Server veritabanında depolar. Birçok uygulama için bu yaklaşım iyi bir sonuç verir. Ancak, farklı bir Kalıcılık mekanizması veya veri şeması kullanmayı tercih edebilirsiniz. Örnek:
+Varsayılan olarak, ASP.NET Core Identity Sistem Kullanıcı bilgilerini Entity Framework Core kullanarak SQL Server veritabanında depolar. Birçok uygulama için bu yaklaşım iyi bir sonuç verir. Ancak, farklı bir Kalıcılık mekanizması veya veri şeması kullanmayı tercih edebilirsiniz. Örneğin:
 
 * [Azure Tablo depolama](/azure/storage/) veya başka bir veri deposu kullanıyorsunuz.
 * Veritabanı tablolarınız farklı bir yapıya sahip. 
@@ -175,7 +177,7 @@ Sınıfı içinde `UserStore` , işlemleri gerçekleştirmek için oluşturduğu
 * **Iqueryableuserstore**  
  [Iqueryableuserstore &lt; Tuser &gt; ](/dotnet/api/microsoft.aspnetcore.identity.iqueryableuserstore-1) arabirimi, bir sorgulanabilir kullanıcı deposu sağlamak için uyguladığınız üyeleri tanımlar.
 
-Yalnızca uygulamanızda gerekli olan arabirimleri uygulayabilirsiniz. Örnek:
+Yalnızca uygulamanızda gerekli olan arabirimleri uygulayabilirsiniz. Örneğin:
 
 ```csharp
 public class UserStore : IUserStore<IdentityUser>,

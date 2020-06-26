@@ -8,25 +8,27 @@ ms.custom: mvc
 ms.date: 11/27/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: signalr/introduction
-ms.openlocfilehash: 4e968659d23330c4b1403ab998dda9c9e6ebe080
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 816ecfc5d23e8e1d2901a8c35c657cc968fa95df
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775784"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85404957"
 ---
 # <a name="introduction-to-aspnet-core-signalr"></a>ASP.NET Core girişSignalR
 
-## <a name="what-is-signalr"></a>Nedir SignalR?
+## <a name="what-is-signalr"></a>Nedir SignalR ?
 
 ASP.NET Core SignalR , uygulamalara gerçek zamanlı Web işlevselliği eklemeyi kolaylaştıran açık kaynaklı bir kitaplıktır. Gerçek zamanlı Web işlevselliği, sunucu tarafı kodun anında istemcilere içerik gönderebilmesine olanak sağlar.
 
-İçin SignalRiyi adaylar:
+İçin iyi adaylar SignalR :
 
 * Sunucudan yüksek sıklıkta güncelleştirmeler gerektiren uygulamalar. Oyun, sosyal ağlar, oylama, açık artırma, haritalar ve GPS uygulamaları bunlara örnektir.
 * Panolar ve izleme uygulamaları. Şirket panoları, anlık satış güncelleştirmeleri veya seyahat uyarıları bunlara örnektir.
@@ -35,7 +37,7 @@ ASP.NET Core SignalR , uygulamalara gerçek zamanlı Web işlevselliği eklemeyi
 
 SignalRsunucudan istemciye [uzak yordam çağrıları (RPC)](https://wikipedia.org/wiki/Remote_procedure_call)oluşturmak IÇIN bir API sağlar. RPC 'ler, sunucu tarafı .NET Core kodundan gelen istemcilerdeki JavaScript işlevlerini çağırır.
 
-ASP.NET Core SignalR için bazı özellikler şunlardır:
+ASP.NET Core için bazı özellikler şunlardır SignalR :
 
 * Bağlantı yönetimini otomatik olarak işler.
 * Tüm bağlı istemcilere aynı anda iletiler gönderir. Örneğin, bir sohbet odası.
@@ -64,7 +66,7 @@ Hub 'lar, istemci tarafı yönteminin adını ve parametrelerini içeren iletile
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [ASP.NET Core SignalR için kullanmaya başlama](xref:tutorials/signalr)
+* [SignalRASP.NET Core için kullanmaya başlama](xref:tutorials/signalr)
 * [Desteklenen platformlar](xref:signalr/supported-platforms)
 * [Merkezler](xref:signalr/hubs)
 * [JavaScript istemcisi](xref:signalr/javascript-client)

@@ -7,23 +7,25 @@ ms.custom: mvc
 ms.date: 11/15/2018
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authorization/resourcebased
-ms.openlocfilehash: 5af4dd6a33e43191dbb5e7a8431fd8468a5fa11b
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 35d8521227d82bb066cfbf2badf4a1e1f30bfd8e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82774320"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405633"
 ---
 # <a name="resource-based-authorization-in-aspnet-core"></a>ASP.NET Core kaynak tabanlı yetkilendirme
 
 Yetkilendirme stratejisi erişilmekte olan kaynağa bağlıdır. Yazar özelliği olan bir belge düşünün. Yalnızca yazarın belgeyi güncelleştirmesine izin verilir. Sonuç olarak, yetkilendirme değerlendirmesi gerçekleşebilmesi için belgenin veri deposundan alınması gerekir.
 
-Öznitelik değerlendirmesi, veri bağlamadan önce ve belgeyi yükleyen sayfa işleyicisinin veya eylemin yürütmeden önce oluşur. Bu nedenlerden dolayı, bir `[Authorize]` öznitelik ile bildirime dayalı yetkilendirme yeterli değildir. Bunun yerine, zorunlu *Yetkilendirme*olarak bilinen bir stil&mdash;için özel bir yetkilendirme yöntemi çağırabilirsiniz.
+Öznitelik değerlendirmesi, veri bağlamadan önce ve belgeyi yükleyen sayfa işleyicisinin veya eylemin yürütmeden önce oluşur. Bu nedenlerden dolayı, bir öznitelik ile bildirime dayalı yetkilendirme `[Authorize]` yeterli değildir. Bunun yerine, zorunlu &mdash; *Yetkilendirme*olarak bilinen bir stil için özel bir yetkilendirme yöntemi çağırabilirsiniz.
 
 ::: moniker range=">= aspnetcore-3.0"
 [Örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/resourcebased/samples/3_0) ([nasıl indirilir](xref:index#how-to-download-a-sample)).
@@ -41,7 +43,7 @@ Yetkilendirme stratejisi erişilmekte olan kaynağa bağlıdır. Yazar özelliğ
 
 ## <a name="use-imperative-authorization"></a>Kesinlik temelli yetkilendirme kullan
 
-Yetkilendirme bir [IAuthorizationService](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationservice) hizmeti olarak uygulanır ve `Startup` sınıfı içindeki hizmet koleksiyonuna kaydedilir. Hizmet, sayfa işleyicilere veya eylemlere [bağımlılık ekleme](xref:fundamentals/dependency-injection) yoluyla kullanılabilir hale getirilir.
+Yetkilendirme bir [IAuthorizationService](/dotnet/api/microsoft.aspnetcore.authorization.iauthorizationservice) hizmeti olarak uygulanır ve sınıfı içindeki hizmet koleksiyonuna kaydedilir `Startup` . Hizmet, sayfa işleyicilere veya eylemlere [bağımlılık ekleme](xref:fundamentals/dependency-injection) yoluyla kullanılabilir hale getirilir.
 
 [!code-csharp[](resourcebased/samples/3_0/ResourceBasedAuthApp2/Controllers/DocumentController.cs?name=snippet_IAuthServiceDI&highlight=6)]
 
@@ -75,10 +77,10 @@ Task<bool> AuthorizeAsync(ClaimsPrincipal user,
 
 <a name="security-authorization-resource-based-imperative"></a>
 
-Aşağıdaki örnekte, güvenli hale getirilme kaynağı özel `Document` bir nesneye yüklenir. Geçerli `AuthorizeAsync` kullanıcının belirtilen belgeyi düzenlemesine izin verilip verilmeyeceğini belirlemekte bir aşırı yükleme çağrılır. Özel bir "EditPolicy" yetkilendirme ilkesi karara göre belirlenir. Yetkilendirme ilkeleri oluşturma hakkında daha fazla bilgi için bkz. [özel ilke tabanlı yetkilendirme](xref:security/authorization/policies) .
+Aşağıdaki örnekte, güvenli hale getirilme kaynağı özel bir `Document` nesneye yüklenir. `AuthorizeAsync`Geçerli kullanıcının belirtilen belgeyi düzenlemesine izin verilip verilmeyeceğini belirlemekte bir aşırı yükleme çağrılır. Özel bir "EditPolicy" yetkilendirme ilkesi karara göre belirlenir. Yetkilendirme ilkeleri oluşturma hakkında daha fazla bilgi için bkz. [özel ilke tabanlı yetkilendirme](xref:security/authorization/policies) .
 
 > [!NOTE]
-> Aşağıdaki kod örnekleri, kimlik doğrulamasının çalıştırıldığını varsayar ve `User` özelliğini ayarlar.
+> Aşağıdaki kod örnekleri, kimlik doğrulamasının çalıştırıldığını varsayar ve özelliğini ayarlar `User` .
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -96,7 +98,7 @@ Aşağıdaki örnekte, güvenli hale getirilme kaynağı özel `Document` bir ne
 
 Kaynak tabanlı yetkilendirme için bir işleyici yazmak, [düz gereksinimler işleyicisi yazmaktan](xref:security/authorization/policies#security-authorization-policies-based-authorization-handler)çok farklı değildir. Özel bir gereksinim sınıfı oluşturun ve bir gereksinim işleyicisi sınıfı uygulayın. Gereksinim sınıfı oluşturma hakkında daha fazla bilgi için bkz. [Requirements](xref:security/authorization/policies#requirements).
 
-Handler sınıfı hem gereksinim hem de kaynak türünü belirtir. Örneğin, bir `SameAuthorRequirement` ve `Document` kaynağı kullanan bir işleyici aşağıdaki gibidir:
+Handler sınıfı hem gereksinim hem de kaynak türünü belirtir. Örneğin, bir ve kaynağı kullanan bir işleyici `SameAuthorRequirement` `Document` aşağıdaki gibidir:
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -110,9 +112,9 @@ Handler sınıfı hem gereksinim hem de kaynak türünü belirtir. Örneğin, bi
 
 ::: moniker-end
 
-Yukarıdaki örnekte, daha genel `SameAuthorRequirement` `SpecificAuthorRequirement` bir sınıfta özel bir durum olduğunu düşünün. `SpecificAuthorRequirement` Sınıf (gösterilmez), yazarın adını temsil `Name` eden bir özelliği içerir. `Name` Özelliği geçerli kullanıcıya ayarlanabilir.
+Yukarıdaki örnekte, `SameAuthorRequirement` daha genel bir sınıfta özel bir durum olduğunu düşünün `SpecificAuthorRequirement` . `SpecificAuthorRequirement`Sınıf (gösterilmez), `Name` yazarın adını temsil eden bir özelliği içerir. `Name`Özelliği geçerli kullanıcıya ayarlanabilir.
 
-Gereksinimi ve işleyiciyi içine `Startup.ConfigureServices`Kaydet:
+Gereksinimi ve işleyiciyi içine Kaydet `Startup.ConfigureServices` :
 
 ::: moniker range=">= aspnetcore-3.0"
 [!code-csharp[](resourcebased/samples/3_0/ResourceBasedAuthApp2/Startup.cs?name=snippet_ConfigureServicesSample&highlight=4-8,10)]
@@ -132,7 +134,7 @@ CRUD (oluşturma, okuma, güncelleştirme, silme) işlemlerinin sonuçlarını t
 
 [!code-csharp[](resourcebased/samples/3_0/ResourceBasedAuthApp2/Services/DocumentAuthorizationCrudHandler.cs?name=snippet_OperationsClass)]
 
-İşleyici, bir `OperationAuthorizationRequirement` gereksinim ve bir `Document` kaynak kullanılarak aşağıdaki gibi uygulanır:
+İşleyici, bir `OperationAuthorizationRequirement` gereksinim ve bir kaynak kullanılarak aşağıdaki gibi uygulanır `Document` :
 
  ::: moniker range=">= aspnetcore-2.0"
 [!code-csharp[](resourcebased/samples/3_0/ResourceBasedAuthApp2/Services/DocumentAuthorizationCrudHandler.cs?name=snippet_Handler)]
@@ -145,22 +147,22 @@ CRUD (oluşturma, okuma, güncelleştirme, silme) işlemlerinin sonuçlarını t
 
 ::: moniker-end
 
-Önceki işleyici, kaynağı, kullanıcının kimliğini ve gereksinimin `Name` özelliğini kullanarak işlemi doğrular.
+Önceki işleyici, kaynağı, kullanıcının kimliğini ve gereksinimin özelliğini kullanarak işlemi doğrular `Name` .
 
 ## <a name="challenge-and-forbid-with-an-operational-resource-handler"></a>İşletimsel kaynak işleyicisiyle Challenge ve fordeklarasyon
 
 Bu bölümde, Challenge ve fordeklarasyon eylem sonuçlarının nasıl işlendiği ve çekişme ve fordeklarasyonu 'nin nasıl farklı olduğu gösterilmektedir.
 
-İşletimsel bir kaynak işleyicisini çağırmak için, sayfa işleyicinizde veya eyleminde `AuthorizeAsync` çağrılırken işlemi belirtin. Aşağıdaki örnek, kimliği doğrulanmış kullanıcının belirtilen belgeyi görüntülemesine izin verilip verilmeyeceğini belirler.
+İşletimsel bir kaynak işleyicisini çağırmak için, `AuthorizeAsync` sayfa işleyicinizde veya eyleminde çağrılırken işlemi belirtin. Aşağıdaki örnek, kimliği doğrulanmış kullanıcının belirtilen belgeyi görüntülemesine izin verilip verilmeyeceğini belirler.
 
 > [!NOTE]
-> Aşağıdaki kod örnekleri, kimlik doğrulamasının çalıştırıldığını varsayar ve `User` özelliğini ayarlar.
+> Aşağıdaki kod örnekleri, kimlik doğrulamasının çalıştırıldığını varsayar ve özelliğini ayarlar `User` .
 
 ::: moniker range=">= aspnetcore-2.0"
 
 [!code-csharp[](resourcebased/samples/3_0/ResourceBasedAuthApp2/Pages/Document/View.cshtml.cs?name=snippet_DocumentViewHandler&highlight=10-11)]
 
-Yetkilendirme başarılı olursa belgeyi görüntüleme sayfası döndürülür. Yetkilendirme başarısız olursa, ancak kullanıcının kimliği doğrulanırsa, `ForbidResult` döndüren kimlik doğrulama ara yazılımı yetkilendirme başarısız olur. `ChallengeResult` Kimlik doğrulaması gerçekleştirilmesi gerektiğinde döndürülür. Etkileşimli tarayıcı istemcileri için, kullanıcıyı bir oturum açma sayfasına yönlendirmek uygun olabilir.
+Yetkilendirme başarılı olursa belgeyi görüntüleme sayfası döndürülür. Yetkilendirme başarısız olursa, ancak kullanıcının kimliği doğrulanırsa, döndüren `ForbidResult` kimlik doğrulama ara yazılımı yetkilendirme başarısız olur. `ChallengeResult`Kimlik doğrulaması gerçekleştirilmesi gerektiğinde döndürülür. Etkileşimli tarayıcı istemcileri için, kullanıcıyı bir oturum açma sayfasına yönlendirmek uygun olabilir.
 
 ::: moniker-end
 

@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 3/25/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: 0078ed5d4aa30ff7a7b76af8dffd015f2557e165
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: b917671053313c74acfff36518e8f36d5ef2eb22
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "83998659"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405490"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core denetleyici eylemlerine yönlendirme
 
@@ -214,7 +216,7 @@ Yönlendirme ile iki uç nokta eşleşmesi durumunda, yönlendirme aşağıdakil
 * En iyi aday ' ı seçin.
 * Bir özel durum oluşturur.
 
-Örnek:
+Örneğin:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet9)]
 
@@ -1007,7 +1009,7 @@ Rota koleksiyonundaki yollar sıralanır ve eklendikleri sırada işlenir. Bu ne
 
 ### <a name="disambiguating-actions"></a>Kesinleştirme eylemleri
 
-İki eylem yönlendirme aracılığıyla eşleşiyorsa, MVC ' en iyi ' adayı seçmek için bir özel durum oluşturması veya bir özel durum oluşturmak için, MVC 'nin belirsizliğini Örnek:
+İki eylem yönlendirme aracılığıyla eşleşiyorsa, MVC ' en iyi ' adayı seçmek için bir özel durum oluşturması veya bir özel durum oluşturmak için, MVC 'nin belirsizliğini Örneğin:
 
 ```csharp
 public class ProductsController : Controller

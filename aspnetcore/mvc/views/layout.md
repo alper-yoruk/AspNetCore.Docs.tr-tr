@@ -6,17 +6,19 @@ ms.author: riande
 ms.date: 07/30/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: mvc/views/layout
-ms.openlocfilehash: fbae94f315c1bb49f1b04be7e71c841f46826216
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 08e6284a6c5fc8e8926651f6fe873a71df449acb
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82766491"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406660"
 ---
 # <a name="layout-in-aspnet-core"></a>ASP.NET Core düzen
 
@@ -63,15 +65,15 @@ RazorGörünümler bir `Layout` özelliğe sahiptir. Bireysel görünümler bu �
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/_ViewStart.cshtml?highlight=2)]
 
-Belirtilen Düzen tam yol (örneğin, */Pages/Shared/_Layout. cshtml* veya */views/Shared/_Layout. cshtml*) ya da kısmi bir ad kullanabilir (örnek: `_Layout`). Kısmi bir ad sağlandığında, Razor Görünüm altyapısı, kendi standart bulma işlemini kullanarak düzen dosyasını arar. Önce işleyici yönteminin (veya denetleyicinin) bulunduğu klasör, sonra *paylaşılan* klasör tarafından aranır. Bu bulma işlemi, [kısmi görünümleri](xref:mvc/views/partial#partial-view-discovery)bulmak için kullanılan işlemle aynıdır.
+Belirtilen Düzen tam yol (örneğin, */Pages/Shared/_Layout. cshtml* veya */views/Shared/_Layout. cshtml*) ya da kısmi bir ad kullanabilir (örnek: `_Layout` ). Kısmi bir ad sağlandığında, Razor Görünüm altyapısı, kendi standart bulma işlemini kullanarak düzen dosyasını arar. Önce işleyici yönteminin (veya denetleyicinin) bulunduğu klasör, sonra *paylaşılan* klasör tarafından aranır. Bu bulma işlemi, [kısmi görünümleri](xref:mvc/views/partial#partial-view-discovery)bulmak için kullanılan işlemle aynıdır.
 
-Varsayılan olarak, tüm mizanpajın çağırması `RenderBody`gerekir. Çağrısının `RenderBody` yerleştirildiği her yerde, görünümün içerikleri işlenir.
+Varsayılan olarak, tüm mizanpajın çağırması gerekir `RenderBody` . Çağrısının yerleştirildiği her yerde `RenderBody` , görünümün içerikleri işlenir.
 
 <a name="layout-sections-label"></a>
 <!-- https://stackoverflow.com/questions/23327578 -->
 ### <a name="sections"></a>Bölümler
 
-Bir düzen, çağırarak `RenderSection`, isteğe bağlı olarak bir veya daha fazla *bölüme*başvurabilir. Bölümler, belirli sayfa öğelerinin yerleştirilmesi gereken yerleri düzenlemek için bir yol sağlar. Her çağrısı `RenderSection` , bu bölümün gerekli veya isteğe bağlı olup olmadığını belirtebilir:
+Bir düzen, çağırarak, isteğe bağlı olarak bir veya daha fazla *bölüme*başvurabilir `RenderSection` . Bölümler, belirli sayfa öğelerinin yerleştirilmesi gereken yerleri düzenlemek için bir yol sağlar. Her çağrısı, `RenderSection` Bu bölümün gerekli veya isteğe bağlı olup olmadığını belirtebilir:
 
 ```html
 <script type="text/javascript" src="~/scripts/global.js"></script>
@@ -79,9 +81,9 @@ Bir düzen, çağırarak `RenderSection`, isteğe bağlı olarak bir veya daha f
 @RenderSection("Scripts", required: false)
 ```
 
-Gerekli bir bölüm bulunamazsa, bir özel durum oluşturulur. Tek görünümler, `@section` Razor sözdizimini kullanarak bir bölüm içinde işlenecek içeriği belirtir. Bir sayfa veya görünüm bir bölümü tanımlıyorsa, oluşturulması gerekir (veya bir hata oluşur).
+Gerekli bir bölüm bulunamazsa, bir özel durum oluşturulur. Tek görünümler, sözdizimini kullanarak bir bölüm içinde işlenecek içeriği belirtir `@section` Razor . Bir sayfa veya görünüm bir bölümü tanımlıyorsa, oluşturulması gerekir (veya bir hata oluşur).
 
-Razor Sayfalar görünümünde örnek `@section` Tanım:
+`@section`Sayfalar görünümünde örnek tanım Razor :
 
 ```html
 @section Scripts {
@@ -89,7 +91,7 @@ Razor Sayfalar görünümünde örnek `@section` Tanım:
 }
 ```
 
-Yukarıdaki kodda *betikler/Main. js* , bir sayfa veya görünümdeki `scripts` bölümüne eklenir. Aynı uygulamadaki diğer sayfalar veya görünümler bu betiği gerektirmeyebilir ve betikler bölümü tanımlamaz.
+Yukarıdaki kodda *betikler/main.js* `scripts` sayfa veya görünümdeki bölümüne eklenir. Aynı uygulamadaki diğer sayfalar veya görünümler bu betiği gerektirmeyebilir ve betikler bölümü tanımlamaz.
 
 Aşağıdaki biçimlendirme *_ValidationScriptsPartial. cshtml*öğesini Işlemek Için [kısmi etiket yardımcısını](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper) kullanır:
 
@@ -105,17 +107,17 @@ Bir sayfada veya görünümde tanımlanan bölümler yalnızca kendi düzen sayf
 
 ### <a name="ignoring-sections"></a>Bölümler yoksayılıyor
 
-Varsayılan olarak, içerik sayfasındaki gövde ve tüm bölümler Düzen sayfası tarafından işlenmelidir. Görünüm Razor altyapısı, gövdenin ve her bölümün işlenip işlenmeyeceğini izleyerek bunu zorlar.
+Varsayılan olarak, içerik sayfasındaki gövde ve tüm bölümler Düzen sayfası tarafından işlenmelidir. RazorGörünüm altyapısı, gövdenin ve her bölümün işlenip işlenmeyeceğini izleyerek bunu zorlar.
 
 Görünüm altyapısına gövde veya bölümleri yok saymasını bildirmek için `IgnoreBody` ve `IgnoreSection` yöntemlerini çağırın.
 
-Bir Razor sayfadaki gövde ve her bölüm işlenen ya da yoksayıldı olmalıdır.
+Bir sayfadaki gövde ve her bölüm Razor işlenen ya da yoksayıldı olmalıdır.
 
 <a name="viewimports"></a>
 
 ## <a name="importing-shared-directives"></a>Paylaşılan yönergeler içeri aktarılıyor
 
-Görünümler ve sayfalar, ad Razor alanlarını içeri aktarmak ve [bağımlılık ekleme](dependency-injection.md)'yi kullanmak için yönergeleri kullanabilir. Birçok görünüm tarafından paylaşılan yönergeler, ortak bir *_ViewImports. cshtml* dosyasında belirtilebilir. `_ViewImports` Dosya aşağıdaki yönergeleri destekler:
+Görünümler ve sayfalar, Razor ad alanlarını içeri aktarmak ve [bağımlılık ekleme](dependency-injection.md)'yi kullanmak için yönergeleri kullanabilir. Birçok görünüm tarafından paylaşılan yönergeler, ortak bir *_ViewImports. cshtml* dosyasında belirtilebilir. `_ViewImports`Dosya aşağıdaki yönergeleri destekler:
 
 * `@addTagHelper`
 * `@removeTagHelper`
@@ -125,9 +127,9 @@ Görünümler ve sayfalar, ad Razor alanlarını içeri aktarmak ve [bağımlıl
 * `@inherits`
 * `@inject`
 
-Dosya, işlevler ve bölüm Razor tanımları gibi diğer özellikleri desteklemez.
+Dosya Razor , işlevler ve bölüm tanımları gibi diğer özellikleri desteklemez.
 
-Örnek `_ViewImports.cshtml` dosya:
+Örnek `_ViewImports.cshtml` Dosya:
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/_ViewImports.cshtml)]
 
@@ -135,14 +137,14 @@ ASP.NET Core MVC uygulamasının *_ViewImports. cshtml* dosyası genellikle *Say
 
 Örneğin, şunu varsayın:
 
-* Kök düzeyi *_ViewImports. cshtml* dosyası ve `@addTagHelper *, MyTagHelper1`içerir `@model MyModel1` .
-* Bir alt klasör *_ViewImports. cshtml* dosyası `@model MyModel2` ve `@addTagHelper *, MyTagHelper2`içerir.
+* Kök düzeyi *_ViewImports. cshtml* dosyası ve içerir `@model MyModel1` `@addTagHelper *, MyTagHelper1` .
+* Bir alt klasör *_ViewImports. cshtml* dosyası `@model MyModel2` ve içerir `@addTagHelper *, MyTagHelper2` .
 
-Alt klasördeki sayfaların ve görünümlerin her ikisi de etiket yardımcılarını ve `MyModel2` modeline erişimi olur.
+Alt klasördeki sayfaların ve görünümlerin her ikisi de etiket yardımcılarını ve modeline erişimi olur `MyModel2` .
 
 Dosya hiyerarşisinde birden çok *_ViewImports. cshtml* dosyası bulunursa, yönergelerin birleştirilmiş davranışı şunlardır:
 
-* `@addTagHelper`, `@removeTagHelper`: tüm çalıştırma, sırasıyla
+* `@addTagHelper`, `@removeTagHelper` : tüm çalıştırma, sırasıyla
 * `@tagHelperPrefix`: görünümün en yakın olanı, diğerlerini geçersiz kılar
 * `@model`: görünümün en yakın olanı, diğerlerini geçersiz kılar
 * `@inherits`: görünümün en yakın olanı, diğerlerini geçersiz kılar

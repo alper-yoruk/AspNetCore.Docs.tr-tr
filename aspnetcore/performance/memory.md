@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 4/05/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: performance/memory
-ms.openlocfilehash: db6f8e867fc83a211170aa59f5bad604d9c2730d
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: d261a26de7b9ba77e5f9787ae2eb37293257a0fc
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82776122"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406400"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>ASP.NET Core 'de bellek yönetimi ve çöp toplama (GC)
 
@@ -135,7 +137,7 @@ Yukarıdaki grafik şunları gösterir:
 * **Iş Istasyonu GC**: Masaüstü için iyileştirildi.
 * **Sunucu GC**. ASP.NET Core uygulamalar için varsayılan GC. Sunucu için iyileştirildi.
 
-GC modu proje dosyasında veya yayımlanan uygulamanın *runtimeconfig. JSON* dosyasında açıkça ayarlanabilir. Aşağıdaki biçimlendirme proje dosyasındaki ayarı `ServerGarbageCollection` gösterir:
+GC modu, proje dosyasında veya yayımlanan uygulamanın dosyası *runtimeconfig.js* açık olarak ayarlanabilir. Aşağıdaki biçimlendirme `ServerGarbageCollection` Proje dosyasındaki ayarı gösterir:
 
 ```xml
 <PropertyGroup>
@@ -143,7 +145,7 @@ GC modu proje dosyasında veya yayımlanan uygulamanın *runtimeconfig. JSON* do
 </PropertyGroup>
 ```
 
-Proje `ServerGarbageCollection` dosyasında değiştirme uygulamanın yeniden oluşturulmasını gerektirir.
+`ServerGarbageCollection`Proje dosyasında değiştirme uygulamanın yeniden oluşturulmasını gerektirir.
 
 **Note:** Sunucu çöp toplama, tek çekirdekli **makinelerde kullanılamaz.** Daha fazla bilgi için bkz. <xref:System.Runtime.GCSettings.IsServerGC>.
 
@@ -186,7 +188,7 @@ public ActionResult<string> GetStaticString()
 Yukarıdaki kod:
 
 * Tipik bir bellek sızıntısı örneğidir.
-* Sık yapılan çağrılar sayesinde, işlem bir `OutOfMemory` özel durumla çökene kadar uygulama belleğinin artmasına neden olur.
+* Sık yapılan çağrılar sayesinde, işlem bir özel durumla çökene kadar uygulama belleğinin artmasına neden olur `OutOfMemory` .
 
 ![önceki grafik](memory/_static/eternal.png)
 
@@ -196,13 +198,13 @@ Yukarıdaki kod:
 * GC, bellek baskısı arttıkça 2. nesil bir koleksiyon çağırarak belleği boşaltmaya çalışır.
 * GC, sızdırılan belleği serbest olamaz. Ayrılan ve çalışma kümesi zaman ile artar.
 
-Önbelleğe alma gibi bazı senaryolar, bellek baskısı serbest bırakılana kadar nesne başvurularının tutulmasını gerektirir. <xref:System.WeakReference> Sınıfı bu tür bir önbelleğe alma kodu için kullanılabilir. Bir `WeakReference` nesne, bellek baskılarına altında toplanır. Varsayılan <xref:Microsoft.Extensions.Caching.Memory.IMemoryCache> kullanım `WeakReference`uygulamasıdır.
+Önbelleğe alma gibi bazı senaryolar, bellek baskısı serbest bırakılana kadar nesne başvurularının tutulmasını gerektirir. <xref:System.WeakReference>Sınıfı bu tür bir önbelleğe alma kodu için kullanılabilir. Bir `WeakReference` nesne, bellek baskılarına altında toplanır. Varsayılan <xref:Microsoft.Extensions.Caching.Memory.IMemoryCache> kullanım uygulamasıdır `WeakReference` .
 
 ### <a name="native-memory"></a>Yerel bellek
 
 Bazı .NET Core nesneleri yerel belleğe bağımlıdır. Yerel bellek GC tarafından **toplanamaz.** Yerel bellek kullanan .NET nesnesi yerel kod kullanarak onu serbest vermelidir.
 
-.NET, <xref:System.IDisposable> geliştiricilerin yerel bellek yayınlamasına izin vermek için arabirim sağlar. <xref:System.IDisposable.Dispose*> Çağrılmasa bile, [Sonlandırıcı](/dotnet/csharp/programming-guide/classes-and-structs/destructors) çalıştırıldığında doğru uygulanmış sınıflar çağrısı `Dispose` .
+.NET, <xref:System.IDisposable> geliştiricilerin yerel bellek yayınlamasına izin vermek için arabirim sağlar. <xref:System.IDisposable.Dispose*>Çağrılmasa bile, Sonlandırıcı çalıştırıldığında doğru uygulanmış sınıflar çağrısı `Dispose` . [finalizer](/dotnet/csharp/programming-guide/classes-and-structs/destructors)
 
 Aşağıdaki kodu inceleyin:
 
@@ -217,7 +219,7 @@ public void GetFileProvider()
 
 [Physicalfileprovider](/dotnet/api/microsoft.extensions.fileproviders.physicalfileprovider?view=dotnet-plat-ext-3.0) yönetilen bir sınıftır, bu nedenle isteğin sonunda herhangi bir örnek toplanacaktır.
 
-Aşağıdaki görüntüde, `fileprovider` API 'yi sürekli çağırırken bellek profili gösterilmektedir.
+Aşağıdaki görüntüde, API 'yi sürekli çağırırken bellek profili gösterilmektedir `fileprovider` .
 
 ![önceki grafik](memory/_static/fileprovider.png)
 
@@ -226,7 +228,7 @@ Yukarıdaki grafikte, bu sınıfın uygulanmasıyla ilgili olarak, bellek kullan
 Kullanıcı kodunda, aşağıdakilerden biri ile aynı sızıntı gerçekleşecektir:
 
 * Sınıf doğru şekilde serbest bırakılmıyor.
-* Atılan bağımlı nesnelerin `Dispose`yöntemini çağırmak için foralıtıon.
+* Atılan bağımlı nesnelerin yöntemini çağırmak için foralıtıon `Dispose` .
 
 ### <a name="large-objects-heap"></a>Büyük nesne yığını
 
@@ -248,7 +250,7 @@ GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.Compa
 GC.Collect();
 ```
 
-LOH 'yi düzenleme hakkında bilgi için bkz <xref:System.Runtime.GCSettings.LargeObjectHeapCompactionMode> ..
+<xref:System.Runtime.GCSettings.LargeObjectHeapCompactionMode>LOH 'yi düzenleme hakkında bilgi için bkz..
 
 .NET Core 3,0 ve üstünü kullanan kapsayıcılarda LOH otomatik olarak sıkıştırılır.
 
@@ -262,11 +264,11 @@ public int GetLOH1(int size)
 }
 ```
 
-Aşağıdaki grafikte, en fazla yük altında `/api/loh/84975` uç nokta çağırma bellek profili gösterilmektedir:
+Aşağıdaki grafikte `/api/loh/84975` , en fazla yük altında uç nokta çağırma bellek profili gösterilmektedir:
 
 ![önceki grafik](memory/_static/loh1.png)
 
-Aşağıdaki grafik, `/api/loh/84976` uç noktayı çağırmanın bellek profilini gösterir ve *yalnızca bir bayt daha*ayırarak aşağıda verilmiştir:
+Aşağıdaki grafik, uç noktayı çağırmanın bellek profilini gösterir `/api/loh/84976` ve *yalnızca bir bayt daha*ayırarak aşağıda verilmiştir:
 
 ![önceki grafik](memory/_static/loh2.png)
 
@@ -299,11 +301,11 @@ Yanlış kullanımı <xref:System.Net.Http.HttpClient> , kaynak sızıntısına 
 * , Bellekten daha fazla.
 * Bellekten sızmış olduğunda daha sorunlu sorun vardır.
 
-Deneyimli .NET geliştiricileri, uygulayan <xref:System.IDisposable.Dispose*> <xref:System.IDisposable>nesneler üzerinde arama gerektiğini bilir. `IDisposable` Genellikle, elde edilen nesneleri atan bellek ya da sızdırılan sistem kaynakları ile ilgili olarak elden atma.
+Deneyimli .NET geliştiricileri <xref:System.IDisposable.Dispose*> , uygulayan nesneler üzerinde arama gerektiğini bilir <xref:System.IDisposable> . Genellikle, elde edilen nesneleri atan `IDisposable` bellek ya da sızdırılan sistem kaynakları ile ilgili olarak elden atma.
 
-`HttpClient`uygular `IDisposable`, ancak her çağrıdan **çıkarılmamalıdır.** Bunun yerine `HttpClient` yeniden kullanılmalıdır.
+`HttpClient`uygular `IDisposable` , ancak her **not** çağrıdan çıkarılmamalıdır. Bunun yerine yeniden kullanılmalıdır `HttpClient` .
 
-Aşağıdaki uç nokta her istekte yeni `HttpClient` bir örnek oluşturur ve atar:
+Aşağıdaki uç nokta her istekte yeni bir örnek oluşturur ve atar `HttpClient` :
 
 ```csharp
 [HttpGet("httpclient1")]
@@ -331,9 +333,9 @@ System.Net.Http.HttpRequestException: Only one usage of each socket address
     CancellationToken cancellationToken)
 ```
 
-`HttpClient` Örnekler atılsa da, gerçek ağ bağlantısının işletim sistemi tarafından yayımlanması zaman alır. Sürekli olarak yeni bağlantılar oluşturarak _bağlantı noktaları tükenmesi_ oluşur. Her istemci bağlantısı kendi istemci bağlantı noktasını gerektirir.
+`HttpClient`Örnekler atılsa da, gerçek ağ bağlantısının işletim sistemi tarafından yayımlanması zaman alır. Sürekli olarak yeni bağlantılar oluşturarak _bağlantı noktaları tükenmesi_ oluşur. Her istemci bağlantısı kendi istemci bağlantı noktasını gerektirir.
 
-Bağlantı noktası tükenmesi 'ni önlemenin bir yolu aynı `HttpClient` örneği yeniden kullanmaktır:
+Bağlantı noktası tükenmesi 'ni önlemenin bir yolu aynı örneği yeniden kullanmaktır `HttpClient` :
 
 ```csharp
 private static readonly HttpClient _httpClient = new HttpClient();
@@ -346,16 +348,16 @@ public async Task<int> GetHttpClient2(string url)
 }
 ```
 
-Uygulama `HttpClient` durdurulduğunda örnek serbest bırakılır. Bu örnek her bir atılabilir kaynağının her bir kullanım sonrasında atılmamalıdır.
+`HttpClient`Uygulama durdurulduğunda örnek serbest bırakılır. Bu örnek her bir atılabilir kaynağının her bir kullanım sonrasında atılmamalıdır.
 
-Bir `HttpClient` örneğin yaşam süresini işlemenin daha iyi bir yolu için aşağıdakilere bakın:
+Bir örneğin yaşam süresini işlemenin daha iyi bir yolu için aşağıdakilere bakın `HttpClient` :
 
 * [HttpClient ve ömür yönetimi](/aspnet/core/fundamentals/http-requests#httpclient-and-lifetime-management)
 * [HTTPClient Factory blogu](https://devblogs.microsoft.com/aspnet/asp-net-core-2-1-preview1-introducing-httpclient-factory/)
  
 ### <a name="object-pooling"></a>Nesne havuzu oluşturma
 
-Önceki örnek, `HttpClient` örneğin tüm istekler tarafından nasıl statik hale getirilebilir ve yeniden kullanılabileceğini gösterdi. Yeniden kullanım, kaynak dışı çalışmayı önler.
+Önceki örnek, `HttpClient` Örneğin tüm istekler tarafından nasıl statik hale getirilebilir ve yeniden kullanılabileceğini gösterdi. Yeniden kullanım, kaynak dışı çalışmayı önler.
 
 Nesne havuzu:
 
@@ -366,7 +368,7 @@ Havuz, iş parçacıkları genelinde ayrılmaları ve yayımlanmaları önceden 
 
 [Microsoft. Extensions. ObjectPool](https://www.nuget.org/packages/Microsoft.Extensions.ObjectPool/) NuGet paketi, bu tür havuzları yönetmeye yardımcı olan sınıflar içerir.
 
-Aşağıdaki API uç noktası her istekte `byte` rastgele sayılarla doldurulmuş bir arabellek başlatır:
+Aşağıdaki API uç noktası `byte` her istekte rastgele sayılarla doldurulmuş bir arabellek başlatır:
 
 ```csharp
         [HttpGet("array/{size}")]
@@ -386,7 +388,7 @@ Aşağıdaki grafik, önceki API 'nin orta yük ile çağrılmasını gösterir:
 
 Yukarıdaki grafikte, nesil 0 toplamaları yaklaşık olarak saniyede bir kez gerçekleşir.
 
-Önceki kod, `byte` [arraypool\<T>](xref:System.Buffers.ArrayPool`1)kullanılarak arabelleği havuzlayarak iyileştirilebilir. Bir statik örnek istekler arasında yeniden kullanılır.
+Önceki kod, `byte` [arraypool \<T> ](xref:System.Buffers.ArrayPool`1)kullanılarak arabelleği havuzlayarak iyileştirilebilir. Bir statik örnek istekler arasında yeniden kullanılır.
 
 Bu yaklaşımla farklı olan özellikler, havuza alınmış bir nesnenin API 'den döndürüldüğü şeydir. Bunun anlamı:
 
@@ -398,7 +400,7 @@ Nesnenin elden çıkarılmasını ayarlamak için:
 * Havuza alınmış diziyi bir atılabilir nesnesinde yalıtma.
 * Havuza alınmış nesneyi [HttpContext. Response. RegisterForDispose](xref:Microsoft.AspNetCore.Http.HttpResponse.RegisterForDispose*)ile kaydedin.
 
-`RegisterForDispose`, yalnızca HTTP isteği tamamlandığında `Dispose`serbest bırakılacak şekilde hedef nesneye çağrı yapılır.
+`RegisterForDispose`, `Dispose` yalnızca http isteği tamamlandığında serbest bırakılacak şekilde hedef nesneye çağrı yapılır.
 
 ```csharp
 private static ArrayPool<byte> _arrayPool = ArrayPool<byte>.Create();

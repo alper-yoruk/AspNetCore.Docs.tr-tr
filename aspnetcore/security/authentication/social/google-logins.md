@@ -7,17 +7,19 @@ ms.custom: mvc, seodec18
 ms.date: 03/19/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/google-logins
-ms.openlocfilehash: 8b1eee7ff088fb1229ec1d2dd538ea4f01e094c3
-ms.sourcegitcommit: 6c7a149168d2c4d747c36de210bfab3abd60809a
+ms.openlocfilehash: ba0b9a0da30f761f12f6015dace5ba8046535761
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/09/2020
-ms.locfileid: "83003101"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405425"
 ---
 # <a name="google-external-login-setup-in-aspnet-core"></a>ASP.NET Core 'de Google dış oturum açma kurulumu
 
@@ -39,7 +41,7 @@ Bu öğreticide, kullanıcıların [önceki sayfada](xref:security/authenticatio
 Google istemci KIMLIĞI ve gizli anahtar değerleri gibi gizli ayarları [gizli yönetici](xref:security/app-secrets)olarak depolayın. Bu örnek için aşağıdaki adımları kullanın:
 
 1. [Gizli depolamayı etkinleştirme](xref:security/app-secrets#enable-secret-storage)konusundaki yönergeler temelinde projeyi gizli depolama için başlatın.
-1. Gizli anahtar ayarlarını gizli anahtarlar ve `Authentication:Google:ClientId` `Authentication:Google:ClientSecret`gizli anahtarlar ile yerel gizli dizi deposunda depolayın:
+1. Gizli anahtar ayarlarını gizli anahtarlar ve gizli anahtarlar ile yerel gizli dizi deposunda `Authentication:Google:ClientId` depolayın `Authentication:Google:ClientSecret` :
 
     ```dotnetcli
     dotnet user-secrets set "Authentication:Google:ClientId" "<client-id>"
@@ -52,7 +54,7 @@ API [konsolunuzun](https://console.developers.google.com/apis/dashboard)API kiml
 
 ## <a name="configure-google-authentication"></a>Google kimlik doğrulamasını yapılandırma
 
-Google hizmetini şu şekilde `Startup.ConfigureServices`ekleyin:
+Google hizmetini şu şekilde ekleyin `Startup.ConfigureServices` :
 
 [!code-csharp[](~/security/authentication/social/social-code/3.x/StartupGoogle3x.cs?highlight=11-19)]
 
@@ -68,20 +70,20 @@ Google hizmetini şu şekilde `Startup.ConfigureServices`ekleyin:
 
 [!INCLUDE[](includes/chain-auth-providers.md)]
 
-Google kimlik <xref:Microsoft.AspNetCore.Authentication.Google.GoogleOptions> doğrulaması tarafından desteklenen yapılandırma seçenekleri hakkında daha fazla bilgi için bkz. API başvurusu. Bu, Kullanıcı hakkında farklı bilgiler istemek için kullanılabilir.
+<xref:Microsoft.AspNetCore.Authentication.Google.GoogleOptions>Google kimlik doğrulaması tarafından desteklenen yapılandırma seçenekleri hakkında daha fazla bilgi için bkz. API başvurusu. Bu, Kullanıcı hakkında farklı bilgiler istemek için kullanılabilir.
 
 ## <a name="change-the-default-callback-uri"></a>Varsayılan geri çağırma URI 'sini değiştirme
 
-URI segmenti `/signin-google` , Google kimlik doğrulama sağlayıcısı 'nın varsayılan geri çağırması olarak ayarlanır. [GoogleOptions](/dotnet/api/microsoft.aspnetcore.authentication.google.googleoptions) sınıfının devralınmış [remoteauthenticationoptions. callbackpath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) özelliği aracılığıyla Google kimlik doğrulama ara yazılımını YAPıLANDıRıRKEN varsayılan geri çağırma URI 'sini değiştirebilirsiniz.
+URI segmenti, `/signin-google` Google kimlik doğrulama sağlayıcısı 'nın varsayılan geri çağırması olarak ayarlanır. [GoogleOptions](/dotnet/api/microsoft.aspnetcore.authentication.google.googleoptions) sınıfının devralınmış [remoteauthenticationoptions. callbackpath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) özelliği aracılığıyla Google kimlik doğrulama ara yazılımını YAPıLANDıRıRKEN varsayılan geri çağırma URI 'sini değiştirebilirsiniz.
 
 ## <a name="troubleshooting"></a>Sorun giderme
 
 * Oturum açma işe yaramazsa ve herhangi bir hata alamıyorsanız, sorunu ayıklamanın daha kolay olması için geliştirme moduna geçin.
-* Identity `services.AddIdentity` Çağrısı yaparak yapılandırılmamışsa `ConfigureServices`, ArgumentException 'de sonuçların kimlik doğrulaması deneniyor *: ' signınscheme ' seçeneğinin sağlanması gerekir*. Bu öğreticide kullanılan proje şablonu bunun yapılmasını sağlar.
+* IdentityÇağrısı yaparak yapılandırılmamışsa `services.AddIdentity` `ConfigureServices` , ArgumentException 'de sonuçların kimlik doğrulaması deneniyor *: ' signınscheme ' seçeneğinin sağlanması gerekir*. Bu öğreticide kullanılan proje şablonu bunun yapılmasını sağlar.
 * Site veritabanı ilk geçiş uygulanarak oluşturulmadıysa, *istek hatasını Işlerken bir veritabanı işlemi başarısız oldu* . Veritabanını oluşturmak için **geçişleri Uygula** ' yı seçin ve hatanın ötesinde devam etmek için sayfayı yenileyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 * Bu makalede, Google ile kimlik doğrulaması yapabilirsiniz. [Önceki sayfada](xref:security/authentication/social/index)listelenen diğer sağlayıcılarla kimlik doğrulaması yapmak için benzer bir yaklaşımı izleyebilirsiniz.
-* Uygulamayı Azure `ClientSecret` 'da yayımladıktan sonra Google API konsolundaki öğesini sıfırlayın.
-* `Authentication:Google:ClientId` Ve `Authentication:Google:ClientSecret` Azure Portal uygulama ayarları olarak ayarlayın. Yapılandırma sistemi, ortam değişkenlerinden anahtarları okumak üzere ayarlanır.
+* Uygulamayı Azure 'da yayımladıktan sonra `ClientSecret` Google API konsolundaki öğesini sıfırlayın.
+* `Authentication:Google:ClientId`Ve `Authentication:Google:ClientSecret` Azure Portal uygulama ayarları olarak ayarlayın. Yapılandırma sistemi, ortam değişkenlerinden anahtarları okumak üzere ayarlanır.

@@ -7,17 +7,19 @@ ms.custom: mvc
 ms.date: 01/21/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/azure-ad-b2c
-ms.openlocfilehash: d62889ba6dba6748ce3d047f0d37b3a904199496
-ms.sourcegitcommit: 4a9321db7ca4e69074fa08a678dcc91e16215b1e
+ms.openlocfilehash: 4933203b8bdd8f653268c1df7ff83b8e9423341f
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/06/2020
-ms.locfileid: "82850441"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405074"
 ---
 # <a name="cloud-authentication-with-azure-active-directory-b2c-in-aspnet-core"></a>ASP.NET Core Azure Active Directory B2C ile bulut kimlik doğrulaması
 
@@ -58,7 +60,7 @@ Aşağıdaki değerleri kullanın:
 | **Adı**                      | *&lt;uygulama adı&gt;*        | Uygulamanızı tüketicilere açıklayan uygulama için bir **ad** girin.                                                                                                                                 |
 | **Web uygulamasını / web API'sini dahil etme** | Yes                       |                                                                                                                                                                                                    |
 | **Örtük akışa izin verme**       | Yes                       |                                                                                                                                                                                                    |
-| **Yanıt URL'si**                 | `https://localhost:44300/signin-oidc` | Yanıt URL'leri, Azure AD B2C'nin, uygulamanız tarafından istenen belirteçleri döndürdüğü uç noktalardır. Visual Studio, kullanılacak yanıt URL 'sini sağlar. Şu an için formunu `https://localhost:44300/signin-oidc` doldurun için yazın. |
+| **Yanıt URL'si**                 | `https://localhost:44300/signin-oidc` | Yanıt URL'leri, Azure AD B2C'nin, uygulamanız tarafından istenen belirteçleri döndürdüğü uç noktalardır. Visual Studio, kullanılacak yanıt URL 'sini sağlar. Şu an için `https://localhost:44300/signin-oidc` formunu doldurun için yazın. |
 | **Uygulama Kimliği URI'si**                | Boş bırakın               | Bu öğretici için gerekli değildir.                                                                                                                                                                    |
 | **Yerel istemci ekle**     | No                        |                                                                                                                                                                                                    |
 
@@ -103,18 +105,18 @@ Visual Studio 'da:
 B2C uygulama özellikleri hala açık olan tarayıcı penceresine geri dönün. Daha önce belirtilen geçici **yanıt URL** 'Sini Visual Studio 'dan kopyalanmış değerle değiştirin. Pencerenin üst kısmındaki **Kaydet** ' i seçin.
 
 > [!TIP]
-> Yanıt URL 'sini kopyalamadıysanız, Web projesi özelliklerindeki hata ayıklama sekmesinden HTTPS adresini kullanın ve *appSettings. JSON*' dan **callbackpath** değerini ekleyin.
+> Yanıt URL 'sini kopyalamadıysanız, Web projesi özelliklerindeki hata ayıklama sekmesinden HTTPS adresini kullanın ve *appsettings.js*' den **callbackpath** değerini ekleyin.
 
 ## <a name="configure-policies"></a>İlkeleri yapılandırma
 
 [Kaydolma veya oturum açma ilkesi oluşturmak](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions)için Azure AD B2C belgelerindeki adımları kullanın ve ardından [bir parola sıfırlama ilkesi oluşturun](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions). ** Identity Sağlayıcılar**, **kaydolma öznitelikleri**ve **uygulama talepleri**için belgelerde verilen örnek değerleri kullanın. Belgelerde açıklandığı şekilde ilkeleri test etmek için **Şimdi Çalıştır** düğmesini kullanmak isteğe bağlıdır.
 
 > [!WARNING]
-> İlke adlarının, bu ilkeler Visual Studio 'daki **kimlik doğrulaması Değiştir** iletişim kutusunda kullanıldığından emin olun. İlke adları *appSettings. JSON*içinde doğrulanabilir.
+> İlke adlarının, bu ilkeler Visual Studio 'daki **kimlik doğrulaması Değiştir** iletişim kutusunda kullanıldığından emin olun. İlke adları *üzerindeappsettings.js*doğrulanabilir.
 
 ## <a name="configure-the-underlying-openidconnectoptionsjwtbearercookie-options"></a>Temeldeki Openıdconnectoptions/Jwttaşıyıcı/tanımlama bilgisi seçeneklerini yapılandırın
 
-Temel alınan seçenekleri doğrudan yapılandırmak için, içinde `Startup.ConfigureServices`uygun düzen sabitini kullanın:
+Temel alınan seçenekleri doğrudan yapılandırmak için, içinde uygun düzen sabitini kullanın `Startup.ConfigureServices` :
 
 ```csharp
 services.Configure<OpenIdConnectOptions>(

@@ -8,17 +8,19 @@ ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: host-and-deploy/iis/development-time-iis-support
-ms.openlocfilehash: 06c215156cdfa9bc1ae6ac2eb21a3f739a309bed
-ms.sourcegitcommit: 6a71b560d897e13ad5b61d07afe4fcb57f8ef6dc
+ms.openlocfilehash: d922b2eb4d00a252b3e7da2f00de8b4571359b20
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/09/2020
-ms.locfileid: "84106786"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406439"
 ---
 # <a name="development-time-iis-support-in-visual-studio-for-aspnet-core"></a>ASP.NET Core için Visual Studio'da geliştirme zamanı IIS desteği
 
@@ -28,7 +30,7 @@ ms.locfileid: "84106786"
 
 Bu makalede, Windows Server 'da IIS ile çalışan ASP.NET Core hata ayıklama için [Visual Studio](https://visualstudio.microsoft.com) desteği açıklanmaktadır. Bu konu başlığı altında, bu senaryonun etkinleştirilmesi ve bir projenin kurulması anlatılmaktadır.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [Windows için Visual Studio](https://visualstudio.microsoft.com/downloads/)
 * **ASP.net ve Web geliştirme** iş yükü
@@ -91,7 +93,7 @@ Geliştirme zamanı IIS desteği eklemek için yeni bir başlatma profili oluşt
 1. Visual Studio 2019 veya sonraki sürümlerde **barındırma modeli** ayarı için, proje tarafından kullanılan barındırma modelini kullanmak üzere **varsayılan** ' ı seçin. Proje, `<AspNetCoreHostingModel>` Proje dosyasında özelliği ayarlarsa, özelliğin değeri ( `InProcess` veya `OutOfProcess` ) kullanılır. Özellik mevcut değilse, uygulamanın varsayılan barındırma modeli, işlem içi kullanılır. Uygulama, uygulamanın normal barındırma modelinden farklı bir açık barındırma modeli ayarı gerektiriyorsa, **barındırma modelini** gereken ya da gerektiği şekilde ayarlayın `In Process` `Out Of Process` .
 1. Profili kaydedin.
 
-Visual Studio kullanmadığınız durumlarda, *Özellikler* klasöründeki [launchsettings. JSON](https://json.schemastore.org/launchsettings) dosyasına el ile bir başlatma profili ekleyin. Aşağıdaki örnek, HTTPS protokolünü kullanmak için profili yapılandırır:
+Visual Studio kullanmadığınız durumlarda, *Özellikler* klasöründeki [launchSettings.js](https://json.schemastore.org/launchsettings) dosya için el ile bir başlatma profili ekleyin. Aşağıdaki örnek, HTTPS protokolünü kullanmak için profili yapılandırır:
 
 ```json
 {
@@ -143,7 +145,7 @@ Güvenilmeyen bir geliştirme sertifikası kullanılırsa, tarayıcı güvenilme
 
 Bu makalede, Windows Server 'da IIS ile çalışan ASP.NET Core hata ayıklama için [Visual Studio](https://visualstudio.microsoft.com) desteği açıklanmaktadır. Bu konu başlığı altında, bu senaryonun etkinleştirilmesi ve bir projenin kurulması anlatılmaktadır.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [Windows için Visual Studio](https://visualstudio.microsoft.com/downloads/)
 * **ASP.net ve Web geliştirme** iş yükü
@@ -206,7 +208,7 @@ Geliştirme zamanı IIS desteği eklemek için yeni bir başlatma profili oluşt
 1. Visual Studio 2019 veya sonraki sürümlerde **barındırma modeli** ayarı için, proje tarafından kullanılan barındırma modelini kullanmak üzere **varsayılan** ' ı seçin. Proje, `<AspNetCoreHostingModel>` Proje dosyasında özelliği ayarlarsa, özelliğin değeri ( `InProcess` veya `OutOfProcess` ) kullanılır. Özellik mevcut değilse, uygulamanın varsayılan barındırma modeli kullanılır ve bu işlem, işlem dışı olur. Uygulama, uygulamanın normal barındırma modelinden farklı bir açık barındırma modeli ayarı gerektiriyorsa, **barındırma modelini** gereken ya da gerektiği şekilde ayarlayın `In Process` `Out Of Process` .
 1. Profili kaydedin.
 
-Visual Studio kullanmadığınız durumlarda, *Özellikler* klasöründeki [launchsettings. JSON](https://json.schemastore.org/launchsettings) dosyasına el ile bir başlatma profili ekleyin. Aşağıdaki örnek, HTTPS protokolünü kullanmak için profili yapılandırır:
+Visual Studio kullanmadığınız durumlarda, *Özellikler* klasöründeki [launchSettings.js](https://json.schemastore.org/launchsettings) dosya için el ile bir başlatma profili ekleyin. Aşağıdaki örnek, HTTPS protokolünü kullanmak için profili yapılandırır:
 
 ```json
 {

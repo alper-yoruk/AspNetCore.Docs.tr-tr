@@ -8,17 +8,19 @@ ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: security/authentication/twitter-logins
-ms.openlocfilehash: c6498704214de5e805c9bf57033529d4acc5fd3e
-ms.sourcegitcommit: 70e5f982c218db82aa54aa8b8d96b377cfc7283f
+ms.openlocfilehash: 61c983de33b91a16ad207d8a350daf4859c89eaf
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 05/04/2020
-ms.locfileid: "82775797"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85406101"
 ---
 # <a name="twitter-external-sign-in-setup-with-aspnet-core"></a>ASP.NET Core ile Twitter dışarıdan oturum açma kurulumu
 
@@ -38,7 +40,7 @@ Bu örnek, [önceki sayfada](xref:security/authentication/social/index)oluşturu
 
 * Microsoft. AspNetCore.Identity Kullanıcıların varsayılan olarak bir e-posta adresi olmasını gerektirir. **İzinler** sekmesine gidin, **Düzenle** düğmesine tıklayın ve **kullanıcılardan e-posta adresi iste**' nin yanındaki kutuyu işaretleyin.
 
-* **Geri arama URL 'leri** `https://webapp128.azurewebsites.net/signin-twitter`alanına `/signin-twitter` eklenen geliştirme URI 'nizi girin (örneğin:). Bu örnekte daha sonra yapılandırılan Twitter kimlik doğrulama şeması, OAuth akışını uygulamak için `/signin-twitter` rotadaki istekleri otomatik olarak işler.
+* `/signin-twitter` **Geri arama URL 'leri** ALANıNA eklenen geliştirme URI 'nizi girin (örneğin: `https://webapp128.azurewebsites.net/signin-twitter` ). Bu örnekte daha sonra yapılandırılan Twitter kimlik doğrulama şeması, `/signin-twitter` OAuth akışını uygulamak için rotadaki istekleri otomatik olarak işler.
 
   > [!NOTE]
   > URI segmenti `/signin-twitter` Twitter kimlik doğrulama sağlayıcısının varsayılan geri çağırması olarak ayarlanır. Twitter kimlik doğrulama ara [yazılımını, '](/dotnet/api/microsoft.aspnetcore.authentication.twitter.twitteroptions) ın devralınan [remoteauthenticationoptions. callbackpath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) özelliğini kullanarak YAPıLANDıRıRKEN varsayılan geri çağırma URI 'sini değiştirebilirsiniz.
@@ -50,7 +52,7 @@ Bu örnek, [önceki sayfada](xref:security/authentication/social/index)oluşturu
 Twitter tüketicisi API anahtarı ve gizli dizi [Yöneticisi](xref:security/app-secrets)ile gizli dizi gibi hassas ayarları depolayın. Bu örnek için aşağıdaki adımları kullanın:
 
 1. [Gizli depolamayı etkinleştirme](xref:security/app-secrets#enable-secret-storage)konusundaki yönergeler temelinde projeyi gizli depolama için başlatın.
-1. Gizli ayarları gizli anahtar deposunda gizli anahtarları `Authentication:Twitter:ConsumerKey` ve `Authentication:Twitter:ConsumerSecret`bunlarla depolayın:
+1. Gizli ayarları gizli anahtar deposunda gizli anahtarları ve bunlarla depolayın `Authentication:Twitter:ConsumerKey` `Authentication:Twitter:ConsumerSecret` :
 
     ```dotnetcli
     dotnet user-secrets set "Authentication:Twitter:ConsumerAPIKey" "<consumer-api-key>"
@@ -93,13 +95,13 @@ Rather in the twitter setup, you can provide an External sign-in homepage. The e
 
 ## <a name="troubleshooting"></a>Sorun giderme
 
-* **Yalnızca 2. x ASP.NET Core:** Identity ' De `services.AddIdentity` `ConfigureServices`çağırarak yapılandırılmamışsa, kimlik doğrulamaya çalışmak ArgumentException Ile sonuçlanır *: ' signınscheme ' seçeneği sağlanmalıdır*. Bu örnekte kullanılan proje şablonu bunun yapılmasını sağlar.
+* **Yalnızca 2. x ASP.NET Core:** Identity `services.AddIdentity` ' De çağırarak yapılandırılmamışsa `ConfigureServices` , kimlik doğrulamaya çalışmak ArgumentException ile sonuçlanır *: ' signınscheme ' seçeneği sağlanmalıdır*. Bu örnekte kullanılan proje şablonu bunun yapılmasını sağlar.
 * Site veritabanı ilk geçiş uygulanarak oluşturulmadıysa, *istek hatasını Işlerken bir veritabanı işlemi başarısız* olur. Veritabanını oluşturmak için **geçişleri Uygula** ' ya dokunun ve hatanın ötesinde devam etmek için yenileyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
 * Bu makalede Twitter ile kimlik doğrulaması yapabilirsiniz. [Önceki sayfada](xref:security/authentication/social/index)listelenen diğer sağlayıcılarla kimlik doğrulaması yapmak için benzer bir yaklaşımı izleyebilirsiniz.
 
-* Web sitenizi Azure Web App 'e yayımladığınızda, `ConsumerSecret` Twitter geliştirici portalındaki ' ı sıfırlamanız gerekir.
+* Web sitenizi Azure Web App 'e yayımladığınızda, Twitter geliştirici portalındaki ' ı sıfırlamanız gerekir `ConsumerSecret` .
 
-* `Authentication:Twitter:ConsumerKey` Ve `Authentication:Twitter:ConsumerSecret` Azure Portal uygulama ayarları olarak ayarlayın. Yapılandırma sistemi, ortam değişkenlerinden anahtarları okumak üzere ayarlanır.
+* `Authentication:Twitter:ConsumerKey`Ve `Authentication:Twitter:ConsumerSecret` Azure Portal uygulama ayarları olarak ayarlayın. Yapılandırma sistemi, ortam değişkenlerinden anahtarları okumak üzere ayarlanır.

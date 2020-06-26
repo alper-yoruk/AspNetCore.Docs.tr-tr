@@ -1,22 +1,24 @@
 ---
-title: "\"Öğretici: Razor ASP.NET Core sayfaları kullanmaya başlama\""
+title: 'Öğretici: Razor ASP.NET Core sayfaları kullanmaya başlama'
 author: rick-anderson
 description: Bu öğretici dizisinde ASP.NET Core sayfaların nasıl kullanılacağı gösterilmektedir Razor . Model oluşturmayı, sayfalar için kod oluşturmayı, Razor veri erişimi için Entity Framework Core ve SQL Server kullanmayı, arama işlevselliği eklemeyi, giriş doğrulaması eklemeyi ve geçiş yapmayı kullanarak modeli güncelleştirme hakkında bilgi edinin.
 ms.author: riande
 ms.date: 11/12/2019
 no-loc:
 - Blazor
+- Blazor Server
+- Blazor WebAssembly
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: 3b8ccf639bb91234f81c67750fffa170e52d636f
-ms.sourcegitcommit: cd73744bd75fdefb31d25ab906df237f07ee7a0a
+ms.openlocfilehash: 97e3f60480bc8e7e88c8361e5b13f02d98765d9e
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/05/2020
-ms.locfileid: "84452362"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "85405308"
 ---
 # <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>Öğretici: Razor ASP.NET Core sayfaları kullanmaya başlama
 
@@ -94,7 +96,7 @@ Bu öğreticinin sonunda, Razor daha sonraki öğreticilerde oluşturacağınız
 
 * Durum çubuğunun omnisharp Yangın simgesi yeşil ' i etkinleştirdikten sonra, **gerekli varlıkların derleme ve hata ayıklama için ' RazorPagesMovie ' içinde eksik olduğunu soran bir iletişim kutusu yok. Bunları ekleyin mi?** **Evet**' i seçin.
 
-  *Launch. JSON* ve *Tasks. JSON* dosyalarını içeren bir *. vscode* dizini, projenin kök dizinine eklenir.
+  Dosyalar *üzerinde* *launch.js* vetasks.jsiçeren bir *. vscode* dizini, projenin kök dizinine eklenir.
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
@@ -144,7 +146,7 @@ Destekleyici dosyalar bir alt çizgiyle başlayan adlara sahiptir. Örneğin, *_
 
 HTML dosyaları, JavaScript dosyaları ve CSS dosyaları gibi statik dosyaları içerir. Daha fazla bilgi için bkz. <xref:fundamentals/static-files>.
 
-### <a name="appsettingsjson"></a>appSettings. JSON
+### <a name="appsettingsjson"></a>Üzerinde appSettings.js
 
 Bağlantı dizeleri gibi yapılandırma verilerini içerir. Daha fazla bilgi için bkz. <xref:fundamentals/configuration/index>.
 
@@ -244,7 +246,7 @@ Bu öğreticinin sonunda, Razor daha sonraki öğreticilerde oluşturacağınız
 
 * Durum çubuğunun omnisharp Yangın simgesi yeşil ' i etkinleştirdikten sonra, **gerekli varlıkların derleme ve hata ayıklama için ' RazorPagesMovie ' içinde eksik olduğunu soran bir iletişim kutusu yok. Bunları ekleyin mi?** **Evet**' i seçin.
 
-  *Launch. JSON* ve *Tasks. JSON* dosyalarını içeren bir *. vscode* dizini, projenin kök dizinine eklenir.
+  Dosyalar *üzerinde* *launch.js* vetasks.jsiçeren bir *. vscode* dizini, projenin kök dizinine eklenir.
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
@@ -343,7 +345,7 @@ Destekleyici dosyalar bir alt çizgiyle başlayan adlara sahiptir. Örneğin, *_
 
 HTML dosyaları, JavaScript dosyaları ve CSS dosyaları gibi statik dosyaları içerir. Daha fazla bilgi için bkz. <xref:fundamentals/static-files>.
 
-### <a name="appsettingsjson"></a>appSettings. JSON
+### <a name="appsettingsjson"></a>Üzerinde appSettings.js
 
 Bağlantı dizeleri gibi yapılandırma verilerini içerir. Daha fazla bilgi için bkz. <xref:fundamentals/configuration/index>.
 
