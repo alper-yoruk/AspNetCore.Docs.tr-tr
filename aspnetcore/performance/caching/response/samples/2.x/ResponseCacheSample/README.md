@@ -1,3 +1,0 @@
-# <a name="aspnet-core-response-cache-sample"></a><span data-ttu-id="e5e8b-101">ASP.NET Core yanıt önbelleği örneği</span><span class="sxs-lookup"><span data-stu-id="e5e8b-101">ASP.NET Core Response Cache Sample</span></span>
-
-<span data-ttu-id="e5e8b-102">Bu örnek, [ASP.NET Core Içindeki yanıt önbelleğe](https://docs.microsoft.com/aspnet/core/performance/caching/response)almaya eşlik etmek için ASP.NET Core ' de yanıt önbelleğe alma kullanımını gösterir.</span><span class="sxs-lookup"><span data-stu-id="e5e8b-102">This sample illustrates the usage of response caching in ASP.NET Core to accompany [Response caching in ASP.NET Core](https://docs.microsoft.com/aspnet/core/performance/caching/response).</span></span>
