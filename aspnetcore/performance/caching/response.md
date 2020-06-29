@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/response
-ms.openlocfilehash: 25d6bdae0fce7821ec7b9195817dc07ef9aed40f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 5c3314991d05ea868fe9190bb3a0206b27fd920f
+ms.sourcegitcommit: b06511252f165dd4590ba9b5beca4153fa220779
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408194"
+ms.lasthandoff: 06/27/2020
+ms.locfileid: "85459772"
 ---
 # <a name="response-caching-in-aspnet-core"></a>ASP.NET Core 'de yanıt önbelleğe alma
 
@@ -176,7 +176,17 @@ Birçok denetleyici eylem özniteliği üzerinde yanıt önbelleği ayarlarını
 
 Önbellek profili ayarlayın. Aşağıdaki örnek, örnek uygulamanın bir 30 saniyelik önbellek profilini göstermektedir `Startup.ConfigureServices` :
 
+::: moniker range=">= aspnetcore-3.0"
+
+[!code-csharp[](response/samples/3.x/Startup.cs?name=snippet1)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
 [!code-csharp[](response/samples/2.x/ResponseCacheSample/Startup.cs?name=snippet1)]
+
+::: moniker-end
 
 Örnek uygulamanın Cache4 sayfa modeli `Default30` önbellek profiline başvurur:
 
@@ -184,9 +194,9 @@ Birçok denetleyici eylem özniteliği üzerinde yanıt önbelleği ayarlarını
 
 , <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> Öğesine uygulanabilir:
 
-* RazorSayfa işleyicileri (sınıflar): öznitelikler işleyici yöntemlerine uygulanamaz.
-* MVC denetleyicileri (sınıflar).
-* MVC eylemleri (Yöntemler): Yöntem düzeyi öznitelikler, sınıf düzeyi özniteliklerde belirtilen ayarları geçersiz kılar.
+* RazorSayfalar: öznitelikler işleyici yöntemlerine uygulanamaz.
+* MVC denetleyicileri.
+* MVC eylem yöntemleri: Yöntem düzeyi öznitelikler, sınıf düzeyi özniteliklerde belirtilen ayarları geçersiz kılar.
 
 Önbellek profili tarafından Cache4 sayfa yanıtına uygulanan sonuç üst bilgisi `Default30` :
 
