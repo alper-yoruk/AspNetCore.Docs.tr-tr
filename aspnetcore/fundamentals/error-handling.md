@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/error-handling
-ms.openlocfilehash: 46654b61d631ef36a6501c6bf6c187ec064a7c9a
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 857b4935816d0010fa425ce98f938c87eb35a581
+ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407687"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85793447"
 ---
 # <a name="handle-errors-in-aspnet-core"></a>ASP.NET Core hataları işleme
 
@@ -46,7 +46,7 @@ Sayfa, özel durum ve istek hakkında şu bilgileri içerir:
 * Yığın izleme
 * Sorgu dizesi parametreleri (varsa)
 * Tanımlama bilgileri (varsa)
-* Üst bilgiler
+* Üst Bilgiler
 
 [Örnek uygulamada](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)geliştirici özel durum sayfasını görmek için, ön `DevEnvironment` işlemci yönergesini kullanın ve giriş sayfasında **özel durum Tetikle** ' yi seçin.
 
@@ -226,6 +226,8 @@ if (env.IsDevelopment())
     app.UseDatabaseErrorPage();
 }
 ```
+
+<xref:Microsoft.AspNetCore.Builder.DatabaseErrorPageExtensions.UseDatabaseErrorPage%2A>[Microsoft. AspNetCore. Diagnostics. EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore/) NuGet paketini gerektirir.
 
 <!-- FUTURE UPDATE: On the next topic overhaul/release update, add API crosslink to this section for xref:Microsoft.AspNetCore.Builder.DatabaseErrorPageExtensions.UseDatabaseErrorPage* when available via the API docs. -->
 

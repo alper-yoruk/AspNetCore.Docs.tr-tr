@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: 28274d1deccdfe9e6430aa2899854f23d3ddc12a
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 0974abfe632fd897c08435b82a7c695534cc3139
+ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408987"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85793596"
 ---
 # <a name="part-4-add-a-model-to-an-aspnet-core-mvc-app"></a>4. bölüm, ASP.NET Core MVC uygulamasına model ekleme
 
@@ -261,6 +261,8 @@ Update-Database
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
+[!INCLUDE [more information on the CLI for EF Core](~/includes/ef-cli.md)]
+
 Aşağıdaki .NET Core CLI komutları çalıştırın:
 
 ```dotnetcli
@@ -271,8 +273,6 @@ dotnet ef database update
 * `ef migrations add InitialCreate`: Bir *geçişler/{timestamp} _InitialCreate. cs* geçiş dosyası oluşturur. `InitialCreate`Bağımsız değişkeni geçiş adıdır. Herhangi bir ad kullanılabilir, ancak kurala göre, geçişi açıklayan bir ad seçilidir. Bu ilk geçiş olduğundan, oluşturulan sınıf veritabanı şemasını oluşturmak için kod içerir. Veritabanı şeması sınıfında belirtilen modeli temel alır `MvcMovieContext` ( *Data/MvcMovieContext. cs* dosyasında).
 
 * `ef database update`: Veritabanını, önceki komutun oluşturulduğu en son geçişe güncelleştirir. Bu komut, `Up` veritabanını oluşturan *geçişler/{Time-damga} _InitialCreate. cs* dosyasında yöntemini çalıştırır.
-
-[!INCLUDE [more information on the CLI for EF Core](~/includes/ef-cli.md)]
 
 ---
 

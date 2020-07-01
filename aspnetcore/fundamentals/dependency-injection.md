@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 665f9f761f729fad59af298cacd0d48ab3a3f71f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2074aa75029cf27922b43545ec18c0cd8a50eb02
+ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400732"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85793342"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>ASP.NET Core'da bağımlılık ekleme
 
@@ -416,6 +416,8 @@ ASP.NET Core isteği içinde bulunan hizmetler, `HttpContext` [HttpContext. requ
 İstek Hizmetleri, uygulamanın bir parçası olarak yapılandırılan ve istenen hizmetleri temsil eder. Nesneler bağımlılıklar belirttiğinizde, bunlar ' de bulunan türler tarafından karşılanır `RequestServices` `ApplicationServices` .
 
 Genellikle, uygulamanın bu özellikleri doğrudan kullanmamalıdır. Bunun yerine, sınıfların Sınıf oluşturucuları aracılığıyla gerektirdiği türleri isteyin ve çerçevenin bağımlılıkları eklemesine izin verin. Bu, test etmek daha kolay olan sınıfları oluşturur.
+
+ASP.NET Core, istek başına kapsam oluşturur ve `RequestServices` kapsamlı hizmet sağlayıcısını kullanıma sunar. Tüm kapsamlı hizmetler, istek etkin olduğu sürece geçerli olur.
 
 > [!NOTE]
 > Koleksiyona erişmek için Oluşturucu parametreleri olarak bağımlılıklar istemeyi tercih edin `RequestServices` .

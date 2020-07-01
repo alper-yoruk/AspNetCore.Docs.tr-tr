@@ -1,5 +1,6 @@
+[!INCLUDE [more information on the CLI for EF Core](~/includes/ef-cli.md)]
 
-Aşağıdaki .NET Core CLI komutlarını çalıştırın:
+Aşağıdaki .NET Core CLI komutları çalıştırın:
 
 ```dotnetcli
 dotnet ef migrations add InitialCreate

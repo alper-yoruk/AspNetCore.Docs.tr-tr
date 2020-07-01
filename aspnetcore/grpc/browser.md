@@ -4,7 +4,7 @@ author: jamesnk
 description: ASP.NET Core GRPC hizmetlerini, gRPC-Web kullanan tarayıcı uygulamalarından çağrılabilir olacak şekilde nasıl yapılandıracağınızı öğrenin.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 05/26/2020
+ms.date: 06/29/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -14,18 +14,23 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/browser
-ms.openlocfilehash: 37932e755a0ef2149fb2336d2dcef87d3347d1a4
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 20f72deb9895111a6e691eb1ee5cd7419c8c4cb4
+ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404762"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85793508"
 ---
 # <a name="use-grpc-in-browser-apps"></a>Tarayıcı uygulamalarında gRPC kullanma
 
 , [James bAyKiNg](https://twitter.com/jamesnk)
 
-Tarayıcı tabanlı bir uygulamadan HTTP/2 gRPC hizmetini çağırmak mümkün değildir. [GRPC-Web](https://github.com/grpc/grpc/blob/master/doc/PROTOCOL-WEB.md) , tarayıcı JavaScript ve Blazor uygulamalarının GRPC hizmetlerini çağırmasını sağlayan bir protokoldür. Bu makalede, .NET Core 'da gRPC-Web ' i kullanma açıklanmaktadır.
+ [GRPC-Web](https://github.com/grpc/grpc/blob/2a388793792cc80944334535b7c729494d209a7e/doc/PROTOCOL-WEB.md) protokolünü kullanarak var olan bir ASP.NET Core GRPC hizmetini tarayıcı uygulamalarından çağrılabilir olacak şekilde yapılandırmayı öğrenin. gRPC-Web tarayıcı JavaScript ve Blazor uygulamalarının GRPC hizmetlerini çağırmasını sağlar. Tarayıcı tabanlı bir uygulamadan HTTP/2 gRPC hizmetini çağırmak mümkün değildir. ASP.NET Core 'de barındırılan gRPC Hizmetleri, gRPC-Web ' i HTTP/2 gRPC ile birlikte destekleyecek şekilde yapılandırılabilir.
+
+
+Mevcut bir ASP.NET Core uygulamasına gRPC hizmeti ekleme hakkında yönergeler için bkz. [bir ASP.NET Core uygulamasına GRPC Hizmetleri ekleme](xref:grpc/aspnetcore#add-grpc-services-to-an-aspnet-core-app).
+
+GRPC projesi oluşturma hakkında yönergeler için bkz <xref:tutorials/grpc/grpc-start> ..
 
 ## <a name="grpc-web-in-aspnet-core-vs-envoy"></a>gRPC-Web 'de ASP.NET Core ve Envoy 'ye karşı
 
@@ -34,7 +39,7 @@ GRPC-Web ' i bir ASP.NET Core uygulamasına eklemenin iki seçeneği vardır:
 * ASP.NET Core 'de GRPC HTTP/2 ile birlikte gRPC-Web desteği. Bu seçenek, paket tarafından sağlanmış olan ara yazılımı kullanır `Grpc.AspNetCore.Web` .
 * GRPC-Web ' i GRPC HTTP/2 ' ye çevirmek için [Envoy proxy 'nin](https://www.envoyproxy.io/) GRPC-Web desteğini kullanın. Çevrilen çağrı daha sonra ASP.NET Core uygulamasına iletilir.
 
-Her yaklaşımın olumlu ve olumsuz yönleri vardır. Zaten uygulamanızın ortamında bir ara sunucu olarak kullanmak istiyorsanız, gRPC-Web desteği sağlamak için de kullanabilirsiniz. GRPC-Web için yalnızca ASP.NET Core gerektiren basit bir çözüm istiyorsanız `Grpc.AspNetCore.Web` iyi bir seçimdir.
+Her yaklaşımın olumlu ve olumsuz yönleri vardır. Bir uygulamanın ortamı zaten bir ara sunucu olarak kullanılıyorsa, gRPC-Web desteği sağlamak için de Envoy kullanılması mantıklı olabilir. Yalnızca ASP.NET Core gerektiren gRPC-Web için temel bir çözüm için `Grpc.AspNetCore.Web` iyi bir seçimdir.
 
 ## <a name="configure-grpc-web-in-aspnet-core"></a>ASP.NET Core 'de gRPC-Web yapılandırma
 
@@ -65,7 +70,7 @@ Alternatif olarak, gRPC-Web ara yazılımı, tüm hizmetlerin varsayılan olarak
 
 Tarayıcı güvenliği, bir Web sayfasının Web sayfasını sunduğundan farklı bir etki alanına istek yapmasını engeller. Bu kısıtlama, tarayıcı uygulamalarıyla gRPC Web çağrıları yapmak için geçerlidir. Örneğin, tarafından sunulan bir tarayıcı uygulamasının `https://www.contoso.com` üzerinde barındırılan gRPC-Web hizmetlerinden çağrılması engellenir `https://services.contoso.com` . Bu kısıtlamayı rahatmak için çapraz kaynak kaynak paylaşımı (CORS) kullanılabilir.
 
-Tarayıcı uygulamanızın çıkış noktaları arası gRPC-Web çağrıları yapmasına izin vermek için [ASP.NET Core 'de CORS](xref:security/cors)'yi ayarlayın. Yerleşik CORS desteğini kullanın ve gRPC 'ye özgü üst bilgileri ile kullanıma sunun <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithExposedHeaders*> .
+Bir tarayıcı uygulamasının, çıkış noktaları arası gRPC-Web çağrıları yapmasına izin vermek için [ASP.NET Core 'de CORS](xref:security/cors)'yi ayarlayın. Yerleşik CORS desteğini kullanın ve gRPC 'ye özgü üst bilgileri ile kullanıma sunun <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithExposedHeaders%2A> .
 
 [!code-csharp[](~/grpc/browser/sample/CORS_Startup.cs?name=snippet_1&highlight=5-11,19,24)]
 

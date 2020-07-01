@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/localization
-ms.openlocfilehash: cc30cedd51af06ffc7e17d36d4426fa45c452015
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 412cd7a39a0eed6800e15d235102ed367da5f746
+ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407752"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85793477"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>ASP.NET Core Genelleştirme ve yerelleştirme
 
@@ -52,7 +52,8 @@ Yukarıdaki kodda, `IStringLocalizer<T>` uygulama [bağımlılık ekleme](depend
 
 [!code-csharp[](~/fundamentals/localization/sample/3.x/Localization/Controllers/BookController.cs?highlight=3,5,20&start=1&end=24)]
 
-**Note:** Genellikle HTML değil yalnızca metni yerelleştirmek istersiniz.
+> [!NOTE]
+> Genellikle, HTML değil yalnızca metni yerelleştirin.
 
 En düşük düzeyde, `IStringLocalizerFactory` [bağımlılık ekleme](dependency-injection.md)işlemini alabilirsiniz:
 
@@ -83,12 +84,13 @@ Varsayılan uygulama, `IViewLocalizer` görünümün dosya adına göre kaynak d
 Bir Fransızca kaynak dosyası şunları içerebilir:
 
 | Anahtar | Değer |
-| ----- | ------ |
+| --- | ----- |
 | `<i>Hello</i> <b>{0}!</b>` | `<i>Bonjour</i> <b>{0} !</b>` |
 
 İşlenmiş görünüm, kaynak dosyasındaki HTML işaretlemesini içerir.
 
-**Note:** Genellikle HTML değil yalnızca metni yerelleştirmek istersiniz.
+> [!NOTE]
+> Genellikle, HTML değil yalnızca metni yerelleştirin.
 
 Bir görünümde paylaşılan kaynak dosyasını kullanmak için şunu ekleme `IHtmlLocalizer<T>` :
 
@@ -136,19 +138,19 @@ Kaynak dosyası, koddan yerelleştirilebilir dizeleri ayırmak için kullanışl
 
 1. **Çözüm Gezgini**' de, **Add** > **Yeni öğe**Ekle > kaynak dosyasını içerecek klasöre sağ tıklayın.
 
-    ![İç içe bağlamsal bağlam menüsü: Çözüm Gezgini, kaynaklar için bir bağlamsal menü açıktır. İkinci bağlamsal menü, yeni öğe komutunun vurgulandığı ekleme için açıktır.](localization/_static/newi.png)
+   ![İç içe bağlamsal bağlam menüsü: Çözüm Gezgini, kaynaklar için bir bağlamsal menü açıktır. İkinci bağlamsal menü, yeni öğe komutunun vurgulandığı ekleme için açıktır.](localization/_static/newi.png)
 
-2. **Yüklü şablonları ara** kutusuna "kaynak" yazın ve dosyayı adlandırın.
+1. **Yüklü şablonları ara** kutusuna "kaynak" yazın ve dosyayı adlandırın.
 
-    ![Yeni öğe Ekle iletişim kutusu](localization/_static/res.png)
+   ![Yeni öğe Ekle iletişim kutusu](localization/_static/res.png)
 
-3. **Ad** sütununa anahtar değerini (yerel dize) ve **değer** sütununda çevrilmiş dizeyi girin.
+1. **Ad** sütununa anahtar değerini (yerel dize) ve **değer** sütununda çevrilmiş dizeyi girin.
 
-    ![Ad sütunundaki Merhaba. es. resx dosyası (Ispanyolca için hoş geldiniz kaynak dosyası) ve değer sütununda Hola (Ispanyolca) adlı kelime](localization/_static/hola.png)
+   ![Ad sütunundaki Merhaba. es. resx dosyası (Ispanyolca için hoş geldiniz kaynak dosyası) ve değer sütununda Hola (Ispanyolca) adlı kelime](localization/_static/hola.png)
 
-    Visual Studio, *Welcome. es. resx* dosyasını gösterir.
+   Visual Studio, *Welcome. es. resx* dosyasını gösterir.
 
-    ![Hoş geldiniz Ispanyolca (es) kaynak dosyasını gösteren Çözüm Gezgini](localization/_static/se.png)
+   ![Hoş geldiniz Ispanyolca (es) kaynak dosyasını gösteren Çözüm Gezgini](localization/_static/se.png)
 
 ## <a name="resource-file-naming"></a>Kaynak dosyası adlandırma
 
@@ -160,7 +162,6 @@ Kaynaklar, sınıfının tam tür adı için derleme adı eksi olarak adlandır�
 | ------------   | ------------- |
 | Kaynaklar/denetleyiciler. HomeController. fr. resx | Nokta  |
 | Kaynaklar/denetleyiciler/HomeController. fr. resx  | Yol |
-|    |     |
 
 Görünümlerde kullanılan kaynak `@inject IViewLocalizer` dosyaları Razor benzer bir model izler. Bir görünüm için kaynak dosyası, nokta adlandırması veya yol adlandırması kullanılarak adlandırılabilir. Razorkaynak dosyalarını görüntüleme, ilişkili görünüm dosyalarının yolunu taklit eden. `ResourcesPath`"Resources" olarak belirlediğimiz varsayılarak, *Görünümler/Home/about. cshtml* görünümü ile ilişkili Fransızca kaynak dosyası aşağıdakilerden biri olabilir:
 
@@ -224,22 +225,23 @@ Yerelleştirme, `Startup.ConfigureServices` yönteminde yapılandırılır:
 
 * `AddLocalization`Yerelleştirme hizmetlerini hizmetler kapsayıcısına ekler. Yukarıdaki kod, kaynakların yolunu da "resources" olarak ayarlar.
 
-* `AddViewLocalization`Yerelleştirilmiş görünüm dosyaları için destek ekler. Bu örnek görünümde yerelleştirme, görünüm dosyası sonekini temel alır. Örneğin, *Index. fr. cshtml* dosyasındaki "fr".
+* `AddViewLocalization`yerelleştirilmiş görünüm dosyaları için destek ekler. Bu örnek görünümde yerelleştirme, görünüm dosyası sonekini temel alır. Örneğin, *Index. fr. cshtml* dosyasındaki "fr".
 
-* `AddDataAnnotationsLocalization``DataAnnotations`Soyutlamalar aracılığıyla yerelleştirilmiş doğrulama iletileri için destek ekler `IStringLocalizer` .
+* `AddDataAnnotationsLocalization``DataAnnotations`soyutlamalar aracılığıyla yerelleştirilmiş doğrulama iletileri için destek ekler `IStringLocalizer` .
 
 ### <a name="localization-middleware"></a>Yerelleştirme ara yazılımı
 
 Bir istekteki geçerli kültür, yerelleştirme [Ara](xref:fundamentals/middleware/index)ortamında ayarlanır. Yerelleştirme ara yazılımı `Startup.Configure` yönteminde etkindir. Yerelleştirme ara yazılımı, istek kültürünü denetlemeyebilir (örneğin,) herhangi bir ara yazılım önce yapılandırılmalıdır `app.UseMvcWithDefaultRoute()` .
 
 [!code-csharp[](localization/sample/3.x/Localization/Startup.cs?name=snippet2)]
+
 [!INCLUDE[about the series](~/includes/code-comments-loc.md)]
 
 `UseRequestLocalization`bir `RequestLocalizationOptions` nesnesi başlatır. Her istekte içindeki listesinin listesi `RequestCultureProvider` `RequestLocalizationOptions` numaralandırılır ve istek kültürünü başarıyla belirleyebilmesi için ilk sağlayıcı kullanılır. Varsayılan sağlayıcılar `RequestLocalizationOptions` sınıftan gelir:
 
 1. `QueryStringRequestCultureProvider`
-2. `CookieRequestCultureProvider`
-3. `AcceptLanguageHeaderRequestCultureProvider`
+1. `CookieRequestCultureProvider`
+1. `AcceptLanguageHeaderRequestCultureProvider`
 
 Varsayılan liste, en çok belirli olan en az özel. Makalenin ilerleyen kısımlarında, sırayı nasıl değiştirekullanabileceğinizi ve hatta özel bir kültür sağlayıcısı nasıl ekleyebileceğiniz hakkında bilgi edineceksiniz. Sağlayıcıların hiçbiri istek kültürünü belirleyeiyorsa, `DefaultRequestCulture` kullanılır.
 
@@ -251,7 +253,9 @@ Bazı uygulamalar [kültür ve UI kültürünü](https://msdn.microsoft.com/libr
 
 Yalnızca iki ( `culture` veya) birini geçirirseniz `ui-culture` , sorgu dizesi sağlayıcısı, her iki değeri de geçirdiğiniz birini kullanarak ayarlar. Örneğin, yalnızca kültür ayarlandığında, ve ' nin her ikisi de ayarlanır `Culture` `UICulture` :
 
-   `http://localhost:5000/?culture=es-MX`
+```
+http://localhost:5000/?culture=es-MX
+```
 
 ### <a name="cookierequestcultureprovider"></a>CookieRequestCultureProvider
 
@@ -261,7 +265,9 @@ Yalnızca iki ( `culture` veya) birini geçirirseniz `ui-culture` , sorgu dizesi
 
 Tanımlama bilgisi biçimi `c=%LANGCODE%|uic=%LANGCODE%` , ve nerede olduğu, `c` `Culture` `uic` `UICulture` Örneğin:
 
-    c=en-UK|uic=en-US
+```
+c=en-UK|uic=en-US
+```
 
 Kültür bilgisi ve UI kültürünün yalnızca birini belirtirseniz, belirtilen kültür hem kültür bilgileri hem de UI kültürü için kullanılacaktır.
 
@@ -273,17 +279,17 @@ Kültür bilgisi ve UI kültürünün yalnızca birini belirtirseniz, belirtilen
 
 1. Dişli simgesinden **Internet seçenekleri**' ne dokunun.
 
-2. **Diller**' e dokunun.
+1. **Diller**' e dokunun.
 
-    ![Internet seçenekleri](localization/_static/lang.png)
+   ![Internet seçenekleri](localization/_static/lang.png)
 
-3. **Dil tercihlerini ayarla**' ya dokunun.
+1. **Dil tercihlerini ayarla**' ya dokunun.
 
-4. **Dil ekle**' ye dokunun.
+1. **Dil ekle**' ye dokunun.
 
-5. Dilini ekleyin.
+1. Dilini ekleyin.
 
-6. Dile dokunun ve ardından **Yukarı taşı**' ya dokunun.
+1. Dile dokunun ve ardından **Yukarı taşı**' ya dokunun.
 
 ### <a name="use-a-custom-provider"></a>Özel bir sağlayıcı kullan
 
@@ -400,7 +406,8 @@ Yukarıdaki kodda, `IStringLocalizer<T>` uygulama [bağımlılık ekleme](depend
 
 [!code-csharp[](~/fundamentals/localization/sample/3.x/Localization/Controllers/BookController.cs?highlight=3,5,20&start=1&end=24)]
 
-**Note:** Genellikle HTML değil yalnızca metni yerelleştirmek istersiniz.
+> [!NOTE]
+> Genellikle, HTML değil yalnızca metni yerelleştirin.
 
 En düşük düzeyde, `IStringLocalizerFactory` [bağımlılık ekleme](dependency-injection.md)işlemini alabilirsiniz:
 
@@ -431,12 +438,13 @@ Varsayılan uygulama, `IViewLocalizer` görünümün dosya adına göre kaynak d
 Bir Fransızca kaynak dosyası şunları içerebilir:
 
 | Anahtar | Değer |
-| ----- | ------ |
+| --- | ----- |
 | `<i>Hello</i> <b>{0}!</b>` | `<i>Bonjour</i> <b>{0} !</b>` |
 
 İşlenmiş görünüm, kaynak dosyasındaki HTML işaretlemesini içerir.
 
-**Note:** Genellikle HTML değil yalnızca metni yerelleştirmek istersiniz.
+> [!NOTE]
+> Genellikle, HTML değil yalnızca metni yerelleştirin.
 
 Bir görünümde paylaşılan kaynak dosyasını kullanmak için şunu ekleme `IHtmlLocalizer<T>` :
 
@@ -484,19 +492,19 @@ Kaynak dosyası, koddan yerelleştirilebilir dizeleri ayırmak için kullanışl
 
 1. **Çözüm Gezgini**' de, **Add** > **Yeni öğe**Ekle > kaynak dosyasını içerecek klasöre sağ tıklayın.
 
-    ![İç içe bağlamsal bağlam menüsü: Çözüm Gezgini, kaynaklar için bir bağlamsal menü açıktır. İkinci bağlamsal menü, yeni öğe komutunun vurgulandığı ekleme için açıktır.](localization/_static/newi.png)
+   ![İç içe bağlamsal bağlam menüsü: Çözüm Gezgini, kaynaklar için bir bağlamsal menü açıktır. İkinci bağlamsal menü, yeni öğe komutunun vurgulandığı ekleme için açıktır.](localization/_static/newi.png)
 
-2. **Yüklü şablonları ara** kutusuna "kaynak" yazın ve dosyayı adlandırın.
+1. **Yüklü şablonları ara** kutusuna "kaynak" yazın ve dosyayı adlandırın.
 
-    ![Yeni öğe Ekle iletişim kutusu](localization/_static/res.png)
+   ![Yeni öğe Ekle iletişim kutusu](localization/_static/res.png)
 
-3. **Ad** sütununa anahtar değerini (yerel dize) ve **değer** sütununda çevrilmiş dizeyi girin.
+1. **Ad** sütununa anahtar değerini (yerel dize) ve **değer** sütununda çevrilmiş dizeyi girin.
 
-    ![Ad sütunundaki Merhaba. es. resx dosyası (Ispanyolca için hoş geldiniz kaynak dosyası) ve değer sütununda Hola (Ispanyolca) adlı kelime](localization/_static/hola.png)
+   ![Ad sütunundaki Merhaba. es. resx dosyası (Ispanyolca için hoş geldiniz kaynak dosyası) ve değer sütununda Hola (Ispanyolca) adlı kelime](localization/_static/hola.png)
 
-    Visual Studio, *Welcome. es. resx* dosyasını gösterir.
+   Visual Studio, *Welcome. es. resx* dosyasını gösterir.
 
-    ![Hoş geldiniz Ispanyolca (es) kaynak dosyasını gösteren Çözüm Gezgini](localization/_static/se.png)
+   ![Hoş geldiniz Ispanyolca (es) kaynak dosyasını gösteren Çözüm Gezgini](localization/_static/se.png)
 
 ## <a name="resource-file-naming"></a>Kaynak dosyası adlandırma
 
@@ -508,7 +516,6 @@ Kaynaklar, sınıfının tam tür adı için derleme adı eksi olarak adlandır�
 | ------------   | ------------- |
 | Kaynaklar/denetleyiciler. HomeController. fr. resx | Nokta  |
 | Kaynaklar/denetleyiciler/HomeController. fr. resx  | Yol |
-|    |     |
 
 Görünümlerde kullanılan kaynak `@inject IViewLocalizer` dosyaları Razor benzer bir model izler. Bir görünüm için kaynak dosyası, nokta adlandırması veya yol adlandırması kullanılarak adlandırılabilir. Razorkaynak dosyalarını görüntüleme, ilişkili görünüm dosyalarının yolunu taklit eden. `ResourcesPath`"Resources" olarak belirlediğimiz varsayılarak, *Görünümler/Home/about. cshtml* görünümü ile ilişkili Fransızca kaynak dosyası aşağıdakilerden biri olabilir:
 
@@ -572,22 +579,23 @@ Yerelleştirme, `Startup.ConfigureServices` yönteminde yapılandırılır:
 
 * `AddLocalization`Yerelleştirme hizmetlerini hizmetler kapsayıcısına ekler. Yukarıdaki kod, kaynakların yolunu da "resources" olarak ayarlar.
 
-* `AddViewLocalization`Yerelleştirilmiş görünüm dosyaları için destek ekler. Bu örnek görünümde yerelleştirme, görünüm dosyası sonekini temel alır. Örneğin, *Index. fr. cshtml* dosyasındaki "fr".
+* `AddViewLocalization`yerelleştirilmiş görünüm dosyaları için destek ekler. Bu örnek görünümde yerelleştirme, görünüm dosyası sonekini temel alır. Örneğin, *Index. fr. cshtml* dosyasındaki "fr".
 
-* `AddDataAnnotationsLocalization``DataAnnotations`Soyutlamalar aracılığıyla yerelleştirilmiş doğrulama iletileri için destek ekler `IStringLocalizer` .
+* `AddDataAnnotationsLocalization``DataAnnotations`soyutlamalar aracılığıyla yerelleştirilmiş doğrulama iletileri için destek ekler `IStringLocalizer` .
 
 ### <a name="localization-middleware"></a>Yerelleştirme ara yazılımı
 
 Bir istekteki geçerli kültür, yerelleştirme [Ara](xref:fundamentals/middleware/index)ortamında ayarlanır. Yerelleştirme ara yazılımı `Startup.Configure` yönteminde etkindir. Yerelleştirme ara yazılımı, istek kültürünü denetlemeyebilir (örneğin,) herhangi bir ara yazılım önce yapılandırılmalıdır `app.UseMvcWithDefaultRoute()` .
 
 [!code-csharp[](localization/sample/3.x/Localization/Startup.cs?name=snippet2)]
+
 [!INCLUDE[about the series](~/includes/code-comments-loc.md)]
 
 `UseRequestLocalization`bir `RequestLocalizationOptions` nesnesi başlatır. Her istekte içindeki listesinin listesi `RequestCultureProvider` `RequestLocalizationOptions` numaralandırılır ve istek kültürünü başarıyla belirleyebilmesi için ilk sağlayıcı kullanılır. Varsayılan sağlayıcılar `RequestLocalizationOptions` sınıftan gelir:
 
 1. `QueryStringRequestCultureProvider`
-2. `CookieRequestCultureProvider`
-3. `AcceptLanguageHeaderRequestCultureProvider`
+1. `CookieRequestCultureProvider`
+1. `AcceptLanguageHeaderRequestCultureProvider`
 
 Varsayılan liste, en çok belirli olan en az özel. Makalenin ilerleyen kısımlarında, sırayı nasıl değiştirekullanabileceğinizi ve hatta özel bir kültür sağlayıcısı nasıl ekleyebileceğiniz hakkında bilgi edineceksiniz. Sağlayıcıların hiçbiri istek kültürünü belirleyeiyorsa, `DefaultRequestCulture` kullanılır.
 
@@ -595,11 +603,15 @@ Varsayılan liste, en çok belirli olan en az özel. Makalenin ilerleyen kısım
 
 Bazı uygulamalar [kültür ve UI kültürünü](https://msdn.microsoft.com/library/system.globalization.cultureinfo.aspx)ayarlamak için bir sorgu dizesi kullanır. Tanımlama bilgisi veya Accept-Language üst bilgisi yaklaşımını kullanan uygulamalar için, URL 'ye bir sorgu dizesi eklemek hata ayıklama ve test kodu için yararlıdır. Varsayılan olarak,, `QueryStringRequestCultureProvider` listede ilk yerelleştirme sağlayıcısı olarak kaydedilir `RequestCultureProvider` . Sorgu dizesi parametrelerini ve öğesini geçirirsiniz `culture` `ui-culture` . Aşağıdaki örnek, belirli kültürü (dil ve bölge) Ispanyolca/Meksika olarak ayarlar:
 
-   `http://localhost:5000/?culture=es-MX&ui-culture=es-MX`
+```
+http://localhost:5000/?culture=es-MX&ui-culture=es-MX
+```
 
 Yalnızca iki ( `culture` veya) birini geçirirseniz `ui-culture` , sorgu dizesi sağlayıcısı, her iki değeri de geçirdiğiniz birini kullanarak ayarlar. Örneğin, yalnızca kültür ayarlandığında, ve ' nin her ikisi de ayarlanır `Culture` `UICulture` :
 
-   `http://localhost:5000/?culture=es-MX`
+```
+http://localhost:5000/?culture=es-MX
+```
 
 ### <a name="cookierequestcultureprovider"></a>CookieRequestCultureProvider
 
@@ -609,7 +621,9 @@ Yalnızca iki ( `culture` veya) birini geçirirseniz `ui-culture` , sorgu dizesi
 
 Tanımlama bilgisi biçimi `c=%LANGCODE%|uic=%LANGCODE%` , ve nerede olduğu, `c` `Culture` `uic` `UICulture` Örneğin:
 
-    c=en-UK|uic=en-US
+```
+c=en-UK|uic=en-US
+```
 
 Kültür bilgisi ve UI kültürünün yalnızca birini belirtirseniz, belirtilen kültür hem kültür bilgileri hem de UI kültürü için kullanılacaktır.
 
@@ -621,17 +635,17 @@ Kültür bilgisi ve UI kültürünün yalnızca birini belirtirseniz, belirtilen
 
 1. Dişli simgesinden **Internet seçenekleri**' ne dokunun.
 
-2. **Diller**' e dokunun.
+1. **Diller**' e dokunun.
 
-    ![Internet seçenekleri](localization/_static/lang.png)
+   ![Internet seçenekleri](localization/_static/lang.png)
 
-3. **Dil tercihlerini ayarla**' ya dokunun.
+1. **Dil tercihlerini ayarla**' ya dokunun.
 
-4. **Dil ekle**' ye dokunun.
+1. **Dil ekle**' ye dokunun.
 
-5. Dilini ekleyin.
+1. Dilini ekleyin.
 
-6. Dile dokunun ve ardından **Yukarı taşı**' ya dokunun.
+1. Dile dokunun ve ardından **Yukarı taşı**' ya dokunun.
 
 ### <a name="use-a-custom-provider"></a>Özel bir sağlayıcı kullan
 
@@ -747,7 +761,8 @@ Yukarıdaki kodda, `IStringLocalizer<T>` uygulama [bağımlılık ekleme](depend
 
 [!code-csharp[](~/fundamentals/localization/sample/3.x/Localization/Controllers/BookController.cs?highlight=3,5,20&start=1&end=24)]
 
-**Note:** Genellikle HTML değil yalnızca metni yerelleştirmek istersiniz.
+> [!NOTE]
+> Genellikle, HTML değil yalnızca metni yerelleştirin.
 
 En düşük düzeyde, `IStringLocalizerFactory` [bağımlılık ekleme](dependency-injection.md)işlemini alabilirsiniz:
 
@@ -778,12 +793,13 @@ Varsayılan uygulama, `IViewLocalizer` görünümün dosya adına göre kaynak d
 Bir Fransızca kaynak dosyası şunları içerebilir:
 
 | Anahtar | Değer |
-| ----- | ------ |
+| --- | ----- |
 | `<i>Hello</i> <b>{0}!</b>` | `<i>Bonjour</i> <b>{0} !</b>` |
 
 İşlenmiş görünüm, kaynak dosyasındaki HTML işaretlemesini içerir.
 
-**Note:** Genellikle HTML değil yalnızca metni yerelleştirmek istersiniz.
+> [!NOTE]
+> Genellikle, HTML değil yalnızca metni yerelleştirin.
 
 Bir görünümde paylaşılan kaynak dosyasını kullanmak için şunu ekleme `IHtmlLocalizer<T>` :
 
@@ -831,19 +847,19 @@ Kaynak dosyası, koddan yerelleştirilebilir dizeleri ayırmak için kullanışl
 
 1. **Çözüm Gezgini**' de, **Add** > **Yeni öğe**Ekle > kaynak dosyasını içerecek klasöre sağ tıklayın.
 
-    ![İç içe bağlamsal bağlam menüsü: Çözüm Gezgini, kaynaklar için bir bağlamsal menü açıktır. İkinci bağlamsal menü, yeni öğe komutunun vurgulandığı ekleme için açıktır.](localization/_static/newi.png)
+   ![İç içe bağlamsal bağlam menüsü: Çözüm Gezgini, kaynaklar için bir bağlamsal menü açıktır. İkinci bağlamsal menü, yeni öğe komutunun vurgulandığı ekleme için açıktır.](localization/_static/newi.png)
 
-2. **Yüklü şablonları ara** kutusuna "kaynak" yazın ve dosyayı adlandırın.
+1. **Yüklü şablonları ara** kutusuna "kaynak" yazın ve dosyayı adlandırın.
 
-    ![Yeni öğe Ekle iletişim kutusu](localization/_static/res.png)
+   ![Yeni öğe Ekle iletişim kutusu](localization/_static/res.png)
 
-3. **Ad** sütununa anahtar değerini (yerel dize) ve **değer** sütununda çevrilmiş dizeyi girin.
+1. **Ad** sütununa anahtar değerini (yerel dize) ve **değer** sütununda çevrilmiş dizeyi girin.
 
-    ![Ad sütunundaki Merhaba. es. resx dosyası (Ispanyolca için hoş geldiniz kaynak dosyası) ve değer sütununda Hola (Ispanyolca) adlı kelime](localization/_static/hola.png)
+   ![Ad sütunundaki Merhaba. es. resx dosyası (Ispanyolca için hoş geldiniz kaynak dosyası) ve değer sütununda Hola (Ispanyolca) adlı kelime](localization/_static/hola.png)
 
-    Visual Studio, *Welcome. es. resx* dosyasını gösterir.
+   Visual Studio, *Welcome. es. resx* dosyasını gösterir.
 
-    ![Hoş geldiniz Ispanyolca (es) kaynak dosyasını gösteren Çözüm Gezgini](localization/_static/se.png)
+   ![Hoş geldiniz Ispanyolca (es) kaynak dosyasını gösteren Çözüm Gezgini](localization/_static/se.png)
 
 ## <a name="resource-file-naming"></a>Kaynak dosyası adlandırma
 
@@ -855,7 +871,6 @@ Kaynaklar, sınıfının tam tür adı için derleme adı eksi olarak adlandır�
 | ------------   | ------------- |
 | Kaynaklar/denetleyiciler. HomeController. fr. resx | Nokta  |
 | Kaynaklar/denetleyiciler/HomeController. fr. resx  | Yol |
-|    |     |
 
 Görünümlerde kullanılan kaynak `@inject IViewLocalizer` dosyaları Razor benzer bir model izler. Bir görünüm için kaynak dosyası, nokta adlandırması veya yol adlandırması kullanılarak adlandırılabilir. Razorkaynak dosyalarını görüntüleme, ilişkili görünüm dosyalarının yolunu taklit eden. `ResourcesPath`"Resources" olarak belirlediğimiz varsayılarak, *Görünümler/Home/about. cshtml* görünümü ile ilişkili Fransızca kaynak dosyası aşağıdakilerden biri olabilir:
 
@@ -919,22 +934,23 @@ Yerelleştirme, `Startup.ConfigureServices` yönteminde yapılandırılır:
 
 * `AddLocalization`Yerelleştirme hizmetlerini hizmetler kapsayıcısına ekler. Yukarıdaki kod, kaynakların yolunu da "resources" olarak ayarlar.
 
-* `AddViewLocalization`Yerelleştirilmiş görünüm dosyaları için destek ekler. Bu örnek görünümde yerelleştirme, görünüm dosyası sonekini temel alır. Örneğin, *Index. fr. cshtml* dosyasındaki "fr".
+* `AddViewLocalization`yerelleştirilmiş görünüm dosyaları için destek ekler. Bu örnek görünümde yerelleştirme, görünüm dosyası sonekini temel alır. Örneğin, *Index. fr. cshtml* dosyasındaki "fr".
 
-* `AddDataAnnotationsLocalization``DataAnnotations`Soyutlamalar aracılığıyla yerelleştirilmiş doğrulama iletileri için destek ekler `IStringLocalizer` .
+* `AddDataAnnotationsLocalization``DataAnnotations`soyutlamalar aracılığıyla yerelleştirilmiş doğrulama iletileri için destek ekler `IStringLocalizer` .
 
 ### <a name="localization-middleware"></a>Yerelleştirme ara yazılımı
 
 Bir istekteki geçerli kültür, yerelleştirme [Ara](xref:fundamentals/middleware/index)ortamında ayarlanır. Yerelleştirme ara yazılımı `Startup.Configure` yönteminde etkindir. Yerelleştirme ara yazılımı, istek kültürünü denetlemeyebilir (örneğin,) herhangi bir ara yazılım önce yapılandırılmalıdır `app.UseMvcWithDefaultRoute()` .
 
 [!code-csharp[](localization/sample/3.x/Localization/Startup.cs?name=snippet2)]
+
 [!INCLUDE[about the series](~/includes/code-comments-loc.md)]
 
 `UseRequestLocalization`bir `RequestLocalizationOptions` nesnesi başlatır. Her istekte içindeki listesinin listesi `RequestCultureProvider` `RequestLocalizationOptions` numaralandırılır ve istek kültürünü başarıyla belirleyebilmesi için ilk sağlayıcı kullanılır. Varsayılan sağlayıcılar `RequestLocalizationOptions` sınıftan gelir:
 
 1. `QueryStringRequestCultureProvider`
-2. `CookieRequestCultureProvider`
-3. `AcceptLanguageHeaderRequestCultureProvider`
+1. `CookieRequestCultureProvider`
+1. `AcceptLanguageHeaderRequestCultureProvider`
 
 Varsayılan liste, en çok belirli olan en az özel. Makalenin ilerleyen kısımlarında, sırayı nasıl değiştirekullanabileceğinizi ve hatta özel bir kültür sağlayıcısı nasıl ekleyebileceğiniz hakkında bilgi edineceksiniz. Sağlayıcıların hiçbiri istek kültürünü belirleyeiyorsa, `DefaultRequestCulture` kullanılır.
 
@@ -942,11 +958,15 @@ Varsayılan liste, en çok belirli olan en az özel. Makalenin ilerleyen kısım
 
 Bazı uygulamalar [kültür ve UI kültürünü](https://msdn.microsoft.com/library/system.globalization.cultureinfo.aspx)ayarlamak için bir sorgu dizesi kullanır. Tanımlama bilgisi veya Accept-Language üst bilgisi yaklaşımını kullanan uygulamalar için, URL 'ye bir sorgu dizesi eklemek hata ayıklama ve test kodu için yararlıdır. Varsayılan olarak,, `QueryStringRequestCultureProvider` listede ilk yerelleştirme sağlayıcısı olarak kaydedilir `RequestCultureProvider` . Sorgu dizesi parametrelerini ve öğesini geçirirsiniz `culture` `ui-culture` . Aşağıdaki örnek, belirli kültürü (dil ve bölge) Ispanyolca/Meksika olarak ayarlar:
 
-   `http://localhost:5000/?culture=es-MX&ui-culture=es-MX`
+```
+http://localhost:5000/?culture=es-MX&ui-culture=es-MX
+```
 
 Yalnızca iki ( `culture` veya) birini geçirirseniz `ui-culture` , sorgu dizesi sağlayıcısı, her iki değeri de geçirdiğiniz birini kullanarak ayarlar. Örneğin, yalnızca kültür ayarlandığında, ve ' nin her ikisi de ayarlanır `Culture` `UICulture` :
 
-   `http://localhost:5000/?culture=es-MX`
+```
+http://localhost:5000/?culture=es-MX
+```
 
 ### <a name="cookierequestcultureprovider"></a>CookieRequestCultureProvider
 
@@ -956,7 +976,9 @@ Yalnızca iki ( `culture` veya) birini geçirirseniz `ui-culture` , sorgu dizesi
 
 Tanımlama bilgisi biçimi `c=%LANGCODE%|uic=%LANGCODE%` , ve nerede olduğu, `c` `Culture` `uic` `UICulture` Örneğin:
 
-    c=en-UK|uic=en-US
+```
+c=en-UK|uic=en-US
+```
 
 Kültür bilgisi ve UI kültürünün yalnızca birini belirtirseniz, belirtilen kültür hem kültür bilgileri hem de UI kültürü için kullanılacaktır.
 
@@ -968,24 +990,24 @@ Kültür bilgisi ve UI kültürünün yalnızca birini belirtirseniz, belirtilen
 
 1. Dişli simgesinden **Internet seçenekleri**' ne dokunun.
 
-2. **Diller**' e dokunun.
+1. **Diller**' e dokunun.
 
-    ![Internet seçenekleri](localization/_static/lang.png)
+   ![Internet seçenekleri](localization/_static/lang.png)
 
-3. **Dil tercihlerini ayarla**' ya dokunun.
+1. **Dil tercihlerini ayarla**' ya dokunun.
 
-4. **Dil ekle**' ye dokunun.
+1. **Dil ekle**' ye dokunun.
 
-5. Dilini ekleyin.
+1. Dilini ekleyin.
 
-6. Dile dokunun ve ardından **Yukarı taşı**' ya dokunun.
+1. Dile dokunun ve ardından **Yukarı taşı**' ya dokunun.
 
 ### <a name="the-content-language-http-header"></a>Content-Language HTTP üst bilgisi
 
 [Content-Language](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Content-Language) varlık üst bilgisi:
 
- - , Hedef kitleleri için tasarlanan dilleri tanımlamakta kullanılır.
- - Kullanıcının kendi tercih ettiği dile göre ayırt etmesine izin verir.
+* , Hedef kitleleri için tasarlanan dilleri tanımlamakta kullanılır.
+* Kullanıcının kendi tercih ettiği dile göre ayırt etmesine izin verir.
 
 Varlık üstbilgileri hem HTTP isteklerinde hem de yanıtlarda kullanılır.
 
@@ -993,8 +1015,8 @@ Varlık üstbilgileri hem HTTP isteklerinde hem de yanıtlarda kullanılır.
 
 `Content-Language`Üst bilgi ekleniyor:
 
- - Requestlocalizationara yazılımı ile üstbilgiyi ayarlamaya izin verir `Content-Language` `CurrentUICulture` .
- - Yanıt üst bilgisini açıkça ayarlama gereksinimini ortadan kaldırır `Content-Language` .
+* Requestlocalizationara yazılımı ile üstbilgiyi ayarlamaya izin verir `Content-Language` `CurrentUICulture` .
+* Yanıt üst bilgisini açıkça ayarlama gereksinimini ortadan kaldırır `Content-Language` .
 
 ```csharp
 app.UseRequestLocalization(new RequestLocalizationOptions

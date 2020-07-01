@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity
-ms.openlocfilehash: 97cbc5f68d20c06e92a56ead85c8377d4e8ef582
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 31970bd2b52ad83c116067d258aa9dca2d9b3b66
+ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404593"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85793567"
 ---
 # <a name="introduction-to-identity-on-aspnet-core"></a>ASP.NET Core giriş Identity
 
@@ -93,7 +93,11 @@ Paket Yöneticisi konsolunda aşağıdaki komutu çalıştırın (PMC):
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-SQLite kullanılırken geçişler Bu adımda gerekli değildir. LocalDB için aşağıdaki komutu çalıştırın:
+SQLite kullanılırken geçişler Bu adımda gerekli değildir.
+
+[!INCLUDE [more information on the CLI for EF Core](~/includes/ef-cli.md)]
+
+LocalDB için aşağıdaki komutu çalıştırın:
 
 ```dotnetcli
 dotnet ef database update

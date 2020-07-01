@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: eb0797a26393ce425d07ea9a97109b7fe8983f91
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 5a2d39af6c921323ae9113fd4aca27dcdedd44a5
+ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407882"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85793468"
 ---
 # <a name="net-generic-host"></a>.NET genel ana bilgisayar
 
@@ -37,7 +37,7 @@ ASP.NET Core şablonları bir .NET Core genel ana bilgisayarı oluşturur <xref:
 * Yapılandırma
 * `IHostedService`uygulamalarını
 
-Bir konak başlatıldığında, bu uygulamanın, `IHostedService.StartAsync` dı kapsayıcısında bulduğu her bir uygulamasına çağrı yapılır <xref:Microsoft.Extensions.Hosting.IHostedService> . Bir Web uygulamasında, `IHostedService` uygulamalardan biri [http sunucu uygulaması](xref:fundamentals/index#servers)Başlatan bir Web hizmetidir.
+Bir konak başlatıldığında, <xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync%2A?displayProperty=nameWithType> <xref:Microsoft.Extensions.Hosting.IHostedService> hizmet kapsayıcısının barındırılan hizmetler koleksiyonunda kayıtlı her bir uygulamasına çağrı yapılır. Bir Web uygulamasında, `IHostedService` uygulamalardan biri [http sunucu uygulaması](xref:fundamentals/index#servers)Başlatan bir Web hizmetidir.
 
 Uygulamanın tüm birbirine bağlı kaynaklarını tek bir nesnede dahil etmek için başlıca neden, yaşam süresi yönetimi: uygulama başlatma ve düzgün kapanma üzerinde denetim.
 
@@ -1014,7 +1014,7 @@ ASP.NET Core şablonları bir .NET Core genel Konağı () oluşturur <xref:Micro
 * Yapılandırma
 * `IHostedService`uygulamalarını
 
-Bir konak başlatıldığında, bu uygulamanın, `IHostedService.StartAsync` dı kapsayıcısında bulduğu her bir uygulamasına çağrı yapılır <xref:Microsoft.Extensions.Hosting.IHostedService> . Bir Web uygulamasında, `IHostedService` uygulamalardan biri [http sunucu uygulaması](xref:fundamentals/index#servers)Başlatan bir Web hizmetidir.
+Bir konak başlatıldığında, <xref:Microsoft.Extensions.Hosting.IHostedService.StartAsync%2A?displayProperty=nameWithType> <xref:Microsoft.Extensions.Hosting.IHostedService> hizmet kapsayıcısının barındırılan hizmetler koleksiyonunda kayıtlı her bir uygulamasına çağrı yapılır. Bir Web uygulamasında, `IHostedService` uygulamalardan biri [http sunucu uygulaması](xref:fundamentals/index#servers)Başlatan bir Web hizmetidir.
 
 Uygulamanın tüm birbirine bağlı kaynaklarını tek bir nesnede dahil etmek için başlıca neden, yaşam süresi yönetimi: uygulama başlatma ve düzgün kapanma üzerinde denetim.
 

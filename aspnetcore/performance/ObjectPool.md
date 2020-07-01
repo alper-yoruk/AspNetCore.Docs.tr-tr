@@ -14,16 +14,16 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/ObjectPool
-ms.openlocfilehash: 8244acb39a345875d80c5528a822de23f78b6e38
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 9df7f370eb550172493478bcd8d94a9541926fec
+ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403553"
+ms.lasthandoff: 07/01/2020
+ms.locfileid: "85793556"
 ---
 # <a name="object-reuse-with-objectpool-in-aspnet-core"></a>ASP.NET Core içinde ObjectPool ile nesne yeniden kullanımı
 
-, [Steve Gordon](https://twitter.com/stevejgordon), [Ryan şimdi ak](https://github.com/rynowak)ve [Rick Anderson](https://twitter.com/RickAndMSFT)
+[Steve Gordon](https://twitter.com/stevejgordon), [Ryan şimdi ak](https://github.com/rynowak)ve [Günther fodl](https://github.com/gfoidl)
 
 <xref:Microsoft.Extensions.ObjectPool>, nesnelerin çöp toplanmasına izin vermek yerine, bir nesne grubunu yeniden kullanım için bellekte tutmayı destekleyen ASP.NET Core altyapısının bir parçasıdır.
 
@@ -42,7 +42,9 @@ Nesne havuzu her zaman performansı iyileştirmez:
 
 Yalnızca uygulamanız veya kitaplığınız için gerçekçi senaryolar kullanarak performans verilerini topladıktan sonra nesne havuzunu kullanın.
 
-**Uyarı: `ObjectPool` uygulamaz `IDisposable` . Bunu, aktiften çıkarma gerektiren türlerle kullanmanızı önermiyoruz.**
+::: moniker range="< aspnetcore-3.0"
+**Uyarı: `ObjectPool` uygulamaz `IDisposable` . Bunu, aktiften çıkarma gerektiren türlerle kullanmanızı önermiyoruz.** `ObjectPool`ASP.NET Core 3,0 ve üzeri sürümlerde desteklenir `IDisposable` .
+::: moniker-end
 
 **UNUTMAYıN: ObjectPool, ayırabilecek nesne sayısına bir sınır yerleştirmez, saklanacak nesne sayısına bir sınır koyar.**
 
@@ -63,7 +65,20 @@ ObjectPool bir uygulamada birden çok şekilde kullanılabilir:
 
 ## <a name="how-to-use-objectpool"></a>ObjectPool kullanma
 
-<xref:Microsoft.Extensions.ObjectPool.ObjectPool`1>Bir nesne almak ve <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1.Return*> nesneyi döndürmek için çağırın.  Her nesneyi döndürmenizde gereksinim yoktur. Bir nesne döndürmezseniz atık olarak toplanacaktır.
+<xref:Microsoft.Extensions.ObjectPool.ObjectPool`1.Get*>Bir nesne almak ve <xref:Microsoft.Extensions.ObjectPool.ObjectPool`1.Return*> nesneyi döndürmek için çağırın.  Her nesneyi döndürmenizde gereksinim yoktur. Bir nesne döndürmezseniz atık olarak toplanacaktır.
+
+::: moniker range=">= aspnetcore-3.0"
+Kullanıldığında <xref:Microsoft.Extensions.ObjectPool.DefaultObjectPoolProvider> ve `T` `IDisposable` şunları uygular:
+
+* Havuza ***döndürülmüyor*** öğeler silinir.
+* Havuz, DI tarafından atıldığında, havuzdaki tüm öğeler silinir.
+
+NOTE: havuz atıldıktan sonra:
+
+* Çağırma `Get` a oluşturur `ObjectDisposedException` .
+* `return`verilen öğeyi atar.
+
+::: moniker-end
 
 ## <a name="objectpool-sample"></a>ObjectPool örneği
 
