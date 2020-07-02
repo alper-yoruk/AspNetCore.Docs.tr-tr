@@ -1,8 +1,8 @@
-## <a name="debug-diagnostics"></a>Hata ayıklama tanılama
+## <a name="debug-diagnostics"></a>Hata ayıklama tanılaması
 
-Ayrıntılı yönlendirme tanı çıktısı `Logging:LogLevel:Microsoft` için, '' olarak `Debug`ayarlayın Örneğin, geliştirme ortamında uygulama *ayarlarını ayarlayın. Development.json*:
+Ayrıntılı yönlendirme tanılama çıktısı için, `Logging:LogLevel:Microsoft` olarak ayarlayın `Debug` . Geliştirme ortamında, *appsettings.Development.jsüzerindeki*günlük düzeyini ayarlayın:
 
-```JSON
+```json
 {
   "Logging": {
     "LogLevel": {
@@ -12,3 +12,4 @@ Ayrıntılı yönlendirme tanı çıktısı `Logging:LogLevel:Microsoft` için, 
     }
   }
 }
+```
