@@ -1,8 +1,8 @@
-## <a name="debug-diagnostics"></a><span data-ttu-id="ad2b8-101">Hata ayıklama tanılama</span><span class="sxs-lookup"><span data-stu-id="ad2b8-101">Debug diagnostics</span></span>
+## <a name="debug-diagnostics"></a><span data-ttu-id="f3f7f-101">Hata ayıklama tanılaması</span><span class="sxs-lookup"><span data-stu-id="f3f7f-101">Debug diagnostics</span></span>
 
-<span data-ttu-id="ad2b8-102">Ayrıntılı yönlendirme tanı çıktısı `Logging:LogLevel:Microsoft` için, '' olarak `Debug`ayarlayın</span><span class="sxs-lookup"><span data-stu-id="ad2b8-102">For detailed routing diagnostic output, set `Logging:LogLevel:Microsoft` to `Debug`.</span></span> <span data-ttu-id="ad2b8-103">Örneğin, geliştirme ortamında uygulama *ayarlarını ayarlayın. Development.json*:</span><span class="sxs-lookup"><span data-stu-id="ad2b8-103">For example, in the development environment, set *appsettings.Development.json*:</span></span>
+<span data-ttu-id="f3f7f-102">Ayrıntılı yönlendirme tanılama çıktısı için, `Logging:LogLevel:Microsoft` olarak ayarlayın `Debug` .</span><span class="sxs-lookup"><span data-stu-id="f3f7f-102">For detailed routing diagnostic output, set `Logging:LogLevel:Microsoft` to `Debug`.</span></span> <span data-ttu-id="f3f7f-103">Geliştirme ortamında, *appsettings.Development.jsüzerindeki*günlük düzeyini ayarlayın:</span><span class="sxs-lookup"><span data-stu-id="f3f7f-103">In the development environment, set the log level in *appsettings.Development.json*:</span></span>
 
-```JSON
+```json
 {
   "Logging": {
     "LogLevel": {
@@ -12,3 +12,4 @@
     }
   }
 }
+```
