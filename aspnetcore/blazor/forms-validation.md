@@ -5,7 +5,7 @@ description: İçindeki form ve alan doğrulama senaryolarını nasıl kullanaca
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/04/2020
+ms.date: 07/01/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: 1ed87b4aa2519334d2339b500a615aa96ef4d57d
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 925051d7426470aebfddbdb5ff83d7dab9f82726
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402968"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944438"
 ---
 # <a name="aspnet-core-blazor-forms-and-validation"></a>BlazorForms ve doğrulama ASP.NET Core
 
@@ -302,7 +302,7 @@ Aşağıdaki örnekte, `CustomInputText` bileşen Framework `InputText` bileşen
 }
 ```
 
-## <a name="work-with-radio-buttons"></a>Radyo düğmeleriyle çalışma
+## <a name="radio-buttons"></a>Radyo düğmeleri
 
 Bir formda radyo düğmeleriyle çalışırken, radyo düğmeleri bir grup olarak değerlendirildiğinden veri bağlama diğer öğelerden farklı işlenir. Her radyo düğmesinin değeri sabittir, ancak radyo düğmesi grubunun değeri seçili radyo düğmesinin değeridir. Aşağıdaki örnek, aşağıdakilerin nasıl yapılacağını göstermektedir:
 
@@ -390,6 +390,30 @@ Aşağıdaki, <xref:Microsoft.AspNetCore.Components.Forms.EditForm> `InputRadio`
 }
 ```
 
+## <a name="binding-select-element-options-to-c-object-null-values"></a>`<select>`Öğe seçeneklerini C# nesne değerlerine bağlama `null`
+
+Bir `<select>` öğe seçeneği değerini C# nesne değeri olarak göstermek için herhangi bir mümkün değildir `null` , çünkü:
+
+* HTML özniteliklerinin değerleri olamaz `null` . HTML olarak en yakın eşdeğeri, `null` ÖĞESINDEN html özniteliğinin yokluğunda olur `value` `<option>` .
+* `<option>`Özniteliği olmayan bir seçerken `value` , tarayıcı değeri bu öğenin *metin içeriği* olarak değerlendirir `<option>` .
+
+BlazorFramework, aşağıdakileri içereceği varsayılan davranışı bastırmak için denenmez:
+
+* Çerçevede özel durum geçici çözümleri zinciri oluşturma.
+* Geçerli çerçeve davranışında son değişiklikler.
+
+::: moniker range=">= aspnetcore-5.0"
+
+HTML 'deki en büyük plausible `null` eşdeğeri boş bir *dizedir* `value` . BlazorÇerçeve, `null` bir değerine iki yönlü bağlama yönelik boş dize dönüştürmelerini işler `<select>` .
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+BlazorÇerçeve, `null` iki yönlü bir değere bağlamayı denerken boş dize dönüştürmeleri için otomatik olarak işleme yapmaz `<select>` . Daha fazla bilgi için bkz. [ `<select>` null değere bağlamayı çözme (DotNet/aspnetcore #23221)](https://github.com/dotnet/aspnetcore/pull/23221).
+
+::: moniker-end
+
 ## <a name="validation-support"></a>Doğrulama desteği
 
 <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator>Bileşen, Basamaklandırılan veri açıklamalarını kullanarak doğrulama desteğini iliştirir <xref:Microsoft.AspNetCore.Components.Forms.EditContext> . Veri ek açıklamalarını kullanarak doğrulama desteğinin etkinleştirilmesi bu açık hareketi gerektirir. Veri ek açıklamalarıyla farklı bir doğrulama sistemi kullanmak için, öğesini <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> özel bir uygulamayla değiştirin. ASP.NET Core uygulama, başvuru kaynağında İnceleme için kullanılabilir: [`DataAnnotationsValidator`](https://github.com/dotnet/AspNetCore/blob/master/src/Components/Forms/src/DataAnnotationsValidator.cs) / [`AddDataAnnotationsValidation`](https://github.com/dotnet/AspNetCore/blob/master/src/Components/Forms/src/EditContextDataAnnotationsExtensions.cs) . Başvuru kaynağına yapılan önceki bağlantılar, deponun `master` dalından kod sağlar ve bu, ürün biriminin ASP.NET Core sonraki sürümü için geçerli geliştirmeyi temsil eder. Farklı bir sürümün dalını seçmek için GitHub dal seçicisini (örneğin `release/3.1` ) kullanın.
@@ -429,7 +453,7 @@ Bir doğrulama sonucunun [özel bir doğrulama özniteliği](xref:mvc/models/val
 using System;
 using System.ComponentModel.DataAnnotations;
 
-private class MyCustomValidator : ValidationAttribute
+private class CustomValidator : ValidationAttribute
 {
     protected override ValidationResult IsValid(object value, 
         ValidationContext validationContext)
@@ -441,6 +465,9 @@ private class MyCustomValidator : ValidationAttribute
     }
 }
 ```
+
+> [!NOTE]
+> <xref:System.ComponentModel.DataAnnotations.ValidationContext.GetService%2A?displayProperty=nameWithType>`null`. Yönteminde doğrulama için ekleme Hizmetleri `IsValid` desteklenmiyor.
 
 ### <a name="blazor-data-annotations-validation-package"></a>Blazorveri ek açıklamaları doğrulama paketi
 

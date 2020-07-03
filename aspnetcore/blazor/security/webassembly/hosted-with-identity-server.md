@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: cce6b6b1ec144e362415fe34645aef567269c873
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b0c6cbd814a23afabbbf9a0d943d28125ac1f61c
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402214"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944586"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-identity-server"></a>Blazor WebAssemblySunucu ile ASP.NET Core barındırılan bir uygulamanın güvenliğini sağlama Identity
 
@@ -32,7 +32,7 @@ Bu makalede Blazor , kullanıcıların ve API çağrılarının kimliğini doğr
 
 Visual Studio 'da:
 
-1. Yeni bir **Blazor WebAssembly** uygulama oluşturun. Daha fazla bilgi için bkz. <xref:blazor/get-started>.
+1. Yeni bir **Blazor WebAssembly** uygulama oluşturun.
 1. **Yeni Blazor uygulama oluştur** Iletişim kutusunda **kimlik doğrulama** bölümünde **Değiştir** ' i seçin.
 1. **Her kullanıcı hesabını** ve ardından **Tamam ' ı**seçin.
 1. **Gelişmiş** bölümünde **ASP.NET Core barındırılan** onay kutusunu seçin.

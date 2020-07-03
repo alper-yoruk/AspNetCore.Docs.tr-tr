@@ -4,7 +4,7 @@ author: jamesnk
 description: ASP.NET Core GRPC hizmetlerini, gRPC-Web kullanan tarayıcı uygulamalarından çağrılabilir olacak şekilde nasıl yapılandıracağınızı öğrenin.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
-ms.date: 06/29/2020
+ms.date: 06/30/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/browser
-ms.openlocfilehash: 20f72deb9895111a6e691eb1ee5cd7419c8c4cb4
-ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
+ms.openlocfilehash: 05ff343f7116509128b7370a50bcfa3c67ffb9fe
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85793508"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944249"
 ---
 # <a name="use-grpc-in-browser-apps"></a>Tarayıcı uygulamalarında gRPC kullanma
 
@@ -79,6 +79,15 @@ Yukarıdaki kod:
 * `AddCors`CORS Hizmetleri ekleme ve gRPC 'ye özgü üst bilgileri kullanıma sunan BIR CORS ilkesini yapılandırma çağrıları.
 * `UseCors`Yönlendirmeden ve bitiş noktalarından önce CORS ara yazılımını ekleme çağrıları.
 * `endpoints.MapGrpcService<GreeterService>()`CORS 'yi ile desteklerken yöntemi belirtir `RequiresCors` .
+
+### <a name="grpc-web-and-streaming"></a>gRPC-Web ve akış
+
+HTTP/2 üzerinde geleneksel gRPC, akışı tüm yönlere göre destekler. gRPC-Web, akış için sınırlı destek sunar:
+
+* gRPC-Web tarayıcısı istemcileri, istemci akışı ve çift yönlü akış yöntemlerinin çağrılmasını desteklemez.
+* Azure App Service ve IIS 'de barındırılan ASP.NET Core gRPC Hizmetleri çift yönlü akışı desteklemez.
+
+GRPC-Web kullanırken, yalnızca birli yöntemlerin ve sunucu akış yöntemlerinin kullanılması önerilir.
 
 ## <a name="call-grpc-web-from-the-browser"></a>Tarayıcıdan gRPC-Web 'i çağırma
 

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/portable-object-localization
-ms.openlocfilehash: e4053bd5024914242db1755ca34ddbeb2f2d5013
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 531e836db8613cc3382ef2f38f336a0986116334
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408129"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944490"
 ---
 # <a name="configure-portable-object-localization-in-aspnet-core"></a>ASP.NET Core taşınabilir nesne yerelleştirmesini yapılandırma
 
@@ -28,7 +28,7 @@ Bu makalede, [Orchard Core](https://github.com/OrchardCMS/OrchardCore) Framework
 
 **Note:** Orchard Core bir Microsoft ürünü değildir. Sonuç olarak, Microsoft bu özellik için destek sağlamaz.
 
-[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/POLocalization) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
+[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/localization/sample/2.x/POLocalization) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
 ## <a name="what-is-a-po-file"></a>PO dosyası nedir?
 

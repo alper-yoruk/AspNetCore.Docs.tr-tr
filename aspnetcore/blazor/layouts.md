@@ -5,7 +5,7 @@ description: Uygulamalar için yeniden kullanılabilir düzen bileşenleri oluş
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 02/12/2020
+ms.date: 06/23/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: f405bb655b2879bd546420d99ff645401ead92fc
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: fe78a144b413bf97be83d20b11148e1856608f78
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402526"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944248"
 ---
 # <a name="aspnet-core-blazor-layouts"></a>ASP.NET Core Blazor düzenleri
 
@@ -80,6 +80,9 @@ Aşağıdaki `_Imports.razor` Dosya içeri aktarmalar:
 `_Imports.razor`Dosya, [ Razor görünümler ve sayfalar için _ViewImports. cshtml dosyasına](xref:mvc/views/layout#importing-shared-directives) benzerdir, ancak özellikle Razor bileşen dosyalarına uygulanır.
 
 İçinde bir düzen belirtildiğinde, `_Imports.razor` yönlendiricinin *varsayılan düzeni*olarak belirtilen bir düzen geçersiz kılınır.
+
+> [!WARNING]
+> **not** Razor `@layout` Kök dosyasına bir yönerge eklemeyin `_Imports.razor` ve bu, uygulamadaki sınırsız bir düzen döngüsüne neden olur. Varsayılan uygulama yerleşimini denetlemek için, bileşenin yerleşimini belirtin `Router` . Daha fazla bilgi için [varsayılan düzen](#default-layout) bölümüne bakın.
 
 ## <a name="nested-layouts"></a>İç içe düzenleri
 

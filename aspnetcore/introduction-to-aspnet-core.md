@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: index
-ms.openlocfilehash: f58c25ec8b47b2bd8d425d0bfd0d52df9bbc2655
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2ad97dd7eb38b4cb69fa7af5ae1e1d1837a97443
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408207"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944550"
 ---
 # <a name="introduction-to-aspnet-core"></a>ASP.NET Core’a Giriş
 
@@ -80,7 +80,7 @@ ASP.NET Core uygulamalar geliştirmeye giriş için aşağıdaki öğretici dizi
    |----------|----------|----------|
    |Web uygulaması                   | Yeni sunucu tarafı Web UI geliştirmesi |[Sayfalarla çalışmaya başlama Razor](xref:tutorials/razor-pages/razor-pages-start) |
    |Web uygulaması                   | MVC uygulamasını sürdürme |[MVC ile çalışmaya başlama](xref:tutorials/first-mvc-app/start-mvc)|
-   |Web uygulaması                   | İstemci tarafı Web UI geliştirmesi |[Kullanmaya başlayınBlazor](xref:tutorials/first-blazor-app) |
+   |Web uygulaması                   | İstemci tarafı Web UI geliştirmesi |[Kullanmaya başlayınBlazor](https://dotnet.microsoft.com/learn/aspnet/blazor-tutorial/intro) |
    |Web API                   | Yeniden takip eden HTTP Hizmetleri |[Web API 'SI oluşturma](xref:tutorials/first-web-api)&dagger; |
    |Uzak yordam çağrısı uygulaması | Sözleşme-protokol arabellekleri kullanan ilk hizmetler |[gRPC hizmetini kullanmaya başlama](xref:tutorials/grpc/grpc-start) |
    |Gerçek zamanlı uygulama             | Sunucular ve bağlı istemciler arasında çift yönlü iletişim |[Kullanmaya başlayınSignalR](xref:tutorials/signalr) |

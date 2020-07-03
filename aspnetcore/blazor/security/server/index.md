@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: ab3baad30f78c5d5e2f969b3292d4886fcd0406d
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 69a24fc955a0f2fb524ec817eb50372052f538a1
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402318"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944262"
 ---
 # <a name="secure-aspnet-core-blazor-server-apps"></a>Güvenli ASP.NET Core Blazor Server uygulamaları
 
@@ -34,7 +34,7 @@ Proje Blazor Server oluşturulduğunda proje şablonu kimlik doğrulaması için
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-<xref:blazor/get-started>Kimlik doğrulama mekanizmasına sahip yeni bir proje oluşturmak için makalesindeki Visual Studio kılavuzunu izleyin Blazor Server .
+<xref:blazor/tooling>Kimlik doğrulama mekanizmasına sahip yeni bir proje oluşturmak için Içindeki Visual Studio kılavuzunu izleyin Blazor Server .
 
 **Yeni bir ASP.NET Core Web uygulaması oluştur** iletişim kutusunda ** Blazor Server uygulama** şablonunu seçtikten sonra, **kimlik doğrulaması**altında **Değiştir** ' i seçin.
 
@@ -49,7 +49,7 @@ Diğer ASP.NET Core projelerine yönelik aynı kimlik doğrulama mekanizması k�
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-<xref:blazor/get-started>Kimlik doğrulama mekanizmasıyla yeni bir proje oluşturmak için makalesindeki Visual Studio Code kılavuzunu izleyin Blazor Server :
+<xref:blazor/tooling>Kimlik doğrulama mekanizmasıyla yeni bir proje oluşturmak için içindeki Visual Studio Code kılavuzunu izleyin Blazor Server :
 
 ```dotnetcli
 dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
@@ -57,7 +57,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 İzin verilen kimlik doğrulama değerleri ( `{AUTHENTICATION}` ) aşağıdaki tabloda gösterilmiştir.
 
-| Kimlik doğrulama mekanizması | Açıklama |
+| Kimlik doğrulama mekanizması | Description |
 | ------------------------ | ----------- |
 | `None`varsayılanını         | Kimlik doğrulaması yok |
 | `Individual`             | ASP.NET Core ile uygulamada depolanan kullanıcılarIdentity |
@@ -75,7 +75,7 @@ Daha fazla bilgi için [`dotnet new`](/dotnet/core/tools/dotnet-new) .NET Core k
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-1. Makalesindeki Mac için Visual Studio kılavuzunu izleyin <xref:blazor/get-started> .
+1. İçindeki Mac için Visual Studio kılavuzunu izleyin <xref:blazor/tooling> .
 
 1. **Yeni Blazor Server uygulamanızı yapılandırın** adımındaki **kimlik doğrulaması** açılan listesinden **bireysel kimlik doğrulaması (uygulama içi)** seçeneğini belirleyin.
 
@@ -83,7 +83,7 @@ Daha fazla bilgi için [`dotnet new`](/dotnet/core/tools/dotnet-new) .NET Core k
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
-<xref:blazor/get-started>Kimlik doğrulama mekanizmasıyla yeni bir proje oluşturmak için makalesindeki .NET Core CLI kılavuzunu izleyin Blazor Server :
+Bir Blazor Server komut kabuğunda aşağıdaki komutu kullanarak kimlik doğrulama mekanizması ile yeni bir proje oluşturun:
 
 ```dotnetcli
 dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
@@ -91,7 +91,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 İzin verilen kimlik doğrulama değerleri ( `{AUTHENTICATION}` ) aşağıdaki tabloda gösterilmiştir.
 
-| Kimlik doğrulama mekanizması | Açıklama |
+| Kimlik doğrulama mekanizması | Description |
 | ------------------------ | ----------- |
 | `None`varsayılanını         | Kimlik doğrulaması yok |
 | `Individual`             | ASP.NET Core ile uygulamada depolanan kullanıcılarIdentity |

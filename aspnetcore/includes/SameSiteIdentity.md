@@ -1,0 +1,3 @@
+ASP.NET Core [kimliği](xref:security/authentication/identity) , veya tümleştirmesi gibi gelişmiş senaryolar haricinde, büyük ölçüde [SameSite tanımlama bilgileriyle](xref:security/samesite) etkilenmez `IFrames` `OpenIdConnect` .
+
+Kullanırken `Identity` , herhangi bir ***not*** tanımlama bilgisi sağlayıcısı veya çağrısı eklemeyin ` services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)` `Identity` .

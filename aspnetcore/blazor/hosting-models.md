@@ -15,22 +15,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: ba43ff052fbd290412fa27cf57ace3ee3491f8d0
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 56681e713e008188d57166da9c8fd4eb6923928c
+ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402565"
+ms.lasthandoff: 07/03/2020
+ms.locfileid: "85944223"
 ---
 # <a name="aspnet-core-blazor-hosting-models"></a>BlazorBarındırma modellerini ASP.NET Core
 
 [Daniel Roth](https://github.com/danroth27) tarafından
 
 Blazor, bir [Webassembly](https://webassembly.org/)tabanlı .NET çalışma zamanı ( *Blazor WebAssembly* ) veya ASP.NET Core () içindeki sunucu tarafında tarayıcıda istemci tarafı çalıştıracak şekilde tasarlanan bir Web çerçevesidir *Blazor Server* . Barındırma modelinden bağımsız olarak, uygulama ve bileşen modelleri *aynıdır*.
-
-Bu makalede açıklanan barındırma modelleriyle ilgili bir proje oluşturmak için, bkz <xref:blazor/get-started> ..
-
-Gelişmiş yapılandırma için bkz <xref:blazor/fundamentals/configuration> ..
 
 ## Blazor WebAssembly
 
@@ -155,7 +151,6 @@ IIS kullanırken, yapışkan oturumlar uygulama Isteği yönlendirme ile etkinle
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* <xref:blazor/get-started>
 * <xref:signalr/introduction>
 * <xref:blazor/fundamentals/additional-scenarios>
 * <xref:tutorials/signalr-blazor-webassembly>
