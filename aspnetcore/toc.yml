@@ -79,7 +79,7 @@
               uid: tutorials/first-mvc-app/details
         - name: Blazor
           displayName: tutorial
-          uid: tutorials/first-blazor-app
+          uid: tutorials/build-a-blazor-app
     - name: Web API’si uygulamaları
       items:
         - name: Web API’si oluşturma
@@ -285,14 +285,14 @@
           uid: blazor/index
         - name: Desteklenen platformlar
           uid: blazor/supported-platforms
-        - name: Kullanmaya başlayın
-          uid: blazor/get-started
+        - name: Araçlar
+          uid: blazor/tooling
         - name: Barındırma modelleri
           uid: blazor/hosting-models
         - name: Öğreticiler
           items:
-            - name: İlk uygulamanızı oluşturma
-              uid: tutorials/first-blazor-app
+            - name: Blazor yapılacaklar listesi uygulaması oluşturma
+              uid: tutorials/build-a-blazor-app
             - name: Blazor WebAssembly ile SignalR
               uid: tutorials/signalr-blazor-webassembly
         - name: Şablonlar
