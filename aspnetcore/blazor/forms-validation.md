@@ -5,7 +5,7 @@ description: İçindeki form ve alan doğrulama senaryolarını nasıl kullanaca
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/01/2020
+ms.date: 07/06/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: 925051d7426470aebfddbdb5ff83d7dab9f82726
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: f31a1f1d8942c9d9654dc26e946c022cf21ed9d1
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944438"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86059870"
 ---
 # <a name="aspnet-core-blazor-forms-and-validation"></a>BlazorForms ve doğrulama ASP.NET Core
 
@@ -445,6 +445,14 @@ Parametresi ile belirli bir model için çıkış doğrulama iletileri `Model` :
 
 <xref:Microsoft.AspNetCore.Components.Forms.ValidationMessage%601>Ve <xref:Microsoft.AspNetCore.Components.Forms.ValidationSummary> bileşenleri, rastgele öznitelikleri destekler. Bir bileşen parametresiyle eşleşmeyen herhangi bir öznitelik oluşturulan `<div>` or `<ul>` öğesine eklenir.
 
+Uygulamanın stil sayfasındaki (veya) doğrulama iletilerinin stilini denetleyin `wwwroot/css/app.css` `wwwroot/css/site.css` . Varsayılan `validation-message` sınıf, doğrulama iletilerinin metin rengini kırmızı olarak ayarlar:
+
+```css
+.validation-message {
+    color: red;
+}
+```
+
 ### <a name="custom-validation-attributes"></a>Özel doğrulama öznitelikleri
 
 Bir doğrulama sonucunun [özel bir doğrulama özniteliği](xref:mvc/models/validation#custom-attributes)kullanılırken bir alanla doğru şekilde ilişkilendirildiğinden emin olmak için, şunu oluştururken doğrulama bağlamını geçirin <xref:System.ComponentModel.DataAnnotations.ValidationContext.MemberName> <xref:System.ComponentModel.DataAnnotations.ValidationResult> :
@@ -467,7 +475,7 @@ private class CustomValidator : ValidationAttribute
 ```
 
 > [!NOTE]
-> <xref:System.ComponentModel.DataAnnotations.ValidationContext.GetService%2A?displayProperty=nameWithType>`null`. Yönteminde doğrulama için ekleme Hizmetleri `IsValid` desteklenmiyor.
+> <xref:System.ComponentModel.DataAnnotations.ValidationContext.GetService%2A?displayProperty=nameWithType>, `null` değeridir. Yönteminde doğrulama için ekleme Hizmetleri `IsValid` desteklenmiyor.
 
 ### <a name="blazor-data-annotations-validation-package"></a>Blazorveri ek açıklamaları doğrulama paketi
 

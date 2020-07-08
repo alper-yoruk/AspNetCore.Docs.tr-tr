@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/update-related-data
-ms.openlocfilehash: b084404a7fdd8b2fc18c407bd11705ccd1c496c1
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b442a4ce1f63c047c123315626f559155fd06424
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406309"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060143"
 ---
 # <a name="part-7-razor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>Bölüm 7, Razor ASP.NET Core EF Core olan sayfalar-Ilgili verileri güncelleştir
 
@@ -158,7 +158,7 @@ Aşağıdaki kodla *SchoolViewModels/AssignedCourseData. cs* oluşturun:
 
 , `InstructorCoursesPageModel` Düzenleme ve oluşturma sayfa modelleri için kullanacağınız temel sınıftır. `PopulateAssignedCourseData``Course`doldurmak için tüm varlıkları okur `AssignedCourseDataList` . Her kurs için kod, `CourseID` başlığı ve eğitmenin kursa atanıp atanmadığını belirler. Bir [diyez kümesi](/dotnet/api/system.collections.generic.hashset-1) etkili aramalar için kullanılır.
 
-RazorSayfada bir kurs varlıkları koleksiyonu olmadığından, model Bağlayıcısı gezinti özelliğini otomatik olarak güncelleştiremez `CourseAssignments` . Gezinti özelliğini güncelleştirmek için model cildi kullanmak yerine `CourseAssignments` , bunu yeni yöntemde yapmanız gerekir `UpdateInstructorCourses` . Bu nedenle, `CourseAssignments` özelliği model bağlamadan hariç bırakmanız gerekir. Bu, `TryUpdateModel` beyaz liste aşırı yüklemesini kullandığınız ve içerme listesinde olmadığı için çağıran kodda herhangi bir değişiklik yapılmasını gerektirmez `CourseAssignments` .
+RazorSayfada bir kurs varlıkları koleksiyonu olmadığından, model Bağlayıcısı gezinti özelliğini otomatik olarak güncelleştiremez `CourseAssignments` . Gezinti özelliğini güncelleştirmek için model cildi kullanmak yerine `CourseAssignments` , bunu yeni yöntemde yapmanız gerekir `UpdateInstructorCourses` . Bu nedenle, `CourseAssignments` özelliği model bağlamadan hariç bırakmanız gerekir. Bu, çağıran kodda herhangi bir değişiklik yapılmasını gerektirmez `TryUpdateModel` , çünkü bu aşırı yüklemeyi, belirtilen özelliklerle birlikte kullanıyor olduğunuzdan ve `CourseAssignments` içerme listesinde yer almadığınızı unutmayın.
 
 Hiçbir onay kutusu seçili değilse, içindeki kod `UpdateInstructorCourses` `CourseAssignments` gezinti özelliğini boş bir koleksiyonla başlatır ve döndürür:
 

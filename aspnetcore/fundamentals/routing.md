@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: 7ac6dc983454153792610a07c1df01fbc38c8d67
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 25464817314f79c5bfd11d982cc9b09a3c72df15
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400836"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060351"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core yönlendirme
 
@@ -565,14 +565,14 @@ Yönlendirme parametresi sınırlayıcı karakterlerini `{` ,,, `}` , `[` `]` if
 
 Yönlendirmelerde kullanılan normal ifadeler, genellikle karakteriyle başlar `^` ve dizenin başlangıç konumuyla eşleşir. İfadeler genellikle `$` karakteriyle biter ve dizenin sonuyla eşleşir. `^`Ve `$` karakterleri, normal ifadenin tüm yol parametresi değeri ile eşleştiğinden emin olun. `^`Ve karakterleri olmadan `$` normal ifade, dize içindeki herhangi bir alt dizeden eşleşir ve bu genellikle istenmeyen bir ifadedir. Aşağıdaki tabloda örnekler verilmektedir ve bunların eşleşmesinin neden eşleşmediği veya eşleşmemesi açıklanmaktadır:
 
-| İfade   | Dize    | Eşleştirme | Yorum               |
+| Expression   | Dize    | Eşleştirme | Yorum               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Yes   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | 123abc456 | Yes   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | MZ        | Yes   | Eşleşen ifadesi    |
-| `[a-z]{2}`   | MZ        | Yes   | Büyük/küçük harfe duyarlı değil    |
-| `^[a-z]{2}$` | hello     | No    | Bkz. `^` ve `$` üzeri |
-| `^[a-z]{2}$` | 123abc456 | No    | Bkz. `^` ve `$` üzeri |
+| `[a-z]{2}`   | hello     | Evet   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | 123abc456 | Evet   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | MZ        | Evet   | Eşleşen ifadesi    |
+| `[a-z]{2}`   | MZ        | Evet   | Büyük/küçük harfe duyarlı değil    |
+| `^[a-z]{2}$` | hello     | Hayır    | Bkz. `^` ve `$` üzeri |
+| `^[a-z]{2}$` | 123abc456 | Hayır    | Bkz. `^` ve `$` üzeri |
 
 Normal ifade sözdizimi hakkında daha fazla bilgi için bkz. [.NET Framework normal ifadeler](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
@@ -1436,26 +1436,26 @@ Yol kısıtlamaları, gelen URL 'de bir eşleşme meydana geldiğinde ve URL yol
 
 Aşağıdaki tabloda örnek yol kısıtlamaları ve bunların beklenen davranışları gösterilmektedir.
 
-| kısıtlama | Örnek | Örnek eşleşmeler | Notlar |
-| ---------- | ------- | --------------- | ----- |
-| `int` | `{id:int}` | `123456789`, `-123456789` | Herhangi bir tamsayıyla eşleşir. |
-| `bool` | `{active:bool}` | `true`, `FALSE` | Eşleşiyor `true` veya ' false. Büyük/küçük harf duyarsız. |
+| Kısıtlaması | Örnek | Örnek eşleşmeler | Notlar |
+|------------|---------|-----------------|-------|
+| `int` | `{id:int}` | `123456789`, `-123456789` | Herhangi bir tamsayıyla eşleşir.|
+| `bool` | `{active:bool}` | `true`, `FALSE` | Veya ile eşleşir `true` `false` . Büyük/küçük harf duyarsız.|
 | `datetime` | `{dob:datetime}` | `2016-12-31`, `2016-12-31 7:32pm` | `DateTime`Sabit kültürün geçerli bir değeriyle eşleşir. Önceki uyarıya bakın.|
 | `decimal` | `{price:decimal}` | `49.99`, `-1,000.01` | `decimal`Sabit kültürün geçerli bir değeriyle eşleşir. Önceki uyarıya bakın.|
 | `double` | `{weight:double}` | `1.234`, `-1,001.01e8` | `double`Sabit kültürün geçerli bir değeriyle eşleşir. Önceki uyarıya bakın.|
 | `float` | `{weight:float}` | `1.234`, `-1,001.01e8` | `float`Sabit kültürün geçerli bir değeriyle eşleşir. Önceki uyarıya bakın.|
-| `guid` | `{id:guid}` | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | Geçerli bir `Guid` değerle eşleşir. |
-| `long` | `{ticks:long}` | `123456789`, `-123456789` | Geçerli bir `long` değerle eşleşir. |
-| `minlength(value)` | `{username:minlength(4)}` | `Rick` | Dize en az 4 karakter olmalıdır. |
-| `maxlength(value)` | `{filename:maxlength(8)}` | `MyFile` | Dizede en fazla 8 karakter vardır. |
-| `length(length)` | `{filename:length(12)}` | `somefile.txt` | Dize tam olarak 12 karakter uzunluğunda olmalıdır. |
-| `length(min,max)` | `{filename:length(8,16)}` | `somefile.txt` | Dize en az 8 olmalı ve en fazla 16 karakter uzunluğunda olmalıdır. |
-| `min(value)` | `{age:min(18)}` | `19` | Tamsayı değeri en az 18 olmalıdır. |
-| `max(value)` | `{age:max(120)}` | `91` | Tamsayı değeri üst sınırı 120. |
-| `range(min,max)` | `{age:range(18,120)}` | `91` | Tamsayı değeri en az 18 ve en fazla 120 olmalıdır. |
-| `alpha` | `{name:alpha}` | `Rick` | Dize bir veya daha fazla alfabetik karakterden oluşmalıdır `a` - `z` .  Büyük/küçük harf duyarsız. |
-| `regex(expression)` | `{ssn:regex(^\\d{{3}}-\\d{{2}}-\\d{{4}}$)}` | `123-45-6789` | Dize, normal ifadeyle eşleşmelidir. Normal ifade tanımlama hakkında ipuçlarına bakın. |
-| `required` | `{name:required}` | `Rick` | URL oluşturma sırasında parametre olmayan bir değerin mevcut olduğunu zorlamak için kullanılır. |
+| `guid` | `{id:guid}` | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | Geçerli bir `Guid` değerle eşleşir.|
+| `long` | `{ticks:long}` | `123456789`, `-123456789` | Geçerli bir `long` değerle eşleşir.|
+| `minlength(value)` | `{username:minlength(4)}` | `Rick` | Dize en az 4 karakter olmalıdır.|
+| `maxlength(value)` | `{filename:maxlength(8)}` | `MyFile` | Dizede en fazla 8 karakter vardır.|
+| `length(length)` | `{filename:length(12)}` | `somefile.txt` | Dize tam olarak 12 karakter uzunluğunda olmalıdır.|
+| `length(min,max)` | `{filename:length(8,16)}` | `somefile.txt` | Dize en az 8 olmalı ve en fazla 16 karakter uzunluğunda olmalıdır.|
+| `min(value)` | `{age:min(18)}` | `19` | Tamsayı değeri en az 18 olmalıdır.|
+| `max(value)` | `{age:max(120)}` | `91` | Tamsayı değeri üst sınırı 120.|
+| `range(min,max)` | `{age:range(18,120)}` | `91` | Tamsayı değeri en az 18 ve en fazla 120 olmalıdır.|
+| `alpha` | `{name:alpha}` | `Rick` | Dize bir veya daha fazla alfabetik karakterden oluşmalıdır `a` - `z` . Büyük/küçük harf duyarsız.|
+| `regex(expression)` | `{ssn:regex(^\\d{{3}}-\\d{{2}}-\\d{{4}}$)}` | `123-45-6789` | Dize, normal ifadeyle eşleşmelidir. Normal ifade tanımlama hakkında ipuçlarına bakın.|
+| `required` | `{name:required}` | `Rick` | URL oluşturma sırasında parametre olmayan bir değerin mevcut olduğunu zorlamak için kullanılır.|
 
 Birden çok, iki nokta üst üste sınırlı kısıtlama tek bir parametreye uygulanabilir. Örneğin, aşağıdaki kısıtlama bir parametreyi 1 veya daha büyük bir tamsayı değeriyle kısıtlar:
 
@@ -1486,14 +1486,14 @@ Yönlendirme parametresi sınırlayıcı karakterleri,,,, `{` `}` `[` `]` ifades
 
 Yönlendirmelerde kullanılan normal ifadeler, genellikle giriş işareti `^` karakteriyle başlar ve dizenin başlangıç konumuyla eşleşir. İfadeler, genellikle dolar işareti `$` karakteriyle biter ve dizenin sonuyla eşleşir. `^`Ve `$` karakterleri, normal ifadenin tüm yol parametresi değeri ile eşleştiğinden emin olun. `^`Ve karakterleri olmadan `$` normal ifade, dize içindeki herhangi bir alt dizeden eşleşir ve bu genellikle istenmeyen bir ifadedir. Aşağıdaki tabloda örnekler verilmektedir ve bunların eşleşmesinin neden eşleşmediği veya eşleşmemesi açıklanmaktadır.
 
-| İfade   | Dize    | Eşleştirme | Yorum               |
+| Expression   | Dize    | Eşleştirme | Yorum               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Yes   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | 123abc456 | Yes   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | MZ        | Yes   | Eşleşen ifadesi    |
-| `[a-z]{2}`   | MZ        | Yes   | Büyük/küçük harfe duyarlı değil    |
-| `^[a-z]{2}$` | hello     | No    | Bkz. `^` ve `$` üzeri |
-| `^[a-z]{2}$` | 123abc456 | No    | Bkz. `^` ve `$` üzeri |
+| `[a-z]{2}`   | hello     | Evet   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | 123abc456 | Evet   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | MZ        | Evet   | Eşleşen ifadesi    |
+| `[a-z]{2}`   | MZ        | Evet   | Büyük/küçük harfe duyarlı değil    |
+| `^[a-z]{2}$` | hello     | Hayır    | Bkz. `^` ve `$` üzeri |
+| `^[a-z]{2}$` | 123abc456 | Hayır    | Bkz. `^` ve `$` üzeri |
 
 Normal ifade sözdizimi hakkında daha fazla bilgi için bkz. [.NET Framework normal ifadeler](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
@@ -1930,14 +1930,14 @@ Normal ifadeler, Yönlendirme ve C# dili tarafından kullanılanlarla benzerlik 
 
 Yönlendirmelerde kullanılan normal ifadeler, genellikle şapka işareti ( `^` ) karakteriyle başlar ve dizenin başlangıç konumuyla eşleşir. İfadeler, genellikle dolar işareti ( `$` ) karakteriyle biter ve dizenin sonuyla eşleşir. `^`Ve `$` karakterleri, normal ifadenin tüm yol parametresi değeri ile eşleştiğinden emin olun. `^`Ve karakterleri olmadan `$` normal ifade, dize içindeki herhangi bir alt dizeden eşleşir ve bu genellikle istenmeyen bir ifadedir. Aşağıdaki tabloda örnekler verilmektedir ve bunların eşleşmesinin neden eşleşmediği veya eşleşmemesi açıklanmaktadır.
 
-| İfade   | Dize    | Eşleştirme | Yorum               |
+| Expression   | Dize    | Eşleştirme | Yorum               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Yes   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | 123abc456 | Yes   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | MZ        | Yes   | Eşleşen ifadesi    |
-| `[a-z]{2}`   | MZ        | Yes   | Büyük/küçük harfe duyarlı değil    |
-| `^[a-z]{2}$` | hello     | No    | Bkz. `^` ve `$` üzeri |
-| `^[a-z]{2}$` | 123abc456 | No    | Bkz. `^` ve `$` üzeri |
+| `[a-z]{2}`   | hello     | Evet   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | 123abc456 | Evet   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | MZ        | Evet   | Eşleşen ifadesi    |
+| `[a-z]{2}`   | MZ        | Evet   | Büyük/küçük harfe duyarlı değil    |
+| `^[a-z]{2}$` | hello     | Hayır    | Bkz. `^` ve `$` üzeri |
+| `^[a-z]{2}$` | 123abc456 | Hayır    | Bkz. `^` ve `$` üzeri |
 
 Normal ifade sözdizimi hakkında daha fazla bilgi için bkz. [.NET Framework normal ifadeler](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 

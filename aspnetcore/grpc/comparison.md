@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/comparison
-ms.openlocfilehash: 08efb79f5085acff455744e46ca411777b2641e5
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: caf9e99bcd4a1887fe5d69a3641fabee08573ef1
+ms.sourcegitcommit: d1fa3d69dda675d7a52c7100742dfa6297413376
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406166"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86093315"
 ---
 # <a name="compare-grpc-services-with-http-apis"></a>gRPC hizmetlerini HTTP API’leriyle karşılaştırma
 
@@ -38,7 +38,7 @@ Aşağıdaki tabloda, gRPC ve HTTP API 'Leri arasında JSON ile yüksek düzeyde
 | Te          | [Prototip (küçük, ikili)](#performance)           | JSON (büyük, insan tarafından okunabilir)  |
 | Dikkatli olun | [Katı belirtim](#strict-specification)      | Miş. Herhangi bir HTTP geçerlidir.     |
 | Akış        | [İstemci, sunucu, iki yönlü](#streaming)       | İstemci, sunucu                |
-| Tarayıcı desteği  | [Hayır (GRPC-Web gerektirir)](#limited-browser-support) | Yes                           |
+| Tarayıcı desteği  | [Hayır (GRPC-Web gerektirir)](#limited-browser-support) | Evet                           |
 | Güvenlik         | Taşıma (TLS)                                    | Taşıma (TLS)               |
 | İstemci kod oluşturma | [Evet](#code-generation)                      | Openapı + üçüncü taraf araçları |
 
@@ -104,7 +104,7 @@ Doğrudan bir tarayıcıda bir gRPC hizmetini doğrudan çağırmak olanaksızd�
 GRPC 'nin özelliklerinin hepsi gRPC-Web tarafından desteklenmez. İstemci ve iki yönlü akış desteklenmez ve sunucu akışı için sınırlı destek vardır.
 
 > [!TIP]
-> .NET Core 'da gRPC-Web için deneysel destek vardır. <xref:grpc/browser>Daha fazla bilgi için ziyaret edin.
+> .NET Core, gRPC-Web desteğine sahiptir. <xref:grpc/browser>Daha fazla bilgi için ziyaret edin.
 
 ### <a name="not-human-readable"></a>Okunabilir değil
 

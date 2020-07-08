@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/subkeyderivation
-ms.openlocfilehash: f373c37a5ea4dab91463d011d3ecd6799ae6d014
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 619a848eb96faab6997f9ddbf4d62a1e04ee66b1
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408038"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060377"
 ---
 # <a name="subkey-derivation-and-authenticated-encryption-in-aspnet-core"></a>ASP.NET Core 'de alt anahtar türetme ve kimliği doğrulanmış şifreleme
 
@@ -43,11 +43,11 @@ Anahtar halkasındaki çoğu anahtar, bir tür entropi içerir ve "CBC-Mode ENCR
 
 AAD, üç bileşenin de kayıt düzeni için benzersiz olduğundan, bunu, şifreleme işlemlerimizin tümünde KM 'yi kullanmak yerine, KM 'den yeni anahtar türetmede kullanabiliriz. Her çağrısı için `IAuthenticatedEncryptor.Encrypt` aşağıdaki anahtar türetme süreci gerçekleşir:
 
-(K_E, K_H) = SP800_108_CTR_HMACSHA512 (K_M, AAD, contextHeader | | keyModifier)
+`( K_E, K_H ) = SP800_108_CTR_HMACSHA512(K_M, AAD, contextHeader || keyModifier)`
 
 Burada, (bkz. [NıST SP800-108](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf), Sec. 5,1), AŞAĞıDAKI parametrelerle NIST SP800-108 KDF 'yi arıyoruz:
 
-* Anahtar türetme anahtarı (KDK) = K_M
+* Anahtar türetme anahtarı (KDK) =`K_M`
 
 * PRF = HMACSHA512
 
@@ -55,28 +55,28 @@ Burada, (bkz. [NıST SP800-108](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nist
 
 * bağlam = contextHeader | | keyModifier
 
-Bağlam üst bilgisi değişken uzunluktadır ve temelde K_E ve K_H türettiğimiz algoritmaların bir parmak izi olarak görev yapar. Anahtar değiştirici, her bir çağrı için rastgele oluşturulan 128 bitlik bir dizedir `Encrypt` ve bu belirli kimlik doğrulama şifreleme işlemi için, KDF 'ye yapılan diğer tüm girişler sabit olsa bile, ke ve KH 'nin bu belirli kimlik doğrulama şifreleme işlemi için benzersiz olmasını sağlar.
+Bağlam üst bilgisi değişken uzunluktadır ve temelde, ve türettiğimiz algoritmaların parmak izi olarak görev yapar `K_E` `K_H` . Anahtar değiştirici, her bir çağrı için rastgele oluşturulan 128 bitlik bir dizedir `Encrypt` ve bu belirli kimlik doğrulama şifreleme işlemi için, KDF 'ye yapılan diğer tüm girişler sabit olsa bile, ke ve KH 'nin bu belirli kimlik doğrulama şifreleme işlemi için benzersiz olmasını sağlar.
 
-CBC modu şifreleme + HMAC doğrulama işlemleri için | K_E | , simetrik blok şifre anahtarının uzunluğu ve | K_H | HMAC yordamının Özet boyutudur. GCM şifreleme + doğrulama işlemleri için | K_H | = 0.
+CBC modu şifreleme + HMAC doğrulama işlemleri için, `| K_E |` simetrik blok şifre anahtarının uzunluğudur ve `| K_H |` HMAC yordamının Özet boyutudur. GCM şifreleme + doğrulama işlemleri için `| K_H | = 0` .
 
 ## <a name="cbc-mode-encryption--hmac-validation"></a>CBC modu şifreleme + HMAC doğrulaması
 
-Yukarıdaki mekanizma aracılığıyla K_E oluşturulduktan sonra rastgele bir başlatma vektörü oluşturur ve düz metin şifreler için simetrik blok şifre algoritmasını çalıştırır. Başlatma vektörü ve şifreli dosyalar, MAC 'i oluşturmak için anahtar K_H ile başlatılan HMAC yordamı aracılığıyla çalıştırılır. Bu işlem ve dönüş değeri aşağıda grafik olarak gösterilir.
+`K_E`Yukarıdaki mekanizmayla bir kez üretildikten sonra rastgele bir başlatma vektörü oluşturur ve düz metin şifreler için simetrik blok şifre algoritmasını çalıştırır. Başlatma vektörü ve şifreli dosyalar, MAC 'i oluşturmak için anahtarla başlatılan HMAC yordamı aracılığıyla çalıştırılır `K_H` . Bu işlem ve dönüş değeri aşağıda grafik olarak gösterilir.
 
 ![CBC modunda işlem ve dönüş](subkeyderivation/_static/cbcprocess.png)
 
-*Çıkış: = keyModifier | | IV | | E_cbc (K_E, IV, veri) | | HMAC (K_H, IV | | E_cbc (K_E, IV, veri))*
+`output:= keyModifier || iv || E_cbc (K_E,iv,data) || HMAC(K_H, iv || E_cbc (K_E,iv,data))`
 
 > [!NOTE]
 > `IDataProtector.Protect`Uygulama, bir [MAGIC üst bilgisini ve anahtar kimliğini](xref:security/data-protection/implementation/authenticated-encryption-details) çağırana döndürmeden önce çıktıya alacak. Sihirli üstbilgi ve anahtar kimliği, [AAD](xref:security/data-protection/implementation/subkeyderivation#data-protection-implementation-subkey-derivation-aad)'nin örtük bir parçası olduğundan ve anahtar değiştiricisi KDF 'ye giriş olarak beslendiği için, bu, son döndürülen yükün her bir BAYTıNıN Mac tarafından doğrulanması anlamına gelir.
 
 ## <a name="galoiscounter-mode-encryption--validation"></a>Galoa/sayaç modu şifreleme + doğrulama
 
-Yukarıdaki mekanizmayla K_E oluşturulduktan sonra rastgele bir 96-bit nonce oluşturur ve simetrik blok şifre algoritmasını şifreler düz metin olarak çalıştırır ve 128 bit kimlik doğrulama etiketini oluşturur.
+Yukarıdaki mekanizmayla bir kez oluşturulduktan sonra `K_E` rastgele bir 96 bit nonce oluşturur ve simetrik blok şifre algoritmasını şifreler, düz metin olarak çalıştırır ve 128 bit kimlik doğrulama etiketini oluşturur.
 
 ![GCM modu işlemi ve döndürme](subkeyderivation/_static/galoisprocess.png)
 
-*Çıkış: = keyModifier | | nonce | | E_gcm (K_E, nonce, veri) | | authTag*
+`output := keyModifier || nonce || E_gcm (K_E,nonce,data) || authTag`
 
 > [!NOTE]
-> GCM yerel olarak AAD kavramını desteklese de, AAD parametresi için bir boş dizeyi GCM 'ye geçirmek için AAD 'yi yalnızca özgün KDF 'ye besliyoruz. Bunun nedeni iki katdır. İlk olarak, [çevikliği desteklemek için](xref:security/data-protection/implementation/context-headers#data-protection-implementation-context-headers) K_M doğrudan şifreleme anahtarı olarak kullanmak istemezsiniz. Ayrıca, GCM, girişlerinde çok sıkı benzersizlik gereksinimleri uygular. GCM şifreleme yordamının, aynı (anahtar, nonce) çiftiyle iki veya daha fazla farklı giriş verisi kümesinde çağrılması olasılığı 2 ^ 32 ' yi aşmamalıdır. K_E düzeltireceğiz 2 ^-32 sınırının afoul 'i çalıştırmadan önce 2 ^ 32 ' den fazla şifreleme işlemi gerçekleştiremedik. Bu çok fazla sayıda işlem gibi görünebilir, ancak yüksek trafikli bir Web sunucusu, bu anahtarların normal ömrü içinde boyutundaydı gün içinde 4.000.000.000 istek aracılığıyla değişebilir. 2 ^-32 olasılık sınırının uyumlu kalmasını sağlamak için, belirli bir K_M için kullanılabilir işlem sayısını genişleten bir 128 bit anahtar değiştiricisi ve 96-bit nonce kullanmaya devam ediyoruz. Tasarımın basitliği için, CBC ve GCM işlemleri arasında KDF kodu yolunu paylaşıyoruz ve AAD 'nin KDF 'de zaten kabul edildiği için, bunu GCM yordamına iletmeniz gerekmez.
+> GCM yerel olarak AAD kavramını desteklese de, AAD parametresi için bir boş dizeyi GCM 'ye geçirmek için AAD 'yi yalnızca özgün KDF 'ye besliyoruz. Bunun nedeni iki katdır. İlk olarak, bir şekilde doğrudan şifreleme anahtarı olarak kullanmak istemediğimiz [çevikliği desteklemek için](xref:security/data-protection/implementation/context-headers#data-protection-implementation-context-headers) `K_M` . Ayrıca, GCM, girişlerinde çok sıkı benzersizlik gereksinimleri uygular. GCM şifreleme yordamının, aynı (anahtar, nonce) çiftiyle iki veya daha fazla farklı giriş verisi kümesinde çağrılması olasılığı 2 ^ 32 ' yi aşmamalıdır. `K_E`2 ^-32 sınırının afoul 'i çalıştırmadan önce 2 ' den fazla ^ 32 şifreleme işlemi gerçekleştiremedik. Bu çok fazla sayıda işlem gibi görünebilir, ancak yüksek trafikli bir Web sunucusu, bu anahtarların normal ömrü içinde boyutundaydı gün içinde 4.000.000.000 istek aracılığıyla değişebilir. 2 ^-32 olasılık limitinin uyumlu kalmasını sağlamak için, bir 128 bit anahtar değiştirici ve 96-bit nonce kullanmaya devam ediyoruz. Bu, belirli bir süre için kullanılabilir işlem sayısı düzeyini önemli ölçüde uzatır `K_M` . Tasarımın basitliği için, CBC ve GCM işlemleri arasında KDF kodu yolunu paylaşıyoruz ve AAD 'nin KDF 'de zaten kabul edildiği için, bunu GCM yordamına iletmeniz gerekmez.

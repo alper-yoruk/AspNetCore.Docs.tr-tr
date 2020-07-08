@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/proper-to-2x/membership-to-core-identity
-ms.openlocfilehash: f039772f4276d0e8bcec2629350eba2ec0e7418c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: afad542a18a357a77f4542511a3d2c3108dbfb31
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399692"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86059779"
 ---
 # <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-identity"></a>ASP.NET üyelik kimlik doğrulamasından ASP.NET Core 2,0 ' ye geçişIdentity
 
@@ -75,36 +75,33 @@ Hem üyelik hem de ASP.NET Core için tablo yapılarında ve alanlarında hafif 
 
 ### <a name="users"></a>Kullanıcılar
 
-|*Identity<br>dbo. AspNetUsers)*        ||*Üyelik <br> (dbo. aspnet_Users/dbo. aspnet_Membership)*||
-|----------------------------------------|-----------------------------------------------------------|
-|**Alan adı**                 |**Tür**|**Alan adı**                                    |**Tür**|
-|`Id`                           |string  |`aspnet_Users.UserId`                             |string  |
-|`UserName`                     |string  |`aspnet_Users.UserName`                           |string  |
-|`Email`                        |string  |`aspnet_Membership.Email`                         |string  |
-|`NormalizedUserName`           |string  |`aspnet_Users.LoweredUserName`                    |string  |
-|`NormalizedEmail`              |string  |`aspnet_Membership.LoweredEmail`                  |string  |
-|`PhoneNumber`                  |string  |`aspnet_Users.MobileAlias`                        |string  |
-|`LockoutEnabled`               |bit     |`aspnet_Membership.IsLockedOut`                   |bit     |
+|Identity<br>( `dbo.AspNetUsers` ) sütunu  |Tür     |Üyelik<br>( `dbo.aspnet_Users`  /  `dbo.aspnet_Membership` ) sütunu|Tür      |
+|-------------------------------------------|-----------------------------------------------------------------------|
+| `Id`                            | `string`| `aspnet_Users.UserId`                                      | `string` |
+| `UserName`                      | `string`| `aspnet_Users.UserName`                                    | `string` |
+| `Email`                         | `string`| `aspnet_Membership.Email`                                  | `string` |
+| `NormalizedUserName`            | `string`| `aspnet_Users.LoweredUserName`                             | `string` |
+| `NormalizedEmail`               | `string`| `aspnet_Membership.LoweredEmail`                           | `string` |
+| `PhoneNumber`                   | `string`| `aspnet_Users.MobileAlias`                                 | `string` |
+| `LockoutEnabled`                | `bit`   | `aspnet_Membership.IsLockedOut`                            | `bit`    |
 
 > [!NOTE]
 > Alan eşlemelerinin hepsi, ASP.NET Core üyeliğinden bire bir ilişkiye benzemez Identity . Yukarıdaki tablo, varsayılan üyelik kullanıcı şemasını alır ve ASP.NET Core şeması ile eşler Identity . Üyelik için kullanılan diğer özel alanların el ile eşlenmesi gerekir. Bu eşlemede, parola ölçütü ve parola salları iki arasında geçiş yapmadan, parola için bir eşleme yoktur. **Parolayı null olarak bırakmanız ve kullanıcılardan parolalarını sıfırlamalarını istemek için önerilir.** ASP.NET Core Identity , `LockoutEnd` Kullanıcı kilitli ise gelecekte bir tarih olarak ayarlanmalıdır. Bu, geçiş komut dosyasında gösterilmiştir.
 
 ### <a name="roles"></a>Roller
 
-|*Identity<br>dbo. AspNetRoles)*        ||*Üyelik <br> (dbo. aspnet_Roles)*||
+|Identity<br>( `dbo.AspNetRoles` ) sütunu|Tür|Üyelik<br>( `dbo.aspnet_Roles` ) sütunu|Tür|
 |----------------------------------------|-----------------------------------|
-|**Alan adı**                 |**Tür**|**Alan adı**   |**Tür**         |
-|`Id`                           |string  |`RoleId`         | string          |
-|`Name`                         |string  |`RoleName`       | string          |
-|`NormalizedName`               |string  |`LoweredRoleName`| string          |
+|`Id`                           |`string`|`RoleId`         | `string`        |
+|`Name`                         |`string`|`RoleName`       | `string`        |
+|`NormalizedName`               |`string`|`LoweredRoleName`| `string`        |
 
 ### <a name="user-roles"></a>Kullanıcı Rolleri
 
-|*Identity<br>dbo. AspNetUserRoles)*||*Üyelik <br> (dbo. aspnet_UsersInRoles)*||
-|------------------------------------|------------------------------------------|
-|**Alan adı**           |**Tür**  |**Alan adı**|**Tür**                   |
-|`RoleId`                 |string    |`RoleId`      |string                     |
-|`UserId`                 |string    |`UserId`      |string                     |
+|Identity<br>( `dbo.AspNetUserRoles` ) sütunu|Tür|Üyelik<br>( `dbo.aspnet_UsersInRoles` ) sütunu|Tür|
+|-------------------------|----------|--------------|---------------------------|
+|`RoleId`                 |`string`  |`RoleId`      |`string`                   |
+|`UserId`                 |`string`  |`UserId`      |`string`                   |
 
 *Kullanıcılar* ve *Roller*için bir geçiş betiği oluştururken önceki eşleme tablolarına başvurun. Aşağıdaki örnek, bir veritabanı sunucusunda iki veritabanınız olduğunu varsayar. Bir veritabanı var olan ASP.NET üyelik şemasını ve verilerini içerir. Diğer *Coreıdentitysample* veritabanı, daha önce açıklanan adımlar kullanılarak oluşturulmuştur. Daha ayrıntılı bilgi için açıklamalar satır içi olarak eklenir.
 

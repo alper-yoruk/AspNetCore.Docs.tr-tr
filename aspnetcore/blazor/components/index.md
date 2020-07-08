@@ -5,7 +5,7 @@ description: RazorVerileri bağlama, olayları işleme ve bileşen yaşam döng�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/25/2020
+ms.date: 07/06/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: 0a8335461b4c9cd628d9c65b97f7ab6a74487fca
-ms.sourcegitcommit: 7f423602a1475736f61fc361327d4de0976c9649
+ms.openlocfilehash: 23aab2504368559b8d3dd21b3c0896ffc3348e2f
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85950903"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86059831"
 ---
 # <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core bileşenleri oluşturma ve kullanma Razor
 
@@ -83,15 +83,15 @@ Bileşenler, normal C# sınıflarıdır ve bir proje içinde herhangi bir yere y
 
 ### <a name="namespaces"></a>Ad alanları
 
-Genellikle, bir bileşenin ad alanı uygulamanın kök ad alanından ve uygulamanın içindeki konum (klasör) ile türetilir. Uygulamanın kök ad alanı ise `BlazorApp` ve `Counter` bileşen `Pages` klasöründe bulunuyorsa:
+Genellikle, bir bileşenin ad alanı uygulamanın kök ad alanından ve uygulamanın içindeki konum (klasör) ile türetilir. Uygulamanın kök ad alanı ise `BlazorSample` ve `Counter` bileşen `Pages` klasöründe bulunuyorsa:
 
-* `Counter`Bileşenin ad alanı `BlazorApp.Pages` .
-* Bileşenin tam nitelikli tür adı `BlazorApp.Pages.Counter` .
+* `Counter`Bileşenin ad alanı `BlazorSample.Pages` .
+* Bileşenin tam nitelikli tür adı `BlazorSample.Pages.Counter` .
 
 Bileşenleri tutan özel klasörler için, [`@using`][2] üst bileşene veya uygulamanın dosyasına bir yönerge ekleyin `_Imports.razor` . Aşağıdaki örnek, klasördeki bileşenleri kullanılabilir hale getirir `Components` :
 
 ```razor
-@using BlazorApp.Components
+@using BlazorSample.Components
 ```
 
 Bileşenlere Ayrıca kendi tam adları kullanılarak başvurulabilir, bu da [`@using`][2] yönergeyi gerektirmez:
@@ -162,7 +162,7 @@ Aşağıdaki örnek, `Counter` [`@code`][1] bir şablondan oluşturulan uygulama
 `Counter.razor.cs`:
 
 ```csharp
-namespace BlazorApp.Pages
+namespace BlazorSample.Pages
 {
     public partial class Counter
     {
@@ -481,15 +481,15 @@ public class NotifierService
 }
 ```
 
-`NotifierService`Bir tekın olarak kaydolun:
+Şunu kaydedin `NotifierService` :
 
-* İçinde Blazor WebAssembly , hizmetini hizmetine kaydedin `Program.Main` :
+* İçinde Blazor WebAssembly , hizmeti şu şekilde ayrı kaydedin `Program.Main` :
 
   ```csharp
   builder.Services.AddSingleton<NotifierService>();
   ```
 
-* İçinde Blazor Server , hizmetini hizmetine kaydedin `Startup.ConfigureServices` :
+* ' De Blazor Server , hizmeti kapsamında şu şekilde kaydedin `Startup.ConfigureServices` :
 
   ```csharp
   services.AddScoped<NotifierService>();
@@ -619,13 +619,19 @@ Aşağıdaki bileşeni göz önünde bulundurun `Expander` :
 * Bileşen parametresiyle alt içeriğin gösterilmesini değiştirir.
 
 ```razor
-<div @onclick="@Toggle">
-    Toggle (Expanded = @Expanded)
+<div @onclick="@Toggle" class="card text-white bg-success mb-3">
+    <div class="card-body">
+        <div class="panel-heading">
+            <h2>Toggle (Expanded = @Expanded)</h2>
+        </div>
 
-    @if (Expanded)
-    {
-        @ChildContent
-    }
+        @if (Expanded)
+        {
+            <div class="card-text">
+                @ChildContent
+            </div>
+        }
+    </div>
 </div>
 
 @code {
@@ -645,13 +651,15 @@ Aşağıdaki bileşeni göz önünde bulundurun `Expander` :
 `Expander`Bileşen, çağıraetkileyebilecek bir üst bileşene eklenir <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> :
 
 ```razor
+@page "/expander"
+
 <Expander Expanded="true">
-    <h1>Hello, world!</h1>
+    Expander 1 content
 </Expander>
 
 <Expander Expanded="true" />
 
-<button @onclick="@(() => StateHasChanged())">
+<button @onclick="StateHasChanged">
     Call StateHasChanged
 </button>
 ```
@@ -660,30 +668,36 @@ Başlangıçta, `Expander` bileşenleri özellikleri bir kez değiştiğinde ba�
 
 Önceki senaryodaki durumu korumak için bileşen içindeki *özel bir alanı* kullanarak, onun geçiş `Expander` durumunu koruyun.
 
-Aşağıdaki `Expander` bileşen:
+Aşağıdaki düzeltilen `Expander` bileşen:
 
 * Üst öğeden `Expanded` bileşen parametre değerini kabul eder.
 * *private field* `expanded` [OnInitialized olaydaki](xref:blazor/components/lifecycle#component-initialization-methods)bir özel alana () bileşen parametre değerini atar.
 * İç geçiş durumunu korumak için özel alanını kullanır.
 
 ```razor
-<div @onclick="@Toggle">
-    Toggle (Expanded = @expanded)
+<div @onclick="@Toggle" class="card text-white bg-success mb-3">
+    <div class="card-body">
+        <div class="panel-heading">
+            <h2>Toggle (Expanded = @expanded)</h2>
+        </div>
 
-    @if (expanded)
-    {
-        @ChildContent
-    }
+        @if (Expanded)
+        {
+            <div class="card-text">
+                @ChildContent
+            </div>
+        }
+    </div>
 </div>
 
 @code {
+    private bool expanded;
+
     [Parameter]
     public bool Expanded { get; set; }
 
     [Parameter]
     public RenderFragment ChildContent { get; set; }
-
-    private bool expanded;
 
     protected override void OnInitialized()
     {

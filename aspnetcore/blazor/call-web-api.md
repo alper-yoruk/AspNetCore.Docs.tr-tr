@@ -5,7 +5,7 @@ description: Blazor WebAssemblyÇıkış noktaları arası kaynak paylaşımı (
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/28/2020
+ms.date: 06/24/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: 2d910def31e4035c1d9cbacb3aaa721dd699c273
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: a2e320eb24d47de9e704c2a5355d28cf90bad0cd
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400758"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86059948"
 ---
 # <a name="call-a-web-api-from-aspnet-core-blazor"></a>ASP.NET Core bir Web API 'SI çağırmaBlazor
 
@@ -158,7 +158,7 @@ JSON yardımcı yöntemleri bir URI 'ye (aşağıdaki örneklerde bir Web API 's
   Döndürecek çağrılar <xref:System.Net.Http.Json.HttpClientJsonExtensions.PutAsJsonAsync%2A> <xref:System.Net.Http.HttpResponseMessage> . Yanıt iletisinden JSON içeriğinin serisini kaldırmak için, <xref:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync%2A> genişletme yöntemini kullanın:
   
   ```csharp
-  var content = response.content.ReadFromJsonAsync<WeatherForecast>();
+  var content = response.Content.ReadFromJsonAsync<WeatherForecast>();
   ```
 
 <xref:System.Net.Http>HTTP istekleri göndermeye ve HTTP yanıtlarını almaya yönelik ek uzantı yöntemleri içerir. <xref:System.Net.Http.HttpClient.DeleteAsync%2A?displayProperty=nameWithType>bir Web API 'sine HTTP DELETE isteği göndermek için kullanılır.
@@ -304,7 +304,7 @@ protected override async Task OnInitializedAsync()
 ```
 
 > [!NOTE]
-> Yukarıdaki örnek tanıtım amaçlıdır. Bir Web API sunucu uygulaması, bir uç nokta mevcut olmadığında veya sunucu üzerinde işlenmeyen bir durum oluştuğunda bile JSON döndürecek şekilde yapılandırılabilir.
+> Yukarıdaki örnek tanıtım amaçlıdır. Bir Web API sunucu uygulaması, bir uç nokta mevcut olmadığında veya sunucu üzerinde işlenmeyen bir özel durum olsa bile JSON döndürecek şekilde yapılandırılabilir.
 
 Daha fazla bilgi için bkz. <xref:blazor/fundamentals/handle-errors>.
 
@@ -314,7 +314,9 @@ Tarayıcı güvenliği, bir Web sayfasının, Web sayfasını sunduğundan farkl
 
 [ Blazor WebAssembly Örnek uygulama (BlazorWebAssemblySample)](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) , Web API bileşeni () çağrısı içinde CORS 'nin kullanımını gösterir `Pages/CallWebAPI.razor` .
 
-Diğer sitelerin uygulamanıza çıkış noktaları arası kaynak paylaşımı (CORS) istekleri yapmasına izin vermek için bkz <xref:security/cors> ..
+Daha fazla bilgi ve güvenlik isteklerine yönelik kod örnekleri için bkz <xref:blazor/security/webassembly/additional-scenarios> .. Güvenli isteklerle CORS hakkında daha fazla bilgi için, önceki makalenin [CORS bölümüne](xref:blazor/security/webassembly/additional-scenarios#cross-origin-resource-sharing-cors) bakın.
+
+Daha fazla bilgi için bkz. <xref:security/cors>.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/context-headers
-ms.openlocfilehash: 078392662281253b8b6cfc0d50fddc8d66482b63
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 0995cd80c10f638c90a60630378518988ffb89ed
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406907"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060104"
 ---
 # <a name="context-headers-in-aspnet-core"></a>ASP.NET Core bağlam üst bilgileri
 
@@ -26,7 +26,7 @@ ms.locfileid: "85406907"
 
 ## <a name="background-and-theory"></a>Arka plan ve teorik
 
-Veri koruma sisteminde, "anahtar" kimliği doğrulanmış şifreleme hizmetleri sağlayabilen bir nesne anlamına gelir. Her anahtar benzersiz bir kimlik (GUID) tarafından tanımlanır ve IT algoritmik Information ve entropıc malzemesiyle birlikte bulunur. Her bir anahtarın benzersiz entropi taşıması ve sistem bunu zorunlu kılamaz ve anahtar halkasının mevcut bir anahtarın algoritmik bilgilerini değiştirerek anahtar halkasını el ile değiştirebilen geliştiriciler için de hesap yapmanız gerekir. Bu durumlarda güvenlik gereksinimlerimize ulaşmak için, veri koruma sisteminin bir [şifreleme çevikliği](https://www.microsoft.com/en-us/research/publication/cryptographic-agility-and-its-relation-to-circular-encryption/)vardır. Bu, birden çok şifreleme algoritmasında tek bir entropıc değeri güvenli bir şekilde kullanılmasına olanak tanır.
+Veri koruma sisteminde, "anahtar" kimliği doğrulanmış şifreleme hizmetleri sağlayabilen bir nesne anlamına gelir. Her anahtar benzersiz bir kimlik (GUID) tarafından tanımlanır ve IT algoritmik Information ve entropıc malzemesiyle birlikte bulunur. Her bir anahtarın benzersiz entropi taşıması ve sistem bunu zorunlu kılamaz ve anahtar halkasının mevcut bir anahtarın algoritmik bilgilerini değiştirerek anahtar halkasını el ile değiştirebilen geliştiriciler için de hesap yapmanız gerekir. Bu durumlarda güvenlik gereksinimlerimize ulaşmak için, veri koruma sisteminin bir [şifreleme çevikliği](https://www.microsoft.com/research/publication/cryptographic-agility-and-its-relation-to-circular-encryption)vardır. Bu, birden çok şifreleme algoritmasında tek bir entropıc değeri güvenli bir şekilde kullanılmasına olanak tanır.
 
 Şifreleme çevikliği destekleyen çoğu sistem, yük içindeki algoritmayla ilgili bazı tanımlayıcı bilgileri de ekleyerek bunu destekler. Algoritmanın OID 'si genellikle bunun için iyi bir adaydır. Ancak, çalıştırdığımız bir sorun aynı algoritmayı belirtmenizin birden çok yolu vardır: "AES" (CNG) ve yönetilen AES, AES, AesCryptoServiceProvider, AesCng ve Rijndadelmanaged (verilen belirli parametreler) sınıflarının hepsi aslında aynı şeydir ve bunların tümünün doğru OID 'ye eşlenmesinin devam etmemiz gerekir. Bir geliştirici özel bir algoritma (ya da başka bir AES uygulama) sağlamak istiyorlarsa, onun OID 'sini söylemeleri gerekir. Bu ek kayıt adımı, sistem yapılandırmasını özellikle sorunsuz hale getirir.
 
@@ -50,21 +50,21 @@ Bağlam üst bilgisi aşağıdaki bileşenlerden oluşur:
 
 * [32 bit] HMAC algoritmasının Özet boyutu (bayt, Big-endian).
 
-* K_E, IV, ""), simetrik blok şifreleme algoritmasının, boş bir dize girişi ve IV 'nin tamamen sıfır olan bir vektör olduğu anlamına gelir. K_E oluşturulması aşağıda açıklanmaktadır.
+* `EncCBC(K_E, IV, "")`, simetrik blok şifre algoritmasının çıktısı boş bir dize girişi, ve IV ' in hepsi sıfır vektörü olduğu anlamına gelir. Oluşturma `K_E` işlemi aşağıda açıklanmıştır.
 
-* MAC (K_H, ""), boş bir dize girişi verilen HMAC algoritmasının çıktısı. K_H oluşturulması aşağıda açıklanmaktadır.
+* `MAC(K_H, "")`, bu, boş bir dize girişi verilen HMAC algoritmasının çıktısı. Oluşturma `K_H` işlemi aşağıda açıklanmıştır.
 
-İdeal olarak, K_E ve K_H için tümüyle sıfır vektörler geçirebiliriz. Bununla birlikte, temeldeki algoritmanın herhangi bir işlem gerçekleştirmeden önce zayıf anahtarların varlığını denetliyoruz (özellikle DES ve 3DES), hepsi sıfır vektörü gibi basit veya yinelenebilir bir model kullanarak,
+İdeal olarak, ve için tüm-sıfır vektörlerini geçirebiliriz `K_E` `K_H` . Bununla birlikte, temeldeki algoritmanın herhangi bir işlem gerçekleştirmeden önce zayıf anahtarların varlığını denetliyoruz (özellikle DES ve 3DES), hepsi sıfır vektörü gibi basit veya yinelenebilir bir model kullanarak,
 
-Bunun yerine, temel alınan PRF olarak (bkz. [NıST SP800-108](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf), Sec. 5,1), sıfır uzunluklu bir anahtar, etiket ve bağlam ve HMACSHA512 ile. Türettik | K_E | + | K_H | çıkış baytları, ardından K_E ve K_H kendilerini parçalara ayırın. Matematik olarak bu, aşağıdaki gibi gösterilir.
+Bunun yerine, temel alınan PRF olarak (bkz. [NıST SP800-108](https://nvlpubs.nist.gov/nistpubs/Legacy/SP/nistspecialpublication800-108.pdf), Sec. 5,1), sıfır uzunluklu bir anahtar, etiket ve bağlam ve HMACSHA512 ile. Çıkışın baytlarını türetireceğiz `| K_E | + | K_H |` , sonra sonucun içine ve kendilerine ait olduğunu kaldırdık `K_E` `K_H` . Matematik olarak bu, aşağıdaki gibi gösterilir.
 
-(K_E | | K_H) = SP800_108_CTR (prf = HMACSHA512, Key = "", Label = "", Context = "")
+`( K_E || K_H ) = SP800_108_CTR(prf = HMACSHA512, key = "", label = "", context = "")`
 
 ### <a name="example-aes-192-cbc--hmacsha256"></a>Örnek: AES-192-CBC + HMACSHA256
 
 Örnek olarak, simetrik blok şifreleme algoritmasının AES-192-CBC ve doğrulama algoritmasının HMACSHA256 olduğu durumu göz önünde bulundurun. Aşağıdaki adımları kullanarak sistem bağlam üst bilgisini oluşturur.
 
-İlk, Let (K_E | | K_H) = SP800_108_CTR (prf = HMACSHA512, Key = "", Label = "", Context = ""), burada | K_E | = 192 bit ve | K_H | = 256 bit Belirtilen algoritmalara göre. Bu K_E = 5BB6 ' ya yol açar. 21DD ve K_H = A04A.. Aşağıdaki örnekte 00A9:
+İlk olarak, `( K_E || K_H ) = SP800_108_CTR(prf = HMACSHA512, key = "", label = "", context = "")` `| K_E | = 192 bits` `| K_H | = 256 bits` Belirtilen algoritmalara göre ve. Bu `K_E = 5BB6..21DD` `K_H = A04A..00A9` , aşağıdaki örnekte ve ' a yol açar:
 
 ```
 5B B6 C9 83 13 78 22 1D 8E 10 73 CA CF 65 8E B0
@@ -73,13 +73,13 @@ Bunun yerine, temel alınan PRF olarak (bkz. [NıST SP800-108](https://nvlpubs.n
 B7 92 3D BF 59 90 00 A9
 ```
 
-Daha sonra, Enc_CBC (K_E, IV, "") AES-192-CBC verilen IV = 0 * ve K_E yukarıdaki gibi hesaplama.
+Ardından, `Enc_CBC (K_E, IV, "")` yukarıda BELIRTILEN AES-192-CBC için `IV = 0*` işlem `K_E` .
 
-Sonuç: = F474B1872B3B53E4721DE19C0841DB6F
+`result := F474B1872B3B53E4721DE19C0841DB6F`
 
-Daha sonra, HMACSHA256 verilen K_H için işlem MAC (K_H, "").
+Daha sonra, `MAC(K_H, "")` yukarıdaki gibi VERILEN HMACSHA256 için işlem `K_H` .
 
-Sonuç: = D4791184B996092EE1202F36E8608FA8FBD98ABDFF5402F264B1D7211536220C
+`result := D4791184B996092EE1202F36E8608FA8FBD98ABDFF5402F264B1D7211536220C`
 
 Bu, aşağıdaki tam bağlam üstbilgisini üretir:
 
@@ -93,26 +93,26 @@ DB 6F D4 79 11 84 B9 96 09 2E E1 20 2F 36 E8 60
 
 Bu bağlam üst bilgisi, kimliği doğrulanmış şifreleme algoritması çiftinin parmak izi (AES-192-CBC şifrelemesi + HMACSHA256 Validation). [Yukarıda](xref:security/data-protection/implementation/context-headers#data-protection-implementation-context-headers-cbc-components) açıklanan bileşenler şunlardır:
 
-* işaretleyici (00 00)
+* işaretleyici`(00 00)`
 
-* blok şifresi anahtar uzunluğu (00 00 00 18)
+* blok şifre anahtar uzunluğu`(00 00 00 18)`
 
-* blok şifre blok boyutu (00 00 00 10)
+* blok şifre blok boyutu`(00 00 00 10)`
 
-* HMAC anahtar uzunluğu (00 00 00 20)
+* HMAC anahtar uzunluğu`(00 00 00 20)`
 
-* HMAC Özet boyutu (00 00 00 20)
+* HMAC Özet boyutu`(00 00 00 20)`
 
-* blok şifre PRP çıkışı (F4 74-DB 6F) ve
+* blok şifre PRP çıkışı `(F4 74 - DB 6F)` ve
 
-* HMAC PRF çıkışı (D4 79-End).
+* HMAC PRF çıkışı `(D4 79 - end)` .
 
 > [!NOTE]
 > CBC modu şifreleme + HMAC kimlik doğrulama bağlamı üst bilgisi, algoritma uygulamalarının Windows CNG tarafından mı yoksa yönetilen SymmetricAlgorithm ve KeyedHashAlgorithm türleriyle mi sağlandığına bakılmaksızın aynı şekilde oluşturulmuştur. Bu, farklı işletim sistemlerinde çalışan uygulamaların, algoritmaların uygulamaları arasında farklı olmasına rağmen aynı bağlam üst bilgisini güvenilir bir şekilde üretmesine olanak tanır. (Uygulamada, KeyedHashAlgorithm 'nin doğru HMAC olması gerekmez. Bu, herhangi bir anahtarlı karma algoritma türü olabilir.)
 
 ### <a name="example-3des-192-cbc--hmacsha1"></a>Örnek: 3DES-192-CBC + HMACSHA1
 
-İlk, Let (K_E | | K_H) = SP800_108_CTR (prf = HMACSHA512, Key = "", Label = "", Context = ""), burada | K_E | = 192 bit ve | K_H | = 160 bit Belirtilen algoritmalara göre. Bu K_E = A219... E2BB ve K_H = DC4A.. Aşağıdaki örnekte B464:
+İlk olarak, `( K_E || K_H ) = SP800_108_CTR(prf = HMACSHA512, key = "", label = "", context = "")` `| K_E | = 192 bits` `| K_H | = 160 bits` Belirtilen algoritmalara göre ve. Bu `K_E = A219..E2BB` `K_H = DC4A..B464` , aşağıdaki örnekte ve ' a yol açar:
 
 ```
 A2 19 60 2F 83 A9 13 EA B0 61 3A 39 B8 A6 7E 22
@@ -120,13 +120,13 @@ A2 19 60 2F 83 A9 13 EA B0 61 3A 39 B8 A6 7E 22
 D1 F7 5A 34 EB 28 3E D7 D4 67 B4 64
 ```
 
-Sonra, 3DES-192-CBC için işlem Enc_CBC (K_E, IV, "") yukarıdaki gibi IV = 0 * ve K_E.
+Daha sonra, `Enc_CBC (K_E, IV, "")` 3DES-192-CBC için `IV = 0*` ve `K_E` yukarıdaki gibi işlem.
 
-Sonuç: = ABB100F81E53E10E
+`result := ABB100F81E53E10E`
 
-Daha sonra, HMACSHA1 verilen K_H için işlem MAC (K_H, "").
+Daha sonra, `MAC(K_H, "")` yukarıdaki gibi VERILEN HMACSHA1 için işlem `K_H` .
 
-Sonuç: = 76EB189B35CF03461DDF877CD9F4B1B4D63A7555
+`result := 76EB189B35CF03461DDF877CD9F4B1B4D63A7555`
 
 Bu, aşağıda gösterildiği gibi, kimliği doğrulanmış şifreleme algoritması çiftinin (3DES-192-CBC şifrelemesi + HMACSHA1 doğrulaması) bir parmak izi olan tam bağlam üstbilgisini üretir
 
@@ -138,19 +138,19 @@ Bu, aşağıda gösterildiği gibi, kimliği doğrulanmış şifreleme algoritma
 
 Bileşenler aşağıdaki gibi kesilir:
 
-* işaretleyici (00 00)
+* işaretleyici`(00 00)`
 
-* blok şifresi anahtar uzunluğu (00 00 00 18)
+* blok şifre anahtar uzunluğu`(00 00 00 18)`
 
-* blok şifre blok boyutu (00 00 00 08)
+* blok şifre blok boyutu`(00 00 00 08)`
 
-* HMAC anahtar uzunluğu (00 00 00 14)
+* HMAC anahtar uzunluğu`(00 00 00 14)`
 
-* HMAC Özet boyutu (00 00 00 14)
+* HMAC Özet boyutu`(00 00 00 14)`
 
-* blok şifre PRP çıkışı (AB B1-E1 0E) ve
+* blok şifre PRP çıkışı `(AB B1 - E1 0E)` ve
 
-* HMAC PRF çıkışı (76 EB-End).
+* HMAC PRF çıkışı `(76 EB - end)` .
 
 ## <a name="galoiscounter-mode-encryption--authentication"></a>Galoa/sayaç modu şifreleme + kimlik doğrulama
 
@@ -166,21 +166,21 @@ Bağlam üst bilgisi aşağıdaki bileşenlerden oluşur:
 
 * [32 bit] Kimliği doğrulanmış şifreleme işlevi tarafından üretilen kimlik doğrulama etiketi boyutu (bayt, Big-endian). (Sistemimizde bu, etiket boyutu = 128 bitde düzeltilir.)
 
-* [128 bit] Enc_GCM (K_E, nonce, "") etiketi, simetrik blok şifreleme algoritmasının boş bir dize girişi verdiği ve nonce 'in 96 bitlik bir tamamen sıfır vektörü olduğu yerdir.
+* [128 bit] `Enc_GCM (K_E, nonce, "")`Simetrik blok şifreleme algoritmasının çıkışı boş bir dize girişi, ve nonce 'nin 96 bitlik bir tamamen sıfır vektörü olduğu, ' nin etiketi.
 
-K_E, CBC şifreleme + HMAC kimlik doğrulama senaryosunda aynı mekanizmayı kullanarak türetilir. Bununla birlikte, burada Play 'de K_H olmadığından, aslında şunları yapmanız gerekir | K_H | = 0 ve algoritma aşağıdaki biçime daraltır.
+`K_E`, CBC şifreleme + HMAC kimlik doğrulama senaryosunda aynı mekanizmayı kullanarak türetilir. Ancak burada hiçbir yürütme olmadığından, `K_H` temelde bu, `| K_H | = 0` algoritma aşağıdaki biçime daraltılır.
 
-K_E = SP800_108_CTR (prf = HMACSHA512, Key = "", Label = "", Context = "")
+`K_E = SP800_108_CTR(prf = HMACSHA512, key = "", label = "", context = "")`
 
 ### <a name="example-aes-256-gcm"></a>Örnek: AES-256-GCM
 
-İlk olarak, izin K_E = SP800_108_CTR (prf = HMACSHA512, Key = "", Label = "", Context = ""), burada | K_E | = 256 bit.
+Birinci, Let `K_E = SP800_108_CTR(prf = HMACSHA512, key = "", label = "", context = "")` , burada `| K_E | = 256 bits` .
 
-K_E: = 22BC6F1B171C08C4AE2F27444AF8FC8B3087A90006CAEA91FDCFB47C1B8733B8
+`K_E := 22BC6F1B171C08C4AE2F27444AF8FC8B3087A90006CAEA91FDCFB47C1B8733B8`
 
-Daha sonra, Enc_GCM (K_E, nonce, "") kimlik doğrulama etiketini AES-256-GCM verilen nonce = 096 ve yukarıdaki gibi K_E için hesaplayın.
+Ardından, `Enc_GCM (K_E, nonce, "")` yukarıda BELIRTILEN AES-256-GCM için kimlik doğrulama etiketini hesaplar `nonce = 096` `K_E` .
 
-Sonuç: = E7DCCE66DF855A323A6BB7BD7A59BE45
+`result := E7DCCE66DF855A323A6BB7BD7A59BE45`
 
 Bu, aşağıdaki tam bağlam üstbilgisini üretir:
 
@@ -192,14 +192,14 @@ BE 45
 
 Bileşenler aşağıdaki gibi kesilir:
 
-* işaretleyici (00 01)
+* işaretleyici`(00 01)`
 
-* blok şifresi anahtar uzunluğu (00 00 00 20)
+* blok şifre anahtar uzunluğu`(00 00 00 20)`
 
-* nonce boyutu (00 00 00 0C)
+* nonce boyutu`(00 00 00 0C)`
 
-* blok şifre blok boyutu (00 00 00 10)
+* blok şifre blok boyutu`(00 00 00 10)`
 
-* kimlik doğrulama etiketi boyutu (00 00 00 10) ve
+* kimlik doğrulama etiketi boyutu `(00 00 00 10)` ve
 
-* blok şifresi (E7 DC-End) çalıştıran kimlik doğrulama etiketi.
+* blok şifresi çalıştıran kimlik doğrulama etiketi `(E7 DC - end)` .

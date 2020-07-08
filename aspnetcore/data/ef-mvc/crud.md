@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/crud
-ms.openlocfilehash: 0be63811874709db95285f4013e47bc1706050b1
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e7e4c4b15cca9612a552c58029ae8b34b79070d1
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401486"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060130"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>Öğretici: EF Core ile CRUD Işlevselliği uygulama-ASP.NET MVC
 
@@ -187,7 +187,7 @@ Bu değişiklikler, aşırı nakletmeyi engellemek için en iyi güvenlik uygula
 
 Yeni kod, mevcut varlığı okur ve `TryUpdateModel` alınan varlıktaki alanları, [postalanan form verilerinde Kullanıcı girişine göre](xref:mvc/models/model-binding)güncelleştirmek için çağırır. Entity Framework otomatik değişiklik izleme, `Modified` form girişi tarafından değiştirilen alanlardaki bayrağı ayarlar. `SaveChanges`Yöntemi çağrıldığında, Entity Framework veritabanı satırını güncelleştirmek IÇIN SQL deyimleri oluşturur. Eşzamanlılık çakışmaları yok sayılır ve yalnızca Kullanıcı tarafından güncellenen tablo sütunları veritabanında güncelleştirilir. (Sonraki bir öğretici eşzamanlılık çakışmalarının nasıl işleneceğini gösterir.)
 
-Fazla nakletmeyi önleyen en iyi yöntem olarak, **düzenleme** sayfası tarafından güncelleştirilemek istediğiniz alanlar parametreler içinde beyaz listelenmiştir `TryUpdateModel` . (Parametre listesindeki alanlar listesinden önceki boş dize, form alanları adlarıyla kullanılacak bir ön ek içindir.) Şu anda koruduğunuz ek alan yok, ancak model cildin bağlamasını istediğiniz alanları listelemek, gelecekte veri modeline alanlar eklerseniz, bunları buraya açıkça eklemeene kadar otomatik olarak korunur.
+Fazla nakletmeyi önleyen en iyi yöntem olarak, **düzenleme** sayfası tarafından güncelleştirilebilir olmasını istediğiniz alanlar `TryUpdateModel` parametrelerde belirtilir. (Parametre listesindeki alanlar listesinden önceki boş dize, form alanları adlarıyla kullanılacak bir ön ek içindir.) Şu anda koruduğunuz ek alan yok, ancak model cildin bağlamasını istediğiniz alanları listelemek, gelecekte veri modeline alanlar eklerseniz, bunları buraya açıkça eklemeene kadar otomatik olarak korunur.
 
 Bu değişikliklerin sonucu olarak, HttpPost yönteminin yöntem imzası `Edit` HttpGet `Edit` yöntemiyle aynıdır; bu nedenle, yöntemi yeniden adlandırdınız `EditPost` .
 

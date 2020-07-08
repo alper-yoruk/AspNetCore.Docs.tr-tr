@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/handle-errors
-ms.openlocfilehash: 23118193ec3829fddce392123210856839471058
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e3ce3a62f351255fd059adaa6e9b0a8e9bdc2ce7
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402851"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86059883"
 ---
 # <a name="handle-errors-in-aspnet-core-blazor-apps"></a>ASP.NET Core uygulamalardaki hataları işleme Blazor
 
@@ -62,7 +62,7 @@ Bir Blazor Server uygulamada, dosyadaki deneyimi özelleştirin `Pages/_Host.csh
 </div>
 ```
 
-`blazor-error-ui`Öğe, Blazor şablonlara () eklenen stillerle gizlenir `wwwroot/css/site.css` ve ardından bir hata oluştuğunda gösterilir:
+`blazor-error-ui`Öğe, şablonlara dahil edilen stillerle Blazor ( `wwwroot/css/app.css` veya) gizlenir `wwwroot/css/site.css` ve bir hata oluştuğunda gösterilir:
 
 ```css
 #blazor-error-ui {

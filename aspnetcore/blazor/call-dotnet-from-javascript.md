@@ -5,7 +5,7 @@ description: Uygulamalarda JavaScript işlevlerinden .NET yöntemlerini çağır
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 07/07/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-dotnet-from-javascript
-ms.openlocfilehash: 91f2aa893c06728b4b71d010241a2cb5a307ae0b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 5dc1c5a4fbaaa756cfaf09c751e516147a04c899
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400199"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060026"
 ---
 # <a name="call-net-methods-from-javascript-functions-in-aspnet-core-blazor"></a>ASP.NET Core içindeki JavaScript işlevlerinden .NET yöntemlerini çağırınBlazor
 
@@ -87,13 +87,15 @@ Varsayılan olarak, yöntem tanımlayıcısı yöntem adıdır, ancak öznitelik
 
 ```javascript
 returnArrayAsyncJs: function () {
-  DotNet.invokeMethodAsync('BlazorSample', 'DifferentMethodName')
+  DotNet.invokeMethodAsync('{APP ASSEMBLY}', 'DifferentMethodName')
     .then(data => {
       data.push(4);
       console.log(data);
     });
 }
 ```
+
+Yer tutucu, `{APP ASSEMBLY}` uygulamanın uygulama derleme adıdır (örneğin, `BlazorSample` ).
 
 ## <a name="instance-method-call"></a>Örnek yöntem çağrısı
 
@@ -182,7 +184,7 @@ Bir bellek sızıntısını önlemek ve oluşturan bir bileşende çöp toplamay
 
   ```razor
   @page "/JSInteropComponent"
-  @using BlazorSample.JsInteropClasses
+  @using {APP ASSEMBLY}.JsInteropClasses
   @implements IDisposable
   @inject IJSRuntime JSRuntime
 
@@ -210,12 +212,14 @@ Bir bellek sızıntısını önlemek ve oluşturan bir bileşende çöp toplamay
       }
   }
   ```
+  
+  Yer tutucu, `{APP ASSEMBLY}` uygulamanın uygulama derleme adıdır (örneğin, `BlazorSample` ).
 
 * Bileşen veya sınıf öğesini atmazsa <xref:Microsoft.JSInterop.DotNetObjectReference> , şunu çağırarak istemci üzerindeki nesnesini atın `.dispose()` :
 
   ```javascript
   window.myFunction = (dotnetHelper) => {
-    dotnetHelper.invokeMethod('BlazorSample', 'MyMethod');
+    dotnetHelper.invokeMethod('{APP ASSEMBLY}', 'MyMethod');
     dotnetHelper.dispose();
   }
   ```
@@ -231,9 +235,11 @@ Bir bileşenin .NET yöntemlerini çağırmak için:
 
 ```javascript
 function updateMessageCallerJS() {
-  DotNet.invokeMethod('BlazorSample', 'UpdateMessageCaller');
+  DotNet.invokeMethod('{APP ASSEMBLY}', 'UpdateMessageCaller');
 }
 ```
+
+Yer tutucu, `{APP ASSEMBLY}` uygulamanın uygulama derleme adıdır (örneğin, `BlazorSample` ).
 
 `Pages/JSInteropComponent.razor`:
 
@@ -294,7 +300,7 @@ public class MessageUpdateInvokeHelper
         action = action;
     }
 
-    [JSInvokable("BlazorSample")]
+    [JSInvokable("{APP ASSEMBLY}")]
     public void UpdateMessageCaller()
     {
         action.Invoke();
@@ -302,11 +308,13 @@ public class MessageUpdateInvokeHelper
 }
 ```
 
+Yer tutucu, `{APP ASSEMBLY}` uygulamanın uygulama derleme adıdır (örneğin, `BlazorSample` ).
+
 İstemci tarafı JavaScript 'te:
 
 ```javascript
 window.updateMessageCallerJS = (dotnetHelper) => {
-    dotnetHelper.invokeMethod('BlazorSample', 'UpdateMessageCaller');
+    dotnetHelper.invokeMethod('{APP ASSEMBLY}', 'UpdateMessageCaller');
     dotnetHelper.dispose();
 }
 ```

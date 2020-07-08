@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/update-related-data
-ms.openlocfilehash: 59bf94f6818108f09e9af147559fc304f48936bc
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 066bebf95a941fca5e7cc175c4c0d6d56abc9cb5
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401317"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86060065"
 ---
 # <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>Öğretici: ilgili verileri güncelleştirme-ASP.NET MVC EF Core
 
@@ -143,7 +143,7 @@ Kod şunları yapar:
 
 * Gezinti özelliği için Eager yüklemesini kullanarak geçerli eğitmen varlığını veritabanından alır `OfficeAssignment` . Bu, HttpGet yönteminde yaptığınız şeydir `Edit` .
 
-* Alınan eğitmen varlığını model Ciltçideki değerlerle güncelleştirir. `TryUpdateModel`Aşırı yükleme, dahil etmek istediğiniz özellikleri beyaz listelemenize olanak sağlar. Bu, [ikinci öğreticide](crud.md)açıklandığı gibi, daha fazla nakletmeyi önler.
+* Alınan eğitmen varlığını model Ciltçideki değerlerle güncelleştirir. `TryUpdateModel`Aşırı yükleme, dahil etmek istediğiniz özellikleri bildirmenize olanak sağlar. Bu, [ikinci öğreticide](crud.md)açıklandığı gibi, daha fazla nakletmeyi önler.
 
     <!-- Snippets don't play well with <ul> [!code-csharp[](intro/samples/cu/Controllers/InstructorsController.cs?range=241-244)] -->
 
@@ -211,7 +211,7 @@ Sonra, Kullanıcı **Kaydet**' i tıklattığında yürütülen kodu ekleyin. `E
 
 Yöntem imzası artık HttpGet `Edit` yönteminden farklıdır, bu nedenle Yöntem adı ' dan ' a değişir `EditPost` `Edit` .
 
-Görünüm bir kurs varlıkları koleksiyonuna sahip olmadığından, model Bağlayıcısı gezinti özelliğini otomatik olarak güncelleştiremez `CourseAssignments` . Gezinti özelliğini güncelleştirmek için model cildi kullanmak yerine `CourseAssignments` , bunu yeni yöntemde yapmanız gerekir `UpdateInstructorCourses` . Bu nedenle, `CourseAssignments` özelliği model bağlamadan hariç bırakmanız gerekir. Bu, `TryUpdateModel` beyaz liste aşırı yüklemesini kullandığınız ve içerme listesinde olmadığı için çağıran kodda herhangi bir değişiklik yapılmasını gerektirmez `CourseAssignments` .
+Görünüm bir kurs varlıkları koleksiyonuna sahip olmadığından, model Bağlayıcısı gezinti özelliğini otomatik olarak güncelleştiremez `CourseAssignments` . Gezinti özelliğini güncelleştirmek için model cildi kullanmak yerine `CourseAssignments` , bunu yeni yöntemde yapmanız gerekir `UpdateInstructorCourses` . Bu nedenle, `CourseAssignments` özelliği model bağlamadan hariç bırakmanız gerekir. Bu, `TryUpdateModel` açık onay gerektiren ve ekleme listesinde olmayan aşırı yüklemeyi kullandığınız için çağıran kodda herhangi bir değişiklik yapılmasını gerektirmez `CourseAssignments` .
 
 Hiçbir onay kutusu seçili değilse, içindeki kod `UpdateInstructorCourses` `CourseAssignments` gezinti özelliğini boş bir koleksiyonla başlatır ve döndürür:
 

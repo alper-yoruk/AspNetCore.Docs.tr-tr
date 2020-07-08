@@ -5,7 +5,7 @@ description: Bir üst bileşenden verileri alt bileşenlere nasıl akacağınız
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/16/2020
+ms.date: 07/06/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,16 +15,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/cascading-values-and-parameters
-ms.openlocfilehash: c72bf5584c7e0afdeadbb4103b5e58d91ae8c1e9
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: c426be21b520520c6745ada95be35816f7365c21
+ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399224"
+ms.lasthandoff: 07/07/2020
+ms.locfileid: "86059935"
 ---
 # <a name="aspnet-core-blazor-cascading-values-and-parameters"></a>BlazorBasamaklı değerleri ve parametreleri ASP.NET Core
 
-## <a name="cascading-values-and-parameters"></a>Değerleri ve parametreleri basamaklandırma
+, [Luke Latham](https://github.com/guardrex) ve [Daniel Roth](https://github.com/danroth27) tarafından
+
+[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
 Bazı senaryolarda, özellikle birden çok bileşen katmanı olduğunda, [bileşen parametreleri](xref:blazor/components/index#component-parameters)kullanarak bir üst bileşenden bir alt bileşene veri akışı yapmak uygun değildir. Değerleri ve parametreleri basamaklama, bir üst bileşenin tüm alt bileşenlerine değer sağlaması için kullanışlı bir yol sağlayarak bu sorunu çözebilir. Basamaklı değerler ve parametreler, bileşenlerin koordinasyonu için bir yaklaşım sağlar.
 
@@ -114,8 +116,8 @@ Basamaklı değerlerin kullanılması için, bileşenler özniteliği kullanarak
 Aynı alt ağaç içindeki aynı türdeki birden çok değeri basamakla, <xref:Microsoft.AspNetCore.Components.CascadingValue%601.Name%2A> her <xref:Microsoft.AspNetCore.Components.CascadingValue%601> bileşene ve karşılık gelen özniteliğine benzersiz bir dize sağlayın [`[CascadingParameter]`](xref:Microsoft.AspNetCore.Components.CascadingParameterAttribute) . Aşağıdaki örnekte, iki <xref:Microsoft.AspNetCore.Components.CascadingValue%601> bileşen adına göre farklı örneklerini basamakla `MyCascadingType` :
 
 ```razor
-<CascadingValue Value=@parentCascadeParameter1 Name="CascadeParam1">
-    <CascadingValue Value=@ParentCascadeParameter2 Name="CascadeParam2">
+<CascadingValue Value="@parentCascadeParameter1" Name="CascadeParam1">
+    <CascadingValue Value="@ParentCascadeParameter2" Name="CascadeParam2">
         ...
     </CascadingValue>
 </CascadingValue>
@@ -155,6 +157,8 @@ Basamaklı parametreler, bileşenlerin bileşen hiyerarşisinde işbirliği yapm
 `CascadingValuesParametersTabSet`Bileşen, `TabSet` çeşitli bileşenleri içeren bileşenini kullanır `Tab` :
 
 ```razor
+@page "/CascadingValuesParametersTabSet"
+
 <TabSet>
     <Tab Title="First tab">
         <h4>Greetings from the first tab!</h4>
@@ -176,6 +180,10 @@ Basamaklı parametreler, bileşenlerin bileşen hiyerarşisinde işbirliği yapm
         </Tab>
     }
 </TabSet>
+
+@code {
+    private bool showThirdTab;
+}
 ```
 
 Alt `Tab` Bileşenler, öğesine açıkça parametre olarak aktarılmaz `TabSet` . Bunun yerine, alt `Tab` bileşenleri öğesinin alt içeriğinin bir parçasıdır `TabSet` . Bununla birlikte, `TabSet` `Tab` üst bilgileri ve etkin sekmeyi işleyebilmesi için her bileşen hakkında hala bilmeniz gerekir. Ek kod gerektirmeden bu koordinasyonu etkinleştirmek için bileşen, `TabSet` kendisini alt bileşenler tarafından çekilen *basamaklı bir değer olarak sağlayabilir* `Tab` .
