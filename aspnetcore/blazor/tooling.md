@@ -16,12 +16,12 @@ no-loc:
 - SignalR
 uid: blazor/tooling
 zone_pivot_groups: operating-systems-set-one
-ms.openlocfilehash: bda287e54efadf8575c15c7b621416f20ae591c9
-ms.sourcegitcommit: d1fa3d69dda675d7a52c7100742dfa6297413376
+ms.openlocfilehash: 30a76eda0e94ee7bb2b2d3db918bc029865bdf1a
+ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
 ms.lasthandoff: 07/08/2020
-ms.locfileid: "86093332"
+ms.locfileid: "86147656"
 ---
 # <a name="tooling-for-aspnet-core-blazor"></a>ASP.NET Core için araç oluşturmaBlazor
 
@@ -35,9 +35,9 @@ ms.locfileid: "86093332"
 
 1. ** Blazor Uygulama**seçin. **İleri**’yi seçin.
 
-1. **Proje adı** alanında bir proje adı girin veya varsayılan proje adını kabul edin. **Konum** girişinin doğru olduğunu onaylayın veya proje için bir konum belirtin. **Oluştur**'u seçin.
+1. **Proje adı** alanında bir proje adı girin veya varsayılan proje adını kabul edin. **Konum** girişinin doğru olduğunu onaylayın veya proje için bir konum belirtin. **Oluştur**’u seçin.
 
-1. Bir Blazor WebAssembly deneyim için ** Blazor WebAssembly uygulama** şablonunu seçin. Bir Blazor Server deneyim için ** Blazor Server uygulama** şablonunu seçin. **Oluştur**'u seçin.
+1. Bir Blazor WebAssembly deneyim için ** Blazor WebAssembly uygulama** şablonunu seçin. Bir Blazor Server deneyim için ** Blazor Server uygulama** şablonunu seçin. **Oluştur**’u seçin.
 
    İki barındırma modeli hakkında daha fazla bilgi için, Blazor *Blazor WebAssembly* *Blazor Server* bkz <xref:blazor/hosting-models> ..
 
@@ -103,14 +103,9 @@ Daha fazla bilgi için, tarayıcınızla ve Linux 'unuz tarafından sunulan kıl
 
    İki barındırma modeli hakkında daha fazla bilgi için, Blazor *Blazor WebAssembly* *Blazor Server* bkz <xref:blazor/hosting-models> ..
 
-1. Aşağıdaki konfigürasyonları onaylayın:
+1. **Kimlik** doğrulamasının **kimlik doğrulaması yok**olarak ayarlandığını onaylayın. **İleri**’yi seçin.
 
-   * **Hedef Framework** , **.NET Core 3,1**olarak ayarlandı.
-   * **Kimlik doğrulaması** **yok**olarak ayarlandı.
-   
-   **İleri**’yi seçin.
-
-1. **Proje adı** alanında, uygulamayı adlandırın `WebApplication1` . **Oluştur**'u seçin.
+1. **Proje adı** alanında, uygulamayı adlandırın `WebApplication1` . **Oluştur**’u seçin.
 
 1. **Run**  >  Uygulamayı hata *ayıklayıcı olmadan*çalıştırmak için**hata ayıklama olmadan Başlat** ' ı seçin. Uygulamayı **Run**  >  *hata ayıklayıcıyla*çalıştırmak için uygulamayı**Başlat hata ayıklaması** veya Çalıştır (&#9654;) düğmesini çalıştırın.
 

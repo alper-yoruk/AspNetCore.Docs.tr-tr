@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/get-started-with-swashbuckle
-ms.openlocfilehash: 0a47ed3338ebfbc5361a6082978d407543fb95c5
-ms.sourcegitcommit: b06511252f165dd4590ba9b5beca4153fa220779
+ms.openlocfilehash: bf6375f8f63bb9db50c423706a48363f53e96549
+ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/27/2020
-ms.locfileid: "85459785"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86147662"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Swashbuckle ve ASP.NET Core kullanmaya başlayın
 
@@ -124,7 +124,7 @@ Yöntemdeki Services koleksiyonuna Swagger oluşturucuyu ekleyin `Startup.Config
 
 Önceki `UseSwaggerUI` Yöntem çağrısı [statik dosya ara yazılımını](xref:fundamentals/static-files)sunar. .NET Framework veya .NET Core 1. x 'i hedefliyorsanız, projeye [Microsoft. AspNetCore. StaticFiles](https://www.nuget.org/packages/Microsoft.AspNetCore.StaticFiles/) NuGet paketini ekleyin.
 
-Uygulamayı başlatın ve adresine gidin `http://localhost:<port>/swagger/v1/swagger.json` . Uç noktaları tanımlayan oluşturulan belge, Swagger belirtiminde gösterildiği gibi görünür [(üzerinde swagger.js)](xref:tutorials/web-api-help-pages-using-swagger#swagger-specification-swaggerjson).
+Uygulamayı başlatın ve adresine gidin `http://localhost:<port>/swagger/v1/swagger.json` . Uç noktaları tanımlayan oluşturulan belge, [Openapı belirtiminde (openapi.jsüzerinde)](xref:tutorials/web-api-help-pages-using-swagger#openapi-specification-openapijson)gösterildiği gibi görüntülenir.
 
 Swagger Kullanıcı arabirimi adresinde bulunabilir `http://localhost:<port>/swagger` . Swagger Kullanıcı arabirimi aracılığıyla API 'YI keşfet ve diğer programlarda birleştirme.
 

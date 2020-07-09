@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: a2e320eb24d47de9e704c2a5355d28cf90bad0cd
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 9c90e2a6c03e02b771cfa8f589e381d52637dc26
+ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86059948"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86147636"
 ---
 # <a name="call-a-web-api-from-aspnet-core-blazor"></a>ASP.NET Core bir Web API 'SI çağırmaBlazor
 
@@ -312,11 +312,11 @@ Daha fazla bilgi için bkz. <xref:blazor/fundamentals/handle-errors>.
 
 Tarayıcı güvenliği, bir Web sayfasının, Web sayfasını sunduğundan farklı bir etki alanına istek yapmasını engeller. Bu kısıtlamaya *aynı-Origin ilkesi*adı verilir. Aynı-kaynak ilkesi, kötü niyetli bir sitenin gizli verileri başka bir siteden okumasını engeller. Tarayıcıdan farklı bir kaynağa sahip bir uç noktaya istek yapmak için *uç noktanın* , [çıkış noktaları arası kaynak PAYLAŞıMı 'nı (CORS)](https://www.w3.org/TR/cors/)etkinleştirmesi gerekir.
 
-[ Blazor WebAssembly Örnek uygulama (BlazorWebAssemblySample)](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) , Web API bileşeni () çağrısı içinde CORS 'nin kullanımını gösterir `Pages/CallWebAPI.razor` .
+[ Blazor WebAssembly Örnek uygulama ( Blazor webassemblysample)](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) , Web API bileşeni () çağrısı içinde CORS 'nin kullanımını gösterir `Pages/CallWebAPI.razor` .
 
-Daha fazla bilgi ve güvenlik isteklerine yönelik kod örnekleri için bkz <xref:blazor/security/webassembly/additional-scenarios> .. Güvenli isteklerle CORS hakkında daha fazla bilgi için, önceki makalenin [CORS bölümüne](xref:blazor/security/webassembly/additional-scenarios#cross-origin-resource-sharing-cors) bakın.
+Uygulamalarda güvenli isteklerle CORS hakkında daha fazla bilgi için Blazor bkz <xref:blazor/security/webassembly/additional-scenarios#cross-origin-resource-sharing-cors> ..
 
-Daha fazla bilgi için bkz. <xref:security/cors>.
+ASP.NET Core uygulamalarla CORS hakkında genel bilgi için bkz <xref:security/cors> ..
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

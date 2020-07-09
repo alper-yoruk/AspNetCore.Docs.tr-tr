@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: 5a58e7ae28842e2e8a0f3bae8f47e252839903fe
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d5aa7520a637b18e014519134dfe2d2139e7c11d
+ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408883"
+ms.lasthandoff: 07/08/2020
+ms.locfileid: "86147777"
 ---
 # <a name="use-aspnet-core-signalr-with-blazor-webassembly"></a>İle ASP.NET Core kullanma SignalRBlazor WebAssembly
 
@@ -74,13 +74,13 @@ Araç seçiminiz için yönergeleri izleyin:
 
 1. ** Blazor Uygulama** ' yı seçin ve **İleri ' yi**seçin.
 
-1. `BlazorSignalRApp` **Proje adı** alanına yazın. **Konum** girişinin doğru olduğunu onaylayın veya proje için bir konum belirtin. **Oluştur**'u seçin.
+1. `BlazorSignalRApp` **Proje adı** alanına yazın. **Konum** girişinin doğru olduğunu onaylayın veya proje için bir konum belirtin. **Oluştur**’u seçin.
 
 1. ** Blazor WebAssembly Uygulama** şablonunu seçin.
 
 1. **Gelişmiş**' in altında, **ASP.NET Core barındırılan** onay kutusunu seçin.
 
-1. **Oluştur**'u seçin.
+1. **Oluştur**’u seçin.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -104,16 +104,9 @@ Araç seçiminiz için yönergeleri izleyin:
 
 1. ** Blazor WebAssembly Uygulama** şablonunu seçin. **İleri**’yi seçin.
 
-   Aşağıdaki konfigürasyonları onaylayın:
+1. **Kimlik** doğrulamasının **kimlik doğrulaması yok**olarak ayarlandığını onaylayın. **Barındırılan ASP.NET Core** onay kutusunu seçin. **İleri**’yi seçin.
 
-   * **Hedef Framework** , **.NET Core 3,1**olarak ayarlandı.
-   * **Kimlik doğrulaması** **yok**olarak ayarlandı.
-
-   **Barındırılan ASP.NET Core** onay kutusunu seçin.
-
-   **İleri**’yi seçin.
-
-1. **Proje adı** alanında, uygulamayı adlandırın `BlazorSignalRApp` . **Oluştur**'u seçin.
+1. **Proje adı** alanında, uygulamayı adlandırın `BlazorSignalRApp` . **Oluştur**’u seçin.
 
    Geliştirme sertifikasına güvenmek için bir istem görünürse, sertifikaya güvenin ve devam edin. Sertifikaya güvenmek için Kullanıcı ve anahtarlık parolaların olması gerekir.
 
