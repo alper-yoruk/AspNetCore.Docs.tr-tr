@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/sort-filter-page
-ms.openlocfilehash: 45aabc644fbeaeaa31d534877ba93cb0611f3f34
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 24643931ed84ac257d98ceb8cc6c64d0767cfc14
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401343"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212589"
 ---
 # <a name="tutorial-add-sorting-filtering-and-paging---aspnet-mvc-with-ef-core"></a>Öğretici: EF Core sıralama, filtreleme ve sayfalama-ASP.NET MVC ekleme
 
@@ -39,7 +39,7 @@ Bu öğreticide şunları yaptınız:
 > * Sayfalama bağlantıları Ekle
 > * Hakkında bir sayfa oluşturun
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * [CRUD Işlevlerini uygulama](crud.md)
 
@@ -78,7 +78,7 @@ Bu kod çok sayıda sütunla ayrıntı alabilir. [Bu serideki son öğretici,](a
 
 *Görünümler/öğrenciler/Index. cshtml*içindeki kodu, sütun başlığı köprüleri eklemek için aşağıdaki kodla değiştirin. Değiştirilen çizgiler vurgulanır.
 
-[!code-html[](intro/samples/cu/Views/Students/Index2.cshtml?highlight=16,22)]
+[!code-cshtml[](intro/samples/cu/Views/Students/Index2.cshtml?highlight=16,22)]
 
 Bu kod, `ViewData` uygun sorgu dizesi değerleriyle köprüler ayarlamak için özelliklerindeki bilgileri kullanır.
 
@@ -107,7 +107,7 @@ Yöntemine bir parametre eklediniz `searchString` `Index` . Arama dizesi değeri
 
 *Görünümler/öğrenci/Index. cshtml*'de, bir başlık, metin kutusu ve bir **arama** düğmesi oluşturmak için, açılan tablo etiketinden hemen önce vurgulanan kodu ekleyin.
 
-[!code-html[](intro/samples/cu/Views/Students/Index3.cshtml?range=9-23&highlight=5-13)]
+[!code-cshtml[](intro/samples/cu/Views/Students/Index3.cshtml?range=9-23&highlight=5-13)]
 
 Bu kod, `<form>` Arama metin kutusu ve düğme eklemek için [etiket yardımcısını](xref:mvc/views/tag-helpers/intro) kullanır. Varsayılan olarak, `<form>` etiket Yardımcısı form verilerini BIR gönderiyle gönderir, yani Parametreler, URL 'de sorgu dizeleri olarak DEĞIL http ileti gövdesinde geçirilir. HTTP GET belirttiğinizde, form verileri URL 'ye sorgu dizeleri olarak geçirilir ve bu da kullanıcıların URL 'ye yer işareti eklemesini sağlar. W3C yönergeleri, eylem bir güncelleştirme ile sonuçlanmazsa Al ' ın kullanılması önerilir.
 
@@ -186,7 +186,7 @@ return View(await PaginatedList<Student>.CreateAsync(students.AsNoTracking(), pa
 
 *Görünümler/öğrenciler/Index. cshtml*'de, mevcut kodu aşağıdaki kodla değiştirin. Değişiklikler vurgulanır.
 
-[!code-html[](intro/samples/cu/Views/Students/Index.cshtml?highlight=1,27,30,33,61-79)]
+[!code-cshtml[](intro/samples/cu/Views/Students/Index.cshtml?highlight=1,27,30,33,61-79)]
 
 `@model`Sayfanın üst kısmındaki ifade, görünümün artık nesne yerine bir nesne aldığından emin olarak belirtir `PaginatedList<T>` `List<T>` .
 
@@ -250,7 +250,7 @@ LINQ beyanı, öğrenci varlıklarını kayıt tarihine göre gruplandırır, he
 
 Aşağıdaki kodla bir *Görünümler/Home/about. cshtml* dosyası ekleyin:
 
-[!code-html[](intro/samples/cu/Views/Home/About.cshtml)]
+[!code-cshtml[](intro/samples/cu/Views/Home/About.cshtml)]
 
 Uygulamayı çalıştırın ve hakkında sayfasına gidin. Her kayıt tarihi için öğrenci sayısı bir tabloda görüntülenir.
 

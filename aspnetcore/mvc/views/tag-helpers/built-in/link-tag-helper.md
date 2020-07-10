@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/link-tag-helper
-ms.openlocfilehash: c767ff4c2a1e0d5d10ccb3ff855126f541c04f64
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ac9f6449e2b7b135318ecf116e1dba7b33ddff83
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408246"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212390"
 ---
 # <a name="link-tag-helper-in-aspnet-core"></a>ASP.NET Core etiket Yardımcısı bağlantı
 
@@ -33,11 +33,11 @@ Bağlantı etiketi Yardımcısı, CSS dosyası için CDN ve CDN kullanılabilir 
 
 Aşağıdaki Razor biçimlendirme `head` ASP.NET Core Web uygulaması şablonuyla oluşturulan bir düzen dosyasının öğesini göstermektedir:
 
-[!code-html[](link-tag-helper/sample/_Layout.cshtml?name=snippet)]
+[!code-cshtml[](link-tag-helper/sample/_Layout.cshtml?name=snippet)]
 
 Aşağıdaki kod, önceki koddan (geliştirme olmayan bir ortamda) HTML olarak işlenir:
 
-[!code-csharp[](link-tag-helper/sample/HtmlPage1.html)]
+[!code-html[](link-tag-helper/sample/HtmlPage1.html)]
 
 Önceki kodda, bağlantı etiketi Yardımcısı `<meta name="x-stylesheet-fallback-test" content="" class="sr-only" />` öğesi ve istenen *Bootstrap. min. css* dosyasının CDN üzerinde kullanılabilir olduğunu doğrulamak Için kullanılan aşağıdaki JavaScript 'i oluşturdu. Bu durumda, CSS dosyası kullanılabilir olduğundan, etiket Yardımcısı `<link />` CDN CSS dosyası ile öğeyi üretti.
 

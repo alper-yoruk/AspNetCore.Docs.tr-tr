@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: 3fdea9f553cbd37f2c27740487cfe030ebd81937
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 0ff580dd7cbefdfe3121b30490f99e0235d93bc3
+ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402097"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86176156"
 ---
 # <a name="secure-aspnet-core-blazor-webassembly"></a>Güvenli ASP.NET CoreBlazor WebAssembly
 
@@ -55,6 +55,18 @@ Benzer site tanımlama bilgilerinin kullanımı gibi, maça 'Ları doğrulamak i
 * Uygulama, Blazor WebAssembly oturum açma geri çağırma uç noktasını ( `/authentication/login-callback` ) yüklediğinde, kimlik doğrulama yanıtı işlenir.
   * Kimlik doğrulama işlemi başarıyla tamamlanırsa, kullanıcının kimliği doğrulanır ve isteğe bağlı olarak kullanıcının istediği özgün URL 'ye geri gönderilir.
   * Kimlik doğrulama işlemi herhangi bir nedenle başarısız olursa, Kullanıcı oturum açma başarısız sayfasına ( `/authentication/login-failed` ) gönderilir ve bir hata görüntülenir.
+
+## <a name="authentication-component"></a>`Authentication` bileşeni
+
+`Authentication`Bileşen ( `Pages/Authentication.razor` ) uzak kimlik doğrulama işlemlerini işler ve uygulamanın şunları kullanmasına izin verir:
+
+* Kimlik doğrulama durumları için uygulama yollarını yapılandırın.
+* Kimlik doğrulama durumları için Kullanıcı arabirimi içeriğini ayarlayın.
+* Kimlik doğrulama durumunu yönetin.
+
+Bir kullanıcıya kaydolma veya oturum açma gibi kimlik doğrulama eylemleri, Blazor Framework <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorViewCore%601> bileşenine geçirilir ve bu da kimlik doğrulama işlemlerinde durum denetimi devam eder.
+
+Daha fazla bilgi ve örnek için bkz <xref:blazor/security/webassembly/additional-scenarios> ..
 
 ## <a name="authorization"></a>Yetkilendirme
 

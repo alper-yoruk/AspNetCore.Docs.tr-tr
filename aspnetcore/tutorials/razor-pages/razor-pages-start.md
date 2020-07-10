@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/razor-pages-start
-ms.openlocfilehash: 97e3f60480bc8e7e88c8361e5b13f02d98765d9e
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 77b230f14b4eef60d771daf8fe09288a9dd3c69c
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405308"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212990"
 ---
 # <a name="tutorial-get-started-with-razor-pages-in-aspnet-core"></a>Öğretici: Razor ASP.NET Core sayfaları kullanmaya başlama
 
@@ -44,7 +44,7 @@ Bu öğreticinin sonunda, Razor daha sonraki öğreticilerde oluşturacağınız
 
 ![Giriş veya dizin sayfası](razor-pages-start/_static/home2.2.png)
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -67,7 +67,7 @@ Bu öğreticinin sonunda, Razor daha sonraki öğreticilerde oluşturacağınız
 * Visual Studio **Dosya** menüsünden **Yeni** > **Proje**' yi seçin.
 * Yeni bir ASP.NET Core Web uygulaması oluşturun ve **İleri ' yi**seçin.
   ![Yeni ASP.NET Core Web uygulaması](razor-pages-start/_static/np_2.1.png)
-* Projeyi **RazorPagesMovie**olarak adlandırın. Kodu kopyaladığınızda ve yapıştırdığınızda ad alanlarının eşleşmesi için Project *RazorPagesMovie* olarak adı vermek önemlidir.
+* Projeyi ** Razor pagesfilmi**olarak adlandırın. Kodu kopyaladığınızda ve yapıştırdığınızda ad alanlarının eşleşmesi için Project * Razor pagesfilmi* olarak adlandırmak önemlidir.
   ![Yeni ASP.NET Core Web uygulaması](razor-pages-start/_static/config.png)
 
 * Açılan **Web uygulamasındaki** **ASP.NET Core 3,1** ' i seçin ve ardından **Oluştur**' u seçin.
@@ -91,10 +91,10 @@ Bu öğreticinin sonunda, Razor daha sonraki öğreticilerde oluşturacağınız
   code -r RazorPagesMovie
   ```
 
-  * `dotnet new`Komut RazorPagesMovie klasöründe yeni bir Razor Sayfalar projesi oluşturur. *RazorPagesMovie*
-  * `code`Komut, Visual Studio Code geçerli örneğindeki *RazorPagesMovie* klasörünü açar.
+  * `dotnet new`Komutu Razor * Razor pagesmovie* klasöründe yeni bir sayfalar projesi oluşturur.
+  * `code`Komutu, Visual Studio Code geçerli örneğindeki * Razor pagesmovie* klasörünü açar.
 
-* Durum çubuğunun omnisharp Yangın simgesi yeşil ' i etkinleştirdikten sonra, **gerekli varlıkların derleme ve hata ayıklama için ' RazorPagesMovie ' içinde eksik olduğunu soran bir iletişim kutusu yok. Bunları ekleyin mi?** **Evet**' i seçin.
+* Durum çubuğunun omnisharp Yangın simgesi yeşil ' i etkinleştirdikten sonra, **gerekli varlıkların derleme ve hata ayıklama için ' pagesmovie ' içinde eksik bir iletişim kutusu yok Razor . Bunları ekleyin mi?** **Evet**’i seçin.
 
   Dosyalar *üzerinde* *launch.js* vetasks.jsiçeren bir *. vscode* dizini, projenin kök dizinine eklenir.
 
@@ -108,16 +108,14 @@ Bu öğreticinin sonunda, Razor daha sonraki öğreticilerde oluşturacağınız
 
   ![macOS Web uygulaması şablon seçimi](razor-pages-start/_static/web_app_template_vsmac.png)
 
-* Aşağıdaki konfigürasyonları onaylayın:
+* **Yeni Web uygulamanızı yapılandırın** iletişim kutusunda:
 
-  * **Hedef Framework** , **.NET Core 3,1**olarak ayarlandı.
-  * **Kimlik doğrulaması** **yok**olarak ayarlandı.
-   
+  * **Kimlik** doğrulamasının **kimlik doğrulaması yok**olarak ayarlandığını onaylayın.
+  * **Hedef çerçeve**seçme seçeneği sunulursa, en son 3. x sürümünü seçin.
+
   **İleri**’yi seçin.
 
-  ![macOS .NET Core 3,1 seçimi](razor-pages-start/_static/targetframework3.png)
-
-* Projeyi **RazorPagesMovie**olarak adlandırın ve **Oluştur**' u seçin.
+* Projeyi ** Razor pagesfilmi**olarak adlandırın ve **Oluştur**' u seçin.
 
   ![macOS projeyi Adlandır](razor-pages-start/_static/RazorPagesMovie.png)
 
@@ -190,7 +188,7 @@ Bu öğreticinin sonunda, Razor daha sonraki öğreticilerde oluşturacağınız
 
 ![Giriş veya dizin sayfası](razor-pages-start/_static/home2.2.png)
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -216,7 +214,7 @@ Bu öğreticinin sonunda, Razor daha sonraki öğreticilerde oluşturacağınız
 
   ![Yeni ASP.NET Core Web uygulaması](razor-pages-start/_static/np_2.1.png)
 
-* Projeyi **RazorPagesMovie**olarak adlandırın. Kodu kopyaladığınızda ve yapıştırdığınızda ad alanlarının eşleşmesi için Project *RazorPagesMovie* olarak adı vermek önemlidir.
+* Projeyi ** Razor pagesfilmi**olarak adlandırın. Kodu kopyaladığınızda ve yapıştırdığınızda ad alanlarının eşleşmesi için Project * Razor pagesfilmi* olarak adlandırmak önemlidir.
 
   ![Yeni ASP.NET Core Web uygulaması](razor-pages-start/_static/config.png)
 
@@ -241,10 +239,10 @@ Bu öğreticinin sonunda, Razor daha sonraki öğreticilerde oluşturacağınız
   code -r RazorPagesMovie
   ```
 
-  * `dotnet new`Komut RazorPagesMovie klasöründe yeni bir Razor Sayfalar projesi oluşturur. *RazorPagesMovie*
-  * `code`Komut, Visual Studio Code geçerli örneğindeki *RazorPagesMovie* klasörünü açar.
+  * `dotnet new`Komutu Razor * Razor pagesmovie* klasöründe yeni bir sayfalar projesi oluşturur.
+  * `code`Komutu, Visual Studio Code geçerli örneğindeki * Razor pagesmovie* klasörünü açar.
 
-* Durum çubuğunun omnisharp Yangın simgesi yeşil ' i etkinleştirdikten sonra, **gerekli varlıkların derleme ve hata ayıklama için ' RazorPagesMovie ' içinde eksik olduğunu soran bir iletişim kutusu yok. Bunları ekleyin mi?** **Evet**' i seçin.
+* Durum çubuğunun omnisharp Yangın simgesi yeşil ' i etkinleştirdikten sonra, **gerekli varlıkların derleme ve hata ayıklama için ' pagesmovie ' içinde eksik bir iletişim kutusu yok Razor . Bunları ekleyin mi?** **Evet**’i seçin.
 
   Dosyalar *üzerinde* *launch.js* vetasks.jsiçeren bir *. vscode* dizini, projenin kök dizinine eklenir.
 
@@ -256,11 +254,14 @@ Bu öğreticinin sonunda, Razor daha sonraki öğreticilerde oluşturacağınız
 
 * Sürüm 8,6 ' den önceki Mac için Visual Studio, ardından **.NET Core**  >  **uygulama**  >  **Web uygulaması**' nı seçin  >  **Next**. Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulaması**  >  **Web uygulaması**  >  **İleri**' yi seçin.
 
-* **Yeni ASP.NET Core Web API 'Nizi yapılandırın** Iletişim kutusunda **hedef Framework 'ü** **.NET Core 3,1**olarak ayarlayın.
+* **Yeni Web uygulamanızı yapılandırın** iletişim kutusunda:
 
-  ![macOS .NET Core 3,0 seçimi](razor-pages-start/_static/targetframework3.png)
+  * **Kimlik** doğrulamasının **kimlik doğrulaması yok**olarak ayarlandığını onaylayın.
+  * **Hedef çerçeve**seçme seçeneği sunulursa, en son 2. x sürümünü seçin.
 
-* Projeyi **RazorPagesMovie**olarak adlandırın ve **Oluştur**' u seçin.
+  **İleri**’yi seçin.
+
+* Projeyi ** Razor pagesfilmi**olarak adlandırın ve **Oluştur**' u seçin.
 
   ![nameproj](razor-pages-start/_static/RazorPagesMovie.png)
 

@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-web-api
-ms.openlocfilehash: 63f91086a7e9d71add7f7a5d58d96f46fa76353c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 79f36168d0430ceee3794cfb5a4e29f3671ac73f
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407791"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212629"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Öğretici: ASP.NET Core bir Web API 'SI oluşturma
 
@@ -56,7 +56,7 @@ Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
 ![İstemci, sol taraftaki bir kutu ile temsil edilir. Bir istek gönderir ve sağ tarafta çizilmiş bir kutu olan uygulamadan bir yanıt alır. Uygulama kutusu içinde, üç kutu denetleyiciyi, modeli ve veri erişim katmanını temsil eder. İstek uygulamanın denetleyicisine gelir ve denetleyici ile veri erişim katmanı arasında okuma/yazma işlemleri gerçekleştirilir. Model serileştirilir ve yanıtta istemciye döndürülür.](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -114,9 +114,7 @@ Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
   ![macOS API şablonu seçimi](first-web-api-mac/_static/api_template.png)
 
-* **Hedef Framework 'ün** **.NET Core 3,1**olarak ayarlandığını onaylayın. **İleri**’yi seçin.
-
-  ![macOS .NET Core 3,1 seçimi](first-web-api-mac/_static/api_31_config.png)
+* **Yeni ASP.NET Core Web API 'Nizi yapılandırın** iletişim kutusunda en son .NET Core 3. x **hedef çerçevesini**seçin. **İleri**’yi seçin.
 
 * **Proje adı** için *TodoApi* girin ve ardından **Oluştur**' u seçin.
 
@@ -283,7 +281,7 @@ Yukarıdaki kod:
 
   * **Model sınıfında** **TodoItem (TodoApi. modeller)** öğesini seçin.
   * **Veri bağlamı sınıfında** **TodoContext (TodoApi. modeller)** öğesini seçin.
-  * **Ekle**'yi seçin.
+  * **Ekle**’yi seçin.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
@@ -382,7 +380,7 @@ Bu yöntemler iki al uç noktası uygular:
 * `GET /api/TodoItems`
 * `GET /api/TodoItems/{id}`
 
-Tarayıcıdan veya Postman 'dan iki uç noktayı çağırarak uygulamayı test edin. Örneğin:
+Tarayıcıdan veya Postman 'dan iki uç noktayı çağırarak uygulamayı test edin. Örnek:
 
 * `https://localhost:5001/api/TodoItems`
 * `https://localhost:5001/api/TodoItems/1`
@@ -424,7 +422,7 @@ Aşağıdaki `GetTodoItem` yöntemde, yapılacaklar `"{id}"` öğesinin benzersi
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=snippet_GetByID&highlight=1-2)]
 
-## <a name="return-values"></a>Döndürülen değerler
+## <a name="return-values"></a>Dönüş değerleri
 
 `GetTodoItems`Ve yöntemlerinin dönüş türü `GetTodoItem` [ActionResult \<T> türüdür](xref:web-api/action-return-types#actionresultt-type). ASP.NET Core nesneyi [JSON](https://www.json.org/) 'a otomatik olarak serileştirir ve yanıt ILETISININ gövdesine JSON yazar. Bu dönüş türü için yanıt kodu, işlenmemiş özel durum olmadığı varsayılarak 200 ' dir. İşlenmemiş özel durumlar 5 xx hataya çevrilir.
 
@@ -435,7 +433,7 @@ Aşağıdaki `GetTodoItem` yöntemde, yapılacaklar `"{id}"` öğesinin benzersi
 
 ## <a name="the-puttodoitem-method"></a>PutTodoItem yöntemi
 
-Yöntemi inceleyin `PutTodoItem` :
+`PutTodoItem` yöntemini inceleyin:
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=snippet_Update)]
 
@@ -463,7 +461,7 @@ Aşağıdaki görüntüde Postman güncelleştirmesi gösterilmektedir:
 
 ## <a name="the-deletetodoitem-method"></a>DeleteTodoItem yöntemi
 
-Yöntemi inceleyin `DeleteTodoItem` :
+`DeleteTodoItem` yöntemini inceleyin:
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=snippet_Delete)]
 
@@ -544,7 +542,7 @@ Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
 ![İstemci, sol taraftaki bir kutu ile temsil edilir. Bir istek gönderir ve sağ tarafta çizilmiş bir kutu olan uygulamadan bir yanıt alır. Uygulama kutusu içinde, üç kutu denetleyiciyi, modeli ve veri erişim katmanını temsil eder. İstek uygulamanın denetleyicisine gelir ve denetleyici ile veri erişim katmanı arasında okuma/yazma işlemleri gerçekleştirilir. Model serileştirilir ve yanıtta istemciye döndürülür.](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -594,7 +592,7 @@ Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
 * Sürüm 8,6 ' den önceki Mac için Visual Studio, **.NET Core**  >  **uygulama**  >  **API 'si**  >  **İleri**' yi seçin. Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulama**  >  **API 'si**  >  **İleri**' yi seçin.
   
-* **Yeni ASP.NET Core Web API 'Nizi yapılandırın** iletişim kutusunda, **.NET Core 2,2*' un varsayılan **hedef çerçevesini** kabul edin.
+* **Yeni ASP.NET Core Web API 'Nizi yapılandırın** iletişim kutusunda en son .NET Core 2. x **hedef çerçevesini**seçin. **İleri**’yi seçin.
 
 * **Proje adı** için *TodoApi* girin ve ardından **Oluştur**' u seçin.
 
@@ -739,7 +737,7 @@ Bu yöntemler iki al uç noktası uygular:
 
 Hala çalışıyorsa uygulamayı durdurun. Ardından, en son değişiklikleri dahil etmek için yeniden çalıştırın.
 
-Bir tarayıcıdan iki uç noktayı çağırarak uygulamayı test edin. Örneğin:
+Bir tarayıcıdan iki uç noktayı çağırarak uygulamayı test edin. Örnek:
 
 * `https://localhost:<port>/api/todo`
 * `https://localhost:<port>/api/todo/1`
@@ -771,7 +769,7 @@ Aşağıdaki `GetTodoItem` yöntemde, yapılacaklar `"{id}"` öğesinin benzersi
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_GetByID&highlight=1-2)]
 
-## <a name="return-values"></a>Döndürülen değerler
+## <a name="return-values"></a>Dönüş değerleri
 
 `GetTodoItems`Ve yöntemlerinin dönüş türü `GetTodoItem` [ActionResult \<T> türüdür](xref:web-api/action-return-types#actionresultt-type). ASP.NET Core nesneyi [JSON](https://www.json.org/) 'a otomatik olarak serileştirir ve yanıt ILETISININ gövdesine JSON yazar. Bu dönüş türü için yanıt kodu, işlenmemiş özel durum olmadığı varsayılarak 200 ' dir. İşlenmemiş özel durumlar 5 xx hataya çevrilir.
 

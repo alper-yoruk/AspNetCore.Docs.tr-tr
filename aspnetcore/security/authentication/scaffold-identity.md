@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: 155bdfbeea06022d35bbb551d5b2d0ee5a51a093
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e2ae82b9c26771ee5da16b1611026c6d62804bce
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400823"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212937"
 ---
 # <a name="scaffold-identity-in-aspnet-core-projects"></a>ASP.NET Core projelerinde yapı iskelesi Identity
 
@@ -48,7 +48,7 @@ IdentityYeni bir veri bağlamıyla, var olan bireysel hesaplara sahip bir projey
 
 [!code-csharp[](scaffold-identity/3.1sample/StartupRemove.cs?name=snippet)]
 
-Önceki kod, alanlarda çoğaltılan kodu Yorumlar */ Identity /IdentityHostingStartup.cs*
+Önceki kod, *alanlarda/ Identity / Identity HostingStartup.cs* yinelenen kodu Yorumlar
 
 Genellikle, bireysel hesaplarla oluşturulan uygulamalar yeni bir veri bağlamı ***oluşturmamalıdır*** .
 
@@ -93,7 +93,7 @@ before dotnet ef database update
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-Identity, */ Identity /IdentityHostingStartup.cs alanlarında*yapılandırılır. Daha fazla bilgi için bkz. [ıhostingstartup](xref:fundamentals/configuration/platform-specific-configuration).
+Identity, *alanlarında/ Identity / Identity HostingStartup.cs*' de yapılandırılır. Daha fazla bilgi için bkz. [ıhostingstartup](xref:fundamentals/configuration/platform-specific-configuration).
 
 <a name="efm"></a>
 
@@ -115,7 +115,7 @@ Identity, */ Identity /IdentityHostingStartup.cs alanlarında*yapılandırılır
 
 İsteğe bağlı: () oturum açma bilgilerini `_LoginPartial` Düzen dosyasına ekleyin:
 
-[!code-html[](scaffold-identity/3.1sample/_Layout.cshtml?highlight=20)]
+[!code-cshtml[](scaffold-identity/3.1sample/_Layout.cshtml?highlight=20)]
 
 ## <a name="scaffold-identity-into-a-razor-project-with-authorization"></a>Identity Razor Yetkilendirmeyle bir projeye yapı
 
@@ -132,7 +132,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
-Bazı Identity Seçenekler */ Identity /IdentityHostingStartup.cs alanlarında*yapılandırılır. Daha fazla bilgi için bkz. [ıhostingstartup](xref:fundamentals/configuration/platform-specific-configuration).
+Bazı Identity Seçenekler, *alanlarda/ Identity / Identity HostingStartup.cs*içinde yapılandırılır. Daha fazla bilgi için bkz. [ıhostingstartup](xref:fundamentals/configuration/platform-specific-configuration).
 
 ## <a name="scaffold-identity-into-an-mvc-project-without-existing-authorization"></a>IdentityVar olan yetkilendirme olmadan BIR MVC projesinde yapı iskelesi yapın
 
@@ -154,11 +154,11 @@ dotnet ef database update
 
 İsteğe bağlı: bir Login ( `_LoginPartial` ) öğesini *views/Shared/_Layout. cshtml* dosyasına ekleyin:
 
-[!code-html[](scaffold-identity/3.1sample/_Layout.cshtml?highlight=20)]
+[!code-cshtml[](scaffold-identity/3.1sample/_Layout.cshtml?highlight=20)]
 
 * *Pages/Shared/_LoginPartial. cshtml* dosyasını *views/Shared/_LoginPartial. cshtml* olarak taşıyın
 
-Identity, */ Identity /IdentityHostingStartup.cs alanlarında*yapılandırılır. Daha fazla bilgi için bkz. ıhostingstartup.
+Identity, *alanlarında/ Identity / Identity HostingStartup.cs*' de yapılandırılır. Daha fazla bilgi için bkz. ıhostingstartup.
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
@@ -184,7 +184,7 @@ dotnet aspnet-codegenerator identity -dc MvcAuth.Data.ApplicationDbContext  --fi
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-Identity, */ Identity /IdentityHostingStartup.cs alanlarında*yapılandırılır. Daha fazla bilgi için bkz. [ıhostingstartup](xref:fundamentals/configuration/platform-specific-configuration).
+Identity, *alanlarında/ Identity / Identity HostingStartup.cs*' de yapılandırılır. Daha fazla bilgi için bkz. [ıhostingstartup](xref:fundamentals/configuration/platform-specific-configuration).
 
 ### <a name="migrations"></a>Geçişler
 
@@ -304,7 +304,7 @@ IdentitySayfa düzeni ve stilleri, varsayılan temayı kullanan sayfalar oluştu
 > [!NOTE]
 > Bu bölümdeki örnek yalnızca özelleştirme için bir başlangıç noktasıdır. En iyi kullanıcı deneyimi için büyük olasılıkla ek çalışma gerekir.
 
-Yeni bir `NavMenu_IdentityLayout` bileşen oluşturun (*paylaşılan/NavMenu_IdentityLayout. Razor*). Bileşenin biçimlendirmesi ve kodu için, uygulamanın bileşeniyle aynı içeriği kullanın `NavMenu` (*paylaşılan/navmenu. Razor*). `NavLink`Bileşendeki otomatik yeniden yönlendirmeler `RedirectToLogin` kimlik doğrulama veya yetkilendirme gerektiren bileşenler için başarısız olduğundan anonim olarak erişilemeyen bileşenlere her birini kaldırın.
+Yeni bir `NavMenu_IdentityLayout` bileşen oluşturun (*paylaşılan/NavMenu_ Identity Layout. Razor*). Bileşenin biçimlendirmesi ve kodu için, uygulamanın bileşeniyle aynı içeriği kullanın `NavMenu` (*paylaşılan/navmenu. Razor*). `NavLink`Bileşendeki otomatik yeniden yönlendirmeler `RedirectToLogin` kimlik doğrulama veya yetkilendirme gerektiren bileşenler için başarısız olduğundan anonim olarak erişilemeyen bileşenlere her birini kaldırın.
 
 *Sayfalar/paylaşılan/Layout. cshtml* dosyasında aşağıdaki değişiklikleri yapın:
 
@@ -366,7 +366,7 @@ Yeni bir `NavMenu_IdentityLayout` bileşen oluşturun (*paylaşılan/NavMenu_Ide
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
-Bazı Identity Seçenekler */ Identity /IdentityHostingStartup.cs alanlarında*yapılandırılır. Daha fazla bilgi için bkz. [ıhostingstartup](xref:fundamentals/configuration/platform-specific-configuration).
+Bazı Identity Seçenekler, *alanlarda/ Identity / Identity HostingStartup.cs*içinde yapılandırılır. Daha fazla bilgi için bkz. [ıhostingstartup](xref:fundamentals/configuration/platform-specific-configuration).
 
 <a name="full"></a>
 
@@ -406,7 +406,7 @@ Bu bölümler, kaydetme sayfasının nasıl devre dışı bırakılacağını g�
 
 Kullanıcı kaydını devre dışı bırakmak için:
 
-* Yapı iskelesi Identity . Account. Register, Account. Login ve account. RegisterConfirmation bilgilerini ekleyin. Örneğin:
+* Yapı iskelesi Identity . Account. Register, Account. Login ve account. RegisterConfirmation bilgilerini ekleyin. Örnek:
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
@@ -526,7 +526,7 @@ dotnet ef database update
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
-Identity, */ Identity /IdentityHostingStartup.cs alanlarında*yapılandırılır. Daha fazla bilgi için bkz. [ıhostingstartup](xref:fundamentals/configuration/platform-specific-configuration).
+Identity, *alanlarında/ Identity / Identity HostingStartup.cs*' de yapılandırılır. Daha fazla bilgi için bkz. [ıhostingstartup](xref:fundamentals/configuration/platform-specific-configuration).
 
 <a name="efm"></a>
 
@@ -548,7 +548,7 @@ Identity, */ Identity /IdentityHostingStartup.cs alanlarında*yapılandırılır
 
 İsteğe bağlı: () oturum açma bilgilerini `_LoginPartial` Düzen dosyasına ekleyin:
 
-[!code-html[](scaffold-identity/sample/_Layout.cshtml?highlight=37)]
+[!code-cshtml[](scaffold-identity/sample/_Layout.cshtml?highlight=37)]
 
 ## <a name="scaffold-identity-into-a-razor-project-with-authorization"></a>Identity Razor Yetkilendirmeyle bir projeye yapı
 
@@ -565,7 +565,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
-Bazı Identity Seçenekler */ Identity /IdentityHostingStartup.cs alanlarında*yapılandırılır. Daha fazla bilgi için bkz. [ıhostingstartup](xref:fundamentals/configuration/platform-specific-configuration).
+Bazı Identity Seçenekler, *alanlarda/ Identity / Identity HostingStartup.cs*içinde yapılandırılır. Daha fazla bilgi için bkz. [ıhostingstartup](xref:fundamentals/configuration/platform-specific-configuration).
 
 ## <a name="scaffold-identity-into-an-mvc-project-without-existing-authorization"></a>IdentityVar olan yetkilendirme olmadan BIR MVC projesinde yapı iskelesi yapın
 
@@ -587,11 +587,11 @@ dotnet ef database update
 
 İsteğe bağlı: bir Login ( `_LoginPartial` ) öğesini *views/Shared/_Layout. cshtml* dosyasına ekleyin:
 
-[!code-html[](scaffold-identity/sample/_LayoutMvc.cshtml?highlight=37)]
+[!code-cshtml[](scaffold-identity/sample/_LayoutMvc.cshtml?highlight=37)]
 
 * *Pages/Shared/_LoginPartial. cshtml* dosyasını *views/Shared/_LoginPartial. cshtml* olarak taşıyın
 
-Identity, */ Identity /IdentityHostingStartup.cs alanlarında*yapılandırılır. Daha fazla bilgi için bkz. ıhostingstartup.
+Identity, *alanlarında/ Identity / Identity HostingStartup.cs*' de yapılandırılır. Daha fazla bilgi için bkz. ıhostingstartup.
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
@@ -651,7 +651,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 Kullanıcı kaydını devre dışı bırakmak için:
 
-* Yapı iskelesi Identity . Account. Register, Account. Login ve account. RegisterConfirmation bilgilerini ekleyin. Örneğin:
+* Yapı iskelesi Identity . Account. Register, Account. Login ve account. RegisterConfirmation bilgilerini ekleyin. Örnek:
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"

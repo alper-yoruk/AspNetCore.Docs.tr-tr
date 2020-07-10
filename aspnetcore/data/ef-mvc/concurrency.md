@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/concurrency
-ms.openlocfilehash: 3038ae8f01273013e6c35694583d9674a1668bac
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f6ee60bf5e75256a9bf330f56b2f09b06f720a85
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401564"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212804"
 ---
 # <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>Öğretici: EF Core eşzamanlılık-ASP.NET MVC 'yi Işleme
 
@@ -45,7 +45,7 @@ Bu öğreticide şunları yaptınız:
 > * Silme sayfasını Güncelleştir
 > * Güncelleştirme ayrıntıları ve görünüm oluşturma
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * [İlgili verileri güncelleştirme](update-related-data.md)
 
@@ -148,7 +148,7 @@ Yapı iskelesi altyapısı dizin görünümünde bir ROWVERSION sütunu oluştur
 
 *Views/departmanlar/Index. cshtml* içindeki kodu aşağıdaki kodla değiştirin.
 
-[!code-html[](intro/samples/cu/Views/Departments/Index.cshtml?highlight=4,7,44)]
+[!code-cshtml[](intro/samples/cu/Views/Departments/Index.cshtml?highlight=4,7,44)]
 
 Bu, başlığı "departmanlar" olarak değiştirir, RowVersion sütununu siler ve yöneticinin adı yerine tam adı gösterir.
 
@@ -198,7 +198,7 @@ Son olarak, kod `RowVersion` değerini `departmentToUpdate` veritabanından alı
 
 * Açılan listeye "Yönetici Seç" seçeneği ekleyin.
 
-[!code-html[](intro/samples/cu/Views/Departments/Edit.cshtml?highlight=16,34-36)]
+[!code-cshtml[](intro/samples/cu/Views/Departments/Edit.cshtml?highlight=16,34-36)]
 
 ## <a name="test-concurrency-conflicts"></a>Eşzamanlılık çakışmalarını test et
 
@@ -258,7 +258,7 @@ Bir eşzamanlılık hatası yakalanmışsa, kod silme onayı sayfasını yeniden
 
 *Views/departmanlar/delete. cshtml*içinde, scafkatkli kodunu, DepartmentID ve rowversion özellikleri için bir hata iletisi alanı ve gizli alanları ekleyen aşağıdaki kodla değiştirin. Değişiklikler vurgulanır.
 
-[!code-html[](intro/samples/cu/Views/Departments/Delete.cshtml?highlight=9,38,44,45,48)]
+[!code-cshtml[](intro/samples/cu/Views/Departments/Delete.cshtml?highlight=9,38,44,45,48)]
 
 Bu, aşağıdaki değişiklikleri yapar:
 
@@ -288,11 +288,11 @@ Yeniden **Sil** ' e tıklarsanız, departmanın silindiğini gösteren dizin say
 
 RowVersion sütununu silmek ve yöneticinin tam adını göstermek için *views/departmanlar/details. cshtml* içindeki kodu değiştirin.
 
-[!code-html[](intro/samples/cu/Views/Departments/Details.cshtml?highlight=35)]
+[!code-cshtml[](intro/samples/cu/Views/Departments/Details.cshtml?highlight=35)]
 
 Açılan listeye bir SELECT seçeneği eklemek için *views/departmanlar/Create. cshtml* içindeki kodu değiştirin.
 
-[!code-html[](intro/samples/cu/Views/Departments/Create.cshtml?highlight=32-34)]
+[!code-cshtml[](intro/samples/cu/Views/Departments/Create.cshtml?highlight=32-34)]
 
 ## <a name="get-the-code"></a>Kodu alma
 

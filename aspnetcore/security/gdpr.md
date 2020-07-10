@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/gdpr
-ms.openlocfilehash: 0fef14388f83d8b4c708194954f2b75b2164b746
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 8a7041a976ea9f0e99bfd1eba792d0e919eaf6d3
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404502"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212829"
 ---
 # <a name="eu-general-data-protection-regulation-gdpr-support-in-aspnet-core"></a>ASP.NET Core içinde AB Genel Veri Koruma Yönetmeliği (GDPR) desteği
 
@@ -86,7 +86,7 @@ RazorProje Şablonlarıyla oluşturulan sayfalar ve MVC projeleri aşağıdaki G
 
 * \_ Pişirme ıeconsentpartial. cshtml* kısmi görünümü:
 
-[!code-html[](gdpr/sample/RP2.2/Pages/Shared/_CookieConsentPartial.cshtml)]
+[!code-cshtml[](gdpr/sample/RP2.2/Pages/Shared/_CookieConsentPartial.cshtml)]
 
 Bu kısmi:
 
@@ -140,13 +140,13 @@ Bazı veritabanları ve depolama mekanizmaları, bekleyen şifreleme için izin 
 * En kolay ve en güvenli seçenektir.
 * Veritabanının anahtarları ve şifrelemeyi yönetmesine izin verir.
 
-Örneğin:
+Örnek:
 
 * Microsoft SQL ve Azure SQL, [Saydam veri şifrelemesi](/sql/relational-databases/security/encryption/transparent-data-encryption) (tde) sağlar.
 * [SQL Azure, varsayılan olarak veritabanını şifreler](https://azure.microsoft.com/updates/newly-created-azure-sql-databases-encrypted-by-default/)
 * [Azure Blobları, dosyalar, tablo ve kuyruk depolaması varsayılan olarak şifrelenir](https://azure.microsoft.com/blog/announcing-default-encryption-for-azure-blobs-files-table-and-queue-storage/).
 
-Bekleyen şifreleme sağlamayan veritabanları için aynı korumayı sağlamak üzere disk şifrelemeyi kullanabilirsiniz. Örneğin:
+Bekleyen şifreleme sağlamayan veritabanları için aynı korumayı sağlamak üzere disk şifrelemeyi kullanabilirsiniz. Örnek:
 
 * [Windows Server için BitLocker](/windows/security/information-protection/bitlocker/bitlocker-how-to-deploy-on-windows-server)
 * Linux:

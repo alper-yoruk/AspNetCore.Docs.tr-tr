@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 7fe33a620e43603388dd0cacb3ea42f5b5adc40f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 0141ad2df5216183424980a6ca50bf6bcd64ade5
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408298"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86213059"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core filtreler
 
@@ -123,7 +123,7 @@ Aşağıdaki kod şunları uygular `ActionFilterAttribute` :
 
 Yapılandırma seçenekleri, [Seçenekler deseninin](xref:fundamentals/configuration/options)kullanıldığı [yapılandırma sisteminden](xref:fundamentals/configuration/index) sağlanır. Örneğin, dosyadaki *appsettings.js* :
 
-[!code-csharp[](filters/3.1sample/FiltersSample/appsettings.json)]
+[!code-json[](filters/3.1sample/FiltersSample/appsettings.json)]
 
 İçinde `StartUp.ConfigureServices` :
 
@@ -186,12 +186,12 @@ Zaman uyumlu eylem filtreleri için filtre yöntemlerinin çağrıldığı sıra
 
 | Sequence | Filtre kapsamı | Filter yöntemi |
 |:--------:|:------------:|:-------------:|
-| 1 | Genel | `OnActionExecuting` |
+| 1 | Küresel | `OnActionExecuting` |
 | 2 | Denetleyici veya Razor sayfa| `OnActionExecuting` |
 | 3 | Yöntem | `OnActionExecuting` |
 | 4 | Yöntem | `OnActionExecuted` |
 | 5 | Denetleyici veya Razor sayfa | `OnActionExecuted` |
-| 6 | Genel | `OnActionExecuted` |
+| 6 | Küresel | `OnActionExecuted` |
 
 ### <a name="controller-level-filters"></a>Denetleyici düzeyi filtreleri
 
@@ -730,12 +730,12 @@ Zaman uyumlu eylem filtreleri için filtre yöntemlerinin çağrıldığı sıra
 
 | Sequence | Filtre kapsamı | Filter yöntemi |
 |:--------:|:------------:|:-------------:|
-| 1 | Genel | `OnActionExecuting` |
+| 1 | Küresel | `OnActionExecuting` |
 | 2 | Kumandasını | `OnActionExecuting` |
 | 3 | Yöntem | `OnActionExecuting` |
 | 4 | Yöntem | `OnActionExecuted` |
 | 5 | Kumandasını | `OnActionExecuted` |
-| 6 | Genel | `OnActionExecuted` |
+| 6 | Küresel | `OnActionExecuted` |
 
 Bu sıra şunları gösterir:
 
@@ -792,8 +792,8 @@ Yukarıdaki örnekte gösterilen 3 eylem filtresini göz önünde bulundurun. `O
 |:--------:|:------------:|:-----------------:|:-------------:|
 | 1 | Yöntem | 0 | `OnActionExecuting` |
 | 2 | Kumandasını | 1  | `OnActionExecuting` |
-| 3 | Genel | 2  | `OnActionExecuting` |
-| 4 | Genel | 2  | `OnActionExecuted` |
+| 3 | Küresel | 2  | `OnActionExecuting` |
+| 4 | Küresel | 2  | `OnActionExecuted` |
 | 5 | Kumandasını | 1  | `OnActionExecuted` |
 | 6 | Yöntem | 0  | `OnActionExecuted` |
 

@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/crud
-ms.openlocfilehash: e7e4c4b15cca9612a552c58029ae8b34b79070d1
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: c33ff357ec6b467435325578047ac851a39e533e
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060130"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212727"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>Öğretici: EF Core ile CRUD Işlevselliği uygulama-ASP.NET MVC
 
@@ -38,7 +38,7 @@ Bu öğreticide şunları yaptınız:
 > * Silme sayfasını Güncelleştir
 > * Veritabanı bağlantılarını kapat
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * [EF Core ve ASP.NET Core MVC ile çalışmaya başlama](intro.md)
 
@@ -102,11 +102,11 @@ Etiket Yardımcıları hakkında daha fazla bilgi için bkz <xref:mvc/views/tag-
 
 *Görünümleri/öğrencileri/details. cshtml*dosyasını açın. Her alan `DisplayNameFor` `DisplayFor` , aşağıdaki örnekte gösterildiği gibi, ve yardımcıları kullanılarak görüntülenir:
 
-[!code-html[](intro/samples/cu/Views/Students/Details.cshtml?range=13-18&highlight=2,5)]
+[!code-cshtml[](intro/samples/cu/Views/Students/Details.cshtml?range=13-18&highlight=2,5)]
 
 Son alandan sonra ve kapanış etiketinden hemen önce `</dl>` , kayıtlar listesini göstermek için aşağıdaki kodu ekleyin:
 
-[!code-html[](intro/samples/cu/Views/Students/Details.cshtml?range=31-52)]
+[!code-cshtml[](intro/samples/cu/Views/Students/Details.cshtml?range=31-52)]
 
 Kodu yapıştırdıktan sonra kod girintileme yanlış ise, düzeltmek için CTRL-K-D tuşlarına basın.
 
@@ -267,7 +267,7 @@ Varlığın de silinmesi gereken ilgili veriler varsa, veritabanında Cascade si
 
 *Görünümler/öğrenci/delete. cshtml*' de, aşağıdaki örnekte gösterildiği gibi, H2 başlığı ve H3 başlığı arasına bir hata iletisi ekleyin:
 
-[!code-html[](intro/samples/cu/Views/Students/Delete.cshtml?range=7-9&highlight=2)]
+[!code-cshtml[](intro/samples/cu/Views/Students/Delete.cshtml?range=7-9&highlight=2)]
 
 Uygulamayı çalıştırın, **öğrenciler** sekmesini seçin ve bir **Delete** köprüsüne tıklayın:
 

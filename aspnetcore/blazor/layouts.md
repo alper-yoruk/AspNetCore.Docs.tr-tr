@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: fe78a144b413bf97be83d20b11148e1856608f78
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 684d7b76c7500ec19c90eb696ec0127692923297
+ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944248"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86176259"
 ---
 # <a name="aspnet-core-blazor-layouts"></a>ASP.NET Core Blazor düzenleri
 
@@ -39,7 +39,11 @@ Aşağıdaki kod örneği Razor , bir düzen bileşeninin şablonunu gösterir `
 
 [!code-razor[](layouts/sample_snapshot/3.x/MainLayout.razor?highlight=1,13)]
 
-Uygulama şablonlarından birini temel alan bir uygulamada Blazor , `MainLayout` bileşen ( `MainLayout.razor` ) uygulamanın `Shared` klasörüdür.
+## <a name="mainlayout-component"></a>`MainLayout` bileşeni
+
+Proje şablonlarından birini temel alan bir uygulamada Blazor , `MainLayout` bileşen ( `MainLayout.razor` ) uygulamanın `Shared` klasöründedir:
+
+[!code-razor[](./common/samples/3.x/BlazorWebAssemblySample/Shared/MainLayout.razor)]
 
 ## <a name="default-layout"></a>Varsayılan düzen
 

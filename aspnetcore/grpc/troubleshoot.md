@@ -5,7 +5,7 @@ description: .NET Core 'da gRPC kullanırken hata giderme.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.custom: mvc
-ms.date: 05/26/2020
+ms.date: 07/09/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/troubleshoot
-ms.openlocfilehash: 9a3e7269db04b79146686668879bf47f1a7dd6af
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 385291ec6bb6719a5fade927fa9f599af8c94045
+ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400043"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86176173"
 ---
 # <a name="troubleshoot-grpc-on-net-core"></a>.NET Core 'da gRPC sorunlarını giderme
 
@@ -135,13 +135,6 @@ aynı somut istemci ve hizmet temel sınıflarının gRPC kod üretimi, bir proj
 * GRPC araç paketi [GRPC. Tools](https://www.nuget.org/packages/Grpc.Tools/)'a paket başvurusu.
 
 GRPC C# varlıkları oluşturma hakkında daha fazla bilgi için bkz <xref:grpc/basics> ..
-
-Varsayılan olarak, `<Protobuf>` başvuru somut bir istemci ve hizmet temel sınıfı oluşturur. Başvuru öğesinin özniteliği, `GrpcServices` C# varlık oluşturmayı sınırlamak için kullanılabilir. Geçerli `GrpcServices` Seçenekler şunlardır:
-
-* `Both`(mevcut olmadığında varsayılan)
-* `Server`
-* `Client`
-* `None`
 
 GRPC hizmetlerini barındıran bir ASP.NET Core Web uygulaması yalnızca oluşturulan hizmet taban sınıfına ihtiyaç duyuyor:
 

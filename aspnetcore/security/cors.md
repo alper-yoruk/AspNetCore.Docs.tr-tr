@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cors
-ms.openlocfilehash: 0a2be31092ab491e23ab9de9be676b5b4d3963ee
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: dc8e68ef482025443147eeb27bd3f245c1a1a5ed
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060286"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212889"
 ---
 # <a name="enable-cross-origin-requests-cors-in-aspnet-core"></a>ASP.NET Core 'de çıkış noktaları arası Istekleri (CORS) etkinleştirme
 
@@ -988,7 +988,7 @@ Yanıt `Access-Control-Allow-Origin` üstbilgiyi içermiyorsa, çapraz kaynak is
 CORS 'yi sınamak için:
 
 1. [BIR API projesi oluşturun](xref:tutorials/first-web-api). Alternatif olarak, [örneği de indirebilirsiniz](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/cors/sample/Cors).
-1. Bu belgedeki yaklaşımlardan birini kullanarak CORS 'yi etkinleştirin. Örneğin:
+1. Bu belgedeki yaklaşımlardan birini kullanarak CORS 'yi etkinleştirin. Örnek:
 
   [!code-csharp[](cors/sample/Cors/WebAPI/StartupTest.cs?name=snippet2&highlight=13-18)]
 
@@ -998,7 +998,7 @@ CORS 'yi sınamak için:
 1. Web uygulaması projesi ( Razor Sayfalar veya Mvc) oluşturun. Örnek, Razor sayfaları kullanır. Web uygulamasını, API projesiyle aynı çözümde oluşturabilirsiniz.
 1. Aşağıdaki Vurgulanan kodu *Index. cshtml* dosyasına ekleyin:
 
-  [!code-csharp[](cors/sample/Cors/ClientApp/Pages/Index2.cshtml?highlight=7-99)]
+  [!code-cshtml[](cors/sample/Cors/ClientApp/Pages/Index2.cshtml?highlight=7-99)]
 
 1. Yukarıdaki kodda, `url: 'https://<web app>.azurewebsites.net/api/values/1',` dağıtılan UYGULAMANıN URL 'siyle değiştirin.
 1. API projesini dağıtın. Örneğin, [Azure 'a dağıtın](xref:host-and-deploy/azure-apps/index).

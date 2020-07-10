@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: 01321d68defafbe79371250669f921307bcfdba6
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d4eb1744b1186704603430584b3da0793f90ee49
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407050"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86213088"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>ASP.NET Core MVC ile çalışmaya başlama
 
@@ -42,7 +42,7 @@ Sonunda, film verilerini yönetebilen ve görüntüleyebilen bir uygulamanız va
 
 [!INCLUDE[](~/includes/mvc-intro/download.md)]
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -106,14 +106,12 @@ Visual Studio, az önce oluşturduğunuz MVC projesi için varsayılan şablonu 
 
   ![macOS Web uygulaması şablon seçimi](start-mvc/_static/web_app_template_vsmac.png)
 
-* Aşağıdaki konfigürasyonları onaylayın:
+* **Yeni Web uygulamanızı yapılandırın** iletişim kutusunda:
 
-  * **Hedef Framework** , **.NET Core 3,1**olarak ayarlandı.
-  * **Kimlik doğrulaması** **yok**olarak ayarlandı.
-   
+  * **Kimlik** doğrulamasının **kimlik doğrulaması yok**olarak ayarlandığını onaylayın.
+  * **Hedef çerçeve**seçme seçeneği sunulursa, en son 3. x sürümünü seçin.
+
   **İleri**’yi seçin.
-
-  ![macOS .NET Core 3,1 seçimi](start-mvc/_static/new_project_31_vsmac.png)
 
 * Projeyi **Mvcfilmi**olarak adlandırın ve **Oluştur**' u seçin.
 
@@ -197,7 +195,7 @@ Sonunda, film verilerini yönetebilen ve görüntüleyebilen bir uygulamanız va
 
 [!INCLUDE[](~/includes/mvc-intro/download.md)]
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -259,9 +257,12 @@ Visual Studio, az önce oluşturduğunuz MVC projesi için varsayılan şablonu 
 
 * Sürüm 8,6 ' den önceki Mac için Visual Studio, ardından **.NET Core**  >  **uygulama**  >  **Web uygulaması (Model-View-Controller)**' ı seçin  >  **Next**. Sürüm 8,6 veya sonraki sürümlerde **Web ve konsol**  >  **uygulaması**  >  **Web uygulaması (Model-View-Controller)**  >  **İleri**' yi seçin.
 
-* **Yeni ASP.NET Core Web API 'Nizi yapılandırın** iletişim kutusunda, **.NET Core 2,2**'nin varsayılan **hedef çerçevesini** kabul edin.
+* **Yeni Web uygulamanızı yapılandırın** iletişim kutusunda:
 
-  ![macOS .NET Core 2,2 seçimi](./start-mvc/_static/new_project_22_vsmac.png)
+  * **Kimlik** doğrulamasının **kimlik doğrulaması yok**olarak ayarlandığını onaylayın.
+  * **Hedef çerçeve**seçme seçeneği sunulursa, en son 2. x sürümünü seçin.
+
+  **İleri**’yi seçin.
 
 * Projeyi **Mvcfilmi**olarak adlandırın ve **Oluştur**' u seçin.
 
@@ -285,7 +286,7 @@ Uygulamayı hata ayıklamasız modda çalıştırmak için **CTRL-F5** ' i seçi
 
   ![IIS Express](start-mvc/_static/iis_express.png)
 
-* İzlemeye izin vermek için **kabul et** ' i seçin. Bu uygulama kişisel bilgileri izlemez. Şablon tarafından oluşturulan kod, [genel veri koruma yönetmeliği (GDPR)](xref:security/gdpr)buluşmanıza yardımcı olan varlıkları içerir.
+* İzlemeye onay vermek için **Kabul Et**'i seçin. Bu uygulama kişisel bilgileri izlemez. Şablon tarafından oluşturulan kod, [genel veri koruma yönetmeliği (GDPR)](xref:security/gdpr)buluşmanıza yardımcı olan varlıkları içerir.
 
   ![Giriş veya dizin sayfası](start-mvc/_static/privacy.png)
 
@@ -303,7 +304,7 @@ Hata ayıklayıcı olmadan çalıştırmak için CTRL + F5 tuşlarına basın.
 
   Uygulamayı CTRL + F5 (hata ayıklama modu) ile başlatmak, kod değişiklikleri yapmanıza, dosyayı kaydetmenize, tarayıcıyı yenilemanıza ve kod değişikliklerini görmenize olanak tanır. Birçok geliştirici, sayfayı yenilemek ve değişiklikleri görüntülemek için hata ayıklama olmayan modu kullanmayı tercih eder.
 
-* İzlemeye izin vermek için **kabul et** ' i seçin. Bu uygulama kişisel bilgileri izlemez. Şablon tarafından oluşturulan kod, [genel veri koruma yönetmeliği (GDPR)](xref:security/gdpr)buluşmanıza yardımcı olan varlıkları içerir.
+* İzlemeye onay vermek için **Kabul Et**'i seçin. Bu uygulama kişisel bilgileri izlemez. Şablon tarafından oluşturulan kod, [genel veri koruma yönetmeliği (GDPR)](xref:security/gdpr)buluşmanıza yardımcı olan varlıkları içerir.
 
   ![Giriş veya dizin sayfası](start-mvc/_static/privacy.png)
 
@@ -320,7 +321,7 @@ Hata ayıklayıcı olmadan çalıştırmak için CTRL + F5 tuşlarına basın.
 * Adres çubuğu `localhost:port#` gibi bir şey gösterir `example.com` . Bunun nedeni `localhost` , Yerel bilgisayarınız için Standart ana bilgisayar adıdır. Visual Studio bir web projesi oluşturduğunda, web sunucusu için rastgele bir bağlantı noktası kullanılır. Uygulamayı çalıştırdığınızda, farklı bir bağlantı noktası numarası görürsünüz.
 * Uygulamayı **Çalıştır** menüsünden Hata Ayıkla veya hata ayıklama olmayan modda başlatabilirsiniz.
 
-* İzlemeye izin vermek için **kabul et** ' i seçin. Bu uygulama kişisel bilgileri izlemez. Şablon tarafından oluşturulan kod, [genel veri koruma yönetmeliği (GDPR)](xref:security/gdpr)buluşmanıza yardımcı olan varlıkları içerir.
+* İzlemeye onay vermek için **Kabul Et**'i seçin. Bu uygulama kişisel bilgileri izlemez. Şablon tarafından oluşturulan kod, [genel veri koruma yönetmeliği (GDPR)](xref:security/gdpr)buluşmanıza yardımcı olan varlıkları içerir.
 
   ![Giriş veya dizin sayfası](./start-mvc/_static/output_privacy_macos.png)
 

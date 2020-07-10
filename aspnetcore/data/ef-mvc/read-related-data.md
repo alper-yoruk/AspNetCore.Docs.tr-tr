@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/read-related-data
-ms.openlocfilehash: f2e989b2c6370d862b4d1e6550b09cb47b5747c1
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: abd5c4e474e30c119e2bea9e3cce3d2b277e0daf
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401525"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212751"
 ---
 # <a name="tutorial-read-related-data---aspnet-mvc-with-ef-core"></a>Öğretici: EF Core ile ilgili verileri okuma-ASP.NET MVC
 
@@ -39,7 +39,7 @@ Bu öğreticide şunları yaptınız:
 > * Eğitmenler sayfası oluşturma
 > * Açık yükleme hakkında bilgi edinin
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * [Karmaşık veri modeli oluşturma](complex-data-model.md)
 
@@ -55,13 +55,13 @@ Entity Framework gibi nesne Ilişkisel eşleme (ORM) yazılımının bir varlı�
 
   ![Ayrı sorgular örneği](read-related-data/_static/separate-queries.png)
 
-* Açık yükleme. Varlık ilk kez okunmadıysa ilgili veriler alınmadı. Gerekirse ilgili verileri alan kodu yazarsınız. Ayrı sorgularla yükleme durumunda olduğu gibi, açıkça yükleme, veritabanına gönderilen birden çok sorgu ile sonuçlanır. Fark, açık yükleme ile kod, yüklenecek gezinti özelliklerini belirtir. Entity Framework Core 1,1 ' de, `Load` açık yükleme yapmak için yöntemini kullanabilirsiniz. Örneğin:
+* Açık yükleme. Varlık ilk kez okunmadıysa ilgili veriler alınmadı. Gerekirse ilgili verileri alan kodu yazarsınız. Ayrı sorgularla yükleme durumunda olduğu gibi, açıkça yükleme, veritabanına gönderilen birden çok sorgu ile sonuçlanır. Fark, açık yükleme ile kod, yüklenecek gezinti özelliklerini belirtir. Entity Framework Core 1,1 ' de, `Load` açık yükleme yapmak için yöntemini kullanabilirsiniz. Örnek:
 
   ![Açık yükleme örneği](read-related-data/_static/explicit-loading.png)
 
 * Yavaş yükleme. Varlık ilk kez okunmadıysa ilgili veriler alınmadı. Ancak, bir gezinti özelliğine ilk kez erişmeye çalıştığınızda, bu gezinti özelliği için gereken veriler otomatik olarak alınır. Bir gezinti özelliğinden ilk kez veri almaya çalıştığınızda veritabanına bir sorgu gönderilir. Entity Framework Core 1,0, yavaş yüklemeyi desteklemez.
 
-### <a name="performance-considerations"></a>Performansla ilgili önemli noktalar
+### <a name="performance-considerations"></a>Performansla ilgili konular
 
 Alınan her varlık için ilgili verilerin gerekli olduğunu biliyorsanız, tek bir sorgu genellikle en iyi performansı sunar, çünkü veritabanına gönderilen tek bir sorgu genellikle alınan her varlık için ayrı sorgulardan daha etkilidir. Örneğin, her departmanın on ile ilgili kurs olduğunu varsayalım. Tüm ilgili verilerin bir şekilde yüklenmesi, tek bir (JOIN) sorgusuna ve veritabanına yönelik tek gidiş dönüş oluşmasına neden olur. Her bölüme yönelik kurslar için ayrı bir sorgu, veritabanı üzerinde on bir gidiş dönüş oluşmasına neden olur. Gecikme süresi yüksek olduğunda veritabanına yönelik ek gidiş dönüşler özellikle performansa neden olur.
 
@@ -83,7 +83,7 @@ Aşağıdaki çizimde gösterildiği gibi, daha önce öğrenciler denetleyicisi
 
 *Views/kurslar/Index. cshtml* dosyasını açın ve şablon kodunu aşağıdaki kodla değiştirin. Değişiklikler vurgulanır:
 
-[!code-html[](intro/samples/cu/Views/Courses/Index.cshtml?highlight=4,7,15-17,34-36,44)]
+[!code-cshtml[](intro/samples/cu/Views/Courses/Index.cshtml?highlight=4,7,15-17,34-36,44)]
 
 Yapı iskelesi kodunda aşağıdaki değişiklikleri yaptınız:
 
@@ -179,7 +179,7 @@ Ardından, bir kurs seçilmişse, seçilen kurs, görünüm modelindeki kurslar 
 
 *Views/eğitmenler/Index. cshtml*içinde, şablon kodunu aşağıdaki kodla değiştirin. Değişiklikler vurgulanır.
 
-[!code-html[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=1-64&highlight=1,3-7,15-19,24,26-31,41-54,56)]
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=1-64&highlight=1,3-7,15-19,24,26-31,41-54,56)]
 
 Varolan koda aşağıdaki değişiklikleri yaptınız:
 
@@ -221,7 +221,7 @@ Uygulamayı çalıştırın ve **eğitmenler** sekmesini seçin. Sayfa ilgili Of
 
 *Views/eğitmenler/Index. cshtml* dosyasında, Kapanış tablosu öğesinden sonra (dosyanın sonunda) aşağıdaki kodu ekleyin. Bu kod, bir eğitmen seçildiğinde bir eğitmenin ilgili kursların bir listesini görüntüler.
 
-[!code-html[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=66-101)]
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=66-101)]
 
 Bu kod, `Courses` kurs listesini görüntülemek için görünüm modelinin özelliğini okur. Ayrıca, seçili kursun KIMLIĞINI eylem yöntemine gönderen bir **seçme** Köprüsü de sağlar `Index` .
 
@@ -231,7 +231,7 @@ Sayfayı yenileyin ve bir eğitmen seçin. Artık Seçili eğitmenin atandığı
 
 Yeni eklediğiniz kod bloğundan sonra aşağıdaki kodu ekleyin. Bu, kurs seçildiğinde bir kursa kaydedilen öğrencilerin listesini görüntüler.
 
-[!code-html[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=103-125)]
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Index1.cshtml?range=103-125)]
 
 Bu kod, kursa kayıtlı öğrencilerin listesini görüntülemek için görünüm modelinin kayıtları özelliğini okur.
 

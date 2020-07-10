@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: 5a2d39af6c921323ae9113fd4aca27dcdedd44a5
-ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
+ms.openlocfilehash: 26aef561ba299403df0dad9893fecd5e2a15ab0e
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85793468"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86213012"
 ---
 # <a name="net-generic-host"></a>.NET genel ana bilgisayar
 
@@ -33,7 +33,7 @@ ASP.NET Core şablonları bir .NET Core genel ana bilgisayarı oluşturur <xref:
 *Ana bilgisayar* , bir uygulamanın kaynaklarını kapsülleyen bir nesnedir, örneğin:
 
 * Bağımlılık ekleme (dı)
-* Günlüğe Kaydetme
+* Günlüğe kaydetme
 * Yapılandırma
 * `IHostedService`uygulamalarını
 
@@ -225,7 +225,7 @@ Host.CreateDefaultBuilder(args)
     //...
 ```
 
-Daha fazla bilgi için bkz.
+Daha fazla bilgi için bkz:
 
 * [Temel bilgiler: Içerik kökü](xref:fundamentals/index#content-root)
 * [WebRoot](#webroot)
@@ -437,7 +437,7 @@ Bu değeri ayarlamak için, ortam değişkenini kullanın veya üzerinde arama `
 webBuilder.UseWebRoot("public");
 ```
 
-Daha fazla bilgi için bkz.
+Daha fazla bilgi için bkz:
 
 * [Temel bilgiler: Web kökü](xref:fundamentals/index#web-root)
 * [ContentRoot](#contentroot)
@@ -650,7 +650,7 @@ Konağın [ortam değişkeni yapılandırmasını](xref:fundamentals/configurati
 
 *hostsettings.js*:
 
-[!code-csharp[](generic-host/samples/2.x/GenericHostSample/hostsettings.json)]
+[!code-json[](generic-host/samples/2.x/GenericHostSample/hostsettings.json)]
 
 Ek yapılandırma [ApplicationName](#application-key-name) ve [contentroot](#content-root) anahtarlarıyla birlikte etkinleştirilebilir.
 
@@ -670,15 +670,15 @@ Kullanarak örnek uygulama yapılandırması <xref:Microsoft.Extensions.Hosting.
 
 *appsettings.js*:
 
-[!code-csharp[](generic-host/samples/2.x/GenericHostSample/appsettings.json)]
+[!code-json[](generic-host/samples/2.x/GenericHostSample/appsettings.json)]
 
 *appsettings.Development.js*:
 
-[!code-csharp[](generic-host/samples/2.x/GenericHostSample/appsettings.Development.json)]
+[!code-json[](generic-host/samples/2.x/GenericHostSample/appsettings.Development.json)]
 
 *appsettings.Production.js*:
 
-[!code-csharp[](generic-host/samples/2.x/GenericHostSample/appsettings.Production.json)]
+[!code-json[](generic-host/samples/2.x/GenericHostSample/appsettings.Production.json)]
 
 Ayar dosyalarını çıkış dizinine taşımak için, ayarlar dosyalarını proje dosyasında [MSBuild proje öğeleri](/visualstudio/msbuild/common-msbuild-project-items) olarak belirtin. Örnek uygulama, JSON uygulama ayarları dosyalarını ve *hostsettings.js* aşağıdaki öğeyle taşıdıkça `<Content>` :
 
@@ -1010,7 +1010,7 @@ ASP.NET Core şablonları bir .NET Core genel Konağı () oluşturur <xref:Micro
 *Ana bilgisayar* , bir uygulamanın kaynaklarını kapsülleyen bir nesnedir, örneğin:
 
 * Bağımlılık ekleme (dı)
-* Günlüğe Kaydetme
+* Günlüğe kaydetme
 * Yapılandırma
 * `IHostedService`uygulamalarını
 
@@ -1200,7 +1200,7 @@ Host.CreateDefaultBuilder(args)
     //...
 ```
 
-Daha fazla bilgi için bkz.
+Daha fazla bilgi için bkz:
 
 * [Temel bilgiler: Içerik kökü](xref:fundamentals/index#content-root)
 * [WebRoot](#webroot)
@@ -1425,7 +1425,7 @@ Bu değeri ayarlamak için, ortam değişkenini kullanın veya üzerinde arama `
 webBuilder.UseWebRoot("public");
 ```
 
-Daha fazla bilgi için bkz.
+Daha fazla bilgi için bkz:
 
 * [Temel bilgiler: Web kökü](xref:fundamentals/index#web-root)
 * [ContentRoot](#contentroot)

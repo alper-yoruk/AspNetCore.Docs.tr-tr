@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/controller-methods-views
-ms.openlocfilehash: a22bc9f9156b671d7bf17b56b62e384a60b2568b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b473b8575a870b91d83e5494103d39486ef4fee1
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405269"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86213051"
 ---
 # <a name="part-6-controller-methods-and-views-in-aspnet-core"></a>ASP.NET Core Bölüm 6, denetleyici yöntemleri ve görünümleri
 
@@ -42,7 +42,7 @@ Sonraki öğreticide [veri ek açıklamalarını](/aspnet/mvc/overview/older-ver
 
 **Düzenle**, **Ayrıntılar**ve **Sil** bağlantıları, *Görünümler/fılmler/Index. cshtml* dosyasındaki Core MVC bağlayıcı etiketi Yardımcısı tarafından oluşturulur.
 
-[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexOriginal.cshtml?highlight=1-3&range=46-50)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexOriginal.cshtml?highlight=1-3&range=46-50)]
 
 [Etiket Yardımcıları](xref:mvc/views/tag-helpers/intro) , sunucu tarafı kodun dosyalarda HTML öğeleri oluşturma ve işlemeye katılmasını sağlar Razor . Yukarıdaki kodda, `AnchorTagHelper` `href` denetleyici eylem yönteminden ve yol kimliğinden HTML özniteliği değeri dinamik olarak oluşturulur. En sevdiğiniz tarayıcıdan **Görünüm kaynağını** kullanıyorsunuz veya oluşturulan biçimlendirmeyi incelemek için geliştirici araçlarını kullanıyorsunuz. Oluşturulan HTML 'nin bir bölümü aşağıda gösterilmiştir:
 
@@ -106,7 +106,7 @@ Aşağıdaki kod, `HTTP POST Edit` postalanan film değerlerini işleyen yöntem
 
 `ValidateAntiForgeryToken`Özniteliği, [bir isteğin bir kısmını engellemek](xref:security/anti-request-forgery) için kullanılır ve düzenleme görünümü dosyasında (*Görünümler/filmler/Düzenle. cshtml*) oluşturulan bir güvenlik yumuşatma belirteci ile eşleştirilmiş olur. Düzenleme görünümü dosyası, [form etiketi Yardımcısı](xref:mvc/views/working-with-forms)ile karşı koruma belirteci oluşturur.
 
-[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/Edit.cshtml?range=9)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/Edit.cshtml?range=9)]
 
 [Form etiketi Yardımcısı](xref:mvc/views/working-with-forms) , `[ValidateAntiForgeryToken]` film denetleyicisi yönteminde üretilen Anti-forgery belirteciyle eşleşmesi gereken gizli bir Anti-forgery belirteci oluşturur `Edit` . Daha fazla bilgi için bkz. [Istek önleyici](xref:security/anti-request-forgery)güvenlik.
 
@@ -116,7 +116,7 @@ Aşağıdaki kod, `HTTP POST Edit` postalanan film değerlerini işleyen yöntem
 
 Scafkatlama sistemi düzenleme görünümü oluştururken, sınıfını ve `Movie` `<label>` `<input>` sınıfının her bir özelliği için işlenecek kodu ve öğelerini inceledi. Aşağıdaki örnekte, Visual Studio scafkatlama sistemi tarafından oluşturulan düzenleme görünümü gösterilmektedir:
 
-[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/EditOriginal.cshtml)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/EditOriginal.cshtml)]
 
 Görünüm şablonunun dosyanın en üstünde bir ifadeye sahip olduğuna dikkat edin `@model MvcMovie.Models.Movie` . `@model MvcMovie.Models.Movie`görünümün görünüm şablonu için modelin türü olmasını beklediğini belirtir `Movie` .
 

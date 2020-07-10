@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: 841751ffb834f77184365c3022293dbadc9f6f2c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d6a541e9633d3ecc2768744956c3b43d830b0b2b
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403540"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86213130"
 ---
 # <a name="part-3-add-a-view-to-an-aspnet-core-mvc-app"></a>Bölüm 3, ASP.NET Core MVC uygulamasına bir görünüm ekleme
 
@@ -72,7 +72,7 @@ Kullanarak bir görünüm şablonu dosyası oluşturursunuz Razor . Razortabanl�
   * Sol bölmedeki **ASP .NET Core** ' u seçin.
   * Orta bölmedeki **MVC görünümü sayfasını** seçin.
   * **Ad** kutusuna *Index* yazın.
-  * **Yeni**' yi seçin.
+  * **Yeni**’yi seçin.
 
 ![Yeni öğe Ekle iletişim kutusu](adding-view/_static/add_view_mac.png)
 
@@ -80,7 +80,7 @@ Kullanarak bir görünüm şablonu dosyası oluşturursunuz Razor . Razortabanl�
 
 *Views/HelloWorld/Index. cshtml* Razor Görünüm dosyasının içeriğini aşağıdakiler ile değiştirin:
 
-[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
 
 `https://localhost:{PORT}/HelloWorld` sayfasına gidin. `Index`' Deki yöntemi `HelloWorldController` çok fazla değil `return View();` , yönteminin tarayıcıya yanıt işlemek için bir görünüm şablonu dosyası kullanması gerektiğini belirten ifadesini çalıştırdı. Bir görünüm şablonu dosya adı belirtilmediğinden, MVC varsayılan görünüm dosyasını kullanmaya göre varsayılan olarak ayarlanmış. Varsayılan görünüm dosyası yöntemiyle aynı ada sahiptir ( `Index` ), bu nedenle */views/HelloWorld/Index.cshtml* içindeki görünüm şablonu kullanılır. Aşağıdaki görüntüde "görünüm Şablonumuzdan Merhaba!" dizesi gösterilmektedir görünümde sabit kodlanmış.
 
@@ -96,7 +96,7 @@ Menü bağlantılarını (**Mvcmovie**, **Home**ve **Gizlilik**) seçin. Her say
 
 *Görünümler/paylaşılan/_Layout. cshtml* dosyasının içeriğini aşağıdaki biçimlendirme ile değiştirin. Değişiklikler vurgulanır:
 
-[!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Views/Shared/_Layout.cshtml?highlight=6,14,40)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Views/Shared/_Layout.cshtml?highlight=6,14,40)]
 
 Yukarıdaki biçimlendirme aşağıdaki değişiklikleri yaptı:
 
@@ -125,7 +125,7 @@ Değişikliklerinizi kaydedin ve **Gizlilik** bağlantısını seçin. Tarayıc�
 
 `<h2>` *Views/HelloWorld/Index. cshtml* görünüm dosyasının başlığını ve öğesini değiştirin:
 
-[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/HelloWorld/Index2.cshtml?highlight=2,5)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/HelloWorld/Index2.cshtml?highlight=2,5)]
 
 Başlık ve `<h2>` öğe biraz farklı olduğundan, hangi kod bitini görüntülemeyi değiştirmekten daha fazla bilgi alabilirsiniz.
 
@@ -161,7 +161,7 @@ Bir görünüm şablonunun yanıt işlemesi için gereken verileri sağlamaktan 
 
 *Welcome. cshtml* görünüm şablonunda "Hello" öğesini görüntüleyen bir döngü oluşturacaksınız `NumTimes` . *Views/HelloWorld/Welcome. cshtml* içeriğini aşağıdakiler ile değiştirin:
 
-[!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/HelloWorld/Welcome.cshtml)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/HelloWorld/Welcome.cshtml)]
 
 Değişikliklerinizi kaydedin ve aşağıdaki URL 'ye gidin:
 
@@ -229,7 +229,7 @@ Kullanarak bir görünüm şablonu dosyası oluşturursunuz Razor . Razortabanl�
   * Sol bölmedeki **Web** ' i seçin.
   * Orta bölmedeki **boş HTML dosyasını** seçin.
   * **Ad** kutusuna *Index. cshtml* yazın.
-  * **Yeni**' yi seçin.
+  * **Yeni**’yi seçin.
 
 ![Yeni öğe Ekle iletişim kutusu](adding-view/_static/add_view_mac.png)
 
@@ -237,7 +237,7 @@ Kullanarak bir görünüm şablonu dosyası oluşturursunuz Razor . Razortabanl�
 
 *Views/HelloWorld/Index. cshtml* Razor Görünüm dosyasının içeriğini aşağıdakiler ile değiştirin:
 
-[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/HelloWorld/Index1.cshtml?highlight=7)]
 
 `https://localhost:{PORT}/HelloWorld` sayfasına gidin. `Index`' Deki yöntemi `HelloWorldController` çok fazla değil `return View();` , yönteminin tarayıcıya yanıt işlemek için bir görünüm şablonu dosyası kullanması gerektiğini belirten ifadesini çalıştırdı. Bir görünüm şablonu dosya adı belirtilmediğinden, MVC varsayılan görünüm dosyasını kullanmaya göre varsayılan olarak ayarlanmış. Varsayılan görünüm dosyası yöntemiyle aynı ada sahiptir ( `Index` ), bu nedenle */views/HelloWorld/Index.cshtml* kullanılır. Aşağıdaki görüntüde "görünüm Şablonumuzdan Merhaba!" dizesi gösterilmektedir görünümde sabit kodlanmış.
 
@@ -256,7 +256,7 @@ Menü bağlantılarını (**Mvcmovie**, **Home**ve **Gizlilik**) seçin. Her say
 
 Aşağıdaki biçimlendirme vurgulanan değişiklikleri göstermektedir:
 
-[!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Shared/_Layout.cshtml?highlight=6,24,51)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Shared/_Layout.cshtml?highlight=6,24,51)]
 
 Önceki biçimlendirmede, `asp-area` Bu uygulama [alan](xref:mvc/controllers/areas)kullandığından [tutturucu etiketi yardımcı özniteliği](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) atlandı.
 
@@ -285,7 +285,7 @@ Değişikliklerinizi kaydedin ve **Gizlilik** bağlantısını seçin. Tarayıc�
 
 `<h2>` *Views/HelloWorld/Index. cshtml* görünüm dosyasının başlığını ve öğesini değiştirin:
 
-[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/HelloWorld/Index2.cshtml?highlight=2,5)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/HelloWorld/Index2.cshtml?highlight=2,5)]
 
 Başlık ve `<h2>` öğe biraz farklı olduğundan, hangi kod bitini görüntülemeyi değiştirmekten daha fazla bilgi alabilirsiniz.
 
@@ -321,7 +321,7 @@ Bir görünüm şablonunun yanıt işlemesi için gereken verileri sağlamaktan 
 
 *Welcome. cshtml* görünüm şablonunda "Hello" öğesini görüntüleyen bir döngü oluşturacaksınız `NumTimes` . *Views/HelloWorld/Welcome. cshtml* içeriğini aşağıdakiler ile değiştirin:
 
-[!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/HelloWorld/Welcome.cshtml)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/HelloWorld/Welcome.cshtml)]
 
 Değişikliklerinizi kaydedin ve aşağıdaki URL 'ye gidin:
 

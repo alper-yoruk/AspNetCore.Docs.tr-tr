@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/authoring
-ms.openlocfilehash: 5e250debb5c4c2ef00b844557d31ed8281d2ff2f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e630bf4b0c121796315be077623abae73d240b37
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407596"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212461"
 ---
 # <a name="author-tag-helpers-in-aspnet-core"></a>ASP.NET Core etiket yardımcıları yazma
 
@@ -39,7 +39,7 @@ Etiket Yardımcısı, arabirimini uygulayan herhangi bir sınıftır `ITagHelper
 
 ## <a name="a-minimal-tag-helper"></a>En az bir etiket Yardımcısı
 
-Bu bölümde, bir e-posta etiketini güncelleştiren bir etiket Yardımcısı yazarsınız. Örneğin:
+Bu bölümde, bir e-posta etiketini güncelleştiren bir etiket Yardımcısı yazarsınız. Örnek:
 
 ```html
 <email>Support</email>
@@ -87,14 +87,14 @@ Diğer bir deyişle, bu e-posta bağlantısını yapan bir bağlantı etikettir.
 
 <!--
 the following snippet uses TagHelpers3 and should use TagHelpers (not the 3)
-    [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImports.cshtml?highlight=3&range=1-3)]
+    [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImports.cshtml?highlight=3&range=1-3)]
 -->
 
 Bir FQN kullanarak bir görünüme etiket Yardımcısı eklemek için, önce FQN ( `AuthoringTagHelpers.TagHelpers.EmailTagHelper` ) ve ardından **derleme adı** (*authoringtaghelmakaı* `namespace` ) eklersiniz. Çoğu geliştirici joker karakter söz dizimini kullanmayı tercih eder. [Etiket yardımcılarına giriş](intro.md) , etiket Yardımcısı ekleme, kaldırma, hiyerarşi ve joker karakter sözdizimi hakkında ayrıntılı bilgi sağlar.
 
 1. *Görünümler/Home/Contact. cshtml* dosyasındaki biçimlendirmeyi şu değişikliklerle güncelleştirin:
 
-   [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Contact.cshtml?highlight=15,16&range=1-17)]
+   [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Contact.cshtml?highlight=15,16&range=1-17)]
 
 1. Uygulamayı çalıştırın ve HTML kaynağını görüntülemek için en sevdiğiniz tarayıcıyı kullanın, böylece e-posta etiketlerinin yer işareti işaretlemesi ile değiştirildiğini doğrulayabilirsiniz (örneğin, `<a>Support</a>` ). *Destek* ve *Pazarlama* bir bağlantı olarak işlenir, ancak `href` bunları işlevsel hale getirmek için bir özniteliğe sahip değildir. Sonraki bölümde bunu çözeceğiz.
 
@@ -118,7 +118,7 @@ Bu yaklaşım, öznitelik koleksiyonunda mevcut olmadığı sürece "href" özni
 
 1. *Görünümler/Home/Contact. cshtml* dosyasındaki biçimlendirmeyi şu değişikliklerle güncelleştirin:
 
-   [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/ContactCopy.cshtml?highlight=15,16)]
+   [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/ContactCopy.cshtml?highlight=15,16)]
 
 1. Uygulamayı çalıştırın ve doğru bağlantıları oluşturmadığını doğrulayın.
 
@@ -147,7 +147,7 @@ Bu bölümde, zaman uyumsuz bir e-posta Yardımcısı yazılacak.
 
 1. Etiket Yardımcısı 'nın hedef e-postayı kullanabilmesi için *Görünümler/giriş/ilgili. cshtml* dosyasında aşağıdaki değişikliği yapın.
 
-   [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Contact.cshtml?highlight=15,16&range=1-17)]
+   [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Contact.cshtml?highlight=15,16&range=1-17)]
 
 1. Uygulamayı çalıştırın ve geçerli bir e-posta bağlantıları oluşturmadığını doğrulayın.
 
@@ -163,7 +163,7 @@ Bu bölümde, zaman uyumsuz bir e-posta Yardımcısı yazılacak.
 
 1. *About. cshtml* görünümünü bir öznitelik değeri içerecek şekilde değiştirin `bold` . Tamamlanan kod aşağıda gösterilmiştir.
 
-   [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/AboutBoldOnly.cshtml?highlight=7)]
+   [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/AboutBoldOnly.cshtml?highlight=7)]
 
 1. Uygulamayı çalıştırın. En sevdiğiniz tarayıcıyı kullanarak kaynağı inceleyebilir ve işaretlemeyi doğrulayabilirsiniz.
 
@@ -225,7 +225,7 @@ Ayrıca, `[HtmlTargetElement]` hedeflenen öğenin adını değiştirmek için �
 
 1. Aşağıdaki işaretlemeyi *About. cshtml* görünümüne ekleyin. Vurgulanan biçimlendirme Web sitesi bilgilerini görüntüler.
 
-   [!code-html[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/About.cshtml?highlight=1,4-8, 18-999)]
+   [!code-cshtml[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/About.cshtml?highlight=1,4-8, 18-999)]
 
    > [!NOTE]
    > RazorAşağıda gösterilen İşaretlemede:
@@ -251,7 +251,7 @@ Koşul etiketi Yardımcısı, doğru bir değer geçirildiğinde çıktıyı iş
 
 1. *Views/Home/Index. cshtml* dosyasının içeriğini aşağıdaki biçimlendirme ile değiştirin:
 
-   [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Index.cshtml)]
+   [!code-cshtml[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Index.cshtml)]
 
 1. `Index` `Home` Denetleyicisindeki yöntemi aşağıdaki kodla değiştirin:
 
@@ -281,7 +281,7 @@ Bu iki yardımcılar yakından ilişkili olduğundan ve gelecekte yeniden düzen
 
 1. *Görünümler/Home/Contact. cshtml* dosyasının sonuna aşağıdaki biçimlendirmeyi ekleyin:
 
-   [!code-html[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Contact.cshtml?highlight=19)]
+   [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/Home/Contact.cshtml?highlight=19)]
 
 1. Uygulamayı çalıştırın ve etiket Yardımcısı 'nın bağlayıcıyı doğru bir şekilde işlediğini doğrulayın.
 

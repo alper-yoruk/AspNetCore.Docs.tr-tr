@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/update-related-data
-ms.openlocfilehash: 066bebf95a941fca5e7cc175c4c0d6d56abc9cb5
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 754ca2f94b1abde30ae650c9c3bcf00499520383
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060065"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212574"
 ---
 # <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>Öğretici: ilgili verileri güncelleştirme-ASP.NET MVC EF Core
 
@@ -41,7 +41,7 @@ Bu öğreticide şunları yaptınız:
 > * Güncelleştirme silme sayfası
 > * Sayfa oluşturmak için Office konumu ve kurslar ekleme
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * [İlgili verileri okuma](read-related-data.md)
 
@@ -87,19 +87,19 @@ Kurs ayrıntılarının ve sayfa silmenin performansını iyileştirmek için, `
 
 *Görünümler/kurslar/oluşturma. cshtml*'de, **Departman** açılan listesine bir "Departman Seç" seçeneği ekleyin, **DepartmentID** etiketini **bölüm**olarak değiştirin ve bir doğrulama iletisi ekleyin.
 
-[!code-html[](intro/samples/cu/Views/Courses/Create.cshtml?highlight=2-6&range=29-34)]
+[!code-cshtml[](intro/samples/cu/Views/Courses/Create.cshtml?highlight=2-6&range=29-34)]
 
 *Görünümler/kurslar/Düzenle. cshtml*'de, *Create. cshtml*içinde yaptığınız departman alanı için aynı değişikliği yapın.
 
 Ayrıca, *Görünümler/kurslar/Düzenle. cshtml*'de **başlık** alanından önce bir kurs numarası alanı ekleyin. Kurs numarası birincil anahtar olduğundan, görüntülenir, ancak değiştirilemez.
 
-[!code-html[](intro/samples/cu/Views/Courses/Edit.cshtml?range=15-18)]
+[!code-cshtml[](intro/samples/cu/Views/Courses/Edit.cshtml?range=15-18)]
 
 `<input type="hidden">`Düzenleme görünümündeki kurs numarası için zaten gizli bir alan () var. `<label>`Kullanıcı **düzenleme** sayfasında **Kaydet** ' i tıklattığında, bir etiket Yardımcısı ekleme, gizli alan gereksinimini ortadan kaldırmaz, çünkü
 
 *Görünümler/kurslar/delete. cshtml*'de, üst kısımdaki bir kurs numarası alanı ekleyin ve bölüm kimliğini bölüm adı olarak değiştirin.
 
-[!code-html[](intro/samples/cu/Views/Courses/Delete.cshtml?highlight=14-19,36)]
+[!code-cshtml[](intro/samples/cu/Views/Courses/Delete.cshtml?highlight=14-19,36)]
 
 *Görünümler/kurslar/ayrıntılar. cshtml*'de, *delete. cshtml*için yaptığınız aynı değişikliği yapın.
 
@@ -109,7 +109,7 @@ Uygulamayı çalıştırın, **Kurslar** sekmesini seçin, **Yeni oluştur**' a 
 
 ![Kurs sayfa oluştur](update-related-data/_static/course-create.png)
 
-**Oluştur**'a tıklayın. Kurslar Dizin sayfası, listeye eklenen yeni kursla birlikte görüntülenir. Dizin sayfası listesindeki departman adı, ilişkinin doğru şekilde oluşturulduğunu gösteren gezinti özelliğinden gelir.
+**Oluştur**’a tıklayın. Kurslar Dizin sayfası, listeye eklenen yeni kursla birlikte görüntülenir. Dizin sayfası listesindeki departman adı, ilişkinin doğru şekilde oluşturulduğunu gösteren gezinti özelliğinden gelir.
 
 Kurslar Dizin sayfasında bir kursa **Düzenle** ' ye tıklayın.
 
@@ -171,7 +171,7 @@ Kod şunları yapar:
 
 *Görünümler/eğitmenler/Edit. cshtml*' de, **Kaydet** düğmesinin sonundaki Office konumunu düzenlemek için yeni bir alan ekleyin:
 
-[!code-html[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=30-34)]
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=30-34)]
 
 Uygulamayı çalıştırın, **eğitmenler** sekmesini seçin ve ardından bir eğitmende **Düzenle** ' ye tıklayın. **Office konumunu** değiştirin ve **Kaydet**' e tıklayın.
 
@@ -235,7 +235,7 @@ Kurs onay kutusu seçili değilse, ancak kurs `Instructor.CourseAssignments` gez
 > [!NOTE]
 > Kodu Visual Studio 'Ya yapıştırdığınızda, satır sonları kodu kesen bir şekilde değiştirilebilir. Kod yapıştırdıktan sonra farklı görünüyorsa, otomatik biçimlendirmeyi geri almak için CTRL + Z bir kez tuşuna basın. Bu işlem satır sonlarını, burada gördüğünüz gibi görünmeleri için düzeltir. Girintide kusursuz olması gerekmez, ancak `@:</tr><tr>` ,, `@:<td>` `@:</td>` ve `@:</tr>` çizgilerinin her biri gösterildiği gibi tek bir satırda olması gerekir, aksi halde bir çalışma zamanı hatası alırsınız. Yeni kod bloğu seçiliyken, yeni kodu mevcut kodla hizalamak için üç kez Tab tuşuna basın. Bu sorun Visual Studio 2019 ' de düzeltilmiştir.
 
-[!code-html[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=35-61)]
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Edit.cshtml?range=35-61)]
 
 Bu kod, üç sütun içeren bir HTML tablosu oluşturur. Her sütunda, bir onay kutusu ve ardından kurs numarası ve başlığından oluşan bir açıklamalı alt yazı bulunur. Onay kutularının hepsi aynı ada ("Selectedkurslar") sahiptir, bu da model cilde bir grup olarak değerlendirilme bildirir. Her onay kutusunun değer özniteliği değerine ayarlanır `CourseID` . Sayfa gönderildiğinde, model Ciltçi `CourseID` yalnızca seçili onay kutularının değerlerinden oluşan bir diziyi denetleyiciye geçirir.
 
@@ -299,7 +299,7 @@ public ICollection<CourseAssignment> CourseAssignments
 
 *Görünümler/eğitmen/oluşturma. cshtml*'de, gönder düğmesinden önce kurslar için bir Office konum metin kutusu ve onay kutuları ekleyin. Düzenleme sayfasında olduğu gibi, [dosyayı yapıştırdığınızda Visual Studio kodu yeniden biçimlendirdiğinden biçimlendirmeyi onarın](#notepad).
 
-[!code-html[](intro/samples/cu/Views/Instructors/Create.cshtml?range=29-61)]
+[!code-cshtml[](intro/samples/cu/Views/Instructors/Create.cshtml?range=29-61)]
 
 Uygulamayı çalıştırıp bir eğitmen oluşturarak test edin.
 

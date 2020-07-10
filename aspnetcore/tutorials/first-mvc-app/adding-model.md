@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: 0974abfe632fd897c08435b82a7c695534cc3139
-ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
+ms.openlocfilehash: 77c12b98462c8a84ab807abef247573b6a028fcc
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85793596"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86213160"
 ---
 # <a name="part-4-add-a-model-to-an-aspnet-core-mvc-app"></a>4. bölüm, ASP.NET Core MVC uygulamasına model ekleme
 
@@ -286,7 +286,7 @@ dotnet ef database update
 
 <a name="test"></a>
 
-## <a name="test-the-app"></a>Uygulamayı test edin
+## <a name="test-the-app"></a>Uygulamayı test etme
 
 * Uygulamayı çalıştırın ve **film uygulaması** bağlantısına tıklayın.
 
@@ -613,7 +613,7 @@ Bir DB bağlamı oluşturdunuz ve bunu DI kapsayıcısı ile kaydettiniz.
 
 <a name="test"></a>
 
-### <a name="test-the-app"></a>Uygulamayı test edin
+### <a name="test-the-app"></a>Uygulamayı test etme
 
 * Uygulamayı çalıştırın ve `/Movies` TARAYıCıDAKI URL 'ye ( `http://localhost:port/movies` ) ekleyin.
 
@@ -690,7 +690,7 @@ return View(movie);
 
 *Görünümler/filmler/ayrıntılar. cshtml* dosyasının içeriğini inceleyin:
 
-[!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/DetailsOriginal.cshtml)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/DetailsOriginal.cshtml)]
 
 `@model`Görünüm dosyasının üst kısmına bir ifade ekleyerek, görünümün beklediği nesne türünü belirtebilirsiniz. Film denetleyicisini oluştururken, `@model` *Ayrıntılar. cshtml* dosyasının en üstüne aşağıdaki ifade otomatik olarak eklenmiştir:
 
@@ -708,11 +708,11 @@ Film denetleyicisini oluştururken, yapı iskelesi `@model` *Index. cshtml* dosy
 
 <!-- Copy Index.cshtml to IndexOriginal.cshtml -->
 
-[!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?range=1)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?range=1)]
 
 `@model`Yönergesi, kesin olarak belirlenmiş bir nesne kullanarak denetleyicinin görünüme geçirildiği film listesine erişmenizi sağlar `Model` . Örneğin, *Index. cshtml* görünümünde, kod `foreach` kesin türü belirtilmiş nesne üzerinde bir deyimle birlikte filmlerde döngü yapılır `Model` :
 
-[!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?highlight=1,31,34,37,40,43,46-48)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexOriginal.cshtml?highlight=1,31,34,37,40,43,46-48)]
 
 `Model`Nesne türü kesin belirlenmiş olduğundan (bir nesne olarak `IEnumerable<Movie>` ), döngüdeki her öğe olarak yazılır `Movie` . Diğer avantajların yanı sıra, kodun derleme zaman denetimini alacağınız anlamına gelir:
 

@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/working-with-forms
-ms.openlocfilehash: 06d5d6e2db1cf3ccb148c24c40c264016d47a0ed
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 7a92f2b5bc791f268b897878db08a9f9f4f7bf0c
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406595"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212404"
 ---
 # <a name="tag-helpers-in-forms-in-aspnet-core"></a>ASP.NET Core formlardaki etiket yardımcıları
 
@@ -45,7 +45,7 @@ Birçok durumda, HTML Yardımcıları belirli bir etiket Yardımcısı için alt
 
 Örnek:
 
-[!code-HTML[](working-with-forms/sample/final/Views/Demo/RegisterFormOnly.cshtml)]
+[!code-cshtml[](working-with-forms/sample/final/Views/Demo/RegisterFormOnly.cshtml)]
 
 Yukarıdaki form etiketi Yardımcısı aşağıdaki HTML 'yi oluşturur:
 
@@ -62,7 +62,7 @@ MVC çalışma zamanı, `action` form etiketi yardımcı öznitelikleri ve ' den
 
 `asp-route`Etiket Yardımcısı özniteliği, HTML özniteliği için de biçimlendirme oluşturabilir `action` . Adlı [yolu](../../fundamentals/routing.md) içeren bir uygulama `register` , kayıt sayfası için aşağıdaki biçimlendirmeyi kullanabilir:
 
-[!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterRoute.cshtml)]
+[!code-cshtml[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterRoute.cshtml)]
 
 *Görünümler/hesap* klasöründeki görünümlerin birçoğu ( *bireysel kullanıcı hesaplarıyla*yeni bir Web uygulaması oluşturduğunuzda oluşturulur), [ASP-Route-ReturnUrl](xref:mvc/views/working-with-forms) özniteliğini içerir:
 
@@ -229,7 +229,7 @@ Aşağıdaki tabloda, giriş etiketi Yardımcısı 'nın belirli giriş türleri
 
 [!code-csharp[](working-with-forms/sample/final/ViewModels/RegisterViewModel.cs)]
 
-[!code-HTML[](working-with-forms/sample/final/Views/Demo/RegisterInput.cshtml)]
+[!code-cshtml[](working-with-forms/sample/final/Views/Demo/RegisterInput.cshtml)]
 
 Yukarıdaki kod, aşağıdaki HTML 'yi oluşturur:
 
@@ -299,7 +299,7 @@ Ayrıca, görünüm modelinin özellik yolunu kullanarak alt Özellikler ' e gid
 
 Görünümünde, şu şekilde bağlandık `Address.AddressLine1` :
 
-[!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterAddress.cshtml?highlight=6)]
+[!code-cshtml[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterAddress.cshtml?highlight=6)]
 
 İçin aşağıdaki HTML oluşturulur `Address.AddressLine1` :
 
@@ -325,11 +325,11 @@ public IActionResult Edit(int id, int colorIndex)
 
 Aşağıda Razor belirli bir öğeye nasıl erişebileceğiniz gösterilmektedir `Color` :
 
-[!code-HTML[](working-with-forms/sample/final/Views/Demo/EditColor.cshtml)]
+[!code-cshtml[](working-with-forms/sample/final/Views/Demo/EditColor.cshtml)]
 
 *Views/Shared/EditorTemplates/String. cshtml* şablonu:
 
-[!code-HTML[](working-with-forms/sample/final/Views/Shared/EditorTemplates/String.cshtml)]
+[!code-cshtml[](working-with-forms/sample/final/Views/Shared/EditorTemplates/String.cshtml)]
 
 Örnek kullanarak `List<T>` :
 
@@ -337,11 +337,11 @@ Aşağıda Razor belirli bir öğeye nasıl erişebileceğiniz gösterilmektedir
 
 Aşağıda Razor bir koleksiyonun üzerinde nasıl yinelemi yapılacağı gösterilmektedir:
 
-[!code-HTML[](working-with-forms/sample/final/Views/Demo/Edit.cshtml)]
+[!code-cshtml[](working-with-forms/sample/final/Views/Demo/Edit.cshtml)]
 
 *Views/Shared/EditorTemplates/TodoItem. cshtml* şablonu:
 
-[!code-HTML[](working-with-forms/sample/final/Views/Shared/EditorTemplates/ToDoItem.cshtml)]
+[!code-cshtml[](working-with-forms/sample/final/Views/Shared/EditorTemplates/ToDoItem.cshtml)]
 
 `foreach`değer bir `asp-for` veya eşdeğer bağlamda kullanılacaksa, mümkünse kullanılması gerekir `Html.DisplayFor` . Genel olarak, `for` `foreach` bir Numaralandırıcı ayırması gerekmiyorsa (senaryo buna izin veriyorsa) daha iyidir; ancak, bir LINQ ifadesinde bir dizin oluşturucunun değerlendirilmesi pahalı olabilir ve simge durumuna küçültülmüş olmalıdır.
 
@@ -364,7 +364,7 @@ Aşağıda Razor bir koleksiyonun üzerinde nasıl yinelemi yapılacağı göste
 
 [!code-csharp[](working-with-forms/sample/final/ViewModels/DescriptionViewModel.cs)]
 
-[!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterTextArea.cshtml?highlight=4)]
+[!code-cshtml[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterTextArea.cshtml?highlight=4)]
 
 Aşağıdaki HTML oluşturulur:
 
@@ -400,7 +400,7 @@ Aşağıdaki HTML oluşturulur:
 
 [!code-csharp[](working-with-forms/sample/final/ViewModels/SimpleViewModel.cs)]
 
-[!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterLabel.cshtml?highlight=4)]
+[!code-cshtml[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterLabel.cshtml?highlight=4)]
 
 Öğesi için aşağıdaki HTML oluşturulur `<label>` :
 
@@ -470,7 +470,7 @@ Aşağıdaki örnekte, veri modelinde, `DataAnnotation` öğesinde doğrulama ha
 
 [!code-csharp[](working-with-forms/sample/final/ViewModels/RegisterViewModel.cs)]
 
-[!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterValidation.cshtml?highlight=4,6,8&range=1-10)]
+[!code-cshtml[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterValidation.cshtml?highlight=4,6,8&range=1-10)]
 
 Oluşturulan HTML (model geçerli olduğunda):
 
@@ -499,9 +499,9 @@ Oluşturulan HTML (model geçerli olduğunda):
 
 * Bir HTML Yardımcısı alternatifi `Html.DropDownListFor` ve`Html.ListBoxFor`
 
-, `Select Tag Helper` `asp-for` [Select](https://www.w3.org/wiki/HTML/Elements/select) öğesi için model özelliği adını belirtir ve `asp-items` [seçenek](https://www.w3.org/wiki/HTML/Elements/option) öğelerini belirtir.  Örneğin:
+, `Select Tag Helper` `asp-for` [Select](https://www.w3.org/wiki/HTML/Elements/select) öğesi için model özelliği adını belirtir ve `asp-items` [seçenek](https://www.w3.org/wiki/HTML/Elements/option) öğelerini belirtir.  Örnek:
 
-[!code-HTML[](working-with-forms/sample/final/Views/Home/Index.cshtml?range=4)]
+[!code-cshtml[](working-with-forms/sample/final/Views/Home/Index.cshtml?range=4)]
 
 Örnek:
 
@@ -538,7 +538,7 @@ Aşağıdaki HTML 'yi üreten ("CA" seçiliyken):
 
 `asp-for`Öznitelik değeri özel bir durumdur ve bir `Model` ön ek gerektirmez, diğer etiket Yardımcısı öznitelikleri olur (gibi `asp-items` )
 
-[!code-HTML[](working-with-forms/sample/final/Views/Home/Index.cshtml?range=4)]
+[!code-cshtml[](working-with-forms/sample/final/Views/Home/Index.cshtml?range=4)]
 
 ### <a name="enum-binding"></a>Sabit Listesi bağlama
 
@@ -552,7 +552,7 @@ Genellikle `<select>` bir `enum` özellikle kullanılması ve `SelectListItem` d
 
 Yöntemi, bir `GetEnumSelectList` `SelectList` numaralandırma için bir nesne oluşturur.
 
-[!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Home/IndexEnum.cshtml?highlight=5)]
+[!code-cshtml[](../../mvc/views/working-with-forms/sample/final/Views/Home/IndexEnum.cshtml?highlight=5)]
 
 `Display`Daha zengin bir kullanıcı arabirimi almak için, Numaralandırıcı listenizi özniteliğiyle işaretleyebilirsiniz:
 
@@ -617,7 +617,7 @@ Oluşturulan HTML:
 
 Aşağıdaki görünümle:
 
-[!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Home/IndexMultiSelect.cshtml?highlight=4)]
+[!code-cshtml[](../../mvc/views/working-with-forms/sample/final/Views/Home/IndexMultiSelect.cshtml?highlight=4)]
 
 Aşağıdaki HTML 'yi oluşturur:
 
@@ -641,17 +641,17 @@ Aşağıdaki HTML 'yi oluşturur:
 
 Birden çok sayfada "belirtilmemiş" seçeneğini kullanarak kendinizi bulursanız, HTML 'yi yinelemeyi ortadan kaldırmak için bir şablon oluşturabilirsiniz:
 
-[!code-HTML[](../../mvc/views/working-with-forms/sample/final/Views/Home/IndexEmptyTemplate.cshtml?highlight=5)]
+[!code-cshtml[](../../mvc/views/working-with-forms/sample/final/Views/Home/IndexEmptyTemplate.cshtml?highlight=5)]
 
 *Views/Shared/EditorTemplates/CountryViewModel. cshtml* şablonu:
 
-[!code-HTML[](working-with-forms/sample/final/Views/Shared/EditorTemplates/CountryViewModel.cshtml)]
+[!code-cshtml[](working-with-forms/sample/final/Views/Shared/EditorTemplates/CountryViewModel.cshtml)]
 
 HTML [\<option>](https://www.w3.org/wiki/HTML/Elements/option) öğelerinin eklenmesi *hiçbir seçim* durumuyla sınırlı değildir. Örneğin, aşağıdaki görünüm ve eylem yöntemi yukarıdaki koda benzer HTML oluşturur:
 
 [!code-csharp[](working-with-forms/sample/final/Controllers/HomeController.cs?name=snippetNone)]
 
-[!code-HTML[](working-with-forms/sample/final/Views/Home/IndexOption.cshtml)]
+[!code-cshtml[](working-with-forms/sample/final/Views/Home/IndexOption.cshtml)]
 
 `<option>` `selected="selected"` Geçerli değere bağlı olarak doğru öğe seçilir (özniteliği içerir) `Country` .
 

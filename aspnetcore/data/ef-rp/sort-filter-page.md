@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: 0a87fe2f4cf7014cc15752dcf25545ce7aaa4687
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 496221bb4e34e1f9e4177d1934786a77d8c9b411
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408610"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212541"
 ---
 # <a name="part-3-razor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>Bölüm 3, Razor ASP.NET Core sıralama, filtreleme, sayfalama EF Core olan sayfalar
 
@@ -148,7 +148,7 @@ Uygulamayı test etme:
 
 * **Ara**' yı seçin.
 
-URL 'nin arama dizesini içerdiğine dikkat edin. Örneğin:
+URL 'nin arama dizesini içerdiğine dikkat edin. Örnek:
 
 ```
 https://localhost:<port>/Students?SearchString=an
@@ -337,7 +337,7 @@ Yöntemi, sıralama yapılacak sütunu belirtmek için LINQ to Entities kullanı
 
 *Öğrenciler/Index. cshtml*içindeki kodu aşağıdaki vurgulanmış kodla değiştirin:
 
-[!code-html[](intro/samples/cu21/Pages/Students/Index2.cshtml?highlight=17-19,25-27)]
+[!code-cshtml[](intro/samples/cu21/Pages/Students/Index2.cshtml?highlight=17-19,25-27)]
 
 Yukarıdaki kod:
 
@@ -393,7 +393,7 @@ Yukarıdaki kod, kodun kullanım için değişiklik yaptığı durumlarda sonuç
 
 *Sayfalar/öğrenciler/Index. cshtml*' de, bir **arama** düğmesi ve asi grafik Chrome oluşturmak için aşağıdaki vurgulanmış kodu ekleyin.
 
-[!code-html[](intro/samples/cu21/Pages/Students/Index3.cshtml?highlight=14-23&range=1-25)]
+[!code-cshtml[](intro/samples/cu21/Pages/Students/Index3.cshtml?highlight=14-23&range=1-25)]
 
 Yukarıdaki kod, `<form>` Arama metin kutusu ve düğme eklemek için [etiket yardımcısını](xref:mvc/views/tag-helpers/intro) kullanır. Varsayılan olarak, `<form>` etiket Yardımcısı form verilerini BIR gönderiyle gönderir. POST ile parametreler, URL 'de değil HTTP ileti gövdesine geçirilir. HTTP GET kullanıldığında, form verileri URL 'ye sorgu dizeleri olarak geçirilir. Verilerin sorgu dizelerine geçirilmesi, kullanıcıların URL 'YI yer işaretine eklemesini sağlar. [W3C yönergeleri](https://www.w3.org/2001/tag/doc/whenToUseGet.html) , eylem bir güncelleştirme ile SONUÇLANMAZSA, Get 'in kullanılması önerilir.
 
@@ -471,15 +471,15 @@ Sayfalama sırasında arama dizesi değiştirilirse sayfa 1 ' e sıfırlanır. Y
 
 *Öğrenciler/Index. cshtml*'de biçimlendirmeyi güncelleştirin. Değişiklikler vurgulanır:
 
-[!code-html[](intro/samples/cu21/Pages/Students/Index.cshtml?highlight=28-31,37-40,68-999)]
+[!code-cshtml[](intro/samples/cu21/Pages/Students/Index.cshtml?highlight=28-31,37-40,68-999)]
 
 Sütun üst bilgisi bağlantıları, `OnGetAsync` kullanıcının filtre sonuçları içinde sıralama yapabilmesi için geçerli arama dizesini yöntemine geçirmek üzere sorgu dizesini kullanır:
 
-[!code-html[](intro/samples/cu21/Pages/Students/Index.cshtml?range=28-31)]
+[!code-cshtml[](intro/samples/cu21/Pages/Students/Index.cshtml?range=28-31)]
 
 Sayfalama düğmeleri etiket yardımcıları tarafından görüntülenir:
 
-[!code-html[](intro/samples/cu21/Pages/Students/Index.cshtml?range=72-)]
+[!code-cshtml[](intro/samples/cu21/Pages/Students/Index.cshtml?range=72-)]
 
 Uygulamayı çalıştırın ve öğrenciler sayfasına gidin.
 
@@ -525,7 +525,7 @@ LINQ beyanı, öğrenci varlıklarını kayıt tarihine göre gruplandırır, he
 
 *Pages/about. cshtml* dosyasındaki kodu aşağıdaki kodla değiştirin:
 
-[!code-html[](intro/samples/cu21/Pages/About.cshtml)]
+[!code-cshtml[](intro/samples/cu21/Pages/About.cshtml)]
 
 Uygulamayı çalıştırın ve hakkında sayfasına gidin. Her kayıt tarihi için öğrenci sayısı bir tabloda görüntülenir.
 

@@ -5,7 +5,7 @@ description: BlazorBir [ Identity sunucu](https://identityserver.io/) arka ucu k
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/08/2020
+ms.date: 07/09/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 001fa0885c4ef4f365d9849278d3aa36e7657c54
-ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
+ms.openlocfilehash: 1e5b4e37acd11280ec41c137426ecc4776d231be
+ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86147732"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86176239"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-identity-server"></a>Blazor WebAssemblySunucu ile ASP.NET Core barındırılan bir uygulamanın güvenliğini sağlama Identity
 
@@ -148,7 +148,7 @@ Veritabanı şemasının tam denetimini elde etmek için, kullanılabilir Identi
 
 `OidcConfigurationController`() İçinde `Controllers/OidcConfigurationController.cs` , istemci uç noktası OIDC parametrelerine hizmeti sunacak şekilde sağlanır.
 
-### <a name="app-settings-files"></a>Uygulama ayarları dosyaları
+### <a name="app-settings"></a>Uygulama ayarları
 
 Proje kökündeki uygulama ayarları dosyasında ( `appsettings.json` ), `IdentityServer` bölümünde yapılandırılan istemcilerin listesi açıklanmaktadır. Aşağıdaki örnekte, tek bir istemci vardır. İstemci adı, uygulama adına karşılık gelir ve kural tarafından OAuth `ClientId` parametresine eşlenir. Profil, yapılandırılan uygulama türünü gösterir. Profil, sunucu için yapılandırma işlemini basitleştiren kuralları yönlendirmek için dahili olarak kullanılır. <!-- There are several profiles available, as explained in the [Application profiles](#application-profiles) section. -->
 
@@ -177,6 +177,22 @@ Bir uygulamaya kimlik doğrulaması ekliyorsanız, paketi uygulamanın proje dos
   Include="Microsoft.AspNetCore.Components.WebAssembly.Authentication" 
   Version="3.2.0" />
 ```
+
+### <a name="httpclient-configuration"></a>`HttpClient`yapılandırmada
+
+`Program.Main`( `Program.cs` ) İçinde, bir adlandırılmış <xref:System.Net.Http.HttpClient> ( `HostIS.ServerAPI` ), <xref:System.Net.Http.HttpClient> sunucu API 'sine istek yaparken erişim belirteçlerini içeren örnekler sağlamak üzere yapılandırılır:
+
+```csharp
+builder.Services.AddHttpClient("HostIS.ServerAPI", 
+        client => client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
+    .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+
+builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
+    .CreateClient("HostIS.ServerAPI"));
+```
+
+> [!NOTE]
+> Bir Blazor WebAssembly uygulamayı barındırılan bir çözümün parçası olmayan var olan bir Identity sunucu örneğini kullanacak şekilde yapılandırıyorsanız Blazor , <xref:System.Net.Http.HttpClient> temel adres kaydını <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> ( `builder.HostEnvironment.BaseAddress` ) konumundan sunucu uygulamasının API yetkilendirme uç noktası URL 'sine değiştirin.
 
 ### <a name="api-authorization-support"></a>API yetkilendirme desteği
 

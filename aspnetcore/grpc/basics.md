@@ -4,7 +4,7 @@ author: juntaoluo
 description: C# ile gRPC hizmetlerini yazarken temel kavramları öğrenin.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
-ms.date: 07/03/2019
+ms.date: 07/09/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/basics
-ms.openlocfilehash: 08c755cf078fe71d09e8c7af2cc16f5c427495f1
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: a99e5c78e291469bdce5c2b5cfa6eec86caa9735
+ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407297"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86176290"
 ---
 # <a name="grpc-services-with-c"></a>C ile gRPC Hizmetleri\#
 
@@ -50,6 +50,13 @@ Prototipsiz dosyaların sözdizimi hakkında daha fazla bilgi için, [resmi belg
 * \* . Proto* dosyası bir projeye öğe grubuna eklenerek dahil edilir `<Protobuf>` :
 
 [!code-xml[](~/tutorials/grpc/grpc-start/sample/GrpcGreeter/GrpcGreeter.csproj?highlight=2&range=7-9)]
+
+Varsayılan olarak, `<Protobuf>` başvuru somut bir istemci ve hizmet temel sınıfı oluşturur. Başvuru öğesinin özniteliği, `GrpcServices` C# varlık oluşturmayı sınırlamak için kullanılabilir. Geçerli `GrpcServices` Seçenekler şunlardır:
+
+* `Both`(mevcut olmadığında varsayılan)
+* `Server`
+* `Client`
+* `None`
 
 ## <a name="c-tooling-support-for-proto-files"></a>. Proto dosyaları için C# araçları desteği
 

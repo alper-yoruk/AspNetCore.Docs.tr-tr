@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: 14b28f04f4077cb5622858dad1bd18b81b198f3d
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 171607544bfe89fdd0a1ed9efb68f7a532f9aee1
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405802"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212652"
 ---
 # <a name="part-6-razor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>Bölüm 6, Razor ASP.NET Core EF Core olan sayfalar-Ilgili verileri oku
 
@@ -56,7 +56,7 @@ EF Core bir varlığın gezinti özelliklerine ilgili verileri yükleyebilmenin 
 
   **Note:** EF Core, daha önce bağlam örneğine yüklenmiş olan diğer varlıklara gezinti özelliklerini otomatik olarak düzeltir. Bir gezinti özelliği için veriler açıkça dahil *edilmese* bile, ilgili varlıkların bazıları veya tümü daha önce yüklenmişse Özellik yine de doldurulabilir.
 
-* [Açık yükleme](/ef/core/querying/related-data#explicit-loading). Varlık ilk kez okunmadıysa ilgili veriler alınmadı. Gerektiğinde ilgili verileri almak için kodun yazılması gerekir. Ayrı sorgularla açık yükleme, veritabanına birden çok sorgu gönderilmesine neden olur. Açık yükleme ile kod, yüklenecek gezinti özelliklerini belirtir. `Load`Açık yükleme yapmak için yöntemini kullanın. Örneğin:
+* [Açık yükleme](/ef/core/querying/related-data#explicit-loading). Varlık ilk kez okunmadıysa ilgili veriler alınmadı. Gerektiğinde ilgili verileri almak için kodun yazılması gerekir. Ayrı sorgularla açık yükleme, veritabanına birden çok sorgu gönderilmesine neden olur. Açık yükleme ile kod, yüklenecek gezinti özelliklerini belirtir. `Load`Açık yükleme yapmak için yöntemini kullanın. Örnek:
 
   ![Açık yükleme örneği](read-related-data/_static/explicit-loading.png)
 
@@ -369,7 +369,7 @@ EF Core bir varlığın gezinti özelliklerine ilgili verileri yükleyebilmenin 
 
   Note: EF Core, daha önce bağlam örneğine yüklenmiş olan diğer varlıklar için gezinti özelliklerini otomatik olarak düzeltir. Bir gezinti özelliği için veriler açıkça dahil *edilmese* bile, ilgili varlıkların bazıları veya tümü daha önce yüklenmişse Özellik yine de doldurulabilir.
 
-* [Açık yükleme](/ef/core/querying/related-data#explicit-loading). Varlık ilk kez okunmadıysa ilgili veriler alınmadı. Gerektiğinde ilgili verileri almak için kodun yazılması gerekir. Ayrı sorgularla açık yükleme, VERITABANıNA birden çok sorgu gönderilmesine neden olur. Açık yükleme ile kod, yüklenecek gezinti özelliklerini belirtir. `Load`Açık yükleme yapmak için yöntemini kullanın. Örneğin:
+* [Açık yükleme](/ef/core/querying/related-data#explicit-loading). Varlık ilk kez okunmadıysa ilgili veriler alınmadı. Gerektiğinde ilgili verileri almak için kodun yazılması gerekir. Ayrı sorgularla açık yükleme, VERITABANıNA birden çok sorgu gönderilmesine neden olur. Açık yükleme ile kod, yüklenecek gezinti özelliklerini belirtir. `Load`Açık yükleme yapmak için yöntemini kullanın. Örnek:
 
   ![Açık yükleme örneği](read-related-data/_static/explicit-loading.png)
 
@@ -420,7 +420,7 @@ Yukarıdaki kod ekler `AsNoTracking` . `AsNoTracking`Döndürülen varlıklar iz
 
 *Pages/kurslar/Index. cshtml* 'yi aşağıdaki vurgulanmış işaretlerle güncelleştirin:
 
-[!code-html[](intro/samples/cu/Pages/Courses/Index.cshtml?highlight=4,7,15-17,34-36,44)]
+[!code-cshtml[](intro/samples/cu/Pages/Courses/Index.cshtml?highlight=4,7,15-17,34-36,44)]
 
 Yapı iskelesi kodunda aşağıdaki değişiklikler yapılmıştır:
 
@@ -515,7 +515,7 @@ Sorgunun iki içerme vardır:
 
 *Sayfaları/eğitmenler/Index. cshtml* 'yi şu biçimlendirmeyle güncelleştirin:
 
-[!code-html[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=1-65&highlight=1,5,8,16-21,25-32,43-57)]
+[!code-cshtml[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=1-65&highlight=1,5,8,16-21,25-32,43-57)]
 
 Yukarıdaki biçimlendirme aşağıdaki değişiklikleri yapar:
 
@@ -595,7 +595,7 @@ Aşağıdaki kod, `Enrollments` bir kurs seçildiğinde görünüm modelinin öz
 
 *Pages/eğitmenler/Index. cshtml* sayfasının sonuna aşağıdaki biçimlendirmeyi ekleyin Razor :
 
-[!code-html[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=60-102&highlight=7-999)]
+[!code-cshtml[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=60-102&highlight=7-999)]
 
 Yukarıdaki biçimlendirme, bir eğitmen seçildiğinde bir eğitmenin ilgili kursların bir listesini görüntüler.
 
@@ -611,7 +611,7 @@ Bu bölümde, uygulama seçili bir kurs için öğrenci verilerini gösterecek �
 
 Güncelleştirme *sayfaları/eğitmenler/Index. cshtml*. Aşağıdaki biçimlendirmeyi dosyanın sonuna ekleyin:
 
-[!code-html[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=103-)]
+[!code-cshtml[](intro/samples/cu/Pages/Instructors/IndexRRD.cshtml?range=103-)]
 
 Yukarıdaki biçimlendirme, seçili kursa kayıtlı öğrencilerin bir listesini görüntüler.
 

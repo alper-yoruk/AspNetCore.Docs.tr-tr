@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/concurrency
-ms.openlocfilehash: 597f396237151f49a9ae333973e91d8f4f7c6ff1
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ff9e01df002ac0fc94ced6d5d093099d66a14f36
+ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401382"
+ms.lasthandoff: 07/09/2020
+ms.locfileid: "86176285"
 ---
 # <a name="part-8-razor-pages-with-ef-core-in-aspnet-core---concurrency"></a>8. bölüm, Razor ASP.NET Core EF Core olan sayfalar-eşzamanlılık
 
@@ -86,7 +86,7 @@ EF Core, `DbConcurrencyException` Çakışmalar algıladığında özel durum ol
 
 * EF Core, Update ve DELETE komutlarının WHERE yan tümcesinde [eşzamanlılık belirteçleri](/ef/core/modeling/concurrency) olarak yapılandırılan sütunların özgün değerlerini içerecek şekilde yapılandırın.
 
-  `SaveChanges`Çağrıldığında, WHERE yan tümcesi [ConcurrencyCheck](/dotnet/api/system.componentmodel.dataannotations.concurrencycheckattribute) özniteliğiyle açıklama eklenmiş herhangi bir özelliğin özgün değerlerini arar. Update deyimleri, satır ilk okunduğundan bu yana eşzamanlılık belirteci özelliklerinden herhangi biri değiştiyse güncelleştirilecek bir satır bulmayacaktır. EF Core eşzamanlılık çakışması olarak yorumlar. Birçok sütunu olan veritabanı tablolarında bu yaklaşım çok büyük WHERE yan tümceleriyle sonuçlanabilir ve büyük miktarlarda durum gerektirebilir. Bu nedenle bu yaklaşım genellikle önerilmez ve bu öğreticide kullanılan yöntem değildir.
+  `SaveChanges`Çağrıldığında WHERE yan tümcesi, özniteliğiyle birlikte açıklanan özelliklerin özgün değerlerini arar <xref:System.ComponentModel.DataAnnotations.ConcurrencyCheckAttribute> . Update deyimleri, satır ilk okunduğundan bu yana eşzamanlılık belirteci özelliklerinden herhangi biri değiştiyse güncelleştirilecek bir satır bulmayacaktır. EF Core eşzamanlılık çakışması olarak yorumlar. Birçok sütunu olan veritabanı tablolarında bu yaklaşım çok büyük WHERE yan tümceleriyle sonuçlanabilir ve büyük miktarlarda durum gerektirebilir. Bu nedenle bu yaklaşım genellikle önerilmez ve bu öğreticide kullanılan yöntem değildir.
 
 * Veritabanı tablosunda, bir satırın ne zaman değiştirildiğini belirlemede kullanılabilecek bir izleme sütunu ekleyin.
 
@@ -98,7 +98,7 @@ EF Core, `DbConcurrencyException` Çakışmalar algıladığında özel durum ol
 
 [!code-csharp[](intro/samples/cu30/Models/Department.cs?highlight=26,27)]
 
-[Timestamp](/dotnet/api/system.componentmodel.dataannotations.timestampattribute) özniteliği sütunu eşzamanlılık izleme sütunu olarak tanımlar. Fluent API, izleme özelliğini belirtmenin alternatif bir yoludur:
+<xref:System.ComponentModel.DataAnnotations.TimestampAttribute>Özniteliği sütunu eşzamanlılık izleme sütunu olarak tanımlar. Fluent API, izleme özelliğini belirtmenin alternatif bir yoludur:
 
 ```csharp
 modelBuilder.Entity<Department>()
@@ -250,7 +250,7 @@ Scafkatlama aracı `RowVersion` Dizin sayfası için bir sütun oluşturdu, anca
 
 Aşağıdaki kod, güncelleştirilmiş sayfayı gösterir:
 
-[!code-html[](intro/samples/cu30/Pages/Departments/Index.cshtml?highlight=5,8,29,48,51)]
+[!code-cshtml[](intro/samples/cu30/Pages/Departments/Index.cshtml?highlight=5,8,29,48,51)]
 
 ## <a name="update-the-edit-page-model"></a>Düzenleme sayfası modelini güncelleştirme
 
@@ -258,7 +258,7 @@ Aşağıdaki kodla *Pages\Departments\Edit.cshtml.cs* güncelleştirin:
 
 [!code-csharp[](intro/samples/cu30/Pages/Departments/Edit.cshtml.cs?name=snippet_All)]
 
-[OriginalValue](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyentry.originalvalue?view=efcore-2.0#Microsoft_EntityFrameworkCore_ChangeTracking_PropertyEntry_OriginalValue) , `rowVersion` yöntemde alındığı sırada varlıktaki değerle güncelleştirilir `OnGet` . EF Core, özgün değeri içeren WHERE yan tümcesiyle bir SQL UPDATE komutu oluşturur `RowVersion` . UPDATE komutundan hiçbir satır etkilenmeden (hiçbir satır özgün değere sahip değilse `RowVersion` ), bir `DbUpdateConcurrencyException` özel durum oluşturulur.
+, <xref:Microsoft.EntityFrameworkCore.ChangeTracking.PropertyEntry.OriginalValue> `rowVersion` Yönteminde alındığı sırada varlıktaki değerle güncelleştirilir `OnGet` . EF Core, özgün değeri içeren WHERE yan tümcesiyle bir SQL UPDATE komutu oluşturur `RowVersion` . UPDATE komutundan hiçbir satır etkilenmeden (hiçbir satır özgün değere sahip değilse `RowVersion` ), bir `DbUpdateConcurrencyException` özel durum oluşturulur.
 
 [!code-csharp[](intro/samples/cu30/Pages/Departments/Edit.cshtml.cs?name=snippet_RowVersion&highlight=17-18)]
 
@@ -282,16 +282,16 @@ Aşağıdaki vurgulanan kod, `RowVersion` değeri veritabanından alınan yeni d
 
 `ModelState.Remove`Eski değere sahip olduğundan deyimin olması gerekir `ModelState` `RowVersion` . RazorSayfada, `ModelState` bir alanın değeri, her ikisi de varsa Model Özellik değerlerinden önceliklidir.
 
-### <a name="update-the-razor-page"></a>Sayfayı Güncelleştir Razor
+### <a name="update-the-edit-page"></a>Düzenleme sayfasını Güncelleştir
 
 *Sayfaları/departmanları/Düzenle. cshtml* 'yi aşağıdaki kodla güncelleştirin:
 
-[!code-html[](intro/samples/cu30/Pages/Departments/Edit.cshtml?highlight=1,14,16-17,37-39)]
+[!code-cshtml[](intro/samples/cu30/Pages/Departments/Edit.cshtml?highlight=1,14,16-17,37-39)]
 
 Yukarıdaki kod:
 
 * `page`İçindeki yönergesini ' a `@page` güncelleştirir `@page "{id:int}"` .
-* Gizli satır sürümü ekler. `RowVersion`, geri gönder değeri bağlayan için eklenmelidir.
+* Gizli satır sürümü ekler. `RowVersion`, geri gönderme, değeri bağlayan şekilde eklenmelidir.
 * `RowVersion`Hata ayıklama amacıyla son baytını görüntüler.
 * `ViewData`Türü kesin belirlenmiş olan ile değiştirilir `InstructorNameSL` .
 
@@ -323,7 +323,7 @@ Bu tarayıcı penceresi, ad alanını değiştirmeyi planlamadı. Geçerli değe
 
 Yeniden **Kaydet** ' e tıklayın. İkinci tarayıcı sekmesine girdiğiniz değer kaydedilir. Kaydedilen değerleri Dizin sayfasında görürsünüz.
 
-## <a name="update-the-delete-page"></a>Silme sayfasını Güncelleştir
+## <a name="update-the-delete-page-model"></a>Sayfa silme modelini Güncelleştir
 
 *Sayfaları/departmanları/delete. cshtml. cs* öğesini aşağıdaki kodla güncelleştirin:
 
@@ -335,11 +335,11 @@ Sil sayfası, varlık alındıktan sonra değiştirildiğinde eşzamanlılık ç
 * Bir DbUpdateConcurrencyException özel durumu oluşturulur.
 * `OnGetAsync`ile çağırılır `concurrencyError` .
 
-### <a name="update-the-delete-razor-page"></a>Silme sayfasını Güncelleştir Razor
+### <a name="update-the-delete-page"></a>Silme sayfasını Güncelleştir
 
 *Sayfaları/departmanları/delete. cshtml* 'yi aşağıdaki kodla güncelleştirin:
 
-[!code-html[](intro/samples/cu30/Pages/Departments/Delete.cshtml?highlight=1,10,39,51)]
+[!code-cshtml[](intro/samples/cu30/Pages/Departments/Delete.cshtml?highlight=1,10,39,42,51)]
 
 Yukarıdaki kod aşağıdaki değişiklikleri yapar:
 
@@ -347,7 +347,7 @@ Yukarıdaki kod aşağıdaki değişiklikleri yapar:
 * Bir hata iletisi ekler.
 * FirstMidName öğesini, **yönetici** alanındaki FullName ile değiştirir.
 * `RowVersion`Son baytın görüntüleneceği değişiklikler.
-* Gizli satır sürümü ekler. `RowVersion`, postgit ekleme geri eklemesi değeri bağlamalıdır.
+* Gizli satır sürümü ekler. `RowVersion`, geri gönderme, değeri bağlayan şekilde eklenmelidir.
 
 ### <a name="test-concurrency-conflicts"></a>Eşzamanlılık çakışmalarını test et
 
@@ -365,7 +365,7 @@ Test departmanı üzerinde silmenin iki tarayıcı örneğini açın:
 
 Tarayıcı, değiştirilen değeri olan dizin sayfasını gösterir ve rowVersion göstergesi güncellenir. Güncelleştirilmiş ROWVERSION göstergesinin, diğer sekmede ikinci geri göndermede görüntülendiğini aklınızda edin.
 
-İkinci sekmeden test departmanını silin. Veritabanında geçerli değerlerle birlikte bir eşzamanlılık hatası görüntülenir. **Sil** ' i tıklamak, güncelleştirilmemiş olmadığı takdirde varlığı siler. `RowVersion` Departman silindi.
+İkinci sekmeden test departmanını silin. Veritabanında geçerli değerlerle birlikte bir eşzamanlılık hatası görüntülenir. **Sil** ' i tıklatmak, güncelleştirilmemiş olmadığı takdirde varlığı siler `RowVersion` .
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
@@ -550,7 +550,7 @@ Dizin sayfasını güncelleştir:
 
 Aşağıdaki biçimlendirme güncelleştirilmiş sayfayı göstermektedir:
 
-[!code-html[](intro/samples/cu/Pages/Departments/Index.cshtml?highlight=5,8,29,47,50)]
+[!code-cshtml[](intro/samples/cu/Pages/Departments/Index.cshtml?highlight=5,8,29,47,50)]
 
 ### <a name="update-the-edit-page-model"></a>Düzenleme sayfası modelini güncelleştirme
 
@@ -582,7 +582,7 @@ Aşağıdaki vurgulanan kod, `RowVersion` değeri, veritabanından alınan yeni 
 
 *Sayfaları/departmanları/Düzenle. cshtml* 'yi şu biçimlendirmeyle güncelleştirin:
 
-[!code-html[](intro/samples/cu/Pages/Departments/Edit.cshtml?highlight=1,14,16-17,37-39)]
+[!code-cshtml[](intro/samples/cu/Pages/Departments/Edit.cshtml?highlight=1,14,16-17,37-39)]
 
 Yukarıdaki biçimlendirme:
 
@@ -637,7 +637,7 @@ Sil sayfası, varlık alındıktan sonra değiştirildiğinde eşzamanlılık ç
 
 *Sayfaları/departmanları/delete. cshtml* 'yi aşağıdaki kodla güncelleştirin:
 
-[!code-html[](intro/samples/cu/Pages/Departments/Delete.cshtml?highlight=1,10,39,51)]
+[!code-cshtml[](intro/samples/cu/Pages/Departments/Delete.cshtml?highlight=1,10,39,51)]
 
 Yukarıdaki kod aşağıdaki değişiklikleri yapar:
 
@@ -663,7 +663,7 @@ Test departmanı üzerinde silmenin iki tarayıcı örneğini açın:
 
 Tarayıcı, değiştirilen değeri olan dizin sayfasını gösterir ve rowVersion göstergesi güncellenir. Güncelleştirilmiş ROWVERSION göstergesinin, diğer sekmede ikinci geri göndermede görüntülendiğini aklınızda edin.
 
-İkinci sekmeden test departmanını silin. Bir eşzamanlılık hatası, VERITABANıNDAKI geçerli değerlerle birlikte görüntülenir. **Sil** ' i tıklamak, güncelleştirilmemiş olmadığı takdirde varlığı siler. `RowVersion` Departman silindi.
+İkinci sekmeden test departmanını silin. Bir eşzamanlılık hatası, VERITABANıNDAKI geçerli değerlerle birlikte görüntülenir. **Sil** ' i tıklatmak, güncelleştirilmemiş olmadığı takdirde varlığı siler `RowVersion` .
 
 Veri modelinin nasıl devralınacağını öğrenmek için bkz. [Devralma](xref:data/ef-mvc/inheritance) .
 

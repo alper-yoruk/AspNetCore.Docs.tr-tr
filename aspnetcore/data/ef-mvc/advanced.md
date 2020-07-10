@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/advanced
-ms.openlocfilehash: 7233d6baf139d2ef362f4e3d1a56cf7f0e2514d2
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ebeb581cf79f2d2ab60de7df43d042fa3185cd32
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403124"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212730"
 ---
 # <a name="tutorial-learn-about-advanced-scenarios---aspnet-mvc-with-ef-core"></a>Öğretici: Gelişmiş senaryolar hakkında bilgi edinin-EF Core ASP.NET MVC
 
@@ -39,7 +39,7 @@ Bu öğreticide şunları yaptınız:
 > * EF Core kaynak kodu ve geliştirme planları hakkında bilgi edinin
 > * Kodu basitleştirmek için dinamik LINQ kullanmayı öğrenin
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * [Devralmayı Uygula](inheritance.md)
 
@@ -105,7 +105,7 @@ Denetleyici bir HttpGet isteğini işlediğinde, içinde hiçbir şey döndürü
 
 *Views/kurslar/UpdateCourseCredits. cshtml*içinde, şablon kodunu şu kodla değiştirin:
 
-[!code-html[](intro/samples/cu/Views/Courses/UpdateCourseCredits.cshtml)]
+[!code-cshtml[](intro/samples/cu/Views/Courses/UpdateCourseCredits.cshtml)]
 
 `UpdateCourseCredits` **Kurs** sekmesini seçerek yöntemi çalıştırın, sonra TARAYıCıNıN adres çubuğundaki URL 'nin sonuna "/UpdateCourseCredits" ekleyin (örneğin: `http://localhost:5813/Courses/UpdateCourseCredits` ). Metin kutusuna bir sayı girin:
 
@@ -181,7 +181,7 @@ Entity Framework bir varlığın geçerli değerlerini özgün değerlerle karş
 
 * ChangeTracker. Entries
 
-Çok sayıda varlığı izliyorsanız ve bu yöntemlerden birini bir döngüde birçok kez çağırırsanız, özelliği kullanarak otomatik değişiklik algılamayı geçici olarak kapatarak önemli performans iyileştirmeleri alabilirsiniz `ChangeTracker.AutoDetectChangesEnabled` . Örneğin:
+Çok sayıda varlığı izliyorsanız ve bu yöntemlerden birini bir döngüde birçok kez çağırırsanız, özelliği kullanarak otomatik değişiklik algılamayı geçici olarak kapatarak önemli performans iyileştirmeleri alabilirsiniz `ChangeTracker.AutoDetectChangesEnabled` . Örnek:
 
 ```csharp
 _context.ChangeTracker.AutoDetectChangesEnabled = false;

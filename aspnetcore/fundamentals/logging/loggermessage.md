@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/logging/loggermessage
-ms.openlocfilehash: dc90c6cdbcea7c36079bcb4a032014998056b56d
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: cf391c773a1187dd96e3719e0fb11d6244c8e94d
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401174"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212774"
 ---
 # <a name="high-performance-logging-with-loggermessage-in-aspnet-core"></a>ASP.NET Core 'de LoggerMessage ile yüksek performanslı günlüğe kaydetme
 
@@ -153,7 +153,7 @@ Yöntemini kullanarak bir dizi günlük mesajı için uygulanacak [günlük kaps
 
 `IncludeScopes` *Üzerindeappsettings.js*konsol günlükçüsü bölümünde etkinleştirin:
 
-[!code-csharp[](loggermessage/samples/3.x/LoggerMessageSample/appsettings.json?highlight=3-5)]
+[!code-json[](loggermessage/samples/3.x/LoggerMessageSample/appsettings.json?highlight=3-5)]
 
 Bir günlük kapsamı oluşturmak için, kapsam için bir temsilci tutacak bir alan ekleyin <xref:System.Func%601> . Örnek uygulama `_allQuotesDeletedScope` (*Iç/LoggerExtensions. cs*) adlı bir alan oluşturur:
 
@@ -321,7 +321,7 @@ Yöntemini kullanarak bir dizi günlük mesajı için uygulanacak [günlük kaps
 
 `IncludeScopes` *Üzerindeappsettings.js*konsol günlükçüsü bölümünde etkinleştirin:
 
-[!code-csharp[](loggermessage/samples/2.x/LoggerMessageSample/appsettings.json?highlight=3-5)]
+[!code-json[](loggermessage/samples/2.x/LoggerMessageSample/appsettings.json?highlight=3-5)]
 
 Bir günlük kapsamı oluşturmak için, kapsam için bir temsilci tutacak bir alan ekleyin <xref:System.Func%601> . Örnek uygulama `_allQuotesDeletedScope` (*Iç/LoggerExtensions. cs*) adlı bir alan oluşturur:
 
@@ -360,4 +360,4 @@ info: LoggerMessageSample.Pages.IndexModel[4]
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [Günlüğe Kaydetme](xref:fundamentals/logging/index)
+* [Günlüğe kaydetme](xref:fundamentals/logging/index)

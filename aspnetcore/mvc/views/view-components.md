@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/view-components
-ms.openlocfilehash: 40902da52217505822abd9bfd889ecafdd4d88e0
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 272b5a89601a9e6ef24f3e60a3da7e2a40297c97
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407843"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86213108"
 ---
 # <a name="view-components-in-aspnet-core"></a>ASP.NET Core bileşenleri görüntüleme
 
@@ -100,7 +100,7 @@ Görünüm dosyasını *default. cshtml* olarak yazmanız ve *görünümleri/pay
 
 Arama yolunu görüntüle ' yi özelleştirmek için, Razor <xref:Microsoft.AspNetCore.Mvc.Razor.RazorViewEngineOptions.ViewLocationFormats> koleksiyonunu değiştirin. Örneğin, "/Components/{View bileşen adı}/{View Name}" yolu içinde görünümleri aramak için, koleksiyona yeni bir öğe ekleyin:
 
-[!code-cs[](view-components/samples_snapshot/2.x/Startup.cs?name=snippet_ViewLocationFormats&highlight=4)]
+[!code-csharp[](view-components/samples_snapshot/2.x/Startup.cs?name=snippet_ViewLocationFormats&highlight=4)]
 
 Yukarıdaki kodda, "" yer tutucusu " {0} Bileşenler/{görünüm bileşeni adı}/{View Name}" yolunu temsil eder.
 

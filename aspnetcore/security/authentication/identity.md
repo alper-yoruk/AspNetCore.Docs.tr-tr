@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity
-ms.openlocfilehash: 31970bd2b52ad83c116067d258aa9dca2d9b3b66
-ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
+ms.openlocfilehash: 6ac565bfa4862168fa143417ab5a81c51b620f16
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85793567"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212447"
 ---
 # <a name="introduction-to-identity-on-aspnet-core"></a>ASP.NET Core giriş Identity
 
@@ -57,7 +57,7 @@ Bireysel kullanıcı hesaplarıyla bir ASP.NET Core Web uygulaması projesi olu�
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * **Dosya** > **Yeni** > **Proje**’yi seçin.
-* **ASP.NET Core Web uygulaması**' nı seçin. Projeyi Proje **WebApp1** aynı ad alanına sahip olacak şekilde adlandırın. **Tamam**'a tıklayın.
+* **ASP.NET Core Web uygulaması**' nı seçin. Projeyi Proje **WebApp1** aynı ad alanına sahip olacak şekilde adlandırın. **Tamam** düğmesine tıklayın.
 * Bir ASP.NET Core **Web uygulaması**seçip **kimlik doğrulamasını Değiştir**' i seçin.
 * **Bireysel kullanıcı hesapları** ' nı seçip **Tamam**' a tıklayın.
 
@@ -75,7 +75,7 @@ dotnet new webapp --auth Individual -uld -o WebApp1
 
 ---
 
-Oluşturulan proje bir [ Razor sınıf kitaplığı](xref:razor-pages/ui-class)olarak [ASP.NET Core Identity ](xref:security/authentication/identity) sağlar. Identity Razor Sınıf kitaplığı, alanı ile uç noktaları kullanıma sunar `Identity` . Örneğin:
+Oluşturulan proje bir [ Razor sınıf kitaplığı](xref:razor-pages/ui-class)olarak [ASP.NET Core Identity ](xref:security/authentication/identity) sağlar. Identity Razor Sınıf kitaplığı, alanı ile uç noktaları kullanıma sunar `Identity` . Örnek:
 
 * /Identity/Account/Login
 * /Identity/Account/Logout
@@ -185,7 +185,7 @@ Yetkilendirme kararlarının nasıl yapılacağı hakkında bilgi için bkz <xre
 
 *Sayfa/paylaşılan/_LoginPartial. cshtml*'de gönderi belirtildi:
 
-[!code-csharp[](identity/sample/WebApp3/Pages/Shared/_LoginPartial.cshtml?highlight=15)]
+[!code-cshtml[](identity/sample/WebApp3/Pages/Shared/_LoginPartial.cshtml?highlight=15)]
 
 ## <a name="test-identity"></a>SınamanızIdentity
 
@@ -216,7 +216,7 @@ Mevcut deponuzu geçirme hakkında daha fazla bilgi ve yönergeler için Identit
 
 Minimum parola gereksinimlerini ayarlayan bir örnek için bkz. [yapılandırma](#pw) .
 
-## <a name="adddefaultidentity-and-addidentity"></a>Adddefaultıdentity ve AddEntity
+## <a name="adddefaultidentity-and-addidentity"></a>AddDefault Identity ve EkleIdentity
 
 <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionUIExtensions.AddDefaultIdentity*>ASP.NET Core 2,1 ' de tanıtılmıştı. Çağırma `AddDefaultIdentity` , aşağıdakileri çağırmaya benzer:
 
@@ -224,7 +224,7 @@ Minimum parola gereksinimlerini ayarlayan bir örnek için bkz. [yapılandırma]
 * <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>
 * <xref:Microsoft.AspNetCore.Identity.IdentityBuilderExtensions.AddDefaultTokenProviders*>
 
-Daha fazla bilgi için bkz. [Adddefaultıdentity kaynağı](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Identity/UI/src/IdentityServiceCollectionUIExtensions.cs#L47-L63) .
+Daha fazla bilgi için bkz. [ADDDEFAULT Identity kaynağı](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Identity/UI/src/IdentityServiceCollectionUIExtensions.cs#L47-L63) .
 
 ## <a name="prevent-publish-of-static-identity-assets"></a>Statik varlıkların yayımlanmasını Engelle Identity
 
@@ -271,7 +271,7 @@ Bu konu başlığında, Identity bir kullanıcıyı kaydetmek, oturum açmak ve 
 
 <a name="adi"></a>
 
-## <a name="adddefaultidentity-and-addidentity"></a>Adddefaultıdentity ve AddEntity
+## <a name="adddefaultidentity-and-addidentity"></a>AddDefault Identity ve EkleIdentity
 
 <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionUIExtensions.AddDefaultIdentity*>ASP.NET Core 2,1 ' de tanıtılmıştı. Çağırma `AddDefaultIdentity` , aşağıdakileri çağırmaya benzer:
 
@@ -279,7 +279,7 @@ Bu konu başlığında, Identity bir kullanıcıyı kaydetmek, oturum açmak ve 
 * <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>
 * <xref:Microsoft.AspNetCore.Identity.IdentityBuilderExtensions.AddDefaultTokenProviders*>
 
-Daha fazla bilgi için bkz. [Adddefaultıdentity kaynağı](https://github.com/dotnet/AspNetCore/blob/release/2.1/src/Identity/UI/src/IdentityServiceCollectionUIExtensions.cs#L47-L63) .
+Daha fazla bilgi için bkz. [ADDDEFAULT Identity kaynağı](https://github.com/dotnet/AspNetCore/blob/release/2.1/src/Identity/UI/src/IdentityServiceCollectionUIExtensions.cs#L47-L63) .
 
 ## <a name="create-a-web-app-with-authentication"></a>Kimlik doğrulamasıyla bir Web uygulaması oluşturma
 
@@ -288,7 +288,7 @@ Bireysel kullanıcı hesaplarıyla bir ASP.NET Core Web uygulaması projesi olu�
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * **Dosya** > **Yeni** > **Proje**’yi seçin.
-* **ASP.NET Core Web uygulaması**' nı seçin. Projeyi Proje **WebApp1** aynı ad alanına sahip olacak şekilde adlandırın. **Tamam**'a tıklayın.
+* **ASP.NET Core Web uygulaması**' nı seçin. Projeyi Proje **WebApp1** aynı ad alanına sahip olacak şekilde adlandırın. **Tamam** düğmesine tıklayın.
 * Bir ASP.NET Core **Web uygulaması**seçip **kimlik doğrulamasını Değiştir**' i seçin.
 * **Bireysel kullanıcı hesapları** ' nı seçip **Tamam**' a tıklayın.
 
@@ -300,7 +300,7 @@ dotnet new webapp --auth Individual -o WebApp1
 
 ---
 
-Oluşturulan proje bir [ Razor sınıf kitaplığı](xref:razor-pages/ui-class)olarak [ASP.NET Core Identity ](xref:security/authentication/identity) sağlar. Identity Razor Sınıf kitaplığı, alanı ile uç noktaları kullanıma sunar `Identity` . Örneğin:
+Oluşturulan proje bir [ Razor sınıf kitaplığı](xref:razor-pages/ui-class)olarak [ASP.NET Core Identity ](xref:security/authentication/identity) sağlar. Identity Razor Sınıf kitaplığı, alanı ile uç noktaları kullanıma sunar `Identity` . Örnek:
 
 * /Identity/Account/Login
 * /Identity/Account/Logout
@@ -346,7 +346,7 @@ Identity[UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuil
 
 [!code-csharp[](identity/sample/WebApp1/Startup.cs?name=snippet_configure&highlight=18)]
 
-Daha fazla bilgi için bkz. [ıdentityoptions sınıfı](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) ve [uygulama başlatma](xref:fundamentals/startup).
+Daha fazla bilgi için bkz. [ Identity Options sınıfı](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) ve [uygulama başlatma](xref:fundamentals/startup).
 
 ## <a name="scaffold-register-login-and-logout"></a>Yapı iskelesi kaydı, oturum açma ve oturum kapatma
 
@@ -402,7 +402,7 @@ Yetkilendirme kararlarının nasıl yapılacağı hakkında bilgi için bkz <xre
 
 *Sayfa/paylaşılan/_LoginPartial. cshtml*'de gönderi belirtildi:
 
-[!code-csharp[](identity/sample/WebApp1/Pages/Shared/_LoginPartial.cshtml?highlight=16)]
+[!code-cshtml[](identity/sample/WebApp1/Pages/Shared/_LoginPartial.cshtml?highlight=16)]
 
 ## <a name="test-identity"></a>SınamanızIdentity
 

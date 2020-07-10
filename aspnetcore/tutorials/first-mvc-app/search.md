@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/search
-ms.openlocfilehash: 652ee8c4bfe8980eb09246720f9ddf1743021f34
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 65bf5e6b022699268f9e7e5677ea8632f1a489c7
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399055"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86213131"
 ---
 # <a name="part-7-add-search-to-an-aspnet-core-mvc-app"></a>Bölüm 7, ASP.NET Core MVC uygulamasına arama ekleme
 
@@ -75,7 +75,7 @@ Ancak, kullanıcıların bir filmi her arayışınızda URL 'YI değiştirmesini
 
 *Views/filmler/Index. cshtml* dosyasını açın ve `<form>` aşağıda vurgulanan biçimlendirmeyi ekleyin:
 
-[!code-HTML[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexForm1.cshtml?highlight=10-16&range=4-21)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexForm1.cshtml?highlight=10-16&range=4-21)]
 
 HTML etiketi, form `<form>` [etiketi yardımcısını](xref:mvc/views/working-with-forms)kullanır, bu nedenle formu gönderdiğinizde, filtre dizesi `Index` film denetleyicisinin eylemine gönderilir. Değişikliklerinizi kaydedin ve sonra filtreyi test edin.
 
@@ -101,7 +101,7 @@ Arama parametresini ve [XSRF](xref:security/anti-request-forgery) belirtecini is
 
 Arama parametresi, URL değil, istek gövdesinde olduğundan, bu arama bilgilerini, yer işareti veya başkalarıyla paylaşmak için yakalayamazsınız. İsteğin, `HTTP GET` *Görünümler/filmler/Index. cshtml* dosyasında bulunması gerektiğini belirterek bunu düzeltemedi.
 
-[!code-html[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexGet.cshtml?highlight=12&range=1-23)]
+[!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/IndexGet.cshtml?highlight=12&range=1-23)]
 
 Artık bir arama gönderdiğinizde, URL arama sorgu dizesini içerir. `HttpGet Index`Bir yönteminiz olsa da, arama eylem yöntemine de gidecektir `HttpPost Index` .
 

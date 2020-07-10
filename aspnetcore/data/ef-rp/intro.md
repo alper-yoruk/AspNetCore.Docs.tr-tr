@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 79cfe50f7e074954291c88689940c3263b68e151
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 700370fd11a0df40a45c47e8c378d5bdd0c60009
+ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401363"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86212700"
 ---
 # <a name="razor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>RazorASP.NET Core Entity Framework Core olan sayfalar-öğretici 1/8
 
@@ -31,7 +31,7 @@ Bu, bir [ASP.NET Core Razor sayfaları](xref:razor-pages/index) UYGULAMASıNDA E
 
 [Tamamlanmış uygulamayı indirin veya görüntüleyin.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [Yönergeleri indirin](xref:index#how-to-download-a-sample).
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * Sayfalarla yeni başladıysanız Razor , bunu başlatmadan önce [ Razor sayfalarla çalışmaya başlama](xref:tutorials/razor-pages/razor-pages-start) öğreticisini izleyin.
 
@@ -223,7 +223,7 @@ Bu bölümde, oluşturmak için ASP.NET Core scafkatlama aracını kullanırsın
   * **Model sınıfı** açılır penceresinde **öğrenci (Contosouniversity. modeller)** öğesini seçin.
   * **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin.
   * *Contosouniversity. modeller. Contosoüniversıtycontext* olan veri bağlamı adını *Contosouniversity. Data. SchoolContext*olarak değiştirin.
-  * **Ekle**'yi seçin.
+  * **Ekle**’yi seçin.
 
 Aşağıdaki paketler otomatik olarak yüklenir:
 
@@ -364,7 +364,7 @@ Bu iş akışı, verileri korumanıza gerek olmadığı sürece, şema hızlı b
 
 Öğretici serisinde daha sonra tarafından oluşturulan veritabanını siler `EnsureCreated` ve bunun yerine geçişleri kullanırsınız. Tarafından oluşturulan bir veritabanı, `EnsureCreated` geçişler kullanılarak güncelleştirilemiyor.
 
-### <a name="test-the-app"></a>Uygulamayı test edin
+### <a name="test-the-app"></a>Uygulamayı test etme
 
 * Uygulamayı çalıştırın.
 * **Öğrenciler** bağlantısını seçin ve ardından **Yeni oluştur**.
@@ -468,7 +468,7 @@ Contoso Üniversitesi örnek Web uygulaması, Razor Entity Framework (EF) Core k
 
 [Tamamlanmış uygulamayı indirin veya görüntüleyin.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [Yönergeleri indirin](xref:index#how-to-download-a-sample).
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -529,11 +529,11 @@ Site menüsünü, düzeni ve giriş sayfasını birkaç değişiklik ayarlar. *S
 
 Değişiklikler vurgulanır. (Tüm *biçimlendirme gösterilmez.* )
 
-[!code-html[](intro/samples/cu21/Pages/Shared/_Layout.cshtml?highlight=6,29,35-38,50&name=snippet)]
+[!code-cshtml[](intro/samples/cu21/Pages/Shared/_Layout.cshtml?highlight=6,29,35-38,50&name=snippet)]
 
 *Pages/Index. cshtml*dosyasında, ASP.net ve MVC hakkındaki metni bu uygulamayla ilgili metinle değiştirmek için dosyanın içeriğini aşağıdaki kodla değiştirin:
 
-[!code-html[](intro/samples/cu21/Pages/Index.cshtml)]
+[!code-cshtml[](intro/samples/cu21/Pages/Index.cshtml)]
 
 ## <a name="create-the-data-model"></a>Veri modelini oluşturma
 
@@ -606,7 +606,7 @@ Bu bölümde öğrenci modeli scafkatdır. Diğer bir deyişle, scafkatlama arac
 * **Model sınıfı** açılır penceresinde **öğrenci (Contosouniversity. modeller)** öğesini seçin.
 * **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin ve üretilen adı **Contosouniversity. modeller. SchoolContext**olarak değiştirin.
 * **Veri bağlamı sınıfı** açılır penceresinde **Contosouniversity. modeller. SchoolContext** öğesini seçin.
-* **Ekle**'yi seçin.
+* **Ekle**’yi seçin.
 
 ![CRUD iletişim kutusu](intro/_static/s1.png)
 
@@ -671,7 +671,7 @@ Aşağıdaki kod güncelleştirilmiş *program.cs* dosyasını gösterir.
 
 `EnsureCreated`şema hızlı bir şekilde gelişmede geliştirmede daha erken kullanışlıdır. Öğreticide daha sonra DB silinir ve geçişler kullanılır.
 
-### <a name="test-the-app"></a>Uygulamayı test edin
+### <a name="test-the-app"></a>Uygulamayı test etme
 
 Uygulamayı çalıştırın ve tanımlama bilgisi ilkesini kabul edin. Bu uygulama, kişisel bilgileri saklar. [Ab genel veri koruma yönetmeliği (GDPR) desteğiyle](xref:security/gdpr)ilgili tanımlama bilgisi İlkesi hakkında bilgi edinebilirsiniz.
 
