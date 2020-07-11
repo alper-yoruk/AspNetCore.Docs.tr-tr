@@ -15,13 +15,13 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/tooling
-zone_pivot_groups: operating-systems-set-one
-ms.openlocfilehash: 30a76eda0e94ee7bb2b2d3db918bc029865bdf1a
-ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
+zone_pivot_groups: operating-systems
+ms.openlocfilehash: 0bd38d8d16365a80d7954c860a4e20e2280c36b2
+ms.sourcegitcommit: e216e8f4afa21215dc38124c28d5ee19f5ed7b1e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86147656"
+ms.lasthandoff: 07/10/2020
+ms.locfileid: "86239614"
 ---
 # <a name="tooling-for-aspnet-core-blazor"></a>ASP.NET Core için araç oluşturmaBlazor
 
@@ -75,7 +75,7 @@ ASP.NET Core HTTPS geliştirme sertifikasını güvenme hakkında daha fazla bil
 
 1. `WebApplication1`Visual Studio Code klasörü açın.
 
-1. IDE, projeyi derlemek ve hatalarını ayıklamak için varlık eklemenizi ister. **Evet**' i seçin.
+1. IDE, projeyi derlemek ve hatalarını ayıklamak için varlık eklemenizi ister. **Evet**’i seçin.
 
 1. <kbd>Ctrl</kbd> + Uygulamayı çalıştırmak için CTRL<kbd>F5</kbd> tuşuna basın.
 
