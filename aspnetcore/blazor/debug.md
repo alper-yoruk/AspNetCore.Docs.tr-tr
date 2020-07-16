@@ -5,7 +5,7 @@ description: Uygulamalarda hata ayıklamayı öğrenin Blazor .
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/06/2020
+ms.date: 07/15/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: c48eb19c5a1759aace112e2afb1637c649173a3d
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 828fb0ce5101407b6f40195138d59c335eec389f
+ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86059909"
+ms.lasthandoff: 07/15/2020
+ms.locfileid: "86407677"
 ---
 # <a name="debug-aspnet-core-blazor-webassembly"></a>Hata ayıklama ASP.NET CoreBlazor WebAssembly
 
@@ -44,12 +44,12 @@ Kullanılabilir senaryolar şunlardır:
 
 Yaklaşan sürümlerde hata ayıklama deneyimini iyileştirmeye devam edeceğiz.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 Hata ayıklama aşağıdaki tarayıcılardan birini gerektirir:
 
+* Google Chrome (sürüm 70 veya üzeri) (varsayılan)
 * Microsoft Edge (sürüm 80 veya üzeri)
-* Google Chrome (sürüm 70 veya üzeri)
 
 ## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Visual Studio ve Visual Studio Code için hata ayıklamayı etkinleştir
 
@@ -133,13 +133,13 @@ Uygulama geliştirme için Visual Studio Code yükleme hakkında bilgi için Bla
 
 ### <a name="debug-hosted-blazor-webassembly"></a>Barındırılan hata ayıklamaBlazor WebAssembly
 
-1. Barındırılan Blazor WebAssembly uygulamayı vs Code açın.
+1. Barındırılan Blazor WebAssembly uygulamanın çözüm klasörünü vs Code açın.
 
-1. Proje için bir başlatma yapılandırma kümesi yoksa, aşağıdaki bildirim görüntülenir. **Evet**' i seçin.
+1. Proje için bir başlatma yapılandırma kümesi yoksa, aşağıdaki bildirim görüntülenir. **Evet**’i seçin.
 
    ![Gerekli varlıkları Ekle](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-required-assets.png)
 
-1. Seçim penceresinde barındırılan çözüm içinde *sunucu* projesini seçin.
+1. Pencerenin üst kısmındaki komut paletinde barındırılan çözüm içindeki *sunucu* projesini seçin.
 
 `launch.json`Hata ayıklayıcıyı başlatmak için başlatma yapılandırması ile bir dosya oluşturulur.
 
@@ -160,7 +160,7 @@ Uygulama geliştirme için Visual Studio Code yükleme hakkında bilgi için Bla
 
 ### <a name="launch-configuration-options"></a>Yapılandırma seçeneklerini Başlat
 
-Hata ayıklama türü için aşağıdaki başlatma yapılandırma seçenekleri desteklenir `blazorwasm` .
+`blazorwasm`Hata ayıklama türü () için aşağıdaki başlatma yapılandırma seçenekleri desteklenir `.vscode/launch.json` .
 
 | Seçenek    | Açıklama |
 | --------- | ----------- |
@@ -198,17 +198,23 @@ Hata ayıklama türü için aşağıdaki başlatma yapılandırma seçenekleri d
 }
 ```
 
-#### <a name="launch-and-debug-a-hosted-blazor-webassembly-app"></a>Barındırılan bir uygulamayı başlatma ve hata ayıklama Blazor WebAssembly
+#### <a name="launch-and-debug-a-hosted-blazor-webassembly-app-with-microsoft-edge"></a>Microsoft Edge ile barındırılan bir uygulamayı başlatma ve hata ayıklama Blazor WebAssembly
+
+Tarayıcı yapılandırması varsayılan olarak Google Chrome olarak belirlenmiştir. Hata ayıklama için Microsoft Edge kullanılırken, `browser` olarak ayarlayın `edge` . Google Chrome 'ı kullanmak için `browser` seçeneği ayarlamayın veya seçeneğin değerini olarak ayarlayın `chrome` .
 
 ```json
 {
+  "name": "Launch and Debug Hosted Blazor WebAssembly App",
   "type": "blazorwasm",
   "request": "launch",
-  "name": "Launch and Debug Hosted App",
+  "hosted": true,
   "program": "${workspaceFolder}/Server/bin/Debug/netcoreapp3.1/MyHostedApp.Server.dll",
-  "cwd": "${workspaceFolder}"
+  "cwd": "${workspaceFolder}/Server",
+  "browser": "edge"
 }
 ```
+
+Yukarıdaki örnekte, `MyHostedApp.Server.dll` *sunucu* uygulamasının derlemesi olur. `.vscode`Klasörü `Client` ,, `Server` ve klasörlerinin yanında çözüm klasöründe bulunur `Shared` .
 
 ## <a name="debug-in-the-browser"></a>Tarayıcıda hata ayıkla
 
