@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: 65095f3990c72224d95f1f5fe46d320ab8f12040
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 17ada36c40997353528f922bece5acc34ce760d2
+ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404840"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86445391"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Azure App Service ve IIS 'de ASP.NET Core sorunlarını giderme
 
@@ -63,7 +63,7 @@ Hata genellikle barındırma sisteminde, aşağıdaki senaryolardan birini içer
 * Dağıtım işlemi, uygulamanın tüm dosyalarını ve klasörlerini barındırma sistemindeki dağıtım klasörüne taşıyamadı.
 * *web.config* dosyası dağıtımda yok veya *web.config* dosya içeriği hatalı biçimlendirilmiş.
 
-Aşağıdaki adımları uygulayın:
+Aşağıdaki adımları gerçekleştirin:
 
 1. Tüm dosya ve klasörleri barındırma sistemindeki dağıtım klasöründen silin.
 1. Visual Studio, PowerShell veya el ile dağıtım gibi normal dağıtım yönteminizi kullanarak, uygulamanın *Yayımlama* klasörünün içeriğini barındırma sistemine yeniden dağıtın:
@@ -226,7 +226,7 @@ Uygulama havuzunun 32 bit ayarının doğru olduğundan emin olun:
 Uygulama olay günlüğüne erişmek için Azure portal **sorunları Tanıla ve çöz** dikey penceresini kullanın:
 
 1. Azure portal uygulama **Hizmetleri**' nde uygulamayı açın.
-1. **Sorunları tanılama ve çözme** seçeneğini belirleyin.
+1. **Sorunları tanılama ve çözme**’yi seçin.
 1. **Tanılama araçları** başlığını seçin.
 1. **Destek Araçları**' nın altında, **uygulama olayları** düğmesini seçin.
 1. **Kaynak** sütununda *IIS AspNetCoreModule* veya *IIS Aspnetcoremodule v2* girişi tarafından belirtilen en son hatayı inceleyin.
@@ -299,34 +299,24 @@ Uygulamadan alınan ve hataları gösteren konsol çıktısı, tüm Kudu konsolu
 
 ### <a name="aspnet-core-module-stdout-log-azure-app-service"></a>ASP.NET Core modülü stdout günlüğü (Azure App Service)
 
-ASP.NET Core Module stdout günlüğü genellikle uygulama olay günlüğünde bulunmayan yararlı hata iletilerini kaydeder. Stdout günlüklerini etkinleştirmek ve görüntülemek için:
-
-1. Azure portal **sorunları Tanıla ve çöz** dikey penceresine gidin.
-1. **Sorun kategorisini seçin**altında **Web uygulaması aşağı** düğmesini seçin.
-1. **Önerilen çözümler** > **stdout günlük yeniden yönlendirmeyi etkinleştirmek**için, **Web.Configdüzenlemek üzere kudu konsolunu açmak **için düğmeyi seçin.
-1. Kudu **Tanılama konsolunda**, klasör Wwwroot **yolunu açın**  >  **wwwroot**. Listenin altındaki *web.config* dosyasını açığa çıkarmak için aşağı kaydırın.
-1. *web.config* dosyasının yanındaki kurşun kalem simgesine tıklayın.
-1. **StdoutLogEnabled** olarak ayarlayın `true` ve **stdoutLogFile** yolunu şu şekilde değiştirin: `\\?\%home%\LogFiles\stdout` .
-1. Güncelleştirilmiş *web.config* dosyasını kaydetmek için **Kaydet** ' i seçin.
-1. Uygulamaya bir istek oluşturun.
-1. Azure portalına dönün. **GELIŞTIRME araçları** alanında **Gelişmiş Araçlar** dikey penceresini seçin. **Git &rarr; ** düğmesini seçin. Kudu konsolu yeni bir tarayıcı sekmesi veya penceresinde açılır.
-1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd**' yi seçin.
-1. **LogFiles** klasörünü seçin.
-1. **Değiştirilen** sütunu inceleyin ve son değiştirilme tarihiyle stdout günlüğünü düzenlemek için kalem simgesini seçin.
-1. Günlük dosyası açıldığında hata görüntülenir.
-
-Sorun giderme tamamlandığında stdout günlüğünü devre dışı bırak:
-
-1. Kudu **Tanılama Konsolu**'nda, **site**  >  *web.config* dosyasını açığa çıkarmak için**Wwwroot** yolu sitesine dönün. Kalem simgesini seçerek **web.config** dosyasını tekrar açın.
-1. **StdoutLogEnabled** olarak ayarlayın `false` .
-1. Dosyayı kaydetmek için **Kaydet** ' i seçin.
-
-Daha fazla bilgi için bkz. <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>.
-
 > [!WARNING]
 > Stdout günlüğünü devre dışı bırakma başarısız olması, uygulama veya sunucu hatasına yol açabilir. Günlük dosyası boyutu veya oluşturulan günlük dosyası sayısı için sınır yoktur. Yalnızca uygulama başlatma sorunlarını gidermek için stdout günlüğünü kullanın.
 >
 > Başlangıçtan sonra ASP.NET Core bir uygulamada genel günlüğe kaydetme için, günlük dosyası boyutunu sınırlayan ve günlükleri döndüren bir günlüğe kaydetme kitaplığı kullanın. Daha fazla bilgi için bkz. [üçüncü taraf günlüğü sağlayıcıları](xref:fundamentals/logging/index#third-party-logging-providers).
+
+ASP.NET Core Module stdout günlüğü genellikle uygulama olay günlüğünde bulunmayan yararlı hata iletilerini kaydeder. Stdout günlüklerini etkinleştirmek ve görüntülemek için:
+
+1. Azure portalında Web uygulamasına gidin.
+1. **App Service** dikey penceresinde, arama kutusuna **kudu** girin.
+1. **Gelişmiş Araçlar** > **Git**' i seçin.
+1. **CMD > hata ayıklama konsolunu**seçin.
+1. *Site/Wwwroot* 'a git
+1. *web.config* dosyasını düzenlemek için kurşun kalem simgesini seçin.
+1. `<aspNetCore />`Öğesinde, öğesini ayarlayın `stdoutLogEnabled="true"` ve **Kaydet**' i seçin.
+
+Ayar ile sorun giderme tamamlandığında stdout günlüğünü devre dışı bırakın `stdoutLogEnabled="false"` .
+
+Daha fazla bilgi için bkz. <xref:host-and-deploy/aspnet-core-module#log-creation-and-redirection>.
 
 ### <a name="aspnet-core-module-debug-log-azure-app-service"></a>ASP.NET Core modülü hata ayıklama günlüğü (Azure App Service)
 
@@ -638,7 +628,7 @@ Hata genellikle barındırma sisteminde, aşağıdaki senaryolardan birini içer
 * Dağıtım işlemi, uygulamanın tüm dosyalarını ve klasörlerini barındırma sistemindeki dağıtım klasörüne taşıyamadı.
 * *web.config* dosyası dağıtımda yok veya *web.config* dosya içeriği hatalı biçimlendirilmiş.
 
-Aşağıdaki adımları uygulayın:
+Aşağıdaki adımları gerçekleştirin:
 
 1. Tüm dosya ve klasörleri barındırma sistemindeki dağıtım klasöründen silin.
 1. Visual Studio, PowerShell veya el ile dağıtım gibi normal dağıtım yönteminizi kullanarak, uygulamanın *Yayımlama* klasörünün içeriğini barındırma sistemine yeniden dağıtın:
@@ -719,7 +709,7 @@ Uygulama havuzunun 32 bit ayarının doğru olduğundan emin olun:
 Uygulama olay günlüğüne erişmek için Azure portal **sorunları Tanıla ve çöz** dikey penceresini kullanın:
 
 1. Azure portal uygulama **Hizmetleri**' nde uygulamayı açın.
-1. **Sorunları tanılama ve çözme** seçeneğini belirleyin.
+1. **Sorunları tanılama ve çözme**’yi seçin.
 1. **Tanılama araçları** başlığını seçin.
 1. **Destek Araçları**' nın altında, **uygulama olayları** düğmesini seçin.
 1. **Kaynak** sütununda *IIS AspNetCoreModule* veya *IIS Aspnetcoremodule v2* girişi tarafından belirtilen en son hatayı inceleyin.
@@ -802,7 +792,7 @@ ASP.NET Core Module stdout günlüğü genellikle uygulama olay günlüğünde b
 1. **StdoutLogEnabled** olarak ayarlayın `true` ve **stdoutLogFile** yolunu şu şekilde değiştirin: `\\?\%home%\LogFiles\stdout` .
 1. Güncelleştirilmiş *web.config* dosyasını kaydetmek için **Kaydet** ' i seçin.
 1. Uygulamaya bir istek oluşturun.
-1. Azure portalına dönün. **GELIŞTIRME araçları** alanında **Gelişmiş Araçlar** dikey penceresini seçin. **Git &rarr; ** düğmesini seçin. Kudu konsolu yeni bir tarayıcı sekmesi veya penceresinde açılır.
+1. Azure portala dönün. **GELIŞTIRME araçları** alanında **Gelişmiş Araçlar** dikey penceresini seçin. **Git &rarr; ** düğmesini seçin. Kudu konsolu yeni bir tarayıcı sekmesi veya penceresinde açılır.
 1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd**' yi seçin.
 1. **LogFiles** klasörünü seçin.
 1. **Değiştirilen** sütunu inceleyin ve son değiştirilme tarihiyle stdout günlüğünü düzenlemek için kalem simgesini seçin.
@@ -1131,7 +1121,7 @@ Hata genellikle barındırma sisteminde, aşağıdaki senaryolardan birini içer
 * Dağıtım işlemi, uygulamanın tüm dosyalarını ve klasörlerini barındırma sistemindeki dağıtım klasörüne taşıyamadı.
 * *web.config* dosyası dağıtımda yok veya *web.config* dosya içeriği hatalı biçimlendirilmiş.
 
-Aşağıdaki adımları uygulayın:
+Aşağıdaki adımları gerçekleştirin:
 
 1. Tüm dosya ve klasörleri barındırma sistemindeki dağıtım klasöründen silin.
 1. Visual Studio, PowerShell veya el ile dağıtım gibi normal dağıtım yönteminizi kullanarak, uygulamanın *Yayımlama* klasörünün içeriğini barındırma sistemine yeniden dağıtın:
@@ -1197,7 +1187,7 @@ Uygulama havuzunun 32 bit ayarının doğru olduğundan emin olun:
 Uygulama olay günlüğüne erişmek için Azure portal **sorunları Tanıla ve çöz** dikey penceresini kullanın:
 
 1. Azure portal uygulama **Hizmetleri**' nde uygulamayı açın.
-1. **Sorunları tanılama ve çözme** seçeneğini belirleyin.
+1. **Sorunları tanılama ve çözme**’yi seçin.
 1. **Tanılama araçları** başlığını seçin.
 1. **Destek Araçları**' nın altında, **uygulama olayları** düğmesini seçin.
 1. **Kaynak** sütununda *IIS AspNetCoreModule* veya *IIS Aspnetcoremodule v2* girişi tarafından belirtilen en son hatayı inceleyin.
@@ -1280,7 +1270,7 @@ ASP.NET Core Module stdout günlüğü genellikle uygulama olay günlüğünde b
 1. **StdoutLogEnabled** olarak ayarlayın `true` ve **stdoutLogFile** yolunu şu şekilde değiştirin: `\\?\%home%\LogFiles\stdout` .
 1. Güncelleştirilmiş *web.config* dosyasını kaydetmek için **Kaydet** ' i seçin.
 1. Uygulamaya bir istek oluşturun.
-1. Azure portalına dönün. **GELIŞTIRME araçları** alanında **Gelişmiş Araçlar** dikey penceresini seçin. **Git &rarr; ** düğmesini seçin. Kudu konsolu yeni bir tarayıcı sekmesi veya penceresinde açılır.
+1. Azure portala dönün. **GELIŞTIRME araçları** alanında **Gelişmiş Araçlar** dikey penceresini seçin. **Git &rarr; ** düğmesini seçin. Kudu konsolu yeni bir tarayıcı sekmesi veya penceresinde açılır.
 1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd**' yi seçin.
 1. **LogFiles** klasörünü seçin.
 1. **Değiştirilen** sütunu inceleyin ve son değiştirilme tarihiyle stdout günlüğünü düzenlemek için kalem simgesini seçin.

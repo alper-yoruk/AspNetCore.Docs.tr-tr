@@ -4,7 +4,7 @@ author: blowdart
 description: IIS ve HTTP.sys için ASP.NET Core sertifika kimlik doğrulamasını nasıl yapılandıracağınızı öğrenin.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
-ms.date: 01/02/2020
+ms.date: 07/16/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 493046e288c6b1ccd8e41f15a8e6e532a10a4adc
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2c58a274e8de0b1205b223287b7690b1d5caed23
+ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403202"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86445131"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core sertifika kimlik doğrulamasını yapılandırma
 
@@ -40,11 +40,38 @@ Proxy 'lerin ve yük dengeleyicilerin kullanıldığı ortamlarda sertifika kiml
 
 HTTPS sertifikası alın, uygulayın ve sunucunuzu sertifika gerektirecek şekilde [yapılandırın](#configure-your-server-to-require-certificates) .
 
-Web uygulamanızda pakete bir başvuru ekleyin `Microsoft.AspNetCore.Authentication.Certificate` . Daha sonra `Startup.ConfigureServices` yönteminde, isteklerle birlikte `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(...);` `OnCertificateValidated` gönderilen istemci sertifikasında herhangi bir destek doğrulaması yapmak için bir temsilci sağlayan seçeneklerinizde çağrı yapın. Bu bilgileri bir öğesine dönüştürün `ClaimsPrincipal` ve özelliği üzerinde ayarlayın `context.Principal` .
+Web uygulamanızda, [Microsoft. AspNetCore. Authentication. Certificate](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Certificate) paketine bir başvuru ekleyin. Daha sonra `Startup.ConfigureServices` yönteminde, isteklerle birlikte `services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate(...);` `OnCertificateValidated` gönderilen istemci sertifikasında herhangi bir destek doğrulaması yapmak için bir temsilci sağlayan seçeneklerinizde çağrı yapın. Bu bilgileri bir öğesine dönüştürün `ClaimsPrincipal` ve özelliği üzerinde ayarlayın `context.Principal` .
 
 Kimlik doğrulaması başarısız olursa, bu işleyici `403 (Forbidden)` `401 (Unauthorized)` , bekleolabileceğiniz gibi bir yanıt döndürür. Bu durum, kimlik doğrulamanın ilk TLS bağlantısı sırasında gerçekleşme nedendir. İşleyiciye ulaştığında, çok geç olur. Anonim bir bağlantıyla bir sertifikayla bir bağlantıyı yükseltmenin bir yolu yoktur.
 
 Yöntemine de ekleyin `app.UseAuthentication();` `Startup.Configure` . Aksi takdirde, `HttpContext.User` sertifika, sertifikadan oluşturulacak şekilde ayarlanmayacak `ClaimsPrincipal` . Örneğin:
+
+::: moniker range=">= aspnetcore-5.0"
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddAuthentication(
+        CertificateAuthenticationDefaults.AuthenticationScheme)
+        .AddCertificate()
+        // Adding an ICertificateValidationCache results in certificate auth caching the results.
+        // The default implementation uses a memory cache.
+        .AddCertificateCache();
+
+    // All other service configuration
+}
+
+public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+{
+    app.UseAuthentication();
+
+    // All other app configuration
+}
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -52,16 +79,19 @@ public void ConfigureServices(IServiceCollection services)
     services.AddAuthentication(
         CertificateAuthenticationDefaults.AuthenticationScheme)
         .AddCertificate();
-    // All the other service configuration.
+
+    // All other service configuration
 }
 
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 {
     app.UseAuthentication();
 
-    // All the other app configuration.
+    // All other app configuration
 }
 ```
+
+::: moniker-end
 
 Önceki örnekte sertifika kimlik doğrulaması eklemenin varsayılan yolu gösterilmektedir. İşleyici, ortak sertifika özelliklerini kullanarak bir Kullanıcı sorumlusu oluşturur.
 
@@ -343,7 +373,7 @@ namespace AspNetCoreCertificateAuthApi
 
 #### <a name="implement-an-httpclient-using-a-certificate-and-the-httpclienthandler"></a>Sertifika ve HttpClientHandler kullanarak bir HttpClient uygulama
 
-HttpClientHandler, doğrudan HttpClient sınıfının oluşturucusuna eklenebilir. HttpClient örnekleri oluşturulurken dikkatli olunmalıdır. HttpClient daha sonra sertifikayı her bir istekle gönderecek.
+, `HttpClientHandler` Sınıfının oluşturucusuna doğrudan eklenebilir `HttpClient` . Örnekleri oluşturulurken dikkatli olunmalıdır `HttpClient` . `HttpClient`Ardından, her istek ile sertifikayı gönderir.
 
 ```csharp
 private async Task<JsonDocument> GetApiDataUsingHttpClientHandler()
@@ -372,7 +402,7 @@ private async Task<JsonDocument> GetApiDataUsingHttpClientHandler()
 
 #### <a name="implement-an-httpclient-using-a-certificate-and-a-named-httpclient-from-ihttpclientfactory"></a>Bir sertifika ve ıhttpclientfactory adlı bir HttpClient kullanarak bir HttpClient uygulama 
 
-Aşağıdaki örnekte, bir istemci sertifikası, işleyicisinden ClientCertificates özelliği kullanılarak bir HttpClientHandler öğesine eklenir. Bu işleyici bundan sonra, ConfigurePrimaryHttpMessageHandler yöntemi kullanılarak bir HttpClient adlandırılmış örneğinde kullanılabilir. Bu, ConfigureServices yöntemindeki başlangıç sınıfında ayarlanır.
+Aşağıdaki örnekte, bir istemci sertifikası, `HttpClientHandler` işleyicisinden özelliği kullanılarak bir öğesine eklenir `ClientCertificates` . Bu işleyici daha sonra yöntemi kullanılarak bir adlandırılmış örneğinde kullanılabilir `HttpClient` `ConfigurePrimaryHttpMessageHandler` . Bu kurulum `Startup.ConfigureServices` :
 
 ```csharp
 var clientCertificate = 
@@ -387,7 +417,7 @@ services.AddHttpClient("namedClient", c =>
 }).ConfigurePrimaryHttpMessageHandler(() => handler);
 ```
 
-Daha sonra ıhttpclientfactory, adlandırılmış örneği işleyicinin ve sertifikayla almak için kullanılabilir. Başlangıç sınıfında tanımlanan istemcinin adına sahip CreateClient yöntemi örneği almak için kullanılır. HTTP isteği, gereken şekilde istemci kullanılarak gönderilebilir.
+`IHttpClientFactory`Daha sonra, adlandırılmış örneği işleyicinin ve sertifikayla almak için kullanılabilir. `CreateClient`Sınıfında tanımlanan istemci adına sahip Yöntem `Startup` örneği almak için kullanılır. HTTP isteği, gereken şekilde istemci kullanılarak gönderilebilir.
 
 ```csharp
 private readonly IHttpClientFactory _clientFactory;
@@ -562,12 +592,43 @@ namespace AspNetCoreCertificateAuthApi
 
 <a name="occ"></a>
 
+::: moniker range=">= aspnetcore-5.0"
+
+## <a name="certificate-validation-caching"></a>Sertifika doğrulama önbelleği
+
+ASP.NET Core 5,0 ve sonraki sürümler, doğrulama sonuçlarının önbelleğe alınmasını etkinleştirme yeteneğini destekler. Doğrulama pahalı bir işlem olduğundan, önbelleğe alma, sertifika kimlik doğrulamasının performansını önemli ölçüde artırır.
+
+Sertifika kimlik doğrulaması varsayılan olarak önbelleğe almayı devre dışı bırakır. Önbelleğe almayı etkinleştirmek için şunu `AddCertificateCache` arayın `Startup.ConfigureServices` :
+
+```csharp
+public void ConfigureServices(IServiceCollection services)
+{
+    services.AddAuthentication(
+        CertificateAuthenticationDefaults.AuthenticationScheme)
+            .AddCertificate()
+            .AddCertificateCache(options =>
+            {
+                options.CacheSize = 1024;
+                options.CacheEntryExpiration = TimeSpan.FromMinutes(2);
+            });
+}
+```
+
+Varsayılan önbelleğe alma uygulama sonuçları bellekte depolar. Bağımlılık ekleme ile kaydederek kendi önbelleğinizi sağlayabilirsiniz `ICertificateValidationCache` . Örneğin, `services.AddSingleton<ICertificateValidationCache, YourCache>()`.
+
+::: moniker-end
+
 ## <a name="optional-client-certificates"></a>İsteğe bağlı istemci sertifikaları
 
 Bu bölüm, bir sertifika ile uygulamanın bir alt kümesini koruması gereken uygulamalar için bilgiler sağlar. Örneğin, uygulamadaki bir Razor sayfa veya denetleyici istemci sertifikaları gerektirebilir. Bu, zorlukları istemci sertifikaları olarak gösterir:
   
 * , HTTP özelliği değil, bir TLS özelliğidir.
-* , Bağlantı başına anlaşma yapılır ve herhangi bir HTTP verisi kullanılabilir olmadan önce bağlantının başlangıcında anlaşılıp verilmelidir. Bağlantının başlangıcında yalnızca Sunucu Adı Belirtme (SNı) &dagger; bilinirdi. İstemci ve sunucu sertifikaları, bir bağlantı üzerindeki ilk istekten önce görüşülür ve istekler genellikle yeniden anlaşma yapamaz. HTTP/2 ' de yeniden anlaşmaya izin verilmez.
+* , Bağlantı başına anlaşma yapılır ve herhangi bir HTTP verisi kullanılabilir olmadan önce bağlantının başlangıcında anlaşılıp verilmelidir. Bağlantının başlangıcında yalnızca Sunucu Adı Belirtme (SNı) &dagger; bilinirdi. İstemci ve sunucu sertifikaları, bir bağlantı üzerindeki ilk istekten önce görüşülür ve istekler genellikle yeniden anlaşma yapamaz.
+
+TLS yeniden anlaşması, isteğe bağlı istemci sertifikaları uygulamak için eski bir yoldur. Bu artık önerilmez, çünkü:
+- HTTP/1.1 ' de, bir POST isteği sırasında yeniden anlaşma, istek gövdesinin TCP penceresini doldurduğu ve yeniden anlaşma paketlerinin alınmamasına neden olabilir.
+- HTTP/2 [açıkça](https://tools.ietf.org/html/rfc7540#section-9.2.1) yeniden anlaşmaya izin vermez.
+- TLS 1,3, yeniden anlaşma desteğini [kaldırdı](https://tools.ietf.org/html/rfc8740#section-1) .
 
 ASP.NET Core 5 Preview 4 ve üzeri, isteğe bağlı istemci sertifikaları için daha kolay destek ekler. Daha fazla bilgi için bkz. [Isteğe bağlı sertifikalar örneği](https://github.com/dotnet/aspnetcore/tree/9ce4a970a21bace3fb262da9591ed52359309592/src/Security/Authentication/Certificate/samples/Certificate.Optional.Sample).
 
@@ -579,7 +640,7 @@ Aşağıdaki yaklaşım isteğe bağlı istemci sertifikalarını destekler:
     * [Kestrel](/fundamentals/servers/kestrel):
       * [ListenOptions. UseHttps](xref:fundamentals/servers/kestrel#listenoptionsusehttps)
       * <xref:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.ClientCertificateMode>
-      * Not Kestrel Şu anda tek bir bağlamada birden fazla TLS yapılandırmasını desteklemez, benzersiz IP 'Ler veya bağlantı noktalarıyla iki bağlama gerekecektir. Bkz. https://github.com/dotnet/runtime/issues/31097
+      * Not Kestrel Şu anda tek bir bağlamada birden fazla TLS yapılandırmasını desteklemez, benzersiz IP 'Ler veya bağlantı noktalarıyla iki bağlama gerekecektir. Bakýnhttps://github.com/dotnet/runtime/issues/31097
     * IIS
       * [IIS barındırma](xref:host-and-deploy/iis/index#create-the-iis-site)
       * [IIS 'de güvenliği yapılandırma](/iis/manage/configuring-security/how-to-set-up-ssl-on-iis#configure-ssl-settings-2)

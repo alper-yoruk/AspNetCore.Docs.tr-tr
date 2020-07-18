@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: bf599487fdc3e574f72f1a3d35278cc9c2ce7513
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 1156ddd2921afbfeccaf077ca29d267f8b1e844a
+ms.sourcegitcommit: 3544941682869734ea0113e24e02ed0ec9e1a9ec
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404658"
+ms.lasthandoff: 07/18/2020
+ms.locfileid: "86464559"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>ASP.NET Core hesap onaylama ve parola kurtarma
 
@@ -32,13 +32,7 @@ Bu öğreticide, e-posta onayı ve parola sıfırlama ile bir ASP.NET Core uygul
 
 <!-- see C:/Dropbox/wrk/Code/SendGridConsole/Program.cs -->
 
-::: moniker range="<= aspnetcore-2.0"
-
-ASP.NET Core 1,1 sürümü için [Bu PDF dosyasına](https://webpifeed.blob.core.windows.net/webpifeed/Partners/asp.net_repo_pdf_1-16-18.pdf) bakın.
-
-::: moniker-end
-
-::: moniker range="> aspnetcore-2.2"
+::: moniker range=">= aspnetcore-3.0"
 
 ## <a name="prerequisites"></a>Ön koşullar
 
@@ -136,6 +130,16 @@ Aşağıdaki kodu `ConfigureServices` *Startup.cs* dosyasındaki yöntemine ekle
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/Startup.cs?name=snippet1&highlight=11-15)]
 
+## <a name="scaffold-registerconfirmation"></a>Yapı iskelesi RegisterConfirmation
+
+[Yapı iskelesi Identity ](xref:security/authentication/scaffold-identity) ve yapı iskelesi için yönergeleri izleyin `RegisterConfirmation` .
+
+<!-- .NET 5 fixes this, see
+https://github.com/dotnet/aspnetcore/blob/master/src/Identity/UI/src/Areas/Identity/Pages/V4/Account/RegisterConfirmation.cshtml.cs#L74-L77
+-->
+
+[!INCLUDE[](~/includes/disableVer.md)]
+
 ## <a name="register-confirm-email-and-reset-password"></a>Kaydolun, e-postayı onaylayın ve parolayı sıfırlayın
 
 Web uygulamasını çalıştırın ve hesap onaylama ve parola kurtarma akışını test edin.
@@ -225,7 +229,7 @@ Kullanıcılara bir sitede hesap onayını etkinleştirmek, mevcut tüm kullanı
 
 ::: moniker-end
 
-::: moniker range="> aspnetcore-2.0 < aspnetcore-3.0"
+::: moniker range="< aspnetcore-3.0"
 
 ## <a name="prerequisites"></a>Ön koşullar
 
@@ -244,8 +248,10 @@ dotnet aspnet-codegenerator identity -dc WebPWrecover.Data.ApplicationDbContext 
 dotnet ef database drop -f
 dotnet ef database update
 dotnet run
-
 ```
+
+> [!NOTE]
+> ' <xref:Microsoft.AspNetCore.Identity.PasswordOptions> De yapılandırılmışsa `Startup.ConfigureServices` , [ `[StringLength]` ](xref:System.ComponentModel.DataAnnotations.StringLengthAttribute) `Password` Yapı iskelesi sayfalarında özelliği için öznitelik yapılandırması gerekli olabilir Identity . Bir `InputModel` `Password` özellik, `Areas/Identity/Pages/Account/Register.cshtml.cs` Yapı iskelesi sonrasında dosyasında bulunur Identity .
 
 ## <a name="test-new-user-registration"></a>Yeni Kullanıcı kaydını sına
 

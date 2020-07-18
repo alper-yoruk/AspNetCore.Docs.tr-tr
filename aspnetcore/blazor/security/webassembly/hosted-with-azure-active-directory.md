@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-azure-active-directory
-ms.openlocfilehash: 82916c06413300bbefa85c619239c23a8e40468a
-ms.sourcegitcommit: f7873c02c1505c99106cbc708f37e18fc0a496d1
+ms.openlocfilehash: d2732819dd8f18da1f99965bb91e5eb3670ff4db
+ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86147748"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86445196"
 ---
 # <a name="secure-an-aspnet-core-blazor-webassembly-hosted-app-with-azure-active-directory"></a>Blazor WebAssemblyAzure Active Directory ile ASP.NET Core barındırılan bir uygulamanın güvenliğini sağlama
 
@@ -43,7 +43,7 @@ Hızlı Başlangıç bölümündeki yönergeleri izleyin: *sunucu API uygulamas�
 1. Desteklenen bir **Hesap türü**seçin. Bu deneyim için **yalnızca bu kuruluş dizininde** (tek kiracı) hesaplar seçebilirsiniz.
 1. *Sunucu API 'si uygulaması* Bu senaryoda **yeniden yönlendirme URI 'si** gerektirmez, bu nedenle açılan kutudan **Web** 'e ve yeniden yönlendirme URI 'si girmeyin.
 1. **Permissions**  >  **OpenID ve offline_access izinleri için yönetici onayı izni ver** onay kutusunu devre dışı bırakın.
-1. **Kaydol**’u seçin.
+1. **Kaydet**’i seçin.
 
 Aşağıdaki bilgileri kaydedin:
 
@@ -79,7 +79,7 @@ Uygulama KIMLIĞI URI 'SI, bu konunun ilerleyen kısımlarında yer aldığı [e
 1. Desteklenen bir **Hesap türü**seçin. Bu deneyim için **yalnızca bu kuruluş dizininde** (tek kiracı) hesaplar seçebilirsiniz.
 1. **Yeniden yönlendirme URI 'si** açılan öğesini **Web** 'e ayarlı bırakın ve aşağıdaki yeniden yönlendirme URI 'sini sağlayın: `https://localhost:{PORT}/authentication/login-callback` . Kestrel üzerinde çalışan bir uygulamanın varsayılan bağlantı noktası 5001 ' dir. Uygulama farklı bir Kestrel bağlantı noktasında çalışıyorsa, uygulamanın bağlantı noktasını kullanın. IIS Express için, uygulama için rastgele oluşturulan bağlantı noktası, **hata ayıklama** panelinde sunucu uygulamasının özelliklerinde bulunabilir. Uygulama bu noktada mevcut olmadığından ve IIS Express bağlantı noktası bilinmediğinden, uygulama oluşturulduktan sonra bu adıma geri dönün ve yeniden yönlendirme URI 'sini güncelleştirin. [Uygulama oluştur](#create-the-app) bölümünde, kullanıcıların YENIDEN yönlendirme URI 'sini güncelleştirmesi IIS Express hatırlatmak için bir açıklama belirir.
 1. **Permissions**  >  **OpenID ve offline_access izinleri için yönetici onayı izni ver** onay kutusunu devre dışı bırakın.
-1. **Kaydol**’u seçin.
+1. **Kaydet**’i seçin.
 
 *İstemci uygulama* uygulaması (ISTEMCI) kimliğini (örneğin, `4369008b-21fa-427c-abaa-9b53bf58e538` ) kaydedin.
 
@@ -98,7 +98,7 @@ Uygulama KIMLIĞI URI 'SI, bu konunun ilerleyen kısımlarında yer aldığı [e
 1. **API** listesini açın.
 1. API 'ye erişimi etkinleştirin (örneğin, `API.Access` ).
 1. **Izin Ekle**' yi seçin.
-1. **{Tenant Name} için yönetici onayı Izni ver** düğmesini seçin. Onaylamak için **Evet**'i seçin.
+1. **{Tenant Name} için yönetici onayı Izni ver** düğmesini seçin. Onaylamak için **Evet**’i seçin.
 
 ### <a name="create-the-app"></a>Uygulama oluşturma
 
@@ -257,7 +257,7 @@ builder.Services.AddHttpClient("{APP ASSEMBLY}.ServerAPI", client =>
         client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress))
     .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
 
-builder.Services.AddTransient(sp => sp.GetRequiredService<IHttpClientFactory>()
+builder.Services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
     .CreateClient("{APP ASSEMBLY}.ServerAPI"));
 ```
 

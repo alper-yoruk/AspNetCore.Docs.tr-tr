@@ -5,7 +5,7 @@ description: HTTP trafiğini Kestrel üzerinde çalışan bir ASP.NET Core Web u
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 04/10/2020
+ms.date: 07/09/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/linux-nginx
-ms.openlocfilehash: c936ff9a7aadd21ce99a0c37184ae8cf911c3070
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 8038c63200c7c9aaadb9e0e7a68ae315ff620197
+ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403982"
+ms.lasthandoff: 07/17/2020
+ms.locfileid: "86445300"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>NGINX ile Linux üzerinde ana bilgisayar ASP.NET Core
 
@@ -395,6 +395,9 @@ Sunucuyu gerekli olan ek modüllerle yapılandırın. Uygulamayı sağlamlaştı
 */Etc/nginx/nginx.conf* yapılandırma dosyasını düzenleyin. Örnek, `http` `server` tek bir yapılandırma dosyasında hem hem de bölümlerini içerir.
 
 [!code-nginx[](linux-nginx/nginx.conf?highlight=2)]
+
+> [!NOTE]
+> Blazor WebAssemblyuygulamalar `burst` , bir uygulama tarafından yapılan isteklerin daha fazla sayısına uyum sağlamak için daha büyük bir parametre değeri gerektirir. Daha fazla bilgi için bkz. <xref:blazor/host-and-deploy/webassembly#nginx>.
 
 #### <a name="secure-nginx-from-clickjacking"></a>Tıklama mercekten NGINX 'i güvenli hale getirme
 

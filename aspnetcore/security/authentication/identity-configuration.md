@@ -3,6 +3,7 @@ title: ASP.NET Core YapılandırIdentity
 author: AdrienTorris
 description: ASP.NET Core Identity varsayılan değerlerini anlayın ve Identity özellikleri özel değerleri kullanacak şekilde yapılandırmayı öğrenin.
 ms.author: riande
+ms.custom: mvc
 ms.date: 02/11/2019
 no-loc:
 - Blazor
@@ -13,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-configuration
-ms.openlocfilehash: 95c19b671602b45ba217dcb551110854cbbee359
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 262101594d57ad63bb0bac4da3cefa8d8d380908
+ms.sourcegitcommit: 3544941682869734ea0113e24e02ed0ec9e1a9ec
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408974"
+ms.lasthandoff: 07/18/2020
+ms.locfileid: "86464533"
 ---
 # <a name="configure-aspnet-core-identity"></a>ASP.NET Core YapılandırIdentity
 
@@ -26,11 +27,11 @@ ASP.NET Core Identity parola ilkesi, kilitleme ve tanımlama bilgisi yapılandı
 
 ## <a name="identity-options"></a>IdentitySeçenekler
 
-[Identityoptions](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) sınıfı, sistemi yapılandırmak için kullanılabilen seçenekleri temsil eder Identity . `IdentityOptions`veya çağrıldıktan **sonra** ayarlanması gerekir `AddIdentity` `AddDefaultIdentity` .
+[ Identity Options](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) sınıfı, sistemi yapılandırmak için kullanılabilen seçenekleri temsil eder Identity . `IdentityOptions`veya çağrıldıktan **sonra** ayarlanması gerekir `AddIdentity` `AddDefaultIdentity` .
 
 ### <a name="claims-identity"></a>BelirtIdentity
 
-[Identityoptions. ClaimsIdentity](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.claimsidentity) , aşağıdaki tabloda gösterilen özelliklerle [Claimsıdentityoptions](/dotnet/api/microsoft.aspnetcore.identity.claimsidentityoptions) 'ı belirtir.
+[ Identity Options. Claim Identity ](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.claimsidentity) , aşağıdaki tabloda gösterilen özelliklerle birlikte [talep Identity seçeneklerini](/dotnet/api/microsoft.aspnetcore.identity.claimsidentityoptions) belirtir.
 
 | Özellik | Açıklama | Varsayılan |
 | -------- | ----------- | :-----: |
@@ -51,11 +52,11 @@ Kilitleme seçenekleri şu şekilde ayarlanır `StartUp.ConfigureServices` :
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_lock)]
 
-Önceki kod, [ıdentityoptions](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) [lockoutoptions](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions) değerlerini varsayılan değerlerle ayarlar.
+Önceki kod, [lockoutoptions](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions) [ Identity seçeneklerini](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) varsayılan değerlerle ayarlar.
 
 Başarılı bir kimlik doğrulaması başarısız erişim denemesi sayısını sıfırlar ve saati sıfırlar.
 
-[Identityoptions. kilitleme](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.lockout) , tabloda gösterilen özelliklerle [Lockoutoptions](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions) değerini belirtir.
+[ Identity Options. kilitleme](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.lockout) , tabloda gösterilen özelliklerle [lockoutoptions](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions) değerini belirtir.
 
 | Özellik | Açıklama | Varsayılan |
 | -------- | ----------- | :-----: |
@@ -65,29 +66,18 @@ Başarılı bir kimlik doğrulaması başarısız erişim denemesi sayısını s
 
 ### <a name="password"></a>Parola
 
-Varsayılan olarak, Identity Parolaların büyük harf, küçük harf karakter, rakam ve alfasayısal olmayan bir karakter içermesini gerektirir. Parolalar en az altı karakter uzunluğunda olmalıdır. [Passwordoseçenekleri](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions) içinde ayarlanabilir `Startup.ConfigureServices` .
+Varsayılan olarak, Identity Parolaların büyük harf, küçük harf karakter, rakam ve alfasayısal olmayan bir karakter içermesini gerektirir. Parolalar en az altı karakter uzunluğunda olmalıdır.
 
-::: moniker range=">= aspnetcore-2.1"
+Parolalar şu şekilde yapılandırılır:
+
+* <xref:Microsoft.AspNetCore.Identity.PasswordOptions>içinde `Startup.ConfigureServices` .
+* Özellik [ `[StringLength]` öznitelikleri](xref:System.ComponentModel.DataAnnotations.StringLengthAttribute) , `Password` Identity [uygulamaya iskli](xref:security/authentication/scaffold-identity)olarak ayarlandığında. `InputModel``Password`aşağıdaki dosyalarda özellikler bulunur:
+  * `Areas/Identity/Pages/Account/Register.cshtml.cs`
+  * `Areas/Identity/Pages/Account/ResetPassword.cshtml.cs`
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_pw)]
 
-::: moniker-end
-
-::: moniker range="= aspnetcore-2.0"
-
-[!code-csharp[](identity/sample/src/ASPNETv2-IdentityDemo-Configuration/Startup.cs?range=29-37,50-52)]
-
-::: moniker-end
-
-::: moniker range="<= aspnetcore-1.1"
-
-[!code-csharp[](identity/sample/src/ASPNET-IdentityDemo-PrimaryKeysConfig/Startup.cs?range=58-65,84)]
-
-::: moniker-end
-
-[Identityoptions. Password](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.password) , tabloda gösterilen özelliklerle birlikte [passwordotions](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions) belirler.
-
-::: moniker range=">= aspnetcore-2.0"
+[ Identity Options. Password](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.password) , tabloda gösterilen özelliklerle birlikte [passwordooptions](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions) 'ı belirtir.
 
 | Özellik | Açıklama | Varsayılan |
 | -------- | ----------- | :-----: |
@@ -98,37 +88,13 @@ Varsayılan olarak, Identity Parolaların büyük harf, küçük harf karakter, 
 | [RequiredUniqueChars](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions.requireduniquechars) | Yalnızca ASP.NET Core 2,0 veya üzeri için geçerlidir.<br><br> Paroladaki ayrı karakter sayısını gerektirir. | 1 |
 | [Requirebüyük](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions.requireuppercase) | Parolada büyük harfli bir karakter gerektirir. | `true` |
 
-::: moniker-end
-
-::: moniker range="< aspnetcore-2.0"
-
-| Özellik | Açıklama | Varsayılan |
-| -------- | ----------- | :-----: |
-| [RequireDigit](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions.requiredigit) | Parolada 0-9 arasında bir sayı gerekir. | `true` |
-| [RequiredLength](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions.requiredlength) | Parola uzunluğu alt sınırı. | 6 |
-| [Requireküçük harf](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions.requirelowercase) | Parolada küçük harfli bir karakter gerektirir. | `true` |
-| [Talep ırenonalfasayısal](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions.requirenonalphanumeric) | Parolada alfasayısal olmayan bir karakter gerektirir. | `true` |
-| [Requirebüyük](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions.requireuppercase) | Parolada büyük harfli bir karakter gerektirir. | `true` |
-
-::: moniker-end
-
 ### <a name="sign-in"></a>Oturum açma
 
 Aşağıdaki kod ayarları ayarlar `SignIn` (varsayılan değerlere göre):
 
-::: moniker range=">= aspnetcore-2.1"
-
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_si)]
 
-::: moniker-end
-
-::: moniker range="<= aspnetcore-2.0"
-
-[!code-csharp[](identity/sample/src/ASPNETv2-IdentityDemo-Configuration/Startup.cs?range=29-30,44-46,50-52)] 
-
-::: moniker-end
-
-[Identityoptions. signıd](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.signin) , tabloda gösterilen özelliklerle [SignInOptions](/dotnet/api/microsoft.aspnetcore.identity.signinoptions) 'ı belirtir.
+[ Identity Options. SignIn](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.signin) , tabloda gösterilen özelliklerle [SignInOptions](/dotnet/api/microsoft.aspnetcore.identity.signinoptions) belirtir.
 
 | Özellik | Açıklama | Varsayılan |
 | -------- | ----------- | :-----: |
@@ -137,22 +103,22 @@ Aşağıdaki kod ayarları ayarlar `SignIn` (varsayılan değerlere göre):
 
 ### <a name="tokens"></a>Belirteçler
 
-[Identityoptions. Tokens](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.tokens) , tabloda gösterilen özelliklerle birlikte [tokenoptions](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions) belirler.
+[ Identity Options. Tokens](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.tokens) , tabloda gösterilen özelliklerle [tokenoptions](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions) belirler.
 
-|                                                        Özellik                                                         |                                                                                      Açıklama                                                                                      |
-|-------------------------------------------------------------------------------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-|     [Kimlik doğrulayan Tortokenprovider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.authenticatortokenprovider)     |                                       `AuthenticatorTokenProvider`İki öğeli oturum açma işlemlerini kimlik doğrulayıcı ile doğrulamak için kullanılan öğesini alır veya ayarlar.                                       |
-|       [ChangeEmailTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changeemailtokenprovider)       |                                     `ChangeEmailTokenProvider`E-posta değişiklik onayı e-postalarında kullanılan belirteçleri oluşturmak için kullanılır veya ayarlar.                                     |
-| [ChangePhoneNumberTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changephonenumbertokenprovider) |                                      `ChangePhoneNumberTokenProvider`Telefon numaralarını değiştirirken kullanılan belirteçler oluşturmak için kullanılan belirteçleri alır veya ayarlar.                                      |
-| [EmailConfirmationTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.emailconfirmationtokenprovider) |                                             Hesap onaylama e-postalarında kullanılan belirteçleri oluşturmak için kullanılan belirteç sağlayıcısını alır veya ayarlar.                                              |
-|     [PasswordResetTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.passwordresettokenprovider)     | Parola sıfırlama e-postalarında kullanılan belirteçleri oluşturmak için kullanılan [ıusertwofactortokenprovider \<TUser> ](/dotnet/api/microsoft.aspnetcore.identity.iusertwofactortokenprovider-1) değerini alır veya ayarlar. |
-|                    [ProviderMap](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.providermap)                    |                Sağlayıcının adı olarak kullanılan anahtarla bir [Kullanıcı belirteci sağlayıcısı](/dotnet/api/microsoft.aspnetcore.identity.tokenproviderdescriptor) oluşturmak için kullanılır.                 |
+| Özellik | Açıklama |
+| -------- | ----------- |
+| [Kimlik doğrulayan Tortokenprovider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.authenticatortokenprovider) | `AuthenticatorTokenProvider`İki öğeli oturum açma işlemlerini kimlik doğrulayıcı ile doğrulamak için kullanılan öğesini alır veya ayarlar. |
+| [ChangeEmailTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changeemailtokenprovider) | `ChangeEmailTokenProvider`E-posta değişiklik onayı e-postalarında kullanılan belirteçleri oluşturmak için kullanılır veya ayarlar. |
+| [ChangePhoneNumberTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.changephonenumbertokenprovider) | `ChangePhoneNumberTokenProvider`Telefon numaralarını değiştirirken kullanılan belirteçler oluşturmak için kullanılan belirteçleri alır veya ayarlar. |
+| [EmailConfirmationTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.emailconfirmationtokenprovider) | Hesap onaylama e-postalarında kullanılan belirteçleri oluşturmak için kullanılan belirteç sağlayıcısını alır veya ayarlar. |
+| [PasswordResetTokenProvider](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.passwordresettokenprovider) | Parola sıfırlama e-postalarında kullanılan belirteçleri oluşturmak için kullanılan [ıusertwofactortokenprovider \<TUser> ](/dotnet/api/microsoft.aspnetcore.identity.iusertwofactortokenprovider-1) değerini alır veya ayarlar. |
+| [ProviderMap](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions.providermap) | Sağlayıcının adı olarak kullanılan anahtarla bir [Kullanıcı belirteci sağlayıcısı](/dotnet/api/microsoft.aspnetcore.identity.tokenproviderdescriptor) oluşturmak için kullanılır. |
 
-### <a name="user"></a>Kullanıcı
+### <a name="user"></a>User
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_user)]
 
-[Identityoptions. User](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.user) , tabloda gösterilen özelliklerle [UserOptions](/dotnet/api/microsoft.aspnetcore.identity.useroptions) 'ı belirtir.
+[ Identity Seçenekler. User](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.user) , tabloda gösterilen özelliklerle [UserOptions](/dotnet/api/microsoft.aspnetcore.identity.useroptions) 'ı belirtir.
 
 | Özellik | Açıklama | Varsayılan |
 | -------- | ----------- | :-----: |
@@ -163,23 +129,7 @@ Aşağıdaki kod ayarları ayarlar `SignIn` (varsayılan değerlere göre):
 
 Uygulamanın tanımlama bilgisini ' de yapılandırın `Startup.ConfigureServices` . Veya çağrıldıktan **sonra** [configureapplicationcookie](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__) çağrılmalıdır `AddIdentity` `AddDefaultIdentity` .
 
-::: moniker range=">= aspnetcore-2.1"
-
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_cookie)]
-
-::: moniker-end
-
-::: moniker range="= aspnetcore-2.0"
-
-[!code-csharp[](identity/sample/src/ASPNETv2-IdentityDemo-Configuration/Startup.cs?name=snippet_configurecookie)]
-
-::: moniker-end
-
-::: moniker range="<= aspnetcore-1.1"
-
-[!code-csharp[](identity/sample/src/ASPNET-IdentityDemo-PrimaryKeysConfig/Startup.cs?range=58-59,72-80,84)]
-
-::: moniker-end
 
 Daha fazla bilgi için bkz. [tanımlama, ıeauthenticationoptions](/dotnet/api/microsoft.aspnetcore.authentication.cookies.cookieauthenticationoptions).
 
