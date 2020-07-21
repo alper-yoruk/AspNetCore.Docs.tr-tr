@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/index
-ms.openlocfilehash: e22d76be26a892fd9e5ba91ae36f8d105060e190
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: e7e9bc76a2bba1c15b32c97f0f3629285f256499
+ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86213153"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86568711"
 ---
 # <a name="introduction-to-razor-pages-in-aspnet-core"></a>RazorASP.NET Core sayfalara giriş
 
@@ -33,7 +33,7 @@ Model-View-Controller yaklaşımını kullanan bir öğretici arıyorsanız, bkz
 
 Bu belge, sayfalara giriş sağlar Razor . Adım adım öğretici değildir. Bölümlerden bazılarını çok gelişmiş bir şekilde buldıysanız, bkz. [ Razor sayfalarla çalışmaya başlama](xref:tutorials/razor-pages/razor-pages-start). ASP.NET Core genel bir bakış için bkz. [ASP.NET Core giriş](xref:index).
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -323,7 +323,7 @@ Model için Oluştur sayfasında, `Movie` geçersiz değerlere sahip hatalar gö
 
 ![Birden çok jQuery istemci tarafı doğrulama hatası içeren film görünümü formu](~/tutorials/razor-pages/validation/_static/val.png)
 
-Daha fazla bilgi için bkz:
+Daha fazla bilgi için bkz.
 
 * [Film uygulamasına doğrulama ekleme](xref:tutorials/razor-pages/validation)
 * [ASP.NET Core 'de model doğrulaması](xref:mvc/models/validation).
@@ -438,13 +438,13 @@ Uygulama aşağıdaki dosya/klasör yapısına sahiptir:
     * *Edit. cshtml*
     * *Index.cshtml*
 
-*Pages/Customers/Create. cshtml* ve *Pages/Customers/Edit. cshtml* sayfaları, başarılı olduktan sonra *sayfaları/müşterileri/Index. cshtml* 'ye yeniden yönlendirir. Dize, `./Index` önceki sayfaya erişmek için kullanılan göreli bir sayfa adıdır. *Pages/Customers/Index. cshtml* sayfasının URL 'leri oluşturmak için kullanılır. Örnek:
+*Pages/Customers/Create. cshtml* ve *Pages/Customers/Edit. cshtml* sayfaları, başarılı olduktan sonra *sayfaları/müşterileri/Index. cshtml* 'ye yeniden yönlendirir. Dize, `./Index` önceki sayfaya erişmek için kullanılan göreli bir sayfa adıdır. *Pages/Customers/Index. cshtml* sayfasının URL 'leri oluşturmak için kullanılır. Örneğin:
 
 * `Url.Page("./Index", ...)`
 * `<a asp-page="./Index">Customers Index Page</a>`
 * `RedirectToPage("./Index")`
 
-Mutlak sayfa adı, `/Index` *Sayfalar/Index. cshtml* sayfasına URL 'ler oluşturmak için kullanılır. Örnek:
+Mutlak sayfa adı, `/Index` *Sayfalar/Index. cshtml* sayfasına URL 'ler oluşturmak için kullanılır. Örneğin:
 
 * `Url.Page("/Index", ...)`
 * `<a asp-page="/Index">Home Index Page</a>`
@@ -577,7 +577,7 @@ URL 'de sorgu dizesini beğenmezseniz `?handler=JoinList` , URL 'nin yol bölüm
 
 Aşağıdaki bölümlerdeki yapılandırma ve ayarlar çoğu uygulama için gerekli değildir.
 
-Gelişmiş seçenekleri yapılandırmak için genişletme yöntemini kullanın <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> :
+Gelişmiş seçenekleri yapılandırmak için, <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddRazorPages%2A> yapılandıran aşırı yüklemeyi kullanın <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions> :
 
 [!code-csharp[](index/3.0sample/RazorPagesContacts/StartupRPoptions.cs?name=snippet)]
 
@@ -624,7 +624,7 @@ Model-View-Controller yaklaşımını kullanan bir öğretici arıyorsanız, bkz
 
 Bu belge, sayfalara giriş sağlar Razor . Adım adım öğretici değildir. Bölümlerden bazılarını çok gelişmiş bir şekilde buldıysanız, bkz. [ Razor sayfalarla çalışmaya başlama](xref:tutorials/razor-pages/razor-pages-start). ASP.NET Core genel bir bakış için bkz. [ASP.NET Core giriş](xref:index).
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -954,7 +954,7 @@ Uygulama aşağıdaki dosya/klasör yapısına sahiptir:
     * *Edit. cshtml*
     * *Index.cshtml*
 
-*Pages/Customers/Create. cshtml* ve *Pages/Customers/Edit. cshtml* sayfaları, başarılı olduktan sonra *Pages/Index. cshtml* dosyasına yönlendirilir. Dize, `/Index` önceki sayfaya erişmek IÇIN URI 'nin bir parçasıdır. Dize, `/Index` *Sayfalar/Index. cshtml* sayfasına URI 'ler oluşturmak için kullanılabilir. Örnek:
+*Pages/Customers/Create. cshtml* ve *Pages/Customers/Edit. cshtml* sayfaları, başarılı olduktan sonra *Pages/Index. cshtml* dosyasına yönlendirilir. Dize, `/Index` önceki sayfaya erişmek IÇIN URI 'nin bir parçasıdır. Dize, `/Index` *Sayfalar/Index. cshtml* sayfasına URI 'ler oluşturmak için kullanılabilir. Örneğin:
 
 * `Url.Page("/Index", ...)`
 * `<a asp-page="/Index">My Index Page</a>`

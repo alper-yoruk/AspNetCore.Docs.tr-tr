@@ -5,7 +5,7 @@ description: BlazorWebassemlby uygulamalarını tek sayfalı uygulamalar (maça 
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/01/2020
+ms.date: 07/16/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: 0ff580dd7cbefdfe3121b30490f99e0235d93bc3
-ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
+ms.openlocfilehash: fbb3f6d254e6d294edc7af59d7980a1d67e4a801
+ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86176156"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86568814"
 ---
 # <a name="secure-aspnet-core-blazor-webassembly"></a>Güvenli ASP.NET CoreBlazor WebAssembly
 
@@ -73,6 +73,22 @@ Daha fazla bilgi ve örnek için bkz <xref:blazor/security/webassembly/additiona
 Blazor WebAssemblyUygulamalarda, tüm istemci tarafı kodlar kullanıcılar tarafından değiştirilemediği için, yetkilendirme denetimleri atlanabilir. Aynı, JavaScript SPA çerçeveleri veya herhangi bir işletim sistemi için yerel uygulamalar dahil olmak üzere tüm istemci tarafı uygulama teknolojileri için de geçerlidir.
 
 **İstemci tarafı uygulamanız tarafından erişilen tüm API uç noktalarında sunucuda her zaman yetkilendirme denetimleri gerçekleştirin.**
+
+## <a name="require-authorization-for-the-entire-app"></a>Tüm uygulama için yetkilendirme iste
+
+Aşağıdaki yaklaşımlardan birini kullanarak, [ `[Authorize]` özniteliği](xref:blazor/security/index#authorize-attribute) ([API belgeleri](xref:System.Web.Mvc.AuthorizeAttribute)) Razor uygulamanın her bileşenine uygulayın:
+
+* [`@attribute`](xref:mvc/views/razor#attribute)Dosyadaki yönergeyi kullanın `_Imports.razor` :
+
+  ```razor
+  @using Microsoft.AspNetCore.Authorization
+  @attribute [Authorize]
+  ```
+
+* Özniteliği klasöründeki her bileşene ekleyin Razor `Pages` .
+
+> [!NOTE]
+> <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy?displayProperty=nameWithType>İle ilke olarak ayarlanması <xref:Microsoft.AspNetCore.Authorization.AuthorizationPolicyBuilder.RequireAuthenticatedUser%2A> desteklenmez. **not**
 
 ## <a name="refresh-tokens"></a>Belirteçleri Yenile
 

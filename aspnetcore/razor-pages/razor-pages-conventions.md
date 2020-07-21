@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/razor-pages-conventions
-ms.openlocfilehash: 308ca4401289a55e5dba8d61de50644cb2a53433
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 3cb83d8cfd058c4d0a93ece9a4f19b6407dac384
+ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405256"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86568866"
 ---
 # <a name="razor-pages-route-and-app-conventions-in-aspnet-core"></a>RazorASP.NET Core 'de sayfa yönlendirme ve uygulama kuralları
 
@@ -42,28 +42,27 @@ Yol kesimleri veya parametre adları olarak kullanılamayan ayrılmış sözcük
 | [Sayfa yolu eylem kuralları](#page-route-action-conventions)<ul><li>AddFolderRouteModelConvention</li><li>AddPageRouteModelConvention</li><li>AddPageRoute</li></ul> | Bir klasördeki sayfalara ve tek bir sayfaya rota şablonu ekleyin. |
 | [Sayfa modeli eylem kuralları](#page-model-action-conventions)<ul><li>AddFolderApplicationModelConvention</li><li>AddPageApplicationModelConvention</li><li>ConfigureFilter (filtre sınıfı, lambda ifadesi veya filtre fabrikası)</li></ul> | Bir klasördeki sayfalara üst bilgi ekleyin, tek bir sayfaya üst bilgi ekleyin ve bir [filtre fabrikası](xref:mvc/controllers/filters#ifilterfactory) yapılandırarak uygulamanın sayfalarına üst bilgi ekleyin. |
 
-RazorSayfa kuralları, <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.AddRazorPagesOptions*> sınıfındaki hizmet koleksiyonunda öğesine genişletme yöntemi kullanılarak eklenir ve yapılandırılır <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddMvc*> `Startup` . Aşağıdaki kural örnekleri bu konunun ilerleyen kısımlarında açıklanmıştır:
+RazorSayfa kuralları, <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddRazorPages%2A> içinde yapılandıran bir aşırı yükleme kullanılarak <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions> yapılandırılır `Startup.ConfigureServices` . Aşağıdaki kural örnekleri bu konunun ilerleyen kısımlarında açıklanmıştır:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
-    services.AddRazorPages()
-        .AddRazorPagesOptions(options =>
-        {
-            options.Conventions.Add( ... );
-            options.Conventions.AddFolderRouteModelConvention(
-                "/OtherPages", model => { ... });
-            options.Conventions.AddPageRouteModelConvention(
-                "/About", model => { ... });
-            options.Conventions.AddPageRoute(
-                "/Contact", "TheContactPage/{text?}");
-            options.Conventions.AddFolderApplicationModelConvention(
-                "/OtherPages", model => { ... });
-            options.Conventions.AddPageApplicationModelConvention(
-                "/About", model => { ... });
-            options.Conventions.ConfigureFilter(model => { ... });
-            options.Conventions.ConfigureFilter( ... );
-        });
+    services.AddRazorPages(options =>
+    {
+        options.Conventions.Add( ... );
+        options.Conventions.AddFolderRouteModelConvention(
+            "/OtherPages", model => { ... });
+        options.Conventions.AddPageRouteModelConvention(
+            "/About", model => { ... });
+        options.Conventions.AddPageRoute(
+            "/Contact", "TheContactPage/{text?}");
+        options.Conventions.AddFolderApplicationModelConvention(
+            "/OtherPages", model => { ... });
+        options.Conventions.AddPageApplicationModelConvention(
+            "/About", model => { ... });
+        options.Conventions.ConfigureFilter(model => { ... });
+        options.Conventions.ConfigureFilter( ... );
+    });
 }
 ```
 
@@ -107,7 +106,7 @@ RazorSayfa yönlendirme ve MVC denetleyici yönlendirme bir uygulamayı paylaş�
 
 Mümkün olan yerlerde, `Order` ' yi ayarlayın `Order = 0` . Doğru yolu seçmek için yönlendirmeyi güvenin.
 
-Razor<xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions>İçindeki hizmet KOLEKSIYONUNA MVC eklendiğinde ekleme gibi sayfa seçenekleri eklenir `Startup.ConfigureServices` . Örnek için bkz. [örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/).
+Razor' <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions.Conventions> Razor Deki hizmet koleksiyonuna sayfa eklendiğinde ekleme gibi sayfa seçenekleri eklenir `Startup.ConfigureServices` . Örnek için bkz. [örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/razor-pages-conventions/samples/).
 
 [!code-csharp[](razor-pages-conventions/samples/3.x/SampleApp/Startup.cs?name=snippet1)]
 
@@ -192,13 +191,12 @@ ASP.NET Core tarafından oluşturulan sayfa yolları, bir parametre transformat�
 ```csharp
 public void ConfigureServices(IServiceCollection services)
 {
-    services.AddRazorPages()
-        .AddRazorPagesOptions(options =>
-        {
-            options.Conventions.Add(
-                new PageRouteTransformerConvention(
-                    new SlugifyParameterTransformer()));
-        });
+    services.AddRazorPages(options =>
+    {
+        options.Conventions.Add(
+            new PageRouteTransformerConvention(
+                new SlugifyParameterTransformer()));
+    });
 }
 ```
 

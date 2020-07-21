@@ -5,7 +5,7 @@ description: ASP.NET Core ' de Web API 'SI oluşturmanın temellerini öğrenin.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 02/02/2020
+ms.date: 07/20/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/index
-ms.openlocfilehash: 7c9762d23ff612155846357bfadeaaad492c7299
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 98fb8c0a26f5f8e7ce5f07066f2f36e748ab2398
+ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404736"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86568749"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>ASP.NET Core ile web API’leri oluşturma
 
@@ -98,16 +98,12 @@ Kullanılabilir öznitelikleri içeren bir liste için, bkz <xref:Microsoft.AspN
 
 ::: moniker-end
 
-::: moniker range="= aspnetcore-2.1"
-
 * [Öznitelik yönlendirme gereksinimi](#attribute-routing-requirement)
 * [Otomatik HTTP 400 yanıtları](#automatic-http-400-responses)
 * [Bağlama kaynak parametresi çıkarımı](#binding-source-parameter-inference)
 * [Multipart/form-veri isteği çıkarımı](#multipartform-data-request-inference)
 
 Bu özellikler, 2,1 veya üzeri bir [Uyumluluk sürümü](xref:mvc/compatibility-version) gerektirir.
-
-::: moniker-end
 
 ### <a name="attribute-on-specific-controllers"></a>Belirli denetleyicilerde öznitelik
 
@@ -232,9 +228,11 @@ Uyumluluk sürümü 2,1 ile, bir HTTP 400 yanıtı için varsayılan yanıt tür
 
 ::: moniker-end
 
+Otomatik ve özel yanıtları tutarlı hale getirmek için <xref:Microsoft.AspNetCore.Mvc.ControllerBase.ValidationProblem%2A> yerine yöntemi çağırın <xref:System.Web.Http.ApiController.BadRequest%2A> . `ValidationProblem`<xref:Microsoft.AspNetCore.Mvc.ValidationProblemDetails>otomatik yanıtı da bir nesne ve döndürür.
+
 ### <a name="log-automatic-400-responses"></a>Otomatik 400 yanıtlarını günlüğe kaydet
 
-Bkz. [otomatik 400 yanıtlarını model doğrulama hatalarında günlüğe kaydetme (ASPNET/AspNetCore.Docs #12157)](https://github.com/dotnet/AspNetCore.Docs/issues/12157).
+Bkz. [otomatik 400 yanıtlarını model doğrulama hatalarında günlüğe kaydetme (DotNet/AspNetCore.Docs # 12157)](https://github.com/dotnet/AspNetCore.Docs/issues/12157).
 
 ### <a name="disable-automatic-400-response"></a>Otomatik 400 yanıtını devre dışı bırak
 

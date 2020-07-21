@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/file-uploads
-ms.openlocfilehash: 055dc7295aad67f92fe5f4e8271a1543262257b5
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 720da8a8fe22f0e1911fd554c094661b4465a335
+ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404606"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86568840"
 ---
 # <a name="upload-files-in-aspnet-core"></a>ASP.NET Core dosyaları karşıya yükleme
 
@@ -111,7 +111,7 @@ Dosya arabelleğe alma, bu konunun aşağıdaki bölümlerinde ele alınmıştı
 * [Fiziksel depolama alanı](#upload-small-files-with-buffered-model-binding-to-physical-storage)
 * [Veritabanı](#upload-small-files-with-buffered-model-binding-to-a-database)
 
-**Akış**
+**Akışlar**
 
 Dosya çok parçalı bir istekten alınır ve doğrudan uygulama tarafından işlenir veya kaydedilir. Akış performansı önemli ölçüde iyileştirmez. Akış, dosya karşıya yüklenirken bellek veya disk alanı taleplerini azaltır.
 
@@ -424,7 +424,7 @@ Aşağıdaki örnek, bir denetleyiciyi bir denetleyici eyleminde akışa almak i
 
 Örnek uygulamada `GenerateAntiforgeryTokenCookieAttribute` ve `DisableFormValueModelBindingAttribute` sayfa `/StreamedSingleFileUploadDb` `/StreamedSingleFileUploadPhysical` `Startup.ConfigureServices` [ Razor kuralları](xref:razor-pages/razor-pages-conventions)kullanılarak ve içindeki sayfa uygulama modellerine filtre olarak uygulanır:
 
-[!code-csharp[](file-uploads/samples/3.x/SampleApp/Startup.cs?name=snippet_AddRazorPages&highlight=8-11,17-20)]
+[!code-csharp[](file-uploads/samples/3.x/SampleApp/Startup.cs?name=snippet_AddRazorPages&highlight=7-10,16-19)]
 
 Model bağlama formu okumadığından formdan bağlanan parametreler bağlanamaz (sorgu, yol ve başlık çalışmaya devam eder). Action yöntemi doğrudan özelliği ile birlikte çalışabilir `Request` . `MultipartReader`Her bölümü okumak için kullanılır. Anahtar/değer verileri bir içinde depolanır `KeyValueAccumulator` . Çok parçalı bölümler okunduktan sonra, öğesinin içeriği `KeyValueAccumulator` form verilerini bir model türüne bağlamak için kullanılır.
 
@@ -621,18 +621,17 @@ public void ConfigureServices(IServiceCollection services)
 Bir Razor Sayfalar uygulamasında, filtresi içindeki bir [kurala](xref:razor-pages/razor-pages-conventions) uygulayın `Startup.ConfigureServices` :
 
 ```csharp
-services.AddRazorPages()
-    .AddRazorPagesOptions(options =>
-    {
-        options.Conventions
-            .AddPageApplicationModelConvention("/FileUploadPage",
-                model.Filters.Add(
-                    new RequestFormLimitsAttribute()
-                    {
-                        // Set the limit to 256 MB
-                        MultipartBodyLengthLimit = 268435456
-                    });
-    });
+services.AddRazorPages(options =>
+{
+    options.Conventions
+        .AddPageApplicationModelConvention("/FileUploadPage",
+            model.Filters.Add(
+                new RequestFormLimitsAttribute()
+                {
+                    // Set the limit to 256 MB
+                    MultipartBodyLengthLimit = 268435456
+                });
+});
 ```
 
 Bir Razor Sayfalar uygulamasında veya BIR MVC uygulamasında, filtreyi sayfa modeline veya eylem yöntemine uygulayın:
@@ -669,18 +668,17 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
 Bir Razor Sayfalar uygulamasında, filtresi içindeki bir [kurala](xref:razor-pages/razor-pages-conventions) uygulayın `Startup.ConfigureServices` :
 
 ```csharp
-services.AddRazorPages()
-    .AddRazorPagesOptions(options =>
-    {
-        options.Conventions
-            .AddPageApplicationModelConvention("/FileUploadPage",
-                model =>
-                {
-                    // Handle requests up to 50 MB
-                    model.Filters.Add(
-                        new RequestSizeLimitAttribute(52428800));
-                });
-    });
+services.AddRazorPages(options =>
+{
+    options.Conventions
+        .AddPageApplicationModelConvention("/FileUploadPage",
+            model =>
+            {
+                // Handle requests up to 50 MB
+                model.Filters.Add(
+                    new RequestSizeLimitAttribute(52428800));
+            });
+});
 ```
 
 Bir Razor Sayfalar uygulamasında veya BIR MVC uygulamasında, filtreyi sayfa işleyici sınıfına veya eylem yöntemine uygulayın:
@@ -840,7 +838,7 @@ Dosya arabelleğe alma, bu konunun aşağıdaki bölümlerinde ele alınmıştı
 * [Fiziksel depolama alanı](#upload-small-files-with-buffered-model-binding-to-physical-storage)
 * [Veritabanı](#upload-small-files-with-buffered-model-binding-to-a-database)
 
-**Akış**
+**Akışlar**
 
 Dosya çok parçalı bir istekten alınır ve doğrudan uygulama tarafından işlenir veya kaydedilir. Akış performansı önemli ölçüde iyileştirmez. Akış, dosya karşıya yüklenirken bellek veya disk alanı taleplerini azaltır.
 

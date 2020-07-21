@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 2c58a274e8de0b1205b223287b7690b1d5caed23
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: 06803ee57824bbfac5725763938abbb9db0e360a
+ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445131"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86568853"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core sertifika kimlik doğrulamasını yapılandırma
 
@@ -36,7 +36,7 @@ Sertifika kimlik doğrulaması, genellikle bir ara sunucu veya yük dengeleyicin
 
 Proxy 'lerin ve yük dengeleyicilerin kullanıldığı ortamlarda sertifika kimlik doğrulamasına alternatif olarak, OpenID Connect (OıDC) ile Federasyon Hizmetleri (ADFS) Active Directory.
 
-## <a name="get-started"></a>Kullanmaya başlayın
+## <a name="get-started"></a>başlarken
 
 HTTPS sertifikası alın, uygulayın ve sunucunuzu sertifika gerektirecek şekilde [yapılandırın](#configure-your-server-to-require-certificates) .
 
@@ -630,7 +630,7 @@ TLS yeniden anlaşması, isteğe bağlı istemci sertifikaları uygulamak için 
 - HTTP/2 [açıkça](https://tools.ietf.org/html/rfc7540#section-9.2.1) yeniden anlaşmaya izin vermez.
 - TLS 1,3, yeniden anlaşma desteğini [kaldırdı](https://tools.ietf.org/html/rfc8740#section-1) .
 
-ASP.NET Core 5 Preview 4 ve üzeri, isteğe bağlı istemci sertifikaları için daha kolay destek ekler. Daha fazla bilgi için bkz. [Isteğe bağlı sertifikalar örneği](https://github.com/dotnet/aspnetcore/tree/9ce4a970a21bace3fb262da9591ed52359309592/src/Security/Authentication/Certificate/samples/Certificate.Optional.Sample).
+ASP.NET Core 5 Preview 7 ve üzeri, isteğe bağlı istemci sertifikaları için daha kolay destek ekler. Daha fazla bilgi için bkz. [Isteğe bağlı sertifikalar örneği](https://github.com/dotnet/aspnetcore/tree/9ce4a970a21bace3fb262da9591ed52359309592/src/Security/Authentication/Certificate/samples/Certificate.Optional.Sample).
 
 Aşağıdaki yaklaşım isteğe bağlı istemci sertifikalarını destekler:
 

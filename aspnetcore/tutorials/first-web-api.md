@@ -6,19 +6,19 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 2/25/2020
 no-loc:
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- ':::no-loc(Blazor):::'
+- ':::no-loc(Blazor Server):::'
+- ':::no-loc(Blazor WebAssembly):::'
+- ':::no-loc(Identity):::'
+- ":::no-loc(Let's Encrypt):::"
+- ':::no-loc(Razor):::'
+- ':::no-loc(SignalR):::'
 uid: tutorials/first-web-api
 ms.openlocfilehash: 79f36168d0430ceee3794cfb5a4e29f3671ac73f
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/10/2020
+ms.lasthandoff: 07/21/2020
 ms.locfileid: "86212629"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Öğretici: ASP.NET Core bir Web API 'SI oluşturma
@@ -46,17 +46,17 @@ Bu öğretici aşağıdaki API 'YI oluşturur:
 
 |API | Açıklama | İstek gövdesi | Yanıt gövdesi |
 |--- | ---- | ---- | ---- |
-|`GET /api/TodoItems` | Tüm yapılacaklar öğelerini Al | Hiçbiri | Yapılacaklar öğeleri dizisi|
-|`GET /api/TodoItems/{id}` | KIMLIĞE göre öğe al | Hiçbiri | Yapılacaklar öğesi|
+|`GET /api/TodoItems` | Tüm yapılacaklar öğelerini Al | Yok | Yapılacaklar öğeleri dizisi|
+|`GET /api/TodoItems/{id}` | KIMLIĞE göre öğe al | Yok | Yapılacaklar öğesi|
 |`POST /api/TodoItems` | Yeni öğe Ekle | Yapılacaklar öğesi | Yapılacaklar öğesi |
-|`PUT /api/TodoItems/{id}` | Mevcut bir öğeyi güncelleştir&nbsp; | Yapılacaklar öğesi | Hiçbiri |
-|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | Öğe &nbsp; silme&nbsp; | Hiçbiri | Hiçbiri|
+|`PUT /api/TodoItems/{id}` | Mevcut bir öğeyi güncelleştir&nbsp; | Yapılacaklar öğesi | Yok |
+|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | Öğe &nbsp; silme&nbsp; | Yok | Yok|
 
 Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
 ![İstemci, sol taraftaki bir kutu ile temsil edilir. Bir istek gönderir ve sağ tarafta çizilmiş bir kutu olan uygulamadan bir yanıt alır. Uygulama kutusu içinde, üç kutu denetleyiciyi, modeli ve veri erişim katmanını temsil eder. İstek uygulamanın denetleyicisine gelir ve denetleyici ile veri erişim katmanı arasında okuma/yazma işlemleri gerçekleştirilir. Model serileştirilir ve yanıtta istemciye döndürülür.](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -281,7 +281,7 @@ Yukarıdaki kod:
 
   * **Model sınıfında** **TodoItem (TodoApi. modeller)** öğesini seçin.
   * **Veri bağlamı sınıfında** **TodoContext (TodoApi. modeller)** öğesini seçin.
-  * **Ekle**’yi seçin.
+  * **Add (Ekle)** seçeneğini belirleyin.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
@@ -380,7 +380,7 @@ Bu yöntemler iki al uç noktası uygular:
 * `GET /api/TodoItems`
 * `GET /api/TodoItems/{id}`
 
-Tarayıcıdan veya Postman 'dan iki uç noktayı çağırarak uygulamayı test edin. Örnek:
+Tarayıcıdan veya Postman 'dan iki uç noktayı çağırarak uygulamayı test edin. Örneğin:
 
 * `https://localhost:5001/api/TodoItems`
 * `https://localhost:5001/api/TodoItems/1`
@@ -532,17 +532,17 @@ Bu öğretici aşağıdaki API 'YI oluşturur:
 
 |API | Açıklama | İstek gövdesi | Yanıt gövdesi |
 |--- | ---- | ---- | ---- |
-|/Api/TodoItems al | Tüm yapılacaklar öğelerini Al | Hiçbiri | Yapılacaklar öğeleri dizisi|
-|/Api/TodoItems/{id} al | KIMLIĞE göre öğe al | Hiçbiri | Yapılacaklar öğesi|
+|/Api/TodoItems al | Tüm yapılacaklar öğelerini Al | Yok | Yapılacaklar öğeleri dizisi|
+|/Api/TodoItems/{id} al | KIMLIĞE göre öğe al | Yok | Yapılacaklar öğesi|
 |POST/api/TodoItems | Yeni öğe Ekle | Yapılacaklar öğesi | Yapılacaklar öğesi |
-|/Api/TodoItems/{id} koy | Mevcut bir öğeyi güncelleştir&nbsp; | Yapılacaklar öğesi | Hiçbiri |
-|/Api/TodoItems/{id} &nbsp; Sil&nbsp; | Öğe &nbsp; silme&nbsp; | Hiçbiri | Hiçbiri|
+|/Api/TodoItems/{id} koy | Mevcut bir öğeyi güncelleştir&nbsp; | Yapılacaklar öğesi | Yok |
+|/Api/TodoItems/{id} &nbsp; Sil&nbsp; | Öğe &nbsp; silme&nbsp; | Yok | Yok|
 
 Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
 ![İstemci, sol taraftaki bir kutu ile temsil edilir. Bir istek gönderir ve sağ tarafta çizilmiş bir kutu olan uygulamadan bir yanıt alır. Uygulama kutusu içinde, üç kutu denetleyiciyi, modeli ve veri erişim katmanını temsil eder. İstek uygulamanın denetleyicisine gelir ve denetleyici ile veri erişim katmanı arasında okuma/yazma işlemleri gerçekleştirilir. Model serileştirilir ve yanıtta istemciye döndürülür.](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -737,7 +737,7 @@ Bu yöntemler iki al uç noktası uygular:
 
 Hala çalışıyorsa uygulamayı durdurun. Ardından, en son değişiklikleri dahil etmek için yeniden çalıştırın.
 
-Bir tarayıcıdan iki uç noktayı çağırarak uygulamayı test edin. Örnek:
+Bir tarayıcıdan iki uç noktayı çağırarak uygulamayı test edin. Örneğin:
 
 * `https://localhost:<port>/api/todo`
 * `https://localhost:<port>/api/todo/1`
@@ -917,7 +917,7 @@ Proje dizininde bir *Wwwroot* klasörü oluşturun.
 
 [!code-html[](first-web-api/samples/2.2/TodoApi/wwwroot/index.html)]
 
-*Wwwroot* dizinine *site.js* adlı bir JavaScript dosyası ekleyin. İçeriğini şu kodla değiştirin:
+*Wwwroot* dizinine *site.js* adlı bir JavaScript dosyası ekleyin. Dosyanın içeriğini aşağıdaki kod ile değiştirin:
 
 [!code-javascript[](first-web-api/samples/2.2/TodoApi/wwwroot/site.js?name=snippet_SiteJs)]
 
@@ -958,7 +958,7 @@ Bir yapılacaklar öğesinin silinmesi, `type` Ajax çağrısının üzerine aya
 
 ## <a name="add-authentication-support-to-a-web-api"></a>Web API 'sine kimlik doğrulama desteği ekleme
 
-[!INCLUDE[](~/includes/IdentityServer4.md)]
+[!INCLUDE[](~/includes/:::no-loc(Identity):::Server4.md)]
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
