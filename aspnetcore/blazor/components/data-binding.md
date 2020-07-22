@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: 0f2741a78b58d7380fcbe84e97f5a08ef291c27b
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 896eed0e55986678b6bb86638ca92b04a77b4fef
+ms.sourcegitcommit: d00a200bc8347af794b24184da14ad5c8b6bba9a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944513"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86869945"
 ---
 # <a name="aspnet-core-blazor-data-binding"></a>ASP.NET Core Blazor veri bağlama
 
@@ -167,7 +167,7 @@ Aşağıdaki alt bileşende ( `ChildComponent` ) bir `Year` bileşen parametresi
 }
 ```
 
-<xref:Microsoft.AspNetCore.Components.EventCallback%601>, bölümünde açıklanmıştır <xref:blazor/components/event-handling#eventcallback> .
+<xref:Microsoft.AspNetCore.Components.EventCallback%601>Önceki örnekte, bileşen parametresi adı, ardından `Changed` soneki () tarafından adlandırılmalıdır `{PARAMETER NAME}Changed` `YearChanged` . Hakkında daha fazla bilgi için <xref:Microsoft.AspNetCore.Components.EventCallback%601> bkz <xref:blazor/components/event-handling#eventcallback> ..
 
 Aşağıdaki üst bileşen şunları kullanır:
 

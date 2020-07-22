@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 0141ad2df5216183424980a6ca50bf6bcd64ade5
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 96d24940af6c591e3c02bfa26ed9d7d6ea60d27d
+ms.sourcegitcommit: d00a200bc8347af794b24184da14ad5c8b6bba9a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86213059"
+ms.lasthandoff: 07/21/2020
+ms.locfileid: "86869984"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core filtreler
 
@@ -83,6 +83,8 @@ Filtreler, farklı arabirim tanımları aracılığıyla hem zaman uyumlu hem de
 Zaman uyumlu filtreler, ardışık düzen aşamasından önce ve sonra kodu çalıştırır. Örneğin, <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuting*> eylem yöntemi çağrılmadan önce çağrılır. <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuted*>, eylem yöntemi döndüğünde çağrılır.
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/MySampleActionFilter.cs?name=snippet_ActionFilter)]
+
+Önceki kodda, [Mydebug](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/filters/3.1sample/FiltersSample/Helper/MyDebug.cs) , [örnek indirmada](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/controllers/filters/3.1sample/FiltersSample/Helper/MyDebug.cs)bir yardımcı programdır.
 
 Zaman uyumsuz filtreler bir `On-Stage-ExecutionAsync` yöntemi tanımlar. Örneğin <xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*> :
 
@@ -186,12 +188,12 @@ Zaman uyumlu eylem filtreleri için filtre yöntemlerinin çağrıldığı sıra
 
 | Sequence | Filtre kapsamı | Filter yöntemi |
 |:--------:|:------------:|:-------------:|
-| 1 | Küresel | `OnActionExecuting` |
+| 1 | Genel | `OnActionExecuting` |
 | 2 | Denetleyici veya Razor sayfa| `OnActionExecuting` |
 | 3 | Yöntem | `OnActionExecuting` |
 | 4 | Yöntem | `OnActionExecuted` |
 | 5 | Denetleyici veya Razor sayfa | `OnActionExecuted` |
-| 6 | Küresel | `OnActionExecuted` |
+| 6 | Genel | `OnActionExecuted` |
 
 ### <a name="controller-level-filters"></a>Denetleyici düzeyi filtreleri
 
@@ -211,6 +213,8 @@ Temel sınıftan devralan her denetleyici <xref:Microsoft.AspNetCore.Mvc.Control
 * Geçersiz kılmalar `OnActionExecuting` ve `OnActionExecuted` .
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/TestController.cs?name=snippet)]
+
+[!INCLUDE[](~/includes/MyDisplayRouteInfo.md)]
 
 <!-- test via  webBuilder.UseStartup<Startup>(); -->
 
@@ -730,12 +734,12 @@ Zaman uyumlu eylem filtreleri için filtre yöntemlerinin çağrıldığı sıra
 
 | Sequence | Filtre kapsamı | Filter yöntemi |
 |:--------:|:------------:|:-------------:|
-| 1 | Küresel | `OnActionExecuting` |
+| 1 | Genel | `OnActionExecuting` |
 | 2 | Kumandasını | `OnActionExecuting` |
 | 3 | Yöntem | `OnActionExecuting` |
 | 4 | Yöntem | `OnActionExecuted` |
 | 5 | Kumandasını | `OnActionExecuted` |
-| 6 | Küresel | `OnActionExecuted` |
+| 6 | Genel | `OnActionExecuted` |
 
 Bu sıra şunları gösterir:
 
@@ -792,8 +796,8 @@ Yukarıdaki örnekte gösterilen 3 eylem filtresini göz önünde bulundurun. `O
 |:--------:|:------------:|:-----------------:|:-------------:|
 | 1 | Yöntem | 0 | `OnActionExecuting` |
 | 2 | Kumandasını | 1  | `OnActionExecuting` |
-| 3 | Küresel | 2  | `OnActionExecuting` |
-| 4 | Küresel | 2  | `OnActionExecuted` |
+| 3 | Genel | 2  | `OnActionExecuting` |
+| 4 | Genel | 2  | `OnActionExecuted` |
 | 5 | Kumandasını | 1  | `OnActionExecuted` |
 | 6 | Yöntem | 0  | `OnActionExecuted` |
 
