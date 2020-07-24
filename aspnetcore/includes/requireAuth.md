@@ -1,0 +1,1 @@
+Tüm kullanıcıların kimliklerinin nasıl doğrulandığını öğrenmek için bkz. [kimliği doğrulanmış kullanıcılar gerektirme](xref:security/authorization/secure-data#rau).

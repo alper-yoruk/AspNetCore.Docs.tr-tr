@@ -9,7 +9,7 @@
 >
 > Bu hata için bir katılım çözümü [.NET Core 3.1.301 SDK ve sonraki sürümlerde](https://dotnet.microsoft.com/download/dotnet-core/3.1)bulunur. Aşağıdaki kod, bu hatayı düzelten bir iç anahtar ayarlar:
 >
->```
+>```csharp
 >public static void Main(string[] args)
 >{
 >    AppContext.SetSwitch("Microsoft.AspNetCore.Routing.UseCorrectCatchAllBehavior", 

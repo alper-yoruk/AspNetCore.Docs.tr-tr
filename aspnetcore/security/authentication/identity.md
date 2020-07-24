@@ -13,12 +13,12 @@ no-loc:
 - ':::no-loc(Razor):::'
 - ':::no-loc(SignalR):::'
 uid: security/authentication/identity
-ms.openlocfilehash: dd3296db568700a363c427398f02239846a46ada
-ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
+ms.openlocfilehash: 25070e90050db9dca8b003ae782662811096526a
+ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86445443"
+ms.lasthandoff: 07/24/2020
+ms.locfileid: "87160300"
 ---
 # <a name="introduction-to-no-locidentity-on-aspnet-core"></a>ASP.NET Core giriş :::no-loc(Identity):::
 
@@ -32,6 +32,8 @@ ASP.NET Core :::no-loc(Identity)::: :
 * Kullanıcıları, parolaları, profil verilerini, rolleri, talepleri, belirteçleri, e-posta onayını ve daha fazlasını yönetir.
 
 Kullanıcılar, içinde depolanan oturum açma bilgilerini içeren bir hesap oluşturabilir :::no-loc(Identity)::: veya bir dış oturum açma sağlayıcısı kullanabilirler. Desteklenen dış oturum açma sağlayıcıları [Facebook, Google, Microsoft hesabı ve Twitter](xref:security/authentication/social/index)içerir.
+
+[!INCLUDE[](~/includes/requireAuth.md)]
 
 [ :::no-loc(Identity)::: Kaynak kodu](https://github.com/dotnet/AspNetCore/tree/master/src/:::no-loc(Identity):::) GitHub ' da kullanılabilir. [Yapı :::no-loc(Identity)::: İskelesi](xref:security/authentication/scaffold-identity) ve şablon etkileşimini gözden geçirmek için oluşturulan dosyaları görüntüleyin :::no-loc(Identity)::: .
 
