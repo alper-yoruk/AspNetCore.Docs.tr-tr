@@ -1,19 +1,19 @@
 ---
-title: 'Hata ayıklama ASP.NET Core:::no-loc(Blazor WebAssembly):::'
+title: Hata ayıklama ASP.NET CoreBlazor WebAssembly
 author: guardrex
-description: 'Uygulamalarda hata ayıklamayı öğrenin :::no-loc(Blazor)::: .'
+description: Uygulamalarda hata ayıklamayı öğrenin Blazor .
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/15/2020
 no-loc:
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: blazor/debug
 ms.openlocfilehash: 14943b9f7847ac9144addfdf16a003f6fc8c340c
 ms.sourcegitcommit: cc845634a490c49ff869c89b6e422b6d65d0e886
@@ -22,11 +22,11 @@ ms.contentlocale: tr-TR
 ms.lasthandoff: 07/24/2020
 ms.locfileid: "87159704"
 ---
-# <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Hata ayıklama ASP.NET Core:::no-loc(Blazor WebAssembly):::
+# <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Hata ayıklama ASP.NET CoreBlazor WebAssembly
 
 [Daniel Roth](https://github.com/danroth27)
 
-:::no-loc(Blazor WebAssembly):::uygulamalar, Kmıum tabanlı tarayıcılarda (Edge/Chrome) tarayıcı geliştirme araçları kullanılarak ayıklanamaz. Alternatif olarak, Visual Studio veya Visual Studio Code kullanarak uygulamanızda hata ayıklaması yapabilirsiniz.
+Blazor WebAssemblyuygulamalar, Kmıum tabanlı tarayıcılarda (Edge/Chrome) tarayıcı geliştirme araçları kullanılarak ayıklanamaz. Alternatif olarak, Visual Studio veya Visual Studio Code kullanarak uygulamanızda hata ayıklaması yapabilirsiniz.
 
 Kullanılabilir senaryolar şunlardır:
 
@@ -53,7 +53,7 @@ Hata ayıklama aşağıdaki tarayıcılardan birini gerektirir:
 
 ## <a name="enable-debugging-for-visual-studio-and-visual-studio-code"></a>Visual Studio ve Visual Studio Code için hata ayıklamayı etkinleştir
 
-Mevcut bir uygulamada hata ayıklamayı etkinleştirmek için :::no-loc(Blazor WebAssembly)::: , `launchSettings.json` Başlangıç projesindeki dosyayı her bir başlatma profiline aşağıdaki özelliği içerecek şekilde güncelleştirin `inspectUri` :
+Mevcut bir uygulamada hata ayıklamayı etkinleştirmek için Blazor WebAssembly , `launchSettings.json` Başlangıç projesindeki dosyayı her bir başlatma profiline aşağıdaki özelliği içerecek şekilde güncelleştirin `inspectUri` :
 
 ```json
 "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/_framework/debug/ws-proxy?browser={browserInspectUri}"
@@ -65,16 +65,16 @@ Dosya güncelleştirildikten sonra, `launchSettings.json` aşağıdaki örneğe 
 
 `inspectUri`Özelliği:
 
-* IDE 'nin uygulamanın bir uygulama olduğunu algılamasını sağlar :::no-loc(Blazor WebAssembly)::: .
-* Betik hata ayıklama altyapısına, :::no-loc(Blazor)::: hata ayıklama proxy 'si aracılığıyla tarayıcıya bağlanmasını söyler.
+* IDE 'nin uygulamanın bir uygulama olduğunu algılamasını sağlar Blazor WebAssembly .
+* Betik hata ayıklama altyapısına, Blazor hata ayıklama proxy 'si aracılığıyla tarayıcıya bağlanmasını söyler.
 
 `wsProtocol`Başlatılan tarayıcıda () WebSockets Protokolü (), ana bilgisayar ( `url.hostname` ), bağlantı noktası () `url.port` ve Inspector URI 'si için yer tutucu değerleri `browserInspectUri` , Framework tarafından sağlanır.
 
 ## <a name="visual-studio"></a>Visual Studio
 
-:::no-loc(Blazor WebAssembly):::Visual Studio 'da bir uygulamada hata ayıklamak için:
+Blazor WebAssemblyVisual Studio 'da bir uygulamada hata ayıklamak için:
 
-1. Yeni ASP.NET Core barındırılan bir :::no-loc(Blazor WebAssembly)::: uygulama oluşturun.
+1. Yeni ASP.NET Core barındırılan bir Blazor WebAssembly uygulama oluşturun.
 1. Uygulamayı hata ayıklayıcıda çalıştırmak için <kbd>F5</kbd> tuşuna basın.
 1. Metodunda bir kesme noktası ayarlayın `Pages/Counter.razor` `IncrementCount` .
 1. **`Counter`** Sekmesine gidin ve kesme noktasına isabet eden düğmeyi seçin:
@@ -87,7 +87,7 @@ Dosya güncelleştirildikten sonra, `launchSettings.json` aşağıdaki örneğe 
 
 1. Yürütmeye devam etmek için <kbd>F5</kbd> tuşuna basın.
 
-Uygulamanızda hata ayıklarken :::no-loc(Blazor WebAssembly)::: , sunucu kodunuzda hata ayıklaması de yapabilirsiniz:
+Uygulamanızda hata ayıklarken Blazor WebAssembly , sunucu kodunuzda hata ayıklaması de yapabilirsiniz:
 
 1. İçindeki sayfada bir kesme noktası ayarlayın `Pages/FetchData.razor` <xref:Microsoft.AspNetCore.Components.ComponentBase.OnInitializedAsync%2A> .
 1. Eylem yönteminde içinde bir kesme noktası ayarlayın `WeatherForecastController` `Get` .
@@ -105,9 +105,9 @@ Uygulamanızda hata ayıklarken :::no-loc(Blazor WebAssembly)::: , sunucu kodunu
 
 ## <a name="visual-studio-code"></a>Visual Studio Code
 
-### <a name="debug-standalone-no-locblazor-webassembly"></a>Tek başına hata ayıkla:::no-loc(Blazor WebAssembly):::
+### <a name="debug-standalone-no-locblazor-webassembly"></a>Tek başına hata ayıklaBlazor WebAssembly
 
-1. Tek başına :::no-loc(Blazor WebAssembly)::: uygulamayı vs Code açın.
+1. Tek başına Blazor WebAssembly uygulamayı vs Code açın.
 
    Aşağıdaki bildirimi, hata ayıklamayı etkinleştirmek için ek kurulumun gerekli olduğunu alırsanız:
    
@@ -119,7 +119,7 @@ Uygulamanızda hata ayıklarken :::no-loc(Blazor WebAssembly)::: , sunucu kodunu
 
 1. <kbd>F5</kbd> klavye kısayolunu veya menü öğesini kullanarak hata ayıklamayı başlatın.
 
-1. İstendiğinde, hata ayıklamayı başlatmak için ** :::no-loc(Blazor WebAssembly)::: Hata Ayıkla** seçeneğini belirleyin.
+1. İstendiğinde, hata ayıklamayı başlatmak için ** Blazor WebAssembly Hata Ayıkla** seçeneğini belirleyin.
 
    ![Kullanılabilir hata ayıklama seçeneklerinin listesi](index/_static/blazor-vscode-debugtypes.png)
 
@@ -129,9 +129,9 @@ Uygulamanızda hata ayıklarken :::no-loc(Blazor WebAssembly)::: , sunucu kodunu
 
    ![VS Code hata ayıklama sayacı](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-debug-counter.png)
 
-### <a name="debug-hosted-no-locblazor-webassembly"></a>Barındırılan hata ayıklama:::no-loc(Blazor WebAssembly):::
+### <a name="debug-hosted-no-locblazor-webassembly"></a>Barındırılan hata ayıklamaBlazor WebAssembly
 
-1. Barındırılan :::no-loc(Blazor WebAssembly)::: uygulamanın çözüm klasörünü vs Code açın.
+1. Barındırılan Blazor WebAssembly uygulamanın çözüm klasörünü vs Code açın.
 
 1. Proje için bir başlatma yapılandırma kümesi yoksa, aşağıdaki bildirim görüntülenir. **Evet**’i seçin.
 
@@ -143,13 +143,13 @@ Uygulamanızda hata ayıklarken :::no-loc(Blazor WebAssembly)::: , sunucu kodunu
 
 ### <a name="attach-to-an-existing-debugging-session"></a>Varolan bir hata ayıklama oturumuna Ekle
 
-Çalışan bir uygulamaya eklemek için :::no-loc(Blazor)::: `launch.json` aşağıdaki yapılandırmaya sahip bir dosya oluşturun:
+Çalışan bir uygulamaya eklemek için Blazor `launch.json` aşağıdaki yapılandırmaya sahip bir dosya oluşturun:
 
 ```json
 {
   "type": "blazorwasm",
   "request": "attach",
-  "name": "Attach to Existing :::no-loc(Blazor WebAssembly)::: Application"
+  "name": "Attach to Existing Blazor WebAssembly Application"
 }
 ```
 
@@ -162,11 +162,11 @@ Uygulamanızda hata ayıklarken :::no-loc(Blazor WebAssembly)::: , sunucu kodunu
 
 | Seçenek    | Açıklama |
 | --------- | ----------- |
-| `request` | `launch`Bir uygulamaya hata ayıklama oturumu başlatmak ve eklemek :::no-loc(Blazor WebAssembly)::: veya `attach` zaten çalışan bir uygulamaya hata ayıklama oturumu eklemek için kullanın. |
+| `request` | `launch`Bir uygulamaya hata ayıklama oturumu başlatmak ve eklemek Blazor WebAssembly veya `attach` zaten çalışan bir uygulamaya hata ayıklama oturumu eklemek için kullanın. |
 | `url`     | Hata ayıklanırken tarayıcıda açılacak URL. Varsayılan olarak olur `https://localhost:5001` . |
 | `browser` | Hata ayıklama oturumu için başlatılacak tarayıcı. Ayarlanan `edge` veya `chrome`. Varsayılan olarak olur `chrome` . |
 | `trace`   | JS hata ayıklayıcısından Günlükler oluşturmak için kullanılır. `true`Günlük oluşturmak için olarak ayarlayın. |
-| `hosted`  | `true`Barındırılan bir uygulama başlatılırken ve hata ayıklandığında olarak ayarlanmalıdır :::no-loc(Blazor WebAssembly)::: . |
+| `hosted`  | `true`Barındırılan bir uygulama başlatılırken ve hata ayıklandığında olarak ayarlanmalıdır Blazor WebAssembly . |
 | `webRoot` | Web sunucusunun mutlak yolunu belirtir. Bir uygulama bir alt rotadan sunulduysa ayarlanmalıdır. |
 | `timeout` | Hata ayıklama oturumunun eklenmesi için beklenecek milisaniye sayısı. Varsayılan değer 30.000 milisaniyedir (30 saniye). |
 | `program` | Barındırılan uygulama sunucusunu çalıştırmak için çalıştırılabilir dosyaya bir başvuru. `hosted`İse ayarlanmalıdır `true` . |
@@ -175,7 +175,7 @@ Uygulamanızda hata ayıklarken :::no-loc(Blazor WebAssembly)::: , sunucu kodunu
 
 ### <a name="example-launch-configurations"></a>Örnek başlatma yapılandırması
 
-#### <a name="launch-and-debug-a-standalone-no-locblazor-webassembly-app"></a>Tek başına bir uygulamayı başlatma ve hata ayıklama :::no-loc(Blazor WebAssembly):::
+#### <a name="launch-and-debug-a-standalone-no-locblazor-webassembly-app"></a>Tek başına bir uygulamayı başlatma ve hata ayıklama Blazor WebAssembly
 
 ```json
 {
@@ -196,13 +196,13 @@ Uygulamanızda hata ayıklarken :::no-loc(Blazor WebAssembly)::: , sunucu kodunu
 }
 ```
 
-#### <a name="launch-and-debug-a-hosted-no-locblazor-webassembly-app-with-microsoft-edge"></a>Microsoft Edge ile barındırılan bir uygulamayı başlatma ve hata ayıklama :::no-loc(Blazor WebAssembly):::
+#### <a name="launch-and-debug-a-hosted-no-locblazor-webassembly-app-with-microsoft-edge"></a>Microsoft Edge ile barındırılan bir uygulamayı başlatma ve hata ayıklama Blazor WebAssembly
 
 Tarayıcı yapılandırması varsayılan olarak Google Chrome olarak belirlenmiştir. Hata ayıklama için Microsoft Edge kullanılırken, `browser` olarak ayarlayın `edge` . Google Chrome 'ı kullanmak için `browser` seçeneği ayarlamayın veya seçeneğin değerini olarak ayarlayın `chrome` .
 
 ```json
 {
-  "name": "Launch and Debug Hosted :::no-loc(Blazor WebAssembly)::: App",
+  "name": "Launch and Debug Hosted Blazor WebAssembly App",
   "type": "blazorwasm",
   "request": "launch",
   "hosted": true,
@@ -230,11 +230,11 @@ Yukarıdaki örnekte, `MyHostedApp.Server.dll` *sunucu* uygulamasının derlemes
 
 1. Bileşen kodunda ( `.razor` Dosyalar) ve C# kod dosyalarında ( `.cs` ), kod yürütüldüğünde ayarladığınız kesme noktaları isabet edilir. Kesme noktası isabet ettikten sonra, kod üzerinden tek adımlı (<kbd>F10</kbd><kbd>) ve</kbd>kod yürütme işlemini normal şekilde yapın.
 
-:::no-loc(Blazor):::[Chrome DevTools protokolünü](https://chromedevtools.github.io/devtools-protocol/) uygulayan ve protokolünü ile genişlettiğini içeren bir hata ayıklama proxy 'si sağlar. NET 'e özgü bilgiler. Klavye kısayoluna hata ayıklama basıldığında, :::no-loc(Blazor)::: Ara sunucu üzerindeki Chrome DevTools ' ı işaret eder. Proxy, hata ayıklama işlemini Aradığınız tarayıcı penceresine bağlanır (Bu nedenle, uzaktan hata ayıklamayı etkinleştirmeniz gerekir).
+Blazor[Chrome DevTools protokolünü](https://chromedevtools.github.io/devtools-protocol/) uygulayan ve protokolünü ile genişlettiğini içeren bir hata ayıklama proxy 'si sağlar. NET 'e özgü bilgiler. Klavye kısayoluna hata ayıklama basıldığında, Blazor Ara sunucu üzerindeki Chrome DevTools ' ı işaret eder. Proxy, hata ayıklama işlemini Aradığınız tarayıcı penceresine bağlanır (Bu nedenle, uzaktan hata ayıklamayı etkinleştirmeniz gerekir).
 
 ## <a name="browser-source-maps"></a>Tarayıcı kaynağı eşlemeleri
 
-Tarayıcı kaynak haritaları tarayıcının derlenmiş dosyaları özgün kaynak dosyalarına geri eşlemesine ve istemci tarafı hata ayıklama için yaygın olarak kullanılmasına izin verir. Ancak, :::no-loc(Blazor)::: Şu anda C# ' yi doğrudan JavaScript/te olarak eşleştirmez. Bunun yerine, :::no-loc(Blazor)::: tarayıcı IÇINDE Il yorumu yapar, bu nedenle kaynak haritaları ilgili değildir.
+Tarayıcı kaynak haritaları tarayıcının derlenmiş dosyaları özgün kaynak dosyalarına geri eşlemesine ve istemci tarafı hata ayıklama için yaygın olarak kullanılmasına izin verir. Ancak, Blazor Şu anda C# ' yi doğrudan JavaScript/te olarak eşleştirmez. Bunun yerine, Blazor tarayıcı IÇINDE Il yorumu yapar, bu nedenle kaynak haritaları ilgili değildir.
 
 ## <a name="troubleshoot"></a>Sorun giderme
 

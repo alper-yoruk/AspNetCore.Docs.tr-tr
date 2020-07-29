@@ -1,18 +1,18 @@
 ---
-title: 'ASP.NET Core Yapılandır:::no-loc(Identity):::'
+title: ASP.NET Core YapılandırIdentity
 author: AdrienTorris
-description: 'ASP.NET Core :::no-loc(Identity)::: varsayılan değerlerini anlayın ve :::no-loc(Identity)::: özellikleri özel değerleri kullanacak şekilde yapılandırmayı öğrenin.'
+description: ASP.NET Core Identity varsayılan değerlerini anlayın ve Identity özellikleri özel değerleri kullanacak şekilde yapılandırmayı öğrenin.
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/11/2019
 no-loc:
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/identity-configuration
 ms.openlocfilehash: 5c999b426742cf75b1997f5b40223e2dda112901
 ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
@@ -21,42 +21,42 @@ ms.contentlocale: tr-TR
 ms.lasthandoff: 07/24/2020
 ms.locfileid: "87160292"
 ---
-# <a name="configure-aspnet-core-no-locidentity"></a>ASP.NET Core Yapılandır:::no-loc(Identity):::
+# <a name="configure-aspnet-core-no-locidentity"></a>ASP.NET Core YapılandırIdentity
 
-ASP.NET Core :::no-loc(Identity)::: parola ilkesi, kilitleme ve tanımlama bilgisi yapılandırması gibi ayarların varsayılan değerlerini kullanır. Bu ayarlar sınıfında geçersiz kılınabilir `Startup` .
+ASP.NET Core Identity parola ilkesi, kilitleme ve tanımlama bilgisi yapılandırması gibi ayarların varsayılan değerlerini kullanır. Bu ayarlar sınıfında geçersiz kılınabilir `Startup` .
 
-## <a name="no-locidentity-options"></a>:::no-loc(Identity):::Seçenekler
+## <a name="no-locidentity-options"></a>IdentitySeçenekler
 
-[ :::no-loc(Identity)::: Options](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) sınıfı, sistemi yapılandırmak için kullanılabilen seçenekleri temsil eder :::no-loc(Identity)::: . `:::no-loc(Identity):::Options`veya çağrıldıktan **sonra** ayarlanması gerekir `Add:::no-loc(Identity):::` `AddDefault:::no-loc(Identity):::` .
+[ Identity Options](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) sınıfı, sistemi yapılandırmak için kullanılabilen seçenekleri temsil eder Identity . `IdentityOptions`veya çağrıldıktan **sonra** ayarlanması gerekir `AddIdentity` `AddDefaultIdentity` .
 
-### <a name="claims-no-locidentity"></a>Belirt:::no-loc(Identity):::
+### <a name="claims-no-locidentity"></a>BelirtIdentity
 
-[ :::no-loc(Identity)::: Options. Claim :::no-loc(Identity)::: ](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.claimsidentity) , aşağıdaki tabloda gösterilen özelliklerle birlikte [talep :::no-loc(Identity)::: seçeneklerini](/dotnet/api/microsoft.aspnetcore.identity.claimsidentityoptions) belirtir.
+[ Identity Options. Claim Identity ](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.claimsidentity) , aşağıdaki tabloda gösterilen özelliklerle birlikte [talep Identity seçeneklerini](/dotnet/api/microsoft.aspnetcore.identity.claimsidentityoptions) belirtir.
 
 | Özellik | Açıklama | Varsayılan |
 | -------- | ----------- | :-----: |
 | [RoleClaimType](/dotnet/api/microsoft.aspnetcore.identity.claimsidentityoptions.roleclaimtype) | Rol talebi için kullanılan talep türünü alır veya ayarlar. | [ClaimTypes. Role](/dotnet/api/system.security.claims.claimtypes.role) |
-| [SecurityStampClaimType](/dotnet/api/microsoft.aspnetcore.identity.claimsidentityoptions.securitystampclaimtype) | Güvenlik damga talebi için kullanılan talep türünü alır veya ayarlar. | `AspNet.:::no-loc(Identity):::.SecurityStamp` |
+| [SecurityStampClaimType](/dotnet/api/microsoft.aspnetcore.identity.claimsidentityoptions.securitystampclaimtype) | Güvenlik damga talebi için kullanılan talep türünü alır veya ayarlar. | `AspNet.Identity.SecurityStamp` |
 | [Userıdclaimtype](/dotnet/api/microsoft.aspnetcore.identity.claimsidentityoptions.useridclaimtype) | Kullanıcı tanımlayıcısı talebi için kullanılan talep türünü alır veya ayarlar. | [ClaimTypes. NameIdentifier](/dotnet/api/system.security.claims.claimtypes.nameidentifier) |
 | [UserNameClaimType](/dotnet/api/microsoft.aspnetcore.identity.claimsidentityoptions.usernameclaimtype) | Kullanıcı adı talebi için kullanılan talep türünü alır veya ayarlar. | [ClaimTypes.Name](/dotnet/api/system.security.claims.claimtypes.name) |
 
 ### <a name="lockout"></a>Özelliğini
 
-[Passwordsignınasync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.passwordsigninasync#Microsoft_AspNetCore_:::no-loc(Identity):::_SignInManager_1_PasswordSignInAsync_System_String_System_String_System_Boolean_System_Boolean_) yönteminde kilitleme ayarlanır:
+[Passwordsignınasync](/dotnet/api/microsoft.aspnetcore.identity.signinmanager-1.passwordsigninasync#Microsoft_AspNetCore_Identity_SignInManager_1_PasswordSignInAsync_System_String_System_String_System_Boolean_System_Boolean_) yönteminde kilitleme ayarlanır:
 
-[!code-csharp[](identity-configuration/sample/Areas/:::no-loc(Identity):::/Pages/Account/Login.cshtml.cs?name=snippet&highlight=9)]
+[!code-csharp[](identity-configuration/sample/Areas/Identity/Pages/Account/Login.cshtml.cs?name=snippet&highlight=9)]
 
-Yukarıdaki kod, şablonu temel alır `Login` :::no-loc(Identity)::: . 
+Yukarıdaki kod, şablonu temel alır `Login` Identity . 
 
 Kilitleme seçenekleri şu şekilde ayarlanır `StartUp.ConfigureServices` :
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_lock)]
 
-Önceki kod, [lockoutoptions](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions) [ :::no-loc(Identity)::: seçeneklerini](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) varsayılan değerlerle ayarlar.
+Önceki kod, [lockoutoptions](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions) [ Identity seçeneklerini](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) varsayılan değerlerle ayarlar.
 
 Başarılı bir kimlik doğrulaması başarısız erişim denemesi sayısını sıfırlar ve saati sıfırlar.
 
-[ :::no-loc(Identity)::: Options. kilitleme](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.lockout) , tabloda gösterilen özelliklerle [lockoutoptions](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions) değerini belirtir.
+[ Identity Options. kilitleme](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.lockout) , tabloda gösterilen özelliklerle [lockoutoptions](/dotnet/api/microsoft.aspnetcore.identity.lockoutoptions) değerini belirtir.
 
 | Özellik | Açıklama | Varsayılan |
 | -------- | ----------- | :-----: |
@@ -66,18 +66,18 @@ Başarılı bir kimlik doğrulaması başarısız erişim denemesi sayısını s
 
 ### <a name="password"></a>Parola
 
-Varsayılan olarak, :::no-loc(Identity)::: Parolaların büyük harf, küçük harf karakter, rakam ve alfasayısal olmayan bir karakter içermesini gerektirir. Parolalar en az altı karakter uzunluğunda olmalıdır.
+Varsayılan olarak, Identity Parolaların büyük harf, küçük harf karakter, rakam ve alfasayısal olmayan bir karakter içermesini gerektirir. Parolalar en az altı karakter uzunluğunda olmalıdır.
 
 Parolalar şu şekilde yapılandırılır:
 
-* <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.PasswordOptions>içinde `Startup.ConfigureServices` .
-* Özellik [ `[StringLength]` öznitelikleri](xref:System.ComponentModel.DataAnnotations.StringLengthAttribute) , `Password` :::no-loc(Identity)::: [uygulamaya iskli](xref:security/authentication/scaffold-identity)olarak ayarlandığında. `InputModel``Password`aşağıdaki dosyalarda özellikler bulunur:
-  * `Areas/:::no-loc(Identity):::/Pages/Account/Register.cshtml.cs`
-  * `Areas/:::no-loc(Identity):::/Pages/Account/ResetPassword.cshtml.cs`
+* <xref:Microsoft.AspNetCore.Identity.PasswordOptions>içinde `Startup.ConfigureServices` .
+* Özellik [ `[StringLength]` öznitelikleri](xref:System.ComponentModel.DataAnnotations.StringLengthAttribute) , `Password` Identity [uygulamaya iskli](xref:security/authentication/scaffold-identity)olarak ayarlandığında. `InputModel``Password`aşağıdaki dosyalarda özellikler bulunur:
+  * `Areas/Identity/Pages/Account/Register.cshtml.cs`
+  * `Areas/Identity/Pages/Account/ResetPassword.cshtml.cs`
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_pw)]
 
-[ :::no-loc(Identity)::: Options. Password](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.password) , tabloda gösterilen özelliklerle birlikte [passwordooptions](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions) 'ı belirtir.
+[ Identity Options. Password](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.password) , tabloda gösterilen özelliklerle birlikte [passwordooptions](/dotnet/api/microsoft.aspnetcore.identity.passwordoptions) 'ı belirtir.
 
 | Özellik | Açıklama | Varsayılan |
 | -------- | ----------- | :-----: |
@@ -94,7 +94,7 @@ Aşağıdaki kod ayarları ayarlar `SignIn` (varsayılan değerlere göre):
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_si)]
 
-[ :::no-loc(Identity)::: Options. SignIn](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.signin) , tabloda gösterilen özelliklerle [SignInOptions](/dotnet/api/microsoft.aspnetcore.identity.signinoptions) belirtir.
+[ Identity Options. SignIn](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.signin) , tabloda gösterilen özelliklerle [SignInOptions](/dotnet/api/microsoft.aspnetcore.identity.signinoptions) belirtir.
 
 | Özellik | Açıklama | Varsayılan |
 | -------- | ----------- | :-----: |
@@ -103,7 +103,7 @@ Aşağıdaki kod ayarları ayarlar `SignIn` (varsayılan değerlere göre):
 
 ### <a name="tokens"></a>Belirteçler
 
-[ :::no-loc(Identity)::: Options. Tokens](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.tokens) , tabloda gösterilen özelliklerle [tokenoptions](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions) belirler.
+[ Identity Options. Tokens](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.tokens) , tabloda gösterilen özelliklerle [tokenoptions](/dotnet/api/microsoft.aspnetcore.identity.tokenoptions) belirler.
 
 | Özellik | Açıklama |
 | -------- | ----------- |
@@ -118,7 +118,7 @@ Aşağıdaki kod ayarları ayarlar `SignIn` (varsayılan değerlere göre):
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_user)]
 
-[ :::no-loc(Identity)::: Seçenekler. User](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.user) , tabloda gösterilen özelliklerle [UserOptions](/dotnet/api/microsoft.aspnetcore.identity.useroptions) 'ı belirtir.
+[ Identity Seçenekler. User](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.user) , tabloda gösterilen özelliklerle [UserOptions](/dotnet/api/microsoft.aspnetcore.identity.useroptions) 'ı belirtir.
 
 | Özellik | Açıklama | Varsayılan |
 | -------- | ----------- | :-----: |
@@ -127,7 +127,7 @@ Aşağıdaki kod ayarları ayarlar `SignIn` (varsayılan değerlere göre):
 
 ### <a name="cookie-settings"></a>Tanımlama bilgisi ayarları
 
-Uygulamanın tanımlama bilgisini ' de yapılandırın `Startup.ConfigureServices` . Veya çağrıldıktan **sonra** [configureapplicationcookie](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_:::no-loc(Identity):::ServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__) çağrılmalıdır `Add:::no-loc(Identity):::` `AddDefault:::no-loc(Identity):::` .
+Uygulamanın tanımlama bilgisini ' de yapılandırın `Startup.ConfigureServices` . Veya çağrıldıktan **sonra** [configureapplicationcookie](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__) çağrılmalıdır `AddIdentity` `AddDefaultIdentity` .
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_cookie)]
 
@@ -135,17 +135,17 @@ Daha fazla bilgi için bkz. [tanımlama, ıeauthenticationoptions](/dotnet/api/m
 
 ## <a name="password-hasher-options"></a>Parola hasher seçenekleri
 
-<xref:Microsoft.AspNetCore.:::no-loc(Identity):::.PasswordHasherOptions>Parola karması seçeneklerini alır ve ayarlar.
+<xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions>Parola karması seçeneklerini alır ve ayarlar.
 
 | Seçenek | Açıklama |
 | ------ | ----------- |
-| <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.PasswordHasherOptions.CompatibilityMode> | Yeni parolalar Karma oluşturulurken kullanılan uyumluluk modu. Varsayılan olarak olur <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.PasswordHasherCompatibilityMode.:::no-loc(Identity):::V3> . Karma parolanın *Biçim işaretleyicisi*olarak adlandırılan ilk baytı, parolayı karma olarak kullanılan karma algoritmanın sürümünü belirtir. Bir karmaya karşı bir parola doğrulanırken, <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.PasswordHasher`1.VerifyHashedPassword*> Yöntem ilk bayta göre doğru algoritmayı seçer. Bir istemci, parolayı karma hale almak için hangi algoritma sürümünün kullanıldığına bakılmaksızın kimlik doğrulaması yapabilir. Uyumluluk modunun ayarlanması *yeni parolaların*karmasını etkiler. |
-| <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.PasswordHasherOptions.IterationCount> | PBKDF2 kullanarak parolaları karmalama sırasında kullanılan yineleme sayısı. Bu değer yalnızca, <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.PasswordHasherOptions.CompatibilityMode> olarak ayarlandığında kullanılır <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.PasswordHasherCompatibilityMode.:::no-loc(Identity):::V3> . Değer pozitif bir tamsayı olmalı ve varsayılan olarak olarak ayarlanmalıdır `10000` . |
+| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> | Yeni parolalar Karma oluşturulurken kullanılan uyumluluk modu. Varsayılan olarak olur <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3> . Karma parolanın *Biçim işaretleyicisi*olarak adlandırılan ilk baytı, parolayı karma olarak kullanılan karma algoritmanın sürümünü belirtir. Bir karmaya karşı bir parola doğrulanırken, <xref:Microsoft.AspNetCore.Identity.PasswordHasher`1.VerifyHashedPassword*> Yöntem ilk bayta göre doğru algoritmayı seçer. Bir istemci, parolayı karma hale almak için hangi algoritma sürümünün kullanıldığına bakılmaksızın kimlik doğrulaması yapabilir. Uyumluluk modunun ayarlanması *yeni parolaların*karmasını etkiler. |
+| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> | PBKDF2 kullanarak parolaları karmalama sırasında kullanılan yineleme sayısı. Bu değer yalnızca, <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> olarak ayarlandığında kullanılır <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3> . Değer pozitif bir tamsayı olmalı ve varsayılan olarak olarak ayarlanmalıdır `10000` . |
 
-Aşağıdaki örnekte, <xref:Microsoft.AspNetCore.:::no-loc(Identity):::.PasswordHasherOptions.IterationCount> içinde olarak ayarlanır `12000` `Startup.ConfigureServices` :
+Aşağıdaki örnekte, <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> içinde olarak ayarlanır `12000` `Startup.ConfigureServices` :
 
 ```csharp
-// using Microsoft.AspNetCore.:::no-loc(Identity):::;
+// using Microsoft.AspNetCore.Identity;
 
 services.Configure<PasswordHasherOptions>(option =>
 {

@@ -1,18 +1,18 @@
 ---
 title: Yetkilendirme ile korunan kullanıcı verileriyle ASP.NET Core uygulama oluşturma
 author: rick-anderson
-description: 'Yetkilendirmeyle korunan kullanıcı verileriyle ASP.NET Core bir Web uygulaması oluşturmayı öğrenin. HTTPS, kimlik doğrulaması, güvenlik, ASP.NET Core içerir :::no-loc(Identity)::: .'
+description: Yetkilendirmeyle korunan kullanıcı verileriyle ASP.NET Core bir Web uygulaması oluşturmayı öğrenin. HTTPS, kimlik doğrulaması, güvenlik, ASP.NET Core içerir Identity .
 ms.author: riande
 ms.date: 7/18/2020
 ms.custom: mvc, seodec18
 no-loc:
-- ':::no-loc(Blazor):::'
-- ':::no-loc(Blazor Server):::'
-- ':::no-loc(Blazor WebAssembly):::'
-- ':::no-loc(Identity):::'
-- ":::no-loc(Let's Encrypt):::"
-- ':::no-loc(Razor):::'
-- ':::no-loc(SignalR):::'
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authorization/secure-data
 ms.openlocfilehash: 7d4c10fa0b1c569179fc3e0a518917ec0185c51f
 ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
@@ -97,11 +97,11 @@ Aşağıdaki bölümlerde, güvenli Kullanıcı verileri uygulaması oluşturmak
 
 ### <a name="tie-the-contact-data-to-the-user"></a>Kişi verilerini kullanıcıya bağlama
 
-[:::no-loc(Identity):::](xref:security/authentication/identity)Kullanıcıların verilerini düzenleyebilmeleri, ancak diğer kullanıcıların verilerini düzenleyebilmeleri için ASP.NET Kullanıcı kimliğini kullanın. `OwnerID`Model ekleyin `ContactStatus` `Contact` :
+[Identity](xref:security/authentication/identity)Kullanıcıların verilerini düzenleyebilmeleri, ancak diğer kullanıcıların verilerini düzenleyebilmeleri için ASP.NET Kullanıcı kimliğini kullanın. `OwnerID`Model ekleyin `ContactStatus` `Contact` :
 
 [!code-csharp[](secure-data/samples/final3/Models/Contact.cs?name=snippet1&highlight=5-6,16-999)]
 
-`OwnerID`kullanıcının `AspNetUser` veritabanındaki TABLODAKI kimliği [:::no-loc(Identity):::](xref:security/authentication/identity) . Bu `Status` alan, bir kişinin genel kullanıcılar tarafından görüntülenebilir olup olmadığını belirler.
+`OwnerID`kullanıcının `AspNetUser` veritabanındaki TABLODAKI kimliği [Identity](xref:security/authentication/identity) . Bu `Status` alan, bir kişinin genel kullanıcılar tarafından görüntülenebilir olup olmadığını belirler.
 
 Yeni bir geçiş oluşturun ve veritabanını güncelleştirin:
 
@@ -110,9 +110,9 @@ dotnet ef migrations add userID_Status
 dotnet ef database update
 ```
 
-### <a name="add-role-services-to-no-locidentity"></a>Rol hizmetlerini Ekle:::no-loc(Identity):::
+### <a name="add-role-services-to-no-locidentity"></a>Rol hizmetlerini EkleIdentity
 
-Rol hizmetleri eklemek için [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_:::no-loc(Identity):::_:::no-loc(Identity):::Builder_AddRoles__1) ekleyin:
+Rol hizmetleri eklemek için [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) ekleyin:
 
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet2&highlight=9)]
 
@@ -124,19 +124,19 @@ Kullanıcıların kimliklerinin doğrulanmasını gerektirmek için geri dönü�
 
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet&highlight=13-99)]
 
-Önceki vurgulanmış kod, [geri dönüş kimlik doğrulama ilkesini](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy)ayarlar. Geri dönüş kimlik doğrulama ilkesi ***all*** , :::no-loc(Razor)::: bir kimlik doğrulama özniteliğiyle sayfalar, denetleyiciler veya eylem yöntemleri dışında tüm kullanıcıların kimliklerinin doğrulanmasını gerektirir. Örneğin, :::no-loc(Razor)::: Sayfalar, denetleyiciler veya eylem yöntemleri, `[AllowAnonymous]` `[Authorize(PolicyName="MyPolicy")]` geri dönüş kimlik doğrulama ilkesi yerine uygulanan kimlik doğrulama özniteliğini kullanır.
+Önceki vurgulanmış kod, [geri dönüş kimlik doğrulama ilkesini](xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.FallbackPolicy)ayarlar. Geri dönüş kimlik doğrulama ilkesi ***all*** , Razor bir kimlik doğrulama özniteliğiyle sayfalar, denetleyiciler veya eylem yöntemleri dışında tüm kullanıcıların kimliklerinin doğrulanmasını gerektirir. Örneğin, Razor Sayfalar, denetleyiciler veya eylem yöntemleri, `[AllowAnonymous]` `[Authorize(PolicyName="MyPolicy")]` geri dönüş kimlik doğrulama ilkesi yerine uygulanan kimlik doğrulama özniteliğini kullanır.
 
 Geri dönüş kimlik doğrulama ilkesi:
 
 * Açıkça bir kimlik doğrulama ilkesi belirtmeyen tüm isteklere uygulanır. Endpoint Routing tarafından sunulan istekler için, bu, yetkilendirme özniteliği belirtmeyen tüm uç noktaları içerir. [Statik dosyalar](xref:fundamentals/static-files)gibi yetkilendirme ara yazılımı sonrasında diğer ara yazılım tarafından hizmet verilen istekler için, bu ilkeyi tüm isteklere uygular.
 
-Geri dönüş kimlik doğrulama ilkesini kullanıcıların kimliğinin doğrulanmasını gerektirecek şekilde ayarlamak, yeni eklenen :::no-loc(Razor)::: sayfaları ve denetleyicileri korur. Varsayılan olarak kimlik doğrulamanın gerekli olması, yeni denetleyicilere ve :::no-loc(Razor)::: sayfalarına bağlı olarak, özniteliğini dahil etmek için daha güvenlidir `[Authorize]` .
+Geri dönüş kimlik doğrulama ilkesini kullanıcıların kimliğinin doğrulanmasını gerektirecek şekilde ayarlamak, yeni eklenen Razor sayfaları ve denetleyicileri korur. Varsayılan olarak kimlik doğrulamanın gerekli olması, yeni denetleyicilere ve Razor sayfalarına bağlı olarak, özniteliğini dahil etmek için daha güvenlidir `[Authorize]` .
 
 <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions>Sınıfı da içerir <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.DefaultPolicy?displayProperty=nameWithType> . , `DefaultPolicy` `[Authorize]` İlke belirtilmediğinde özniteliğiyle kullanılan ilkedir. `[Authorize]`, aksine adlandırılmış bir ilke içermez `[Authorize(PolicyName="MyPolicy")]` .
 
 İlkeler hakkında daha fazla bilgi için bkz <xref:security/authorization/policies> ..
 
-MVC denetleyicilerinin ve :::no-loc(Razor)::: sayfaların tüm kullanıcıların kimliğinin doğrulanmasını gerektirmek için alternatif bir yol yetkilendirme filtresi ekliyor:
+MVC denetleyicilerinin ve Razor sayfaların tüm kullanıcıların kimliğinin doğrulanmasını gerektirmek için alternatif bir yol yetkilendirme filtresi ekliyor:
 
 [!code-csharp[](secure-data/samples/final3/Startup2.cs?name=snippet&highlight=14-99)]
 
@@ -199,7 +199,7 @@ Uygulama, iletişim sahiplerinin kendi verilerini düzenlemesine/silmesine/oluş
 
 ## <a name="register-the-authorization-handlers"></a>Yetkilendirme işleyicilerini kaydetme
 
-Entity Framework Core kullanan hizmetlerin, [Addkapsamlıdır](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions)kullanılarak [bağımlılık ekleme](xref:fundamentals/dependency-injection) için kayıtlı olması gerekir. , `ContactIsOwnerAuthorizationHandler` [:::no-loc(Identity):::](xref:security/authentication/identity) Entity Framework Core oluşturulan ASP.NET Core kullanır. İşleyicileri hizmet koleksiyonuyla kaydedin, bu sayede `ContactsController` [bağımlılık ekleme](xref:fundamentals/dependency-injection)üzerinden kullanılabilir. Aşağıdaki kodu sonuna ekleyin `ConfigureServices` :
+Entity Framework Core kullanan hizmetlerin, [Addkapsamlıdır](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions)kullanılarak [bağımlılık ekleme](xref:fundamentals/dependency-injection) için kayıtlı olması gerekir. , `ContactIsOwnerAuthorizationHandler` [Identity](xref:security/authentication/identity) Entity Framework Core oluşturulan ASP.NET Core kullanır. İşleyicileri hizmet koleksiyonuyla kaydedin, bu sayede `ContactsController` [bağımlılık ekleme](xref:fundamentals/dependency-injection)üzerinden kullanılabilir. Aşağıdaki kodu sonuna ekleyin `ConfigureServices` :
 
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet_defaultPolicy&highlight=23-99)]
 
@@ -207,7 +207,7 @@ Entity Framework Core kullanan hizmetlerin, [Addkapsamlıdır](/dotnet/api/micro
 
 ## <a name="support-authorization"></a>Destek yetkilendirme
 
-Bu bölümde, :::no-loc(Razor)::: sayfaları güncelleştirir ve bir işlem gereksinimleri sınıfı eklersiniz.
+Bu bölümde, Razor sayfaları güncelleştirir ve bir işlem gereksinimleri sınıfı eklersiniz.
 
 ### <a name="review-the-contact-operations-requirements-class"></a>İlgili kişi işlemleri gereksinimleri sınıfını gözden geçirin
 
@@ -215,16 +215,16 @@ Sınıfını gözden geçirin `ContactOperations` . Bu sınıf, uygulamanın des
 
 [!code-csharp[](secure-data/samples/final3/Authorization/ContactOperations.cs)]
 
-### <a name="create-a-base-class-for-the-contacts-no-locrazor-pages"></a>Kişiler sayfaları için temel sınıf oluşturma :::no-loc(Razor):::
+### <a name="create-a-base-class-for-the-contacts-no-locrazor-pages"></a>Kişiler sayfaları için temel sınıf oluşturma Razor
 
-Kişiler sayfalarında kullanılan hizmetleri içeren bir temel sınıf oluşturun :::no-loc(Razor)::: . Temel sınıf, başlatma kodunu bir konuma koyar:
+Kişiler sayfalarında kullanılan hizmetleri içeren bir temel sınıf oluşturun Razor . Temel sınıf, başlatma kodunu bir konuma koyar:
 
 [!code-csharp[](secure-data/samples/final3/Pages/Contacts/DI_BasePageModel.cs)]
 
 Yukarıdaki kod:
 
 * `IAuthorizationService`Yetkilendirme işleyicilerine erişim için hizmeti ekler.
-* Hizmeti ekler :::no-loc(Identity)::: `UserManager` .
+* Hizmeti ekler Identity `UserManager` .
 * Öğesini ekleyin `ApplicationDbContext` .
 
 ### <a name="update-the-createmodel"></a>CreateModel 'i Güncelleştir
@@ -273,7 +273,7 @@ Yukarıdaki biçimlendirme birkaç deyim ekliyor `using` .
 [!code-cshtml[](secure-data/samples/final3/Pages/Contacts/Index.cshtml?highlight=34-36,62-999)]
 
 > [!WARNING]
-> Verileri değiştirme izni olmayan kullanıcıların bağlantılarının gizlenmesi, uygulamanın güvenliğini sağlar. Bağlantıların gizlenmesi, yalnızca geçerli bağlantıları görüntüleyerek uygulamayı daha kolay hale getirir. Kullanıcılar, sahip olmadıkları veriler üzerinde düzenleme ve silme işlemlerini çağırmak için oluşturulan URL 'Leri hacme edebilir. :::no-loc(Razor):::Sayfanın veya denetleyicinin, verilerin güvenliğini sağlamak için erişim denetimlerini zorlaması gerekir.
+> Verileri değiştirme izni olmayan kullanıcıların bağlantılarının gizlenmesi, uygulamanın güvenliğini sağlar. Bağlantıların gizlenmesi, yalnızca geçerli bağlantıları görüntüleyerek uygulamayı daha kolay hale getirir. Kullanıcılar, sahip olmadıkları veriler üzerinde düzenleme ve silme işlemlerini çağırmak için oluşturulan URL 'Leri hacme edebilir. RazorSayfanın veya denetleyicinin, verilerin güvenliğini sağlamak için erişim denetimlerini zorlaması gerekir.
 
 ### <a name="update-details"></a>Güncelleştirme ayrıntıları
 
@@ -338,7 +338,7 @@ Yöneticinin tarayıcısında bir kişi oluşturun. Yönetici iletişim kutusund
 
 ## <a name="create-the-starter-app"></a>Başlangıç uygulamasını oluşturma
 
-* :::no-loc(Razor):::"ContactManager" adlı bir sayfalar uygulaması oluşturma
+* Razor"ContactManager" adlı bir sayfalar uygulaması oluşturma
   * **Ayrı kullanıcı hesaplarıyla**uygulamayı oluşturun.
   * Ad alanı örnekte kullanılan ad alanıyla eşleşecek şekilde "ContactManager" olarak adlandırın.
   * `-uld`SQLite yerine LocalDB belirtir
@@ -451,11 +451,11 @@ Aşağıdaki bölümlerde, güvenli Kullanıcı verileri uygulaması oluşturmak
 
 ### <a name="tie-the-contact-data-to-the-user"></a>Kişi verilerini kullanıcıya bağlama
 
-[:::no-loc(Identity):::](xref:security/authentication/identity)Kullanıcıların verilerini düzenleyebilmeleri, ancak diğer kullanıcıların verilerini düzenleyebilmeleri için ASP.NET Kullanıcı kimliğini kullanın. `OwnerID`Model ekleyin `ContactStatus` `Contact` :
+[Identity](xref:security/authentication/identity)Kullanıcıların verilerini düzenleyebilmeleri, ancak diğer kullanıcıların verilerini düzenleyebilmeleri için ASP.NET Kullanıcı kimliğini kullanın. `OwnerID`Model ekleyin `ContactStatus` `Contact` :
 
 [!code-csharp[](secure-data/samples/final2.1/Models/Contact.cs?name=snippet1&highlight=5-6,16-999)]
 
-`OwnerID`kullanıcının `AspNetUser` veritabanındaki TABLODAKI kimliği [:::no-loc(Identity):::](xref:security/authentication/identity) . Bu `Status` alan, bir kişinin genel kullanıcılar tarafından görüntülenebilir olup olmadığını belirler.
+`OwnerID`kullanıcının `AspNetUser` veritabanındaki TABLODAKI kimliği [Identity](xref:security/authentication/identity) . Bu `Status` alan, bir kişinin genel kullanıcılar tarafından görüntülenebilir olup olmadığını belirler.
 
 Yeni bir geçiş oluşturun ve veritabanını güncelleştirin:
 
@@ -464,9 +464,9 @@ dotnet ef migrations add userID_Status
 dotnet ef database update
 ```
 
-### <a name="add-role-services-to-no-locidentity"></a>Rol hizmetlerini Ekle:::no-loc(Identity):::
+### <a name="add-role-services-to-no-locidentity"></a>Rol hizmetlerini EkleIdentity
 
-Rol hizmetleri eklemek için [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_:::no-loc(Identity):::_:::no-loc(Identity):::Builder_AddRoles__1) ekleyin:
+Rol hizmetleri eklemek için [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) ekleyin:
 
 [!code-csharp[](secure-data/samples/final2.1/Startup.cs?name=snippet2&highlight=11)]
 
@@ -476,7 +476,7 @@ Kullanıcıların kimliklerinin doğrulanmasını gerektirmek için varsayılan 
 
 [!code-csharp[](secure-data/samples/final2.1/Startup.cs?name=snippet&highlight=17-99)] 
 
- Bir :::no-loc(Razor)::: sayfada, denetleyicide veya eylem yöntemi düzeyinde kimlik doğrulamasından vazgeçebilirsiniz `[AllowAnonymous]` . Varsayılan kimlik doğrulama ilkesini kullanıcıların kimliğinin doğrulanmasını gerektirecek şekilde ayarlamak, yeni eklenen :::no-loc(Razor)::: sayfaları ve denetleyicileri korur. Varsayılan olarak kimlik doğrulamanın gerekli olması, yeni denetleyicilere ve :::no-loc(Razor)::: sayfalarına bağlı olarak, özniteliğini dahil etmek için daha güvenlidir `[Authorize]` .
+ Bir Razor sayfada, denetleyicide veya eylem yöntemi düzeyinde kimlik doğrulamasından vazgeçebilirsiniz `[AllowAnonymous]` . Varsayılan kimlik doğrulama ilkesini kullanıcıların kimliğinin doğrulanmasını gerektirecek şekilde ayarlamak, yeni eklenen Razor sayfaları ve denetleyicileri korur. Varsayılan olarak kimlik doğrulamanın gerekli olması, yeni denetleyicilere ve Razor sayfalarına bağlı olarak, özniteliğini dahil etmek için daha güvenlidir `[Authorize]` .
 
 Anonim kullanıcıların, kayıt yaptırmadan önce site hakkında bilgi alması için dizine, hakkında ve Iletişim sayfalarına [AllowAnonymous](/dotnet/api/microsoft.aspnetcore.authorization.allowanonymousattribute) ekleyin.
 
@@ -535,7 +535,7 @@ Uygulama, iletişim sahiplerinin kendi verilerini düzenlemesine/silmesine/oluş
 
 ## <a name="register-the-authorization-handlers"></a>Yetkilendirme işleyicilerini kaydetme
 
-Entity Framework Core kullanan hizmetlerin, [Addkapsamlıdır](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions)kullanılarak [bağımlılık ekleme](xref:fundamentals/dependency-injection) için kayıtlı olması gerekir. , `ContactIsOwnerAuthorizationHandler` [:::no-loc(Identity):::](xref:security/authentication/identity) Entity Framework Core oluşturulan ASP.NET Core kullanır. İşleyicileri hizmet koleksiyonuyla kaydedin, bu sayede `ContactsController` [bağımlılık ekleme](xref:fundamentals/dependency-injection)üzerinden kullanılabilir. Aşağıdaki kodu sonuna ekleyin `ConfigureServices` :
+Entity Framework Core kullanan hizmetlerin, [Addkapsamlıdır](/dotnet/api/microsoft.extensions.dependencyinjection.servicecollectionserviceextensions)kullanılarak [bağımlılık ekleme](xref:fundamentals/dependency-injection) için kayıtlı olması gerekir. , `ContactIsOwnerAuthorizationHandler` [Identity](xref:security/authentication/identity) Entity Framework Core oluşturulan ASP.NET Core kullanır. İşleyicileri hizmet koleksiyonuyla kaydedin, bu sayede `ContactsController` [bağımlılık ekleme](xref:fundamentals/dependency-injection)üzerinden kullanılabilir. Aşağıdaki kodu sonuna ekleyin `ConfigureServices` :
 
 [!code-csharp[](secure-data/samples/final2.1/Startup.cs?name=snippet_defaultPolicy&highlight=27-99)]
 
@@ -543,7 +543,7 @@ Entity Framework Core kullanan hizmetlerin, [Addkapsamlıdır](/dotnet/api/micro
 
 ## <a name="support-authorization"></a>Destek yetkilendirme
 
-Bu bölümde, :::no-loc(Razor)::: sayfaları güncelleştirir ve bir işlem gereksinimleri sınıfı eklersiniz.
+Bu bölümde, Razor sayfaları güncelleştirir ve bir işlem gereksinimleri sınıfı eklersiniz.
 
 ### <a name="review-the-contact-operations-requirements-class"></a>İlgili kişi işlemleri gereksinimleri sınıfını gözden geçirin
 
@@ -551,16 +551,16 @@ Sınıfını gözden geçirin `ContactOperations` . Bu sınıf, uygulamanın des
 
 [!code-csharp[](secure-data/samples/final2.1/Authorization/ContactOperations.cs)]
 
-### <a name="create-a-base-class-for-the-contacts-no-locrazor-pages"></a>Kişiler sayfaları için temel sınıf oluşturma :::no-loc(Razor):::
+### <a name="create-a-base-class-for-the-contacts-no-locrazor-pages"></a>Kişiler sayfaları için temel sınıf oluşturma Razor
 
-Kişiler sayfalarında kullanılan hizmetleri içeren bir temel sınıf oluşturun :::no-loc(Razor)::: . Temel sınıf, başlatma kodunu bir konuma koyar:
+Kişiler sayfalarında kullanılan hizmetleri içeren bir temel sınıf oluşturun Razor . Temel sınıf, başlatma kodunu bir konuma koyar:
 
 [!code-csharp[](secure-data/samples/final2.1/Pages/Contacts/DI_BasePageModel.cs)]
 
 Yukarıdaki kod:
 
 * `IAuthorizationService`Yetkilendirme işleyicilerine erişim için hizmeti ekler.
-* Hizmeti ekler :::no-loc(Identity)::: `UserManager` .
+* Hizmeti ekler Identity `UserManager` .
 * Öğesini ekleyin `ApplicationDbContext` .
 
 ### <a name="update-the-createmodel"></a>CreateModel 'i Güncelleştir
@@ -609,7 +609,7 @@ Yukarıdaki biçimlendirme birkaç deyim ekliyor `using` .
 [!code-cshtml[](secure-data/samples/final2.1/Pages/Contacts/Index.cshtml?highlight=34-36,62-999)]
 
 > [!WARNING]
-> Verileri değiştirme izni olmayan kullanıcıların bağlantılarının gizlenmesi, uygulamanın güvenliğini sağlar. Bağlantıların gizlenmesi, yalnızca geçerli bağlantıları görüntüleyerek uygulamayı daha kolay hale getirir. Kullanıcılar, sahip olmadıkları veriler üzerinde düzenleme ve silme işlemlerini çağırmak için oluşturulan URL 'Leri hacme edebilir. :::no-loc(Razor):::Sayfanın veya denetleyicinin, verilerin güvenliğini sağlamak için erişim denetimlerini zorlaması gerekir.
+> Verileri değiştirme izni olmayan kullanıcıların bağlantılarının gizlenmesi, uygulamanın güvenliğini sağlar. Bağlantıların gizlenmesi, yalnızca geçerli bağlantıları görüntüleyerek uygulamayı daha kolay hale getirir. Kullanıcılar, sahip olmadıkları veriler üzerinde düzenleme ve silme işlemlerini çağırmak için oluşturulan URL 'Leri hacme edebilir. RazorSayfanın veya denetleyicinin, verilerin güvenliğini sağlamak için erişim denetimlerini zorlaması gerekir.
 
 ### <a name="update-details"></a>Güncelleştirme ayrıntıları
 
@@ -665,7 +665,7 @@ Yöneticinin tarayıcısında bir kişi oluşturun. Yönetici iletişim kutusund
 
 ## <a name="create-the-starter-app"></a>Başlangıç uygulamasını oluşturma
 
-* :::no-loc(Razor):::"ContactManager" adlı bir sayfalar uygulaması oluşturma
+* Razor"ContactManager" adlı bir sayfalar uygulaması oluşturma
   * **Ayrı kullanıcı hesaplarıyla**uygulamayı oluşturun.
   * Ad alanı örnekte kullanılan ad alanıyla eşleşecek şekilde "ContactManager" olarak adlandırın.
   * `-uld`SQLite yerine LocalDB belirtir
