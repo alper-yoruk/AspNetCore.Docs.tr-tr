@@ -1,43 +1,60 @@
 ---
-title: ASP.NET Core Windows kimlik doğrulamasını yapılandırma
+title: ASP.NET Core 'da Windows kimlik doğrulamasını yapılandırma
 author: scottaddie
-description: Windows kimlik doğrulaması için IIS ve HTTP.sys içinde ASP.NET Core yapılandırmayı öğrenin.
+description: IIS ve HTTP.sys için ASP.NET Core Windows kimlik doğrulamasını nasıl yapılandıracağınızı öğrenin.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc, seodec18
-ms.date: 07/01/2019
+ms.date: 02/26/2020
+no-loc:
+- Blazor
+- Blazor Server
+- Blazor WebAssembly
+- Identity
+- Let's Encrypt
+- Razor
+- SignalR
 uid: security/authentication/windowsauth
-ms.openlocfilehash: 30f1f554a29412ed6b84115d457d2da1aba91c17
-ms.sourcegitcommit: eb3e51d58dd713eefc242148f45bd9486be3a78a
+ms.openlocfilehash: 8f6dc8620df04bcebe996119869ca2e498cffccc
+ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/02/2019
-ms.locfileid: "67500510"
+ms.lasthandoff: 06/26/2020
+ms.locfileid: "87330696"
 ---
-# <a name="configure-windows-authentication-in-aspnet-core"></a>ASP.NET Core Windows kimlik doğrulamasını yapılandırma
+# <a name="configure-windows-authentication-in-aspnet-core"></a>ASP.NET Core 'da Windows kimlik doğrulamasını yapılandırma
 
-Tarafından [Scott Addie](https://twitter.com/Scott_Addie) ve [Luke Latham](https://github.com/guardrex)
+[Scott Ade](https://twitter.com/Scott_Addie) tarafından
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Windows kimlik doğrulaması (anlaşma, Kerberos veya NTLM kimlik olarak da bilinir) ile barındırılan ASP.NET Core uygulamaları için yapılandırılabilir [IIS](xref:host-and-deploy/iis/index), [Kestrel](xref:fundamentals/servers/kestrel), veya [HTTP.sys](xref:fundamentals/servers/httpsys) .
+Windows kimlik doğrulaması (Negotiate, Kerberos veya NTLM kimlik doğrulaması olarak da bilinir), [IIS](xref:host-and-deploy/iis/index), [Kestrel](xref:fundamentals/servers/kestrel)veya [HTTP.sys](xref:fundamentals/servers/httpsys)ile barındırılan ASP.NET Core uygulamalar için yapılandırılabilir.
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-Windows kimlik doğrulaması (anlaşma, Kerberos veya NTLM kimlik olarak da bilinir) ile barındırılan ASP.NET Core uygulamaları için yapılandırılabilir [IIS](xref:host-and-deploy/iis/index) veya [HTTP.sys](xref:fundamentals/servers/httpsys).
+Windows kimlik doğrulaması (Negotiate, Kerberos veya NTLM kimlik doğrulaması olarak da bilinir), [IIS](xref:host-and-deploy/iis/index) veya [HTTP.sys](xref:fundamentals/servers/httpsys)ile barındırılan ASP.NET Core uygulamalar için yapılandırılabilir.
 
 ::: moniker-end
 
-Windows kimlik doğrulaması, ASP.NET Core uygulamaları, kullanıcıların kimliklerini doğrulamak için işletim sistemi kullanır. Sunucunuz, kullanıcıları tanımlamak için Active Directory etki alanı kimlikleri veya Windows hesaplarını kullanarak bir şirket ağında çalıştığında, Windows kimlik doğrulaması kullanabilirsiniz. Windows kimlik doğrulaması nerede kullanıcılar, istemci uygulamaları ve web sunucuları aynı Windows etki alanına ait intranet ortamları için idealdir.
+Windows kimlik doğrulaması, ASP.NET Core uygulama kullanıcılarının kimliğini doğrulamak için işletim sistemini kullanır. Sunucunuz, kullanıcıları tanımlamak için Active Directory etki alanı kimliklerini veya Windows hesaplarını kullanarak bir kurumsal ağda çalıştığında Windows kimlik doğrulamasını kullanabilirsiniz. Windows kimlik doğrulaması, kullanıcıların, istemci uygulamalarının ve Web sunucularının aynı Windows etki alanına ait olduğu intranet ortamları için idealdir.
 
 > [!NOTE]
-> Windows kimlik doğrulaması, HTTP/2 ile desteklenmiyor. Kimlik doğrulama sınaması, HTTP/2 yanıtları gönderilebilir, ancak önce kimlik doğrulaması, istemci HTTP/1.1 düşürme gerekir.
+> Windows kimlik doğrulaması, HTTP/2 ile desteklenmez. Kimlik doğrulaması sorunları HTTP/2 Yanıtlarına gönderilebilir, ancak kimlik doğrulamadan önce istemci HTTP/1.1 sürümüne indirgenmelidir.
+
+## <a name="proxy-and-load-balancer-scenarios"></a>Proxy ve yük dengeleyici senaryoları
+
+Windows kimlik doğrulaması, birincil olarak bir intranette kullanılan ve bir ara sunucu veya yük dengeleyicinin istemciler ve sunucular arasındaki trafiği genellikle işlemeyen bir durum bilgisi olan senaryodur. Bir ara sunucu veya yük dengeleyici kullanılırsa, Windows kimlik doğrulaması yalnızca proxy veya yük dengeleyici için geçerlidir:
+
+* Kimlik doğrulamasını işler.
+* Kullanıcı kimlik doğrulama bilgilerini uygulamaya geçirir (örneğin, bir istek üstbilgisinde), kimlik doğrulama bilgileri üzerinde davranır.
+
+Proxy 'lerin ve yük dengeleyicilerin kullanıldığı ortamlarda Windows kimlik doğrulamasına alternatif olarak, OpenID Connect (OıDC) ile Federasyon Hizmetleri (ADFS) Active Directory.
 
 ## <a name="iisiis-express"></a>IIS/IIS Express
 
-Kimlik doğrulama hizmetleri çağırarak ekleme <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> (<xref:Microsoft.AspNetCore.Server.IISIntegration?displayProperty=fullName> ad alanı) içinde `Startup.ConfigureServices`:
+<xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> <xref:Microsoft.AspNetCore.Server.IISIntegration?displayProperty=fullName> İçinde (ad alanı) çağırarak kimlik doğrulama hizmetleri ekleyin `Startup.ConfigureServices` :
 
 ```csharp
 services.AddAuthentication(IISDefaults.AuthenticationScheme);
@@ -45,169 +62,170 @@ services.AddAuthentication(IISDefaults.AuthenticationScheme);
 
 ### <a name="launch-settings-debugger"></a>Başlatma ayarları (hata ayıklayıcı)
 
-Başlatma ayarları yapılandırması yalnızca etkiler *Properties/launchSettings.json* dosya için IIS Express ve IIS için Windows kimlik doğrulaması yapılandırmaz. Sunucu Yapılandırması içinde açıklanan [IIS](#iis) bölümü.
+Başlatma ayarları için yapılandırma yalnızca IIS Express dosya *üzerindeki özellikleri/launchSettings.js* etkiler ve Windows kimlik doğrulaması için IIS 'yi yapılandırmaz. Sunucu yapılandırması [IIS](#iis) bölümünde açıklanmıştır.
 
-**Web uygulaması** şablonu Visual Studio veya .NET Core CLI aracılığıyla kullanılabilir, Windows kimlik doğrulamasını güncelleştiren destekleyecek şekilde yapılandırılabilir *Properties/launchSettings.json* dosyası otomatik olarak.
+Visual Studio veya .NET Core CLI ile kullanılabilen **Web uygulaması** şablonu, Windows kimlik doğrulamasını destekleyecek şekilde yapılandırılabilir ve bu, dosyadaki *özellikleri/launchSettings.js* otomatik olarak güncelleştirir.
 
-# <a name="visual-studiotabvisual-studio"></a>[Visual Studio](#tab/visual-studio)
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-**Yeni Proje**
+**Yeni proje**
 
-1. Yeni bir proje oluşturun.
-1. Seçin **ASP.NET Core Web uygulaması**. **İleri**’yi seçin.
-1. Bir ad sağlayın **proje adı** alan. Onayla **konumu** giriş doğru olduğundan veya proje için bir konum sağlayın. **Oluştur**’u seçin.
-1. Seçin **değişiklik** altında **kimlik doğrulaması**.
-1. İçinde **kimlik doğrulamayı Değiştir** penceresinde **Windows kimlik doğrulaması**. **Tamam**’ı seçin.
-1. Seçin **Web uygulaması**.
+1. Yeni bir proje oluşturma.
+1. **ASP.NET Core Web uygulaması**' nı seçin. **İleri**’yi seçin.
+1. **Proje adı** alanına bir ad girin. **Konum** girişinin doğru olduğunu onaylayın veya proje için bir konum belirtin. **Oluştur**’u seçin.
+1. **Kimlik doğrulaması**altında **Değiştir** ' i seçin.
+1. **Kimlik doğrulamasını Değiştir** penceresinde, **Windows kimlik doğrulaması**' nı seçin. **Tamam**’ı seçin.
+1. **Web uygulaması**' nı seçin.
 1. **Oluştur**’u seçin.
 
-Uygulamayı çalıştırın. Kullanıcı işlenen uygulamanın kullanıcı arabiriminde görüntülenir.
+Uygulamayı çalıştırın. Kullanıcı adı, işlenmiş uygulamanın kullanıcı arabiriminde görüntülenir.
 
 **Mevcut proje**
 
-Projenin özelliklerini Windows kimlik doğrulamasını etkinleştirmek ve anonim kimlik doğrulamasını devre dışı bırakın:
+Projenin özellikleri Windows kimlik doğrulamasını etkinleştirir ve anonim kimlik doğrulamasını devre dışı bırakır:
 
-1. Projeye sağ **Çözüm Gezgini** seçip **özellikleri**.
-1. Seçin **hata ayıklama** sekmesi.
-1. Onay kutusunu temizleyin **anonim kimlik doğrulamasını etkinleştir**.
-1. Onay kutusunu seçin **Windows kimlik doğrulamasını etkinleştir**.
-1. Kaydet ve özellik sayfasını kapatın.
+1. **Çözüm Gezgini** ' de projeye sağ tıklayın ve **Özellikler**' i seçin.
+1. **Hata Ayıkla** sekmesini seçin.
+1. **Anonim kimlik doğrulamasını etkinleştir**onay kutusunun işaretini kaldırın.
+1. **Windows kimlik doğrulamasını etkinleştir**onay kutusunu işaretleyin.
+1. Özellik sayfasını kaydedin ve kapatın.
 
-Alternatif olarak, özellikler, yapılandırılabilir `iisSettings` düğümünün *launchSettings.json* dosyası:
+Alternatif olarak, Özellikler `iisSettings` dosyadaki *launchSettings.js* düğümünde yapılandırılabilir:
 
 [!code-json[](windowsauth/sample_snapshot/launchSettings.json?highlight=2-3)]
 
-# <a name="visual-studio-code--net-core-clitabvisual-studio-codenetcore-cli"></a>[Visual Studio Code / .NET Core CLI](#tab/visual-studio-code+netcore-cli)
+# <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-**Yeni Proje**
+**Yeni proje**
 
-Yürütme [yeni dotnet](/dotnet/core/tools/dotnet-new) komutunu `webapp` bağımsız değişken (ASP.NET Core Web uygulaması) ve `--auth Windows` geçin:
+Bağımsız değişkenle [DotNet New](/dotnet/core/tools/dotnet-new) komutunu yürütün `webapp` (ASP.NET Core Web uygulaması) ve `--auth Windows` anahtar:
 
-```console
+```dotnetcli
 dotnet new webapp --auth Windows
 ```
 
 **Mevcut proje**
 
-Güncelleştirme `iisSettings` düğümünün *launchSettings.json* dosyası:
+`iisSettings`Dosyadaki *launchSettings.js* düğümünü güncelleştirin:
 
 [!code-json[](windowsauth/sample_snapshot/launchSettings.json?highlight=2-3)]
 
 ---
 
-Mevcut bir projeyi değiştirirken, proje dosyası için bir paket başvurusu içerdiğini onaylamak [Microsoft.AspNetCore.App metapackage](xref:fundamentals/metapackage-app) **veya** [ Microsoft.AspNetCore.Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication/) NuGet paketi.
+Mevcut bir projeyi değiştirirken, proje dosyasının [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app) **veya** [Microsoft. aspnetcore. Authentication](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication/) NuGet paketi için bir paket başvurusu içerdiğini doğrulayın.
 
 ### <a name="iis"></a>IIS
 
-IIS kullanan [ASP.NET Core Modülü](xref:host-and-deploy/aspnet-core-module) konak ASP.NET Core uygulamaları için. Windows kimlik doğrulaması için IIS yapılandırılır *web.config* dosya. Aşağıdaki bölümlerde show nasıl yapılır:
+IIS, ASP.NET Core uygulamalarını barındırmak için [ASP.NET Core modülünü](xref:host-and-deploy/aspnet-core-module) kullanır. Windows kimlik doğrulaması, *web.config* dosyası aracılığıyla IIS için yapılandırılır. Aşağıdaki bölümlerde aşağıdakilerin nasıl yapılacağı gösterilmektedir:
 
-* Yerel bir sağlamak *web.config* dosya uygulama dağıtıldığında, sunucu üzerinde Windows kimlik doğrulamasını etkinleştirir.
-* IIS Yöneticisi'ni yapılandırmak için kullanın *web.config* dosyası sunucuda zaten dağıtılmış bir ASP.NET Core uygulaması.
+* Uygulama dağıtıldığında sunucuda Windows kimlik doğrulamasını etkinleştiren bir yerel *web.config* dosyası sağlayın.
+* Sunucuda zaten dağıtılan bir ASP.NET Core uygulamasının *web.config* dosyasını YAPıLANDıRMAK Için IIS Yöneticisi 'ni kullanın.
 
-Zaten yapmadıysanız, IIS için ASP.NET Core uygulamaları barındırın etkinleştirin. Daha fazla bilgi için bkz. <xref:host-and-deploy/iis/index>.
+Daha önce yapmadıysanız, IIS 'yi ASP.NET Core uygulamaları barındıracak şekilde etkinleştirin. Daha fazla bilgi için bkz. <xref:host-and-deploy/iis/index>.
 
-Windows kimlik doğrulaması için IIS rolü hizmetini etkinleştirin. Daha fazla bilgi için [IIS rol hizmetlerini (bkz. 2. adım), Windows kimlik doğrulamasını etkinleştir](xref:host-and-deploy/iis/index#iis-configuration).
+Windows kimlik doğrulaması için IIS rol hizmetini etkinleştirin. Daha fazla bilgi için bkz. [IIS rol hizmetlerinde Windows kimlik doğrulamasını etkinleştirme (bkz. 2. adım)](xref:host-and-deploy/iis/index#iis-configuration).
 
-[IIS tümleştirme ara yazılımı](xref:host-and-deploy/iis/index#enable-the-iisintegration-components) otomatik olarak isteklerinin kimliğini doğrulamak için varsayılan olarak yapılandırılır. Daha fazla bilgi için [ana bilgisayar Windows IIS üzerinde ASP.NET Core: IIS seçeneklerini (AutomaticAuthentication)](xref:host-and-deploy/iis/index#iis-options).
+[IIS tümleştirme ara yazılımı](xref:host-and-deploy/iis/index#enable-the-iisintegration-components) , varsayılan olarak isteklerin kimliğini otomatik olarak doğrulamak için yapılandırılır. Daha fazla bilgi için bkz. [IIS Ile Windows üzerinde ana bilgisayar ASP.NET Core: IIS seçenekleri (Automatıcauthentication)](xref:host-and-deploy/iis/index#iis-options).
 
-ASP.NET Core modülü varsayılan olarak, varsayılan olarak Windows kimlik doğrulaması belirteci uygulamaya iletmek için yapılandırılır. Daha fazla bilgi için [ASP.NET Core Module yapılandırma başvurusu: AspNetCore öğenin öznitelikleri](xref:host-and-deploy/aspnet-core-module#attributes-of-the-aspnetcore-element).
+ASP.NET Core modülü, Windows kimlik doğrulama belirtecini varsayılan olarak uygulamaya iletecek şekilde yapılandırılmıştır. Daha fazla bilgi için bkz. [ASP.NET Core modülü yapılandırma başvurusu: aspNetCore öğesinin öznitelikleri](xref:host-and-deploy/aspnet-core-module#attributes-of-the-aspnetcore-element).
 
-Kullanım **ya da** aşağıdaki yaklaşımlardan biri:
+Aşağıdaki yaklaşımlardan **birini** kullanın:
 
-* **Projeyi dağıtma ve yayımlama önce** aşağıdaki *web.config* proje kök dosya:
+* **Projeyi yayımlamadan ve dağıtmaya başlamadan önce** aşağıdaki *web.config* dosyasını proje köküne ekleyin:
 
   [!code-xml[](windowsauth/sample_snapshot/web_2.config)]
 
-  Proje .NET Core SDK'sı tarafından yayımlanmıştır ne zaman (olmadan `<IsTransformWebConfigDisabled>` özelliğini `true` proje dosyasında), yayımlanan *web.config* dosyasını içeren `<location><system.webServer><security><authentication>` bölümü. Daha fazla bilgi için `<IsTransformWebConfigDisabled>` özelliği bkz <xref:host-and-deploy/iis/index#webconfig-file>.
+  Proje, .NET Core SDK ( `<IsTransformWebConfigDisabled>` Proje dosyasında özelliği olarak ayarlanmış olmayan) tarafından yayımlandığında `true` , yayımlanan *web.config* dosyası `<location><system.webServer><security><authentication>` bölümünü içerir. Özelliği hakkında daha fazla bilgi için `<IsTransformWebConfigDisabled>` bkz <xref:host-and-deploy/iis/index#webconfig-file> ..
 
-* **Sonra projeyi dağıtma ve yayımlama** sunucu tarafı yapılandırması IIS Yöneticisi ile gerçekleştirin:
+* **Projeyi yayımladıktan ve dağıttıktan sonra** IIS yöneticisiyle sunucu tarafı yapılandırması gerçekleştirin:
 
-  1. IIS Yöneticisi'nde IIS sitesi altında seçin **siteleri** düğümünün **bağlantıları** kenar çubuğu.
-  1. Çift **kimlik doğrulaması** içinde **IIS** alan.
-  1. Seçin **anonim kimlik doğrulaması**. Seçin **devre dışı** içinde **eylemleri** kenar çubuğu.
-  1. Seçin **Windows kimlik doğrulaması**. Seçin **etkinleştirme** içinde **eylemleri** kenar çubuğu.
+  1. IIS Yöneticisi 'nde, **Bağlantılar** kenar çubuğu ' nun **sıteler** düğümü altında IIS sitesini seçin.
+  1. **IIS** alanında **kimlik doğrulaması** ' na çift tıklayın.
+  1. **Anonim kimlik doğrulamasını**seçin. **Eylemler** kenar çubuğunda **devre dışı bırak** ' ı seçin.
+  1. **Windows kimlik doğrulaması**' nı seçin. **Eylemler** kenar çubuğunda **Etkinleştir** ' i seçin.
 
-  Bu eylemler gerçekleştirildikçe, IIS Yöneticisi'ni uygulamanın değiştirir *web.config* dosya. A `<system.webServer><security><authentication>` düğümü için güncelleştirilmiş ayarlarla eklenir `anonymousAuthentication` ve `windowsAuthentication`:
+  Bu eylemler çekilirken, IIS Yöneticisi uygulamanın *web.config* dosyasını değiştirir. `<system.webServer><security><authentication>`Ve için güncelleştirilmiş ayarlarla bir düğüm eklenir `anonymousAuthentication` `windowsAuthentication` :
 
   [!code-xml[](windowsauth/sample_snapshot/web_1.config?highlight=4-5)]
 
-  `<system.webServer>` Bölümüne eklenen *web.config* dosyasıdır IIS Yöneticisi tarafından uygulamanın dışında `<location>` uygulama yayımlandığında, .NET Core SDK'sı tarafından eklenen bölümü. Bölümün dışında eklendiğinden `<location>` düğümünü ayarları tarafından devralınır [alt uygulamaları](xref:host-and-deploy/iis/index#sub-applications) geçerli uygulama. Devralma önlemek için ek taşıma `<security>` içine bölümünde `<location><system.webServer>` .NET Core SDK'sını sağlanan bölüm.
+  `<system.webServer>`IIS Yöneticisi tarafından *web.config* dosyasına eklenen bölüm, `<location>` uygulama yayımlandığında .NET Core SDK tarafından eklenen uygulama bölümünün dışındadır. Bölüm düğümün dışına eklendiğinden `<location>` , ayarlar herhangi bir [alt uygulama](xref:host-and-deploy/iis/index#sub-applications) tarafından geçerli uygulamaya devralınır. Devralmayı önlemek için, eklenen `<security>` bölümü `<location><system.webServer>` .NET Core SDK bölümün içine taşıyın.
 
-  IIS Yöneticisi, IIS yapılandırması eklemek için kullanıldığında, uygulamanın yalnızca etkiler *web.config* dosya sunucusunda. Uygulamanın bir sonraki dağıtım sunucudaki ayarları varsa üzerine yazabilir sunucunun kopyasını *web.config* projenin tarafından değiştirilir *web.config* dosya. Kullanım **ya da** ayarlarını yönetmek için aşağıdaki yaklaşımlardan biri:
+  IIS Yöneticisi IIS yapılandırmasını eklemek için kullanıldığında, yalnızca sunucudaki *web.config* dosyasını etkiler. Sunucunun *web.config* kopyası projenin *web.config* dosyası tarafından değiştirilirse uygulamanın sonraki dağıtımı sunucudaki ayarların üzerine yazabilir. Ayarları yönetmek için aşağıdaki yaklaşımlardan **birini** kullanın:
 
-  * Ayarlar sıfırlamak için IIS Yöneticisi'ni kullanın *web.config* dağıtımı dosyanın üzerine yazılır sonra dosya.
-  * Ekleme bir *web.config dosyasını* uygulamada yerel olarak ayarlar.
+  * Dağıtım sırasında dosyanın üzerine yazıldıktan sonra *web.config* dosyasındaki ayarları SıFıRLAMAK Için IIS Yöneticisi 'ni kullanın.
+  * Ayarlarla yerel olarak uygulamaya bir *web.config dosyası* ekleyin.
 
 ::: moniker range=">= aspnetcore-3.0"
 
 ## <a name="kestrel"></a>Kestrel
 
- [Microsoft.AspNetCore.Authentication.Negotiate](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate) NuGet paketi ile kullanılabilir [Kestrel](xref:fundamentals/servers/kestrel) Windows Windows, Linux ve Macos'ta anlaşma, Kerberos ve NTLM kullanarak kimlik doğrulamasını desteklemek için.
+Windows, Linux ve macOS 'ta Negotiate ve Kerberos kullanarak Windows kimlik doğrulamasını desteklemek için [Microsoft. AspNetCore. Authentication. Negotiate](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate) NuGet paketi [Kestrel](xref:fundamentals/servers/kestrel) ile birlikte kullanılabilir.
 
 > [!WARNING]
-> Kimlik bilgileri bağlantı istekleri arasında kalıcı. *Anlaşma kimlik doğrulaması değil kullanılmalıdır proxy'leriyle sürece proxy Kestrel ile 1:1 bağlantı benzeşimi (kalıcı bir bağlantı) korur.*
+> Kimlik bilgileri bir bağlantı üzerindeki istekler arasında kalıcı olabilir. *Proxy, Kestrel ile bir 1:1 bağlantı benzeşimi (kalıcı bağlantı) tutmadığı müddetçe, Negotiate kimlik doğrulaması proxy ile kullanılmamalıdır.*
 
 > [!NOTE]
-> Görüşme işleyicisi, temel alınan sunucusunda yerel olarak Windows kimlik doğrulamayı destekliyorsa ve etkin olduğunda algılar. Sunucusu Windows kimlik doğrulamasını destekliyor, ancak devre dışı sunucusu uygulaması etkinleştirmek isteyen bir hata oluşturulur. Sunucuda Windows kimlik doğrulaması etkinleştirildiğinde, Negotiate işleyici şeffaf bir şekilde kendisine iletir.
+> Negotiate işleyicisi, temeldeki sunucunun Windows kimlik doğrulamasını yerel olarak destekleyip desteklemediğini ve etkinleştirilip etkinleştirilmediğini algılar. Sunucu Windows kimlik doğrulamasını destekliyorsa, ancak devre dışıysa sunucu uygulamasını etkinleştirmenizi isteyen bir hata oluşur. Sunucuda Windows kimlik doğrulaması etkinleştirildiğinde, anlaşma işleyicisi saydam olarak buna iletilir.
 
- Kimlik doğrulama hizmetleri çağırarak ekleme <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> (`Microsoft.AspNetCore.Authentication.Negotiate` ad alanı) ve `AddNegotitate` (`Microsoft.AspNetCore.Authentication.Negotiate` ad alanı) içinde `Startup.ConfigureServices`:
+Ve ' i çağırarak kimlik doğrulama hizmetleri ekleyin <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> <xref:Microsoft.Extensions.DependencyInjection.NegotiateExtensions.AddNegotiate*> `Startup.ConfigureServices` :
 
  ```csharp
+// using Microsoft.AspNetCore.Authentication.Negotiate;
+// using Microsoft.Extensions.DependencyInjection;
+
 services.AddAuthentication(NegotiateDefaults.AuthenticationScheme)
     .AddNegotiate();
 ```
 
-Kimlik doğrulaması ara yazılımı çağırarak ekleme <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> içinde `Startup.Configure`:
+Şunları çağırarak kimlik doğrulama ara yazılımı ekleyin <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> `Startup.Configure` :
 
  ```csharp
 app.UseAuthentication();
-
-app.UseMvc();
 ```
 
-Ara yazılım hakkında daha fazla bilgi için bkz. <xref:fundamentals/middleware/index>.
+Ara yazılım hakkında daha fazla bilgi için bkz <xref:fundamentals/middleware/index> ..
 
-Anonim isteklere izin verilir. Kullanım [ASP.NET Core yetkilendirme](xref:security/authorization/introduction) kimlik doğrulaması için anonim isteklere meydan okuyun.
+Anonim isteklere izin verilir. Kimlik doğrulaması için anonim istekleri zorluk [ASP.NET Core yetkilendirmeyi](xref:security/authorization/introduction) kullanın.
 
-### <a name="windows-environment-configuration"></a>Windows ortamını yapılandırma
+### <a name="windows-environment-configuration"></a>Windows ortam yapılandırması
 
-[Microsoft.AspNetCore.Authentication.Negotiate](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate) bileşeni kullanıcı modu kimlik doğrulaması gerçekleştirir. Hizmet asıl adları (SPN) makine hesabı değil hizmetini çalıştıran kullanıcı hesabına eklenmelidir. Yürütme `setspn -S HTTP/mysrevername.mydomain.com myuser` bir yönetim komut kabuğu'nda.
+[Microsoft. AspNetCore. Authentication. Negotiate](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate) bileşeni, Kullanıcı modu kimlik doğrulaması gerçekleştirir. Hizmet sorumlusu adları (SPN 'Ler) makine hesabını değil, hizmeti çalıştıran kullanıcı hesabına eklenmelidir. `setspn -S HTTP/myservername.mydomain.com myuser`Yönetim komut kabuğu 'nda yürütün.
 
-### <a name="linux-and-macos-environment-configuration"></a>Linux ve Macos'ta ortamı yapılandırma
+### <a name="linux-and-macos-environment-configuration"></a>Linux ve macOS ortam yapılandırması
 
-Bir Linux veya Macos'ta makine bir Windows etki alanına katmak için yönergeler kullanılabilir [Azure veri Studio Windows kimlik doğrulaması - Kerberos kullanarak SQL sunucunuza bağlanmak](/sql/azure-data-studio/enable-kerberos?view=sql-server-2017#join-your-os-to-the-active-directory-domain-controller) makalesi. Yönergeleri Linux makinesi için bir makine hesabı etki alanında oluşturun. Bu makine hesabı için SPN eklenmesi gerekir.
+Linux veya macOS makinesini bir Windows etki alanına katılmaya yönelik yönergeler, [Windows kimlik doğrulaması-Kerberos makalesini kullanarak SQL Server Azure Data Studio bağlanma](/sql/azure-data-studio/enable-kerberos?view=sql-server-2017#join-your-os-to-the-active-directory-domain-controller) ' da kullanılabilir. Yönergeler, etki alanındaki Linux makinesi için bir makine hesabı oluşturur. SPN 'Ler bu makine hesabına eklenmelidir.
 
 > [!NOTE]
-> ' Deki yönergeleri takip ederken [Azure veri Studio Windows kimlik doğrulaması - Kerberos kullanarak SQL sunucunuza bağlanmak](/sql/azure-data-studio/enable-kerberos?view=sql-server-2017#join-your-os-to-the-active-directory-domain-controller) makalesi, yerine `python-software-properties` ile `python3-software-properties` gerekirse.
+> [Windows kimlik doğrulaması-Kerberos makalesini kullanarak SQL Server Azure Data Studio bağlanma](/sql/azure-data-studio/enable-kerberos?view=sql-server-2017#join-your-os-to-the-active-directory-domain-controller) ' daki kılavuzdan sonra, `python-software-properties` gerekirse öğesini ile değiştirin `python3-software-properties` .
 
-Linux veya Macos'ta makine etki alanına katılmış sonra sağlamak için ek adımlar gereklidir bir [anahtar tablosu dosya](https://blogs.technet.microsoft.com/pie/2018/01/03/all-you-need-to-know-about-keytab-files/) SPN'ler ile:
+Linux veya macOS makinesi etki alanına katıldığında, SPN 'Ler içeren bir [keytab dosyası](https://blogs.technet.microsoft.com/pie/2018/01/03/all-you-need-to-know-about-keytab-files/) sağlamak için ek adımlar gerekir:
 
-* Etki alanı denetleyicisinde makine hesabı için yeni bir web hizmeti SPN'ler ekleyin:
+* Etki alanı denetleyicisinde, makine hesabına yeni Web hizmeti SPN 'Leri ekleyin:
   * `setspn -S HTTP/mywebservice.mydomain.com mymachine`
   * `setspn -S HTTP/mywebservice@MYDOMAIN.COM mymachine`
-* Kullanım [ktpass](/windows-server/administration/windows-commands/ktpass) anahtar tablosu dosyası oluşturmak için:
+* Bir keytab dosyası oluşturmak için [Ktpass](/windows-server/administration/windows-commands/ktpass) kullanın:
   * `ktpass -princ HTTP/mywebservice.mydomain.com@MYDOMAIN.COM -pass myKeyTabFilePassword -mapuser MYDOMAIN\mymachine$ -pType KRB5_NT_PRINCIPAL -out c:\temp\mymachine.HTTP.keytab -crypto AES256-SHA1`
-  * Bazı alanları belirtilmelidir gösterildiği gibi büyük.
-* Anahtar tablosu dosyasını Linux veya Macos'ta makineye kopyalayın.
-* Bir ortam değişkeni aracılığıyla anahtar tablosu dosyayı seçin: `export KRB5_KTNAME=/tmp/mymachine.HTTP.keytab`
-* Çağırma `klist` şu anda kullanılabilir SPN'ler gösterilecek.
+  * Bazı alanların gösterildiği gibi büyük harfle belirtilmesi gerekir.
+* Keytab dosyasını Linux veya macOS makinesine kopyalayın.
+* Bir ortam değişkeni aracılığıyla keytab dosyasını seçin:`export KRB5_KTNAME=/tmp/mymachine.HTTP.keytab`
+* `klist`Şu anda kullanılabilecek SPN 'leri göstermek için çağırın.
 
 > [!NOTE]
-> Bir anahtar tablosu dosyası, etki alanı erişim kimlik bilgileri içeriyor ve uygun şekilde korunması gerekir.
+> Bir keytab dosyası, etki alanı erişimi kimlik bilgilerini içerir ve buna uygun şekilde korunması gerekir.
 
 ::: moniker-end
 
 ## <a name="httpsys"></a>HTTP.sys
 
-[HTTP.sys](xref:fundamentals/servers/httpsys) çekirdek modu Windows Negotiate, NTLM veya temel kimlik doğrulamasını kullanarak kimlik doğrulaması destekler.
+[HTTP.sys](xref:fundamentals/servers/httpsys) , NEGOTIATE, NTLM veya temel kimlik doğrulaması kullanarak çekirdek modu Windows kimlik doğrulamasını destekler.
 
-Kimlik doğrulama hizmetleri çağırarak ekleme <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> (<xref:Microsoft.AspNetCore.Server.HttpSys?displayProperty=fullName> ad alanı) içinde `Startup.ConfigureServices`:
+<xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> <xref:Microsoft.AspNetCore.Server.HttpSys?displayProperty=fullName> İçinde (ad alanı) çağırarak kimlik doğrulama hizmetleri ekleyin `Startup.ConfigureServices` :
 
 ```csharp
 services.AddAuthentication(HttpSysDefaults.AuthenticationScheme);
 ```
 
-Uygulamanın web ana HTTP.sys Windows kimlik doğrulaması için yapılandırma (*Program.cs*). <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderHttpSysExtensions.UseHttpSys*> içinde <xref:Microsoft.AspNetCore.Server.HttpSys?displayProperty=fullName> ad alanı.
+Uygulamanın Web konağını, Windows kimlik doğrulaması (*program.cs*) ile HTTP.sys kullanacak şekilde yapılandırın. <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderHttpSysExtensions.UseHttpSys*><xref:Microsoft.AspNetCore.Server.HttpSys?displayProperty=fullName>ad alanında.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -222,51 +240,51 @@ Uygulamanın web ana HTTP.sys Windows kimlik doğrulaması için yapılandırma 
 ::: moniker-end
 
 > [!NOTE]
-> Çekirdek modu kimlik doğrulaması Kerberos kimlik doğrulama protokolü HTTP.sys temsil eder. Kullanıcı modu kimlik doğrulaması, Kerberos ve HTTP.sys ile desteklenmez. Makine hesabı Kerberos belirteci/Active Directory'den elde edilen anahtar şifresini çözmek için kullanılan ve kullanıcının kimliğini doğrulamak için istemcinin sunucuya iletilir. Hizmet asıl adı (SPN) konak için değil uygulamanın kullanıcı kaydedin.
+> Kerberos kimlik doğrulama protokolü ile çekirdek modu kimlik doğrulamasına temsilciler HTTP.sys. Kullanıcı modu kimlik doğrulaması, Kerberos ve HTTP.sys desteklenmez. Makine hesabı, Active Directory alındığı ve kullanıcının kimliğini doğrulamak için istemci tarafından sunucuya iletilen Kerberos belirtecinin/biletinin şifresini çözmek için kullanılmalıdır. Uygulamanın kullanıcısına değil, ana bilgisayar için hizmet asıl adını (SPN) kaydedin.
 
 > [!NOTE]
-> HTTP.sys sürüm 1709 veya üzeri Nano Sunucu'da desteklenmemektedir. Windows kimlik doğrulaması ve HTTP.sys Nano Server ile kullanmak için bir [(microsoft/windowsservercore) Server Core kapsayıcı](https://hub.docker.com/r/microsoft/windowsservercore/). Sunucu Çekirdeği hakkında daha fazla bilgi için bkz. [Windows Server'da Sunucu Çekirdeği yükleme seçeneği nedir?](/windows-server/administration/server-core/what-is-server-core).
+> HTTP.sys nano sunucu 1709 veya sonraki bir sürümde desteklenmez. Windows kimlik doğrulaması 'nı ve nano sunucu ile HTTP.sys kullanmak için, bir [sunucu çekirdeği (Microsoft/windowsservercore) kapsayıcısı](https://hub.docker.com/r/microsoft/windowsservercore/)kullanın. Sunucu Çekirdeği hakkında daha fazla bilgi için bkz. [Windows Server 'Da Sunucu Çekirdeği yükleme seçeneği nedir?](/windows-server/administration/server-core/what-is-server-core).
 
-## <a name="authorize-users"></a>Kullanıcıları yetkilendirme
+## <a name="authorize-users"></a>Kullanıcıları yetkilendir
 
-Anonim erişim yapılandırma durumunu yolla belirler `[Authorize]` ve `[AllowAnonymous]` öznitelikleri, uygulamada kullanılır. Aşağıdaki iki bölümü anonim erişime izin verilmeyen ve izin verilen yapılandırma durumunu nasıl ele alınacağını açıklar.
+Anonim erişimin yapılandırma durumu, `[Authorize]` ve `[AllowAnonymous]` özniteliklerinin uygulamada kullanılma şeklini belirler. Aşağıdaki iki bölümde, anonim erişimin izin verilmeyen ve izin verilen yapılandırma durumlarının nasıl işleneceği açıklanmaktadır.
 
 ### <a name="disallow-anonymous-access"></a>Anonim erişime izin verme
 
-Windows kimlik doğrulaması etkinleştirildiğinde ve adsız erişim devre dışıysa, `[Authorize]` ve `[AllowAnonymous]` özniteliklerinin etkisi yoktur. İstek, hiçbir zaman bir IIS sitesi anonim erişime izin vermeyecek şekilde yapılandırılmışsa, uygulama ulaşır. Bu nedenle, `[AllowAnonymous]` özniteliği geçerli değil.
+Windows kimlik doğrulaması etkinleştirildiğinde ve anonim erişim devre dışı bırakıldığında, `[Authorize]` ve `[AllowAnonymous]` özniteliklerinin etkisi yoktur. Bir IIS sitesi anonim erişime izin vermeyecek şekilde yapılandırıldıysa, istek uygulamaya hiçbir şekilde ulaşmaz. Bu nedenle, `[AllowAnonymous]` öznitelik geçerli değildir.
 
 ### <a name="allow-anonymous-access"></a>Anonim erişime izin ver
 
-Windows kimlik doğrulaması hem anonim erişim etkin olduğunda, kullanmak `[Authorize]` ve `[AllowAnonymous]` öznitelikleri. `[Authorize]` Özniteliği güvenli kimlik doğrulaması gerektiren uygulama uç olanak tanır. `[AllowAnonymous]` Öznitelik geçersiz kılmalarını `[Authorize]` anonim erişime izin veren uygulamalarında öznitelik. Öznitelik kullanım ayrıntıları için bkz. <xref:security/authorization/simple>.
+Hem Windows kimlik doğrulaması hem de anonim erişim etkinleştirildiğinde, `[Authorize]` ve özniteliklerini kullanın `[AllowAnonymous]` . `[Authorize]`Özniteliği, uygulamanın kimlik doğrulaması gerektiren uç noktaların güvenliğini sağlamanıza olanak tanır. `[AllowAnonymous]`Özniteliği, `[Authorize]` anonim erişime izin veren uygulamalardaki özniteliği geçersiz kılar. Öznitelik kullanım ayrıntıları için bkz <xref:security/authorization/simple> ..
 
 > [!NOTE]
-> Varsayılan olarak, yetersiz bir sayfaya erişmek için yetkilendirme kullanıcılar ile boş bir HTTP 403 yanıtı sunulur. [StatusCodePages ara yazılım](xref:fundamentals/error-handling#usestatuscodepages) kullanıcılar daha iyi bir "Erişim engellendi" deneyimi sunmak için yapılandırılabilir.
+> Varsayılan olarak, bir sayfaya erişim yetkisi olmayan kullanıcılara boş bir HTTP 403 yanıtı sunulur. [Statuscodepages ara yazılımı](xref:fundamentals/error-handling#usestatuscodepages) , kullanıcılara daha iyi bir "erişim reddedildi" deneyimi sunacak şekilde yapılandırılabilir.
 
 ## <a name="impersonation"></a>Kimliğe bürünme
 
-ASP.NET Core, kimliğe bürünme uygulamaz. Uygulamalar, uygulama havuzu veya işlem kimliğini kullanarak, tüm istekler için uygulamanın kimlik ile çalıştırın. Uygulamanın kullanıcı adına bir eylem gerçekleştirmeniz gereken kullanırsanız [WindowsIdentity.RunImpersonated](xref:System.Security.Principal.WindowsIdentity.RunImpersonated*) içinde bir [terminal satır içi ara yazılım](xref:fundamentals/middleware/index#create-a-middleware-pipeline-with-iapplicationbuilder) içinde `Startup.Configure`. Bu bağlamda tek bir eylem çalıştırın ve ardından bağlam kapatın.
+ASP.NET Core kimliğe bürünme uygulamaz. Uygulamalar, uygulama havuzu veya işlem kimliği kullanarak tüm istekler için uygulamanın kimliğiyle çalışır. Uygulamanın bir kullanıcı adına bir eylem gerçekleştirmesi gerekiyorsa, içindeki bir [Terminal satır içi ara yazılım](xref:fundamentals/middleware/index#create-a-middleware-pipeline-with-iapplicationbuilder) Içinde [WindowsIdentity. runınkimliğine](xref:System.Security.Principal.WindowsIdentity.RunImpersonated*) bürünme kullanın `Startup.Configure` . Bu bağlamda tek bir eylem çalıştırın ve sonra bağlamı kapatın.
 
 [!code-csharp[](windowsauth/sample_snapshot/Startup.cs?highlight=10-19)]
 
-`RunImpersonated` zaman uyumsuz işlemleri desteklemeyen ve karmaşık senaryolar için kullanılmamalıdır. Örneğin, tüm istekleri veya bir ara yazılım zincirleri sarmalama desteklenen önerilen veya değil.
+`RunImpersonated`, zaman uyumsuz işlemleri desteklemez ve karmaşık senaryolar için kullanılmamalıdır. Örneğin, tüm isteklerin veya ara yazılım zincirlerinin sarmalanması desteklenmez veya önerilmez.
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Sırada [Microsoft.AspNetCore.Authentication.Negotiate](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate) paket, Windows kimlik doğrulamasını etkinleştirir, Linux ve Macos'ta kimliğe bürünme yalnızca Windows üzerinde desteklenir.
+[Microsoft. AspNetCore. Authentication. Negotiate](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Negotiate) paketi Windows, Linux ve MacOS 'ta kimlik doğrulamaya izin sağlarken, kimliğe bürünme yalnızca Windows 'da desteklenir.
 
 ::: moniker-end
 
-## <a name="claims-transformations"></a>Talep dönüştürmeleri
+## <a name="claims-transformations"></a>Talep dönüşümleri
 
 ::: moniker range=">= aspnetcore-3.0"
 
-IIS ile barındırırken <xref:Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync*> dahili olarak bir kullanıcı başlatmak için çağırılır değil. Bu nedenle, bir <xref:Microsoft.AspNetCore.Authentication.IClaimsTransformation> her kimlik doğrulaması varsayılan olarak etkinleştirilmez sonra talepleri dönüştürmek için kullanılan uygulama. Daha fazla bilgi ve talep dönüştürmeleri etkinleştiren bir kod örneği için bkz: <xref:host-and-deploy/aspnet-core-module#in-process-hosting-model>.
+IIS ile barındırırken, <xref:Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync*> bir kullanıcıyı başlatmak için dahili olarak çağrılmaz. Bu nedenle, <xref:Microsoft.AspNetCore.Authentication.IClaimsTransformation> her kimlik doğrulaması sonrasında talepleri dönüştürmek için kullanılan bir uygulama varsayılan olarak etkinleştirilmez. Daha fazla bilgi ve talep dönüştürmelerini etkinleştiren bir kod örneği için bkz <xref:host-and-deploy/aspnet-core-module#in-process-hosting-model> ..
 
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-3.0"
 
-IIS işlem içi moduyla barındırırken <xref:Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync*> dahili olarak bir kullanıcı başlatmak için çağırılır değil. Bu nedenle, bir <xref:Microsoft.AspNetCore.Authentication.IClaimsTransformation> her kimlik doğrulaması varsayılan olarak etkinleştirilmez sonra talepleri dönüştürmek için kullanılan uygulama. Daha fazla bilgi ve barındırma işlemi içinde talep dönüştürmeleri etkinleştiren bir kod örneği için bkz: <xref:host-and-deploy/aspnet-core-module#in-process-hosting-model>.
+IIS işlem içi modunda barındırırken, <xref:Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync*> bir kullanıcıyı başlatmak için dahili olarak çağrılmaz. Bu nedenle, <xref:Microsoft.AspNetCore.Authentication.IClaimsTransformation> her kimlik doğrulaması sonrasında talepleri dönüştürmek için kullanılan bir uygulama varsayılan olarak etkinleştirilmez. İşlem içinde barındırırken talep dönüştürmelerini etkinleştiren daha fazla bilgi ve kod örneği için bkz <xref:host-and-deploy/aspnet-core-module#in-process-hosting-model> ..
 
 ::: moniker-end
 

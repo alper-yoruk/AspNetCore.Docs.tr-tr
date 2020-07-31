@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: 18f1aee5ac33b17914bd182e46453120e14b31ab
-ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
+ms.openlocfilehash: fcf79966abf7a023773ef892636530278b668c44
+ms.sourcegitcommit: 5a36758cca2861aeb10840093e46d273a6e6e91d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86176200"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87303618"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core yönlendirme
 
@@ -73,7 +73,7 @@ Yönlendirme, ve tarafından kaydedilen bir dizi ara yazılımı <xref:Microsoft
   * `Hello World!`HTTP yanıtına yazılır. Varsayılan olarak, kök URL 'sidir `/` `https://localhost:5001/` .
 * İstek yöntemi yoksa `GET` veya kök URL 'si değilse `/` , hiçbir yol eşleşmesi ve bir HTTP 404 döndürülür.
 
-### <a name="endpoint"></a>Uç Nokta
+### <a name="endpoint"></a>Uç Noktası
 
 <a name="endpoint"></a>
 
@@ -391,7 +391,7 @@ Bu yöntemlerin aşırı yüklemeleri, içeren bağımsız değişkenleri kabul 
 
 Tarafından sunulan yöntemler, <xref:Microsoft.AspNetCore.Routing.LinkGenerator> herhangi bir adres türü için standart bağlantı oluşturma yeteneklerini destekler. Bağlantı oluşturucuyu kullanmanın en kolay yolu, belirli bir adres türü için işlem gerçekleştiren genişletme yöntemlerine yöneliktir:
 
-| Genişletme yöntemi | Açıklama |
+| Genişletme yöntemi | Description |
 | ---------------- | ----------- |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | Belirtilen değerleri temel alarak mutlak bir yola sahip bir URI oluşturur. |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | Belirtilen değerleri temel alarak mutlak bir URI oluşturur.             |
@@ -565,14 +565,14 @@ Yönlendirme parametresi sınırlayıcı karakterlerini `{` ,,, `}` , `[` `]` if
 
 Yönlendirmelerde kullanılan normal ifadeler, genellikle karakteriyle başlar `^` ve dizenin başlangıç konumuyla eşleşir. İfadeler genellikle `$` karakteriyle biter ve dizenin sonuyla eşleşir. `^`Ve `$` karakterleri, normal ifadenin tüm yol parametresi değeri ile eşleştiğinden emin olun. `^`Ve karakterleri olmadan `$` normal ifade, dize içindeki herhangi bir alt dizeden eşleşir ve bu genellikle istenmeyen bir ifadedir. Aşağıdaki tabloda örnekler verilmektedir ve bunların eşleşmesinin neden eşleşmediği veya eşleşmemesi açıklanmaktadır:
 
-| İfade   | Dize    | Eşleştirme | Yorum               |
+| Expression   | Dize    | Eşleştirme | Yorum               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Evet   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | 123abc456 | Evet   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | MZ        | Evet   | Eşleşen ifadesi    |
-| `[a-z]{2}`   | MZ        | Evet   | Büyük/küçük harfe duyarlı değil    |
-| `^[a-z]{2}$` | hello     | Hayır    | Bkz. `^` ve `$` üzeri |
-| `^[a-z]{2}$` | 123abc456 | Hayır    | Bkz. `^` ve `$` üzeri |
+| `[a-z]{2}`   | hello     | Yes   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | 123abc456 | Yes   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | MZ        | Yes   | Eşleşen ifadesi    |
+| `[a-z]{2}`   | MZ        | Yes   | Büyük/küçük harfe duyarlı değil    |
+| `^[a-z]{2}$` | hello     | No    | Bkz. `^` ve `$` üzeri |
+| `^[a-z]{2}$` | 123abc456 | No    | Bkz. `^` ve `$` üzeri |
 
 Normal ifade sözdizimi hakkında daha fazla bilgi için bkz. [.NET Framework normal ifadeler](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
@@ -586,7 +586,7 @@ Bir parametreyi bilinen olası değerler kümesiyle kısıtlamak için, normal b
 
 ASP.NET Core [kısıtlamalar](https://github.com/dotnet/aspnetcore/tree/master/src/Http/Routing/src/Constraints) klasörü, bir kısıtlama oluşturmaya yönelik iyi örnekler sağlar. Örneğin, [Guidrouteconstraint](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Constraints/GuidRouteConstraint.cs#L18).
 
-Özel bir kullanmak için `IRouteConstraint` yol kısıtlama türü, uygulamanın hizmet kapsayıcısında kayıtlı olması gerekir <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> . `ConstraintMap`, Yol kısıtlama anahtarlarını `IRouteConstraint` Bu kısıtlamaları doğrulayan uygulamalarla eşleyen bir sözlüktür. Bir uygulama `ConstraintMap` , `Startup.ConfigureServices` hizmetlerin bir parçası olarak ' de güncelleştirilir [. AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) çağrısı veya <xref:Microsoft.AspNetCore.Routing.RouteOptions> doğrudan ile yapılandırma `services.Configure<RouteOptions>` . Örnek:
+Özel bir kullanmak için `IRouteConstraint` yol kısıtlama türü, uygulamanın hizmet kapsayıcısında kayıtlı olması gerekir <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> . `ConstraintMap`, Yol kısıtlama anahtarlarını `IRouteConstraint` Bu kısıtlamaları doğrulayan uygulamalarla eşleyen bir sözlüktür. Bir uygulama `ConstraintMap` , `Startup.ConfigureServices` hizmetlerin bir parçası olarak ' de güncelleştirilir [. AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) çağrısı veya <xref:Microsoft.AspNetCore.Routing.RouteOptions> doğrudan ile yapılandırma `services.Configure<RouteOptions>` . Örneğin:
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/StartupConstraint.cs?name=snippet)]
 
@@ -669,7 +669,7 @@ URL oluşturma sorunlarını gidermeye yönelik ilk adım, günlük düzeyini `M
 
 URL oluşturma hakkında ayrıntılı bilgi için bkz. [URL oluşturma başvurusu](#ugr) .
 
-### <a name="addresses"></a>Adresleri
+### <a name="addresses"></a>Adresler
 
 Adresler, bağlantı oluşturucuya bir çağrıyı bir aday uç noktası kümesine bağlamak için kullanılan URL oluşturma kavramıdır.
 
@@ -831,7 +831,7 @@ Yukarıdaki kodda, `culture` Yerelleştirme için Route parametresi kullanılır
 Aşağıdaki bağlantılar, uç nokta meta verilerini yapılandırma hakkında bilgi sağlar:
 
 * [Uç nokta yönlendirme ile CORS 'yi etkinleştirme](xref:security/cors#enable-cors-with-endpoint-routing)
-* Özel bir öznitelik kullanan [ıauthorizationpolicyprovider örneği](https://github.com/dotnet/AspNetCore/tree/release/3.0/src/Security/samples/CustomPolicyProvider) `[MinimumAgeAuthorize]`
+* Özel bir öznitelik kullanan [ıauthorizationpolicyprovider örneği](https://github.com/dotnet/AspNetCore/tree/release/3.1/src/Security/samples/CustomPolicyProvider) `[MinimumAgeAuthorize]`
 * [[Yetkilendir] özniteliğiyle test kimlik doğrulaması](xref:security/authentication/identity#test-identity)
 * <xref:Microsoft.AspNetCore.Builder.AuthorizationEndpointConventionBuilderExtensions.RequireAuthorization*>
 * [[Yetkilendir] özniteliğiyle düzeni seçme](xref:security/authorization/limitingidentitybyscheme#selecting-the-scheme-with-the-authorize-attribute)
@@ -1110,7 +1110,7 @@ Bu yöntemlerin aşırı yüklemesi, içeren bağımsız değişkenleri kabul ed
 
 Tarafından sunulan yöntemler, <xref:Microsoft.AspNetCore.Routing.LinkGenerator> herhangi bir adres türü için standart bağlantı oluşturma yeteneklerini destekler. Bağlantı oluşturucuyu kullanmanın en kolay yolu, belirli bir adres türü için işlem gerçekleştiren genişletme yöntemlerine yöneliktir.
 
-| Genişletme yöntemi   | Açıklama                                                         |
+| Genişletme yöntemi   | Description                                                         |
 | ------------------ | ------------------------------------------------------------------- |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | Belirtilen değerleri temel alarak mutlak bir yola sahip bir URI oluşturur. |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | Belirtilen değerleri temel alarak mutlak bir URI oluşturur.             |
@@ -1486,14 +1486,14 @@ Yönlendirme parametresi sınırlayıcı karakterleri,,,, `{` `}` `[` `]` ifades
 
 Yönlendirmelerde kullanılan normal ifadeler, genellikle giriş işareti `^` karakteriyle başlar ve dizenin başlangıç konumuyla eşleşir. İfadeler, genellikle dolar işareti `$` karakteriyle biter ve dizenin sonuyla eşleşir. `^`Ve `$` karakterleri, normal ifadenin tüm yol parametresi değeri ile eşleştiğinden emin olun. `^`Ve karakterleri olmadan `$` normal ifade, dize içindeki herhangi bir alt dizeden eşleşir ve bu genellikle istenmeyen bir ifadedir. Aşağıdaki tabloda örnekler verilmektedir ve bunların eşleşmesinin neden eşleşmediği veya eşleşmemesi açıklanmaktadır.
 
-| İfade   | Dize    | Eşleştirme | Yorum               |
+| Expression   | Dize    | Eşleştirme | Yorum               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Evet   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | 123abc456 | Evet   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | MZ        | Evet   | Eşleşen ifadesi    |
-| `[a-z]{2}`   | MZ        | Evet   | Büyük/küçük harfe duyarlı değil    |
-| `^[a-z]{2}$` | hello     | Hayır    | Bkz. `^` ve `$` üzeri |
-| `^[a-z]{2}$` | 123abc456 | Hayır    | Bkz. `^` ve `$` üzeri |
+| `[a-z]{2}`   | hello     | Yes   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | 123abc456 | Yes   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | MZ        | Yes   | Eşleşen ifadesi    |
+| `[a-z]{2}`   | MZ        | Yes   | Büyük/küçük harfe duyarlı değil    |
+| `^[a-z]{2}$` | hello     | No    | Bkz. `^` ve `$` üzeri |
+| `^[a-z]{2}$` | 123abc456 | No    | Bkz. `^` ve `$` üzeri |
 
 Normal ifade sözdizimi hakkında daha fazla bilgi için bkz. [.NET Framework normal ifadeler](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
@@ -1503,7 +1503,7 @@ Bir parametreyi bilinen olası değerler kümesiyle kısıtlamak için, normal b
 
 Yerleşik yol kısıtlamalarına ek olarak, arabirimi uygulayarak özel yol kısıtlamaları oluşturulabilir <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> . <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>Arabirim, `Match` `true` kısıtlama karşılanıp Aksi takdirde döndüren tek bir yöntemi içerir `false` .
 
-Özel bir kullanmak için <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> yol kısıtlama türü, uygulamanın uygulamanın hizmet kapsayıcısında kayıtlı olması gerekir <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> . <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>, Yol kısıtlama anahtarlarını <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> Bu kısıtlamaları doğrulayan uygulamalarla eşleyen bir sözlüktür. Bir uygulama <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> , `Startup.ConfigureServices` hizmetlerin bir parçası olarak ' de güncelleştirilir [. AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) çağrısı veya <xref:Microsoft.AspNetCore.Routing.RouteOptions> doğrudan ile yapılandırma `services.Configure<RouteOptions>` . Örnek:
+Özel bir kullanmak için <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> yol kısıtlama türü, uygulamanın uygulamanın hizmet kapsayıcısında kayıtlı olması gerekir <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> . <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>, Yol kısıtlama anahtarlarını <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> Bu kısıtlamaları doğrulayan uygulamalarla eşleyen bir sözlüktür. Bir uygulama <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> , `Startup.ConfigureServices` hizmetlerin bir parçası olarak ' de güncelleştirilir [. AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) çağrısı veya <xref:Microsoft.AspNetCore.Routing.RouteOptions> doğrudan ile yapılandırma `services.Configure<RouteOptions>` . Örneğin:
 
 ```csharp
 services.AddRouting(options =>
@@ -1512,7 +1512,7 @@ services.AddRouting(options =>
 });
 ```
 
-Kısıtlama daha sonra, kısıtlama türü kaydedilirken belirtilen ad kullanılarak yollara her zamanki şekilde uygulanabilir. Örnek:
+Kısıtlama daha sonra, kısıtlama türü kaydedilirken belirtilen ad kullanılarak yollara her zamanki şekilde uygulanabilir. Örneğin:
 
 ```csharp
 [HttpGet("{id:customName}")]
@@ -1930,14 +1930,14 @@ Normal ifadeler, Yönlendirme ve C# dili tarafından kullanılanlarla benzerlik 
 
 Yönlendirmelerde kullanılan normal ifadeler, genellikle şapka işareti ( `^` ) karakteriyle başlar ve dizenin başlangıç konumuyla eşleşir. İfadeler, genellikle dolar işareti ( `$` ) karakteriyle biter ve dizenin sonuyla eşleşir. `^`Ve `$` karakterleri, normal ifadenin tüm yol parametresi değeri ile eşleştiğinden emin olun. `^`Ve karakterleri olmadan `$` normal ifade, dize içindeki herhangi bir alt dizeden eşleşir ve bu genellikle istenmeyen bir ifadedir. Aşağıdaki tabloda örnekler verilmektedir ve bunların eşleşmesinin neden eşleşmediği veya eşleşmemesi açıklanmaktadır.
 
-| İfade   | Dize    | Eşleştirme | Yorum               |
+| Expression   | Dize    | Eşleştirme | Yorum               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Evet   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | 123abc456 | Evet   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | MZ        | Evet   | Eşleşen ifadesi    |
-| `[a-z]{2}`   | MZ        | Evet   | Büyük/küçük harfe duyarlı değil    |
-| `^[a-z]{2}$` | hello     | Hayır    | Bkz. `^` ve `$` üzeri |
-| `^[a-z]{2}$` | 123abc456 | Hayır    | Bkz. `^` ve `$` üzeri |
+| `[a-z]{2}`   | hello     | Yes   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | 123abc456 | Yes   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | MZ        | Yes   | Eşleşen ifadesi    |
+| `[a-z]{2}`   | MZ        | Yes   | Büyük/küçük harfe duyarlı değil    |
+| `^[a-z]{2}$` | hello     | No    | Bkz. `^` ve `$` üzeri |
+| `^[a-z]{2}$` | 123abc456 | No    | Bkz. `^` ve `$` üzeri |
 
 Normal ifade sözdizimi hakkında daha fazla bilgi için bkz. [.NET Framework normal ifadeler](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
@@ -1947,7 +1947,7 @@ Bir parametreyi bilinen olası değerler kümesiyle kısıtlamak için, normal b
 
 Yerleşik yol kısıtlamalarına ek olarak, arabirimi uygulayarak özel yol kısıtlamaları oluşturulabilir <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> . <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>Arabirim, `Match` `true` kısıtlama karşılanıp Aksi takdirde döndüren tek bir yöntemi içerir `false` .
 
-Özel bir kullanmak için <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> yol kısıtlama türü, uygulamanın uygulamanın hizmet kapsayıcısında kayıtlı olması gerekir <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> . <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>, Yol kısıtlama anahtarlarını <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> Bu kısıtlamaları doğrulayan uygulamalarla eşleyen bir sözlüktür. Bir uygulama <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> , `Startup.ConfigureServices` hizmetlerin bir parçası olarak ' de güncelleştirilir [. AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) çağrısı veya <xref:Microsoft.AspNetCore.Routing.RouteOptions> doğrudan ile yapılandırma `services.Configure<RouteOptions>` . Örnek:
+Özel bir kullanmak için <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> yol kısıtlama türü, uygulamanın uygulamanın hizmet kapsayıcısında kayıtlı olması gerekir <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> . <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>, Yol kısıtlama anahtarlarını <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> Bu kısıtlamaları doğrulayan uygulamalarla eşleyen bir sözlüktür. Bir uygulama <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> , `Startup.ConfigureServices` hizmetlerin bir parçası olarak ' de güncelleştirilir [. AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) çağrısı veya <xref:Microsoft.AspNetCore.Routing.RouteOptions> doğrudan ile yapılandırma `services.Configure<RouteOptions>` . Örneğin:
 
 ```csharp
 services.AddRouting(options =>
@@ -1956,7 +1956,7 @@ services.AddRouting(options =>
 });
 ```
 
-Kısıtlama daha sonra, kısıtlama türü kaydedilirken belirtilen ad kullanılarak yollara her zamanki şekilde uygulanabilir. Örnek:
+Kısıtlama daha sonra, kısıtlama türü kaydedilirken belirtilen ad kullanılarak yollara her zamanki şekilde uygulanabilir. Örneğin:
 
 ```csharp
 [HttpGet("{id:customName}")]

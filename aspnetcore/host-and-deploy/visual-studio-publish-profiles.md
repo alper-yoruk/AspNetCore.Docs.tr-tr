@@ -5,7 +5,7 @@ description: Visual Studio 'da yayımlama profilleri oluşturmayı ve bunları �
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/14/2020
+ms.date: 07/28/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/visual-studio-publish-profiles
-ms.openlocfilehash: a386066f8d780c5e71c3634065c4e06b74e83c8c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 7ad85de1a566c993e59203a5efe31458f3acdc53
+ms.sourcegitcommit: 5a36758cca2861aeb10840093e46d273a6e6e91d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403865"
+ms.lasthandoff: 07/28/2020
+ms.locfileid: "87303631"
 ---
 # <a name="visual-studio-publish-profiles-pubxml-for-aspnet-core-app-deployment"></a>ASP.NET Core uygulama dağıtımı için Visual Studio yayımlama profilleri (. pubxml)
 
@@ -160,21 +160,15 @@ Azure hedefine yayımlarken, *. pubxml* dosyası Azure abonelik tanımlarınız�
 
 Gizli bilgiler (yayımlama parolası gibi) Kullanıcı/makine düzeyinde şifrelenir. *Özellikler/PublishProfiles/{PROFILE Name}. pubxml. User* dosyasında depolanır. Bu dosya hassas bilgileri depolayabildiğinden, kaynak denetimine denetlenmemelidir.
 
-ASP.NET Core Web uygulamasının nasıl yayımlanacağı hakkında genel bir bakış için, bkz <xref:host-and-deploy/index> .. ASP.NET Core Web uygulaması yayımlamak için gereken MSBuild görevleri ve hedefleri, [ASPNET/WebSDK deposunda](https://github.com/aspnet/websdk)açık kaynaktır.
+ASP.NET Core Web uygulamasının nasıl yayımlanacağı hakkında genel bir bakış için, bkz <xref:host-and-deploy/index> .. ASP.NET Core Web uygulaması yayımlamak için gereken MSBuild görevleri ve hedefleri, [DotNet/WebSDK deposunda](https://github.com/dotnet/websdk)açık kaynaktır.
 
 Aşağıdaki komutlar Folder, MSDeploy ve [kudu](https://github.com/projectkudu/kudu/wiki) yayımlama profillerini kullanabilir. MSDeploy platformlar arası destek olmadığından, aşağıdaki MSDeploy seçenekleri yalnızca Windows 'da desteklenir.
 
 **Klasör (platformlar arası):**
 
-<!--
-
-NOTE: Add back the following 'dotnet publish' folder publish example after https://github.com/aspnet/websdk/issues/888 is resolved.
-
 ```dotnetcli
 dotnet publish WebApplication.csproj /p:PublishProfile=<FolderProfileName>
 ```
-
--->
 
 ```dotnetcli
 dotnet build WebApplication.csproj /p:DeployOnBuild=true /p:PublishProfile=<FolderProfileName>
@@ -205,7 +199,7 @@ Yukarıdaki örneklerde:
 * `dotnet publish`ve `dotnet build` Azure 'da herhangi bir platformda yayımlanacak kudu API 'lerini destekler. Visual Studio yayımlama, kudu API 'Lerini destekler, ancak Azure 'da platformlar arası yayımlama için WebSDK tarafından desteklenir.
 * Komuta geçme `DeployOnBuild` `dotnet publish` .
 
-Daha fazla bilgi için bkz. [Microsoft. net. SDK. Publish](https://github.com/aspnet/websdk#microsoftnetsdkpublish).
+Daha fazla bilgi için bkz. [Microsoft. net. SDK. Publish](https://github.com/dotnet/websdk#microsoftnetsdkpublish).
 
 Projenin *Properties/PublishProfiles* klasörüne aşağıdaki içeriğe sahip bir yayımlama profili ekleyin:
 
@@ -224,16 +218,17 @@ Projenin *Properties/PublishProfiles* klasörüne aşağıdaki içeriğe sahip b
 
 *Folderprofile*adlı bir profille yayımlarken, aşağıdaki komutlardan birini kullanın:
 
-<!--
+```dotnetcli
+dotnet publish /p:Configuration=Release /p:PublishProfile=FolderProfile`
+```
 
-NOTE: Temporarily removed until https://github.com/aspnet/websdk/issues/888 is resolved.
+```dotnetcli
+dotnet build /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
+```
 
-* `dotnet publish /p:Configuration=Release /p:PublishProfile=FolderProfile`
-
--->
-
-* `dotnet build /p:DeployOnBuild=true /p:PublishProfile=FolderProfile`
-* `msbuild /p:DeployOnBuild=true /p:PublishProfile=FolderProfile`
+```bash
+msbuild /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
+```
 
 .NET Core CLI [DotNet Build](/dotnet/core/tools/dotnet-build) komutu, `msbuild` derleme ve yayımlama işlemini çalıştırmak için çağırır. `dotnet build`Ve `msbuild` komutları, bir klasör profilinde geçirilerek eşdeğerdir. `msbuild`Doğrudan Windows üzerinde çağrılırken, MSBuild 'in .NET Framework sürümü kullanılır. `dotnet build`Klasör olmayan bir profilde çağırma:
 
@@ -269,19 +264,12 @@ MSBuild file.
 Yukarıdaki örnekte:
 
 * `<ExcludeApp_Data>`Özelliği yalnızca BIR XML şeması gereksinimini karşılamak için vardır. `<ExcludeApp_Data>`Proje kökünde bir *App_Data* klasörü olsa bile, özelliğin yayımlama işlemi üzerinde hiçbir etkisi yoktur. *App_Data* klasörü, ASP.NET 4. x projelerinde olduğu gibi özel bir işleme almaz.
-
-<!--
-
-NOTE: Temporarily removed from 'Using the .NET Core CLI' below until https://github.com/aspnet/websdk/issues/888 is resolved.
+* `<LastUsedBuildConfiguration>` özelliği `Release` olarak ayarlanmıştır. Visual Studio 'dan yayımlarken değeri, `<LastUsedBuildConfiguration>` Yayımlama işlemi başlatıldığında değeri kullanılarak ayarlanır. `<LastUsedBuildConfiguration>`özeldir ve içeri aktarılan MSBuild dosyasında geçersiz kılınmamalıdır. Ancak, bu özellik aşağıdaki yaklaşımlardan birini kullanarak komut satırından geçersiz kılınabilir.
+  * .NET Core CLI kullanarak:
 
     ```dotnetcli
     dotnet publish /p:Configuration=Release /p:PublishProfile=FolderProfile
     ```
-
--->
-
-* `<LastUsedBuildConfiguration>`Özelliği olarak ayarlanır `Release` . Visual Studio 'dan yayımlarken değeri, `<LastUsedBuildConfiguration>` Yayımlama işlemi başlatıldığında değeri kullanılarak ayarlanır. `<LastUsedBuildConfiguration>`özeldir ve içeri aktarılan MSBuild dosyasında geçersiz kılınmamalıdır. Ancak, bu özellik aşağıdaki yaklaşımlardan birini kullanarak komut satırından geçersiz kılınabilir.
-  * .NET Core CLI kullanarak:
 
     ```dotnetcli
     dotnet build -c Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
@@ -289,7 +277,7 @@ NOTE: Temporarily removed from 'Using the .NET Core CLI' below until https://git
 
   * MSBuild 'i kullanma:
 
-    ```console
+    ```bash
     msbuild /p:Configuration=Release /p:DeployOnBuild=true /p:PublishProfile=FolderProfile
     ```
 
@@ -303,7 +291,7 @@ Uygulamayı bir yayımlama profili kullanarak dağıtmak için, `msbuild` bir Vi
 
 MSBuild aşağıdaki komut sözdizimini kullanır:
 
-```console
+```bash
 msbuild {PATH} 
     /p:DeployOnBuild=true 
     /p:PublishProfile={PROFILE} 
@@ -311,16 +299,16 @@ msbuild {PATH}
     /p:Password={PASSWORD}
 ```
 
-* {PATH}: uygulamanın proje dosyasının yolu.
-* {PROFILE}: yayımlama profilinin adı.
-* {USERNAME}: MSDeploy Kullanıcı adı. {USERNAME}, yayımlama profilinde bulunabilir.
-* {PASSWORD}: MSDeploy parolası. {PROFILE} öğesinden {PASSWORD} öğesini edinin *. PublishSettings* dosyası. ' Nı indirin *. PublishSettings* dosyası şunlardan biri:
+* `{PATH}`: Uygulamanın proje dosyasının yolu.
+* `{PROFILE}`: Yayımlama profilinin adı.
+* `{USERNAME}`: MSDeploy Kullanıcı adı. , `{USERNAME}` Yayımlama profilinde bulunabilir.
+* `{PASSWORD}`: MSDeploy parolası. `{PASSWORD}` *{PROFILE} öğesinden alın. PublishSettings* dosyası. ' Nı indirin *. PublishSettings* dosyası şunlardan biri:
   * **Çözüm Gezgini**: **View**  >  **bulut Gezginini**görüntüle ' yi seçin. Azure aboneliğinize bağlanın. **Uygulama hizmetleri**'ni açın. Uygulamaya sağ tıklayın. **Yayımlama profilini indir**' i seçin.
   * Azure portal: Web uygulamasının **genel bakış** panelinde **Yayımlama profilini al** ' ı seçin.
 
 Aşağıdaki örnek, *AzureWebApp-Web dağıtımı*adlı bir yayımlama profili kullanır:
 
-```console
+```bash
 msbuild "AzureWebApp.csproj" 
     /p:DeployOnBuild=true 
     /p:PublishProfile="AzureWebApp - Web Deploy" 
@@ -482,7 +470,7 @@ Yukarıdaki örnek, `ResolvedFileToPublish` varsayılan davranışı özniteliğ
 </ResolvedFileToPublish>
 ```
 
-Daha fazla dağıtım örneği için bkz. [Web SDK deposu Benioku dosyası](https://github.com/aspnet/websdk).
+Daha fazla dağıtım örneği için bkz. [Web SDK Benioku dosyası](https://github.com/dotnet/sdk/tree/master/src/WebSdk).
 
 ## <a name="run-a-target-before-or-after-publishing"></a>Yayımlamadan önce veya sonra bir hedef Çalıştır
 
@@ -521,6 +509,6 @@ Dosyaları görüntülemek, düzenlemek, silmek veya eklemek için [hata ayıkla
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * [Web dağıtımı](https://www.iis.net/downloads/microsoft/web-deploy) (MSDeploy), IIS sunucularına Web uygulamaları ve Web siteleri dağıtımını basitleştirir.
-* [Web SDK GitHub deposu](https://github.com/aspnet/websdk/issues): dağıtım için dosya sorunları ve istek özellikleri.
+* [Web SDK GitHub deposu](https://github.com/dotnet/websdk/issues): dağıtım için dosya sorunları ve istek özellikleri.
 * [Visual Studio 'dan bir Azure VM 'de ASP.NET Web uygulaması yayımlama](/azure/virtual-machines/windows/publish-web-app-from-visual-studio)
 * <xref:host-and-deploy/iis/transform-webconfig>
