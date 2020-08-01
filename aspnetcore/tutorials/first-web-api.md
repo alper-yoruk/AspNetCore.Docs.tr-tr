@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-web-api
-ms.openlocfilehash: 2383934070a65b8131e890a170186b736d3fcec0
-ms.sourcegitcommit: 5a36758cca2861aeb10840093e46d273a6e6e91d
+ms.openlocfilehash: b6a189907f521d7d9d18c1373747a13ab38a621f
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "86869997"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87444171"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Öğretici: ASP.NET Core bir Web API 'SI oluşturma
 
@@ -238,7 +238,7 @@ Model sınıfları projede herhangi bir yere gidebilir, ancak *modeller* klasör
 * **Araştır** sekmesini seçin ve arama kutusuna **Microsoft. Entityframeworkcore. SqlServer** yazın.
 * Sol bölmedeki **Microsoft. EntityFrameworkCore. SqlServer** öğesini seçin.
 * Sağ bölmedeki **Proje** onay kutusunu seçin ve ardından **Install**' ı seçin.
-* Önceki yönergeleri kullanarak `Microsoft.EntityFrameworkCore.InMemory` NuGet paketini ekleyin.
+* Yukarıdaki yönergeleri kullanarak **Microsoft. EntityFrameworkCore. InMemory** NuGet paketini ekleyin.
 
 ![NuGet Paket Yöneticisi](first-web-api/_static/vs3NuGet.png)
 
@@ -304,7 +304,7 @@ dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m 
 
 Oluşturulan kod:
 
-* Sınıfını [`[ApiController]`](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute) özniteliğiyle işaretler. Bu öznitelik, denetleyicinin Web API isteklerine yanıt verdiğini belirtir. Özniteliğin izin aldığı belirli davranışlar hakkında daha fazla bilgi için bkz <xref:web-api/index> ..
+* Sınıfını [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) özniteliğiyle işaretler. Bu öznitelik, denetleyicinin Web API isteklerine yanıt verdiğini belirtir. Özniteliğin izin aldığı belirli davranışlar hakkında daha fazla bilgi için bkz <xref:web-api/index> ..
 * Veritabanı bağlamını () denetleyiciye eklemek için DI kullanır `TodoContext` . Veritabanı bağlamı, denetleyicideki [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) yöntemlerinde her birinde kullanılır.
 
 İçin ASP.NET Core şablonları:
@@ -320,7 +320,7 @@ Oluşturulan kod:
 
 [!code-csharp[](first-web-api/samples/3.0/TodoApi/Controllers/TodoItemsController.cs?name=snippet_Create)]
 
-Yukarıdaki kod, özniteliğiyle gösterildiği gibi bir HTTP POST yöntemidir [`[HttpPost]`](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute) . Yöntemi, HTTP isteğinin gövdesinden Yapılacaklar öğesinin değerini alır.
+Yukarıdaki kod, özniteliğiyle gösterildiği gibi bir HTTP POST yöntemidir [`[HttpPost]`](xref:Microsoft.AspNetCore.Mvc.HttpPostAttribute) . Yöntemi, HTTP isteğinin gövdesinden Yapılacaklar öğesinin değerini alır.
 
 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*>Yöntemi:
 
@@ -409,7 +409,7 @@ Bu uygulama, bellek içi bir veritabanını kullanır. Uygulama durdurulup başl
 
 ## <a name="routing-and-url-paths"></a>Yönlendirme ve URL yolları
 
-[`[HttpGet]`](/dotnet/api/microsoft.aspnetcore.mvc.httpgetattribute)Öznitelik, BIR HTTP GET isteğine yanıt veren bir yöntemi gösterir. Her yöntemin URL yolu şu şekilde oluşturulur:
+[`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute)Öznitelik, BIR HTTP GET isteğine yanıt veren bir yöntemi gösterir. Her yöntemin URL yolu şu şekilde oluşturulur:
 
 * Denetleyicinin özniteliğinde şablon dizesiyle başlayın `Route` :
 
@@ -428,7 +428,7 @@ Aşağıdaki `GetTodoItem` yöntemde, yapılacaklar `"{id}"` öğesinin benzersi
 
 `ActionResult`dönüş türleri, geniş bir HTTP durum kodu aralığını temsil edebilir. Örneğin, `GetTodoItem` iki farklı durum değeri döndürebilir:
 
-* İstenen KIMLIKLE eşleşen hiçbir öğe yoksa, yöntem 404 [NotFound](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.notfound) hata kodu döndürür.
+* İstenen KIMLIKLE eşleşen hiçbir öğe yoksa, yöntem bir 404 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound%2A> hata kodu döndürür.
 * Aksi takdirde, yöntemi bir JSON yanıt gövdesi ile 200 döndürür. `item`Sonuçları BIR HTTP 200 yanıtına döndürme.
 
 ## <a name="the-puttodoitem-method"></a>PutTodoItem yöntemi
@@ -720,7 +720,7 @@ Yukarıdaki kod:
 Yukarıdaki kod:
 
 * Yöntemler olmadan bir API denetleyici sınıfı tanımlar.
-* Sınıfını [`[ApiController]`](/dotnet/api/microsoft.aspnetcore.mvc.apicontrollerattribute) özniteliğiyle işaretler. Bu öznitelik, denetleyicinin Web API isteklerine yanıt verdiğini belirtir. Özniteliğin izin aldığı belirli davranışlar hakkında daha fazla bilgi için bkz <xref:web-api/index> ..
+* Sınıfını [`[ApiController]`](xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute) özniteliğiyle işaretler. Bu öznitelik, denetleyicinin Web API isteklerine yanıt verdiğini belirtir. Özniteliğin izin aldığı belirli davranışlar hakkında daha fazla bilgi için bkz <xref:web-api/index> ..
 * Veritabanı bağlamını () denetleyiciye eklemek için DI kullanır `TodoContext` . Veritabanı bağlamı, denetleyicideki [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) yöntemlerinde her birinde kullanılır.
 * Veritabanı boşsa veritabanına adlı bir öğe ekler `Item1` . Bu kod oluşturucuda yer aldığı için, her yeni HTTP isteği olduğunda çalışır. Tüm öğeleri silerseniz, `Item1` BIR API yönteminin bir sonraki çağrılışında Oluşturucu yeniden oluşturulur. Bu nedenle, aslında çalışırken silme işe yaramadı gibi görünebilir.
 
@@ -756,7 +756,7 @@ Aşağıdaki HTTP yanıtı, çağrısı tarafından oluşturulur `GetTodoItems` 
 
 ## <a name="routing-and-url-paths"></a>Yönlendirme ve URL yolları
 
-[`[HttpGet]`](/dotnet/api/microsoft.aspnetcore.mvc.httpgetattribute)Öznitelik, BIR HTTP GET isteğine yanıt veren bir yöntemi gösterir. Her yöntemin URL yolu şu şekilde oluşturulur:
+[`[HttpGet]`](xref:Microsoft.AspNetCore.Mvc.HttpGetAttribute)Öznitelik, BIR HTTP GET isteğine yanıt veren bir yöntemi gösterir. Her yöntemin URL yolu şu şekilde oluşturulur:
 
 * Denetleyicinin özniteliğinde şablon dizesiyle başlayın `Route` :
 
@@ -775,7 +775,7 @@ Aşağıdaki `GetTodoItem` yöntemde, yapılacaklar `"{id}"` öğesinin benzersi
 
 `ActionResult`dönüş türleri, geniş bir HTTP durum kodu aralığını temsil edebilir. Örneğin, `GetTodoItem` iki farklı durum değeri döndürebilir:
 
-* İstenen KIMLIKLE eşleşen hiçbir öğe yoksa, yöntem 404 [NotFound](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.notfound) hata kodu döndürür.
+* İstenen KIMLIKLE eşleşen hiçbir öğe yoksa, yöntem bir 404 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound%2A> hata kodu döndürür.
 * Aksi takdirde, yöntemi bir JSON yanıt gövdesi ile 200 döndürür. `item`Sonuçları BIR HTTP 200 yanıtına döndürme.
 
 ## <a name="test-the-gettodoitems-method"></a>GetTodoItems yöntemini test etme
@@ -814,7 +814,7 @@ Bu öğretici, Web API 'sini test etmek için Postman kullanır.
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Controllers/TodoController.cs?name=snippet_Create)]
 
-Yukarıdaki kod, özniteliğiyle gösterildiği gibi bir HTTP POST yöntemidir [`[HttpPost]`](/dotnet/api/microsoft.aspnetcore.mvc.httppostattribute) . Yöntemi, HTTP isteğinin gövdesinden Yapılacaklar öğesinin değerini alır.
+Yukarıdaki kod, özniteliğiyle gösterildiği gibi bir HTTP POST yöntemidir [`[HttpPost]`](xref:Microsoft.AspNetCore.Mvc.HttpPostAttribute) . Yöntemi, HTTP isteğinin gövdesinden Yapılacaklar öğesinin değerini alır.
 
 `CreatedAtAction`Yöntemi:
 
@@ -907,7 +907,7 @@ Bir yapılacaklar öğesini silmek için Postman kullanın:
 
 Bu bölümde, Web API 'sini çağırmak için JavaScript kullanan bir HTML sayfası eklenir. jQuery isteği başlatır. JavaScript, sayfayı Web API 'sinin yanıtından alınan ayrıntılarla güncelleştirir.
 
-Uygulamayı [statik dosyalara sunacak](/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles#Microsoft_AspNetCore_Builder_StaticFileExtensions_UseStaticFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) şekilde yapılandırın ve aşağıdaki vurgulanmış kodla *Startup.cs* güncelleştirerek [varsayılan dosya eşlemesini etkinleştirin](/dotnet/api/microsoft.aspnetcore.builder.defaultfilesextensions.usedefaultfiles#Microsoft_AspNetCore_Builder_DefaultFilesExtensions_UseDefaultFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) :
+Uygulamayı [statik dosyalara sunacak](xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A) şekilde yapılandırın ve aşağıdaki vurgulanmış kodla *Startup.cs* güncelleştirerek [varsayılan dosya eşlemesini etkinleştirin](xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles%2A) :
 
 [!code-csharp[](first-web-api/samples/2.2/TodoApi/Startup.cs?highlight=14-15&name=snippet_configure)]
 

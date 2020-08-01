@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: b917671053313c74acfff36518e8f36d5ef2eb22
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 962b42239b2101fc95e55fb38ce214481bf0ef01
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405490"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87444145"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core denetleyici eylemlerine yönlendirme
 
@@ -52,7 +52,7 @@ Bu belge:
 
 [!code-csharp[](routing/samples/3.x/main/StartupDefaultMVC.cs?name=snippet)]
 
-Çağrısı içinde <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> , <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> tek bir yol oluşturmak için kullanılır. Tek yol yol olarak adlandırılır `default` . Denetleyiciler ve görünümler içeren çoğu uygulama, yola benzer bir rota şablonu kullanır `default` . REST API 'Leri [öznitelik yönlendirmeyi](#ar)kullanmalıdır.
+Çağrısı içinde <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints%2A> , <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute%2A> tek bir yol oluşturmak için kullanılır. Tek yol yol olarak adlandırılır `default` . Denetleyiciler ve görünümler içeren çoğu uygulama, yola benzer bir rota şablonu kullanır `default` . REST API 'Leri [öznitelik yönlendirmeyi](#ar)kullanmalıdır.
 
 Yol şablonu `"{controller=Home}/{action=Index}/{id?}"` :
 
@@ -89,7 +89,7 @@ public class HomeController : Controller
 
 URL yolu, `/` yönlendirme şablonu varsayılan `Home` denetleyicilerini ve eylemini kullanır `Index` . URL yolu, `/Home` yönlendirme şablonu varsayılan eylemini kullanır `Index` .
 
-Kolaylık yöntemi <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute*> :
+Kolaylık yöntemi <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute%2A> :
 
 ```csharp
 endpoints.MapDefaultControllerRoute();
@@ -102,10 +102,10 @@ endpoints.MapControllerRoute("default", "{controller=Home}/{action=Index}/{id?}"
 ```
 
 > [!IMPORTANT]
-> Yönlendirme, <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting*> ve <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints*> ara yazılımı kullanılarak yapılandırılır. Denetleyicileri kullanmak için:
+> Yönlendirme, <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting%2A> ve <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints%2A> ara yazılımı kullanılarak yapılandırılır. Denetleyicileri kullanmak için:
 >
-> * <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*> `UseEndpoints` [Öznitelik yönlendirmeli](#ar) denetleyicileri eşlemek için içinde çağırın.
-> * <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> Hem [genel olarak yönlendirmeli](#cr) denetleyicileri hem de [öznitelik yönlendirmeli](#ar) denetleyicileri eşlemek için veya öğesini çağırın.
+> * <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers%2A> `UseEndpoints` [Öznitelik yönlendirmeli](#ar) denetleyicileri eşlemek için içinde çağırın.
+> * <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute%2A> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute%2A> Hem [genel olarak yönlendirmeli](#cr) denetleyicileri hem de [öznitelik yönlendirmeli](#ar) denetleyicileri eşlemek için veya öğesini çağırın.
 
 <a name="routing-conventional-ref-label"></a>
 <a name="crd"></a>
@@ -151,7 +151,7 @@ Varsayılan yol ile geleneksel yönlendirmeyi kullanmak, her eylem için yeni bi
 * , UI tabanlı uygulamalar için kullanışlı bir başlangıç noktasıdır.
 * Birçok Web UI uygulaması için tek yol şablonu gereklidir. Daha büyük Web Kullanıcı arabirimi uygulamaları için, sık sık gerekli olan [alanlarda](#areas) başka bir yol kullanın.
 
-<xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*>ve <xref:Microsoft.AspNetCore.Builder.MvcAreaRouteBuilderExtensions.MapAreaRoute*> :
+<xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute%2A>ve <xref:Microsoft.AspNetCore.Builder.MvcAreaRouteBuilderExtensions.MapAreaRoute%2A> :
 
 * , Çağrıldığı sıraya göre kendi uç noktalarına otomatik olarak bir **sipariş** değeri atayın.
 
@@ -168,7 +168,7 @@ ASP.NET Core 3,0 ve üzeri için uç nokta yönlendirme:
 
 ### <a name="multiple-conventional-routes"></a>Birden çok geleneksel yollar
 
-[conventional routes](#cr) `UseEndpoints` Ve ' ye daha fazla çağrı eklenerek, içine birden çok geleneksel yol eklenebilir <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> . Bunun yapılması, birden çok kural tanımlamayı veya belirli bir [eyleme](#action)adanmış geleneksel yollar eklemeyi sağlar; örneğin:
+[conventional routes](#cr) `UseEndpoints` Ve ' ye daha fazla çağrı eklenerek, içine birden çok geleneksel yol eklenebilir <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute%2A> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute%2A> . Bunun yapılması, birden çok kural tanımlamayı veya belirli bir [eyleme](#action)adanmış geleneksel yollar eklemeyi sağlar; örneğin:
 
 [!code-csharp[](routing/samples/3.x/main/Startup.cs?name=snippet_1)]
 
@@ -189,7 +189,7 @@ ASP.NET Core 3,0 ve üzeri için uç nokta yönlendirme:
 Önceki örnek:
 
 * `blog`yol, önce eklendiğinden, rotadan eşleşme için daha yüksek önceliğe sahiptir `default` .
-* Ve, URL 'nin bir parçası olarak bir makale adı olması gereken tipik bir [başlık](https://developer.mozilla.org/docs/Glossary/Slug) stili yönlendirme örneğidir.
+* , URL 'nin bir parçası olarak bir makale adının olması gereken tipik bir [başlık](https://developer.mozilla.org/docs/Glossary/Slug) stili yönlendirme örneğidir.
 
 > [!WARNING]
 > ASP.NET Core 3,0 ve üzeri sürümlerde yönlendirme:
@@ -203,7 +203,7 @@ ASP.NET Core 3,0 ve üzeri için uç nokta yönlendirme:
 ### <a name="conventional-routing-order"></a>Geleneksel yönlendirme sırası
 
 Geleneksel yönlendirme yalnızca uygulama tarafından tanımlanan eylem ve denetleyicinin bir bileşimiyle eşleşir. Bu, geleneksel yolların çakıştığı durumları basitleştirmek için tasarlanmıştır.
-,, Ve kullanarak yollar ekleme, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute*> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute*> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> çağırdıkları sıraya göre bitiş noktalarına otomatik olarak bir sipariş değeri atar. Daha önce görüntülenen bir rotadaki eşleşmelerin önceliği daha yüksektir. Geleneksel yönlendirme sıra bağımlıdır. Genel olarak, alanlar içeren rotalar daha önce bir alan olmadan rotalardan daha belirgin olduklarından yerleştirilmelidir. Catch-all yol parametrelerine sahip [adanmış geleneksel yollar](#dcr) `{*article}` , bir yol çok uzun sürebilir [greedy](xref:fundamentals/routing#greedy), yani diğer yollarla eşleştirmek istediğiniz URL 'lerle eşleşir. Doyumsuz yollarını daha sonra yol tablosuna yerleştirerek doyumsuz eşleşmelerini önleyin.
+,, Ve kullanarak yollar ekleme, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute%2A> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapDefaultControllerRoute%2A> <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute%2A> çağırdıkları sıraya göre bitiş noktalarına otomatik olarak bir sipariş değeri atar. Daha önce görüntülenen bir rotadaki eşleşmelerin önceliği daha yüksektir. Geleneksel yönlendirme sıra bağımlıdır. Genel olarak, alanlar içeren rotalar daha önce bir alan olmadan rotalardan daha belirgin olduklarından yerleştirilmelidir. Catch-all yol parametrelerine sahip [adanmış geleneksel yollar](#dcr) `{*article}` , bir yol çok uzun sürebilir [greedy](xref:fundamentals/routing#greedy), yani diğer yollarla eşleştirmek istediğiniz URL 'lerle eşleşir. Doyumsuz yollarını daha sonra yol tablosuna yerleştirerek doyumsuz eşleşmelerini önleyin.
 
 [!INCLUDE[](~/includes/catchall.md)]
 
@@ -216,7 +216,7 @@ Yönlendirme ile iki uç nokta eşleşmesi durumunda, yönlendirme aşağıdakil
 * En iyi aday ' ı seçin.
 * Bir özel durum oluşturur.
 
-Örneğin:
+Örnek:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet9)]
 
@@ -272,7 +272,7 @@ REST API 'Leri, uygulamanın işlevselliğini [http fiilleri](#verb)tarafından 
 
 [!code-csharp[](routing/samples/3.x/main/StartupAPI.cs?name=snippet)]
 
-Önceki kodda, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers*> `UseEndpoints` öznitelik yönlendirmeli denetleyicileri eşlemek için içinde çağırılır.
+Önceki kodda, <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllers%2A> `UseEndpoints` öznitelik yönlendirmeli denetleyicileri eşlemek için içinde çağırılır.
 
 Aşağıdaki örnekte:
 
@@ -758,7 +758,7 @@ Aşağıdaki Razor Dosya, için BIR HTML bağlantısı oluşturur `Destination_R
 
 <a name="routing-gen-urls-html-ref-label"></a>
 
-### <a name="generate-urls-in-html-and-razor"></a>HTML ve, URL 'Leri oluşturmaRazor
+### <a name="generate-urls-in-html-and-no-locrazor"></a>HTML ve, URL 'Leri oluşturmaRazor
 
 <xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper><xref:Microsoft.AspNetCore.Mvc.ViewFeatures.HtmlHelper>sırasıyla ve öğeleri oluşturmak Için [HTML. BeginForm](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.BeginForm*) ve [HTML. ActionLink](xref:Microsoft.AspNetCore.Mvc.Rendering.IHtmlHelper.ActionLink*) yöntemlerini sağlar `<form>` `<a>` . Bu yöntemler bir URL oluşturmak için [URL. Action](xref:Microsoft.AspNetCore.Mvc.IUrlHelper.Action*) yöntemini kullanır ve benzer bağımsız değişkenleri kabul ederler. `Url.RouteUrl`İçin `HtmlHelper` şirkeme, `Html.BeginRouteForm` ve `Html.RouteLink` benzer işlevlere sahiptir.
 
@@ -776,7 +776,7 @@ Yukarıdaki örneklerde `IUrlHelper` bir denetleyicide kullanılması gösterild
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/CustomerController.cs?name=snippet)]
 
-Eylem, gibi Fabrika yöntemleri sonuçları <xref:Microsoft.AspNetCore.Mvc.ControllerBase.RedirectToAction*> ve <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*> üzerindeki yöntemlere benzer bir model izler `IUrlHelper` .
+Eylem, gibi Fabrika yöntemleri sonuçları <xref:Microsoft.AspNetCore.Mvc.ControllerBase.RedirectToAction%2A> ve <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction%2A> üzerindeki yöntemlere benzer bir model izler `IUrlHelper` .
 
 <a name="routing-dedicated-ref-label"></a>
 
@@ -805,7 +805,7 @@ Aşağıdaki örnek, MVC 'yi varsayılan geleneksel yolu ve bir adlandırılmı�
 
 [!code-csharp[](routing/samples/3.x/AreasRouting/Startup.cs?name=snippet1)]
 
-Önceki kodda, öğesini <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute*> oluşturmak için çağırılır `"blog_route"` . İkinci parametresi, `"Blog"` , alan adıdır.
+Önceki kodda, öğesini <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapAreaControllerRoute%2A> oluşturmak için çağırılır `"blog_route"` . İkinci parametresi, `"Blog"` , alan adıdır.
 
 Benzer bir URL yolu eşleştirilirken `/Manage/Users/AddUser` yol, `"blog_route"` yol değerlerini oluşturur `{ area = Blog, controller = Users, action = AddUser }` . `area`Rota değeri, için varsayılan bir değer tarafından üretilir `area` . Tarafından oluşturulan yol `MapAreaControllerRoute` , aşağıdaki ile eşdeğerdir:
 
@@ -1009,7 +1009,7 @@ Rota koleksiyonundaki yollar sıralanır ve eklendikleri sırada işlenir. Bu ne
 
 ### <a name="disambiguating-actions"></a>Kesinleştirme eylemleri
 
-İki eylem yönlendirme aracılığıyla eşleşiyorsa, MVC ' en iyi ' adayı seçmek için bir özel durum oluşturması veya bir özel durum oluşturmak için, MVC 'nin belirsizliğini Örneğin:
+İki eylem yönlendirme aracılığıyla eşleşiyorsa, MVC ' en iyi ' adayı seçmek için bir özel durum oluşturması veya bir özel durum oluşturmak için, MVC 'nin belirsizliğini Örnek:
 
 ```csharp
 public class ProductsController : Controller

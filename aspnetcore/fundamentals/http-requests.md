@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/http-requests
-ms.openlocfilehash: 578263978959100e266626aeccccc0830d9462b7
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: fb9001c06228b4290ca1e0c7cfb6b1338f431cd6
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399120"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87444117"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>ASP.NET Core 'de ıhttpclientfactory kullanarak HTTP istekleri yapın
 
@@ -214,7 +214,7 @@ Yukarıdaki kodda, `CreateItemAsync` yöntemi:
 * <xref:System.Net.Http.HttpClient.PostAsync%2A>JSON içeriğini BELIRTILEN URL 'ye göndermek için çağrılar. Bu, [HttpClient. BaseAddress](xref:System.Net.Http.HttpClient.BaseAddress)'e eklenen GÖRELI bir URL 'dir.
 * <xref:System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode%2A>Yanıt durum kodu başarıyı belirtmezse bir özel durum oluşturmak için çağırır.
 
-`HttpClient`, diğer içerik türlerini de destekler. Örneğin, <xref:System.Net.Http.MultipartContent> ve <xref:System.Net.Http.StreamContent> . Desteklenen içeriğin tamamı listesi için bkz <xref:System.Net.Http.HttpContent> ..
+`HttpClient`, diğer içerik türlerini de destekler. Örneğin, <xref:System.Net.Http.MultipartContent> ve <xref:System.Net.Http.StreamContent>. Desteklenen içeriğin tamamı listesi için bkz <xref:System.Net.Http.HttpContent> ..
 
 Aşağıdaki örnekte bir HTTP PUT isteği gösterilmektedir:
 
@@ -744,7 +744,7 @@ Bir <xref:System.Net.Http.IHttpClientFactory> uygulamadaki örnekleri yapıland�
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 .NET Framework hedefleyen projeler [Microsoft. Extensions. http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) NuGet paketinin yüklenmesini gerektirir. .NET Core ile hedeflenen ve [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app) 'e başvuran projeler zaten paketi içeriyor `Microsoft.Extensions.Http` .
 

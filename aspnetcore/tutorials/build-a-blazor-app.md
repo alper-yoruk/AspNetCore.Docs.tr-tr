@@ -5,7 +5,7 @@ description: Bir Blazor uygulamayı adım adım oluşturun.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/02/2020
+ms.date: 07/30/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/build-a-blazor-app
-ms.openlocfilehash: 174a8e561701bb3ebd68ed05e42dfc3d70a9b450
-ms.sourcegitcommit: 14c3d111f9d656c86af36ecb786037bf214f435c
+ms.openlocfilehash: b58c0c3db685d0a5b082aaf2eb434635bd10e2eb
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/09/2020
-ms.locfileid: "86176235"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87444038"
 ---
-# <a name="build-a-blazor-todo-list-app"></a>BlazorYapılacaklar listesi uygulaması oluşturma
+# <a name="build-a-no-locblazor-todo-list-app"></a>BlazorYapılacaklar listesi uygulaması oluşturma
 
 [Daniel Roth](https://github.com/danroth27) ve [Luke Latham](https://github.com/guardrex) tarafından
 
@@ -32,9 +32,15 @@ Bu öğreticide, bir uygulamayı nasıl oluşturabileceğiniz ve değiştireceğ
 > * Yapılacaklar listesi Blazor uygulama projesi oluşturma
 > * RazorBileşenleri Değiştir
 > * Bileşenlerde olay işleme ve veri bağlamayı kullanma
-> * Bir uygulamada bağımlılık ekleme (dı) ve yönlendirmeyi kullanma Blazor
+> * Bir uygulamada yönlendirmeyi kullanma Blazor
 
 Bu öğreticinin sonunda, çalışan bir yapılacaklar listesi uygulamanız olacak.
+
+## <a name="prerequisites"></a>Önkoşullar
+
+[!INCLUDE[](~/includes/3.1-SDK.md)]
+
+## <a name="create-a-todo-list-no-locblazor-app"></a>Yapılacaklar listesi uygulaması oluşturma Blazor
 
 1. BlazorKomut kabuğunda adlı yeni bir uygulama oluşturun `TodoList` :
 
@@ -140,7 +146,7 @@ Bu öğreticide, şunların nasıl yapıldığını öğrendiniz:
 > * Yapılacaklar listesi Blazor uygulama projesi oluşturma
 > * RazorBileşenleri Değiştir
 > * Bileşenlerde olay işleme ve veri bağlamayı kullanma
-> * Bir uygulamada bağımlılık ekleme (dı) ve yönlendirmeyi kullanma Blazor
+> * Bir uygulamada yönlendirmeyi kullanma Blazor
 
 ASP.NET Core araçları hakkında bilgi edinin Blazor :
 

@@ -14,14 +14,14 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/index
-ms.openlocfilehash: e7e9bc76a2bba1c15b32c97f0f3629285f256499
-ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
+ms.openlocfilehash: bd9f991a2aba32cbbeb193ad422005f910e6795b
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86568711"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87444071"
 ---
-# <a name="introduction-to-razor-pages-in-aspnet-core"></a>RazorASP.NET Core sayfalara giriş
+# <a name="introduction-to-no-locrazor-pages-in-aspnet-core"></a>RazorASP.NET Core sayfalara giriş
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -33,7 +33,7 @@ Model-View-Controller yaklaşımını kullanan bir öğretici arıyorsanız, bkz
 
 Bu belge, sayfalara giriş sağlar Razor . Adım adım öğretici değildir. Bölümlerden bazılarını çok gelişmiş bir şekilde buldıysanız, bkz. [ Razor sayfalarla çalışmaya başlama](xref:tutorials/razor-pages/razor-pages-start). ASP.NET Core genel bir bakış için bkz. [ASP.NET Core giriş](xref:index).
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -51,7 +51,7 @@ Bu belge, sayfalara giriş sağlar Razor . Adım adım öğretici değildir. Bö
 
 <a name="rpvs17"></a>
 
-## <a name="create-a-razor-pages-project"></a>RazorSayfalar projesi oluşturma
+## <a name="create-a-no-locrazor-pages-project"></a>RazorSayfalar projesi oluşturma
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -67,7 +67,7 @@ Bir sayfa projesi oluşturma hakkında ayrıntılı yönergeler için bkz. [ Raz
 
 ---
 
-## <a name="razor-pages"></a>RazorSayfaları
+## <a name="no-locrazor-pages"></a>RazorSayfaları
 
 Razor*Startup.cs*'de sayfalar etkin:
 
@@ -108,6 +108,8 @@ Notlar:
 RazorSayfalar, Web tarayıcıları ile kullanılan yaygın desenleri bir uygulama oluştururken kolayca uygulanması için tasarlanmıştır. [Model bağlama](xref:mvc/models/model-binding), [ETIKET yardımcıları](xref:mvc/views/tag-helpers/intro)ve HTML Yardımcıları hepsi yalnızca bir sayfa sınıfında tanımlanan özelliklerle *çalışır* Razor . Model için temel bir "bize başvurun" formu uygulayan bir sayfa düşünün `Contact` :
 
 Bu belgedeki örnekler için, `DbContext` [Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/razor-pages/index/3.0sample/RazorPagesContacts/Startup.cs#L23-L24) dosyasında başlatılır.
+
+Bellek içi veritabanı `Microsoft.EntityFrameworkCore.InMemory` NuGet paketini gerektirir.
 
 [!code-csharp[](index/3.0sample/RazorPagesContacts/Startup.cs?name=snippet)]
 
@@ -296,7 +298,7 @@ Create formunu ad değeri olmadan göndermek "ad alanı gereklidir" hata iletisi
 `[StringLength(10)]`Özniteliği `data-val-length-max="10"` işlenmiş html üzerinde oluşturulur. `data-val-length-max`tarayıcıların belirtilen uzunluk üst sınırından fazlasını girmesini engeller. Gönderiyi düzenlemek ve yeniden oynatmak için [Fiddler](https://www.telerik.com/fiddler) gibi bir araç kullanılıyorsa:
 
 * , Adı 10 ' dan daha uzun.
-* "Alan adı, en fazla 10 uzunluğunda bir dize olmalıdır" hata iletisi. döndürülür.
+* "Alan adı, en fazla 10 uzunluğunda bir dize olmalıdır" hata iletisi. hatası döndürülür.
 
 Aşağıdaki modeli göz önünde bulundurun `Movie` :
 
@@ -340,13 +342,13 @@ RazorBir `OnGet` işleyici tanımlanmazsa, sayfa işleyiciyi çağırmaya geri d
 
 <a name="xsrf"></a>
 
-## <a name="xsrfcsrf-and-razor-pages"></a>XSRF/CSRF ve Razor Sayfalar
+## <a name="xsrfcsrf-and-no-locrazor-pages"></a>XSRF/CSRF ve Razor Sayfalar
 
 RazorSayfalar, [Antiforgery doğrulaması](xref:security/anti-request-forgery)tarafından korunur. [Formtaghelper](xref:mvc/views/working-with-forms#the-form-tag-helper) , antiforgery belirteçlerini HTML form öğelerine çıkartır.
 
 <a name="layout"></a>
 
-## <a name="using-layouts-partials-templates-and-tag-helpers-with-razor-pages"></a>Sayfalarla düzenleri, partileri, şablonları ve etiket yardımcıları kullanma Razor
+## <a name="using-layouts-partials-templates-and-tag-helpers-with-no-locrazor-pages"></a>Sayfalarla düzenleri, partileri, şablonları ve etiket yardımcıları kullanma Razor
 
 Sayfalar, görünüm altyapısının tüm özellikleri ile çalışır Razor . Düzenler, partıals, şablonlar, etiket yardımcıları, *_ViewStart. cshtml*ve *_ViewImports. cshtml* geleneksel görünümlerde aynı şekilde çalışır Razor .
 
@@ -438,13 +440,13 @@ Uygulama aşağıdaki dosya/klasör yapısına sahiptir:
     * *Edit. cshtml*
     * *Index.cshtml*
 
-*Pages/Customers/Create. cshtml* ve *Pages/Customers/Edit. cshtml* sayfaları, başarılı olduktan sonra *sayfaları/müşterileri/Index. cshtml* 'ye yeniden yönlendirir. Dize, `./Index` önceki sayfaya erişmek için kullanılan göreli bir sayfa adıdır. *Pages/Customers/Index. cshtml* sayfasının URL 'leri oluşturmak için kullanılır. Örneğin:
+*Pages/Customers/Create. cshtml* ve *Pages/Customers/Edit. cshtml* sayfaları, başarılı olduktan sonra *sayfaları/müşterileri/Index. cshtml* 'ye yeniden yönlendirir. Dize, `./Index` önceki sayfaya erişmek için kullanılan göreli bir sayfa adıdır. *Pages/Customers/Index. cshtml* sayfasının URL 'leri oluşturmak için kullanılır. Örnek:
 
 * `Url.Page("./Index", ...)`
 * `<a asp-page="./Index">Customers Index Page</a>`
 * `RedirectToPage("./Index")`
 
-Mutlak sayfa adı, `/Index` *Sayfalar/Index. cshtml* sayfasına URL 'ler oluşturmak için kullanılır. Örneğin:
+Mutlak sayfa adı, `/Index` *Sayfalar/Index. cshtml* sayfasına URL 'ler oluşturmak için kullanılır. Örnek:
 
 * `Url.Page("/Index", ...)`
 * `<a asp-page="/Index">Home Index Page</a>`
@@ -585,13 +587,13 @@ Sayfalar için <xref:Microsoft.AspNetCore.Mvc.RazorPages.RazorPagesOptions> kök
 
 Görünümleri önceden derlemek için bkz. [ Razor derlemeyi görüntüle](xref:mvc/views/view-compilation).
 
-### <a name="specify-that-razor-pages-are-at-the-content-root"></a>RazorSayfaların içerik kökünde olduğunu belirtin
+### <a name="specify-that-no-locrazor-pages-are-at-the-content-root"></a>RazorSayfaların içerik kökünde olduğunu belirtin
 
 Varsayılan olarak, Razor Sayfalar, */Pages* dizininde kök olarak depolanır. <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcBuilderExtensions.WithRazorPagesAtContentRoot*> Razor Sayfalarınızın, uygulamanın [içerik kökünde](xref:fundamentals/index#content-root) () olduğunu belirtmek için ekleyin <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment.ContentRootPath> :
 
 [!code-csharp[](index/3.0sample/RazorPagesContacts/StartupWithRazorPagesAtContentRoot.cs?name=snippet)]
 
-### <a name="specify-that-razor-pages-are-at-a-custom-root-directory"></a>RazorSayfaların özel kök dizinde olduğunu belirtme
+### <a name="specify-that-no-locrazor-pages-are-at-a-custom-root-directory"></a>RazorSayfaların özel kök dizinde olduğunu belirtme
 
 <xref:Microsoft.Extensions.DependencyInjection.MvcRazorPagesMvcCoreBuilderExtensions.WithRazorPagesRoot*>Bu Razor sayfaların, uygulamadaki özel bir kök dizinde olduğunu belirtmek için ekleyin (göreli bir yol sağlayın):
 
@@ -624,7 +626,7 @@ Model-View-Controller yaklaşımını kullanan bir öğretici arıyorsanız, bkz
 
 Bu belge, sayfalara giriş sağlar Razor . Adım adım öğretici değildir. Bölümlerden bazılarını çok gelişmiş bir şekilde buldıysanız, bkz. [ Razor sayfalarla çalışmaya başlama](xref:tutorials/razor-pages/razor-pages-start). ASP.NET Core genel bir bakış için bkz. [ASP.NET Core giriş](xref:index).
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -642,7 +644,7 @@ Bu belge, sayfalara giriş sağlar Razor . Adım adım öğretici değildir. Bö
 
 <a name="rpvs17"></a>
 
-## <a name="create-a-razor-pages-project"></a>RazorSayfalar projesi oluşturma
+## <a name="create-a-no-locrazor-pages-project"></a>RazorSayfalar projesi oluşturma
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -660,7 +662,7 @@ Oluşturulan *. csproj* dosyasını Mac için Visual Studio açın.
 
 ---
 
-## <a name="razor-pages"></a>RazorSayfaları
+## <a name="no-locrazor-pages"></a>RazorSayfaları
 
 Razor*Startup.cs*'de sayfalar etkin:
 
@@ -860,13 +862,13 @@ services.AddMvc()
 
 <a name="xsrf"></a>
 
-## <a name="xsrfcsrf-and-razor-pages"></a>XSRF/CSRF ve Razor Sayfalar
+## <a name="xsrfcsrf-and-no-locrazor-pages"></a>XSRF/CSRF ve Razor Sayfalar
 
 [Antiforgery doğrulaması](xref:security/anti-request-forgery)için herhangi bir kod yazmanız gerekmez. Antiforgery belirteci oluşturma ve doğrulama, sayfalara otomatik olarak eklenir Razor .
 
 <a name="layout"></a>
 
-## <a name="using-layouts-partials-templates-and-tag-helpers-with-razor-pages"></a>Sayfalarla düzenleri, partileri, şablonları ve etiket yardımcıları kullanma Razor
+## <a name="using-layouts-partials-templates-and-tag-helpers-with-no-locrazor-pages"></a>Sayfalarla düzenleri, partileri, şablonları ve etiket yardımcıları kullanma Razor
 
 Sayfalar, görünüm altyapısının tüm özellikleri ile çalışır Razor . Düzenler, partıals, şablonlar, etiket yardımcıları, *_ViewStart. cshtml*, *_ViewImports. cshtml* geleneksel görünümlerde aynı şekilde çalışır Razor .
 
@@ -954,7 +956,7 @@ Uygulama aşağıdaki dosya/klasör yapısına sahiptir:
     * *Edit. cshtml*
     * *Index.cshtml*
 
-*Pages/Customers/Create. cshtml* ve *Pages/Customers/Edit. cshtml* sayfaları, başarılı olduktan sonra *Pages/Index. cshtml* dosyasına yönlendirilir. Dize, `/Index` önceki sayfaya erişmek IÇIN URI 'nin bir parçasıdır. Dize, `/Index` *Sayfalar/Index. cshtml* sayfasına URI 'ler oluşturmak için kullanılabilir. Örneğin:
+*Pages/Customers/Create. cshtml* ve *Pages/Customers/Edit. cshtml* sayfaları, başarılı olduktan sonra *Pages/Index. cshtml* dosyasına yönlendirilir. Dize, `/Index` önceki sayfaya erişmek IÇIN URI 'nin bir parçasıdır. Dize, `/Index` *Sayfalar/Index. cshtml* sayfasına URI 'ler oluşturmak için kullanılabilir. Örnek:
 
 * `Url.Page("/Index", ...)`
 * `<a asp-page="/Index">My Index Page</a>`
@@ -1094,7 +1096,7 @@ Görünümleri önceden derlemek için bkz. [ Razor derlemeyi görüntüle](xref
 
 Bu giriş hakkında daha fazla bilgi için bkz. [ Razor sayfalarla çalışmaya başlama](xref:tutorials/razor-pages/razor-pages-start).
 
-### <a name="specify-that-razor-pages-are-at-the-content-root"></a>RazorSayfaların içerik kökünde olduğunu belirtin
+### <a name="specify-that-no-locrazor-pages-are-at-the-content-root"></a>RazorSayfaların içerik kökünde olduğunu belirtin
 
 Varsayılan olarak, Razor Sayfalar, */Pages* dizininde kök olarak depolanır. Sayfalarınızın uygulamanın içerik kökünde (contentrootpath) olduğunu belirtmek için [ Razor pagesatcontentroot Ile](/dotnet/api/microsoft.extensions.dependencyinjection.mvcrazorpagesmvcbuilderextensions.withrazorpagesatcontentroot) [addmvc](/dotnet/api/microsoft.extensions.dependencyinjection.mvcservicecollectionextensions.addmvc#Microsoft_Extensions_DependencyInjection_MvcServiceCollectionExtensions_AddMvc_Microsoft_Extensions_DependencyInjection_IServiceCollection_) ' ye ekleyin Razor : [content root](xref:fundamentals/index#content-root) [ContentRootPath](/dotnet/api/microsoft.aspnetcore.hosting.ihostingenvironment.contentrootpath)
 
@@ -1107,7 +1109,7 @@ services.AddMvc()
     .WithRazorPagesAtContentRoot();
 ```
 
-### <a name="specify-that-razor-pages-are-at-a-custom-root-directory"></a>RazorSayfaların özel kök dizinde olduğunu belirtme
+### <a name="specify-that-no-locrazor-pages-are-at-a-custom-root-directory"></a>RazorSayfaların özel kök dizinde olduğunu belirtme
 
 Sayfalarınızın uygulamadaki özel bir kök dizinde olduğunu belirtmek için [Addmvc](/dotnet/api/microsoft.extensions.dependencyinjection.mvcservicecollectionextensions.addmvc#Microsoft_Extensions_DependencyInjection_MvcServiceCollectionExtensions_AddMvc_Microsoft_Extensions_DependencyInjection_IServiceCollection_) 'ye [ Razor pagesroot ile](/dotnet/api/microsoft.extensions.dependencyinjection.mvcrazorpagesmvccorebuilderextensions.withrazorpagesroot) ekleyin Razor (göreli bir yol sağlayın):
 

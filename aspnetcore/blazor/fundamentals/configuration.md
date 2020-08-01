@@ -5,7 +5,7 @@ description: BlazorUygulama ayarları, kimlik doğrulaması ve günlüğe kaydet
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/10/2020
+ms.date: 07/29/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,24 +15,29 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/configuration
-ms.openlocfilehash: f78803a3954feb98a39f26874b9de0aa08dc6327
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: 9ae0dcc16b9debd47a61010953243b0abe499c4f
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445222"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87443975"
 ---
-# <a name="aspnet-core-blazor-configuration"></a>ASP.NET Core Blazor yapılandırması
+# <a name="aspnet-core-no-locblazor-configuration"></a>ASP.NET Core Blazor yapılandırması
 
 > [!NOTE]
 > Bu konu için geçerlidir Blazor WebAssembly . ASP.NET Core uygulama yapılandırması hakkında genel yönergeler için bkz <xref:fundamentals/configuration/index> ..
 
-Blazor WebAssemblyyapılandırmayı şuradan yükler:
+Blazor WebAssemblyyapılandırma ayarlarını varsayılan olarak uygulama ayarları dosyalarından yükler:
 
-* Uygulama ayarları dosyaları varsayılan olarak:
-  * `wwwroot/appsettings.json`
-  * `wwwroot/appsettings.{ENVIRONMENT}.json`
-* Uygulama tarafından kaydedilen diğer [yapılandırma sağlayıcıları](xref:fundamentals/configuration/index) . Tüm sağlayıcılar, uygulamalar için uygun değildir Blazor WebAssembly . İçin desteklenen sağlayıcıların açıklanması, ' nin Blazor WebAssembly [ Blazor (DotNet/AspNetCore.Docs #18134) yapılandırma sağlayıcılarını açıklığa kavuşturarak](https://github.com/dotnet/AspNetCore.Docs/issues/18134)izlenir.
+* `wwwroot/appsettings.json`
+* `wwwroot/appsettings.{ENVIRONMENT}.json`
+
+Uygulama tarafından kaydedilen diğer yapılandırma sağlayıcıları da yapılandırma sağlayabilir.
+
+Tüm sağlayıcılar veya sağlayıcı özellikleri uygulamalar için uygun değildir Blazor WebAssembly :
+
+* [Azure Key Vault yapılandırma sağlayıcısı](xref:security/key-vault-configuration): sağlayıcı, istemci gizli senaryolarıyla yönetilen kimlik ve uygulama kimliği (istemci kimliği) için desteklenmiyor. İstemci Blazor WebAssembly sırrı, hizmete erişmek için istemci tarafında güvenli hale getirilmediği için, istemci gizli anahtarı ile uygulama kimliği hiçbir ASP.NET Core uygulama için önerilmez.
+* [Azure uygulama yapılandırma sağlayıcısı](/azure/azure-app-configuration/quickstart-aspnet-core-app): Blazor WebAssembly Blazor WebAssembly uygulamalar Azure 'da bir sunucuda çalıştırılmadığından, sağlayıcı uygulamalar için uygun değildir.
 
 > [!WARNING]
 > Bir uygulamadaki yapılandırma Blazor WebAssembly kullanıcılar tarafından görülebilir. **Yapılandırma bölümünde uygulama gizli dizilerini veya kimlik bilgilerini depolamamayın.**
@@ -61,7 +66,31 @@ Yapılandırma sağlayıcıları hakkında daha fazla bilgi için bkz <xref:fund
 <p>Message: @Configuration["message"]</p>
 ```
 
-## <a name="provider-configuration"></a>Sağlayıcı yapılandırması
+## <a name="custom-configuration-provider-with-ef-core"></a>EF Core ile özel yapılandırma sağlayıcısı
+
+' De gösterilen EF Core olan özel yapılandırma sağlayıcısı <xref:fundamentals/configuration/index#custom-configuration-provider> uygulamalarla birlikte kullanılır Blazor WebAssembly .
+
+Örneğin yapılandırma sağlayıcısını aşağıdaki kodla `Program.Main` ( `Program.cs` ) ekleyin:
+
+```csharp
+builder.Configuration.AddEFConfiguration(
+    options => options.UseInMemoryDatabase("InMemoryDb"));
+```
+
+<xref:Microsoft.Extensions.Configuration.IConfiguration>Yapılandırma verilerine erişmek için bileşene örnek ekleme:
+
+```razor
+@using Microsoft.Extensions.Configuration
+@inject IConfiguration Configuration
+
+<ul>
+    <li>@Configuration["quote1"]</li>
+    <li>@Configuration["quote2"]</li>
+    <li>@Configuration["quote3"]</li>
+</ul>
+```
+
+## <a name="memory-configuration-source"></a>Bellek yapılandırma kaynağı
 
 Aşağıdaki örnek, <xref:Microsoft.Extensions.Configuration.Memory.MemoryConfigurationSource> ek yapılandırma sağlamak için bir kullanır:
 

@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
-ms.openlocfilehash: a106654c8a37e84e9186a2f06d90605df753e8a7
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: af151b65d3fefb5863529de1cd97c6315f11ca82
+ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405607"
+ms.lasthandoff: 07/30/2020
+ms.locfileid: "87444120"
 ---
 # <a name="dotnet-aspnet-codegenerator"></a>DotNet ASPNET-CodeGenerator
 
@@ -60,13 +60,13 @@ dotnet aspnet-codegenerator [-h|--help]
 
 Çalıştırılacak kod Oluşturucu. Aşağıdaki oluşturucular kullanılabilir:
 
-| Oluşturucu | Çalışma |
-| ----------------- | ------------ | 
-| alan      | [Bir alanı dolandırın](/aspnet/core/mvc/controllers/areas) |
-  denetleyici| [Bir denetleyiciyi yapı iskelesi](/aspnet/core/tutorials/first-mvc-app/adding-model) |
-  identity  | [İşleyicilerinIdentity](/aspnet/core/security/authentication/scaffold-identity) |
-  razorpage | [Yapı iskelesi Razor sayfaları](/aspnet/core/tutorials/razor-pages/model) |
-  görüntüle      | [Bir görünümü dolandırın](/aspnet/core/mvc/views/overview) |
+| Oluşturucu  | İşlem                                                            |
+| ---------- | -------------------------------------------------------------------- |
+| alan       | [Bir alanı dolandırın](xref:mvc/controllers/areas)                      |
+| denetleyici | [Bir denetleyiciyi yapı iskelesi](xref:tutorials/first-mvc-app/adding-model)  |
+| identity   | [İşleyicilerinIdentity](xref:security/authentication/scaffold-identity) |
+| razorpage  | [Yapı iskelesi Razor sayfaları](xref:tutorials/razor-pages/model)            |
+| görüntüle       | [Bir görünümü dolandırın](xref:mvc/views/overview)                          |
 
 ## <a name="options"></a>Seçenekler
 
@@ -105,7 +105,7 @@ Aşağıdaki bölümler, desteklenen oluşturucular için kullanılabilen seçen
 * Alan
 * Kumandasını
 * Identity  
-* Razorpage
+* Razorsayfasında
 * Görüntüle
 
 <a name="area"></a>
@@ -121,7 +121,7 @@ Yukarıdaki komut aşağıdaki klasörleri oluşturur:
 * *Alanlar*
   * *AreaNameToGenerate*
     * *Denetleyiciler*
-    * *Veri*
+    * *Veriler*
     * *Modeller*
     * *Görünümler*
 
@@ -135,13 +135,13 @@ Aşağıdaki tabloda ve seçenekleri listelenmiştir `aspnet-codegenerator` `con
 
 Aşağıdaki tabloda aşağıdakiler için benzersiz seçenekler listelenmektedir `aspnet-codegenerator controller` :
 
-| Seçenek               | Açıklama|
-| ----------------- | ------------ |
-| --controllerName veya-Name | Denetleyicinin adı. |
-| --Kullanılan Asyncactions veya-async | Zaman uyumsuz denetleyici eylemleri oluştur. |
-| --noViews veya-NV | **Hiçbir** görünüm oluşturun. |
-| --restWithNoViews veya-API  | REST stili API ile bir denetleyici oluşturun. `noViews`varsayılır ve tüm görünümle ilgili seçenekler yok sayılır. |
-| --readWriteActions veya-Actions | Model olmadan okuma/yazma eylemleri ile denetleyici oluşturun. |
+| Seçenek                         | Açıklama                                                                                               |
+| ------------------------------ | --------------------------------------------------------------------------------------------------------- |
+| --controllerName veya-Name      | Denetleyicinin adı.                                                                                   |
+| --Kullanılan Asyncactions veya-async    | Zaman uyumsuz denetleyici eylemleri oluştur.                                                                        |
+| --noViews veya-NV               | **Hiçbir** görünüm oluşturun.                                                                                    |
+| --restWithNoViews veya-API      | REST stili API ile bir denetleyici oluşturun. `noViews`varsayılır ve tüm görünümle ilgili seçenekler yok sayılır. |
+| --readWriteActions veya-Actions | Model olmadan okuma/yazma eylemleri ile denetleyici oluşturun.                                              |
 
 `-h`Komutuyla ilgili yardım için anahtarı kullanın `aspnet-codegenerator controller` :
 
@@ -149,9 +149,9 @@ Aşağıdaki tabloda aşağıdakiler için benzersiz seçenekler listelenmektedi
 dotnet aspnet-codegenerator controller -h
 ```
 
-Bir örneği için bkz. [film modelini yapı iskelesi](/aspnet/core/tutorials/razor-pages/model) `dotnet aspnet-codegenerator controller` .
+Bir örneği için bkz. [film modelini yapı iskelesi](xref:tutorials/first-mvc-app/adding-model) `dotnet aspnet-codegenerator controller` .
 
-### <a name="razorpage"></a>Razorpage
+### <a name="no-locrazorpage"></a>Razorsayfasında
 
 <a name="rp"></a>
 
@@ -184,11 +184,11 @@ Aşağıdaki tabloda ve seçenekleri listelenmiştir `aspnet-codegenerator` `raz
 
 Aşağıdaki tabloda aşağıdakiler için benzersiz seçenekler listelenmektedir `aspnet-codegenerator razorpage` :
 
-| Seçenek               | Açıklama|
-| ----------------- | ------------ |
-|   --namespaceName veya-Namespace | Oluşturulan PageModel için kullanılacak ad alanının adı |
-| --partialView veya-Partial | Kısmi bir görünüm oluşturun. Bu belirtilirse, düzen seçenekleri-l ve-UDL yok sayılır. |
-| --noPageModel veya-NPM | Boş şablon için bir PageModel sınıfı oluşturmamı geç |
+| Seçenek                        | Açıklama                                                                           |
+| ----------------------------- | ------------------------------------------------------------------------------------- |
+| --namespaceName veya-Namespace | Oluşturulan PageModel için kullanılacak ad alanının adı                          |
+| --partialView veya-Partial     | Kısmi bir görünüm oluşturun. Bu belirtilirse, düzen seçenekleri-l ve-UDL yok sayılır. |
+| --noPageModel veya-NPM         | Boş şablon için bir PageModel sınıfı oluşturmamı geç                           |
 
 `-h`Komutuyla ilgili yardım için anahtarı kullanın `aspnet-codegenerator razorpage` :
 
@@ -196,8 +196,8 @@ Aşağıdaki tabloda aşağıdakiler için benzersiz seçenekler listelenmektedi
 dotnet aspnet-codegenerator razorpage -h
 ```
 
-Bir örneği için bkz. [film modelini yapı iskelesi](/aspnet/core/tutorials/razor-pages/model) `dotnet aspnet-codegenerator razorpage` .
+Bir örneği için bkz. [film modelini yapı iskelesi](xref:tutorials/razor-pages/model) `dotnet aspnet-codegenerator razorpage` .
 
 ### Identity
 
-Bkz. [Yapı Iskelesi Identity ](/aspnet/core/security/authentication/scaffold-identity)
+Bkz. [Yapı Iskelesi Identity ](xref:security/authentication/scaffold-identity)
