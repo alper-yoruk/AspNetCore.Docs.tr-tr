@@ -1,0 +1,1 @@
+[Mydisplayrouteınfo ve ToCtxString](https://github.com/Rick-Anderson/RouteInfo/blob/master/Microsoft.Docs.Samples.RouteInfo/ControllerContextExtensions.cs) [Rick.Docs. Samples. routeınfo](https://www.nuget.org/packages/Rick.Docs.Samples.RouteInfo) NuGet paketi tarafından sağlanır. Yöntemler `Controller` yol bilgilerini görüntüler.

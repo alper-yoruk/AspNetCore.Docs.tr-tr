@@ -5,7 +5,7 @@ Sunucu Blazor sunucu uygulamaları canlı. Diğer bir deyişle, aynı işlem iç
 
 Blazor uygulamalarında durum bilgisi olan Singleton Hizmetleri, özellikle kendisi için tasarlandıklarında kullanabilirsiniz. Örneğin, belirli bir girdiye erişmek için bir anahtar gerektirdiğinden bir bellek önbelleğinin tek bir şekilde kullanılması, kullanıcıların hangi önbellek anahtarlarının kullanıldıklarını denetleyemediği varsayılarak, bu bir değer olarak kullanılabilir.
 
-**Ek olarak, güvenlik nedenleriyle, <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> Blazor Apps içinde kullanmamalıdır.** Blazor uygulamaları ASP.NET Core işlem hattı bağlamı dışında çalışır ve <xref:Microsoft.AspNetCore.Http.HttpContext> içinde kullanılabilir garanti edilmez <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> , ya da Blazor uygulamasını Başlatan bağlamını tutan garanti edilir.
+**Ek olarak, güvenlik nedenleriyle, <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> Blazor Apps içinde kullanmamalıdır.** Blazor uygulamaları ASP.NET Core işlem hattı bağlamı dışında çalışır. <xref:Microsoft.AspNetCore.Http.HttpContext>İçinde kullanılabilir olmadığı garanti edilmez ve <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> Blazor uygulamasını Başlatan bağlamını tutan garanti edilmez.
 
 İstek durumunu Blazor uygulamasına geçirmek için önerilen yol, uygulamanın ilk işlemede kök bileşene parametreler kullanmaktır:
 
