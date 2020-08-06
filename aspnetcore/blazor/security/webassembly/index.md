@@ -15,18 +15,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: fbb3f6d254e6d294edc7af59d7980a1d67e4a801
-ms.sourcegitcommit: d9ae1f352d372a20534b57e23646c1a1d9171af1
+ms.openlocfilehash: 8d75852c74b33fe538d05c5945829e0726a5030f
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86568814"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87818826"
 ---
-# <a name="secure-aspnet-core-blazor-webassembly"></a>Güvenli ASP.NET CoreBlazor WebAssembly
+# <a name="secure-aspnet-core-no-locblazor-webassembly"></a>Güvenli ASP.NET CoreBlazor WebAssembly
 
 Sağlayan [Javier Calvarro Nelson](https://github.com/javiercn)
 
-Blazor WebAssemblyuygulamalar, tek sayfalı uygulamalarla (maça 'Lar) aynı şekilde güvenli hale getirilir. Kullanıcıların maça üzerinde kimlik doğrulaması için birkaç yaklaşım vardır, ancak en yaygın ve kapsamlı yaklaşım, [Open ID Connect (OıDC)](https://openid.net/connect/)gibi [OAuth 2,0 protokolüne](https://oauth.net/)dayalı bir uygulama kullanmaktır.
+Blazor WebAssemblyuygulamalar, tek sayfalı uygulamalarla (maça 'Lar) aynı şekilde güvenli hale getirilir. Kullanıcıların maça üzerinde kimlik doğrulaması için birkaç yaklaşım vardır, ancak en yaygın ve kapsamlı yaklaşım, [OpenID Connect (OıDC)](https://openid.net/connect/)gibi [OAuth 2,0 protokolüne](https://oauth.net/)dayalı bir uygulama kullanmaktır.
 
 ## <a name="authentication-library"></a>Kimlik doğrulama kitaplığı
 

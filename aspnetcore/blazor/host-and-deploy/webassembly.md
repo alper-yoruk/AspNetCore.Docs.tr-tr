@@ -5,7 +5,7 @@ description: BlazorASP.NET Core, Içerik teslim ağları (CDN), dosya sunucular�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/27/2020
+ms.date: 08/03/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 15c5f02043a83e499eb5ec36fda52171124fe202
-ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
+ms.openlocfilehash: 9d596e38a1d8350cd4a27f2fec4b262a0edf1015
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/30/2020
-ms.locfileid: "87443988"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87818852"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core barındırma ve dağıtmaBlazor WebAssembly
 
@@ -116,6 +116,289 @@ Bir IIS sunucusuna dağıtım yaparken, URL yeniden yazma modülünü uygulaman�
 Uygulama barındırma ve dağıtım ASP.NET Core hakkında daha fazla bilgi için bkz <xref:host-and-deploy/index> ..
 
 Azure App Service dağıtma hakkında daha fazla bilgi için bkz <xref:tutorials/publish-to-azure-webapp-using-vs> ..
+
+## <a name="hosted-deployment-with-multiple-no-locblazor-webassembly-apps"></a>Birden çok uygulama ile barındırılan dağıtım Blazor WebAssembly
+
+### <a name="app-configuration"></a>Uygulama yapılandırması
+
+Barındırılan bir Blazor çözümü birden çok uygulamaya yönelik olarak yapılandırmak için Blazor WebAssembly :
+
+* BlazorBarındırılan proje şablonundan mevcut bir barındırılan çözümü kullanın veya yeni bir çözüm oluşturun Blazor .
+
+* İstemci uygulamasının proje dosyasında, `<StaticWebAssetBasePath>` `<PropertyGroup>` `FirstApp` projenin statik varlıkların temel yolunu ayarlamak için değeri ile öğesine bir özelliği ekleyin:
+
+  ```xml
+  <PropertyGroup>
+    ...
+    <StaticWebAssetBasePath>FirstApp</StaticWebAssetBasePath>
+  </PropertyGroup>
+  ```
+
+* Çözüme ikinci bir istemci uygulaması ekleyin:
+
+  * Çözümün klasörüne adlı bir klasör ekleyin `SecondClient` .
+  * Blazor WebAssembly `SecondBlazorApp.Client` `SecondClient` Proje şablonundan klasöründe adlı bir uygulama oluşturun Blazor WebAssembly .
+  * Uygulamanın proje dosyasında:
+
+    * `<StaticWebAssetBasePath>`Değerine sahip öğesine bir özelliği ekleyin `<PropertyGroup>` `SecondApp` :
+
+      ```xml
+      <PropertyGroup>
+        ...
+        <StaticWebAssetBasePath>SecondApp</StaticWebAssetBasePath>
+      </PropertyGroup>
+      ```
+
+    * Projeye bir proje başvurusu ekleyin `Shared` :
+
+      ```xml
+      <ItemGroup>
+        <ProjectReference Include="..\Shared\{SOLUTION NAME}.Shared.csproj" />
+      </ItemGroup>
+      ```
+
+      Yer tutucu `{SOLUTION NAME}` çözümün adıdır.
+
+* Sunucu uygulamasının proje dosyasında, eklenen istemci uygulaması için bir proje başvurusu oluşturun:
+
+  ```xml
+  <ItemGroup>
+    ...
+    <ProjectReference Include="..\SecondClient\SecondBlazorApp.Client.csproj" />
+  </ItemGroup>
+  ```
+
+* Sunucu uygulamasının `Properties/launchSettings.json` dosyasında, `applicationUrl` `{SOLUTION NAME}.Server` 5001 ve 5002 bağlantı noktalarında istemci uygulamalarına erişmek için Kestrel profili () öğesini yapılandırın:
+
+  ```json
+  "applicationUrl": "https://localhost:5001;https://localhost:5002",
+  ```
+
+* Sunucu uygulamasının `Startup.Configure` yönteminde ( `Startup.cs` ), çağrısından sonra görünen aşağıdaki satırları kaldırın <xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection%2A> :
+
+  ```csharp
+  app.UseBlazorFrameworkFiles();
+  app.UseStaticFiles();
+
+  app.UseRouting();
+
+  app.UseEndpoints(endpoints =>
+  {
+      endpoints.MapRazorPages();
+      endpoints.MapControllers();
+      endpoints.MapFallbackToFile("index.html");
+  });
+  ```
+
+  İstekleri istemci uygulamalarına eşleyen ara yazılım ekleme. Aşağıdaki örnek, şu durumlarda ara yazılımı çalıştıracak şekilde yapılandırır:
+
+  * İstek bağlantı noktası, özgün istemci uygulaması için 5001 ya da eklenen istemci uygulaması için 5002 ' dir.
+  * İstek Konağı, `firstapp.com` özgün istemci uygulaması ya da `secondapp.com` eklenen istemci uygulaması için.
+
+    > [!NOTE]
+    > Bu bölümde gösterilen örnekte, için ek yapılandırma gerekir:
+    >
+    > * Örnek ana bilgisayar etki alanlarındaki uygulamalara erişme `firstapp.com` ve `secondapp.com` .
+    > * TLS güvenliğini etkinleştirmek için istemci uygulamalarına yönelik Sertifikalar (HTTPS).
+    >
+    > Gerekli yapılandırma Bu makalenin kapsamı dışındadır ve çözümün nasıl barındırıldığını bağlıdır. Daha fazla bilgi için bkz. [konak ve dağıtım makaleleri](xref:host-and-deploy/index).
+
+  Aşağıdaki kodu satırların daha önce kaldırıldığı yere yerleştirin:
+
+  ```csharp
+  app.MapWhen(ctx => ctx.Request.Host.Port == 5001 || 
+      ctx.Request.Host.Equals("firstapp.com"), first =>
+  {
+      first.Use((ctx, nxt) =>
+      {
+          ctx.Request.Path = "/FirstApp" + ctx.Request.Path;
+          return nxt();
+      });
+
+      first.UseBlazorFrameworkFiles("/FirstApp");
+      first.UseStaticFiles();
+      first.UseStaticFiles("/FirstApp");
+      first.UseRouting();
+
+      first.UseEndpoints(endpoints =>
+      {
+          endpoints.MapControllers();
+          endpoints.MapFallbackToFile("/FirstApp/{*path:nonfile}", 
+              "FirstApp/index.html");
+      });
+  });
+  
+  app.MapWhen(ctx => ctx.Request.Host.Port == 5002 || 
+      ctx.Request.Host.Equals("secondapp.com"), second =>
+  {
+      second.Use((ctx, nxt) =>
+      {
+          ctx.Request.Path = "/SecondApp" + ctx.Request.Path;
+          return nxt();
+      });
+
+      second.UseBlazorFrameworkFiles("/SecondApp");
+      second.UseStaticFiles();
+      second.UseStaticFiles("/SecondApp");
+      second.UseRouting();
+
+      second.UseEndpoints(endpoints =>
+      {
+          endpoints.MapControllers();
+          endpoints.MapFallbackToFile("/SecondApp/{*path:nonfile}", 
+              "SecondApp/index.html");
+      });
+  });
+  ```
+
+* Sunucu uygulamasının Hava durumu tahmin denetleyicisi 'nde ( `Controllers/WeatherForecastController.cs` ), var olan yolu ( `[Route("[controller]")]` ) `WeatherForecastController` aşağıdaki yollarla değiştirin:
+
+  ```csharp
+  [Route("FirstApp/[controller]")]
+  [Route("SecondApp/[controller]")]
+  ```
+
+  Sunucu uygulamasının yöntemine eklenen ara yazılım, `Startup.Configure` gelen istekleri `/WeatherForecast` `/FirstApp/WeatherForecast` `/SecondApp/WeatherForecast` bağlantı noktasına (5001/5002) veya etki alanına () bağlı olarak ya da öğesine göre değiştirir `firstapp.com` / `secondapp.com` . Sunucu uygulamasından istemci uygulamalarına Hava durumu verilerini döndürmek için önceki denetleyici yolları gereklidir.
+
+### <a name="static-assets-and-class-libraries"></a>Statik varlıklar ve sınıf kitaplıkları
+
+Statik varlıklar için aşağıdaki yaklaşımları kullanın:
+
+* Varlık, istemci uygulamasının `wwwroot` klasöründe olduğunda, kendi yollarını normal olarak sağlayın:
+
+  ```razor
+  <img alt="..." src="/{ASSET FILE NAME}" />
+  ```
+
+* Varlık `wwwroot` bir [ Razor sınıf kitaplığı (RCL)](xref:blazor/components/class-libraries)klasöründe olduğunda, [RCL makalesindeki](xref:razor-pages/ui-class#consume-content-from-a-referenced-rcl)kılavuzluk uyarınca istemci uygulamasındaki statik varlığa başvurun:
+
+  ```razor
+  <img alt="..." src="_content/{LIBRARY NAME}/{ASSET FILE NAME}" />
+  ```
+
+::: moniker range=">= aspnetcore-5.0"
+
+Bir sınıf kitaplığı tarafından bir istemci uygulamasına verilen bileşenlere normal olarak başvurulur. Herhangi bir bileşen stil sayfaları veya JavaScript dosyaları gerektiriyorsa, statik varlıkları almak için aşağıdaki yaklaşımlardan birini kullanın:
+
+* İstemci uygulamasının `wwwroot/index.html` dosyası `<link>` statik varlıklara bağlanabilir ().
+* Bileşen, statik varlıkları almak için Framework [ `Link` bileşenini](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements) kullanabilir.
+
+Yukarıdaki yaklaşımlar aşağıdaki örneklerde gösterilmiştir.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+Bir sınıf kitaplığı tarafından bir istemci uygulamasına verilen bileşenlere normal olarak başvurulur. Herhangi bir bileşen stil sayfaları veya JavaScript dosyaları gerektiriyorsa, istemci uygulamanın `wwwroot/index.html` dosyası doğru statik varlık bağlantılarını içermelidir. Bu yaklaşımlar aşağıdaki örneklerde gösterilmiştir.
+
+::: moniker-end
+
+Aşağıdaki `Jeep` bileşeni istemci uygulamalarından birine ekleyin. `Jeep`Bileşen şunları kullanır:
+
+* İstemci uygulamanın `wwwroot` klasöründen () bir resim `jeep-cj.png` .
+* [Eklenen Razor Bileşen kitaplığı](xref:blazor/components/class-libraries) () `JeepImage` `wwwroot` klasöründen () bir resim `jeep-yj.png` .
+* Örnek bileşen ( `Component1` ), kitaplık çözüme eklendiğinde RCL proje şablonu tarafından otomatik olarak oluşturulur `JeepImage` .
+
+```razor
+@page "/Jeep"
+
+<h1>1979 Jeep CJ-5&trade;</h1>
+
+<p>
+    <img alt="1979 Jeep CJ-5&trade;" src="/jeep-cj.png" />
+</p>
+
+<h1>1991 Jeep YJ&trade;</h1>
+
+<p>
+    <img alt="1991 Jeep YJ&trade;" src="_content/JeepImage/jeep-yj.png" />
+</p>
+
+<p>
+    <em>Jeep CJ-5</em> and <em>Jeep YJ</em> are a trademarks of 
+    <a href="https://www.fcagroup.com">Fiat Chrysler Automobiles</a>.
+</p>
+
+<JeepImage.Component1 />
+```
+
+> [!WARNING]
+> Görüntülerin sahibi olmadığınız takdirde, taşıtlar görüntülerini **herkese yayımlamayın** . Aksi takdirde, telif hakkı ihlali riski vardır.
+
+::: moniker range=">= aspnetcore-5.0"
+
+Kitaplığın `jeep-yj.png` görüntüsü kitaplığın bileşenine de eklenebilir `Component1` ( `Component1.razor` ). `my-component`İstemci uygulamasının sayfasına CSS sınıfı sağlamak için, Framework 'ün [ `Link` bileşenini](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements)kullanarak kitaplığın stil sayfasına bağlanın:
+
+```razor
+<div class="my-component">
+    <Link href="_content/JeepImage/styles.css" rel="stylesheet" />
+
+    <h1>JeepImage.Component1</h1>
+
+    <p>
+        This Blazor component is defined in the <strong>JeepImage</strong> package.
+    </p>
+
+    <p>
+        <img alt="1991 Jeep YJ&trade;" src="_content/JeepImage/jeep-yj.png" />
+    </p>
+</div>
+```
+
+[ `Link` Bileşeni](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements) kullanmanın bir alternatifi, stil sayfasını istemci uygulamasının dosyasından yüklenkullanmaktır `wwwroot/index.html` . Bu yaklaşım, stil sayfasını istemci uygulamasındaki tüm bileşenler için kullanılabilir hale getirir:
+
+```html
+<head>
+    ...
+    <link href="_content/JeepImage/styles.css" rel="stylesheet" />
+</head>
+```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+Kitaplığın `jeep-yj.png` görüntüsü kitaplığın bileşenine de eklenebilir `Component1` ( `Component1.razor` ):
+
+```razor
+<div class="my-component">
+    <h1>JeepImage.Component1</h1>
+
+    <p>
+        This Blazor component is defined in the <strong>JeepImage</strong> package.
+    </p>
+
+    <p>
+        <img alt="1991 Jeep YJ&trade;" src="_content/JeepImage/jeep-yj.png" />
+    </p>
+</div>
+```
+
+İstemci uygulamasının dosyası, `wwwroot/index.html` aşağıdaki eklenmiş etikete sahip kitaplığın stil sayfasını ister `<link>` :
+
+```html
+<head>
+    ...
+    <link href="_content/JeepImage/styles.css" rel="stylesheet" />
+</head>
+```
+
+::: moniker-end
+
+`Jeep`İstemci uygulamasının bileşeninde bileşene gezinti ekleyin `NavMenu` ( `Shared/NavMenu.razor` ):
+
+```razor
+<li class="nav-item px-3">
+    <NavLink class="nav-link" href="Jeep">
+        <span class="oi oi-list-rich" aria-hidden="true"></span> Jeep
+    </NavLink>
+</li>
+```
+
+RCLs hakkında daha fazla bilgi için bkz.
+
+* <xref:blazor/components/class-libraries>
+* <xref:razor-pages/ui-class>
 
 ## <a name="standalone-deployment"></a>Tek başına dağıtım
 
@@ -333,9 +616,15 @@ Daha fazla bilgi için bkz [`mod_mime`](https://httpd.apache.org/docs/2.4/mod/mo
 
 ### <a name="github-pages"></a>GitHub Pages
 
-URL yeniden işlemesini işlemek için, `404.html` isteği sayfaya yönlendirmeyi işleyen bir betiği olan bir dosya ekleyin `index.html` . Topluluk tarafından sunulan örnek bir uygulama için bkz. [GitHub sayfaları Için tek sayfalı uygulamalar](https://spa-github-pages.rafrex.com/) ([GitHub üzerinde rafrex/Spa-GitHub-Pages](https://github.com/rafrex/spa-github-pages#readme)). Topluluk yaklaşımını kullanan bir örnek, GitHub ([canlı site](https://blazor-demo.github.io/)) [üzerinde blazor-demo/blazor-demo. GitHub. IO](https://github.com/blazor-demo/blazor-demo.github.io) adresinde görülebilir.
+URL yeniden işlemesini işlemek için, `wwwroot/404.html` isteği sayfaya yönlendirmeyi işleyen bir betiği olan bir dosya ekleyin `index.html` . Bir örnek için bkz. [Stevesandersonms/ Blazor ongithubpages GitHub deposu](https://github.com/SteveSandersonMS/BlazorOnGitHubPages):
 
-Bir kuruluş sitesi yerine bir proje sitesi kullanırken, içindeki etiketi ekleyin veya güncelleştirin `<base>` `index.html` . `href`Öznitelik değerini GitHub deposu adına sondaki eğik çizgiyle (örneğin,) ayarlayın `my-repository/` .
+* [`wwwroot/404.html`](https://github.com/SteveSandersonMS/BlazorOnGitHubPages/blob/master/wwwroot/404.html)
+* [Canlı site](https://stevesandersonms.github.io/BlazorOnGitHubPages/))
+
+Bir kuruluş sitesi yerine bir proje sitesi kullanırken, `<base>` içindeki etiketini güncelleştirin `wwwroot/index.html` . `href`Öznitelik değerini GitHub deposu adına sondaki eğik çizgiyle (örneğin, `/my-repository/` ) ayarlayın. [Stevesandersonms/ Blazor ongithubpages GitHub deposunda](https://github.com/SteveSandersonMS/BlazorOnGitHubPages), temel `href` [ `.github/workflows/main.yml` yapılandırma dosyası](https://github.com/SteveSandersonMS/BlazorOnGitHubPages/blob/master/.github/workflows/main.yml)tarafından yayımlama sırasında güncelleştirilir.
+
+> [!NOTE]
+> [Stevesandersonms/ Blazor ongithubpages GitHub deposu](https://github.com/SteveSandersonMS/BlazorOnGitHubPages) , .net Foundation veya Microsoft tarafından sahip değil, korunmuyor veya desteklenmiyor.
 
 ## <a name="host-configuration-values"></a>Ana bilgisayar yapılandırma değerleri
 
@@ -552,4 +841,3 @@ Proje dosyasında, komut dosyası uygulama yayımlandıktan sonra çalıştırı
 ```
 
 Geri bildirim sağlamak için, [#5477 aspnetcore/sorunlar](https://github.com/dotnet/aspnetcore/issues/5477)' ı ziyaret edin.
- 

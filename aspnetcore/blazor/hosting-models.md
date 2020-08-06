@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 56681e713e008188d57166da9c8fd4eb6923928c
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 6e3753131388c294130f11aa913a0bb7e8127fa3
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944223"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87818956"
 ---
-# <a name="aspnet-core-blazor-hosting-models"></a>BlazorBarındırma modellerini ASP.NET Core
+# <a name="aspnet-core-no-locblazor-hosting-models"></a>BlazorBarındırma modellerini ASP.NET Core
 
 [Daniel Roth](https://github.com/danroth27) tarafından
 
@@ -32,7 +32,7 @@ Blazor, bir [Webassembly](https://webassembly.org/)tabanlı .NET çalışma zama
 
 İçin sorumlu barındırma modeli, Blazor WebAssembly üzerinde tarayıcıda istemci tarafı çalıştırıyor. BlazorUygulama, bağımlılıkları ve .NET çalışma zamanı tarayıcıya indirilir. Uygulama doğrudan tarayıcı kullanıcı arabirimi iş parçacığında yürütülür. UI güncelleştirmeleri ve olay işleme aynı işlem içinde oluşur. Uygulamanın varlıkları, istemcilere statik içerik sunan bir Web sunucusuna veya hizmete statik dosyalar olarak dağıtılır.
 
-![Blazor WebAssembly: Blazor Uygulama, tarayıcı içindeki bir kullanıcı arabirimi iş parçacığında çalışır.](hosting-models/_static/blazor-webassembly.png)
+![::: No-Loc (Blazor WebAssembly):::: No-Loc (Blazor)::: uygulama, tarayıcı içindeki bir kullanıcı arabirimi iş parçacığında çalışır.](hosting-models/_static/blazor-webassembly.png)
 
 Blazorİstemci tarafı barındırma modelini kullanarak bir uygulama oluşturmak için ** Blazor WebAssembly uygulama** şablonunu ( [`dotnet new blazorwasm`](/dotnet/core/tools/dotnet-new) ) kullanın.
 
@@ -57,13 +57,13 @@ Barındırmak için aşağı taraf vardır Blazor WebAssembly :
 * İndirme boyutu daha büyüktür ve uygulamaların yüklenmesi daha uzun sürer.
 * .NET çalışma zamanı ve araç desteği daha az olgun. Örneğin, [.NET Standard](/dotnet/standard/net-standard) desteğinin ve hata ayıklamada sınırlamalar mevcuttur.
 
-BlazorBarındırılan uygulama modeli [Docker kapsayıcılarını](/dotnet/standard/microservices-architecture/container-docker-introduction/index)destekler. Visual Studio 'da sunucu projesine sağ tıklayın ve **Add**  >  **Docker desteği**Ekle ' yi seçin.
+Barındırılan Blazor uygulama modeli [Docker kapsayıcılarını](/dotnet/standard/microservices-architecture/container-docker-introduction/index)destekler. Visual Studio 'da sunucu projesine sağ tıklayın ve **Add**  >  **Docker desteği**Ekle ' yi seçin.
 
 ## Blazor Server
 
 Blazor ServerBarındırma modeliyle, uygulama sunucuda ASP.NET Core bir uygulama içinden yürütülür. Kullanıcı Arabirimi güncelleştirmeleri, olay işleme ve JavaScript çağrıları bir bağlantı üzerinden işlenir [SignalR](xref:signalr/introduction) .
 
-![Tarayıcı, bir bağlantı üzerinden sunucusunda (bir ASP.NET Core uygulamasının içinde barındırılan) uygulamayla etkileşime girer SignalR .](hosting-models/_static/blazor-server.png)
+![Tarayıcı,::: No-Loc (SignalR)::: Connection üzerinden sunucu üzerinde uygulamayla (bir ASP.NET Core uygulama içinde barındırılan) etkileşime girer.](hosting-models/_static/blazor-server.png)
 
 BlazorBarındırma modelini kullanarak bir uygulama oluşturmak için Blazor Server ASP.NET Core ** Blazor Server uygulama** şablonu ( [`dotnet new blazorserver`](/dotnet/core/tools/dotnet-new) ) kullanın. ASP.NET Core uygulama Blazor Server uygulamayı barındırır ve SignalR istemcilerin bağlanacağı uç noktayı oluşturur.
 

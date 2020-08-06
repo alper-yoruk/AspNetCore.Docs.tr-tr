@@ -5,7 +5,7 @@ description: Blazor WebAssemblyAzure Active Directory grupları ve rolleri kulla
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 07/28/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/aad-groups-roles
-ms.openlocfilehash: 6e27b062d7b5a1b72804fe5d4ea31ec65358ce45
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 68071be9fb9f7a097c0c3693293bf8295e0173f1
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402162"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87818813"
 ---
 # <a name="azure-ad-groups-administrative-roles-and-user-defined-roles"></a>Azure AD grupları, yönetim rolleri ve Kullanıcı tanımlı roller
 
@@ -42,7 +42,19 @@ Bu makaledeki kılavuz, Blazor WebAssembly aşağıdaki konularda açıklanan AA
 * [AAD ile bağımsız](xref:blazor/security/webassembly/standalone-with-azure-active-directory)
 * [AAD ile barındırılan](xref:blazor/security/webassembly/hosted-with-azure-active-directory)
 
-### <a name="user-defined-groups-and-built-in-administrative-roles"></a>Kullanıcı tanımlı gruplar ve yerleşik yönetim rolleri
+## <a name="microsoft-graph-api-permission"></a>Microsoft Graph API izni
+
+Beş taneden fazla yerleşik AAD yönetici rolü ve güvenlik grubu üyeliğine sahip tüm uygulama kullanıcıları için [MICROSOFT Graph API](/graph/use-the-api) çağrısı gerekir.
+
+Graph API çağrılarına izin vermek için, Azure portal bir barındırılan çözümün tek başına veya istemci uygulamasına Blazor aşağıdaki [Graph API izinlerinden](/graph/permissions-reference) birini verin:
+
+* `Directory.Read.All`
+* `Directory.ReadWrite.All`
+* `Directory.AccessAsUser.All`
+
+`Directory.Read.All`en az ayrıcalıklı izindir ve bu makalede açıklanan örnek için kullanılan izindir.
+
+## <a name="user-defined-groups-and-built-in-administrative-roles"></a>Kullanıcı tanımlı gruplar ve yerleşik yönetim rolleri
 
 Azure portal bir üyelik talebi sağlamak üzere uygulamayı yapılandırmak için `groups` aşağıdaki Azure makalelerine bakın. Kullanıcıları Kullanıcı tanımlı AAD gruplarına ve yerleşik yönetici rollerine atayın.
 
@@ -53,7 +65,9 @@ Aşağıdaki örneklerde, bir kullanıcının AAD yerleşik *Faturalama yönetic
 
 `groups`AAD tarafından gönderilen tek talep, kullanıcının gruplarını ve rollerini BIR JSON dizisinde nesne kimlikleri (GUID 'ler) olarak sunar. Uygulamanın, bir grup ve rol JSON dizisini, `group` uygulamanın [ilke](xref:security/authorization/policies) derleyebilir ayrı talepler olarak dönüştürmesi gerekir.
 
-<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount>Gruplar ve roller için dizi özelliklerini içerecek şekilde genişletin.
+Atanan yerleşik Azure yönetim rolleri ve Kullanıcı tanımlı grupların sayısı beş aştığında AAD, `hasgroups` `true` talep göndermek yerine değeri olan bir talep gönderir `groups` . En fazla beş rol ve gruba atanmış olan herhangi bir uygulama, bir kullanıcının rollerini ve gruplarını almak için ayrı bir Graph API çağrısı yapmalıdır. Bu makalede belirtilen örnek uygulama, bu senaryoyu ele alınmaktadır. Daha fazla bilgi için bkz `groups` `hasgroups` . [Microsoft Identity platform erişim belirteçleri](/azure/active-directory/develop/access-tokens#payload-claims) 'nde ve talep bilgileri: yük talepleri makalesi.
+
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount>Gruplar ve roller için dizi özelliklerini içerecek şekilde genişletin. `null`Bu özellikler `foreach` daha sonra Döngülerde kullanıldığında gerekli olmaması için her özelliğe boş bir dizi atayın.
 
 `CustomUserAccount.cs`:
 
@@ -64,29 +78,98 @@ using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 public class CustomUserAccount : RemoteUserAccount
 {
     [JsonPropertyName("groups")]
-    public string[] Groups { get; set; }
+    public string[] Groups { get; set; } = new string[] { };
 
     [JsonPropertyName("roles")]
-    public string[] Roles { get; set; }
+    public string[] Roles { get; set; } = new string[] { };
 }
 ```
 
-Barındırılan bir çözümün tek başına uygulamasında veya Istemci uygulamasında özel bir Kullanıcı fabrikası oluşturun. Aşağıdaki fabrika Ayrıca `roles` , [Kullanıcı tanımlı roller](#user-defined-roles) bölümünde kapsanan talep dizilerini işleyecek şekilde yapılandırılmıştır:
+Bir barındırılan çözümün tek başına uygulamasında veya istemci uygulamasında Blazor özel bir <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> sınıf oluşturun. Rol ve grup bilgilerini elde eden Graph API çağrıları için doğru kapsam (izin) kullanın.
+
+`GraphAPIAuthorizationMessageHandler.cs`:
 
 ```csharp
-using System.Security.Claims;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
+
+public class GraphAPIAuthorizationMessageHandler : AuthorizationMessageHandler
+{
+    public GraphAPIAuthorizationMessageHandler(IAccessTokenProvider provider,
+        NavigationManager navigationManager)
+        : base(provider, navigationManager)
+    {
+        ConfigureHandler(
+            authorizedUrls: new[] { "https://graph.microsoft.com" },
+            scopes: new[] { "https://graph.microsoft.com/Directory.Read.All" });
+    }
+}
+```
+
+`Program.Main`( `Program.cs` ) İçinde, <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> uygulama hizmetini ekleyin ve <xref:System.Net.Http.HttpClient> Graph API istekleri yapmak için adlandırılmış bir ad ekleyin. Aşağıdaki örnekte istemcinin adı verilmiştir `GraphAPI` :
+
+```csharp
+builder.Services.AddScoped<GraphAPIAuthorizationMessageHandler>();
+
+builder.Services.AddHttpClient("GraphAPI",
+        client => client.BaseAddress = new Uri("https://graph.microsoft.com"))
+    .AddHttpMessageHandler<GraphAPIAuthorizationMessageHandler>();
+```
+
+Bir Graph API çağrısından açık veri Protokolü (OData) rollerini ve gruplarını almak için AAD dizin nesneleri sınıfları oluşturun. OData JSON biçimine ulaştı ve <xref:System.Net.Http.Json.HttpContentJsonExtensions.ReadFromJsonAsync%2A> sınıfının bir örneğini dolduran bir çağrı `DirectoryObjects` .
+
+`DirectoryObjects.cs`:
+
+```csharp
+using System.Collections.Generic;
+using System.Text.Json.Serialization;
+
+public class DirectoryObjects
+{
+    [JsonPropertyName("@odata.context")]
+    public string Context { get; set; }
+
+    [JsonPropertyName("value")]
+    public List<Value> Values { get; set; }
+}
+
+public class Value
+{
+    [JsonPropertyName("@odata.type")]
+    public string Type { get; set; }
+
+    [JsonPropertyName("id")]
+    public string Id { get; set; }
+}
+```
+
+Rolleri ve grup taleplerini işlemek için özel bir Kullanıcı fabrikası oluşturun. Aşağıdaki örnek uygulama, `roles` [Kullanıcı tanımlı roller](#user-defined-roles) bölümünde ele alınan talep dizisini de işler. Talep varsa `hasgroups` , <xref:System.Net.Http.HttpClient> kullanıcının rollerini ve gruplarını almak için Graph API yetkili bir istek oluşturmak için adı kullanılır. Bu uygulama, Microsoft Identity Platform v 1.0 uç noktasını `https://graph.microsoft.com/v1.0/me/memberOf` ([API belgeleri](/graph/api/user-list-memberof)) kullanır. Bu konudaki kılavuz, Identity msal paketleri v 2.0 için yükseltildiğinde v 2.0 için de güncelleştirilecektir.
+
+`CustomAccountFactory.cs`:
+
+```csharp
+using System.Linq;
+using System.Net.Http;
+using System.Net.Http.Json;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
 using Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal;
+using Microsoft.Extensions.Logging;
 
 public class CustomUserFactory
     : AccountClaimsPrincipalFactory<CustomUserAccount>
 {
-    public CustomUserFactory(NavigationManager navigationManager,
-        IAccessTokenProviderAccessor accessor)
+    private readonly ILogger<CustomUserFactory> _logger;
+    private readonly IHttpClientFactory _clientFactory;
+
+    public CustomUserFactory(IAccessTokenProviderAccessor accessor, 
+        IHttpClientFactory clientFactory, 
+        ILogger<CustomUserFactory> logger)
         : base(accessor)
     {
+        _clientFactory = clientFactory;
+        _logger = logger;
     }
 
     public async override ValueTask<ClaimsPrincipal> CreateUserAsync(
@@ -104,9 +187,47 @@ public class CustomUserFactory
                 userIdentity.AddClaim(new Claim("role", role));
             }
 
-            foreach (var group in account.Groups)
+            if (userIdentity.HasClaim(c => c.Type == "hasgroups"))
             {
-                userIdentity.AddClaim(new Claim("group", group));
+                try
+                {
+                    var client = _clientFactory.CreateClient("GraphAPI");
+
+                    var response = await client.GetAsync("v1.0/me/memberOf");
+
+                    if (response.IsSuccessStatusCode)
+                    {
+                        var userObjects = await response.Content
+                            .ReadFromJsonAsync<DirectoryObjects>();
+
+                        foreach (var obj in userObjects?.Values)
+                        {
+                            userIdentity.AddClaim(new Claim("group", obj.Id));
+                        }
+
+                        var claim = userIdentity.Claims.FirstOrDefault(
+                            c => c.Type == "hasgroups");
+
+                        userIdentity.RemoveClaim(claim);
+                    }
+                    else
+                    {
+                        _logger.LogError("Graph API request failure: {REASON}", 
+                            response.ReasonPhrase);
+                    }
+                }
+                catch (AccessTokenNotAvailableException exception)
+                {
+                    _logger.LogError("Graph API access token failure: {MESSAGE}", 
+                        exception.Message);
+                }
+            }
+            else
+            {
+                foreach (var group in account.Groups)
+                {
+                    userIdentity.AddClaim(new Claim("group", group));
+                }
             }
         }
 
@@ -115,9 +236,18 @@ public class CustomUserFactory
 }
 ```
 
-Çerçeve tarafından otomatik olarak kaldırıldığı için özgün talebi kaldırmak üzere kod sağlamanız gerekmez `groups` .
+Varsa, özgün talebi kaldırmak için kod sağlamanız gerekmez, çünkü varsa, `groups` Framework tarafından otomatik olarak kaldırılır.
 
-`Program.Main` `Program.cs` Bir barındırılan çözümün tek başına uygulamasının veya istemci uygulamasının fabrikasını () kaydedin:
+> [!NOTE]
+> Bu örnekteki yaklaşım:
+>
+> * <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>Giden isteklere erişim belirteçleri eklemek için özel bir sınıf ekler.
+> * <xref:System.Net.Http.HttpClient>Güvenli, dış Web API uç noktası için Web API istekleri yapmak üzere bir adlandırılmış adı ekler.
+> * , <xref:System.Net.Http.HttpClient> Yetkili istekleri yapmak için adını kullanır.
+>
+> Bu yaklaşım için genel kapsam <xref:blazor/security/webassembly/additional-scenarios#custom-authorizationmessagehandler-class> makalesinde bulabilirsiniz.
+
+`Program.Main` `Program.cs` Bir barındırılan çözümün tek başına uygulamasının veya istemci uygulamasının fabrikasını () kaydedin Blazor . `Directory.Read.All`Uygulama için ek kapsam olarak izin kapsamına onay:
 
 ```csharp
 builder.Services.AddMsalAuthentication<RemoteAuthenticationState, 
@@ -126,8 +256,9 @@ builder.Services.AddMsalAuthentication<RemoteAuthenticationState,
     builder.Configuration.Bind("AzureAd", 
         options.ProviderOptions.Authentication);
     options.ProviderOptions.DefaultAccessTokenScopes.Add("...");
-    
-    ...
+
+    options.ProviderOptions.AdditionalScopesToConsent.Add(
+        "https://graph.microsoft.com/Directory.Read.All");
 })
 .AddAccountClaimsPrincipalFactory<RemoteAuthenticationState, CustomUserAccount, 
     CustomUserFactory>();
@@ -214,7 +345,7 @@ Bir ilke denetimi, [yordamsal mantığa kodunda de gerçekleştirilebilir](xref:
 }
 ```
 
-### <a name="user-defined-roles"></a>Kullanıcı tanımlı roller
+## <a name="user-defined-roles"></a>Kullanıcı tanımlı roller
 
 AAD ile kaydedilen bir uygulama, Kullanıcı tanımlı rolleri kullanmak için de yapılandırılabilir.
 
@@ -232,9 +363,9 @@ Aşağıdaki örnek, bir uygulamanın iki rolle yapılandırıldığını varsay
 
 `roles`AAD tarafından gönderilen tek talep, Kullanıcı tanımlı rolleri `appRoles` `value` bir JSON dizisinde öğeleri olarak sunar. Uygulama, rollerin JSON dizisini bağımsız taleplerine dönüştürmelidir `role` .
 
-`CustomUserFactory` [Kullanıcı tanımlı gruplar ve AAD yerleşik yönetim rolleri](#user-defined-groups-and-built-in-administrative-roles) bölümünde gösterilen bir `roles` JSON dizi değeri olan bir talep üzerinde işlem yapacak şekilde ayarlanır. `CustomUserFactory` [Kullanıcı tanımlı gruplar ve AAD yerleşik yönetici rolleri](#user-defined-groups-and-built-in-administrative-roles) bölümünde gösterildiği gibi barındırılan bir çözümün tek başına uygulamasını veya istemci uygulamasını ekleyin ve kaydedin. Çerçeve tarafından otomatik olarak kaldırıldığı için özgün talebi kaldırmak üzere kod sağlamanız gerekmez `roles` .
+`CustomUserFactory` [Kullanıcı tanımlı gruplar ve AAD yerleşik yönetim rolleri](#user-defined-groups-and-built-in-administrative-roles) bölümünde gösterilen bir `roles` JSON dizi değeri olan bir talep üzerinde işlem yapacak şekilde ayarlanır. `CustomUserFactory` Blazor [Kullanıcı TANıMLı gruplar ve AAD yerleşik yönetici rolleri](#user-defined-groups-and-built-in-administrative-roles) bölümünde gösterildiği gibi barındırılan bir çözümün tek başına uygulamasını veya istemci uygulamasını ekleyin ve kaydedin. Çerçeve tarafından otomatik olarak kaldırıldığı için özgün talebi kaldırmak üzere kod sağlamanız gerekmez `roles` .
 
-`Program.Main`Barındırılan bir çözümün tek başına uygulamasında veya istemci uygulamasında, rol talebi olarak "" adlı talebi belirtin `role` :
+`Program.Main`Barındırılan bir çözümün tek başına uygulamasında veya istemci uygulamasında Blazor , `role` rol talebi olarak "" adlı talebi belirtin:
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>

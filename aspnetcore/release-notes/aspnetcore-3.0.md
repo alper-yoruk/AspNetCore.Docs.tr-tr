@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: 6e31a8f49ca535f98f4e073af13896386a4a0feb
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: cebfc88a8a8313bfd975001b50db6e41b6939aed
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408220"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87819157"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3,0 ' deki yenilikler
 
@@ -49,11 +49,11 @@ Daha fazla bilgi için bkz. <xref:blazor/index>.
 
 BlazorKullanıcı arabirimi güncelleştirmelerinin uygulanma, bileşen işleme mantığını ayırır. Blazor ServerASP.NET Core uygulamasında sunucuda barındırma bileşenleri için destek sağlar Razor . Kullanıcı Arabirimi güncelleştirmeleri bir bağlantı üzerinden işlenir SignalR . Blazor ServerASP.NET Core 3,0 ' de desteklenir.
 
-### <a name="blazor-webassembly-preview"></a>Blazor WebAssemblyÖnizle
+### <a name="no-locblazor-webassembly-preview"></a>Blazor WebAssemblyÖnizle
 
 Blazoruygulamalar, bir WebAssembly tabanlı .NET çalışma zamanı kullanarak doğrudan tarayıcıda da çalıştırılabilir. Blazor WebAssemblyönizlemededir *ve ASP.NET Core 3,0 ' de* desteklenmez. Blazor WebAssemblyASP.NET Core gelecek bir sürümünde desteklenecektir.
 
-### <a name="razor-components"></a>Razorbileşenleri
+### <a name="no-locrazor-components"></a>Razorbileşenleri
 
 Blazoruygulamalar bileşenlerden oluşturulmuştur. Bileşenler, bir sayfa, iletişim kutusu veya form gibi kullanıcı arabirimi (UI) için kendi içinde yer alan öbeklerdir. Bileşenler, Kullanıcı arabirimi işleme mantığını ve istemci tarafı olay işleyicilerini tanımlayan normal .NET sınıflarıdır. JavaScript olmadan zengin etkileşimli Web uygulamaları oluşturabilirsiniz.
 
@@ -320,25 +320,25 @@ ASP.NET Core 3,0 artık <xref:System.Text.Json> JSON serileştirme için varsay�
 
 ASP.NET Core 3,0 ' ye Json.NET eklemek için bkz. [Newtonsoft.Jstabanlı JSON biçimi desteği ekleme](xref:web-api/advanced/formatting#add-newtonsoftjson-based-json-format-support).
 
-## <a name="new-razor-directives"></a>Yeni Razor yönergeler
+## <a name="new-no-locrazor-directives"></a>Yeni Razor yönergeler
 
 Aşağıdaki listede yeni yönergeler yer almaktadır Razor :
 
 * [`@attribute`](xref:mvc/views/razor#attribute): `@attribute` Yönergesi verilen özniteliği oluşturulan sayfanın veya görünümün sınıfına uygular. Örneğin, `@attribute [Authorize]`.
 * [`@implements`](xref:mvc/views/razor#implements): `@implements` Yönerge, oluşturulan sınıf için bir arabirim uygular. Örneğin, `@implements IDisposable`.
 
-## <a name="identityserver4-supports-authentication-and-authorization-for-web-apis-and-spas"></a>Identityserver4, Web API 'Leri ve maça 'Ları için kimlik doğrulama ve yetkilendirmeyi destekler
+## <a name="no-locidentityserver4-supports-authentication-and-authorization-for-web-apis-and-spas"></a>IdentityServer4, Web API 'Leri ve maça 'Ları için kimlik doğrulama ve yetkilendirmeyi destekler
 
-ASP.NET Core 3,0, Web API yetkilendirmesi desteğini kullanarak tek sayfalı uygulamalarda (Spaon) kimlik doğrulaması sunmaktadır. IdentityKimlik doğrulama ve depolama için ASP.NET Core, açık kimlik bağlamayı uygulamak Için [ıdentityserver4](https://identityserver.io/) ile birleştirilir.
+ASP.NET Core 3,0, Web API yetkilendirmesi desteğini kullanarak tek sayfalı uygulamalarda (Spaon) kimlik doğrulaması sunmaktadır. IdentityKimlik doğrulama ve depolama için ASP.NET Core, OpenID Connect 'i uygulamak için [ Identity Server4](https://identityserver.io/) ile birleştirilir.
 
-Identityserver4, ASP.NET Core 3,0 için bir OpenID Connect ve OAuth 2,0 çerçevesidir. Aşağıdaki güvenlik özelliklerini sunar:
+IdentityServer4, ASP.NET Core 3,0 için bir OpenID Connect ve OAuth 2,0 çerçevesidir. Aşağıdaki güvenlik özelliklerini sunar:
 
 * Hizmet olarak kimlik doğrulaması (AaaS)
 * Birden çok uygulama türü üzerinde çoklu oturum açma/kapatma (SSO)
 * API 'Ler için erişim denetimi
 * Federasyon ağ geçidi
 
-Daha fazla bilgi için bkz. [ıdentityserver4 belgeleri](http://docs.identityserver.io/en/latest/index.html) veya [kimlik doğrulaması ve kimlik doğrulama ve yetkilendirme](xref:security/authentication/identity/spa).
+Daha fazla bilgi için bkz [. Identity Server4 belgeleri](http://docs.identityserver.io/en/latest/index.html) veya [kimlik doğrulaması ve kimlik doğrulama ve yetkilendirme](xref:security/authentication/identity/spa).
 
 ## <a name="certificate-and-kerberos-authentication"></a>Sertifika ve Kerberos kimlik doğrulaması
 
@@ -485,7 +485,7 @@ Daha fazla bilgi için aşağıdaki makaleleri inceleyin:
 
 ## <a name="pipes-on-httpcontext"></a>HttpContext üzerindeki kanallar
 
-Artık istek gövdesini okumak ve yanıt gövdesini API kullanarak yazmak mümkündür <xref:System.IO.Pipelines> . Bu <!-- <xref:Microsoft.AspNetCore.Http.HttpRequest.BodyReader> --> `HttpRequest.BodyReader`özelliği <xref:System.IO.Pipelines.PipeReader> , istek gövdesini okumak için kullanılabilecek bir sağlar. Bu <!-- <xref:Microsoft.AspNetCore.Http.> --> `HttpResponse.BodyWriter`özelliği <xref:System.IO.Pipelines.PipeWriter> , yanıt gövdesini yazmak için kullanılabilecek bir sağlar. `HttpRequest.BodyReader`akışın analog bir `HttpRequest.Body` kadır. `HttpResponse.BodyWriter`akışın analog bir `HttpResponse.Body` kadır.
+Artık istek gövdesini okumak ve yanıt gövdesini API kullanarak yazmak mümkündür <xref:System.IO.Pipelines> . Sanal Makineye (VM) bağlı bir veya birden çok işletim sistemi diski içerdiği için <!-- <xref:Microsoft.AspNetCore.Http.HttpRequest.BodyReader> --> `HttpRequest.BodyReader`özelliği <xref:System.IO.Pipelines.PipeReader> , istek gövdesini okumak için kullanılabilecek bir sağlar. Sanal Makineye (VM) bağlı bir veya birden çok işletim sistemi diski içerdiği için <!-- <xref:Microsoft.AspNetCore.Http.> --> `HttpResponse.BodyWriter`özelliği <xref:System.IO.Pipelines.PipeWriter> , yanıt gövdesini yazmak için kullanılabilecek bir sağlar. `HttpRequest.BodyReader`akışın analog bir `HttpRequest.Body` kadır. `HttpResponse.BodyWriter`akışın analog bir `HttpResponse.Body` kadır.
 
 <!-- indirectly related, https://github.com/dotnet/docs/pull/14414 won't be published by 9/23  -->
 
@@ -509,7 +509,7 @@ Daha fazla bilgi için bkz.
 
 Bu senaryo ASP.NET Core 3,0 ' de düzeltilmiştir. Ortam değişkeni olarak ayarlandığında, ana bilgisayar [Iletilen üstbilgiler ara yazılımını](xref:host-and-deploy/proxy-load-balancer#forwarded-headers-middleware-options) sağlar `ASPNETCORE_FORWARDEDHEADERS_ENABLED` `true` . `ASPNETCORE_FORWARDEDHEADERS_ENABLED`, `true` kapsayıcı görüntülerimizde olarak ayarlanır.
 
-## <a name="performance-improvements"></a>Performans geliştirmeleri
+## <a name="performance-improvements"></a>Performans iyileştirmeleri
 
 ASP.NET Core 3,0, bellek kullanımını azaltan ve üretilen işi geliştiren birçok geliştirme içerir:
 

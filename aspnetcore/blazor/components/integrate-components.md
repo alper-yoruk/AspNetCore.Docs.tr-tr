@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/integrate-components-into-razor-pages-and-mvc-apps
-ms.openlocfilehash: 6aef51a0f8bf4ec2e7cb6115856bc465a90ec2ee
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: a28c43ed68adb7af9c30f7ae62872811361d8f9c
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86059857"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87819099"
 ---
-# <a name="integrate-aspnet-core-razor-components-into-razor-pages-and-mvc-apps"></a>ASP.NET Core Razor bileşenlerini Razor Sayfalar ve MVC uygulamalarıyla tümleştirme
+# <a name="integrate-aspnet-core-no-locrazor-components-into-no-locrazor-pages-and-mvc-apps"></a>ASP.NET Core Razor bileşenlerini Razor Sayfalar ve MVC uygulamalarıyla tümleştirme
 
 , [Luke Latham](https://github.com/guardrex) ve [Daniel Roth](https://github.com/danroth27) tarafından
 
@@ -86,7 +86,7 @@ Mevcut Razor Sayfalar ve MVC uygulamaları, Razor bileşenleri sayfalar ve gör�
 
 1. Bileşenleri herhangi bir sayfa veya görünümle tümleştirin. Daha fazla bilgi için, [bir sayfadan veya görünümden bileşenleri işleme](#render-components-from-a-page-or-view) bölümüne bakın.
 
-## <a name="use-routable-components-in-a-razor-pages-app"></a>Bir sayfalar uygulamasında yönlendirilebilir bileşenleri kullanma Razor
+## <a name="use-routable-components-in-a-no-locrazor-pages-app"></a>Bir sayfalar uygulamasında yönlendirilebilir bileşenleri kullanma Razor
 
 *Bu bölüm, Kullanıcı isteklerinden doğrudan yönlendirilebilir bileşenleri eklemeye aittir.*
 
@@ -99,7 +99,7 @@ RazorSayfalar uygulamalarında yönlendirilebilir bileşenleri desteklemek için
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
 
-   <Router AppAssembly="typeof(Program).Assembly">
+   <Router AppAssembly="@typeof(Program).Assembly">
        <Found Context="routeData">
            <RouteView RouteData="routeData" />
        </Found>
@@ -149,7 +149,7 @@ RazorSayfalar uygulamalarında yönlendirilebilir bileşenleri desteklemek için
    });
    ```
 
-1. Uygulamaya yönlendirilebilir bileşenler ekleyin. Örneğin:
+1. Uygulamaya yönlendirilebilir bileşenler ekleyin. Örnek:
 
    ```razor
    @page "/counter"
@@ -174,7 +174,7 @@ RazorMVC uygulamalarında yönlendirilebilir bileşenleri desteklemek için:
    ```razor
    @using Microsoft.AspNetCore.Components.Routing
 
-   <Router AppAssembly="typeof(Program).Assembly">
+   <Router AppAssembly="@typeof(Program).Assembly">
        <Found Context="routeData">
            <RouteView RouteData="routeData" />
        </Found>
@@ -232,7 +232,7 @@ RazorMVC uygulamalarında yönlendirilebilir bileşenleri desteklemek için:
    });
    ```
 
-1. Bir `Pages` klasör oluşturun ve uygulamaya yönlendirilebilir bileşenler ekleyin. Örneğin:
+1. Bir `Pages` klasör oluşturun ve uygulamaya yönlendirilebilir bileşenler ekleyin. Örnek:
 
    ```razor
    @page "/counter"

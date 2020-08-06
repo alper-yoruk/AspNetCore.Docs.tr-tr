@@ -5,7 +5,7 @@ description: Bileşenlerin Blazor bir dış bileşen kitaplığından uygulamala
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 03/23/2020
+ms.date: 07/27/2020
 no-loc:
 - Blazor
 - Blazor Server
@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/class-libraries
-ms.openlocfilehash: b172059407f9a08dacc0fadd804864c7aee7fb90
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 8293d61f88f53e55d94b114ca2143fdfb6fd8468
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944497"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87819073"
 ---
-# <a name="aspnet-core-razor-components-class-libraries"></a>ASP.NET Core Razor bileşenleri sınıf kitaplıkları
+# <a name="aspnet-core-no-locrazor-components-class-libraries"></a>ASP.NET Core Razor bileşenleri sınıf kitaplıkları
 
 [Simon Timms](https://github.com/stimms) tarafından
 
@@ -41,7 +41,7 @@ Bileşenler normal .NET türleri olduğu gibi, bir RCL tarafından sunulan bile�
 1. Yeni bir proje oluşturma.
 1. ** Razor Sınıf kitaplığı**' nı seçin. **İleri**’yi seçin.
 1. **Yeni Razor sınıf kitaplığı oluştur** iletişim kutusunda **Oluştur**' u seçin.
-1. **Proje adı** alanında bir proje adı girin veya varsayılan proje adını kabul edin. Bu konudaki örneklerde proje adı kullanılır `MyComponentLib1` . **Oluştur**'u seçin.
+1. **Proje adı** alanında bir proje adı girin veya varsayılan proje adını kabul edin. Bu konudaki örneklerde proje adı kullanılır `ComponentLibrary` . **Oluştur**’u seçin.
 1. RCL 'yi bir çözüme ekleyin:
    1. Çözüme sağ tıklayın. **Add**  >  **Varolan proje**Ekle ' yi seçin.
    1. RCL 'nin proje dosyasına gidin.
@@ -61,10 +61,10 @@ Bileşenler normal .NET türleri olduğu gibi, bir RCL tarafından sunulan bile�
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-1. Komut kabuğunda komutuyla ** Razor sınıf kitaplığı** şablonu ( `razorclasslib` ) kullanın [`dotnet new`](/dotnet/core/tools/dotnet-new) . Aşağıdaki örnekte adlı bir RCL oluşturulur `MyComponentLib1` . Komut yürütüldüğünde, tutan klasör `MyComponentLib1` otomatik olarak oluşturulur:
+1. Komut kabuğunda komutuyla ** Razor sınıf kitaplığı** şablonu ( `razorclasslib` ) kullanın [`dotnet new`](/dotnet/core/tools/dotnet-new) . Aşağıdaki örnekte adlı bir RCL oluşturulur `ComponentLibrary` . Komut yürütüldüğünde, tutan klasör `ComponentLibrary` otomatik olarak oluşturulur:
 
    ```dotnetcli
-   dotnet new razorclasslib -o MyComponentLib1
+   dotnet new razorclasslib -o ComponentLibrary
    ```
 
    > [!NOTE]
@@ -91,35 +91,82 @@ Başka bir projedeki bir kitaplıkta tanımlanan bileşenleri kullanmak için a�
 * Ad alanı ile tam tür adını kullanın.
 * Kullanım Razor [`@using`](xref:mvc/views/razor#using) yönergesini kullanın. Tek tek bileşenler, ada göre eklenebilir.
 
-Aşağıdaki örneklerde, `MyComponentLib1` bir bileşeni içeren bir bileşen kitaplığı vardır `SalesReport` .
+Aşağıdaki örneklerde, `ComponentLibrary` bileşeni () içeren bir bileşen kitaplığı vardır `Component1` `Component1.razor` . `Component1`Bileşen, kitaplık oluşturulduğunda RCL proje şablonu tarafından otomatik olarak eklenen örnek bir bileşendir.
 
-`SalesReport`Bileşene, ad alanı ile tam tür adı kullanılarak başvurulabilir:
+`Component1`Bileşene ad alanını kullanarak başvurun:
 
 ```razor
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
 
-<MyComponentLib1.SalesReport />
+<ComponentLibrary.Component1 />
 ```
 
-Ayrıca, kitaplık bir yönergeyle kapsama alınırsa bileşene de başvurulabilir `@using` :
+Alternatif olarak, kitaplığı bir yönergeyle kapsama taşıyın [`@using`](xref:mvc/views/razor#using) ve bileşeni ad alanı olmadan kullanın:
 
 ```razor
-@using MyComponentLib1
+@using ComponentLibrary
 
 <h1>Hello, world!</h1>
 
 Welcome to your new app.
 
-<SalesReport />
+<Component1 />
 ```
 
-`@using MyComponentLib1` `_Import.razor` Kitaplığın bileşenlerini bir projenin tamamına kullanılabilir hale getirmek için, en üst düzey dosyaya yönergesini ekleyin. `_Import.razor`Ad alanını tek bir sayfaya veya bir klasör içindeki sayfa kümesine uygulamak için herhangi bir düzeydeki bir dosyaya yönerge ekleyin.
+İsteğe bağlı olarak, `@using ComponentLibrary` `_Import.razor` kitaplığın bileşenlerini bir projenin tamamına kullanılabilir hale getirmek için en üst düzey dosyaya yönergesini dahil edin. `_Import.razor`Ad alanını tek bir bileşene veya bir klasör içindeki bileşen kümesine uygulamak için herhangi bir düzeydeki bir dosyaya yönerge ekleyin.
 
-## <a name="create-a-razor-components-class-library-with-static-assets"></a>RazorStatik varlıklar içeren bir bileşen sınıfı kitaplığı oluşturma
+::: moniker range=">= aspnetcore-5.0"
+
+`Component1` `my-component` Bileşene CSS sınıfı sağlamak için, ' deki Framework [ `Link` bileşeni](xref:blazor/fundamentals/additional-scenarios#influence-html-head-tag-elements) kullanılarak kitaplığın stil sayfasına bağlanın `Component1.razor` :
+
+```razor
+<div class="my-component">
+    <Link href="_content/ComponentLibrary/styles.css" rel="stylesheet" />
+
+    <p>
+        This Blazor component is defined in the <strong>ComponentLibrary</strong> package.
+    </p>
+</div>
+```
+
+Uygulama genelinde stil sayfasını sağlamak için, bunun yerine uygulamanın `wwwroot/index.html` dosya ( Blazor WebAssembly ) veya `Pages/_Host.cshtml` dosyasında () kitaplığın stil sayfasına bağlanabilirsiniz Blazor Server :
+
+```html
+<head>
+    ...
+    <link href="_content/ComponentLibrary/styles.css" rel="stylesheet" />
+</head>
+```
+
+`Link`Bileşen bir alt bileşende kullanıldığında, bileşenin alt öğesi işlendiği sürece bağlantılı varlık ana bileşenin diğer alt bileşenleri için de kullanılabilir `Link` . `Link`Bir alt bileşende bileşeni kullanma ve veya ' a bir HTML etiketi yerleştirme arasındaki ayrım, `<link>` `wwwroot/index.html` `Pages/_Host.cshtml` çerçeve bileşeninin işlenmiş html etiketinin:
+
+* , Uygulama durumu ile değiştirilebilir. Sabit kodlanmış `<link>` HTML etiketi uygulama durumu tarafından değiştirilemez.
+* `<head>`Üst bileşen artık IŞLENMEDIĞINDE HTML 'den kaldırılır.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+`Component1` `my-component` CSS sınıfını sağlamak için, uygulamanın `wwwroot/index.html` dosya ( Blazor WebAssembly ) veya `Pages/_Host.cshtml` dosyasında () kitaplığın stil sayfasına bağlanın Blazor Server :
+
+```html
+<head>
+    ...
+    <link href="_content/ComponentLibrary/styles.css" rel="stylesheet" />
+</head>
+```
+
+::: moniker-end
+
+## <a name="create-a-no-locrazor-components-class-library-with-static-assets"></a>RazorStatik varlıklar içeren bir bileşen sınıfı kitaplığı oluşturma
 
 RCL statik varlıkları içerebilir. Statik varlıklar, kitaplığı kullanan tüm uygulamalar tarafından kullanılabilir. Daha fazla bilgi için bkz. <xref:razor-pages/ui-class#create-an-rcl-with-static-assets>.
+
+## <a name="supply-components-and-static-assets-to-multiple-hosted-no-locblazor-apps"></a>Birden çok barındırılan uygulamaya bileşenleri ve statik varlıkları sağlama Blazor
+
+Daha fazla bilgi için bkz. <xref:blazor/host-and-deploy/webassembly#static-assets-and-class-libraries>.
 
 ## <a name="build-pack-and-ship-to-nuget"></a>NuGet 'i derleyin, paketleyebilir ve iade edin
 

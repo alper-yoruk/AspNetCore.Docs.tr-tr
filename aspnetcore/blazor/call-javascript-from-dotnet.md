@@ -15,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 5c22220871fdba7fea43c38fa4bc826c07135ffc
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: f3afa9592422da911799a137f9943631ed12ab59
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060039"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87819132"
 ---
-# <a name="call-javascript-functions-from-net-methods-in-aspnet-core-blazor"></a>ASP.NET Core .NET metotlarından JavaScript işlevlerini çağırınBlazor
+# <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>ASP.NET Core .NET metotlarından JavaScript işlevlerini çağırınBlazor
 
 Sağlayan [Javier Calvarro Nelson](https://github.com/javiercn), [Daniel Roth](https://github.com/danroth27)ve [Luke Latham](https://github.com/guardrex)
 
@@ -154,7 +154,7 @@ Yer tutucu, `{APP ASSEMBLY}` uygulamanın uygulama derleme adıdır (örneğin, 
 
 [Void (0)/void 0](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void) veya [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined) döndüren JavaScript işlevleri ile çağırılır <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> .
 
-## <a name="detect-when-a-blazor-server-app-is-prerendering"></a>Bir uygulamanın ne zaman Blazor Server prerendering olduğunu Algıla
+## <a name="detect-when-a-no-locblazor-server-app-is-prerendering"></a>Bir uygulamanın ne zaman Blazor Server prerendering olduğunu Algıla
  
 [!INCLUDE[](~/includes/blazor-prerendering.md)]
 
@@ -178,7 +178,7 @@ Aşağıdaki örnek, öğesine bir başvuru yakalama göstermektedir `username` 
 ```
 
 > [!WARNING]
-> Yalnızca ile etkileşimde bulunmayan boş bir öğenin içeriğini bulunmamalıdır için bir öğe başvurusu kullanın Blazor . Bu senaryo, bir 3. taraf API 'SI öğeye içerik sağladığı zaman yararlıdır. BlazorÖğesiyle etkileşmediği için, Blazor öğe ve Dom gösterimi arasında bir çakışma olabilir.
+> Yalnızca ile etkileşimde bulunmayan boş bir öğenin içeriğini bulunmamalıdır için bir öğe başvurusu kullanın Blazor . Bu senaryo, üçüncü taraf bir API 'nin öğeye içerik sağladığı durumlarda faydalıdır. BlazorÖğesiyle etkileşmediği için, Blazor öğe ve Dom gösterimi arasında bir çakışma olabilir.
 >
 > Aşağıdaki örnekte, *dangerous* `ul` Blazor Bu öğenin liste öğelerini () doldurmak üzere Dom ile etkileşimde bulunduğundan, sıralanmamış listenin () içeriğini zaman içinde () () zaman zaman aşmaktır `<li>` .
 >

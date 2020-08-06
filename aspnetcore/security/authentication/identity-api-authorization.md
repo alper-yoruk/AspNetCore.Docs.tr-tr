@@ -15,16 +15,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity/spa
-ms.openlocfilehash: 2b587517268208dcf66cd2895b7aa22bfa381f84
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: c06f1d4bf772d7726d19163fcdee8c92d4006cd2
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060364"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87819119"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>Maça kimlik doğrulaması ve yetkilendirme
 
-ASP.NET Core 3,0 veya üzeri, API yetkilendirmesi desteğini kullanarak tek sayfalı uygulamalarda (Spaon) kimlik doğrulaması sunmaktadır. IdentityKimlik doğrulama ve depolama için ASP.NET Core, açık kimlik Connect uygulama Için [IdentityServer](https://identityserver.io/) ile birleştirilir.
+ASP.NET Core 3,0 veya üzeri, API yetkilendirmesi desteğini kullanarak tek sayfalı uygulamalarda (Spaon) kimlik doğrulaması sunmaktadır. IdentityKimlik doğrulama ve depolama için ASP.NET Core, OpenID Connect 'i uygulamak üzere [ Identity sunucu](https://identityserver.io/) ile birleştirilir.
 
 Bir kimlik doğrulama parametresi, **angular** 'a eklenmiştir ve **Web uygulamasındaki (model-görünüm-denetleyici)** (MVC) ve **Web uygulaması** (sayfalar) proje şablonlarında kimlik doğrulama parametresine benzer olan proje şablonlarına **tepki** verir Razor . İzin verilen parametre değerleri **none** ve **bireysel**. **React.js ve Redux** proje şablonu, kimlik doğrulama parametresini Şu anda desteklemiyor.
 
@@ -52,7 +52,7 @@ Aşağıdaki bölümlerde, kimlik doğrulama desteği dahil edildiğinde projeni
 
 ### <a name="startup-class"></a>Başlangıç sınıfı
 
-Aşağıdaki kod örnekleri [Microsoft. AspNetCore. ApiAuthorization. IdentityServer](https://www.nuget.org/packages/Microsoft.AspNetCore.ApiAuthorization.IdentityServer) NuGet paketini kullanır. Örnekler, <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A> ve genişletme yöntemlerini kullanarak API kimlik doğrulaması ve yetkilendirme yapılandırır <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiResourceCollection.AddIdentityServerJwt%2A> . Kimlik doğrulamasıyla tepki verme veya angular SPA proje şablonlarını kullanan projeler, bu pakete bir başvuru içerir.
+Aşağıdaki kod örnekleri, [Microsoft. AspNetCore. ApiAuthorization öğesine bağımlıdır. Identity Sunucu](https://www.nuget.org/packages/Microsoft.AspNetCore.ApiAuthorization.IdentityServer) NuGet paketi. Örnekler, <xref:Microsoft.Extensions.DependencyInjection.IdentityServerBuilderConfigurationExtensions.AddApiAuthorization%2A> ve genişletme yöntemlerini kullanarak API kimlik doğrulaması ve yetkilendirme yapılandırır <xref:Microsoft.AspNetCore.ApiAuthorization.IdentityServer.ApiResourceCollection.AddIdentityServerJwt%2A> . Kimlik doğrulamasıyla tepki verme veya angular SPA proje şablonlarını kullanan projeler, bu pakete bir başvuru içerir.
 
 `Startup`Sınıfı aşağıdaki eklemelere sahiptir:
 
@@ -67,14 +67,14 @@ Aşağıdaki kod örnekleri [Microsoft. AspNetCore. ApiAuthorization. IdentitySe
         .AddEntityFrameworkStores<ApplicationDbContext>();
     ```
 
-  * IdentityServer `AddApiAuthorization` 'ın en üstünde bazı varsayılan ASP.NET Core kuralları ayarlayan ek bir yardımcı yöntemi olan IdentityServer:
+  * Identity`AddApiAuthorization`Sunucu üst kısmında bazı varsayılan ASP.NET Core kuralları ayarlayan ek bir yardımcı yöntemi olan sunucu Identity :
 
     ```csharp
     services.AddIdentityServer()
         .AddApiAuthorization<ApplicationUser, ApplicationDbContext>();
     ```
 
-  * Kimliği `AddIdentityServerJwt` , IdentityServer tarafından ÜRETILEN JWT belirteçlerini doğrulamak üzere uygulamayı yapılandıran ek bir yardımcı yöntem ile kimlik doğrulaması:
+  * `AddIdentityServerJwt`Sunucu tarafından ÜRETILEN JWT belirteçlerini doğrulamak üzere uygulamayı yapılandıran ek bir yardımcı yöntem ile kimlik doğrulaması Identity :
 
     ```csharp
     services.AddAuthentication()
@@ -88,7 +88,7 @@ Aşağıdaki kod örnekleri [Microsoft. AspNetCore. ApiAuthorization. IdentitySe
     app.UseAuthentication();
     ```
 
-  * Açık KIMLIK bağlantı noktalarını kullanıma sunan IdentityServer ara yazılımı:
+  * IdentityOpenID Connect uç noktalarını kullanıma sunan sunucu ara yazılımı:
 
     ```csharp
     app.UseIdentityServer();
@@ -96,11 +96,11 @@ Aşağıdaki kod örnekleri [Microsoft. AspNetCore. ApiAuthorization. IdentitySe
 
 ### <a name="addapiauthorization"></a>Addadpiauthorization
 
-Bu yardımcı yöntemi, IdentityServer 'ı desteklenen yapılandırmamızı kullanacak şekilde yapılandırır. IdentityServer, uygulama güvenliği sorunlarını işlemeye yönelik güçlü ve genişletilebilir bir çerçevedir. Aynı zamanda, en yaygın senaryolar için gereksiz karmaşıklık sunan. Sonuç olarak, size iyi bir başlangıç noktası olarak kabul edilen bir dizi kural ve yapılandırma seçeneği sağlanır. Kimlik doğrulama gereksinimleriniz değiştikçe, IdentityServer 'ın tam gücü, kimlik doğrulamasını gereksinimlerinize uyacak şekilde özelleştirmek için hala kullanılabilir.
+Bu yardımcı yöntem, Identity sunucuyu desteklenen yapılandırmamızı kullanacak şekilde yapılandırır. IdentitySunucu, uygulama güvenliği sorunlarını işlemeye yönelik güçlü ve genişletilebilir bir çerçevedir. Aynı zamanda, en yaygın senaryolar için gereksiz karmaşıklık sunan. Sonuç olarak, size iyi bir başlangıç noktası olarak kabul edilen bir dizi kural ve yapılandırma seçeneği sağlanır. Kimlik doğrulamanın değişmesi için, sunucunun tam gücü, Identity kimlik doğrulamasını gereksinimlerinize uyacak şekilde özelleştirmek için hala kullanılabilir.
 
-### <a name="addidentityserverjwt"></a>Addentityserverjwt
+### <a name="addno-locidentityserverjwt"></a>IdentityServerjwt Ekle
 
-Bu yardımcı yöntemi, varsayılan kimlik doğrulama işleyicisi olarak uygulama için bir ilke düzeni yapılandırır. İlke, Identity Identity "/" URL alanındaki herhangi bir alt yolda yönlendirilen tüm isteklerin işlemesini sağlamak üzere yapılandırılmıştır Identity . `JwtBearerHandler`Diğer tüm istekleri işler. Ayrıca, bu yöntem, `<<ApplicationName>>API` IdentityServer ile bir API kaynağını varsayılan kapsamına kaydeder ve bu `<<ApplicationName>>API` uygulama Için IdentityServer tarafından verilen belirteçleri doğrulamak üzere JWT taşıyıcı belirteç ara yazılımını yapılandırır.
+Bu yardımcı yöntemi, varsayılan kimlik doğrulama işleyicisi olarak uygulama için bir ilke düzeni yapılandırır. İlke, Identity Identity "/" URL alanındaki herhangi bir alt yolda yönlendirilen tüm isteklerin işlemesini sağlamak üzere yapılandırılmıştır Identity . `JwtBearerHandler`Diğer tüm istekleri işler. Ayrıca, bu yöntem, bir `<<ApplicationName>>API` API kaynağını Identity varsayılan kapsamına sahip sunucuya kaydeder ve bu `<<ApplicationName>>API` Identity uygulama için sunucu tarafından VERILEN belirteçleri doğrulamak üzere JWT taşıyıcı belirteç ara yazılımını yapılandırır.
 
 ### <a name="weatherforecastcontroller"></a>Dalgalı bir denetleyici
 
@@ -108,7 +108,7 @@ Bu yardımcı yöntemi, varsayılan kimlik doğrulama işleyicisi olarak uygulam
 
 ### <a name="applicationdbcontext"></a>ApplicationDbContext
 
-*Data\applicationdbcontext.cs* dosyasında, ' `DbContext` nin Identity `ApiAuthorizationDbContext` (öğesinden daha fazla türetilmiş bir sınıf `IdentityDbContext` ) IdentityServer şemasını dahil etmek için kullandığı özel durum ile birlikte kullanıldığına dikkat edin.
+*Data\applicationdbcontext.cs* dosyasında, ' `DbContext` ın Identity `ApiAuthorizationDbContext` genişlettiği özel durumla (öğesinden daha fazla türetilmiş bir sınıf `IdentityDbContext` ) sunucu için şemayı dahil etmek için Identity aynı olduğuna dikkat edin.
 
 Veritabanı şemasının tam denetimini elde etmek için, kullanılabilir Identity `DbContext` sınıflardan birini ve Identity yöntemi çağırarak şemayı içerecek şekilde yapılandırın `builder.ConfigurePersistedGrantContext(_operationalStoreOptions.Value)` `OnModelCreating` .
 
@@ -194,7 +194,7 @@ services.Configure<JwtBearerOptions>(
 
 API 'nin JWT işleyicisi, kullanarak kimlik doğrulama işlemi üzerinde denetimi etkinleştiren olaylar oluşturur `JwtBearerEvents` . API yetkilendirmesi için destek sağlamak üzere `AddIdentityServerJwt` kendi olay işleyicilerini kaydeder.
 
-Bir olayın işlenmesini özelleştirmek için, var olan olay işleyicisini gereken ek mantığla sarın. Örneğin:
+Bir olayın işlenmesini özelleştirmek için, var olan olay işleyicisini gereken ek mantığla sarın. Örnek:
 
 ```csharp
 services.Configure<JwtBearerOptions>(
@@ -273,7 +273,7 @@ async populateWeatherData() {
 
 Uygulamayı üretime dağıtmak için aşağıdaki kaynakların sağlanması gerekir:
 
-* Kullanıcı hesaplarını depolamak için bir veritabanı Identity ve IdentityServer izin verir.
+* Kullanıcı hesaplarını depolamak için bir veritabanı Identity ve Identity sunucu verir.
 * Belirteçleri imzalamak için kullanılacak bir üretim sertifikası.
   * Bu sertifika için belirli bir gereksinim yoktur; otomatik olarak imzalanan bir sertifika veya bir CA yetkilisi tarafından sağlanan bir sertifika olabilir.
   * PowerShell veya OpenSSL gibi standart araçlarla oluşturulabilir.
@@ -310,25 +310,25 @@ Azure portal uygulamayı ve uygulamanın ayarlarını yapılandırdıktan sonra,
 
 ## <a name="other-configuration-options"></a>Diğer yapılandırma seçenekleri
 
-API yetkilendirmesi desteği, IdentityServer 'ın en üstünde bir dizi kural, varsayılan değer ve, maça deneyimini basitleştirecek geliştirmeler oluşturur. Daha az ki, ASP.NET Core tümleştirmeler senaryonuzu kapsamadıysanız, IdentityServer 'ın tam gücü arka planda kullanılabilir. ASP.NET Core desteği, tüm uygulamaların kuruluşumuza göre oluşturulduğu ve dağıtıldığı "birinci taraf" uygulamalara odaklanır. Bu nedenle, izin veya Federasyon gibi şeyler için destek sunulmaz. Bu senaryolar için IdentityServer kullanın ve belgelerini izleyin.
+API yetkilendirmesi desteği, Identity bir dizi kural, varsayılan değer ve, maça deneyimini basitleştirmek için geliştirmeler kümesi ile sunucu üzerinde oluşturulur. Daha az ki, Identity ASP.NET Core tümleştirmeler senaryonuzu kapsamadıysanız sunucunun tam gücü arka planda kullanılabilir. ASP.NET Core desteği, tüm uygulamaların kuruluşumuza göre oluşturulduğu ve dağıtıldığı "birinci taraf" uygulamalara odaklanır. Bu nedenle, izin veya Federasyon gibi şeyler için destek sunulmaz. Bu senaryolar için sunucu ' yı kullanın Identity ve belgelerini izleyin.
 
 ### <a name="application-profiles"></a>Uygulama profilleri
 
 Uygulama profilleri, parametrelerini daha fazla tanımlayan uygulamalar için önceden tanımlanmış yapılandırlardır. Şu anda, aşağıdaki profiller desteklenir:
 
-* `IdentityServerSPA`: IdentityServer 'ın yanı sıra tek bir birim olarak barındırılan bir SPA 'yı temsil eder.
+* `IdentityServerSPA`: Identity Tek bir birim olarak sunucu ile barındırılan BIR Spa 'yı temsil eder.
   * `redirect_uri`Varsayılan olarak olur `/authentication/login-callback` .
   * `post_logout_redirect_uri`Varsayılan olarak olur `/authentication/logout-callback` .
   * Kapsam kümesi `openid` , `profile` , ve uygulamadaki API 'ler için tanımlanan tüm kapsamları içerir.
   * İzin verilen OıDC yanıt türleri kümesi, `id_token token` tek tek ( `id_token` , `token` ).
   * İzin verilen yanıt modu `fragment` .
-* `SPA`: IdentityServer ile barındırılmayan bir SPA 'yı temsil eder.
+* `SPA`: Sunucusu ile barındırılmayan bir SPA 'yı temsil eder Identity .
   * Kapsam kümesi `openid` , `profile` , ve uygulamadaki API 'ler için tanımlanan tüm kapsamları içerir.
   * İzin verilen OıDC yanıt türleri kümesi, `id_token token` tek tek ( `id_token` , `token` ).
   * İzin verilen yanıt modu `fragment` .
-* `IdentityServerJwt`: IdentityServer ile birlikte barındırılan bir API 'YI temsil eder.
+* `IdentityServerJwt`: Sunucusuyla birlikte barındırılan bir API 'YI temsil eder Identity .
   * Uygulama, uygulama adı için varsayılan olarak kullanılan tek bir kapsama sahip olacak şekilde yapılandırılmıştır.
-* `API`: IdentityServer ile barındırılmayan bir API 'YI temsil eder.
+* `API`: Sunucusu ile barındırılmayan bir API 'YI temsil eder Identity .
   * Uygulama, uygulama adı için varsayılan olarak kullanılan tek bir kapsama sahip olacak şekilde yapılandırılmıştır.
 
 ### <a name="configuration-through-appsettings"></a>AppSettings aracılığıyla yapılandırma

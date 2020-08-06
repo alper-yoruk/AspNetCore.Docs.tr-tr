@@ -15,20 +15,20 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: b28e4e43b88fcf8eab9e8959142cca21223c57ff
-ms.sourcegitcommit: e216e8f4afa21215dc38124c28d5ee19f5ed7b1e
+ms.openlocfilehash: b32710e515d111b7dd6556f1db55082cd56a82b5
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86239640"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87819008"
 ---
-# <a name="aspnet-core-blazor-hosting-model-configuration"></a>ASP.NET Core Blazor barındırma modeli yapılandırması
+# <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a>ASP.NET Core Blazor barındırma modeli yapılandırması
 
-[Daniel Roth](https://github.com/danroth27) ve [Luke Latham](https://github.com/guardrex) tarafından
+[Daniel Roth](https://github.com/danroth27), [Mackinnon Buck](https://github.com/MackinnonBuck)ve [Luke Latham](https://github.com/guardrex) tarafından
 
 Bu makalede barındırma modeli yapılandırması ele alınmaktadır.
 
-### <a name="signalr-cross-origin-negotiation-for-authentication"></a>SignalRkimlik doğrulaması için çıkış noktaları arası anlaşma
+### <a name="no-locsignalr-cross-origin-negotiation-for-authentication"></a>SignalRkimlik doğrulaması için çıkış noktaları arası anlaşma
 
 *Bu bölüm için geçerlidir Blazor WebAssembly .*
 
@@ -125,13 +125,13 @@ Blazor Serveruygulamalar, sunucu bağlantısı oluşturulmadan önce sunucudaki 
 
 Statik HTML sayfasından sunucu bileşenleri işleme desteklenmiyor.
 
-## <a name="configure-the-signalr-client-for-blazor-server-apps"></a>SignalRUygulamalar için istemciyi yapılandırma Blazor Server
+## <a name="configure-the-no-locsignalr-client-for-no-locblazor-server-apps"></a>SignalRUygulamalar için istemciyi yapılandırma Blazor Server
 
 *Bu bölüm için geçerlidir Blazor Server .*
 
 SignalRDosyadaki uygulamalar tarafından kullanılan istemciyi yapılandırın Blazor Server `Pages/_Host.cshtml` . `Blazor.start` `_framework/blazor.server.js` Komut dosyasını ve etiketinin arkasına çağrı yapan bir betik yerleştirin `</body>` .
 
-### <a name="logging"></a>Günlüğe kaydetme
+### <a name="logging"></a>Günlüğe Kaydetme
 
 SignalRİstemci günlüğünü yapılandırmak için:
 
@@ -141,7 +141,7 @@ SignalRİstemci günlüğünü yapılandırmak için:
 ```cshtml
     ...
 
-    <script src="_framework/blazor.server.js" autostart="false"></script>
+    <script autostart="false" src="_framework/blazor.server.js"></script>
     <script>
       Blazor.start({
         configureSignalR: function (builder) {
@@ -169,7 +169,7 @@ Bağlantı olaylarını değiştirmek için:
 ```cshtml
     ...
 
-    <script src="_framework/blazor.server.js" autostart="false"></script>
+    <script autostart="false" src="_framework/blazor.server.js"></script>
     <script>
       Blazor.start({
         reconnectionHandler: {
@@ -191,7 +191,7 @@ Yeniden bağlantı yeniden deneme sayısını ve aralığını ayarlamak için:
 ```cshtml
     ...
 
-    <script src="_framework/blazor.server.js" autostart="false"></script>
+    <script autostart="false" src="_framework/blazor.server.js"></script>
     <script>
       Blazor.start({
         reconnectionOptions: {
@@ -213,7 +213,7 @@ Yeniden bağlantı görüntüsünü gizlemek için:
 ```cshtml
     ...
 
-    <script src="_framework/blazor.server.js" autostart="false"></script>
+    <script autostart="false" src="_framework/blazor.server.js"></script>
     <script>
       window.addEventListener('beforeunload', function () {
         Blazor.defaultReconnectionHandler._reconnectionDisplay = {};
@@ -230,6 +230,41 @@ Blazor.defaultReconnectionHandler._reconnectionDisplay =
 ```
 
 Yer tutucu, `{ELEMENT ID}` görüntülenecek HTML ÖĞESININ kimliğidir.
+
+::: moniker range=">= aspnetcore-5.0"
+
+## <a name="influence-html-head-tag-elements"></a>HTML `<head>` etiketi öğelerini etkiler
+
+*Bu bölüm ve için Blazor WebAssembly geçerlidir Blazor Server .*
+
+İşlendiğinde,, `Title` `Link` ve `Meta` bileşenleri HTML etiketi öğelerine veri ekler veya güncelleştirir `<head>` :
+
+```razor
+@using Microsoft.AspNetCore.Components.Web.Extensions.Head
+
+<Title Value="{TITLE}" />
+<Link href="{URL}" rel="stylesheet" />
+<Meta content="{DESCRIPTION}" name="description" />
+```
+
+Önceki örnekte,,, ve için yer tutucular `{TITLE}` `{URL}` `{DESCRIPTION}` dize değerleri, Razor değişkenler veya Razor ifadeleridir.
+
+Aşağıdaki özellikler geçerlidir:
+
+* Sunucu tarafı prerendering desteklenir.
+* `Value`Parametresi, bileşen için tek geçerli parametredir `Title` .
+* Ve bileşenlerine verilen HTML öznitelikleri `Meta` , `Link` [ek özniteliklerde](xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters) yakalanıp işlenen HTML etiketine geçirilir.
+* Birden çok `Title` bileşen için, sayfanın başlığı, `Value` işlenen son bileşenin sayısını yansıtır `Title` .
+* `Meta` `Link` Aynı özniteliklere sahip birden çok veya bileşen varsa, veya bileşen başına tam olarak bir HTML etiketi işlenir `Meta` `Link` . İki `Meta` veya `Link` bileşen aynı işlenen HTML etiketine başvuramaz.
+* Mevcut veya bileşenlerin parametrelerine yapılan değişiklikler `Meta` , `Link` İşlenmiş HTML etiketlerine yansıtılır.
+* `Link`Veya `Meta` bileşenleri artık oluşturulmuyorsa ve bu nedenle Framework tarafından atılmışsa, işlenen HTML etiketleri kaldırılır.
+
+Bir alt bileşende çerçeve bileşenlerinden biri kullanıldığında, çerçeve bileşenini içeren alt bileşen işlendiği sürece işlenen HTML etiketi, ana bileşenin diğer alt bileşenlerini etkiler. Bir alt bileşendeki bu çerçeve bileşenlerinden birini kullanma ve veya ' a bir HTML etiketi yerleştirme arasındaki ayrım, `wwwroot/index.html` `Pages/_Host.cshtml` bir çerçeve BILEŞENININ işlenmiş html etiketinin:
+
+* , Uygulama durumu ile değiştirilebilir. Sabit kodlanmış HTML etiketi uygulama durumu tarafından değiştirilemez.
+* `<head>`Üst bileşen artık IŞLENMEDIĞINDE HTML 'den kaldırılır.
+
+::: moniker-end
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

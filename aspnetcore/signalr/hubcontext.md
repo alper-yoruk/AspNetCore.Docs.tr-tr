@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/hubcontext
-ms.openlocfilehash: 85f0f48dd6586b40b8db21eb4b59793069afe2c5
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d38cb5b3e818879d3ec40a927acfdd69dc85377a
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405815"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87819256"
 ---
 # <a name="send-messages-from-outside-a-hub"></a>Hub dışından ileti gönderme
 
@@ -70,7 +70,7 @@ app.Use(async (context, next) =>
 
 ### <a name="get-an-instance-of-ihubcontext-from-ihost"></a>IHOST 'dan bir ıubcontext örneği al
 
-`IHubContext`Web ana bilgisayarına erişmek, örneğin 3. taraf bağımlılığı ekleme çerçevelerini kullanarak ASP.NET Core dışındaki alanlarla tümleştirme için yararlıdır:
+`IHubContext`Web ana bilgisayarına erişmek, örneğin üçüncü taraf bağımlılık ekleme çerçevelerini kullanarak ASP.NET Core dışındaki alanlarla tümleştirme için yararlıdır:
 
 ```csharp
     public class Program
@@ -113,6 +113,6 @@ public class ChatController : Controller
 
 ## <a name="related-resources"></a>İlgili kaynaklar
 
-* [Kullanmaya başlayın](xref:tutorials/signalr)
-* [Merkezler](xref:signalr/hubs)
+* [Kullanmaya başlama](xref:tutorials/signalr)
+* [Hub'lar](xref:signalr/hubs)
 * [Azure’da Yayımlama](xref:signalr/publish-to-azure-web-app)

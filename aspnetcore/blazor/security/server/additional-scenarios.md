@@ -15,22 +15,22 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/additional-scenarios
-ms.openlocfilehash: 46de9a22dec540b8dfda7583b7a3c5c2dcbbc549
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 8f112a4d71e44cae112e9854fc77dfda4af5a47a
+ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402332"
+ms.lasthandoff: 08/05/2020
+ms.locfileid: "87818917"
 ---
-# <a name="aspnet-core-blazor-server-additional-security-scenarios"></a>ASP.NET Core Blazor Server ek güvenlik senaryoları
+# <a name="aspnet-core-no-locblazor-server-additional-security-scenarios"></a>ASP.NET Core Blazor Server ek güvenlik senaryoları
 
 Sağlayan [Javier Calvarro Nelson](https://github.com/javiercn)
 
-## <a name="pass-tokens-to-a-blazor-server-app"></a>Belirteçleri bir uygulamaya geçirin Blazor Server
+## <a name="pass-tokens-to-a-no-locblazor-server-app"></a>Belirteçleri bir uygulamaya geçirin Blazor Server
 
 Bir uygulamadaki bileşenlerin dışında bulunan belirteçler, Razor Blazor Server Bu bölümde açıklanan yaklaşımla birlikte bileşenlere geçirilebilir. Örnek kod için, tam bir örnek de dahil olmak üzere `Startup.ConfigureServices` [belirteçleri sunucu tarafı Blazor uygulamasına geçirme](https://github.com/javiercn/blazor-server-aad-sample)konusuna bakın.
 
-Uygulamanın kimliğini Blazor Server düzenli sayfalar veya MVC uygulamasıyla yaptığınız gibi doğrulayın Razor . Belirteçleri sağlama ve kimlik doğrulama tanımlama bilgisine kaydetme. Örneğin:
+Uygulamanın kimliğini Blazor Server düzenli sayfalar veya MVC uygulamasıyla yaptığınız gibi doğrulayın Razor . Belirteçleri sağlama ve kimlik doğrulama tanımlama bilgisine kaydetme. Örnek:
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -162,9 +162,9 @@ endpoints.MapBlazorHub().RequireAuthorization(
     });
 ```
 
-## <a name="use-open-id-connect-oidc-v20-endpoints"></a>Açık KIMLIK Connect (OıDC) v 2.0 uç noktalarını kullan
+## <a name="use-openid-connect-oidc-v20-endpoints"></a>OpenID Connect (OıDC) v 2.0 uç noktalarını kullan
 
-Kimlik doğrulama kitaplığı ve Blazor şablonları Open ID Connect (OıDC) v 1.0 uç noktalarını kullanır. Bir v 2.0 uç noktası kullanmak için, <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority?displayProperty=nameWithType> ' deki seçeneğini yapılandırın <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> :
+Kimlik doğrulama kitaplığı ve Blazor şablonları OpenID Connect (OıDC) v 1.0 uç noktalarını kullanır. Bir v 2.0 uç noktası kullanmak için, <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions.Authority?displayProperty=nameWithType> ' deki seçeneğini yapılandırın <xref:Microsoft.AspNetCore.Builder.OpenIdConnectOptions> :
 
 ```csharp
 services.Configure<OpenIdConnectOptions>(AzureADDefaults.OpenIdScheme, 
