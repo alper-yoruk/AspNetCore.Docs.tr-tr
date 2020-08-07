@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: 27ee69130bc455ab2570556091692053d59e89a5
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f7c5d75fbbbecacea8bbe3a0e54b526f000a001b
+ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408233"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87913754"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>ASP.NET Core Web sunucusu uygulamasını HTTP.sys
 
@@ -169,7 +169,7 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
 
    Ayarları `UrlPrefixes` geçersiz kıl `UseUrls` / `urls` / `ASPNETCORE_URLS` . Bu nedenle, `UseUrls` `urls` ve `ASPNETCORE_URLS` ortam değişkeninin avantajı Kestrel ve HTTP.sys arasında geçiş yapmak daha kolay bir hale gelir.
 
-   HTTP.sys, [http sunucusu API UrlPrefix dize biçimlerini](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx)kullanır.
+   HTTP.sys, [http sunucusu API UrlPrefix dize biçimlerini](/windows/win32/http/urlprefix-strings)kullanır.
 
    > [!WARNING]
    > Üst düzey joker karakter bağlamaları ( `http://*:80/` ve `http://+:80` ) kullanılmamalıdır **not** . Üst düzey joker karakter bağlamaları uygulama güvenliği güvenlik açıklarını oluşturur. Bu hem güçlü hem de zayıf Joker karakterlere yöneliktir. Joker karakterler yerine açık konak adlarını veya IP adreslerini kullanın. Alt etki alanı joker bağlantısı (örneğin, `*.mysub.com` ), tüm üst etki alanını ( `*.com` Bu güvenlik açığı olan aksine) kontrol ediyorsanız bir güvenlik riski değildir. Daha fazla bilgi için bkz. [RFC 7230: bölüm 5,4: Host](https://tools.ietf.org/html/rfc7230#section-5.4).
@@ -253,7 +253,7 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
    *netsh.exe*için başvuru belgeleri:
 
    * [Köprü Metni Aktarım Protokolü (HTTP) için Netsh komutları](https://technet.microsoft.com/library/cc725882.aspx)
-   * [UrlPrefix dizeleri](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx)
+   * [UrlPrefix dizeleri](/windows/win32/http/urlprefix-strings)
 
 1. Uygulamayı çalıştırın.
 
@@ -272,7 +272,7 @@ Internet veya şirket ağından gelen isteklerle etkileşime geçen HTTP.sys tar
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * [HTTP.sysile Windows kimlik doğrulamasını etkinleştir](xref:security/authentication/windowsauth#httpsys)
-* [HTTP Sunucusu API 'SI](https://msdn.microsoft.com/library/windows/desktop/aa364510.aspx)
+* [HTTP Sunucusu API 'SI](/windows/win32/http/http-api-start-page)
 * [ASPNET/HttpSysServer GitHub deposu (kaynak kodu)](https://github.com/aspnet/HttpSysServer/)
 * [Ana bilgisayar](xref:fundamentals/index#host)
 * <xref:test/troubleshoot>
@@ -420,7 +420,7 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
 
    Ayarları `UrlPrefixes` geçersiz kıl `UseUrls` / `urls` / `ASPNETCORE_URLS` . Bu nedenle, `UseUrls` `urls` ve `ASPNETCORE_URLS` ortam değişkeninin avantajı Kestrel ve HTTP.sys arasında geçiş yapmak daha kolay bir hale gelir.
 
-   HTTP.sys, [http sunucusu API UrlPrefix dize biçimlerini](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx)kullanır.
+   HTTP.sys, [http sunucusu API UrlPrefix dize biçimlerini](/windows/win32/http/urlprefix-strings)kullanır.
 
    > [!WARNING]
    > Üst düzey joker karakter bağlamaları ( `http://*:80/` ve `http://+:80` ) kullanılmamalıdır **not** . Üst düzey joker karakter bağlamaları uygulama güvenliği güvenlik açıklarını oluşturur. Bu hem güçlü hem de zayıf Joker karakterlere yöneliktir. Joker karakterler yerine açık konak adlarını veya IP adreslerini kullanın. Alt etki alanı joker bağlantısı (örneğin, `*.mysub.com` ), tüm üst etki alanını ( `*.com` Bu güvenlik açığı olan aksine) kontrol ediyorsanız bir güvenlik riski değildir. Daha fazla bilgi için bkz. [RFC 7230: bölüm 5,4: Host](https://tools.ietf.org/html/rfc7230#section-5.4).
@@ -504,7 +504,7 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
    *netsh.exe*için başvuru belgeleri:
 
    * [Köprü Metni Aktarım Protokolü (HTTP) için Netsh komutları](https://technet.microsoft.com/library/cc725882.aspx)
-   * [UrlPrefix dizeleri](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx)
+   * [UrlPrefix dizeleri](/windows/win32/http/urlprefix-strings)
 
 1. Uygulamayı çalıştırın.
 
@@ -523,7 +523,7 @@ Internet veya şirket ağından gelen isteklerle etkileşime geçen HTTP.sys tar
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * [HTTP.sysile Windows kimlik doğrulamasını etkinleştir](xref:security/authentication/windowsauth#httpsys)
-* [HTTP Sunucusu API 'SI](https://msdn.microsoft.com/library/windows/desktop/aa364510.aspx)
+* [HTTP Sunucusu API 'SI](/windows/win32/http/http-api-start-page)
 * [ASPNET/HttpSysServer GitHub deposu (kaynak kodu)](https://github.com/aspnet/HttpSysServer/)
 * [Ana bilgisayar](xref:fundamentals/index#host)
 * <xref:test/troubleshoot>
@@ -673,7 +673,7 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
 
    Ayarları `UrlPrefixes` geçersiz kıl `UseUrls` / `urls` / `ASPNETCORE_URLS` . Bu nedenle, `UseUrls` `urls` ve `ASPNETCORE_URLS` ortam değişkeninin avantajı Kestrel ve HTTP.sys arasında geçiş yapmak daha kolay bir hale gelir.
 
-   HTTP.sys, [http sunucusu API UrlPrefix dize biçimlerini](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx)kullanır.
+   HTTP.sys, [http sunucusu API UrlPrefix dize biçimlerini](/windows/win32/http/urlprefix-strings)kullanır.
 
    > [!WARNING]
    > Üst düzey joker karakter bağlamaları ( `http://*:80/` ve `http://+:80` ) kullanılmamalıdır **not** . Üst düzey joker karakter bağlamaları uygulama güvenliği güvenlik açıklarını oluşturur. Bu hem güçlü hem de zayıf Joker karakterlere yöneliktir. Joker karakterler yerine açık konak adlarını veya IP adreslerini kullanın. Alt etki alanı joker bağlantısı (örneğin, `*.mysub.com` ), tüm üst etki alanını ( `*.com` Bu güvenlik açığı olan aksine) kontrol ediyorsanız bir güvenlik riski değildir. Daha fazla bilgi için bkz. [RFC 7230: bölüm 5,4: Host](https://tools.ietf.org/html/rfc7230#section-5.4).
@@ -757,7 +757,7 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
    *netsh.exe*için başvuru belgeleri:
 
    * [Köprü Metni Aktarım Protokolü (HTTP) için Netsh komutları](https://technet.microsoft.com/library/cc725882.aspx)
-   * [UrlPrefix dizeleri](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx)
+   * [UrlPrefix dizeleri](/windows/win32/http/urlprefix-strings)
 
 1. Uygulamayı çalıştırın.
 
@@ -776,7 +776,7 @@ Internet veya şirket ağından gelen isteklerle etkileşime geçen HTTP.sys tar
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * [HTTP.sysile Windows kimlik doğrulamasını etkinleştir](xref:security/authentication/windowsauth#httpsys)
-* [HTTP Sunucusu API 'SI](https://msdn.microsoft.com/library/windows/desktop/aa364510.aspx)
+* [HTTP Sunucusu API 'SI](/windows/win32/http/http-api-start-page)
 * [ASPNET/HttpSysServer GitHub deposu (kaynak kodu)](https://github.com/aspnet/HttpSysServer/)
 * [Ana bilgisayar](xref:fundamentals/index#host)
 * <xref:test/troubleshoot>
@@ -926,7 +926,7 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
 
    Ayarları `UrlPrefixes` geçersiz kıl `UseUrls` / `urls` / `ASPNETCORE_URLS` . Bu nedenle, `UseUrls` `urls` ve `ASPNETCORE_URLS` ortam değişkeninin avantajı Kestrel ve HTTP.sys arasında geçiş yapmak daha kolay bir hale gelir.
 
-   HTTP.sys, [http sunucusu API UrlPrefix dize biçimlerini](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx)kullanır.
+   HTTP.sys, [http sunucusu API UrlPrefix dize biçimlerini](/windows/win32/http/urlprefix-strings)kullanır.
 
    > [!WARNING]
    > Üst düzey joker karakter bağlamaları ( `http://*:80/` ve `http://+:80` ) kullanılmamalıdır **not** . Üst düzey joker karakter bağlamaları uygulama güvenliği güvenlik açıklarını oluşturur. Bu hem güçlü hem de zayıf Joker karakterlere yöneliktir. Joker karakterler yerine açık konak adlarını veya IP adreslerini kullanın. Alt etki alanı joker bağlantısı (örneğin, `*.mysub.com` ), tüm üst etki alanını ( `*.com` Bu güvenlik açığı olan aksine) kontrol ediyorsanız bir güvenlik riski değildir. Daha fazla bilgi için bkz. [RFC 7230: bölüm 5,4: Host](https://tools.ietf.org/html/rfc7230#section-5.4).
@@ -1010,7 +1010,7 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
    *netsh.exe*için başvuru belgeleri:
 
    * [Köprü Metni Aktarım Protokolü (HTTP) için Netsh komutları](https://technet.microsoft.com/library/cc725882.aspx)
-   * [UrlPrefix dizeleri](https://msdn.microsoft.com/library/windows/desktop/aa364698.aspx)
+   * [UrlPrefix dizeleri](/windows/win32/http/urlprefix-strings)
 
 1. Uygulamayı çalıştırın.
 
@@ -1029,7 +1029,7 @@ Internet veya şirket ağından gelen isteklerle etkileşime geçen HTTP.sys tar
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * [HTTP.sysile Windows kimlik doğrulamasını etkinleştir](xref:security/authentication/windowsauth#httpsys)
-* [HTTP Sunucusu API 'SI](https://msdn.microsoft.com/library/windows/desktop/aa364510.aspx)
+* [HTTP Sunucusu API 'SI](/windows/win32/http/http-api-start-page)
 * [ASPNET/HttpSysServer GitHub deposu (kaynak kodu)](https://github.com/aspnet/HttpSysServer/)
 * [Ana bilgisayar](xref:fundamentals/index#host)
 * <xref:test/troubleshoot>

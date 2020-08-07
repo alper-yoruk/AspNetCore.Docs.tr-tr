@@ -16,18 +16,18 @@ no-loc:
 - SignalR
 uid: blazor/tooling
 zone_pivot_groups: operating-systems
-ms.openlocfilehash: 33245e669b317ed577a8a1652b2eed8f9ea5b915
-ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
+ms.openlocfilehash: 094ec24fb6599168f0aa84f16c00deabf5f239b7
+ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/15/2020
-ms.locfileid: "86407651"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87913831"
 ---
-# <a name="tooling-for-aspnet-core-blazor"></a>ASP.NET Core için araç oluşturmaBlazor
+# <a name="tooling-for-aspnet-core-no-locblazor"></a>ASP.NET Core için araç oluşturmaBlazor
 
 [Daniel Roth](https://github.com/danroth27) ve [Luke Latham](https://github.com/guardrex) tarafından
 
-::: zone pivot="os-windows"
+::: zone pivot="windows"
 
 1. **ASP.net ve Web geliştirme** iş yüküyle [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/) ' in en son sürümünü yükler.
 
@@ -47,7 +47,7 @@ ASP.NET Core HTTPS geliştirme sertifikasını güvenme hakkında daha fazla bil
 
 ::: zone-end
 
-::: zone pivot="os-linux"
+::: zone pivot="linux"
 
 1. [.NET Core 3,1 SDK 'sının](https://dotnet.microsoft.com/download/dotnet-core/3.1)en son sürümünü yükler. SDK 'Yı daha önce yüklediyseniz, bir komut kabuğu 'nda aşağıdaki komutu yürüterek yüklü sürümünüzü belirleyebilirsiniz:
 
@@ -91,7 +91,7 @@ Daha fazla bilgi için, tarayıcı ve Linux dağıtım tarafından sunulan kıla
 
 ::: zone-end
 
-::: zone pivot="os-macos"
+::: zone pivot="macos"
 
 1. [Mac için Visual Studio](https://visualstudio.microsoft.com/vs/mac/)'i yükler.
 

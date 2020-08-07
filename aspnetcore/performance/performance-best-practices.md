@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: 15f3ce5a8e8d47ac567acaadcdc4bf8ba738b2ff
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f74f6ce93093adbc931dd90b32a14de5d4f89096
+ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408181"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87913887"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core performans En Iyi yöntemleri
 
@@ -50,7 +50,7 @@ ASP.NET Core uygulamalarda yaygın bir performans sorunu, zaman uyumsuz olabilec
 **Şunları yapın**:
 
 * [Etkin kod yollarını](#understand-hot-code-paths) zaman uyumsuz yapın.
-* Zaman uyumsuz bir API kullanılabiliyorsa veri erişimi, g/ç ve uzun süre çalışan işlem API 'Lerini çağrı zaman uyumsuz olarak çağırın. Bir synchronus API 'SI zaman uyumsuz yapmak için [Task. Run](/dotnet/api/system.threading.tasks.task.run) **kullanmayın.**
+* Zaman uyumsuz bir API kullanılabiliyorsa veri erişimi, g/ç ve uzun süre çalışan işlem API 'Lerini çağrı zaman uyumsuz olarak çağırın. Zaman uyumlu bir API zaman **uyumsuz yapmak Için** [Task. Run](/dotnet/api/system.threading.tasks.task.run) kullanmayın.
 * Denetleyici/ Razor sayfa eylemlerini zaman uyumsuz yapın. [Zaman uyumsuz/await](/dotnet/csharp/programming-guide/concepts/async/) desenlerinden faydalanmak için tüm çağrı yığını zaman uyumsuzdur.
 
 [Iş parçacığı havuzuna](/windows/desktop/procthread/thread-pools)sık sık eklenen iş parçacıklarını bulmak Için [PerfView](https://github.com/Microsoft/perfview)gibi bir profil oluşturucu kullanılabilir. `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start`Olay, iş parçacığı havuzuna eklenen bir iş parçacığını gösterir. <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc)  -->
@@ -108,7 +108,7 @@ Sorgu sorunları, [Application Insights](/azure/application-insights/app-insight
 
 ## <a name="keep-common-code-paths-fast"></a>Ortak kod yollarını hızlı tutun
 
-Tüm kodunuzun hızlı olmasını istiyorsunuz. Yaygın olarak çağrılan kod yolları en kritik öneme sahiptir. Bu güncelleştirmeler şunlardır:
+Tüm kodunuzun hızlı olmasını istiyorsunuz. Yaygın olarak çağrılan kod yolları en kritik öneme sahiptir. Bunlara
 
 * Uygulamanın istek işleme ardışık düzeninde bulunan ara yazılım bileşenleri, özellikle de ara yazılım ardışık düzende çalışır. Bu bileşenlerin performansı üzerinde büyük bir etkisi vardır.
 * Her istek için veya istek başına birden çok kez yürütülen kod. Örneğin, özel günlük kaydı, yetkilendirme işleyicileri veya geçici Hizmetleri başlatma.
@@ -146,7 +146,7 @@ Karmaşık ön uçları olan ASP.NET Core uygulamalar sıklıkla birçok JavaScr
 
 ## <a name="use-the-latest-aspnet-core-release"></a>En son ASP.NET Core sürümü kullan
 
-ASP.NET Core her yeni sürümü performans iyileştirmeleri içerir. .NET Core ve ASP.NET Core iyileştirmeler, daha yeni sürümlerin genellikle eski sürümlerin genel olarak gerçekleştirdiği anlamına gelir. Örneğin, .NET Core 2,1, derlenmiş normal ifadeler ve [benefitted 'dan gelen \<T> ](https://msdn.microsoft.com/magazine/mt814808.aspx)destek eklendi. ASP.NET Core 2,2 HTTP/2 desteği eklendi. ASP.NET Core 3,0, bellek kullanımını azaltan ve üretilen işi geliştiren [birçok geliştirme ekler](xref:aspnetcore-3.0) . Performans bir önceliktir, ASP.NET Core güncel sürümüne yükseltmeyi göz önünde bulundurun.
+ASP.NET Core her yeni sürümü performans iyileştirmeleri içerir. .NET Core ve ASP.NET Core iyileştirmeler, daha yeni sürümlerin genellikle eski sürümlerin genel olarak gerçekleştirdiği anlamına gelir. Örneğin, .NET Core 2,1, derlenmiş normal ifadeler ve [benefitted 'dan gelen \<T> ](/archive/msdn-magazine/2018/january/csharp-all-about-span-exploring-a-new-net-mainstay)destek eklendi. ASP.NET Core 2,2 HTTP/2 desteği eklendi. ASP.NET Core 3,0, bellek kullanımını azaltan ve üretilen işi geliştiren [birçok geliştirme ekler](xref:aspnetcore-3.0) . Performans bir önceliktir, ASP.NET Core güncel sürümüne yükseltmeyi göz önünde bulundurun.
 
 ## <a name="minimize-exceptions"></a>Özel durumları Küçült
 

@@ -13,12 +13,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mobile/native-mobile-backend
-ms.openlocfilehash: a6d99e4a8f05125e6e7968b088c5b7e29cb75e6c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b719c64e6976e65a725b28ae3f6c245f2f4874a4
+ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407570"
+ms.lasthandoff: 08/07/2020
+ms.locfileid: "87913601"
 ---
 # <a name="create-backend-services-for-native-mobile-apps-with-aspnet-core"></a>ASP.NET Core ile yerel mobil uygulamalar için arka uç hizmetleri oluşturma
 
@@ -158,8 +158,8 @@ Silme işlevinin test edilirken, isteğin gövdesinde hiçbir şey gerekmediği 
 
 Uygulamanız için arka uç hizmetlerini geliştirirken, çapraz kesme sorunlarını işlemeye yönelik tutarlı bir kural veya ilke kümesiyle birlikte çalışmak isteyeceksiniz. Örneğin, yukarıda gösterilen hizmette, bulunamayan belirli kayıtlara yönelik istekler `NotFound` Yanıt yerine bir yanıt aldı `BadRequest` . Benzer şekilde, bu hizmete, model bağlantılı türler 'e geçirilen komutlar her zaman denetlenir `ModelState.IsValid` ve `BadRequest` geçersiz model türleri için döndürülür.
 
-API 'leriniz için ortak bir ilke tanımladıktan sonra, genellikle bunu bir [filtrede](../mvc/controllers/filters.md)kapsülleyebilirsiniz. [ASP.NET Core MVC uygulamalarında ortak API ilkelerini kapsüllemek](https://msdn.microsoft.com/magazine/mt767699.aspx)hakkında daha fazla bilgi edinin.
+API 'leriniz için ortak bir ilke tanımladıktan sonra, genellikle bunu bir [filtrede](../mvc/controllers/filters.md)kapsülleyebilirsiniz. [ASP.NET Core MVC uygulamalarında ortak API ilkelerini kapsüllemek](/archive/msdn-magazine/2016/august/asp-net-core-real-world-asp-net-core-mvc-filters)hakkında daha fazla bilgi edinin.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [Kimlik Doğrulama ve Yetkilendirme](/xamarin/xamarin-forms/enterprise-application-patterns/authentication-and-authorization)
+* [Kimlik doğrulama ve yetkilendirme](/xamarin/xamarin-forms/enterprise-application-patterns/authentication-and-authorization)
