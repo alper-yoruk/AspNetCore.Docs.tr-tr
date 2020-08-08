@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.1
-ms.openlocfilehash: bf041965b009d5c10b96ad4f2a349c6efb346eb5
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 3fb524748b9e2aa2c12b64f67a7960c4f0f911b0
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408168"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021165"
 ---
 # <a name="whats-new-in-aspnet-core-21"></a>ASP.NET Core 2,1 ' deki yenilikler
 
@@ -38,7 +40,7 @@ SignalRASP.NET Core 2,1 için yeniden yazıldı. ASP.NET Core SignalR birkaç ge
 
 Daha fazla bilgi için bkz [. SignalR ASP.NET Core ](xref:signalr/introduction).
 
-## <a name="razor-class-libraries"></a>Razorsınıf kitaplıkları
+## <a name="no-locrazor-class-libraries"></a>Razorsınıf kitaplıkları
 
 ASP.NET Core 2,1, bir kitaplıkta derleme ve ekleme temelli Kullanıcı arabirimini daha kolay hale getirir Razor ve bunu birden fazla proje arasında paylaşabilir. Yeni Razor SDK, Razor bir NuGet paketine paketlenebilecek bir sınıf kitaplığı projesinde dosya oluşturulmasına izin vermez. Kitaplıklardaki görünümler ve sayfalar otomatik olarak keşfedilir ve uygulama tarafından geçersiz kılınabilir. RazorDerlemeyi derlemeyle tümleştirerek:
 
@@ -47,7 +49,7 @@ ASP.NET Core 2,1, bir kitaplıkta derleme ve ekleme temelli Kullanıcı arabirim
 
 Daha fazla bilgi için bkz. [ Razor Sınıf Kitaplığı projesini kullanarak yeniden kullanılabilir kullanıcı arabirimi oluşturma](xref:razor-pages/ui-class).
 
-## <a name="identity-ui-library--scaffolding"></a>IdentityUI kitaplığı & yapı iskelesi
+## <a name="no-locidentity-ui-library--scaffolding"></a>IdentityUI kitaplığı & yapı iskelesi
 
 ASP.NET Core 2,1, bir [ Razor sınıf kitaplığı](xref:razor-pages/ui-class)olarak [ASP.NET Core Identity ](xref:security/authentication/identity) sağlar. Dahil edilen uygulamalar, Identity Identity Identity Razor sınıf kitaplığı 'nda (RCL) bulunan kaynak kodunu seçmeli olarak eklemek için yeni desteği uygulayabilir. Kodu değiştirebilmeniz ve davranışı değiştirebilmek için kaynak kodu oluşturmak isteyebilirsiniz. Örneğin, kayıt sırasında kullanılan kodu oluşturmak için desteği ' ı söyleyebilirsiniz. Oluşturulan kod RCL 'deki aynı koda göre önceliklidir Identity .
 
@@ -159,7 +161,7 @@ Daha fazla bilgi için bkz.
 * <xref:spa/react>
 * <xref:spa/react-with-redux>
 
-## <a name="razor-pages-search-for-razor-assets"></a>RazorVarlıklar için arama sayfaları Razor
+## <a name="no-locrazor-pages-search-for-no-locrazor-assets"></a>RazorVarlıklar için arama sayfaları Razor
 
 2,1 ' de Razor Sayfalar, Razor listelenen sırada aşağıdaki dizinlerde bulunan varlıkları (örneğin, düzenler ve partileri) arar:
 
@@ -167,7 +169,7 @@ Daha fazla bilgi için bkz.
 1. */Pages/Shared/*
 1. */Views/Shared/*
 
-## <a name="razor-pages-in-an-area"></a>RazorBir alandaki sayfalar
+## <a name="no-locrazor-pages-in-an-area"></a>RazorBir alandaki sayfalar
 
 RazorSayfalar artık [bölgeleri](xref:mvc/controllers/areas)destekliyor. Bir alan örneği görmek için Razor bireysel kullanıcı hesaplarıyla yeni bir sayfa Web uygulaması oluşturun. RazorBireysel kullanıcı hesapları içeren bir sayfa Web uygulaması */Areas/ Identity /Pages*içerir.
 

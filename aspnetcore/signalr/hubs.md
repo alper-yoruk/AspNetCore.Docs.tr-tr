@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,24 +17,24 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/hubs
-ms.openlocfilehash: 1757d205b583c8b3f3bbf845594d7228f8d45175
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: bd7432fc29d0cda003abed1f0e522bdddf2e4efc
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408558"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022218"
 ---
-# <a name="use-hubs-in-signalr-for-aspnet-core"></a>ASP.NET Core için hub 'ları kullanın SignalR
+# <a name="use-hubs-in-no-locsignalr-for-aspnet-core"></a>ASP.NET Core için hub 'ları kullanın SignalR
 
 , [Rachel Appel](https://twitter.com/rachelappel) ve [Kevin Griffin](https://twitter.com/1kevgriff) tarafından
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/hubs/sample/ ) [(nasıl indirileceği)](xref:index#how-to-download-a-sample)
 
-## <a name="what-is-a-signalr-hub"></a>Hub nedir? SignalR
+## <a name="what-is-a-no-locsignalr-hub"></a>Hub nedir? SignalR
 
 SignalRHub 'lar API 'si, bağlı istemcilerdeki yöntemleri sunucudan çağırmanızı sağlar. Sunucu kodunda, istemci tarafından çağrılan yöntemleri tanımlarsınız. İstemci kodunda, sunucudan çağrılan yöntemleri tanımlarsınız. SignalRgerçek zamanlı istemciden sunucuya ve sunucudan istemciye iletişimleri mümkün kılan arka planda her şeyi ele alır.
 
-## <a name="configure-signalr-hubs"></a>SignalRHub 'ları yapılandırma
+## <a name="configure-no-locsignalr-hubs"></a>SignalRHub 'ları yapılandırma
 
 SignalRAra yazılım, çağırarak yapılandırılan bazı hizmetler gerektirir `services.AddSignalR` .
 
@@ -152,7 +154,7 @@ Bu arabirim, önceki örneği yeniden düzenleme için kullanılabilir `ChatHub`
 
 Kullanımı `Hub<IChatClient>` , istemci yöntemlerinin derleme zamanı denetimini sunar. Bu, `Hub<T>` yalnızca arabirimde tanımlanan yöntemlere erişim sağlayabileceğinizden, sihirli dizeler kullanılarak oluşan sorunları önler.
 
-Türü kesin belirlenmiş kullanılması `Hub<T>` , kullanma yeteneğini devre dışı bırakır `SendAsync` . Arabirim üzerinde tanımlanan Yöntemler hala zaman uyumsuz olarak tanımlanabilir. Aslında, bu yöntemlerin her biri bir döndürmelidir `Task` . Bir arabirim olduğundan `async` anahtar sözcüğünü kullanmayın. Örneğin:
+Türü kesin belirlenmiş kullanılması `Hub<T>` , kullanma yeteneğini devre dışı bırakır `SendAsync` . Arabirim üzerinde tanımlanan Yöntemler hala zaman uyumsuz olarak tanımlanabilir. Aslında, bu yöntemlerin her biri bir döndürmelidir `Task` . Bir arabirim olduğundan `async` anahtar sözcüğünü kullanmayın. Örnek:
 
 ```csharp
 public interface IClient
@@ -188,7 +190,7 @@ Hub yöntemleriniz içinde oluşturulan özel durumlar, yöntemi çağıran iste
 
 [!code-javascript[Error](hubs/sample/wwwroot/js/chat.js?range=23)]
 
-Hub 'ınız bir özel durum oluşturursa, bağlantılar kapanmamıştır. Varsayılan olarak, SignalR istemciye genel bir hata iletisi döndürür. Örneğin:
+Hub 'ınız bir özel durum oluşturursa, bağlantılar kapanmamıştır. Varsayılan olarak, SignalR istemciye genel bir hata iletisi döndürür. Örnek:
 
 ```
 Microsoft.AspNetCore.SignalR.HubException: An unexpected error occurred invoking 'MethodName' on the server.

@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/publish-to-azure-web-app
-ms.openlocfilehash: d3f48b3171012b03fcaf7665c2089b27d37bbeca
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 3163a2743c544d0a07d92eb7547e77c3b200ac83
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408844"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022543"
 ---
-# <a name="publish-an-aspnet-core-signalr-app-to-azure-app-service"></a>SignalRAzure App Service için ASP.NET Core uygulaması yayımlama
+# <a name="publish-an-aspnet-core-no-locsignalr-app-to-azure-app-service"></a>SignalRAzure App Service için ASP.NET Core uygulaması yayımlama
 
 , [Brady Gaster](https://twitter.com/bradygaster) tarafından
 
@@ -45,14 +47,14 @@ Bu makalede, Visual Studio 'daki araçları kullanarak yayımlama ele alınmakta
 
    | Öğe               | Açıklama |
    | ------------------ | ----------- |
-   | **Adı**           | Uygulamanın benzersiz adı. |
+   | **Ad**           | Uygulamanın benzersiz adı. |
    | **Abonelik**   | Uygulamanın kullandığı Azure aboneliği. |
-   | **Kaynak grubu** | Uygulamanın ait olduğu ilgili kaynaklar grubu. |
+   | **Kaynak Grubu** | Uygulamanın ait olduğu ilgili kaynaklar grubu. |
    | **Barındırma Planı**   | Web uygulaması için fiyatlandırma planı. |
 
 1. **Bağımlılıklar**ekleme açılan listesinden **Azure SignalR hizmetini** seçin  >  **Add** :
 
-   ![Ekle açılan listesinde Azure hizmeti seçimini gösteren bağımlılıklar alanı SignalR](publish-to-azure-web-app/_static/signalr-service-dependency.png)
+   ![Ekle açılan listesinde Azure::: No-Loc (SignalR)::: Service seçimini gösteren bağımlılıklar alanı](publish-to-azure-web-app/_static/signalr-service-dependency.png)
 
 1. **Azure SignalR hizmeti** iletişim kutusunda **Yeni bir Azure SignalR hizmet örneği oluştur**' u seçin.
 
@@ -78,7 +80,7 @@ Bir Preview .NET Core sürümünü hedefleyen bir uygulama dağıtırken HTTP *5
 
 Azure hizmeti olmadan barındırılan uygulamalar için SignalR şunları etkinleştirin:
 
-* İstekleri bir kullanıcıdan tekrar aynı App Service örneğine yönlendirmek için [ARR benzeşimi](https://azure.github.io/AppService/2016/05/16/Disable-Session-affinity-cookie-(ARR-cookie)-for-Azure-web-apps.html) . Varsayılan ayar **Açık '** dır.
+* [ARR benzeşimi] ( https://azure.github.io/AppService/2016/05/16/Disable-Session-affinity- cookie -(ARR- cookie ) -for-Azure-web-apps.html) bir kullanıcıdan gelen istekleri yeniden aynı App Service örneğine yönlendirmek için. Varsayılan ayar **Açık '** dır.
 * Web Sockets taşımanın çalışmasına izin veren [Web Yuvaları](xref:fundamentals/websockets) . Varsayılan ayar **kapalıdır**.
 
 1. Azure portal, **uygulama hizmetleri**' nde Web uygulamasına gidin.

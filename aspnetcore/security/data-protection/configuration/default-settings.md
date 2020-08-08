@@ -5,6 +5,8 @@ description: ASP.NET Core veri koruma anahtarı yönetimi ve ömrü hakkında bi
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/configuration/default-settings
-ms.openlocfilehash: f758c814280ee09a240d99cc59cdab2dc4590df6
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b39187d93247dc83c34bbbe6ec6accfd77108794
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407102"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021386"
 ---
 # <a name="data-protection-key-management-and-lifetime-in-aspnet-core"></a>ASP.NET Core veri koruma anahtarı yönetimi ve ömrü
 
@@ -31,7 +33,7 @@ Uygulama, işletimsel ortamı algılamaya çalışır ve anahtar yapılandırmas
 1. Uygulama [Azure uygulamalarında](https://azure.microsoft.com/services/app-service/)barındırılıyorsa, anahtarlar *%Home%\ASP.NET\DataProtection-Keys* klasöründe kalıcı hale getirilir. Bu klasör, ağ depolama tarafından desteklenir ve uygulamayı barındıran tüm makinelerde eşitlenir.
    * Anahtarlar bekleyen bir şekilde korunmuyor.
    * *DataProtection-Keys* klasörü, bir uygulamanın tüm örneklerine tek bir dağıtım yuvasında anahtar halkasını sağlar.
-   * Hazırlama ve üretim gibi ayrı dağıtım yuvaları, anahtar halkasını paylaşmaz. Dağıtım yuvaları arasında takas yaptığınızda (örneğin, hazırlama üretimini üretime değiştirme veya A/B testi kullanma), veri koruma kullanan tüm uygulamalar, önceki yuvanın içindeki anahtar halkasını kullanarak depolanan verilerin şifresini çözemez. Bu, kullanıcıların tanımlama bilgilerini korumak için veri koruma kullandığından, standart ASP.NET Core tanımlama bilgisi kimlik doğrulaması kullanan bir uygulamadan oturum açmış kullanıcılara yol açar. Yuvada bağımsız anahtar halkaları istiyorsanız, Azure Blob depolama, Azure Key Vault, bir SQL Mağazası veya Redsıs önbelleği gibi bir dış anahtar halka sağlayıcısı kullanın.
+   * Hazırlama ve üretim gibi ayrı dağıtım yuvaları, anahtar halkasını paylaşmaz. Dağıtım yuvaları arasında takas yaptığınızda (örneğin, hazırlama üretimini üretime değiştirme veya A/B testi kullanma), veri koruma kullanan tüm uygulamalar, önceki yuvanın içindeki anahtar halkasını kullanarak depolanan verilerin şifresini çözemez. Bu cookie , kullanıcıların, s 'yi korumak Için veri koruma kullandığından, standart ASP.NET Core kimlik doğrulamasını kullanan bir uygulamadan oturum açmış kullanıcılara yol açar cookie . Yuvada bağımsız anahtar halkaları istiyorsanız, Azure Blob depolama, Azure Key Vault, bir SQL Mağazası veya Redsıs önbelleği gibi bir dış anahtar halka sağlayıcısı kullanın.
 
 1. Kullanıcı profili varsa, anahtarlar *%LocalAppData%\ASP.NET\DataProtection-Keys* klasöründe kalıcı hale getirilir. İşletim sistemi Windows ise, anahtarlar DPAPI kullanılarak geri kalanıyla şifrelenir.
 

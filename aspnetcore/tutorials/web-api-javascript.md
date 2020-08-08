@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/26/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/web-api-javascript
-ms.openlocfilehash: 4031289e43af75ef2026661dbecbbbce30593d43
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4e5c6bdea97f54e3cef60d03ea0b63ac3e665bbf
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407986"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021295"
 ---
 # <a name="tutorial-call-an-aspnet-core-web-api-with-javascript"></a>Öğretici: JavaScript ile ASP.NET Core Web API 'SI çağırma
 
@@ -35,7 +37,7 @@ ASP.NET Core 2,2 için, [JavaScript ile Web API 'Sini çağırma](xref:tutorials
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * Tüm [öğreticiyi: Web API 'Si oluşturma](xref:tutorials/first-web-api)
 * CSS, HTML ve JavaScript ile benzerlik

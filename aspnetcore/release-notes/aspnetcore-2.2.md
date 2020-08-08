@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.2
-ms.openlocfilehash: c2e23871866565a3f4ea0b0c72af5ec4fb770e6f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 354839abe295b4adcbf6becfd3bd926330f0823f
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408714"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021152"
 ---
 # <a name="whats-new-in-aspnet-core-22"></a>ASP.NET Core 2,2 ' deki yenilikler
 
@@ -87,7 +89,7 @@ ASP.NET Core önceki sürümlerinde IIS, ters proxy işlevi görür. 2,2 ' de AS
 
 Daha fazla bilgi için bkz. [IIS için işlem içi barındırma](xref:host-and-deploy/aspnet-core-module?view=aspnetcore-2.2#in-process-hosting-model).
 
-## <a name="signalr-java-client"></a>SignalRJava istemcisi
+## <a name="no-locsignalr-java-client"></a>SignalRJava istemcisi
 
 ASP.NET Core 2,2, için bir Java Istemcisi sunar SignalR . Bu istemci SignalR , Android uygulamaları dahil olmak üzere Java kodundan bir ASP.NET Core sunucusuna bağlanmayı destekler.
 

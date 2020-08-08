@@ -6,6 +6,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/client-features
-ms.openlocfilehash: 10752e8cace82dc08721af7d38c0250182e9bfb0
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4f5fa2f4ff1ac3d00b04845aedc26fb0118b9991
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408493"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021477"
 ---
-# <a name="aspnet-core-signalr-clients"></a>ASP.NET Core SignalR istemcileri
+# <a name="aspnet-core-no-locsignalr-clients"></a>ASP.NET Core SignalR istemcileri
 
 ## <a name="versioning-support-and-compatibility"></a>Sürüm oluşturma, destek ve uyumluluk
 
@@ -61,5 +63,5 @@ Aşağıdaki tabloda, gerçek zamanlı destek sunan istemciler için özellikler
 
 * [SignalRASP.NET Core için kullanmaya başlama](xref:tutorials/signalr)
 * [Desteklenen platformlar](xref:signalr/supported-platforms)
-* [Merkezler](xref:signalr/hubs)
+* [Hub'lar](xref:signalr/hubs)
 * [JavaScript istemcisi](xref:signalr/javascript-client)

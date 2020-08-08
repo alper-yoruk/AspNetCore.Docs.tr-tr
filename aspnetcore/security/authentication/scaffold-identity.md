@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 5/1/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: a8ca520d84d382b95cd4c0e2962ba4e5c922049e
-ms.sourcegitcommit: 3544941682869734ea0113e24e02ed0ec9e1a9ec
+ms.openlocfilehash: 4404a5513d9dc989e50c904f3e7863de59991939
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/18/2020
-ms.locfileid: "86464572"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022335"
 ---
-# <a name="scaffold-identity-in-aspnet-core-projects"></a>ASP.NET Core projelerinde yapı iskelesi Identity
+# <a name="scaffold-no-locidentity-in-aspnet-core-projects"></a>ASP.NET Core projelerinde yapı iskelesi Identity
 
 Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -52,7 +54,7 @@ IdentityYeni bir veri bağlamıyla, var olan bireysel hesaplara sahip bir projey
 
 Genellikle, bireysel hesaplarla oluşturulan uygulamalar yeni bir veri bağlamı ***oluşturmamalıdır*** .
 
-## <a name="scaffold-identity-into-an-empty-project"></a>IdentityBoş bir projeye yapı iskelesi
+## <a name="scaffold-no-locidentity-into-an-empty-project"></a>IdentityBoş bir projeye yapı iskelesi
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
@@ -64,7 +66,7 @@ Genellikle, bireysel hesaplarla oluşturulan uygulamalar yeni bir veri bağlamı
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
-## <a name="scaffold-identity-into-a-razor-project-without-existing-authorization"></a>Identity Razor Var olan yetkilendirme olmadan bir projeye yapı iskelesi yapın
+## <a name="scaffold-no-locidentity-into-a-no-locrazor-project-without-existing-authorization"></a>Identity Razor Var olan yetkilendirme olmadan bir projeye yapı iskelesi yapın
 
 <!--  Updated for 3.0
 set projNam=RPnoAuth
@@ -117,7 +119,7 @@ Identity, *alanlarında/ Identity / Identity HostingStartup.cs*' de yapılandır
 
 [!code-cshtml[](scaffold-identity/3.1sample/_Layout.cshtml?highlight=20)]
 
-## <a name="scaffold-identity-into-a-razor-project-with-authorization"></a>Identity Razor Yetkilendirmeyle bir projeye yapı
+## <a name="scaffold-no-locidentity-into-a-no-locrazor-project-with-authorization"></a>Identity Razor Yetkilendirmeyle bir projeye yapı
 
 <!--
 Use >=2.1: dotnet new webapp -au Individual -o RPauth
@@ -134,7 +136,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 Bazı Identity Seçenekler, *alanlarda/ Identity / Identity HostingStartup.cs*içinde yapılandırılır. Daha fazla bilgi için bkz. [ıhostingstartup](xref:fundamentals/configuration/platform-specific-configuration).
 
-## <a name="scaffold-identity-into-an-mvc-project-without-existing-authorization"></a>IdentityVar olan yetkilendirme olmadan BIR MVC projesinde yapı iskelesi yapın
+## <a name="scaffold-no-locidentity-into-an-mvc-project-without-existing-authorization"></a>IdentityVar olan yetkilendirme olmadan BIR MVC projesinde yapı iskelesi yapın
 
 <!--
 set projNam=MvcNoAuth
@@ -168,7 +170,7 @@ Identity, *alanlarında/ Identity / Identity HostingStartup.cs*' de yapılandır
 
 [!INCLUDE[](~/includes/scaffold-identity/hsts.md)]
 
-## <a name="scaffold-identity-into-an-mvc-project-with-authorization"></a>IdentityYetkilendirme ile BIR MVC projesinde yapı iskelesi oluşturma
+## <a name="scaffold-no-locidentity-into-an-mvc-project-with-authorization"></a>IdentityYetkilendirme ile BIR MVC projesinde yapı iskelesi oluşturma
 
 <!--
 dotnet new mvc -au Individual -o MvcAuth
@@ -180,7 +182,7 @@ dotnet aspnet-codegenerator identity -dc MvcAuth.Data.ApplicationDbContext  --fi
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
-## <a name="scaffold-identity-into-a-blazor-server-project-without-existing-authorization"></a>Identity Blazor Server Var olan yetkilendirme olmadan bir projeye yapı iskelesi yapın
+## <a name="scaffold-no-locidentity-into-a-no-locblazor-server-project-without-existing-authorization"></a>Identity Blazor Server Var olan yetkilendirme olmadan bir projeye yapı iskelesi yapın
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
@@ -194,7 +196,7 @@ Identity, *alanlarında/ Identity / Identity HostingStartup.cs*' de yapılandır
 
 Belirteçler bileşenlere geçirilebilir:
 
-* Kimlik doğrulama belirteçleri sağlandığında ve kimlik doğrulama tanımlama bilgisine kaydedildiğinde, bunlar bileşenlere geçirilebilir.
+* Kimlik doğrulama belirteçleri sağlandığında ve kimlik doğrulamasına kaydedildiğinde cookie , bunlar bileşenlere geçirilebilir.
 * Razorbileşenler doğrudan kullanamaz `HttpContext` . bu nedenle, tarihinde oturum kapatma uç noktasına gönderi için bir [istek önleme zaman AŞıMı (XSRF) belirteci](xref:security/anti-request-forgery) elde etmenin bir yolu yoktur Identity `/Identity/Account/Logout` . Bir XSRF belirteci bileşenlere geçirilebilir.
 
 Daha fazla bilgi için bkz. <xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>.
@@ -293,11 +295,11 @@ TokenProvider.XsrfToken = InitialState.XsrfToken;
 
 Blazor Server Razor Sayfa sayfalarını kullandığından Identity , bir ziyaretçi sayfalar ve bileşenler arasında gezinse Kullanıcı arabiriminin stili değişir Identity . Uyumsuz stillere yönelik iki seçeneğiniz vardır:
 
-#### <a name="build-identity-components"></a>Derleme Identity bileşenleri
+#### <a name="build-no-locidentity-components"></a>Derleme Identity bileşenleri
 
 Bileşenler oluşturmak için bileşenleri kullanmanın bir yaklaşımı Identity , Identity bileşenleri oluşturmaktır. `SignInManager` `UserManager` Razor Bileşenlerinde desteklenmediğinden, Blazor Server Kullanıcı hesabı EYLEMLERINI işlemek için uygulamadaki API uç noktalarını kullanın.
 
-#### <a name="use-a-custom-layout-with-blazor-app-styles"></a>Uygulama stilleriyle özel düzen kullanma Blazor
+#### <a name="use-a-custom-layout-with-no-locblazor-app-styles"></a>Uygulama stilleriyle özel düzen kullanma Blazor
 
 IdentitySayfa düzeni ve stilleri, varsayılan temayı kullanan sayfalar oluşturmak için değiştirilebilir Blazor .
 
@@ -362,7 +364,7 @@ Yeni bir `NavMenu_IdentityLayout` bileşen oluşturun (*paylaşılan/NavMenu_ Id
   <script src="_framework/blazor.server.js"></script>
   ```
 
-## <a name="scaffold-identity-into-a-blazor-server-project-with-authorization"></a>Identity Blazor Server Yetkilendirmeyle bir projeye yapı
+## <a name="scaffold-no-locidentity-into-a-no-locblazor-server-project-with-authorization"></a>Identity Blazor Server Yetkilendirmeyle bir projeye yapı
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg-auth.md)]
 
@@ -370,7 +372,7 @@ Bazı Identity Seçenekler, *alanlarda/ Identity / Identity HostingStartup.cs*i�
 
 <a name="full"></a>
 
-## <a name="create-full-identity-ui-source"></a>Tam Identity UI kaynağı oluştur
+## <a name="create-full-no-locidentity-ui-source"></a>Tam Identity UI kaynağı oluştur
 
 Kullanıcı arabiriminin tam denetimini sürdürmek için Identity , Identity desteği ' ı çalıştırın ve **tüm dosyaları geçersiz kıl**' ı seçin.
 
@@ -414,7 +416,7 @@ Bu bölümler, kaydetme sayfasının nasıl devre dışı bırakılacağını g�
 
 Kullanıcı kaydını devre dışı bırakmak için:
 
-* Yapı iskelesi Identity . Account. Register, Account. Login ve account. RegisterConfirmation bilgilerini ekleyin. Örneğin:
+* Yapı iskelesi Identity . Account. Register, Account. Login ve account. RegisterConfirmation bilgilerini ekleyin. Örnek:
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"
@@ -476,7 +478,7 @@ Aşağıdaki kod, bir kullanıcı ekleme ana hatlarıyla verilmiştir:
 
 Üretim senaryolarında de benzer bir yaklaşım izlenebilir.
 
-## <a name="prevent-publish-of-static-identity-assets"></a>Statik varlıkların yayımlanmasını Engelle Identity
+## <a name="prevent-publish-of-static-no-locidentity-assets"></a>Statik varlıkların yayımlanmasını Engelle Identity
 
 Statik Identity varlıkların Web köküne yayımlanmasını engellemek için bkz <xref:security/authentication/identity#prevent-publish-of-static-identity-assets> ..
 
@@ -501,7 +503,7 @@ Dosya farklılıklarını gösteren ve değişikliklerden geri dönüş yapmanı
 > [!NOTE]
 > [Iki öğeli kimlik doğrulaması](xref:security/authentication/identity-enable-qrcodes), [Hesap onaylama ve parola kurtarma](xref:security/authentication/accconfirm)ile diğer güvenlik özellikleri kullanılırken hizmetler gereklidir Identity . Hizmetler veya hizmet saplamaları, yapı iskelesi sırasında oluşturulmaz Identity . Bu özelliklerin etkinleştirilmesi için hizmetlerin el ile eklenmesi gerekir. Örneğin, bkz. [e-posta onayı gerektir](xref:security/authentication/accconfirm#require-email-confirmation).
 
-## <a name="scaffold-identity-into-an-empty-project"></a>IdentityBoş bir projeye yapı iskelesi
+## <a name="scaffold-no-locidentity-into-an-empty-project"></a>IdentityBoş bir projeye yapı iskelesi
 
 [!INCLUDE[](~/includes/scaffold-identity/id-scaffold-dlg.md)]
 
@@ -513,7 +515,7 @@ Aşağıdaki Vurgulanan çağrıları `Startup` sınıfına ekleyin:
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
-## <a name="scaffold-identity-into-a-razor-project-without-existing-authorization"></a>Identity Razor Var olan yetkilendirme olmadan bir projeye yapı iskelesi yapın
+## <a name="scaffold-no-locidentity-into-a-no-locrazor-project-without-existing-authorization"></a>Identity Razor Var olan yetkilendirme olmadan bir projeye yapı iskelesi yapın
 
 <!--  Updated for 3.0
 set projNam=RPnoAuth
@@ -558,7 +560,7 @@ Identity, *alanlarında/ Identity / Identity HostingStartup.cs*' de yapılandır
 
 [!code-cshtml[](scaffold-identity/sample/_Layout.cshtml?highlight=37)]
 
-## <a name="scaffold-identity-into-a-razor-project-with-authorization"></a>Identity Razor Yetkilendirmeyle bir projeye yapı
+## <a name="scaffold-no-locidentity-into-a-no-locrazor-project-with-authorization"></a>Identity Razor Yetkilendirmeyle bir projeye yapı
 
 <!--
 Use >=2.1: dotnet new webapp -au Individual -o RPauth
@@ -575,7 +577,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 Bazı Identity Seçenekler, *alanlarda/ Identity / Identity HostingStartup.cs*içinde yapılandırılır. Daha fazla bilgi için bkz. [ıhostingstartup](xref:fundamentals/configuration/platform-specific-configuration).
 
-## <a name="scaffold-identity-into-an-mvc-project-without-existing-authorization"></a>IdentityVar olan yetkilendirme olmadan BIR MVC projesinde yapı iskelesi yapın
+## <a name="scaffold-no-locidentity-into-an-mvc-project-without-existing-authorization"></a>IdentityVar olan yetkilendirme olmadan BIR MVC projesinde yapı iskelesi yapın
 
 <!--
 set projNam=MvcNoAuth
@@ -609,7 +611,7 @@ Identity, *alanlarında/ Identity / Identity HostingStartup.cs*' de yapılandır
 
 [!INCLUDE[](~/includes/scaffold-identity/hsts.md)]
 
-## <a name="scaffold-identity-into-an-mvc-project-with-authorization"></a>IdentityYetkilendirme ile BIR MVC projesinde yapı iskelesi oluşturma
+## <a name="scaffold-no-locidentity-into-an-mvc-project-with-authorization"></a>IdentityYetkilendirme ile BIR MVC projesinde yapı iskelesi oluşturma
 
 <!--
 dotnet new mvc -au Individual -o MvcAuth
@@ -625,7 +627,7 @@ dotnet aspnet-codegenerator identity -dc MvcAuth.Data.ApplicationDbContext  --fi
 
 <a name="full"></a>
 
-## <a name="create-full-identity-ui-source"></a>Tam Identity UI kaynağı oluştur
+## <a name="create-full-no-locidentity-ui-source"></a>Tam Identity UI kaynağı oluştur
 
 Kullanıcı arabiriminin tam denetimini sürdürmek için Identity , Identity desteği ' ı çalıştırın ve **tüm dosyaları geçersiz kıl**' ı seçin.
 
@@ -667,7 +669,7 @@ dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --file
 
 Kullanıcı kaydını devre dışı bırakmak için:
 
-* Yapı iskelesi Identity . Account. Register, Account. Login ve account. RegisterConfirmation bilgilerini ekleyin. Örneğin:
+* Yapı iskelesi Identity . Account. Register, Account. Login ve account. RegisterConfirmation bilgilerini ekleyin. Örnek:
 
   ```dotnetcli
    dotnet aspnet-codegenerator identity -dc RPauth.Data.ApplicationDbContext --files "Account.Register;Account.Login;Account.RegisterConfirmation"

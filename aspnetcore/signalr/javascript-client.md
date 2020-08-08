@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 04/08/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/javascript-client
-ms.openlocfilehash: 8c7acad42f3a49ccf1bc60f8ae5b4f68a602d97b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 04200ced41113eb9a68cefc2f485f2d3798476c6
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406933"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022348"
 ---
-# <a name="aspnet-core-signalr-javascript-client"></a>SignalRJavaScript istemcisi ASP.NET Core
+# <a name="aspnet-core-no-locsignalr-javascript-client"></a>SignalRJavaScript istemcisi ASP.NET Core
 
 , [Oychel Appel](https://twitter.com/rachelappel) tarafından
 
@@ -30,7 +32,7 @@ SignalRJavaScript istemci kitaplığı ASP.NET Core, geliştiricilerin sunucu ta
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/signalr/javascript-client/sample) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="install-the-signalr-client-package"></a>SignalRİstemci paketini yükler
+## <a name="install-the-no-locsignalr-client-package"></a>SignalRİstemci paketini yükler
 
 SignalRJavaScript istemci kitaplığı [NPM](https://www.npmjs.com/) paketi olarak dağıtılır. Aşağıdaki bölümlerde, istemci kitaplığını yüklemenin farklı yolları ana hatlarıyla verilmiştir.
 
@@ -60,7 +62,7 @@ NPM *node_modules \\ @aspnet\signalr\dist\browser * klasöre paket içeriğini y
 
 ::: moniker-end
 
-SignalRÖğesindeki JavaScript istemcisine başvurun `<script>` . Örneğin:
+SignalRÖğesindeki JavaScript istemcisine başvurun `<script>` . Örnek:
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -68,7 +70,7 @@ SignalRÖğesindeki JavaScript istemcisine başvurun `<script>` . Örneğin:
 
 ### <a name="use-a-content-delivery-network-cdn"></a>Content Delivery Network kullanma (CDN)
 
-İstemci kitaplığını NPM önkoşulu olmadan kullanmak için, istemci kitaplığının CDN ile barındırılan bir kopyasına başvurun. Örneğin:
+İstemci kitaplığını NPM önkoşulu olmadan kullanmak için, istemci kitaplığının CDN ile barındırılan bir kopyasına başvurun. Örnek:
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.3/signalr.min.js"></script>
@@ -314,7 +316,7 @@ Gerçek dünyada bir uygulama, bir üstel geri kapatmayı kullanır veya vermede
 * [JavaScript API'si başvurusu](/javascript/api/?view=signalr-js-latest)
 * [JavaScript öğreticisi](xref:tutorials/signalr)
 * [WebPack ve TypeScript öğreticisi](xref:tutorials/signalr-typescript-webpack)
-* [Merkezler](xref:signalr/hubs)
+* [Hub'lar](xref:signalr/hubs)
 * [.NET istemcisi](xref:signalr/dotnet-client)
 * [Azure’da Yayımlama](xref:signalr/publish-to-azure-web-app)
 * [Çıkış noktaları arası Istekler (CORS)](xref:security/cors)

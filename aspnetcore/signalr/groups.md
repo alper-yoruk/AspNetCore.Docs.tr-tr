@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 05/17/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/groups
-ms.openlocfilehash: af76402d02ee4273deadac246f275c1ae7ad84ac
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 3a1182b793c7d05a11f0b5f16f4d406a9063f023
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408519"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021035"
 ---
-# <a name="manage-users-and-groups-in-signalr"></a>İçindeki kullanıcıları ve grupları yönetmeSignalR
+# <a name="manage-users-and-groups-in-no-locsignalr"></a>İçindeki kullanıcıları ve grupları yönetmeSignalR
 
 [Brennan Conroy](https://github.com/BrennanConroy) tarafından
 
@@ -30,7 +32,7 @@ SignalRiletilerin, belirli bir kullanıcıyla ve adlandırılmış bağlantı gr
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/groups/sample/) [(nasıl indirileceği)](xref:index#how-to-download-a-sample)
 
-## <a name="users-in-signalr"></a>İçindeki kullanıcılarSignalR
+## <a name="users-in-no-locsignalr"></a>İçindeki kullanıcılarSignalR
 
 Uygulamasındaki tek bir kullanıcının SignalR bir uygulamayla birden çok bağlantısı olabilir. Örneğin, bir Kullanıcı masaüstüne ve telefonlarına bağlanabilir. Her cihazın ayrı bir SignalR bağlantısı vardır, ancak hepsi aynı kullanıcıyla ilişkilendirilir. Kullanıcıya bir ileti gönderildiğinde, bu kullanıcıyla ilişkili tüm bağlantılar iletiyi alır. Bir bağlantı için Kullanıcı tanımlayıcısına, `Context.UserIdentifier` hub 'daki özellik tarafından erişilebilir.
 
@@ -43,7 +45,7 @@ Varsayılan olarak, SignalR `ClaimTypes.NameIdentifier` `ClaimsPrincipal` Kullan
 
 [!code-csharp[Configure service](groups/sample/Hubs/ChatHub.cs?range=29-32)]
 
-## <a name="groups-in-signalr"></a>İçindeki gruplarSignalR
+## <a name="groups-in-no-locsignalr"></a>İçindeki gruplarSignalR
 
 Grup, bir adla ilişkili bir bağlantı koleksiyonudur. İletiler, bir gruptaki tüm bağlantılara gönderilebilir. Gruplar uygulama tarafından yönetildiğinden, gruplar bir bağlantıya veya birden çok bağlantıya göndermek için önerilen yoldur. Bir bağlantı, birden fazla grubun üyesi olabilir. Gruplar, her odanın bir grup olarak gösterilebileceği bir sohbet uygulaması gibi bir şey için idealdir. Ve yöntemleri aracılığıyla gruplara eklenen veya gruplardan bağlantılar kaldırılır `AddToGroupAsync` `RemoveFromGroupAsync` .
 
@@ -58,6 +60,6 @@ Grupları kullanırken kaynaklara erişimi korumak için ASP.NET Core [kimlik do
 
 ## <a name="related-resources"></a>İlgili kaynaklar
 
-* [Kullanmaya başlayın](xref:tutorials/signalr)
-* [Merkezler](xref:signalr/hubs)
+* [Kullanmaya başlama](xref:tutorials/signalr)
+* [Hub'lar](xref:signalr/hubs)
 * [Azure’da Yayımlama](xref:signalr/publish-to-azure-web-app)

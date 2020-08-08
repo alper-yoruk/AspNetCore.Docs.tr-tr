@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 2/18/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/filter
-ms.openlocfilehash: 626003ad75333cfaf17a3ea97549ca82650469a8
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b8942020e98d0f985e5445bb1816c540bcb7829b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407375"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021412"
 ---
-# <a name="filter-methods-for-razor-pages-in-aspnet-core"></a>RazorASP.NET Core sayfaların filtre yöntemleri
+# <a name="filter-methods-for-no-locrazor-pages-in-aspnet-core"></a>RazorASP.NET Core sayfaların filtre yöntemleri
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -57,7 +59,7 @@ RazorSayfa filtreleri, genel olarak veya sayfa düzeyinde uygulanabilecek aşağ
 
 Her ikisini de **değil** , bir filtre arabiriminin zaman uyumlu veya zaman uyumsuz **sürümünü uygulayın.** Çerçeve öncelikle filtrenin zaman uyumsuz arabirimi uygulayıp uygulamadığını denetler ve bu durumda bunu çağırır. Aksi takdirde, zaman uyumlu arabirimin Yöntem (ler) i çağırır. Her iki arabirim de uygulanmışsa yalnızca zaman uyumsuz yöntemler çağrılır. Aynı kural sayfalardaki geçersiz kılmalara uygulanır, her ikisine de değil, geçersiz kılmanın zaman uyumlu veya zaman uyumsuz sürümünü uygular.
 
-## <a name="implement-razor-page-filters-globally"></a>RazorSayfa filtrelerini küresel olarak Uygula
+## <a name="implement-no-locrazor-page-filters-globally"></a>RazorSayfa filtrelerini küresel olarak Uygula
 
 Aşağıdaki kod şunları uygular `IAsyncPageFilter` :
 
@@ -81,7 +83,7 @@ Aşağıdaki kod şunları sunar `SamplePageFilter` :
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/StartupSync.cs?name=snippet2)]
 
-## <a name="implement-razor-page-filters-by-overriding-filter-methods"></a>RazorFiltre yöntemlerini geçersiz kılarak sayfa filtrelerini uygulama
+## <a name="implement-no-locrazor-page-filters-by-overriding-filter-methods"></a>RazorFiltre yöntemlerini geçersiz kılarak sayfa filtrelerini uygulama
 
 Aşağıdaki kod, zaman uyumsuz Razor sayfa filtrelerini geçersiz kılar:
 
@@ -149,7 +151,7 @@ RazorSayfa filtreleri, genel olarak veya sayfa düzeyinde uygulanabilecek aşağ
 > [!NOTE]
 > Her ikisini de değil, bir filtre arabiriminin zaman uyumlu veya zaman uyumsuz **sürümünü uygulayın.** Çerçeve öncelikle filtrenin zaman uyumsuz arabirimi uygulayıp uygulamadığını denetler ve bu durumda bunu çağırır. Aksi takdirde, zaman uyumlu arabirimin Yöntem (ler) i çağırır. Her iki arabirim de uygulanmışsa yalnızca zaman uyumsuz yöntemler çağrılır. Aynı kural sayfalardaki geçersiz kılmalara uygulanır, her ikisine de değil, geçersiz kılmanın zaman uyumlu veya zaman uyumsuz sürümünü uygular.
 
-## <a name="implement-razor-page-filters-globally"></a>RazorSayfa filtrelerini küresel olarak Uygula
+## <a name="implement-no-locrazor-page-filters-globally"></a>RazorSayfa filtrelerini küresel olarak Uygula
 
 Aşağıdaki kod şunları uygular `IAsyncPageFilter` :
 
@@ -177,7 +179,7 @@ Aşağıdaki kod şunları sunar `SamplePageFilter` :
 
 [!code-csharp[Main](filter/sample/PageFilter/StartupSync.cs?name=snippet2&highlight=11)]
 
-## <a name="implement-razor-page-filters-by-overriding-filter-methods"></a>RazorFiltre yöntemlerini geçersiz kılarak sayfa filtrelerini uygulama
+## <a name="implement-no-locrazor-page-filters-by-overriding-filter-methods"></a>RazorFiltre yöntemlerini geçersiz kılarak sayfa filtrelerini uygulama
 
 Aşağıdaki kod, zaman uyumlu Razor sayfa filtrelerini geçersiz kılar:
 

@@ -6,6 +6,8 @@ ms.author: riande
 ms.date: 03/26/2020
 ms.custom: mvc, seodec18
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/add-user-data
-ms.openlocfilehash: e5c23cc49a52b8772a43853e9e953dd416d69f69
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d65974e9ff8e2f5be52ab79b063ed9d2dca557ea
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408740"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020866"
 ---
-# <a name="add-download-and-delete-custom-user-data-to-identity-in-an-aspnet-core-project"></a>ASP.NET Core projesindeki özel kullanıcı verilerini ekleme, indirme ve silme Identity
+# <a name="add-download-and-delete-custom-user-data-to-no-locidentity-in-an-aspnet-core-project"></a>ASP.NET Core projesindeki özel kullanıcı verilerini ekleme, indirme ve silme Identity
 
 Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -34,7 +36,7 @@ Proje örneği bir sayfalar Web uygulamasından oluşturulur Razor , ancak yöne
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/add-user-data) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -48,7 +50,7 @@ Proje örneği bir sayfalar Web uygulamasından oluşturulur Razor , ancak yöne
 
 ::: moniker-end
 
-## <a name="create-a-razor-web-app"></a>RazorWeb uygulaması oluşturma
+## <a name="create-a-no-locrazor-web-app"></a>RazorWeb uygulaması oluşturma
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -81,7 +83,7 @@ dotnet new webapp -o WebApp1
 
 ---
 
-## <a name="run-the-identity-scaffolder"></a>IdentityDesteği 'ı çalıştırma
+## <a name="run-the-no-locidentity-scaffolder"></a>IdentityDesteği 'ı çalıştırma
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -94,7 +96,7 @@ dotnet new webapp -o WebApp1
     * **Hesap/yönet/Dizin**
   * **+** Yeni bir **veri bağlamı sınıfı**oluşturmak için düğmeyi seçin. Proje **WebApp1**olarak adlandırılmışsa türü (**WebApp1. modeller. WebApp1Context** ) kabul edin.
   * **+** Yeni bir **Kullanıcı sınıfı**oluşturmak için düğmeyi seçin. **Ekle**> ( **projenin adı****WebApp1User** ) öğesini kabul edin.
-* **Ekle**'yi seçin.
+* **Add (Ekle)** seçeneğini belirleyin.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
@@ -137,7 +139,7 @@ Aşağıdaki adımları gerçekleştirmek için [geçişler, UseAuthentication v
   * **İndir** düğmesini seçin ve dosyadaki *PersonalData.js* incelendi.
   * Oturum açan kullanıcıyı silen **Sil** düğmesini test edin.
 
-## <a name="add-custom-user-data-to-the-identity-db"></a>Veritabanına özel kullanıcı verileri ekleme Identity
+## <a name="add-custom-user-data-to-the-no-locidentity-db"></a>Veritabanına özel kullanıcı verileri ekleme Identity
 
 `IdentityUser`Türetilmiş sınıfı özel özelliklerle güncelleştirin. Projeyi WebApp1 olarak adlandırdıysanız, dosya */ Identity /Data/webapp1user.cs*olarak adlandırılır. Dosyayı aşağıdaki kodla güncelleştirin:
 
@@ -237,7 +239,7 @@ Uygulamayı test etme:
 * Sayfadaki özel kullanıcı verilerini görüntüleyin `/Identity/Account/Manage` .
 * Kullanıcıların kişisel verilerini sayfadan indirip görüntüleyin `/Identity/Account/Manage/PersonalData` .
 
-## <a name="add-claims-to-identity-using-iuserclaimsprincipalfactoryapplicationuser"></a>IdentityIUserClaimsPrincipalFactory kullanarak talepler ekleme<ApplicationUser>
+## <a name="add-claims-to-no-locidentity-using-iuserclaimsprincipalfactoryapplicationuser"></a>IdentityIUserClaimsPrincipalFactory kullanarak talepler ekleme<ApplicationUser>
 
 > [!NOTE]
 > Bu bölüm, önceki öğreticinin bir uzantısı değildir. Aşağıdaki adımları öğretici kullanılarak oluşturulan uygulamaya uygulamak için [Bu GitHub sorununa](https://github.com/dotnet/AspNetCore.Docs/issues/18797)bakın.

@@ -6,6 +6,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/21/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr
-ms.openlocfilehash: 91d7108748f3e2ae4d7db3791ebc1536e104e2a8
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 51b9eae0d4746001696e0795467eaf4c0ab2c990
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406959"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022036"
 ---
-# <a name="tutorial-get-started-with-aspnet-core-signalr"></a>Öğretici: ASP.NET Core kullanmaya başlayınSignalR
+# <a name="tutorial-get-started-with-aspnet-core-no-locsignalr"></a>Öğretici: ASP.NET Core kullanmaya başlayınSignalR
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -36,9 +38,9 @@ Bu öğreticide, kullanarak gerçek zamanlı bir uygulama oluşturmanın temelle
 
 Sonunda, çalışan bir sohbet uygulamanız olacaktır:
 
-![SignalRörnek uygulama](signalr/_static/3.x/signalr-get-started-finished.png)
+![::: No-Loc (SignalR)::: örnek uygulama](signalr/_static/3.x/signalr-get-started-finished.png)
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -62,7 +64,7 @@ Sonunda, çalışan bir sohbet uygulamanız olacaktır:
 
 * **Yeni proje oluştur** iletişim kutusunda **ASP.NET Core Web uygulaması**' nı seçin ve ardından **İleri**' yi seçin.
 
-* **Yeni projenizi yapılandırın** iletişim kutusunda, proje *signalrchat*adını adlandırın ve ardından **Oluştur**' u seçin.
+* **Yeni projenizi yapılandırın** iletişim kutusunda, proje * SignalR sohbetini*adlandırın ve ardından **Oluştur**' u seçin.
 
 * **Yeni bir ASP.NET Core Web uygulaması oluştur** iletişim kutusunda **.net Core** ve **ASP.NET Core 3,0**' i seçin. 
 
@@ -89,11 +91,11 @@ Sonunda, çalışan bir sohbet uygulamanız olacaktır:
 
 * **Hedef çerçevenin** **.NET Core 3,0**olarak ayarlandığından emin olun ve ardından **İleri**' yi seçin.
 
-* Projeyi *Signalrchat*olarak adlandırın ve **Oluştur**' u seçin.
+* Projenin * SignalR sohbetini*adlandırın ve ardından **Oluştur**' u seçin.
 
 ---
 
-## <a name="add-the-signalr-client-library"></a>SignalRİstemci kitaplığını ekleme
+## <a name="add-the-no-locsignalr-client-library"></a>SignalRİstemci kitaplığını ekleme
 
 SignalRSunucu kitaplığı ASP.NET Core 3,0 paylaşılan çerçevesine dahildir. JavaScript istemci kitaplığı projeye otomatik olarak dahil değildir. Bu öğreticide, istemci kitaplığını *unpkg*'den almak Için kitaplık Yöneticisi 'Ni (Libman) kullanacaksınız. unpkg, Node.js Paket Yöneticisi NPM 'de bulunan her şeyi teslim edebilen bir içerik teslim ağı (CDN).
 
@@ -148,7 +150,7 @@ SignalRSunucu kitaplığı ASP.NET Core 3,0 paylaşılan çerçevesine dahildir.
   dotnet tool install -g Microsoft.Web.LibraryManager.Cli
   ```
 
-* Proje klasörüne gidin ( *Signalrchat. csproj* dosyasını içeren bir dosya).
+* Proje klasörüne gidin ( * SignalR sohbet. csproj* dosyasını içeren bir dosya).
 
 * SignalRLibMan kullanarak istemci kitaplığını almak için aşağıdaki komutu çalıştırın.
 
@@ -171,11 +173,11 @@ SignalRSunucu kitaplığı ASP.NET Core 3,0 paylaşılan çerçevesine dahildir.
 
 ---
 
-## <a name="create-a-signalr-hub"></a>Merkez oluşturma SignalR
+## <a name="create-a-no-locsignalr-hub"></a>Merkez oluşturma SignalR
 
 *Hub* , istemci-sunucu iletişimini işleyen yüksek düzeyli bir işlem hattı görevi gören bir sınıftır.
 
-* SignalRChat proje klasöründe bir *hub* klasörü oluşturun.
+* SignalRSohbet projesi klasöründe bir *hub* klasörü oluşturun.
 
 * *Hub 'lar* klasöründe, aşağıdaki kodla bir *ChatHub.cs* dosyası oluşturun:
 
@@ -185,7 +187,7 @@ SignalRSunucu kitaplığı ASP.NET Core 3,0 paylaşılan çerçevesine dahildir.
 
   `SendMessage`Yöntemi, tüm istemcilere ileti göndermek için bağlı bir istemci tarafından çağrılabilir. Yöntemi çağıran JavaScript istemci kodu Öğreticinin ilerleyen kısımlarında gösterilmektedir. SignalRmaksimum ölçeklenebilirlik sağlamak için kod zaman uyumsuzdur.
 
-## <a name="configure-signalr"></a>YapılandırmaSignalR
+## <a name="configure-no-locsignalr"></a>YapılandırmaSignalR
 
 SignalRSunucunun istekleri geçirilecek şekilde yapılandırılması gerekir SignalR SignalR .
 
@@ -195,7 +197,7 @@ SignalRSunucunun istekleri geçirilecek şekilde yapılandırılması gerekir Si
 
   Bu değişiklikler SignalR ASP.NET Core bağımlılığı ekleme ve yönlendirme sistemlerine ekler.
 
-## <a name="add-signalr-client-code"></a>SignalRİstemci kodu ekle
+## <a name="add-no-locsignalr-client-code"></a>SignalRİstemci kodu ekle
 
 * *Pages\ındex.cshtml* içindeki içeriği şu kodla değiştirin:
 
@@ -243,7 +245,7 @@ SignalRSunucunun istekleri geçirilecek şekilde yapılandırılması gerekir Si
 
   Ad ve ileti anında her iki sayfada da görüntülenir.
 
-  ![SignalRörnek uygulama](signalr/_static/3.x/signalr-get-started-finished.png)
+  ![::: No-Loc (SignalR)::: örnek uygulama](signalr/_static/3.x/signalr-get-started-finished.png)
 
 > [!TIP]
 > * Uygulama işe yaramazsa, tarayıcı geliştirici araçlarınızı (F12) açın ve konsola gidin. HTML ve JavaScript kodunuzla ilgili hatalarla karşılaşabilirsiniz. Örneğin, *signalr.js* yönlendirenden farklı bir klasöre yerleştirdiğinizi varsayalım. Bu durumda, bu dosyaya başvuru çalışmaz ve konsolunda 404 hatası görürsünüz.
@@ -267,9 +269,9 @@ Bu öğreticide, kullanarak gerçek zamanlı bir uygulama oluşturmanın temelle
 > * Bir SignalR hub oluşturun. 
 > * Projeyi kullanmak üzere yapılandırın SignalR . 
 > * Herhangi bir istemciden tüm bağlı istemcilere ileti gönderen kodu ekleyin.  
-Sonunda, çalışan bir sohbet uygulamasına sahipsiniz: ![SignalR örnek uygulama](signalr/_static/2.x/signalr-get-started-finished.png)   
+Sonunda, çalışan bir sohbet uygulamasına sahipsiniz::: ![ : No-Loc (SignalR)::: örnek uygulama](signalr/_static/2.x/signalr-get-started-finished.png)   
 
-## <a name="prerequisites"></a>Ön koşullar    
+## <a name="prerequisites"></a>Önkoşullar    
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)   
 
@@ -291,7 +293,7 @@ Sonunda, çalışan bir sohbet uygulamasına sahipsiniz: ![SignalR örnek uygula
 
 * Menüden **dosya > yeni proje**' yi seçin. 
 
-* **Yeni proje** iletişim kutusunda, **Visual C# > Web > ASP.NET Core Web uygulaması > yüklü**' i seçin. Projeyi *Signalrchat*olarak adlandırın. 
+* **Yeni proje** iletişim kutusunda, **Visual C# > Web > ASP.NET Core Web uygulaması > yüklü**' i seçin. Projenin * SignalR sohbetini*adlandırın.   
 
   ![Visual Studio 'da yeni proje iletişim kutusu](signalr/_static/2.x/signalr-new-project-dialog.png)    
 
@@ -308,8 +310,8 @@ Sonunda, çalışan bir sohbet uygulamasına sahipsiniz: ![SignalR örnek uygula
 * Aşağıdaki komutları çalıştırın:   
 
    ```dotnetcli 
-   dotnet new webapp -o SignalRChat 
-   code -r SignalRChat  
+   dotnet new webapp -o SignalRChat   
+   code -r SignalRChat    
    ```  
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)   
@@ -320,11 +322,11 @@ Sonunda, çalışan bir sohbet uygulamasına sahipsiniz: ![SignalR örnek uygula
 
 * **İleri**’yi seçin.  
 
-* Projeyi *Signalrchat*olarak adlandırın ve **Oluştur**' u seçin.   
+* Projenin * SignalR sohbetini*adlandırın ve ardından **Oluştur**' u seçin. 
 
 --- 
 
-## <a name="add-the-signalr-client-library"></a>SignalRİstemci kitaplığını ekleme 
+## <a name="add-the-no-locsignalr-client-library"></a>SignalRİstemci kitaplığını ekleme 
 
 SignalRSunucu kitaplığı, metapackage 'e dahildir `Microsoft.AspNetCore.App` . JavaScript istemci kitaplığı projeye otomatik olarak dahil değildir. Bu öğreticide, istemci kitaplığını *unpkg*'den almak Için kitaplık Yöneticisi 'Ni (Libman) kullanacaksınız. unpkg, Node.js Paket Yöneticisi NPM 'de bulunan her şeyi teslim edebilen bir içerik teslim ağı (CDN).   
 
@@ -381,7 +383,7 @@ SignalRSunucu kitaplığı, metapackage 'e dahildir `Microsoft.AspNetCore.App` .
   dotnet tool install -g Microsoft.Web.LibraryManager.Cli   
   ```   
 
-* Proje klasörüne gidin ( *Signalrchat. csproj* dosyasını içeren bir dosya). 
+* Proje klasörüne gidin ( * SignalR sohbet. csproj* dosyasını içeren bir dosya).   
 
 * SignalRLibMan kullanarak istemci kitaplığını almak için aşağıdaki komutu çalıştırın.    
 
@@ -404,11 +406,11 @@ SignalRSunucu kitaplığı, metapackage 'e dahildir `Microsoft.AspNetCore.App` .
 
 --- 
 
-## <a name="create-a-signalr-hub"></a>Merkez oluşturma SignalR   
+## <a name="create-a-no-locsignalr-hub"></a>Merkez oluşturma SignalR   
 
 *Hub* , istemci-sunucu iletişimini işleyen yüksek düzeyli bir işlem hattı görevi gören bir sınıftır.   
 
-* SignalRChat proje klasöründe bir *hub* klasörü oluşturun.    
+* SignalRSohbet projesi klasöründe bir *hub* klasörü oluşturun.  
 
 * *Hub 'lar* klasöründe, aşağıdaki kodla bir *ChatHub.cs* dosyası oluşturun: 
 
@@ -418,7 +420,7 @@ SignalRSunucu kitaplığı, metapackage 'e dahildir `Microsoft.AspNetCore.App` .
 
   `SendMessage`Yöntemi, tüm istemcilere ileti göndermek için bağlı bir istemci tarafından çağrılabilir. Yöntemi çağıran JavaScript istemci kodu Öğreticinin ilerleyen kısımlarında gösterilmektedir. SignalRmaksimum ölçeklenebilirlik sağlamak için kod zaman uyumsuzdur.    
 
-## <a name="configure-signalr"></a>YapılandırmaSignalR  
+## <a name="configure-no-locsignalr"></a>YapılandırmaSignalR  
 
 SignalRSunucunun istekleri geçirilecek şekilde yapılandırılması gerekir SignalR SignalR .    
 
@@ -428,7 +430,7 @@ SignalRSunucunun istekleri geçirilecek şekilde yapılandırılması gerekir Si
 
   Bu değişiklikler SignalR ASP.NET Core bağımlılık ekleme sistemine ve ara yazılım ardışık düzenine ekler.  
 
-## <a name="add-signalr-client-code"></a>SignalRİstemci kodu ekle    
+## <a name="add-no-locsignalr-client-code"></a>SignalRİstemci kodu ekle    
 
 * *Pages\ındex.cshtml* içindeki içeriği şu kodla değiştirin:  
 
@@ -476,7 +478,7 @@ SignalRSunucunun istekleri geçirilecek şekilde yapılandırılması gerekir Si
 
   Ad ve ileti anında her iki sayfada da görüntülenir.   
 
-  ![SignalRörnek uygulama](signalr/_static/2.x/signalr-get-started-finished.png) 
+  ![::: No-Loc (SignalR)::: örnek uygulama](signalr/_static/2.x/signalr-get-started-finished.png) 
 
 > [!TIP]    
 > Uygulama işe yaramazsa, tarayıcı geliştirici araçlarınızı (F12) açın ve konsola gidin. HTML ve JavaScript kodunuzla ilgili hatalarla karşılaşabilirsiniz. Örneğin, *signalr.js* yönlendirenden farklı bir klasöre yerleştirdiğinizi varsayalım. Bu durumda, bu dosyaya başvuru çalışmaz ve konsolunda 404 hatası görürsünüz.   

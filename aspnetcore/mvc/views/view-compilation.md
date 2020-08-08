@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/14/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/view-compilation
-ms.openlocfilehash: 71487ff2d5d7d7cf96835778f386e5f30fa32254
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: fc7924f8f8b321ae017b7acd729fe11c4e0e3c7e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405451"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021087"
 ---
-# <a name="razor-file-compilation-in-aspnet-core"></a>RazorASP.NET Core 'de dosya derleme
+# <a name="no-locrazor-file-compilation-in-aspnet-core"></a>RazorASP.NET Core 'de dosya derleme
 
 Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -29,7 +31,7 @@ Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 Razor*. cshtml* uzantılı dosyalar, [ Razor SDK](xref:razor-pages/sdk)kullanılarak hem derleme hem de yayımlama zamanında derlenir. Çalışma zamanı derlemesi, projeniz yapılandırılarak isteğe bağlı olarak etkinleştirilebilir.
 
-## <a name="razor-compilation"></a>Razorderleme
+## <a name="no-locrazor-compilation"></a>Razorderleme
 
 Dosyaların derleme zamanı ve yayımlama zamanı derlemesi, Razor SDK tarafından varsayılan olarak etkindir Razor . Etkinleştirildiğinde, çalışma zamanı derlemesi derleme zamanı derlemesini tamamlar ve bu Razor dosyalar düzenlendiklerinde güncelleştirilmesini sağlar.
 
@@ -59,7 +61,7 @@ dotnet new webapp --razor-runtime-compilation
 Mevcut bir projedeki tüm ortamlarda çalışma zamanı derlemesini etkinleştirmek için:
 
 1. [Microsoft. AspNetCore. Mvc 'yi yükler. Razor RuntimeCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/) NuGet paketi.
-1. `Startup.ConfigureServices`İçin bir çağrı içerecek şekilde projenin metodunu güncelleştirin <xref:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation*> . Örneğin:
+1. `Startup.ConfigureServices`İçin bir çağrı içerecek şekilde projenin metodunu güncelleştirin <xref:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation*> . Örnek:
 
     ```csharp
     public void ConfigureServices(IServiceCollection services)
@@ -91,7 +93,7 @@ Aşağıdaki örnekte, `IIS Express` ve başlatma profillerinin geliştirme orta
 
 Projenin sınıfında kod değişikliği yapılması gerekmez `Startup` . Çalışma zamanında, içinde [derleme düzeyi HostingStartup özniteliğini](xref:fundamentals/configuration/platform-specific-configuration#hostingstartup-attribute) arar ASP.NET Core `Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation` . `HostingStartup`Öznitelik, çalıştırılacak uygulama başlangıç kodunu belirtir. Bu başlangıç kodu, çalışma zamanı derlemesini sunar.
 
-## <a name="enable-runtime-compilation-for-a-razor-class-library"></a>Sınıf kitaplığı için çalışma zamanı derlemesini Etkinleştir Razor
+## <a name="enable-runtime-compilation-for-a-no-locrazor-class-library"></a>Sınıf kitaplığı için çalışma zamanı derlemesini Etkinleştir Razor
 
 Bir Razor sayfa projesinin *myclasslib*adlı bir [ Razor sınıf kitaplığına (RCL)](xref:razor-pages/ui-class) başvurduğu bir senaryo düşünün. RCL, tüm takımınızın MVC ve sayfa projelerinin tükettiği bir *_Layout. cshtml* dosyası içerir Razor . Bu RCL 'de *_Layout. cshtml* dosyası için çalışma zamanı derlemesini etkinleştirmek istiyorsunuz. Sayfalar projesinde aşağıdaki değişiklikleri yapın Razor :
 
@@ -104,7 +106,7 @@ Bir Razor sayfa projesinin *myclasslib*adlı bir [ Razor sınıf kitaplığına 
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [RazorCompileOnBuild ve RazorCompileOnPublish](xref:razor-pages/sdk#properties) özellikleri.
+* [ Razor Compileonbuild ve Razor compileonpublish](xref:razor-pages/sdk#properties) özellikleri.
 * <xref:razor-pages/index>
 * <xref:mvc/views/overview>
 * <xref:razor-pages/sdk>
@@ -115,7 +117,7 @@ Bir Razor sayfa projesinin *myclasslib*adlı bir [ Razor sınıf kitaplığına 
 
 Razor*. cshtml* uzantılı dosyalar, [ Razor SDK](xref:razor-pages/sdk)kullanılarak hem derleme hem de yayımlama zamanında derlenir. Çalışma zamanı derlemesi, uygulamanız yapılandırılarak isteğe bağlı olarak etkinleştirilebilir.
 
-## <a name="razor-compilation"></a>Razorderleme
+## <a name="no-locrazor-compilation"></a>Razorderleme
 
 Dosyaların derleme zamanı ve yayımlama zamanı derlemesi, Razor SDK tarafından varsayılan olarak etkindir Razor . Etkinleştirildiğinde, çalışma zamanı derlemesi derleme zamanı derlemesini tamamlar ve bu Razor dosyalar düzenlendiklerinde güncelleştirilmesini sağlar.
 
@@ -125,7 +127,7 @@ Tüm ortamlar ve yapılandırma modları için çalışma zamanı derlemesini et
 
 1. [Microsoft. AspNetCore. Mvc 'yi yükler. Razor RuntimeCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/) NuGet paketi.
 
-1. `Startup.ConfigureServices`İçin bir çağrı içerecek şekilde projenin metodunu güncelleştirin <xref:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation*> . Örneğin:
+1. `Startup.ConfigureServices`İçin bir çağrı içerecek şekilde projenin metodunu güncelleştirin <xref:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation*> . Örnek:
 
     ```csharp
     public void ConfigureServices(IServiceCollection services)
@@ -159,7 +161,7 @@ Tüm ortamlar ve yapılandırma modları için çalışma zamanı derlemesini et
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [RazorCompileOnBuild ve RazorCompileOnPublish](xref:razor-pages/sdk#properties) özellikleri.
+* [ Razor Compileonbuild ve Razor compileonpublish](xref:razor-pages/sdk#properties) özellikleri.
 * <xref:razor-pages/index>
 * <xref:mvc/views/overview>
 * <xref:razor-pages/sdk>
@@ -171,7 +173,7 @@ Tüm ortamlar ve yapılandırma modları için çalışma zamanı derlemesini et
 
 RazorÇalışma zamanında, ilişkili Razor sayfa veya MVC görünümü çağrıldığında bir dosya derlenir. Razordosyalar, [ Razor SDK](xref:razor-pages/sdk)kullanılarak hem derlemede hem de yayımlama zamanında derlenir.
 
-## <a name="razor-compilation"></a>Razorderleme
+## <a name="no-locrazor-compilation"></a>Razorderleme
 
 Dosyaların derleme ve yayımlama zamanı derlemesi, Razor SDK tarafından varsayılan olarak etkindir Razor . RazorDosyalar güncelleştirildikten sonra düzenlendikten sonra derleme sırasında desteklenir. Varsayılan olarak, yalnızca derlenmiş *Views.dll* ve No *. cshtml* dosyası ya da dosyaları derlemek için gerekli derlemeler Razor uygulamanız ile dağıtılır.
 

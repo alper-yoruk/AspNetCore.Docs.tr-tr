@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/background-services
-ms.openlocfilehash: bf5fff213b2cd7db0b3227922a8c5babba2fc904
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 409ace5e3eaa4ab1de0b9d5f0cbd0e10d9243ea9
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85409091"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022387"
 ---
-# <a name="host-aspnet-core-signalr-in-background-services"></a>SignalRArka plan hizmetlerinde ana bilgisayar ASP.NET Core
+# <a name="host-aspnet-core-no-locsignalr-in-background-services"></a>SignalRArka plan hizmetlerinde ana bilgisayar ASP.NET Core
 
 , [Brady Gaster](https://twitter.com/bradygaster) tarafından
 
@@ -42,7 +44,7 @@ Bu makalede şu yönergelere kılavuzluk sunulmaktadır:
 
 ::: moniker-end
 
-## <a name="enable-signalr-in-startup"></a>SignalRBaşlangıçta etkinleştir
+## <a name="enable-no-locsignalr-in-startup"></a>SignalRBaşlangıçta etkinleştir
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -90,7 +92,7 @@ Kesin olarak yazılan tarafından kullanılan arabirim `ClockHub` `IClock` arabi
 
 ::: moniker-end
 
-## <a name="call-a-signalr-hub-from-a-background-service"></a>SignalRArka plan hizmetinden hub çağırma
+## <a name="call-a-no-locsignalr-hub-from-a-background-service"></a>SignalRArka plan hizmetinden hub çağırma
 
 Başlangıç sırasında, `Worker` a sınıfı `BackgroundService` kullanılarak etkindir `AddHostedService` .
 
@@ -113,7 +115,7 @@ SignalRAyrıca `Startup` , her hub 'ıN ASP.NET Core http isteği ardışık dü
 
 `ExecuteAsync`Yöntemi arka plan hizmetinde yinelemeli olarak çağrıldığı için sunucunun geçerli tarih ve saati kullanılarak bağlı istemcilere gönderilir `ClockHub` .
 
-## <a name="react-to-signalr-events-with-background-services"></a>SignalRArka plan hizmetleriyle olaylara tepki verme
+## <a name="react-to-no-locsignalr-events-with-background-services"></a>SignalRArka plan hizmetleriyle olaylara tepki verme
 
 JavaScript istemcisi veya bir .NET masaüstü uygulaması kullanan tek sayfalı bir uygulama gibi kullanarak, SignalR <xref:signalr/dotnet-client> `BackgroundService` `IHostedService` SignalR hub 'lara bağlanmak ve olaylara yanıt vermek için bir veya uygulaması da kullanılabilir.
 
@@ -156,7 +158,7 @@ Yöntemi sırasında, `IHostedService.StopAsync` `HubConnection` zaman uyumsuz o
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [Kullanmaya başlayın](xref:tutorials/signalr)
-* [Merkezler](xref:signalr/hubs)
+* [Kullanmaya başlama](xref:tutorials/signalr)
+* [Hub'lar](xref:signalr/hubs)
 * [Azure’da Yayımlama](xref:signalr/publish-to-azure-web-app)
 * [Türü kesin belirlenmiş hub 'Lar](xref:signalr/hubs#strongly-typed-hubs)

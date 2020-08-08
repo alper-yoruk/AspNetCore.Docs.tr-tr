@@ -6,6 +6,8 @@ ms.author: casoper
 ms.custom: mvc
 ms.date: 01/21/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/azure-ad-b2c
-ms.openlocfilehash: 4933203b8bdd8f653268c1df7ff83b8e9423341f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 78fe4d5dd9e3f64789956e58a4490bef6bdbca1e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405074"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021711"
 ---
 # <a name="cloud-authentication-with-azure-active-directory-b2c-in-aspnet-core"></a>ASP.NET Core Azure Active Directory B2C ile bulut kimlik doğrulaması
 
@@ -38,7 +40,7 @@ Bu öğreticide şunların nasıl yapıldığını öğrenirsiniz:
 > * Kimlik doğrulaması için Azure AD B2C kiracısını kullanacak şekilde yapılandırılmış bir ASP.NET Core Web uygulaması oluşturmak için Visual Studio 'Yu kullanma
 > * Azure AD B2C kiracının davranışını denetleyen ilkeleri yapılandırın
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 Bu izlenecek yol için aşağıdakiler gereklidir:
 
@@ -57,12 +59,12 @@ Aşağıdaki değerleri kullanın:
 
 | Ayar                       | Değer                     | Notlar                                                                                                                                                                                              |
 |-------------------------------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| **Adı**                      | *&lt;uygulama adı&gt;*        | Uygulamanızı tüketicilere açıklayan uygulama için bir **ad** girin.                                                                                                                                 |
+| **Ad**                      | *&lt;uygulama adı&gt;*        | Uygulamanızı tüketicilere açıklayan uygulama için bir **ad** girin.                                                                                                                                 |
 | **Web uygulamasını / web API'sini dahil etme** | Yes                       |                                                                                                                                                                                                    |
 | **Örtük akışa izin verme**       | Yes                       |                                                                                                                                                                                                    |
 | **Yanıt URL'si**                 | `https://localhost:44300/signin-oidc` | Yanıt URL'leri, Azure AD B2C'nin, uygulamanız tarafından istenen belirteçleri döndürdüğü uç noktalardır. Visual Studio, kullanılacak yanıt URL 'sini sağlar. Şu an için `https://localhost:44300/signin-oidc` formunu doldurun için yazın. |
 | **Uygulama Kimliği URI'si**                | Boş bırakın               | Bu öğretici için gerekli değildir.                                                                                                                                                                    |
-| **Yerel istemci ekle**     | No                        |                                                                                                                                                                                                    |
+| **Yerel istemci ekle**     | Hayır                        |                                                                                                                                                                                                    |
 
 > [!WARNING]
 > Localhost olmayan bir yanıt URL 'SI ayarlıyorsanız, [yanıt URL 'si listesinde izin verilen kısıtlamalara](/azure/active-directory-b2c/tutorial-register-applications#register-a-web-application)dikkat edin. 
@@ -92,7 +94,7 @@ Visual Studio 'da:
     | Ayar                       | Değer                                                 |
     |-------------------------------|-------------------------------------------------------|
     | **Etki alanı adı**               | *&lt;B2C kiracınızın etki alanı adı&gt;*          |
-    | **Uygulama KIMLIĞI**            | *&lt;Uygulama KIMLIĞINI Panodan yapıştırma&gt;* |
+    | **Uygulama Kimliği**            | *&lt;Uygulama KIMLIĞINI Panodan yapıştırma&gt;* |
     | **Geri çağırma yolu**             | *&lt;Varsayılan değeri kullan&gt;*                       |
     | **Kaydolma veya oturum açma ilkesi** | `B2C_1_SiUpIn`                                        |
     | **Parola ilkesini Sıfırla**     | `B2C_1_SSPR`                                          |
@@ -114,7 +116,7 @@ B2C uygulama özellikleri hala açık olan tarayıcı penceresine geri dönün. 
 > [!WARNING]
 > İlke adlarının, bu ilkeler Visual Studio 'daki **kimlik doğrulaması Değiştir** iletişim kutusunda kullanıldığından emin olun. İlke adları *üzerindeappsettings.js*doğrulanabilir.
 
-## <a name="configure-the-underlying-openidconnectoptionsjwtbearercookie-options"></a>Temeldeki Openıdconnectoptions/Jwttaşıyıcı/tanımlama bilgisi seçeneklerini yapılandırın
+## <a name="configure-the-underlying-openidconnectoptionsjwtbearerno-loccookie-options"></a>Temel alınan Openıdconnectoptions/Jwttaşıyıcı/ Cookie seçeneklerini yapılandırın
 
 Temel alınan seçenekleri doğrudan yapılandırmak için, içinde uygun düzen sabitini kullanın `Startup.ConfigureServices` :
 
@@ -140,7 +142,7 @@ services.Configure<JwtBearerOptions>(
 
 ## <a name="run-the-app"></a>Uygulamayı çalıştırma
 
-Visual Studio 'da **F5** ' e basarak uygulamayı derleyin ve çalıştırın. Web uygulaması başlatıldıktan sonra, tanımlama bilgilerinin kullanımını kabul etmek için **kabul et** ' i seçin (istenirse) ve ardından **oturum aç**' ı seçin.
+Visual Studio 'da **F5** ' e basarak uygulamayı derleyin ve çalıştırın. Web uygulaması başlatıldıktan sonra, (istenirse) kullanımını kabul etmek için **kabul et** ' i seçin cookie ve ardından **oturum aç**' ı seçin.
 
 ![Uygulamada oturum açın](./azure-ad-b2c/_static/signin.png)
 

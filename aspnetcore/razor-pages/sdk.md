@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 03/26/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/sdk
-ms.openlocfilehash: 56b4d4c13023918a4ac25c8c5d8ad1ee2c346ac6
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b960460a50558a11bc47f9a1844931aa32e3d696
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403046"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021425"
 ---
-# <a name="aspnet-core-razor-sdk"></a>ASP.NET Core Razor SDK
+# <a name="aspnet-core-no-locrazor-sdk"></a>ASP.NET Core Razor SDK
 
 Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -48,11 +50,11 @@ RazorSDK, `Content` `Include` Glob düzenine ayarlanmış bir özniteliği olan 
 
 ::: moniker-end
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 [!INCLUDE[](~/includes/2.1-SDK.md)]
 
-## <a name="use-the-razor-sdk"></a>RazorSDK 'yı kullanma
+## <a name="use-the-no-locrazor-sdk"></a>RazorSDK 'yı kullanma
 
 Çoğu Web uygulaması SDK 'ya açık olarak başvurmak için gerekli değildir Razor .
 
@@ -116,7 +118,7 @@ Aşağıdaki tablodaki Özellikler ve öğeler, SDK 'ya giriş ve çıkış yap�
 | `RazorGenerate` | Kod oluşturmaya giriş olan öğe öğeleri (*. cshtml* dosyaları). |
 | `RazorComponent` | Bileşen kodu oluşturmaya giriş olan öğe öğeleri (*. Razor* dosyaları) Razor . |
 | `RazorCompile` | Derleme hedeflerine giriş olan öğe öğeleri (*. cs* dosyaları) Razor . `ItemGroup`Derlemeye derlenecek ek dosyaları belirtmek için bunu kullanın Razor . |
-| `RazorTargetAssemblyAttribute` | Derleme için öznitelikleri oluşturmak için kullanılan öğe öğeleri Razor . Örneğin:  <br>`RazorAssemblyAttribute`<br>`Include="System.Reflection.AssemblyMetadataAttribute"`<br>`_Parameter1="BuildSource" _Parameter2="https://docs.microsoft.com/">` |
+| `RazorTargetAssemblyAttribute` | Derleme için öznitelikleri oluşturmak için kullanılan öğe öğeleri Razor . Örnek:  <br>`RazorAssemblyAttribute`<br>`Include="System.Reflection.AssemblyMetadataAttribute"`<br>`_Parameter1="BuildSource" _Parameter2="https://docs.microsoft.com/">` |
 | `RazorEmbeddedResource` | Oluşturulan derlemeye gömülü kaynaklar olarak eklenen öğe öğeleri Razor . |
 
 ::: moniker range=">= aspnetcore-3.0"
@@ -133,7 +135,7 @@ Aşağıdaki tablodaki Özellikler ve öğeler, SDK 'ya giriş ve çıkış yap�
 | `CopyRazorGenerateFilesToPublishDirectory` | Ne zaman `true` , `RazorGenerate` öğe (*. cshtml*) dosyalarını yayımlama dizinine kopyalar. Genellikle, derleme Razor zamanında veya yayımlama zamanında derlemeye katılırsanız yayımlanmış bir uygulama için dosyalar gerekli değildir. Varsayılan olarak olur `false` . |
 | `PreserveCompilationReferences` | Ne zaman `true` , başvuru derleme öğelerini yayımlama dizinine kopyalayın. Genellikle, derleme Razor zamanında veya yayımlama zamanında derleme gerçekleşirse yayımlanmış bir uygulama için başvuru derlemeleri gerekli değildir. `true`Yayımlanmış uygulamanız çalışma zamanı derlemesi gerektiriyorsa, olarak ayarlayın. Örneğin, `true` uygulama çalışma zamanında *. cshtml* dosyalarını değiştirirse veya gömülü görünümleri kullanıyorsa, değerini olarak ayarlayın. Varsayılan olarak olur `false` . |
 | `IncludeRazorContentInPack` | Ne zaman `true` , tüm Razor içerik öğeleri (*. cshtml* dosyaları) oluşturulan NuGet paketine eklenmek üzere işaretlenir. Varsayılan olarak olur `false` . |
-| `EmbedRazorGenerateSources` | Ne zaman `true` , RazorGenerate (*. cshtml*) öğelerini oluşturulan derlemeye gömülü dosyalar olarak ekler Razor . Varsayılan olarak olur `false` . |
+| `EmbedRazorGenerateSources` | Ne zaman `true` , Razor oluşturulan derlemeye katıştırılmış dosyalar olarak Generate (*. cshtml*) öğeleri ekler Razor . Varsayılan olarak olur `false` . |
 | `UseRazorBuildServer` | Ne zaman `true` , kod oluşturma işinin yükünü boşaltmak için kalıcı bir yapı sunucusu işlemi kullanır. Varsayılan değer olarak değeridir `UseSharedCompilation` . |
 | `GenerateMvcApplicationPartsAssemblyAttributes` | Ne zaman `true` , SDK, uygulama bölümü keşfi gerçekleştirmek için çalışma ZAMANıNDA MVC tarafından kullanılan ek öznitelikler üretir. |
 | `DefaultWebContentItemExcludes` | `Content`Web veya SDK 'yı hedefleyen projelerde öğe grubundan çıkarılacak öğe öğeleri için glob bir model Razor |
@@ -157,7 +159,7 @@ Aşağıdaki tablodaki Özellikler ve öğeler, SDK 'ya giriş ve çıkış yap�
 | `CopyRazorGenerateFilesToPublishDirectory` | Ne zaman `true` , `RazorGenerate` öğe (*. cshtml*) dosyalarını yayımlama dizinine kopyalar. Genellikle, derleme Razor zamanında veya yayımlama zamanında derlemeye katılırsanız yayımlanmış bir uygulama için dosyalar gerekli değildir. Varsayılan olarak olur `false` . |
 | `CopyRefAssembliesToPublishDirectory` | Ne zaman `true` , başvuru derleme öğelerini yayımlama dizinine kopyalayın. Genellikle, derleme Razor zamanında veya yayımlama zamanında derleme gerçekleşirse yayımlanmış bir uygulama için başvuru derlemeleri gerekli değildir. `true`Yayımlanmış uygulamanız çalışma zamanı derlemesi gerektiriyorsa, olarak ayarlayın. Örneğin, `true` uygulama çalışma zamanında *. cshtml* dosyalarını değiştirirse veya gömülü görünümleri kullanıyorsa, değerini olarak ayarlayın. Varsayılan olarak olur `false` . |
 | `IncludeRazorContentInPack` | Ne zaman `true` , tüm Razor içerik öğeleri (*. cshtml* dosyaları) oluşturulan NuGet paketine eklenmek üzere işaretlenir. Varsayılan olarak olur `false` . |
-| `EmbedRazorGenerateSources` | Ne zaman `true` , RazorGenerate (*. cshtml*) öğelerini oluşturulan derlemeye gömülü dosyalar olarak ekler Razor . Varsayılan olarak olur `false` . |
+| `EmbedRazorGenerateSources` | Ne zaman `true` , Razor oluşturulan derlemeye katıştırılmış dosyalar olarak Generate (*. cshtml*) öğeleri ekler Razor . Varsayılan olarak olur `false` . |
 | `UseRazorBuildServer` | Ne zaman `true` , kod oluşturma işinin yükünü boşaltmak için kalıcı bir yapı sunucusu işlemi kullanır. Varsayılan değer olarak değeridir `UseSharedCompilation` . |
 | `GenerateMvcApplicationPartsAssemblyAttributes` | Ne zaman `true` , SDK, uygulama bölümü keşfi gerçekleştirmek için çalışma ZAMANıNDA MVC tarafından kullanılan ek öznitelikler üretir. |
 | `DefaultWebContentItemExcludes` | `Content`Web veya SDK 'yı hedefleyen projelerde öğe grubundan çıkarılacak öğe öğeleri için glob bir model Razor |
@@ -177,13 +179,13 @@ RazorSDK iki birincil hedefi tanımlar:
 * `RazorCompile`: İçinde oluşturulan *. cs* dosyalarını derleme için derler Razor . `RazorCompileDependsOn`Bu hedeften önce veya sonra çalışabilecek ek hedefleri belirtmek için öğesini kullanın.
 * `RazorComponentGenerate`: Kod, öğe öğeleri için *. cs* dosyaları oluşturur `RazorComponent` . `RazorComponentGenerateDependsOn`Bu hedeften önce veya sonra çalışabilecek ek hedefleri belirtmek için özelliğini kullanın.
 
-### <a name="runtime-compilation-of-razor-views"></a>Görünümlerin çalışma zamanı derlemesi Razor
+### <a name="runtime-compilation-of-no-locrazor-views"></a>Görünümlerin çalışma zamanı derlemesi Razor
 
 * Varsayılan olarak SDK, Razor çalışma zamanı derlemesini gerçekleştirmek için gerekli olan başvuru derlemelerini yayımlamaz. Bu durum, uygulama modeli çalışma zamanı derlemesini kullandığında derleme hatalarıyla sonuçlanır &mdash; . uygulama yayımlandıktan sonra uygulama gömülü görünümleri veya değişiklik görünümlerini kullanır. `CopyRefAssembliesToPublishDirectory` `true` Başvuru derlemelerini yayımlamaya devam etmek için olarak ayarlayın.
 
 * Bir Web uygulaması için uygulamanızın SDK 'yı hedeflediğinden emin olun `Microsoft.NET.Sdk.Web` .
 
-## <a name="razor-language-version"></a>Razordil sürümü
+## <a name="no-locrazor-language-version"></a>Razordil sürümü
 
 `Microsoft.NET.Sdk.Web`SDK 'yı hedeflerken, Razor dil sürümü uygulamanın hedef Framework sürümünden algılanır. SDK 'yı hedefleyen projeler `Microsoft.NET.Sdk.Razor` veya uygulamanın Razor çıkarılan değerden farklı bir dil sürümü gerektirmesi durumunda, `<RazorLangVersion>` uygulamanın proje dosyasındaki özelliği ayarlanarak bir sürüm yapılandırılabilir:
 

@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/02/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/jsonpatch
-ms.openlocfilehash: 08ae366859c4466e6957592f78dda813d6670bb4
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 09da557d678889ba16abe6f9af40ae1b33583d8b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405035"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022374"
 ---
 # <a name="jsonpatch-in-aspnet-core-web-api"></a>ASP.NET Core Web API 'sinde JsonPatch
 
@@ -34,7 +36,7 @@ Bu makalede, ASP.NET Core Web API 'sinde JSON Patch isteklerinin nasıl işlenec
 Uygulamanızda JSON yama desteğini etkinleştirmek için aşağıdaki adımları izleyin:
 
 1. [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/)NuGet paketini yükler.
-1. `Startup.ConfigureServices`Çağırmak için projenin metodunu güncelleştirin <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> . Örneğin:
+1. `Startup.ConfigureServices`Çağırmak için projenin metodunu güncelleştirin <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> . Örnek:
 
     ```csharp
     services
@@ -114,11 +116,11 @@ Bir işlem nesnesinin [Path](https://tools.ietf.org/html/rfc6901) özelliği dü
 
 Sıfır tabanlı dizinler, dizi öğelerini belirtmek için kullanılır. Dizinin ilk öğesi `addresses` `/addresses/0` . `add`Bir dizinin sonuna kadar, `-` Dizin numarası yerine bir tire () kullanın: `/addresses/-` .
 
-### <a name="operations"></a>Operations
+### <a name="operations"></a>İşlemler
 
 Aşağıdaki tabloda, [JSON Patch belirtiminde](https://tools.ietf.org/html/rfc6902)tanımlanan desteklenen işlemler gösterilmektedir:
 
-|Çalışma  | Notlar |
+|İşlem  | Notlar |
 |-----------|--------------------------------|
 | `add`     | Bir özellik veya dizi öğesi ekleyin. Var olan özellik için: set değeri.|
 | `remove`  | Bir özellik veya dizi öğesi kaldırın. |
@@ -139,7 +141,7 @@ Bir API denetleyicisinde, JSON yaması için bir eylem yöntemi:
 * `JsonPatchDocument<T>`, Genellikle ile kabul eder `[FromBody]` .
 * `ApplyTo`Değişiklikleri uygulamak için düzeltme eki belgesindeki çağrılar.
 
-İşte bir örnek:
+Aşağıda bir örnek verilmiştir:
 
 [!code-csharp[](jsonpatch/samples/2.2/Controllers/HomeController.cs?name=snippet_PatchAction&highlight=1,3,9)]
 
@@ -326,11 +328,11 @@ Bir işlem nesnesinin [Path](https://tools.ietf.org/html/rfc6901) özelliği dü
 
 Sıfır tabanlı dizinler, dizi öğelerini belirtmek için kullanılır. Dizinin ilk öğesi `addresses` `/addresses/0` . `add`Bir dizinin sonuna kadar, dizin numarası yerine bir tire (-) kullanın: `/addresses/-` .
 
-### <a name="operations"></a>Operations
+### <a name="operations"></a>İşlemler
 
 Aşağıdaki tabloda, [JSON Patch belirtiminde](https://tools.ietf.org/html/rfc6902)tanımlanan desteklenen işlemler gösterilmektedir:
 
-|Çalışma  | Notlar |
+|İşlem  | Notlar |
 |-----------|--------------------------------|
 | `add`     | Bir özellik veya dizi öğesi ekleyin. Var olan özellik için: set değeri.|
 | `remove`  | Bir özellik veya dizi öğesi kaldırın. |
@@ -351,7 +353,7 @@ Bir API denetleyicisinde, JSON yaması için bir eylem yöntemi:
 * `JsonPatchDocument<T>`, Genellikle ile kabul eder `[FromBody]` .
 * `ApplyTo`Değişiklikleri uygulamak için düzeltme eki belgesindeki çağrılar.
 
-İşte bir örnek:
+Aşağıda bir örnek verilmiştir:
 
 [!code-csharp[](jsonpatch/samples/2.2/Controllers/HomeController.cs?name=snippet_PatchAction&highlight=1,3,9)]
 

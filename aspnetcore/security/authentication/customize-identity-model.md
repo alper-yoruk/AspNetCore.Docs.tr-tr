@@ -5,6 +5,8 @@ description: Bu makalede, ASP.NET Core için temel Entity Framework Core veri mo
 ms.author: avickers
 ms.date: 07/01/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,20 +15,20 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/customize_identity_model
-ms.openlocfilehash: 3a5bac0e3e34602b1f8a85a7bcde1ba92b372607
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4e6d91de013755f1ae998e36481f4c3b659270ae
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399172"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022010"
 ---
-# <a name="identity-model-customization-in-aspnet-core"></a>IdentityASP.NET Core model özelleştirmesi
+# <a name="no-locidentity-model-customization-in-aspnet-core"></a>IdentityASP.NET Core model özelleştirmesi
 
 [Arthur Vicranlar](https://github.com/ajcvickers) tarafından
 
 ASP.NET Core Identity , ASP.NET Core uygulamalarda Kullanıcı hesaplarını yönetmek ve depolamak için bir çerçeve sağlar. Identity, kimlik doğrulama mekanizması olarak **bireysel kullanıcı hesapları** seçildiğinde projenize eklenir. Varsayılan olarak, Identity Entity Framework (EF) temel veri modelini kullanır. Bu makalede, modelin nasıl özelleştirileceği açıklanır Identity .
 
-## <a name="identity-and-ef-core-migrations"></a>Identityve EF Core geçişleri
+## <a name="no-locidentity-and-ef-core-migrations"></a>Identityve EF Core geçişleri
 
 Modeli incelemeden önce, Identity bir veritabanı oluşturmak ve güncelleştirmek için [EF Core geçişlerle](/ef/core/managing-schemas/migrations/) nasıl çalıştığını anlamak yararlı olur. En üst düzeyde, işlem şu şekilde yapılır:
 
@@ -52,7 +54,7 @@ Kullanılarak yeni bir uygulama Identity oluşturulduğunda, yukarıdaki 1. ve 2
 
 Modelde değişiklikler yapıldığından önceki adımları yineleyin.
 
-## <a name="the-identity-model"></a>IdentityModel
+## <a name="the-no-locidentity-model"></a>IdentityModel
 
 ### <a name="entity-types"></a>Varlık türleri
 
@@ -217,7 +219,7 @@ IdentityYukarıda listelenen her varlık türü için varsayılan [ortak dil ça
 
 Bu türleri doğrudan kullanmak yerine, türler uygulamanın kendi türleri için temel sınıflar olarak kullanılabilir. `DbContext`Tarafından tanımlanan sınıflar Identity geneldir, örneğin, modeldeki bir veya daha fazla varlık türü IÇIN farklı clr türleri kullanılabilir. Bu genel türler Ayrıca `User` birincil anahtar (PK) veri türünün değiştirilmesine izin verir.
 
-IdentityRol desteğiyle birlikte kullanıldığında bir <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> sınıf kullanılmalıdır. Örneğin:
+IdentityRol desteğiyle birlikte kullanıldığında bir <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> sınıf kullanılmalıdır. Örnek:
 
 ```csharp
 // Uses all the built-in Identity types
@@ -355,7 +357,7 @@ Sınıfında geçersiz kılınmasına gerek yoktur `OnModelCreating` `Applicatio
 @inject UserManager<ApplicationUser> UserManager
 ```
 
-*Alanı güncelleştirin/ Identity /IdentityHostingStartup.cs* veya `Startup.ConfigureServices` ile değiştirin `IdentityUser` `ApplicationUser` .
+*Alanı/ Identity / Identity HostingStartup.cs* veya `Startup.ConfigureServices` `IdentityUser` ile değiştirin `ApplicationUser` .
 
 ```csharp
 services.AddIdentity<ApplicationUser>()
@@ -432,7 +434,7 @@ PK türünü değiştirmek için şu adımları izleyin:
 
     ::: moniker-end
 
-4. Özel bir `ApplicationUser` sınıf kullanılıyorsa, öğesinden devralacak olan sınıfı güncelleştirin `IdentityUser` . Örneğin:
+4. Özel bir `ApplicationUser` sınıf kullanılıyorsa, öğesinden devralacak olan sınıfı güncelleştirin `IdentityUser` . Örnek:
 
     ::: moniker range="<= aspnetcore-1.1"
 
@@ -500,7 +502,7 @@ PK türünü değiştirmek için şu adımları izleyin:
 
     ::: moniker-end
 
-5. Özel bir `ApplicationRole` sınıf kullanılıyorsa, öğesinden devralacak olan sınıfı güncelleştirin `IdentityRole<TKey>` . Örneğin:
+5. Özel bir `ApplicationRole` sınıf kullanılıyorsa, öğesinden devralacak olan sınıfı güncelleştirin `IdentityRole<TKey>` . Örnek:
 
     [!code-csharp[](customize-identity-model/samples/2.1/RazorPagesSampleApp/Data/ApplicationRole.cs?name=snippet_ApplicationRole&highlight=4)]
 
@@ -949,7 +951,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 ### <a name="map-to-a-different-schema"></a>Farklı bir şemaya eşleme
 
-Şemalar, veritabanı sağlayıcıları genelinde farklı davranabilir. SQL Server için varsayılan, *dbo* şemasında tüm tabloları oluşturmaktır. Tablolar farklı bir şemada oluşturulabilir. Örneğin:
+Şemalar, veritabanı sağlayıcıları genelinde farklı davranabilir. SQL Server için varsayılan, *dbo* şemasında tüm tabloları oluşturmaktır. Tablolar farklı bir şemada oluşturulabilir. Örnek:
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)

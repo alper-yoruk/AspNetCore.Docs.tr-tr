@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: 1bc9b2b081c58392bd2c226ebedc804b43810bc2
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: dad2e667cb6fa3ace7cb5e5dcb982511357ed49b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408857"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021529"
 ---
-# <a name="part-8-add-validation-to-an-aspnet-core-razor-page"></a>8. bölüm, ASP.NET Core sayfasına doğrulama ekleme Razor
+# <a name="part-8-add-validation-to-an-aspnet-core-no-locrazor-page"></a>8. bölüm, ASP.NET Core sayfasına doğrulama ekleme Razor
 
 Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -63,7 +65,7 @@ Doğrulama öznitelikleri, uygulanan model özellikleri üzerinde zorlamak isted
 
 Doğrulama kurallarının otomatik olarak uygulanmasını ASP.NET Core uygulamanızın daha sağlam olmasına yardımcı olur. Ayrıca, bir şeyi doğrulamayı unutmanızı ve veritabanına yanlışlıkla veri vermemesini de sağlar.
 
-### <a name="validation-error-ui-in-razor-pages"></a>Sayfalarda doğrulama hatası Kullanıcı arabirimi Razor
+### <a name="validation-error-ui-in-no-locrazor-pages"></a>Sayfalarda doğrulama hatası Kullanıcı arabirimi Razor
 
 Uygulamayı çalıştırın ve sayfalar/Filmler ' e gidin.
 
@@ -191,7 +193,7 @@ Add-Migration New_DataAnnotations
 Update-Database
 ```
 
-`Update-Database``Up`sınıfının yöntemlerini çalıştırır `New_DataAnnotations` . Yöntemi inceleyin `Up` :
+`Update-Database``Up`sınıfının yöntemlerini çalıştırır `New_DataAnnotations` . `Up` yöntemini inceleyin:
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Migrations/20190724163003_New_DataAnnotations.cs?name=snippet)]
 

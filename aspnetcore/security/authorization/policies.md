@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/policies
-ms.openlocfilehash: 668c68bc328860ef17e1f2df09103fca07733ef7
-ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
+ms.openlocfilehash: 03d6e7fdc4ab4b5e4925508952bfd6c835d90486
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/24/2020
-ms.locfileid: "87160178"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021282"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>ASP.NET Core ilke tabanlı yetkilendirme
 
@@ -119,13 +121,13 @@ public void ConfigureServices(IServiceCollection services)
 
 RazorSayfalar kullanıyorsanız, bkz. bu belgedeki [ Razor sayfalara ilke uygulama](#apply-policies-to-razor-pages) .
 
-İlkeler, `[Authorize]` ilke adı ile özniteliği kullanılarak denetleyicilere uygulanır. Örneğin:
+İlkeler, `[Authorize]` ilke adı ile özniteliği kullanılarak denetleyicilere uygulanır. Örnek:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
 ## <a name="apply-policies-to-no-locrazor-pages"></a>İlkeleri sayfalara uygula Razor
 
-İlkeler, Razor `[Authorize]` ilke adı ile özniteliği kullanılarak sayfalara uygulanır. Örneğin:
+İlkeler, Razor `[Authorize]` ilke adı ile özniteliği kullanılarak sayfalara uygulanır. Örnek:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
@@ -174,7 +176,7 @@ Yukarıdaki kod, [Pendingrequirements](/dotnet/api/microsoft.aspnetcore.authoriz
 
 ### <a name="handler-registration"></a>İşleyici kaydı
 
-İşleyiciler, yapılandırma sırasında hizmetler koleksiyonuna kaydedilir. Örneğin:
+İşleyiciler, yapılandırma sırasında hizmetler koleksiyonuna kaydedilir. Örnek:
 
 [!code-csharp[](policies/samples/3.0PoliciesAuthApp1/Startup.cs?range=31-32,39-40,42-45, 53-55, 58)]
 
@@ -227,7 +229,7 @@ Kodun kodda hızlı bir şekilde kullanılması için bir ilkeyi karşıladığ�
 
 `HandleRequirementAsync`Bir yetkilendirme işleyicisinde uyguladığınız yöntemin iki parametresi vardır: bir `AuthorizationHandlerContext` ve `TRequirement` işleme çalışıyorsunuz. Daha SignalR `Resource` `AuthorizationHandlerContext` fazla bilgi GEÇIRMEK için, MVC gibi çerçeveler veya üzerinde özelliğine herhangi bir nesne eklemek ücretsizdir.
 
-Endpoint Routing kullanılırken, yetkilendirme genellikle yetkilendirme ara yazılımı tarafından işlenir. Bu durumda, `Resource` özelliği öğesinin bir örneğidir <xref:Microsoft.AspNetCore.Http.Endpoint> . Uç noktası, yönlendirolduğunuz temel kaynağı yoklayabilmeniz için kullanılabilir. Örneğin:
+Endpoint Routing kullanılırken, yetkilendirme genellikle yetkilendirme ara yazılımı tarafından işlenir. Bu durumda, `Resource` özelliği öğesinin bir örneğidir <xref:Microsoft.AspNetCore.Http.Endpoint> . Uç noktası, yönlendirolduğunuz temel kaynağı yoklayabilmeniz için kullanılabilir. Örnek:
 
 ```csharp
 if (context.Resource is Endpoint endpoint)
@@ -355,13 +357,13 @@ public void ConfigureServices(IServiceCollection services)
 
 RazorSayfalar kullanıyorsanız, bkz. bu belgedeki [ Razor sayfalara ilke uygulama](#apply-policies-to-razor-pages) .
 
-İlkeler, `[Authorize]` ilke adı ile özniteliği kullanılarak denetleyicilere uygulanır. Örneğin:
+İlkeler, `[Authorize]` ilke adı ile özniteliği kullanılarak denetleyicilere uygulanır. Örnek:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
 ## <a name="apply-policies-to-no-locrazor-pages"></a>İlkeleri sayfalara uygula Razor
 
-İlkeler, Razor `[Authorize]` ilke adı ile özniteliği kullanılarak sayfalara uygulanır. Örneğin:
+İlkeler, Razor `[Authorize]` ilke adı ile özniteliği kullanılarak sayfalara uygulanır. Örnek:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
@@ -408,7 +410,7 @@ Yukarıdaki kod, [Pendingrequirements](/dotnet/api/microsoft.aspnetcore.authoriz
 
 ### <a name="handler-registration"></a>İşleyici kaydı
 
-İşleyiciler, yapılandırma sırasında hizmetler koleksiyonuna kaydedilir. Örneğin:
+İşleyiciler, yapılandırma sırasında hizmetler koleksiyonuna kaydedilir. Örnek:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Startup.cs?range=32-33,48-53,61,62-63,66)]
 

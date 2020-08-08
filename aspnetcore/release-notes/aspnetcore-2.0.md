@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.0
-ms.openlocfilehash: 97d8606ba6bef0bb8bf23d1553c7cb5681fbdbd8
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 1ec51bf054f1f0d60ed27ee280f436e6d4c8c4b0
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404372"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021204"
 ---
 # <a name="whats-new-in-aspnet-core-20"></a>ASP.NET Core 2,0 ' deki yenilikler
 
 Bu makalede, ASP.NET Core 2,0 ' deki en önemli değişiklikler, ilgili belgelerin bağlantılarıyla vurgulanır.
 
-## <a name="razor-pages"></a>RazorSayfaları
+## <a name="no-locrazor-pages"></a>RazorSayfaları
 
 RazorSayfalar, kod odaklı senaryoları daha kolay ve daha üretken hale getiren ASP.NET Core MVC 'nin yeni bir özelliğidir.
 
@@ -72,7 +74,7 @@ Yeni bir kimlik doğrulama modeli, DI kullanarak bir uygulama için kimlik doğr
 
 Planlı belgelerin durumu hakkında daha fazla bilgi için bkz. [GitHub sorunu](https://github.com/dotnet/AspNetCore.Docs/issues/3054).
 
-## <a name="identity-update"></a>IdentityUpdate
+## <a name="no-locidentity-update"></a>IdentityUpdate
 
 ASP.NET Core 2,0 ' de kullanarak güvenli Web API 'Leri oluşturmayı daha kolay hale geçirdik Identity . [Microsoft kimlik doğrulama kitaplığı 'nı (msal)](https://www.nuget.org/packages/Microsoft.Identity.Client)kullanarak Web API 'lerinize erişmek için erişim belirteçleri edinebilirsiniz.
 
@@ -136,7 +138,7 @@ RazorYayımlama ön derleme sırasında varsayılan olarak, yayımlama çıkış
 
 Daha fazla bilgi için bkz. [ Razor ASP.NET Core derleme ve ön derlemeyi görüntüleme](xref:mvc/views/view-compilation).
 
-## <a name="razor-support-for-c-71"></a>RazorC# 7,1 için destek
+## <a name="no-locrazor-support-for-c-71"></a>RazorC# 7,1 için destek
 
 RazorGörünüm altyapısı, yeni Roslyn derleyicisi ile çalışacak şekilde güncelleştirilmiştir. Bu, varsayılan Ifadeler gibi C# 7,1 özellikleri, gösterilen tanımlama grubu adları ve genel türler ile birlikte kalıp eşleme desteği içerir. Projenizde C# 7,1 kullanmak için, proje dosyanıza aşağıdaki özelliği ekleyin ve çözümü yeniden yükleyin:
 

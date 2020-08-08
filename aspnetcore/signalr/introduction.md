@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/27/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,16 +17,16 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/introduction
-ms.openlocfilehash: 816ecfc5d23e8e1d2901a8c35c657cc968fa95df
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6f3cec83c9af5ec6e820db4a15061eddac613f36
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404957"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022179"
 ---
-# <a name="introduction-to-aspnet-core-signalr"></a>ASP.NET Core girişSignalR
+# <a name="introduction-to-aspnet-core-no-locsignalr"></a>ASP.NET Core girişSignalR
 
-## <a name="what-is-signalr"></a>Nedir SignalR ?
+## <a name="what-is-no-locsignalr"></a>Nedir SignalR ?
 
 ASP.NET Core SignalR , uygulamalara gerçek zamanlı Web işlevselliği eklemeyi kolaylaştıran açık kaynaklı bir kitaplıktır. Gerçek zamanlı Web işlevselliği, sunucu tarafı kodun anında istemcilere içerik gönderebilmesine olanak sağlar.
 
@@ -56,7 +58,7 @@ SignalRgerçek zamanlı iletişimi işlemek için aşağıdaki teknikleri destek
 
 SignalRsunucu ve istemci özellikleri içinde en iyi taşıma yöntemini otomatik olarak seçer.
 
-## <a name="hubs"></a>Merkezler
+## <a name="hubs"></a>Hub'lar
 
 SignalRistemciler ve sunucular arasında iletişim kurmak için *hub 'ları* kullanır.
 
@@ -68,5 +70,5 @@ Hub 'lar, istemci tarafı yönteminin adını ve parametrelerini içeren iletile
 
 * [SignalRASP.NET Core için kullanmaya başlama](xref:tutorials/signalr)
 * [Desteklenen platformlar](xref:signalr/supported-platforms)
-* [Merkezler](xref:signalr/hubs)
+* [Hub'lar](xref:signalr/hubs)
 * [JavaScript istemcisi](xref:signalr/javascript-client)

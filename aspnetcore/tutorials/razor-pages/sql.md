@@ -5,6 +5,8 @@ description: Sayfalardaki eğitim serisinin 4. bölümü Razor .
 ms.author: riande
 ms.date: 7/22/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/sql
-ms.openlocfilehash: 68764a5b8c908012cc0053aa4e3ea071f2ce423d
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6d1a93a9cab49d33181e88b7fdc0f203a1e2546c
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400914"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88022426"
 ---
 # <a name="part-4-with-a-database-and-aspnet-core"></a>4. bölüm, bir veritabanı ve ASP.NET Core
 
@@ -120,7 +122,7 @@ Aşağıdaki kod güncelleştirilmiş *program.cs* dosyasını gösterir.
 > `SqlException: Cannot open database "RazorPagesMovieContext-" requested by the login. The login failed.`
 > `Login failed for user 'user name'.`
 
-### <a name="test-the-app"></a>Uygulamayı test edin
+### <a name="test-the-app"></a>Uygulamayı test etme
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -261,10 +263,10 @@ Aşağıdaki kod güncelleştirilmiş *program.cs* dosyasını gösterir.
 
 Bir üretim uygulaması çağırmaz `Database.Migrate` . Çalıştırılmayan aşağıdaki özel durumu engellemek için önceki koda eklenir `Update-Database` :
 
-SqlException: oturum açma tarafından istenen "RazorPagesMovieContext-21" veritabanı açılamıyor. Oturum açılamadı.
+SqlException: Razor oturum açma tarafından istenen "pagesmoviecontext-21" veritabanı açılamıyor. Oturum açılamadı.
 ' Kullanıcı adı ' kullanıcısı için oturum açma başarısız.
 
-### <a name="test-the-app"></a>Uygulamayı test edin
+### <a name="test-the-app"></a>Uygulamayı test etme
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
