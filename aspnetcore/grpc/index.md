@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 09/20/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,36 +16,36 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/index
-ms.openlocfilehash: 9f3a2041059c1d890ce72ce5f2a88151253d9bd9
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d21d808181d44b4c7e800df61ec1f3accdb58539
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404190"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016108"
 ---
-# <a name="introduction-to-grpc-on-net-core"></a><span data-ttu-id="7251f-103">.NET Core 'da gRPC 'ye giriş</span><span class="sxs-lookup"><span data-stu-id="7251f-103">Introduction to gRPC on .NET Core</span></span>
+# <a name="introduction-to-grpc-on-net-core"></a><span data-ttu-id="5f442-103">.NET Core 'da gRPC 'ye giriş</span><span class="sxs-lookup"><span data-stu-id="5f442-103">Introduction to gRPC on .NET Core</span></span>
 
-<span data-ttu-id="7251f-104">[John Luo](https://github.com/juntaoluo) ve [James bAyKiNg](https://twitter.com/jamesnk)</span><span class="sxs-lookup"><span data-stu-id="7251f-104">By [John Luo](https://github.com/juntaoluo) and [James Newton-King](https://twitter.com/jamesnk)</span></span>
+<span data-ttu-id="5f442-104">[John Luo](https://github.com/juntaoluo) ve [James bAyKiNg](https://twitter.com/jamesnk)</span><span class="sxs-lookup"><span data-stu-id="5f442-104">By [John Luo](https://github.com/juntaoluo) and [James Newton-King](https://twitter.com/jamesnk)</span></span>
 
-<span data-ttu-id="7251f-105">[GRPC](https://grpc.io/docs/guides/) , dilden bağımsız, yüksek performanslı bir uzak yordam ÇAĞRıSı (RPC) çerçevesidir.</span><span class="sxs-lookup"><span data-stu-id="7251f-105">[gRPC](https://grpc.io/docs/guides/) is a language agnostic, high-performance Remote Procedure Call (RPC) framework.</span></span>
+<span data-ttu-id="5f442-105">[GRPC](https://grpc.io/docs/guides/) , dilden bağımsız, yüksek performanslı bir uzak yordam ÇAĞRıSı (RPC) çerçevesidir.</span><span class="sxs-lookup"><span data-stu-id="5f442-105">[gRPC](https://grpc.io/docs/guides/) is a language agnostic, high-performance Remote Procedure Call (RPC) framework.</span></span>
 
-<span data-ttu-id="7251f-106">gRPC’nin başlıca avantajları şunlardır:</span><span class="sxs-lookup"><span data-stu-id="7251f-106">The main benefits of gRPC are:</span></span>
-* <span data-ttu-id="7251f-107">Modern, yüksek performanslı, hafif RPC çerçevesi.</span><span class="sxs-lookup"><span data-stu-id="7251f-107">Modern, high-performance, lightweight RPC framework.</span></span>
-* <span data-ttu-id="7251f-108">Varsayılan olarak Protokol Arabellekleri kullanan, dilden bağımsız uygulamalara olanak veren Sözleşme öncelikli API geliştirme.</span><span class="sxs-lookup"><span data-stu-id="7251f-108">Contract-first API development, using Protocol Buffers by default, allowing for language agnostic implementations.</span></span>
-* <span data-ttu-id="7251f-109">Kesin tür belirtilmiş sunucular ve istemciler oluşturmak için çok sayıda dilde kullanılabilen araçlar.</span><span class="sxs-lookup"><span data-stu-id="7251f-109">Tooling available for many languages to generate strongly-typed servers and clients.</span></span>
-* <span data-ttu-id="7251f-110">İstemci, sunucu ve iki yönlü akış çağrılarına yönelik destek.</span><span class="sxs-lookup"><span data-stu-id="7251f-110">Supports client, server, and bi-directional streaming calls.</span></span>
-* <span data-ttu-id="7251f-111">Protobuf ikili serileştirme ile azaltılmış ağ kullanımı.</span><span class="sxs-lookup"><span data-stu-id="7251f-111">Reduced network usage with Protobuf binary serialization.</span></span>
+<span data-ttu-id="5f442-106">gRPC’nin başlıca avantajları şunlardır:</span><span class="sxs-lookup"><span data-stu-id="5f442-106">The main benefits of gRPC are:</span></span>
+* <span data-ttu-id="5f442-107">Modern, yüksek performanslı, hafif RPC çerçevesi.</span><span class="sxs-lookup"><span data-stu-id="5f442-107">Modern, high-performance, lightweight RPC framework.</span></span>
+* <span data-ttu-id="5f442-108">Varsayılan olarak Protokol Arabellekleri kullanan, dilden bağımsız uygulamalara olanak veren Sözleşme öncelikli API geliştirme.</span><span class="sxs-lookup"><span data-stu-id="5f442-108">Contract-first API development, using Protocol Buffers by default, allowing for language agnostic implementations.</span></span>
+* <span data-ttu-id="5f442-109">Kesin tür belirtilmiş sunucular ve istemciler oluşturmak için çok sayıda dilde kullanılabilen araçlar.</span><span class="sxs-lookup"><span data-stu-id="5f442-109">Tooling available for many languages to generate strongly-typed servers and clients.</span></span>
+* <span data-ttu-id="5f442-110">İstemci, sunucu ve iki yönlü akış çağrılarına yönelik destek.</span><span class="sxs-lookup"><span data-stu-id="5f442-110">Supports client, server, and bi-directional streaming calls.</span></span>
+* <span data-ttu-id="5f442-111">Protobuf ikili serileştirme ile azaltılmış ağ kullanımı.</span><span class="sxs-lookup"><span data-stu-id="5f442-111">Reduced network usage with Protobuf binary serialization.</span></span>
 
-<span data-ttu-id="7251f-112">Bu avantajlar, gRPC 'yi ideal hale getirir:</span><span class="sxs-lookup"><span data-stu-id="7251f-112">These benefits make gRPC ideal for:</span></span>
-* <span data-ttu-id="7251f-113">Verimlilik açısından kritik olan hafif mikro hizmetler.</span><span class="sxs-lookup"><span data-stu-id="7251f-113">Lightweight microservices where efficiency is critical.</span></span>
-* <span data-ttu-id="7251f-114">Geliştirme için birden fazla dilin gerekli olduğu çok yönlü sistemleri.</span><span class="sxs-lookup"><span data-stu-id="7251f-114">Polyglot systems where multiple languages are required for development.</span></span>
-* <span data-ttu-id="7251f-115">Akış isteklerini veya yanıtlarını işlemek için gereken noktadan noktaya gerçek zamanlı hizmetler.</span><span class="sxs-lookup"><span data-stu-id="7251f-115">Point-to-point real-time services that need to handle streaming requests or responses.</span></span>
+<span data-ttu-id="5f442-112">Bu avantajlar, gRPC 'yi ideal hale getirir:</span><span class="sxs-lookup"><span data-stu-id="5f442-112">These benefits make gRPC ideal for:</span></span>
+* <span data-ttu-id="5f442-113">Verimlilik açısından kritik olan hafif mikro hizmetler.</span><span class="sxs-lookup"><span data-stu-id="5f442-113">Lightweight microservices where efficiency is critical.</span></span>
+* <span data-ttu-id="5f442-114">Geliştirme için birden fazla dilin gerekli olduğu çok yönlü sistemleri.</span><span class="sxs-lookup"><span data-stu-id="5f442-114">Polyglot systems where multiple languages are required for development.</span></span>
+* <span data-ttu-id="5f442-115">Akış isteklerini veya yanıtlarını işlemek için gereken noktadan noktaya gerçek zamanlı hizmetler.</span><span class="sxs-lookup"><span data-stu-id="5f442-115">Point-to-point real-time services that need to handle streaming requests or responses.</span></span>
 
 [!INCLUDE[](~/includes/gRPCazure.md)]
 
-## <a name="c-tooling-support-for-proto-files"></a><span data-ttu-id="7251f-116">. Proto dosyaları için C# araçları desteği</span><span class="sxs-lookup"><span data-stu-id="7251f-116">C# Tooling support for .proto files</span></span>
+## <a name="c-tooling-support-for-proto-files"></a><span data-ttu-id="5f442-116">. Proto dosyaları için C# araçları desteği</span><span class="sxs-lookup"><span data-stu-id="5f442-116">C# Tooling support for .proto files</span></span>
 
-<span data-ttu-id="7251f-117">gRPC, API geliştirmesi için bir sözleşmenin ilk yaklaşımını kullanır.</span><span class="sxs-lookup"><span data-stu-id="7251f-117">gRPC uses a contract-first approach to API development.</span></span> <span data-ttu-id="7251f-118">Hizmetler ve mesajlar \* \* . proto\* dosyalarında tanımlanmıştır:</span><span class="sxs-lookup"><span data-stu-id="7251f-118">Services and messages are defined in *\*.proto* files:</span></span>
+<span data-ttu-id="5f442-117">gRPC, API geliştirmesi için bir sözleşmenin ilk yaklaşımını kullanır.</span><span class="sxs-lookup"><span data-stu-id="5f442-117">gRPC uses a contract-first approach to API development.</span></span> <span data-ttu-id="5f442-118">Hizmetler ve mesajlar \* \* . proto\* dosyalarında tanımlanmıştır:</span><span class="sxs-lookup"><span data-stu-id="5f442-118">Services and messages are defined in *\*.proto* files:</span></span>
 
 ```protobuf
 syntax = "proto3";
@@ -61,10 +63,10 @@ message HelloReply {
 }
 ```
 
-<span data-ttu-id="7251f-119">Hizmetler, istemciler ve iletiler için .NET türleri bir projedeki \* \* . proto\* dosyaları eklenerek otomatik olarak oluşturulur:</span><span class="sxs-lookup"><span data-stu-id="7251f-119">.NET types for services, clients and messages are automatically generated by including *\*.proto* files in a project:</span></span>
+<span data-ttu-id="5f442-119">Hizmetler, istemciler ve iletiler için .NET türleri bir projedeki \* \* . proto\* dosyaları eklenerek otomatik olarak oluşturulur:</span><span class="sxs-lookup"><span data-stu-id="5f442-119">.NET types for services, clients and messages are automatically generated by including *\*.proto* files in a project:</span></span>
 
-* <span data-ttu-id="7251f-120">[GRPC. Tools](https://www.nuget.org/packages/Grpc.Tools/) paketine bir paket başvurusu ekleyin.</span><span class="sxs-lookup"><span data-stu-id="7251f-120">Add a package reference to [Grpc.Tools](https://www.nuget.org/packages/Grpc.Tools/) package.</span></span>
-* <span data-ttu-id="7251f-121">\* \* . Proto\* dosyalarını `<Protobuf>` öğe grubuna ekleyin.</span><span class="sxs-lookup"><span data-stu-id="7251f-121">Add *\*.proto* files to the `<Protobuf>` item group.</span></span>
+* <span data-ttu-id="5f442-120">[GRPC. Tools](https://www.nuget.org/packages/Grpc.Tools/) paketine bir paket başvurusu ekleyin.</span><span class="sxs-lookup"><span data-stu-id="5f442-120">Add a package reference to [Grpc.Tools](https://www.nuget.org/packages/Grpc.Tools/) package.</span></span>
+* <span data-ttu-id="5f442-121">\* \* . Proto\* dosyalarını `<Protobuf>` öğe grubuna ekleyin.</span><span class="sxs-lookup"><span data-stu-id="5f442-121">Add *\*.proto* files to the `<Protobuf>` item group.</span></span>
 
 ```xml
 <ItemGroup>
@@ -72,13 +74,13 @@ message HelloReply {
 </ItemGroup>
 ```
 
-<span data-ttu-id="7251f-122">GRPC araç desteği hakkında daha fazla bilgi için bkz <xref:grpc/basics> ..</span><span class="sxs-lookup"><span data-stu-id="7251f-122">For more information on gRPC tooling support, see <xref:grpc/basics>.</span></span>
+<span data-ttu-id="5f442-122">GRPC araç desteği hakkında daha fazla bilgi için bkz <xref:grpc/basics> ..</span><span class="sxs-lookup"><span data-stu-id="5f442-122">For more information on gRPC tooling support, see <xref:grpc/basics>.</span></span>
 
-## <a name="grpc-services-on-aspnet-core"></a><span data-ttu-id="7251f-123">ASP.NET Core gRPC Hizmetleri</span><span class="sxs-lookup"><span data-stu-id="7251f-123">gRPC services on ASP.NET Core</span></span>
+## <a name="grpc-services-on-aspnet-core"></a><span data-ttu-id="5f442-123">ASP.NET Core gRPC Hizmetleri</span><span class="sxs-lookup"><span data-stu-id="5f442-123">gRPC services on ASP.NET Core</span></span>
 
-<span data-ttu-id="7251f-124">gRPC Hizmetleri, ASP.NET Core üzerinde barındırılabilir.</span><span class="sxs-lookup"><span data-stu-id="7251f-124">gRPC services can be hosted on ASP.NET Core.</span></span> <span data-ttu-id="7251f-125">Hizmetler, günlüğe kaydetme, bağımlılık ekleme (dı), kimlik doğrulama ve yetkilendirme gibi popüler ASP.NET Core özelliklerle tam tümleştirmeye sahiptir.</span><span class="sxs-lookup"><span data-stu-id="7251f-125">Services have full integration with popular ASP.NET Core features such as logging, dependency injection (DI), authentication and authorization.</span></span>
+<span data-ttu-id="5f442-124">gRPC Hizmetleri, ASP.NET Core üzerinde barındırılabilir.</span><span class="sxs-lookup"><span data-stu-id="5f442-124">gRPC services can be hosted on ASP.NET Core.</span></span> <span data-ttu-id="5f442-125">Hizmetler, günlüğe kaydetme, bağımlılık ekleme (dı), kimlik doğrulama ve yetkilendirme gibi popüler ASP.NET Core özelliklerle tam tümleştirmeye sahiptir.</span><span class="sxs-lookup"><span data-stu-id="5f442-125">Services have full integration with popular ASP.NET Core features such as logging, dependency injection (DI), authentication and authorization.</span></span>
 
-<span data-ttu-id="7251f-126">GRPC hizmeti proje şablonu bir başlatıcı hizmeti sağlar:</span><span class="sxs-lookup"><span data-stu-id="7251f-126">The gRPC service project template provides a starter service:</span></span>
+<span data-ttu-id="5f442-126">GRPC hizmeti proje şablonu bir başlatıcı hizmeti sağlar:</span><span class="sxs-lookup"><span data-stu-id="5f442-126">The gRPC service project template provides a starter service:</span></span>
 
 ```csharp
 public class GreeterService : Greeter.GreeterBase
@@ -102,7 +104,7 @@ public class GreeterService : Greeter.GreeterBase
 }
 ```
 
-<span data-ttu-id="7251f-127">`GreeterService``GreeterBase`, `Greeter` \* \* . proto\* dosyasındaki hizmetten oluşturulan türden devralır.</span><span class="sxs-lookup"><span data-stu-id="7251f-127">`GreeterService` inherits from the `GreeterBase` type, which is generated from the `Greeter` service in the *\*.proto* file.</span></span> <span data-ttu-id="7251f-128">Hizmet, *Startup.cs*içindeki istemciler için erişilebilir hale getirilir:</span><span class="sxs-lookup"><span data-stu-id="7251f-128">The service is made accessible to clients in *Startup.cs*:</span></span>
+<span data-ttu-id="5f442-127">`GreeterService``GreeterBase`, `Greeter` \* \* . proto\* dosyasındaki hizmetten oluşturulan türden devralır.</span><span class="sxs-lookup"><span data-stu-id="5f442-127">`GreeterService` inherits from the `GreeterBase` type, which is generated from the `Greeter` service in the *\*.proto* file.</span></span> <span data-ttu-id="5f442-128">Hizmet, *Startup.cs*içindeki istemciler için erişilebilir hale getirilir:</span><span class="sxs-lookup"><span data-stu-id="5f442-128">The service is made accessible to clients in *Startup.cs*:</span></span>
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -111,11 +113,11 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-<span data-ttu-id="7251f-129">ASP.NET Core 'de gRPC hizmetleri hakkında daha fazla bilgi edinmek için bkz <xref:grpc/aspnetcore> ..</span><span class="sxs-lookup"><span data-stu-id="7251f-129">To learn more about gRPC services on ASP.NET Core, see <xref:grpc/aspnetcore>.</span></span>
+<span data-ttu-id="5f442-129">ASP.NET Core 'de gRPC hizmetleri hakkında daha fazla bilgi edinmek için bkz <xref:grpc/aspnetcore> ..</span><span class="sxs-lookup"><span data-stu-id="5f442-129">To learn more about gRPC services on ASP.NET Core, see <xref:grpc/aspnetcore>.</span></span>
 
-## <a name="call-grpc-services-with-a-net-client"></a><span data-ttu-id="7251f-130">Bir .NET istemcisiyle gRPC hizmetlerini çağırma</span><span class="sxs-lookup"><span data-stu-id="7251f-130">Call gRPC services with a .NET client</span></span>
+## <a name="call-grpc-services-with-a-net-client"></a><span data-ttu-id="5f442-130">Bir .NET istemcisiyle gRPC hizmetlerini çağırma</span><span class="sxs-lookup"><span data-stu-id="5f442-130">Call gRPC services with a .NET client</span></span>
 
-<span data-ttu-id="7251f-131">gRPC istemcileri [ \* \* . proto\* dosyalarından oluşturulan](xref:grpc/basics#generated-c-assets)somut istemci türleridir.</span><span class="sxs-lookup"><span data-stu-id="7251f-131">gRPC clients are concrete client types that are [generated from *\*.proto* files](xref:grpc/basics#generated-c-assets).</span></span> <span data-ttu-id="7251f-132">Somut gRPC istemcisinde \* \* . proto\* dosyasındaki GRPC hizmetine çeviren yöntemler vardır.</span><span class="sxs-lookup"><span data-stu-id="7251f-132">The concrete gRPC client has methods that translate to the gRPC service in the *\*.proto* file.</span></span>
+<span data-ttu-id="5f442-131">gRPC istemcileri [ \* \* . proto\* dosyalarından oluşturulan](xref:grpc/basics#generated-c-assets)somut istemci türleridir.</span><span class="sxs-lookup"><span data-stu-id="5f442-131">gRPC clients are concrete client types that are [generated from *\*.proto* files](xref:grpc/basics#generated-c-assets).</span></span> <span data-ttu-id="5f442-132">Somut gRPC istemcisinde \* \* . proto\* dosyasındaki GRPC hizmetine çeviren yöntemler vardır.</span><span class="sxs-lookup"><span data-stu-id="5f442-132">The concrete gRPC client has methods that translate to the gRPC service in the *\*.proto* file.</span></span>
 
 ```csharp
 var channel = GrpcChannel.ForAddress("https://localhost:5001");
@@ -127,11 +129,11 @@ var response = await client.SayHelloAsync(
 Console.WriteLine(response.Message);
 ```
 
-<span data-ttu-id="7251f-133">GRPC istemcisi, bir gRPC hizmeti ile uzun süreli bağlantıyı temsil eden bir kanal kullanılarak oluşturulur.</span><span class="sxs-lookup"><span data-stu-id="7251f-133">A gRPC client is created using a channel, which represents a long-lived connection to a gRPC service.</span></span> <span data-ttu-id="7251f-134">Kullanılarak bir kanal oluşturulabilir `GrpcChannel.ForAddress` .</span><span class="sxs-lookup"><span data-stu-id="7251f-134">A channel can be created using `GrpcChannel.ForAddress`.</span></span>
+<span data-ttu-id="5f442-133">GRPC istemcisi, bir gRPC hizmeti ile uzun süreli bağlantıyı temsil eden bir kanal kullanılarak oluşturulur.</span><span class="sxs-lookup"><span data-stu-id="5f442-133">A gRPC client is created using a channel, which represents a long-lived connection to a gRPC service.</span></span> <span data-ttu-id="5f442-134">Kullanılarak bir kanal oluşturulabilir `GrpcChannel.ForAddress` .</span><span class="sxs-lookup"><span data-stu-id="5f442-134">A channel can be created using `GrpcChannel.ForAddress`.</span></span>
 
-<span data-ttu-id="7251f-135">İstemci oluşturma ve farklı hizmet yöntemlerini çağırma hakkında daha fazla bilgi için bkz <xref:grpc/client> ..</span><span class="sxs-lookup"><span data-stu-id="7251f-135">For more information on creating clients, and calling different service methods, see <xref:grpc/client>.</span></span>
+<span data-ttu-id="5f442-135">İstemci oluşturma ve farklı hizmet yöntemlerini çağırma hakkında daha fazla bilgi için bkz <xref:grpc/client> ..</span><span class="sxs-lookup"><span data-stu-id="5f442-135">For more information on creating clients, and calling different service methods, see <xref:grpc/client>.</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="7251f-136">Ek kaynaklar</span><span class="sxs-lookup"><span data-stu-id="7251f-136">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="5f442-136">Ek kaynaklar</span><span class="sxs-lookup"><span data-stu-id="5f442-136">Additional resources</span></span>
 
 * <xref:grpc/basics>
 * <xref:grpc/aspnetcore>
