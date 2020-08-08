@@ -5,6 +5,8 @@ description: Çeşitli ASP.NET Core veri koruma genişletilebilirliği konuları
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,17 +15,17 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/extensibility/index
-ms.openlocfilehash: 5f28e3b23932cf812ef62f6b7a43c083ec20a4d0
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 83b6a9518f6e16c873b83571a069987a2e5c0303
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404242"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88021581"
 ---
-# <a name="aspnet-core-data-protection-extensibility-apis"></a><span data-ttu-id="b0dba-103">ASP.NET Core Data Protection genişletilebilirlik API 'Leri</span><span class="sxs-lookup"><span data-stu-id="b0dba-103">ASP.NET Core Data Protection extensibility APIs</span></span>
+# <a name="aspnet-core-data-protection-extensibility-apis"></a><span data-ttu-id="5c004-103">ASP.NET Core Data Protection genişletilebilirlik API 'Leri</span><span class="sxs-lookup"><span data-stu-id="5c004-103">ASP.NET Core Data Protection extensibility APIs</span></span>
 
-* [<span data-ttu-id="b0dba-104">Çekirdek şifreleme genişletilebilirliği</span><span class="sxs-lookup"><span data-stu-id="b0dba-104">Core cryptography extensibility</span></span>](xref:security/data-protection/extensibility/core-crypto)
+* [<span data-ttu-id="5c004-104">Çekirdek şifreleme genişletilebilirliği</span><span class="sxs-lookup"><span data-stu-id="5c004-104">Core cryptography extensibility</span></span>](xref:security/data-protection/extensibility/core-crypto)
 
-* [<span data-ttu-id="b0dba-105">Anahtar yönetimi genişletilebilirliği</span><span class="sxs-lookup"><span data-stu-id="b0dba-105">Key management extensibility</span></span>](xref:security/data-protection/extensibility/key-management)
+* [<span data-ttu-id="5c004-105">Anahtar yönetimi genişletilebilirliği</span><span class="sxs-lookup"><span data-stu-id="5c004-105">Key management extensibility</span></span>](xref:security/data-protection/extensibility/key-management)
 
-* [<span data-ttu-id="b0dba-106">Çeşitli API'ler</span><span class="sxs-lookup"><span data-stu-id="b0dba-106">Miscellaneous APIs</span></span>](xref:security/data-protection/extensibility/misc-apis)
+* [<span data-ttu-id="5c004-106">Çeşitli API'ler</span><span class="sxs-lookup"><span data-stu-id="5c004-106">Miscellaneous APIs</span></span>](xref:security/data-protection/extensibility/misc-apis)
