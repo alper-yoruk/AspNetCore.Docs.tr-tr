@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/logging
-ms.openlocfilehash: 1f4b18bdea02016fb76b75dd01a8fcbeab9b2bc9
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: c2e8ee24c135b3c2f9b6be5b0e0efa54750c68b2
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402838"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014366"
 ---
-# <a name="aspnet-core-blazor-logging"></a><span data-ttu-id="0e26b-103">BlazorGünlüğe kaydetme ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="0e26b-103">ASP.NET Core Blazor logging</span></span>
+# <a name="aspnet-core-no-locblazor-logging"></a><span data-ttu-id="188b5-103">BlazorGünlüğe kaydetme ASP.NET Core</span><span class="sxs-lookup"><span data-stu-id="188b5-103">ASP.NET Core Blazor logging</span></span>
 
 ## Blazor WebAssembly
 
-<span data-ttu-id="0e26b-104">Uygulamalarda oturum açma Blazor WebAssembly `WebAssemblyHostBuilder.Logging` özelliğini içindeki özelliği kullanarak yapılandırın `Program.Main` :</span><span class="sxs-lookup"><span data-stu-id="0e26b-104">Configure logging in Blazor WebAssembly apps with the `WebAssemblyHostBuilder.Logging` property in `Program.Main`:</span></span>
+<span data-ttu-id="188b5-104">Uygulamalarda oturum açma Blazor WebAssembly `WebAssemblyHostBuilder.Logging` özelliğini içindeki özelliği kullanarak yapılandırın `Program.Main` :</span><span class="sxs-lookup"><span data-stu-id="188b5-104">Configure logging in Blazor WebAssembly apps with the `WebAssemblyHostBuilder.Logging` property in `Program.Main`:</span></span>
 
 ```csharp
 using Microsoft.AspNetCore.Components.WebAssembly.Hosting;
@@ -39,17 +41,17 @@ builder.Logging.SetMinimumLevel(LogLevel.Debug);
 builder.Logging.AddProvider(new CustomLoggingProvider());
 ```
 
-<span data-ttu-id="0e26b-105">`Logging`Özelliği türündedir <xref:Microsoft.Extensions.Logging.ILoggingBuilder> , bu nedenle tüm uzantı yöntemleri <xref:Microsoft.Extensions.Logging.ILoggingBuilder> üzerinde de kullanılabilir `Logging` .</span><span class="sxs-lookup"><span data-stu-id="0e26b-105">The `Logging` property is of type <xref:Microsoft.Extensions.Logging.ILoggingBuilder>, so all of the extension methods available on <xref:Microsoft.Extensions.Logging.ILoggingBuilder> are also available on `Logging`.</span></span>
+<span data-ttu-id="188b5-105">`Logging`Özelliği türündedir <xref:Microsoft.Extensions.Logging.ILoggingBuilder> , bu nedenle tüm uzantı yöntemleri <xref:Microsoft.Extensions.Logging.ILoggingBuilder> üzerinde de kullanılabilir `Logging` .</span><span class="sxs-lookup"><span data-stu-id="188b5-105">The `Logging` property is of type <xref:Microsoft.Extensions.Logging.ILoggingBuilder>, so all of the extension methods available on <xref:Microsoft.Extensions.Logging.ILoggingBuilder> are also available on `Logging`.</span></span>
 
-<span data-ttu-id="0e26b-106">Günlüğe kaydetme yapılandırması, uygulama ayarları dosyalarından yüklenebilir.</span><span class="sxs-lookup"><span data-stu-id="0e26b-106">Logging configuration can be loaded from app settings files.</span></span> <span data-ttu-id="0e26b-107">Daha fazla bilgi için bkz. <xref:blazor/fundamentals/configuration#logging-configuration>.</span><span class="sxs-lookup"><span data-stu-id="0e26b-107">For more information, see <xref:blazor/fundamentals/configuration#logging-configuration>.</span></span>
+<span data-ttu-id="188b5-106">Günlüğe kaydetme yapılandırması, uygulama ayarları dosyalarından yüklenebilir.</span><span class="sxs-lookup"><span data-stu-id="188b5-106">Logging configuration can be loaded from app settings files.</span></span> <span data-ttu-id="188b5-107">Daha fazla bilgi için bkz. <xref:blazor/fundamentals/configuration#logging-configuration>.</span><span class="sxs-lookup"><span data-stu-id="188b5-107">For more information, see <xref:blazor/fundamentals/configuration#logging-configuration>.</span></span>
 
 ## Blazor Server
 
-<span data-ttu-id="0e26b-108">Genel ASP.NET Core günlük Kılavuzu için bkz <xref:fundamentals/logging/index> ..</span><span class="sxs-lookup"><span data-stu-id="0e26b-108">For general ASP.NET Core logging guidance, see <xref:fundamentals/logging/index>.</span></span>
+<span data-ttu-id="188b5-108">Genel ASP.NET Core günlük Kılavuzu için bkz <xref:fundamentals/logging/index> ..</span><span class="sxs-lookup"><span data-stu-id="188b5-108">For general ASP.NET Core logging guidance, see <xref:fundamentals/logging/index>.</span></span>
 
-## <a name="blazor-webassembly-signalr-net-client-logging"></a>Blazor WebAssembly<span data-ttu-id="0e26b-109">SignalR.NET istemci günlüğü</span><span class="sxs-lookup"><span data-stu-id="0e26b-109"> SignalR .NET client logging</span></span>
+## <a name="no-locblazor-webassembly-no-locsignalr-net-client-logging"></a><span data-ttu-id="188b5-109">Blazor WebAssemblySignalR.NET istemci günlüğü</span><span class="sxs-lookup"><span data-stu-id="188b5-109">Blazor WebAssembly SignalR .NET client logging</span></span>
 
-<span data-ttu-id="0e26b-110">Öğesine <xref:Microsoft.Extensions.Logging.ILoggerProvider> `WebAssemblyConsoleLogger` geçirilen günlüğe kaydetme sağlayıcılarına eklemek için bir ekleyin <xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder> .</span><span class="sxs-lookup"><span data-stu-id="0e26b-110">Inject an <xref:Microsoft.Extensions.Logging.ILoggerProvider> to add a `WebAssemblyConsoleLogger` to the logging providers passed to <xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder>.</span></span> <span data-ttu-id="0e26b-111">Geleneksel olarak <xref:Microsoft.Extensions.Logging.Console.ConsoleLogger> , `WebAssemblyConsoleLogger` tarayıcıya özgü günlüğe kaydetme API 'leri (örneğin,) etrafında bir sarmalayıcı olur `console.log` .</span><span class="sxs-lookup"><span data-stu-id="0e26b-111">Unlike a traditional <xref:Microsoft.Extensions.Logging.Console.ConsoleLogger>, `WebAssemblyConsoleLogger` is a wrapper around browser-specific logging APIs (for example, `console.log`).</span></span> <span data-ttu-id="0e26b-112">' Nin kullanımı, `WebAssemblyConsoleLogger` bir tarayıcı bağlamı Içinde mono içinde mümkün olan bir kayıt oluşturur.</span><span class="sxs-lookup"><span data-stu-id="0e26b-112">Use of `WebAssemblyConsoleLogger` makes logging possible within Mono inside a browser context.</span></span>
+<span data-ttu-id="188b5-110">Öğesine <xref:Microsoft.Extensions.Logging.ILoggerProvider> `WebAssemblyConsoleLogger` geçirilen günlüğe kaydetme sağlayıcılarına eklemek için bir ekleyin <xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder> .</span><span class="sxs-lookup"><span data-stu-id="188b5-110">Inject an <xref:Microsoft.Extensions.Logging.ILoggerProvider> to add a `WebAssemblyConsoleLogger` to the logging providers passed to <xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder>.</span></span> <span data-ttu-id="188b5-111">Geleneksel olarak <xref:Microsoft.Extensions.Logging.Console.ConsoleLogger> , `WebAssemblyConsoleLogger` tarayıcıya özgü günlüğe kaydetme API 'leri (örneğin,) etrafında bir sarmalayıcı olur `console.log` .</span><span class="sxs-lookup"><span data-stu-id="188b5-111">Unlike a traditional <xref:Microsoft.Extensions.Logging.Console.ConsoleLogger>, `WebAssemblyConsoleLogger` is a wrapper around browser-specific logging APIs (for example, `console.log`).</span></span> <span data-ttu-id="188b5-112">' Nin kullanımı, `WebAssemblyConsoleLogger` bir tarayıcı bağlamı Içinde mono içinde mümkün olan bir kayıt oluşturur.</span><span class="sxs-lookup"><span data-stu-id="188b5-112">Use of `WebAssemblyConsoleLogger` makes logging possible within Mono inside a browser context.</span></span>
 
 ```csharp
 @using Microsoft.Extensions.Logging
@@ -63,13 +65,13 @@ var connection = new HubConnectionBuilder()
     .Build();
 ```
 
-## <a name="log-in-razor-components"></a><span data-ttu-id="0e26b-113">RazorBileşenlerdeki oturum açma</span><span class="sxs-lookup"><span data-stu-id="0e26b-113">Log in Razor components</span></span>
+## <a name="log-in-no-locrazor-components"></a><span data-ttu-id="188b5-113">RazorBileşenlerdeki oturum açma</span><span class="sxs-lookup"><span data-stu-id="188b5-113">Log in Razor components</span></span>
 
-<span data-ttu-id="0e26b-114">Uygulama başlangıç yapılandırmasına göre günlüğe kaydetme defterleri.</span><span class="sxs-lookup"><span data-stu-id="0e26b-114">Loggers respect app startup configuration.</span></span>
+<span data-ttu-id="188b5-114">Uygulama başlangıç yapılandırmasına göre günlüğe kaydetme defterleri.</span><span class="sxs-lookup"><span data-stu-id="188b5-114">Loggers respect app startup configuration.</span></span>
 
-<span data-ttu-id="0e26b-115">`using`İçin olan yönergesi <xref:Microsoft.Extensions.Logging> , ve gibi API 'Leri için IntelliSense 'i desteklemek için gereklidir <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogWarning%2A> <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogError%2A> .</span><span class="sxs-lookup"><span data-stu-id="0e26b-115">The `using` directive for <xref:Microsoft.Extensions.Logging> is required to support Intellisense completions for APIs, such as <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogWarning%2A> and <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogError%2A>.</span></span>
+<span data-ttu-id="188b5-115">`using`İçin olan yönergesi <xref:Microsoft.Extensions.Logging> , ve gibi API 'Leri için IntelliSense 'i desteklemek için gereklidir <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogWarning%2A> <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogError%2A> .</span><span class="sxs-lookup"><span data-stu-id="188b5-115">The `using` directive for <xref:Microsoft.Extensions.Logging> is required to support Intellisense completions for APIs, such as <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogWarning%2A> and <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogError%2A>.</span></span>
 
-<span data-ttu-id="0e26b-116">Aşağıdaki örnek, bileşenleri içindeki bir günlüğü <xref:Microsoft.Extensions.Logging.ILogger> gösterir Razor :</span><span class="sxs-lookup"><span data-stu-id="0e26b-116">The following example demonstrates logging with an <xref:Microsoft.Extensions.Logging.ILogger> in Razor components:</span></span>
+<span data-ttu-id="188b5-116">Aşağıdaki örnek, bileşenleri içindeki bir günlüğü <xref:Microsoft.Extensions.Logging.ILogger> gösterir Razor :</span><span class="sxs-lookup"><span data-stu-id="188b5-116">The following example demonstrates logging with an <xref:Microsoft.Extensions.Logging.ILogger> in Razor components:</span></span>
 
 ```razor
 @page "/counter"
@@ -94,7 +96,7 @@ var connection = new HubConnectionBuilder()
 }
 ```
 
-<span data-ttu-id="0e26b-117">Aşağıdaki örnek, bileşenleri içindeki bir günlüğü <xref:Microsoft.Extensions.Logging.ILoggerFactory> gösterir Razor :</span><span class="sxs-lookup"><span data-stu-id="0e26b-117">The following example demonstrates logging with an <xref:Microsoft.Extensions.Logging.ILoggerFactory> in Razor components:</span></span>
+<span data-ttu-id="188b5-117">Aşağıdaki örnek, bileşenleri içindeki bir günlüğü <xref:Microsoft.Extensions.Logging.ILoggerFactory> gösterir Razor :</span><span class="sxs-lookup"><span data-stu-id="188b5-117">The following example demonstrates logging with an <xref:Microsoft.Extensions.Logging.ILoggerFactory> in Razor components:</span></span>
 
 ```razor
 @page "/counter"
@@ -120,6 +122,6 @@ var connection = new HubConnectionBuilder()
 }
 ```
 
-## <a name="additional-resources"></a><span data-ttu-id="0e26b-118">Ek kaynaklar</span><span class="sxs-lookup"><span data-stu-id="0e26b-118">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="188b5-118">Ek kaynaklar</span><span class="sxs-lookup"><span data-stu-id="188b5-118">Additional resources</span></span>
 
 * <xref:fundamentals/logging/index>
