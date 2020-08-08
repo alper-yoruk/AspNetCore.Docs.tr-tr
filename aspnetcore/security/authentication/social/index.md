@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/23/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/index
-ms.openlocfilehash: a2c068df85290a59d45432cb168b2c882b59405b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 7dacbb00b40d2741fcbfc78ec7cdf2a67482a8da
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405373"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020476"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>ASP.NET Core Facebook, Google ve dış sağlayıcı kimlik doğrulaması
 
@@ -42,7 +44,7 @@ Sosyal oturumların trafik ve müşteri dönüştürmelerini nasıl ve ne şekil
 
 * Yeni bir proje oluşturma.
 * **ASP.NET Core Web uygulaması** ' nı ve **İleri ' yi**seçin.
-* Bir **Proje adı** girin ve **konumu**onaylayın veya değiştirin. **Oluştur**'u seçin.
+* Bir **Proje adı** girin ve **konumu**onaylayın veya değiştirin. **Oluştur**’u seçin.
 * Açılan kutuda ASP.NET Core en son sürümünü (**ASP.NET Core {X. Y}**) seçin ve ardından **Web uygulaması**' nı seçin.
 * **Kimlik doğrulaması**altında **Değiştir** ' i seçin ve kimlik doğrulamasını **bireysel kullanıcı hesapları**olarak ayarlayın. **Tamam**’ı seçin.
 * **Yeni ASP.NET Core Web uygulaması oluştur** penceresinde **Oluştur**' u seçin.
@@ -111,7 +113,7 @@ Bir parola oluşturmak ve dış sağlayıcılar ile oturum açma işlemi sıras�
 
 ![Web uygulaması yönetme görünümü](index/_static/pass1a.png)
 
-* **Oluştur** ' u seçin
+* **Oluştur**’u seçin
 
 ![Parola sayfanızı ayarlama](index/_static/pass2a.png)
 

@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: cebfc88a8a8313bfd975001b50db6e41b6939aed
-ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
+ms.openlocfilehash: 10741cfc701bf261484b9e6c73a2347e2dd7083d
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87819157"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019848"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3,0 ' deki yenilikler
 
@@ -402,7 +404,7 @@ Daha fazla bilgi için bkz. <xref:security/authentication/windowsauth>.
 
 Web UI şablonları ( Razor Sayfalar, denetleyici ve GÖRÜNÜMLERLE Mvc) aşağıdaki gibi kaldırılmıştır:
 
-* Tanımlama bilgisi onayı Kullanıcı arabirimi artık dahil değildir. ASP.NET Core 3,0 şablon tarafından oluşturulan bir uygulamada tanımlama bilgisi onay özelliğini etkinleştirmek için, bkz <xref:security/gdpr> ..
+* cookieOnay Kullanıcı arabirimi artık dahil değildir. cookieASP.NET Core 3,0 şablon tarafından oluşturulan bir uygulamada izin özelliğini etkinleştirmek için, bkz <xref:security/gdpr> ..
 * Betiklerin ve ilgili statik varlıkların artık CDNs kullanmak yerine yerel dosyalar olarak başvuruluyor. Daha fazla bilgi için, bkz. [betikler ve ilgili statik varlıklar artık geçerli ortama (ASPNET/AspNetCore.Docs #14350) göre CDNs kullanmak yerine yerel dosyalar olarak başvuruluyor](https://github.com/dotnet/AspNetCore.Docs/issues/14350).
 
 Angular şablonu, angular 8 ' i kullanacak şekilde güncelleştirildi.

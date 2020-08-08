@@ -5,6 +5,8 @@ description: Alanların ilgili işlevleri bir grup içinde ayrı bir ad alanı (
 ms.author: riande
 ms.date: 03/21/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/areas
-ms.openlocfilehash: f4471f54e92b940ecb0eabab82f03e0c77a0509f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: af765eebfa8bfd147bd3b721508b5794d15d64a7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406413"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018448"
 ---
 # <a name="areas-in-aspnet-core"></a>ASP.NET Core bölgeler
 
@@ -162,7 +164,7 @@ Aşağıdaki kod varsayılan alan klasörünü ' den ' a `"Areas"` değiştirir 
 
 <a name="arp"></a>
 
-## <a name="areas-with-razor-pages"></a>Sayfaları olan bölgeler Razor
+## <a name="areas-with-no-locrazor-pages"></a>Sayfaları olan bölgeler Razor
 
 Sayfaları olan alanlarda, Razor `Areas/<area name>/Pages` uygulamanın kökünde bir klasör gerekir. Aşağıdaki klasör yapısı [örnek uygulamayla](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/31samples)birlikte kullanılır:
 
@@ -179,7 +181,7 @@ Sayfaları olan alanlarda, Razor `Areas/<area name>/Pages` uygulamanın kökünd
           * Hakkında
           * Dizin oluşturma
 
-### <a name="link-generation-with-razor-pages-and-areas"></a>RazorSayfalar ve alanlarla bağlantı oluşturma
+### <a name="link-generation-with-no-locrazor-pages-and-areas"></a>RazorSayfalar ve alanlarla bağlantı oluşturma
 
 [Örnek indirmenin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas) aşağıdaki kodu, belirtilen alanla birlikte bağlantı oluşturmayı gösterir (örneğin, `asp-area="Products"` ):
 
@@ -222,7 +224,7 @@ Aşağıdaki biçimlendirme */Products/about* Razor sayfasını göstermektedir:
 
 Daha fazla bilgi için bkz. [etiket Yardımcısı kapsamını yönetme](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope) ve [paylaşılan yönergeleri içeri aktarma](xref:mvc/views/layout#importing-shared-directives).
 
-### <a name="shared-layout-for-razor-pages-areas"></a>Sayfalar için paylaşılan Düzen Razor alanı
+### <a name="shared-layout-for-no-locrazor-pages-areas"></a>Sayfalar için paylaşılan Düzen Razor alanı
 
 Uygulamanın tamamında ortak bir düzen paylaşmak için *_ViewStart. cshtml* 'yi uygulama kök klasörüne taşıyın.
 
@@ -349,7 +351,7 @@ Aşağıdaki kod varsayılan alan klasörünü ' den ' a `"Areas"` değiştirir 
 
 <a name="arp"></a>
 
-## <a name="areas-with-razor-pages"></a>Sayfaları olan bölgeler Razor
+## <a name="areas-with-no-locrazor-pages"></a>Sayfaları olan bölgeler Razor
 
 Sayfaları olan alanlarda, Razor `Areas/<area name>/Pages` uygulamanın kökünde bir klasör gerekir. Aşağıdaki klasör yapısı [örnek uygulamayla](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples)birlikte kullanılır:
 
@@ -366,7 +368,7 @@ Sayfaları olan alanlarda, Razor `Areas/<area name>/Pages` uygulamanın kökünd
           * Hakkında
           * Dizin oluşturma
 
-### <a name="link-generation-with-razor-pages-and-areas"></a>RazorSayfalar ve alanlarla bağlantı oluşturma
+### <a name="link-generation-with-no-locrazor-pages-and-areas"></a>RazorSayfalar ve alanlarla bağlantı oluşturma
 
 [Örnek indirmenin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/controllers/areas/samples/RPareas) aşağıdaki kodu, belirtilen alanla birlikte bağlantı oluşturmayı gösterir (örneğin, `asp-area="Products"` ):
 
@@ -411,7 +413,7 @@ Aşağıdaki biçimlendirme */Products/about* Razor sayfasını göstermektedir:
 
 Daha fazla bilgi için bkz. [etiket Yardımcısı kapsamını yönetme](xref:mvc/views/tag-helpers/intro?view=aspnetcore-2.2#managing-tag-helper-scope) ve [paylaşılan yönergeleri içeri aktarma](xref:mvc/views/layout#importing-shared-directives).
 
-### <a name="shared-layout-for-razor-pages-areas"></a>Sayfalar için paylaşılan Düzen Razor alanı
+### <a name="shared-layout-for-no-locrazor-pages-areas"></a>Sayfalar için paylaşılan Düzen Razor alanı
 
 Uygulamanın tamamında ortak bir düzen paylaşmak için *_ViewStart. cshtml* 'yi uygulama kök klasörüne taşıyın.
 

@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/distributed
-ms.openlocfilehash: 56c67178bd5c63f08a812357a4f8e672dd483994
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 64a4b6f606a4f5f8e73ef08f53cbb6e4003245aa
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405399"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020684"
 ---
 # <a name="distributed-caching-in-aspnet-core"></a>ASP.NET Core 'de dağıtılmış önbelleğe alma
 
@@ -42,7 +44,7 @@ Dağıtılmış önbellek yapılandırması uygulamaya özgüdür. Bu makalede S
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 SQL Server dağıtılmış önbellek kullanmak için [Microsoft. Extensions. Caching. SqlServer](https://www.nuget.org/packages/Microsoft.Extensions.Caching.SqlServer) paketine bir paket başvurusu ekleyin.
 
@@ -134,7 +136,7 @@ NCache 'yi yapılandırmak için:
 
 1. [NCache açık kaynak NuGet](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/)'i yükler.
 1. Cache kümesini [Client. ncconf](https://www.alachisoft.com/resources/docs/ncache-oss/admin-guide/client-config.html)' de yapılandırın.
-1. Aşağıdaki kodu öğesine ekleyin `Startup.ConfigureServices` :
+1. Aşağıdaki kodu `Startup.ConfigureServices` dosyasına ekleyin:
 
    ```csharp
    services.AddNCacheDistributedCache(configuration =>    
@@ -212,7 +214,7 @@ Dağıtılmış önbellek yapılandırması uygulamaya özgüdür. Bu makalede S
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 SQL Server dağıtılmış önbellek kullanmak için [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app) 'e başvurun veya [Microsoft. Extensions. Caching. SqlServer](https://www.nuget.org/packages/Microsoft.Extensions.Caching.SqlServer) paketine bir paket başvurusu ekleyin.
 
@@ -304,7 +306,7 @@ NCache 'yi yapılandırmak için:
 
 1. [NCache açık kaynak NuGet](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/)'i yükler.
 1. Cache kümesini [Client. ncconf](https://www.alachisoft.com/resources/docs/ncache-oss/admin-guide/client-config.html)' de yapılandırın.
-1. Aşağıdaki kodu öğesine ekleyin `Startup.ConfigureServices` :
+1. Aşağıdaki kodu `Startup.ConfigureServices` dosyasına ekleyin:
 
    ```csharp
    services.AddNCacheDistributedCache(configuration =>    
@@ -382,7 +384,7 @@ Dağıtılmış önbellek yapılandırması uygulamaya özgüdür. Bu makalede S
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 SQL Server dağıtılmış önbellek kullanmak için [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app) 'e başvurun veya [Microsoft. Extensions. Caching. SqlServer](https://www.nuget.org/packages/Microsoft.Extensions.Caching.SqlServer) paketine bir paket başvurusu ekleyin.
 
@@ -480,7 +482,7 @@ NCache 'yi yapılandırmak için:
 
 1. [NCache açık kaynak NuGet](https://www.nuget.org/packages/Alachisoft.NCache.OpenSource.SDK/)'i yükler.
 1. Cache kümesini [Client. ncconf](https://www.alachisoft.com/resources/docs/ncache-oss/admin-guide/client-config.html)' de yapılandırın.
-1. Aşağıdaki kodu öğesine ekleyin `Startup.ConfigureServices` :
+1. Aşağıdaki kodu `Startup.ConfigureServices` dosyasına ekleyin:
 
    ```csharp
    services.AddNCacheDistributedCache(configuration =>    

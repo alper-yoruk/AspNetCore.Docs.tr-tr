@@ -5,6 +5,8 @@ description: Sayfalardaki eğitim serisinin 3. bölümü Razor .
 ms.author: riande
 ms.date: 08/17/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: 898f3be045755a0ee14c738b6ffc104408ded7b6
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f8942e52b3b438817e3d1041a2c6b568eb662469
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407778"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020398"
 ---
-# <a name="part-3-scaffolded-razor-pages-in-aspnet-core"></a>Bölüm 3, ASP.NET Core yapı iskelesi Razor olan sayfalar
+# <a name="part-3-scaffolded-no-locrazor-pages-in-aspnet-core"></a>Bölüm 3, ASP.NET Core yapı iskelesi Razor olan sayfalar
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -72,7 +74,7 @@ Aşağıdaki HTML Yardımcısı 'nda kullanılan lambda ifadesini inceleyin:
 
 ### <a name="the-layout-page"></a>Düzen sayfası
 
-Menü bağlantılarını (**RazorPagesMovie**, **Home**ve **Gizlilik**) seçin. Her sayfada aynı menü düzeni gösterilir. Menü düzeni *sayfa/paylaşılan/_Layout. cshtml* dosyasında uygulanır. *Pages/Shared/_Layout. cshtml* dosyasını açın.
+Menü bağlantılarını (** Razor pagesmovie**, **Home**ve **Gizlilik**) seçin. Her sayfada aynı menü düzeni gösterilir. Menü düzeni *sayfa/paylaşılan/_Layout. cshtml* dosyasında uygulanır. *Pages/Shared/_Layout. cshtml* dosyasını açın.
 
 [Düzen](xref:mvc/views/layout) ŞABLONLARı, HTML kapsayıcı düzeninin şu şekilde olmasını sağlar:
 
@@ -104,7 +106,7 @@ Satır `@*Markup removed for brevity.*@` bir Razor açıklamadır. HTML yorumlar
 
 ### <a name="update-the-layout"></a>Düzeni güncelleştirme
 
-`<title>` *Pages/Shared/_Layout. cshtml* dosyasındaki öğeyi **RazorPagesMovie**yerine **filmi** görüntüleyecek şekilde değiştirin.
+`<title>` *Pages/Shared/_Layout. cshtml* dosyasındaki öğeyi ** Razor pagesmovie**yerine **filmi** görüntüleyecek şekilde değiştirin.
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie30/Pages/Shared/_Layout.cshtml?range=1-6&highlight=6)]
 
@@ -153,7 +155,7 @@ Herhangi bir model hatası varsa, form, gönderilen tüm form verileriyle birlik
 
 Model hatası yoksa, veriler kaydedilir ve tarayıcı dizin sayfasına yönlendirilir.
 
-### <a name="the-create-razor-page"></a>Oluştur Razor sayfası
+### <a name="the-create-no-locrazor-page"></a>Oluştur Razor sayfası
 
 *Sayfalar/filmler/Create. cshtml* Razor sayfa dosyasını inceleyin:
 
@@ -263,7 +265,7 @@ Aşağıdaki HTML Yardımcısı 'nda kullanılan lambda ifadesini inceleyin:
 
 ### <a name="the-layout-page"></a>Düzen sayfası
 
-Menü bağlantılarını (**RazorPagesMovie**, **Home**ve **Gizlilik**) seçin. Her sayfada aynı menü düzeni gösterilir. Menü düzeni *sayfa/paylaşılan/_Layout. cshtml* dosyasında uygulanır. *Pages/Shared/_Layout. cshtml* dosyasını açın.
+Menü bağlantılarını (** Razor pagesmovie**, **Home**ve **Gizlilik**) seçin. Her sayfada aynı menü düzeni gösterilir. Menü düzeni *sayfa/paylaşılan/_Layout. cshtml* dosyasında uygulanır. *Pages/Shared/_Layout. cshtml* dosyasını açın.
 
 [Düzen](xref:mvc/views/layout) şablonları, sitenizin HTML kapsayıcı yerleşimini tek bir yerde belirtmenize ve sonra sitenizdeki birden çok sayfaya uygulamanıza olanak tanır. Satırı bulun `@RenderBody()` . `RenderBody`, oluşturduğunuz tüm sayfaya özgü görünümlerin, Düzen sayfasında *kaydırılan* bir yer tutucudur. Örneğin, **Gizlilik** bağlantısını seçerseniz, **Sayfa/Gizlilik. cshtml** görünümü yöntemin içinde işlenir `RenderBody` .
 
@@ -290,7 +292,7 @@ changing in in the next step.
 
 ### <a name="update-the-layout"></a>Düzeni güncelleştirme
 
-`<title>` *Pages/Shared/_Layout. cshtml* dosyasındaki öğeyi **RazorPagesMovie**yerine **filmi** görüntüleyecek şekilde değiştirin.
+`<title>` *Pages/Shared/_Layout. cshtml* dosyasındaki öğeyi ** Razor pagesmovie**yerine **filmi** görüntüleyecek şekilde değiştirin.
 
 [!code-cshtml[](razor-pages-start/sample/RazorPagesMovie22/Pages/Shared/_Layout.cshtml?range=1-6&highlight=6)]
 
@@ -339,7 +341,7 @@ Herhangi bir model hatası varsa, form, gönderilen tüm form verileriyle birlik
 
 Model hatası yoksa, veriler kaydedilir ve tarayıcı dizin sayfasına yönlendirilir.
 
-### <a name="the-create-razor-page"></a>Oluştur Razor sayfası
+### <a name="the-create-no-locrazor-page"></a>Oluştur Razor sayfası
 
 *Sayfalar/filmler/Create. cshtml* Razor sayfa dosyasını inceleyin:
 

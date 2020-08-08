@@ -5,6 +5,8 @@ description: RazorSunucu tabanlı kodu Web sayfalarına eklemek için biçimlend
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: ba778c45c9a6f608b50a17a9f8c6d50484dbf07c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4b418c53535965eae6b41f3297b0c6336fb993d5
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85405906"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020593"
 ---
-# <a name="razor-syntax-reference-for-aspnet-core"></a>RazorASP.NET Core için sözdizimi başvurusu
+# <a name="no-locrazor-syntax-reference-for-aspnet-core"></a>RazorASP.NET Core için sözdizimi başvurusu
 
 By [Rick Anderson](https://twitter.com/RickAndMSFT), [Taylor Mullen](https://twitter.com/ntaylormullen)ve [dan vicarel](https://github.com/Rabadash8820)
 
@@ -30,7 +32,7 @@ Razor, Web sayfalarına sunucu tabanlı kod eklemeye yönelik biçimlendirme sö
 
 Varsayılan Razor DIL HTML 'dir. Biçimlendirmeden HTML işleme HTML Razor dosyasından HTML işlenenden farklı değildir. *. Cshtml* Razor dosyalarındaki HTML işaretlemesi sunucu tarafından değiştirilmeden işlenir.
 
-## <a name="razor-syntax"></a>Razorsözdizimi
+## <a name="no-locrazor-syntax"></a>Razorsözdizimi
 
 RazorC# ' i destekler ve `@` HTML 'Den C# ' ye geçiş yapmak için sembolünü kullanır. RazorC# ifadelerini değerlendirir ve bunları HTML çıktısında işler.
 
@@ -54,7 +56,7 @@ HTML öznitelikleri ve e-posta adreslerini içeren içerik `@` sembol bir geçi�
 <a href="mailto:Support@contoso.com">Support@contoso.com</a>
 ```
 
-## <a name="implicit-razor-expressions"></a>Örtük Razor ifadeler
+## <a name="implicit-no-locrazor-expressions"></a>Örtük Razor ifadeler
 
 Örtük Razor ifadeler `@` sonrasında C# kodu ile başlar:
 
@@ -82,7 +84,7 @@ Yukarıdaki kod, aşağıdakilerden birine benzer bir derleyici hatası oluştur
 
 Genel metot çağrılarının [açık bir Razor ifadede](#explicit-razor-expressions) veya [ Razor kod bloğunda](#razor-code-blocks)sarmalanması gerekir.
 
-## <a name="explicit-razor-expressions"></a>Açık Razor ifadeler
+## <a name="explicit-no-locrazor-expressions"></a>Açık Razor ifadeler
 
 Açık Razor ifadeler, `@` dengeli parantez içeren bir sembolden oluşur. Son haftanın saatini işlemek için aşağıdaki Razor biçimlendirme kullanılır:
 
@@ -155,7 +157,7 @@ Kod, aşağıdaki HTML 'yi işler:
 <span>Hello World</span>
 ```
 
-## <a name="razor-code-blocks"></a>Razorkod blokları
+## <a name="no-locrazor-code-blocks"></a>Razorkod blokları
 
 Razorkod blokları ile başlar `@` ve tarafından alınmıştır `{}` . İfadelerin aksine, kod blokları içindeki C# kodu işlenmez. Bir görünümdeki kod blokları ve ifadeler aynı kapsamı paylaşır ve sırasıyla tanımlanmıştır:
 
@@ -397,7 +399,7 @@ Razorkilitleme deyimleriyle kritik bölümleri koruma özelliğine sahiptir:
 }
 ```
 
-### <a name="comments"></a>Yorumlar
+### <a name="comments"></a>Açıklamalar
 
 RazorC# ve HTML açıklamalarını destekler:
 
@@ -495,7 +497,7 @@ RazorBileşenler için `@code` bir diğer addır [`@functions`](#functions) ve �
 
 ::: moniker-end
 
-Örneğin:
+Örnek:
 
 [!code-cshtml[](razor/sample/Views/Home/Contact6.cshtml)]
 
@@ -777,7 +779,7 @@ Bileşen başvuruları ( `@ref` ) bir bileşen örneğine başvurmak için bir y
 
 ::: moniker-end
 
-## <a name="templated-razor-delegates"></a>Şablonlu Razor Temsilciler
+## <a name="templated-no-locrazor-delegates"></a>Şablonlu Razor Temsilciler
 
 RazorŞablonlar, aşağıdaki biçimde bir UI parçacığı tanımlamanızı sağlar:
 
@@ -888,9 +890,9 @@ RazorBir yönteme bağımsız değişken olarak bir satır içi şablon da sağl
 | [`@removeTagHelper`](xref:mvc/views/tag-helpers/intro#remove-razor-directives-label) | Daha önce bir görünümden eklenen etiket yardımcıları kaldırır. |
 | [`@tagHelperPrefix`](xref:mvc/views/tag-helpers/intro#prefix-razor-directives-label) | Etiket Yardımcısı desteğini etkinleştirmek ve etiket Yardımcısı kullanımını açık hale getirmek için bir etiket ön eki belirtir. |
 
-## <a name="razor-reserved-keywords"></a>Razorayrılmış anahtar sözcükler
+## <a name="no-locrazor-reserved-keywords"></a>Razorayrılmış anahtar sözcükler
 
-### <a name="razor-keywords"></a>Razorlerimi
+### <a name="no-locrazor-keywords"></a>Razorlerimi
 
 * `page`(ASP.NET Core 2,1 veya üzeri gerekir)
 * `namespace`
@@ -902,7 +904,7 @@ RazorBir yönteme bağımsız değişken olarak bir satır içi şablon da sağl
 
 Razoranahtar kelimelerden kaçışın `@(Razor Keyword)` (örneğin, `@(functions)` ).
 
-### <a name="c-razor-keywords"></a>C# Razor anahtar sözcükleri
+### <a name="c-no-locrazor-keywords"></a>C# Razor anahtar sözcükleri
 
 * `case`
 * `do`
@@ -921,11 +923,11 @@ Razoranahtar kelimelerden kaçışın `@(Razor Keyword)` (örneğin, `@(function
 
 C# Razor anahtar sözcükleri ile çift kaçış olmalıdır `@(@C# Razor Keyword)` (örneğin, `@(@case)` ). İlki `@` Razor Ayrıştırıcıdan çıkar. İkincisi, `@` C# ayrıştırıcısının çıkar.
 
-### <a name="reserved-keywords-not-used-by-razor"></a>Ayrılmış anahtar sözcükler tarafından kullanılmıyorRazor
+### <a name="reserved-keywords-not-used-by-no-locrazor"></a>Ayrılmış anahtar sözcükler tarafından kullanılmıyorRazor
 
 * `class`
 
-## <a name="inspect-the-razor-c-class-generated-for-a-view"></a>RazorBir görünüm için oluşturulan C# sınıfını inceleyin
+## <a name="inspect-the-no-locrazor-c-class-generated-for-a-view"></a>RazorBir görünüm için oluşturulan C# sınıfını inceleyin
 
 ::: moniker range=">= aspnetcore-2.1"
 

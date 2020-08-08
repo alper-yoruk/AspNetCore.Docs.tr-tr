@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/04/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: 96d24940af6c591e3c02bfa26ed9d7d6ea60d27d
-ms.sourcegitcommit: d00a200bc8347af794b24184da14ad5c8b6bba9a
+ms.openlocfilehash: 11d0c514dd15e787224510991ffb81680c9fc479
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/21/2020
-ms.locfileid: "86869984"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019348"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core filtreler
 
@@ -207,7 +209,7 @@ Temel sınıftan devralan her denetleyici <xref:Microsoft.AspNetCore.Mvc.Control
 
 Örneğin, indirme örneğinde, `MySampleActionFilter` başlangıçta genel olarak uygulanır.
 
-`TestController`Şunları yapın:
+`TestController`:
 
 * `SampleActionFilterAttribute` `[SampleActionFilter]` Eyleme () uygular `FilterTest2` .
 * Geçersiz kılmalar `OnActionExecuting` ve `OnActionExecuted` .
@@ -279,7 +281,7 @@ Filtre işlem hattı, <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingCo
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/ShortCircuitingResourceFilterAttribute.cs?name=snippet)]
 
-Aşağıdaki kodda, `ShortCircuitingResourceFilter` ve `AddHeader` filtresi `SomeResource` Action metodunu hedefleyin. `ShortCircuitingResourceFilter`Şunları yapın:
+Aşağıdaki kodda, `ShortCircuitingResourceFilter` ve `AddHeader` filtresi `SomeResource` Action metodunu hedefleyin. `ShortCircuitingResourceFilter`:
 
 * İlk olarak bir kaynak filtresi olduğundan ve bir `AddHeader` eylem filtresiyle çalışır.
 * Kısa süreli işlem hattının geri kalanı.
@@ -746,7 +748,7 @@ Bu sıra şunları gösterir:
 * Yöntem filtresi, denetleyici filtresi içinde iç içe geçmiş.
 * Denetleyici filtresi, genel filtrenin içinde iç içe geçmiş.
 
-### <a name="controller-and-razor-page-level-filters"></a>Denetleyici ve Razor sayfa düzeyi filtreleri
+### <a name="controller-and-no-locrazor-page-level-filters"></a>Denetleyici ve Razor sayfa düzeyi filtreleri
 
 Temel sınıftan devralan her denetleyici <xref:Microsoft.AspNetCore.Mvc.Controller> [Controller. OnActionExecuting](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuting*), [Controller. onactionexecutionasync](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecutionAsync*)ve [Controller. onactionyürütülmüş](xref:Microsoft.AspNetCore.Mvc.Controller.OnActionExecuted*) 
  `OnActionExecuted` yöntemlerini içerir. Bu Yöntemler:
@@ -758,7 +760,7 @@ Temel sınıftan devralan her denetleyici <xref:Microsoft.AspNetCore.Mvc.Control
 
 Örneğin, indirme örneğinde, `MySampleActionFilter` başlangıçta genel olarak uygulanır.
 
-`TestController`Şunları yapın:
+`TestController`:
 
 * `SampleActionFilterAttribute` `[SampleActionFilter]` Eyleme () uygular `FilterTest2` .
 * Geçersiz kılmalar `OnActionExecuting` ve `OnActionExecuted` .
@@ -811,7 +813,7 @@ Filtre işlem hattı, <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingCo
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/ShortCircuitingResourceFilterAttribute.cs?name=snippet)]
 
-Aşağıdaki kodda, `ShortCircuitingResourceFilter` ve `AddHeader` filtresi `SomeResource` Action metodunu hedefleyin. `ShortCircuitingResourceFilter`Şunları yapın:
+Aşağıdaki kodda, `ShortCircuitingResourceFilter` ve `AddHeader` filtresi `SomeResource` Action metodunu hedefleyin. `ShortCircuitingResourceFilter`:
 
 * İlk olarak bir kaynak filtresi olduğundan ve bir `AddHeader` eylem filtresiyle çalışır.
 * Kısa süreli işlem hattının geri kalanı.

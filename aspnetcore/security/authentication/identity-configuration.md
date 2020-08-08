@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/11/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,16 +16,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-configuration
-ms.openlocfilehash: 5c999b426742cf75b1997f5b40223e2dda112901
-ms.sourcegitcommit: 1b89fc58114a251926abadfd5c69c120f1ba12d8
+ms.openlocfilehash: b7f6eaba1a0e819a077e3d63b4f997e75b8cd317
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/24/2020
-ms.locfileid: "87160292"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020606"
 ---
 # <a name="configure-aspnet-core-no-locidentity"></a>ASP.NET Core YapılandırIdentity
 
-ASP.NET Core Identity parola ilkesi, kilitleme ve tanımlama bilgisi yapılandırması gibi ayarların varsayılan değerlerini kullanır. Bu ayarlar sınıfında geçersiz kılınabilir `Startup` .
+ASP.NET Core Identity parola ilkesi, kilitleme ve yapılandırma gibi ayarların varsayılan değerlerini kullanır cookie . Bu ayarlar sınıfında geçersiz kılınabilir `Startup` .
 
 ## <a name="no-locidentity-options"></a>IdentitySeçenekler
 
@@ -125,13 +127,13 @@ Aşağıdaki kod ayarları ayarlar `SignIn` (varsayılan değerlere göre):
 | [AllowedUserNameCharacters](/dotnet/api/microsoft.aspnetcore.identity.useroptions.allowedusernamecharacters) | Kullanıcı adında izin verilen karakterler. | abcdefghgpqrstuıxyz<br>ABCDEFGHGPQRSTUıXYZ<br>0123456789<br>-.\_@+ |
 | [RequireUniqueEmail](/dotnet/api/microsoft.aspnetcore.identity.useroptions.requireuniqueemail) | Her kullanıcının benzersiz bir e-postasına sahip olmasını gerektirir. | `false` |
 
-### <a name="cookie-settings"></a>Tanımlama bilgisi ayarları
+### <a name="no-loccookie-settings"></a>Cookie ayarları
 
-Uygulamanın tanımlama bilgisini ' de yapılandırın `Startup.ConfigureServices` . Veya çağrıldıktan **sonra** [configureapplicationcookie](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__) çağrılmalıdır `AddIdentity` `AddDefaultIdentity` .
+Uygulamasının cookie içinde yapılandırma `Startup.ConfigureServices` . [Configureapplication Cookie ](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__) , veya çağrıldıktan **sonra** çağrılmalıdır `AddIdentity` `AddDefaultIdentity` .
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_cookie)]
 
-Daha fazla bilgi için bkz. [tanımlama, ıeauthenticationoptions](/dotnet/api/microsoft.aspnetcore.authentication.cookies.cookieauthenticationoptions).
+Daha fazla bilgi için bkz. [ Cookie authenticationoptions](/dotnet/api/microsoft.aspnetcore.authentication.cookies.cookieauthenticationoptions).
 
 ## <a name="password-hasher-options"></a>Parola hasher seçenekleri
 

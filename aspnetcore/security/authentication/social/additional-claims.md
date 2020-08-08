@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/15/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/additional-claims
-ms.openlocfilehash: 291897b06d3d8294bc170996683f36532712ebe4
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f7a440a13891cd51226cad12924cfc65684632ea
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399016"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020190"
 ---
 # <a name="persist-additional-claims-and-tokens-from-external-providers-in-aspnet-core"></a>ASP.NET Core dış sağlayıcılardan ek talepler ve belirteçler kalıcı hale getirme
 
@@ -30,7 +32,7 @@ ASP.NET Core bir uygulama, Facebook, Google, Microsoft ve Twitter gibi dış kim
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/social/additional-claims/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 Uygulamada hangi dış kimlik doğrulama sağlayıcılarının destekileceğine karar verin. Her sağlayıcı için, uygulamayı kaydedin ve bir istemci KIMLIĞI ve istemci parolası alın. Daha fazla bilgi için bkz. <xref:security/authentication/social/index>. Örnek uygulama [Google kimlik doğrulama sağlayıcısını](xref:security/authentication/google-logins)kullanır.
 
@@ -80,19 +82,19 @@ Sağlayıcının seçeneklerinde, <xref:Microsoft.AspNetCore.Authentication.Clai
 
 [!code-csharp[](additional-claims/samples/3.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=35-51)]
 
-Varsayılan olarak, bir kullanıcının talepleri kimlik doğrulama tanımlama bilgisinde depolanır. Kimlik doğrulama tanımlama bilgisi çok büyükse, bunun nedeni uygulamanın başarısız olmasına neden olabilir:
+Varsayılan olarak, bir kullanıcının talepleri kimlik doğrulamasında depolanır cookie . Kimlik doğrulaması cookie çok büyükse uygulamanın başarısız olmasına neden olabilir çünkü:
 
-* Tarayıcı, tanımlama bilgisi üstbilgisinin çok uzun olduğunu algılar.
+* Tarayıcı cookie üstbilginin çok uzun olduğunu algılar.
 * İsteğin genel boyutu çok büyük.
 
 Kullanıcı isteklerini işlemek için büyük miktarda Kullanıcı verisi gerekliyse:
 
 * İstek işleme için Kullanıcı taleplerinin sayısını ve boyutunu yalnızca uygulamanın gerektirdiği şekilde sınırlayın.
-* <xref:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore>Kimlik bilgisi kimlik doğrulaması ara yazılımı için özel ' i kullanarak <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions.SessionStore> kimlik istekleri arasında depolama alanı. Yalnızca istemciye küçük bir oturum tanımlayıcı anahtarı gönderilirken sunucuda büyük miktarlarda kimlik bilgilerini koruyun.
+* <xref:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore>Kimlik doğrulama ara yazılımı için özel ' i kullanarak kimlik Cookie <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions.SessionStore> istekleri arasında depolama alanı. Yalnızca istemciye küçük bir oturum tanımlayıcı anahtarı gönderilirken sunucuda büyük miktarlarda kimlik bilgilerini koruyun.
 
 ## <a name="save-the-access-token"></a>Erişim belirtecini Kaydet
 
-<xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*>başarılı bir yetkilendirmeden sonra erişim ve yenileme belirteçlerinin ' de depolanması gerekip gerekmediğini tanımlar <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> . `SaveTokens`, `false` son kimlik doğrulama tanımlama bilgisinin boyutunu azaltmak için varsayılan olarak olarak ayarlanır.
+<xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*>başarılı bir yetkilendirmeden sonra erişim ve yenileme belirteçlerinin ' de depolanması gerekip gerekmediğini tanımlar <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> . `SaveTokens`, `false` son kimlik doğrulamanın boyutunu azaltmak için varsayılan olarak olarak ayarlanır cookie .
 
 Örnek uygulama, değerini içinde olarak ayarlar `SaveTokens` `true` <xref:Microsoft.AspNetCore.Authentication.Google.GoogleOptions> :
 
@@ -170,7 +172,7 @@ ASP.NET Core bir uygulama, Facebook, Google, Microsoft ve Twitter gibi dış kim
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/social/additional-claims/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 Uygulamada hangi dış kimlik doğrulama sağlayıcılarının destekileceğine karar verin. Her sağlayıcı için, uygulamayı kaydedin ve bir istemci KIMLIĞI ve istemci parolası alın. Daha fazla bilgi için bkz. <xref:security/authentication/social/index>. Örnek uygulama [Google kimlik doğrulama sağlayıcısını](xref:security/authentication/google-logins)kullanır.
 
@@ -220,19 +222,19 @@ Sağlayıcının seçeneklerinde, <xref:Microsoft.AspNetCore.Authentication.Clai
 
 [!code-csharp[](additional-claims/samples/2.x/ClaimsSample/Areas/Identity/Pages/Account/ExternalLogin.cshtml.cs?name=snippet_OnPostConfirmationAsync&highlight=35-51)]
 
-Varsayılan olarak, bir kullanıcının talepleri kimlik doğrulama tanımlama bilgisinde depolanır. Kimlik doğrulama tanımlama bilgisi çok büyükse, bunun nedeni uygulamanın başarısız olmasına neden olabilir:
+Varsayılan olarak, bir kullanıcının talepleri kimlik doğrulamasında depolanır cookie . Kimlik doğrulaması cookie çok büyükse uygulamanın başarısız olmasına neden olabilir çünkü:
 
-* Tarayıcı, tanımlama bilgisi üstbilgisinin çok uzun olduğunu algılar.
+* Tarayıcı cookie üstbilginin çok uzun olduğunu algılar.
 * İsteğin genel boyutu çok büyük.
 
 Kullanıcı isteklerini işlemek için büyük miktarda Kullanıcı verisi gerekliyse:
 
 * İstek işleme için Kullanıcı taleplerinin sayısını ve boyutunu yalnızca uygulamanın gerektirdiği şekilde sınırlayın.
-* <xref:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore>Kimlik bilgisi kimlik doğrulaması ara yazılımı için özel ' i kullanarak <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions.SessionStore> kimlik istekleri arasında depolama alanı. Yalnızca istemciye küçük bir oturum tanımlayıcı anahtarı gönderilirken sunucuda büyük miktarlarda kimlik bilgilerini koruyun.
+* <xref:Microsoft.AspNetCore.Authentication.Cookies.ITicketStore>Kimlik doğrulama ara yazılımı için özel ' i kullanarak kimlik Cookie <xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationOptions.SessionStore> istekleri arasında depolama alanı. Yalnızca istemciye küçük bir oturum tanımlayıcı anahtarı gönderilirken sunucuda büyük miktarlarda kimlik bilgilerini koruyun.
 
 ## <a name="save-the-access-token"></a>Erişim belirtecini Kaydet
 
-<xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*>başarılı bir yetkilendirmeden sonra erişim ve yenileme belirteçlerinin ' de depolanması gerekip gerekmediğini tanımlar <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> . `SaveTokens`, `false` son kimlik doğrulama tanımlama bilgisinin boyutunu azaltmak için varsayılan olarak olarak ayarlanır.
+<xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.SaveTokens*>başarılı bir yetkilendirmeden sonra erişim ve yenileme belirteçlerinin ' de depolanması gerekip gerekmediğini tanımlar <xref:Microsoft.AspNetCore.Http.Authentication.AuthenticationProperties> . `SaveTokens`, `false` son kimlik doğrulamanın boyutunu azaltmak için varsayılan olarak olarak ayarlanır cookie .
 
 Örnek uygulama, değerini içinde olarak ayarlar `SaveTokens` `true` <xref:Microsoft.AspNetCore.Authentication.Google.GoogleOptions> :
 

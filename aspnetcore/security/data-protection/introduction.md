@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/introduction
-ms.openlocfilehash: bf41d5a756c988b239824c19ef7a9d177a93a4a1
-ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
+ms.openlocfilehash: b29711e8e1ef1558731ba58ca2ff14000af19ca2
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/07/2020
-ms.locfileid: "87913819"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019362"
 ---
 # <a name="aspnet-core-data-protection"></a>ASP.NET Core veri koruma
 
@@ -31,7 +33,7 @@ ASP.NET Core veri koruma yığını, &lt; &gt; ASP.NET 1. x-4. x içindeki machi
 
 Genel sorun açıklaması tek bir tümcede succinctly belirtilebilir: daha sonra alımı sağlamak için güvenilir bilgileri kalıcı hale getirmeniz gerekiyor, ancak Kalıcılık mekanizmasına güvenmiyor. Web koşullarında bu, "güvenilmeyen bir istemci aracılığıyla güvenilir duruma gidiş dönüş olması gerekir." şeklinde yazılmış olabilir.
 
-Bunun kurallı örneği, bir kimlik doğrulama tanımlama bilgisidir veya taşıyıcı belirteçtir. Sunucu bir "I ÖÖ ve XYZ izinleri var" belirtecini oluşturur ve istemciye ister. Daha sonraki bir tarihte, istemci bu belirteci sunucuya geri sunacaktır, ancak sunucunun belirteci sahte olmadığı bir tür güvence ihtiyacı vardır. Bu nedenle, ilk gereksinim: özgünlük (deyişle bütünlük, yetkisiz sağlama).
+Bunun kurallı örneği, bir kimlik doğrulama cookie veya taşıyıcı belirteçtir. Sunucu bir "I ÖÖ ve XYZ izinleri var" belirtecini oluşturur ve istemciye ister. Daha sonraki bir tarihte, istemci bu belirteci sunucuya geri sunacaktır, ancak sunucunun belirteci sahte olmadığı bir tür güvence ihtiyacı vardır. Bu nedenle, ilk gereksinim: özgünlük (deyişle bütünlük, yetkisiz sağlama).
 
 Kalıcı duruma sunucu tarafından güvenildiğinden, bu durumun işletim ortamına özgü bilgiler içerebileceğini tahmin ederiz. Bu, bir dosya yolu, izin, bir tanıtıcı veya başka bir dolaylı başvuru biçiminde veya sunucuya özgü başka bir veri parçası olabilir. Bu tür bilgiler genellikle güvenilmeyen bir istemciye açıklanmamalıdır. Bu nedenle, ikinci gereksinim: Gizlilik.
 

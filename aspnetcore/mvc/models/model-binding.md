@@ -6,6 +6,8 @@ ms.assetid: 0be164aa-1d72-4192-bd6b-192c9c301164
 ms.author: riande
 ms.date: 12/18/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/model-binding
-ms.openlocfilehash: b3dcb3a80e8d5150d8513ef558531749d0884568
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 6ec531a04a220f75f5793cb2c7b5232908dbd883
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400160"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019163"
 ---
 # <a name="model-binding-in-aspnet-core"></a>ASP.NET Core 'de model bağlama
 
@@ -155,13 +157,13 @@ Giriş biçimleri yalnızca gövdeyi okur ve bağlama kaynak özniteliklerini an
 
 ### <a name="additional-sources"></a>Ek kaynaklar
 
-Kaynak verileri, model bağlama sistemine *değer sağlayıcılara*göre sağlanır. Diğer kaynaklardan model bağlamaya yönelik verileri alan özel değer sağlayıcıları yazabilir ve kaydedebilirsiniz. Örneğin, tanımlama bilgileri veya oturum durumu verilerini isteyebilirsiniz. Yeni bir kaynaktan veri almak için:
+Kaynak verileri, model bağlama sistemine *değer sağlayıcılara*göre sağlanır. Diğer kaynaklardan model bağlamaya yönelik verileri alan özel değer sağlayıcıları yazabilir ve kaydedebilirsiniz. Örneğin, verilerin cookie veya oturum durumunun olmasını isteyebilirsiniz. Yeni bir kaynaktan veri almak için:
 
 * Uygulayan bir sınıf oluşturun `IValueProvider` .
 * Uygulayan bir sınıf oluşturun `IValueProviderFactory` .
 * Fabrika sınıfını içine kaydedin `Startup.ConfigureServices` .
 
-Örnek uygulama, tanımlama bilgilerinden değerler alan bir [değer sağlayıcısı](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProvider.cs) ve [Factory](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProviderFactory.cs) örneği içerir. Kayıt kodu aşağıda verilmiştir `Startup.ConfigureServices` :
+Örnek uygulama, ' den değerler alan bir [değer sağlayıcısı](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProvider.cs) ve [Factory](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/3.x/ModelBindingSample/CookieValueProviderFactory.cs) örneği içerir cookie . Kayıt kodu aşağıda verilmiştir `Startup.ConfigureServices` :
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Startup.cs?name=snippet_ValueProvider&highlight=4)]
 
@@ -282,13 +284,13 @@ Karmaşık türlerin model bağlamasını denetlemek için birkaç yerleşik öz
 
 ### <a name="bindrequired-attribute"></a>[BindRequired] özniteliği
 
-, Yöntem parametrelerine değil yalnızca model özelliklerine uygulanabilir. Modelin özelliği için bağlama gerçekleşmemişse model bağlamasının model durumu hatası eklemesine neden olur. İşte bir örnek:
+, Yöntem parametrelerine değil yalnızca model özelliklerine uygulanabilir. Modelin özelliği için bağlama gerçekleşmemişse model bağlamasının model durumu hatası eklemesine neden olur. Aşağıda bir örnek verilmiştir:
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/InstructorWithCollection.cs?name=snippet_BindRequired&highlight=8-9)]
 
 ### <a name="bindnever-attribute"></a>[Bindhiç] özniteliği
 
-, Yöntem parametrelerine değil yalnızca model özelliklerine uygulanabilir. Model bağlamasının model özelliğini değiştirmesini engeller. İşte bir örnek:
+, Yöntem parametrelerine değil yalnızca model özelliklerine uygulanabilir. Model bağlamasının model özelliğini değiştirmesini engeller. Aşağıda bir örnek verilmiştir:
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/InstructorWithDictionary.cs?name=snippet_BindNever&highlight=3-4)]
 
@@ -314,7 +316,7 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 ## <a name="collections"></a>Koleksiyonlar
 
-Basit türlerin koleksiyonları olan hedefler için model bağlama, *parameter_name* veya *property_name*ile eşleşmeleri arar. Eşleşme bulunmazsa, ön ek olmadan desteklenen biçimlerden birini arar. Örneğin:
+Basit türlerin koleksiyonları olan hedefler için model bağlama, *parameter_name* veya *property_name*ile eşleşmeleri arar. Eşleşme bulunmazsa, ön ek olmadan desteklenen biçimlerden birini arar. Örnek:
 
 * Bağlanacak parametrenin adlı bir dizi olduğunu varsayalım `selectedCourses` :
 
@@ -359,7 +361,7 @@ Basit türlerin koleksiyonları olan hedefler için model bağlama, *parameter_n
 
 ## <a name="dictionaries"></a>Sözlükler
 
-`Dictionary`Hedefler için, model bağlama *parameter_name* veya *property_name*eşleşme arar. Eşleşme bulunmazsa, ön ek olmadan desteklenen biçimlerden birini arar. Örneğin:
+`Dictionary`Hedefler için, model bağlama *parameter_name* veya *property_name*eşleşme arar. Eşleşme bulunmazsa, ön ek olmadan desteklenen biçimlerden birini arar. Örnek:
 
 * Hedef parametrenin bir adlandırılmış olduğunu varsayalım `Dictionary<int, string>` `selectedCourses` :
 
@@ -488,7 +490,7 @@ Belirtilen türdeki özelliklerde doğrulamayı devre dışı bırakmak için i�
 
 ## <a name="manual-model-binding"></a>El ile model bağlama 
 
-Model bağlama yöntemi kullanılarak el ile çağrılabilir <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> . Yöntemi hem hem de sınıflarında tanımlanmıştır `ControllerBase` `PageModel` . Yöntem aşırı yüklemeleri, kullanılacak öneki ve değer sağlayıcısını belirtmenizi sağlar. Yöntemi `false` model bağlamanın başarısız olup olmadığını döndürür. İşte bir örnek:
+Model bağlama yöntemi kullanılarak el ile çağrılabilir <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> . Yöntemi hem hem de sınıflarında tanımlanmıştır `ControllerBase` `PageModel` . Yöntem aşırı yüklemeleri, kullanılacak öneki ve değer sağlayıcısını belirtmenizi sağlar. Yöntemi `false` model bağlamanın başarısız olup olmadığını döndürür. Aşağıda bir örnek verilmiştir:
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Pages/InstructorsWithCollection/Create.cshtml.cs?name=snippet_TryUpdate&highlight=1-4)]
 
@@ -641,13 +643,13 @@ Giriş biçimleri yalnızca gövdeyi okur ve bağlama kaynak özniteliklerini an
 
 ### <a name="additional-sources"></a>Ek kaynaklar
 
-Kaynak verileri, model bağlama sistemine *değer sağlayıcılara*göre sağlanır. Diğer kaynaklardan model bağlamaya yönelik verileri alan özel değer sağlayıcıları yazabilir ve kaydedebilirsiniz. Örneğin, tanımlama bilgileri veya oturum durumu verilerini isteyebilirsiniz. Yeni bir kaynaktan veri almak için:
+Kaynak verileri, model bağlama sistemine *değer sağlayıcılara*göre sağlanır. Diğer kaynaklardan model bağlamaya yönelik verileri alan özel değer sağlayıcıları yazabilir ve kaydedebilirsiniz. Örneğin, verilerin cookie veya oturum durumunun olmasını isteyebilirsiniz. Yeni bir kaynaktan veri almak için:
 
 * Uygulayan bir sınıf oluşturun `IValueProvider` .
 * Uygulayan bir sınıf oluşturun `IValueProviderFactory` .
 * Fabrika sınıfını içine kaydedin `Startup.ConfigureServices` .
 
-Örnek uygulama, tanımlama bilgilerinden değerler alan bir [değer sağlayıcısı](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProvider.cs) ve [Factory](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProviderFactory.cs) örneği içerir. Kayıt kodu aşağıda verilmiştir `Startup.ConfigureServices` :
+Örnek uygulama, ' den değerler alan bir [değer sağlayıcısı](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProvider.cs) ve [Factory](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/mvc/models/model-binding/samples/2.x/ModelBindingSample/CookieValueProviderFactory.cs) örneği içerir cookie . Kayıt kodu aşağıda verilmiştir `Startup.ConfigureServices` :
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Startup.cs?name=snippet_ValueProvider&highlight=3)]
 
@@ -768,13 +770,13 @@ Karmaşık türlerin model bağlamasını denetlemek için birkaç yerleşik öz
 
 ### <a name="bindrequired-attribute"></a>[BindRequired] özniteliği
 
-, Yöntem parametrelerine değil yalnızca model özelliklerine uygulanabilir. Modelin özelliği için bağlama gerçekleşmemişse model bağlamasının model durumu hatası eklemesine neden olur. İşte bir örnek:
+, Yöntem parametrelerine değil yalnızca model özelliklerine uygulanabilir. Modelin özelliği için bağlama gerçekleşmemişse model bağlamasının model durumu hatası eklemesine neden olur. Aşağıda bir örnek verilmiştir:
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Models/InstructorWithCollection.cs?name=snippet_BindRequired&highlight=8-9)]
 
 ### <a name="bindnever-attribute"></a>[Bindhiç] özniteliği
 
-, Yöntem parametrelerine değil yalnızca model özelliklerine uygulanabilir. Model bağlamasının model özelliğini değiştirmesini engeller. İşte bir örnek:
+, Yöntem parametrelerine değil yalnızca model özelliklerine uygulanabilir. Model bağlamasının model özelliğini değiştirmesini engeller. Aşağıda bir örnek verilmiştir:
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Models/InstructorWithDictionary.cs?name=snippet_BindNever&highlight=3-4)]
 
@@ -800,7 +802,7 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 ## <a name="collections"></a>Koleksiyonlar
 
-Basit türlerin koleksiyonları olan hedefler için model bağlama, *parameter_name* veya *property_name*ile eşleşmeleri arar. Eşleşme bulunmazsa, ön ek olmadan desteklenen biçimlerden birini arar. Örneğin:
+Basit türlerin koleksiyonları olan hedefler için model bağlama, *parameter_name* veya *property_name*ile eşleşmeleri arar. Eşleşme bulunmazsa, ön ek olmadan desteklenen biçimlerden birini arar. Örnek:
 
 * Bağlanacak parametrenin adlı bir dizi olduğunu varsayalım `selectedCourses` :
 
@@ -845,7 +847,7 @@ Basit türlerin koleksiyonları olan hedefler için model bağlama, *parameter_n
 
 ## <a name="dictionaries"></a>Sözlükler
 
-`Dictionary`Hedefler için, model bağlama *parameter_name* veya *property_name*eşleşme arar. Eşleşme bulunmazsa, ön ek olmadan desteklenen biçimlerden birini arar. Örneğin:
+`Dictionary`Hedefler için, model bağlama *parameter_name* veya *property_name*eşleşme arar. Eşleşme bulunmazsa, ön ek olmadan desteklenen biçimlerden birini arar. Örnek:
 
 * Hedef parametrenin bir adlandırılmış olduğunu varsayalım `Dictionary<int, string>` `selectedCourses` :
 
@@ -956,7 +958,7 @@ Belirtilen türdeki özelliklerde doğrulamayı devre dışı bırakmak için i�
 
 ## <a name="manual-model-binding"></a>El ile model bağlama
 
-Model bağlama yöntemi kullanılarak el ile çağrılabilir <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> . Yöntemi hem hem de sınıflarında tanımlanmıştır `ControllerBase` `PageModel` . Yöntem aşırı yüklemeleri, kullanılacak öneki ve değer sağlayıcısını belirtmenizi sağlar. Yöntemi `false` model bağlamanın başarısız olup olmadığını döndürür. İşte bir örnek:
+Model bağlama yöntemi kullanılarak el ile çağrılabilir <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> . Yöntemi hem hem de sınıflarında tanımlanmıştır `ControllerBase` `PageModel` . Yöntem aşırı yüklemeleri, kullanılacak öneki ve değer sağlayıcısını belirtmenizi sağlar. Yöntemi `false` model bağlamanın başarısız olup olmadığını döndürür. Aşağıda bir örnek verilmiştir:
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Pages/InstructorsWithCollection/Create.cshtml.cs?name=snippet_TryUpdate&highlight=1-4)]
 

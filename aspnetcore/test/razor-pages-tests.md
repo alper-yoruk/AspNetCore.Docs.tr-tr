@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/22/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: test/razor-pages-tests
-ms.openlocfilehash: ed048d600b629335b8267b63b3cfd57b525d608e
-ms.sourcegitcommit: c86b4e2955dc1724f2eaa7c97894ad8b3bf763fb
+ms.openlocfilehash: 21810f00548ad9f9c399ec4e453dd914dc186f5d
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/22/2020
-ms.locfileid: "86949101"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018955"
 ---
-# <a name="razor-pages-unit-tests-in-aspnet-core"></a>RazorASP.NET Core birim testleri sayfa testleri
+# <a name="no-locrazor-pages-unit-tests-in-aspnet-core"></a>RazorASP.NET Core birim testleri sayfa testleri
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -43,7 +45,7 @@ Bu konu başlığı altında, Razor uygulamalar ve birim testleri için temel ol
 
 Örnek proje iki uygulamalardan oluşur:
 
-| Uygulama         | Proje klasörü                     | Description |
+| Uygulama         | Proje klasörü                     | Açıklama |
 | ----------- | ---------------------------------- | ----------- |
 | İleti uygulaması | *src/ Razor pagestestsample*         | Kullanıcının ileti eklemesine, bir ileti silmesine, tüm iletileri silmesine ve iletileri çözümlemesine (ileti başına ortalama sözcük sayısını bulur) izin verir. |
 | Test uygulaması    | *testler/ Razor pagestestsample. testler* | İleti uygulamasının DAL ve Dizin sayfa modelini test etmek için kullanılır. |
@@ -72,7 +74,7 @@ EF konusunda, [InMemory Ile Test](/ef/core/miscellaneous/testing/in-memory)&#822
 
 Test uygulaması, *testler/ Razor pagestestsample. Tests* klasörünün içindeki bir konsol uygulamasıdır.
 
-| Test uygulaması klasörü | Description |
+| Test uygulaması klasörü | Açıklama |
 | --------------- | ----------- |
 | *UnitTests*     | <ul><li>*DataAccessLayerTest.cs* , dal için birim testlerini içerir.</li><li>*IndexPageTests.cs* , Dizin sayfası modelinin birim testlerini içerir.</li></ul> |
 | *Yardımcı Programlar*     | Her bir `TestDbContextOptions` dal birim testi için yeni veritabanı bağlamı seçenekleri oluşturmak için kullanılan yöntemi içerir, böylece veritabanı her test için kendi temel koşuluna sıfırlanır. |
@@ -227,7 +229,7 @@ Bu konu başlığı altında, Razor uygulamalar ve birim testleri için temel ol
 
 Örnek proje iki uygulamalardan oluşur:
 
-| Uygulama         | Proje klasörü                     | Description |
+| Uygulama         | Proje klasörü                     | Açıklama |
 | ----------- | ---------------------------------- | ----------- |
 | İleti uygulaması | *src/ Razor pagestestsample*         | Kullanıcının ileti eklemesine, bir ileti silmesine, tüm iletileri silmesine ve iletileri çözümlemesine (ileti başına ortalama sözcük sayısını bulur) izin verir. |
 | Test uygulaması    | *testler/ Razor pagestestsample. testler* | İleti uygulamasının DAL ve Dizin sayfa modelini test etmek için kullanılır. |
@@ -256,7 +258,7 @@ EF konusunda, [InMemory Ile Test](/ef/core/miscellaneous/testing/in-memory)&#822
 
 Test uygulaması, *testler/ Razor pagestestsample. Tests* klasörünün içindeki bir konsol uygulamasıdır.
 
-| Test uygulaması klasörü | Description |
+| Test uygulaması klasörü | Açıklama |
 | --------------- | ----------- |
 | *UnitTests*     | <ul><li>*DataAccessLayerTest.cs* , dal için birim testlerini içerir.</li><li>*IndexPageTests.cs* , Dizin sayfası modelinin birim testlerini içerir.</li></ul> |
 | *Yardımcı Programlar*     | Her bir `TestDbContextOptions` dal birim testi için yeni veritabanı bağlamı seçenekleri oluşturmak için kullanılan yöntemi içerir, böylece veritabanı her test için kendi temel koşuluna sıfırlanır. |

@@ -6,6 +6,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 02/10/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-typescript-webpack
-ms.openlocfilehash: 49d185ce941d5f8e841224e7de3b72b8350a1c47
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 48b59fea5da3872fb29cacd9edbedd14de9e602f
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407908"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019423"
 ---
-# <a name="use-aspnet-core-signalr-with-typescript-and-webpack"></a>SignalRTypeScript ve WebPack ile ASP.NET Core kullanma
+# <a name="use-aspnet-core-no-locsignalr-with-typescript-and-webpack"></a>SignalRTypeScript ve WebPack ile ASP.NET Core kullanma
 
 , [Sébastien Sougnez](https://twitter.com/ssougnez) ve [Scott Ade](https://twitter.com/Scott_Addie) tarafından
 
@@ -40,7 +42,7 @@ Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -63,7 +65,7 @@ Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 Visual Studio 'Yu, *Path* ortam değişkeninde NPM için arama yapmak üzere yapılandırın. Varsayılan olarak, Visual Studio yükleme dizininde bulunan NPM sürümünü kullanır. Visual Studio 'da şu yönergeleri izleyin:
 
-1. Visual Studio’yu başlatın. Başlangıç penceresinde, **kod olmadan devam et**' i seçin.
+1. Visual Studio 'Yu başlatın. Başlangıç penceresinde, **kod olmadan devam et**' i seçin.
 1. **Araçlar** > **Seçenekler** > **Projeler ve çözümler** > **Web paket yönetimi** > **dış Web araçları**' na gidin.
 1. Listeden *$ (yol)* girişini seçin. Yukarı oka tıklayarak girişi listedeki ikinci konuma taşıyın ve **Tamam**' ı seçin.
 
@@ -72,7 +74,7 @@ Visual Studio 'Yu, *Path* ortam değişkeninde NPM için arama yapmak üzere yap
 Visual Studio yapılandırması tamamlanmıştır.
 
 1. **Dosya**  >  **Yeni**  >  **Proje** menü seçeneğini kullanın ve **ASP.NET Core Web uygulaması** şablonunu seçin. **İleri**’yi seçin.
-1. Projeyi *Signalrwebpack*olarak adlandırın ve **Oluştur**' u seçin.
+1. Projeyi * SignalR WebPack*olarak adlandırın ve **Oluştur**' u seçin.
 1. Hedef çerçeve açılır listesinden *.NET Core* ' u seçin ve çerçeve Seçicisi açılır listesinden *ASP.NET Core 3,1* ' ı seçin. **Boş** şablonu seçin ve **Oluştur**' u seçin.
 
 `Microsoft.TypeScript.MSBuild`Paketi projeye ekleyin:
@@ -90,8 +92,8 @@ dotnet new web -o SignalRWebPack
 code -r SignalRWebPack
 ```
 
-* `dotnet new`Komut, bir *Signalrwebpack* dizininde boş bir ASP.NET Core Web uygulaması oluşturur.
-* `code`Komutu, Visual Studio Code geçerli örneğindeki *Signalrwebpack* klasörünü açar.
+* `dotnet new`Komut, bir * SignalR WebPack* dizininde boş bir ASP.NET Core Web uygulaması oluşturur.
+* `code`Komut, Visual Studio Code geçerli örneğindeki * SignalR WebPack* klasörünü açar.
 
 **Tümleşik terminalde**aşağıdaki .NET Core CLI komutunu çalıştırın:
 
@@ -200,11 +202,11 @@ Aşağıdaki adımlar, TypeScript 'in JavaScript 'e dönüştürülmesini ve ist
 
    [!code-csharp[Startup](signalr-typescript-webpack/sample/3.x/Startup.cs?name=snippet_UseSignalR&highlight=3)]
 
-1. İçinde `Startup.ConfigureServices` [Addsignalr](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr#Microsoft_Extensions_DependencyInjection_SignalRDependencyInjectionExtensions_AddSignalR_Microsoft_Extensions_DependencyInjection_IServiceCollection_)öğesini çağırın.
+1. İçinde `Startup.ConfigureServices` , [Ekle SignalR ](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr#Microsoft_Extensions_DependencyInjection_SignalRDependencyInjectionExtensions_AddSignalR_Microsoft_Extensions_DependencyInjection_IServiceCollection_)öğesini çağırın.
 
    [!code-csharp[Startup](signalr-typescript-webpack/sample/3.x/Startup.cs?name=snippet_AddSignalR)]
 
-1. Hub 'ı depolamak için proje kök *Signalrwebpack/* içindeki *hub* adlı yeni bir dizin oluşturun SignalR .
+1. Hub 'ı depolamak için proje kök * SignalR WebPack/* içindeki *hub* adlı yeni bir dizin oluşturun SignalR .
 
 1. Aşağıdaki kodla hub *hub 'ları/ChatHub. cs* oluşturun:
 
@@ -251,7 +253,7 @@ Uygulama Şu anda ileti göndermek için temel bir form görüntülüyor, ancak 
 
     Bu örnekte, TypeScript istemcisi olarak tanımlanan bir ileti gönderir `newMessage` . C# `NewMessage` yöntemi, istemci tarafından gönderilen verileri bekliyor. Istemcilerde [Sendadsync](/dotnet/api/microsoft.aspnetcore.signalr.clientproxyextensions.sendasync) çağrısı yapılır [. tümü](/dotnet/api/microsoft.aspnetcore.signalr.ihubclients-1.all). Alınan iletiler, hub 'a bağlı tüm istemcilere gönderilir.
 
-## <a name="test-the-app"></a>Uygulamayı test edin
+## <a name="test-the-app"></a>Uygulamayı test etme
 
 Uygulamanın aşağıdaki adımlarla çalıştığından emin olun.
 
@@ -297,7 +299,7 @@ Uygulamanın aşağıdaki adımlarla çalıştığından emin olun.
 
 ::: moniker range="< aspnetcore-3.0"
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -328,7 +330,7 @@ Visual Studio 'Yu, *Path* ortam değişkeninde NPM için arama yapmak üzere yap
 Visual Studio yapılandırması tamamlandı. Projeyi oluşturma zamanı.
 
 1. **Dosya** > **Yeni** > **Proje** menü seçeneğini kullanın ve **ASP.NET Core Web uygulaması** şablonunu seçin.
-1. Projeyi *Signalrwebpack*olarak adlandırın ve **Oluştur**' u seçin.
+1. Projeyi * SignalR WebPack*olarak adlandırın ve **Oluştur**' u seçin.
 1. Hedef çerçeve açılır listesinden *.NET Core* ' u seçin ve çerçeve Seçicisi açılır listesinden *ASP.NET Core 2,2* ' ı seçin. **Boş** şablonu seçin ve **Oluştur**' u seçin.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
@@ -339,7 +341,7 @@ Visual Studio yapılandırması tamamlandı. Projeyi oluşturma zamanı.
 dotnet new web -o SignalRWebPack
 ```
 
-.NET Core 'u hedefleyen boş bir ASP.NET Core Web uygulaması, bir *Signalrwebpack* dizininde oluşturulur.
+.NET Core 'u hedefleyen boş bir ASP.NET Core Web uygulaması bir * SignalR WebPack* dizininde oluşturulur.
 
 ---
 
@@ -436,7 +438,7 @@ Aşağıdaki adımlar, TypeScript 'in JavaScript 'e dönüştürülmesini ve ist
 
     Yukarıdaki kod, kullanıcının tam URL 'sini veya Web uygulamasının kök URL 'sini girip girmediğini *index.html* dosyasını bulmasını ve sunmasını sağlar.
 
-1. İçinde [Addsignalr](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr#Microsoft_Extensions_DependencyInjection_SignalRDependencyInjectionExtensions_AddSignalR_Microsoft_Extensions_DependencyInjection_IServiceCollection_) öğesini çağırın `Startup.ConfigureServices` . SignalRHizmetleri projeye ekler.
+1. [Add SignalR ](/dotnet/api/microsoft.extensions.dependencyinjection.signalrdependencyinjectionextensions.addsignalr#Microsoft_Extensions_DependencyInjection_SignalRDependencyInjectionExtensions_AddSignalR_Microsoft_Extensions_DependencyInjection_IServiceCollection_) eklentisini çağırın `Startup.ConfigureServices` . SignalRHizmetleri projeye ekler.
 
     [!code-csharp[Startup](signalr-typescript-webpack/sample/2.x/Startup.cs?name=snippet_AddSignalR)]
 
@@ -488,7 +490,7 @@ Uygulama Şu anda ileti göndermek için basit bir form görüntülüyor. Bunu y
 
     Bu örnekte, TypeScript istemcisi olarak tanımlanan bir ileti gönderir `newMessage` . C# `NewMessage` yöntemi, istemci tarafından gönderilen verileri bekliyor. Istemcilerde [Sendadsync](/dotnet/api/microsoft.aspnetcore.signalr.clientproxyextensions.sendasync) çağrısı yapılır [. tümü](/dotnet/api/microsoft.aspnetcore.signalr.ihubclients-1.all). Alınan iletiler, hub 'a bağlı tüm istemcilere gönderilir.
 
-## <a name="test-the-app"></a>Uygulamayı test edin
+## <a name="test-the-app"></a>Uygulamayı test etme
 
 Uygulamanın aşağıdaki adımlarla çalıştığından emin olun.
 

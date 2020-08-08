@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 04/17/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/formatting
-ms.openlocfilehash: e6b78af3eeb858310eb772fdf0034510c10351c0
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 8aa94bd1f33d1dd8ce8e7f50468ed60b4ccb2515
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400368"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019943"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>ASP.NET Core Web API 'sindeki yanıt verilerini biçimlendirme
 
@@ -143,7 +145,7 @@ services.AddControllers().AddJsonOptions(options =>
 });
 ```
 
-İşlem başına temelinde çıkış serileştirme seçenekleri kullanılarak yapılandırılabilir `JsonResult` . Örneğin:
+İşlem başına temelinde çıkış serileştirme seçenekleri kullanılarak yapılandırılabilir `JsonResult` . Örnek:
 
 ```csharp
 public IActionResult Get()
@@ -182,7 +184,7 @@ services.AddControllers().AddNewtonsoftJson(options =>
 });
 ```
 
-İşlem başına temelinde çıkış serileştirme seçenekleri kullanılarak yapılandırılabilir `JsonResult` . Örneğin:
+İşlem başına temelinde çıkış serileştirme seçenekleri kullanılarak yapılandırılabilir `JsonResult` . Örnek:
 
 ```csharp
 public IActionResult Get()
@@ -238,7 +240,7 @@ Bazı özel durumlar, yerleşik formatlayıcılar kullanılarak uygulanır. Vars
 
 Olmadan `StringOutputFormatter` , YERLEŞIK JSON biçimlendiricisi, `string` dönüş türlerini biçimlendirir. Yerleşik JSON biçimlendiricisi kaldırılırsa ve bir XML biçimlendirici varsa, XML biçimlendirici, `string` dönüş türlerini biçimlendirir. Aksi takdirde, `string` dönüş türleri döndürülür `406 Not Acceptable` .
 
-Olmadan `HttpNoContentOutputFormatter` , null nesneler yapılandırılmış biçimlendirici kullanılarak biçimlendirilir. Örneğin:
+Olmadan `HttpNoContentOutputFormatter` , null nesneler yapılandırılmış biçimlendirici kullanılarak biçimlendirilir. Örnek:
 
 * JSON biçimlendiricisi, gövdesi olan bir yanıt döndürür `null` .
 * XML biçimlendiricisi özniteliği ayarlanmış bir boş XML öğesi döndürüyor `xsi:nil="true"` .
@@ -250,7 +252,7 @@ Olmadan `HttpNoContentOutputFormatter` , null nesneler yapılandırılmış biç
 * Sorgu dizesinde veya yolun bir bölümünde.
 * . Xml veya. JSON gibi formata özgü bir dosya uzantısı kullanarak.
 
-İstek yolundan eşleme, API 'nin kullandığı rotada belirtilmelidir. Örneğin:
+İstek yolundan eşleme, API 'nin kullandığı rotada belirtilmelidir. Örnek:
 
 [!code-csharp[](./formatting/sample/Controllers/ProductsController.cs?name=snippet)]
 

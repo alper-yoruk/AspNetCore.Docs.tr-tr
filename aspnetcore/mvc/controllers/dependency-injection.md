@@ -5,6 +5,8 @@ description: ASP.NET Core MVC denetleyicilerinin bağımlılıklarını açıkç
 ms.author: riande
 ms.date: 02/24/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/dependency-injection
-ms.openlocfilehash: bae31e38c3b4146ec5e4b7a398a2e0fa290fd34c
-ms.sourcegitcommit: 99c784a873b62fbd97a73c5c07f4fe7a7f5db638
+ms.openlocfilehash: aabb7f893fd9650e2e901dcfdfe845faba391435
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/27/2020
-ms.locfileid: "85503545"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019182"
 ---
 # <a name="dependency-injection-into-controllers-in-aspnet-core"></a>ASP.NET Core denetleyicilere bağımlılık ekleme
 
@@ -62,7 +64,7 @@ Uygulamayı çalıştırın ve zamana göre bir ileti görüntülenir.
 
 Bir denetleyici içinden uygulama veya yapılandırma ayarlarına erişmek ortak bir modeldir. ' Da açıklanan *Seçenekler deseninin* <xref:fundamentals/configuration/options> ayarları yönetmek için tercih edilen yaklaşım vardır. Genellikle, <xref:Microsoft.Extensions.Configuration.IConfiguration> bir denetleyiciye doğrudan eklemeyin.
 
-Seçenekleri temsil eden bir sınıf oluşturun. Örneğin:
+Seçenekleri temsil eden bir sınıf oluşturun. Örnek:
 
 [!code-csharp[](dependency-injection/3.1sample/ControllerDI/Models/SampleWebSettings.cs?name=snippet)]
 
@@ -126,7 +128,7 @@ Uygulamayı çalıştırın ve zamana göre bir ileti görüntülenir.
 
 Bir denetleyici içinden uygulama veya yapılandırma ayarlarına erişmek ortak bir modeldir. ' Da açıklanan *Seçenekler deseninin* <xref:fundamentals/configuration/options> ayarları yönetmek için tercih edilen yaklaşım vardır. Genellikle, <xref:Microsoft.Extensions.Configuration.IConfiguration> bir denetleyiciye doğrudan eklemeyin.
 
-Seçenekleri temsil eden bir sınıf oluşturun. Örneğin:
+Seçenekleri temsil eden bir sınıf oluşturun. Örnek:
 
 [!code-csharp[](dependency-injection/sample/ControllerDI/Models/SampleWebSettings.cs?name=snippet)]
 

@@ -5,6 +5,8 @@ description: ASP.NET Core 1,1 ' deki yeni özellikler hakkında bilgi edinin.
 ms.author: riande
 ms.date: 12/18/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-1.1
-ms.openlocfilehash: ea9605c60e05f2a9cea962aa744850e07ef4d2f5
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 9b3e0a368fdcd9e1044cfe6bf6a13ca11d3039cc
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403670"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88020671"
 ---
 # <a name="whats-new-in-aspnet-core-11"></a>ASP.NET Core 1,1 ' deki yenilikler
 
@@ -28,7 +30,7 @@ ASP.NET Core 1,1 aşağıdaki yeni özellikleri içerir:
 - [Yanıt önbelleğe alma ara yazılımı](xref:performance/caching/middleware)
 - [Bileşenleri etiket yardımcıları olarak görüntüle](xref:mvc/views/view-components#invoking-a-view-component-as-a-tag-helper)
 - [MVC filtreleri olarak ara yazılım](xref:mvc/controllers/filters#using-middleware-in-the-filter-pipeline)
-- [Tanımlama bilgisi tabanlı TempData sağlayıcısı](xref:fundamentals/app-state#tempdata)
+- [Cookietabanlı TempData sağlayıcısı](xref:fundamentals/app-state#tempdata)
 - [Azure App Service günlük sağlayıcısı](xref:fundamentals/logging/index#azure-app-service-provider)
 - [Azure Key Vault yapılandırma sağlayıcısı](xref:security/key-vault-configuration)
 - [Azure ve Redsıs depolama veri koruma anahtarı depoları](xref:security/data-protection/implementation/key-storage-providers)

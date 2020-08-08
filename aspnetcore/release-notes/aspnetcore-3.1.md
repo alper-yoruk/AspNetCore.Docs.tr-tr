@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/12/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,22 +16,22 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-3.1
-ms.openlocfilehash: 92804d168381526100ddb8a368f71d201bd4cad9
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 68373c39461be896a52627e21577fdda89cbb661
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407674"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019598"
 ---
 # <a name="whats-new-in-aspnet-core-31"></a>ASP.NET Core 3,1 ' deki yenilikler
 
 Bu makalede, ASP.NET Core 3,1 ' deki en önemli değişiklikler ilgili belgelerin bağlantılarıyla vurgulanır.
 
-## <a name="partial-class-support-for-razor-components"></a>Bileşenler için kısmi sınıf desteği Razor
+## <a name="partial-class-support-for-no-locrazor-components"></a>Bileşenler için kısmi sınıf desteği Razor
 
 Razorbileşenler artık kısmi sınıflar olarak oluşturulmuştur. Bir bileşenin kodu, Razor tek bir dosyada bileşen için tüm kodu tanımlamak yerine kısmi bir sınıf olarak tanımlanmış bir arka plan kod dosyası kullanılarak yazılabilir. Daha fazla bilgi için bkz. [kısmi sınıf desteği](xref:blazor/components/index#partial-class-support).
 
-## <a name="blazor-component-tag-helper-and-pass-parameters-to-top-level-components"></a>BlazorBileşen etiketi Yardımcısı ve parametreleri en üst düzey bileşenlere geçir
+## <a name="no-locblazor-component-tag-helper-and-pass-parameters-to-top-level-components"></a>BlazorBileşen etiketi Yardımcısı ve parametreleri en üst düzey bileşenlere geçir
 
 BlazorASP.NET Core 3,0 ' de, BILEŞENLER HTML Yardımcısı () kullanılarak sayfalar ve görünümler halinde işlenmiştir `Html.RenderComponentAsync` . ASP.NET Core 3,1 ' de, yeni bileşen etiketi Yardımcısı ile bir sayfadan veya görünümden bir bileşeni işleme:
 
@@ -56,11 +58,11 @@ Daha fazla bilgi için bkz. [bileşenleri Razor Sayfalar ve MVC uygulamaları il
 
 [!code-csharp[](sample/Program.cs?name=snippet)]
 
-## <a name="breaking-changes-for-samesite-cookies"></a>SameSite tanımlama bilgilerine yönelik son değişiklikler
+## <a name="breaking-changes-for-samesite-no-loccookies"></a>SameSite s için son değişiklikler cookie
 
-SameSite tanımlama bilgilerinin davranışı yaklaşan tarayıcı değişikliklerini yansıtacak şekilde değiştirilmiştir. Bu, AzureAd, Openıdconnect veya WsFederation gibi kimlik doğrulama senaryolarını etkileyebilir. Daha fazla bilgi için bkz. <xref:security/samesite>.
+SameSite s 'nin davranışı cookie yaklaşan tarayıcı değişikliklerini yansıtacak şekilde değiştirilmiştir. Bu, AzureAd, Openıdconnect veya WsFederation gibi kimlik doğrulama senaryolarını etkileyebilir. Daha fazla bilgi için bkz. <xref:security/samesite>.
 
-## <a name="prevent-default-actions-for-events-in-blazor-apps"></a>Uygulamalardaki olaylar için varsayılan eylemleri engelleme Blazor
+## <a name="prevent-default-actions-for-events-in-no-locblazor-apps"></a>Uygulamalardaki olaylar için varsayılan eylemleri engelleme Blazor
 
 `@on{EVENT}:preventDefault`Bir olayın varsayılan eylemini engellemek için Directive özniteliğini kullanın. Aşağıdaki örnekte, metin kutusunda anahtarın karakterini görüntülemenin varsayılan eylemi engellenir:
 
@@ -70,7 +72,7 @@ SameSite tanımlama bilgilerinin davranışı yaklaşan tarayıcı değişiklikl
 
 Daha fazla bilgi için bkz. [varsayılan eylemleri engelleme](xref:blazor/components/event-handling#prevent-default-actions).
 
-## <a name="stop-event-propagation-in-blazor-apps"></a>Uygulamalarda olay yaymayı Durdur Blazor
+## <a name="stop-event-propagation-in-no-locblazor-apps"></a>Uygulamalarda olay yaymayı Durdur Blazor
 
 `@on{EVENT}:stopPropagation`Olay yaymayı durdurmak için Directive özniteliğini kullanın. Aşağıdaki örnekte, onay kutusunun seçilmesi alt öğeden `<div>` üst öğeye yayılmalarını önler `<div>` :
 
@@ -90,7 +92,7 @@ Daha fazla bilgi için bkz. [varsayılan eylemleri engelleme](xref:blazor/compon
 
 Daha fazla bilgi için bkz. [olay yaymayı durdurma](xref:blazor/components/event-handling#stop-event-propagation).
 
-## <a name="detailed-errors-during-blazor-app-development"></a>Uygulama geliştirme sırasında ayrıntılı hatalar Blazor
+## <a name="detailed-errors-during-no-locblazor-app-development"></a>Uygulama geliştirme sırasında ayrıntılı hatalar Blazor
 
 BlazorGeliştirme sırasında bir uygulama düzgün çalışmadığı zaman, uygulamanın ayrıntılı hata bilgilerini alma sorunu gidermeye ve soruna yardımcı olur. Bir hata oluştuğunda, Blazor uygulamalar ekranın alt kısmında altın bir çubuk görüntüler:
 

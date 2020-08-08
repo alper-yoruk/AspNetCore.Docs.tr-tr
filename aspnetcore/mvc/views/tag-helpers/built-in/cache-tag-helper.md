@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/10/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/cache-tag-helper
-ms.openlocfilehash: 65d8bbcdaed76a308b924ba024219e8f520bb585
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 7d2ff774b7654993e2cd9b126db252f81a3032d3
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399289"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018773"
 ---
 # <a name="cache-tag-helper-in-aspnet-core-mvc"></a>ASP.NET Core MVC 'de önbellek etiketi Yardımcısı
 
@@ -163,15 +165,15 @@ routes.MapRoute(
 </cache>
 ```
 
-### <a name="vary-by-cookie"></a>tanımlama bilgisine göre farklılık
+### <a name="vary-by-no-loccookie"></a>değişiklik ölçütü-cookie
 
 | Öznitelik türü | Örnekler                                                                         |
 | -------------- | -------------------------------------------------------------------------------- |
 | Dize         | `.AspNetCore.Identity.Application`, `.AspNetCore.Identity.Application,HairColor` |
 
-`vary-by-cookie`tanımlama bilgisi değerleri değiştiğinde önbellek yenilemeyi tetikleyen tanımlama bilgisi adlarının virgülle ayrılmış listesini kabul eder.
+`vary-by-cookie`cookiedeğerler değiştiğinde önbellek yenilemeyi tetikleyen adların virgülle ayrılmış bir listesini kabul eder cookie .
 
-Aşağıdaki örnek, ASP.NET Core ilişkili tanımlama bilgisini izler Identity . Bir kullanıcının kimliği doğrulandığında, Identity tanımlama bilgisindeki bir değişiklik önbellek yenilemeyi tetikler:
+Aşağıdaki örnek ASP.NET Core ilişkili ' i izler cookie Identity . Bir kullanıcının kimliği doğrulandığında, içindeki bir değişiklik Identity cookie bir önbellek yenilemesi tetikler:
 
 ```cshtml
 <cache vary-by-cookie=".AspNetCore.Identity.Application">
@@ -195,7 +197,7 @@ Aşağıdaki örnek, bir önbellek yenilemeyi tetiklemek için geçerli oturum a
 </cache>
 ```
 
-Bu özniteliğin kullanılması, oturum açma ve oturum kapatma döngüsüyle önbellekteki içerikleri saklar. Değer olarak ayarlandığında `true` , bir kimlik doğrulama çevrimi kimliği doğrulanmış kullanıcı için önbelleği geçersiz kılar. Bir kullanıcının kimliği doğrulandığında yeni bir benzersiz tanımlama bilgisi değeri oluşturulduğundan önbellek geçersiz kılındı. Bir tanımlama bilgisi yoksa veya tanımlama bilgisinin süresi dolduğunda önbellek, anonim durum için korunur. Kullanıcının kimliği **doğrulanmıyorsa** , önbellek korunur.
+Bu özniteliğin kullanılması, oturum açma ve oturum kapatma döngüsüyle önbellekteki içerikleri saklar. Değer olarak ayarlandığında `true` , bir kimlik doğrulama çevrimi kimliği doğrulanmış kullanıcı için önbelleği geçersiz kılar. cookieBir kullanıcının kimliği doğrulandığında yeni bir benzersiz değer oluşturulduğundan önbellek geçersiz kılındı. No yoksa cookie veya süresi dolduğunda önbellek, anonim durum için korunur cookie . Kullanıcının kimliği **doğrulanmıyorsa** , önbellek korunur.
 
 ### <a name="vary-by"></a>değişiklik ölçütü-
 

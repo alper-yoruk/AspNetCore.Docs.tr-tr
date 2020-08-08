@@ -6,6 +6,8 @@ ms.author: riande
 ms.date: 01/25/2020
 ms.custom: mvc, seodec18
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/ui-class
-ms.openlocfilehash: 1d37ebaa913a2815b79b16875049bbf91f9fb941
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 042ef8dcc7135e0c60baec972d405380d85a6a10
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404398"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88019228"
 ---
-# <a name="create-reusable-ui-using-the-razor-class-library-project-in-aspnet-core"></a>RazorASP.NET Core içindeki sınıf kitaplığı projesini kullanarak yeniden kullanılabilir kullanıcı arabirimi oluşturma
+# <a name="create-reusable-ui-using-the-no-locrazor-class-library-project-in-aspnet-core"></a>RazorASP.NET Core içindeki sınıf kitaplığı projesini kullanarak yeniden kullanılabilir kullanıcı arabirimi oluşturma
 
 Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -31,20 +33,20 @@ Razorgörünümler, sayfalar, denetleyiciler, sayfa modelleri, [ Razor Bileşenl
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="create-a-class-library-containing-razor-ui"></a>UI içeren bir sınıf kitaplığı oluşturma Razor
+## <a name="create-a-class-library-containing-no-locrazor-ui"></a>UI içeren bir sınıf kitaplığı oluşturma Razor
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Visual Studio 'dan **Yeni bir proje oluştur**' u seçin.
 * ** Razor Sınıf kitaplığı** > **İleri ' yi**seçin.
-* Kitaplığı adlandırın (örneğin, "RazorClassLib"), > **Oluştur**. Oluşturulan görünüm kitaplığıyla bir dosya adı çarpışmasını önlemek için, kitaplık adının bitmediğinden emin olun `.Views` .
-* Görünümleri desteketmeniz gerekiyorsa **destek sayfaları ve görünümleri '** ni seçin. Varsayılan olarak, yalnızca Razor Sayfalar desteklenir. **Oluştur**'u seçin.
+* Kitaplığı adlandırın (örneğin, " Razor ClassLib"), > **Oluştur**. Oluşturulan görünüm kitaplığıyla bir dosya adı çarpışmasını önlemek için, kitaplık adının bitmediğinden emin olun `.Views` .
+* Görünümleri desteketmeniz gerekiyorsa **destek sayfaları ve görünümleri '** ni seçin. Varsayılan olarak, yalnızca Razor Sayfalar desteklenir. **Oluştur**’u seçin.
 
 RazorSınıf kitaplığı (RCL) şablonu Razor Varsayılan olarak varsayılan olarak bileşen geliştirme olur. **Destek sayfaları ve görünümleri** seçeneği sayfaları ve görünümleri destekler.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-Komut satırından komutunu çalıştırın `dotnet new razorclasslib` . Örneğin:
+Komut satırından komutunu çalıştırın `dotnet new razorclasslib` . Örnek:
 
 ```dotnetcli
 dotnet new razorclasslib -o RazorUIClassLib
@@ -73,16 +75,16 @@ Hem Web uygulamasında hem de RCL 'de bir görünüm, kısmi görünüm veya Raz
 
 Örnek indirme içinde *WebApp1/Areas/MyFeature2* öğesini *WebApp1/Areas/myfeature* olarak yeniden adlandırın ve test önceliğini belirtin.
 
-*RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message. cshtml* kısmi görünümünü *WebApp1/Areas/Myfeature/Pages/Shared/_Message. cshtml*'ye kopyalayın. Biçimlendirmeyi yeni konumu belirtecek şekilde güncelleştirin. Uygulamanın kısmi sürümünün kullanılmakta olduğunu doğrulamak için uygulamayı derleyin ve çalıştırın.
+* Razor Uıısslib/Areas/Myfeature/Pages/shared/_Message. cshtml* kısmi görünümünü *WebApp1/Areas/Myfeature/pages/Shared/_Message. cshtml*'ye kopyalayın. Biçimlendirmeyi yeni konumu belirtecek şekilde güncelleştirin. Uygulamanın kısmi sürümünün kullanılmakta olduğunu doğrulamak için uygulamayı derleyin ve çalıştırın.
 
 ### <a name="rcl-pages-layout"></a>RCL sayfaları düzeni
 
 RCL içeriğine, Web uygulamasının *Sayfalar* klasörünün bir parçası olmasına rağmen başvurmak için, aşağıdaki dosya yapısıyla RCL projesini oluşturun:
 
-* *RazorUIClassLib/sayfalar*
-* *RazorUIClassLib/sayfalar/paylaşılan*
+* *RazorUıısslib/sayfalar*
+* *RazorUıısslib/sayfalar/paylaşılan*
 
-*RazorUIClassLib/Pages/Shared* iki kısmi dosya içerir: *_Header. cshtml* ve *_Footer. cshtml*. `<partial>`Etiketler *_Layout. cshtml* dosyasına eklenebilir:
+* Razor Uıısslib/Pages/Shared* iki kısmi dosya içerir: *_Header. cshtml* ve *_Footer. cshtml*. `<partial>`Etiketler *_Layout. cshtml* dosyasına eklenebilir:
 
 ```cshtml
 <body>
@@ -186,7 +188,7 @@ Kullanan uygulama şu şekilde çalışır:
 
 RCL yapılandırıldığında, statik Web varlık konumlarını açıklayan bir bildirim oluşturulur. Tüketen uygulama, başvurulan proje ve paketlerden varlıkları kullanmak için çalışma zamanında bildirimi okur. Bir RCL 'ye yeni bir varlık eklendiğinde, bir uygulamanın yeni varlığa erişebilmesi için bildirim güncellemek üzere RCL 'nin yeniden oluşturulması gerekir.
 
-### <a name="publish"></a>Yayımlama
+### <a name="publish"></a>Yayımla
 
 Uygulama yayımlandığında, tüm başvurulan projeler ve paketlerin yardımcı varlıkları altında yayımlanan uygulamanın *Wwwroot* klasörüne kopyalanır `_content/{LIBRARY NAME}/` .
 
@@ -198,13 +200,13 @@ Razorgörünümler, sayfalar, denetleyiciler, sayfa modelleri, [ Razor Bileşenl
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="create-a-class-library-containing-razor-ui"></a>UI içeren bir sınıf kitaplığı oluşturma Razor
+## <a name="create-a-class-library-containing-no-locrazor-ui"></a>UI içeren bir sınıf kitaplığı oluşturma Razor
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Visual Studio **Dosya** menüsünden **Yeni** > **Proje**' yi seçin.
 * **ASP.NET Core Web uygulaması**' nı seçin.
-* Kitaplığı adlandırın (örneğin, "RazorClassLib") > **Tamam**. Oluşturulan görünüm kitaplığıyla bir dosya adı çarpışmasını önlemek için, kitaplık adının bitmediğinden emin olun `.Views` .
+* Kitaplığı adlandırın (örneğin, " Razor ClassLib") > **Tamam**. Oluşturulan görünüm kitaplığıyla bir dosya adı çarpışmasını önlemek için, kitaplık adının bitmediğinden emin olun `.Views` .
 * **ASP.NET Core 2,1** veya sonraki bir sürümü seçildiğini doğrulayın.
 * ** Razor Sınıf kitaplığı** > **Tamam ' ı**seçin.
 
@@ -214,7 +216,7 @@ RCL aşağıdaki proje dosyasına sahiptir:
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
-Komut satırından komutunu çalıştırın `dotnet new razorclasslib` . Örneğin:
+Komut satırından komutunu çalıştırın `dotnet new razorclasslib` . Örnek:
 
 ```dotnetcli
 dotnet new razorclasslib -o RazorUIClassLib
@@ -235,7 +237,7 @@ RCL 'ye şu şekilde başvurulabilir:
 * NuGet paketi. Bkz. [NuGet paketleri oluşturma](/nuget/create-packages/creating-a-package) ve [DotNet paket ekleme](/dotnet/core/tools/dotnet-add-package) ve [bir NuGet paketi oluşturma ve yayımlama](/nuget/quickstart/create-and-publish-a-package-using-visual-studio).
 * *{ProjectName}. csproj*. Bkz. [DotNet-başvuru Ekle](/dotnet/core/tools/dotnet-add-reference).
 
-## <a name="walkthrough-create-an-rcl-project-and-use-from-a-razor-pages-project"></a>İzlenecek yol: bir RCL projesi oluşturma ve bir Razor Sayfalar projesinden kullanma
+## <a name="walkthrough-create-an-rcl-project-and-use-from-a-no-locrazor-pages-project"></a>İzlenecek yol: bir RCL projesi oluşturma ve bir Razor Sayfalar projesinden kullanma
 
 [Tüm projeyi](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/ui-class/samples) indirebilir ve oluşturmak yerine test edebilirsiniz. Örnek indirme, projenin test olmasını kolaylaştıran ek kod ve bağlantılar içerir. Yükleme örnekleri ve adım adım yönergeler hakkındaki açıklamalarınızla [Bu GitHub sorunuyla](https://github.com/dotnet/AspNetCore.Docs/issues/6098) ilgili geri bildirimde bulunun.
 
@@ -275,10 +277,10 @@ RCL projesini oluşturun:
 
 * Visual Studio **Dosya** menüsünden **Yeni** > **Proje**' yi seçin.
 * **ASP.NET Core Web uygulaması**' nı seçin.
-* Uygulamayı **RazorUIClassLib** > **Tamam**olarak adlandırın.
+* Uygulamayı ** Razor uıısslib** olarak adlandırın > **OK**.
 * **ASP.NET Core 2,1** veya sonraki bir sürümü seçildiğini doğrulayın.
 * ** Razor Sınıf kitaplığı** > **Tamam ' ı**seçin.
-* Razor *RazorUIClassLib/Areas/Myfeature/Pages/Shared/_Message. cshtml*adlı kısmi bir görünüm dosyası ekleyin.
+* Razor * Razor Uıısslib/Areas/Myfeature/Pages/Shared/_Message. cshtml*adlı kısmi bir görünüm dosyası ekleyin.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
@@ -300,17 +302,17 @@ dotnet new viewstart -o RazorUIClassLib/Areas/MyFeature/Pages
 
 ---
 
-### <a name="add-razor-files-and-folders-to-the-project"></a>RazorProjeye dosya ve klasör ekleme
+### <a name="add-no-locrazor-files-and-folders-to-the-project"></a>RazorProjeye dosya ve klasör ekleme
 
-* *RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message. cshtml* içindeki biçimlendirmeyi aşağıdaki kodla değiştirin:
+* * Razor Uıısslib/Areas/Myfeature/Pages/Shared/_Message. cshtml* içindeki biçimlendirmeyi aşağıdaki kodla değiştirin:
 
   [!code-cshtml[](ui-class/samples/cli/RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message.cshtml)]
 
-* *RazorUIClassLib/Areas/MyFeature/Pages/Sayfa1. cshtml* içindeki biçimlendirmeyi aşağıdaki kodla değiştirin:
+* * Razor Uıısslib/Areas/Myfeature/Pages/Sayfa1. cshtml* içindeki biçimlendirmeyi aşağıdaki kodla değiştirin:
 
   [!code-cshtml[](ui-class/samples/cli/RazorUIClassLib/Areas/MyFeature/Pages/Page1.cshtml)]
 
-  `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`kısmi görünümü kullanmak için gerekir ( `<partial name="_Message" />` ). `@addTagHelper`Yönergesini eklemek yerine bir *_ViewImports. cshtml* dosyası ekleyebilirsiniz. Örneğin:
+  `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`kısmi görünümü kullanmak için gerekir ( `<partial name="_Message" />` ). `@addTagHelper`Yönergesini eklemek yerine bir *_ViewImports. cshtml* dosyası ekleyebilirsiniz. Örnek:
 
   ```dotnetcli
   dotnet new viewimports -o RazorUIClassLib/Areas/MyFeature/Pages
@@ -324,9 +326,9 @@ dotnet new viewstart -o RazorUIClassLib/Areas/MyFeature/Pages
   dotnet build RazorUIClassLib
   ```
 
-Derleme çıktısı *RazorUIClassLib.dll* ve *RazorUIClassLib.Views.dll*içerir. *RazorUIClassLib.Views.dll* derlenen içeriği içerir Razor .
+Derleme çıktısı * RazorUIClassLib.dll* ve * RazorUIClassLib.Views.dll*içerir. * RazorUIClassLib.Views.dll* derlenen içeriği içerir Razor .
 
-### <a name="use-the-razor-ui-library-from-a-razor-pages-project"></a>RazorBir sayfalar projesinden UI kitaplığını kullanma Razor
+### <a name="use-the-no-locrazor-ui-library-from-a-no-locrazor-pages-project"></a>RazorBir sayfalar projesinden UI kitaplığını kullanma Razor
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -340,9 +342,9 @@ RazorSayfalar Web uygulaması oluşturma:
 
 * **Çözüm Gezgini**, **WebApp1** ' ye sağ tıklayın ve **Başlangıç projesi olarak ayarla**' yı seçin.
 * **Çözüm Gezgini**, **WebApp1** ' ye sağ tıklayın ve **yapı bağımlılıkları** > **Proje bağımlılıkları**' nı seçin.
-* **WebApp1**'in bağımlılığı olarak **RazorUIClassLib** denetleyin.
+* ** Razor Uıısslib** öğesini **WebApp1**bağımlılığı olarak denetleyin.
 * **Çözüm Gezgini**, **WebApp1** ' a sağ tıklayın ve başvuru **Ekle** ' yi seçin > **Reference**.
-* **Başvuru Yöneticisi** iletişim kutusunda **RazorUIClassLib** > **Tamam**' ı işaretleyin.
+* **Başvuru Yöneticisi** iletişim kutusunda ** Razor uıısslib** Tamam ' ı işaretleyin > **OK**.
 
 Uygulamayı çalıştırın.
 
@@ -377,16 +379,16 @@ Hem Web uygulamasında hem de RCL 'de bir görünüm, kısmi görünüm veya Raz
 
 Örnek indirme içinde *WebApp1/Areas/MyFeature2* öğesini *WebApp1/Areas/myfeature* olarak yeniden adlandırın ve test önceliğini belirtin.
 
-*RazorUIClassLib/Areas/MyFeature/Pages/Shared/_Message. cshtml* kısmi görünümünü *WebApp1/Areas/Myfeature/Pages/Shared/_Message. cshtml*'ye kopyalayın. Biçimlendirmeyi yeni konumu belirtecek şekilde güncelleştirin. Uygulamanın kısmi sürümünün kullanılmakta olduğunu doğrulamak için uygulamayı derleyin ve çalıştırın.
+* Razor Uıısslib/Areas/Myfeature/Pages/shared/_Message. cshtml* kısmi görünümünü *WebApp1/Areas/Myfeature/pages/Shared/_Message. cshtml*'ye kopyalayın. Biçimlendirmeyi yeni konumu belirtecek şekilde güncelleştirin. Uygulamanın kısmi sürümünün kullanılmakta olduğunu doğrulamak için uygulamayı derleyin ve çalıştırın.
 
 ### <a name="rcl-pages-layout"></a>RCL sayfaları düzeni
 
 RCL içeriğine, Web uygulamasının *Sayfalar* klasörünün bir parçası olmasına rağmen başvurmak için, aşağıdaki dosya yapısıyla RCL projesini oluşturun:
 
-* *RazorUIClassLib/sayfalar*
-* *RazorUIClassLib/sayfalar/paylaşılan*
+* *RazorUıısslib/sayfalar*
+* *RazorUıısslib/sayfalar/paylaşılan*
 
-*RazorUIClassLib/Pages/Shared* iki kısmi dosya içerir: *_Header. cshtml* ve *_Footer. cshtml*. `<partial>`Etiketler *_Layout. cshtml* dosyasına eklenebilir:
+* Razor Uıısslib/Pages/Shared* iki kısmi dosya içerir: *_Header. cshtml* ve *_Footer. cshtml*. `<partial>`Etiketler *_Layout. cshtml* dosyasına eklenebilir:
 
 ```cshtml
 <body>

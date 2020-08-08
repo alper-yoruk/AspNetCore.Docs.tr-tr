@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 09/26/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 700370fd11a0df40a45c47e8c378d5bdd0c60009
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: cd6624d107fb19da92a7e58a747cc85e876a6ba4
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212700"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018643"
 ---
-# <a name="razor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>RazorASP.NET Core Entity Framework Core olan sayfalar-öğretici 1/8
+# <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>RazorASP.NET Core Entity Framework Core olan sayfalar-öğretici 1/8
 
 , [Tom Dykstra](https://github.com/tdykstra) ve [Rick Anderson](https://twitter.com/RickAndMSFT) tarafından
 
@@ -223,7 +225,7 @@ Bu bölümde, oluşturmak için ASP.NET Core scafkatlama aracını kullanırsın
   * **Model sınıfı** açılır penceresinde **öğrenci (Contosouniversity. modeller)** öğesini seçin.
   * **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin.
   * *Contosouniversity. modeller. Contosoüniversıtycontext* olan veri bağlamı adını *Contosouniversity. Data. SchoolContext*olarak değiştirin.
-  * **Ekle**’yi seçin.
+  * **Add (Ekle)** seçeneğini belirleyin.
 
 Aşağıdaki paketler otomatik olarak yüklenir:
 
@@ -498,7 +500,7 @@ Kullanıcılar öğrenci, kurs ve eğitmen bilgilerini görüntüleyebilir ve g�
 
 Bu sitenin kullanıcı arabirimi stili yerleşik şablonlar tarafından üretilme kadar yakın. Eğitim odağı, Razor kullanıcı arabiriminden değil, sayfalarla EF Core.
 
-## <a name="create-the-contosouniversity-razor-pages-web-app"></a>Contosoüniversitesi Razor sayfaları Web uygulaması oluşturma
+## <a name="create-the-contosouniversity-no-locrazor-pages-web-app"></a>Contosoüniversitesi Razor sayfaları Web uygulaması oluşturma
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -606,7 +608,7 @@ Bu bölümde öğrenci modeli scafkatdır. Diğer bir deyişle, scafkatlama arac
 * **Model sınıfı** açılır penceresinde **öğrenci (Contosouniversity. modeller)** öğesini seçin.
 * **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin ve üretilen adı **Contosouniversity. modeller. SchoolContext**olarak değiştirin.
 * **Veri bağlamı sınıfı** açılır penceresinde **Contosouniversity. modeller. SchoolContext** öğesini seçin.
-* **Ekle**’yi seçin.
+* **Add (Ekle)** seçeneğini belirleyin.
 
 ![CRUD iletişim kutusu](intro/_static/s1.png)
 
@@ -673,7 +675,7 @@ Aşağıdaki kod güncelleştirilmiş *program.cs* dosyasını gösterir.
 
 ### <a name="test-the-app"></a>Uygulamayı test etme
 
-Uygulamayı çalıştırın ve tanımlama bilgisi ilkesini kabul edin. Bu uygulama, kişisel bilgileri saklar. [Ab genel veri koruma yönetmeliği (GDPR) desteğiyle](xref:security/gdpr)ilgili tanımlama bilgisi İlkesi hakkında bilgi edinebilirsiniz.
+Uygulamayı çalıştırın ve ilkeyi kabul edin cookie . Bu uygulama, kişisel bilgileri saklar. İlke hakkında, cookie [AB Genel VERI koruma YÖNETMELIĞI (GDPR) desteğiyle](xref:security/gdpr)ilgili bilgi edinebilirsiniz.
 
 * **Öğrenciler** bağlantısını seçin ve ardından **Yeni oluştur**.
 * Düzenle, Ayrıntılar ve Sil bağlantılarını test edin.
