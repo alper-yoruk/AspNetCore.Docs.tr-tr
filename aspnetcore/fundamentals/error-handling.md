@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/error-handling
-ms.openlocfilehash: 7bc21901fe1e9ddf604abf3b5bfecdb8a319f12c
-ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
+ms.openlocfilehash: 2e6aabda449a24496916c6ea9fcbd38062b54c04
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/30/2020
-ms.locfileid: "87444099"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017460"
 ---
 # <a name="handle-errors-in-aspnet-core"></a>ASP.NET Core hataları işleme
 
@@ -45,8 +47,8 @@ Sayfa, özel durum ve istek hakkında şu bilgileri içerir:
 
 * Yığın izleme
 * Sorgu dizesi parametreleri (varsa)
-* Tanımlama bilgileri (varsa)
-* Üst bilgiler
+* Cookies (varsa)
+* Üst Bilgiler
 
 [Örnek uygulamada](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples)geliştirici özel durum sayfasını görmek için, ön `DevEnvironment` işlemci yönergesini kullanın ve giriş sayfasında **özel durum Tetikle** ' yi seçin.
 

@@ -6,18 +6,20 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 6/23/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Identity
 - Let's Encrypt
 - Razor
 - SignalR
 uid: fundamentals/static-files
-ms.openlocfilehash: 3f4fc6f7d9d44d76d0504d9666df41571fd0b12c
-ms.sourcegitcommit: d306407dc5bfe6fdfbac482214b3f59371b582bc
+ms.openlocfilehash: 32f794d498533e846343831d2360e98939105fb1
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/04/2020
-ms.locfileid: "85951947"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016692"
 ---
 # <a name="static-files-in-aspnet-core"></a>ASP.NET Core statik dosyalar
 
@@ -283,7 +285,7 @@ Statik dosyalara, [Web köküne](xref:fundamentals/index#web-root)göre bir yol 
   * `images`
   * `js`
 
-*Görüntüler* alt klasöründeki bir dosyaya erışmek için urı biçimi *http:// \<server_address> /images/ \<image_file_name> *olur. Örneğin, *http://localhost:9189/images/banner3.svg* .
+*Görüntüler* alt klasöründeki bir dosyaya erışmek için urı biçimi *http:// \<server_address> /images/ \<image_file_name> *olur. Örneğin, *http://localhost:9189/images/banner3.svg*.
 
 .NET Framework hedefliyorsanız, [Microsoft. AspNetCore. StaticFiles](https://www.nuget.org/packages/Microsoft.AspNetCore.StaticFiles/) paketini projeye ekleyin. .NET Core hedefleniyorsa, [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app) bu paketi içerir.
 

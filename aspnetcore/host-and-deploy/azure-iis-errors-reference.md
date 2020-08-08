@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/azure-iis-errors-reference
-ms.openlocfilehash: 1b0402ceccde0f2410ac29e9c6a251110c81eafa
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 8f21e02409a04b06c06dff5b0a113b0f21d59090
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408142"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015874"
 ---
 # <a name="common-errors-reference-for-azure-app-service-and-iis-with-aspnet-core"></a>ASP.NET Core ile Azure App Service ve IIS için ortak hatalar başvurusu
 
@@ -173,7 +175,7 @@ Sorun Giderme:
 
   Daha fazla bilgi için bkz. [.NET Core barındırma paketini yüklemeye](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle).
 
-* **Uygulama havuzu** > **işlem modelinin** > **Identity** **applicationpokaydentity** olarak ayarlandığından veya özel kimliğin uygulamanın dağıtım klasörüne erişmek için doğru izinlere sahip olduğundan emin olun.
+* **Uygulama havuzu** > **işlem modelinin** > **Identity** **applicationPool Identity ** olarak ayarlandığından veya özel kimliğin uygulamanın dağıtım klasörüne erişmek için doğru izinlere sahip olduğundan emin olun.
 
 * ASP.NET Core barındırma paketini kaldırdıysanız ve barındırma paketinin önceki bir sürümünü yüklediyseniz, *applicationHost.config* dosyası ASP.NET Core modülü için bir bölüm içermez. *% Windir%/system32/inetsrv/config* konumundaki *applicationHost.config* açın ve `<configuration><configSections><sectionGroup name="system.webServer">` bölüm grubunu bulun. Bölüm grubunda ASP.NET Core modülünün bölümü eksikse, Bölüm öğesini ekleyin:
 
@@ -451,7 +453,7 @@ Sorun Giderme:
 
   Daha fazla bilgi için bkz. [.NET Core barındırma paketini yüklemeye](xref:host-and-deploy/iis/index#install-the-net-core-hosting-bundle).
 
-* **Uygulama havuzu** > **işlem modelinin** > **Identity** **applicationpokaydentity** olarak ayarlandığından veya özel kimliğin uygulamanın dağıtım klasörüne erişmek için doğru izinlere sahip olduğundan emin olun.
+* **Uygulama havuzu** > **işlem modelinin** > **Identity** **applicationPool Identity ** olarak ayarlandığından veya özel kimliğin uygulamanın dağıtım klasörüne erişmek için doğru izinlere sahip olduğundan emin olun.
 
 * ASP.NET Core barındırma paketini kaldırdıysanız ve barındırma paketinin önceki bir sürümünü yüklediyseniz, *applicationHost.config* dosyası ASP.NET Core modülü için bir bölüm içermez. *% Windir%/system32/inetsrv/config* konumundaki *applicationHost.config* açın ve `<configuration><configSections><sectionGroup name="system.webServer">` bölüm grubunu bulun. Bölüm grubunda ASP.NET Core modülünün bölümü eksikse, Bölüm öğesini ekleyin:
 

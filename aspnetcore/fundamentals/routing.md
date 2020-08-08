@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/1/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: fcf79966abf7a023773ef892636530278b668c44
-ms.sourcegitcommit: 5a36758cca2861aeb10840093e46d273a6e6e91d
+ms.openlocfilehash: 06c4f215c1c8d970cdfe41e395f39d4215b693f7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87303618"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016862"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core yönlendirme
 
@@ -391,7 +393,7 @@ Bu yöntemlerin aşırı yüklemeleri, içeren bağımsız değişkenleri kabul 
 
 Tarafından sunulan yöntemler, <xref:Microsoft.AspNetCore.Routing.LinkGenerator> herhangi bir adres türü için standart bağlantı oluşturma yeteneklerini destekler. Bağlantı oluşturucuyu kullanmanın en kolay yolu, belirli bir adres türü için işlem gerçekleştiren genişletme yöntemlerine yöneliktir:
 
-| Genişletme yöntemi | Description |
+| Genişletme yöntemi | Açıklama |
 | ---------------- | ----------- |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | Belirtilen değerleri temel alarak mutlak bir yola sahip bir URI oluşturur. |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | Belirtilen değerleri temel alarak mutlak bir URI oluşturur.             |
@@ -571,8 +573,8 @@ Yönlendirmelerde kullanılan normal ifadeler, genellikle karakteriyle başlar `
 | `[a-z]{2}`   | 123abc456 | Yes   | Alt dize eşleşmeleri     |
 | `[a-z]{2}`   | MZ        | Yes   | Eşleşen ifadesi    |
 | `[a-z]{2}`   | MZ        | Yes   | Büyük/küçük harfe duyarlı değil    |
-| `^[a-z]{2}$` | hello     | No    | Bkz. `^` ve `$` üzeri |
-| `^[a-z]{2}$` | 123abc456 | No    | Bkz. `^` ve `$` üzeri |
+| `^[a-z]{2}$` | hello     | Hayır    | Bkz. `^` ve `$` üzeri |
+| `^[a-z]{2}$` | 123abc456 | Hayır    | Bkz. `^` ve `$` üzeri |
 
 Normal ifade sözdizimi hakkında daha fazla bilgi için bkz. [.NET Framework normal ifadeler](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
@@ -586,7 +588,7 @@ Bir parametreyi bilinen olası değerler kümesiyle kısıtlamak için, normal b
 
 ASP.NET Core [kısıtlamalar](https://github.com/dotnet/aspnetcore/tree/master/src/Http/Routing/src/Constraints) klasörü, bir kısıtlama oluşturmaya yönelik iyi örnekler sağlar. Örneğin, [Guidrouteconstraint](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Constraints/GuidRouteConstraint.cs#L18).
 
-Özel bir kullanmak için `IRouteConstraint` yol kısıtlama türü, uygulamanın hizmet kapsayıcısında kayıtlı olması gerekir <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> . `ConstraintMap`, Yol kısıtlama anahtarlarını `IRouteConstraint` Bu kısıtlamaları doğrulayan uygulamalarla eşleyen bir sözlüktür. Bir uygulama `ConstraintMap` , `Startup.ConfigureServices` hizmetlerin bir parçası olarak ' de güncelleştirilir [. AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) çağrısı veya <xref:Microsoft.AspNetCore.Routing.RouteOptions> doğrudan ile yapılandırma `services.Configure<RouteOptions>` . Örneğin:
+Özel bir kullanmak için `IRouteConstraint` yol kısıtlama türü, uygulamanın hizmet kapsayıcısında kayıtlı olması gerekir <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> . `ConstraintMap`, Yol kısıtlama anahtarlarını `IRouteConstraint` Bu kısıtlamaları doğrulayan uygulamalarla eşleyen bir sözlüktür. Bir uygulama `ConstraintMap` , `Startup.ConfigureServices` hizmetlerin bir parçası olarak ' de güncelleştirilir [. AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) çağrısı veya <xref:Microsoft.AspNetCore.Routing.RouteOptions> doğrudan ile yapılandırma `services.Configure<RouteOptions>` . Örnek:
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/StartupConstraint.cs?name=snippet)]
 
@@ -1110,7 +1112,7 @@ Bu yöntemlerin aşırı yüklemesi, içeren bağımsız değişkenleri kabul ed
 
 Tarafından sunulan yöntemler, <xref:Microsoft.AspNetCore.Routing.LinkGenerator> herhangi bir adres türü için standart bağlantı oluşturma yeteneklerini destekler. Bağlantı oluşturucuyu kullanmanın en kolay yolu, belirli bir adres türü için işlem gerçekleştiren genişletme yöntemlerine yöneliktir.
 
-| Genişletme yöntemi   | Description                                                         |
+| Genişletme yöntemi   | Açıklama                                                         |
 | ------------------ | ------------------------------------------------------------------- |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | Belirtilen değerleri temel alarak mutlak bir yola sahip bir URI oluşturur. |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | Belirtilen değerleri temel alarak mutlak bir URI oluşturur.             |
@@ -1492,8 +1494,8 @@ Yönlendirmelerde kullanılan normal ifadeler, genellikle giriş işareti `^` ka
 | `[a-z]{2}`   | 123abc456 | Yes   | Alt dize eşleşmeleri     |
 | `[a-z]{2}`   | MZ        | Yes   | Eşleşen ifadesi    |
 | `[a-z]{2}`   | MZ        | Yes   | Büyük/küçük harfe duyarlı değil    |
-| `^[a-z]{2}$` | hello     | No    | Bkz. `^` ve `$` üzeri |
-| `^[a-z]{2}$` | 123abc456 | No    | Bkz. `^` ve `$` üzeri |
+| `^[a-z]{2}$` | hello     | Hayır    | Bkz. `^` ve `$` üzeri |
+| `^[a-z]{2}$` | 123abc456 | Hayır    | Bkz. `^` ve `$` üzeri |
 
 Normal ifade sözdizimi hakkında daha fazla bilgi için bkz. [.NET Framework normal ifadeler](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
@@ -1503,7 +1505,7 @@ Bir parametreyi bilinen olası değerler kümesiyle kısıtlamak için, normal b
 
 Yerleşik yol kısıtlamalarına ek olarak, arabirimi uygulayarak özel yol kısıtlamaları oluşturulabilir <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> . <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>Arabirim, `Match` `true` kısıtlama karşılanıp Aksi takdirde döndüren tek bir yöntemi içerir `false` .
 
-Özel bir kullanmak için <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> yol kısıtlama türü, uygulamanın uygulamanın hizmet kapsayıcısında kayıtlı olması gerekir <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> . <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>, Yol kısıtlama anahtarlarını <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> Bu kısıtlamaları doğrulayan uygulamalarla eşleyen bir sözlüktür. Bir uygulama <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> , `Startup.ConfigureServices` hizmetlerin bir parçası olarak ' de güncelleştirilir [. AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) çağrısı veya <xref:Microsoft.AspNetCore.Routing.RouteOptions> doğrudan ile yapılandırma `services.Configure<RouteOptions>` . Örneğin:
+Özel bir kullanmak için <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> yol kısıtlama türü, uygulamanın uygulamanın hizmet kapsayıcısında kayıtlı olması gerekir <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> . <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>, Yol kısıtlama anahtarlarını <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> Bu kısıtlamaları doğrulayan uygulamalarla eşleyen bir sözlüktür. Bir uygulama <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> , `Startup.ConfigureServices` hizmetlerin bir parçası olarak ' de güncelleştirilir [. AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) çağrısı veya <xref:Microsoft.AspNetCore.Routing.RouteOptions> doğrudan ile yapılandırma `services.Configure<RouteOptions>` . Örnek:
 
 ```csharp
 services.AddRouting(options =>
@@ -1512,7 +1514,7 @@ services.AddRouting(options =>
 });
 ```
 
-Kısıtlama daha sonra, kısıtlama türü kaydedilirken belirtilen ad kullanılarak yollara her zamanki şekilde uygulanabilir. Örneğin:
+Kısıtlama daha sonra, kısıtlama türü kaydedilirken belirtilen ad kullanılarak yollara her zamanki şekilde uygulanabilir. Örnek:
 
 ```csharp
 [HttpGet("{id:customName}")]
@@ -1936,8 +1938,8 @@ Yönlendirmelerde kullanılan normal ifadeler, genellikle şapka işareti ( `^` 
 | `[a-z]{2}`   | 123abc456 | Yes   | Alt dize eşleşmeleri     |
 | `[a-z]{2}`   | MZ        | Yes   | Eşleşen ifadesi    |
 | `[a-z]{2}`   | MZ        | Yes   | Büyük/küçük harfe duyarlı değil    |
-| `^[a-z]{2}$` | hello     | No    | Bkz. `^` ve `$` üzeri |
-| `^[a-z]{2}$` | 123abc456 | No    | Bkz. `^` ve `$` üzeri |
+| `^[a-z]{2}$` | hello     | Hayır    | Bkz. `^` ve `$` üzeri |
+| `^[a-z]{2}$` | 123abc456 | Hayır    | Bkz. `^` ve `$` üzeri |
 
 Normal ifade sözdizimi hakkında daha fazla bilgi için bkz. [.NET Framework normal ifadeler](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
@@ -1947,7 +1949,7 @@ Bir parametreyi bilinen olası değerler kümesiyle kısıtlamak için, normal b
 
 Yerleşik yol kısıtlamalarına ek olarak, arabirimi uygulayarak özel yol kısıtlamaları oluşturulabilir <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> . <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>Arabirim, `Match` `true` kısıtlama karşılanıp Aksi takdirde döndüren tek bir yöntemi içerir `false` .
 
-Özel bir kullanmak için <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> yol kısıtlama türü, uygulamanın uygulamanın hizmet kapsayıcısında kayıtlı olması gerekir <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> . <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>, Yol kısıtlama anahtarlarını <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> Bu kısıtlamaları doğrulayan uygulamalarla eşleyen bir sözlüktür. Bir uygulama <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> , `Startup.ConfigureServices` hizmetlerin bir parçası olarak ' de güncelleştirilir [. AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) çağrısı veya <xref:Microsoft.AspNetCore.Routing.RouteOptions> doğrudan ile yapılandırma `services.Configure<RouteOptions>` . Örneğin:
+Özel bir kullanmak için <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> yol kısıtlama türü, uygulamanın uygulamanın hizmet kapsayıcısında kayıtlı olması gerekir <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> . <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>, Yol kısıtlama anahtarlarını <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> Bu kısıtlamaları doğrulayan uygulamalarla eşleyen bir sözlüktür. Bir uygulama <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> , `Startup.ConfigureServices` hizmetlerin bir parçası olarak ' de güncelleştirilir [. AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) çağrısı veya <xref:Microsoft.AspNetCore.Routing.RouteOptions> doğrudan ile yapılandırma `services.Configure<RouteOptions>` . Örnek:
 
 ```csharp
 services.AddRouting(options =>
@@ -1956,7 +1958,7 @@ services.AddRouting(options =>
 });
 ```
 
-Kısıtlama daha sonra, kısıtlama türü kaydedilirken belirtilen ad kullanılarak yollara her zamanki şekilde uygulanabilir. Örneğin:
+Kısıtlama daha sonra, kısıtlama türü kaydedilirken belirtilen ad kullanılarak yollara her zamanki şekilde uygulanabilir. Örnek:
 
 ```csharp
 [HttpGet("{id:customName}")]

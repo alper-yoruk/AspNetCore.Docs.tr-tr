@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core için seçenek kalıbı
+title: ASP.NET Core'da seçenek deseni
 author: rick-anderson
 description: ASP.NET Core uygulamalarında ilgili ayarların gruplarını temsil etmek için seçenekler deseninin nasıl kullanılacağını öğrenin.
 monikerRange: '>= aspnetcore-2.1'
@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/20/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/options
-ms.openlocfilehash: 300b26c198e6ea07fe83af8fb9ae967e814396fb
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: dc03e0820bc332f29e48edb73b57faf5cfd83754
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408363"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017629"
 ---
-# <a name="options-pattern-in-aspnet-core"></a>ASP.NET Core için seçenek kalıbı
+# <a name="options-pattern-in-aspnet-core"></a>ASP.NET Core'da seçenek deseni
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -288,7 +290,7 @@ Seçenekler Ayrıca yapılandırma verilerini doğrulamaya yönelik bir mekanizm
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/options/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app) 'e başvurun veya [Microsoft.Extensions.Options.Configurationextensions](https://www.nuget.org/packages/Microsoft.Extensions.Options.ConfigurationExtensions/) paketine bir paket başvurusu ekleyin.
 
@@ -710,7 +712,7 @@ Seçenekler Ayrıca yapılandırma verilerini doğrulamaya yönelik bir mekanizm
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/options/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app) 'e başvurun veya [Microsoft.Extensions.Options.Configurationextensions](https://www.nuget.org/packages/Microsoft.Extensions.Options.ConfigurationExtensions/) paketine bir paket başvurusu ekleyin.
 

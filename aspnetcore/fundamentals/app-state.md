@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/06/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/app-state
-ms.openlocfilehash: 30123e043a7c152b5719af8092b2ab42a70d2787
-ms.sourcegitcommit: 6fb27ea41a92f6d0e91dfd0eba905d2ac1a707f7
+ms.openlocfilehash: c05129c0f239fb28c83ab1c561dd910305eeb54b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/15/2020
-ms.locfileid: "86407625"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017642"
 ---
 # <a name="session-and-state-management-in-aspnet-core"></a>ASP.NET Core’da oturum ve durum yönetimi
 
@@ -37,23 +39,23 @@ Durum, çeşitli yaklaşımlar kullanılarak depolanabilir. Her yaklaşım, bu k
 
 | Depolama yaklaşımı | Depolama mekanizması |
 | ---------------- | ----------------- |
-| [Özgü](#cookies) | HTTP tanımlama bilgileri. , Sunucu tarafı uygulama kodu kullanılarak depolanan verileri içerebilir. |
-| [Oturum durumu](#session-state) | HTTP tanımlama bilgileri ve sunucu tarafı uygulama kodu |
-| [TempData](#tempdata) | HTTP tanımlama bilgileri veya oturum durumu |
+| [Cookiemalar](#cookies) | HTTP cookie s. , Sunucu tarafı uygulama kodu kullanılarak depolanan verileri içerebilir. |
+| [Oturum durumu](#session-state) | HTTP cookie s ve sunucu tarafı uygulama kodu |
+| [TempData](#tempdata) | HTTP cookie s veya oturum durumu |
 | [Sorgu dizeleri](#query-strings) | HTTP sorgu dizeleri |
 | [Gizli alanlar](#hidden-fields) | HTTP form alanları |
 | [HttpContext. Items](#httpcontextitems) | Sunucu tarafı uygulama kodu |
 | [Önbellek](#cache) | Sunucu tarafı uygulama kodu |
 
-## <a name="cookies"></a>Tanımlama bilgileri
+## <a name="no-loccookies"></a>Cookiemalar
 
-Tanımlama bilgileri istekler arasında veri depolar. Tanımlama bilgileri her istekle birlikte gönderildiğinden, boyutları minimum olarak tutulmalıdır. İdeal olarak, uygulama tarafından depolanan verileri içeren bir tanımlama bilgisinde yalnızca bir tanımlayıcı depolanmalıdır. Tarayıcıların çoğu, tanımlama bilgisi boyutunu 4096 bayt olarak kısıtlar. Her etki alanı için yalnızca sınırlı sayıda tanımlama bilgisi vardır.
+Cookies verileri istekler arasında depolar. cookieS her istek ile gönderildiğinden, boyutu en az bir olmalıdır. İdeal olarak, cookie uygulama tarafından depolanan verilerle birlikte yalnızca bir tanımlayıcı depolanmalıdır. Tarayıcıların çoğu, cookie boyutu 4096 bayt olarak kısıtlar. cookieHer etki alanı için yalnızca sınırlı sayıda s vardır.
 
-Tanımlama bilgileri değişikliklere tabi olduğundan, uygulama tarafından doğrulanması gerekir. Tanımlama bilgileri kullanıcılar tarafından silinebilir ve istemciler üzerinde zaman alabilir. Ancak, tanımlama bilgileri genellikle istemcide en dayanıklı veri kalıcılığı biçimidir.
+cookieS, değişikliklere tabi olduğundan uygulama tarafından doğrulanması gerekir. Cookies, kullanıcılar tarafından silinebilir ve istemciler üzerinde sona erer. Ancak, cookie genel olarak istemcide en dayanıklı veri kalıcılığı biçimidir.
 
-Tanımlama bilgileri genellikle içerik bilinen bir kullanıcı için özelleştirildiğinde kişiselleştirme için kullanılır. Kullanıcı yalnızca tanımlı ve kimlik doğrulaması değil çoğu durumda. Tanımlama bilgisi, kullanıcının adını, hesap adını veya GUID gibi benzersiz kullanıcı KIMLIĞINI depolayabilirler. Tanımlama bilgisi, kullanıcının tercih ettiği Web sitesi arka plan rengi gibi kişiselleştirilmiş ayarlarına erişmek için kullanılabilir.
+Cookie, içerik bilinen bir kullanıcı için özelleştirildiğinde, genellikle kişiselleştirme için kullanılır. Kullanıcı yalnızca tanımlı ve kimlik doğrulaması değil çoğu durumda. , cookie Kullanıcının adını, hesap adını veya GUID gibi benzersiz kullanıcı kimliğini depolayabilirler. , cookie Kullanıcının tercih edilen web sitesi arka plan rengi gibi kişiselleştirilmiş ayarlarına erişmek için kullanılabilir.
 
-Tanımlama bilgilerini verirken ve gizlilik kaygılarıyla ilgilenirken [Avrupa Birliği genel veri koruma yönetmeliklerine (GDPR)](https://ec.europa.eu/info/law/law-topic/data-protection) bakın. Daha fazla bilgi için [ASP.NET Core genel veri koruma yönetmeliği (GDPR) desteğini](xref:security/gdpr)inceleyin.
+' İ verirken ve gizlilik kaygılarıyla ilgilenirken [Avrupa Birliği genel veri koruma yönetmeliklerine (GDPR)](https://ec.europa.eu/info/law/law-topic/data-protection) bakın cookie . Daha fazla bilgi için [ASP.NET Core genel veri koruma yönetmeliği (GDPR) desteğini](xref:security/gdpr)inceleyin.
 
 ## <a name="session-state"></a>Oturum durumu
 
@@ -61,31 +63,31 @@ Oturum durumu, Kullanıcı bir Web uygulamasına göz atarken Kullanıcı verile
 
 [SignalR](xref:signalr/index)Bir [ SignalR hub](xref:signalr/hubs) http bağlamından bağımsız olarak yürütülemediğinden, oturum uygulamalarda desteklenmez. Örneğin, bir uzun yoklama isteği, isteğin HTTP bağlamının ömrü ötesinde bir hub tarafından açık tutulduğunda bu durum oluşabilir.
 
-ASP.NET Core, oturum KIMLIĞI içeren istemciye bir tanımlama bilgisi sağlayarak oturum durumunu korur. Tanımlama bilgisi oturum KIMLIĞI:
+ASP.NET Core cookie , oturum kimliği içeren istemciye bir sağlayarak oturum durumunu korur. cookieOturum kimliği:
 
 * Her istekle birlikte uygulamaya gönderilir.
 * Uygulama tarafından oturum verilerini getirmek için kullanılır.
 
 Oturum durumu aşağıdaki davranışları sergiler:
 
-* Oturum tanımlama bilgisi tarayıcıya özeldir. Oturumlar tarayıcılar arasında paylaşılmaz.
-* Tarayıcı oturumu sona erdiğinde oturum tanımlama bilgileri silinir.
-* Kullanım dışı bir oturum için tanımlama bilgisi alınmışsa, aynı oturum tanımlama bilgisini kullanan yeni bir oturum oluşturulur.
+* Oturum, cookie tarayıcıya özeldir. Oturumlar tarayıcılar arasında paylaşılmaz.
+* cookieTarayıcı oturumu sona erdiğinde oturum öğeleri silinir.
+* Bir cookie oturum, tarihi geçen bir oturum için alınmışsa, aynı oturumu kullanan yeni bir oturum oluşturulur cookie .
 * Boş oturumlar korunmaz. Oturumun istekler arasında kalıcı olması için oturumun en az bir değere ayarlanmış olması gerekir. Bir oturum tutulmadığı zaman, her yeni istek için yeni bir oturum KIMLIĞI oluşturulur.
 * Uygulama, son istekten sonra sınırlı bir süre boyunca bir oturum tutar. Uygulama, oturum zaman aşımını ayarlar ya da 20 dakikalık varsayılan değeri kullanır. Oturum durumu, Kullanıcı verilerini depolamak için idealdir:
   * Belirli bir oturuma özgüdür.
   * Verilerin oturumlar arasında kalıcı depolama gerektirmediğini.
 * Oturum verileri, <xref:Microsoft.AspNetCore.Http.ISession.Clear%2A?displayProperty=nameWithType> uygulama çağrıldığında veya oturum sona erdiğinde silinir.
-* Uygulama kodunu istemci tarayıcısının kapatıldığını veya istemcide oturum tanımlama bilgisinin silindiği veya süresi dolduğunda bilgilendirmeye yönelik varsayılan bir mekanizma yoktur.
-* Oturum durumu tanımlama bilgileri varsayılan olarak temel olarak işaretlenmez. Site ziyaretçisi tarafından izlemeye izin verilmediği müddetçe oturum durumu işlevsel değildir. Daha fazla bilgi için bkz. <xref:security/gdpr#tempdata-provider-and-session-state-cookies-arent-essential>.
+* Uygulama kodunu bir istemci tarayıcısının kapatıldığını veya istemcide ne zaman dolduğunu veya bittiğini bildirmek için varsayılan bir mekanizma yoktur cookie .
+* Oturum durumu cookie Varsayılan olarak temel olarak işaretlenmez. Site ziyaretçisi tarafından izlemeye izin verilmediği müddetçe oturum durumu işlevsel değildir. Daha fazla bilgi için bkz. <xref:security/gdpr#tempdata-provider-and-session-state-cookies-arent-essential>.
 
 > [!WARNING]
-> Gizli verileri oturum durumunda depolamayin. Kullanıcı tarayıcıyı Kapatmayabilir ve oturum tanımlama bilgisini temizleyebilir. Bazı tarayıcılar tarayıcı pencereleri arasında geçerli oturum tanımlama bilgilerini korur. Bir oturum, tek bir kullanıcıyla kısıtlanmayabilir. Sonraki Kullanıcı aynı oturum tanımlama bilgisiyle uygulamaya gözatmaya devam edebilir.
+> Gizli verileri oturum durumunda depolamayin. Kullanıcı tarayıcıyı Kapatmayabilir ve oturumu temizleyebilir cookie . Bazı tarayıcılarda cookie tarayıcı pencereleri arasında geçerli oturum vardır. Bir oturum, tek bir kullanıcıyla kısıtlanmayabilir. Sonraki Kullanıcı aynı oturumla uygulamaya gözatmaya devam edebilir cookie .
 
 Bellek içi önbellek sağlayıcısı, oturum verilerini uygulamanın bulunduğu sunucunun belleğinde depolar. Sunucu grubu senaryosunda:
 
 * Her oturumu tek bir sunucudaki belirli bir uygulama örneğine bağlamak için *yapışkan oturumları* kullanın. [Azure App Service](https://azure.microsoft.com/services/app-service/) , varsayılan olarak yapışkan oturumları zorlamak Için [uygulama isteği yönlendirme (ARR)](/iis/extensions/planning-for-arr/using-the-application-request-routing-module) kullanır. Ancak, yapışkan oturumlar ölçeklenebilirliği etkileyebilir ve Web uygulaması güncelleştirmelerini karmaşıklaştırır. Daha iyi bir yaklaşım, yapışkan oturum gerektirmeyen bir redya veya SQL Server dağıtılmış önbellek kullanmaktır. Daha fazla bilgi için bkz. <xref:performance/caching/distributed>.
-* Oturum tanımlama bilgisi aracılığıyla şifrelenir <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> . Veri koruma, her makinede oturum tanımlama bilgilerini okumak için düzgün şekilde yapılandırılmalıdır. Daha fazla bilgi için bkz <xref:security/data-protection/introduction> . ve [anahtar depolama sağlayıcıları](xref:security/data-protection/implementation/key-storage-providers).
+* Oturum, cookie aracılığıyla şifrelenir <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> . Veri koruma, her makinede oturum s 'yi okumak için düzgün şekilde yapılandırılmalıdır cookie . Daha fazla bilgi için bkz <xref:security/data-protection/introduction> . ve [anahtar depolama sağlayıcıları](xref:security/data-protection/implementation/key-storage-providers).
 
 ### <a name="configure-session-state"></a>Oturum durumunu yapılandırma
 
@@ -112,7 +114,7 @@ Ara yazılım sırası önemlidir.  `UseSession`Sonra `UseRouting` ve önce ça�
 
 `HttpContext.Session`çağrılmadan önce erişilemez `UseSession` .
 
-Uygulama yanıt akışına yazmaya başladıktan sonra yeni bir oturum tanımlama bilgisine sahip yeni bir oturum oluşturulamıyor. Özel durum Web sunucusu günlüğüne kaydedilir ve tarayıcıda gösterilmez.
+Uygulama yanıt akışına yazmaya başladıktan sonra yeni bir oturum ile yeni bir oturum cookie oluşturulamaz. Özel durum Web sunucusu günlüğüne kaydedilir ve tarayıcıda gösterilmez.
 
 ### <a name="load-session-state-asynchronously"></a>Oturum durumunu zaman uyumsuz olarak yükle
 
@@ -126,17 +128,17 @@ Oturum varsayılanlarını geçersiz kılmak için kullanın <xref:Microsoft.Asp
 
 | Seçenek | Açıklama |
 | ------ | ----------- |
-| <xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie> | Tanımlama bilgisini oluşturmak için kullanılan ayarları belirler. <xref:Microsoft.AspNetCore.Http.CookieBuilder.Name>Varsayılan olarak <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookieName?displayProperty=nameWithType> ( `.AspNetCore.Session` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.Path>Varsayılan olarak <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookiePath?displayProperty=nameWithType> ( `/` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.SameSite>Varsayılan olarak <xref:Microsoft.AspNetCore.Http.SameSiteMode.Lax?displayProperty=nameWithType> ( `1` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly>Varsayılan olarak olur `true` . <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential>Varsayılan olarak olur `false` . |
-| <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> | , `IdleTimeout` Oturumun içeriği terk edilmeden önce ne kadar süreyle boşta kalabileceğini gösterir. Her oturum erişimi zaman aşımını sıfırlar. Bu ayar, tanımlama bilgisi değil yalnızca oturumun içeriği için geçerlidir. Varsayılan değer 20 dakikadır. |
+| <xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie> | Oluşturmak için kullanılan ayarları belirler cookie . <xref:Microsoft.AspNetCore.Http.CookieBuilder.Name>Varsayılan olarak <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookieName?displayProperty=nameWithType> ( `.AspNetCore.Session` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.Path>Varsayılan olarak <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookiePath?displayProperty=nameWithType> ( `/` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.SameSite>Varsayılan olarak <xref:Microsoft.AspNetCore.Http.SameSiteMode.Lax?displayProperty=nameWithType> ( `1` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly>Varsayılan olarak olur `true` . <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential>Varsayılan olarak olur `false` . |
+| <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> | , `IdleTimeout` Oturumun içeriği terk edilmeden önce ne kadar süreyle boşta kalabileceğini gösterir. Her oturum erişimi zaman aşımını sıfırlar. Bu ayar, yalnızca oturum içeriği için geçerlidir cookie . Varsayılan değer 20 dakikadır. |
 | <xref:Microsoft.AspNetCore.Builder.SessionOptions.IOTimeout> | Mağazadan bir oturumu yüklemesine veya depolama alanına geri kaydetmeye izin verilen en uzun süre. Bu ayar yalnızca zaman uyumsuz işlemlere uygulanabilir. Bu zaman aşımı, kullanılarak devre dışı bırakılabilir <xref:System.Threading.Timeout.InfiniteTimeSpan> . Varsayılan değer 1 dakikadır. |
 
-Oturum, tek bir tarayıcıdan gelen istekleri izlemek ve tanımlamak için bir tanımlama bilgisi kullanır. Bu tanımlama bilgisi varsayılan olarak adlandırılır `.AspNetCore.Session` ve bir yolu kullanır `/` . Tanımlama bilgisi varsayılan olarak bir etki alanı belirtmediği için, sayfada istemci tarafı komut dosyası tarafından kullanılamaz ( <xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly> Varsayılan olarak olduğu için `true` ).
+Oturum cookie , tek bir tarayıcıdan gelen istekleri izlemek ve tanımlamak için bir kullanır. Varsayılan olarak, bu olarak cookie adlandırılır `.AspNetCore.Session` ve bir yolu kullanır `/` . Varsayılan, cookie bir etki alanı belirtmediği için, sayfada istemci tarafı komut dosyası tarafından kullanılamaz ( <xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly> Varsayılan olarak ' dir `true` ).
 
-Tanımlama bilgisi oturum varsayılanlarını geçersiz kılmak için şunu kullanın <xref:Microsoft.AspNetCore.Builder.SessionOptions> :
+Oturum varsayılanlarını geçersiz kılmak için cookie şunu kullanın <xref:Microsoft.AspNetCore.Builder.SessionOptions> :
 
 [!code-csharp[](app-state/samples/3.x/SessionSample/Startup2.cs?name=snippet1&highlight=5-10)]
 
-Uygulama, <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> bir oturumun, sunucunun önbelleğindeki içeriği terk edilmeden önce ne kadar süreyle boşta kalabileceğini anlamak için özelliğini kullanır. Bu özellik, tanımlama bilgisi bitiş zamanından bağımsızdır. [Oturum ara yazılımı](xref:Microsoft.AspNetCore.Session.SessionMiddleware) üzerinden geçen her istek zaman aşımını sıfırlar.
+Uygulama, <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> bir oturumun, sunucunun önbelleğindeki içeriği terk edilmeden önce ne kadar süreyle boşta kalabileceğini anlamak için özelliğini kullanır. Bu özellik, cookie süre sonundan bağımsızdır. [Oturum ara yazılımı](xref:Microsoft.AspNetCore.Session.SessionMiddleware) üzerinden geçen her istek zaman aşımını sıfırlar.
 
 Oturum durumu *kilitli*değil. İki istek aynı anda bir oturumun içeriğini değiştirmeyi denerseniz, son istek ilk geçersiz kılar. `Session`*tutarlı bir oturum*olarak uygulanır, yani tüm içerikler birlikte depolanır. İki istek farklı oturum değerlerini değiştirmek için arama yaparken, son istek ilk tarafından yapılan oturum değişikliklerini geçersiz kılabilir.
 
@@ -185,7 +187,7 @@ Aşağıdaki örnek, sınıfı ile serileştirilebilir bir nesnenin nasıl ayarl
 ASP.NET Core, Razor [TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) veya Controller sayfalarını kullanıma sunar <xref:Microsoft.AspNetCore.Mvc.Controller.TempData> . Bu özellik, verileri başka bir istekte okunana kadar depolar. [Saklama (dize)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) ve [Peek (dize)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*) yöntemleri, isteğin sonunda silme yapılmadan verileri incelemek için kullanılabilir. [Saklama için](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) sözlükte tüm öğeleri işaretler. `TempData`eklenir
 
 * Tek bir istek için veri gerektiğinde yeniden yönlendirme için kullanışlıdır.
-* `TempData`Tanımlama bilgileri ya da oturum durumu kullanılarak sağlayıcılar tarafından uygulanır.
+* Sağlayıcılar tarafından ya `TempData` da cookie oturum durumu kullanılarak uygulanır.
 
 ## <a name="tempdata-samples"></a>TempData örnekleri
 
@@ -211,23 +213,23 @@ Aşağıdaki kod görüntülenir `TempData["Message"]` , ancak isteğin sonunda 
 
 ### <a name="tempdata-providers"></a>TempData sağlayıcıları
 
-Tanımlama bilgisi tabanlı TempData sağlayıcısı, TempData 'ı tanımlama bilgilerinde depolamak için varsayılan olarak kullanılır.
+cookie-Tabanlı TempData sağlayıcısı, ' deki TempData ' i depolamak için varsayılan olarak kullanılır cookie .
 
-Tanımlama bilgisi verileri, <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> ile kodlanmış, <xref:Microsoft.AspNetCore.WebUtilities.Base64UrlTextEncoder> ve ardından öbekli kullanılarak şifrelenir. En büyük tanımlama bilgisi boyutu, şifreleme ve parçalama nedeniyle [4096 bayttan](http://www.faqs.org/rfcs/rfc2965.html) daha azdır. Şifreli verileri sıkıştırmak, [suç](https://wikipedia.org/wiki/CRIME_(security_exploit)) ve [ihlal](https://wikipedia.org/wiki/BREACH_(security_exploit)) saldırıları gibi güvenlik sorunlarına yol açacağından, tanımlama bilgisi verileri sıkıştırılmaz. Tanımlama bilgisi tabanlı TempData sağlayıcısı hakkında daha fazla bilgi için bkz <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.CookieTempDataProvider> ..
+cookieVeriler, <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> ile kodlanmış, <xref:Microsoft.AspNetCore.WebUtilities.Base64UrlTextEncoder> ve ardından öbekli kullanılarak şifrelenir. En büyük cookie boyut, şifreleme ve parçalama nedeniyle [4096 bayttan](http://www.faqs.org/rfcs/rfc2965.html) daha azdır. cookieŞifrelenmiş verilerin sıkıştırılması, [suç](https://wikipedia.org/wiki/CRIME_(security_exploit)) ve [ihlal](https://wikipedia.org/wiki/BREACH_(security_exploit)) saldırıları gibi güvenlik sorunlarına yol açacağından veriler sıkıştırılmaz. Tabanlı TempData sağlayıcısı hakkında daha fazla bilgi için cookie bkz <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.CookieTempDataProvider> ..
 
 ### <a name="choose-a-tempdata-provider"></a>Bir TempData sağlayıcısı seçin
 
 Bir TempData sağlayıcısı seçmek şöyle bazı hususlar içerir:
 
 * Uygulama oturum durumunu zaten kullanıyor mu? Bu durumda, oturum durumu ' nu kullanmak TempData Provider 'ın veri boyutunun ötesinde uygulamaya ek maliyeti yoktur.
-* Uygulama, 500 bayta kadar yalnızca görece küçük miktarlarda veri için TempData kullanıyor mu? Bu durumda, bir tanımlama bilgisi TempData Provider, TempData kullanan her isteğe küçük bir maliyet ekler. Aksi takdirde, oturum durumu TempData Provider, Geçicimiz veri tüketilene kadar her istekte büyük miktarda veri dönüşü olmaması yararlı olabilir.
-* Uygulama, birden çok sunucuda bir sunucu grubunda mi çalışıyor? Bu durumda, veri koruma (bkz <xref:security/data-protection/introduction> . ve [anahtar depolama sağlayıcıları](xref:security/data-protection/implementation/key-storage-providers)) dışındaki tanımlama bilgisi TempData sağlayıcısını kullanmak için ek bir yapılandırma gerekmez.
+* Uygulama, 500 bayta kadar yalnızca görece küçük miktarlarda veri için TempData kullanıyor mu? Bu durumda, cookie TempData sağlayıcısı her bir istek Için TempData içeren küçük bir maliyet ekler. Aksi takdirde, oturum durumu TempData Provider, Geçicimiz veri tüketilene kadar her istekte büyük miktarda veri dönüşü olmaması yararlı olabilir.
+* Uygulama, birden çok sunucuda bir sunucu grubunda mi çalışıyor? Bu durumda, cookie veri koruma dışında TempData sağlayıcısını kullanmak için ek yapılandırma gerekmez (bkz <xref:security/data-protection/introduction> . ve [anahtar depolama sağlayıcıları](xref:security/data-protection/implementation/key-storage-providers)).
 
-Web tarayıcıları gibi birçok Web istemcisi, her tanımlama bilgisinin en büyük boyutu ve toplam tanımlama bilgisi sayısı üzerinde sınırlar uygular. Bu tanımlama bilgisi TempData sağlayıcısını kullanırken, uygulamanın [Bu sınırları](http://www.faqs.org/rfcs/rfc2965.html)aşmadığını doğrulayın. Verilerin toplam boyutunu göz önünde bulundurun. Şifreleme ve parçalama nedeniyle tanımlama bilgisi boyutundaki artışlar için hesap.
+Web tarayıcıları gibi birçok Web istemcisi, her birinin en büyük boyutu cookie ve toplam sayısı için sınırlar uygular cookie . cookieTempData sağlayıcısını kullanırken, uygulamanın [Bu sınırları](http://www.faqs.org/rfcs/rfc2965.html)aşmadığını doğrulayın. Verilerin toplam boyutunu göz önünde bulundurun. cookieŞifreleme ve öbek oluşturma nedeniyle hesabın boyutu artar.
 
 ### <a name="configure-the-tempdata-provider"></a>TempData sağlayıcısını yapılandırma
 
-Tanımlama bilgisi tabanlı TempData sağlayıcısı varsayılan olarak etkindir.
+cookieTabanlı TempData sağlayıcısı varsayılan olarak etkindir.
 
 Oturum tabanlı TempData sağlayıcısını etkinleştirmek için <xref:Microsoft.Extensions.DependencyInjection.MvcViewFeaturesMvcBuilderExtensions.AddSessionStateTempDataProvider%2A> genişletme yöntemini kullanın. Yalnızca bir çağrısı `AddSessionStateTempDataProvider` gereklidir:
 
@@ -284,7 +286,7 @@ Yedekleme deposu kullanılamıyorsa, oturum ara yazılımı bir oturumu kalıcı
 
 Hataları denetlemek için önerilen yaklaşım, `await feature.Session.CommitAsync` uygulama oturuma yazma tamamlandığında çağrmalıdır. <xref:Microsoft.AspNetCore.Http.ISession.CommitAsync*>yedekleme deposu kullanılamıyorsa bir özel durum oluşturur. `CommitAsync`Başarısız olursa, uygulama özel durumu işleyebilir. <xref:Microsoft.AspNetCore.Http.ISession.LoadAsync*>, veri deposu kullanılamadığında aynı koşulların altına atar.
   
-## <a name="signalr-and-session-state"></a>SignalRve oturum durumu
+## <a name="no-locsignalr-and-session-state"></a>SignalRve oturum durumu
 
 SignalRuygulamalar, bilgileri depolamak için oturum durumunu kullanmamalıdır. SignalRuygulamalar, hub 'da bağlantı durumu başına depolama yapabilir `Context.Items` . <!-- https://github.com/aspnet/SignalR/issues/2139 -->
 
@@ -307,24 +309,24 @@ Durum, çeşitli yaklaşımlar kullanılarak depolanabilir. Her yaklaşım, bu k
 
 | Depolama yaklaşımı | Depolama mekanizması |
 | ---------------- | ----------------- |
-| [Özgü](#cookies) | HTTP tanımlama bilgileri (sunucu tarafı uygulama kodu kullanılarak depolanan veriler içerebilir) |
-| [Oturum durumu](#session-state) | HTTP tanımlama bilgileri ve sunucu tarafı uygulama kodu |
-| [TempData](#tempdata) | HTTP tanımlama bilgileri veya oturum durumu |
+| [Cookiemalar](#cookies) | HTTP cookie s (sunucu tarafı uygulama kodu kullanılarak depolanan verileri içerebilir) |
+| [Oturum durumu](#session-state) | HTTP cookie s ve sunucu tarafı uygulama kodu |
+| [TempData](#tempdata) | HTTP cookie s veya oturum durumu |
 | [Sorgu dizeleri](#query-strings) | HTTP sorgu dizeleri |
 | [Gizli alanlar](#hidden-fields) | HTTP form alanları |
 | [HttpContext. Items](#httpcontextitems) | Sunucu tarafı uygulama kodu |
 | [Önbellek](#cache) | Sunucu tarafı uygulama kodu |
 | [Bağımlılık Ekleme](#dependency-injection) | Sunucu tarafı uygulama kodu |
 
-## <a name="cookies"></a>Tanımlama bilgileri
+## <a name="no-loccookies"></a>Cookiemalar
 
-Tanımlama bilgileri istekler arasında veri depolar. Tanımlama bilgileri her istekle birlikte gönderildiğinden, boyutları minimum olarak tutulmalıdır. İdeal olarak, uygulama tarafından depolanan verileri içeren bir tanımlama bilgisinde yalnızca bir tanımlayıcı depolanmalıdır. Tarayıcıların çoğu, tanımlama bilgisi boyutunu 4096 bayt olarak kısıtlar. Her etki alanı için yalnızca sınırlı sayıda tanımlama bilgisi vardır.
+Cookies verileri istekler arasında depolar. cookieS her istek ile gönderildiğinden, boyutu en az bir olmalıdır. İdeal olarak, cookie uygulama tarafından depolanan verilerle birlikte yalnızca bir tanımlayıcı depolanmalıdır. Tarayıcıların çoğu, cookie boyutu 4096 bayt olarak kısıtlar. cookieHer etki alanı için yalnızca sınırlı sayıda s vardır.
 
-Tanımlama bilgileri değişikliklere tabi olduğundan, uygulama tarafından doğrulanması gerekir. Tanımlama bilgileri kullanıcılar tarafından silinebilir ve istemciler üzerinde zaman alabilir. Ancak, tanımlama bilgileri genellikle istemcide en dayanıklı veri kalıcılığı biçimidir.
+cookieS, değişikliklere tabi olduğundan uygulama tarafından doğrulanması gerekir. Cookies, kullanıcılar tarafından silinebilir ve istemciler üzerinde sona erer. Ancak, cookie genel olarak istemcide en dayanıklı veri kalıcılığı biçimidir.
 
-Tanımlama bilgileri genellikle içerik bilinen bir kullanıcı için özelleştirildiğinde kişiselleştirme için kullanılır. Kullanıcı yalnızca tanımlı ve kimlik doğrulaması değil çoğu durumda. Tanımlama bilgisi kullanıcının adını, hesap adını veya benzersiz kullanıcı KIMLIĞINI (GUID gibi) saklayabilir. Daha sonra kullanıcının tercih ettiği Web sitesi arka plan rengi gibi kişiselleştirilmiş ayarlarına erişmek için tanımlama bilgisini kullanabilirsiniz.
+Cookie, içerik bilinen bir kullanıcı için özelleştirildiğinde, genellikle kişiselleştirme için kullanılır. Kullanıcı yalnızca tanımlı ve kimlik doğrulaması değil çoğu durumda. cookieKullanıcının adını, hesap adını veya benzersiz kullanıcı kimliğini (GUID gibi) depolayabilirler. Daha sonra, cookie tercih edilen web sitesi arka plan rengi gibi kullanıcının kişiselleştirilmiş ayarlarına erişmek için kullanabilirsiniz.
 
-Tanımlama bilgilerini verirken ve gizlilik kaygılarıyla ilgilenirken [Avrupa Birliği genel veri koruma düzenlemelerine (GDPR)](https://ec.europa.eu/info/law/law-topic/data-protection) sahip olun. Daha fazla bilgi için [ASP.NET Core genel veri koruma yönetmeliği (GDPR) desteğini](xref:security/gdpr)inceleyin.
+, Ve gizlilik sorunları ile ilgilenirken [Avrupa Birliği genel veri koruma düzenlemelerine (GDPR)](https://ec.europa.eu/info/law/law-topic/data-protection) cookie sahip olun. Daha fazla bilgi için [ASP.NET Core genel veri koruma yönetmeliği (GDPR) desteğini](xref:security/gdpr)inceleyin.
 
 ## <a name="session-state"></a>Oturum durumu
 
@@ -333,26 +335,26 @@ Oturum durumu, Kullanıcı bir Web uygulamasına göz atarken Kullanıcı verile
 > [!NOTE]
 > [SignalR](xref:signalr/index)Bir [ SignalR hub](xref:signalr/hubs) http bağlamından bağımsız olarak yürütülemediğinden, oturum uygulamalarda desteklenmez. Örneğin, bir uzun yoklama isteği, isteğin HTTP bağlamının ömrü ötesinde bir hub tarafından açık tutulduğunda bu durum oluşabilir.
 
-ASP.NET Core, her istekle birlikte uygulamaya gönderilen oturum KIMLIĞI içeren istemciye bir tanımlama bilgisi sağlayarak oturum durumunu korur. Uygulama, oturum verilerini getirmek için oturum KIMLIĞINI kullanır.
+ASP.NET Core cookie , her istekle birlikte uygulamaya gönderilen oturum kimliği içeren bir istemciye sağlayarak oturum durumunu korur. Uygulama, oturum verilerini getirmek için oturum KIMLIĞINI kullanır.
 
 Oturum durumu aşağıdaki davranışları sergiler:
 
-* Oturum tanımlama bilgisi tarayıcıya özel olduğundan, oturumlar tarayıcılar arasında paylaşılmaz.
-* Tarayıcı oturumu sona erdiğinde oturum tanımlama bilgileri silinir.
-* Kullanım dışı bir oturum için tanımlama bilgisi alınmışsa, aynı oturum tanımlama bilgisini kullanan yeni bir oturum oluşturulur.
+* Oturum cookie tarayıcıya özel olduğundan, oturumlar tarayıcılar arasında paylaşılmaz.
+* cookieTarayıcı oturumu sona erdiğinde oturum öğeleri silinir.
+* Bir cookie oturum, tarihi geçen bir oturum için alınmışsa, aynı oturumu kullanan yeni bir oturum oluşturulur cookie .
 * Boş oturumlar tutulmadığı &mdash; için oturum, oturum istekleri arasında kalıcı hale getirmek için en az bir değere ayarlanmış olmalıdır. Bir oturum tutulmadığı zaman, her yeni istek için yeni bir oturum KIMLIĞI oluşturulur.
 * Uygulama, son istekten sonra sınırlı bir süre boyunca bir oturum tutar. Uygulama, oturum zaman aşımını ayarlar ya da 20 dakikalık varsayılan değeri kullanır. Oturum durumu, belirli bir oturuma özgü kullanıcı verilerini depolamak için idealdir, ancak verilerin oturumlarda kalıcı depolama gerektirmez.
 * Oturum verileri, <xref:Microsoft.AspNetCore.Http.ISession.Clear%2A?displayProperty=nameWithType> uygulama çağrıldığında veya oturum sona erdiğinde silinir.
-* Uygulama kodunu istemci tarayıcısının kapatıldığını veya istemcide oturum tanımlama bilgisinin silindiği veya süresi dolduğunda bilgilendirmeye yönelik varsayılan bir mekanizma yoktur.
-* ASP.NET Core MVC ve Razor sayfa şablonları, genel veri koruma yönetmeliği (GDPR) desteğini içerir. Oturum durumu tanımlama bilgileri varsayılan olarak temel olarak işaretlenmez, bu nedenle site ziyaretçisi tarafından izlemeye izin verilmediği takdirde oturum durumu işlevsel değildir. Daha fazla bilgi için bkz. <xref:security/gdpr#tempdata-provider-and-session-state-cookies-arent-essential>.
+* Uygulama kodunu bir istemci tarayıcısının kapatıldığını veya istemcide ne zaman dolduğunu veya bittiğini bildirmek için varsayılan bir mekanizma yoktur cookie .
+* ASP.NET Core MVC ve Razor sayfa şablonları, genel veri koruma yönetmeliği (GDPR) desteğini içerir. Oturum durumu cookie Varsayılan olarak gerekli değildir, bu nedenle site ziyaretçisi tarafından izlemeye izin verilmediği takdirde oturum durumu işlevsel değildir. Daha fazla bilgi için bkz. <xref:security/gdpr#tempdata-provider-and-session-state-cookies-arent-essential>.
 
 > [!WARNING]
-> Gizli verileri oturum durumunda depolamayin. Kullanıcı tarayıcıyı Kapatmayabilir ve oturum tanımlama bilgisini temizleyebilir. Bazı tarayıcılar tarayıcı pencereleri arasında geçerli oturum tanımlama bilgilerini korur. Bir oturum tek bir kullanıcıyla kısıtlanmayabilir &mdash; ve bir sonraki Kullanıcı aynı oturum tanımlama bilgisiyle uygulamaya gözatmaya devam edebilir.
+> Gizli verileri oturum durumunda depolamayin. Kullanıcı tarayıcıyı Kapatmayabilir ve oturumu temizleyebilir cookie . Bazı tarayıcılarda cookie tarayıcı pencereleri arasında geçerli oturum vardır. Bir oturum tek bir kullanıcıyla kısıtlanmayabilir &mdash; ve bir sonraki Kullanıcı aynı oturumla uygulamaya gözatmaya devam edebilir cookie .
 
 Bellek içi önbellek sağlayıcısı, oturum verilerini uygulamanın bulunduğu sunucunun belleğinde depolar. Sunucu grubu senaryosunda:
 
 * Her oturumu tek bir sunucudaki belirli bir uygulama örneğine bağlamak için *yapışkan oturumları* kullanın. [Azure App Service](https://azure.microsoft.com/services/app-service/) , varsayılan olarak yapışkan oturumları zorlamak Için [uygulama isteği yönlendirme (ARR)](/iis/extensions/planning-for-arr/using-the-application-request-routing-module) kullanır. Ancak, yapışkan oturumlar ölçeklenebilirliği etkileyebilir ve Web uygulaması güncelleştirmelerini karmaşıklaştırır. Daha iyi bir yaklaşım, yapışkan oturum gerektirmeyen bir redya veya SQL Server dağıtılmış önbellek kullanmaktır. Daha fazla bilgi için bkz. <xref:performance/caching/distributed>.
-* Oturum tanımlama bilgisi aracılığıyla şifrelenir <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> . Veri koruma, her makinede oturum tanımlama bilgilerini okumak için düzgün şekilde yapılandırılmalıdır. Daha fazla bilgi için bkz <xref:security/data-protection/introduction> . ve [anahtar depolama sağlayıcıları](xref:security/data-protection/implementation/key-storage-providers).
+* Oturum, cookie aracılığıyla şifrelenir <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> . Veri koruma, her makinede oturum s 'yi okumak için düzgün şekilde yapılandırılmalıdır cookie . Daha fazla bilgi için bkz <xref:security/data-protection/introduction> . ve [anahtar depolama sağlayıcıları](xref:security/data-protection/implementation/key-storage-providers).
 
 ### <a name="configure-session-state"></a>Oturum durumunu yapılandırma
 
@@ -372,7 +374,7 @@ Ara yazılım sırası önemlidir. Önceki örnekte, `InvalidOperationException`
 
 `HttpContext.Session`çağrılmadan önce erişilemez `UseSession` .
 
-Uygulama yanıt akışına yazmaya başladıktan sonra yeni bir oturum tanımlama bilgisine sahip yeni bir oturum oluşturulamıyor. Özel durum Web sunucusu günlüğüne kaydedilir ve tarayıcıda gösterilmez.
+Uygulama yanıt akışına yazmaya başladıktan sonra yeni bir oturum ile yeni bir oturum cookie oluşturulamaz. Özel durum Web sunucusu günlüğüne kaydedilir ve tarayıcıda gösterilmez.
 
 ### <a name="load-session-state-asynchronously"></a>Oturum durumunu zaman uyumsuz olarak yükle
 
@@ -386,17 +388,17 @@ Oturum varsayılanlarını geçersiz kılmak için kullanın <xref:Microsoft.Asp
 
 | Seçenek | Açıklama |
 | ------ | ----------- |
-| <xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie> | Tanımlama bilgisini oluşturmak için kullanılan ayarları belirler. <xref:Microsoft.AspNetCore.Http.CookieBuilder.Name>Varsayılan olarak <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookieName?displayProperty=nameWithType> ( `.AspNetCore.Session` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.Path>Varsayılan olarak <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookiePath?displayProperty=nameWithType> ( `/` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.SameSite>Varsayılan olarak <xref:Microsoft.AspNetCore.Http.SameSiteMode.Lax?displayProperty=nameWithType> ( `1` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly>Varsayılan olarak olur `true` . <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential>Varsayılan olarak olur `false` . |
-| <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> | , `IdleTimeout` Oturumun içeriği terk edilmeden önce ne kadar süreyle boşta kalabileceğini gösterir. Her oturum erişimi zaman aşımını sıfırlar. Bu ayar, tanımlama bilgisi değil yalnızca oturumun içeriği için geçerlidir. Varsayılan değer 20 dakikadır. |
+| <xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie> | Oluşturmak için kullanılan ayarları belirler cookie . <xref:Microsoft.AspNetCore.Http.CookieBuilder.Name>Varsayılan olarak <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookieName?displayProperty=nameWithType> ( `.AspNetCore.Session` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.Path>Varsayılan olarak <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookiePath?displayProperty=nameWithType> ( `/` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.SameSite>Varsayılan olarak <xref:Microsoft.AspNetCore.Http.SameSiteMode.Lax?displayProperty=nameWithType> ( `1` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly>Varsayılan olarak olur `true` . <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential>Varsayılan olarak olur `false` . |
+| <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> | , `IdleTimeout` Oturumun içeriği terk edilmeden önce ne kadar süreyle boşta kalabileceğini gösterir. Her oturum erişimi zaman aşımını sıfırlar. Bu ayar, yalnızca oturum içeriği için geçerlidir cookie . Varsayılan değer 20 dakikadır. |
 | <xref:Microsoft.AspNetCore.Builder.SessionOptions.IOTimeout> | Mağazadan bir oturumu yüklemesine veya depolama alanına geri kaydetmeye izin verilen en uzun süre. Bu ayar yalnızca zaman uyumsuz işlemlere uygulanabilir. Bu zaman aşımı, kullanılarak devre dışı bırakılabilir <xref:System.Threading.Timeout.InfiniteTimeSpan> . Varsayılan değer 1 dakikadır. |
 
-Oturum, tek bir tarayıcıdan gelen istekleri izlemek ve tanımlamak için bir tanımlama bilgisi kullanır. Bu tanımlama bilgisi varsayılan olarak adlandırılır `.AspNetCore.Session` ve bir yolu kullanır `/` . Tanımlama bilgisi varsayılan olarak bir etki alanı belirtmediği için, sayfada istemci tarafı komut dosyası tarafından kullanılamaz ( <xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly> Varsayılan olarak olduğu için `true` ).
+Oturum cookie , tek bir tarayıcıdan gelen istekleri izlemek ve tanımlamak için bir kullanır. Varsayılan olarak, bu olarak cookie adlandırılır `.AspNetCore.Session` ve bir yolu kullanır `/` . Varsayılan, cookie bir etki alanı belirtmediği için, sayfada istemci tarafı komut dosyası tarafından kullanılamaz ( <xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly> Varsayılan olarak ' dir `true` ).
 
-Tanımlama bilgisi oturum varsayılanlarını geçersiz kılmak için şunu kullanın `SessionOptions` :
+Oturum varsayılanlarını geçersiz kılmak için cookie şunu kullanın `SessionOptions` :
 
 [!code-csharp[](app-state/samples_snapshot/2.x/SessionSample/Startup.cs?name=snippet1&highlight=14-19)]
 
-Uygulama, <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> bir oturumun, sunucunun önbelleğindeki içeriği terk edilmeden önce ne kadar süreyle boşta kalabileceğini anlamak için özelliğini kullanır. Bu özellik, tanımlama bilgisi bitiş zamanından bağımsızdır. [Oturum ara yazılımı](xref:Microsoft.AspNetCore.Session.SessionMiddleware) üzerinden geçen her istek zaman aşımını sıfırlar.
+Uygulama, <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> bir oturumun, sunucunun önbelleğindeki içeriği terk edilmeden önce ne kadar süreyle boşta kalabileceğini anlamak için özelliğini kullanır. Bu özellik, cookie süre sonundan bağımsızdır. [Oturum ara yazılımı](xref:Microsoft.AspNetCore.Session.SessionMiddleware) üzerinden geçen her istek zaman aşımını sıfırlar.
 
 Oturum durumu *kilitli*değil. İki istek aynı anda bir oturumun içeriğini değiştirmeyi denerseniz, son istek ilk geçersiz kılar. `Session`*tutarlı bir oturum*olarak uygulanır, yani tüm içerikler birlikte depolanır. İki istek farklı oturum değerlerini değiştirmek için arama yaparken, son istek ilk tarafından yapılan oturum değişikliklerini geçersiz kılabilir.
 
@@ -442,7 +444,7 @@ Aşağıdaki örnek, uzantı yöntemleriyle bir serileştirilebilir nesnenin nas
 
 ## <a name="tempdata"></a>TempData
 
-ASP.NET Core, Razor [TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) veya Controller sayfalarını kullanıma sunar <xref:Microsoft.AspNetCore.Mvc.Controller.TempData> . Bu özellik, verileri başka bir istekte okunana kadar depolar. [Sakla (dize)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) ve [Peek (dize)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*) yöntemleri, isteğin sonunda silme yapılmadan verileri incelemek için kullanılabilir. [Keep ()](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) sözlükte tüm öğeleri bekletme için işaretler. `TempData`, tek bir istek için veri gerektiğinde yeniden yönlendirme için özellikle kullanışlıdır. `TempData`, `TempData` tanımlama bilgileri ya da oturum durumu kullanılarak sağlayıcılar tarafından uygulanır.
+ASP.NET Core, Razor [TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) veya Controller sayfalarını kullanıma sunar <xref:Microsoft.AspNetCore.Mvc.Controller.TempData> . Bu özellik, verileri başka bir istekte okunana kadar depolar. [Sakla (dize)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) ve [Peek (dize)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*) yöntemleri, isteğin sonunda silme yapılmadan verileri incelemek için kullanılabilir. [Keep ()](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) sözlükte tüm öğeleri bekletme için işaretler. `TempData`, tek bir istek için veri gerektiğinde yeniden yönlendirme için özellikle kullanışlıdır. `TempData`sağlayıcılar tarafından ya `TempData` da cookie oturum durumu kullanılarak uygulanır.
 
 ## <a name="tempdata-samples"></a>TempData örnekleri
 
@@ -468,24 +470,24 @@ Aşağıdaki kod görüntülenir `TempData["Message"]` , ancak isteğin sonunda 
 
 ### <a name="tempdata-providers"></a>TempData sağlayıcıları
 
-Tanımlama bilgisi tabanlı TempData sağlayıcısı, TempData 'ı tanımlama bilgilerinde depolamak için varsayılan olarak kullanılır.
+cookie-Tabanlı TempData sağlayıcısı, ' deki TempData ' i depolamak için varsayılan olarak kullanılır cookie .
 
-Tanımlama bilgisi verileri, <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> ile kodlanmış, <xref:Microsoft.AspNetCore.WebUtilities.Base64UrlTextEncoder> ve ardından öbekli kullanılarak şifrelenir. Tanımlama bilgisi öbekli olduğundan, ASP.NET Core 1. x içinde bulunan tek tanımlama bilgisi boyut sınırı uygulanmaz. Şifreli verileri sıkıştırmak, [suç](https://wikipedia.org/wiki/CRIME_(security_exploit)) ve [ihlal](https://wikipedia.org/wiki/BREACH_(security_exploit)) saldırıları gibi güvenlik sorunlarına yol açacağından, tanımlama bilgisi verileri sıkıştırılmaz. Tanımlama bilgisi tabanlı TempData sağlayıcısı hakkında daha fazla bilgi için bkz <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.CookieTempDataProvider> ..
+cookieVeriler, <xref:Microsoft.AspNetCore.DataProtection.IDataProtector> ile kodlanmış, <xref:Microsoft.AspNetCore.WebUtilities.Base64UrlTextEncoder> ve ardından öbekli kullanılarak şifrelenir. Çünkü, cookie cookie ASP.NET Core 1. x içinde bulunan tek boyut sınırı uygulanmaz. cookieŞifrelenmiş verilerin sıkıştırılması, [suç](https://wikipedia.org/wiki/CRIME_(security_exploit)) ve [ihlal](https://wikipedia.org/wiki/BREACH_(security_exploit)) saldırıları gibi güvenlik sorunlarına yol açacağından veriler sıkıştırılmaz. Tabanlı TempData sağlayıcısı hakkında daha fazla bilgi için cookie bkz <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.CookieTempDataProvider> ..
 
 ### <a name="choose-a-tempdata-provider"></a>Bir TempData sağlayıcısı seçin
 
 Bir TempData sağlayıcısı seçmek şöyle bazı hususlar içerir:
 
 1. Uygulama oturum durumunu zaten kullanıyor mu? Bu durumda, oturum durumu, TempData Provider 'ın kullanılması uygulamaya ek bir ücret vermez (verilerin boyutundan itibaren).
-2. Uygulama yalnızca görece küçük miktarlarda veri (500 bayta kadar) için TempData kullanıyor mu? Bu durumda, bir tanımlama bilgisi TempData Provider, TempData kullanan her isteğe küçük bir maliyet ekler. Aksi takdirde, oturum durumu TempData Provider, Geçicimiz veri tüketilene kadar her istekte büyük miktarda veri dönüşü olmaması yararlı olabilir.
-3. Uygulama, birden çok sunucuda bir sunucu grubunda mi çalışıyor? Bu durumda, veri koruma (bkz <xref:security/data-protection/introduction> . ve [anahtar depolama sağlayıcıları](xref:security/data-protection/implementation/key-storage-providers)) dışındaki tanımlama bilgisi TempData sağlayıcısını kullanmak için ek bir yapılandırma gerekmez.
+2. Uygulama yalnızca görece küçük miktarlarda veri (500 bayta kadar) için TempData kullanıyor mu? Bu durumda, cookie TempData sağlayıcısı her bir istek Için TempData içeren küçük bir maliyet ekler. Aksi takdirde, oturum durumu TempData Provider, Geçicimiz veri tüketilene kadar her istekte büyük miktarda veri dönüşü olmaması yararlı olabilir.
+3. Uygulama, birden çok sunucuda bir sunucu grubunda mi çalışıyor? Bu durumda, cookie veri koruma dışında TempData sağlayıcısını kullanmak için ek yapılandırma gerekmez (bkz <xref:security/data-protection/introduction> . ve [anahtar depolama sağlayıcıları](xref:security/data-protection/implementation/key-storage-providers)).
 
 > [!NOTE]
-> Çoğu Web istemcisi (Web tarayıcıları gibi), her tanımlama bilgisinin en büyük boyutu, toplam tanımlama bilgisi sayısı veya her ikisi için sınır uygular. Bu tanımlama bilgisi TempData sağlayıcısını kullanırken, uygulamanın bu sınırları aşmadığını doğrulayın. Verilerin toplam boyutunu göz önünde bulundurun. Şifreleme ve parçalama nedeniyle tanımlama bilgisi boyutundaki artışlar için hesap.
+> Çoğu Web istemcisi (Web tarayıcıları gibi), her birinin en büyük boyutu cookie , toplam sayısı cookie veya her ikisi için sınır uygular. cookieTempData sağlayıcısını kullanırken, uygulamanın bu sınırları aşmadığını doğrulayın. Verilerin toplam boyutunu göz önünde bulundurun. cookieŞifreleme ve öbek oluşturma nedeniyle hesabın boyutu artar.
 
 ### <a name="configure-the-tempdata-provider"></a>TempData sağlayıcısını yapılandırma
 
-Tanımlama bilgisi tabanlı TempData sağlayıcısı varsayılan olarak etkindir.
+cookieTabanlı TempData sağlayıcısı varsayılan olarak etkindir.
 
 Oturum tabanlı TempData sağlayıcısını etkinleştirmek için <xref:Microsoft.Extensions.DependencyInjection.MvcViewFeaturesMvcBuilderExtensions.AddSessionStateTempDataProvider%2A> genişletme yöntemini kullanın:
 
@@ -595,7 +597,7 @@ Verilerin tüm kullanıcılar tarafından kullanılabilmesini sağlamak için [b
 
   Hataları denetlemek için önerilen yaklaşım, `await feature.Session.CommitAsync();` uygulama oturuma yazma işlemi tamamlandığında uygulama kodundan çağırmalıdır. `CommitAsync`yedekleme deposu kullanılamıyorsa bir özel durum oluşturur. `CommitAsync`Başarısız olursa, uygulama özel durumu işleyebilir. `LoadAsync`veri deposunun kullanılamadığı koşulların aynısını oluşturur.
   
-## <a name="signalr-and-session-state"></a>SignalRve oturum durumu
+## <a name="no-locsignalr-and-session-state"></a>SignalRve oturum durumu
 
 SignalRuygulamalar, bilgileri depolamak için oturum durumunu kullanmamalıdır. SignalRuygulamalar, hub 'da bağlantı durumu başına depolama yapabilir `Context.Items` . <!-- https://github.com/aspnet/SignalR/issues/2139 -->
 

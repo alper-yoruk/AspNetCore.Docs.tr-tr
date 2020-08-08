@@ -5,6 +5,8 @@ description: ASP.NET Core uygulamalarında Yerelleştirmede sorunları tanılama
 ms.author: riande
 ms.date: 01/24/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/troubleshoot-aspnet-core-localization
-ms.openlocfilehash: 48f75b4fbfdb2078f07efeffd8d4105366998876
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 801ae3a708d23308cbf909ceeace160e3c0db1bd
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407089"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016472"
 ---
 # <a name="troubleshoot-aspnet-core-localization"></a>ASP.NET Core yerelleştirme sorunlarını giderme
 
@@ -58,7 +60,7 @@ Kaynakların Bulunamamasının yaygın nedenleri şunlardır:
 - Kaynak `resx` bazı diller için öğesinde yok, ancak başkaları içinde var.
 - Sorun yaşamaya devam ediyorsanız, `Debug` eksik kaynaklar hakkında daha fazla ayrıntı için yerelleştirme günlüğü iletilerini (günlük düzeyinde) kontrol edin.
 
-_**İpucu:** Kullanırken `CookieRequestCultureProvider` , tek tırnak, yerelleştirme tanımlama bilgisi değeri içindeki kültürler ile kullanılmaz. Örneğin, `c='en-UK'|uic='en-US'` geçersiz bir tanımlama bilgisi değeridir, ancak `c=en-UK|uic=en-US` geçerli olur._
+_**İpucu:** Kullanırken `CookieRequestCultureProvider` , tek tekliflerin yerelleştirme değeri içindeki kültürler ile kullanılmadığını doğrulayın cookie . Örneğin, `c='en-UK'|uic='en-US'` geçersiz cookie bir değerdir, ancak `c=en-UK|uic=en-US` geçerli olur._
 
 ## <a name="resources--class-libraries-issues"></a>Sınıf kitaplığı sorunlarını & kaynaklar
 

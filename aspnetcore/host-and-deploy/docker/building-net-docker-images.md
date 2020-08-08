@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/12/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/docker/building-net-docker-images
-ms.openlocfilehash: 2b77b4fbb960a8d2dbcb67c3f4f32ba9d9459d78
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 428186b1a0ee0c1527eedcd91d3a061053f814fc
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408090"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015809"
 ---
 # <a name="docker-images-for-aspnet-core"></a>ASP.NET Core için Docker görüntüleri
 
@@ -48,7 +50,7 @@ Bu öğreticide, ASP.NET Core örnek bir uygulama indirir ve Docker kapsayıcıl
 
    Örnek, uygulamayı çalıştırmak için bu görüntüyü kullanır. Görüntü, ASP.NET Core çalışma zamanını ve kitaplıklarını içerir ve üretimde uygulamaları çalıştırmak için iyileştirilmiştir. Dağıtım ve uygulama başlatma hızı için tasarlanan görüntü görece küçüktür, bu nedenle Docker kayıt defterinden Docker ana bilgisayarına ağ performansı en iyi duruma getirilmiştir. Yalnızca bir uygulamayı çalıştırmak için gereken ikili dosyalar ve içerikler kapsayıcıya kopyalanır. İçerik çalıştırılmaya hazırlanmaya, en hızlı süreyi uygulama başlatmaya kadar etkinleştirir `Docker run` . Docker modelinde dinamik kod derlemesi gerekli değildir.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 ::: moniker range="< aspnetcore-3.0"
 
 * [.NET Core 2,2 SDK](https://dotnet.microsoft.com/download/dotnet-core)

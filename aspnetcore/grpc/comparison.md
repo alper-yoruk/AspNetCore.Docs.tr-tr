@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/comparison
-ms.openlocfilehash: caf9e99bcd4a1887fe5d69a3641fabee08573ef1
-ms.sourcegitcommit: d1fa3d69dda675d7a52c7100742dfa6297413376
+ms.openlocfilehash: cdddb14e62f42bc9c0ec0bbe2a8595fe1cb27ceb
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/08/2020
-ms.locfileid: "86093315"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016212"
 ---
 # <a name="compare-grpc-services-with-http-apis"></a>gRPC hizmetlerini HTTP API’leriyle karşılaştırma
 
@@ -38,7 +40,7 @@ Aşağıdaki tabloda, gRPC ve HTTP API 'Leri arasında JSON ile yüksek düzeyde
 | Te          | [Prototip (küçük, ikili)](#performance)           | JSON (büyük, insan tarafından okunabilir)  |
 | Dikkatli olun | [Katı belirtim](#strict-specification)      | Miş. Herhangi bir HTTP geçerlidir.     |
 | Akış        | [İstemci, sunucu, iki yönlü](#streaming)       | İstemci, sunucu                |
-| Tarayıcı desteği  | [Hayır (GRPC-Web gerektirir)](#limited-browser-support) | Evet                           |
+| Tarayıcı desteği  | [Hayır (GRPC-Web gerektirir)](#limited-browser-support) | Yes                           |
 | Güvenlik         | Taşıma (TLS)                                    | Taşıma (TLS)               |
 | İstemci kod oluşturma | [Evet](#code-generation)                      | Openapı + üçüncü taraf araçları |
 

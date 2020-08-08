@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/06/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/azure-apps/azure-continuous-deployment
-ms.openlocfilehash: 97da88b6fb79944d99b69c92eb611dd0e4e39454
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: af983a2bc8a2802f9be07b30ab733ed2cfb7933c
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400173"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016095"
 ---
 # <a name="continuous-deployment-to-azure-with-visual-studio-and-git-with-aspnet-core"></a>ASP.NET Core ile Visual Studio ve Git kullanarak Azure’a sürekli dağıtım
 
@@ -34,7 +36,7 @@ Ayrıca, Azure DevOps Services kullanarak [Azure App Service](/azure/app-service
 > [!NOTE]
 > Bu öğreticiyi tamamlayabilmeniz için bir Microsoft Azure hesabı gereklidir. Bir hesap almak için [MSDN abone avantajlarını etkinleştirin](https://azure.microsoft.com/pricing/member-offers/credit-for-visual-studio-subscribers/?WT.mc_id=A261C142F) veya [ücretsiz deneme için kaydolun](https://azure.microsoft.com/free/dotnet/?WT.mc_id=A261C142F).
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 Bu öğreticide aşağıdaki yazılımların yüklü olduğu varsayılmaktadır:
 
@@ -90,7 +92,7 @@ Aşağıdaki adımlar Azure portalında bir Web uygulaması oluşturur:
 
    Ayrıca, **Web uygulaması** dikey penceresinde, mevcut bir **App Service planı/konumu** seçin veya yeni bir tane oluşturun. Yeni bir plan oluşturuyorsanız, fiyatlandırma katmanını, konumunu ve diğer seçenekleri seçin. App Service planları hakkında daha fazla bilgi için bkz. [Azure App Service planlar ayrıntılı genel bakış](/azure/app-service/azure-web-sites-web-hosting-plans-in-depth-overview).
 
-1. **Oluştur**'u seçin. Azure, Web uygulamasını sağlayacak ve başlatacak.
+1. **Oluştur**’u seçin. Azure, Web uygulamasını sağlayacak ve başlatacak.
 
    ![Azure portalı: örnek Web uygulaması tanıtımı 01 Essentials dikey penceresi](azure-continuous-deployment/_static/07-azure-webappblade.png)
 
@@ -114,7 +116,7 @@ Git, bir Azure App Service Web uygulaması dağıtmak için kullanılabilen bir 
 
    * **Ayarlar**  >  **dağıtım kimlik bilgileri**' ni seçin. **Dağıtım kimlik bilgilerini ayarla** dikey penceresi görüntülenir.
    * Bir kullanıcı adı ve parola oluşturun. Git ayarlanırken daha sonra kullanmak üzere parolayı kaydedin.
-   * **Kaydet**’i seçin.
+   * **Kaydet**'i seçin.
 
 1. **Web uygulaması** dikey penceresinde **Ayarlar**  >  **Özellikler**' i seçin. Dağıtım yapılacak uzak git deposunun URL 'SI **GIT URL 'si**altında gösterilir.
 

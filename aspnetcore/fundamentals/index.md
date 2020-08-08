@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/30/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/index
-ms.openlocfilehash: c797ce8bcb22aec2b56df2f3b108da4cbfde263d
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f141e9248a702ad9a1d9737f82543a0ccc8fb573
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403306"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017213"
 ---
 # <a name="aspnet-core-fundamentals"></a>ASP.NET Core temelleri
 
@@ -45,7 +47,7 @@ Daha fazla bilgi için bkz. <xref:fundamentals/startup>.
 
 ASP.NET Core, yapılandırılmış Hizmetleri bir uygulama genelinde kullanılabilir hale getiren yerleşik bağımlılık ekleme (dı) çerçevesini içerir. Örneğin, bir günlük bileşeni bir hizmettir.
 
-Hizmetleri yapılandırmak (veya *kaydettirmek*) için kod `Startup.ConfigureServices` yöntemine eklenmiştir. Örneğin:
+Hizmetleri yapılandırmak (veya *kaydettirmek*) için kod `Startup.ConfigureServices` yöntemine eklenmiştir. Örnek:
 
 [!code-csharp[](index/samples_snapshot/3.x/ConfigureServices.cs)]
 
@@ -73,13 +75,13 @@ ASP.NET Core zengin bir yerleşik ara yazılım kümesi içerir. Özel ara yazı
 
 Daha fazla bilgi için bkz. <xref:fundamentals/middleware/index>.
 
-## <a name="host"></a>Host
+## <a name="host"></a>Konak
 
 Başlangıçta ASP.NET Core bir uygulama bir *konak*oluşturur. Konak, uygulamanın tüm kaynaklarını kapsüller, örneğin:
 
 * Bir HTTP sunucusu uygulama
 * Ara yazılım bileşenleri
-* Günlüğe Kaydetme
+* Günlüğe kaydetme
 * Bağımlılık ekleme (dı) Hizmetleri
 * Yapılandırma
 
@@ -152,7 +154,7 @@ Aşağıdaki örnek, uygulamayı ortamda çalışırken ayrıntılı hata bilgil
 
 Daha fazla bilgi için bkz. <xref:fundamentals/environments>.
 
-## <a name="logging"></a>Günlüğe Kaydetme
+## <a name="logging"></a>Günlüğe kaydetme
 
 ASP.NET Core, çeşitli yerleşik ve üçüncü taraf günlük sağlayıcılarıyla birlikte çalışarak bir günlüğe kaydetme API 'sini destekler. Kullanılabilir sağlayıcılar şunları içerir:
 
@@ -164,7 +166,7 @@ ASP.NET Core, çeşitli yerleşik ve üçüncü taraf günlük sağlayıcıları
 * Azure App Service
 * Azure Application Insights
 
-Günlükler oluşturmak için, bir <xref:Microsoft.Extensions.Logging.ILogger%601> hizmeti bağımlılık ekleme (dı) ve çağrı günlüğü yöntemlerinden bir hizmete çözümleyin <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogInformation*> . Örneğin:
+Günlükler oluşturmak için, bir <xref:Microsoft.Extensions.Logging.ILogger%601> hizmeti bağımlılık ekleme (dı) ve çağrı günlüğü yöntemlerinden bir hizmete çözümleyin <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogInformation*> . Örnek:
 
 [!code-csharp[](index/samples_snapshot/3.x/TodoController.cs?highlight=5,13,19)]
 
@@ -286,13 +288,13 @@ ASP.NET Core, zengin bir yerleşik ara yazılım kümesi içerir ve özel ara ya
 
 Daha fazla bilgi için bkz. <xref:fundamentals/middleware/index>.
 
-## <a name="host"></a>Host
+## <a name="host"></a>Konak
 
 ASP.NET Core bir uygulama, başlangıçta bir *konak* oluşturur. Ana bilgisayar, uygulamanın tüm kaynaklarını kapsülleyen bir nesnedir, örneğin:
 
 * Bir HTTP sunucusu uygulama
 * Ara yazılım bileşenleri
-* Günlüğe Kaydetme
+* Günlüğe kaydetme
 * IÇERIK
 * Yapılandırma
 
@@ -399,7 +401,7 @@ Sınıfından aşağıdaki örnek kod, `Startup` uygulamayı yalnızca geliştir
 
 Daha fazla bilgi için bkz. <xref:fundamentals/environments>.
 
-## <a name="logging"></a>Günlüğe Kaydetme
+## <a name="logging"></a>Günlüğe kaydetme
 
 ASP.NET Core, çeşitli yerleşik ve üçüncü taraf günlük sağlayıcılarıyla birlikte çalışarak bir günlüğe kaydetme API 'sini destekler. Kullanılabilir sağlayıcılar şunları içerir:
 

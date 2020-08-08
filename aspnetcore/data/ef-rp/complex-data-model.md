@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: 38d3753b889da709e2d4691590290a5438208290
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: b3531f786b3101fcbea4b25d3950d1bce9a289dc
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401460"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018058"
 ---
-# <a name="part-5-razor-pages-with-ef-core-in-aspnet-core---data-model"></a>Bölüm 5, Razor ASP.NET Core veri modelinde EF Core olan sayfalar
+# <a name="part-5-no-locrazor-pages-with-ef-core-in-aspnet-core---data-model"></a>Bölüm 5, Razor ASP.NET Core veri modelinde EF Core olan sayfalar
 
 , [Tom Dykstra](https://github.com/tdykstra) ve [Rick Anderson](https://twitter.com/RickAndMSFT) tarafından
 
@@ -67,7 +69,7 @@ Yukarıdaki kod, bir `FullName` özelliği ekler ve var olan özelliklere aşağ
 
 Öğrenci kayıt tarihleri için, tüm sayfalar şu anda tarihle birlikte tarih ile görüntülenir, ancak yalnızca tarihin ilgili olması gerekir. Veri ek açıklaması özniteliklerini kullanarak, verileri gösteren her sayfada görüntü biçimini giderecek bir kod değişikliği yapabilirsiniz. 
 
-[DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) özniteliği, veritabanı iç türünden daha belirgin bir veri türünü belirtir. Bu durumda, tarih ve saat değil yalnızca tarih görüntülenmelidir. Veri [türü numaralandırması](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1) , tarih, saat, PhoneNumber, para birimi, emaadresi vb. gibi birçok veri türü sağlar. `DataType`Özniteliği Ayrıca uygulamanın türe özgü özellikleri otomatik olarak sağlamasını da sağlayabilir. Örneğin:
+[DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) özniteliği, veritabanı iç türünden daha belirgin bir veri türünü belirtir. Bu durumda, tarih ve saat değil yalnızca tarih görüntülenmelidir. Veri [türü numaralandırması](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1) , tarih, saat, PhoneNumber, para birimi, emaadresi vb. gibi birçok veri türü sağlar. `DataType`Özniteliği Ayrıca uygulamanın türe özgü özellikleri otomatik olarak sağlamasını da sağlayabilir. Örnek:
 
 * `mailto:`Bağlantı için otomatik olarak oluşturulur `DataType.EmailAddress` .
 * Tarih Seçici çoğu tarayıcıda için verilmiştir `DataType.Date` .
@@ -757,7 +759,7 @@ Bu bölümde, veri modeli öznitelikler kullanılarak özelleştirilir.
 
 [!code-csharp[](intro/samples/cu21/Models/Student.cs?name=snippet_DataType&highlight=3,12-13)]
 
-[DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) özniteliği, veritabanı iç türünden daha belirgin bir veri türünü belirtir. Bu durumda, tarih ve saat değil yalnızca tarih görüntülenmelidir. Veri [türü numaralandırması](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1) , tarih, saat, PhoneNumber, para birimi, emaadresi vb. gibi birçok veri türü sağlar. `DataType`Özniteliği Ayrıca uygulamanın türe özgü özellikleri otomatik olarak sağlamasını da sağlayabilir. Örneğin:
+[DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) özniteliği, veritabanı iç türünden daha belirgin bir veri türünü belirtir. Bu durumda, tarih ve saat değil yalnızca tarih görüntülenmelidir. Veri [türü numaralandırması](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1) , tarih, saat, PhoneNumber, para birimi, emaadresi vb. gibi birçok veri türü sağlar. `DataType`Özniteliği Ayrıca uygulamanın türe özgü özellikleri otomatik olarak sağlamasını da sağlayabilir. Örnek:
 
 * `mailto:`Bağlantı için otomatik olarak oluşturulur `DataType.EmailAddress` .
 * Tarih Seçici çoğu tarayıcıda için verilmiştir `DataType.Date` .
@@ -799,7 +801,7 @@ Yukarıdaki kod, adları 50 karakterden fazla olmayacak şekilde sınırlandır�
 [RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
 ```
 
-Uygulamayı çalıştırın:
+Uygulamayı çalıştırın: 
 
 * Öğrenciler sayfasına gidin.
 * **Yeni oluştur**' u seçin ve 50 karakterden daha uzun bir ad girin.

@@ -5,6 +5,8 @@ description: RazorSayfaların 2. bölümü ve Entity Framework öğretici serisi
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/crud
-ms.openlocfilehash: 46846d99230620e45d8a2baab46df320425cfb6c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: f205e7741c8e901e9219bec2028c7bee98129161
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401213"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018370"
 ---
-# <a name="part-2-razor-pages-with-ef-core-in-aspnet-core---crud"></a>Bölüm 2, Razor ASP.NET Core EF Core olan sayfalar-CRUD
+# <a name="part-2-no-locrazor-pages-with-ef-core-in-aspnet-core---crud"></a>Bölüm 2, Razor ASP.NET Core EF Core olan sayfalar-CRUD
 
 , [Tom Dykstra](https://github.com/tdykstra), [Jon P Smith](https://twitter.com/thereformedprog)ve [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -393,7 +395,7 @@ Bu bölümde, çağrı başarısız olduğunda özel bir hata iletisi uygulamak 
 * DB özel durumu yakalandı.
 * Sayfaları Sil `OnGetAsync` yöntemi ile çağırılır `saveChangesError=true` .
 
-### <a name="update-the-delete-razor-page"></a>Silme sayfasını Güncelleştir Razor
+### <a name="update-the-delete-no-locrazor-page"></a>Silme sayfasını Güncelleştir Razor
 
 Aşağıdaki Vurgulanan hata iletisini silme Razor sayfasına ekleyin.
 <!--

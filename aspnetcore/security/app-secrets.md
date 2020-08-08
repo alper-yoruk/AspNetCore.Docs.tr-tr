@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 4/20/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/app-secrets
-ms.openlocfilehash: a12262d182ce84a326086935627b55d2edc4885e
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 917e698d34a5d4b6c2c3f4737c08f1a590f5df1a
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407011"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017954"
 ---
 # <a name="safe-storage-of-app-secrets-in-development-in-aspnet-core"></a>ASP.NET Core sürümünde geliştirme sırasında uygulama gizli dizileri güvenli depolama
 
@@ -97,7 +99,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345"
 
 Yukarıdaki örnekte, iki nokta üst üste `Movies` bir özelliği olan bir nesne sabit değeri olduğunu gösterir `ServiceApiKey` .
 
-Gizli dizi Yöneticisi Aracı diğer dizinlerden de kullanılabilir. `--project` *. Csproj* dosyasının bulunduğu dosya sistemi yolunu sağlamak için seçeneğini kullanın. Örneğin:
+Gizli dizi Yöneticisi Aracı diğer dizinlerden de kullanılabilir. `--project` *. Csproj* dosyasının bulunduğu dosya sistemi yolunu sağlamak için seçeneğini kullanın. Örnek:
 
 ```dotnetcli
 dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp1\src\WebApp1"
@@ -105,7 +107,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 
 ### <a name="json-structure-flattening-in-visual-studio"></a>Visual Studio 'da JSON yapısı düzleştirme
 
-Visual Studio 'nun **Kullanıcı gizli dizilerini Yönet** hareketi metin düzenleyicisinde bir *secrets.js* dosya açar. *Üzerindesecrets.js* içeriğini, saklanacak anahtar-değer çiftleriyle değiştirin. Örneğin:
+Visual Studio 'nun **Kullanıcı gizli dizilerini Yönet** hareketi metin düzenleyicisinde bir *secrets.js* dosya açar. *Üzerindesecrets.js* içeriğini, saklanacak anahtar-değer çiftleriyle değiştirin. Örnek:
 
 ```json
 {
@@ -182,13 +184,13 @@ Parolaların düz metin olarak depolanması güvenli değildir. Örneğin, *üze
 
 [!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
-Daha güvenli bir yaklaşım, parolayı gizli olarak depolanmalıdır. Örneğin:
+Daha güvenli bir yaklaşım, parolayı gizli olarak depolanmalıdır. Örnek:
 
 ```dotnetcli
 dotnet user-secrets set "DbPassword" "pass123"
 ```
 
-`Password`Anahtar-değer çiftini *appsettings.jsüzerindeki*bağlantı dizesinden kaldırın. Örneğin:
+`Password`Anahtar-değer çiftini *appsettings.jsüzerindeki*bağlantı dizesinden kaldırın. Örnek:
 
 [!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings.json?highlight=3)]
 
@@ -206,7 +208,7 @@ Gizli dizi değeri, <xref:System.Data.SqlClient.SqlConnectionStringBuilder> <xre
 dotnet user-secrets list
 ```
 
-Şu çıktı görünür:
+Aşağıdaki çıkış görüntülenir:
 
 ```console
 Movies:ConnectionString = Server=(localdb)\mssqllocaldb;Database=Movie-1;Trusted_Connection=True;MultipleActiveResultSets=true
@@ -340,7 +342,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345"
 
 Yukarıdaki örnekte, iki nokta üst üste `Movies` bir özelliği olan bir nesne sabit değeri olduğunu gösterir `ServiceApiKey` .
 
-Gizli dizi Yöneticisi Aracı diğer dizinlerden de kullanılabilir. `--project` *. Csproj* dosyasının bulunduğu dosya sistemi yolunu sağlamak için seçeneğini kullanın. Örneğin:
+Gizli dizi Yöneticisi Aracı diğer dizinlerden de kullanılabilir. `--project` *. Csproj* dosyasının bulunduğu dosya sistemi yolunu sağlamak için seçeneğini kullanın. Örnek:
 
 ```dotnetcli
 dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp1\src\WebApp1"
@@ -348,7 +350,7 @@ dotnet user-secrets set "Movies:ServiceApiKey" "12345" --project "C:\apps\WebApp
 
 ### <a name="json-structure-flattening-in-visual-studio"></a>Visual Studio 'da JSON yapısı düzleştirme
 
-Visual Studio 'nun **Kullanıcı gizli dizilerini Yönet** hareketi metin düzenleyicisinde bir *secrets.js* dosya açar. *Üzerindesecrets.js* içeriğini, saklanacak anahtar-değer çiftleriyle değiştirin. Örneğin:
+Visual Studio 'nun **Kullanıcı gizli dizilerini Yönet** hareketi metin düzenleyicisinde bir *secrets.js* dosya açar. *Üzerindesecrets.js* içeriğini, saklanacak anahtar-değer çiftleriyle değiştirin. Örnek:
 
 ```json
 {
@@ -427,13 +429,13 @@ Parolaların düz metin olarak depolanması güvenli değildir. Örneğin, *üze
 
 [!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
-Daha güvenli bir yaklaşım, parolayı gizli olarak depolanmalıdır. Örneğin:
+Daha güvenli bir yaklaşım, parolayı gizli olarak depolanmalıdır. Örnek:
 
 ```dotnetcli
 dotnet user-secrets set "DbPassword" "pass123"
 ```
 
-`Password`Anahtar-değer çiftini *appsettings.jsüzerindeki*bağlantı dizesinden kaldırın. Örneğin:
+`Password`Anahtar-değer çiftini *appsettings.jsüzerindeki*bağlantı dizesinden kaldırın. Örnek:
 
 [!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings.json?highlight=3)]
 
@@ -451,7 +453,7 @@ Gizli dizi değeri, <xref:System.Data.SqlClient.SqlConnectionStringBuilder> <xre
 dotnet user-secrets list
 ```
 
-Şu çıktı görünür:
+Aşağıdaki çıkış görüntülenir:
 
 ```console
 Movies:ConnectionString = Server=(localdb)\mssqllocaldb;Database=Movie-1;Trusted_Connection=True;MultipleActiveResultSets=true

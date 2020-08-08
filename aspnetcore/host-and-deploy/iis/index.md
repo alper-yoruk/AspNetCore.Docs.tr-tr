@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 5/7/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 951ae53876edf345af1a3eb32cb9be1b9668fa53
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 0594303f3ae8c57a0a7776900e6b2a6781c919db
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404177"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015835"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>IIS ile Windows üzerinde ASP.NET Core barındırma
 
@@ -354,7 +356,7 @@ Uygulamaları [Web dağıtımı](/iis/install/installing-publishing-technologies
 
 1. İşlem modeli kimliğinin uygun izinlere sahip olduğunu doğrulayın.
 
-   Uygulama havuzunun varsayılan kimliği (**işlem modeli**  >  **Identity** ) **applicationpokaydentity** 'den başka bir kimliğe değiştiyse, yeni kimliğin uygulamanın klasörüne, veritabanına ve diğer gerekli kaynaklara erişmek için gerekli izinlere sahip olduğunu doğrulayın. Örneğin, uygulama havuzu, uygulamanın dosyaları okuduğu ve yazdığı klasörlere okuma ve yazma erişimi gerektirir.
+   Uygulama havuzunun varsayılan kimliği (**işlem modeli**  >  **Identity** ) **applicationPool Identity ** 'den başka bir kimliğe değiştirilirse, yeni kimliğin uygulamanın klasörüne, veritabanına ve diğer gerekli kaynaklara erişmek için gerekli izinlere sahip olduğunu doğrulayın. Örneğin, uygulama havuzu, uygulamanın dosyaları okuduğu ve yazdığı klasörlere okuma ve yazma erişimi gerektirir.
 
 **Windows kimlik doğrulama yapılandırması (Isteğe bağlı)**  
 Daha fazla bilgi için bkz. [Windows kimlik doğrulamasını yapılandırma](xref:security/authentication/windowsauth).
@@ -414,9 +416,9 @@ Dağıtım klasöründeki dosyalar, uygulama çalışırken kilitlenir. Dağıt�
 
 Uygulama yeniden başlatıldığında anahtar halkası bellekte depolanıyorsa:
 
-* Tüm tanımlama bilgisi tabanlı kimlik doğrulama belirteçleri geçersiz kılınır. 
+* Tüm cookie tabanlı kimlik doğrulama belirteçleri geçersiz kılındı. 
 * Kullanıcıların bir sonraki isteğinde yeniden oturum açması gerekir. 
-* Anahtar halkası ile korunan tüm veriler artık çözülemez. Bu, [CSRF belirteçlerini](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) ve [ASP.NET Core MVC TempData tanımlama bilgilerini](xref:fundamentals/app-state#tempdata)içerebilir.
+* Anahtar halkası ile korunan tüm veriler artık çözülemez. Bu, [CSRF belirteçlerini](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) ve [ASP.NET Core MVC TempData cookie s](xref:fundamentals/app-state#tempdata)öğesini içerebilir.
 
 Anahtar halkasını sürdürmek için IIS altındaki veri korumasını yapılandırmak için aşağıdaki yaklaşımlardan **birini** kullanın:
 
@@ -510,9 +512,9 @@ Uygulama havuzu yalıtımı, barındırma modeliyle belirlenir:
 
 IIS **Web sitesi ekleme** iletişim kutusu varsayılan olarak uygulama başına tek bir uygulama havuzu olur. Bir **site adı** sağlandığında, metin otomatik olarak **uygulama havuzu** metin kutusuna aktarılır. Site eklendiğinde site adı kullanılarak yeni bir uygulama havuzu oluşturulur.
 
-## <a name="application-pool-identity"></a>Uygulama havuzuIdentity
+## <a name="application-pool-no-locidentity"></a>Uygulama havuzuIdentity
 
-Bir uygulama havuzu kimliği hesabı, bir uygulamanın etki alanı veya yerel hesap oluşturmak ve yönetmek zorunda kalmadan benzersiz bir hesap altında çalışmasına izin verir. IIS 8,0 veya sonraki sürümlerde, IIS Yönetici çalışan Işlemi (WAS), yeni uygulama havuzunun adıyla bir sanal hesap oluşturur ve varsayılan olarak bu hesap altında uygulama havuzunun çalışan işlemlerini çalıştırır. Uygulama havuzunun **Gelişmiş ayarlar** altındaki IIS Yönetim Konsolu 'nda, uygulamasının **Identity** **applicationpokaydentity**kullanacak şekilde ayarlandığından emin olun:
+Bir uygulama havuzu kimliği hesabı, bir uygulamanın etki alanı veya yerel hesap oluşturmak ve yönetmek zorunda kalmadan benzersiz bir hesap altında çalışmasına izin verir. IIS 8,0 veya sonraki sürümlerde, IIS Yönetici çalışan Işlemi (WAS), yeni uygulama havuzunun adıyla bir sanal hesap oluşturur ve varsayılan olarak bu hesap altında uygulama havuzunun çalışan işlemlerini çalıştırır. Uygulama havuzu için **Gelişmiş ayarlar** altındaki IIS Yönetim Konsolu 'nda, **Identity** öğesinin ** Identity applicationPool**kullanmak için ayarlandığından emin olun:
 
 ![Uygulama havuzu Gelişmiş ayarları iletişim kutusu](index/_static/apppool-identity.png)
 
@@ -954,7 +956,7 @@ Uygulamaları [Web dağıtımı](/iis/install/installing-publishing-technologies
 
 1. İşlem modeli kimliğinin uygun izinlere sahip olduğunu doğrulayın.
 
-   Uygulama havuzunun varsayılan kimliği (**işlem modeli**  >  **Identity** ) **applicationpokaydentity** 'den başka bir kimliğe değiştiyse, yeni kimliğin uygulamanın klasörüne, veritabanına ve diğer gerekli kaynaklara erişmek için gerekli izinlere sahip olduğunu doğrulayın. Örneğin, uygulama havuzu, uygulamanın dosyaları okuduğu ve yazdığı klasörlere okuma ve yazma erişimi gerektirir.
+   Uygulama havuzunun varsayılan kimliği (**işlem modeli**  >  **Identity** ) **applicationPool Identity ** 'den başka bir kimliğe değiştirilirse, yeni kimliğin uygulamanın klasörüne, veritabanına ve diğer gerekli kaynaklara erişmek için gerekli izinlere sahip olduğunu doğrulayın. Örneğin, uygulama havuzu, uygulamanın dosyaları okuduğu ve yazdığı klasörlere okuma ve yazma erişimi gerektirir.
 
 **Windows kimlik doğrulama yapılandırması (Isteğe bağlı)**  
 Daha fazla bilgi için bkz. [Windows kimlik doğrulamasını yapılandırma](xref:security/authentication/windowsauth).
@@ -1014,9 +1016,9 @@ Dağıtım klasöründeki dosyalar, uygulama çalışırken kilitlenir. Dağıt�
 
 Uygulama yeniden başlatıldığında anahtar halkası bellekte depolanıyorsa:
 
-* Tüm tanımlama bilgisi tabanlı kimlik doğrulama belirteçleri geçersiz kılınır. 
+* Tüm cookie tabanlı kimlik doğrulama belirteçleri geçersiz kılındı. 
 * Kullanıcıların bir sonraki isteğinde yeniden oturum açması gerekir. 
-* Anahtar halkası ile korunan tüm veriler artık çözülemez. Bu, [CSRF belirteçlerini](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) ve [ASP.NET Core MVC TempData tanımlama bilgilerini](xref:fundamentals/app-state#tempdata)içerebilir.
+* Anahtar halkası ile korunan tüm veriler artık çözülemez. Bu, [CSRF belirteçlerini](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) ve [ASP.NET Core MVC TempData cookie s](xref:fundamentals/app-state#tempdata)öğesini içerebilir.
 
 Anahtar halkasını sürdürmek için IIS altındaki veri korumasını yapılandırmak için aşağıdaki yaklaşımlardan **birini** kullanın:
 
@@ -1110,9 +1112,9 @@ Uygulama havuzu yalıtımı, barındırma modeliyle belirlenir:
 
 IIS **Web sitesi ekleme** iletişim kutusu varsayılan olarak uygulama başına tek bir uygulama havuzu olur. Bir **site adı** sağlandığında, metin otomatik olarak **uygulama havuzu** metin kutusuna aktarılır. Site eklendiğinde site adı kullanılarak yeni bir uygulama havuzu oluşturulur.
 
-## <a name="application-pool-identity"></a>Uygulama havuzuIdentity
+## <a name="application-pool-no-locidentity"></a>Uygulama havuzuIdentity
 
-Bir uygulama havuzu kimliği hesabı, bir uygulamanın etki alanı veya yerel hesap oluşturmak ve yönetmek zorunda kalmadan benzersiz bir hesap altında çalışmasına izin verir. IIS 8,0 veya sonraki sürümlerde, IIS Yönetici çalışan Işlemi (WAS), yeni uygulama havuzunun adıyla bir sanal hesap oluşturur ve varsayılan olarak bu hesap altında uygulama havuzunun çalışan işlemlerini çalıştırır. Uygulama havuzunun **Gelişmiş ayarlar** altındaki IIS Yönetim Konsolu 'nda, uygulamasının **Identity** **applicationpokaydentity**kullanacak şekilde ayarlandığından emin olun:
+Bir uygulama havuzu kimliği hesabı, bir uygulamanın etki alanı veya yerel hesap oluşturmak ve yönetmek zorunda kalmadan benzersiz bir hesap altında çalışmasına izin verir. IIS 8,0 veya sonraki sürümlerde, IIS Yönetici çalışan Işlemi (WAS), yeni uygulama havuzunun adıyla bir sanal hesap oluşturur ve varsayılan olarak bu hesap altında uygulama havuzunun çalışan işlemlerini çalıştırır. Uygulama havuzu için **Gelişmiş ayarlar** altındaki IIS Yönetim Konsolu 'nda, **Identity** öğesinin ** Identity applicationPool**kullanmak için ayarlandığından emin olun:
 
 ![Uygulama havuzu Gelişmiş ayarları iletişim kutusu](index/_static/apppool-identity.png)
 
@@ -1522,7 +1524,7 @@ Uygulamaları [Web dağıtımı](/iis/install/installing-publishing-technologies
 
 1. İşlem modeli kimliğinin uygun izinlere sahip olduğunu doğrulayın.
 
-   Uygulama havuzunun varsayılan kimliği (**işlem modeli**  >  **Identity** ) **applicationpokaydentity** 'den başka bir kimliğe değiştiyse, yeni kimliğin uygulamanın klasörüne, veritabanına ve diğer gerekli kaynaklara erişmek için gerekli izinlere sahip olduğunu doğrulayın. Örneğin, uygulama havuzu, uygulamanın dosyaları okuduğu ve yazdığı klasörlere okuma ve yazma erişimi gerektirir.
+   Uygulama havuzunun varsayılan kimliği (**işlem modeli**  >  **Identity** ) **applicationPool Identity ** 'den başka bir kimliğe değiştirilirse, yeni kimliğin uygulamanın klasörüne, veritabanına ve diğer gerekli kaynaklara erişmek için gerekli izinlere sahip olduğunu doğrulayın. Örneğin, uygulama havuzu, uygulamanın dosyaları okuduğu ve yazdığı klasörlere okuma ve yazma erişimi gerektirir.
 
 **Windows kimlik doğrulama yapılandırması (Isteğe bağlı)**  
 Daha fazla bilgi için bkz. [Windows kimlik doğrulamasını yapılandırma](xref:security/authentication/windowsauth).
@@ -1582,9 +1584,9 @@ Dağıtım klasöründeki dosyalar, uygulama çalışırken kilitlenir. Dağıt�
 
 Uygulama yeniden başlatıldığında anahtar halkası bellekte depolanıyorsa:
 
-* Tüm tanımlama bilgisi tabanlı kimlik doğrulama belirteçleri geçersiz kılınır. 
+* Tüm cookie tabanlı kimlik doğrulama belirteçleri geçersiz kılındı. 
 * Kullanıcıların bir sonraki isteğinde yeniden oturum açması gerekir. 
-* Anahtar halkası ile korunan tüm veriler artık çözülemez. Bu, [CSRF belirteçlerini](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) ve [ASP.NET Core MVC TempData tanımlama bilgilerini](xref:fundamentals/app-state#tempdata)içerebilir.
+* Anahtar halkası ile korunan tüm veriler artık çözülemez. Bu, [CSRF belirteçlerini](xref:security/anti-request-forgery#aspnet-core-antiforgery-configuration) ve [ASP.NET Core MVC TempData cookie s](xref:fundamentals/app-state#tempdata)öğesini içerebilir.
 
 Anahtar halkasını sürdürmek için IIS altındaki veri korumasını yapılandırmak için aşağıdaki yaklaşımlardan **birini** kullanın:
 
@@ -1706,9 +1708,9 @@ ASP.NET Core uygulamalar diğer yapılandırma sağlayıcıları kullanılarak y
 
 Bir sunucuda birden çok Web sitesi barındırırken, her uygulamayı kendi uygulama havuzunda çalıştırarak uygulamaları birbirinden yalıtmayı öneririz. IIS **Web sitesi ekleme** iletişim kutusu varsayılan olarak bu yapılandırmaya sahiptir. Bir **site adı** sağlandığında, metin otomatik olarak **uygulama havuzu** metin kutusuna aktarılır. Site eklendiğinde site adı kullanılarak yeni bir uygulama havuzu oluşturulur.
 
-## <a name="application-pool-identity"></a>Uygulama havuzuIdentity
+## <a name="application-pool-no-locidentity"></a>Uygulama havuzuIdentity
 
-Bir uygulama havuzu kimliği hesabı, bir uygulamanın etki alanı veya yerel hesap oluşturmak ve yönetmek zorunda kalmadan benzersiz bir hesap altında çalışmasına izin verir. IIS 8,0 veya sonraki sürümlerde, IIS Yönetici çalışan Işlemi (WAS), yeni uygulama havuzunun adıyla bir sanal hesap oluşturur ve varsayılan olarak bu hesap altında uygulama havuzunun çalışan işlemlerini çalıştırır. Uygulama havuzunun **Gelişmiş ayarlar** altındaki IIS Yönetim Konsolu 'nda, uygulamasının **Identity** **applicationpokaydentity**kullanacak şekilde ayarlandığından emin olun:
+Bir uygulama havuzu kimliği hesabı, bir uygulamanın etki alanı veya yerel hesap oluşturmak ve yönetmek zorunda kalmadan benzersiz bir hesap altında çalışmasına izin verir. IIS 8,0 veya sonraki sürümlerde, IIS Yönetici çalışan Işlemi (WAS), yeni uygulama havuzunun adıyla bir sanal hesap oluşturur ve varsayılan olarak bu hesap altında uygulama havuzunun çalışan işlemlerini çalıştırır. Uygulama havuzu için **Gelişmiş ayarlar** altındaki IIS Yönetim Konsolu 'nda, **Identity** öğesinin ** Identity applicationPool**kullanmak için ayarlandığından emin olun:
 
 ![Uygulama havuzu Gelişmiş ayarları iletişim kutusu](index/_static/apppool-identity.png)
 

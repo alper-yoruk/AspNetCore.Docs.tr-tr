@@ -5,6 +5,8 @@ description: Sayfaların Bölüm 7 Razor ve Entity Framework öğretici serisi.
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/update-related-data
-ms.openlocfilehash: b442a4ce1f63c047c123315626f559155fd06424
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 3807c52bb843c4d6403e8236fde50c034a8d1e2b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86060143"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017752"
 ---
-# <a name="part-7-razor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>Bölüm 7, Razor ASP.NET Core EF Core olan sayfalar-Ilgili verileri güncelleştir
+# <a name="part-7-no-locrazor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>Bölüm 7, Razor ASP.NET Core EF Core olan sayfalar-Ilgili verileri güncelleştir
 
 , [Tom Dykstra](https://github.com/tdykstra)ve [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -65,7 +67,7 @@ Yukarıdaki kod:
 * `TryUpdateModelAsync` [Aşırı nakletmeyi](xref:data/ef-rp/crud#overposting)engellemek için kullanır.
 * Kaldırır `ViewData["DepartmentID"]` . `DepartmentNameSL`temel sınıftan türü kesin belirlenmiş bir modeldir ve sayfa tarafından kullanılır Razor . Kesin olarak belirlenmiş modeller, kesin olarak yazılan zayıf bir şekilde tercih edilir. Daha fazla bilgi için bkz. [zayıf yazılmış veriler (ViewData ve ViewBag)](xref:mvc/views/overview#VD_VB).
 
-### <a name="update-the-course-create-razor-page"></a>Kurs oluşturma sayfasını güncelleştirme Razor
+### <a name="update-the-course-create-no-locrazor-page"></a>Kurs oluşturma sayfasını güncelleştirme Razor
 
 *Sayfaları/kursları/Create. cshtml* 'yi aşağıdaki kodla güncelleştirin:
 
@@ -92,7 +94,7 @@ Oluştur sayfasını test edin. Oluştur sayfası departman KIMLIĞI yerine depa
 
 Değişiklikler, oluşturma sayfası modelinde yapılanlarla benzerdir. Yukarıdaki kodda, `PopulateDepartmentsDropDownList` Bu departmanı açılan listede seçen departman kimliği ' nde geçirilir.
 
-### <a name="update-the-course-edit-razor-page"></a>Kurs düzenleme sayfasını güncelleştirme Razor
+### <a name="update-the-course-edit-no-locrazor-page"></a>Kurs düzenleme sayfasını güncelleştirme Razor
 
 *Pages/kurslar/Edit. cshtml* dosyasını aşağıdaki kodla güncelleştirin:
 
@@ -120,7 +122,7 @@ Sayfa `<input type="hidden">` , kurs numarası için gizli bir alan () içerir. 
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/Details.cshtml.cs?highlight=28)]
 
-### <a name="update-the-course-razor-pages"></a>Kurs sayfalarını güncelleştirme Razor
+### <a name="update-the-course-no-locrazor-pages"></a>Kurs sayfalarını güncelleştirme Razor
 
 *Pages/kurslar/delete. cshtml* dosyasını aşağıdaki kodla güncelleştirin:
 
@@ -197,7 +199,7 @@ Yukarıdaki kod:
 * `UpdateInstructorCourses` `OnPostAsync` Onay kutularından düzenlenmekte olan eğitmen varlığına bilgi uygulamak için ' de çağırır.
 * Başarısız olursa, `PopulateAssignedCourseData` ve `UpdateInstructorCourses` ' de çağırır `OnPostAsync` `TryUpdateModel` . Bu yöntem çağrıları, bir hata iletisiyle yeniden görüntülendiğinde sayfaya girilen atanan kurs verilerini geri yükler.
 
-### <a name="update-the-instructor-edit-razor-page"></a>Eğitmen düzenleme sayfasını güncelleştirme Razor
+### <a name="update-the-instructor-edit-no-locrazor-page"></a>Eğitmen düzenleme sayfasını güncelleştirme Razor
 
 *Pages/eğitmenler/Edit. cshtml* dosyasını aşağıdaki kodla güncelleştirin:
 

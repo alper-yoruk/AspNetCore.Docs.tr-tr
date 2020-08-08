@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: 496221bb4e34e1f9e4177d1934786a77d8c9b411
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 5bfea63cc1ff85adbe5ce572858b78a8e86b2280
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212541"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017733"
 ---
-# <a name="part-3-razor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>Bölüm 3, Razor ASP.NET Core sıralama, filtreleme, sayfalama EF Core olan sayfalar
+# <a name="part-3-no-locrazor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>Bölüm 3, Razor ASP.NET Core sıralama, filtreleme, sayfalama EF Core olan sayfalar
 
 By [Tom Dykstra](https://github.com/tdykstra), [Rick Anderson](https://twitter.com/RickAndMSFT)ve [Jon P Smith](https://twitter.com/thereformedprog)
 
@@ -134,7 +136,7 @@ Yukarıdaki kod, `Where` yöntemin bir veya bir SQLite üzerinde çağrılması 
 
 Daha fazla bilgi için bkz. [SQLite sağlayıcı ile büyük/küçük harfe duyarsız sorgu kullanma](https://github.com/aspnet/EntityFrameworkCore/issues/11414).
 
-### <a name="update-the-razor-page"></a>Sayfayı Güncelleştir Razor
+### <a name="update-the-no-locrazor-page"></a>Sayfayı Güncelleştir Razor
 
 *Sayfalar/öğrenciler/Index. cshtml* içindeki kodu, bir **arama** düğmesi ve assıralanan Chrome oluşturmak için değiştirin.
 
@@ -211,7 +213,7 @@ Sayfalama sırasında arama dizesi değiştirilirse sayfa 1 ' e sıfırlanır. Y
 
   Çağrıdan sonraki iki soru işareti, `pageIndex` `PaginatedList.CreateAsync` [null birleşim işlecini](/dotnet/csharp/language-reference/operators/null-conditional-operator)temsil eder. Null birleşim işleci, null yapılabilir bir tür için varsayılan değeri tanımlar. İfade, `(pageIndex ?? 1)` bir değer içeriyorsa değerini döndürür anlamına gelir `pageIndex` . `pageIndex`Değer yoksa 1 döndürün.
 
-### <a name="add-paging-links-to-the-razor-page"></a>Sayfaya sayfalama bağlantıları ekleyin Razor
+### <a name="add-paging-links-to-the-no-locrazor-page"></a>Sayfaya sayfalama bağlantıları ekleyin Razor
 
 *Öğrenciler/Index. cshtml* içindeki kodu aşağıdaki kodla değiştirin. Değişiklikler vurgulanır:
 
@@ -247,7 +249,7 @@ Aşağıdaki kodla *SchoolViewModels/kayıtlarını Mentdategroup. cs* oluşturu
 
 [!code-csharp[Main](intro/samples/cu30/Models/SchoolViewModels/EnrollmentDateGroup.cs)]
 
-### <a name="create-the-razor-page"></a>Sayfayı oluşturun Razor
+### <a name="create-the-no-locrazor-page"></a>Sayfayı oluşturun Razor
 
 Aşağıdaki kodla bir *Pages/about. cshtml* dosyası oluşturun:
 
@@ -467,7 +469,7 @@ Sayfalama sırasında arama dizesi değiştirilirse sayfa 1 ' e sıfırlanır. Y
 
 İçindeki iki soru işareti `PaginatedList.CreateAsync` , [null birleşim işlecini](/dotnet/csharp/language-reference/operators/null-conditional-operator)temsil eder. Null birleşim işleci, null yapılabilir bir tür için varsayılan değeri tanımlar. İfade, `(pageIndex ?? 1)` bir değer içeriyorsa değerini döndürür anlamına gelir `pageIndex` . `pageIndex`Değer yoksa 1 döndürün.
 
-## <a name="add-paging-links-to-the-student-razor-page"></a>Öğrenci sayfasına sayfalama bağlantıları ekleme Razor
+## <a name="add-paging-links-to-the-student-no-locrazor-page"></a>Öğrenci sayfasına sayfalama bağlantıları ekleme Razor
 
 *Öğrenciler/Index. cshtml*'de biçimlendirmeyi güncelleştirin. Değişiklikler vurgulanır:
 
@@ -521,7 +523,7 @@ ASP.NET Core 2,2 ' deki Web şablonları hakkında sayfasını içermez. ASP.NET
 
 LINQ beyanı, öğrenci varlıklarını kayıt tarihine göre gruplandırır, her bir gruptaki varlıkların sayısını hesaplar ve sonuçları bir `EnrollmentDateGroup` görünüm modeli nesneleri koleksiyonunda depolar.
 
-### <a name="modify-the-about-razor-page"></a>Hakkında sayfasını değiştirme Razor
+### <a name="modify-the-about-no-locrazor-page"></a>Hakkında sayfasını değiştirme Razor
 
 *Pages/about. cshtml* dosyasındaki kodu aşağıdaki kodla değiştirin:
 

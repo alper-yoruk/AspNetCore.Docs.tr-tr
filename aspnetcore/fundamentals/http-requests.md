@@ -7,6 +7,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 02/09/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/http-requests
-ms.openlocfilehash: fb9001c06228b4290ca1e0c7cfb6b1338f431cd6
-ms.sourcegitcommit: ca6a1f100c1a3f59999189aa962523442dd4ead1
+ms.openlocfilehash: ef6ed0911c2615ea543b1c2cea31a9a453f0c604
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/30/2020
-ms.locfileid: "87444117"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017239"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>ASP.NET Core 'de ıhttpclientfactory kullanarak HTTP istekleri yapın
 
@@ -214,7 +216,7 @@ Yukarıdaki kodda, `CreateItemAsync` yöntemi:
 * <xref:System.Net.Http.HttpClient.PostAsync%2A>JSON içeriğini BELIRTILEN URL 'ye göndermek için çağrılar. Bu, [HttpClient. BaseAddress](xref:System.Net.Http.HttpClient.BaseAddress)'e eklenen GÖRELI bir URL 'dir.
 * <xref:System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode%2A>Yanıt durum kodu başarıyı belirtmezse bir özel durum oluşturmak için çağırır.
 
-`HttpClient`, diğer içerik türlerini de destekler. Örneğin, <xref:System.Net.Http.MultipartContent> ve <xref:System.Net.Http.StreamContent>. Desteklenen içeriğin tamamı listesi için bkz <xref:System.Net.Http.HttpContent> ..
+`HttpClient`, diğer içerik türlerini de destekler. Örneğin <xref:System.Net.Http.MultipartContent> ve <xref:System.Net.Http.StreamContent>. Desteklenen içeriğin tamamı listesi için bkz <xref:System.Net.Http.HttpContent> ..
 
 Aşağıdaki örnekte bir HTTP PUT isteği gösterilmektedir:
 
@@ -359,18 +361,18 @@ Yukarıdaki yaklaşımlar, `IHttpClientFactory` benzer bir şekilde çözen kayn
 - , `SocketsHttpHandler` Örnekleri arasında bağlantıları paylaşır `HttpClient` . Bu paylaşım, yuva azalmasına engel olur.
 - `SocketsHttpHandler`Bağlantıları, `PooledConnectionLifetime` eski DNS sorunlarından kaçınmak için öğesine göre döngüler.
 
-### <a name="cookies"></a>Tanımlama bilgileri
+### <a name="no-loccookies"></a>Cookiemalar
 
-Havuza alınmış `HttpMessageHandler` örnekler, `CookieContainer` paylaşılan nesneler ile sonuçlanır. Beklenmeyen `CookieContainer` nesne paylaşımı genellikle hatalı kodla sonuçlanır. Tanımlama bilgileri gerektiren uygulamalar için şunlardan birini göz önünde bulundurun:
+Havuza alınmış `HttpMessageHandler` örnekler, `CookieContainer` paylaşılan nesneler ile sonuçlanır. Beklenmeyen `CookieContainer` nesne paylaşımı genellikle hatalı kodla sonuçlanır. S gerektiren uygulamalar için cookie şunlardan birini göz önünde bulundurun:
 
- - Otomatik tanımlama bilgisi işlemeyi devre dışı bırakma
+ - Otomatik işlemeyi devre dışı bırakma cookie
  - Önlemenin`IHttpClientFactory`
 
-<xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*>Otomatik tanımlama bilgisi işlemesini devre dışı bırakmak için çağırın:
+<xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*>Otomatik işlemeyi devre dışı bırakmak için çağırın cookie :
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
 
-## <a name="logging"></a>Günlüğe Kaydetme
+## <a name="logging"></a>Günlüğe kaydetme
 
 `IHttpClientFactory`Tüm istekler için kayıt günlüğü iletileri aracılığıyla oluşturulan istemciler. Varsayılan günlük iletilerini görmek için günlük yapılandırmasında uygun bilgi düzeyini etkinleştirin. İstek üst bilgilerinin günlüğe kaydedilmesi gibi ek Günlükler yalnızca izleme düzeyinde yer alır.
 
@@ -677,18 +679,18 @@ Yukarıdaki yaklaşımlar, `IHttpClientFactory` benzer bir şekilde çözen kayn
 - , `SocketsHttpHandler` Örnekleri arasında bağlantıları paylaşır `HttpClient` . Bu paylaşım, yuva azalmasına engel olur.
 - `SocketsHttpHandler`Bağlantıları, `PooledConnectionLifetime` eski DNS sorunlarından kaçınmak için öğesine göre döngüler.
 
-### <a name="cookies"></a>Tanımlama bilgileri
+### <a name="no-loccookies"></a>Cookiemalar
 
-Havuza alınmış `HttpMessageHandler` örnekler, `CookieContainer` paylaşılan nesneler ile sonuçlanır. Beklenmeyen `CookieContainer` nesne paylaşımı genellikle hatalı kodla sonuçlanır. Tanımlama bilgileri gerektiren uygulamalar için şunlardan birini göz önünde bulundurun:
+Havuza alınmış `HttpMessageHandler` örnekler, `CookieContainer` paylaşılan nesneler ile sonuçlanır. Beklenmeyen `CookieContainer` nesne paylaşımı genellikle hatalı kodla sonuçlanır. S gerektiren uygulamalar için cookie şunlardan birini göz önünde bulundurun:
 
- - Otomatik tanımlama bilgisi işlemeyi devre dışı bırakma
+ - Otomatik işlemeyi devre dışı bırakma cookie
  - Önlemenin`IHttpClientFactory`
 
-<xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*>Otomatik tanımlama bilgisi işlemesini devre dışı bırakmak için çağırın:
+<xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*>Otomatik işlemeyi devre dışı bırakmak için çağırın cookie :
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
 
-## <a name="logging"></a>Günlüğe Kaydetme
+## <a name="logging"></a>Günlüğe kaydetme
 
 `IHttpClientFactory`Tüm istekler için kayıt günlüğü iletileri aracılığıyla oluşturulan istemciler. Varsayılan günlük iletilerini görmek için günlük yapılandırmanızda uygun bilgi düzeyini etkinleştirin. İstek üst bilgilerinin günlüğe kaydedilmesi gibi ek Günlükler yalnızca izleme düzeyinde yer alır.
 
@@ -985,18 +987,18 @@ Yukarıdaki yaklaşımlar, `IHttpClientFactory` benzer bir şekilde çözen kayn
 - , `SocketsHttpHandler` Örnekleri arasında bağlantıları paylaşır `HttpClient` . Bu paylaşım, yuva azalmasına engel olur.
 - `SocketsHttpHandler`Bağlantıları, `PooledConnectionLifetime` eski DNS sorunlarından kaçınmak için öğesine göre döngüler.
 
-### <a name="cookies"></a>Tanımlama bilgileri
+### <a name="no-loccookies"></a>Cookiemalar
 
-Havuza alınmış `HttpMessageHandler` örnekler, `CookieContainer` paylaşılan nesneler ile sonuçlanır. Beklenmeyen `CookieContainer` nesne paylaşımı genellikle hatalı kodla sonuçlanır. Tanımlama bilgileri gerektiren uygulamalar için şunlardan birini göz önünde bulundurun:
+Havuza alınmış `HttpMessageHandler` örnekler, `CookieContainer` paylaşılan nesneler ile sonuçlanır. Beklenmeyen `CookieContainer` nesne paylaşımı genellikle hatalı kodla sonuçlanır. S gerektiren uygulamalar için cookie şunlardan birini göz önünde bulundurun:
 
- - Otomatik tanımlama bilgisi işlemeyi devre dışı bırakma
+ - Otomatik işlemeyi devre dışı bırakma cookie
  - Önlemenin`IHttpClientFactory`
 
-<xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*>Otomatik tanımlama bilgisi işlemesini devre dışı bırakmak için çağırın:
+<xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*>Otomatik işlemeyi devre dışı bırakmak için çağırın cookie :
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
 
-## <a name="logging"></a>Günlüğe Kaydetme
+## <a name="logging"></a>Günlüğe kaydetme
 
 `IHttpClientFactory`Tüm istekler için kayıt günlüğü iletileri aracılığıyla oluşturulan istemciler. Varsayılan günlük iletilerini görmek için günlük yapılandırmanızda uygun bilgi düzeyini etkinleştirin. İstek üst bilgilerinin günlüğe kaydedilmesi gibi ek Günlükler yalnızca izleme düzeyinde yer alır.
 

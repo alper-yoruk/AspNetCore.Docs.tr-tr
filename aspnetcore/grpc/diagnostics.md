@@ -6,6 +6,8 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 09/23/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/diagnostics
-ms.openlocfilehash: ca87ba5b03e7657132e5ebaba72370bde85c85d4
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: bf8068375da81288f2fbfa2c1bfafe97c03c70fc
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85406777"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016186"
 ---
 # <a name="logging-and-diagnostics-in-grpc-on-net"></a>.NET üzerinde gRPC 'de günlüğe kaydetme ve tanılama
 
@@ -31,7 +33,7 @@ Bu makale, sorunları gidermeye yardımcı olmak için bir gRPC uygulamasından 
 * **İzleme** -ve kullanılarak yazılmış bir işlemle ilgili olaylar `DiaganosticSource` `Activity` . Tanılama kaynağından alınan izlemeler, [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-core) ve [opentelemetri](https://github.com/open-telemetry/opentelemetry-dotnet)gibi kitaplıklara göre uygulama telemetrisini toplamak için yaygın olarak kullanılır.
 * **Ölçümler** -saniye başına isteklerin zaman aralıklarıyla veri ölçülerinin temsili. Ölçümler kullanılarak dağıtılır `EventCounter` ve [DotNet-Counters](https://docs.microsoft.com/dotnet/core/diagnostics/dotnet-counters) komut satırı aracı kullanılarak veya [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters)ile gözlemlenebilir.
 
-## <a name="logging"></a>Günlüğe Kaydetme
+## <a name="logging"></a>Günlüğe kaydetme
 
 gRPC Hizmetleri ve gRPC istemcisi [.NET Core günlüğü](xref:fundamentals/logging/index)kullanarak yazma günlükleri. Günlüklerde, uygulamalarınızda beklenmeyen davranışa hata ayıklamanız gerektiğinde başlamak için iyi bir yerdir.
 
@@ -173,7 +175,7 @@ Kullanmanın en kolay yolu, `DiagnosticSource` uygulamanızda [Application Insig
 
 gRPC sunucu ölçümleri `Grpc.AspNetCore.Server` olay kaynağında raporlanır.
 
-| Adı                      | Açıklama                   |
+| Ad                      | Açıklama                   |
 | --------------------------|-------------------------------|
 | `total-calls`             | Toplam çağrı sayısı                   |
 | `current-calls`           | Geçerli çağrılar                 |
@@ -189,7 +191,7 @@ ASP.NET Core Ayrıca olay kaynağı üzerinde kendi ölçümlerini de sağlar `M
 
 gRPC istemci ölçümleri `Grpc.Net.Client` olay kaynağında raporlanır.
 
-| Adı                      | Açıklama                   |
+| Ad                      | Açıklama                   |
 | --------------------------|-------------------------------|
 | `total-calls`             | Toplam çağrı sayısı                   |
 | `current-calls`           | Geçerli çağrılar                 |

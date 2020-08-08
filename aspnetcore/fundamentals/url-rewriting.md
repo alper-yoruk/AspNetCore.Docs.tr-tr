@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/16/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/url-rewriting
-ms.openlocfilehash: dbdb7cd86218fd9ba63ae4ac2aa516836d4fd1a1
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 9f7eb15271a0b7adb3964b4fe039497bda7fef08
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944301"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016550"
 ---
 # <a name="url-rewriting-middleware-in-aspnet-core"></a>ASP.NET Core içinde URL yeniden yazma ara yazılımı
 
@@ -204,7 +206,7 @@ Yeniden yazma kuralı, `^rewrite-rule/(\d+)/(\d+)` yalnızca ile başlarsa yolla
 
 | Yol                              | Eşleştirme |
 | --------------------------------- | :---: |
-| `/rewrite-rule/1234/5678`         | Evet   |
+| `/rewrite-rule/1234/5678`         | Yes   |
 | `/my-cool-rewrite-rule/1234/5678` | Hayır    |
 | `/anotherrewrite-rule/1234/5678`  | Hayır    |
 
@@ -558,7 +560,7 @@ Yeniden yazma kuralı, `^rewrite-rule/(\d+)/(\d+)` yalnızca ile başlarsa yolla
 
 | Yol                              | Eşleştirme |
 | --------------------------------- | :---: |
-| `/rewrite-rule/1234/5678`         | Evet   |
+| `/rewrite-rule/1234/5678`         | Yes   |
 | `/my-cool-rewrite-rule/1234/5678` | Hayır    |
 | `/anotherrewrite-rule/1234/5678`  | Hayır    |
 

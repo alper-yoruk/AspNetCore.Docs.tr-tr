@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 02/12/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/choose-between-aspnet-and-aspnetcore
-ms.openlocfilehash: 73495ea851cdfe5d3588b347e75f0af6adacc02e
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 29596f1d974d585570af5ad686ff6be4b1f9b837
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404944"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017499"
 ---
 # <a name="choose-between-aspnet-4x-and-aspnet-core"></a>ASP.NET 4. x ve ASP.NET Core arasında seçim yapın
 
 ASP.NET Core, ASP.NET 4. x ' in bir tasarlayadır. Bu makalede aralarındaki farklar listelenir.
 
-## <a name="aspnet-core"></a>ASP.NET Core
+## <a name="aspnet-core"></a>ASP.NET Çekirdeği
 
 ASP.NET Core, Windows, macOS veya Linux 'ta modern, bulut tabanlı Web uygulamaları oluşturmaya yönelik açık kaynaklı, platformlar arası bir çerçevedir.
 
@@ -39,7 +41,7 @@ ASP.NET 4. x, Windows 'ta kurumsal düzeyde, sunucu tabanlı Web uygulamaları o
 
 Aşağıdaki tabloda ASP.NET Core ASP.NET 4. x ile karşılaştırılır.
 
-| ASP.NET Core | ASP.NET 4.x |
+| ASP.NET Çekirdeği | ASP.NET 4.x |
 |---|---|
 |Windows, macOS veya Linux için derleme|Windows için derleme|
 |[ Razor Sayfalar](xref:razor-pages/index) , ASP.NET Core 2. x itibariyle bir Web Kullanıcı arabirimi oluşturmak için önerilen yaklaşımdır. Ayrıca bkz. [MVC](xref:mvc/overview), [Web API 'si](xref:tutorials/first-web-api)ve [SignalR](xref:signalr/introduction) .|[Web Forms](/aspnet/web-forms), [SignalR](/aspnet/signalr) , [MVC](/aspnet/mvc), [Web API](/aspnet/web-api/), Web [kancaları](/aspnet/webhooks/)veya [Web sayfaları](/aspnet/web-pages) kullanın|

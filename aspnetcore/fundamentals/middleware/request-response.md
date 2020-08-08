@@ -7,6 +7,8 @@ ms.author: jukotali
 ms.custom: mvc
 ms.date: 5/29/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/request-response
-ms.openlocfilehash: b6fc7a115cb0f4696d10bf036eadb59028dfb605
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: da863ac5ecf649adffe8a3d13838be2ac1f748c2
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404138"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016966"
 ---
 # <a name="request-and-response-operations-in-aspnet-core"></a>ASP.NET Core 'de istek ve yanıt işlemleri
 
@@ -30,7 +32,7 @@ Bu makalede, istek gövdesinden okuma ve yanıt gövdesine yazma işlemleri aç�
 
 İstek ve yanıt gövdelerinin iki soyutlamaları vardır: <xref:System.IO.Stream> ve <xref:System.IO.Pipelines.Pipe> . İstek okuma için <xref:Microsoft.AspNetCore.Http.HttpRequest.Body?displayProperty=nameWithType> bir <xref:System.IO.Stream> , ve `HttpRequest.BodyReader` olur <xref:System.IO.Pipelines.PipeReader> . Yanıt yazma için <xref:Microsoft.AspNetCore.Http.HttpResponse.Body?displayProperty=nameWithType> bir <xref:System.IO.Stream> , ve `HttpResponse.BodyWriter` olur <xref:System.IO.Pipelines.PipeWriter> .
 
-İşlem [hatları](/dotnet/standard/io/pipelines) akışlar üzerinde önerilir. Akışlar bazı basit işlemler için daha kolay olabilir, ancak işlem hatları performans avantajına sahiptir ve çoğu senaryoda daha kolay kullanılır. ASP.NET Core dahili akışlar yerine işlem hatlarını kullanmaya başlıyor. Örnekler arasında şunlar yer almaktadır:
+İşlem [hatları](/dotnet/standard/io/pipelines) akışlar üzerinde önerilir. Akışlar bazı basit işlemler için daha kolay olabilir, ancak işlem hatları performans avantajına sahiptir ve çoğu senaryoda daha kolay kullanılır. ASP.NET Core dahili akışlar yerine işlem hatlarını kullanmaya başlıyor. Örneklere şunlar dahildir:
 
 * `FormReader`
 * `TextReader`
@@ -78,7 +80,7 @@ Ancak, yine de bazı sorunlar vardır:
 
 Bu sorunlar düzeltilebilir, ancak kod çok daha karmaşık bir geliştirme sayesinde daha karmaşık hale geliyor. İşlem hatları, en az kod karmaşıklığı ile bu sorunları çözmenin bir yolunu sağlar.
 
-## <a name="pipelines"></a>Pipelines
+## <a name="pipelines"></a>İşlem hatları
 
 Aşağıdaki örnek, bir [Pipereader](/dotnet/standard/io/pipelines#pipe)kullanılarak aynı senaryonun nasıl işlenebileceğini göstermektedir:
 

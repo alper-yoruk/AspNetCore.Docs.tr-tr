@@ -5,6 +5,8 @@ description: ASP.NET Core veri koruma API 'Lerinde amaç dizelerinin nasıl kull
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/consumer-apis/purpose-strings
-ms.openlocfilehash: b52961fd33ce2d3708754f73ea38456d8d5f8f3c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 33139f6e5e36aed2cb54738fbd2487969844edc7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404294"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88018409"
 ---
 # <a name="purpose-strings-in-aspnet-core"></a>ASP.NET Core için amaç dizeleri
 

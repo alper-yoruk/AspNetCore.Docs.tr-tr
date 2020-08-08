@@ -5,6 +5,8 @@ description: Kimlik doğrulama ilkesi şemaları, tek bir mantıksal kimlik doğ
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,16 +15,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/policyschemes
-ms.openlocfilehash: a8bde9633f06f41ebcb55480eb2322544db4b4da
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ddee613bf9c603542f17adf59a835a2ddbdc25a3
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408766"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017811"
 ---
 # <a name="policy-schemes-in-aspnet-core"></a>ASP.NET Core 'de ilke şemaları
 
-Kimlik doğrulama ilkesi şemaları, tek bir mantıksal kimlik doğrulama düzeninin birden çok yaklaşım kullanmasına daha kolay olmasını sağlar. Örneğin, bir ilke şeması, sorunlar için Google kimlik doğrulaması ve diğer her şey için tanımlama bilgisi kimlik doğrulaması kullanabilir. Kimlik doğrulama ilkesi şemaları şunları yapar:
+Kimlik doğrulama ilkesi şemaları, tek bir mantıksal kimlik doğrulama düzeninin birden çok yaklaşım kullanmasına daha kolay olmasını sağlar. Örneğin, bir ilke şeması, sorunlar için Google kimlik doğrulaması ve cookie diğer her şey için kimlik doğrulaması kullanabilir. Kimlik doğrulama ilkesi şemaları şunları yapar:
 
 * Herhangi bir kimlik doğrulama eylemini başka bir düzene iletmek kolay.
 * İsteğe göre dinamik olarak ilet.
@@ -36,11 +38,11 @@ Türetilmiş <xref:Microsoft.AspNetCore.Authentication.AuthenticationSchemeOptio
 
 ## <a name="examples"></a>Örnekler
 
-Aşağıdaki örnek, alt düzey şemaları birleştiren daha yüksek düzey bir düzeni gösterir. Google kimlik doğrulaması, sorunlar için kullanılır ve diğer her şey için tanımlama bilgisi kimlik doğrulaması kullanılır:
+Aşağıdaki örnek, alt düzey şemaları birleştiren daha yüksek düzey bir düzeni gösterir. Daha zorluk için Google kimlik doğrulaması kullanılır ve cookie diğer her şey için kimlik doğrulaması kullanılır:
 
 [!code-csharp[sample](policyschemes/samples/Startup.cs?name=snippet1)]
 
-Aşağıdaki örnek, istek temelinde dinamik düzen seçimini mümkün bir şekilde sunar. Diğer bir deyişle, tanımlama bilgilerini ve API kimlik doğrulamasını karıştırma:
+Aşağıdaki örnek, istek temelinde dinamik düzen seçimini mümkün bir şekilde sunar. Diğer bir deyişle, cookie ve API kimlik doğrulamasını karıştırma:
 
  <!-- REVIEW, missing If set in public Func<HttpContext, string> ForwardDefaultSelector -->
 

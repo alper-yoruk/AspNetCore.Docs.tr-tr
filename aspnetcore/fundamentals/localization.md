@@ -5,6 +5,8 @@ description: ASP.NET Core farklı diller ve kültürlere içerik yerelleştirilm
 ms.author: riande
 ms.date: 11/30/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/localization
-ms.openlocfilehash: 412cd7a39a0eed6800e15d235102ed367da5f746
-ms.sourcegitcommit: 895e952aec11c91d703fbdd3640a979307b8cc67
+ms.openlocfilehash: 9fd68d3b412c2cef6125c657653f605689ca6e70
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/01/2020
-ms.locfileid: "85793477"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017226"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>ASP.NET Core Genelleştirme ve yerelleştirme
 
@@ -247,7 +249,7 @@ Varsayılan liste, en çok belirli olan en az özel. Makalenin ilerleyen kısım
 
 ### <a name="querystringrequestcultureprovider"></a>QueryStringRequestCultureProvider
 
-Bazı uygulamalar [kültür ve UI kültürünü](https://msdn.microsoft.com/library/system.globalization.cultureinfo.aspx)ayarlamak için bir sorgu dizesi kullanır. Tanımlama bilgisi veya Accept-Language üst bilgisi yaklaşımını kullanan uygulamalar için, URL 'ye bir sorgu dizesi eklemek hata ayıklama ve test kodu için yararlıdır. Varsayılan olarak,, `QueryStringRequestCultureProvider` listede ilk yerelleştirme sağlayıcısı olarak kaydedilir `RequestCultureProvider` . Sorgu dizesi parametrelerini ve öğesini geçirirsiniz `culture` `ui-culture` . Aşağıdaki örnek, belirli kültürü (dil ve bölge) Ispanyolca/Meksika olarak ayarlar:
+Bazı uygulamalar [kültür ve UI kültürünü](https://msdn.microsoft.com/library/system.globalization.cultureinfo.aspx)ayarlamak için bir sorgu dizesi kullanır. cookieVeya Accept-Language üstbilgi yaklaşımını kullanan uygulamalar için, URL 'ye bir sorgu dizesi eklemek hata ayıklama ve test kodu için yararlıdır. Varsayılan olarak,, `QueryStringRequestCultureProvider` listede ilk yerelleştirme sağlayıcısı olarak kaydedilir `RequestCultureProvider` . Sorgu dizesi parametrelerini ve öğesini geçirirsiniz `culture` `ui-culture` . Aşağıdaki örnek, belirli kültürü (dil ve bölge) Ispanyolca/Meksika olarak ayarlar:
 
    `http://localhost:5000/?culture=es-MX&ui-culture=es-MX`
 
@@ -257,13 +259,13 @@ Yalnızca iki ( `culture` veya) birini geçirirseniz `ui-culture` , sorgu dizesi
 http://localhost:5000/?culture=es-MX
 ```
 
-### <a name="cookierequestcultureprovider"></a>CookieRequestCultureProvider
+### <a name="no-loccookierequestcultureprovider"></a>CookieRequestCultureProvider
 
-Üretim uygulamaları genellikle ASP.NET Core kültür tanımlama bilgisiyle kültürü ayarlamaya yönelik bir mekanizma sağlar. `MakeCookieValue`Bir tanımlama bilgisi oluşturmak için yöntemini kullanın.
+Üretim uygulamaları genellikle ASP.NET Core kültür ile kültürü ayarlamak için bir mekanizma sağlar cookie . `MakeCookieValue`Oluşturmak için yöntemini kullanın cookie .
 
-, `CookieRequestCultureProvider` `DefaultCookieName` Kullanıcının tercih ettiği kültür bilgilerini izlemek için kullanılan varsayılan tanımlama bilgisi adını döndürür. Varsayılan tanımlama bilgisi adı `.AspNetCore.Culture` .
+, `CookieRequestCultureProvider` `DefaultCookieName` cookie Kullanıcının tercih ettiği kültür bilgilerini izlemek için kullanılan varsayılan adı döndürür. Varsayılan cookie ad `.AspNetCore.Culture` .
 
-Tanımlama bilgisi biçimi `c=%LANGCODE%|uic=%LANGCODE%` , ve nerede olduğu, `c` `Culture` `uic` `UICulture` Örneğin:
+cookieBiçimi `c=%LANGCODE%|uic=%LANGCODE%` , ve nerede olduğu `c` , `Culture` `uic` `UICulture` Örneğin:
 
 ```
 c=en-UK|uic=en-US
@@ -330,7 +332,7 @@ services.Configure<RequestLocalizationOptions>(options =>
 
 [!code-cshtml[](localization/sample/3.x/Localization/Views/Shared/_Layout.cshtml?range=43-56&highlight=10)]
 
-`SetLanguage`Yöntemi kültür tanımlama bilgisini ayarlar.
+`SetLanguage`Yöntemi kültürü ayarlar cookie .
 
 [!code-csharp[](localization/sample/3.x/Localization/Controllers/HomeController.cs?range=57-67)]
 
@@ -601,7 +603,7 @@ Varsayılan liste, en çok belirli olan en az özel. Makalenin ilerleyen kısım
 
 ### <a name="querystringrequestcultureprovider"></a>QueryStringRequestCultureProvider
 
-Bazı uygulamalar [kültür ve UI kültürünü](https://msdn.microsoft.com/library/system.globalization.cultureinfo.aspx)ayarlamak için bir sorgu dizesi kullanır. Tanımlama bilgisi veya Accept-Language üst bilgisi yaklaşımını kullanan uygulamalar için, URL 'ye bir sorgu dizesi eklemek hata ayıklama ve test kodu için yararlıdır. Varsayılan olarak,, `QueryStringRequestCultureProvider` listede ilk yerelleştirme sağlayıcısı olarak kaydedilir `RequestCultureProvider` . Sorgu dizesi parametrelerini ve öğesini geçirirsiniz `culture` `ui-culture` . Aşağıdaki örnek, belirli kültürü (dil ve bölge) Ispanyolca/Meksika olarak ayarlar:
+Bazı uygulamalar [kültür ve UI kültürünü](https://msdn.microsoft.com/library/system.globalization.cultureinfo.aspx)ayarlamak için bir sorgu dizesi kullanır. cookieVeya Accept-Language üstbilgi yaklaşımını kullanan uygulamalar için, URL 'ye bir sorgu dizesi eklemek hata ayıklama ve test kodu için yararlıdır. Varsayılan olarak,, `QueryStringRequestCultureProvider` listede ilk yerelleştirme sağlayıcısı olarak kaydedilir `RequestCultureProvider` . Sorgu dizesi parametrelerini ve öğesini geçirirsiniz `culture` `ui-culture` . Aşağıdaki örnek, belirli kültürü (dil ve bölge) Ispanyolca/Meksika olarak ayarlar:
 
 ```
 http://localhost:5000/?culture=es-MX&ui-culture=es-MX
@@ -613,13 +615,13 @@ Yalnızca iki ( `culture` veya) birini geçirirseniz `ui-culture` , sorgu dizesi
 http://localhost:5000/?culture=es-MX
 ```
 
-### <a name="cookierequestcultureprovider"></a>CookieRequestCultureProvider
+### <a name="no-loccookierequestcultureprovider"></a>CookieRequestCultureProvider
 
-Üretim uygulamaları genellikle ASP.NET Core kültür tanımlama bilgisiyle kültürü ayarlamaya yönelik bir mekanizma sağlar. `MakeCookieValue`Bir tanımlama bilgisi oluşturmak için yöntemini kullanın.
+Üretim uygulamaları genellikle ASP.NET Core kültür ile kültürü ayarlamak için bir mekanizma sağlar cookie . `MakeCookieValue`Oluşturmak için yöntemini kullanın cookie .
 
-, `CookieRequestCultureProvider` `DefaultCookieName` Kullanıcının tercih ettiği kültür bilgilerini izlemek için kullanılan varsayılan tanımlama bilgisi adını döndürür. Varsayılan tanımlama bilgisi adı `.AspNetCore.Culture` .
+, `CookieRequestCultureProvider` `DefaultCookieName` cookie Kullanıcının tercih ettiği kültür bilgilerini izlemek için kullanılan varsayılan adı döndürür. Varsayılan cookie ad `.AspNetCore.Culture` .
 
-Tanımlama bilgisi biçimi `c=%LANGCODE%|uic=%LANGCODE%` , ve nerede olduğu, `c` `Culture` `uic` `UICulture` Örneğin:
+cookieBiçimi `c=%LANGCODE%|uic=%LANGCODE%` , ve nerede olduğu `c` , `Culture` `uic` `UICulture` Örneğin:
 
 ```
 c=en-UK|uic=en-US
@@ -686,7 +688,7 @@ services.Configure<RequestLocalizationOptions>(options =>
 
 [!code-cshtml[](localization/sample/3.x/Localization/Views/Shared/_Layout.cshtml?range=43-56&highlight=10)]
 
-`SetLanguage`Yöntemi kültür tanımlama bilgisini ayarlar.
+`SetLanguage`Yöntemi kültürü ayarlar cookie .
 
 [!code-csharp[](localization/sample/3.x/Localization/Controllers/HomeController.cs?range=57-67)]
 
@@ -956,7 +958,7 @@ Varsayılan liste, en çok belirli olan en az özel. Makalenin ilerleyen kısım
 
 ### <a name="querystringrequestcultureprovider"></a>QueryStringRequestCultureProvider
 
-Bazı uygulamalar [kültür ve UI kültürünü](https://msdn.microsoft.com/library/system.globalization.cultureinfo.aspx)ayarlamak için bir sorgu dizesi kullanır. Tanımlama bilgisi veya Accept-Language üst bilgisi yaklaşımını kullanan uygulamalar için, URL 'ye bir sorgu dizesi eklemek hata ayıklama ve test kodu için yararlıdır. Varsayılan olarak,, `QueryStringRequestCultureProvider` listede ilk yerelleştirme sağlayıcısı olarak kaydedilir `RequestCultureProvider` . Sorgu dizesi parametrelerini ve öğesini geçirirsiniz `culture` `ui-culture` . Aşağıdaki örnek, belirli kültürü (dil ve bölge) Ispanyolca/Meksika olarak ayarlar:
+Bazı uygulamalar [kültür ve UI kültürünü](https://msdn.microsoft.com/library/system.globalization.cultureinfo.aspx)ayarlamak için bir sorgu dizesi kullanır. cookieVeya Accept-Language üstbilgi yaklaşımını kullanan uygulamalar için, URL 'ye bir sorgu dizesi eklemek hata ayıklama ve test kodu için yararlıdır. Varsayılan olarak,, `QueryStringRequestCultureProvider` listede ilk yerelleştirme sağlayıcısı olarak kaydedilir `RequestCultureProvider` . Sorgu dizesi parametrelerini ve öğesini geçirirsiniz `culture` `ui-culture` . Aşağıdaki örnek, belirli kültürü (dil ve bölge) Ispanyolca/Meksika olarak ayarlar:
 
 ```
 http://localhost:5000/?culture=es-MX&ui-culture=es-MX
@@ -968,13 +970,13 @@ Yalnızca iki ( `culture` veya) birini geçirirseniz `ui-culture` , sorgu dizesi
 http://localhost:5000/?culture=es-MX
 ```
 
-### <a name="cookierequestcultureprovider"></a>CookieRequestCultureProvider
+### <a name="no-loccookierequestcultureprovider"></a>CookieRequestCultureProvider
 
-Üretim uygulamaları genellikle ASP.NET Core kültür tanımlama bilgisiyle kültürü ayarlamaya yönelik bir mekanizma sağlar. `MakeCookieValue`Bir tanımlama bilgisi oluşturmak için yöntemini kullanın.
+Üretim uygulamaları genellikle ASP.NET Core kültür ile kültürü ayarlamak için bir mekanizma sağlar cookie . `MakeCookieValue`Oluşturmak için yöntemini kullanın cookie .
 
-, `CookieRequestCultureProvider` `DefaultCookieName` Kullanıcının tercih ettiği kültür bilgilerini izlemek için kullanılan varsayılan tanımlama bilgisi adını döndürür. Varsayılan tanımlama bilgisi adı `.AspNetCore.Culture` .
+, `CookieRequestCultureProvider` `DefaultCookieName` cookie Kullanıcının tercih ettiği kültür bilgilerini izlemek için kullanılan varsayılan adı döndürür. Varsayılan cookie ad `.AspNetCore.Culture` .
 
-Tanımlama bilgisi biçimi `c=%LANGCODE%|uic=%LANGCODE%` , ve nerede olduğu, `c` `Culture` `uic` `UICulture` Örneğin:
+cookieBiçimi `c=%LANGCODE%|uic=%LANGCODE%` , ve nerede olduğu `c` , `Culture` `uic` `UICulture` Örneğin:
 
 ```
 c=en-UK|uic=en-US
@@ -1064,7 +1066,7 @@ services.Configure<RequestLocalizationOptions>(options =>
 
 [!code-cshtml[](localization/sample/3.x/Localization/Views/Shared/_Layout.cshtml?range=43-56&highlight=10)]
 
-`SetLanguage`Yöntemi kültür tanımlama bilgisini ayarlar.
+`SetLanguage`Yöntemi kültürü ayarlar cookie .
 
 [!code-csharp[](localization/sample/3.x/Localization/Controllers/HomeController.cs?range=57-67)]
 

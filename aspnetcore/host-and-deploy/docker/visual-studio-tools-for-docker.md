@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 09/12/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/docker/visual-studio-tools-for-docker
-ms.openlocfilehash: 2b0b1a869f41bcaed59d9bed89f7fcdb58d0f6c1
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2bdbbcfe4a94e5333ae11c4ab486ee0676d24b31
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407739"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015731"
 ---
 # <a name="visual-studio-container-tools-with-aspnet-core"></a>ASP.NET Core ile Visual Studio kapsayıcı araçları
 
@@ -27,7 +29,7 @@ Visual Studio 2017 ve üzeri sürümleri, .NET Core 'u hedefleyen ASP.NET Core K
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/docker/visual-studio-tools-for-docker/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * [Docker for Windows](https://docs.docker.com/docker-for-windows/install/)
 * **.NET Core platformlar arası geliştirme** iş yüküyle [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
@@ -57,7 +59,7 @@ Bir projeye Docker desteği eklerken, bir Windows veya Linux kapsayıcısı seç
 
 Hedef çerçeve .NET Core ise, **Işletim sistemi** açılır listesi bir kapsayıcı türü seçimine izin verir.
 
-### <a name="existing-app"></a>Mevcut uygulama
+### <a name="existing-app"></a>Var olan uygulama
 
 .NET Core 'u hedefleyen ASP.NET Core projeleri için, araç aracılığıyla Docker desteği eklemenin iki seçeneği vardır. Visual Studio 'da projeyi açın ve aşağıdaki seçeneklerden birini belirleyin:
 

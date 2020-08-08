@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/15/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/index
-ms.openlocfilehash: 7b0212ce6463d00a4c5cc87e2b36e1e7e7c5a54e
-ms.sourcegitcommit: 384833762c614851db653b841cc09fbc944da463
+ms.openlocfilehash: 560f25c9acabe2860bcaaddcdb42e2b15842a29d
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/17/2020
-ms.locfileid: "86445417"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017083"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core ara yazılımı
 
@@ -93,7 +95,7 @@ Aşağıdaki `Startup.Configure` Yöntem, güvenlikle ilgili ara yazılım bile�
 Yukarıdaki kodda:
 
 * [Bireysel kullanıcılar hesaplarıyla](xref:security/authentication/identity) yeni bir Web uygulaması oluştururken eklenmemiş olan ara yazılım, yorum yapılır.
-* Her ara yazılımın bu tam sıra, ancak birçok do olması gerekmez. Örneğin:
+* Her ara yazılımın bu tam sıra, ancak birçok do olması gerekmez. Örnek:
   * `UseCors`, `UseAuthentication` , ve `UseAuthorization` gösterilen sırayla başlamalıdır.
   * `UseCors`Şu anda `UseResponseCaching` [Bu hata](https://github.com/dotnet/aspnetcore/issues/23218)nedeniyle önce gitmelidir.
 
@@ -108,11 +110,11 @@ Aşağıdaki `Startup.Configure` Yöntem, genel uygulama senaryoları için ara 
      * HTTP katı aktarım güvenliği Protokolü (HSTS) ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.HstsBuilderExtensions.UseHsts%2A> ) `Strict-Transport-Security` üstbilgiyi ekler.
 1. HTTPS yeniden yönlendirme ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection%2A> ) http ISTEKLERINI https 'ye yönlendirir.
 1. Statik dosya ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A> ) statik dosyaları ve kısa devre dışı istek işlemeyi döndürür.
-1. Tanımlama bilgisi Ilkesi ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy%2A> ), uygulamayı ab genel veri koruma yönetmeliği (GDPR) düzenlemelerine uyar.
+1. Cookieİlke ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy%2A> ), uygulamayı ab genel veri koruma yönetmeliği (GDPR) düzenlemelerine uyar.
 1. <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting%2A>İstekleri yönlendirmek Için ara yazılım () yönlendirme.
 1. Kimlik doğrulama ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication%2A> ), güvenli kaynaklara erişim izni vermeden önce kullanıcının kimliğini doğrulamaya çalışır.
 1. Yetkilendirme ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization%2A> ), bir kullanıcıya güvenli kaynaklara erişim yetkisi verir.
-1. Oturum ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.SessionMiddlewareExtensions.UseSession%2A> ) oturum durumunu oluşturur ve korur. Uygulama oturum durumunu kullanıyorsa, tanımlama bilgisi Ilkesi ara yazılımı ve MVC ara yazılımı öncesinde oturum ara yazılımını çağırın.
+1. Oturum ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.SessionMiddlewareExtensions.UseSession%2A> ) oturum durumunu oluşturur ve korur. Uygulama oturum durumu kullanıyorsa, Cookie Ilke ara yazılımı ve MVC ara yazılımı sonrasında oturum ara yazılımını çağırın.
 1. <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseEndpoints%2A> <xref:Microsoft.AspNetCore.Builder.RazorPagesEndpointRouteBuilderExtensions.MapRazorPages%2A> Razor İstek ardışık düzenine sayfa uç noktaları eklemek Için uç nokta yönlendirme ara yazılımı (ile).
 
 <!--
@@ -251,7 +253,7 @@ ASP.NET Core aşağıdaki ara yazılım bileşenleriyle birlikte gönderilir. *O
 | ---------- | ----------- | ----- |
 | [Kimlik Doğrulaması](xref:security/authentication/identity) | Kimlik doğrulama desteği sağlar. | `HttpContext.User`Gerekir. OAuth geri çağırmaları için Terminal. |
 | [Yetkilendirme](xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization%2A) | Yetkilendirme desteği sağlar. | Kimlik doğrulama ara yazılımı hemen sonrasında. |
-| [Tanımlama bilgisi Ilkesi](xref:security/gdpr) | Kişisel bilgileri depolamak için kullanıcılardan onay izler ve ve gibi tanımlama bilgisi alanları için en düşük standartları uygular `secure` `SameSite` . | Tanımlama bilgilerini veren ara yazılım öncesi. Örnekler: Authentication, Session, MVC (TempData). |
+| [Cookieİlkesinin](xref:security/gdpr) | Kişisel bilgileri depolamak için kullanıcılardan onay izler ve ve gibi alanlar için en düşük standartları uygular cookie `secure` `SameSite` . | İle ilgili olan ara yazılımlar cookie . Örnekler: Authentication, Session, MVC (TempData). |
 | [CORS](xref:security/cors) | Çıkış noktaları arası kaynak paylaşımını yapılandırır. | CORS kullanan bileşenlerden önce. `UseCors`Şu anda `UseResponseCaching` [Bu hata](https://github.com/dotnet/aspnetcore/issues/23218)nedeniyle önce gitmelidir.|
 | [Tanılama](xref:fundamentals/error-handling) | Geliştirici özel durum sayfası, özel durum işleme, durum kodu sayfaları ve yeni uygulamalar için varsayılan Web sayfası sağlayan çeşitli ayrı middlewares. | Hata oluşturan bileşenlerden önce. Özel durumlar için Terminal veya yeni uygulamalar için varsayılan Web sayfasına hizmet sunma. |
 | [İletilen üstbilgiler](xref:host-and-deploy/proxy-load-balancer) | Proxy üst bilgilerini geçerli istek üzerine iletir. | Güncelleştirilmiş alanları kullanan bileşenlerden önce. Örnekler: Scheme, Host, istemci IP, yöntem. |
@@ -353,9 +355,9 @@ Aşağıdaki `Startup.Configure` Yöntem, genel uygulama senaryoları için ara 
      * HTTP katı aktarım güvenliği Protokolü (HSTS) ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.HstsBuilderExtensions.UseHsts%2A> ) `Strict-Transport-Security` üstbilgiyi ekler.
 1. HTTPS yeniden yönlendirme ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection%2A> ) http ISTEKLERINI https 'ye yönlendirir.
 1. Statik dosya ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A> ) statik dosyaları ve kısa devre dışı istek işlemeyi döndürür.
-1. Tanımlama bilgisi Ilkesi ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy%2A> ), uygulamayı ab genel veri koruma yönetmeliği (GDPR) düzenlemelerine uyar.
+1. Cookieİlke ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy%2A> ), uygulamayı ab genel veri koruma yönetmeliği (GDPR) düzenlemelerine uyar.
 1. Kimlik doğrulama ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication%2A> ), güvenli kaynaklara erişim izni vermeden önce kullanıcının kimliğini doğrulamaya çalışır.
-1. Oturum ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.SessionMiddlewareExtensions.UseSession%2A> ) oturum durumunu oluşturur ve korur. Uygulama oturum durumunu kullanıyorsa, tanımlama bilgisi Ilkesi ara yazılımı ve MVC ara yazılımı öncesinde oturum ara yazılımını çağırın.
+1. Oturum ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.SessionMiddlewareExtensions.UseSession%2A> ) oturum durumunu oluşturur ve korur. Uygulama oturum durumu kullanıyorsa, Cookie Ilke ara yazılımı ve MVC ara yazılımı sonrasında oturum ara yazılımını çağırın.
 1. MVC ( <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A> ) istek ardışık DÜZENINE MVC eklemek için.
 
 ```csharp
@@ -457,7 +459,7 @@ ASP.NET Core aşağıdaki ara yazılım bileşenleriyle birlikte gönderilir. *O
 | Ara yazılım | Açıklama | Sipariş verme |
 | ---------- | ----------- | ----- |
 | [Kimlik Doğrulaması](xref:security/authentication/identity) | Kimlik doğrulama desteği sağlar. | `HttpContext.User`Gerekir. OAuth geri çağırmaları için Terminal. |
-| [Tanımlama bilgisi Ilkesi](xref:security/gdpr) | Kişisel bilgileri depolamak için kullanıcılardan onay izler ve ve gibi tanımlama bilgisi alanları için en düşük standartları uygular `secure` `SameSite` . | Tanımlama bilgilerini veren ara yazılım öncesi. Örnekler: Authentication, Session, MVC (TempData). |
+| [Cookieİlkesinin](xref:security/gdpr) | Kişisel bilgileri depolamak için kullanıcılardan onay izler ve ve gibi alanlar için en düşük standartları uygular cookie `secure` `SameSite` . | İle ilgili olan ara yazılımlar cookie . Örnekler: Authentication, Session, MVC (TempData). |
 | [CORS](xref:security/cors) | Çıkış noktaları arası kaynak paylaşımını yapılandırır. | CORS kullanan bileşenlerden önce. |
 | [Tanılama](xref:fundamentals/error-handling) | Geliştirici özel durum sayfası, özel durum işleme, durum kodu sayfaları ve yeni uygulamalar için varsayılan Web sayfası sağlayan çeşitli ayrı middlewares. | Hata oluşturan bileşenlerden önce. Özel durumlar için Terminal veya yeni uygulamalar için varsayılan Web sayfasına hizmet sunma. |
 | [İletilen üstbilgiler](xref:host-and-deploy/proxy-load-balancer) | Proxy üst bilgilerini geçerli istek üzerine iletir. | Güncelleştirilmiş alanları kullanan bileşenlerden önce. Örnekler: Scheme, Host, istemci IP, yöntem. |

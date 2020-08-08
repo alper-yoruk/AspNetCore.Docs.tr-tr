@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/websockets
-ms.openlocfilehash: e2aff39db621ea6e71dce1f1560b1aa70fa865f0
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d0116a50051c1e9ddc9783e0102a3b32fb20cdce
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85404099"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88016459"
 ---
 # <a name="websockets-support-in-aspnet-core"></a>ASP.NET Core desteği WebSockets
 
@@ -36,7 +38,7 @@ Bu makalede, ASP.NET Core ' de WebSockets ile çalışmaya başlama açıklanmak
 
 Çoğu uygulama için SignalR Ham WebSockets üzerinde önerilir. SignalRWebSockets ' nin kullanılamadığı ortamlar için taşıma geri dönüşü sağlar. Ayrıca, basit bir uzak yordam çağrısı uygulama modeli sağlar. Ve çoğu senaryoda SignalR Ham WebSockets kullanmaya kıyasla önemli bir performans olumsuz yanı yoktur.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * ASP.NET Core 1,1 veya üzeri
 * ASP.NET Core destekleyen herhangi bir işletim sistemi:
@@ -182,7 +184,7 @@ Windows Server 2012 veya sonraki sürümlerde WebSocket protokolü desteğini et
 1. **Roller** ağacında **Web sunucusu (IIS)** öğesini genişletin, **Web sunucusu**' nu genişletin ve ardından **uygulama geliştirme**' yi genişletin.
 1. **WebSocket protokolünü**seçin. **İleri**’yi seçin.
 1. Ek özellikler gerekmiyorsa, **İleri**' yi seçin.
-1. **Yükle**'yi seçin.
+1. **Yükle**’yi seçin.
 1. Yükleme tamamlandığında sihirbazdan çıkmak için **Kapat** ' ı seçin.
 
 Windows 8 veya sonraki sürümlerde WebSocket protokolü desteğini etkinleştirmek için:

@@ -6,6 +6,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/28/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: 171607544bfe89fdd0a1ed9efb68f7a532f9aee1
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: d2594dd05ee6d7e8e0dbd3c279ecd8783d182b62
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212652"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017837"
 ---
-# <a name="part-6-razor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>Bölüm 6, Razor ASP.NET Core EF Core olan sayfalar-Ilgili verileri oku
+# <a name="part-6-no-locrazor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>Bölüm 6, Razor ASP.NET Core EF Core olan sayfalar-Ilgili verileri oku
 
 , [Tom Dykstra](https://github.com/tdykstra), [Jon P Smith](https://twitter.com/thereformedprog)ve [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -147,7 +149,7 @@ Aşağıdaki kod, yöntemiyle ilgili verileri yükler `Select` :
 
 Yukarıdaki kod hiçbir varlık türü döndürmez, bu nedenle hiçbir izleme yapılmaz. EF izleme hakkında daha fazla bilgi için bkz. [izleme ve Izleme sorguları karşılaştırması](/ef/core/querying/tracking).
 
-`CourseViewModel`Şunları yapın:
+`CourseViewModel`:
 
 [!code-csharp[](intro/samples/cu30snapshots/6-related/Models/SchoolViewModels/CourseViewModel.cs?name=snippet)]
 
@@ -450,7 +452,7 @@ Aşağıdaki kod, yöntemiyle ilgili verileri yükler `Select` :
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/IndexSelect.cshtml.cs?name=snippet_RevisedIndexMethod&highlight=4)]
 
-`CourseViewModel`Şunları yapın:
+`CourseViewModel`:
 
 [!code-csharp[](intro/samples/cu/Models/SchoolViewModels/CourseViewModel.cs?name=snippet)]
 

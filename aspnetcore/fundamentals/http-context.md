@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 5/5/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/httpcontext
-ms.openlocfilehash: d4512c9fa136e518fa0230c0cf9c607519eed6d8
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2b8ac1d6c6cdeee14b74c5b14206bff51982c711
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399458"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017252"
 ---
 # <a name="access-httpcontext-in-aspnet-core"></a>ASP.NET Core 'de HttpContext 'e erişme
 
 Uygulamalar `HttpContext` , <xref:Microsoft.AspNetCore.Http.IHttpContextAccessor> arabirim ve varsayılan uygulaması üzerinden erişim ASP.NET Core <xref:Microsoft.AspNetCore.Http.HttpContextAccessor> . Yalnızca `IHttpContextAccessor` bir hizmetin içine erişmeniz gerektiğinde kullanılması gerekir `HttpContext` .
 
-## <a name="use-httpcontext-from-razor-pages"></a>Sayfalardan HttpContext kullanın Razor
+## <a name="use-httpcontext-from-no-locrazor-pages"></a>Sayfalardan HttpContext kullanın Razor
 
 RazorSayfalar <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> özelliği kullanıma sunar <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> :
 
@@ -42,9 +44,9 @@ public class AboutModel : PageModel
 }
 ```
 
-## <a name="use-httpcontext-from-a-razor-view"></a>Bir görünümden HttpContext kullanma Razor
+## <a name="use-httpcontext-from-a-no-locrazor-view"></a>Bir görünümden HttpContext kullanma Razor
 
-Razorgörünümler, `HttpContext` görünümdeki doğrudan bir [RazorPage. Context](xref:Microsoft.AspNetCore.Mvc.Razor.RazorPage.Context) özelliği aracılığıyla kullanıma sunar. Aşağıdaki örnek, Windows kimlik doğrulamasını kullanarak bir intranet uygulamasındaki geçerli kullanıcı adını alır:
+Razorgörünümler, `HttpContext` görünümdeki bir [ Razor Page. Context](xref:Microsoft.AspNetCore.Mvc.Razor.RazorPage.Context) özelliği aracılığıyla doğrudan kullanıma sunar. Aşağıdaki örnek, Windows kimlik doğrulamasını kullanarak bir intranet uygulamasındaki geçerli kullanıcı adını alır:
 
 ```cshtml
 @{
@@ -173,6 +175,6 @@ public class EmailController : Controller
 }
 ```
 
-## <a name="blazor-and-shared-state"></a>Blazorve paylaşılan durum
+## <a name="no-locblazor-and-shared-state"></a>Blazorve paylaşılan durum
 
 [!INCLUDE[](~/includes/blazor-security/blazor-shared-state.md)]

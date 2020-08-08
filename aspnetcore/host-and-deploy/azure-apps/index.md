@@ -7,6 +7,8 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 12/16/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/azure-apps/index
-ms.openlocfilehash: 9ffeebbf8125ddac5d6e621e411c4e86c5bd34b1
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 11de6b04f6813161e5eaee294f3e67e223ae0db3
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85399315"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015926"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>ASP.NET Core uygulamalarını Azure App Service dağıtma
 
@@ -147,7 +149,7 @@ Sorun giderme önerisi ile Azure App Service/IIS tarafından barındırılan uyg
 
 [Veri koruma anahtarları](xref:security/data-protection/implementation/key-management#data-protection-implementation-key-management) *%Home%\ASP.NET\DataProtection-Keys* klasöründe kalıcı hale getirilir. Bu klasör, ağ depolama tarafından desteklenir ve uygulamayı barındıran tüm makinelerde eşitlenir. Anahtarlar bekleyen bir şekilde korunmuyor. Bu klasör, bir uygulamanın tüm örneklerine tek bir dağıtım yuvasında anahtar halkasını sağlar. Hazırlama ve üretim gibi ayrı dağıtım yuvaları, anahtar halkasını paylaşmaz.
 
-Dağıtım yuvaları arasında takas edildiğinde, veri koruma kullanan tüm sistem, önceki yuva içindeki anahtar halkasını kullanarak depolanan verilerin şifresini çözemeyecektir. ASP.NET tanımlama bilgisi ara yazılımı, tanımlama bilgilerini korumak için veri koruma kullanır. Bu, kullanıcılara standart ASP.NET tanımlama bilgisi ara yazılımı kullanan bir uygulamanın oturumunu kapatmakta olduğunu gösterir. Yuvada bağımsız bir anahtar halka çözümü için, bir dış anahtar halka sağlayıcısı kullanın, örneğin:
+Dağıtım yuvaları arasında takas edildiğinde, veri koruma kullanan tüm sistem, önceki yuva içindeki anahtar halkasını kullanarak depolanan verilerin şifresini çözemeyecektir. ASP.NET Cookie ara yazılımı, verilerini korumak için veri koruma kullanır cookie . Bu, kullanıcıların standart ASP.NET ara yazılım kullanan bir uygulamanın oturumunu kapatmakta olduğunu gösterir Cookie . Yuvada bağımsız bir anahtar halka çözümü için, bir dış anahtar halka sağlayıcısı kullanın, örneğin:
 
 * Azure Blob Depolama
 * Azure Key Vault
@@ -209,7 +211,7 @@ Kendi kendine içerilen bir uygulama dağıtımında:
 1. Web uygulamasını seçin.
 1. "Uzantıları" filtrelemek için arama kutusuna "Ex" yazın veya yönetim araçları listesini aşağı kaydırın.
 1. **Uzantılar**'ı seçin.
-1. **Ekle**'yi seçin.
+1. **Add (Ekle)** seçeneğini belirleyin.
 1. Listeden ASP.NET Core önizleme sürümü olduğu ve platformu belirten **ASP.NET Core {X. Y} ({x64 | x86}) çalışma zamanı** uzantısını seçin `{X.Y}` `{x64|x86}` .
 1. Yasal koşulları kabul etmek için **Tamam ' ı** seçin.
 1. Uzantıyı yüklemek için **Tamam ' ı** seçin.
@@ -245,7 +247,7 @@ Kendi kendine içerilen bir uygulama dağıtımında:
 
 **Bir ARM şablonuyla önizleme sitesi uzantısını kullanma**
 
-Uygulama oluşturmak ve dağıtmak için bir ARM şablonu kullanılıyorsa, `siteextensions` kaynak türü bir Web uygulamasına site uzantısını eklemek için kullanılabilir. Örneğin:
+Uygulama oluşturmak ve dağıtmak için bir ARM şablonu kullanılıyorsa, `siteextensions` kaynak türü bir Web uygulamasına site uzantısını eklemek için kullanılabilir. Örnek:
 
 [!code-json[](index/sample/arm.json?highlight=2)]
 
@@ -272,7 +274,7 @@ Uygulama oluşturmak ve dağıtmak için bir ARM şablonu kullanılıyorsa, `sit
    * **Dağıtım modu** açılır listesini açın ve **çerçeveye bağımlı**' ı seçin.
    * **Hedef çalışma zamanı**olarak **Taşınabilir** öğesini seçin.
    * Dağıtımdan sonra ek dosyaları kaldırmanız gerekiyorsa, **dosya yayımlama seçenekleri** ' ni açın ve hedefteki ek dosyaları kaldırmak için onay kutusunu işaretleyin.
-   * **Kaydet**’i seçin.
+   * **Kaydet**'i seçin.
 1. Yayımla sihirbazının kalan istemlerini izleyerek yeni bir site oluşturun veya var olan bir siteyi güncelleştirin.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
@@ -303,7 +305,7 @@ Visual Studio 'Yu veya kendi içindeki bir dağıtım için .NET Core CLI kullan
    * **Dağıtım modu** açılır listesini açın ve **kendinden bağımsız**' i seçin.
    * Hedef **çalışma** zamanı açılır listesinden hedef çalışma zamanını seçin. Varsayılan değer: `win-x86`.
    * Dağıtımdan sonra ek dosyaları kaldırmanız gerekiyorsa, **dosya yayımlama seçenekleri** ' ni açın ve hedefteki ek dosyaları kaldırmak için onay kutusunu işaretleyin.
-   * **Kaydet**’i seçin.
+   * **Kaydet**'i seçin.
 1. Yayımla sihirbazının kalan istemlerini izleyerek yeni bir site oluşturun veya var olan bir siteyi güncelleştirin.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)

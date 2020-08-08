@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 3/29/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 9f143523a6d02ac018ad2a869cc9d768ee25681f
-ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
+ms.openlocfilehash: 2352bbaa3c4123cd588609e22b65cd9e268f5637
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87819269"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88017668"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core yapılandırma
 
@@ -356,6 +358,8 @@ Bir ortam değişkeni keşfedildiğinde ve tabloda gösterilen dört önekle yap
 | `SQLAZURECONNSTR_{KEY}`  | `ConnectionStrings:{KEY}`   | Anahtar: `ConnectionStrings:{KEY}_ProviderName` :<br>Değer: `System.Data.SqlClient`  |
 | `SQLCONNSTR_{KEY}`       | `ConnectionStrings:{KEY}`   | Anahtar: `ConnectionStrings:{KEY}_ProviderName` :<br>Değer: `System.Data.SqlClient`  |
 
+<a name="fcp"></a>
+
 ## <a name="file-configuration-provider"></a>Dosya yapılandırma sağlayıcısı
 
 <xref:Microsoft.Extensions.Configuration.FileConfigurationProvider>, dosya sisteminden yapılandırma yüklemeye yönelik temel sınıftır. Aşağıdaki yapılandırma sağlayıcıları öğesinden türetilir `FileConfigurationProvider` :
@@ -425,8 +429,6 @@ Yukarıdaki kodda, ve *MyConfig* *MyConfig.js* `Environment` ayarlar. *JSON* dos
 [Örnek indirmenin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) aşağıdaki kodu, önceki yapılandırma ayarlarından birkaçını görüntüler:
 
 [!code-csharp[](index/samples/3.x/ConfigSample/Pages/Test.cshtml.cs?name=snippet)]
-
-<a name="fcp"></a>
 
 ### <a name="xml-configuration-provider"></a>XML yapılandırma sağlayıcısı
 
