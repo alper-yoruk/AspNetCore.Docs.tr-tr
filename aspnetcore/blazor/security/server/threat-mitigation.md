@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/05/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/threat-mitigation
-ms.openlocfilehash: 4477b16d0d35fb90c35d17852f4639676d76aa02
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2637645da9db7d52668c6a36c822df25520ff1f1
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402292"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013820"
 ---
-# <a name="threat-mitigation-guidance-for-aspnet-core-blazor-server"></a>ASP.NET Core için tehdit azaltma KılavuzuBlazor Server
+# <a name="threat-mitigation-guidance-for-aspnet-core-no-locblazor-server"></a>ASP.NET Core için tehdit azaltma KılavuzuBlazor Server
 
 Sağlayan [Javier Calvarro Nelson](https://github.com/javiercn)
 
@@ -37,7 +39,7 @@ JS birlikte çalışması Internet üzerinden yapıldığından ve istemci uzak 
 * Kısıtlanmış ortamda uygulanmaz.
 * Güvenlik riski kısıtlı bir ortamda azaldığından, uygulama maliyeti değer değildir.
 
-## <a name="blazor-and-shared-state"></a>Blazorve paylaşılan durum
+## <a name="no-locblazor-and-shared-state"></a>Blazorve paylaşılan durum
 
 [!INCLUDE[](~/includes/blazor-security/blazor-shared-state.md)]
 
@@ -154,11 +156,11 @@ JavaScript 'e yönelik çağrılara .NET yöntemlerine güvenmeyin. JavaScript '
   * Parametrelerde Kullanıcı tarafından sağlanan verileri JavaScript çağrılarına geçirmekten kaçının. Parametrelerde veri geçirilmesi kesinlikle gerekliyse, JavaScript kodunun, [siteler arası betik oluşturma (XSS)](#cross-site-scripting-xss) güvenlik açıklarına gerek kalmadan verileri geçirmeyi işlediğinden emin olun. Örneğin, bir öğenin özelliğini ayarlayarak Belge Nesne Modeli (DOM) Kullanıcı tarafından sağlanan verileri yazma `innerHTML` . Devre dışı bırakmak için [Içerik güvenlik ilkesi 'ni (CSP)](https://developer.mozilla.org/docs/Web/HTTP/CSP) `eval` ve diğer güvenli olmayan JavaScript temel öğelerini kullanmayı düşünün.
 * Framework 'ün gönderme uygulamasının en üstünde .NET etkinleştirmeleri için özel bir dağıtma uygulamaktan kaçının. .NET yöntemlerini tarayıcıya sunma, genel geliştirme için önerilmeyen gelişmiş bir senaryodur Blazor .
 
-### <a name="events"></a>Ekinlikler
+### <a name="events"></a>Olaylar
 
 Olaylar bir uygulamaya giriş noktası sağlar Blazor Server . Web Apps 'teki uç noktaları koruma için aynı kurallar, uygulamalardaki olay işleme için geçerlidir Blazor Server . Kötü amaçlı bir istemci, istediği verileri bir olay için yük olarak gönderebilirler.
 
-Örneğin:
+Örnek:
 
 * Bir için değişiklik olayı `<select>` , uygulamanın istemciye sunulan seçenekler içinde olmayan bir değer gönderebilir.
 * `<input>`Sunucu, istemci tarafı doğrulamayı atlayarak herhangi bir metin verisi gönderebilir.

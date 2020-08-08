@@ -7,6 +7,8 @@ ms.author: scaddie
 ms.custom: H1Hack27Feb2017
 ms.date: 09/06/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/spa-services
-ms.openlocfilehash: 05f76a7d341fc5c55b8234b6ff6d2be5aa61d6fd
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2c91fa13c6fcb92c5985cae21c175c0a2a2a313e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401837"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013274"
 ---
 # <a name="use-javascript-services-to-create-single-page-applications-in-aspnet-core"></a>ASP.NET Core içinde tek sayfalı uygulamalar oluşturmak için JavaScript hizmetlerini kullanın
 
@@ -278,7 +280,7 @@ Uygulama, [çalışma zamanı yapılandırma moduna](#set-the-runtime-configurat
 
 [DotNet New](/dotnet/core/tools/dotnet-new) komutu tarafından oluşturulan *. csproj* dosyasını açın. Gerekli NuGet ve NPM paketleri proje açık olduğunda otomatik olarak geri yüklenir. Bu geri yükleme işlemi birkaç dakika sürebilir ve bu işlem tamamlandığında uygulama çalıştırılmaya başlayabilir. Yeşil çalışma düğmesine veya tuşuna basın `Ctrl + F5` ve tarayıcı uygulamanın giriş sayfasında açılır. Uygulama, [çalışma zamanı yapılandırma moduna](#set-the-runtime-configuration-mode)göre localhost üzerinde çalışır.
 
-## <a name="test-the-app"></a>Uygulamayı test edin
+## <a name="test-the-app"></a>Uygulamayı test etme
 
 SpaServices şablonları, [karma](https://karma-runner.github.io/1.0/index.html) ve [Jasmine](https://jasmine.github.io/)kullanarak istemci tarafı testleri çalıştıracak şekilde önceden yapılandırılmıştır. Jasmine JavaScript için popüler bir birim testi çerçevesidir, ancak karma bu testler için bir Test Çalıştırıcısı olur. Karma, geliştiricilerin her değişiklik yapıldığında testi durdurmak ve çalıştırmak için gerekli olmaması gibi [WebPack dev ara yazılımı](#webpack-dev-middleware) ile birlikte çalışmak üzere yapılandırılmıştır. Test çalışmasına veya test çalışmasının kendisine karşı çalışan kod olup olmadığı, test otomatik olarak çalışır.
 

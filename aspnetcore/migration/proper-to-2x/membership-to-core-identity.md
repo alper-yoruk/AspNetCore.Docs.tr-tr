@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 01/10/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,14 +16,14 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/proper-to-2x/membership-to-core-identity
-ms.openlocfilehash: afad542a18a357a77f4542511a3d2c3108dbfb31
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 97039ac1c7bcd6a1ff7b53e1579c623b26564d26
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86059779"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014899"
 ---
-# <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-identity"></a>ASP.NET üyelik kimlik doğrulamasından ASP.NET Core 2,0 ' ye geçişIdentity
+# <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-no-locidentity"></a>ASP.NET üyelik kimlik doğrulamasından ASP.NET Core 2,0 ' ye geçişIdentity
 
 İle [Isaac Levi](https://isaaclevin.com) tarafından
 
@@ -38,14 +40,14 @@ ASP.NET 2,0 ' den önce, geliştiriciler, uygulamaları için tüm kimlik doğru
 
 Mevcut uygulamaları ASP.NET Core 2,0 ' ye geçirmek için Identity , bu tablolardaki verilerin yeni şema tarafından kullanılan tablolara geçirilmesi gerekir Identity .
 
-## <a name="aspnet-core-identity-20-schema"></a>ASP.NET Core Identity 2,0 şeması
+## <a name="aspnet-core-no-locidentity-20-schema"></a>ASP.NET Core Identity 2,0 şeması
 
 ASP.NET Core 2,0, [Identity](/aspnet/identity/index) ASP.NET 4,5 ' de tanıtılan prensibi izler. İlke paylaşılsa da, çerçeveler arasındaki uygulama, ASP.NET Core sürümleri arasında bile farklıdır (bkz. [kimlik doğrulamasını geçirme ve Identity ASP.NET Core 2,0](xref:migration/1x-to-2x/index)).
 
 ASP.NET Core 2,0 şemasını görüntülemenin en hızlı yolu, Identity Yeni bir ASP.NET Core 2,0 uygulaması oluşturmaktır. Visual Studio 2017 'de şu adımları izleyin:
 
 1. **Dosya**  >  **Yeni**  >  **Proje**' yi seçin.
-1. *Coreıdentitysample*adlı yeni bir **ASP.NET Core Web uygulaması** projesi oluşturun.
+1. *Çekirdek Identity örnek*adlı yeni bir **ASP.NET Core Web uygulaması** projesi oluşturun.
 1. Açılan listede **ASP.NET Core 2,0** ' i seçin ve ardından **Web uygulaması**' nı seçin. Bu şablon bir [ Razor Sayfalar](xref:razor-pages/index) uygulaması oluşturur. **Tamam**' a tıklamadan önce **kimlik doğrulamasını Değiştir**' e tıklayın.
 1. Şablonlar için **bireysel kullanıcı hesapları** seçin Identity . Son olarak **Tamam**' a ve ardından **Tamam**' a tıklayın. Visual Studio ASP.NET Core şablonunu kullanarak bir proje oluşturur Identity .
 1. **Tools**  >  Paket Yöneticisi Konsolu (PMC) penceresini açmak için Araçlar**NuGet Paket Yöneticisi**  >  **Paket Yöneticisi konsolu** **Package Manager Console** ' nu seçin.
@@ -67,7 +69,7 @@ ASP.NET Core 2,0 şemasını görüntülemenin en hızlı yolu, Identity Yeni bi
 
     `Update-Database`Komut, şema ile belirtilen veritabanını ve uygulama başlatma için gereken tüm verileri oluşturdu. Aşağıdaki görüntüde, önceki adımlarla oluşturulan tablo yapısı gösterilmektedir.
 
-    ![IdentityTakvimleri](identity/_static/identity-tables.png)
+    ![::: No-Loc (kimlik)::: tablolar](identity/_static/identity-tables.png)
 
 ## <a name="migrate-the-schema"></a>Şemayı geçirme
 
@@ -103,7 +105,7 @@ Hem üyelik hem de ASP.NET Core için tablo yapılarında ve alanlarında hafif 
 |`RoleId`                 |`string`  |`RoleId`      |`string`                   |
 |`UserId`                 |`string`  |`UserId`      |`string`                   |
 
-*Kullanıcılar* ve *Roller*için bir geçiş betiği oluştururken önceki eşleme tablolarına başvurun. Aşağıdaki örnek, bir veritabanı sunucusunda iki veritabanınız olduğunu varsayar. Bir veritabanı var olan ASP.NET üyelik şemasını ve verilerini içerir. Diğer *Coreıdentitysample* veritabanı, daha önce açıklanan adımlar kullanılarak oluşturulmuştur. Daha ayrıntılı bilgi için açıklamalar satır içi olarak eklenir.
+*Kullanıcılar* ve *Roller*için bir geçiş betiği oluştururken önceki eşleme tablolarına başvurun. Aşağıdaki örnek, bir veritabanı sunucusunda iki veritabanınız olduğunu varsayar. Bir veritabanı var olan ASP.NET üyelik şemasını ve verilerini içerir. Diğer *çekirdek Identity örnek* veritabanı, daha önce açıklanan adımlar kullanılarak oluşturulmuştur. Daha ayrıntılı bilgi için açıklamalar satır içi olarak eklenir.
 
 ```sql
 -- THIS SCRIPT NEEDS TO RUN FROM THE CONTEXT OF THE MEMBERSHIP DB

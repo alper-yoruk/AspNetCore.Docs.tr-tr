@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 05/26/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/webapi
-ms.openlocfilehash: 530455c85c4c869f06ba795d9fb63dcfd1c8d5cf
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4888de6ad55037be540cb62b6e4f02878e2b57ab
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407232"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014821"
 ---
 # <a name="migrate-from-aspnet-web-api-to-aspnet-core"></a>ASP.NET Web API 'sinden ASP.NET Core 'e geçiş
 
@@ -31,7 +33,7 @@ ASP.NET 4. x Web API 'SI, tarayıcılar ve mobil cihazlar dahil olmak üzere ço
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 [!INCLUDE [prerequisites](../includes/net-core-prereqs-vs-3.1.md)]
 
@@ -61,7 +63,7 @@ Visual Studio 'da yeni bir boş çözüm oluşturun ve geçirilecek ASP.NET 4. x
 
 1. **Dosya** menüsünden **Yeni** > **Proje**' yi seçin.
 1. **Boş çözüm** şablonunu seçin ve Ileri ' **yi**seçin.
-1. Çözümü *WebAPIMigration*olarak adlandırın. **Oluştur**'u seçin.
+1. Çözümü *WebAPIMigration*olarak adlandırın. **Oluştur**’u seçin.
 1. Varolan *Productsapp* projesini çözüme ekleyin.
 
 Geçirilecek yeni bir API projesi ekleyin:
@@ -153,7 +155,7 @@ Geçirilen projeyi çalıştırın ve konumuna gidin `/api/products` . Üç ür�
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-2.2"
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 [!INCLUDE [prerequisites](../includes/net-core-prereqs-vs2019-2.2.md)]
 

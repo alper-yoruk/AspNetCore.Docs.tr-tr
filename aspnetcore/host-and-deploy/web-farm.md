@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/web-farm
-ms.openlocfilehash: 13c4a8e287e4b62a1429f67fbe83ff5b0dc65f52
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 58409b5c47d71c96ece6f4ecfab6f18df47f798b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408285"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015445"
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>Web çiftliğinde ASP.NET Core ana bilgisayar
 
@@ -70,8 +72,8 @@ Aşağıdaki senaryolar ek yapılandırma gerektirmez, ancak Web grupları için
 | -------- | ------------------- |
 | Kimlik Doğrulaması | Veri koruma (bkz <xref:security/data-protection/configuration/overview> .).<br><br>Daha fazla bilgi için <xref:security/authentication/cookie> ve <xref:security/cookie-sharing> bölümlerine bakın. |
 | Identity | Kimlik doğrulama ve veritabanı yapılandırması.<br><br>Daha fazla bilgi için bkz. <xref:security/authentication/identity>. |
-| Oturum | Veri koruma (şifreli tanımlama bilgileri) (bkz <xref:security/data-protection/configuration/overview> .) ve önbelleğe alma (bkz <xref:performance/caching/distributed> .).<br><br>Daha fazla bilgi için bkz. [oturum ve durum yönetimi: oturum durumu](xref:fundamentals/app-state#session-state). |
-| TempData | Veri koruma (şifreli tanımlama bilgileri) (bkz <xref:security/data-protection/configuration/overview> . [oturum ve durum yönetimi: oturum durumu](xref:fundamentals/app-state#session-state)).<br><br>Daha fazla bilgi için bkz. [oturum ve durum yönetimi: TempData](xref:fundamentals/app-state#tempdata). |
+| Oturum | Veri koruma (şifrelenmiş cookie ) (bkz <xref:security/data-protection/configuration/overview> .) ve önbelleğe alma (bkz <xref:performance/caching/distributed> .).<br><br>Daha fazla bilgi için bkz. [oturum ve durum yönetimi: oturum durumu](xref:fundamentals/app-state#session-state). |
+| TempData | Veri koruma (şifreli cookie ) (bkz <xref:security/data-protection/configuration/overview> .) veya oturum (bkz. [oturum ve durum yönetimi: oturum durumu](xref:fundamentals/app-state#session-state)).<br><br>Daha fazla bilgi için bkz. [oturum ve durum yönetimi: TempData](xref:fundamentals/app-state#tempdata). |
 | Korsanlığa karşı koruma | Veri koruma (bkz <xref:security/data-protection/configuration/overview> .).<br><br>Daha fazla bilgi için bkz. <xref:security/anti-request-forgery>. |
 
 ## <a name="troubleshoot"></a>Sorun giderme
@@ -80,11 +82,11 @@ Aşağıdaki senaryolar ek yapılandırma gerektirmez, ancak Web grupları için
 
 Veri koruma veya önbelleğe alma bir Web grubu ortamı için yapılandırılmadığında, istekler işlendiğinde aralıklı hatalar oluşur. Bu durum, düğümlerin aynı kaynakları paylaşmadığı ve kullanıcı isteklerinin her zaman aynı düğüme geri yönlendirilmediği için oluşur.
 
-Tanımlama bilgisi kimlik doğrulaması kullanarak uygulamada oturum açan bir kullanıcıyı göz önünde bulundurun. Kullanıcı uygulamada bir Web grubu düğümünde oturum açar. Bir sonraki isteği, oturum açtıkları aynı düğüme alınırsa, uygulama kimlik doğrulama tanımlama bilgisinin şifresini çözebilir ve uygulamanın kaynağına erişime izin verebilir. Sonraki istekleri farklı bir düğüme alınırsa, uygulama kimlik doğrulama tanımlama bilgisinin kullanıcının oturum açmış olduğu düğümden şifresini çözemez ve istenen kaynak için yetkilendirme başarısız olur.
+Kimlik doğrulaması kullanarak uygulamada oturum açan bir kullanıcıyı göz önünde bulundurun cookie . Kullanıcı uygulamada bir Web grubu düğümünde oturum açar. Bir sonraki isteği, oturum açtıkları aynı düğüme alınırsa, uygulama kimlik doğrulamasının şifresini çözebilir cookie ve uygulamanın kaynağına erişim izni verebilir. Sonraki istekleri farklı bir düğüme alınırsa, uygulama cookie kullanıcının oturum açmadığı düğümden kimlik doğrulamasının şifresini çözemez ve istenen kaynak için yetkilendirme başarısız olur.
 
 Aşağıdaki belirtilerden herhangi biri **zaman zaman**meydana geldiğinde, sorun genellikle hatalı veri korumasına veya bir Web grubu ortamı için önbelleğe alma yapılandırmasına göre izlenmelidir:
 
-* Kimlik doğrulama sonları: kimlik doğrulama tanımlama bilgisi yanlış yapılandırılmış veya şifresi çözülemiyor. OAuth (Facebook, Microsoft, Twitter) veya Openıdconnect oturumları "bağıntı başarısız oldu" hatasıyla başarısız oluyor.
+* Kimlik doğrulama sonları: kimlik doğrulaması cookie yanlış yapılandırılmış veya şifresi çözülemiyor. OAuth (Facebook, Microsoft, Twitter) veya Openıdconnect oturumları "bağıntı başarısız oldu" hatasıyla başarısız oluyor.
 * Yetkilendirme sonları: Identity kaybedildi.
 * Oturum durumu verileri kaybeder.
 * Önbelleğe alınan öğeler kaybolur.

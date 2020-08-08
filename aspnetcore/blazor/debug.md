@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/30/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: cb0a8737fb975db285986d18b995e488f09580e8
-ms.sourcegitcommit: 37f6f2e13ceb4eae268d20973d76e4b83acf6a24
+ms.openlocfilehash: 225916411550cc8e89c604e1426316843bb0ff52
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/03/2020
-ms.locfileid: "87526296"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014548"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Hata ayıklama ASP.NET CoreBlazor WebAssembly
 
@@ -76,6 +78,10 @@ Blazor WebAssemblyVisual Studio 'da bir uygulamada hata ayıklamak için:
 
 1. Yeni ASP.NET Core barındırılan bir Blazor WebAssembly uygulama oluşturun.
 1. Uygulamayı hata ayıklayıcıda çalıştırmak için <kbd>F5</kbd> tuşuna basın.
+
+   > [!NOTE]
+   > **Hata ayıklama olmadan Başlat** (<kbd>CTRL</kbd> + <kbd>F5</kbd>) desteklenmez.
+
 1. Metodunda bir kesme noktası ayarlayın `Pages/Counter.razor` `IncrementCount` .
 1. **`Counter`** Sekmesine gidin ve kesme noktasına isabet eden düğmeyi seçin:
 
@@ -116,10 +122,13 @@ Uygulamanızda hata ayıklarken Blazor WebAssembly , sunucu kodunuzda hata ayık
    Bildirimi alırsanız:
 
    * [Visual Studio Code uzantısının](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) en son C# ' nin yüklü olduğunu doğrulayın. Yüklü uzantıları denetlemek için, menü çubuğundan **uzantıları görüntüle**' yi açın  >  **Extensions** veya **etkinlik** kenar çubuğunda **Uzantılar** simgesini seçin.
-   * JavaScript önizlemesi hata ayıklamanın etkinleştirildiğini doğrulayın. Menü çubuğundan (**Dosya**  >  **tercihleri**  >  **ayarları**) ayarları açın. Anahtar sözcüklerini kullanarak arama yapın `debug preview` . Arama sonuçlarında, **hata ayıkla > JavaScript: önizleme kullan** onay kutusunun işaretli olduğundan emin olun.
+   * JavaScript önizlemesi hata ayıklamanın etkinleştirildiğini doğrulayın. Menü çubuğundan (**Dosya**  >  **tercihleri**  >  **ayarları**) ayarları açın. Anahtar sözcüklerini kullanarak arama yapın `debug preview` . Arama sonuçlarında, **hata ayıkla > JavaScript: önizleme kullan** onay kutusunun işaretli olduğundan emin olun. Önizleme hata ayıklamayı etkinleştirme seçeneği yoksa, VS Code en son sürümüne yükseltin veya [JavaScript hata ayıklayıcı uzantısı](https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly) 'nı (vs Code 1,46 veya önceki bir sürümü) yüklersiniz.
    * Pencereyi yeniden yükleyin.
 
 1. <kbd>F5</kbd> klavye kısayolunu veya menü öğesini kullanarak hata ayıklamayı başlatın.
+
+   > [!NOTE]
+   > **Hata ayıklama olmadan Çalıştır** (<kbd>CTRL</kbd> + <kbd>F5</kbd>) desteklenmez.
 
 1. İstendiğinde, hata ayıklamayı başlatmak için ** Blazor WebAssembly Hata Ayıkla** seçeneğini belirleyin.
 

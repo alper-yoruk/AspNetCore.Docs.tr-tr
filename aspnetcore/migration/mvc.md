@@ -5,6 +5,8 @@ description: ASP.NET MVC projesini ASP.NET Core MVC 'ye geçirmeye nasıl başla
 ms.author: wpickett
 ms.date: 06/18/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/mvc
-ms.openlocfilehash: 6a645d0e5959b4301ee7d2bcfc692f7499574dc4
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 17f2a2532c58c3796835328260231d63f8fb2e40
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85407336"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015055"
 ---
 # <a name="migrate-from-aspnet-mvc-to-aspnet-core-mvc"></a>ASP.NET MVC 'den ASP.NET Core MVC 'ye geçiş
 
@@ -35,7 +37,7 @@ ASP.NET MVC 'den geçiş çok adımlı bir işlemdir. Bu makalede şunları ele 
 
 Yapılandırma ve kodu geçirmek için Identity bkz. [yapılandırmayı ASP.NET Core](xref:migration/configuration) ve [geçiş kimlik doğrulaması ve Identity ASP.NET Core geçirme](xref:migration/identity).
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 [!INCLUDE [prerequisites](../includes/net-core-prereqs-vs-3.1.md)]
 
@@ -45,7 +47,7 @@ Geçirmek için Visual Studio 'da örnek bir ASP.NET MVC projesi oluşturun:
 
 1. **Dosya** menüsünden **Yeni** > **Proje**' yi seçin.
 1. **ASP.NET Web uygulaması (.NET Framework)** öğesini seçin ve ardından **İleri**' yi seçin.
-1. Ad alanı, bir sonraki adımda oluşturulan ASP.NET Core projesi ile eşleşen proje *WebApp1* olarak adlandırın. **Oluştur**'u seçin.
+1. Ad alanı, bir sonraki adımda oluşturulan ASP.NET Core projesi ile eşleşen proje *WebApp1* olarak adlandırın. **Oluştur**’u seçin.
 1. **MVC**' yi ve ardından **Oluştur**' u seçin.
 
 ## <a name="create-the-aspnet-core-project"></a>ASP.NET Core projesi oluşturma
@@ -56,7 +58,7 @@ Geçirilecek yeni bir ASP.NET Core projesi ile yeni bir çözüm oluşturun:
 1. **Dosya** menüsünden **Yeni** > **Proje**' yi seçin.
 1. **ASP.NET Web Core Web uygulaması** ' nı seçin ve ardından **İleri**' yi seçin.
 1. **Yeni projenizi yapılandırın** iletişim kutusunda projeyi *WebApp1*olarak adlandırın.
-1. Aynı proje adını kullanmak için konumu önceki projeden farklı bir dizine ayarlayın. Aynı ad alanının kullanılması, kodu iki proje arasında kopyalamayı kolaylaştırır. **Oluştur**'u seçin.
+1. Aynı proje adını kullanmak için konumu önceki projeden farklı bir dizine ayarlayın. Aynı ad alanının kullanılması, kodu iki proje arasında kopyalamayı kolaylaştırır. **Oluştur**’u seçin.
 1. **Yeni bir ASP.NET Core Web uygulaması oluştur** iletişim kutusunda, **.net Core** ve **ASP.NET Core 3,1** ' un seçili olduğunu doğrulayın. **Web uygulaması (Model-View-Controller)** proje şablonunu seçin ve **Oluştur**' u seçin.
 
 ## <a name="configure-the-aspnet-core-site-to-use-mvc"></a>ASP.NET Core sitesini MVC kullanacak şekilde yapılandırma

@@ -5,6 +5,8 @@ description: Bu makalede ASP.NET Core 1. x kimlik doğrulamasını ve ASP.NET Co
 ms.author: scaddie
 ms.date: 06/21/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,14 +15,14 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/1x-to-2x/identity-2x
-ms.openlocfilehash: dacf6fa7191f51f36b9ba65a90746a26f958fc03
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 46f10df25235b532f188eda2a079aef71070cd6d
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408675"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015296"
 ---
-# <a name="migrate-authentication-and-identity-to-aspnet-core-20"></a>Kimlik doğrulamasını Identity ASP.NET Core ve 2,0 'e geçirin
+# <a name="migrate-authentication-and-no-locidentity-to-aspnet-core-20"></a>Kimlik doğrulamasını Identity ASP.NET Core ve 2,0 'e geçirin
 
 [Scott Ade](https://github.com/scottaddie) ve [Hao Kung](https://github.com/HaoK) tarafından
 
@@ -86,19 +88,19 @@ public void Configure(IApplicationBuilder app, ILoggerFactory loggerfactory) {
 
 Her bir büyük kimlik doğrulama şeması için 2,0 geçiş yönergeleri aşağıda verilmiştir.
 
-### <a name="cookie-based-authentication"></a>Tanımlama bilgisi tabanlı kimlik doğrulaması
+### <a name="no-loccookie-based-authentication"></a>Cookietabanlı kimlik doğrulaması
 
 Aşağıdaki iki seçenekten birini seçin ve *Startup.cs*'de gerekli değişiklikleri yapın:
 
-1. Tanımlama bilgilerini kullanmaIdentity
+1. cookieİle s kullanınIdentity
     - `UseIdentity`Yönteminde ile değiştirin `UseAuthentication` `Configure` :
 
         ```csharp
         app.UseAuthentication();
         ```
 
-    - `AddIdentity` `ConfigureServices` Tanımlama bilgisi kimlik doğrulama hizmetlerini eklemek için yöntemindeki yöntemi çağırın.
-    - İsteğe bağlı olarak, `ConfigureApplicationCookie` `ConfigureExternalCookie` `ConfigureServices` tanımlama bilgisi ayarlarını ince ayar için yöntemindeki or metodunu çağırın Identity .
+    - `AddIdentity` `ConfigureServices` Kimlik doğrulama hizmetlerini eklemek için yöntemindeki yöntemi çağırın cookie .
+    - İsteğe bağlı olarak, `ConfigureApplicationCookie` `ConfigureExternalCookie` `ConfigureServices` ayarları ince ayar için yöntemi içindeki or metodunu çağırın Identity cookie .
 
         ```csharp
         services.AddIdentity<ApplicationUser, IdentityRole>()
@@ -108,7 +110,7 @@ Aşağıdaki iki seçenekten birini seçin ve *Startup.cs*'de gerekli değişikl
         services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/LogIn");
         ```
 
-2. Tanımlama bilgilerini kullanmadan kullanmaIdentity
+2. Şunu cookie olmadan s kullanIdentity
     - `UseCookieAuthentication`Yöntemindeki yöntem çağrısını `Configure` ile değiştirin `UseAuthentication` :
 
         ```csharp
@@ -277,7 +279,7 @@ Microsoft hesabı kimlik doğrulaması hakkında daha fazla bilgi için [Bu GitH
 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme);
 ```
 
-Önceki kod parçacığında, varsayılan düzen `CookieAuthenticationDefaults.AuthenticationScheme` ("Cookies") olarak ayarlanır.
+Yukarıdaki kod parçacığında, varsayılan düzen `CookieAuthenticationDefaults.AuthenticationScheme` (" Cookie s") olarak ayarlanır.
 
 Alternatif olarak, birden `AddAuthentication` fazla özellik ayarlamak için yönteminin aşırı yüklenmiş bir sürümünü kullanın. Aşağıdaki aşırı yüklenmiş yöntem örneğinde, varsayılan düzen olarak ayarlanır `CookieAuthenticationDefaults.AuthenticationScheme` . Kimlik doğrulama düzeni, farklı `[Authorize]` özniteliklerde veya yetkilendirme ilkeleriniz içinde de belirtilebilir.
 
@@ -293,7 +295,7 @@ Aşağıdaki koşullardan biri doğru ise, 2,0 'de varsayılan bir düzen tanım
 - Kullanıcının otomatik olarak oturum açabilmesi istiyorsunuz
 - `[Authorize]`Şemaları belirtmeden özniteliği veya yetkilendirme ilkelerini kullanın
 
-Bu kural için bir özel durum `AddIdentity` yöntemidir. Bu yöntem sizin için tanımlama bilgileri ekler ve varsayılan kimlik doğrulama ve zorluk düzenlerini uygulama tanımlama bilgisine ayarlar `IdentityConstants.ApplicationScheme` . Ayrıca, varsayılan oturum açma düzenini dış tanımlama bilgisine ayarlar `IdentityConstants.ExternalScheme` .
+Bu kural için bir özel durum `AddIdentity` yöntemidir. Bu yöntem cookie sizin için ekler ve varsayılan kimlik doğrulama ve zorluk düzenlerini uygulamaya ayarlar cookie `IdentityConstants.ApplicationScheme` . Ayrıca, varsayılan oturum açma düzenini dış olarak ayarlar cookie `IdentityConstants.ExternalScheme` .
 
 <a name="obsolete-interface"></a>
 
@@ -342,11 +344,11 @@ Daha fazla bilgi için bkz. <xref:security/authentication/windowsauth>.
 
 <a name="identity-cookie-options"></a>
 
-## <a name="identitycookieoptions-instances"></a>Identityıeoptions örnekleri
+## <a name="no-locidentityno-loccookieoptions-instances"></a>IdentityCookieSeçenek örnekleri
 
-2,0 değişikliğin yan etkisi, tanımlama bilgisi seçenekleri örnekleri yerine adlandırılmış seçenekleri kullanma anahtarıdır. IdentityTanımlama bilgisi düzen adlarını özelleştirme özelliği kaldırılır.
+2,0 değişikliğin yan etkisi, seçenek örnekleri yerine adlandırılmış seçenekleri kullanma anahtarıdır cookie . Identity cookie Düzen adlarını özelleştirme özelliği kaldırılır.
 
-Örneğin, 1. x projeleri bir [constructor injection](xref:mvc/controllers/dependency-injection#constructor-injection) `IdentityCookieOptions` parametreyi *accountcontroller.cs* ve *ManageController.cs*öğesine geçirmek için Oluşturucu Ekleme kullanır. Dış tanımlama bilgisi kimlik doğrulama şemasına, belirtilen örnekten erişilir:
+Örneğin, 1. x projeleri bir [constructor injection](xref:mvc/controllers/dependency-injection#constructor-injection) `IdentityCookieOptions` parametreyi *accountcontroller.cs* ve *ManageController.cs*öğesine geçirmek için Oluşturucu Ekleme kullanır. Dış cookie kimlik doğrulama düzenine, belirtilen örnekten erişilir:
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Controllers/AccountController.cs?name=snippet_AccountControllerConstructor&highlight=4,11)]
 
@@ -368,7 +370,7 @@ Belirtilen Oluşturucu Ekleme, 2,0 projesinde gereksiz hale gelir ve `_externalC
 
 <a name="navigation-properties"></a>
 
-## <a name="add-identityuser-poco-navigation-properties"></a>Identityuser POCO gezinti özellikleri ekle
+## <a name="add-no-locidentityuser-poco-navigation-properties"></a>IdentityKullanıcı POCO gezintisi özellikleri ekle
 
 Taban `IdentityUser` poco 'nın (düz eskı CLR nesnesi) Entity Framework (EF) temel gezinti özellikleri kaldırılmıştır. 1. x projeniz bu özellikleri kullandıysanız, bunları el ile 2,0 projesine ekleyin:
 

@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/1x-to-2x/index
-ms.openlocfilehash: 97fe2f36aed4a2ac60a7ffc30ede5e682a838e5e
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: cad1cd868ef8c972d7e0fbfec79cd1d8b49c3b6e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85408701"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015341"
 ---
 # <a name="migrate-from-aspnet-core-1x-to-20"></a>ASP.NET Core 1. x ile 2,0 arasında geçiş yapın
 
@@ -31,7 +33,7 @@ Mevcut ASP.NET Core 1. x uygulamaları sürüme özgü proje şablonlarını tem
 
 <a name="prerequisites"></a>
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 Bkz. [ASP.NET Core kullanmaya başlama](xref:getting-started).
 
@@ -164,7 +166,7 @@ Startup.cs yönteminde aşağıdaki 1. x çekirdek başlatma kodunu göz önünd
 
 <a name="view-compilation"></a>
 
-## <a name="review-razor-view-compilation-setting"></a>RazorGörünüm derleme ayarını gözden geçir
+## <a name="review-no-locrazor-view-compilation-setting"></a>RazorGörünüm derleme ayarını gözden geçir
 
 Daha hızlı uygulama başlangıç süresi ve daha küçük yayımlanmış paketleri size en önemli öneme sahiptir. Bu nedenlerden dolayı, ASP.NET Core 2,0 ' de [ Razor derleme görünümü](xref:mvc/views/view-compilation) varsayılan olarak etkinleştirilmiştir.
 
@@ -198,7 +200,7 @@ Application Insights SDK 'Yı doğrudan kullanıyorsanız, bunu yapmaya devam ed
 
 <a name="auth-and-identity"></a>
 
-## <a name="adopt-authenticationidentity-improvements"></a>Kimlik doğrulaması/ Identity iyileştirmeleri benimseyin
+## <a name="adopt-authenticationno-locidentity-improvements"></a>Kimlik doğrulaması/ Identity iyileştirmeleri benimseyin
 
 ASP.NET Core 2,0 ' de yeni bir kimlik doğrulama modeli ve ASP.NET Core birçok önemli değişiklik vardır Identity . Projenizi ayrı ayrı kullanıcı hesaplarıyla oluşturduysanız veya el ile kimlik doğrulaması eklediyseniz veya Identity [ Identity ASP.NET Core 2,0 ' ye](xref:migration/1x-to-2x/identity-2x)bakın.
 

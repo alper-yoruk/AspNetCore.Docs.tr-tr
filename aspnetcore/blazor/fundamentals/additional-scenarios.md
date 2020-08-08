@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/10/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: b32710e515d111b7dd6556f1db55082cd56a82b5
-ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
+ms.openlocfilehash: dbad91e46a95d9ab5ec62d66e0d9a18938ff4520
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87819008"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014470"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a>ASP.NET Core Blazor barındırma modeli yapılandırması
 
@@ -32,7 +34,7 @@ Bu makalede barındırma modeli yapılandırması ele alınmaktadır.
 
 *Bu bölüm için geçerlidir Blazor WebAssembly .*
 
-SignalRTemel alınan istemciyi tanımlama bilgileri veya http kimlik doğrulama üstbilgileri gibi kimlik bilgilerini gönderecek şekilde yapılandırmak için:
+SignalRTemel alınan istemciyi, cookie s veya http kimlik doğrulama üstbilgileri gibi kimlik bilgilerini gönderecek şekilde yapılandırmak için:
 
 * <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.WebAssemblyHttpRequestMessageExtensions.SetBrowserRequestCredentials%2A> <xref:Microsoft.AspNetCore.Components.WebAssembly.Http.BrowserRequestCredentials.Include> Kaynak noktaları arası isteklere ayarlamak için kullanın [`fetch`](https://developer.mozilla.org/docs/Web/API/Fetch_API/Using_Fetch) :
 
@@ -131,7 +133,7 @@ Statik HTML sayfasından sunucu bileşenleri işleme desteklenmiyor.
 
 SignalRDosyadaki uygulamalar tarafından kullanılan istemciyi yapılandırın Blazor Server `Pages/_Host.cshtml` . `Blazor.start` `_framework/blazor.server.js` Komut dosyasını ve etiketinin arkasına çağrı yapan bir betik yerleştirin `</body>` .
 
-### <a name="logging"></a>Günlüğe Kaydetme
+### <a name="logging"></a>Günlüğe kaydetme
 
 SignalRİstemci günlüğünü yapılandırmak için:
 
@@ -231,11 +233,9 @@ Blazor.defaultReconnectionHandler._reconnectionDisplay =
 
 Yer tutucu, `{ELEMENT ID}` görüntülenecek HTML ÖĞESININ kimliğidir.
 
-::: moniker range=">= aspnetcore-5.0"
-
 ## <a name="influence-html-head-tag-elements"></a>HTML `<head>` etiketi öğelerini etkiler
 
-*Bu bölüm ve için Blazor WebAssembly geçerlidir Blazor Server .*
+*Bu bölüm, ve ' nin yakında ASP.NET Core 5,0 sürümü için geçerlidir Blazor WebAssembly Blazor Server .*
 
 İşlendiğinde,, `Title` `Link` ve `Meta` bileşenleri HTML etiketi öğelerine veri ekler veya güncelleştirir `<head>` :
 
@@ -263,8 +263,6 @@ Bir alt bileşende çerçeve bileşenlerinden biri kullanıldığında, çerçev
 
 * , Uygulama durumu ile değiştirilebilir. Sabit kodlanmış HTML etiketi uygulama durumu tarafından değiştirilemez.
 * `<head>`Üst bileşen artık IŞLENMEDIĞINDE HTML 'den kaldırılır.
-
-::: moniker-end
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

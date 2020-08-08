@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/18/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/advanced-scenarios
-ms.openlocfilehash: bdea9f2fe5c552b56414bb49588733c8dc2a34db
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: d6446447a51e22b7df1289e7ef20a4a6381c2b20
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400225"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012533"
 ---
-# <a name="aspnet-core-blazor-advanced-scenarios"></a>ASP.NET Core Blazor Gelişmiş senaryolar
+# <a name="aspnet-core-no-locblazor-advanced-scenarios"></a>ASP.NET Core Blazor Gelişmiş senaryolar
 
 , [Luke Latham](https://github.com/guardrex) ve [Daniel Roth](https://github.com/danroth27) tarafından
 
-## <a name="blazor-server-circuit-handler"></a>Blazor Serverdevre işleyici
+## <a name="no-locblazor-server-circuit-handler"></a>Blazor Serverdevre işleyici
 
 Blazor Serverkodun bir Kullanıcı devresi durumunda değişiklikler üzerinde kod çalıştırmaya izin veren bir *devhandler*tanımlamasına olanak tanır. Devre işleyici, `CircuitHandler` uygulamanın hizmet kapsayıcısındaki sınıfından türeterek ve kayıt işleminden uygulanır. Bir devre işleyicinin aşağıdaki örneği açık SignalR bağlantıları izler:
 
@@ -163,16 +165,16 @@ builder.AddContent(1, "Second");
 
 Kod ilk kez çalıştırıldığında, `someFlag` `true` Oluşturucu şunları alır:
 
-| Sequence | Tür      | Veri   |
+| Sequence | Tür      | Veriler   |
 | :------: | --------- | :----: |
-| 0        | Metin düğümü | İlk  |
-| 1        | Metin düğümü | Saniye |
+| 0        | Metin düğümü | Birinci  |
+| 1        | Metin düğümü | Second |
 
 Olduğunu düşünün `someFlag` `false` ve biçimlendirme yeniden işlenir. Bu kez, Oluşturucu şunları alır:
 
-| Sequence | Tür       | Veri   |
+| Sequence | Tür       | Veriler   |
 | :------: | ---------- | :----: |
-| 1        | Metin düğümü  | Saniye |
+| 1        | Metin düğümü  | Second |
 
 Çalışma zamanı bir fark gerçekleştirdiğinde, sıradaki öğenin `0` kaldırıldığını görür, bu nedenle aşağıdaki önemsiz *düzenleme betiğini*oluşturur:
 
@@ -195,16 +197,16 @@ builder.AddContent(seq++, "Second");
 
 Şimdi ilk çıktı:
 
-| Sequence | Tür      | Veri   |
+| Sequence | Tür      | Veriler   |
 | :------: | --------- | :----: |
-| 0        | Metin düğümü | İlk  |
-| 1        | Metin düğümü | Saniye |
+| 0        | Metin düğümü | Birinci  |
+| 1        | Metin düğümü | Second |
 
 Bu sonuç önceki bir durum ile aynıdır, bu nedenle olumsuz bir sorun yoktur. `someFlag``false`ikinci işleme ve çıktı:
 
-| Sequence | Tür      | Veri   |
+| Sequence | Tür      | Veriler   |
 | :------: | --------- | ------ |
-| 0        | Metin düğümü | Saniye |
+| 0        | Metin düğümü | Second |
 
 Bu kez, fark algoritması *iki* değişikliğin oluştuğunu görür ve algoritma aşağıdaki düzenleme betiğini üretir:
 
@@ -223,7 +225,7 @@ Bu, önemsiz bir örnektir. Karmaşık ve derin iç içe yapıları ve özellikl
 * Dizi numaraları sabit kodluysa, fark algoritması yalnızca değer değerinde sıra numaralarının artırılmasını gerektirir. İlk değer ve boşluklar ilgisiz. Tek bir seçenek, kod satırı numarasını sıra numarası olarak kullanmak veya sıfırdan başlayıp bir ya da yüzlerce (ya da tercih edilen aralığa) artırmak için kullanılır. 
 * Blazorsıra numaralarını kullanır, diğer ağaç dağıtma Kullanıcı arabirimi çerçeveleri bunları kullanmaz. Dizi numaraları kullanıldığında, yayılma işlemi daha hızlı bir şekilde yapılır ve Blazor geliştiricilerin yazma dosyaları için otomatik olarak sıra numaralarıyla ilgilenen bir derleme adımının avantajına sahiptir `.razor` .
 
-## <a name="perform-large-data-transfers-in-blazor-server-apps"></a>Uygulamalarda büyük veri aktarımları gerçekleştirme Blazor Server
+## <a name="perform-large-data-transfers-in-no-locblazor-server-apps"></a>Uygulamalarda büyük veri aktarımları gerçekleştirme Blazor Server
 
 Bazı senaryolarda, JavaScript ve arasında büyük miktarlarda veri aktarılmalıdır Blazor . Genellikle, büyük veri aktarımları şu durumlarda oluşur:
 

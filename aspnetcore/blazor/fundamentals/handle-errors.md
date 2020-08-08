@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/23/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/handle-errors
-ms.openlocfilehash: e3ce3a62f351255fd059adaa6e9b0a8e9bdc2ce7
-ms.sourcegitcommit: fa89d6553378529ae86b388689ac2c6f38281bb9
+ms.openlocfilehash: 5f7112d9a072f28d387e07bdf69ec0b7595ff6b4
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/07/2020
-ms.locfileid: "86059883"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014444"
 ---
-# <a name="handle-errors-in-aspnet-core-blazor-apps"></a>ASP.NET Core uygulamalardaki hataları işleme Blazor
+# <a name="handle-errors-in-aspnet-core-no-locblazor-apps"></a>ASP.NET Core uygulamalardaki hataları işleme Blazor
 
 [Steve Sanderson](https://github.com/SteveSandersonMS) tarafından
 
@@ -85,7 +87,7 @@ Bir Blazor Server uygulamada, dosyadaki deneyimi özelleştirin `Pages/_Host.csh
 }
 ```
 
-## <a name="how-a-blazor-server-app-reacts-to-unhandled-exceptions"></a>Bir Blazor Server uygulamanın işlenmemiş özel durumlara nasıl yeniden davranması
+## <a name="how-a-no-locblazor-server-app-reacts-to-unhandled-exceptions"></a>Bir Blazor Server uygulamanın işlenmemiş özel durumlara nasıl yeniden davranması
 
 Blazor Serverdurum bilgisi olan bir çerçevedir. Kullanıcılar bir uygulamayla etkileşim kurarken, *devre*olarak bilinen sunucuya bir bağlantı sağlar. Devre, etkin bileşen örneklerini ve diğer birçok durum düzeyini barındırır; örneğin:
 
@@ -221,7 +223,7 @@ Daha fazla bilgi için aşağıdaki makaleleri inceleyin:
 * <xref:blazor/call-javascript-from-dotnet>
 * <xref:blazor/call-dotnet-from-javascript>
 
-### <a name="blazor-server-prerendering"></a>Blazor Serverprerendering
+### <a name="no-locblazor-server-prerendering"></a>Blazor Serverprerendering
 
 Blazorbileşenler, işlenen HTML işaretlemesi kullanıcının ilk HTTP isteğinin bir parçası olarak döndürüldüğünden, [bileşen etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) kullanılarak önceden uygulanabilir. Bu şu şekilde geçerlidir:
 

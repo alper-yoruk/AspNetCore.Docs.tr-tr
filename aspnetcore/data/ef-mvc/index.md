@@ -5,6 +5,8 @@ description: ''
 ms.author: riande
 ms.date: 03/27/2017
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/index
-ms.openlocfilehash: b04df04029a6afcc21b449ea0f1d60fb445df1cc
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: c41f601311b1f9487199009d596d6cf3aed07d48
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400511"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012819"
 ---
 # <a name="aspnet-core-mvc-with-ef-core---tutorial-series"></a>EF Core öğreticisi serisi ile MVC ASP.NET Core
 
@@ -30,7 +32,7 @@ Bu öğretici 3,0 **not** ASP.NET Core güncelleştirilmedi. [ Razor Sayfalar s�
 
 [!INCLUDE [RP better than MVC](../../includes/RP-EF/rp-over-mvc.md)]
 
-1. [Kullanmaya başlayın](xref:data/ef-mvc/intro)
+1. [Kullanmaya başlama](xref:data/ef-mvc/intro)
 1. [İşlem Oluşturma, Okuma, Güncelleştirme ve Silme](xref:data/ef-mvc/crud)
 1. [Sıralama, filtreleme, disk belleği ve gruplandırma](xref:data/ef-mvc/sort-filter-page)
 1. [Geçişler](xref:data/ef-mvc/migrations)

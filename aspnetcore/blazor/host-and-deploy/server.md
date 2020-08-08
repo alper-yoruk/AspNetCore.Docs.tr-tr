@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/04/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/server
-ms.openlocfilehash: e59579046ecbfdbb4cca79bfb0e39d299e26913c
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e7c8627cd27fd30288b4bcfa1ac2ffe3e9b46e29
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402604"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014223"
 ---
-# <a name="host-and-deploy-blazor-server"></a>Barındırma ve dağıtmaBlazor Server
+# <a name="host-and-deploy-no-locblazor-server"></a>Barındırma ve dağıtmaBlazor Server
 
 , [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com)ve [Daniel Roth](https://github.com/danroth27) tarafından
 
@@ -54,13 +56,13 @@ Güvenli ve ölçeklenebilir sunucu uygulamaları oluşturma hakkında yönergel
 
 Her bağlantı hattı en düşük *Merhaba Dünya*stilinde bir uygulama için YAKLAŞıK 250 KB bellek kullanır. Bir devrenin boyutu, uygulamanın koduna ve her bileşenle ilişkili durum bakım gereksinimlerine bağlıdır. Uygulama ve altyapınız için geliştirme sırasında kaynak taleplerini ölçmenizi öneririz, ancak aşağıdaki taban çizgisi, dağıtım hedefini planlamada bir başlangıç noktası olabilir: uygulamanızın 5.000 eşzamanlı kullanıcı desteklemesini istiyorsanız, en az 1,3 GB sunucu belleğini uygulamaya (veya Kullanıcı başına ~ 273 KB) göre bütçeleme yapmayı düşünün.
 
-### <a name="signalr-configuration"></a>SignalRyapılandırmada
+### <a name="no-locsignalr-configuration"></a>SignalRyapılandırmada
 
 Blazor Serveruygulamalar SignalR tarayıcıyla iletişim kurmak için ASP.NET Core kullanır. [ SignalR uygulamasının barındırma ve ölçeklendirme koşulları](xref:signalr/publish-to-azure-web-app) uygulamalar için geçerlidir Blazor Server .
 
 BlazorSignalRdaha düşük gecikme süresi, güvenilirlik ve [güvenlik](xref:signalr/security)nedeniyle taşıma olarak WebSockets kullanırken en iyi şekilde işe yarar. Uzun yoklama, SignalR WebSockets kullanılamadığında veya uygulama açıkça uzun yoklamayı kullanacak şekilde yapılandırıldığında kullanılır. Azure App Service dağıtım sırasında, uygulamayı hizmetin Azure portal ayarları içinde kullanmak üzere yapılandırın. Azure App Service için uygulamayı yapılandırma hakkında ayrıntılı bilgi için bkz. [ SignalR yayımlama yönergeleri](xref:signalr/publish-to-azure-web-app).
 
-#### <a name="azure-signalr-service"></a>Azure SignalR hizmeti
+#### <a name="azure-no-locsignalr-service"></a>Azure SignalR hizmeti
 
 Uygulamalar için [Azure SignalR hizmetini](/azure/azure-signalr) kullanmanızı öneririz Blazor Server . Hizmet, bir Blazor Server uygulamayı çok sayıda eşzamanlı bağlantıya ölçeklendirmeye olanak tanır SignalR . Ayrıca, SignalR hizmetin küresel erişim ve yüksek performanslı veri merkezleri Coğrafya nedeniyle gecikme süresini azaltmaya önemli ölçüde yardımcı olur. Azure hizmetini bir uygulamayı yapılandırmak (ve isteğe bağlı olarak sağlamak) için SignalR :
 

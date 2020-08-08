@@ -5,6 +5,8 @@ description: Bir ASP.NET MVC projesinden kimlik doğrulaması ve kimliği ASP.NE
 ms.author: riande
 ms.date: 3/22/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,22 +15,22 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/identity
-ms.openlocfilehash: 995de894bc77c4db5e5683b36e691b0c5a3463d3
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 8a6cc1e612dbf59dc2db2eca165dd1a03ab92f81
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403761"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014938"
 ---
-# <a name="migrate-authentication-and-identity-to-aspnet-core"></a>Kimlik doğrulamasını ve Identity ASP.NET Core geçir
+# <a name="migrate-authentication-and-no-locidentity-to-aspnet-core"></a>Kimlik doğrulamasını ve Identity ASP.NET Core geçir
 
 [Steve Smith](https://ardalis.com/) tarafından
 
 Önceki makalede, [yapılandırmayı ASP.NET Core MVC 'ye bir ASP.NET MVC projesinden geçirdik](xref:migration/configuration). Bu makalede, kayıt, oturum açma ve Kullanıcı yönetimi özelliklerini geçiririz.
 
-## <a name="configure-identity-and-membership"></a>Yapılandırma Identity ve üyelik
+## <a name="configure-no-locidentity-and-membership"></a>Yapılandırma Identity ve üyelik
 
-ASP.NET MVC 'de, kimlik doğrulama ve kimlik özellikleri Identity *App_Start* klasöründe bulunan *Startup.Auth.cs* ve *IdentityConfig.cs*ile ASP.NET kullanılarak yapılandırılır. ASP.NET Core MVC 'de, bu özellikler *Startup.cs*' de yapılandırılır.
+ASP.NET MVC 'de, kimlik doğrulama ve kimlik özellikleri Identity *App_Start* klasöründe bulunan *Startup.Auth.cs* ve * Identity config.cs*ile ASP.NET kullanılarak yapılandırılır. ASP.NET Core MVC 'de, bu özellikler *Startup.cs*' de yapılandırılır.
 
 Aşağıdaki NuGet paketlerini yükler:
 
@@ -53,7 +55,7 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Bu noktada, yukarıdaki kodda henüz ASP.NET MVC projesinden geçirdiğimiz iki tür vardır: `ApplicationDbContext` ve `ApplicationUser` . ASP.NET Core projesinde yeni *modeller* klasörü oluşturun ve bu türlere karşılık gelen kendisine iki sınıf ekleyin. Bu sınıfların ASP.NET MVC sürümlerini */models/ıdentitymodels.cs*içinde bulacaksınız, ancak geçirilen projede sınıf başına bir dosya kullanacağız çünkü bu daha net bir şekilde yapılır.
+Bu noktada, yukarıdaki kodda henüz ASP.NET MVC projesinden geçirdiğimiz iki tür vardır: `ApplicationDbContext` ve `ApplicationUser` . ASP.NET Core projesinde yeni *modeller* klasörü oluşturun ve bu türlere karşılık gelen kendisine iki sınıf ekleyin. Bu sınıfların ASP.NET MVC sürümlerini */models/ Identity models.cs*içinde bulacaksınız, ancak daha açık olan bu yana geçirilmiş projede sınıf başına bir dosya kullanacağız.
 
 *ApplicationUser.cs*:
 

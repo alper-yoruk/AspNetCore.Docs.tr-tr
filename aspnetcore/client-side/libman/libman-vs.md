@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 08/20/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/libman/libman-vs
-ms.openlocfilehash: 504c34ccd8813273161b86504700704f8a932538
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 2dc944ffd4307aa108a54b70d58f298c26959ce0
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403176"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013352"
 ---
 # <a name="use-libman-with-aspnet-core-in-visual-studio"></a>Visual Studio 'da ASP.NET Core LibMan kullanma
 
@@ -34,7 +36,7 @@ Visual Studio, aşağıdakiler dahil olmak üzere ASP.NET Core projelerinde [Lib
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/client-side/libman/samples/) [(nasıl indirileceği)](xref:index#how-to-download-a-sample)
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * **ASP.net ve Web geliştirme** iş yüküyle [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
 
@@ -77,7 +79,7 @@ Kitaplık dosyaları, ASP.NET Core projesine iki farklı şekilde eklenebilir:
   |Projedeki *Sayfalar* klasörü                 |*Sayfa/jQuery/*       |
 
 * *libman.jsüzerindeki*yapılandırma başına dosyaları Indirmek için **Yükle** düğmesine tıklayın.
-* Yükleme ayrıntıları için **Çıkış** penceresinin **Kitaplık Yöneticisi** akışını gözden geçirin. Örneğin:
+* Yükleme ayrıntıları için **Çıkış** penceresinin **Kitaplık Yöneticisi** akışını gözden geçirin. Örnek:
 
   ```console
   Restore operation started...
@@ -168,7 +170,7 @@ Kitaplık dosyalarını el ile geri yüklemek için:
 Geri yükleme işlemi çalışırken:
 
 * Visual Studio durum çubuğundaki Görev Durumu Merkezi (TSC) simgesi canlandırılır ve *geri yükleme işlemi başlatılır*. Simgeye tıkladığınızda bilinen arka plan görevlerinin listelendiği bir araç ipucu açılır.
-* İletiler durum çubuğuna ve **Çıkış** penceresinin **Kitaplık Yöneticisi** akışına gönderilir. Örneğin:
+* İletiler durum çubuğuna ve **Çıkış** penceresinin **Kitaplık Yöneticisi** akışına gönderilir. Örnek:
 
   ```console
   Restore operation started...
@@ -193,7 +195,7 @@ Kitaplık olmayan dosyaların yanlışlıkla kaldırılmasını engellemek için
 Temizleme işlemi çalışırken:
 
 * Visual Studio durum çubuğundaki TSC simgesi animasyon alınacaktır ve *istemci kitaplıkları işlemini*okur. Simgeye tıkladığınızda bilinen arka plan görevlerinin listelendiği bir araç ipucu açılır.
-* İletiler durum çubuğuna ve **Çıkış** penceresinin **Kitaplık Yöneticisi** akışına gönderilir. Örneğin:
+* İletiler durum çubuğuna ve **Çıkış** penceresinin **Kitaplık Yöneticisi** akışına gönderilir. Örnek:
 
 ```console
 Clean libraries operation started...

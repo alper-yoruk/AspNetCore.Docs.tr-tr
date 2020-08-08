@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/04/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 1d24ebe900dfcdeb8b7bcc97f1d212deea9cecae
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 59b6e4cb2f466594d8a105a239e175e9c7b37ad8
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402734"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014261"
 ---
-# <a name="aspnet-core-blazor-globalization-and-localization"></a>BlazorGenelleştirme ve yerelleştirme ASP.NET Core
+# <a name="aspnet-core-no-locblazor-globalization-and-localization"></a>BlazorGenelleştirme ve yerelleştirme ASP.NET Core
 
 , [Luke Latham](https://github.com/guardrex) ve [Daniel Roth](https://github.com/danroth27) tarafından
 
@@ -81,20 +83,20 @@ Blazor Serveruygulamalar, [Yerelleştirme ara yazılımı](xref:fundamentals/loc
 
 Kültür aşağıdaki yaklaşımlardan biri kullanılarak ayarlanabilir:
 
-* [Çerezler](#cookies)
+* [Cookiemalar](#cookies)
 * [Kültürü seçmek için Kullanıcı arabirimi sağlama](#provide-ui-to-choose-the-culture)
 
 Daha fazla bilgi ve örnek için bkz <xref:fundamentals/localization> ..
 
-#### <a name="cookies"></a>Tanımlama bilgileri
+#### <a name="no-loccookies"></a>Cookiemalar
 
-Yerelleştirme kültürü tanımlama bilgisi kullanıcının kültürünü kalıcı hale getirebilirler. Yerelleştirme ara yazılımı, sonraki isteklerde Kullanıcı kültürünü ayarlamak için tanımlama bilgilerini okur. 
+Yerelleştirme kültürü cookie kullanıcının kültürünü kalıcı hale getirebilirler. Yerelleştirme ara yazılımı, cookie sonraki istekleri kullanıcının kültürünü ayarlamak için okur. 
 
-Tanımlama bilgisinin kullanımı, WebSocket bağlantısının kültürü doğru şekilde yaymasını sağlar. Yerelleştirme şemaları URL yolunu veya sorgu dizesini temel alıyorsa, düzen WebSockets ile çalışmayabilir, bu nedenle kültürü kalıcı hale getiremeyebilir. Bu nedenle, yerelleştirme kültürü tanımlama bilgisinin kullanılması önerilen yaklaşımdır.
+' Nin kullanımı, cookie WebSocket bağlantısının kültürü doğru şekilde yaymasını sağlar. Yerelleştirme şemaları URL yolunu veya sorgu dizesini temel alıyorsa, düzen WebSockets ile çalışmayabilir, bu nedenle kültürü kalıcı hale getiremeyebilir. Bu nedenle, yerelleştirme kültürünün kullanılması cookie önerilen yaklaşımdır.
 
-Kültür bir yerelleştirme tanımlama bilgisinde kalıcı hale getirilir kültür atamak için herhangi bir teknik kullanılabilir. Uygulamanın zaten sunucu tarafı ASP.NET Core için bir yerelleştirme şeması varsa, uygulamanın var olan yerelleştirme altyapısını kullanmaya devam edin ve uygulamanın şeması içinde yerelleştirme kültür tanımlama bilgisini ayarlayın.
+Kültür bir Yerelleştirmede kalıcı ise kültür atamak için herhangi bir teknik kullanılabilir cookie . Uygulamanın zaten sunucu tarafı ASP.NET Core için bir yerelleştirme şeması varsa, uygulamanın var olan yerelleştirme altyapısını kullanmaya devam edin ve cookie uygulamanın şeması içinde yerelleştirme kültürünü ayarlayın.
 
-Aşağıdaki örnekte, yerelleştirme ara yazılımı tarafından okunabilen bir tanımlama bilgisinde geçerli kültürün nasıl ayarlanacağı gösterilmektedir. Razor `Pages/_Host.cshtml` Dosyada açılış etiketinin hemen içinde bir ifade oluşturun `<body>` :
+Aşağıdaki örnek, ' de cookie Yerelleştirme ara yazılımı tarafından okunabilen geçerli kültürün nasıl ayarlanacağını gösterir. Razor `Pages/_Host.cshtml` Dosyada açılış etiketinin hemen içinde bir ifade oluşturun `<body>` :
 
 ```cshtml
 @using System.Globalization
@@ -120,18 +122,18 @@ Yerelleştirme, uygulama tarafından aşağıdaki olay dizisinde işlenir:
 
 1. Tarayıcı, uygulamaya bir ilk HTTP isteği gönderir.
 1. Kültür, yerelleştirme ara yazılımı tarafından atanır.
-1. Razor `_Host` Sayfadaki ifade (), `_Host.cshtml` yanıtın bir parçası olarak bir tanımlama bilgisinde kültürü devam ettirir.
+1. Razor `_Host` Sayfadaki ifade (), `_Host.cshtml` yanıtın bir parçası olarak bir içinde kültürü devam ettirir cookie .
 1. Tarayıcı, etkileşimli bir oturum oluşturmak için bir WebSocket bağlantısı açar Blazor Server .
-1. Yerelleştirme ara yazılımı tanımlama bilgisini okur ve kültürü atar.
+1. Yerelleştirme ara yazılımı okur cookie ve kültürü atar.
 1. Blazor ServerOturum doğru kültür ile başlar.
 
 #### <a name="provide-ui-to-choose-the-culture"></a>Kültürü seçmek için Kullanıcı arabirimi sağlama
 
 Bir kullanıcının bir kültür seçmesine izin vermek için kullanıcı ARABIRIMI sağlamak üzere bir *yeniden yönlendirme tabanlı yaklaşım* önerilir. Bir Kullanıcı güvenli bir kaynağa erişmeyi denediğinde, işlem Web uygulamasında gerçekleşmelere benzer. Kullanıcı bir oturum açma sayfasına yönlendirilir ve ardından özgün kaynağa yeniden yönlendirilir. 
 
-Uygulama, bir denetleyiciye yeniden yönlendirme yoluyla kullanıcının seçili kültürünü devam ettirir. Denetleyici kullanıcının seçili kültürünü bir tanımlama bilgisine ayarlar ve kullanıcıyı özgün URI 'ye yeniden yönlendirir.
+Uygulama, bir denetleyiciye yeniden yönlendirme yoluyla kullanıcının seçili kültürünü devam ettirir. Denetleyici kullanıcının seçili kültürünü bir cookie olarak ayarlar ve kullanıcıyı özgün URI 'ye yeniden yönlendirir.
 
-Bir tanımlama bilgisinde kullanıcının seçili kültürünü ayarlamak ve özgün URI 'ye yeniden yönlendirmeyi gerçekleştirmek için sunucuda bir HTTP uç noktası oluşturun:
+Sunucuda kullanıcının seçili kültürünü ayarlamak cookie ve özgün URI 'ye yeniden yönlendirmeyi gerçekleştirmek için sunucuda BIR HTTP uç noktası oluşturun:
 
 ```csharp
 [Route("[controller]/[action]")]

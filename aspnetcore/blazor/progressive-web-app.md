@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: 237a8fceb75ba724625f018cf94c8d5bc5acfdad
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 1c33a3abd2ebee60a4025d4598495d276663dc9b
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402591"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014171"
 ---
-# <a name="build-progressive-web-applications-with-aspnet-core-blazor-webassembly"></a>ASP.NET Core ile aşamalı Web uygulamaları oluşturmaBlazor WebAssembly
+# <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core ile aşamalı Web uygulamaları oluşturmaBlazor WebAssembly
 
 [Steve Sanderson](https://github.com/SteveSandersonMS) tarafından
 
@@ -69,13 +71,13 @@ dotnet new blazorwasm -o MyNewProject --pwa
 
 PWA şablonu kullanılarak oluşturulan bir uygulamayı ziyaret ederken, kullanıcılar uygulamayı işletim sistemi başlangıç menüsüne, Dock 'a veya ana ekrana yükleme seçeneğine sahiptir. Bu seçeneğin sunulma şekli kullanıcının tarayıcısına bağlıdır. Edge veya Chrome gibi Desktop Kmıum tabanlı tarayıcıları kullanılırken, URL çubuğu içinde bir **Ekle** düğmesi görünür. Kullanıcı **Ekle** düğmesini seçtikten sonra bir onay iletişim kutusu alırlar:
 
-![Google Chrome 'daki onaylama diaglog, kullanıcıya ' MyBlazorPwa ' uygulaması için bir Install Button düğmesi gösterir.](progressive-web-app/_static/image2.png)
+![Google Chrome 'daki onaylama diaglog, kullanıcıya ' My::: No-Loc (Blazor):::P WA ' uygulaması için bir Install Button düğmesi sunar.](progressive-web-app/_static/image2.png)
 
 İOS 'ta, ziyaretçiler Safari 'nin **Share** düğmesini ve **Add to HOMESCREEN** seçeneğini kullanarak PWA 'yı yükleyebilir. Android için Chrome 'da kullanıcılar, sağ üst köşedeki **menü** düğmesini ve ardından **Giriş ekranına Ekle**' yi seçer.
 
 Yüklendikten sonra uygulama, adres çubuğu olmadan kendi penceresinde görünür:
 
-![' MyBlazorPwa ' uygulaması, bir adres çubuğu olmadan Google Chrome 'da çalışır.](progressive-web-app/_static/image3.png)
+![' My::: No-Loc (Blazor):::P WA ' uygulaması, bir adres çubuğu olmadan Google Chrome 'da çalışır.](progressive-web-app/_static/image3.png)
 
 Pencerenin başlığını, renk şemasını, simgesini veya diğer ayrıntıları özelleştirmek için `manifest.json` projenin dizinindeki dosyasına bakın `wwwroot` . Bu dosyanın şeması Web standartları tarafından tanımlanır. Daha fazla bilgi için bkz. [MDN Web belgeleri: Web uygulaması bildirimi](https://developer.mozilla.org/docs/Web/Manifest).
 
@@ -164,7 +166,7 @@ Kullanıcı, veya gibi bir URL 'ye ilk kez gittiğinde ne olacağını göz ön�
 
 Varsayılan hizmet çalışanı, gezinti istekleri için özel durum mantığı içerir. Hizmet çalışanı, istenen URL 'den bağımsız olarak, için önbelleğe alınmış içeriği döndürerek istekleri çözer `/index.html` . Bu mantık `onFetch` içindeki işlevinde uygulanır `service-worker.published.js` .
 
-Uygulamanızda sunucu tarafından işlenmiş HTML döndürmesi gereken belirli URL 'Ler varsa ve önbellekten hizmet vermezse `/index.html` , hizmet çalışanınızdaki mantığı düzenlemeniz gerekir. İçeren tüm URL 'Lerin `/Identity/` sunucuya düzenli olarak yalnızca çevrimiçi istekler olarak işlenmesi gerekiyorsa, `service-worker.published.js` `onFetch` mantığı değiştirin. Aşağıdaki kodu bulun:
+Uygulamanızda sunucu tarafından işlenmiş HTML döndürmesi gereken belirli URL 'Ler varsa ve önbellekten hizmet vermezse `/index.html` , hizmet çalışanınızdaki mantığı düzenlemeniz gerekir. İçeren tüm URL 'Lerin `/Identity/` sunucuya düzenli olarak yalnızca çevrimiçi istekler olarak işlenmesi gerekiyorsa, `service-worker.published.js` `onFetch` mantığı değiştirin. Şu kodu bulun:
 
 ```javascript
 const shouldServeIndexHtml = event.request.mode === 'navigate';

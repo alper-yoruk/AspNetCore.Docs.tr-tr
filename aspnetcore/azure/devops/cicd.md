@@ -6,6 +6,8 @@ ms.author: scaddie
 ms.date: 10/24/2018
 ms.custom: mvc, seodec18
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/cicd
-ms.openlocfilehash: 0edded18d766d6f2af08f6be5dbecbfd52a14a35
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 780d233014c26e37886d6bc5bd8fcb23d857dff0
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400563"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012624"
 ---
 # <a name="continuous-integration-and-deployment"></a>Sürekli tümleştirme ve dağıtım
 
@@ -107,7 +109,7 @@ Tamamlanacak üç farklı adım vardır. Aşağıdaki üç bölümde bulunan ad�
 
     ![Kaynak seçin-GitHub](media/cicd/vsts-select-source.png)
 
-1. Azure DevOps 'ın GitHub deponuza erişebilmesi için yetkilendirme gereklidir. **Bağlantı adı** metin kutusuna *GitHub bağlantısı><GitHub_username* girin. Örneğin:
+1. Azure DevOps 'ın GitHub deponuza erişebilmesi için yetkilendirme gereklidir. **Bağlantı adı** metin kutusuna *GitHub bağlantısı><GitHub_username* girin. Örnek:
 
     ![GitHub bağlantı adı](media/cicd/vsts-repo-authz.png)
 

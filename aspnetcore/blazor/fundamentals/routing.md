@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/14/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: f7110688a7a03dd0cf533fa5f9759af3363169f8
-ms.sourcegitcommit: 84150702757cf7a7b839485382420e8db8e92b9c
+ms.openlocfilehash: 2e0c1a479554b704b4a8cd87bc177d0f76ddc7e2
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/05/2020
-ms.locfileid: "87818943"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014365"
 ---
 # <a name="aspnet-core-no-locblazor-routing"></a>ASP.NET Core Blazor Yönlendirme
 
@@ -145,13 +147,13 @@ Aşağıdaki tabloda gösterilen yol kısıtlamaları mevcuttur. Sabit kültür 
 | Kısıtlaması | Örnek           | Örnek eşleşmeler                                                                  | Bilmesi<br>kültür<br>eşleştirme |
 | ---------- | ----------------- | -------------------------------------------------------------------------------- | :------------------------------: |
 | `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | Hayır                               |
-| `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | Evet                              |
-| `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | Evet                              |
-| `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | Evet                              |
-| `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | Evet                              |
+| `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | Yes                              |
+| `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | Yes                              |
+| `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | Yes                              |
+| `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | Yes                              |
 | `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | Hayır                               |
-| `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | Evet                              |
-| `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | Evet                              |
+| `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | Yes                              |
+| `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | Yes                              |
 
 > [!WARNING]
 > URL 'YI doğrulayan ve bir CLR türüne (veya gibi) dönüştürülen yol kısıtlamaları `int` <xref:System.DateTime> , her zaman sabit kültürü kullanır. Bu kısıtlamalar, URL 'nin yerelleştirilemeyen olduğunu varsayar.

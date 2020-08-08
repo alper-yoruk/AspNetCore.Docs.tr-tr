@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/02/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,20 +17,20 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: 69a24fc955a0f2fb524ec817eb50372052f538a1
-ms.sourcegitcommit: 66fca14611eba141d455fe0bd2c37803062e439c
+ms.openlocfilehash: 4dc9040b9410304eb33e5df7c47db2f9a42152d3
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/03/2020
-ms.locfileid: "85944262"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014002"
 ---
-# <a name="secure-aspnet-core-blazor-server-apps"></a>Güvenli ASP.NET Core Blazor Server uygulamaları
+# <a name="secure-aspnet-core-no-locblazor-server-apps"></a>Güvenli ASP.NET Core Blazor Server uygulamaları
 
 [Luke Latham](https://github.com/guardrex) tarafından
 
 Blazor Serveruygulamalar, güvenlik için ASP.NET Core uygulamalarla aynı şekilde yapılandırılır. Daha fazla bilgi için, altındaki makalelere bakın <xref:security/index> . Bu genel bakışın altındaki konular özellikle için geçerlidir Blazor Server . 
 
-## <a name="blazor-server-project-template"></a>Blazor ServerProje şablonu
+## <a name="no-locblazor-server-project-template"></a>Blazor ServerProje şablonu
 
 Proje Blazor Server oluşturulduğunda proje şablonu kimlik doğrulaması için yapılandırılabilir.
 
@@ -40,7 +42,7 @@ Proje Blazor Server oluşturulduğunda proje şablonu kimlik doğrulaması için
 
 Diğer ASP.NET Core projelerine yönelik aynı kimlik doğrulama mekanizması kümesini sunmak için bir iletişim kutusu açılır:
 
-* **Kimlik Doğrulaması Yok**
+* **Kimlik doğrulaması yok**
 * **Bireysel kullanıcı hesapları**: Kullanıcı hesapları depolanabilir:
   * ASP.NET Core sistemi kullanılarak uygulama içinde [Identity](xref:security/authentication/identity) .
   * [Azure AD B2C](xref:security/authentication/azure-ad-b2c).
@@ -57,7 +59,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 İzin verilen kimlik doğrulama değerleri ( `{AUTHENTICATION}` ) aşağıdaki tabloda gösterilmiştir.
 
-| Kimlik doğrulama mekanizması | Description |
+| Kimlik doğrulama mekanizması | Açıklama |
 | ------------------------ | ----------- |
 | `None`varsayılanını         | Kimlik doğrulaması yok |
 | `Individual`             | ASP.NET Core ile uygulamada depolanan kullanıcılarIdentity |
@@ -91,7 +93,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 İzin verilen kimlik doğrulama değerleri ( `{AUTHENTICATION}` ) aşağıdaki tabloda gösterilmiştir.
 
-| Kimlik doğrulama mekanizması | Description |
+| Kimlik doğrulama mekanizması | Açıklama |
 | ------------------------ | ----------- |
 | `None`varsayılanını         | Kimlik doğrulaması yok |
 | `Individual`             | ASP.NET Core ile uygulamada depolanan kullanıcılarIdentity |
@@ -109,7 +111,7 @@ Daha fazla bilgi için [`dotnet new`](/dotnet/core/tools/dotnet-new) .NET Core k
 
 ---
 
-## <a name="scaffold-identity"></a>İskeleIdentity
+## <a name="scaffold-no-locidentity"></a>İskeleIdentity
 
 IdentityBir projeye yapı iskelesi Blazor Server :
 

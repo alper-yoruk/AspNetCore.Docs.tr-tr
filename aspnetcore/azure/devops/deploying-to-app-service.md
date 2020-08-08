@@ -6,6 +6,8 @@ ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/deploy-to-app-service
-ms.openlocfilehash: 7cf6395b6f57413d85532ed15e5a875af10f905b
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 4349e8a994cfa4007ce847b2952c53f4223f1b3d
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400394"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012364"
 ---
 # <a name="deploy-an-app-to-app-service"></a>App Service için uygulama dağıtma
 
@@ -159,9 +161,9 @@ Uygulama, komut kabuğundan zaten dağıtıldı. Uygulamaya bir güncelleştirme
 4. Çözüm Gezgini, projeye sağ tıklayın ve **Yayımla**' ya tıklayın.
 
     ![Sağ tıklama, yayımlamayı gösteren ekran görüntüsü](./media/deploying-to-app-service/publish.png)
-5. Visual Studio yeni bir App Service kaynağı oluşturabilir, ancak bu güncelleştirme mevcut dağıtım üzerinden yayımlanacak. **Bir yayımlama hedefi seç** iletişim kutusunda, sol taraftaki listeden **App Service** ' yi seçin ve ardından **Varolanı Seç**' i seçin. **Yayımla**’ta tıklayın.
+5. Visual Studio yeni bir App Service kaynağı oluşturabilir, ancak bu güncelleştirme mevcut dağıtım üzerinden yayımlanacak. **Bir yayımlama hedefi seç** iletişim kutusunda, sol taraftaki listeden **App Service** ' yi seçin ve ardından **Varolanı Seç**' i seçin. **Yayımla**’ya tıklayın.
 6. **App Service** iletişim kutusunda, Azure aboneliğinizi oluşturmak Için kullanılan Microsoft veya kuruluş hesabının sağ üst köşede görüntülendiğini doğrulayın. Aksi takdirde, açılan eklentiye tıklayın ve ekleyin.
-7. Doğru Azure **aboneliğinin** seçili olduğunu onaylayın. **Görünüm**Için **kaynak grubu**' nu seçin. **AzureTutorial** kaynak grubunu genişletin ve ardından mevcut Web uygulamasını seçin. **Tamam**'a tıklayın.
+7. Doğru Azure **aboneliğinin** seçili olduğunu onaylayın. **Görünüm**Için **kaynak grubu**' nu seçin. **AzureTutorial** kaynak grubunu genişletin ve ardından mevcut Web uygulamasını seçin. **Tamam** düğmesine tıklayın.
 
     ![Yayımla App Service iletişim kutusunu gösteren ekran görüntüsü](./media/deploying-to-app-service/publish-dialog.png)
 
@@ -251,4 +253,4 @@ Sonraki bölümde Azure Pipelines bir DevOps işlem hattı oluşturmayı öğren
 * [Web Apps genel bakış](/azure/app-service/app-service-web-overview)
 * [Azure App Service’te .NET Core ve SQL Veritabanı web uygulaması oluşturma](/azure/app-service/app-service-web-tutorial-dotnetcore-sqldb)
 * [Azure App Service için dağıtım kimlik bilgilerini yapılandırma](/azure/app-service/app-service-deployment-credentials)
-* [Azure App Service’te hazırlık ortamları ayarlama](/azure/app-service/web-sites-staged-publishing)
+* [Azure App Service’ta hazırlık ortamları ayarlama](/azure/app-service/web-sites-staged-publishing)

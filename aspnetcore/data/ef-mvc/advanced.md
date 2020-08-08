@@ -7,6 +7,8 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/advanced
-ms.openlocfilehash: ebeb581cf79f2d2ab60de7df43d042fa3185cd32
-ms.sourcegitcommit: 50e7c970f327dbe92d45eaf4c21caa001c9106d0
+ms.openlocfilehash: 36b45339f7c3f79eca20a3467c10e896f260601f
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/10/2020
-ms.locfileid: "86212730"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012988"
 ---
 # <a name="tutorial-learn-about-advanced-scenarios---aspnet-mvc-with-ef-core"></a>Öğretici: Gelişmiş senaryolar hakkında bilgi edinin-EF Core ASP.NET MVC
 
@@ -205,7 +207,7 @@ Mevcut bir veritabanından varlık sınıfları dahil bir veri modeline ters mü
 
 [!code-csharp[](intro/samples/cu/Controllers/StudentsController.cs?name=snippet_DynamicLinq)]
 
-## <a name="acknowledgments"></a>İlgili kaynaklar
+## <a name="acknowledgments"></a>Teşekkürler
 
 Tom Dykstra ve Rick Anderson (Twitter @RickAndMSFT ) bu öğreticiyi yazdı. ROWA Miller, Diego Vega ve kod incelemeleri ile Entity Framework ekip yardımlı diğer üyeleri ve öğreticiler için kod yazarken oluşan sorunları ayıkladık. John Parente ve Paul Goldman, 2,2 ASP.NET Core öğreticisini güncelleştirmeye çalıştı.
 

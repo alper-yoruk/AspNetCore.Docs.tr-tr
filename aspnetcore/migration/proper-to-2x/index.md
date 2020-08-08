@@ -5,6 +5,8 @@ description: Mevcut ASP.NET MVC veya Web API uygulamalarını ASP.NET Core. Web 
 ms.author: scaddie
 ms.date: 10/18/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/proper-to-2x/index
-ms.openlocfilehash: 1530a5e6cc4b241b916ed7c64587b515186cc6ca
-ms.sourcegitcommit: d306407dc5bfe6fdfbac482214b3f59371b582bc
+ms.openlocfilehash: defdb190acf915eaa7c4aa8469ee47888f771526
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/04/2020
-ms.locfileid: "85951925"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014925"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core"></a>ASP.NET 'den ASP.NET Core 'e geçiş
 
@@ -163,9 +165,9 @@ ASP.NET Core, statik dosyalar, aksi belirtilmedikçe "Web kökünde" (* &lt; iç
 > [!NOTE]
 > ASP.NET Core içinde statik dosyalar sunma konusunda daha ayrıntılı bir başvuru için bkz. [statik dosyalar](xref:fundamentals/static-files).
 
-## <a name="multi-value-cookies"></a>Çok değerli tanımlama bilgileri
+## <a name="multi-value-no-loccookies"></a>Çoklu değer cookie s
 
-ASP.NET Core 'de [çok değerli tanımlama bilgileri](xref:System.Web.HttpCookie.Values) desteklenmez. Değer başına bir tanımlama bilgisi oluşturun.
+[Birden çok değerli cookie s](xref:System.Web.HttpCookie.Values) ASP.NET Core desteklenmez. Değer başına bir tane oluşturun cookie .
 
 ## <a name="partial-app-migration"></a>Kısmi uygulama geçişi
 

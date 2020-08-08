@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: 7b19ac9170fc99a3524fedda419bd03498aa999a
-ms.sourcegitcommit: b0fa7ff0cb158277df61bcd08058a81222c3fe10
+ms.openlocfilehash: d2ebb5d3c3a1c3629a5bf563aecfd6fc147715d6
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/07/2020
-ms.locfileid: "87913786"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014028"
 ---
 # <a name="aspnet-core-no-locblazor-authentication-and-authorization"></a>ASP.NET Core Blazor kimlik doğrulaması ve yetkilendirme
 
@@ -59,7 +61,7 @@ Uygulama ve yapılandırma oluşturma hakkında daha fazla bilgi için bkz <xref
 
 ### <a name="no-locblazor-server-authentication"></a>Blazor Serveryetkilendirmesi
 
-Blazor Serveruygulamalar kullanılarak oluşturulan gerçek zamanlı bir bağlantı üzerinden çalışır SignalR . Bağlantı kurulurken [kimlik doğrulaması SignalR tabanlı uygulamalar](xref:signalr/authn-and-authz) işlenir. Kimlik doğrulaması, bir tanımlama bilgisine veya başka bir taşıyıcı belirtecine dayalı olabilir.
+Blazor Serveruygulamalar kullanılarak oluşturulan gerçek zamanlı bir bağlantı üzerinden çalışır SignalR . Bağlantı kurulurken [kimlik doğrulaması SignalR tabanlı uygulamalar](xref:signalr/authn-and-authz) işlenir. Kimlik doğrulaması bir cookie veya başka bir taşıyıcı belirtecini temel alabilir.
 
 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider>Uygulamalar için yerleşik hizmet, Blazor Server ASP.NET Core 'dan kimlik doğrulama durumu verilerini alır `HttpContext.User` . Kimlik doğrulama durumu, mevcut ASP.NET Core kimlik doğrulama mekanizmalarıyla tümleştirilir.
 

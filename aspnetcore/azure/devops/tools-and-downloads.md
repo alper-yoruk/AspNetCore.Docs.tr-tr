@@ -6,6 +6,8 @@ ms.author: casoper
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -14,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/tools-and-downloads
-ms.openlocfilehash: ed8aee214ff9b9e941aeea01887882c3bdfc56a7
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e224121692a0965c66bd3b95b3fbf691867d5548
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85400303"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012546"
 ---
 # <a name="tools-and-downloads"></a>Araçlar ve indirmeler
 
 Azure 'da [Azure Portal](https://portal.azure.com), [azure CLI](/cli/azure/), [Azure PowerShell](/powershell/azure/overview), [Azure Cloud Shell](https://shell.azure.com/bash)ve Visual Studio gibi kaynakları sağlamak ve yönetmek için çeşitli arabirimler vardır. Bu kılavuz, en az aList yaklaşımla yararlanır ve gerekli adımları azaltmak için mümkün olan her durumda Azure Cloud Shell kullanır. Ancak, bazı bölümlerinde Azure portal kullanılması gerekir.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 Aşağıdaki abonelikler gereklidir:
 
@@ -52,4 +54,4 @@ Aşağıdaki araçlar gereklidir:
 
   * ASP.NET ve web geliştirme
   * Azure geliştirme
-  * .NET Core çoklu platform geliştirme
+  * .NET Core platformlar arası geliştirme

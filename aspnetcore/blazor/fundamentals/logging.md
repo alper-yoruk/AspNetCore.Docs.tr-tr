@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/logging
-ms.openlocfilehash: 1f4b18bdea02016fb76b75dd01a8fcbeab9b2bc9
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: c2e8ee24c135b3c2f9b6be5b0e0efa54750c68b2
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402838"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014366"
 ---
-# <a name="aspnet-core-blazor-logging"></a>BlazorGünlüğe kaydetme ASP.NET Core
+# <a name="aspnet-core-no-locblazor-logging"></a>BlazorGünlüğe kaydetme ASP.NET Core
 
 ## Blazor WebAssembly
 
@@ -47,7 +49,7 @@ Günlüğe kaydetme yapılandırması, uygulama ayarları dosyalarından yüklen
 
 Genel ASP.NET Core günlük Kılavuzu için bkz <xref:fundamentals/logging/index> ..
 
-## <a name="blazor-webassembly-signalr-net-client-logging"></a>Blazor WebAssemblySignalR.NET istemci günlüğü
+## <a name="no-locblazor-webassembly-no-locsignalr-net-client-logging"></a>Blazor WebAssemblySignalR.NET istemci günlüğü
 
 Öğesine <xref:Microsoft.Extensions.Logging.ILoggerProvider> `WebAssemblyConsoleLogger` geçirilen günlüğe kaydetme sağlayıcılarına eklemek için bir ekleyin <xref:Microsoft.AspNetCore.SignalR.Client.HubConnectionBuilder> . Geleneksel olarak <xref:Microsoft.Extensions.Logging.Console.ConsoleLogger> , `WebAssemblyConsoleLogger` tarayıcıya özgü günlüğe kaydetme API 'leri (örneğin,) etrafında bir sarmalayıcı olur `console.log` . ' Nin kullanımı, `WebAssemblyConsoleLogger` bir tarayıcı bağlamı Içinde mono içinde mümkün olan bir kayıt oluşturur.
 
@@ -63,7 +65,7 @@ var connection = new HubConnectionBuilder()
     .Build();
 ```
 
-## <a name="log-in-razor-components"></a>RazorBileşenlerdeki oturum açma
+## <a name="log-in-no-locrazor-components"></a>RazorBileşenlerdeki oturum açma
 
 Uygulama başlangıç yapılandırmasına göre günlüğe kaydetme defterleri.
 

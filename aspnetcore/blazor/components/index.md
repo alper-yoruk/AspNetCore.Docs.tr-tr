@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/14/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: 1312ae531b0acb0ce09137cc2bae6299ddda5c32
-ms.sourcegitcommit: e6b3dd344521ce320d5c2121bbc27c211df87e57
+ms.openlocfilehash: a145cfd551650445f9ff35259cbedf71ebb686f0
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/19/2020
-ms.locfileid: "86468853"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014600"
 ---
-# <a name="create-and-use-aspnet-core-razor-components"></a>ASP.NET Core bileşenleri oluşturma ve kullanma Razor
+# <a name="create-and-use-aspnet-core-no-locrazor-components"></a>ASP.NET Core bileşenleri oluşturma ve kullanma Razor
 
 [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27)ve [tosapma Bartsch](https://www.aveo-solutions.com/) tarafından
 
@@ -34,7 +36,7 @@ Blazoruygulamalar, *Bileşenler*kullanılarak oluşturulmuştur. Bir bileşen, b
 
 Bileşenler, [Razor](xref:mvc/views/razor) `.razor` C# ve HTML biçimlendirmesinin bir birleşimi kullanılarak bileşen dosyalarında () uygulanır. İçindeki bir bileşen Blazor bir * Razor bileşen*olarak adlandırılır.
 
-### <a name="razor-syntax"></a>Razorsözdizimi
+### <a name="no-locrazor-syntax"></a>Razorsözdizimi
 
 Razoruygulamalardaki bileşenler Blazor yaygın olarak Razor söz dizimini kullanır. RazorBiçimlendirme diline alışkın değilseniz, devam etmeden önce okumanız önerilir <xref:mvc/views/razor> .
 
@@ -81,7 +83,7 @@ Bileşen ilk olarak işlendikten sonra, bileşen işleme ağacını olaylara yan
 
 Bileşenler, normal C# sınıflarıdır ve bir proje içinde herhangi bir yere yerleştirilebilir. Web sayfalarını üreten bileşenler genellikle `Pages` klasöründe bulunur. Sayfa olmayan bileşenler sıklıkla `Shared` klasöre veya projeye eklenen özel bir klasöre yerleştirilir.
 
-### <a name="namespaces"></a>Ad alanları
+### <a name="namespaces"></a>Ad Alanları
 
 Genellikle, bir bileşenin ad alanı uygulamanın kök ad alanından ve uygulamanın içindeki konum (klasör) ile türetilir. Uygulamanın kök ad alanı ise `BlazorSample` ve `Counter` bileşen `Pages` klasöründe bulunuyorsa:
 
@@ -796,7 +798,7 @@ Aşağıdaki örnek, `MarkupString` bir bileşenin işlenmiş çıktısına STAT
 }
 ```
 
-## <a name="razor-templates"></a>Razorşablondan
+## <a name="no-locrazor-templates"></a>Razorşablondan
 
 İşleme parçaları, Razor şablon sözdizimi kullanılarak tanımlanabilir. RazorŞablonlar, UI parçacığı tanımlamanın ve aşağıdaki biçimi varsayacak bir yoldur:
 

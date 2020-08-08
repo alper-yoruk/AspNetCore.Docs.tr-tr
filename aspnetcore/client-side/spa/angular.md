@@ -7,6 +7,8 @@ ms.author: stevesa
 ms.custom: mvc
 ms.date: 02/06/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: spa/angular
-ms.openlocfilehash: 1c91f1adadca8b339e4daf33207ca60008679810
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ce29d891b0fba2581d352637c2ae50ac792b785e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401785"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013170"
 ---
 # <a name="use-the-angular-project-template-with-aspnet-core"></a>Angular proje şablonunu ASP.NET Core ile kullanma
 
@@ -88,7 +90,7 @@ cd ClientApp
 
 ## <a name="install-npm-packages"></a>NPM paketlerini yükler
 
-Üçüncü taraf NPM paketlerini yüklemek için *clientapp* alt dizininde bir komut istemi kullanın. Örneğin:
+Üçüncü taraf NPM paketlerini yüklemek için *clientapp* alt dizininde bir komut istemi kullanın. Örnek:
 
 ```console
 cd ClientApp
@@ -107,7 +109,7 @@ Standart [ASP.NET Core barındırma ve dağıtım yöntemleri](xref:host-and-dep
 
 Proje, ASP.NET Core uygulaması geliştirme modunda başladığında arka planda kendi angular CLı sunucusu örneğini başlatacak şekilde yapılandırılmıştır. Ayrı bir sunucuyu el ile çalıştırmak zorunda olmadığınızdan bu kullanışlıdır.
 
-Bu varsayılan Kurulumun bir dezavantajı vardır. C# kodunuzu her değiştirişinizde ve ASP.NET Core uygulamanızın yeniden başlatılması gerektiğinde, angular CLı sunucusu yeniden başlatılır. Yeniden başlatmak için yaklaşık 10 saniye gereklidir. Sık kullanılan C# kod düzenlemeleri oluşturuyorsanız ve angular CLı 'nın yeniden başlatılmasını beklemek istemiyorsanız, angular CLı sunucusunu ASP.NET Core işleminden bağımsız olarak dışarıdan çalıştırın. Bunu yapmak için:
+Bu varsayılan Kurulumun bir dezavantajı vardır. C# kodunuzu her değiştirişinizde ve ASP.NET Core uygulamanızın yeniden başlatılması gerektiğinde, angular CLı sunucusu yeniden başlatılır. Yeniden başlatmak için yaklaşık 10 saniye gereklidir. Sık kullanılan C# kod düzenlemeleri oluşturuyorsanız ve angular CLı 'nın yeniden başlatılmasını beklemek istemiyorsanız, angular CLı sunucusunu ASP.NET Core işleminden bağımsız olarak dışarıdan çalıştırın. Bunun için:
 
 1. Bir komut isteminde *clientapp* alt dizinine geçin ve ANGULAR CLI geliştirme sunucusunu başlatın:
 
@@ -129,7 +131,7 @@ ASP.NET Core uygulamanızı başlattığınızda, angular CLı sunucusunu başla
 
 ### <a name="pass-data-from-net-code-into-typescript-code"></a>.NET kodundan verileri TypeScript koduna geçirme
 
-SSR sırasında, ASP.NET Core uygulamanızdaki istek başına verileri angular uygulamanıza geçirmek isteyebilirsiniz. Örneğin, tanımlama bilgisi bilgilerini veya bir veritabanından okunan bir şeyi geçirebilirsiniz. Bunu yapmak için *Başlangıç* sınıfınızı düzenleyin. İçin geri çağırmada `UseSpaPrerendering` , aşağıdaki gibi bir değer ayarlayın `options.SupplyData` :
+SSR sırasında, ASP.NET Core uygulamanızdaki istek başına verileri angular uygulamanıza geçirmek isteyebilirsiniz. Örneğin, cookie bilgileri veya bir veritabanından okunan bir şeyi geçirebilirsiniz. Bunu yapmak için *Başlangıç* sınıfınızı düzenleyin. İçin geri çağırmada `UseSpaPrerendering` , aşağıdaki gibi bir değer ayarlayın `options.SupplyData` :
 
 ```csharp
 options.SupplyData = (context, data) =>

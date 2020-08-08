@@ -7,6 +7,8 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 03/07/2019
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: spa/react
-ms.openlocfilehash: d5185a80895423bdd60309509ab4d1dad4dad12f
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: e9f3bbe2248d1c2fc9030745febb69177c301f7e
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85401733"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88013131"
 ---
 # <a name="use-the-react-project-template-with-aspnet-core"></a>ASP.NET Core ile tepki verme proje şablonunu kullanın
 
@@ -69,7 +71,7 @@ Bu şablon tarafından oluşturulan ve CRA tarafından oluşturulan tepki verme 
 
 ## <a name="install-npm-packages"></a>NPM paketlerini yükler
 
-Üçüncü taraf NPM paketlerini yüklemek için *clientapp* alt dizininde bir komut istemi kullanın. Örneğin:
+Üçüncü taraf NPM paketlerini yüklemek için *clientapp* alt dizininde bir komut istemi kullanın. Örnek:
 
 ```console
 cd ClientApp
@@ -88,7 +90,7 @@ Standart [ASP.NET Core barındırma ve dağıtım yöntemleri](xref:host-and-dep
 
 Proje, ASP.NET Core uygulama geliştirme modunda başladığında, CRA geliştirme sunucusunun kendi örneğini arka planda başlatacak şekilde yapılandırılmıştır. Bu kullanışlı bir yöntemdir çünkü bu, ayrı bir sunucuyu el ile çalıştırmak zorunda olmadığınız anlamına gelir.
 
-Bu varsayılan Kurulumun bir dezavantajı vardır. C# kodunuzu her değiştirişinizde ve ASP.NET Core uygulamanızın yeniden başlatılması gerektiğinde CRA sunucusu yeniden başlatılır. Yeniden başlamak için birkaç saniye gerekir. Sık kullanılan C# kod düzenlemeleri yapıyorsanız ve CRA sunucusunun yeniden başlamasını beklemek istemiyorsanız, CRA sunucusunu ASP.NET Core işleminden bağımsız olarak dışarıdan çalıştırın. Bunu yapmak için:
+Bu varsayılan Kurulumun bir dezavantajı vardır. C# kodunuzu her değiştirişinizde ve ASP.NET Core uygulamanızın yeniden başlatılması gerektiğinde CRA sunucusu yeniden başlatılır. Yeniden başlamak için birkaç saniye gerekir. Sık kullanılan C# kod düzenlemeleri yapıyorsanız ve CRA sunucusunun yeniden başlamasını beklemek istemiyorsanız, CRA sunucusunu ASP.NET Core işleminden bağımsız olarak dışarıdan çalıştırın. Bunun için:
 
 1. *Clientapp* alt dizinine aşağıdaki ayarla bir *. env* dosyası ekleyin:
 

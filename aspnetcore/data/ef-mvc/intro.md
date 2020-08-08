@@ -7,6 +7,8 @@ ms.custom: mvc
 ms.date: 02/06/2019
 ms.topic: tutorial
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/intro
-ms.openlocfilehash: 3a42ce1773bef74fab35884025765d147c534dd2
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 36b0c913db3c2b6c2c834d33b0ea8665f3e25814
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403228"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88012975"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Öğretici: bir ASP.NET MVC web uygulamasında EF Core kullanmaya başlama
 
@@ -50,7 +52,7 @@ Bu öğreticide şunları yaptınız:
 > * Denetleyici ve görünüm oluşturma
 > * Veritabanını görüntüleme
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * [.NET Core SDK 2,2](https://dotnet.microsoft.com/download)
 * Aşağıdaki iş yükleriyle [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) :

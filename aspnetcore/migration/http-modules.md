@@ -5,6 +5,8 @@ description: ''
 ms.author: riande
 ms.date: 12/07/2016
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -13,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/http-modules
-ms.openlocfilehash: 362dd16db358f7ceb6730bde908fff9854c73a84
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: 92672b2d05ee6bbdfcf0255ae14529a5c28c41b7
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85403664"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014990"
 ---
 # <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>ASP.NET Core ara yazılıma HTTP işleyicileri ve modülleri geçirme
 
@@ -291,7 +293,7 @@ Size her istek için benzersiz bir kimlik verir. Günlüklerinizi eklemek çok y
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Host)]
 
-**HttpContext. Request. Cookies** şu şekilde çevirir:
+**HttpContext. Request. Cookie , şu** şekilde çevirir:
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Cookies)]
 
@@ -374,9 +376,9 @@ public async Task Invoke(HttpContext httpContext)
 
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_SetHeaders)]
 
-**HttpContext. Response. Cookies**
+**HttpContext. Response. Cookie malar**
 
-Tanımlama bilgileri bir *set-Cookie* yanıt üst bilgisinde tarayıcıya seyahat ediyor. Sonuç olarak, tanımlama bilgilerinin gönderilmesi yanıt üst bilgilerini göndermek için kullanılan geri çağırma işlemini gerektirir:
+Cookies, bir *set- Cookie * Response üst bilgisinde tarayıcıya seyahat ediyor. Sonuç olarak, ' cookie ın gönderilmesi yanıt üst bilgilerini göndermek için kullanılan geri çağırma işlemini gerektirir:
 
 ```csharp
 public async Task Invoke(HttpContext httpContext)

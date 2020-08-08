@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc, seoapril2019
 ms.date: 06/19/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: 30f11a137e711b1cf7a8b036af92fbb5fa2a1f05
-ms.sourcegitcommit: d65a027e78bf0b83727f975235a18863e685d902
+ms.openlocfilehash: ad543087243658f09a23e4f6d957d0c6aa77b361
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 06/26/2020
-ms.locfileid: "85402578"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88014184"
 ---
-# <a name="introduction-to-aspnet-core-blazor"></a>ASP.NET Core girişBlazor
+# <a name="introduction-to-aspnet-core-no-locblazor"></a>ASP.NET Core girişBlazor
 
 [Daniel Roth](https://github.com/danroth27) ve [Luke Latham](https://github.com/guardrex) tarafından
 
@@ -118,7 +120,7 @@ Web tarayıcıları içinde .NET kodu çalıştırmak, [Webassembly](https://web
 
 WebAssembly Code, JavaScript ile *birlikte çalışabilirlik* (veya *JavaScript birlikte çalışma*) olarak adlandırılan JavaScript aracılığıyla tarayıcının tüm işlevlerine erişebilir. Tarayıcıda WebAssembly aracılığıyla yürütülen .NET kodu, sanal makinenin istemci makinesindeki kötü amaçlı eylemlere karşı sağladığı korumalar ile tarayıcının JavaScript korumalı alanında çalışır.
 
-![Blazor WebAssemblyWebAssembly ile tarayıcıda .NET kodu çalıştırır.](index/_static/blazor-webassembly.png)
+![::: No-Loc (Blazor WebAssembly)::: .NET kodunu WebAssembly ile tarayıcıda çalıştırır.](index/_static/blazor-webassembly.png)
 
 Bir Blazor WebAssembly uygulama bir tarayıcıda oluşturulup çalıştırıldığında:
 
@@ -140,7 +142,7 @@ BlazorKullanıcı arabirimi güncelleştirmelerinin uygulanma, bileşen işleme 
 
 Blazor ServerTarayıcıyla iletişim kurmak için tarafından kullanılan bağlantı, JavaScript birlikte çalışma çağrılarını işlemek için de kullanılır.
 
-![Blazor Serversunucuda .NET kodu çalıştırır ve bir bağlantı üzerinden istemcideki Belge Nesne Modeli etkileşime girer SignalR](index/_static/blazor-server.png)
+![::: No-Loc (Blazor Server)::: sunucuda .NET kodu çalıştırır ve şu şekilde istemcisinde Belge Nesne Modeli:: No-Loc (SignalR)::: Connection](index/_static/blazor-server.png)
 
 ## <a name="javascript-interop"></a>JavaScript ile birlikte çalışma
 

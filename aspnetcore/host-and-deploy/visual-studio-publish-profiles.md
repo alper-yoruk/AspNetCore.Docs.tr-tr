@@ -7,6 +7,8 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/28/2020
 no-loc:
+- cookie
+- Cookie
 - Blazor
 - Blazor Server
 - Blazor WebAssembly
@@ -15,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/visual-studio-publish-profiles
-ms.openlocfilehash: 7ad85de1a566c993e59203a5efe31458f3acdc53
-ms.sourcegitcommit: 5a36758cca2861aeb10840093e46d273a6e6e91d
+ms.openlocfilehash: 1c4b1def75a76b8392427fd6916a7b5927737cac
+ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 07/28/2020
-ms.locfileid: "87303631"
+ms.lasthandoff: 08/08/2020
+ms.locfileid: "88015458"
 ---
 # <a name="visual-studio-publish-profiles-pubxml-for-aspnet-core-app-deployment"></a>ASP.NET Core uygulama dağıtımı için Visual Studio yayımlama profilleri (. pubxml)
 
@@ -78,7 +80,7 @@ Proje dosyasına bir ASP.NET Core projesi başvurduğunda `Microsoft.NET.Sdk.Web
 
 ## <a name="basic-command-line-publishing"></a>Temel komut satırı yayımlama
 
-Komut satırı yayımlama, .NET Core tarafından desteklenen tüm platformlarda çalışmaktadır ve Visual Studio 'Yu gerektirmez. Aşağıdaki örneklerde .NET Core CLI [DotNet Publish](/dotnet/core/tools/dotnet-publish) komutu proje dizininden çalıştırılır ( *. csproj* dosyasını içerir). Proje klasörü geçerli çalışma dizini değilse, proje dosyası yolunda açıkça geçiş yapın. Örneğin:
+Komut satırı yayımlama, .NET Core tarafından desteklenen tüm platformlarda çalışmaktadır ve Visual Studio 'Yu gerektirmez. Aşağıdaki örneklerde .NET Core CLI [DotNet Publish](/dotnet/core/tools/dotnet-publish) komutu proje dizininden çalıştırılır ( *. csproj* dosyasını içerir). Proje klasörü geçerli çalışma dizini değilse, proje dosyası yolunda açıkça geçiş yapın. Örnek:
 
 ```dotnetcli
 dotnet publish C:\Webs\Web1
@@ -461,7 +463,7 @@ Aşağıdaki örnekte vurgulanan biçimlendirme şunları göstermektedir:
 
 [!code-xml[](visual-studio-publish-profiles/samples/Web1.pubxml?highlight=18-23)]
 
-Yukarıdaki örnek, `ResolvedFileToPublish` varsayılan davranışı özniteliğinde belirtilen dosyaları her zaman yayımlanan siteye kopyalamak için olan öğesini kullanır `Include` . `<CopyToPublishDirectory>`Ya da ' ın iç metniyle bir alt öğe ekleyerek varsayılan davranışı geçersiz kılın `Never` `PreserveNewest` . Örneğin:
+Yukarıdaki örnek, `ResolvedFileToPublish` varsayılan davranışı özniteliğinde belirtilen dosyaları her zaman yayımlanan siteye kopyalamak için olan öğesini kullanır `Include` . `<CopyToPublishDirectory>`Ya da ' ın iç metniyle bir alt öğe ekleyerek varsayılan davranışı geçersiz kılın `Never` `PreserveNewest` . Örnek:
 
 ```xml
 <ResolvedFileToPublish Include="..\ReadMe2.md">
@@ -497,7 +499,7 @@ Yerleşik `BeforePublish` ve `AfterPublish` hedefler, yayımlama hedefinden önc
 
 ## <a name="the-kudu-service"></a>Kudu hizmeti
 
-Azure App Service Web uygulaması dağıtımında dosyaları görüntülemek için [kudu hizmetini](https://github.com/projectkudu/kudu/wiki/Accessing-the-kudu-service)kullanın. `scm`Belirteci Web uygulaması adına ekleyin. Örneğin:
+Azure App Service Web uygulaması dağıtımında dosyaları görüntülemek için [kudu hizmetini](https://github.com/projectkudu/kudu/wiki/Accessing-the-kudu-service)kullanın. `scm`Belirteci Web uygulaması adına ekleyin. Örnek:
 
 | URL                                    | Sonuç       |
 | -------------------------------------- | ------------ |
