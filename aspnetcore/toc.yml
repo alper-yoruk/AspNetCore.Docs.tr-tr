@@ -337,14 +337,20 @@
                   href: blazor/forms-validation.md#built-in-forms-components
                 - name: InputTextArea
                   href: blazor/forms-validation.md#built-in-forms-components
+                - name: Bağlantı
+                  href: blazor/fundamentals/additional-scenarios.md#influence-html-head-tag-elements
                 - name: MainLayout
                   href: blazor/layouts.md#mainlayout-component
+                - name: Meta
+                  href: blazor/fundamentals/additional-scenarios.md#influence-html-head-tag-elements
                 - name: NavLink
                   href: blazor/fundamentals/routing.md#navlink-component
                 - name: NavMenu
                   href: blazor/fundamentals/routing.md#navlink-component
                 - name: Yönlendirici
                   href: blazor/fundamentals/routing.md#route-templates
+                - name: Başlık
+                  href: blazor/fundamentals/additional-scenarios.md#influence-html-head-tag-elements
             - name: Değerleri ve parametreleri basamaklandırma
               uid: blazor/components/cascading-values-and-parameters
             - name: Veri bağlama
@@ -411,6 +417,8 @@
           uid: blazor/state-management
         - name: WebAssembly hata ayıklaması
           uid: blazor/debug
+        - name: Bütünleştirilmiş kodları WebAssembly ile geç yükleme
+          uid: blazor/webassembly-lazy-load-assemblies
         - name: WebAssembly performansı
           uid: blazor/webassembly-performance-best-practices
         - name: Aşamalı Web Uygulamaları
@@ -932,7 +940,7 @@
   items:
     - name: Genel Bakış
       uid: security/index
-    - name: Kimlik doğrulaması
+    - name: Kimlik Doğrulaması
       items:
         - name: Genel Bakış
           uid: security/authentication/index
