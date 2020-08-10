@@ -95,7 +95,7 @@ Aşağıdaki paketler `Microsoft.AspNetCore.All` paketine dahil değildir ancak 
 
 `Microsoft.AspNetCore.All` `Microsoft.AspNetCore.App` Uygulamanız, yukarıdaki paketlerin veya bu paketler tarafından getirilen paketlerin herhangi bir API 'sini kullanıyorsa, ' dan ' a geçiş yapmak için projenizdeki bu paketlere başvurular ekleyin.
 
-Önceki paketlerin bağımlılığı olmayan tüm bağımlılıkları `Microsoft.AspNetCore.App` örtük olarak dahil edilmez. Örnek:
+Önceki paketlerin bağımlılığı olmayan tüm bağımlılıkları `Microsoft.AspNetCore.App` örtük olarak dahil edilmez. Örneğin:
 
 * `StackExchange.Redis`bağımlılığı olarak`Microsoft.Extensions.Caching.Redis`
 * `Microsoft.ApplicationInsights`bağımlılığı olarak`Microsoft.AspNetCore.ApplicationInsights.HostingStartup`

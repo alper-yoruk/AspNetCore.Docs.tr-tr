@@ -79,7 +79,7 @@ Bir web tarayıcısında `http://localhost:<port number>/api/math/sum?a=4&b=5` s
 
 ## <a name="run-net-core-cli-commands-using-dotnet-watch"></a>Kullanarak .NET Core CLI komutları çalıştırma`dotnet watch`
 
-Tüm [.NET Core CLI komutları](/dotnet/core/tools#cli-commands) ile çalıştırılabilir `dotnet watch` . Örnek:
+Tüm [.NET Core CLI komutları](/dotnet/core/tools#cli-commands) ile çalıştırılabilir `dotnet watch` . Örneğin:
 
 | Komut | İzle komutu |
 | ---- | ----- |

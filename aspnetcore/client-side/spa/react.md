@@ -71,7 +71,7 @@ Bu şablon tarafından oluşturulan ve CRA tarafından oluşturulan tepki verme 
 
 ## <a name="install-npm-packages"></a>NPM paketlerini yükler
 
-Üçüncü taraf NPM paketlerini yüklemek için *clientapp* alt dizininde bir komut istemi kullanın. Örnek:
+Üçüncü taraf NPM paketlerini yüklemek için *clientapp* alt dizininde bir komut istemi kullanın. Örneğin:
 
 ```console
 cd ClientApp

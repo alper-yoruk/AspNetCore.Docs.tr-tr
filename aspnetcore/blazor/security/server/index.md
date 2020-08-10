@@ -59,7 +59,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 İzin verilen kimlik doğrulama değerleri ( `{AUTHENTICATION}` ) aşağıdaki tabloda gösterilmiştir.
 
-| Kimlik doğrulama mekanizması | Açıklama |
+| Kimlik doğrulama mekanizması | Description |
 | ------------------------ | ----------- |
 | `None`varsayılanını         | Kimlik doğrulaması yok |
 | `Individual`             | ASP.NET Core ile uygulamada depolanan kullanıcılarIdentity |
@@ -93,7 +93,7 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 İzin verilen kimlik doğrulama değerleri ( `{AUTHENTICATION}` ) aşağıdaki tabloda gösterilmiştir.
 
-| Kimlik doğrulama mekanizması | Açıklama |
+| Kimlik doğrulama mekanizması | Description |
 | ------------------------ | ----------- |
 | `None`varsayılanını         | Kimlik doğrulaması yok |
 | `Individual`             | ASP.NET Core ile uygulamada depolanan kullanıcılarIdentity |

@@ -90,7 +90,7 @@ Uygulama kullanıldığında, veriler birikir. Yeni verilerle dikey pencereyi ye
 
 Application Insights, ek yapılandırma olmadan yararlı sunucu tarafı bilgileri sağlar. Application Insights en fazla değeri almak için [uygulamanızı APPLICATION INSIGHTS SDK ile işaretleyin](/azure/application-insights/app-insights-asp-net-core). Düzgün yapılandırıldığında, hizmet, istemci tarafı performansı dahil olmak üzere Web sunucusu ve tarayıcı genelinde uçtan uca izleme sağlar. Daha fazla bilgi için [Application Insights belgelerine](/azure/application-insights/app-insights-overview)bakın.
 
-## <a name="logging"></a>Günlüğe kaydetme
+## <a name="logging"></a>Günlüğe Kaydetme
 
 Web sunucusu ve uygulama günlükleri Azure App Service ' de varsayılan olarak devre dışıdır. Aşağıdaki adımlarla günlükleri etkinleştirin:
 
