@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-controller
-ms.openlocfilehash: 6a2c9fe6dde725129e293a3137c1281bfb1a30ef
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 46f8cbc5ef3d9fe00a5151160a9119f68a9fe572
+ms.sourcegitcommit: 68d03d1aee8906b53bda66f8f1e0747efc3007e6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021061"
+ms.lasthandoff: 08/10/2020
+ms.locfileid: "88051816"
 ---
 # <a name="part-2-add-a-controller-to-an-aspnet-core-mvc-app"></a>2. bölüm, ASP.NET Core MVC uygulamasına denetleyici ekleme
 
@@ -47,7 +47,7 @@ Bu kavramları, bu öğretici serisinde ele alınmaktadır ve bir film uygulamas
 * **Çözüm Gezgini**, denetleyiciler öğesine sağ tıklayın **> > denetleyicisi** 
    ![ bağlamsal menü ekleyin](adding-controller/_static/add_controller.png)
 
-* **Yapı Iskelesi Ekle** iletişim kutusunda, **MVC denetleyicisi-boş** seçeneğini belirleyin
+* **Yapı Iskelesi Ekle** iletişim kutusunda, **Denetleyici sınıfı-boş** seçeneğini belirleyin
 
   ![MVC denetleyicisi ekleme ve adlandırma](adding-controller/_static/ac.png)
 
@@ -64,7 +64,7 @@ Bu kavramları, bu öğretici serisinde ele alınmaktadır ve bir film uygulamas
 **Çözüm Gezgini**, denetleyiciler ' e sağ tıklayın **> yeni > dosya ekleyin**.
 ![Bağlamsal menü](~/tutorials/first-mvc-app-mac/adding-controller/_static/add_controller.png)
 
-**ASP.NET Core** ve **MVC denetleyici sınıfı**' nı seçin.
+**ASP.NET Core** ve **Denetleyici sınıfını**seçin.
 
 Denetleyiciyi **Merhaba Dünya denetleyicisine**adlandırın.
 

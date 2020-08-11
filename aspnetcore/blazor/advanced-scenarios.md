@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/advanced-scenarios
-ms.openlocfilehash: d6446447a51e22b7df1289e7ef20a4a6381c2b20
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 4bd73acd821a8791d7f6cc93545edc2e39a6f2c7
+ms.sourcegitcommit: 68d03d1aee8906b53bda66f8f1e0747efc3007e6
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012533"
+ms.lasthandoff: 08/10/2020
+ms.locfileid: "88051790"
 ---
 # <a name="aspnet-core-no-locblazor-advanced-scenarios"></a>ASP.NET Core Blazor Gelişmiş senaryolar
 
@@ -97,7 +97,7 @@ Aşağıdaki `PetDetails` bileşeni, başka bir bileşende el ile yerleşik olar
 }
 ```
 
-Aşağıdaki örnekte, `CreateComponent` yöntemindeki döngü üç `PetDetails` bileşen oluşturur. <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder>Bileşenleri (ve) oluşturmak için yöntemler çağrılırken `OpenComponent` `AddAttribute` , dizi numaraları kaynak kodu satır numaralarıdır. BlazorFark algoritması, ayrı çağrı etkinleştirmeleri değil ayrı kod satırlarına karşılık gelen sıra numaralarına dayanır. Yöntemler içeren bir bileşen oluştururken <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> , dizi numaralarına yönelik bağımsız değişkenleri kod olarak kodlayın. **Sıra numarasını oluşturmak için bir hesaplama veya sayaç kullanmak kötü performansa neden olabilir.** Daha fazla bilgi için bkz. [kod satırı numaralarıyla Ilgili sıra numaraları ve yürütme sırası çalışmıyor](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order) bölümü.
+Aşağıdaki örnekte, `CreateComponent` yöntemindeki döngü üç `PetDetails` bileşen oluşturur. <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder>Sıra numarası olan yöntemlerde, sıra numaraları kaynak kodu satır numaralarıdır. BlazorFark algoritması, ayrı çağrı etkinleştirmeleri değil ayrı kod satırlarına karşılık gelen sıra numaralarına dayanır. Yöntemler içeren bir bileşen oluştururken <xref:Microsoft.AspNetCore.Components.Rendering.RenderTreeBuilder> , dizi numaralarına yönelik bağımsız değişkenleri kod olarak kodlayın. **Sıra numarasını oluşturmak için bir hesaplama veya sayaç kullanmak kötü performansa neden olabilir.** Daha fazla bilgi için bkz. [kod satırı numaralarıyla Ilgili sıra numaraları ve yürütme sırası çalışmıyor](#sequence-numbers-relate-to-code-line-numbers-and-not-execution-order) bölümü.
 
 `BuiltContent`bileşeninde
 
