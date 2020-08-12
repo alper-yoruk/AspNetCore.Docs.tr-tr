@@ -163,9 +163,14 @@
         - name: Web API’si uygulamaları >>
           displayName: tutorial
           href: /learn/modules/build-web-api-net-core/
-        - name: Buluta özel mikro hizmetler >>
-          displayName: 'tutorial, kubernetes, aks, acr, docker'
-          href: /learn/modules/microservices-aspnet-core/
+        - name: Buluta özel mikro hizmetler
+          items:
+            - name: Oluşturma ve dağıtma >>
+              displayName: 'tutorial, kubernetes, aks, acr, docker'
+              href: /learn/modules/microservices-aspnet-core/
+            - name: Dayanıklılık uygulama >>
+              displayName: 'tutorial, kubernetes, aks, acr, docker'
+              href: /learn/modules/microservices-resiliency-aspnet-core/
         - name: Veri erişimi >>
           displayName: 'tutorial, ef, entity framework'
           href: /learn/modules/persist-data-ef-core/
@@ -1191,6 +1196,8 @@
       uid: performance/diagnostic-tools
     - name: Yükleme ve stres testleri
       uid: test/loadtests
+    - name: Olay sayaçları
+      href: /dotnet/core/diagnostics/event-counter-perf
 - name: Genelleştirme ve yerelleştirme
   items:
     - name: Genel Bakış
