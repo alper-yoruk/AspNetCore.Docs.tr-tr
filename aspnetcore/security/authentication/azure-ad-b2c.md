@@ -3,7 +3,7 @@ title: ASP.NET Core Azure Active Directory B2C ile bulut kimlik doğrulaması
 author: camsoper
 description: ASP.NET Core ile Azure Active Directory B2C kimlik doğrulamasını ayarlamayı öğrenin.
 ms.author: casoper
-ms.custom: mvc
+ms.custom: devx-track-csharp, mvc
 ms.date: 01/21/2019
 no-loc:
 - cookie
@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/azure-ad-b2c
-ms.openlocfilehash: 78fe4d5dd9e3f64789956e58a4490bef6bdbca1e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ccd3868c4b3294098e692f7a20e06d59ba482e7c
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021711"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130528"
 ---
 # <a name="cloud-authentication-with-azure-active-directory-b2c-in-aspnet-core"></a>ASP.NET Core Azure Active Directory B2C ile bulut kimlik doğrulaması
 
@@ -40,7 +40,7 @@ Bu öğreticide şunların nasıl yapıldığını öğrenirsiniz:
 > * Kimlik doğrulaması için Azure AD B2C kiracısını kullanacak şekilde yapılandırılmış bir ASP.NET Core Web uygulaması oluşturmak için Visual Studio 'Yu kullanma
 > * Azure AD B2C kiracının davranışını denetleyen ilkeleri yapılandırın
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 Bu izlenecek yol için aşağıdakiler gereklidir:
 
@@ -60,8 +60,8 @@ Aşağıdaki değerleri kullanın:
 | Ayar                       | Değer                     | Notlar                                                                                                                                                                                              |
 |-------------------------------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Ad**                      | *&lt;uygulama adı&gt;*        | Uygulamanızı tüketicilere açıklayan uygulama için bir **ad** girin.                                                                                                                                 |
-| **Web uygulamasını / web API'sini dahil etme** | Yes                       |                                                                                                                                                                                                    |
-| **Örtük akışa izin verme**       | Yes                       |                                                                                                                                                                                                    |
+| **Web uygulamasını / web API'sini dahil etme** | Evet                       |                                                                                                                                                                                                    |
+| **Örtük akışa izin verme**       | Evet                       |                                                                                                                                                                                                    |
 | **Yanıt URL'si**                 | `https://localhost:44300/signin-oidc` | Yanıt URL'leri, Azure AD B2C'nin, uygulamanız tarafından istenen belirteçleri döndürdüğü uç noktalardır. Visual Studio, kullanılacak yanıt URL 'sini sağlar. Şu an için `https://localhost:44300/signin-oidc` formunu doldurun için yazın. |
 | **Uygulama Kimliği URI'si**                | Boş bırakın               | Bu öğretici için gerekli değildir.                                                                                                                                                                    |
 | **Yerel istemci ekle**     | Hayır                        |                                                                                                                                                                                                    |

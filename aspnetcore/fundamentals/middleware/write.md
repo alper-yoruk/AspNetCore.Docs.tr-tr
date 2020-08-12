@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/write
-ms.openlocfilehash: dd6a26d07e20f9795bbe3fbe6da59027e757782e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 480120718959a364ce8008949c3b76c558c0e995
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016924"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130593"
 ---
 # <a name="write-custom-aspnet-core-middleware"></a>Özel ASP.NET Core ara yazılımı yaz
 
@@ -85,6 +85,8 @@ public class CustomMiddleware
 }
 ```
 
+[Ömür ve kayıt seçenekleri](xref:fundamentals/dependency-injection#lifetime-and-registration-options) , *kapsamlı* ömür Hizmetleri olan bir ara yazılım örneğinin tamamını içerir.
+
 ## <a name="middleware-extension-method"></a>Ara yazılım genişletme yöntemi
 
 Aşağıdaki genişletme yöntemi, ara yazılımı aracılığıyla kullanıma sunar <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> :
@@ -97,6 +99,7 @@ Aşağıdaki kod, içindeki ara yazılımı çağırır `Startup.Configure` :
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
+* [Ömür ve kayıt seçenekleri](xref:fundamentals/dependency-injection#lifetime-and-registration-options) , *kapsamlı*, *geçici*ve *tek* bir yaşam süresi Hizmetleri olan bir ara yazılım örneği içerir.
 * <xref:fundamentals/middleware/index>
 * <xref:test/middleware>
 * <xref:migration/http-modules>

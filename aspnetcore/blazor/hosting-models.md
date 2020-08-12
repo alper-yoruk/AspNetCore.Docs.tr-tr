@@ -5,7 +5,7 @@ description: Blazor WebAssemblyModelleri anlayın ve Blazor Server barındırma.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 08/11/2020
 no-loc:
 - cookie
 - Cookie
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 0d2ee7862c5737a1e16335a5d5987779884d5536
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 14fa13bafa984c0ca7b9fd8cde538042cc0ec2cc
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014288"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130450"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-models"></a>BlazorBarındırma modellerini ASP.NET Core
 
@@ -32,13 +32,13 @@ Blazor, bir [Webassembly](https://webassembly.org/)tabanlı .NET çalışma zama
 
 ## Blazor WebAssembly
 
-İçin sorumlu barındırma modeli, Blazor WebAssembly üzerinde tarayıcıda istemci tarafı çalıştırıyor. BlazorUygulama, bağımlılıkları ve .NET çalışma zamanı tarayıcıya indirilir. Uygulama doğrudan tarayıcı kullanıcı arabirimi iş parçacığında yürütülür. UI güncelleştirmeleri ve olay işleme aynı işlem içinde oluşur. Uygulamanın varlıkları, istemcilere statik içerik sunan bir Web sunucusuna veya hizmete statik dosyalar olarak dağıtılır.
+İçin sorumlu barındırma modeli, Blazor WebAssembly üzerinde tarayıcıda istemci tarafı çalıştırıyor. BlazorUygulama, bağımlılıkları ve .NET çalışma zamanı tarayıcıya indirilir. Uygulama doğrudan tarayıcı kullanıcı arabirimi iş parçacığında yürütülür. UI güncelleştirmeleri ve olay işleme aynı işlem içinde oluşur. Uygulamanın varlıkları, istemcilere statik içerik sunan bir Web sunucusuna veya hizmete statik dosyalar olarak dağıtılır. Uygulama, arka uç ASP.NET Core uygulaması olmadan dağıtım için oluşturulduğundan, *tek başına Blazor WebAssembly uygulama*olarak adlandırılır.
 
 ![::: No-Loc (Blazor WebAssembly):::: No-Loc (Blazor)::: uygulama, tarayıcı içindeki bir kullanıcı arabirimi iş parçacığında çalışır.](hosting-models/_static/blazor-webassembly.png)
 
 Blazorİstemci tarafı barındırma modelini kullanarak bir uygulama oluşturmak için ** Blazor WebAssembly uygulama** şablonunu ( [`dotnet new blazorwasm`](/dotnet/core/tools/dotnet-new) ) kullanın.
 
-** Blazor WebAssembly Uygulama** şablonunu seçtikten sonra, **ASP.NET Core barındırılan** onay kutusunu () seçerek uygulamayı ASP.NET Core arka ucunu kullanacak şekilde yapılandırma seçeneğiniz vardır [`dotnet new blazorwasm --hosted`](/dotnet/core/tools/dotnet-new) . ASP.NET Core uygulaması, Blazor uygulamayı istemcilere sunar. Blazor WebAssemblyUygulama, Web API çağrılarını veya () kullanarak ağ üzerinden sunucu ile etkileşime geçebilir [SignalR](xref:signalr/introduction) <xref:tutorials/signalr-blazor-webassembly> .
+** Blazor WebAssembly Uygulama** şablonunu seçtikten sonra, **ASP.NET Core barındırılan** onay kutusunu () seçerek uygulamayı ASP.NET Core arka ucunu kullanacak şekilde yapılandırma seçeneğiniz vardır [`dotnet new blazorwasm --hosted`](/dotnet/core/tools/dotnet-new) . ASP.NET Core uygulaması, Blazor uygulamayı istemcilere sunar. ASP.NET Core arka uca sahip bir uygulama *barındırılan Blazor WebAssembly uygulama*olarak adlandırılır. Blazor WebAssemblyUygulama, Web API çağrılarını veya () kullanarak ağ üzerinden sunucu ile etkileşime geçebilir [SignalR](xref:signalr/introduction) <xref:tutorials/signalr-blazor-webassembly> .
 
 Şablonlar aşağıdakileri `blazor.webassembly.js` işleyecek betiği içerir:
 

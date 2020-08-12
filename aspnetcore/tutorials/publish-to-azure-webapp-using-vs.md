@@ -3,7 +3,7 @@ title: Visual Studio ile Azure 'da ASP.NET Core uygulaması yayımlama
 author: rick-anderson
 description: ASP.NET Core uygulamasının Visual Studio kullanarak Azure App Service nasıl yayımlanacağını öğrenin.
 ms.author: riande
-ms.custom: mvc
+ms.custom: devx-track-csharp, mvc
 ms.date: 07/10/2019
 no-loc:
 - cookie
@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/publish-to-azure-webapp-using-vs
-ms.openlocfilehash: aa078fa30217d737d579b97d4de9704b5d1dd8a3
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 1fced12700fcd5910c1484ebb9190c7652b2646e
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022088"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130710"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio"></a>Visual Studio ile Azure 'da ASP.NET Core uygulaması yayımlama
 
@@ -174,7 +174,7 @@ Oluşturma işlemi tamamlandıktan sonra iletişim kutusu otomatik olarak kapat�
 * **Veritabanları** ' nı genişletin ve **çalışma zamanında bu bağlantı dizesini kullan**' ı işaretleyin.
 * **Entity Framework geçişleri** genişletin ve **Bu geçişi yayınla Uygula**' yı işaretleyin.
 
-* **Kaydet**'i seçin. Visual Studio **Yayımla** iletişim kutusuna geri döner. 
+* **Kaydet**’i seçin. Visual Studio **Yayımla** iletişim kutusuna geri döner. 
 
 ![Yayımla iletişim kutusu: ayarlar paneli](publish-to-azure-webapp-using-vs/_static/pp_settings.png)
 

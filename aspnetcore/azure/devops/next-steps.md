@@ -3,7 +3,7 @@ title: ASP.NET Core ve Azure ile sonraki adımlar-DevOps
 author: CamSoper
 description: ASP.NET Core ve Azure ile DevOps için ek öğrenme yolları.
 ms.author: casoper
-ms.custom: mvc, seodec18
+ms.custom: devx-track-csharp, mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
 - cookie
@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/next-steps
-ms.openlocfilehash: feff73b307791c0a7ad8968b5145c0388df1ca10
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a9a6b0a588b7813f9d6e2b215630a1b9100be890
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012597"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130437"
 ---
 # <a name="next-steps"></a>Sonraki adımlar
 
@@ -43,7 +43,7 @@ Azure [depolama](/azure/storage/) , Azure 'un büyük oranda ölçeklenebilir bu
 
 [Azure Active Directory](/azure/active-directory/) ve [Azure Active Directory B2C](/azure/active-directory-b2c/) her ikisi de kimlik hizmetlerdir. Azure Active Directory, kurumsal senaryolar için tasarlanmıştır ve Azure AD B2B (işletmeler arası) işbirliğinin yanı sıra sosyal ağ oturum açma da dahil olmak üzere işletmeler arası senaryolar (Azure Active Directory B2C) sağlar.
 
-## <a name="mobile"></a>Mobil
+## <a name="mobile"></a>Cep telefonu
 
 [Notification Hubs](/azure/notification-hubs/) , çeşitli türlerde cihazlarda çalışan uygulamalara Milyonlarca iletiyi hızlı bir şekilde göndermek için çok platformlu, ölçeklenebilir bir anında iletme bildirimi altyapısıdır.
 

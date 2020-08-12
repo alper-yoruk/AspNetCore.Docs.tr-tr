@@ -3,7 +3,7 @@ title: ASP.NET Core ile Visual Studio ve Git kullanarak Azure’a sürekli dağ�
 author: rick-anderson
 description: Visual Studio kullanarak ASP.NET Core bir Web uygulaması oluşturmayı ve sürekli dağıtım için git 'i kullanarak Azure App Service nasıl dağıtacağınızı öğrenin.
 ms.author: riande
-ms.custom: mvc
+ms.custom: devx-track-csharp, mvc
 ms.date: 12/06/2018
 no-loc:
 - cookie
@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/azure-apps/azure-continuous-deployment
-ms.openlocfilehash: af983a2bc8a2802f9be07b30ab733ed2cfb7933c
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 0def05f73fd5264b1fb01e0a2ae4fd8d70588d9c
+ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016095"
+ms.lasthandoff: 08/12/2020
+ms.locfileid: "88130567"
 ---
 # <a name="continuous-deployment-to-azure-with-visual-studio-and-git-with-aspnet-core"></a>ASP.NET Core ile Visual Studio ve Git kullanarak Azure’a sürekli dağıtım
 
@@ -36,7 +36,7 @@ Ayrıca, Azure DevOps Services kullanarak [Azure App Service](/azure/app-service
 > [!NOTE]
 > Bu öğreticiyi tamamlayabilmeniz için bir Microsoft Azure hesabı gereklidir. Bir hesap almak için [MSDN abone avantajlarını etkinleştirin](https://azure.microsoft.com/pricing/member-offers/credit-for-visual-studio-subscribers/?WT.mc_id=A261C142F) veya [ücretsiz deneme için kaydolun](https://azure.microsoft.com/free/dotnet/?WT.mc_id=A261C142F).
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 Bu öğreticide aşağıdaki yazılımların yüklü olduğu varsayılmaktadır:
 
@@ -116,7 +116,7 @@ Git, bir Azure App Service Web uygulaması dağıtmak için kullanılabilen bir 
 
    * **Ayarlar**  >  **dağıtım kimlik bilgileri**' ni seçin. **Dağıtım kimlik bilgilerini ayarla** dikey penceresi görüntülenir.
    * Bir kullanıcı adı ve parola oluşturun. Git ayarlanırken daha sonra kullanmak üzere parolayı kaydedin.
-   * **Kaydet**'i seçin.
+   * **Kaydet**’i seçin.
 
 1. **Web uygulaması** dikey penceresinde **Ayarlar**  >  **Özellikler**' i seçin. Dağıtım yapılacak uzak git deposunun URL 'SI **GIT URL 'si**altında gösterilir.
 
