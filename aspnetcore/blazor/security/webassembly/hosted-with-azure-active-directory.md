@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-azure-active-directory
-ms.openlocfilehash: 08e202f0876d01a98c099424fd65b06cbe82a3b2
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: 407dab96216149178abd5bdd21ef318154f414da
+ms.sourcegitcommit: ec41ab354952b75557240923756a8c2ac79b49f8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130346"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88202721"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-azure-active-directory"></a>Blazor WebAssemblyAzure Active Directory ile ASP.NET Core barındırılan bir uygulamanın güvenliğini sağlama
 
@@ -327,6 +327,13 @@ Daha fazla bilgi için *ek senaryolar* makalesinin aşağıdaki bölümlerine ba
 * [Ek erişim belirteçleri isteyin](xref:blazor/security/webassembly/additional-scenarios#request-additional-access-tokens)
 * [Giden isteklere belirteç iliştirme](xref:blazor/security/webassembly/additional-scenarios#attach-tokens-to-outgoing-requests)
 
+::: moniker range=">= aspnetcore-5.0"
+
+### <a name="login-mode"></a>Oturum açma modu
+
+[!INCLUDE[](~/includes/blazor-security/msal-login-mode.md)]
+
+::: moniker-end
 
 ### <a name="imports-file"></a>Dosya içeri aktarmalar
 

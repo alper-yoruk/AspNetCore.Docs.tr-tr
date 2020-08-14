@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/static-files
-ms.openlocfilehash: 32f794d498533e846343831d2360e98939105fb1
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: b1f84a936ee1327498abce660cd64f8d7d0a2864
+ms.sourcegitcommit: ec41ab354952b75557240923756a8c2ac79b49f8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016692"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88202787"
 ---
 # <a name="static-files-in-aspnet-core"></a>ASP.NET Core statik dosyalar
 
@@ -117,8 +117,8 @@ Dizin tarama, güvenlik nedenleriyle varsayılan olarak devre dışıdır. Daha 
 
 Dizin taramayı etkinleştir:
 
-* <xref:Microsoft.Extensions.DependencyInjection.DirectoryBrowserServiceExtensions.AddDirectoryBrowser%2A>içinde `Startup.ConfigureServices` .
-* <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser%2A>içinde `Startup.Configure` .
+* <xref:Microsoft.Extensions.DependencyInjection.DirectoryBrowserServiceExtensions.AddDirectoryBrowser%2A> içinde `Startup.ConfigureServices` .
+* <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser%2A> içinde `Startup.Configure` .
 
 [!code-csharp[](~/fundamentals/static-files/samples/3.x/StaticFilesSample/StartupBrowse.cs?name=snippet_ClassMembers&highlight=4,21-35)]
 
@@ -132,7 +132,7 @@ Varsayılan bir sayfanın ayarlanması, ziyaretçilerin bir sitede başlangıç 
 
 [!code-csharp[](~/fundamentals/static-files/samples/3.x/StaticFilesSample/StartupEmpty.cs?name=snippet_Configure&highlight=15)]
 
-`UseDefaultFiles`Varsayılan dosyaya kullanılmadan önce çağrılmalıdır `UseStaticFiles` . `UseDefaultFiles`, dosyaya hizmeti olmayan bir URL yeniden yazar.
+`UseDefaultFiles` Varsayılan dosyaya kullanılmadan önce çağrılmalıdır `UseStaticFiles` . `UseDefaultFiles` , dosyaya hizmeti olmayan bir URL yeniden yazar.
 
 İle `UseDefaultFiles` , için arama içindeki bir klasöre yönelik istekler `wwwroot` :
 
@@ -197,7 +197,7 @@ Dosya hiyerarşisini ve önceki kodu kullanarak, URL 'Ler aşağıdaki şekilde 
 
 ![Statik dosyalar listesi](static-files/_static/db2.png)
 
-<xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles*>ve hedef URI 'den sonuna kadar sondaki bir <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser*> istemci tarafı yeniden yönlendirmesi gerçekleştirin `/` `/` . Örneğin, öğesinden `https://<hostname>/StaticFiles` `https://<hostname>/StaticFiles/` . *Staticfiles* dizinindeki göreli URL 'ler, sondaki eğik çizgi () olmadan geçersizdir `/` .
+<xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles*> ve hedef URI 'den sonuna kadar sondaki bir <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser*> istemci tarafı yeniden yönlendirmesi gerçekleştirin `/` `/` . Örneğin, öğesinden `https://<hostname>/StaticFiles` `https://<hostname>/StaticFiles/` . *Staticfiles* dizinindeki göreli URL 'ler, sondaki eğik çizgi () olmadan geçersizdir `/` .
 
 ## <a name="fileextensioncontenttypeprovider"></a>FileExtensionContentTypeProvider
 
@@ -230,14 +230,14 @@ Yukarıdaki kodla, bilinmeyen içerik türüne sahip bir dosya isteği görünt�
 
 ## <a name="serve-files-from-multiple-locations"></a>Birden çok konumdan dosyaları sunma
 
-`UseStaticFiles`ve ' i `UseFileServer` işaret eden dosya sağlayıcısına varsayılan olarak `wwwroot` . Diğer `UseStaticFiles` `UseFileServer` konumlardan dosya hizmeti sağlamak için diğer dosya sağlayıcılarıyla ek ve diğer örnekleri bulunabilir. Daha fazla bilgi için [Bu GitHub sorununa](https://github.com/dotnet/AspNetCore.Docs/issues/15578)bakın.
+`UseStaticFiles` ve ' i `UseFileServer` işaret eden dosya sağlayıcısına varsayılan olarak `wwwroot` . Diğer `UseStaticFiles` `UseFileServer` konumlardan dosya hizmeti sağlamak için diğer dosya sağlayıcılarıyla ek ve diğer örnekleri bulunabilir. Daha fazla bilgi için [Bu GitHub sorununa](https://github.com/dotnet/AspNetCore.Docs/issues/15578)bakın.
 
 <a name="sc"></a>
 
 ### <a name="security-considerations-for-static-files"></a>Statik dosyalar için güvenlik konuları
 
 > [!WARNING]
-> `UseDirectoryBrowser`ve `UseStaticFiles` gizli dizileri sızdırabilirsiniz. Üretimde dizin taramayı devre dışı bırakmak önemle önerilir. Veya ile hangi dizinlerin etkinleştirildiğini dikkatle gözden `UseStaticFiles` geçirin `UseDirectoryBrowser` . Tüm dizin ve alt dizinleri herkese açık şekilde erişilebilir hale gelir. Özel bir dizinde genel kullanıma sunma için uygun dosyaları (gibi) depolayın `<content_root>/wwwroot` . Bu dosyaları MVC görünümleri, Razor sayfaları, yapılandırma dosyaları vb. ile ayırın.
+> `UseDirectoryBrowser` ve `UseStaticFiles` gizli dizileri sızdırabilirsiniz. Üretimde dizin taramayı devre dışı bırakmak önemle önerilir. Veya ile hangi dizinlerin etkinleştirildiğini dikkatle gözden `UseStaticFiles` geçirin `UseDirectoryBrowser` . Tüm dizin ve alt dizinleri herkese açık şekilde erişilebilir hale gelir. Özel bir dizinde genel kullanıma sunma için uygun dosyaları (gibi) depolayın `<content_root>/wwwroot` . Bu dosyaları MVC görünümleri, Razor sayfaları, yapılandırma dosyaları vb. ile ayırın.
 
 * Ve ile sunulan içerik URL 'Leri `UseDirectoryBrowser` , `UseStaticFiles` temel dosya sisteminin büyük küçük harf duyarlılığı ve karakter kısıtlamalarına tabidir. Örneğin, Windows büyük/küçük harfe duyarlıdır, ancak macOS ve Linux değildir.
 
@@ -374,7 +374,7 @@ Varsayılan ana sayfanın ayarlanması, ziyaretçi sitenizi ziyaret ederken mant
 [!code-csharp[](static-files/samples/1.x/StaticFilesSample/StartupEmpty.cs?name=snippet_ConfigureMethod&highlight=3)]
 
 > [!IMPORTANT]
-> `UseDefaultFiles`Varsayılan dosyaya kullanılmadan önce çağrılmalıdır `UseStaticFiles` . `UseDefaultFiles`, dosyayı gerçekten sunan bir URL yeniden yazar. Dosya hizmeti sağlamak için statik dosya ara yazılımını etkinleştirin `UseStaticFiles` .
+> `UseDefaultFiles` Varsayılan dosyaya kullanılmadan önce çağrılmalıdır `UseStaticFiles` . `UseDefaultFiles` , dosyayı gerçekten sunan bir URL yeniden yazar. Dosya hizmeti sağlamak için statik dosya ara yazılımını etkinleştirin `UseStaticFiles` .
 
 İle `UseDefaultFiles` , bir klasör için arama istekleri:
 
@@ -436,7 +436,7 @@ Dosya hiyerarşisini ve önceki kodu kullanarak, URL 'Ler aşağıdaki şekilde 
 ![Statik dosyalar listesi](static-files/_static/db2.png)
 
 > [!NOTE]
-> <xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles*>ve <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser*> `http://{SERVER ADDRESS}/StaticFiles` (sonunda eğik çizgi olmadan) ile (sonunda eğik çizgiyle) bir istemci tarafı yeniden yönlendirmesi gerçekleştirin `http://{SERVER ADDRESS}/StaticFiles/` . *Staticfiles* dizinindeki göreli URL 'ler, sondaki eğik çizgi olmadan geçersizdir.
+> <xref:Microsoft.AspNetCore.Builder.DefaultFilesExtensions.UseDefaultFiles*> ve <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser*> `http://{SERVER ADDRESS}/StaticFiles` (sonunda eğik çizgi olmadan) ile (sonunda eğik çizgiyle) bir istemci tarafı yeniden yönlendirmesi gerçekleştirin `http://{SERVER ADDRESS}/StaticFiles/` . *Staticfiles* dizinindeki göreli URL 'ler, sondaki eğik çizgi olmadan geçersizdir.
 
 ## <a name="fileextensioncontenttypeprovider"></a>FileExtensionContentTypeProvider
 
@@ -445,6 +445,8 @@ Dosya hiyerarşisini ve önceki kodu kullanarak, URL 'Ler aşağıdaki şekilde 
 [!code-csharp[](static-files/samples/1.x/StaticFilesSample/StartupFileExtensionContentTypeProvider.cs?name=snippet_ConfigureMethod&highlight=3-12,19)]
 
 Bkz. [MIME içerik türleri](https://www.iana.org/assignments/media-types/media-types.xhtml).
+
+Özel bir kullanma <xref:Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider> veya sunucu uygulamalarında diğer yapılandırma hakkında bilgi <xref:Microsoft.AspNetCore.Builder.StaticFileOptions> için Blazor bkz <xref:blazor/fundamentals/additional-scenarios#static-files> ..
 
 ## <a name="non-standard-content-types"></a>Standart olmayan içerik türleri
 
@@ -461,12 +463,12 @@ Yukarıdaki kodla, bilinmeyen içerik türüne sahip bir dosya isteği görünt�
 
 ## <a name="serve-files-from-multiple-locations"></a>Birden çok konumdan dosyaları sunma
 
-`UseStaticFiles`ve `UseFileServer` Varsayılan olarak *Wwwroot*' a işaret eden dosya sağlayıcısına sahiptir. `UseStaticFiles` `UseFileServer` Diğer konumlardan dosya sunmak için diğer dosya sağlayıcılarının yanı sıra ek örnekler de sağlayabilirsiniz. Daha fazla bilgi için [Bu GitHub sorununa](https://github.com/dotnet/AspNetCore.Docs/issues/15578)bakın.
+`UseStaticFiles` ve `UseFileServer` Varsayılan olarak *Wwwroot*' a işaret eden dosya sağlayıcısına sahiptir. `UseStaticFiles` `UseFileServer` Diğer konumlardan dosya sunmak için diğer dosya sağlayıcılarının yanı sıra ek örnekler de sağlayabilirsiniz. Daha fazla bilgi için [Bu GitHub sorununa](https://github.com/dotnet/AspNetCore.Docs/issues/15578)bakın.
 
 ### <a name="considerations"></a>Dikkat edilmesi gerekenler
 
 > [!WARNING]
-> `UseDirectoryBrowser`ve `UseStaticFiles` gizli dizileri sızdırabilirsiniz. Üretimde dizin taramayı devre dışı bırakmak önemle önerilir. Veya ile hangi dizinlerin etkinleştirildiğini dikkatle gözden `UseStaticFiles` geçirin `UseDirectoryBrowser` . Tüm dizin ve alt dizinleri herkese açık şekilde erişilebilir hale gelir. Özel bir dizinde genel kullanıma sunma için uygun dosyaları, örneğin * \<content_root> /Wwwroot*gibi depolayın. Bu dosyaları MVC görünümlerini, Razor sayfaları (yalnızca 2. x), yapılandırma dosyalarını vb. ayırın.
+> `UseDirectoryBrowser` ve `UseStaticFiles` gizli dizileri sızdırabilirsiniz. Üretimde dizin taramayı devre dışı bırakmak önemle önerilir. Veya ile hangi dizinlerin etkinleştirildiğini dikkatle gözden `UseStaticFiles` geçirin `UseDirectoryBrowser` . Tüm dizin ve alt dizinleri herkese açık şekilde erişilebilir hale gelir. Özel bir dizinde genel kullanıma sunma için uygun dosyaları, örneğin * \<content_root> /Wwwroot*gibi depolayın. Bu dosyaları MVC görünümlerini, Razor sayfaları (yalnızca 2. x), yapılandırma dosyalarını vb. ayırın.
 
 * Ve ile sunulan içerik URL 'Leri `UseDirectoryBrowser` , `UseStaticFiles` temel dosya sisteminin büyük küçük harf duyarlılığı ve karakter kısıtlamalarına tabidir. Örneğin, Windows büyük/küçük harfe duyarsız &mdash; MacOS ve Linux değildir.
 

@@ -5,7 +5,7 @@ description: ASP.NET Core barındırma modeli yapılandırmasına yönelik ek se
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/10/2020
+ms.date: 08/12/2020
 no-loc:
 - cookie
 - Cookie
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: dbad91e46a95d9ab5ec62d66e0d9a18938ff4520
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 618e451f5cb8a4e8eaf355d398fdeb80190cf559
+ms.sourcegitcommit: ec41ab354952b75557240923756a8c2ac79b49f8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014470"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88202717"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a>ASP.NET Core Blazor barındırma modeli yapılandırması
 
@@ -30,7 +30,7 @@ ms.locfileid: "88014470"
 
 Bu makalede barındırma modeli yapılandırması ele alınmaktadır.
 
-### <a name="no-locsignalr-cross-origin-negotiation-for-authentication"></a>SignalRkimlik doğrulaması için çıkış noktaları arası anlaşma
+### <a name="no-locsignalr-cross-origin-negotiation-for-authentication"></a>SignalR kimlik doğrulaması için çıkış noktaları arası anlaşma
 
 *Bu bölüm için geçerlidir Blazor WebAssembly .*
 
@@ -102,7 +102,7 @@ Aşağıdaki tabloda öğesine uygulanan CSS sınıfları açıklanmaktadır `co
 
 *Bu bölüm için geçerlidir Blazor Server .*
 
-Blazor Serveruygulamalar, sunucu bağlantısı oluşturulmadan önce sunucudaki kullanıcı arabirimini varsayılan olarak PreRender 'a ayarlar. Bu, `_Host.cshtml` Razor sayfada ayarlanır:
+Blazor Server uygulamalar, sunucu bağlantısı oluşturulmadan önce sunucudaki kullanıcı arabirimini varsayılan olarak PreRender 'a ayarlar. Bu, `_Host.cshtml` Razor sayfada ayarlanır:
 
 ```cshtml
 <body>
@@ -114,7 +114,7 @@ Blazor Serveruygulamalar, sunucu bağlantısı oluşturulmadan önce sunucudaki 
 </body>
 ```
 
-<xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode>bileşenin şunları yapıp kullanmadığını yapılandırır:
+<xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper.RenderMode> bileşenin şunları yapıp kullanmadığını yapılandırır:
 
 * , Sayfaya ön gönderilir.
 * , Sayfada statik HTML olarak veya Kullanıcı aracısından bir uygulamayı önyüklemek için gerekli bilgileri içeriyorsa Blazor .
@@ -133,7 +133,7 @@ Statik HTML sayfasından sunucu bileşenleri işleme desteklenmiyor.
 
 SignalRDosyadaki uygulamalar tarafından kullanılan istemciyi yapılandırın Blazor Server `Pages/_Host.cshtml` . `Blazor.start` `_framework/blazor.server.js` Komut dosyasını ve etiketinin arkasına çağrı yapan bir betik yerleştirin `</body>` .
 
-### <a name="logging"></a>Günlüğe kaydetme
+### <a name="logging"></a>Günlüğe Kaydetme
 
 SignalRİstemci günlüğünü yapılandırmak için:
 
@@ -263,6 +263,46 @@ Bir alt bileşende çerçeve bileşenlerinden biri kullanıldığında, çerçev
 
 * , Uygulama durumu ile değiştirilebilir. Sabit kodlanmış HTML etiketi uygulama durumu tarafından değiştirilemez.
 * `<head>`Üst bileşen artık IŞLENMEDIĞINDE HTML 'den kaldırılır.
+
+## <a name="static-files"></a>Statik dosyalar
+
+*Bu bölüm için geçerlidir Blazor Server .*
+
+Bir veya diğer yapılandırma ile ek dosya eşlemeleri oluşturmak için <xref:Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider> <xref:Microsoft.AspNetCore.Builder.StaticFileOptions> aşağıdaki yaklaşımlardan **birini** kullanın. Aşağıdaki örneklerde, `{EXTENSION}` yer tutucu dosya uzantısıdır ve `{CONTENT TYPE}` yer tutucu içerik türüdür.
+
+* () İçindeki () [bağımlılık ekleme (dı)](xref:blazor/fundamentals/dependency-injection) aracılığıyla seçenekleri `Startup.ConfigureServices` kullanarak yapılandırın `Startup.cs` <xref:Microsoft.AspNetCore.Builder.StaticFileOptions> :
+
+  ```csharp
+  using Microsoft.AspNetCore.StaticFiles;
+
+  ...
+
+  var provider = new FileExtensionContentTypeProvider();
+  provider.Mappings["{EXTENSION}"] = "{CONTENT TYPE}";
+
+  services.Configure<StaticFileOptions>(options =>
+  {
+      options.ContentTypeProvider = provider;
+  });
+  ```
+
+  Bu yaklaşım, hizmet vermek için kullanılan aynı dosya sağlayıcısını yapılandırdığından `blazor.server.js` , özel yapılandırmanızın hizmeti sunmaya engel olmadığından emin olun `blazor.server.js` . Örneğin, sağlayıcıyı ile yapılandırarak JavaScript dosyaları için eşlemeyi kaldırmayın `provider.Mappings.Remove(".js")` .
+
+* <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A>() İçinde için iki çağrı kullanın `Startup.Configure` `Startup.cs` :
+  * İle ilk çağrıda özel dosya sağlayıcısını yapılandırın <xref:Microsoft.AspNetCore.Builder.StaticFileOptions> .
+  * İkinci ara yazılım, `blazor.server.js` Framework tarafından sunulan varsayılan statik dosya yapılandırmasını kullanan hizmet verir Blazor .
+
+  ```csharp
+  using Microsoft.AspNetCore.StaticFiles;
+
+  ...
+
+  var provider = new FileExtensionContentTypeProvider();
+  provider.Mappings["{EXTENSION}"] = "{CONTENT TYPE}";
+
+  app.UseStaticFiles(new StaticFileOptions { ContentTypeProvider = provider });
+  app.UseStaticFiles();
+  ```
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

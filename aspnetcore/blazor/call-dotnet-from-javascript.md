@@ -1,11 +1,11 @@
 ---
-title: ASP.NET Core içindeki JavaScript işlevlerinden .NET yöntemlerini çağırınBlazor
+title: ASP.NET Core içindeki JavaScript işlevlerinden .NET yöntemlerini çağırın Blazor
 author: guardrex
 description: Uygulamalarda JavaScript işlevlerinden .NET yöntemlerini çağırmayı öğrenin Blazor .
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/07/2020
+ms.date: 08/12/2020
 no-loc:
 - cookie
 - Cookie
@@ -17,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-dotnet-from-javascript
-ms.openlocfilehash: 5a0731b45424ffd8560bb3b0d9123c686ae9e247
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 65a339bc7b246ab1825ad9bad5a2b5523259b488
+ms.sourcegitcommit: ec41ab354952b75557240923756a8c2ac79b49f8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012572"
+ms.lasthandoff: 08/13/2020
+ms.locfileid: "88202733"
 ---
-# <a name="call-net-methods-from-javascript-functions-in-aspnet-core-no-locblazor"></a>ASP.NET Core içindeki JavaScript işlevlerinden .NET yöntemlerini çağırınBlazor
+# <a name="call-net-methods-from-javascript-functions-in-aspnet-core-no-locblazor"></a>ASP.NET Core içindeki JavaScript işlevlerinden .NET yöntemlerini çağırın Blazor
 
 , [Javier Calvarro Nelson](https://github.com/javiercn), [Daniel Roth](https://github.com/danroth27), [Shashikant Rudrawadi](http://wisne.co)ve [Luke Latham](https://github.com/guardrex)
 
@@ -129,7 +129,7 @@ JavaScript 'ten de .NET örnek yöntemlerini çağırabilirsiniz. JavaScript 'te
 }
 ```
 
-`CallHelloHelperSayHello`JavaScript işlevini `sayHello` Yeni bir örneğiyle çağırır `HelloHelper` .
+`CallHelloHelperSayHello` JavaScript işlevini `sayHello` Yeni bir örneğiyle çağırır `HelloHelper` .
 
 `JsInteropClasses/ExampleJsInterop.cs`:
 
@@ -233,11 +233,16 @@ Bir bileşenin .NET yöntemlerini çağırmak için:
 * `invokeMethod` `invokeMethodAsync` Bileşene statik yöntem çağrısı yapmak için or işlevini kullanın.
 * Bileşenin static yöntemi, çağırma yöntemi olarak çağrılır <xref:System.Action> .
 
+> [!NOTE]
+> Blazor ServerBirden çok kullanıcının aynı bileşeni aynı anda kullandığı uygulamalarda, örnek yöntemleri çağırmak için bir yardımcı sınıfı kullanın.
+>
+> Daha fazla bilgi için bkz. [bileşen örnek yöntemi yardımcı sınıfı](#component-instance-method-helper-class) bölümü.
+
 İstemci tarafı JavaScript 'te:
 
 ```javascript
 function updateMessageCallerJS() {
-  DotNet.invokeMethod('{APP ASSEMBLY}', 'UpdateMessageCaller');
+  DotNet.invokeMethodAsync('{APP ASSEMBLY}', 'UpdateMessageCaller');
 }
 ```
 
@@ -279,7 +284,70 @@ Yer tutucu, `{APP ASSEMBLY}` uygulamanın uygulama derleme adıdır (örneğin, 
 }
 ```
 
-Her biri çağrılacak örnek yöntemleri olan birkaç bileşen olduğunda, her bileşenin örnek yöntemlerini (as) çağırmak için bir yardımcı sınıfı kullanın <xref:System.Action> .
+Bağımsız değişkenleri örnek yöntemine geçirmek için:
+
+* JS yöntem çağrısına parametreler ekleyin. Aşağıdaki örnekte yöntemine bir ad geçirilir. Gerektiğinde, ek parametreler listeye eklenebilir.
+
+  ```javascript
+  function updateMessageCallerJS(name) {
+    DotNet.invokeMethodAsync('{APP ASSEMBLY}', 'UpdateMessageCaller', name);
+  }
+  ```
+  
+  Yer tutucu, `{APP ASSEMBLY}` uygulamanın uygulama derleme adıdır (örneğin, `BlazorSample` ).
+
+* Parametreleri için doğru türleri sağlayın <xref:System.Action> . C# yöntemlerine parametre listesini sağlayın. <xref:System.Action>() Parametreleriyle () öğesini çağırın `UpdateMessage` `action.Invoke(name)` .
+
+  `Pages/JSInteropComponent.razor`:
+
+  ```razor
+  @page "/JSInteropComponent"
+
+  <p>
+      Message: @message
+  </p>
+
+  <p>
+      <button onclick="updateMessageCallerJS('Sarah Jane')">
+          Call JS Method
+      </button>
+  </p>
+
+  @code {
+      private static Action<string> action;
+      private string message = "Select the button.";
+
+      protected override void OnInitialized()
+      {
+          action = UpdateMessage;
+      }
+
+      private void UpdateMessage(string name)
+      {
+          message = $"{name}, UpdateMessage Called!";
+          StateHasChanged();
+      }
+
+      [JSInvokable]
+      public static void UpdateMessageCaller(string name)
+      {
+          action.Invoke(name);
+      }
+  }
+  ```
+
+  `message` **Çağıran js yöntemi** düğmesi seçildiğinde çıkış:
+
+  ```
+  Sarah Jane, UpdateMessage Called!
+  ```
+
+## <a name="component-instance-method-helper-class"></a>Bileşen örnek yöntemi yardımcı sınıfı
+
+Yardımcı sınıfı bir örnek yöntemini bir olarak çağırmak için kullanılır <xref:System.Action> . Yardımcı sınıflar şu durumlarda yararlı olur:
+
+* Aynı türdeki birçok bileşen aynı sayfada işlenir.
+* Blazor ServerBirden çok kullanıcının aynı anda bir bileşen kullandığı bir uygulama kullanılır.
 
 Aşağıdaki örnekte:
 
@@ -388,5 +456,5 @@ Daha fazla bilgi için aşağıdaki konulara bakın:
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * <xref:blazor/call-javascript-from-dotnet>
-* [`InteropComponent.razor`örnek (DotNet/AspNetCore GitHub deposu, 3,1 yayın dalı)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
+* [`InteropComponent.razor` örnek (DotNet/AspNetCore GitHub deposu, 3,1 yayın dalı)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
 * [Uygulamalarda büyük veri aktarımları gerçekleştirme Blazor Server](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)
