@@ -4,7 +4,7 @@ author: rick-anderson
 description: ASP.NET Core ile Web API 'SI oluşturmayı öğrenin.
 ms.author: riande
 ms.custom: mvc
-ms.date: 2/25/2020
+ms.date: 08/13/2020
 no-loc:
 - cookie
 - Cookie
@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-web-api
-ms.openlocfilehash: ad6eac246e5bc7039158981bbe96036389512e4f
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 15e5c838e6dae824a189f170b28730a63f8c3ea7
+ms.sourcegitcommit: 4df445e7d49a99f81625430f728c28e5d6bf2107
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019241"
+ms.lasthandoff: 08/15/2020
+ms.locfileid: "88253648"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Öğretici: ASP.NET Core bir Web API 'SI oluşturma
 
@@ -51,8 +51,8 @@ Bu öğretici aşağıdaki API 'YI oluşturur:
 |`GET /api/TodoItems` | Tüm yapılacaklar öğelerini Al | Yok | Yapılacaklar öğeleri dizisi|
 |`GET /api/TodoItems/{id}` | KIMLIĞE göre öğe al | Yok | Yapılacaklar öğesi|
 |`POST /api/TodoItems` | Yeni öğe Ekle | Yapılacaklar öğesi | Yapılacaklar öğesi |
-|`PUT /api/TodoItems/{id}` | Mevcut bir öğeyi güncelleştir&nbsp; | Yapılacaklar öğesi | Yok |
-|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | Öğe &nbsp; silme&nbsp; | Yok | Yok|
+|`PUT /api/TodoItems/{id}` | Mevcut bir öğeyi güncelleştir &nbsp; | Yapılacaklar öğesi | Yok |
+|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | Öğe &nbsp; silme &nbsp; | Yok | Yok|
 
 Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
@@ -112,11 +112,11 @@ Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
   ![macOS yeni çözüm](first-web-api-mac/_static/sln.png)
 
-* Sürüm 8,6 ' den önceki Mac için Visual Studio, **.NET Core**  >  **uygulama**  >  **API 'si**  >  **İleri**' yi seçin. Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulama**  >  **API 'si**  >  **İleri** ' yi seçin.
+* Sürüm 8,6 ' den önceki Mac için Visual Studio, **.NET Core**  >  **uygulama**  >  **API 'si**  >  **İleri**' yi seçin. Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulama**  >  **API 'si**  >  **İleri**' yi seçin.
 
   ![macOS API şablonu seçimi](first-web-api-mac/_static/api_template.png)
 
-* **Yeni ASP.NET Core Web API 'Nizi yapılandırın** iletişim kutusunda en son .NET Core 3. x **hedef çerçevesini**seçin. **İleri**’yi seçin.
+* **Yeni ASP.NET Core Web API 'Sini Yapılandır** iletişim kutusunda en son .NET Core 3. x **hedef çerçevesini**seçin. **İleri**’yi seçin.
 
 * **Proje adı** için *TodoApi* girin ve ardından **Oluştur**' u seçin.
 
@@ -293,7 +293,8 @@ Aşağıdaki komutları çalıştırın:
 dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
 dotnet add package Microsoft.EntityFrameworkCore.Design
 dotnet tool install --global dotnet-aspnet-codegenerator
-dotnet aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc TodoContext -outDir Controllers
+dotnet tool update -g Dotnet-aspnet-codegenerator
+dotnet-aspnet-codegenerator controller -name TodoItemsController -async -api -m TodoItem -dc TodoContext -outDir Controllers
 ```
 
 Önceki komutlar:
@@ -324,6 +325,8 @@ Oluşturulan kod:
 
 Yukarıdaki kod, özniteliğiyle gösterildiği gibi bir HTTP POST yöntemidir [`[HttpPost]`](xref:Microsoft.AspNetCore.Mvc.HttpPostAttribute) . Yöntemi, HTTP isteğinin gövdesinden Yapılacaklar öğesinin değerini alır.
 
+Daha fazla bilgi için bkz. [http [fiil] öznitelikleriyle öznitelik yönlendirme](xref:mvc/controllers/routing#attribute-routing-with-httpverb-attributes).
+
 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*>Yöntemi:
 
 * Başarılı olursa bir HTTP 201 durum kodu döndürür. HTTP 201, sunucuda yeni bir kaynak oluşturan HTTP POST yöntemi için standart yanıttır.
@@ -348,6 +351,7 @@ Bu öğretici, Web API 'sini test etmek için Postman kullanır.
 
 * Yeni bir istek oluşturun.
 * HTTP yöntemini olarak ayarlayın `POST` .
+* URI değerini olarak ayarlayın `https://localhost:<port>/api/TodoItem` . Örneğin, `https://localhost:5001/api/TodoItem`.
 * **Gövde** sekmesini seçin.
 * **Ham** radyo düğmesini seçin.
 * Türü **JSON (Application/JSON)** olarak ayarlayın.
@@ -364,15 +368,15 @@ Bu öğretici, Web API 'sini test etmek için Postman kullanır.
 
   ![Oluşturma isteğiyle Postman](first-web-api/_static/3/create.png)
 
-### <a name="test-the-location-header-uri"></a>Konum üst bilgisi URI 'sini test etme
+### <a name="test-the-location-header-uri-with-postman"></a>Konum üstbilgisi URI 'sini Postman ile test etme
 
 * **Yanıt** bölmesinde **üstbilgiler** sekmesini seçin.
 * **Konum** üst bilgisi değerini kopyalayın:
 
   ![Postman konsolunun üstbilgiler sekmesi](first-web-api/_static/3/create.png)
 
-* ALıNACAK yöntemi ayarlayın.
-* URI 'yi yapıştırın (örneğin, `https://localhost:5001/api/TodoItems/1` ).
+* HTTP yöntemini olarak ayarlayın `GET` .
+* URI değerini olarak ayarlayın `https://localhost:<port>/api/TodoItems/1` . Örneğin, `https://localhost:5001/api/TodoItems/1`.
 * **Gönder**’i seçin.
 
 ## <a name="examine-the-get-methods"></a>GET yöntemlerini inceleyin
@@ -403,7 +407,7 @@ Tarayıcıdan veya Postman 'dan iki uç noktayı çağırarak uygulamayı test e
 
 * Yeni bir istek oluşturun.
 * **Almak**için http yöntemini ayarlayın.
-* İstek URL 'sini olarak ayarlayın `https://localhost:<port>/api/TodoItems` . Örneğin, `https://localhost:5001/api/TodoItems`.
+* İstek URI 'sini olarak ayarlayın `https://localhost:<port>/api/TodoItems` . Örneğin, `https://localhost:5001/api/TodoItems`.
 * Postman 'da **iki bölme görünümü** ayarlayın.
 * **Gönder**’i seçin.
 
@@ -428,7 +432,7 @@ Aşağıdaki `GetTodoItem` yöntemde, yapılacaklar `"{id}"` öğesinin benzersi
 
 `GetTodoItems`Ve yöntemlerinin dönüş türü `GetTodoItem` [ActionResult \<T> türüdür](xref:web-api/action-return-types#actionresultt-type). ASP.NET Core nesneyi [JSON](https://www.json.org/) 'a otomatik olarak serileştirir ve yanıt ILETISININ gövdesine JSON yazar. Bu dönüş türü için yanıt kodu, işlenmemiş özel durum olmadığı varsayılarak 200 ' dir. İşlenmemiş özel durumlar 5 xx hataya çevrilir.
 
-`ActionResult`dönüş türleri, geniş bir HTTP durum kodu aralığını temsil edebilir. Örneğin, `GetTodoItem` iki farklı durum değeri döndürebilir:
+`ActionResult` dönüş türleri, geniş bir HTTP durum kodu aralığını temsil edebilir. Örneğin, `GetTodoItem` iki farklı durum değeri döndürebilir:
 
 * İstenen KIMLIKLE eşleşen hiçbir öğe yoksa, yöntem bir 404 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound%2A> hata kodu döndürür.
 * Aksi takdirde, yöntemi bir JSON yanıt gövdesi ile 200 döndürür. `item`Sonuçları BIR HTTP 200 yanıtına döndürme.
@@ -537,8 +541,8 @@ Bu öğretici aşağıdaki API 'YI oluşturur:
 |/Api/TodoItems al | Tüm yapılacaklar öğelerini Al | Yok | Yapılacaklar öğeleri dizisi|
 |/Api/TodoItems/{id} al | KIMLIĞE göre öğe al | Yok | Yapılacaklar öğesi|
 |POST/api/TodoItems | Yeni öğe Ekle | Yapılacaklar öğesi | Yapılacaklar öğesi |
-|/Api/TodoItems/{id} koy | Mevcut bir öğeyi güncelleştir&nbsp; | Yapılacaklar öğesi | Yok |
-|/Api/TodoItems/{id} &nbsp; Sil&nbsp; | Öğe &nbsp; silme&nbsp; | Yok | Yok|
+|/Api/TodoItems/{id} koy | Mevcut bir öğeyi güncelleştir &nbsp; | Yapılacaklar öğesi | Yok |
+|/Api/TodoItems/{id} &nbsp; Sil &nbsp; | Öğe &nbsp; silme &nbsp; | Yok | Yok|
 
 Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
@@ -594,7 +598,7 @@ Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
 * Sürüm 8,6 ' den önceki Mac için Visual Studio, **.NET Core**  >  **uygulama**  >  **API 'si**  >  **İleri**' yi seçin. Sürüm 8,6 veya üzeri sürümlerde **Web ve konsol**  >  **uygulama**  >  **API 'si**  >  **İleri**' yi seçin.
   
-* **Yeni ASP.NET Core Web API 'Nizi yapılandırın** iletişim kutusunda en son .NET Core 2. x **hedef çerçevesini**seçin. **İleri**’yi seçin.
+* **Yeni ASP.NET Core Web API 'Sini Yapılandır** iletişim kutusunda en son .NET Core 2. x **hedef çerçevesini**seçin. **İleri**’yi seçin.
 
 * **Proje adı** için *TodoApi* girin ve ardından **Oluştur**' u seçin.
 
@@ -775,7 +779,7 @@ Aşağıdaki `GetTodoItem` yöntemde, yapılacaklar `"{id}"` öğesinin benzersi
 
 `GetTodoItems`Ve yöntemlerinin dönüş türü `GetTodoItem` [ActionResult \<T> türüdür](xref:web-api/action-return-types#actionresultt-type). ASP.NET Core nesneyi [JSON](https://www.json.org/) 'a otomatik olarak serileştirir ve yanıt ILETISININ gövdesine JSON yazar. Bu dönüş türü için yanıt kodu, işlenmemiş özel durum olmadığı varsayılarak 200 ' dir. İşlenmemiş özel durumlar 5 xx hataya çevrilir.
 
-`ActionResult`dönüş türleri, geniş bir HTTP durum kodu aralığını temsil edebilir. Örneğin, `GetTodoItem` iki farklı durum değeri döndürebilir:
+`ActionResult` dönüş türleri, geniş bir HTTP durum kodu aralığını temsil edebilir. Örneğin, `GetTodoItem` iki farklı durum değeri döndürebilir:
 
 * İstenen KIMLIKLE eşleşen hiçbir öğe yoksa, yöntem bir 404 <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound%2A> hata kodu döndürür.
 * Aksi takdirde, yöntemi bir JSON yanıt gövdesi ile 200 döndürür. `item`Sonuçları BIR HTTP 200 yanıtına döndürme.
@@ -804,7 +808,7 @@ Bu öğretici, Web API 'sini test etmek için Postman kullanır.
 
 * Yeni bir istek oluşturun.
   * **Almak**için http yöntemini ayarlayın.
-  * İstek URL 'sini olarak ayarlayın `https://localhost:<port>/api/todo` . Örneğin, `https://localhost:5001/api/todo`.
+  * İstek URI 'sini olarak ayarlayın `https://localhost:<port>/api/todo` . Örneğin, `https://localhost:5001/api/todo`.
 * Postman 'da **iki bölme görünümü** ayarlayın.
 * **Gönder**’i seçin.
 
@@ -830,6 +834,7 @@ Yukarıdaki kod, özniteliğiyle gösterildiği gibi bir HTTP POST yöntemidir [
 
 * Projeyi derleyin.
 * Postman 'da HTTP yöntemini olarak ayarlayın `POST` .
+* URI değerini olarak ayarlayın `https://localhost:<port>/api/TodoItem` . Örneğin, `https://localhost:5001/api/TodoItem`.
 * **Gövde** sekmesini seçin.
 * **Ham** radyo düğmesini seçin.
 * Türü **JSON (Application/JSON)** olarak ayarlayın.
@@ -856,7 +861,7 @@ Yukarıdaki kod, özniteliğiyle gösterildiği gibi bir HTTP POST yöntemidir [
   ![Postman konsolunun üstbilgiler sekmesi](first-web-api/_static/pmc2.png)
 
 * ALıNACAK yöntemi ayarlayın.
-* URI 'yi yapıştırın (örneğin, `https://localhost:5001/api/Todo/2` ).
+* URI değerini olarak ayarlayın  `https://localhost:<port>/api/TodoItems/2` .Örneğin,  `https://localhost:5001/api/TodoItems/2` .
 * **Gönder**’i seçin.
 
 ## <a name="add-a-puttodoitem-method"></a>PutTodoItem yöntemi ekleme

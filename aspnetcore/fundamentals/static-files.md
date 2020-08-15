@@ -14,12 +14,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/static-files
-ms.openlocfilehash: b1f84a936ee1327498abce660cd64f8d7d0a2864
-ms.sourcegitcommit: ec41ab354952b75557240923756a8c2ac79b49f8
+ms.openlocfilehash: 3dbc233cef752bbf593e677728aee7b9e93c1621
+ms.sourcegitcommit: 4df445e7d49a99f81625430f728c28e5d6bf2107
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/13/2020
-ms.locfileid: "88202787"
+ms.lasthandoff: 08/15/2020
+ms.locfileid: "88253635"
 ---
 # <a name="static-files-in-aspnet-core"></a>ASP.NET Core statik dosyalar
 
@@ -103,6 +103,19 @@ Statik dosyalar 600 saniye boyunca genel olarak önbelleklenebilir:
 ## <a name="static-file-authorization"></a>Statik dosya yetkilendirmesi
 
 Statik dosya ara yazılımı yetkilendirme denetimleri sağlamıyor. Tarafından sunulan tüm dosyalar, altında olanlar da dahil `wwwroot` herkese açık bir şekilde erişilebilir. Dosyalara yetkilendirme temelinde hizmeti sağlamak için:
+
+* Bunları `wwwroot` ve varsayılan statik dosya ara yazılımı tarafından erişilebilen herhangi bir dizini dışında saklayın.
+* Sonra çağrısı yapın `UseStaticFiles` `UseAuthorization` ve yolu belirtin:
+
+  [!code-csharp[](static-files/samples/3.x/StaticFileAuth/Startup.cs?name=snippet2)]
+  
+  Yukarıdaki yaklaşım kümeleri kullanıcıların kimliklerinin doğrulanmasını gerektirir:
+
+  [!code-csharp[](static-files/samples/3.x/StaticFileAuth/Startup.cs?name=snippet1&highlight=20-99)]
+
+   [!INCLUDE[](~/includes/requireAuth.md)]
+
+Yetkilendirmeyi temel alarak dosyaları sunmaya yönelik alternatif bir yaklaşım:
 
 * Onları `wwwroot` ve statik dosya ara yazılımı tarafından erişilebilen herhangi bir dizini dışında saklayın.
 * Onlara yetkilendirme uygulanmış bir eylem yöntemiyle ve bir nesne döndüren bir eylem yöntemi aracılığıyla sunar <xref:Microsoft.AspNetCore.Mvc.FileResult> :
