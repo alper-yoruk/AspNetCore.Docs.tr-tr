@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 0d8b349d0381e2902907ea841e07bbc96db5b847
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: b0ba7c7598df13413c00934a30e03681129de98a
+ms.sourcegitcommit: 503b348e9046fcd969de85898394a1ea8274ec38
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130683"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227585"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>ASP.NET Core'da bağımlılık ekleme
 
@@ -111,7 +111,7 @@ Updated `ConfigureServices` yöntemi yeni `IMyDependency` uygulamayı kaydeder:
 
 [!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/StartupMyDependency2.cs?name=snippet1)]
 
-`MyDependency2`oluşturucuda bir ister <xref:Microsoft.Extensions.Logging.ILogger`1> . Bağımlılık ekleme işlemini zincirleme bir biçimde kullanmak olağan dışı değildir. Her istenen bağımlılık, kendi bağımlılıklarını ister. Kapsayıcı grafikteki bağımlılıkları çözer ve tamamen çözümlenen hizmeti döndürür. Çözümlenmesi gereken, genellikle *bağımlılık ağacı*, *bağımlılık grafiği*veya *nesne grafiği*olarak adlandırılan toplu bağımlılıklar kümesi.
+`MyDependency2` oluşturucuda bir ister <xref:Microsoft.Extensions.Logging.ILogger`1> . Bağımlılık ekleme işlemini zincirleme bir biçimde kullanmak olağan dışı değildir. Her istenen bağımlılık, kendi bağımlılıklarını ister. Kapsayıcı grafikteki bağımlılıkları çözer ve tamamen çözümlenen hizmeti döndürür. Çözümlenmesi gereken, genellikle *bağımlılık ağacı*, *bağımlılık grafiği*veya *nesne grafiği*olarak adlandırılan toplu bağımlılıklar kümesi.
 
 `ILogger<TCategoryName>`[Framework tarafından sağlanmış bir hizmettir](#framework-provided-services).
 
@@ -192,7 +192,7 @@ Entity Framework Core kullanılırken, <xref:Microsoft.Extensions.DependencyInje
 Aşağıdaki yaklaşımlardan biriyle ara yazılım kapsamındaki Hizmetleri kullanın:
 
 * Hizmeti `Invoke` veya `InvokeAsync` yöntemine ekleyin. Ekleme by [Oluşturucu Ekleme](xref:mvc/controllers/dependency-injection#constructor-injection) , hizmeti tek bir gibi davranmaya zordığı için çalışma zamanında bir özel durum oluşturur. [Ömür ve kayıt seçeneklerinde](#lifetime-and-registration-options) örnek, `InvokeAsync` yaklaşımı kullanır.
-* [Fabrika tabanlı ara yazılım](<xref:fundamentals/middleware/extensibility>). <xref:Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.UseMiddleware*>Uzantı yöntemleri bir ara yazılımın kayıtlı türünün uygulayıp uygulamadığını denetler <xref:Microsoft.AspNetCore.Http.IMiddleware> . Bu durumda, <xref:Microsoft.AspNetCore.Http.IMiddlewareFactory> kapsayıcıya kaydedilen örnek, <xref:Microsoft.AspNetCore.Http.IMiddleware> kural tabanlı ara yazılım etkinleştirme mantığını kullanmak yerine, uygulamayı çözmek için kullanılır. Ara yazılım, uygulamanın hizmet kapsayıcısında kapsamlı veya geçici bir hizmet olarak kaydedilir.
+* [Fabrika tabanlı ara yazılım](<xref:fundamentals/middleware/extensibility>). <xref:Microsoft.AspNetCore.Builder.UseMiddlewareExtensions.UseMiddleware*> Uzantı yöntemleri bir ara yazılımın kayıtlı türünün uygulayıp uygulamadığını denetler <xref:Microsoft.AspNetCore.Http.IMiddleware> . Bu durumda, <xref:Microsoft.AspNetCore.Http.IMiddlewareFactory> kapsayıcıya kaydedilen örnek, <xref:Microsoft.AspNetCore.Http.IMiddleware> kural tabanlı ara yazılım etkinleştirme mantığını kullanmak yerine, uygulamayı çözmek için kullanılır. Ara yazılım, uygulamanın hizmet kapsayıcısında kapsamlı veya geçici bir hizmet olarak kaydedilir.
 
 Daha fazla bilgi için bkz. <xref:fundamentals/middleware/write#per-request-middleware-dependencies>.
 
@@ -234,7 +234,7 @@ Hizmet kayıt uzantısı yöntemleri, belirli senaryolarda yararlı olan aşır�
 
 Tür çıkarma hakkında daha fazla bilgi için [Hizmetler 'In aktiften çıkarılması](#disposal-of-services) bölümüne bakın. Birden çok uygulama için yaygın bir senaryo, [test için bir sahte işlem türüdür](xref:test/integration-tests#inject-mock-services).
 
-`TryAdd{LIFETIME}`zaten kayıtlı bir uygulama yoksa Yöntemler hizmeti kaydeder.
+`TryAdd{LIFETIME}` zaten kayıtlı bir uygulama yoksa Yöntemler hizmeti kaydeder.
 
 Aşağıdaki örnekte, ilk satır `MyDependency` için kaydedilir `IMyDependency` . `IMyDependency`Zaten kayıtlı bir uygulamaya sahip olduğundan ikinci satır etkisizdir:
 
@@ -268,7 +268,7 @@ services.TryAddEnumerable(ServiceDescriptor.Singleton<IMyDep1, MyDep>());
 
 Hizmet kaydı, aynı türde birden çok uygulama kaydedilirken genellikle sıralı olarak bağımsızdır.
 
-`IServiceCollection`, bir koleksiyonudur <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor> . Aşağıdaki kod, bir oluşturucunun bulunduğu bir hizmetin nasıl ekleneceğini göstermektedir:
+`IServiceCollection` , bir koleksiyonudur <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor> . Aşağıdaki kod, bir oluşturucunun bulunduğu bir hizmetin nasıl ekleneceğini göstermektedir:
 
 [!code-csharp[](dependency-injection/samples/3.x/DependencyInjectionSample/Startup5.cs?name=snippet)]
 
@@ -502,7 +502,7 @@ Yerleşik hizmet kapsayıcısı, çerçeve ihtiyaçlarına ve çoğu tüketici u
 * Ada göre ekleme
 * Alt kapsayıcılar
 * Özel ömür yönetimi
-* `Func<T>`yavaş başlatma desteği
+* `Func<T>` yavaş başlatma desteği
 * Kural tabanlı kayıt
 
 Aşağıdaki üçüncü taraf kapsayıcıları ASP.NET Core uygulamalarla kullanılabilir:
@@ -523,7 +523,7 @@ Tek bir hizmetin fabrika yöntemi (örneğin, AddSingleton için ikinci bağıms
 
 ## <a name="recommendations"></a>Öneriler
 
-* `async/await`ve `Task` tabanlı hizmet çözümlemesi desteklenmez. C# zaman uyumsuz oluşturucuları desteklemez. Önerilen model, hizmeti eşzamanlı olarak çözümledikten sonra zaman uyumsuz yöntemler kullanmaktır.
+* `async/await` ve `Task` tabanlı hizmet çözümlemesi desteklenmez. C# zaman uyumsuz oluşturucuları desteklemez. Önerilen model, hizmeti eşzamanlı olarak çözümledikten sonra zaman uyumsuz yöntemler kullanmaktır.
 * Veri ve yapılandırmayı doğrudan hizmet kapsayıcısında saklamaktan kaçının. Örneğin, bir kullanıcının alışveriş sepeti genellikle hizmet kapsayıcısına eklenmemelidir. Yapılandırma, [Seçenekler modelini](xref:fundamentals/configuration/options)kullanmalıdır. Benzer şekilde, yalnızca başka bir nesneye erişime izin vermek için mevcut olan "veri sahibi" nesnelerinden kaçının. DI aracılığıyla gerçek öğe istemek daha iyidir.
 * Hizmetlere statik erişimi önleyin. Örneğin, başka bir yerde kullanmak üzere [IApplicationBuilder. ApplicationServices](xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices) statik olarak yazılanmaktan kaçının.
 * Dı fabrikalarını hızlı ve zaman uyumlu tutun.
@@ -608,6 +608,7 @@ https://github.com/OrchardCMS/OrchardCore.SamplesCMS 'e özgü özelliklerden he
 * <xref:mvc/controllers/dependency-injection>
 * <xref:security/authorization/dependencyinjection>
 * <xref:blazor/fundamentals/dependency-injection>
+* [Dı uygulaması geliştirme için NDC Konferansı desenleri](https://www.youtube.com/watch?v=x-C-CNBVTaY)
 * <xref:fundamentals/startup>
 * <xref:fundamentals/middleware/extensibility>
 * [ASP.NET Core ' de ıdisposa, ' i atılanmanın dört yolu](https://andrewlock.net/four-ways-to-dispose-idisposables-in-asp-net-core/)
@@ -686,7 +687,7 @@ Bu arabirim somut bir tür tarafından uygulanır, `MyDependency` :
 
 `MyDependency`<xref:Microsoft.Extensions.Logging.ILogger`1>kendi oluşturucusunda bir ister. Bağımlılık ekleme işlemini zincirleme bir biçimde kullanmak olağan dışı değildir. Her istenen bağımlılık, kendi bağımlılıklarını ister. Kapsayıcı grafikteki bağımlılıkları çözer ve tamamen çözümlenen hizmeti döndürür. Çözümlenmesi gereken, genellikle *bağımlılık ağacı*, *bağımlılık grafiği*veya *nesne grafiği*olarak adlandırılan toplu bağımlılıklar kümesi.
 
-`IMyDependency`ve `ILogger<TCategoryName>` hizmet kapsayıcısında kayıtlı olmalıdır. `IMyDependency`kaydedilir `Startup.ConfigureServices` . `ILogger<TCategoryName>`günlüğe kaydetme soyutlamaları altyapısı tarafından kaydedilir. bu nedenle, Framework tarafından varsayılan olarak kaydedilen [Framework tarafından sağlanmış bir hizmettir](#framework-provided-services) .
+`IMyDependency` ve `ILogger<TCategoryName>` hizmet kapsayıcısında kayıtlı olmalıdır. `IMyDependency` kaydedilir `Startup.ConfigureServices` . `ILogger<TCategoryName>` günlüğe kaydetme soyutlamaları altyapısı tarafından kaydedilir. bu nedenle, Framework tarafından varsayılan olarak kaydedilen [Framework tarafından sağlanmış bir hizmettir](#framework-provided-services) .
 
 Kapsayıcı `ILogger<TCategoryName>` [(genel) açık türlerden](/dotnet/csharp/language-reference/language-specification/types#open-and-closed-types)yararlanarak çözümlenir, her [(genel) oluşturulan türü](/dotnet/csharp/language-reference/language-specification/types#constructed-types)kaydetme ihtiyacını ortadan kaldırır:
 
@@ -827,7 +828,7 @@ Hizmet kayıt uzantısı yöntemleri, belirli senaryolarda yararlı olan aşır�
 
 Tür çıkarma hakkında daha fazla bilgi için [Hizmetler 'In aktiften çıkarılması](#disposal-of-services) bölümüne bakın. Birden çok uygulama için yaygın bir senaryo, [test için bir sahte işlem türüdür](xref:test/integration-tests#inject-mock-services).
 
-`TryAdd{LIFETIME}`Yöntemler, zaten kayıtlı bir uygulama yoksa hizmeti kaydeder.
+`TryAdd{LIFETIME}` Yöntemler, zaten kayıtlı bir uygulama yoksa hizmeti kaydeder.
 
 Aşağıdaki örnekte, ilk satır `MyDependency` için kaydedilir `IMyDependency` . `IMyDependency`Zaten kayıtlı bir uygulamaya sahip olduğundan ikinci satır etkisizdir:
 
@@ -865,7 +866,7 @@ services.TryAddEnumerable(ServiceDescriptor.Singleton<IMyDep1, MyDep>());
 Hizmetler, iki mekanizma tarafından çözülebilir:
 
 * <xref:System.IServiceProvider>
-* <xref:Microsoft.Extensions.DependencyInjection.ActivatorUtilities>: Bağımlılık ekleme kapsayıcısında hizmet kaydı olmadan nesne oluşturulmasına izin verir. `ActivatorUtilities`Etiket Yardımcıları, MVC denetleyicileri ve model ciltler gibi kullanıcıya yönelik soyutlamalar ile kullanılır.
+* <xref:Microsoft.Extensions.DependencyInjection.ActivatorUtilities>: Bağımlılık ekleme kapsayıcısında hizmet kaydı olmadan nesne oluşturulmasına izin verir. `ActivatorUtilities` Etiket Yardımcıları, MVC denetleyicileri ve model ciltler gibi kullanıcıya yönelik soyutlamalar ile kullanılır.
 
 Oluşturucular bağımlılık ekleme tarafından sağlanmayan bağımsız değişkenleri kabul edebilir, ancak bağımsız değişkenlerin varsayılan değerleri ataması gerekir.
 
@@ -889,7 +890,7 @@ Arabirimler `Operation` sınıfında uygulanır. `Operation`Bir tane sağlanmazs
 
 , `OperationService` Diğer türlerin her birine bağlı olarak kaydedilir `Operation` . `OperationService`Bağımlılık ekleme yoluyla istendiğinde, her bir hizmetin yeni bir örneğini ya da bağımlı hizmetin kullanım ömrü temelinde mevcut bir örneği alır.
 
-* Kapsayıcıda istendiğinde geçici hizmetler oluşturulduğunda, `OperationId` `IOperationTransient` hizmet öğesinden farklı olur `OperationId` `OperationService` . `OperationService`sınıfının yeni bir örneğini alır `IOperationTransient` . Yeni örnek farklı bir şekilde oluşturur `OperationId` .
+* Kapsayıcıda istendiğinde geçici hizmetler oluşturulduğunda, `OperationId` `IOperationTransient` hizmet öğesinden farklı olur `OperationId` `OperationService` . `OperationService` sınıfının yeni bir örneğini alır `IOperationTransient` . Yeni örnek farklı bir şekilde oluşturur `OperationId` .
 * İstemci isteği başına kapsamlı hizmetler oluşturulduğunda, `OperationId` `IOperationScoped` hizmetin istemci isteği içindeki ile aynı olması gerekir `OperationService` . İstemci istekleri arasında her iki hizmet de farklı bir `OperationId` değer paylaşır.
 * Tek ve tek örnekli hizmetler bir kez oluşturulduğunda ve tüm istemci isteklerinde ve tüm hizmetlerde kullanıldığında, `OperationId` tüm hizmet istekleri genelinde sabittir.
 
@@ -916,7 +917,7 @@ Kapsam: 5d997e2d-55f5-4a64-8388-51c4e3a1ad19
 Tek: 01271bc1-9e31-48e7-8f7c-7261b040ded9  
 Örnek: 00000000-0000-0000-0000-000000000000
 
-`OperationService`operasyonları
+`OperationService` operasyonları
 
 Geçici: c6b049eb-1318-4E31-90f1-eb2dd849ff64  
 Kapsam: 5d997e2d-55f5-4a64-8388-51c4e3a1ad19  
@@ -932,7 +933,7 @@ Kapsam: 31e820c5-4834-4d22-83fc-a60118acb9f4
 Tek: 01271bc1-9e31-48e7-8f7c-7261b040ded9  
 Örnek: 00000000-0000-0000-0000-000000000000
 
-`OperationService`operasyonları
+`OperationService` operasyonları
 
 Geçici: c4cbacb8-36a2-436d-81c8-8c1b78808aaf  
 Kapsam: 31e820c5-4834-4d22-83fc-a60118acb9f4  
@@ -1105,7 +1106,7 @@ Yerleşik hizmet kapsayıcısı, çerçeve ihtiyaçlarına ve çoğu tüketici u
 * Ada göre ekleme
 * Alt kapsayıcılar
 * Özel ömür yönetimi
-* `Func<T>`yavaş başlatma desteği
+* `Func<T>` yavaş başlatma desteği
 * Kural tabanlı kayıt
 
 Aşağıdaki üçüncü taraf kapsayıcıları ASP.NET Core uygulamalarla kullanılabilir:
@@ -1126,7 +1127,7 @@ Tek bir hizmetin fabrika yöntemi (örneğin, AddSingleton için ikinci bağıms
 
 ## <a name="recommendations"></a>Öneriler
 
-* `async/await`ve `Task` tabanlı hizmet çözümlemesi desteklenmez. C# zaman uyumsuz oluşturucuları desteklemez; Bu nedenle, önerilen model hizmeti zaman uyumlu olarak çözümledikten sonra zaman uyumsuz yöntemler kullanmaktır.
+* `async/await` ve `Task` tabanlı hizmet çözümlemesi desteklenmez. C# zaman uyumsuz oluşturucuları desteklemez; Bu nedenle, önerilen model hizmeti zaman uyumlu olarak çözümledikten sonra zaman uyumsuz yöntemler kullanmaktır.
 
 * Veri ve yapılandırmayı doğrudan hizmet kapsayıcısında saklamaktan kaçının. Örneğin, bir kullanıcının alışveriş sepeti genellikle hizmet kapsayıcısına eklenmemelidir. Yapılandırma, [Seçenekler modelini](xref:fundamentals/configuration/options)kullanmalıdır. Benzer şekilde, yalnızca başka bir nesneye erişime izin vermek için mevcut olan "veri sahibi" nesnelerinden kaçının. DI aracılığıyla gerçek öğe istemek daha iyidir.
 * Hizmetlere statik erişimi önleyin. Örneğin, bir başka yerde kullanmak üzere [IApplicationBuilder. ApplicationServices](xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices) statik olarak yazılanmaktan kaçının.

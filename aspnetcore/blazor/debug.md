@@ -1,5 +1,5 @@
 ---
-title: Hata ayıklama ASP.NET CoreBlazor WebAssembly
+title: Hata ayıklama ASP.NET Core Blazor WebAssembly
 author: guardrex
 description: Uygulamalarda hata ayıklamayı öğrenin Blazor .
 monikerRange: '>= aspnetcore-3.1'
@@ -17,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 225916411550cc8e89c604e1426316843bb0ff52
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 838ed1a10ab3312e449782a29c305a976265550c
+ms.sourcegitcommit: 503b348e9046fcd969de85898394a1ea8274ec38
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014548"
+ms.lasthandoff: 08/14/2020
+ms.locfileid: "88227598"
 ---
-# <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Hata ayıklama ASP.NET CoreBlazor WebAssembly
+# <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Hata ayıklama ASP.NET Core Blazor WebAssembly
 
 [Daniel Roth](https://github.com/danroth27)
 
-Blazor WebAssemblyuygulamalar, Kmıum tabanlı tarayıcılarda (Edge/Chrome) tarayıcı geliştirme araçları kullanılarak ayıklanamaz. Alternatif olarak, Visual Studio veya Visual Studio Code kullanarak uygulamanızda hata ayıklaması yapabilirsiniz.
+Blazor WebAssembly uygulamalar, Kmıum tabanlı tarayıcılarda (Edge/Chrome) tarayıcı geliştirme araçları kullanılarak ayıklanamaz. Alternatif olarak, Visual Studio veya Visual Studio Code kullanarak uygulamanızda hata ayıklaması yapabilirsiniz.
 
 Kullanılabilir senaryolar şunlardır:
 
@@ -80,7 +80,7 @@ Blazor WebAssemblyVisual Studio 'da bir uygulamada hata ayıklamak için:
 1. Uygulamayı hata ayıklayıcıda çalıştırmak için <kbd>F5</kbd> tuşuna basın.
 
    > [!NOTE]
-   > **Hata ayıklama olmadan Başlat** (<kbd>CTRL</kbd> + <kbd>F5</kbd>) desteklenmez.
+   > **Hata ayıklama olmadan Başlat** (<kbd>CTRL</kbd> + <kbd>F5</kbd>) desteklenmez. Uygulama hata ayıklama yapılandırmasında çalıştırıldığında, hata ayıklama ek yükü her zaman küçük bir performans azalmasıyla sonuçlanır.
 
 1. Metodunda bir kesme noktası ayarlayın `Pages/Counter.razor` `IncrementCount` .
 1. **`Counter`** Sekmesine gidin ve kesme noktasına isabet eden düğmeyi seçin:
@@ -111,7 +111,7 @@ Uygulamanızda hata ayıklarken Blazor WebAssembly , sunucu kodunuzda hata ayık
 
 ## <a name="visual-studio-code"></a>Visual Studio Code
 
-### <a name="debug-standalone-no-locblazor-webassembly"></a>Tek başına hata ayıklaBlazor WebAssembly
+### <a name="debug-standalone-no-locblazor-webassembly"></a>Tek başına hata ayıkla Blazor WebAssembly
 
 1. Tek başına Blazor WebAssembly uygulamayı vs Code açın.
 
@@ -128,7 +128,7 @@ Uygulamanızda hata ayıklarken Blazor WebAssembly , sunucu kodunuzda hata ayık
 1. <kbd>F5</kbd> klavye kısayolunu veya menü öğesini kullanarak hata ayıklamayı başlatın.
 
    > [!NOTE]
-   > **Hata ayıklama olmadan Çalıştır** (<kbd>CTRL</kbd> + <kbd>F5</kbd>) desteklenmez.
+   > **Hata ayıklama olmadan Başlat** (<kbd>CTRL</kbd> + <kbd>F5</kbd>) desteklenmez. Uygulama hata ayıklama yapılandırmasında çalıştırıldığında, hata ayıklama ek yükü her zaman küçük bir performans azalmasıyla sonuçlanır.
 
 1. İstendiğinde, hata ayıklamayı başlatmak için ** Blazor WebAssembly Hata Ayıkla** seçeneğini belirleyin.
 
@@ -140,7 +140,7 @@ Uygulamanızda hata ayıklarken Blazor WebAssembly , sunucu kodunuzda hata ayık
 
    ![VS Code hata ayıklama sayacı](https://devblogs.microsoft.com/aspnet/wp-content/uploads/sites/16/2020/03/vscode-debug-counter.png)
 
-### <a name="debug-hosted-no-locblazor-webassembly"></a>Barındırılan hata ayıklamaBlazor WebAssembly
+### <a name="debug-hosted-no-locblazor-webassembly"></a>Barındırılan hata ayıklama Blazor WebAssembly
 
 1. Barındırılan Blazor WebAssembly uygulamanın çözüm klasörünü vs Code açın.
 
