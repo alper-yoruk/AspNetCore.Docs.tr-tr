@@ -426,6 +426,8 @@
           uid: blazor/webassembly-lazy-load-assemblies
         - name: WebAssembly performansı
           uid: blazor/webassembly-performance-best-practices
+        - name: Test etme
+          uid: blazor/test
         - name: Aşamalı Web Uygulamaları
           uid: blazor/progressive-web-app
         - name: Barındırma ve dağıtma
@@ -438,6 +440,8 @@
               uid: blazor/host-and-deploy/server
             - name: Bağlayıcıyı yapılandırma
               uid: blazor/host-and-deploy/configure-linker
+        - name: Blazor Server ve EF Core
+          uid: blazor/blazor-server-ef-core
         - name: Gelişmiş senaryolar
           uid: blazor/advanced-scenarios
     - name: İstemci tarafı geliştirme
