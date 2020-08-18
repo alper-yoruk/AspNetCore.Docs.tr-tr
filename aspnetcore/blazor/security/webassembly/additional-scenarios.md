@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: 15531c39a66a9f6dfd0f5c20cf960e4db5a78074
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 8cb09b9ecf8fc67652125e92aa15b484526c121e
+ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88013807"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88504664"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly ek güvenlik senaryoları
 
@@ -30,7 +30,7 @@ ms.locfileid: "88013807"
 
 ## <a name="attach-tokens-to-outgoing-requests"></a>Giden isteklere belirteç iliştirme
 
-<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>, <xref:System.Net.Http.DelegatingHandler> giden örneklere erişim belirteçleri eklemek için kullanılır <xref:System.Net.Http.HttpResponseMessage> . Belirteçler, <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> Framework tarafından kaydedilen hizmet kullanılarak alınır. Bir belirteç alınamadığından, bir oluşturulur <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> . <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A>, yeni bir belirteç almak için kullanıcıdan kimlik sağlayıcısına gitmek üzere kullanılabilecek bir yönteme sahiptir.
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> , <xref:System.Net.Http.DelegatingHandler> giden örneklere erişim belirteçleri eklemek için kullanılır <xref:System.Net.Http.HttpResponseMessage> . Belirteçler, <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> Framework tarafından kaydedilen hizmet kullanılarak alınır. Bir belirteç alınamadığından, bir oluşturulur <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> . <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A>, yeni bir belirteç almak için kullanıcıdan kimlik sağlayıcısına gitmek üzere kullanılabilecek bir yönteme sahiptir.
 
 Kolaylık olması için Framework, <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> uygulamanın temel adresiyle önceden yapılandırılmış bir yetkili URL 'si sağlar. **Erişim belirteçleri yalnızca istek URI 'si uygulamanın temel URI 'SI içinde olduğunda eklenir.** Giden istek URI 'Leri uygulamanın temel URI 'SI içinde olmadığında, [özel bir sınıf kullanın `AuthorizationMessageHandler` (*önerilir*)](#custom-authorizationmessagehandler-class) veya öğesini [yapılandırın `AuthorizationMessageHandler` ](#configure-authorizationmessagehandler).
 
@@ -39,8 +39,8 @@ Kolaylık olması için Framework, <xref:Microsoft.AspNetCore.Components.WebAsse
 
 Aşağıdaki örnekte:
 
-* <xref:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient%2A><xref:System.Net.Http.IHttpClientFactory>hizmet koleksiyonuna ve ilgili hizmetleri ekler ve adlandırılmış bir <xref:System.Net.Http.HttpClient> ( `ServerAPI` ) yapılandırır. <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType>, istek gönderilirken Kaynak URI 'sinin temel adresidir. <xref:System.Net.Http.IHttpClientFactory>, [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) NuGet paketi tarafından sağlanır.
-* <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler>, <xref:System.Net.Http.DelegatingHandler> giden örneklere erişim belirteçleri eklemek için kullanılır <xref:System.Net.Http.HttpResponseMessage> . Erişim belirteçleri yalnızca istek URI 'si uygulamanın temel URI 'SI içinde olduğunda eklenir.
+* <xref:Microsoft.Extensions.DependencyInjection.HttpClientFactoryServiceCollectionExtensions.AddHttpClient%2A><xref:System.Net.Http.IHttpClientFactory>hizmet koleksiyonuna ve ilgili hizmetleri ekler ve adlandırılmış bir <xref:System.Net.Http.HttpClient> ( `ServerAPI` ) yapılandırır. <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> , istek gönderilirken Kaynak URI 'sinin temel adresidir. <xref:System.Net.Http.IHttpClientFactory> , [`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http) NuGet paketi tarafından sağlanır.
+* <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> , <xref:System.Net.Http.DelegatingHandler> giden örneklere erişim belirteçleri eklemek için kullanılır <xref:System.Net.Http.HttpResponseMessage> . Erişim belirteçleri yalnızca istek URI 'si uygulamanın temel URI 'SI içinde olduğunda eklenir.
 * <xref:System.Net.Http.IHttpClientFactory.CreateClient%2A?displayProperty=nameWithType><xref:System.Net.Http.HttpClient>adlandırılmış () öğesine karşılık gelen yapılandırmayı kullanarak giden istekler için bir örnek oluşturur ve yapılandırır <xref:System.Net.Http.HttpClient> `ServerAPI` .
 
 ```csharp
@@ -89,7 +89,7 @@ protected override async Task OnInitializedAsync()
 
 *Bu bölümdeki kılavuz, uygulamanın temel URI 'SI içinde olmayan URI 'lere giden istekleri yapan istemci uygulamalar için önerilir.*
 
-Aşağıdaki örnekte, için bir özel sınıf <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> için olarak kullanılmak üzere genişletilir <xref:System.Net.Http.DelegatingHandler> <xref:System.Net.Http.HttpClient> . <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A>Bu işleyiciyi, bir erişim belirteci kullanarak giden HTTP isteklerini yetkilendirmek üzere yapılandırır. Erişim belirteci yalnızca, yetkili URL 'Lerden en az biri istek URI 'sinin () bir taban ise eklenir <xref:System.Net.Http.HttpRequestMessage.RequestUri?displayProperty=nameWithType> .
+Aşağıdaki örnekte, için bir özel sınıf <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> için olarak kullanılmak üzere genişletilir <xref:System.Net.Http.DelegatingHandler> <xref:System.Net.Http.HttpClient> . <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> Bu işleyiciyi, bir erişim belirteci kullanarak giden HTTP isteklerini yetkilendirmek üzere yapılandırır. Erişim belirteci yalnızca, yetkili URL 'Lerden en az biri istek URI 'sinin () bir taban ise eklenir <xref:System.Net.Http.HttpRequestMessage.RequestUri?displayProperty=nameWithType> .
 
 ```csharp
 using Microsoft.AspNetCore.Components;
@@ -149,9 +149,9 @@ Yapılandırma, <xref:System.Net.Http.HttpClient> model kullanarak yetkili istek
 }
 ```
 
-### <a name="configure-authorizationmessagehandler"></a>Yapılandırma`AuthorizationMessageHandler`
+### <a name="configure-authorizationmessagehandler"></a>Yapılandırma `AuthorizationMessageHandler`
 
-<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler>, yöntemi kullanılarak yetkili URL 'Ler, kapsamlar ve dönüş URL 'SI ile yapılandırılabilir <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> . <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A>, bir erişim belirteci kullanarak giden HTTP isteklerini yetkilendirmek için işleyiciyi yapılandırır. Erişim belirteci yalnızca, yetkili URL 'Lerden en az biri istek URI 'sinin () bir taban ise eklenir <xref:System.Net.Http.HttpRequestMessage.RequestUri?displayProperty=nameWithType> . İstek URI 'si göreli bir URI ise, ile birleştirilir <xref:System.Net.Http.HttpClient.BaseAddress> .
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> , yöntemi kullanılarak yetkili URL 'Ler, kapsamlar ve dönüş URL 'SI ile yapılandırılabilir <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> . <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler.ConfigureHandler%2A> , bir erişim belirteci kullanarak giden HTTP isteklerini yetkilendirmek için işleyiciyi yapılandırır. Erişim belirteci yalnızca, yetkili URL 'Lerden en az biri istek URI 'sinin () bir taban ise eklenir <xref:System.Net.Http.HttpRequestMessage.RequestUri?displayProperty=nameWithType> . İstek URI 'si göreli bir URI ise, ile birleştirilir <xref:System.Net.Http.HttpClient.BaseAddress> .
 
 Aşağıdaki örnekte, <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> <xref:System.Net.Http.HttpClient> () bir içinde yapılandırır `Program.Main` `Program.cs` :
 
@@ -176,7 +176,7 @@ BlazorBarındırılan proje şablonunu temel alan bir uygulama için Blazor WebA
 * <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType>( `new Uri(builder.HostEnvironment.BaseAddress)` ).
 * Dizinin URL 'SI `authorizedUrls` .
 
-## <a name="typed-httpclient"></a>Girdiyseniz`HttpClient`
+## <a name="typed-httpclient"></a>Girdiyseniz `HttpClient`
 
 Türü belirtilmiş bir istemci, tüm HTTP ve Token Alım sorunlarını tek bir sınıf içinde işleyen tanımlanabilir.
 
@@ -234,7 +234,7 @@ builder.Services.AddHttpClient<WeatherForecastClient>(
 
 BlazorBarındırılan proje şablonuna dayalı bir uygulama için Blazor WebAssembly , <xref:Microsoft.AspNetCore.Components.WebAssembly.Hosting.IWebAssemblyHostEnvironment.BaseAddress?displayProperty=nameWithType> ( `new Uri(builder.HostEnvironment.BaseAddress)` ) <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType> Varsayılan olarak öğesine atanır.
 
-`FetchData`bileşen ( `Pages/FetchData.razor` ):
+`FetchData` bileşen ( `Pages/FetchData.razor` ):
 
 ```razor
 @inject WeatherForecastClient Client
@@ -352,12 +352,12 @@ if (tokenResult.TryGetToken(out var token))
 }
 ```
 
-<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.TryGetToken%2A?displayProperty=nameWithType>döndürdüğü
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenResult.TryGetToken%2A?displayProperty=nameWithType> döndürdüğü
 
-* `true`' i `token` kullanın.
-* `false`belirteç alınmadıysa.
+* `true` ' i `token` kullanın.
+* `false` belirteç alınmadıysa.
 
-## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>`HttpClient`ve `HttpRequestMessage` Fetch API isteği seçenekleriyle
+## <a name="httpclient-and-httprequestmessage-with-fetch-api-request-options"></a>`HttpClient` ve `HttpRequestMessage` Fetch API isteği seçenekleriyle
 
 Bir uygulamada WebAssembly üzerinde çalışırken Blazor WebAssembly [`HttpClient`](xref:fundamentals/http-requests) ([API belgeleri](xref:System.Net.Http.HttpClient)) ve <xref:System.Net.Http.HttpRequestMessage> istekleri özelleştirmek için kullanılabilir. Örneğin, HTTP yöntemini ve istek üst bilgilerini belirtebilirsiniz. Aşağıdaki bileşen, `POST` sunucuda Yapılacaklar LISTESI API uç noktası için bir istek yapar ve yanıt gövdesini gösterir:
 
@@ -452,7 +452,7 @@ Aşağıdaki ilke için yapılandırma içerir:
 
 * İstek kaynakları ( `http://localhost:5000` , `https://localhost:5001` ).
 * Any yöntemi (fiil).
-* `Content-Type`ve `Authorization` üst bilgiler. Özel bir üstbilgiye (örneğin,) izin vermek için `x-custom-header` , çağrılırken üstbilgiyi listeleyin <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*> .
+* `Content-Type` ve `Authorization` üst bilgiler. Özel bir üstbilgiye (örneğin,) izin vermek için `x-custom-header` , çağrılırken üstbilgiyi listeleyin <xref:Microsoft.AspNetCore.Cors.Infrastructure.CorsPolicyBuilder.WithHeaders*> .
 * İstemci tarafı JavaScript kodu tarafından ayarlanan kimlik bilgileri ( `credentials` özellik olarak ayarlanır `include` ).
 
 ```csharp
@@ -697,7 +697,7 @@ builder.Services.AddSingleton<StateContainer>();
 
 ## <a name="customize-app-routes"></a>Uygulama yollarını özelleştirme
 
-Varsayılan olarak, [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication/) kitaplık, farklı kimlik doğrulama durumlarını temsil etmek için aşağıdaki tabloda gösterilen yolları kullanır.
+Varsayılan olarak, [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) kitaplık, farklı kimlik doğrulama durumlarını temsil etmek için aşağıdaki tabloda gösterilen yolları kullanır.
 
 | Yol                            | Amaç |
 | -------------------------------- | ------- |
@@ -715,7 +715,7 @@ Yukarıdaki tabloda gösterilen rotalar aracılığıyla yapılandırılabilir <
 
 Aşağıdaki örnekte, tüm yollar ön ekine sahiptir `/security` .
 
-`Authentication`bileşen ( `Pages/Authentication.razor` ):
+`Authentication` bileşen ( `Pages/Authentication.razor` ):
 
 ```razor
 @page "/security/{action}"
@@ -757,9 +757,9 @@ Bunu seçerseniz, Kullanıcı arabirimini farklı sayfalara bölmek için izin v
 
 ## <a name="customize-the-authentication-user-interface"></a>Kimlik doğrulama kullanıcı arabirimini özelleştirme
 
-<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView>Her kimlik doğrulama durumu için varsayılan bir UI parçaları kümesi içerir. Her durum, özel olarak geçirerek özelleştirilebilir <xref:Microsoft.AspNetCore.Components.RenderFragment> . İlk oturum açma işlemi sırasında görüntülenecek metni özelleştirmek için <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> aşağıdaki gibi değiştirebilir.
+<xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> Her kimlik doğrulama durumu için varsayılan bir UI parçaları kümesi içerir. Her durum, özel olarak geçirerek özelleştirilebilir <xref:Microsoft.AspNetCore.Components.RenderFragment> . İlk oturum açma işlemi sırasında görüntülenecek metni özelleştirmek için <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteAuthenticatorView> aşağıdaki gibi değiştirebilir.
 
-`Authentication`bileşen ( `Pages/Authentication.razor` ):
+`Authentication` bileşen ( `Pages/Authentication.razor` ):
 
 ```razor
 @page "/security/{action}"

@@ -1,5 +1,5 @@
 ---
-title: IdentityASP.NET Core model özelleştirmesi
+title: Identity ASP.NET Core model özelleştirmesi
 author: ajcvickers
 description: Bu makalede, ASP.NET Core için temel Entity Framework Core veri modelinin nasıl özelleştirileceği açıklanır Identity .
 ms.author: avickers
@@ -15,20 +15,20 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/customize_identity_model
-ms.openlocfilehash: 4e6d91de013755f1ae998e36481f4c3b659270ae
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 7c325bbc96ad4a8c5e4686073266d730eb924c10
+ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022010"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88504677"
 ---
-# <a name="no-locidentity-model-customization-in-aspnet-core"></a>IdentityASP.NET Core model özelleştirmesi
+# <a name="no-locidentity-model-customization-in-aspnet-core"></a>Identity ASP.NET Core model özelleştirmesi
 
 [Arthur Vicranlar](https://github.com/ajcvickers) tarafından
 
-ASP.NET Core Identity , ASP.NET Core uygulamalarda Kullanıcı hesaplarını yönetmek ve depolamak için bir çerçeve sağlar. Identity, kimlik doğrulama mekanizması olarak **bireysel kullanıcı hesapları** seçildiğinde projenize eklenir. Varsayılan olarak, Identity Entity Framework (EF) temel veri modelini kullanır. Bu makalede, modelin nasıl özelleştirileceği açıklanır Identity .
+ASP.NET Core Identity , ASP.NET Core uygulamalarda Kullanıcı hesaplarını yönetmek ve depolamak için bir çerçeve sağlar. Identity , kimlik doğrulama mekanizması olarak **bireysel kullanıcı hesapları** seçildiğinde projenize eklenir. Varsayılan olarak, Identity Entity Framework (EF) temel veri modelini kullanır. Bu makalede, modelin nasıl özelleştirileceği açıklanır Identity .
 
-## <a name="no-locidentity-and-ef-core-migrations"></a>Identityve EF Core geçişleri
+## <a name="no-locidentity-and-ef-core-migrations"></a>Identity ve EF Core geçişleri
 
 Modeli incelemeden önce, Identity bir veritabanı oluşturmak ve güncelleştirmek için [EF Core geçişlerle](/ef/core/managing-schemas/migrations/) nasıl çalıştığını anlamak yararlı olur. En üst düzeyde, işlem şu şekilde yapılır:
 
@@ -207,7 +207,7 @@ builder.Entity<TUserRole>(b =>
 
 ### <a name="model-generic-types"></a>Model genel türleri
 
-IdentityYukarıda listelenen her varlık türü için varsayılan [ortak dil çalışma zamanı](/dotnet/standard/glossary#clr) (CLR) türlerini tanımlar. Bu türlerin öneki *Identity* :
+Identity Yukarıda listelenen her varlık türü için varsayılan [ortak dil çalışma zamanı](/dotnet/standard/glossary#clr) (CLR) türlerini tanımlar. Bu türlerin öneki *Identity* :
 
 * `IdentityUser`
 * `IdentityRole`
@@ -219,7 +219,7 @@ IdentityYukarıda listelenen her varlık türü için varsayılan [ortak dil ça
 
 Bu türleri doğrudan kullanmak yerine, türler uygulamanın kendi türleri için temel sınıflar olarak kullanılabilir. `DbContext`Tarafından tanımlanan sınıflar Identity geneldir, örneğin, modeldeki bir veya daha fazla varlık türü IÇIN farklı clr türleri kullanılabilir. Bu genel türler Ayrıca `User` birincil anahtar (PK) veri türünün değiştirilmesine izin verir.
 
-IdentityRol desteğiyle birlikte kullanıldığında bir <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> sınıf kullanılmalıdır. Örnek:
+IdentityRol desteğiyle birlikte kullanıldığında bir <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> sınıf kullanılmalıdır. Örneğin:
 
 ```csharp
 // Uses all the built-in Identity types
@@ -367,8 +367,8 @@ services.AddIdentity<ApplicationUser>()
 
 ASP.NET Core 2,1 veya sonraki sürümlerde Identity bir sınıf kitaplığı olarak sağlanır Razor . Daha fazla bilgi için bkz. <xref:security/authentication/scaffold-identity>. Sonuç olarak, yukarıdaki kod için bir çağrısı gerektirir <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> . IdentityProjeye dosya eklemek için desteği kullanılmışsa Identity , çağrısını kaldırın `AddDefaultUI` . Daha fazla bilgi için bkz.
 
-* [İskeleIdentity](xref:security/authentication/scaffold-identity)
-* [İçin özel kullanıcı verisi ekleme, indirme ve silmeIdentity](xref:security/authentication/add-user-data)
+* [İskele Identity](xref:security/authentication/scaffold-identity)
+* [İçin özel kullanıcı verisi ekleme, indirme ve silme Identity](xref:security/authentication/add-user-data)
 
 ### <a name="change-the-primary-key-type"></a>Birincil anahtar türünü değiştirme
 
@@ -403,7 +403,7 @@ PK türünü değiştirmek için şu adımları izleyin:
 
     ::: moniker-end
 
-    `Startup.ConfigureServices`Genel kullanıcıyı kullanacak şekilde güncelleştirilmeleri gerekir:
+    `Startup.ConfigureServices` Genel kullanıcıyı kullanacak şekilde güncelleştirilmeleri gerekir:
 
     ::: moniker range=">= aspnetcore-2.1"
 
@@ -434,7 +434,7 @@ PK türünü değiştirmek için şu adımları izleyin:
 
     ::: moniker-end
 
-4. Özel bir `ApplicationUser` sınıf kullanılıyorsa, öğesinden devralacak olan sınıfı güncelleştirin `IdentityUser` . Örnek:
+4. Özel bir `ApplicationUser` sınıf kullanılıyorsa, öğesinden devralacak olan sınıfı güncelleştirin `IdentityUser` . Örneğin:
 
     ::: moniker range="<= aspnetcore-1.1"
 
@@ -502,7 +502,7 @@ PK türünü değiştirmek için şu adımları izleyin:
 
     ::: moniker-end
 
-5. Özel bir `ApplicationRole` sınıf kullanılıyorsa, öğesinden devralacak olan sınıfı güncelleştirin `IdentityRole<TKey>` . Örnek:
+5. Özel bir `ApplicationRole` sınıf kullanılıyorsa, öğesinden devralacak olan sınıfı güncelleştirin `IdentityRole<TKey>` . Örneğin:
 
     [!code-csharp[](customize-identity-model/samples/2.1/RazorPagesSampleApp/Data/ApplicationRole.cs?name=snippet_ApplicationRole&highlight=4)]
 
@@ -561,7 +561,7 @@ builder.Entity<TUser>(b =>
 });
 ```
 
-Bu ilişki için FK özellik olarak belirtilir `UserClaim.UserId` . `HasMany`ve, ' ın `WithOne` Gezinti özellikleri olmadan ilişki oluşturmak için bağımsız değişken olmadan çağırılır.
+Bu ilişki için FK özellik olarak belirtilir `UserClaim.UserId` . `HasMany` ve, ' ın `WithOne` Gezinti özellikleri olmadan ilişki oluşturmak için bağımsız değişken olmadan çağırılır.
 
 `ApplicationUser`Kullanıcıdan ilişkili olmasına izin veren bir gezinti özelliği ekleyin `UserClaims` :
 
@@ -744,8 +744,8 @@ public class ApplicationDbContext
 Notlar:
 
 * Bu örnek ayrıca `UserRole` , kullanıcılardan rollere kadar çoktan çoğa ilişkiye gitmek için gereken JOIN varlığını içerir.
-* Gezinti özelliklerinin türlerini, türlerin türler yerine kullanılmakta olduğunu yansıtacak şekilde değiştirmeyi unutmayın `ApplicationXxx` `IdentityXxx` .
-* Öğesini `ApplicationXxx` genel tanımda kullanmayı unutmayın `ApplicationContext` .
+* Gezinti özelliklerinin türlerini, türlerin türler yerine kullanılmakta olduğunu yansıtacak şekilde değiştirmeyi unutmayın `Application{...}` `Identity{...}` .
+* Öğesini `Application{...}` genel tanımda kullanmayı unutmayın `ApplicationContext` .
 
 ### <a name="add-all-navigation-properties"></a>Tüm gezinti özelliklerini Ekle
 
@@ -951,7 +951,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 ### <a name="map-to-a-different-schema"></a>Farklı bir şemaya eşleme
 
-Şemalar, veritabanı sağlayıcıları genelinde farklı davranabilir. SQL Server için varsayılan, *dbo* şemasında tüm tabloları oluşturmaktır. Tablolar farklı bir şemada oluşturulabilir. Örnek:
+Şemalar, veritabanı sağlayıcıları genelinde farklı davranabilir. SQL Server için varsayılan, *dbo* şemasında tüm tabloları oluşturmaktır. Tablolar farklı bir şemada oluşturulabilir. Örneğin:
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)

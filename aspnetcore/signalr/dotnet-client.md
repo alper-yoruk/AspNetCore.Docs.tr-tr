@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/dotnet-client
-ms.openlocfilehash: a03598f887d628c8a2b6720d99826d4aef4e52fa
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e27748e8267a931390f831119a3fd1d45e87745a
+ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020008"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88504742"
 ---
 # <a name="aspnet-core-no-locsignalr-net-client"></a>ASP.NET Core SignalR .NET istemcisi
 
@@ -110,7 +110,7 @@ connection.Reconnected += connectionId =>
 };
 ```
 
-`WithAutomaticReconnect()`, `HubConnection` ilk başlatma başarısızlıklarını yeniden denemek üzere yapılandırmaz, bu nedenle başlatma hatalarının el ile işlenmesi gerekir:
+`WithAutomaticReconnect()` , `HubConnection` ilk başlatma başarısızlıklarını yeniden denemek üzere yapılandırmaz, bu nedenle başlatma hatalarının el ile işlenmesi gerekir:
 
 ```csharp
 public static async Task<bool> ConnectWithRetryAsync(HubConnection connection, CancellationToken token)
@@ -172,9 +172,9 @@ Yukarıdaki örnek, `HubConnection` bağlantı kaybolduktan hemen sonra yeniden 
 
 Otomatik yeniden bağlanma girişimlerinin zamanlaması ve sayısı üzerinde daha fazla denetime sahip olmak isterseniz, `WithAutomaticReconnect` `IRetryPolicy` adlı tek bir yöntemine sahip olan arabirimini uygulayan nesneyi kabul eder `NextRetryDelay` .
 
-`NextRetryDelay`türünde tek bir bağımsız değişken alır `RetryContext` . ,, `RetryContext` Ve sırasıyla bir olan üç özelliğe sahiptir: `PreviousRetryCount` `ElapsedTime` ve `RetryReason` `long` `TimeSpan` `Exception` . İlk yeniden bağlanma denemesinden önce, `PreviousRetryCount` ve `ElapsedTime` sıfır olur ve `RetryReason` bağlantının kaybolmasına neden olan özel durum olacaktır. Her başarısız yeniden deneme denemesinden sonra, `PreviousRetryCount` Bu, `ElapsedTime` şimdiye kadar bir süre sonra yeniden bağlanılan süreyi yansıtacak şekilde güncelleştirilir ve `RetryReason` son yeniden bağlanma denemesinin başarısız olmasına neden olan özel durum olacaktır.
+`NextRetryDelay` türünde tek bir bağımsız değişken alır `RetryContext` . ,, `RetryContext` Ve sırasıyla bir olan üç özelliğe sahiptir: `PreviousRetryCount` `ElapsedTime` ve `RetryReason` `long` `TimeSpan` `Exception` . İlk yeniden bağlanma denemesinden önce, `PreviousRetryCount` ve `ElapsedTime` sıfır olur ve `RetryReason` bağlantının kaybolmasına neden olan özel durum olacaktır. Her başarısız yeniden deneme denemesinden sonra, `PreviousRetryCount` Bu, `ElapsedTime` şimdiye kadar bir süre sonra yeniden bağlanılan süreyi yansıtacak şekilde güncelleştirilir ve `RetryReason` son yeniden bağlanma denemesinin başarısız olmasına neden olan özel durum olacaktır.
 
-`NextRetryDelay`bir sonraki yeniden bağlanma girişiminden önce beklenecek süreyi temsil eden bir TimeSpan değeri veya bunun yeniden `null` `HubConnection` bağlanması durdurulmalıdır.
+`NextRetryDelay` bir sonraki yeniden bağlanma girişiminden önce beklenecek süreyi temsil eden bir TimeSpan değeri veya bunun yeniden `null` `HubConnection` bağlanması durdurulmalıdır.
 
 ```csharp
 public class RandomRetryPolicy : IRetryPolicy
@@ -237,7 +237,7 @@ Zaman uyumsuz desteğin ana nedeni, bağlantıyı yeniden başlatabilmeniz için
 
 ## <a name="call-hub-methods-from-client"></a>İstemciden çağrı merkezi yöntemleri
 
-`InvokeAsync`Hub 'daki yöntemleri çağırır. Hub yöntemi adını ve hub metodunda tanımlanan tüm bağımsız değişkenleri öğesine geçirin `InvokeAsync` . SignalRzaman uyumsuzdur, bu nedenle `async` `await` çağrıları yaparken ve kullanın.
+`InvokeAsync` Hub 'daki yöntemleri çağırır. Hub yöntemi adını ve hub metodunda tanımlanan tüm bağımsız değişkenleri öğesine geçirin `InvokeAsync` . SignalR zaman uyumsuzdur, bu nedenle `async` `await` çağrıları yaparken ve kullanın.
 
 [!code-csharp[InvokeAsync method](dotnet-client/sample/signalrchatclient/MainWindow.xaml.cs?name=snippet_InvokeAsync)]
 
@@ -246,7 +246,7 @@ Zaman uyumsuz desteğin ana nedeni, bağlantıyı yeniden başlatabilmeniz için
 `SendAsync`Yöntemi, `Task` ileti sunucuya gönderildiğinde tamamlanmış bir döndürür. Bu `Task` , sunucu yöntemi tamamlanana kadar beklemediğinden hiçbir dönüş değeri sağlanmaz. İletiyi gönderirken istemcide oluşturulan özel durumlar hatalı bir şekilde oluşur `Task` . `await` `try...catch` Gönderme hatalarını işlemek için ve sözdizimini kullanın.
 
 > [!NOTE]
-> Azure SignalR hizmeti 'Ni *sunucusuz modda*kullanıyorsanız, bir istemciden hub yöntemleri çağrılamaz. Daha fazla bilgi için bkz. [ SignalR hizmet belgeleri](/azure/azure-signalr/signalr-concept-serverless-development-config).
+> Hub yöntemlerinin bir istemciden çağrılması yalnızca Azure SignalR hizmeti *varsayılan* modda kullanılırken desteklenir. Daha fazla bilgi için bkz. [sık sorulan sorular (Azure-SignalR GitHub deposu)](https://github.com/Azure/azure-signalr/blob/dev/docs/faq.md#what-is-the-meaning-of-service-mode-defaultserverlessclassic-how-can-i-choose).
 
 ## <a name="call-client-methods-from-hub"></a>Hub 'dan istemci yöntemlerini çağır
 
@@ -266,7 +266,7 @@ Try-catch ifadesiyle hataları işleyin. `Exception`Bir hata oluştuktan sonra g
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [Hub'lar](xref:signalr/hubs)
+* [Merkezler](xref:signalr/hubs)
 * [JavaScript istemcisi](xref:signalr/javascript-client)
 * [Azure’da Yayımlama](xref:signalr/publish-to-azure-web-app)
 * [Azure SignalR hizmeti sunucusuz belgeler](/azure/azure-signalr/signalr-concept-serverless-development-config)

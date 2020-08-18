@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/error-handling
-ms.openlocfilehash: 2e6aabda449a24496916c6ea9fcbd38062b54c04
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ba44479707f526d5aeb1e8d74ced4f0b4996d915
+ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017460"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88504755"
 ---
 # <a name="handle-errors-in-aspnet-core"></a>ASP.NET Core hataları işleme
 
@@ -34,7 +34,7 @@ Bu makalede ASP.NET Core Web Apps 'teki hataları işlemeye yönelik yaygın yak
 
 ## <a name="developer-exception-page"></a>Geliştirici özel durum sayfası
 
-*Geliştirici özel durum sayfası* , istek özel durumları hakkında ayrıntılı bilgileri görüntüler. Sayfa, [Microsoft. aspnetcore. app metapackage](xref:fundamentals/metapackage-app)içindeki [Microsoft. Aspnetcore. Diagnostics](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics/) paketi tarafından kullanılabilir hale getirilir. `Startup.Configure`Uygulama geliştirme [ortamında](xref:fundamentals/environments)çalışırken sayfayı etkinleştirmek için yöntemine kod ekleyin:
+*Geliştirici özel durum sayfası* , istek özel durumları hakkında ayrıntılı bilgileri görüntüler. Sayfa, `Microsoft.AspNetCore.Diagnostics` [ `Microsoft.AspNetCore.App` paylaşılan çerçevede](xref:fundamentals/metapackage-app)bulunan bütünleştirilmiş kod tarafından kullanılabilir hale getirilir. `Startup.Configure`Uygulama geliştirme [ortamında](xref:fundamentals/environments)çalışırken sayfayı etkinleştirmek için yöntemine kod ekleyin:
 
 [!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_DevPageAndHandlerPage&highlight=1-4)]
 
