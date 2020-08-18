@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core bir Web API 'SI çağırmaBlazor WebAssembly
+title: ASP.NET Core bir Web API 'SI çağırma Blazor WebAssembly
 author: guardrex
 description: Blazor WebAssemblyÇıkış noktaları arası kaynak paylaşımı (CORS) istekleri yapma dahil olmak üzere JSON yardımcıları kullanarak bir Web API 'sini nasıl çağıracağınızı öğrenin.
 monikerRange: '>= aspnetcore-3.1'
@@ -17,21 +17,21 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-web-api
-ms.openlocfilehash: ef31d3d9b3914f3c86aa397ff214778fe295964b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: f8c105624506d13f3ea8e963ceb49aeaf6d22a66
+ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012598"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88504573"
 ---
-# <a name="call-a-web-api-from-aspnet-core-no-locblazor"></a>ASP.NET Core bir Web API 'SI çağırmaBlazor
+# <a name="call-a-web-api-from-aspnet-core-no-locblazor"></a>ASP.NET Core bir Web API 'SI çağırma Blazor
 
 [Luke Latham](https://github.com/guardrex), [Daniel Roth](https://github.com/danroth27)ve [Juan de la Cruz](https://github.com/juandelacruz23) tarafından
 
 > [!NOTE]
-> Bu konu için geçerlidir Blazor WebAssembly . [Blazor Server](xref:blazor/hosting-models#blazor-server)uygulamalar <xref:System.Net.Http.HttpClient> , genellikle kullanılarak oluşturulan örnekleri kullanarak Web API 'lerini çağırır <xref:System.Net.Http.IHttpClientFactory> . İçin geçerli olan rehberlik için Blazor Server bkz <xref:fundamentals/http-requests> ..
+> Bu konu için geçerlidir Blazor WebAssembly . [Blazor Server](xref:blazor/hosting-models#blazor-server) uygulamalar <xref:System.Net.Http.HttpClient> , genellikle kullanılarak oluşturulan örnekleri kullanarak Web API 'lerini çağırır <xref:System.Net.Http.IHttpClientFactory> . İçin geçerli olan rehberlik için Blazor Server bkz <xref:fundamentals/http-requests> ..
 
-[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly)uygulamalar önceden yapılandırılmış bir hizmeti kullanarak Web API 'Lerini çağırır <xref:System.Net.Http.HttpClient> . JSON yardımcıları veya ile birlikte JavaScript [getirme API 'si](https://developer.mozilla.org/docs/Web/API/Fetch_API) seçenekleri içerebilen oluşturma istekleri Blazor <xref:System.Net.Http.HttpRequestMessage> . <xref:System.Net.Http.HttpClient>Uygulamalardaki hizmet, Blazor WebAssembly isteklerin kaynak sunucusuna geri getirilmesi üzerine odaklanır. Bu konudaki kılavuz yalnızca uygulamalar için geçerlidir Blazor WebAssembly .
+[Blazor WebAssembly](xref:blazor/hosting-models#blazor-webassembly) uygulamalar önceden yapılandırılmış bir hizmeti kullanarak Web API 'Lerini çağırır <xref:System.Net.Http.HttpClient> . JSON yardımcıları veya ile birlikte JavaScript [getirme API 'si](https://developer.mozilla.org/docs/Web/API/Fetch_API) seçenekleri içerebilen oluşturma istekleri Blazor <xref:System.Net.Http.HttpRequestMessage> . <xref:System.Net.Http.HttpClient>Uygulamalardaki hizmet, Blazor WebAssembly isteklerin kaynak sunucusuna geri getirilmesi üzerine odaklanır. Bu konudaki kılavuz yalnızca uygulamalar için geçerlidir Blazor WebAssembly .
 
 [Örnek kodu görüntüle veya indir](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([nasıl indirilir](xref:index#how-to-download-a-sample)): `BlazorWebAssemblySample` uygulamayı seçin.
 
@@ -42,7 +42,7 @@ ms.locfileid: "88012598"
 
 ## <a name="packages"></a>Paketler
 
-[`System.Net.Http.Json`](https://www.nuget.org/packages/System.Net.Http.Json/)Proje dosyasındaki NuGet paketine başvurun.
+[`System.Net.Http.Json`](https://www.nuget.org/packages/System.Net.Http.Json)Proje dosyasındaki NuGet paketine başvurun.
 
 ## <a name="add-the-httpclient-service"></a>HttpClient hizmetini ekleme
 
@@ -62,7 +62,7 @@ Bir Blazor WebAssembly uygulamada, [`HttpClient`](xref:fundamentals/http-request
 
 Bir Blazor Server uygulama <xref:System.Net.Http.HttpClient> Varsayılan olarak bir hizmet içermez. <xref:System.Net.Http.HttpClient> [ `HttpClient` Fabrika altyapısını](xref:fundamentals/http-requests)kullanarak uygulamaya bir uygulama sağlayın.
 
-<xref:System.Net.Http.HttpClient>ve JSON yardımcıları, üçüncü taraf Web API uç noktalarını çağırmak için de kullanılır. <xref:System.Net.Http.HttpClient>, tarayıcı [getirme API 'si](https://developer.mozilla.org/docs/Web/API/Fetch_API) kullanılarak uygulanır ve aynı kaynak ilkesini zorlama dahil olmak üzere sınırlamalarına tabidir.
+<xref:System.Net.Http.HttpClient> ve JSON yardımcıları, üçüncü taraf Web API uç noktalarını çağırmak için de kullanılır. <xref:System.Net.Http.HttpClient> , tarayıcı [getirme API 'si](https://developer.mozilla.org/docs/Web/API/Fetch_API) kullanılarak uygulanır ve aynı kaynak ilkesini zorlama dahil olmak üzere sınırlamalarına tabidir.
 
 İstemcinin temel adresi, kaynak sunucunun adresine ayarlanır. <xref:System.Net.Http.HttpClient>Yönergesini kullanarak bir örnek ekleme [`@inject`](xref:mvc/views/razor#inject) :
 
@@ -163,7 +163,7 @@ JSON yardımcı yöntemleri bir URI 'ye (aşağıdaki örneklerde bir Web API 's
   var content = response.Content.ReadFromJsonAsync<WeatherForecast>();
   ```
 
-<xref:System.Net.Http>HTTP istekleri göndermeye ve HTTP yanıtlarını almaya yönelik ek uzantı yöntemleri içerir. <xref:System.Net.Http.HttpClient.DeleteAsync%2A?displayProperty=nameWithType>bir Web API 'sine HTTP DELETE isteği göndermek için kullanılır.
+<xref:System.Net.Http> HTTP istekleri göndermeye ve HTTP yanıtlarını almaya yönelik ek uzantı yöntemleri içerir. <xref:System.Net.Http.HttpClient.DeleteAsync%2A?displayProperty=nameWithType> bir Web API 'sine HTTP DELETE isteği göndermek için kullanılır.
 
 Aşağıdaki kodda, Delete `<button>` öğesi `DeleteItem` yöntemini çağırır. Bağlantılı `<input>` öğe, `id` Silinecek öğenin bir listesini sağlar. Örnek uygulamaya bkz. örnek uygulama.
 
@@ -184,9 +184,9 @@ Aşağıdaki kodda, Delete `<button>` öğesi `DeleteItem` yöntemini çağırı
 
 ## <a name="named-httpclient-with-ihttpclientfactory"></a>Ihttpclientfactory ile adlandırılmış HttpClient
 
-<xref:System.Net.Http.IHttpClientFactory>Hizmetler ve bir adlandırılmış yapılandırma <xref:System.Net.Http.HttpClient> desteklenir.
+<xref:System.Net.Http.IHttpClientFactory> Hizmetler ve bir adlandırılmış yapılandırma <xref:System.Net.Http.HttpClient> desteklenir.
 
-[`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http/)Proje dosyasındaki NuGet paketine başvurun.
+[`Microsoft.Extensions.Http`](https://www.nuget.org/packages/Microsoft.Extensions.Http)Proje dosyasındaki NuGet paketine başvurun.
 
 `Program.Main` (`Program.cs`):
 
@@ -195,7 +195,7 @@ builder.Services.AddHttpClient("ServerAPI", client =>
     client.BaseAddress = new Uri(builder.HostEnvironment.BaseAddress));
 ```
 
-`FetchData`bileşen ( `Pages/FetchData.razor` ):
+`FetchData` bileşen ( `Pages/FetchData.razor` ):
 
 ```razor
 @inject IHttpClientFactory ClientFactory
@@ -263,7 +263,7 @@ builder.Services.AddHttpClient<WeatherForecastClient>(client =>
 
 Bileşenler, <xref:System.Net.Http.HttpClient> Web API 'sini çağırmak için türü ekler.
 
-`FetchData`bileşen ( `Pages/FetchData.razor` ):
+`FetchData` bileşen ( `Pages/FetchData.razor` ):
 
 ```razor
 @inject WeatherForecastClient Client

@@ -17,19 +17,19 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/configuration
-ms.openlocfilehash: 437e7be6b805ad836df60e831f5e0dc0bda4f5a5
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 159b6da106ab21946ae02a970a28e1f0309acf6c
+ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014457"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88504586"
 ---
 # <a name="aspnet-core-no-locblazor-configuration"></a>ASP.NET Core Blazor yapılandırması
 
 > [!NOTE]
 > Bu konu için geçerlidir Blazor WebAssembly . ASP.NET Core uygulama yapılandırması hakkında genel yönergeler için bkz <xref:fundamentals/configuration/index> ..
 
-Blazor WebAssemblyyapılandırma ayarlarını varsayılan olarak uygulama ayarları dosyalarından yükler:
+Blazor WebAssembly yapılandırma ayarlarını varsayılan olarak uygulama ayarları dosyalarından yükler:
 
 * `wwwroot/appsettings.json`
 * `wwwroot/appsettings.{ENVIRONMENT}.json`
@@ -200,11 +200,13 @@ builder.Services.AddOidcAuthentication(options =>
 
 ## <a name="logging-configuration"></a>Günlüğe kaydetme yapılandırması
 
-İçin bir paket başvurusu ekleyin [`Microsoft.Extensions.Logging.Configuration`](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration/) :
+İçin bir paket başvurusu ekleyin [`Microsoft.Extensions.Logging.Configuration`](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration) :
 
 ```xml
 <PackageReference Include="Microsoft.Extensions.Logging.Configuration" Version="{VERSION}" />
 ```
+
+Yer tutucu için `{VERSION}` , uygulamanın paylaşılan Framework sürümüyle eşleşen en son kararlı sürümü paketin [NuGet.org](https://www.nuget.org/packages/Microsoft.Extensions.Logging.Configuration)adresindeki **sürüm geçmişinde** bulunabilir.
 
 `wwwroot/appsettings.json`:
 

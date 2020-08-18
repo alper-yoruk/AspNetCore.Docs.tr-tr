@@ -5,7 +5,7 @@ description: Uygulamalarda hata ayıklamayı öğrenin Blazor .
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/14/2020
+ms.date: 08/17/2020
 no-loc:
 - cookie
 - Cookie
@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 7b5dac5c634ae3eef180ef2c7c7287da94342169
-ms.sourcegitcommit: 4df445e7d49a99f81625430f728c28e5d6bf2107
+ms.openlocfilehash: ac649b80a6cb1106de8acbb4764b53017afaa238
+ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/15/2020
-ms.locfileid: "88253583"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88504599"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Hata ayıklama ASP.NET Core Blazor WebAssembly
 
@@ -42,11 +42,11 @@ Kullanılabilir senaryolar şunlardır:
 Şimdilik şunları *yapamazsınız*:
 
 * İşlenmemiş özel durumların üzerine bölün.
-* Uygulamanın başlatılması sırasında isabet kesme noktaları.
+* Hata ayıklama proxy 'si çalışmadan önce uygulama başlatılırken kesme noktaları isabet edin. Bu, `Program.Main` ( `Program.cs` ) ve uygulamadan istenen ilk sayfa tarafından yüklenen bileşen [ `OnInitialized{Async}` yöntemlerinde](xref:blazor/components/lifecycle#component-initialization-methods) kesme noktaları içerir.
 
 Yaklaşan sürümlerde hata ayıklama deneyimini iyileştirmeye devam edeceğiz.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 Hata ayıklama aşağıdaki tarayıcılardan birini gerektirir:
 

@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: d2ebb5d3c3a1c3629a5bf563aecfd6fc147715d6
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 7d6745d616242a54dd2424a3a291b8c9039ec789
+ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014028"
+ms.lasthandoff: 08/18/2020
+ms.locfileid: "88504534"
 ---
 # <a name="aspnet-core-no-locblazor-authentication-and-authorization"></a>ASP.NET Core Blazor kimlik doğrulaması ve yetkilendirme
 
@@ -35,33 +35,33 @@ Güvenlik senaryoları ve uygulamalar arasında farklılık gösterir Blazor Ser
 * Kullanıcıya sunulan kullanıcı ARABIRIMI seçenekleri (örneğin, bir kullanıcı için hangi menü girişlerinin kullanılabildiği).
 * Uygulama ve bileşenlerin bölgeleri için erişim kuralları.
 
-Blazor WebAssemblyuygulamalar istemcide çalışır. Yetkilendirme *yalnızca* hangi kullanıcı arabirimi seçeneklerinin gösterileceğini belirlemede kullanılır. İstemci tarafı denetimleri bir kullanıcı tarafından değiştirililerek veya atlandığından, bir Blazor WebAssembly uygulama yetkilendirme erişim kurallarını zorunlu kılamaz.
+Blazor WebAssembly uygulamalar istemcide çalışır. Yetkilendirme *yalnızca* hangi kullanıcı arabirimi seçeneklerinin gösterileceğini belirlemede kullanılır. İstemci tarafı denetimleri bir kullanıcı tarafından değiştirililerek veya atlandığından, bir Blazor WebAssembly uygulama yetkilendirme erişim kurallarını zorunlu kılamaz.
 
 [ Razor Sayfalar yetkilendirme kuralları](xref:security/authorization/razor-pages-authorization) yönlendirilebilir Razor bileşenlere uygulanmaz. Bir sayfada yönlendirilemeyen bir Razor bileşen [gömüliyorsa](xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps#render-components-from-a-page-or-view), sayfanın yetkilendirme kuralları, Razor sayfanın geri kalanı ile birlikte, bileşeni dolaylı olarak etkiler.
 
 > [!NOTE]
-> <xref:Microsoft.AspNetCore.Identity.SignInManager%601>ve <xref:Microsoft.AspNetCore.Identity.UserManager%601> Razor bileşenlerde desteklenmez.
+> <xref:Microsoft.AspNetCore.Identity.SignInManager%601> ve <xref:Microsoft.AspNetCore.Identity.UserManager%601> Razor bileşenlerde desteklenmez.
 
 ## <a name="authentication"></a>Kimlik Doğrulaması
 
-Blazor, kullanıcının kimliğini kurmak için mevcut ASP.NET Core kimlik doğrulama mekanizmalarını kullanır. Tam mekanizma, Blazor uygulamanın nasıl barındırıldığını Blazor WebAssembly veya Blazor Server .
+Blazor , kullanıcının kimliğini kurmak için mevcut ASP.NET Core kimlik doğrulama mekanizmalarını kullanır. Tam mekanizma, Blazor uygulamanın nasıl barındırıldığını Blazor WebAssembly veya Blazor Server .
 
-### <a name="no-locblazor-webassembly-authentication"></a>Blazor WebAssemblyyetkilendirmesi
+### <a name="no-locblazor-webassembly-authentication"></a>Blazor WebAssembly yetkilendirmesi
 
 Blazor WebAssemblyUygulamalarda, tüm istemci tarafı kodlar kullanıcılar tarafından değiştirilemediği için, kimlik doğrulama denetimleri atlanabilir. Aynı, JavaScript SPA çerçeveleri veya herhangi bir işletim sistemi için yerel uygulamalar dahil olmak üzere tüm istemci tarafı uygulama teknolojileri için de geçerlidir.
 
 Aşağıdakileri ekleyin:
 
-* Uygulamanın proje dosyasına yönelik bir paket başvurusu [`Microsoft.AspNetCore.Components.Authorization`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.Authorization/) .
+* Uygulamanın proje dosyasına yönelik bir paket başvurusu [`Microsoft.AspNetCore.Components.Authorization`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.Authorization) .
 * `Microsoft.AspNetCore.Components.Authorization`Uygulama dosyasının ad alanı `_Imports.razor` .
 
 Kimlik doğrulamasını işlemek için, yerleşik veya özel bir <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> hizmetin kullanımı aşağıdaki bölümlerde ele alınmıştır.
 
 Uygulama ve yapılandırma oluşturma hakkında daha fazla bilgi için bkz <xref:blazor/security/webassembly/index> ..
 
-### <a name="no-locblazor-server-authentication"></a>Blazor Serveryetkilendirmesi
+### <a name="no-locblazor-server-authentication"></a>Blazor Server yetkilendirmesi
 
-Blazor Serveruygulamalar kullanılarak oluşturulan gerçek zamanlı bir bağlantı üzerinden çalışır SignalR . Bağlantı kurulurken [kimlik doğrulaması SignalR tabanlı uygulamalar](xref:signalr/authn-and-authz) işlenir. Kimlik doğrulaması bir cookie veya başka bir taşıyıcı belirtecini temel alabilir.
+Blazor Server uygulamalar kullanılarak oluşturulan gerçek zamanlı bir bağlantı üzerinden çalışır SignalR . Bağlantı kurulurken [kimlik doğrulaması SignalR tabanlı uygulamalar](xref:signalr/authn-and-authz) işlenir. Kimlik doğrulaması bir cookie veya başka bir taşıyıcı belirtecini temel alabilir.
 
 <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider>Uygulamalar için yerleşik hizmet, Blazor Server ASP.NET Core 'dan kimlik doğrulama durumu verilerini alır `HttpContext.User` . Kimlik doğrulama durumu, mevcut ASP.NET Core kimlik doğrulama mekanizmalarıyla tümleştirilir.
 
@@ -69,7 +69,7 @@ Uygulama ve yapılandırma oluşturma hakkında daha fazla bilgi için bkz <xref
 
 ## <a name="authenticationstateprovider-service"></a>AuthenticationStateProvider hizmeti
 
-<xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider>, <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> bileşen ve <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState> bileşen tarafından kimlik doğrulama durumunu almak için kullanılan temel hizmettir.
+<xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> , <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> bileşen ve <xref:Microsoft.AspNetCore.Components.Authorization.CascadingAuthenticationState> bileşen tarafından kimlik doğrulama durumunu almak için kullanılan temel hizmettir.
 
 Genellikle doğrudan kullanmazsınız <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> . [ `AuthorizeView` ](#authorizeview-component) [`Task<AuthenticationState>`](#expose-the-authentication-state-as-a-cascading-parameter) Bu makalenin ilerleyen kısımlarında açıklanan bileşeni veya yaklaşımları kullanın. Doğrudan kullanmanın ana dezavantajı, <xref:Microsoft.AspNetCore.Components.Authorization.AuthenticationStateProvider> temeldeki kimlik doğrulama durumu verileri değişirse bileşen tarafından otomatik olarak bildirilmemektedir.
 
@@ -320,7 +320,7 @@ Ne <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Roles> de <
 
 ### <a name="content-displayed-during-asynchronous-authentication"></a>Zaman uyumsuz kimlik doğrulaması sırasında görünen içerik
 
-Blazorkimlik doğrulaması durumunun *zaman uyumsuz*olarak belirlenmesine izin verir. Bu yaklaşım için birincil senaryo, Blazor WebAssembly kimlik doğrulaması için bir dış uç noktaya istek yapan uygulamalarda yer alan uygulamalardır.
+Blazor kimlik doğrulaması durumunun *zaman uyumsuz*olarak belirlenmesine izin verir. Bu yaklaşım için birincil senaryo, Blazor WebAssembly kimlik doğrulaması için bir dış uç noktaya istek yapan uygulamalarda yer alan uygulamalardır.
 
 Kimlik doğrulama devam ederken, <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> Varsayılan olarak içerik görüntülemez. Kimlik doğrulama sırasında içeriği göstermek için `<Authorizing>` etiketini kullanın:
 
@@ -337,7 +337,7 @@ Kimlik doğrulama devam ederken, <xref:Microsoft.AspNetCore.Components.Authoriza
 </AuthorizeView>
 ```
 
-Bu yaklaşım normalde uygulamalar için geçerli değildir Blazor Server . Blazor Serveruygulamalar, durum belirlenir oluşturmaz kimlik doğrulama durumunu bilir. <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.Authorizing>içerik bir uygulamanın bileşeni içinde bulunabilir Blazor Server <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> , ancak içerik hiçbir şekilde gösterilmez.
+Bu yaklaşım normalde uygulamalar için geçerli değildir Blazor Server . Blazor Server uygulamalar, durum belirlenir oluşturmaz kimlik doğrulama durumunu bilir. <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeViewCore.Authorizing> içerik bir uygulamanın bileşeni içinde bulunabilir Blazor Server <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> , ancak içerik hiçbir şekilde gösterilmez.
 
 ## <a name="authorize-attribute"></a>[Yetkilendir] özniteliği
 
@@ -477,9 +477,9 @@ Uygulama, yordamsal mantığın bir parçası olarak yetkilendirme kurallarını
 
 Yaygın hatalar:
 
-* **Yetkilendirme, türünde basamaklı bir parametre gerektirir `Task\<AuthenticationState>` . `CascadingAuthenticationState`Bunu sağlamak için kullanmayı düşünün.**
+* **Yetkilendirme, türünde basamaklı bir parametre gerektirir `Task\<AuthenticationState>` . `CascadingAuthenticationState` Bunu sağlamak için kullanmayı düşünün.**
 
-* **`null`için değer alındı`authenticationStateTask`**
+* **`null` için değer alındı `authenticationStateTask`**
 
 Projenin kimlik doğrulaması etkin bir şablon kullanılarak oluşturulmamış olması olasıdır Blazor Server . `<CascadingAuthenticationState>`Kullanıcı arabirimi ağacının bir bölümünü (örneğin, `App` bileşen () içinde aşağıdaki gibi sarmalayın `App.razor` :
 
