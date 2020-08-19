@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.0'
 ms.author: scaddie
 ms.date: 06/12/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/th-components
-ms.openlocfilehash: 736288b6e7d2e9be7f23f6df02183a813951eb56
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: d3bae9cd5b4a5c7315c795229c7eafbf1e44e22d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014730"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627591"
 ---
 # <a name="tag-helper-components-in-aspnet-core"></a>ASP.NET Core içindeki etiket Yardımcısı bileşenleri
 
@@ -50,11 +51,11 @@ HTML öğesinin içinde `<head>` , CSS dosyaları genellıkle HTML öğesiyle i�
 
 Yukarıdaki kodda:
 
-* `AddressStyleTagHelperComponent`uygular <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent> . Soyutlama:
+* `AddressStyleTagHelperComponent` uygular <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent> . Soyutlama:
   * İle sınıfının başlatılmasına izin verir <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext> .
   * HTML öğeleri eklemek veya değiştirmek için etiket Yardımcısı bileşenlerinin kullanılmasını sağlar.
-* <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent.Order*>Özelliği, bileşenlerin işlendiği sırayı tanımlar. `Order`bir uygulamada etiket Yardımcısı bileşenlerinin birden çok kullanımı olduğunda gereklidir.
-* <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent.ProcessAsync*>yürütme bağlamının <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext.TagName*> özellik değerini olarak karşılaştırır `head` . Karşılaştırma true olarak değerlendirilirse, `_style` alanın IÇERIĞI HTML `<head>` öğesine eklenir.
+* <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent.Order*>Özelliği, bileşenlerin işlendiği sırayı tanımlar. `Order` bir uygulamada etiket Yardımcısı bileşenlerinin birden çok kullanımı olduğunda gereklidir.
+* <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperComponent.ProcessAsync*> yürütme bağlamının <xref:Microsoft.AspNetCore.Razor.TagHelpers.TagHelperContext.TagName*> özellik değerini olarak karşılaştırır `head` . Karşılaştırma true olarak değerlendirilirse, `_style` alanın IÇERIĞI HTML `<head>` öğesine eklenir.
 
 ### <a name="inject-into-html-body-element"></a>HTML Body öğesine Ekle
 
@@ -86,7 +87,7 @@ Etiket Yardımcısı bileşen sınıfı ile yönetilmemişse <xref:Microsoft.Asp
 
 Etiket Yardımcısı bileşeni, DI ile kayıtlı değilse, bir Razor Sayfalar sayfasından veya BIR MVC görünümünden kayıt olabilir. Bu teknik, eklenen işaretlemeyi ve bileşen yürütme sırasını bir dosyadan denetlemek için kullanılır Razor .
 
-`ITagHelperComponentManager`Etiket Yardımcısı bileşenleri eklemek veya uygulamadan kaldırmak için kullanılır. Aşağıdaki kod bu tekniği ile göstermektedir `AddressTagHelperComponent` :
+`ITagHelperComponentManager` Etiket Yardımcısı bileşenleri eklemek veya uygulamadan kaldırmak için kullanılır. Aşağıdaki kod bu tekniği ile göstermektedir `AddressTagHelperComponent` :
 
 [!code-cshtml[](th-components/samples/RazorPagesSample/Pages/Contact.cshtml?name=snippet_ITagHelperComponentManager)]
 
@@ -95,7 +96,7 @@ Yukarıdaki kodda:
 * `@inject`Yönergesi bir örneği sağlar `ITagHelperComponentManager` . Örnek, `manager` dosyadaki aşağı akış erişimi için adlı bir değişkene atanır Razor .
 * Bir örneği, `AddressTagHelperComponent` uygulamanın etiket Yardımcısı bileşenleri koleksiyonuna eklenir.
 
-`AddressTagHelperComponent`, ve parametrelerini kabul eden bir oluşturucuya uyacak şekilde `markup` değiştirilmiştir `order` :
+`AddressTagHelperComponent` , ve parametrelerini kabul eden bir oluşturucuya uyacak şekilde `markup` değiştirilmiştir `order` :
 
 [!code-csharp[](th-components/samples/RazorPagesSample/TagHelpers/AddressTagHelperComponent.cs?name=snippet_Constructor)]
 

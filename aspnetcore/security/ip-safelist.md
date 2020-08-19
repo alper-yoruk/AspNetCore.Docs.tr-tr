@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/12/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/ip-safelist
-ms.openlocfilehash: 75c1ea3a6087f89a200d1f73b1ff65080c819ccd
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 621be5351acb251335a42f57e8ea670af1b35a87
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021776"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634455"
 ---
 # <a name="client-ip-safelist-for-aspnet-core"></a>ASP.NET Core için istemci IP SafeList
 
@@ -32,7 +33,7 @@ Bu makalede bir ASP.NET Core uygulamasında bir IP adresi SafeList (izin verilen
 
 * Her isteğin uzak IP adresini denetlemek için ara yazılım.
 * MVC eylemi belirli denetleyiciler veya eylem yöntemlerine yönelik isteklerin uzak IP adresini denetlemek için filtreler.
-* RazorSayfa isteklerinin uzak IP adresini denetlemek için sayfalar filtreler Razor .
+* Razor Sayfa isteklerinin uzak IP adresini denetlemek için sayfalar filtreler Razor .
 
 Her durumda, onaylanan istemci IP adreslerini içeren bir dize bir uygulama ayarında saklanır. Ara yazılım veya filtre:
 
@@ -101,7 +102,7 @@ Eylem filtresi daha sonra [[Servicefilter]](xref:Microsoft.AspNetCore.Mvc.Servic
 
 * GET dışında bir HTTP istek fiili, `AdminSafeListMiddleware` Ara yazılım ISTEMCI IP adresini doğrular.
 
-## <a name="no-locrazor-pages-filter"></a>RazorSayfa filtresi
+## <a name="no-locrazor-pages-filter"></a>Razor Sayfa filtresi
 
 Bir sayfalar uygulaması için güvenli liste temelli erişim denetimi istiyorsanız Razor , bir Razor sayfa filtresi kullanın. Örnek:
 

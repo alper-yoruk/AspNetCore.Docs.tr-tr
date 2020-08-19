@@ -5,6 +5,7 @@ description: Sayfalardaki eğitim serisinin 2. bölümü Razor .
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/model
-ms.openlocfilehash: 6b50f46863a6dabb01bcf0976a42abb504e6f7b7
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 4099873142b99afb7f0659dfd9a4fde8bec3081d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020463"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633779"
 ---
 # <a name="part-2-add-a-model-to-a-no-locrazor-pages-app-in-aspnet-core"></a>Bölüm 2, Razor ASP.NET Core bir sayfalar uygulamasına bir model ekleyin
 
@@ -94,7 +95,7 @@ Bu bölümde, film modeli scafkatdır. Diğer bir deyişle, scafkatlama aracı f
 
 * **Model sınıfı** açılan kutusunda **Film ( Razor pagesmovie. modeller)** öğesini seçin.
 * **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin ve oluşturulan adı Razor pagesmovie 'den değiştirin.** Modeller**. Razor Pagesmovie 'e PagesMovieContext Razor .** Veri**. Razor PagesMovieContext. [Bu değişiklik](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) gerekli değildir. Doğru ad alanıyla veritabanı bağlamı sınıfını oluşturur.
-* **Add (Ekle)** seçeneğini belirleyin.
+* **Ekle**’yi seçin.
 
 ![Önceki yönergelerden görüntü.](model/_static/3/arp.png)
 
@@ -148,7 +149,7 @@ Yeni yapı iskelesi **eklemek** > *Sayfalar/filmler* klasörüne sağ tıklayın
 
 * **Model sınıfı** açılan kutusunda, seçin veya yazın, **Film ( Razor pagesmovie. modeller)**.
 * **Veri bağlamı sınıfı** satırına yeni sınıfın adını yazın, Razor pagesfilmi.** Veri**. Razor PagesMovieContext. [Bu değişiklik](https://developercommunity.visualstudio.com/content/problem/652166/aspnet-core-ef-scaffolder-uses-incorrect-namespace.html) gerekli değildir. Doğru ad alanıyla veritabanı bağlamı sınıfını oluşturur.
-* **Add (Ekle)** seçeneğini belirleyin.
+* **Ekle**’yi seçin.
 
 ![Önceki yönergelerden görüntü.](model/_static/arpMac.png)
 
@@ -242,7 +243,7 @@ Bu uyarıyı yoksayabilirsiniz, daha sonraki bir öğreticide düzeltilecektir.
 
 Geçişler komutu, ilk veritabanı şemasını oluşturmak için kod üretir. Şema, içinde belirtilen modeli temel alır `DbContext` . `InitialCreate`Bağımsız değişken, geçişleri adlandırmak için kullanılır. Herhangi bir ad kullanılabilir, ancak geçiş işlemini açıklayan bir ad seçilir.
 
-`update`Komutu `Up` uygulanmamış geçişlerde yöntemini çalıştırır. Bu durumda, `update` `Up` veritabanını oluşturan *geçişler/ \<time-stamp> _InitialCreate. cs* dosyasında yöntemini çalıştırır.
+`update`Komutu `Up` uygulanmamış geçişlerde yöntemini çalıştırır. Bu durumda, `update` `Up` veritabanını oluşturan  *geçişler/ \<time-stamp> _InitialCreate. cs* dosyasında yöntemini çalıştırır.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -379,7 +380,7 @@ to use Data, it should not use models. That will make the namespace the same for
 
 * **Model sınıfı** açılan kutusunda **Film ( Razor pagesmovie. modeller)** öğesini seçin.
 * **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin ve oluşturulan ** Razor pagesmovie. modeller adlı adı kabul edin. Razor PagesMovieContext**.
-* **Add (Ekle)** seçeneğini belirleyin.
+* **Ekle**’yi seçin.
 
 ![Önceki yönergelerden görüntü.](model/_static/arp.png)
 
@@ -425,7 +426,7 @@ Dosyadaki *appsettings.js* , yerel bir veritabanına bağlanmak için kullanıla
 
 * **Model sınıfı** açılan kutusunda **film**' ı seçin veya yazın.
 * **Veri bağlamı sınıfı** satırında, ** Razor pagesmoviecontext** ' i seçin. Bu, doğru ad alanı ile yeni bir DB bağlam sınıfı oluşturacaktır. Bu durumda, ** Razor pagesmovie. modeller olacaktır. Razor PagesMovieContext**.
-* **Add (Ekle)** seçeneğini belirleyin.
+* **Ekle**’yi seçin.
 
 ![Önceki yönergelerden görüntü.](model/_static/arpMac.png)
 

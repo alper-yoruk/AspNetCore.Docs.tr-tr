@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 07/20/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/index
-ms.openlocfilehash: 7c59867f6d6fbf0f4d8207eb5d2919967d825e8b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 594d3dcbf55ed0a3476bb580df8e122cedb1dcd3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021308"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634377"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>ASP.NET Core ile web API’leri oluşturma
 
@@ -48,7 +49,7 @@ Bir Web API 'SI, öğesinden türetilen bir veya daha fazla denetleyici sınıf�
 
 ::: moniker-end
 
-Sınıfından türeterek bir Web API denetleyicisi oluşturmayın <xref:Microsoft.AspNetCore.Mvc.Controller> . `Controller`' dan türetilir `ControllerBase` ve görünümler için destek ekler, bu nedenle Web API istekleri için değil Web sayfalarını işlemeye yöneliktir. Bu kural için bir özel durum var: aynı denetleyiciyi hem görünümler hem de Web API 'Leri için kullanmayı planlıyorsanız, öğesinden türetirsiniz `Controller` .
+Sınıfından türeterek bir Web API denetleyicisi oluşturmayın <xref:Microsoft.AspNetCore.Mvc.Controller> . `Controller` ' dan türetilir `ControllerBase` ve görünümler için destek ekler, bu nedenle Web API istekleri için değil Web sayfalarını işlemeye yöneliktir. Bu kural için bir özel durum var: aynı denetleyiciyi hem görünümler hem de Web API 'Leri için kullanmayı planlıyorsanız, öğesinden türetirsiniz `Controller` .
 
 `ControllerBase`Sınıfı, http isteklerini işlemek için yararlı olan birçok özellik ve yöntem sağlar. Örneğin, `ControllerBase.CreatedAtAction` bir 201 durum kodu döndürür:
 
@@ -272,7 +273,7 @@ Bağlama kaynak özniteliği, bir eylem parametresi değerinin bulunduğu konumu
 |[`[FromServices]`](xref:mvc/controllers/dependency-injection#action-injection-with-fromservices) | Eylem parametresi olarak eklenen istek hizmeti |
 
 > [!WARNING]
-> `[FromRoute]`Değerler `%2f` (yani) içerdiğinde kullanmayın `/` . `%2f`atlanmaz `/` . `[FromQuery]`Değer içermesi gerekiyorsa kullanın `%2f` .
+> `[FromRoute]`Değerler `%2f` (yani) içerdiğinde kullanmayın `/` . `%2f` atlanmaz `/` . `[FromQuery]`Değer içermesi gerekiyorsa kullanın `%2f` .
 
 `[ApiController]`Özniteliği veya gibi bağlama kaynak öznitelikleri olmadan `[FromQuery]` , ASP.NET Core çalışma zamanı karmaşık nesne modeli cildi kullanmaya çalışır. Karmaşık nesne modeli Ciltçi, verileri değer sağlayıcılarından tanımlı bir düzende çeker.
 
@@ -282,32 +283,32 @@ Aşağıdaki örnekte `[FromQuery]` öznitelik, `discontinuedOnly` istek URL 'si
 
 `[ApiController]`Öznitelik, eylem parametrelerinin varsayılan veri kaynakları için çıkarım kurallarını uygular. Bu kurallar, eylem parametrelerine öznitelikleri uygulayarak bağlama kaynaklarını el ile tanımlamak zorunda kalmadan sizi kaydeder. Bağlama kaynak çıkarımı kuralları aşağıdaki gibi davranır:
 
-* `[FromBody]`karmaşık tür parametreleri için algılanır. Çıkarım kuralı için bir özel durum, `[FromBody]` ve gibi özel bir anlamı olan karmaşık, yerleşik bir türdür <xref:Microsoft.AspNetCore.Http.IFormCollection> <xref:System.Threading.CancellationToken> . Bağlama kaynak çıkarımı kodu bu özel türleri yoksayar.
-* `[FromForm]`, ve türündeki eylem parametreleri için algılanır <xref:Microsoft.AspNetCore.Http.IFormFile> <xref:Microsoft.AspNetCore.Http.IFormFileCollection> . Bu, herhangi bir basit veya Kullanıcı tanımlı tür için çıkarsanamıyor.
-* `[FromRoute]`yol şablonundaki bir parametreyle eşleşen herhangi bir eylem parametresi adı için algılanır. Birden fazla yol bir eylem parametresiyle eşleştiğinde, herhangi bir rota değeri kabul edilir `[FromRoute]` .
-* `[FromQuery]`diğer eylem parametreleri için algılanır.
+* `[FromBody]` karmaşık tür parametreleri için algılanır. Çıkarım kuralı için bir özel durum, `[FromBody]` ve gibi özel bir anlamı olan karmaşık, yerleşik bir türdür <xref:Microsoft.AspNetCore.Http.IFormCollection> <xref:System.Threading.CancellationToken> . Bağlama kaynak çıkarımı kodu bu özel türleri yoksayar.
+* `[FromForm]` , ve türündeki eylem parametreleri için algılanır <xref:Microsoft.AspNetCore.Http.IFormFile> <xref:Microsoft.AspNetCore.Http.IFormFileCollection> . Bu, herhangi bir basit veya Kullanıcı tanımlı tür için çıkarsanamıyor.
+* `[FromRoute]` yol şablonundaki bir parametreyle eşleşen herhangi bir eylem parametresi adı için algılanır. Birden fazla yol bir eylem parametresiyle eşleştiğinde, herhangi bir rota değeri kabul edilir `[FromRoute]` .
+* `[FromQuery]` diğer eylem parametreleri için algılanır.
 
 ### <a name="frombody-inference-notes"></a>FromBody çıkarım notları
 
-`[FromBody]`, veya gibi basit türler için çıkarsanamıyor `string` `int` . Bu nedenle, bu `[FromBody]` işlev gerektiğinde basit türler için özniteliği kullanılmalıdır.
+`[FromBody]` , veya gibi basit türler için çıkarsanamıyor `string` `int` . Bu nedenle, bu `[FromBody]` işlev gerektiğinde basit türler için özniteliği kullanılmalıdır.
 
 Bir eylem, istek gövdesinden birden fazla parametre bağlamışsa, bir özel durum oluşturulur. Örneğin, aşağıdaki eylem yöntemi imzalarının tümü bir özel duruma neden olur:
 
-* `[FromBody]`karmaşık türler olduklarından her ikisi de üzerinde algılanır.
+* `[FromBody]` karmaşık türler olduklarından her ikisi de üzerinde algılanır.
 
   ```csharp
   [HttpPost]
   public IActionResult Action1(Product product, Order order)
   ```
 
-* `[FromBody]`karmaşık bir tür olduğundan, diğeri üzerinde olan özniteliği.
+* `[FromBody]` karmaşık bir tür olduğundan, diğeri üzerinde olan özniteliği.
 
   ```csharp
   [HttpPost]
   public IActionResult Action2(Product product, [FromBody] Order order)
   ```
 
-* `[FromBody]`her ikisinde de özniteliği.
+* `[FromBody]` her ikisinde de özniteliği.
 
   ```csharp
   [HttpPost]

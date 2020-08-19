@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/12/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-3.1
-ms.openlocfilehash: 68373c39461be896a52627e21577fdda89cbb661
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: f25cb38a3390600664980933caaf1003b533b2b6
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019598"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627578"
 ---
 # <a name="whats-new-in-aspnet-core-31"></a>ASP.NET Core 3,1 ' deki yenilikler
 
@@ -29,9 +30,9 @@ Bu makalede, ASP.NET Core 3,1 ' deki en önemli değişiklikler ilgili belgeleri
 
 ## <a name="partial-class-support-for-no-locrazor-components"></a>Bileşenler için kısmi sınıf desteği Razor
 
-Razorbileşenler artık kısmi sınıflar olarak oluşturulmuştur. Bir bileşenin kodu, Razor tek bir dosyada bileşen için tüm kodu tanımlamak yerine kısmi bir sınıf olarak tanımlanmış bir arka plan kod dosyası kullanılarak yazılabilir. Daha fazla bilgi için bkz. [kısmi sınıf desteği](xref:blazor/components/index#partial-class-support).
+Razor bileşenler artık kısmi sınıflar olarak oluşturulmuştur. Bir bileşenin kodu, Razor tek bir dosyada bileşen için tüm kodu tanımlamak yerine kısmi bir sınıf olarak tanımlanmış bir arka plan kod dosyası kullanılarak yazılabilir. Daha fazla bilgi için bkz. [kısmi sınıf desteği](xref:blazor/components/index#partial-class-support).
 
-## <a name="no-locblazor-component-tag-helper-and-pass-parameters-to-top-level-components"></a>BlazorBileşen etiketi Yardımcısı ve parametreleri en üst düzey bileşenlere geçir
+## <a name="no-locblazor-component-tag-helper-and-pass-parameters-to-top-level-components"></a>Blazor Bileşen etiketi Yardımcısı ve parametreleri en üst düzey bileşenlere geçir
 
 BlazorASP.NET Core 3,0 ' de, BILEŞENLER HTML Yardımcısı () kullanılarak sayfalar ve görünümler halinde işlenmiştir `Html.RenderComponentAsync` . ASP.NET Core 3,1 ' de, yeni bileşen etiketi Yardımcısı ile bir sayfadan veya görünümden bir bileşeni işleme:
 
@@ -41,7 +42,7 @@ BlazorASP.NET Core 3,0 ' de, BILEŞENLER HTML Yardımcısı () kullanılarak say
 
 HTML Yardımcısı ASP.NET Core 3,1 ' de desteklenmeye devam eder, ancak bileşen etiketi Yardımcısı önerilir.
 
-Blazor Serveruygulamalar, artık ilk işleme sırasında parametreleri en üst düzey bileşenlere geçirebilir. Daha önce, parametreleri yalnızca [RenderMode. static](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static)olan en üst düzey bileşene geçirebilirsiniz. Bu sürümle birlikte, hem [RenderMode. Server](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server) hem de [RenderMode. Serverprerenimli](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered) desteklenir. Belirtilen parametre değerleri JSON olarak serileştirilir ve başlangıç yanıtına dahil edilir.
+Blazor Server uygulamalar, artık ilk işleme sırasında parametreleri en üst düzey bileşenlere geçirebilir. Daha önce, parametreleri yalnızca [RenderMode. static](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Static)olan en üst düzey bileşene geçirebilirsiniz. Bu sürümle birlikte, hem [RenderMode. Server](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server) hem de [RenderMode. Serverprerenimli](xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered) desteklenir. Belirtilen parametre değerleri JSON olarak serileştirilir ve başlangıç yanıtına dahil edilir.
 
 Örneğin, `Counter` artış miktarı () olan bir bileşen için `IncrementAmount` :
 

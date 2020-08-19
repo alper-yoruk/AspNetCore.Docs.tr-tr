@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/06/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/cascading-values-and-parameters
-ms.openlocfilehash: 1ee30a84e0869f6b9ee937648eb87bd41e8702e3
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 8cb2bd5f19a4cc21671a0b077d4ef0fda2e30455
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014717"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628592"
 ---
 # <a name="aspnet-core-no-locblazor-cascading-values-and-parameters"></a>BlazorBasamaklı değerleri ve parametreleri ASP.NET Core
 
@@ -47,9 +48,9 @@ public class ThemeInfo
 
 Bir üst bileşen basamaklı değer bileşeni kullanılarak basamaklı bir değer sağlayabilir. <xref:Microsoft.AspNetCore.Components.CascadingValue%601>Bileşen, bileşen hiyerarşisinin bir alt ağacını sarmalanmış ve bu alt ağaçta bulunan tüm bileşenlere tek bir değer sağlar.
 
-Örneğin, örnek uygulama, `ThemeInfo` uygulamanın düzenleriyle, özelliğin düzen gövdesini oluşturan tüm bileşenler için bir geçişli parametre olarak tema bilgilerini () belirtir `@Body` . `ButtonClass`öğesinin bir değeri, `btn-success` Düzen bileşeninde atanır. Tüm alt bileşenler bu özelliği basamaklı nesne aracılığıyla kullanabilir `ThemeInfo` .
+Örneğin, örnek uygulama, `ThemeInfo` uygulamanın düzenleriyle, özelliğin düzen gövdesini oluşturan tüm bileşenler için bir geçişli parametre olarak tema bilgilerini () belirtir `@Body` . `ButtonClass` öğesinin bir değeri, `btn-success` Düzen bileşeninde atanır. Tüm alt bileşenler bu özelliği basamaklı nesne aracılığıyla kullanabilir `ThemeInfo` .
 
-`CascadingValuesParametersLayout`bileşeninde
+`CascadingValuesParametersLayout` bileşeninde
 
 ```razor
 @inherits LayoutComponentBase
@@ -79,7 +80,7 @@ Basamaklı değerlerin kullanılması için, bileşenler özniteliği kullanarak
 
 Örnek uygulamada, `CascadingValuesParametersTheme` bileşen `ThemeInfo` basamaklı değeri basamaklı bir parametreye bağlar. Parametresi, bileşen tarafından görünen düğmelerden birine ait CSS sınıfını ayarlamak için kullanılır.
 
-`CascadingValuesParametersTheme`bileşeninde
+`CascadingValuesParametersTheme` bileşeninde
 
 ```razor
 @page "/cascadingvaluesparameterstheme"
@@ -190,12 +191,12 @@ Basamaklı parametreler, bileşenlerin bileşen hiyerarşisinde işbirliği yapm
 
 Alt `Tab` Bileşenler, öğesine açıkça parametre olarak aktarılmaz `TabSet` . Bunun yerine, alt `Tab` bileşenleri öğesinin alt içeriğinin bir parçasıdır `TabSet` . Bununla birlikte, `TabSet` `Tab` üst bilgileri ve etkin sekmeyi işleyebilmesi için her bileşen hakkında hala bilmeniz gerekir. Ek kod gerektirmeden bu koordinasyonu etkinleştirmek için bileşen, `TabSet` kendisini alt bileşenler tarafından çekilen *basamaklı bir değer olarak sağlayabilir* `Tab` .
 
-`TabSet`bileşeninde
+`TabSet` bileşeninde
 
 [!code-razor[](../common/samples/3.x/BlazorWebAssemblySample/Components/TabSet.razor)]
 
 Alt `Tab` Bileşenler, kapsayan ' `TabSet` i basamaklı bir parametre olarak yakalar, bu nedenle bileşenler, `Tab` `TabSet` Bu sekmenin etkin olduğu ve koordinasyonu üzerine eklenir.
 
-`Tab`bileşeninde
+`Tab` bileşeninde
 
 [!code-razor[](../common/samples/3.x/BlazorWebAssemblySample/Components/Tab.razor)]

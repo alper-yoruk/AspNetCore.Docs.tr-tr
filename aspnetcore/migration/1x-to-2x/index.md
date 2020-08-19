@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/1x-to-2x/index
-ms.openlocfilehash: cad1cd868ef8c972d7e0fbfec79cd1d8b49c3b6e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 6160dfd117235065ba4b990b95bbc1f4abdf1626
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015341"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634351"
 ---
 # <a name="migrate-from-aspnet-core-1x-to-20"></a>ASP.NET Core 1. x ile 2,0 arasında geçiş yapın
 
@@ -33,7 +34,7 @@ Mevcut ASP.NET Core 1. x uygulamaları sürüme özgü proje şablonlarını tem
 
 <a name="prerequisites"></a>
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 Bkz. [ASP.NET Core kullanmaya başlama](xref:getting-started).
 
@@ -128,7 +129,7 @@ Unable to create an object of type '<Context>'. Add an implementation of 'IDesig
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Startup.cs?name=snippet_1xStartup)]
 
-Yukarıdaki örnek, `Configuration` üyeyiappsettings.jsve tüm appSettings *'teki* yapılandırma ayarlarıyla yükler *. \<EnvironmentName\> *özelliği ile eşleşen JSON dosyası `IHostingEnvironment.EnvironmentName` . Bu dosyaların konumu *Startup.cs*ile aynı yoldur.
+Yukarıdaki örnek, `Configuration` üyeyiappsettings.jsve tüm appSettings * 'teki* yapılandırma ayarlarıyla yükler *. \<EnvironmentName\> * özelliği ile eşleşen JSON dosyası `IHostingEnvironment.EnvironmentName` . Bu dosyaların konumu *Startup.cs*ile aynı yoldur.
 
 2,0 projesinde, 1. x projelerine devralınan ortak yapılandırma kodu, arka planda çalışır. Örneğin, ortam değişkenleri ve uygulama ayarları başlangıçta yüklenir. Denk *Startup.cs* kodu, `IConfiguration` eklenen örnekle başlatılacak şekilde azaltılır:
 
@@ -202,7 +203,7 @@ Application Insights SDK 'Yı doğrudan kullanıyorsanız, bunu yapmaya devam ed
 
 ## <a name="adopt-authenticationno-locidentity-improvements"></a>Kimlik doğrulaması/ Identity iyileştirmeleri benimseyin
 
-ASP.NET Core 2,0 ' de yeni bir kimlik doğrulama modeli ve ASP.NET Core birçok önemli değişiklik vardır Identity . Projenizi ayrı ayrı kullanıcı hesaplarıyla oluşturduysanız veya el ile kimlik doğrulaması eklediyseniz veya Identity [ Identity ASP.NET Core 2,0 ' ye](xref:migration/1x-to-2x/identity-2x)bakın.
+ASP.NET Core 2,0 ' de yeni bir kimlik doğrulama modeli ve bazı önemli değişiklikler vardır ASP.NET Core Identity . Projenizi ayrı ayrı kullanıcı hesaplarıyla oluşturduysanız veya el ile kimlik doğrulaması eklediyseniz veya Identity [ Identity ASP.NET Core 2,0 ' ye](xref:migration/1x-to-2x/identity-2x)bakın.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

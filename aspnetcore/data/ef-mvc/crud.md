@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 02/04/2019
 ms.topic: tutorial
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/crud
-ms.openlocfilehash: 2c71ea0eaccf4daeb8937dd5839481a506864fbe
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: c17461f8d1d43335230a967a4b62943c055c06b9
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012858"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629216"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>Öğretici: EF Core ile CRUD Işlevselliği uygulama-ASP.NET MVC
 
@@ -40,7 +41,7 @@ Bu öğreticide şunları yaptınız:
 > * Silme sayfasını Güncelleştir
 > * Veritabanı bağlantılarını kapat
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [EF Core ve ASP.NET Core MVC ile çalışmaya başlama](intro.md)
 
@@ -128,9 +129,9 @@ Bu kod, ASP.NET Core MVC model Ciltçi tarafından oluşturulan öğrenci varlı
 
 KIMLIĞI, `ID` `Bind` satır eklendiğinde SQL Server otomatik olarak ayarlanacak birincil anahtar değeri olduğundan, bu öznitelikten kaldırdınız. Kullanıcı girişi, KIMLIK değerini ayarladı.
 
-`Bind`Özniteliği dışında, try-catch bloğu, scafkatlanmış kodda yapmış olduğunuz tek değişikdir. ' Den türetilen bir özel durum, `DbUpdateException` değişiklikler kaydedilirken yakalanmışsa, genel bir hata iletisi görüntülenir. `DbUpdateException`Bazen bir programlama hatası yerine uygulamanın harici bir şeyi neden olduğundan, kullanıcının yeniden denemek önerilir. Bu örnekte uygulanmamış olsa da, bir üretim kalitesi uygulaması özel durumu günlüğe kaydeder. Daha fazla bilgi için bkz. Izleme ve telemetri bölümünde **Öngörüler Için günlük** [(Azure Ile gerçek bulut uygulamaları oluşturma)](/aspnet/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/monitoring-and-telemetry).
+`Bind`Özniteliği dışında, try-catch bloğu, scafkatlanmış kodda yapmış olduğunuz tek değişikdir. ' Den türetilen bir özel durum, `DbUpdateException` değişiklikler kaydedilirken yakalanmışsa, genel bir hata iletisi görüntülenir. `DbUpdateException` Bazen bir programlama hatası yerine uygulamanın harici bir şeyi neden olduğundan, kullanıcının yeniden denemek önerilir. Bu örnekte uygulanmamış olsa da, bir üretim kalitesi uygulaması özel durumu günlüğe kaydeder. Daha fazla bilgi için bkz. Izleme ve telemetri bölümünde **Öngörüler Için günlük** [(Azure Ile gerçek bulut uygulamaları oluşturma)](/aspnet/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/monitoring-and-telemetry).
 
-`ValidateAntiForgeryToken`Öznitelik, siteler arası istek sahteciliği (CSRF) saldırılarını önlemeye yardımcı olur. Belirteç, [Formtaghelper](xref:mvc/views/working-with-forms#the-form-tag-helper) tarafından otomatik olarak görünüme eklenir ve form kullanıcı tarafından gönderildiğinde dahil edilir. Belirteç özniteliği tarafından onaylanır `ValidateAntiForgeryToken` . CSRF hakkında daha fazla bilgi için bkz. [Istek önleyici](../../security/anti-request-forgery.md)güvenlik.
+`ValidateAntiForgeryToken`Öznitelik, siteler arası istek sahteciliği (CSRF) saldırılarını önlemeye yardımcı olur. Belirteç, [Formtaghelper](xref:mvc/views/working-with-forms#the-form-tag-helper) tarafından otomatik olarak görünüme eklenir ve form kullanıcı tarafından gönderildiğinde dahil edilir. Belirteç özniteliği tarafından onaylanır `ValidateAntiForgeryToken` . Daha fazla bilgi için bkz. <xref:security/anti-request-forgery>.
 
 <a id="overpost"></a>
 
@@ -281,7 +282,7 @@ Uygulamayı çalıştırın, **öğrenciler** sekmesini seçin ve bir **Delete**
 
 Bir veritabanı bağlantısının tuttuğu kaynakları boşaltmak için bağlam örneği, bununla işiniz bittiğinde en kısa sürede atılmalıdır. ASP.NET Core yerleşik [bağımlılık ekleme](../../fundamentals/dependency-injection.md) , sizin için bu görevi gerçekleştirir.
 
-*Startup.cs*' de, sınıfı ASP.NET Core dı kapsayıcısında sağlamak Için [adddbcontext genişletme yöntemini](https://github.com/aspnet/EntityFrameworkCore/blob/03bcb5122e3f577a84498545fcf130ba79a3d987/src/Microsoft.EntityFrameworkCore/EntityFrameworkServiceCollectionExtensions.cs) çağırın `DbContext` . Bu yöntem, hizmet ömrünü `Scoped` Varsayılan olarak olarak ayarlar. `Scoped`, Web isteği ömrü boyunca saatle çakışan bağlam nesnesi yaşam süresi anlamına gelir ve `Dispose` Bu yöntem Web isteğinin sonunda otomatik olarak çağrılır.
+*Startup.cs*' de, sınıfı ASP.NET Core dı kapsayıcısında sağlamak Için [adddbcontext genişletme yöntemini](https://github.com/aspnet/EntityFrameworkCore/blob/03bcb5122e3f577a84498545fcf130ba79a3d987/src/Microsoft.EntityFrameworkCore/EntityFrameworkServiceCollectionExtensions.cs) çağırın `DbContext` . Bu yöntem, hizmet ömrünü `Scoped` Varsayılan olarak olarak ayarlar. `Scoped` , Web isteği ömrü boyunca saatle çakışan bağlam nesnesi yaşam süresi anlamına gelir ve `Dispose` Bu yöntem Web isteğinin sonunda otomatik olarak çağrılır.
 
 ## <a name="handle-transactions"></a>İşlemleri işle
 

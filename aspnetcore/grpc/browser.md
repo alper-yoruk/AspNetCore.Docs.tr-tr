@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 06/30/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/browser
-ms.openlocfilehash: f995fdaee1009ff51359df720c39d664aea6e3b1
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 8d1f761731ab3840d009eba1ff5316808bafec40
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016277"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634416"
 ---
 # <a name="use-grpc-in-browser-apps"></a>Tarayıcı uygulamalarında gRPC kullanma
 
@@ -64,7 +65,7 @@ Alternatif olarak, gRPC-Web ara yazılımı, tüm hizmetlerin varsayılan olarak
 [!code-csharp[](~/grpc/browser/sample/AllServicesSupportExample_Startup.cs?name=snippet_1&highlight=12)]
 
 > [!NOTE]
-> .NET Core 3. x içinde [Http.systarafından barındırılırken](xref:fundamentals/servers/httpsys) GRPC-Web ' i, başarısız olmasına neden olan bilinen bir sorun vardır.
+> .NET Core 3. x içinde [Http.systarafından barındırılırken ](xref:fundamentals/servers/httpsys) GRPC-Web ' i, başarısız olmasına neden olan bilinen bir sorun vardır.
 >
 > GRPC 'yi (Http.sys Web üzerinde çalışmaya yönelik bir geçici çözüm) [buradan](https://github.com/grpc/grpc-dotnet/issues/853#issuecomment-610078202)edinebilirsiniz.
 
@@ -120,12 +121,12 @@ Yukarıdaki kod:
 * GRPC-Web kullanmak için bir kanal yapılandırır.
 * Bir istemci oluşturur ve kanalı kullanarak bir çağrı yapar.
 
-`GrpcWebHandler`Aşağıdaki yapılandırma seçeneklerine sahiptir:
+`GrpcWebHandler` Aşağıdaki yapılandırma seçeneklerine sahiptir:
 
 * **InnerHandler**:, <xref:System.Net.Http.HttpMessageHandler> Örneğin, GRPC http isteğini oluşturan temel `HttpClientHandler` .
 * **Grpcwebmode**: GRPC http isteğinin veya olup olmadığını belirten bir numaralandırma türü `Content-Type` `application/grpc-web` `application/grpc-web-text` .
-    * `GrpcWebMode.GrpcWeb`kodlamadan gönderilecek içeriği yapılandırır. Varsayılan değer.
-    * `GrpcWebMode.GrpcWebText`içeriği Base64 kodlamalı olarak yapılandırır. Tarayıcılarda sunucu akış çağrıları için gereklidir.
+    * `GrpcWebMode.GrpcWeb` kodlamadan gönderilecek içeriği yapılandırır. Varsayılan değer.
+    * `GrpcWebMode.GrpcWebText` içeriği Base64 kodlamalı olarak yapılandırır. Tarayıcılarda sunucu akış çağrıları için gereklidir.
 * **HttpVersion**: `Version` TEMELDEKI GRPC http isteğindeki [HttpRequestMessage. Version](xref:System.Net.Http.HttpRequestMessage.Version) öğesini ayarlamak için kullanılan http protokolü. gRPC-Web belirli bir sürüm gerektirmez ve belirtilmediği takdirde varsayılanı geçersiz kılmaz.
 
 > [!IMPORTANT]

@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/13/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-ms.openlocfilehash: 25f1716b5c80492edb72bc9555954c9c93c02a49
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: fcb58e2e0bfc6598edeb8c7f79986c3faf84e316
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018772"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633935"
 ---
 # <a name="anchor-tag-helper-in-aspnet-core"></a>ASP.NET Core 'de bağlayıcı etiketi Yardımcısı
 
@@ -185,7 +186,7 @@ Karma Etiketler, istemci tarafı uygulamalar oluşturulurken faydalıdır. JavaS
 
 #### <a name="usage-in-no-locrazor-pages"></a>Sayfalarda kullanım Razor
 
-RazorSayfa alanı ASP.NET Core 2,1 veya üzeri sürümlerde desteklenir.
+Razor Sayfa alanı ASP.NET Core 2,1 veya üzeri sürümlerde desteklenir.
 
 Aşağıdaki dizin hiyerarşisini göz önünde bulundurun:
 

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/03/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/localization-extensibility
-ms.openlocfilehash: e31a724107145ab72adfb395afec1cbd2775bac0
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 2e1041ed4cce3c3919d75ff47e2bc24fc446e9c3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017135"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627617"
 ---
 # <a name="localization-extensibility"></a>Yerelleştirme genişletilebilirliği
 
@@ -35,7 +36,7 @@ Bu makalede:
 
 ## <a name="extensible-points-in-localization-apis"></a>Yerelleştirme API 'Lerinde Genişletilebilir noktaları
 
-ASP.NET Core yerelleştirme API 'Leri genişletilebilir olacak şekilde oluşturulmuştur. Genişletilebilirlik, geliştiricilerin gereksinimlerine göre yerelleştirmeyi özelleştirmesini sağlar. Örneğin, [Orchardcore](https://github.com/orchardCMS/OrchardCore/) bir `POStringLocalizer` . `POStringLocalizer`Yerelleştirme kaynaklarını depolamak üzere dosyaları kullanmak için [Taşınabilir nesne yerelleştirmesini](xref:fundamentals/portable-object-localization) kullanma hakkında ayrıntılı bilgi sağlar `PO` .
+ASP.NET Core yerelleştirme API 'Leri genişletilebilir olacak şekilde oluşturulmuştur. Genişletilebilirlik, geliştiricilerin gereksinimlerine göre yerelleştirmeyi özelleştirmesini sağlar. Örneğin, [Orchardcore](https://github.com/orchardCMS/OrchardCore/) bir `POStringLocalizer` . `POStringLocalizer` Yerelleştirme kaynaklarını depolamak üzere dosyaları kullanmak için [Taşınabilir nesne yerelleştirmesini](xref:fundamentals/portable-object-localization) kullanma hakkında ayrıntılı bilgi sağlar `PO` .
 
 Bu makalede, yerelleştirme API 'Lerinin sağladığı iki ana genişletilebilirlik noktası listelenmektedir: 
 
@@ -103,7 +104,7 @@ options.AddInitialRequestCultureProvider(new CustomRequestCultureProvider(async 
 
 <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider>Özel bir kaynaktan istek kültür bilgilerini belirleyen yeni bir uygulama oluşturulabilir. Örneğin, özel kaynak bir yapılandırma dosyası veya veritabanı olabilir.
 
-Aşağıdaki örnekte gösterildiği `AppSettingsRequestCultureProvider` gibi, <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> *üzerindeappsettings.js*istek kültür bilgilerini belirleyen ' i genişleten gösterilmektedir:
+Aşağıdaki örnekte gösterildiği `AppSettingsRequestCultureProvider` gibi, <xref:Microsoft.AspNetCore.Localization.RequestCultureProvider> * üzerindeappsettings.js*istek kültür bilgilerini belirleyen ' i genişleten gösterilmektedir:
 
 ```csharp
 public class AppSettingsRequestCultureProvider : RequestCultureProvider
@@ -147,7 +148,7 @@ public class AppSettingsRequestCultureProvider : RequestCultureProvider
 
 ## <a name="localization-resources"></a>Yerelleştirme kaynakları
 
-ASP.NET Core yerelleştirme sağlar <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer> . <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer>, <xref:Microsoft.Extensions.Localization.IStringLocalizer> `resx` Yerelleştirme kaynaklarını depolamak için kullanılan bir uygulamasıdır.
+ASP.NET Core yerelleştirme sağlar <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer> . <xref:Microsoft.Extensions.Localization.ResourceManagerStringLocalizer> , <xref:Microsoft.Extensions.Localization.IStringLocalizer> `resx` Yerelleştirme kaynaklarını depolamak için kullanılan bir uygulamasıdır.
 
 Dosya kullanma sınırlı değilsiniz `resx` . Uygulama `IStringLocalized` , herhangi bir veri kaynağı kullanılabilir.
 

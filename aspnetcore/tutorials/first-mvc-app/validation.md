@@ -5,6 +5,7 @@ description: ASP.NET Core MVC 'de öğretici serisinin Bölüm 9 ' da.
 ms.author: riande
 ms.date: 04/13/2017
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/validation
-ms.openlocfilehash: 43e8fbb46a3154cf2c4a50cc1683defeb5f898b6
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: c6904606cfe82a6c3a375667b2b2fcae0ab31d26
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020788"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628644"
 ---
 # <a name="part-9-add-validation-to-an-aspnet-core-mvc-app"></a>9. bölüm, ASP.NET Core MVC uygulamasına doğrulama ekleme
 
@@ -97,7 +98,7 @@ Doğrulama mantığını değiştirmeniz gerektiğinde, modele doğrulama öznit
 
 `DataType`Öznitelikler yalnızca görünüm altyapısının verileri biçimlendirmek için ipuçları sağlar (ve `<a>` URL 'ler ve `<a href="mailto:EmailAddress.com">` e-posta için gibi öğeleri/öznitelikleri sağlar. `RegularExpression`Veri biçimini doğrulamak için özniteliğini kullanabilirsiniz. `DataType`Özniteliği, veritabanı iç türünden daha belirgin bir veri türü belirtmek için kullanılır, bunlar doğrulama öznitelikleri değildir. Bu durumda, zamanı değil yalnızca tarihi izlemek istiyoruz. `DataType`Sabit listesi, tarih, saat, PhoneNumber, para birimi, Emaadresi ve daha fazlası gibi birçok veri türünü sağlar. `DataType`Özniteliği Ayrıca uygulamanın türe özgü özellikleri otomatik olarak sağlamasını da sağlayabilir. Örneğin, için bir `mailto:` bağlantı oluşturulabilir `DataType.EmailAddress` ve HTML5 'i destekleyen tarayıcılarda için bir tarih seçici sağlaneklenebilir `DataType.Date` . Öznitelikler HTML 5 `DataType` `data-` tarayıcılarının ANLAYABILMESI için HTML 5 (bir veri Dash) öznitelikleri yayar. `DataType`Öznitelikler herhangi bir **not** doğrulama sağlamaz.
 
-`DataType.Date`görüntülenen tarihin biçimini belirtmez. Varsayılan olarak, veri alanı sunucu ' a göre varsayılan biçimlere göre görüntülenir `CultureInfo` .
+`DataType.Date` görüntülenen tarihin biçimini belirtmez. Varsayılan olarak, veri alanı sunucu ' a göre varsayılan biçimlere göre görüntülenir `CultureInfo` .
 
 `DisplayFormat`Öznitelik, tarih biçimini açıkça belirtmek için kullanılır:
 

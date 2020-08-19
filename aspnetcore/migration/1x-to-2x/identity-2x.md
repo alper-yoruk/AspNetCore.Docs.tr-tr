@@ -5,6 +5,7 @@ description: Bu makalede ASP.NET Core 1. x kimlik doğrulamasını ve ASP.NET Co
 ms.author: scaddie
 ms.date: 06/21/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/1x-to-2x/identity-2x
-ms.openlocfilehash: 46f10df25235b532f188eda2a079aef71070cd6d
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 63f2fadc328650063078339467e65c6b0e97a08e
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015296"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634325"
 ---
 # <a name="migrate-authentication-and-no-locidentity-to-aspnet-core-20"></a>Kimlik doğrulamasını Identity ASP.NET Core ve 2,0 'e geçirin
 
@@ -110,7 +111,7 @@ Aşağıdaki iki seçenekten birini seçin ve *Startup.cs*'de gerekli değişikl
         services.ConfigureApplicationCookie(options => options.LoginPath = "/Account/LogIn");
         ```
 
-2. Şunu cookie olmadan s kullanIdentity
+2. Şunu cookie olmadan s kullan Identity
     - `UseCookieAuthentication`Yöntemindeki yöntem çağrısını `Configure` ile değiştirin `UseAuthentication` :
 
         ```csharp

@@ -5,6 +5,7 @@ description: ASP.NET Core veri koruma API 'Lerini kullanarak korumalı yükün �
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/consumer-apis/limited-lifetime-payloads
-ms.openlocfilehash: c7bc86cd42a725f21cf66187c033376a8c5a9e65
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: f76aca460c293b5f814ba10ee6c8ac68b3d147bb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014834"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634429"
 ---
 # <a name="limit-the-lifetime-of-protected-payloads-in-aspnet-core"></a>ASP.NET Core korumalı yüklerin ömrünü sınırlayın
 
@@ -32,7 +33,7 @@ Geliştirici izleyicilerimizin bu kadar kolay olması için, [Microsoft. AspNetC
 
 `ITimeLimitedDataProtector`Arabirim, zaman sınırlı/kendi kendine süresi dolan yükleri korumak ve korumayı kaldırmak için çekirdek arabirimdir. Bir örneğini oluşturmak için `ITimeLimitedDataProtector` öncelikle belirli bir amaca göre oluşturulan normal bir [ıdataprotector](xref:security/data-protection/consumer-apis/overview) örneğine ihtiyacınız vardır. `IDataProtector`Örnek kullanılabilir olduğunda, `IDataProtector.ToTimeLimitedDataProtector` yerleşik süre sonu özelliklerine sahip bir koruyucu geri almak için genişletme yöntemini çağırın.
 
-`ITimeLimitedDataProtector`Aşağıdaki API yüzeyini ve genişletme yöntemlerini gösterir:
+`ITimeLimitedDataProtector` Aşağıdaki API yüzeyini ve genişletme yöntemlerini gösterir:
 
 * CreateProtector (dize amacı): ıomelimiteddataprotector-bu API, `IDataProtectionProvider.CreateProtector` bir kök zaman sınırlı koruyucudan [Amaç zincirlerini](xref:security/data-protection/consumer-apis/purpose-strings) oluşturmak için kullanılabilecek mevcut öğesine benzerdir.
 

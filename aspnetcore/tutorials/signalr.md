@@ -1,11 +1,12 @@
 ---
-title: ASP.NET Core kullanmaya başlayınSignalR
+title: ASP.NET Core kullanmaya başlayın SignalR
 author: bradygaster
 description: Bu öğreticide, ASP.NET Core kullanan bir sohbet uygulaması oluşturacaksınız SignalR .
 ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/21/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr
-ms.openlocfilehash: 51b9eae0d4746001696e0795467eaf4c0ab2c990
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e98cfc5e95233ce4d1001ab1225fc15e5fd23733
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022036"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634507"
 ---
-# <a name="tutorial-get-started-with-aspnet-core-no-locsignalr"></a>Öğretici: ASP.NET Core kullanmaya başlayınSignalR
+# <a name="tutorial-get-started-with-aspnet-core-no-locsignalr"></a>Öğretici: ASP.NET Core kullanmaya başlayın SignalR
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -40,7 +41,7 @@ Sonunda, çalışan bir sohbet uygulamanız olacaktır:
 
 ![::: No-Loc (SignalR)::: örnek uygulama](signalr/_static/3.x/signalr-get-started-finished.png)
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -185,9 +186,9 @@ SignalRSunucu kitaplığı ASP.NET Core 3,0 paylaşılan çerçevesine dahildir.
 
   `ChatHub`Sınıf sınıfından devralır SignalR `Hub` . `Hub`Sınıfı bağlantıları, grupları ve mesajlaşmayı yönetir.
 
-  `SendMessage`Yöntemi, tüm istemcilere ileti göndermek için bağlı bir istemci tarafından çağrılabilir. Yöntemi çağıran JavaScript istemci kodu Öğreticinin ilerleyen kısımlarında gösterilmektedir. SignalRmaksimum ölçeklenebilirlik sağlamak için kod zaman uyumsuzdur.
+  `SendMessage`Yöntemi, tüm istemcilere ileti göndermek için bağlı bir istemci tarafından çağrılabilir. Yöntemi çağıran JavaScript istemci kodu Öğreticinin ilerleyen kısımlarında gösterilmektedir. SignalR maksimum ölçeklenebilirlik sağlamak için kod zaman uyumsuzdur.
 
-## <a name="configure-no-locsignalr"></a>YapılandırmaSignalR
+## <a name="configure-no-locsignalr"></a>Yapılandırma SignalR
 
 SignalRSunucunun istekleri geçirilecek şekilde yapılandırılması gerekir SignalR SignalR .
 
@@ -271,7 +272,7 @@ Bu öğreticide, kullanarak gerçek zamanlı bir uygulama oluşturmanın temelle
 > * Herhangi bir istemciden tüm bağlı istemcilere ileti gönderen kodu ekleyin.  
 Sonunda, çalışan bir sohbet uygulamasına sahipsiniz::: ![ : No-Loc (SignalR)::: örnek uygulama](signalr/_static/2.x/signalr-get-started-finished.png)   
 
-## <a name="prerequisites"></a>Önkoşullar    
+## <a name="prerequisites"></a>Ön koşullar    
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)   
 
@@ -418,9 +419,9 @@ SignalRSunucu kitaplığı, metapackage 'e dahildir `Microsoft.AspNetCore.App` .
 
   `ChatHub`Sınıf sınıfından devralır SignalR `Hub` . `Hub`Sınıfı bağlantıları, grupları ve mesajlaşmayı yönetir.  
 
-  `SendMessage`Yöntemi, tüm istemcilere ileti göndermek için bağlı bir istemci tarafından çağrılabilir. Yöntemi çağıran JavaScript istemci kodu Öğreticinin ilerleyen kısımlarında gösterilmektedir. SignalRmaksimum ölçeklenebilirlik sağlamak için kod zaman uyumsuzdur.    
+  `SendMessage`Yöntemi, tüm istemcilere ileti göndermek için bağlı bir istemci tarafından çağrılabilir. Yöntemi çağıran JavaScript istemci kodu Öğreticinin ilerleyen kısımlarında gösterilmektedir. SignalR maksimum ölçeklenebilirlik sağlamak için kod zaman uyumsuzdur.    
 
-## <a name="configure-no-locsignalr"></a>YapılandırmaSignalR  
+## <a name="configure-no-locsignalr"></a>Yapılandırma SignalR  
 
 SignalRSunucunun istekleri geçirilecek şekilde yapılandırılması gerekir SignalR SignalR .    
 

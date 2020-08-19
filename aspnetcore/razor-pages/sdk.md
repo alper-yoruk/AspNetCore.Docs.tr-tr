@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 03/26/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/sdk
-ms.openlocfilehash: b960460a50558a11bc47f9a1844931aa32e3d696
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: d11600af88d499d63adf9eae90d6deb929f9d92a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021425"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632921"
 ---
 # <a name="aspnet-core-no-locrazor-sdk"></a>ASP.NET Core Razor SDK
 
@@ -50,7 +51,7 @@ RazorSDK, `Content` `Include` Glob düzenine ayarlanmış bir özniteliği olan 
 
 ::: moniker-end
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 [!INCLUDE[](~/includes/2.1-SDK.md)]
 
@@ -109,7 +110,7 @@ Aşağıdaki tablodaki Özellikler ve öğeler, SDK 'ya giriş ve çıkış yap�
 ::: moniker range=">= aspnetcore-3.0"
 
 > [!WARNING]
-> ASP.NET Core 3,0 ' den başlayarak, MVC görünümleri veya Razor sayfaları `RazorCompileOnBuild` `RazorCompileOnPublish` Proje dosyasındaki ya da MSBuild özellikleri devre dışı bırakılmışsa varsayılan olarak sunulmuyor. Uygulamalar [Microsoft. AspNetCore. Mvc öğesine açık bir başvuru eklememelidir. Razor ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation)Uygulama *. cshtml* dosyalarını işlemek için çalışma zamanı derlemesini kullanıyorsa runtimecompilation paketi.
+> ASP.NET Core 3,0 ' den başlayarak, MVC görünümleri veya Razor sayfaları `RazorCompileOnBuild` `RazorCompileOnPublish` Proje dosyasındaki ya da MSBuild özellikleri devre dışı bırakılmışsa varsayılan olarak sunulmuyor. Uygulamalar [Microsoft. AspNetCore. Mvc öğesine açık bir başvuru eklememelidir. Razor ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation) Uygulama *. cshtml* dosyalarını işlemek için çalışma zamanı derlemesini kullanıyorsa runtimecompilation paketi.
 
 ::: moniker-end
 
@@ -171,7 +172,7 @@ Aşağıdaki tablodaki Özellikler ve öğeler, SDK 'ya giriş ve çıkış yap�
 
 Özellikler hakkında daha fazla bilgi için bkz. [MSBuild özellikleri](/visualstudio/msbuild/msbuild-properties).
 
-### <a name="targets"></a>Hedefler
+### <a name="targets"></a>Targets
 
 RazorSDK iki birincil hedefi tanımlar:
 
@@ -185,7 +186,7 @@ RazorSDK iki birincil hedefi tanımlar:
 
 * Bir Web uygulaması için uygulamanızın SDK 'yı hedeflediğinden emin olun `Microsoft.NET.Sdk.Web` .
 
-## <a name="no-locrazor-language-version"></a>Razordil sürümü
+## <a name="no-locrazor-language-version"></a>Razor dil sürümü
 
 `Microsoft.NET.Sdk.Web`SDK 'yı hedeflerken, Razor dil sürümü uygulamanın hedef Framework sürümünden algılanır. SDK 'yı hedefleyen projeler `Microsoft.NET.Sdk.Razor` veya uygulamanın Razor çıkarılan değerden farklı bir dil sürümü gerektirmesi durumunda, `<RazorLangVersion>` uygulamanın proje dosyasındaki özelliği ayarlanarak bir sürüm yapılandırılabilir:
 
