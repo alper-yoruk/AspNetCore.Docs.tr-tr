@@ -1156,7 +1156,7 @@
       uid: security/anti-request-forgery
     - name: Açık yeniden yönlendirme saldırılarını önleme
       uid: security/preventing-open-redirects
-    - name: Siteler Arası Betik kullanmayı önleme
+    - name: Siteler Arası Betik Oluşturmayı Önleme (XSS)
       uid: security/cross-site-scripting
     - name: Kaynaklar Arası İstekleri (CORS) etkinleştirme
       uid: security/cors
