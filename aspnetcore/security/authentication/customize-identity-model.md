@@ -1,10 +1,11 @@
 ---
 title: Identity ASP.NET Core model özelleştirmesi
 author: ajcvickers
-description: Bu makalede, ASP.NET Core için temel Entity Framework Core veri modelinin nasıl özelleştirileceği açıklanır Identity .
+description: Bu makalede, için temel alınan Entity Framework Core veri modelinin nasıl özelleştirileceği açıklanır ASP.NET Core Identity .
 ms.author: avickers
 ms.date: 07/01/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,74 +16,74 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/customize_identity_model
-ms.openlocfilehash: 7c325bbc96ad4a8c5e4686073266d730eb924c10
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: 71f532aa00c2afeeb0d6b93c01cb6a1fbd0a686c
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504677"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634312"
 ---
-# <a name="no-locidentity-model-customization-in-aspnet-core"></a><span data-ttu-id="d5c3d-103">Identity ASP.NET Core model özelleştirmesi</span><span class="sxs-lookup"><span data-stu-id="d5c3d-103">Identity model customization in ASP.NET Core</span></span>
+# <a name="no-locidentity-model-customization-in-aspnet-core"></a><span data-ttu-id="c670a-103">Identity ASP.NET Core model özelleştirmesi</span><span class="sxs-lookup"><span data-stu-id="c670a-103">Identity model customization in ASP.NET Core</span></span>
 
-<span data-ttu-id="d5c3d-104">[Arthur Vicranlar](https://github.com/ajcvickers) tarafından</span><span class="sxs-lookup"><span data-stu-id="d5c3d-104">By [Arthur Vickers](https://github.com/ajcvickers)</span></span>
+<span data-ttu-id="c670a-104">[Arthur Vicranlar](https://github.com/ajcvickers) tarafından</span><span class="sxs-lookup"><span data-stu-id="c670a-104">By [Arthur Vickers](https://github.com/ajcvickers)</span></span>
 
-<span data-ttu-id="d5c3d-105">ASP.NET Core Identity , ASP.NET Core uygulamalarda Kullanıcı hesaplarını yönetmek ve depolamak için bir çerçeve sağlar.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-105">ASP.NET Core Identity provides a framework for managing and storing user accounts in ASP.NET Core apps.</span></span> <span data-ttu-id="d5c3d-106">Identity , kimlik doğrulama mekanizması olarak **bireysel kullanıcı hesapları** seçildiğinde projenize eklenir.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-106">Identity is added to your project when **Individual User Accounts** is selected as the authentication mechanism.</span></span> <span data-ttu-id="d5c3d-107">Varsayılan olarak, Identity Entity Framework (EF) temel veri modelini kullanır.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-107">By default, Identity makes use of an Entity Framework (EF) Core data model.</span></span> <span data-ttu-id="d5c3d-108">Bu makalede, modelin nasıl özelleştirileceği açıklanır Identity .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-108">This article describes how to customize the Identity model.</span></span>
+<span data-ttu-id="c670a-105">ASP.NET Core Identity ASP.NET Core uygulamalarda Kullanıcı hesaplarını yönetmek ve depolamak için bir çerçeve sağlar.</span><span class="sxs-lookup"><span data-stu-id="c670a-105">ASP.NET Core Identity provides a framework for managing and storing user accounts in ASP.NET Core apps.</span></span> <span data-ttu-id="c670a-106">Identity , kimlik doğrulama mekanizması olarak **bireysel kullanıcı hesapları** seçildiğinde projenize eklenir.</span><span class="sxs-lookup"><span data-stu-id="c670a-106">Identity is added to your project when **Individual User Accounts** is selected as the authentication mechanism.</span></span> <span data-ttu-id="c670a-107">Varsayılan olarak, Identity Entity Framework (EF) temel veri modelini kullanır.</span><span class="sxs-lookup"><span data-stu-id="c670a-107">By default, Identity makes use of an Entity Framework (EF) Core data model.</span></span> <span data-ttu-id="c670a-108">Bu makalede, modelin nasıl özelleştirileceği açıklanır Identity .</span><span class="sxs-lookup"><span data-stu-id="c670a-108">This article describes how to customize the Identity model.</span></span>
 
-## <a name="no-locidentity-and-ef-core-migrations"></a><span data-ttu-id="d5c3d-109">Identity ve EF Core geçişleri</span><span class="sxs-lookup"><span data-stu-id="d5c3d-109">Identity and EF Core Migrations</span></span>
+## <a name="no-locidentity-and-ef-core-migrations"></a><span data-ttu-id="c670a-109">Identity ve EF Core geçişleri</span><span class="sxs-lookup"><span data-stu-id="c670a-109">Identity and EF Core Migrations</span></span>
 
-<span data-ttu-id="d5c3d-110">Modeli incelemeden önce, Identity bir veritabanı oluşturmak ve güncelleştirmek için [EF Core geçişlerle](/ef/core/managing-schemas/migrations/) nasıl çalıştığını anlamak yararlı olur.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-110">Before examining the model, it's useful to understand how Identity works with [EF Core Migrations](/ef/core/managing-schemas/migrations/) to create and update a database.</span></span> <span data-ttu-id="d5c3d-111">En üst düzeyde, işlem şu şekilde yapılır:</span><span class="sxs-lookup"><span data-stu-id="d5c3d-111">At the top level, the process is:</span></span>
+<span data-ttu-id="c670a-110">Modeli incelemeden önce, Identity bir veritabanı oluşturmak ve güncelleştirmek için [EF Core geçişlerle](/ef/core/managing-schemas/migrations/) nasıl çalıştığını anlamak yararlı olur.</span><span class="sxs-lookup"><span data-stu-id="c670a-110">Before examining the model, it's useful to understand how Identity works with [EF Core Migrations](/ef/core/managing-schemas/migrations/) to create and update a database.</span></span> <span data-ttu-id="c670a-111">En üst düzeyde, işlem şu şekilde yapılır:</span><span class="sxs-lookup"><span data-stu-id="c670a-111">At the top level, the process is:</span></span>
 
-1. <span data-ttu-id="d5c3d-112">[Kodda bir veri modeli](/ef/core/modeling/)tanımlayın veya güncelleştirin.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-112">Define or update a [data model in code](/ef/core/modeling/).</span></span>
-1. <span data-ttu-id="d5c3d-113">Bu modeli veritabanına uygulanabilecek değişikliklere dönüştürmek için bir geçiş ekleyin.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-113">Add a Migration to translate this model into changes that can be applied to the database.</span></span>
-1. <span data-ttu-id="d5c3d-114">Geçişin, amaclarınızı doğru şekilde temsil ettiğini denetleyin.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-114">Check that the Migration correctly represents your intentions.</span></span>
-1. <span data-ttu-id="d5c3d-115">Veritabanını modeliyle eşitlenmiş olacak şekilde güncelleştirmek için geçişi uygulayın.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-115">Apply the Migration to update the database to be in sync with the model.</span></span>
-1. <span data-ttu-id="d5c3d-116">Modeli daha belirginleştirmek ve veritabanını eşitlenmiş halde tutmak için 1 ile 4 arasındaki adımları tekrarlayın.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-116">Repeat steps 1 through 4 to further refine the model and keep the database in sync.</span></span>
+1. <span data-ttu-id="c670a-112">[Kodda bir veri modeli](/ef/core/modeling/)tanımlayın veya güncelleştirin.</span><span class="sxs-lookup"><span data-stu-id="c670a-112">Define or update a [data model in code](/ef/core/modeling/).</span></span>
+1. <span data-ttu-id="c670a-113">Bu modeli veritabanına uygulanabilecek değişikliklere dönüştürmek için bir geçiş ekleyin.</span><span class="sxs-lookup"><span data-stu-id="c670a-113">Add a Migration to translate this model into changes that can be applied to the database.</span></span>
+1. <span data-ttu-id="c670a-114">Geçişin, amaclarınızı doğru şekilde temsil ettiğini denetleyin.</span><span class="sxs-lookup"><span data-stu-id="c670a-114">Check that the Migration correctly represents your intentions.</span></span>
+1. <span data-ttu-id="c670a-115">Veritabanını modeliyle eşitlenmiş olacak şekilde güncelleştirmek için geçişi uygulayın.</span><span class="sxs-lookup"><span data-stu-id="c670a-115">Apply the Migration to update the database to be in sync with the model.</span></span>
+1. <span data-ttu-id="c670a-116">Modeli daha belirginleştirmek ve veritabanını eşitlenmiş halde tutmak için 1 ile 4 arasındaki adımları tekrarlayın.</span><span class="sxs-lookup"><span data-stu-id="c670a-116">Repeat steps 1 through 4 to further refine the model and keep the database in sync.</span></span>
 
-<span data-ttu-id="d5c3d-117">Geçişleri eklemek ve uygulamak için aşağıdaki yaklaşımlardan birini kullanın:</span><span class="sxs-lookup"><span data-stu-id="d5c3d-117">Use one of the following approaches to add and apply Migrations:</span></span>
+<span data-ttu-id="c670a-117">Geçişleri eklemek ve uygulamak için aşağıdaki yaklaşımlardan birini kullanın:</span><span class="sxs-lookup"><span data-stu-id="c670a-117">Use one of the following approaches to add and apply Migrations:</span></span>
 
-* <span data-ttu-id="d5c3d-118">Visual Studio kullanıyorsanız **Paket Yöneticisi konsolu** (PMC) penceresi.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-118">The **Package Manager Console** (PMC) window if using Visual Studio.</span></span> <span data-ttu-id="d5c3d-119">Daha fazla bilgi için bkz. [EF Core PMC araçları](/ef/core/miscellaneous/cli/powershell).</span><span class="sxs-lookup"><span data-stu-id="d5c3d-119">For more information, see [EF Core PMC tools](/ef/core/miscellaneous/cli/powershell).</span></span>
-* <span data-ttu-id="d5c3d-120">Komut satırı kullanılıyorsa .NET Core CLI.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-120">The .NET Core CLI if using the command line.</span></span> <span data-ttu-id="d5c3d-121">Daha fazla bilgi için bkz. [.NET komut satırı araçları EF Core](/ef/core/miscellaneous/cli/dotnet).</span><span class="sxs-lookup"><span data-stu-id="d5c3d-121">For more information, see [EF Core .NET command line tools](/ef/core/miscellaneous/cli/dotnet).</span></span>
-* <span data-ttu-id="d5c3d-122">Uygulama çalıştırıldığında hata sayfasındaki **geçişleri Uygula** düğmesine tıklanın.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-122">Clicking the **Apply Migrations** button on the error page when the app is run.</span></span>
+* <span data-ttu-id="c670a-118">Visual Studio kullanıyorsanız **Paket Yöneticisi konsolu** (PMC) penceresi.</span><span class="sxs-lookup"><span data-stu-id="c670a-118">The **Package Manager Console** (PMC) window if using Visual Studio.</span></span> <span data-ttu-id="c670a-119">Daha fazla bilgi için bkz. [EF Core PMC araçları](/ef/core/miscellaneous/cli/powershell).</span><span class="sxs-lookup"><span data-stu-id="c670a-119">For more information, see [EF Core PMC tools](/ef/core/miscellaneous/cli/powershell).</span></span>
+* <span data-ttu-id="c670a-120">Komut satırı kullanılıyorsa .NET Core CLI.</span><span class="sxs-lookup"><span data-stu-id="c670a-120">The .NET Core CLI if using the command line.</span></span> <span data-ttu-id="c670a-121">Daha fazla bilgi için bkz. [.NET komut satırı araçları EF Core](/ef/core/miscellaneous/cli/dotnet).</span><span class="sxs-lookup"><span data-stu-id="c670a-121">For more information, see [EF Core .NET command line tools](/ef/core/miscellaneous/cli/dotnet).</span></span>
+* <span data-ttu-id="c670a-122">Uygulama çalıştırıldığında hata sayfasındaki **geçişleri Uygula** düğmesine tıklanın.</span><span class="sxs-lookup"><span data-stu-id="c670a-122">Clicking the **Apply Migrations** button on the error page when the app is run.</span></span>
 
-<span data-ttu-id="d5c3d-123">ASP.NET Core bir geliştirme zamanı hata sayfası işleyicisine sahiptir.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-123">ASP.NET Core has a development-time error page handler.</span></span> <span data-ttu-id="d5c3d-124">İşleyici, uygulama çalıştırıldığında geçişleri uygulayabilir.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-124">The handler can apply migrations when the app is run.</span></span> <span data-ttu-id="d5c3d-125">Üretim uygulamaları tipik olarak geçişlerden SQL betikleri oluşturur ve veritabanı değişiklikleri denetimli bir uygulama ve veritabanı dağıtımının bir parçası olarak dağıtılır.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-125">Production apps typically generate SQL scripts from the migrations and deploy database changes as part of a controlled app and database deployment.</span></span>
+<span data-ttu-id="c670a-123">ASP.NET Core bir geliştirme zamanı hata sayfası işleyicisine sahiptir.</span><span class="sxs-lookup"><span data-stu-id="c670a-123">ASP.NET Core has a development-time error page handler.</span></span> <span data-ttu-id="c670a-124">İşleyici, uygulama çalıştırıldığında geçişleri uygulayabilir.</span><span class="sxs-lookup"><span data-stu-id="c670a-124">The handler can apply migrations when the app is run.</span></span> <span data-ttu-id="c670a-125">Üretim uygulamaları tipik olarak geçişlerden SQL betikleri oluşturur ve veritabanı değişiklikleri denetimli bir uygulama ve veritabanı dağıtımının bir parçası olarak dağıtılır.</span><span class="sxs-lookup"><span data-stu-id="c670a-125">Production apps typically generate SQL scripts from the migrations and deploy database changes as part of a controlled app and database deployment.</span></span>
 
-<span data-ttu-id="d5c3d-126">Kullanılarak yeni bir uygulama Identity oluşturulduğunda, yukarıdaki 1. ve 2. adım zaten tamamlanmıştır.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-126">When a new app using Identity is created, steps 1 and 2 above have already been completed.</span></span> <span data-ttu-id="d5c3d-127">Diğer bir deyişle, ilk veri modeli zaten var ve ilk geçiş projeye eklendi.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-127">That is, the initial data model already exists, and the initial migration has been added to the project.</span></span> <span data-ttu-id="d5c3d-128">İlk geçişin hala veritabanına uygulanması gerekir.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-128">The initial migration still needs to be applied to the database.</span></span> <span data-ttu-id="d5c3d-129">İlk geçiş aşağıdaki yaklaşımlardan biri aracılığıyla uygulanabilir:</span><span class="sxs-lookup"><span data-stu-id="d5c3d-129">The initial migration can be applied via one of the following approaches:</span></span>
+<span data-ttu-id="c670a-126">Kullanılarak yeni bir uygulama Identity oluşturulduğunda, yukarıdaki 1. ve 2. adım zaten tamamlanmıştır.</span><span class="sxs-lookup"><span data-stu-id="c670a-126">When a new app using Identity is created, steps 1 and 2 above have already been completed.</span></span> <span data-ttu-id="c670a-127">Diğer bir deyişle, ilk veri modeli zaten var ve ilk geçiş projeye eklendi.</span><span class="sxs-lookup"><span data-stu-id="c670a-127">That is, the initial data model already exists, and the initial migration has been added to the project.</span></span> <span data-ttu-id="c670a-128">İlk geçişin hala veritabanına uygulanması gerekir.</span><span class="sxs-lookup"><span data-stu-id="c670a-128">The initial migration still needs to be applied to the database.</span></span> <span data-ttu-id="c670a-129">İlk geçiş aşağıdaki yaklaşımlardan biri aracılığıyla uygulanabilir:</span><span class="sxs-lookup"><span data-stu-id="c670a-129">The initial migration can be applied via one of the following approaches:</span></span>
 
-* <span data-ttu-id="d5c3d-130">`Update-Database`PMC 'de çalıştırın.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-130">Run `Update-Database` in PMC.</span></span>
-* <span data-ttu-id="d5c3d-131">`dotnet ef database update`Komut kabuğu 'nda çalıştırın.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-131">Run `dotnet ef database update` in a command shell.</span></span>
-* <span data-ttu-id="d5c3d-132">Uygulama çalıştırıldığında hata sayfasında **geçişleri Uygula** düğmesine tıklayın.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-132">Click the **Apply Migrations** button on the error page when the app is run.</span></span>
+* <span data-ttu-id="c670a-130">`Update-Database`PMC 'de çalıştırın.</span><span class="sxs-lookup"><span data-stu-id="c670a-130">Run `Update-Database` in PMC.</span></span>
+* <span data-ttu-id="c670a-131">`dotnet ef database update`Komut kabuğu 'nda çalıştırın.</span><span class="sxs-lookup"><span data-stu-id="c670a-131">Run `dotnet ef database update` in a command shell.</span></span>
+* <span data-ttu-id="c670a-132">Uygulama çalıştırıldığında hata sayfasında **geçişleri Uygula** düğmesine tıklayın.</span><span class="sxs-lookup"><span data-stu-id="c670a-132">Click the **Apply Migrations** button on the error page when the app is run.</span></span>
 
-<span data-ttu-id="d5c3d-133">Modelde değişiklikler yapıldığından önceki adımları yineleyin.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-133">Repeat the preceding steps as changes are made to the model.</span></span>
+<span data-ttu-id="c670a-133">Modelde değişiklikler yapıldığından önceki adımları yineleyin.</span><span class="sxs-lookup"><span data-stu-id="c670a-133">Repeat the preceding steps as changes are made to the model.</span></span>
 
-## <a name="the-no-locidentity-model"></a><span data-ttu-id="d5c3d-134">IdentityModel</span><span class="sxs-lookup"><span data-stu-id="d5c3d-134">The Identity model</span></span>
+## <a name="the-no-locidentity-model"></a><span data-ttu-id="c670a-134">IdentityModel</span><span class="sxs-lookup"><span data-stu-id="c670a-134">The Identity model</span></span>
 
-### <a name="entity-types"></a><span data-ttu-id="d5c3d-135">Varlık türleri</span><span class="sxs-lookup"><span data-stu-id="d5c3d-135">Entity types</span></span>
+### <a name="entity-types"></a><span data-ttu-id="c670a-135">Varlık türleri</span><span class="sxs-lookup"><span data-stu-id="c670a-135">Entity types</span></span>
 
-<span data-ttu-id="d5c3d-136">IdentityModel aşağıdaki varlık türlerinden oluşur.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-136">The Identity model consists of the following entity types.</span></span>
+<span data-ttu-id="c670a-136">IdentityModel aşağıdaki varlık türlerinden oluşur.</span><span class="sxs-lookup"><span data-stu-id="c670a-136">The Identity model consists of the following entity types.</span></span>
 
-|<span data-ttu-id="d5c3d-137">Varlık türü</span><span class="sxs-lookup"><span data-stu-id="d5c3d-137">Entity type</span></span>|<span data-ttu-id="d5c3d-138">Açıklama</span><span class="sxs-lookup"><span data-stu-id="d5c3d-138">Description</span></span>                                                  |
+|<span data-ttu-id="c670a-137">Varlık türü</span><span class="sxs-lookup"><span data-stu-id="c670a-137">Entity type</span></span>|<span data-ttu-id="c670a-138">Açıklama</span><span class="sxs-lookup"><span data-stu-id="c670a-138">Description</span></span>                                                  |
 |-----------|-------------------------------------------------------------|
-|`User`     |<span data-ttu-id="d5c3d-139">Kullanıcıyı temsil eder.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-139">Represents the user.</span></span>                                         |
-|`Role`     |<span data-ttu-id="d5c3d-140">Bir rolü temsil eder.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-140">Represents a role.</span></span>                                           |
-|`UserClaim`|<span data-ttu-id="d5c3d-141">Bir kullanıcının sahip olduğu talebi temsil eder.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-141">Represents a claim that a user possesses.</span></span>                    |
-|`UserToken`|<span data-ttu-id="d5c3d-142">Bir kullanıcı için kimlik doğrulama belirtecini temsil eder.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-142">Represents an authentication token for a user.</span></span>               |
-|`UserLogin`|<span data-ttu-id="d5c3d-143">Kullanıcıyı bir oturum ile ilişkilendirir.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-143">Associates a user with a login.</span></span>                              |
-|`RoleClaim`|<span data-ttu-id="d5c3d-144">Bir rol içindeki tüm kullanıcılara verilen bir talebi temsil eder.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-144">Represents a claim that's granted to all users within a role.</span></span>|
-|`UserRole` |<span data-ttu-id="d5c3d-145">Kullanıcıları ve rolleri ilişkilendiren bir JOIN varlığı.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-145">A join entity that associates users and roles.</span></span>               |
+|`User`     |<span data-ttu-id="c670a-139">Kullanıcıyı temsil eder.</span><span class="sxs-lookup"><span data-stu-id="c670a-139">Represents the user.</span></span>                                         |
+|`Role`     |<span data-ttu-id="c670a-140">Bir rolü temsil eder.</span><span class="sxs-lookup"><span data-stu-id="c670a-140">Represents a role.</span></span>                                           |
+|`UserClaim`|<span data-ttu-id="c670a-141">Bir kullanıcının sahip olduğu talebi temsil eder.</span><span class="sxs-lookup"><span data-stu-id="c670a-141">Represents a claim that a user possesses.</span></span>                    |
+|`UserToken`|<span data-ttu-id="c670a-142">Bir kullanıcı için kimlik doğrulama belirtecini temsil eder.</span><span class="sxs-lookup"><span data-stu-id="c670a-142">Represents an authentication token for a user.</span></span>               |
+|`UserLogin`|<span data-ttu-id="c670a-143">Kullanıcıyı bir oturum ile ilişkilendirir.</span><span class="sxs-lookup"><span data-stu-id="c670a-143">Associates a user with a login.</span></span>                              |
+|`RoleClaim`|<span data-ttu-id="c670a-144">Bir rol içindeki tüm kullanıcılara verilen bir talebi temsil eder.</span><span class="sxs-lookup"><span data-stu-id="c670a-144">Represents a claim that's granted to all users within a role.</span></span>|
+|`UserRole` |<span data-ttu-id="c670a-145">Kullanıcıları ve rolleri ilişkilendiren bir JOIN varlığı.</span><span class="sxs-lookup"><span data-stu-id="c670a-145">A join entity that associates users and roles.</span></span>               |
 
-### <a name="entity-type-relationships"></a><span data-ttu-id="d5c3d-146">Varlık türü ilişkileri</span><span class="sxs-lookup"><span data-stu-id="d5c3d-146">Entity type relationships</span></span>
+### <a name="entity-type-relationships"></a><span data-ttu-id="c670a-146">Varlık türü ilişkileri</span><span class="sxs-lookup"><span data-stu-id="c670a-146">Entity type relationships</span></span>
 
-<span data-ttu-id="d5c3d-147">[Varlık türleri](#entity-types) , aşağıdaki yollarla birbirleriyle ilişkilidir:</span><span class="sxs-lookup"><span data-stu-id="d5c3d-147">The [entity types](#entity-types) are related to each other in the following ways:</span></span>
+<span data-ttu-id="c670a-147">[Varlık türleri](#entity-types) , aşağıdaki yollarla birbirleriyle ilişkilidir:</span><span class="sxs-lookup"><span data-stu-id="c670a-147">The [entity types](#entity-types) are related to each other in the following ways:</span></span>
 
-* <span data-ttu-id="d5c3d-148">Her birinin `User` çok sayıda olabilir `UserClaims` .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-148">Each `User` can have many `UserClaims`.</span></span>
-* <span data-ttu-id="d5c3d-149">Her birinin `User` çok sayıda olabilir `UserLogins` .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-149">Each `User` can have many `UserLogins`.</span></span>
-* <span data-ttu-id="d5c3d-150">Her birinin `User` çok sayıda olabilir `UserTokens` .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-150">Each `User` can have many `UserTokens`.</span></span>
-* <span data-ttu-id="d5c3d-151">Her birinin `Role` birden çok ilişkili olabilir `RoleClaims` .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-151">Each `Role` can have many associated `RoleClaims`.</span></span>
-* <span data-ttu-id="d5c3d-152">Her biri `User` birden çok ilişkili olabilir `Roles` ve her biri `Role` birçok ile ilişkilendirilebilir `Users` .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-152">Each `User` can have many associated `Roles`, and each `Role` can be associated with many `Users`.</span></span> <span data-ttu-id="d5c3d-153">Bu, veritabanında bir JOIN tablosu gerektiren çoktan çoğa bir ilişkidir.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-153">This is a many-to-many relationship that requires a join table in the database.</span></span> <span data-ttu-id="d5c3d-154">JOIN tablosu varlıkla temsil edilir `UserRole` .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-154">The join table is represented by the `UserRole` entity.</span></span>
+* <span data-ttu-id="c670a-148">Her birinin `User` çok sayıda olabilir `UserClaims` .</span><span class="sxs-lookup"><span data-stu-id="c670a-148">Each `User` can have many `UserClaims`.</span></span>
+* <span data-ttu-id="c670a-149">Her birinin `User` çok sayıda olabilir `UserLogins` .</span><span class="sxs-lookup"><span data-stu-id="c670a-149">Each `User` can have many `UserLogins`.</span></span>
+* <span data-ttu-id="c670a-150">Her birinin `User` çok sayıda olabilir `UserTokens` .</span><span class="sxs-lookup"><span data-stu-id="c670a-150">Each `User` can have many `UserTokens`.</span></span>
+* <span data-ttu-id="c670a-151">Her birinin `Role` birden çok ilişkili olabilir `RoleClaims` .</span><span class="sxs-lookup"><span data-stu-id="c670a-151">Each `Role` can have many associated `RoleClaims`.</span></span>
+* <span data-ttu-id="c670a-152">Her biri `User` birden çok ilişkili olabilir `Roles` ve her biri `Role` birçok ile ilişkilendirilebilir `Users` .</span><span class="sxs-lookup"><span data-stu-id="c670a-152">Each `User` can have many associated `Roles`, and each `Role` can be associated with many `Users`.</span></span> <span data-ttu-id="c670a-153">Bu, veritabanında bir JOIN tablosu gerektiren çoktan çoğa bir ilişkidir.</span><span class="sxs-lookup"><span data-stu-id="c670a-153">This is a many-to-many relationship that requires a join table in the database.</span></span> <span data-ttu-id="c670a-154">JOIN tablosu varlıkla temsil edilir `UserRole` .</span><span class="sxs-lookup"><span data-stu-id="c670a-154">The join table is represented by the `UserRole` entity.</span></span>
 
-### <a name="default-model-configuration"></a><span data-ttu-id="d5c3d-155">Varsayılan model yapılandırması</span><span class="sxs-lookup"><span data-stu-id="d5c3d-155">Default model configuration</span></span>
+### <a name="default-model-configuration"></a><span data-ttu-id="c670a-155">Varsayılan model yapılandırması</span><span class="sxs-lookup"><span data-stu-id="c670a-155">Default model configuration</span></span>
 
-<span data-ttu-id="d5c3d-156">Identitymodeli yapılandırmak ve kullanmak için [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) 'ten devraldığı birçok *bağlam sınıfını* tanımlar.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-156">Identity defines many *context classes* that inherit from [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) to configure and use the model.</span></span> <span data-ttu-id="d5c3d-157">Bu yapılandırma, bağlam sınıfının [Onmodeloluþturma](/dotnet/api/microsoft.entityframeworkcore.dbcontext.onmodelcreating) yönteminde [EF Core Code First floent API 'si](/ef/core/modeling/) kullanılarak yapılır.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-157">This configuration is done using the [EF Core Code First Fluent API](/ef/core/modeling/) in the [OnModelCreating](/dotnet/api/microsoft.entityframeworkcore.dbcontext.onmodelcreating) method of the context class.</span></span> <span data-ttu-id="d5c3d-158">Varsayılan yapılandırma:</span><span class="sxs-lookup"><span data-stu-id="d5c3d-158">The default configuration is:</span></span>
+<span data-ttu-id="c670a-156">Identitymodeli yapılandırmak ve kullanmak için [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) 'ten devraldığı birçok *bağlam sınıfını* tanımlar.</span><span class="sxs-lookup"><span data-stu-id="c670a-156">Identity defines many *context classes* that inherit from [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) to configure and use the model.</span></span> <span data-ttu-id="c670a-157">Bu yapılandırma, bağlam sınıfının [Onmodeloluþturma](/dotnet/api/microsoft.entityframeworkcore.dbcontext.onmodelcreating) yönteminde [EF Core Code First floent API 'si](/ef/core/modeling/) kullanılarak yapılır.</span><span class="sxs-lookup"><span data-stu-id="c670a-157">This configuration is done using the [EF Core Code First Fluent API](/ef/core/modeling/) in the [OnModelCreating](/dotnet/api/microsoft.entityframeworkcore.dbcontext.onmodelcreating) method of the context class.</span></span> <span data-ttu-id="c670a-158">Varsayılan yapılandırma:</span><span class="sxs-lookup"><span data-stu-id="c670a-158">The default configuration is:</span></span>
 
 ```csharp
 builder.Entity<TUser>(b =>
@@ -205,9 +206,9 @@ builder.Entity<TUserRole>(b =>
 });
 ```
 
-### <a name="model-generic-types"></a><span data-ttu-id="d5c3d-159">Model genel türleri</span><span class="sxs-lookup"><span data-stu-id="d5c3d-159">Model generic types</span></span>
+### <a name="model-generic-types"></a><span data-ttu-id="c670a-159">Model genel türleri</span><span class="sxs-lookup"><span data-stu-id="c670a-159">Model generic types</span></span>
 
-<span data-ttu-id="d5c3d-160">Identity Yukarıda listelenen her varlık türü için varsayılan [ortak dil çalışma zamanı](/dotnet/standard/glossary#clr) (CLR) türlerini tanımlar.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-160">Identity defines default [Common Language Runtime](/dotnet/standard/glossary#clr) (CLR) types for each of the entity types listed above.</span></span> <span data-ttu-id="d5c3d-161">Bu türlerin öneki *Identity* :</span><span class="sxs-lookup"><span data-stu-id="d5c3d-161">These types are all prefixed with *Identity*:</span></span>
+<span data-ttu-id="c670a-160">Identity Yukarıda listelenen her varlık türü için varsayılan [ortak dil çalışma zamanı](/dotnet/standard/glossary#clr) (CLR) türlerini tanımlar.</span><span class="sxs-lookup"><span data-stu-id="c670a-160">Identity defines default [Common Language Runtime](/dotnet/standard/glossary#clr) (CLR) types for each of the entity types listed above.</span></span> <span data-ttu-id="c670a-161">Bu türlerin öneki *Identity* :</span><span class="sxs-lookup"><span data-stu-id="c670a-161">These types are all prefixed with *Identity*:</span></span>
 
 * `IdentityUser`
 * `IdentityRole`
@@ -217,9 +218,9 @@ builder.Entity<TUserRole>(b =>
 * `IdentityRoleClaim`
 * `IdentityUserRole`
 
-<span data-ttu-id="d5c3d-162">Bu türleri doğrudan kullanmak yerine, türler uygulamanın kendi türleri için temel sınıflar olarak kullanılabilir.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-162">Rather than using these types directly, the types can be used as base classes for the app's own types.</span></span> <span data-ttu-id="d5c3d-163">`DbContext`Tarafından tanımlanan sınıflar Identity geneldir, örneğin, modeldeki bir veya daha fazla varlık türü IÇIN farklı clr türleri kullanılabilir.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-163">The `DbContext` classes defined by Identity are generic, such that different CLR types can be used for one or more of the entity types in the model.</span></span> <span data-ttu-id="d5c3d-164">Bu genel türler Ayrıca `User` birincil anahtar (PK) veri türünün değiştirilmesine izin verir.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-164">These generic types also allow the `User` primary key (PK) data type to be changed.</span></span>
+<span data-ttu-id="c670a-162">Bu türleri doğrudan kullanmak yerine, türler uygulamanın kendi türleri için temel sınıflar olarak kullanılabilir.</span><span class="sxs-lookup"><span data-stu-id="c670a-162">Rather than using these types directly, the types can be used as base classes for the app's own types.</span></span> <span data-ttu-id="c670a-163">`DbContext`Tarafından tanımlanan sınıflar Identity geneldir, örneğin, modeldeki bir veya daha fazla varlık türü IÇIN farklı clr türleri kullanılabilir.</span><span class="sxs-lookup"><span data-stu-id="c670a-163">The `DbContext` classes defined by Identity are generic, such that different CLR types can be used for one or more of the entity types in the model.</span></span> <span data-ttu-id="c670a-164">Bu genel türler Ayrıca `User` birincil anahtar (PK) veri türünün değiştirilmesine izin verir.</span><span class="sxs-lookup"><span data-stu-id="c670a-164">These generic types also allow the `User` primary key (PK) data type to be changed.</span></span>
 
-<span data-ttu-id="d5c3d-165">IdentityRol desteğiyle birlikte kullanıldığında bir <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> sınıf kullanılmalıdır.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-165">When using Identity with support for roles, an <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> class should be used.</span></span> <span data-ttu-id="d5c3d-166">Örneğin:</span><span class="sxs-lookup"><span data-stu-id="d5c3d-166">For example:</span></span>
+<span data-ttu-id="c670a-165">IdentityRol desteğiyle birlikte kullanıldığında bir <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> sınıf kullanılmalıdır.</span><span class="sxs-lookup"><span data-stu-id="c670a-165">When using Identity with support for roles, an <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> class should be used.</span></span> <span data-ttu-id="c670a-166">Örnek:</span><span class="sxs-lookup"><span data-stu-id="c670a-166">For example:</span></span>
 
 ```csharp
 // Uses all the built-in Identity types
@@ -263,7 +264,7 @@ public abstract class IdentityDbContext<
          where TUserToken : IdentityUserToken<TKey>
 ```
 
-<span data-ttu-id="d5c3d-167">Ayrıca Identity , bir <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserContext%601> sınıf kullanılması gereken roller (yalnızca talepler) olmadan da kullanılabilir:</span><span class="sxs-lookup"><span data-stu-id="d5c3d-167">It's also possible to use Identity without roles (only claims), in which case an <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserContext%601> class should be used:</span></span>
+<span data-ttu-id="c670a-167">Ayrıca Identity , bir <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserContext%601> sınıf kullanılması gereken roller (yalnızca talepler) olmadan da kullanılabilir:</span><span class="sxs-lookup"><span data-stu-id="c670a-167">It's also possible to use Identity without roles (only claims), in which case an <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserContext%601> class should be used:</span></span>
 
 ```csharp
 // Uses the built-in non-role Identity types except with a custom User type
@@ -297,18 +298,18 @@ public abstract class IdentityUserContext<
 }
 ```
 
-## <a name="customize-the-model"></a><span data-ttu-id="d5c3d-168">Modeli özelleştirme</span><span class="sxs-lookup"><span data-stu-id="d5c3d-168">Customize the model</span></span>
+## <a name="customize-the-model"></a><span data-ttu-id="c670a-168">Modeli özelleştirme</span><span class="sxs-lookup"><span data-stu-id="c670a-168">Customize the model</span></span>
 
-<span data-ttu-id="d5c3d-169">Model özelleştirmesi için başlangıç noktası uygun bağlam türünden türetilmelidir.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-169">The starting point for model customization is to derive from the appropriate context type.</span></span> <span data-ttu-id="d5c3d-170">[Model genel türler](#model-generic-types) bölümüne bakın.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-170">See the [Model generic types](#model-generic-types) section.</span></span> <span data-ttu-id="d5c3d-171">Bu bağlam türü geleneksel çağırılır `ApplicationDbContext` ve ASP.NET Core şablonları tarafından oluşturulur.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-171">This context type is customarily called `ApplicationDbContext` and is created by the ASP.NET Core templates.</span></span>
+<span data-ttu-id="c670a-169">Model özelleştirmesi için başlangıç noktası uygun bağlam türünden türetilmelidir.</span><span class="sxs-lookup"><span data-stu-id="c670a-169">The starting point for model customization is to derive from the appropriate context type.</span></span> <span data-ttu-id="c670a-170">[Model genel türler](#model-generic-types) bölümüne bakın.</span><span class="sxs-lookup"><span data-stu-id="c670a-170">See the [Model generic types](#model-generic-types) section.</span></span> <span data-ttu-id="c670a-171">Bu bağlam türü geleneksel çağırılır `ApplicationDbContext` ve ASP.NET Core şablonları tarafından oluşturulur.</span><span class="sxs-lookup"><span data-stu-id="c670a-171">This context type is customarily called `ApplicationDbContext` and is created by the ASP.NET Core templates.</span></span>
 
-<span data-ttu-id="d5c3d-172">Bağlam, modeli iki şekilde yapılandırmak için kullanılır:</span><span class="sxs-lookup"><span data-stu-id="d5c3d-172">The context is used to configure the model in two ways:</span></span>
+<span data-ttu-id="c670a-172">Bağlam, modeli iki şekilde yapılandırmak için kullanılır:</span><span class="sxs-lookup"><span data-stu-id="c670a-172">The context is used to configure the model in two ways:</span></span>
 
-* <span data-ttu-id="d5c3d-173">Genel tür parametreleri için varlık ve anahtar türleri sağlama.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-173">Supplying entity and key types for the generic type parameters.</span></span>
-* <span data-ttu-id="d5c3d-174">`OnModelCreating`Bu türlerin eşlemesini değiştirmek için geçersiz kılma.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-174">Overriding `OnModelCreating` to modify the mapping of these types.</span></span>
+* <span data-ttu-id="c670a-173">Genel tür parametreleri için varlık ve anahtar türleri sağlama.</span><span class="sxs-lookup"><span data-stu-id="c670a-173">Supplying entity and key types for the generic type parameters.</span></span>
+* <span data-ttu-id="c670a-174">`OnModelCreating`Bu türlerin eşlemesini değiştirmek için geçersiz kılma.</span><span class="sxs-lookup"><span data-stu-id="c670a-174">Overriding `OnModelCreating` to modify the mapping of these types.</span></span>
 
-<span data-ttu-id="d5c3d-175">Geçersiz kıldığınızda `OnModelCreating` , `base.OnModelCreating` ilk olarak çağrılmalıdır; geçersiz kılma yapılandırması daha sonra çağrılmalıdır.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-175">When overriding `OnModelCreating`, `base.OnModelCreating` should be called first; the overriding configuration should be called next.</span></span> <span data-ttu-id="d5c3d-176">EF Core, yapılandırma için genellikle son bir WINS ilkesine sahiptir.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-176">EF Core generally has a last-one-wins policy for configuration.</span></span> <span data-ttu-id="d5c3d-177">Örneğin, bir `ToTable` varlık türünün yöntemi ilk olarak bir tablo adı ve daha sonra farklı bir tablo adıyla çağrılırsa ikinci çağrıda tablo adı kullanılır.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-177">For example, if the `ToTable` method for an entity type is called first with one table name and then again later with a different table name, the table name in the second call is used.</span></span>
+<span data-ttu-id="c670a-175">Geçersiz kıldığınızda `OnModelCreating` , `base.OnModelCreating` ilk olarak çağrılmalıdır; geçersiz kılma yapılandırması daha sonra çağrılmalıdır.</span><span class="sxs-lookup"><span data-stu-id="c670a-175">When overriding `OnModelCreating`, `base.OnModelCreating` should be called first; the overriding configuration should be called next.</span></span> <span data-ttu-id="c670a-176">EF Core, yapılandırma için genellikle son bir WINS ilkesine sahiptir.</span><span class="sxs-lookup"><span data-stu-id="c670a-176">EF Core generally has a last-one-wins policy for configuration.</span></span> <span data-ttu-id="c670a-177">Örneğin, bir `ToTable` varlık türünün yöntemi ilk olarak bir tablo adı ve daha sonra farklı bir tablo adıyla çağrılırsa ikinci çağrıda tablo adı kullanılır.</span><span class="sxs-lookup"><span data-stu-id="c670a-177">For example, if the `ToTable` method for an entity type is called first with one table name and then again later with a different table name, the table name in the second call is used.</span></span>
 
-### <a name="custom-user-data"></a><span data-ttu-id="d5c3d-178">Özel Kullanıcı verileri</span><span class="sxs-lookup"><span data-stu-id="d5c3d-178">Custom user data</span></span>
+### <a name="custom-user-data"></a><span data-ttu-id="c670a-178">Özel Kullanıcı verileri</span><span class="sxs-lookup"><span data-stu-id="c670a-178">Custom user data</span></span>
 
 <!--
 set projNam=WebApp1
@@ -320,7 +321,7 @@ dotnet ef migrations add CreateIdentitySchema
 dotnet ef database update
  -->
 
-<span data-ttu-id="d5c3d-179">[Özel Kullanıcı verileri](xref:security/authentication/add-user-data) , öğesinden devralınırken desteklenir `IdentityUser` .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-179">[Custom user data](xref:security/authentication/add-user-data) is supported by inheriting from `IdentityUser`.</span></span> <span data-ttu-id="d5c3d-180">Bu tür için ad vermek önemlidir `ApplicationUser` :</span><span class="sxs-lookup"><span data-stu-id="d5c3d-180">It's customary to name this type `ApplicationUser`:</span></span>
+<span data-ttu-id="c670a-179">[Özel Kullanıcı verileri](xref:security/authentication/add-user-data) , öğesinden devralınırken desteklenir `IdentityUser` .</span><span class="sxs-lookup"><span data-stu-id="c670a-179">[Custom user data](xref:security/authentication/add-user-data) is supported by inheriting from `IdentityUser`.</span></span> <span data-ttu-id="c670a-180">Bu tür için ad vermek önemlidir `ApplicationUser` :</span><span class="sxs-lookup"><span data-stu-id="c670a-180">It's customary to name this type `ApplicationUser`:</span></span>
 
 ```csharp
 public class ApplicationUser : IdentityUser
@@ -329,7 +330,7 @@ public class ApplicationUser : IdentityUser
 }
 ```
 
-<span data-ttu-id="d5c3d-181">`ApplicationUser`Türü bağlam için genel bir bağımsız değişken olarak kullanın:</span><span class="sxs-lookup"><span data-stu-id="d5c3d-181">Use the `ApplicationUser` type as a generic argument for the context:</span></span>
+<span data-ttu-id="c670a-181">`ApplicationUser`Türü bağlam için genel bir bağımsız değişken olarak kullanın:</span><span class="sxs-lookup"><span data-stu-id="c670a-181">Use the `ApplicationUser` type as a generic argument for the context:</span></span>
 
 ```csharp
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -346,9 +347,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 }
 ```
 
-<span data-ttu-id="d5c3d-182">Sınıfında geçersiz kılınmasına gerek yoktur `OnModelCreating` `ApplicationDbContext` .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-182">There's no need to override `OnModelCreating` in the `ApplicationDbContext` class.</span></span> <span data-ttu-id="d5c3d-183">EF Core, `CustomTag` özelliği kuralına göre eşler.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-183">EF Core maps the `CustomTag` property by convention.</span></span> <span data-ttu-id="d5c3d-184">Ancak, veritabanının yeni bir sütun oluşturmak için güncelleştirilmesi gerekir `CustomTag` .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-184">However, the database needs to be updated to create a new `CustomTag` column.</span></span> <span data-ttu-id="d5c3d-185">Sütunu oluşturmak için bir geçiş ekleyin ve sonra, [ Identity ve EF Core geçişleri](#identity-and-ef-core-migrations)içinde açıklandığı gibi veritabanını güncelleştirin.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-185">To create the column, add a migration, and then update the database as described in [Identity and EF Core Migrations](#identity-and-ef-core-migrations).</span></span>
+<span data-ttu-id="c670a-182">Sınıfında geçersiz kılınmasına gerek yoktur `OnModelCreating` `ApplicationDbContext` .</span><span class="sxs-lookup"><span data-stu-id="c670a-182">There's no need to override `OnModelCreating` in the `ApplicationDbContext` class.</span></span> <span data-ttu-id="c670a-183">EF Core, `CustomTag` özelliği kuralına göre eşler.</span><span class="sxs-lookup"><span data-stu-id="c670a-183">EF Core maps the `CustomTag` property by convention.</span></span> <span data-ttu-id="c670a-184">Ancak, veritabanının yeni bir sütun oluşturmak için güncelleştirilmesi gerekir `CustomTag` .</span><span class="sxs-lookup"><span data-stu-id="c670a-184">However, the database needs to be updated to create a new `CustomTag` column.</span></span> <span data-ttu-id="c670a-185">Sütunu oluşturmak için bir geçiş ekleyin ve sonra, [ Identity ve EF Core geçişleri](#identity-and-ef-core-migrations)içinde açıklandığı gibi veritabanını güncelleştirin.</span><span class="sxs-lookup"><span data-stu-id="c670a-185">To create the column, add a migration, and then update the database as described in [Identity and EF Core Migrations](#identity-and-ef-core-migrations).</span></span>
 
-<span data-ttu-id="d5c3d-186">*Sayfaları/paylaşılan/_LoginPartial. cshtml* 'yi güncelleştirin ve `IdentityUser` ile değiştirin `ApplicationUser` :</span><span class="sxs-lookup"><span data-stu-id="d5c3d-186">Update *Pages/Shared/_LoginPartial.cshtml* and replace `IdentityUser` with `ApplicationUser`:</span></span>
+<span data-ttu-id="c670a-186">*Sayfaları/paylaşılan/_LoginPartial. cshtml* 'yi güncelleştirin ve `IdentityUser` ile değiştirin `ApplicationUser` :</span><span class="sxs-lookup"><span data-stu-id="c670a-186">Update *Pages/Shared/_LoginPartial.cshtml* and replace `IdentityUser` with `ApplicationUser`:</span></span>
 
 ```cshtml
 @using Microsoft.AspNetCore.Identity
@@ -357,7 +358,7 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 @inject UserManager<ApplicationUser> UserManager
 ```
 
-<span data-ttu-id="d5c3d-187">*Alanı/ Identity / Identity HostingStartup.cs* veya `Startup.ConfigureServices` `IdentityUser` ile değiştirin `ApplicationUser` .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-187">Update *Areas/Identity/IdentityHostingStartup.cs*  or `Startup.ConfigureServices` and replace `IdentityUser` with `ApplicationUser`.</span></span>
+<span data-ttu-id="c670a-187">*Alanı/ Identity / Identity HostingStartup.cs* veya `Startup.ConfigureServices` `IdentityUser` ile değiştirin `ApplicationUser` .</span><span class="sxs-lookup"><span data-stu-id="c670a-187">Update *Areas/Identity/IdentityHostingStartup.cs*  or `Startup.ConfigureServices` and replace `IdentityUser` with `ApplicationUser`.</span></span>
 
 ```csharp
 services.AddIdentity<ApplicationUser>()
@@ -365,20 +366,20 @@ services.AddIdentity<ApplicationUser>()
         .AddDefaultUI();
 ```
 
-<span data-ttu-id="d5c3d-188">ASP.NET Core 2,1 veya sonraki sürümlerde Identity bir sınıf kitaplığı olarak sağlanır Razor .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-188">In ASP.NET Core 2.1 or later, Identity is provided as a Razor Class Library.</span></span> <span data-ttu-id="d5c3d-189">Daha fazla bilgi için bkz. <xref:security/authentication/scaffold-identity>.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-189">For more information, see <xref:security/authentication/scaffold-identity>.</span></span> <span data-ttu-id="d5c3d-190">Sonuç olarak, yukarıdaki kod için bir çağrısı gerektirir <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-190">Consequently, the preceding code requires a call to <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>.</span></span> <span data-ttu-id="d5c3d-191">IdentityProjeye dosya eklemek için desteği kullanılmışsa Identity , çağrısını kaldırın `AddDefaultUI` .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-191">If the Identity scaffolder was used to add Identity files to the project, remove the call to `AddDefaultUI`.</span></span> <span data-ttu-id="d5c3d-192">Daha fazla bilgi için bkz.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-192">For more information, see:</span></span>
+<span data-ttu-id="c670a-188">ASP.NET Core 2,1 veya sonraki sürümlerde Identity bir sınıf kitaplığı olarak sağlanır Razor .</span><span class="sxs-lookup"><span data-stu-id="c670a-188">In ASP.NET Core 2.1 or later, Identity is provided as a Razor Class Library.</span></span> <span data-ttu-id="c670a-189">Daha fazla bilgi için bkz. <xref:security/authentication/scaffold-identity>.</span><span class="sxs-lookup"><span data-stu-id="c670a-189">For more information, see <xref:security/authentication/scaffold-identity>.</span></span> <span data-ttu-id="c670a-190">Sonuç olarak, yukarıdaki kod için bir çağrısı gerektirir <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> .</span><span class="sxs-lookup"><span data-stu-id="c670a-190">Consequently, the preceding code requires a call to <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>.</span></span> <span data-ttu-id="c670a-191">IdentityProjeye dosya eklemek için desteği kullanılmışsa Identity , çağrısını kaldırın `AddDefaultUI` .</span><span class="sxs-lookup"><span data-stu-id="c670a-191">If the Identity scaffolder was used to add Identity files to the project, remove the call to `AddDefaultUI`.</span></span> <span data-ttu-id="c670a-192">Daha fazla bilgi için bkz.</span><span class="sxs-lookup"><span data-stu-id="c670a-192">For more information, see:</span></span>
 
-* [<span data-ttu-id="d5c3d-193">İskele Identity</span><span class="sxs-lookup"><span data-stu-id="d5c3d-193">Scaffold Identity</span></span>](xref:security/authentication/scaffold-identity)
-* [<span data-ttu-id="d5c3d-194">İçin özel kullanıcı verisi ekleme, indirme ve silme Identity</span><span class="sxs-lookup"><span data-stu-id="d5c3d-194">Add, download, and delete custom user data to Identity</span></span>](xref:security/authentication/add-user-data)
+* [<span data-ttu-id="c670a-193">İskele Identity</span><span class="sxs-lookup"><span data-stu-id="c670a-193">Scaffold Identity</span></span>](xref:security/authentication/scaffold-identity)
+* [<span data-ttu-id="c670a-194">İçin özel kullanıcı verisi ekleme, indirme ve silme Identity</span><span class="sxs-lookup"><span data-stu-id="c670a-194">Add, download, and delete custom user data to Identity</span></span>](xref:security/authentication/add-user-data)
 
-### <a name="change-the-primary-key-type"></a><span data-ttu-id="d5c3d-195">Birincil anahtar türünü değiştirme</span><span class="sxs-lookup"><span data-stu-id="d5c3d-195">Change the primary key type</span></span>
+### <a name="change-the-primary-key-type"></a><span data-ttu-id="c670a-195">Birincil anahtar türünü değiştirme</span><span class="sxs-lookup"><span data-stu-id="c670a-195">Change the primary key type</span></span>
 
-<span data-ttu-id="d5c3d-196">Veritabanı oluşturulduktan sonra PK sütununun veri türünün bir değişikliği birçok veritabanı sisteminde sorunlu olur.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-196">A change to the PK column's data type after the database has been created is problematic on many database systems.</span></span> <span data-ttu-id="d5c3d-197">PK 'nin değiştirilmesi genellikle tabloyu bırakmayı ve yeniden oluşturmayı içerir.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-197">Changing the PK typically involves dropping and re-creating the table.</span></span> <span data-ttu-id="d5c3d-198">Bu nedenle, veritabanı oluşturulduğunda ilk geçişte anahtar türleri belirtilmelidir.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-198">Therefore, key types should be specified in the initial migration when the database is created.</span></span>
+<span data-ttu-id="c670a-196">Veritabanı oluşturulduktan sonra PK sütununun veri türünün bir değişikliği birçok veritabanı sisteminde sorunlu olur.</span><span class="sxs-lookup"><span data-stu-id="c670a-196">A change to the PK column's data type after the database has been created is problematic on many database systems.</span></span> <span data-ttu-id="c670a-197">PK 'nin değiştirilmesi genellikle tabloyu bırakmayı ve yeniden oluşturmayı içerir.</span><span class="sxs-lookup"><span data-stu-id="c670a-197">Changing the PK typically involves dropping and re-creating the table.</span></span> <span data-ttu-id="c670a-198">Bu nedenle, veritabanı oluşturulduğunda ilk geçişte anahtar türleri belirtilmelidir.</span><span class="sxs-lookup"><span data-stu-id="c670a-198">Therefore, key types should be specified in the initial migration when the database is created.</span></span>
 
-<span data-ttu-id="d5c3d-199">PK türünü değiştirmek için şu adımları izleyin:</span><span class="sxs-lookup"><span data-stu-id="d5c3d-199">Follow these steps to change the PK type:</span></span>
+<span data-ttu-id="c670a-199">PK türünü değiştirmek için şu adımları izleyin:</span><span class="sxs-lookup"><span data-stu-id="c670a-199">Follow these steps to change the PK type:</span></span>
 
-1. <span data-ttu-id="d5c3d-200">Veritabanı PK değişikliğinden önce oluşturulduysa, `Drop-Database` dosyayı silmek için (PMC) veya `dotnet ef database drop` (.NET Core CLI) çalıştırın.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-200">If the database was created before the PK change, run `Drop-Database` (PMC) or `dotnet ef database drop` (.NET Core CLI) to delete it.</span></span>
-2. <span data-ttu-id="d5c3d-201">Veritabanını silme işlemini onayladıktan sonra, `Remove-Migration` (PMC) veya `dotnet ef migrations remove` (.NET Core CLI) ile ilk geçişi kaldırın.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-201">After confirming deletion of the database, remove the initial migration with `Remove-Migration` (PMC) or `dotnet ef migrations remove` (.NET Core CLI).</span></span>
-3. <span data-ttu-id="d5c3d-202">`ApplicationDbContext`Türeten türetilmiş sınıfı güncelleştirin <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext%603> .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-202">Update the `ApplicationDbContext` class to derive from <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext%603>.</span></span> <span data-ttu-id="d5c3d-203">İçin yeni anahtar türünü belirtin `TKey` .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-203">Specify the new key type for `TKey`.</span></span> <span data-ttu-id="d5c3d-204">Örneğin, bir `Guid` anahtar türü kullanmak için:</span><span class="sxs-lookup"><span data-stu-id="d5c3d-204">For example, to use a `Guid` key type:</span></span>
+1. <span data-ttu-id="c670a-200">Veritabanı PK değişikliğinden önce oluşturulduysa, `Drop-Database` dosyayı silmek için (PMC) veya `dotnet ef database drop` (.NET Core CLI) çalıştırın.</span><span class="sxs-lookup"><span data-stu-id="c670a-200">If the database was created before the PK change, run `Drop-Database` (PMC) or `dotnet ef database drop` (.NET Core CLI) to delete it.</span></span>
+2. <span data-ttu-id="c670a-201">Veritabanını silme işlemini onayladıktan sonra, `Remove-Migration` (PMC) veya `dotnet ef migrations remove` (.NET Core CLI) ile ilk geçişi kaldırın.</span><span class="sxs-lookup"><span data-stu-id="c670a-201">After confirming deletion of the database, remove the initial migration with `Remove-Migration` (PMC) or `dotnet ef migrations remove` (.NET Core CLI).</span></span>
+3. <span data-ttu-id="c670a-202">`ApplicationDbContext`Türeten türetilmiş sınıfı güncelleştirin <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext%603> .</span><span class="sxs-lookup"><span data-stu-id="c670a-202">Update the `ApplicationDbContext` class to derive from <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext%603>.</span></span> <span data-ttu-id="c670a-203">İçin yeni anahtar türünü belirtin `TKey` .</span><span class="sxs-lookup"><span data-stu-id="c670a-203">Specify the new key type for `TKey`.</span></span> <span data-ttu-id="c670a-204">Örneğin, bir `Guid` anahtar türü kullanmak için:</span><span class="sxs-lookup"><span data-stu-id="c670a-204">For example, to use a `Guid` key type:</span></span>
 
     ```csharp
     public class ApplicationDbContext
@@ -393,17 +394,17 @@ services.AddIdentity<ApplicationUser>()
 
     ::: moniker range=">= aspnetcore-2.0"
 
-    <span data-ttu-id="d5c3d-205">Önceki kodda, genel sınıflar <xref:Microsoft.AspNetCore.Identity.IdentityUser%601> ve <xref:Microsoft.AspNetCore.Identity.IdentityRole%601> Yeni anahtar türünü kullanmak için belirtilmelidir.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-205">In the preceding code, the generic classes <xref:Microsoft.AspNetCore.Identity.IdentityUser%601> and <xref:Microsoft.AspNetCore.Identity.IdentityRole%601> must be specified to use the new key type.</span></span>
+    <span data-ttu-id="c670a-205">Önceki kodda, genel sınıflar <xref:Microsoft.AspNetCore.Identity.IdentityUser%601> ve <xref:Microsoft.AspNetCore.Identity.IdentityRole%601> Yeni anahtar türünü kullanmak için belirtilmelidir.</span><span class="sxs-lookup"><span data-stu-id="c670a-205">In the preceding code, the generic classes <xref:Microsoft.AspNetCore.Identity.IdentityUser%601> and <xref:Microsoft.AspNetCore.Identity.IdentityRole%601> must be specified to use the new key type.</span></span>
 
     ::: moniker-end
 
     ::: moniker range="<= aspnetcore-1.1"
 
-    <span data-ttu-id="d5c3d-206">Önceki kodda, genel sınıflar <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUser%601> ve <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole%601> Yeni anahtar türünü kullanmak için belirtilmelidir.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-206">In the preceding code, the generic classes <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUser%601> and <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole%601> must be specified to use the new key type.</span></span>
+    <span data-ttu-id="c670a-206">Önceki kodda, genel sınıflar <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUser%601> ve <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole%601> Yeni anahtar türünü kullanmak için belirtilmelidir.</span><span class="sxs-lookup"><span data-stu-id="c670a-206">In the preceding code, the generic classes <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUser%601> and <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityRole%601> must be specified to use the new key type.</span></span>
 
     ::: moniker-end
 
-    <span data-ttu-id="d5c3d-207">`Startup.ConfigureServices` Genel kullanıcıyı kullanacak şekilde güncelleştirilmeleri gerekir:</span><span class="sxs-lookup"><span data-stu-id="d5c3d-207">`Startup.ConfigureServices` must be updated to use the generic user:</span></span>
+    <span data-ttu-id="c670a-207">`Startup.ConfigureServices` Genel kullanıcıyı kullanacak şekilde güncelleştirilmeleri gerekir:</span><span class="sxs-lookup"><span data-stu-id="c670a-207">`Startup.ConfigureServices` must be updated to use the generic user:</span></span>
 
     ::: moniker range=">= aspnetcore-2.1"
 
@@ -434,7 +435,7 @@ services.AddIdentity<ApplicationUser>()
 
     ::: moniker-end
 
-4. <span data-ttu-id="d5c3d-208">Özel bir `ApplicationUser` sınıf kullanılıyorsa, öğesinden devralacak olan sınıfı güncelleştirin `IdentityUser` .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-208">If a custom `ApplicationUser` class is being used, update the class to inherit from `IdentityUser`.</span></span> <span data-ttu-id="d5c3d-209">Örneğin:</span><span class="sxs-lookup"><span data-stu-id="d5c3d-209">For example:</span></span>
+4. <span data-ttu-id="c670a-208">Özel bir `ApplicationUser` sınıf kullanılıyorsa, öğesinden devralacak olan sınıfı güncelleştirin `IdentityUser` .</span><span class="sxs-lookup"><span data-stu-id="c670a-208">If a custom `ApplicationUser` class is being used, update the class to inherit from `IdentityUser`.</span></span> <span data-ttu-id="c670a-209">Örnek:</span><span class="sxs-lookup"><span data-stu-id="c670a-209">For example:</span></span>
 
     ::: moniker range="<= aspnetcore-1.1"
 
@@ -448,7 +449,7 @@ services.AddIdentity<ApplicationUser>()
 
     ::: moniker-end
 
-    <span data-ttu-id="d5c3d-210">`ApplicationDbContext`Özel sınıfa başvurmak için Güncelleştir `ApplicationUser` :</span><span class="sxs-lookup"><span data-stu-id="d5c3d-210">Update `ApplicationDbContext` to reference the custom `ApplicationUser` class:</span></span>
+    <span data-ttu-id="c670a-210">`ApplicationDbContext`Özel sınıfa başvurmak için Güncelleştir `ApplicationUser` :</span><span class="sxs-lookup"><span data-stu-id="c670a-210">Update `ApplicationDbContext` to reference the custom `ApplicationUser` class:</span></span>
 
     ```csharp
     public class ApplicationDbContext
@@ -461,7 +462,7 @@ services.AddIdentity<ApplicationUser>()
     }
     ```
 
-    <span data-ttu-id="d5c3d-211">Hizmeti eklerken özel veritabanı bağlam sınıfını Kaydet Identity `Startup.ConfigureServices` :</span><span class="sxs-lookup"><span data-stu-id="d5c3d-211">Register the custom database context class when adding the Identity service in `Startup.ConfigureServices`:</span></span>
+    <span data-ttu-id="c670a-211">Hizmeti eklerken özel veritabanı bağlam sınıfını Kaydet Identity `Startup.ConfigureServices` :</span><span class="sxs-lookup"><span data-stu-id="c670a-211">Register the custom database context class when adding the Identity service in `Startup.ConfigureServices`:</span></span>
 
     ::: moniker range=">= aspnetcore-2.1"
 
@@ -472,9 +473,9 @@ services.AddIdentity<ApplicationUser>()
             .AddDefaultTokenProviders();
     ```
 
-    <span data-ttu-id="d5c3d-212">Birincil anahtarın veri türü, [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) nesnesi analiz edilirken algılanır.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-212">The primary key's data type is inferred by analyzing the [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) object.</span></span>
+    <span data-ttu-id="c670a-212">Birincil anahtarın veri türü, [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) nesnesi analiz edilirken algılanır.</span><span class="sxs-lookup"><span data-stu-id="c670a-212">The primary key's data type is inferred by analyzing the [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) object.</span></span>
 
-    <span data-ttu-id="d5c3d-213">ASP.NET Core 2,1 veya sonraki sürümlerde Identity bir sınıf kitaplığı olarak sağlanır Razor .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-213">In ASP.NET Core 2.1 or later, Identity is provided as a Razor Class Library.</span></span> <span data-ttu-id="d5c3d-214">Daha fazla bilgi için bkz. <xref:security/authentication/scaffold-identity>.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-214">For more information, see <xref:security/authentication/scaffold-identity>.</span></span> <span data-ttu-id="d5c3d-215">Sonuç olarak, yukarıdaki kod için bir çağrısı gerektirir <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-215">Consequently, the preceding code requires a call to <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>.</span></span> <span data-ttu-id="d5c3d-216">IdentityProjeye dosya eklemek için desteği kullanılmışsa Identity , çağrısını kaldırın `AddDefaultUI` .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-216">If the Identity scaffolder was used to add Identity files to the project, remove the call to `AddDefaultUI`.</span></span>
+    <span data-ttu-id="c670a-213">ASP.NET Core 2,1 veya sonraki sürümlerde Identity bir sınıf kitaplığı olarak sağlanır Razor .</span><span class="sxs-lookup"><span data-stu-id="c670a-213">In ASP.NET Core 2.1 or later, Identity is provided as a Razor Class Library.</span></span> <span data-ttu-id="c670a-214">Daha fazla bilgi için bkz. <xref:security/authentication/scaffold-identity>.</span><span class="sxs-lookup"><span data-stu-id="c670a-214">For more information, see <xref:security/authentication/scaffold-identity>.</span></span> <span data-ttu-id="c670a-215">Sonuç olarak, yukarıdaki kod için bir çağrısı gerektirir <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> .</span><span class="sxs-lookup"><span data-stu-id="c670a-215">Consequently, the preceding code requires a call to <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>.</span></span> <span data-ttu-id="c670a-216">IdentityProjeye dosya eklemek için desteği kullanılmışsa Identity , çağrısını kaldırın `AddDefaultUI` .</span><span class="sxs-lookup"><span data-stu-id="c670a-216">If the Identity scaffolder was used to add Identity files to the project, remove the call to `AddDefaultUI`.</span></span>
 
     ::: moniker-end
 
@@ -486,7 +487,7 @@ services.AddIdentity<ApplicationUser>()
             .AddDefaultTokenProviders();
     ```
 
-    <span data-ttu-id="d5c3d-217">Birincil anahtarın veri türü, [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) nesnesi analiz edilirken algılanır.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-217">The primary key's data type is inferred by analyzing the [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) object.</span></span>
+    <span data-ttu-id="c670a-217">Birincil anahtarın veri türü, [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) nesnesi analiz edilirken algılanır.</span><span class="sxs-lookup"><span data-stu-id="c670a-217">The primary key's data type is inferred by analyzing the [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) object.</span></span>
 
     ::: moniker-end
 
@@ -498,27 +499,27 @@ services.AddIdentity<ApplicationUser>()
             .AddDefaultTokenProviders();
     ```
 
-    <span data-ttu-id="d5c3d-218"><xref:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores*>Yöntemi, `TKey` birincil anahtarın veri türünü gösteren bir türü kabul eder.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-218">The <xref:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores*> method accepts a `TKey` type indicating the primary key's data type.</span></span>
+    <span data-ttu-id="c670a-218"><xref:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores*>Yöntemi, `TKey` birincil anahtarın veri türünü gösteren bir türü kabul eder.</span><span class="sxs-lookup"><span data-stu-id="c670a-218">The <xref:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores*> method accepts a `TKey` type indicating the primary key's data type.</span></span>
 
     ::: moniker-end
 
-5. <span data-ttu-id="d5c3d-219">Özel bir `ApplicationRole` sınıf kullanılıyorsa, öğesinden devralacak olan sınıfı güncelleştirin `IdentityRole<TKey>` .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-219">If a custom `ApplicationRole` class is being used, update the class to inherit from `IdentityRole<TKey>`.</span></span> <span data-ttu-id="d5c3d-220">Örneğin:</span><span class="sxs-lookup"><span data-stu-id="d5c3d-220">For example:</span></span>
+5. <span data-ttu-id="c670a-219">Özel bir `ApplicationRole` sınıf kullanılıyorsa, öğesinden devralacak olan sınıfı güncelleştirin `IdentityRole<TKey>` .</span><span class="sxs-lookup"><span data-stu-id="c670a-219">If a custom `ApplicationRole` class is being used, update the class to inherit from `IdentityRole<TKey>`.</span></span> <span data-ttu-id="c670a-220">Örnek:</span><span class="sxs-lookup"><span data-stu-id="c670a-220">For example:</span></span>
 
     [!code-csharp[](customize-identity-model/samples/2.1/RazorPagesSampleApp/Data/ApplicationRole.cs?name=snippet_ApplicationRole&highlight=4)]
 
-    <span data-ttu-id="d5c3d-221">`ApplicationDbContext`Özel sınıfa başvurmak için güncelleştirin `ApplicationRole` .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-221">Update `ApplicationDbContext` to reference the custom `ApplicationRole` class.</span></span> <span data-ttu-id="d5c3d-222">Örneğin, aşağıdaki sınıf özel ve özel bir öğesine başvurur `ApplicationUser` `ApplicationRole` :</span><span class="sxs-lookup"><span data-stu-id="d5c3d-222">For example, the following class references a custom `ApplicationUser` and a custom `ApplicationRole`:</span></span>
+    <span data-ttu-id="c670a-221">`ApplicationDbContext`Özel sınıfa başvurmak için güncelleştirin `ApplicationRole` .</span><span class="sxs-lookup"><span data-stu-id="c670a-221">Update `ApplicationDbContext` to reference the custom `ApplicationRole` class.</span></span> <span data-ttu-id="c670a-222">Örneğin, aşağıdaki sınıf özel ve özel bir öğesine başvurur `ApplicationUser` `ApplicationRole` :</span><span class="sxs-lookup"><span data-stu-id="c670a-222">For example, the following class references a custom `ApplicationUser` and a custom `ApplicationRole`:</span></span>
 
     ::: moniker range=">= aspnetcore-2.1"
 
     [!code-csharp[](customize-identity-model/samples/2.1/RazorPagesSampleApp/Data/ApplicationDbContext.cs?name=snippet_ApplicationDbContext&highlight=5-6)]
 
-    <span data-ttu-id="d5c3d-223">Hizmeti eklerken özel veritabanı bağlam sınıfını Kaydet Identity `Startup.ConfigureServices` :</span><span class="sxs-lookup"><span data-stu-id="d5c3d-223">Register the custom database context class when adding the Identity service in `Startup.ConfigureServices`:</span></span>
+    <span data-ttu-id="c670a-223">Hizmeti eklerken özel veritabanı bağlam sınıfını Kaydet Identity `Startup.ConfigureServices` :</span><span class="sxs-lookup"><span data-stu-id="c670a-223">Register the custom database context class when adding the Identity service in `Startup.ConfigureServices`:</span></span>
 
     [!code-csharp[](customize-identity-model/samples/2.1/RazorPagesSampleApp/Startup.cs?name=snippet_ConfigureServices&highlight=13-16)]
 
-    <span data-ttu-id="d5c3d-224">Birincil anahtarın veri türü, [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) nesnesi analiz edilirken algılanır.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-224">The primary key's data type is inferred by analyzing the [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) object.</span></span>
+    <span data-ttu-id="c670a-224">Birincil anahtarın veri türü, [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) nesnesi analiz edilirken algılanır.</span><span class="sxs-lookup"><span data-stu-id="c670a-224">The primary key's data type is inferred by analyzing the [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) object.</span></span>
 
-    <span data-ttu-id="d5c3d-225">ASP.NET Core 2,1 veya sonraki sürümlerde Identity bir sınıf kitaplığı olarak sağlanır Razor .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-225">In ASP.NET Core 2.1 or later, Identity is provided as a Razor Class Library.</span></span> <span data-ttu-id="d5c3d-226">Daha fazla bilgi için bkz. <xref:security/authentication/scaffold-identity>.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-226">For more information, see <xref:security/authentication/scaffold-identity>.</span></span> <span data-ttu-id="d5c3d-227">Sonuç olarak, yukarıdaki kod için bir çağrısı gerektirir <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-227">Consequently, the preceding code requires a call to <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>.</span></span> <span data-ttu-id="d5c3d-228">IdentityProjeye dosya eklemek için desteği kullanılmışsa Identity , çağrısını kaldırın `AddDefaultUI` .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-228">If the Identity scaffolder was used to add Identity files to the project, remove the call to `AddDefaultUI`.</span></span>
+    <span data-ttu-id="c670a-225">ASP.NET Core 2,1 veya sonraki sürümlerde Identity bir sınıf kitaplığı olarak sağlanır Razor .</span><span class="sxs-lookup"><span data-stu-id="c670a-225">In ASP.NET Core 2.1 or later, Identity is provided as a Razor Class Library.</span></span> <span data-ttu-id="c670a-226">Daha fazla bilgi için bkz. <xref:security/authentication/scaffold-identity>.</span><span class="sxs-lookup"><span data-stu-id="c670a-226">For more information, see <xref:security/authentication/scaffold-identity>.</span></span> <span data-ttu-id="c670a-227">Sonuç olarak, yukarıdaki kod için bir çağrısı gerektirir <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*> .</span><span class="sxs-lookup"><span data-stu-id="c670a-227">Consequently, the preceding code requires a call to <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>.</span></span> <span data-ttu-id="c670a-228">IdentityProjeye dosya eklemek için desteği kullanılmışsa Identity , çağrısını kaldırın `AddDefaultUI` .</span><span class="sxs-lookup"><span data-stu-id="c670a-228">If the Identity scaffolder was used to add Identity files to the project, remove the call to `AddDefaultUI`.</span></span>
 
     ::: moniker-end
 
@@ -526,11 +527,11 @@ services.AddIdentity<ApplicationUser>()
 
     [!code-csharp[](customize-identity-model/samples/2.0/RazorPagesSampleApp/Data/ApplicationDbContext.cs?name=snippet_ApplicationDbContext&highlight=5-6)]
 
-    <span data-ttu-id="d5c3d-229">Hizmeti eklerken özel veritabanı bağlam sınıfını Kaydet Identity `Startup.ConfigureServices` :</span><span class="sxs-lookup"><span data-stu-id="d5c3d-229">Register the custom database context class when adding the Identity service in `Startup.ConfigureServices`:</span></span>
+    <span data-ttu-id="c670a-229">Hizmeti eklerken özel veritabanı bağlam sınıfını Kaydet Identity `Startup.ConfigureServices` :</span><span class="sxs-lookup"><span data-stu-id="c670a-229">Register the custom database context class when adding the Identity service in `Startup.ConfigureServices`:</span></span>
 
     [!code-csharp[](customize-identity-model/samples/2.0/RazorPagesSampleApp/Startup.cs?name=snippet_ConfigureServices&highlight=7-9)]
 
-    <span data-ttu-id="d5c3d-230">Birincil anahtarın veri türü, [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) nesnesi analiz edilirken algılanır.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-230">The primary key's data type is inferred by analyzing the [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) object.</span></span>
+    <span data-ttu-id="c670a-230">Birincil anahtarın veri türü, [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) nesnesi analiz edilirken algılanır.</span><span class="sxs-lookup"><span data-stu-id="c670a-230">The primary key's data type is inferred by analyzing the [DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext) object.</span></span>
 
     ::: moniker-end
 
@@ -538,17 +539,17 @@ services.AddIdentity<ApplicationUser>()
 
     [!code-csharp[](customize-identity-model/samples/1.1/MvcSampleApp/Data/ApplicationDbContext.cs?name=snippet_ApplicationDbContext&highlight=5-6)]
 
-    <span data-ttu-id="d5c3d-231">Hizmeti eklerken özel veritabanı bağlam sınıfını Kaydet Identity `Startup.ConfigureServices` :</span><span class="sxs-lookup"><span data-stu-id="d5c3d-231">Register the custom database context class when adding the Identity service in `Startup.ConfigureServices`:</span></span>
+    <span data-ttu-id="c670a-231">Hizmeti eklerken özel veritabanı bağlam sınıfını Kaydet Identity `Startup.ConfigureServices` :</span><span class="sxs-lookup"><span data-stu-id="c670a-231">Register the custom database context class when adding the Identity service in `Startup.ConfigureServices`:</span></span>
 
     [!code-csharp[](customize-identity-model/samples/1.1/MvcSampleApp/Startup.cs?name=snippet_ConfigureServices&highlight=7-9)]
 
-    <span data-ttu-id="d5c3d-232"><xref:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores*>Yöntemi, `TKey` birincil anahtarın veri türünü gösteren bir türü kabul eder.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-232">The <xref:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores*> method accepts a `TKey` type indicating the primary key's data type.</span></span>
+    <span data-ttu-id="c670a-232"><xref:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores*>Yöntemi, `TKey` birincil anahtarın veri türünü gösteren bir türü kabul eder.</span><span class="sxs-lookup"><span data-stu-id="c670a-232">The <xref:Microsoft.Extensions.DependencyInjection.IdentityEntityFrameworkBuilderExtensions.AddEntityFrameworkStores*> method accepts a `TKey` type indicating the primary key's data type.</span></span>
 
     ::: moniker-end
 
-### <a name="add-navigation-properties"></a><span data-ttu-id="d5c3d-233">Gezinti özellikleri ekle</span><span class="sxs-lookup"><span data-stu-id="d5c3d-233">Add navigation properties</span></span>
+### <a name="add-navigation-properties"></a><span data-ttu-id="c670a-233">Gezinti özellikleri ekle</span><span class="sxs-lookup"><span data-stu-id="c670a-233">Add navigation properties</span></span>
 
-<span data-ttu-id="d5c3d-234">İlişkiler için model yapılandırmasının değiştirilmesi, başka değişiklikler yapmaktan daha zor olabilir.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-234">Changing the model configuration for relationships can be more difficult than making other changes.</span></span> <span data-ttu-id="d5c3d-235">Yeni, ek ilişkiler oluşturmak yerine var olan ilişkilerin yerini almak için dikkatli olunmalıdır.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-235">Care must be taken to replace the existing relationships rather than create new, additional relationships.</span></span> <span data-ttu-id="d5c3d-236">Özellikle, değiştirilen ilişki var olan ilişki olarak aynı yabancı anahtar (FK) özelliğini belirtmelidir.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-236">In particular, the changed relationship must specify the same foreign key (FK) property as the existing relationship.</span></span> <span data-ttu-id="d5c3d-237">Örneğin, ve arasındaki ilişki `Users` `UserClaims` Varsayılan olarak, aşağıdaki şekilde belirtilir:</span><span class="sxs-lookup"><span data-stu-id="d5c3d-237">For example, the relationship between `Users` and `UserClaims` is, by default, specified as follows:</span></span>
+<span data-ttu-id="c670a-234">İlişkiler için model yapılandırmasının değiştirilmesi, başka değişiklikler yapmaktan daha zor olabilir.</span><span class="sxs-lookup"><span data-stu-id="c670a-234">Changing the model configuration for relationships can be more difficult than making other changes.</span></span> <span data-ttu-id="c670a-235">Yeni, ek ilişkiler oluşturmak yerine var olan ilişkilerin yerini almak için dikkatli olunmalıdır.</span><span class="sxs-lookup"><span data-stu-id="c670a-235">Care must be taken to replace the existing relationships rather than create new, additional relationships.</span></span> <span data-ttu-id="c670a-236">Özellikle, değiştirilen ilişki var olan ilişki olarak aynı yabancı anahtar (FK) özelliğini belirtmelidir.</span><span class="sxs-lookup"><span data-stu-id="c670a-236">In particular, the changed relationship must specify the same foreign key (FK) property as the existing relationship.</span></span> <span data-ttu-id="c670a-237">Örneğin, ve arasındaki ilişki `Users` `UserClaims` Varsayılan olarak, aşağıdaki şekilde belirtilir:</span><span class="sxs-lookup"><span data-stu-id="c670a-237">For example, the relationship between `Users` and `UserClaims` is, by default, specified as follows:</span></span>
 
 ```csharp
 builder.Entity<TUser>(b =>
@@ -561,9 +562,9 @@ builder.Entity<TUser>(b =>
 });
 ```
 
-<span data-ttu-id="d5c3d-238">Bu ilişki için FK özellik olarak belirtilir `UserClaim.UserId` .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-238">The FK for this relationship is specified as the `UserClaim.UserId` property.</span></span> <span data-ttu-id="d5c3d-239">`HasMany` ve, ' ın `WithOne` Gezinti özellikleri olmadan ilişki oluşturmak için bağımsız değişken olmadan çağırılır.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-239">`HasMany` and `WithOne` are called without arguments to create the relationship without navigation properties.</span></span>
+<span data-ttu-id="c670a-238">Bu ilişki için FK özellik olarak belirtilir `UserClaim.UserId` .</span><span class="sxs-lookup"><span data-stu-id="c670a-238">The FK for this relationship is specified as the `UserClaim.UserId` property.</span></span> <span data-ttu-id="c670a-239">`HasMany` ve, ' ın `WithOne` Gezinti özellikleri olmadan ilişki oluşturmak için bağımsız değişken olmadan çağırılır.</span><span class="sxs-lookup"><span data-stu-id="c670a-239">`HasMany` and `WithOne` are called without arguments to create the relationship without navigation properties.</span></span>
 
-<span data-ttu-id="d5c3d-240">`ApplicationUser`Kullanıcıdan ilişkili olmasına izin veren bir gezinti özelliği ekleyin `UserClaims` :</span><span class="sxs-lookup"><span data-stu-id="d5c3d-240">Add a navigation property to `ApplicationUser` that allows associated `UserClaims` to be referenced from the user:</span></span>
+<span data-ttu-id="c670a-240">`ApplicationUser`Kullanıcıdan ilişkili olmasına izin veren bir gezinti özelliği ekleyin `UserClaims` :</span><span class="sxs-lookup"><span data-stu-id="c670a-240">Add a navigation property to `ApplicationUser` that allows associated `UserClaims` to be referenced from the user:</span></span>
 
 ```csharp
 public class ApplicationUser : IdentityUser
@@ -572,9 +573,9 @@ public class ApplicationUser : IdentityUser
 }
 ```
 
-<span data-ttu-id="d5c3d-241">`TKey`İçin, `IdentityUserClaim<TKey>` Kullanıcı PK için belirtilen türdür.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-241">The `TKey` for `IdentityUserClaim<TKey>` is the type specified for the PK of users.</span></span> <span data-ttu-id="d5c3d-242">Bu durumda, `TKey` Varsayılan olarak `string` kullanılıyor.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-242">In this case, `TKey` is `string` because the defaults are being used.</span></span> <span data-ttu-id="d5c3d-243">Varlık türü için PK türü **değildir** `UserClaim` .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-243">It's **not** the PK type for the `UserClaim` entity type.</span></span>
+<span data-ttu-id="c670a-241">`TKey`İçin, `IdentityUserClaim<TKey>` Kullanıcı PK için belirtilen türdür.</span><span class="sxs-lookup"><span data-stu-id="c670a-241">The `TKey` for `IdentityUserClaim<TKey>` is the type specified for the PK of users.</span></span> <span data-ttu-id="c670a-242">Bu durumda, `TKey` Varsayılan olarak `string` kullanılıyor.</span><span class="sxs-lookup"><span data-stu-id="c670a-242">In this case, `TKey` is `string` because the defaults are being used.</span></span> <span data-ttu-id="c670a-243">Varlık türü için PK türü **değildir** `UserClaim` .</span><span class="sxs-lookup"><span data-stu-id="c670a-243">It's **not** the PK type for the `UserClaim` entity type.</span></span>
 
-<span data-ttu-id="d5c3d-244">Artık gezinti özelliği var olduğuna göre, bu, ' de yapılandırılması gerekir `OnModelCreating` :</span><span class="sxs-lookup"><span data-stu-id="d5c3d-244">Now that the navigation property exists, it must be configured in `OnModelCreating`:</span></span>
+<span data-ttu-id="c670a-244">Artık gezinti özelliği var olduğuna göre, bu, ' de yapılandırılması gerekir `OnModelCreating` :</span><span class="sxs-lookup"><span data-stu-id="c670a-244">Now that the navigation property exists, it must be configured in `OnModelCreating`:</span></span>
 
 ```csharp
 public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
@@ -600,13 +601,13 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 }
 ```
 
-<span data-ttu-id="d5c3d-245">İlişkinin yalnızca ' de olduğu gibi, yalnızca çağrısında belirtilen bir gezinti özelliği ile yapılandırıldığından emin olun `HasMany` .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-245">Notice that relationship is configured exactly as it was before, only with a navigation property specified in the call to `HasMany`.</span></span>
+<span data-ttu-id="c670a-245">İlişkinin yalnızca ' de olduğu gibi, yalnızca çağrısında belirtilen bir gezinti özelliği ile yapılandırıldığından emin olun `HasMany` .</span><span class="sxs-lookup"><span data-stu-id="c670a-245">Notice that relationship is configured exactly as it was before, only with a navigation property specified in the call to `HasMany`.</span></span>
 
-<span data-ttu-id="d5c3d-246">Gezinti özellikleri, veritabanında değil yalnızca EF modelinde bulunur.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-246">The navigation properties only exist in the EF model, not the database.</span></span> <span data-ttu-id="d5c3d-247">İlişki için FK değişmediğinden, bu tür bir model değişikliği veritabanının güncelleştirilmesini gerektirmez.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-247">Because the FK for the relationship hasn't changed, this kind of model change doesn't require the database to be updated.</span></span> <span data-ttu-id="d5c3d-248">Bu, değişiklik yapıldıktan sonra bir geçiş eklenerek denetlenebilir.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-248">This can be checked by adding a migration after making the change.</span></span> <span data-ttu-id="d5c3d-249">`Up`Ve `Down` yöntemleri boş.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-249">The `Up` and `Down` methods are empty.</span></span>
+<span data-ttu-id="c670a-246">Gezinti özellikleri, veritabanında değil yalnızca EF modelinde bulunur.</span><span class="sxs-lookup"><span data-stu-id="c670a-246">The navigation properties only exist in the EF model, not the database.</span></span> <span data-ttu-id="c670a-247">İlişki için FK değişmediğinden, bu tür bir model değişikliği veritabanının güncelleştirilmesini gerektirmez.</span><span class="sxs-lookup"><span data-stu-id="c670a-247">Because the FK for the relationship hasn't changed, this kind of model change doesn't require the database to be updated.</span></span> <span data-ttu-id="c670a-248">Bu, değişiklik yapıldıktan sonra bir geçiş eklenerek denetlenebilir.</span><span class="sxs-lookup"><span data-stu-id="c670a-248">This can be checked by adding a migration after making the change.</span></span> <span data-ttu-id="c670a-249">`Up`Ve `Down` yöntemleri boş.</span><span class="sxs-lookup"><span data-stu-id="c670a-249">The `Up` and `Down` methods are empty.</span></span>
 
-### <a name="add-all-user-navigation-properties"></a><span data-ttu-id="d5c3d-250">Tüm kullanıcı gezinti özelliklerini Ekle</span><span class="sxs-lookup"><span data-stu-id="d5c3d-250">Add all User navigation properties</span></span>
+### <a name="add-all-user-navigation-properties"></a><span data-ttu-id="c670a-250">Tüm kullanıcı gezinti özelliklerini Ekle</span><span class="sxs-lookup"><span data-stu-id="c670a-250">Add all User navigation properties</span></span>
 
-<span data-ttu-id="d5c3d-251">Aşağıdaki örnek, kılavuz olarak yukarıdaki bölümü kullanarak, Kullanıcı üzerindeki tüm ilişkiler için tek yönlü gezinti özelliklerini yapılandırır:</span><span class="sxs-lookup"><span data-stu-id="d5c3d-251">Using the section above as guidance, the following example configures unidirectional navigation properties for all relationships on User:</span></span>
+<span data-ttu-id="c670a-251">Aşağıdaki örnek, kılavuz olarak yukarıdaki bölümü kullanarak, Kullanıcı üzerindeki tüm ilişkiler için tek yönlü gezinti özelliklerini yapılandırır:</span><span class="sxs-lookup"><span data-stu-id="c670a-251">Using the section above as guidance, the following example configures unidirectional navigation properties for all relationships on User:</span></span>
 
 ```csharp
 public class ApplicationUser : IdentityUser
@@ -660,9 +661,9 @@ public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
 }
 ```
 
-### <a name="add-user-and-role-navigation-properties"></a><span data-ttu-id="d5c3d-252">Kullanıcı ve rol gezinti özellikleri ekleme</span><span class="sxs-lookup"><span data-stu-id="d5c3d-252">Add User and Role navigation properties</span></span>
+### <a name="add-user-and-role-navigation-properties"></a><span data-ttu-id="c670a-252">Kullanıcı ve rol gezinti özellikleri ekleme</span><span class="sxs-lookup"><span data-stu-id="c670a-252">Add User and Role navigation properties</span></span>
 
-<span data-ttu-id="d5c3d-253">Aşağıdaki örnek, kılavuz olarak yukarıdaki bölümü kullanarak, Kullanıcı ve roldeki tüm ilişkiler için gezinti özelliklerini yapılandırır:</span><span class="sxs-lookup"><span data-stu-id="d5c3d-253">Using the section above as guidance, the following example configures navigation properties for all relationships on User and Role:</span></span>
+<span data-ttu-id="c670a-253">Aşağıdaki örnek, kılavuz olarak yukarıdaki bölümü kullanarak, Kullanıcı ve roldeki tüm ilişkiler için gezinti özelliklerini yapılandırır:</span><span class="sxs-lookup"><span data-stu-id="c670a-253">Using the section above as guidance, the following example configures navigation properties for all relationships on User and Role:</span></span>
 
 ```csharp
 public class ApplicationUser : IdentityUser
@@ -741,15 +742,15 @@ public class ApplicationDbContext
 }
 ```
 
-<span data-ttu-id="d5c3d-254">Notlar:</span><span class="sxs-lookup"><span data-stu-id="d5c3d-254">Notes:</span></span>
+<span data-ttu-id="c670a-254">Notlar:</span><span class="sxs-lookup"><span data-stu-id="c670a-254">Notes:</span></span>
 
-* <span data-ttu-id="d5c3d-255">Bu örnek ayrıca `UserRole` , kullanıcılardan rollere kadar çoktan çoğa ilişkiye gitmek için gereken JOIN varlığını içerir.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-255">This example also includes the `UserRole` join entity, which is needed to navigate the many-to-many relationship from Users to Roles.</span></span>
-* <span data-ttu-id="d5c3d-256">Gezinti özelliklerinin türlerini, türlerin türler yerine kullanılmakta olduğunu yansıtacak şekilde değiştirmeyi unutmayın `Application{...}` `Identity{...}` .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-256">Remember to change the types of the navigation properties to reflect that `Application{...}` types are now being used instead of `Identity{...}` types.</span></span>
-* <span data-ttu-id="d5c3d-257">Öğesini `Application{...}` genel tanımda kullanmayı unutmayın `ApplicationContext` .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-257">Remember to use the `Application{...}` in the generic `ApplicationContext` definition.</span></span>
+* <span data-ttu-id="c670a-255">Bu örnek ayrıca `UserRole` , kullanıcılardan rollere kadar çoktan çoğa ilişkiye gitmek için gereken JOIN varlığını içerir.</span><span class="sxs-lookup"><span data-stu-id="c670a-255">This example also includes the `UserRole` join entity, which is needed to navigate the many-to-many relationship from Users to Roles.</span></span>
+* <span data-ttu-id="c670a-256">Gezinti özelliklerinin türlerini, türlerin türler yerine kullanılmakta olduğunu yansıtacak şekilde değiştirmeyi unutmayın `Application{...}` `Identity{...}` .</span><span class="sxs-lookup"><span data-stu-id="c670a-256">Remember to change the types of the navigation properties to reflect that `Application{...}` types are now being used instead of `Identity{...}` types.</span></span>
+* <span data-ttu-id="c670a-257">Öğesini `Application{...}` genel tanımda kullanmayı unutmayın `ApplicationContext` .</span><span class="sxs-lookup"><span data-stu-id="c670a-257">Remember to use the `Application{...}` in the generic `ApplicationContext` definition.</span></span>
 
-### <a name="add-all-navigation-properties"></a><span data-ttu-id="d5c3d-258">Tüm gezinti özelliklerini Ekle</span><span class="sxs-lookup"><span data-stu-id="d5c3d-258">Add all navigation properties</span></span>
+### <a name="add-all-navigation-properties"></a><span data-ttu-id="c670a-258">Tüm gezinti özelliklerini Ekle</span><span class="sxs-lookup"><span data-stu-id="c670a-258">Add all navigation properties</span></span>
 
-<span data-ttu-id="d5c3d-259">Aşağıdaki örnek, kılavuz olarak yukarıdaki bölümü kullanarak tüm varlık türlerindeki tüm ilişkiler için gezinti özelliklerini yapılandırır:</span><span class="sxs-lookup"><span data-stu-id="d5c3d-259">Using the section above as guidance, the following example configures navigation properties for all relationships on all entity types:</span></span>
+<span data-ttu-id="c670a-259">Aşağıdaki örnek, kılavuz olarak yukarıdaki bölümü kullanarak tüm varlık türlerindeki tüm ilişkiler için gezinti özelliklerini yapılandırır:</span><span class="sxs-lookup"><span data-stu-id="c670a-259">Using the section above as guidance, the following example configures navigation properties for all relationships on all entity types:</span></span>
 
 ```csharp
 public class ApplicationUser : IdentityUser
@@ -854,13 +855,13 @@ public class ApplicationDbContext
 }
 ```
 
-### <a name="use-composite-keys"></a><span data-ttu-id="d5c3d-260">Bileşik anahtarlar kullanın</span><span class="sxs-lookup"><span data-stu-id="d5c3d-260">Use composite keys</span></span>
+### <a name="use-composite-keys"></a><span data-ttu-id="c670a-260">Bileşik anahtarlar kullanın</span><span class="sxs-lookup"><span data-stu-id="c670a-260">Use composite keys</span></span>
 
-<span data-ttu-id="d5c3d-261">Önceki bölümlerde, modelde kullanılan anahtarın türünü değiştirme gösterilmiştir Identity .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-261">The preceding sections demonstrated changing the type of key used in the Identity model.</span></span> <span data-ttu-id="d5c3d-262">IdentityAnahtar modelinin bileşik anahtarları kullanacak şekilde değiştirilmesi desteklenmez veya önerilmez.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-262">Changing the Identity key model to use composite keys isn't supported or recommended.</span></span> <span data-ttu-id="d5c3d-263">İle bileşik anahtar kullanılması Identity , Identity yönetici kodunun modelle nasıl etkileşime gireceğini içerir.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-263">Using a composite key with Identity involves changing how the Identity manager code interacts with the model.</span></span> <span data-ttu-id="d5c3d-264">Bu özelleştirme, bu belgenin kapsamı dışındadır.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-264">This customization is beyond the scope of this document.</span></span>
+<span data-ttu-id="c670a-261">Önceki bölümlerde, modelde kullanılan anahtarın türünü değiştirme gösterilmiştir Identity .</span><span class="sxs-lookup"><span data-stu-id="c670a-261">The preceding sections demonstrated changing the type of key used in the Identity model.</span></span> <span data-ttu-id="c670a-262">IdentityAnahtar modelinin bileşik anahtarları kullanacak şekilde değiştirilmesi desteklenmez veya önerilmez.</span><span class="sxs-lookup"><span data-stu-id="c670a-262">Changing the Identity key model to use composite keys isn't supported or recommended.</span></span> <span data-ttu-id="c670a-263">İle bileşik anahtar kullanılması Identity , Identity yönetici kodunun modelle nasıl etkileşime gireceğini içerir.</span><span class="sxs-lookup"><span data-stu-id="c670a-263">Using a composite key with Identity involves changing how the Identity manager code interacts with the model.</span></span> <span data-ttu-id="c670a-264">Bu özelleştirme, bu belgenin kapsamı dışındadır.</span><span class="sxs-lookup"><span data-stu-id="c670a-264">This customization is beyond the scope of this document.</span></span>
 
-### <a name="change-tablecolumn-names-and-facets"></a><span data-ttu-id="d5c3d-265">Tablo/sütun adlarını ve modelleri değiştirme</span><span class="sxs-lookup"><span data-stu-id="d5c3d-265">Change table/column names and facets</span></span>
+### <a name="change-tablecolumn-names-and-facets"></a><span data-ttu-id="c670a-265">Tablo/sütun adlarını ve modelleri değiştirme</span><span class="sxs-lookup"><span data-stu-id="c670a-265">Change table/column names and facets</span></span>
 
-<span data-ttu-id="d5c3d-266">Tablo ve sütun adlarını değiştirmek için çağrısı yapın `base.OnModelCreating` .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-266">To change the names of tables and columns, call `base.OnModelCreating`.</span></span> <span data-ttu-id="d5c3d-267">Ardından, varsayılan ayarları geçersiz kılmak için yapılandırma ekleyin.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-267">Then, add configuration to override any of the defaults.</span></span> <span data-ttu-id="d5c3d-268">Örneğin, tüm tabloların adını değiştirmek için Identity :</span><span class="sxs-lookup"><span data-stu-id="d5c3d-268">For example, to change the name of all the Identity tables:</span></span>
+<span data-ttu-id="c670a-266">Tablo ve sütun adlarını değiştirmek için çağrısı yapın `base.OnModelCreating` .</span><span class="sxs-lookup"><span data-stu-id="c670a-266">To change the names of tables and columns, call `base.OnModelCreating`.</span></span> <span data-ttu-id="c670a-267">Ardından, varsayılan ayarları geçersiz kılmak için yapılandırma ekleyin.</span><span class="sxs-lookup"><span data-stu-id="c670a-267">Then, add configuration to override any of the defaults.</span></span> <span data-ttu-id="c670a-268">Örneğin, tüm tabloların adını değiştirmek için Identity :</span><span class="sxs-lookup"><span data-stu-id="c670a-268">For example, to change the name of all the Identity tables:</span></span>
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -904,9 +905,9 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-<span data-ttu-id="d5c3d-269">Bu örnekler varsayılan türleri kullanır Identity .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-269">These examples use the default Identity types.</span></span> <span data-ttu-id="d5c3d-270">Gibi bir uygulama türü kullanıyorsanız `ApplicationUser` , varsayılan tür yerine bu türü yapılandırın.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-270">If using an app type such as `ApplicationUser`, configure that type instead of the default type.</span></span>
+<span data-ttu-id="c670a-269">Bu örnekler varsayılan türleri kullanır Identity .</span><span class="sxs-lookup"><span data-stu-id="c670a-269">These examples use the default Identity types.</span></span> <span data-ttu-id="c670a-270">Gibi bir uygulama türü kullanıyorsanız `ApplicationUser` , varsayılan tür yerine bu türü yapılandırın.</span><span class="sxs-lookup"><span data-stu-id="c670a-270">If using an app type such as `ApplicationUser`, configure that type instead of the default type.</span></span>
 
-<span data-ttu-id="d5c3d-271">Aşağıdaki örnek bazı sütun adlarını değiştirir:</span><span class="sxs-lookup"><span data-stu-id="d5c3d-271">The following example changes some column names:</span></span>
+<span data-ttu-id="c670a-271">Aşağıdaki örnek bazı sütun adlarını değiştirir:</span><span class="sxs-lookup"><span data-stu-id="c670a-271">The following example changes some column names:</span></span>
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -926,7 +927,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-<span data-ttu-id="d5c3d-272">Bazı veritabanı sütunları bazı tür bazı *modellerle* yapılandırılabilir (örneğin, `string` izin verilen en fazla uzunluk).</span><span class="sxs-lookup"><span data-stu-id="d5c3d-272">Some types of database columns can be configured with certain *facets* (for example, the maximum `string` length allowed).</span></span> <span data-ttu-id="d5c3d-273">Aşağıdaki örnek, modeldeki çeşitli özellikler için en fazla sütun uzunluğunu ayarlar `string` :</span><span class="sxs-lookup"><span data-stu-id="d5c3d-273">The following example sets column maximum lengths for several `string` properties in the model:</span></span>
+<span data-ttu-id="c670a-272">Bazı veritabanı sütunları bazı tür bazı *modellerle* yapılandırılabilir (örneğin, `string` izin verilen en fazla uzunluk).</span><span class="sxs-lookup"><span data-stu-id="c670a-272">Some types of database columns can be configured with certain *facets* (for example, the maximum `string` length allowed).</span></span> <span data-ttu-id="c670a-273">Aşağıdaki örnek, modeldeki çeşitli özellikler için en fazla sütun uzunluğunu ayarlar `string` :</span><span class="sxs-lookup"><span data-stu-id="c670a-273">The following example sets column maximum lengths for several `string` properties in the model:</span></span>
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -949,9 +950,9 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 }
 ```
 
-### <a name="map-to-a-different-schema"></a><span data-ttu-id="d5c3d-274">Farklı bir şemaya eşleme</span><span class="sxs-lookup"><span data-stu-id="d5c3d-274">Map to a different schema</span></span>
+### <a name="map-to-a-different-schema"></a><span data-ttu-id="c670a-274">Farklı bir şemaya eşleme</span><span class="sxs-lookup"><span data-stu-id="c670a-274">Map to a different schema</span></span>
 
-<span data-ttu-id="d5c3d-275">Şemalar, veritabanı sağlayıcıları genelinde farklı davranabilir.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-275">Schemas can behave differently across database providers.</span></span> <span data-ttu-id="d5c3d-276">SQL Server için varsayılan, *dbo* şemasında tüm tabloları oluşturmaktır.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-276">For SQL Server, the default is to create all tables in the *dbo* schema.</span></span> <span data-ttu-id="d5c3d-277">Tablolar farklı bir şemada oluşturulabilir.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-277">The tables can be created in a different schema.</span></span> <span data-ttu-id="d5c3d-278">Örneğin:</span><span class="sxs-lookup"><span data-stu-id="d5c3d-278">For example:</span></span>
+<span data-ttu-id="c670a-275">Şemalar, veritabanı sağlayıcıları genelinde farklı davranabilir.</span><span class="sxs-lookup"><span data-stu-id="c670a-275">Schemas can behave differently across database providers.</span></span> <span data-ttu-id="c670a-276">SQL Server için varsayılan, *dbo* şemasında tüm tabloları oluşturmaktır.</span><span class="sxs-lookup"><span data-stu-id="c670a-276">For SQL Server, the default is to create all tables in the *dbo* schema.</span></span> <span data-ttu-id="c670a-277">Tablolar farklı bir şemada oluşturulabilir.</span><span class="sxs-lookup"><span data-stu-id="c670a-277">The tables can be created in a different schema.</span></span> <span data-ttu-id="c670a-278">Örnek:</span><span class="sxs-lookup"><span data-stu-id="c670a-278">For example:</span></span>
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -964,17 +965,17 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 ::: moniker range=">= aspnetcore-2.1"
 
-### <a name="lazy-loading"></a><span data-ttu-id="d5c3d-279">Geç yükleme</span><span class="sxs-lookup"><span data-stu-id="d5c3d-279">Lazy loading</span></span>
+### <a name="lazy-loading"></a><span data-ttu-id="c670a-279">Geç yükleme</span><span class="sxs-lookup"><span data-stu-id="c670a-279">Lazy loading</span></span>
 
-<span data-ttu-id="d5c3d-280">Bu bölümde, modeldeki yavaş yükleme proxy 'leri için destek Identity eklenmiştir.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-280">In this section, support for lazy-loading proxies in the Identity model is added.</span></span> <span data-ttu-id="d5c3d-281">Yavaş yükleme, gezinti özelliklerinin önce yüklendiklerinden emin olmadan kullanılmasına izin verdiğinden yararlıdır.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-281">Lazy-loading is useful since it allows navigation properties to be used without first ensuring they're loaded.</span></span>
+<span data-ttu-id="c670a-280">Bu bölümde, modeldeki yavaş yükleme proxy 'leri için destek Identity eklenmiştir.</span><span class="sxs-lookup"><span data-stu-id="c670a-280">In this section, support for lazy-loading proxies in the Identity model is added.</span></span> <span data-ttu-id="c670a-281">Yavaş yükleme, gezinti özelliklerinin önce yüklendiklerinden emin olmadan kullanılmasına izin verdiğinden yararlıdır.</span><span class="sxs-lookup"><span data-stu-id="c670a-281">Lazy-loading is useful since it allows navigation properties to be used without first ensuring they're loaded.</span></span>
 
-<span data-ttu-id="d5c3d-282">Varlık türleri, [EF Core belgelerinde](/ef/core/querying/related-data#lazy-loading)açıklandığı gibi çeşitli yollarla yavaş yükleme için uygun hale getirilebilir.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-282">Entity types can be made suitable for lazy-loading in several ways, as described in the [EF Core documentation](/ef/core/querying/related-data#lazy-loading).</span></span> <span data-ttu-id="d5c3d-283">Basitlik için, aşağıdakileri gerektiren yavaş yükleme proxy 'leri kullanın:</span><span class="sxs-lookup"><span data-stu-id="d5c3d-283">For simplicity, use lazy-loading proxies, which requires:</span></span>
+<span data-ttu-id="c670a-282">Varlık türleri, [EF Core belgelerinde](/ef/core/querying/related-data#lazy-loading)açıklandığı gibi çeşitli yollarla yavaş yükleme için uygun hale getirilebilir.</span><span class="sxs-lookup"><span data-stu-id="c670a-282">Entity types can be made suitable for lazy-loading in several ways, as described in the [EF Core documentation](/ef/core/querying/related-data#lazy-loading).</span></span> <span data-ttu-id="c670a-283">Basitlik için, aşağıdakileri gerektiren yavaş yükleme proxy 'leri kullanın:</span><span class="sxs-lookup"><span data-stu-id="c670a-283">For simplicity, use lazy-loading proxies, which requires:</span></span>
 
-* <span data-ttu-id="d5c3d-284">[Microsoft. EntityFrameworkCore. proxy](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/) paketi yüklemesi.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-284">Installation of the [Microsoft.EntityFrameworkCore.Proxies](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/) package.</span></span>
-* <span data-ttu-id="d5c3d-285"><xref:Microsoft.EntityFrameworkCore.ProxiesExtensions.UseLazyLoadingProxies*> [Adddbcontext \<TContext> ](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext)içinde bir çağrı.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-285">A call to <xref:Microsoft.EntityFrameworkCore.ProxiesExtensions.UseLazyLoadingProxies*> inside [AddDbContext\<TContext>](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext).</span></span>
-* <span data-ttu-id="d5c3d-286">Gezinti özelliklerine sahip ortak varlık türleri `public virtual` .</span><span class="sxs-lookup"><span data-stu-id="d5c3d-286">Public entity types with `public virtual` navigation properties.</span></span>
+* <span data-ttu-id="c670a-284">[Microsoft. EntityFrameworkCore. proxy](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/) paketi yüklemesi.</span><span class="sxs-lookup"><span data-stu-id="c670a-284">Installation of the [Microsoft.EntityFrameworkCore.Proxies](https://www.nuget.org/packages/Microsoft.EntityFrameworkCore.Proxies/) package.</span></span>
+* <span data-ttu-id="c670a-285"><xref:Microsoft.EntityFrameworkCore.ProxiesExtensions.UseLazyLoadingProxies*> [Adddbcontext \<TContext> ](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext)içinde bir çağrı.</span><span class="sxs-lookup"><span data-stu-id="c670a-285">A call to <xref:Microsoft.EntityFrameworkCore.ProxiesExtensions.UseLazyLoadingProxies*> inside [AddDbContext\<TContext>](/dotnet/api/microsoft.extensions.dependencyinjection.entityframeworkservicecollectionextensions.adddbcontext).</span></span>
+* <span data-ttu-id="c670a-286">Gezinti özelliklerine sahip ortak varlık türleri `public virtual` .</span><span class="sxs-lookup"><span data-stu-id="c670a-286">Public entity types with `public virtual` navigation properties.</span></span>
 
-<span data-ttu-id="d5c3d-287">Aşağıdaki örnekte çağırma gösterilmektedir `UseLazyLoadingProxies` `Startup.ConfigureServices` :</span><span class="sxs-lookup"><span data-stu-id="d5c3d-287">The following example demonstrates calling `UseLazyLoadingProxies` in `Startup.ConfigureServices`:</span></span>
+<span data-ttu-id="c670a-287">Aşağıdaki örnekte çağırma gösterilmektedir `UseLazyLoadingProxies` `Startup.ConfigureServices` :</span><span class="sxs-lookup"><span data-stu-id="c670a-287">The following example demonstrates calling `UseLazyLoadingProxies` in `Startup.ConfigureServices`:</span></span>
 
 ```csharp
 services
@@ -985,9 +986,9 @@ services
     .AddEntityFrameworkStores<ApplicationDbContext>();
 ```
 
-<span data-ttu-id="d5c3d-288">Varlık türlerine gezinti özellikleri ekleme hakkında rehberlik için yukarıdaki örneklere bakın.</span><span class="sxs-lookup"><span data-stu-id="d5c3d-288">Refer to the preceding examples for guidance on adding navigation properties to the entity types.</span></span>
+<span data-ttu-id="c670a-288">Varlık türlerine gezinti özellikleri ekleme hakkında rehberlik için yukarıdaki örneklere bakın.</span><span class="sxs-lookup"><span data-stu-id="c670a-288">Refer to the preceding examples for guidance on adding navigation properties to the entity types.</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="d5c3d-289">Ek kaynaklar</span><span class="sxs-lookup"><span data-stu-id="d5c3d-289">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="c670a-289">Ek kaynaklar</span><span class="sxs-lookup"><span data-stu-id="c670a-289">Additional resources</span></span>
 
 * <xref:security/authentication/scaffold-identity>
 

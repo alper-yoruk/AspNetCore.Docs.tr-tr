@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/11/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,44 +17,44 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/otherlogins
-ms.openlocfilehash: 3de76b303c469341ba022fa3d33d3cd2a17581db
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: f410f9ade34c3ffb19dc9f6e5409f44d0a6e5d32
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014912"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634247"
 ---
-# <a name="external-oauth-authentication-providers"></a><span data-ttu-id="2cd85-103">Dış OAuth kimlik doğrulama sağlayıcıları</span><span class="sxs-lookup"><span data-stu-id="2cd85-103">External OAuth authentication providers</span></span>
+# <a name="external-oauth-authentication-providers"></a><span data-ttu-id="8e5ea-103">Dış OAuth kimlik doğrulama sağlayıcıları</span><span class="sxs-lookup"><span data-stu-id="8e5ea-103">External OAuth authentication providers</span></span>
 
-<span data-ttu-id="2cd85-104">By [Rick Anderson](https://twitter.com/RickAndMSFT), [Pranav Oystogi](https://github.com/rustd)ve [Valeriy Novi tskyy](https://github.com/01binary)</span><span class="sxs-lookup"><span data-stu-id="2cd85-104">By [Rick Anderson](https://twitter.com/RickAndMSFT), [Pranav Rastogi](https://github.com/rustd), and [Valeriy Novytskyy](https://github.com/01binary)</span></span>
+<span data-ttu-id="8e5ea-104">By [Rick Anderson](https://twitter.com/RickAndMSFT), [Pranav Oystogi](https://github.com/rustd)ve [Valeriy Novi tskyy](https://github.com/01binary)</span><span class="sxs-lookup"><span data-stu-id="8e5ea-104">By [Rick Anderson](https://twitter.com/RickAndMSFT), [Pranav Rastogi](https://github.com/rustd), and [Valeriy Novytskyy](https://github.com/01binary)</span></span>
 
-<span data-ttu-id="2cd85-105">Aşağıdaki liste ASP.NET Core uygulamalarla çalışan ortak dış OAuth kimlik doğrulama sağlayıcılarını içerir.</span><span class="sxs-lookup"><span data-stu-id="2cd85-105">The following list includes common external OAuth authentication providers that work with ASP.NET Core apps.</span></span> <span data-ttu-id="2cd85-106">[ASPNET-contrib](https://www.nuget.org/packages?q=owners%3Aaspnet-contrib+title%3AOAuth)tarafından tutulan gibi üçüncü taraf NuGet paketleri, ASP.NET Core ekibi tarafından uygulanan kimlik doğrulama sağlayıcılarını tamamlamak için kullanılabilir.</span><span class="sxs-lookup"><span data-stu-id="2cd85-106">Third-party NuGet packages, such as the ones maintained by [aspnet-contrib](https://www.nuget.org/packages?q=owners%3Aaspnet-contrib+title%3AOAuth), can be used to complement the authentication providers implemented by the ASP.NET Core team.</span></span>
+<span data-ttu-id="8e5ea-105">Aşağıdaki liste ASP.NET Core uygulamalarla çalışan ortak dış OAuth kimlik doğrulama sağlayıcılarını içerir.</span><span class="sxs-lookup"><span data-stu-id="8e5ea-105">The following list includes common external OAuth authentication providers that work with ASP.NET Core apps.</span></span> <span data-ttu-id="8e5ea-106">[ASPNET-contrib](https://www.nuget.org/packages?q=owners%3Aaspnet-contrib+title%3AOAuth)tarafından tutulan gibi üçüncü taraf NuGet paketleri, ASP.NET Core ekibi tarafından uygulanan kimlik doğrulama sağlayıcılarını tamamlamak için kullanılabilir.</span><span class="sxs-lookup"><span data-stu-id="8e5ea-106">Third-party NuGet packages, such as the ones maintained by [aspnet-contrib](https://www.nuget.org/packages?q=owners%3Aaspnet-contrib+title%3AOAuth), can be used to complement the authentication providers implemented by the ASP.NET Core team.</span></span>
 
-* <span data-ttu-id="2cd85-107">[LinkedIn](https://www.linkedin.com/developer/apps) ([yönergeler](https://developer.linkedin.com/docs/oauth2))</span><span class="sxs-lookup"><span data-stu-id="2cd85-107">[LinkedIn](https://www.linkedin.com/developer/apps) ([Instructions](https://developer.linkedin.com/docs/oauth2))</span></span>
+* <span data-ttu-id="8e5ea-107">[LinkedIn](https://www.linkedin.com/developer/apps) ([yönergeler](https://developer.linkedin.com/docs/oauth2))</span><span class="sxs-lookup"><span data-stu-id="8e5ea-107">[LinkedIn](https://www.linkedin.com/developer/apps) ([Instructions](https://developer.linkedin.com/docs/oauth2))</span></span>
 
-* <span data-ttu-id="2cd85-108">[Sistem durumu](https://www.instagram.com/developer/register/) ([yönergeler](https://www.instagram.com/developer/authentication/))</span><span class="sxs-lookup"><span data-stu-id="2cd85-108">[Instagram](https://www.instagram.com/developer/register/) ([Instructions](https://www.instagram.com/developer/authentication/))</span></span>
+* <span data-ttu-id="8e5ea-108">[Sistem durumu](https://www.instagram.com/developer/register/) ([yönergeler](https://www.instagram.com/developer/authentication/))</span><span class="sxs-lookup"><span data-stu-id="8e5ea-108">[Instagram](https://www.instagram.com/developer/register/) ([Instructions](https://www.instagram.com/developer/authentication/))</span></span>
 
-* <span data-ttu-id="2cd85-109">[Reddıt](https://www.reddit.com/login?dest=https%3A%2F%2Fwww.reddit.com%2Fprefs%2Fapps) ([yönergeler](https://github.com/reddit/reddit/wiki/OAuth2-Quick-Start-Example))</span><span class="sxs-lookup"><span data-stu-id="2cd85-109">[Reddit](https://www.reddit.com/login?dest=https%3A%2F%2Fwww.reddit.com%2Fprefs%2Fapps) ([Instructions](https://github.com/reddit/reddit/wiki/OAuth2-Quick-Start-Example))</span></span>
+* <span data-ttu-id="8e5ea-109">[Reddıt](https://www.reddit.com/login?dest=https%3A%2F%2Fwww.reddit.com%2Fprefs%2Fapps) ([yönergeler](https://github.com/reddit/reddit/wiki/OAuth2-Quick-Start-Example))</span><span class="sxs-lookup"><span data-stu-id="8e5ea-109">[Reddit](https://www.reddit.com/login?dest=https%3A%2F%2Fwww.reddit.com%2Fprefs%2Fapps) ([Instructions](https://github.com/reddit/reddit/wiki/OAuth2-Quick-Start-Example))</span></span>
 
-* <span data-ttu-id="2cd85-110">[GitHub](https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Fsettings%2Fapplications%2Fnew) ([yönergeler](https://developer.github.com/v3/oauth/))</span><span class="sxs-lookup"><span data-stu-id="2cd85-110">[Github](https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Fsettings%2Fapplications%2Fnew) ([Instructions](https://developer.github.com/v3/oauth/))</span></span>
+* <span data-ttu-id="8e5ea-110">[GitHub](https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Fsettings%2Fapplications%2Fnew) ([yönergeler](https://developer.github.com/v3/oauth/))</span><span class="sxs-lookup"><span data-stu-id="8e5ea-110">[Github](https://github.com/login?return_to=https%3A%2F%2Fgithub.com%2Fsettings%2Fapplications%2Fnew) ([Instructions](https://developer.github.com/v3/oauth/))</span></span>
 
-* <span data-ttu-id="2cd85-111">[Yahoo](https://login.yahoo.com/config/login?src=devnet&.done=http%3A%2F%2Fdeveloper.yahoo.com%2Fapps%2Fcreate%2F) ([yönergeler](https://developer.yahoo.com/bbauth/user.html))</span><span class="sxs-lookup"><span data-stu-id="2cd85-111">[Yahoo](https://login.yahoo.com/config/login?src=devnet&.done=http%3A%2F%2Fdeveloper.yahoo.com%2Fapps%2Fcreate%2F) ([Instructions](https://developer.yahoo.com/bbauth/user.html))</span></span>
+* <span data-ttu-id="8e5ea-111">[Yahoo](https://login.yahoo.com/config/login?src=devnet&.done=http%3A%2F%2Fdeveloper.yahoo.com%2Fapps%2Fcreate%2F) ([yönergeler](https://developer.yahoo.com/bbauth/user.html))</span><span class="sxs-lookup"><span data-stu-id="8e5ea-111">[Yahoo](https://login.yahoo.com/config/login?src=devnet&.done=http%3A%2F%2Fdeveloper.yahoo.com%2Fapps%2Fcreate%2F) ([Instructions](https://developer.yahoo.com/bbauth/user.html))</span></span>
 
-* <span data-ttu-id="2cd85-112">[Tumblr](https://www.tumblr.com/oauth/apps) ([yönergeler](https://www.tumblr.com/docs/api/v2#auth))</span><span class="sxs-lookup"><span data-stu-id="2cd85-112">[Tumblr](https://www.tumblr.com/oauth/apps) ([Instructions](https://www.tumblr.com/docs/api/v2#auth))</span></span>
+* <span data-ttu-id="8e5ea-112">[Tumblr](https://www.tumblr.com/oauth/apps) ([yönergeler](https://www.tumblr.com/docs/api/v2#auth))</span><span class="sxs-lookup"><span data-stu-id="8e5ea-112">[Tumblr](https://www.tumblr.com/oauth/apps) ([Instructions](https://www.tumblr.com/docs/api/v2#auth))</span></span>
 
-* <span data-ttu-id="2cd85-113">[Pilgi](https://www.pinterest.com/login/?next=http%3A%2F%2Fdevsite%2Fapps%2F) ([yönergeler](https://developers.pinterest.com/docs/api/overview/?))</span><span class="sxs-lookup"><span data-stu-id="2cd85-113">[Pinterest](https://www.pinterest.com/login/?next=http%3A%2F%2Fdevsite%2Fapps%2F) ([Instructions](https://developers.pinterest.com/docs/api/overview/?))</span></span>
+* <span data-ttu-id="8e5ea-113">[Pilgi](https://www.pinterest.com/login/?next=http%3A%2F%2Fdevsite%2Fapps%2F) ([yönergeler](https://developers.pinterest.com/docs/api/overview/?))</span><span class="sxs-lookup"><span data-stu-id="8e5ea-113">[Pinterest](https://www.pinterest.com/login/?next=http%3A%2F%2Fdevsite%2Fapps%2F) ([Instructions](https://developers.pinterest.com/docs/api/overview/?))</span></span>
 
-* <span data-ttu-id="2cd85-114">[Pocket](https://getpocket.com/developer/apps/new) ([yönergeler](https://getpocket.com/developer/docs/authentication))</span><span class="sxs-lookup"><span data-stu-id="2cd85-114">[Pocket](https://getpocket.com/developer/apps/new) ([Instructions](https://getpocket.com/developer/docs/authentication))</span></span>
+* <span data-ttu-id="8e5ea-114">[Pocket](https://getpocket.com/developer/apps/new) ([yönergeler](https://getpocket.com/developer/docs/authentication))</span><span class="sxs-lookup"><span data-stu-id="8e5ea-114">[Pocket](https://getpocket.com/developer/apps/new) ([Instructions](https://getpocket.com/developer/docs/authentication))</span></span>
 
-* <span data-ttu-id="2cd85-115">[Flickr](https://www.flickr.com/services/apps/create) ([yönergeler](https://www.flickr.com/services/api/auth.oauth.html))</span><span class="sxs-lookup"><span data-stu-id="2cd85-115">[Flickr](https://www.flickr.com/services/apps/create) ([Instructions](https://www.flickr.com/services/api/auth.oauth.html))</span></span>
+* <span data-ttu-id="8e5ea-115">[Flickr](https://www.flickr.com/services/apps/create) ([yönergeler](https://www.flickr.com/services/api/auth.oauth.html))</span><span class="sxs-lookup"><span data-stu-id="8e5ea-115">[Flickr](https://www.flickr.com/services/apps/create) ([Instructions](https://www.flickr.com/services/api/auth.oauth.html))</span></span>
 
-* <span data-ttu-id="2cd85-116">[Dribble](https://dribbble.com/signup) ([yönergeler](https://developer.dribbble.com/v1/oauth/))</span><span class="sxs-lookup"><span data-stu-id="2cd85-116">[Dribble](https://dribbble.com/signup) ([Instructions](https://developer.dribbble.com/v1/oauth/))</span></span>
+* <span data-ttu-id="8e5ea-116">[Dribble](https://dribbble.com/signup) ([yönergeler](https://developer.dribbble.com/v1/oauth/))</span><span class="sxs-lookup"><span data-stu-id="8e5ea-116">[Dribble](https://dribbble.com/signup) ([Instructions](https://developer.dribbble.com/v1/oauth/))</span></span>
 
-* <span data-ttu-id="2cd85-117">[Vimeo](https://vimeo.com/join) ([yönergeler](https://developer.vimeo.com/api/authentication))</span><span class="sxs-lookup"><span data-stu-id="2cd85-117">[Vimeo](https://vimeo.com/join) ([Instructions](https://developer.vimeo.com/api/authentication))</span></span>
+* <span data-ttu-id="8e5ea-117">[Vimeo](https://vimeo.com/join) ([yönergeler](https://developer.vimeo.com/api/authentication))</span><span class="sxs-lookup"><span data-stu-id="8e5ea-117">[Vimeo](https://vimeo.com/join) ([Instructions](https://developer.vimeo.com/api/authentication))</span></span>
 
-* <span data-ttu-id="2cd85-118">[SoundCloud](https://soundcloud.com/you/apps/new) ([yönergeler](https://developers.soundcloud.com/blog/we-love-oauth-2))</span><span class="sxs-lookup"><span data-stu-id="2cd85-118">[SoundCloud](https://soundcloud.com/you/apps/new) ([Instructions](https://developers.soundcloud.com/blog/we-love-oauth-2))</span></span>
+* <span data-ttu-id="8e5ea-118">[SoundCloud](https://soundcloud.com/you/apps/new) ([yönergeler](https://developers.soundcloud.com/blog/we-love-oauth-2))</span><span class="sxs-lookup"><span data-stu-id="8e5ea-118">[SoundCloud](https://soundcloud.com/you/apps/new) ([Instructions](https://developers.soundcloud.com/blog/we-love-oauth-2))</span></span>
 
-* <span data-ttu-id="2cd85-119">[VK](https://vk.com/apps?act=manage) ([yönergeler](https://vk.com/pages?oid=-17680044&p=Authorizing_Sites))</span><span class="sxs-lookup"><span data-stu-id="2cd85-119">[VK](https://vk.com/apps?act=manage) ([Instructions](https://vk.com/pages?oid=-17680044&p=Authorizing_Sites))</span></span>
+* <span data-ttu-id="8e5ea-119">[VK](https://vk.com/apps?act=manage) ([yönergeler](https://vk.com/pages?oid=-17680044&p=Authorizing_Sites))</span><span class="sxs-lookup"><span data-stu-id="8e5ea-119">[VK](https://vk.com/apps?act=manage) ([Instructions](https://vk.com/pages?oid=-17680044&p=Authorizing_Sites))</span></span>
 
 [!INCLUDE[Multiple authentication providers](includes/chain-auth-providers.md)]
 
