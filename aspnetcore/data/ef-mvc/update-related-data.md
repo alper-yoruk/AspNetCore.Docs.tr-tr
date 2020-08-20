@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/update-related-data
-ms.openlocfilehash: 215cf04e882c438eac3fb74ee7cd582e96ddaeb7
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 356536a22f11ca5db6cfa9cda79598ec8aa03e18
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018032"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625277"
 ---
 # <a name="tutorial-update-related-data---aspnet-mvc-with-ef-core"></a>Öğretici: ilgili verileri güncelleştirme-ASP.NET MVC EF Core
 
@@ -43,7 +44,7 @@ Bu öğreticide şunları yaptınız:
 > * Güncelleştirme silme sayfası
 > * Sayfa oluşturmak için Office konumu ve kurslar ekleme
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [İlgili verileri okuma](read-related-data.md)
 

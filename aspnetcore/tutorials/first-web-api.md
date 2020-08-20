@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/13/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-web-api
-ms.openlocfilehash: 15e5c838e6dae824a189f170b28730a63f8c3ea7
-ms.sourcegitcommit: 4df445e7d49a99f81625430f728c28e5d6bf2107
+ms.openlocfilehash: ce0dfdf1ce88b55790d33918a2d20bc19a09b288
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/15/2020
-ms.locfileid: "88253648"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626902"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Öğretici: ASP.NET Core bir Web API 'SI oluşturma
 
@@ -58,7 +59,7 @@ Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
 ![İstemci, sol taraftaki bir kutu ile temsil edilir. Bir istek gönderir ve sağ tarafta çizilmiş bir kutu olan uygulamadan bir yanıt alır. Uygulama kutusu içinde, üç kutu denetleyiciyi, modeli ve veri erişim katmanını temsil eder. İstek uygulamanın denetleyicisine gelir ve denetleyici ile veri erişim katmanı arasında okuma/yazma işlemleri gerçekleştirilir. Model serileştirilir ve yanıtta istemciye döndürülür.](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -283,7 +284,7 @@ Yukarıdaki kod:
 
   * **Model sınıfında** **TodoItem (TodoApi. modeller)** öğesini seçin.
   * **Veri bağlamı sınıfında** **TodoContext (TodoApi. modeller)** öğesini seçin.
-  * **Add (Ekle)** seçeneğini belirleyin.
+  * **Ekle**’yi seçin.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
@@ -351,7 +352,7 @@ Bu öğretici, Web API 'sini test etmek için Postman kullanır.
 
 * Yeni bir istek oluşturun.
 * HTTP yöntemini olarak ayarlayın `POST` .
-* URI değerini olarak ayarlayın `https://localhost:<port>/api/TodoItem` . Örneğin, `https://localhost:5001/api/TodoItem`.
+* URI değerini olarak ayarlayın `https://localhost:<port>/api/TodoItems` . Örneğin, `https://localhost:5001/api/TodoItems`.
 * **Gövde** sekmesini seçin.
 * **Ham** radyo düğmesini seçin.
 * Türü **JSON (Application/JSON)** olarak ayarlayın.
@@ -548,7 +549,7 @@ Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
 ![İstemci, sol taraftaki bir kutu ile temsil edilir. Bir istek gönderir ve sağ tarafta çizilmiş bir kutu olan uygulamadan bir yanıt alır. Uygulama kutusu içinde, üç kutu denetleyiciyi, modeli ve veri erişim katmanını temsil eder. İstek uygulamanın denetleyicisine gelir ve denetleyici ile veri erişim katmanı arasında okuma/yazma işlemleri gerçekleştirilir. Model serileştirilir ve yanıtta istemciye döndürülür.](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 

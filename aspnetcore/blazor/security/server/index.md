@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/02/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,20 +18,20 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: 4dc9040b9410304eb33e5df7c47db2f9a42152d3
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ba9fe3c0149679fa5760c0c9214cd426f1804c31
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014002"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626460"
 ---
 # <a name="secure-aspnet-core-no-locblazor-server-apps"></a>Güvenli ASP.NET Core Blazor Server uygulamaları
 
 [Luke Latham](https://github.com/guardrex) tarafından
 
-Blazor Serveruygulamalar, güvenlik için ASP.NET Core uygulamalarla aynı şekilde yapılandırılır. Daha fazla bilgi için, altındaki makalelere bakın <xref:security/index> . Bu genel bakışın altındaki konular özellikle için geçerlidir Blazor Server . 
+Blazor Server uygulamalar, güvenlik için ASP.NET Core uygulamalarla aynı şekilde yapılandırılır. Daha fazla bilgi için, altındaki makalelere bakın <xref:security/index> . Bu genel bakışın altındaki konular özellikle için geçerlidir Blazor Server . 
 
-## <a name="no-locblazor-server-project-template"></a>Blazor ServerProje şablonu
+## <a name="no-locblazor-server-project-template"></a>Blazor Server Proje şablonu
 
 Proje Blazor Server oluşturulduğunda proje şablonu kimlik doğrulaması için yapılandırılabilir.
 
@@ -59,10 +60,10 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 İzin verilen kimlik doğrulama değerleri ( `{AUTHENTICATION}` ) aşağıdaki tabloda gösterilmiştir.
 
-| Kimlik doğrulama mekanizması | Description |
+| Kimlik doğrulama mekanizması | Açıklama |
 | ------------------------ | ----------- |
-| `None`varsayılanını         | Kimlik doğrulaması yok |
-| `Individual`             | ASP.NET Core ile uygulamada depolanan kullanıcılarIdentity |
+| `None` varsayılanını         | Kimlik doğrulaması yok |
+| `Individual`             | Uygulamada depolanan kullanıcılar ASP.NET Core Identity |
 | `IndividualB2C`          | [Azure AD B2C](xref:security/authentication/azure-ad-b2c) depolanan kullanıcılar |
 | `SingleOrg`              | Tek bir kiracı için kuruluş kimlik doğrulaması |
 | `MultiOrg`               | Birden çok kiracı için kuruluş kimlik doğrulaması |
@@ -81,7 +82,7 @@ Daha fazla bilgi için [`dotnet new`](/dotnet/core/tools/dotnet-new) .NET Core k
 
 1. **Yeni Blazor Server uygulamanızı yapılandırın** adımındaki **kimlik doğrulaması** açılan listesinden **bireysel kimlik doğrulaması (uygulama içi)** seçeneğini belirleyin.
 
-1. Uygulama, ASP.NET Core uygulamada depolanan bireysel kullanıcılar için oluşturulur Identity .
+1. Uygulama, uygulamasında depolanan bireysel kullanıcılar için oluşturulur ASP.NET Core Identity .
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
 
@@ -93,10 +94,10 @@ dotnet new blazorserver -o {APP NAME} -au {AUTHENTICATION}
 
 İzin verilen kimlik doğrulama değerleri ( `{AUTHENTICATION}` ) aşağıdaki tabloda gösterilmiştir.
 
-| Kimlik doğrulama mekanizması | Description |
+| Kimlik doğrulama mekanizması | Açıklama |
 | ------------------------ | ----------- |
-| `None`varsayılanını         | Kimlik doğrulaması yok |
-| `Individual`             | ASP.NET Core ile uygulamada depolanan kullanıcılarIdentity |
+| `None` varsayılanını         | Kimlik doğrulaması yok |
+| `Individual`             | Uygulamada depolanan kullanıcılar ASP.NET Core Identity |
 | `IndividualB2C`          | [Azure AD B2C](xref:security/authentication/azure-ad-b2c) depolanan kullanıcılar |
 | `SingleOrg`              | Tek bir kiracı için kuruluş kimlik doğrulaması |
 | `MultiOrg`               | Birden çok kiracı için kuruluş kimlik doğrulaması |
@@ -111,7 +112,7 @@ Daha fazla bilgi için [`dotnet new`](/dotnet/core/tools/dotnet-new) .NET Core k
 
 ---
 
-## <a name="scaffold-no-locidentity"></a>İskeleIdentity
+## <a name="scaffold-no-locidentity"></a>İskele Identity
 
 IdentityBir projeye yapı iskelesi Blazor Server :
 

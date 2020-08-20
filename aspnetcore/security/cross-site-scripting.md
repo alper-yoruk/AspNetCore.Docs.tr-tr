@@ -5,6 +5,7 @@ description: ASP.NET Core uygulamasında bu güvenlik açığını gidermeye yö
 ms.author: riande
 ms.date: 10/02/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cross-site-scripting
-ms.openlocfilehash: 24fab313c3af30cfd4143ba29a33ba25bfcdf9a9
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ec8b321be08447ca634a1e28799f790f723f17d1
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021815"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625628"
 ---
 # <a name="prevent-cross-site-scripting-xss-in-aspnet-core"></a>ASP.NET Core siteler arası komut dosyası (XSS) engelle
 
@@ -42,7 +43,7 @@ Temel düzeyde XSS `<script>` , uygulamanıza, işlenmiş sayfanıza bir etiket 
 
 5. Güvenilmeyen verileri bir URL sorgu dizesine geçirmeden önce URL 'nin kodlandığından emin olun.
 
-## <a name="html-encoding-using-no-locrazor"></a>Kullanarak HTML kodlamasıRazor
+## <a name="html-encoding-using-no-locrazor"></a>Kullanarak HTML kodlaması Razor
 
 RazorMVC 'de kullanılan motor, bunu yapmamaya gerçekten engel olmadığınız müddetçe, değişkenlerden kaynaklanan tüm çıktıyı otomatik olarak kodlar. Yönergesini her kullandığınızda HTML öznitelik kodlama kurallarını kullanır *@* . Html öznitelik kodlaması bir HTML kodlaması üst kümesidir, bu, HTML kodlaması veya HTML öznitelik kodlaması kullanılması gerekip gerekmediği için kendinize sorun olması gerekmediği anlamına gelir. Güvenilmeyen girişi doğrudan JavaScript 'e eklemeye çalışırken değil, yalnızca bir HTML içeriğinde @ kullandığınızdan emin olmanız gerekir. Etiket Yardımcıları, etiket parametrelerinde kullandığınız girişi de kodlayacaktır.
 
@@ -65,7 +66,7 @@ Bu görünüm *Untrustedınput* değişkeninin içeriğini verir. Bu değişken,
 >[!WARNING]
 > ASP.NET Core MVC, `HtmlString` Çıkış üzerine otomatik olarak kodlanmayan bir sınıf sağlar. Bu, XSS Güvenlik Açığı sunan güvenilir olmayan girişle birlikte asla kullanılmamalıdır.
 
-## <a name="javascript-encoding-using-no-locrazor"></a>Kullanılarak JavaScript kodlamasıRazor
+## <a name="javascript-encoding-using-no-locrazor"></a>Kullanılarak JavaScript kodlaması Razor
 
 Görünümünüzde işlemek için JavaScript 'e bir değer eklemek istediğiniz zaman olabilir. Bunu yapmanın iki yolu vardır. Değer eklemenin en güvenli yolu, değeri bir etiketinin veri özniteliğinde yerleştirmenin ve JavaScript 'te alamaktır. Örnek:
 

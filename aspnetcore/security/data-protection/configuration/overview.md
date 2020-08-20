@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/07/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/configuration/overview
-ms.openlocfilehash: 0ff211624b7cf363da393a627c761302d9f3d8ed
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: aa7f6f3c1ff8042bd11bba485a2d7b8aaa6ef88a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019761"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626720"
 ---
 # <a name="configure-aspnet-core-data-protection"></a>ASP.NET Core veri korumasını yapılandırma
 
@@ -35,7 +36,7 @@ Bu senaryolar için veri koruma sistemi, zengin bir yapılandırma API 'SI sunar
 > [!WARNING]
 > Yapılandırma dosyalarına benzer şekilde, veri koruma anahtarı halkası uygun izinler kullanılarak korunmalıdır. Rest 'de anahtarları şifrelemeyi seçebilirsiniz, ancak bu, saldırganların yeni anahtar oluşturmasını engellemez. Sonuç olarak, uygulamanızın güvenliği etkilenir. Veri koruma ile yapılandırılan depolama konumu, yapılandırma dosyalarını korumanıza benzer şekilde uygulamanın kendisiyle sınırlı olmalıdır. Örneğin, anahtar halkasını diskte depolamayı seçerseniz, dosya sistemi izinleri ' ni kullanın. Yalnızca Web uygulamanızın çalıştırıldığı kimliğin bu dizine okuma, yazma ve oluşturma erişimi olduğundan emin olun. Azure Blob depolama kullanırsanız, yalnızca Web uygulaması Blob deposunda, vb. için yeni girişler okuma, yazma veya oluşturma yeteneğine sahip olmalıdır.
 >
-> [Adddataprotection](/dotnet/api/microsoft.extensions.dependencyinjection.dataprotectionservicecollectionextensions.adddataprotection) genişletme yöntemi bir [ıdataprotectionbuilder](/dotnet/api/microsoft.aspnetcore.dataprotection.idataprotectionbuilder)döndürür. `IDataProtectionBuilder`Veri koruma seçeneklerini yapılandırmak için birlikte zincirleyebilirsiniz uzantı yöntemleri sunar.
+> [Adddataprotection](/dotnet/api/microsoft.extensions.dependencyinjection.dataprotectionservicecollectionextensions.adddataprotection) genişletme yöntemi bir [ıdataprotectionbuilder](/dotnet/api/microsoft.aspnetcore.dataprotection.idataprotectionbuilder)döndürür. `IDataProtectionBuilder` Veri koruma seçeneklerini yapılandırmak için birlikte zincirleyebilirsiniz uzantı yöntemleri sunar.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -65,7 +66,7 @@ Anahtar halka depolama konumunu ayarlayın (örneğin, [PersistKeysToAzureBlobSt
 
 `keyIdentifier`Anahtar şifreleme için kullanılan Anahtar Kasası anahtar tanımlayıcısıdır. Örneğin, içinde adlı anahtar kasasında oluşturulan bir anahtarın `dataprotection` `contosokeyvault` anahtar tanımlayıcısı vardır `https://contosokeyvault.vault.azure.net/keys/dataprotection/` . Anahtar Kasası için anahtar **sarmalama** ve **sarmalama** anahtarı izinlerini içeren uygulamayı belirtin.
 
-`ProtectKeysWithAzureKeyVault`kullanabilen
+`ProtectKeysWithAzureKeyVault` kullanabilen
 
 * [ProtectKeysWithAzureKeyVault (ıdataprotectionbuilder, keyvaultclient, String)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_Microsoft_Azure_KeyVault_KeyVaultClient_System_String_) , veri koruma sisteminin anahtar kasasını kullanmasını sağlamak Için bir [keyvaultclient](/dotnet/api/microsoft.azure.keyvault.keyvaultclient) kullanılmasına izin verir.
 * [ProtectKeysWithAzureKeyVault (ıdataprotectionbuilder, String, String, X509Certificate2)](/dotnet/api/microsoft.aspnetcore.dataprotection.azuredataprotectionbuilderextensions.protectkeyswithazurekeyvault#Microsoft_AspNetCore_DataProtection_AzureDataProtectionBuilderExtensions_ProtectKeysWithAzureKeyVault_Microsoft_AspNetCore_DataProtection_IDataProtectionBuilder_System_String_System_String_System_Security_Cryptography_X509Certificates_X509Certificate2_) , `ClientId` veri koruma sisteminin anahtar kasasını kullanmasını sağlamak Için a ve [X509Certificate](/dotnet/api/system.security.cryptography.x509certificates.x509certificate2) kullanılmasına izin verir.

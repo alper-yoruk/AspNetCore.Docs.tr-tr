@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core için bağlayıcı yapılandırmaBlazor
+title: ASP.NET Core için bağlayıcı yapılandırma Blazor
 author: guardrex
 description: Uygulama oluştururken ara dil (IL) bağlayıcı denetimini nasıl denetleyeceğinizi öğrenin Blazor .
 monikerRange: '>= aspnetcore-3.1'
@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/configure-linker
-ms.openlocfilehash: e76d25dbbf5c7a166e5f58a5ad1f9b5a2ecacf79
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 27a7edf0de1acc107d324afe07db63624615e550
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014262"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628137"
 ---
-# <a name="configure-the-linker-for-aspnet-core-no-locblazor"></a>ASP.NET Core için bağlayıcı yapılandırmaBlazor
+# <a name="configure-the-linker-for-aspnet-core-no-locblazor"></a>ASP.NET Core için bağlayıcı yapılandırma Blazor
 
 [Luke Latham](https://github.com/guardrex) tarafından
 
-Blazor WebAssemblyuygulamanın çıkış derlemelerinden gereksiz Il 'yi kırpmak için bir derleme sırasında [ara dil (IL)](/dotnet/standard/managed-code#intermediate-language--execution) bağlamayı gerçekleştirir. Hata ayıklama yapılandırmasında oluşturulurken bağlayıcı devre dışı bırakıldı. Bağlayıcı etkinleştirmek için uygulamaların yayın yapılandırmasında derlenmesi gerekir. Uygulamalarınızı dağıttığınızda yayında derleme yapmanızı öneririz Blazor WebAssembly . 
+Blazor WebAssembly uygulamanın çıkış derlemelerinden gereksiz Il 'yi kırpmak için bir derleme sırasında [ara dil (IL)](/dotnet/standard/managed-code#intermediate-language--execution) bağlamayı gerçekleştirir. Hata ayıklama yapılandırmasında oluşturulurken bağlayıcı devre dışı bırakıldı. Bağlayıcı etkinleştirmek için uygulamaların yayın yapılandırmasında derlenmesi gerekir. Uygulamalarınızı dağıttığınızda yayında derleme yapmanızı öneririz Blazor WebAssembly . 
 
 Uygulama bağlama boyutu için en iyi duruma getirir, ancak bu etkilere sebep olabilir. Bağlayıcı bu dinamik davranışı öğrenmediği ve çalışma zamanında yansıma için hangi türlerin gerekli olduğunu belirleyemediği için yansıma veya ilgili dinamik özellikleri kullanan uygulamalar kırpılmayabilir. Bu tür uygulamaları kırpmak için bağlayıcı, koddaki yansıma tarafından gerek duyulan herhangi bir tür ve uygulamanın bağımlı olduğu paketler veya çerçeveler hakkında bilgilendirmelidir. 
 
@@ -124,7 +125,7 @@ Hangi I18N derlemelerinin korunacağını denetlemek için, `<BlazorWebAssemblyI
 | `all`            | Tüm derlemeler dahil |
 | `cjk`            | `I18N.CJK.dll`          |
 | `mideast`        | `I18N.MidEast.dll`      |
-| `none`varsayılanını | Yok                    |
+| `none` varsayılanını | Yok                    |
 | `other`          | `I18N.Other.dll`        |
 | `rare`           | `I18N.Rare.dll`         |
 | `west`           | `I18N.West.dll`         |

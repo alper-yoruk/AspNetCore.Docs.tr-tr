@@ -5,6 +5,7 @@ description: RazorSayfaların 2. bölümü ve Entity Framework öğretici serisi
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/crud
-ms.openlocfilehash: f205e7741c8e901e9219bec2028c7bee98129161
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a6a99d736a60a55b81eb7e852413dc52b733d2fb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018370"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627539"
 ---
 # <a name="part-2-no-locrazor-pages-with-ef-core-in-aspnet-core---crud"></a>Bölüm 2, Razor ASP.NET Core EF Core olan sayfalar-CRUD
 
@@ -52,7 +53,7 @@ Yöntemi, `OnGetAsync` Seçili öğrenci için kayıt verilerini okumak üzere a
 
 [Include](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.include) ve [thenınclude](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.theninclude#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_ThenInclude__3_Microsoft_EntityFrameworkCore_Query_IIncludableQueryable___0_System_Collections_Generic_IEnumerable___1___System_Linq_Expressions_Expression_System_Func___1___2___) yöntemleri, içeriğin `Student.Enrollments` gezinti özelliğini yüklemesine ve her kaydın gezinti özelliği içine olmasına neden olur `Enrollment.Course` . Bu yöntemler, [okuma ilgili verileri](xref:data/ef-rp/read-related-data) öğreticisinde ayrıntılı olarak incelendi.
 
-[Asnotracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) yöntemi, döndürülen varlıkların geçerli bağlamda güncelleştirilmediği senaryolarda performansı geliştirir. `AsNoTracking`Bu öğreticinin ilerleyen kısımlarında ele alınmıştır.
+[Asnotracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) yöntemi, döndürülen varlıkların geçerli bağlamda güncelleştirilmediği senaryolarda performansı geliştirir. `AsNoTracking` Bu öğreticinin ilerleyen kısımlarında ele alınmıştır.
 
 ### <a name="display-enrollments"></a>Kayıtları görüntüle
 
@@ -66,7 +67,7 @@ Uygulamayı çalıştırın, **öğrenciler** sekmesini seçin ve bir öğrenci 
 
 ### <a name="ways-to-read-one-entity"></a>Bir varlığı okuma yolları
 
-Oluşturulan kod, bir varlığı okumak için [Firstordefaultasync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_) kullanır. Bu yöntem, hiçbir şey bulunamazsa null değerini döndürür; Aksi takdirde, sorgu filtresi ölçütlerine uyan bulunan ilk satırı döndürür. `FirstOrDefaultAsync`genellikle aşağıdaki alternatiflere göre daha iyi bir seçimdir:
+Oluşturulan kod, bir varlığı okumak için [Firstordefaultasync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_) kullanır. Bu yöntem, hiçbir şey bulunamazsa null değerini döndürür; Aksi takdirde, sorgu filtresi ölçütlerine uyan bulunan ilk satırı döndürür. `FirstOrDefaultAsync` genellikle aşağıdaki alternatiflere göre daha iyi bir seçimdir:
 
 * [Singleordefaultasync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.singleordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_SingleOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_) -sorgu filtresini karşılayan birden fazla varlık varsa bir özel durum oluşturur. Sorgu tarafından birden fazla satır döndürülüp döndürülmeyeceğini anlamak için `SingleOrDefaultAsync` birden çok satır getirmeyi dener. Sorgu yalnızca bir varlık döndürebiliyorsanız ve benzersiz bir anahtarda arama yaptığında bu ek çalışma gereksizdir.
 * [Findadsync](/dotnet/api/microsoft.entityframeworkcore.dbcontext.findasync#Microsoft_EntityFrameworkCore_DbContext_FindAsync_System_Type_System_Object___) -birincil ANAHTARLA (PK) bir varlık bulur. PK 'ye sahip bir varlık bağlam tarafından izleniyorsa, veritabanına bir istek olmadan döndürülür. Bu yöntem tek bir varlık aramak için en iyi duruma getirilmiştir, ancak ile çağrılamaz `Include` `FindAsync` .  Bu nedenle, ilgili veriler gerekliyse, `FirstOrDefaultAsync` daha iyi bir seçimdir.
@@ -124,7 +125,7 @@ Aşağıdaki kod, `StudentVM` Yeni bir öğrenci oluşturmak için görünüm mo
 
 [!code-csharp[Main](intro/samples/cu30snapshots/2-crud/Pages/Students/CreateVM.cshtml.cs?name=snippet_OnPostAsync)]
 
-[SetValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues.setvalues#Microsoft_EntityFrameworkCore_ChangeTracking_PropertyValues_SetValues_System_Object_) yöntemi, başka bir [PropertyValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues) nesnesinden değerleri okuyarak bu nesnenin değerlerini ayarlar. `SetValues`Özellik adı eşleştirme kullanır. Görünüm modeli türünün model türüyle ilgili olması gerekmez, yalnızca eşleşen özellikleri olması gerekir.
+[SetValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues.setvalues#Microsoft_EntityFrameworkCore_ChangeTracking_PropertyValues_SetValues_System_Object_) yöntemi, başka bir [PropertyValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues) nesnesinden değerleri okuyarak bu nesnenin değerlerini ayarlar. `SetValues` Özellik adı eşleştirme kullanır. Görünüm modeli türünün model türüyle ilgili olması gerekmez, yalnızca eşleşen özellikleri olması gerekir.
 
 Kullanılması `StudentVM` Için [Create. cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu30snapshots/2-crud/Pages/Students/CreateVM.cshtml) kullanılması gerekir `StudentVM` `Student` .
 
@@ -136,8 +137,8 @@ Kullanılması `StudentVM` Için [Create. cshtml](https://github.com/dotnet/AspN
 
 Kod değişiklikleri, birkaç özel durum dışında oluşturma sayfasına benzerdir:
 
-* `FirstOrDefaultAsync`, [Findadsync](/dotnet/api/microsoft.entityframeworkcore.dbset-1.findasync)ile değiştirilmiştir. İlgili verileri dahil etmeniz gerekmiyorsa, `FindAsync` daha etkilidir.
-* `OnPostAsync`bir `id` parametreye sahiptir.
+* `FirstOrDefaultAsync` , [Findadsync](/dotnet/api/microsoft.entityframeworkcore.dbset-1.findasync)ile değiştirilmiştir. İlgili verileri dahil etmeniz gerekmiyorsa, `FindAsync` daha etkilidir.
+* `OnPostAsync` bir `id` parametreye sahiptir.
 * Geçerli öğrenci boş bir öğrenci oluşturmak yerine veritabanından getirilir.
 
 Uygulamayı çalıştırın ve bir öğrenci oluşturup düzenleyerek test edin.
@@ -170,7 +171,7 @@ Bu bölümde, çağrısı başarısız olduğunda özel bir hata iletisi uygulay
 
 [!code-csharp[Main](intro/samples/cu30/Pages/Students/Delete.cshtml.cs?name=snippet_All&highlight=20,22,30,38-41,53-71)]
 
-Yukarıdaki kod, isteğe bağlı parametresini `saveChangesError` `OnGetAsync` Yöntem imzasına ekler. `saveChangesError`öğrenci nesnesini silme hatasından sonra yöntemin çağrılıp çağrılmadığını gösterir. Geçici ağ sorunları nedeniyle silme işlemi başarısız olabilir. Geçici ağ hataları, veritabanı bulutta olduğunda daha olasıdır. `saveChangesError`Sil sayfası kullanıcı arabiriminden çağrıldığında parametre false 'tur `OnGetAsync` . `OnGetAsync`Tarafından çağrıldığında `OnPostAsync` (silme işlemi başarısız olduğundan), `saveChangesError` parametresi true olur.
+Yukarıdaki kod, isteğe bağlı parametresini `saveChangesError` `OnGetAsync` Yöntem imzasına ekler. `saveChangesError` öğrenci nesnesini silme hatasından sonra yöntemin çağrılıp çağrılmadığını gösterir. Geçici ağ sorunları nedeniyle silme işlemi başarısız olabilir. Geçici ağ hataları, veritabanı bulutta olduğunda daha olasıdır. `saveChangesError`Sil sayfası kullanıcı arabiriminden çağrıldığında parametre false 'tur `OnGetAsync` . `OnGetAsync`Tarafından çağrıldığında `OnPostAsync` (silme işlemi başarısız olduğundan), `saveChangesError` parametresi true olur.
 
 `OnPostAsync`Yöntemi seçili varlığı alır, ardından varlığın durumunu olarak ayarlamak Için [Remove](/dotnet/api/microsoft.entityframeworkcore.dbcontext.remove#Microsoft_EntityFrameworkCore_DbContext_Remove_System_Object_) yöntemini çağırır `Deleted` . `SaveChanges`Çağrıldığında, BIR SQL DELETE komutu oluşturulur. `Remove`Başarısız olursa:
 
@@ -204,18 +205,18 @@ Scafkatlanmış kod, sayfa oluşturma, düzenleme ve silme için aşağıdaki ka
 * HTTP GET yöntemiyle istenen verileri alın ve görüntüleyin `OnGetAsync` .
 * HTTP POST yöntemiyle verilerde yapılan değişiklikleri kaydedin `OnPostAsync` .
 
-Dizin ve ayrıntı sayfaları, HTTP GET yöntemiyle istenen verileri alır ve görüntüler`OnGetAsync`
+Dizin ve ayrıntı sayfaları, HTTP GET yöntemiyle istenen verileri alır ve görüntüler `OnGetAsync`
 
 ## <a name="singleordefaultasync-vs-firstordefaultasync"></a>SingleOrDefaultAsync ile FirstOrDefaultAsync
 
 Oluşturulan kod, genellikle [Singleordefaultasync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.singleordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_SingleOrDefaultAsync__1_System_Linq_IQueryable___0__System_Linq_Expressions_Expression_System_Func___0_System_Boolean___System_Threading_CancellationToken_)üzerinden tercih edilen [firstordefaultasync](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.firstordefaultasync#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_FirstOrDefaultAsync__1_System_Linq_IQueryable___0__System_Threading_CancellationToken_)kullanır.
 
- `FirstOrDefaultAsync`, `SingleOrDefaultAsync` bir varlık getirenden daha verimlidir:
+ `FirstOrDefaultAsync` , `SingleOrDefaultAsync` bir varlık getirenden daha verimlidir:
 
 * Kodun sorgudan döndürülen birden fazla varlık olmadığını doğrulaması gerekmiyorsa.
-* `SingleOrDefaultAsync`daha fazla veri getirir ve gereksiz işler.
-* `SingleOrDefaultAsync`Filtre bölümüne uyan birden fazla varlık varsa bir özel durum oluşturur.
-* `FirstOrDefaultAsync`Filtre bölümüne uyan birden fazla varlık varsa oluşturmaz.
+* `SingleOrDefaultAsync` daha fazla veri getirir ve gereksiz işler.
+* `SingleOrDefaultAsync` Filtre bölümüne uyan birden fazla varlık varsa bir özel durum oluşturur.
+* `FirstOrDefaultAsync` Filtre bölümüne uyan birden fazla varlık varsa oluşturmaz.
 
 <a name="FindAsync"></a>
 
@@ -265,7 +266,7 @@ Uygulamayı çalıştırın, Ayrıntılar bağlantısına tıklayın ve URL 'nin
 
 [Include](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.include) ve [thenınclude](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.theninclude#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_ThenInclude__3_Microsoft_EntityFrameworkCore_Query_IIncludableQueryable___0_System_Collections_Generic_IEnumerable___1___System_Linq_Expressions_Expression_System_Func___1___2___) yöntemleri, içeriğin `Student.Enrollments` gezinti özelliğini yüklemesine ve her kaydın gezinti özelliği içine olmasına neden olur `Enrollment.Course` . Bu yöntemler, okuma ile ilgili veri öğreticisinde ayrıntılı olarak incelenmelidir.
 
-[Asnotracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) yöntemi, döndürülen varlıkların geçerli bağlamda güncelleştirilmediği durumlarda, senaryolarda performansı geliştirir. `AsNoTracking`Bu öğreticinin ilerleyen kısımlarında ele alınmıştır.
+[Asnotracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) yöntemi, döndürülen varlıkların geçerli bağlamda güncelleştirilmediği durumlarda, senaryolarda performansı geliştirir. `AsNoTracking` Bu öğreticinin ilerleyen kısımlarında ele alınmıştır.
 
 ### <a name="display-related-enrollments-on-the-details-page"></a>Ayrıntılar sayfasında ilgili kayıtları görüntüleme
 
@@ -293,7 +294,7 @@ Uygulamayı çalıştırın, **öğrenciler** sekmesini seçin ve bir öğrenci 
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Create.cshtml.cs?name=snippet_TryUpdateModelAsync)]
 
-Önceki kodda, `TryUpdateModelAsync<Student>` `emptyStudent` [Pagemodel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel)içindeki [pagecontext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_PageContext) özelliğinden gönderilen form değerlerini kullanarak nesneyi güncelleştirmeye çalışır. `TryUpdateModelAsync`yalnızca listelenen () özellikleri güncelleştirir `s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate` .
+Önceki kodda, `TryUpdateModelAsync<Student>` `emptyStudent` [Pagemodel](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel)içindeki [pagecontext](/dotnet/api/microsoft.aspnetcore.mvc.razorpages.pagemodel.pagecontext#Microsoft_AspNetCore_Mvc_RazorPages_PageModel_PageContext) özelliğinden gönderilen form değerlerini kullanarak nesneyi güncelleştirmeye çalışır. `TryUpdateModelAsync` yalnızca listelenen () özellikleri güncelleştirir `s => s.FirstMidName, s => s.LastName, s => s.EnrollmentDate` .
 
 Yukarıdaki örnekte:
 
@@ -330,7 +331,7 @@ Aşağıdaki kod, `StudentVM` Yeni bir öğrenci oluşturmak için görünüm mo
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/CreateVM.cshtml.cs?name=snippet_OnPostAsync)]
 
-[SetValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues.setvalues#Microsoft_EntityFrameworkCore_ChangeTracking_PropertyValues_SetValues_System_Object_) yöntemi, başka bir [PropertyValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues) nesnesinden değerleri okuyarak bu nesnenin değerlerini ayarlar. `SetValues`Özellik adı eşleştirme kullanır. Görünüm modeli türünün model türüyle ilgili olması gerekmez, yalnızca eşleşen özellikleri olması gerekir.
+[SetValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues.setvalues#Microsoft_EntityFrameworkCore_ChangeTracking_PropertyValues_SetValues_System_Object_) yöntemi, başka bir [PropertyValues](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyvalues) nesnesinden değerleri okuyarak bu nesnenin değerlerini ayarlar. `SetValues` Özellik adı eşleştirme kullanır. Görünüm modeli türünün model türüyle ilgili olması gerekmez, yalnızca eşleşen özellikleri olması gerekir.
 
 Kullanmak `StudentVM` Için [createvm gerekir. cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples/cu21/Pages/Students/CreateVM.cshtml) , yerine kullanılmak üzere güncelleştirilir `StudentVM` `Student` .
 
@@ -344,9 +345,9 @@ Düzenleme sayfasının sayfa modelini güncelleştirin. Büyük değişiklikler
 
 Kod değişiklikleri, birkaç özel durum dışında oluşturma sayfasına benzerdir:
 
-* `OnPostAsync`isteğe bağlı bir `id` parametreye sahiptir.
+* `OnPostAsync` isteğe bağlı bir `id` parametreye sahiptir.
 * Geçerli öğrenci boş bir öğrenci oluşturmak yerine DB 'den getirilir.
-* `FirstOrDefaultAsync`, [Findadsync](/dotnet/api/microsoft.entityframeworkcore.dbset-1.findasync)ile değiştirilmiştir. `FindAsync`birincil anahtardan bir varlık seçerken iyi bir seçimdir. Daha fazla bilgi için bkz. [Findadsync](#FindAsync) .
+* `FirstOrDefaultAsync` , [Findadsync](/dotnet/api/microsoft.entityframeworkcore.dbset-1.findasync)ile değiştirilmiştir. `FindAsync` birincil anahtardan bir varlık seçerken iyi bir seçimdir. Daha fazla bilgi için bkz. [Findadsync](#FindAsync) .
 
 ### <a name="test-the-edit-and-create-pages"></a>Düzenleme ve oluşturma sayfalarını test etme
 
@@ -382,7 +383,7 @@ Bu bölümde, çağrı başarısız olduğunda özel bir hata iletisi uygulamak 
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Delete.cshtml.cs?name=snippet_OnGetAsync&highlight=1,9,17-20)]
 
-Önceki kod isteğe bağlı parametresini içerir `saveChangesError` . `saveChangesError`öğrenci nesnesini silme hatasından sonra yöntemin çağrılıp çağrılmadığını gösterir. Geçici ağ sorunları nedeniyle silme işlemi başarısız olabilir. Geçici ağ hataları, bulutta daha olasıdır. `saveChangesError`, silme sayfası `OnGetAsync` kullanıcı arabiriminden çağrıldığında false 'tur. `OnGetAsync`Tarafından çağrıldığında `OnPostAsync` (silme işlemi başarısız olduğundan), `saveChangesError` parametresi true olur.
+Önceki kod isteğe bağlı parametresini içerir `saveChangesError` . `saveChangesError` öğrenci nesnesini silme hatasından sonra yöntemin çağrılıp çağrılmadığını gösterir. Geçici ağ sorunları nedeniyle silme işlemi başarısız olabilir. Geçici ağ hataları, bulutta daha olasıdır. `saveChangesError`, silme sayfası `OnGetAsync` kullanıcı arabiriminden çağrıldığında false 'tur. `OnGetAsync`Tarafından çağrıldığında `OnPostAsync` (silme işlemi başarısız olduğundan), `saveChangesError` parametresi true olur.
 
 ### <a name="the-delete-pages-onpostasync-method"></a>Sayfaları sil OnPostAsync yöntemi
 

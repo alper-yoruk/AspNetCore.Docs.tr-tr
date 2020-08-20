@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/11/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 14fa13bafa984c0ca7b9fd8cde538042cc0ec2cc
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: 53293ae9780129530ce5a41639e19284f47aa245
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130450"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628085"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-models"></a>BlazorBarındırma modellerini ASP.NET Core
 
 [Daniel Roth](https://github.com/danroth27) tarafından
 
-Blazor, bir [Webassembly](https://webassembly.org/)tabanlı .NET çalışma zamanı ( *Blazor WebAssembly* ) veya ASP.NET Core () içindeki sunucu tarafında tarayıcıda istemci tarafı çalıştıracak şekilde tasarlanan bir Web çerçevesidir *Blazor Server* . Barındırma modelinden bağımsız olarak, uygulama ve bileşen modelleri *aynıdır*.
+Blazor , bir [Webassembly](https://webassembly.org/)tabanlı .NET çalışma zamanı ( *Blazor WebAssembly* ) veya ASP.NET Core () içindeki sunucu tarafında tarayıcıda istemci tarafı çalıştıracak şekilde tasarlanan bir Web çerçevesidir *Blazor Server* . Barındırma modelinden bağımsız olarak, uygulama ve bileşen modelleri *aynıdır*.
 
 ## Blazor WebAssembly
 
@@ -102,7 +103,7 @@ Bir Razor sayfa veya görünüm işlendiğinde, her Razor kod satırı metın bi
 * Sayfanın tamamı HTML metnine yeniden eklenir.
 * Sayfa istemciye gönderilir.
 
-BlazorUygulama, *bileşen*olarak adlandırılan Kullanıcı arabiriminin yeniden kullanılabilir öğelerinden oluşur. Bir bileşen C# kodu, biçimlendirme ve diğer bileşenleri içerir. Bir bileşen işlendiğinde, bir Blazor HTML veya XML belge nesne modeli (DOM) gibi dahil edilen bileşenlerin bir grafiğini üretir. Bu grafik, özelliklerde ve alanlarında tutulan bileşen durumunu içerir. Blazorbiçimlendirmenin ikili gösterimini üretmek için bileşen grafiğini değerlendirir. İkili biçimi şu şekilde olabilir:
+BlazorUygulama, *bileşen*olarak adlandırılan Kullanıcı arabiriminin yeniden kullanılabilir öğelerinden oluşur. Bir bileşen C# kodu, biçimlendirme ve diğer bileşenleri içerir. Bir bileşen işlendiğinde, bir Blazor HTML veya XML belge nesne modeli (DOM) gibi dahil edilen bileşenlerin bir grafiğini üretir. Bu grafik, özelliklerde ve alanlarında tutulan bileşen durumunu içerir. Blazor biçimlendirmenin ikili gösterimini üretmek için bileşen grafiğini değerlendirir. İkili biçimi şu şekilde olabilir:
 
 * HTML metnine açıldı (prerendering sırasında &dagger; ).
 * Düzenli işleme sırasında biçimlendirmeyi verimli bir şekilde güncelleştirmek için kullanılır.
@@ -124,9 +125,9 @@ Bir Blazor Server uygulama [ASP.NET Core SignalR ](xref:signalr/introduction)üz
 
 Bir uygulamaya bağlı her tarayıcı ekranı (tarayıcı sekmesi veya iframe) Blazor Server bir SignalR bağlantı kullanır. Bu, tipik sunucu tarafından işlenmiş uygulamalarla karşılaştırıldığında daha önemli bir ayırım ifade etmiştir. Sunucu tarafından işlenen bir uygulamada, aynı uygulamayı birden çok tarayıcı ekranında açmak genellikle sunucuda ek kaynak taleplerine çevirilmez. Bir Blazor Server uygulamada, her tarayıcı ekranı için ayrı bir devre ve sunucu tarafından yönetilecek bileşen durumunun ayrı örnekleri gerekir.
 
-Blazortarayıcı sekmesini kapatmayı *veya bir dış* URL 'ye gidilmesini göz önünde bulundurur. Düzgün sonlandırma durumunda, devre ve ilişkili kaynaklar hemen serbest bırakılır. Bir istemci, örneğin bir ağ kesintisi nedeniyle düzgün şekilde kesilmeyen bir şekilde kesilebilir. Blazor Serveristemcinin yeniden bağlanmasına izin vermek için, yapılandırılabilir bir Aralık için bağlantısı kesilen devreleri depolar.
+Blazor tarayıcı sekmesini kapatmayı *veya bir dış* URL 'ye gidilmesini göz önünde bulundurur. Düzgün sonlandırma durumunda, devre ve ilişkili kaynaklar hemen serbest bırakılır. Bir istemci, örneğin bir ağ kesintisi nedeniyle düzgün şekilde kesilmeyen bir şekilde kesilebilir. Blazor Server istemcinin yeniden bağlanmasına izin vermek için, yapılandırılabilir bir Aralık için bağlantısı kesilen devreleri depolar.
 
-Blazor Serverkodun bir Kullanıcı devresi durumunda değişiklikler üzerinde kod çalıştırmaya izin veren bir *devhandler*tanımlamasına olanak tanır. Daha fazla bilgi için bkz. <xref:blazor/advanced-scenarios#blazor-server-circuit-handler>.
+Blazor Server kodun bir Kullanıcı devresi durumunda değişiklikler üzerinde kod çalıştırmaya izin veren bir *devhandler*tanımlamasına olanak tanır. Daha fazla bilgi için bkz. <xref:blazor/advanced-scenarios#blazor-server-circuit-handler>.
 
 ### <a name="ui-latency"></a>UI gecikmesi
 
@@ -136,16 +137,16 @@ UI gecikme süresi, başlatılan bir eylemden Kullanıcı arabiriminin güncelle
 
 Bellek kullanımı ayrıca uygulama gecikme süresine de katkıda bulunabilir. Daha fazla bellek kullanımı, her ikisi de uygulama performansının düşmesine neden olan ve bu nedenle kullanıcı arabirimi gecikmesini arttığı diskte sık görülen çöp toplama veya disk belleği belleği
 
-Blazor ServerAğ gecikmesi ve bellek kullanımını azaltarak Kullanıcı arabirimi gecikmesini en aza indirmek için uygulamalar iyileştirilmelidir. Ağ gecikmesini ölçmeye yönelik bir yaklaşım için bkz <xref:blazor/host-and-deploy/server#measure-network-latency> .. Ve hakkında daha fazla bilgi için SignalR Blazor bkz.
+Blazor Server Ağ gecikmesi ve bellek kullanımını azaltarak Kullanıcı arabirimi gecikmesini en aza indirmek için uygulamalar iyileştirilmelidir. Ağ gecikmesini ölçmeye yönelik bir yaklaşım için bkz <xref:blazor/host-and-deploy/server#measure-network-latency> .. Ve hakkında daha fazla bilgi için SignalR Blazor bkz.
 
 * <xref:blazor/host-and-deploy/server>
 * <xref:blazor/security/server/threat-mitigation>
 
 ### <a name="connection-to-the-server"></a>Sunucuyla bağlantı
 
-Blazor Serveruygulamalar sunucuya etkin bir SignalR bağlantı gerektirir. Bağlantı kaybolursa, uygulama sunucuya yeniden bağlanmaya çalışır. İstemcinin durumu hala bellekte olduğu sürece, istemci oturumu durum kaybı olmadan devam eder.
+Blazor Server uygulamalar sunucuya etkin bir SignalR bağlantı gerektirir. Bağlantı kaybolursa, uygulama sunucuya yeniden bağlanmaya çalışır. İstemcinin durumu hala bellekte olduğu sürece, istemci oturumu durum kaybı olmadan devam eder.
 
-Bir Blazor Server uygulama, sunucu üzerinde kullanıcı arabirimi durumunu ayarlayan ilk istemci isteğine yanıt olarak ön ekler. İstemci bir bağlantı oluşturmayı denediğinde SignalR , istemci aynı sunucuya yeniden bağlanmalıdır. Blazor Serverbirden fazla arka uç sunucusu kullanan uygulamalar, bağlantılar için *yapışkan oturumlar* uygulamalıdır SignalR .
+Bir Blazor Server uygulama, sunucu üzerinde kullanıcı arabirimi durumunu ayarlayan ilk istemci isteğine yanıt olarak ön ekler. İstemci bir bağlantı oluşturmayı denediğinde SignalR , istemci aynı sunucuya yeniden bağlanmalıdır. Blazor Server birden fazla arka uç sunucusu kullanan uygulamalar, bağlantılar için *yapışkan oturumlar* uygulamalıdır SignalR .
 
 Uygulamalar için [Azure SignalR hizmetini](/azure/azure-signalr) kullanmanızı öneririz Blazor Server . Hizmet, bir Blazor Server uygulamayı çok sayıda eşzamanlı bağlantıya ölçeklendirmeye olanak tanır SignalR . Sticky Sessions, SignalR hizmetin `ServerStickyMode` seçenek veya yapılandırma değeri olarak ayarlanarak Azure hizmeti için etkinleştirilir `Required` . Daha fazla bilgi için bkz. <xref:blazor/host-and-deploy/server#signalr-configuration>.
 

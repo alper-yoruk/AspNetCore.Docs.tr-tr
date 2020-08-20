@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/09/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 33a82885dee5e13a97c76e6ecef96731a0336fad
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: ef5e9e1becb511ef383b22fc96441b0f61537354
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504690"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626226"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-no-locidentity-server"></a>Blazor WebAssemblySunucu ile ASP.NET Core barındırılan bir uygulamanın güvenliğini sağlama Identity
 
@@ -81,7 +82,7 @@ Aşağıdaki bölümlerde, kimlik doğrulama desteği dahil edildiğinde projeni
 
 * `Startup.ConfigureServices` içinde:
 
-  * ASP.NET Core Identity :
+  * ASP.NET Core Identity:
 
     ```csharp
     services.AddDbContext<ApplicationDbContext>(options =>
@@ -233,7 +234,7 @@ Varsayılan olarak, uygulamanın yapılandırması tarafından kural tarafından
 
 * Kimliği doğrulanmış kullanıcılar için:
   * Geçerli Kullanıcı adını görüntüler.
-  * ASP.NET Core 'daki Kullanıcı profili sayfasına bir bağlantı sunar Identity .
+  * İçindeki kullanıcı profili sayfasına bir bağlantı sunar ASP.NET Core Identity .
   * Uygulamanın oturumunu kapatmak için bir düğme sunar.
 * Anonim kullanıcılar için:
   * Kayıt için seçeneği sunar.

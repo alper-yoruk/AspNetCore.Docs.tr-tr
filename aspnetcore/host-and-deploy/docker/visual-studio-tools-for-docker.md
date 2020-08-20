@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 09/12/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/docker/visual-studio-tools-for-docker
-ms.openlocfilehash: 2bdbbcfe4a94e5333ae11c4ab486ee0676d24b31
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 68ecc4961401211f1304ac4a26fff1b31e4ad7eb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015731"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627344"
 ---
 # <a name="visual-studio-container-tools-with-aspnet-core"></a>ASP.NET Core ile Visual Studio kapsayıcı araçları
 
@@ -29,7 +30,7 @@ Visual Studio 2017 ve üzeri sürümleri, .NET Core 'u hedefleyen ASP.NET Core K
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/docker/visual-studio-tools-for-docker/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [Docker for Windows](https://docs.docker.com/docker-for-windows/install/)
 * **.NET Core platformlar arası geliştirme** iş yüküyle [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
@@ -38,7 +39,7 @@ Visual Studio 2017 ve üzeri sürümleri, .NET Core 'u hedefleyen ASP.NET Core K
 
 Docker yüklemesi için öncelikle [Docker for Windows: yüklemeden önce bilmeniz](https://docs.docker.com/docker-for-windows/install/#what-to-know-before-you-install)gereken bilgileri gözden geçirin. Ardından, [Windows Için Docker](https://docs.docker.com/docker-for-windows/install/)'ı yüklersiniz.
 
-Docker for Windows içindeki **[paylaşılan sürücüler](https://docs.docker.com/docker-for-windows/#shared-drives)** , birim eşlemesini ve hata ayıklamayı destekleyecek şekilde yapılandırılmalıdır. Sistem tepsisinin Docker simgesine sağ tıklayın, **Ayarlar**' ı seçin ve **paylaşılan sürücüler**' i seçin. Docker 'ın dosyaları depoladığı sürücüyü seçin. **Uygula**'ya tıklayın.
+Docker for Windows içindeki **[paylaşılan sürücüler](https://docs.docker.com/docker-for-windows/#shared-drives)** , birim eşlemesini ve hata ayıklamayı destekleyecek şekilde yapılandırılmalıdır. Sistem tepsisinin Docker simgesine sağ tıklayın, **Ayarlar**' ı seçin ve **paylaşılan sürücüler**' i seçin. Docker 'ın dosyaları depoladığı sürücüyü seçin. **Uygula**’ya tıklayın.
 
 ![Kapsayıcılar için yerel C sürücüsü paylaşımını seçme iletişim kutusu](visual-studio-tools-for-docker/_static/settings-shared-drives-win.png)
 
@@ -98,7 +99,7 @@ Visual Studio 2017 sürümleri 15,8 veya üzeri bir düzenleme çözümünü yal
 
 * [Docker Compose](#docker-compose)
 * [Service Fabric](#service-fabric)
-* [Kubernetes/Held](https://helm.sh/)
+* [Kubernetes/Held ](https://helm.sh/)
 
 ### <a name="docker-compose"></a>Docker Compose
 

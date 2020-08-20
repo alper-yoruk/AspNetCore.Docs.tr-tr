@@ -5,8 +5,9 @@ description: RazorVerileri bağlama, olayları işleme ve bileşen yaşam döng�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/14/2020
+ms.date: 08/19/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: a145cfd551650445f9ff35259cbedf71ebb686f0
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 6ee767ee76b622e15a1dc5a7fe2f3e05f03dabd0
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014600"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628501"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>ASP.NET Core bileşenleri oluşturma ve kullanma Razor
 
@@ -30,15 +31,15 @@ ms.locfileid: "88014600"
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-Blazoruygulamalar, *Bileşenler*kullanılarak oluşturulmuştur. Bir bileşen, bir sayfa, iletişim veya form gibi bir kullanıcı arabirimi (UI) öbekidir. Bir bileşen, veri eklemek veya UI olaylarına yanıt vermek için gereken HTML işaretlemesini ve işleme mantığını içerir. Bileşenler esnek ve hafif. Bunlar, iç içe geçmiş, yeniden kullanılabilir ve projeler arasında paylaşılabilir.
+Blazor uygulamalar, *Bileşenler*kullanılarak oluşturulmuştur. Bir bileşen, bir sayfa, iletişim veya form gibi bir kullanıcı arabirimi (UI) öbekidir. Bir bileşen, veri eklemek veya UI olaylarına yanıt vermek için gereken HTML işaretlemesini ve işleme mantığını içerir. Bileşenler esnek ve hafif. Bunlar, iç içe geçmiş, yeniden kullanılabilir ve projeler arasında paylaşılabilir.
 
 ## <a name="component-classes"></a>Bileşen sınıfları
 
 Bileşenler, [Razor](xref:mvc/views/razor) `.razor` C# ve HTML biçimlendirmesinin bir birleşimi kullanılarak bileşen dosyalarında () uygulanır. İçindeki bir bileşen Blazor bir * Razor bileşen*olarak adlandırılır.
 
-### <a name="no-locrazor-syntax"></a>Razorsözdizimi
+### <a name="no-locrazor-syntax"></a>Razor sözdizimi
 
-Razoruygulamalardaki bileşenler Blazor yaygın olarak Razor söz dizimini kullanır. RazorBiçimlendirme diline alışkın değilseniz, devam etmeden önce okumanız önerilir <xref:mvc/views/razor> .
+Razor uygulamalardaki bileşenler Blazor yaygın olarak Razor söz dizimini kullanır. RazorBiçimlendirme diline alışkın değilseniz, devam etmeden önce okumanız önerilir <xref:mvc/views/razor> .
 
 Söz dizimi üzerindeki içeriğe erişirken Razor , aşağıdaki bölümlere özel bir dikkat ödeyin:
 
@@ -67,7 +68,7 @@ Bileşen sınıfının üyeleri bir [`@code`][1] blokta tanımlanır. [`@code`][
 
 Bileşen üyeleri, ile başlayan C# ifadeleri kullanılarak bileşenin işleme mantığının bir parçası olarak kullanılabilir `@` . Örneğin, bir C# alanı alan adının önüne eklenerek işlenir `@` . Aşağıdaki örnek değerlendirilir ve işler:
 
-* `headingFontStyle`için CSS özellik değerine `font-style` .
+* `headingFontStyle` için CSS özellik değerine `font-style` .
 * `headingText``<h1>`öğenin içeriğine.
 
 ```razor
@@ -79,11 +80,11 @@ Bileşen üyeleri, ile başlayan C# ifadeleri kullanılarak bileşenin işleme m
 }
 ```
 
-Bileşen ilk olarak işlendikten sonra, bileşen işleme ağacını olaylara yanıt olarak yeniden oluşturur. Blazorardından, yeni işleme ağacını önceki bir değerle karşılaştırır ve tarayıcının Belge Nesne Modeli (DOM) üzerinde yapılan tüm değişiklikleri uygular.
+Bileşen ilk olarak işlendikten sonra, bileşen işleme ağacını olaylara yanıt olarak yeniden oluşturur. Blazor ardından, yeni işleme ağacını önceki bir değerle karşılaştırır ve tarayıcının Belge Nesne Modeli (DOM) üzerinde yapılan tüm değişiklikleri uygular.
 
 Bileşenler, normal C# sınıflarıdır ve bir proje içinde herhangi bir yere yerleştirilebilir. Web sayfalarını üreten bileşenler genellikle `Pages` klasöründe bulunur. Sayfa olmayan bileşenler sıklıkla `Shared` klasöre veya projeye eklenen özel bir klasöre yerleştirilir.
 
-### <a name="namespaces"></a>Ad Alanları
+### <a name="namespaces"></a>Ad alanları
 
 Genellikle, bir bileşenin ad alanı uygulamanın kök ad alanından ve uygulamanın içindeki konum (klasör) ile türetilir. Uygulamanın kök ad alanı ise `BlazorSample` ve `Counter` bileşen `Pages` klasöründe bulunuyorsa:
 
@@ -119,9 +120,9 @@ Bileşenlere Ayrıca kendi tam adları kullanılarak başvurulabilir, bu da [`@u
 
 ### <a name="partial-class-support"></a>Kısmi sınıf desteği
 
-Razorbileşenler kısmi sınıflar olarak oluşturulur. Razorbileşenler aşağıdaki yaklaşımlardan birini kullanarak yazılır:
+Razor bileşenler kısmi sınıflar olarak oluşturulur. Razor bileşenler aşağıdaki yaklaşımlardan birini kullanarak yazılır:
 
-* C# kodu, [`@code`][1] tek bir dosyada HTML işaretlemesi ve kodu olan bir blokta tanımlanmıştır Razor . BlazorŞablonlar, Razor Bu yaklaşımı kullanarak bileşenlerini tanımlar.
+* C# kodu, [`@code`][1] tek bir dosyada HTML işaretlemesi ve kodu olan bir blokta tanımlanmıştır Razor . Blazor Şablonlar, Razor Bu yaklaşımı kullanarak bileşenlerini tanımlar.
 * C# kodu, kısmi sınıf olarak tanımlanmış bir arka plan kod dosyasına yerleştirilir.
 
 Aşağıdaki örnek, `Counter` [`@code`][1] bir şablondan oluşturulan uygulamada bir blok içeren varsayılan bileşeni gösterir Blazor . HTML Markup, Razor Code ve C# kodu aynı dosyada:
@@ -265,7 +266,7 @@ Bileşenler, bileşen sınıfında özniteliği ile ortak özellikler kullanıla
 [!code-razor[](index/samples_snapshot/ParentComponent.razor?highlight=5-6)]
 
 > [!WARNING]
-> Kendi *bileşen parametrelerine*yazan bileşenler oluşturmayın, bunun yerine özel bir alan kullanın. Daha fazla bilgi için [kendi parametre özelliklerine yazan bileşenleri oluşturma](#dont-create-components-that-write-to-their-own-parameter-properties) bölümüne bakın.
+> Bileşenin içeriği bir ile işlendiğinde kendi *bileşen parametrelerine* yazan bileşenler oluşturmayın <xref:Microsoft.AspNetCore.Components.RenderFragment> , bunun yerine özel bir alan kullanın. Daha fazla bilgi için bkz. [üzerine yazılan parametreler `RenderFragment` ](#overwritten-parameters-with-renderfragment) bölümü.
 
 ## <a name="child-content"></a>Alt içerik
 
@@ -317,28 +318,20 @@ Aşağıdaki örnekte, ilk `<input>` öğesi ( `id="useIndividualParams"` ) bağ
 
 ```razor
 <input id="useIndividualParams"
-       maxlength="@Maxlength"
-       placeholder="@Placeholder"
-       required="@Required"
-       size="@Size" />
+       maxlength="@maxlength"
+       placeholder="@placeholder"
+       required="@required"
+       size="@size" />
 
 <input id="useAttributesDict"
        @attributes="InputAttributes" />
 
 @code {
-    [Parameter]
-    public string Maxlength { get; set; } = "10";
+    public string maxlength = "10";
+    public string placeholder = "Input placeholder text";
+    public string required = "required";
+    public string size = "50";
 
-    [Parameter]
-    public string Placeholder { get; set; } = "Input placeholder text";
-
-    [Parameter]
-    public string Required { get; set; } = "required";
-
-    [Parameter]
-    public string Size { get; set; } = "50";
-
-    [Parameter]
     public Dictionary<string, object> InputAttributes { get; set; } =
         new Dictionary<string, object>()
         {
@@ -350,7 +343,7 @@ Aşağıdaki örnekte, ilk `<input>` öğesi ( `id="useIndividualParams"` ) bağ
 }
 ```
 
-Parametrenin türü `IEnumerable<KeyValuePair<string, object>>` dize anahtarlarıyla gerçekleştirmelidir. `IReadOnlyDictionary<string, object>`Bu senaryoda ayrıca bir seçenek de vardır.
+Parametrenin türü, `IEnumerable<KeyValuePair<string, object>>` dize anahtarları uygulamalıdır veya kullanmalıdır `IReadOnlyDictionary<string, object>` .
 
 `<input>`Her iki yaklaşımın de kullanıldığı işlenen öğeler aynıdır:
 
@@ -433,10 +426,10 @@ Bileşen başvuruları, bir bileşen örneğine başvurmak için bir yol sağlar
 * Alt bileşenle aynı türde bir alan tanımlayın.
 
 ```razor
-<MyLoginDialog @ref="loginDialog" ... />
+<CustomLoginDialog @ref="loginDialog" ... />
 
 @code {
-    private MyLoginDialog loginDialog;
+    private CustomLoginDialog loginDialog;
 
     private void OnSomething()
     {
@@ -556,7 +549,7 @@ public class NotifierService
 }
 ```
 
-Önceki örnekte, `NotifierService` bileşen `OnNotify` metodunu Blazor eşitleme bağlamı dışında çağırır. `InvokeAsync`doğru bağlama geçmek ve bir işlemeyi kuyruğa almak için kullanılır.
+Önceki örnekte, `NotifierService` bileşen `OnNotify` metodunu Blazor eşitleme bağlamı dışında çağırır. `InvokeAsync` doğru bağlama geçmek ve bir işlemeyi kuyruğa almak için kullanılır.
 
 ## <a name="use-key-to-control-the-preservation-of-elements-and-components"></a>\@Öğe ve bileşenlerin korunmasını denetlemek için anahtar kullanın
 
@@ -578,7 +571,7 @@ Aşağıdaki örneği inceleyin:
 
 Koleksiyonun içeriği, `People` ekli, silinmiş veya yeniden sıralanmış girdilerle değişebilir. Bileşen yeniden oluşturulduğunda, `<DetailsEditor>` bileşen farklı parametre değerleri almak için değişebilir `Details` . Bu, beklenenden daha karmaşık rerendering oluşmasına neden olabilir. Bazı durumlarda rerendering, kayıp öğe odağı gibi görünür davranış farklılıklarına yol açabilir.
 
-Eşleme işlemi, [`@key`][5] Directive özniteliğiyle denetlenebilir. [`@key`][5], anahtar değerine göre öğelerin veya bileşenlerin korunmasını güvence altına almak için dağıtılmış algoritmaya neden olur:
+Eşleme işlemi, [`@key`][5] Directive özniteliğiyle denetlenebilir. [`@key`][5] , anahtar değerine göre öğelerin veya bileşenlerin korunmasını güvence altına almak için dağıtılmış algoritmaya neden olur:
 
 ```csharp
 @foreach (var person in People)
@@ -632,12 +625,12 @@ Genellikle, için aşağıdaki değer türlerinden birini sağlamak mantıklı o
 
 Bu değerlerin çakışmayın için kullanıldığından emin olun [`@key`][5] . Aynı üst öğe içinde çakışan değerler algılanırsa, Blazor eski öğeleri veya bileşenleri yeni öğe veya bileşenlere kesin bir şekilde eşlemediğinden bir özel durum oluşturur. Yalnızca nesne örnekleri veya birincil anahtar değerleri gibi farklı değerleri kullanın.
 
-## <a name="dont-create-components-that-write-to-their-own-parameter-properties"></a>Kendi parametre özelliklerine yazan bileşenler oluşturmayın
+## <a name="overwritten-parameters-with-renderfragment"></a>İle parametrelerin üzerine yazıldı `RenderFragment`
 
 Parametreleri aşağıdaki koşullarda üzerine yazılır:
 
 * Bir alt bileşenin içeriği ile işlenir <xref:Microsoft.AspNetCore.Components.RenderFragment> .
-* <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A>üst bileşende çağrılır.
+* <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> üst bileşende çağrılır.
 
 Üst bileşen <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> çağrıldığında ve alt bileşene yeni parametre değerleri sağlandığında parametreler sıfırlanır.
 
@@ -647,17 +640,13 @@ Aşağıdaki bileşeni göz önünde bulundurun `Expander` :
 * Bileşen parametresiyle alt içeriğin gösterilmesini değiştirir.
 
 ```razor
-<div @onclick="@Toggle" class="card text-white bg-success mb-3">
+<div @onclick="@Toggle" class="card bg-light mb-3" style="width:30rem">
     <div class="card-body">
-        <div class="panel-heading">
-            <h2>Toggle (<code>Expanded</code> = @Expanded)</h2>
-        </div>
+        <h2 class="card-title">Toggle (<code>Expanded</code> = @Expanded)</h2>
 
         @if (Expanded)
         {
-            <div class="card-text">
-                @ChildContent
-            </div>
+            <p class="card-text">@ChildContent</p>
         }
     </div>
 </div>
@@ -703,17 +692,13 @@ Aşağıdaki düzeltilen `Expander` bileşen:
 * İç geçiş durumunu korumak için özel alanını kullanır.
 
 ```razor
-<div @onclick="@Toggle" class="card text-white bg-success mb-3">
+<div @onclick="@Toggle" class="card bg-light mb-3" style="width:30rem">
     <div class="card-body">
-        <div class="panel-heading">
-            <h2>Toggle (<code>expanded</code> = @expanded)</h2>
-        </div>
+        <h2 class="card-title">Toggle (<code>expanded</code> = @expanded)</h2>
 
         @if (expanded)
         {
-            <div class="card-text">
-                @ChildContent
-            </div>
+            <p class="card-text">@ChildContent</p>
         }
     </div>
 </div>
@@ -798,9 +783,9 @@ Aşağıdaki örnek, `MarkupString` bir bileşenin işlenmiş çıktısına STAT
 }
 ```
 
-## <a name="no-locrazor-templates"></a>Razorşablondan
+## <a name="no-locrazor-templates"></a>Razor şablondan
 
-İşleme parçaları, Razor şablon sözdizimi kullanılarak tanımlanabilir. RazorŞablonlar, UI parçacığı tanımlamanın ve aşağıdaki biçimi varsayacak bir yoldur:
+İşleme parçaları, Razor şablon sözdizimi kullanılarak tanımlanabilir. Razor Şablonlar, UI parçacığı tanımlamanın ve aşağıdaki biçimi varsayacak bir yoldur:
 
 ```razor
 @<{HTML tag}>...</{HTML tag}>

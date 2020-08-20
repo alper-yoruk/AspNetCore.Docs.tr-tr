@@ -6,6 +6,7 @@ ms.author: riserrad
 ms.custom: devx-track-csharp, mvc
 ms.date: 07/10/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/publish-to-azure-webapp-using-vscode
-ms.openlocfilehash: 28074d64e9d4d0ec35af06e8b6daae939e316b2b
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: 113ebbefe338f49738095633c95ee3327b615078
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130216"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627903"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio-code"></a>Visual Studio Code ile Azure 'da ASP.NET Core uygulaması yayımlama
 
@@ -84,7 +85,7 @@ Aşağıdaki komut çalışmazsa, [Bu bağlantıya](https://code.visualstudio.co
 ### <a name="through-visual-studio-code-interface"></a>Visual Studio Code arabirimi aracılığıyla
 
 - Visual Studio Code’u açın
-- Menüsünde, şunu seçin`File > Open Folder`
+- Menüsünde, şunu seçin `File > Open Folder`
 - MVC projesini oluşturduğunuz klasörün kökünü seçin
 
 Proje klasörünü açtığınızda, gerekli varlıkların derleme ve hata ayıklama için eksik olduğunu söyleyen bir ileti alırsınız. Bunları eklemek için yardımı kabul edin.
@@ -127,7 +128,7 @@ Visual Studio Code Azure App Service uzantısı 'ndan yararlanarak, Web sitesini
 
 ### <a name="if-youre-creating-a-new-web-app"></a>Yeni bir Web uygulaması oluşturuyorsanız
 
-- Klasöre sağ tıklayın `publish` ve şunları seçin`Deploy to Web App...`
+- Klasöre sağ tıklayın `publish` ve şunları seçin `Deploy to Web App...`
 - Web uygulaması oluşturmak istediğiniz aboneliği seçin
 - `Create New Web App` seçeneğini belirleyin
 - Web uygulaması için bir ad girin
@@ -142,7 +143,7 @@ Uzantı yeni Web uygulamasını oluşturur ve paketin otomatik olarak dağıtım
 
 ### <a name="if-youre-deploying-to-an-existing-web-app"></a>Var olan bir Web uygulamasına dağıtım yapıyorsanız
 
-- Klasöre sağ tıklayın `publish` ve şunları seçin`Deploy to Web App...`
+- Klasöre sağ tıklayın `publish` ve şunları seçin `Deploy to Web App...`
 - Mevcut Web uygulamasının bulunduğu aboneliği seçin
 - Listeden Web uygulamasını seçin
 - Visual Studio Code, var olan içeriğin üzerine yazmak isteyip istemediğinizi sorar. `Deploy`Onaylamak için tıklayın

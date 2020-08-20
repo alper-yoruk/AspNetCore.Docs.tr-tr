@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/complex-data-model
-ms.openlocfilehash: 7774716905ade1b2b32a513a09899b563d48679b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 07f5e910236f78105c039e462ab51d6e62b09439
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88013001"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626941"
 ---
 # <a name="tutorial-create-a-complex-data-model---aspnet-mvc-with-ef-core"></a>Öğretici: EF Core ile karmaşık veri modeli oluşturma-ASP.NET MVC
 
@@ -48,7 +49,7 @@ Bu öğreticide şunları yaptınız:
 > * Bağlantı dizesini değiştirme
 > * Veritabanını güncelleştirme
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [EF Core geçişleri kullanma](migrations.md)
 
@@ -66,7 +67,7 @@ Bu bölümde, biçimlendirme, doğrulama ve veritabanı eşleme kurallarını be
 
 `DataType`Özniteliği, veritabanı iç türünden daha belirgin bir veri türü belirtmek için kullanılır. Bu durumda, tarihi ve saati değil yalnızca tarihi izlemek istiyoruz. `DataType`Sabit listesi, tarih, saat, PhoneNumber, para birimi, Emaadresi gibi birçok veri türünü sağlar. `DataType`Özniteliği Ayrıca uygulamanın türe özgü özellikleri otomatik olarak sağlamasını da sağlayabilir. Örneğin, için bir `mailto:` bağlantı oluşturulabilir `DataType.EmailAddress` ve HTML5 'i destekleyen tarayıcılarda için bir tarih seçici sağlaneklenebilir `DataType.Date` . `DataType`ÖZNITELIĞI `data-` HTML 5 tarayıcılarının ANLAYABILMESI için HTML 5 (bir veri Dash) öznitelikleri yayar. `DataType`Öznitelikler hiçbir doğrulama sağlamaz.
 
-`DataType.Date`görüntülenen tarihin biçimini belirtmez. Varsayılan olarak, veri alanı sunucunun CultureInfo öğesine göre varsayılan biçimlere göre görüntülenir.
+`DataType.Date` görüntülenen tarihin biçimini belirtmez. Varsayılan olarak, veri alanı sunucunun CultureInfo öğesine göre varsayılan biçimlere göre görüntülenir.
 
 `DisplayFormat`Öznitelik, tarih biçimini açıkça belirtmek için kullanılır:
 
@@ -180,7 +181,7 @@ public string LastName { get; set; }
 
 ### <a name="the-fullname-calculated-property"></a>FullName hesaplanmış özelliği
 
-`FullName`, iki diğer özelliğin bitiştirerek oluşturulmuş bir değer döndüren hesaplanmış bir özelliktir. Bu nedenle, yalnızca bir get erişimcisine sahiptir ve `FullName` veritabanında hiçbir sütun oluşturulmaz.
+`FullName` , iki diğer özelliğin bitiştirerek oluşturulmuş bir değer döndüren hesaplanmış bir özelliktir. Bu nedenle, yalnızca bir get erişimcisine sahiptir ve `FullName` veritabanında hiçbir sütun oluşturulmaz.
 
 ## <a name="create-instructor-entity"></a>Eğitmen varlığı oluşturma
 

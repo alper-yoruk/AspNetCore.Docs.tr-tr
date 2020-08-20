@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: bdorrans
 ms.date: 07/16/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,16 +17,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 7a23f2b17cc8fb3a4989b9fddd5c128add13db5b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 54780e2d67c70d945fd875c41c8d6483aa358bbf
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021958"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627201"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core sertifika kimlik doğrulamasını yapılandırma
 
-`Microsoft.AspNetCore.Authentication.Certificate`ASP.NET Core için [sertifika kimlik doğrulamasına](https://tools.ietf.org/html/rfc5246#section-7.4.4) benzer bir uygulama içerir. Sertifika kimlik doğrulaması TLS düzeyinde gerçekleşir ve bu süre ASP.NET Core. Daha doğru, bu, sertifikayı doğrulayan bir kimlik doğrulama işleyicisidir ve bu sertifikayı bir ' a çözebileceğiniz bir olay verir `ClaimsPrincipal` . 
+`Microsoft.AspNetCore.Authentication.Certificate` ASP.NET Core için [sertifika kimlik doğrulamasına](https://tools.ietf.org/html/rfc5246#section-7.4.4) benzer bir uygulama içerir. Sertifika kimlik doğrulaması TLS düzeyinde gerçekleşir ve bu süre ASP.NET Core. Daha doğru, bu, sertifikayı doğrulayan bir kimlik doğrulama işleyicisidir ve bu sertifikayı bir ' a çözebileceğiniz bir olay verir `ClaimsPrincipal` . 
 
 [Sunucunuzu](#configure-your-server-to-require-certificates) sertifika kimlik doğrulaması için yapılandırın, BT IIS, Kestrel, Azure Web Apps veya kullandığınız başka herhangi bir şeydir.
 
@@ -103,25 +104,25 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 ### <a name="allowedcertificatetypes--chained-selfsigned-or-all-chained--selfsigned"></a>AllowedCertificateTypes = zincirleme, SelfSigned veya All (zincirleme | SelfSigned)
 
-Varsayılan değer:`CertificateTypes.Chained`
+Varsayılan değer: `CertificateTypes.Chained`
 
 Bu denetim yalnızca uygun sertifika türüne izin verildiğini doğrular. Uygulama otomatik olarak imzalanan sertifikalar kullanıyorsa, bu seçeneğin veya olarak ayarlanması gerekir `CertificateTypes.All` `CertificateTypes.SelfSigned` .
 
 ### <a name="validatecertificateuse"></a>ValidateCertificateUse
 
-Varsayılan değer:`true`
+Varsayılan değer: `true`
 
 Bu denetim, istemci tarafından sunulan sertifikanın Istemci kimlik doğrulaması genişletilmiş anahtar kullanımı (EKU) olduğunu veya hiç EKU olmadığını doğrular. Belirtimlerde bir EKU belirtilmemişse, tüm EKU 'lar geçerli kabul edilir.
 
 ### <a name="validatevalidityperiod"></a>ValidateValidityPeriod
 
-Varsayılan değer:`true`
+Varsayılan değer: `true`
 
 Bu denetim, sertifikanın geçerlilik süresi içinde olduğunu doğrular. Her istekte işleyici, geçerli oturumu sırasında sunulmadığı zaman geçerli olmayan bir sertifikanın süresinin dolmamasını sağlar.
 
 ### <a name="revocationflag"></a>Revocationbayrağı
 
-Varsayılan değer:`X509RevocationFlag.ExcludeRoot`
+Varsayılan değer: `X509RevocationFlag.ExcludeRoot`
 
 Zincirdeki hangi sertifikaların iptal için denetleneceğini belirten bayrak.
 
@@ -129,7 +130,7 @@ Zincirdeki hangi sertifikaların iptal için denetleneceğini belirten bayrak.
 
 ### <a name="revocationmode"></a>Revocationmodu
 
-Varsayılan değer:`X509RevocationMode.Online`
+Varsayılan değer: `X509RevocationMode.Online`
 
 İptal denetimlerinin nasıl gerçekleştirileceğini belirten bayrak.
 
@@ -325,7 +326,7 @@ private static byte[] StringToByteArray(string hex)
 }
 ```
 
-`Startup.Configure`Yöntemi daha sonra ara yazılımı ekler. `UseCertificateForwarding`, ve çağrıları için çağrılır `UseAuthentication` `UseAuthorization` :
+`Startup.Configure`Yöntemi daha sonra ara yazılımı ekler. `UseCertificateForwarding` , ve çağrıları için çağrılır `UseAuthentication` `UseAuthorization` :
 
 ```csharp
 public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -642,7 +643,7 @@ Aşağıdaki yaklaşım isteğe bağlı istemci sertifikalarını destekler:
     * [Kestrel](/fundamentals/servers/kestrel):
       * [ListenOptions. UseHttps](xref:fundamentals/servers/kestrel#listenoptionsusehttps)
       * <xref:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.ClientCertificateMode>
-      * Not Kestrel Şu anda tek bir bağlamada birden fazla TLS yapılandırmasını desteklemez, benzersiz IP 'Ler veya bağlantı noktalarıyla iki bağlama gerekecektir. Bakýnhttps://github.com/dotnet/runtime/issues/31097
+      * Not Kestrel Şu anda tek bir bağlamada birden fazla TLS yapılandırmasını desteklemez, benzersiz IP 'Ler veya bağlantı noktalarıyla iki bağlama gerekecektir. Bakýn https://github.com/dotnet/runtime/issues/31097
     * IIS
       * [IIS barındırma](xref:host-and-deploy/iis/index#create-the-iis-site)
       * [IIS 'de güvenliği yapılandırma](/iis/manage/configuring-security/how-to-set-up-ssl-on-iis#configure-ssl-settings-2)
@@ -654,4 +655,4 @@ Aşağıdaki yaklaşım isteğe bağlı istemci sertifikalarını destekler:
 
 [Bu GitHub tartışma](https://github.com/dotnet/AspNetCore.Docs/issues/18720) sorununa yönelik isteğe bağlı istemci sertifikalarıyla ilgili soruları, açıklamaları ve diğer geri bildirimleri bırakın.
 
-&dagger;Sunucu Adı Belirtme (SNı), SSL anlaşmasının bir parçası olarak sanal etki alanı dahil etmek için bir TLS uzantısıdır. Bu, sanal etki alanı adının veya ana bilgisayar adının ağ uç noktasını tanımlamak için kullanılabileceği anlamına gelir.
+&dagger; Sunucu Adı Belirtme (SNı), SSL anlaşmasının bir parçası olarak sanal etki alanı dahil etmek için bir TLS uzantısıdır. Bu, sanal etki alanı adının veya ana bilgisayar adının ağ uç noktasını tanımlamak için kullanılabileceği anlamına gelir.

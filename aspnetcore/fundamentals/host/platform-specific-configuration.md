@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 09/26/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/platform-specific-configuration
-ms.openlocfilehash: 13728bca9d382bad39a85144ae9efd5b63a05dc4
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: fadd93cf28603653e20ed6c7dceadcabf0dfb9a5
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017395"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627526"
 ---
 # <a name="use-hosting-startup-assemblies-in-aspnet-core"></a>ASP.NET Core 'de barındırma başlangıç derlemelerini kullanın
 
@@ -69,7 +70,7 @@ Barındırma başlangıç derlemelerinin otomatik yüklenmesini devre dışı b�
             });
     ```
 
-  * `ASPNETCORE_PREVENTHOSTINGSTARTUP`ortam değişkeni.
+  * `ASPNETCORE_PREVENTHOSTINGSTARTUP` ortam değişkeni.
 
 * Belirli barındırma başlangıç derlemelerinin yüklenmesini engellemek için aşağıdakilerden birini, başlangıçta dışlamak üzere, bir barındırma başlangıç bütünleştirilmiş kodlarının noktalı virgülle ayrılmış dizesine ayarlayın:
 
@@ -87,7 +88,7 @@ Barındırma başlangıç derlemelerinin otomatik yüklenmesini devre dışı b�
             });
     ```
 
-  * `ASPNETCORE_HOSTINGSTARTUPEXCLUDEASSEMBLIES`ortam değişkeni.
+  * `ASPNETCORE_HOSTINGSTARTUPEXCLUDEASSEMBLIES` ortam değişkeni.
 
 Ana bilgisayar yapılandırma ayarı ve ortam değişkeni ayarlanırsa, konak ayarı davranışı denetler.
 
@@ -106,7 +107,7 @@ Bir barındırma başlatma geliştirmesi, bir sınıf kitaplığında bulunabili
 
 [Örnek kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) , bir Razor Pages uygulaması, *Hostingstartupapp*ve bir sınıf kitaplığı, *hostingstartuplibrary*içerir. Sınıf kitaplığı:
 
-* Uygulayan bir barındırma başlangıç sınıfı içerir `ServiceKeyInjection` `IHostingStartup` . `ServiceKeyInjection`bellek içi yapılandırma sağlayıcısını ([Addınmemorycollection](xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*)) kullanarak uygulamanın yapılandırmasına bir hizmet dizesi çifti ekler.
+* Uygulayan bir barındırma başlangıç sınıfı içerir `ServiceKeyInjection` `IHostingStartup` . `ServiceKeyInjection` bellek içi yapılandırma sağlayıcısını ([Addınmemorycollection](xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*)) kullanarak uygulamanın yapılandırmasına bir hizmet dizesi çifti ekler.
 * `HostingStartup`Barındırma başlatmasının ad alanını ve sınıfını tanımlayan bir özniteliği içerir.
 
 `ServiceKeyInjection`Sınıfın <xref:Microsoft.AspNetCore.Hosting.IHostingStartup.Configure*> yöntemi bir <xref:Microsoft.AspNetCore.Hosting.IWebHostBuilder> uygulamaya geliştirmeler eklemek için bir kullanır.
@@ -123,7 +124,7 @@ Uygulamanın dizin sayfası, sınıf kitaplığının barındırma başlangıç 
 
 [Örnek kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ayrıca ayrı bir barındırma başlatma, *Hostingstartuppackage*sağlayan bir NuGet paket projesi içerir. Paket, daha önce açıklanan sınıf kitaplığıyla aynı özelliklere sahiptir. Paket:
 
-* Uygulayan bir barındırma başlangıç sınıfı içerir `ServiceKeyInjection` `IHostingStartup` . `ServiceKeyInjection`uygulamanın yapılandırmasına bir hizmet dizesi çifti ekler.
+* Uygulayan bir barındırma başlangıç sınıfı içerir `ServiceKeyInjection` `IHostingStartup` . `ServiceKeyInjection` uygulamanın yapılandırmasına bir hizmet dizesi çifti ekler.
 * Bir `HostingStartup` özniteliği içerir.
 
 *Hostingstartuppackage/ServiceKeyInjection. cs*:
@@ -164,7 +165,7 @@ Konsol uygulaması [Microsoft. AspNetCore. Hosting. soyutlamalar](https://www.nu
 
 [!code-csharp[](platform-specific-configuration/samples-snapshot/3.x/StartupEnhancement.cs?name=snippet1)]
 
-Bir sınıf uygular `IHostingStartup` . Sınıfın <xref:Microsoft.AspNetCore.Hosting.IHostingStartup.Configure*> yöntemi bir <xref:Microsoft.AspNetCore.Hosting.IWebHostBuilder> uygulamaya geliştirmeler eklemek için bir kullanır. `IHostingStartup.Configure`barındırma başlangıç derlemesinde kullanıcı kodundan önce çalışma zamanı tarafından çağrılır `Startup.Configure` , bu da kullanıcı kodunun barındırma başlangıç derlemesi tarafından verilen yapılandırmanın üzerine yazılmasına olanak tanır.
+Bir sınıf uygular `IHostingStartup` . Sınıfın <xref:Microsoft.AspNetCore.Hosting.IHostingStartup.Configure*> yöntemi bir <xref:Microsoft.AspNetCore.Hosting.IWebHostBuilder> uygulamaya geliştirmeler eklemek için bir kullanır. `IHostingStartup.Configure` barındırma başlangıç derlemesinde kullanıcı kodundan önce çalışma zamanı tarafından çağrılır `Startup.Configure` , bu da kullanıcı kodunun barındırma başlangıç derlemesi tarafından verilen yapılandırmanın üzerine yazılmasına olanak tanır.
 
 [!code-csharp[](platform-specific-configuration/samples-snapshot/3.x/StartupEnhancement.cs?name=snippet2&highlight=3,5)]
 
@@ -271,7 +272,7 @@ dotnet store --manifest store.manifest.csproj --runtime win7-x64 --output ./depl
 
 **Barındırma başlatmasının bağımlılıklar dosyasını değiştirme ve yerleştirme**
 
-Geliştirmede bir paket başvurusu olmadan geliştirmeyi etkinleştirmek için, ile çalışma zamanına ek bağımlılıklar belirtin `additionalDeps` . `additionalDeps`şunları yapmanıza olanak sağlar:
+Geliştirmede bir paket başvurusu olmadan geliştirmeyi etkinleştirmek için, ile çalışma zamanına ek bağımlılıklar belirtin `additionalDeps` . `additionalDeps` şunları yapmanıza olanak sağlar:
 
 * Dosya başlangıcında uygulamanın kendi *.deps.js* birlikte birleştirilecek dosyalara bir dizi ek *.deps.js* sağlayarak uygulamanın kitaplık grafiğini genişletin.
 * Barındırma başlangıç derlemesini bulunabilir ve yüklenebilir hale getirin.
@@ -482,10 +483,10 @@ Barındırma başlangıç derlemelerinin otomatik yüklenmesini devre dışı b�
 
 * Tüm barındırma başlangıç derlemelerinin yüklenmesini engellemek için aşağıdakilerden birini veya olarak ayarlayın `true` `1` :
   * [Barındırma başlangıç](xref:fundamentals/host/web-host#prevent-hosting-startup) ana bilgisayar yapılandırma ayarını önleyin.
-  * `ASPNETCORE_PREVENTHOSTINGSTARTUP`ortam değişkeni.
+  * `ASPNETCORE_PREVENTHOSTINGSTARTUP` ortam değişkeni.
 * Belirli barındırma başlangıç derlemelerinin yüklenmesini engellemek için aşağıdakilerden birini, başlangıçta dışlamak üzere, bir barındırma başlangıç bütünleştirilmiş kodlarının noktalı virgülle ayrılmış dizesine ayarlayın:
   * [Barındırma başlatma derlemeleri](xref:fundamentals/host/web-host#hosting-startup-exclude-assemblies) ana bilgisayar yapılandırma ayarı.
-  * `ASPNETCORE_HOSTINGSTARTUPEXCLUDEASSEMBLIES`ortam değişkeni.
+  * `ASPNETCORE_HOSTINGSTARTUPEXCLUDEASSEMBLIES` ortam değişkeni.
 
 Ana bilgisayar yapılandırma ayarı ve ortam değişkeni ayarlanırsa, konak ayarı davranışı denetler.
 
@@ -504,7 +505,7 @@ Bir barındırma başlatma geliştirmesi, bir sınıf kitaplığında bulunabili
 
 [Örnek kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) , bir Razor Pages uygulaması, *Hostingstartupapp*ve bir sınıf kitaplığı, *hostingstartuplibrary*içerir. Sınıf kitaplığı:
 
-* Uygulayan bir barındırma başlangıç sınıfı içerir `ServiceKeyInjection` `IHostingStartup` . `ServiceKeyInjection`bellek içi yapılandırma sağlayıcısını ([Addınmemorycollection](xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*)) kullanarak uygulamanın yapılandırmasına bir hizmet dizesi çifti ekler.
+* Uygulayan bir barındırma başlangıç sınıfı içerir `ServiceKeyInjection` `IHostingStartup` . `ServiceKeyInjection` bellek içi yapılandırma sağlayıcısını ([Addınmemorycollection](xref:Microsoft.Extensions.Configuration.MemoryConfigurationBuilderExtensions.AddInMemoryCollection*)) kullanarak uygulamanın yapılandırmasına bir hizmet dizesi çifti ekler.
 * `HostingStartup`Barındırma başlatmasının ad alanını ve sınıfını tanımlayan bir özniteliği içerir.
 
 `ServiceKeyInjection`Sınıfın <xref:Microsoft.AspNetCore.Hosting.IHostingStartup.Configure*> yöntemi bir <xref:Microsoft.AspNetCore.Hosting.IWebHostBuilder> uygulamaya geliştirmeler eklemek için bir kullanır.
@@ -521,7 +522,7 @@ Uygulamanın dizin sayfası, sınıf kitaplığının barındırma başlangıç 
 
 [Örnek kod](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/host/platform-specific-configuration/samples/) ayrıca ayrı bir barındırma başlatma, *Hostingstartuppackage*sağlayan bir NuGet paket projesi içerir. Paket, daha önce açıklanan sınıf kitaplığıyla aynı özelliklere sahiptir. Paket:
 
-* Uygulayan bir barındırma başlangıç sınıfı içerir `ServiceKeyInjection` `IHostingStartup` . `ServiceKeyInjection`uygulamanın yapılandırmasına bir hizmet dizesi çifti ekler.
+* Uygulayan bir barındırma başlangıç sınıfı içerir `ServiceKeyInjection` `IHostingStartup` . `ServiceKeyInjection` uygulamanın yapılandırmasına bir hizmet dizesi çifti ekler.
 * Bir `HostingStartup` özniteliği içerir.
 
 *Hostingstartuppackage/ServiceKeyInjection. cs*:
@@ -562,7 +563,7 @@ Konsol uygulaması [Microsoft. AspNetCore. Hosting. soyutlamalar](https://www.nu
 
 [!code-csharp[](platform-specific-configuration/samples-snapshot/2.x/StartupEnhancement.cs?name=snippet1)]
 
-Bir sınıf uygular `IHostingStartup` . Sınıfın <xref:Microsoft.AspNetCore.Hosting.IHostingStartup.Configure*> yöntemi bir <xref:Microsoft.AspNetCore.Hosting.IWebHostBuilder> uygulamaya geliştirmeler eklemek için bir kullanır. `IHostingStartup.Configure`barındırma başlangıç derlemesinde kullanıcı kodundan önce çalışma zamanı tarafından çağrılır `Startup.Configure` , bu da kullanıcı kodunun barındırma başlangıç derlemesi tarafından verilen yapılandırmanın üzerine yazılmasına olanak tanır.
+Bir sınıf uygular `IHostingStartup` . Sınıfın <xref:Microsoft.AspNetCore.Hosting.IHostingStartup.Configure*> yöntemi bir <xref:Microsoft.AspNetCore.Hosting.IWebHostBuilder> uygulamaya geliştirmeler eklemek için bir kullanır. `IHostingStartup.Configure` barındırma başlangıç derlemesinde kullanıcı kodundan önce çalışma zamanı tarafından çağrılır `Startup.Configure` , bu da kullanıcı kodunun barındırma başlangıç derlemesi tarafından verilen yapılandırmanın üzerine yazılmasına olanak tanır.
 
 [!code-csharp[](platform-specific-configuration/samples-snapshot/2.x/StartupEnhancement.cs?name=snippet2&highlight=3,5)]
 
@@ -657,7 +658,7 @@ dotnet store --manifest store.manifest.csproj --runtime win7-x64 --output ./depl
 
 **Barındırma başlatmasının bağımlılıklar dosyasını değiştirme ve yerleştirme**
 
-Geliştirmede bir paket başvurusu olmadan geliştirmeyi etkinleştirmek için, ile çalışma zamanına ek bağımlılıklar belirtin `additionalDeps` . `additionalDeps`şunları yapmanıza olanak sağlar:
+Geliştirmede bir paket başvurusu olmadan geliştirmeyi etkinleştirmek için, ile çalışma zamanına ek bağımlılıklar belirtin `additionalDeps` . `additionalDeps` şunları yapmanıza olanak sağlar:
 
 * Dosya başlangıcında uygulamanın kendi *.deps.js* birlikte birleştirilecek dosyalara bir dizi ek *.deps.js* sağlayarak uygulamanın kitaplık grafiğini genişletin.
 * Barındırma başlangıç derlemesini bulunabilir ve yüklenebilir hale getirin.

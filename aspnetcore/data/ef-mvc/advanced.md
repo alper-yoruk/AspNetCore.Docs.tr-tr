@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/advanced
-ms.openlocfilehash: 36b45339f7c3f79eca20a3467c10e896f260601f
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 9f02165f54d3cd3328496710dc92ebc86c4640d6
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012988"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626837"
 ---
 # <a name="tutorial-learn-about-advanced-scenarios---aspnet-mvc-with-ef-core"></a>Öğretici: Gelişmiş senaryolar hakkında bilgi edinin-EF Core ASP.NET MVC
 
@@ -41,7 +42,7 @@ Bu öğreticide şunları yaptınız:
 > * EF Core kaynak kodu ve geliştirme planları hakkında bilgi edinin
 > * Kodu basitleştirmek için dinamik LINQ kullanmayı öğrenin
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [Devralmayı Uygula](inheritance.md)
 
@@ -239,7 +240,7 @@ Komutunu çalıştırın `migrations remove` , kod değişikliklerinizi kaydedin
 
 Varolan verileri içeren bir veritabanında şema değişiklikleri yaparken başka hatalar almak mümkündür. Çözümleyemez geçiş hataları alırsanız, bağlantı dizesindeki veritabanı adını değiştirebilir veya veritabanını silebilirsiniz. Yeni bir veritabanı ile geçirilecek veri yoktur ve Update-Database komutunun hatasız tamamlanabilmesi çok daha yüksektir.
 
-En basit yaklaşım, *üzerindeappsettings.js*veritabanının yeniden adlandırılmasına. Bir sonraki sefer çalıştırdığınızda `database update` Yeni bir veritabanı oluşturulur.
+En basit yaklaşım, * üzerindeappsettings.js*veritabanının yeniden adlandırılmasına. Bir sonraki sefer çalıştırdığınızda `database update` Yeni bir veritabanı oluşturulur.
 
 SSOX 'te bir veritabanını silmek için veritabanına sağ tıklayın, **Sil**' e tıklayın ve ardından **veritabanını sil** Iletişim kutusunda **varolan bağlantıları kapat** ' ı seçin ve **Tamam**' a tıklayın.
 

@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 08/20/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/libman/libman-vs
-ms.openlocfilehash: 2dc944ffd4307aa108a54b70d58f298c26959ce0
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 77cfced18edd9db5be21265469b42f32e3de274d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88013352"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625680"
 ---
 # <a name="use-libman-with-aspnet-core-in-visual-studio"></a>Visual Studio 'da ASP.NET Core LibMan kullanma
 
@@ -36,7 +37,7 @@ Visual Studio, aşağıdakiler dahil olmak üzere ASP.NET Core projelerinde [Lib
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/client-side/libman/samples/) [(nasıl indirileceği)](xref:index#how-to-download-a-sample)
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * **ASP.net ve Web geliştirme** iş yüküyle [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
 
@@ -94,7 +95,7 @@ Kitaplık dosyaları, ASP.NET Core projesine iki farklı şekilde eklenebilir:
 
 ### <a name="manually-configure-libman-manifest-file-entries"></a>LibMan bildirim dosyası girişlerini el ile yapılandır
 
-Visual Studio 'daki tüm LibMan işlemleri, proje kökünün LibMan bildiriminin içeriğine dayalıdır (*libman.js*). Projenin kitaplık dosyalarını yapılandırmak için *üzerindelibman.js* el ile düzenleyebilirsiniz. *libman.json* kaydedildiğinde, Visual Studio tüm kitaplık dosyalarını geri yükler.
+Visual Studio 'daki tüm LibMan işlemleri, proje kökünün LibMan bildiriminin içeriğine dayalıdır (*libman.js*). Projenin kitaplık dosyalarını yapılandırmak için * üzerindelibman.js* el ile düzenleyebilirsiniz. *libman.json* kaydedildiğinde, Visual Studio tüm kitaplık dosyalarını geri yükler.
 
 Düzenlenmek üzere *libman.js* açmak için aşağıdaki seçenekler mevcuttur:
 
@@ -102,7 +103,7 @@ Düzenlenmek üzere *libman.js* açmak için aşağıdaki seçenekler mevcuttur:
 * **Çözüm Gezgini** ' de projeye sağ tıklayın ve **Istemci tarafı kitaplıklarını yönet**' i seçin. **&#8224;**
 * Visual Studio **Proje** menüsünden **Istemci tarafı kitaplıklarını yönet** ' i seçin. **&#8224;**
 
-**&#8224;** Dosya *üzerindelibman.js* proje kökünde zaten yoksa, varsayılan öğe şablonu içeriğiyle oluşturulur.
+**&#8224;** Dosya * üzerindelibman.js* proje kökünde zaten yoksa, varsayılan öğe şablonu içeriğiyle oluşturulur.
 
 Visual Studio, renklendirme, biçimlendirme, IntelliSense ve şema doğrulaması gibi zengin JSON düzenlemesi desteği sunar. LibMan bildiriminin JSON şeması konumunda bulunur [https://json.schemastore.org/libman](https://json.schemastore.org/libman) .
 

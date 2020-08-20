@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 04/13/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/messagepackhubprotocol
-ms.openlocfilehash: 8e590c87f75d35cbafde1adbc87dea9c45eac92d
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ab9bd11e37182f5b24db5595d5d050f4cc0e32da
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022556"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626655"
 ---
 # <a name="use-messagepack-hub-protocol-in-no-locsignalr-for-aspnet-core"></a>ASP.NET Core için ' de MessagePack hub protokolünü kullanın SignalR
 
@@ -32,7 +33,7 @@ Bu makalede, okuyucunun [Başlarken](xref:tutorials/signalr)bölümünde ele al�
 
 ## <a name="what-is-messagepack"></a>MessagePack nedir?
 
-[MessagePack](https://msgpack.org/index.html) hızlı ve kompakt ikili serileştirme biçimidir. Bu, [JSON](https://www.json.org/)ile karşılaştırıldığında daha küçük iletiler oluşturduğundan performans ve bant genişliği açısından yararlıdır. Baytlar bir MessagePack ayrıştırıcısı üzerinden geçirilmediği takdirde, ağ izlemeleri ve günlükleri aranırken ikili iletiler okunamaz. SignalR, MessagePack biçimi için yerleşik desteğe sahiptir ve istemci ve sunucunun kullanması için API 'Ler sağlar.
+[MessagePack](https://msgpack.org/index.html) hızlı ve kompakt ikili serileştirme biçimidir. Bu, [JSON](https://www.json.org/)ile karşılaştırıldığında daha küçük iletiler oluşturduğundan performans ve bant genişliği açısından yararlıdır. Baytlar bir MessagePack ayrıştırıcısı üzerinden geçirilmediği takdirde, ağ izlemeleri ve günlükleri aranırken ikili iletiler okunamaz. SignalR , MessagePack biçimi için yerleşik desteğe sahiptir ve istemci ve sunucunun kullanması için API 'Ler sağlar.
 
 ## <a name="configure-messagepack-on-the-server"></a>Sunucuda MessagePack 'i yapılandırma
 
@@ -197,7 +198,7 @@ Bu makalede, okuyucunun [Başlarken](xref:tutorials/signalr)bölümünde ele al�
 
 ## <a name="what-is-messagepack"></a>MessagePack nedir?
 
-[MessagePack](https://msgpack.org/index.html) hızlı ve kompakt ikili serileştirme biçimidir. Bu, [JSON](https://www.json.org/)ile karşılaştırıldığında daha küçük iletiler oluşturduğundan performans ve bant genişliği açısından yararlıdır. Baytlar bir MessagePack ayrıştırıcısı üzerinden geçirilmediği takdirde, ağ izlemeleri ve günlükleri aranırken ikili iletiler okunamaz. SignalR, MessagePack biçimi için yerleşik desteğe sahiptir ve istemci ve sunucunun kullanması için API 'Ler sağlar.
+[MessagePack](https://msgpack.org/index.html) hızlı ve kompakt ikili serileştirme biçimidir. Bu, [JSON](https://www.json.org/)ile karşılaştırıldığında daha küçük iletiler oluşturduğundan performans ve bant genişliği açısından yararlıdır. Baytlar bir MessagePack ayrıştırıcısı üzerinden geçirilmediği takdirde, ağ izlemeleri ve günlükleri aranırken ikili iletiler okunamaz. SignalR , MessagePack biçimi için yerleşik desteğe sahiptir ve istemci ve sunucunun kullanması için API 'Ler sağlar.
 
 ## <a name="configure-messagepack-on-the-server"></a>Sunucuda MessagePack 'i yapılandırma
 
@@ -372,7 +373,7 @@ Bu makalede, okuyucunun [Başlarken](xref:tutorials/signalr)bölümünde ele al�
 
 ## <a name="what-is-messagepack"></a>MessagePack nedir?
 
-[MessagePack](https://msgpack.org/index.html) hızlı ve kompakt ikili serileştirme biçimidir. Bu, [JSON](https://www.json.org/)ile karşılaştırıldığında daha küçük iletiler oluşturduğundan performans ve bant genişliği açısından yararlıdır. Baytlar bir MessagePack ayrıştırıcısı üzerinden geçirilmediği takdirde, ağ izlemeleri ve günlükleri aranırken ikili iletiler okunamaz. SignalR, MessagePack biçimi için yerleşik desteğe sahiptir ve istemci ve sunucunun kullanması için API 'Ler sağlar.
+[MessagePack](https://msgpack.org/index.html) hızlı ve kompakt ikili serileştirme biçimidir. Bu, [JSON](https://www.json.org/)ile karşılaştırıldığında daha küçük iletiler oluşturduğundan performans ve bant genişliği açısından yararlıdır. Baytlar bir MessagePack ayrıştırıcısı üzerinden geçirilmediği takdirde, ağ izlemeleri ve günlükleri aranırken ikili iletiler okunamaz. SignalR , MessagePack biçimi için yerleşik desteğe sahiptir ve istemci ve sunucunun kullanması için API 'Ler sağlar.
 
 ## <a name="configure-messagepack-on-the-server"></a>Sunucuda MessagePack 'i yapılandırma
 

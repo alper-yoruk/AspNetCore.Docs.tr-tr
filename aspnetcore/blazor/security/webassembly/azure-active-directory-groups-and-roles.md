@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: devx-track-csharp, mvc
 ms.date: 07/28/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/aad-groups-roles
-ms.openlocfilehash: bd0a7c5a905ae4888ea6ad326be5b16cbfaa10fc
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: 50d019897310f9edd560069137ab73b39d780be8
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130411"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626239"
 ---
 # <a name="azure-ad-groups-administrative-roles-and-user-defined-roles"></a>Azure AD grupları, yönetim rolleri ve Kullanıcı tanımlı roller
 
 Sağlayan, [Luke Latham](https://github.com/guardrex) ve [Javier Calvarro Nelson](https://github.com/javiercn)
 
-Azure Active Directory (AAD), ASP.NET Core birleştirilebilecek çeşitli yetkilendirme yaklaşımları sağlar Identity :
+Azure Active Directory (AAD), ile birleştirilebilir çeşitli yetkilendirme yaklaşımları sağlar ASP.NET Core Identity :
 
 * Kullanıcı tanımlı gruplar
   * Güvenlik
@@ -54,14 +55,14 @@ Graph API çağrılarına izin vermek için, Azure portal bir barındırılan ç
 * `Directory.ReadWrite.All`
 * `Directory.AccessAsUser.All`
 
-`Directory.Read.All`en az ayrıcalıklı izindir ve bu makalede açıklanan örnek için kullanılan izindir.
+`Directory.Read.All` en az ayrıcalıklı izindir ve bu makalede açıklanan örnek için kullanılan izindir.
 
 ## <a name="user-defined-groups-and-built-in-administrative-roles"></a>Kullanıcı tanımlı gruplar ve yerleşik yönetim rolleri
 
 Azure portal bir üyelik talebi sağlamak üzere uygulamayı yapılandırmak için `groups` aşağıdaki Azure makalelerine bakın. Kullanıcıları Kullanıcı tanımlı AAD gruplarına ve yerleşik yönetici rollerine atayın.
 
 * [Azure AD güvenlik gruplarını kullanan roller](/azure/architecture/multitenant-identity/app-roles#roles-using-azure-ad-security-groups)
-* [`groupMembershipClaims`özniteliğe](/azure/active-directory/develop/reference-app-manifest#groupmembershipclaims-attribute)
+* [`groupMembershipClaims` özniteliğe](/azure/active-directory/develop/reference-app-manifest#groupmembershipclaims-attribute)
 
 Aşağıdaki örneklerde, bir kullanıcının AAD yerleşik *Faturalama yöneticisi* rolüne atandığını varsayılır.
 

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/distributed
-ms.openlocfilehash: 64a4b6f606a4f5f8e73ef08f53cbb6e4003245aa
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a25cbaf9a4e7dc5f1bd3706d01f409208a39aaa3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020684"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626733"
 ---
 # <a name="distributed-caching-in-aspnet-core"></a>ASP.NET Core 'de dağıtılmış önbelleğe alma
 
@@ -44,7 +45,7 @@ Dağıtılmış önbellek yapılandırması uygulamaya özgüdür. Bu makalede S
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 SQL Server dağıtılmış önbellek kullanmak için [Microsoft. Extensions. Caching. SqlServer](https://www.nuget.org/packages/Microsoft.Extensions.Caching.SqlServer) paketine bir paket başvurusu ekleyin.
 
@@ -174,7 +175,7 @@ Dizin sayfası her yüklendiğinde, önbellek, içindeki önbelleğe alınmış 
 
 * Mevcut altyapı
 * Performans gereksinimleri
-* Maliyet
+* Cost
 * Ekip deneyimi
 
 Önbelleğe alma çözümleri genellikle önbelleğe alınmış verilerin hızlı bir şekilde alınmasını sağlamak için bellek içi depolamaya dayanır, ancak bellek sınırlı bir kaynaktır ve genişleyebilir. Yalnızca yaygın olarak kullanılan verileri bir önbellekte depolayın.
@@ -214,7 +215,7 @@ Dağıtılmış önbellek yapılandırması uygulamaya özgüdür. Bu makalede S
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 SQL Server dağıtılmış önbellek kullanmak için [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app) 'e başvurun veya [Microsoft. Extensions. Caching. SqlServer](https://www.nuget.org/packages/Microsoft.Extensions.Caching.SqlServer) paketine bir paket başvurusu ekleyin.
 
@@ -344,7 +345,7 @@ Dizin sayfası her yüklendiğinde, önbellek, içindeki önbelleğe alınmış 
 
 * Mevcut altyapı
 * Performans gereksinimleri
-* Maliyet
+* Cost
 * Ekip deneyimi
 
 Önbelleğe alma çözümleri genellikle önbelleğe alınmış verilerin hızlı bir şekilde alınmasını sağlamak için bellek içi depolamaya dayanır, ancak bellek sınırlı bir kaynaktır ve genişleyebilir. Yalnızca yaygın olarak kullanılan verileri bir önbellekte depolayın.
@@ -384,7 +385,7 @@ Dağıtılmış önbellek yapılandırması uygulamaya özgüdür. Bu makalede S
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/performance/caching/distributed/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 SQL Server dağıtılmış önbellek kullanmak için [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app) 'e başvurun veya [Microsoft. Extensions. Caching. SqlServer](https://www.nuget.org/packages/Microsoft.Extensions.Caching.SqlServer) paketine bir paket başvurusu ekleyin.
 
@@ -520,7 +521,7 @@ Dizin sayfası her yüklendiğinde, önbellek, içindeki önbelleğe alınmış 
 
 * Mevcut altyapı
 * Performans gereksinimleri
-* Maliyet
+* Cost
 * Ekip deneyimi
 
 Önbelleğe alma çözümleri genellikle önbelleğe alınmış verilerin hızlı bir şekilde alınmasını sağlamak için bellek içi depolamaya dayanır, ancak bellek sınırlı bir kaynaktır ve genişleyebilir. Yalnızca yaygın olarak kullanılan verileri bir önbellekte depolayın.

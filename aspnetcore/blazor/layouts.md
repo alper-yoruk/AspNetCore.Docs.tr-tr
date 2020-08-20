@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/23/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/layouts
-ms.openlocfilehash: 68fc4c9bd516948eeb2c46c67fdb5bde7cfeefca
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: f41b41194f597505d775c95f1e65960c2f827e3b
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014158"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628020"
 ---
 # <a name="aspnet-core-no-locblazor-layouts"></a>ASP.NET Core Blazor düzenleri
 
@@ -73,7 +74,7 @@ Düzen doğrudan bir bileşen içinde belirtildiğinde, yönlendirici veya *defa
 
 ## <a name="centralized-layout-selection"></a>Merkezi düzen seçimi
 
-Bir uygulamanın her klasörü, isteğe bağlı olarak adlı bir şablon dosyası içerebilir `_Imports.razor` . Derleyici, içeri aktarmalar dosyasında belirtilen yönergeleri Razor aynı klasörde ve özyinelemeli olarak tüm alt klasörlerinde bulunan tüm şablonlarda içerir. Bu nedenle, `_Imports.razor` içeren bir dosya, `@layout MyCoolLayout` bir klasördeki tüm bileşenlerin kullanımını sağlar `MyCoolLayout` . `@layout MyCoolLayout` `.razor` Klasöre ve alt klasörlerde bulunan tüm dosyalara tekrar tekrar eklemeniz gerekmez. `@using`yönergeler aynı zamanda bileşenlere aynı şekilde uygulanır.
+Bir uygulamanın her klasörü, isteğe bağlı olarak adlı bir şablon dosyası içerebilir `_Imports.razor` . Derleyici, içeri aktarmalar dosyasında belirtilen yönergeleri Razor aynı klasörde ve özyinelemeli olarak tüm alt klasörlerinde bulunan tüm şablonlarda içerir. Bu nedenle, `_Imports.razor` içeren bir dosya, `@layout MyCoolLayout` bir klasördeki tüm bileşenlerin kullanımını sağlar `MyCoolLayout` . `@layout MyCoolLayout` `.razor` Klasöre ve alt klasörlerde bulunan tüm dosyalara tekrar tekrar eklemeniz gerekmez. `@using` yönergeler aynı zamanda bileşenlere aynı şekilde uygulanır.
 
 Aşağıdaki `_Imports.razor` Dosya içeri aktarmalar:
 
@@ -98,11 +99,11 @@ Aşağıdaki örnek, iç içe düzenleri nasıl kullanacağınızı gösterir. `
 
 [!code-razor[](layouts/sample_snapshot/3.x/EpisodesComponent.razor?highlight=1)]
 
-`MasterListLayout.razor`Dosyası sağlar `MasterListLayout` . Düzen, nerede işlendiği başka bir düzene başvurur `MasterLayout` . `EpisodesComponent`, görüntülendiği yerde işlenir `@Body` :
+`MasterListLayout.razor`Dosyası sağlar `MasterListLayout` . Düzen, nerede işlendiği başka bir düzene başvurur `MasterLayout` . `EpisodesComponent` , görüntülendiği yerde işlenir `@Body` :
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterListLayout.razor?highlight=1,9)]
 
-Son olarak, `MasterLayout` içinde `MasterLayout.razor` üstbilgi, ana menü ve altbilgi gibi en üst düzey düzen öğelerini içerir. `MasterListLayout`ile birlikte `EpisodesComponent` işlendiğinde, şu şekilde `@Body` görünür:
+Son olarak, `MasterLayout` içinde `MasterLayout.razor` üstbilgi, ana menü ve altbilgi gibi en üst düzey düzen öğelerini içerir. `MasterListLayout` ile birlikte `EpisodesComponent` işlendiğinde, şu şekilde `@Body` görünür:
 
 [!code-razor[](layouts/sample_snapshot/3.x/MasterLayout.razor?highlight=6)]
 

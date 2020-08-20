@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/23/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/handle-errors
-ms.openlocfilehash: 5f7112d9a072f28d387e07bdf69ec0b7595ff6b4
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: dfe6f1ac79732d158e31fb5250645d4ff98d1c0b
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014444"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628345"
 ---
 # <a name="handle-errors-in-aspnet-core-no-locblazor-apps"></a>ASP.NET Core uygulamalardaki hataları işleme Blazor
 
@@ -89,14 +90,14 @@ Bir Blazor Server uygulamada, dosyadaki deneyimi özelleştirin `Pages/_Host.csh
 
 ## <a name="how-a-no-locblazor-server-app-reacts-to-unhandled-exceptions"></a>Bir Blazor Server uygulamanın işlenmemiş özel durumlara nasıl yeniden davranması
 
-Blazor Serverdurum bilgisi olan bir çerçevedir. Kullanıcılar bir uygulamayla etkileşim kurarken, *devre*olarak bilinen sunucuya bir bağlantı sağlar. Devre, etkin bileşen örneklerini ve diğer birçok durum düzeyini barındırır; örneğin:
+Blazor Server durum bilgisi olan bir çerçevedir. Kullanıcılar bir uygulamayla etkileşim kurarken, *devre*olarak bilinen sunucuya bir bağlantı sağlar. Devre, etkin bileşen örneklerini ve diğer birçok durum düzeyini barındırır; örneğin:
 
 * Bileşenlerin en son işlenmiş çıktısı.
 * İstemci tarafı olayları tarafından tetiklenebilecek geçerli olay işleme temsilcileri kümesi.
 
 Bir Kullanıcı uygulamayı birden çok tarayıcı sekmelerinde açarsa, birden çok bağımsız devreler vardır.
 
-Blazorişlenmemiş özel durumları, nerede gerçekleştikleri devreye göre önemli olarak değerlendirir. İşlenmeyen bir özel durum nedeniyle devre sonlandırılırsa, Kullanıcı yalnızca yeni bir bağlantı oluşturmak için sayfayı yeniden yükleyerek uygulamayla etkileşime geçerek devam edebilir. Diğer kullanıcılar veya diğer tarayıcı sekmeleri için devre dışı bırakılmış olan Sonlandırıcı dışındaki devreleri etkilenmez. Bu senaryo, çöktüğü bir masaüstü uygulamasına benzerdir. Kilitlenen uygulamanın yeniden başlatılması gerekiyor, ancak diğer uygulamalar etkilenmedi.
+Blazor işlenmemiş özel durumları, nerede gerçekleştikleri devreye göre önemli olarak değerlendirir. İşlenmeyen bir özel durum nedeniyle devre sonlandırılırsa, Kullanıcı yalnızca yeni bir bağlantı oluşturmak için sayfayı yeniden yükleyerek uygulamayla etkileşime geçerek devam edebilir. Diğer kullanıcılar veya diğer tarayıcı sekmeleri için devre dışı bırakılmış olan Sonlandırıcı dışındaki devreleri etkilenmez. Bu senaryo, çöktüğü bir masaüstü uygulamasına benzerdir. Kilitlenen uygulamanın yeniden başlatılması gerekiyor, ancak diğer uygulamalar etkilenmedi.
 
 Aşağıdaki nedenlerden dolayı işlenmeyen bir özel durum oluştuğunda devre sonlandırılır:
 
@@ -133,7 +134,7 @@ Daha fazla bilgi için bkz. <xref:blazor/fundamentals/logging>.
 * [Olay işleyicileri](#event-handlers)
 * [Bileşen elden çıkarma](#component-disposal)
 * [JavaScript ile birlikte çalışma](#javascript-interop)
-* [Blazor Serverrerendering](#blazor-server-prerendering)
+* [Blazor Server rerendering](#blazor-server-prerendering)
 
 Önceki işlenmemiş özel durumlar, bu makalenin aşağıdaki bölümlerinde açıklanmıştır.
 
@@ -203,7 +204,7 @@ Bileşen elden çıkarma hakkında daha fazla bilgi için bkz <xref:blazor/compo
 
 ### <a name="javascript-interop"></a>JavaScript ile birlikte çalışma
 
-<xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType>.NET kodunun Kullanıcı tarayıcısında JavaScript çalışma zamanına zaman uyumsuz çağrılar yapmasına izin verir.
+<xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> .NET kodunun Kullanıcı tarayıcısında JavaScript çalışma zamanına zaman uyumsuz çağrılar yapmasına izin verir.
 
 Aşağıdaki koşullar ile hata işleme için geçerlidir <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A> :
 
@@ -223,9 +224,9 @@ Daha fazla bilgi için aşağıdaki makaleleri inceleyin:
 * <xref:blazor/call-javascript-from-dotnet>
 * <xref:blazor/call-dotnet-from-javascript>
 
-### <a name="no-locblazor-server-prerendering"></a>Blazor Serverprerendering
+### <a name="no-locblazor-server-prerendering"></a>Blazor Server prerendering
 
-Blazorbileşenler, işlenen HTML işaretlemesi kullanıcının ilk HTTP isteğinin bir parçası olarak döndürüldüğünden, [bileşen etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) kullanılarak önceden uygulanabilir. Bu şu şekilde geçerlidir:
+Blazor bileşenler, işlenen HTML işaretlemesi kullanıcının ilk HTTP isteğinin bir parçası olarak döndürüldüğünden, [bileşen etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/component-tag-helper) kullanılarak önceden uygulanabilir. Bu şu şekilde geçerlidir:
 
 * Aynı sayfanın parçası olan tüm ön işlenmiş bileşenler için yeni bir devre oluşturma.
 * İlk HTML oluşturuluyor.

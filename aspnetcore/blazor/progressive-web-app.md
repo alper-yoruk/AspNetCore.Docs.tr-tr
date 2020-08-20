@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core ile aşamalı Web uygulamaları oluşturmaBlazor WebAssembly
+title: ASP.NET Core ile aşamalı Web uygulamaları oluşturma Blazor WebAssembly
 author: guardrex
 description: BlazorMasaüstü uygulaması gibi davranması için modern tarayıcı özelliklerini kullanan bir tabanlı aşamalı Web uygulaması (PWA) oluşturmayı öğrenin.
 monikerRange: '>= aspnetcore-3.1'
@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: 1c33a3abd2ebee60a4025d4598495d276663dc9b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 230b2a801a76e2d719fba8e2b97fddb0b32a9634
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014171"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627968"
 ---
-# <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core ile aşamalı Web uygulamaları oluşturmaBlazor WebAssembly
+# <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core ile aşamalı Web uygulamaları oluşturma Blazor WebAssembly
 
 [Steve Sanderson](https://github.com/SteveSandersonMS) tarafından
 
-Aşamalı bir Web uygulaması (PWA) genellikle modern tarayıcı API 'Leri ve masaüstü uygulaması gibi davranmaya yönelik yetenekler kullanan tek sayfalı bir uygulamadır (SPA). Blazor WebAssembly, standartlara dayalı bir istemci tarafı Web uygulaması platformudur, bu nedenle aşağıdaki yetenekler için gereken PWA API 'Leri de dahil olmak üzere herhangi bir tarayıcı API 'sini kullanabilir:
+Aşamalı bir Web uygulaması (PWA) genellikle modern tarayıcı API 'Leri ve masaüstü uygulaması gibi davranmaya yönelik yetenekler kullanan tek sayfalı bir uygulamadır (SPA). Blazor WebAssembly , standartlara dayalı bir istemci tarafı Web uygulaması platformudur, bu nedenle aşağıdaki yetenekler için gereken PWA API 'Leri de dahil olmak üzere herhangi bir tarayıcı API 'sini kullanabilir:
 
 * Ağ hızından bağımsız olarak çevrimdışı çalışma ve anında yükleme.
 * Yalnızca bir tarayıcı penceresi değil kendi uygulama penceresinde çalışıyor.
@@ -161,8 +162,8 @@ Uygulamanın Razor bileşenleri, arka uç API 'lerinden veri istemeyi ve ağ kul
 
 Kullanıcı, veya gibi bir URL 'ye ilk kez gittiğinde ne olacağını göz önünde bulundurun `/counter` . Bu durumlarda, olarak önbelleğe alınmış içeriği döndürmek istemezsiniz `/counter` , bunun yerine `/index.html` uygulamanızı başlatmak için tarayıcıda önbelleğe alınmış içeriği yüklemesi gerekir Blazor WebAssembly . Bu ilk istekler, şu şekilde *Gezinti* istekleri olarak bilinir:
 
-* `subresource`görüntüler, stil sayfaları veya diğer dosyalar için istekler.
-* `fetch/XHR`API verisi istekleri.
+* `subresource` görüntüler, stil sayfaları veya diğer dosyalar için istekler.
+* `fetch/XHR` API verisi istekleri.
 
 Varsayılan hizmet çalışanı, gezinti istekleri için özel durum mantığı içerir. Hizmet çalışanı, istenen URL 'den bağımsız olarak, için önbelleğe alınmış içeriği döndürerek istekleri çözer `/index.html` . Bu mantık `onFetch` içindeki işlevinde uygulanır `service-worker.published.js` .
 
@@ -295,8 +296,8 @@ Kimlik doğrulamasıyla etkileşime sahip bir çevrimdışı PWA uygulaması olu
 
 * `OfflineAccountClaimsPrincipalFactory` (`Client/Data/OfflineAccountClaimsPrincipalFactory.cs`)
 * `LocalVehiclesStore` (`Client/Data/LocalVehiclesStore.cs`)
-* `LoginStatus`bileşen ( `Client/Shared/LoginStatus.razor` )
+* `LoginStatus` bileşen ( `Client/Shared/LoginStatus.razor` )
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [SignalRkimlik doğrulaması için çıkış noktaları arası anlaşma](xref:blazor/fundamentals/additional-scenarios#signalr-cross-origin-negotiation-for-authentication)
+* [SignalR kimlik doğrulaması için çıkış noktaları arası anlaşma](xref:blazor/fundamentals/additional-scenarios#signalr-cross-origin-negotiation-for-authentication)

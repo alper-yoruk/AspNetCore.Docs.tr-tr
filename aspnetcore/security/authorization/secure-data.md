@@ -1,11 +1,12 @@
 ---
 title: Yetkilendirme ile korunan kullanıcı verileriyle ASP.NET Core uygulama oluşturma
 author: rick-anderson
-description: Yetkilendirmeyle korunan kullanıcı verileriyle ASP.NET Core bir Web uygulaması oluşturmayı öğrenin. HTTPS, kimlik doğrulaması, güvenlik, ASP.NET Core içerir Identity .
+description: Yetkilendirmeyle korunan kullanıcı verileriyle ASP.NET Core bir Web uygulaması oluşturmayı öğrenin. HTTPS, kimlik doğrulaması, güvenlik, içerir ASP.NET Core Identity .
 ms.author: riande
 ms.date: 7/18/2020
 ms.custom: mvc, seodec18
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/secure-data
-ms.openlocfilehash: 44777369693f9eb29d78c3ba638db2e692f430ae
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 5f86e514ee6339888171d83ab3117e9b3fcf107e
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021203"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627825"
 ---
 # <a name="create-an-aspnet-core-web-app-with-user-data-protected-by-authorization"></a>Yetkilendirmeyle korunan kullanıcı verileriyle ASP.NET Core bir Web uygulaması oluşturma
 
@@ -73,7 +74,7 @@ Uygulama, aşağıdaki model için [Yapı iskelesi](xref:tutorials/first-mvc-app
 * `ContactManagerAuthorizationHandler`: Yöneticilerin kişileri onaylamasını veya reddetmesini sağlar.
 * `ContactAdministratorsAuthorizationHandler`: Yöneticilerin kişileri onaylamasını veya reddetmesini ve kişileri düzenlemesini/silmesini sağlar.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 Bu öğretici gelişmiş bir deyişle. Şunu tanımanız gerekir:
 
@@ -103,7 +104,7 @@ Aşağıdaki bölümlerde, güvenli Kullanıcı verileri uygulaması oluşturmak
 
 [!code-csharp[](secure-data/samples/final3/Models/Contact.cs?name=snippet1&highlight=5-6,16-999)]
 
-`OwnerID`kullanıcının `AspNetUser` veritabanındaki TABLODAKI kimliği [Identity](xref:security/authentication/identity) . Bu `Status` alan, bir kişinin genel kullanıcılar tarafından görüntülenebilir olup olmadığını belirler.
+`OwnerID` kullanıcının `AspNetUser` veritabanındaki TABLODAKI kimliği [Identity](xref:security/authentication/identity) . Bu `Status` alan, bir kişinin genel kullanıcılar tarafından görüntülenebilir olup olmadığını belirler.
 
 Yeni bir geçiş oluşturun ve veritabanını güncelleştirin:
 
@@ -112,7 +113,7 @@ dotnet ef migrations add userID_Status
 dotnet ef database update
 ```
 
-### <a name="add-role-services-to-no-locidentity"></a>Rol hizmetlerini EkleIdentity
+### <a name="add-role-services-to-no-locidentity"></a>Rol hizmetlerini Ekle Identity
 
 Rol hizmetleri eklemek için [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) ekleyin:
 
@@ -134,7 +135,7 @@ Geri dönüş kimlik doğrulama ilkesi:
 
 Geri dönüş kimlik doğrulama ilkesini kullanıcıların kimliğinin doğrulanmasını gerektirecek şekilde ayarlamak, yeni eklenen Razor sayfaları ve denetleyicileri korur. Varsayılan olarak kimlik doğrulamanın gerekli olması, yeni denetleyicilere ve Razor sayfalarına bağlı olarak, özniteliğini dahil etmek için daha güvenlidir `[Authorize]` .
 
-<xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions>Sınıfı da içerir <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.DefaultPolicy?displayProperty=nameWithType> . , `DefaultPolicy` `[Authorize]` İlke belirtilmediğinde özniteliğiyle kullanılan ilkedir. `[Authorize]`, aksine adlandırılmış bir ilke içermez `[Authorize(PolicyName="MyPolicy")]` .
+<xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions>Sınıfı da içerir <xref:Microsoft.AspNetCore.Authorization.AuthorizationOptions.DefaultPolicy?displayProperty=nameWithType> . , `DefaultPolicy` `[Authorize]` İlke belirtilmediğinde özniteliğiyle kullanılan ilkedir. `[Authorize]` , aksine adlandırılmış bir ilke içermez `[Authorize(PolicyName="MyPolicy")]` .
 
 İlkeler hakkında daha fazla bilgi için bkz <xref:security/authorization/policies> ..
 
@@ -181,11 +182,11 @@ Yönetici kullanıcı KIMLIĞINI ve kişilerini ekleyin `ContactStatus` . Kişil
 `ContactIsOwnerAuthorizationHandler`Çağıran [bağlamı. ](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.succeed#Microsoft_AspNetCore_Authorization_AuthorizationHandlerContext_Succeed_Microsoft_AspNetCore_Authorization_IAuthorizationRequirement_)Kimliği doğrulanmış geçerli kullanıcı kişi sahibsiyse başarılı olur. Yetkilendirme işleyicileri genellikle:
 
 * `context.Succeed`Gereksinimler karşılandığında döndürün.
-* `Task.CompletedTask`Gereksinimler karşılanmazsa döndürün. `Task.CompletedTask`başarılı veya başarısız değil, &mdash; diğer yetkilendirme işleyicilerinin çalışmasına izin verir.
+* `Task.CompletedTask`Gereksinimler karşılanmazsa döndürün. `Task.CompletedTask` başarılı veya başarısız değil, &mdash; diğer yetkilendirme işleyicilerinin çalışmasına izin verir.
 
 Açıkça başarısız olması gerekiyorsa, [bağlamı döndürün. Başarısız oldu](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.fail).
 
-Uygulama, iletişim sahiplerinin kendi verilerini düzenlemesine/silmesine/oluşturmasına izin verir. `ContactIsOwnerAuthorizationHandler`gereksinim parametresine geçirilen işlemi denetlemesi gerekmez.
+Uygulama, iletişim sahiplerinin kendi verilerini düzenlemesine/silmesine/oluşturmasına izin verir. `ContactIsOwnerAuthorizationHandler` gereksinim parametresine geçirilen işlemi denetlemesi gerekmez.
 
 ### <a name="create-a-manager-authorization-handler"></a>Yönetici yetkilendirme işleyicisi oluşturma
 
@@ -205,7 +206,7 @@ Entity Framework Core kullanan hizmetlerin, [Addkapsamlıdır](/dotnet/api/micro
 
 [!code-csharp[](secure-data/samples/final3/Startup.cs?name=snippet_defaultPolicy&highlight=23-99)]
 
-`ContactAdministratorsAuthorizationHandler`ve `ContactManagerAuthorizationHandler` tekton olarak eklenir. Bu, EF kullanmayan ve gereken tüm bilgiler yöntemin parametresinde olduğundan tektonlar vardır `Context` `HandleRequirementAsync` .
+`ContactAdministratorsAuthorizationHandler` ve `ContactManagerAuthorizationHandler` tekton olarak eklenir. Bu, EF kullanmayan ve gereken tüm bilgiler yöntemin parametresinde olduğundan tektonlar vardır `Context` `HandleRequirementAsync` .
 
 ## <a name="support-authorization"></a>Destek yetkilendirme
 
@@ -332,7 +333,7 @@ Tamamlanmış uygulamayı test etmenin kolay bir yolu da üç farklı tarayıcı
 
 | Kullanıcı                | Uygulama tarafından sağlanan | Seçenekler                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
-| test@example.com    | Hayır                | Kendi verilerini düzenleyin/silin.                |
+| test@example.com    | No                | Kendi verilerini düzenleyin/silin.                |
 | manager@contoso.com | Yes               | Kendi verilerini onaylama/reddetme ve düzenleme/silme. |
 | admin@contoso.com   | Yes               | Tüm verileri onaylama/reddetme ve düzenleme/silme. |
 
@@ -343,7 +344,7 @@ Yöneticinin tarayıcısında bir kişi oluşturun. Yönetici iletişim kutusund
 * Razor"ContactManager" adlı bir sayfalar uygulaması oluşturma
   * **Ayrı kullanıcı hesaplarıyla**uygulamayı oluşturun.
   * Ad alanı örnekte kullanılan ad alanıyla eşleşecek şekilde "ContactManager" olarak adlandırın.
-  * `-uld`SQLite yerine LocalDB belirtir
+  * `-uld` SQLite yerine LocalDB belirtir
 
   ```dotnetcli
   dotnet new webapp -o ContactManager -au Individual -uld
@@ -427,7 +428,7 @@ Uygulama, aşağıdaki model için [Yapı iskelesi](xref:tutorials/first-mvc-app
 * `ContactManagerAuthorizationHandler`: Yöneticilerin kişileri onaylamasını veya reddetmesini sağlar.
 * `ContactAdministratorsAuthorizationHandler`: Yöneticilerin kişileri onaylamasını veya reddetmesini ve kişileri düzenlemesini/silmesini sağlar.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 Bu öğretici gelişmiş bir deyişle. Şunu tanımanız gerekir:
 
@@ -457,7 +458,7 @@ Aşağıdaki bölümlerde, güvenli Kullanıcı verileri uygulaması oluşturmak
 
 [!code-csharp[](secure-data/samples/final2.1/Models/Contact.cs?name=snippet1&highlight=5-6,16-999)]
 
-`OwnerID`kullanıcının `AspNetUser` veritabanındaki TABLODAKI kimliği [Identity](xref:security/authentication/identity) . Bu `Status` alan, bir kişinin genel kullanıcılar tarafından görüntülenebilir olup olmadığını belirler.
+`OwnerID` kullanıcının `AspNetUser` veritabanındaki TABLODAKI kimliği [Identity](xref:security/authentication/identity) . Bu `Status` alan, bir kişinin genel kullanıcılar tarafından görüntülenebilir olup olmadığını belirler.
 
 Yeni bir geçiş oluşturun ve veritabanını güncelleştirin:
 
@@ -466,7 +467,7 @@ dotnet ef migrations add userID_Status
 dotnet ef database update
 ```
 
-### <a name="add-role-services-to-no-locidentity"></a>Rol hizmetlerini EkleIdentity
+### <a name="add-role-services-to-no-locidentity"></a>Rol hizmetlerini Ekle Identity
 
 Rol hizmetleri eklemek için [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) ekleyin:
 
@@ -517,11 +518,11 @@ Bir *Yetkilendirme* klasörü oluşturun ve içinde bir `ContactIsOwnerAuthoriza
 `ContactIsOwnerAuthorizationHandler`Çağıran [bağlamı. ](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.succeed#Microsoft_AspNetCore_Authorization_AuthorizationHandlerContext_Succeed_Microsoft_AspNetCore_Authorization_IAuthorizationRequirement_)Kimliği doğrulanmış geçerli kullanıcı kişi sahibsiyse başarılı olur. Yetkilendirme işleyicileri genellikle:
 
 * `context.Succeed`Gereksinimler karşılandığında döndürün.
-* `Task.CompletedTask`Gereksinimler karşılanmazsa döndürün. `Task.CompletedTask`başarılı veya başarısız değil, &mdash; diğer yetkilendirme işleyicilerinin çalışmasına izin verir.
+* `Task.CompletedTask`Gereksinimler karşılanmazsa döndürün. `Task.CompletedTask` başarılı veya başarısız değil, &mdash; diğer yetkilendirme işleyicilerinin çalışmasına izin verir.
 
 Açıkça başarısız olması gerekiyorsa, [bağlamı döndürün. Başarısız oldu](/dotnet/api/microsoft.aspnetcore.authorization.authorizationhandlercontext.fail).
 
-Uygulama, iletişim sahiplerinin kendi verilerini düzenlemesine/silmesine/oluşturmasına izin verir. `ContactIsOwnerAuthorizationHandler`gereksinim parametresine geçirilen işlemi denetlemesi gerekmez.
+Uygulama, iletişim sahiplerinin kendi verilerini düzenlemesine/silmesine/oluşturmasına izin verir. `ContactIsOwnerAuthorizationHandler` gereksinim parametresine geçirilen işlemi denetlemesi gerekmez.
 
 ### <a name="create-a-manager-authorization-handler"></a>Yönetici yetkilendirme işleyicisi oluşturma
 
@@ -541,7 +542,7 @@ Entity Framework Core kullanan hizmetlerin, [Addkapsamlıdır](/dotnet/api/micro
 
 [!code-csharp[](secure-data/samples/final2.1/Startup.cs?name=snippet_defaultPolicy&highlight=27-99)]
 
-`ContactAdministratorsAuthorizationHandler`ve `ContactManagerAuthorizationHandler` tekton olarak eklenir. Bu, EF kullanmayan ve gereken tüm bilgiler yöntemin parametresinde olduğundan tektonlar vardır `Context` `HandleRequirementAsync` .
+`ContactAdministratorsAuthorizationHandler` ve `ContactManagerAuthorizationHandler` tekton olarak eklenir. Bu, EF kullanmayan ve gereken tüm bilgiler yöntemin parametresinde olduğundan tektonlar vardır `Context` `HandleRequirementAsync` .
 
 ## <a name="support-authorization"></a>Destek yetkilendirme
 
@@ -659,7 +660,7 @@ Tamamlanmış uygulamayı test etmenin kolay bir yolu da üç farklı tarayıcı
 
 | Kullanıcı                | Uygulama tarafından sağlanan | Seçenekler                                  |
 | ------------------- | :---------------: | ---------------------------------------- |
-| test@example.com    | Hayır                | Kendi verilerini düzenleyin/silin.                |
+| test@example.com    | No                | Kendi verilerini düzenleyin/silin.                |
 | manager@contoso.com | Yes               | Kendi verilerini onaylama/reddetme ve düzenleme/silme. |
 | admin@contoso.com   | Yes               | Tüm verileri onaylama/reddetme ve düzenleme/silme. |
 
@@ -670,7 +671,7 @@ Yöneticinin tarayıcısında bir kişi oluşturun. Yönetici iletişim kutusund
 * Razor"ContactManager" adlı bir sayfalar uygulaması oluşturma
   * **Ayrı kullanıcı hesaplarıyla**uygulamayı oluşturun.
   * Ad alanı örnekte kullanılan ad alanıyla eşleşecek şekilde "ContactManager" olarak adlandırın.
-  * `-uld`SQLite yerine LocalDB belirtir
+  * `-uld` SQLite yerine LocalDB belirtir
 
   ```dotnetcli
   dotnet new webapp -o ContactManager -au Individual -uld

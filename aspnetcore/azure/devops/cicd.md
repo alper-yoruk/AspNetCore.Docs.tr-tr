@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.date: 10/24/2018
 ms.custom: devx-track-csharp, mvc, seodec18
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/cicd
-ms.openlocfilehash: 26ca6c416691c75c4bad73dca4c8383325af025d
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: 3632f1c4bd419aae08105005de3d81fc2cb9e410
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130477"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625888"
 ---
 # <a name="continuous-integration-and-deployment"></a>Sürekli tümleştirme ve dağıtım
 
@@ -48,19 +49,19 @@ Bu bölümde, aşağıdaki görevleri tamamlayacaksınız:
 1. **Sahip** açılır penceresinde hesabınızı seçin ve **Depo adı** metin kutusuna *basit-Feed-Reader* girin.
 1. **Depo oluştur** düğmesine tıklayın.
 1. Yerel makinenizin komut kabuğunu açın. *Basit akış okuyucusu* git deposunun depolandığı dizine gidin.
-1. Var olan *kaynağı* uzak *yukarı akış*olarak yeniden adlandırın. Aşağıdaki komutu yürütün:
+1. Var olan *kaynağı* uzak *yukarı akış*olarak yeniden adlandırın. Şu kodu yürütün:
 
     ```console
     git remote rename origin upstream
     ```
 
-1. GitHub 'daki deponun kopyasına işaret eden yeni bir *Başlangıç noktası* ekleyin. Aşağıdaki komutu yürütün:
+1. GitHub 'daki deponun kopyasına işaret eden yeni bir *Başlangıç noktası* ekleyin. Şu kodu yürütün:
 
     ```console
     git remote add origin https://github.com/<GitHub_username>/simple-feed-reader/
     ```
 
-1. Yerel git deponuzu yeni oluşturulan GitHub deposuna yayımlayın. Aşağıdaki komutu yürütün:
+1. Yerel git deponuzu yeni oluşturulan GitHub deposuna yayımlayın. Şu kodu yürütün:
 
     ```console
     git push -u origin master
@@ -241,14 +242,14 @@ Yapı tanımının **Görevler** sekmesi, kullanılan adımları listeler. Beş 
 
 ![derleme tanımı görevleri](media/cicd/build-definition-tasks.png)
 
-1. **Geri yükle** &mdash; `dotnet restore`Uygulamanın NuGet paketlerini geri yüklemek için komutunu yürütür. Kullanılan varsayılan paket akışı nuget.org ' dir.
-1. **Derleme** &mdash; `dotnet build --configuration release`Uygulamanın kodunu derlemek için komutunu yürütür. Bu `--configuration` seçenek, bir üretim ortamına dağıtım için uygun olan, kodun iyileştirilmiş bir sürümünü oluşturmak için kullanılır. Örneğin, bir hata ayıklama yapılandırması gerekiyorsa, derleme tanımının **değişkenler** sekmesinde *buildconfiguration* değişkenini değiştirin.
-1. **Test et** &mdash; `dotnet test --configuration release --logger trx --results-directory <local_path_on_build_agent>`Uygulamanın birim testlerini çalıştırmak için komutunu yürütür. Birim testleri, glob düzeniyle eşleşen herhangi bir C# projesi içinde yürütülür `**/*Tests/*.csproj` . Test sonuçları, seçeneği tarafından belirtilen konumdaki bir *. trx* dosyasına kaydedilir `--results-directory` . Herhangi bir test başarısız olursa, yapı başarısız olur ve dağıtılmaz.
+1. **Geri yükle** &mdash; `dotnet restore` Uygulamanın NuGet paketlerini geri yüklemek için komutunu yürütür. Kullanılan varsayılan paket akışı nuget.org ' dir.
+1. **Derleme** &mdash; `dotnet build --configuration release` Uygulamanın kodunu derlemek için komutunu yürütür. Bu `--configuration` seçenek, bir üretim ortamına dağıtım için uygun olan, kodun iyileştirilmiş bir sürümünü oluşturmak için kullanılır. Örneğin, bir hata ayıklama yapılandırması gerekiyorsa, derleme tanımının **değişkenler** sekmesinde *buildconfiguration* değişkenini değiştirin.
+1. **Test et** &mdash; `dotnet test --configuration release --logger trx --results-directory <local_path_on_build_agent>` Uygulamanın birim testlerini çalıştırmak için komutunu yürütür. Birim testleri, glob düzeniyle eşleşen herhangi bir C# projesi içinde yürütülür `**/*Tests/*.csproj` . Test sonuçları, seçeneği tarafından belirtilen konumdaki bir *. trx* dosyasına kaydedilir `--results-directory` . Herhangi bir test başarısız olursa, yapı başarısız olur ve dağıtılmaz.
 
     > [!NOTE]
     > Birim testlerinin çalışmasını doğrulamak için, *Simplefeedreader. Tests\Services\NewsServiceTests.cs* ' yi, testlerin birini tam olarak kesin olarak bölmek için değiştirin. Örneğin, `Assert.True(result.Count > 0);` yönteminde olarak değiştirin `Assert.False(result.Count > 0);` `Returns_News_Stories_Given_Valid_Uri` . Değişiklikleri yürütün ve GitHub 'a gönderin. Derleme tetiklenir ve başarısız olur. Derleme ardışık düzeni durumu **başarısız**olarak değişir. Değişikliği, yürütmeyi ve yeniden gönderin. Derleme başarılı oldu.
 
-1. **Yayımla** &mdash; `dotnet publish --configuration release --output <local_path_on_build_agent>`Dağıtılacak yapıtlar içeren bir *. zip* dosyası üretmek için komutunu yürütür. `--output`Seçeneği, *. zip* dosyasının yayımlama konumunu belirtir. Bu konum adlı [önceden tanımlanmış bir değişken](/azure/devops/pipelines/build/variables) geçirilerek belirtilir `$(build.artifactstagingdirectory)` . Bu değişken, derleme aracısında *c:\agent \_ work\1\a*gibi bir yerel yola genişletilir.
+1. **Yayımla** &mdash; `dotnet publish --configuration release --output <local_path_on_build_agent>` Dağıtılacak yapıtlar içeren bir *. zip* dosyası üretmek için komutunu yürütür. `--output`Seçeneği, *. zip* dosyasının yayımlama konumunu belirtir. Bu konum adlı [önceden tanımlanmış bir değişken](/azure/devops/pipelines/build/variables) geçirilerek belirtilir `$(build.artifactstagingdirectory)` . Bu değişken, derleme aracısında *c:\agent \_ work\1\a*gibi bir yerel yola genişletilir.
 1. **Yapıtı Yayımla** &mdash; **Yayımla** görevi tarafından oluşturulan *. zip* dosyasını yayımlar. Görev *. zip* dosya konumunu bir parametre olarak kabul eder, bu, önceden tanımlanmış değişkenidir `$(build.artifactstagingdirectory)` . *. Zip* dosyası *Drop*adlı bir klasör olarak yayımlanır.
 
 Tanım içeren derlemelerin geçmişini görüntülemek için derleme tanımının **Özet** bağlantısına tıklayın:

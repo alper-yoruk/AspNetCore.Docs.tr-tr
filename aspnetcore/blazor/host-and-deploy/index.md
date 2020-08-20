@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core barındırma ve dağıtmaBlazor
+title: ASP.NET Core barındırma ve dağıtma Blazor
 author: guardrex
 description: Uygulamaları nasıl barındırılacağını ve dağıtacağınızı öğrenin Blazor .
 monikerRange: '>= aspnetcore-3.1'
@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/15/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/index
-ms.openlocfilehash: 8a5172db22a17138f7462d140fd97316586e5282
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 7bde61b0ff1d122b449ccc9d7ea9629fc8fb6108
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014210"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628098"
 ---
-# <a name="host-and-deploy-aspnet-core-no-locblazor"></a>ASP.NET Core barındırma ve dağıtmaBlazor
+# <a name="host-and-deploy-aspnet-core-no-locblazor"></a>ASP.NET Core barındırma ve dağıtma Blazor
 
 , [Luke Latham](https://github.com/guardrex), [Rainer Stropek](https://www.timecockpit.com)ve [Daniel Roth](https://github.com/danroth27) tarafından
 
@@ -36,7 +37,7 @@ Uygulamalar yayın yapılandırmasında dağıtım için yayımlanır.
 
 1. Gezinti çubuğundan **Build**  >  **Publish {APPLICATION}** öğesini seçin.
 1. *Yayımla hedefini*seçin. Yerel olarak yayımlamak için **klasör**' ü seçin.
-1. **Klasör seçin** alanında varsayılan konumu kabul edin veya farklı bir konum belirtin. Düğmeyi seçin **`Publish`** .
+1. **Klasör seçin** alanında varsayılan konumu kabul edin veya farklı bir konum belirtin. **`Publish`** düğmesini seçin.
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
@@ -83,7 +84,7 @@ Uygulamanın temel yolu için yapılandırma sağlamak üzere Blazor `https://ww
 <base href="/CoolApp/">
 ```
 
-Blazor Serveruygulamalar Ayrıca <xref:Microsoft.AspNetCore.Builder.UsePathBaseExtensions.UsePathBase*> uygulamanın istek ardışık düzeninde çağırarak sunucu tarafı taban yolunu ayarlar `Startup.Configure` :
+Blazor Server uygulamalar Ayrıca <xref:Microsoft.AspNetCore.Builder.UsePathBaseExtensions.UsePathBase*> uygulamanın istek ardışık düzeninde çağırarak sunucu tarafı taban yolunu ayarlar `Startup.Configure` :
 
 ```csharp
 app.UsePathBase("/CoolApp");

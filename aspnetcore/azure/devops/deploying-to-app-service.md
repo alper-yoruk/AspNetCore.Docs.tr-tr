@@ -6,6 +6,7 @@ ms.author: casoper
 ms.custom: devx-track-csharp, mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/deploy-to-app-service
-ms.openlocfilehash: f27c33d692512130ba0a36e9d00d46dffe90da16
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: 31cd1f6ac8e1243b25569ae34ea252185bbf6467
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130242"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625485"
 ---
 # <a name="deploy-an-app-to-app-service"></a>App Service için uygulama dağıtma
 
@@ -163,7 +164,7 @@ Uygulama, komut kabuğundan zaten dağıtıldı. Uygulamaya bir güncelleştirme
     ![Sağ tıklama, yayımlamayı gösteren ekran görüntüsü](./media/deploying-to-app-service/publish.png)
 5. Visual Studio yeni bir App Service kaynağı oluşturabilir, ancak bu güncelleştirme mevcut dağıtım üzerinden yayımlanacak. **Bir yayımlama hedefi seç** iletişim kutusunda, sol taraftaki listeden **App Service** ' yi seçin ve ardından **Varolanı Seç**' i seçin. **Yayımla**’ya tıklayın.
 6. **App Service** iletişim kutusunda, Azure aboneliğinizi oluşturmak Için kullanılan Microsoft veya kuruluş hesabının sağ üst köşede görüntülendiğini doğrulayın. Aksi takdirde, açılan eklentiye tıklayın ve ekleyin.
-7. Doğru Azure **aboneliğinin** seçili olduğunu onaylayın. **Görünüm**Için **kaynak grubu**' nu seçin. **AzureTutorial** kaynak grubunu genişletin ve ardından mevcut Web uygulamasını seçin. **Tamam**’a tıklayın.
+7. Doğru Azure **aboneliğinin** seçili olduğunu onaylayın. **Görünüm**Için **kaynak grubu**' nu seçin. **AzureTutorial** kaynak grubunu genişletin ve ardından mevcut Web uygulamasını seçin. **Tamam** düğmesine tıklayın.
 
     ![Yayımla App Service iletişim kutusunu gösteren ekran görüntüsü](./media/deploying-to-app-service/publish-dialog.png)
 

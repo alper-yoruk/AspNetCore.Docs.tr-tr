@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/04/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,25 +18,25 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 59b6e4cb2f466594d8a105a239e175e9c7b37ad8
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: deb68b50f408532af22d20ba9b06a9ee3eccb335
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014261"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628228"
 ---
 # <a name="aspnet-core-no-locblazor-globalization-and-localization"></a>BlazorGenelleştirme ve yerelleştirme ASP.NET Core
 
 , [Luke Latham](https://github.com/guardrex) ve [Daniel Roth](https://github.com/danroth27) tarafından
 
-Razorbileşenlere birden fazla kültürde ve dilde kullanıcılar erişilebilir hale getirilebilir. Aşağıdaki .NET Genelleştirme ve yerelleştirme senaryoları kullanılabilir:
+Razor bileşenlere birden fazla kültürde ve dilde kullanıcılar erişilebilir hale getirilebilir. Aşağıdaki .NET Genelleştirme ve yerelleştirme senaryoları kullanılabilir:
 
 * . NET ' in kaynak sistemi
 * Kültüre özgü sayı ve Tarih biçimlendirmesi
 
 Sınırlı bir ASP.NET Core yerelleştirme senaryosu kümesi şu anda desteklenmektedir:
 
-* <xref:Microsoft.Extensions.Localization.IStringLocalizer>ve <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> uygulamalarında *desteklenir* Blazor .
+* <xref:Microsoft.Extensions.Localization.IStringLocalizer> ve <xref:Microsoft.Extensions.Localization.IStringLocalizer%601> uygulamalarında *desteklenir* Blazor .
 * <xref:Microsoft.AspNetCore.Mvc.Localization.IHtmlLocalizer>, <xref:Microsoft.AspNetCore.Mvc.Localization.IViewLocalizer> ve veri ek açıklamaları yerelleştirme ASP.NET Core MVC senaryolardır ve uygulamalarda **desteklenmez** Blazor .
 
 Daha fazla bilgi için bkz. <xref:fundamentals/localization>.
@@ -46,7 +47,7 @@ Blazor[`@bind`](xref:mvc/views/razor#bind)işlevselliği, kullanıcının geçer
 
 Geçerli kültüre <xref:System.Globalization.CultureInfo.CurrentCulture?displayProperty=fullName> özelliğinden erişilebilir.
 
-<xref:System.Globalization.CultureInfo.InvariantCulture?displayProperty=nameWithType>, aşağıdaki alan türleri için kullanılır ( `<input type="{TYPE}" />` ):
+<xref:System.Globalization.CultureInfo.InvariantCulture?displayProperty=nameWithType> , aşağıdaki alan türleri için kullanılır ( `<input type="{TYPE}" />` ):
 
 * `date`
 * `number`
@@ -63,13 +64,13 @@ Aşağıdaki alan türleri belirli biçimlendirme gereksinimlerine sahiptir ve �
 * `month`
 * `week`
 
-[`@bind`](xref:mvc/views/razor#bind), bir `@bind:culture` <xref:System.Globalization.CultureInfo?displayProperty=fullName> değeri ayrıştırmak ve biçimlendirmek için bir parametresini destekler. `date`Ve alan türleri kullanılırken bir kültürün belirtilmesi önerilmez `number` . `date`ve `number` Blazor gerekli kültürü sağlayan yerleşik desteğe sahiptir.
+[`@bind`](xref:mvc/views/razor#bind) , bir `@bind:culture` <xref:System.Globalization.CultureInfo?displayProperty=fullName> değeri ayrıştırmak ve biçimlendirmek için bir parametresini destekler. `date`Ve alan türleri kullanılırken bir kültürün belirtilmesi önerilmez `number` . `date` ve `number` Blazor gerekli kültürü sağlayan yerleşik desteğe sahiptir.
 
 ## <a name="localization"></a>Yerelleştirme
 
 ### Blazor WebAssembly
 
-Blazor WebAssemblyuygulamalar, kullanıcının [Dil tercihini](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages)kullanarak kültürü ayarlar.
+Blazor WebAssembly uygulamalar, kullanıcının [Dil tercihini](https://developer.mozilla.org/docs/Web/API/NavigatorLanguage/languages)kullanarak kültürü ayarlar.
 
 Kültürü açıkça yapılandırmak için, <xref:System.Globalization.CultureInfo.DefaultThreadCurrentCulture?displayProperty=nameWithType> ve içinde öğesini <xref:System.Globalization.CultureInfo.DefaultThreadCurrentUICulture?displayProperty=nameWithType> ayarlayın `Program.Main` .
 
@@ -79,7 +80,7 @@ BlazorVarsayılan olarak seçen kültür çoğu kullanıcı için yeterli olabil
 
 ### Blazor Server
 
-Blazor Serveruygulamalar, [Yerelleştirme ara yazılımı](xref:fundamentals/localization#localization-middleware)kullanılarak yerelleştirilir. Ara yazılım, uygulamadan kaynak isteyen kullanıcılar için uygun kültürü seçer.
+Blazor Server uygulamalar, [Yerelleştirme ara yazılımı](xref:fundamentals/localization#localization-middleware)kullanılarak yerelleştirilir. Ara yazılım, uygulamadan kaynak isteyen kullanıcılar için uygun kültürü seçer.
 
 Kültür aşağıdaki yaklaşımlardan biri kullanılarak ayarlanabilir:
 

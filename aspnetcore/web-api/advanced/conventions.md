@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/conventions
-ms.openlocfilehash: e18a2096c3b9fa788ba2a9713d0f25c1e76af2db
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 425f1aaf1fa86f10d857c34e621c302f2db258e5
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019969"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626798"
 ---
 # <a name="use-web-api-conventions"></a>Web API 'SI kurallarını kullanma
 
@@ -37,7 +38,7 @@ Bir kural şunları yapmanıza olanak sağlar:
 
 ASP.NET Core MVC 2,2 ve üzeri, içinde bir dizi varsayılan kural içerir <xref:Microsoft.AspNetCore.Mvc.DefaultApiConventions?displayProperty=fullName> . Kurallar ASP.NET Core **API** proje şablonunda belirtilen denetleyiciyi (*ValuesController.cs*) temel alır. Eylemleriniz şablondaki desenleri izledikten sonra varsayılan kuralları kullanarak başarılı olmanız gerekir. Varsayılan kurallar ihtiyaçlarınızı karşılamıyorsa, bkz. [Web API kuralları oluşturma](#create-web-api-conventions).
 
-Çalışma zamanında, <xref:Microsoft.AspNetCore.Mvc.ApiExplorer> kuralları anlamıştır. `ApiExplorer`, [Openapı](https://www.openapis.org/) (Swagger olarak da bilinir) belge oluşturucuları ile iletişim kurmak için MVC 'nin soyutlamasıdır. Uygulanan kuraldaki öznitelikler bir eylemle ilişkilendirilir ve eylemin Openapı belgelerine dahil edilir. [API Çözümleyicileri](xref:web-api/advanced/analyzers) , kuralları da anlalar. Eyleminiz geleneksel değilse (örneğin, uygulanan kural tarafından belgelenmemiş bir durum kodu döndürürse), durum kodunu belgeleyerek bir uyarı görürsünüz.
+Çalışma zamanında, <xref:Microsoft.AspNetCore.Mvc.ApiExplorer> kuralları anlamıştır. `ApiExplorer` , [Openapı](https://www.openapis.org/) (Swagger olarak da bilinir) belge oluşturucuları ile iletişim kurmak için MVC 'nin soyutlamasıdır. Uygulanan kuraldaki öznitelikler bir eylemle ilişkilendirilir ve eylemin Openapı belgelerine dahil edilir. [API Çözümleyicileri](xref:web-api/advanced/analyzers) , kuralları da anlalar. Eyleminiz geleneksel değilse (örneğin, uygulanan kural tarafından belgelenmemiş bir durum kodu döndürürse), durum kodunu belgeleyerek bir uyarı görürsünüz.
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/advanced/conventions/sample) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
@@ -62,13 +63,13 @@ Kurallar oluşturma; Her eylem, tam olarak bir kurala göre ilişkilendirilebili
 
     Hakkında daha fazla bilgi için `[ProducesDefaultResponseType]` bkz. [Varsayılan Yanıt](https://swagger.io/docs/specification/describing-responses/#default).
 
-1. `Microsoft.AspNetCore.Mvc.ApiConventionTypeAttribute`bir denetleyiciye uygulanan &mdash; , belirtilen kural türünü denetleyicideki tüm eylemlere uygular. Kural yöntemi, kural yönteminin uygulandığı eylemleri belirleyen ipuçlarıyla işaretlenir. İpuçları hakkında daha fazla bilgi için bkz. [Web API kuralları oluşturma](#create-web-api-conventions)).
+1. `Microsoft.AspNetCore.Mvc.ApiConventionTypeAttribute` bir denetleyiciye uygulanan &mdash; , belirtilen kural türünü denetleyicideki tüm eylemlere uygular. Kural yöntemi, kural yönteminin uygulandığı eylemleri belirleyen ipuçlarıyla işaretlenir. İpuçları hakkında daha fazla bilgi için bkz. [Web API kuralları oluşturma](#create-web-api-conventions)).
 
     Aşağıdaki örnekte, varsayılan kurallar kümesi *ContactsConventionController*içindeki tüm eylemlere uygulanır:
 
     [!code-csharp[](conventions/sample/Controllers/ContactsConventionController.cs?name=snippet_ApiConventionTypeAttribute&highlight=2)]
 
-1. `Microsoft.AspNetCore.Mvc.ApiConventionTypeAttribute`bir derlemeye uygulanan, &mdash; belirtilen kural türünü geçerli derlemedeki tüm denetleyicilere uygular. Öneri olarak, *Startup.cs* dosyasına derleme düzeyi öznitelikleri uygulayın.
+1. `Microsoft.AspNetCore.Mvc.ApiConventionTypeAttribute` bir derlemeye uygulanan, &mdash; belirtilen kural türünü geçerli derlemedeki tüm denetleyicilere uygular. Öneri olarak, *Startup.cs* dosyasına derleme düzeyi öznitelikleri uygulayın.
 
     Aşağıdaki örnekte, varsayılan kural kümesi derlemedeki tüm denetleyicilere uygulanır:
 
@@ -118,7 +119,7 @@ public static void Find(
 Yukarıdaki örnekte:
 
 * `Microsoft.AspNetCore.Mvc.ApiExplorer.ApiConventionNameMatchBehavior.Prefix`Yöntemine uygulanan seçenek, kuralının "Find" önekini ön eki eklenmiş herhangi bir eylemle eşleştirdiğini gösterir. Eşleşen eylemlere örnek `Find` olarak, `FindPet` , ve verilebilir `FindById` .
-* `Microsoft.AspNetCore.Mvc.ApiExplorer.ApiConventionNameMatchBehavior.Suffix`Parametresine uygulanan, yöntemin sonek tanımlayıcıda biten tek bir parametreye sahip yöntemlerle eşleştiğini gösterir. Örnekler, veya gibi parametreleri `id` içerir `petId` . `ApiConventionTypeMatch`benzer şekilde, parametre türünü kısıtlamak için türlere uygulanabilir. `params[]`Bağımsız değişken, açıkça eşleştirilmesinin gerekli olmadığı kalan parametreleri gösterir.
+* `Microsoft.AspNetCore.Mvc.ApiExplorer.ApiConventionNameMatchBehavior.Suffix`Parametresine uygulanan, yöntemin sonek tanımlayıcıda biten tek bir parametreye sahip yöntemlerle eşleştiğini gösterir. Örnekler, veya gibi parametreleri `id` içerir `petId` . `ApiConventionTypeMatch` benzer şekilde, parametre türünü kısıtlamak için türlere uygulanabilir. `params[]`Bağımsız değişken, açıkça eşleştirilmesinin gerekli olmadığı kalan parametreleri gösterir.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

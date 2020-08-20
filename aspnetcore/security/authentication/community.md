@@ -5,6 +5,7 @@ description: ASP.NET Core için açık kaynaklı kimlik doğrulama seçeneklerin
 ms.author: riande
 ms.date: 10/28/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/community
-ms.openlocfilehash: a4e32f8525447e0adb543730cd26296775d40e11
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ae95221850711b4133a0966c0bd787b892135698
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020996"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627175"
 ---
 # <a name="community-oss-authentication-options-for-aspnet-core"></a>ASP.NET Core için topluluk OSS kimlik doğrulama seçenekleri
 

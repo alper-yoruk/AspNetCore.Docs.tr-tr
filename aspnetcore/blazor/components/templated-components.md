@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/18/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/templated-components
-ms.openlocfilehash: 408fc433dd6c81ac84f2198465b3191441ad0fc4
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 293154658e9d39166213c0a465bed1166ba39b54
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014522"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628358"
 ---
 # <a name="aspnet-core-no-locblazor-templated-components"></a>BlazorŞablonlu bileşenleri ASP.NET Core
 
@@ -35,9 +36,9 @@ ms.locfileid: "88014522"
 
 ## <a name="template-parameters"></a>Şablon parametreleri
 
-Şablonlu bir bileşen, veya türünde bir veya daha fazla bileşen parametresi belirtilerek <xref:Microsoft.AspNetCore.Components.RenderFragment> tanımlanır <xref:Microsoft.AspNetCore.Components.RenderFragment%601> . Bir işleme parçası, işlenecek Kullanıcı arabiriminin bir kesimini temsil eder. <xref:Microsoft.AspNetCore.Components.RenderFragment%601>işleme parçası çağrıldığında belirtilebildiği bir tür parametresi alır.
+Şablonlu bir bileşen, veya türünde bir veya daha fazla bileşen parametresi belirtilerek <xref:Microsoft.AspNetCore.Components.RenderFragment> tanımlanır <xref:Microsoft.AspNetCore.Components.RenderFragment%601> . Bir işleme parçası, işlenecek Kullanıcı arabiriminin bir kesimini temsil eder. <xref:Microsoft.AspNetCore.Components.RenderFragment%601> işleme parçası çağrıldığında belirtilebildiği bir tür parametresi alır.
 
-`TableTemplate`bileşeninde
+`TableTemplate` bileşeninde
 
 [!code-razor[](../common/samples/3.x/BlazorWebAssemblySample/Components/TableTemplate.razor)]
 

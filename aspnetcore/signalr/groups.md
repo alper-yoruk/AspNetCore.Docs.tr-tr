@@ -1,5 +1,5 @@
 ---
-title: İçindeki kullanıcıları ve grupları yönetmeSignalR
+title: İçindeki kullanıcıları ve grupları yönetme SignalR
 author: bradygaster
 description: ASP.NET Core SignalR Kullanıcı ve grup yönetimine genel bakış.
 monikerRange: '>= aspnetcore-2.1'
@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 05/17/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,22 +18,22 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/groups
-ms.openlocfilehash: 3a1182b793c7d05a11f0b5f16f4d406a9063f023
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 0dfdf3a5eccd7462b675554e02fe4d2e166e8b92
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021035"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627565"
 ---
-# <a name="manage-users-and-groups-in-no-locsignalr"></a>İçindeki kullanıcıları ve grupları yönetmeSignalR
+# <a name="manage-users-and-groups-in-no-locsignalr"></a>İçindeki kullanıcıları ve grupları yönetme SignalR
 
 [Brennan Conroy](https://github.com/BrennanConroy) tarafından
 
-SignalRiletilerin, belirli bir kullanıcıyla ve adlandırılmış bağlantı gruplarının yanı sıra ilişkili tüm bağlantılara gönderilmesine izin verir.
+SignalR iletilerin, belirli bir kullanıcıyla ve adlandırılmış bağlantı gruplarının yanı sıra ilişkili tüm bağlantılara gönderilmesine izin verir.
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/signalr/groups/sample/) [(nasıl indirileceği)](xref:index#how-to-download-a-sample)
 
-## <a name="users-in-no-locsignalr"></a>İçindeki kullanıcılarSignalR
+## <a name="users-in-no-locsignalr"></a>İçindeki kullanıcılar SignalR
 
 Uygulamasındaki tek bir kullanıcının SignalR bir uygulamayla birden çok bağlantısı olabilir. Örneğin, bir Kullanıcı masaüstüne ve telefonlarına bağlanabilir. Her cihazın ayrı bir SignalR bağlantısı vardır, ancak hepsi aynı kullanıcıyla ilişkilendirilir. Kullanıcıya bir ileti gönderildiğinde, bu kullanıcıyla ilişkili tüm bağlantılar iletiyi alır. Bir bağlantı için Kullanıcı tanımlayıcısına, `Context.UserIdentifier` hub 'daki özellik tarafından erişilebilir.
 
@@ -45,7 +46,7 @@ Varsayılan olarak, SignalR `ClaimTypes.NameIdentifier` `ClaimsPrincipal` Kullan
 
 [!code-csharp[Configure service](groups/sample/Hubs/ChatHub.cs?range=29-32)]
 
-## <a name="groups-in-no-locsignalr"></a>İçindeki gruplarSignalR
+## <a name="groups-in-no-locsignalr"></a>İçindeki gruplar SignalR
 
 Grup, bir adla ilişkili bir bağlantı koleksiyonudur. İletiler, bir gruptaki tüm bağlantılara gönderilebilir. Gruplar uygulama tarafından yönetildiğinden, gruplar bir bağlantıya veya birden çok bağlantıya göndermek için önerilen yoldur. Bir bağlantı, birden fazla grubun üyesi olabilir. Gruplar, her odanın bir grup olarak gösterilebileceği bir sohbet uygulaması gibi bir şey için idealdir. Ve yöntemleri aracılığıyla gruplara eklenen veya gruplardan bağlantılar kaldırılır `AddToGroupAsync` `RemoveFromGroupAsync` .
 

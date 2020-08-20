@@ -5,6 +5,7 @@ description: RazorSayfaların 4. bölümü ve Entity Framework öğretici serisi
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/migrations
-ms.openlocfilehash: ebdcf5605e8b4067c52841b138184e51668f9c25
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: d922e3a4ad3660bdd1c70dc262acc2f87bdd4214
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019657"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88627006"
 ---
 # <a name="part-4-no-locrazor-pages-with-ef-core-migrations-in-aspnet-core"></a>Bölüm 4, Razor ASP.NET Core EF Core geçişleri olan sayfalar
 
@@ -118,7 +119,7 @@ Anlık görüntü dosyası veri modelinin durumunu izlediğinden, dosyayı siler
 
 ## <a name="remove-ensurecreated"></a>Yeniden oluşturulmasını kaldır
 
-Bu öğretici serisi kullanılarak başlatıldı `EnsureCreated` . `EnsureCreated`geçişler geçmişi tablosu oluşturmaz ve geçişler ile kullanılamaz. Bu, veritabanının düşürülme ve sıklıkla yeniden oluşturulduğu test veya hızlı prototip oluşturma için tasarlanmıştır.
+Bu öğretici serisi kullanılarak başlatıldı `EnsureCreated` . `EnsureCreated` geçişler geçmişi tablosu oluşturmaz ve geçişler ile kullanılamaz. Bu, veritabanının düşürülme ve sıklıkla yeniden oluşturulduğu test veya hızlı prototip oluşturma için tasarlanmıştır.
 
 Bu noktadan sonra öğreticiler, geçişleri kullanacaktır.
 
@@ -131,7 +132,7 @@ Uygulamayı çalıştırın ve veritabanının çalıştığını doğrulayın.
 
 ## <a name="applying-migrations-in-production"></a>Üretimde geçişleri uygulama
 
-Uygulama başlangıcında, üretim uygulamalarının [Database. Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) **olarak çağırmalarını** öneririz. `Migrate`sunucu grubuna dağıtılan bir uygulamadan çağrılmamalıdır. Uygulama birden çok sunucu örneğine ölçekleniyorsa, veritabanı şeması güncelleştirmelerinin birden çok sunucudan oluşmaması veya okuma/yazma erişimiyle çakışmamasını sağlamak zordur.
+Uygulama başlangıcında, üretim uygulamalarının [Database. Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) **olarak çağırmalarını** öneririz. `Migrate` sunucu grubuna dağıtılan bir uygulamadan çağrılmamalıdır. Uygulama birden çok sunucu örneğine ölçekleniyorsa, veritabanı şeması güncelleştirmelerinin birden çok sunucudan oluşmaması veya okuma/yazma erişimiyle çakışmamasını sağlamak zordur.
 
 Veritabanı geçişi, dağıtımın bir parçası olarak ve denetimli bir şekilde yapılmalıdır. Üretim veritabanı geçiş yaklaşımları şunları içerir:
 
@@ -271,7 +272,7 @@ Geçişleri Kaldır komutu geçişi siler ve anlık görüntünün doğru şekil
 
 ### <a name="remove-ensurecreated-and-test-the-app"></a>Uygulamayı kaldırın ve uygulamayı test edin
 
-Erken geliştirme için `EnsureCreated` kullanıldı. Bu öğreticide geçişler kullanılır. `EnsureCreated`aşağıdaki sınırlamalara sahiptir:
+Erken geliştirme için `EnsureCreated` kullanıldı. Bu öğreticide geçişler kullanılır. `EnsureCreated` aşağıdaki sınırlamalara sahiptir:
 
 * Geçişleri atlar ve DB ve şema oluşturur.
 * Geçişler tablosu oluşturmaz.
@@ -294,7 +295,7 @@ Uygulamayı çalıştırın ve her şeyin çalıştığını doğrulayın.
 
 ## <a name="applying-migrations-in-production"></a>Üretimde geçişleri uygulama
 
-Uygulama başlangıcında, üretim uygulamalarının [Database. Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) **çağrısını yapmanızı** öneririz. `Migrate`sunucu grubundaki bir uygulamadan çağrılmamalıdır. Örneğin, uygulama bulutu genişleme ile dağıtılmışsa (uygulamanın birden çok örneği çalışır).
+Uygulama başlangıcında, üretim uygulamalarının [Database. Migrate](/dotnet/api/microsoft.entityframeworkcore.relationaldatabasefacadeextensions.migrate?view=efcore-2.0#Microsoft_EntityFrameworkCore_RelationalDatabaseFacadeExtensions_Migrate_Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_) **çağrısını yapmanızı** öneririz. `Migrate` sunucu grubundaki bir uygulamadan çağrılmamalıdır. Örneğin, uygulama bulutu genişleme ile dağıtılmışsa (uygulamanın birden çok örneği çalışır).
 
 Veritabanı geçişi, dağıtımın bir parçası olarak ve denetimli bir şekilde yapılmalıdır. Üretim veritabanı geçiş yaklaşımları şunları içerir:
 
@@ -316,7 +317,7 @@ The login failed.
 Login failed for user 'user name'.
 ```
 
-Çözüm: Çalıştır`dotnet ef database update`
+Çözüm: Çalıştır `dotnet ef database update`
 
 ### <a name="additional-resources"></a>Ek kaynaklar
 

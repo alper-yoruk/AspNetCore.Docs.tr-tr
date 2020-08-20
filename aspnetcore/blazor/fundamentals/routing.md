@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/14/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: 2e0c1a479554b704b4a8cd87bc177d0f76ddc7e2
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 0c878a05a50e5a6879278ee737ada167669ee0ff
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014365"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88626486"
 ---
 # <a name="aspnet-core-no-locblazor-routing"></a>ASP.NET Core Blazor Yönlendirme
 
@@ -62,7 +63,7 @@ En yaygın yapılandırma, tüm istekleri bir sayfaya yönlendirmesidir Razor ve
 * ' İ <xref:Microsoft.AspNetCore.Components.RouteData> <xref:Microsoft.AspNetCore.Components.Routing.Router> istediğiniz parametrelerle birlikte alır.
 * Belirtilen parametreleri kullanarak belirtilen bileşeni düzeniyle (veya isteğe bağlı bir varsayılan düzende) işler.
 
-İsteğe bağlı olarak, <xref:Microsoft.AspNetCore.Components.RouteView.DefaultLayout> bir düzen belirtmeyen bileşenler için kullanılacak düzen sınıfıyla bir parametre belirtebilirsiniz. Varsayılan Blazor Şablonlar, bileşeni belirtir `MainLayout` . `MainLayout.razor`Şablon projenin `Shared` klasörü. Düzenler hakkında daha fazla bilgi için bkz <xref:blazor/layouts> ..
+İsteğe bağlı olarak, <xref:Microsoft.AspNetCore.Components.RouteView.DefaultLayout> bir düzen belirtmeyen bileşenler için kullanılacak düzen sınıfıyla bir parametre belirtebilirsiniz. Varsayılan Blazor Şablonlar, bileşeni belirtir `MainLayout` . `MainLayout.razor` Şablon projenin `Shared` klasörü. Düzenler hakkında daha fazla bilgi için bkz <xref:blazor/layouts> ..
 
 Birden çok yol şablonu, bir bileşene uygulanabilir. Aşağıdaki bileşen ve için isteklere yanıt verir `/BlazorRoute` `/DifferentBlazorRoute` :
 
@@ -146,12 +147,12 @@ Aşağıdaki tabloda gösterilen yol kısıtlamaları mevcuttur. Sabit kültür 
 
 | Kısıtlaması | Örnek           | Örnek eşleşmeler                                                                  | Bilmesi<br>kültür<br>eşleştirme |
 | ---------- | ----------------- | -------------------------------------------------------------------------------- | :------------------------------: |
-| `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | Hayır                               |
+| `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | No                               |
 | `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | Yes                              |
 | `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | Yes                              |
 | `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | Yes                              |
 | `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | Yes                              |
-| `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | Hayır                               |
+| `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | No                               |
 | `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | Yes                              |
 | `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | Yes                              |
 
@@ -169,7 +170,7 @@ Blazor ServerUygulamalarda varsayılan yol `_Host.cshtml` `/` () ' dir `@page "/
 `"/{**path}"`Şablon şunları içerir:
 
 * Ters *catch-all* `**` eğik çizgi () kodlaması olmadan birden çok klasör sınırlarındaki yolu yakalamak için çift yıldız catch-all söz dizimi () `/` .
-* `path`rota parametresi adı.
+* `path` rota parametresi adı.
 
 > [!NOTE]
 > *Catch-all* parametre sözdizimi ( `*` / `**` ) **not** Razor bileşenlerde ( `.razor` ) desteklenmez.
@@ -187,7 +188,7 @@ Aşağıdaki `NavMenu` Bileşen, [`Bootstrap`](https://getbootstrap.com/docs/) b
 <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch>Öğesinin özniteliğine atayabilmeniz için kullanabileceğiniz iki seçenek vardır `Match` `<NavLink>` :
 
 * <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.All?displayProperty=nameWithType>: <xref:Microsoft.AspNetCore.Components.Routing.NavLink> GEÇERLI URL 'nin tamamı eşleştiğinde etkin olur.
-* <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.Prefix?displayProperty=nameWithType>(*varsayılan*): <xref:Microsoft.AspNetCore.Components.Routing.NavLink> geçerli URL 'nin herhangi bir önekiyle eşleştiğinde etkin olur.
+* <xref:Microsoft.AspNetCore.Components.Routing.NavLinkMatch.Prefix?displayProperty=nameWithType> (*varsayılan*): <xref:Microsoft.AspNetCore.Components.Routing.NavLink> geçerli URL 'nin herhangi bir önekiyle eşleştiğinde etkin olur.
 
 Yukarıdaki örnekte, ana giriş URL 'siyle <xref:Microsoft.AspNetCore.Components.Routing.NavLink> `href=""` eşleşir ve yalnızca `active` uygulamanın varsayılan temel yol URL 'sindeki CSS sınıfını alır (örneğin, `https://localhost:5001/` ). İkincisi, <xref:Microsoft.AspNetCore.Components.Routing.NavLink> `active` Kullanıcı ön eki olan herhangi bir URL 'yi ziyaret ettiğinde sınıfı alır `MyComponent` (örneğin, `https://localhost:5001/MyComponent` ve `https://localhost:5001/MyComponent/AnotherSegment` ).
 
@@ -235,7 +236,7 @@ Aşağıdaki HTML biçimlendirmesi işlenir:
 
 ## <a name="uri-and-navigation-state-helpers"></a>URI ve gezinti durumu yardımcıları
 
-<xref:Microsoft.AspNetCore.Components.NavigationManager>C# kodunda URI ve gezinme ile çalışmak için kullanın. <xref:Microsoft.AspNetCore.Components.NavigationManager>Aşağıdaki tabloda gösterilen olay ve yöntemleri sağlar.
+<xref:Microsoft.AspNetCore.Components.NavigationManager>C# kodunda URI ve gezinme ile çalışmak için kullanın. <xref:Microsoft.AspNetCore.Components.NavigationManager> Aşağıdaki tabloda gösterilen olay ve yöntemleri sağlar.
 
 | Üye | Açıklama |
 | ------ | ----------- |
@@ -290,7 +291,7 @@ public void Dispose()
 }
 ```
 
-<xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs>olayla ilgili aşağıdaki bilgileri sağlar:
+<xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs> olayla ilgili aşağıdaki bilgileri sağlar:
 
 * <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.Location>: Yeni konumun URL 'SI.
 * <xref:Microsoft.AspNetCore.Components.Routing.LocationChangedEventArgs.IsNavigationIntercepted>: Varsa `true` , Blazor Tarayıcıdan gezinme ele geçirilebilir. Varsa `false` , <xref:Microsoft.AspNetCore.Components.NavigationManager.NavigateTo%2A?displayProperty=nameWithType> gezintinin oluşmasına neden oldu.

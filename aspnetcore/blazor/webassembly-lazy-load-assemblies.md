@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core 'de geç yük derlemeleriBlazor WebAssembly
+title: ASP.NET Core 'de geç yük derlemeleri Blazor WebAssembly
 author: guardrex
 description: ASP.NET Core uygulamalarında derlemelerin nasıl yavaş yükleneceğini öğrenin Blazor WebAssembly .
 monikerRange: '>= aspnetcore-5.0'
@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/16/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-lazy-load-assemblies
-ms.openlocfilehash: 0ce03badccad4e06aa3c316580ab82be38a806c6
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 31e6c9638d3262d3cb0a5e0fbcf34d24e2d1e91c
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88013378"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88625810"
 ---
-# <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core 'de geç yük derlemeleriBlazor WebAssembly
+# <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core 'de geç yük derlemeleri Blazor WebAssembly
 
 By [Safia Abdalla](https://safia.rocks) ve [Luke Latham](https://github.com/guardrex)
 
-Blazor WebAssemblyUygulama başlatma performansı, bazı uygulama derlemelerinin yüklenmesi gerekene kadar artırılabilir ve bu da *yavaş yükleme*olarak adlandırılır. Örneğin, yalnızca tek bir bileşeni işlemek için kullanılan derlemeler yalnızca Kullanıcı o bileşene gittiğinde yüklenecek şekilde ayarlanabilir. Yüklendikten sonra derlemeler istemci tarafında önbelleğe alınır ve gelecekteki tüm gezinmeler için kullanılabilir.
+Blazor WebAssembly Uygulama başlatma performansı, bazı uygulama derlemelerinin yüklenmesi gerekene kadar artırılabilir ve bu da *yavaş yükleme*olarak adlandırılır. Örneğin, yalnızca tek bir bileşeni işlemek için kullanılan derlemeler yalnızca Kullanıcı o bileşene gittiğinde yüklenecek şekilde ayarlanabilir. Yüklendikten sonra derlemeler istemci tarafında önbelleğe alınır ve gelecekteki tüm gezinmeler için kullanılabilir.
 
 Blazoryavaş yükleme özelliği, Kullanıcı belirli bir rotaya geçtiğinde çalışma zamanı sırasında derlemeleri yükleyen yavaş yükleme için uygulama derlemelerini işaretlemenizi sağlar. Özelliği proje dosyasındaki değişikliklerden ve uygulamanın yönlendiricisinde yapılan değişikliklerle oluşur.
 
@@ -77,19 +78,19 @@ Uygulamanın `Router` bileşeninde ( `App.razor` ):
 
 `OnNavigateAsync`Geri çağırma işlenmeyen bir özel durum oluşturursa, [ Blazor hata Kullanıcı arabirimi](xref:blazor/fundamentals/handle-errors#detailed-errors-during-development) çağrılır.
 
-### <a name="assembly-load-logic-in-onnavigateasync"></a>İçindeki derleme yükleme mantığı`OnNavigateAsync`
+### <a name="assembly-load-logic-in-onnavigateasync"></a>İçindeki derleme yükleme mantığı `OnNavigateAsync`
 
 `OnNavigateAsync``NavigationContext`, hedef yol ( `Path` ) ve iptal belirteci () dahil olmak üzere geçerli zaman uyumsuz gezinti olayı hakkında bilgi sağlayan bir parametreye sahiptir `CancellationToken` :
 
 * `Path`Özelliği, kullanıcının, gibi uygulamanın temel yoluna göre hedef yoludur `/robot` .
-* , `CancellationToken` Zaman uyumsuz görevin iptalini gözlemlemek için kullanılabilir. `OnNavigateAsync`Kullanıcı farklı bir sayfaya gittiğinde, çalışmakta olan gezinti görevini otomatik olarak iptal eder.
+* , `CancellationToken` Zaman uyumsuz görevin iptalini gözlemlemek için kullanılabilir. `OnNavigateAsync` Kullanıcı farklı bir sayfaya gittiğinde, çalışmakta olan gezinti görevini otomatik olarak iptal eder.
 
 İçinde `OnNavigateAsync` , yüklenecek derlemeleri belirleme mantığını uygulayın. Seçeneklere şunlar dahildir:
 
 * Yöntemin içindeki koşullu denetimler `OnNavigateAsync` .
 * Bileşene eklenen ya da blok içinde uygulanan bir arama tablosu [`@code`](xref:mvc/views/razor#code) .
 
-`LazyAssemblyLoader`, derlemeleri yüklemek için çerçeve tarafından sunulan tek bir hizmettir. `LazyAssemblyLoader` `Router` Bileşene ekle:
+`LazyAssemblyLoader` , derlemeleri yüklemek için çerçeve tarafından sunulan tek bir hizmettir. `LazyAssemblyLoader` `Router` Bileşene ekle:
 
 ```razor
 ...
@@ -130,7 +131,7 @@ Birkaç saniye sürebilen derlemeler yüklenirken, `Router` bileşen kullanıcı
 ...
 ```
 
-### <a name="handle-cancellations-in-onnavigateasync"></a>Üzerinde iptalleri işle`OnNavigateAsync`
+### <a name="handle-cancellations-in-onnavigateasync"></a>Üzerinde iptalleri işle `OnNavigateAsync`
 
 `NavigationContext`Geri çağırmaya geçirilen nesne, `OnNavigateAsync` `CancellationToken` Yeni bir gezinti olayı gerçekleştiğinde ayarlanmış bir içerir. `OnNavigateAsync`Bu iptal belirteci, `OnNavigateAsync` geri çağırma işlemini eski bir gezinmede çalıştırmaya devam etmeden kaçınmak üzere ayarlandığında, geri çağırma işlemi throw olmalıdır.
 
