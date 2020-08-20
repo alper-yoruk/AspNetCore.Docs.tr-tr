@@ -5,6 +5,7 @@ description: Sayfaların Bölüm 7 Razor ve Entity Framework öğretici serisi.
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/update-related-data
-ms.openlocfilehash: 3807c52bb843c4d6403e8236fde50c034a8d1e2b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 603c5e7c9f095c380461f8c6e4ead783ad35abe2
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017752"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630867"
 ---
 # <a name="part-7-no-locrazor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>Bölüm 7, Razor ASP.NET Core EF Core olan sayfalar-Ilgili verileri güncelleştir
 
@@ -65,7 +66,7 @@ Yukarıdaki kod:
 
 * Türetiliyor `DepartmentNamePageModel` .
 * `TryUpdateModelAsync` [Aşırı nakletmeyi](xref:data/ef-rp/crud#overposting)engellemek için kullanır.
-* Kaldırır `ViewData["DepartmentID"]` . `DepartmentNameSL`temel sınıftan türü kesin belirlenmiş bir modeldir ve sayfa tarafından kullanılır Razor . Kesin olarak belirlenmiş modeller, kesin olarak yazılan zayıf bir şekilde tercih edilir. Daha fazla bilgi için bkz. [zayıf yazılmış veriler (ViewData ve ViewBag)](xref:mvc/views/overview#VD_VB).
+* Kaldırır `ViewData["DepartmentID"]` . `DepartmentNameSL` temel sınıftan türü kesin belirlenmiş bir modeldir ve sayfa tarafından kullanılır Razor . Kesin olarak belirlenmiş modeller, kesin olarak yazılan zayıf bir şekilde tercih edilir. Daha fazla bilgi için bkz. [zayıf yazılmış veriler (ViewData ve ViewBag)](xref:mvc/views/overview#VD_VB).
 
 ### <a name="update-the-course-create-no-locrazor-page"></a>Kurs oluşturma sayfasını güncelleştirme Razor
 
@@ -106,7 +107,7 @@ Yukarıdaki kod aşağıdaki değişiklikleri yapar:
 * Bölüm açılan başlığını **DepartmentID** ' dan **departmana**dönüştürür.
 * `"ViewBag.DepartmentID"`İle değiştirir `DepartmentNameSL` (taban sınıfından).
 
-Sayfa `<input type="hidden">` , kurs numarası için gizli bir alan () içerir. `<label>`Etiket Yardımcısı ekleme, `asp-for="Course.CourseID"` gizli alan gereksinimini ortadan kaldırmaz. `<input type="hidden">`Kullanıcı **Kaydet**' e tıkladığında, gönderilen veriler için kurs numarasının dahil olması gerekir.
+Sayfa `<input type="hidden">` , kurs numarası için gizli bir alan () içerir. `<label>`Etiket Yardımcısı ekleme, `asp-for="Course.CourseID"` gizli alan gereksinimini ortadan kaldırmaz. `<input type="hidden">` Kullanıcı **Kaydet**' e tıkladığında, gönderilen veriler için kurs numarasının dahil olması gerekir.
 
 ## <a name="update-the-course-details-and-delete-pages"></a>Kurs ayrıntılarını güncelleştirme ve sayfaları silme
 
@@ -231,7 +232,7 @@ Eğitmen oluşturma sayfasını test edin.
 
 Yukarıdaki kod aşağıdaki değişiklikleri yapar:
 
-* Gezinti özelliği için Eager yüklemesi kullanır `CourseAssignments` . `CourseAssignments`eğitmen silindiğinde, dahil edilmiş veya silinmemelidir. Bunları okumaktan kaçınmak için, veritabanında basamaklı silme 'yı yapılandırın.
+* Gezinti özelliği için Eager yüklemesi kullanır `CourseAssignments` . `CourseAssignments` eğitmen silindiğinde, dahil edilmiş veya silinmemelidir. Bunları okumaktan kaçınmak için, veritabanında basamaklı silme 'yı yapılandırın.
 
 * Silinecek eğitmen herhangi bir departmanların Yöneticisi olarak atanırsa, bu departmanlardan eğitmen atamasını kaldırır.
 
@@ -282,7 +283,7 @@ Yukarıdaki kod:
 * `TryUpdateModelAsync` [Aşırı nakletmeyi](xref:data/ef-rp/crud#overposting)engellemek için kullanır.
 * `ViewData["DepartmentID"]`İle değiştirir `DepartmentNameSL` (taban sınıfından).
 
-`ViewData["DepartmentID"]`, türü kesin belirlenmiş olan ile değiştirilmiştir `DepartmentNameSL` . Kesin olarak belirlenmiş modeller, kesin olarak yazılan zayıf bir şekilde tercih edilir. Daha fazla bilgi için bkz. [zayıf yazılmış veriler (ViewData ve ViewBag)](xref:mvc/views/overview#VD_VB).
+`ViewData["DepartmentID"]` , türü kesin belirlenmiş olan ile değiştirilmiştir `DepartmentNameSL` . Kesin olarak belirlenmiş modeller, kesin olarak yazılan zayıf bir şekilde tercih edilir. Daha fazla bilgi için bkz. [zayıf yazılmış veriler (ViewData ve ViewBag)](xref:mvc/views/overview#VD_VB).
 
 ### <a name="update-the-courses-create-page"></a>Kurslar oluşturma sayfasını güncelleştirme
 
@@ -321,7 +322,7 @@ Yukarıdaki biçimlendirme aşağıdaki değişiklikleri yapar:
 * **DepartmentID** etiketini **departmana**dönüştürür.
 * `"ViewBag.DepartmentID"`İle değiştirir `DepartmentNameSL` (taban sınıfından).
 
-Sayfa `<input type="hidden">` , kurs numarası için gizli bir alan () içerir. `<label>`Etiket Yardımcısı ekleme, `asp-for="Course.CourseID"` gizli alan gereksinimini ortadan kaldırmaz. `<input type="hidden">`Kullanıcı **Kaydet**' e tıkladığında, gönderilen veriler için kurs numarasının dahil olması gerekir.
+Sayfa `<input type="hidden">` , kurs numarası için gizli bir alan () içerir. `<label>`Etiket Yardımcısı ekleme, `asp-for="Course.CourseID"` gizli alan gereksinimini ortadan kaldırmaz. `<input type="hidden">` Kullanıcı **Kaydet**' e tıkladığında, gönderilen veriler için kurs numarasının dahil olması gerekir.
 
 Güncelleştirilmiş kodu test edin. Kurs oluşturun, düzenleyin ve silin.
 
@@ -383,7 +384,7 @@ Eğitmenler, istediğiniz sayıda kurs öğretebilir. Bu bölümde kurs atamalar
 
 ![Kurslar ile eğitmen düzenleme sayfası](update-related-data/_static/instructor-edit-courses.png)
 
-`Course`ve `Instructor` çoktan çoğa ilişkisine sahiptir. İlişki eklemek ve kaldırmak için, JOIN varlık kümesinden varlık ekleyin ve kaldırın `CourseAssignments` .
+`Course` ve `Instructor` çoktan çoğa ilişkisine sahiptir. İlişki eklemek ve kaldırmak için, JOIN varlık kümesinden varlık ekleyin ve kaldırın `CourseAssignments` .
 
 Onay kutuları, bir eğitmenin atandığı kurslara değişiklikler sağlar. Veritabanındaki her kurs için bir onay kutusu görüntülenir. Eğitmenin atandığı kurslar denetlenir. Kullanıcı kurs atamalarını değiştirmek için onay kutularını seçebilir veya temizleyebilir. Kurs sayısı çok fazlaysa:
 
@@ -450,7 +451,7 @@ Silme sayfası modelini aşağıdaki kodla güncelleştirin:
 
 Yukarıdaki kod aşağıdaki değişiklikleri yapar:
 
-* Gezinti özelliği için Eager yüklemesi kullanır `CourseAssignments` . `CourseAssignments`eğitmen silindiğinde, dahil edilmiş veya silinmemelidir. Bunları okumaktan kaçınmak için, veritabanında basamaklı silme 'yı yapılandırın.
+* Gezinti özelliği için Eager yüklemesi kullanır `CourseAssignments` . `CourseAssignments` eğitmen silindiğinde, dahil edilmiş veya silinmemelidir. Bunları okumaktan kaçınmak için, veritabanında basamaklı silme 'yı yapılandırın.
 
 * Silinecek eğitmen herhangi bir departmanların Yöneticisi olarak atanırsa, bu departmanlardan eğitmen atamasını kaldırır.
 

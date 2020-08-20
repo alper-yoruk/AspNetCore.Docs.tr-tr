@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: 384b6559b4ee6140da5cf785ffda3978aafbb132
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 29af28f512764b9efec682b44c8de1d2ae03ee04
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016771"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631140"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>ASP.NET Core Web sunucusu uygulamasını HTTP.sys
 
@@ -105,7 +106,7 @@ Ek HTTP.sys yapılandırması, [kayıt defteri ayarları](https://support.micros
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.MaxRequestBodySize> | <a href="#maxrequestbodysize">MaxRequestBodySize</a> bölümüne bakın. | 30000000 bayt<br>(~ 28,6 MB) |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.RequestQueueLimit> | Sıraya alınabilen en fazla istek sayısı. | 1000 |
 | `RequestQueueMode` | Bu, sunucunun istek kuyruğunu oluşturma ve yapılandırmadan sorumlu olup olmadığını veya mevcut bir kuyruğa iliştirilmesinin gerekip gerekmediğini belirtir.<br>Mevcut bir kuyruğa eklenirken, mevcut yapılandırma seçeneklerinin çoğu geçerli değildir. | `RequestQueueMode.Create` |
-| `RequestQueueName` | HTTP.sys istek kuyruğunun adı. | `null`(Anonim kuyruk) |
+| `RequestQueueName` | HTTP.sys istek kuyruğunun adı. | `null` (Anonim kuyruk) |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.ThrowWriteExceptions> | İstemci bağlantısının kesilmesinden kaynaklanan yanıt gövdesi yazmasının, özel durumlar oluşturması veya normal şekilde tamamlanması gerektiğini belirtin. | `false`<br>(normal olarak) |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.Timeouts> | <xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager>Kayıt defterinde da yapılandırılabilen HTTP.sys yapılandırmasını kullanıma sunun. Varsayılan değerler de dahil olmak üzere her bir ayar hakkında daha fazla bilgi edinmek için API bağlantılarını izleyin:<ul><li>[TimeoutManager. DrainEntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.DrainEntityBody): http sunucusu API 'sinin varlık gövdesini etkin tut bağlantısı üzerinde boşaltmasına izin verilen süre.</li><li>[TimeoutManager. EntityBody](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.EntityBody): istek varlığı gövdesinin gelmesi için izin verilen süre.</li><li>[TimeoutManager. HeaderWait](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.HeaderWait): http sunucusu API 'sinin istek üst bilgisini ayrıştırması için izin verilen süre.</li><li>[TimeoutManager. IdleConnection](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.IdleConnection): boştaki bir bağlantı için izin verilen süre.</li><li>[TimeoutManager. MinSendBytesPerSecond](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.MinSendBytesPerSecond): yanıt için en düşük gönderme hızı.</li><li>[TimeoutManager. RequestQueue](xref:Microsoft.AspNetCore.Server.HttpSys.TimeoutManager.RequestQueue): isteğin, uygulamanın onu seçmeden önce istek kuyruğunda kalması için izin verilen süre.</li></ul> |  |
 | <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> | <xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection>HTTP.sys kaydolmak için öğesini belirtin. En yararlı olan [UrlPrefixCollection. Add](xref:Microsoft.AspNetCore.Server.HttpSys.UrlPrefixCollection.Add*), koleksiyona bir ön ek eklemek için kullanılır. Bunlar, dinleyici elden atılıyor öncesinde herhangi bir zamanda değiştirilebilir. |  |
@@ -159,8 +160,8 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
    Varsayılan olarak, ASP.NET Core öğesine bağlanır `http://localhost:5000` . URL öneklerini ve bağlantı noktalarını yapılandırmak için seçenekler şunları içerir:
 
    * <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseUrls*>
-   * `urls`komut satırı bağımsız değişkeni
-   * `ASPNETCORE_URLS`ortam değişkeni
+   * `urls` komut satırı bağımsız değişkeni
+   * `ASPNETCORE_URLS` ortam değişkeni
    * <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes>
 
    Aşağıdaki kod örneği, <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> `10.0.0.4` 443 numaralı bağlantı noktasında sunucunun yerel IP adresi ile nasıl kullanılacağını göstermektedir:
@@ -273,7 +274,7 @@ Internet veya şirket ağından gelen isteklerle etkileşime geçen HTTP.sys tar
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [HTTP.sysile Windows kimlik doğrulamasını etkinleştir](xref:security/authentication/windowsauth#httpsys)
+* [HTTP.sysile Windows kimlik doğrulamasını etkinleştir ](xref:security/authentication/windowsauth#httpsys)
 * [HTTP Sunucusu API 'SI](/windows/win32/http/http-api-start-page)
 * [ASPNET/HttpSysServer GitHub deposu (kaynak kodu)](https://github.com/aspnet/HttpSysServer/)
 * [Ana bilgisayar](xref:fundamentals/index#host)
@@ -410,8 +411,8 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
    Varsayılan olarak, ASP.NET Core öğesine bağlanır `http://localhost:5000` . URL öneklerini ve bağlantı noktalarını yapılandırmak için seçenekler şunları içerir:
 
    * <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseUrls*>
-   * `urls`komut satırı bağımsız değişkeni
-   * `ASPNETCORE_URLS`ortam değişkeni
+   * `urls` komut satırı bağımsız değişkeni
+   * `ASPNETCORE_URLS` ortam değişkeni
    * <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes>
 
    Aşağıdaki kod örneği, <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> `10.0.0.4` 443 numaralı bağlantı noktasında sunucunun yerel IP adresi ile nasıl kullanılacağını göstermektedir:
@@ -524,7 +525,7 @@ Internet veya şirket ağından gelen isteklerle etkileşime geçen HTTP.sys tar
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [HTTP.sysile Windows kimlik doğrulamasını etkinleştir](xref:security/authentication/windowsauth#httpsys)
+* [HTTP.sysile Windows kimlik doğrulamasını etkinleştir ](xref:security/authentication/windowsauth#httpsys)
 * [HTTP Sunucusu API 'SI](/windows/win32/http/http-api-start-page)
 * [ASPNET/HttpSysServer GitHub deposu (kaynak kodu)](https://github.com/aspnet/HttpSysServer/)
 * [Ana bilgisayar](xref:fundamentals/index#host)
@@ -663,8 +664,8 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
    Varsayılan olarak, ASP.NET Core öğesine bağlanır `http://localhost:5000` . URL öneklerini ve bağlantı noktalarını yapılandırmak için seçenekler şunları içerir:
 
    * <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseUrls*>
-   * `urls`komut satırı bağımsız değişkeni
-   * `ASPNETCORE_URLS`ortam değişkeni
+   * `urls` komut satırı bağımsız değişkeni
+   * `ASPNETCORE_URLS` ortam değişkeni
    * <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes>
 
    Aşağıdaki kod örneği, <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> `10.0.0.4` 443 numaralı bağlantı noktasında sunucunun yerel IP adresi ile nasıl kullanılacağını göstermektedir:
@@ -777,7 +778,7 @@ Internet veya şirket ağından gelen isteklerle etkileşime geçen HTTP.sys tar
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [HTTP.sysile Windows kimlik doğrulamasını etkinleştir](xref:security/authentication/windowsauth#httpsys)
+* [HTTP.sysile Windows kimlik doğrulamasını etkinleştir ](xref:security/authentication/windowsauth#httpsys)
 * [HTTP Sunucusu API 'SI](/windows/win32/http/http-api-start-page)
 * [ASPNET/HttpSysServer GitHub deposu (kaynak kodu)](https://github.com/aspnet/HttpSysServer/)
 * [Ana bilgisayar](xref:fundamentals/index#host)
@@ -916,8 +917,8 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
    Varsayılan olarak, ASP.NET Core öğesine bağlanır `http://localhost:5000` . URL öneklerini ve bağlantı noktalarını yapılandırmak için seçenekler şunları içerir:
 
    * <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseUrls*>
-   * `urls`komut satırı bağımsız değişkeni
-   * `ASPNETCORE_URLS`ortam değişkeni
+   * `urls` komut satırı bağımsız değişkeni
+   * `ASPNETCORE_URLS` ortam değişkeni
    * <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes>
 
    Aşağıdaki kod örneği, <xref:Microsoft.AspNetCore.Server.HttpSys.HttpSysOptions.UrlPrefixes> `10.0.0.4` 443 numaralı bağlantı noktasında sunucunun yerel IP adresi ile nasıl kullanılacağını göstermektedir:
@@ -1030,7 +1031,7 @@ Internet veya şirket ağından gelen isteklerle etkileşime geçen HTTP.sys tar
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [HTTP.sysile Windows kimlik doğrulamasını etkinleştir](xref:security/authentication/windowsauth#httpsys)
+* [HTTP.sysile Windows kimlik doğrulamasını etkinleştir ](xref:security/authentication/windowsauth#httpsys)
 * [HTTP Sunucusu API 'SI](/windows/win32/http/http-api-start-page)
 * [ASPNET/HttpSysServer GitHub deposu (kaynak kodu)](https://github.com/aspnet/HttpSysServer/)
 * [Ana bilgisayar](xref:fundamentals/index#host)

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 10/24/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/extensibility/key-management
-ms.openlocfilehash: 5f55b56bd35a583e1f078a5a281788b68412e4f7
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 797df457a5584233043210e9ba2657b7fd7f3893
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021698"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631010"
 ---
 # <a name="key-management-extensibility-in-aspnet-core"></a>ASP.NET Core 'de anahtar yönetimi genişletilebilirliği
 
@@ -73,7 +74,7 @@ Ayrıca, `IKey` `CreateEncryptorInstance` Bu anahtara bağlı bir [ıauthenticat
 
 `XmlKeyManager`Türü, öğesinin ın-Box somut uygulamasıdır `IKeyManager` . Bu, anahtar Emanet ve anahtarların şifrelenmesi dahil olmak üzere çeşitli yararlı olanaklar sağlar. Bu sistemdeki anahtarlar XML öğeleri (özellikle, [XElement](/dotnet/csharp/programming-guide/concepts/linq/xelement-class-overview)) olarak temsil edilir.
 
-`XmlKeyManager`görevlerini yerine getirdikten sonra diğer birçok bileşene bağlıdır:
+`XmlKeyManager` görevlerini yerine getirdikten sonra diğer birçok bileşene bağlıdır:
 
 ::: moniker range=">= aspnetcore-2.0"
 
@@ -81,9 +82,9 @@ Ayrıca, `IKey` `CreateEncryptorInstance` Bu anahtara bağlı bir [ıauthenticat
 
 * `IXmlRepository`Bu, anahtarların depolamada nerede kalıcı olduğunu denetler.
 
-* `IXmlEncryptor`[isteğe bağlı], bekleyen anahtarları şifrelemeye izin verir.
+* `IXmlEncryptor` [isteğe bağlı], bekleyen anahtarları şifrelemeye izin verir.
 
-* `IKeyEscrowSink`[isteğe bağlı], anahtar emanet hizmetleri sağlar.
+* `IKeyEscrowSink` [isteğe bağlı], anahtar emanet hizmetleri sağlar.
 
 ::: moniker-end
 
@@ -91,9 +92,9 @@ Ayrıca, `IKey` `CreateEncryptorInstance` Bu anahtara bağlı bir [ıauthenticat
 
 * `IXmlRepository`Bu, anahtarların depolamada nerede kalıcı olduğunu denetler.
 
-* `IXmlEncryptor`[isteğe bağlı], bekleyen anahtarları şifrelemeye izin verir.
+* `IXmlEncryptor` [isteğe bağlı], bekleyen anahtarları şifrelemeye izin verir.
 
-* `IKeyEscrowSink`[isteğe bağlı], anahtar emanet hizmetleri sağlar.
+* `IKeyEscrowSink` [isteğe bağlı], anahtar emanet hizmetleri sağlar.
 
 ::: moniker-end
 
@@ -240,7 +241,7 @@ Emanet arabirimi, bir acil durum çıkış taraması sağlar ve bu, yapılandır
 
 * Mağaza (GUID keyId, XElement öğesi)
 
-`IKeyEscrowSink`İş ilkesiyle güvenli bir şekilde tutarlı bir şekilde, belirtilen öğeyi işlemek için uygulamaya en uygun seçenektir. Mümkün olan bir uygulama,, sertifikanın özel anahtarının esutde olduğu bilinen bir kurumsal X. 509.440 sertifikası kullanarak XML öğesini şifrelemek üzere, Emanet havuzu için olabilir. `CertificateXmlEncryptor`tür, bu yardımcı olabilir. `IKeyEscrowSink`Uygulama, belirtilen öğeyi uygun şekilde kalıcı hale getirmekten de sorumludur.
+`IKeyEscrowSink`İş ilkesiyle güvenli bir şekilde tutarlı bir şekilde, belirtilen öğeyi işlemek için uygulamaya en uygun seçenektir. Mümkün olan bir uygulama,, sertifikanın özel anahtarının esutde olduğu bilinen bir kurumsal X. 509.440 sertifikası kullanarak XML öğesini şifrelemek üzere, Emanet havuzu için olabilir. `CertificateXmlEncryptor` tür, bu yardımcı olabilir. `IKeyEscrowSink`Uygulama, belirtilen öğeyi uygun şekilde kalıcı hale getirmekten de sorumludur.
 
 Varsayılan olarak, sunucu yöneticileri [bunu genel olarak yapılandırabilse](xref:security/data-protection/configuration/machine-wide-policy)de bir emanet mekanizması etkinleştirilmez. Ayrıca, `IDataProtectionBuilder.AddKeyEscrowSink` Aşağıdaki örnekte gösterildiği gibi yöntemi aracılığıyla programlı bir şekilde yapılandırılabilir. `AddKeyEscrowSink` `IServiceCollection.AddSingleton` `IServiceCollection.AddInstance` `IKeyEscrowSink` Örneklerin tekton olmasını amaçlandığı için yöntem, ve aşırı yüklemelerini yansıtır. Birden çok `IKeyEscrowSink` örnek kayıtlıysa, her biri anahtar oluşturma sırasında çağrılır, bu nedenle anahtarlar birden çok mekanizmayı eşzamanlı olarak gerçekleştirebilir.
 

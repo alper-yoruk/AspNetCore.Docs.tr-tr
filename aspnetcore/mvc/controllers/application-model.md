@@ -5,6 +5,7 @@ description: MVC öğelerinin ASP.NET Core nasıl davranacağını değiştirmek
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/application-model
-ms.openlocfilehash: de831a8b5012a2fe61642887ad816466df7a1bcb
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: f2e86a8607ddd00dc7f4bec36079660f0cd1eea3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019904"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630295"
 ---
 # <a name="work-with-the-application-model-in-aspnet-core"></a>ASP.NET Core 'de uygulama modeliyle çalışma
 
@@ -63,7 +64,7 @@ Sonra ( `Order=-990` ):
 > İçin aynı değere sahip iki sağlayıcının `Order` çağrılmasıyla ilgili sıralama tanımsız ve bu nedenle güvenmemelidir.
 
 > [!NOTE]
-> `IApplicationModelProvider`, çerçeve yazarlarının genişlemesine yönelik gelişmiş bir kavramdır. Genel olarak, uygulamalar, sağlayıcıları kullanması gereken kuralları ve çerçeveleri kullanmalıdır. Anahtar ayrımı, sağlayıcıların kuralların önüne her zaman çalıştırılacağı bir değer.
+> `IApplicationModelProvider` , çerçeve yazarlarının genişlemesine yönelik gelişmiş bir kavramdır. Genel olarak, uygulamalar, sağlayıcıları kullanması gereken kuralları ve çerçeveleri kullanmalıdır. Anahtar ayrımı, sağlayıcıların kuralların önüne her zaman çalıştırılacağı bir değer.
 
 , `DefaultApplicationModelProvider` ASP.NET Core MVC tarafından kullanılan varsayılan davranışların çoğunu belirler. Sorumlulukları şunları içerir:
 

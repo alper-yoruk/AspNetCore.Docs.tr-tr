@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/15/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/index
-ms.openlocfilehash: a9f158bf875da75afbccc1a6d226bc842fa1c62c
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: 32a4e54a46f062f3ff45d0b840237be53406dbdb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130515"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630893"
 ---
 # <a name="aspnet-core-middleware"></a>ASP.NET Core ara yazılımı
 
@@ -39,7 +40,7 @@ Ara yazılım, istekleri ve yanıtları işlemek için bir uygulama ardışık d
 
 İstek temsilcileri <xref:Microsoft.AspNetCore.Builder.RunExtensions.Run%2A> ,, <xref:Microsoft.AspNetCore.Builder.MapExtensions.Map%2A> ve <xref:Microsoft.AspNetCore.Builder.UseExtensions.Use%2A> genişletme yöntemleri kullanılarak yapılandırılır. Tek bir istek temsilcisi, bir anonim Yöntem (çevrimiçi ara yazılım olarak adlandırılır) olarak satır içinde belirtilebilir veya yeniden kullanılabilir bir sınıfta tanımlanabilir. Bu yeniden kullanılabilir sınıflar ve satır içi anonim yöntemler, *Ara yazılım bileşenleri*olarak da adlandırılan *ara yazılımlar*. İstek ardışık düzeninde bulunan her bir ara yazılım bileşeni, işlem hattındaki bir sonraki bileşeni çağırmaktan veya işlem hattının kısa süreli olarak sağlanmasından sorumludur. Bir ara yazılım kısa devre dışı bırakıldığında, bu, diğer ara yazılımların isteği işlemesini önlediği için *Terminal ara yazılımı* olarak adlandırılır.
 
-<xref:migration/http-modules>ASP.NET Core ve ASP.NET 4. x içindeki istek işlem hatları arasındaki farkı açıklar ve ek ara yazılım örnekleri sağlar.
+<xref:migration/http-modules> ASP.NET Core ve ASP.NET 4. x içindeki istek işlem hatları arasındaki farkı açıklar ve ek ara yazılım örnekleri sağlar.
 
 ## <a name="create-a-middleware-pipeline-with-iapplicationbuilder"></a>IApplicationBuilder ile bir ara yazılım işlem hattı oluşturma
 
@@ -65,9 +66,9 @@ Bir temsilci bir sonraki temsilciye bir istek iletmezse, *istek ardışık düze
 > * Protokol ihlaline neden olabilir. Örneğin, belirtiden daha fazla yazma `Content-Length` .
 > * Gövde biçimi bozulabilir. Örneğin, bir CSS dosyasına bir HTML altbilgisi yazma.
 >
-> <xref:Microsoft.AspNetCore.Http.HttpResponse.HasStarted%2A>, üstbilgilerin gönderilip gönderilmediğini veya gövdenin yazıldığını belirten faydalı bir ipucu.
+> <xref:Microsoft.AspNetCore.Http.HttpResponse.HasStarted%2A> , üstbilgilerin gönderilip gönderilmediğini veya gövdenin yazıldığını belirten faydalı bir ipucu.
 
-<xref:Microsoft.AspNetCore.Builder.RunExtensions.Run%2A>Temsilciler bir parametre almaz `next` . İlk `Run` temsilci her zaman terminaldir ve ardışık düzeni sonlandırır. `Run`bir kuraldır. Bazı ara yazılım bileşenleri, işlem `Run[Middleware]` hattının sonunda çalışan yöntemleri ortaya çıkarır:
+<xref:Microsoft.AspNetCore.Builder.RunExtensions.Run%2A> Temsilciler bir parametre almaz `next` . İlk `Run` temsilci her zaman terminaldir ve ardışık düzeni sonlandırır. `Run` bir kuraldır. Bazı ara yazılım bileşenleri, işlem `Run[Middleware]` hattının sonunda çalışan yöntemleri ortaya çıkarır:
 
 [!code-csharp[](index/snapshot/Chain/Startup.cs?highlight=12-15)]
 [!INCLUDE[about the series](~/includes/code-comments-loc.md)]
@@ -97,7 +98,7 @@ Yukarıdaki kodda:
 * [Bireysel kullanıcılar hesaplarıyla](xref:security/authentication/identity) yeni bir Web uygulaması oluştururken eklenmemiş olan ara yazılım, yorum yapılır.
 * Her ara yazılımın bu tam sıra, ancak birçok do olması gerekmez. Örnek:
   * `UseCors`, `UseAuthentication` , ve `UseAuthorization` gösterilen sırayla başlamalıdır.
-  * `UseCors`Şu anda `UseResponseCaching` [Bu hata](https://github.com/dotnet/aspnetcore/issues/23218)nedeniyle önce gitmelidir.
+  * `UseCors` Şu anda `UseResponseCaching` [Bu hata](https://github.com/dotnet/aspnetcore/issues/23218)nedeniyle önce gitmelidir.
 
 Aşağıdaki `Startup.Configure` Yöntem, genel uygulama senaryoları için ara yazılım bileşenleri ekler:
 
@@ -110,7 +111,7 @@ Aşağıdaki `Startup.Configure` Yöntem, genel uygulama senaryoları için ara 
      * HTTP katı aktarım güvenliği Protokolü (HSTS) ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.HstsBuilderExtensions.UseHsts%2A> ) `Strict-Transport-Security` üstbilgiyi ekler.
 1. HTTPS yeniden yönlendirme ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection%2A> ) http ISTEKLERINI https 'ye yönlendirir.
 1. Statik dosya ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A> ) statik dosyaları ve kısa devre dışı istek işlemeyi döndürür.
-1. Cookieİlke ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy%2A> ), uygulamayı ab genel veri koruma yönetmeliği (GDPR) düzenlemelerine uyar.
+1. Cookie İlke ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy%2A> ), uygulamayı ab genel veri koruma yönetmeliği (GDPR) düzenlemelerine uyar.
 1. <xref:Microsoft.AspNetCore.Builder.EndpointRoutingApplicationBuilderExtensions.UseRouting%2A>İstekleri yönlendirmek Için ara yazılım () yönlendirme.
 1. Kimlik doğrulama ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication%2A> ), güvenli kaynaklara erişim izni vermeden önce kullanıcının kimliğini doğrulamaya çalışır.
 1. Yetkilendirme ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization%2A> ), bir kullanıcıya güvenli kaynaklara erişim yetkisi verir.
@@ -160,7 +161,7 @@ public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
 
 Yukarıdaki örnek kodda, her bir ara yazılım uzantısı yöntemi <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> <xref:Microsoft.AspNetCore.Builder?displayProperty=fullName> ad alanı aracılığıyla sunulur.
 
-<xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler%2A>, ardışık düzene eklenen ilk ara yazılım bileşenidir. Bu nedenle, özel durum Işleyicisi ara yazılımı sonraki çağrılarında oluşan tüm özel durumları yakalar.
+<xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler%2A> , ardışık düzene eklenen ilk ara yazılım bileşenidir. Bu nedenle, özel durum Işleyicisi ara yazılımı sonraki çağrılarında oluşan tüm özel durumları yakalar.
 
 Statik dosya ara yazılımı, geri kalan bileşenlere geçmeden istekleri ve kısa devre dışı bırakabilirsiniz. bu sayede işlem hattının başlarında çağrılır. Statik dosya ara **yazılımı yetkilendirme denetimleri sağlamaz.** *Wwwroot*altındakiler de dahil olmak üzere statik dosya ara yazılımı tarafından sunulan tüm dosyalar herkese açık bir şekilde sunulur. Statik dosyaların güvenliğini sağlamaya yönelik bir yaklaşım için bkz <xref:fundamentals/static-files> ..
 
@@ -196,7 +197,7 @@ Maça hakkında daha fazla bilgi için bkz. [tepki](xref:spa/react) verme ve [an
 
 ## <a name="branch-the-middleware-pipeline"></a>Ara yazılım ardışık düzenini dallandırma
 
-<xref:Microsoft.AspNetCore.Builder.MapExtensions.Map%2A>Uzantılar, işlem hattının dallanması için bir kural olarak kullanılır. `Map`istek işlem hattını, belirtilen istek yolunun eşleşmelerini temel alarak dallandırır. İstek yolu verilen yol ile başlıyorsa, dal yürütülür.
+<xref:Microsoft.AspNetCore.Builder.MapExtensions.Map%2A> Uzantılar, işlem hattının dallanması için bir kural olarak kullanılır. `Map` istek işlem hattını, belirtilen istek yolunun eşleşmelerini temel alarak dallandırır. İstek yolu verilen yol ile başlıyorsa, dal yürütülür.
 
 [!code-csharp[](index/snapshot/Chain/StartupMap.cs)]
 
@@ -211,7 +212,7 @@ Aşağıdaki tabloda, önceki kodu kullanmanın istekleri ve yanıtları göster
 
 `Map`Kullanıldığında, eşleşen yol kesimleri `HttpRequest.Path` her istek için kaynağından kaldırılır ve öğesine eklenir `HttpRequest.PathBase` .
 
-`Map`iç içe geçirmeyi destekler, örneğin:
+`Map` iç içe geçirmeyi destekler, örneğin:
 
 ```csharp
 app.Map("/level1", level1App => {
@@ -224,11 +225,11 @@ app.Map("/level1", level1App => {
 });
 ```
 
-`Map`aynı anda birden çok kesimde eşleşir:
+`Map` aynı anda birden çok kesimde eşleşir:
 
 [!code-csharp[](index/snapshot/Chain/StartupMultiSeg.cs?highlight=13)]
 
-<xref:Microsoft.AspNetCore.Builder.MapWhenExtensions.MapWhen%2A>verilen koşulun sonucuna göre istek ardışık düzenini dallandırır. Herhangi bir tür koşulu `Func<HttpContext, bool>` , istekleri işlem hattının yeni bir dalına eşlemek için kullanılabilir. Aşağıdaki örnekte, bir sorgu dizesi değişkeninin varlığını algılamak için bir koşul kullanılır `branch` :
+<xref:Microsoft.AspNetCore.Builder.MapWhenExtensions.MapWhen%2A> verilen koşulun sonucuna göre istek ardışık düzenini dallandırır. Herhangi bir tür koşulu `Func<HttpContext, bool>` , istekleri işlem hattının yeni bir dalına eşlemek için kullanılabilir. Aşağıdaki örnekte, bir sorgu dizesi değişkeninin varlığını algılamak için bir koşul kullanılır `branch` :
 
 [!code-csharp[](index/snapshot/Chain/StartupMapWhen.cs?highlight=14-15)]
 
@@ -239,7 +240,7 @@ Aşağıdaki tabloda, önceki kodu kullanmanın istekleri ve yanıtları göster
 | localhost: 1234                | Eşleme olmayan temsilciden Merhaba. |
 | localhost: 1234/? dalı = ana | Kullanılan dal = ana         |
 
-<xref:Microsoft.AspNetCore.Builder.UseWhenExtensions.UseWhen%2A>Ayrıca, belirtilen koşulun sonucuna göre istek ardışık düzenini dallandırır. İle farklı olarak `MapWhen` , bu dal, kısa devre olmaması veya bir Terminal ara yazılımı içermesi durumunda ana işlem hattına yeniden katılır:
+<xref:Microsoft.AspNetCore.Builder.UseWhenExtensions.UseWhen%2A> Ayrıca, belirtilen koşulun sonucuna göre istek ardışık düzenini dallandırır. İle farklı olarak `MapWhen` , bu dal, kısa devre olmaması veya bir Terminal ara yazılımı içermesi durumunda ana işlem hattına yeniden katılır:
 
 [!code-csharp[](index/snapshot/Chain/StartupUseWhen.cs?highlight=25-26)]
 
@@ -253,8 +254,8 @@ ASP.NET Core aşağıdaki ara yazılım bileşenleriyle birlikte gönderilir. *O
 | ---------- | ----------- | ----- |
 | [Kimlik Doğrulaması](xref:security/authentication/identity) | Kimlik doğrulama desteği sağlar. | `HttpContext.User`Gerekir. OAuth geri çağırmaları için Terminal. |
 | [Yetkilendirme](xref:Microsoft.AspNetCore.Builder.AuthorizationAppBuilderExtensions.UseAuthorization%2A) | Yetkilendirme desteği sağlar. | Kimlik doğrulama ara yazılımı hemen sonrasında. |
-| [Cookieİlkesinin](xref:security/gdpr) | Kişisel bilgileri depolamak için kullanıcılardan onay izler ve ve gibi alanlar için en düşük standartları uygular cookie `secure` `SameSite` . | İle ilgili olan ara yazılımlar cookie . Örnekler: Authentication, Session, MVC (TempData). |
-| [CORS](xref:security/cors) | Çıkış noktaları arası kaynak paylaşımını yapılandırır. | CORS kullanan bileşenlerden önce. `UseCors`Şu anda `UseResponseCaching` [Bu hata](https://github.com/dotnet/aspnetcore/issues/23218)nedeniyle önce gitmelidir.|
+| [Cookie İlkesinin](xref:security/gdpr) | Kişisel bilgileri depolamak için kullanıcılardan onay izler ve ve gibi alanlar için en düşük standartları uygular cookie `secure` `SameSite` . | İle ilgili olan ara yazılımlar cookie . Örnekler: Authentication, Session, MVC (TempData). |
+| [CORS](xref:security/cors) | Çıkış noktaları arası kaynak paylaşımını yapılandırır. | CORS kullanan bileşenlerden önce. `UseCors` Şu anda `UseResponseCaching` [Bu hata](https://github.com/dotnet/aspnetcore/issues/23218)nedeniyle önce gitmelidir.|
 | [Tanılama](xref:fundamentals/error-handling) | Geliştirici özel durum sayfası, özel durum işleme, durum kodu sayfaları ve yeni uygulamalar için varsayılan Web sayfası sağlayan çeşitli ayrı middlewares. | Hata oluşturan bileşenlerden önce. Özel durumlar için Terminal veya yeni uygulamalar için varsayılan Web sayfasına hizmet sunma. |
 | [İletilen üstbilgiler](xref:host-and-deploy/proxy-load-balancer) | Proxy üst bilgilerini geçerli istek üzerine iletir. | Güncelleştirilmiş alanları kullanan bileşenlerden önce. Örnekler: Scheme, Host, istemci IP, yöntem. |
 | [Sistem durumu denetimi](xref:host-and-deploy/health-checks) | ASP.NET Core uygulamasının sistem durumunu ve bağımlılıklarını denetler (örneğin, veritabanı kullanılabilirliğini denetleme). | Bir istek bir sistem durumu denetimi uç noktasıyla eşleşiyorsa Terminal. |
@@ -264,7 +265,7 @@ ASP.NET Core aşağıdaki ara yazılım bileşenleriyle birlikte gönderilir. *O
 | [HTTP katı taşıma güvenliği (HSTS)](xref:security/enforcing-ssl#http-strict-transport-security-protocol-hsts) | Özel bir yanıt üst bilgisi ekleyen güvenlik geliştirme ara yazılımı. | Yanıtlar gönderilmeden önce ve istekleri değiştiren bileşenler. Örnekler: Iletilen üstbilgiler, URL yeniden yazma. |
 | [MVC](xref:mvc/overview) | MVC/sayfalarla istekleri işler Razor . | Bir istek bir rota ile eşleşiyorsa Terminal. |
 | [OWIN](xref:fundamentals/owin) | OWIN tabanlı uygulamalar, sunucular ve ara yazılım ile birlikte çalışma. | OWıN ara yazılımı isteği tam olarak işliyorsa Terminal. |
-| [Yanıt önbelleğe alma](xref:performance/caching/middleware) | Yanıtları önbelleğe almak için destek sağlar. | Önbelleğe alma gerektiren bileşenlerden önce. `UseCORS`önünde gelmelidir `UseResponseCaching` .|
+| [Yanıt önbelleğe alma](xref:performance/caching/middleware) | Yanıtları önbelleğe almak için destek sağlar. | Önbelleğe alma gerektiren bileşenlerden önce. `UseCORS` önünde gelmelidir `UseResponseCaching` .|
 | [Yanıt sıkıştırması](xref:performance/response-compression) | Yanıtları sıkıştırmak için destek sağlar. | Sıkıştırma gerektiren bileşenlerden önce. |
 | [Yerelleştirme iste](xref:fundamentals/localization) | Yerelleştirme desteği sağlar. | Yerelleştirmenin önemli bileşenlerinden önce. |
 | [Uç nokta yönlendirme](xref:fundamentals/routing) | İstek yollarını tanımlar ve kısıtlar. | Eşleşen yolların terminali. |
@@ -300,7 +301,7 @@ Ara yazılım, istekleri ve yanıtları işlemek için bir uygulama ardışık d
 
 İstek temsilcileri <xref:Microsoft.AspNetCore.Builder.RunExtensions.Run%2A> ,, <xref:Microsoft.AspNetCore.Builder.MapExtensions.Map%2A> ve <xref:Microsoft.AspNetCore.Builder.UseExtensions.Use%2A> genişletme yöntemleri kullanılarak yapılandırılır. Tek bir istek temsilcisi, bir anonim Yöntem (çevrimiçi ara yazılım olarak adlandırılır) olarak satır içinde belirtilebilir veya yeniden kullanılabilir bir sınıfta tanımlanabilir. Bu yeniden kullanılabilir sınıflar ve satır içi anonim yöntemler, *Ara yazılım bileşenleri*olarak da adlandırılan *ara yazılımlar*. İstek ardışık düzeninde bulunan her bir ara yazılım bileşeni, işlem hattındaki bir sonraki bileşeni çağırmaktan veya işlem hattının kısa süreli olarak sağlanmasından sorumludur. Bir ara yazılım kısa devre dışı bırakıldığında, bu, diğer ara yazılımların isteği işlemesini önlediği için *Terminal ara yazılımı* olarak adlandırılır.
 
-<xref:migration/http-modules>ASP.NET Core ve ASP.NET 4. x içindeki istek işlem hatları arasındaki farkı açıklar ve ek ara yazılım örnekleri sağlar.
+<xref:migration/http-modules> ASP.NET Core ve ASP.NET 4. x içindeki istek işlem hatları arasındaki farkı açıklar ve ek ara yazılım örnekleri sağlar.
 
 ## <a name="create-a-middleware-pipeline-with-iapplicationbuilder"></a>IApplicationBuilder ile bir ara yazılım işlem hattı oluşturma
 
@@ -328,7 +329,7 @@ Bir temsilci bir sonraki temsilciye bir istek iletmezse, *istek ardışık düze
 > * Protokol ihlaline neden olabilir. Örneğin, belirtiden daha fazla yazma `Content-Length` .
 > * Gövde biçimi bozulabilir. Örneğin, bir CSS dosyasına bir HTML altbilgisi yazma.
 >
-> <xref:Microsoft.AspNetCore.Http.HttpResponse.HasStarted%2A>, üstbilgilerin gönderilip gönderilmediğini veya gövdenin yazıldığını belirten faydalı bir ipucu.
+> <xref:Microsoft.AspNetCore.Http.HttpResponse.HasStarted%2A> , üstbilgilerin gönderilip gönderilmediğini veya gövdenin yazıldığını belirten faydalı bir ipucu.
 
 <a name="order"></a>
 
@@ -356,7 +357,7 @@ Aşağıdaki `Startup.Configure` Yöntem, genel uygulama senaryoları için ara 
      * HTTP katı aktarım güvenliği Protokolü (HSTS) ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.HstsBuilderExtensions.UseHsts%2A> ) `Strict-Transport-Security` üstbilgiyi ekler.
 1. HTTPS yeniden yönlendirme ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection%2A> ) http ISTEKLERINI https 'ye yönlendirir.
 1. Statik dosya ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.StaticFileExtensions.UseStaticFiles%2A> ) statik dosyaları ve kısa devre dışı istek işlemeyi döndürür.
-1. Cookieİlke ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy%2A> ), uygulamayı ab genel veri koruma yönetmeliği (GDPR) düzenlemelerine uyar.
+1. Cookie İlke ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy%2A> ), uygulamayı ab genel veri koruma yönetmeliği (GDPR) düzenlemelerine uyar.
 1. Kimlik doğrulama ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication%2A> ), güvenli kaynaklara erişim izni vermeden önce kullanıcının kimliğini doğrulamaya çalışır.
 1. Oturum ara yazılımı ( <xref:Microsoft.AspNetCore.Builder.SessionMiddlewareExtensions.UseSession%2A> ) oturum durumunu oluşturur ve korur. Uygulama oturum durumu kullanıyorsa, Cookie Ilke ara yazılımı ve MVC ara yazılımı sonrasında oturum ara yazılımını çağırın.
 1. MVC ( <xref:Microsoft.AspNetCore.Builder.MvcApplicationBuilderExtensions.UseMvc%2A> ) istek ardışık DÜZENINE MVC eklemek için.
@@ -386,7 +387,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 Yukarıdaki örnek kodda, her bir ara yazılım uzantısı yöntemi <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> <xref:Microsoft.AspNetCore.Builder?displayProperty=fullName> ad alanı aracılığıyla sunulur.
 
-<xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler%2A>, ardışık düzene eklenen ilk ara yazılım bileşenidir. Bu nedenle, özel durum Işleyicisi ara yazılımı sonraki çağrılarında oluşan tüm özel durumları yakalar.
+<xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtensions.UseExceptionHandler%2A> , ardışık düzene eklenen ilk ara yazılım bileşenidir. Bu nedenle, özel durum Işleyicisi ara yazılımı sonraki çağrılarında oluşan tüm özel durumları yakalar.
 
 Statik dosya ara yazılımı, geri kalan bileşenlere geçmeden istekleri ve kısa devre dışı bırakabilirsiniz. bu sayede işlem hattının başlarında çağrılır. Statik dosya ara **yazılımı yetkilendirme denetimleri sağlamaz.** *Wwwroot*altındakiler de dahil olmak üzere statik dosya ara yazılımı tarafından sunulan tüm dosyalar herkese açık bir şekilde sunulur. Statik dosyaların güvenliğini sağlamaya yönelik bir yaklaşım için bkz <xref:fundamentals/static-files> ..
 
@@ -408,9 +409,9 @@ public void Configure(IApplicationBuilder app)
 
 ## <a name="use-run-and-map"></a>Kullanın, çalıştırın ve eşleyin
 
-, Ve kullanarak HTTP işlem hattını yapılandırın <xref:Microsoft.AspNetCore.Builder.UseExtensions.Use%2A> <xref:Microsoft.AspNetCore.Builder.RunExtensions.Run%2A> <xref:Microsoft.AspNetCore.Builder.MapExtensions.Map%2A> . `Use`Yöntemi, işlem hattı kısa devre dışı (yani bir `next` istek temsilcisi çağırmazsa) olabilir. `Run`bir kuraldır ve bazı ara yazılım bileşenleri, işlem `Run[Middleware]` hattının sonunda çalışan yöntemleri ortaya çıkarır.
+, Ve kullanarak HTTP işlem hattını yapılandırın <xref:Microsoft.AspNetCore.Builder.UseExtensions.Use%2A> <xref:Microsoft.AspNetCore.Builder.RunExtensions.Run%2A> <xref:Microsoft.AspNetCore.Builder.MapExtensions.Map%2A> . `Use`Yöntemi, işlem hattı kısa devre dışı (yani bir `next` istek temsilcisi çağırmazsa) olabilir. `Run` bir kuraldır ve bazı ara yazılım bileşenleri, işlem `Run[Middleware]` hattının sonunda çalışan yöntemleri ortaya çıkarır.
 
-<xref:Microsoft.AspNetCore.Builder.MapExtensions.Map%2A>Uzantılar, işlem hattının dallanması için bir kural olarak kullanılır. `Map`istek işlem hattını, belirtilen istek yolunun eşleşmelerini temel alarak dallandırır. İstek yolu verilen yol ile başlıyorsa, dal yürütülür.
+<xref:Microsoft.AspNetCore.Builder.MapExtensions.Map%2A> Uzantılar, işlem hattının dallanması için bir kural olarak kullanılır. `Map` istek işlem hattını, belirtilen istek yolunun eşleşmelerini temel alarak dallandırır. İstek yolu verilen yol ile başlıyorsa, dal yürütülür.
 
 [!code-csharp[](index/snapshot/Chain/StartupMap.cs)]
 
@@ -425,7 +426,7 @@ Aşağıdaki tabloda, önceki kodu kullanmanın istekleri ve yanıtları göster
 
 `Map`Kullanıldığında, eşleşen yol kesimleri `HttpRequest.Path` her istek için kaynağından kaldırılır ve öğesine eklenir `HttpRequest.PathBase` .
 
-<xref:Microsoft.AspNetCore.Builder.MapWhenExtensions.MapWhen%2A>verilen koşulun sonucuna göre istek ardışık düzenini dallandırır. Herhangi bir tür koşulu `Func<HttpContext, bool>` , istekleri işlem hattının yeni bir dalına eşlemek için kullanılabilir. Aşağıdaki örnekte, bir sorgu dizesi değişkeninin varlığını algılamak için bir koşul kullanılır `branch` :
+<xref:Microsoft.AspNetCore.Builder.MapWhenExtensions.MapWhen%2A> verilen koşulun sonucuna göre istek ardışık düzenini dallandırır. Herhangi bir tür koşulu `Func<HttpContext, bool>` , istekleri işlem hattının yeni bir dalına eşlemek için kullanılabilir. Aşağıdaki örnekte, bir sorgu dizesi değişkeninin varlığını algılamak için bir koşul kullanılır `branch` :
 
 [!code-csharp[](index/snapshot/Chain/StartupMapWhen.cs)]
 
@@ -436,7 +437,7 @@ Aşağıdaki tabloda, önceki kodu kullanmanın istekleri ve yanıtları göster
 | localhost: 1234                | Eşleme olmayan temsilciden Merhaba. |
 | localhost: 1234/? dalı = ana | Kullanılan dal = ana         |
 
-`Map`iç içe geçirmeyi destekler, örneğin:
+`Map` iç içe geçirmeyi destekler, örneğin:
 
 ```csharp
 app.Map("/level1", level1App => {
@@ -449,7 +450,7 @@ app.Map("/level1", level1App => {
 });
 ```
 
-`Map`aynı anda birden çok kesimde eşleşir:
+`Map` aynı anda birden çok kesimde eşleşir:
 
 [!code-csharp[](index/snapshot/Chain/StartupMultiSeg.cs?highlight=13)]
 
@@ -460,7 +461,7 @@ ASP.NET Core aşağıdaki ara yazılım bileşenleriyle birlikte gönderilir. *O
 | Ara yazılım | Açıklama | Sipariş verme |
 | ---------- | ----------- | ----- |
 | [Kimlik Doğrulaması](xref:security/authentication/identity) | Kimlik doğrulama desteği sağlar. | `HttpContext.User`Gerekir. OAuth geri çağırmaları için Terminal. |
-| [Cookieİlkesinin](xref:security/gdpr) | Kişisel bilgileri depolamak için kullanıcılardan onay izler ve ve gibi alanlar için en düşük standartları uygular cookie `secure` `SameSite` . | İle ilgili olan ara yazılımlar cookie . Örnekler: Authentication, Session, MVC (TempData). |
+| [Cookie İlkesinin](xref:security/gdpr) | Kişisel bilgileri depolamak için kullanıcılardan onay izler ve ve gibi alanlar için en düşük standartları uygular cookie `secure` `SameSite` . | İle ilgili olan ara yazılımlar cookie . Örnekler: Authentication, Session, MVC (TempData). |
 | [CORS](xref:security/cors) | Çıkış noktaları arası kaynak paylaşımını yapılandırır. | CORS kullanan bileşenlerden önce. |
 | [Tanılama](xref:fundamentals/error-handling) | Geliştirici özel durum sayfası, özel durum işleme, durum kodu sayfaları ve yeni uygulamalar için varsayılan Web sayfası sağlayan çeşitli ayrı middlewares. | Hata oluşturan bileşenlerden önce. Özel durumlar için Terminal veya yeni uygulamalar için varsayılan Web sayfasına hizmet sunma. |
 | [İletilen üstbilgiler](xref:host-and-deploy/proxy-load-balancer) | Proxy üst bilgilerini geçerli istek üzerine iletir. | Güncelleştirilmiş alanları kullanan bileşenlerden önce. Örnekler: Scheme, Host, istemci IP, yöntem. |

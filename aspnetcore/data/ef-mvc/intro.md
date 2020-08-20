@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 02/06/2019
 ms.topic: tutorial
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/intro
-ms.openlocfilehash: 36b0c913db3c2b6c2c834d33b0ea8665f3e25814
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e081c13f9ffb33c1ff137cb0989e747d51571ea7
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012975"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629203"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Öğretici: bir ASP.NET MVC web uygulamasında EF Core kullanmaya başlama
 
@@ -52,7 +53,7 @@ Bu öğreticide şunları yaptınız:
 > * Denetleyici ve görünüm oluşturma
 > * Veritabanını görüntüleme
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [.NET Core SDK 2,2](https://dotnet.microsoft.com/download)
 * Aşağıdaki iş yükleriyle [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) :
@@ -216,7 +217,7 @@ Bağlantı dizesinin adı bir nesne üzerinde bir yöntem çağırarak bağlama 
 
 [!code-csharp[](intro/samples/cu/Startup.cs?name=snippet_Usings)]
 
-appsettings.jsdosya *üzerinde* açın ve aşağıdaki örnekte gösterildiği gibi bir bağlantı dizesi ekleyin.
+appsettings.jsdosya * üzerinde* açın ve aşağıdaki örnekte gösterildiği gibi bir bağlantı dizesi ekleyin.
 
 [!code-json[](./intro/samples/cu/appsettings1.json?highlight=2-4)]
 
@@ -358,7 +359,7 @@ Aşağıdaki kodda, `async` anahtar sözcüğü, `Task<T>` return değeri, `awai
 
 * `await`Anahtar sözcüğü, derleyicinin yöntemi iki parçaya böetmesine neden olur. İlk bölüm, zaman uyumsuz olarak başlatılan işlemle biter. İkinci bölüm, işlem tamamlandığında çağrılan bir geri çağırma yöntemine konur.
 
-* `ToListAsync`, Uzantı yönteminin zaman uyumsuz sürümüdür `ToList` .
+* `ToListAsync` , Uzantı yönteminin zaman uyumsuz sürümüdür `ToList` .
 
 Entity Framework kullanan zaman uyumsuz kod yazarken dikkat edilmesi gereken bazı şeyler:
 

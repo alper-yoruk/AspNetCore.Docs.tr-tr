@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/16/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/target-aspnetcore
-ms.openlocfilehash: a6c20c61f7f33706e620fcbc239b2cc4bace15f0
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 571e6c66f60bbc09b902ff9064d2fb1c18c433dc
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016498"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630061"
 ---
 # <a name="use-aspnet-core-apis-in-a-class-library"></a>Bir sınıf kitaplığında ASP.NET Core API 'Leri kullanma
 
@@ -52,7 +53,7 @@ ASP.NET Core buna bu şekilde başvurulması yalnızca .NET Core 3. x 'i hedefle
 
 ## <a name="include-no-locblazor-extensibility"></a>Genişletilebilirlik dahil et Blazor
 
-BlazorWebAssembly (ıSSTREAM) ve sunucu [barındırma modellerini](xref:blazor/hosting-models)destekler. Belirli bir neden olmadığı müddetçe, bir [ Razor bileşen](xref:blazor/components/index) Kitaplığı hem barındırma modellerini desteklemelidir. Bir Razor Bileşen kitaplığı [MICROSOFT. net. SDK kullanmalıdır. Razor SDK](xref:razor-pages/sdk).
+Blazor WebAssembly (ıSSTREAM) ve sunucu [barındırma modellerini](xref:blazor/hosting-models)destekler. Belirli bir neden olmadığı müddetçe, bir [ Razor bileşen](xref:blazor/components/index) Kitaplığı hem barındırma modellerini desteklemelidir. Bir Razor Bileşen kitaplığı [MICROSOFT. net. SDK kullanmalıdır. Razor SDK](xref:razor-pages/sdk).
 
 ### <a name="support-both-hosting-models"></a>Barındırma modellerini destekler
 
@@ -79,7 +80,7 @@ dotnet new razorclasslib
 Şablondan oluşturulan proje aşağıdaki işlemleri yapar:
 
 * 2,0 .NET Standard hedefler.
-* `RazorLangVersion`Özelliğini olarak ayarlar `3.0` . `3.0`, .NET Core 3. x için varsayılan değerdir.
+* `RazorLangVersion`Özelliğini olarak ayarlar `3.0` . `3.0` , .NET Core 3. x için varsayılan değerdir.
 * Aşağıdaki paket başvurularını ekler:
   * [Microsoft. AspNetCore. Components](https://www.nuget.org/packages/Microsoft.AspNetCore.Components)
   * [Microsoft. AspNetCore. components. Web](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.Web)
@@ -105,13 +106,13 @@ Bileşenleri içeren kitaplıklar hakkında daha fazla bilgi için Razor bkz. [A
 
 Bu bölümde şunları içeren kitaplıklara ilişkin öneriler özetlenmektedir:
 
-* [Razorgörünümler veya Razor Sayfalar](#razor-views-or-razor-pages)
+* [Razor görünümler veya Razor Sayfalar](#razor-views-or-razor-pages)
 * [Etiket Yardımcıları](#tag-helpers)
 * [Görünüm bileşenleri](#view-components)
 
 Bu bölüm, MVC 'nin birden çok sürümünü desteklemek için Çoklu hedefleme ile açıklanmamaktadır. Birden çok ASP.NET Core sürümünün desteklenmesi hakkında rehberlik için bkz. [çoklu ASP.NET Core sürümlerini](#support-multiple-aspnet-core-versions)destekleme.
 
-### <a name="no-locrazor-views-or-no-locrazor-pages"></a>Razorgörünümler veya Razor Sayfalar
+### <a name="no-locrazor-views-or-no-locrazor-pages"></a>Razor görünümler veya Razor Sayfalar
 
 [ Razor Görünümler](xref:mvc/views/overview) veya [ Razor Sayfalar](xref:razor-pages/index) içeren bir projenin [Microsoft. net. SDK kullanması gerekir. Razor SDK](xref:razor-pages/sdk).
 

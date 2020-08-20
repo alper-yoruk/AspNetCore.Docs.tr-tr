@@ -5,6 +5,7 @@ description: Bir ASP.NET Core uygulamasında görünümler işlemeden önce orta
 ms.author: riande
 ms.date: 07/30/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/layout
-ms.openlocfilehash: 4d5032f02db28341d7781dd57d58d776636fd16d
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 308e567e0480f83972ab7a55c7b957af83a164fd
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020450"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630698"
 ---
 # <a name="layout-in-aspnet-core"></a>ASP.NET Core düzen
 
@@ -34,7 +35,7 @@ Sayfalar ve görünümler genellikle görsel ve programlı öğeleri paylaşır.
 
 Bu belge, ASP.NET Core MVC için iki farklı yaklaşım için düzenleri açıklar: Razor görünümler içeren sayfalar ve denetleyiciler. Bu konu için, farklar en az:
 
-* RazorSayfalar, *Sayfalar* klasöründedir.
+* Razor Sayfalar, *Sayfalar* klasöründedir.
 * Görünümleri olan denetleyiciler görünümler için bir *Görünümler* klasörü kullanır.
 
 ## <a name="what-is-a-layout"></a>Düzen nedir?
@@ -47,7 +48,7 @@ Betikler ve stil sayfaları gibi ortak HTML yapıları da bir uygulama içindeki
 
 Kurala göre, bir ASP.NET Core uygulamasının varsayılan düzeni *_Layout. cshtml*olarak adlandırılır. Şablonlarla oluşturulan yeni ASP.NET Core projelerine yönelik düzen dosyaları şunlardır:
 
-* RazorSayfalar: *sayfa/paylaşılan/_Layout. cshtml*
+* Razor Sayfalar: *sayfa/paylaşılan/_Layout. cshtml*
 
   ![Çözüm Gezgini sayfa klasörü](layout/_static/rp-web-project-views.png)
 
@@ -63,7 +64,7 @@ Aşağıdaki kod, bir şablon tarafından oluşturulan ve bir denetleyici ve gö
 
 ## <a name="specifying-a-layout"></a>Düzen belirtme
 
-RazorGörünümler bir `Layout` özelliğe sahiptir. Bireysel görünümler bu özelliği ayarlayarak bir düzen belirtir:
+Razor Görünümler bir `Layout` özelliğe sahiptir. Bireysel görünümler bu özelliği ayarlayarak bir düzen belirtir:
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/_ViewStart.cshtml?highlight=2)]
 
@@ -135,12 +136,12 @@ Dosya Razor , işlevler ve bölüm tanımları gibi diğer özellikleri destekle
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/_ViewImports.cshtml)]
 
-ASP.NET Core MVC uygulamasının *_ViewImports. cshtml* dosyası genellikle *Sayfalar* (veya *Görünümler*) klasörüne yerleştirilir. Bir *_ViewImports. cshtml* dosyası herhangi bir klasöre yerleştirilebilir, bu durumda yalnızca söz konusu klasör ve alt klasörleri içindeki sayfalara veya görünümlere uygulanacaktır. `_ViewImports`dosyalar, kök düzeyinden başlayarak işlenir ve sonra her bir klasör için sayfanın konumu veya görünümü görüntülenir. `_ViewImports`kök düzeyinde belirtilen ayarlar klasör düzeyinde geçersiz kılınabilir.
+ASP.NET Core MVC uygulamasının *_ViewImports. cshtml* dosyası genellikle *Sayfalar* (veya *Görünümler*) klasörüne yerleştirilir. Bir *_ViewImports. cshtml* dosyası herhangi bir klasöre yerleştirilebilir, bu durumda yalnızca söz konusu klasör ve alt klasörleri içindeki sayfalara veya görünümlere uygulanacaktır. `_ViewImports` dosyalar, kök düzeyinden başlayarak işlenir ve sonra her bir klasör için sayfanın konumu veya görünümü görüntülenir. `_ViewImports` kök düzeyinde belirtilen ayarlar klasör düzeyinde geçersiz kılınabilir.
 
 Örneğin, şunu varsayın:
 
 * Kök düzeyi *_ViewImports. cshtml* dosyası ve içerir `@model MyModel1` `@addTagHelper *, MyTagHelper1` .
-* Bir alt klasör *_ViewImports. cshtml* dosyası `@model MyModel2` ve içerir `@addTagHelper *, MyTagHelper2` .
+* Bir alt klasör  *_ViewImports. cshtml* dosyası `@model MyModel2` ve içerir `@addTagHelper *, MyTagHelper2` .
 
 Alt klasördeki sayfaların ve görünümlerin her ikisi de etiket yardımcılarını ve modeline erişimi olur `MyModel2` .
 

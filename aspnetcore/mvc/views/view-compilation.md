@@ -1,11 +1,12 @@
 ---
-title: RazorASP.NET Core 'de dosya derleme
+title: Razor ASP.NET Core 'de dosya derleme
 author: rick-anderson
 description: ASP.NET Core uygulamasında dosya derlemesinin nasıl Razor oluştuğunu öğrenin.
 ms.author: riande
 ms.custom: mvc
 ms.date: 04/14/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/view-compilation
-ms.openlocfilehash: fc7924f8f8b321ae017b7acd729fe11c4e0e3c7e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 3d76eff93d5c7c53b57136e5183e1ca5287dec81
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021087"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631127"
 ---
-# <a name="no-locrazor-file-compilation-in-aspnet-core"></a>RazorASP.NET Core 'de dosya derleme
+# <a name="no-locrazor-file-compilation-in-aspnet-core"></a>Razor ASP.NET Core 'de dosya derleme
 
 Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
@@ -31,7 +32,7 @@ Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 Razor*. cshtml* uzantılı dosyalar, [ Razor SDK](xref:razor-pages/sdk)kullanılarak hem derleme hem de yayımlama zamanında derlenir. Çalışma zamanı derlemesi, projeniz yapılandırılarak isteğe bağlı olarak etkinleştirilebilir.
 
-## <a name="no-locrazor-compilation"></a>Razorderleme
+## <a name="no-locrazor-compilation"></a>Razor derleme
 
 Dosyaların derleme zamanı ve yayımlama zamanı derlemesi, Razor SDK tarafından varsayılan olarak etkindir Razor . Etkinleştirildiğinde, çalışma zamanı derlemesi derleme zamanı derlemesini tamamlar ve bu Razor dosyalar düzenlendiklerinde güncelleştirilmesini sağlar.
 
@@ -117,7 +118,7 @@ Bir Razor sayfa projesinin *myclasslib*adlı bir [ Razor sınıf kitaplığına 
 
 Razor*. cshtml* uzantılı dosyalar, [ Razor SDK](xref:razor-pages/sdk)kullanılarak hem derleme hem de yayımlama zamanında derlenir. Çalışma zamanı derlemesi, uygulamanız yapılandırılarak isteğe bağlı olarak etkinleştirilebilir.
 
-## <a name="no-locrazor-compilation"></a>Razorderleme
+## <a name="no-locrazor-compilation"></a>Razor derleme
 
 Dosyaların derleme zamanı ve yayımlama zamanı derlemesi, Razor SDK tarafından varsayılan olarak etkindir Razor . Etkinleştirildiğinde, çalışma zamanı derlemesi derleme zamanı derlemesini tamamlar ve bu Razor dosyalar düzenlendiklerinde güncelleştirilmesini sağlar.
 
@@ -149,7 +150,7 @@ Tüm ortamlar ve yapılandırma modları için çalışma zamanı derlemesini et
 
 Çalışma zamanı derlemesini ortam ve yapılandırma moduna göre etkinleştirmek için:
 
-1. Koşullu olarak [Microsoft. AspNetCore. Mvc öğesine başvurun. Razor ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/)Etkin değere göre RuntimeCompilation paketi `Configuration` :
+1. Koşullu olarak [Microsoft. AspNetCore. Mvc öğesine başvurun. Razor ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/) Etkin değere göre RuntimeCompilation paketi `Configuration` :
 
     ```xml
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="3.1.0" Condition="'$(Configuration)' == 'Debug'" />
@@ -173,7 +174,7 @@ Tüm ortamlar ve yapılandırma modları için çalışma zamanı derlemesini et
 
 RazorÇalışma zamanında, ilişkili Razor sayfa veya MVC görünümü çağrıldığında bir dosya derlenir. Razordosyalar, [ Razor SDK](xref:razor-pages/sdk)kullanılarak hem derlemede hem de yayımlama zamanında derlenir.
 
-## <a name="no-locrazor-compilation"></a>Razorderleme
+## <a name="no-locrazor-compilation"></a>Razor derleme
 
 Dosyaların derleme ve yayımlama zamanı derlemesi, Razor SDK tarafından varsayılan olarak etkindir Razor . RazorDosyalar güncelleştirildikten sonra düzenlendikten sonra derleme sırasında desteklenir. Varsayılan olarak, yalnızca derlenmiş *Views.dll* ve No *. cshtml* dosyası ya da dosyaları derlemek için gerekli derlemeler Razor uygulamanız ile dağıtılır.
 

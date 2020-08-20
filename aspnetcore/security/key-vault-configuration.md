@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/key-vault-configuration
-ms.openlocfilehash: 20561b2608b343d0c0bcf545cc9c48d1886b7cb9
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 32967e039671721852b8e421fe5a08763b23e418
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022023"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629788"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>ASP.NET Core Azure Key Vault yapılandırma sağlayıcısı
 
@@ -39,7 +40,7 @@ Bu belgede, Azure Key Vault gizliliklerden uygulama yapılandırma değerlerini 
 
 ## <a name="packages"></a>Paketler
 
-Microsoft.Extensions.Configyönlendirmeye bir paket başvurusu ekleyin [. AzureKeyVault](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/) paketi.
+Microsoft.Extensions.Configyönlendirmeye bir paket başvurusu ekleyin [ . AzureKeyVault](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/) paketi.
 
 ## <a name="sample-app"></a>Örnek uygulama
 
@@ -157,9 +158,9 @@ X. 509.440 sertifikası işletim sistemi tarafından yönetiliyor. Uygulama, <xr
 
 Örnek değerler:
 
-* Anahtar Kasası adı:`contosovault`
-* Uygulama KIMLIĞI:`627e911e-43cc-61d4-992e-12db9c81b413`
-* Sertifika parmak izi:`fe14593dd66b2406c5269d742d04b6e1ab03adb1`
+* Anahtar Kasası adı: `contosovault`
+* Uygulama KIMLIĞI: `627e911e-43cc-61d4-992e-12db9c81b413`
+* Sertifika parmak izi: `fe14593dd66b2406c5269d742d04b6e1ab03adb1`
 
 *appsettings.js*:
 
@@ -173,7 +174,7 @@ Azure **'a dağıtılan bir uygulama** , [Azure kaynakları için yönetilen kim
 
 Örnek uygulama, `#define` *program.cs* dosyasının en üstündeki Ifade olarak ayarlandığında Azure kaynakları için Yönetilen kimlikler kullanır `Managed` .
 
-Dosyanın *üzerine uygulamanınappsettings.js* kasa adını girin. Örnek uygulama sürüme ayarlandığında bir uygulama KIMLIĞI ve parola (Istemci gizli anahtarı) gerektirmez `Managed` , bu nedenle bu yapılandırma girişlerini yoksayabilirsiniz. Uygulama Azure 'a dağıtılır ve Azure, yalnızca *appsettings.json* dosyasında depolanan kasa adını kullanarak Azure Key Vault erişmek için uygulamanın kimliğini doğrular.
+Dosyanın * üzerine uygulamanınappsettings.js* kasa adını girin. Örnek uygulama sürüme ayarlandığında bir uygulama KIMLIĞI ve parola (Istemci gizli anahtarı) gerektirmez `Managed` , bu nedenle bu yapılandırma girişlerini yoksayabilirsiniz. Uygulama Azure 'a dağıtılır ve Azure, yalnızca *appsettings.json* dosyasında depolanan kasa adını kullanarak Azure Key Vault erişmek için uygulamanın kimliğini doğrular.
 
 Azure App Service için örnek uygulamayı dağıtın.
 
@@ -195,7 +196,7 @@ Azure CLı, PowerShell veya Azure portal kullanarak **uygulamayı yeniden başla
 
 [!code-csharp[](key-vault-configuration/samples/3.x/SampleApp/Program.cs?name=snippet2&highlight=13-21)]
 
-Anahtar Kasası adı örnek değeri:`contosovault`
+Anahtar Kasası adı örnek değeri: `contosovault`
     
 *appsettings.js*:
 
@@ -213,7 +214,7 @@ Sağlayıcıyı yönetilen bir kimlik ve bir Azure DevOps işlem hattı ile kull
 
 ## <a name="configuration-options"></a>Yapılandırma seçenekleri
 
-<xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*>şunları kabul edebilir <xref:Microsoft.Extensions.Configuration.AzureKeyVault.AzureKeyVaultConfigurationOptions> :
+<xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> şunları kabul edebilir <xref:Microsoft.Extensions.Configuration.AzureKeyVault.AzureKeyVaultConfigurationOptions> :
 
 ```csharp
 config.AddAzureKeyVault(
@@ -225,9 +226,9 @@ config.AddAzureKeyVault(
 
 | Özellik         | Açıklama |
 | ---------------- | ----------- |
-| `Client`         | <xref:Microsoft.Azure.KeyVault.KeyVaultClient>değerlerini almak için kullanmak üzere. |
-| `Manager`        | <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager>gizli dizi yüklemeyi denetlemek için kullanılan örnek. |
-| `ReloadInterval` | `Timespan`anahtar kasasındaki değişiklikleri yoklamaya yönelik denemeler arasında bekleme. Varsayılan değer `null` (yapılandırma yeniden yüklenmez). |
+| `Client`         | <xref:Microsoft.Azure.KeyVault.KeyVaultClient> değerlerini almak için kullanmak üzere. |
+| `Manager`        | <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager> gizli dizi yüklemeyi denetlemek için kullanılan örnek. |
+| `ReloadInterval` | `Timespan` anahtar kasasındaki değişiklikleri yoklamaya yönelik denemeler arasında bekleme. Varsayılan değer `null` (yapılandırma yeniden yüklenmez). |
 | `Vault`          | Anahtar Kasası URI 'SI. |
 
 ## <a name="use-a-key-name-prefix"></a>Anahtar adı öneki kullanın
@@ -239,13 +240,13 @@ config.AddAzureKeyVault(
 
 Aşağıdaki örnekte, için anahtar kasasında (ve geliştirme ortamı için gizli Yönetim Aracı kullanılarak) bir gizli dizi oluşturulur `5000-AppSecret` (Anahtar Kasası gizli adlarında dönemlere izin verilmez). Bu gizli anahtar, uygulamanın 5.0.0.0 sürümü için bir uygulama gizli anahtarı temsil eder. Uygulamanın başka bir sürümü olan 5.1.0.0, anahtar kasasına (ve gizli Yönetici Aracı kullanılarak) bir gizli dizi eklenir `5100-AppSecret` . Her bir uygulama sürümü sürümü sürümlü gizli değerini yapılandırma olarak yükler `AppSecret` , bu, gizli anahtarı yüklerken sürümü de kapatıyor.
 
-<xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*>özel bir ile çağrılır <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager> :
+<xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> özel bir ile çağrılır <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager> :
 
 [!code-csharp[](key-vault-configuration/samples_snapshot/Program.cs)]
 
 <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager>Uygulama, doğru gizli anahtarı yapılandırmaya yüklemek için gizli dizi sürüm öneklerine tepki verir:
 
-* `Load`adı önekiyle başladığında bir gizli dizi yükler. Diğer gizlilikler yüklenmez.
+* `Load` adı önekiyle başladığında bir gizli dizi yükler. Diğer gizlilikler yüklenmez.
 * `GetKey`:
   * Gizli dizi adından öneki kaldırır.
   * `KeyDelimiter`Yapılandırmada kullanılan sınırlayıcı olan (genellikle iki nokta üst üste), herhangi bir ada sahip iki kısa çizgi koyar. Azure Key Vault gizli dizi adlarında bir iki nokta üst üste izin vermez.
@@ -385,7 +386,7 @@ Bu belgede, Azure Key Vault gizliliklerden uygulama yapılandırma değerlerini 
 
 ## <a name="packages"></a>Paketler
 
-Microsoft.Extensions.Configyönlendirmeye bir paket başvurusu ekleyin [. AzureKeyVault](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/) paketi.
+Microsoft.Extensions.Configyönlendirmeye bir paket başvurusu ekleyin [ . AzureKeyVault](https://www.nuget.org/packages/Microsoft.Extensions.Configuration.AzureKeyVault/) paketi.
 
 ## <a name="sample-app"></a>Örnek uygulama
 
@@ -503,9 +504,9 @@ X. 509.440 sertifikası işletim sistemi tarafından yönetiliyor. Uygulama, <xr
 
 Örnek değerler:
 
-* Anahtar Kasası adı:`contosovault`
-* Uygulama KIMLIĞI:`627e911e-43cc-61d4-992e-12db9c81b413`
-* Sertifika parmak izi:`fe14593dd66b2406c5269d742d04b6e1ab03adb1`
+* Anahtar Kasası adı: `contosovault`
+* Uygulama KIMLIĞI: `627e911e-43cc-61d4-992e-12db9c81b413`
+* Sertifika parmak izi: `fe14593dd66b2406c5269d742d04b6e1ab03adb1`
 
 *appsettings.js*:
 
@@ -519,7 +520,7 @@ Azure **'a dağıtılan bir uygulama** , [Azure kaynakları için yönetilen kim
 
 Örnek uygulama, `#define` *program.cs* dosyasının en üstündeki Ifade olarak ayarlandığında Azure kaynakları için Yönetilen kimlikler kullanır `Managed` .
 
-Dosyanın *üzerine uygulamanınappsettings.js* kasa adını girin. Örnek uygulama sürüme ayarlandığında bir uygulama KIMLIĞI ve parola (Istemci gizli anahtarı) gerektirmez `Managed` , bu nedenle bu yapılandırma girişlerini yoksayabilirsiniz. Uygulama Azure 'a dağıtılır ve Azure, yalnızca *appsettings.json* dosyasında depolanan kasa adını kullanarak Azure Key Vault erişmek için uygulamanın kimliğini doğrular.
+Dosyanın * üzerine uygulamanınappsettings.js* kasa adını girin. Örnek uygulama sürüme ayarlandığında bir uygulama KIMLIĞI ve parola (Istemci gizli anahtarı) gerektirmez `Managed` , bu nedenle bu yapılandırma girişlerini yoksayabilirsiniz. Uygulama Azure 'a dağıtılır ve Azure, yalnızca *appsettings.json* dosyasında depolanan kasa adını kullanarak Azure Key Vault erişmek için uygulamanın kimliğini doğrular.
 
 Azure App Service için örnek uygulamayı dağıtın.
 
@@ -541,7 +542,7 @@ Azure CLı, PowerShell veya Azure portal kullanarak **uygulamayı yeniden başla
 
 [!code-csharp[](key-vault-configuration/samples/2.x/SampleApp/Program.cs?name=snippet2&highlight=13-21)]
 
-Anahtar Kasası adı örnek değeri:`contosovault`
+Anahtar Kasası adı örnek değeri: `contosovault`
     
 *appsettings.js*:
 
@@ -566,13 +567,13 @@ Sağlayıcıyı yönetilen bir kimlik ve bir Azure DevOps işlem hattı ile kull
 
 Aşağıdaki örnekte, için anahtar kasasında (ve geliştirme ortamı için gizli Yönetim Aracı kullanılarak) bir gizli dizi oluşturulur `5000-AppSecret` (Anahtar Kasası gizli adlarında dönemlere izin verilmez). Bu gizli anahtar, uygulamanın 5.0.0.0 sürümü için bir uygulama gizli anahtarı temsil eder. Uygulamanın başka bir sürümü olan 5.1.0.0, anahtar kasasına (ve gizli Yönetici Aracı kullanılarak) bir gizli dizi eklenir `5100-AppSecret` . Her bir uygulama sürümü sürümü sürümlü gizli değerini yapılandırma olarak yükler `AppSecret` , bu, gizli anahtarı yüklerken sürümü de kapatıyor.
 
-<xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*>özel bir ile çağrılır <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager> :
+<xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> özel bir ile çağrılır <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager> :
 
 [!code-csharp[](key-vault-configuration/samples_snapshot/Program.cs)]
 
 <xref:Microsoft.Extensions.Configuration.AzureKeyVault.IKeyVaultSecretManager>Uygulama, doğru gizli anahtarı yapılandırmaya yüklemek için gizli dizi sürüm öneklerine tepki verir:
 
-* `Load`adı önekiyle başladığında bir gizli dizi yükler. Diğer gizlilikler yüklenmez.
+* `Load` adı önekiyle başladığında bir gizli dizi yükler. Diğer gizlilikler yüklenmez.
 * `GetKey`:
   * Gizli dizi adından öneki kaldırır.
   * `KeyDelimiter`Yapılandırmada kullanılan sınırlayıcı olan (genellikle iki nokta üst üste), herhangi bir ada sahip iki kısa çizgi koyar. Azure Key Vault gizli dizi adlarında bir iki nokta üst üste izin vermez.

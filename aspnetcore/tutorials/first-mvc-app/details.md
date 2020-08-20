@@ -5,6 +5,7 @@ description: ASP.NET Core MVC 'de öğretici serisinin Bölüm 10 ' dur.
 ms.author: riande
 ms.date: 12/13/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/details
-ms.openlocfilehash: 2bde0e649af4928a03027b646436cc7b215b707c
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: b25113f8e2132c06e06d53a25e71ed2a42deb00f
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021659"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629710"
 ---
 # <a name="part-10-examine-the-details-and-delete-methods-of-an-aspnet-core-app"></a>10. kısım, ASP.NET Core uygulamasının ayrıntılarını ve silme yöntemlerini inceleyin
 
@@ -34,7 +35,7 @@ Bu eylem yöntemini oluşturan MVC yapı iskelesi altyapısı, yöntemi çağır
 
 [!code-csharp[](start-mvc/sample/MvcMovie3/Startup.cs?highlight=5&name=snippet_1)]
 
-EF, yöntemi kullanarak verileri aramanızı kolaylaştırır `FirstOrDefaultAsync` . Yöntemi içinde yerleşik olarak bulunan önemli bir güvenlik özelliği, kodun, onunla herhangi bir şey yapmayı denemeden önce arama yönteminin bir filmi buldığını doğrulamasından kaynaklanmaktadır. Örneğin, bir korsan bağlantıları tarafından oluşturulan URL 'yi `http://localhost:{PORT}/Movies/Details/1` `http://localhost:{PORT}/Movies/Details/12345` (veya gerçek bir filmi temsil eden başka bir değer) gibi bir konuma değiştirerek siteye hata verebilir. Null bir filmi denetmediyseniz, uygulama bir özel durum oluşturur.
+EF, yöntemi kullanarak verileri aramanızı kolaylaştırır `FirstOrDefaultAsync` . Yöntemi içinde yerleşik olarak bulunan önemli bir güvenlik özelliği, kodun, onunla herhangi bir şey yapmayı denemeden önce arama yönteminin bir filmi buldığını doğrulamasından kaynaklanmaktadır. Örneğin, bir korsan bağlantıları tarafından oluşturulan URL 'yi `http://localhost:{PORT}/Movies/Details/1`  `http://localhost:{PORT}/Movies/Details/12345` (veya gerçek bir filmi temsil eden başka bir değer) gibi bir konuma değiştirerek siteye hata verebilir. Null bir filmi denetmediyseniz, uygulama bir özel durum oluşturur.
 
 `Delete`Ve yöntemlerini inceleyin `DeleteConfirmed` .
 

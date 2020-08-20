@@ -7,6 +7,7 @@ ms.author: rick-anderson
 ms.custom: mvc
 ms.date: 03/17/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/mfa
-ms.openlocfilehash: 4538030b4ce6aba6c78edb69cf44fc5812ddff76
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 048d88a121d0a4a7ab3d3adee9b426b95fd68a80
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017863"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629593"
 ---
 # <a name="multi-factor-authentication-in-aspnet-core"></a>ASP.NET Core 'de çok faktörlü kimlik doğrulaması
 
@@ -33,7 +34,7 @@ Multi-Factor Authentication (MFA), bir kullanıcının ek tanımlama biçimleri 
 Bu makalede aşağıdaki alanlarda yer verilmiştir:
 
 * MFA nedir ve MFA akışlarının kullanılması önerilir
-* ASP.NET Core kullanarak yönetim sayfaları için MFA 'yı yapılandırmaIdentity
+* Kullanarak yönetim sayfaları için MFA 'yı yapılandırma ASP.NET Core Identity
 * OpenID Connect sunucusuna MFA oturum açma gereksinimi gönderin
 * ASP.NET Core OpenID Connect istemcisini MFA gerektir olarak zorla
 
@@ -45,7 +46,7 @@ MFA, bildiğiniz bir şey, sahip olduğunuz bir şey veya kullanıcının kimlik
 
 ### <a name="mfa-totp-time-based-one-time-password-algorithm"></a>MFA TOTP (zamana bağlı bir kerelik parola algoritması)
 
-TOTP kullanarak MFA, ASP.NET Core kullanarak desteklenen bir uygulama Identity . Bu, aşağıdakiler dahil olmak üzere tüm uyumlu Doğrulayıcı uygulamaları ile birlikte kullanılabilir:
+TOTP kullanarak MFA, kullanarak desteklenen bir uygulama ASP.NET Core Identity . Bu, aşağıdakiler dahil olmak üzere tüm uyumlu Doğrulayıcı uygulamaları ile birlikte kullanılabilir:
 
 * Microsoft Authenticator uygulaması
 * Google Authenticator uygulaması
@@ -71,9 +72,9 @@ SMS ile MFA, parola kimlik doğrulaması (tek etken) ile karşılaştırıldığ
 
 [NıST yönergeleri](https://pages.nist.gov/800-63-3/sp800-63b.html)
 
-## <a name="configure-mfa-for-administration-pages-using-aspnet-core-no-locidentity"></a>ASP.NET Core kullanarak yönetim sayfaları için MFA 'yı yapılandırmaIdentity
+## <a name="configure-mfa-for-administration-pages-using-no-locaspnet-core-identity"></a>Kullanarak yönetim sayfaları için MFA 'yı yapılandırma ASP.NET Core Identity
 
-MFA, kullanıcıların bir ASP.NET Core uygulaması içindeki hassas sayfalara erişmelerine zorlanabilir Identity . Bu, farklı kimlikler için farklı erişim düzeylerinin bulunduğu uygulamalar için yararlı olabilir. Örneğin, kullanıcılar bir parola oturum açma kullanarak profil verilerini görüntüleyebilir, ancak yönetim sayfalarına erişmek için bir yöneticinin MFA 'yı kullanması gerekir.
+MFA, kullanıcıların bir uygulama içindeki hassas sayfalara erişmelerine zorlanabilir ASP.NET Core Identity . Bu, farklı kimlikler için farklı erişim düzeylerinin bulunduğu uygulamalar için yararlı olabilir. Örneğin, kullanıcılar bir parola oturum açma kullanarak profil verilerini görüntüleyebilir, ancak yönetim sayfalarına erişmek için bir yöneticinin MFA 'yı kullanması gerekir.
 
 ### <a name="extend-the-login-with-an-mfa-claim"></a>Bir MFA talebi ile oturum açmayı genişletme
 
@@ -304,9 +305,9 @@ public void ConfigureServices(IServiceCollection services)
     });
 ```
 
-### <a name="example-openid-connect-no-locidentityserver-4-server-with-aspnet-core-no-locidentity"></a>Örnek OpenID Connect Identity Server 4 sunucusu ASP.NET CoreIdentity
+### <a name="example-openid-connect-no-locidentityserver-4-server-with-no-locaspnet-core-identity"></a>Örnek OpenID Connect Identity Server 4 Server with ASP.NET Core Identity
 
-MVC görünümleriyle ASP.NET Core kullanılarak uygulanan OpenID Connect sunucusunda Identity , *ErrorEnable2FA. cshtml* adlı yeni bir görünüm oluşturulur. Görünüm:
+MVC görünümleriyle kullanılarak uygulanan OpenID Connect sunucusunda ASP.NET Core Identity , *ErrorEnable2FA. cshtml* adlı yeni bir görünüm oluşturulur. Görünüm:
 
 * , Identity MFA gerektiren bir uygulamadan geliyorsa, ancak Kullanıcı ' de bunu etkinleştirmediğinde görüntüler Identity .
 * Kullanıcıya bildirir ve bunu etkinleştirmek için bir bağlantı ekler.
@@ -329,7 +330,7 @@ You can enable MFA to login here:
 
 `Login`Yönteminde, `IIdentityServerInteractionService` `_interaction` OpenID Connect istek parametrelerine erişmek için arabirim uygulama kullanılır. `acr_values`Parametresi, özelliği kullanılarak erişilir `AcrValues` . İstemci bu `mfa` ayarı kümesiyle gönderdiğinden, bu daha sonra denetlenebilir.
 
-MFA gerekliyse ve ASP.NET Core içindeki Kullanıcı Identity MFA 'yı etkinleştirmişse, oturum açma işlemi devam eder. Kullanıcının MFA özelliği etkin olmadığında, Kullanıcı *ErrorEnable2FA. cshtml*özel görünümüne yönlendirilir. Ardından Identity , kullanıcıyı ' de imzalar ASP.NET Core.
+MFA gerekliyse ve içindeki Kullanıcı ASP.NET Core Identity MFA 'yı etkinleştirmişse, oturum açma işlemi devam eder. Kullanıcının MFA özelliği etkin olmadığında, Kullanıcı *ErrorEnable2FA. cshtml*özel görünümüne yönlendirilir. Ardından ASP.NET Core Identity Kullanıcı oturumunu kapatır.
 
 ```csharp
 //
@@ -410,7 +411,7 @@ public async Task<IActionResult> ExternalLoginCallback(
 Kullanıcı zaten oturum açmışsa istemci uygulaması:
 
 * Talebi hala doğrular `amr` .
-* MFA 'yı ASP.NET Core görünümüne yönelik bir bağlantıyla ayarlayabilir Identity .
+* MFA 'yı görünümün bir bağlantısıyla ayarlayabilir ASP.NET Core Identity .
 
 ![acr_values-1](mfa/_static/acr_values-1.png)
 
@@ -433,7 +434,7 @@ namespace AspNetCoreRequireMfaOidc
 
 Döndürülen değer, kimliğin kimlik doğrulamasının ve OpenID Connect sunucu uygulamasında nasıl doğrulandığına bağlıdır.
 
-, `AuthorizationHandler` Gereksinimi kullanır `RequireMfa` ve `amr` talebi doğrular. OpenID Connect sunucusu, Identity ASP.NET Core ile Server4 kullanılarak uygulanabilir Identity . Bir Kullanıcı TOTP kullanarak oturum açtığında, `amr` talep BIR MFA değeri ile döndürülür. Farklı bir OpenID Connect sunucu uygulamasının veya farklı bir MFA türünün kullanılması durumunda `amr` talep ya da olabilir, farklı bir değere sahip olur. Bu kod de kabul etmek için genişletilmelidir.
+, `AuthorizationHandler` Gereksinimi kullanır `RequireMfa` ve `amr` talebi doğrular. OpenID Connect sunucusu, ile Server4 kullanılarak uygulanabilir Identity ASP.NET Core Identity . Bir Kullanıcı TOTP kullanarak oturum açtığında, `amr` talep BIR MFA değeri ile döndürülür. Farklı bir OpenID Connect sunucu uygulamasının veya farklı bir MFA türünün kullanılması durumunda `amr` talep ya da olabilir, farklı bir değere sahip olur. Bu kod de kabul etmek için genişletilmelidir.
 
 ```csharp
 using Microsoft.AspNetCore.Authorization;

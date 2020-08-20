@@ -1,11 +1,12 @@
 ---
-title: RazorASP.NET Core Entity Framework Core olan sayfalar-öğretici 1/8
+title: Razor ASP.NET Core Entity Framework Core olan sayfalar-öğretici 1/8
 author: rick-anderson
 description: RazorEntity Framework Core kullanarak bir sayfalar uygulamasının nasıl oluşturulacağını gösterir
 ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 09/26/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: cd6624d107fb19da92a7e58a747cc85e876a6ba4
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 00d5c348b7ab06f9044e6705026e43feb7807ae3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018643"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630320"
 ---
-# <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>RazorASP.NET Core Entity Framework Core olan sayfalar-öğretici 1/8
+# <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor ASP.NET Core Entity Framework Core olan sayfalar-öğretici 1/8
 
 , [Tom Dykstra](https://github.com/tdykstra) ve [Rick Anderson](https://twitter.com/RickAndMSFT) tarafından
 
@@ -33,7 +34,7 @@ Bu, bir [ASP.NET Core Razor sayfaları](xref:razor-pages/index) UYGULAMASıNDA E
 
 [Tamamlanmış uygulamayı indirin veya görüntüleyin.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [Yönergeleri indirin](xref:index#how-to-download-a-sample).
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * Sayfalarla yeni başladıysanız Razor , bunu başlatmadan önce [ Razor sayfalarla çalışmaya başlama](xref:tutorials/razor-pages/razor-pages-start) öğreticisini izleyin.
 
@@ -89,7 +90,7 @@ Tamamlanmış projeyi indirdikten sonra uygulamayı çalıştırmak için:
 Tamamlanmış projeyi indirdikten sonra uygulamayı çalıştırmak için:
 
 * *Contosouniversity. csproj*öğesini silin ve *Contosoüniversıtysqlite. csproj* öğesini *contosouniversity. csproj*olarak yeniden adlandırın.
-* *Startup.cs*silin ve *StartupSQLite.cs* öğesini *Startup.cs*olarak yeniden adlandırın.
+* *Program.cs*' de, açıklama dışarı bu `#define Startup` şekilde `StartupSQLite` kullanılır.
 * *appSettings.js*silin ve üzerinde *appSettings.js* *appSettingsSQLite.js* yeniden adlandırın.
 * *Geçişler* klasörünü silin ve *migrationssql* öğesini *geçişlerle*yeniden adlandırın.
 * İçin genel arama yapın `#if SQLiteVersion` ve `#if SQLiteVersion` ilgili `#endif` ifadeyi kaldırın.
@@ -214,7 +215,7 @@ Derleyici hatası olmadığını doğrulamak için projeyi derleyin.
 Bu bölümde, oluşturmak için ASP.NET Core scafkatlama aracını kullanırsınız:
 
 * EF Core *bağlamı* sınıfı. Bağlam, belirli bir veri modeli için Entity Framework işlevselliği koordine eden ana sınıftır. `Microsoft.EntityFrameworkCore.DbContext`Sınıfından türetilir.
-* Razorvarlık için oluşturma, okuma, güncelleştirme ve silme (CRUD) işlemlerini işleyen sayfalar `Student` .
+* Razor varlık için oluşturma, okuma, güncelleştirme ve silme (CRUD) işlemlerini işleyen sayfalar `Student` .
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -225,7 +226,7 @@ Bu bölümde, oluşturmak için ASP.NET Core scafkatlama aracını kullanırsın
   * **Model sınıfı** açılır penceresinde **öğrenci (Contosouniversity. modeller)** öğesini seçin.
   * **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin.
   * *Contosouniversity. modeller. Contosoüniversıtycontext* olan veri bağlamı adını *Contosouniversity. Data. SchoolContext*olarak değiştirin.
-  * **Add (Ekle)** seçeneğini belirleyin.
+  * **Ekle**’yi seçin.
 
 Aşağıdaki paketler otomatik olarak yüklenir:
 
@@ -355,12 +356,12 @@ Mevcut değilse veritabanını oluşturmak için *program.cs* güncelleştirin:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Program.cs?highlight=1-2,14-18,21-38)]
 
-Bağlam için bir veritabanı varsa, [Ensuyeniden](/dotnet/api/microsoft.entityframeworkcore.infrastructure.databasefacade.ensurecreated#Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_EnsureCreated) oluşturma yöntemi hiçbir eylemde bulunmaz. Veritabanı yoksa, veritabanını ve şemayı oluşturur. `EnsureCreated`veri modeli değişikliklerini işlemek için aşağıdaki iş akışını sunar:
+Bağlam için bir veritabanı varsa, [Ensuyeniden](/dotnet/api/microsoft.entityframeworkcore.infrastructure.databasefacade.ensurecreated#Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_EnsureCreated) oluşturma yöntemi hiçbir eylemde bulunmaz. Veritabanı yoksa, veritabanını ve şemayı oluşturur. `EnsureCreated` veri modeli değişikliklerini işlemek için aşağıdaki iş akışını sunar:
 
 * Veritabanını silin. Mevcut veriler kaybolur.
 * Veri modelini değiştirin. Örneğin, bir alan ekleyin `EmailAddress` .
 * Uygulamayı çalıştırın.
-* `EnsureCreated`yeni şemaya sahip bir veritabanı oluşturur.
+* `EnsureCreated` yeni şemaya sahip bir veritabanı oluşturur.
 
 Bu iş akışı, verileri korumanıza gerek olmadığı sürece, şema hızlı bir şekilde gelişen zaman geliştirme aşamasında iyi bir şekilde gerçekleştirilir. Veritabanına girilen verilerin korunması gerektiğinde bu durum farklıdır. Bu durumda, geçişleri kullanın.
 
@@ -445,7 +446,7 @@ public async Task OnGetAsync()
   * Döndürülen [görev](/dotnet/csharp/programming-guide/concepts/async/async-return-types#BKMK_TaskReturnType) nesnesini oluşturun.
 * `Task<T>`Dönüş türü, devam eden işi temsil eder.
 * `await`Anahtar sözcüğü, derleyicinin yöntemi iki parçaya böetmesine neden olur. İlk bölüm, zaman uyumsuz olarak başlatılan işlemle biter. İkinci bölüm, işlem tamamlandığında çağrılan bir geri çağırma yöntemine konur.
-* `ToListAsync`, Uzantı yönteminin zaman uyumsuz sürümüdür `ToList` .
+* `ToListAsync` , Uzantı yönteminin zaman uyumsuz sürümüdür `ToList` .
 
 EF Core kullanan zaman uyumsuz kodu yazarken dikkat edilmesi gereken bazı şeyler:
 
@@ -470,7 +471,7 @@ Contoso Üniversitesi örnek Web uygulaması, Razor Entity Framework (EF) Core k
 
 [Tamamlanmış uygulamayı indirin veya görüntüleyin.](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/data/ef-rp/intro/samples) [Yönergeleri indirin](xref:index#how-to-download-a-sample).
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -557,9 +558,9 @@ Aşağıdaki bölümlerde, bu varlıkların her biri için bir sınıf oluşturu
 
 `ID`Özelliği, bu sınıfa karşılık gelen veritabanı (DB) tablosunun birincil anahtar sütunu olur. Varsayılan olarak, EF Core `ID` birincil anahtar olarak adlandırılan bir özelliği Yorumlar `classnameID` . `classnameID`' De, `classname` sınıfının adıdır. Diğer otomatik olarak tanınan birincil anahtar, `StudentID` Önceki örnekte yer verilir.
 
-`Enrollments`Özelliği bir [Gezinti özelliğidir](/ef/core/modeling/relationships). Gezinti özellikleri bu varlıkla ilgili diğer varlıkların bağlantısını sağlar. Bu durumda, `Enrollments` öğesinin özelliği ile `Student entity` `Enrollment` ilgili tüm varlıkları barındırır `Student` . Örneğin, VERITABANıNDAKI bir öğrenci satırında iki ilişkili kayıt satırı varsa, `Enrollments` gezinti özelliği bu iki `Enrollment` varlığı içerir. İlgili `Enrollment` satır, söz konusu öğrencinin birincil anahtar değerini sütununda içeren bir satırdır `StudentID` . Örneğin, ID = 1 olan öğrencinin tabloda iki satır olduğunu varsayalım `Enrollment` . `Enrollment`Tabloda = 1 olan iki satır vardır `StudentID` . `StudentID`, tablodaki `Enrollment` öğrencisi belirten bir yabancı anahtardır `Student` .
+`Enrollments`Özelliği bir [Gezinti özelliğidir](/ef/core/modeling/relationships). Gezinti özellikleri bu varlıkla ilgili diğer varlıkların bağlantısını sağlar. Bu durumda, `Enrollments` öğesinin özelliği ile `Student entity` `Enrollment` ilgili tüm varlıkları barındırır `Student` . Örneğin, VERITABANıNDAKI bir öğrenci satırında iki ilişkili kayıt satırı varsa, `Enrollments` gezinti özelliği bu iki `Enrollment` varlığı içerir. İlgili `Enrollment` satır, söz konusu öğrencinin birincil anahtar değerini sütununda içeren bir satırdır `StudentID` . Örneğin, ID = 1 olan öğrencinin tabloda iki satır olduğunu varsayalım `Enrollment` . `Enrollment`Tabloda = 1 olan iki satır vardır `StudentID` . `StudentID` , tablodaki `Enrollment` öğrencisi belirten bir yabancı anahtardır `Student` .
 
-Bir gezinti özelliği birden çok varlık tutabileceğinden, gezinti özelliği gibi bir liste türü olmalıdır `ICollection<T>` . `ICollection<T>`belirtilebilir veya veya gibi bir tür olabilir `List<T>` `HashSet<T>` . Kullanıldığında `ICollection<T>` , EF Core `HashSet<T>` Varsayılan olarak bir koleksiyon oluşturur. Birden çok varlığı tutan gezinti özellikleri, çoktan çoğa ve bire çok ilişkilerden gelir.
+Bir gezinti özelliği birden çok varlık tutabileceğinden, gezinti özelliği gibi bir liste türü olmalıdır `ICollection<T>` . `ICollection<T>` belirtilebilir veya veya gibi bir tür olabilir `List<T>` `HashSet<T>` . Kullanıldığında `ICollection<T>` , EF Core `HashSet<T>` Varsayılan olarak bir koleksiyon oluşturur. Birden çok varlığı tutan gezinti özellikleri, çoktan çoğa ve bire çok ilişkilerden gelir.
 
 ### <a name="the-enrollment-entity"></a>Kayıt varlığı
 
@@ -608,7 +609,7 @@ Bu bölümde öğrenci modeli scafkatdır. Diğer bir deyişle, scafkatlama arac
 * **Model sınıfı** açılır penceresinde **öğrenci (Contosouniversity. modeller)** öğesini seçin.
 * **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin ve üretilen adı **Contosouniversity. modeller. SchoolContext**olarak değiştirin.
 * **Veri bağlamı sınıfı** açılır penceresinde **Contosouniversity. modeller. SchoolContext** öğesini seçin.
-* **Add (Ekle)** seçeneğini belirleyin.
+* **Ekle**’yi seçin.
 
 ![CRUD iletişim kutusu](intro/_static/s1.png)
 
@@ -655,23 +656,23 @@ Bağlantı dizesinin adı, [Dbcontextoptions](/dotnet/api/microsoft.entityframew
 *Program.cs*' de, `Main` aşağıdakileri yapmak için yöntemini değiştirin:
 
 * Bağımlılık ekleme kapsayıcısından bir DB bağlam örneği alın.
-* Yeniden [oluşturulmasını](/dotnet/api/microsoft.entityframeworkcore.infrastructure.databasefacade.ensurecreated#Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_EnsureCreated)çağırın.
+* Yeniden  [oluşturulmasını](/dotnet/api/microsoft.entityframeworkcore.infrastructure.databasefacade.ensurecreated#Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_EnsureCreated)çağırın.
 * `EnsureCreated`Yöntem tamamlandığında bağlamı atın.
 
 Aşağıdaki kod güncelleştirilmiş *program.cs* dosyasını gösterir.
 
 [!code-csharp[](intro/samples/cu21/Program.cs?name=snippet)]
 
-`EnsureCreated`bağlam veritabanının mevcut olmasını sağlar. Varsa, hiçbir eylem yapılmaz. Yoksa, veritabanı ve tüm şeması oluşturulur. `EnsureCreated`veritabanını oluşturmak için geçişleri kullanmaz. İle oluşturulan bir veritabanı `EnsureCreated` daha sonra geçişler kullanılarak güncelleştirilemez.
+`EnsureCreated` bağlam veritabanının mevcut olmasını sağlar. Varsa, hiçbir eylem yapılmaz. Yoksa, veritabanı ve tüm şeması oluşturulur. `EnsureCreated` veritabanını oluşturmak için geçişleri kullanmaz. İle oluşturulan bir veritabanı `EnsureCreated` daha sonra geçişler kullanılarak güncelleştirilemez.
 
-`EnsureCreated`, aşağıdaki iş akışına izin veren uygulama başlatma sırasında çağrılır:
+`EnsureCreated` , aşağıdaki iş akışına izin veren uygulama başlatma sırasında çağrılır:
 
 * VERITABANıNı silin.
 * DB şemasını değiştirin (örneğin, bir `EmailAddress` alan ekleyin).
 * Uygulamayı çalıştırın.
-* `EnsureCreated`sütunu ile bir VERITABANı oluşturur `EmailAddress` .
+* `EnsureCreated` sütunu ile bir VERITABANı oluşturur `EmailAddress` .
 
-`EnsureCreated`şema hızlı bir şekilde gelişmede geliştirmede daha erken kullanışlıdır. Öğreticide daha sonra DB silinir ve geçişler kullanılır.
+`EnsureCreated` şema hızlı bir şekilde gelişmede geliştirmede daha erken kullanışlıdır. Öğreticide daha sonra DB silinir ve geçişler kullanılır.
 
 ### <a name="test-the-app"></a>Uygulamayı test etme
 
@@ -693,7 +694,7 @@ Vurgulanan kod, her bir varlık kümesi için bir [Dbset \<TEntity> ](/dotnet/ap
 * Bir varlık kümesi, genellikle bir DB tablosuna karşılık gelir.
 * Bir varlık, tablodaki bir satıra karşılık gelir.
 
-`DbSet<Enrollment>`ve `DbSet<Course>` atlanamaz. EF Core `Student` `Enrollment` , varlık varlığa başvurduğundan ve varlık `Enrollment` varlığa başvurduğundan bunları örtülü olarak içerir `Course` . Bu öğreticide, `DbSet<Enrollment>` ve `DbSet<Course>` içinde tutun `SchoolContext` .
+`DbSet<Enrollment>` ve `DbSet<Course>` atlanamaz. EF Core `Student` `Enrollment` , varlık varlığa başvurduğundan ve varlık `Enrollment` varlığa başvurduğundan bunları örtülü olarak içerir `Course` . Bu öğreticide, `DbSet<Enrollment>` ve `DbSet<Course>` içinde tutun `SchoolContext` .
 
 ### <a name="sql-server-express-localdb"></a>SQL Server Express LocalDB
 
@@ -707,7 +708,7 @@ EF Core boş bir VERITABANı oluşturur. Bu bölümde, `Initialize` Test veriler
 
 [!code-csharp[](intro/samples/cu21/Data/DbInitializer.cs?name=snippet_Intro)]
 
-Note: önceki kod, `Models` yerine ad alanı için ( `namespace ContosoUniversity.Models` ) kullanır `Data` . `Models`, scaffolder tarafından oluşturulan kodla tutarlıdır. Daha fazla bilgi için bkz. [GitHub yapı iskelesi sorunu](https://github.com/aspnet/Scaffolding/issues/822).
+Note: önceki kod, `Models` yerine ad alanı için ( `namespace ContosoUniversity.Models` ) kullanır `Data` . `Models` , scaffolder tarafından oluşturulan kodla tutarlıdır. Daha fazla bilgi için bkz. [GitHub yapı iskelesi sorunu](https://github.com/aspnet/Scaffolding/issues/822).
 
 Kod, VERITABANıNDA herhangi bir öğrenci olup olmadığını denetler. Veritabanında hiç öğrenci yoksa, DB test verileriyle başlatılır. Performansı iyileştirmek için test verilerini koleksiyonlar yerine dizilere yükler `List<T>` .
 
@@ -759,7 +760,7 @@ Aşağıdaki kodda, [Async](/dotnet/csharp/language-reference/keywords/async) an
 
 * Örtük dönüş türü, `Task` devam eden işi temsil eder.
 * `await`Anahtar sözcüğü, derleyicinin yöntemi iki parçaya böetmesine neden olur. İlk bölüm, zaman uyumsuz olarak başlatılan işlemle biter. İkinci bölüm, işlem tamamlandığında çağrılan bir geri çağırma yöntemine konur.
-* `ToListAsync`, Uzantı yönteminin zaman uyumsuz sürümüdür `ToList` .
+* `ToListAsync` , Uzantı yönteminin zaman uyumsuz sürümüdür `ToList` .
 
 EF Core kullanan zaman uyumsuz kodu yazarken dikkat edilmesi gereken bazı şeyler:
 

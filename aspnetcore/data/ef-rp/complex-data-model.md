@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: b3531f786b3101fcbea4b25d3950d1bce9a289dc
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 3fab57df84e6902a8041940939c067da41f1674c
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018058"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629736"
 ---
 # <a name="part-5-no-locrazor-pages-with-ef-core-in-aspnet-core---data-model"></a>Bölüm 5, Razor ASP.NET Core veri modelinde EF Core olan sayfalar
 
@@ -59,7 +60,7 @@ Yukarıdaki kod, bir `FullName` özelliği ekler ve var olan özelliklere aşağ
 
 ### <a name="the-fullname-calculated-property"></a>FullName hesaplanmış özelliği
 
-`FullName`, iki diğer özelliğin bitiştirerek oluşturulmuş bir değer döndüren hesaplanmış bir özelliktir. `FullName`ayarlanamaz, bu nedenle yalnızca bir get erişimcisi vardır. `FullName`Veritabanında hiçbir sütun oluşturulmaz.
+`FullName` , iki diğer özelliğin bitiştirerek oluşturulmuş bir değer döndüren hesaplanmış bir özelliktir. `FullName` ayarlanamaz, bu nedenle yalnızca bir get erişimcisi vardır. `FullName`Veritabanında hiçbir sütun oluşturulmaz.
 
 ### <a name="the-datatype-attribute"></a>DataType özniteliği
 
@@ -69,7 +70,7 @@ Yukarıdaki kod, bir `FullName` özelliği ekler ve var olan özelliklere aşağ
 
 Öğrenci kayıt tarihleri için, tüm sayfalar şu anda tarihle birlikte tarih ile görüntülenir, ancak yalnızca tarihin ilgili olması gerekir. Veri ek açıklaması özniteliklerini kullanarak, verileri gösteren her sayfada görüntü biçimini giderecek bir kod değişikliği yapabilirsiniz. 
 
-[DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) özniteliği, veritabanı iç türünden daha belirgin bir veri türünü belirtir. Bu durumda, tarih ve saat değil yalnızca tarih görüntülenmelidir. Veri [türü numaralandırması](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1) , tarih, saat, PhoneNumber, para birimi, emaadresi vb. gibi birçok veri türü sağlar. `DataType`Özniteliği Ayrıca uygulamanın türe özgü özellikleri otomatik olarak sağlamasını da sağlayabilir. Örnek:
+[DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) özniteliği, veritabanı iç türünden daha belirgin bir veri türünü belirtir. Bu durumda, tarih ve saat değil yalnızca tarih görüntülenmelidir. Veri [türü numaralandırması](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1) , tarih, saat, PhoneNumber, para birimi, emaadresi vb. gibi birçok veri türü sağlar. `DataType` Özniteliği Ayrıca uygulamanın türe özgü özellikleri otomatik olarak sağlamasını da sağlayabilir. Örnek:
 
 * `mailto:`Bağlantı için otomatik olarak oluşturulur `DataType.EmailAddress` .
 * Tarih Seçici çoğu tarayıcıda için verilmiştir `DataType.Date` .
@@ -82,7 +83,7 @@ Yukarıdaki kod, bir `FullName` özelliği ekler ve var olan özelliklere aşağ
 [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
 ```
 
-`DataType.Date`görüntülenen tarihin biçimini belirtmez. Varsayılan olarak, Tarih alanı sunucunun [CultureInfo](xref:fundamentals/localization#provide-localized-resources-for-the-languages-and-cultures-you-support)öğesine göre varsayılan biçimlere göre görüntülenir.
+`DataType.Date` görüntülenen tarihin biçimini belirtmez. Varsayılan olarak, Tarih alanı sunucunun [CultureInfo](xref:fundamentals/localization#provide-localized-resources-for-the-languages-and-cultures-you-support)öğesine göre varsayılan biçimlere göre görüntülenir.
 
 `DisplayFormat`Öznitelik, tarih biçimini açıkça belirtmek için kullanılır. `ApplyFormatInEditMode`Ayar, biçimlendirmenin düzenleme kullanıcı arabirimine de uygulanacağını belirtir. Bazı alanlar kullanmamanız gerekir `ApplyFormatInEditMode` . Örneğin, para birimi simgesi genellikle bir düzenleme metin kutusunda gösterilmemelidir.
 
@@ -153,7 +154,7 @@ Veritabanı oluşturulduğunda, modeldeki Özellik adları sütun adları için 
 public string LastName { get; set; }
 ```
 
-`MinimumLength`ve `Required` doğrulamanın doğrulanmasını karşılamamak için boşluk. `RegularExpression`Dize üzerinde tam denetim için özniteliğini kullanın.
+`MinimumLength` ve `Required` doğrulamanın doğrulanmasını karşılamamak için boşluk. `RegularExpression`Dize üzerinde tam denetim için özniteliğini kullanın.
 
 ### <a name="the-display-attribute"></a>Display özniteliği
 
@@ -264,7 +265,7 @@ Bir eğitmen herhangi bir sayıda kurs öğretebilir, bu nedenle `CourseAssignme
 public ICollection<CourseAssignment> CourseAssignments { get; set; }
 ```
 
-Bir eğitmenin en fazla bir ofisi olabilir, bu nedenle `OfficeAssignment` özellik tek bir varlık içerir `OfficeAssignment` . `OfficeAssignment`hiçbir Office atanmamışsa null olur.
+Bir eğitmenin en fazla bir ofisi olabilir, bu nedenle `OfficeAssignment` özellik tek bir varlık içerir `OfficeAssignment` . `OfficeAssignment` hiçbir Office atanmamışsa null olur.
 
 ```csharp
 public OfficeAssignment OfficeAssignment { get; set; }
@@ -309,7 +310,7 @@ Bir `Instructor` varlık ilişkili bir varlığa sahip olduğunda `OfficeAssignm
 
 [!code-csharp[](intro/samples/cu30/Models/Course.cs?highlight=2,10,13,16,19,21,23)]
 
-`Course`Varlığın yabancı anahtar (FK) özelliği vardır `DepartmentID` . `DepartmentID`ilgili varlığa işaret eder `Department` . `Course`Varlığın bir `Department` gezinti özelliği vardır.
+`Course`Varlığın yabancı anahtar (FK) özelliği vardır `DepartmentID` . `DepartmentID` ilgili varlığa işaret eder `Department` . `Course`Varlığın bir `Department` gezinti özelliği vardır.
 
 EF Core, modelin ilgili bir varlık için gezinti özelliği olduğunda bir veri modeli için yabancı anahtar özelliği gerektirmez. EF Core, gerektiği yerde otomatik olarak veritabanında FKs 'ler oluşturur. EF Core otomatik olarak oluşturulan FKs 'ler için [gölge Özellikler](/ef/core/modeling/shadow-properties) oluşturur. Ancak, doğrudan veri modelinde FK dahil edilmesi, güncelleştirmelerin daha basit ve daha verimli olmasını sağlayabilir. Örneğin, FK özelliğinin `DepartmentID` dahil *olmadığı* bir model düşünün. Bir kurs varlığı düzenlemek üzere getirilirken:
 
@@ -374,7 +375,7 @@ Daha önce `Column` öznitelik, sütun adı eşlemesini değiştirmek için kull
 public decimal Budget { get; set; }
 ```
 
-Sütun eşlemesi genellikle gerekli değildir. EF Core, özelliğin CLR türüne göre uygun SQL Server veri türünü seçer. CLR `decimal` türü SQL Server bir `decimal` türe eşlenir. `Budget`para birimi için, para veri türü ise para birimi için daha uygundur.
+Sütun eşlemesi genellikle gerekli değildir. EF Core, özelliğin CLR türüne göre uygun SQL Server veri türünü seçer. CLR `decimal` türü SQL Server bir `decimal` türe eşlenir. `Budget` para birimi için, para veri türü ise para birimi için daha uygundur.
 
 ### <a name="foreign-key-and-navigation-properties"></a>Yabancı anahtar ve gezinti özellikleri
 
@@ -471,7 +472,7 @@ Veri modelleri basit ve büyümeye başlar. Yük (PJTs) olmayan ekleme tablolar�
 
 ### <a name="composite-key"></a>Bileşik anahtar
 
-(Ve) içindeki iki FKs, `CourseAssignment` `InstructorID` `CourseID` tablonun her satırını benzersiz bir şekilde tanımlar `CourseAssignment` . `CourseAssignment`adanmış bir PK gerektirmez. `InstructorID`Ve `CourseID` özellikleri BILEŞIK bir PK olarak çalışır. EF Core bileşik PKs 'leri belirtmenin tek yolu *Fluent API*' dir. Sonraki bölümde, bileşik PK 'nin nasıl yapılandırılacağı gösterilmektedir.
+(Ve) içindeki iki FKs, `CourseAssignment` `InstructorID` `CourseID` tablonun her satırını benzersiz bir şekilde tanımlar `CourseAssignment` . `CourseAssignment` adanmış bir PK gerektirmez. `InstructorID`Ve `CourseID` özellikleri BILEŞIK bir PK olarak çalışır. EF Core bileşik PKs 'leri belirtmenin tek yolu *Fluent API*' dir. Sonraki bölümde, bileşik PK 'nin nasıl yapılandırılacağı gösterilmektedir.
 
 Bileşik anahtar şunları sağlar:
 
@@ -507,7 +508,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 Bu öğreticide, Fluent API yalnızca özniteliklerle yapılamadığını veritabanı eşlemesi için kullanılır. Ancak Fluent API, özniteliklerle yapılabilecek biçimlendirme, doğrulama ve eşleme kurallarının çoğunu belirtebilir.
 
-Gibi bazı öznitelikler `MinimumLength` Fluent API uygulanamaz. `MinimumLength`şemayı değiştirmez, yalnızca bir minimum uzunluk doğrulama kuralı uygular.
+Gibi bazı öznitelikler `MinimumLength` Fluent API uygulanamaz. `MinimumLength` şemayı değiştirmez, yalnızca bir minimum uzunluk doğrulama kuralı uygular.
 
 Bazı geliştiriciler, varlık sınıflarının "temiz" olmasını sağlamak için Fluent API özel olarak kullanmayı tercih eder. Öznitelikler ve Fluent API karışık olabilir. Yalnızca Fluent API (bileşik bir PK belirterek) yapılabilecek bazı konfigürasyonlar vardır. Yalnızca özniteliklerle () yapılabilecek bazı konfigürasyonlar vardır `MinimumLength` . Fluent API veya özniteliklerini kullanmak için önerilen uygulama:
 
@@ -759,14 +760,14 @@ Bu bölümde, veri modeli öznitelikler kullanılarak özelleştirilir.
 
 [!code-csharp[](intro/samples/cu21/Models/Student.cs?name=snippet_DataType&highlight=3,12-13)]
 
-[DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) özniteliği, veritabanı iç türünden daha belirgin bir veri türünü belirtir. Bu durumda, tarih ve saat değil yalnızca tarih görüntülenmelidir. Veri [türü numaralandırması](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1) , tarih, saat, PhoneNumber, para birimi, emaadresi vb. gibi birçok veri türü sağlar. `DataType`Özniteliği Ayrıca uygulamanın türe özgü özellikleri otomatik olarak sağlamasını da sağlayabilir. Örnek:
+[DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) özniteliği, veritabanı iç türünden daha belirgin bir veri türünü belirtir. Bu durumda, tarih ve saat değil yalnızca tarih görüntülenmelidir. Veri [türü numaralandırması](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1) , tarih, saat, PhoneNumber, para birimi, emaadresi vb. gibi birçok veri türü sağlar. `DataType` Özniteliği Ayrıca uygulamanın türe özgü özellikleri otomatik olarak sağlamasını da sağlayabilir. Örnek:
 
 * `mailto:`Bağlantı için otomatik olarak oluşturulur `DataType.EmailAddress` .
 * Tarih Seçici çoğu tarayıcıda için verilmiştir `DataType.Date` .
 
 `DataType`ÖZNITELIĞI `data-` HTML 5 TARAYıCıLARıNıN kullandığı HTML 5 (bir veri Dash) özniteliklerini yayar. `DataType`Öznitelikler doğrulama sağlamaz.
 
-`DataType.Date`görüntülenen tarihin biçimini belirtmez. Varsayılan olarak, Tarih alanı sunucunun [CultureInfo](xref:fundamentals/localization#provide-localized-resources-for-the-languages-and-cultures-you-support)öğesine göre varsayılan biçimlere göre görüntülenir.
+`DataType.Date` görüntülenen tarihin biçimini belirtmez. Varsayılan olarak, Tarih alanı sunucunun [CultureInfo](xref:fundamentals/localization#provide-localized-resources-for-the-languages-and-cultures-you-support)öğesine göre varsayılan biçimlere göre görüntülenir.
 
 `DisplayFormat`Öznitelik, tarih biçimini açıkça belirtmek için kullanılır:
 
@@ -902,7 +903,7 @@ public string LastName { get; set; }
 
 ### <a name="the-fullname-calculated-property"></a>FullName hesaplanmış özelliği
 
-`FullName`, iki diğer özelliğin bitiştirerek oluşturulmuş bir değer döndüren hesaplanmış bir özelliktir. `FullName`ayarlanamaz, yalnızca bir get erişimcisine sahip. `FullName`Veritabanında hiçbir sütun oluşturulmaz.
+`FullName` , iki diğer özelliğin bitiştirerek oluşturulmuş bir değer döndüren hesaplanmış bir özelliktir. `FullName` ayarlanamaz, yalnızca bir get erişimcisine sahip. `FullName`Veritabanında hiçbir sütun oluşturulmaz.
 
 ## <a name="create-the-instructor-entity"></a>Eğitmen varlığı oluşturma
 
@@ -942,7 +943,7 @@ Gezinti özelliği türleri şunları içerir:
 
 `CourseAssignment`Varlık, çoktan çoğa ilişkilerin bölümünde açıklanmaktadır.
 
-Contoso Üniversitesi iş kuralları, bir eğitmenin en fazla bir ofisiniz olabilir. `OfficeAssignment`Özelliği tek bir varlık içerir `OfficeAssignment` . `OfficeAssignment`hiçbir Office atanmamışsa null olur.
+Contoso Üniversitesi iş kuralları, bir eğitmenin en fazla bir ofisiniz olabilir. `OfficeAssignment`Özelliği tek bir varlık içerir `OfficeAssignment` . `OfficeAssignment` hiçbir Office atanmamışsa null olur.
 
 ```csharp
 public OfficeAssignment OfficeAssignment { get; set; }
@@ -962,7 +963,7 @@ Aşağıdaki kodla *modeller/OfficeAssignment. cs* oluşturun:
 
 Ve varlıkları arasında bire sıfır veya-bir ilişkisi vardır `Instructor` `OfficeAssignment` . Office ataması, atandığı eğitmenle ilişkili olarak yalnızca vardır. `OfficeAssignment`PK Ayrıca varlığa ait yabancı anahtardır (FK) `Instructor` . EF Core, şu nedenle otomatik olarak tanıyamaz `InstructorID` `OfficeAssignment` :
 
-* `InstructorID`ID veya Classnameıd adlandırma kuralını takip etmez.
+* `InstructorID` ID veya Classnameıd adlandırma kuralını takip etmez.
 
 Bu nedenle, `Key` ÖZNITELIĞI PK olarak tanımlamak için kullanılır `InstructorID` :
 
@@ -982,7 +983,7 @@ Varsayılan olarak, EF Core, sütun tanımlayıcı bir ilişki için olduğundan
 
 `OfficeAssignment`Varlık null atanamaz bir `Instructor` gezinti özelliğine sahip, çünkü:
 
-* `InstructorID`null atanamaz.
+* `InstructorID` null atanamaz.
 * Bir Office ataması, bir eğitmen olmadan bulunamaz.
 
 Bir `Instructor` varlık ilişkili bir varlığa sahip olduğunda `OfficeAssignment` , her varlığın gezinti özelliğinde diğer bir başvurusu vardır.
@@ -1004,7 +1005,7 @@ Yukarıdaki kod, ilgili bir eğitmen olması gerektiğini belirtir. `InstructorI
 
 [!code-csharp[](intro/samples/cu21/Models/Course.cs?name=snippet_Final&highlight=2,10,13,16,19,21,23)]
 
-`Course`Varlığın yabancı anahtar (FK) özelliği vardır `DepartmentID` . `DepartmentID`ilgili varlığa işaret eder `Department` . `Course`Varlığın bir `Department` gezinti özelliği vardır.
+`Course`Varlığın yabancı anahtar (FK) özelliği vardır `DepartmentID` . `DepartmentID` ilgili varlığa işaret eder `Department` . `Course`Varlığın bir `Department` gezinti özelliği vardır.
 
 EF Core, modelin ilgili bir varlık için gezinti özelliği olduğunda bir veri modeli için FK özelliği gerektirmez.
 
@@ -1071,7 +1072,7 @@ Daha önce `Column` öznitelik, sütun adı eşlemesini değiştirmek için kull
 public decimal Budget { get; set; }
 ```
 
-Sütun eşlemesi genellikle gerekli değildir. EF Core genellikle özelliğin CLR türüne göre uygun SQL Server veri türünü seçer. CLR `decimal` türü SQL Server bir `decimal` türe eşlenir. `Budget`para birimi için, para veri türü ise para birimi için daha uygundur.
+Sütun eşlemesi genellikle gerekli değildir. EF Core genellikle özelliğin CLR türüne göre uygun SQL Server veri türünü seçer. CLR `decimal` türü SQL Server bir `decimal` türe eşlenir. `Budget` para birimi için, para veri türü ise para birimi için daha uygundur.
 
 ### <a name="foreign-key-and-navigation-properties"></a>Yabancı anahtar ve gezinti özellikleri
 
@@ -1179,7 +1180,7 @@ Veri modelleri basit ve büyümeye başlar. Yük yükü dahil olmak üzere genel
 
 ### <a name="composite-key"></a>Bileşik anahtar
 
-FKs null değer atanamaz. (Ve) içindeki iki FKs, `CourseAssignment` `InstructorID` `CourseID` tablonun her satırını benzersiz bir şekilde tanımlar `CourseAssignment` . `CourseAssignment`adanmış bir PK gerektirmez. `InstructorID`Ve `CourseID` özellikleri BILEŞIK bir PK olarak çalışır. EF Core bileşik PKs 'leri belirtmenin tek yolu *Fluent API*' dir. Sonraki bölümde, bileşik PK 'nin nasıl yapılandırılacağı gösterilmektedir.
+FKs null değer atanamaz. (Ve) içindeki iki FKs, `CourseAssignment` `InstructorID` `CourseID` tablonun her satırını benzersiz bir şekilde tanımlar `CourseAssignment` . `CourseAssignment` adanmış bir PK gerektirmez. `InstructorID`Ve `CourseID` özellikleri BILEŞIK bir PK olarak çalışır. EF Core bileşik PKs 'leri belirtmenin tek yolu *Fluent API*' dir. Sonraki bölümde, bileşik PK 'nin nasıl yapılandırılacağı gösterilmektedir.
 
 Bileşik anahtar şunları sağlar:
 
@@ -1215,7 +1216,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 Bu öğreticide, Fluent API yalnızca özniteliklerle yapılamadığını DB eşlemesi için kullanılır. Ancak Fluent API, özniteliklerle yapılabilecek biçimlendirme, doğrulama ve eşleme kurallarının çoğunu belirtebilir.
 
-Gibi bazı öznitelikler `MinimumLength` Fluent API uygulanamaz. `MinimumLength`şemayı değiştirmez, yalnızca bir minimum uzunluk doğrulama kuralı uygular.
+Gibi bazı öznitelikler `MinimumLength` Fluent API uygulanamaz. `MinimumLength` şemayı değiştirmez, yalnızca bir minimum uzunluk doğrulama kuralı uygular.
 
 Bazı geliştiriciler, varlık sınıflarının "temiz" olmasını sağlamak için Fluent API özel olarak kullanmayı tercih eder. Öznitelikler ve Fluent API karışık olabilir. Yalnızca Fluent API (bileşik bir PK belirterek) yapılabilecek bazı konfigürasyonlar vardır. Yalnızca özniteliklerle () yapılabilecek bazı konfigürasyonlar vardır `MinimumLength` . Fluent API veya özniteliklerini kullanmak için önerilen uygulama:
 

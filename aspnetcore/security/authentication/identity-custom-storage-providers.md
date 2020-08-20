@@ -1,11 +1,12 @@
 ---
-title: ASP.NET Core için özel depolama sağlayıcılarıIdentity
+title: İçin özel depolama sağlayıcıları ASP.NET Core Identity
 author: ardalis
-description: ASP.NET Core için özel depolama sağlayıcıları yapılandırma hakkında bilgi edinin Identity .
+description: İçin özel depolama sağlayıcıları yapılandırma hakkında bilgi edinin ASP.NET Core Identity .
 ms.author: riande
 ms.custom: mvc
 ms.date: 07/23/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,24 +17,24 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-custom-storage-providers
-ms.openlocfilehash: 27f6130742e25e07d4b908973e1ebf26288fdbfd
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a8414efeece1afd55d0f30d232ef360d0a21714c
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021542"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630139"
 ---
-# <a name="custom-storage-providers-for-aspnet-core-no-locidentity"></a>ASP.NET Core için özel depolama sağlayıcılarıIdentity
+# <a name="custom-storage-providers-for-no-locaspnet-core-identity"></a>İçin özel depolama sağlayıcıları ASP.NET Core Identity
 
 [Steve Smith](https://ardalis.com/) tarafından
 
-ASP.NET Core Identity , özel bir depolama sağlayıcısı oluşturup uygulamanıza bağlayabilmenizi sağlayan genişletilebilir bir sistemdir. Bu konuda, ASP.NET Core için özelleştirilmiş bir depolama sağlayıcısının nasıl oluşturulacağı açıklanmaktadır Identity . Kendi depolama sağlayıcınızı oluşturmaya yönelik önemli kavramları ele alır, ancak adım adım bir adım adım değildir.
+ASP.NET Core Identity , özel bir depolama sağlayıcısı oluşturmanızı ve uygulamanıza bağlanmanızı sağlayan genişletilebilir bir sistemdir. Bu konuda, için özelleştirilmiş bir depolama sağlayıcısının nasıl oluşturulacağı açıklanmaktadır ASP.NET Core Identity . Kendi depolama sağlayıcınızı oluşturmaya yönelik önemli kavramları ele alır, ancak adım adım bir adım adım değildir.
 
 [GitHub 'dan örnek görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity-custom-storage-providers/sample/CustomIdentityProviderSample).
 
 ## <a name="introduction"></a>Giriş
 
-Varsayılan olarak, ASP.NET Core Identity Sistem Kullanıcı bilgilerini Entity Framework Core kullanarak SQL Server veritabanında depolar. Birçok uygulama için bu yaklaşım iyi bir sonuç verir. Ancak, farklı bir Kalıcılık mekanizması veya veri şeması kullanmayı tercih edebilirsiniz. Örnek:
+Varsayılan olarak, ASP.NET Core Identity sistem, Entity Framework Core kullanarak Kullanıcı bilgilerini bir SQL Server veritabanında depolar. Birçok uygulama için bu yaklaşım iyi bir sonuç verir. Ancak, farklı bir Kalıcılık mekanizması veya veri şeması kullanmayı tercih edebilirsiniz. Örnek:
 
 * [Azure Tablo depolama](/azure/storage/) veya başka bir veri deposu kullanıyorsunuz.
 * Veritabanı tablolarınız farklı bir yapıya sahip. 
@@ -49,9 +50,9 @@ ASP.NET Core Identity , Visual Studio 'daki proje şablonlarına "bireysel kulla
 dotnet new mvc -au Individual
 ```
 
-## <a name="the-aspnet-core-no-locidentity-architecture"></a>ASP.NET Core Identity mimarisi
+## <a name="the-no-locaspnet-core-identity-architecture"></a>ASP.NET Core IdentityMimari
 
-ASP.NET Core Identity , Yöneticiler ve depolar adlı sınıflardan oluşur. *Yöneticiler* , bir uygulama geliştiricisinin Kullanıcı oluşturma gibi işlemleri gerçekleştirmek için kullandığı üst düzey sınıflardır Identity . *Depolar* , kullanıcılar ve roller gibi varlıkların nasıl kalıcı olduğunu belirten alt düzey sınıflardır. Depolar depo modelini izler ve kalıcılık mekanizmasıyla yakından ilişkilidir. Yöneticiler mağazalardan ayrılır, bu da uygulama kodunuzu değiştirmeden (yapılandırma dışında) Kalıcılık mekanizmasını değiştirebilirsiniz.
+ASP.NET Core Identity Yöneticiler ve depolar adlı sınıflardan oluşur. *Yöneticiler* , bir uygulama geliştiricisinin Kullanıcı oluşturma gibi işlemleri gerçekleştirmek için kullandığı üst düzey sınıflardır Identity . *Depolar* , kullanıcılar ve roller gibi varlıkların nasıl kalıcı olduğunu belirten alt düzey sınıflardır. Depolar depo modelini izler ve kalıcılık mekanizmasıyla yakından ilişkilidir. Yöneticiler mağazalardan ayrılır, bu da uygulama kodunuzu değiştirmeden (yapılandırma dışında) Kalıcılık mekanizmasını değiştirebilirsiniz.
 
 Aşağıdaki diyagramda, bir Web uygulamasının yöneticileriyle nasıl etkileşim kurduğu, mağazalarda veri erişim katmanıyla etkileşim kurma yöntemi gösterilmektedir.
 
@@ -63,9 +64,9 @@ Veya ' nin yeni bir örneğini oluştururken, `UserManager` `RoleManager` Kullan
 
 [Uygulamayı yeni depolama sağlayıcısını kullanacak şekilde yeniden yapılandırmak](#reconfigure-app-to-use-a-new-storage-provider) `UserManager` , `RoleManager` özelleştirilmiş bir deponun örneğini oluşturmayı ve bunu gösterir.
 
-## <a name="aspnet-core-no-locidentity-stores-data-types"></a>IdentityVeri türlerini ASP.NET Core depolar
+## <a name="no-locaspnet-core-identity-stores-data-types"></a>ASP.NET Core Identity veri türlerini depolar
 
-[ASP.NET Core Identity ](https://github.com/aspnet/identity) veri türleri aşağıdaki bölümlerde ayrıntılı olarak verilmiştir:
+[ASP.NET Core Identity](https://github.com/aspnet/identity) veri türleri aşağıdaki bölümlerde ayrıntılı olarak verilmiştir:
 
 ### <a name="users"></a>Kullanıcılar
 
@@ -85,9 +86,9 @@ Sitenizin yetkilendirme grupları. Rol kimliği ve rol adı ("admin" veya "Emplo
 
 ## <a name="the-data-access-layer"></a>Veri erişim katmanı
 
-Bu konuda, kullanacağınız Kalıcılık mekanizması hakkında bilgi sahibi olduğunuz ve bu mekanizma için nasıl varlık oluşturacağınız varsayılmaktadır. Bu konu, depoları veya veri erişim sınıflarını oluşturma hakkında ayrıntılı bilgi sağlamaz; ASP.NET Core çalışırken tasarım kararları hakkında bazı öneriler sağlar Identity .
+Bu konuda, kullanacağınız Kalıcılık mekanizması hakkında bilgi sahibi olduğunuz ve bu mekanizma için nasıl varlık oluşturacağınız varsayılmaktadır. Bu konu, depoları veya veri erişim sınıflarını oluşturma hakkında ayrıntılı bilgi sağlamaz; ile çalışırken tasarım kararları hakkında bazı öneriler sağlar ASP.NET Core Identity .
 
-Özelleştirilmiş bir mağaza sağlayıcısı için veri erişim katmanını tasarlarken çok fazla özgürlük vardır. Yalnızca uygulamanızda kullanmayı düşündüğünüz özellikler için kalıcılık mekanizmaları oluşturmanız gerekir. Örneğin, uygulamanızda roller kullanmıyorsanız, roller veya Kullanıcı rolü ilişkilendirmeleri için depolama alanı oluşturmanız gerekmez. Teknolojiniz ve mevcut altyapınız, ASP.NET Core varsayılan uygulamasından çok farklı bir yapı gerektirebilir Identity . Veri erişim katmanınızdaki depolama uygulamanızın yapısıyla çalışma mantığını sağlarsınız.
+Özelleştirilmiş bir mağaza sağlayıcısı için veri erişim katmanını tasarlarken çok fazla özgürlük vardır. Yalnızca uygulamanızda kullanmayı düşündüğünüz özellikler için kalıcılık mekanizmaları oluşturmanız gerekir. Örneğin, uygulamanızda roller kullanmıyorsanız, roller veya Kullanıcı rolü ilişkilendirmeleri için depolama alanı oluşturmanız gerekmez. Teknolojiniz ve mevcut altyapınız, varsayılan uygulamasından çok farklı bir yapı gerektirebilir ASP.NET Core Identity . Veri erişim katmanınızdaki depolama uygulamanızın yapısıyla çalışma mantığını sağlarsınız.
 
 Veri erişim katmanı, verileri ASP.NET Core Identity bir veri kaynağına kaydetme mantığını sağlar. Özelleştirilmiş depolama sağlayıcınızla ilgili veri erişim katmanı, Kullanıcı ve rol bilgilerini depolamak için aşağıdaki sınıfları içerebilir.
 
@@ -247,5 +248,5 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="references"></a>Başvurular
 
-* [ASP.NET 4. x için özel depolama sağlayıcılarıIdentity](/aspnet/identity/overview/extensibility/overview-of-custom-storage-providers-for-aspnet-identity)
-* [ASP.NET Core Identity ](https://github.com/dotnet/AspNetCore/tree/master/src/Identity): Bu depo, topluluk tarafından tutulan depo sağlayıcılarının bağlantılarını içerir.
+* [ASP.NET 4. x için özel depolama sağlayıcıları Identity](/aspnet/identity/overview/extensibility/overview-of-custom-storage-providers-for-aspnet-identity)
+* [ASP.NET Core Identity](https://github.com/dotnet/AspNetCore/tree/master/src/Identity): Bu depo, topluluk tarafından tutulan depo sağlayıcılarının bağlantılarını içerir.

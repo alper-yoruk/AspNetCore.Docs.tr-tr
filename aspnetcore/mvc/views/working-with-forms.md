@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/working-with-forms
-ms.openlocfilehash: 3f5b0287a4f9c6c6c05a47297e3e602b80bf6015
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: c337e727a4683b0b3c67307af93ef8efa246e2ad
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021490"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631023"
 ---
 # <a name="tag-helpers-in-forms-in-aspnet-core"></a>ASP.NET Core formlardaki etiket yardımcıları
 
@@ -43,7 +44,7 @@ Birçok durumda, HTML Yardımcıları belirli bir etiket Yardımcısı için alt
 
 * `asp-route-<Parameter Name>`, `<Parameter Name>` Yol değerlerine eklendiği özniteliği sağlar. `routeValues`Ve için parametreler `Html.BeginForm` , `Html.BeginRouteForm` benzer işlevlere sahiptir.
 
-* Bir HTML Yardımcısı alternatifi `Html.BeginForm` ve`Html.BeginRouteForm`
+* Bir HTML Yardımcısı alternatifi `Html.BeginForm` ve `Html.BeginRouteForm`
 
 Örnek:
 
@@ -62,7 +63,7 @@ MVC çalışma zamanı, `action` form etiketi yardımcı öznitelikleri ve ' den
 
 ### <a name="using-a-named-route"></a>Adlandırılmış yol kullanma
 
-`asp-route`Etiket Yardımcısı özniteliği, HTML özniteliği için de biçimlendirme oluşturabilir `action` . Adlı [yolu](../../fundamentals/routing.md) içeren bir uygulama `register` , kayıt sayfası için aşağıdaki biçimlendirmeyi kullanabilir:
+`asp-route`Etiket Yardımcısı özniteliği, HTML özniteliği için de biçimlendirme oluşturabilir `action` . Adlı [yolu](../../fundamentals/routing.md)  içeren bir uygulama `register` , kayıt sayfası için aşağıdaki biçimlendirmeyi kullanabilir:
 
 [!code-cshtml[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterRoute.cshtml)]
 
@@ -181,9 +182,9 @@ Söz dizimi:
 
 Giriş etiketi Yardımcısı:
 
-* `id` `name` Özniteliğinde belirtilen ifade adı için ve HTML özniteliklerini üretir `asp-for` . `asp-for="Property1.Property2"`değerine eşdeğerdir `m => m.Property1.Property2` . İfadenin adı, öznitelik değeri için kullanılan şeydir `asp-for` . Ek bilgi için [ifade adları](#expression-names) bölümüne bakın.
+* `id` `name` Özniteliğinde belirtilen ifade adı için ve HTML özniteliklerini üretir `asp-for` . `asp-for="Property1.Property2"` değerine eşdeğerdir `m => m.Property1.Property2` . İfadenin adı, öznitelik değeri için kullanılan şeydir `asp-for` . Ek bilgi için [ifade adları](#expression-names) bölümüne bakın.
 
-* Model `type` özelliğine uygulanan model türüne ve [veri ek açıklaması](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.iattributeadapter) özniteliklerine göre html öznitelik değerini ayarlar
+* Model `type` özelliğine uygulanan model türüne ve  [veri ek açıklaması](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.iattributeadapter) özniteliklerine göre html öznitelik değerini ayarlar
 
 * `type`BELIRTILDIĞINDE html öznitelik değerinin üzerine yazılmaz
 
@@ -255,11 +256,11 @@ Ve özelliklerine uygulanan veri ek açıklamaları `Email` `Password` modelde m
 
 ### <a name="html-helper-alternatives-to-input-tag-helper"></a>Giriş etiketi Yardımcısı için HTML Yardımcısı alternatifleri
 
-`Html.TextBox`, `Html.TextBoxFor` `Html.Editor` ve, `Html.EditorFor` giriş etiketi Yardımcısı ile çakışan özelliklere sahiptir. Giriş etiketi Yardımcısı otomatik olarak `type` özniteliği ayarlar ve bu şekilde `Html.TextBox` `Html.TextBoxFor` çalışmaz. `Html.Editor`ve `Html.EditorFor` koleksiyonlar, karmaşık nesneler ve şablonlar; giriş etiketi Yardımcısı değildir. Giriş etiketi Yardımcısı `Html.EditorFor` ve kesin olarak `Html.TextBoxFor` yazılmış (lambda ifadeleri kullanır) `Html.TextBox` ve `Html.Editor` değildir (ifade adları kullanır).
+`Html.TextBox`, `Html.TextBoxFor` `Html.Editor` ve, `Html.EditorFor` giriş etiketi Yardımcısı ile çakışan özelliklere sahiptir. Giriş etiketi Yardımcısı otomatik olarak `type` özniteliği ayarlar ve bu şekilde `Html.TextBox` `Html.TextBoxFor` çalışmaz. `Html.Editor` ve `Html.EditorFor` koleksiyonlar, karmaşık nesneler ve şablonlar; giriş etiketi Yardımcısı değildir. Giriş etiketi Yardımcısı `Html.EditorFor`  ve kesin olarak  `Html.TextBoxFor` yazılmış (lambda ifadeleri kullanır) `Html.TextBox` ve `Html.Editor` değildir (ifade adları kullanır).
 
 ### <a name="htmlattributes"></a>HtmlAttributes
 
-`@Html.Editor()`ve `@Html.EditorFor()` `ViewDataDictionary` varsayılan şablonlarını yürütürken adlı özel bir giriş kullanın `htmlAttributes` . Bu davranış, isteğe bağlı olarak parametreler kullanılarak genişletilmiş şekilde belirlenir `additionalViewData` . "HtmlAttributes" anahtarı büyük/küçük harfe duyarlıdır. "HtmlAttributes" anahtarı, `htmlAttributes` gibi giriş yardımcılarını geçirilmiş nesneye benzer şekilde işlenir `@Html.TextBox()` .
+`@Html.Editor()` ve `@Html.EditorFor()` `ViewDataDictionary` varsayılan şablonlarını yürütürken adlı özel bir giriş kullanın `htmlAttributes` . Bu davranış, isteğe bağlı olarak parametreler kullanılarak genişletilmiş şekilde belirlenir `additionalViewData` . "HtmlAttributes" anahtarı büyük/küçük harfe duyarlıdır. "HtmlAttributes" anahtarı, `htmlAttributes` gibi giriş yardımcılarını geçirilmiş nesneye benzer şekilde işlenir `@Html.TextBox()` .
 
 ```cshtml
 @Html.EditorFor(model => model.YourProperty, 
@@ -288,7 +289,7 @@ Koleksiyon özellikleriyle, `asp-for="CollectionProperty[23].Member"` değeri ol
 
 ASP.NET Core MVC değeri hesapladığında, `ModelExpression` dahil olmak üzere çeşitli kaynakları inceler `ModelState` . Göz önünde bulundurun `<input type="text" asp-for="@Name">` . Hesaplanan `value` öznitelik, öğesinden gelen ilk null olmayan değerdir:
 
-* `ModelState`"Name" anahtarına sahip giriş.
+* `ModelState` "Name" anahtarına sahip giriş.
 * İfadenin sonucu `Model.Name` .
 
 ### <a name="navigating-child-properties"></a>Alt özelliklerde gezinme
@@ -345,7 +346,7 @@ Aşağıda Razor bir koleksiyonun üzerinde nasıl yinelemi yapılacağı göste
 
 [!code-cshtml[](working-with-forms/sample/final/Views/Shared/EditorTemplates/ToDoItem.cshtml)]
 
-`foreach`değer bir `asp-for` veya eşdeğer bağlamda kullanılacaksa, mümkünse kullanılması gerekir `Html.DisplayFor` . Genel olarak, `for` `foreach` bir Numaralandırıcı ayırması gerekmiyorsa (senaryo buna izin veriyorsa) daha iyidir; ancak, bir LINQ ifadesinde bir dizin oluşturucunun değerlendirilmesi pahalı olabilir ve simge durumuna küçültülmüş olmalıdır.
+`foreach` değer bir `asp-for` veya eşdeğer bağlamda kullanılacaksa, mümkünse kullanılması gerekir `Html.DisplayFor` . Genel olarak, `for` `foreach` bir Numaralandırıcı ayırması gerekmiyorsa (senaryo buna izin veriyorsa) daha iyidir; ancak, bir LINQ ifadesinde bir dizin oluşturucunun değerlendirilmesi pahalı olabilir ve simge durumuna küçültülmüş olmalıdır.
 
 &nbsp;
 
@@ -360,7 +361,7 @@ Aşağıda Razor bir koleksiyonun üzerinde nasıl yinelemi yapılacağı göste
 
 * Güçlü yazma sağlar.
 
-* HTML Yardımcısı alternatifi:`Html.TextAreaFor`
+* HTML Yardımcısı alternatifi: `Html.TextAreaFor`
 
 Örnek:
 
@@ -390,7 +391,7 @@ Aşağıdaki HTML oluşturulur:
 
 * HTML Yardımcısı alternatifi: `Html.LabelFor` .
 
-, `Label Tag Helper` Saf HTML etiket öğesi üzerinde aşağıdaki avantajları sağlar:
+, `Label Tag Helper`  Saf HTML etiket öğesi üzerinde aşağıdaki avantajları sağlar:
 
 * Öznitelikten açıklayıcı etiket değerini otomatik olarak alırsınız `Display` . İstenen görünen ad zaman içinde değişebilir ve `Display` öznitelik ve etiket etiketi Yardımcısı 'nın birleşimi, `Display` kullanıldığı her yere uygulanır.
 
@@ -422,7 +423,7 @@ Etiket etiketi Yardımcısı, `for` öğesiyle ILIŞKILI kimlik olan "e-posta" �
 
 * Doğrulama de sunucuda gerçekleşir. İstemciler JavaScript devre dışı bırakılmış olabilir ve bazı doğrulamalar yalnızca sunucu tarafında yapılabilir.
 
-* HTML Yardımcısı alternatifi:`Html.ValidationMessageFor`
+* HTML Yardımcısı alternatifi: `Html.ValidationMessageFor`
 
 , `Validation Message Tag Helper` `asp-validation-for` Bir HTML [span](https://developer.mozilla.org/docs/Web/HTML/Element/span) öğesinde özniteliğiyle kullanılır.
 
@@ -456,14 +457,14 @@ Sunucu tarafı doğrulama hatası oluştuğunda (örneğin, özel sunucu tarafı
 
 * `<div>`Özniteliği olan öğeleri hedefler `asp-validation-summary`
 
-* HTML Yardımcısı alternatifi:`@Html.ValidationSummary`
+* HTML Yardımcısı alternatifi: `@Html.ValidationSummary`
 
-, `Validation Summary Tag Helper` Doğrulama iletilerinin özetini göstermek için kullanılır. `asp-validation-summary`Öznitelik değeri, aşağıdakilerden herhangi biri olabilir:
+, `Validation Summary Tag Helper`  Doğrulama iletilerinin özetini göstermek için kullanılır. `asp-validation-summary`Öznitelik değeri, aşağıdakilerden herhangi biri olabilir:
 
 |ASP-doğrulama-Özet|Görünen doğrulama iletileri|
 |--- |--- |
 |ValidationSummary. All|Özellik ve model düzeyi|
-|Yalnızca ValidationSummary. model|Model|
+|Yalnızca ValidationSummary. model|Modelleme|
 |ValidationSummary. None|Yok|
 
 ### <a name="sample"></a>Örnek
@@ -499,7 +500,7 @@ Oluşturulan HTML (model geçerli olduğunda):
 
 * Modelinizin özellikleri için [Select](https://www.w3.org/wiki/HTML/Elements/select) ve ilişkili [seçenek](https://www.w3.org/wiki/HTML/Elements/option) öğeleri oluşturur.
 
-* Bir HTML Yardımcısı alternatifi `Html.DropDownListFor` ve`Html.ListBoxFor`
+* Bir HTML Yardımcısı alternatifi `Html.DropDownListFor` ve `Html.ListBoxFor`
 
 , `Select Tag Helper` `asp-for` [Select](https://www.w3.org/wiki/HTML/Elements/select) öğesi için model özelliği adını belirtir ve `asp-items` [seçenek](https://www.w3.org/wiki/HTML/Elements/option) öğelerini belirtir.  Örnek:
 
@@ -580,7 +581,7 @@ Aşağıdaki HTML oluşturulur:
 
 ### <a name="option-group"></a>Seçenek grubu
 
-HTML [\<optgroup>](https://www.w3.org/wiki/HTML/Elements/optgroup) öğesi, görünüm modeli bir veya daha fazla nesne içerdiğinde oluşturulur `SelectListGroup` .
+HTML  [\<optgroup>](https://www.w3.org/wiki/HTML/Elements/optgroup) öğesi, görünüm modeli bir veya daha fazla nesne içerdiğinde oluşturulur `SelectListGroup` .
 
 `CountryViewModelGroup` `SelectListItem` Öğeleri "Kuzey Amerika" ve "Avrupa" gruplarında gruplandırır:
 
@@ -613,7 +614,7 @@ Oluşturulan HTML:
 
 ### <a name="multiple-select"></a>Çoklu seçim
 
-Öznitelikte belirtilen özellik bir ise, select etiketi Yardımcısı otomatik olarak [birden çok = "çoklu"](https://w3c.github.io/html-reference/select.html) özniteliği oluşturur `asp-for` `IEnumerable` . Örneğin, aşağıdaki model verildiğinde:
+Öznitelikte belirtilen özellik bir ise, select etiketi Yardımcısı otomatik olarak [birden çok = "çoklu"](https://w3c.github.io/html-reference/select.html)  özniteliği oluşturur `asp-for` `IEnumerable` . Örneğin, aşağıdaki model verildiğinde:
 
 [!code-csharp[](../../mvc/views/working-with-forms/sample/final/ViewModels/CountryViewModelIEnumerable.cs?highlight=6)]
 

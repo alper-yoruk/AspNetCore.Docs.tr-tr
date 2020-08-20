@@ -6,6 +6,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 02/10/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-typescript-webpack
-ms.openlocfilehash: 48b59fea5da3872fb29cacd9edbedd14de9e602f
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 912f6f5d20add99cd0173b6d1ebcf06161c448f5
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019423"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629684"
 ---
 # <a name="use-aspnet-core-no-locsignalr-with-typescript-and-webpack"></a>SignalRTypeScript ve WebPack ile ASP.NET Core kullanma
 
@@ -42,7 +43,7 @@ Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -237,7 +238,7 @@ Uygulama Şu anda ileti göndermek için temel bir form görüntülüyor, ancak 
 
     Yukarıdaki kod, sunucudan ileti almayı destekler. `HubConnectionBuilder`Sınıfı, sunucu bağlantısını yapılandırmak için yeni bir Oluşturucu oluşturur. `withUrl`İşlevi hub URL 'sini yapılandırır.
 
-    SignalRistemci ve sunucu arasında ileti alışverişi yapılmasını mümkün. Her ileti belirli bir ada sahiptir. Örneğin, adı olan mesajlar ileti `messageReceived` bölgesindeki yeni iletiyi görüntülemeden sorumlu mantığı çalıştırabilir. Belirli bir iletiyi dinlemek, işlevi aracılığıyla yapılabilir `on` . Herhangi bir sayıda ileti adı ile listenlebilir. Ayrıca, yazarın adı ve alınan iletinin içeriği gibi parametreleri iletiye geçirmek da mümkündür. İstemci bir ileti aldıktan sonra `div` yazarın adı ve onun özniteliğinde ileti içeriğiyle yeni bir öğe oluşturulur `innerHTML` . `div`İletileri görüntüleyen Main öğesine eklenir.
+    SignalR istemci ve sunucu arasında ileti alışverişi yapılmasını mümkün. Her ileti belirli bir ada sahiptir. Örneğin, adı olan mesajlar ileti `messageReceived` bölgesindeki yeni iletiyi görüntülemeden sorumlu mantığı çalıştırabilir. Belirli bir iletiyi dinlemek, işlevi aracılığıyla yapılabilir `on` . Herhangi bir sayıda ileti adı ile listenlebilir. Ayrıca, yazarın adı ve alınan iletinin içeriği gibi parametreleri iletiye geçirmek da mümkündür. İstemci bir ileti aldıktan sonra `div` yazarın adı ve onun özniteliğinde ileti içeriğiyle yeni bir öğe oluşturulur `innerHTML` . `div`İletileri görüntüleyen Main öğesine eklenir.
 
 1. Artık istemci bir ileti aldığına göre, ileti gönderecek şekilde yapılandırın. Vurgulanan kodu *src/index. TS* dosyasına ekleyin:
 
@@ -299,7 +300,7 @@ Uygulamanın aşağıdaki adımlarla çalıştığından emin olun.
 
 ::: moniker range="< aspnetcore-3.0"
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -474,7 +475,7 @@ Uygulama Şu anda ileti göndermek için basit bir form görüntülüyor. Bunu y
 
     Yukarıdaki kod, sunucudan ileti almayı destekler. `HubConnectionBuilder`Sınıfı, sunucu bağlantısını yapılandırmak için yeni bir Oluşturucu oluşturur. `withUrl`İşlevi hub URL 'sini yapılandırır.
 
-    SignalRistemci ve sunucu arasında ileti alışverişi yapılmasını mümkün. Her ileti belirli bir ada sahiptir. Örneğin, adı olan mesajlar ileti `messageReceived` bölgesindeki yeni iletiyi görüntülemeden sorumlu mantığı çalıştırabilir. Belirli bir iletiyi dinlemek, işlevi aracılığıyla yapılabilir `on` . Herhangi bir sayıda ileti adını dinleyebilmeniz gerekir. Ayrıca, yazarın adı ve alınan iletinin içeriği gibi parametreleri iletiye geçirmek da mümkündür. İstemci bir ileti aldıktan sonra `div` yazarın adı ve onun özniteliğinde ileti içeriğiyle yeni bir öğe oluşturulur `innerHTML` . Yeni ileti, `div` iletileri görüntüleyen Main öğesine eklenir.
+    SignalR istemci ve sunucu arasında ileti alışverişi yapılmasını mümkün. Her ileti belirli bir ada sahiptir. Örneğin, adı olan mesajlar ileti `messageReceived` bölgesindeki yeni iletiyi görüntülemeden sorumlu mantığı çalıştırabilir. Belirli bir iletiyi dinlemek, işlevi aracılığıyla yapılabilir `on` . Herhangi bir sayıda ileti adını dinleyebilmeniz gerekir. Ayrıca, yazarın adı ve alınan iletinin içeriği gibi parametreleri iletiye geçirmek da mümkündür. İstemci bir ileti aldıktan sonra `div` yazarın adı ve onun özniteliğinde ileti içeriğiyle yeni bir öğe oluşturulur `innerHTML` . Yeni ileti, `div` iletileri görüntüleyen Main öğesine eklenir.
 
 1. Artık istemci bir ileti aldığına göre, ileti gönderecek şekilde yapılandırın. Vurgulanan kodu *src/index. TS* dosyasına ekleyin:
 

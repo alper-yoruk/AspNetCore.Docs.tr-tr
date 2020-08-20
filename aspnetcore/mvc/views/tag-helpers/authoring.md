@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/authoring
-ms.openlocfilehash: d40b37a4ca8acf57b662124597a8ebc3b90bffd2
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: c1891b8093c5a4c1599cd3c4ed4e5e60e2fd13e8
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018175"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629008"
 ---
 # <a name="author-tag-helpers-in-aspnet-core"></a>ASP.NET Core etiket yardımcıları yazma
 
@@ -79,7 +80,7 @@ Diğer bir deyişle, bu e-posta bağlantısını yapan bir bağlantı etikettir.
 
    [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopyEmail.cshtml?highlight=2,3)]
 
-   Yukarıdaki kod, derlemeizdeki tüm etiket yardımcılarını belirtmek için joker karakter sözdizimini kullanır. Sonraki ilk dize, `@addTagHelper` yüklenecek etiket yardımcısını (tüm etiket yardımcıları için "*" kullanın) ve ikinci dize olan "Authoringtaghelmakacıları", etiket Yardımcısı 'nın bulunduğu derlemeyi belirtir. Ayrıca, ikinci satırın joker karakter söz dizimini kullanarak ASP.NET Core MVC etiket yardımcılarına getirdiğine unutmayın (Bu yardımcılar [etiket yardımcılarına giriş](intro.md)bölümünde ele alınmıştır.) `@addTagHelper`Etiket yardımcısını görünüm için kullanılabilir hale getiren yönergedir Razor . Alternatif olarak, aşağıda gösterildiği gibi bir etiket yardımcısından tam nitelikli adı (FQN) sağlayabilirsiniz:
+   Yukarıdaki kod, derlemeizdeki tüm etiket yardımcılarını belirtmek için joker karakter sözdizimini kullanır. Sonraki ilk dize, `@addTagHelper` yüklenecek etiket yardımcısını (tüm etiket yardımcıları için "*" kullanın) ve ikinci dize olan "Authoringtaghelmakacıları", etiket Yardımcısı 'nın bulunduğu derlemeyi belirtir. Ayrıca, ikinci satırın joker karakter söz dizimini kullanarak ASP.NET Core MVC etiket yardımcılarına getirdiğine unutmayın (Bu yardımcılar [etiket yardımcılarına giriş](intro.md)bölümünde ele alınmıştır.) `@addTagHelper` Etiket yardımcısını görünüm için kullanılabilir hale getiren yönergedir Razor . Alternatif olarak, aşağıda gösterildiği gibi bir etiket yardımcısından tam nitelikli adı (FQN) sağlayabilirsiniz:
 
 ```csharp
 @using AuthoringTagHelpers
@@ -259,7 +260,7 @@ Koşul etiketi Yardımcısı, doğru bir değer geçirildiğinde çıktıyı iş
 
    [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Controllers/HomeController.cs?range=9-18)]
 
-1. Uygulamayı çalıştırın ve giriş sayfasına gidin. Koşullu içindeki biçimlendirme `div` işlenmez. URL 'ye sorgu dizesi ekleyin `?approved=true` (örneğin, `http://localhost:1235/Home/Index?approved=true` ). `approved`true olarak ayarlanır ve koşullu biçimlendirme görüntülenir.
+1. Uygulamayı çalıştırın ve giriş sayfasına gidin. Koşullu içindeki biçimlendirme `div` işlenmez. URL 'ye sorgu dizesi ekleyin `?approved=true` (örneğin, `http://localhost:1235/Home/Index?approved=true` ). `approved` true olarak ayarlanır ve koşullu biçimlendirme görüntülenir.
 
 > [!NOTE]
 > Kalın etiket Yardımcısı ile yaptığınız gibi bir dize belirtmek yerine, hedeflenecek özniteliği belirtmek için [NameOf](/dotnet/csharp/language-reference/keywords/nameof) işlecini kullanın:

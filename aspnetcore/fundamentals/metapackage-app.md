@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 09/24/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/metapackage-app
-ms.openlocfilehash: 182d167a1848492846a04c938749a6de30bce377
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: d9753a43bdc47b467dcf781c97069edfaa693a8f
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017070"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630516"
 ---
 # <a name="microsoftaspnetcoreapp-for-aspnet-core"></a>ASP.NET Core için Microsoft. AspNetCore. app
 
 ::: moniker range=">= aspnetcore-3.0"
 
- ASP.NET Core paylaşılan Framework ( `Microsoft.AspNetCore.App` ), Microsoft tarafından geliştirilen ve desteklenen derlemeler içerir. `Microsoft.AspNetCore.App`, [.NET Core 3,0 veya sonraki BIR SDK](https://dotnet.microsoft.com/download/dotnet-core/3.0) yüklendiğinde yüklenir. *Paylaşılan çerçeve* , makinede yüklü olan derlemeler (*. dll* dosyaları) kümesidir ve bir çalışma zamanı bileşeni ve hedefleme paketi içerir. Daha fazla bilgi için bkz. [paylaşılan çerçeve](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/).
+ ASP.NET Core paylaşılan Framework ( `Microsoft.AspNetCore.App` ), Microsoft tarafından geliştirilen ve desteklenen derlemeler içerir. `Microsoft.AspNetCore.App` , [.NET Core 3,0 veya sonraki BIR SDK](https://dotnet.microsoft.com/download/dotnet-core/3.0) yüklendiğinde yüklenir. *Paylaşılan çerçeve* , makinede yüklü olan derlemeler (*. dll* dosyaları) kümesidir ve bir çalışma zamanı bileşeni ve hedefleme paketi içerir. Daha fazla bilgi için bkz. [paylaşılan çerçeve](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/).
 
 * SDK 'yı hedefleyen projeler `Microsoft.NET.Sdk.Web` çerçeveye dolaylı olarak başvurur `Microsoft.AspNetCore.App` .
 
@@ -67,7 +68,7 @@ ASP.NET Core 2. x ve Entity Framework Core 2. x özelliklerinin tümü `Microsof
 
 * İçindeki bir pakette geçişli (doğrudan) bağımlılığı olan bir paket varsa `Microsoft.AspNetCore.App` ve bu sürüm numaraları farklıysa, NuGet bir hata oluşturur.
 * Uygulamanıza eklenen diğer paketler, ' de yer alan paketlerin sürümünü değiştiremez `Microsoft.AspNetCore.App` .
-* Sürüm tutarlılığı, güvenilir bir deneyim sağlar. `Microsoft.AspNetCore.App`, ilişkili bitlerin test edilmemiş sürüm birleşimlerinin aynı uygulamada birlikte kullanılmaları önleyecek şekilde tasarlandı.
+* Sürüm tutarlılığı, güvenilir bir deneyim sağlar. `Microsoft.AspNetCore.App` , ilişkili bitlerin test edilmemiş sürüm birleşimlerinin aynı uygulamada birlikte kullanılmaları önleyecek şekilde tasarlandı.
 
 Metapackage kullanan uygulamalar `Microsoft.AspNetCore.App` ASP.NET Core paylaşılan çerçeveden otomatik olarak yararlanır. `Microsoft.AspNetCore.App`Metapackage kullandığınızda başvurulan ASP.NET Core NuGet paketlerinden **hiçbir** varlık, &mdash; ASP.NET Core paylaşılan Framework 'ün bu varlıkları içerdiği uygulamayla birlikte dağıtılır. Paylaşılan çerçevede bulunan varlıklar, uygulama başlatma süresini artırmak için önceden derlenmiş. Daha fazla bilgi için bkz. [paylaşılan çerçeve](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/).
 

@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 07/04/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,24 +17,24 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/tools/dotnet-aspnet-codegenerator
-ms.openlocfilehash: 071f2269081e63ad1355547bccb449180c59c997
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 12825c13e1c9de984251b5554833f7194edff8c3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016511"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629944"
 ---
 # <a name="dotnet-aspnet-codegenerator"></a>DotNet ASPNET-CodeGenerator
 
 Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-`dotnet aspnet-codegenerator`-ASP.NET Core scafkatlama altyapısını çalıştırır. `dotnet aspnet-codegenerator`yalnızca komut satırından yapı iskelesi sağlamak için gereklidir, Visual Studio ile scafkatlamayı kullanmak gerekli değildir.
+`dotnet aspnet-codegenerator` -ASP.NET Core scafkatlama altyapısını çalıştırır. `dotnet aspnet-codegenerator` yalnızca komut satırından yapı iskelesi sağlamak için gereklidir, Visual Studio ile scafkatlamayı kullanmak gerekli değildir.
 
 Bu makale [.NET Core 2,1 SDK](https://dotnet.microsoft.com/download/dotnet-core/2.1) ve üzeri için geçerlidir.
 
 ## <a name="installing-aspnet-codegenerator"></a>ASPNET-CodeGenerator yükleniyor
 
-`dotnet-aspnet-codegenerator`yüklenmesi gereken [küresel bir araçtır](/dotnet/core/tools/global-tools) . Aşağıdaki komut aracın en son kararlı sürümünü yüklüyor `dotnet-aspnet-codegenerator` :
+`dotnet-aspnet-codegenerator` yüklenmesi gereken [küresel bir araçtır](/dotnet/core/tools/global-tools) . Aşağıdaki komut aracın en son kararlı sürümünü yüklüyor `dotnet-aspnet-codegenerator` :
 
 ```dotnetcli
 dotnet tool install -g dotnet-aspnet-codegenerator
@@ -66,7 +67,7 @@ dotnet aspnet-codegenerator [-h|--help]
 | ---------- | -------------------------------------------------------------------- |
 | alan       | [Bir alanı dolandırın](xref:mvc/controllers/areas)                      |
 | denetleyici | [Bir denetleyiciyi yapı iskelesi](xref:tutorials/first-mvc-app/adding-model)  |
-| identity   | [İşleyicilerinIdentity](xref:security/authentication/scaffold-identity) |
+| identity   | [İşleyicilerin Identity](xref:security/authentication/scaffold-identity) |
 | razorpage  | [Yapı iskelesi Razor sayfaları](xref:tutorials/razor-pages/model)            |
 | görüntüle       | [Bir görünümü dolandırın](xref:mvc/views/overview)                          |
 
@@ -131,18 +132,18 @@ Yukarıdaki komut aşağıdaki klasörleri oluşturur:
 
 ### <a name="controller-options"></a>Denetleyici Seçenekleri
 
-Aşağıdaki tabloda ve seçenekleri listelenmiştir `aspnet-codegenerator` `controller` `razorpage` :
+Aşağıdaki tabloda ve seçenekleri listelenmiştir  `aspnet-codegenerator` `controller` `razorpage` :
 
 [!INCLUDE [aspnet-codegenerator-args-md.md](~/includes/aspnet-codegenerator-args-md.md)]
 
-Aşağıdaki tabloda aşağıdakiler için benzersiz seçenekler listelenmektedir `aspnet-codegenerator controller` :
+Aşağıdaki tabloda aşağıdakiler için benzersiz seçenekler listelenmektedir  `aspnet-codegenerator controller` :
 
 | Seçenek                         | Açıklama                                                                                               |
 | ------------------------------ | --------------------------------------------------------------------------------------------------------- |
 | --controllerName veya-Name      | Denetleyicinin adı.                                                                                   |
 | --Kullanılan Asyncactions veya-async    | Zaman uyumsuz denetleyici eylemleri oluştur.                                                                        |
 | --noViews veya-NV               | **Hiçbir** görünüm oluşturun.                                                                                    |
-| --restWithNoViews veya-API      | REST stili API ile bir denetleyici oluşturun. `noViews`varsayılır ve tüm görünümle ilgili seçenekler yok sayılır. |
+| --restWithNoViews veya-API      | REST stili API ile bir denetleyici oluşturun. `noViews` varsayılır ve tüm görünümle ilgili seçenekler yok sayılır. |
 | --readWriteActions veya-Actions | Model olmadan okuma/yazma eylemleri ile denetleyici oluşturun.                                              |
 
 `-h`Komutuyla ilgili yardım için anahtarı kullanın `aspnet-codegenerator controller` :
@@ -157,7 +158,7 @@ Bir örneği için bkz. [film modelini yapı iskelesi](xref:tutorials/first-mvc-
 
 <a name="rp"></a>
 
-RazorSayfalar, yeni sayfanın adı ve kullanılacak şablon belirtilerek tek tek iskele alınabilir. Desteklenen şablonlar şunlardır:
+Razor Sayfalar, yeni sayfanın adı ve kullanılacak şablon belirtilerek tek tek iskele alınabilir. Desteklenen şablonlar şunlardır:
 
 * `Empty`
 * `Create`
@@ -180,11 +181,11 @@ Genellikle, şablon ve oluşturulan dosya adı belirtilmez ve aşağıdaki şabl
 * `Details`
 * `List`
 
-Aşağıdaki tabloda ve seçenekleri listelenmiştir `aspnet-codegenerator` `razorpage` `controller` :
+Aşağıdaki tabloda ve seçenekleri listelenmiştir  `aspnet-codegenerator` `razorpage` `controller` :
 
 [!INCLUDE [aspnet-codegenerator-args-md.md](~/includes/aspnet-codegenerator-args-md.md)]
 
-Aşağıdaki tabloda aşağıdakiler için benzersiz seçenekler listelenmektedir `aspnet-codegenerator razorpage` :
+Aşağıdaki tabloda aşağıdakiler için benzersiz seçenekler listelenmektedir  `aspnet-codegenerator razorpage` :
 
 | Seçenek                        | Açıklama                                                                           |
 | ----------------------------- | ------------------------------------------------------------------------------------- |

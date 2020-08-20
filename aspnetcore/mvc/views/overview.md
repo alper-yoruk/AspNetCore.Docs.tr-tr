@@ -5,6 +5,7 @@ description: Görünümlerin ASP.NET Core MVC 'de uygulamanın veri sunumunu ve 
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/overview
-ms.openlocfilehash: 8630df0ad8ea556c6edf0ab251b3c86493f751e2
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 6afd69414f2dc0158f724c6e6f7b3a3e51c1e92c
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020879"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630685"
 ---
 # <a name="views-in-aspnet-core-mvc"></a>ASP.NET Core MVC 'deki görünümler
 
@@ -28,7 +29,7 @@ ms.locfileid: "88020879"
 
 Bu belgede ASP.NET Core MVC uygulamalarında kullanılan görünümler açıklanmaktadır. Sayfalar hakkında bilgi için Razor bkz. [ Razor sayfalara giriş](xref:razor-pages/index).
 
-Model-View-Controller (MVC) modelinde, *Görünüm* uygulamanın veri sunumunu ve kullanıcı etkileşimini işler. Görünüm, gömülü [ Razor biçimlendirme](xref:mvc/views/razor)içeren bir HTML şablonudur. Razorbiçimlendirme, istemciye gönderilen bir Web sayfası oluşturmak için HTML işaretlemesi ile etkileşen koddur.
+Model-View-Controller (MVC) modelinde, *Görünüm* uygulamanın veri sunumunu ve kullanıcı etkileşimini işler. Görünüm, gömülü [ Razor biçimlendirme](xref:mvc/views/razor)içeren bir HTML şablonudur. Razor biçimlendirme, istemciye gönderilen bir Web sayfası oluşturmak için HTML işaretlemesi ile etkileşen koddur.
 
 ASP.NET Core MVC 'de, görünümler, biçimlendirme içinde [C# programlama dilini](/dotnet/csharp/) kullanan *. cshtml* dosyalarıdır Razor . Genellikle, görünüm dosyaları uygulama [denetleyicilerinin](xref:mvc/controllers/actions)her biri için adlandırılmış klasörler halinde gruplandırılır. Klasörler, uygulamanın kökündeki bir *Görünümler* klasöründe depolanır:
 
@@ -214,13 +215,13 @@ Türü kesin belirlenmiş görünümlere ek olarak, görünümler, verilerin bir
 
 Bu koleksiyona, `ViewData` denetleyiciler ve görünümlerde bulunan ya da `ViewBag` özellikleri aracılığıyla başvurulabilir. `ViewData`Özelliği, Zayıf yazılmış nesnelerin bir sözlüğüdür. `ViewBag`Özelliği, `ViewData` temel alınan koleksiyon için dinamik özellikler sağlayan etrafındaki bir sarmalayıcıdır `ViewData` . Note: anahtar aramaları hem hem de için büyük/küçük harfe duyarsızdır `ViewData` `ViewBag` .
 
-`ViewData`ve `ViewBag` , çalışma zamanında dinamik olarak çözümlenir. Derleme zamanı tür denetimi sunmadığı için, her ikisi de bir ViewModel kullanmaktan daha fazla hataya açıktır. Bu nedenle, bazı geliştiriciler ve için en az bir süre önce ve hiç kullanmayın `ViewData` `ViewBag` .
+`ViewData` ve `ViewBag` , çalışma zamanında dinamik olarak çözümlenir. Derleme zamanı tür denetimi sunmadığı için, her ikisi de bir ViewModel kullanmaktan daha fazla hataya açıktır. Bu nedenle, bazı geliştiriciler ve için en az bir süre önce ve hiç kullanmayın `ViewData` `ViewBag` .
 
 <a name="VD"></a>
 
 **ViewData**
 
-`ViewData`Anahtarlar aracılığıyla erişilen bir [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) nesnesidir `string` . Dize verileri doğrudan bir dönüştürme gerektirmeden depolanabilir ve kullanılabilir, ancak diğer `ViewData` nesne değerlerini ayıkladığınızda belirli türlere atamalısınız. `ViewData`Verileri denetleyicilerden görünümlere ve görünümler arasında ( [kısmi görünümler](xref:mvc/views/partial) ve [düzenler](xref:mvc/views/layout)dahil) geçirmek için kullanabilirsiniz.
+`ViewData` Anahtarlar aracılığıyla erişilen bir [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) nesnesidir `string` . Dize verileri doğrudan bir dönüştürme gerektirmeden depolanabilir ve kullanılabilir, ancak diğer `ViewData` nesne değerlerini ayıkladığınızda belirli türlere atamalısınız. `ViewData`Verileri denetleyicilerden görünümlere ve görünümler arasında ( [kısmi görünümler](xref:mvc/views/partial) ve [düzenler](xref:mvc/views/layout)dahil) geçirmek için kullanabilirsiniz.
 
 Aşağıda bir selamlama ve bir adresin değerlerini bir eylemde kullanarak ayarlayan bir örnek verilmiştir `ViewData` :
 
@@ -298,7 +299,7 @@ Mizanpajda, başlık ViewData sözlüğünden okundu:
 
 `ViewBag`*içinde Razor kullanılamaz Sayfalar.*
 
-`ViewBag`, içinde depolanan nesnelere dinamik erişim sağlayan bir [Dynamicviewdata](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata) nesnesidir `ViewData` . `ViewBag`atama gerektirmediğinden, ile çalışmak daha uygun olabilir. Aşağıdaki örnek, `ViewBag` Yukarıdaki ile aynı sonuçla nasıl kullanılacağını gösterir `ViewData` :
+`ViewBag` , içinde depolanan nesnelere dinamik erişim sağlayan bir [Dynamicviewdata](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.internal.dynamicviewdata) nesnesidir `ViewData` . `ViewBag` atama gerektirmediğinden, ile çalışmak daha uygun olabilir. Aşağıdaki örnek, `ViewBag` Yukarıdaki ile aynı sonuçla nasıl kullanılacağını gösterir `ViewData` :
 
 ```csharp
 public IActionResult SomeAction()

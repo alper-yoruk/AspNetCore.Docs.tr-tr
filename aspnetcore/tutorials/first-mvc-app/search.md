@@ -5,6 +5,7 @@ description: ASP.NET Core MVC üzerinde öğretici serisinin Bölüm 7.
 ms.author: riande
 ms.date: 12/13/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/search
-ms.openlocfilehash: 8df331ec6a6170255f357937adb8fbb6ccb59aaa
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: fcb96300c08d9f985cbfe4d3bf055036be7d2eb0
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021321"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629580"
 ---
 # <a name="part-7-add-search-to-an-aspnet-core-mvc-app"></a>Bölüm 7, ASP.NET Core MVC uygulamasına arama ekleme
 
@@ -154,7 +155,7 @@ Yukarıdaki kodda, `DisplayNameFor` HTML Yardımcısı, `Title` görünen adı b
 
 Türe göre, film başlığına göre ve her ikisine birden arayarak uygulamayı test edin:
 
-![Sonuçları gösteren tarayıcı penceresihttps://localhost:5001/Movies?MovieGenre=Comedy&SearchString=2](~/tutorials/first-mvc-app/search/_static/s2.png)
+![Sonuçları gösteren tarayıcı penceresi https://localhost:5001/Movies?MovieGenre=Comedy&SearchString=2](~/tutorials/first-mvc-app/search/_static/s2.png)
 
 > [!div class="step-by-step"]
 > [Önceki](controller-methods-views.md) 

@@ -5,6 +5,7 @@ description: ASP.NET Core iki öğeli kimlik doğrulamasıyla çalışan TOTP Au
 ms.author: riande
 ms.date: 08/14/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-enable-qrcodes
-ms.openlocfilehash: 4ccfd83c273f7179ac26b075eb33f138e724b967
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e61aa925262fc9fe25c7bb2d37958cfaa308aeaf
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019566"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630802"
 ---
 # <a name="enable-qr-code-generation-for-totp-authenticator-apps-in-aspnet-core"></a>ASP.NET Core 'daki TOTP Authenticator uygulamaları için QR kodu oluşturmayı etkinleştirme
 
@@ -128,7 +129,7 @@ QR kod kitaplığı 'nı tercih ettiğiniz kitaplıkla değiştirebilirsiniz. HT
 
 QR kodu için doğru şekilde biçimlendirilen URL şu şekilde kullanılabilir:
 
-* `AuthenticatorUri`Model özelliği.
+* `AuthenticatorUri` Model özelliği.
 * `data-url``qrCodeData`öğesinde özelliği.
 
 ## <a name="totp-client-and-server-time-skew"></a>TOTP istemci ve sunucu saati eğriltme

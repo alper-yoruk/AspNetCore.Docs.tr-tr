@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core 'de günlüğe kaydetme ve tanılamaSignalR
+title: ASP.NET Core 'de günlüğe kaydetme ve tanılama SignalR
 author: anurse
 description: ASP.NET Core uygulamanızdan tanılamayı nasıl toplayacağınızı öğrenin SignalR .
 monikerRange: '>= aspnetcore-2.1'
@@ -7,6 +7,7 @@ ms.author: anurse
 ms.custom: devx-track-csharp, signalr
 ms.date: 06/12/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: 922b2ca0aa7933e1010db7ca319631766ffbf753
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: 649398a3868117b2e7f3358aa25544c99cc625b3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130541"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631348"
 ---
-# <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a>ASP.NET Core 'de günlüğe kaydetme ve tanılamaSignalR
+# <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a>ASP.NET Core 'de günlüğe kaydetme ve tanılama SignalR
 
 , [Andrew Stanton-nurte](https://twitter.com/anurse)
 
@@ -37,7 +38,7 @@ Bu makalede, SignalR sorunları gidermeye yardımcı olmak için ASP.NET Core uy
 
 SignalRASP.NET Core bir parçası olduğundan, ASP.NET Core günlük sistemini kullanır. Varsayılan yapılandırmada SignalR çok az bilgi günlüğe kaydedilir, ancak bu yapılandırılabilir. ASP.NET Core günlüğü yapılandırma hakkında ayrıntılar için [ASP.NET Core günlüğe kaydetme](xref:fundamentals/logging/index#configuration) hakkındaki belgelere bakın.
 
-SignalRİki Günlükçü kategorisi kullanır:
+SignalR İki Günlükçü kategorisi kullanır:
 
 * `Microsoft.AspNetCore.SignalR`: Merkez protokolleriyle ilgili Günlükler için, hub 'Ları etkinleştirme, yöntemleri çağırma ve hub ile ilgili diğer etkinlikler için.
 * `Microsoft.AspNetCore.Http.Connections`: WebSockets, uzun yoklama, sunucu tarafından gönderilen olaylar ve alt düzey altyapı gibi aktarımlarıyla ilgili Günlükler için SignalR .
@@ -65,7 +66,7 @@ Sunucu tarafı günlüklerine erişme, çalıştırdığınız ortama bağlıdı
 
 ### <a name="as-a-console-app-outside-iis"></a>IIS dışında bir konsol uygulaması olarak
 
-Konsol uygulamasında çalıştırıyorsanız, [konsol günlükçüsü](xref:fundamentals/logging/index#console) varsayılan olarak etkinleştirilmelidir. SignalRGünlükler konsolunda görünür.
+Konsol uygulamasında çalıştırıyorsanız, [konsol günlükçüsü](xref:fundamentals/logging/index#console) varsayılan olarak etkinleştirilmelidir. SignalR Günlükler konsolunda görünür.
 
 ### <a name="within-iis-express-from-visual-studio"></a>Visual Studio 'dan IIS Express içinde
 
@@ -131,7 +132,7 @@ Günlükleri, Visual Studio 'daki **Çıkış** penceresine gitmek için de yap�
 
 ### <a name="other-logging-providers"></a>Diğer günlüğe kaydetme sağlayıcıları
 
-SignalRSerilog, seq, NLog gibi diğer günlük sağlayıcılarını veya ile tümleştirilen diğer bir günlük sistemini destekler `Microsoft.Extensions.Logging` . Günlük sisteminiz bir sağlıyorsa `ILoggerProvider` , şunu kullanarak kaydedebilirsiniz `AddProvider` :
+SignalR Serilog, seq, NLog gibi diğer günlük sağlayıcılarını veya ile tümleştirilen diğer bir günlük sistemini destekler `Microsoft.Extensions.Logging` . Günlük sisteminiz bir sağlıyorsa `ILoggerProvider` , şunu kullanarak kaydedebilirsiniz `AddProvider` :
 
 [!code-csharp[](diagnostics/net-client-custom-log.cs?highlight=6)]
 
@@ -220,9 +221,9 @@ Tanılama dosyalarını, bir uzantıya sahip olacak şekilde yeniden adlandırar
 
 Ölçümler, zaman aralıklarıyla veri ölçümlerinin bir gösterimidir. Örneğin, saniye başına istek. Ölçüm verileri, yüksek düzeyde bir uygulamanın durumunun gözlemde yapılmasına izin verir. .NET gRPC ölçümleri kullanılarak dağıtılır <xref:System.Diagnostics.Tracing.EventCounter> .
 
-### <a name="no-locsignalr-server-metrics"></a>SignalRSunucu ölçümleri
+### <a name="no-locsignalr-server-metrics"></a>SignalR Sunucu ölçümleri
 
-SignalRSunucu ölçümleri <xref:Microsoft.AspNetCore.Http.Connections> olay kaynağında raporlanır.
+SignalR Sunucu ölçümleri <xref:Microsoft.AspNetCore.Http.Connections> olay kaynağında raporlanır.
 
 | Ad                    | Açıklama                 |
 |-------------------------|-----------------------------|

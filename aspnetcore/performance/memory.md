@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/memory
-ms.openlocfilehash: 09df67657c9b6e4e59d6a1379bf801c289028819
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: c409eaaf07109d363581ee7d61dc76521d6818d0
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020944"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630672"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>ASP.NET Core 'de bellek yönetimi ve çöp toplama (GC)
 
@@ -307,7 +308,7 @@ Deneyimli .NET geliştiricileri <xref:System.IDisposable.Dispose*> , uygulayan n
 
 `HttpClient`uygular `IDisposable` , ancak her **not** çağrıdan çıkarılmamalıdır. Bunun yerine yeniden kullanılmalıdır `HttpClient` .
 
-Aşağıdaki uç nokta her istekte yeni bir örnek oluşturur ve atar `HttpClient` :
+Aşağıdaki uç nokta her istekte yeni bir örnek oluşturur ve atar  `HttpClient` :
 
 ```csharp
 [HttpGet("httpclient1")]
@@ -402,7 +403,7 @@ Nesnenin elden çıkarılmasını ayarlamak için:
 * Havuza alınmış diziyi bir atılabilir nesnesinde yalıtma.
 * Havuza alınmış nesneyi [HttpContext. Response. RegisterForDispose](xref:Microsoft.AspNetCore.Http.HttpResponse.RegisterForDispose*)ile kaydedin.
 
-`RegisterForDispose`, `Dispose` yalnızca http isteği tamamlandığında serbest bırakılacak şekilde hedef nesneye çağrı yapılır.
+`RegisterForDispose` , `Dispose` yalnızca http isteği tamamlandığında serbest bırakılacak şekilde hedef nesneye çağrı yapılır.
 
 ```csharp
 private static ArrayPool<byte> _arrayPool = ArrayPool<byte>.Create();

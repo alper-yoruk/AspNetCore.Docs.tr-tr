@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/concurrency
-ms.openlocfilehash: bb29001e30578e0992e578c2f98cda82c5dcf185
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e03711d970c83c2b7d6cc76039cb0d556a751018
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018669"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88628918"
 ---
 # <a name="part-8-no-locrazor-pages-with-ef-core-in-aspnet-core---concurrency"></a>8. bölüm, Razor ASP.NET Core EF Core olan sayfalar-eşzamanlılık
 
@@ -267,7 +268,7 @@ Aşağıdaki kodla *Pages\Departments\Edit.cshtml.cs* güncelleştirin:
 Vurgulanan kodda:
 
 * İçindeki değeri, `Department.RowVersion` ilk olarak düzenleme sayfasına yönelik GET isteğine getirilen varlıkta olduğu şeydir. Değer, `OnPost` Razor düzenlenecek varlığı görüntüleyen sayfadaki bir gizli alanla yöntemine sağlanır. Gizli alan değeri `Department.RowVersion` model cildi tarafından öğesine kopyalanır.
-* `OriginalValue`WHERE yan tümcesinde EF Core kullanılacak şeydir. Vurgulanan kod satırından önce, `OriginalValue` Bu yöntemde çağrıldığında veritabanında bulunan değeri, `FirstOrDefaultAsync` düzenleme sayfasında görüntülendiklerden farklı olabilir.
+* `OriginalValue` WHERE yan tümcesinde EF Core kullanılacak şeydir. Vurgulanan kod satırından önce, `OriginalValue` Bu yöntemde çağrıldığında veritabanında bulunan değeri, `FirstOrDefaultAsync` düzenleme sayfasında görüntülendiklerden farklı olabilir.
 * Vurgulanan kod, EF Core `RowVersion` `Department` SQL Update ifadesinin WHERE yan tümcesinde görüntülenen varlıktaki özgün değeri kullandığından emin olur.
 
 Bir eşzamanlılık hatası oluştuğunda, aşağıdaki vurgulanmış kod istemci değerlerini (Bu yönteme gönderilen değerler) ve veritabanı değerlerini alır.
@@ -293,7 +294,7 @@ Aşağıdaki vurgulanan kod, `RowVersion` değeri veritabanından alınan yeni d
 Yukarıdaki kod:
 
 * `page`İçindeki yönergesini ' a `@page` güncelleştirir `@page "{id:int}"` .
-* Gizli satır sürümü ekler. `RowVersion`, geri gönderme, değeri bağlayan şekilde eklenmelidir.
+* Gizli satır sürümü ekler. `RowVersion` , geri gönderme, değeri bağlayan şekilde eklenmelidir.
 * `RowVersion`Hata ayıklama amacıyla son baytını görüntüler.
 * `ViewData`Türü kesin belirlenmiş olan ile değiştirilir `InstructorNameSL` .
 
@@ -331,11 +332,11 @@ Yeniden **Kaydet** ' e tıklayın. İkinci tarayıcı sekmesine girdiğiniz değ
 
 [!code-csharp[](intro/samples/cu30/Pages/Departments/Delete.cshtml.cs)]
 
-Sil sayfası, varlık alındıktan sonra değiştirildiğinde eşzamanlılık çakışmalarını algılar. `Department.RowVersion`, varlık getirilen satır sürümüdür. EF Core, SQL DELETE komutunu oluşturduğunda, içeren bir WHERE yan tümcesi içerir `RowVersion` . SQL DELETE komutu sıfır satırla etkileniyorsa:
+Sil sayfası, varlık alındıktan sonra değiştirildiğinde eşzamanlılık çakışmalarını algılar. `Department.RowVersion` , varlık getirilen satır sürümüdür. EF Core, SQL DELETE komutunu oluşturduğunda, içeren bir WHERE yan tümcesi içerir `RowVersion` . SQL DELETE komutu sıfır satırla etkileniyorsa:
 
 * `RowVersion`SQL DELETE komutunda bulunan, `RowVersion` veritabanında eşleşmiyor.
 * Bir DbUpdateConcurrencyException özel durumu oluşturulur.
-* `OnGetAsync`ile çağırılır `concurrencyError` .
+* `OnGetAsync` ile çağırılır `concurrencyError` .
 
 ### <a name="update-the-delete-page"></a>Silme sayfasını Güncelleştir
 
@@ -349,7 +350,7 @@ Yukarıdaki kod aşağıdaki değişiklikleri yapar:
 * Bir hata iletisi ekler.
 * FirstMidName öğesini, **yönetici** alanındaki FullName ile değiştirir.
 * `RowVersion`Son baytın görüntüleneceği değişiklikler.
-* Gizli satır sürümü ekler. `RowVersion`, geri gönderme, değeri bağlayan şekilde eklenmelidir.
+* Gizli satır sürümü ekler. `RowVersion` , geri gönderme, değeri bağlayan şekilde eklenmelidir.
 
 ### <a name="test-concurrency-conflicts"></a>Eşzamanlılık çakışmalarını test et
 
@@ -462,7 +463,7 @@ Eşzamanlılık çakışmalarını algılamak için, modele bir [ROWVERSION](/sq
 
 DB, `rowversion` satır her güncelleştirildiği zaman arttırılan sıralı bir sayı üretir. `Update`Or `Delete` komutunda, `Where` yan tümcesi getirilen değerini içerir `rowversion` . Güncelleştirilmekte olan satır değiştiyse:
 
-* `rowversion`getirilen değerle eşleşmez.
+* `rowversion` getirilen değerle eşleşmez.
 * `Update`Yan tümcesi getirilen ' i içerdiğinden veya `Delete` komutları bir satır bulmayın `Where` `rowversion` .
 * Bir `DbUpdateConcurrencyException` oluşturulur.
 
@@ -564,7 +565,7 @@ Bir eşzamanlılık sorunu tespit etmek için [OriginalValue](/dotnet/api/micros
 
 [!code-csharp[](intro/samples/cu/Pages/Departments/Edit.cshtml.cs?name=snippet_rv&highlight=24-999)]
 
-Önceki kodda, `Department.RowVersion` varlık getirilirken değeridir. `OriginalValue`Bu yöntemde çağrıldığında, DB 'deki değerdir `FirstOrDefaultAsync` .
+Önceki kodda, `Department.RowVersion` varlık getirilirken değeridir. `OriginalValue` Bu yöntemde çağrıldığında, DB 'deki değerdir `FirstOrDefaultAsync` .
 
 Aşağıdaki kod, istemci değerlerini (Bu yönteme gönderilen değerler) ve DB değerlerini alır:
 
@@ -589,7 +590,7 @@ Aşağıdaki vurgulanan kod, `RowVersion` değeri, veritabanından alınan yeni 
 Yukarıdaki biçimlendirme:
 
 * `page`İçindeki yönergesini ' a `@page` güncelleştirir `@page "{id:int}"` .
-* Gizli satır sürümü ekler. `RowVersion`, geri gönder değeri bağlayan için eklenmelidir.
+* Gizli satır sürümü ekler. `RowVersion` , geri gönder değeri bağlayan için eklenmelidir.
 * `RowVersion`Hata ayıklama amacıyla son baytını görüntüler.
 * `ViewData`Türü kesin belirlenmiş olan ile değiştirilir `InstructorNameSL` .
 
@@ -629,11 +630,11 @@ Silme sayfası modelini aşağıdaki kodla güncelleştirin:
 
 [!code-csharp[](intro/samples/cu/Pages/Departments/Delete.cshtml.cs)]
 
-Sil sayfası, varlık alındıktan sonra değiştirildiğinde eşzamanlılık çakışmalarını algılar. `Department.RowVersion`, varlık getirilen satır sürümüdür. EF Core, SQL DELETE komutunu oluşturduğunda, içeren bir WHERE yan tümcesi içerir `RowVersion` . SQL DELETE komutu sıfır satırla etkileniyorsa:
+Sil sayfası, varlık alındıktan sonra değiştirildiğinde eşzamanlılık çakışmalarını algılar. `Department.RowVersion` , varlık getirilen satır sürümüdür. EF Core, SQL DELETE komutunu oluşturduğunda, içeren bir WHERE yan tümcesi içerir `RowVersion` . SQL DELETE komutu sıfır satırla etkileniyorsa:
 
 * `RowVersion`SQL DELETE komutunda bulunan, DB ile eşleşmiyor `RowVersion` .
 * Bir DbUpdateConcurrencyException özel durumu oluşturulur.
-* `OnGetAsync`ile çağırılır `concurrencyError` .
+* `OnGetAsync` ile çağırılır `concurrencyError` .
 
 ### <a name="update-the-delete-page"></a>Silme sayfasını Güncelleştir
 
@@ -647,7 +648,7 @@ Yukarıdaki kod aşağıdaki değişiklikleri yapar:
 * Bir hata iletisi ekler.
 * FirstMidName öğesini, **yönetici** alanındaki FullName ile değiştirir.
 * `RowVersion`Son baytın görüntüleneceği değişiklikler.
-* Gizli satır sürümü ekler. `RowVersion`, geri gönder değeri bağlayan için eklenmelidir.
+* Gizli satır sürümü ekler. `RowVersion` , geri gönder değeri bağlayan için eklenmelidir.
 
 ### <a name="test-concurrency-conflicts-with-the-delete-page"></a>Silme sayfasıyla eşzamanlılık çakışmalarını test etme
 

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 5/1/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: 4404a5513d9dc989e50c904f3e7863de59991939
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 09535f41d15b90fa5e50eb1f22f6aecef0530f0c
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022335"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629567"
 ---
 # <a name="scaffold-no-locidentity-in-aspnet-core-projects"></a>ASP.NET Core projelerinde yapı iskelesi Identity
 
@@ -30,7 +31,7 @@ Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core bir [ Razor sınıf kitaplığı](xref:razor-pages/ui-class)olarak [ASP.NET Core Identity ](xref:security/authentication/identity) sağlar. Dahil edilen uygulamalar, Identity Identity Razor sınıf kitaplığı 'nda (RCL) bulunan kaynak kodu seçmeli olarak eklemek için desteği uygulayabilir. Kodu değiştirebilmeniz ve davranışı değiştirebilmek için kaynak kodu oluşturmak isteyebilirsiniz. Örneğin, kayıt sırasında kullanılan kodu oluşturmak için desteği ' ı söyleyebilirsiniz. Oluşturulan kod RCL 'deki aynı koda göre önceliklidir Identity . Kullanıcı arabirimine tam denetim sağlamak ve varsayılan RCL 'yi kullanmak için, [tam Identity UI kaynağı oluşturma](#full)bölümüne bakın.
+ASP.NET Core [ASP.NET Core Identity](xref:security/authentication/identity) bir [ Razor sınıf kitaplığı](xref:razor-pages/ui-class)olarak sunulur. Dahil edilen uygulamalar, Identity Identity Razor sınıf kitaplığı 'nda (RCL) bulunan kaynak kodu seçmeli olarak eklemek için desteği uygulayabilir. Kodu değiştirebilmeniz ve davranışı değiştirebilmek için kaynak kodu oluşturmak isteyebilirsiniz. Örneğin, kayıt sırasında kullanılan kodu oluşturmak için desteği ' ı söyleyebilirsiniz. Oluşturulan kod RCL 'deki aynı koda göre önceliklidir Identity . Kullanıcı arabirimine tam denetim sağlamak ve varsayılan RCL 'yi kullanmak için, [tam Identity UI kaynağı oluşturma](#full)bölümüne bakın.
 
 Kimlik **doğrulaması içermeyen uygulamalar** , RCL paketini eklemek için desteği uygulayabilir Identity . Oluşturulacak kodu seçme seçeneğiniz vardır Identity .
 
@@ -105,7 +106,7 @@ Identity, *alanlarında/ Identity / Identity HostingStartup.cs*' de yapılandır
 
 <a name="useauthentication"></a>
 
-### <a name="enable-authentication"></a>Kimlik doğrulamasını etkinleştir
+### <a name="enable-authentication"></a>Kimlik doğrulamayı etkinleştir
 
 `Startup`Sınıfını aşağıdakine benzer kodla güncelleştirin:
 
@@ -197,7 +198,7 @@ Identity, *alanlarında/ Identity / Identity HostingStartup.cs*' de yapılandır
 Belirteçler bileşenlere geçirilebilir:
 
 * Kimlik doğrulama belirteçleri sağlandığında ve kimlik doğrulamasına kaydedildiğinde cookie , bunlar bileşenlere geçirilebilir.
-* Razorbileşenler doğrudan kullanamaz `HttpContext` . bu nedenle, tarihinde oturum kapatma uç noktasına gönderi için bir [istek önleme zaman AŞıMı (XSRF) belirteci](xref:security/anti-request-forgery) elde etmenin bir yolu yoktur Identity `/Identity/Account/Logout` . Bir XSRF belirteci bileşenlere geçirilebilir.
+* Razor bileşenler doğrudan kullanamaz `HttpContext` . bu nedenle, tarihinde oturum kapatma uç noktasına gönderi için bir [istek önleme zaman AŞıMı (XSRF) belirteci](xref:security/anti-request-forgery) elde etmenin bir yolu yoktur Identity `/Identity/Account/Logout` . Bir XSRF belirteci bileşenlere geçirilebilir.
 
 Daha fazla bilgi için bkz. <xref:blazor/security/server/additional-scenarios#pass-tokens-to-a-blazor-server-app>.
 
@@ -228,7 +229,7 @@ TokenProvider.XsrfToken = InitialState.XsrfToken;
 
 `TokenProvider`Konusunda gösterilen hizmet, `LoginDisplay` bileşeninde aşağıdaki [Düzen ve kimlik doğrulama akışı değişiklikleri](#layout-and-authentication-flow-changes) bölümünde kullanılır.
 
-### <a name="enable-authentication"></a>Kimlik doğrulamasını etkinleştir
+### <a name="enable-authentication"></a>Kimlik doğrulamayı etkinleştir
 
 `Startup`Sınıfında:
 
@@ -490,7 +491,7 @@ Statik Identity varlıkların Web köküne yayımlanmasını engellemek için bk
 
 ::: moniker range="< aspnetcore-3.0"
 
-ASP.NET Core 2,1 ve üzeri bir [ Razor sınıf kitaplığı](xref:razor-pages/ui-class)olarak [ASP.NET Core Identity ](xref:security/authentication/identity) sağlar. Dahil edilen uygulamalar, Identity Identity Razor sınıf kitaplığı 'nda (RCL) bulunan kaynak kodu seçmeli olarak eklemek için desteği uygulayabilir. Kodu değiştirebilmeniz ve davranışı değiştirebilmek için kaynak kodu oluşturmak isteyebilirsiniz. Örneğin, kayıt sırasında kullanılan kodu oluşturmak için desteği ' ı söyleyebilirsiniz. Oluşturulan kod RCL 'deki aynı koda göre önceliklidir Identity . Kullanıcı arabirimine tam denetim sağlamak ve varsayılan RCL 'yi kullanmak için, [tam KIMLIK UI kaynağı oluşturma](#full)bölümüne bakın.
+ASP.NET Core 2,1 ve üzeri [ASP.NET Core Identity](xref:security/authentication/identity) bir [ Razor sınıf kitaplığı](xref:razor-pages/ui-class)olarak sunulmaktadır. Dahil edilen uygulamalar, Identity Identity Razor sınıf kitaplığı 'nda (RCL) bulunan kaynak kodu seçmeli olarak eklemek için desteği uygulayabilir. Kodu değiştirebilmeniz ve davranışı değiştirebilmek için kaynak kodu oluşturmak isteyebilirsiniz. Örneğin, kayıt sırasında kullanılan kodu oluşturmak için desteği ' ı söyleyebilirsiniz. Oluşturulan kod RCL 'deki aynı koda göre önceliklidir Identity . Kullanıcı arabirimine tam denetim sağlamak ve varsayılan RCL 'yi kullanmak için, [tam KIMLIK UI kaynağı oluşturma](#full)bölümüne bakın.
 
 Kimlik **doğrulaması içermeyen uygulamalar** , RCL paketini eklemek için desteği uygulayabilir Identity . Oluşturulacak kodu seçme seçeneğiniz vardır Identity .
 
@@ -546,7 +547,7 @@ Identity, *alanlarında/ Identity / Identity HostingStartup.cs*' de yapılandır
 
 <a name="useauthentication"></a>
 
-### <a name="enable-authentication"></a>Kimlik doğrulamasını etkinleştir
+### <a name="enable-authentication"></a>Kimlik doğrulamayı etkinleştir
 
 `Configure` `Startup` Sınıfının yönteminde, sonrasında [UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) ' ı çağırın `UseStaticFiles` :
 

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/12/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/partial
-ms.openlocfilehash: 826d7cf96d95ee7eb98b0f05a233401a1e3bff33
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 7a370042520adfe5b06784b76acf41a81eb2c72d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020840"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88630633"
 ---
 # <a name="partial-views-in-aspnet-core"></a>ASP.NET Core kısmi görünümler
 
@@ -147,7 +148,7 @@ Bir dosya uzantısı mevcut olduğunda, etiket Yardımcısı kısmi görünümü
 
 Aşağıdaki örnek, uygulama kökünden kısmi bir görünüme başvurur. Bir tilde işareti ( `~/` ) veya eğik çizgi () ile başlayan yollar `/` uygulama köküne başvurur:
 
-**RazorSayfaları**
+**Razor Sayfaları**
 
 ```cshtml
 <partial name="~/Pages/Folder/_PartialName.cshtml" />
@@ -189,7 +190,7 @@ Aşağıdaki örnek, uygulama kökünden kısmi bir görünüme başvurur. Bir t
 
 ::: moniker range=">= aspnetcore-2.1"
 
-**RazorSayfaları**
+**Razor Sayfaları**
 
 ```cshtml
 @await Html.PartialAsync("~/Pages/Folder/_PartialName.cshtml")
@@ -219,7 +220,7 @@ Alternatif olarak, ile kısmi bir görünüm işleyebilirsiniz <xref:Microsoft.A
 
 ### <a name="synchronous-html-helper"></a>Zaman uyumlu HTML Yardımcısı
 
-<xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.Partial*>ve <xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.RenderPartial*> sırasıyla zaman uyumlu eşdeğerlerdir `PartialAsync` `RenderPartialAsync` . Zaman uyumlu eşdeğerleri, kilitlendikleri senaryolar olduğu için önerilmez. Zaman uyumlu yöntemler gelecek sürümlerde kaldırılmak üzere hedeflenmiştir.
+<xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.Partial*> ve <xref:Microsoft.AspNetCore.Mvc.Rendering.HtmlHelperPartialExtensions.RenderPartial*> sırasıyla zaman uyumlu eşdeğerlerdir `PartialAsync` `RenderPartialAsync` . Zaman uyumlu eşdeğerleri, kilitlendikleri senaryolar olduğu için önerilmez. Zaman uyumlu yöntemler gelecek sürümlerde kaldırılmak üzere hedeflenmiştir.
 
 > [!IMPORTANT]
 > Kodu yürütmeniz gerekiyorsa, kısmi bir görünüm yerine bir [Görünüm bileşeni](xref:mvc/views/view-components) kullanın.
@@ -240,7 +241,7 @@ Bir dosya uzantısı olmayan kısmi bir görünüme ad ile başvurulduğunda, a�
 
 ::: moniker range=">= aspnetcore-2.1"
 
-**RazorSayfaları**
+**Razor Sayfaları**
 
 1. Şu anda sayfanın klasörü yürütülüyor
 1. Sayfanın klasörünün üzerindeki Dizin grafiği
@@ -280,7 +281,7 @@ Kısmi görünüm bulma için aşağıdaki kurallar geçerlidir:
 
 ## <a name="access-data-from-partial-views"></a>Kısmi görünümlerde verilere erişin
 
-Kısmi bir görünüm örneği oluşturulduğunda, üst öğenin sözlüğünün bir *kopyasını* alır `ViewData` . Kısmi görünüm içindeki verilerde yapılan güncelleştirmeler üst görünümde kalıcı değildir. `ViewData`kısmi görünüm geri döndüğünde kısmi görünümdeki değişiklikler kaybolur.
+Kısmi bir görünüm örneği oluşturulduğunda, üst öğenin sözlüğünün bir *kopyasını* alır `ViewData` . Kısmi görünüm içindeki verilerde yapılan güncelleştirmeler üst görünümde kalıcı değildir. `ViewData` kısmi görünüm geri döndüğünde kısmi görünümdeki değişiklikler kaybolur.
 
 Aşağıdaki örnek, bir [ViewDataDictionary](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.viewdatadictionary) örneğinin kısmi bir görünüme nasıl geçirileceğini göstermektedir:
 
@@ -296,7 +297,7 @@ Bir modeli kısmi bir görünüme geçirebilirsiniz. Model özel bir nesne olabi
 
 ::: moniker range=">= aspnetcore-2.1"
 
-**RazorSayfaları**
+**Razor Sayfaları**
 
 Örnek uygulamada aşağıdaki biçimlendirme, *Pages/ArticlesRP/ReadRP. cshtml* sayfasından yapılır. Sayfada iki kısmi görünüm bulunur. İkinci kısmi görünüm bir modelde ve `ViewData` kısmi görünüme geçer. `ViewDataDictionary`Oluşturucu aşırı yüklemesi, `ViewData` var olan sözlüğü korurken yeni bir sözlüğü geçirmek için kullanılır `ViewData` .
 

@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 02/03/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/action-return-types
-ms.openlocfilehash: 3058fabb0c08ac62956c18f3c294692d35122e12
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 8e33a2628986146d1d72e1d4772e3d9e42de119c
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022166"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88629398"
 ---
 # <a name="controller-action-return-types-in-aspnet-core-web-api"></a>ASP.NET Core Web API 'sindeki denetleyici eylemi dönüş türleri
 
@@ -102,7 +103,7 @@ Yukarıdaki eylemlerin her ikisi de ASP.NET Core 3,0 itibariyle engellenmeyen bi
 
 <xref:Microsoft.AspNetCore.Mvc.IActionResult>Bir eylemde birden çok dönüş türü mümkünse, dönüş türü uygun olur `ActionResult` . `ActionResult`Türler ÇEŞITLI http durum kodlarını temsil eder. Herhangi bir soyut olmayan sınıf, `ActionResult` geçerli bir dönüş türü olarak niteleyen ' dan türetiliyor. Bu kategorideki bazı yaygın dönüş türleri şunlardır <xref:Microsoft.AspNetCore.Mvc.BadRequestResult> (400), <xref:Microsoft.AspNetCore.Mvc.NotFoundResult> (404) ve <xref:Microsoft.AspNetCore.Mvc.OkObjectResult> (200). Alternatif olarak, sınıftaki kullanışlı yöntemler <xref:Microsoft.AspNetCore.Mvc.ControllerBase> bir eylemden tür döndürmek için kullanılabilir `ActionResult` . Örneğin, `return BadRequest();` öğesinin bir toplu biçimidir `return new BadRequestResult();` .
 
-Bu tür bir eylemde birden çok dönüş türü ve yolu olduğundan, özniteliğin serbest kullanımı [`[ProducesResponseType]`](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute) gereklidir. Bu öznitelik, [Swagger](xref:tutorials/web-api-help-pages-using-swagger)gibi araçlar tarafından oluşturulan Web API Yardım sayfaları için daha açıklayıcı yanıt ayrıntıları üretir. `[ProducesResponseType]`eylem tarafından döndürülecek bilinen türleri ve HTTP durum kodlarını gösterir.
+Bu tür bir eylemde birden çok dönüş türü ve yolu olduğundan, özniteliğin serbest kullanımı [`[ProducesResponseType]`](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute) gereklidir. Bu öznitelik, [Swagger](xref:tutorials/web-api-help-pages-using-swagger)gibi araçlar tarafından oluşturulan Web API Yardım sayfaları için daha açıklayıcı yanıt ayrıntıları üretir. `[ProducesResponseType]` eylem tarafından döndürülecek bilinen türleri ve HTTP durum kodlarını gösterir.
 
 ### <a name="synchronous-action"></a>Zaman uyumlu eylem
 
@@ -159,7 +160,7 @@ Bu tür bir eylemde birden çok dönüş türü ve yolu olduğundan, özniteliğ
 ASP.NET Core 2,1, Web API denetleyicisi eylemleri için [ActionResult \<T> ](xref:Microsoft.AspNetCore.Mvc.ActionResult`1) dönüş türünü sunmuştur. <xref:Microsoft.AspNetCore.Mvc.ActionResult> [Belirli bir türden](#specific-type)türetilen veya döndürülen bir tür döndürmenizi sağlar. `ActionResult<T>`[ıactionresult türü](#iactionresult-type)üzerinde aşağıdaki avantajları sunar:
 
 * [`[ProducesResponseType]`](xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute)Özniteliğin `Type` özelliği dışarıda bırakılabilirler. Örneğin, `[ProducesResponseType(200, Type = typeof(Product))]` basitleştirilmiştir `[ProducesResponseType(200)]` . Eylemin beklenen dönüş türü, yerine öğesinden çıkarsanamıyor `T` `ActionResult<T>` .
-* [Örtük atama işleçleri](/dotnet/csharp/language-reference/keywords/implicit) hem hem de için dönüştürmeyi `T` destekler `ActionResult` `ActionResult<T>` . `T`öğesine dönüştürür <xref:Microsoft.AspNetCore.Mvc.ObjectResult> , yani `return new ObjectResult(T);` basitleştirilmiştir `return T;` .
+* [Örtük atama işleçleri](/dotnet/csharp/language-reference/keywords/implicit) hem hem de için dönüştürmeyi `T` destekler `ActionResult` `ActionResult<T>` . `T` öğesine dönüştürür <xref:Microsoft.AspNetCore.Mvc.ObjectResult> , yani `return new ObjectResult(T);` basitleştirilmiştir `return T;` .
 
 C#, arabirimlerde örtük atama işleçlerini desteklemez. Sonuç olarak, kullanmak için arabirimin somut bir türe dönüştürülmesi gerekir `ActionResult<T>` . Örneğin, `IEnumerable` Aşağıdaki örnekte öğesinin kullanımı işe yaramaz:
 
