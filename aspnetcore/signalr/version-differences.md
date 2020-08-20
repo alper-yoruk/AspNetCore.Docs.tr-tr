@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.date: 11/21/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/version-differences
-ms.openlocfilehash: f52bf6c82cd5125e0905d9bcbda5dd5499d6455e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a8336a6c13c502f5a0fad150785cd9d484064618
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020047"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633012"
 ---
-# <a name="differences-between-aspnet-no-locsignalr-and-aspnet-core-no-locsignalr"></a>ASP.NET SignalR ve ASP.NET Core arasındaki farklarSignalR
+# <a name="differences-between-aspnet-no-locsignalr-and-aspnet-core-no-locsignalr"></a>ASP.NET SignalR ve ASP.NET Core arasındaki farklar SignalR
 
 ASP.NET Core SignalR , ASP.NET için istemcilerle veya sunucularla uyumlu değildir SignalR . Bu makalede, ASP.NET Core kaldırılan veya değiştirilen özellikler ayrıntılı olarak anlatılmaktadır SignalR .
 
@@ -31,7 +32,7 @@ ASP.NET Core SignalR , ASP.NET için istemcilerle veya sunucularla uyumlu değil
 
 ::: moniker range=">= aspnetcore-3.0"
 
-|                      | ASP.NETSignalR | ASP.NET CoreSignalR |
+|                      | ASP.NET SignalR | ASP.NET Core SignalR |
 | -------------------- | --------------- | -------------------- |
 | **Sunucu NuGet paketi** | [Microsoft. AspNet.SignalR](https://www.nuget.org/packages/Microsoft.AspNet.SignalR/) | Yok. [Microsoft. AspNetCore. app](xref:fundamentals/metapackage-app) Shared Framework 'e dahildir. |
 | **İstemci NuGet paketleri** | [Microsoft. AspNet. SignalR . İstemcilerinin](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.Client/)<br>[Microsoft. AspNet. SignalR . JS](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.JS/) | [Microsoft. AspNetCore. SignalR . İstemcilerinin](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) |
@@ -44,7 +45,7 @@ ASP.NET Core SignalR , ASP.NET için istemcilerle veya sunucularla uyumlu değil
 
 ::: moniker range="<= aspnetcore-2.2"
 
-|                      | ASP.NETSignalR | ASP.NET CoreSignalR |
+|                      | ASP.NET SignalR | ASP.NET Core SignalR |
 | -------------------- | --------------- | -------------------- |
 | **Sunucu NuGet paketi** | [Microsoft. AspNet.SignalR](https://www.nuget.org/packages/Microsoft.AspNet.SignalR/) | [Microsoft. AspNetCore. app](https://www.nuget.org/packages/Microsoft.AspNetCore.App/) (.NET Core)<br>[Microsoft. AspNetCore.SignalR](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR/) (.NET Framework) |
 | **İstemci NuGet paketleri** | [Microsoft. AspNet. SignalR . İstemcilerinin](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.Client/)<br>[Microsoft. AspNet. SignalR . JS](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.JS/) | [Microsoft. AspNetCore. SignalR . İstemcilerinin](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) |
@@ -279,9 +280,9 @@ ASP.NET SignalR SQL Server ve redsıs destekler. ASP.NET Core SignalR Azure Sign
 
 ### <a name="aspnet"></a>ASP.NET
 
-* [SignalRAzure Service Bus ile ölçeği genişletme](/aspnet/signalr/overview/performance/scaleout-with-windows-azure-service-bus)
-* [SignalRRedsıs ile ölçek genişletme](/aspnet/signalr/overview/performance/scaleout-with-redis)
-* [SignalRSQL Server ile ölçeği genişletme](/aspnet/signalr/overview/performance/scaleout-with-sql-server)
+* [SignalR Azure Service Bus ile ölçeği genişletme](/aspnet/signalr/overview/performance/scaleout-with-windows-azure-service-bus)
+* [SignalR Redsıs ile ölçek genişletme](/aspnet/signalr/overview/performance/scaleout-with-redis)
+* [SignalR SQL Server ile ölçeği genişletme](/aspnet/signalr/overview/performance/scaleout-with-sql-server)
 
 ### <a name="aspnet-core"></a>ASP.NET Çekirdeği
 

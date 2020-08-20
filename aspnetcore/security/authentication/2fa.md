@@ -7,6 +7,7 @@ ms.author: riande
 ms.date: 09/22/2018
 ms.custom: mvc, seodec18
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/2fa
-ms.openlocfilehash: 28aef65234eaf162ba6e18a2594feb575c93b02f
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e5e606afaf0219f3a0eb7301203b7142a00322be
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019503"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634117"
 ---
 # <a name="two-factor-authentication-with-sms-in-aspnet-core"></a>ASP.NET Core 'de SMS ile iki öğeli kimlik doğrulama
 
@@ -71,7 +72,7 @@ Kullanıcı hesabına ve anahtar ayarlarına erişmek için [Seçenekler modelin
 
 [!code-csharp[](2fa/sample/Web2FA/Services/SMSoptions.cs)]
 
-`SMSAccountIdentification`, Ve öğesini `SMSAccountPassword` `SMSAccountFrom` [gizli-Manager aracı](xref:security/app-secrets)ile ayarlayın. Örneğin:
+`SMSAccountIdentification`, Ve öğesini `SMSAccountPassword` `SMSAccountFrom` [gizli-Manager aracı](xref:security/app-secrets)ile ayarlayın. Örnek:
 
 ```none
 C:/Web2FA/src/WebApp1>dotnet user-secrets set SMSAccountIdentification 12345
@@ -96,7 +97,7 @@ info: Successfully saved SMSAccountIdentification = 12345 to the secret store.
 **ASPSMS:**  
 [!code-csharp[](2fa/sample/Web2FA/Services/MessageServices_ASPSMS.cs)]
 
-### <a name="configure-startup-to-use-smsoptions"></a>Başlangıç 'yi kullanacak şekilde yapılandırma`SMSoptions`
+### <a name="configure-startup-to-use-smsoptions"></a>Başlangıç 'yi kullanacak şekilde yapılandırma `SMSoptions`
 
 `SMSoptions` `ConfigureServices` *Startup.cs*içindeki yönteminde hizmet kapsayıcısına ekleyin:
 

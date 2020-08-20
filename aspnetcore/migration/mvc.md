@@ -5,6 +5,7 @@ description: ASP.NET MVC projesini ASP.NET Core MVC 'ye geçirmeye nasıl başla
 ms.author: wpickett
 ms.date: 06/18/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/mvc
-ms.openlocfilehash: 17f2a2532c58c3796835328260231d63f8fb2e40
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: cd1a7ff57d911f96f0adfe4b548fa80ec844886d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015055"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632245"
 ---
 # <a name="migrate-from-aspnet-mvc-to-aspnet-core-mvc"></a>ASP.NET MVC 'den ASP.NET Core MVC 'ye geçiş
 
@@ -37,7 +38,7 @@ ASP.NET MVC 'den geçiş çok adımlı bir işlemdir. Bu makalede şunları ele 
 
 Yapılandırma ve kodu geçirmek için Identity bkz. [yapılandırmayı ASP.NET Core](xref:migration/configuration) ve [geçiş kimlik doğrulaması ve Identity ASP.NET Core geçirme](xref:migration/identity).
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 [!INCLUDE [prerequisites](../includes/net-core-prereqs-vs-3.1.md)]
 
@@ -96,7 +97,7 @@ ASP.NET Core projesinde, geçiş için herhangi bir ASP.NET MVC projesindeki den
 
 ASP.NET Core *WebApp1* projesi zaten en az bir örnek denetleyici içeriyor ve ASP.NET MVC projesiyle aynı ada sahip bir görünüm içeriyor. Bu nedenle, ASP.NET MVC denetleyicisi ve görünümleri ASP.NET MVC *WebApp1* projesinden geçirilecek görünümler için yer tutucu olarak görev yapar.
 
-1. `HomeController`Yeni ASP.NET Core yöntemlerini değiştirmek için ASP.NET MVC içindeki yöntemleri kopyalayın `HomeController` . Eylem yöntemlerinin dönüş türünü değiştirmeniz gerekmez. ASP.NET MVC yerleşik şablonunun denetleyici eylemi yöntemi dönüş türü [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); ASP.NET Core MVC 'de, eylem metotları `IActionResult` bunun yerine döndürülür. `ActionResult`uygular `IActionResult` .
+1. `HomeController`Yeni ASP.NET Core yöntemlerini değiştirmek için ASP.NET MVC içindeki yöntemleri kopyalayın `HomeController` . Eylem yöntemlerinin dönüş türünü değiştirmeniz gerekmez. ASP.NET MVC yerleşik şablonunun denetleyici eylemi yöntemi dönüş türü [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); ASP.NET Core MVC 'de, eylem metotları `IActionResult` bunun yerine döndürülür. `ActionResult` uygular `IActionResult` .
 1. ASP.NET Core projesinde, *Görünümler/giriş* dizinine sağ tıklayın, **Add** > **Varolan öğe**Ekle ' yi seçin.
 1. **Varolan öğe Ekle** iletişim kutusunda ASP.NET MVC *WebApp1* projesinin *Görünümler/giriş* dizinine gidin.
 1. *Hakkında. cshtml*, *Contact. cshtml*ve *Index. cshtml* Razor Görünüm dosyalarını seçin ve ardından **Ekle**' yi seçerek var olan dosyaları değiştirin.
@@ -230,7 +231,7 @@ Yükseltmeyi göstermek için, bir ASP.NET MVC uygulaması oluşturarak başlaya
 
 * .NET Core 'u hedeflerken, varsayılan olarak [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app) öğesine başvurulur. Bu paket, MVC uygulamaları tarafından yaygın olarak kullanılan paketleri içerir. .NET Framework hedefliyorsanız, paket başvurularının proje dosyasında tek tek listelenmesi gerekir.
 
-`Microsoft.AspNetCore.Mvc`ASP.NET Core MVC çerçevesidir. `Microsoft.AspNetCore.StaticFiles`, statik dosya işleyicisidir. ASP.NET Core uygulamalar, statik dosyalar sunma gibi bir ara yazılım için açıkça kabul edebilir. Daha fazla bilgi için bkz. [statik dosyalar](xref:fundamentals/static-files).
+`Microsoft.AspNetCore.Mvc` ASP.NET Core MVC çerçevesidir. `Microsoft.AspNetCore.StaticFiles` , statik dosya işleyicisidir. ASP.NET Core uygulamalar, statik dosyalar sunma gibi bir ara yazılım için açıkça kabul edebilir. Daha fazla bilgi için bkz. [statik dosyalar](xref:fundamentals/static-files).
 
 * *Startup.cs* dosyasını açın ve kodu aşağıdakiler ile eşleşecek şekilde değiştirin:
 
@@ -290,7 +291,7 @@ Aşağıdaki işlev örnek ASP.NET MVC projesinden ASP.NET Core projesine geçi�
 
 ## <a name="controllers-and-views"></a>Denetleyiciler ve görünümler
 
-* Yöntemlerin her birini ASP.NET MVC 'den `HomeController` New öğesine kopyalayın `HomeController` . ASP.NET MVC 'de, yerleşik şablonun denetleyici eylem yöntemi dönüş türü [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); ASP.NET Core MVC 'de, eylem metotları `IActionResult` bunun yerine döndürülür. `ActionResult`uyguladığı `IActionResult` için, eylem yöntemlerinin dönüş türünü değiştirmeniz gerekmez.
+* Yöntemlerin her birini ASP.NET MVC 'den `HomeController` New öğesine kopyalayın `HomeController` . ASP.NET MVC 'de, yerleşik şablonun denetleyici eylem yöntemi dönüş türü [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); ASP.NET Core MVC 'de, eylem metotları `IActionResult` bunun yerine döndürülür. `ActionResult` uyguladığı `IActionResult` için, eylem yöntemlerinin dönüş türünü değiştirmeniz gerekmez.
 
 * ASP.NET MVC projesindeki *. cshtml*, *Contact. cshtml*ve *Index. cshtml* Razor Görünüm dosyalarını ASP.NET Core projesine kopyalayın.
 
@@ -416,7 +417,7 @@ Yükseltmeyi göstermek için, bir ASP.NET MVC uygulaması oluşturarak başlaya
 
 * .NET Core 'u hedeflerken, varsayılan olarak [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app) öğesine başvurulur. Bu paket, MVC uygulamaları tarafından yaygın olarak kullanılan paketleri içerir. .NET Framework hedefliyorsanız, paket başvurularının proje dosyasında tek tek listelenmesi gerekir.
 
-`Microsoft.AspNetCore.Mvc`ASP.NET Core MVC çerçevesidir. `Microsoft.AspNetCore.StaticFiles`, statik dosya işleyicisidir. ASP.NET Core uygulamalar, statik dosyalar sunma gibi bir ara yazılım için açıkça kabul edebilir. Daha fazla bilgi için bkz. [statik dosyalar](xref:fundamentals/static-files).
+`Microsoft.AspNetCore.Mvc` ASP.NET Core MVC çerçevesidir. `Microsoft.AspNetCore.StaticFiles` , statik dosya işleyicisidir. ASP.NET Core uygulamalar, statik dosyalar sunma gibi bir ara yazılım için açıkça kabul edebilir. Daha fazla bilgi için bkz. [statik dosyalar](xref:fundamentals/static-files).
 
 * *Startup.cs* dosyasını açın ve kodu aşağıdakiler ile eşleşecek şekilde değiştirin:
 
@@ -476,7 +477,7 @@ Aşağıdaki işlev örnek ASP.NET MVC projesinden ASP.NET Core projesine geçi�
 
 ## <a name="controllers-and-views"></a>Denetleyiciler ve görünümler
 
-* Yöntemlerin her birini ASP.NET MVC 'den `HomeController` New öğesine kopyalayın `HomeController` . ASP.NET MVC 'de, yerleşik şablonun denetleyici eylem yöntemi dönüş türü [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); ASP.NET Core MVC 'de, eylem metotları `IActionResult` bunun yerine döndürülür. `ActionResult`uyguladığı `IActionResult` için, eylem yöntemlerinin dönüş türünü değiştirmeniz gerekmez.
+* Yöntemlerin her birini ASP.NET MVC 'den `HomeController` New öğesine kopyalayın `HomeController` . ASP.NET MVC 'de, yerleşik şablonun denetleyici eylem yöntemi dönüş türü [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); ASP.NET Core MVC 'de, eylem metotları `IActionResult` bunun yerine döndürülür. `ActionResult` uyguladığı `IActionResult` için, eylem yöntemlerinin dönüş türünü değiştirmeniz gerekmez.
 
 * ASP.NET MVC projesindeki *. cshtml*, *Contact. cshtml*ve *Index. cshtml* Razor Görünüm dosyalarını ASP.NET Core projesine kopyalayın.
 

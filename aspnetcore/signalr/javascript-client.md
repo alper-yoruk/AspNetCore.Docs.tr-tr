@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 04/08/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/javascript-client
-ms.openlocfilehash: e6feeb0009034d9ea92f09c44ed0ca882d80fe1b
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: 7b11172df902f0d6a26f357755f33c78e7f8d1ff
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504768"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631426"
 ---
 # <a name="aspnet-core-no-locsignalr-javascript-client"></a>SignalRJavaScript istemcisi ASP.NET Core
 
@@ -62,7 +63,7 @@ NPM *node_modules \\ @aspnet\signalr\dist\browser * klasöre paket içeriğini y
 
 ::: moniker-end
 
-SignalRÖğesindeki JavaScript istemcisine başvurun `<script>` . Örneğin:
+SignalRÖğesindeki JavaScript istemcisine başvurun `<script>` . Örnek:
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -70,7 +71,7 @@ SignalRÖğesindeki JavaScript istemcisine başvurun `<script>` . Örneğin:
 
 ### <a name="use-a-content-delivery-network-cdn"></a>Content Delivery Network kullanma (CDN)
 
-İstemci kitaplığını NPM önkoşulu olmadan kullanmak için, istemci kitaplığının CDN ile barındırılan bir kopyasına başvurun. Örneğin:
+İstemci kitaplığını NPM önkoşulu olmadan kullanmak için, istemci kitaplığının CDN ile barındırılan bir kopyasına başvurun. Örnek:
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.3/signalr.min.js"></script>
@@ -316,7 +317,7 @@ Gerçek dünyada bir uygulama, bir üstel geri kapatmayı kullanır veya vermede
 * [JavaScript API'si başvurusu](/javascript/api/?view=signalr-js-latest)
 * [JavaScript öğreticisi](xref:tutorials/signalr)
 * [WebPack ve TypeScript öğreticisi](xref:tutorials/signalr-typescript-webpack)
-* [Merkezler](xref:signalr/hubs)
+* [Hub'lar](xref:signalr/hubs)
 * [.NET istemcisi](xref:signalr/dotnet-client)
 * [Azure’da Yayımlama](xref:signalr/publish-to-azure-web-app)
 * [Çıkış noktaları arası Istekler (CORS)](xref:security/cors)

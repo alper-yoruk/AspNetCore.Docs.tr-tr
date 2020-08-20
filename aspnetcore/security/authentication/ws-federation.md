@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 01/16/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/ws-federation
-ms.openlocfilehash: e303679190a7d7f42d8525541cec031ba090fd7a
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 8a593efd799e900483d0337a06e02c3558b63bfb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022309"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634091"
 ---
 # <a name="authenticate-users-with-ws-federation-in-aspnet-core"></a>ASP.NET Core 'de WS-Federation ile kullanıcıların kimliğini doğrulama
 
@@ -61,7 +62,7 @@ Varsayılan olarak, yeni ara yazılım:
 
 * Sihirbazın geri kalanında **İleri** ' ye tıklayın ve sonda da **kapatın** .
 
-* ASP.NET Core Identity bir **ad kimliği** talebi gerektiriyor. **Talep kurallarını Düzenle** iletişim kutusundan bir tane ekleyin:
+* ASP.NET Core Identity**ad kimliği** talebi gerektirir. **Talep kurallarını Düzenle** iletişim kutusundan bir tane ekleyin:
 
 ![Talep kurallarını Düzenle](ws-federation/_static/EditClaimRules.png)
 
@@ -90,7 +91,7 @@ Varsayılan olarak, yeni ara yazılım:
 
 ![Azure Active Directory: uygulama kaydı özellikleri](ws-federation/_static/AadAppIdUri.png)
 
-## <a name="use-ws-federation-without-aspnet-core-no-locidentity"></a>ASP.NET Core olmadan WS-Federation kullanınIdentity
+## <a name="use-ws-federation-without-no-locaspnet-core-identity"></a>WS-Federation ' i kullanmadan kullanma ASP.NET Core Identity
 
 WS-Federation ara yazılımı, olmadan kullanılabilir Identity . Örnek:
 ::: moniker range=">= aspnetcore-3.0"
@@ -101,7 +102,7 @@ WS-Federation ara yazılımı, olmadan kullanılabilir Identity . Örnek:
 [!code-csharp[](ws-federation/samples/StartupNon21.cs?name=snippet)]
 ::: moniker-end
 
-## <a name="add-ws-federation-as-an-external-login-provider-for-aspnet-core-no-locidentity"></a>WS-Federation ' i ASP.NET Core için dış oturum açma sağlayıcısı olarak ekleyinIdentity
+## <a name="add-ws-federation-as-an-external-login-provider-for-no-locaspnet-core-identity"></a>İçin dış oturum açma sağlayıcısı olarak WS-Federation ekleyin ASP.NET Core Identity
 
 * Projeye [Microsoft. AspNetCore. Authentication. WsFederation](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.WsFederation) bağımlılığı ekleyin.
 * WS-Federation Ekle `Startup.ConfigureServices` :

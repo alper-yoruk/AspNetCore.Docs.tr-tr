@@ -5,6 +5,7 @@ description: ASP.NET Core MVC 'deki öğretici serisinin 4. bölümü.
 ms.author: riande
 ms.date: 01/13/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-model
-ms.openlocfilehash: cc9c0447dc032ff0a88d379cd9d542e3406777bf
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ddd517ef8fbf8cb4bb8765cb3caab4724c0205f0
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021971"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631972"
 ---
 # <a name="part-4-add-a-model-to-an-aspnet-core-mvc-app"></a>4. bölüm, ASP.NET Core MVC uygulamasına model ekleme
 
@@ -192,7 +193,7 @@ Film modeli için oluşturma, okuma, güncelleştirme ve silme (CRUD) sayfaları
 Visual Studio şunları oluşturur:
 
 * Bir filmler denetleyicisi (*denetleyiciler/MoviesController. cs*)
-* RazorOluşturma, silme, ayrıntılar, düzenleme ve dizin sayfaları için dosyaları görüntüleme (*Görünümler/filmler/ \* . cshtml*)
+* Razor Oluşturma, silme, ayrıntılar, düzenleme ve dizin sayfaları için dosyaları görüntüleme (*Görünümler/filmler/ \* . cshtml*)
 
 Bu dosyaların otomatik olarak oluşturulması, *Yapı iskelesi*olarak bilinir.
 
@@ -336,7 +337,7 @@ Oluşturucu, veritabanı bağlamını () denetleyiciye eklemek için [bağımlı
 
 ### <a name="use-sqlite-for-development-sql-server-for-production"></a>Geliştirme için SQLite kullanın, üretim için SQL Server
 
-SQLite seçildiğinde, şablon tarafından oluşturulan kod geliştirme için hazırlayın. Aşağıdaki kod, başlangıca nasıl ekleneceğini gösterir <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> . `IWebHostEnvironment`eklendiğinde, `ConfigureServices` geliştirme ve üretimde SQL Server Için SQLite kullanılabilir.
+SQLite seçildiğinde, şablon tarafından oluşturulan kod geliştirme için hazırlayın. Aşağıdaki kod, başlangıca nasıl ekleneceğini gösterir <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> . `IWebHostEnvironment` eklendiğinde, `ConfigureServices` geliştirme ve üretimde SQL Server Için SQLite kullanılabilir.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/StartupDevProd.cs?name=snippet_StartupClass&highlight=5,10,16-28)]
 
@@ -470,7 +471,7 @@ Visual Studio şunları oluşturur:
 
 * Entity Framework Core [veritabanı bağlam sınıfı](xref:data/ef-mvc/intro#create-the-database-context) (*Data/MvcMovieContext. cs*)
 * Bir filmler denetleyicisi (*denetleyiciler/MoviesController. cs*)
-* RazorOluşturma, silme, ayrıntılar, düzenleme ve dizin sayfaları için dosyaları görüntüleme (*Görünümler/filmler/ \* . cshtml*)
+* Razor Oluşturma, silme, ayrıntılar, düzenleme ve dizin sayfaları için dosyaları görüntüleme (*Görünümler/filmler/ \* . cshtml*)
 
 Veritabanı bağlamı ve [CRUD](https://wikipedia.org/wiki/Create,_read,_update_and_delete) (oluşturma, okuma, güncelleştirme ve silme) eylem yöntemlerinin ve görünümlerinin otomatik olarak oluşturulması, *Yapı iskelesi*olarak bilinir.
 
@@ -641,8 +642,8 @@ Sınıfı inceleyin `Startup` :
 
 Önceki vurgulanan kod, [bağımlılık ekleme](xref:fundamentals/dependency-injection) kapsayıcısına eklenen film veritabanı bağlamını gösterir:
 
-* `services.AddDbContext<MvcMovieContext>(options =>`kullanılacak veritabanını ve bağlantı dizesini belirtir.
-* `=>`bir [lambda operatörü](/dotnet/articles/csharp/language-reference/operators/lambda-operator)
+* `services.AddDbContext<MvcMovieContext>(options =>` kullanılacak veritabanını ve bağlantı dizesini belirtir.
+* `=>` bir [lambda operatörü](/dotnet/articles/csharp/language-reference/operators/lambda-operator)
 
 *Controllers/MoviesController. cs* dosyasını açın ve oluşturucuyu inceleyin:
 

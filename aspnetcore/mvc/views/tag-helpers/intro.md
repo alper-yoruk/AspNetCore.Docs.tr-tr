@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 03/18/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/intro
-ms.openlocfilehash: 067698687268ac072d8944fd5d9ae47c49fd4a24
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 42a7231b529dd9f8ecbce4f8116111e1c96c830d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015018"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633103"
 ---
 # <a name="tag-helpers-in-aspnet-core"></a>ASP.NET Core etiket yardımcıları
 
@@ -72,7 +73,7 @@ Etiket Yardımcıları kapsamı `@addTagHelper` ,, `@removeTagHelper` ve "!" ger
 
 <a name="add-helper-label"></a>
 
-### <a name="addtaghelper-makes-tag-helpers-available"></a>`@addTagHelper`Etiket Yardımcıları kullanılabilir hale getirir
+### <a name="addtaghelper-makes-tag-helpers-available"></a>`@addTagHelper` Etiket Yardımcıları kullanılabilir hale getirir
 
 *Authoringtaghelmakaadı*adlı yeni bir ASP.NET Core Web uygulaması oluşturursanız, projenize aşağıdaki *Görünümler/_ViewImports. cshtml* dosyası eklenecektir:
 
@@ -103,7 +104,7 @@ Daha önce bahsedildiği gibi, `@addTagHelper` *views/_ViewImports. cshtml* dosy
 
 <a name="remove-razor-directives-label"></a>
 
-### <a name="removetaghelper-removes-tag-helpers"></a>`@removeTagHelper`Etiket Yardımcıları kaldırır
+### <a name="removetaghelper-removes-tag-helpers"></a>`@removeTagHelper` Etiket Yardımcıları kaldırır
 
 , İle `@removeTagHelper` aynı iki parametreye sahiptir `@addTagHelper` ve daha önce eklenmiş bir etiket yardımcısını kaldırır. Örneğin, `@removeTagHelper` belirli bir görünüme uygulandığında, belirtilen etiket Yardımcısı görünümden kaldırılır. `@removeTagHelper`Bir *views/Folder/_ViewImports. cshtml* dosyasında kullanmak, belirtilen etiket yardımcısını *klasördeki*tüm görünümlerden kaldırır.
 
@@ -267,7 +268,7 @@ Visual Studio Düzenleyicisi, kayıt formunun etiket Yardımcısı yaklaşımın
 
 * Web sunucusu denetimleri, dizeleri nesnelere dönüştürmek için tür dönüştürücüler kullanır. Etiket Yardımcıları sayesinde yerel olarak C# dilinde çalışır, bu nedenle tür dönüştürmesi yapmanız gerekmez.
 
-* Web sunucusu denetimleri, bileşenlerin ve denetimlerin çalışma zamanı ve tasarım zamanı davranışını uygulamak için [System. ComponentModel](/dotnet/api/system.componentmodel) kullanır. `System.ComponentModel`öznitelikleri ve tür dönüştürücülerini uygulamak, veri kaynaklarına bağlama ve lisans bileşenlerine yönelik temel sınıfları ve arabirimleri içerir. Genellikle, ve temel sınıftan türetilen yardımcıları etiketleyerek `TagHelper` `TagHelper` yalnızca iki yöntemi gösterir `Process` ve `ProcessAsync` .
+* Web sunucusu denetimleri, bileşenlerin ve denetimlerin çalışma zamanı ve tasarım zamanı davranışını uygulamak için [System. ComponentModel](/dotnet/api/system.componentmodel) kullanır. `System.ComponentModel` öznitelikleri ve tür dönüştürücülerini uygulamak, veri kaynaklarına bağlama ve lisans bileşenlerine yönelik temel sınıfları ve arabirimleri içerir. Genellikle, ve temel sınıftan türetilen yardımcıları etiketleyerek `TagHelper` `TagHelper` yalnızca iki yöntemi gösterir `Process` ve `ProcessAsync` .
 
 ## <a name="customizing-the-tag-helper-element-font"></a>Etiket Yardımcısı öğe yazı tipini özelleştirme
 

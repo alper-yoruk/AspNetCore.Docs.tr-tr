@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,20 +17,20 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.0
-ms.openlocfilehash: 1ec51bf054f1f0d60ed27ee280f436e6d4c8c4b0
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 9d8c33ef10825baa212466fe683d4c1dc582f7eb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021204"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632466"
 ---
 # <a name="whats-new-in-aspnet-core-20"></a>ASP.NET Core 2,0 ' deki yenilikler
 
 Bu makalede, ASP.NET Core 2,0 ' deki en önemli değişiklikler, ilgili belgelerin bağlantılarıyla vurgulanır.
 
-## <a name="no-locrazor-pages"></a>RazorSayfaları
+## <a name="no-locrazor-pages"></a>Razor Sayfaları
 
-RazorSayfalar, kod odaklı senaryoları daha kolay ve daha üretken hale getiren ASP.NET Core MVC 'nin yeni bir özelliğidir.
+Razor Sayfalar, kod odaklı senaryoları daha kolay ve daha üretken hale getiren ASP.NET Core MVC 'nin yeni bir özelliğidir.
 
 Daha fazla bilgi için bkz. giriş ve öğretici:
 
@@ -56,7 +57,7 @@ Metapackage, .NET Core `Microsoft.AspNetCore.All` 2,0 çalışma zamanı deposuy
 
 ## <a name="configuration-update"></a>Yapılandırma güncelleştirmesi
 
-`IConfiguration`ASP.NET Core 2,0 ' de varsayılan olarak hizmetler kapsayıcısına bir örnek eklenir. `IConfiguration`Hizmetler kapsayıcısında, uygulamaların kapsayıcıdan yapılandırma değerlerini almasına daha kolay hale gelir.
+`IConfiguration`ASP.NET Core 2,0 ' de varsayılan olarak hizmetler kapsayıcısına bir örnek eklenir. `IConfiguration` Hizmetler kapsayıcısında, uygulamaların kapsayıcıdan yapılandırma değerlerini almasına daha kolay hale gelir.
 
 Planlı belgelerin durumu hakkında daha fazla bilgi için bkz. [GitHub sorunu](https://github.com/dotnet/AspNetCore.Docs/issues/3387).
 
@@ -74,7 +75,7 @@ Yeni bir kimlik doğrulama modeli, DI kullanarak bir uygulama için kimlik doğr
 
 Planlı belgelerin durumu hakkında daha fazla bilgi için bkz. [GitHub sorunu](https://github.com/dotnet/AspNetCore.Docs/issues/3054).
 
-## <a name="no-locidentity-update"></a>IdentityUpdate
+## <a name="no-locidentity-update"></a>Identity Update
 
 ASP.NET Core 2,0 ' de kullanarak güvenli Web API 'Leri oluşturmayı daha kolay hale geçirdik Identity . [Microsoft kimlik doğrulama kitaplığı 'nı (msal)](https://www.nuget.org/packages/Microsoft.Identity.Client)kullanarak Web API 'lerinize erişmek için erişim belirteçleri edinebilirsiniz.
 
@@ -102,7 +103,7 @@ Daha fazla bilgi için bkz. [Kestrel Web Server Implementation For ASP.NET Core]
 
 Paketler `Microsoft.AspNetCore.Server.WebListener` ve `Microsoft.Net.Http.Server` Yeni bir pakette birleştirildi `Microsoft.AspNetCore.Server.HttpSys` . Ad alanları eşleşecek şekilde güncelleştirildi.
 
-Daha fazla bilgi için bkz. [ASP.NET Core Web sunucusu uygulamasınıHTTP.sys](xref:fundamentals/servers/httpsys).
+Daha fazla bilgi için bkz. [ ASP.NET Core Web sunucusu uygulamasınıHTTP.sys](xref:fundamentals/servers/httpsys).
 
 ## <a name="enhanced-http-header-support"></a>Gelişmiş HTTP üst bilgisi desteği
 
@@ -130,15 +131,15 @@ Planlı belgelerin durumu hakkında daha fazla bilgi için bkz. [GitHub sorunu](
 
 ASP.NET Core, varsayılan olarak her zaman HTML kodsuz içeriğe yardımcı olur, ancak yeni sürüme, siteler arası istek sahteciliği (XSRF) saldırılarını önlemeye yardımcı olmak için ek bir adım alınmıştır. ASP.NET Core artık varsayılan olarak korsanlığa karşı koruma belirteçleri yayıp bunları, ek yapılandırma olmadan bu eylemleri ve sayfaları form SONRASı olarak doğrular.
 
-Daha fazla bilgi için bkz. [siteler arası Istek forgery (XSRF/CSRF) saldırılarını önleme](xref:security/anti-request-forgery).
+Daha fazla bilgi için bkz. <xref:security/anti-request-forgery>.
 
 ## <a name="automatic-precompilation"></a>Otomatik ön derleme
 
-RazorYayımlama ön derleme sırasında varsayılan olarak, yayımlama çıkış boyutunu ve uygulama başlatma süresini azaltarak etkin olarak görüntüle ' yi görüntüleyin.
+Razor Yayımlama ön derleme sırasında varsayılan olarak, yayımlama çıkış boyutunu ve uygulama başlatma süresini azaltarak etkin olarak görüntüle ' yi görüntüleyin.
 
 Daha fazla bilgi için bkz. [ Razor ASP.NET Core derleme ve ön derlemeyi görüntüleme](xref:mvc/views/view-compilation).
 
-## <a name="no-locrazor-support-for-c-71"></a>RazorC# 7,1 için destek
+## <a name="no-locrazor-support-for-c-71"></a>Razor C# 7,1 için destek
 
 RazorGörünüm altyapısı, yeni Roslyn derleyicisi ile çalışacak şekilde güncelleştirilmiştir. Bu, varsayılan Ifadeler gibi C# 7,1 özellikleri, gösterilen tanımlama grubu adları ve genel türler ile birlikte kalıp eşleme desteği içerir. Projenizde C# 7,1 kullanmak için, proje dosyanıza aşağıdaki özelliği ekleyin ve çözümü yeniden yükleyin:
 

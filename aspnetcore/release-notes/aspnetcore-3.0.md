@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: 10741cfc701bf261484b9e6c73a2347e2dd7083d
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a53ba22c301b04aafa1eeb53d91f82f90dab0bad
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019848"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631556"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3,0 ' deki yenilikler
 
@@ -29,13 +30,13 @@ Bu makalede, ASP.NET Core 3,0 ' deki en önemli değişiklikler ilgili belgeleri
 
 ## Blazor
 
-Blazor, .NET ile etkileşimli istemci tarafı Web Kullanıcı arabirimi oluşturmak için ASP.NET Core yeni bir çerçevedir:
+Blazor , .NET ile etkileşimli istemci tarafı Web Kullanıcı arabirimi oluşturmak için ASP.NET Core yeni bir çerçevedir:
 
 * JavaScript yerine C# kullanarak zengin etkileşimli uo 'lar oluşturun.
 * .NET ' te yazılmış sunucu tarafı ve istemci tarafı uygulama mantığını paylaşabilirsiniz.
 * Mobil tarayıcılar dahil olmak üzere geniş tarayıcı desteği için Kullanıcı arabirimini HTML ve CSS olarak işleme.
 
-Blazorçerçeve tarafından desteklenen senaryolar:
+Blazor çerçeve tarafından desteklenen senaryolar:
 
 * Yeniden kullanılabilir kullanıcı arabirimi bileşenleri ( Razor bileşenler)
 * İstemci tarafı yönlendirme
@@ -49,17 +50,17 @@ Daha fazla bilgi için bkz. <xref:blazor/index>.
 
 ### Blazor Server
 
-BlazorKullanıcı arabirimi güncelleştirmelerinin uygulanma, bileşen işleme mantığını ayırır. Blazor ServerASP.NET Core uygulamasında sunucuda barındırma bileşenleri için destek sağlar Razor . Kullanıcı Arabirimi güncelleştirmeleri bir bağlantı üzerinden işlenir SignalR . Blazor ServerASP.NET Core 3,0 ' de desteklenir.
+Blazor Kullanıcı arabirimi güncelleştirmelerinin uygulanma, bileşen işleme mantığını ayırır. Blazor Server ASP.NET Core uygulamasında sunucuda barındırma bileşenleri için destek sağlar Razor . Kullanıcı Arabirimi güncelleştirmeleri bir bağlantı üzerinden işlenir SignalR . Blazor Server ASP.NET Core 3,0 ' de desteklenir.
 
-### <a name="no-locblazor-webassembly-preview"></a>Blazor WebAssemblyÖnizle
+### <a name="no-locblazor-webassembly-preview"></a>Blazor WebAssembly Önizle
 
-Blazoruygulamalar, bir WebAssembly tabanlı .NET çalışma zamanı kullanarak doğrudan tarayıcıda da çalıştırılabilir. Blazor WebAssemblyönizlemededir *ve ASP.NET Core 3,0 ' de* desteklenmez. Blazor WebAssemblyASP.NET Core gelecek bir sürümünde desteklenecektir.
+Blazor uygulamalar, bir WebAssembly tabanlı .NET çalışma zamanı kullanarak doğrudan tarayıcıda da çalıştırılabilir. Blazor WebAssembly önizlemededir *ve ASP.NET Core 3,0 ' de* desteklenmez. Blazor WebAssembly ASP.NET Core gelecek bir sürümünde desteklenecektir.
 
-### <a name="no-locrazor-components"></a>Razorbileşenleri
+### <a name="no-locrazor-components"></a>Razor bileşenleri
 
-Blazoruygulamalar bileşenlerden oluşturulmuştur. Bileşenler, bir sayfa, iletişim kutusu veya form gibi kullanıcı arabirimi (UI) için kendi içinde yer alan öbeklerdir. Bileşenler, Kullanıcı arabirimi işleme mantığını ve istemci tarafı olay işleyicilerini tanımlayan normal .NET sınıflarıdır. JavaScript olmadan zengin etkileşimli Web uygulamaları oluşturabilirsiniz.
+Blazor uygulamalar bileşenlerden oluşturulmuştur. Bileşenler, bir sayfa, iletişim kutusu veya form gibi kullanıcı arabirimi (UI) için kendi içinde yer alan öbeklerdir. Bileşenler, Kullanıcı arabirimi işleme mantığını ve istemci tarafı olay işleyicilerini tanımlayan normal .NET sınıflarıdır. JavaScript olmadan zengin etkileşimli Web uygulamaları oluşturabilirsiniz.
 
-İçindeki bileşenler Blazor genellıkle Razor HTML ve C# ' nin doğal bir karışımı olan sözdizimi kullanılarak yazılır. Razorbileşenler, Razor her ikisi de kullandıkları sayfalara ve MVC görünümlerine benzerdir Razor . Bir istek-yanıt modelini temel alan sayfaların ve görünümlerin aksine, bileşenler Kullanıcı arabirimi oluşturmayı işlemek için kullanılır.
+İçindeki bileşenler Blazor genellıkle Razor HTML ve C# ' nin doğal bir karışımı olan sözdizimi kullanılarak yazılır. Razor bileşenler, Razor her ikisi de kullandıkları sayfalara ve MVC görünümlerine benzerdir Razor . Bir istek-yanıt modelini temel alan sayfaların ve görünümlerin aksine, bileşenler Kullanıcı arabirimi oluşturmayı işlemek için kullanılır.
 
 ## <a name="grpc"></a>gRPC
 
@@ -88,7 +89,7 @@ Daha fazla bilgi için bkz. <xref:grpc/index>.
 
 ## SignalR
 
-Bkz. geçiş yönergeleri için [ SignalR kodu güncelleştirme](xref:migration/22-to-30#signalr) . SignalRArtık `System.Text.Json` JSON iletilerini seri hale getirmek/seri durumdan çıkarmak için kullanır. Tabanlı seri hale getirici 'yi geri yükleme yönergeleri için bkz. [Newtonsoft.Js'ye geçme](xref:migration/22-to-30#switch-to-newtonsoftjson) `Newtonsoft.Json` .
+Bkz. geçiş yönergeleri için [ SignalR kodu güncelleştirme](xref:migration/22-to-30#signalr) . SignalR Artık `System.Text.Json` JSON iletilerini seri hale getirmek/seri durumdan çıkarmak için kullanır. Tabanlı seri hale getirici 'yi geri yükleme yönergeleri için bkz. [Newtonsoft.Js'ye geçme](xref:migration/22-to-30#switch-to-newtonsoftjson) `Newtonsoft.Json` .
 
 İçin JavaScript ve .NET Istemcilerinde SignalR , otomatik yeniden bağlanma için destek eklenmiştir. Varsayılan olarak, istemci hemen yeniden bağlanmaya çalışır ve gerekirse 2, 10 ve 30 saniye sonra yeniden dener. İstemci başarıyla yeniden bağlanırsa, yeni bir bağlantı KIMLIĞI alır. Otomatik yeniden bağlanma kabul etme:
 
@@ -142,7 +143,7 @@ connection.onreconnected((connectionId) => {
 });
 ```
 
-SignalR3,0 ve üzeri, bir hub yöntemi yetkilendirme gerektirdiğinde, yetkilendirme işleyicilerine özel bir kaynak sağlar. Kaynak bir örneğidir `HubInvocationContext` . `HubInvocationContext`Şunları içerir:
+SignalR 3,0 ve üzeri, bir hub yöntemi yetkilendirme gerektirdiğinde, yetkilendirme işleyicilerine özel bir kaynak sağlar. Kaynak bir örneğidir `HubInvocationContext` . `HubInvocationContext`Şunları içerir:
 
 * `HubCallerContext`
 * Çağrılan hub yönteminin adı.
@@ -232,7 +233,7 @@ services
     });
 ```
 
-SignalRHub [uç nokta yönlendirme](xref:fundamentals/routing)kullanır. SignalRHub bağlantısı daha önce açık olarak yapıldı:
+SignalR Hub [uç nokta yönlendirme](xref:fundamentals/routing)kullanır. SignalR Hub bağlantısı daha önce açık olarak yapıldı:
 
 ```csharp
 app.UseSignalR(routes =>
@@ -255,7 +256,7 @@ app.UseRouting(routes =>
 });
 ```
 
-SignalR3,0 hub 'ları, uç nokta yönlendirme aracılığıyla yönlendirilebilir. Uç nokta yönlendirme ile, genellikle tüm yönlendirme ' de yapılandırılabilir `UseRouting` :
+SignalR 3,0 hub 'ları, uç nokta yönlendirme aracılığıyla yönlendirilebilir. Uç nokta yönlendirme ile, genellikle tüm yönlendirme ' de yapılandırılabilir `UseRouting` :
 
 ```csharp
 app.UseRouting(routes =>
@@ -331,7 +332,7 @@ Aşağıdaki listede yeni yönergeler yer almaktadır Razor :
 
 ## <a name="no-locidentityserver4-supports-authentication-and-authorization-for-web-apis-and-spas"></a>IdentityServer4, Web API 'Leri ve maça 'Ları için kimlik doğrulama ve yetkilendirmeyi destekler
 
-ASP.NET Core 3,0, Web API yetkilendirmesi desteğini kullanarak tek sayfalı uygulamalarda (Spaon) kimlik doğrulaması sunmaktadır. IdentityKimlik doğrulama ve depolama için ASP.NET Core, OpenID Connect 'i uygulamak için [ Identity Server4](https://identityserver.io/) ile birleştirilir.
+ASP.NET Core 3,0, Web API yetkilendirmesi desteğini kullanarak tek sayfalı uygulamalarda (Spaon) kimlik doğrulaması sunmaktadır. ASP.NET Core Identitykimlik doğrulama ve depolama kullanıcıları için OpenID Connect 'i uygulamak üzere [ Identity Server4](https://identityserver.io/) ile birleştirilir.
 
 IdentityServer4, ASP.NET Core 3,0 için bir OpenID Connect ve OAuth 2,0 çerçevesidir. Aşağıdaki güvenlik özelliklerini sunar:
 
@@ -487,7 +488,7 @@ Daha fazla bilgi için aşağıdaki makaleleri inceleyin:
 
 ## <a name="pipes-on-httpcontext"></a>HttpContext üzerindeki kanallar
 
-Artık istek gövdesini okumak ve yanıt gövdesini API kullanarak yazmak mümkündür <xref:System.IO.Pipelines> . Sanal Makineye (VM) bağlı bir veya birden çok işletim sistemi diski içerdiği için <!-- <xref:Microsoft.AspNetCore.Http.HttpRequest.BodyReader> --> `HttpRequest.BodyReader`özelliği <xref:System.IO.Pipelines.PipeReader> , istek gövdesini okumak için kullanılabilecek bir sağlar. Sanal Makineye (VM) bağlı bir veya birden çok işletim sistemi diski içerdiği için <!-- <xref:Microsoft.AspNetCore.Http.> --> `HttpResponse.BodyWriter`özelliği <xref:System.IO.Pipelines.PipeWriter> , yanıt gövdesini yazmak için kullanılabilecek bir sağlar. `HttpRequest.BodyReader`akışın analog bir `HttpRequest.Body` kadır. `HttpResponse.BodyWriter`akışın analog bir `HttpResponse.Body` kadır.
+Artık istek gövdesini okumak ve yanıt gövdesini API kullanarak yazmak mümkündür <xref:System.IO.Pipelines> . Bu <!-- <xref:Microsoft.AspNetCore.Http.HttpRequest.BodyReader> --> `HttpRequest.BodyReader` özelliği <xref:System.IO.Pipelines.PipeReader> , istek gövdesini okumak için kullanılabilecek bir sağlar. Bu <!-- <xref:Microsoft.AspNetCore.Http.> --> `HttpResponse.BodyWriter` özelliği <xref:System.IO.Pipelines.PipeWriter> , yanıt gövdesini yazmak için kullanılabilecek bir sağlar. `HttpRequest.BodyReader` akışın analog bir `HttpRequest.Body` kadır. `HttpResponse.BodyWriter` akışın analog bir `HttpResponse.Body` kadır.
 
 <!-- indirectly related, https://github.com/dotnet/docs/pull/14414 won't be published by 9/23  -->
 
@@ -507,11 +508,11 @@ Daha fazla bilgi için bkz.
 
 ## <a name="forwarded-headers-middleware-improvements"></a>İletilen üstbilgiler ara yazılımı geliştirmeleri
 
-Önceki ASP.NET Core sürümlerinde, <xref:Microsoft.AspNetCore.Builder.HstsBuilderExtensions.UseHsts*> <xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection*> bir Azure Linux 'a DAĞıTıLıRKEN veya IIS dışında herhangi bir ters proxy 'nin arkasında sorun. Önceki sürümlere yönelik düzeltmeler, [Linux ve IIS olmayan ters proxy 'lerin düzenini iletme](xref:host-and-deploy/proxy-load-balancer#forward-the-scheme-for-linux-and-non-iis-reverse-proxies)bölümünde belgelenmiştir.
+Önceki ASP.NET Core sürümlerinde, <xref:Microsoft.AspNetCore.Builder.HstsBuilderExtensions.UseHsts*>  <xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection*> bir Azure Linux 'a DAĞıTıLıRKEN veya IIS dışında herhangi bir ters proxy 'nin arkasında sorun. Önceki sürümlere yönelik düzeltmeler, [Linux ve IIS olmayan ters proxy 'lerin düzenini iletme](xref:host-and-deploy/proxy-load-balancer#forward-the-scheme-for-linux-and-non-iis-reverse-proxies)bölümünde belgelenmiştir.
 
-Bu senaryo ASP.NET Core 3,0 ' de düzeltilmiştir. Ortam değişkeni olarak ayarlandığında, ana bilgisayar [Iletilen üstbilgiler ara yazılımını](xref:host-and-deploy/proxy-load-balancer#forwarded-headers-middleware-options) sağlar `ASPNETCORE_FORWARDEDHEADERS_ENABLED` `true` . `ASPNETCORE_FORWARDEDHEADERS_ENABLED`, `true` kapsayıcı görüntülerimizde olarak ayarlanır.
+Bu senaryo ASP.NET Core 3,0 ' de düzeltilmiştir. Ortam değişkeni olarak ayarlandığında, ana bilgisayar [Iletilen üstbilgiler ara yazılımını](xref:host-and-deploy/proxy-load-balancer#forwarded-headers-middleware-options) sağlar `ASPNETCORE_FORWARDEDHEADERS_ENABLED` `true` . `ASPNETCORE_FORWARDEDHEADERS_ENABLED` , `true` kapsayıcı görüntülerimizde olarak ayarlanır.
 
-## <a name="performance-improvements"></a>Performans iyileştirmeleri
+## <a name="performance-improvements"></a>Performans geliştirmeleri
 
 ASP.NET Core 3,0, bellek kullanımını azaltan ve üretilen işi geliştiren birçok geliştirme içerir:
 

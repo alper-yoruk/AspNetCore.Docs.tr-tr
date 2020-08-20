@@ -5,6 +5,7 @@ description: ASP.NET Core MVC 'nin, Model-View-Controller tasarım modelini kull
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/overview
-ms.openlocfilehash: 64bee1966eff40e9057166adfafbf78d0cc5b6aa
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 29701506d9f6c1ff90081a548d524bc0deb65cda
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021451"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633623"
 ---
 # <a name="overview-of-aspnet-core-mvc"></a>ASP.NET Core MVC’ye Genel Bakış
 
@@ -77,7 +78,7 @@ ASP.NET Core MVC şunları içerir:
 * [Alanlar](#areas)
 * [Web API'leri](#web-apis)
 * [Test edilebilirlik](#testability)
-* [Razoraltyapıyı görüntüle](#razor-view-engine)
+* [Razor altyapıyı görüntüle](#razor-view-engine)
 * [Türü kesin belirlenmiş görünümler](#strongly-typed-views)
 * [Etiket Yardımcıları](#tag-helpers)
 * [Bileşenleri görüntüle](#view-components)
@@ -173,7 +174,7 @@ Uygulamanız Ayrıca, yönergeyi [görüntüleme dosyalarını kullanarak bağı
 
 ### <a name="filters"></a>Filtreler
 
-[Filtreler](controllers/filters.md) , geliştiricilerin özel durum işleme veya yetkilendirme gibi çapraz sorunları yalıtmalarına yardımcı olur. Filtreler, eylem yöntemleri için özel ön ve son işlem dışı mantığı çalıştırmayı etkinleştirir ve belirli bir istek için yürütme işlem hattının içindeki belirli noktalarda çalışacak şekilde yapılandırılabilir. Filtreler, denetleyicilere veya eylemlere öznitelik olarak uygulanabilir (veya küresel olarak çalıştırılabilir). Birçok filtre (gibi `Authorize` ) çerçeveye dahil edilir. `[Authorize]`, MVC yetkilendirme filtrelerini oluşturmak için kullanılan özniteliktir.
+[Filtreler](controllers/filters.md) , geliştiricilerin özel durum işleme veya yetkilendirme gibi çapraz sorunları yalıtmalarına yardımcı olur. Filtreler, eylem yöntemleri için özel ön ve son işlem dışı mantığı çalıştırmayı etkinleştirir ve belirli bir istek için yürütme işlem hattının içindeki belirli noktalarda çalışacak şekilde yapılandırılabilir. Filtreler, denetleyicilere veya eylemlere öznitelik olarak uygulanabilir (veya küresel olarak çalıştırılabilir). Birçok filtre (gibi `Authorize` ) çerçeveye dahil edilir. `[Authorize]` , MVC yetkilendirme filtrelerini oluşturmak için kullanılan özniteliktir.
 
 ```csharp
 [Authorize]
@@ -196,9 +197,9 @@ Hiper medya desteğini etkinleştirmek için bağlantı oluşturma kullanın. We
 
 Çerçevenin arabirimlerin ve bağımlılık ekleme özelliğinin kullanımı, birim testine uygun hale getirir ve Framework, [tümleştirme testlerini](xref:test/integration-tests) hızlı ve kolay hale getirmek için özellikler (Entity Framework Için bir testhost ve InMemory sağlayıcısı gibi) içerir. [Denetleyici mantığını test etme](controllers/testing.md)hakkında daha fazla bilgi edinin.
 
-### <a name="no-locrazor-view-engine"></a>Razoraltyapıyı görüntüle
+### <a name="no-locrazor-view-engine"></a>Razor altyapıyı görüntüle
 
-[MVC görünümlerini ASP.NET Core](views/overview.md) görünümleri oluşturmak için [ Razor Görünüm altyapısını](views/razor.md) kullanın. Razor, katıştırılmış C# kodu kullanarak görünümleri tanımlamaya yönelik kompakt, ifade ve akışkan şablonu biçimlendirme dilidir. Razor, sunucusunda dinamik olarak Web içeriği oluşturmak için kullanılır. Sunucu kodunu istemci tarafı içeriğiyle ve kodla düzgün bir şekilde karıştırabilirsiniz.
+[MVC görünümlerini ASP.NET Core](views/overview.md) görünümleri oluşturmak için [ Razor Görünüm altyapısını](views/razor.md) kullanın. Razor , katıştırılmış C# kodu kullanarak görünümleri tanımlamaya yönelik kompakt, ifade ve akışkan şablonu biçimlendirme dilidir. Razor , sunucusunda dinamik olarak Web içeriği oluşturmak için kullanılır. Sunucu kodunu istemci tarafı içeriğiyle ve kodla düzgün bir şekilde karıştırabilirsiniz.
 
 ```cshtml
 <ul>
@@ -212,7 +213,7 @@ RazorGörünüm altyapısını kullanarak [düzenler](views/layout.md), [kısmi 
 
 ### <a name="strongly-typed-views"></a>Türü kesin belirlenmiş görünümler
 
-RazorMVC 'deki görünümler modelinize göre kesin bir şekilde yazılabilir. Denetleyiciler, görünümlerinizin tür denetlemesi ve IntelliSense desteği olmasını sağlayan görünümlere kesin olarak belirlenmiş bir model geçirebilir.
+Razor MVC 'deki görünümler modelinize göre kesin bir şekilde yazılabilir. Denetleyiciler, görünümlerinizin tür denetlemesi ve IntelliSense desteği olmasını sağlayan görünümlere kesin olarak belirlenmiş bir model geçirebilir.
 
 Örneğin, aşağıdaki görünüm türünde bir model işler `IEnumerable<Product>` :
 

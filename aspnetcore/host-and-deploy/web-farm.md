@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/web-farm
-ms.openlocfilehash: 58409b5c47d71c96ece6f4ecfab6f18df47f798b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 13f1ad5dcd4a230ec05b08c402f4ee9e455c3c29
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015445"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634143"
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>Web çiftliğinde ASP.NET Core ana bilgisayar
 
@@ -60,7 +61,7 @@ Veri koruma ve önbelleğe alma, bir Web grubuna dağıtılan uygulamalar için 
 
 [ASP.NET Core Data Protection sistemi](xref:security/data-protection/introduction) , uygulamalar tarafından verileri korumak için kullanılır. Veri koruma, *anahtar halkaında*depolanan bir şifreleme anahtarı kümesini temel alır. Veri koruma sistemi başlatıldığında, anahtar halkasını yerel olarak depolayan [varsayılan ayarları](xref:security/data-protection/configuration/default-settings) uygular. Varsayılan yapılandırma altında, Web grubunun her bir düğümüne benzersiz bir anahtar halkası depolanır. Sonuç olarak, her Web grubu düğümü diğer düğümlerde bir uygulama tarafından şifrelenen verilerin şifresini çözemez. Varsayılan yapılandırma, uygulamaları bir Web grubunda barındırmak için genellikle uygun değildir. Paylaşılan anahtar halkasını uygulamaya bir alternatif, her zaman kullanıcı isteklerini aynı düğüme yönlendirkullanmaktır. Web grubu dağıtımları için veri koruma sistem yapılandırması hakkında daha fazla bilgi için bkz <xref:security/data-protection/configuration/overview> ..
 
-### <a name="caching"></a>Önbelleğe alma
+### <a name="caching"></a>Önbelleğe Alma
 
 Bir Web grubu ortamında, önbelleğe alma mekanizması, önbelleğe alınmış öğeleri Web grubunun düğümleri arasında paylaşmalıdır. Önbelleğe alma, ortak bir Redsıs önbelleği, paylaşılan bir SQL Server veritabanı veya Web grubu genelinde önbelleğe alınmış öğeleri paylaşan özel bir önbelleğe alma uygulamasını kullanmalıdır. Daha fazla bilgi için bkz. <xref:performance/caching/distributed>.
 
@@ -68,7 +69,7 @@ Bir Web grubu ortamında, önbelleğe alma mekanizması, önbelleğe alınmış 
 
 Aşağıdaki senaryolar ek yapılandırma gerektirmez, ancak Web grupları için yapılandırma gerektiren teknolojilere bağımlıdır.
 
-| Senaryo | Bağlı&hellip; |
+| Senaryo | Bağlı &hellip; |
 | -------- | ------------------- |
 | Kimlik Doğrulaması | Veri koruma (bkz <xref:security/data-protection/configuration/overview> .).<br><br>Daha fazla bilgi için <xref:security/authentication/cookie> ve <xref:security/cookie-sharing> bölümlerine bakın. |
 | Identity | Kimlik doğrulama ve veritabanı yapılandırması.<br><br>Daha fazla bilgi için bkz. <xref:security/authentication/identity>. |

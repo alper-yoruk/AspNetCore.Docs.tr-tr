@@ -6,6 +6,7 @@ ms.assetid: 0be164aa-1d72-4192-bd6b-192c9c301164
 ms.author: riande
 ms.date: 12/18/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/model-binding
-ms.openlocfilehash: 6ec531a04a220f75f5793cb2c7b5232908dbd883
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ec36ff6d646e0554550a4372389aed89aa267b1f
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019163"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633987"
 ---
 # <a name="model-binding-in-aspnet-core"></a>ASP.NET Core 'de model bağlama
 
@@ -65,7 +66,7 @@ Framework daha sonra yöntemi çağırır `GetById` , parametresi için 2 ' ye g
 
 Önceki örnekte, model bağlama hedefleri basit türler olan yöntem parametreleridir. Hedefler, karmaşık bir türün özellikleri de olabilir. Her bir özellik başarıyla bağlandıktan sonra, bu özellik için [model doğrulaması](xref:mvc/models/validation) oluşur. Hangi verilerin modele bağladığına ve tüm bağlama veya doğrulama hatalarıyla ilgili kayıt, [ControllerBase. ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState) veya [Pagemodel. ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState)içinde depolanır. Bu işlemin başarılı olup olmadığını öğrenmek için uygulama [ModelState. IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid) bayrağını denetler.
 
-## <a name="targets"></a>Hedefler
+## <a name="targets"></a>Targets
 
 Model bağlama, aşağıdaki tür hedeflerin değerlerini bulmayı dener:
 
@@ -108,11 +109,11 @@ Her hedef parametresi veya özelliği için kaynaklar, önceki listede belirtile
 
 Varsayılan kaynak doğru değilse, kaynağı belirtmek için aşağıdaki özniteliklerden birini kullanın:
 
-* [`[FromQuery]`](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute)-Sorgu dizesinden değerleri alır. 
-* [`[FromRoute]`](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute)-Rota verilerinden değerleri alır.
-* [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute)-Postalanan Form alanlarındaki değerleri alır.
-* [`[FromBody]`](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute)-İstek gövdesinden değerleri alır.
-* [`[FromHeader]`](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute)-HTTP başlıklarındaki değerleri alır.
+* [`[FromQuery]`](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute) -Sorgu dizesinden değerleri alır. 
+* [`[FromRoute]`](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute) -Rota verilerinden değerleri alır.
+* [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) -Postalanan Form alanlarındaki değerleri alır.
+* [`[FromBody]`](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute) -İstek gövdesinden değerleri alır.
+* [`[FromHeader]`](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute) -HTTP başlıklarındaki değerleri alır.
 
 Bu öznitelikler:
 
@@ -273,30 +274,16 @@ Model bağlama, anahtar kaynaklarına bakarak başlar `Instructor.ID` . Bu bulun
 
 Karmaşık türlerin model bağlamasını denetlemek için birkaç yerleşik öznitelik mevcuttur:
 
+* `[Bind]`
 * `[BindRequired]`
 * `[BindNever]`
-* `[Bind]`
 
-> [!NOTE]
-> Bu öznitelikler, gönderilen form verileri değer kaynağı olduğunda model bağlamayı etkiler. Bunlar, gönderilen JSON ve XML istek gövdelerini işleyen giriş formatlayıcıları 'nı etkilemez. Giriş biçimleri [Bu makalenin ilerleyen kısımlarında](#input-formatters)açıklanmıştır.
->
-> Ayrıca bkz `[Required]` . [model doğrulama](xref:mvc/models/validation#required-attribute)içindeki öznitelik tartışması.
-
-### <a name="bindrequired-attribute"></a>[BindRequired] özniteliği
-
-, Yöntem parametrelerine değil yalnızca model özelliklerine uygulanabilir. Modelin özelliği için bağlama gerçekleşmemişse model bağlamasının model durumu hatası eklemesine neden olur. Aşağıda bir örnek verilmiştir:
-
-[!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/InstructorWithCollection.cs?name=snippet_BindRequired&highlight=8-9)]
-
-### <a name="bindnever-attribute"></a>[Bindhiç] özniteliği
-
-, Yöntem parametrelerine değil yalnızca model özelliklerine uygulanabilir. Model bağlamasının model özelliğini değiştirmesini engeller. Aşağıda bir örnek verilmiştir:
-
-[!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/InstructorWithDictionary.cs?name=snippet_BindNever&highlight=3-4)]
+> [!WARNING]
+> Bu öznitelikler, gönderilen form verileri değer kaynağı olduğunda model bağlamayı etkiler. Bunlar, gönderilen JSON ve XML istek gövdelerini işleyen giriş formatlayıcıları ***'nı etkilemez.*** Giriş biçimleri [Bu makalenin ilerleyen kısımlarında](#input-formatters)açıklanmıştır.
 
 ### <a name="bind-attribute"></a>[Bind] özniteliği
 
-, Bir sınıfa veya yöntem parametresine uygulanabilir. Model bağlamasındaki bir modelin hangi özelliklerinin dahil edileceğini belirtir.
+, Bir sınıfa veya yöntem parametresine uygulanabilir. Model bağlamasındaki bir modelin hangi özelliklerinin dahil edileceğini belirtir. `[Bind]`Giriş ***formatlarını etkilemez.***
 
 Aşağıdaki örnekte, `Instructor` herhangi bir işleyici veya eylem yöntemi çağrıldığında yalnızca modelin belirtilen özellikleri bağlanır:
 
@@ -313,6 +300,20 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 ```
 
 `[Bind]`Özniteliği, *oluşturma* senaryolarında fazla nakline karşı korumak için kullanılabilir. Dışlanan Özellikler null ya da boş değer olarak ayarlandığı için, düzenleme senaryolarında iyi çalışmaz. Fazla naklin savunma için, öznitelik yerine görüntüleme modelleri önerilir `[Bind]` . Daha fazla bilgi için bkz. fazla [nakil hakkında güvenlik NOI](xref:data/ef-mvc/crud#security-note-about-overposting).
+
+### <a name="bindrequired-attribute"></a>[BindRequired] özniteliği
+
+, Yöntem parametrelerine değil yalnızca model özelliklerine uygulanabilir. Modelin özelliği için bağlama gerçekleşmemişse model bağlamasının model durumu hatası eklemesine neden olur. Aşağıda bir örnek verilmiştir:
+
+[!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/InstructorWithCollection.cs?name=snippet_BindRequired&highlight=8-9)]
+
+Ayrıca bkz `[Required]` . [model doğrulama](xref:mvc/models/validation#required-attribute)içindeki öznitelik tartışması.
+
+### <a name="bindnever-attribute"></a>[Bindhiç] özniteliği
+
+, Yöntem parametrelerine değil yalnızca model özelliklerine uygulanabilir. Model bağlamasının model özelliğini değiştirmesini engeller. Aşağıda bir örnek verilmiştir:
+
+[!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/InstructorWithDictionary.cs?name=snippet_BindNever&highlight=3-4)]
 
 ## <a name="collections"></a>Koleksiyonlar
 
@@ -406,7 +407,7 @@ Buna karşılık, form verilerinden gelen değerler kültüre duyarlı bir dön�
 
 ASP.NET Core yol değeri sağlayıcısını ve sorgu dizesi değeri sağlayıcısını, kültüre duyarlı bir dönüşüme dönüştürmek için:
 
-* Şuradan devralma<xref:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProviderFactory>
+* Şuradan devralma <xref:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProviderFactory>
 * [QueryStringValueProviderFactory](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/ModelBinding/QueryStringValueProviderFactory.cs) veya [RouteValueValueProviderFactory](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/ModelBinding/RouteValueProviderFactory.cs) adresinden kodu kopyalayın
 * Değer sağlayıcısı oluşturucusuna geçirilen [kültür değerini](https://github.com/dotnet/AspNetCore/blob/e625fe29b049c60242e8048b4ea743cca65aa7b5/src/Mvc/Mvc.Core/src/ModelBinding/QueryStringValueProviderFactory.cs#L30) [CultureInfo. CurrentCulture](xref:System.Globalization.CultureInfo.CurrentCulture) ile değiştirin
 * MVC seçeneklerinde varsayılan değer sağlayıcı fabrikasını yeni bir değerle değiştirin:
@@ -494,7 +495,7 @@ Model bağlama yöntemi kullanılarak el ile çağrılabilir <xref:Microsoft.Asp
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Pages/InstructorsWithCollection/Create.cshtml.cs?name=snippet_TryUpdate&highlight=1-4)]
 
-<xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*>, form gövdesinden, sorgu dizesinden ve veri yönlendirme verilerinden veri almak için değer sağlayıcılarını kullanır. `TryUpdateModelAsync`genellikle: 
+<xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*>  , form gövdesinden, sorgu dizesinden ve veri yönlendirme verilerinden veri almak için değer sağlayıcılarını kullanır. `TryUpdateModelAsync` genellikle: 
 
 * Daha Razor fazla nakletmeyi engellemek için denetleyiciler ve görünümler kullanan sayfalarla ve MVC uygulamalarıyla kullanılır.
 * Form verilerinden, sorgu dizelerinden ve veri rotalarından tüketilmediği müddetçe bir Web API 'SI ile kullanılmaz. JSON kullanan Web API uç noktaları, istek gövdesini bir nesne olarak seri durumdan çıkarmak için [giriş formatlarını](#input-formatters) kullanır.
@@ -551,7 +552,7 @@ Framework daha sonra yöntemi çağırır `GetById` , parametresi için 2 ' ye g
 
 Önceki örnekte, model bağlama hedefleri basit türler olan yöntem parametreleridir. Hedefler, karmaşık bir türün özellikleri de olabilir. Her bir özellik başarıyla bağlandıktan sonra, bu özellik için [model doğrulaması](xref:mvc/models/validation) oluşur. Hangi verilerin modele bağladığına ve tüm bağlama veya doğrulama hatalarıyla ilgili kayıt, [ControllerBase. ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState) veya [Pagemodel. ModelState](xref:Microsoft.AspNetCore.Mvc.ControllerBase.ModelState)içinde depolanır. Bu işlemin başarılı olup olmadığını öğrenmek için uygulama [ModelState. IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid) bayrağını denetler.
 
-## <a name="targets"></a>Hedefler
+## <a name="targets"></a>Targets
 
 Model bağlama, aşağıdaki tür hedeflerin değerlerini bulmayı dener:
 
@@ -594,11 +595,11 @@ Her hedef parametresi veya özelliği için kaynaklar, önceki listede belirtile
 
 Varsayılan kaynak doğru değilse, kaynağı belirtmek için aşağıdaki özniteliklerden birini kullanın:
 
-* [`[FromQuery]`](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute)-Sorgu dizesinden değerleri alır. 
-* [`[FromRoute]`](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute)-Rota verilerinden değerleri alır.
-* [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute)-Postalanan Form alanlarındaki değerleri alır.
-* [`[FromBody]`](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute)-İstek gövdesinden değerleri alır.
-* [`[FromHeader]`](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute)-HTTP başlıklarındaki değerleri alır.
+* [`[FromQuery]`](xref:Microsoft.AspNetCore.Mvc.FromQueryAttribute) -Sorgu dizesinden değerleri alır. 
+* [`[FromRoute]`](xref:Microsoft.AspNetCore.Mvc.FromRouteAttribute) -Rota verilerinden değerleri alır.
+* [`[FromForm]`](xref:Microsoft.AspNetCore.Mvc.FromFormAttribute) -Postalanan Form alanlarındaki değerleri alır.
+* [`[FromBody]`](xref:Microsoft.AspNetCore.Mvc.FromBodyAttribute) -İstek gövdesinden değerleri alır.
+* [`[FromHeader]`](xref:Microsoft.AspNetCore.Mvc.FromHeaderAttribute) -HTTP başlıklarındaki değerleri alır.
 
 Bu öznitelikler:
 
@@ -892,7 +893,7 @@ Buna karşılık, form verilerinden gelen değerler kültüre duyarlı bir dön�
 
 ASP.NET Core yol değeri sağlayıcısını ve sorgu dizesi değeri sağlayıcısını, kültüre duyarlı bir dönüşüme dönüştürmek için:
 
-* Şuradan devralma<xref:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProviderFactory>
+* Şuradan devralma <xref:Microsoft.AspNetCore.Mvc.ModelBinding.IValueProviderFactory>
 * [QueryStringValueProviderFactory](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/ModelBinding/QueryStringValueProviderFactory.cs) veya [RouteValueValueProviderFactory](https://github.com/dotnet/AspNetCore/blob/master/src/Mvc/Mvc.Core/src/ModelBinding/RouteValueProviderFactory.cs) adresinden kodu kopyalayın
 * Değer sağlayıcısı oluşturucusuna geçirilen [kültür değerini](https://github.com/dotnet/AspNetCore/blob/e625fe29b049c60242e8048b4ea743cca65aa7b5/src/Mvc/Mvc.Core/src/ModelBinding/QueryStringValueProviderFactory.cs#L30) [CultureInfo. CurrentCulture](xref:System.Globalization.CultureInfo.CurrentCulture) ile değiştirin
 * MVC seçeneklerinde varsayılan değer sağlayıcı fabrikasını yeni bir değerle değiştirin:

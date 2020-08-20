@@ -5,6 +5,7 @@ description: ASP.NET Core MVC 'deki öğretici serisinin 2. bölümü.
 ms.author: riande
 ms.date: 08/05/2017
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-controller
-ms.openlocfilehash: 46f8cbc5ef3d9fe00a5151160a9119f68a9fe572
-ms.sourcegitcommit: 68d03d1aee8906b53bda66f8f1e0747efc3007e6
+ms.openlocfilehash: b5ef99d5645e0bbd453d09809a446bf4af38a975
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/10/2020
-ms.locfileid: "88051816"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634052"
 ---
 # <a name="part-2-add-a-controller-to-an-aspnet-core-mvc-app"></a>2. bölüm, ASP.NET Core MVC uygulamasına denetleyici ekleme
 
@@ -34,7 +35,7 @@ Model-View-Controller (MVC) mimari modeli, bir uygulamayı üç ana bileşene ay
 
 * **V**ıews: görünümler, uygulamanın kullanıcı ARABIRIMINI (UI) görüntüleyen bileşenlerdir. Genellikle, bu kullanıcı arabirimi model verilerini görüntüler.
 
-* **C**ontrolleyiciler: tarayıcı Isteklerini işleyen sınıflar. Model verileri alır ve yanıt döndüren çağrı görünümü şablonları. MVC uygulamasında, görünüm yalnızca bilgileri görüntüler; denetleyici, Kullanıcı girişini ve etkileşimini işler ve yanıtlar. Örneğin, denetleyici rota verilerini ve sorgu dizesi değerlerini işler ve bu değerleri modele geçirir. Model bu değerleri veritabanını sorgulamak için kullanabilir. Örneğin, `https://localhost:5001/Home/Privacy` `Home` (denetleyici) ve `Privacy` (ana denetleyicide çağrılacak eylem yöntemi) verilerinin yolunu içerir. `https://localhost:5001/Movies/Edit/5`filmi film denetleyicisi kullanarak, ID = 5 olan filmi düzenleme isteği. Rota verileri öğreticide daha sonra açıklanmaktadır.
+* **C**ontrolleyiciler: tarayıcı Isteklerini işleyen sınıflar. Model verileri alır ve yanıt döndüren çağrı görünümü şablonları. MVC uygulamasında, görünüm yalnızca bilgileri görüntüler; denetleyici, Kullanıcı girişini ve etkileşimini işler ve yanıtlar. Örneğin, denetleyici rota verilerini ve sorgu dizesi değerlerini işler ve bu değerleri modele geçirir. Model bu değerleri veritabanını sorgulamak için kullanabilir. Örneğin, `https://localhost:5001/Home/Privacy` `Home` (denetleyici) ve `Privacy` (ana denetleyicide çağrılacak eylem yöntemi) verilerinin yolunu içerir. `https://localhost:5001/Movies/Edit/5` filmi film denetleyicisi kullanarak, ID = 5 olan filmi düzenleme isteği. Rota verileri öğreticide daha sonra açıklanmaktadır.
 
 MVC deseninin uygulamanın farklı yönlerini (Giriş mantığı, iş mantığı ve Kullanıcı arabirimi mantığı) ayıran uygulamalar oluşturmanıza yardımcı olur. bu öğeler arasında gevşek bir bağ sağlanır. Bu model, her bir mantık türünün uygulamada nerede bulunması gerektiğini belirtir. Kullanıcı arabirimi mantığı görünüme aittir. Giriş mantığı denetleyiciye aittir. İş mantığı modele aittir. Bu ayrım, bir uygulama oluşturduğunuzda karmaşıklığın yönetilmesine yardımcı olur, çünkü uygulamanın bir tek tarafında, başka bir kodu etkilemeden bir kez çalışmanıza olanak sağlar. Örneğin, iş mantığı koduna bağlı kalmadan görünüm kodu üzerinde çalışabilirsiniz.
 
@@ -126,7 +127,7 @@ Yukarıdaki görüntüde, URL segmenti ( `Parameters` ) kullanılmaz, `name` ve 
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_3)]
 
-Uygulamayı çalıştırın ve aşağıdaki URL 'YI girin:`https://localhost:{PORT}/HelloWorld/Welcome/3?name=Rick`
+Uygulamayı çalıştırın ve aşağıdaki URL 'YI girin: `https://localhost:{PORT}/HelloWorld/Welcome/3?name=Rick`
 
 Bu kez, üçüncü URL segmenti rota parametresiyle eşleşti `id` . `Welcome`Yöntemi, `id` yöntemindeki URL şablonuyla eşleşen bir parametre içerir `MapControllerRoute` . Sondaki `?` (içinde `id?` ) `id` parametresinin isteğe bağlı olduğunu gösterir.
 
@@ -148,7 +149,7 @@ Model-View-Controller (MVC) mimari modeli, bir uygulamayı üç ana bileşene ay
 
 * **V**ıews: görünümler, uygulamanın kullanıcı ARABIRIMINI (UI) görüntüleyen bileşenlerdir. Genellikle, bu kullanıcı arabirimi model verilerini görüntüler.
 
-* **C**ontrolleyiciler: tarayıcı Isteklerini işleyen sınıflar. Model verileri alır ve yanıt döndüren çağrı görünümü şablonları. MVC uygulamasında, görünüm yalnızca bilgileri görüntüler; denetleyici, Kullanıcı girişini ve etkileşimini işler ve yanıtlar. Örneğin, denetleyici rota verilerini ve sorgu dizesi değerlerini işler ve bu değerleri modele geçirir. Model bu değerleri veritabanını sorgulamak için kullanabilir. Örneğin, `https://localhost:5001/Home/About` `Home` (denetleyici) ve `About` (ana denetleyicide çağrılacak eylem yöntemi) verilerinin yolunu içerir. `https://localhost:5001/Movies/Edit/5`filmi film denetleyicisi kullanarak, ID = 5 olan filmi düzenleme isteği. Rota verileri öğreticide daha sonra açıklanmaktadır.
+* **C**ontrolleyiciler: tarayıcı Isteklerini işleyen sınıflar. Model verileri alır ve yanıt döndüren çağrı görünümü şablonları. MVC uygulamasında, görünüm yalnızca bilgileri görüntüler; denetleyici, Kullanıcı girişini ve etkileşimini işler ve yanıtlar. Örneğin, denetleyici rota verilerini ve sorgu dizesi değerlerini işler ve bu değerleri modele geçirir. Model bu değerleri veritabanını sorgulamak için kullanabilir. Örneğin, `https://localhost:5001/Home/About` `Home` (denetleyici) ve `About` (ana denetleyicide çağrılacak eylem yöntemi) verilerinin yolunu içerir. `https://localhost:5001/Movies/Edit/5` filmi film denetleyicisi kullanarak, ID = 5 olan filmi düzenleme isteği. Rota verileri öğreticide daha sonra açıklanmaktadır.
 
 MVC deseninin uygulamanın farklı yönlerini (Giriş mantığı, iş mantığı ve Kullanıcı arabirimi mantığı) ayıran uygulamalar oluşturmanıza yardımcı olur. bu öğeler arasında gevşek bir bağ sağlanır. Bu model, her bir mantık türünün uygulamada nerede bulunması gerektiğini belirtir. Kullanıcı arabirimi mantığı görünüme aittir. Giriş mantığı denetleyiciye aittir. İş mantığı modele aittir. Bu ayrım, bir uygulama oluşturduğunuzda karmaşıklığın yönetilmesine yardımcı olur, çünkü uygulamanın bir tek tarafında, başka bir kodu etkilemeden bir kez çalışmanıza olanak sağlar. Örneğin, iş mantığı koduna bağlı kalmadan görünüm kodu üzerinde çalışabilirsiniz.
 
@@ -245,7 +246,7 @@ Yukarıdaki görüntüde, URL segmenti ( `Parameters` ) kullanılmaz, `name` ve 
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_3)]
 
-Uygulamayı çalıştırın ve aşağıdaki URL 'YI girin:`https://localhost:{PORT}/HelloWorld/Welcome/3?name=Rick`
+Uygulamayı çalıştırın ve aşağıdaki URL 'YI girin: `https://localhost:{PORT}/HelloWorld/Welcome/3?name=Rick`
 
 Bu kez, üçüncü URL segmenti rota parametresiyle eşleşti `id` . `Welcome`Yöntemi, `id` yöntemindeki URL şablonuyla eşleşen bir parametre içerir `MapRoute` . Sondaki `?` (içinde `id?` ) `id` parametresinin isteğe bağlı olduğunu gösterir.
 

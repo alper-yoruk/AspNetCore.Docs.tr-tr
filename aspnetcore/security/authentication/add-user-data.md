@@ -6,6 +6,7 @@ ms.author: riande
 ms.date: 03/26/2020
 ms.custom: mvc, seodec18
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/add-user-data
-ms.openlocfilehash: d65974e9ff8e2f5be52ab79b063ed9d2dca557ea
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a71395e82ed15dae753888a438471495208a14da
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020866"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631855"
 ---
 # <a name="add-download-and-delete-custom-user-data-to-no-locidentity-in-an-aspnet-core-project"></a>ASP.NET Core projesindeki özel kullanıcı verilerini ekleme, indirme ve silme Identity
 
@@ -36,7 +37,7 @@ Proje örneği bir sayfalar Web uygulamasından oluşturulur Razor , ancak yöne
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/add-user-data) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -90,13 +91,13 @@ dotnet new webapp -o WebApp1
 * **Çözüm Gezgini**, projeye sağ tıklayıp **Add**  >  **Yeni iskli öğe**Ekle >.
 * **Yapı iskelesi Ekle** iletişim kutusunun sol bölmesinde Ekle ' yi seçin **Identity**  >  **Add**.
 * **Ekle Identity ** iletişim kutusunda aşağıdaki seçenekler:
-  * Var olan düzen dosyasını seçin *~/Pages/Shared/_Layout. cshtml*
+  * Var olan düzen dosyasını seçin  *~/Pages/Shared/_Layout. cshtml*
   * Geçersiz kılmak için aşağıdaki dosyaları seçin:
     * **Hesap/kayıt**
     * **Hesap/yönet/Dizin**
   * **+** Yeni bir **veri bağlamı sınıfı**oluşturmak için düğmeyi seçin. Proje **WebApp1**olarak adlandırılmışsa türü (**WebApp1. modeller. WebApp1Context** ) kabul edin.
   * **+** Yeni bir **Kullanıcı sınıfı**oluşturmak için düğmeyi seçin. **Ekle**> ( **projenin adı****WebApp1User** ) öğesini kabul edin.
-* **Add (Ekle)** seçeneğini belirleyin.
+* **Ekle**’yi seçin.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
@@ -244,7 +245,7 @@ Uygulamayı test etme:
 > [!NOTE]
 > Bu bölüm, önceki öğreticinin bir uzantısı değildir. Aşağıdaki adımları öğretici kullanılarak oluşturulan uygulamaya uygulamak için [Bu GitHub sorununa](https://github.com/dotnet/AspNetCore.Docs/issues/18797)bakın.
 
-Arabirimi kullanılarak ASP.NET Core ek talepler eklenebilir Identity `IUserClaimsPrincipalFactory<T>` . Bu sınıf, yöntemi içinde uygulamaya eklenebilir `Startup.ConfigureServices` . Sınıfının özel uygulamasını şu şekilde ekleyin:
+Arabirimi kullanılarak ek talepler eklenebilir ASP.NET Core Identity `IUserClaimsPrincipalFactory<T>` . Bu sınıf, yöntemi içinde uygulamaya eklenebilir `Startup.ConfigureServices` . Sınıfının özel uygulamasını şu şekilde ekleyin:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)

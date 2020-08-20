@@ -5,6 +5,7 @@ description: ASP.NET Core veri koruma bağlamı üst bilgilerinin uygulama ayrı
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/context-headers
-ms.openlocfilehash: 572f930dbf78aaef1ed47d1a154b5ba56633b4f1
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 2f07db4b7d8bca9f64aee5d60e88fc92dc8965eb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018825"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633714"
 ---
 # <a name="context-headers-in-aspnet-core"></a>ASP.NET Core bağlam üst bilgileri
 
@@ -95,15 +96,15 @@ DB 6F D4 79 11 84 B9 96 09 2E E1 20 2F 36 E8 60
 
 Bu bağlam üst bilgisi, kimliği doğrulanmış şifreleme algoritması çiftinin parmak izi (AES-192-CBC şifrelemesi + HMACSHA256 Validation). [Yukarıda](xref:security/data-protection/implementation/context-headers#data-protection-implementation-context-headers-cbc-components) açıklanan bileşenler şunlardır:
 
-* işaretleyici`(00 00)`
+* işaretleyici `(00 00)`
 
-* blok şifre anahtar uzunluğu`(00 00 00 18)`
+* blok şifre anahtar uzunluğu `(00 00 00 18)`
 
-* blok şifre blok boyutu`(00 00 00 10)`
+* blok şifre blok boyutu `(00 00 00 10)`
 
-* HMAC anahtar uzunluğu`(00 00 00 20)`
+* HMAC anahtar uzunluğu `(00 00 00 20)`
 
-* HMAC Özet boyutu`(00 00 00 20)`
+* HMAC Özet boyutu `(00 00 00 20)`
 
 * blok şifre PRP çıkışı `(F4 74 - DB 6F)` ve
 
@@ -140,15 +141,15 @@ Bu, aşağıda gösterildiği gibi, kimliği doğrulanmış şifreleme algoritma
 
 Bileşenler aşağıdaki gibi kesilir:
 
-* işaretleyici`(00 00)`
+* işaretleyici `(00 00)`
 
-* blok şifre anahtar uzunluğu`(00 00 00 18)`
+* blok şifre anahtar uzunluğu `(00 00 00 18)`
 
-* blok şifre blok boyutu`(00 00 00 08)`
+* blok şifre blok boyutu `(00 00 00 08)`
 
-* HMAC anahtar uzunluğu`(00 00 00 14)`
+* HMAC anahtar uzunluğu `(00 00 00 14)`
 
-* HMAC Özet boyutu`(00 00 00 14)`
+* HMAC Özet boyutu `(00 00 00 14)`
 
 * blok şifre PRP çıkışı `(AB B1 - E1 0E)` ve
 
@@ -170,7 +171,7 @@ Bağlam üst bilgisi aşağıdaki bileşenlerden oluşur:
 
 * [128 bit] `Enc_GCM (K_E, nonce, "")`Simetrik blok şifreleme algoritmasının çıkışı boş bir dize girişi, ve nonce 'nin 96 bitlik bir tamamen sıfır vektörü olduğu, ' nin etiketi.
 
-`K_E`, CBC şifreleme + HMAC kimlik doğrulama senaryosunda aynı mekanizmayı kullanarak türetilir. Ancak burada hiçbir yürütme olmadığından, `K_H` temelde bu, `| K_H | = 0` algoritma aşağıdaki biçime daraltılır.
+`K_E` , CBC şifreleme + HMAC kimlik doğrulama senaryosunda aynı mekanizmayı kullanarak türetilir. Ancak burada hiçbir yürütme olmadığından, `K_H` temelde bu, `| K_H | = 0` algoritma aşağıdaki biçime daraltılır.
 
 `K_E = SP800_108_CTR(prf = HMACSHA512, key = "", label = "", context = "")`
 
@@ -194,13 +195,13 @@ BE 45
 
 Bileşenler aşağıdaki gibi kesilir:
 
-* işaretleyici`(00 01)`
+* işaretleyici `(00 01)`
 
-* blok şifre anahtar uzunluğu`(00 00 00 20)`
+* blok şifre anahtar uzunluğu `(00 00 00 20)`
 
-* nonce boyutu`(00 00 00 0C)`
+* nonce boyutu `(00 00 00 0C)`
 
-* blok şifre blok boyutu`(00 00 00 10)`
+* blok şifre blok boyutu `(00 00 00 10)`
 
 * kimlik doğrulama etiketi boyutu `(00 00 00 10)` ve
 

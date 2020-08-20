@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/03/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - SignalR
 - Electron
 uid: security/samesite
-ms.openlocfilehash: 7688367093dec09c172a2e24337566bc5e5185f6
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: c95952face8763dc9f2dd12312cab1a1bc07528a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021750"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632349"
 ---
 # <a name="work-with-samesite-no-loccookies-in-aspnet-core"></a>cookieASP.NET Core ' de SameSite s ile çalışma
 
@@ -31,7 +32,7 @@ Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 SameSite, siteler arası istek sahteciliği (CSRF) saldırılarına karşı bir koruma sağlamak için tasarlanmış bir [IETF](https://ietf.org/about/) taslak standardıdır. [2016](https://tools.ietf.org/html/draft-west-first-party-cookies-07)içinde orijinal drafted, taslak standart [2019](https://tools.ietf.org/html/draft-west-cookie-incrementalism-00)' de güncelleştirildi. Güncelleştirilmiş standart, önceki standartlarla geriye dönük olarak uyumlu değildir ve aşağıdakiler en belirgin farklılıklardır:
 
 * Cookie, SameSite üst bilgisi olmayan s varsayılan olarak kabul edilir `SameSite=Lax` .
-* `SameSite=None`siteler arası kullanıma izin vermek için kullanılmalıdır cookie .
+* `SameSite=None` siteler arası kullanıma izin vermek için kullanılmalıdır cookie .
 * Cookies bu `SameSite=None` onay ayrıca olarak işaretlenmelidir `Secure` .
 * Kullanan uygulamalar [`<iframe>`](https://developer.mozilla.org/docs/Web/HTML/Element/iframe) `sameSite=Lax` `sameSite=Strict` cookie `<iframe>` , siteler arası senaryolar olarak kabul edildiği için veya öğeleri ile ilgili sorunlar yaşayabilir.
 * Değerin `SameSite=None` [2016 standart](https://tools.ietf.org/html/draft-west-first-party-cookies-07) tarafından yapılmasına izin verilmez ve bazı uygulamaların gibi bu tür öğeleri ele almasına neden olur cookie `SameSite=Strict` . Bkz. bu belgede [eski tarayıcıları destekleme](#sob) .
@@ -40,7 +41,7 @@ Bu `SameSite=Lax` ayar çoğu uygulama için geçerlidir cookie . [OpenID Connec
 
 Her bir ASP.NET Core bileşeni, cookie SameSite ' ın uygun olup olmadığına karar vermek için gerekir.
 
-## <a name="samesite-and-no-locidentity"></a>SameSite veIdentity
+## <a name="samesite-and-no-locidentity"></a>SameSite ve Identity
 
 [!INCLUDE[](~/includes/SameSiteIdentity.md)]
 
@@ -72,7 +73,7 @@ Aşağıdaki örnek indirilebilir ve test edilebilir:
 
 ## <a name="net-core-support-for-the-samesite-attribute"></a>SameSite özniteliği için .NET Core desteği
 
-.NET Core 2,2, Aralık 2019 ' de güncelleştirmelerin yayımlanmasından bu yana SameSite için 2019 taslak standardını destekler. Geliştiriciler özelliği kullanarak sameSite özniteliğinin değerini programlı bir şekilde denetleyebilir `HttpCookie.SameSite` . `SameSite`Özelliği Strict, LAX veya None olarak ayarlamak, bu değerlerin ile ağda yazıldığı sonuçlara neden olur cookie . Şuna eşit (SameSiteMode) (-1) ayarı, ağa hiçbir sameSite özniteliği ekleneceğini belirtircookie
+.NET Core 2,2, Aralık 2019 ' de güncelleştirmelerin yayımlanmasından bu yana SameSite için 2019 taslak standardını destekler. Geliştiriciler özelliği kullanarak sameSite özniteliğinin değerini programlı bir şekilde denetleyebilir `HttpCookie.SameSite` . `SameSite`Özelliği Strict, LAX veya None olarak ayarlamak, bu değerlerin ile ağda yazıldığı sonuçlara neden olur cookie . Şuna eşit (SameSiteMode) (-1) ayarı, ağa hiçbir sameSite özniteliği ekleneceğini belirtir cookie
 
 [!code-csharp[](samesite/snippets/Privacy.cshtml.cs?name=snippet)]
 
@@ -105,7 +106,7 @@ Tüm ASP.NET Core bileşenleri cookie , önceki varsayılan değerleri, senaryol
 | <xref:Microsoft.AspNetCore.Http.HttpContext.Session>  | [SessionOptions.Cookie](xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie) |`Lax` |
 | <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.CookieTempDataProvider>  | [CookieTempDataProviderOptions.Cookie](xref:Microsoft.AspNetCore.Mvc.CookieTempDataProviderOptions.Cookie) | `Lax` |
 | <xref:Microsoft.AspNetCore.Antiforgery.IAntiforgery> | [AntiforgeryOptions.Cookie](xref:Microsoft.AspNetCore.Antiforgery.AntiforgeryOptions.Cookie)| `Strict` |
-| [CookieYetkilendirmesi](xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*) | [CookieAuthenticationOptions.Cookie](xref:Microsoft.AspNetCore.Builder.CookieAuthenticationOptions.CookieName) | `Lax` |
+| [Cookie Yetkilendirmesi](xref:Microsoft.Extensions.DependencyInjection.CookieExtensions.AddCookie*) | [CookieAuthenticationOptions.Cookie](xref:Microsoft.AspNetCore.Builder.CookieAuthenticationOptions.CookieName) | `Lax` |
 | <xref:Microsoft.Extensions.DependencyInjection.TwitterExtensions.AddTwitter*> | [Dallı bir seçenek. durum Cookie](xref:Microsoft.AspNetCore.Authentication.Twitter.TwitterOptions.StateCookie) | `Lax`  |
 | <xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationHandler`1> | [RemoteAuthenticationOptions. bağıntıCookie](xref:Microsoft.AspNetCore.Authentication.RemoteAuthenticationOptions.CorrelationCookie)  | `None` |
 | <xref:Microsoft.Extensions.DependencyInjection.OpenIdConnectExtensions.AddOpenIdConnect*> | [Openıdconnectoptions. nonceCookie](xref:Microsoft.AspNetCore.Authentication.OpenIdConnect.OpenIdConnectOptions.NonceCookie)| `None` |
@@ -126,7 +127,7 @@ ASP.NET Core 3,1 ve üzeri, aşağıdaki SameSite desteğini sağlamaktadır:
 ASP.NET Core 3,0 ' de ve sonraki sürümlerde, tutarsız istemci varsayılanlarıyla çakışmadan kaçınmak için SameSite Varsayılanları değiştirilmiştir. Aşağıdaki API 'Ler, `SameSiteMode.Lax ` `-1` Bu öğeleri Için bir SameSite özniteliği yaymamak üzere varsayılan olan ' i olarak değiştirmiştir cookie :
 
 * <xref:Microsoft.AspNetCore.Http.CookieOptions>[HttpContext. Response ile kullanılır. Cookie s. Append](xref:Microsoft.AspNetCore.Http.IResponseCookies.Append*)
-* <xref:Microsoft.AspNetCore.Http.CookieBuilder>için bir fabrika olarak kullanılır`CookieOptions`
+* <xref:Microsoft.AspNetCore.Http.CookieBuilder>  için bir fabrika olarak kullanılır `CookieOptions`
 * [CookiePolicyOptions. MinimumSameSitePolicy](xref:Microsoft.AspNetCore.Builder.CookiePolicyOptions.MinimumSameSitePolicy)
 
 ::: moniker-end
@@ -139,7 +140,7 @@ Kasım 2019 ' de 2016 standartdan 2019 standardına güncelleştirme için [düz
 
 * , 2016 taslağı ile geriye dönük olarak uyumlu **değildir** . Daha fazla bilgi için bu belgede [eski tarayıcıları destekleme](#sob) bölümüne bakın.
 * cookie, Varsayılan olarak olarak değerlendirilir `SameSite=Lax` .
-* cookie `SameSite=None` Siteler arası teslimin etkinleştirilmesi için açıkça onay veren öğeleri belirtir `Secure` . `None`, geri çevirmek için yeni bir giriştir.
+* cookie `SameSite=None` Siteler arası teslimin etkinleştirilmesi için açıkça onay veren öğeleri belirtir `Secure` . `None` , geri çevirmek için yeni bir giriştir.
 * ASP.NET Core 2,1, 2,2 ve 3,0 için verilen düzeltme ekleri tarafından desteklenir. ASP.NET Core 3,1, ek SameSite desteğine sahiptir.
 * , [Şubat 2020](https://blog.chromium.org/2019/10/developers-get-ready-for-new.html)' de varsayılan olarak [Chrome](https://chromestatus.com/feature/5088147346030592) tarafından etkinleştirilmek üzere zamanlanır. Tarayıcılar 2019 içinde bu standarda geçmeyi başlattı.
 
@@ -211,7 +212,7 @@ Canary sürümünden itibaren `80.0.3975.0` , LAX + GEÇICI sonrası risk azaltm
 
 ### <a name="test-with-safari"></a>Safari ile test etme
 
-Safari 12, önceki taslağı kesin olarak uyguladık ve yeni `None` değer bir içinde olduğunda başarısız olur cookie . `None`Bu belgede [eski tarayıcıları destekleyen](#sob) tarayıcı algılama kodu aracılığıyla kaçınılmaz. MSAL, ADAL veya kullandığınız herhangi bir kitaplığı kullanarak Safari 12, Safari 13 ve WebKit tabanlı işletim sistemi stili oturum açma stilini test edin. Sorun, temel alınan işletim sistemi sürümüne bağımlıdır. OSX Mojave (10,14) ve iOS 12 ' nin yeni SameSite davranışıyla uyumluluk sorunlarına sahip olduğu bilinmektedir. İşletim sistemini OSX Catalina (10,15) veya iOS 13 ' e yükseltmek sorunu düzeltir. Safari 'nin şu anda yeni belirtim davranışını test etmek için bir katılım bayrağı yoktur.
+Safari 12, önceki taslağı kesin olarak uyguladık ve yeni `None` değer bir içinde olduğunda başarısız olur cookie . `None` Bu belgede [eski tarayıcıları destekleyen](#sob) tarayıcı algılama kodu aracılığıyla kaçınılmaz. MSAL, ADAL veya kullandığınız herhangi bir kitaplığı kullanarak Safari 12, Safari 13 ve WebKit tabanlı işletim sistemi stili oturum açma stilini test edin. Sorun, temel alınan işletim sistemi sürümüne bağımlıdır. OSX Mojave (10,14) ve iOS 12 ' nin yeni SameSite davranışıyla uyumluluk sorunlarına sahip olduğu bilinmektedir. İşletim sistemini OSX Catalina (10,15) veya iOS 13 ' e yükseltmek sorunu düzeltir. Safari 'nin şu anda yeni belirtim davranışını test etmek için bir katılım bayrağı yoktur.
 
 ### <a name="test-with-firefox"></a>Firefox ile test etme
 
@@ -225,7 +226,7 @@ Edge, eski SameSite standardını destekler. Edge sürüm 44, yeni standart ile 
 
 Sayfada SameSite bayrakları ayarlanır `edge://flags/#same-site-by-default-cookies` . Edge Kmıum ile hiçbir uyumluluk sorunu bulunmadı.
 
-### <a name="test-with-no-locelectron"></a>Test etmeElectron
+### <a name="test-with-no-locelectron"></a>Test etme Electron
 
 Sürümleri, Electron Kmıum 'un eski sürümlerini içerir. Örneğin, Electron takımlar tarafından kullanılan sürümü, eski davranışı gösteren Kmıum 66 ' dir. Kendi uyumluluk testinizi ürününüzün kullandığı sürümle gerçekleştirmeniz gerekir Electron . Aşağıdaki bölümde [daha eski tarayıcıları destekleme](#sob) bölümüne bakın.
 

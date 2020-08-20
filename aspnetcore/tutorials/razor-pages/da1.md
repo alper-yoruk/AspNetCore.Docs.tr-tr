@@ -5,6 +5,7 @@ description: Sayfalardaki eğitim serisinin 5. bölümü Razor .
 ms.author: riande
 ms.date: 12/20/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/da1
-ms.openlocfilehash: d8f1a256bfa3491ff1cc7f38a23c61beb719bd49
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 04479e5c3a0b1e9badbb4e58043cf059beefb4ab
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022101"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632804"
 ---
 # <a name="part-5-update-the-generated-pages-in-an-aspnet-core-app"></a>5. bölüm, ASP.NET Core uygulamasında oluşturulan sayfaları güncelleştirme
 
@@ -62,7 +63,7 @@ Oluşturulan biçimlendirmeyi incelemek için sık kullandığınız tarayıcıd
 </td>
 ```
 
-Dinamik olarak oluşturulan bağlantılar film KIMLIĞINI bir sorgu dizesiyle (örneğin, `?id=1` içinde `https://localhost:5001/Movies/Details?id=1` ) iletir.
+Dinamik olarak oluşturulan bağlantılar film KIMLIĞINI bir sorgu dizesiyle (örneğin, `?id=1` içinde  `https://localhost:5001/Movies/Details?id=1` ) iletir.
 
 ### <a name="add-route-template"></a>Rota şablonu Ekle
 
@@ -100,7 +101,7 @@ Davranışını test etmek için `@page "{id:int?}"` :
 
 Bloğu test etmek için `catch` :
 
-* Üzerinde bir kesme noktası ayarlayın`catch (DbUpdateConcurrencyException)`
+* Üzerinde bir kesme noktası ayarlayın `catch (DbUpdateConcurrencyException)`
 * Film için **Düzenle** ' yi seçin, değişiklikler yapın, ancak **Kaydet**' i girmeyin.
 * Başka bir tarayıcı penceresinde, aynı filmin **Sil** bağlantısını seçin ve ardından filmi silin.
 * Önceki tarayıcı penceresinde filmdeki değişiklikleri gönderin.
@@ -177,7 +178,7 @@ Oluşturulan biçimlendirmeyi incelemek için sık kullandığınız tarayıcıd
 </td>
 ```
 
-Dinamik olarak oluşturulan bağlantılar film KIMLIĞINI bir sorgu dizesiyle (örneğin, `?id=1` içinde `https://localhost:5001/Movies/Details?id=1` ) iletir.
+Dinamik olarak oluşturulan bağlantılar film KIMLIĞINI bir sorgu dizesiyle (örneğin, `?id=1` içinde  `https://localhost:5001/Movies/Details?id=1` ) iletir.
 
 Razor"{İd: int}" yol şablonunu kullanmak Için düzenleme, Ayrıntılar ve silme sayfalarını güncelleştirin. Bu sayfaların her biri için Page yönergesini ' den ' `@page` e değiştirin `@page "{id:int}"` . Uygulamayı çalıştırın ve kaynağı görüntüleyin. Oluşturulan HTML, URL 'nin yol bölümüne KIMLIĞI ekler:
 
@@ -213,7 +214,7 @@ Davranışını test etmek için `@page "{id:int?}"` :
 
 Bloğu test etmek için `catch` :
 
-* Üzerinde bir kesme noktası ayarlayın`catch (DbUpdateConcurrencyException)`
+* Üzerinde bir kesme noktası ayarlayın `catch (DbUpdateConcurrencyException)`
 * Film için **Düzenle** ' yi seçin, değişiklikler yapın, ancak **Kaydet**' i girmeyin.
 * Başka bir tarayıcı penceresinde, aynı filmin **Sil** bağlantısını seçin ve ardından filmi silin.
 * Önceki tarayıcı penceresinde filmdeki değişiklikleri gönderin.

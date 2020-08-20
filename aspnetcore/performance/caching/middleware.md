@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/middleware
-ms.openlocfilehash: 7e1463671323cddd2b95c03de994d497449d7884
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 43b0ef1dcbf6d0137b14be9e58eb056f06ae093d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019098"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633454"
 ---
 # <a name="response-caching-middleware-in-aspnet-core"></a>ASP.NET Core 'de yanıt önbelleğe alma ara yazılımı
 
@@ -149,10 +150,10 @@ Ara yazılım, [HTTP 1,1 önbelleğe alma belirtiminin](https://tools.ietf.org/h
 * İstek yöntemi GET veya HEAD olmalıdır.
 * `Startup.Configure`' De, yanıt önbelleğe alma ara yazılımı, önbelleğe alma gerektiren ara yazılımlar için yerleştirilmelidir. Daha fazla bilgi için bkz. <xref:fundamentals/middleware/index>.
 * `Authorization`Üst bilgi mevcut olmamalıdır.
-* `Cache-Control`üst bilgi parametreleri geçerli olmalıdır ve yanıtın işaretlenmiş ve işaretlenmemiş olması gerekir `public` `private` .
+* `Cache-Control` üst bilgi parametreleri geçerli olmalıdır ve yanıtın işaretlenmiş ve işaretlenmemiş olması gerekir `public` `private` .
 * Üst bilgi mevcut olmadığında üst bilgi mevcut olmamalıdır, üstbilgi mevcut `Pragma: no-cache` `Cache-Control` olduğunda üstbilgiyi `Cache-Control` geçersiz kılar `Pragma` .
 * `Set-Cookie`Üst bilgi mevcut olmamalıdır.
-* `Vary`üst bilgi parametreleri geçerli ve eşit olmalıdır `*` .
+* `Vary` üst bilgi parametreleri geçerli ve eşit olmalıdır `*` .
 * `Content-Length`Üst bilgi değeri (ayarlandıysa), yanıt gövdesinin boyutuyla aynı olmalıdır.
 * <xref:Microsoft.AspNetCore.Http.Features.IHttpSendFileFeature>Kullanılmaz.
 * Yanıtın `Expires` üst bilgi ve `max-age` ve önbellek yönergeleri tarafından belirtilen eski olmaması gerekir `s-maxage` .
@@ -293,10 +294,10 @@ Ara yazılım, [HTTP 1,1 önbelleğe alma belirtiminin](https://tools.ietf.org/h
 * İstek yöntemi GET veya HEAD olmalıdır.
 * `Startup.Configure`' De, yanıt önbelleğe alma ara yazılımı, önbelleğe alma gerektiren ara yazılımlar için yerleştirilmelidir. Daha fazla bilgi için bkz. <xref:fundamentals/middleware/index>.
 * `Authorization`Üst bilgi mevcut olmamalıdır.
-* `Cache-Control`üst bilgi parametreleri geçerli olmalıdır ve yanıtın işaretlenmiş ve işaretlenmemiş olması gerekir `public` `private` .
+* `Cache-Control` üst bilgi parametreleri geçerli olmalıdır ve yanıtın işaretlenmiş ve işaretlenmemiş olması gerekir `public` `private` .
 * Üst bilgi mevcut olmadığında üst bilgi mevcut olmamalıdır, üstbilgi mevcut `Pragma: no-cache` `Cache-Control` olduğunda üstbilgiyi `Cache-Control` geçersiz kılar `Pragma` .
 * `Set-Cookie`Üst bilgi mevcut olmamalıdır.
-* `Vary`üst bilgi parametreleri geçerli ve eşit olmalıdır `*` .
+* `Vary` üst bilgi parametreleri geçerli ve eşit olmalıdır `*` .
 * `Content-Length`Üst bilgi değeri (ayarlandıysa), yanıt gövdesinin boyutuyla aynı olmalıdır.
 * <xref:Microsoft.AspNetCore.Http.Features.IHttpSendFileFeature>Kullanılmaz.
 * Yanıtın `Expires` üst bilgi ve `max-age` ve önbellek yönergeleri tarafından belirtilen eski olmaması gerekir `s-maxage` .

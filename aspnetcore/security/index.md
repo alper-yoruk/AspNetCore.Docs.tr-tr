@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/24/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,16 +17,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/index
-ms.openlocfilehash: ead5863f0656e182d395fc1e0deaf63ff66034cb
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 0378fd06b5cae5b8911e8a2f41937b28d5444538
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021373"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632869"
 ---
 # <a name="overview-of-aspnet-core-security"></a>ASP.NET Core güvenliğine genel bakış
 
-ASP.NET Core, geliştiricilerin uygulamaları için güvenliği kolayca yapılandırıp yönetmesine olanak sağlar. ASP.NET Core, kimlik doğrulama, yetkilendirme, veri koruma, HTTPS zorlaması, uygulama parolaları, istek önleyici koruma ve CORS yönetimi yönetimi için özellikler içerir. Bu güvenlik özellikleri, güçlü ancak güvenli ASP.NET Core uygulamalar oluşturmanıza olanak tanır.
+ASP.NET Core, geliştiricilerin uygulamaları için güvenliği kolayca yapılandırıp yönetmesine olanak sağlar. ASP.NET Core, kimlik doğrulaması, yetkilendirme, veri koruma, HTTPS zorlaması, uygulama parolaları, XSRF/CSRF önleme ve CORS yönetimi yönetimi için özellikler içerir. Bu güvenlik özellikleri, güçlü ancak güvenli ASP.NET Core uygulamalar oluşturmanıza olanak tanır.
 
 ## <a name="aspnet-core-security-features"></a>ASP.NET Core güvenlik özellikleri
 
@@ -41,9 +42,9 @@ Kimlik doğrulamayı düşünmenin bir diğer yolu da, bir sunucu, veritabanı, 
 
 ASP.NET Core ve EF, uygulamalarınızın güvenliğini sağlamanıza ve güvenlik ihlallerinin engellenmesine yardımcı olan özellikler içerir. Aşağıdaki bağlantı listesi, Web Apps 'teki en yaygın güvenlik açıklarını önlemenize yönelik teknik bilgi için sizi belgeler halinde yönlendirir:
 
-* [Siteler arası betik saldırıları](xref:security/cross-site-scripting)
+* [Siteler arası komut dosyası (XSS) saldırıları](xref:security/cross-site-scripting)
 * [SQL ekleme saldırıları](/ef/core/querying/raw-sql)
-* [Çapraz site Isteği forgery (CSRF)](xref:security/anti-request-forgery)
+* [Çapraz site Isteği forgery (XSRF/CSRF) saldırıları](xref:security/anti-request-forgery)
 * [Yeniden yönlendirme saldırılarını aç](xref:security/preventing-open-redirects)
 
 Bilmeniz gereken daha fazla güvenlik açığı vardır. Daha fazla bilgi için içindekiler tablosunun **güvenlik ve Identity ** bölümündeki diğer makalelere bakın.

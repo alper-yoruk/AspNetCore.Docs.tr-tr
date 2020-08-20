@@ -1,11 +1,12 @@
 ---
-title: ASP.NET Core YapılandırIdentity
+title: Yapılandırma ASP.NET Core Identity
 author: AdrienTorris
-description: ASP.NET Core Identity varsayılan değerlerini anlayın ve Identity özellikleri özel değerleri kullanacak şekilde yapılandırmayı öğrenin.
+description: ASP.NET Core IdentityVarsayılan değerleri anlayın ve Identity özellikleri özel değerleri kullanacak şekilde yapılandırmayı öğrenin.
 ms.author: riande
 ms.custom: mvc
 ms.date: 02/11/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,22 +17,22 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-configuration
-ms.openlocfilehash: b7f6eaba1a0e819a077e3d63b4f997e75b8cd317
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ae4a2eb9d95339651c3810a9f8489d703d73a3fe
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020606"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632687"
 ---
-# <a name="configure-aspnet-core-no-locidentity"></a>ASP.NET Core YapılandırIdentity
+# <a name="configure-no-locaspnet-core-identity"></a>Yapılandırma ASP.NET Core Identity
 
-ASP.NET Core Identity parola ilkesi, kilitleme ve yapılandırma gibi ayarların varsayılan değerlerini kullanır cookie . Bu ayarlar sınıfında geçersiz kılınabilir `Startup` .
+ASP.NET Core Identity parola ilkesi, kilitleme ve yapılandırma gibi ayarlar için varsayılan değerleri kullanır cookie . Bu ayarlar sınıfında geçersiz kılınabilir `Startup` .
 
-## <a name="no-locidentity-options"></a>IdentitySeçenekler
+## <a name="no-locidentity-options"></a>Identity Seçenekler
 
-[ Identity Options](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) sınıfı, sistemi yapılandırmak için kullanılabilen seçenekleri temsil eder Identity . `IdentityOptions`veya çağrıldıktan **sonra** ayarlanması gerekir `AddIdentity` `AddDefaultIdentity` .
+[ Identity Options](/dotnet/api/microsoft.aspnetcore.identity.identityoptions) sınıfı, sistemi yapılandırmak için kullanılabilen seçenekleri temsil eder Identity . `IdentityOptions` veya çağrıldıktan **sonra** ayarlanması gerekir `AddIdentity` `AddDefaultIdentity` .
 
-### <a name="claims-no-locidentity"></a>BelirtIdentity
+### <a name="claims-no-locidentity"></a>Belirt Identity
 
 [ Identity Options. Claim Identity ](/dotnet/api/microsoft.aspnetcore.identity.identityoptions.claimsidentity) , aşağıdaki tabloda gösterilen özelliklerle birlikte [talep Identity seçeneklerini](/dotnet/api/microsoft.aspnetcore.identity.claimsidentityoptions) belirtir.
 
@@ -72,7 +73,7 @@ Varsayılan olarak, Identity Parolaların büyük harf, küçük harf karakter, 
 
 Parolalar şu şekilde yapılandırılır:
 
-* <xref:Microsoft.AspNetCore.Identity.PasswordOptions>içinde `Startup.ConfigureServices` .
+* <xref:Microsoft.AspNetCore.Identity.PasswordOptions> içinde `Startup.ConfigureServices` .
 * Özellik [ `[StringLength]` öznitelikleri](xref:System.ComponentModel.DataAnnotations.StringLengthAttribute) , `Password` Identity [uygulamaya iskli](xref:security/authentication/scaffold-identity)olarak ayarlandığında. `InputModel``Password`aşağıdaki dosyalarda özellikler bulunur:
   * `Areas/Identity/Pages/Account/Register.cshtml.cs`
   * `Areas/Identity/Pages/Account/ResetPassword.cshtml.cs`
@@ -137,7 +138,7 @@ Daha fazla bilgi için bkz. [ Cookie authenticationoptions](/dotnet/api/microsof
 
 ## <a name="password-hasher-options"></a>Parola hasher seçenekleri
 
-<xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions>Parola karması seçeneklerini alır ve ayarlar.
+<xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions> Parola karması seçeneklerini alır ve ayarlar.
 
 | Seçenek | Açıklama |
 | ------ | ----------- |

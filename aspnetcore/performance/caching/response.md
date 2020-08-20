@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/04/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/response
-ms.openlocfilehash: 7d2d563eef60cb8eead95c6792bcac2cda16a859
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 9516410399ce69f1d69b09781b2530d052a11e7a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021347"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631881"
 ---
 # <a name="response-caching-in-aspnet-core"></a>ASP.NET Core 'de yanıt önbelleğe alma
 
@@ -99,7 +100,7 @@ Daha fazla bilgi için bkz. <xref:mvc/views/tag-helpers/builtin-th/distributed-c
 > [!WARNING]
 > Kimliği doğrulanmış istemciler için bilgi içeren içerik için önbelleğe almayı devre dışı bırakın. Önbelleğe alma yalnızca kullanıcının kimliğine göre değişmeyen içerik veya bir kullanıcının oturum açmış olup olmadığı için etkinleştirilmelidir.
 
-<xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys>saklı yanıtı, belirtilen sorgu anahtarları listesinin değerlerine göre değiştirir. Tek bir değer `*` sağlandığında, ara yazılım tüm istek sorgu dizesi parametrelerine göre yanıtları değiştirir.
+<xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys> saklı yanıtı, belirtilen sorgu anahtarları listesinin değerlerine göre değiştirir. Tek bir değer `*` sağlandığında, ara yazılım tüm istek sorgu dizesi parametrelerine göre yanıtları değiştirir.
 
 Özelliği ayarlamak için [yanıt önbelleğe alma ara yazılımı](xref:performance/caching/middleware) etkinleştirilmelidir <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys> . Aksi takdirde, çalışma zamanı özel durumu oluşturulur. Özellik için karşılık gelen bir HTTP üst bilgisi yok <xref:Microsoft.AspNetCore.Mvc.CacheProfile.VaryByQueryKeys> . Özelliği, yanıt önbelleğe alma ara yazılımı tarafından işlenen bir HTTP özelliğidir. Ara yazılım, önbelleğe alınmış bir yanıta hizmeti sağlamak için sorgu dizesi ve sorgu dizesi değerinin önceki bir istekle eşleşmesi gerekir. Örneğin, aşağıdaki tabloda gösterilen istek sırasını ve sonuçları göz önünde bulundurun.
 
@@ -132,14 +133,14 @@ Vary: User-Agent
 
 ### <a name="nostore-and-locationnone"></a>NoStore ve Location. None
 
-<xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore>Diğer özelliklerin çoğunu geçersiz kılar. Bu özellik olarak ayarlandığında `true` , `Cache-Control` üst bilgi olarak ayarlanır `no-store` . <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location>Şu şekilde ayarlanmışsa `None` :
+<xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore> Diğer özelliklerin çoğunu geçersiz kılar. Bu özellik olarak ayarlandığında `true` , `Cache-Control` üst bilgi olarak ayarlanır `no-store` . <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location>Şu şekilde ayarlanmışsa `None` :
 
-* `Cache-Control`, olarak ayarlanır `no-store,no-cache` .
-* `Pragma`, olarak ayarlanır `no-cache` .
+* `Cache-Control` , olarak ayarlanır `no-store,no-cache` .
+* `Pragma` , olarak ayarlanır `no-cache` .
 
 , <xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore> Ve ise ve ise, `false` ve olarak <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> `None` `Cache-Control` `Pragma` ayarlanır `no-cache` .
 
-<xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore>genellikle `true` hata sayfaları için olarak ayarlanır. Örnek uygulamadaki Cache2 sayfası, istemcinin yanıtı depolayamamasını sağlayan yanıt üst bilgileri oluşturur.
+<xref:Microsoft.AspNetCore.Mvc.CacheProfile.NoStore> genellikle `true` hata sayfaları için olarak ayarlanır. Örnek uygulamadaki Cache2 sayfası, istemcinin yanıtı depolayamamasını sağlayan yanıt üst bilgileri oluşturur.
 
 [!code-csharp[](response/samples/2.x/ResponseCacheSample/Pages/Cache2.cshtml.cs?name=snippet)]
 
@@ -156,9 +157,9 @@ Pragma: no-cache
 
 <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location>öğesinin seçenekleri `Any` ve `Client` `Cache-Control` sırasıyla üst bilgi değerlerine dönüştürülür `public` `private` . [NoStore ve Location. None](#nostore-and-locationnone) bölümünde belirtildiği gibi, <xref:Microsoft.AspNetCore.Mvc.CacheProfile.Location> `None` hem hem de `Cache-Control` `Pragma` üst bilgileri olarak ayarlar `no-cache` .
 
-`Location.Any`( `Cache-Control` olarak ayarlanır `public` ), *istemci veya herhangi bir ara proxy* 'Nin, [yanıt önbelleğe alma ara yazılımı](xref:performance/caching/middleware)dahil olmak üzere değeri önbellekte olabileceğini belirtir.
+`Location.Any` ( `Cache-Control` olarak ayarlanır `public` ), *istemci veya herhangi bir ara proxy* 'Nin, [yanıt önbelleğe alma ara yazılımı](xref:performance/caching/middleware)dahil olmak üzere değeri önbellekte olabileceğini belirtir.
 
-`Location.Client`( `Cache-Control` olarak ayarlanır `private` ) *yalnızca istemcinin* değeri önbelleğe alabilir olduğunu gösterir. [Yanıt önbelleğe alma ara yazılımı](xref:performance/caching/middleware)da dahil olmak üzere, bir ara önbelleğin değeri önbelleğe almalıdır.
+`Location.Client` ( `Cache-Control` olarak ayarlanır `private` ) *yalnızca istemcinin* değeri önbelleğe alabilir olduğunu gösterir. [Yanıt önbelleğe alma ara yazılımı](xref:performance/caching/middleware)da dahil olmak üzere, bir ara önbelleğin değeri önbelleğe almalıdır.
 
 Önbellek denetim üstbilgileri, yalnızca istemcilere ve yanıt önbelleklerine ne zaman ve nasıl önbellek alınacağını gösteren yönergeler sağlar. İstemcilerin ve proxy 'lerin [HTTP 1,1 önbelleğe alma belirtimini](https://tools.ietf.org/html/rfc7234)kabul edeceğini garanti etmez. [Yanıt önbelleğe alma ara yazılımı](xref:performance/caching/middleware) her zaman belirtim tarafından düzenlendiği önbelleğe alma kurallarını izler.
 
@@ -196,7 +197,7 @@ Birçok denetleyici eylem özniteliği üzerinde yanıt önbelleği ayarlarını
 
 , <xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute> Öğesine uygulanabilir:
 
-* RazorSayfalar: öznitelikler işleyici yöntemlerine uygulanamaz.
+* Razor Sayfalar: öznitelikler işleyici yöntemlerine uygulanamaz.
 * MVC denetleyicileri.
 * MVC eylem yöntemleri: Yöntem düzeyi öznitelikler, sınıf düzeyi özniteliklerde belirtilen ayarları geçersiz kılar.
 

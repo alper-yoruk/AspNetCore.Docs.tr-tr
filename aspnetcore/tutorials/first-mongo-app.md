@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc, seodec18
 ms.date: 08/17/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mongo-app
-ms.openlocfilehash: fac4adb6ffa487c7ca9650a8ebd063dd344d84a7
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 61f72c4d281e7957b520e1660440e536ebd4c78a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020255"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631777"
 ---
 # <a name="create-a-web-api-with-aspnet-core-and-mongodb"></a>ASP.NET Core ve MongoDB ile Web API 'SI oluşturma
 
@@ -43,7 +44,7 @@ Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-mongo-app/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -288,10 +289,10 @@ Veritabanı hazırlanıyor. ASP.NET Core Web API 'sini oluşturmaya başlayabili
 
 * [Imongodatabase](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_IMongoDatabase.htm): işlemleri gerçekleştirmek Için Mongo veritabanını temsil eder. Bu öğretici, belirli bir koleksiyondaki verilere erişim kazanmak için arabirimdeki genel [GetCollection \<TDocument> (Collection)](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoDatabase_GetCollection__1.htm) yöntemini kullanır. Bu yöntem çağrıldıktan sonra, koleksiyonda CRUD işlemleri gerçekleştirin. `GetCollection<TDocument>(collection)`Yöntem çağrısında:
 
-  * `collection`koleksiyon adını temsil eder.
-  * `TDocument`Koleksiyonda depolanan CLR nesne türünü temsil eder.
+  * `collection` koleksiyon adını temsil eder.
+  * `TDocument` Koleksiyonda depolanan CLR nesne türünü temsil eder.
 
-`GetCollection<TDocument>(collection)`koleksiyonu temsil eden bir [Mongocollection](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoCollection.htm) nesnesi döndürür. Bu öğreticide, koleksiyonda aşağıdaki yöntemler çağrılır:
+`GetCollection<TDocument>(collection)` koleksiyonu temsil eden bir [Mongocollection](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoCollection.htm) nesnesi döndürür. Bu öğreticide, koleksiyonda aşağıdaki yöntemler çağrılır:
 
 * [Deleteone](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_DeleteOne.htm): belirtilen arama ölçütleriyle eşleşen tek bir belgeyi siler.
 * [Bul \<TDocument> ](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollectionExtensions_Find__1_1.htm): koleksiyonda, belirtilen arama ölçütleriyle eşleşen tüm belgeleri döndürür.
@@ -308,7 +309,7 @@ Veritabanı hazırlanıyor. ASP.NET Core Web API 'sini oluşturmaya başlayabili
 
 * `BookService`CRUD işlemleri gerçekleştirmek için sınıfını kullanır.
 * HTTP isteklerini al, gönder, koy ve SIL desteği için eylem yöntemleri içerir.
-* <xref:System.Web.Http.ApiController.CreatedAtRoute*> `Create` [Http 201](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) yanıtı döndürmek için eylem yöntemindeki çağrılar. Durum kodu 201, sunucuda yeni bir kaynak oluşturan HTTP POST yöntemi için standart yanıttır. `CreatedAtRoute`Ayrıca yanıta bir `Location` üst bilgi ekler. `Location`Üst bilgi, yeni oluşturulan KITABıN URI 'sini belirtir.
+* <xref:System.Web.Http.ApiController.CreatedAtRoute*> `Create` [Http 201](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) yanıtı döndürmek için eylem yöntemindeki çağrılar. Durum kodu 201, sunucuda yeni bir kaynak oluşturan HTTP POST yöntemi için standart yanıttır. `CreatedAtRoute` Ayrıca yanıta bir `Location` üst bilgi ekler. `Location`Üst bilgi, yeni oluşturulan KITABıN URI 'sini belirtir.
 
 ## <a name="test-the-web-api"></a>Web API 'sini test etme
 
@@ -393,7 +394,7 @@ Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/first-mongo-app/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -638,10 +639,10 @@ Veritabanı hazırlanıyor. ASP.NET Core Web API 'sini oluşturmaya başlayabili
 
 * [Imongodatabase](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_IMongoDatabase.htm): işlemleri gerçekleştirmek Için Mongo veritabanını temsil eder. Bu öğretici, belirli bir koleksiyondaki verilere erişim kazanmak için arabirimdeki genel [GetCollection \<TDocument> (Collection)](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoDatabase_GetCollection__1.htm) yöntemini kullanır. Bu yöntem çağrıldıktan sonra, koleksiyonda CRUD işlemleri gerçekleştirin. `GetCollection<TDocument>(collection)`Yöntem çağrısında:
 
-  * `collection`koleksiyon adını temsil eder.
-  * `TDocument`Koleksiyonda depolanan CLR nesne türünü temsil eder.
+  * `collection` koleksiyon adını temsil eder.
+  * `TDocument` Koleksiyonda depolanan CLR nesne türünü temsil eder.
 
-`GetCollection<TDocument>(collection)`koleksiyonu temsil eden bir [Mongocollection](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoCollection.htm) nesnesi döndürür. Bu öğreticide, koleksiyonda aşağıdaki yöntemler çağrılır:
+`GetCollection<TDocument>(collection)` koleksiyonu temsil eden bir [Mongocollection](https://api.mongodb.com/csharp/current/html/T_MongoDB_Driver_MongoCollection.htm) nesnesi döndürür. Bu öğreticide, koleksiyonda aşağıdaki yöntemler çağrılır:
 
 * [Deleteone](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollection_1_DeleteOne.htm): belirtilen arama ölçütleriyle eşleşen tek bir belgeyi siler.
 * [Bul \<TDocument> ](https://api.mongodb.com/csharp/current/html/M_MongoDB_Driver_IMongoCollectionExtensions_Find__1_1.htm): koleksiyonda, belirtilen arama ölçütleriyle eşleşen tüm belgeleri döndürür.
@@ -658,7 +659,7 @@ Veritabanı hazırlanıyor. ASP.NET Core Web API 'sini oluşturmaya başlayabili
 
 * `BookService`CRUD işlemleri gerçekleştirmek için sınıfını kullanır.
 * HTTP isteklerini al, gönder, koy ve SIL desteği için eylem yöntemleri içerir.
-* <xref:System.Web.Http.ApiController.CreatedAtRoute*> `Create` [Http 201](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) yanıtı döndürmek için eylem yöntemindeki çağrılar. Durum kodu 201, sunucuda yeni bir kaynak oluşturan HTTP POST yöntemi için standart yanıttır. `CreatedAtRoute`Ayrıca yanıta bir `Location` üst bilgi ekler. `Location`Üst bilgi, yeni oluşturulan KITABıN URI 'sini belirtir.
+* <xref:System.Web.Http.ApiController.CreatedAtRoute*> `Create` [Http 201](https://www.w3.org/Protocols/rfc2616/rfc2616-sec10.html) yanıtı döndürmek için eylem yöntemindeki çağrılar. Durum kodu 201, sunucuda yeni bir kaynak oluşturan HTTP POST yöntemi için standart yanıttır. `CreatedAtRoute` Ayrıca yanıta bir `Location` üst bilgi ekler. `Location`Üst bilgi, yeni oluşturulan KITABıN URI 'sini belirtir.
 
 ## <a name="test-the-web-api"></a>Web API 'sini test etme
 

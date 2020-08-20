@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/06/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/enforcing-ssl
-ms.openlocfilehash: 5dcdf50ff9f750e4966ed3bdf24a71b9f433240a
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 1cb2c2d18b717dc99c6ef4dac9954fef149c6deb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019007"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631569"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>ASP.NET Core 'de HTTPS 'yi zorla
 
@@ -39,7 +40,7 @@ Hiçbir API, istemcinin ilk istekte hassas veri göndermesini engelleyebilir.
 > [!WARNING]
 > ## <a name="api-projects"></a>API projeleri
 >
-> Hassas bilgileri alan Web API 'Lerinde [RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) **kullanmayın.** `RequireHttpsAttribute`tarayıcıları HTTP 'den HTTPS 'ye yönlendirmek için HTTP durum kodlarını kullanır. API istemcileri HTTP 'den HTTPS 'ye yeniden yönlendirmeyi anlamayabilir veya buna uymayabilir. Bu tür istemciler, HTTP üzerinden bilgi gönderebilir. Web API 'Leri şunlardan biri olmalıdır:
+> Hassas bilgileri alan Web API 'Lerinde [RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) **kullanmayın.** `RequireHttpsAttribute` tarayıcıları HTTP 'den HTTPS 'ye yönlendirmek için HTTP durum kodlarını kullanır. API istemcileri HTTP 'den HTTPS 'ye yeniden yönlendirmeyi anlamayabilir veya buna uymayabilir. Bu tür istemciler, HTTP üzerinden bilgi gönderebilir. Web API 'Leri şunlardan biri olmalıdır:
 >
 > * HTTP üzerinde dinleme yok.
 > * Durum kodu 400 olan bağlantıyı kapatın (Hatalı Istek) ve isteğe bağlı değildir.
@@ -55,7 +56,7 @@ Hiçbir API, istemcinin ilk istekte hassas veri göndermesini engelleyebilir.
 > [!WARNING]
 > ## <a name="api-projects"></a>API projeleri
 >
-> Hassas bilgileri alan Web API 'Lerinde [RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) **kullanmayın.** `RequireHttpsAttribute`tarayıcıları HTTP 'den HTTPS 'ye yönlendirmek için HTTP durum kodlarını kullanır. API istemcileri HTTP 'den HTTPS 'ye yeniden yönlendirmeyi anlamayabilir veya buna uymayabilir. Bu tür istemciler, HTTP üzerinden bilgi gönderebilir. Web API 'Leri şunlardan biri olmalıdır:
+> Hassas bilgileri alan Web API 'Lerinde [RequireHttpsAttribute](/dotnet/api/microsoft.aspnetcore.mvc.requirehttpsattribute) **kullanmayın.** `RequireHttpsAttribute` tarayıcıları HTTP 'den HTTPS 'ye yönlendirmek için HTTP durum kodlarını kullanır. API istemcileri HTTP 'den HTTPS 'ye yeniden yönlendirmeyi anlamayabilir veya buna uymayabilir. Bu tür istemciler, HTTP üzerinden bilgi gönderebilir. Web API 'Leri şunlardan biri olmalıdır:
 >
 > * HTTP üzerinde dinleme yok.
 > * Durum kodu 400 olan bağlantıyı kapatın (Hatalı Istek) ve isteğe bağlı değildir.
@@ -134,7 +135,7 @@ Aşağıdaki yaklaşımlardan herhangi birini kullanarak HTTPS bağlantı noktas
 
 ::: moniker-end
 
-* Geliştirme aşamasında, *üzerindelaunchsettings.js*bir https URL 'si ayarlayın. IIS Express kullanıldığında HTTPS 'yi etkinleştirin.
+* Geliştirme aşamasında, * üzerindelaunchsettings.js*bir https URL 'si ayarlayın. IIS Express kullanıldığında HTTPS 'yi etkinleştirin.
 
 * [Kestrel](xref:fundamentals/servers/kestrel) server veya [HTTP.sys](xref:fundamentals/servers/httpsys) Server 'ın herkese açık BIR uç dağıtımı için https URL uç noktası yapılandırın. Uygulama tarafından yalnızca **BIR HTTPS bağlantı noktası** kullanılır. Ara yazılım, ile bağlantı noktasını bulur <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> .
 
@@ -234,7 +235,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ## <a name="https-redirection-middleware-alternative-approach"></a>HTTPS yeniden yönlendirme ara yazılımı alternatif yaklaşımı
 
-HTTPS yeniden yönlendirme ara yazılımı () kullanmanın bir alternatifi `UseHttpsRedirection` , URL yeniden yazma ara yazılımı ( `AddRedirectToHttps` ) kullanmaktır. `AddRedirectToHttps`, yeniden yönlendirme yürütüldüğünde durum kodunu ve bağlantı noktasını da ayarlayabilir. Daha fazla bilgi için bkz. [URL yeniden yazma ara yazılımı](xref:fundamentals/url-rewriting).
+HTTPS yeniden yönlendirme ara yazılımı () kullanmanın bir alternatifi `UseHttpsRedirection` , URL yeniden yazma ara yazılımı ( `AddRedirectToHttps` ) kullanmaktır. `AddRedirectToHttps` , yeniden yönlendirme yürütüldüğünde durum kodunu ve bağlantı noktasını da ayarlayabilir. Daha fazla bilgi için bkz. [URL yeniden yazma ara yazılımı](xref:fundamentals/url-rewriting).
 
 Ek yeniden yönlendirme kuralları gereksinimi olmadan HTTPS 'ye yönlendirilirken, bu konuda açıklanan HTTPS yeniden yönlendirme ara yazılımı () kullanmanızı öneririz `UseHttpsRedirection` .
 
@@ -267,7 +268,7 @@ ASP.NET Core 2,1 ve üzeri, genişletme yöntemiyle HSTS uygular `UseHsts` . Aş
 
 ::: moniker-end
 
-`UseHsts`geliştirme aşamasında önerilmez çünkü HSTS ayarları tarayıcılar tarafından yüksek oranda önbelleklenebilir. Varsayılan olarak, `UseHsts` yerel geri döngü adresini dışlar.
+`UseHsts` geliştirme aşamasında önerilmez çünkü HSTS ayarları tarayıcılar tarafından yüksek oranda önbelleklenebilir. Varsayılan olarak, `UseHsts` yerel geri döngü adresini dışlar.
 
 İlk kez HTTPS 'yi uygulayan üretim ortamları için, yöntemlerden birini kullanarak ilk [HstsOptions. maxAge](xref:Microsoft.AspNetCore.HttpsPolicy.HstsOptions.MaxAge*) değerini küçük bir değere ayarlayın <xref:System.TimeSpan> . HTTPS altyapısını HTTP 'ye döndürmeniz gerekirse, değeri saat olarak bir tek güne kadar ayarlayın. HTTPS yapılandırmasının sürdürülebilirliği konusunda emin olduktan sonra, HSTS `max-age` değerini artırın; yaygın olarak kullanılan bir değer bir yıldır.
 
@@ -292,11 +293,11 @@ Aşağıdaki kod:
 * `max-age`Üstbilginin parametresini 60 güne açık olarak ayarlar `Strict-Transport-Security` . Ayarlanmazsa, varsayılan olarak 30 gün olur. Daha fazla bilgi için bkz. [Maksimum yaş yönergesi](https://tools.ietf.org/html/rfc6797#section-6.1.1).
 * `example.com`Dışlanacak konaklar listesine ekler.
 
-`UseHsts`Aşağıdaki geri döngü Konakları dışlar:
+`UseHsts` Aşağıdaki geri döngü Konakları dışlar:
 
-* `localhost`: IPv4 geri döngü adresi.
-* `127.0.0.1`: IPv4 geri döngü adresi.
-* `[::1]`: IPv6 geri döngü adresi.
+* `localhost` : IPv4 geri döngü adresi.
+* `127.0.0.1` : IPv4 geri döngü adresi.
+* `[::1]` : IPv6 geri döngü adresi.
 
 ## <a name="opt-out-of-httpshsts-on-project-creation"></a>Proje oluşturulurken HTTPS/HSTS 'nin katılımı
 
@@ -361,6 +362,14 @@ dotnet dev-certs https --help
 ## <a name="how-to-set-up-a-developer-certificate-for-docker"></a>Docker için Geliştirici Sertifikası ayarlama
 
 [Bu GitHub sorununa](https://github.com/dotnet/AspNetCore.Docs/issues/6199)bakın.
+
+<a name="ssl-linux"></a>
+
+## <a name="trust-https-certificate-on-linux"></a>Linux üzerinde HTTPS sertifikasına güven
+
+<!-- Instructions to be updated by engineering team after 5.0 RTM. -->
+
+Linux hakkındaki yönergeler için dağıtım belgelerine bakın.
 
 <a name="wsl"></a>
 

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/03/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/index
-ms.openlocfilehash: b0258118e116b1686abbebf1c8d89135ae3cb1f6
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 2511d68dd049ca47dea002d8960e7d2fd0207383
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019322"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632648"
 ---
 # <a name="overview-of-aspnet-core-authentication"></a>ASP.NET Core kimlik doğrulamasına genel bakış
 
@@ -51,7 +52,7 @@ services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 Birden çok düzen kullanılırsa, yetkilendirme ilkeleri (veya yetkilendirme öznitelikleri) kullanıcının kimliğini doğrulamak için bağımlı oldukları [kimlik doğrulama düzenini (veya düzenleri) belirtebilir](xref:security/authorization/limitingidentitybyscheme) . Yukarıdaki örnekte, cookie kimlik doğrulama düzeni adı belirtilerek kullanılabilir ( `CookieAuthenticationDefaults.AuthenticationScheme` Varsayılan olarak, çağrılırken farklı bir ad sağlansa da `AddCookie` ).
 
-Bazı durumlarda, çağrısı `AddAuthentication` diğer uzantı yöntemleri tarafından otomatik olarak yapılır. Örneğin, [ASP.NET Core Identity ](xref:security/authentication/identity)kullanırken `AddAuthentication` dahili olarak çağrılır.
+Bazı durumlarda, çağrısı `AddAuthentication` diğer uzantı yöntemleri tarafından otomatik olarak yapılır. Örneğin, kullanırken [ASP.NET Core Identity](xref:security/authentication/identity) , dahili olarak `AddAuthentication` çağrılır.
 
 Kimlik doğrulama ara yazılımı, uygulamasının ' de `Startup.Configure` <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> uzantı yöntemi çağırarak öğesine eklenir `IApplicationBuilder` . Çağıran `UseAuthentication` , daha önce kaydedilen kimlik doğrulama düzenlerini kullanan ara yazılımı kaydeder. `UseAuthentication`Kimliği doğrulanan kullanıcılara bağlı olan herhangi bir ara yazılımın önüne çağrı yapın. Endpoint Routing kullanılırken, çağrısının `UseAuthentication` gitmesi gerekir:
 

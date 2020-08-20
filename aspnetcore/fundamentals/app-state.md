@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/06/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/app-state
-ms.openlocfilehash: c05129c0f239fb28c83ab1c561dd910305eeb54b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 95035ec372ab6adb5bafb40f2b939c549ac6f839
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017642"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633818"
 ---
 # <a name="session-and-state-management-in-aspnet-core"></a>ASP.NET Core’da oturum ve durum yönetimi
 
@@ -112,7 +113,7 @@ Ara yazılım sırası önemlidir.  `UseSession`Sonra `UseRouting` ve önce ça�
 
 [HttpContext. Session](xref:Microsoft.AspNetCore.Http.HttpContext.Session) , oturum durumu yapılandırıldıktan sonra kullanılabilir.
 
-`HttpContext.Session`çağrılmadan önce erişilemez `UseSession` .
+`HttpContext.Session` çağrılmadan önce erişilemez `UseSession` .
 
 Uygulama yanıt akışına yazmaya başladıktan sonra yeni bir oturum ile yeni bir oturum cookie oluşturulamaz. Özel durum Web sunucusu günlüğüne kaydedilir ve tarayıcıda gösterilmez.
 
@@ -128,7 +129,7 @@ Oturum varsayılanlarını geçersiz kılmak için kullanın <xref:Microsoft.Asp
 
 | Seçenek | Açıklama |
 | ------ | ----------- |
-| <xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie> | Oluşturmak için kullanılan ayarları belirler cookie . <xref:Microsoft.AspNetCore.Http.CookieBuilder.Name>Varsayılan olarak <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookieName?displayProperty=nameWithType> ( `.AspNetCore.Session` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.Path>Varsayılan olarak <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookiePath?displayProperty=nameWithType> ( `/` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.SameSite>Varsayılan olarak <xref:Microsoft.AspNetCore.Http.SameSiteMode.Lax?displayProperty=nameWithType> ( `1` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly>Varsayılan olarak olur `true` . <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential>Varsayılan olarak olur `false` . |
+| <xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie> | Oluşturmak için kullanılan ayarları belirler cookie . <xref:Microsoft.AspNetCore.Http.CookieBuilder.Name> Varsayılan olarak <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookieName?displayProperty=nameWithType> ( `.AspNetCore.Session` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.Path> Varsayılan olarak <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookiePath?displayProperty=nameWithType> ( `/` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.SameSite> Varsayılan olarak <xref:Microsoft.AspNetCore.Http.SameSiteMode.Lax?displayProperty=nameWithType> ( `1` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly> Varsayılan olarak olur `true` . <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> Varsayılan olarak olur `false` . |
 | <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> | , `IdleTimeout` Oturumun içeriği terk edilmeden önce ne kadar süreyle boşta kalabileceğini gösterir. Her oturum erişimi zaman aşımını sıfırlar. Bu ayar, yalnızca oturum içeriği için geçerlidir cookie . Varsayılan değer 20 dakikadır. |
 | <xref:Microsoft.AspNetCore.Builder.SessionOptions.IOTimeout> | Mağazadan bir oturumu yüklemesine veya depolama alanına geri kaydetmeye izin verilen en uzun süre. Bu ayar yalnızca zaman uyumsuz işlemlere uygulanabilir. Bu zaman aşımı, kullanılarak devre dışı bırakılabilir <xref:System.Threading.Timeout.InfiniteTimeSpan> . Varsayılan değer 1 dakikadır. |
 
@@ -148,7 +149,7 @@ Oturum durumuna, Razor ile bir Pages <xref:Microsoft.AspNetCore.Mvc.RazorPages.P
 
 `ISession`Uygulama, tamsayı ve dize değerlerini ayarlamak ve almak için birkaç uzantı yöntemi sağlar. Uzantı yöntemleri <xref:Microsoft.AspNetCore.Http> ad alanıdır.
 
-`ISession`Uzantı yöntemleri:
+`ISession` Uzantı yöntemleri:
 
 * [Al (ISession, dize)](xref:Microsoft.AspNetCore.Http.SessionExtensions.Get%2A)
 * [Getınt32 (ISession, dize)](xref:Microsoft.AspNetCore.Http.SessionExtensions.GetInt32%2A)
@@ -184,7 +185,7 @@ Aşağıdaki örnek, sınıfı ile serileştirilebilir bir nesnenin nasıl ayarl
 
 ## <a name="tempdata"></a>TempData
 
-ASP.NET Core, Razor [TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) veya Controller sayfalarını kullanıma sunar <xref:Microsoft.AspNetCore.Mvc.Controller.TempData> . Bu özellik, verileri başka bir istekte okunana kadar depolar. [Saklama (dize)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) ve [Peek (dize)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*) yöntemleri, isteğin sonunda silme yapılmadan verileri incelemek için kullanılabilir. [Saklama için](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) sözlükte tüm öğeleri işaretler. `TempData`eklenir
+ASP.NET Core, Razor [TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) veya Controller sayfalarını kullanıma sunar <xref:Microsoft.AspNetCore.Mvc.Controller.TempData> . Bu özellik, verileri başka bir istekte okunana kadar depolar. [Saklama (dize)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) ve [Peek (dize)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*) yöntemleri, isteğin sonunda silme yapılmadan verileri incelemek için kullanılabilir. [Saklama için](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) sözlükte tüm öğeleri işaretler. `TempData` eklenir
 
 * Tek bir istek için veri gerektiğinde yeniden yönlendirme için kullanışlıdır.
 * Sağlayıcılar tarafından ya `TempData` da cookie oturum durumu kullanılarak uygulanır.
@@ -239,7 +240,7 @@ Oturum tabanlı TempData sağlayıcısını etkinleştirmek için <xref:Microsof
 
 Yeni isteğin sorgu dizesine eklenerek sınırlı miktarda veri, bir istekten diğerine geçirilebilir. Bu durum, gömülü durum ile bağlantıların e-posta veya sosyal ağlar aracılığıyla paylaşılmasını sağlamak için durumu kalıcı bir şekilde yakalamak için yararlıdır. URL sorgu dizeleri ortak olduğundan, gizli veriler için hiçbir şekilde Sorgu dizelerini kullanmayın.
 
-Sorgu dizelerindeki veriler de dahil olmak üzere, istenmeden paylaşıma ek olarak uygulamayı [siteler arası Istek forgery (CSRF)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) saldırılarına açık duruma getirebilir. Korunan oturum durumunun, CSRF saldırılarına karşı korunması gerekir. Daha fazla bilgi için bkz. [siteler arası Istek forgery (XSRF/CSRF) saldırılarını önleme](xref:security/anti-request-forgery).
+Sorgu dizelerindeki veriler de dahil olmak üzere, istenmeden paylaşıma ek olarak uygulamayı [siteler arası Istek forgery (CSRF)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) saldırılarına açık duruma getirebilir. Korunan oturum durumunun, CSRF saldırılarına karşı korunması gerekir. Daha fazla bilgi için bkz. <xref:security/anti-request-forgery>.
 
 ## <a name="hidden-fields"></a>Gizli alanlar
 
@@ -284,11 +285,11 @@ Oturum ara yazılımı bir oturumu kalıcı hale getiremezse:
 
 Yedekleme deposu kullanılamıyorsa, oturum ara yazılımı bir oturumu kalıcı hale getiremeyebilir. Örneğin, bir Kullanıcı bir alışveriş sepetini oturum içinde depolar. Kullanıcı sepete bir öğe ekler, ancak kayıt başarısız olur. Uygulama hata hakkında bilgi sahibi değildir, bu nedenle bu, doğru olmayan, kullanıcıya öğenin sepetine eklendiğini bildirir.
 
-Hataları denetlemek için önerilen yaklaşım, `await feature.Session.CommitAsync` uygulama oturuma yazma tamamlandığında çağrmalıdır. <xref:Microsoft.AspNetCore.Http.ISession.CommitAsync*>yedekleme deposu kullanılamıyorsa bir özel durum oluşturur. `CommitAsync`Başarısız olursa, uygulama özel durumu işleyebilir. <xref:Microsoft.AspNetCore.Http.ISession.LoadAsync*>, veri deposu kullanılamadığında aynı koşulların altına atar.
+Hataları denetlemek için önerilen yaklaşım, `await feature.Session.CommitAsync` uygulama oturuma yazma tamamlandığında çağrmalıdır. <xref:Microsoft.AspNetCore.Http.ISession.CommitAsync*> yedekleme deposu kullanılamıyorsa bir özel durum oluşturur. `CommitAsync`Başarısız olursa, uygulama özel durumu işleyebilir. <xref:Microsoft.AspNetCore.Http.ISession.LoadAsync*> , veri deposu kullanılamadığında aynı koşulların altına atar.
   
-## <a name="no-locsignalr-and-session-state"></a>SignalRve oturum durumu
+## <a name="no-locsignalr-and-session-state"></a>SignalR ve oturum durumu
 
-SignalRuygulamalar, bilgileri depolamak için oturum durumunu kullanmamalıdır. SignalRuygulamalar, hub 'da bağlantı durumu başına depolama yapabilir `Context.Items` . <!-- https://github.com/aspnet/SignalR/issues/2139 -->
+SignalR uygulamalar, bilgileri depolamak için oturum durumunu kullanmamalıdır. SignalR uygulamalar, hub 'da bağlantı durumu başına depolama yapabilir `Context.Items` . <!-- https://github.com/aspnet/SignalR/issues/2139 -->
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
@@ -370,9 +371,9 @@ Aşağıdaki kod, bellek içi oturum sağlayıcısını varsayılan bir bellek i
 
 Ara yazılım sırası önemlidir. Önceki örnekte, `InvalidOperationException` sonrasında çağrıldığında bir özel durum oluşur `UseSession` `UseMvc` . Daha fazla bilgi için bkz. [Ara yazılım sıralaması](xref:fundamentals/middleware/index#order).
 
-<xref:Microsoft.AspNetCore.Http.HttpContext.Session?displayProperty=nameWithType>, oturum durumu yapılandırıldıktan sonra kullanılabilir.
+<xref:Microsoft.AspNetCore.Http.HttpContext.Session?displayProperty=nameWithType> , oturum durumu yapılandırıldıktan sonra kullanılabilir.
 
-`HttpContext.Session`çağrılmadan önce erişilemez `UseSession` .
+`HttpContext.Session` çağrılmadan önce erişilemez `UseSession` .
 
 Uygulama yanıt akışına yazmaya başladıktan sonra yeni bir oturum ile yeni bir oturum cookie oluşturulamaz. Özel durum Web sunucusu günlüğüne kaydedilir ve tarayıcıda gösterilmez.
 
@@ -388,7 +389,7 @@ Oturum varsayılanlarını geçersiz kılmak için kullanın <xref:Microsoft.Asp
 
 | Seçenek | Açıklama |
 | ------ | ----------- |
-| <xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie> | Oluşturmak için kullanılan ayarları belirler cookie . <xref:Microsoft.AspNetCore.Http.CookieBuilder.Name>Varsayılan olarak <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookieName?displayProperty=nameWithType> ( `.AspNetCore.Session` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.Path>Varsayılan olarak <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookiePath?displayProperty=nameWithType> ( `/` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.SameSite>Varsayılan olarak <xref:Microsoft.AspNetCore.Http.SameSiteMode.Lax?displayProperty=nameWithType> ( `1` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly>Varsayılan olarak olur `true` . <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential>Varsayılan olarak olur `false` . |
+| <xref:Microsoft.AspNetCore.Builder.SessionOptions.Cookie> | Oluşturmak için kullanılan ayarları belirler cookie . <xref:Microsoft.AspNetCore.Http.CookieBuilder.Name> Varsayılan olarak <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookieName?displayProperty=nameWithType> ( `.AspNetCore.Session` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.Path> Varsayılan olarak <xref:Microsoft.AspNetCore.Session.SessionDefaults.CookiePath?displayProperty=nameWithType> ( `/` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.SameSite> Varsayılan olarak <xref:Microsoft.AspNetCore.Http.SameSiteMode.Lax?displayProperty=nameWithType> ( `1` ). <xref:Microsoft.AspNetCore.Http.CookieBuilder.HttpOnly> Varsayılan olarak olur `true` . <xref:Microsoft.AspNetCore.Http.CookieBuilder.IsEssential> Varsayılan olarak olur `false` . |
 | <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> | , `IdleTimeout` Oturumun içeriği terk edilmeden önce ne kadar süreyle boşta kalabileceğini gösterir. Her oturum erişimi zaman aşımını sıfırlar. Bu ayar, yalnızca oturum içeriği için geçerlidir cookie . Varsayılan değer 20 dakikadır. |
 | <xref:Microsoft.AspNetCore.Builder.SessionOptions.IOTimeout> | Mağazadan bir oturumu yüklemesine veya depolama alanına geri kaydetmeye izin verilen en uzun süre. Bu ayar yalnızca zaman uyumsuz işlemlere uygulanabilir. Bu zaman aşımı, kullanılarak devre dışı bırakılabilir <xref:System.Threading.Timeout.InfiniteTimeSpan> . Varsayılan değer 1 dakikadır. |
 
@@ -408,7 +409,7 @@ Oturum durumuna, Razor ile bir Pages <xref:Microsoft.AspNetCore.Mvc.RazorPages.P
 
 `ISession`Uygulama, tamsayı ve dize değerlerini ayarlamak ve almak için birkaç uzantı yöntemi sağlar. Uzantı yöntemleri, <xref:Microsoft.AspNetCore.Http> `using Microsoft.AspNetCore.Http;` Proje tarafından [Microsoft. Aspnetcore. http. Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.Http.Extensions/) paketine başvurulduğunda ad alanında (uzantı yöntemlerine erişim kazanmak için bir ifade ekleyin). Her iki paket de [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app)'e dahildir.
 
-`ISession`Uzantı yöntemleri:
+`ISession` Uzantı yöntemleri:
 
 * [Al (ISession, dize)](xref:Microsoft.AspNetCore.Http.SessionExtensions.Get%2A)
 * [Getınt32 (ISession, dize)](xref:Microsoft.AspNetCore.Http.SessionExtensions.GetInt32%2A)
@@ -444,7 +445,7 @@ Aşağıdaki örnek, uzantı yöntemleriyle bir serileştirilebilir nesnenin nas
 
 ## <a name="tempdata"></a>TempData
 
-ASP.NET Core, Razor [TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) veya Controller sayfalarını kullanıma sunar <xref:Microsoft.AspNetCore.Mvc.Controller.TempData> . Bu özellik, verileri başka bir istekte okunana kadar depolar. [Sakla (dize)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) ve [Peek (dize)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*) yöntemleri, isteğin sonunda silme yapılmadan verileri incelemek için kullanılabilir. [Keep ()](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) sözlükte tüm öğeleri bekletme için işaretler. `TempData`, tek bir istek için veri gerektiğinde yeniden yönlendirme için özellikle kullanışlıdır. `TempData`sağlayıcılar tarafından ya `TempData` da cookie oturum durumu kullanılarak uygulanır.
+ASP.NET Core, Razor [TempData](xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.TempData) veya Controller sayfalarını kullanıma sunar <xref:Microsoft.AspNetCore.Mvc.Controller.TempData> . Bu özellik, verileri başka bir istekte okunana kadar depolar. [Sakla (dize)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) ve [Peek (dize)](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Peek*) yöntemleri, isteğin sonunda silme yapılmadan verileri incelemek için kullanılabilir. [Keep ()](xref:Microsoft.AspNetCore.Mvc.ViewFeatures.ITempDataDictionary.Keep*) sözlükte tüm öğeleri bekletme için işaretler. `TempData` , tek bir istek için veri gerektiğinde yeniden yönlendirme için özellikle kullanışlıdır. `TempData` sağlayıcılar tarafından ya `TempData` da cookie oturum durumu kullanılarak uygulanır.
 
 ## <a name="tempdata-samples"></a>TempData örnekleri
 
@@ -502,7 +503,7 @@ Ara yazılım sırası önemlidir. Önceki örnekte, `InvalidOperationException`
 
 Yeni isteğin sorgu dizesine eklenerek sınırlı miktarda veri, bir istekten diğerine geçirilebilir. Bu durum, gömülü durum ile bağlantıların e-posta veya sosyal ağlar aracılığıyla paylaşılmasını sağlamak için durumu kalıcı bir şekilde yakalamak için yararlıdır. URL sorgu dizeleri ortak olduğundan, gizli veriler için hiçbir şekilde Sorgu dizelerini kullanmayın.
 
-Sorgu dizelerindeki veriler de dahil olmak üzere, istenmeyen paylaşıma ek olarak, [siteler arası Istek forgery (CSRF)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) saldırıları için fırsat oluşturabilir ve bu da kullanıcıların kimliği doğrulandığında kötü amaçlı siteleri ziyaret etmesini sağlayabilir. Saldırganlar daha sonra Kullanıcı verilerini uygulamadan çalabilir veya Kullanıcı adına kötü amaçlı eylemler gerçekleştirebilir. Korunan uygulamaların veya oturum durumunun CSRF saldırılarına karşı korunması gerekir. Daha fazla bilgi için bkz. [siteler arası Istek forgery (XSRF/CSRF) saldırılarını önleme](xref:security/anti-request-forgery).
+Sorgu dizelerindeki veriler de dahil olmak üzere, istenmeyen paylaşıma ek olarak, [siteler arası Istek forgery (CSRF)](https://www.owasp.org/index.php/Cross-Site_Request_Forgery_(CSRF)) saldırıları için fırsat oluşturabilir ve bu da kullanıcıların kimliği doğrulandığında kötü amaçlı siteleri ziyaret etmesini sağlayabilir. Saldırganlar daha sonra Kullanıcı verilerini uygulamadan çalabilir veya Kullanıcı adına kötü amaçlı eylemler gerçekleştirebilir. Korunan uygulamaların veya oturum durumunun CSRF saldırılarına karşı korunması gerekir. Daha fazla bilgi için bkz. <xref:security/anti-request-forgery>.
 
 ## <a name="hidden-fields"></a>Gizli alanlar
 
@@ -595,11 +596,11 @@ Verilerin tüm kullanıcılar tarafından kullanılabilmesini sağlamak için [b
 
   Örneğin, bir Kullanıcı bir alışveriş sepetini oturum içinde depolar. Kullanıcı sepete bir öğe ekler, ancak kayıt başarısız olur. Uygulama hata hakkında bilgi sahibi değildir, bu nedenle bu, doğru olmayan, kullanıcıya öğenin sepetine eklendiğini bildirir.
 
-  Hataları denetlemek için önerilen yaklaşım, `await feature.Session.CommitAsync();` uygulama oturuma yazma işlemi tamamlandığında uygulama kodundan çağırmalıdır. `CommitAsync`yedekleme deposu kullanılamıyorsa bir özel durum oluşturur. `CommitAsync`Başarısız olursa, uygulama özel durumu işleyebilir. `LoadAsync`veri deposunun kullanılamadığı koşulların aynısını oluşturur.
+  Hataları denetlemek için önerilen yaklaşım, `await feature.Session.CommitAsync();` uygulama oturuma yazma işlemi tamamlandığında uygulama kodundan çağırmalıdır. `CommitAsync` yedekleme deposu kullanılamıyorsa bir özel durum oluşturur. `CommitAsync`Başarısız olursa, uygulama özel durumu işleyebilir. `LoadAsync` veri deposunun kullanılamadığı koşulların aynısını oluşturur.
   
-## <a name="no-locsignalr-and-session-state"></a>SignalRve oturum durumu
+## <a name="no-locsignalr-and-session-state"></a>SignalR ve oturum durumu
 
-SignalRuygulamalar, bilgileri depolamak için oturum durumunu kullanmamalıdır. SignalRuygulamalar, hub 'da bağlantı durumu başına depolama yapabilir `Context.Items` . <!-- https://github.com/aspnet/SignalR/issues/2139 -->
+SignalR uygulamalar, bilgileri depolamak için oturum durumunu kullanmamalıdır. SignalR uygulamalar, hub 'da bağlantı durumu başına depolama yapabilir `Context.Items` . <!-- https://github.com/aspnet/SignalR/issues/2139 -->
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

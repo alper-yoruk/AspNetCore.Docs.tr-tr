@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/26/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/web-api-javascript
-ms.openlocfilehash: 4e5c6bdea97f54e3cef60d03ea0b63ac3e665bbf
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 3d097d724ac5e2313d24f1f06e47b881f29a4a98
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021295"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633805"
 ---
 # <a name="tutorial-call-an-aspnet-core-web-api-with-javascript"></a>Öğretici: JavaScript ile ASP.NET Core Web API 'SI çağırma
 
@@ -37,7 +38,7 @@ ASP.NET Core 2,2 için, [JavaScript ile Web API 'Sini çağırma](xref:tutorials
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * Tüm [öğreticiyi: Web API 'Si oluşturma](xref:tutorials/first-web-api)
 * CSS, HTML ve JavaScript ile benzerlik
@@ -48,7 +49,7 @@ Bu bölümde, Yapılacaklar öğeleri oluşturmak ve yönetmek için form içere
 
 `fetch`İşlevi, nesne olarak temsil edilen BIR http yanıtı içeren bir [Promise](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Promise) nesnesi döndürür `Response` . Ortak bir model, nesnesinde işlevini çağırarak JSON yanıt gövdesini ayıklamaya yönelik olur `json` `Response` . JavaScript, sayfayı Web API 'sinin yanıtından alınan ayrıntılarla güncelleştirir.
 
-En basit `fetch` çağrı, yolu temsil eden tek bir parametre kabul eder. Nesne olarak bilinen ikinci bir parametre `init` isteğe bağlıdır. `init`HTTP isteğini yapılandırmak için kullanılır.
+En basit `fetch` çağrı, yolu temsil eden tek bir parametre kabul eder. Nesne olarak bilinen ikinci bir parametre `init` isteğe bağlıdır. `init` HTTP isteğini yapılandırmak için kullanılır.
 
 1. Uygulamayı [statik dosyaları sunacak](/dotnet/api/microsoft.aspnetcore.builder.staticfileextensions.usestaticfiles#Microsoft_AspNetCore_Builder_StaticFileExtensions_UseStaticFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_) ve [varsayılan dosya eşlemesini etkinleştirecek](/dotnet/api/microsoft.aspnetcore.builder.defaultfilesextensions.usedefaultfiles#Microsoft_AspNetCore_Builder_DefaultFilesExtensions_UseDefaultFiles_Microsoft_AspNetCore_Builder_IApplicationBuilder_)şekilde yapılandırın. Aşağıdaki vurgulanan kod, `Configure` *Startup.cs*yönteminde gereklidir:
 

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/09/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/linux-nginx
-ms.openlocfilehash: f6a777ab796da42402fae4f77ecc028efa2d6039
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 63227f068926c4158ac8162fdc1ac11399fd65cb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015549"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633792"
 ---
 # <a name="host-aspnet-core-on-linux-with-nginx"></a>NGINX ile Linux üzerinde ana bilgisayar ASP.NET Core
 
@@ -42,7 +43,7 @@ Bu kılavuz:
 * Web uygulamasının, bir arka plan programı olarak başlangıcında çalışmasını sağlar.
 * Web uygulamasını yeniden başlatmanıza yardımcı olması için bir işlem yönetim aracı yapılandırır.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 1. Sudo ayrıcalığına sahip standart bir kullanıcı hesabı ile Ubuntu 16,04 sunucusuna erişim.
 1. .NET Core çalışma zamanını sunucuya yükler.
@@ -224,7 +225,7 @@ WantedBy=multi-user.target
 
 Yukarıdaki örnekte, hizmeti yöneten Kullanıcı `User` seçeneğiyle belirtilir. Kullanıcı ( `www-data` ) var olmalıdır ve uygulamanın dosyalarının doğru sahipliğini içermelidir.
 
-`TimeoutStopSec`Uygulamanın ilk kesme sinyali aldıktan sonra kapanması için bekleyeceği süreyi yapılandırmak için kullanın. Uygulama bu dönemde kapanmazsa, uygulamayı sonlandırmak için SIGKıLL çıkarılır. Değeri unitless saniyeler (örneğin, `150` ), bir zaman aralığı değeri (örneğin, `2min 30s` ) veya `infinity` zaman aşımını devre dışı bırakmak için girin. `TimeoutStopSec`Varsayılan olarak, `DefaultTimeoutStopSec` yönetici yapılandırma dosyasındaki değerini alır (*systemd-System. conf*, *System. conf. d*, *systemd-User. conf*, *User. conf. d*). Çoğu dağıtım için varsayılan zaman aşımı 90 saniyedir.
+`TimeoutStopSec`Uygulamanın ilk kesme sinyali aldıktan sonra kapanması için bekleyeceği süreyi yapılandırmak için kullanın. Uygulama bu dönemde kapanmazsa, uygulamayı sonlandırmak için SIGKıLL çıkarılır. Değeri unitless saniyeler (örneğin, `150` ), bir zaman aralığı değeri (örneğin, `2min 30s` ) veya `infinity` zaman aşımını devre dışı bırakmak için girin. `TimeoutStopSec` Varsayılan olarak, `DefaultTimeoutStopSec` yönetici yapılandırma dosyasındaki değerini alır (*systemd-System. conf*, *System. conf. d*, *systemd-User. conf*, *User. conf. d*). Çoğu dağıtım için varsayılan zaman aşımı 90 saniyedir.
 
 ```
 # The default value is 90 seconds for most distributions.
@@ -399,7 +400,7 @@ Sunucuyu gerekli olan ek modüllerle yapılandırın. Uygulamayı sağlamlaştı
 [!code-nginx[](linux-nginx/nginx.conf?highlight=2)]
 
 > [!NOTE]
-> Blazor WebAssemblyuygulamalar `burst` , bir uygulama tarafından yapılan isteklerin daha fazla sayısına uyum sağlamak için daha büyük bir parametre değeri gerektirir. Daha fazla bilgi için bkz. <xref:blazor/host-and-deploy/webassembly#nginx>.
+> Blazor WebAssembly uygulamalar `burst` , bir uygulama tarafından yapılan isteklerin daha fazla sayısına uyum sağlamak için daha büyük bir parametre değeri gerektirir. Daha fazla bilgi için bkz. <xref:blazor/host-and-deploy/webassembly#nginx>.
 
 #### <a name="secure-nginx-from-clickjacking"></a>Tıklama mercekten NGINX 'i güvenli hale getirme
 

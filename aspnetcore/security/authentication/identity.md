@@ -5,6 +5,7 @@ description: IdentityASP.NET Core bir uygulamayla kullanın. Parola gereksinimle
 ms.author: riande
 ms.date: 7/15/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity
-ms.openlocfilehash: 67bf24d8f871c4e80ed91f5f437895fe29e09087
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 1d14a3668192a165ea5025ae0575a8e3d6dfd8e4
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021243"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633259"
 ---
 # <a name="introduction-to-no-locidentity-on-aspnet-core"></a>ASP.NET Core giriş Identity
 
@@ -28,7 +29,7 @@ ms.locfileid: "88021243"
 
 Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-ASP.NET Core Identity :
+ASP.NET Core Identity:
 
 * , Kullanıcı arabirimi (UI) oturum açma işlevselliğini destekleyen bir API 'dir.
 * Kullanıcıları, parolaları, profil verilerini, rolleri, talepleri, belirteçleri, e-posta onayını ve daha fazlasını yönetir.
@@ -39,14 +40,14 @@ Kullanıcılar, içinde depolanan oturum açma bilgilerini içeren bir hesap olu
 
 [ Identity Kaynak kodu](https://github.com/dotnet/AspNetCore/tree/master/src/Identity) GitHub ' da kullanılabilir. [Yapı Identity İskelesi](xref:security/authentication/scaffold-identity) ve şablon etkileşimini gözden geçirmek için oluşturulan dosyaları görüntüleyin Identity .
 
-Identitygenellikle kullanıcı adlarını, parolaları ve profil verilerini depolamak için bir SQL Server veritabanı kullanılarak yapılandırılır. Alternatif olarak, başka bir kalıcı mağaza da kullanılabilir, örneğin Azure Tablo depolaması.
+Identity genellikle kullanıcı adlarını, parolaları ve profil verilerini depolamak için bir SQL Server veritabanı kullanılarak yapılandırılır. Alternatif olarak, başka bir kalıcı mağaza da kullanılabilir, örneğin Azure Tablo depolaması.
 
 Bu konu başlığında, Identity bir kullanıcıyı kaydetmek, oturum açmak ve oturumu kapatmak için kullanmayı öğreneceksiniz. Note: Şablonlar Kullanıcı adı ve e-postayı kullanıcılar için aynı olarak değerlendirir. Kullanan uygulamaları oluşturma hakkında daha ayrıntılı yönergeler için Identity bkz. [sonraki adımlar](#next).
 
 [Microsoft Identity platform](/azure/active-directory/develop/) :
 
 * Azure Active Directory (Azure AD) geliştirici platformunun bir evrimi.
-* ASP.NET Core ilgisi yoktur Identity .
+* İlgisiz ASP.NET Core Identity .
 
 [!INCLUDE[](~/includes/IdentityServer4.md)]
 
@@ -79,7 +80,7 @@ dotnet new webapp --auth Individual -uld -o WebApp1
 
 ---
 
-Oluşturulan proje bir [ Razor sınıf kitaplığı](xref:razor-pages/ui-class)olarak [ASP.NET Core Identity ](xref:security/authentication/identity) sağlar. Identity Razor Sınıf kitaplığı, alanı ile uç noktaları kullanıma sunar `Identity` . Örnek:
+Oluşturulan proje [ASP.NET Core Identity](xref:security/authentication/identity) bir [ Razor sınıf kitaplığı](xref:razor-pages/ui-class)olarak sağlanır. Identity Razor Sınıf kitaplığı, alanı ile uç noktaları kullanıma sunar `Identity` . Örnek:
 
 * /Identity/Account/Login
 * /Identity/Account/Logout
@@ -125,11 +126,11 @@ Hizmetler ' de eklenir `ConfigureServices` . Tipik model, tüm yöntemleri çağ
 
 Önceki vurgulanan kod Identity varsayılan seçenek değerleriyle yapılandırılır. Hizmetler, [bağımlılık ekleme](xref:fundamentals/dependency-injection)yoluyla uygulama için kullanılabilir hale getirilir.
 
-Identityçağırarak etkindir <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> . `UseAuthentication`istek ardışık düzenine kimlik doğrulama [ara yazılımı](xref:fundamentals/middleware/index) ekler.
+Identity çağırarak etkindir <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> . `UseAuthentication` istek ardışık düzenine kimlik doğrulama [ara yazılımı](xref:fundamentals/middleware/index) ekler.
 
 [!code-csharp[](identity/sample/WebApp3/Startup.cs?name=snippet_configure&highlight=19)]
 
-Şablon tarafından oluşturulan uygulama [Yetkilendirme](xref:security/authorization/secure-data)kullanmaz. `app.UseAuthorization`, uygulamanın yetkilendirme eklemesi için doğru sırada eklendiğinden emin olmak için dahil edilmiştir. `UseRouting`, `UseAuthentication` , `UseAuthorization` ve `UseEndpoints` Önceki kodda gösterilen sırada çağrılmalıdır.
+Şablon tarafından oluşturulan uygulama [Yetkilendirme](xref:security/authorization/secure-data)kullanmaz. `app.UseAuthorization` , uygulamanın yetkilendirme eklemesi için doğru sırada eklendiğinden emin olmak için dahil edilmiştir. `UseRouting`, `UseAuthentication` , `UseAuthorization` ve `UseEndpoints` Önceki kodda gösterilen sırada çağrılmalıdır.
 
 Ve hakkında daha fazla bilgi için `IdentityOptions` `Startup` , bkz <xref:Microsoft.AspNetCore.Identity.IdentityOptions> . ve [uygulama başlatma](xref:fundamentals/startup).
 
@@ -172,7 +173,7 @@ Oturum açma formu şu durumlarda görüntülenir:
 * **Oturum aç** bağlantısı seçilidir.
 * Kullanıcı, erişim yetkisi olmayan **veya** sistem tarafından kimliği doğrulanmamış olan sınırlı bir sayfaya erişmeyi dener.
 
-Oturum açma sayfasındaki form gönderildiğinde, `OnPostAsync` eylem çağrılır. `PasswordSignInAsync`, nesne üzerinde çağrılır `_signInManager` .
+Oturum açma sayfasındaki form gönderildiğinde, `OnPostAsync` eylem çağrılır. `PasswordSignInAsync` , nesne üzerinde çağrılır `_signInManager` .
 
 [!code-csharp[](identity/sample/WebApp3/Areas/Identity/Pages/Account/Login.cshtml.cs?name=snippet&highlight=10-11)]
 
@@ -192,7 +193,7 @@ Yetkilendirme kararlarının nasıl yapılacağı hakkında bilgi için bkz <xre
 
 [!code-cshtml[](identity/sample/WebApp3/Pages/Shared/_LoginPartial.cshtml?highlight=15)]
 
-## <a name="test-no-locidentity"></a>SınamanızIdentity
+## <a name="test-no-locidentity"></a>Sınamanız Identity
 
 Varsayılan Web projesi şablonları, giriş sayfalarına anonim erişime izin verir. Test etmek için şunları Identity ekleyin [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) :
 
@@ -200,20 +201,20 @@ Varsayılan Web projesi şablonları, giriş sayfalarına anonim erişime izin v
 
 Oturumunuz açık ise oturumu kapatın. Uygulamayı çalıştırın ve **Gizlilik** bağlantısını seçin. Oturum açma sayfasına yönlendirilirsiniz.
 
-### <a name="explore-no-locidentity"></a>ExplorerIdentity
+### <a name="explore-no-locidentity"></a>Explorer Identity
 
 IdentityDaha ayrıntılı incelemek için:
 
 * [Tam kimlik UI kaynağı oluşturma](xref:security/authentication/scaffold-identity#create-full-identity-ui-source)
 * Her sayfanın kaynağını inceleyin ve hata ayıklayıcıda ilerleyin.
 
-## <a name="no-locidentity-components"></a>IdentityBileşenleri
+## <a name="no-locidentity-components"></a>Identity Bileşenleri
 
 Tüm Identity bağımlı NuGet paketleri [ASP.NET Core paylaşılan çerçevesine](xref:aspnetcore-3.0#use-the-aspnet-core-shared-framework)dahildir.
 
-İçin birincil paket Identity [Microsoft. aspnetcore Identity .](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity/).. Bu paket, ASP.NET Core için temel arabirim kümesini içerir Identity ve tarafından dahildir `Microsoft.AspNetCore.Identity.EntityFrameworkCore` .
+İçin birincil paket Identity [Microsoft. aspnetcore Identity .](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity/).. Bu paket, için temel arabirim kümesini içerir ASP.NET Core Identity ve tarafından dahildir `Microsoft.AspNetCore.Identity.EntityFrameworkCore` .
 
-## <a name="migrating-to-aspnet-core-no-locidentity"></a>ASP.NET Core geçiriliyorIdentity
+## <a name="migrating-to-no-locaspnet-core-identity"></a>Geçiş yapılıyor ASP.NET Core Identity
 
 Mevcut deponuzu geçirme hakkında daha fazla bilgi ve yönergeler için Identity bkz. [geçiş kimlik Identity doğrulaması ve ](xref:migration/identity).
 
@@ -223,7 +224,7 @@ Minimum parola gereksinimlerini ayarlayan bir örnek için bkz. [yapılandırma]
 
 ## <a name="adddefaultno-locidentity-and-addno-locidentity"></a>AddDefault Identity ve EkleIdentity
 
-<xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionUIExtensions.AddDefaultIdentity*>ASP.NET Core 2,1 ' de tanıtılmıştı. Çağırma `AddDefaultIdentity` , aşağıdakileri çağırmaya benzer:
+<xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionUIExtensions.AddDefaultIdentity*> ASP.NET Core 2,1 ' de tanıtılmıştı. Çağırma `AddDefaultIdentity` , aşağıdakileri çağırmaya benzer:
 
 * <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionExtensions.AddIdentity*>
 * <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>
@@ -253,7 +254,7 @@ Statik Identity varlıkların (Kullanıcı arabirimi için stil sayfaları ve Ja
 
 * [ASP.NET Core Identity kaynak kodu](https://github.com/dotnet/aspnetcore/tree/master/src/Identity)
 * SQLite kullanarak yapılandırma hakkında bilgi için [Bu GitHub sorununa](https://github.com/dotnet/AspNetCore.Docs/issues/5131) bakın Identity .
-* [YapılandırmaIdentity](xref:security/authentication/identity-configuration)
+* [Yapılandırma Identity](xref:security/authentication/identity-configuration)
 * <xref:security/authorization/secure-data>
 * <xref:security/authentication/add-user-data>
 * <xref:security/authentication/identity-enable-qrcodes>
@@ -268,9 +269,9 @@ Statik Identity varlıkların (Kullanıcı arabirimi için stil sayfaları ve Ja
 
 Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-ASP.NET Core Identity , ASP.NET Core uygulamalara oturum açma işlevselliği ekleyen bir üyelik sistemidir. Kullanıcılar, içinde depolanan oturum açma bilgilerini içeren bir hesap oluşturabilir Identity veya bir dış oturum açma sağlayıcısı kullanabilirler. Desteklenen dış oturum açma sağlayıcıları [Facebook, Google, Microsoft hesabı ve Twitter](xref:security/authentication/social/index)içerir.
+ASP.NET Core Identity , ASP.NET Core uygulamalarına oturum açma işlevselliği ekleyen bir üyelik sistemidir. Kullanıcılar, içinde depolanan oturum açma bilgilerini içeren bir hesap oluşturabilir Identity veya bir dış oturum açma sağlayıcısı kullanabilirler. Desteklenen dış oturum açma sağlayıcıları [Facebook, Google, Microsoft hesabı ve Twitter](xref:security/authentication/social/index)içerir.
 
-IdentityKullanıcı adlarını, parolaları ve profil verilerini depolamak için bir SQL Server veritabanı kullanılarak yapılandırılabilir. Alternatif olarak, başka bir kalıcı mağaza da kullanılabilir, örneğin Azure Tablo depolaması.
+Identity Kullanıcı adlarını, parolaları ve profil verilerini depolamak için bir SQL Server veritabanı kullanılarak yapılandırılabilir. Alternatif olarak, başka bir kalıcı mağaza da kullanılabilir, örneğin Azure Tablo depolaması.
 
 Örnek kodu ([indirme](xref:index#how-to-download-a-sample)) [görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/identity/sample/src/ASPNETCore-IdentityDemoComplete/) .
 
@@ -280,7 +281,7 @@ Bu konu başlığında, Identity bir kullanıcıyı kaydetmek, oturum açmak ve 
 
 ## <a name="adddefaultno-locidentity-and-addno-locidentity"></a>AddDefault Identity ve EkleIdentity
 
-<xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionUIExtensions.AddDefaultIdentity*>ASP.NET Core 2,1 ' de tanıtılmıştı. Çağırma `AddDefaultIdentity` , aşağıdakileri çağırmaya benzer:
+<xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionUIExtensions.AddDefaultIdentity*> ASP.NET Core 2,1 ' de tanıtılmıştı. Çağırma `AddDefaultIdentity` , aşağıdakileri çağırmaya benzer:
 
 * <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionExtensions.AddIdentity*>
 * <xref:Microsoft.AspNetCore.Identity.IdentityBuilderUIExtensions.AddDefaultUI*>
@@ -307,7 +308,7 @@ dotnet new webapp --auth Individual -o WebApp1
 
 ---
 
-Oluşturulan proje bir [ Razor sınıf kitaplığı](xref:razor-pages/ui-class)olarak [ASP.NET Core Identity ](xref:security/authentication/identity) sağlar. Identity Razor Sınıf kitaplığı, alanı ile uç noktaları kullanıma sunar `Identity` . Örnek:
+Oluşturulan proje [ASP.NET Core Identity](xref:security/authentication/identity) bir [ Razor sınıf kitaplığı](xref:razor-pages/ui-class)olarak sağlanır. Identity Razor Sınıf kitaplığı, alanı ile uç noktaları kullanıma sunar `Identity` . Örnek:
 
 * /Identity/Account/Login
 * /Identity/Account/Logout
@@ -349,7 +350,7 @@ Hizmetler ' de eklenir `ConfigureServices` . Tipik model, tüm yöntemleri çağ
 
 Önceki kod Identity varsayılan seçenek değerleriyle yapılandırılır. Hizmetler, [bağımlılık ekleme](xref:fundamentals/dependency-injection)yoluyla uygulama için kullanılabilir hale getirilir.
 
-Identity[UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_)çağırarak etkinleştirilir. `UseAuthentication`istek ardışık düzenine kimlik doğrulama [ara yazılımı](xref:fundamentals/middleware/index) ekler.
+Identity[UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_)çağırarak etkinleştirilir. `UseAuthentication` istek ardışık düzenine kimlik doğrulama [ara yazılımı](xref:fundamentals/middleware/index) ekler.
 
 [!code-csharp[](identity/sample/WebApp1/Startup.cs?name=snippet_configure&highlight=18)]
 
@@ -393,7 +394,7 @@ Oturum açma formu şu durumlarda görüntülenir:
 * **Oturum aç** bağlantısı seçilidir.
 * Kullanıcı, erişim yetkisi olmayan **veya** sistem tarafından kimliği doğrulanmamış olan sınırlı bir sayfaya erişmeyi dener.
 
-Oturum açma sayfasındaki form gönderildiğinde, `OnPostAsync` eylem çağrılır. `PasswordSignInAsync`, nesne üzerinde çağrılır `_signInManager` .
+Oturum açma sayfasındaki form gönderildiğinde, `OnPostAsync` eylem çağrılır. `PasswordSignInAsync` , nesne üzerinde çağrılır `_signInManager` .
 
 [!code-csharp[](identity/sample/WebApp1/Areas/Identity/Pages/Account/Login.cshtml.cs?name=snippet&highlight=10-11)]
 
@@ -411,7 +412,7 @@ Yetkilendirme kararlarının nasıl yapılacağı hakkında bilgi için bkz <xre
 
 [!code-cshtml[](identity/sample/WebApp1/Pages/Shared/_LoginPartial.cshtml?highlight=16)]
 
-## <a name="test-no-locidentity"></a>SınamanızIdentity
+## <a name="test-no-locidentity"></a>Sınamanız Identity
 
 Varsayılan Web projesi şablonları, giriş sayfalarına anonim erişime izin verir. Test etmek için Identity [`[Authorize]`](/dotnet/api/microsoft.aspnetcore.authorization.authorizeattribute) Gizlilik sayfasına ekleyin.
 
@@ -419,20 +420,20 @@ Varsayılan Web projesi şablonları, giriş sayfalarına anonim erişime izin v
 
 Oturumunuz açık ise oturumu kapatın. Uygulamayı çalıştırın ve **Gizlilik** bağlantısını seçin. Oturum açma sayfasına yönlendirilirsiniz.
 
-### <a name="explore-no-locidentity"></a>ExplorerIdentity
+### <a name="explore-no-locidentity"></a>Explorer Identity
 
 IdentityDaha ayrıntılı incelemek için:
 
 * [Tam kimlik UI kaynağı oluşturma](xref:security/authentication/scaffold-identity#create-full-identity-ui-source)
 * Her sayfanın kaynağını inceleyin ve hata ayıklayıcıda ilerleyin.
 
-## <a name="no-locidentity-components"></a>IdentityBileşenleri
+## <a name="no-locidentity-components"></a>Identity Bileşenleri
 
 Tüm Identity bağımlı NuGet paketleri [Microsoft. aspnetcore. app metapackage](xref:fundamentals/metapackage-app)'e dahildir.
 
-İçin birincil paket Identity [Microsoft. aspnetcore Identity .](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity/).. Bu paket, ASP.NET Core için temel arabirim kümesini içerir Identity ve tarafından dahildir `Microsoft.AspNetCore.Identity.EntityFrameworkCore` .
+İçin birincil paket Identity [Microsoft. aspnetcore Identity .](https://www.nuget.org/packages/Microsoft.AspNetCore.Identity/).. Bu paket, için temel arabirim kümesini içerir ASP.NET Core Identity ve tarafından dahildir `Microsoft.AspNetCore.Identity.EntityFrameworkCore` .
 
-## <a name="migrating-to-aspnet-core-no-locidentity"></a>ASP.NET Core geçiriliyorIdentity
+## <a name="migrating-to-no-locaspnet-core-identity"></a>Geçiş yapılıyor ASP.NET Core Identity
 
 Mevcut deponuzu geçirme hakkında daha fazla bilgi ve yönergeler için Identity bkz. [geçiş kimlik Identity doğrulaması ve ](xref:migration/identity).
 
@@ -443,7 +444,7 @@ Minimum parola gereksinimlerini ayarlayan bir örnek için bkz. [yapılandırma]
 ## <a name="next-steps"></a>Sonraki Adımlar
 
 * SQLite kullanarak yapılandırma hakkında bilgi için [Bu GitHub sorununa](https://github.com/dotnet/AspNetCore.Docs/issues/5131) bakın Identity .
-* [YapılandırmaIdentity](xref:security/authentication/identity-configuration)
+* [Yapılandırma Identity](xref:security/authentication/identity-configuration)
 * <xref:security/authorization/secure-data>
 * <xref:security/authentication/add-user-data>
 * <xref:security/authentication/identity-enable-qrcodes>

@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.0'
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/index
-ms.openlocfilehash: 203d77a2caaba9156419a04754fe162dd57052c1
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 8058cc3c3461d72c713c8be53c3667112adb2ae5
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88012715"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634130"
 ---
 # <a name="introduction-to-no-locrazor-pages-in-aspnet-core"></a>RazorASP.NET Core sayfalara giriş
 
@@ -29,13 +30,13 @@ ms.locfileid: "88012715"
 
 By [Rick Anderson](https://twitter.com/RickAndMSFT) ve [Ryan şimdi ak](https://github.com/rynowak)
 
-RazorSayfalar, denetleyici ve görünümleri kullanmaktan daha kolay ve daha üretken bir şekilde kodlama sayfasına odaklanmış senaryolar yapabilir.
+Razor Sayfalar, denetleyici ve görünümleri kullanmaktan daha kolay ve daha üretken bir şekilde kodlama sayfasına odaklanmış senaryolar yapabilir.
 
 Model-View-Controller yaklaşımını kullanan bir öğretici arıyorsanız, bkz. [ASP.NET Core MVC ile çalışmaya başlama](xref:tutorials/first-mvc-app/start-mvc).
 
 Bu belge, sayfalara giriş sağlar Razor . Adım adım öğretici değildir. Bölümlerden bazılarını çok gelişmiş bir şekilde buldıysanız, bkz. [ Razor sayfalarla çalışmaya başlama](xref:tutorials/razor-pages/razor-pages-start). ASP.NET Core genel bir bakış için bkz. [ASP.NET Core giriş](xref:index).
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -69,17 +70,17 @@ Bir sayfa projesi oluşturma hakkında ayrıntılı yönergeler için bkz. [ Raz
 
 ---
 
-## <a name="no-locrazor-pages"></a>RazorSayfaları
+## <a name="no-locrazor-pages"></a>Razor Sayfaları
 
 Razor*Startup.cs*'de sayfalar etkin:
 
 [!code-csharp[](index/3.0sample/RazorPagesIntro/Startup.cs?name=snippet_Startup&highlight=12,36)]
 
-Temel bir sayfa düşünün:<a name="OnGet"></a>
+Temel bir sayfa düşünün: <a name="OnGet"></a>
 
 [!code-cshtml[](index/3.0sample/RazorPagesIntro/Pages/Index.cshtml?highlight=1)]
 
-Yukarıdaki kod, denetleyiciler ve görünümlerle ASP.NET Core bir uygulamada kullanılan bir [ Razor görünüm dosyası](xref:tutorials/first-mvc-app/adding-view) gibi çok sayıda görünür. Bu, farklı kılan [`@page`](xref:mvc/views/razor#page) yönergedir. `@page`dosyayı bir MVC eylemine dönüştürür. Bu, bir denetleyiciden geçmeden istekleri doğrudan işlediği anlamına gelir. `@page`sayfadaki ilk yönerge olmalıdır Razor . `@page`diğer yapıların davranışını etkiler [Razor](xref:mvc/views/razor) . RazorSayfaların dosya adlarında *. cshtml* soneki vardır.
+Yukarıdaki kod, denetleyiciler ve görünümlerle ASP.NET Core bir uygulamada kullanılan bir [ Razor görünüm dosyası](xref:tutorials/first-mvc-app/adding-view) gibi çok sayıda görünür. Bu, farklı kılan [`@page`](xref:mvc/views/razor#page) yönergedir. `@page` dosyayı bir MVC eylemine dönüştürür. Bu, bir denetleyiciden geçmeden istekleri doğrudan işlediği anlamına gelir. `@page` sayfadaki ilk yönerge olmalıdır Razor . `@page` diğer yapıların davranışını etkiler [Razor](xref:mvc/views/razor) . Razor Sayfaların dosya adlarında *. cshtml* soneki vardır.
 
 Bir sınıf kullanan benzer bir sayfa `PageModel` aşağıdaki iki dosyada gösterilmiştir. *Pages/Index2. cshtml* dosyası:
 
@@ -103,11 +104,11 @@ URL yollarının sayfalara olan ilişkilendirmeleri, sayfanın dosya sistemindek
 Notlar:
 
 * Çalışma zamanı sayfalar Razor klasöründeki sayfalar dosyalarını varsayılan olarak *Pages* arar.
-* `Index`, URL bir sayfa içermiyorsa varsayılan sayfasıdır.
+* `Index` , URL bir sayfa içermiyorsa varsayılan sayfasıdır.
 
 ## <a name="write-a-basic-form"></a>Temel form yazma
 
-RazorSayfalar, Web tarayıcıları ile kullanılan yaygın desenleri bir uygulama oluştururken kolayca uygulanması için tasarlanmıştır. [Model bağlama](xref:mvc/models/model-binding), [ETIKET yardımcıları](xref:mvc/views/tag-helpers/intro)ve HTML Yardımcıları hepsi yalnızca bir sayfa sınıfında tanımlanan özelliklerle *çalışır* Razor . Model için temel bir "bize başvurun" formu uygulayan bir sayfa düşünün `Contact` :
+Razor Sayfalar, Web tarayıcıları ile kullanılan yaygın desenleri bir uygulama oluştururken kolayca uygulanması için tasarlanmıştır. [Model bağlama](xref:mvc/models/model-binding), [ETIKET yardımcıları](xref:mvc/views/tag-helpers/intro)ve HTML Yardımcıları hepsi yalnızca bir sayfa sınıfında tanımlanan özelliklerle *çalışır* Razor . Model için temel bir "bize başvurun" formu uygulayan bir sayfa düşünün `Contact` :
 
 Bu belgedeki örnekler için, `DbContext` [Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/razor-pages/index/3.0sample/RazorPagesContacts/Startup.cs#L23-L24) dosyasında başlatılır.
 
@@ -177,11 +178,11 @@ Sayfalardan işlenmiş HTML */Create. cshtml*:
 
     * Bir eylem sonucudur.
     * , Veya ile `RedirectToAction` benzerdir `RedirectToRoute` (denetleyiciler ve görünümlerde kullanılır).
-    * Sayfalar için özelleştirilir. Yukarıdaki örnekte, kök dizin sayfasına () yeniden yönlendiriliyor `/Index` . `RedirectToPage`, [Sayfalar Için URL oluşturma](#url_gen) bölümünde ayrıntılı olarak açıklanmıştır.
+    * Sayfalar için özelleştirilir. Yukarıdaki örnekte, kök dizin sayfasına () yeniden yönlendiriliyor `/Index` . `RedirectToPage` , [Sayfalar Için URL oluşturma](#url_gen) bölümünde ayrıntılı olarak açıklanmıştır.
 
 * Sunucuya geçirilen doğrulama hatalarıyla birlikte:
 
-  * `OnPostAsync`Handler yöntemi <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageBase.Page*> yardımcı yöntemini çağırır. `Page`, bir <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageResult> örneği döndürür. Döndürme `Page` , denetleyicilerde eylemlerin nasıl dönüşlerine benzer `View` . `PageResult`, bir işleyici yöntemi için varsayılan dönüş türüdür. Döndüren bir işleyici yöntemi `void` sayfayı işler.
+  * `OnPostAsync`Handler yöntemi <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageBase.Page*> yardımcı yöntemini çağırır. `Page`, bir <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageResult> örneği döndürür. Döndürme `Page` , denetleyicilerde eylemlerin nasıl dönüşlerine benzer `View` . `PageResult` , bir işleyici yöntemi için varsayılan dönüş türüdür. Döndüren bir işleyici yöntemi `void` sayfayı işler.
   * Yukarıdaki örnekte, formun hiçbir değer olmadan nakledilmesi [ModelState ile sonuçlanır. IsValid](xref:Microsoft.AspNetCore.Mvc.ModelBinding.ModelStateDictionary.IsValid) yanlış döndürüyor. Bu örnekte, istemcide hiçbir doğrulama hatası gösterilmezler. Doğrulama hatası teslim etme bu belgenin ilerleyen bölümlerinde ele alınmıştır.
 
   [!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml.cs?name=snippet_OnPostAsync&highlight=3-6)]
@@ -197,7 +198,7 @@ Sayfalardan işlenmiş HTML */Create. cshtml*:
 
 `[BindProperty]`istemci tarafından değiştirilmemesi gereken özellikler içeren **modellerde kullanılmamalıdır.** Daha fazla bilgi için bkz. fazla [nakil](xref:data/ef-rp/crud#overposting).
 
-RazorSayfalar, varsayılan olarak, özellikleri yalnızca fiil dışı özelliklerle bağlayın `GET` . Özelliklere bağlama, HTTP verilerini model türüne dönüştürmek için kod yazma ihtiyacını ortadan kaldırır. Bağlama, form alanlarını işlemek için aynı özelliği kullanarak kodu azaltır ( `<input asp-for="Customer.Name">` ) ve girişi kabul eder.
+Razor Sayfalar, varsayılan olarak, özellikleri yalnızca fiil dışı özelliklerle bağlayın `GET` . Özelliklere bağlama, HTTP verilerini model türüne dönüştürmek için kod yazma ihtiyacını ortadan kaldırır. Bağlama, form alanlarını işlemek için aynı özelliği kullanarak kodu azaltır ( `<input asp-for="Customer.Name">` ) ve girişi kabul eder.
 
 [!INCLUDE[](~/includes/bind-get.md)]
 
@@ -206,7 +207,7 @@ RazorSayfalar, varsayılan olarak, özellikleri yalnızca fiil dışı özellikl
 [!code-cshtml[](index/3.0sample/RazorPagesContacts/Pages/Customers/Create.cshtml?highlight=3,9)]
 
 * Yukarıdaki kodda, [giriş etiketi Yardımcısı](xref:mvc/views/working-with-forms#the-input-tag-helper) `<input asp-for="Customer.Name" />` HTML `<input>` öğesini `Customer.Name` model ifadesine bağlar.
-* [`@addTagHelper`](xref:mvc/views/tag-helpers/intro#addtaghelper-makes-tag-helpers-available)Etiket Yardımcıları kullanılabilir hale getirir.
+* [`@addTagHelper`](xref:mvc/views/tag-helpers/intro#addtaghelper-makes-tag-helpers-available) Etiket Yardımcıları kullanılabilir hale getirir.
 
 ### <a name="the-home-page"></a>Giriş sayfası
 
@@ -297,7 +298,7 @@ Yukarıdaki kod:
 
 Create formunu ad değeri olmadan göndermek "ad alanı gereklidir" hata iletisini görüntüler. formunda. İstemcide JavaScript etkinse tarayıcı, sunucuya göndermeden hatayı görüntüler.
 
-`[StringLength(10)]`Özniteliği `data-val-length-max="10"` işlenmiş html üzerinde oluşturulur. `data-val-length-max`tarayıcıların belirtilen uzunluk üst sınırından fazlasını girmesini engeller. Gönderiyi düzenlemek ve yeniden oynatmak için [Fiddler](https://www.telerik.com/fiddler) gibi bir araç kullanılıyorsa:
+`[StringLength(10)]`Özniteliği `data-val-length-max="10"` işlenmiş html üzerinde oluşturulur. `data-val-length-max` tarayıcıların belirtilen uzunluk üst sınırından fazlasını girmesini engeller. Gönderiyi düzenlemek ve yeniden oynatmak için [Fiddler](https://www.telerik.com/fiddler) gibi bir araç kullanılıyorsa:
 
 * , Adı 10 ' dan daha uzun.
 * "Alan adı, en fazla 10 uzunluğunda bir dize olmalıdır" hata iletisi. hatası döndürülür.
@@ -334,19 +335,19 @@ Daha fazla bilgi için bkz.
 
 ## <a name="handle-head-requests-with-an-onget-handler-fallback"></a>OnGet işleyicisi geri dönüşü ile tanıtıcı HEAD istekleri
 
-`HEAD`istekler belirli bir kaynak için üstbilgileri almaya izin verir. `GET`İsteklerin aksine `HEAD` istekler bir yanıt gövdesi döndürmez.
+`HEAD` istekler belirli bir kaynak için üstbilgileri almaya izin verir. `GET`İsteklerin aksine `HEAD` istekler bir yanıt gövdesi döndürmez.
 
 Normalde, `OnHead` istekler için bir işleyici oluşturulur ve çağırılır `HEAD` :
 
 [!code-csharp[](index/3.0sample/RazorPagesContacts/Pages/Privacy.cshtml.cs?name=snippet)]
 
-RazorBir `OnGet` işleyici tanımlanmazsa, sayfa işleyiciyi çağırmaya geri döner `OnHead` .
+Razor Bir `OnGet` işleyici tanımlanmazsa, sayfa işleyiciyi çağırmaya geri döner `OnHead` .
 
 <a name="xsrf"></a>
 
 ## <a name="xsrfcsrf-and-no-locrazor-pages"></a>XSRF/CSRF ve Razor Sayfalar
 
-RazorSayfalar, [Antiforgery doğrulaması](xref:security/anti-request-forgery)tarafından korunur. [Formtaghelper](xref:mvc/views/working-with-forms#the-form-tag-helper) , antiforgery belirteçlerini HTML form öğelerine çıkartır.
+Razor Sayfalar, [Antiforgery doğrulaması](xref:security/anti-request-forgery)tarafından korunur. [Formtaghelper](xref:mvc/views/working-with-forms#the-form-tag-helper) , antiforgery belirteçlerini HTML form öğelerine çıkartır.
 
 <a name="layout"></a>
 
@@ -376,7 +377,7 @@ Düzen *Sayfalar/paylaşılan* klasöründedir. Sayfalar, geçerli sayfayla ayn�
 
 Düzen dosyası *Sayfalar/paylaşılan* klasörüne gitmelidir.
 
-Düzen dosyasını *Görünümler/paylaşılan* klasöre **yerleştirmenizi öneririz** . *Görünümler/paylaşılan* bir MVC görünümleri modelidir. RazorSayfalar, yol kurallarını değil klasör hiyerarşisine güvenmektir.
+Düzen dosyasını *Görünümler/paylaşılan* klasöre **yerleştirmenizi öneririz** . *Görünümler/paylaşılan* bir MVC görünümleri modelidir. Razor Sayfalar, yol kurallarını değil klasör hiyerarşisine güvenmektir.
 
 Bir sayfadan aramayı görüntüleme Razor *sayfaları* klasörünü içerir. MVC denetleyicileri ve geleneksel görünümler ile kullanılan düzenler, şablonlar ve partilar Razor *yalnızca çalışır*.
 
@@ -384,7 +385,7 @@ Bir *Pages/_ViewImports. cshtml* dosyası ekleyin:
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/_ViewImports.cshtml)]
 
-`@namespace`, Öğreticinin ilerleyen kısımlarında açıklanmıştır. `@addTagHelper`Yönergesi, [yerleşik etiket yardımcılarını](xref:mvc/views/tag-helpers/builtin-th/Index) *Sayfalar* klasöründeki tüm sayfalara getirir.
+`@namespace` , Öğreticinin ilerleyen kısımlarında açıklanmıştır. `@addTagHelper`Yönergesi, [yerleşik etiket yardımcılarını](xref:mvc/views/tag-helpers/builtin-th/Index) *Sayfalar* klasöründeki tüm sayfalara getirir.
 
 <a name="namespace"></a>
 
@@ -518,7 +519,7 @@ Mizanpajda, başlık ViewData sözlüğünden okundu:
 
 ## <a name="tempdata"></a>TempData
 
-ASP.NET Core, öğesini kullanıma sunar <xref:Microsoft.AspNetCore.Mvc.Controller.TempData> . Bu özellik, okunana kadar verileri depolar. <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.TempDataDictionary.Keep*>Ve <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.TempDataDictionary.Peek*> yöntemleri silmeden verileri incelemek için kullanılabilir. `TempData`, bir tek istekten daha fazla veri gerektiğinde yeniden yönlendirme için yararlıdır.
+ASP.NET Core, öğesini kullanıma sunar <xref:Microsoft.AspNetCore.Mvc.Controller.TempData> . Bu özellik, okunana kadar verileri depolar. <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.TempDataDictionary.Keep*>Ve <xref:Microsoft.AspNetCore.Mvc.ViewFeatures.TempDataDictionary.Peek*> yöntemleri silmeden verileri incelemek için kullanılabilir. `TempData` , bir tek istekten daha fazla veri gerektiğinde yeniden yönlendirme için yararlıdır.
 
 Aşağıdaki kod, şunu kullanarak değerini ayarlar `Message` `TempData` :
 
@@ -547,7 +548,7 @@ Aşağıdaki sayfa, etiket Yardımcısını kullanarak iki işleyici için biçi
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/Customers/CreateFATH.cshtml?highlight=12-13)]
 
-Yukarıdaki örnekteki formda, her biri `FormActionTagHelper` farklı BIR URL 'ye göndermek için kullanan iki gönderme düğmesi vardır. `asp-page-handler`Özniteliği, için bir yardımcı ' `asp-page` dir. `asp-page-handler`bir sayfa tarafından tanımlanan her bir işleyici yöntemini gönderen URL 'Ler oluşturur. `asp-page`örnek geçerli sayfaya bağlandığından belirtilmedi.
+Yukarıdaki örnekteki formda, her biri `FormActionTagHelper` farklı BIR URL 'ye göndermek için kullanan iki gönderme düğmesi vardır. `asp-page-handler`Özniteliği, için bir yardımcı ' `asp-page` dir. `asp-page-handler` bir sayfa tarafından tanımlanan her bir işleyici yöntemini gönderen URL 'Ler oluşturur. `asp-page` örnek geçerli sayfaya bağlandığından belirtilmedi.
 
 Sayfa modeli:
 
@@ -622,13 +623,13 @@ Varsayılan olarak, Razor Sayfalar, */Pages* dizininde kök olarak depolanır. <
 
 By [Rick Anderson](https://twitter.com/RickAndMSFT) ve [Ryan şimdi ak](https://github.com/rynowak)
 
-RazorSayfalar, kod odaklı senaryoları daha kolay ve daha üretken hale getiren ASP.NET Core MVC 'nin yeni bir yönüdür.
+Razor Sayfalar, kod odaklı senaryoları daha kolay ve daha üretken hale getiren ASP.NET Core MVC 'nin yeni bir yönüdür.
 
 Model-View-Controller yaklaşımını kullanan bir öğretici arıyorsanız, bkz. [ASP.NET Core MVC ile çalışmaya başlama](xref:tutorials/first-mvc-app/start-mvc).
 
 Bu belge, sayfalara giriş sağlar Razor . Adım adım öğretici değildir. Bölümlerden bazılarını çok gelişmiş bir şekilde buldıysanız, bkz. [ Razor sayfalarla çalışmaya başlama](xref:tutorials/razor-pages/razor-pages-start). ASP.NET Core genel bir bakış için bkz. [ASP.NET Core giriş](xref:index).
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -664,17 +665,17 @@ Oluşturulan *. csproj* dosyasını Mac için Visual Studio açın.
 
 ---
 
-## <a name="no-locrazor-pages"></a>RazorSayfaları
+## <a name="no-locrazor-pages"></a>Razor Sayfaları
 
 Razor*Startup.cs*'de sayfalar etkin:
 
 [!code-csharp[](index/sample/RazorPagesIntro/Startup.cs?name=snippet_Startup)]
 
-Temel bir sayfa düşünün:<a name="OnGet"></a>
+Temel bir sayfa düşünün: <a name="OnGet"></a>
 
 [!code-cshtml[](index/sample/RazorPagesIntro/Pages/Index.cshtml)]
 
-Yukarıdaki kod, denetleyiciler ve görünümlerle ASP.NET Core bir uygulamada kullanılan bir [ Razor görünüm dosyası](xref:tutorials/first-mvc-app/adding-view) gibi çok sayıda görünür. Bu, farklı kılan `@page` yönergedir. `@page`dosyayı bir MVC eylemine dönüştürür. Bu, bir denetleyiciden geçmeden istekleri doğrudan işlediği anlamına gelir. `@page`sayfadaki ilk yönerge olmalıdır Razor . `@page`diğer yapıların davranışını etkiler Razor .
+Yukarıdaki kod, denetleyiciler ve görünümlerle ASP.NET Core bir uygulamada kullanılan bir [ Razor görünüm dosyası](xref:tutorials/first-mvc-app/adding-view) gibi çok sayıda görünür. Bu, farklı kılan `@page` yönergedir. `@page` dosyayı bir MVC eylemine dönüştürür. Bu, bir denetleyiciden geçmeden istekleri doğrudan işlediği anlamına gelir. `@page` sayfadaki ilk yönerge olmalıdır Razor . `@page` diğer yapıların davranışını etkiler Razor .
 
 Bir sınıf kullanan benzer bir sayfa `PageModel` aşağıdaki iki dosyada gösterilmiştir. *Pages/Index2. cshtml* dosyası:
 
@@ -698,11 +699,11 @@ URL yollarının sayfalara olan ilişkilendirmeleri, sayfanın dosya sistemindek
 Notlar:
 
 * Çalışma zamanı sayfalar Razor klasöründeki sayfalar dosyalarını varsayılan olarak *Pages* arar.
-* `Index`, URL bir sayfa içermiyorsa varsayılan sayfasıdır.
+* `Index` , URL bir sayfa içermiyorsa varsayılan sayfasıdır.
 
 ## <a name="write-a-basic-form"></a>Temel form yazma
 
-RazorSayfalar, Web tarayıcıları ile kullanılan yaygın desenleri bir uygulama oluştururken kolayca uygulanması için tasarlanmıştır. [Model bağlama](xref:mvc/models/model-binding), [ETIKET yardımcıları](xref:mvc/views/tag-helpers/intro)ve HTML Yardımcıları hepsi yalnızca bir sayfa sınıfında tanımlanan özelliklerle *çalışır* Razor . Model için temel bir "bize başvurun" formu uygulayan bir sayfa düşünün `Contact` :
+Razor Sayfalar, Web tarayıcıları ile kullanılan yaygın desenleri bir uygulama oluştururken kolayca uygulanması için tasarlanmıştır. [Model bağlama](xref:mvc/models/model-binding), [ETIKET yardımcıları](xref:mvc/views/tag-helpers/intro)ve HTML Yardımcıları hepsi yalnızca bir sayfa sınıfında tanımlanan özelliklerle *çalışır* Razor . Model için temel bir "bize başvurun" formu uygulayan bir sayfa düşünün `Contact` :
 
 Bu belgedeki örnekler için, `DbContext` [Startup.cs](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/razor-pages/index/sample/RazorPagesContacts/Startup.cs#L15-L16) dosyasında başlatılır.
 
@@ -754,15 +755,15 @@ Doğrulama hatalarını kontrol edin.
 * Hata yoksa, verileri kaydedin ve yeniden yönlendirin.
 * Hatalar varsa, doğrulama iletileriyle sayfayı yeniden görüntüleyin. İstemci tarafı doğrulaması geleneksel ASP.NET Core MVC uygulamalarıyla aynıdır. Çoğu durumda, doğrulama hataları istemci üzerinde algılanır ve sunucuya hiçbir zaman gönderilmez.
 
-Veriler başarıyla girildiğinde, `OnPostAsync` işleyici yöntemi `RedirectToPage` bir örneğini döndürmek için yardımcı yöntemini çağırır `RedirectToPageResult` . `RedirectToPage`, `RedirectToAction` veya ' a benzer ancak sayfalara özelleştirilmiş yeni bir eylem sonucudur `RedirectToRoute` . Yukarıdaki örnekte, kök dizin sayfasına () yeniden yönlendiriliyor `/Index` . `RedirectToPage`, [Sayfalar Için URL oluşturma](#url_gen) bölümünde ayrıntılı olarak açıklanmıştır.
+Veriler başarıyla girildiğinde, `OnPostAsync` işleyici yöntemi `RedirectToPage` bir örneğini döndürmek için yardımcı yöntemini çağırır `RedirectToPageResult` . `RedirectToPage` , `RedirectToAction` veya ' a benzer ancak sayfalara özelleştirilmiş yeni bir eylem sonucudur `RedirectToRoute` . Yukarıdaki örnekte, kök dizin sayfasına () yeniden yönlendiriliyor `/Index` . `RedirectToPage` , [Sayfalar Için URL oluşturma](#url_gen) bölümünde ayrıntılı olarak açıklanmıştır.
 
-Gönderilen formda doğrulama hataları olduğunda (sunucuya geçirilen), `OnPostAsync` işleyici yöntemi `Page` yardımcı yöntemini çağırır. `Page`, bir `PageResult` örneği döndürür. Döndürme `Page` , denetleyicilerde eylemlerin nasıl dönüşlerine benzer `View` . `PageResult`, bir işleyici yöntemi için varsayılan dönüş türüdür. Döndüren bir işleyici yöntemi `void` sayfayı işler.
+Gönderilen formda doğrulama hataları olduğunda (sunucuya geçirilen), `OnPostAsync` işleyici yöntemi `Page` yardımcı yöntemini çağırır. `Page`, bir `PageResult` örneği döndürür. Döndürme `Page` , denetleyicilerde eylemlerin nasıl dönüşlerine benzer `View` . `PageResult` , bir işleyici yöntemi için varsayılan dönüş türüdür. Döndüren bir işleyici yöntemi `void` sayfayı işler.
 
 `Customer`Özelliği `[BindProperty]` model bağlamayı kabul etmek için özniteliğini kullanır.
 
 [!code-csharp[](index/sample/RazorPagesContacts/Pages/Create.cshtml.cs?name=snippet_PageModel&highlight=10-11)]
 
-RazorSayfalar, varsayılan olarak, özellikleri yalnızca fiil dışı özelliklerle bağlayın `GET` . Özelliklere bağlamak, yazmanız gereken kod miktarını azaltabilir. Bağlama, form alanlarını işlemek için aynı özelliği kullanarak kodu azaltır ( `<input asp-for="Customer.Name">` ) ve girişi kabul eder.
+Razor Sayfalar, varsayılan olarak, özellikleri yalnızca fiil dışı özelliklerle bağlayın `GET` . Özelliklere bağlamak, yazmanız gereken kod miktarını azaltabilir. Bağlama, form alanlarını işlemek için aynı özelliği kullanarak kodu azaltır ( `<input asp-for="Customer.Name">` ) ve girişi kabul eder.
 
 [!INCLUDE[](~/includes/bind-get.md)]
 
@@ -778,7 +779,7 @@ Giriş sayfası (*Index. cshtml*):
 
 [!code-cshtml[](index/sample/RazorPagesContacts/Pages/Index.cshtml?range=21)]
 
-`<a asp-page="./Edit" asp-route-id="@contact.Id">Edit</a>` [Tutturucu etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) , `asp-route-{value}` düzenleme sayfasına bir bağlantı oluşturmak için özniteliğini kullandı. Bağlantı, iletişim KIMLIĞINE sahip rota verileri içerir. Örneğin, `https://localhost:5001/Edit/1`. [Etiket Yardımcıları](xref:mvc/views/tag-helpers/intro) , sunucu tarafı kodun dosyalarda HTML öğeleri oluşturma ve işlemeye katılmasını sağlar Razor . Etiket Yardımcıları tarafından etkinleştirilir`@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`
+`<a asp-page="./Edit" asp-route-id="@contact.Id">Edit</a>` [Tutturucu etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) , `asp-route-{value}` düzenleme sayfasına bir bağlantı oluşturmak için özniteliğini kullandı. Bağlantı, iletişim KIMLIĞINE sahip rota verileri içerir. Örneğin, `https://localhost:5001/Edit/1`. [Etiket Yardımcıları](xref:mvc/views/tag-helpers/intro) , sunucu tarafı kodun dosyalarda HTML öğeleri oluşturma ve işlemeye katılmasını sağlar Razor . Etiket Yardımcıları tarafından etkinleştirilir `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`
 
 *Pages/Edit. cshtml* dosyası:
 
@@ -832,7 +833,7 @@ Daha fazla bilgi için bkz. [model doğrulaması](xref:mvc/models/validation).
 
 ## <a name="handle-head-requests-with-an-onget-handler-fallback"></a>OnGet işleyicisi geri dönüşü ile tanıtıcı HEAD istekleri
 
-`HEAD`istekleri belirli bir kaynak için üstbilgileri almanıza izin verir. `GET`İsteklerin aksine `HEAD` istekler bir yanıt gövdesi döndürmez.
+`HEAD` istekleri belirli bir kaynak için üstbilgileri almanıza izin verir. `GET`İsteklerin aksine `HEAD` istekler bir yanıt gövdesi döndürmez.
 
 Normalde, `OnHead` istekler için bir işleyici oluşturulur ve çağırılır `HEAD` : 
 
@@ -895,7 +896,7 @@ Düzen *Sayfalar/paylaşılan* klasöründedir. Sayfalar, geçerli sayfayla ayn�
 
 Düzen dosyası *Sayfalar/paylaşılan* klasörüne gitmelidir.
 
-Düzen dosyasını *Görünümler/paylaşılan* klasöre **yerleştirmenizi öneririz** . *Görünümler/paylaşılan* bir MVC görünümleri modelidir. RazorSayfalar, yol kurallarını değil klasör hiyerarşisine güvenmektir.
+Düzen dosyasını *Görünümler/paylaşılan* klasöre **yerleştirmenizi öneririz** . *Görünümler/paylaşılan* bir MVC görünümleri modelidir. Razor Sayfalar, yol kurallarını değil klasör hiyerarşisine güvenmektir.
 
 Bir sayfadan aramayı görüntüleme Razor *sayfaları* klasörünü içerir. MVC denetleyicileri ve geleneksel görünümler ile kullanmakta olduğunuz düzenler, şablonlar ve parals Razor *yalnızca çalışır*.
 
@@ -903,7 +904,7 @@ Bir *Pages/_ViewImports. cshtml* dosyası ekleyin:
 
 [!code-cshtml[](index/sample/RazorPagesContacts2/Pages/_ViewImports.cshtml)]
 
-`@namespace`, Öğreticinin ilerleyen kısımlarında açıklanmıştır. `@addTagHelper`Yönergesi, [yerleşik etiket yardımcılarını](xref:mvc/views/tag-helpers/builtin-th/Index) *Sayfalar* klasöründeki tüm sayfalara getirir.
+`@namespace` , Öğreticinin ilerleyen kısımlarında açıklanmıştır. `@addTagHelper`Yönergesi, [yerleşik etiket yardımcılarını](xref:mvc/views/tag-helpers/builtin-th/Index) *Sayfalar* klasöründeki tüm sayfalara getirir.
 
 <a name="namespace"></a>
 
@@ -1023,7 +1024,7 @@ Mizanpajda, başlık ViewData sözlüğünden okundu:
 
 ## <a name="tempdata"></a>TempData
 
-ASP.NET Core bir [denetleyicide](/dotnet/api/microsoft.aspnetcore.mvc.controller) [TempData](/dotnet/api/microsoft.aspnetcore.mvc.controller.tempdata?view=aspnetcore-2.0#Microsoft_AspNetCore_Mvc_Controller_TempData) özelliğini kullanıma sunar. Bu özellik, okunana kadar verileri depolar. `Keep`Ve `Peek` yöntemleri silmeden verileri incelemek için kullanılabilir. `TempData`, bir tek istekten daha fazla veri gerektiğinde yeniden yönlendirme için yararlıdır.
+ASP.NET Core bir [denetleyicide](/dotnet/api/microsoft.aspnetcore.mvc.controller) [TempData](/dotnet/api/microsoft.aspnetcore.mvc.controller.tempdata?view=aspnetcore-2.0#Microsoft_AspNetCore_Mvc_Controller_TempData) özelliğini kullanıma sunar. Bu özellik, okunana kadar verileri depolar. `Keep`Ve `Peek` yöntemleri silmeden verileri incelemek için kullanılabilir. `TempData` , bir tek istekten daha fazla veri gerektiğinde yeniden yönlendirme için yararlıdır.
 
 Aşağıdaki kod, şunu kullanarak değerini ayarlar `Message` `TempData` :
 
@@ -1054,7 +1055,7 @@ Aşağıdaki sayfa, etiket Yardımcısını kullanarak iki işleyici için biçi
 
 <!-- Review: the FormActionTagHelper applies to all <form /> elements on a Razor page, even when there's no `asp-` attribute   -->
 
-Yukarıdaki örnekteki formda, her biri `FormActionTagHelper` farklı BIR URL 'ye göndermek için kullanan iki gönderme düğmesi vardır. `asp-page-handler`Özniteliği, için bir yardımcı ' `asp-page` dir. `asp-page-handler`bir sayfa tarafından tanımlanan her bir işleyici yöntemini gönderen URL 'Ler oluşturur. `asp-page`örnek geçerli sayfaya bağlandığından belirtilmedi.
+Yukarıdaki örnekteki formda, her biri `FormActionTagHelper` farklı BIR URL 'ye göndermek için kullanan iki gönderme düğmesi vardır. `asp-page-handler`Özniteliği, için bir yardımcı ' `asp-page` dir. `asp-page-handler` bir sayfa tarafından tanımlanan her bir işleyici yöntemini gönderen URL 'Ler oluşturur. `asp-page` örnek geçerli sayfaya bağlandığından belirtilmedi.
 
 Sayfa modeli:
 

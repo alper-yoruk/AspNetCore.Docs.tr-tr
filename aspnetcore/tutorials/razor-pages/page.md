@@ -5,6 +5,7 @@ description: Sayfalardaki eğitim serisinin 3. bölümü Razor .
 ms.author: riande
 ms.date: 08/17/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: f8942e52b3b438817e3d1041a2c6b568eb662469
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 9fc44d228a31b8ae6c78dc12988392806dd95823
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020398"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633441"
 ---
 # <a name="part-3-scaffolded-no-locrazor-pages-in-aspnet-core"></a>Bölüm 3, ASP.NET Core yapı iskelesi Razor olan sayfalar
 
@@ -38,9 +39,9 @@ Bu öğreticide Razor , [önceki öğreticide](xref:tutorials/razor-pages/model)
 
 [!code-csharp[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Index.cshtml.cs)]
 
-RazorSayfalar öğesinden türetilir `PageModel` . Kural gereği, `PageModel` -türetilmiş sınıfı çağrılır `<PageName>Model` . Oluşturucu, sayfasına eklemek için [bağımlılık ekleme](xref:fundamentals/dependency-injection) işlemini kullanır `RazorPagesMovieContext` . Tüm yapı iskelesi sayfaları bu düzene uyar. Entity Framework zaman uyumsuz programlama hakkında daha fazla bilgi için bkz. [zaman uyumsuz kod](xref:data/ef-rp/intro#asynchronous-code) .
+Razor Sayfalar öğesinden türetilir `PageModel` . Kural gereği, `PageModel` -türetilmiş sınıfı çağrılır `<PageName>Model` . Oluşturucu, sayfasına eklemek için [bağımlılık ekleme](xref:fundamentals/dependency-injection) işlemini kullanır `RazorPagesMovieContext` . Tüm yapı iskelesi sayfaları bu düzene uyar. Entity Framework zaman uyumsuz programlama hakkında daha fazla bilgi için bkz. [zaman uyumsuz kod](xref:data/ef-rp/intro#asynchronous-code) .
 
-Sayfa için bir istek yapıldığında, `OnGetAsync` yöntemi sayfaya bir film listesi döndürür Razor . `OnGetAsync`ya da `OnGet` sayfanın durumunu başlatmak için çağırılır. Bu durumda, `OnGetAsync` filmlerin bir listesini alır ve görüntüler.
+Sayfa için bir istek yapıldığında, `OnGetAsync` yöntemi sayfaya bir film listesi döndürür Razor . `OnGetAsync` ya da `OnGet` sayfanın durumunu başlatmak için çağırılır. Bu durumda, `OnGetAsync` filmlerin bir listesini alır ve görüntüler.
 
 Döndürüldüğünde `OnGet` `void` veya `OnGetAsync` döndüğünde `Task` , Return deyimleri kullanılmaz. Dönüş türü `IActionResult` veya olduğunda `Task<IActionResult>` , bir return ifadesinin sağlanması gerekir. Örneğin, *Pages/filmler/Create. cshtml. cs* `OnPostAsync` yöntemi:
 
@@ -50,11 +51,11 @@ Döndürüldüğünde `OnGet` `void` veya `OnGetAsync` döndüğünde `Task` , R
 
 [!code-cshtml[](razor-pages-start/snapshot_sample3/RazorPagesMovie30/Pages/Movies/Index.cshtml)]
 
-RazorHTML 'den C# veya belirli bir biçimlendirmeye geçiş yapabilir Razor . Bir `@` simgenin arkasından [ Razor ayrılmış bir anahtar sözcük](xref:mvc/views/razor#razor-reserved-keywords)geldiğinde, bu, belirli bir Razor biçimlendirmeye geçiş yapar, aksi takdirde C# içine geçiş yapar.
+Razor HTML 'den C# veya belirli bir biçimlendirmeye geçiş yapabilir Razor . Bir `@` simgenin arkasından [ Razor ayrılmış bir anahtar sözcük](xref:mvc/views/razor#razor-reserved-keywords)geldiğinde, bu, belirli bir Razor biçimlendirmeye geçiş yapar, aksi takdirde C# içine geçiş yapar.
 
 ### <a name="the-page-directive"></a>@pageYönergesi
 
-`@page` Razor Yönergesi, dosyayı bir MVC eylemi yapar, bu da istekleri işleyebileceği anlamına gelir. `@page`sayfadaki ilk yönerge olmalıdır Razor . `@page`, belirli bir biçimlendirmeyi geçme örneğidir Razor . Daha fazla bilgi için bkz. [ Razor sözdizimi](xref:mvc/views/razor#razor-syntax) .
+`@page` Razor Yönergesi, dosyayı bir MVC eylemi yapar, bu da istekleri işleyebileceği anlamına gelir. `@page` sayfadaki ilk yönerge olmalıdır Razor . `@page` , belirli bir biçimlendirmeyi geçme örneğidir Razor . Daha fazla bilgi için bkz. [ Razor sözdizimi](xref:mvc/views/razor#razor-syntax) .
 
 Aşağıdaki HTML Yardımcısı 'nda kullanılan lambda ifadesini inceleyin:
 
@@ -81,7 +82,7 @@ Menü bağlantılarını (** Razor pagesmovie**, **Home**ve **Gizlilik**) seçin
 * Tek bir yerde belirtildi.
 * Sitede birden çok sayfada uygulandı.
 
-Satırı bulun `@RenderBody()` . `RenderBody`, sayfaya özgü tüm görünümlerin, Düzen sayfasında *kaydırılan* bir yer tutucudur. Örneğin, **Gizlilik** bağlantısını seçin ve *Sayfalar/gizlilik. cshtml* görünümü yöntemin içinde işlenir `RenderBody` .
+Satırı bulun `@RenderBody()` . `RenderBody` , sayfaya özgü tüm görünümlerin, Düzen sayfasında *kaydırılan* bir yer tutucudur. Örneğin, **Gizlilik** bağlantısını seçin ve *Sayfalar/gizlilik. cshtml* görünümü yöntemin içinde işlenir `RenderBody` .
 
 <a name="vd"></a>
 
@@ -231,9 +232,9 @@ Bu öğreticide Razor , [önceki öğreticide](xref:tutorials/razor-pages/model)
 
 [!code-csharp[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml.cs)]
 
-RazorSayfalar öğesinden türetilir `PageModel` . Kural gereği, `PageModel` -türetilmiş sınıfı çağrılır `<PageName>Model` . Oluşturucu, sayfasına eklemek için [bağımlılık ekleme](xref:fundamentals/dependency-injection) işlemini kullanır `RazorPagesMovieContext` . Tüm yapı iskelesi sayfaları bu düzene uyar. Entity Framework zaman uyumsuz programlama hakkında daha fazla bilgi için bkz. [zaman uyumsuz kod](xref:data/ef-rp/intro#asynchronous-code) .
+Razor Sayfalar öğesinden türetilir `PageModel` . Kural gereği, `PageModel` -türetilmiş sınıfı çağrılır `<PageName>Model` . Oluşturucu, sayfasına eklemek için [bağımlılık ekleme](xref:fundamentals/dependency-injection) işlemini kullanır `RazorPagesMovieContext` . Tüm yapı iskelesi sayfaları bu düzene uyar. Entity Framework zaman uyumsuz programlama hakkında daha fazla bilgi için bkz. [zaman uyumsuz kod](xref:data/ef-rp/intro#asynchronous-code) .
 
-Sayfa için bir istek yapıldığında, `OnGetAsync` yöntemi sayfaya bir film listesi döndürür Razor . `OnGetAsync`ya da sayfa `OnGet` Razor için durumu başlatmak üzere bir sayfada çağırılır. Bu durumda, `OnGetAsync` filmlerin bir listesini alır ve görüntüler.
+Sayfa için bir istek yapıldığında, `OnGetAsync` yöntemi sayfaya bir film listesi döndürür Razor . `OnGetAsync` ya da sayfa `OnGet` Razor için durumu başlatmak üzere bir sayfada çağırılır. Bu durumda, `OnGetAsync` filmlerin bir listesini alır ve görüntüler.
 
 Döndürüldüğünde `OnGet` `void` veya `OnGetAsync` döndüğünde `Task` , return yöntemi kullanılmaz. Dönüş türü `IActionResult` veya olduğunda `Task<IActionResult>` , bir return ifadesinin sağlanması gerekir. Örneğin, *Pages/filmler/Create. cshtml. cs* `OnPostAsync` yöntemi:
 
@@ -243,9 +244,9 @@ Döndürüldüğünde `OnGet` `void` veya `OnGetAsync` döndüğünde `Task` , r
 
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml)]
 
-RazorHTML 'den C# veya belirli bir biçimlendirmeye geçiş yapabilir Razor . Bir `@` simgenin arkasından [ Razor ayrılmış bir anahtar sözcük](xref:mvc/views/razor#razor-reserved-keywords)geldiğinde, bu, belirli bir Razor biçimlendirmeye geçiş yapar, aksi takdirde C# içine geçiş yapar.
+Razor HTML 'den C# veya belirli bir biçimlendirmeye geçiş yapabilir Razor . Bir `@` simgenin arkasından [ Razor ayrılmış bir anahtar sözcük](xref:mvc/views/razor#razor-reserved-keywords)geldiğinde, bu, belirli bir Razor biçimlendirmeye geçiş yapar, aksi takdirde C# içine geçiş yapar.
 
-`@page` Razor Yönergesi, dosyayı bir MVC eylemine yapar, bu da istekleri işleyebileceği anlamına gelir. `@page`sayfadaki ilk yönerge olmalıdır Razor . `@page`, belirli bir biçimlendirmeyi geçme örneğidir Razor . Daha fazla bilgi için bkz. [ Razor sözdizimi](xref:mvc/views/razor#razor-syntax) .
+`@page` Razor Yönergesi, dosyayı bir MVC eylemine yapar, bu da istekleri işleyebileceği anlamına gelir. `@page` sayfadaki ilk yönerge olmalıdır Razor . `@page` , belirli bir biçimlendirmeyi geçme örneğidir Razor . Daha fazla bilgi için bkz. [ Razor sözdizimi](xref:mvc/views/razor#razor-syntax) .
 
 Aşağıdaki HTML Yardımcısı 'nda kullanılan lambda ifadesini inceleyin:
 
@@ -267,7 +268,7 @@ Aşağıdaki HTML Yardımcısı 'nda kullanılan lambda ifadesini inceleyin:
 
 Menü bağlantılarını (** Razor pagesmovie**, **Home**ve **Gizlilik**) seçin. Her sayfada aynı menü düzeni gösterilir. Menü düzeni *sayfa/paylaşılan/_Layout. cshtml* dosyasında uygulanır. *Pages/Shared/_Layout. cshtml* dosyasını açın.
 
-[Düzen](xref:mvc/views/layout) şablonları, sitenizin HTML kapsayıcı yerleşimini tek bir yerde belirtmenize ve sonra sitenizdeki birden çok sayfaya uygulamanıza olanak tanır. Satırı bulun `@RenderBody()` . `RenderBody`, oluşturduğunuz tüm sayfaya özgü görünümlerin, Düzen sayfasında *kaydırılan* bir yer tutucudur. Örneğin, **Gizlilik** bağlantısını seçerseniz, **Sayfa/Gizlilik. cshtml** görünümü yöntemin içinde işlenir `RenderBody` .
+[Düzen](xref:mvc/views/layout) şablonları, sitenizin HTML kapsayıcı yerleşimini tek bir yerde belirtmenize ve sonra sitenizdeki birden çok sayfaya uygulamanıza olanak tanır. Satırı bulun `@RenderBody()` . `RenderBody` , oluşturduğunuz tüm sayfaya özgü görünümlerin, Düzen sayfasında *kaydırılan* bir yer tutucudur. Örneğin, **Gizlilik** bağlantısını seçerseniz, **Sayfa/Gizlilik. cshtml** görünümü yöntemin içinde işlenir `RenderBody` .
 
 <a name="vd"></a>
 

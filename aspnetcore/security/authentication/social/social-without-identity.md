@@ -1,10 +1,11 @@
 ---
-title: ASP.NET Core olmadan Facebook, Google ve dış sağlayıcı kimlik doğrulamasıIdentity
+title: No olmadan Facebook, Google ve dış sağlayıcı kimlik doğrulaması ASP.NET Core Identity
 author: rick-anderson
-description: Facebook, Google, Twitter vb. hesap Kullanıcı kimlik doğrulamasını ASP.NET Core olmadan kullanma açıklaması Identity .
+description: Facebook, Google, Twitter vb. hesap Kullanıcı kimlik doğrulamasını kullanma açıklaması ASP.NET Core Identity .
 ms.author: riande
 ms.date: 12/10/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,22 +16,22 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/social-without-identity
-ms.openlocfilehash: 73055a262ac69c0fd6a7f59e77d23121e71ea3dd
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a91a2f2fb7873e5a672c624e9cf863ae720c8005
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021672"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634234"
 ---
-# <a name="use-social-sign-in-provider-authentication-without-aspnet-core-no-locidentity"></a>ASP.NET Core olmadan sosyal oturum açma sağlayıcısı kimlik doğrulamasını kullanmaIdentity
+# <a name="use-social-sign-in-provider-authentication-without-no-locaspnet-core-identity"></a>Şu olmadan sosyal oturum açma sağlayıcısı kimlik doğrulamasını kullanma ASP.NET Core Identity
 
 , [Kirk Larkabağı](https://twitter.com/serpent5) ve [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-<xref:security/authentication/social/index>Kullanıcıların, OAuth 2,0 kullanarak dış kimlik doğrulama sağlayıcılarından kimlik bilgileriyle oturum açmasını açıklar. Bu konu başlığı altında açıklanan yaklaşım, Identity kimlik doğrulama sağlayıcısı olarak ASP.NET Core içerir.
+<xref:security/authentication/social/index> Kullanıcıların, OAuth 2,0 kullanarak dış kimlik doğrulama sağlayıcılarından kimlik bilgileriyle oturum açmasını açıklar. Bu konuda açıklanan yaklaşım, ASP.NET Core Identity kimlik doğrulama sağlayıcısı olarak içerir.
 
-Bu örnek, ASP.NET Core **olmadan** bir dış kimlik doğrulama sağlayıcısının nasıl kullanılacağını gösterir Identity . Bu, tüm ASP.NET Core özelliklerinin gerekli olmadığı Identity , ancak yine de güvenilen bir dış kimlik doğrulama sağlayıcısıyla tümleştirme gerektirdiğinden uygulamalar için yararlıdır.
+Bu örnek, **olmadan** bir dış kimlik doğrulama sağlayıcısının nasıl kullanılacağını gösterir ASP.NET Core Identity . Bu, tüm özelliklerini gerektirmeyen ASP.NET Core Identity , ancak yine de güvenilen bir dış kimlik doğrulama sağlayıcısı ile tümleştirme gerektiren uygulamalar için yararlıdır.
 
 Bu örnek, kullanıcıların kimliğini doğrulamak için [Google kimlik doğrulamasını](xref:security/authentication/google-logins) kullanır. Google kimlik doğrulamasını kullanmak, oturum açma işlemini Google 'a yönetmenin karmaşıklıklarından çoğunu kaydırır. Farklı bir dış kimlik doğrulama sağlayıcısıyla tümleştirme için aşağıdaki konulara bakın:
 
@@ -53,7 +54,7 @@ Uygulamanın ' i <xref:Microsoft.Extensions.DependencyInjection.AuthenticationSe
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignInAsync*>
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*>
 
-Uygulamanın `DefaultScheme` [ Cookie Authenticationdefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) (" Cookie s") olarak ayarlanması, uygulamayı Cookie Bu uzantı yöntemlerinin varsayılan şeması olarak kullanacak şekilde yapılandırır. Uygulamanın <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme> [GoogleDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) ("Google") olarak ayarlanması, uygulamayı Google 'ın öğesine yapılan çağrılar için varsayılan düzen olarak kullanacak şekilde yapılandırır `ChallengeAsync` . `DefaultChallengeScheme`geçersiz kılmalar `DefaultScheme` . <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions>Ayarlandığında geçersiz kılan ek özellikler için bkz `DefaultScheme` ..
+Uygulamanın `DefaultScheme` [ Cookie Authenticationdefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) (" Cookie s") olarak ayarlanması, uygulamayı Cookie Bu uzantı yöntemlerinin varsayılan şeması olarak kullanacak şekilde yapılandırır. Uygulamanın <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme> [GoogleDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) ("Google") olarak ayarlanması, uygulamayı Google 'ın öğesine yapılan çağrılar için varsayılan düzen olarak kullanacak şekilde yapılandırır `ChallengeAsync` . `DefaultChallengeScheme` geçersiz kılmalar `DefaultScheme` . <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions>Ayarlandığında geçersiz kılan ek özellikler için bkz `DefaultScheme` ..
 
 ' De `Startup.Configure` , `UseAuthentication` `UseAuthorization` çağırma ve arasında çağrı yapın `UseRouting` `UseEndpoints` . Bu, `HttpContext.User` özelliği ayarlar ve istekler Için yetkilendirme ara yazılımını çalıştırır:
 
@@ -83,9 +84,9 @@ Geçerli kullanıcının oturumunu kapatmak ve bunları silmek için cookie [Sig
 ::: moniker-end
 ::: moniker range="< aspnetcore-3.0"
 
-<xref:security/authentication/social/index>Kullanıcıların, OAuth 2,0 kullanarak dış kimlik doğrulama sağlayıcılarından kimlik bilgileriyle oturum açmasını açıklar. Bu konu başlığı altında açıklanan yaklaşım, Identity kimlik doğrulama sağlayıcısı olarak ASP.NET Core içerir.
+<xref:security/authentication/social/index> Kullanıcıların, OAuth 2,0 kullanarak dış kimlik doğrulama sağlayıcılarından kimlik bilgileriyle oturum açmasını açıklar. Bu konuda açıklanan yaklaşım, ASP.NET Core Identity kimlik doğrulama sağlayıcısı olarak içerir.
 
-Bu örnek, ASP.NET Core **olmadan** bir dış kimlik doğrulama sağlayıcısının nasıl kullanılacağını gösterir Identity . Bu, tüm ASP.NET Core özelliklerinin gerekli olmadığı Identity , ancak yine de güvenilen bir dış kimlik doğrulama sağlayıcısıyla tümleştirme gerektirdiğinden uygulamalar için yararlıdır.
+Bu örnek, **olmadan** bir dış kimlik doğrulama sağlayıcısının nasıl kullanılacağını gösterir ASP.NET Core Identity . Bu, tüm özelliklerini gerektirmeyen ASP.NET Core Identity , ancak yine de güvenilen bir dış kimlik doğrulama sağlayıcısı ile tümleştirme gerektiren uygulamalar için yararlıdır.
 
 Bu örnek, kullanıcıların kimliğini doğrulamak için [Google kimlik doğrulamasını](xref:security/authentication/google-logins) kullanır. Google kimlik doğrulamasını kullanmak, oturum açma işlemini Google 'a yönetmenin karmaşıklıklarından çoğunu kaydırır. Farklı bir dış kimlik doğrulama sağlayıcısıyla tümleştirme için aşağıdaki konulara bakın:
 
@@ -108,7 +109,7 @@ Yönteminde,, `ConfigureServices` ve yöntemleriyle uygulamanın kimlik doğrula
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignInAsync*>
 * <xref:Microsoft.AspNetCore.Authentication.AuthenticationHttpContextExtensions.SignOutAsync*>
 
-Uygulamanın `DefaultScheme` [ Cookie Authenticationdefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) (" Cookie s") olarak ayarlanması, uygulamayı Cookie Bu uzantı yöntemlerinin varsayılan şeması olarak kullanacak şekilde yapılandırır. Uygulamanın <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme> [GoogleDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) ("Google") olarak ayarlanması, uygulamayı Google 'ın öğesine yapılan çağrılar için varsayılan düzen olarak kullanacak şekilde yapılandırır `ChallengeAsync` . `DefaultChallengeScheme`geçersiz kılmalar `DefaultScheme` . <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions>Ayarlandığında geçersiz kılan ek özellikler için bkz `DefaultScheme` ..
+Uygulamanın `DefaultScheme` [ Cookie Authenticationdefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Cookies.CookieAuthenticationDefaults.AuthenticationScheme) (" Cookie s") olarak ayarlanması, uygulamayı Cookie Bu uzantı yöntemlerinin varsayılan şeması olarak kullanacak şekilde yapılandırır. Uygulamanın <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions.DefaultChallengeScheme> [GoogleDefaults. AuthenticationScheme](xref:Microsoft.AspNetCore.Authentication.Google.GoogleDefaults.AuthenticationScheme) ("Google") olarak ayarlanması, uygulamayı Google 'ın öğesine yapılan çağrılar için varsayılan düzen olarak kullanacak şekilde yapılandırır `ChallengeAsync` . `DefaultChallengeScheme` geçersiz kılmalar `DefaultScheme` . <xref:Microsoft.AspNetCore.Authentication.AuthenticationOptions>Ayarlandığında geçersiz kılan ek özellikler için bkz `DefaultScheme` ..
 
 `Configure`Yönteminde, `UseAuthentication` özelliğini ayarlayan kimlik doğrulama ara yazılımını çağırmak için yöntemini çağırın `HttpContext.User` . `UseAuthentication`Veya çağrılmadan önce yöntemi çağırın `UseMvcWithDefaultRoute` `UseMvc` :
 

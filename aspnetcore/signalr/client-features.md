@@ -6,6 +6,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/client-features
-ms.openlocfilehash: 4f5fa2f4ff1ac3d00b04845aedc26fb0118b9991
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: df0084411134167df31506a01362a0520821e577
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021477"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631764"
 ---
 # <a name="aspnet-core-no-locsignalr-clients"></a>ASP.NET Core SignalR istemcileri
 
 ## <a name="versioning-support-and-compatibility"></a>Sürüm oluşturma, destek ve uyumluluk
 
-SignalRİstemciler, sunucu bileşenleriyle birlikte dağıtılır ve eşleşmek üzere sürümlüdür. Desteklenen her türlü istemci, desteklenen herhangi bir sunucuya güvenli bir şekilde bağlanabilir ve tüm uyumluluk sorunları düzeltilme hataları olarak kabul edilebilir. SignalRistemciler, .NET Core 'un geri kalanı ile aynı destek yaşam döngüsü içinde desteklenir. Ayrıntılar için bkz. [.NET Core destek ilkesi](https://dotnet.microsoft.com/platform/support/policy/dotnet-core) .
+SignalRİstemciler, sunucu bileşenleriyle birlikte dağıtılır ve eşleşmek üzere sürümlüdür. Desteklenen her türlü istemci, desteklenen herhangi bir sunucuya güvenli bir şekilde bağlanabilir ve tüm uyumluluk sorunları düzeltilme hataları olarak kabul edilebilir. SignalR istemciler, .NET Core 'un geri kalanı ile aynı destek yaşam döngüsü içinde desteklenir. Ayrıntılar için bkz. [.NET Core destek ilkesi](https://dotnet.microsoft.com/platform/support/policy/dotnet-core) .
 
 Birçok özellik uyumlu bir istemci **ve** sunucu gerektirir. Çeşitli özelliklerin en düşük sürümlerinin gösterildiği tablo için aşağıya bakın.
 

@@ -5,6 +5,7 @@ description: RazorSunucu tabanlı kodu Web sayfalarına eklemek için biçimlend
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,26 +16,26 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: 4b418c53535965eae6b41f3297b0c6336fb993d5
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: b62fcb685b1c6d0c504c685c600d0316b32d7f57
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020593"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632505"
 ---
-# <a name="no-locrazor-syntax-reference-for-aspnet-core"></a>RazorASP.NET Core için sözdizimi başvurusu
+# <a name="no-locrazor-syntax-reference-for-aspnet-core"></a>Razor ASP.NET Core için sözdizimi başvurusu
 
 By [Rick Anderson](https://twitter.com/RickAndMSFT), [Taylor Mullen](https://twitter.com/ntaylormullen)ve [dan vicarel](https://github.com/Rabadash8820)
 
-Razor, Web sayfalarına sunucu tabanlı kod eklemeye yönelik biçimlendirme sözdizimidir. RazorSöz dizimi, Razor biçimlendirme, C# ve HTML 'den oluşur. Genellikle içeren dosyaların Razor *. cshtml* dosya uzantısı vardır. RazorAyrıca, [ Razor Bileşenler](xref:blazor/components/index) dosyalarında (*. Razor*) bulunur.
+Razor , Web sayfalarına sunucu tabanlı kod eklemeye yönelik biçimlendirme sözdizimidir. RazorSöz dizimi, Razor biçimlendirme, C# ve HTML 'den oluşur. Genellikle içeren dosyaların Razor *. cshtml* dosya uzantısı vardır. RazorAyrıca, [ Razor Bileşenler](xref:blazor/components/index) dosyalarında (*. Razor*) bulunur.
 
 ## <a name="rendering-html"></a>HTML işleniyor
 
 Varsayılan Razor DIL HTML 'dir. Biçimlendirmeden HTML işleme HTML Razor dosyasından HTML işlenenden farklı değildir. *. Cshtml* Razor dosyalarındaki HTML işaretlemesi sunucu tarafından değiştirilmeden işlenir.
 
-## <a name="no-locrazor-syntax"></a>Razorsözdizimi
+## <a name="no-locrazor-syntax"></a>Razor sözdizimi
 
-RazorC# ' i destekler ve `@` HTML 'Den C# ' ye geçiş yapmak için sembolünü kullanır. RazorC# ifadelerini değerlendirir ve bunları HTML çıktısında işler.
+Razor C# ' i destekler ve `@` HTML 'Den C# ' ye geçiş yapmak için sembolünü kullanır. Razor C# ifadelerini değerlendirir ve bunları HTML çıktısında işler.
 
 Bir `@` simgenin arkasından [ Razor ayrılmış bir anahtar sözcük](#razor-reserved-keywords)geldiğinde, bu, belirli bir Razor biçimlendirmeyi geçirir. Aksi halde, düz C# ' ye geçiş yapar.
 
@@ -142,7 +143,7 @@ HTML tarayıcıda şu şekilde gösterilir:
 <span>Hello World</span>
 ```
 
-`HtmlHelper.Raw`çıktı kodlanmamış, ancak HTML işaretlemesi olarak işlendi.
+`HtmlHelper.Raw` çıktı kodlanmamış, ancak HTML işaretlemesi olarak işlendi.
 
 > [!WARNING]
 > `HtmlHelper.Raw`Ayıklanmış Kullanıcı girişinde kullanmak bir güvenlik riskidir. Kullanıcı girişi kötü amaçlı JavaScript veya diğer kötüye kullanım içerebilir. Kullanıcı girişinin Temizleme işlemi zordur. `HtmlHelper.Raw`Kullanıcı girişiyle kullanmaktan kaçının.
@@ -157,9 +158,9 @@ Kod, aşağıdaki HTML 'yi işler:
 <span>Hello World</span>
 ```
 
-## <a name="no-locrazor-code-blocks"></a>Razorkod blokları
+## <a name="no-locrazor-code-blocks"></a>Razor kod blokları
 
-Razorkod blokları ile başlar `@` ve tarafından alınmıştır `{}` . İfadelerin aksine, kod blokları içindeki C# kodu işlenmez. Bir görünümdeki kod blokları ve ifadeler aynı kapsamı paylaşır ve sırasıyla tanımlanmıştır:
+Razor kod blokları ile başlar `@` ve tarafından alınmıştır `{}` . İfadelerin aksine, kod blokları içindeki C# kodu işlenmez. Bir görünümdeki kod blokları ve ifadeler aynı kapsamı paylaşır ve sırasıyla tanımlanmıştır:
 
 ```cshtml
 @{
@@ -257,9 +258,9 @@ Tüm satırın geri kalanını bir kod bloğu içinde HTML olarak işlemek için
 
 Denetim yapıları, kod bloklarının bir uzantısıdır. Kod bloklarının tüm yönleri (biçimlendirmeye geçme, satır içi C#) Ayrıca aşağıdaki yapılar için de geçerlidir:
 
-### <a name="conditionals-if-else-if-else-and-switch"></a>Koşullular`@if, else if, else, and @switch`
+### <a name="conditionals-if-else-if-else-and-switch"></a>Koşullular `@if, else if, else, and @switch`
 
-`@if`kodun ne zaman çalışacağını denetler:
+`@if` kodun ne zaman çalışacağını denetler:
 
 ```cshtml
 @if (value % 2 == 0)
@@ -268,7 +269,7 @@ Denetim yapıları, kod bloklarının bir uzantısıdır. Kod bloklarının tüm
 }
 ```
 
-`else`ve `else if` `@` sembol gerektirmez:
+`else` ve `else if` `@` sembol gerektirmez:
 
 ```cshtml
 @if (value % 2 == 0)
@@ -302,7 +303,7 @@ Aşağıdaki biçimlendirme bir switch ifadesinin nasıl kullanılacağını gö
 }
 ```
 
-### <a name="looping-for-foreach-while-and-do-while"></a>Döngüye`@for, @foreach, @while, and @do while`
+### <a name="looping-for-foreach-while-and-do-while"></a>Döngüye `@for, @foreach, @while, and @do while`
 
 Şablonlu HTML, döngü denetim deyimleri ile oluşturulabilir. Bir kişi listesini işlemek için:
 
@@ -368,7 +369,7 @@ Aşağıdaki döngü deyimleri desteklenir:
 } while (i < people.Length);
 ```
 
-### <a name="compound-using"></a>İstekteki`@using`
+### <a name="compound-using"></a>İstekteki `@using`
 
 C# ' de bir `using` nesne atılmış olduğundan emin olmak için bir ifade kullanılır. Razor' De, ek içerik IÇEREN HTML Yardımcıları oluşturmak için aynı mekanizma kullanılır. Aşağıdaki kodda, HTML Yardımcıları ifadesiyle bir etiketi işlerler `<form>` `@using` :
 
@@ -390,7 +391,7 @@ C# ' de bir `using` nesne atılmış olduğundan emin olmak için bir ifade kull
 
 ### `@lock`
 
-Razorkilitleme deyimleriyle kritik bölümleri koruma özelliğine sahiptir:
+Razor kilitleme deyimleriyle kritik bölümleri koruma özelliğine sahiptir:
 
 ```cshtml
 @lock (SomeLock)
@@ -399,9 +400,9 @@ Razorkilitleme deyimleriyle kritik bölümleri koruma özelliğine sahiptir:
 }
 ```
 
-### <a name="comments"></a>Açıklamalar
+### <a name="comments"></a>Yorumlar
 
-RazorC# ve HTML açıklamalarını destekler:
+Razor C# ve HTML açıklamalarını destekler:
 
 ```cshtml
 @{
@@ -417,7 +418,7 @@ Kod, aşağıdaki HTML 'yi işler:
 <!-- HTML comment -->
 ```
 
-RazorWeb sayfası işlenmeden önce açıklamalar sunucu tarafından kaldırılır. Razor`@*  *@`açıklamaları sınırlandırmak için kullanır. Aşağıdaki kod açıklama olarak belirlenir, bu nedenle sunucu herhangi bir biçimlendirme oluşturmaz:
+Razor Web sayfası işlenmeden önce açıklamalar sunucu tarafından kaldırılır. Razor`@*  *@`açıklamaları sınırlandırmak için kullanır. Aşağıdaki kod açıklama olarak belirlenir, bu nedenle sunucu herhangi bir biçimlendirme oluşturmaz:
 
 ```cshtml
 @*
@@ -431,7 +432,7 @@ RazorWeb sayfası işlenmeden önce açıklamalar sunucu tarafından kaldırıl�
 
 ## <a name="directives"></a>Yönergeler
 
-Razoryönergeler, simgeyi izleyen ayrılmış anahtar sözcüklerle örtük ifadelerle temsil edilir `@` . Yönerge genellikle görünümün ayrıştırılma şeklini değiştirir veya farklı işlevleri sunar.
+Razor yönergeler, simgeyi izleyen ayrılmış anahtar sözcüklerle örtük ifadelerle temsil edilir `@` . Yönerge genellikle görünümün ayrıştırılma şeklini değiştirir veya farklı işlevleri sunar.
 
 RazorBir görünüm için kod üretme şeklini anlamak, yönergelerin nasıl çalıştığını anlamayı kolaylaştırır.
 
@@ -513,7 +514,7 @@ Aşağıdaki kod, oluşturulan Razor C# sınıfıdır:
 
 ::: moniker range=">= aspnetcore-3.0"
 
-`@functions`Yöntemler, işaretlemelerdeki şablon oluşturma yöntemleri olarak görev yapar:
+`@functions` Yöntemler, işaretlemelerdeki şablon oluşturma yöntemleri olarak görev yapar:
 
 ```cshtml
 @{
@@ -583,7 +584,7 @@ Kod, aşağıdaki HTML 'yi işler:
 </div>
 ```
 
- `@model``@inherits`aynı görünümde kullanılabilir. `@inherits`görünümün içeri aktardığı bir *_ViewImports. cshtml* dosyasında olabilir:
+ `@model``@inherits`aynı görünümde kullanılabilir. `@inherits` görünümün içeri aktardığı bir *_ViewImports. cshtml* dosyasında olabilir:
 
 [!code-cshtml[](razor/sample/Views/_ViewImportsModel.cshtml)]
 
@@ -719,13 +720,13 @@ Yukarıdaki örnekteki *evente Pages* klasöründe bir içeri aktarmalar dosyas�
 
 ## <a name="directive-attributes"></a>Yönerge öznitelikleri
 
-Razoryönerge öznitelikleri, simgeyi izleyen ayrılmış anahtar sözcüklerle örtük ifadelerle temsil edilir `@` . Bir Directive özniteliği genellikle bir öğenin ayrıştırılma şeklini değiştirir veya farklı işlevlere izin vermez.
+Razor yönerge öznitelikleri, simgeyi izleyen ayrılmış anahtar sözcüklerle örtük ifadelerle temsil edilir `@` . Bir Directive özniteliği genellikle bir öğenin ayrıştırılma şeklini değiştirir veya farklı işlevlere izin vermez.
 
 ### `@attributes`
 
 *Bu senaryo yalnızca Razor Bileşenler (. Razor) için geçerlidir.*
 
-`@attributes`bir bileşenin bildirilmeyen öznitelikleri işlemesini sağlar. Daha fazla bilgi için bkz. <xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters>.
+`@attributes` bir bileşenin bildirilmeyen öznitelikleri işlemesini sağlar. Daha fazla bilgi için bkz. <xref:blazor/components/index#attribute-splatting-and-arbitrary-parameters>.
 
 ### `@bind`
 
@@ -737,7 +738,7 @@ Bileşenlerdeki veri bağlama, `@bind` özniteliğiyle gerçekleştirilir. Daha 
 
 *Bu senaryo yalnızca Razor Bileşenler (. Razor) için geçerlidir.*
 
-Razorbileşenler için olay işleme özellikleri sağlar. Daha fazla bilgi için bkz. <xref:blazor/components/event-handling>.
+Razor bileşenler için olay işleme özellikleri sağlar. Daha fazla bilgi için bkz. <xref:blazor/components/event-handling>.
 
 ::: moniker-end
 
@@ -781,7 +782,7 @@ Bileşen başvuruları ( `@ref` ) bir bileşen örneğine başvurmak için bir y
 
 ## <a name="templated-no-locrazor-delegates"></a>Şablonlu Razor Temsilciler
 
-RazorŞablonlar, aşağıdaki biçimde bir UI parçacığı tanımlamanızı sağlar:
+Razor Şablonlar, aşağıdaki biçimde bir UI parçacığı tanımlamanızı sağlar:
 
 ```cshtml
 @<tag>...</tag>
@@ -890,19 +891,19 @@ RazorBir yönteme bağımsız değişken olarak bir satır içi şablon da sağl
 | [`@removeTagHelper`](xref:mvc/views/tag-helpers/intro#remove-razor-directives-label) | Daha önce bir görünümden eklenen etiket yardımcıları kaldırır. |
 | [`@tagHelperPrefix`](xref:mvc/views/tag-helpers/intro#prefix-razor-directives-label) | Etiket Yardımcısı desteğini etkinleştirmek ve etiket Yardımcısı kullanımını açık hale getirmek için bir etiket ön eki belirtir. |
 
-## <a name="no-locrazor-reserved-keywords"></a>Razorayrılmış anahtar sözcükler
+## <a name="no-locrazor-reserved-keywords"></a>Razor ayrılmış anahtar sözcükler
 
-### <a name="no-locrazor-keywords"></a>Razorlerimi
+### <a name="no-locrazor-keywords"></a>Razor lerimi
 
-* `page`(ASP.NET Core 2,1 veya üzeri gerekir)
+* `page` (ASP.NET Core 2,1 veya üzeri gerekir)
 * `namespace`
 * `functions`
 * `inherits`
 * `model`
 * `section`
-* `helper`(Şu anda ASP.NET Core tarafından desteklenmiyor)
+* `helper` (Şu anda ASP.NET Core tarafından desteklenmiyor)
 
-Razoranahtar kelimelerden kaçışın `@(Razor Keyword)` (örneğin, `@(functions)` ).
+Razor anahtar kelimelerden kaçışın `@(Razor Keyword)` (örneğin, `@(functions)` ).
 
 ### <a name="c-no-locrazor-keywords"></a>C# Razor anahtar sözcükleri
 
@@ -923,7 +924,7 @@ Razoranahtar kelimelerden kaçışın `@(Razor Keyword)` (örneğin, `@(function
 
 C# Razor anahtar sözcükleri ile çift kaçış olmalıdır `@(@C# Razor Keyword)` (örneğin, `@(@case)` ). İlki `@` Razor Ayrıştırıcıdan çıkar. İkincisi, `@` C# ayrıştırıcısının çıkar.
 
-### <a name="reserved-keywords-not-used-by-no-locrazor"></a>Ayrılmış anahtar sözcükler tarafından kullanılmıyorRazor
+### <a name="reserved-keywords-not-used-by-no-locrazor"></a>Ayrılmış anahtar sözcükler tarafından kullanılmıyor Razor
 
 * `class`
 
@@ -1001,7 +1002,7 @@ RazorGörünüm altyapısı, görünümler için büyük/küçük harfe duyarlı
 Geliştiricilerin dosya ve dizin adlarını büyük küçük harf olarak eşleşmesi önerilir:
 
 * Alan, denetleyici ve eylem adları.
-* RazorSayfaları.
+* Razor Sayfaları.
 
 Eşleşen durum, dağıtımların görünümlerini temel alınan dosya sisteminden bağımsız olarak bulmasını sağlar.
 

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: 7b82947c40d8e3fb46042ee5a3a32af9126623c9
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 117c777dc9ae1b8c6448f097132454b714a1b5dc
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020034"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632167"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Azure App Service ve IIS 'de ASP.NET Core sorunlarını giderme
 
@@ -272,7 +273,7 @@ Uygulamadan alınan ve hataları gösteren konsol çıktısı, tüm Kudu konsolu
 
 *ASP.NET Core {VERSION} (x86) çalışma zamanı site uzantısının yüklenmesini gerektirir.*
 
-1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x32`( `{X.Y}` çalışma zamanı sürümüdür)
+1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x32` ( `{X.Y}` çalışma zamanı sürümüdür)
 1. Uygulamayı çalıştırın: `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
 
 Uygulamadan alınan ve hataları gösteren konsol çıktısı, tüm Kudu konsoluna gönderilir.
@@ -294,7 +295,7 @@ Uygulamadan alınan ve hataları gösteren konsol çıktısı, tüm Kudu konsolu
 
 *ASP.NET Core {VERSION} (x64) çalışma zamanı site uzantısını yüklemeyi gerektirir.*
 
-1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x64`( `{X.Y}` çalışma zamanı sürümüdür)
+1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x64` ( `{X.Y}` çalışma zamanı sürümüdür)
 1. Uygulamayı çalıştırın: `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
 
 Uygulamadan alınan ve hataları gösteren konsol çıktısı, tüm Kudu konsoluna gönderilir.
@@ -441,7 +442,7 @@ Stdout günlüklerini etkinleştirmek ve görüntülemek için:
 
 1. Barındırma sistemindeki sitenin dağıtım klasörüne gidin.
 1. *Günlükler* klasörü yoksa, klasörü oluşturun. MSBuild 'in dağıtımdaki *Günlükler* klasörünü otomatik olarak oluşturmak üzere nasıl etkinleştirileceği hakkında yönergeler için, bkz. [Dizin yapısı](xref:host-and-deploy/directory-structure) konusu.
-1. *web.config* dosyasını düzenleyin. **StdoutLogEnabled** olarak ayarlayın `true` ve **stdoutLogFile** yolunu *Günlükler* klasörünü işaret etmek üzere değiştirin (örneğin, `.\logs\stdout` ). `stdout`yolunda günlük dosyası adı ön eki bulunur. Günlük oluşturulduğunda zaman damgası, işlem kimliği ve dosya uzantısı otomatik olarak eklenir. `stdout`Dosya adı ön eki olarak kullanıldığında, tipik bir günlük dosyası *stdout_20180205184032_5412. log*olarak adlandırılır.
+1. *web.config* dosyasını düzenleyin. **StdoutLogEnabled** olarak ayarlayın `true` ve **stdoutLogFile** yolunu *Günlükler* klasörünü işaret etmek üzere değiştirin (örneğin, `.\logs\stdout` ). `stdout` yolunda günlük dosyası adı ön eki bulunur. Günlük oluşturulduğunda zaman damgası, işlem kimliği ve dosya uzantısı otomatik olarak eklenir. `stdout`Dosya adı ön eki olarak kullanıldığında, tipik bir günlük dosyası *stdout_20180205184032_5412. log*olarak adlandırılır.
 1. Uygulama havuzunuzun kimliğinin *Günlükler* klasörü için yazma izinlerine sahip olduğundan emin olun.
 1. Güncelleştirilmiş *web.config* dosyasını kaydedin.
 1. Uygulamaya bir istek oluşturun.
@@ -755,7 +756,7 @@ Uygulamadan alınan ve hataları gösteren konsol çıktısı, tüm Kudu konsolu
 
 *ASP.NET Core {VERSION} (x86) çalışma zamanı site uzantısının yüklenmesini gerektirir.*
 
-1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x32`( `{X.Y}` çalışma zamanı sürümüdür)
+1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x32` ( `{X.Y}` çalışma zamanı sürümüdür)
 1. Uygulamayı çalıştırın: `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
 
 Uygulamadan alınan ve hataları gösteren konsol çıktısı, tüm Kudu konsoluna gönderilir.
@@ -777,7 +778,7 @@ Uygulamadan alınan ve hataları gösteren konsol çıktısı, tüm Kudu konsolu
 
 *ASP.NET Core {VERSION} (x64) çalışma zamanı site uzantısını yüklemeyi gerektirir.*
 
-1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x64`( `{X.Y}` çalışma zamanı sürümüdür)
+1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x64` ( `{X.Y}` çalışma zamanı sürümüdür)
 1. Uygulamayı çalıştırın: `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
 
 Uygulamadan alınan ve hataları gösteren konsol çıktısı, tüm Kudu konsoluna gönderilir.
@@ -934,7 +935,7 @@ Stdout günlüklerini etkinleştirmek ve görüntülemek için:
 
 1. Barındırma sistemindeki sitenin dağıtım klasörüne gidin.
 1. *Günlükler* klasörü yoksa, klasörü oluşturun. MSBuild 'in dağıtımdaki *Günlükler* klasörünü otomatik olarak oluşturmak üzere nasıl etkinleştirileceği hakkında yönergeler için, bkz. [Dizin yapısı](xref:host-and-deploy/directory-structure) konusu.
-1. *web.config* dosyasını düzenleyin. **StdoutLogEnabled** olarak ayarlayın `true` ve **stdoutLogFile** yolunu *Günlükler* klasörünü işaret etmek üzere değiştirin (örneğin, `.\logs\stdout` ). `stdout`yolunda günlük dosyası adı ön eki bulunur. Günlük oluşturulduğunda zaman damgası, işlem kimliği ve dosya uzantısı otomatik olarak eklenir. `stdout`Dosya adı ön eki olarak kullanıldığında, tipik bir günlük dosyası *stdout_20180205184032_5412. log*olarak adlandırılır.
+1. *web.config* dosyasını düzenleyin. **StdoutLogEnabled** olarak ayarlayın `true` ve **stdoutLogFile** yolunu *Günlükler* klasörünü işaret etmek üzere değiştirin (örneğin, `.\logs\stdout` ). `stdout` yolunda günlük dosyası adı ön eki bulunur. Günlük oluşturulduğunda zaman damgası, işlem kimliği ve dosya uzantısı otomatik olarak eklenir. `stdout`Dosya adı ön eki olarak kullanıldığında, tipik bir günlük dosyası *stdout_20180205184032_5412. log*olarak adlandırılır.
 1. Uygulama havuzunuzun kimliğinin *Günlükler* klasörü için yazma izinlerine sahip olduğundan emin olun.
 1. Güncelleştirilmiş *web.config* dosyasını kaydedin.
 1. Uygulamaya bir istek oluşturun.
@@ -1233,7 +1234,7 @@ Uygulamadan alınan ve hataları gösteren konsol çıktısı, tüm Kudu konsolu
 
 *ASP.NET Core {VERSION} (x86) çalışma zamanı site uzantısının yüklenmesini gerektirir.*
 
-1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x32`( `{X.Y}` çalışma zamanı sürümüdür)
+1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x32` ( `{X.Y}` çalışma zamanı sürümüdür)
 1. Uygulamayı çalıştırın: `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
 
 Uygulamadan alınan ve hataları gösteren konsol çıktısı, tüm Kudu konsoluna gönderilir.
@@ -1255,7 +1256,7 @@ Uygulamadan alınan ve hataları gösteren konsol çıktısı, tüm Kudu konsolu
 
 *ASP.NET Core {VERSION} (x64) çalışma zamanı site uzantısını yüklemeyi gerektirir.*
 
-1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x64`( `{X.Y}` çalışma zamanı sürümüdür)
+1. `cd D:\home\SiteExtensions\AspNetCoreRuntime.{X.Y}.x64` ( `{X.Y}` çalışma zamanı sürümüdür)
 1. Uygulamayı çalıştırın: `dotnet \home\site\wwwroot\{ASSEMBLY NAME}.dll`
 
 Uygulamadan alınan ve hataları gösteren konsol çıktısı, tüm Kudu konsoluna gönderilir.
@@ -1383,7 +1384,7 @@ Stdout günlüklerini etkinleştirmek ve görüntülemek için:
 
 1. Barındırma sistemindeki sitenin dağıtım klasörüne gidin.
 1. *Günlükler* klasörü yoksa, klasörü oluşturun. MSBuild 'in dağıtımdaki *Günlükler* klasörünü otomatik olarak oluşturmak üzere nasıl etkinleştirileceği hakkında yönergeler için, bkz. [Dizin yapısı](xref:host-and-deploy/directory-structure) konusu.
-1. *web.config* dosyasını düzenleyin. **StdoutLogEnabled** olarak ayarlayın `true` ve **stdoutLogFile** yolunu *Günlükler* klasörünü işaret etmek üzere değiştirin (örneğin, `.\logs\stdout` ). `stdout`yolunda günlük dosyası adı ön eki bulunur. Günlük oluşturulduğunda zaman damgası, işlem kimliği ve dosya uzantısı otomatik olarak eklenir. `stdout`Dosya adı ön eki olarak kullanıldığında, tipik bir günlük dosyası *stdout_20180205184032_5412. log*olarak adlandırılır.
+1. *web.config* dosyasını düzenleyin. **StdoutLogEnabled** olarak ayarlayın `true` ve **stdoutLogFile** yolunu *Günlükler* klasörünü işaret etmek üzere değiştirin (örneğin, `.\logs\stdout` ). `stdout` yolunda günlük dosyası adı ön eki bulunur. Günlük oluşturulduğunda zaman damgası, işlem kimliği ve dosya uzantısı otomatik olarak eklenir. `stdout`Dosya adı ön eki olarak kullanıldığında, tipik bir günlük dosyası *stdout_20180205184032_5412. log*olarak adlandırılır.
 1. Uygulama havuzunuzun kimliğinin *Günlükler* klasörü için yazma izinlerine sahip olduğundan emin olun.
 1. Güncelleştirilmiş *web.config* dosyasını kaydedin.
 1. Uygulamaya bir istek oluşturun.

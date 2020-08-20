@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-1.1'
 ms.author: riande
 ms.date: 04/11/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/ObjectPool
-ms.openlocfilehash: 1f57bc4662296333b3d2c659c057230548541b91
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 6997dbfdd5c654e4a8b15a026fd3ec61d024f02d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020411"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632375"
 ---
 # <a name="object-reuse-with-objectpool-in-aspnet-core"></a>ASP.NET Core içinde ObjectPool ile nesne yeniden kullanımı
 
 [Steve Gordon](https://twitter.com/stevejgordon), [Ryan şimdi ak](https://github.com/rynowak)ve [Günther fodl](https://github.com/gfoidl)
 
-<xref:Microsoft.Extensions.ObjectPool>, nesnelerin çöp toplanmasına izin vermek yerine, bir nesne grubunu yeniden kullanım için bellekte tutmayı destekleyen ASP.NET Core altyapısının bir parçasıdır.
+<xref:Microsoft.Extensions.ObjectPool> , nesnelerin çöp toplanmasına izin vermek yerine, bir nesne grubunu yeniden kullanım için bellekte tutmayı destekleyen ASP.NET Core altyapısının bir parçasıdır.
 
 Yönetilebilecek nesneler şunları içeriyorsa, nesne havuzunu kullanmak isteyebilirsiniz:
 
@@ -35,7 +36,7 @@ Yönetilebilecek nesneler şunları içeriyorsa, nesne havuzunu kullanmak isteye
 - Sınırlı bir kaynağı temsil eder.
 - Tahmin edilebilir ve sık kullanılır.
 
-Örneğin, ASP.NET Core Framework örnekleri yeniden kullanmak için bazı yerlerde nesne havuzunu kullanır <xref:System.Text.StringBuilder> . `StringBuilder`karakter verilerini tutmak için kendi arabelleğini ayırır ve yönetir. ASP.NET Core `StringBuilder` Özellikler uygulamak için düzenli olarak kullanımlar ve bunları yeniden kullanmak bir performans avantajı sağlar.
+Örneğin, ASP.NET Core Framework örnekleri yeniden kullanmak için bazı yerlerde nesne havuzunu kullanır <xref:System.Text.StringBuilder> . `StringBuilder` karakter verilerini tutmak için kendi arabelleğini ayırır ve yönetir. ASP.NET Core `StringBuilder` Özellikler uygulamak için düzenli olarak kullanımlar ve bunları yeniden kullanmak bir performans avantajı sağlar.
 
 Nesne havuzu her zaman performansı iyileştirmez:
 
@@ -45,18 +46,18 @@ Nesne havuzu her zaman performansı iyileştirmez:
 Yalnızca uygulamanız veya kitaplığınız için gerçekçi senaryolar kullanarak performans verilerini topladıktan sonra nesne havuzunu kullanın.
 
 ::: moniker range="< aspnetcore-3.0"
-**Uyarı: `ObjectPool` uygulamaz `IDisposable` . Bunu, aktiften çıkarma gerektiren türlerle kullanmanızı önermiyoruz.** `ObjectPool`ASP.NET Core 3,0 ve üzeri sürümlerde desteklenir `IDisposable` .
+**Uyarı: `ObjectPool` uygulamaz `IDisposable` . Bunu, aktiften çıkarma gerektiren türlerle kullanmanızı önermiyoruz.** `ObjectPool` ASP.NET Core 3,0 ve üzeri sürümlerde desteklenir `IDisposable` .
 ::: moniker-end
 
 **UNUTMAYıN: ObjectPool, ayırabilecek nesne sayısına bir sınır yerleştirmez, saklanacak nesne sayısına bir sınır koyar.**
 
 ## <a name="concepts"></a>Kavramlar
 
-<xref:Microsoft.Extensions.ObjectPool.ObjectPool`1>-temel nesne havuzu soyutlama. Nesneleri almak ve döndürmek için kullanılır.
+<xref:Microsoft.Extensions.ObjectPool.ObjectPool`1> -temel nesne havuzu soyutlama. Nesneleri almak ve döndürmek için kullanılır.
 
-<xref:Microsoft.Extensions.ObjectPool.PooledObjectPolicy%601>-bir nesnenin nasıl oluşturulduğunu ve havuza döndürüldüğünde nasıl *sıfırlandığını* özelleştirmek için bunu uygulayın. Bu, doğrudan oluşturduğunuz bir nesne havuzuna geçirilebilir.... VEYA
+<xref:Microsoft.Extensions.ObjectPool.PooledObjectPolicy%601> -bir nesnenin nasıl oluşturulduğunu ve havuza döndürüldüğünde nasıl *sıfırlandığını* özelleştirmek için bunu uygulayın. Bu, doğrudan oluşturduğunuz bir nesne havuzuna geçirilebilir.... VEYA
 
-<xref:Microsoft.Extensions.ObjectPool.ObjectPoolProvider.Create*>nesne havuzları oluşturmak için bir fabrika işlevi görür.
+<xref:Microsoft.Extensions.ObjectPool.ObjectPoolProvider.Create*> nesne havuzları oluşturmak için bir fabrika işlevi görür.
 <!-- REview, there is no ObjectPoolProvider<T> -->
 
 ObjectPool bir uygulamada birden çok şekilde kullanılabilir:
@@ -78,7 +79,7 @@ Kullanıldığında <xref:Microsoft.Extensions.ObjectPool.DefaultObjectPoolProvi
 NOTE: havuz atıldıktan sonra:
 
 * Çağırma `Get` a oluşturur `ObjectDisposedException` .
-* `return`verilen öğeyi atar.
+* `return` verilen öğeyi atar.
 
 ::: moniker-end
 
@@ -92,7 +93,7 @@ Aşağıdaki kod:
 
 [!code-csharp[](ObjectPool/ObjectPoolSample/Startup.cs?name=snippet)]
 
-Aşağıdaki kod şunu uygular`BirthdayMiddleware`
+Aşağıdaki kod şunu uygular `BirthdayMiddleware`
 
 [!code-csharp[](ObjectPool/ObjectPoolSample/BirthdayMiddleware.cs?name=snippet)]
 

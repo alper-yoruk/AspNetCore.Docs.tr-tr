@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 10/17/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/dotnet-grpc
-ms.openlocfilehash: d41958d586f54d5944af187933f2b0248f763171
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 18d504d7a130aeaa9f8ab6cca6c92dab5febfae6
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016135"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633246"
 ---
 # <a name="manage-protobuf-references-with-dotnet-grpc"></a>dotnet-grpc ile Protobuf başvurularını yönetme
 
 [John Luo](https://github.com/juntaoluo) tarafından
 
-`dotnet-grpc`, bir .NET gRPC projesindeki [prototip (*. proto*)](xref:grpc/basics#proto-file) başvurularını yönetmeye yönelik .NET Core küresel bir araçtır. Araç, prototipleme başvurularını eklemek, yenilemek, kaldırmak ve listelemek için kullanılabilir.
+`dotnet-grpc` , bir .NET gRPC projesindeki [prototip (*. proto*)](xref:grpc/basics#proto-file) başvurularını yönetmeye yönelik .NET Core küresel bir araçtır. Araç, prototipleme başvurularını eklemek, yenilemek, kaldırmak ve listelemek için kullanılabilir.
 
 ## <a name="installation"></a>Yükleme
 
@@ -39,7 +40,7 @@ dotnet tool install -g dotnet-grpc
 
 ## <a name="add-references"></a>Başvuru Ekle
 
-`dotnet-grpc`, `<Protobuf />` *. csproj* dosyasına öğe olarak prototip başvuruları eklemek için kullanılabilir:
+`dotnet-grpc` , `<Protobuf />` *. csproj* dosyasına öğe olarak prototip başvuruları eklemek için kullanılabilir:
 
 ```xml
 <Protobuf Include="Protos\greet.proto" GrpcServices="Server" />
@@ -51,7 +52,7 @@ Prototip başvuruları, C# istemcisi ve/veya sunucu varlıklarını oluşturmak 
 * Bir URL ile belirtilen uzak dosyadan Protobir başvuru oluştur.
 * Projeye doğru gRPC paket bağımlılıklarının eklendiğinden emin olun.
 
-Örneğin, `Grpc.AspNetCore` paket bir Web uygulamasına eklenir. `Grpc.AspNetCore`gRPC sunucusu ve istemci kitaplıklarını ve araç desteğini içerir. Alternatif olarak, `Grpc.Net.Client` `Grpc.Tools` ve `Google.Protobuf` yalnızca GRPC istemci kitaplıklarını ve araç desteğini içeren paketleri konsol uygulamasına eklenir.
+Örneğin, `Grpc.AspNetCore` paket bir Web uygulamasına eklenir. `Grpc.AspNetCore` gRPC sunucusu ve istemci kitaplıklarını ve araç desteğini içerir. Alternatif olarak, `Grpc.Net.Client` `Grpc.Tools` ve `Google.Protobuf` yalnızca GRPC istemci kitaplıklarını ve araç desteğini içeren paketleri konsol uygulamasına eklenir.
 
 ### <a name="add-file"></a>Dosya ekle
 

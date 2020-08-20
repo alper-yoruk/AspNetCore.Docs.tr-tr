@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core 'da akış kullanmaSignalR
+title: ASP.NET Core 'da akış kullanma SignalR
 author: bradygaster
 description: İstemci ve sunucu arasında veri akışını öğrenin.
 monikerRange: '>= aspnetcore-2.1'
@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/streaming
-ms.openlocfilehash: e0eabe711fd69e42bd9bfa5e03a92e1df780e4db
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 29748ebe24fea03415b5a01b21300433e3fbc0f0
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022517"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634221"
 ---
-# <a name="use-streaming-in-aspnet-core-no-locsignalr"></a>ASP.NET Core 'da akış kullanmaSignalR
+# <a name="use-streaming-in-aspnet-core-no-locsignalr"></a>ASP.NET Core 'da akış kullanma SignalR
 
 [Brennan Conroy](https://github.com/BrennanConroy) tarafından
 
@@ -303,7 +304,7 @@ Akışı sonlandırmak için çağırın `subject.complete()` .
 
 ### <a name="server-to-client-streaming"></a>Sunucudan istemciye akış
 
-SignalRJava istemcisi, `stream` akış yöntemlerini çağırmak için yöntemini kullanır. `stream`üç veya daha fazla bağımsız değişken kabul eder:
+SignalRJava istemcisi, `stream` akış yöntemlerini çağırmak için yöntemini kullanır. `stream` üç veya daha fazla bağımsız değişken kabul eder:
 
 * Akış öğelerinin beklenen türü.
 * Hub yönteminin adı.

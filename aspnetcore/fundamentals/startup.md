@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/startup
-ms.openlocfilehash: 84b2aa6185654789b925dc4a9262f446de6c0a3c
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: b10ddf52ea7d22ea98c295da61c09da8c87fc7a7
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016602"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633753"
 ---
 # <a name="app-startup-in-aspnet-core"></a>ASP.NET Core 'de uygulama başlatma
 
@@ -39,7 +40,7 @@ ASP.NET Core uygulamalar `Startup` , kural tarafından adlandırılan bir sını
 * İsteğe bağlı olarak <xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*> , uygulamanın *hizmetlerini*yapılandırmak için bir yöntem içerir. Hizmet, uygulama işlevselliği sağlayan yeniden kullanılabilir bir bileşendir. Hizmetler *registered* `ConfigureServices` , [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection) veya ile uygulama genelinde kullanılır <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices*> .
 * <xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*>Uygulamanın istek işleme ardışık düzenini oluşturmak için bir yöntem içerir.
 
-`ConfigureServices`ve `Configure` uygulama başlatıldığında ASP.NET Core çalışma zamanı tarafından çağrılır:
+`ConfigureServices` ve `Configure` uygulama başlatıldığında ASP.NET Core çalışma zamanı tarafından çağrılır:
 
 [!code-csharp[](startup/3.0_samples/StartupFilterSample/Startup.cs?name=snippet)]
 
@@ -86,7 +87,7 @@ Hizmet kapsayıcısına hizmet eklemek, bunları uygulama içinde ve yönteminde
 
 ## <a name="the-configure-method"></a>Configure yöntemi
 
-<xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*>Yöntemi, UYGULAMANıN http isteklerine nasıl yanıt verdiğini belirtmek için kullanılır. İstek ardışık düzeni, bir örneğe [Ara yazılım](xref:fundamentals/middleware/index) bileşenleri eklenerek yapılandırılır <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> . `IApplicationBuilder`, yöntemi için kullanılabilir `Configure` , ancak hizmet kapsayıcısına kayıtlı değildir. Barındırma bir oluşturur `IApplicationBuilder` ve doğrudan öğesine geçirir `Configure` .
+<xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*>Yöntemi, UYGULAMANıN http isteklerine nasıl yanıt verdiğini belirtmek için kullanılır. İstek ardışık düzeni, bir örneğe [Ara yazılım](xref:fundamentals/middleware/index) bileşenleri eklenerek yapılandırılır <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> . `IApplicationBuilder` , yöntemi için kullanılabilir `Configure` , ancak hizmet kapsayıcısına kayıtlı değildir. Barındırma bir oluşturur `IApplicationBuilder` ve doğrudan öğesine geçirir `Configure` .
 
 [ASP.NET Core şablonlar](/dotnet/core/tools/dotnet-new) işlem hattını desteğiyle birlikte yapılandırır:
 
@@ -122,7 +123,7 @@ Hizmetleri ve istek işleme işlem hattını, `Startup` `ConfigureServices` ana 
 
 Şunu kullanın <xref:Microsoft.AspNetCore.Hosting.IStartupFilter> :
 
-* Bir uygulamanın başlangıcında veya sonunda, açık bir çağrı olmadan ara yazılım [yapılandırma](#the-configure-method) ardışık düzenini yapılandırmak için `Use{Middleware}` . `IStartupFilter`ASP.NET Core tarafından, uygulama yazarının varsayılan ara yazılımı açıkça kaydetmesi gerekmeden, işlem hattının başlangıcına varsayılanlar eklemek için kullanılır. `IStartupFilter`Uygulama yazarı adına farklı bir bileşen çağrısının yapılmasına izin verir `Use{Middleware}` .
+* Bir uygulamanın başlangıcında veya sonunda, açık bir çağrı olmadan ara yazılım [yapılandırma](#the-configure-method) ardışık düzenini yapılandırmak için `Use{Middleware}` . `IStartupFilter` ASP.NET Core tarafından, uygulama yazarının varsayılan ara yazılımı açıkça kaydetmesi gerekmeden, işlem hattının başlangıcına varsayılanlar eklemek için kullanılır. `IStartupFilter` Uygulama yazarı adına farklı bir bileşen çağrısının yapılmasına izin verir `Use{Middleware}` .
 * Yöntem işlem hattı oluşturmak için `Configure` . [IStartupFilter.Configure](xref:Microsoft.AspNetCore.Hosting.IStartupFilter.Configure*) , bir ara yazılımı kitaplıklar tarafından eklenen ve sonrasında çalışan bir ara yazılım olarak ayarlayabilir.
 
 `IStartupFilter`<xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*>öğesini alır ve döndürür `Action<IApplicationBuilder>` . Bir <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> uygulamanın istek ardışık düzenini yapılandırmak için bir sınıf tanımlar. Daha fazla bilgi için bkz. [IApplicationBuilder ile bir ara yazılım işlem hattı oluşturma](xref:fundamentals/middleware/index#create-a-middleware-pipeline-with-iapplicationbuilder).
@@ -174,7 +175,7 @@ ASP.NET Core uygulamalar `Startup` , kural tarafından adlandırılan bir sını
 * İsteğe bağlı olarak <xref:Microsoft.AspNetCore.Hosting.StartupBase.ConfigureServices*> , uygulamanın *hizmetlerini*yapılandırmak için bir yöntem içerir. Hizmet, uygulama işlevselliği sağlayan yeniden kullanılabilir bir bileşendir. Hizmetler *registered* `ConfigureServices` , [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection) veya ile uygulama genelinde kullanılır <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ApplicationServices*> .
 * <xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*>Uygulamanın istek işleme ardışık düzenini oluşturmak için bir yöntem içerir.
 
-`ConfigureServices`ve `Configure` uygulama başlatıldığında ASP.NET Core çalışma zamanı tarafından çağrılır:
+`ConfigureServices` ve `Configure` uygulama başlatıldığında ASP.NET Core çalışma zamanı tarafından çağrılır:
 
 [!code-csharp[](startup/sample_snapshot/Startup1.cs)]
 
@@ -186,9 +187,9 @@ Ana bilgisayar, sınıf oluşturucusunun kullanabildiği hizmetleri sağlar `Sta
 
 Sınıfa [bağımlılık ekleme](xref:fundamentals/dependency-injection) 'nin yaygın bir kullanımı `Startup` , şu ekleme yapmak için kullanılır:
 
-* <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment>Hizmetleri ortama göre yapılandırmak için.
-* <xref:Microsoft.Extensions.Configuration.IConfiguration>yapılandırmasını okuyun.
-* <xref:Microsoft.Extensions.Logging.ILoggerFactory>içinde bir günlükçü oluşturmak için `Startup.ConfigureServices` .
+* <xref:Microsoft.AspNetCore.Hosting.IHostingEnvironment> Hizmetleri ortama göre yapılandırmak için.
+* <xref:Microsoft.Extensions.Configuration.IConfiguration> yapılandırmasını okuyun.
+* <xref:Microsoft.Extensions.Logging.ILoggerFactory> içinde bir günlükçü oluşturmak için `Startup.ConfigureServices` .
 
 [!code-csharp[](startup/sample_snapshot/Startup2.cs?highlight=7-8)]
 
@@ -220,7 +221,7 @@ Hakkında daha fazla bilgi için bkz. [Setcompatibilityversion](xref:mvc/compati
 
 ## <a name="the-configure-method"></a>Configure yöntemi
 
-<xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*>Yöntemi, UYGULAMANıN http isteklerine nasıl yanıt verdiğini belirtmek için kullanılır. İstek ardışık düzeni, bir örneğe [Ara yazılım](xref:fundamentals/middleware/index) bileşenleri eklenerek yapılandırılır <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> . `IApplicationBuilder`, yöntemi için kullanılabilir `Configure` , ancak hizmet kapsayıcısına kayıtlı değildir. Barındırma bir oluşturur `IApplicationBuilder` ve doğrudan öğesine geçirir `Configure` .
+<xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*>Yöntemi, UYGULAMANıN http isteklerine nasıl yanıt verdiğini belirtmek için kullanılır. İstek ardışık düzeni, bir örneğe [Ara yazılım](xref:fundamentals/middleware/index) bileşenleri eklenerek yapılandırılır <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> . `IApplicationBuilder` , yöntemi için kullanılabilir `Configure` , ancak hizmet kapsayıcısına kayıtlı değildir. Barındırma bir oluşturur `IApplicationBuilder` ve doğrudan öğesine geçirir `Configure` .
 
 [ASP.NET Core şablonlar](/dotnet/core/tools/dotnet-new) işlem hattını desteğiyle birlikte yapılandırır:
 
@@ -254,7 +255,7 @@ Hizmetleri ve istek işleme işlem hattını, `Startup` `ConfigureServices` ana 
 
 Şunu kullanın <xref:Microsoft.AspNetCore.Hosting.IStartupFilter> :
 
-* Bir uygulamanın başlangıcında veya sonunda, açık bir çağrı olmadan ara yazılım [yapılandırma](#the-configure-method) ardışık düzenini yapılandırmak için `Use{Middleware}` . `IStartupFilter`ASP.NET Core tarafından, uygulama yazarının varsayılan ara yazılımı açıkça kaydetmesi gerekmeden, işlem hattının başlangıcına varsayılanlar eklemek için kullanılır. `IStartupFilter`Uygulama yazarı adına farklı bir bileşen çağrısının yapılmasına izin verir `Use{Middleware}` .
+* Bir uygulamanın başlangıcında veya sonunda, açık bir çağrı olmadan ara yazılım [yapılandırma](#the-configure-method) ardışık düzenini yapılandırmak için `Use{Middleware}` . `IStartupFilter` ASP.NET Core tarafından, uygulama yazarının varsayılan ara yazılımı açıkça kaydetmesi gerekmeden, işlem hattının başlangıcına varsayılanlar eklemek için kullanılır. `IStartupFilter` Uygulama yazarı adına farklı bir bileşen çağrısının yapılmasına izin verir `Use{Middleware}` .
 * Yöntem işlem hattı oluşturmak için `Configure` . [IStartupFilter.Configure](xref:Microsoft.AspNetCore.Hosting.IStartupFilter.Configure*) , bir ara yazılımı kitaplıklar tarafından eklenen ve sonrasında çalışan bir ara yazılım olarak ayarlayabilir.
 
 `IStartupFilter`<xref:Microsoft.AspNetCore.Hosting.StartupBase.Configure*>öğesini alır ve döndürür `Action<IApplicationBuilder>` . Bir <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> uygulamanın istek ardışık düzenini yapılandırmak için bir sınıf tanımlar. Daha fazla bilgi için bkz. [IApplicationBuilder ile bir ara yazılım işlem hattı oluşturma](xref:fundamentals/middleware/index#create-a-middleware-pipeline-with-iapplicationbuilder).

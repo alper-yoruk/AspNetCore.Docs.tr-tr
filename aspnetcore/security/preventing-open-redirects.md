@@ -5,6 +5,7 @@ description: ASP.NET Core uygulamasında açık yeniden yönlendirme saldırıla
 ms.author: riande
 ms.date: 07/07/2017
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/preventing-open-redirects
-ms.openlocfilehash: 3a58c25bbd54803ce0b8c42a2667222d6e14c050
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 5226e301960a56145b94b6128d0034c40b86bffd
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021022"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633467"
 ---
 # <a name="prevent-open-redirect-attacks-in-aspnet-core"></a>ASP.NET Core 'da açık yeniden yönlendirme saldırılarını önleme
 
@@ -64,7 +65,7 @@ public IActionResult SomeAction(string redirectUrl)
 }
 ```
 
-`LocalRedirect`Yerel olmayan bir URL belirtilirse, bir özel durum oluşturur. Aksi takdirde, tıpkı yöntemi gibi davranır `Redirect` .
+`LocalRedirect` Yerel olmayan bir URL belirtilirse, bir özel durum oluşturur. Aksi takdirde, tıpkı yöntemi gibi davranır `Redirect` .
 
 ### <a name="islocalurl"></a>IsLocalUrl 'Si
 

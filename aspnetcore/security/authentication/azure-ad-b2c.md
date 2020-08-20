@@ -6,6 +6,7 @@ ms.author: casoper
 ms.custom: devx-track-csharp, mvc
 ms.date: 01/21/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/azure-ad-b2c
-ms.openlocfilehash: ccd3868c4b3294098e692f7a20e06d59ba482e7c
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: a1bac04944d9671df3f804a9724c9f0fd6f1fb27
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130528"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633636"
 ---
 # <a name="cloud-authentication-with-azure-active-directory-b2c-in-aspnet-core"></a>ASP.NET Core Azure Active Directory B2C ile bulut kimlik doğrulaması
 
@@ -60,11 +61,11 @@ Aşağıdaki değerleri kullanın:
 | Ayar                       | Değer                     | Notlar                                                                                                                                                                                              |
 |-------------------------------|---------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | **Ad**                      | *&lt;uygulama adı&gt;*        | Uygulamanızı tüketicilere açıklayan uygulama için bir **ad** girin.                                                                                                                                 |
-| **Web uygulamasını / web API'sini dahil etme** | Evet                       |                                                                                                                                                                                                    |
-| **Örtük akışa izin verme**       | Evet                       |                                                                                                                                                                                                    |
+| **Web uygulamasını / web API'sini dahil etme** | Yes                       |                                                                                                                                                                                                    |
+| **Örtük akışa izin verme**       | Yes                       |                                                                                                                                                                                                    |
 | **Yanıt URL'si**                 | `https://localhost:44300/signin-oidc` | Yanıt URL'leri, Azure AD B2C'nin, uygulamanız tarafından istenen belirteçleri döndürdüğü uç noktalardır. Visual Studio, kullanılacak yanıt URL 'sini sağlar. Şu an için `https://localhost:44300/signin-oidc` formunu doldurun için yazın. |
 | **Uygulama Kimliği URI'si**                | Boş bırakın               | Bu öğretici için gerekli değildir.                                                                                                                                                                    |
-| **Yerel istemci ekle**     | Hayır                        |                                                                                                                                                                                                    |
+| **Yerel istemci ekle**     | No                        |                                                                                                                                                                                                    |
 
 > [!WARNING]
 > Localhost olmayan bir yanıt URL 'SI ayarlıyorsanız, [yanıt URL 'si listesinde izin verilen kısıtlamalara](/azure/active-directory-b2c/tutorial-register-applications#register-a-web-application)dikkat edin. 
@@ -114,7 +115,7 @@ B2C uygulama özellikleri hala açık olan tarayıcı penceresine geri dönün. 
 [Kaydolma veya oturum açma ilkesi oluşturmak](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions)için Azure AD B2C belgelerindeki adımları kullanın ve ardından [bir parola sıfırlama ilkesi oluşturun](/azure/active-directory-b2c/active-directory-b2c-reference-policies#user-flow-versions). ** Identity Sağlayıcılar**, **kaydolma öznitelikleri**ve **uygulama talepleri**için belgelerde verilen örnek değerleri kullanın. Belgelerde açıklandığı şekilde ilkeleri test etmek için **Şimdi Çalıştır** düğmesini kullanmak isteğe bağlıdır.
 
 > [!WARNING]
-> İlke adlarının, bu ilkeler Visual Studio 'daki **kimlik doğrulaması Değiştir** iletişim kutusunda kullanıldığından emin olun. İlke adları *üzerindeappsettings.js*doğrulanabilir.
+> İlke adlarının, bu ilkeler Visual Studio 'daki **kimlik doğrulaması Değiştir** iletişim kutusunda kullanıldığından emin olun. İlke adları * üzerindeappsettings.js*doğrulanabilir.
 
 ## <a name="configure-the-underlying-openidconnectoptionsjwtbearerno-loccookie-options"></a>Temel alınan Openıdconnectoptions/Jwttaşıyıcı/ Cookie seçeneklerini yapılandırın
 

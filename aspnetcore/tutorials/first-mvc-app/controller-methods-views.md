@@ -5,6 +5,7 @@ description: 6. bölüm, ASP.NET Core MVC uygulamasına model ekleme
 ms.author: riande
 ms.date: 12/13/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/controller-methods-views
-ms.openlocfilehash: b5b54adb1d86e4ab982647dc8207839cc9afdac9
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 07b67cd7c267c39b99277114b73642b5caa3e312
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021074"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632843"
 ---
 # <a name="part-6-controller-methods-and-views-in-aspnet-core"></a>ASP.NET Core Bölüm 6, denetleyici yöntemleri ve görünümleri
 
@@ -110,7 +111,7 @@ Aşağıdaki kod, `HTTP POST Edit` postalanan film değerlerini işleyen yöntem
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/Edit.cshtml?range=9)]
 
-[Form etiketi Yardımcısı](xref:mvc/views/working-with-forms) , `[ValidateAntiForgeryToken]` film denetleyicisi yönteminde üretilen Anti-forgery belirteciyle eşleşmesi gereken gizli bir Anti-forgery belirteci oluşturur `Edit` . Daha fazla bilgi için bkz. [Istek önleyici](xref:security/anti-request-forgery)güvenlik.
+[Form etiketi Yardımcısı](xref:mvc/views/working-with-forms) , `[ValidateAntiForgeryToken]` film denetleyicisi yönteminde üretilen Anti-forgery belirteciyle eşleşmesi gereken gizli bir Anti-forgery belirteci oluşturur `Edit` . Daha fazla bilgi için bkz. <xref:security/anti-request-forgery>.
 
 `HttpGet Edit`Yöntemi, film parametresini alır `ID` , Entity Framework yöntemini kullanarak filmi arar `FindAsync` ve seçili filmi düzenleme görünümüne döndürür. Bir film bulunamazsa `NotFound` (HTTP 404) döndürülür.
 
@@ -120,7 +121,7 @@ Scafkatlama sistemi düzenleme görünümü oluştururken, sınıfını ve `Movi
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Views/Movies/EditOriginal.cshtml)]
 
-Görünüm şablonunun dosyanın en üstünde bir ifadeye sahip olduğuna dikkat edin `@model MvcMovie.Models.Movie` . `@model MvcMovie.Models.Movie`görünümün görünüm şablonu için modelin türü olmasını beklediğini belirtir `Movie` .
+Görünüm şablonunun dosyanın en üstünde bir ifadeye sahip olduğuna dikkat edin `@model MvcMovie.Models.Movie` . `@model MvcMovie.Models.Movie` görünümün görünüm şablonu için modelin türü olmasını beklediğini belirtir `Movie` .
 
 Scafkatlanmış kod, HTML işaretlemesini kolaylaştırmak için birkaç etiket Yardımcısı yöntemi kullanır. [Etiket etiketi Yardımcısı](xref:mvc/views/working-with-forms) alanın adını ("title", "ReleaseDate", "tarz" veya "Price") görüntüler. [Giriş etiketi Yardımcısı](xref:mvc/views/working-with-forms) bir HTML öğesi işler `<input>` . [Doğrulama etiketi Yardımcısı](xref:mvc/views/working-with-forms) , bu özellikle ilişkili tüm doğrulama iletilerini görüntüler.
 
@@ -161,7 +162,7 @@ Form sunucuya gönderilmeden önce, istemci tarafı doğrulaması alanlarda tüm
 * [Genelleştirme ve yerelleştirme](xref:fundamentals/localization)
 * [Etiket yardımcılarına giriş](xref:mvc/views/tag-helpers/intro)
 * [Yazar etiketi yardımcıları](xref:mvc/views/tag-helpers/authoring)
-* [Istek dışı koruma](xref:security/anti-request-forgery)
+* <xref:security/anti-request-forgery>
 * Denetleyicinizi [yeniden gönderme](/aspnet/mvc/overview/getting-started/getting-started-with-ef-using-mvc/implementing-basic-crud-functionality-with-the-entity-framework-in-asp-net-mvc-application) durumundan koruma
 * [ViewModel 'lar](https://rachelappel.com/use-viewmodels-to-manage-data-amp-organize-code-in-asp-net-mvc-applications/)
 * [Form Etiketi Yardımcısı](xref:mvc/views/working-with-forms)

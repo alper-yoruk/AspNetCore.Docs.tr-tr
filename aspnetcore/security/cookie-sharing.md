@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cookie-sharing
-ms.openlocfilehash: f4762871cbae77f690d8478e1342e0d53918eb51
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 6ac808d11790ae27e82606b442ff215d95b93e41
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022205"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631374"
 ---
 # <a name="share-authentication-no-loccookies-among-aspnet-apps"></a>Kimlik doğrulamasını cookie ASP.NET uygulamalar arasında paylaşma
 
@@ -35,18 +36,18 @@ Aşağıdaki örneklerde:
 * Kimlik doğrulama cookie adı, ortak bir değerine ayarlanır `.AspNet.SharedCookie` .
 * , `AuthenticationType` `Identity.Application` Açıkça ya da varsayılan olarak ayarlanır.
 * Veri koruma sisteminin veri koruma anahtarlarını () paylaşmasını sağlamak için ortak bir uygulama adı kullanılır `SharedCookieApp` .
-* `Identity.Application`, kimlik doğrulama düzeni olarak kullanılır. Hangi düzenin kullanıldığı, her ne kadar paylaşılan uygulamalar için *within and across* cookie varsayılan düzen olarak, ya da açıkça ayarlanarak kullanılması gerekir. Şema, şifreleme ve şifre çözme sırasında kullanılır cookie , bu nedenle uygulamalarda tutarlı bir düzenin kullanılması gerekir.
+* `Identity.Application` , kimlik doğrulama düzeni olarak kullanılır. Hangi düzenin kullanıldığı, her ne kadar paylaşılan uygulamalar için *within and across* cookie varsayılan düzen olarak, ya da açıkça ayarlanarak kullanılması gerekir. Şema, şifreleme ve şifre çözme sırasında kullanılır cookie , bu nedenle uygulamalarda tutarlı bir düzenin kullanılması gerekir.
 * Ortak bir [veri koruma anahtarı](xref:security/data-protection/implementation/key-management) depolama konumu kullanılır.
   * ASP.NET Core uygulamalarda, <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.PersistKeysToFileSystem*> anahtar depolama konumunu ayarlamak için kullanılır.
-  * .NET Framework uygulamalarda, Cookie kimlik doğrulama ara yazılımı bir uygulamasını kullanır <xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider> . `DataProtectionProvider`, kimlik doğrulaması yük verilerinin şifrelenmesi ve şifresinin çözülmesi için veri koruma hizmetleri sağlar cookie . `DataProtectionProvider`Örnek, uygulamanın diğer bölümleri tarafından kullanılan veri koruma sisteminden yalıtılmıştır. [Dataprotectionprovider. Create (System. IO. DirectoryInfo, Action \<IDataProtectionBuilder> ),](xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider.Create*) <xref:System.IO.DirectoryInfo> veri koruma anahtar depolaması konumunu belirtmek için bir değerini kabul eder.
+  * .NET Framework uygulamalarda, Cookie kimlik doğrulama ara yazılımı bir uygulamasını kullanır <xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider> . `DataProtectionProvider` , kimlik doğrulaması yük verilerinin şifrelenmesi ve şifresinin çözülmesi için veri koruma hizmetleri sağlar cookie . `DataProtectionProvider`Örnek, uygulamanın diğer bölümleri tarafından kullanılan veri koruma sisteminden yalıtılmıştır. [Dataprotectionprovider. Create (System. IO. DirectoryInfo, Action \<IDataProtectionBuilder> ),](xref:Microsoft.AspNetCore.DataProtection.DataProtectionProvider.Create*) <xref:System.IO.DirectoryInfo> veri koruma anahtar depolaması konumunu belirtmek için bir değerini kabul eder.
 * `DataProtectionProvider`[Microsoft. AspNetCore. DataProtection. Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/) NuGet paketini gerektirir:
   * ASP.NET Core 2. x uygulamalarında [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app)öğesine başvurun.
   * .NET Framework uygulamalar ' da [Microsoft. AspNetCore. DataProtection. Extensions](https://www.nuget.org/packages/Microsoft.AspNetCore.DataProtection.Extensions/)'a bir paket başvurusu ekleyin.
-* <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.SetApplicationName*>ortak uygulama adını ayarlar.
+* <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.SetApplicationName*> ortak uygulama adını ayarlar.
 
-## <a name="share-authentication-no-loccookies-with-aspnet-core-no-locidentity"></a>Kimlik doğrulamasını cookie ASP.NET Core ile paylaşmaIdentity
+## <a name="share-authentication-no-loccookies-with-no-locaspnet-core-identity"></a>Kimlik doğrulaması cookie ile paylaşma ASP.NET Core Identity
 
-ASP.NET Core kullanırken Identity :
+Kullanırken ASP.NET Core Identity :
 
 * Veri koruma anahtarlarının ve uygulama adının uygulamalar arasında paylaşılması gerekir. Aşağıdaki örneklerde yöntemine ortak bir anahtar depolama konumu verilmiştir <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.PersistKeysToFileSystem*> . <xref:Microsoft.AspNetCore.DataProtection.DataProtectionBuilderExtensions.SetApplicationName*>Ortak bir paylaşılan uygulama adı yapılandırmak için kullanın ( `SharedCookieApp` Aşağıdaki örneklerde). Daha fazla bilgi için bkz. <xref:security/data-protection/configuration/overview>.
 * <xref:Microsoft.Extensions.DependencyInjection.IdentityServiceCollectionExtensions.ConfigureApplicationCookie*>İçin veri koruma hizmetini ayarlamak üzere genişletme yöntemini kullanın cookie .
@@ -64,9 +65,9 @@ services.ConfigureApplicationCookie(options => {
 });
 ```
 
-## <a name="share-authentication-no-loccookies-without-aspnet-core-no-locidentity"></a>Kimlik doğrulaması cookie ASP.NET Core olmadan paylaşmaIdentity
+## <a name="share-authentication-no-loccookies-without-no-locaspnet-core-identity"></a>Kimlik doğrulama cookie 'leri paylaşma ASP.NET Core Identity
 
-cookieASP.NET Core olmadan doğrudan kullanırken Identity , ' de veri korumayı ve kimlik doğrulamasını yapılandırın `Startup.ConfigureServices` . Aşağıdaki örnekte, kimlik doğrulama türü olarak ayarlanır `Identity.Application` :
+İle cookie doğrudan kullanıldığında ASP.NET Core Identity , ' de veri korumayı ve kimlik doğrulamasını yapılandırın `Startup.ConfigureServices` . Aşağıdaki örnekte, kimlik doğrulama türü olarak ayarlanır `Identity.Application` :
 
 ```csharp
 services.AddDataProtection()

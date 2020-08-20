@@ -5,6 +5,7 @@ description: ''
 ms.author: riande
 ms.date: 12/07/2016
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/http-modules
-ms.openlocfilehash: 92672b2d05ee6bbdfcf0255ae14529a5c28c41b7
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 8be09171991964540cd41a1324fb87503591151f
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014990"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632180"
 ---
 # <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>ASP.NET Core ara yazılıma HTTP işleyicileri ve modülleri geçirme
 
@@ -169,7 +170,7 @@ Bir çözüm, genişletme yöntemi kullanılarak belirli bir uzantıya sahip ist
 
 [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_Configure&highlight=27-34)]
 
-`MapWhen`Şu parametreleri alır:
+`MapWhen` Şu parametreleri alır:
 
 1. `HttpContext`' İ alan ve `true` isteğin dala gitmesi gerekiyorsa, döndüren bir lambda. Bu, yalnızca uzantısına göre değil, istek üst bilgileri, sorgu dizesi parametreleri vb. için istekleri dallayabileceğiniz anlamına gelir.
 
@@ -193,7 +194,7 @@ Yeni [yapılandırma sistemi](xref:fundamentals/configuration/index) , bunu çö
 
 2. Seçenek değerlerini depolama
 
-   Yapılandırma sistemi istediğiniz her yerde seçenek değerlerini depolamanıza olanak tanır. Ancak, çoğu site *üzerindeappsettings.js*kullanır, bu nedenle bu yaklaşımı ele alacağız:
+   Yapılandırma sistemi istediğiniz her yerde seçenek değerlerini depolamanıza olanak tanır. Ancak, çoğu site * üzerindeappsettings.js*kullanır, bu nedenle bu yaklaşımı ele alacağız:
 
    [!code-json[](http-modules/sample/Asp.Net.Core/appsettings.json?range=1,14-18)]
 
@@ -257,7 +258,7 @@ Daha önce, `Invoke` Ara ortamınızdaki yöntemin türünde bir parametre alıp
 public async Task Invoke(HttpContext context)
 ```
 
-`HttpContext`ASP.NET Core içinde önemli ölçüde değişmiştir. Bu bölümde, en yaygın olarak kullanılan [System. Web. HttpContext](/dotnet/api/system.web.httpcontext) özelliklerinin yeni sürümüne nasıl çevrilebileceğini gösterir `Microsoft.AspNetCore.Http.HttpContext` .
+`HttpContext` ASP.NET Core içinde önemli ölçüde değişmiştir. Bu bölümde, en yaygın olarak kullanılan [System. Web. HttpContext](/dotnet/api/system.web.httpcontext) özelliklerinin yeni sürümüne nasıl çevrilebileceğini gösterir `Microsoft.AspNetCore.Http.HttpContext` .
 
 ### <a name="httpcontext"></a>HttpContext
 

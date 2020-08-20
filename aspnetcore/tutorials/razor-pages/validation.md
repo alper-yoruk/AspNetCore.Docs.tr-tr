@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: dad2e667cb6fa3ace7cb5e5dcb982511357ed49b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 86c523c69d3ee85f56bf1a51719a0bd93cbe97fc
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021529"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633558"
 ---
 # <a name="part-8-add-validation-to-an-aspnet-core-no-locrazor-page"></a>8. bölüm, ASP.NET Core sayfasına doğrulama ekleme Razor
 
@@ -31,7 +32,7 @@ Bu bölümde, doğrulama mantığı `Movie` modele eklenir. Doğrulama kurallar�
 
 ## <a name="validation"></a>Doğrulama
 
-Yazılım geliştirmeye yönelik temel bir temel [kuru](https://wikipedia.org/wiki/Don%27t_repeat_yourself) ("**D**on't **R**epeon **Y**ourself") olarak adlandırılır. RazorSayfalar, işlevlerin bir kez belirtildiği ve uygulama genelinde yansıtıldığı durumlarda geliştirmeyi teşvik eder. Kuru şu şekilde yardımcı olabilir:
+Yazılım geliştirmeye yönelik temel bir temel [kuru](https://wikipedia.org/wiki/Don%27t_repeat_yourself) ("**D**on't **R**epeon **Y**ourself") olarak adlandırılır. Razor Sayfalar, işlevlerin bir kez belirtildiği ve uygulama genelinde yansıtıldığı durumlarda geliştirmeyi teşvik eder. Kuru şu şekilde yardımcı olabilir:
 
 * Uygulamadaki kod miktarını azaltın.
 * Kodu daha az hata haline getirin ve test ve bakım yapmayı kolaylaştırın.
@@ -121,11 +122,11 @@ Sınıfını inceleyin `Movie` . `System.ComponentModel.DataAnnotations`Ad alan�
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie/Models/MovieDateRatingDA.cs?highlight=2,6&name=snippet2)]
 
-`DataType`Öznitelikler yalnızca görünüm altyapısının verileri biçimlendirmek için ipuçları sağlar (ve `<a>` URL 'ler ve e-posta için gibi öznitelikleri sağlar `<a href="mailto:EmailAddress.com">` ). `RegularExpression`Veri biçimini doğrulamak için özniteliğini kullanın. `DataType`Özniteliği, veritabanı iç türünden daha belirgin bir veri türü belirtmek için kullanılır. `DataType`Öznitelikler, doğrulama öznitelikleri değildir. Örnek uygulamada, yalnızca tarih ve saat olmadan görüntülenir.
+`DataType`Öznitelikler yalnızca görünüm altyapısının verileri biçimlendirmek için ipuçları sağlar (ve `<a>` URL 'ler ve e-posta için gibi öznitelikleri sağlar `<a href="mailto:EmailAddress.com">` ). `RegularExpression`Veri biçimini doğrulamak için özniteliğini kullanın. `DataType`Özniteliği, veritabanı iç türünden daha belirgin bir veri türü belirtmek için kullanılır. `DataType` Öznitelikler, doğrulama öznitelikleri değildir. Örnek uygulamada, yalnızca tarih ve saat olmadan görüntülenir.
 
 `DataType`Sabit listesi, tarih, saat, PhoneNumber, para birimi, Emaadresi gibi birçok veri türünü sağlar. `DataType`Özniteliği Ayrıca uygulamanın türe özgü özellikleri otomatik olarak sağlamasını da sağlayabilir. Örneğin, için bir `mailto:` bağlantı oluşturulabilir `DataType.EmailAddress` . HTML5 'i destekleyen tarayıcılarda için bir tarih seçici sağlanmış olabilir `DataType.Date` . Öznitelikler HTML 5 `DataType` `data-` TARAYıCıLARıNıN kullandığı HTML 5 (bir veri Dash) özniteliklerini yayar. `DataType`Öznitelikler herhangi bir **not** doğrulama sağlamaz.
 
-`DataType.Date`görüntülenen tarihin biçimini belirtmez. Varsayılan olarak, veri alanı sunucu ' a göre varsayılan biçimlere göre görüntülenir `CultureInfo` .
+`DataType.Date` görüntülenen tarihin biçimini belirtmez. Varsayılan olarak, veri alanı sunucu ' a göre varsayılan biçimlere göre görüntülenir `CultureInfo` .
 
 `[Column(TypeName = "decimal(18, 2)")]`Entity Framework Core veri ek açıklaması gerekir, bu nedenle `Price` veritabanında para birimiyle doğru şekilde eşleşebilirler. Daha fazla bilgi için bkz. [veri türleri](/ef/core/modeling/relational/data-types).
 

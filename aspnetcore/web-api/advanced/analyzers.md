@@ -7,6 +7,7 @@ ms.author: prkrishn
 ms.custom: mvc
 ms.date: 09/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/analyzers
-ms.openlocfilehash: 571046052dbe131e9cdcf981aaee0921ed8c2ea1
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 1bc76f3965009dbdd66c58b197f4c12bd44faf18
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021854"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633038"
 ---
 # <a name="use-web-api-analyzers"></a>Web API Çözümleyicileri kullanma
 
@@ -60,7 +61,7 @@ Aşağıdaki yaklaşımlardan biriyle [Microsoft. AspNetCore. Mvc. api. çözüm
 **Paket Yöneticisi konsol** penceresinde:
   * **View** > **Diğer Windows** > **Paket Yöneticisi konsolunu**görüntüle ' ye gidin.
   * *Apiconventions. csproj* dosyasının bulunduğu dizine gidin.
-  * Aşağıdaki komutu yürütün:
+  * Şu kodu yürütün:
 
     ```powershell
     Install-Package Microsoft.AspNetCore.Mvc.Api.Analyzers
@@ -95,7 +96,7 @@ dotnet add ApiConventions.csproj package Microsoft.AspNetCore.Mvc.Api.Analyzers
 
 ## <a name="analyzers-for-web-api-conventions"></a>Web API kuralları için çözümleyiciler
 
-Openapı belgeleri, bir eylemin döndürebildiği durum kodlarını ve yanıt türlerini içerir. ASP.NET Core MVC 'de, ve gibi öznitelikler <xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute> <xref:Microsoft.AspNetCore.Mvc.ProducesAttribute> bir eylemi belgelemek için kullanılır. <xref:tutorials/web-api-help-pages-using-swagger>Web API 'nizi belgeleme hakkında daha fazla ayrıntıya gider.
+Openapı belgeleri, bir eylemin döndürebildiği durum kodlarını ve yanıt türlerini içerir. ASP.NET Core MVC 'de, ve gibi öznitelikler <xref:Microsoft.AspNetCore.Mvc.ProducesResponseTypeAttribute> <xref:Microsoft.AspNetCore.Mvc.ProducesAttribute> bir eylemi belgelemek için kullanılır. <xref:tutorials/web-api-help-pages-using-swagger> Web API 'nizi belgeleme hakkında daha fazla ayrıntıya gider.
 
 Paketteki çözümleyicilerden biri ile açıklanmış denetimleri inceler <xref:Microsoft.AspNetCore.Mvc.ApiControllerAttribute> ve yanıtlarını tamamen belgemeyen eylemleri tanımlar. Aşağıdaki örneği inceleyin:
 

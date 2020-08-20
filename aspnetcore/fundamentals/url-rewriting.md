@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/16/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/url-rewriting
-ms.openlocfilehash: 9f7eb15271a0b7adb3964b4fe039497bda7fef08
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a1d31428945adade6748185c17d42ef60a61b5dc
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016550"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88631712"
 ---
 # <a name="url-rewriting-middleware-in-aspnet-core"></a>ASP.NET Core içinde URL yeniden yazma ara yazılımı
 
@@ -130,7 +131,7 @@ Bir URL *yeniden yönlendirildiğinde*sunucuya gidiş dönüş yapılır.
 > [!WARNING]
 > Yeniden yönlendirme kuralları oluştururken dikkatli olun. Yeniden yönlendirme kuralları, bir yeniden yönlendirmeden sonra dahil olmak üzere, uygulamaya yapılan her istekte değerlendirilir. Yanlışlıkla *sonsuz yeniden yönlendirmeler döngüsü*oluşturmak kolaydır.
 
-Özgün Istek:`/redirect-rule/1234/5678`
+Özgün Istek: `/redirect-rule/1234/5678`
 
 ![İstekleri ve yanıtları izleyen Geliştirici Araçları tarayıcı penceresi](url-rewriting/_static/add_redirect.png)
 
@@ -174,11 +175,11 @@ public void Configure(IApplicationBuilder app)
 
 Örnek uygulama, veya kullanımını gösterme yeteneğine sahiptir `AddRedirectToHttps` `AddRedirectToHttpsPermanent` . Uzantı yöntemini öğesine ekleyin `RewriteOptions` . Herhangi bir URL 'de uygulamaya güvenli olmayan bir istek oluşturun. Otomatik olarak imzalanan sertifikanın güvenilmeyen tarayıcı güvenlik uyarısını kapatın veya sertifikaya güvenmek için bir özel durum oluşturun.
 
-Kullanarak özgün Istek `AddRedirectToHttps(301, 5001)` :`http://localhost:5000/secure`
+Kullanarak özgün Istek `AddRedirectToHttps(301, 5001)` : `http://localhost:5000/secure`
 
 ![İstekleri ve yanıtları izleyen Geliştirici Araçları tarayıcı penceresi](url-rewriting/_static/add_redirect_to_https.png)
 
-Kullanarak özgün Istek `AddRedirectToHttpsPermanent` :`http://localhost:5000/secure`
+Kullanarak özgün Istek `AddRedirectToHttpsPermanent` : `http://localhost:5000/secure`
 
 ![İstekleri ve yanıtları izleyen Geliştirici Araçları tarayıcı penceresi](url-rewriting/_static/add_redirect_to_https_permanent.png)
 
@@ -188,7 +189,7 @@ Kullanarak özgün Istek `AddRedirectToHttpsPermanent` :`http://localhost:5000/s
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=10-11)]
 
-Özgün Istek:`/rewrite-rule/1234/5678`
+Özgün Istek: `/rewrite-rule/1234/5678`
 
 ![İsteği ve yanıtı izleyen Geliştirici Araçları tarayıcı penceresi](url-rewriting/_static/add_rewrite.png)
 
@@ -232,7 +233,7 @@ Kaynağı almak için sunucuya gidiş dönüş yok. Kaynak varsa, bu, alınır v
 
 [!code[](url-rewriting/samples/3.x/SampleApp/ApacheModRewrite.txt)]
 
-Özgün Istek:`/apache-mod-rules-redirect/1234`
+Özgün Istek: `/apache-mod-rules-redirect/1234`
 
 ![İstekleri ve yanıtları izleyen Geliştirici Araçları tarayıcı penceresi](url-rewriting/_static/add_apache_mod_redirect.png)
 
@@ -280,7 +281,7 @@ IIS URL yeniden yazma modülü için geçerli olan kural kümesini kullanmak iç
 
 [!code-xml[](url-rewriting/samples/3.x/SampleApp/IISUrlRewrite.xml)]
 
-Özgün Istek:`/iis-rules-rewrite/1234`
+Özgün Istek: `/iis-rules-rewrite/1234`
 
 ![İsteği ve yanıtı izleyen Geliştirici Araçları tarayıcı penceresi](url-rewriting/_static/add_iis_url_rewrite.png)
 
@@ -325,11 +326,11 @@ Ara yazılım aşağıdaki IIS URL yeniden yazma modülü sunucu değişkenlerin
 
 ### <a name="method-based-rule"></a>Yöntem tabanlı kural
 
-<xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*>Bir yöntemde kendi kural mantığınızı uygulamak için kullanın. `Add`, <xref:Microsoft.AspNetCore.Rewrite.RewriteContext> metodunda kullanım için kullanılabilir hale getiren öğesini gösterir <xref:Microsoft.AspNetCore.Http.HttpContext> . [Rewritecontext. Result](xref:Microsoft.AspNetCore.Rewrite.RewriteContext.Result*) , ek ardışık düzen işlemenin nasıl işlendiğini belirler. Değeri <xref:Microsoft.AspNetCore.Rewrite.RuleResult> Aşağıdaki tabloda açıklanan alanlardan birine ayarlayın.
+<xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*>Bir yöntemde kendi kural mantığınızı uygulamak için kullanın. `Add` , <xref:Microsoft.AspNetCore.Rewrite.RewriteContext> metodunda kullanım için kullanılabilir hale getiren öğesini gösterir <xref:Microsoft.AspNetCore.Http.HttpContext> . [Rewritecontext. Result](xref:Microsoft.AspNetCore.Rewrite.RewriteContext.Result*) , ek ardışık düzen işlemenin nasıl işlendiğini belirler. Değeri <xref:Microsoft.AspNetCore.Rewrite.RuleResult> Aşağıdaki tabloda açıklanan alanlardan birine ayarlayın.
 
 | Bağlam sonucunu yeniden yaz               | Eylem                                                           |
 | ------------------------------------ | ---------------------------------------------------------------- |
-| `RuleResult.ContinueRules`varsayılanını | Kuralları uygulamaya devam edin.                                         |
+| `RuleResult.ContinueRules` varsayılanını | Kuralları uygulamaya devam edin.                                         |
 | `RuleResult.EndResponse`             | Kuralları uygulamayı durdurun ve yanıtı gönderin.                       |
 | `RuleResult.SkipRemainingRules`      | Kuralları uygulamayı durdurun ve bağlamı bir sonraki ara yazılıma gönderin. |
 
@@ -351,7 +352,7 @@ Bu yaklaşım ayrıca istekleri yeniden yazabilir. Örnek uygulama, herhangi bir
 
 ### <a name="irule-based-rule"></a>Irule tabanlı kural
 
-<xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*>Arabirimini uygulayan bir sınıfta kural mantığını kullanmak için kullanın <xref:Microsoft.AspNetCore.Rewrite.IRule> . `IRule`Yöntem tabanlı kural yaklaşımını kullanarak daha fazla esneklik sağlar. Uygulama sınıfınız, yöntemi için parametreleri geçirebilmeniz için bir Oluşturucu içerebilir <xref:Microsoft.AspNetCore.Rewrite.IRule.ApplyRule*> .
+<xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*>Arabirimini uygulayan bir sınıfta kural mantığını kullanmak için kullanın <xref:Microsoft.AspNetCore.Rewrite.IRule> . `IRule` Yöntem tabanlı kural yaklaşımını kullanarak daha fazla esneklik sağlar. Uygulama sınıfınız, yöntemi için parametreleri geçirebilmeniz için bir Oluşturucu içerebilir <xref:Microsoft.AspNetCore.Rewrite.IRule.ApplyRule*> .
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=16-17)]
 
@@ -359,11 +360,11 @@ Ve için örnek uygulamadaki parametrelerin değerleri, `extension` `newPath` ç
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/RewriteRules.cs?name=snippet_RedirectImageRequests)]
 
-Özgün Istek:`/image.png`
+Özgün Istek: `/image.png`
 
 ![image.png için istekleri ve yanıtları izleyen Geliştirici Araçları tarayıcı penceresi](url-rewriting/_static/add_redirect_png_requests.png)
 
-Özgün Istek:`/image.jpg`
+Özgün Istek: `/image.jpg`
 
 ![image.jpg için istekleri ve yanıtları izleyen Geliştirici Araçları tarayıcı penceresi](url-rewriting/_static/add_redirect_jpg_requests.png)
 
@@ -374,7 +375,7 @@ Ve için örnek uygulamadaki parametrelerin değerleri, `extension` `newPath` ç
 | Yolu QueryString 'e yeniden yazın | `^path/(.*)/(.*)`<br>`/path/abc/123` | `path?var1=$1&var2=$2`<br>`/path?var1=abc&var2=123` |
 | Eğik çizgiyi çıkar | `(.*)/$`<br>`/path/` | `$1`<br>`/path` |
 | Sondaki eğik çizgiyi zorla | `(.*[^/])$`<br>`/path` | `$1/`<br>`/path/` |
-| Belirli istekleri yeniden yazmayı önleyin | `^(.*)(?<!\.axd)$` veya `^(?!.*\.axd$)(.*)$`<br>Yes`/resource.htm`<br>Eşleşen`/resource.axd` | `rewritten/$1`<br>`/rewritten/resource.htm`<br>`/resource.axd` |
+| Belirli istekleri yeniden yazmayı önleyin | `^(.*)(?<!\.axd)$` veya `^(?!.*\.axd$)(.*)$`<br>Yes `/resource.htm`<br>Eşleşen `/resource.axd` | `rewritten/$1`<br>`/rewritten/resource.htm`<br>`/resource.axd` |
 | URL segmentlerini yeniden Düzenle | `path/(.*)/(.*)/(.*)`<br>`path/1/2/3` | `path/$3/$2/$1`<br>`path/3/2/1` |
 | URL segmentini değiştirme | `^(.*)/segment2/(.*)`<br>`/segment1/segment2/segment3` | `$1/replaced/$2`<br>`/segment1/replaced/segment3` |
 
@@ -484,7 +485,7 @@ Bir URL *yeniden yönlendirildiğinde*sunucuya gidiş dönüş yapılır.
 > [!WARNING]
 > Yeniden yönlendirme kuralları oluştururken dikkatli olun. Yeniden yönlendirme kuralları, bir yeniden yönlendirmeden sonra dahil olmak üzere, uygulamaya yapılan her istekte değerlendirilir. Yanlışlıkla *sonsuz yeniden yönlendirmeler döngüsü*oluşturmak kolaydır.
 
-Özgün Istek:`/redirect-rule/1234/5678`
+Özgün Istek: `/redirect-rule/1234/5678`
 
 ![İstekleri ve yanıtları izleyen Geliştirici Araçları tarayıcı penceresi](url-rewriting/_static/add_redirect.png)
 
@@ -528,11 +529,11 @@ public void Configure(IApplicationBuilder app)
 
 Örnek uygulama, veya kullanımını gösterme yeteneğine sahiptir `AddRedirectToHttps` `AddRedirectToHttpsPermanent` . Uzantı yöntemini öğesine ekleyin `RewriteOptions` . Herhangi bir URL 'de uygulamaya güvenli olmayan bir istek oluşturun. Otomatik olarak imzalanan sertifikanın güvenilmeyen tarayıcı güvenlik uyarısını kapatın veya sertifikaya güvenmek için bir özel durum oluşturun.
 
-Kullanarak özgün Istek `AddRedirectToHttps(301, 5001)` :`http://localhost:5000/secure`
+Kullanarak özgün Istek `AddRedirectToHttps(301, 5001)` : `http://localhost:5000/secure`
 
 ![İstekleri ve yanıtları izleyen Geliştirici Araçları tarayıcı penceresi](url-rewriting/_static/add_redirect_to_https.png)
 
-Kullanarak özgün Istek `AddRedirectToHttpsPermanent` :`http://localhost:5000/secure`
+Kullanarak özgün Istek `AddRedirectToHttpsPermanent` : `http://localhost:5000/secure`
 
 ![İstekleri ve yanıtları izleyen Geliştirici Araçları tarayıcı penceresi](url-rewriting/_static/add_redirect_to_https_permanent.png)
 
@@ -542,7 +543,7 @@ Kullanarak özgün Istek `AddRedirectToHttpsPermanent` :`http://localhost:5000/s
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=10-11)]
 
-Özgün Istek:`/rewrite-rule/1234/5678`
+Özgün Istek: `/rewrite-rule/1234/5678`
 
 ![İsteği ve yanıtı izleyen Geliştirici Araçları tarayıcı penceresi](url-rewriting/_static/add_rewrite.png)
 
@@ -586,7 +587,7 @@ Kaynağı almak için sunucuya gidiş dönüş yok. Kaynak varsa, bu, alınır v
 
 [!code[](url-rewriting/samples/2.x/SampleApp/ApacheModRewrite.txt)]
 
-Özgün Istek:`/apache-mod-rules-redirect/1234`
+Özgün Istek: `/apache-mod-rules-redirect/1234`
 
 ![İstekleri ve yanıtları izleyen Geliştirici Araçları tarayıcı penceresi](url-rewriting/_static/add_apache_mod_redirect.png)
 
@@ -634,7 +635,7 @@ IIS URL yeniden yazma modülü için geçerli olan kural kümesini kullanmak iç
 
 [!code-xml[](url-rewriting/samples/2.x/SampleApp/IISUrlRewrite.xml)]
 
-Özgün Istek:`/iis-rules-rewrite/1234`
+Özgün Istek: `/iis-rules-rewrite/1234`
 
 ![İsteği ve yanıtı izleyen Geliştirici Araçları tarayıcı penceresi](url-rewriting/_static/add_iis_url_rewrite.png)
 
@@ -679,11 +680,11 @@ Ara yazılım aşağıdaki IIS URL yeniden yazma modülü sunucu değişkenlerin
 
 ### <a name="method-based-rule"></a>Yöntem tabanlı kural
 
-<xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*>Bir yöntemde kendi kural mantığınızı uygulamak için kullanın. `Add`, <xref:Microsoft.AspNetCore.Rewrite.RewriteContext> metodunda kullanım için kullanılabilir hale getiren öğesini gösterir <xref:Microsoft.AspNetCore.Http.HttpContext> . [Rewritecontext. Result](xref:Microsoft.AspNetCore.Rewrite.RewriteContext.Result*) , ek ardışık düzen işlemenin nasıl işlendiğini belirler. Değeri <xref:Microsoft.AspNetCore.Rewrite.RuleResult> Aşağıdaki tabloda açıklanan alanlardan birine ayarlayın.
+<xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*>Bir yöntemde kendi kural mantığınızı uygulamak için kullanın. `Add` , <xref:Microsoft.AspNetCore.Rewrite.RewriteContext> metodunda kullanım için kullanılabilir hale getiren öğesini gösterir <xref:Microsoft.AspNetCore.Http.HttpContext> . [Rewritecontext. Result](xref:Microsoft.AspNetCore.Rewrite.RewriteContext.Result*) , ek ardışık düzen işlemenin nasıl işlendiğini belirler. Değeri <xref:Microsoft.AspNetCore.Rewrite.RuleResult> Aşağıdaki tabloda açıklanan alanlardan birine ayarlayın.
 
 | Bağlam sonucunu yeniden yaz               | Eylem                                                           |
 | ------------------------------------ | ---------------------------------------------------------------- |
-| `RuleResult.ContinueRules`varsayılanını | Kuralları uygulamaya devam edin.                                         |
+| `RuleResult.ContinueRules` varsayılanını | Kuralları uygulamaya devam edin.                                         |
 | `RuleResult.EndResponse`             | Kuralları uygulamayı durdurun ve yanıtı gönderin.                       |
 | `RuleResult.SkipRemainingRules`      | Kuralları uygulamayı durdurun ve bağlamı bir sonraki ara yazılıma gönderin. |
 
@@ -705,7 +706,7 @@ Bu yaklaşım ayrıca istekleri yeniden yazabilir. Örnek uygulama, herhangi bir
 
 ### <a name="irule-based-rule"></a>Irule tabanlı kural
 
-<xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*>Arabirimini uygulayan bir sınıfta kural mantığını kullanmak için kullanın <xref:Microsoft.AspNetCore.Rewrite.IRule> . `IRule`Yöntem tabanlı kural yaklaşımını kullanarak daha fazla esneklik sağlar. Uygulama sınıfınız, yöntemi için parametreleri geçirebilmeniz için bir Oluşturucu içerebilir <xref:Microsoft.AspNetCore.Rewrite.IRule.ApplyRule*> .
+<xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.Add*>Arabirimini uygulayan bir sınıfta kural mantığını kullanmak için kullanın <xref:Microsoft.AspNetCore.Rewrite.IRule> . `IRule` Yöntem tabanlı kural yaklaşımını kullanarak daha fazla esneklik sağlar. Uygulama sınıfınız, yöntemi için parametreleri geçirebilmeniz için bir Oluşturucu içerebilir <xref:Microsoft.AspNetCore.Rewrite.IRule.ApplyRule*> .
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=16-17)]
 
@@ -713,11 +714,11 @@ Ve için örnek uygulamadaki parametrelerin değerleri, `extension` `newPath` ç
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/RewriteRules.cs?name=snippet_RedirectImageRequests)]
 
-Özgün Istek:`/image.png`
+Özgün Istek: `/image.png`
 
 ![image.png için istekleri ve yanıtları izleyen Geliştirici Araçları tarayıcı penceresi](url-rewriting/_static/add_redirect_png_requests.png)
 
-Özgün Istek:`/image.jpg`
+Özgün Istek: `/image.jpg`
 
 ![image.jpg için istekleri ve yanıtları izleyen Geliştirici Araçları tarayıcı penceresi](url-rewriting/_static/add_redirect_jpg_requests.png)
 
@@ -728,7 +729,7 @@ Ve için örnek uygulamadaki parametrelerin değerleri, `extension` `newPath` ç
 | Yolu QueryString 'e yeniden yazın | `^path/(.*)/(.*)`<br>`/path/abc/123` | `path?var1=$1&var2=$2`<br>`/path?var1=abc&var2=123` |
 | Eğik çizgiyi çıkar | `(.*)/$`<br>`/path/` | `$1`<br>`/path` |
 | Sondaki eğik çizgiyi zorla | `(.*[^/])$`<br>`/path` | `$1/`<br>`/path/` |
-| Belirli istekleri yeniden yazmayı önleyin | `^(.*)(?<!\.axd)$` veya `^(?!.*\.axd$)(.*)$`<br>Yes`/resource.htm`<br>Eşleşen`/resource.axd` | `rewritten/$1`<br>`/rewritten/resource.htm`<br>`/resource.axd` |
+| Belirli istekleri yeniden yazmayı önleyin | `^(.*)(?<!\.axd)$` veya `^(?!.*\.axd$)(.*)$`<br>Yes `/resource.htm`<br>Eşleşen `/resource.axd` | `rewritten/$1`<br>`/rewritten/resource.htm`<br>`/resource.axd` |
 | URL segmentlerini yeniden Düzenle | `path/(.*)/(.*)/(.*)`<br>`path/1/2/3` | `path/$3/$2/$1`<br>`path/3/2/1` |
 | URL segmentini değiştirme | `^(.*)/segment2/(.*)`<br>`/segment1/segment2/segment3` | `$1/replaced/$2`<br>`/segment1/replaced/segment3` |
 

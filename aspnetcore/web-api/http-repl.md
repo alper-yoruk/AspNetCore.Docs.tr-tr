@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 05/20/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: 0fb19aa19703e68812b83f0631f029dd66a3d64e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e6263f19cdb7f9957fa8360f9e782e622589ea18
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021334"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633324"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>HTTP REPL ile Web API 'Lerini test etme
 
@@ -37,16 +38,16 @@ HTTP okuma-değerlendirme-yazdırma döngüsü (REPL):
 Aşağıdaki [http fiilleri](https://github.com/microsoft/api-guidelines/blob/vNext/Guidelines.md#74-supported-methods) desteklenir:
 
 * [SILMELI](#test-http-delete-requests)
-* [GET](#test-http-get-requests)
+* [Al](#test-http-get-requests)
 * [HEAD](#test-http-head-requests)
 * [Seçenekler](#test-http-options-requests)
 * [DÜZELTMESI](#test-http-patch-requests)
-* [POST](#test-http-post-requests)
+* [Yayınla](#test-http-post-requests)
 * [PUT](#test-http-put-requests)
 
 Takip etmek için, [örnek ASP.NET Core Web API](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/web-api/http-repl/samples) 'sini ([indirme](xref:index#how-to-download-a-sample)) görüntüleyin veya indirin.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [!INCLUDE [2.1-SDK](~/includes/2.1-SDK.md)]
 
@@ -144,7 +145,7 @@ Aşağıdaki komutu çalıştırarak bir Web API 'sine bağlanın:
 httprepl <ROOT URI>
 ```
 
-`<ROOT URI>`, Web API 'sinin temel URI 'sidir. Örnek:
+`<ROOT URI>` , Web API 'sinin temel URI 'sidir. Örnek:
 
 ```console
 httprepl https://localhost:5001
@@ -375,7 +376,7 @@ pref set editor.command.default.arguments "--disable-extensions --new-window"
 
 Varsayılan olarak, HTTP REPL, komutu seçeneği olmadan yürütürken Swagger belgesini bulmak için kullandığı bir göreli yollar kümesine sahiptir `connect` `--swagger` . Bu göreli yollar, komutta belirtilen kök ve taban yollarla birleştirilir `connect` . Varsayılan göreli yollar şunlardır:
 
-- *Üzerindeswagger.js*
+- * Üzerindeswagger.js*
 - *Swagger/v1/swagger.jsaçık*
 - */swagger.js*
 - */Swagger/v1/swagger.js*

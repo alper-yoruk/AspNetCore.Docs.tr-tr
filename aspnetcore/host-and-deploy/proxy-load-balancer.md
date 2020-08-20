@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/proxy-load-balancer
-ms.openlocfilehash: 75bb92908525d18af57f408e8ebba53c6eec88b2
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 737575667be0e6b776a4d9ec9fb75bc0d11309dc
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015523"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634182"
 ---
 # <a name="configure-aspnet-core-to-work-with-proxy-servers-and-load-balancers"></a>Proxy sunucularıyla ve yük dengeleyicilerle çalışacak ASP.NET Core yapılandırma
 
@@ -94,11 +95,11 @@ Alternatif olarak, `UseForwardedHeaders` Tanılama öncesinde çağırın:
 
 ## <a name="apache-configuration"></a>Apache yapılandırması
 
-`X-Forwarded-For`otomatik olarak eklenir (bkz. [Apache modülü mod_proxy: ters proxy Istek üstbilgileri](https://httpd.apache.org/docs/2.4/mod/mod_proxy.html#x-headers)). Üstbilgiyi iletme hakkında daha fazla bilgi için `X-Forwarded-Proto` bkz <xref:host-and-deploy/linux-apache#configure-apache> ..
+`X-Forwarded-For` otomatik olarak eklenir (bkz. [Apache modülü mod_proxy: ters proxy Istek üstbilgileri](https://httpd.apache.org/docs/2.4/mod/mod_proxy.html#x-headers)). Üstbilgiyi iletme hakkında daha fazla bilgi için `X-Forwarded-Proto` bkz <xref:host-and-deploy/linux-apache#configure-apache> ..
 
 ## <a name="forwarded-headers-middleware-options"></a>İletilen üstbilgiler ara yazılım seçenekleri
 
-<xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions>Iletilen üstbilgiler ara yazılımı davranışını denetleyin. Aşağıdaki örnek varsayılan değerleri değiştirir:
+<xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions> Iletilen üstbilgiler ara yazılımı davranışını denetleyin. Aşağıdaki örnek varsayılan değerleri değiştirir:
 
 * İletilen üst bilgilerdeki giriş sayısını sınırlayın `2` .
 * Bilinen bir proxy adresi ekleyin `127.0.10.1` .
@@ -198,9 +199,9 @@ Sunucu çift modlu yuvalar kullanıyorsa, IPv4 adresleri IPv6 biçiminde sağlan
 
 Aşağıdaki örnekte, iletilen üstbilgiler sağlayan bir ağ adresi `KnownNetworks` listeye IPv6 biçiminde eklenir.
 
-IPv4 adresi:`10.11.12.1/8`
+IPv4 adresi: `10.11.12.1/8`
 
-Dönüştürülen IPv6 adresi:`::ffff:10.11.12.1`  
+Dönüştürülen IPv6 adresi: `::ffff:10.11.12.1`  
 Dönüştürülen önek uzunluğu: 104
 
 Adresi onaltılık biçimde ( `10.11.12.1` IPv6 olarak temsil edilir) de sağlayabilirsiniz `::ffff:0a0b:0c01` . Bir IPv4 adresini IPv6 'ya dönüştürürken, `8` ek `::ffff:` IPv6 öneki (8 + 96 = 104) için (ÖRNEKTEKI) CIDR önek uzunluğuna 96 ekleyin. 
@@ -220,7 +221,7 @@ services.Configure<ForwardedHeadersOptions>(options =>
 
 ## <a name="forward-the-scheme-for-linux-and-non-iis-reverse-proxies"></a>Linux ve IIS olmayan ters proxy 'ler için Düzen iletme
 
-<xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection*> <xref:Microsoft.AspNetCore.Builder.HstsBuilderExtensions.UseHsts*> Bir azure Linux App Service, Azure Linux sanal MAKINESI (VM) veya IIS 'nin yanı sıra diğer tüm ters proxy 'ler için dağıtıldığında bir siteyi çağıran ve sonsuz döngüye alan uygulamalar. TLS, ters proxy tarafından sonlandırılır ve Kestrel doğru istek düzeninden haberdar değildir. OAuth ve OıDC yanlış yeniden yönlendirmeler oluşturduğundan bu yapılandırmada de başarısız olur. <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*>IIS 'nin arkasında çalışırken Iletilen üstbilgiler ara yazılımı ekler ve yapılandırır, ancak Linux için eşleşen otomatik yapılandırma (Apache veya NGINX tümleştirmesi) yoktur.
+<xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection*> <xref:Microsoft.AspNetCore.Builder.HstsBuilderExtensions.UseHsts*> Bir azure Linux App Service, Azure Linux sanal MAKINESI (VM) veya IIS 'nin yanı sıra diğer tüm ters proxy 'ler için dağıtıldığında bir siteyi çağıran ve sonsuz döngüye alan uygulamalar. TLS, ters proxy tarafından sonlandırılır ve Kestrel doğru istek düzeninden haberdar değildir. OAuth ve OıDC yanlış yeniden yönlendirmeler oluşturduğundan bu yapılandırmada de başarısız olur. <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*> IIS 'nin arkasında çalışırken Iletilen üstbilgiler ara yazılımı ekler ve yapılandırır, ancak Linux için eşleşen otomatik yapılandırma (Apache veya NGINX tümleştirmesi) yoktur.
 
 IIS olmayan senaryolarda düzeni proxy 'den iletmek için, Iletilen üstbilgiler ara yazılımını ekleyin ve yapılandırın. İçinde `Startup.ConfigureServices` , aşağıdaki kodu kullanın:
 
@@ -472,11 +473,11 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
 ## <a name="apache-configuration"></a>Apache yapılandırması
 
-`X-Forwarded-For`otomatik olarak eklenir (bkz. [Apache modülü mod_proxy: ters proxy Istek üstbilgileri](https://httpd.apache.org/docs/2.4/mod/mod_proxy.html#x-headers)). Üstbilgiyi iletme hakkında daha fazla bilgi için `X-Forwarded-Proto` bkz <xref:host-and-deploy/linux-apache#configure-apache> ..
+`X-Forwarded-For` otomatik olarak eklenir (bkz. [Apache modülü mod_proxy: ters proxy Istek üstbilgileri](https://httpd.apache.org/docs/2.4/mod/mod_proxy.html#x-headers)). Üstbilgiyi iletme hakkında daha fazla bilgi için `X-Forwarded-Proto` bkz <xref:host-and-deploy/linux-apache#configure-apache> ..
 
 ## <a name="forwarded-headers-middleware-options"></a>İletilen üstbilgiler ara yazılım seçenekleri
 
-<xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions>Iletilen üstbilgiler ara yazılımı davranışını denetleyin. Aşağıdaki örnek varsayılan değerleri değiştirir:
+<xref:Microsoft.AspNetCore.Builder.ForwardedHeadersOptions> Iletilen üstbilgiler ara yazılımı davranışını denetleyin. Aşağıdaki örnek varsayılan değerleri değiştirir:
 
 * İletilen üst bilgilerdeki giriş sayısını sınırlayın `2` .
 * Bilinen bir proxy adresi ekleyin `127.0.10.1` .
@@ -576,9 +577,9 @@ Sunucu çift modlu yuvalar kullanıyorsa, IPv4 adresleri IPv6 biçiminde sağlan
 
 Aşağıdaki örnekte, iletilen üstbilgiler sağlayan bir ağ adresi `KnownNetworks` listeye IPv6 biçiminde eklenir.
 
-IPv4 adresi:`10.11.12.1/8`
+IPv4 adresi: `10.11.12.1/8`
 
-Dönüştürülen IPv6 adresi:`::ffff:10.11.12.1`  
+Dönüştürülen IPv6 adresi: `::ffff:10.11.12.1`  
 Dönüştürülen önek uzunluğu: 104
 
 Adresi onaltılık biçimde ( `10.11.12.1` IPv6 olarak temsil edilir) de sağlayabilirsiniz `::ffff:0a0b:0c01` . Bir IPv4 adresini IPv6 'ya dönüştürürken, `8` ek `::ffff:` IPv6 öneki (8 + 96 = 104) için (ÖRNEKTEKI) CIDR önek uzunluğuna 96 ekleyin. 
@@ -598,7 +599,7 @@ services.Configure<ForwardedHeadersOptions>(options =>
 
 ## <a name="forward-the-scheme-for-linux-and-non-iis-reverse-proxies"></a>Linux ve IIS olmayan ters proxy 'ler için Düzen iletme
 
-<xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection*> <xref:Microsoft.AspNetCore.Builder.HstsBuilderExtensions.UseHsts*> Bir azure Linux App Service, Azure Linux sanal MAKINESI (VM) veya IIS 'nin yanı sıra diğer tüm ters proxy 'ler için dağıtıldığında bir siteyi çağıran ve sonsuz döngüye alan uygulamalar. TLS, ters proxy tarafından sonlandırılır ve Kestrel doğru istek düzeninden haberdar değildir. OAuth ve OıDC yanlış yeniden yönlendirmeler oluşturduğundan bu yapılandırmada de başarısız olur. <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*>IIS 'nin arkasında çalışırken Iletilen üstbilgiler ara yazılımı ekler ve yapılandırır, ancak Linux için eşleşen otomatik yapılandırma (Apache veya NGINX tümleştirmesi) yoktur.
+<xref:Microsoft.AspNetCore.Builder.HttpsPolicyBuilderExtensions.UseHttpsRedirection*> <xref:Microsoft.AspNetCore.Builder.HstsBuilderExtensions.UseHsts*> Bir azure Linux App Service, Azure Linux sanal MAKINESI (VM) veya IIS 'nin yanı sıra diğer tüm ters proxy 'ler için dağıtıldığında bir siteyi çağıran ve sonsuz döngüye alan uygulamalar. TLS, ters proxy tarafından sonlandırılır ve Kestrel doğru istek düzeninden haberdar değildir. OAuth ve OıDC yanlış yeniden yönlendirmeler oluşturduğundan bu yapılandırmada de başarısız olur. <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*> IIS 'nin arkasında çalışırken Iletilen üstbilgiler ara yazılımı ekler ve yapılandırır, ancak Linux için eşleşen otomatik yapılandırma (Apache veya NGINX tümleştirmesi) yoktur.
 
 IIS olmayan senaryolarda düzeni proxy 'den iletmek için, Iletilen üstbilgiler ara yazılımını ekleyin ve yapılandırın. İçinde `Startup.ConfigureServices` , aşağıdaki kodu kullanın:
 

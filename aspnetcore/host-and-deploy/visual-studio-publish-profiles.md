@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/28/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/visual-studio-publish-profiles
-ms.openlocfilehash: 1c4b1def75a76b8392427fd6916a7b5927737cac
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a7bbc3f3a0a0d5a320bd290d325f0c01390828b4
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015458"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634169"
 ---
 # <a name="visual-studio-publish-profiles-pubxml-for-aspnet-core-app-deployment"></a>ASP.NET Core uygulama dağıtımı için Visual Studio yayımlama profilleri (. pubxml)
 
@@ -198,7 +199,7 @@ dotnet build WebApplication.csproj /p:DeployOnBuild=true /p:PublishProfile=<MsDe
 
 Yukarıdaki örneklerde:
 
-* `dotnet publish`ve `dotnet build` Azure 'da herhangi bir platformda yayımlanacak kudu API 'lerini destekler. Visual Studio yayımlama, kudu API 'Lerini destekler, ancak Azure 'da platformlar arası yayımlama için WebSDK tarafından desteklenir.
+* `dotnet publish` ve `dotnet build` Azure 'da herhangi bir platformda yayımlanacak kudu API 'lerini destekler. Visual Studio yayımlama, kudu API 'Lerini destekler, ancak Azure 'da platformlar arası yayımlama için WebSDK tarafından desteklenir.
 * Komuta geçme `DeployOnBuild` `dotnet publish` .
 
 Daha fazla bilgi için bkz. [Microsoft. net. SDK. Publish](https://github.com/dotnet/websdk#microsoftnetsdkpublish).
@@ -266,7 +267,7 @@ MSBuild file.
 Yukarıdaki örnekte:
 
 * `<ExcludeApp_Data>`Özelliği yalnızca BIR XML şeması gereksinimini karşılamak için vardır. `<ExcludeApp_Data>`Proje kökünde bir *App_Data* klasörü olsa bile, özelliğin yayımlama işlemi üzerinde hiçbir etkisi yoktur. *App_Data* klasörü, ASP.NET 4. x projelerinde olduğu gibi özel bir işleme almaz.
-* `<LastUsedBuildConfiguration>` özelliği `Release` olarak ayarlanmıştır. Visual Studio 'dan yayımlarken değeri, `<LastUsedBuildConfiguration>` Yayımlama işlemi başlatıldığında değeri kullanılarak ayarlanır. `<LastUsedBuildConfiguration>`özeldir ve içeri aktarılan MSBuild dosyasında geçersiz kılınmamalıdır. Ancak, bu özellik aşağıdaki yaklaşımlardan birini kullanarak komut satırından geçersiz kılınabilir.
+* `<LastUsedBuildConfiguration>` özelliği `Release` olarak ayarlanmıştır. Visual Studio 'dan yayımlarken değeri, `<LastUsedBuildConfiguration>` Yayımlama işlemi başlatıldığında değeri kullanılarak ayarlanır. `<LastUsedBuildConfiguration>` özeldir ve içeri aktarılan MSBuild dosyasında geçersiz kılınmamalıdır. Ancak, bu özellik aşağıdaki yaklaşımlardan birini kullanarak komut satırından geçersiz kılınabilir.
   * .NET Core CLI kullanarak:
 
     ```dotnetcli
@@ -349,8 +350,8 @@ ASP.NET Core Web Apps yayımlandığında, aşağıdaki varlıklar dahil edilmi�
 
 * Yapı yapıtları
 * Aşağıdaki glob desenleriyle eşleşen klasörler ve dosyalar:
-  * `**\*.config`(örneğin, *web.config*)
-  * `**\*.json`(örneğin, *appsettings.js*)
+  * `**\*.config` (örneğin, *web.config*)
+  * `**\*.json` (örneğin, *appsettings.js*)
   * `wwwroot\**`
 
 MSBuild, [Glob desenlerini](https://gruntjs.com/configuring-tasks#globbing-patterns)destekler. Örneğin, aşağıdaki öğe, `<Content>` metin (*. txt*) dosyalarının *wwwroot\content* klasörü ve alt klasörlerinde kopyalanmasını bastırır:
@@ -374,7 +375,7 @@ Aşağıdaki `<MsDeploySkipRules>` öğe, tüm dosyaları *wwwroot\content* klas
 </ItemGroup>
 ```
 
-`<MsDeploySkipRules>`dağıtım sitesinden *atlama* hedeflerini silmez. `<Content>`hedeflenen dosya ve klasörler dağıtım sitesinden silinir. Örneğin, dağıtılan bir Web uygulamasının aşağıdaki dosyalar olduğunu varsayalım:
+`<MsDeploySkipRules>` dağıtım sitesinden *atlama* hedeflerini silmez. `<Content>` hedeflenen dosya ve klasörler dağıtım sitesinden silinir. Örneğin, dağıtılan bir Web uygulamasının aşağıdaki dosyalar olduğunu varsayalım:
 
 * *Görünümler/Home/about1. cshtml*
 * *Görünümler/Home/About2. cshtml*

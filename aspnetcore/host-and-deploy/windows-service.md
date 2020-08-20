@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/windows-service
-ms.openlocfilehash: 7740774cad33418489fc1d94240574167f84fae6
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 11362f677da3e55df4267cf3d6ca8097c24c218f
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015367"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88633948"
 ---
 # <a name="host-aspnet-core-in-a-windows-service"></a>Windows hizmetinde konak ASP.NET Core
 
@@ -32,7 +33,7 @@ Bir ASP.NET Core uygulaması, IIS kullanmadan Windows [hizmeti](/dotnet/framewor
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [ASP.NET Core SDK 2,1 veya üzeri](https://dotnet.microsoft.com/download)
 * [PowerShell 6,2 veya üzeri](https://github.com/PowerShell/PowerShell)
@@ -50,7 +51,7 @@ ASP.NET Core Worker hizmeti şablonu, uzun süre çalışan hizmet uygulamaları
 
 Uygulama, [Microsoft. Extensions. Hosting. WindowsServices](https://www.nuget.org/packages/Microsoft.Extensions.Hosting.WindowsServices)için bir paket başvurusu gerektirir.
 
-`IHostBuilder.UseWindowsService`Ana bilgisayar oluşturulurken çağrılır. Uygulama bir Windows hizmeti olarak çalışıyorsa, yöntemi:
+`IHostBuilder.UseWindowsService` Ana bilgisayar oluşturulurken çağrılır. Uygulama bir Windows hizmeti olarak çalışıyorsa, yöntemi:
 
 * Ana bilgisayar ömrünü olarak ayarlar `WindowsServiceLifetime` .
 * [İçerik kökünü](xref:fundamentals/index#content-root) [AppContext. BaseDirectory](xref:System.AppContext.BaseDirectory)olarak ayarlar. Daha fazla bilgi için [geçerli dizin ve içerik kökü](#current-directory-and-content-root) bölümüne bakın.
@@ -355,7 +356,7 @@ Bir ASP.NET Core uygulaması, IIS kullanmadan Windows [hizmeti](/dotnet/framewor
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [ASP.NET Core SDK 2,1 veya üzeri](https://dotnet.microsoft.com/download)
 * [PowerShell 6,2 veya üzeri](https://github.com/PowerShell/PowerShell)
@@ -689,7 +690,7 @@ Bir ASP.NET Core uygulaması, IIS kullanmadan Windows [hizmeti](/dotnet/framewor
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/windows-service/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [ASP.NET Core SDK 2,1 veya üzeri](https://dotnet.microsoft.com/download)
 * [PowerShell 6,2 veya üzeri](https://github.com/PowerShell/PowerShell)

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/03/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/samesite/mvc21
-ms.openlocfilehash: 4285432d48ba11b5069d109c5667192a99fe115e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 0a719ae48199f7854ded534446045eb304d4d9f0
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021789"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88632362"
 ---
 # <a name="aspnet-core-21-mvc-samesite-no-loccookie-sample"></a>ASP.NET Core 2,1 MVC SameSite cookie örneği
 
@@ -56,7 +57,7 @@ Response.Cookies.Append(CookieName, "cookieValue", cookieOptions);
 
 ## <a name="setting-no-loccookie-authentication-and-session-state-no-loccookies"></a>CookieKimlik doğrulaması ve oturum durumu cookie s ayarlanıyor
 
-Cookiekimlik doğrulama, oturum durumu ve [diğer diğer bileşenler](https://docs.microsoft.com/aspnet/core/security/samesite?view=aspnetcore-2.1) aynı site seçeneklerini seçenekler aracılığıyla ayarlar Cookie , örneğin
+Cookie kimlik doğrulama, oturum durumu ve [diğer diğer bileşenler](https://docs.microsoft.com/aspnet/core/security/samesite?view=aspnetcore-2.1) aynı site seçeneklerini seçenekler aracılığıyla ayarlar Cookie , örneğin
 
 ```c#
 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

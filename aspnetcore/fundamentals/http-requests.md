@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 02/09/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/http-requests
-ms.openlocfilehash: ef6ed0911c2615ea543b1c2cea31a9a453f0c604
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: ca52b6cf8646bced3a228341717f8ccb1edff582
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017239"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634208"
 ---
 # <a name="make-http-requests-using-ihttpclientfactory-in-aspnet-core"></a>ASP.NET Core 'de ıhttpclientfactory kullanarak HTTP istekleri yapın
 
@@ -30,9 +31,9 @@ ms.locfileid: "88017239"
 
 [Glenn CONDRON](https://github.com/glennc), [Ryan şimdi ak](https://github.com/rynowak), [Steve Gordon](https://github.com/stevejgordon), [Rick Anderson](https://twitter.com/RickAndMSFT)ve [Kirk larkabağı](https://github.com/serpent5)
 
-Bir <xref:System.Net.Http.IHttpClientFactory> uygulamadaki örnekleri yapılandırmak ve oluşturmak için kayıt yapılabilir ve kullanılabilir <xref:System.Net.Http.HttpClient> . `IHttpClientFactory`aşağıdaki avantajları sunar:
+Bir <xref:System.Net.Http.IHttpClientFactory> uygulamadaki örnekleri yapılandırmak ve oluşturmak için kayıt yapılabilir ve kullanılabilir <xref:System.Net.Http.HttpClient> . `IHttpClientFactory` aşağıdaki avantajları sunar:
 
-* , Mantıksal örnekleri adlandırmak ve yapılandırmak için merkezi bir konum sağlar `HttpClient` . Örneğin, *GitHub* adlı bir Istemci, [GitHub](https://github.com/)'a erişmek için kaydedilebilir ve yapılandırılabilir. Varsayılan istemci, genel erişim için kaydedilebilir.
+* , Mantıksal örnekleri adlandırmak ve yapılandırmak için merkezi bir konum sağlar `HttpClient` . Örneğin,  *GitHub* adlı bir Istemci, [GitHub](https://github.com/)'a erişmek için kaydedilebilir ve yapılandırılabilir. Varsayılan istemci, genel erişim için kaydedilebilir.
 * ' De işleyiciler temsilci seçme yoluyla giden ara yazılım kavramını daha da artırır `HttpClient` . ' De işleyiciler temsilci atama avantajlarından faydalanmak için, Polya tabanlı bir ara yazılım için uzantılar sağlar `HttpClient` .
 * Temel örneklerin biriktirmesini ve ömrünü yönetir `HttpClientMessageHandler` . Otomatik yönetim, yaşam sürelerini el ile yönetirken oluşan ortak DNS (etki alanı adı sistemi) sorunlarını önler `HttpClient` .
 * `ILogger`Fabrika tarafından oluşturulan istemciler aracılığıyla gönderilen tüm istekler için yapılandırılabilir bir günlüğe kaydetme deneyimi ekler (aracılığıyla).
@@ -54,7 +55,7 @@ En iyi yaklaşım, uygulamanın gereksinimlerine bağlı olarak değişir.
 
 ### <a name="basic-usage"></a>Temel kullanım
 
-`IHttpClientFactory`, çağırarak kaydedilebilir `AddHttpClient` :
+`IHttpClientFactory` , çağırarak kaydedilebilir `AddHttpClient` :
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup.cs?name=snippet1)]
 
@@ -141,7 +142,7 @@ Yukarıdaki kodda, `HttpClient` bir özel alanda depolanır. Öğesine erişimi,
 
 ### <a name="generated-clients"></a>Oluşturulan istemciler
 
-`IHttpClientFactory`, [yeniden sığdırma](https://github.com/paulcbetts/refit)gibi üçüncü taraf kitaplıklarla birlikte kullanılabilir. Yeniden sığdırma, .NET için bir REST kitaplığıdır. REST API 'Leri canlı arabirimlere dönüştürür. Arabirim bir uygulama, `RestService` `HttpClient` dış http çağrıları yapmak için kullanılarak tarafından dinamik olarak oluşturulur.
+`IHttpClientFactory` , [yeniden sığdırma](https://github.com/paulcbetts/refit)gibi üçüncü taraf kitaplıklarla birlikte kullanılabilir. Yeniden sığdırma, .NET için bir REST kitaplığıdır. REST API 'Leri canlı arabirimlere dönüştürür. Arabirim bir uygulama, `RestService` `HttpClient` dış http çağrıları yapmak için kullanılarak tarafından dinamik olarak oluşturulur.
 
 Bir arabirim ve yanıt, dış API 'yi ve yanıtını temsil edecek şekilde tanımlanır:
 
@@ -196,7 +197,7 @@ public class ValuesController : ControllerBase
 
 ## <a name="make-post-put-and-delete-requests"></a>GÖNDERI, PUT ve DELETE isteklerini oluşturma
 
-Yukarıdaki örneklerde, tüm HTTP istekleri GET HTTP fiilini kullanır. `HttpClient`, aşağıdakiler de dahil olmak üzere diğer HTTP fiillerini de destekler:
+Yukarıdaki örneklerde, tüm HTTP istekleri GET HTTP fiilini kullanır. `HttpClient` , aşağıdakiler de dahil olmak üzere diğer HTTP fiillerini de destekler:
 
 * POST
 * PUT
@@ -216,7 +217,7 @@ Yukarıdaki kodda, `CreateItemAsync` yöntemi:
 * <xref:System.Net.Http.HttpClient.PostAsync%2A>JSON içeriğini BELIRTILEN URL 'ye göndermek için çağrılar. Bu, [HttpClient. BaseAddress](xref:System.Net.Http.HttpClient.BaseAddress)'e eklenen GÖRELI bir URL 'dir.
 * <xref:System.Net.Http.HttpResponseMessage.EnsureSuccessStatusCode%2A>Yanıt durum kodu başarıyı belirtmezse bir özel durum oluşturmak için çağırır.
 
-`HttpClient`, diğer içerik türlerini de destekler. Örneğin <xref:System.Net.Http.MultipartContent> ve <xref:System.Net.Http.StreamContent>. Desteklenen içeriğin tamamı listesi için bkz <xref:System.Net.Http.HttpContent> ..
+`HttpClient` , diğer içerik türlerini de destekler. Örneğin <xref:System.Net.Http.MultipartContent> ve <xref:System.Net.Http.StreamContent>. Desteklenen içeriğin tamamı listesi için bkz <xref:System.Net.Http.HttpContent> ..
 
 Aşağıdaki örnekte bir HTTP PUT isteği gösterilmektedir:
 
@@ -234,7 +235,7 @@ Yukarıdaki kodda, `DeleteItemAsync` yöntemi çağırır <xref:System.Net.Http.
 
 ## <a name="outgoing-request-middleware"></a>Giden istek ara yazılımı
 
-`HttpClient`, giden HTTP istekleri için birlikte bağlanabilen işleyicileri temsilci seçme kavramıdır. `IHttpClientFactory`:
+`HttpClient` , giden HTTP istekleri için birlikte bağlanabilen işleyicileri temsilci seçme kavramıdır. `IHttpClientFactory`:
 
 * Her bir adlandırılmış istemci için uygulanacak işleyiciler tanımlamayı basitleştirir.
 * Bir giden istek ara yazılım işlem hattı oluşturmak için birden çok işleyicinin kaydedilmesini ve zincirleme kullanımını destekler. Bu işleyicilerin her biri, giden istekten önce ve sonra iş gerçekleştirebilir. Bu model:
@@ -276,13 +277,13 @@ Birden çok işleyici, yürütülmesi gereken sırayla kaydedilebilir. Her işle
 
 ## <a name="use-polly-based-handlers"></a>Polly tabanlı işleyiciler kullanın
 
-`IHttpClientFactory`üçüncü taraf kitaplığı [Polly](https://github.com/App-vNext/Polly)ile tümleşir. Polly, .NET için kapsamlı bir esnekliği ve geçici hata işleme kitaplığıdır. Geliştiricilerin yeniden deneme, devre kesici, zaman aşımı, Bulkbaş yalıtımı, akıcı ve iş parçacığı açısından güvenli bir şekilde geri dönüş gibi ilkeler almasına olanak tanır.
+`IHttpClientFactory` üçüncü taraf kitaplığı [Polly](https://github.com/App-vNext/Polly)ile tümleşir. Polly, .NET için kapsamlı bir esnekliği ve geçici hata işleme kitaplığıdır. Geliştiricilerin yeniden deneme, devre kesici, zaman aşımı, Bulkbaş yalıtımı, akıcı ve iş parçacığı açısından güvenli bir şekilde geri dönüş gibi ilkeler almasına olanak tanır.
 
 Uzantı yöntemleri, yapılandırılmış örneklerle Polly ilkelerin kullanımını etkinleştirmek için sağlanır `HttpClient` . Polly uzantıları, istemcilere Polly tabanlı işleyiciler eklemeyi destekler. Polly, [Microsoft. Extensions. http. Polly](https://www.nuget.org/packages/Microsoft.Extensions.Http.Polly/) NuGet paketini gerektirir.
 
 ### <a name="handle-transient-faults"></a>Geçici hataları işle
 
-Hatalar genellikle dış HTTP çağrıları geçici olduğunda oluşur. <xref:Microsoft.Extensions.DependencyInjection.PollyHttpClientBuilderExtensions.AddTransientHttpErrorPolicy*>geçici hataları işlemek için bir ilkenin tanımlanmasını sağlar. `AddTransientHttpErrorPolicy`Aşağıdaki yanıtları işleyecek şekilde yapılandırılan ilkeler:
+Hatalar genellikle dış HTTP çağrıları geçici olduğunda oluşur. <xref:Microsoft.Extensions.DependencyInjection.PollyHttpClientBuilderExtensions.AddTransientHttpErrorPolicy*> geçici hataları işlemek için bir ilkenin tanımlanmasını sağlar. `AddTransientHttpErrorPolicy`Aşağıdaki yanıtları işleyecek şekilde yapılandırılan ilkeler:
 
 * <xref:System.Net.Http.HttpRequestException>
 * HTTP 5xx
@@ -321,7 +322,7 @@ Düzenli olarak kullanılan ilkeleri yönetmeye yönelik bir yaklaşım, bunlar�
 Aşağıdaki kodda:
 
 * "Normal" ve "uzun" ilkeler eklenmiştir.
-* <xref:Microsoft.Extensions.DependencyInjection.PollyHttpClientBuilderExtensions.AddPolicyHandlerFromRegistry*>kayıt defterinden "normal" ve "uzun" ilkeleri ekler.
+* <xref:Microsoft.Extensions.DependencyInjection.PollyHttpClientBuilderExtensions.AddPolicyHandlerFromRegistry*> kayıt defterinden "normal" ve "uzun" ilkeleri ekler.
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup4.cs?name=snippet1)]
 
@@ -339,7 +340,7 @@ Varsayılan işleyici ömrü iki dakikadır. Varsayılan değer, adlandırılmı
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactorySample/Startup5.cs?name=snippet1)]
 
-`HttpClient`örnekler genellikle aktiften **çıkarma gerektirmeyen .NET nesneleri olarak** kabul edilebilir. Çıkarma giden istekleri iptal eder ve `HttpClient` çağırma sonrasında verilen örneğin kullanılamaz olmasını sağlar <xref:System.IDisposable.Dispose*> . `IHttpClientFactory`örnekler tarafından kullanılan kaynakları izler ve ortadan kaldırdık `HttpClient` .
+`HttpClient` örnekler genellikle aktiften **çıkarma gerektirmeyen .NET nesneleri olarak** kabul edilebilir. Çıkarma giden istekleri iptal eder ve `HttpClient` çağırma sonrasında verilen örneğin kullanılamaz olmasını sağlar <xref:System.IDisposable.Dispose*> . `IHttpClientFactory` örnekler tarafından kullanılan kaynakları izler ve ortadan kaldırdık `HttpClient` .
 
 Tek `HttpClient` bir örneğinin uzun süre canlı tutulması, önünde kullanılmadan önce kullanılan ortak bir modeldir `IHttpClientFactory` . Bu model, ' a geçtikten sonra gereksiz hale gelir `IHttpClientFactory` .
 
@@ -366,13 +367,13 @@ Yukarıdaki yaklaşımlar, `IHttpClientFactory` benzer bir şekilde çözen kayn
 Havuza alınmış `HttpMessageHandler` örnekler, `CookieContainer` paylaşılan nesneler ile sonuçlanır. Beklenmeyen `CookieContainer` nesne paylaşımı genellikle hatalı kodla sonuçlanır. S gerektiren uygulamalar için cookie şunlardan birini göz önünde bulundurun:
 
  - Otomatik işlemeyi devre dışı bırakma cookie
- - Önlemenin`IHttpClientFactory`
+ - Önlemenin `IHttpClientFactory`
 
 <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*>Otomatik işlemeyi devre dışı bırakmak için çağırın cookie :
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
 
-## <a name="logging"></a>Günlüğe kaydetme
+## <a name="logging"></a>Günlüğe Kaydetme
 
 `IHttpClientFactory`Tüm istekler için kayıt günlüğü iletileri aracılığıyla oluşturulan istemciler. Varsayılan günlük iletilerini görmek için günlük yapılandırmasında uygun bilgi düzeyini etkinleştirin. İstek üst bilgilerinin günlüğe kaydedilmesi gibi ek Günlükler yalnızca izleme düzeyinde yer alır.
 
@@ -401,9 +402,9 @@ Konsol uygulamasında, aşağıdaki paket başvurularını projeye ekleyin:
 
 Aşağıdaki örnekte:
 
-* <xref:System.Net.Http.IHttpClientFactory>, [genel konağın](xref:fundamentals/host/generic-host) hizmet kapsayıcısına kaydedilir.
-* `MyService`hizmetinden bir istemci fabrikası örneği oluşturur `HttpClient` . `HttpClient`, bir Web sayfasını almak için kullanılır.
-* `Main`hizmetin yöntemini yürütmek için bir kapsam oluşturur `GetPage` ve Web sayfası içeriğinin ilk 500 karakterini konsola yazar.
+* <xref:System.Net.Http.IHttpClientFactory> , [genel konağın](xref:fundamentals/host/generic-host) hizmet kapsayıcısına kaydedilir.
+* `MyService` hizmetinden bir istemci fabrikası örneği oluşturur `HttpClient` . `HttpClient` , bir Web sayfasını almak için kullanılır.
+* `Main` hizmetin yöntemini yürütmek için bir kapsam oluşturur `GetPage` ve Web sayfası içeriğinin ilk 500 karakterini konsola yazar.
 
 [!code-csharp[](http-requests/samples/3.x/HttpClientFactoryConsoleSample/Program.cs?highlight=14-15,20,26-27,59-62)]
 
@@ -519,7 +520,7 @@ Tercih edilirse, yazılan istemcinin yapılandırması, `Startup.ConfigureServic
 
 ### <a name="generated-clients"></a>Oluşturulan istemciler
 
-`IHttpClientFactory`, [yeniden sığdırma](https://github.com/paulcbetts/refit)gibi diğer üçüncü taraf kitaplıklarıyla birlikte kullanılabilir. Yeniden sığdırma, .NET için bir REST kitaplığıdır. REST API 'Leri canlı arabirimlere dönüştürür. Arabirim bir uygulama, `RestService` `HttpClient` dış http çağrıları yapmak için kullanılarak tarafından dinamik olarak oluşturulur.
+`IHttpClientFactory` , [yeniden sığdırma](https://github.com/paulcbetts/refit)gibi diğer üçüncü taraf kitaplıklarıyla birlikte kullanılabilir. Yeniden sığdırma, .NET için bir REST kitaplığıdır. REST API 'Leri canlı arabirimlere dönüştürür. Arabirim bir uygulama, `RestService` `HttpClient` dış http çağrıları yapmak için kullanılarak tarafından dinamik olarak oluşturulur.
 
 Bir arabirim ve yanıt, dış API 'yi ve yanıtını temsil edecek şekilde tanımlanır:
 
@@ -574,7 +575,7 @@ public class ValuesController : ControllerBase
 
 ## <a name="outgoing-request-middleware"></a>Giden istek ara yazılımı
 
-`HttpClient`, giden HTTP istekleri için birlikte bağlanabilen işleyicileri temsilci seçme kavramı zaten var. , `IHttpClientFactory` Her bir adlandırılmış istemci için uygulanacak işleyicileri tanımlamanızı kolaylaştırır. Bir giden istek ara yazılım işlem hattı oluşturmak için birden çok işleyicinin kaydını ve zincirlemeyi destekler. Bu işleyicilerin her biri, giden istekten önce ve sonra iş gerçekleştirebilir. Bu düzen, ASP.NET Core gelen ara yazılım ardışık düzenine benzer. Bu model, önbelleğe alma, hata işleme, serileştirme ve günlüğe kaydetme dahil olmak üzere HTTP istekleri etrafında çapraz kesme sorunlarını yönetmek için bir mekanizma sağlar.
+`HttpClient` , giden HTTP istekleri için birlikte bağlanabilen işleyicileri temsilci seçme kavramı zaten var. , `IHttpClientFactory` Her bir adlandırılmış istemci için uygulanacak işleyicileri tanımlamanızı kolaylaştırır. Bir giden istek ara yazılım işlem hattı oluşturmak için birden çok işleyicinin kaydını ve zincirlemeyi destekler. Bu işleyicilerin her biri, giden istekten önce ve sonra iş gerçekleştirebilir. Bu düzen, ASP.NET Core gelen ara yazılım ardışık düzenine benzer. Bu model, önbelleğe alma, hata işleme, serileştirme ve günlüğe kaydetme dahil olmak üzere HTTP istekleri etrafında çapraz kesme sorunlarını yönetmek için bir mekanizma sağlar.
 
 Bir işleyici oluşturmak için, öğesinden türeten bir sınıf tanımlayın <xref:System.Net.Http.DelegatingHandler> . `SendAsync`İsteği ardışık düzen içindeki bir sonraki işleyiciye geçirmeden önce kodu yürütmek için yöntemi geçersiz kılın:
 
@@ -602,7 +603,7 @@ Birden çok işleyici, yürütülmesi gereken sırayla kaydedilebilir. Her işle
 
 ## <a name="use-polly-based-handlers"></a>Polly tabanlı işleyiciler kullanın
 
-`IHttpClientFactory`, [Polly](https://github.com/App-vNext/Polly)adlı popüler bir üçüncü taraf kitaplığı ile tümleşir. Polly, .NET için kapsamlı bir esnekliği ve geçici hata işleme kitaplığıdır. Geliştiricilerin yeniden deneme, devre kesici, zaman aşımı, Bulkbaş yalıtımı, akıcı ve iş parçacığı açısından güvenli bir şekilde geri dönüş gibi ilkeler almasına olanak tanır.
+`IHttpClientFactory` , [Polly](https://github.com/App-vNext/Polly)adlı popüler bir üçüncü taraf kitaplığı ile tümleşir. Polly, .NET için kapsamlı bir esnekliği ve geçici hata işleme kitaplığıdır. Geliştiricilerin yeniden deneme, devre kesici, zaman aşımı, Bulkbaş yalıtımı, akıcı ve iş parçacığı açısından güvenli bir şekilde geri dönüş gibi ilkeler almasına olanak tanır.
 
 Uzantı yöntemleri, yapılandırılmış örneklerle Polly ilkelerin kullanımını etkinleştirmek için sağlanır `HttpClient` . Polly uzantıları:
 
@@ -657,7 +658,7 @@ Varsayılan işleyici ömrü iki dakikadır. Varsayılan değer, adlandırılmı
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet11)]
 
-İstemcinin çıkarılması gerekli değildir. Çıkarma giden istekleri iptal eder ve `HttpClient` çağırma sonrasında verilen örneğin kullanılamaz olmasını sağlar <xref:System.IDisposable.Dispose*> . `IHttpClientFactory`örnekler tarafından kullanılan kaynakları izler ve ortadan kaldırdık `HttpClient` . `HttpClient`Örnekler genellikle aktiften çıkarma gerektirmeyen .NET nesneleri olarak kabul edilebilir.
+İstemcinin çıkarılması gerekli değildir. Çıkarma giden istekleri iptal eder ve `HttpClient` çağırma sonrasında verilen örneğin kullanılamaz olmasını sağlar <xref:System.IDisposable.Dispose*> . `IHttpClientFactory` örnekler tarafından kullanılan kaynakları izler ve ortadan kaldırdık `HttpClient` . `HttpClient`Örnekler genellikle aktiften çıkarma gerektirmeyen .NET nesneleri olarak kabul edilebilir.
 
 Tek `HttpClient` bir örneğinin uzun süre canlı tutulması, önünde kullanılmadan önce kullanılan ortak bir modeldir `IHttpClientFactory` . Bu model, ' a geçtikten sonra gereksiz hale gelir `IHttpClientFactory` .
 
@@ -684,13 +685,13 @@ Yukarıdaki yaklaşımlar, `IHttpClientFactory` benzer bir şekilde çözen kayn
 Havuza alınmış `HttpMessageHandler` örnekler, `CookieContainer` paylaşılan nesneler ile sonuçlanır. Beklenmeyen `CookieContainer` nesne paylaşımı genellikle hatalı kodla sonuçlanır. S gerektiren uygulamalar için cookie şunlardan birini göz önünde bulundurun:
 
  - Otomatik işlemeyi devre dışı bırakma cookie
- - Önlemenin`IHttpClientFactory`
+ - Önlemenin `IHttpClientFactory`
 
 <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*>Otomatik işlemeyi devre dışı bırakmak için çağırın cookie :
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
 
-## <a name="logging"></a>Günlüğe kaydetme
+## <a name="logging"></a>Günlüğe Kaydetme
 
 `IHttpClientFactory`Tüm istekler için kayıt günlüğü iletileri aracılığıyla oluşturulan istemciler. Varsayılan günlük iletilerini görmek için günlük yapılandırmanızda uygun bilgi düzeyini etkinleştirin. İstek üst bilgilerinin günlüğe kaydedilmesi gibi ek Günlükler yalnızca izleme düzeyinde yer alır.
 
@@ -719,9 +720,9 @@ Konsol uygulamasında, aşağıdaki paket başvurularını projeye ekleyin:
 
 Aşağıdaki örnekte:
 
-* <xref:System.Net.Http.IHttpClientFactory>, [genel konağın](xref:fundamentals/host/generic-host) hizmet kapsayıcısına kaydedilir.
-* `MyService`hizmetinden bir istemci fabrikası örneği oluşturur `HttpClient` . `HttpClient`, bir Web sayfasını almak için kullanılır.
-* `Main`hizmetin yöntemini yürütmek için bir kapsam oluşturur `GetPage` ve Web sayfası içeriğinin ilk 500 karakterini konsola yazar.
+* <xref:System.Net.Http.IHttpClientFactory> , [genel konağın](xref:fundamentals/host/generic-host) hizmet kapsayıcısına kaydedilir.
+* `MyService` hizmetinden bir istemci fabrikası örneği oluşturur `HttpClient` . `HttpClient` , bir Web sayfasını almak için kullanılır.
+* `Main` hizmetin yöntemini yürütmek için bir kapsam oluşturur `GetPage` ve Web sayfası içeriğinin ilk 500 karakterini konsola yazar.
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactoryConsoleSample/Program.cs?highlight=14-15,20,26-27,59-62)]
 
@@ -746,7 +747,7 @@ Bir <xref:System.Net.Http.IHttpClientFactory> uygulamadaki örnekleri yapıland�
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/http-requests/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 .NET Framework hedefleyen projeler [Microsoft. Extensions. http](https://www.nuget.org/packages/Microsoft.Extensions.Http/) NuGet paketinin yüklenmesini gerektirir. .NET Core ile hedeflenen ve [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app) 'e başvuran projeler zaten paketi içeriyor `Microsoft.Extensions.Http` .
 
@@ -824,7 +825,7 @@ Tercih edilirse, yazılan istemcinin yapılandırması, `Startup.ConfigureServic
 
 ### <a name="generated-clients"></a>Oluşturulan istemciler
 
-`IHttpClientFactory`, [yeniden sığdırma](https://github.com/paulcbetts/refit)gibi diğer üçüncü taraf kitaplıklarıyla birlikte kullanılabilir. Yeniden sığdırma, .NET için bir REST kitaplığıdır. REST API 'Leri canlı arabirimlere dönüştürür. Arabirim bir uygulama, `RestService` `HttpClient` dış http çağrıları yapmak için kullanılarak tarafından dinamik olarak oluşturulur.
+`IHttpClientFactory` , [yeniden sığdırma](https://github.com/paulcbetts/refit)gibi diğer üçüncü taraf kitaplıklarıyla birlikte kullanılabilir. Yeniden sığdırma, .NET için bir REST kitaplığıdır. REST API 'Leri canlı arabirimlere dönüştürür. Arabirim bir uygulama, `RestService` `HttpClient` dış http çağrıları yapmak için kullanılarak tarafından dinamik olarak oluşturulur.
 
 Bir arabirim ve yanıt, dış API 'yi ve yanıtını temsil edecek şekilde tanımlanır:
 
@@ -879,7 +880,7 @@ public class ValuesController : ControllerBase
 
 ## <a name="outgoing-request-middleware"></a>Giden istek ara yazılımı
 
-`HttpClient`, giden HTTP istekleri için birlikte bağlanabilen işleyicileri temsilci seçme kavramı zaten var. , `IHttpClientFactory` Her bir adlandırılmış istemci için uygulanacak işleyicileri tanımlamanızı kolaylaştırır. Bir giden istek ara yazılım işlem hattı oluşturmak için birden çok işleyicinin kaydını ve zincirlemeyi destekler. Bu işleyicilerin her biri, giden istekten önce ve sonra iş gerçekleştirebilir. Bu düzen, ASP.NET Core gelen ara yazılım ardışık düzenine benzer. Bu model, önbelleğe alma, hata işleme, serileştirme ve günlüğe kaydetme dahil olmak üzere HTTP istekleri etrafında çapraz kesme sorunlarını yönetmek için bir mekanizma sağlar.
+`HttpClient` , giden HTTP istekleri için birlikte bağlanabilen işleyicileri temsilci seçme kavramı zaten var. , `IHttpClientFactory` Her bir adlandırılmış istemci için uygulanacak işleyicileri tanımlamanızı kolaylaştırır. Bir giden istek ara yazılım işlem hattı oluşturmak için birden çok işleyicinin kaydını ve zincirlemeyi destekler. Bu işleyicilerin her biri, giden istekten önce ve sonra iş gerçekleştirebilir. Bu düzen, ASP.NET Core gelen ara yazılım ardışık düzenine benzer. Bu model, önbelleğe alma, hata işleme, serileştirme ve günlüğe kaydetme dahil olmak üzere HTTP istekleri etrafında çapraz kesme sorunlarını yönetmek için bir mekanizma sağlar.
 
 Bir işleyici oluşturmak için, öğesinden türeten bir sınıf tanımlayın <xref:System.Net.Http.DelegatingHandler> . `SendAsync`İsteği ardışık düzen içindeki bir sonraki işleyiciye geçirmeden önce kodu yürütmek için yöntemi geçersiz kılın:
 
@@ -910,7 +911,7 @@ Birden çok işleyici, yürütülmesi gereken sırayla kaydedilebilir. Her işle
 
 ## <a name="use-polly-based-handlers"></a>Polly tabanlı işleyiciler kullanın
 
-`IHttpClientFactory`, [Polly](https://github.com/App-vNext/Polly)adlı popüler bir üçüncü taraf kitaplığı ile tümleşir. Polly, .NET için kapsamlı bir esnekliği ve geçici hata işleme kitaplığıdır. Geliştiricilerin yeniden deneme, devre kesici, zaman aşımı, Bulkbaş yalıtımı, akıcı ve iş parçacığı açısından güvenli bir şekilde geri dönüş gibi ilkeler almasına olanak tanır.
+`IHttpClientFactory` , [Polly](https://github.com/App-vNext/Polly)adlı popüler bir üçüncü taraf kitaplığı ile tümleşir. Polly, .NET için kapsamlı bir esnekliği ve geçici hata işleme kitaplığıdır. Geliştiricilerin yeniden deneme, devre kesici, zaman aşımı, Bulkbaş yalıtımı, akıcı ve iş parçacığı açısından güvenli bir şekilde geri dönüş gibi ilkeler almasına olanak tanır.
 
 Uzantı yöntemleri, yapılandırılmış örneklerle Polly ilkelerin kullanımını etkinleştirmek için sağlanır `HttpClient` . Polly uzantıları:
 
@@ -965,7 +966,7 @@ Varsayılan işleyici ömrü iki dakikadır. Varsayılan değer, adlandırılmı
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet11)]
 
-İstemcinin çıkarılması gerekli değildir. Çıkarma giden istekleri iptal eder ve `HttpClient` çağırma sonrasında verilen örneğin kullanılamaz olmasını sağlar <xref:System.IDisposable.Dispose*> . `IHttpClientFactory`örnekler tarafından kullanılan kaynakları izler ve ortadan kaldırdık `HttpClient` . `HttpClient`Örnekler genellikle aktiften çıkarma gerektirmeyen .NET nesneleri olarak kabul edilebilir.
+İstemcinin çıkarılması gerekli değildir. Çıkarma giden istekleri iptal eder ve `HttpClient` çağırma sonrasında verilen örneğin kullanılamaz olmasını sağlar <xref:System.IDisposable.Dispose*> . `IHttpClientFactory` örnekler tarafından kullanılan kaynakları izler ve ortadan kaldırdık `HttpClient` . `HttpClient`Örnekler genellikle aktiften çıkarma gerektirmeyen .NET nesneleri olarak kabul edilebilir.
 
 Tek `HttpClient` bir örneğinin uzun süre canlı tutulması, önünde kullanılmadan önce kullanılan ortak bir modeldir `IHttpClientFactory` . Bu model, ' a geçtikten sonra gereksiz hale gelir `IHttpClientFactory` .
 
@@ -992,13 +993,13 @@ Yukarıdaki yaklaşımlar, `IHttpClientFactory` benzer bir şekilde çözen kayn
 Havuza alınmış `HttpMessageHandler` örnekler, `CookieContainer` paylaşılan nesneler ile sonuçlanır. Beklenmeyen `CookieContainer` nesne paylaşımı genellikle hatalı kodla sonuçlanır. S gerektiren uygulamalar için cookie şunlardan birini göz önünde bulundurun:
 
  - Otomatik işlemeyi devre dışı bırakma cookie
- - Önlemenin`IHttpClientFactory`
+ - Önlemenin `IHttpClientFactory`
 
 <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler*>Otomatik işlemeyi devre dışı bırakmak için çağırın cookie :
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactorySample/Startup.cs?name=snippet13)]
 
-## <a name="logging"></a>Günlüğe kaydetme
+## <a name="logging"></a>Günlüğe Kaydetme
 
 `IHttpClientFactory`Tüm istekler için kayıt günlüğü iletileri aracılığıyla oluşturulan istemciler. Varsayılan günlük iletilerini görmek için günlük yapılandırmanızda uygun bilgi düzeyini etkinleştirin. İstek üst bilgilerinin günlüğe kaydedilmesi gibi ek Günlükler yalnızca izleme düzeyinde yer alır.
 
@@ -1027,9 +1028,9 @@ Konsol uygulamasında, aşağıdaki paket başvurularını projeye ekleyin:
 
 Aşağıdaki örnekte:
 
-* <xref:System.Net.Http.IHttpClientFactory>, [genel konağın](xref:fundamentals/host/generic-host) hizmet kapsayıcısına kaydedilir.
-* `MyService`hizmetinden bir istemci fabrikası örneği oluşturur `HttpClient` . `HttpClient`, bir Web sayfasını almak için kullanılır.
-* `Main`hizmetin yöntemini yürütmek için bir kapsam oluşturur `GetPage` ve Web sayfası içeriğinin ilk 500 karakterini konsola yazar.
+* <xref:System.Net.Http.IHttpClientFactory> , [genel konağın](xref:fundamentals/host/generic-host) hizmet kapsayıcısına kaydedilir.
+* `MyService` hizmetinden bir istemci fabrikası örneği oluşturur `HttpClient` . `HttpClient` , bir Web sayfasını almak için kullanılır.
+* `Main` hizmetin yöntemini yürütmek için bir kapsam oluşturur `GetPage` ve Web sayfası içeriğinin ilk 500 karakterini konsola yazar.
 
 [!code-csharp[](http-requests/samples/2.x/HttpClientFactoryConsoleSample/Program.cs?highlight=14-15,20,26-27,59-62)]
 
