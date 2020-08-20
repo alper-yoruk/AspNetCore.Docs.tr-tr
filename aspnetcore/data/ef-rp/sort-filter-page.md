@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: 5bfea63cc1ff85adbe5ce572858b78a8e86b2280
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 5e073845acbecdf0db4c30c4725f12033cfc42ac
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017733"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634689"
 ---
 # <a name="part-3-no-locrazor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>Bölüm 3, Razor ASP.NET Core sıralama, filtreleme, sayfalama EF Core olan sayfalar
 
@@ -55,7 +56,7 @@ Yukarıdaki kod:
 
 **Öğrenciler** bağlantısından Dizin sayfası istendiğinde sorgu dizesi yoktur. Öğrenciler, son ada göre artan sırada görüntülenir. Son ada göre artan sıralama, deyimindeki varsayılan (gelen durumdur) `switch` . Kullanıcı bir sütun başlığı bağlantısına tıkladığında, `sortOrder` sorgu dizesi değerinde uygun değer sağlanır.
 
-`NameSort`ve `DateSort` Razor sütun başlığı köprülerini uygun sorgu dizesi değerleriyle yapılandırmak için kullanılır:
+`NameSort` ve `DateSort` Razor sütun başlığı köprülerini uygun sorgu dizesi değerleriyle yapılandırmak için kullanılır:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_Ternary)]
 
@@ -74,11 +75,11 @@ Yöntemi, sıralama yapılacak sütunu belirtmek için LINQ to Entities kullanı
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_IQueryable)]
 
-Bir `IQueryable` oluşturulduğunda veya değiştirildiğinde, veritabanına hiçbir sorgu gönderilmez. `IQueryable`Nesne bir koleksiyona dönüştürülene kadar sorgu yürütülmez. `IQueryable`, gibi bir yöntemi çağırarak bir koleksiyona dönüştürülür `ToListAsync` . Bu nedenle, `IQueryable` kod, aşağıdaki deyime kadar yürütülemeyen tek bir sorgu ile sonuçlanır:
+Bir `IQueryable` oluşturulduğunda veya değiştirildiğinde, veritabanına hiçbir sorgu gönderilmez. `IQueryable`Nesne bir koleksiyona dönüştürülene kadar sorgu yürütülmez. `IQueryable` , gibi bir yöntemi çağırarak bir koleksiyona dönüştürülür `ToListAsync` . Bu nedenle, `IQueryable` kod, aşağıdaki deyime kadar yürütülemeyen tek bir sorgu ile sonuçlanır:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_SortOnlyRtn)]
 
-`OnGetAsync`çok sayıda sıralanabilir sütunla ayrıntı alabilir. Bu işlevi kodun alternatif bir yolu hakkında daha fazla bilgi için, bu öğretici serisinin MVC sürümünde [kodu basitleştirmek için dınamık LINQ kullanma](xref:data/ef-mvc/advanced#dynamic-linq) konusuna bakın.
+`OnGetAsync` çok sayıda sıralanabilir sütunla ayrıntı alabilir. Bu işlevi kodun alternatif bir yolu hakkında daha fazla bilgi için, bu öğretici serisinin MVC sürümünde [kodu basitleştirmek için dınamık LINQ kullanma](xref:data/ef-mvc/advanced#dynamic-linq) konusuna bakın.
 
 ### <a name="add-column-heading-hyperlinks-to-the-student-index-page"></a>Öğrenci dizini sayfasına sütun başlığı köprüleri ekleme
 
@@ -120,7 +121,7 @@ Yukarıdaki kod:
 
 Kod, `Where` yöntemi bir nesne üzerinde çağırır `IQueryable` ve filtre sunucuda işlenir. Bazı senaryolarda, uygulama `Where` bir bellek içi koleksiyonda bir genişletme yöntemi olarak yöntemi çağırıyor olabilir. Örneğin, `_context.Students` EF Core 'den `DbSet` bir koleksiyonu döndüren bir depo yöntemine yapılan değişiklikleri varsayın `IEnumerable` . Sonuç normalde aynı olur, ancak bazı durumlarda farklı olabilir.
 
-Örneğin, uygulamasının .NET Framework uygulanması `Contains` Varsayılan olarak büyük/küçük harfe duyarlı bir karşılaştırma gerçekleştirir. SQL Server, `Contains` büyük/küçük harf duyarlılığı SQL Server örneğinin harmanlama ayarına göre belirlenir. SQL Server varsayılan olarak büyük/küçük harfe duyarlı değildir. SQLite, büyük/küçük harfe duyarlı olur. `ToUpper`testi açık büyük/küçük harfe duyarsız hale getirmek için çağrılabilir:
+Örneğin, uygulamasının .NET Framework uygulanması `Contains` Varsayılan olarak büyük/küçük harfe duyarlı bir karşılaştırma gerçekleştirir. SQL Server, `Contains` büyük/küçük harf duyarlılığı SQL Server örneğinin harmanlama ayarına göre belirlenir. SQL Server varsayılan olarak büyük/küçük harfe duyarlı değildir. SQLite, büyük/küçük harfe duyarlı olur. `ToUpper` testi açık büyük/küçük harfe duyarsız hale getirmek için çağrılabilir:
 
 ```csharp
 Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())`
@@ -304,7 +305,7 @@ Yukarıdaki kod, `sortOrder` URL 'deki sorgu dizesinden bir parametre alır. URL
 
 **Öğrenciler** bağlantısından Dizin sayfası istendiğinde sorgu dizesi yoktur. Öğrenciler, son ada göre artan sırada görüntülenir. Son ada göre artan sıralama, deyimindeki varsayılan (gelen durumdur) `switch` . Kullanıcı bir sütun başlığı bağlantısına tıkladığında, `sortOrder` sorgu dizesi değerinde uygun değer sağlanır.
 
-`NameSort`ve `DateSort` Razor sütun başlığı köprülerini uygun sorgu dizesi değerleriyle yapılandırmak için kullanılır:
+`NameSort` ve `DateSort` Razor sütun başlığı köprülerini uygun sorgu dizesi değerleriyle yapılandırmak için kullanılır:
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortOnly&highlight=3-4)]
 
@@ -329,11 +330,11 @@ Yöntemi, sıralama yapılacak sütunu belirtmek için LINQ to Entities kullanı
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortOnly&highlight=6-999)]
 
- Bir `IQueryable` oluşturulduğunda veya değiştirildiğinde, veritabanına hiçbir sorgu gönderilmez. `IQueryable`Nesne bir koleksiyona dönüştürülene kadar sorgu yürütülmez. `IQueryable`, gibi bir yöntemi çağırarak bir koleksiyona dönüştürülür `ToListAsync` . Bu nedenle, `IQueryable` kod, aşağıdaki deyime kadar yürütülemeyen tek bir sorgu ile sonuçlanır:
+ Bir `IQueryable` oluşturulduğunda veya değiştirildiğinde, veritabanına hiçbir sorgu gönderilmez. `IQueryable`Nesne bir koleksiyona dönüştürülene kadar sorgu yürütülmez. `IQueryable` , gibi bir yöntemi çağırarak bir koleksiyona dönüştürülür `ToListAsync` . Bu nedenle, `IQueryable` kod, aşağıdaki deyime kadar yürütülemeyen tek bir sorgu ile sonuçlanır:
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortOnlyRtn)]
 
-`OnGetAsync`çok sayıda sıralanabilir sütunla ayrıntı alabilir.
+`OnGetAsync` çok sayıda sıralanabilir sütunla ayrıntı alabilir.
 
 ### <a name="add-column-heading-hyperlinks-to-the-student-index-page"></a>Öğrenci dizini sayfasına sütun başlığı köprüleri ekleme
 
@@ -380,7 +381,7 @@ Yukarıdaki kod:
 
 Note: Yukarıdaki kod, `Where` metodu bir nesne üzerinde çağırır `IQueryable` ve filtre sunucuda işlenir. Bazı senaryolarda, uygulama `Where` bir bellek içi koleksiyonda bir genişletme yöntemi olarak yöntemi çağırıyor olabilir. Örneğin, `_context.Students` EF Core 'den `DbSet` bir koleksiyonu döndüren bir depo yöntemine yapılan değişiklikleri varsayın `IEnumerable` . Sonuç normalde aynı olur, ancak bazı durumlarda farklı olabilir.
 
-Örneğin, uygulamasının .NET Framework uygulanması `Contains` Varsayılan olarak büyük/küçük harfe duyarlı bir karşılaştırma gerçekleştirir. SQL Server, `Contains` büyük/küçük harf duyarlılığı SQL Server örneğinin harmanlama ayarına göre belirlenir. SQL Server varsayılan olarak büyük/küçük harfe duyarlı değildir. `ToUpper`testi açık büyük/küçük harfe duyarsız hale getirmek için çağrılabilir:
+Örneğin, uygulamasının .NET Framework uygulanması `Contains` Varsayılan olarak büyük/küçük harfe duyarlı bir karşılaştırma gerçekleştirir. SQL Server, `Contains` büyük/küçük harf duyarlılığı SQL Server örneğinin harmanlama ayarına göre belirlenir. SQL Server varsayılan olarak büyük/küçük harfe duyarlı değildir. `ToUpper` testi açık büyük/küçük harfe duyarsız hale getirmek için çağrılabilir:
 
 `Where(s => s.LastName.ToUpper().Contains(searchString.ToUpper())`
 

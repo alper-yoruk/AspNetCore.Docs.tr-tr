@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 12/16/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/azure-apps/index
-ms.openlocfilehash: 11de6b04f6813161e5eaee294f3e67e223ae0db3
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 739ef9bd17e6a3f030243e88488f0c19134d0151
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015926"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634496"
 ---
 # <a name="deploy-aspnet-core-apps-to-azure-app-service"></a>ASP.NET Core uygulamalarını Azure App Service dağıtma
 
@@ -211,7 +212,7 @@ Kendi kendine içerilen bir uygulama dağıtımında:
 1. Web uygulamasını seçin.
 1. "Uzantıları" filtrelemek için arama kutusuna "Ex" yazın veya yönetim araçları listesini aşağı kaydırın.
 1. **Uzantılar**'ı seçin.
-1. **Add (Ekle)** seçeneğini belirleyin.
+1. **Ekle**’yi seçin.
 1. Listeden ASP.NET Core önizleme sürümü olduğu ve platformu belirten **ASP.NET Core {X. Y} ({x64 | x86}) çalışma zamanı** uzantısını seçin `{X.Y}` `{x64|x86}` .
 1. Yasal koşulları kabul etmek için **Tamam ' ı** seçin.
 1. Uzantıyı yüklemek için **Tamam ' ı** seçin.
@@ -274,7 +275,7 @@ Uygulama oluşturmak ve dağıtmak için bir ARM şablonu kullanılıyorsa, `sit
    * **Dağıtım modu** açılır listesini açın ve **çerçeveye bağımlı**' ı seçin.
    * **Hedef çalışma zamanı**olarak **Taşınabilir** öğesini seçin.
    * Dağıtımdan sonra ek dosyaları kaldırmanız gerekiyorsa, **dosya yayımlama seçenekleri** ' ni açın ve hedefteki ek dosyaları kaldırmak için onay kutusunu işaretleyin.
-   * **Kaydet**'i seçin.
+   * **Kaydet**’i seçin.
 1. Yayımla sihirbazının kalan istemlerini izleyerek yeni bir site oluşturun veya var olan bir siteyi güncelleştirin.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
@@ -305,7 +306,7 @@ Visual Studio 'Yu veya kendi içindeki bir dağıtım için .NET Core CLI kullan
    * **Dağıtım modu** açılır listesini açın ve **kendinden bağımsız**' i seçin.
    * Hedef **çalışma** zamanı açılır listesinden hedef çalışma zamanını seçin. Varsayılan değer: `win-x86`.
    * Dağıtımdan sonra ek dosyaları kaldırmanız gerekiyorsa, **dosya yayımlama seçenekleri** ' ni açın ve hedefteki ek dosyaları kaldırmak için onay kutusunu işaretleyin.
-   * **Kaydet**'i seçin.
+   * **Kaydet**’i seçin.
 1. Yayımla sihirbazının kalan istemlerini izleyerek yeni bir site oluşturun veya var olan bir siteyi güncelleştirin.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)

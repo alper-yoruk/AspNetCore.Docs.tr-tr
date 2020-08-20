@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 4/20/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/app-secrets
-ms.openlocfilehash: 917e698d34a5d4b6c2c3f4737c08f1a590f5df1a
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 74c9ae63ffbe39d6ba6e77aee8f6adcc8c8a157a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017954"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634910"
 ---
 # <a name="safe-storage-of-app-secrets-in-development-in-aspnet-core"></a>ASP.NET Core sürümünde geliştirme sırasında uygulama gizli dizileri güvenli depolama
 
@@ -180,7 +181,7 @@ Bir nesne sabit değerinin tamamını bir POCO 'ya eşleme (özelliklerle basit 
 
 ## <a name="string-replacement-with-secrets"></a>Gizli dizileri olan dize değiştirme
 
-Parolaların düz metin olarak depolanması güvenli değildir. Örneğin, *üzerindeappsettings.js* depolanan bir veritabanı bağlantı dizesi, belirtilen kullanıcı için bir parola içerebilir:
+Parolaların düz metin olarak depolanması güvenli değildir. Örneğin, * üzerindeappsettings.js* depolanan bir veritabanı bağlantı dizesi, belirtilen kullanıcı için bir parola içerebilir:
 
 [!code-json[](app-secrets/samples/3.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 
@@ -237,7 +238,7 @@ Uygulamanın dosyada *secrets.js* , anahtarla ilişkili anahtar-değer çiftini 
 }
 ```
 
-`dotnet user-secrets list`Aşağıdaki iletiyi görüntüler:
+`dotnet user-secrets list` Aşağıdaki iletiyi görüntüler:
 
 ```console
 Movies:ServiceApiKey = 12345
@@ -425,7 +426,7 @@ Bir nesne sabit değerinin tamamını bir POCO 'ya eşleme (özelliklerle basit 
 
 ## <a name="string-replacement-with-secrets"></a>Gizli dizileri olan dize değiştirme
 
-Parolaların düz metin olarak depolanması güvenli değildir. Örneğin, *üzerindeappsettings.js* depolanan bir veritabanı bağlantı dizesi, belirtilen kullanıcı için bir parola içerebilir:
+Parolaların düz metin olarak depolanması güvenli değildir. Örneğin, * üzerindeappsettings.js* depolanan bir veritabanı bağlantı dizesi, belirtilen kullanıcı için bir parola içerebilir:
 
 [!code-json[](app-secrets/samples/2.x/UserSecrets/appsettings-unsecure.json?highlight=3)]
 

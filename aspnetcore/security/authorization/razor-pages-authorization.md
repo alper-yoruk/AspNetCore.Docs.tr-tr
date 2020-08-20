@@ -1,5 +1,5 @@
 ---
-title: RazorASP.NET Core için sayfa yetkilendirme kuralları
+title: Razor ASP.NET Core için sayfa yetkilendirme kuralları
 author: rick-anderson
 description: Kullanıcılara yetki veren ve anonim kullanıcıların sayfalara veya sayfa klasörlerine erişmesine izin veren kurallara sahip sayfalara erişimi denetleme hakkında bilgi edinin.
 monikerRange: '>= aspnetcore-2.1'
@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/12/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/razor-pages-authorization
-ms.openlocfilehash: 5e0c76ea6c6b4af8e24693b1bfe8ac28bf2ce3a9
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: b17717e7b3cbaa64d4ff00661f15439728f161d3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022283"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634897"
 ---
-# <a name="no-locrazor-pages-authorization-conventions-in-aspnet-core"></a>RazorASP.NET Core için sayfa yetkilendirme kuralları
+# <a name="no-locrazor-pages-authorization-conventions-in-aspnet-core"></a>Razor ASP.NET Core için sayfa yetkilendirme kuralları
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -32,7 +33,7 @@ Sayfalar uygulamanızda erişimi denetlemeye yönelik bir yol Razor , başlangı
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/razor-pages-authorization/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-Örnek uygulama [ cookie ASP.NET Core Identity olmadan kimlik doğrulaması ](xref:security/authentication/cookie)kullanır. Bu konu başlığında gösterilen kavramlar ve örnekler, ASP.NET Core kullanan uygulamalar için eşit oranda geçerlidir Identity . ASP.NET Core kullanmak için Identity içindeki yönergeleri izleyin <xref:security/authentication/identity> .
+Örnek uygulama, [ cookie kimlik doğrulaması olmadan ASP.NET Core Identity ](xref:security/authentication/cookie)kullanır. Bu konuda gösterilen kavramlar ve örnekler, kullanan uygulamalar için eşit oranda geçerlidir ASP.NET Core Identity . Kullanmak için ASP.NET Core Identity içindeki yönergeleri izleyin <xref:security/authentication/identity> .
 
 ## <a name="require-authorization-to-access-a-page"></a>Bir sayfaya erişmek için yetkilendirme gerektir
 
@@ -144,7 +145,7 @@ Sayfalar uygulamanızda erişimi denetlemeye yönelik bir yol Razor , başlangı
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authorization/razor-pages-authorization/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-Örnek uygulama [ cookie ASP.NET Core Identity olmadan kimlik doğrulaması ](xref:security/authentication/cookie)kullanır. Bu konu başlığında gösterilen kavramlar ve örnekler, ASP.NET Core kullanan uygulamalar için eşit oranda geçerlidir Identity . ASP.NET Core kullanmak için Identity içindeki yönergeleri izleyin <xref:security/authentication/identity> .
+Örnek uygulama, [ cookie kimlik doğrulaması olmadan ASP.NET Core Identity ](xref:security/authentication/cookie)kullanır. Bu konuda gösterilen kavramlar ve örnekler, kullanan uygulamalar için eşit oranda geçerlidir ASP.NET Core Identity . Kullanmak için ASP.NET Core Identity içindeki yönergeleri izleyin <xref:security/authentication/identity> .
 
 ## <a name="require-authorization-to-access-a-page"></a>Bir sayfaya erişmek için yetkilendirme gerektir
 

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/18/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/view-components
-ms.openlocfilehash: 0c952502d58744bbbe06c92f51bd51bd547fb8ae
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 32ae699c4ef501096a9c4ab7bca6673139910f02
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020957"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635092"
 ---
 # <a name="view-components-in-aspnet-core"></a>ASP.NET Core bileşenleri görüntüleme
 
@@ -52,7 +53,7 @@ Görünüm bileşenleri, kısmi bir görünüm için çok karmaşık olan işlem
 
 Bir görünüm bileşeni iki bölümden oluşur: Sınıf (genellikle [Viewcomponent](/dotnet/api/microsoft.aspnetcore.mvc.viewcomponent)öğesinden türetilir) ve döndürdüğü sonuç (genellikle bir görünüm). Denetleyiciler gibi bir görünüm bileşeni de bir POCO olabilir, ancak çoğu geliştirici, ' den türeterek kullanılabilir yöntemler ve özelliklerden faydalanmak ister `ViewComponent` .
 
-Görünüm bileşenlerinin bir uygulamanın belirtimlerini karşılayıp karşılamadığını düşünürken, Razor bunun yerine bileşenleri kullanmayı düşünün. RazorBileşenler Ayrıca yeniden kullanılabilir kullanıcı arabirimi birimleri oluşturmak için biçimlendirmeyi C# koduyla birleştirir. RazorBileşenler, istemci tarafı UI mantığı ve kompozisyonu sağlarken geliştirici üretkenliği için tasarlanmıştır. Daha fazla bilgi için bkz. <xref:blazor/components/index>.
+Görünüm bileşenlerinin bir uygulamanın belirtimlerini karşılayıp karşılamadığını düşünürken, Razor bunun yerine bileşenleri kullanmayı düşünün. Razor Bileşenler Ayrıca yeniden kullanılabilir kullanıcı arabirimi birimleri oluşturmak için biçimlendirmeyi C# koduyla birleştirir. Razor Bileşenler, istemci tarafı UI mantığı ve kompozisyonu sağlarken geliştirici üretkenliği için tasarlanmıştır. Daha fazla bilgi için bkz. <xref:blazor/components/index>.
 
 ## <a name="creating-a-view-component"></a>Görünüm bileşeni oluşturma
 
@@ -188,7 +189,7 @@ Koda notlar:
 
 * `[ViewComponent]`Yukarıdaki özniteliği görüntüle bileşen seçicisine `PriorityList` bileşenle ilişkili görünümleri ararken adı kullanmasını ve bir görünümden sınıf bileşenine başvururken "PriorityList" dizesini kullanmasını söyler. Daha sonra ayrıntılı olarak açıklayacağım.
 * Bileşen, veri bağlamını kullanılabilir hale getirmek için [bağımlılık ekleme](../../fundamentals/dependency-injection.md) işlemini kullanır.
-* `InvokeAsync`bir görünümden çağrılabilen bir yöntemi gösterir ve rastgele sayıda bağımsız değişken alabilir.
+* `InvokeAsync` bir görünümden çağrılabilen bir yöntemi gösterir ve rastgele sayıda bağımsız değişken alabilir.
 * `InvokeAsync`Yöntemi `ToDo` ve parametrelerini karşılayan öğe kümesini döndürür `isDone` `maxPriority` .
 
 ### <a name="create-the-view-component-no-locrazor-view"></a>Görünüm bileşeni görünümünü oluşturma Razor
@@ -210,7 +211,7 @@ Koda notlar:
 
     [!code-cshtml[](view-components/sample/ViewCompFinal/Views/ToDo/IndexFirst.cshtml?range=34-38)]
 
-Biçimlendirme, `@await Component.InvokeAsync` Görünüm bileşenlerini çağırma söz dizimini gösterir. İlk bağımsız değişken, çağırmak veya çağırmak istediğimiz bileşenin adıdır. Sonraki parametreler bileşene geçirilir. `InvokeAsync`rastgele sayıda bağımsız değişken alabilir.
+Biçimlendirme, `@await Component.InvokeAsync` Görünüm bileşenlerini çağırma söz dizimini gösterir. İlk bağımsız değişken, çağırmak veya çağırmak istediğimiz bileşenin adıdır. Sonraki parametreler bileşene geçirilir. `InvokeAsync` rastgele sayıda bağımsız değişken alabilir.
 
 Uygulamayı test etme. Aşağıdaki görüntüde ToDo listesi ve öncelik öğeleri gösterilmektedir:
 

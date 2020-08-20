@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 11/08/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,16 +18,16 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity/spa
-ms.openlocfilehash: 21bd1db322a984b5644b817e82a293b6c0b2d91e
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 913f8f1e43586ce71353c080e72be3b80f4c0573
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019335"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634273"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>Maça kimlik doğrulaması ve yetkilendirme
 
-ASP.NET Core 3,0 veya üzeri, API yetkilendirmesi desteğini kullanarak tek sayfalı uygulamalarda (Spaon) kimlik doğrulaması sunmaktadır. IdentityKimlik doğrulama ve depolama için ASP.NET Core, OpenID Connect 'i uygulamak üzere [ Identity sunucu](https://identityserver.io/) ile birleştirilir.
+ASP.NET Core 3,0 veya üzeri, API yetkilendirmesi desteğini kullanarak tek sayfalı uygulamalarda (Spaon) kimlik doğrulaması sunmaktadır. ASP.NET Core Identitykimlik doğrulamak ve depolamak için, OpenID Connect 'i uygulamak üzere [ Identity sunucu](https://identityserver.io/) ile birleştirilir.
 
 Bir kimlik doğrulama parametresi, **angular** 'a eklenmiştir ve **Web uygulamasındaki (model-görünüm-denetleyici)** (MVC) ve **Web uygulaması** (sayfalar) proje şablonlarında kimlik doğrulama parametresine benzer olan proje şablonlarına **tepki** verir Razor . İzin verilen parametre değerleri **none** ve **bireysel**. **React.js ve Redux** proje şablonu, kimlik doğrulama parametresini Şu anda desteklemiyor.
 
@@ -59,7 +60,7 @@ Aşağıdaki kod örnekleri, [Microsoft. AspNetCore. ApiAuthorization öğesine 
 `Startup`Sınıfı aşağıdaki eklemelere sahiptir:
 
 * Yöntemin içinde `Startup.ConfigureServices` :
-  * IdentityVarsayılan Kullanıcı arabirimi ile:
+  * Identity Varsayılan Kullanıcı arabirimi ile:
 
     ```csharp
     services.AddDbContext<ApplicationDbContext>(options =>

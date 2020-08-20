@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/02/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/jsonpatch
-ms.openlocfilehash: 09da557d678889ba16abe6f9af40ae1b33583d8b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e57c5185323305ccbef7960653c9174931e45d75
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022374"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635404"
 ---
 # <a name="jsonpatch-in-aspnet-core-web-api"></a>ASP.NET Core Web API 'sinde JsonPatch
 
@@ -44,7 +45,7 @@ Uygulamanızda JSON yama desteğini etkinleştirmek için aşağıdaki adımlar�
         .AddNewtonsoftJson();
     ```
 
-`AddNewtonsoftJson`, MVC hizmeti kayıt yöntemleriyle uyumludur:
+`AddNewtonsoftJson` , MVC hizmeti kayıt yöntemleriyle uyumludur:
 
 * <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddRazorPages*>
 * <xref:Microsoft.Extensions.DependencyInjection.MvcServiceCollectionExtensions.AddControllersWithViews*>
@@ -253,9 +254,9 @@ Aşağıdaki örnek düzeltme eki belgesinin ilk değeri `CustomerName` "John" i
 
 Örneği test etmek için, uygulamayı çalıştırın ve aşağıdaki ayarlarla HTTP istekleri gönderin:
 
-* 'DEKI`http://localhost:{port}/jsonpatch/jsonpatchwithmodelstate`
-* HTTP yöntemi:`PATCH`
-* Üst bilgi`Content-Type: application/json-patch+json`
+* 'DEKI `http://localhost:{port}/jsonpatch/jsonpatchwithmodelstate`
+* HTTP yöntemi: `PATCH`
+* Üst bilgi `Content-Type: application/json-patch+json`
 * Gövde: *JSON proje klasöründen JSON Patch* belgesi örneklerinden birini kopyalayıp yapıştırın.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
@@ -465,9 +466,9 @@ Aşağıdaki örnek düzeltme eki belgesinin ilk değeri `CustomerName` "John" i
 
 Örneği test etmek için, uygulamayı çalıştırın ve aşağıdaki ayarlarla HTTP istekleri gönderin:
 
-* 'DEKI`http://localhost:{port}/jsonpatch/jsonpatchwithmodelstate`
-* HTTP yöntemi:`PATCH`
-* Üst bilgi`Content-Type: application/json-patch+json`
+* 'DEKI `http://localhost:{port}/jsonpatch/jsonpatchwithmodelstate`
+* HTTP yöntemi: `PATCH`
+* Üst bilgi `Content-Type: application/json-patch+json`
 * Gövde: *JSON proje klasöründen JSON Patch* belgesi örneklerinden birini kopyalayıp yapıştırın.
 
 ## <a name="additional-resources"></a>Ek kaynaklar

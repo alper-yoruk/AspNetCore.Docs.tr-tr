@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 05/26/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/webapi
-ms.openlocfilehash: 4888de6ad55037be540cb62b6e4f02878e2b57ab
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e3e46f8050ba87c3108885341675c9d2a2cb7847
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014821"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635170"
 ---
 # <a name="migrate-from-aspnet-web-api-to-aspnet-core"></a>ASP.NET Web API 'sinden ASP.NET Core 'e geçiş
 
@@ -33,7 +34,7 @@ ASP.NET 4. x Web API 'SI, tarayıcılar ve mobil cihazlar dahil olmak üzere ço
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 [!INCLUDE [prerequisites](../includes/net-core-prereqs-vs-3.1.md)]
 
@@ -101,8 +102,8 @@ Aşağıdaki kod, `ProductsController` ASP.NET Core için güncelleştirileceği
 Aşağıdaki bileşenler ASP.NET Core yok:
 
 * `ApiController` sınıfı
-* `System.Web.Http`uzayına
-* `IHttpActionResult`arayüz
+* `System.Web.Http` uzayına
+* `IHttpActionResult` arayüz
 
 Aşağıdaki değişiklikleri yapın:
 
@@ -155,7 +156,7 @@ Geçirilen projeyi çalıştırın ve konumuna gidin `/api/products` . Üç ür�
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-2.2"
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 [!INCLUDE [prerequisites](../includes/net-core-prereqs-vs2019-2.2.md)]
 
@@ -205,7 +206,7 @@ ASP.NET Core MVC 'de, ' de çağrıldığında öznitelik yönlendirme varsayıl
 
 ## <a name="migrate-models-and-controllers"></a>Modelleri ve denetleyicileri geçirme
 
-Aşağıdaki kod `ProductsController` ASP.NET Core güncelleştirmesini gösterir:[!code-csharp[](webapi/sample/2.x/ProductsApp/Controllers/ProductsController.cs)]
+Aşağıdaki kod `ProductsController` ASP.NET Core güncelleştirmesini gösterir: [!code-csharp[](webapi/sample/2.x/ProductsApp/Controllers/ProductsController.cs)]
 
 `ProductsController`ASP.NET Core için Güncelleştir:
 
@@ -217,8 +218,8 @@ Aşağıdaki kod `ProductsController` ASP.NET Core güncelleştirmesini gösteri
 Aşağıdaki bileşenler ASP.NET Core yok:
 
 * `ApiController` sınıfı
-* `System.Web.Http`uzayına
-* `IHttpActionResult`arayüz
+* `System.Web.Http` uzayına
+* `IHttpActionResult` arayüz
 
 Aşağıdaki değişiklikleri yapın:
 
@@ -272,7 +273,7 @@ Web API 'SI uyumluluk dolgusu, büyük ASP.NET 4. x Web API projelerini ASP.NET 
 * Denetleyici eylemlerinin tür parametreleri alması için model bağlamayı genişletir `HttpRequestMessage` .
 * Eylemlerin tür sonuçları döndürmesini sağlayan ileti biçimleri ekler `HttpResponseMessage` .
 * Web API 2 eylemlerinin yanıtları karşılamak için kullanmış olabileceği ek yanıt yöntemleri ekler:
-  * `HttpResponseMessage`oluşturucuları
+  * `HttpResponseMessage` oluşturucuları
     * `CreateResponse<T>`
     * `CreateErrorResponse`
   * Eylem sonucu yöntemleri:

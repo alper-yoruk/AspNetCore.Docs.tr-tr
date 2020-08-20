@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/modules
-ms.openlocfilehash: c526fc779d778cd0f99bcdaae283b6a5a0fe09ab
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 7ddc1b0f80625fbc39ac49f305f745b005cbce46
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015614"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634676"
 ---
 # <a name="iis-modules-with-aspnet-core"></a>ASP.NET Core ile IIS modülleri
 
@@ -34,20 +35,20 @@ Tablo, ASP.NET Core uygulamalar ve ASP.NET Core modülü ile işlevsel yerel IIS
 
 | Modül | ASP.NET Core uygulamalarla işlevsel | ASP.NET Core seçeneği |
 | --- | :---: | --- |
-| **Anonim kimlik doğrulaması**<br>`AnonymousAuthenticationModule`                                  | Yes | |
+| **Anonim Kimlik Doğrulaması**<br>`AnonymousAuthenticationModule`                                  | Yes | |
 | **Temel kimlik doğrulaması**<br>`BasicAuthenticationModule`                                          | Yes | |
 | **İstemci sertifikası eşleme kimlik doğrulaması**<br>`CertificateMappingAuthenticationModule`      | Yes | |
-| **CGI**<br>`CgiModule`                                                                           | Hayır  | |
+| **CGI**<br>`CgiModule`                                                                           | No  | |
 | **Yapılandırma doğrulaması**<br>`ConfigurationValidationModule`                                  | Yes | |
-| **HTTP Hataları**<br>`CustomErrorModule`                                                           | Hayır  | [Durum kodu sayfaları ara yazılımı](xref:fundamentals/error-handling#usestatuscodepages) |
+| **HTTP Hataları**<br>`CustomErrorModule`                                                           | No  | [Durum kodu sayfaları ara yazılımı](xref:fundamentals/error-handling#usestatuscodepages) |
 | **Özel günlüğe kaydetme**<br>`CustomLoggingModule`                                                      | Yes | |
-| **Varsayılan Belge**<br>`DefaultDocumentModule`                                                  | Hayır  | [Varsayılan dosyalar ara yazılımı](xref:fundamentals/static-files#serve-a-default-document) |
+| **Varsayılan Belge**<br>`DefaultDocumentModule`                                                  | No  | [Varsayılan dosyalar ara yazılımı](xref:fundamentals/static-files#serve-a-default-document) |
 | **Özet kimlik doğrulaması**<br>`DigestAuthenticationModule`                                        | Yes | |
-| **Dizin Tarama**<br>`DirectoryListingModule`                                               | Hayır  | [Dizin tarama ara yazılımı](xref:fundamentals/static-files#enable-directory-browsing) |
+| **Dizin Tarama**<br>`DirectoryListingModule`                                               | No  | [Dizin tarama ara yazılımı](xref:fundamentals/static-files#enable-directory-browsing) |
 | **Dinamik sıkıştırma**<br>`DynamicCompressionModule`                                            | Yes | [Yanıt sıkıştırma ara yazılımı](xref:performance/response-compression) |
 | **Başarısız Istek Izleme**<br>`FailedRequestsTracingModule`                                     | Yes | [Günlüğe kaydetme ASP.NET Core](xref:fundamentals/logging/index#tracesource-provider) |
-| **Dosya önbelleğe alma**<br>`FileCacheModule`                                                            | Hayır  | [Yanıt önbelleğe alma ara yazılımı](xref:performance/caching/middleware) |
-| **HTTP önbelleği**<br>`HttpCacheModule`                                                            | Hayır  | [Yanıt önbelleğe alma ara yazılımı](xref:performance/caching/middleware) |
+| **Dosya önbelleğe alma**<br>`FileCacheModule`                                                            | No  | [Yanıt önbelleğe alma ara yazılımı](xref:performance/caching/middleware) |
+| **HTTP önbelleği**<br>`HttpCacheModule`                                                            | No  | [Yanıt önbelleğe alma ara yazılımı](xref:performance/caching/middleware) |
 | **HTTP Günlüğe Kaydetme**<br>`HttpLoggingModule`                                                          | Yes | [Günlüğe kaydetme ASP.NET Core](xref:fundamentals/logging/index) |
 | **HTTP Yeniden Yönlendirme**<br>`HttpRedirectionModule`                                                  | Yes | [URL yeniden yazma ara yazılımı](xref:fundamentals/url-rewriting) |
 | **HTTP Izleme**<br>`TracingModule`                                                              | Yes | |
@@ -56,15 +57,15 @@ Tablo, ASP.NET Core uygulamalar ve ASP.NET Core modülü ile işlevsel yerel IIS
 | **ISAPI filtreleri**<br>`IsapiFilterModule`                                                         | Yes | [Ara yazılım](xref:fundamentals/middleware/index) |
 | **I**<br>`IsapiModule`                                                                       | Yes | [Ara yazılım](xref:fundamentals/middleware/index) |
 | **Protokol desteği**<br>`ProtocolSupportModule`                                                  | Yes | |
-| **İstek Filtreleme**<br>`RequestFilteringModule`                                                | Yes | [URL yeniden yazma ara yazılımı`IRule`](xref:fundamentals/url-rewriting#irule-based-rule) |
+| **İstek Filtreleme**<br>`RequestFilteringModule`                                                | Yes | [URL yeniden yazma ara yazılımı `IRule`](xref:fundamentals/url-rewriting#irule-based-rule) |
 | **İstek İzleyicisi**<br>`RequestMonitorModule`                                                    | Yes | |
 | **URL yeniden yazma**&#8224;<br>`RewriteModule`                                                      | Yes | [URL yeniden yazma ara yazılımı](xref:fundamentals/url-rewriting) |
-| **Sunucu tarafı eklemeleri**<br>`ServerSideIncludeModule`                                            | Hayır  | |
-| **Statik sıkıştırma**<br>`StaticCompressionModule`                                              | Hayır  | [Yanıt sıkıştırma ara yazılımı](xref:performance/response-compression) |
-| **Statik İçerik**<br>`StaticFileModule`                                                         | Hayır  | [Statik dosya ara yazılımı](xref:fundamentals/static-files) |
+| **Sunucu tarafı eklemeleri**<br>`ServerSideIncludeModule`                                            | No  | |
+| **Statik sıkıştırma**<br>`StaticCompressionModule`                                              | No  | [Yanıt sıkıştırma ara yazılımı](xref:performance/response-compression) |
+| **Statik İçerik**<br>`StaticFileModule`                                                         | No  | [Statik dosya ara yazılımı](xref:fundamentals/static-files) |
 | **Belirteç önbelleğe alma**<br>`TokenCacheModule`                                                          | Yes | |
 | **URI önbelleğe alma**<br>`UriCacheModule`                                                              | Yes | |
-| **URL Yetkilendirmesi**<br>`UrlAuthorizationModule`                                                | Yes | [ASP.NET CoreIdentity](xref:security/authentication/identity) |
+| **URL Yetkilendirmesi**<br>`UrlAuthorizationModule`                                                | Yes | [ASP.NET Core Identity](xref:security/authentication/identity) |
 | **Windows Kimlik Doğrulaması**<br>`WindowsAuthenticationModule`                                      | Yes | |
 
 &#8224;, `isFile` `isDirectory` [Dizin YAPıSıNDAKI](xref:host-and-deploy/directory-structure)değişiklikler nedeniyle URL yeniden yazma modülünün ve eşleşme türlerinin ASP.NET Core uygulamalarla birlikte çalışmıyor.
@@ -78,7 +79,7 @@ Yönetilen modüller, uygulama havuzunun .NET CLR sürümü **yönetilen kod olm
 | AnonymousIdentification | |
 | DefaultAuthentication   | |
 | Dosya yetkilendirmesi       | |
-| FormsAuthentication     | [CookieKimlik doğrulama ara yazılımı](xref:security/authentication/cookie) |
+| FormsAuthentication     | [Cookie Kimlik doğrulama ara yazılımı](xref:security/authentication/cookie) |
 | OutputCache             | [Yanıt önbelleğe alma ara yazılımı](xref:performance/caching/middleware) |
 | Profil                 | |
 | 'Da             | |
@@ -86,7 +87,7 @@ Yönetilen modüller, uygulama havuzunun .NET CLR sürümü **yönetilen kod olm
 | Oturum                 | [Oturum ara yazılımı](xref:fundamentals/app-state) |
 | UrlAuthorization        | |
 | UrlMappingsModule       | [URL yeniden yazma ara yazılımı](xref:fundamentals/url-rewriting) |
-| UrlRoutingModule-4,0    | [ASP.NET CoreIdentity](xref:security/authentication/identity) |
+| UrlRoutingModule-4,0    | [ASP.NET Core Identity](xref:security/authentication/identity) |
 | WindowsAuthentication   | |
 
 ## <a name="iis-manager-application-changes"></a>IIS Yöneticisi uygulama değişiklikleri
@@ -178,4 +179,4 @@ HTTP önbelleğe alma modülü ( `HttpCacheModule` ), IIS çıkış önbelleğin
 * [IIS mimarilerine giriş: IIS 'deki modüller](/iis/get-started/introduction-to-iis/introduction-to-iis-architecture#modules-in-iis)
 * [IIS modüllerine genel bakış](/iis/get-started/introduction-to-iis/iis-modules-overview)
 * [IIS 7,0 rollerini ve modüllerini özelleştirme](https://technet.microsoft.com/library/cc627313.aspx)
-* [ISS\<system.webServer>](/iis/configuration/system.webServer/)
+* [ISS \<system.webServer>](/iis/configuration/system.webServer/)

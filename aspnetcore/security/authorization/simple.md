@@ -5,6 +5,7 @@ description: ASP.NET Core denetleyicilerine ve eylemlerine erişimi kısıtlamak
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/simple
-ms.openlocfilehash: b503f5e79cbfbbd3e74e18356884c3223ede66a6
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: edf027b23ba6b22146e4521c134e67ac6fe1bd03
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019033"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634806"
 ---
 # <a name="simple-authorization-in-aspnet-core"></a>ASP.NET Core basit yetkilendirme
 
@@ -82,7 +83,7 @@ public class AccountController : Controller
 Bu, `AccountController` `Login` kimliği doğrulanmış veya kimliği doğrulanmamış/anonim durumundan bağımsız olarak herkes tarafından erişilebilen, yalnızca kimliği doğrulanmış kullanıcıların öğesine izin verir.
 
 > [!WARNING]
-> `[AllowAnonymous]`Tüm yetkilendirme deyimlerini atlar. `[AllowAnonymous]`Ve herhangi bir özniteliği birleştirirseniz `[Authorize]` , `[Authorize]` öznitelikler yok sayılır. Örneğin, `[AllowAnonymous]` Denetleyici düzeyinde uygularsanız, `[Authorize]` aynı denetleyicideki (veya içindeki herhangi bir eylemde) tüm öznitelikler yok sayılır.
+> `[AllowAnonymous]` Tüm yetkilendirme deyimlerini atlar. `[AllowAnonymous]`Ve herhangi bir özniteliği birleştirirseniz `[Authorize]` , `[Authorize]` öznitelikler yok sayılır. Örneğin, `[AllowAnonymous]` Denetleyici düzeyinde uygularsanız, `[Authorize]` aynı denetleyicideki (veya içindeki herhangi bir eylemde) tüm öznitelikler yok sayılır.
 
 [!INCLUDE[](~/includes/requireAuth.md)]
 

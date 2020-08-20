@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/development-time-iis-support
-ms.openlocfilehash: ba4d47e0500d7f3287e6a57d10036d774c4b19f4
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 5636abef928ed8a8122ec907ef025d55baa65127
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015671"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635365"
 ---
 # <a name="development-time-iis-support-in-visual-studio-for-aspnet-core"></a>ASP.NET Core için Visual Studio'da geliştirme zamanı IIS desteği
 
@@ -32,7 +33,7 @@ ms.locfileid: "88015671"
 
 Bu makalede, Windows Server 'da IIS ile çalışan ASP.NET Core hata ayıklama için [Visual Studio](https://visualstudio.microsoft.com) desteği açıklanmaktadır. Bu konu başlığı altında, bu senaryonun etkinleştirilmesi ve bir projenin kurulması anlatılmaktadır.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [Windows için Visual Studio](https://visualstudio.microsoft.com/downloads/)
 * **ASP.net ve Web geliştirme** iş yükü
@@ -147,7 +148,7 @@ Güvenilmeyen bir geliştirme sertifikası kullanılırsa, tarayıcı güvenilme
 
 Bu makalede, Windows Server 'da IIS ile çalışan ASP.NET Core hata ayıklama için [Visual Studio](https://visualstudio.microsoft.com) desteği açıklanmaktadır. Bu konu başlığı altında, bu senaryonun etkinleştirilmesi ve bir projenin kurulması anlatılmaktadır.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 * [Windows için Visual Studio](https://visualstudio.microsoft.com/downloads/)
 * **ASP.net ve Web geliştirme** iş yükü

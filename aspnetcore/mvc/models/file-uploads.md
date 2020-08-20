@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/03/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/file-uploads
-ms.openlocfilehash: a11e6325143b9db57d6fbd1cd67478dc1dd6122d
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 93ffa3a5313e63a1e9b98fb5bf9788944254213f
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021256"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635222"
 ---
 # <a name="upload-files-in-aspnet-core"></a>ASP.NET Core dosyaları karşıya yükleme
 
@@ -239,7 +240,7 @@ Sunucuya yüklenen tek dosyalara, kullanılarak [model bağlama](xref:mvc/models
 > Bu nedenle, şu ana kadar dikkate alınması gereken örnekler aşağıda verilmiştir. Ek bilgiler aşağıdaki bölümler ve [örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)tarafından sağlanır:
 >
 > * [Güvenlikle ilgili dikkat edilmesi gerekenler](#security-considerations)
-> * [Doğrulamasına](#validation)
+> * [Doğrulama](#validation)
 
 Model bağlama kullanarak dosyaları karşıya yüklerken <xref:Microsoft.AspNetCore.Http.IFormFile> , eylem yöntemi kabul edebilir:
 
@@ -348,7 +349,7 @@ public class BufferedSingleFileUploadDb
 ```
 
 > [!NOTE]
-> <xref:Microsoft.AspNetCore.Http.IFormFile>doğrudan bir eylem yöntemi parametresi veya bir bağlantılı model özelliği olarak kullanılabilir. Önceki örnekte, bir bağlantılı model özelliği kullanılmaktadır.
+> <xref:Microsoft.AspNetCore.Http.IFormFile> doğrudan bir eylem yöntemi parametresi veya bir bağlantılı model özelliği olarak kullanılabilir. Önceki örnekte, bir bağlantılı model özelliği kullanılmaktadır.
 
 , `FileUpload` Razor Sayfalar formunda kullanılır:
 
@@ -410,7 +411,7 @@ Yukarıdaki örnek, örnek uygulamada gösterilen senaryoya benzerdir:
 > Belirtilen örneklerde dikkate alınması gereken önemli noktalar. Ek bilgiler aşağıdaki bölümler ve [örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)tarafından sağlanır:
 >
 > * [Güvenlikle ilgili dikkat edilmesi gerekenler](#security-considerations)
-> * [Doğrulamasına](#validation)
+> * [Doğrulama](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>Akışa sahip büyük dosyaları karşıya yükleme
 
@@ -434,7 +435,7 @@ Model bağlama formu okumadığından formdan bağlanan parametreler bağlanamaz
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Controllers/StreamingController.cs?name=snippet_UploadDatabase)]
 
-`MultipartRequestHelper`(*Utilities/MultipartRequestHelper. cs*):
+`MultipartRequestHelper` (*Utilities/MultipartRequestHelper. cs*):
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Utilities/MultipartRequestHelper.cs)]
 
@@ -512,7 +513,7 @@ Ek dosya imzaları almak için [Dosya Imzaları veritabanı](https://www.filesig
 
 Fiziksel depolamaya bir dosyayı kaydetmek için hiçbir şekilde istemci tarafından sağlanan dosya adı kullanmayın. Geçici depolama için tam yol (dosya adı da dahil olmak üzere) oluşturmak için [Path. GetRandomFileName](xref:System.IO.Path.GetRandomFileName*) veya [Path. GetTempFileName](xref:System.IO.Path.GetTempFileName*) kullanarak dosya için güvenli bir dosya adı oluşturun.
 
-RazorOtomatik HTML, görüntüleme için özellik değerlerini kodluyor. Aşağıdaki kodun kullanımı güvenlidir:
+Razor Otomatik HTML, görüntüleme için özellik değerlerini kodluyor. Aşağıdaki kodun kullanımı güvenlidir:
 
 ```cshtml
 @foreach (var file in Model.DatabaseFiles) {
@@ -605,7 +606,7 @@ C# yönteminin () parametresi için eşleşen bir ad kullanın `battlePlans` :
 
 ### <a name="multipart-body-length-limit"></a>Çok parçalı gövde uzunluğu sınırı
 
-<xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit>Her bir çok parçalı gövdenin uzunluk sınırını ayarlar. Bu sınırı aşan form bölümleri <xref:System.IO.InvalidDataException> ayrıştırıldığında bir oluşturur. Varsayılan değer 134.217.728 ' dir (128 MB). Sınırı, <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> içindeki ayarı kullanarak özelleştirin `Startup.ConfigureServices` :
+<xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> Her bir çok parçalı gövdenin uzunluk sınırını ayarlar. Bu sınırı aşan form bölümleri <xref:System.IO.InvalidDataException> ayrıştırıldığında bir oluşturur. Varsayılan değer 134.217.728 ' dir (128 MB). Sınırı, <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> içindeki ayarı kullanarak özelleştirin `Startup.ConfigureServices` :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -665,7 +666,7 @@ public static IHostBuilder CreateHostBuilder(string[] args) =>
         });
 ```
 
-<xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute>, tek sayfa veya eylem için [MaxRequestBodySize](xref:fundamentals/servers/kestrel#maximum-request-body-size) ayarlamak üzere kullanılır.
+<xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute> , tek sayfa veya eylem için [MaxRequestBodySize](xref:fundamentals/servers/kestrel#maximum-request-body-size) ayarlamak üzere kullanılır.
 
 Bir Razor Sayfalar uygulamasında, filtresi içindeki bir [kurala](xref:razor-pages/razor-pages-conventions) uygulayın `Startup.ConfigureServices` :
 
@@ -966,7 +967,7 @@ Sunucuya yüklenen tek dosyalara, kullanılarak [model bağlama](xref:mvc/models
 > Bu nedenle, şu ana kadar dikkate alınması gereken örnekler aşağıda verilmiştir. Ek bilgiler aşağıdaki bölümler ve [örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)tarafından sağlanır:
 >
 > * [Güvenlikle ilgili dikkat edilmesi gerekenler](#security-considerations)
-> * [Doğrulamasına](#validation)
+> * [Doğrulama](#validation)
 
 Model bağlama kullanarak dosyaları karşıya yüklerken <xref:Microsoft.AspNetCore.Http.IFormFile> , eylem yöntemi kabul edebilir:
 
@@ -1075,7 +1076,7 @@ public class BufferedSingleFileUploadDb
 ```
 
 > [!NOTE]
-> <xref:Microsoft.AspNetCore.Http.IFormFile>doğrudan bir eylem yöntemi parametresi veya bir bağlantılı model özelliği olarak kullanılabilir. Önceki örnekte, bir bağlantılı model özelliği kullanılmaktadır.
+> <xref:Microsoft.AspNetCore.Http.IFormFile> doğrudan bir eylem yöntemi parametresi veya bir bağlantılı model özelliği olarak kullanılabilir. Önceki örnekte, bir bağlantılı model özelliği kullanılmaktadır.
 
 , `FileUpload` Razor Sayfalar formunda kullanılır:
 
@@ -1137,7 +1138,7 @@ Yukarıdaki örnek, örnek uygulamada gösterilen senaryoya benzerdir:
 > Belirtilen örneklerde dikkate alınması gereken önemli noktalar. Ek bilgiler aşağıdaki bölümler ve [örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)tarafından sağlanır:
 >
 > * [Güvenlikle ilgili dikkat edilmesi gerekenler](#security-considerations)
-> * [Doğrulamasına](#validation)
+> * [Doğrulama](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>Akışa sahip büyük dosyaları karşıya yükleme
 
@@ -1161,7 +1162,7 @@ Model bağlama formu okumadığından formdan bağlanan parametreler bağlanamaz
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Controllers/StreamingController.cs?name=snippet_UploadDatabase)]
 
-`MultipartRequestHelper`(*Utilities/MultipartRequestHelper. cs*):
+`MultipartRequestHelper` (*Utilities/MultipartRequestHelper. cs*):
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Utilities/MultipartRequestHelper.cs)]
 
@@ -1239,7 +1240,7 @@ Ek dosya imzaları almak için [Dosya Imzaları veritabanı](https://www.filesig
 
 Fiziksel depolamaya bir dosyayı kaydetmek için hiçbir şekilde istemci tarafından sağlanan dosya adı kullanmayın. Geçici depolama için tam yol (dosya adı da dahil olmak üzere) oluşturmak için [Path. GetRandomFileName](xref:System.IO.Path.GetRandomFileName*) veya [Path. GetTempFileName](xref:System.IO.Path.GetTempFileName*) kullanarak dosya için güvenli bir dosya adı oluşturun.
 
-RazorOtomatik HTML, görüntüleme için özellik değerlerini kodluyor. Aşağıdaki kodun kullanımı güvenlidir:
+Razor Otomatik HTML, görüntüleme için özellik değerlerini kodluyor. Aşağıdaki kodun kullanımı güvenlidir:
 
 ```cshtml
 @foreach (var file in Model.DatabaseFiles) {
@@ -1332,7 +1333,7 @@ C# yönteminin () parametresi için eşleşen bir ad kullanın `battlePlans` :
 
 ### <a name="multipart-body-length-limit"></a>Çok parçalı gövde uzunluğu sınırı
 
-<xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit>Her bir çok parçalı gövdenin uzunluk sınırını ayarlar. Bu sınırı aşan form bölümleri <xref:System.IO.InvalidDataException> ayrıştırıldığında bir oluşturur. Varsayılan değer 134.217.728 ' dir (128 MB). Sınırı, <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> içindeki ayarı kullanarak özelleştirin `Startup.ConfigureServices` :
+<xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> Her bir çok parçalı gövdenin uzunluk sınırını ayarlar. Bu sınırı aşan form bölümleri <xref:System.IO.InvalidDataException> ayrıştırıldığında bir oluşturur. Varsayılan değer 134.217.728 ' dir (128 MB). Sınırı, <xref:Microsoft.AspNetCore.Http.Features.FormOptions.MultipartBodyLengthLimit> içindeki ayarı kullanarak özelleştirin `Startup.ConfigureServices` :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -1391,7 +1392,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-<xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute>, tek sayfa veya eylem için [MaxRequestBodySize](xref:fundamentals/servers/kestrel#maximum-request-body-size) ayarlamak üzere kullanılır.
+<xref:Microsoft.AspNetCore.Mvc.RequestSizeLimitAttribute> , tek sayfa veya eylem için [MaxRequestBodySize](xref:fundamentals/servers/kestrel#maximum-request-body-size) ayarlamak üzere kullanılır.
 
 Bir Razor Sayfalar uygulamasında, filtresi içindeki bir [kurala](xref:razor-pages/razor-pages-conventions) uygulayın `Startup.ConfigureServices` :
 

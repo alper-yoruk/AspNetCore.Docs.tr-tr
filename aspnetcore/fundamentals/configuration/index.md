@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 3/29/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 8f39d6f460faaab3d54178daf3730f5a6662df40
-ms.sourcegitcommit: ba4872dd5a93780fe6cfacb2711ec1e69e0df92c
+ms.openlocfilehash: fe0a0d3dbb87455be602234825d702fab02df936
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/12/2020
-ms.locfileid: "88130697"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634598"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core yapılandırma
 
@@ -51,7 +52,7 @@ ASP.NET Core yapılandırma bir veya daha fazla [yapılandırma sağlayıcısı]
 
 [!code-csharp[](index/samples/3.x/ConfigSample/Program.cs?name=snippet&highlight=9)]
 
- <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*>uygulama için varsayılan yapılandırmayı aşağıdaki sırayla sağlar:
+ <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> uygulama için varsayılan yapılandırmayı aşağıdaki sırayla sağlar:
 
 1. [Chainedconfigurationprovider](xref:Microsoft.Extensions.Configuration.ChainedConfigurationSource) : var olan bir `IConfiguration` kaynak olarak ekler. Varsayılan yapılandırma durumunda, [ana bilgisayar](#hvac) yapılandırmasını ekler ve _uygulama_ yapılandırması için ilk kaynak olarak ayarlar.
 1. [JSON yapılandırma sağlayıcısını](#file-configuration-provider)kullanarak [appsettings.js](#appsettingsjson) .
@@ -60,7 +61,7 @@ ASP.NET Core yapılandırma bir veya daha fazla [yapılandırma sağlayıcısı]
 1. Ortam [değişkenleri yapılandırma sağlayıcısını](#evcp)kullanarak ortam değişkenleri.
 1. Komut satırı [yapılandırma sağlayıcısını](#command-line)kullanan komut satırı bağımsız değişkenleri.
 
-Daha sonra eklenen yapılandırma sağlayıcıları önceki anahtar ayarlarını geçersiz kılar. Örneğin, `MyKey` ve ortamında hem *appsettings.js* hem de ortamda ayarlandıysa, ortam değeri kullanılır. Varsayılan yapılandırma sağlayıcılarını kullanarak, [komut satırı yapılandırma sağlayıcısı](#clcp) diğer tüm sağlayıcıları geçersiz kılar.
+Daha sonra eklenen yapılandırma sağlayıcıları önceki anahtar ayarlarını geçersiz kılar. Örneğin, `MyKey` ve ortamında hem *appsettings.js* hem de ortamda ayarlandıysa, ortam değeri kullanılır. Varsayılan yapılandırma sağlayıcılarını kullanarak,  [komut satırı yapılandırma sağlayıcısı](#clcp) diğer tüm sağlayıcıları geçersiz kılar.
 
 Hakkında daha fazla bilgi için `CreateDefaultBuilder` bkz. [Varsayılan Oluşturucu ayarları](xref:fundamentals/host/generic-host#default-builder-settings).
 
@@ -80,13 +81,13 @@ Dosyasında aşağıdaki *appsettings.js* göz önünde bulundurun:
 
 Varsayılan <xref:Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider> yapılandırma yapılandırması aşağıdaki sırayla yüklenir:
 
-1. *Üzerindeappsettings.js*
+1. * Üzerindeappsettings.js*
 1. *appSettings.* `Environment` *. JSON* : Örneğin, *appSettings*. ***Üretim***. *JSON* ve *appSettings*. ***Geliştirme***. *JSON* dosyaları. Dosyanın ortam sürümü, [ıhostingenvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*)temel alınarak yüklenir. Daha fazla bilgi için bkz. <xref:fundamentals/environments>.
 
 *appSettings*. `Environment` . *JSON* değerleri *appsettings.jsüzerindeki*anahtarları geçersiz kılar. Örneğin, varsayılan olarak:
 
-* Geliştirme sürümünde *appSettings*. ***Geliştirme***. *JSON* yapılandırması, *üzerindeappsettings.js*bulunan değerlerin üzerine yazar.
-* Üretimde, *appSettings*. ***Üretim***. *JSON* yapılandırması, *üzerindeappsettings.js*bulunan değerlerin üzerine yazar. Örneğin, uygulamayı Azure 'a dağıtma.
+* Geliştirme sürümünde *appSettings*. ***Geliştirme***. *JSON* yapılandırması, * üzerindeappsettings.js*bulunan değerlerin üzerine yazar.
+* Üretimde, *appSettings*. ***Üretim***. *JSON* yapılandırması, * üzerindeappsettings.js*bulunan değerlerin üzerine yazar. Örneğin, uygulamayı Azure 'a dağıtma.
 
 <a name="optpat"></a>
 
@@ -144,7 +145,7 @@ dotnet run
 * Yalnızca ' de ayarlanan komut penceresinden başlatılan işlemlerde ayarlanır.
 * Visual Studio ile başlatılan tarayıcılar tarafından okunmayacaktır.
 
-Aşağıdaki [Setx](/windows-server/administration/windows-commands/setx) komutları Windows üzerinde ortam anahtarlarını ve değerlerini ayarlamak için kullanılabilir. Farklı olarak `set` , `setx` ayarlar kalıcı hale getirilir. `/M`değişkeni sistem ortamında ayarlar. `/M`Anahtar kullanılmazsa, bir kullanıcı ortam değişkeni ayarlanır.
+Aşağıdaki [Setx](/windows-server/administration/windows-commands/setx) komutları Windows üzerinde ortam anahtarlarını ve değerlerini ayarlamak için kullanılabilir. Farklı olarak `set` , `setx` ayarlar kalıcı hale getirilir. `/M` değişkeni sistem ortamında ayarlar. `/M`Anahtar kullanılmazsa, bir kullanıcı ortam değişkeni ayarlanır.
 
 ```cmd
 setx MyKey "My key from setx Environment" /M
@@ -256,14 +257,6 @@ Aşağıdaki komut, anahtar değişimini test etmek için işe yarar:
 dotnet run -k1 value1 -k2 value2 --alt3=value2 /alt4=value3 --alt5 value5 /alt6 value6
 ```
 
-<!-- Run the following command to test the key replacement: -->
-
-Note: Şu anda, `=` anahtar değiştirme değerlerini tek bir çizgiyle ayarlamak için kullanılamaz `-` . [Bu GitHub sorununa](https://github.com/dotnet/extensions/issues/3059)bakın.
-
-```dotnetcli
-dotnet run -k1=value1 -k2 value2 --alt3=value2 /alt4=value3 --alt5 value5 /alt6 value6
-```
-
 Anahtar eşlemeleri kullanan uygulamalar için, ' ye yapılan çağrı `CreateDefaultBuilder` bağımsız değişkenleri geçirmez. `CreateDefaultBuilder`Yöntemin `AddCommandLine` çağrısı eşlenmiş anahtarlar içermez ve anahtar eşleme sözlüğünü öğesine geçirmenin bir yolu yoktur `CreateDefaultBuilder` . Çözüm, bağımsız değişkenleri öğesine geçirmektir, `CreateDefaultBuilder` bunun yerine `ConfigurationBuilder` metodun `AddCommandLine` yönteminin hem bağımsız değişkenleri hem de anahtar eşleme sözlüğünü işlemesini sağlar.
 
 ## <a name="hierarchical-configuration-data"></a>Hiyerarşik yapılandırma verileri
@@ -280,7 +273,7 @@ Yapılandırma API 'SI, hiyerarşik verileri, yapılandırma anahtarlarında bir
 
 Hiyerarşik yapılandırma verilerini okumak için tercih edilen yol, Seçenekler modelini kullanmaktır. Daha fazla bilgi için, bkz. bu belgedeki [Hiyerarşik yapılandırma verilerini bağlama](#optpat) .
 
-<xref:Microsoft.Extensions.Configuration.ConfigurationSection.GetSection*>ve <xref:Microsoft.Extensions.Configuration.IConfiguration.GetChildren*> yapılandırma verileri bölümünün bölümlerini ve alt öğelerini yalıtmak için kullanılabilir. Bu yöntemler daha sonra [GetSection, GetChildren ve Exists](#getsection)içinde açıklanmıştır.
+<xref:Microsoft.Extensions.Configuration.ConfigurationSection.GetSection*> ve <xref:Microsoft.Extensions.Configuration.IConfiguration.GetChildren*> yapılandırma verileri bölümünün bölümlerini ve alt öğelerini yalıtmak için kullanılabilir. Bu yöntemler daha sonra [GetSection, GetChildren ve Exists](#getsection)içinde açıklanmıştır.
 
 <!--
 [Azure Key Vault configuration provider](xref:security/key-vault-configuration) implement change detection.
@@ -325,7 +318,7 @@ Yapılandırma kaynakları, yapılandırma sağlayıcılarının belirtilme sır
 
 Yapılandırma sağlayıcılarının tipik bir sırası şunlardır:
 
-1. *Üzerindeappsettings.js*
+1. * Üzerindeappsettings.js*
 1. *appSettings*. `Environment` . *JSON*
 1. [Gizli dizi Yöneticisi](xref:security/app-secrets)
 1. Ortam [değişkenleri yapılandırma sağlayıcısını](#evcp)kullanarak ortam değişkenleri.
@@ -364,7 +357,7 @@ Bir ortam değişkeni keşfedildiğinde ve tabloda gösterilen dört önekle yap
 
 ## <a name="file-configuration-provider"></a>Dosya yapılandırma sağlayıcısı
 
-<xref:Microsoft.Extensions.Configuration.FileConfigurationProvider>, dosya sisteminden yapılandırma yüklemeye yönelik temel sınıftır. Aşağıdaki yapılandırma sağlayıcıları öğesinden türetilir `FileConfigurationProvider` :
+<xref:Microsoft.Extensions.Configuration.FileConfigurationProvider> , dosya sisteminden yapılandırma yüklemeye yönelik temel sınıftır. Aşağıdaki yapılandırma sağlayıcıları öğesinden türetilir `FileConfigurationProvider` :
 
 * [INı yapılandırma sağlayıcısı](#ini-configuration-provider)
 * [JSON yapılandırma sağlayıcısı](#jcp)
@@ -378,7 +371,7 @@ Aşağıdaki kod tüm yapılandırma sağlayıcılarını temizler ve çeşitli 
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramINI.cs?name=snippet&highlight=10-30)]
 
-Yukarıdaki kodda, *MyIniConfig.ini* ve *Myıniconfig*içindeki `Environment` ayarlar. *ını* dosyaları, içindeki ayarlar tarafından geçersiz kılınır:
+Yukarıdaki kodda, *MyIniConfig.ini* ve  *Myıniconfig*içindeki `Environment` ayarlar. *ını* dosyaları, içindeki ayarlar tarafından geçersiz kılınır:
 
 * [Ortam değişkenleri yapılandırma sağlayıcısı](#evcp)
 * [Komut satırı yapılandırma sağlayıcısı](#clcp).
@@ -410,7 +403,7 @@ Yukarıdaki kod:
 
 * Dosyadaki *MyConfig.js* yüklemek için JSON yapılandırma sağlayıcısını aşağıdaki seçeneklerle yapılandırır:
   * `optional: true`: Dosya isteğe bağlıdır.
-  * `reloadOnChange: true`: Değişiklikler kaydedildiğinde dosya yeniden yüklenir.
+  * `reloadOnChange: true` : Değişiklikler kaydedildiğinde dosya yeniden yüklenir.
 * Dosyadaki *MyConfig.js* önce [varsayılan yapılandırma sağlayıcılarını](#default) okur. [Ortam değişkenleri yapılandırma sağlayıcısı](#evcp) ve [komut satırı yapılandırma sağlayıcısı](#clcp)da dahil olmak üzere varsayılan yapılandırma sağlayıcılarındaki *MyConfig.js* dosya geçersiz kılma ayarı ayarları.
 
 Genellikle, [ortam değişkenleri Yapılandırma sağlayıcısında](#evcp) ve [komut satırı yapılandırma sağlayıcısında](#clcp)ayarlanmış özel bir JSON dosyası değerlerini geçersiz ***kılmayı istemezsiniz.***
@@ -440,7 +433,7 @@ Aşağıdaki kod tüm yapılandırma sağlayıcılarını temizler ve çeşitli 
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramXML.cs?name=snippet)]
 
-Yukarıdaki kodda, *MyXMLFile.xml* ve *myXMLfile*içindeki ayarlar. `Environment` .. *XML* dosyaları, içindeki ayarlar tarafından geçersiz kılınır:
+Yukarıdaki kodda, *MyXMLFile.xml* ve  *myXMLfile*içindeki ayarlar. `Environment` .. *XML* dosyaları, içindeki ayarlar tarafından geçersiz kılınır:
 
 * [Ortam değişkenleri yapılandırma sağlayıcısı](#evcp)
 * [Komut satırı yapılandırma sağlayıcısı](#clcp).
@@ -522,7 +515,7 @@ Bkz. kullanarak bir diziyi başka bir örnek için [bağlama](#boa) `MemoryConfi
 
 ## <a name="getvalue"></a>GetValue
 
-[`ConfigurationBinder.GetValue<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue*)belirli bir anahtarla yapılandırmadan tek bir değer ayıklar ve belirtilen türe dönüştürür:
+[`ConfigurationBinder.GetValue<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue*) belirli bir anahtarla yapılandırmadan tek bir değer ayıklar ve belirtilen türe dönüştürür:
 
 [!code-csharp[](index/samples/3.x/ConfigSample/Pages/TestNum.cshtml.cs?name=snippet)]
 
@@ -550,7 +543,7 @@ Aşağıdaki kod şu değerleri döndürür `section2:subsection0` :
 
 [!code-csharp[](index/samples/3.x/ConfigSample/Pages/TestSection2.cshtml.cs?name=snippet)]
 
-`GetSection`hiçbir süre geri döndürmez `null` . Eşleşen bir bölüm bulunamazsa boş `IConfigurationSection` değer döndürülür.
+`GetSection` hiçbir süre geri döndürmez `null` . Eşleşen bir bölüm bulunamazsa boş `IConfigurationSection` değer döndürülür.
 
 `GetSection`Eşleşen bir bölüm döndürdüğünde, <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Value> doldurulmuyor. Bir <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Key> ve <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Path> , bölüm varsa döndürülür.
 
@@ -616,7 +609,7 @@ Dizin 3 &num; `ArrayExample` &num; anahtar/değer çiftini okuyan herhangi bir y
 
 [!code-json[](index/samples/3.x/ConfigSample/Value3.json)]
 
-Aşağıdaki kod, ve *üzerindeValue3.js* için yapılandırma içerir `arrayDict` `Dictionary` :
+Aşağıdaki kod, ve * üzerindeValue3.js* için yapılandırma içerir `arrayDict` `Dictionary` :
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramArray.cs?name=snippet2)]
 
@@ -725,7 +718,7 @@ Aşağıdaki kod, seçenek değerlerini görüntüler:
 
 [!code-csharp[](options/samples/3.x/OptionsSample/Pages/Test2.cshtml.cs?name=snippet)]
 
-Yukarıdaki örnekte, `Option1` ve değerleri `Option2` *üzerindeappsettings.js* belirtilmiştir ve sonra yapılandırılan temsilci tarafından geçersiz kılınır.
+Yukarıdaki örnekte, `Option1` ve değerleri `Option2` * üzerindeappsettings.js* belirtilmiştir ve sonra yapılandırılan temsilci tarafından geçersiz kılınır.
 
 <a name="hvac"></a>
 
@@ -819,7 +812,7 @@ ASP.NET 'in önceki sürümlerinden uygulama yapılandırmasını geçirme hakk�
 
 ## <a name="default-configuration"></a>Varsayılan yapılandırma
 
-Ana bilgisayar oluştururken ASP.NET Core [DotNet yeni](/dotnet/core/tools/dotnet-new) şablonlar çağrısı tabanlı Web Apps <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> . `CreateDefaultBuilder`uygulama için varsayılan yapılandırmayı aşağıdaki sırayla sağlar:
+Ana bilgisayar oluştururken ASP.NET Core [DotNet yeni](/dotnet/core/tools/dotnet-new) şablonlar çağrısı tabanlı Web Apps <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> . `CreateDefaultBuilder` uygulama için varsayılan yapılandırmayı aşağıdaki sırayla sağlar:
 
 [Web ana bilgisayarı](xref:fundamentals/host/web-host)kullanan uygulamalar için aşağıdakiler geçerlidir. [Genel ana bilgisayarı](xref:fundamentals/host/generic-host)kullanırken varsayılan yapılandırmayla ilgili ayrıntılar için, [Bu konunun en son sürümüne](xref:fundamentals/configuration/index)bakın.
 
@@ -874,7 +867,7 @@ Dosya yapılandırmaya okunduğu zaman, yapılandırma kaynağının özgün hiy
 * section1:key0
 * Section1: KEY1
 
-<xref:Microsoft.Extensions.Configuration.ConfigurationSection.GetSection*>ve <xref:Microsoft.Extensions.Configuration.IConfiguration.GetChildren*> yapılandırma verileri bölümünün bölümlerini ve alt öğelerini yalıtmak için kullanılabilir. Bu yöntemler daha sonra [GetSection, GetChildren ve Exists](#getsection-getchildren-and-exists)içinde açıklanmıştır.
+<xref:Microsoft.Extensions.Configuration.ConfigurationSection.GetSection*> ve <xref:Microsoft.Extensions.Configuration.IConfiguration.GetChildren*> yapılandırma verileri bölümünün bölümlerini ve alt öğelerini yalıtmak için kullanılabilir. Bu yöntemler daha sonra [GetSection, GetChildren ve Exists](#getsection-getchildren-and-exists)içinde açıklanmıştır.
 
 ## <a name="conventions"></a>Kurallar
 
@@ -884,7 +877,7 @@ Uygulama başlangıcında yapılandırma kaynakları, yapılandırma sağlayıc�
 
 Değişiklik algılamayı uygulayan yapılandırma sağlayıcılarının, temel alınan bir ayar değiştirildiğinde yapılandırmayı yeniden yükleme yeteneği vardır. Örneğin, dosya yapılandırma sağlayıcısı (Bu konunun ilerleyen kısımlarında açıklanmıştır) ve [Azure Key Vault yapılandırma sağlayıcısı](xref:security/key-vault-configuration) değişiklik algılamayı uygular.
 
-<xref:Microsoft.Extensions.Configuration.IConfiguration>uygulamanın [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection) kapsayıcısında kullanılabilir. <xref:Microsoft.Extensions.Configuration.IConfiguration>Razor <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> <xref:Microsoft.AspNetCore.Mvc.Controller> , sınıfının yapılandırmasını elde etmek için BIR sayfalara veya MVC 'ye eklenebilir.
+<xref:Microsoft.Extensions.Configuration.IConfiguration> uygulamanın [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection) kapsayıcısında kullanılabilir. <xref:Microsoft.Extensions.Configuration.IConfiguration>Razor <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> <xref:Microsoft.AspNetCore.Mvc.Controller> , sınıfının yapılandırmasını elde etmek için BIR sayfalara veya MVC 'ye eklenebilir.
 
 Aşağıdaki örneklerde, `_config` alanı yapılandırma değerlerine erişmek için kullanılır:
 
@@ -1026,17 +1019,17 @@ Uygulamasında uygulamaya sağlanan yapılandırma `ConfigureAppConfiguration` ,
 
 Komut satırı yapılandırmasını etkinleştirmek için, <xref:Microsoft.Extensions.Configuration.CommandLineConfigurationExtensions.AddCommandLine*> bir örneğinde genişletme yöntemi çağırılır <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder> .
 
-`AddCommandLine`çağrıldığında otomatik olarak çağrılır `CreateDefaultBuilder(string [])` . Daha fazla bilgi için [varsayılan yapılandırma](#default-configuration) bölümüne bakın.
+`AddCommandLine` çağrıldığında otomatik olarak çağrılır `CreateDefaultBuilder(string [])` . Daha fazla bilgi için [varsayılan yapılandırma](#default-configuration) bölümüne bakın.
 
-`CreateDefaultBuilder`Ayrıca yüklenir:
+`CreateDefaultBuilder` Ayrıca yüklenir:
 
 * *appsettings.json* ve appSettings 'ten isteğe bağlı yapılandırma *. { Environment}. JSON* dosyaları.
 * Geliştirme ortamında [Kullanıcı gizli dizileri (gizli yönetici)](xref:security/app-secrets) .
 * Ortam değişkenleri.
 
-`CreateDefaultBuilder`Komut satırı yapılandırma sağlayıcısını son ekler. Diğer sağlayıcılar tarafından ayarlanan çalışma zamanında geçersiz kılma yapılandırmasında komut satırı bağımsız değişkenleri geçirildi.
+`CreateDefaultBuilder` Komut satırı yapılandırma sağlayıcısını son ekler. Diğer sağlayıcılar tarafından ayarlanan çalışma zamanında geçersiz kılma yapılandırmasında komut satırı bağımsız değişkenleri geçirildi.
 
-`CreateDefaultBuilder`Ana bilgisayar oluşturulduğunda davranır. Bu nedenle, tarafından etkinleştirilen komut satırı yapılandırması `CreateDefaultBuilder` konağın nasıl yapılandırıldığını etkileyebilir.
+`CreateDefaultBuilder` Ana bilgisayar oluşturulduğunda davranır. Bu nedenle, tarafından etkinleştirilen komut satırı yapılandırması `CreateDefaultBuilder` konağın nasıl yapılandırıldığını etkileyebilir.
 
 ASP.NET Core şablonlarına dayalı uygulamalar için, `AddCommandLine` tarafından zaten çağırılır `CreateDefaultBuilder` . Ek yapılandırma sağlayıcıları eklemek ve bu sağlayıcılardan yapılandırmayı komut satırı bağımsız değişkenleriyle geçersiz kılmak için uygulamanın ek sağlayıcılarını çağırın `ConfigureAppConfiguration` ve `AddCommandLine` en son çağrısı yapın.
 
@@ -1142,7 +1135,7 @@ Ortam değişkenleri yapılandırmasını etkinleştirmek için, <xref:Microsoft
 
 `AddEnvironmentVariables`, `ASPNETCORE_` [Web ana](xref:fundamentals/host/web-host) bilgisayarıyla yeni bir konak Oluşturucu başlatıldığında ve çağrıldığında, [ana bilgisayar yapılandırması](#host-versus-app-configuration) için önekli ortam değişkenlerini yüklemek için kullanılır `CreateDefaultBuilder` . Daha fazla bilgi için [varsayılan yapılandırma](#default-configuration) bölümüne bakın.
 
-`CreateDefaultBuilder`Ayrıca yüklenir:
+`CreateDefaultBuilder` Ayrıca yüklenir:
 
 * Önek olmadan çağırarak ön eki edilmemiş ortam değişkenlerinden uygulama yapılandırması `AddEnvironmentVariables` .
 * *appsettings.json* ve appSettings 'ten isteğe bağlı yapılandırma *. { Environment}. JSON* dosyaları.
@@ -1229,7 +1222,7 @@ _config["ConnectionStrings:ReleaseDB"]
 
 ## <a name="file-configuration-provider"></a>Dosya yapılandırma sağlayıcısı
 
-<xref:Microsoft.Extensions.Configuration.FileConfigurationProvider>, dosya sisteminden yapılandırma yüklemeye yönelik temel sınıftır. Aşağıdaki yapılandırma sağlayıcıları belirli dosya türlerine ayrılmıştır:
+<xref:Microsoft.Extensions.Configuration.FileConfigurationProvider> , dosya sisteminden yapılandırma yüklemeye yönelik temel sınıftır. Aşağıdaki yapılandırma sağlayıcıları belirli dosya türlerine ayrılmıştır:
 
 * [INı yapılandırma sağlayıcısı](#ini-configuration-provider)
 * [JSON yapılandırma sağlayıcısı](#json-configuration-provider)
@@ -1296,14 +1289,14 @@ Aşırı yüklemeler belirtmeye izin ver:
 * Dosya değişirse yapılandırmanın yeniden yüklenip yüklenmediğini belirtir.
 * <xref:Microsoft.Extensions.FileProviders.IFileProvider>Dosyaya erişmek için kullanılır.
 
-`AddJsonFile`, ile yeni bir ana bilgisayar Oluşturucu başlatıldığında otomatik olarak iki kez çağrılır `CreateDefaultBuilder` . Yöntemi, yapılandırmayı şuradan yüklemek için çağrılır:
+`AddJsonFile` , ile yeni bir ana bilgisayar Oluşturucu başlatıldığında otomatik olarak iki kez çağrılır `CreateDefaultBuilder` . Yöntemi, yapılandırmayı şuradan yüklemek için çağrılır:
 
 * *appsettings.js*: Bu dosya ilk kez okundu. Dosyanın ortam sürümü, *appsettings.js* dosya tarafından belirtilen değerleri geçersiz kılabilir.
 * *appSettings. {Environment}. JSON*: dosyanın ortam sürümü [ıhostingenvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*)temel alınarak yüklenir.
 
 Daha fazla bilgi için [varsayılan yapılandırma](#default-configuration) bölümüne bakın.
 
-`CreateDefaultBuilder`Ayrıca yüklenir:
+`CreateDefaultBuilder` Ayrıca yüklenir:
 
 * Ortam değişkenleri.
 * Geliştirme ortamında [Kullanıcı gizli dizileri (gizli yönetici)](xref:security/app-secrets) .
@@ -1484,7 +1477,7 @@ Sözlük, yapılandırmayı sağlamak için çağrısı ile kullanılır `AddInM
 
 ## <a name="getvalue"></a>GetValue
 
-[`ConfigurationBinder.GetValue<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue*)belirli bir anahtarla yapılandırmadan tek bir değer ayıklar ve belirtilen koleksiyon olmayan türe dönüştürür. Aşırı yükleme varsayılan bir değeri kabul eder.
+[`ConfigurationBinder.GetValue<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.GetValue*) belirli bir anahtarla yapılandırmadan tek bir değer ayıklar ve belirtilen koleksiyon olmayan türe dönüştürür. Aşırı yükleme varsayılan bir değeri kabul eder.
 
 Aşağıdaki örnek:
 
@@ -1565,7 +1558,7 @@ Benzer şekilde, içindeki anahtarların değerlerini almak için `section2:subs
 var configSection = _config.GetSection("section2:subsection0");
 ```
 
-`GetSection`hiçbir süre geri döndürmez `null` . Eşleşen bir bölüm bulunamazsa boş `IConfigurationSection` değer döndürülür.
+`GetSection` hiçbir süre geri döndürmez `null` . Eşleşen bir bölüm bulunamazsa boş `IConfigurationSection` değer döndürülür.
 
 `GetSection`Eşleşen bir bölüm döndürdüğünde, <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Value> doldurulmuyor. Bir <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Key> ve <xref:Microsoft.Extensions.Configuration.IConfigurationSection.Path> , bölüm varsa döndürülür.
 
@@ -1594,7 +1587,7 @@ var sectionExists = _config.GetSection("section2:subsection2").Exists();
 
 ## <a name="bind-to-an-object-graph"></a>Bir nesne grafiğine bağlama
 
-<xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*>, bir POCO nesne grafiğinin tamamına bağlama yeteneğine sahiptir. Basit bir nesne bağlamakla birlikte yalnızca genel okuma/yazma özellikleri bağlanır.
+<xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*> , bir POCO nesne grafiğinin tamamına bağlama yeteneğine sahiptir. Basit bir nesne bağlamakla birlikte yalnızca genel okuma/yazma özellikleri bağlanır.
 
 Örnek, `TvShow` nesne grafı içeren ve sınıfları olan bir model içerir `Metadata` `Actors` (*modeller/tvshow. cs*):
 
@@ -1612,7 +1605,7 @@ _config.GetSection("tvshow").Bind(tvShow);
 TvShow = tvShow;
 ```
 
-[`ConfigurationBinder.Get<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Get*)belirtilen türü bağlar ve döndürür. `Get<T>`, kullanmaktan daha uygundur `Bind` . Aşağıdaki kod, `Get<T>` önceki örnekle birlikte nasıl kullanılacağını gösterir:
+[`ConfigurationBinder.Get<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Get*) belirtilen türü bağlar ve döndürür. `Get<T>` , kullanmaktan daha uygundur `Bind` . Aşağıdaki kod, `Get<T>` önceki örnekle birlikte nasıl kullanılacağını gösterir:
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/Pages/Index.cshtml.cs?name=snippet_tvshow)]
 
@@ -1654,13 +1647,13 @@ var arrayExample = new ArrayExample();
 _config.GetSection("array").Bind(arrayExample);
 ```
 
-[`ConfigurationBinder.Get<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Get*)sözdizimi de kullanılabilir ve bu da daha küçük kod elde edilebilir:
+[`ConfigurationBinder.Get<T>`](xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Get*) sözdizimi de kullanılabilir ve bu da daha küçük kod elde edilebilir:
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/Pages/Index.cshtml.cs?name=snippet_array)]
 
 Bir örneği olan bağlantılı nesne, `ArrayExample` yapılandırmadan dizi verilerini alır.
 
-| `ArrayExample.Entries`İndeks | `ArrayExample.Entries`Deeri |
+| `ArrayExample.Entries` İndeks | `ArrayExample.Entries` Deeri |
 | :--------------------------: | :--------------------------: |
 | 0                            | value0                       |
 | 1                            | value1                       |
@@ -1695,7 +1688,7 @@ Tabloda gösterilen anahtar-değer çifti, yapılandırmaya yüklendi.
 
 `ArrayExample`Sınıf örneği, JSON yapılandırma sağlayıcısı Dizin &num; 3 ' ü içeriyorsa, `ArrayExample.Entries` dizi değerini içerir.
 
-| `ArrayExample.Entries`İndeks | `ArrayExample.Entries`Deeri |
+| `ArrayExample.Entries` İndeks | `ArrayExample.Entries` Deeri |
 | :--------------------------: | :--------------------------: |
 | 0                            | value0                       |
 | 1                            | value1                       |
@@ -1725,7 +1718,7 @@ JSON yapılandırma sağlayıcısı, yapılandırma verilerini aşağıdaki anah
 
 Bağlama işleminden sonra `JsonArrayExample.Key` değeri barındırır `valueA` . Alt bölüm değerleri POCO dizisi özelliğinde depolanır `Subsection` .
 
-| `JsonArrayExample.Subsection`İndeks | `JsonArrayExample.Subsection`Deeri |
+| `JsonArrayExample.Subsection` İndeks | `JsonArrayExample.Subsection` Deeri |
 | :---------------------------------: | :---------------------------------: |
 | 0                                   | valueB                              |
 | 1                                   | değer EC                              |

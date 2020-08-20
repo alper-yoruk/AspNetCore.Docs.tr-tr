@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/28/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: d2594dd05ee6d7e8e0dbd3c279ecd8783d182b62
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 41b2ce35a6910df7587af7ebabe8a4984cda6ae5
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017837"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634975"
 ---
 # <a name="part-6-no-locrazor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>Bölüm 6, Razor ASP.NET Core EF Core olan sayfalar-Ilgili verileri oku
 
@@ -117,7 +118,7 @@ Pages/kurslar/Index. cshtml. cs dosyasını aşağıdaki kodla güncelleştirin:
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/Index.cshtml.cs?highlight=18,22,24)]
 
-Önceki kod, `Course` özelliği olarak değiştirir `Courses` ve ekler `AsNoTracking` . `AsNoTracking`Döndürülen varlıklar izlenmediğinden performansı geliştirir. Varlıkların geçerli bağlamda güncelleştirilmediği için izlenmesi gerekmez.
+Önceki kod, `Course` özelliği olarak değiştirir `Courses` ve ekler `AsNoTracking` . `AsNoTracking` Döndürülen varlıklar izlenmediğinden performansı geliştirir. Varlıkların geçerli bağlamda güncelleştirilmediği için izlenmesi gerekmez.
 
 *Pages/kurslar/Index. cshtml* 'yi aşağıdaki kodla güncelleştirin.
 
@@ -235,7 +236,7 @@ Aşağıdaki kod, bir eğitmen seçildiğinde ( `id != null` ) yürütülür.
 
 Seçilen eğitmen, görünüm modelindeki eğitmenler listesinden alınır. Görünüm modelinin özelliği, `Courses` `Course` bu eğitmenin gezinti özelliğinden alınan varlıklarla birlikte yüklenir `CourseAssignments` .
 
-`Where`Yöntemi bir koleksiyon döndürür. Ancak bu durumda, filtre tek bir varlık seçer. bu nedenle, `Single` yöntemi koleksiyonu tek bir varlığa dönüştürmek için çağırılır `Instructor` . `Instructor`Varlık, özelliğine erişim sağlar `CourseAssignments` . `CourseAssignments`ilgili varlıklara erişim sağlar `Course` .
+`Where`Yöntemi bir koleksiyon döndürür. Ancak bu durumda, filtre tek bir varlık seçer. bu nedenle, `Single` yöntemi koleksiyonu tek bir varlığa dönüştürmek için çağırılır `Instructor` . `Instructor`Varlık, özelliğine erişim sağlar `CourseAssignments` . `CourseAssignments` ilgili varlıklara erişim sağlar `Course` .
 
 ![Eğitmenden kurslar M:d](complex-data-model/_static/courseassignment.png)
 
@@ -253,7 +254,7 @@ Aşağıdaki kod, `Enrollments` bir kurs seçildiğinde görünüm modelinin öz
 
 Yukarıdaki kod aşağıdaki değişiklikleri yapar:
 
-* `page`İçindeki yönergesini ' a `@page` güncelleştirir `@page "{id:int?}"` . `"{id:int?}"`bir yol şablonudur. Yol şablonu, verileri yönlendirmek için URL 'deki tamsayı Sorgu dizelerini değiştirir. Örneğin, yalnızca yönergeyle bir eğitmenin **Select** bağlantısına tıklanması `@page` AŞAĞıDAKINE benzer bir URL oluşturur:
+* `page`İçindeki yönergesini ' a `@page` güncelleştirir `@page "{id:int?}"` . `"{id:int?}"` bir yol şablonudur. Yol şablonu, verileri yönlendirmek için URL 'deki tamsayı Sorgu dizelerini değiştirir. Örneğin, yalnızca yönergeyle bir eğitmenin **Select** bağlantısına tıklanması `@page` AŞAĞıDAKINE benzer bir URL oluşturur:
 
   `https://localhost:5001/Instructors?id=2`
 
@@ -418,7 +419,7 @@ Uygulamayı çalıştırın ve **Kurslar** bağlantısını seçin. Departman s�
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/Index.cshtml.cs?name=snippet_RevisedIndexMethod)]
 
-Yukarıdaki kod ekler `AsNoTracking` . `AsNoTracking`Döndürülen varlıklar izlenmediğinden performansı geliştirir. Geçerli bağlamda güncelleştirilmemiş oldukları için varlıklar izlenmiyor.
+Yukarıdaki kod ekler `AsNoTracking` . `AsNoTracking` Döndürülen varlıklar izlenmediğinden performansı geliştirir. Geçerli bağlamda güncelleştirilmemiş oldukları için varlıklar izlenmiyor.
 
 *Pages/kurslar/Index. cshtml* 'yi aşağıdaki vurgulanmış işaretlerle güncelleştirin:
 
@@ -521,7 +522,7 @@ Sorgunun iki içerme vardır:
 
 Yukarıdaki biçimlendirme aşağıdaki değişiklikleri yapar:
 
-* `page`İçindeki yönergesini ' a `@page` güncelleştirir `@page "{id:int?}"` . `"{id:int?}"`bir yol şablonudur. Yol şablonu, verileri yönlendirmek için URL 'deki tamsayı Sorgu dizelerini değiştirir. Örneğin, yalnızca yönergeyle bir eğitmenin **Select** bağlantısına tıklanması `@page` AŞAĞıDAKINE benzer bir URL oluşturur:
+* `page`İçindeki yönergesini ' a `@page` güncelleştirir `@page "{id:int?}"` . `"{id:int?}"` bir yol şablonudur. Yol şablonu, verileri yönlendirmek için URL 'deki tamsayı Sorgu dizelerini değiştirir. Örneğin, yalnızca yönergeyle bir eğitmenin **Select** bağlantısına tıklanması `@page` AŞAĞıDAKINE benzer bir URL oluşturur:
 
   `http://localhost:1234/Instructors?id=2`
 
@@ -568,7 +569,7 @@ Uygulamayı çalıştırın ve **eğitmenler** sekmesini seçin. Sayfa, `Locatio
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index2.cshtml.cs?name=snippet_OnGetAsync&highlight=1,8,16-999)]
 
-Ekleyemiyorum`public int CourseID { get; set; }`
+Ekleyemiyorum `public int CourseID { get; set; }`
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index2.cshtml.cs?name=snippet_1&highlight=12)]
 
@@ -582,7 +583,7 @@ Aşağıdaki kod, bir eğitmen seçildiğinde ( `id != null` ) yürütülür. Se
 
 [!code-csharp[](intro/samples/cu/Pages/Instructors/Index2.cshtml.cs?name=snippet_ID)]
 
-`Where`Yöntemi bir koleksiyon döndürür. Önceki `Where` yöntemde yalnızca tek bir `Instructor` varlık döndürülür. `Single`Yöntemi, koleksiyonu tek bir `Instructor` varlığa dönüştürür. `Instructor`Varlık, özelliğine erişim sağlar `CourseAssignments` . `CourseAssignments`ilgili varlıklara erişim sağlar `Course` .
+`Where`Yöntemi bir koleksiyon döndürür. Önceki `Where` yöntemde yalnızca tek bir `Instructor` varlık döndürülür. `Single`Yöntemi, koleksiyonu tek bir `Instructor` varlığa dönüştürür. `Instructor`Varlık, özelliğine erişim sağlar `CourseAssignments` . `CourseAssignments` ilgili varlıklara erişim sağlar `Course` .
 
 ![Eğitmenden kurslar M:d](complex-data-model/_static/courseassignment.png)
 

@@ -5,6 +5,7 @@ description: Bu öğreticide, .NET Core CLI dosya İzleyicisi (DotNet Watch) ara
 ms.author: riande
 ms.date: 05/31/2018
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/dotnet-watch
-ms.openlocfilehash: f4987e7eef496f3ba4b8f9bb084816be3b17ada7
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: cc152c2ca553b00619ddbf829f6044867c53bb98
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88022452"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635144"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>Dosya İzleyicisi kullanarak ASP.NET Core uygulamalar geliştirme
 
 By [Rick Anderson](https://twitter.com/RickAndMSFT) ve [Victor Hurdugaci](https://twitter.com/victorhurdugaci)
 
-`dotnet watch`, kaynak dosyalar değiştiğinde [.NET Core CLI](/dotnet/core/tools) komutu çalıştıran bir araçtır. Örneğin, bir dosya değişikliği derleme, test yürütmesi veya dağıtımı tetikleyebilir.
+`dotnet watch` , kaynak dosyalar değiştiğinde [.NET Core CLI](/dotnet/core/tools) komutu çalıştıran bir araçtır. Örneğin, bir dosya değişikliği derleme, test yürütmesi veya dağıtımı tetikleyebilir.
 
 Bu öğretici, iki uç nokta ile mevcut bir Web API 'SI kullanır: bir toplamı ve bir ürünü döndüren bir tane döndürür. Ürün yönteminde, bu öğreticide düzeltilen bir hata vardır.
 
@@ -77,9 +78,9 @@ Bir web tarayıcısında `http://localhost:<port number>/api/math/sum?a=4&b=5` s
 
 ::: moniker-end
 
-## <a name="run-net-core-cli-commands-using-dotnet-watch"></a>Kullanarak .NET Core CLI komutları çalıştırma`dotnet watch`
+## <a name="run-net-core-cli-commands-using-dotnet-watch"></a>Kullanarak .NET Core CLI komutları çalıştırma `dotnet watch`
 
-Tüm [.NET Core CLI komutları](/dotnet/core/tools#cli-commands) ile çalıştırılabilir `dotnet watch` . Örneğin:
+Tüm [.NET Core CLI komutları](/dotnet/core/tools#cli-commands) ile çalıştırılabilir `dotnet watch` . Örnek:
 
 | Komut | İzle komutu |
 | ---- | ----- |
@@ -93,7 +94,7 @@ Tüm [.NET Core CLI komutları](/dotnet/core/tools#cli-commands) ile çalıştı
 > [!NOTE]
 > `dotnet watch --project <PROJECT>`İzlenecek projeyi belirtmek için kullanabilirsiniz. Örneğin, `dotnet watch --project WebApp run` örnek uygulamanın kökünden çalıştırılması Ayrıca *WebApp* projesini de çalıştırır ve bu uygulamayı izleyebilir.
 
-## <a name="make-changes-with-dotnet-watch"></a>İle değişiklik yap`dotnet watch`
+## <a name="make-changes-with-dotnet-watch"></a>İle değişiklik yap `dotnet watch`
 
 Çalıştığından emin olun `dotnet watch` .
 
@@ -110,12 +111,12 @@ Dosyayı kaydedin. Konsol çıktısı `dotnet watch` bir dosya değişikliği ol
 
 Verify `http://localhost:<port number>/api/math/product?a=4&b=5` doğru sonucu döndürür.
 
-## <a name="run-tests-using-dotnet-watch"></a>Kullanarak testleri çalıştırma`dotnet watch`
+## <a name="run-tests-using-dotnet-watch"></a>Kullanarak testleri çalıştırma `dotnet watch`
 
 1. `Product`Toplamı döndürmek için *MathController.cs* yöntemini geri değiştirin. Dosyayı kaydedin.
 1. Bir komut kabuğunda *Webapptests* klasörüne gidin.
 1. [DotNet restore](/dotnet/core/tools/dotnet-restore)çalıştırın.
-1. `dotnet watch test` komutunu çalıştırın. Çıktısı bir testin başarısız olduğunu ve izleyicinin dosya değişikliklerini beklediğini gösterir:
+1. `dotnet watch test` öğesini çalıştırın. Çıktısı bir testin başarısız olduğunu ve izleyicinin dosya değişikliklerini beklediğini gösterir:
 
      ```console
      Total tests: 2. Passed: 1. Failed: 1. Skipped: 0.
@@ -124,7 +125,7 @@ Verify `http://localhost:<port number>/api/math/product?a=4&b=5` doğru sonucu d
 
 1. `Product`Yöntem kodunu, ürünü geri döndürdüğünden düzeltir. Dosyayı kaydedin.
 
-`dotnet watch`dosya değişikliğini algılar ve testleri yeniden çalıştırır. Konsol çıktısı, geçirilen testleri belirtir.
+`dotnet watch` dosya değişikliğini algılar ve testleri yeniden çalıştırır. Konsol çıktısı, geçirilen testleri belirtir.
 
 ## <a name="customize-files-list-to-watch"></a>Dosya listesini izlemek için Özelleştir
 
@@ -145,7 +146,7 @@ Varsayılan olarak, `dotnet-watch` aşağıdaki glob desenleriyle eşleşen tüm
 
 ## <a name="opt-out-of-files-to-be-watched"></a>İzlenen dosyaları kabul etme
 
-`dotnet-watch`varsayılan ayarlarını yok sayılabilecek şekilde yapılandırılabilir. Belirli dosyaları yoksaymak için `Watch="false"` özniteliği *. csproj* dosyasındaki bir öğenin tanımına ekleyin:
+`dotnet-watch` varsayılan ayarlarını yok sayılabilecek şekilde yapılandırılabilir. Belirli dosyaları yoksaymak için `Watch="false"` özniteliği *. csproj* dosyasındaki bir öğenin tanımına ekleyin:
 
 ```xml
 <ItemGroup>
@@ -162,7 +163,7 @@ Varsayılan olarak, `dotnet-watch` aşağıdaki glob desenleriyle eşleşen tüm
 
 ## <a name="custom-watch-projects"></a>Özel izleme projeleri
 
-`dotnet-watch`C# projeleriyle sınırlı değildir. Özel izleme projeleri, farklı senaryoları işlemek için oluşturulabilir. Aşağıdaki proje mizanpajını göz önünde bulundurun:
+`dotnet-watch` C# projeleriyle sınırlı değildir. Özel izleme projeleri, farklı senaryoları işlemek için oluşturulabilir. Aşağıdaki proje mizanpajını göz önünde bulundurun:
 
 * **sınamanız**
   * *UnitTests/UnitTests. csproj*
@@ -185,7 +186,7 @@ Hedef her iki projeyi de seyretmek istiyorsanız, her iki projeyi de izlemek iç
 </Project>
 ```
 
-Her iki projede de dosya izlemeye başlamak için, *Test* klasörüne geçin. Aşağıdaki komutu yürütün:
+Her iki projede de dosya izlemeye başlamak için, *Test* klasörüne geçin. Şu kodu yürütün:
 
 ```dotnetcli
 dotnet watch msbuild /t:Test
@@ -193,6 +194,6 @@ dotnet watch msbuild /t:Test
 
 VSTest, her iki test projesinde herhangi bir dosya değiştiğinde yürütülür.
 
-## <a name="dotnet-watch-in-github"></a>`dotnet-watch`GitHub 'da
+## <a name="dotnet-watch-in-github"></a>`dotnet-watch` GitHub 'da
 
-`dotnet-watch`GitHub [DotNet/AspNetCore deposunun](https://github.com/dotnet/AspNetCore/tree/master/src/Tools/dotnet-watch)bir parçasıdır.
+`dotnet-watch` GitHub [DotNet/AspNetCore deposunun](https://github.com/dotnet/AspNetCore/tree/master/src/Tools/dotnet-watch)bir parçasıdır.

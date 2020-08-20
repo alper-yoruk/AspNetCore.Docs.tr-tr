@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 09/22/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/middleware/extensibility-third-party-container
-ms.openlocfilehash: 5d453de26b265b795768befeaa4071e7b0e1ec08
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: e0ebcd46e6b506b7b2172f087f12773910ea4d9c
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017044"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634871"
 ---
 # <a name="middleware-activation-with-a-third-party-container-in-aspnet-core"></a>ASP.NET Core bir üçüncü taraf kapsayıcısı ile ara yazılım etkinleştirme
 
@@ -41,7 +42,7 @@ Bu makalede <xref:Microsoft.AspNetCore.Http.IMiddlewareFactory> , <xref:Microsof
 
 ## <a name="imiddlewarefactory"></a>Imıddliwarefactory
 
-<xref:Microsoft.AspNetCore.Http.IMiddlewareFactory>ara yazılım oluşturmak için yöntemler sağlar.
+<xref:Microsoft.AspNetCore.Http.IMiddlewareFactory> ara yazılım oluşturmak için yöntemler sağlar.
 
 Örnek uygulamada bir örnek oluşturmak için bir ara yazılım fabrikası uygulanır `SimpleInjectorActivatedMiddleware` . Ara yazılım fabrikası, ara yazılımı çözümlemek için basit Injector kapsayıcısını kullanır:
 
@@ -49,7 +50,7 @@ Bu makalede <xref:Microsoft.AspNetCore.Http.IMiddlewareFactory> , <xref:Microsof
 
 ## <a name="imiddleware"></a>Imıddliware
 
-<xref:Microsoft.AspNetCore.Http.IMiddleware>uygulamanın istek ardışık düzeni için ara yazılımı tanımlar.
+<xref:Microsoft.AspNetCore.Http.IMiddleware> uygulamanın istek ardışık düzeni için ara yazılımı tanımlar.
 
 Bir uygulama tarafından etkinleştirilen ara yazılım `IMiddlewareFactory` (*Ara yazılım/Simpleınjectoractivatedara yazılım. cs*):
 
@@ -59,7 +60,7 @@ Ara yazılım (*Ara yazılım/MiddlewareExtensions. cs*) için bir uzantı oluş
 
 [!code-csharp[](extensibility-third-party-container/samples/3.x/SampleApp/Middleware/MiddlewareExtensions.cs?name=snippet1)]
 
-`Startup.ConfigureServices`birkaç görev gerçekleştirmeniz gerekir:
+`Startup.ConfigureServices` birkaç görev gerçekleştirmeniz gerekir:
 
 * Basit Injector kapsayıcısını ayarlayın.
 * Fabrika ve ara yazılımı kaydedin.
@@ -88,7 +89,7 @@ Bu makalede <xref:Microsoft.AspNetCore.Http.IMiddlewareFactory> , <xref:Microsof
 
 ## <a name="imiddlewarefactory"></a>Imıddliwarefactory
 
-<xref:Microsoft.AspNetCore.Http.IMiddlewareFactory>ara yazılım oluşturmak için yöntemler sağlar.
+<xref:Microsoft.AspNetCore.Http.IMiddlewareFactory> ara yazılım oluşturmak için yöntemler sağlar.
 
 Örnek uygulamada bir örnek oluşturmak için bir ara yazılım fabrikası uygulanır `SimpleInjectorActivatedMiddleware` . Ara yazılım fabrikası, ara yazılımı çözümlemek için basit Injector kapsayıcısını kullanır:
 
@@ -96,7 +97,7 @@ Bu makalede <xref:Microsoft.AspNetCore.Http.IMiddlewareFactory> , <xref:Microsof
 
 ## <a name="imiddleware"></a>Imıddliware
 
-<xref:Microsoft.AspNetCore.Http.IMiddleware>uygulamanın istek ardışık düzeni için ara yazılımı tanımlar.
+<xref:Microsoft.AspNetCore.Http.IMiddleware> uygulamanın istek ardışık düzeni için ara yazılımı tanımlar.
 
 Bir uygulama tarafından etkinleştirilen ara yazılım `IMiddlewareFactory` (*Ara yazılım/Simpleınjectoractivatedara yazılım. cs*):
 
@@ -106,7 +107,7 @@ Ara yazılım (*Ara yazılım/MiddlewareExtensions. cs*) için bir uzantı oluş
 
 [!code-csharp[](extensibility-third-party-container/samples/2.x/SampleApp/Middleware/MiddlewareExtensions.cs?name=snippet1)]
 
-`Startup.ConfigureServices`birkaç görev gerçekleştirmeniz gerekir:
+`Startup.ConfigureServices` birkaç görev gerçekleştirmeniz gerekir:
 
 * Basit Injector kapsayıcısını ayarlayın.
 * Fabrika ve ara yazılımı kaydedin.

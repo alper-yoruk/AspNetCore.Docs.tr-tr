@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/04/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/kestrel
-ms.openlocfilehash: ad15a7e3bfdb8da79db091f0116bdd2f580ccb31
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 5890e56f65712bcd781a3aad278a5aaa7914d0ea
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016706"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635027"
 ---
 # <a name="kestrel-web-server-implementation-in-aspnet-core"></a>ASP.NET Core Web sunucusu uygulamasını Kestrel
 
@@ -141,7 +142,7 @@ Bu makalenin ilerleyen kısımlarında gösterilen örneklerde, Kestrel seçenek
 ```
 
 > [!NOTE]
-> <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions>ve [uç nokta yapılandırması](#endpoint-configuration) yapılandırma sağlayıcılarından yapılandırılabilir. Kalan Kestrel yapılandırması C# kodunda yapılandırılmalıdır.
+> <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions> ve [uç nokta yapılandırması](#endpoint-configuration) yapılandırma sağlayıcılarından yapılandırılabilir. Kalan Kestrel yapılandırması C# kodunda yapılandırılmalıdır.
 
 Aşağıdaki yaklaşımlardan **birini** kullanın:
 
@@ -278,7 +279,7 @@ Sunucunun istek üst bilgilerini alması için harcadığı en uzun süreyi alı
 
 ### <a name="maximum-streams-per-connection"></a>Bağlantı başına en fazla akış
 
-`Http2.MaxStreamsPerConnection`HTTP/2 bağlantısı başına eşzamanlı istek akışı sayısını sınırlar. Fazlalık akışlar reddedildi.
+`Http2.MaxStreamsPerConnection` HTTP/2 bağlantısı başına eşzamanlı istek akışı sayısını sınırlar. Fazlalık akışlar reddedildi.
 
 ```csharp
 webBuilder.ConfigureKestrel(serverOptions =>
@@ -291,7 +292,7 @@ Varsayılan değer 100’dür.
 
 ### <a name="header-table-size"></a>Üst bilgi tablosu boyutu
 
-HPACK kod çözücüsü HTTP/2 bağlantıları için HTTP üstbilgilerini açar. `Http2.HeaderTableSize`HPACK kod çözücüsünün kullandığı üst bilgi sıkıştırma tablosunun boyutunu sınırlandırır. Değer sekizli cinsinden sağlanır ve sıfırdan büyük olmalıdır (0).
+HPACK kod çözücüsü HTTP/2 bağlantıları için HTTP üstbilgilerini açar. `Http2.HeaderTableSize` HPACK kod çözücüsünün kullandığı üst bilgi sıkıştırma tablosunun boyutunu sınırlandırır. Değer sekizli cinsinden sağlanır ve sıfırdan büyük olmalıdır (0).
 
 ```csharp
 webBuilder.ConfigureKestrel(serverOptions =>
@@ -304,7 +305,7 @@ Varsayılan değer 4096 ' dir.
 
 ### <a name="maximum-frame-size"></a>En büyük çerçeve boyutu
 
-`Http2.MaxFrameSize`sunucu tarafından alınan veya gönderilen HTTP/2 bağlantı çerçevesi yükünün izin verilen en büyük boyutunu belirtir. Değer sekizli cinsinden sağlanır ve 2 ^ 14 (16.384) ile 2 ^ 24-1 (16.777.215) arasında olmalıdır.
+`Http2.MaxFrameSize` sunucu tarafından alınan veya gönderilen HTTP/2 bağlantı çerçevesi yükünün izin verilen en büyük boyutunu belirtir. Değer sekizli cinsinden sağlanır ve 2 ^ 14 (16.384) ile 2 ^ 24-1 (16.777.215) arasında olmalıdır.
 
 ```csharp
 webBuilder.ConfigureKestrel(serverOptions =>
@@ -317,7 +318,7 @@ Varsayılan değer 2 ^ 14 ' dir (16.384).
 
 ### <a name="maximum-request-header-size"></a>En fazla istek üst bilgi boyutu
 
-`Http2.MaxRequestHeaderFieldSize`istek üst bilgisi değerlerinin sekizlisi cinsinden izin verilen en büyük boyutu belirtir. Bu sınır, sıkıştırılmış ve sıkıştırılmamış temsillerinde hem ad hem de değer için geçerlidir. Değer sıfırdan büyük (0) olmalıdır.
+`Http2.MaxRequestHeaderFieldSize` istek üst bilgisi değerlerinin sekizlisi cinsinden izin verilen en büyük boyutu belirtir. Bu sınır, sıkıştırılmış ve sıkıştırılmamış temsillerinde hem ad hem de değer için geçerlidir. Değer sıfırdan büyük (0) olmalıdır.
 
 ```csharp
 webBuilder.ConfigureKestrel(serverOptions =>
@@ -330,7 +331,7 @@ Varsayılan değer 8.192 ' dir.
 
 ### <a name="initial-connection-window-size"></a>İlk bağlantı pencere boyutu
 
-`Http2.InitialConnectionWindowSize`sunucu, bağlantı başına tüm istekler (akışlar) genelinde toplanan tek seferde sunucunun arabelleğe aldığı en fazla istek gövde verilerini bayt cinsinden gösterir. İstekleri ile de sınırlıdır `Http2.InitialStreamWindowSize` . Değer, 65.535 değerinden büyük veya buna eşit ve 2 ^ 31 (2.147.483.648) değerinden küçük olmalıdır.
+`Http2.InitialConnectionWindowSize` sunucu, bağlantı başına tüm istekler (akışlar) genelinde toplanan tek seferde sunucunun arabelleğe aldığı en fazla istek gövde verilerini bayt cinsinden gösterir. İstekleri ile de sınırlıdır `Http2.InitialStreamWindowSize` . Değer, 65.535 değerinden büyük veya buna eşit ve 2 ^ 31 (2.147.483.648) değerinden küçük olmalıdır.
 
 ```csharp
 webBuilder.ConfigureKestrel(serverOptions =>
@@ -343,7 +344,7 @@ Varsayılan değer 128 KB 'tır (131.072).
 
 ### <a name="initial-stream-window-size"></a>İlk akış pencere boyutu
 
-`Http2.InitialStreamWindowSize`sunucu, istek başına bir kez (Stream) arabelleğe alınan en fazla istek gövde verilerini bayt cinsinden gösterir. İstekleri ile de sınırlıdır `Http2.InitialConnectionWindowSize` . Değer, 65.535 değerinden büyük veya buna eşit ve 2 ^ 31 (2.147.483.648) değerinden küçük olmalıdır.
+`Http2.InitialStreamWindowSize` sunucu, istek başına bir kez (Stream) arabelleğe alınan en fazla istek gövde verilerini bayt cinsinden gösterir. İstekleri ile de sınırlıdır `Http2.InitialConnectionWindowSize` . Değer, 65.535 değerinden büyük veya buna eşit ve 2 ^ 31 (2.147.483.648) değerinden küçük olmalıdır.
 
 ```csharp
 webBuilder.ConfigureKestrel(serverOptions =>
@@ -356,7 +357,7 @@ Varsayılan değer 96 KB 'tır (98.304).
 
 ### <a name="synchronous-io"></a>Zaman Uyumlu G/Ç
 
-<xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.AllowSynchronousIO>istek ve yanıt için zaman uyumlu g/ç 'ye izin verilip verilmediğini denetler. Varsayılan değer: `false`.
+<xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.AllowSynchronousIO> istek ve yanıt için zaman uyumlu g/ç 'ye izin verilip verilmediğini denetler. Varsayılan değer: `false`.
 
 > [!WARNING]
 > Çok sayıda engelleme zaman uyumlu g/ç işlemi, iş parçacığı havuzuna yol açabilir, bu da uygulamanın yanıt vermemesine neden olur. Yalnızca `AllowSynchronousIO` zaman uyumsuz g/ç desteklemeyen bir kitaplık kullanırken etkinleştirin.
@@ -376,14 +377,14 @@ Diğer Kestrel seçenekleri ve limitleri hakkında daha fazla bilgi için bkz.:
 Varsayılan olarak, ASP.NET Core bağlar:
 
 * `http://localhost:5000`
-* `https://localhost:5001`(bir yerel geliştirme sertifikası varsa)
+* `https://localhost:5001` (bir yerel geliştirme sertifikası varsa)
 
 Kullanarak URL 'Leri belirtin:
 
-* `ASPNETCORE_URLS`ortam değişkeni.
-* `--urls`komut satırı bağımsız değişkeni.
-* `urls`Ana bilgisayar yapılandırma anahtarı.
-* `UseUrls`genişletme yöntemi.
+* `ASPNETCORE_URLS` ortam değişkeni.
+* `--urls` komut satırı bağımsız değişkeni.
+* `urls` Ana bilgisayar yapılandırma anahtarı.
+* `UseUrls` genişletme yöntemi.
 
 Bu yaklaşımlar kullanılarak sağlanan değer bir veya daha fazla HTTP ve HTTPS uç noktası olabilir (varsayılan bir sertifika varsa HTTPS). Değeri noktalı virgülle ayrılmış bir liste olarak yapılandırın (örneğin, `"Urls": "http://localhost:8000;http://localhost:8001"` ).
 
@@ -402,7 +403,7 @@ Proje şablonları, uygulamaları HTTPS üzerinde varsayılan olarak çalışaca
 
 `UseUrls`, `--urls` komut satırı bağımsız değişkeni, `urls` ana bilgisayar yapılandırma anahtarı ve `ASPNETCORE_URLS` ortam değişkeni de çalışır, ancak bu bölümün ilerleyen kısımlarında belirtilen sınırlamalara sahiptir (https uç noktası yapılandırması için varsayılan sertifika kullanılabilir olmalıdır).
 
-`KestrelServerOptions`yapılandırmada
+`KestrelServerOptions` yapılandırmada
 
 ### <a name="configureendpointdefaultsactionlistenoptions"></a>ConfigureEndpointDefaults Varsayılanları (eylem \<ListenOptions> )
 
@@ -447,7 +448,7 @@ Bir as girişi alan Kestrel ayarlamak için bir yapılandırma yükleyicisi olu�
 
 Kestrel 'i HTTPS kullanacak şekilde yapılandırın.
 
-`ListenOptions.UseHttps`uzantılardan
+`ListenOptions.UseHttps` uzantılardan
 
 * `UseHttps`: Kestrel 'i varsayılan sertifikayla HTTPS kullanacak şekilde yapılandırın. Varsayılan sertifika yapılandırılmamışsa bir özel durum oluşturur.
 * `UseHttps(string fileName)`
@@ -461,16 +462,16 @@ Kestrel 'i HTTPS kullanacak şekilde yapılandırın.
 * `UseHttps(X509Certificate2 serverCertificate, Action<HttpsConnectionAdapterOptions> configureOptions)`
 * `UseHttps(Action<HttpsConnectionAdapterOptions> configureOptions)`
 
-`ListenOptions.UseHttps`parametrelere
+`ListenOptions.UseHttps` parametrelere
 
-* `filename`, uygulamanın içerik dosyalarını içeren dizine göre bir sertifika dosyasının yolu ve dosya adıdır.
-* `password`X. 509.440 sertifika verilerine erişmek için parola gereklidir.
-* `configureOptions`, öğesini `Action` yapılandırmak için kullanılır `HttpsConnectionAdapterOptions` . Döndürür `ListenOptions` .
-* `storeName`, sertifikanın yükleneceği sertifika deposudur.
-* `subject`, sertifika için konu adıdır.
-* `allowInvalid`geçersiz sertifikaların, otomatik olarak imzalanan sertifikalar gibi göz önünde bulundurulmayacağını gösterir.
-* `location`, sertifikanın yükleneceği mağaza konumudur.
-* `serverCertificate`, X. 509.440 sertifikasıdır.
+* `filename` , uygulamanın içerik dosyalarını içeren dizine göre bir sertifika dosyasının yolu ve dosya adıdır.
+* `password` X. 509.440 sertifika verilerine erişmek için parola gereklidir.
+* `configureOptions` , öğesini `Action` yapılandırmak için kullanılır `HttpsConnectionAdapterOptions` . Döndürür `ListenOptions` .
+* `storeName` , sertifikanın yükleneceği sertifika deposudur.
+* `subject` , sertifika için konu adıdır.
+* `allowInvalid` geçersiz sertifikaların, otomatik olarak imzalanan sertifikalar gibi göz önünde bulundurulmayacağını gösterir.
+* `location` , sertifikanın yükleneceği mağaza konumudur.
+* `serverCertificate` , X. 509.440 sertifikasıdır.
 
 Üretimde HTTPS 'nin açıkça yapılandırılması gerekir. En azından, varsayılan bir sertifika sağlanmalıdır.
 
@@ -558,7 +559,7 @@ Herhangi bir sertifika düğümü için **yol** ve **parola** kullanmanın alter
 * Bu `Certificate` bölüm isteğe bağlıdır. `Certificate`Bölüm belirtilmemişse, önceki senaryolarda tanımlanan varsayılanlar kullanılır. Kullanılabilir varsayılan değer yoksa, sunucu bir özel durum oluşturur ve başlayamaz.
 * Bu `Certificate` bölüm hem **yol** &ndash; **parolasını** hem de **Konu** &ndash; **deposu** sertifikalarını destekler.
 * Herhangi bir sayıda uç nokta, bağlantı noktası çakışmalarına neden olmadıkları sürece bu şekilde tanımlanabilir.
-* `options.Configure(context.Configuration.GetSection("{SECTION}"))`yapılandırılmış bir `KestrelConfigurationLoader` `.Endpoint(string name, listenOptions => { })` uç noktanın ayarlarını tamamlamak için kullanılabilecek bir yöntemi olan bir döndürür:
+* `options.Configure(context.Configuration.GetSection("{SECTION}"))` yapılandırılmış bir `KestrelConfigurationLoader` `.Endpoint(string name, listenOptions => { })` uç noktanın ayarlarını tamamlamak için kullanılabilecek bir yöntemi olan bir döndürür:
 
 ```csharp
 webBuilder.UseKestrel((context, serverOptions) =>
@@ -571,7 +572,7 @@ webBuilder.UseKestrel((context, serverOptions) =>
 });
 ```
 
-`KestrelServerOptions.ConfigurationLoader`, tarafından sağlana gibi var olan yükleyicisindeki yinelemeye devam etmek için doğrudan erişilebilir <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> .
+`KestrelServerOptions.ConfigurationLoader` , tarafından sağlana gibi var olan yükleyicisindeki yinelemeye devam etmek için doğrudan erişilebilir <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> .
 
 * Her uç noktanın yapılandırma bölümü, `Endpoint` özel ayarların okunabilmesi için yöntemindeki seçeneklerde kullanılabilir.
 * Birden çok yapılandırma, `options.Configure(context.Configuration.GetSection("{SECTION}"))` başka bir bölümle yeniden çağırarak yüklenebilir. Önceki örneklerde açıkça çağrılmadığı takdirde, yalnızca son yapılandırma kullanılır `Load` . Metapackage, `Load` varsayılan yapılandırma bölümünün değiştirilmesini sağlayacak şekilde çağırmıyor.
@@ -579,7 +580,7 @@ webBuilder.UseKestrel((context, serverOptions) =>
 
 *Koddaki varsayılanları değiştirme*
 
-`ConfigureEndpointDefaults`ve `ConfigureHttpsDefaults` `ListenOptions` `HttpsConnectionAdapterOptions` , önceki senaryoda belirtilen varsayılan sertifikayı geçersiz kılma dahil, ve için varsayılan ayarları değiştirmek üzere kullanılabilir. `ConfigureEndpointDefaults`ve `ConfigureHttpsDefaults` herhangi bir uç nokta yapılandırılmadan önce çağrılmalıdır.
+`ConfigureEndpointDefaults` ve `ConfigureHttpsDefaults` `ListenOptions` `HttpsConnectionAdapterOptions` , önceki senaryoda belirtilen varsayılan sertifikayı geçersiz kılma dahil, ve için varsayılan ayarları değiştirmek üzere kullanılabilir. `ConfigureEndpointDefaults` ve `ConfigureHttpsDefaults` herhangi bir uç nokta yapılandırılmadan önce çağrılmalıdır.
 
 ```csharp
 webBuilder.ConfigureKestrel(serverOptions =>
@@ -673,7 +674,7 @@ webBuilder.ConfigureKestrel(serverOptions =>
 
 [!code-csharp[](kestrel/samples/3.x/KestrelSample/Program.cs?name=snippet_UnixSocket)]
 
-* NGINX yapılandırma dosyasında, `server`  >  `location`  >  `proxy_pass` girdisini olarak ayarlayın `http://unix:/tmp/{KESTREL SOCKET}:/;` . `{KESTREL SOCKET}`, için belirtilen yuvanın adıdır <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> (örneğin, `kestrel-test.sock` Önceki örnekte).
+* NGINX yapılandırma dosyasında, `server`  >  `location`  >  `proxy_pass` girdisini olarak ayarlayın `http://unix:/tmp/{KESTREL SOCKET}:/;` . `{KESTREL SOCKET}` , için belirtilen yuvanın adıdır <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> (örneğin, `kestrel-test.sock` Önceki örnekte).
 * Yuvanın NGINX tarafından yazılabilir olduğundan emin olun (örneğin, `chmod go+w /tmp/kestrel-test.sock` ).
 
 ### <a name="port-0"></a>Bağlantı noktası 0
@@ -693,9 +694,9 @@ Listening on the following addresses: http://127.0.0.1:48508
 Aşağıdaki yaklaşımlar ile uç noktaları yapılandırın:
 
 * <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseUrls*>
-* `--urls`komut satırı bağımsız değişkeni
-* `urls`Ana bilgisayar yapılandırma anahtarı
-* `ASPNETCORE_URLS`ortam değişkeni
+* `--urls` komut satırı bağımsız değişkeni
+* `urls` Ana bilgisayar yapılandırma anahtarı
+* `ASPNETCORE_URLS` ortam değişkeni
 
 Bu yöntemler, kodun Kestrel dışındaki sunucularla çalışmasını sağlamak için yararlıdır. Ancak, aşağıdaki sınırlamalara dikkat edin:
 
@@ -710,7 +711,7 @@ IIS kullanırken, IIS geçersiz kılma bağlamaları için URL bağlamaları vey
 
 `Protocols`Özelliği, `HttpProtocols` bir bağlantı uç noktasında veya sunucu IÇIN etkin HTTP protokollerini () belirler. `Protocols`Sabit listesinden özelliğe bir değer atayın `HttpProtocols` .
 
-| `HttpProtocols`sabit listesi değeri | Bağlantı protokolü izin verildi |
+| `HttpProtocols` sabit listesi değeri | Bağlantı protokolü izin verildi |
 | -------------------------- | ----------------------------- |
 | `Http1`                    | Yalnızca HTTP/1.1. , TLS olmadan veya ile kullanılabilir. |
 | `Http2`                    | Yalnızca HTTP/2. Yalnızca istemci [önceki bir bilgi modunu](https://tools.ietf.org/html/rfc7540#section-3.4)DESTEKLIYORSA, TLS olmadan kullanılabilir. |
@@ -852,7 +853,7 @@ webBuilder.ConfigureKestrel(serverOptions =>
 
 `CreateDefaultBuilder``serverOptions.Configure(context.Configuration.GetSection("Kestrel"))`Kestrel yapılandırmasını yüklemek için varsayılan olarak çağırır.
 
-Aşağıdakiappsettings.js, tüm uç noktaları için varsayılan bağlantı protokolü olarak HTTP/1.1 *'* i oluşturur:
+Aşağıdakiappsettings.js, tüm uç noktaları için varsayılan bağlantı protokolü olarak HTTP/1.1 * '* i oluşturur:
 
 ```json
 {
@@ -924,7 +925,7 @@ Yalnızca HTTP URL ön ekleri geçerlidir. Kestrel, kullanılarak URL bağlamala
   http://65.55.39.10:80/
   ```
 
-  `0.0.0.0`Tüm IPv4 adreslerine bağlanan özel bir durumdur.
+  `0.0.0.0` Tüm IPv4 adreslerine bağlanan özel bir durumdur.
 
 * Bağlantı noktası numarasına sahip IPv6 adresi
 
@@ -932,7 +933,7 @@ Yalnızca HTTP URL ön ekleri geçerlidir. Kestrel, kullanılarak URL bağlamala
   http://[0:0:0:0:0:ffff:4137:270a]:80/
   ```
 
-  `[::]`, IPv4 'un IPv6 eşdeğeridir `0.0.0.0` .
+  `[::]` , IPv4 'un IPv6 eşdeğeridir `0.0.0.0` .
 
 * Bağlantı noktası numarası olan ana bilgisayar adı
 
@@ -958,7 +959,7 @@ Yalnızca HTTP URL ön ekleri geçerlidir. Kestrel, kullanılarak URL bağlamala
 
 ## <a name="host-filtering"></a>Konak filtreleme
 
-Kestrel gibi önekleri temel alarak yapılandırmayı desteklese `http://example.com:5000` de, Kestrel büyük ölçüde ana bilgisayar adını yoksayar. Ana bilgisayar `localhost` , geri döngü adreslerine bağlama için kullanılan özel bir durumdur. Açık IP adresi dışındaki tüm ana bilgisayar tüm genel IP adreslerine bağlanır. `Host`Üstbilgiler doğrulanmadı.
+Kestrel gibi önekleri temel alarak yapılandırmayı desteklese `http://example.com:5000` de, Kestrel büyük ölçüde ana bilgisayar adını yoksayar. Ana bilgisayar `localhost` , geri döngü adreslerine bağlama için kullanılan özel bir durumdur. Açık IP adresi dışındaki tüm ana bilgisayar tüm genel IP adreslerine bağlanır. `Host` Üstbilgiler doğrulanmadı.
 
 Geçici bir çözüm olarak, ana bilgisayar filtreleme ara yazılımı kullanın. Ana bilgisayar filtreleme ara yazılımı, ASP.NET Core uygulamaları için örtük olarak sunulan [Microsoft. AspNetCore. HostFiltering](https://www.nuget.org/packages/Microsoft.AspNetCore.HostFiltering) paketi tarafından sağlanır. Ara yazılım tarafından eklenir <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> ve şunları çağırır <xref:Microsoft.AspNetCore.Builder.HostFilteringServicesExtensions.AddHostFiltering*> :
 
@@ -1241,7 +1242,7 @@ Sunucunun istek üst bilgilerini alması için harcadığı en uzun süreyi alı
 
 ### <a name="maximum-streams-per-connection"></a>Bağlantı başına en fazla akış
 
-`Http2.MaxStreamsPerConnection`HTTP/2 bağlantısı başına eşzamanlı istek akışı sayısını sınırlar. Fazlalık akışlar reddedildi.
+`Http2.MaxStreamsPerConnection` HTTP/2 bağlantısı başına eşzamanlı istek akışı sayısını sınırlar. Fazlalık akışlar reddedildi.
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -1257,7 +1258,7 @@ Varsayılan değer 100’dür.
 
 ### <a name="header-table-size"></a>Üst bilgi tablosu boyutu
 
-HPACK kod çözücüsü HTTP/2 bağlantıları için HTTP üstbilgilerini açar. `Http2.HeaderTableSize`HPACK kod çözücüsünün kullandığı üst bilgi sıkıştırma tablosunun boyutunu sınırlandırır. Değer sekizli cinsinden sağlanır ve sıfırdan büyük olmalıdır (0).
+HPACK kod çözücüsü HTTP/2 bağlantıları için HTTP üstbilgilerini açar. `Http2.HeaderTableSize` HPACK kod çözücüsünün kullandığı üst bilgi sıkıştırma tablosunun boyutunu sınırlandırır. Değer sekizli cinsinden sağlanır ve sıfırdan büyük olmalıdır (0).
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -1273,7 +1274,7 @@ Varsayılan değer 4096 ' dir.
 
 ### <a name="maximum-frame-size"></a>En büyük çerçeve boyutu
 
-`Http2.MaxFrameSize`alacak HTTP/2 bağlantı çerçevesi yükünün en büyük boyutunu belirtir. Değer sekizli cinsinden sağlanır ve 2 ^ 14 (16.384) ile 2 ^ 24-1 (16.777.215) arasında olmalıdır.
+`Http2.MaxFrameSize` alacak HTTP/2 bağlantı çerçevesi yükünün en büyük boyutunu belirtir. Değer sekizli cinsinden sağlanır ve 2 ^ 14 (16.384) ile 2 ^ 24-1 (16.777.215) arasında olmalıdır.
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -1289,7 +1290,7 @@ Varsayılan değer 2 ^ 14 ' dir (16.384).
 
 ### <a name="maximum-request-header-size"></a>En fazla istek üst bilgi boyutu
 
-`Http2.MaxRequestHeaderFieldSize`istek üst bilgisi değerlerinin sekizlisi cinsinden izin verilen en büyük boyutu belirtir. Bu sınır, hem sıkıştırılmış hem de sıkıştırılmamış temsillerinde birlikte hem ad hem de değer için geçerlidir. Değer sıfırdan büyük (0) olmalıdır.
+`Http2.MaxRequestHeaderFieldSize` istek üst bilgisi değerlerinin sekizlisi cinsinden izin verilen en büyük boyutu belirtir. Bu sınır, hem sıkıştırılmış hem de sıkıştırılmamış temsillerinde birlikte hem ad hem de değer için geçerlidir. Değer sıfırdan büyük (0) olmalıdır.
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -1305,7 +1306,7 @@ Varsayılan değer 8.192 ' dir.
 
 ### <a name="initial-connection-window-size"></a>İlk bağlantı pencere boyutu
 
-`Http2.InitialConnectionWindowSize`sunucu, bağlantı başına tüm istekler (akışlar) genelinde toplanan tek seferde sunucunun arabelleğe aldığı en fazla istek gövde verilerini bayt cinsinden gösterir. İstekleri ile de sınırlıdır `Http2.InitialStreamWindowSize` . Değer, 65.535 değerinden büyük veya buna eşit ve 2 ^ 31 (2.147.483.648) değerinden küçük olmalıdır.
+`Http2.InitialConnectionWindowSize` sunucu, bağlantı başına tüm istekler (akışlar) genelinde toplanan tek seferde sunucunun arabelleğe aldığı en fazla istek gövde verilerini bayt cinsinden gösterir. İstekleri ile de sınırlıdır `Http2.InitialStreamWindowSize` . Değer, 65.535 değerinden büyük veya buna eşit ve 2 ^ 31 (2.147.483.648) değerinden küçük olmalıdır.
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -1321,7 +1322,7 @@ Varsayılan değer 128 KB 'tır (131.072).
 
 ### <a name="initial-stream-window-size"></a>İlk akış pencere boyutu
 
-`Http2.InitialStreamWindowSize`sunucu, istek başına bir kez (Stream) arabelleğe alınan en fazla istek gövde verilerini bayt cinsinden gösterir. İstekleri ile de sınırlıdır `Http2.InitialStreamWindowSize` . Değer, 65.535 değerinden büyük veya buna eşit ve 2 ^ 31 (2.147.483.648) değerinden küçük olmalıdır.
+`Http2.InitialStreamWindowSize` sunucu, istek başına bir kez (Stream) arabelleğe alınan en fazla istek gövde verilerini bayt cinsinden gösterir. İstekleri ile de sınırlıdır `Http2.InitialStreamWindowSize` . Değer, 65.535 değerinden büyük veya buna eşit ve 2 ^ 31 (2.147.483.648) değerinden küçük olmalıdır.
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -1337,7 +1338,7 @@ Varsayılan değer 96 KB 'tır (98.304).
 
 ### <a name="synchronous-io"></a>Zaman Uyumlu G/Ç
 
-<xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.AllowSynchronousIO>istek ve yanıt için zaman uyumlu g/ç 'ye izin verilip verilmediğini denetler. Varsayılan değer `true` .
+<xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.AllowSynchronousIO> istek ve yanıt için zaman uyumlu g/ç 'ye izin verilip verilmediğini denetler. Varsayılan değer `true` .
 
 > [!WARNING]
 > Çok sayıda engelleme zaman uyumlu g/ç işlemi, iş parçacığı havuzuna yol açabilir, bu da uygulamanın yanıt vermemesine neden olur. Yalnızca `AllowSynchronousIO` zaman uyumsuz g/ç desteklemeyen bir kitaplık kullanırken etkinleştirin.
@@ -1357,14 +1358,14 @@ Diğer Kestrel seçenekleri ve limitleri hakkında daha fazla bilgi için bkz.:
 Varsayılan olarak, ASP.NET Core bağlar:
 
 * `http://localhost:5000`
-* `https://localhost:5001`(bir yerel geliştirme sertifikası varsa)
+* `https://localhost:5001` (bir yerel geliştirme sertifikası varsa)
 
 Kullanarak URL 'Leri belirtin:
 
-* `ASPNETCORE_URLS`ortam değişkeni.
-* `--urls`komut satırı bağımsız değişkeni.
-* `urls`Ana bilgisayar yapılandırma anahtarı.
-* `UseUrls`genişletme yöntemi.
+* `ASPNETCORE_URLS` ortam değişkeni.
+* `--urls` komut satırı bağımsız değişkeni.
+* `urls` Ana bilgisayar yapılandırma anahtarı.
+* `UseUrls` genişletme yöntemi.
 
 Bu yaklaşımlar kullanılarak sağlanan değer bir veya daha fazla HTTP ve HTTPS uç noktası olabilir (varsayılan bir sertifika varsa HTTPS). Değeri noktalı virgülle ayrılmış bir liste olarak yapılandırın (örneğin, `"Urls": "http://localhost:8000;http://localhost:8001"` ).
 
@@ -1383,7 +1384,7 @@ Proje şablonları, uygulamaları HTTPS üzerinde varsayılan olarak çalışaca
 
 `UseUrls`, `--urls` komut satırı bağımsız değişkeni, `urls` ana bilgisayar yapılandırma anahtarı ve `ASPNETCORE_URLS` ortam değişkeni de çalışır, ancak bu bölümün ilerleyen kısımlarında belirtilen sınırlamalara sahiptir (https uç noktası yapılandırması için varsayılan sertifika kullanılabilir olmalıdır).
 
-`KestrelServerOptions`yapılandırmada
+`KestrelServerOptions` yapılandırmada
 
 ### <a name="configureendpointdefaultsactionlistenoptions"></a>ConfigureEndpointDefaults Varsayılanları (eylem \<ListenOptions> )
 
@@ -1435,7 +1436,7 @@ Bir as girişi alan Kestrel ayarlamak için bir yapılandırma yükleyicisi olu�
 
 Kestrel 'i HTTPS kullanacak şekilde yapılandırın.
 
-`ListenOptions.UseHttps`uzantılardan
+`ListenOptions.UseHttps` uzantılardan
 
 * `UseHttps`: Kestrel 'i varsayılan sertifikayla HTTPS kullanacak şekilde yapılandırın. Varsayılan sertifika yapılandırılmamışsa bir özel durum oluşturur.
 * `UseHttps(string fileName)`
@@ -1449,16 +1450,16 @@ Kestrel 'i HTTPS kullanacak şekilde yapılandırın.
 * `UseHttps(X509Certificate2 serverCertificate, Action<HttpsConnectionAdapterOptions> configureOptions)`
 * `UseHttps(Action<HttpsConnectionAdapterOptions> configureOptions)`
 
-`ListenOptions.UseHttps`parametrelere
+`ListenOptions.UseHttps` parametrelere
 
-* `filename`, uygulamanın içerik dosyalarını içeren dizine göre bir sertifika dosyasının yolu ve dosya adıdır.
-* `password`X. 509.440 sertifika verilerine erişmek için parola gereklidir.
-* `configureOptions`, öğesini `Action` yapılandırmak için kullanılır `HttpsConnectionAdapterOptions` . Döndürür `ListenOptions` .
-* `storeName`, sertifikanın yükleneceği sertifika deposudur.
-* `subject`, sertifika için konu adıdır.
-* `allowInvalid`geçersiz sertifikaların, otomatik olarak imzalanan sertifikalar gibi göz önünde bulundurulmayacağını gösterir.
-* `location`, sertifikanın yükleneceği mağaza konumudur.
-* `serverCertificate`, X. 509.440 sertifikasıdır.
+* `filename` , uygulamanın içerik dosyalarını içeren dizine göre bir sertifika dosyasının yolu ve dosya adıdır.
+* `password` X. 509.440 sertifika verilerine erişmek için parola gereklidir.
+* `configureOptions` , öğesini `Action` yapılandırmak için kullanılır `HttpsConnectionAdapterOptions` . Döndürür `ListenOptions` .
+* `storeName` , sertifikanın yükleneceği sertifika deposudur.
+* `subject` , sertifika için konu adıdır.
+* `allowInvalid` geçersiz sertifikaların, otomatik olarak imzalanan sertifikalar gibi göz önünde bulundurulmayacağını gösterir.
+* `location` , sertifikanın yükleneceği mağaza konumudur.
+* `serverCertificate` , X. 509.440 sertifikasıdır.
 
 Üretimde HTTPS 'nin açıkça yapılandırılması gerekir. En azından, varsayılan bir sertifika sağlanmalıdır.
 
@@ -1550,7 +1551,7 @@ Herhangi bir sertifika düğümü için **yol** ve **parola** kullanmanın alter
 * Bu `Certificate` bölüm isteğe bağlıdır. `Certificate`Bölüm belirtilmemişse, önceki senaryolarda tanımlanan varsayılanlar kullanılır. Kullanılabilir varsayılan değer yoksa, sunucu bir özel durum oluşturur ve başlayamaz.
 * Bu `Certificate` bölüm hem **yol** &ndash; **parolasını** hem de **Konu** &ndash; **deposu** sertifikalarını destekler.
 * Herhangi bir sayıda uç nokta, bağlantı noktası çakışmalarına neden olmadıkları sürece bu şekilde tanımlanabilir.
-* `options.Configure(context.Configuration.GetSection("{SECTION}"))`yapılandırılmış bir `KestrelConfigurationLoader` `.Endpoint(string name, listenOptions => { })` uç noktanın ayarlarını tamamlamak için kullanılabilecek bir yöntemi olan bir döndürür:
+* `options.Configure(context.Configuration.GetSection("{SECTION}"))` yapılandırılmış bir `KestrelConfigurationLoader` `.Endpoint(string name, listenOptions => { })` uç noktanın ayarlarını tamamlamak için kullanılabilecek bir yöntemi olan bir döndürür:
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -1566,7 +1567,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-`KestrelServerOptions.ConfigurationLoader`, tarafından sağlana gibi var olan yükleyicisindeki yinelemeye devam etmek için doğrudan erişilebilir <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> .
+`KestrelServerOptions.ConfigurationLoader` , tarafından sağlana gibi var olan yükleyicisindeki yinelemeye devam etmek için doğrudan erişilebilir <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> .
 
 * Her uç noktanın yapılandırma bölümü, `Endpoint` özel ayarların okunabilmesi için yöntemindeki seçeneklerde kullanılabilir.
 * Birden çok yapılandırma, `options.Configure(context.Configuration.GetSection("{SECTION}"))` başka bir bölümle yeniden çağırarak yüklenebilir. Önceki örneklerde açıkça çağrılmadığı takdirde, yalnızca son yapılandırma kullanılır `Load` . Metapackage, `Load` varsayılan yapılandırma bölümünün değiştirilmesini sağlayacak şekilde çağırmıyor.
@@ -1574,7 +1575,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 
 *Koddaki varsayılanları değiştirme*
 
-`ConfigureEndpointDefaults`ve `ConfigureHttpsDefaults` `ListenOptions` `HttpsConnectionAdapterOptions` , önceki senaryoda belirtilen varsayılan sertifikayı geçersiz kılma dahil, ve için varsayılan ayarları değiştirmek üzere kullanılabilir. `ConfigureEndpointDefaults`ve `ConfigureHttpsDefaults` herhangi bir uç nokta yapılandırılmadan önce çağrılmalıdır.
+`ConfigureEndpointDefaults` ve `ConfigureHttpsDefaults` `ListenOptions` `HttpsConnectionAdapterOptions` , önceki senaryoda belirtilen varsayılan sertifikayı geçersiz kılma dahil, ve için varsayılan ayarları değiştirmek üzere kullanılabilir. `ConfigureEndpointDefaults` ve `ConfigureHttpsDefaults` herhangi bir uç nokta yapılandırılmadan önce çağrılmalıdır.
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -1674,7 +1675,7 @@ webBuilder.ConfigureKestrel(serverOptions =>
 
 [!code-csharp[](kestrel/samples/2.x/KestrelSample/Program.cs?name=snippet_UnixSocket)]
 
-* NGINX confiuguration dosyasında, `server`  >  `location`  >  `proxy_pass` girdisini olarak ayarlayın `http://unix:/tmp/{KESTREL SOCKET}:/;` . `{KESTREL SOCKET}`, için belirtilen yuvanın adıdır <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> (örneğin, `kestrel-test.sock` Önceki örnekte).
+* NGINX confiuguration dosyasında, `server`  >  `location`  >  `proxy_pass` girdisini olarak ayarlayın `http://unix:/tmp/{KESTREL SOCKET}:/;` . `{KESTREL SOCKET}` , için belirtilen yuvanın adıdır <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> (örneğin, `kestrel-test.sock` Önceki örnekte).
 * Yuvanın NGINX tarafından yazılabilir olduğundan emin olun (örneğin, `chmod go+w /tmp/kestrel-test.sock` ). 
 
 ### <a name="port-0"></a>Bağlantı noktası 0
@@ -1694,9 +1695,9 @@ Listening on the following addresses: http://127.0.0.1:48508
 Aşağıdaki yaklaşımlar ile uç noktaları yapılandırın:
 
 * <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseUrls*>
-* `--urls`komut satırı bağımsız değişkeni
-* `urls`Ana bilgisayar yapılandırma anahtarı
-* `ASPNETCORE_URLS`ortam değişkeni
+* `--urls` komut satırı bağımsız değişkeni
+* `urls` Ana bilgisayar yapılandırma anahtarı
+* `ASPNETCORE_URLS` ortam değişkeni
 
 Bu yöntemler, kodun Kestrel dışındaki sunucularla çalışmasını sağlamak için yararlıdır. Ancak, aşağıdaki sınırlamalara dikkat edin:
 
@@ -1711,7 +1712,7 @@ IIS kullanırken, IIS geçersiz kılma bağlamaları için URL bağlamaları vey
 
 `Protocols`Özelliği, `HttpProtocols` bir bağlantı uç noktasında veya sunucu IÇIN etkin HTTP protokollerini () belirler. `Protocols`Sabit listesinden özelliğe bir değer atayın `HttpProtocols` .
 
-| `HttpProtocols`sabit listesi değeri | Bağlantı protokolü izin verildi |
+| `HttpProtocols` sabit listesi değeri | Bağlantı protokolü izin verildi |
 | -------------------------- | ----------------------------- |
 | `Http1`                    | Yalnızca HTTP/1.1. , TLS olmadan veya ile kullanılabilir. |
 | `Http2`                    | Yalnızca HTTP/2. Yalnızca istemci [önceki bir bilgi modunu](https://tools.ietf.org/html/rfc7540#section-3.4)DESTEKLIYORSA, TLS olmadan kullanılabilir. |
@@ -1875,7 +1876,7 @@ Yalnızca HTTP URL ön ekleri geçerlidir. Kestrel, kullanılarak URL bağlamala
   http://65.55.39.10:80/
   ```
 
-  `0.0.0.0`Tüm IPv4 adreslerine bağlanan özel bir durumdur.
+  `0.0.0.0` Tüm IPv4 adreslerine bağlanan özel bir durumdur.
 
 * Bağlantı noktası numarasına sahip IPv6 adresi
 
@@ -1883,7 +1884,7 @@ Yalnızca HTTP URL ön ekleri geçerlidir. Kestrel, kullanılarak URL bağlamala
   http://[0:0:0:0:0:ffff:4137:270a]:80/
   ```
 
-  `[::]`, IPv4 'un IPv6 eşdeğeridir `0.0.0.0` .
+  `[::]` , IPv4 'un IPv6 eşdeğeridir `0.0.0.0` .
 
 * Bağlantı noktası numarası olan ana bilgisayar adı
 
@@ -1909,7 +1910,7 @@ Yalnızca HTTP URL ön ekleri geçerlidir. Kestrel, kullanılarak URL bağlamala
 
 ## <a name="host-filtering"></a>Konak filtreleme
 
-Kestrel gibi önekleri temel alarak yapılandırmayı desteklese `http://example.com:5000` de, Kestrel büyük ölçüde ana bilgisayar adını yoksayar. Ana bilgisayar `localhost` , geri döngü adreslerine bağlama için kullanılan özel bir durumdur. Açık IP adresi dışındaki tüm ana bilgisayar tüm genel IP adreslerine bağlanır. `Host`Üstbilgiler doğrulanmadı.
+Kestrel gibi önekleri temel alarak yapılandırmayı desteklese `http://example.com:5000` de, Kestrel büyük ölçüde ana bilgisayar adını yoksayar. Ana bilgisayar `localhost` , geri döngü adreslerine bağlama için kullanılan özel bir durumdur. Açık IP adresi dışındaki tüm ana bilgisayar tüm genel IP adreslerine bağlanır. `Host` Üstbilgiler doğrulanmadı.
 
 Geçici bir çözüm olarak, ana bilgisayar filtreleme ara yazılımı kullanın. Ana bilgisayar filtreleme ara yazılımı, [Microsoft. aspnetcore. app metapackage](xref:fundamentals/metapackage-app) (ASP.NET Core 2,1 veya 2,2) ' de yer alan [Microsoft. Aspnetcore. hostfiltering](https://www.nuget.org/packages/Microsoft.AspNetCore.HostFiltering) paketi tarafından sağlanır. Ara yazılım tarafından eklenir <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> ve şunları çağırır <xref:Microsoft.AspNetCore.Builder.HostFilteringServicesExtensions.AddHostFiltering*> :
 
@@ -2194,7 +2195,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 
 ### <a name="synchronous-io"></a>Zaman Uyumlu G/Ç
 
-<xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.AllowSynchronousIO>istek ve yanıt için zaman uyumlu g/ç 'ye izin verilip verilmediğini denetler. Varsayılan değer `true` .
+<xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.AllowSynchronousIO> istek ve yanıt için zaman uyumlu g/ç 'ye izin verilip verilmediğini denetler. Varsayılan değer `true` .
 
 > [!WARNING]
 > Çok sayıda engelleme zaman uyumlu g/ç işlemi, iş parçacığı havuzuna yol açabilir, bu da uygulamanın yanıt vermemesine neden olur. Yalnızca `AllowSynchronousIO` zaman uyumsuz g/ç desteklemeyen bir kitaplık kullanırken etkinleştirin.
@@ -2222,14 +2223,14 @@ Diğer Kestrel seçenekleri ve limitleri hakkında daha fazla bilgi için bkz.:
 Varsayılan olarak, ASP.NET Core bağlar:
 
 * `http://localhost:5000`
-* `https://localhost:5001`(bir yerel geliştirme sertifikası varsa)
+* `https://localhost:5001` (bir yerel geliştirme sertifikası varsa)
 
 Kullanarak URL 'Leri belirtin:
 
-* `ASPNETCORE_URLS`ortam değişkeni.
-* `--urls`komut satırı bağımsız değişkeni.
-* `urls`Ana bilgisayar yapılandırma anahtarı.
-* `UseUrls`genişletme yöntemi.
+* `ASPNETCORE_URLS` ortam değişkeni.
+* `--urls` komut satırı bağımsız değişkeni.
+* `urls` Ana bilgisayar yapılandırma anahtarı.
+* `UseUrls` genişletme yöntemi.
 
 Bu yaklaşımlar kullanılarak sağlanan değer bir veya daha fazla HTTP ve HTTPS uç noktası olabilir (varsayılan bir sertifika varsa HTTPS). Değeri noktalı virgülle ayrılmış bir liste olarak yapılandırın (örneğin, `"Urls": "http://localhost:8000;http://localhost:8001"` ).
 
@@ -2248,7 +2249,7 @@ Proje şablonları, uygulamaları HTTPS üzerinde varsayılan olarak çalışaca
 
 `UseUrls`, `--urls` komut satırı bağımsız değişkeni, `urls` ana bilgisayar yapılandırma anahtarı ve `ASPNETCORE_URLS` ortam değişkeni de çalışır, ancak bu bölümün ilerleyen kısımlarında belirtilen sınırlamalara sahiptir (https uç noktası yapılandırması için varsayılan sertifika kullanılabilir olmalıdır).
 
-`KestrelServerOptions`yapılandırmada
+`KestrelServerOptions` yapılandırmada
 
 ### <a name="configureendpointdefaultsactionlistenoptions"></a>ConfigureEndpointDefaults Varsayılanları (eylem \<ListenOptions> )
 
@@ -2299,7 +2300,7 @@ Bir as girişi alan Kestrel ayarlamak için bir yapılandırma yükleyicisi olu�
 
 Kestrel 'i HTTPS kullanacak şekilde yapılandırın.
 
-`ListenOptions.UseHttps`uzantılardan
+`ListenOptions.UseHttps` uzantılardan
 
 * `UseHttps`: Kestrel 'i varsayılan sertifikayla HTTPS kullanacak şekilde yapılandırın. Varsayılan sertifika yapılandırılmamışsa bir özel durum oluşturur.
 * `UseHttps(string fileName)`
@@ -2313,16 +2314,16 @@ Kestrel 'i HTTPS kullanacak şekilde yapılandırın.
 * `UseHttps(X509Certificate2 serverCertificate, Action<HttpsConnectionAdapterOptions> configureOptions)`
 * `UseHttps(Action<HttpsConnectionAdapterOptions> configureOptions)`
 
-`ListenOptions.UseHttps`parametrelere
+`ListenOptions.UseHttps` parametrelere
 
-* `filename`, uygulamanın içerik dosyalarını içeren dizine göre bir sertifika dosyasının yolu ve dosya adıdır.
-* `password`X. 509.440 sertifika verilerine erişmek için parola gereklidir.
-* `configureOptions`, öğesini `Action` yapılandırmak için kullanılır `HttpsConnectionAdapterOptions` . Döndürür `ListenOptions` .
-* `storeName`, sertifikanın yükleneceği sertifika deposudur.
-* `subject`, sertifika için konu adıdır.
-* `allowInvalid`geçersiz sertifikaların, otomatik olarak imzalanan sertifikalar gibi göz önünde bulundurulmayacağını gösterir.
-* `location`, sertifikanın yükleneceği mağaza konumudur.
-* `serverCertificate`, X. 509.440 sertifikasıdır.
+* `filename` , uygulamanın içerik dosyalarını içeren dizine göre bir sertifika dosyasının yolu ve dosya adıdır.
+* `password` X. 509.440 sertifika verilerine erişmek için parola gereklidir.
+* `configureOptions` , öğesini `Action` yapılandırmak için kullanılır `HttpsConnectionAdapterOptions` . Döndürür `ListenOptions` .
+* `storeName` , sertifikanın yükleneceği sertifika deposudur.
+* `subject` , sertifika için konu adıdır.
+* `allowInvalid` geçersiz sertifikaların, otomatik olarak imzalanan sertifikalar gibi göz önünde bulundurulmayacağını gösterir.
+* `location` , sertifikanın yükleneceği mağaza konumudur.
+* `serverCertificate` , X. 509.440 sertifikasıdır.
 
 Üretimde HTTPS 'nin açıkça yapılandırılması gerekir. En azından, varsayılan bir sertifika sağlanmalıdır.
 
@@ -2414,7 +2415,7 @@ Herhangi bir sertifika düğümü için **yol** ve **parola** kullanmanın alter
 * Bu `Certificate` bölüm isteğe bağlıdır. `Certificate`Bölüm belirtilmemişse, önceki senaryolarda tanımlanan varsayılanlar kullanılır. Kullanılabilir varsayılan değer yoksa, sunucu bir özel durum oluşturur ve başlayamaz.
 * Bu `Certificate` bölüm hem **yol** &ndash; **parolasını** hem de **Konu** &ndash; **deposu** sertifikalarını destekler.
 * Herhangi bir sayıda uç nokta, bağlantı noktası çakışmalarına neden olmadıkları sürece bu şekilde tanımlanabilir.
-* `options.Configure(context.Configuration.GetSection("{SECTION}"))`yapılandırılmış bir `KestrelConfigurationLoader` `.Endpoint(string name, listenOptions => { })` uç noktanın ayarlarını tamamlamak için kullanılabilecek bir yöntemi olan bir döndürür:
+* `options.Configure(context.Configuration.GetSection("{SECTION}"))` yapılandırılmış bir `KestrelConfigurationLoader` `.Endpoint(string name, listenOptions => { })` uç noktanın ayarlarını tamamlamak için kullanılabilecek bir yöntemi olan bir döndürür:
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -2430,7 +2431,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-`KestrelServerOptions.ConfigurationLoader`, tarafından sağlana gibi var olan yükleyicisindeki yinelemeye devam etmek için doğrudan erişilebilir <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> .
+`KestrelServerOptions.ConfigurationLoader` , tarafından sağlana gibi var olan yükleyicisindeki yinelemeye devam etmek için doğrudan erişilebilir <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> .
 
 * Her uç noktanın yapılandırma bölümü, `Endpoint` özel ayarların okunabilmesi için yöntemindeki seçeneklerde kullanılabilir.
 * Birden çok yapılandırma, `options.Configure(context.Configuration.GetSection("{SECTION}"))` başka bir bölümle yeniden çağırarak yüklenebilir. Önceki örneklerde açıkça çağrılmadığı takdirde, yalnızca son yapılandırma kullanılır `Load` . Metapackage, `Load` varsayılan yapılandırma bölümünün değiştirilmesini sağlayacak şekilde çağırmıyor.
@@ -2438,7 +2439,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
 
 *Koddaki varsayılanları değiştirme*
 
-`ConfigureEndpointDefaults`ve `ConfigureHttpsDefaults` `ListenOptions` `HttpsConnectionAdapterOptions` , önceki senaryoda belirtilen varsayılan sertifikayı geçersiz kılma dahil, ve için varsayılan ayarları değiştirmek üzere kullanılabilir. `ConfigureEndpointDefaults`ve `ConfigureHttpsDefaults` herhangi bir uç nokta yapılandırılmadan önce çağrılmalıdır.
+`ConfigureEndpointDefaults` ve `ConfigureHttpsDefaults` `ListenOptions` `HttpsConnectionAdapterOptions` , önceki senaryoda belirtilen varsayılan sertifikayı geçersiz kılma dahil, ve için varsayılan ayarları değiştirmek üzere kullanılabilir. `ConfigureEndpointDefaults` ve `ConfigureHttpsDefaults` herhangi bir uç nokta yapılandırılmadan önce çağrılmalıdır.
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -2587,7 +2588,7 @@ public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
         });
 ```
 
-* NGINX confiuguration dosyasında, `server`  >  `location`  >  `proxy_pass` girdisini olarak ayarlayın `http://unix:/tmp/{KESTREL SOCKET}:/;` . `{KESTREL SOCKET}`, için belirtilen yuvanın adıdır <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> (örneğin, `kestrel-test.sock` Önceki örnekte).
+* NGINX confiuguration dosyasında, `server`  >  `location`  >  `proxy_pass` girdisini olarak ayarlayın `http://unix:/tmp/{KESTREL SOCKET}:/;` . `{KESTREL SOCKET}` , için belirtilen yuvanın adıdır <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenUnixSocket*> (örneğin, `kestrel-test.sock` Önceki örnekte).
 * Yuvanın NGINX tarafından yazılabilir olduğundan emin olun (örneğin, `chmod go+w /tmp/kestrel-test.sock` ). 
 
 ### <a name="port-0"></a>Bağlantı noktası 0
@@ -2607,9 +2608,9 @@ Listening on the following addresses: http://127.0.0.1:48508
 Aşağıdaki yaklaşımlar ile uç noktaları yapılandırın:
 
 * <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseUrls*>
-* `--urls`komut satırı bağımsız değişkeni
-* `urls`Ana bilgisayar yapılandırma anahtarı
-* `ASPNETCORE_URLS`ortam değişkeni
+* `--urls` komut satırı bağımsız değişkeni
+* `urls` Ana bilgisayar yapılandırma anahtarı
+* `ASPNETCORE_URLS` ortam değişkeni
 
 Bu yöntemler, kodun Kestrel dışındaki sunucularla çalışmasını sağlamak için yararlıdır. Ancak, aşağıdaki sınırlamalara dikkat edin:
 
@@ -2665,7 +2666,7 @@ Yalnızca HTTP URL ön ekleri geçerlidir. Kestrel, kullanılarak URL bağlamala
   http://65.55.39.10:80/
   ```
 
-  `0.0.0.0`Tüm IPv4 adreslerine bağlanan özel bir durumdur.
+  `0.0.0.0` Tüm IPv4 adreslerine bağlanan özel bir durumdur.
 
 * Bağlantı noktası numarasına sahip IPv6 adresi
 
@@ -2673,7 +2674,7 @@ Yalnızca HTTP URL ön ekleri geçerlidir. Kestrel, kullanılarak URL bağlamala
   http://[0:0:0:0:0:ffff:4137:270a]:80/
   ```
 
-  `[::]`, IPv4 'un IPv6 eşdeğeridir `0.0.0.0` .
+  `[::]` , IPv4 'un IPv6 eşdeğeridir `0.0.0.0` .
 
 * Bağlantı noktası numarası olan ana bilgisayar adı
 
@@ -2699,7 +2700,7 @@ Yalnızca HTTP URL ön ekleri geçerlidir. Kestrel, kullanılarak URL bağlamala
 
 ## <a name="host-filtering"></a>Konak filtreleme
 
-Kestrel gibi önekleri temel alarak yapılandırmayı desteklese `http://example.com:5000` de, Kestrel büyük ölçüde ana bilgisayar adını yoksayar. Ana bilgisayar `localhost` , geri döngü adreslerine bağlama için kullanılan özel bir durumdur. Açık IP adresi dışındaki tüm ana bilgisayar tüm genel IP adreslerine bağlanır. `Host`Üstbilgiler doğrulanmadı.
+Kestrel gibi önekleri temel alarak yapılandırmayı desteklese `http://example.com:5000` de, Kestrel büyük ölçüde ana bilgisayar adını yoksayar. Ana bilgisayar `localhost` , geri döngü adreslerine bağlama için kullanılan özel bir durumdur. Açık IP adresi dışındaki tüm ana bilgisayar tüm genel IP adreslerine bağlanır. `Host` Üstbilgiler doğrulanmadı.
 
 Geçici bir çözüm olarak, ana bilgisayar filtreleme ara yazılımı kullanın. Ana bilgisayar filtreleme ara yazılımı, [Microsoft. aspnetcore. app metapackage](xref:fundamentals/metapackage-app) (ASP.NET Core 2,1 veya 2,2) ' de yer alan [Microsoft. Aspnetcore. hostfiltering](https://www.nuget.org/packages/Microsoft.AspNetCore.HostFiltering) paketi tarafından sağlanır. Ara yazılım tarafından eklenir <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> ve şunları çağırır <xref:Microsoft.AspNetCore.Builder.HostFilteringServicesExtensions.AddHostFiltering*> :
 

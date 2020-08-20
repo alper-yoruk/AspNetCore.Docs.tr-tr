@@ -1,5 +1,5 @@
 ---
-title: RazorASP.NET Core birim testleri sayfa testleri
+title: Razor ASP.NET Core birim testleri sayfa testleri
 author: rick-anderson
 description: Sayfalar uygulamaları için birim testleri oluşturmayı öğrenin Razor .
 monikerRange: '>= aspnetcore-2.1'
@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/22/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: test/razor-pages-tests
-ms.openlocfilehash: 21810f00548ad9f9c399ec4e453dd914dc186f5d
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: bb376412daafd49b307c3c13ea7c88f34628f1c3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018955"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634845"
 ---
-# <a name="no-locrazor-pages-unit-tests-in-aspnet-core"></a>RazorASP.NET Core birim testleri sayfa testleri
+# <a name="no-locrazor-pages-unit-tests-in-aspnet-core"></a>Razor ASP.NET Core birim testleri sayfa testleri
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -182,7 +183,7 @@ Birim testi Işlem adımı (*testler/ Razor pagestestsample. testler/unittests/�
 
 [!code-csharp[](razor-pages-tests/samples/3.x/tests/RazorPagesTestSample.Tests/UnitTests/IndexPageTests.cs?name=snippet2)]
 
-`IndexPage`sayfa modelinin `OnGetAsync` Yöntemi (*src/ Razor pagestestsample/Pages/Index. cshtml. cs*):
+`IndexPage` sayfa modelinin `OnGetAsync` Yöntemi (*src/ Razor pagestestsample/Pages/Index. cshtml. cs*):
 
 [!code-csharp[](razor-pages-tests/samples/3.x/src/RazorPagesTestSample/Pages/Index.cshtml.cs?name=snippet1&highlight=3)]
 
@@ -366,7 +367,7 @@ Birim testi Işlem adımı (*testler/ Razor pagestestsample. testler/unittests/�
 
 [!code-csharp[](razor-pages-tests/samples/2.x/tests/RazorPagesTestSample.Tests/UnitTests/IndexPageTests.cs?name=snippet2)]
 
-`IndexPage`sayfa modelinin `OnGetAsync` Yöntemi (*src/ Razor pagestestsample/Pages/Index. cshtml. cs*):
+`IndexPage` sayfa modelinin `OnGetAsync` Yöntemi (*src/ Razor pagestestsample/Pages/Index. cshtml. cs*):
 
 [!code-csharp[](razor-pages-tests/samples/2.x/src/RazorPagesTestSample/Pages/Index.cshtml.cs?name=snippet1&highlight=3)]
 

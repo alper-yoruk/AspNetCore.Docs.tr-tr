@@ -1,10 +1,11 @@
 ---
 title: Identity ASP.NET Core model özelleştirmesi
 author: ajcvickers
-description: Bu makalede, ASP.NET Core için temel Entity Framework Core veri modelinin nasıl özelleştirileceği açıklanır Identity .
+description: Bu makalede, için temel alınan Entity Framework Core veri modelinin nasıl özelleştirileceği açıklanır ASP.NET Core Identity .
 ms.author: avickers
 ms.date: 07/01/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,18 +16,18 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/customize_identity_model
-ms.openlocfilehash: 7c325bbc96ad4a8c5e4686073266d730eb924c10
-ms.sourcegitcommit: dfea24471f4f3d7904faa92fe60c000853bddc3b
+ms.openlocfilehash: 71f532aa00c2afeeb0d6b93c01cb6a1fbd0a686c
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/18/2020
-ms.locfileid: "88504677"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634312"
 ---
 # <a name="no-locidentity-model-customization-in-aspnet-core"></a>Identity ASP.NET Core model özelleştirmesi
 
 [Arthur Vicranlar](https://github.com/ajcvickers) tarafından
 
-ASP.NET Core Identity , ASP.NET Core uygulamalarda Kullanıcı hesaplarını yönetmek ve depolamak için bir çerçeve sağlar. Identity , kimlik doğrulama mekanizması olarak **bireysel kullanıcı hesapları** seçildiğinde projenize eklenir. Varsayılan olarak, Identity Entity Framework (EF) temel veri modelini kullanır. Bu makalede, modelin nasıl özelleştirileceği açıklanır Identity .
+ASP.NET Core Identity ASP.NET Core uygulamalarda Kullanıcı hesaplarını yönetmek ve depolamak için bir çerçeve sağlar. Identity , kimlik doğrulama mekanizması olarak **bireysel kullanıcı hesapları** seçildiğinde projenize eklenir. Varsayılan olarak, Identity Entity Framework (EF) temel veri modelini kullanır. Bu makalede, modelin nasıl özelleştirileceği açıklanır Identity .
 
 ## <a name="no-locidentity-and-ef-core-migrations"></a>Identity ve EF Core geçişleri
 
@@ -219,7 +220,7 @@ Identity Yukarıda listelenen her varlık türü için varsayılan [ortak dil ç
 
 Bu türleri doğrudan kullanmak yerine, türler uygulamanın kendi türleri için temel sınıflar olarak kullanılabilir. `DbContext`Tarafından tanımlanan sınıflar Identity geneldir, örneğin, modeldeki bir veya daha fazla varlık türü IÇIN farklı clr türleri kullanılabilir. Bu genel türler Ayrıca `User` birincil anahtar (PK) veri türünün değiştirilmesine izin verir.
 
-IdentityRol desteğiyle birlikte kullanıldığında bir <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> sınıf kullanılmalıdır. Örneğin:
+IdentityRol desteğiyle birlikte kullanıldığında bir <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> sınıf kullanılmalıdır. Örnek:
 
 ```csharp
 // Uses all the built-in Identity types
@@ -434,7 +435,7 @@ PK türünü değiştirmek için şu adımları izleyin:
 
     ::: moniker-end
 
-4. Özel bir `ApplicationUser` sınıf kullanılıyorsa, öğesinden devralacak olan sınıfı güncelleştirin `IdentityUser` . Örneğin:
+4. Özel bir `ApplicationUser` sınıf kullanılıyorsa, öğesinden devralacak olan sınıfı güncelleştirin `IdentityUser` . Örnek:
 
     ::: moniker range="<= aspnetcore-1.1"
 
@@ -502,7 +503,7 @@ PK türünü değiştirmek için şu adımları izleyin:
 
     ::: moniker-end
 
-5. Özel bir `ApplicationRole` sınıf kullanılıyorsa, öğesinden devralacak olan sınıfı güncelleştirin `IdentityRole<TKey>` . Örneğin:
+5. Özel bir `ApplicationRole` sınıf kullanılıyorsa, öğesinden devralacak olan sınıfı güncelleştirin `IdentityRole<TKey>` . Örnek:
 
     [!code-csharp[](customize-identity-model/samples/2.1/RazorPagesSampleApp/Data/ApplicationRole.cs?name=snippet_ApplicationRole&highlight=4)]
 
@@ -951,7 +952,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 ### <a name="map-to-a-different-schema"></a>Farklı bir şemaya eşleme
 
-Şemalar, veritabanı sağlayıcıları genelinde farklı davranabilir. SQL Server için varsayılan, *dbo* şemasında tüm tabloları oluşturmaktır. Tablolar farklı bir şemada oluşturulabilir. Örneğin:
+Şemalar, veritabanı sağlayıcıları genelinde farklı davranabilir. SQL Server için varsayılan, *dbo* şemasında tüm tabloları oluşturmaktır. Tablolar farklı bir şemada oluşturulabilir. Örnek:
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)

@@ -5,6 +5,7 @@ description: Rolleri Yetkilendir özniteliğine geçirerek ASP.NET Core denetley
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/roles
-ms.openlocfilehash: 44e5f9a2a429c9f4a510d2f3e564ddd6bbe77205
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 7673bb006c344e6f9baaa3cd99c4bdb4a6fc2862
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021126"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635183"
 ---
 # <a name="role-based-authorization-in-aspnet-core"></a>ASP.NET Core rol tabanlı yetkilendirme
 
@@ -175,7 +176,7 @@ options.AddPolicy("ElevatedRights", policy =>
 
 Bu örnek `Administrator` , veya rollerine ait olan kullanıcıları yetkilendirir `PowerUser` `BackupAdministrator` .
 
-### <a name="add-role-services-to-no-locidentity"></a>Rol hizmetlerini EkleIdentity
+### <a name="add-role-services-to-no-locidentity"></a>Rol hizmetlerini Ekle Identity
 
 Rol hizmetleri eklemek için [Addroles](/dotnet/api/microsoft.aspnetcore.identity.identitybuilder.addroles#Microsoft_AspNetCore_Identity_IdentityBuilder_AddRoles__1) ekleyin:
 

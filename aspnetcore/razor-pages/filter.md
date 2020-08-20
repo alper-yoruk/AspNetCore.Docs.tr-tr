@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 2/18/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/filter
-ms.openlocfilehash: b8942020e98d0f985e5445bb1816c540bcb7829b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: b6d6585c0cbd52715c4192d4ab3bee756dbb41b3
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021412"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635053"
 ---
 # <a name="filter-methods-for-no-locrazor-pages-in-aspnet-core"></a>RazorASP.NET Core sayfaların filtre yöntemleri
 
@@ -29,9 +30,9 @@ ms.locfileid: "88021412"
 
 Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-RazorSayfa filtreleri [ıpagefilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) ve [ıasyncpagefilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) Razor sayfaların bir sayfa işleyicisi çalıştırılmadan önce ve sonra kod çalıştırmasına izin verir Razor . RazorSayfa filtreleri, tek sayfa işleyicisi yöntemlerine uygulanamazlar hariç [ASP.NET Core MVC eylem filtrelerine](xref:mvc/controllers/filters#action-filters)benzerdir.
+Razor Sayfa filtreleri [ıpagefilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) ve [ıasyncpagefilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) Razor sayfaların bir sayfa işleyicisi çalıştırılmadan önce ve sonra kod çalıştırmasına izin verir Razor . Razor Sayfa filtreleri, tek sayfa işleyicisi yöntemlerine uygulanamazlar hariç [ASP.NET Core MVC eylem filtrelerine](xref:mvc/controllers/filters#action-filters)benzerdir.
 
-RazorSayfa filtreleri:
+Razor Sayfa filtreleri:
 
 * Bir işleyici yöntemi seçildikten sonra, ancak model bağlama gerçekleşmeden önce kodu çalıştırın.
 * Model bağlama işlemi tamamlandıktan sonra işleyici metodu yürütülmeden önce kodu çalıştırın.
@@ -44,7 +45,7 @@ Sayfa oluşturucular ve ara yazılım, bir işleyici yöntemi yürütmeden önce
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/filter/3.1sample) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-RazorSayfa filtreleri, genel olarak veya sayfa düzeyinde uygulanabilecek aşağıdaki yöntemleri sağlar:
+Razor Sayfa filtreleri, genel olarak veya sayfa düzeyinde uygulanabilecek aşağıdaki yöntemleri sağlar:
 
 * Zaman uyumlu Yöntemler:
 
@@ -121,9 +122,9 @@ Filtre işlem hattının bir filtreden kısa devre dışı olması için bkz. [i
 
 Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-RazorSayfa filtreleri [ıpagefilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) ve [ıasyncpagefilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) Razor sayfaların bir sayfa işleyicisi çalıştırılmadan önce ve sonra kod çalıştırmasına izin verir Razor . RazorSayfa filtreleri, tek sayfa işleyicisi yöntemlerine uygulanamazlar hariç [ASP.NET Core MVC eylem filtrelerine](xref:mvc/controllers/filters#action-filters)benzerdir.
+Razor Sayfa filtreleri [ıpagefilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.ipagefilter?view=aspnetcore-2.0) ve [ıasyncpagefilter](/dotnet/api/microsoft.aspnetcore.mvc.filters.iasyncpagefilter?view=aspnetcore-2.0) Razor sayfaların bir sayfa işleyicisi çalıştırılmadan önce ve sonra kod çalıştırmasına izin verir Razor . Razor Sayfa filtreleri, tek sayfa işleyicisi yöntemlerine uygulanamazlar hariç [ASP.NET Core MVC eylem filtrelerine](xref:mvc/controllers/filters#action-filters)benzerdir.
 
-RazorSayfa filtreleri:
+Razor Sayfa filtreleri:
 
 * Bir işleyici yöntemi seçildikten sonra, ancak model bağlama gerçekleşmeden önce kodu çalıştırın.
 * Model bağlama işlemi tamamlandıktan sonra işleyici metodu yürütülmeden önce kodu çalıştırın.
@@ -135,7 +136,7 @@ Bir işleyici yöntemi sayfa Oluşturucusu veya ara yazılım kullanılarak yür
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/razor-pages/filter/sample/PageFilter) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-RazorSayfa filtreleri, genel olarak veya sayfa düzeyinde uygulanabilecek aşağıdaki yöntemleri sağlar:
+Razor Sayfa filtreleri, genel olarak veya sayfa düzeyinde uygulanabilecek aşağıdaki yöntemleri sağlar:
 
 * Zaman uyumlu Yöntemler:
 

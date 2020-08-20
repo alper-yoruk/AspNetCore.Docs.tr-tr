@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 04/06/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: 0d99c5881b1ca786287d8643c82cab6a3f98f988
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 94ae9e52ed99c3fe8e7044f474cdf5b702dc5adf
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019865"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634468"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core performans En Iyi yöntemleri
 
@@ -110,7 +111,7 @@ Sorgu sorunları, [Application Insights](/azure/application-insights/app-insight
 
 ## <a name="keep-common-code-paths-fast"></a>Ortak kod yollarını hızlı tutun
 
-Tüm kodunuzun hızlı olmasını istiyorsunuz. Yaygın olarak çağrılan kod yolları en kritik öneme sahiptir. Bu modüller şunlardır:
+Tüm kodunuzun hızlı olmasını istiyorsunuz. Yaygın olarak çağrılan kod yolları en kritik öneme sahiptir. Bunlar:
 
 * Uygulamanın istek işleme ardışık düzeninde bulunan ara yazılım bileşenleri, özellikle de ara yazılım ardışık düzende çalışır. Bu bileşenlerin performansı üzerinde büyük bir etkisi vardır.
 * Her istek için veya istek başına birden çok kez yürütülen kod. Örneğin, özel günlük kaydı, yetkilendirme işleyicileri veya geçici Hizmetleri başlatma.
@@ -195,12 +196,12 @@ Yukarıdaki kod, istek gövdesini bir C# nesnesine zaman uyumsuz olarak serileş
 ## <a name="prefer-readformasync-over-requestform"></a>Istek üzerinde ReadFormAsync tercih et. form
 
 `HttpContext.Request.ReadFormAsync`Yerine kullanın `HttpContext.Request.Form` .
-`HttpContext.Request.Form`yalnızca aşağıdaki koşullara göre güvenle okunabilir:
+`HttpContext.Request.Form` yalnızca aşağıdaki koşullara göre güvenle okunabilir:
 
 * Form, bir çağrısıyla okundu `ReadFormAsync` ve
-* Önbelleğe alınan form değeri şu kullanılarak okunmakta`HttpContext.Request.Form`
+* Önbelleğe alınan form değeri şu kullanılarak okunmakta `HttpContext.Request.Form`
 
-Bunu **yapın:** Aşağıdaki örnek kullanılmıştır `HttpContext.Request.Form` .  `HttpContext.Request.Form`, [zaman uyumsuz olarak eşitleme](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#warning-sync-over-async
+Bunu **yapın:** Aşağıdaki örnek kullanılmıştır `HttpContext.Request.Form` .  `HttpContext.Request.Form` , [zaman uyumsuz olarak eşitleme](https://github.com/davidfowl/AspNetCoreDiagnosticScenarios/blob/master/AsyncGuidance.md#warning-sync-over-async
 ) kullanır ve iş parçacığı havuzunda ortaya çıkmasına neden olabilir.
 
 [!code-csharp[](performance-best-practices/samples/3.0/Controllers/MySecondController.cs?name=snippet1)]
@@ -229,7 +230,7 @@ Büyük bir isteği veya Yanıt gövdesini tek bir veya ' a bir veya daha fazla 
 
 ## <a name="working-with-a-synchronous-data-processing-api"></a>Zaman uyumlu veri işleme API 'SI ile çalışma
 
-Yalnızca zaman uyumlu okuma ve yazma işlemlerini destekleyen bir serileştirici/devre dışı bırakma kullanılırken (örneğin, [JSON.net](https://www.newtonsoft.com/json/help/html/Introduction.htm)):
+Yalnızca zaman uyumlu okuma ve yazma işlemlerini destekleyen bir serileştirici/devre dışı bırakma kullanılırken (örneğin,  [JSON.net](https://www.newtonsoft.com/json/help/html/Introduction.htm)):
 
 * Verileri seri hale getirici/devre dışı serileştiriciye geçirmeden önce zaman uyumsuz olarak belleğe arabelleğe ın.
 
@@ -261,7 +262,7 @@ Yukarıdaki kod, oluşturucuda genellikle null veya yanlış yakalar `HttpContex
 
 ## <a name="do-not-access-httpcontext-from-multiple-threads"></a>Birden çok iş parçacığından HttpContext 'e erişme
 
-`HttpContext`, iş parçacığı açısından güvenli *değildir* . `HttpContext`Paralel olarak birden çok iş parçacığından erişilmesi, askıda kalma, kilitlenme ve veri bozulması gibi tanımsız davranışlara neden olabilir.
+`HttpContext` , iş parçacığı açısından güvenli *değildir* . `HttpContext`Paralel olarak birden çok iş parçacığından erişilmesi, askıda kalma, kilitlenme ve veri bozulması gibi tanımsız davranışlara neden olabilir.
 
 Bunu **yapın:** Aşağıdaki örnek üç paralel istek yapar ve giden HTTP isteğinden önce ve sonra gelen istek yolunu günlüğe kaydeder. İstek yoluna, potansiyel olarak paralel olarak birden çok iş parçacığından erişilir.
 
@@ -273,7 +274,7 @@ Bunu **yapın:** Aşağıdaki örnek üç paralel istek yapar ve giden HTTP iste
 
 ## <a name="do-not-use-the-httpcontext-after-the-request-is-complete"></a>İstek tamamlandıktan sonra HttpContext 'i kullanma
 
-`HttpContext`yalnızca ASP.NET Core işlem hattında etkin bir HTTP isteği olduğu sürece geçerlidir. Tüm ASP.NET Core işlem hattı, her isteği yürüten zaman uyumsuz temsilciler zinciridir. `Task`Bu zincirden döndürülen işlem tamamlandığında, geri dönüştürülür `HttpContext` .
+`HttpContext` yalnızca ASP.NET Core işlem hattında etkin bir HTTP isteği olduğu sürece geçerlidir. Tüm ASP.NET Core işlem hattı, her isteği yürüten zaman uyumsuz temsilciler zinciridir. `Task`Bu zincirden döndürülen işlem tamamlandığında, geri dönüştürülür `HttpContext` .
 
 Bunu **yapın:** Aşağıdaki örnek, `async void` ilk kez ULAŞıLDıĞıNDA http isteğinin tamamlanmasını sağlar `await` :
 
@@ -313,7 +314,7 @@ Bunu **yapın:** Aşağıdaki örnek, bir kapanışın `DbContext` `Controller` 
 
 **Bunu yapın:** Aşağıdaki örnek:
 
-* <xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory>Arka plan iş öğesinde bir kapsam oluşturmak için bir oluşturur. `IServiceScopeFactory`tek bir.
+* <xref:Microsoft.Extensions.DependencyInjection.IServiceScopeFactory>Arka plan iş öğesinde bir kapsam oluşturmak için bir oluşturur. `IServiceScopeFactory` tek bir.
 * Arka plan iş parçacığında yeni bir bağımlılık ekleme kapsamı oluşturur.
 * Denetleyiciden hiçbir şeye başvurmuyor.
 * `ContosoDbContext`Gelen istekten yakalanmaz.

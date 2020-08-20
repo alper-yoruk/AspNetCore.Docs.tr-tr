@@ -5,6 +5,7 @@ description: E-posta onayı ve parola sıfırlama ile ASP.NET Core bir uygulama 
 ms.author: riande
 ms.date: 03/11/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: 7016c2c1997d961f4b3d3cf513fc1769bd65247b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 57607390e7d5e58df9f27437faecd57504ad64df
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021620"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635378"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>ASP.NET Core hesap onaylama ve parola kurtarma
 
@@ -36,7 +37,7 @@ Bu öğreticide, e-posta onayı ve parola sıfırlama ile bir ASP.NET Core uygul
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 [.NET Core 3,0 SDK veya üzeri](https://dotnet.microsoft.com/download/dotnet-core/3.0)
 
@@ -52,7 +53,7 @@ dotnet run
 
 Uygulamayı çalıştırın, **Kaydet** bağlantısını seçin ve bir Kullanıcı kaydedin. Kaydolduktan sonra, `/Identity/Account/RegisterConfirmation` e-posta onayı benzetimi için bir bağlantı içeren to sayfasına yönlendirilirsiniz:
 
-* Bağlantıyı seçin `Click here to confirm your account` .
+* `Click here to confirm your account` bağlantısını seçin.
 * **Oturum açma** bağlantısını seçin ve aynı kimlik bilgileriyle oturum açın.
 * `Hello YourEmail@provider.com!`Sizi sayfaya yönlendiren bağlantıyı seçin `/Identity/Account/Manage/PersonalData` .
 * Sol taraftaki **kişisel veri** sekmesini seçin ve **Sil**' i seçin.
@@ -233,11 +234,11 @@ Kullanıcılara bir sitede hesap onayını etkinleştirmek, mevcut tüm kullanı
 
 ::: moniker range="< aspnetcore-3.0"
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 [.NET Core 2,2 SDK veya üzeri](https://dotnet.microsoft.com/download/dotnet-core)
 
-## <a name="create-a-web--app-and-scaffold-no-locidentity"></a>Web uygulaması ve yapı iskelesi oluşturmaIdentity
+## <a name="create-a-web--app-and-scaffold-no-locidentity"></a>Web uygulaması ve yapı iskelesi oluşturma Identity
 
 Kimlik doğrulamasıyla bir Web uygulaması oluşturmak için aşağıdaki komutları çalıştırın.
 
@@ -277,7 +278,7 @@ Genellikle yeni kullanıcıların, onaylanan bir e-posta almadan önce Web siten
 
 [!code-csharp[](accconfirm/sample/WebPWrecover22/Startup.cs?name=snippet1&highlight=8-11)]
 
-`config.SignIn.RequireConfirmedEmail = true;`kayıtlı kullanıcıların e-postaları onaylanana kadar oturum açmasını önler.
+`config.SignIn.RequireConfirmedEmail = true;` kayıtlı kullanıcıların e-postaları onaylanana kadar oturum açmasını önler.
 
 ### <a name="configure-email-provider"></a>E-posta sağlayıcısını Yapılandır
 

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/06/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/file-providers
-ms.openlocfilehash: e2441a56fc8b05ba16dd8e368382501ac6b268a3
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 30c28e7bd4cd9c926b157f5a7b9e6688bd5b9b9a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017447"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634611"
 ---
 # <a name="file-providers-in-aspnet-core"></a>ASP.NET Core dosya sağlayıcıları
 
@@ -32,28 +33,28 @@ ms.locfileid: "88017447"
 
 ASP.NET Core dosya sistemi erişimini dosya sağlayıcılarının kullanımı üzerinden soyutlar. Dosya sağlayıcıları ASP.NET Core Framework boyunca kullanılır. Örnek:
 
-* <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment>uygulamanın [içerik kökünü](xref:fundamentals/index#content-root) ve [Web kökünü](xref:fundamentals/index#web-root) türler olarak gösterir `IFileProvider` .
+* <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> uygulamanın [içerik kökünü](xref:fundamentals/index#content-root) ve [Web kökünü](xref:fundamentals/index#web-root) türler olarak gösterir `IFileProvider` .
 * [Statik dosya ara yazılımı](xref:fundamentals/static-files) , statik dosyaları bulmak Için dosya sağlayıcılarını kullanır.
-* [Razor](xref:mvc/views/razor)sayfa ve görünümleri bulmak için dosya sağlayıcılarını kullanır.
+* [Razor](xref:mvc/views/razor) sayfa ve görünümleri bulmak için dosya sağlayıcılarını kullanır.
 * .NET Core araçları, hangi dosyaların yayımlanacak olduğunu belirlemek için dosya sağlayıcılarını ve glob düzenlerini kullanır.
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/file-providers/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
 ## <a name="file-provider-interfaces"></a>Dosya sağlayıcısı arabirimleri
 
-Birincil arabirim <xref:Microsoft.Extensions.FileProviders.IFileProvider> . `IFileProvider`şunları yapmak için yöntemler sunar:
+Birincil arabirim <xref:Microsoft.Extensions.FileProviders.IFileProvider> . `IFileProvider` şunları yapmak için yöntemler sunar:
 
 * Dosya bilgilerini edinin ( <xref:Microsoft.Extensions.FileProviders.IFileInfo> ).
 * Dizin bilgilerini ( <xref:Microsoft.Extensions.FileProviders.IDirectoryContents> ) alın.
 * Değişiklik bildirimlerini ayarlayın (bir kullanarak <xref:Microsoft.Extensions.Primitives.IChangeToken> ).
 
-`IFileInfo`dosyalarla çalışma için yöntemler ve özellikler sağlar:
+`IFileInfo` dosyalarla çalışma için yöntemler ve özellikler sağlar:
 
 * <xref:Microsoft.Extensions.FileProviders.IFileInfo.Exists>
 * <xref:Microsoft.Extensions.FileProviders.IFileInfo.IsDirectory>
 * <xref:Microsoft.Extensions.FileProviders.IFileInfo.Name>
-* <xref:Microsoft.Extensions.FileProviders.IFileInfo.Length>(bayt cinsinden)
-* <xref:Microsoft.Extensions.FileProviders.IFileInfo.LastModified>güncel
+* <xref:Microsoft.Extensions.FileProviders.IFileInfo.Length> (bayt cinsinden)
+* <xref:Microsoft.Extensions.FileProviders.IFileInfo.LastModified> güncel
 
 Yöntemini kullanarak dosyasından okuma yapabilirsiniz <xref:Microsoft.Extensions.FileProviders.IFileInfo.CreateReadStream*?displayProperty=nameWithType> .
 
@@ -71,7 +72,7 @@ Aşağıdaki tablo uygulamasının uygulamalarını listelemektedir `IFileProvid
 
 ### <a name="physicalfileprovider"></a>PhysicalFileProvider
 
-<xref:Microsoft.Extensions.FileProviders.PhysicalFileProvider>Fiziksel dosya sistemine erişim sağlar. `PhysicalFileProvider`, <xref:System.IO.File?displayProperty=fullName> türü (fiziksel sağlayıcı için) ve tüm yolları bir dizine ve alt öğelerine kullanır. Bu kapsam, belirtilen dizin ve alt öğeleri dışındaki dosya sistemine erişimi engeller. Oluşturma ve kullanma için en yaygın senaryo, `PhysicalFileProvider` `IFileProvider` [bağımlılık ekleme](xref:fundamentals/dependency-injection)aracılığıyla bir Oluşturucu içinde istekte bulunur.
+<xref:Microsoft.Extensions.FileProviders.PhysicalFileProvider>Fiziksel dosya sistemine erişim sağlar. `PhysicalFileProvider` , <xref:System.IO.File?displayProperty=fullName> türü (fiziksel sağlayıcı için) ve tüm yolları bir dizine ve alt öğelerine kullanır. Bu kapsam, belirtilen dizin ve alt öğeleri dışındaki dosya sistemine erişimi engeller. Oluşturma ve kullanma için en yaygın senaryo, `PhysicalFileProvider` `IFileProvider` [bağımlılık ekleme](xref:fundamentals/dependency-injection)aracılığıyla bir Oluşturucu içinde istekte bulunur.
 
 Bu sağlayıcıyı doğrudan örnekledikten sonra, mutlak bir dizin yolu gereklidir ve sağlayıcı kullanılarak yapılan tüm isteklerin temel yolu olarak görev yapar. Glob desenleri dizin yolunda desteklenmez.
 
@@ -86,9 +87,9 @@ var fileInfo = provider.GetFileInfo(filePath);
 
 Önceki örnekteki türler:
 
-* `provider`bir `IFileProvider` .
-* `contents`bir `IDirectoryContents` .
-* `fileInfo`bir `IFileInfo` .
+* `provider` bir `IFileProvider` .
+* `contents` bir `IDirectoryContents` .
+* `fileInfo` bir `IFileInfo` .
 
 Dosya sağlayıcısı, tarafından belirtilen dizin üzerinden yinelemek `applicationRoot` veya `GetFileInfo` bir dosyanın bilgilerini almak için çağırmak üzere kullanılabilir. Glob desenleri yönteme geçirilememelidir `GetFileInfo` . Dosya sağlayıcısı, dizin dışında bir erişime sahip değil `applicationRoot` .
 
@@ -183,28 +184,28 @@ Aşağıdaki tabloda, glob desenlerinin yaygın örnekleri verilmiştir.
 
 ASP.NET Core dosya sistemi erişimini dosya sağlayıcılarının kullanımı üzerinden soyutlar. Dosya sağlayıcıları ASP.NET Core Framework boyunca kullanılır:
 
-* <xref:Microsoft.Extensions.Hosting.IHostingEnvironment>uygulamanın [içerik kökünü](xref:fundamentals/index#content-root) ve [Web kökünü](xref:fundamentals/index#web-root) türler olarak gösterir `IFileProvider` .
+* <xref:Microsoft.Extensions.Hosting.IHostingEnvironment> uygulamanın [içerik kökünü](xref:fundamentals/index#content-root) ve [Web kökünü](xref:fundamentals/index#web-root) türler olarak gösterir `IFileProvider` .
 * [Statik dosya ara yazılımı](xref:fundamentals/static-files) , statik dosyaları bulmak Için dosya sağlayıcılarını kullanır.
-* [Razor](xref:mvc/views/razor)sayfa ve görünümleri bulmak için dosya sağlayıcılarını kullanır.
+* [Razor](xref:mvc/views/razor) sayfa ve görünümleri bulmak için dosya sağlayıcılarını kullanır.
 * .NET Core araçları, hangi dosyaların yayımlanacak olduğunu belirlemek için dosya sağlayıcılarını ve glob düzenlerini kullanır.
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/file-providers/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
 ## <a name="file-provider-interfaces"></a>Dosya sağlayıcısı arabirimleri
 
-Birincil arabirim <xref:Microsoft.Extensions.FileProviders.IFileProvider> . `IFileProvider`şunları yapmak için yöntemler sunar:
+Birincil arabirim <xref:Microsoft.Extensions.FileProviders.IFileProvider> . `IFileProvider` şunları yapmak için yöntemler sunar:
 
 * Dosya bilgilerini edinin ( <xref:Microsoft.Extensions.FileProviders.IFileInfo> ).
 * Dizin bilgilerini ( <xref:Microsoft.Extensions.FileProviders.IDirectoryContents> ) alın.
 * Değişiklik bildirimlerini ayarlayın (bir kullanarak <xref:Microsoft.Extensions.Primitives.IChangeToken> ).
 
-`IFileInfo`dosyalarla çalışma için yöntemler ve özellikler sağlar:
+`IFileInfo` dosyalarla çalışma için yöntemler ve özellikler sağlar:
 
 * <xref:Microsoft.Extensions.FileProviders.IFileInfo.Exists>
 * <xref:Microsoft.Extensions.FileProviders.IFileInfo.IsDirectory>
 * <xref:Microsoft.Extensions.FileProviders.IFileInfo.Name>
-* <xref:Microsoft.Extensions.FileProviders.IFileInfo.Length>(bayt cinsinden)
-* <xref:Microsoft.Extensions.FileProviders.IFileInfo.LastModified>güncel
+* <xref:Microsoft.Extensions.FileProviders.IFileInfo.Length> (bayt cinsinden)
+* <xref:Microsoft.Extensions.FileProviders.IFileInfo.LastModified> güncel
 
 [Ifileınfo. CreateReadStream](xref:Microsoft.Extensions.FileProviders.IFileInfo.CreateReadStream*) yöntemini kullanarak dosyadan okuma yapabilirsiniz.
 
@@ -222,7 +223,7 @@ Birincil arabirim <xref:Microsoft.Extensions.FileProviders.IFileProvider> . `IFi
 
 ### <a name="physicalfileprovider"></a>PhysicalFileProvider
 
-<xref:Microsoft.Extensions.FileProviders.PhysicalFileProvider>Fiziksel dosya sistemine erişim sağlar. `PhysicalFileProvider`, <xref:System.IO.File?displayProperty=fullName> türü (fiziksel sağlayıcı için) ve tüm yolları bir dizine ve alt öğelerine kullanır. Bu kapsam, belirtilen dizin ve alt öğeleri dışındaki dosya sistemine erişimi engeller. Oluşturma ve kullanma için en yaygın senaryo, `PhysicalFileProvider` `IFileProvider` [bağımlılık ekleme](xref:fundamentals/dependency-injection)aracılığıyla bir Oluşturucu içinde istekte bulunur.
+<xref:Microsoft.Extensions.FileProviders.PhysicalFileProvider>Fiziksel dosya sistemine erişim sağlar. `PhysicalFileProvider` , <xref:System.IO.File?displayProperty=fullName> türü (fiziksel sağlayıcı için) ve tüm yolları bir dizine ve alt öğelerine kullanır. Bu kapsam, belirtilen dizin ve alt öğeleri dışındaki dosya sistemine erişimi engeller. Oluşturma ve kullanma için en yaygın senaryo, `PhysicalFileProvider` `IFileProvider` [bağımlılık ekleme](xref:fundamentals/dependency-injection)aracılığıyla bir Oluşturucu içinde istekte bulunur.
 
 Bu sağlayıcıyı doğrudan örnekleyen bir dizin yolu gereklidir ve sağlayıcı kullanılarak yapılan tüm isteklerin temel yolu olarak görev yapar.
 
@@ -236,9 +237,9 @@ var fileInfo = provider.GetFileInfo("wwwroot/js/site.js");
 
 Önceki örnekteki türler:
 
-* `provider`bir `IFileProvider` .
-* `contents`bir `IDirectoryContents` .
-* `fileInfo`bir `IFileInfo` .
+* `provider` bir `IFileProvider` .
+* `contents` bir `IDirectoryContents` .
+* `fileInfo` bir `IFileInfo` .
 
 Dosya sağlayıcısı, tarafından belirtilen dizin üzerinden yinelemek `applicationRoot` veya `GetFileInfo` bir dosyanın bilgilerini almak için çağırmak üzere kullanılabilir. Dosya sağlayıcısı, dizin dışında bir erişime sahip değil `applicationRoot` .
 
@@ -289,7 +290,7 @@ Ek aşırı yüklemeler şunları yapmanıza olanak sağlar:
 
 ## <a name="watch-for-changes"></a>Değişiklikleri izle
 
-[IFileProvider. Watch](xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*) yöntemi, değişiklikler için bir veya daha fazla dosya ya da dizin izlemek üzere bir senaryo sağlar. `Watch`birden çok dosya belirtmek için [Glob desenlerini](#glob-patterns) içerebilen bir yol dizesi kabul eder. `Watch`döndürür <xref:Microsoft.Extensions.Primitives.IChangeToken> . Değişiklik belirteci şunları gösterir:
+[IFileProvider. Watch](xref:Microsoft.Extensions.FileProviders.IFileProvider.Watch*) yöntemi, değişiklikler için bir veya daha fazla dosya ya da dizin izlemek üzere bir senaryo sağlar. `Watch` birden çok dosya belirtmek için [Glob desenlerini](#glob-patterns) içerebilen bir yol dizesi kabul eder. `Watch` döndürür <xref:Microsoft.Extensions.Primitives.IChangeToken> . Değişiklik belirteci şunları gösterir:
 
 * <xref:Microsoft.Extensions.Primitives.IChangeToken.HasChanged>: Bir değişikliğin oluşup oluşmadığını tespit etmek için incelenebilir bir özellik.
 * <xref:Microsoft.Extensions.Primitives.IChangeToken.RegisterChangeCallback*>: Belirtilen yol dizesinde değişiklikler algılandığında çağırılır. Her değişiklik belirteci yalnızca, ilişkili geri çağırma işlemini tek bir değişikliğe yanıt olarak çağırır. Sabit izlemeyi etkinleştirmek için bir <xref:System.Threading.Tasks.TaskCompletionSource`1> (aşağıda gösterilmiştir) kullanın veya `IChangeToken` değişiklikleri yanıt olarak yeniden oluşturun.

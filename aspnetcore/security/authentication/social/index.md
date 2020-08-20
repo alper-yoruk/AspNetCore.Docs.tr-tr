@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/23/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/index
-ms.openlocfilehash: 7dacbb00b40d2741fcbfc78ec7cdf2a67482a8da
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: da025cb8dced8ac8a6ecf559d4de7795c9797f71
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020476"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634286"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>ASP.NET Core Facebook, Google ve dış sağlayıcı kimlik doğrulaması
 
@@ -68,8 +69,8 @@ Sosyal oturumların trafik ve müşteri dönüştürmelerini nasıl ve ne şekil
   ```
 
   * `dotnet new`Komut WebApp1 klasöründe yeni bir Razor Sayfalar projesi oluşturur. *WebApp1*
-  * `-au Individual`Tek kimlik doğrulaması için kodu oluşturur.
-  * `-uld`Windows için SQL Server Express basit bir sürümü olan LocalDB 'yi kullanır. `-uld`SQLite kullanmak için atlayın.
+  * `-au Individual` Tek kimlik doğrulaması için kodu oluşturur.
+  * `-uld` Windows için SQL Server Express basit bir sürümü olan LocalDB 'yi kullanır. `-uld`SQLite kullanmak için atlayın.
   * `code`Komutu, Visual Studio Code yeni bir örneğinde *WebApp1* klasörünü açar.
 
 ---

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/30/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/index
-ms.openlocfilehash: f141e9248a702ad9a1d9737f82543a0ccc8fb573
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 8fa44f567906ecf36a9bbaa5076cd36c75c10781
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017213"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634884"
 ---
 # <a name="aspnet-core-fundamentals"></a>ASP.NET Core temelleri
 
@@ -81,7 +82,7 @@ Başlangıçta ASP.NET Core bir uygulama bir *konak*oluşturur. Konak, uygulaman
 
 * Bir HTTP sunucusu uygulama
 * Ara yazılım bileşenleri
-* Günlüğe kaydetme
+* Günlüğe Kaydetme
 * Bağımlılık ekleme (dı) Hizmetleri
 * Yapılandırma
 
@@ -136,7 +137,7 @@ Daha fazla bilgi için bkz. <xref:fundamentals/servers/index>.
 
 ASP.NET Core, ayarları sıralı bir yapılandırma sağlayıcıları kümesinden ad-değer çiftleri olarak alan bir yapılandırma çerçevesi sağlar. Yerleşik yapılandırma sağlayıcıları *. JSON* dosyaları, *. xml* dosyaları, ortam değişkenleri ve komut satırı bağımsız değişkenleri gibi çeşitli kaynaklar için kullanılabilir. Diğer kaynakları desteklemek için özel yapılandırma sağlayıcıları yazın.
 
-[Varsayılan](xref:fundamentals/configuration/index#default)olarak, ASP.NET Core uygulamalar *appsettings.json*, ortam değişkenleri, komut satırı ve daha fazlasını okumak üzere yapılandırılır. Uygulamanın yapılandırması yüklendiğinde, ortam değişkenlerinin değerleri *üzerindekiappsettings.js*değerleri geçersiz kılar.
+[Varsayılan](xref:fundamentals/configuration/index#default)olarak, ASP.NET Core uygulamalar *appsettings.json*, ortam değişkenleri, komut satırı ve daha fazlasını okumak üzere yapılandırılır. Uygulamanın yapılandırması yüklendiğinde, ortam değişkenlerinin değerleri * üzerindekiappsettings.js*değerleri geçersiz kılar.
 
 İlgili yapılandırma değerlerini okumak için tercih edilen yol, [Seçenekler modelini](xref:fundamentals/configuration/options)kullanmaktır. Daha fazla bilgi için bkz. [Seçenekler modelini kullanarak hiyerarşik yapılandırma verilerini bağlama](xref:fundamentals/configuration/index#optpat).
 
@@ -154,7 +155,7 @@ Aşağıdaki örnek, uygulamayı ortamda çalışırken ayrıntılı hata bilgil
 
 Daha fazla bilgi için bkz. <xref:fundamentals/environments>.
 
-## <a name="logging"></a>Günlüğe kaydetme
+## <a name="logging"></a>Günlüğe Kaydetme
 
 ASP.NET Core, çeşitli yerleşik ve üçüncü taraf günlük sağlayıcılarıyla birlikte çalışarak bir günlüğe kaydetme API 'sini destekler. Kullanılabilir sağlayıcılar şunları içerir:
 
@@ -210,7 +211,7 @@ Daha fazla bilgi için bkz. <xref:fundamentals/http-requests>.
 * Uygulamayı barındıran yürütülebilir dosya (*. exe*).
 * Uygulamayı oluşturan derlenmiş derlemeler (*. dll*).
 * Uygulama tarafından kullanılan içerik dosyaları, örneğin:
-  * Razordosyalar (*. cshtml*, *. Razor*)
+  * Razor dosyalar (*. cshtml*, *. Razor*)
   * Yapılandırma dosyaları (*. JSON*, *. xml*)
   * Veri dosyaları (*. db*)
 * [Web kökü](#web-root), genellikle *Wwwroot* klasörü.
@@ -294,7 +295,7 @@ ASP.NET Core bir uygulama, başlangıçta bir *konak* oluşturur. Ana bilgisayar
 
 * Bir HTTP sunucusu uygulama
 * Ara yazılım bileşenleri
-* Günlüğe kaydetme
+* Günlüğe Kaydetme
 * IÇERIK
 * Yapılandırma
 
@@ -401,7 +402,7 @@ Sınıfından aşağıdaki örnek kod, `Startup` uygulamayı yalnızca geliştir
 
 Daha fazla bilgi için bkz. <xref:fundamentals/environments>.
 
-## <a name="logging"></a>Günlüğe kaydetme
+## <a name="logging"></a>Günlüğe Kaydetme
 
 ASP.NET Core, çeşitli yerleşik ve üçüncü taraf günlük sağlayıcılarıyla birlikte çalışarak bir günlüğe kaydetme API 'sini destekler. Kullanılabilir sağlayıcılar şunları içerir:
 
@@ -459,7 +460,7 @@ Daha fazla bilgi için bkz. <xref:fundamentals/http-requests>.
 * Uygulamayı barındıran yürütülebilir dosya (*. exe*).
 * Uygulamayı oluşturan derlenmiş derlemeler (*. dll*).
 * Uygulama tarafından kullanılan kod olmayan içerik dosyaları, örneğin:
-  * Razordosyalar (*. cshtml*, *. Razor*)
+  * Razor dosyalar (*. cshtml*, *. Razor*)
   * Yapılandırma dosyaları (*. JSON*, *. xml*)
   * Veri dosyaları (*. db*)
 * [Web kökü](#web-root), genellikle yayınlanan *Wwwroot* klasörü.

@@ -6,6 +6,7 @@ description: ASP.NET Core link etiketi yardımcı özniteliklerini ve her bir ö
 ms.custom: mvc
 ms.date: 09/24/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/link-tag-helper
-ms.openlocfilehash: 7487bc64f8e20f85ef95e5389409c0194ec31337
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 09507294b90f08bbaf134f611aad0b91504ccffb
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018565"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635079"
 ---
 # <a name="link-tag-helper-in-aspnet-core"></a>ASP.NET Core etiket Yardımcısı bağlantı
 
@@ -45,7 +46,7 @@ Aşağıdaki kod, önceki koddan (geliştirme olmayan bir ortamda) HTML olarak i
 
 ## <a name="commonly-used-link-tag-helper-attributes"></a>Yaygın olarak kullanılan bağlantı etiketi Yardımcısı öznitelikleri
 
-Tüm bağlantı etiketi Yardımcısı öznitelikleri, özellikleri ve yöntemleri için [bağlantı etiketi Yardımcısı](xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper) ' na bakın.
+Tüm bağlantı etiketi Yardımcısı öznitelikleri, özellikleri ve yöntemleri için [bağlantı etiketi Yardımcısı](xref:Microsoft.AspNetCore.Mvc.TagHelpers.LinkTagHelper)  ' na bakın.
 
 ### <a name="href"></a>değerini
 

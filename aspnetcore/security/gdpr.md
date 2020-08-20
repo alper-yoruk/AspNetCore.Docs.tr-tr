@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/11/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/gdpr
-ms.openlocfilehash: 6392a22e316f903da18cd1a91d1eb779d8dde1b3
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 35a12cb8d2a9617e51d886e798cff5ee60b0a8ad
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020021"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634715"
 ---
 # <a name="eu-general-data-protection-regulation-gdpr-support-in-aspnet-core"></a>ASP.NET Core içinde AB Genel Veri Koruma Yönetmeliği (GDPR) desteği
 
@@ -67,7 +68,7 @@ cookieASP.NET Core 3,0 şablonu tarafından oluşturulan bir uygulamada ASP.NET 
 
 ## <a name="aspnet-core-gdpr-support-in-template-generated-code"></a>Şablon tarafından üretilen kodda ASP.NET Core GDPR desteği
 
-RazorProje Şablonlarıyla oluşturulan sayfalar ve MVC projeleri aşağıdaki GDPR desteğini içerir:
+Razor Proje Şablonlarıyla oluşturulan sayfalar ve MVC projeleri aşağıdaki GDPR desteğini içerir:
 
 * [ Cookie Policyoptions](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions) ve [Use Cookie ilkesi](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyappbuilderextensions.usecookiepolicy) `Startup` sınıfında ayarlanır.
 * * \_ Cookie Consentpartial. cshtml* [kısmi görünümü](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper). Bu dosyaya bir **kabul** düğmesi dahildir. Kullanıcı **kabul et** düğmesine tıkladığında, Store 'lar için onay cookie sağlanır.

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/transform-webconfig
-ms.openlocfilehash: 3d0bbfceb6dfedd7234112d33fd99e91a34f5793
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: a2f26f32d2a282189b391aa9bb8c4637723dc60a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015588"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634637"
 ---
 # <a name="transform-webconfig"></a>Web.config’i dönüştürme
 
@@ -78,7 +79,7 @@ Yapılandırma için MSBuild özelliği `$(Configuration)` .
 
 Profil dönüştürmeleri, [Derleme yapılandırması](#build-configuration) dönüşümlerinden sonra ikinci çalıştırılır.
 
-Bir *Web ekleyin. { *Her profil yapılandırması için bir *web.config* dönüşümü gerektiren profile}. config dosyası.
+Bir *Web ekleyin. { * Her profil yapılandırması için bir *web.config* dönüşümü gerektiren profile}. config dosyası.
 
 Aşağıdaki örnekte, bir klasör yayımlama profili için *web.FolderProfile.config* profile özgü bir ortam değişkeni ayarlanır:
 
@@ -192,5 +193,5 @@ dotnet publish /p:IsWebConfigTransformDisabled=true
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [Web uygulaması proje dağıtımı içinWeb.config dönüştürme sözdizimi](/previous-versions/dd465326(v=vs.100))
-* [Visual Studio kullanarak Web proje dağıtımı içinWeb.config dönüştürme sözdizimi](/previous-versions/aspnet/dd465326(v=vs.110))
+* [ Web uygulaması proje dağıtımı içinWeb.config dönüştürme sözdizimi](/previous-versions/dd465326(v=vs.100))
+* [ Visual Studio kullanarak Web proje dağıtımı içinWeb.config dönüştürme sözdizimi](/previous-versions/aspnet/dd465326(v=vs.110))

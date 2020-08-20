@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 5/7/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 0594303f3ae8c57a0a7776900e6b2a6781c919db
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 1338ecd6205a351b54a58522b1713a6d70e2d22a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015835"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634754"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>IIS ile Windows üzerinde ASP.NET Core barındırma
 
@@ -486,7 +487,7 @@ IIS yapılandırması, `<system.webServer>` ASP.NET Core modüllü ASP.NET Core 
 
 Daha fazla bilgi edinmek için aşağıdaki kaynaklara bakın:
 
-* [İçin yapılandırma başvurusu\<system.webServer>](/iis/configuration/system.webServer/)
+* [İçin yapılandırma başvurusu \<system.webServer>](/iis/configuration/system.webServer/)
 * <xref:host-and-deploy/aspnet-core-module>
 * <xref:host-and-deploy/iis/modules>
 
@@ -512,7 +513,7 @@ Uygulama havuzu yalıtımı, barındırma modeliyle belirlenir:
 
 IIS **Web sitesi ekleme** iletişim kutusu varsayılan olarak uygulama başına tek bir uygulama havuzu olur. Bir **site adı** sağlandığında, metin otomatik olarak **uygulama havuzu** metin kutusuna aktarılır. Site eklendiğinde site adı kullanılarak yeni bir uygulama havuzu oluşturulur.
 
-## <a name="application-pool-no-locidentity"></a>Uygulama havuzuIdentity
+## <a name="application-pool-no-locidentity"></a>Uygulama havuzu Identity
 
 Bir uygulama havuzu kimliği hesabı, bir uygulamanın etki alanı veya yerel hesap oluşturmak ve yönetmek zorunda kalmadan benzersiz bir hesap altında çalışmasına izin verir. IIS 8,0 veya sonraki sürümlerde, IIS Yönetici çalışan Işlemi (WAS), yeni uygulama havuzunun adıyla bir sanal hesap oluşturur ve varsayılan olarak bu hesap altında uygulama havuzunun çalışan işlemlerini çalıştırır. Uygulama havuzu için **Gelişmiş ayarlar** altındaki IIS Yönetim Konsolu 'nda, **Identity** öğesinin ** Identity applicationPool**kullanmak için ayarlandığından emin olun:
 
@@ -1086,7 +1087,7 @@ IIS yapılandırması, `<system.webServer>` ASP.NET Core modüllü ASP.NET Core 
 
 Daha fazla bilgi edinmek için aşağıdaki kaynaklara bakın:
 
-* [İçin yapılandırma başvurusu\<system.webServer>](/iis/configuration/system.webServer/)
+* [İçin yapılandırma başvurusu \<system.webServer>](/iis/configuration/system.webServer/)
 * <xref:host-and-deploy/aspnet-core-module>
 * <xref:host-and-deploy/iis/modules>
 
@@ -1112,7 +1113,7 @@ Uygulama havuzu yalıtımı, barındırma modeliyle belirlenir:
 
 IIS **Web sitesi ekleme** iletişim kutusu varsayılan olarak uygulama başına tek bir uygulama havuzu olur. Bir **site adı** sağlandığında, metin otomatik olarak **uygulama havuzu** metin kutusuna aktarılır. Site eklendiğinde site adı kullanılarak yeni bir uygulama havuzu oluşturulur.
 
-## <a name="application-pool-no-locidentity"></a>Uygulama havuzuIdentity
+## <a name="application-pool-no-locidentity"></a>Uygulama havuzu Identity
 
 Bir uygulama havuzu kimliği hesabı, bir uygulamanın etki alanı veya yerel hesap oluşturmak ve yönetmek zorunda kalmadan benzersiz bir hesap altında çalışmasına izin verir. IIS 8,0 veya sonraki sürümlerde, IIS Yönetici çalışan Işlemi (WAS), yeni uygulama havuzunun adıyla bir sanal hesap oluşturur ve varsayılan olarak bu hesap altında uygulama havuzunun çalışan işlemlerini çalıştırır. Uygulama havuzu için **Gelişmiş ayarlar** altındaki IIS Yönetim Konsolu 'nda, **Identity** öğesinin ** Identity applicationPool**kullanmak için ayarlandığından emin olun:
 
@@ -1312,9 +1313,9 @@ Modül, başlangıç sırasında bir ortam değişkeni aracılığıyla bağlant
 
 Kestrel, isteği modülden başlattıktan sonra, istek ASP.NET Core ara yazılım ardışık düzenine gönderilir. Ara yazılım ardışık düzeni isteği işler ve `HttpContext` uygulamanın mantığına bir örnek olarak geçirir. IIS tümleştirmesi tarafından eklenen ara yazılım, isteği Kestrel iletmek için düzen, uzak IP ve pathbase 'i hesaba göre güncelleştirir. Uygulamanın yanıtı IIS 'e geri geçirilir ve bu, isteği başlatan HTTP istemcisine geri gönderilir.
 
-`CreateDefaultBuilder`Web sunucusu olarak [Kestrel](xref:fundamentals/servers/kestrel) sunucusunu yapılandırır ve [ASP.NET Core modülü](xref:host-and-deploy/aspnet-core-module)için temel yolu ve bağlantı noktasını yapılandırarak IIS tümleştirmesini sunar.
+`CreateDefaultBuilder` Web sunucusu olarak [Kestrel](xref:fundamentals/servers/kestrel) sunucusunu yapılandırır ve [ASP.NET Core modülü](xref:host-and-deploy/aspnet-core-module)için temel yolu ve bağlantı noktasını yapılandırarak IIS tümleştirmesini sunar.
 
-ASP.NET Core modülü, arka uç işlemine atanacak dinamik bir bağlantı noktası oluşturur. `CreateDefaultBuilder`yöntemini çağırır <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*> . `UseIISIntegration`Kestrel 'i, localhost IP adresinde () dinamik bağlantı noktasında dinlemek üzere yapılandırır `127.0.0.1` . Dinamik bağlantı noktası 1234 ise, Kestrel dinler `127.0.0.1:1234` . Bu yapılandırma tarafından belirtilen diğer URL yapılandırmalarının yerini alır:
+ASP.NET Core modülü, arka uç işlemine atanacak dinamik bir bağlantı noktası oluşturur. `CreateDefaultBuilder` yöntemini çağırır <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*> . `UseIISIntegration` Kestrel 'i, localhost IP adresinde () dinamik bağlantı noktasında dinlemek üzere yapılandırır `127.0.0.1` . Dinamik bağlantı noktası 1234 ise, Kestrel dinler `127.0.0.1:1234` . Bu yapılandırma tarafından belirtilen diğer URL yapılandırmalarının yerini alır:
 
 * `UseUrls`
 * [Kestrel 'in dinleme API 'SI](xref:fundamentals/servers/kestrel#endpoint-configuration)
@@ -1687,7 +1688,7 @@ IIS yapılandırması, `<system.webServer>` ASP.NET Core modüllü ASP.NET Core 
 
 Daha fazla bilgi edinmek için aşağıdaki kaynaklara bakın:
 
-* [İçin yapılandırma başvurusu\<system.webServer>](/iis/configuration/system.webServer/)
+* [İçin yapılandırma başvurusu \<system.webServer>](/iis/configuration/system.webServer/)
 * <xref:host-and-deploy/aspnet-core-module>
 * <xref:host-and-deploy/iis/modules>
 
@@ -1708,7 +1709,7 @@ ASP.NET Core uygulamalar diğer yapılandırma sağlayıcıları kullanılarak y
 
 Bir sunucuda birden çok Web sitesi barındırırken, her uygulamayı kendi uygulama havuzunda çalıştırarak uygulamaları birbirinden yalıtmayı öneririz. IIS **Web sitesi ekleme** iletişim kutusu varsayılan olarak bu yapılandırmaya sahiptir. Bir **site adı** sağlandığında, metin otomatik olarak **uygulama havuzu** metin kutusuna aktarılır. Site eklendiğinde site adı kullanılarak yeni bir uygulama havuzu oluşturulur.
 
-## <a name="application-pool-no-locidentity"></a>Uygulama havuzuIdentity
+## <a name="application-pool-no-locidentity"></a>Uygulama havuzu Identity
 
 Bir uygulama havuzu kimliği hesabı, bir uygulamanın etki alanı veya yerel hesap oluşturmak ve yönetmek zorunda kalmadan benzersiz bir hesap altında çalışmasına izin verir. IIS 8,0 veya sonraki sürümlerde, IIS Yönetici çalışan Işlemi (WAS), yeni uygulama havuzunun adıyla bir sanal hesap oluşturur ve varsayılan olarak bu hesap altında uygulama havuzunun çalışan işlemlerini çalıştırır. Uygulama havuzu için **Gelişmiş ayarlar** altındaki IIS Yönetim Konsolu 'nda, **Identity** öğesinin ** Identity applicationPool**kullanmak için ayarlandığından emin olun:
 

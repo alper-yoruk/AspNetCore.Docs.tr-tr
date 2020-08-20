@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/response-compression
-ms.openlocfilehash: 1dd931d0ee654b888814df8a0d0675d32b5c3a20
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: b8947e3c3c4f634fbd838c22ff60799257143480
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020970"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635001"
 ---
 # <a name="response-compression-in-aspnet-core"></a>ASP.NET Core 'de yanıt sıkıştırması
 
@@ -52,14 +53,14 @@ Genellikle, yerel olarak sıkıştırılmamış herhangi bir yanıt, yanıt sık
 
 Bir istemci sıkıştırılmış içeriği işleyebilir, istemci, `Accept-Encoding` üst bilgiyi istekle birlikte göndererek yeteneklerini bilgilendirmelidir. Bir sunucu sıkıştırılmış içerik gönderdiğinde, `Content-Encoding` sıkıştırılan yanıtın kodlanmasının üst bilgisine bilgi içermelidir. Ara yazılım tarafından desteklenen içerik kodlama göstergeleri aşağıdaki tabloda gösterilmiştir.
 
-| `Accept-Encoding`üst bilgi değerleri | Desteklenen ara yazılım | Açıklama |
+| `Accept-Encoding` üst bilgi değerleri | Desteklenen ara yazılım | Açıklama |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | Evet (varsayılan)        | [Brotli sıkıştırılmış veri biçimi](https://tools.ietf.org/html/rfc7932) |
-| `deflate`                       | Hayır                   | [Sıkıştırılmış veri biçimini söndür](https://tools.ietf.org/html/rfc1951) |
-| `exi`                           | Hayır                   | [W3C verimli XML değişim](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
+| `deflate`                       | No                   | [Sıkıştırılmış veri biçimini söndür](https://tools.ietf.org/html/rfc1951) |
+| `exi`                           | No                   | [W3C verimli XML değişim](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
 | `gzip`                          | Yes                  | [Gzip dosya biçimi](https://tools.ietf.org/html/rfc1952) |
 | `identity`                      | Yes                  | "Kodlama yok" tanımlayıcısı: Yanıt kodlanmamalıdır. |
-| `pack200-gzip`                  | Hayır                   | [Java arşivleri için ağ aktarım biçimi](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
+| `pack200-gzip`                  | No                   | [Java arşivleri için ağ aktarım biçimi](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
 | `*`                             | Yes                  | Tüm kullanılabilir içerik kodlamaları açıkça istenmedi |
 
 Daha fazla bilgi için, [IANA resmi Içerik kodlama listesine](https://www.iana.org/assignments/http-parameters/http-parameters.xml#http-content-coding-registry)bakın.
@@ -72,7 +73,7 @@ Sıkıştırma algoritmaları, sıkıştırma hızı ve sıkıştırmanın verim
 
 Sıkıştırılmış içerik isteme, gönderme, önbelleğe alma ve alma ile ilgili üstbilgiler aşağıdaki tabloda açıklanmıştır.
 
-| Üst bilgi             | Role |
+| Üst bilgi             | Rol |
 | ------------------ | ---- |
 | `Accept-Encoding`  | İstemci için kabul edilebilir içerik kodlama düzenlerini göstermek üzere istemciden sunucusuna gönderilir. |
 | `Content-Encoding` | Yük içindeki içeriğin kodlamasını göstermek için sunucudan istemciye gönderilir. |
@@ -111,7 +112,7 @@ public class Startup
 
 Notlar:
 
-* `app.UseResponseCompression`yanıtları sıkıştıran herhangi bir ara yazılım önce çağrılmalıdır. Daha fazla bilgi için bkz. <xref:fundamentals/middleware/index#middleware-order>.
+* `app.UseResponseCompression` yanıtları sıkıştıran herhangi bir ara yazılım önce çağrılmalıdır. Daha fazla bilgi için bkz. <xref:fundamentals/middleware/index#middleware-order>.
 * İstek üst bilgisini ayarlamak ve yanıt üst bilgilerini, boyutunu ve gövdesini incelemek için [Fiddler](https://www.telerik.com/fiddler), [Firebug](https://getfirebug.com/)veya [Postman](https://www.getpostman.com/) gibi bir araç kullanın `Accept-Encoding` .
 
 Üstbilgi olmadan örnek uygulamaya bir istek gönderir `Accept-Encoding` ve yanıtın sıkıştırılmamış olduğunu gözlemleyin. `Content-Encoding`Ve `Vary` başlıkları yanıtta yok.
@@ -298,14 +299,14 @@ Genellikle, yerel olarak sıkıştırılmamış herhangi bir yanıt, yanıt sık
 
 Bir istemci sıkıştırılmış içeriği işleyebilir, istemci, `Accept-Encoding` üst bilgiyi istekle birlikte göndererek yeteneklerini bilgilendirmelidir. Bir sunucu sıkıştırılmış içerik gönderdiğinde, `Content-Encoding` sıkıştırılan yanıtın kodlanmasının üst bilgisine bilgi içermelidir. Ara yazılım tarafından desteklenen içerik kodlama göstergeleri aşağıdaki tabloda gösterilmiştir.
 
-| `Accept-Encoding`üst bilgi değerleri | Desteklenen ara yazılım | Açıklama |
+| `Accept-Encoding` üst bilgi değerleri | Desteklenen ara yazılım | Açıklama |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | Evet (varsayılan)        | [Brotli sıkıştırılmış veri biçimi](https://tools.ietf.org/html/rfc7932) |
-| `deflate`                       | Hayır                   | [Sıkıştırılmış veri biçimini söndür](https://tools.ietf.org/html/rfc1951) |
-| `exi`                           | Hayır                   | [W3C verimli XML değişim](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
+| `deflate`                       | No                   | [Sıkıştırılmış veri biçimini söndür](https://tools.ietf.org/html/rfc1951) |
+| `exi`                           | No                   | [W3C verimli XML değişim](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
 | `gzip`                          | Yes                  | [Gzip dosya biçimi](https://tools.ietf.org/html/rfc1952) |
 | `identity`                      | Yes                  | "Kodlama yok" tanımlayıcısı: Yanıt kodlanmamalıdır. |
-| `pack200-gzip`                  | Hayır                   | [Java arşivleri için ağ aktarım biçimi](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
+| `pack200-gzip`                  | No                   | [Java arşivleri için ağ aktarım biçimi](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
 | `*`                             | Yes                  | Tüm kullanılabilir içerik kodlamaları açıkça istenmedi |
 
 Daha fazla bilgi için, [IANA resmi Içerik kodlama listesine](https://www.iana.org/assignments/http-parameters/http-parameters.xml#http-content-coding-registry)bakın.
@@ -318,7 +319,7 @@ Sıkıştırma algoritmaları, sıkıştırma hızı ve sıkıştırmanın verim
 
 Sıkıştırılmış içerik isteme, gönderme, önbelleğe alma ve alma ile ilgili üstbilgiler aşağıdaki tabloda açıklanmıştır.
 
-| Üst bilgi             | Role |
+| Üst bilgi             | Rol |
 | ------------------ | ---- |
 | `Accept-Encoding`  | İstemci için kabul edilebilir içerik kodlama düzenlerini göstermek üzere istemciden sunucusuna gönderilir. |
 | `Content-Encoding` | Yük içindeki içeriğin kodlamasını göstermek için sunucudan istemciye gönderilir. |
@@ -357,7 +358,7 @@ public class Startup
 
 Notlar:
 
-* `app.UseResponseCompression`yanıtları sıkıştıran herhangi bir ara yazılım önce çağrılmalıdır. Daha fazla bilgi için bkz. <xref:fundamentals/middleware/index#middleware-order>.
+* `app.UseResponseCompression` yanıtları sıkıştıran herhangi bir ara yazılım önce çağrılmalıdır. Daha fazla bilgi için bkz. <xref:fundamentals/middleware/index#middleware-order>.
 * İstek üst bilgisini ayarlamak ve yanıt üst bilgilerini, boyutunu ve gövdesini incelemek için [Fiddler](https://www.telerik.com/fiddler), [Firebug](https://getfirebug.com/)veya [Postman](https://www.getpostman.com/) gibi bir araç kullanın `Accept-Encoding` .
 
 Üstbilgi olmadan örnek uygulamaya bir istek gönderir `Accept-Encoding` ve yanıtın sıkıştırılmamış olduğunu gözlemleyin. `Content-Encoding`Ve `Vary` başlıkları yanıtta yok.
@@ -543,14 +544,14 @@ Genellikle, yerel olarak sıkıştırılmamış herhangi bir yanıt, yanıt sık
 
 Bir istemci sıkıştırılmış içeriği işleyebilir, istemci, `Accept-Encoding` üst bilgiyi istekle birlikte göndererek yeteneklerini bilgilendirmelidir. Bir sunucu sıkıştırılmış içerik gönderdiğinde, `Content-Encoding` sıkıştırılan yanıtın kodlanmasının üst bilgisine bilgi içermelidir. Ara yazılım tarafından desteklenen içerik kodlama göstergeleri aşağıdaki tabloda gösterilmiştir.
 
-| `Accept-Encoding`üst bilgi değerleri | Desteklenen ara yazılım | Açıklama |
+| `Accept-Encoding` üst bilgi değerleri | Desteklenen ara yazılım | Açıklama |
 | ------------------------------- | :------------------: | ----------- |
-| `br`                            | Hayır                   | [Brotli sıkıştırılmış veri biçimi](https://tools.ietf.org/html/rfc7932) |
-| `deflate`                       | Hayır                   | [Sıkıştırılmış veri biçimini söndür](https://tools.ietf.org/html/rfc1951) |
-| `exi`                           | Hayır                   | [W3C verimli XML değişim](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
+| `br`                            | No                   | [Brotli sıkıştırılmış veri biçimi](https://tools.ietf.org/html/rfc7932) |
+| `deflate`                       | No                   | [Sıkıştırılmış veri biçimini söndür](https://tools.ietf.org/html/rfc1951) |
+| `exi`                           | No                   | [W3C verimli XML değişim](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
 | `gzip`                          | Evet (varsayılan)        | [Gzip dosya biçimi](https://tools.ietf.org/html/rfc1952) |
 | `identity`                      | Yes                  | "Kodlama yok" tanımlayıcısı: Yanıt kodlanmamalıdır. |
-| `pack200-gzip`                  | Hayır                   | [Java arşivleri için ağ aktarım biçimi](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
+| `pack200-gzip`                  | No                   | [Java arşivleri için ağ aktarım biçimi](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
 | `*`                             | Yes                  | Tüm kullanılabilir içerik kodlamaları açıkça istenmedi |
 
 Daha fazla bilgi için, [IANA resmi Içerik kodlama listesine](https://www.iana.org/assignments/http-parameters/http-parameters.xml#http-content-coding-registry)bakın.
@@ -563,7 +564,7 @@ Sıkıştırma algoritmaları, sıkıştırma hızı ve sıkıştırmanın verim
 
 Sıkıştırılmış içerik isteme, gönderme, önbelleğe alma ve alma ile ilgili üstbilgiler aşağıdaki tabloda açıklanmıştır.
 
-| Üst bilgi             | Role |
+| Üst bilgi             | Rol |
 | ------------------ | ---- |
 | `Accept-Encoding`  | İstemci için kabul edilebilir içerik kodlama düzenlerini göstermek üzere istemciden sunucusuna gönderilir. |
 | `Content-Encoding` | Yük içindeki içeriğin kodlamasını göstermek için sunucudan istemciye gönderilir. |
@@ -602,7 +603,7 @@ public class Startup
 
 Notlar:
 
-* `app.UseResponseCompression`yanıtları sıkıştıran herhangi bir ara yazılım önce çağrılmalıdır. Daha fazla bilgi için bkz. <xref:fundamentals/middleware/index#middleware-order>.
+* `app.UseResponseCompression` yanıtları sıkıştıran herhangi bir ara yazılım önce çağrılmalıdır. Daha fazla bilgi için bkz. <xref:fundamentals/middleware/index#middleware-order>.
 * İstek üst bilgisini ayarlamak ve yanıt üst bilgilerini, boyutunu ve gövdesini incelemek için [Fiddler](https://www.telerik.com/fiddler), [Firebug](https://getfirebug.com/)veya [Postman](https://www.getpostman.com/) gibi bir araç kullanın `Accept-Encoding` .
 
 Üstbilgi olmadan örnek uygulamaya bir istek gönderir `Accept-Encoding` ve yanıtın sıkıştırılmamış olduğunu gözlemleyin. `Content-Encoding`Ve `Vary` başlıkları yanıtta yok.

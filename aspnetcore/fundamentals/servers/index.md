@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/07/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/index
-ms.openlocfilehash: fb9ba7cd4fe7ce805374dd802cc7ba4258d52527
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 8dde2d663f4eac94173038eaf7df6b95d67ba62e
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88016758"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635040"
 ---
 # <a name="web-server-implementations-in-aspnet-core"></a>ASP.NET Core Web sunucusu uygulamaları
 
@@ -152,7 +153,7 @@ HTTP.sys yapılandırma kılavuzu için bkz <xref:fundamentals/servers/httpsys> 
 
 <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder> `Startup.Configure` Yönteminde bulunan <xref:Microsoft.AspNetCore.Builder.IApplicationBuilder.ServerFeatures> özelliği türünün özelliğini kullanıma sunar <xref:Microsoft.AspNetCore.Http.Features.IFeatureCollection> . Kestrel ve HTTP.sys her biri yalnızca tek bir özellik sunar, <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> ancak farklı sunucu uygulamaları ek işlevsellik sergilede gösterebilir.
 
-`IServerAddressesFeature`sunucu uygulamasının çalışma zamanında hangi bağlantı noktasını bağladığına ilişkin bilgi edinmek için kullanılabilir.
+`IServerAddressesFeature` sunucu uygulamasının çalışma zamanında hangi bağlantı noktasını bağladığına ilişkin bilgi edinmek için kullanılabilir.
 
 ## <a name="custom-servers"></a>Özel sunucular
 

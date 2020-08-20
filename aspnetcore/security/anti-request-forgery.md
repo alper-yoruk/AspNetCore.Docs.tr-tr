@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/anti-request-forgery
-ms.openlocfilehash: cc6f7c7e6692224f537f5eeba50b214aa84029db
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: d0cce4f48151ab56774ab28eb6d89a687b3747af
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88018838"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635131"
 ---
 # <a name="prevent-cross-site-request-forgery-xsrfcsrf-attacks-in-aspnet-core"></a>ASP.NET Core siteler arası Istek sahteciliği (XSRF/CSRF) saldırılarını önle
 
@@ -261,7 +262,7 @@ Daha fazla bilgi için bkz. [ Cookie authenticationoptions](/dotnet/api/Microsof
 
 ## <a name="configure-antiforgery-features-with-iantiforgery"></a>Iantiforgery ile antiforgery özelliklerini yapılandırma
 
-[Iantiforgery](/dotnet/api/microsoft.aspnetcore.antiforgery.iantiforgery) , antiforgery özelliklerini YAPıLANDıRMAK için API sağlar. `IAntiforgery`, `Configure` sınıfının yönteminde istenebilir `Startup` . Aşağıdaki örnek, bir antiforgery belirteci oluşturmak ve yanıt olarak cookie (Bu konunun ilerleyen kısımlarında açıklanan varsayılan angular adlandırma kuralını kullanarak) olarak yanıtta göndermek için uygulamanın giriş sayfasından ara yazılım kullanır:
+[Iantiforgery](/dotnet/api/microsoft.aspnetcore.antiforgery.iantiforgery) , antiforgery özelliklerini YAPıLANDıRMAK için API sağlar. `IAntiforgery` , `Configure` sınıfının yönteminde istenebilir `Startup` . Aşağıdaki örnek, bir antiforgery belirteci oluşturmak ve yanıt olarak cookie (Bu konunun ilerleyen kısımlarında açıklanan varsayılan angular adlandırma kuralını kullanarak) olarak yanıtta göndermek için uygulamanın giriş sayfasından ara yazılım kullanır:
 
 ```csharp
 public void Configure(IApplicationBuilder app, IAntiforgery antiforgery)

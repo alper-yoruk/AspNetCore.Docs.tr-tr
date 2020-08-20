@@ -6,6 +6,7 @@ ms.author: riande
 ms.date: 01/25/2020
 ms.custom: mvc, seodec18
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/ui-class
-ms.openlocfilehash: 042ef8dcc7135e0c60baec972d405380d85a6a10
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 95399246df954549cb76139a66d6998fd05a051a
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88019228"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634832"
 ---
 # <a name="create-reusable-ui-using-the-no-locrazor-class-library-project-in-aspnet-core"></a>RazorASP.NET Core içindeki sınıf kitaplığı projesini kullanarak yeniden kullanılabilir kullanıcı arabirimi oluşturma
 
@@ -188,7 +189,7 @@ Kullanan uygulama şu şekilde çalışır:
 
 RCL yapılandırıldığında, statik Web varlık konumlarını açıklayan bir bildirim oluşturulur. Tüketen uygulama, başvurulan proje ve paketlerden varlıkları kullanmak için çalışma zamanında bildirimi okur. Bir RCL 'ye yeni bir varlık eklendiğinde, bir uygulamanın yeni varlığa erişebilmesi için bildirim güncellemek üzere RCL 'nin yeniden oluşturulması gerekir.
 
-### <a name="publish"></a>Yayımla
+### <a name="publish"></a>Yayımlama
 
 Uygulama yayımlandığında, tüm başvurulan projeler ve paketlerin yardımcı varlıkları altında yayımlanan uygulamanın *Wwwroot* klasörüne kopyalanır `_content/{LIBRARY NAME}/` .
 
@@ -269,7 +270,7 @@ dotnet run
 
 ## <a name="create-an-rcl"></a>RCL oluşturma
 
-Bu bölümde bir RCL oluşturulur. Razordosyalar RCL 'ye eklenir.
+Bu bölümde bir RCL oluşturulur. Razor dosyalar RCL 'ye eklenir.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -312,7 +313,7 @@ dotnet new viewstart -o RazorUIClassLib/Areas/MyFeature/Pages
 
   [!code-cshtml[](ui-class/samples/cli/RazorUIClassLib/Areas/MyFeature/Pages/Page1.cshtml)]
 
-  `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers`kısmi görünümü kullanmak için gerekir ( `<partial name="_Message" />` ). `@addTagHelper`Yönergesini eklemek yerine bir *_ViewImports. cshtml* dosyası ekleyebilirsiniz. Örnek:
+  `@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers` kısmi görünümü kullanmak için gerekir ( `<partial name="_Message" />` ). `@addTagHelper`Yönergesini eklemek yerine bir *_ViewImports. cshtml* dosyası ekleyebilirsiniz. Örnek:
 
   ```dotnetcli
   dotnet new viewimports -o RazorUIClassLib/Areas/MyFeature/Pages

@@ -5,6 +5,7 @@ description: Mevcut ASP.NET MVC veya Web API uygulamalarını ASP.NET Core. Web 
 ms.author: scaddie
 ms.date: 10/18/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/proper-to-2x/index
-ms.openlocfilehash: defdb190acf915eaa7c4aa8469ee47888f771526
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 7f5d2835d93631ac73b3da0c3dc26d87ef64c57d
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88014925"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634767"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core"></a>ASP.NET 'den ASP.NET Core 'e geçiş
 
@@ -28,7 +29,7 @@ ms.locfileid: "88014925"
 
 Bu makale, ASP.NET uygulamalarının ASP.NET Core geçişine yönelik bir başvuru kılavuzu görevi görür.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 [.NET Core SDK 2,2 veya üzeri](https://dotnet.microsoft.com/download)
 
@@ -64,7 +65,7 @@ ASP.NET Core, bir uygulamayı önyüklemeden yeni bir mekanizma getirmiştir. AS
 
 [!code-csharp[](samples/globalasax-sample.cs)]
 
-Bu yaklaşım, uygulamayı ve dağıtıldığı sunucuyu uygulamayı kesintiye uğratan bir şekilde bağar. Bağımsız olarak, [Owin](https://owin.org/) , birden çok çerçeveyi birlikte kullanmanın bir temizleyici yolunu sağlamak için sunulmuştur. OWIN yalnızca gereken modülleri eklemek için bir işlem hattı sağlar. Barındırma ortamı, hizmetleri ve uygulamanın istek ardışık düzenini yapılandırmak için bir [Başlangıç](xref:fundamentals/startup) işlevi alır. `Startup`uygulamayla bir ara yazılım kümesini kaydeder. Her istek için, uygulama bir ara yazılım bileşeninin her birini bağlantılı listenin baş işaretçisi ile mevcut bir işleyici kümesine çağırır. Her bir ara yazılım bileşeni, istek işleme ardışık düzenine bir veya daha fazla işleyici ekleyebilir. Bu, listenin yeni başlığı olan işleyiciye bir başvuru döndürülerek gerçekleştirilir. Her işleyici, listedeki bir sonraki işleyiciyi hatırlayıp çağırmaktan sorumludur. ASP.NET Core, bir uygulamaya giriş noktası olur `Startup` ve artık *Global. asax*' a bağımlılığı yoktur. .NET Framework ile OWIN kullanırken, işlem hattı olarak aşağıdaki gibi bir şey kullanın:
+Bu yaklaşım, uygulamayı ve dağıtıldığı sunucuyu uygulamayı kesintiye uğratan bir şekilde bağar. Bağımsız olarak, [Owin](https://owin.org/) , birden çok çerçeveyi birlikte kullanmanın bir temizleyici yolunu sağlamak için sunulmuştur. OWIN yalnızca gereken modülleri eklemek için bir işlem hattı sağlar. Barındırma ortamı, hizmetleri ve uygulamanın istek ardışık düzenini yapılandırmak için bir [Başlangıç](xref:fundamentals/startup) işlevi alır. `Startup` uygulamayla bir ara yazılım kümesini kaydeder. Her istek için, uygulama bir ara yazılım bileşeninin her birini bağlantılı listenin baş işaretçisi ile mevcut bir işleyici kümesine çağırır. Her bir ara yazılım bileşeni, istek işleme ardışık düzenine bir veya daha fazla işleyici ekleyebilir. Bu, listenin yeni başlığı olan işleyiciye bir başvuru döndürülerek gerçekleştirilir. Her işleyici, listedeki bir sonraki işleyiciyi hatırlayıp çağırmaktan sorumludur. ASP.NET Core, bir uygulamaya giriş noktası olur `Startup` ve artık *Global. asax*' a bağımlılığı yoktur. .NET Framework ile OWIN kullanırken, işlem hattı olarak aşağıdaki gibi bir şey kullanın:
 
 [!code-csharp[](samples/webapi-owin.cs)]
 
@@ -74,7 +75,7 @@ ASP.NET Core benzer bir yaklaşım kullanır, ancak girişi işlemek için OWıN
 
 [!code-csharp[](samples/program.cs)]
 
-`Startup`bir yöntem içermelidir `Configure` . ' De `Configure` , gerekli ara yazılımı ardışık düzene ekleyin. Aşağıdaki örnekte (varsayılan Web sitesi şablonundan), uzantı yöntemleri işlem hattını aşağıdakiler için desteğiyle yapılandırır:
+`Startup` bir yöntem içermelidir `Configure` . ' De `Configure` , gerekli ara yazılımı ardışık düzene ekleyin. Aşağıdaki örnekte (varsayılan Web sitesi şablonundan), uzantı yöntemleri işlem hattını aşağıdakiler için desteğiyle yapılandırır:
 
 - Hata sayfaları
 - HTTP katı aktarım güvenliği

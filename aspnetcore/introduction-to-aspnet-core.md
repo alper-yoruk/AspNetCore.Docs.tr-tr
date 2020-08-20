@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/17/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: index
-ms.openlocfilehash: 9cf721b381d3c4c737c15225edcf7918dd1fcf5b
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: f1235337748bacdb6eaa775a5853238bf729e605
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88015354"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88634559"
 ---
 # <a name="introduction-to-aspnet-core"></a>ASP.NET Core’a Giriş
 
@@ -82,16 +83,16 @@ ASP.NET Core uygulamalar geliştirmeye giriş için aşağıdaki öğretici dizi
    |----------|----------|----------|
    |Web uygulaması                   | Yeni sunucu tarafı Web UI geliştirmesi |[Sayfalarla çalışmaya başlama Razor](xref:tutorials/razor-pages/razor-pages-start) |
    |Web uygulaması                   | MVC uygulamasını sürdürme |[MVC ile çalışmaya başlama](xref:tutorials/first-mvc-app/start-mvc)|
-   |Web uygulaması                   | İstemci tarafı Web UI geliştirmesi |[Kullanmaya başlayınBlazor](https://dotnet.microsoft.com/learn/aspnet/blazor-tutorial/intro) |
+   |Web uygulaması                   | İstemci tarafı Web UI geliştirmesi |[Kullanmaya başlayın Blazor](https://dotnet.microsoft.com/learn/aspnet/blazor-tutorial/intro) |
    |Web API                   | Yeniden takip eden HTTP Hizmetleri |[Web API 'SI oluşturma](xref:tutorials/first-web-api)&dagger; |
    |Uzak yordam çağrısı uygulaması | Sözleşme-protokol arabellekleri kullanan ilk hizmetler |[gRPC hizmetini kullanmaya başlama](xref:tutorials/grpc/grpc-start) |
-   |Gerçek zamanlı uygulama             | Sunucular ve bağlı istemciler arasında çift yönlü iletişim |[Kullanmaya başlayınSignalR](xref:tutorials/signalr) |
+   |Gerçek zamanlı uygulama             | Sunucular ve bağlı istemciler arasında çift yönlü iletişim |[Kullanmaya başlayın SignalR](xref:tutorials/signalr) |
 
 1. Temel veri erişiminin nasıl yapılacağını gösteren bir öğreticiyi izleyin.
 
    |Senaryo  |Öğretici  |
    |----------|----------|
-   |Yeni geliştirme        |[RazorEntity Framework Core olan sayfalar](xref:data/ef-rp/intro) |
+   |Yeni geliştirme        |[Razor Entity Framework Core olan sayfalar](xref:data/ef-rp/intro) |
    |MVC uygulamasını sürdürme |[Entity Framework Core ile MVC](xref:data/ef-mvc/intro) |
 
 1. Tüm uygulama türleri için uygulanan ASP.NET Core [temelleri](xref:fundamentals/index) hakkında genel bakış makalesini okuyun.
@@ -171,13 +172,13 @@ ASP.NET Core uygulamaları geliştirmeye başlamak için şu öğreticileri ve m
    |Web uygulaması                   | Yeni proje geliştirmek için        |[Sayfalarla çalışmaya başlama Razor](xref:tutorials/razor-pages/razor-pages-start) |
    |Web uygulaması                   | MVC uygulaması yönetmek için |[MVC ile çalışmaya başlama](xref:tutorials/first-mvc-app/start-mvc)|
    |Web API                   |                            |[Web API 'SI oluşturma](xref:tutorials/first-web-api)&dagger; |
-   |Gerçek zamanlı uygulama             |                            |[Kullanmaya başlayınSignalR](xref:tutorials/signalr) |
+   |Gerçek zamanlı uygulama             |                            |[Kullanmaya başlayın SignalR](xref:tutorials/signalr) |
 
 1. Temel veri erişiminin nasıl yapılacağını gösteren bir öğreticiyi izleyin.
 
    |Senaryo  |Öğretici  |
    |----------|----------|
-   | Yeni proje geliştirmek için        |[RazorEntity Framework Core olan sayfalar](xref:data/ef-rp/intro) |
+   | Yeni proje geliştirmek için        |[Razor Entity Framework Core olan sayfalar](xref:data/ef-rp/intro) |
    | MVC uygulaması yönetmek için |[Entity Framework Core ile MVC](xref:data/ef-mvc/intro) |
 
 1. Tüm uygulama türleri için uygulanan ASP.NET Core [temelleri](xref:fundamentals/index) hakkında genel bakış makalesini okuyun.

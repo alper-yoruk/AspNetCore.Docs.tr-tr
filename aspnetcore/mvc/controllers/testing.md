@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/22/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/testing
-ms.openlocfilehash: 311f1ce9eb2b0e358ddc01a1982dc39379f53b8f
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: d6c70d828d6c2f62f9e7b849a299df3077f2da32
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88020918"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635235"
 ---
 # <a name="unit-test-controller-logic-in-aspnet-core"></a>ASP.NET Core 'de birim test denetleyicisi mantığı
 
@@ -54,7 +55,7 @@ Ana denetleyici bir beyin fırtınası oturumlarının listesini görüntüler v
 
 `HTTP GET Index`Metodun döngüsü veya dallanmayı yoktur ve yalnızca bir yöntem çağırır. Bu eylemin birim testi:
 
-* `IBrainstormSessionRepository`Yöntemini kullanarak hizmeti gizler `GetTestSessions` . `GetTestSessions`Tarih ve oturum adlarıyla iki adet sahte beyin fırtınası oturumu oluşturur.
+* `IBrainstormSessionRepository`Yöntemini kullanarak hizmeti gizler `GetTestSessions` . `GetTestSessions` Tarih ve oturum adlarıyla iki adet sahte beyin fırtınası oturumu oluşturur.
 * Yöntemini yürütür `Index` .
 * Yöntemi tarafından döndürülen sonuç üzerinde onaylama işlemleri yapar:
   * Bir <xref:Microsoft.AspNetCore.Mvc.ViewResult> döndürülür.
@@ -162,9 +163,9 @@ Geçerli bir oturum için `id` ikinci test, yöntemin döndürdüğünü onaylar
 
 Örnek uygulama, belirli bir oturum için yeni bir oluşturma yöntemi de içerir `Idea` . Denetleyici şunu döndürür:
 
-* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest*>geçersiz bir model.
-* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*>oturum yoksa.
-* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*>oturum yeni fikrle güncelleştirildiği zaman.
+* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest*> geçersiz bir model.
+* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*> oturum yoksa.
+* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*> oturum yeni fikrle güncelleştirildiği zaman.
 
 [!code-csharp[](testing/samples/3.x/TestingControllersSample/src/TestingControllersSample/Api/IdeasController.cs?name=snippet_CreateActionResult&highlight=9,16,29)]
 
@@ -181,7 +182,7 @@ Geçerli bir oturum için `id` ikinci test, yöntemin döndürdüğünü onaylar
 Geçerli bir oturum için `id` son test şunları onaylar:
 
 * Yöntemi bir `ActionResult` türü ile döndürür `BrainstormSession` .
-* [Eylem sonucu \<T> . Sonuç](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*) bir <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult> . `CreatedAtActionResult`, bir üst bilgiyle *201 oluşturulan* yanıta benzerdir `Location` .
+* [Eylem sonucu \<T> . Sonuç](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*) bir <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult> . `CreatedAtActionResult` , bir üst bilgiyle *201 oluşturulan* yanıta benzerdir `Location` .
 * [Eylem sonucu \<T> . Değer](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*) bir `BrainstormSession` türdür.
 * Oturumu güncelleştirmek için kullanılan sahte çağrı, `UpdateAsync(testSession)` çağrıldı. `Verifiable`Yöntem çağrısı `mockRepo.Verify()` onaylamalarda yürütülerek denetlenir.
 * `Idea`Oturum için iki nesne döndürülür.
@@ -217,7 +218,7 @@ Denetleyici birim testlerini göstermek için örnek uygulamada aşağıdaki den
 
 `HTTP GET Index`Metodun döngüsü veya dallanmayı yoktur ve yalnızca bir yöntem çağırır. Bu eylemin birim testi:
 
-* `IBrainstormSessionRepository`Yöntemini kullanarak hizmeti gizler `GetTestSessions` . `GetTestSessions`Tarih ve oturum adlarıyla iki adet sahte beyin fırtınası oturumu oluşturur.
+* `IBrainstormSessionRepository`Yöntemini kullanarak hizmeti gizler `GetTestSessions` . `GetTestSessions` Tarih ve oturum adlarıyla iki adet sahte beyin fırtınası oturumu oluşturur.
 * Yöntemini yürütür `Index` .
 * Yöntemi tarafından döndürülen sonuç üzerinde onaylama işlemleri yapar:
   * Bir <xref:Microsoft.AspNetCore.Mvc.ViewResult> döndürülür.
@@ -325,9 +326,9 @@ Geçerli bir oturum için `id` ikinci test, yöntemin döndürdüğünü onaylar
 
 Örnek uygulama, belirli bir oturum için yeni bir oluşturma yöntemi de içerir `Idea` . Denetleyici şunu döndürür:
 
-* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest*>geçersiz bir model.
-* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*>oturum yoksa.
-* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*>oturum yeni fikrle güncelleştirildiği zaman.
+* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.BadRequest*> geçersiz bir model.
+* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.NotFound*> oturum yoksa.
+* <xref:Microsoft.AspNetCore.Mvc.ControllerBase.CreatedAtAction*> oturum yeni fikrle güncelleştirildiği zaman.
 
 [!code-csharp[](testing/samples/2.x/TestingControllersSample/src/TestingControllersSample/Api/IdeasController.cs?name=snippet_CreateActionResult&highlight=9,16,29)]
 
@@ -344,7 +345,7 @@ Geçerli bir oturum için `id` ikinci test, yöntemin döndürdüğünü onaylar
 Geçerli bir oturum için `id` son test şunları onaylar:
 
 * Yöntemi bir `ActionResult` türü ile döndürür `BrainstormSession` .
-* [Eylem sonucu \<T> . Sonuç](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*) bir <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult> . `CreatedAtActionResult`, bir üst bilgiyle *201 oluşturulan* yanıta benzerdir `Location` .
+* [Eylem sonucu \<T> . Sonuç](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Result*) bir <xref:Microsoft.AspNetCore.Mvc.CreatedAtActionResult> . `CreatedAtActionResult` , bir üst bilgiyle *201 oluşturulan* yanıta benzerdir `Location` .
 * [Eylem sonucu \<T> . Değer](xref:Microsoft.AspNetCore.Mvc.ActionResult%601.Value*) bir `BrainstormSession` türdür.
 * Oturumu güncelleştirmek için kullanılan sahte çağrı, `UpdateAsync(testSession)` çağrıldı. `Verifiable`Yöntem çağrısı `mockRepo.Verify()` onaylamalarda yürütülerek denetlenir.
 * `Idea`Oturum için iki nesne döndürülür.

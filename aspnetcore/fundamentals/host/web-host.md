@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/07/2019
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/host/web-host
-ms.openlocfilehash: 06135d57ca6d0bceb9c53af61cc9aaca2ec46f30
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: 67831237ab1f95c6535cf586681150a230b491d0
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88017291"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635274"
 ---
 # <a name="aspnet-core-web-host"></a>ASP.NET Core Web ana bilgisayarı
 
@@ -70,7 +71,7 @@ public class Program
   * Ön eki olan ortam değişkenleri `ASPNETCORE_` (örneğin, `ASPNETCORE_ENVIRONMENT` ).
   * Komut satırı bağımsız değişkenleri.
 * Aşağıdaki sırayla uygulama yapılandırmasını yükler:
-  * *Üzerindeappsettings.js*.
+  * * Üzerindeappsettings.js*.
   * *appSettings. {Environment}. JSON*.
   * [Secret Manager](xref:security/app-secrets) Uygulama, `Development` giriş derlemesini kullanarak ortamda çalıştırıldığında gizli Yöneticisi.
   * Ortam değişkenleri.
@@ -81,7 +82,7 @@ public class Program
 
 Tarafından tanımlanan yapılandırma `CreateDefaultBuilder` , [Configureappconfiguration](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.configureappconfiguration), [configurelogging](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.configurelogging)ve [ıwebhostbuilder](/dotnet/api/microsoft.aspnetcore.hosting.iwebhostbuilder)'ın diğer yöntemleri ve genişletme yöntemleri tarafından geçersiz kılınabilir ve genişletilebilir. Birkaç örnek aşağıda verilmiştir:
 
-* [Configureappconfiguration](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.configureappconfiguration) , uygulama için ek belirtmek için kullanılır `IConfiguration` . Aşağıdaki `ConfigureAppConfiguration` çağrı *appsettings.xml* dosyasına uygulama yapılandırmasını dahil etmek için bir temsilci ekler. `ConfigureAppConfiguration`birden çok kez çağrılabilir. Bu yapılandırmanın ana bilgisayar için (örneğin, sunucu URL 'Leri veya ortam) uygulanmadığını unutmayın. [Konak yapılandırma değerleri](#host-configuration-values) bölümüne bakın.
+* [Configureappconfiguration](/dotnet/api/microsoft.aspnetcore.hosting.webhostbuilderextensions.configureappconfiguration) , uygulama için ek belirtmek için kullanılır `IConfiguration` . Aşağıdaki `ConfigureAppConfiguration` çağrı *appsettings.xml* dosyasına uygulama yapılandırmasını dahil etmek için bir temsilci ekler. `ConfigureAppConfiguration` birden çok kez çağrılabilir. Bu yapılandırmanın ana bilgisayar için (örneğin, sunucu URL 'Leri veya ortam) uygulanmadığını unutmayın. [Konak yapılandırma değerleri](#host-configuration-values) bölümüne bakın.
 
     ```csharp
     WebHost.CreateDefaultBuilder(args)
@@ -92,7 +93,7 @@ Tarafından tanımlanan yapılandırma `CreateDefaultBuilder` , [Configureappcon
         ...
     ```
 
-* Aşağıdaki `ConfigureLogging` çağrı, en düşük günlük düzeyi ([Setminimumlevel](/dotnet/api/microsoft.extensions.logging.loggingbuilderextensions.setminimumlevel)) değerini [LogLevel. Warning](/dotnet/api/microsoft.extensions.logging.loglevel)olarak yapılandırmak için bir temsilci ekler. Bu ayar, () *üzerindeappsettings.Development.js* `LogLevel.Debug` ve tarafından yapılandırılan () *appsettings.Production.jsüzerindeki* ayarları geçersiz kılar `LogLevel.Error` `CreateDefaultBuilder` . `ConfigureLogging`birden çok kez çağrılabilir.
+* Aşağıdaki `ConfigureLogging` çağrı, en düşük günlük düzeyi ([Setminimumlevel](/dotnet/api/microsoft.extensions.logging.loggingbuilderextensions.setminimumlevel)) değerini [LogLevel. Warning](/dotnet/api/microsoft.extensions.logging.loglevel)olarak yapılandırmak için bir temsilci ekler. Bu ayar, () * üzerindeappsettings.Development.js* `LogLevel.Debug` ve tarafından yapılandırılan () *appsettings.Production.jsüzerindeki* ayarları geçersiz kılar `LogLevel.Error` `CreateDefaultBuilder` . `ConfigureLogging` birden çok kez çağrılabilir.
 
     ```csharp
     WebHost.CreateDefaultBuilder(args)
@@ -168,7 +169,7 @@ Konak oluşturma sırasında [Usestartup](/dotnet/api/microsoft.aspnetcore.hosti
 **Tür**: *dize*  
 **Varsayılan**: uygulamanın giriş noktasını içeren derlemenin adı.  
 Şunu **kullanarak ayarla**:`UseSetting`  
-**Ortam değişkeni**:`ASPNETCORE_APPLICATIONNAME`
+**Ortam değişkeni**: `ASPNETCORE_APPLICATIONNAME`
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -183,7 +184,7 @@ Bu ayar, başlatma hatalarının yakalanmasını denetler.
 **Tür**: *bool* ( `true` veya `1` )  
 **Varsayılan**: `false` uygulamanın IIS arkasındaki Kestrel, varsayılan olarak olduğu durumlar dışında çalışır `true` .  
 Şunu **kullanarak ayarla**:`CaptureStartupErrors`  
-**Ortam değişkeni**:`ASPNETCORE_CAPTURESTARTUPERRORS`
+**Ortam değişkeni**: `ASPNETCORE_CAPTURESTARTUPERRORS`
 
 Ne zaman `false` , başlatma sırasında oluşan hata, ana bilgisayardan çıkılıyor. Ne zaman `true` , ana bilgisayar başlangıç sırasında özel durumları yakalar ve sunucuyu başlatmaya çalışır.
 
@@ -200,7 +201,7 @@ Bu ayar ASP.NET Core içerik dosyalarını aramaya başladığı yeri belirler.
 **Tür**: *dize*  
 **Varsayılan**: uygulama derlemesinin bulunduğu klasörü varsayılan olarak belirler.  
 Şunu **kullanarak ayarla**:`UseContentRoot`  
-**Ortam değişkeni**:`ASPNETCORE_CONTENTROOT`
+**Ortam değişkeni**: `ASPNETCORE_CONTENTROOT`
 
 İçerik kökü, [Web kökünün](xref:fundamentals/index#web-root)temel yolu olarak da kullanılır. İçerik kök yolu yoksa, ana bilgisayar başlatılamaz.
 
@@ -222,7 +223,7 @@ Ayrıntılı hataların yakalanıp yakalanmayacağını belirler.
 **Tür**: *bool* ( `true` veya `1` )  
 **Varsayılan**: false  
 Şunu **kullanarak ayarla**:`UseSetting`  
-**Ortam değişkeni**:`ASPNETCORE_DETAILEDERRORS`
+**Ortam değişkeni**: `ASPNETCORE_DETAILEDERRORS`
 
 Etkinleştirildiğinde (veya <a href="#environment">ortam</a> olarak ayarlandığında `Development` ), uygulama ayrıntılı özel durumları yakalar.
 
@@ -239,7 +240,7 @@ Uygulamanın ortamını ayarlar.
 **Tür**: *dize*  
 **Varsayılan**: üretim  
 Şunu **kullanarak ayarla**:`UseEnvironment`  
-**Ortam değişkeni**:`ASPNETCORE_ENVIRONMENT`
+**Ortam değişkeni**: `ASPNETCORE_ENVIRONMENT`
 
 Ortam herhangi bir değere ayarlanabilir. Çerçeve tanımlı değerler,, `Development` `Staging` ve içerir `Production` . Değerler büyük/küçük harfe duyarlı değildir. Varsayılan olarak *ortam* , `ASPNETCORE_ENVIRONMENT` ortam değişkeninden okunurdur. [Visual Studio](https://visualstudio.microsoft.com)kullanırken, ortam değişkenleri dosyadaki *launchSettings.js* ayarlanabilir. Daha fazla bilgi için bkz. <xref:fundamentals/environments>.
 
@@ -256,7 +257,7 @@ Uygulamanın barındırma başlangıç derlemelerini ayarlar.
 **Tür**: *dize*  
 **Varsayılan**: boş dize  
 Şunu **kullanarak ayarla**:`UseSetting`  
-**Ortam değişkeni**:`ASPNETCORE_HOSTINGSTARTUPASSEMBLIES`
+**Ortam değişkeni**: `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES`
 
 Başlangıçta yüklenecek başlangıç derlemelerinin barındırılması için noktalı virgülle ayrılmış bir dize.
 
@@ -289,7 +290,7 @@ Başlangıçta dışlamak üzere başlangıç derlemelerinin barındırılması 
 **Tür**: *dize*  
 **Varsayılan**: boş dize  
 Şunu **kullanarak ayarla**:`UseSetting`  
-**Ortam değişkeni**:`ASPNETCORE_HOSTINGSTARTUPEXCLUDEASSEMBLIES`
+**Ortam değişkeni**: `ASPNETCORE_HOSTINGSTARTUPEXCLUDEASSEMBLIES`
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -304,7 +305,7 @@ Konağın `WebHostBuilder` uygulamayla yapılandırılanlar yerine ile yapıland
 **Tür**: *bool* ( `true` veya `1` )  
 **Varsayılan**: true  
 Şunu **kullanarak ayarla**:`PreferHostingUrls`  
-**Ortam değişkeni**:`ASPNETCORE_PREFERHOSTINGURLS`
+**Ortam değişkeni**: `ASPNETCORE_PREFERHOSTINGURLS`
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -319,7 +320,7 @@ Uygulamanın derlemesi tarafından yapılandırılan başlatma derlemelerinin ba
 **Tür**: *bool* ( `true` veya `1` )  
 **Varsayılan**: false  
 Şunu **kullanarak ayarla**:`UseSetting`  
-**Ortam değişkeni**:`ASPNETCORE_PREVENTHOSTINGSTARTUP`
+**Ortam değişkeni**: `ASPNETCORE_PREVENTHOSTINGSTARTUP`
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -332,9 +333,9 @@ Sunucunun istekler için dinlemesi gereken bağlantı noktaları ve protokoller 
 
 **Anahtar**: URL 'ler  
 **Tür**: *dize*  
-**Varsayılan**:http://localhost:5000  
+**Varsayılan**: http://localhost:5000  
 Şunu **kullanarak ayarla**:`UseUrls`  
-**Ortam değişkeni**:`ASPNETCORE_URLS`
+**Ortam değişkeni**: `ASPNETCORE_URLS`
 
 Noktalı virgülle ayrılmış olarak ayarlayın (;) sunucunun yanıtlaması gereken URL ön eklerinin listesi. Örneğin, `http://localhost:123`. \*Sunucunun belirtilen bağlantı noktasını ve Protokolü (örneğin,) kullanarak herhangi BIR IP adresi veya ana bilgisayar için istekleri dinlemesi gerektiğini belirtmek için "" kullanın `http://*:5000` . Protokol ( `http://` veya `https://` ) her URL 'ye dahil edilmiş olmalıdır. Desteklenen biçimler sunucular arasında farklılık gösterir.
 
@@ -353,7 +354,7 @@ Web konağının kapanması için beklenecek süreyi belirtir.
 **Tür**: *int*  
 **Varsayılan**: 5  
 Şunu **kullanarak ayarla**:`UseShutdownTimeout`  
-**Ortam değişkeni**:`ASPNETCORE_SHUTDOWNTIMEOUTSECONDS`
+**Ortam değişkeni**: `ASPNETCORE_SHUTDOWNTIMEOUTSECONDS`
 
 Anahtar, ile bir *int* kabul etse de `UseSetting` (örneğin, `.UseSetting(WebHostDefaults.ShutdownTimeoutKey, "10")` ), [useshutdowntimeout](/dotnet/api/microsoft.aspnetcore.hosting.hostingabstractionswebhostbuilderextensions.useshutdowntimeout) genişletme yöntemi bir [TimeSpan](/dotnet/api/system.timespan)alır.
 
@@ -377,7 +378,7 @@ Sınıfın aranacağı derlemeyi belirler `Startup` .
 **Tür**: *dize*  
 **Varsayılan**: uygulamanın derlemesi  
 Şunu **kullanarak ayarla**:`UseStartup`  
-**Ortam değişkeni**:`ASPNETCORE_STARTUPASSEMBLY`
+**Ortam değişkeni**: `ASPNETCORE_STARTUPASSEMBLY`
 
 Ada ( `string` ) veya türe () göre derlemeye `TStartup` başvurulabilir. Birden çok `UseStartup` yöntem çağrılırsa, son bir öncelik alır.
 
@@ -399,7 +400,7 @@ Uygulamanın statik varlıklarının göreli yolunu ayarlar.
 **Tür**: *dize*  
 **Varsayılan**: varsayılan `wwwroot` . *{Content root}/Wwwroot* yolu var olmalıdır. Yol yoksa, Hayır-op dosya sağlayıcısı kullanılır.  
 Şunu **kullanarak ayarla**:`UseWebRoot`  
-**Ortam değişkeni**:`ASPNETCORE_WEBROOT`
+**Ortam değişkeni**: `ASPNETCORE_WEBROOT`
 
 ```csharp
 WebHost.CreateDefaultBuilder(args)
@@ -464,7 +465,7 @@ dotnet run --urls "http://*:8080"
 
 ## <a name="manage-the-host"></a>Konağı yönetme
 
-**Çalışmaz**
+**Çalıştır**
 
 `Run`Yöntemi, Web uygulamasını başlatır ve konak kapanana kadar çağıran iş parçacığını engeller:
 
@@ -518,7 +519,7 @@ using (var host = WebHost.Start(app => app.Response.WriteAsync("Hello, World!"))
 }
 ```
 
-`http://localhost:5000`"Merhaba Dünya!" yanıtını almak için tarayıcıda bir istek yapın `WaitForShutdown`kesme (CTRL-C/SIGINT veya SIGTERM) verilene kadar engeller. Uygulama `Console.WriteLine` iletiyi görüntüler ve bir tuş basışını, çıkış için bekler.
+`http://localhost:5000`"Merhaba Dünya!" yanıtını almak için tarayıcıda bir istek yapın `WaitForShutdown` kesme (CTRL-C/SIGINT veya SIGTERM) verilene kadar engeller. Uygulama `Console.WriteLine` iletiyi görüntüler ve bir tuş basışını, çıkış için bekler.
 
 **Başlangıç (dize URL 'si, RequestDelegate uygulaması)**
 
@@ -566,7 +567,7 @@ Aşağıdaki tarayıcı isteklerini örnekle birlikte kullanın:
 | `http://localhost:5000/Sante/Kevin`        | Sante, Kevin!                            |
 | `http://localhost:5000`                    | Merhaba Dünya!                             |
 
-`WaitForShutdown`kesme (CTRL-C/SIGINT veya SIGTERM) verilene kadar engeller. Uygulama `Console.WriteLine` iletiyi görüntüler ve bir tuş basışını, çıkış için bekler.
+`WaitForShutdown` kesme (CTRL-C/SIGINT veya SIGTERM) verilene kadar engeller. Uygulama `Console.WriteLine` iletiyi görüntüler ve bir tuş basışını, çıkış için bekler.
 
 **Başlat (dize URL 'si, eylem \<IRouteBuilder> routebuilder)**
 
@@ -610,7 +611,7 @@ using (var host = WebHost.StartWith(app =>
 }
 ```
 
-`http://localhost:5000`"Merhaba Dünya!" yanıtını almak için tarayıcıda bir istek yapın `WaitForShutdown`kesme (CTRL-C/SIGINT veya SIGTERM) verilene kadar engeller. Uygulama `Console.WriteLine` iletiyi görüntüler ve bir tuş basışını, çıkış için bekler.
+`http://localhost:5000`"Merhaba Dünya!" yanıtını almak için tarayıcıda bir istek yapın `WaitForShutdown` kesme (CTRL-C/SIGINT veya SIGTERM) verilene kadar engeller. Uygulama `Console.WriteLine` iletiyi görüntüler ve bir tuş basışını, çıkış için bekler.
 
 **StartWith (dize URL 'si, eylem \<IApplicationBuilder> uygulaması)**
 
@@ -827,7 +828,7 @@ public async Task Invoke(HttpContext context, IHostingEnvironment env)
 
 ## <a name="ihostapplicationlifetime-interface"></a>Ihostapplicationlifetime arabirimi
 
-`IHostApplicationLifetime`başlatma sonrası ve kapalı etkinlikler için izin verir. Arabirimdeki üç özellik, `Action` Başlangıç ve kapalı olayları tanımlayan yöntemleri kaydetmek için kullanılan iptal belirteçleridir.
+`IHostApplicationLifetime` başlatma sonrası ve kapalı etkinlikler için izin verir. Arabirimdeki üç özellik, `Action` Başlangıç ve kapalı olayları tanımlayan yöntemleri kaydetmek için kullanılan iptal belirteçleridir.
 
 | İptal belirteci    | &#8230; tetiklendi |
 | --------------------- | --------------------- |
@@ -869,7 +870,7 @@ public class Startup
 }
 ```
 
-`StopApplication`uygulamanın sonlandırılmasını ister. Aşağıdaki sınıf, `StopApplication` sınıfın yöntemi çağrıldığında bir uygulamayı düzgün bir şekilde kapatmak için kullanır `Shutdown` :
+`StopApplication` uygulamanın sonlandırılmasını ister. Aşağıdaki sınıf, `StopApplication` sınıfın yöntemi çağrıldığında bir uygulamayı düzgün bir şekilde kapatmak için kullanır `Shutdown` :
 
 ```csharp
 public class MyClass

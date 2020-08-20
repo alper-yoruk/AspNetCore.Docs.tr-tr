@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/14/2020
 no-loc:
+- ASP.NET Core Identity
 - cookie
 - Cookie
 - Blazor
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/integration-tests
-ms.openlocfilehash: 508c2d2cb668f5dbf416d341c1d9a966f9d16fd4
-ms.sourcegitcommit: 497be502426e9d90bb7d0401b1b9f74b6a384682
+ms.openlocfilehash: b06c06fb5e525a0bdc3df1de50236fa8f76daca9
+ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/08/2020
-ms.locfileid: "88021048"
+ms.lasthandoff: 08/19/2020
+ms.locfileid: "88635118"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>ASP.NET Core tümleştirme testleri
 
@@ -40,7 +41,7 @@ Bu konuda, birim testlerinin temel bir şekilde anlaşıldığı varsayılır. T
 
 * [Sayfalara giriş Razor](xref:razor-pages/index)
 * [Sayfalarla çalışmaya başlama Razor](xref:tutorials/razor-pages/razor-pages-start)
-* [RazorSayfalar birim testleri](xref:test/razor-pages-tests)
+* [Razor Sayfalar birim testleri](xref:test/razor-pages-tests)
 
 > [!NOTE]
 > Maça 'Ları test etmek için, bir tarayıcıyı otomatikleştirebilen [Selenium](https://www.seleniumhq.org/)gibi bir araç öneririz.
@@ -136,7 +137,7 @@ SUT [ortamı](xref:fundamentals/environments) ayarlanmamışsa, ortam varsayıla
 
 ## <a name="basic-tests-with-the-default-webapplicationfactory"></a>Varsayılan WebApplicationFactory ile temel testler
 
-[Webapplicationfactory \<TEntryPoint> ](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) , tümleştirme testleri için bir [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) oluşturmak için kullanılır. `TEntryPoint`, genellikle sınıfının, SUT 'ın giriş noktası sınıfıdır `Startup` .
+[Webapplicationfactory \<TEntryPoint> ](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) , tümleştirme testleri için bir [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) oluşturmak için kullanılır. `TEntryPoint` , genellikle sınıfının, SUT 'ın giriş noktası sınıfıdır `Startup` .
 
 Test sınıfları sınıfı testlerin içerdiğini göstermek ve sınıftaki testler arasında paylaşılan nesne örnekleri sağlamak için bir *sınıf armatürü* arabirimi ([ıssfixture](https://xunit.github.io/docs/shared-context#class-fixture)) uygular.
 
@@ -195,7 +196,7 @@ SUT 'a yönelik herhangi bir POST isteği, uygulamanın [veri koruma antiforgery
 
 `SendAsync`Örnek uygulamadaki yardımcı uzantı yöntemleri (*yardımcılar/Httpclienconversionsions. cs*) ve `GetDocumentAsync` yardımcı yöntemi (*yardımcılar/htmlyardımcıları. cs*), aşağıdaki [sample app](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/) yöntemlerle Antiforgery denetimini işlemek için [anglesharp](https://anglesharp.github.io/) ayrıştırıcısını kullanır:
 
-* `GetDocumentAsync`: [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) 'ı alır ve döndürür `IHtmlDocument` . `GetDocumentAsync`, orijinalin temelinde bir *sanal yanıt* hazırlayan bir fabrika kullanır `HttpResponseMessage` . Daha fazla bilgi için bkz. [Anglesharp belgeleri](https://github.com/AngleSharp/AngleSharp#documentation).
+* `GetDocumentAsync`: [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) 'ı alır ve döndürür `IHtmlDocument` . `GetDocumentAsync` , orijinalin temelinde bir *sanal yanıt* hazırlayan bir fabrika kullanır `HttpResponseMessage` . Daha fazla bilgi için bkz. [Anglesharp belgeleri](https://github.com/AngleSharp/AngleSharp#documentation).
 * `SendAsync``HttpClient`bir [HttpRequestMessage](/dotnet/api/system.net.http.httprequestmessage) oluşturun ve istekleri sut 'A göndermek Için [Sendadsync (HttpRequestMessage)](/dotnet/api/system.net.http.httpclient.sendasync#System_Net_Http_HttpClient_SendAsync_System_Net_Http_HttpRequestMessage_) çağrısı yapın. `SendAsync`HTML biçimini kabul etmek için aşırı yüklemeler ( `IHtmlFormElement` ) ve şunları yapın:
   * Formun () Gönder düğmesi `IHtmlElement`
   * Form değerleri koleksiyonu ( `IEnumerable<KeyValuePair<string, string>>` )
@@ -277,7 +278,7 @@ Bir tümleştirme testinde hizmet ve teklif ekleme işlemini test etmek için, t
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/IndexPageTests.cs?name=snippet4)]
 
-`ConfigureTestServices`çağrılır ve kapsamlı hizmet kaydedilir:
+`ConfigureTestServices` çağrılır ve kapsamlı hizmet kaydedilir:
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/IndexPageTests.cs?name=snippet5&highlight=7-10,17,20-21)]
 
@@ -428,7 +429,7 @@ Bu konuda, birim testlerinin temel bir şekilde anlaşıldığı varsayılır. T
 
 * [Sayfalara giriş Razor](xref:razor-pages/index)
 * [Sayfalarla çalışmaya başlama Razor](xref:tutorials/razor-pages/razor-pages-start)
-* [RazorSayfalar birim testleri](xref:test/razor-pages-tests)
+* [Razor Sayfalar birim testleri](xref:test/razor-pages-tests)
 
 > [!NOTE]
 > Maça 'Ları test etmek için, bir tarayıcıyı otomatikleştirebilen [Selenium](https://www.seleniumhq.org/)gibi bir araç öneririz.
@@ -518,7 +519,7 @@ SUT [ortamı](xref:fundamentals/environments) ayarlanmamışsa, ortam varsayıla
 
 ## <a name="basic-tests-with-the-default-webapplicationfactory"></a>Varsayılan WebApplicationFactory ile temel testler
 
-[Webapplicationfactory \<TEntryPoint> ](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) , tümleştirme testleri için bir [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) oluşturmak için kullanılır. `TEntryPoint`, genellikle sınıfının, SUT 'ın giriş noktası sınıfıdır `Startup` .
+[Webapplicationfactory \<TEntryPoint> ](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) , tümleştirme testleri için bir [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) oluşturmak için kullanılır. `TEntryPoint` , genellikle sınıfının, SUT 'ın giriş noktası sınıfıdır `Startup` .
 
 Test sınıfları sınıfı testlerin içerdiğini göstermek ve sınıftaki testler arasında paylaşılan nesne örnekleri sağlamak için bir *sınıf armatürü* arabirimi ([ıssfixture](https://xunit.github.io/docs/shared-context#class-fixture)) uygular.
 
@@ -558,7 +559,7 @@ SUT 'a yönelik herhangi bir POST isteği, uygulamanın [veri koruma antiforgery
 
 `SendAsync`Örnek uygulamadaki yardımcı uzantı yöntemleri (*yardımcılar/Httpclienconversionsions. cs*) ve `GetDocumentAsync` yardımcı yöntemi (*yardımcılar/htmlyardımcıları. cs*), aşağıdaki [sample app](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/) yöntemlerle Antiforgery denetimini işlemek için [anglesharp](https://anglesharp.github.io/) ayrıştırıcısını kullanır:
 
-* `GetDocumentAsync`: [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) 'ı alır ve döndürür `IHtmlDocument` . `GetDocumentAsync`, orijinalin temelinde bir *sanal yanıt* hazırlayan bir fabrika kullanır `HttpResponseMessage` . Daha fazla bilgi için bkz. [Anglesharp belgeleri](https://github.com/AngleSharp/AngleSharp#documentation).
+* `GetDocumentAsync`: [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) 'ı alır ve döndürür `IHtmlDocument` . `GetDocumentAsync` , orijinalin temelinde bir *sanal yanıt* hazırlayan bir fabrika kullanır `HttpResponseMessage` . Daha fazla bilgi için bkz. [Anglesharp belgeleri](https://github.com/AngleSharp/AngleSharp#documentation).
 * `SendAsync``HttpClient`bir [HttpRequestMessage](/dotnet/api/system.net.http.httprequestmessage) oluşturun ve istekleri sut 'A göndermek Için [Sendadsync (HttpRequestMessage)](/dotnet/api/system.net.http.httpclient.sendasync#System_Net_Http_HttpClient_SendAsync_System_Net_Http_HttpRequestMessage_) çağrısı yapın. `SendAsync`HTML biçimini kabul etmek için aşırı yüklemeler ( `IHtmlFormElement` ) ve şunları yapın:
   * Formun () Gönder düğmesi `IHtmlElement`
   * Form değerleri koleksiyonu ( `IEnumerable<KeyValuePair<string, string>>` )
@@ -640,7 +641,7 @@ Bir tümleştirme testinde hizmet ve teklif ekleme işlemini test etmek için, t
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/IndexPageTests.cs?name=snippet4)]
 
-`ConfigureTestServices`çağrılır ve kapsamlı hizmet kaydedilir:
+`ConfigureTestServices` çağrılır ve kapsamlı hizmet kaydedilir:
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/IndexPageTests.cs?name=snippet5&highlight=7-10,17,20-21)]
 
