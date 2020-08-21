@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/distributed
-ms.openlocfilehash: a25cbaf9a4e7dc5f1bd3706d01f409208a39aaa3
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 0d27206412a098f4ea749ec10189bf24d2322de1
+ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626733"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88712486"
 ---
 # <a name="distributed-caching-in-aspnet-core"></a>ASP.NET Core 'de dağıtılmış önbelleğe alma
 
@@ -116,16 +116,13 @@ Araç tarafından oluşturulan tablo `sql-cache` aşağıdaki şemaya sahiptir:
 
 ### <a name="distributed-redis-cache"></a>Dağıtılmış Redis Cache
 
-[Redsıs](https://redis.io/) , genellikle dağıtılmış önbellek olarak kullanılan açık kaynaklı bir bellek içi veri deposudur. Redsıs 'yi yerel olarak kullanabilir ve Azure 'da barındırılan ASP.NET Core uygulaması için bir [Azure Redis Cache](https://azure.microsoft.com/services/cache/) yapılandırabilirsiniz.
+[Redsıs](https://redis.io/) , genellikle dağıtılmış önbellek olarak kullanılan açık kaynaklı bir bellek içi veri deposudur.  Azure 'da barındırılan ASP.NET Core uygulaması için bir [Azure Redis Cache](https://azure.microsoft.com/services/cache/) yapılandırabilir ve yerel geliştirme için bir Azure Redis Cache kullanabilirsiniz.
 
-Bir uygulama, <xref:Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache> <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisCacheServiceCollectionExtensions.AddStackExchangeRedisCache*> içinde geliştirme olmayan bir ortamda bir örnek () kullanarak önbellek uygulamasını yapılandırır `Startup.ConfigureServices` :
+Bir uygulama bir <xref:Microsoft.Extensions.Caching.StackExchangeRedis.RedisCache> örnek () kullanarak önbellek uygulamasını yapılandırır <xref:Microsoft.Extensions.DependencyInjection.StackExchangeRedisCacheServiceCollectionExtensions.AddStackExchangeRedisCache*> .
 
-[!code-csharp[](distributed/samples/3.x/DistCacheSample/Startup.cs?name=snippet_AddStackExchangeRedisCache)]
+Daha fazla bilgi için bkz. [Redis için Azure Cache](/azure/azure-cache-for-redis/cache-overview).
 
-Redsıs 'i yerel makinenize yüklemek için:
-
-1. [Chocolatey redsıs paketini](https://chocolatey.org/packages/redis-64/)yükler.
-1. `redis-server`Komut isteminden çalıştırın.
+Yerel bir Redsıs önbelleğine alternatif yaklaşımlar hakkında bir tartışma için [Bu GitHub sorununa](https://github.com/dotnet/AspNetCore.Docs/issues/19542) bakın.
 
 ### <a name="distributed-ncache-cache"></a>Dağıtılmış NCache önbelleği
 
@@ -544,4 +541,3 @@ SQL Server dağıtılmış önbellek yedekleme deposu olarak kullanıldığında
 * <xref:host-and-deploy/web-farm>
 
 ::: moniker-end
- 

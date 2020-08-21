@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/proper-to-2x/index
-ms.openlocfilehash: 7f5d2835d93631ac73b3da0c3dc26d87ef64c57d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: f1a5af60f8dce83d9622ed9d2c6bcb4b8fc22b73
+ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634767"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88712499"
 ---
 # <a name="migrate-from-aspnet-to-aspnet-core"></a>ASP.NET 'den ASP.NET Core 'e geçiş
 
@@ -203,6 +203,12 @@ Dizin yapısı:
     ├── ...
     └── web.config
 ```
+
+## <a name="bind-and-input-formatters"></a>[Bağlama] ve giriş biçimleri
+
+[Önceki ASP.NET sürümleri](/aspnet/mvc/overview/getting-started/introduction/examining-the-edit-methods-and-edit-view) , `[Bind]` aşırı gönderme saldırılarına karşı korumak için özniteliği kullandı. [Giriş biçimleri](xref:mvc/models/model-binding#input-formatters) ASP.NET Core farklı şekilde çalışır. `[Bind]`Özniteliği artık JSON veya XML ayrıştırılmaya yönelik giriş formatlayıcıları ile kullanıldığında fazla nakletmeyi engelleyecek şekilde tasarlanmamıştır. Bu öznitelikler, veri kaynağı içerik türüyle gönderilen veri formu olduğunda model bağlamayı etkiler `x-www-form-urlencoded` .
+
+Denetleyicilere JSON bilgilerini veren ve verileri ayrıştırmak için JSON giriş Formatlayıcıları kullanan uygulamalar için, özniteliğini `[Bind]` özniteliği tarafından tanımlanan özelliklerle eşleşen bir görünüm modeliyle değiştirmeyi öneririz `[Bind]` .
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
