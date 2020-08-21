@@ -1152,7 +1152,7 @@
       uid: security/docker-compose-https
     - name: AB Genel Veri Koruma Yönetmeliği (GDPR) desteği
       uid: security/gdpr
-    - name: İstek sahteciliğinden koruma
+    - name: Siteler Arası İstek Sahteciliği (XSRF/CSRF) Saldırılarını Önleme
       uid: security/anti-request-forgery
     - name: Açık yeniden yönlendirme saldırılarını önleme
       uid: security/preventing-open-redirects
