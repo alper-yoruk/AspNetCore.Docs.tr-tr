@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: 94ae9e52ed99c3fe8e7044f474cdf5b702dc5adf
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 587872b269d897d7c86eb77c110a4b6432218ed3
+ms.sourcegitcommit: dd0e87abf2bb50ee992d9185bb256ed79d48f545
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634468"
+ms.lasthandoff: 08/21/2020
+ms.locfileid: "88746565"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core performans En Iyi yöntemleri
 
@@ -57,6 +57,12 @@ ASP.NET Core uygulamalarda yaygın bir performans sorunu, zaman uyumsuz olabilec
 * Denetleyici/ Razor sayfa eylemlerini zaman uyumsuz yapın. [Zaman uyumsuz/await](/dotnet/csharp/programming-guide/concepts/async/) desenlerinden faydalanmak için tüm çağrı yığını zaman uyumsuzdur.
 
 [Iş parçacığı havuzuna](/windows/desktop/procthread/thread-pools)sık sık eklenen iş parçacıklarını bulmak Için [PerfView](https://github.com/Microsoft/perfview)gibi bir profil oluşturucu kullanılabilir. `Microsoft-Windows-DotNETRuntime/ThreadPoolWorkerThread/Start`Olay, iş parçacığı havuzuna eklenen bir iş parçacığını gösterir. <!--  For more information, see [async guidance docs](TBD-Link_To_Davifowl_Doc)  -->
+
+## <a name="return-ienumerablet-or-iasyncenumerablet"></a>IEnumerable \<T> veya ıasyncenumerable döndürün\<T>
+
+`IEnumerable<T>`Bir eylemden dönmek, seri hale getirici tarafından zaman uyumlu koleksiyon yinelemesi ile sonuçlanır. Sonuç olarak, çağrı engelleme ve iş parçacığı havuzu için olası bir olasılık vardır. Zaman uyumlu numaralandırmayı önlemek için, `ToListAsync` numaralandırılabilir öğesini döndürmeden önce kullanın.
+
+ASP.NET Core 3,0 ' den başlayarak, `IAsyncEnumerable<T>` `IEnumerable<T>` zaman uyumsuz olarak numaralandırbir alternatif olarak kullanılabilir. Daha fazla bilgi için bkz. [denetleyici eylemi dönüş türleri](xref:web-api/action-return-types#return-ienumerablet-or-iasyncenumerablet).
 
 ## <a name="minimize-large-object-allocations"></a>Büyük nesne ayırmalarını en aza indir
 
@@ -111,7 +117,7 @@ Sorgu sorunları, [Application Insights](/azure/application-insights/app-insight
 
 ## <a name="keep-common-code-paths-fast"></a>Ortak kod yollarını hızlı tutun
 
-Tüm kodunuzun hızlı olmasını istiyorsunuz. Yaygın olarak çağrılan kod yolları en kritik öneme sahiptir. Bunlar:
+Tüm kodunuzun hızlı olmasını istiyorsunuz. Yaygın olarak çağrılan kod yolları en kritik öneme sahiptir. Bu güncelleştirmeler şunlardır:
 
 * Uygulamanın istek işleme ardışık düzeninde bulunan ara yazılım bileşenleri, özellikle de ara yazılım ardışık düzende çalışır. Bu bileşenlerin performansı üzerinde büyük bir etkisi vardır.
 * Her istek için veya istek başına birden çok kez yürütülen kod. Örneğin, özel günlük kaydı, yetkilendirme işleyicileri veya geçici Hizmetleri başlatma.
@@ -357,3 +363,11 @@ Yanıtın başlatılmamış olup olmadığı denetleniyor yanıt üst bilgileri 
 ## <a name="do-not-call-next-if-you-have-already-started-writing-to-the-response-body"></a>Yanıt gövdesine yazmaya başladıysanız ileri () çağrısı yapın
 
 Bileşenler yalnızca yanıtı işlemek ve işlemek için mümkünse çağrılabilir.
+
+## <a name="use-in-process-hosting-with-iis"></a>IIS ile işlem Içi barındırma kullanma
+
+ASP.NET Core bir uygulama, işlem içi barındırma kullanarak IIS çalışan işlemiyle aynı işlemde çalışır. İşlem içi barındırma, isteklerin geri döngü bağdaştırıcısı üzerinde proxy olmadığından işlem dışı barındırma üzerinde gelişmiş performans sağlar. Geri döngü bağdaştırıcısı, giden ağ trafiğinin aynı makineye geri döndürdüğü bir ağ arabirimidir. IIS, [Windows Işlem etkinleştirme hizmeti (was)](/iis/manage/provisioning-and-managing-iis/features-of-the-windows-process-activation-service-was)ile işlem yönetimini işler.
+
+Projeler varsayılan olarak ASP.NET Core 3,0 ve sonraki sürümlerde işlem içi barındırma modeline göre yapılır.
+
+Daha fazla bilgi için bkz. [IIS Ile Windows üzerinde ana bilgisayar ASP.NET Core](xref:host-and-deploy/iis/index)
