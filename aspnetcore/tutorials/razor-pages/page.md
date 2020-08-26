@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/page
-ms.openlocfilehash: 9fc44d228a31b8ae6c78dc12988392806dd95823
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 03febbd71df19cd3524d26e229a8bd8798a874b5
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633441"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865121"
 ---
 # <a name="part-3-scaffolded-no-locrazor-pages-in-aspnet-core"></a>Bölüm 3, ASP.NET Core yapı iskelesi Razor olan sayfalar
 
@@ -98,9 +98,8 @@ Satırı bulun `@RenderBody()` . `RenderBody` , sayfaya özgü tüm görünümle
 
 `"Title"`Özelliği *Pages/Shared/_Layout. cshtml* dosyasında kullanılır. Aşağıdaki biçimlendirme *_Layout. cshtml* dosyasının ilk birkaç satırını gösterir.
 
-<!-- we need a snapshot copy of layout because we are
-changing in in the next step.
--->
+<!-- We need a snapshot copy of layout because we are changing in the next step. -->
+
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/NU/_Layout.cshtml?highlight=6)]
 
 Satır `@*Markup removed for brevity.*@` bir Razor açıklamadır. HTML yorumlarının ( `<!-- -->` ) aksine, Razor açıklamalar istemciye gönderilmez.
@@ -284,9 +283,8 @@ Menü bağlantılarını (** Razor pagesmovie**, **Home**ve **Gizlilik**) seçin
 
 "Title" özelliği *sayfa/paylaşılan/_Layout. cshtml* dosyasında kullanılır. Aşağıdaki biçimlendirme *_Layout. cshtml* dosyasının ilk birkaç satırını gösterir.
 
-<!-- we need a snapshot copy of layout because we are
-changing in in the next step.
--->
+<!-- We need a snapshot copy of layout because we are changing in the next step. -->
+
 [!code-cshtml[](razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/NU/_Layout.cshtml?highlight=6-99)]
 
 Çizgi, `@*Markup removed for brevity.*@` Razor Düzen dosyanızda görünmeyen bir açıklamadır. HTML yorumlarının ( `<!-- -->` ) aksine, Razor açıklamalar istemciye gönderilmez.

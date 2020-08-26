@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 - Electron
 uid: security/samesite
-ms.openlocfilehash: c95952face8763dc9f2dd12312cab1a1bc07528a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 3ba033b4165b19131d11311e5ae9d64e6afe48ca
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632349"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865429"
 ---
 # <a name="work-with-samesite-no-loccookies-in-aspnet-core"></a>cookieASP.NET Core ' de SameSite s ile çalışma
 
@@ -73,11 +73,11 @@ Aşağıdaki örnek indirilebilir ve test edilebilir:
 
 ## <a name="net-core-support-for-the-samesite-attribute"></a>SameSite özniteliği için .NET Core desteği
 
-.NET Core 2,2, Aralık 2019 ' de güncelleştirmelerin yayımlanmasından bu yana SameSite için 2019 taslak standardını destekler. Geliştiriciler özelliği kullanarak sameSite özniteliğinin değerini programlı bir şekilde denetleyebilir `HttpCookie.SameSite` . `SameSite`Özelliği Strict, LAX veya None olarak ayarlamak, bu değerlerin ile ağda yazıldığı sonuçlara neden olur cookie . Şuna eşit (SameSiteMode) (-1) ayarı, ağa hiçbir sameSite özniteliği ekleneceğini belirtir cookie
+.NET Core 2,2 ve üzeri sürümleri, Aralık 2019 ' de güncelleştirmelerin yayımlanmasından bu yana SameSite için 2019 taslak standardını destekler. Geliştiriciler özelliği kullanarak sameSite özniteliğinin değerini programlı bir şekilde denetleyebilir `HttpCookie.SameSite` . `SameSite`Özelliği Strict, LAX veya None olarak ayarlamak, bu değerlerin ile ağda yazıldığı sonuçlara neden olur cookie . Şuna eşit ayarı `(SameSiteMode)(-1)` , ağ üzerinde şu şekilde bir sameSite özniteliği ekleneceğini belirtir cookie
 
 [!code-csharp[](samesite/snippets/Privacy.cshtml.cs?name=snippet)]
 
-.NET Core 3,0, güncelleştirilmiş SameSite değerlerini destekler ve sabit listesine ek bir sabit listesi değeri ekler `SameSiteMode.Unspecified` `SameSiteMode` .
+.NET Core 3,0 ve üzeri, güncelleştirilmiş SameSite değerlerini destekler ve sabit listesine ek bir sabit listesi değeri ekler `SameSiteMode.Unspecified` `SameSiteMode` .
 Bu yeni değer, ile hiçbir sameSite gönderilmesi gerektiğini gösterir cookie .
 
 ::: moniker-end

@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/http-modules
-ms.openlocfilehash: 8be09171991964540cd41a1324fb87503591151f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 213807634a2a6990e9025de7871295cf97a81faf
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632180"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865583"
 ---
 # <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>ASP.NET Core ara yazılıma HTTP işleyicileri ve modülleri geçirme
 
@@ -55,7 +55,7 @@ ASP.NET Core ara yazılıma devam etmeden önce, ilk olarak HTTP modüllerinin v
 
 **Modüllerin gelen istekleri işleme sırası şu şekilde belirlenir:**
 
-1. ASP.NET tarafından tetiklenen bir dizi olay olan [uygulama yaşam döngüsü](https://msdn.microsoft.com/library/ms227673.aspx): [BeginRequest](/dotnet/api/system.web.httpapplication.beginrequest), [kimlik doğrulayan terequest](/dotnet/api/system.web.httpapplication.authenticaterequest), vb. Her modül, bir veya daha fazla olay için bir işleyici oluşturabilir.
+1. , <https://docs.microsoft.com/previous-versions/ms227673(v=vs.140)> ASP.NET tarafından tetiklenen bir dizi olaydır: [BeginRequest](/dotnet/api/system.web.httpapplication.beginrequest), [kimlik doğrulayan terequest](/dotnet/api/system.web.httpapplication.authenticaterequest), vb. Her modül, bir veya daha fazla olay için bir işleyici oluşturabilir.
 
 2. Aynı olay için, *Web.config*yapılandırıldığı sıra.
 
@@ -92,7 +92,7 @@ Modüllere ek olarak, *Global.asax.cs* dosyanıza yaşam döngüsü olaylarını
 
 **Ara yazılım ve modüller farklı bir sırayla işlenir:**
 
-* Ara yazılım sırası, istek işlem hattına eklendikleri sıraya göre, modüller sırası genellikle [uygulama yaşam döngüsü](https://msdn.microsoft.com/library/ms227673.aspx) olaylarına dayalıdır
+* Ara yazılım sırası, istek ardışık düzenine göre eklendikleri sıraya göre, modüller sırası genellikle olayları temel alır <https://docs.microsoft.com/previous-versions/ms227673(v=vs.140)>
 
 * Yanıt için ara yazılım sırası, istekler için bu istekten ters, modüller sırası istekler ve yanıtlar için de aynıdır
 

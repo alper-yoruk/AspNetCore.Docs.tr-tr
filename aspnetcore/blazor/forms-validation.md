@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: 4690c279c24ef23806a6e72aece5f7cd821752bc
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 6fde5800a6a791c4a5923c13964c34977a59c017
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628332"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865303"
 ---
 # <a name="aspnet-core-no-locblazor-forms-and-validation"></a>BlazorForms ve doğrulama ASP.NET Core
 
@@ -47,7 +47,7 @@ public class ExampleModel
 Bir form, bileşeni kullanılarak tanımlanır <xref:Microsoft.AspNetCore.Components.Forms.EditForm> . Aşağıdaki form tipik öğeleri, bileşenleri ve Razor kodu gösterir:
 
 ```razor
-<EditForm Model="@exampleModel" OnValidSubmit="HandleValidSubmit">
+<EditForm Model="@exampleModel" OnValidSubmit="@HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -78,20 +78,39 @@ Yukarıdaki örnekte:
 
 ## <a name="built-in-forms-components"></a>Yerleşik Forms bileşenleri
 
-Kullanıcı girişini almak ve doğrulamak için yerleşik bir giriş bileşenleri kümesi vardır. Girişler değiştirildiklerinde ve bir form gönderildiğinde onaylanır. Kullanılabilir giriş bileşenleri aşağıdaki tabloda gösterilmiştir.
+Bir dizi yerleşik bileşen, Kullanıcı girişini almak ve doğrulamak için kullanılabilir. Girişler değiştirildiklerinde ve bir form gönderildiğinde onaylanır. Kullanılabilir giriş bileşenleri aşağıdaki tabloda gösterilmiştir.
+
+::: moniker range=">= aspnetcore-5.0"
 
 | Giriş bileşeni | Olarak işlendi&hellip; |
 | --------------- | ------------------- |
-| <xref:Microsoft.AspNetCore.Components.Forms.InputText> | `<input>` |
-| <xref:Microsoft.AspNetCore.Components.Forms.InputTextArea> | `<textarea>` |
-| <xref:Microsoft.AspNetCore.Components.Forms.InputSelect%601> | `<select>` |
-| <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> | `<input type="number">` |
 | <xref:Microsoft.AspNetCore.Components.Forms.InputCheckbox> | `<input type="checkbox">` |
 | <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> | `<input type="date">` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> | `<input type="number">` |
+| [`InputRadio`](#radio-buttons) | `<input type="radio">` |
+| [`InputRadioGroup`](#radio-buttons) | `<input type="radio">` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputSelect%601> | `<select>` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputText> | `<input>` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputTextArea> | `<textarea>` |
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+| Giriş bileşeni | Olarak işlendi&hellip; |
+| --------------- | ------------------- |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputCheckbox> | `<input type="checkbox">` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> | `<input type="date">` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> | `<input type="number">` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputSelect%601> | `<select>` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputText> | `<input>` |
+| <xref:Microsoft.AspNetCore.Components.Forms.InputTextArea> | `<textarea>` |
+
+::: moniker-end
 
 Dahil olmak üzere tüm giriş bileşenleri, <xref:Microsoft.AspNetCore.Components.Forms.EditForm> rastgele öznitelikleri destekler. Bir bileşen parametresiyle eşleşmeyen herhangi bir öznitelik işlenmiş HTML öğesine eklenir.
 
-Giriş bileşenleri, düzenleme sırasında doğrulamak ve CSS sınıfını alan durumunu yansıtacak şekilde değiştirmek için varsayılan davranışı sağlar. Bazı bileşenler, yararlı ayrıştırma mantığını içerir. Örneğin, <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> bunları doğrulama hatası olarak kaydederek düzeltilemez değerleri düzgün şekilde işleyin. Null değerleri kabul edebilecek türler, hedef alanın null değer alabilme durumunu da destekler (örneğin, `int?` ).
+Giriş bileşenleri, alan CSS sınıfının alan durumunu yansıtacak şekilde güncelleştirilmesi dahil olmak üzere, bir alan değiştirildiğinde doğrulamak için varsayılan davranışı sağlar. Bazı bileşenler, yararlı ayrıştırma mantığını içerir. Örneğin, <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601> düzeltilemez değerleri <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601> doğrulama hatası olarak kaydederek, düzeltilemez değerleri düzgün şekilde işleyin. Null değerleri kabul edebilecek türler, hedef alanın null değer alabilme durumunu da destekler (örneğin, `int?` ).
 
 Aşağıdaki tür, daha `Starship` önce daha büyük bir özellik kümesi ve daha önceki veri açıklamalarını kullanarak doğrulama mantığını tanımlar `ExampleModel` :
 
@@ -134,7 +153,7 @@ Aşağıdaki form, modelde tanımlanan doğrulamayı kullanarak Kullanıcı giri
 
 <h2>New Ship Entry Form</h2>
 
-<EditForm Model="@starship" OnValidSubmit="HandleValidSubmit">
+<EditForm Model="@starship" OnValidSubmit="@HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -252,6 +271,39 @@ Aşağıdaki örnekte:
 > [!NOTE]
 > Framework API 'SI, doğrulama iletilerini doğrudan bir öğesinden temizlemek için yok <xref:Microsoft.AspNetCore.Components.Forms.EditContext> . Bu nedenle, genellikle bir form içinde yeni bir doğrulama iletileri eklemeniz önerilmez <xref:Microsoft.AspNetCore.Components.Forms.ValidationMessageStore> . Doğrulama iletilerini yönetmek için, bu makalede açıklandığı gibi [iş mantığı doğrulama kodunuzla](#business-logic-validation)bir [Doğrulayıcı bileşeni](#validator-components) kullanın.
 
+::: moniker range=">= aspnetcore-5.0"
+
+## <a name="display-name-support"></a>Görünen ad desteği
+
+*Bu bölüm, .NET 5 Release Candidate 1 (RC1) veya sonraki sürümler için geçerlidir. Bu sürüm, orta Eylül 'de kullanıma sunulacaktır.*
+
+Aşağıdaki yerleşik bileşenler parametresiyle görünen adları destekler `DisplayName` :
+
+* <xref:Microsoft.AspNetCore.Components.Forms.InputDate%601>
+* <xref:Microsoft.AspNetCore.Components.Forms.InputNumber%601>
+* <xref:Microsoft.AspNetCore.Components.Forms.InputSelect%601>
+
+Aşağıdaki `InputDate` bileşen örneğinde:
+
+* Görünen ad ( `DisplayName` ) olarak ayarlanır `birthday` .
+* Bileşen, `BirthDate` bir tür olarak özelliğe bağlanır `DateTime` .
+
+```razor
+<InputDate @bind-Value="@BirthDate" DisplayName="birthday" />
+
+@code {
+    public DateTime BirthDate { get; set; }
+}
+```
+
+Kullanıcı bir tarih değeri sağlamıyorsa, doğrulama hatası şöyle görünür:
+
+```
+The birthday must be a date.
+```
+
+::: moniker-end
+
 ## <a name="validator-components"></a>Doğrulayıcı bileşenleri
 
 Doğrulayıcı bileşenleri, form için bir için yöneterek form doğrulamasını destekler <xref:Microsoft.AspNetCore.Components.Forms.ValidationMessageStore> <xref:Microsoft.AspNetCore.Components.Forms.EditContext> .
@@ -345,7 +397,7 @@ Aşağıdaki örnekte:
 
 <h2>New Ship Entry Form</h2>
 
-<EditForm Model="@starship" OnValidSubmit="HandleValidSubmit">
+<EditForm Model="@starship" OnValidSubmit="@HandleValidSubmit">
     <DataAnnotationsValidator />
     <CustomValidator @ref="customValidator" />
     <ValidationSummary />
@@ -545,7 +597,7 @@ Daha fazla bilgi için bkz. <xref:web-api/handle-errors#validation-failure-error
 
 <h2>New Ship Entry Form</h2>
 
-<EditForm Model="@starship" OnValidSubmit="HandleValidSubmit">
+<EditForm Model="@starship" OnValidSubmit="@HandleValidSubmit">
     <DataAnnotationsValidator />
     <CustomValidator @ref="customValidator" />
     <ValidationSummary />
@@ -694,10 +746,10 @@ Aşağıdaki örnekte, `CustomInputText` bileşen Framework `InputText` bileşen
 `Pages/TestForm.razor`:
 
 ```razor
-@page  "/testform"
+@page "/testform"
 @using System.ComponentModel.DataAnnotations;
 
-<EditForm Model="@exampleModel" OnValidSubmit="HandleValidSubmit">
+<EditForm Model="@exampleModel" OnValidSubmit="@HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -728,6 +780,77 @@ Aşağıdaki örnekte, `CustomInputText` bileşen Framework `InputText` bileşen
 ```
 
 ## <a name="radio-buttons"></a>Radyo düğmeleri
+
+::: moniker range=">= aspnetcore-5.0"
+
+`InputRadio` `InputRadioGroup` Radyo düğmesi grubu oluşturmak için bileşeni olan bileşenleri kullanın. Aşağıdaki örnekte, Özellikler `Starship` [yerleşik Forms bileşenleri](#built-in-forms-components) bölümünde açıklanan modele eklenir:
+
+```csharp
+[Required]
+[Range(typeof(Manufacturer), nameof(Manufacturer.SpaceX), 
+    nameof(Manufacturer.VirginGalactic), ErrorMessage = "Pick a manufacturer.")]
+public Manufacturer Manufacturer { get; set; } = Manufacturer.Unknown;
+
+[Required, EnumDataType(typeof(Color))]
+public Color? Color { get; set; } = null;
+
+[Required, EnumDataType(typeof(Engine))]
+public Engine? Engine { get; set; } = null;
+```
+
+Aşağıdakileri uygulamaya ekleyin `enums` . ' İ barındıracak yeni bir dosya oluşturun `enums` veya `enums` `Starship.cs` dosyayı dosyasına ekleyin. `enums` `Starship` Model ve *Starfleet başlangıçgönder veritabanı* formu için erişilebilir yapın:
+
+```csharp
+public enum Manufacturer { SpaceX, NASA, ULA, Virgin, Unknown }
+public enum Color { ImperialRed, SpacecruiserGreen, StarshipBlue, VoyagerOrange }
+public enum Engine { Ion, Plasma, Fusion, Warp }
+```
+
+[Yerleşik Forms bileşenleri](#built-in-forms-components) bölümünde açıklanan *Starfleet starsevkiyat veritabanı* formunu güncelleştirin. Üretilecek bileşenleri ekleyin:
+
+* Sevk üreticisi için bir radyo düğmesi grubu.
+* Sevk rengi ve motoru için iç içe bir radyo düğmesi grubu.
+
+```razor
+<p>
+    <InputRadioGroup @bind-Value="starship.Manufacturer">
+        Manufacturer:
+        <br>
+        @foreach (var manufacturer in (Manufacturer[])Enum
+            .GetValues(typeof(Manufacturer)))
+        {
+            <InputRadio Value="manufacturer" />
+            @manufacturer
+            <br>
+        }
+    </InputRadioGroup>
+</p>
+
+<p>
+    Pick one color and one engine:
+    <InputRadioGroup Name="engine" @bind-Value="starship.Engine">
+        <InputRadioGroup Name="color" @bind-Value="starship.Color">
+            <InputRadio Name="color" Value="Color.ImperialRed" />Imperial Red<br>
+            <InputRadio Name="engine" Value="Engine.Ion" />Ion<br>
+            <InputRadio Name="color" Value="Color.SpacecruiserGreen" />
+                Spacecruiser Green<br>
+            <InputRadio Name="engine" Value="Engine.Plasma" />Plasma<br>
+            <InputRadio Name="color" Value="Color.StarshipBlue" />Starship Blue<br>
+            <InputRadio Name="engine" Value="Engine.Fusion" />Fusion<br>
+            <InputRadio Name="color" Value="Color.VoyagerOrange" />
+                Voyager Orange<br>
+            <InputRadio Name="engine" Value="Engine.Warp" />Warp<br>
+        </InputRadioGroup>
+    </InputRadioGroup>
+</p>
+```
+
+> [!NOTE]
+> `Name`Atlanırsa, `InputRadio` Bileşenler en son üst öğesine göre gruplandırılır.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
 
 Bir formda radyo düğmeleriyle çalışırken, radyo düğmeleri bir grup olarak değerlendirildiğinden veri bağlama diğer öğelerden farklı işlenir. Her radyo düğmesinin değeri sabittir, ancak radyo düğmesi grubunun değeri seçili radyo düğmesinin değeridir. Aşağıdaki örnek, aşağıdakilerin nasıl yapılacağını göstermektedir:
 
@@ -782,7 +905,7 @@ Aşağıdaki, <xref:Microsoft.AspNetCore.Components.Forms.EditForm> `InputRadio`
 
 <h1>Radio Button Group Test</h1>
 
-<EditForm Model="model" OnValidSubmit="HandleValidSubmit">
+<EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary />
 
@@ -814,6 +937,8 @@ Aşağıdaki, <xref:Microsoft.AspNetCore.Components.Forms.EditForm> `InputRadio`
     }
 }
 ```
+
+::: moniker-end
 
 ## <a name="binding-select-element-options-to-c-object-null-values"></a>`<select>`Öğe seçeneklerini C# nesne değerlerine bağlama `null`
 
@@ -920,7 +1045,7 @@ Blazor yerleşik olan veri açıklamalarını kullanarak form girişini doğrula
 Koleksiyon ve karmaşık tür özellikleri dahil olmak üzere, bağlantılı modelin tüm nesne grafiğini doğrulamak için `ObjectGraphDataAnnotationsValidator` *deneysel* paket tarafından sunulan öğesini kullanın [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) :
 
 ```razor
-<EditForm Model="@model" OnValidSubmit="HandleValidSubmit">
+<EditForm Model="@model" OnValidSubmit="@HandleValidSubmit">
     <ObjectGraphDataAnnotationsValidator />
     ...
 </EditForm>
@@ -1021,7 +1146,7 @@ Yukarıdaki örnekte, şu şekilde ayarlayın `formInvalid` `false` :
 * <xref:Microsoft.AspNetCore.Components.Forms.ValidationSummary>Gönder düğmesi seçildiğinde bileşeni görünür hale getirin (örneğin, bir `HandleValidSubmit` yöntemde).
 
 ```razor
-<EditForm EditContext="@editContext" OnValidSubmit="HandleValidSubmit">
+<EditForm EditContext="@editContext" OnValidSubmit="@HandleValidSubmit">
     <DataAnnotationsValidator />
     <ValidationSummary style="@displaySummary" />
 

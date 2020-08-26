@@ -5,7 +5,7 @@ description: Bir Blazor uygulamayı adım adım oluşturun.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/30/2020
+ms.date: 08/22/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/build-a-blazor-app
-ms.openlocfilehash: 769b3bda591252c51bec3ffd72a43eaa5929349e
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 7335b68ad06b9d2b8d7e056cfc1a6d8214119b21
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630841"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865422"
 ---
 # <a name="build-a-no-locblazor-todo-list-app"></a>BlazorYapılacaklar listesi uygulaması oluşturma
 
@@ -39,7 +39,7 @@ Bu öğreticide, bir uygulamayı nasıl oluşturabileceğiniz ve değiştireceğ
 
 Bu öğreticinin sonunda, çalışan bir yapılacaklar listesi uygulamanız olacak.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 [!INCLUDE[](~/includes/3.1-SDK.md)]
 
@@ -51,7 +51,7 @@ Bu öğreticinin sonunda, çalışan bir yapılacaklar listesi uygulamanız olac
    dotnet new blazorserver -o TodoList
    ```
 
-   Yukarıdaki komut, uygulamayı tutmak için adlı bir klasör oluşturur `TodoList` . `TodoList`Aşağıdaki komutla klasörleri klasöre değiştirin:
+   Yukarıdaki komut, uygulamayı tutmak için adlı bir klasör oluşturur `TodoList` . `TodoList`Klasör, projenin *kök klasörüdür* . `TodoList`Aşağıdaki komutla klasörleri klasöre değiştirin:
 
    ```dotnetcli
    cd TodoList
@@ -64,7 +64,7 @@ Bu öğreticinin sonunda, çalışan bir yapılacaklar listesi uygulamanız olac
    ```
 
    > [!IMPORTANT]
-   > Razor bileşen dosyası adları, büyük harfle bir ilk harf gerektirir, bu nedenle `Todo` bileşen dosyası adının büyük harfle başlatıldığını onaylayın `T` .
+   > Razor bileşen dosyası adları, büyük harfle bir ilk harf gerektirir. Klasörünü açın `Pages` ve `Todo` bileşen dosyası adının büyük harfle başlatıldığını onaylayın `T` . Dosya adı olmalıdır `Todo.razor` .
 
 1. İçinde `Pages/Todo.razor` bileşen için ilk biçimlendirmeyi belirtin:
 
@@ -88,9 +88,9 @@ Bu öğreticinin sonunda, çalışan bir yapılacaklar listesi uygulamanız olac
    </li>
    ```
 
-1. Uygulamayı yeniden derleyin ve çalıştırın. Bileşen bağlantısının çalıştığından emin olmak için yeni Todo sayfasını ziyaret edin `Todo` .
+1. `dotnet run`Klasörden komut kabuğu 'ndaki komutu yürüterek uygulamayı derleyin ve çalıştırın `TodoList` . Bileşen bağlantısının çalıştığından emin olmak için yeni Todo sayfasını ziyaret edin `Todo` .
 
-1. `TodoItem.cs`Bir Todo öğesini temsil eden bir sınıfı tutmak için projenin köküne bir dosya ekleyin. Sınıfı için aşağıdaki C# kodunu kullanın `TodoItem` :
+1. `TodoItem.cs` `TodoList` Bir Todo öğesini temsil eden bir sınıfı tutmak için projenin (klasör) köküne bir dosya ekleyin. Sınıfı için aşağıdaki C# kodunu kullanın `TodoItem` :
 
    [!code-csharp[](build-a-blazor-app/samples_snapshot/3.x/TodoItem.cs)]
 
@@ -105,7 +105,7 @@ Bu öğreticinin sonunda, çalışan bir yapılacaklar listesi uygulamanız olac
 
    [!code-razor[](build-a-blazor-app/samples_snapshot/3.x/ToDo5.razor?highlight=12-13)]
 
-1. Uygulamayı yeniden derleyin ve çalıştırın. **`Add todo`** Düğme seçildiğinde, bir olay işleyicisi düğmeye kablolu olmadığı için hiçbir şey olmaz.
+1. Komut kabuğundan çalışan uygulamayı durdurun. Birçok komut kabuklarını, <kbd>Ctrl</kbd> + bir uygulamayı durdurmak için CTRL<kbd>c</kbd> klavye komutunu kabul eder. Komutuyla uygulamayı yeniden derleyin ve çalıştırın `dotnet run` . **`Add todo`** Düğme seçildiğinde, bir olay işleyicisi düğmeye kablolu olmadığı için hiçbir şey olmaz.
 
 1. Bileşene bir `AddTodo` Yöntem ekleyin `Todo` ve özniteliği kullanarak düğme seçimleri için kaydedin `@onclick` . `AddTodo`C# yöntemi, düğme seçildiğinde çağrılır:
 
@@ -123,7 +123,7 @@ Bu öğreticinin sonunda, çalışan bir yapılacaklar listesi uygulamanız olac
 
    [!code-razor[](build-a-blazor-app/samples_snapshot/3.x/ToDo8.razor?highlight=19-26)]
 
-1. Uygulamayı yeniden derleyin ve çalıştırın. Yeni kodu test etmek için Todo listesine bazı Todo öğeleri ekleyin.
+1. Komut kabuğundan çalışan uygulamayı durdurun. Komutuyla uygulamayı yeniden derleyin ve çalıştırın `dotnet run` . Yeni kodu test etmek için Todo listesine bazı Todo öğeleri ekleyin.
 
 1. Her Todo öğesi için başlık metni düzenlenebilir hale getirilebilir ve bir onay kutusu kullanıcının tamamlanmış öğeleri izlemesine yardımcı olabilir. Her Todo öğesi için bir onay kutusu girişi ekleyin ve değerini `IsDone` özelliğine bağlayın. Öğesine göre `@todo.Title` bir `<input>` öğeye geç `@todo.Title` :
 
@@ -139,7 +139,7 @@ Bu öğreticinin sonunda, çalışan bir yapılacaklar listesi uygulamanız olac
 
    [!code-razor[](build-a-blazor-app/samples_snapshot/3.x/Todo.razor)]
 
-1. Uygulamayı yeniden derleyin ve çalıştırın. Yeni kodu test etmek için Todo öğeleri ekleyin.
+1. Komut kabuğundan çalışan uygulamayı durdurun. Komutuyla uygulamayı yeniden derleyin ve çalıştırın `dotnet run` . Yeni kodu test etmek için Todo öğeleri ekleyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 

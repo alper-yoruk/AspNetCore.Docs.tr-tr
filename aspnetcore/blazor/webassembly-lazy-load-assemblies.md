@@ -5,7 +5,7 @@ description: ASP.NET Core uygulamalarında derlemelerin nasıl yavaş yüklenece
 monikerRange: '>= aspnetcore-5.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/16/2020
+ms.date: 08/25/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-lazy-load-assemblies
-ms.openlocfilehash: 31e6c9638d3262d3cb0a5e0fbcf34d24e2d1e91c
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 46f98080ad40f614f9cb1af2190f263d205c1016
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625810"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865154"
 ---
 # <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core 'de geç yük derlemeleri Blazor WebAssembly
 
@@ -47,6 +47,15 @@ Blazoryavaş yükleme özelliği, Kullanıcı belirli bir rotaya geçtiğinde ç
 ```
 
 Yalnızca uygulama tarafından kullanılan derlemelerin geç yüklü olması olabilir. Bağlayıcı, yayımlanan çıktısından kullanılmayan derlemeleri şeritleri.
+
+> [!NOTE]
+> .NET 5 sürüm adayı 1 ' de (RC1) veya sonraki sürümlerde, bu, PARÇAAL-Eylül 'de yayımlanacak, derleme adı şu uzantıyı gerektirir `.dll` :
+>
+> ```xml
+> <ItemGroup>
+>  <BlazorWebAssemblyLazyLoad Include="GrantImaharaRobotControls.dll" />
+> </ItemGroup>
+> ```
 
 ## <a name="router-component"></a>`Router` bileşeni
 
@@ -170,6 +179,15 @@ Bir kullanıcı yönlendirme A 'ya gider ve sonra B 'ye yönlendirmek için, uyg
 
 > [!NOTE]
 > ' Deki iptal belirteci `NavigationContext` iptal edildiğinde, bir bileşeni önceki bir gezinmede işlemek gibi istenmeden davranışa neden olabilir.
+
+### <a name="onnavigateasync-events-and-renamed-assembly-files"></a>`OnNavigateAsync` olaylar ve yeniden adlandırılmış derleme dosyaları
+
+Kaynak yükleyicisi, dosyasında tanımlanan derleme adlarını kullanır `blazor.boot.json` . [Derlemeler yeniden adlandırılırsa](xref:blazor/host-and-deploy/webassembly#change-the-filename-extension-of-dll-files), yöntemlerde kullanılan derleme adları `OnNavigateAsync` ve dosyadaki derleme adları `blazor.boot.json` eşitlenmemiş.
+
+Bunu düzeltmek için:
+
+* Kullanılacak derleme adlarını belirlerken uygulamanın üretim ortamında çalışıp çalışmadığını denetleyin.
+* Yeniden adlandırılmış derleme adlarını ayrı bir dosyada depolayın ve bu dosyadan okuyarak, ve yöntemlerinde hangi derleme adının kullanılacağını saptayın `LazyLoadAssemblyService` `OnNavigateAsync` .
 
 ### <a name="complete-example"></a>Örnek Tamam
 

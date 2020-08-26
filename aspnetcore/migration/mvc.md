@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/mvc
-ms.openlocfilehash: cd1a7ff57d911f96f0adfe4b548fa80ec844886d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d615f67fc5cb23499ee7e14b747390a7a1b5a693
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632245"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865131"
 ---
 # <a name="migrate-from-aspnet-mvc-to-aspnet-core-mvc"></a>ASP.NET MVC 'den ASP.NET Core MVC 'ye geçiş
 
@@ -38,7 +38,7 @@ ASP.NET MVC 'den geçiş çok adımlı bir işlemdir. Bu makalede şunları ele 
 
 Yapılandırma ve kodu geçirmek için Identity bkz. [yapılandırmayı ASP.NET Core](xref:migration/configuration) ve [geçiş kimlik doğrulaması ve Identity ASP.NET Core geçirme](xref:migration/identity).
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 [!INCLUDE [prerequisites](../includes/net-core-prereqs-vs-3.1.md)]
 
@@ -97,7 +97,7 @@ ASP.NET Core projesinde, geçiş için herhangi bir ASP.NET MVC projesindeki den
 
 ASP.NET Core *WebApp1* projesi zaten en az bir örnek denetleyici içeriyor ve ASP.NET MVC projesiyle aynı ada sahip bir görünüm içeriyor. Bu nedenle, ASP.NET MVC denetleyicisi ve görünümleri ASP.NET MVC *WebApp1* projesinden geçirilecek görünümler için yer tutucu olarak görev yapar.
 
-1. `HomeController`Yeni ASP.NET Core yöntemlerini değiştirmek için ASP.NET MVC içindeki yöntemleri kopyalayın `HomeController` . Eylem yöntemlerinin dönüş türünü değiştirmeniz gerekmez. ASP.NET MVC yerleşik şablonunun denetleyici eylemi yöntemi dönüş türü [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); ASP.NET Core MVC 'de, eylem metotları `IActionResult` bunun yerine döndürülür. `ActionResult` uygular `IActionResult` .
+1. `HomeController`Yeni ASP.NET Core yöntemlerini değiştirmek için ASP.NET MVC içindeki yöntemleri kopyalayın `HomeController` . Eylem yöntemlerinin dönüş türünü değiştirmeniz gerekmez. ASP.NET MVC yerleşik şablonunun denetleyici eylem yöntemi dönüş türü <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2> ; ASP.NET Core MVC içinde eylem yöntemleri döndürülür `IActionResult` . `ActionResult` uygular `IActionResult` .
 1. ASP.NET Core projesinde, *Görünümler/giriş* dizinine sağ tıklayın, **Add** > **Varolan öğe**Ekle ' yi seçin.
 1. **Varolan öğe Ekle** iletişim kutusunda ASP.NET MVC *WebApp1* projesinin *Görünümler/giriş* dizinine gidin.
 1. *Hakkında. cshtml*, *Contact. cshtml*ve *Index. cshtml* Razor Görünüm dosyalarını seçin ve ardından **Ekle**' yi seçerek var olan dosyaları değiştirin.
@@ -291,7 +291,7 @@ Aşağıdaki işlev örnek ASP.NET MVC projesinden ASP.NET Core projesine geçi�
 
 ## <a name="controllers-and-views"></a>Denetleyiciler ve görünümler
 
-* Yöntemlerin her birini ASP.NET MVC 'den `HomeController` New öğesine kopyalayın `HomeController` . ASP.NET MVC 'de, yerleşik şablonun denetleyici eylem yöntemi dönüş türü [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); ASP.NET Core MVC 'de, eylem metotları `IActionResult` bunun yerine döndürülür. `ActionResult` uyguladığı `IActionResult` için, eylem yöntemlerinin dönüş türünü değiştirmeniz gerekmez.
+* Yöntemlerin her birini ASP.NET MVC 'den `HomeController` New öğesine kopyalayın `HomeController` . ASP.NET MVC 'de, yerleşik şablonun denetleyici eylem yöntemi dönüş türü ' dir <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2> ; ASP.NET Core MVC 'de, eylem yöntemleri `IActionResult` bunun yerine döndürülür. `ActionResult` uyguladığı `IActionResult` için, eylem yöntemlerinin dönüş türünü değiştirmeniz gerekmez.
 
 * ASP.NET MVC projesindeki *. cshtml*, *Contact. cshtml*ve *Index. cshtml* Razor Görünüm dosyalarını ASP.NET Core projesine kopyalayın.
 
@@ -477,7 +477,7 @@ Aşağıdaki işlev örnek ASP.NET MVC projesinden ASP.NET Core projesine geçi�
 
 ## <a name="controllers-and-views"></a>Denetleyiciler ve görünümler
 
-* Yöntemlerin her birini ASP.NET MVC 'den `HomeController` New öğesine kopyalayın `HomeController` . ASP.NET MVC 'de, yerleşik şablonun denetleyici eylem yöntemi dönüş türü [ActionResult](https://msdn.microsoft.com/library/system.web.mvc.actionresult(v=vs.118).aspx); ASP.NET Core MVC 'de, eylem metotları `IActionResult` bunun yerine döndürülür. `ActionResult` uyguladığı `IActionResult` için, eylem yöntemlerinin dönüş türünü değiştirmeniz gerekmez.
+* Yöntemlerin her birini ASP.NET MVC 'den `HomeController` New öğesine kopyalayın `HomeController` . ASP.NET MVC 'de, yerleşik şablonun denetleyici eylem yöntemi dönüş türü ' dir <https://docs.microsoft.com/dotnet/api/system.web.mvc.actionresult?view=aspnet-mvc-5.2> ; ASP.NET Core MVC 'de, eylem yöntemleri `IActionResult` bunun yerine döndürülür. `ActionResult` uyguladığı `IActionResult` için, eylem yöntemlerinin dönüş türünü değiştirmeniz gerekmez.
 
 * ASP.NET MVC projesindeki *. cshtml*, *Contact. cshtml*ve *Index. cshtml* Razor Görünüm dosyalarını ASP.NET Core projesine kopyalayın.
 

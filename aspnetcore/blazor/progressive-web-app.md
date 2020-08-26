@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: 230b2a801a76e2d719fba8e2b97fddb0b32a9634
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 4f184a1264614b16ce98ba5474aacd60f175bd8a
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627968"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865219"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core ile aşamalı Web uygulamaları oluşturma Blazor WebAssembly
 
@@ -72,7 +72,7 @@ dotnet new blazorwasm -o MyNewProject --pwa
 
 PWA şablonu kullanılarak oluşturulan bir uygulamayı ziyaret ederken, kullanıcılar uygulamayı işletim sistemi başlangıç menüsüne, Dock 'a veya ana ekrana yükleme seçeneğine sahiptir. Bu seçeneğin sunulma şekli kullanıcının tarayıcısına bağlıdır. Edge veya Chrome gibi Desktop Kmıum tabanlı tarayıcıları kullanılırken, URL çubuğu içinde bir **Ekle** düğmesi görünür. Kullanıcı **Ekle** düğmesini seçtikten sonra bir onay iletişim kutusu alırlar:
 
-![Google Chrome 'daki onaylama diaglog, kullanıcıya ' My::: No-Loc (Blazor):::P WA ' uygulaması için bir Install Button düğmesi sunar.](progressive-web-app/_static/image2.png)
+![Google Chrome 'daki onay iletişim kutusu kullanıcıya ' My::: No-Loc (Blazor):::P WA ' uygulaması için bir Install düğmesi sunar.](progressive-web-app/_static/image2.png)
 
 İOS 'ta, ziyaretçiler Safari 'nin **Share** düğmesini ve **Add to HOMESCREEN** seçeneğini kullanarak PWA 'yı yükleyebilir. Android için Chrome 'da kullanıcılar, sağ üst köşedeki **menü** düğmesini ve ardından **Giriş ekranına Ekle**' yi seçer.
 
@@ -292,7 +292,7 @@ Kimlik doğrulamasıyla etkileşime sahip bir çevrimdışı PWA uygulaması olu
 * Uygulama çevrimdışıyken sıraya alma işlemleri yapın ve uygulama çevrimiçi olarak geri döndüğünde bunları uygulayın.
 * Oturumu kapatma sırasında, depolanan kullanıcıyı temizleyin.
 
-[`CarChecker`](https://github.com/SteveSandersonMS/CarChecker)Örnek uygulama, önceki yaklaşımları gösterir. Uygulamanın aşağıdaki bölümlerine bakın:
+[`CarChecker`](https://github.com/SteveSandersonMS/CarChecker)Örnek uygulama önceki yaklaşımları gösterir. Uygulamanın aşağıdaki bölümlerine bakın:
 
 * `OfflineAccountClaimsPrincipalFactory` (`Client/Data/OfflineAccountClaimsPrincipalFactory.cs`)
 * `LocalVehiclesStore` (`Client/Data/LocalVehiclesStore.cs`)

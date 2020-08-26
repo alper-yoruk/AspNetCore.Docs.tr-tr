@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/proper-to-2x/membership-to-core-identity
-ms.openlocfilehash: de9d1e5f6f595269595212fbab60d12dfd5a29e4
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a9ec02381b156a6599042d8e504a476036246302
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633649"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865566"
 ---
 # <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-no-locidentity"></a>ASP.NET üyelik kimlik doğrulamasından ASP.NET Core 2,0 ' ye geçiş Identity
 
@@ -35,7 +35,7 @@ Bu makalede üyelik kimlik doğrulaması kullanılarak ASP.NET uygulamaları iç
 
 ## <a name="review-of-membership-schema"></a>Üyelik şemasının incelenmesi
 
-ASP.NET 2,0 ' den önce, geliştiriciler, uygulamaları için tüm kimlik doğrulama ve yetkilendirme sürecini oluşturmaya eklendi. ASP.NET 2,0 ile üyelik tanıtılmıştı ve ASP.NET Apps içindeki güvenliği işlemek için ortak bir çözüm sağlar. Geliştiriciler artık [aspnet_regsql.exe](https://msdn.microsoft.com/library/ms229862.aspx) komutuyla bir şemayı SQL Server veritabanına önyükleyebiliyor. Bu komutu çalıştırdıktan sonra, veritabanında aşağıdaki tablolar oluşturulmuştur.
+ASP.NET 2,0 ' den önce, geliştiriciler, uygulamaları için tüm kimlik doğrulama ve yetkilendirme sürecini oluşturmaya eklendi. ASP.NET 2,0 ile üyelik tanıtılmıştı ve ASP.NET Apps içindeki güvenliği işlemek için ortak bir çözüm sağlar. Geliştiriciler artık, komutuyla bir şemayı SQL Server veritabanına önyükleyebiliyor <https://docs.microsoft.com/previous-versions/ms229862(v=vs.140)> . Bu komutu çalıştırdıktan sonra, veritabanında aşağıdaki tablolar oluşturulmuştur.
 
   ![Üyelik tabloları](identity/_static/membership-tables.png)
 

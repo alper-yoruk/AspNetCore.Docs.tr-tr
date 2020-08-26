@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/intro
-ms.openlocfilehash: 42a7231b529dd9f8ecbce4f8116111e1c96c830d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 345d20494111b808dac9678637de060169730a53
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633103"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865352"
 ---
 # <a name="tag-helpers-in-aspnet-core"></a>ASP.NET Core etiket yardımcıları
 
@@ -254,9 +254,9 @@ Visual Studio Düzenleyicisi, kayıt formunun etiket Yardımcısı yaklaşımın
 
 ## <a name="tag-helpers-compared-to-web-server-controls"></a>Web sunucusu denetimleriyle karşılaştırılan etiket yardımcıları
 
-* Etiket Yardımcıları ilişkili oldukları öğeye sahip değil; yalnızca öğe ve içerik işleme katılır. ASP.NET [Web sunucusu denetimleri](https://msdn.microsoft.com/library/7698y1f0.aspx) bir sayfada bildirilmiştir ve çağrılır.
+* Etiket Yardımcıları ilişkili oldukları öğeye sahip değil; yalnızca öğe ve içerik işleme katılır. ASP.NET <https://docs.microsoft.com/previous-versions/dotnet/netframework-3.0/7698y1f0(v=vs.85)> , bir sayfada bildirilmiştir ve çağrılır.
 
-* [Web sunucusu denetimlerinde](https://msdn.microsoft.com/library/zsyt68f1.aspx) geliştirme ve hata ayıklama zor hale getirmek için önemsiz olmayan bir yaşam döngüsü vardır.
+* <https://docs.microsoft.com/previous-versions/zsyt68f1(v=vs.140)> geliştirme ve hata ayıklama zor hale getirmek için önemsiz olmayan bir yaşam döngüsüne sahiptir.
 
 * Web sunucusu denetimleri, istemci denetimi kullanarak istemci Belge Nesne Modeli (DOM) öğelerine işlevsellik eklemenize olanak tanır. Etiket yardımcıların DOM 'ı yok.
 

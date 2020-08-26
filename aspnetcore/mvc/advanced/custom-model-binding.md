@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/advanced/custom-model-binding
-ms.openlocfilehash: 4bef68fffbdfaff023f71964a27ead56863e4192
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 7e1151b04f39f637f889e690bccc97eb6f0c91ea
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630438"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865580"
 ---
 # <a name="custom-model-binding-in-aspnet-core"></a>ASP.NET Core özel model bağlama
 
@@ -127,7 +127,7 @@ Bir özniteliği uygulamak yerine, öğesini uygulayabilirsiniz `IModelBinderPro
 
 [!code-csharp[](custom-model-binding/samples/3.x/CustomModelBindingSample/Startup.cs?name=snippet_ConfigureServices&highlight=5-8)]
 
-Model ciltleri değerlendirilirken, sağlayıcı koleksiyonu sırayla incelenir. Bir cildi döndüren ilk sağlayıcı kullanılır. Sağlayıcınızı koleksiyonun sonuna eklemek, özel ciltçinin bir şansı olmadan önce yerleşik bir model cilde yol açabilir. Bu örnekte, özel sağlayıcı, eylem bağımsız değişkenleri için kullanıldığından emin olmak için koleksiyonun başlangıcına eklenir `Author` .
+Model ciltleri değerlendirilirken, sağlayıcı koleksiyonu sırayla incelenir. Giriş modeliyle eşleşen bir cildi döndüren ilk sağlayıcı kullanılır. Sağlayıcınızı koleksiyonun sonuna eklemek, özel cildin bir şansına girmeden önce yerleşik bir model cildin çağrılmasına neden olabilir. Bu örnekte, özel sağlayıcı, her zaman eylem bağımsız değişkenleri için kullanıldığından emin olmak için koleksiyonun başlangıcına eklenir `Author` .
 
 ### <a name="polymorphic-model-binding"></a>Polimorfik model bağlama
 

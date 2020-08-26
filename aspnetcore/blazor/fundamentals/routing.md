@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: 0c878a05a50e5a6879278ee737ada167669ee0ff
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: eb9e3cbddd2eaca8fef9a6782c28bbce4c029f58
+ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626486"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88865327"
 ---
 # <a name="aspnet-core-no-locblazor-routing"></a>ASP.NET Core Blazor Yönlendirme
 
@@ -147,12 +147,12 @@ Aşağıdaki tabloda gösterilen yol kısıtlamaları mevcuttur. Sabit kültür 
 
 | Kısıtlaması | Örnek           | Örnek eşleşmeler                                                                  | Bilmesi<br>kültür<br>eşleştirme |
 | ---------- | ----------------- | -------------------------------------------------------------------------------- | :------------------------------: |
-| `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | No                               |
+| `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | Hayır                               |
 | `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | Yes                              |
 | `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | Yes                              |
 | `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | Yes                              |
 | `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | Yes                              |
-| `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | No                               |
+| `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | Hayır                               |
 | `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | Yes                              |
 | `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | Yes                              |
 
@@ -169,13 +169,43 @@ Blazor ServerUygulamalarda varsayılan yol `_Host.cshtml` `/` () ' dir `@page "/
 
 `"/{**path}"`Şablon şunları içerir:
 
-* Ters *catch-all* `**` eğik çizgi () kodlaması olmadan birden çok klasör sınırlarındaki yolu yakalamak için çift yıldız catch-all söz dizimi () `/` .
+* Ters *catch-all* `**` eğik çizgi () kodu olmadan birden çok klasör sınırlarındaki yolu yakalamak için çift yıldız catch-all söz dizimi () `/` .
 * `path` rota parametresi adı.
 
-> [!NOTE]
-> *Catch-all* parametre sözdizimi ( `*` / `**` ) **not** Razor bileşenlerde ( `.razor` ) desteklenmez.
-
 Daha fazla bilgi için bkz. <xref:fundamentals/routing>.
+
+## <a name="catch-all-route-parameters"></a>Catch-all Route parametreleri
+
+::: moniker range=">= aspnetcore-5.0"
+
+*Bu bölüm, .NET 5 Release Candidate 1 (RC1) veya sonraki sürümler için geçerlidir. Bu sürüm, orta Eylül 'de kullanıma sunulacaktır.*
+
+Birden çok klasör sınırlarındaki yolları yakalayan catch-all yol parametreleri, bileşenlerinde desteklenir. Catch-all yol parametresi şu olmalıdır:
+
+* Yol segmenti adıyla eşleşecek şekilde adlandırılır. Adlandırma, büyük/küçük harfe duyarlı değildir.
+* Bir `string` tür. Çerçeve otomatik atama sağlamaz.
+* URL 'nin sonunda.
+
+```razor
+@page "/page/{*pageRoute}"
+
+@code {
+    [Parameter]
+    public string PageRoute { get; set; }
+}
+```
+
+`/page/this/is/a/test`Yol şablonuna sahıp URL için `/page/{*pageRoute}` , değeri `PageRoute` olarak ayarlanır `this/is/a/test` .
+
+Yakalanan yolun eğik çizgileri ve kesimleri kodu çözülür. Bir yol şablonu için `/page/{*pageRoute}` , URL 'nin `/page/this/is/a%2Ftest%2A` verir `this/is/a/test*` .
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+Catch-all Route parametreleri, .NET 5 Release Candidate 1 ' de (RC1) veya sonraki sürümlerde desteklenecektir ve bu da PARÇAAL-Eylül 'de yayımlanır. *
+
+::: moniker-end
 
 ## <a name="navlink-component"></a>Gezinti bağlantısı bileşeni
 
