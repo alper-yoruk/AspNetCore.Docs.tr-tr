@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/entity-framework-6
-ms.openlocfilehash: d01c0a1bdf29dbb79c04504d747b319fff710d89
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 64d420d7076f1da453ee423cc4a3732eeb47b221
+ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633766"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88876704"
 ---
 # <a name="aspnet-core-and-entity-framework-6"></a>ASP.NET Core ve Entity Framework 6
 ::: moniker range=">= aspnetcore-3.0"
@@ -51,7 +51,7 @@ ASP.NET Core uygulamasında 6 Entity Framework kullanmanın önerilen yolu, EF6 
 
 .NET Core projeleri, *Enable-geçişler* gibi EF6 komutlarının tüm işlevlerini desteklemediğinden, bir ASP.NET Core projesine EF6 bağlamı koyamazsınız.    
 
-EF6 bağlamını bulmakta olduğunuz proje türünden bağımsız olarak, yalnızca EF6 komut satırı araçları bir EF6 bağlamıyla çalışır. Örneğin, `Scaffold-DbContext` yalnızca Entity Framework Core kullanılabilir. Bir veritabanının EF6 modeline ters mühendislik uygulamanız gerekiyorsa bkz. [var olan bir veritabanına Code First](https://msdn.microsoft.com/jj200620).  
+EF6 bağlamını bulmakta olduğunuz proje türünden bağımsız olarak, yalnızca EF6 komut satırı araçları bir EF6 bağlamıyla çalışır. Örneğin, `Scaffold-DbContext` yalnızca Entity Framework Core kullanılabilir. Bir veritabanının EF6 modeline ters mühendislik uygulamanız gerekiyorsa bkz <https://docs.microsoft.com/ef/ef6/modeling/code-first/workflows/existing-database> ..    
 
 ## <a name="reference-full-framework-and-ef6-in-the-aspnet-core-project"></a>ASP.NET Core projesindeki tam Framework ve EF6 başvurusu 
 
@@ -67,7 +67,7 @@ EF6 sınıf kitaplığı projesinde kullanacağınız EF6 komut satırı araçla
 
 [!code-csharp[](entity-framework-6/sample/EF6/SchoolContext.cs?name=snippet_Constructor)]   
 
-EF6 içeriğiniz parametresiz bir oluşturucuya sahip olmadığından, EF6 projenizin bir [ıdbcontextfactory](https://msdn.microsoft.com/library/hh506876)uygulamasını sağlaması gerekir. EF6 komut satırı araçları, bağlamı örneklebilmeleri için bu uygulamayı bulup kullanacaktır. Bir örneği aşağıda verilmiştir.    
+EF6 içeriğiniz parametresiz bir oluşturucuya sahip olmadığından, EF6 projenizin bir uygulamasını sağlaması gerekir <https://docs.microsoft.com/dotnet/api/system.data.entity.infrastructure.idbcontextfactory-1?view=entity-framework-6.2.0> . EF6 komut satırı araçları, bağlamı örneklebilmeleri için bu uygulamayı bulup kullanacaktır. Bir örneği aşağıda verilmiştir.   
 
 [!code-csharp[](entity-framework-6/sample/EF6/SchoolContextFactory.cs?name=snippet_IDbContextFactory)]  
 

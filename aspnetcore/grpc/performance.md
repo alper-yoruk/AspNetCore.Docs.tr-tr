@@ -1,5 +1,5 @@
 ---
-title: Performans için en iyi yöntemler
+title: ASP.NET Core için gRPC 'de performans en iyi yöntemleri
 author: jamesnk
 description: Yüksek performanslı gRPC hizmetleri oluşturmak için en iyi uygulamaları öğrenin.
 monikerRange: '>= aspnetcore-3.0'
@@ -17,14 +17,14 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/performance
-ms.openlocfilehash: c6f6a9e5c9aa2f01209c8457a848dc6ec1f5ed88
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: f9cefa89ec6e533920b33223b34333f6ebe38428
+ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
 ms.translationtype: MT
 ms.contentlocale: tr-TR
 ms.lasthandoff: 08/26/2020
-ms.locfileid: "88866191"
+ms.locfileid: "88876730"
 ---
-# <a name="performance-best-practices"></a>Performans için en iyi yöntemler
+# <a name="performance-best-practices-in-grpc-for-aspnet-core"></a>ASP.NET Core için gRPC 'de performans en iyi yöntemleri
 
 , [James bAyKiNg](https://twitter.com/jamesnk)
 
