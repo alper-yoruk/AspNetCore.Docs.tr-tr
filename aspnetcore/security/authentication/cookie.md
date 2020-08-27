@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/cookie
-ms.openlocfilehash: 04d2f0d289e2c9ec13aeb880df47240bec19d3ec
-ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
+ms.openlocfilehash: 24ba49828db08fdd67723c81ac0c8d9981ab3404
+ms.sourcegitcommit: 47c9a59ff8a359baa6bca2637d3af87ddca1245b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88876769"
+ms.lasthandoff: 08/27/2020
+ms.locfileid: "88945421"
 ---
 # <a name="use-no-loccookie-authentication-without-no-locaspnet-core-identity"></a>cookieKimlik doğrulamasını kullanmadan kullanınASP.NET Core Identity
 
@@ -117,7 +117,7 @@ Geçerli kullanıcının oturumunu kapatmak ve öğesini silmek için cookie şu
 
 `CookieAuthenticationDefaults.AuthenticationScheme`(Veya " Cookie s") düzen olarak kullanılmazsa (örneğin, "contoso Cookie "), kimlik doğrulama sağlayıcısını yapılandırırken kullanılan düzeni sağlayın. Aksi takdirde, varsayılan düzen kullanılır.
 
-Sunucuda istemci tarayıcısı denetimi yoktur. Kullanıcı tarayıcıyı veya sekmeyi kapatırsa, sunucu kullanıcıyı imzalayamıyor. Tarayıcı kapalıyken Kullanıcı oturumunu kapatmak için, JavaScript ile bu uygulamayı tespit etmeniz gerekir. "Tarayıcı penceresi sekmesi kapatma olayını Algıla" ifadesini arayın.
+Tarayıcı kapandığında oturum tabanlı öğeleri otomatik olarak siler cookie (kalıcı olmayan cookie ), ancak cookie tek bir sekme kapalıyken hiçbir s temizlenir. Sunucu, sekme veya tarayıcı kapatma olayları hakkında bilgi vermez.
 
 ## <a name="react-to-back-end-changes"></a>Arka uç değişikliklerine tepki verme
 

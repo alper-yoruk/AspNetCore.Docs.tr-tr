@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/basics
-ms.openlocfilehash: 61ac7b84ec6a5eeb344cbf6f9a6712366be7d3c9
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: aacaf9cca131d3fba1c3ae96cf42d51d3fdc17b6
+ms.sourcegitcommit: 47c9a59ff8a359baa6bca2637d3af87ddca1245b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627084"
+ms.lasthandoff: 08/27/2020
+ms.locfileid: "88945434"
 ---
 # <a name="grpc-services-with-c"></a>C ile gRPC Hizmetleri\#
 
@@ -32,12 +32,12 @@ Bu belgede, C# dilinde [GRPC](https://grpc.io/docs/guides/) uygulamaları yazmak
 
 ## <a name="proto-file"></a>Proto dosyası
 
-gRPC, API geliştirmesi için bir sözleşmenin ilk yaklaşımını kullanır. Protokol arabellekleri (protobellek) varsayılan olarak arabirim tasarım dili (IDL) olarak kullanılır. * \* . Proto* dosyası şunları içerir:
+gRPC, API geliştirmesi için bir sözleşmenin ilk yaklaşımını kullanır. Protokol arabellekleri (protoarabellek) varsayılan olarak arabirim tanım dili (IDL) olarak kullanılır. * \* . Proto* dosyası şunları içerir:
 
 * GRPC hizmetinin tanımı.
 * İstemciler ve sunucular arasında gönderilen iletiler.
 
-Prototipsiz dosyaların sözdizimi hakkında daha fazla bilgi için, [resmi belgelere (protoarabellek)](https://developers.google.com/protocol-buffers/docs/proto3)bakın.
+Prototipsiz dosyaların sözdizimi hakkında daha fazla bilgi için bkz <xref:grpc/protobuf> ..
 
 Örneğin, [gRPC hizmetini kullanmaya başlama](xref:tutorials/grpc/grpc-start)bölümünde kullanılan *Greet. proto* dosyasını düşünün:
 
