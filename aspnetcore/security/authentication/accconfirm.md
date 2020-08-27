@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: 57607390e7d5e58df9f27437faecd57504ad64df
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d6ea37ceb83ffbaa94187e0c541c79428594e4b4
+ms.sourcegitcommit: 2039e60eb7b482da8298f82dcd5eda27cf747f32
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635378"
+ms.lasthandoff: 08/26/2020
+ms.locfileid: "88906455"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>ASP.NET Core hesap onaylama ve parola kurtarma
 
@@ -30,14 +30,14 @@ By [Rick Anderson](https://twitter.com/RickAndMSFT), [Ponant](https://github.com
 Bu öğreticide, e-posta onayı ve parola sıfırlama ile bir ASP.NET Core uygulamasının nasıl oluşturulacağı gösterilmektedir. Bu öğretici bir başlangıç konusu **değildir** . Şunu tanımanız gerekir:
 
 * [ASP.NET Core](xref:tutorials/razor-pages/razor-pages-start)
-* [Kimlik Doğrulaması](xref:security/authentication/identity)
+* [Kimlik doğrulaması](xref:security/authentication/identity)
 * [Entity Framework Core](xref:data/ef-mvc/intro)
 
 <!-- see C:/Dropbox/wrk/Code/SendGridConsole/Program.cs -->
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 [.NET Core 3,0 SDK veya üzeri](https://dotnet.microsoft.com/download/dotnet-core/3.0)
 
@@ -160,7 +160,13 @@ Web uygulamasını çalıştırın ve hesap onaylama ve parola kurtarma akışı
 * Hesabı kaydettirmek için kullandığınız e-postayı girin.
 * Parolanızı sıfırlamaya yönelik bağlantı içeren bir e-posta gönderilir. E-postanızı kontrol edin ve parolanızı sıfırlamak için bağlantıya tıklayın. Parolanız başarıyla sıfırlandıktan sonra, e-posta ve yeni parolanızla oturum açabilirsiniz.
 
-## <a name="change-email-and-activity-timeout"></a>E-posta ve etkinlik zaman aşımını değiştirme
+<a name="resend"></a>
+
+## <a name="resend-email-confirmation"></a>E-posta onayını yeniden gönder
+
+ASP.NET Core 5,0 ve üzeri sürümlerde, **oturum açma** sayfasında **e-postayı yeniden gönder onay** bağlantısını seçin.
+
+### <a name="change-email-and-activity-timeout"></a>E-posta ve etkinlik zaman aşımını değiştirme
 
 Varsayılan eylemsizlik zaman aşımı 14 gündür. Aşağıdaki kod, etkinlik dışı zaman aşımını 5 güne ayarlar:
 
@@ -185,10 +191,6 @@ Yerleşik Identity Kullanıcı belirteçleri (bkz. [aspnetcore/src/ Identity /Ex
 Özel sağlayıcıyı hizmet kapsayıcısına ekleyin:
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/StartupEmail.cs?name=snippet1&highlight=10-16)]
-
-### <a name="resend-email-confirmation"></a>E-posta onayını yeniden gönder
-
-[Bu GitHub sorununa](https://github.com/dotnet/AspNetCore/issues/5410)bakın.
 
 <a name="debug"></a>
 
@@ -234,7 +236,7 @@ Kullanıcılara bir sitede hesap onayını etkinleştirmek, mevcut tüm kullanı
 
 ::: moniker range="< aspnetcore-3.0"
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 [.NET Core 2,2 SDK veya üzeri](https://dotnet.microsoft.com/download/dotnet-core)
 
