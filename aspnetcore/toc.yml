@@ -94,6 +94,9 @@
         - name: Mobil için arka uç
           displayName: tutorial
           uid: mobile/native-mobile-backend
+        - name: Azure API Management’a yayımlama
+          displayName: tutorial
+          uid: tutorials/publish-to-azure-api-management-using-vs
     - name: Gerçek zamanlı web uygulamaları
       items:
         - name: JavaScript ile SignalR
@@ -702,7 +705,11 @@
         - name: gRPC hizmetini kullanmaya başlama
           uid: tutorials/grpc/grpc-start
     - name: C# içeren gRPC hizmetleri
-      uid: grpc/basics
+      items:
+        - name: Genel Bakış
+          uid: grpc/basics
+        - name: gRPC hizmetleri oluşturma
+          uid: grpc/services
     - name: ASP.NET Core içeren gRPC Hizmetleri
       uid: grpc/aspnetcore
     - name: .NET istemcisiyle gRPC hizmetlerini çağırma
@@ -711,6 +718,8 @@
       uid: grpc/clientfactory
     - name: Tarayıcı uygulamalarında gRPC kullanma
       uid: grpc/browser
+    - name: gRPC ile işlemler arası iletişim
+      uid: grpc/interprocess
     - name: Yapılandırma
       uid: grpc/configuration
     - name: Kimlik doğrulaması ve yetkilendirme
@@ -719,6 +728,8 @@
       uid: grpc/diagnostics
     - name: Güvenlik konuları
       uid: grpc/security
+    - name: Protobuf iletileri oluşturma
+      uid: grpc/protobuf
     - name: Performans için en iyi yöntemler
       uid: grpc/performance
     - name: gRPC hizmetlerinin sürümünü oluşturma
@@ -955,7 +966,7 @@
   items:
     - name: Genel Bakış
       uid: security/index
-    - name: Kimlik Doğrulaması
+    - name: Kimlik doğrulaması
       items:
         - name: Genel Bakış
           uid: security/authentication/index
