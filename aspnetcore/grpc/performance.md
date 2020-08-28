@@ -1,5 +1,5 @@
 ---
-title: ASP.NET Core için gRPC 'de performans en iyi yöntemleri
+title: GRPC ile en iyi performans uygulamaları
 author: jamesnk
 description: Yüksek performanslı gRPC hizmetleri oluşturmak için en iyi uygulamaları öğrenin.
 monikerRange: '>= aspnetcore-3.0'
@@ -17,24 +17,24 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/performance
-ms.openlocfilehash: f9cefa89ec6e533920b33223b34333f6ebe38428
-ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
+ms.openlocfilehash: 7d4d5732e6edb0d0a156fdcec5f59cc09a69d7de
+ms.sourcegitcommit: 111b4e451da2e275fb074cde5d8a84b26a81937d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88876730"
+ms.lasthandoff: 08/27/2020
+ms.locfileid: "89040885"
 ---
-# <a name="performance-best-practices-in-grpc-for-aspnet-core"></a>ASP.NET Core için gRPC 'de performans en iyi yöntemleri
+# <a name="performance-best-practices-with-grpc"></a>GRPC ile en iyi performans uygulamaları
 
 , [James bAyKiNg](https://twitter.com/jamesnk)
 
 gRPC, yüksek performanslı hizmetler için tasarlanmıştır. Bu belgede, gRPC 'den mümkün olan en iyi performansı alma açıklanmaktadır.
 
-## <a name="reuse-channel"></a>Kanalı yeniden kullan
+## <a name="reuse-grpc-channels"></a>GRPC kanallarını yeniden kullanma
 
 GRPC araması yapıldığında bir gRPC kanalının kullanılması gerekir. Bir kanalı yeniden kullanmak, çağrıların mevcut bir HTTP/2 bağlantısıyla çoğullanmış olmasına olanak sağlar.
 
-Her gRPC çağrısı için yeni bir kanal oluşturulursa, tamamlanma süresi önemli ölçüde artabilir. Her çağrının, istemci ile sunucu arasında bir HTTP/2 bağlantısı oluşturmak için birden çok ağ gidiş dönüşmesini gerekir:
+Her gRPC çağrısı için yeni bir kanal oluşturulursa, tamamlanma süresi önemli ölçüde artabilir. Her çağrının, istemci ile sunucu arasında yeni bir HTTP/2 bağlantısı oluşturmak için birden çok ağ gidiş dönüşmesini gerekir:
 
 1. Yuva açma
 2. TCP bağlantısı kuruluyor
@@ -86,7 +86,45 @@ var channel = GrpcChannel.ForAddress("https://localhost", new GrpcChannelOptions
 > * Bağlantıya yazmaya çalışan akışlar arasında iş parçacığı çakışması.
 > * Bağlantı paketi kaybı, TCP katmanında tüm çağrıların engellenmesine neden olur.
 
+## <a name="load-balancing"></a>Yük dengeleme
+
+Bazı yük dengeleyiciler gRPC ile etkili bir şekilde çalışmaz. L4 (taşıma) yük dengeleyiciler, TCP bağlantılarını uç noktalar arasında dağıtarak bağlantı düzeyinde çalışır. Bu yaklaşım, HTTP/1.1 ile yapılan Yük Dengeleme API çağrılarının yüklenmesi için iyi bir sonuç verir. HTTP/1.1 ile yapılan eşzamanlı çağrılar farklı bağlantılarda gönderilir ve çağrılar, uç noktalar arasında yük dengelemesi yapılmasına izin verir.
+
+L4 yük dengeleyiciler bir bağlantı düzeyinde çalıştığından, gRPC ile iyi çalışmaz. gRPC, tek bir TCP bağlantısında birden çok çağrının çoğullanmış HTTP/2 kullanır. Bu bağlantı üzerindeki tüm gRPC çağrıları bir uç noktaya gider.
+
+GRPC 'nin yükünü etkin şekilde dengelemek için iki seçenek vardır:
+
+1. İstemci tarafı Yük Dengeleme
+2. L7 (uygulama) proxy Yük Dengeleme
+
+> [!NOTE]
+> Yalnızca gRPC çağrıları uç noktalar arasında yük dengelenebilir. Akış gRPC çağrısı kurulduktan sonra, akış üzerinden gönderilen tüm iletiler bir uç noktaya gider.
+
+### <a name="client-side-load-balancing"></a>İstemci tarafı Yük Dengeleme
+
+İstemci tarafı yük dengelemesi ile istemci, uç noktalar hakkında bilir. Her gRPC çağrısı için, çağrısını göndermek üzere farklı bir uç nokta seçer. Gecikme süresi önemli olduğunda istemci tarafı yük dengelemesi iyi bir seçenektir. İstemci ile hizmet arasında, çağrının hizmete doğrudan gönderilmesi için bir ara sunucu yok. İstemci tarafı yük dengelemenin dezavantajı, her istemcinin kullanması gereken kullanılabilir uç noktaları izlemesine sahip olması gerekir.
+
+Arabelleği istemci yük dengelemesi, Yük Dengeleme durumunun merkezi bir konumda depolandığı bir tekniktir. İstemciler, Yük Dengeleme kararları verirken kullanılacak bilgiler için merkezi konumu düzenli aralıklarla sorgular.
+
+`Grpc.Net.Client` Şu anda istemci tarafı yük dengelemeyi desteklemez. .NET ' te istemci tarafı yük dengelemesi gerekliyse, [GRPC. Core](https://www.nuget.org/packages/Grpc.Core) iyi bir seçimdir.
+
+### <a name="proxy-load-balancing"></a>Proxy yük dengelemesi
+
+Bir L7 (uygulama) proxy 'si, bir L4 (aktarım) proxy 'si tarafından daha yüksek bir düzeyde çalışmaktadır. L7 proxy 'leri HTTP/2 ' yi anlayın ve birden fazla uç nokta genelinde tek bir HTTP/2 bağlantısı üzerinde gRPC çağrılarını bir tane sunucuya dağıtabiliyor. Proxy kullanmak, istemci tarafı yük dengelemeden daha basittir, ancak gRPC çağrılarına ek gecikme süresi ekleyebilir.
+
+Kullanılabilir çok sayıda L7 proxy vardır. Bazı seçenekler şunlardır:
+
+1. [Envoy](https://www.envoyproxy.io/) proxy-popüler bir açık kaynak proxy 'si.
+2. Kubernetes için [Linkerd](https://linkerd.io/) -hizmet ağı.
+2. [Yarp: bir ters ara sunucu](https://microsoft.github.io/reverse-proxy/) -.net ' te yazılmış bir önizleme açık kaynak proxy 'si.
+
 ::: moniker range=">= aspnetcore-5.0"
+
+## <a name="inter-process-communication"></a>İşlem arası iletişim
+
+istemci ve hizmet arasındaki gRPC çağrıları genellikle TCP Yuvaları üzerinden gönderilir. TCP bir ağ üzerinden iletişim kurmak için idealdir, ancak istemci ve hizmet aynı makinede olduğunda, [işlemler arası iletişim (IPC)](https://wikipedia.org/wiki/Inter-process_communication) daha etkilidir.
+
+Aynı makinede bulunan süreçler arasında gRPC çağrıları için UNIX etki alanı yuvaları veya adlandırılmış kanallar gibi bir taşıma kullanmayı düşünün. Daha fazla bilgi için bkz. <xref:grpc/interprocess>.
 
 ## <a name="keep-alive-pings"></a>Canlı ping pingleri tut
 

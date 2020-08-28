@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/protobuf
-ms.openlocfilehash: b8149b79c1e7b204e52cc8595d1193b623bb0008
-ms.sourcegitcommit: 47c9a59ff8a359baa6bca2637d3af87ddca1245b
+ms.openlocfilehash: f898907e5bae7c67cfca72c70dc8497f36de2622
+ms.sourcegitcommit: 111b4e451da2e275fb074cde5d8a84b26a81937d
 ms.translationtype: MT
 ms.contentlocale: tr-TR
 ms.lasthandoff: 08/27/2020
-ms.locfileid: "88945767"
+ms.locfileid: "89040859"
 ---
 # <a name="create-protobuf-messages-for-net-apps"></a>.NET uygulamaları için Prototipsiz iletiler oluşturma
 
@@ -286,7 +286,7 @@ person.Attributes.Add(attributes);
 
 Prototip, bir sözleşmenin ilk ileti biçimidir ve uygulama oluşturulduğunda *. proto* dosyalarında bir uygulamalar iletisi belirtilmesi gerekir. Gelişmiş senaryolar için Protoarabellek, koşullu ve bilinmeyen iletileri desteklemek için dil özellikleri ve iyi bilinen türler sunmaktadır.
 
-### <a name="any"></a>Herhangi bir
+### <a name="any"></a>Herhangi biri
 
 `Any`Türü, *. proto* tanımına sahip olmayan iletileri katıştırılmış tür olarak kullanmanıza olanak tanır. Türünü kullanmak için `Any` içeri aktarın `any.proto` .
 
@@ -338,7 +338,7 @@ Küme içindeki alanlar, `oneof` genel ileti bildiriminde benzersiz alan numaral
 Kullanırken `oneof` , oluşturulan C# kodu, alanların hangisinin ayarlandığını belirten bir sabit listesi içerir. Hangi alanın ayarlandığını bulmak için sabit listesini test edebilirsiniz. Ayarlı olmayan alanlar `null` , özel durum oluşturmak yerine varsayılan değer döndürür.
 
 ```csharp
-var response = client.GetPersonAsync(new RequestMessage());
+var response = await client.GetPersonAsync(new RequestMessage());
 
 switch (response.ResultCase)
 {
