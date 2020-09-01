@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: e42ee7a80475e784ea4791395d9b0665aca94a03
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 9c2bbd2d463af8a2ea7db716d01bf1436338ea77
+ms.sourcegitcommit: cd861463faf44956855e3c4b3669483bbc4a7463
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865166"
+ms.lasthandoff: 08/29/2020
+ms.locfileid: "89101367"
 ---
 # <a name="no-locrazor-syntax-reference-for-aspnet-core"></a>Razor ASP.NET Core için sözdizimi başvurusu
 
@@ -131,17 +131,15 @@ Dizeyi değerlendiren C# ifadeleri HTML kodlandı. Sonucunu veren C# ifadeleri `
 @("<span>Hello World</span>")
 ```
 
-Kod, aşağıdaki HTML 'yi işler:
+Yukarıdaki kod, aşağıdaki HTML 'yi işler:
 
 ```html
 &lt;span&gt;Hello World&lt;/span&gt;
 ```
 
-HTML tarayıcıda şu şekilde gösterilir:
+HTML tarayıcıda düz metin olarak gösterilir:
 
-```html
-<span>Hello World</span>
-```
+&lt;Aralık &gt; Merhaba Dünya &lt; /span&gt;
 
 `HtmlHelper.Raw` çıktı kodlanmamış, ancak HTML işaretlemesi olarak işlendi.
 
@@ -498,7 +496,7 @@ RazorBileşenler için `@code` bir diğer addır [`@functions`](#functions) ve �
 
 ::: moniker-end
 
-Örnek:
+Örneğin:
 
 [!code-cshtml[](razor/sample/Views/Home/Contact6.cshtml)]
 

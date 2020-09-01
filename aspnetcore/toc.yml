@@ -710,6 +710,8 @@
           uid: grpc/basics
         - name: gRPC hizmetleri oluşturma
           uid: grpc/services
+        - name: Protobuf iletileri oluşturma
+          uid: grpc/protobuf
     - name: ASP.NET Core içeren gRPC Hizmetleri
       uid: grpc/aspnetcore
     - name: .NET istemcisiyle gRPC hizmetlerini çağırma
@@ -720,6 +722,8 @@
       uid: grpc/browser
     - name: gRPC ile işlemler arası iletişim
       uid: grpc/interprocess
+    - name: gRPC'den JSON Web API'leri oluşturma
+      uid: grpc/httpapi
     - name: Yapılandırma
       uid: grpc/configuration
     - name: Kimlik doğrulaması ve yetkilendirme
@@ -728,8 +732,6 @@
       uid: grpc/diagnostics
     - name: Güvenlik konuları
       uid: grpc/security
-    - name: Protobuf iletileri oluşturma
-      uid: grpc/protobuf
     - name: Performans için en iyi yöntemler
       uid: grpc/performance
     - name: gRPC hizmetlerinin sürümünü oluşturma
@@ -966,7 +968,7 @@
   items:
     - name: Genel Bakış
       uid: security/index
-    - name: Kimlik doğrulaması
+    - name: Kimlik Doğrulaması
       items:
         - name: Genel Bakış
           uid: security/authentication/index

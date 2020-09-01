@@ -17,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/protobuf
-ms.openlocfilehash: f898907e5bae7c67cfca72c70dc8497f36de2622
-ms.sourcegitcommit: 111b4e451da2e275fb074cde5d8a84b26a81937d
+ms.openlocfilehash: 60af1add9ae2f8b2b94bc19b65667d7af91fb122
+ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/27/2020
-ms.locfileid: "89040859"
+ms.lasthandoff: 08/29/2020
+ms.locfileid: "89102672"
 ---
 # <a name="create-protobuf-messages-for-net-apps"></a>.NET uygulamaları için Prototipsiz iletiler oluşturma
 
 [Can koç](https://twitter.com/jamesnk) ve [işareti yeniden adlandır](https://twitter.com/markrendle)
 
-gRPC, arabirim tanım dili (IDL) olarak [Protoarabelleğe](https://developers.google.com/protocol-buffers) 'yi kullanır. Prototip IDL, gRPC Hizmetleri tarafından gönderilen ve alınan iletileri belirtmek için dilden bağımsız bir biçimdir. Prototip iletileri *. proto* dosyalarında tanımlanır. Bu belgede, prototip kavramlarının .NET ile nasıl eşlendiği açıklanmaktadır.
+gRPC, arabirim tanım dili (IDL) olarak [Protoarabelleğe](https://developers.google.com/protocol-buffers) 'yi kullanır. Prototip IDL, gRPC Hizmetleri tarafından gönderilen ve alınan iletileri belirtmek için dilden bağımsız bir biçimdir. Prototip iletileri `.proto` dosyalarda tanımlanmıştır. Bu belgede, prototip kavramlarının .NET ile nasıl eşlendiği açıklanmaktadır.
 
 ## <a name="protobuf-messages"></a>Protobuf iletileri
 
@@ -50,7 +50,7 @@ Yukarıdaki ileti tanımı, üç alanı ad-değer çiftleri olarak belirtir. .NE
 
 Bir ada ek olarak, ileti tanımındaki her bir alanın benzersiz bir numarası vardır. Alan numaraları, ileti Protoarabelleğe serileştirildiğinde alanları tanımlamak için kullanılır. Küçük bir sayının serileştirilmesi, tüm alan adının serileştirilmesinin daha hızlıdır. Alan numaraları bir alanı tanımladığından, bunları değiştirirken dikkatli olmanız önemlidir. Prototipsiz iletileri değiştirme hakkında daha fazla bilgi için bkz <xref:grpc/versioning> ..
 
-Bir uygulama oluşturulduğunda, prototipleme araçları *. proto* dosyalarından .net türleri oluşturur. `Person`İleti bir .NET sınıfı üretir:
+Bir uygulama yapılandırıldığında, prototipleme araçları dosyalardan .NET türleri oluşturur `.proto` . `Person`İleti bir .NET sınıfı üretir:
 
 ```csharp
 public class Person
@@ -87,15 +87,15 @@ Prototip, yerel skaler değer türlerini destekler. Aşağıdaki tabloda bunlar�
 
 ### <a name="dates-and-times"></a>Tarihler ve saatler
 
-Yerel skaler türler, ile eşdeğer tarih ve saat değerleri için sağlamaz. NET <xref:System.DateTimeOffset> , <xref:System.DateTime> ve <xref:System.TimeSpan> . Bu türler, Prototiplerde "tanınmış türler" uzantıları kullanılarak belirtilebilir. Bu uzantılar desteklenen platformlar genelinde karmaşık alan türleri için kod oluşturma ve çalışma zamanı desteği sağlar.
+Yerel skaler türler, ile eşdeğer tarih ve saat değerleri için sağlamaz. NET <xref:System.DateTimeOffset> , <xref:System.DateTime> ve <xref:System.TimeSpan> . Bu türler, prototipin *Iyi bilinen türler* uzantıları kullanılarak belirtilebilir. Bu uzantılar desteklenen platformlar genelinde karmaşık alan türleri için kod oluşturma ve çalışma zamanı desteği sağlar.
 
 Aşağıdaki tabloda tarih ve saat türleri gösterilmektedir:
 
-| .NET türü | Prototip iyi bilinen tür |
-| ------- | ------------------------ |
+| .NET türü        | Prototip Iyi bilinen tür    |
+| ---------------- | --------------------------- |
 | `DateTimeOffset` | `google.protobuf.Timestamp` |
-| `DateTime` | `google.protobuf.Timestamp` |
-| `TimeSpan` | `google.protobuf.Duration` |
+| `DateTime`       | `google.protobuf.Timestamp` |
+| `TimeSpan`       | `google.protobuf.Duration`  |
 
 ```protobuf  
 syntax = "proto3"
@@ -132,7 +132,7 @@ var duration = meeting.Duration?.ToTimeSpan();
 
 C# için prototip kod oluşturma, gibi yerel türleri kullanır `int` `int32` . Bu nedenle değerler her zaman dahil edilir ve olamaz `null` .
 
-C# kodunda kullanılması gibi açık gerektiren değerler için `null` `int?` , prototipli "Iyi bilinen türler", null yapılabilir C# türlerine derlenen sarmalayıcıları içerir. Bunları kullanmak için, `wrappers.proto` `.proto` Aşağıdaki kod gibi dosyanıza içeri aktarın:
+`null`C# kodunda kullanılması gibi açık gerektiren değerler için `int?` , Prototipen Iyi bilinen türler, null yapılabilir C# türlerine derlenen sarmalayıcıları içerir. Bunları kullanmak için, `wrappers.proto` `.proto` Aşağıdaki kod gibi dosyanıza içeri aktarın:
 
 ```protobuf  
 syntax = "proto3"
@@ -284,11 +284,17 @@ person.Attributes.Add(attributes);
 
 ## <a name="unstructured-and-conditional-messages"></a>Yapılandırılmamış ve koşullu iletiler
 
-Prototip, bir sözleşmenin ilk ileti biçimidir ve uygulama oluşturulduğunda *. proto* dosyalarında bir uygulamalar iletisi belirtilmesi gerekir. Gelişmiş senaryolar için Protoarabellek, koşullu ve bilinmeyen iletileri desteklemek için dil özellikleri ve iyi bilinen türler sunmaktadır.
+Prototip, bir sözleşmenin ilk ileti biçimidir. Uygulama oluşturulduğunda, bir uygulamanın, alanları ve türleri de dahil olmak üzere iletiler içinde belirtilmesi gerekir `.proto` . Prototipleme sözleşmesi-ilk tasarımı ileti içeriğini zorlarken harika, ancak katı bir sözleşmenin gerekmediği senaryoları sınırlayabilir:
+
+* Bilinmeyen yükleri olan mesajlar. Örneğin, herhangi bir ileti içerebilen bir alan içeren bir ileti.
+* Koşullu iletiler. Örneğin, bir gRPC hizmetinden döndürülen bir ileti, başarılı bir sonuç veya hata sonucu olabilir.
+* Dinamik değerler. Örneğin, JSON ile benzer şekilde yapılandırılmamış değer koleksiyonu içeren bir alan içeren bir ileti.
+
+Prototip, bu senaryoları desteklemek için dil özellikleri ve türleri sunar.
 
 ### <a name="any"></a>Herhangi biri
 
-`Any`Türü, *. proto* tanımına sahip olmayan iletileri katıştırılmış tür olarak kullanmanıza olanak tanır. Türünü kullanmak için `Any` içeri aktarın `any.proto` .
+`Any`Türü, kendi tanımına sahip olmayan iletileri katıştırılmış tür olarak kullanmanıza olanak tanır `.proto` . Türünü kullanmak için `Any` içeri aktarın `any.proto` .
 
 ```protobuf
 import "google/protobuf/any.proto";
@@ -355,7 +361,7 @@ switch (response.ResultCase)
 
 ### <a name="value"></a>Değer
 
-`Value`Tür, dinamik olarak yazılmış bir değeri temsil eder. Bu, `null` bir sayı, bir dize, Boole değeri, değerlerin bir sözlüğü ( `Struct` ) veya bir değerler listesi ( `ValueList` ) olabilir. `Value` , daha önce tartışılan özelliği kullanan iyi bilinen bir türdür `oneof` . Türünü kullanmak için `Value` içeri aktarın `struct.proto` .
+`Value`Tür, dinamik olarak yazılmış bir değeri temsil eder. Bu, `null` bir sayı, bir dize, Boole değeri, değerlerin bir sözlüğü ( `Struct` ) veya bir değerler listesi ( `ValueList` ) olabilir. `Value` , daha önce tartışılan özelliği kullanan, prototip Iyi bilinen bir türdür `oneof` . Türünü kullanmak için `Value` içeri aktarın `struct.proto` .
 
 ```protobuf
 import "google/protobuf/struct.proto";

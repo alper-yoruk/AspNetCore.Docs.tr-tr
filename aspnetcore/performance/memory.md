@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/memory
-ms.openlocfilehash: c409eaaf07109d363581ee7d61dc76521d6818d0
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 9bb055670b73c9a1ae04083bc326200a42151708
+ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630672"
+ms.lasthandoff: 08/29/2020
+ms.locfileid: "89102802"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>ASP.NET Core 'de bellek yönetimi ve çöp toplama (GC)
 
@@ -235,7 +235,7 @@ Kullanıcı kodunda, aşağıdakilerden biri ile aynı sızıntı gerçekleşece
 
 ### <a name="large-objects-heap"></a>Büyük nesne yığını
 
-Sık bellek ayırma/ücretsiz döngüler, özellikle büyük bellek öbekleri ayrılırken belleği parçalara ayırıyor. Nesneler bitişik bellek bloklarına ayrılır. Parçalanmayı azaltmak için, GC belleği serbest bırakır. Bu işleme **sıkıştırma**adı verilir. Sıkıştırma, nesneleri taşımayı içerir. Büyük nesnelerin taşınması, bir performans cezası getirir. Bu nedenle GC, büyük [nesne yığını](/dotnet/standard/garbage-collection/large-object-heap) (LOH) olarak adlandırılan _büyük_ nesneler için özel bir bellek bölgesi oluşturur. 85.000 bayttan (yaklaşık 83 KB) büyük olan nesneler şunlardır:
+Sık bellek ayırma/ücretsiz döngüler, özellikle büyük bellek öbekleri ayrılırken belleği parçalara ayırıyor. Nesneler bitişik bellek bloklarına ayrılır. Parçalanmayı azaltmak için, GC belleği serbest bırakır, birleştirmeyi dener. Bu işleme **sıkıştırma**adı verilir. Sıkıştırma, nesneleri taşımayı içerir. Büyük nesnelerin taşınması, bir performans cezası getirir. Bu nedenle GC, büyük [nesne yığını](/dotnet/standard/garbage-collection/large-object-heap) (LOH) olarak adlandırılan _büyük_ nesneler için özel bir bellek bölgesi oluşturur. 85.000 bayttan (yaklaşık 83 KB) büyük olan nesneler şunlardır:
 
 * LOH 'ye yerleştirildi.
 * Düzenlenmedi.

@@ -5,7 +5,7 @@ description: ASP.NET Core kullanarak bir uygulamayı nasıl barındırılacağı
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/14/2020
+ms.date: 08/26/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/server
-ms.openlocfilehash: 72a22fc2dd50bbcda230bb1824bb4fe176bf2189
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: afbaad2f27359a4a1cac5c5fe1da16d3e80d038f
+ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628059"
+ms.lasthandoff: 08/29/2020
+ms.locfileid: "89102659"
 ---
 # <a name="host-and-deploy-no-locblazor-server"></a>Barındırma ve dağıtma Blazor Server
 
@@ -65,7 +65,19 @@ BlazorSignalRdaha düşük gecikme süresi, güvenilirlik ve [güvenlik](xref:si
 
 #### <a name="azure-no-locsignalr-service"></a>Azure SignalR hizmeti
 
-Uygulamalar için [Azure SignalR hizmetini](/azure/azure-signalr) kullanmanızı öneririz Blazor Server . Hizmet, bir Blazor Server uygulamayı çok sayıda eşzamanlı bağlantıya ölçeklendirmeye olanak tanır SignalR . Ayrıca, SignalR hizmetin küresel erişim ve yüksek performanslı veri merkezleri Coğrafya nedeniyle gecikme süresini azaltmaya önemli ölçüde yardımcı olur. Azure hizmetini bir uygulamayı yapılandırmak (ve isteğe bağlı olarak sağlamak) için SignalR :
+Uygulamalar için [Azure SignalR hizmetini](xref:signalr/scale#azure-signalr-service) kullanmanızı öneririz Blazor Server . Hizmet, bir Blazor Server uygulamayı çok sayıda eşzamanlı bağlantıya ölçeklendirmeye olanak tanır SignalR . Ayrıca, SignalR hizmetin küresel erişim ve yüksek performanslı veri merkezleri Coğrafya nedeniyle gecikme süresini azaltmaya önemli ölçüde yardımcı olur.
+
+> [!IMPORTANT]
+> [WebSockets](https://wikipedia.org/wiki/WebSocket) devre dışı bırakıldığında, Azure App Service http uzun yoklamayla gerçek zamanlı bir bağlantıya benzetir. HTTP uzun yoklama, bir istemci-sunucu bağlantısının benzetimini yapmak için yoklamayı kullanmayan, WebSockets Enabled ile çalıştırmanın önemli ölçüde yavaştır.
+>
+> Blazor ServerAzure App Service için dağıtılan uygulamalar Için WebSockets kullanmanızı öneririz. [Azure SignalR hizmeti](xref:signalr/scale#azure-signalr-service) varsayılan olarak WebSockets kullanır. Uygulama Azure SignalR hizmetini kullanmıyorsa, bkz <xref:signalr/publish-to-azure-web-app#configure-the-app-in-azure-app-service> ..
+>
+> Daha fazla bilgi için bkz.
+>
+> * [Azure hizmeti nedir SignalR ?](/azure/azure-signalr/signalr-overview)
+> * [Azure hizmeti için performans Kılavuzu SignalR](/azure-signalr/signalr-concept-performance#performance-factors)
+
+Azure hizmetini bir uygulamayı yapılandırmak (ve isteğe bağlı olarak sağlamak) için SignalR :
 
 1. [Prerendering sırasında istemciler aynı sunucuya geri yönlendirildiği](xref:blazor/hosting-models#connection-to-the-server) *yapışkan oturumları*desteklemek için hizmeti etkinleştirin. `ServerStickyMode`Seçeneğini veya yapılandırma değerini olarak ayarlayın `Required` . Genellikle, bir uygulama aşağıdaki yaklaşımlardan **birini** kullanarak yapılandırmayı oluşturur:
 
