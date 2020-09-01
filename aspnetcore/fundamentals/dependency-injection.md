@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/dependency-injection
-ms.openlocfilehash: 98c43eda002abc96fe3c2f031c429ccaa70cee3e
-ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
+ms.openlocfilehash: 2d002e075f9d57654589b540e522307c363d9660
+ms.sourcegitcommit: 4cce99cbd44372fd4575e8da8c0f4345949f4d9a
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/29/2020
-ms.locfileid: "89102789"
+ms.lasthandoff: 08/31/2020
+ms.locfileid: "89153551"
 ---
 # <a name="dependency-injection-in-aspnet-core"></a>ASP.NET Core bağımlılık ekleme
 
@@ -517,7 +517,7 @@ Tek bir hizmetin fabrika yöntemi (örneğin, AddSingleton için ikinci bağıms
   [!code-csharp[](dependency-injection/samples/3.x/AntiPattern3/Startup.cs?name=snippet)]
 
 * Atılabilir geçici hizmetler, aktiften çıkarma için kapsayıcı tarafından yakalanır. Bu, en üst düzey kapsayıcıdan çözümlenirse bir bellek sızıntısını açabilir.
-* Uygulamanın tekton yakalayan kapsamlı hizmetler içermediğinden emin olmak için kapsam doğrulamayı etkinleştirin. Daha fazla bilgi için bkz. [kapsam doğrulaması](#scope-validation).
+* Uygulamanın kapsamlı hizmetleri yakalayan tekton içermediğinden emin olmak için kapsam doğrulamayı etkinleştirin. Daha fazla bilgi için bkz. [kapsam doğrulaması](#scope-validation).
 
 Tüm öneri kümeleri gibi, bir öneriyi yok saymayı yok saymış durumlarla karşılaşabilirsiniz. Özel durumlar nadiren, genellikle Framework içindeki özel durumlardır.
 
