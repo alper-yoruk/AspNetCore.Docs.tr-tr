@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: 3b41aedcbd0d2c22b20d8fa3a21b8af97d1fbb2c
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d88cad10314872271250cd43212a64698f485381
+ms.sourcegitcommit: 8ed9a413bdc2d665ad11add8828898d726ccb106
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628566"
+ms.lasthandoff: 09/01/2020
+ms.locfileid: "89280406"
 ---
 # <a name="aspnet-core-no-locblazor-data-binding"></a>ASP.NET Core Blazor veri bağlama
 
@@ -79,27 +79,7 @@ Parametre içeren bir özniteliği de ekleyerek diğer olaylardaki bir özelliğ
 
 `onchange`' In aksine, öğe odağı kaybettiğinde harekete geçirilir, `oninput` metin kutusunun değeri değiştiğinde harekete geçirilir.
 
-`@bind-{ATTRIBUTE}` `@bind-{ATTRIBUTE}:event` Dışındaki öğe özniteliklerini bağlamak için sözdizimi ile kullanın `value` . Aşağıdaki örnekte:
-
-* Bileşen () yüklediğinde paragrafın stili **kırmızıdır** `style="color:red"` .
-* Kullanıcı, metin kutusunun değerini farklı bir CSS renk stilini yansıtacak şekilde değiştirir ve sayfanın öğe odağını değiştirir. Örneğin, Kullanıcı metin kutusu değerini olarak değiştirir `color:blue` ve klavyede <kbd>sekme</kbd> tuşuna basar.
-* Öğe odağı değiştiğinde:
-  * Değeri, `paragraphStyle` `<input>` öğenin değerinden atanır.
-  * Paragraf stili, içindeki yeni stili yansıtacak şekilde güncelleştirilir `paragraphStyle` . Stil olarak güncelleştirilirse `color:blue` metin rengi **mavi**olarak değişir.
-
-```razor
-<p>
-    <input type="text" @bind="paragraphStyle" />
-</p>
-
-<p @bind-style="paragraphStyle" @bind-style:event="onchange">
-    Blazorify the app!
-</p>
-
-@code {
-    private string paragraphStyle = "color:red";
-}
-```
+<!-- Hold location for resolution of https://github.com/dotnet/AspNetCore.Docs/issues/19721 -->
 
 Öznitelik bağlama büyük/küçük harfe duyarlıdır:
 

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: 53293ae9780129530ce5a41639e19284f47aa245
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a8d2ceaffb670723d7662234f3dc964c864e6763
+ms.sourcegitcommit: 8ed9a413bdc2d665ad11add8828898d726ccb106
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628085"
+ms.lasthandoff: 09/01/2020
+ms.locfileid: "89280432"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-models"></a>BlazorBarındırma modellerini ASP.NET Core
 
@@ -84,6 +84,9 @@ Blazor ServerBarındırma modeli çeşitli avantajlar sunar:
 * Sunucuda .NET Core, uygulamayı çalıştırmak için kullanılır, bu nedenle hata ayıklama gibi mevcut .NET araçları beklendiği gibi çalışır.
 * Ölçülü istemciler desteklenir. Örneğin uygulamalar, Blazor Server WebAssembly ve kaynak kısıtlı cihazlarda bulunan tarayıcılarla çalışır.
 * Uygulamanın bileşen kodu da dahil olmak üzere, uygulamanın .NET/C# kod tabanı istemcilere sunulmuyor.
+
+> [!IMPORTANT]
+> Bir Blazor Server uygulama, sunucu üzerinde kullanıcı arabirimi durumunu ayarlayan ilk istemci isteğine yanıt olarak ön ekler. İstemci bir bağlantı oluşturmayı denediğinde SignalR , **istemci aynı sunucuya yeniden bağlanmalıdır**. Blazor Server birden fazla arka uç sunucusu kullanan uygulamalar, bağlantılar için *yapışkan oturumlar* uygulamalıdır SignalR . Daha fazla bilgi için [sunucu bağlantısı](#connection-to-the-server) bölümüne bakın.
 
 Barındırmak için aşağı taraf vardır Blazor Server :
 
