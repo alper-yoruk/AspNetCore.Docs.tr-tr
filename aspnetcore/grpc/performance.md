@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/performance
-ms.openlocfilehash: 7d4d5732e6edb0d0a156fdcec5f59cc09a69d7de
-ms.sourcegitcommit: 111b4e451da2e275fb074cde5d8a84b26a81937d
+ms.openlocfilehash: a0a1a6901e07fb0074ca403870378f267d3d4403
+ms.sourcegitcommit: c9b03d8a6a4dcc59e4aacb30a691f349235a74c8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/27/2020
-ms.locfileid: "89040885"
+ms.lasthandoff: 09/02/2020
+ms.locfileid: "89379451"
 ---
 # <a name="performance-best-practices-with-grpc"></a>GRPC ile en iyi performans uygulamaları
 
@@ -48,6 +48,8 @@ Kanalların gRPC çağrıları arasında paylaşılması ve yeniden kullanılmas
 * Farklı istemci türleri dahil olmak üzere bir kanaldan birden çok gRPC istemcisi oluşturulabilir.
 * Kanaldan oluşturulan bir kanal ve istemciler, birden çok iş parçacığı tarafından güvenli bir şekilde kullanılabilir.
 * Kanaldan oluşturulan istemciler birden çok eş zamanlı çağrı yapabilir.
+
+gRPC istemci fabrikası, kanalları yapılandırmak için merkezi bir yöntem sunar. Temel kanalları otomatik olarak yeniden kullanır. Daha fazla bilgi için bkz. <xref:grpc/clientfactory>.
 
 ## <a name="connection-concurrency"></a>Bağlantı eşzamanlılık
 
@@ -94,8 +96,8 @@ L4 yük dengeleyiciler bir bağlantı düzeyinde çalıştığından, gRPC ile i
 
 GRPC 'nin yükünü etkin şekilde dengelemek için iki seçenek vardır:
 
-1. İstemci tarafı Yük Dengeleme
-2. L7 (uygulama) proxy Yük Dengeleme
+* İstemci tarafı Yük Dengeleme
+* L7 (uygulama) proxy Yük Dengeleme
 
 > [!NOTE]
 > Yalnızca gRPC çağrıları uç noktalar arasında yük dengelenebilir. Akış gRPC çağrısı kurulduktan sonra, akış üzerinden gönderilen tüm iletiler bir uç noktaya gider.
@@ -114,17 +116,11 @@ Bir L7 (uygulama) proxy 'si, bir L4 (aktarım) proxy 'si tarafından daha yükse
 
 Kullanılabilir çok sayıda L7 proxy vardır. Bazı seçenekler şunlardır:
 
-1. [Envoy](https://www.envoyproxy.io/) proxy-popüler bir açık kaynak proxy 'si.
-2. Kubernetes için [Linkerd](https://linkerd.io/) -hizmet ağı.
-2. [Yarp: bir ters ara sunucu](https://microsoft.github.io/reverse-proxy/) -.net ' te yazılmış bir önizleme açık kaynak proxy 'si.
+* [Envoy](https://www.envoyproxy.io/) -popüler bir açık kaynak proxy 'si.
+* Kubernetes için [Linkerd](https://linkerd.io/) -hizmet ağı.
+* [Yarp: bir ters ara sunucu](https://microsoft.github.io/reverse-proxy/) -.net ' te yazılmış bir önizleme açık kaynak proxy 'si.
 
 ::: moniker range=">= aspnetcore-5.0"
-
-## <a name="inter-process-communication"></a>İşlem arası iletişim
-
-istemci ve hizmet arasındaki gRPC çağrıları genellikle TCP Yuvaları üzerinden gönderilir. TCP bir ağ üzerinden iletişim kurmak için idealdir, ancak istemci ve hizmet aynı makinede olduğunda, [işlemler arası iletişim (IPC)](https://wikipedia.org/wiki/Inter-process_communication) daha etkilidir.
-
-Aynı makinede bulunan süreçler arasında gRPC çağrıları için UNIX etki alanı yuvaları veya adlandırılmış kanallar gibi bir taşıma kullanmayı düşünün. Daha fazla bilgi için bkz. <xref:grpc/interprocess>.
 
 ## <a name="keep-alive-pings"></a>Canlı ping pingleri tut
 

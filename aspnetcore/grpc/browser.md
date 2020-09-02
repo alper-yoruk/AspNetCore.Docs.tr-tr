@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/browser
-ms.openlocfilehash: fd4cae386b8c9654192cd0c66e095500290c4aa0
-ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
+ms.openlocfilehash: 5c9501b3e7cbdcbb02e3d78d67185a0a75ccba7c
+ms.sourcegitcommit: c9b03d8a6a4dcc59e4aacb30a691f349235a74c8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/29/2020
-ms.locfileid: "89102698"
+ms.lasthandoff: 09/02/2020
+ms.locfileid: "89379424"
 ---
 # <a name="use-grpc-in-browser-apps"></a>Tarayıcı uygulamalarında gRPC kullanma
 
@@ -131,6 +131,30 @@ Yukarıdaki kod:
 
 > [!IMPORTANT]
 > Oluşturulan gRPC istemcilerinin birli yöntemleri çağırmak için eşitleme ve zaman uyumsuz yöntemleri vardır. Örneğin, `SayHello` eşitlenir ve `SayHelloAsync` zaman uyumsuz olur. Bir uygulamada eşitleme yönteminin çağrılması Blazor WebAssembly uygulamanın yanıt vermemeye başlamasına neden olur. Zaman uyumsuz yöntemlerin içinde her zaman kullanılması gerekir Blazor WebAssembly .
+
+### <a name="use-grpc-client-factory-with-grpc-web"></a>GRPC istemci fabrikası ile gRPC-Web kullanma
+
+GRPC 'nin [Httpclientfactory](xref:System.Net.Http.IHttpClientFactory)ile tümleştirmesi kullanılarak bir GRPC-Web uyumlu .NET istemcisi oluşturulabilir.
+
+GRPC-Web ' i istemci fabrikası ile kullanmak için:
+
+* Aşağıdaki paketler için proje dosyasına paket başvuruları ekleyin:
+  * [GRPC .net. Client. Web](https://www.nuget.org/packages/Grpc.Net.Client.Web)
+  * [GRPC .net. ClientFactory](https://www.nuget.org/packages/Grpc.Net.ClientFactory)
+* Genel genişletme yöntemini kullanarak bir gRPC istemcisini bağımlılık ekleme (dı) ile kaydedin `AddGrpcClient` . Bir Blazor WebAssembly uygulamada, HIZMETLER dı ile kaydedilir `Program.cs` .
+* `GrpcWebHandler` <xref:Microsoft.Extensions.DependencyInjection.HttpClientBuilderExtensions.ConfigurePrimaryHttpMessageHandler%2A> Uzantı yöntemini kullanarak yapılandırın.
+
+```csharp
+builder.Services
+    .AddGrpcClient<Greet.GreeterClient>((services, options) =>
+    {
+        options.Address = new Uri("https://localhost:5001");
+    })
+    .ConfigurePrimaryHttpMessageHandler(
+        () => new GrpcWebHandler(GrpcWebMode.GrpcWebText, new HttpClientHandler()));
+```
+
+Daha fazla bilgi için bkz. <xref:grpc/clientfactory>.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
