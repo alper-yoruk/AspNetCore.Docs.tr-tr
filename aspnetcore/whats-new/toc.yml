@@ -5,6 +5,8 @@
     - name: 2020
       expanded: true
       items:
+        - name: Ağustos
+          href: 2020-08.md
         - name: Temmuz
           href: 2020-07.md
         - name: Haziran
@@ -15,5 +17,3 @@
           href: 2020-04.md
         - name: Mart
           href: 2020-03.md
-        - name: Şubat
-          href: 2020-02.md
