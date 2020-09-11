@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/hosting-models
-ms.openlocfilehash: a8d2ceaffb670723d7662234f3dc964c864e6763
-ms.sourcegitcommit: 8ed9a413bdc2d665ad11add8828898d726ccb106
+ms.openlocfilehash: 0830214029d59d0820ed3c5806267c766314c74f
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/01/2020
-ms.locfileid: "89280432"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009680"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-models"></a>BlazorBarındırma modellerini ASP.NET Core
 
@@ -41,7 +41,7 @@ Blazorİstemci tarafı barındırma modelini kullanarak bir uygulama oluşturmak
 
 ** Blazor WebAssembly Uygulama** şablonunu seçtikten sonra, **ASP.NET Core barındırılan** onay kutusunu () seçerek uygulamayı ASP.NET Core arka ucunu kullanacak şekilde yapılandırma seçeneğiniz vardır [`dotnet new blazorwasm --hosted`](/dotnet/core/tools/dotnet-new) . ASP.NET Core uygulaması, Blazor uygulamayı istemcilere sunar. ASP.NET Core arka uca sahip bir uygulama *barındırılan Blazor WebAssembly uygulama*olarak adlandırılır. Blazor WebAssemblyUygulama, Web API çağrılarını veya () kullanarak ağ üzerinden sunucu ile etkileşime geçebilir [SignalR](xref:signalr/introduction) <xref:tutorials/signalr-blazor-webassembly> .
 
-Şablonlar aşağıdakileri `blazor.webassembly.js` işleyecek betiği içerir:
+`blazor.webassembly.js`Betik, Framework ve işleyiciler tarafından sağlanır:
 
 * .NET çalışma zamanını, uygulamayı ve uygulamanın bağımlılıklarını indirme.
 * Uygulamayı çalıştırmak için çalışma zamanının başlatılması.
@@ -75,7 +75,7 @@ ASP.NET Core uygulama, eklenecek uygulamanın sınıfına başvurur `Startup` :
 * Sunucu tarafı hizmetler.
 * İstek işleme işlem hattının uygulaması.
 
-`blazor.server.js`Komut dosyası, istemci bağlantısını belirler. Uygulamanın, uygulama durumunu (örneğin, kayıp ağ bağlantısı durumunda) kalıcı hale getirmek ve geri yüklemek, uygulamanın sorumluluğundadır. `blazor.server.js`Betik, ASP.NET Core paylaşılan çerçevede eklenmiş bir kaynaktan sunulur.
+İstemcide, `blazor.server.js` komut dosyası SignalR sunucu ile bağlantı kurar. Betik, ASP.NET Core paylaşılan çerçevede eklenmiş bir kaynaktan istemci tarafı uygulamaya sunulur. İstemci tarafı uygulama, gerektiğinde uygulama durumunu kalıcı hale getirmekten ve geri yüklemekten sorumludur. 
 
 Blazor ServerBarındırma modeli çeşitli avantajlar sunar:
 

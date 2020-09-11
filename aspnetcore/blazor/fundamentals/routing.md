@@ -5,7 +5,7 @@ description: Uygulamalardaki istekleri yönlendirme ve gezinti bağlantısı bil
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/14/2020
+ms.date: 09/02/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: eb9e3cbddd2eaca8fef9a6782c28bbce4c029f58
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: fe67ebfefb463ab698e5ff1bb7d9b527a28a596e
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865327"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009589"
 ---
 # <a name="aspnet-core-no-locblazor-routing"></a>ASP.NET Core Blazor Yönlendirme
 
@@ -161,16 +161,35 @@ Aşağıdaki tabloda gösterilen yol kısıtlamaları mevcuttur. Sabit kültür 
 
 ### <a name="routing-with-urls-that-contain-dots"></a>Noktalar içeren URL 'lerle yönlendirme
 
-Blazor ServerUygulamalarda varsayılan yol `_Host.cshtml` `/` () ' dir `@page "/"` . `.`URL bir dosya isteyecek şekilde göründüğünden, nokta () içeren bir Istek URL 'si varsayılan yol tarafından eşleşmiyor. Bir Blazor uygulama, var olmayan bir statik dosya için *404-Found* yanıtı döndürür. Bir nokta içeren yolları kullanmak için `_Host.cshtml` Aşağıdaki rota şablonuyla yapılandırın:
+Barındırılan Blazor WebAssembly ve Blazor Server uygulamalar için, sunucu tarafı varsayılan yol şablonu, BIR istek URL 'sinin son segmentinin bir dosyanın istendiği nokta () içerdiğini varsayar `.` (örneğin, `https://localhost.com:5001/example/some.thing` ). Ek yapılandırma olmadan, bir bileşen bir bileşene yönlendirilmesi için bir uygulama *404-Found* yanıtı döndürür. Bir nokta içeren bir veya daha fazla parametre içeren bir yol kullanmak için, uygulamanın rotayı özel bir şablonla yapılandırması gerekir.
 
-```cshtml
-@page "/{**path}"
+`Example`URL 'nin son segmentinden bir yol parametresi alabilen aşağıdaki bileşeni göz önünde bulundurun:
+
+```razor
+@page "/example"
+@page "/example/{param}"
+
+<p>
+    Param: @Param
+</p>
+
+@code {
+    [Parameter]
+    public string Param { get; set; }
+}
 ```
 
-`"/{**path}"`Şablon şunları içerir:
+Barındırılan bir çözümün *sunucu* uygulamasına Blazor WebAssembly isteği parametresindeki bir noktayla yönlendirmeye izin vermek için `param` , () içinde isteğe bağlı parametresine sahip bir geri dönüş dosya yolu şablonu ekleyin `Startup.Configure` `Startup.cs` :
 
-* Ters *catch-all* `**` eğik çizgi () kodu olmadan birden çok klasör sınırlarındaki yolu yakalamak için çift yıldız catch-all söz dizimi () `/` .
-* `path` rota parametresi adı.
+```csharp
+endpoints.MapFallbackToFile("/example/{param?}", "index.html");
+```
+
+Bir uygulamayı, Blazor Server isteği bir noktayla yönlendirmek üzere yapılandırmak için `param` , () içinde isteğe bağlı parametresine sahip bir geri dönüş sayfası yol şablonu ekleyin `Startup.Configure` `Startup.cs` :
+
+```csharp
+endpoints.MapFallbackToPage("/example/{param?}", "/_Host");
+```
 
 Daha fazla bilgi için bkz. <xref:fundamentals/routing>.
 

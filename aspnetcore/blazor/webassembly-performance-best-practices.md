@@ -5,7 +5,7 @@ description: ASP.NET Core uygulamalarında performansı artırma Blazor WebAssem
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/25/2020
+ms.date: 09/09/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: 819947be90e7f09c7ba853df1af1f3c7066c0219
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 91d0eb7b4910d1cf19b179372546afa63cd3f9c1
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625823"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009602"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly performans en iyi yöntemleri
 
@@ -171,6 +171,19 @@ Blazor WebAssemblyçalışma zamanı, uygulamanın daha küçük bir yük boyutu
   </PropertyGroup>
   ```
 
+::: moniker range=">= aspnetcore-5.0"
+
+* Varsayılan olarak, Blazor WebAssembly Kullanıcı kültürünün tarih ve para birimi gibi değerleri görüntülemesi için gereken Genelleştirme kaynaklarını taşır. Uygulama yerelleştirmeyi gerektirmiyorsa, uygulamayı kültürü temel alan sabit kültürü destekleyecek şekilde yapılandırabilirsiniz `en-US` :
+
+  ```xml
+  <PropertyGroup>
+    <InvariantGlobalization>true</InvariantGlobalization>
+  </PropertyGroup>
+  ```
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 * Doğru çalışma gibi API 'Leri oluşturmak için harmanlama bilgileri eklenmiştir <xref:System.StringComparison.InvariantCultureIgnoreCase?displayProperty=nameWithType> . Uygulamanın harmanlama verileri gerektirmediğinden emin değilseniz, `BlazorWebAssemblyPreserveCollationData` uygulamanın proje dosyasındaki MSBuild özelliğini şu şekilde ayarlayarak devre dışı bırakmayı göz önünde bulundurun `false` :
 
   ```xml
@@ -178,3 +191,5 @@ Blazor WebAssemblyçalışma zamanı, uygulamanın daha küçük bir yük boyutu
     <BlazorWebAssemblyPreserveCollationData>false</BlazorWebAssemblyPreserveCollationData>
   </PropertyGroup>
   ```
+
+::: moniker-end

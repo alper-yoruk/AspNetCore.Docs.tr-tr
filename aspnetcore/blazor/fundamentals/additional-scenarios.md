@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: 6f092f3f9a18883c31b217b59d0b0abe802aff01
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 870509a3cbbcbea9b1c4804185c49a831af22630
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628310"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009641"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a>ASP.NET Core Blazor barındırma modeli yapılandırması
 
@@ -128,20 +128,62 @@ Blazor Server uygulamalar, sunucu bağlantısı oluşturulmadan önce sunucudaki
 
 Statik HTML sayfasından sunucu bileşenleri işleme desteklenmiyor.
 
-## <a name="configure-the-no-locsignalr-client-for-no-locblazor-server-apps"></a>SignalRUygulamalar için istemciyi yapılandırma Blazor Server
+## <a name="initialize-the-no-locblazor-circuit"></a>BlazorDevresini başlatma
 
 *Bu bölüm için geçerlidir Blazor Server .*
 
-SignalRDosyadaki uygulamalar tarafından kullanılan istemciyi yapılandırın Blazor Server `Pages/_Host.cshtml` . `Blazor.start` `_framework/blazor.server.js` Komut dosyasını ve etiketinin arkasına çağrı yapan bir betik yerleştirin `</body>` .
-
-### <a name="logging"></a>Günlüğe Kaydetme
-
-SignalRİstemci günlüğünü yapılandırmak için:
+Blazor ServerDosyada uygulamanın [ SignalR devresine](xref:blazor/hosting-models#circuits) el ile başlangıcını yapılandırın `Pages/_Host.cshtml` :
 
 * `autostart="false"`Betiğin etiketine bir öznitelik ekleyin `<script>` `blazor.server.js` .
-* `configureSignalR` `configureLogging` İstemci Oluşturucu üzerinde günlük düzeyiyle çağıran bir yapılandırma nesnesi () geçirin.
+* `Blazor.start` `blazor.server.js` Komut dosyasının etiketinden ve kapanış etiketinin içindeyken çağıran bir betik yerleştirin `</body>` .
+
+`autostart`Devre dışı bırakıldığında, devresine bağımlı olmayan uygulamanın herhangi bir yönü normal şekilde çalışır. Örneğin, istemci tarafı yönlendirme çalışır. Ancak, devresine bağlı olan herhangi bir boyut, `Blazor.start` çağrılana kadar çalışmaz. Uygulama davranışı, kurulu bir devre olmadan tahmin edilemez. Örneğin, devre kesildiğinde bileşen yöntemleri yürütülemeyebilir.
+
+### <a name="initialize-no-locblazor-when-the-document-is-ready"></a>BlazorBelge hazır olduğunda Başlat
+
+BlazorBelge hazır olduğunda uygulamayı başlatmak için:
 
 ```cshtml
+<body>
+
+    ...
+
+    <script autostart="false" src="_framework/blazor.server.js"></script>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        Blazor.start();
+      });
+    </script>
+</body>
+```
+
+### <a name="chain-to-the-promise-that-results-from-a-manual-start"></a>`Promise`El ile başlatılan sonuçlara zincir
+
+JS birlikte çalışma başlatma gibi ek görevler gerçekleştirmek için, `then` `Promise` el ile gerçekleştirilen bir uygulama başlangıcını kullanarak bu sonuçlara zincir atamak için kullanın Blazor :
+
+```cshtml
+<body>
+
+    ...
+
+    <script autostart="false" src="_framework/blazor.server.js"></script>
+    <script>
+      Blazor.start().then(function () {
+        ...
+      });
+    </script>
+</body>
+```
+
+### <a name="configure-the-no-locsignalr-client"></a>İstemciyi yapılandırma SignalR
+
+#### <a name="logging"></a>Günlüğe kaydetme
+
+SignalRİstemci günlüğünü yapılandırmak için, `configureSignalR` `configureLogging` istemci Oluşturucu 'da günlük düzeyiyle çağıran bir yapılandırma nesnesi () geçirin:
+
+```cshtml
+<body>
+
     ...
 
     <script autostart="false" src="_framework/blazor.server.js"></script>
@@ -164,12 +206,16 @@ Yeniden bağlantı işleyicisinin devre bağlantı olayları, şu gibi özel dav
 * Bağlantı kesildiğinde kullanıcıya bildirimde bulunur.
 * Bir devre bağlıyken günlüğe kaydetme (istemciden) gerçekleştirmek için.
 
-Bağlantı olaylarını değiştirmek için:
+Bağlantı olaylarını değiştirmek için, aşağıdaki bağlantı değişiklikleri için geri çağırmaları kaydedin:
 
-* `autostart="false"`Betiğin etiketine bir öznitelik ekleyin `<script>` `blazor.server.js` .
-* Bırakılan bağlantılar ( `onConnectionDown` ) ve kurulan/yeniden kurulan bağlantılar () için bağlantı değişiklikleri için geri çağırmaları kaydedin `onConnectionUp` . **Her ikisi** `onConnectionDown` ve `onConnectionUp` belirtilmelidir.
+* Bırakılan bağlantıların kullanımı `onConnectionDown` .
+* Kurulan/yeniden kurulan bağlantılar kullanımı `onConnectionUp` .
+
+**Her ikisi** `onConnectionDown` ve `onConnectionUp` belirtilmelidir:
 
 ```cshtml
+<body>
+
     ...
 
     <script autostart="false" src="_framework/blazor.server.js"></script>
@@ -186,12 +232,11 @@ Bağlantı olaylarını değiştirmek için:
 
 ### <a name="adjust-the-reconnection-retry-count-and-interval"></a>Yeniden bağlantı yeniden deneme sayısını ve aralığını ayarlama
 
-Yeniden bağlantı yeniden deneme sayısını ve aralığını ayarlamak için:
-
-* `autostart="false"`Betiğin etiketine bir öznitelik ekleyin `<script>` `blazor.server.js` .
-* `maxRetries`Her yeniden deneme girişimi için izin verilen yeniden deneme sayısını () ve süreyi milisaniye cinsinden ayarlayın ( `retryIntervalMilliseconds` ).
+Yeniden bağlantı yeniden deneme sayısını ve aralığını ayarlamak için, `maxRetries` her yeniden deneme girişimi için izin verilen yeniden deneme sayısını () ve süreyi milisaniye cinsinden ayarlayın ( `retryIntervalMilliseconds` ):
 
 ```cshtml
+<body>
+
     ...
 
     <script autostart="false" src="_framework/blazor.server.js"></script>
@@ -206,14 +251,13 @@ Yeniden bağlantı yeniden deneme sayısını ve aralığını ayarlamak için:
 </body>
 ```
 
-### <a name="hide-or-replace-the-reconnection-display"></a>Yeniden bağlantı görüntüsünü gizleme veya değiştirme
+## <a name="hide-or-replace-the-reconnection-display"></a>Yeniden bağlantı görüntüsünü gizleme veya değiştirme
 
-Yeniden bağlantı görüntüsünü gizlemek için:
-
-* `autostart="false"`Betiğin etiketine bir öznitelik ekleyin `<script>` `blazor.server.js` .
-* Yeniden bağlantı işleyicisini `_reconnectionDisplay` boş bir nesneye ayarlayın ( `{}` veya `new Object()` ).
+Yeniden bağlantı görüntüsünü gizlemek için, yeniden bağlanma işleyicisini `_reconnectionDisplay` boş bir nesneye ayarlayın ( `{}` veya `new Object()` ):
 
 ```cshtml
+<body>
+
     ...
 
     <script autostart="false" src="_framework/blazor.server.js"></script>
@@ -221,6 +265,8 @@ Yeniden bağlantı görüntüsünü gizlemek için:
       window.addEventListener('beforeunload', function () {
         Blazor.defaultReconnectionHandler._reconnectionDisplay = {};
       });
+
+      Blazor.start();
     </script>
 </body>
 ```
@@ -233,6 +279,18 @@ Blazor.defaultReconnectionHandler._reconnectionDisplay =
 ```
 
 Yer tutucu, `{ELEMENT ID}` görüntülenecek HTML ÖĞESININ kimliğidir.
+
+::: moniker range=">= aspnetcore-5.0"
+
+`transition-delay`Kalıcı öğe için UYGULAMANıN CSS () içindeki özelliğini ayarlayarak yeniden bağlantı görüntülenmeden önce gecikmeyi özelleştirin `wwwroot/css/site.css` . Aşağıdaki örnek, 500 MS (varsayılan) olan geçiş gecikmesini 1.000 MS (1 saniye) olarak ayarlar:
+
+```css
+#components-reconnect-modal {
+    transition: visibility 0s linear 1000ms;
+}
+```
+
+::: moniker-end
 
 ## <a name="influence-html-head-tag-elements"></a>HTML `<head>` etiketi öğelerini etkiler
 

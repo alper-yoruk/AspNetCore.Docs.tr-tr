@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/routing
-ms.openlocfilehash: 83ddb49f60058ecc744163faa2f5c454abc7b42d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 08cd6396cca78488827dfa7c2cca62a35c500dbd
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630321"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009706"
 ---
 # <a name="routing-to-controller-actions-in-aspnet-core"></a>ASP.NET Core denetleyici eylemlerine yönlendirme
 
@@ -152,7 +152,7 @@ Varsayılan yol ile geleneksel yönlendirmeyi kullanmak, her eylem için yeni bi
 
 * Temel ve açıklayıcı bir yönlendirme düzenini destekler.
 * , UI tabanlı uygulamalar için kullanışlı bir başlangıç noktasıdır.
-* Birçok Web UI uygulaması için tek yol şablonu gereklidir. Daha büyük Web Kullanıcı arabirimi uygulamaları için, sık sık gerekli olan [alanlarda](#areas) başka bir yol kullanın.
+* Birçok Web UI uygulaması için tek yol şablonu gereklidir. Daha büyük Web UI uygulamaları için, [alan](#areas) kullanan başka bir yol da sıkça gereklidir.
 
 <xref:Microsoft.AspNetCore.Builder.ControllerEndpointRouteBuilderExtensions.MapControllerRoute%2A> ve <xref:Microsoft.AspNetCore.Builder.MvcAreaRouteBuilderExtensions.MapAreaRoute%2A> :
 
@@ -219,7 +219,7 @@ Yönlendirme ile iki uç nokta eşleşmesi durumunda, yönlendirme aşağıdakil
 * En iyi aday ' ı seçin.
 * Bir özel durum oluşturur.
 
-Örnek:
+Örneğin:
 
 [!code-csharp[](routing/samples/3.x/main/Controllers/ProductsController.cs?name=snippet9)]
 
@@ -1012,7 +1012,7 @@ Rota koleksiyonundaki yollar sıralanır ve eklendikleri sırada işlenir. Bu ne
 
 ### <a name="disambiguating-actions"></a>Kesinleştirme eylemleri
 
-İki eylem yönlendirme aracılığıyla eşleşiyorsa, MVC ' en iyi ' adayı seçmek için bir özel durum oluşturması veya bir özel durum oluşturmak için, MVC 'nin belirsizliğini Örnek:
+İki eylem yönlendirme aracılığıyla eşleşiyorsa, MVC ' en iyi ' adayı seçmek için bir özel durum oluşturması veya bir özel durum oluşturmak için, MVC 'nin belirsizliğini Örneğin:
 
 ```csharp
 public class ProductsController : Controller

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/troubleshoot-azure-iis
-ms.openlocfilehash: 117c777dc9ae1b8c6448f097132454b714a1b5dc
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: bc968489a35405c1be0a4ac2e52e6dff4c3af050
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632167"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009745"
 ---
 # <a name="troubleshoot-aspnet-core-on-azure-app-service-and-iis"></a>Azure App Service ve IIS 'de ASP.NET Core sorunlarını giderme
 
@@ -167,7 +167,7 @@ Bu hatayı gidermek için [.NET Core barındırma paketi](xref:host-and-deploy/i
 
 ### <a name="50037-ancm-failed-to-start-within-startup-time-limit"></a>500,37 ANCM başlangıç zamanı sınırı Içinde başlatılamadı
 
-ANCM, kısımları başlangıç süresi sınırı içinde başlatılamadı. Varsayılan olarak, zaman aşımı 120 saniyedir.
+ANCM, belirtilen başlatma süresi sınırı içinde başlatılamadı. Varsayılan olarak, zaman aşımı 120 saniyedir.
 
 Aynı makinede çok sayıda uygulama başlatılırken bu hata oluşabilir. Başlangıç sırasında sunucuda CPU/bellek kullanımı artışlarını denetleyin. Birden çok uygulamanın başlatma işlemini şaşırtmayı yapmanız gerekebilir.
 
@@ -795,7 +795,7 @@ ASP.NET Core Module stdout günlüğü genellikle uygulama olay günlüğünde b
 1. **StdoutLogEnabled** olarak ayarlayın `true` ve **stdoutLogFile** yolunu şu şekilde değiştirin: `\\?\%home%\LogFiles\stdout` .
 1. Güncelleştirilmiş *web.config* dosyasını kaydetmek için **Kaydet** ' i seçin.
 1. Uygulamaya bir istek oluşturun.
-1. Azure portala dönün. **GELIŞTIRME araçları** alanında **Gelişmiş Araçlar** dikey penceresini seçin. **Git &rarr; ** düğmesini seçin. Kudu konsolu yeni bir tarayıcı sekmesi veya penceresinde açılır.
+1. Azure portalına dönün. **GELIŞTIRME araçları** alanında **Gelişmiş Araçlar** dikey penceresini seçin. **Git &rarr; ** düğmesini seçin. Kudu konsolu yeni bir tarayıcı sekmesi veya penceresinde açılır.
 1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd**' yi seçin.
 1. **LogFiles** klasörünü seçin.
 1. **Değiştirilen** sütunu inceleyin ve son değiştirilme tarihiyle stdout günlüğünü düzenlemek için kalem simgesini seçin.
@@ -1273,7 +1273,7 @@ ASP.NET Core Module stdout günlüğü genellikle uygulama olay günlüğünde b
 1. **StdoutLogEnabled** olarak ayarlayın `true` ve **stdoutLogFile** yolunu şu şekilde değiştirin: `\\?\%home%\LogFiles\stdout` .
 1. Güncelleştirilmiş *web.config* dosyasını kaydetmek için **Kaydet** ' i seçin.
 1. Uygulamaya bir istek oluşturun.
-1. Azure portala dönün. **GELIŞTIRME araçları** alanında **Gelişmiş Araçlar** dikey penceresini seçin. **Git &rarr; ** düğmesini seçin. Kudu konsolu yeni bir tarayıcı sekmesi veya penceresinde açılır.
+1. Azure portalına dönün. **GELIŞTIRME araçları** alanında **Gelişmiş Araçlar** dikey penceresini seçin. **Git &rarr; ** düğmesini seçin. Kudu konsolu yeni bir tarayıcı sekmesi veya penceresinde açılır.
 1. Sayfanın üst kısmındaki gezinti çubuğunu kullanarak **hata ayıklama konsolu 'nu** açın ve **cmd**' yi seçin.
 1. **LogFiles** klasörünü seçin.
 1. **Değiştirilen** sütunu inceleyin ve son değiştirilme tarihiyle stdout günlüğünü düzenlemek için kalem simgesini seçin.

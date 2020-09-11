@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/index
-ms.openlocfilehash: 26e8239634c3edb99c7606ab2e250c69af4e746f
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: be1584e72fc1504ac9f8ca10a6b084c95a579b5b
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865292"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009628"
 ---
 # <a name="create-and-use-aspnet-core-no-locrazor-components"></a>ASP.NET Core bileşenleri oluşturma ve kullanma Razor
 
@@ -84,7 +84,7 @@ Bileşen ilk olarak işlendikten sonra, bileşen işleme ağacını olaylara yan
 
 Bileşenler, normal C# sınıflarıdır ve bir proje içinde herhangi bir yere yerleştirilebilir. Web sayfalarını üreten bileşenler genellikle `Pages` klasöründe bulunur. Sayfa olmayan bileşenler sıklıkla `Shared` klasöre veya projeye eklenen özel bir klasöre yerleştirilir.
 
-### <a name="namespaces"></a>Ad alanları
+### <a name="namespaces"></a>Ad Alanları
 
 Genellikle, bir bileşenin ad alanı uygulamanın kök ad alanından ve uygulamanın içindeki konum (klasör) ile türetilir. Uygulamanın kök ad alanı ise `BlazorSample` ve `Counter` bileşen `Pages` klasöründe bulunuyorsa:
 
@@ -266,7 +266,7 @@ Bileşenler, bileşen sınıfında özniteliği ile ortak özellikler kullanıla
 [!code-razor[](index/samples_snapshot/ParentComponent.razor?highlight=5-6)]
 
 > [!WARNING]
-> Bileşenin içeriği bir ile işlendiğinde kendi *bileşen parametrelerine* yazan bileşenler oluşturmayın <xref:Microsoft.AspNetCore.Components.RenderFragment> , bunun yerine özel bir alan kullanın. Daha fazla bilgi için bkz. [üzerine yazılan parametreler `RenderFragment` ](#overwritten-parameters-with-renderfragment) bölümü.
+> Kendi *bileşen parametrelerine*yazan bileşenler oluşturmayın, bunun yerine özel bir alan kullanın. Daha fazla bilgi için, [üzerine yazılan parametreler](#overwritten-parameters) bölümüne bakın.
 
 ## <a name="child-content"></a>Alt içerik
 
@@ -625,14 +625,9 @@ Genellikle, için aşağıdaki değer türlerinden birini sağlamak mantıklı o
 
 Bu değerlerin çakışmayın için kullanıldığından emin olun [`@key`][5] . Aynı üst öğe içinde çakışan değerler algılanırsa, Blazor eski öğeleri veya bileşenleri yeni öğe veya bileşenlere kesin bir şekilde eşlemediğinden bir özel durum oluşturur. Yalnızca nesne örnekleri veya birincil anahtar değerleri gibi farklı değerleri kullanın.
 
-## <a name="overwritten-parameters-with-renderfragment"></a>İle parametrelerin üzerine yazıldı `RenderFragment`
+## <a name="overwritten-parameters"></a>Üzerine yazılan parametreler
 
-Parametreleri aşağıdaki koşullarda üzerine yazılır:
-
-* Bir alt bileşenin içeriği ile işlenir <xref:Microsoft.AspNetCore.Components.RenderFragment> .
-* <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> üst bileşende çağrılır.
-
-Üst bileşen <xref:Microsoft.AspNetCore.Components.ComponentBase.StateHasChanged%2A> çağrıldığında ve alt bileşene yeni parametre değerleri sağlandığında parametreler sıfırlanır.
+Yeni parametre değerleri, genellikle, üst bileşen yeniden oluşturulduğunda mevcut olanların üzerine yazılır.
 
 Aşağıdaki bileşeni göz önünde bulundurun `Expander` :
 

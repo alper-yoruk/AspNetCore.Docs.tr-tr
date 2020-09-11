@@ -18,16 +18,16 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: fc257015a9ee972da90b0f206a60b07bd6cc1f97
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: bba965e14058663c3ed9c0f15afc6a8d78997aea
+ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631114"
+ms.lasthandoff: 09/11/2020
+ms.locfileid: "90009758"
 ---
 # <a name="aspnet-core-no-locsignalr-hosting-and-scaling"></a>SignalRBarındırma ve ölçeklendirmeyi ASP.NET Core
 
-, [Andrew Stanton-nuri](https://twitter.com/anurse), [Brady Gaster](https://twitter.com/bradygaster)ve [Tom Dykstra](https://github.com/tdykstra),
+, [Andrew Stanton-nuri](https://twitter.com/anurse), [Brady Gaster](https://twitter.com/bradygaster)ve [Tom Dykstra](https://github.com/tdykstra)
 
 Bu makalede, ASP.NET Core kullanan yüksek trafik uygulamalarına yönelik barındırma ve ölçeklendirme konuları açıklanmaktadır SignalR .
 
@@ -51,7 +51,7 @@ Kalıcı bağlantılar, her bağlantıyı izlemek için ek bellek de tüketir.
 
 İle bağlantıyla ilgili kaynakların ağır kullanımı, SignalR aynı sunucuda barındırılan diğer Web uygulamalarını etkileyebilir. SignalR, Ve en son KULLANILABILIR TCP bağlantılarını tutuyorsa, aynı sunucudaki diğer Web uygulamalarına da daha fazla bağlantı bulunmaz.
 
-Sunucuda bağlantı biterse rastgele yuva hataları ve bağlantı sıfırlama hataları görürsünüz. Örnek:
+Sunucuda bağlantı biterse rastgele yuva hataları ve bağlantı sıfırlama hataları görürsünüz. Örneğin:
 
 ```
 An attempt was made to access a socket in a way forbidden by its access permissions...
@@ -82,7 +82,7 @@ Sonuç olarak, hizmetin tüm istemci bağlantılarını yönetmesi, her sunucunu
 Bu genişleme yaklaşımına yönelik bu yaklaşım, Redsıs geri düzlemi 'nin diğer avantajlarından biridir:
 
 * [İstemci benzeşimi](/iis/extensions/configuring-application-request-routing-arr/http-load-balancing-using-application-request-routing#step-3---configure-client-affinity)olarak da bilinen yapışkan oturumlar gerekli değildir, çünkü Istemciler bağlandıklarında Azure hizmetine anında yönlendirilir SignalR .
-* SignalRAzure SignalR hizmeti, herhangi bir sayıda bağlantıyı işleyecek şekilde otomatik olarak ölçeklendirilirken, gönderilen ileti sayısına göre bir uygulamanın ölçeği ölçeklenebilir. Örneğin, binlerce istemci olabilir, ancak saniye başına yalnızca birkaç ileti gönderiliyorsa, SignalR uygulamanın yalnızca bağlantıları işlemek için birden çok sunucuya ölçeklendirilmesi gerekmez.
+* SignalRAzure SignalR hizmeti herhangi bir sayıda bağlantıyı işleyecek şekilde ölçeklenirken, bir uygulama gönderilen ileti sayısına göre ölçeklendirebilir. Örneğin, binlerce istemci olabilir, ancak saniye başına yalnızca birkaç ileti gönderiliyorsa, SignalR uygulamanın yalnızca bağlantıları işlemek için birden çok sunucuya ölçeklendirilmesi gerekmez.
 * Bir SignalR uygulama, olmadan bir Web uygulamasından çok daha fazla bağlantı kaynağı kullanmaz SignalR .
 
 Bu nedenlerden dolayı, SignalR SignalR App Service, VM 'ler ve kapsayıcılar dahil olmak üzere Azure 'da barındırılan tüm ASP.NET Core uygulamaları için Azure hizmetini öneririz.
