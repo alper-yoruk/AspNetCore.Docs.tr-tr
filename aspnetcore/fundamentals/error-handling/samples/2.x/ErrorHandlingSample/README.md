@@ -1,3 +1,0 @@
-# <a name="error-handling-sample-application"></a><span data-ttu-id="e99c2-101">Hata İşleme Örnek Uygulaması</span><span class="sxs-lookup"><span data-stu-id="e99c2-101">Error Handling Sample Application</span></span>
-
-<span data-ttu-id="e99c2-102">Bu örnek [uygulama, ASP.NET Core'daki Tanıt hatalarında](https://docs.microsoft.com/aspnet/core/fundamentals/error-handling)açıklanan senaryoları gösterir.</span><span class="sxs-lookup"><span data-stu-id="e99c2-102">This sample app demonstrates the scenarios described in [Handle errors in ASP.NET Core](https://docs.microsoft.com/aspnet/core/fundamentals/error-handling).</span></span>
