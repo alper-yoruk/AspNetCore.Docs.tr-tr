@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/dotnet-watch
-ms.openlocfilehash: cc152c2ca553b00619ddbf829f6044867c53bb98
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 3569e9440b8e431ec0e5357e548af2e3783481ac
+ms.sourcegitcommit: 422e02bad384775bfe19a90910737340ad106c5b
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635144"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90083459"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>Dosya İzleyicisi kullanarak ASP.NET Core uygulamalar geliştirme
 
@@ -85,11 +85,25 @@ Tüm [.NET Core CLI komutları](/dotnet/core/tools#cli-commands) ile çalıştı
 | Komut | İzle komutu |
 | ---- | ----- |
 | dotnet run | DotNet izleme çalıştırması |
-| DotNet Run-f netcoreapp 2.0 | DotNet Watch çalıştırması-f netcoreapp 2.0 |
-| DotNet Run-f netcoreapp 2.0----arg1 | DotNet Watch-f netcoreapp 2.0----arg1 |
+| DotNet Run-f netcoreapp 3.1 | DotNet Watch çalıştırması-f netcoreapp 3.1 |
+| DotNet Run-f netcoreapp 3.1----arg1 | DotNet Watch-f netcoreapp 3.1----arg1 |
 | dotnet test | DotNet izleme testi |
 
 `dotnet watch run` *WebApp* klasöründe çalıştırın. Konsol çıktısı başladığını gösterir `watch` .
+
+::: moniker range=">= aspnetcore-5.0"
+`dotnet watch run`Bir Web uygulamasında çalıştırıldığında UYGULAMANıN URL 'sine, bir kez daha sonra giden bir tarayıcı başlatılır. `dotnet watch` Bunu, uygulamanın konsol çıkışını okuyarak ve tarafından görüntülenmeye yönelik bir ileti için bekleyen yapar <xref:Microsoft.AspNetCore.WebHost> .
+
+`dotnet watch` izlenen dosyalardaki değişiklikleri algıladığında tarayıcıyı yeniler. Bunu yapmak için, izle komutu, uygulama tarafından oluşturulan HTML yanıtlarını değiştiren bir ara yazılımı uygulamaya yerleştirir. Ara yazılım, `dotnet watch` tarayıcıya, tarayıcıyı yenilemeye izin veren bir JavaScript betik bloğu ekler. Şu anda, *. html* ve *. css* dosyaları gibi statik içerik de dahil olmak üzere tüm izlenen dosyalardaki değişiklikler uygulamanın yeniden oluşturulmasına neden olur.
+
+`dotnet watch`:
+
+* Yalnızca varsayılan olarak derlemeleri etkileyen dosyaları izler.
+* Diğer izlenen dosyalar (yapılandırma aracılığıyla), hala derleme gerçekleşirken sonuç olarak oluşur.
+
+Yapılandırma hakkında daha fazla bilgi için bu belgede [DotNet-Watch yapılandırması](#dotnet-watch-configuration) bölümüne bakın
+
+::: moniker-end
 
 > [!NOTE]
 > `dotnet watch --project <PROJECT>`İzlenecek projeyi belirtmek için kullanabilirsiniz. Örneğin, `dotnet watch --project WebApp run` örnek uygulamanın kökünden çalıştırılması Ayrıca *WebApp* projesini de çalıştırır ve bu uygulamayı izleyebilir.
@@ -193,6 +207,17 @@ dotnet watch msbuild /t:Test
 ```
 
 VSTest, her iki test projesinde herhangi bir dosya değiştiğinde yürütülür.
+
+## <a name="dotnet-watch-configuration"></a>DotNet-yapılandırmayı izle
+
+Bazı yapılandırma seçenekleri, `dotnet watch` ortam değişkenleri aracılığıyla geçirilebilir. Kullanılabilir değişkenler şunlardır:
+
+| Ayar  | Açıklama |
+| ------------- | ------------- |
+| `DOTNET_USE_POLLING_FILE_WATCHER`                | "1" veya "true" olarak ayarlandıysa `dotnet watch` CoreFx yerine bir yoklama Dosya İzleyicisi kullanır `FileSystemWatcher` . Ağ paylaşımlarında veya Docker takılmış birimlerde dosya izlerken kullanılır.                       |
+| `DOTNET_WATCH_SUPPRESS_MSBUILD_INCREMENTALISM`   | Varsayılan olarak, `dotnet watch` her dosya değişikliğine geri yükleme çalıştırma veya izlenen dosyalar kümesini yeniden değerlendirme gibi belirli işlemleri önleyerek derlemeyi iyileştirir. "1" veya "true" olarak ayarlanırsa, bu iyileştirmeler devre dışı bırakılır. |
+| `DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER`   | `dotnet watch run``launchBrowser` *launchSettings.jsüzerinde*yapılandırılmış Web uygulamaları için tarayıcıları başlatmaya çalışır. "1" veya "true" olarak ayarlanırsa, bu davranış bastırılır. |
+| `DOTNET_WATCH_SUPPRESS_BROWSER_REFRESH`   | `dotnet watch run` dosya değişikliklerini algıladığında tarayıcıları yenilemeyi dener. "1" veya "true" olarak ayarlanırsa, bu davranış bastırılır. Ayarlanırsa, bu davranış da bastırılır `DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER` . |
 
 ## <a name="dotnet-watch-in-github"></a>`dotnet-watch` GitHub 'da
 
