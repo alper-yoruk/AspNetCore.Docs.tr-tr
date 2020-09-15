@@ -16,13 +16,14 @@ no-loc:
 - Let's Encrypt
 - Razor
 - SignalR
+- Models
 uid: tutorials/first-web-api
-ms.openlocfilehash: 3d83141b8b638a369b08b0fadafccd96c0b48214
-ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
+ms.openlocfilehash: ebce9f2f4992d83c6b28edb5c771cdfc8a7a0b6a
+ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88876795"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90080387"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Öğretici: ASP.NET Core bir Web API 'SI oluşturma
 
@@ -49,11 +50,11 @@ Bu öğretici aşağıdaki API 'YI oluşturur:
 
 |API | Açıklama | İstek gövdesi | Yanıt gövdesi |
 |--- | ---- | ---- | ---- |
-|`GET /api/TodoItems` | Tüm yapılacaklar öğelerini Al | Hiçbiri | Yapılacaklar öğeleri dizisi|
-|`GET /api/TodoItems/{id}` | KIMLIĞE göre öğe al | Hiçbiri | Yapılacaklar öğesi|
+|`GET /api/TodoItems` | Tüm yapılacaklar öğelerini Al | Yok | Yapılacaklar öğeleri dizisi|
+|`GET /api/TodoItems/{id}` | KIMLIĞE göre öğe al | Yok | Yapılacaklar öğesi|
 |`POST /api/TodoItems` | Yeni öğe Ekle | Yapılacaklar öğesi | Yapılacaklar öğesi |
-|`PUT /api/TodoItems/{id}` | Mevcut bir öğeyi güncelleştir &nbsp; | Yapılacaklar öğesi | Hiçbiri |
-|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | Öğe &nbsp; silme &nbsp; | Hiçbiri | Hiçbiri|
+|`PUT /api/TodoItems/{id}` | Mevcut bir öğeyi güncelleştir &nbsp; | Yapılacaklar öğesi | Yok |
+|`DELETE /api/TodoItems/{id}` &nbsp; &nbsp; | Öğe &nbsp; silme &nbsp; | Yok | Yok|
 
 Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
@@ -197,25 +198,25 @@ Aşağıdakine benzer bir JSON döndürülür:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **Çözüm Gezgini**, projeye sağ tıklayın. **Add**  >  **Yeni klasör**Ekle ' yi seçin. Klasör *modellerini*adlandırın.
+* **Çözüm Gezgini**, projeye sağ tıklayın. **Add**  >  **Yeni klasör**Ekle ' yi seçin. Klasörü adlandırın *Models* .
 
-* *Modeller* klasörüne sağ tıklayın ve sınıf **Ekle**' yi seçin  >  **Class**. Sınıfı *TodoItem* olarak adlandırın ve **Ekle**' yi seçin.
+* Klasöre sağ tıklayın *Models* ve sınıf **Ekle**' yi seçin  >  **Class**. Sınıfı *TodoItem* olarak adlandırın ve **Ekle**' yi seçin.
 
 * Şablon kodunu şu kodla değiştirin:
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* *Modeller*adlı bir klasör ekleyin.
+* Adlı bir klasör ekleyin *Models* .
 
-* `TodoItem` *Modeller* klasörüne aşağıdaki kodla bir sınıf ekleyin:
+* `TodoItem` *Models* Klasöre aşağıdaki kodla bir sınıf ekleyin:
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-* Projeye sağ tıklayın. **Add**  >  **Yeni klasör**Ekle ' yi seçin. Klasör *modellerini*adlandırın.
+* Projeye sağ tıklayın. **Add**  >  **Yeni klasör**Ekle ' yi seçin. Klasörü adlandırın *Models* .
 
   ![Yeni klasör](first-web-api-mac/_static/folder.png)
 
-* *Modeller* klasörüne sağ tıklayın ve **Add** > **yeni dosya** Ekle > **genel** > **boş sınıfı**' nı seçin.
+* Klasöre sağ tıklayın *Models* ve **Add** > **yeni dosya** Ekle > **genel** > **boş sınıfı**' nı seçin.
 
 * Sınıfı *TodoItem*olarak adlandırın ve ardından **Yeni**' ye tıklayın.
 
@@ -227,7 +228,7 @@ Aşağıdakine benzer bir JSON döndürülür:
 
 `Id`Özelliği, ilişkisel bir veritabanındaki benzersiz anahtar olarak işlev görür.
 
-Model sınıfları projede herhangi bir yere gidebilir, ancak *modeller* klasörü kural tarafından kullanılır.
+Model sınıfları projede herhangi bir yere gidebilir, ancak *Models* klasör kural tarafından kullanılır.
 
 ## <a name="add-a-database-context"></a>Veritabanı bağlamı ekleme
 
@@ -247,11 +248,11 @@ Model sınıfları projede herhangi bir yere gidebilir, ancak *modeller* klasör
 
 ## <a name="add-the-todocontext-database-context"></a>TodoContext veritabanı bağlamını ekleme
 
-* *Modeller* klasörüne sağ tıklayın ve sınıf **Ekle**' yi seçin  >  **Class**. Sınıfı *TodoContext* olarak adlandırın ve **Ekle**' ye tıklayın.
+* Klasöre sağ tıklayın *Models* ve sınıf **Ekle**' yi seçin  >  **Class**. Sınıfı *TodoContext* olarak adlandırın ve **Ekle**' ye tıklayın.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
-* `TodoContext` *Modeller* klasörüne bir sınıf ekleyin.
+* Klasöre bir `TodoContext` sınıf ekleyin *Models* .
 
 ---
 
@@ -282,8 +283,8 @@ Yukarıdaki kod:
 * **Entity Framework kullanarak ve eylemler Içeren API denetleyicisi**' ni seçin ve ardından **Ekle**' yi seçin.
 * **API denetleyiciyi eylemler Ile Ekle ' de Entity Framework** iletişim kutusunu kullanarak:
 
-  * **Model sınıfında** **TodoItem (TodoApi. modeller)** öğesini seçin.
-  * **Veri bağlamı sınıfında** **TodoContext (TodoApi. modeller)** öğesini seçin.
+  * **Model sınıfında** **TodoItem (TodoApi. Models )** öğesini seçin.
+  * **Veri bağlamı sınıfında** **TodoContext (TodoApi. Models )** öğesini seçin.
   * **Ekle**’yi seçin.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
@@ -387,7 +388,7 @@ Bu yöntemler iki al uç noktası uygular:
 * `GET /api/TodoItems`
 * `GET /api/TodoItems/{id}`
 
-Tarayıcıdan veya Postman 'dan iki uç noktayı çağırarak uygulamayı test edin. Örneğin:
+Tarayıcıdan veya Postman 'dan iki uç noktayı çağırarak uygulamayı test edin. Örnek:
 
 * `https://localhost:5001/api/TodoItems`
 * `https://localhost:5001/api/TodoItems/1`
@@ -539,11 +540,11 @@ Bu öğretici aşağıdaki API 'YI oluşturur:
 
 |API | Açıklama | İstek gövdesi | Yanıt gövdesi |
 |--- | ---- | ---- | ---- |
-|/Api/TodoItems al | Tüm yapılacaklar öğelerini Al | Hiçbiri | Yapılacaklar öğeleri dizisi|
-|/Api/TodoItems/{id} al | KIMLIĞE göre öğe al | Hiçbiri | Yapılacaklar öğesi|
+|/Api/TodoItems al | Tüm yapılacaklar öğelerini Al | Yok | Yapılacaklar öğeleri dizisi|
+|/Api/TodoItems/{id} al | KIMLIĞE göre öğe al | Yok | Yapılacaklar öğesi|
 |POST/api/TodoItems | Yeni öğe Ekle | Yapılacaklar öğesi | Yapılacaklar öğesi |
-|/Api/TodoItems/{id} koy | Mevcut bir öğeyi güncelleştir &nbsp; | Yapılacaklar öğesi | Hiçbiri |
-|/Api/TodoItems/{id} &nbsp; Sil &nbsp; | Öğe &nbsp; silme &nbsp; | Hiçbiri | Hiçbiri|
+|/Api/TodoItems/{id} koy | Mevcut bir öğeyi güncelleştir &nbsp; | Yapılacaklar öğesi | Yok |
+|/Api/TodoItems/{id} &nbsp; Sil &nbsp; | Öğe &nbsp; silme &nbsp; | Yok | Yok|
 
 Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
@@ -639,25 +640,25 @@ Aşağıdaki JSON döndürülür:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **Çözüm Gezgini**, projeye sağ tıklayın. **Add**  >  **Yeni klasör**Ekle ' yi seçin. Klasör *modellerini*adlandırın.
+* **Çözüm Gezgini**, projeye sağ tıklayın. **Add**  >  **Yeni klasör**Ekle ' yi seçin. Klasörü adlandırın *Models* .
 
-* *Modeller* klasörüne sağ tıklayın ve sınıf **Ekle**' yi seçin  >  **Class**. Sınıfı *TodoItem* olarak adlandırın ve **Ekle**' yi seçin.
+* Klasöre sağ tıklayın *Models* ve sınıf **Ekle**' yi seçin  >  **Class**. Sınıfı *TodoItem* olarak adlandırın ve **Ekle**' yi seçin.
 
 * Şablon kodunu şu kodla değiştirin:
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* *Modeller*adlı bir klasör ekleyin.
+* Adlı bir klasör ekleyin *Models* .
 
-* `TodoItem` *Modeller* klasörüne aşağıdaki kodla bir sınıf ekleyin:
+* `TodoItem` *Models* Klasöre aşağıdaki kodla bir sınıf ekleyin:
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-* Projeye sağ tıklayın. **Add**  >  **Yeni klasör**Ekle ' yi seçin. Klasör *modellerini*adlandırın.
+* Projeye sağ tıklayın. **Add**  >  **Yeni klasör**Ekle ' yi seçin. Klasörü adlandırın *Models* .
 
   ![Yeni klasör](first-web-api-mac/_static/folder.png)
 
-* *Modeller* klasörüne sağ tıklayın ve **Add** > **yeni dosya** Ekle > **genel** > **boş sınıfı**' nı seçin.
+* Klasöre sağ tıklayın *Models* ve **Add** > **yeni dosya** Ekle > **genel** > **boş sınıfı**' nı seçin.
 
 * Sınıfı *TodoItem*olarak adlandırın ve ardından **Yeni**' ye tıklayın.
 
@@ -669,7 +670,7 @@ Aşağıdaki JSON döndürülür:
 
 `Id`Özelliği, ilişkisel bir veritabanındaki benzersiz anahtar olarak işlev görür.
 
-Model sınıfları projede herhangi bir yere gidebilir, ancak *modeller* klasörü kural tarafından kullanılır.
+Model sınıfları projede herhangi bir yere gidebilir, ancak *Models* klasör kural tarafından kullanılır.
 
 ## <a name="add-a-database-context"></a>Veritabanı bağlamı ekleme
 
@@ -677,11 +678,11 @@ Model sınıfları projede herhangi bir yere gidebilir, ancak *modeller* klasör
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* *Modeller* klasörüne sağ tıklayın ve sınıf **Ekle**' yi seçin  >  **Class**. Sınıfı *TodoContext* olarak adlandırın ve **Ekle**' ye tıklayın.
+* Klasöre sağ tıklayın *Models* ve sınıf **Ekle**' yi seçin  >  **Class**. Sınıfı *TodoContext* olarak adlandırın ve **Ekle**' ye tıklayın.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
-* `TodoContext` *Modeller* klasörüne bir sınıf ekleyin.
+* Klasöre bir `TodoContext` sınıf ekleyin *Models* .
 
 ---
 
@@ -744,7 +745,7 @@ Bu yöntemler iki al uç noktası uygular:
 
 Hala çalışıyorsa uygulamayı durdurun. Ardından, en son değişiklikleri dahil etmek için yeniden çalıştırın.
 
-Bir tarayıcıdan iki uç noktayı çağırarak uygulamayı test edin. Örneğin:
+Bir tarayıcıdan iki uç noktayı çağırarak uygulamayı test edin. Örnek:
 
 * `https://localhost:<port>/api/todo`
 * `https://localhost:<port>/api/todo/1`

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/blazor-server-ef-core
-ms.openlocfilehash: a1b295b2ce42bc5ee06b8b9579ea2c70d480580a
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: e548465b3d79279802fbfacd66c69724d864d14d
+ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009667"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90080335"
 ---
 # <a name="aspnet-core-no-locblazor-server-with-entity-framework-core-efcore"></a>Blazor ServerEntity Framework Core ile ASP.NET Core (EFCore)
 
@@ -36,7 +36,7 @@ Blazor Server durum bilgisi olan bir uygulama çerçevesidir. Uygulama, sunucuyl
 > [!NOTE]
 > Bu makalede, uygulamalarda EF Core ele alınmaktadır Blazor Server . Blazor WebAssembly uygulamalar, çoğu doğrudan veritabanı bağlantısının önlediği bir WebAssembly korumalı alanında çalışır. İçinde EF Core çalıştırmak, Blazor WebAssembly Bu makalenin kapsamı dışındadır.
 
-## <a name="sample-app"></a>Örnek uygulama
+<h2 id="sample-app-5x">Örnek uygulama</h2>
 
 Örnek uygulama, EF Core kullanan uygulamalar için bir başvuru olarak oluşturulmuştur Blazor Server . Örnek uygulama sıralama ve filtreleme, silme, ekleme ve güncelleştirme işlemlerini içeren bir kılavuz içerir. Örnek, iyimser eşzamanlılık işlemek için EF Core kullanımını gösterir.
 
@@ -51,7 +51,7 @@ Izgara, ekleme ve görüntüleme bileşenleri, her işlem için bir bağlamın o
 > [!NOTE]
 > Bu konudaki bazı kod örnekleri, gösterilmeyen ad alanlarını ve Hizmetleri gerektirir. Gerekli ve örnek yönergeleri dahil olmak üzere tam çalışma kodunu incelemek için [`@using`](xref:mvc/views/razor#using) [`@inject`](xref:mvc/views/razor#inject) Razor bkz. [örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/5.x/BlazorServerEFCoreSample).
 
-## <a name="database-access"></a>Veritabanı erişimi
+<h2 id="database-access-5x">Veritabanı erişimi</h2>
 
 EF Core <xref:Microsoft.EntityFrameworkCore.DbContext> , [veritabanı erişimini yapılandırma](/ef/core/miscellaneous/configuring-dbcontext) ve bir [*iş birimi*](https://martinfowler.com/eaaCatalog/unitOfWork.html)görevi gören bir yöntem olarak bir kullanır. EF Core <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> , bağlamı varsayılan olarak *kapsamlı* bir hizmet olarak kaydeden ASP.NET Core uygulamalar için uzantı sağlar. Blazor ServerUygulamalarda, örnek Kullanıcı devresi içindeki bileşenler arasında paylaşıldığından kapsamlı hizmet kayıtları sorunlu olabilir. <xref:Microsoft.EntityFrameworkCore.DbContext> iş parçacığı güvenli değildir ve eşzamanlı kullanım için tasarlanmamıştır. Mevcut yaşam süreleri şu nedenlerle uygun değildir:
 
@@ -91,9 +91,9 @@ Aşağıdaki öneriler, uygulamalarda EF Core kullanmak için tutarlı bir yakla
 
   `Loading = true;`Blok içindeki satırdan sonra işlemleri yerleştir `try` .
 
-* EF Core [değişiklik izleme](/ef/core/querying/tracking) veya [eşzamanlılık denetiminden](/ef/core/saving/concurrency)faydalanan uzun süreli işlemler için, [bağlamı bileşenin kullanım ömrüne göre kapsam](#scope-to-the-component-lifetime).
+* EF Core [değişiklik izleme](/ef/core/querying/tracking) veya [eşzamanlılık denetiminden](/ef/core/saving/concurrency)faydalanan uzun süreli işlemler için, [bağlamı bileşenin kullanım ömrüne göre kapsam](#scope-to-the-component-lifetime-5x).
 
-### <a name="new-dbcontext-instances"></a>Yeni DbContext örnekleri
+<h3 id="new-dbcontext-instances-5x">Yeni DbContext örnekleri</h3>
 
 Yeni bir örnek oluşturmanın en hızlı yolu <xref:Microsoft.EntityFrameworkCore.DbContext> , `new` Yeni bir örnek oluşturmak için kullanmaktır. Ancak, ek bağımlılıkların çözümlenme gerektirebilecek birkaç senaryo vardır. Örneğin, [`DbContextOptions`](/ef/core/miscellaneous/configuring-dbcontext#configuring-dbcontextoptions) bağlamını yapılandırmak için kullanmak isteyebilirsiniz.
 
@@ -110,7 +110,7 @@ Fabrika bileşenlere eklenir ve yeni örnekler oluşturmak için kullanılır. �
 > [!NOTE]
 > `Wrapper` bileşene bir [bileşen başvurusu](xref:blazor/components/index#capture-references-to-components) `GridWrapper` . `Index` `Pages/Index.razor` [Örnek uygulamadaki](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/common/samples/5.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor)bileşene () bakın.
 
-### <a name="scope-to-the-component-lifetime"></a>Bileşen ömrü için kapsam
+<h3 id="scope-to-the-component-lifetime-5x">Bileşen ömrü için kapsam</h3>
 
 <xref:Microsoft.EntityFrameworkCore.DbContext>Bir bileşenin ömrü için var olan bir oluşturmak isteyebilirsiniz. Bu, bunu [çalışma birimi](https://martinfowler.com/eaaCatalog/unitOfWork.html) olarak kullanmanıza ve değişiklik izleme ve eşzamanlılık çözümleme gibi yerleşik özelliklerden yararlanmanıza olanak sağlar.
 Fabrika 'yi kullanarak bir bağlam oluşturabilir ve bileşenin kullanım ömrü boyunca izleyebilirsiniz. İlk olarak, <xref:System.IDisposable> fabrika 'yi aşağıda gösterildiği gibi uygulayın ve ekleme `Pages/EditContact.razor` :
@@ -137,7 +137,7 @@ Blazor Server durum bilgisi olan bir uygulama çerçevesidir. Uygulama, sunucuyl
 > [!NOTE]
 > Bu makalede, uygulamalarda EF Core ele alınmaktadır Blazor Server . Blazor WebAssembly uygulamalar, çoğu doğrudan veritabanı bağlantısının önlediği bir WebAssembly korumalı alanında çalışır. İçinde EF Core çalıştırmak, Blazor WebAssembly Bu makalenin kapsamı dışındadır.
 
-## <a name="sample-app"></a>Örnek uygulama
+<h2 id="sample-app-3x">Örnek uygulama</h2>
 
 Örnek uygulama, EF Core kullanan uygulamalar için bir başvuru olarak oluşturulmuştur Blazor Server . Örnek uygulama sıralama ve filtreleme, silme, ekleme ve güncelleştirme işlemlerini içeren bir kılavuz içerir. Örnek, iyimser eşzamanlılık işlemek için EF Core kullanımını gösterir.
 
@@ -152,15 +152,13 @@ Izgara, ekleme ve görüntüleme bileşenleri, her işlem için bir bağlamın o
 > [!NOTE]
 > Bu konudaki bazı kod örnekleri, gösterilmeyen ad alanlarını ve Hizmetleri gerektirir. Gerekli ve örnek yönergeleri dahil olmak üzere tam çalışma kodunu incelemek için [`@using`](xref:mvc/views/razor#using) [`@inject`](xref:mvc/views/razor#inject) Razor bkz. [örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/3.x/BlazorServerEFCoreSample).
 
-## <a name="database-access"></a>Veritabanı erişimi
+<h2 id="database-access-3x">Veritabanı erişimi</h2>
 
 EF Core <xref:Microsoft.EntityFrameworkCore.DbContext> , [veritabanı erişimini yapılandırma](/ef/core/miscellaneous/configuring-dbcontext) ve bir [*iş birimi*](https://martinfowler.com/eaaCatalog/unitOfWork.html)görevi gören bir yöntem olarak bir kullanır. EF Core <xref:Microsoft.Extensions.DependencyInjection.EntityFrameworkServiceCollectionExtensions.AddDbContext%2A> , bağlamı varsayılan olarak *kapsamlı* bir hizmet olarak kaydeden ASP.NET Core uygulamalar için uzantı sağlar. Blazor ServerUygulamalarda, örnek Kullanıcı devresi içindeki bileşenler arasında paylaşıldığından bu sorun sorunlu olabilir. <xref:Microsoft.EntityFrameworkCore.DbContext> iş parçacığı güvenli değildir ve eşzamanlı kullanım için tasarlanmamıştır. Mevcut yaşam süreleri şu nedenlerle uygun değildir:
 
 * **Tek tek** , uygulamanın tüm kullanıcıları genelinde durumu paylaşır ve uygunsuz eşzamanlı kullanım sağlar.
 * **Kapsamlı** (varsayılan), aynı kullanıcının bileşenleri arasında benzer bir sorun oluşturur.
 * İstek başına yeni bir örneğe **geçici** sonuçlar; Ancak, bileşenler uzun süreli olabileceğinden, bu, amacına kıyasla daha uzun ömürlü bir bağlam elde edebilir.
-
-## <a name="database-access"></a>Veritabanı erişimi
 
 Aşağıdaki öneriler, uygulamalarda EF Core kullanmak için tutarlı bir yaklaşım sağlamak üzere tasarlanmıştır Blazor Server .
 
@@ -194,9 +192,9 @@ Aşağıdaki öneriler, uygulamalarda EF Core kullanmak için tutarlı bir yakla
 
   `Loading = true;`Blok içindeki satırdan sonra işlemleri yerleştir `try` .
 
-* EF Core [değişiklik izleme](/ef/core/querying/tracking) veya [eşzamanlılık denetiminden](/ef/core/saving/concurrency)faydalanan uzun süreli işlemler için, [bağlamı bileşenin kullanım ömrüne göre kapsam](#scope-to-the-component-lifetime).
+* EF Core [değişiklik izleme](/ef/core/querying/tracking) veya [eşzamanlılık denetiminden](/ef/core/saving/concurrency)faydalanan uzun süreli işlemler için, [bağlamı bileşenin kullanım ömrüne göre kapsam](#scope-to-the-component-lifetime-3x).
 
-### <a name="create-new-dbcontext-instances"></a>Yeni DbContext örnekleri oluştur
+<h3 id="new-dbcontext-instances-3x">Yeni DbContext örnekleri</h3>
 
 Yeni bir örnek oluşturmanın en hızlı yolu <xref:Microsoft.EntityFrameworkCore.DbContext> , `new` Yeni bir örnek oluşturmak için kullanmaktır. Ancak, ek bağımlılıkların çözümlenme gerektirebilecek birkaç senaryo vardır. Örneğin, [`DbContextOptions`](/ef/core/miscellaneous/configuring-dbcontext#configuring-dbcontextoptions) bağlamını yapılandırmak için kullanmak isteyebilirsiniz.
 
@@ -217,7 +215,7 @@ Fabrika bileşenlere eklenir ve yeni örnekler oluşturmak için kullanılır. �
 > [!NOTE]
 > `Wrapper` bileşene bir [bileşen başvurusu](xref:blazor/components/index#capture-references-to-components) `GridWrapper` . `Index` `Pages/Index.razor` [Örnek uygulamadaki](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/common/samples/3.x/BlazorServerEFCoreSample/BlazorServerDbContextExample/Pages/Index.razor)bileşene () bakın.
 
-### <a name="scope-to-the-component-lifetime"></a>Bileşen ömrü için kapsam
+<h3 id="scope-to-the-component-lifetime-3x">Bileşen ömrü için kapsam</h3>
 
 <xref:Microsoft.EntityFrameworkCore.DbContext>Bir bileşenin ömrü için var olan bir oluşturmak isteyebilirsiniz. Bu, bunu [çalışma birimi](https://martinfowler.com/eaaCatalog/unitOfWork.html) olarak kullanmanıza ve değişiklik izleme ve eşzamanlılık çözümleme gibi yerleşik özelliklerden yararlanmanıza olanak sağlar.
 Fabrika 'yi kullanarak bir bağlam oluşturabilir ve bileşenin kullanım ömrü boyunca izleyebilirsiniz. İlk olarak, <xref:System.IDisposable> fabrika 'yi aşağıda gösterildiği gibi uygulayın ve ekleme `Pages/EditContact.razor` :

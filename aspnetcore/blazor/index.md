@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: abebd5fde514975b1dcb642a3d378e33c3836fa9
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: ace2285e3265e7bb2ec50c8afce2eb9c296fd524
+ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628072"
+ms.lasthandoff: 09/14/2020
+ms.locfileid: "90080348"
 ---
 # <a name="introduction-to-aspnet-core-no-locblazor"></a>ASP.NET Core giriş Blazor
 
@@ -131,9 +131,21 @@ Bir Blazor WebAssembly uygulama bir tarayıcıda oluşturulup çalıştırıldı
 
 Yayınlanan uygulamanın boyutu, *Yük boyutu*, uygulamanın useyeteneğinin önemli bir performans etkendir. Büyük bir uygulamanın tarayıcıya indirmesi oldukça uzun sürer ve bu da Kullanıcı deneyimini azaltabilecek. Blazor WebAssembly yükleme sürelerini azaltmak için yük boyutunu iyileştirir:
 
+::: moniker range=">= aspnetcore-5.0"
+
+* Kullanılmayan kod, [ara dil (IL) ayarlayıcısı](xref:blazor/host-and-deploy/configure-trimmer)tarafından yayımlandığında uygulamadan çıkarılır.
+* HTTP yanıtları sıkıştırılır.
+* .NET çalışma zamanı ve derlemeler tarayıcıda önbelleğe alınır.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 * Kullanılmayan kod, [ara dil (IL) bağlayıcı](xref:blazor/host-and-deploy/configure-linker)tarafından yayımlandığında uygulamadan çıkarılır.
 * HTTP yanıtları sıkıştırılır.
 * .NET çalışma zamanı ve derlemeler tarayıcıda önbelleğe alınır.
+
+::: moniker-end
 
 ## Blazor Server
 
