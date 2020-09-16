@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: 391a38e9af42b162fc74bac803e6aa3cf687e7d5
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e1af8f1de61edd934505a44e75ea07e0f09a67b5
+ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626070"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90592962"
 ---
 # <a name="secure-aspnet-core-no-locblazor-webassembly"></a>Güvenli ASP.NET Core Blazor WebAssembly
 
@@ -98,6 +98,13 @@ Aşağıdaki yaklaşımlardan birini kullanarak, [ `[Authorize]` özniteliği](x
 Yenileme belirteçleri uygulamalarda istemci tarafında güvenli olamaz Blazor WebAssembly . Bu nedenle, doğrudan kullanım için yenileme belirteçleri uygulamaya gönderilmez.
 
 Yenileme belirteçleri, Blazor WebAssembly üçüncü taraf API 'lerine erişmek Için barındırılan bir çözümde sunucu tarafı uygulama tarafından korunabilir ve kullanılabilir. Daha fazla bilgi için bkz. <xref:blazor/security/webassembly/additional-scenarios#authenticate-users-with-a-third-party-provider-and-call-protected-apis-on-the-host-server-and-the-third-party>.
+
+## <a name="establish-claims-for-users"></a>Kullanıcılar için talepler oluşturma
+
+Uygulamalar, genellikle bir sunucuya bir Web API çağrısını temel alan kullanıcılar için talepler gerektirir. Örneğin, Talepler genellikle bir uygulamada [Yetkilendirme kurmak](xref:blazor/security/index#authorization) için kullanılır. Bu senaryolarda, uygulama hizmete erişmek için bir erişim belirteci ister ve bu belirteci kullanarak talepler için Kullanıcı verilerini elde eder. Örnekler için aşağıdaki kaynaklara bakın:
+
+* [Ek senaryolar: kullanıcıyı özelleştirme](xref:blazor/security/webassembly/additional-scenarios#customize-the-user)
+* <xref:blazor/security/webassembly/aad-groups-roles>
 
 ## <a name="implementation-guidance"></a>Uygulama Kılavuzu
 

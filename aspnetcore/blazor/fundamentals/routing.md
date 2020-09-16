@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/routing
-ms.openlocfilehash: fe67ebfefb463ab698e5ff1bb7d9b527a28a596e
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: 09e7ca9c03103de116c566352496174e97fbc3ce
+ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009589"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90593014"
 ---
 # <a name="aspnet-core-no-locblazor-routing"></a>ASP.NET Core Blazor Yönlendirme
 
@@ -147,12 +147,12 @@ Aşağıdaki tabloda gösterilen yol kısıtlamaları mevcuttur. Sabit kültür 
 
 | Kısıtlaması | Örnek           | Örnek eşleşmeler                                                                  | Bilmesi<br>kültür<br>eşleştirme |
 | ---------- | ----------------- | -------------------------------------------------------------------------------- | :------------------------------: |
-| `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | Hayır                               |
+| `bool`     | `{active:bool}`   | `true`, `FALSE`                                                                  | No                               |
 | `datetime` | `{dob:datetime}`  | `2016-12-31`, `2016-12-31 7:32pm`                                                | Yes                              |
 | `decimal`  | `{price:decimal}` | `49.99`, `-1,000.01`                                                             | Yes                              |
 | `double`   | `{weight:double}` | `1.234`, `-1,001.01e8`                                                           | Yes                              |
 | `float`    | `{weight:float}`  | `1.234`, `-1,001.01e8`                                                           | Yes                              |
-| `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | Hayır                               |
+| `guid`     | `{id:guid}`       | `CD2C1638-1638-72D5-1638-DEADBEEF1638`, `{CD2C1638-1638-72D5-1638-DEADBEEF1638}` | No                               |
 | `int`      | `{id:int}`        | `123456789`, `-123456789`                                                        | Yes                              |
 | `long`     | `{ticks:long}`    | `123456789`, `-123456789`                                                        | Yes                              |
 
@@ -197,7 +197,7 @@ Daha fazla bilgi için bkz. <xref:fundamentals/routing>.
 
 ::: moniker range=">= aspnetcore-5.0"
 
-*Bu bölüm, .NET 5 Release Candidate 1 (RC1) veya sonraki sürümler için geçerlidir. Bu sürüm, orta Eylül 'de kullanıma sunulacaktır.*
+*Bu bölüm, .NET 5 Release Candidate 1 (RC1) veya sonraki sürümlerde ASP.NET Core için geçerlidir.*
 
 Birden çok klasör sınırlarındaki yolları yakalayan catch-all yol parametreleri, bileşenlerinde desteklenir. Catch-all yol parametresi şu olmalıdır:
 
@@ -222,7 +222,7 @@ Yakalanan yolun eğik çizgileri ve kesimleri kodu çözülür. Bir yol şablonu
 
 ::: moniker range="< aspnetcore-5.0"
 
-Catch-all Route parametreleri, .NET 5 Release Candidate 1 ' de (RC1) veya sonraki sürümlerde desteklenecektir ve bu da PARÇAAL-Eylül 'de yayımlanır. *
+Catch-all Route parametreleri .NET 5 Release Candidate 1 (RC1) veya sonraki sürümlerde ASP.NET Core desteklenir. *
 
 ::: moniker-end
 
@@ -287,7 +287,7 @@ Aşağıdaki HTML biçimlendirmesi işlenir:
 
 <xref:Microsoft.AspNetCore.Components.NavigationManager>C# kodunda URI ve gezinme ile çalışmak için kullanın. <xref:Microsoft.AspNetCore.Components.NavigationManager> Aşağıdaki tabloda gösterilen olay ve yöntemleri sağlar.
 
-| Üye | Açıklama |
+| Üye | Description |
 | ------ | ----------- |
 | <xref:Microsoft.AspNetCore.Components.NavigationManager.Uri> | Geçerli mutlak URI 'yi alır. |
 | <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> | Mutlak bir URI oluşturmak için göreli URI yollarına eklenebilir olan temel URI 'yi (sondaki eğik çizgiyle birlikte) alır. Genellikle, <xref:Microsoft.AspNetCore.Components.NavigationManager.BaseUri> `href` `<base>` `wwwroot/index.html` ( Blazor WebAssembly ) veya `Pages/_Host.cshtml` () içinde belge öğesindeki özniteliğine karşılık gelir Blazor Server . |

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-lazy-load-assemblies
-ms.openlocfilehash: f9b6766c2f46274e06cab18fd35b5e417e9bfa97
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: eb4aaa2f3d412cdf650ed2daf7c12166991d92a1
+ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009615"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90592910"
 ---
 # <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core 'de geç yük derlemeleri Blazor WebAssembly
 
@@ -42,20 +42,9 @@ Blazoryavaş yükleme özelliği, Kullanıcı belirli bir rotaya geçtiğinde ç
 
 ```xml
 <ItemGroup>
-  <BlazorWebAssemblyLazyLoad Include="GrantImaharaRobotControls" />
+  <BlazorWebAssemblyLazyLoad Include="GrantImaharaRobotControls.dll" />
 </ItemGroup>
 ```
-
-Yalnızca uygulama tarafından kullanılan derlemelerin geç yüklü olması olabilir. Bağlayıcı, yayımlanan çıktısından kullanılmayan derlemeleri şeritleri.
-
-> [!NOTE]
-> .NET 5 sürüm adayı 1 ' de (RC1) veya sonraki sürümlerde, bu, PARÇAAL-Eylül 'de yayımlanacak, derleme adı şu uzantıyı gerektirir `.dll` :
->
-> ```xml
-> <ItemGroup>
->  <BlazorWebAssemblyLazyLoad Include="GrantImaharaRobotControls.dll" />
-> </ItemGroup>
-> ```
 
 ## <a name="router-component"></a>`Router` bileşeni
 

@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/client
-ms.openlocfilehash: 28e4f372e301a673644bfa97763ebc930f2d0ad5
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 9406c2a34126f3e5cd1406a55c3585e7a28f3dd9
+ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634338"
+ms.lasthandoff: 09/15/2020
+ms.locfileid: "90593053"
 ---
 # <a name="call-grpc-services-with-the-net-client"></a>.NET istemcisiyle gRPC hizmetlerini çağırma
 
@@ -260,7 +260,18 @@ catch (RpcException ex)
 }
 ```
 
+## <a name="configure-deadline"></a>Son tarihi Yapılandır
+
+Bir çağrının ne kadar süreyle çalıştırılabildiğinden bir üst sınır sağladığından bir gRPC çağrı son tarihinin yapılandırılması önerilir. Yanlış çalışan hizmetlerin sürekli olarak çalıştırılmasını ve sunucu kaynaklarının tüketilmesi işlemini sonlandırır. Son tarihler, güvenilir uygulamalar oluşturmaya yönelik yararlı bir araçtır.
+
+`CallOptions.Deadline`Bir gRPC çağrısının son tarihini ayarlamak için yapılandırın:
+
+[!code-csharp[](~/grpc/deadlines-cancellation/deadline-client.cs?highlight=7,12)]
+
+Daha fazla bilgi için bkz. <xref:grpc/deadlines-cancellation#deadlines>.
+
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * <xref:grpc/clientfactory>
+* <xref:grpc/deadlines-cancellation>
 * <xref:grpc/basics>
