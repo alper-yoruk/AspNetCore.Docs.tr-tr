@@ -447,6 +447,8 @@
               uid: blazor/host-and-deploy/server
             - name: Bağlayıcıyı yapılandırma
               uid: blazor/host-and-deploy/configure-linker
+            - name: Kesiciyi yapılandırma
+              uid: blazor/host-and-deploy/configure-trimmer
         - name: Blazor Server ve EF Core
           uid: blazor/blazor-server-ef-core
         - name: Gelişmiş senaryolar
