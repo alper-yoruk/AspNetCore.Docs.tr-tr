@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/client-features
-ms.openlocfilehash: df0084411134167df31506a01362a0520821e577
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: bb8352b11e78582c4a32b67da7dcb701d020b0d9
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631764"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90721716"
 ---
 # <a name="aspnet-core-no-locsignalr-clients"></a>ASP.NET Core SignalR istemcileri
 
@@ -46,12 +46,12 @@ SignalR2,1 ve 2,2 .NET Core yayınlarına eşlenecek ve aynı yaşam süresine s
 
 Aşağıdaki tabloda, gerçek zamanlı destek sunan istemciler için özellikler ve destek gösterilmektedir. Her özellik için, bu özelliği destekleyen *En düşük* sürüm listelenir. Listelenen bir sürüm yoksa özellik desteklenmez.
 
-| Özellik | Sunucu | .NET istemcisi | JavaScript istemcisi | Java istemcisi |
+| Öne çıkan özelliği | Sunucu | .NET istemcisi | JavaScript istemcisi | Java istemcisi |
 | ---- | :-: | :-: | :-: | :-: |
 | Azure SignalR hizmeti desteği |2.1.0|1.0.0|1.0.0|1.0.0|
 | [Sunucudan istemciye akış](xref:signalr/streaming)          |2.1.0|1.0.0|1.0.0|1.0.0|
 | [İstemciden sunucuya akış](xref:signalr/streaming)          |3.0.0|3.0.0|3.0.0|3.0.0|
-| Otomatik yeniden bağlanma ([.net](/aspnet/core/signalr/dotnet-client?view=aspnetcore-3.0&tabs=visual-studio#handle-lost-connection), [JavaScript](/aspnet/core/signalr/javascript-client?view=aspnetcore-3.0#reconnect-clients))          |3.0.0|3.0.0|3.0.0|❌|
+| Otomatik yeniden bağlanma ([.net](./dotnet-client.md?tabs=visual-studio&view=aspnetcore-3.0#handle-lost-connection), [JavaScript](./javascript-client.md?view=aspnetcore-3.0#reconnect-clients))          |3.0.0|3.0.0|3.0.0|❌|
 | WebSockets taşıma |2.1.0|1.0.0|1.0.0|1.0.0|
 | Sunucu tarafından gönderilen olay aktarımı |2.1.0|1.0.0|1.0.0|❌|
 | Uzun yoklama taşıması |2.1.0|1.0.0|1.0.0|3.0.0|
@@ -64,5 +64,5 @@ Aşağıdaki tabloda, gerçek zamanlı destek sunan istemciler için özellikler
 
 * [SignalRASP.NET Core için kullanmaya başlama](xref:tutorials/signalr)
 * [Desteklenen platformlar](xref:signalr/supported-platforms)
-* [Hub'lar](xref:signalr/hubs)
+* [Merkezler](xref:signalr/hubs)
 * [JavaScript istemcisi](xref:signalr/javascript-client)

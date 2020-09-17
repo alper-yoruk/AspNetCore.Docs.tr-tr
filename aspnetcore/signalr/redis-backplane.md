@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/redis-backplane
-ms.openlocfilehash: bc28eb3096e88455347f68ca381c9a280d5a153e
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a57176409c5f9bcc620db7e070f6616951eb9a54
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633662"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722780"
 ---
 # <a name="set-up-a-redis-backplane-for-aspnet-core-no-locsignalr-scale-out"></a>ASP.NET Core ölçeği genişletme için Redsıs arka düzlemi ayarlama SignalR
 
@@ -42,7 +42,7 @@ Bu makalede SignalR , bir ASP.NET Core uygulamasının ölçeğini genişletmek 
 
   * <xref:signalr/scale>
   * [Redsıs belgeleri](https://redis.io/)
-  * [Azure Redis Cache belgeleri](https://docs.microsoft.com/azure/redis-cache/)
+  * [Azure Redis Cache belgeleri](/azure/redis-cache/)
 
 ::: moniker range="= aspnetcore-2.1"
 
@@ -240,4 +240,4 @@ Daha fazla bilgi için aşağıdaki kaynaklara bakın:
 * <xref:signalr/scale>
 * [Redsıs belgeleri](https://redis.io/documentation)
 * [StackExchange redin belgeleri](https://stackexchange.github.io/StackExchange.Redis/)
-* [Azure Redis Cache belgeleri](https://docs.microsoft.com/azure/redis-cache/)
+* [Azure Redis Cache belgeleri](/azure/redis-cache/)

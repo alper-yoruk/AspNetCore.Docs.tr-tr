@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: ed40800f3e363cc3fd6f57492d76a42095e5b97b
-ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
+ms.openlocfilehash: c6b77f20792c32a697fff8d1d78ef3c2536c5f8f
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/21/2020
-ms.locfileid: "88712564"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722903"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core yapılandırma
 
@@ -732,7 +732,7 @@ Uygulama yapılandırıldıktan ve başlatılmadan önce, bir *konak* yapıland�
 
 ## <a name="default-host-configuration"></a>Varsayılan konak yapılandırması
 
-[Web konağını](xref:fundamentals/host/web-host)kullanırken varsayılan yapılandırmayla ilgili ayrıntılar için, [bu konunun ASP.NET Core 2,2 sürümüne](/aspnet/core/fundamentals/configuration/?view=aspnetcore-2.2)bakın.
+[Web konağını](xref:fundamentals/host/web-host)kullanırken varsayılan yapılandırmayla ilgili ayrıntılar için, [bu konunun ASP.NET Core 2,2 sürümüne](?view=aspnetcore-2.2)bakın.
 
 * Ana bilgisayar yapılandırması şuradan sağlanır:
   * Ortam değişkenleri `DOTNET_` `DOTNET_ENVIRONMENT` [yapılandırma sağlayıcısı](#environment-variables)kullanılarak (örneğin,) ön eki olan ortam değişkenleri. `DOTNET_`Yapılandırma anahtar-değer çiftleri yüklendiğinde önek () çıkarılır.

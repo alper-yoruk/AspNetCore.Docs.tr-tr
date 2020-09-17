@@ -722,8 +722,8 @@
       uid: grpc/clientfactory
     - name: Tarayıcı uygulamalarında gRPC kullanma
       uid: grpc/browser
-    - name: gRPC'den JSON Web API'leri oluşturma
-      uid: grpc/httpapi
+    - name: Son tarihler ve iptal
+      uid: grpc/deadlines-cancellation
     - name: Yapılandırma
       uid: grpc/configuration
     - name: Kimlik doğrulaması ve yetkilendirme
@@ -738,12 +738,16 @@
       uid: grpc/versioning
     - name: dotnet-grpc ile Protobuf başvurularını yönetme
       uid: grpc/dotnet-grpc
+    - name: gRPC araçlarıyla test hizmetleri
+      uid: grpc/test-tools
     - name: C-core’dan gRPC hizmetlerini geçirme
       uid: grpc/migration
     - name: WCF neden ASP.NET Core gRPC’ye geçirilmeli?
       uid: grpc/wcf
     - name: gRPC hizmetlerini HTTP API’leriyle karşılaştırma
       uid: grpc/comparison
+    - name: gRPC'den JSON Web API'leri oluşturma
+      uid: grpc/httpapi
     - name: Örnekler
       href: 'https://github.com/grpc/grpc-dotnet/tree/master/examples'
     - name: Sorun giderme

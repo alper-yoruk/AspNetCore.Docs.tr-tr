@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: cf450385db3c7327de233357d4c13d556ee44bad
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1b8ccb510927fbc8a40f7424ae1ca4a131799095
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633687"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722890"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core yönlendirme
 
@@ -50,7 +50,7 @@ Bu belgede ASP.NET Core yönlendirmenin alt düzey ayrıntıları ele alınmakta
 Bu belgede açıklanan uç nokta yönlendirme sistemi, ASP.NET Core 3,0 ve üzeri için geçerlidir. Önceki yönlendirme sistemiyle ilgili daha fazla bilgi için <xref:Microsoft.AspNetCore.Routing.IRouter> , aşağıdaki yaklaşımlardan birini kullanarak ASP.NET Core 2,1 sürümünü seçin:
 
 * Önceki sürümün sürüm Seçicisi.
-* [ASP.NET Core 2,1 yönlendirme](https://docs.microsoft.com/aspnet/core/fundamentals/routing?view=aspnetcore-2.1)öğesini seçin.
+* [ASP.NET Core 2,1 yönlendirme](?view=aspnetcore-2.1)öğesini seçin.
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/aspnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples/3.x) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
@@ -394,7 +394,7 @@ Bu yöntemlerin aşırı yüklemeleri, içeren bağımsız değişkenleri kabul 
 
 Tarafından sunulan yöntemler, <xref:Microsoft.AspNetCore.Routing.LinkGenerator> herhangi bir adres türü için standart bağlantı oluşturma yeteneklerini destekler. Bağlantı oluşturucuyu kullanmanın en kolay yolu, belirli bir adres türü için işlem gerçekleştiren genişletme yöntemlerine yöneliktir:
 
-| Genişletme yöntemi | Açıklama |
+| Genişletme yöntemi | Description |
 | ---------------- | ----------- |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | Belirtilen değerleri temel alarak mutlak bir yola sahip bir URI oluşturur. |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | Belirtilen değerleri temel alarak mutlak bir URI oluşturur.             |
@@ -589,7 +589,7 @@ Bir parametreyi bilinen olası değerler kümesiyle kısıtlamak için, normal b
 
 ASP.NET Core [kısıtlamalar](https://github.com/dotnet/aspnetcore/tree/master/src/Http/Routing/src/Constraints) klasörü, bir kısıtlama oluşturmaya yönelik iyi örnekler sağlar. Örneğin, [Guidrouteconstraint](https://github.com/dotnet/aspnetcore/blob/master/src/Http/Routing/src/Constraints/GuidRouteConstraint.cs#L18).
 
-Özel bir kullanmak için `IRouteConstraint` yol kısıtlama türü, uygulamanın hizmet kapsayıcısında kayıtlı olması gerekir <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> . `ConstraintMap`, Yol kısıtlama anahtarlarını `IRouteConstraint` Bu kısıtlamaları doğrulayan uygulamalarla eşleyen bir sözlüktür. Bir uygulama `ConstraintMap` , `Startup.ConfigureServices` hizmetlerin bir parçası olarak ' de güncelleştirilir [. AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) çağrısı veya <xref:Microsoft.AspNetCore.Routing.RouteOptions> doğrudan ile yapılandırma `services.Configure<RouteOptions>` . Örnek:
+Özel bir kullanmak için `IRouteConstraint` yol kısıtlama türü, uygulamanın hizmet kapsayıcısında kayıtlı olması gerekir <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> . `ConstraintMap`, Yol kısıtlama anahtarlarını `IRouteConstraint` Bu kısıtlamaları doğrulayan uygulamalarla eşleyen bir sözlüktür. Bir uygulama `ConstraintMap` , `Startup.ConfigureServices` hizmetlerin bir parçası olarak ' de güncelleştirilir [. AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) çağrısı veya <xref:Microsoft.AspNetCore.Routing.RouteOptions> doğrudan ile yapılandırma `services.Configure<RouteOptions>` . Örneğin:
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/StartupConstraint.cs?name=snippet)]
 
@@ -1025,7 +1025,7 @@ services.AddMvc(options => options.EnableEndpointRouting = false)
     .SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
 ```
 
-Tabanlı yönlendirme hakkında daha fazla bilgi için <xref:Microsoft.AspNetCore.Routing.IRouter> [bu konunun ASP.NET Core 2,1 sürümüne](/aspnet/core/fundamentals/routing?view=aspnetcore-2.1)bakın.
+Tabanlı yönlendirme hakkında daha fazla bilgi için <xref:Microsoft.AspNetCore.Routing.IRouter> [bu konunun ASP.NET Core 2,1 sürümüne](?view=aspnetcore-2.1)bakın.
 
 > [!IMPORTANT]
 > Bu belge, alt düzey ASP.NET Core yönlendirmeyi içerir. ASP.NET Core MVC yönlendirme hakkında bilgi için bkz <xref:mvc/controllers/routing> .. Sayfalardaki yönlendirme kuralları hakkında daha fazla bilgi için Razor bkz <xref:razor-pages/razor-pages-conventions> ..
@@ -1113,7 +1113,7 @@ Bu yöntemlerin aşırı yüklemesi, içeren bağımsız değişkenleri kabul ed
 
 Tarafından sunulan yöntemler, <xref:Microsoft.AspNetCore.Routing.LinkGenerator> herhangi bir adres türü için standart bağlantı oluşturma yeteneklerini destekler. Bağlantı oluşturucuyu kullanmanın en kolay yolu, belirli bir adres türü için işlem gerçekleştiren genişletme yöntemlerine yöneliktir.
 
-| Genişletme yöntemi   | Açıklama                                                         |
+| Genişletme yöntemi   | Description                                                         |
 | ------------------ | ------------------------------------------------------------------- |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | Belirtilen değerleri temel alarak mutlak bir yola sahip bir URI oluşturur. |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | Belirtilen değerleri temel alarak mutlak bir URI oluşturur.             |
@@ -1506,7 +1506,7 @@ Bir parametreyi bilinen olası değerler kümesiyle kısıtlamak için, normal b
 
 Yerleşik yol kısıtlamalarına ek olarak, arabirimi uygulayarak özel yol kısıtlamaları oluşturulabilir <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> . <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>Arabirim, `Match` `true` kısıtlama karşılanıp Aksi takdirde döndüren tek bir yöntemi içerir `false` .
 
-Özel bir kullanmak için <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> yol kısıtlama türü, uygulamanın uygulamanın hizmet kapsayıcısında kayıtlı olması gerekir <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> . <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>, Yol kısıtlama anahtarlarını <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> Bu kısıtlamaları doğrulayan uygulamalarla eşleyen bir sözlüktür. Bir uygulama <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> , `Startup.ConfigureServices` hizmetlerin bir parçası olarak ' de güncelleştirilir [. AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) çağrısı veya <xref:Microsoft.AspNetCore.Routing.RouteOptions> doğrudan ile yapılandırma `services.Configure<RouteOptions>` . Örnek:
+Özel bir kullanmak için <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> yol kısıtlama türü, uygulamanın uygulamanın hizmet kapsayıcısında kayıtlı olması gerekir <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> . <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>, Yol kısıtlama anahtarlarını <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> Bu kısıtlamaları doğrulayan uygulamalarla eşleyen bir sözlüktür. Bir uygulama <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> , `Startup.ConfigureServices` hizmetlerin bir parçası olarak ' de güncelleştirilir [. AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) çağrısı veya <xref:Microsoft.AspNetCore.Routing.RouteOptions> doğrudan ile yapılandırma `services.Configure<RouteOptions>` . Örneğin:
 
 ```csharp
 services.AddRouting(options =>
@@ -1515,7 +1515,7 @@ services.AddRouting(options =>
 });
 ```
 
-Kısıtlama daha sonra, kısıtlama türü kaydedilirken belirtilen ad kullanılarak yollara her zamanki şekilde uygulanabilir. Örnek:
+Kısıtlama daha sonra, kısıtlama türü kaydedilirken belirtilen ad kullanılarak yollara her zamanki şekilde uygulanabilir. Örneğin:
 
 ```csharp
 [HttpGet("{id:customName}")]
@@ -1557,8 +1557,8 @@ routes.MapRoute(
 
 ASP.NET Core, oluşturulan yollarla bir parametre dönüştürücüler kullanmak için API kuralları sağlar:
 
-* ASP.NET Core MVC 'nin `Microsoft.AspNetCore.Mvc.ApplicationModels.RouteTokenTransformerConvention` API kuralı vardır. Bu kural, uygulamadaki tüm öznitelik yollarına belirtilen bir parametre transformatörü uygular. Parametre transformatörü, öznitelik yol belirteçlerini değiştirildiklerinde dönüştürür. Daha fazla bilgi için bkz. [belirteç değişimini özelleştirmek için bir parametre transformatörü kullanma](/aspnet/core/mvc/controllers/routing#use-a-parameter-transformer-to-customize-token-replacement).
-* Razor Sayfaların `Microsoft.AspNetCore.Mvc.ApplicationModels.PageRouteTransformerConvention` API kuralı vardır. Bu kural, belirtilen bir parametre transformatörü otomatik olarak bulunan tüm Razor sayfalara uygular. Parametre transformatörü, sayfa yollarının klasör ve dosya adı segmentlerini dönüştürür Razor . Daha fazla bilgi için bkz. [sayfa yollarını özelleştirmek için bir parametre transformatörü kullanma](/aspnet/core/razor-pages/razor-pages-conventions#use-a-parameter-transformer-to-customize-page-routes).
+* ASP.NET Core MVC 'nin `Microsoft.AspNetCore.Mvc.ApplicationModels.RouteTokenTransformerConvention` API kuralı vardır. Bu kural, uygulamadaki tüm öznitelik yollarına belirtilen bir parametre transformatörü uygular. Parametre transformatörü, öznitelik yol belirteçlerini değiştirildiklerinde dönüştürür. Daha fazla bilgi için bkz. [belirteç değişimini özelleştirmek için bir parametre transformatörü kullanma](xref:mvc/controllers/routing#use-a-parameter-transformer-to-customize-token-replacement).
+* Razor Sayfaların `Microsoft.AspNetCore.Mvc.ApplicationModels.PageRouteTransformerConvention` API kuralı vardır. Bu kural, belirtilen bir parametre transformatörü otomatik olarak bulunan tüm Razor sayfalara uygular. Parametre transformatörü, sayfa yollarının klasör ve dosya adı segmentlerini dönüştürür Razor . Daha fazla bilgi için bkz. [sayfa yollarını özelleştirmek için bir parametre transformatörü kullanma](xref:razor-pages/razor-pages-conventions#use-a-parameter-transformer-to-customize-page-routes).
 
 ## <a name="url-generation-reference"></a>URL oluşturma başvurusu
 
@@ -1950,7 +1950,7 @@ Bir parametreyi bilinen olası değerler kümesiyle kısıtlamak için, normal b
 
 Yerleşik yol kısıtlamalarına ek olarak, arabirimi uygulayarak özel yol kısıtlamaları oluşturulabilir <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> . <xref:Microsoft.AspNetCore.Routing.IRouteConstraint>Arabirim, `Match` `true` kısıtlama karşılanıp Aksi takdirde döndüren tek bir yöntemi içerir `false` .
 
-Özel bir kullanmak için <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> yol kısıtlama türü, uygulamanın uygulamanın hizmet kapsayıcısında kayıtlı olması gerekir <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> . <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>, Yol kısıtlama anahtarlarını <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> Bu kısıtlamaları doğrulayan uygulamalarla eşleyen bir sözlüktür. Bir uygulama <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> , `Startup.ConfigureServices` hizmetlerin bir parçası olarak ' de güncelleştirilir [. AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) çağrısı veya <xref:Microsoft.AspNetCore.Routing.RouteOptions> doğrudan ile yapılandırma `services.Configure<RouteOptions>` . Örnek:
+Özel bir kullanmak için <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> yol kısıtlama türü, uygulamanın uygulamanın hizmet kapsayıcısında kayıtlı olması gerekir <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> . <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap>, Yol kısıtlama anahtarlarını <xref:Microsoft.AspNetCore.Routing.IRouteConstraint> Bu kısıtlamaları doğrulayan uygulamalarla eşleyen bir sözlüktür. Bir uygulama <xref:Microsoft.AspNetCore.Routing.RouteOptions.ConstraintMap> , `Startup.ConfigureServices` hizmetlerin bir parçası olarak ' de güncelleştirilir [. AddRouting](xref:Microsoft.Extensions.DependencyInjection.RoutingServiceCollectionExtensions.AddRouting*) çağrısı veya <xref:Microsoft.AspNetCore.Routing.RouteOptions> doğrudan ile yapılandırma `services.Configure<RouteOptions>` . Örneğin:
 
 ```csharp
 services.AddRouting(options =>
@@ -1959,7 +1959,7 @@ services.AddRouting(options =>
 });
 ```
 
-Kısıtlama daha sonra, kısıtlama türü kaydedilirken belirtilen ad kullanılarak yollara her zamanki şekilde uygulanabilir. Örnek:
+Kısıtlama daha sonra, kısıtlama türü kaydedilirken belirtilen ad kullanılarak yollara her zamanki şekilde uygulanabilir. Örneğin:
 
 ```csharp
 [HttpGet("{id:customName}")]

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: bba965e14058663c3ed9c0f15afc6a8d78997aea
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: 2bfe05748e6740043be7f1ccc6dbe22ad4b0ca44
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009758"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722572"
 ---
 # <a name="aspnet-core-no-locsignalr-hosting-and-scaling"></a>SignalRBarındırma ve ölçeklendirmeyi ASP.NET Core
 
@@ -33,7 +33,7 @@ Bu makalede, ASP.NET Core kullanan yüksek trafik uygulamalarına yönelik barı
 
 ## <a name="sticky-sessions"></a>Yapışkan oturumlar
 
-SignalR belirli bir bağlantı için tüm HTTP isteklerinin aynı sunucu işlemi tarafından işlenmesini gerektirir. SignalRBir sunucu grubunda (birden çok sunucu) çalışırken, "yapışkan oturumlar" kullanılması gerekir. "Yapışkan oturumlar", bazı yük dengeleyiciler tarafından oturum benzeşimi olarak da adlandırılır. Azure App Service istekleri yönlendirmek için [uygulama Isteği yönlendirme](https://docs.microsoft.com/iis/extensions/planning-for-arr/application-request-routing-version-2-overview) (ARR) kullanır. Azure App Service "ARR benzeşimi" ayarının etkinleştirilmesi "yapışkan oturumlar" sağlayacaktır. Yapışkan oturumların gerekmediği tek koşullar şunlardır:
+SignalR belirli bir bağlantı için tüm HTTP isteklerinin aynı sunucu işlemi tarafından işlenmesini gerektirir. SignalRBir sunucu grubunda (birden çok sunucu) çalışırken, "yapışkan oturumlar" kullanılması gerekir. "Yapışkan oturumlar", bazı yük dengeleyiciler tarafından oturum benzeşimi olarak da adlandırılır. Azure App Service istekleri yönlendirmek için [uygulama Isteği yönlendirme](/iis/extensions/planning-for-arr/application-request-routing-version-2-overview) (ARR) kullanır. Azure App Service "ARR benzeşimi" ayarının etkinleştirilmesi "yapışkan oturumlar" sağlayacaktır. Yapışkan oturumların gerekmediği tek koşullar şunlardır:
 
 1. Tek bir sunucuda barındırırken, tek bir işlemde.
 1. Azure SignalR hizmetini kullanırken.

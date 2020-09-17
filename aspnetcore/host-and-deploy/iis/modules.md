@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/modules
-ms.openlocfilehash: 7ddc1b0f80625fbc39ac49f305f745b005cbce46
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 6936071339786262fa8eeb669a59225a695d7488
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634676"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722812"
 ---
 # <a name="iis-modules-with-aspnet-core"></a>ASP.NET Core ile IIS modülleri
 
@@ -178,5 +178,5 @@ HTTP önbelleğe alma modülü ( `HttpCacheModule` ), IIS çıkış önbelleğin
 
 * [IIS mimarilerine giriş: IIS 'deki modüller](/iis/get-started/introduction-to-iis/introduction-to-iis-architecture#modules-in-iis)
 * [IIS modüllerine genel bakış](/iis/get-started/introduction-to-iis/iis-modules-overview)
-* [IIS 7,0 rollerini ve modüllerini özelleştirme](https://technet.microsoft.com/library/cc627313.aspx)
+* [IIS 7,0 rollerini ve modüllerini özelleştirme](/previous-versions/tn-archive/cc627313(v=technet.10))
 * [ISS \<system.webServer>](/iis/configuration/system.webServer/)

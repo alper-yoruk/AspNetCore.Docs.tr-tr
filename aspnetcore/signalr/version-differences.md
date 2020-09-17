@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/version-differences
-ms.openlocfilehash: a8336a6c13c502f5a0fad150785cd9d484064618
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 965fbb3d8007cb64aaf51d82d87ed7a3a5298e9b
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633012"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90721794"
 ---
 # <a name="differences-between-aspnet-no-locsignalr-and-aspnet-core-no-locsignalr"></a>ASP.NET SignalR ve ASP.NET Core arasındaki farklar SignalR
 
@@ -38,7 +38,7 @@ ASP.NET Core SignalR , ASP.NET için istemcilerle veya sunucularla uyumlu değil
 | **İstemci NuGet paketleri** | [Microsoft. AspNet. SignalR . İstemcilerinin](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.Client/)<br>[Microsoft. AspNet. SignalR . JS](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.JS/) | [Microsoft. AspNetCore. SignalR . İstemcilerinin](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) |
 | **JavaScript istemcisi NPM paketi** | [SignalR](https://www.npmjs.com/package/signalr) | [`@microsoft/signalr`](https://www.npmjs.com/package/@microsoft/signalr) |
 | **Java istemcisi** | [GitHub deposu](https://github.com/SignalR/java-client) (kullanım dışı)  | Maven paketi [com. Microsoft. SignalR](https://search.maven.org/artifact/com.microsoft.signalr/signalr) |
-| **Sunucu uygulaması türü** | ASP.NET (System. Web) veya OWıN Self-Host | ASP.NET Çekirdeği |
+| **Sunucu uygulaması türü** | ASP.NET (System. Web) veya OWıN Self-Host | ASP.NET Core |
 | **Desteklenen sunucu platformları** | .NET Framework 4,5 veya üzeri | .NET Core 3,0 veya üzeri |
 
 ::: moniker-end
@@ -51,7 +51,7 @@ ASP.NET Core SignalR , ASP.NET için istemcilerle veya sunucularla uyumlu değil
 | **İstemci NuGet paketleri** | [Microsoft. AspNet. SignalR . İstemcilerinin](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.Client/)<br>[Microsoft. AspNet. SignalR . JS](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.JS/) | [Microsoft. AspNetCore. SignalR . İstemcilerinin](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) |
 | **JavaScript istemcisi NPM paketi** | [SignalR](https://www.npmjs.com/package/signalr) | [`@aspnet/signalr`](https://www.npmjs.com/package/@aspnet/signalr) |
 | **Java istemcisi** | [GitHub deposu](https://github.com/SignalR/java-client) (kullanım dışı)  | Maven paketi [com. Microsoft. SignalR](https://search.maven.org/artifact/com.microsoft.signalr/signalr) |
-| **Sunucu uygulaması türü** | ASP.NET (System. Web) veya OWıN Self-Host | ASP.NET Çekirdeği |
+| **Sunucu uygulaması türü** | ASP.NET (System. Web) veya OWıN Self-Host | ASP.NET Core |
 | **Desteklenen sunucu platformları** | .NET Framework 4,5 veya üzeri | .NET Framework 4.6.1 veya üzeri<br>.NET Core 2,1 veya üzeri |
 
 ::: moniker-end
@@ -156,7 +156,7 @@ ASP.NET Core SignalR artık hub 'dan istemciye [veri akışını](xref:signalr/s
 
 ### <a name="persistentconnection-removal"></a>PersistentConnection kaldırma
 
-ASP.NET Core SignalR , [Persistentconnection](https://docs.microsoft.com/previous-versions/aspnet/jj919047(v%3dvs.118)) sınıfı kaldırılmıştır.
+ASP.NET Core SignalR , [Persistentconnection](/previous-versions/aspnet/jj919047(v=vs.118)) sınıfı kaldırılmıştır.
 
 ### <a name="globalhost"></a>GlobalHost
 
@@ -284,14 +284,14 @@ ASP.NET SignalR SQL Server ve redsıs destekler. ASP.NET Core SignalR Azure Sign
 * [SignalR Redsıs ile ölçek genişletme](/aspnet/signalr/overview/performance/scaleout-with-redis)
 * [SignalR SQL Server ile ölçeği genişletme](/aspnet/signalr/overview/performance/scaleout-with-sql-server)
 
-### <a name="aspnet-core"></a>ASP.NET Çekirdeği
+### <a name="aspnet-core"></a>ASP.NET Core
 
 * [Azure SignalR hizmeti](/azure/azure-signalr/)
 * [Redsıs geri düzlemi](xref:signalr/redis-backplane)
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [Hub'lar](xref:signalr/hubs)
+* [Merkezler](xref:signalr/hubs)
 * [JavaScript istemcisi](xref:signalr/javascript-client)
 * [.NET istemcisi](xref:signalr/dotnet-client)
 * [Desteklenen platformlar](xref:signalr/supported-platforms)

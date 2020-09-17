@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: 3fab57df84e6902a8041940939c067da41f1674c
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 55269c6985534b49cc2567b2d197e46d9b7b1fd7
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629736"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722533"
 ---
 # <a name="part-5-no-locrazor-pages-with-ef-core-in-aspnet-core---data-model"></a>Bölüm 5, Razor ASP.NET Core veri modelinde EF Core olan sayfalar
 
@@ -70,7 +70,7 @@ Yukarıdaki kod, bir `FullName` özelliği ekler ve var olan özelliklere aşağ
 
 Öğrenci kayıt tarihleri için, tüm sayfalar şu anda tarihle birlikte tarih ile görüntülenir, ancak yalnızca tarihin ilgili olması gerekir. Veri ek açıklaması özniteliklerini kullanarak, verileri gösteren her sayfada görüntü biçimini giderecek bir kod değişikliği yapabilirsiniz. 
 
-[DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) özniteliği, veritabanı iç türünden daha belirgin bir veri türünü belirtir. Bu durumda, tarih ve saat değil yalnızca tarih görüntülenmelidir. Veri [türü numaralandırması](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1) , tarih, saat, PhoneNumber, para birimi, emaadresi vb. gibi birçok veri türü sağlar. `DataType` Özniteliği Ayrıca uygulamanın türe özgü özellikleri otomatik olarak sağlamasını da sağlayabilir. Örnek:
+[DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute) özniteliği, veritabanı iç türünden daha belirgin bir veri türünü belirtir. Bu durumda, tarih ve saat değil yalnızca tarih görüntülenmelidir. Veri [türü numaralandırması](/dotnet/api/system.componentmodel.dataannotations.datatype) , tarih, saat, PhoneNumber, para birimi, emaadresi vb. gibi birçok veri türü sağlar. `DataType` Özniteliği Ayrıca uygulamanın türe özgü özellikleri otomatik olarak sağlamasını da sağlayabilir. Örneğin:
 
 * `mailto:`Bağlantı için otomatik olarak oluşturulur `DataType.EmailAddress` .
 * Tarih Seçici çoğu tarayıcıda için verilmiştir `DataType.Date` .
@@ -100,11 +100,11 @@ Daha fazla bilgi için bkz. [ \<input> etiket Yardımcısı belgeleri](xref:mvc/
 [StringLength(50, ErrorMessage = "First name cannot be longer than 50 characters.")]
 ```
 
-Veri doğrulama kuralları ve doğrulama hatası iletileri özniteliklerle belirtilebilir. [StringLength](/dotnet/api/system.componentmodel.dataannotations.stringlengthattribute?view=netframework-4.7.1) özniteliği, bir veri alanında izin verilen en düşük ve en fazla karakter uzunluğunu belirtir. Gösterilen kod, adları 50 karakterden fazla olmayacak şekilde sınırlar. En küçük dize uzunluğunu ayarlayan bir örnek [daha sonra](#the-required-attribute)gösterilmiştir.
+Veri doğrulama kuralları ve doğrulama hatası iletileri özniteliklerle belirtilebilir. [StringLength](/dotnet/api/system.componentmodel.dataannotations.stringlengthattribute) özniteliği, bir veri alanında izin verilen en düşük ve en fazla karakter uzunluğunu belirtir. Gösterilen kod, adları 50 karakterden fazla olmayacak şekilde sınırlar. En küçük dize uzunluğunu ayarlayan bir örnek [daha sonra](#the-required-attribute)gösterilmiştir.
 
 `StringLength`Öznitelik Ayrıca istemci tarafı ve sunucu tarafı doğrulaması sağlar. En küçük değerin veritabanı şeması üzerinde hiçbir etkisi yoktur.
 
-Öznitelik, bir `StringLength` kullanıcının ad için boşluk girmesini engellemez. [Cevap içerisinde RegularExpression](/dotnet/api/system.componentmodel.dataannotations.regularexpressionattribute?view=netframework-4.7.1) özniteliği, girişe kısıtlamalar uygulamak için kullanılabilir. Örneğin, aşağıdaki kod ilk karakterin büyük küçük harf olmasını ve geri kalan karakterlerin alfabetik olmasını gerektirir:
+Öznitelik, bir `StringLength` kullanıcının ad için boşluk girmesini engellemez. [Cevap içerisinde RegularExpression](/dotnet/api/system.componentmodel.dataannotations.regularexpressionattribute) özniteliği, girişe kısıtlamalar uygulamak için kullanılabilir. Örneğin, aşağıdaki kod ilk karakterin büyük küçük harf olmasını ve geri kalan karakterlerin alfabetik olmasını gerektirir:
 
 ```csharp
 [RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
@@ -760,7 +760,7 @@ Bu bölümde, veri modeli öznitelikler kullanılarak özelleştirilir.
 
 [!code-csharp[](intro/samples/cu21/Models/Student.cs?name=snippet_DataType&highlight=3,12-13)]
 
-[DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute?view=netframework-4.7.1) özniteliği, veritabanı iç türünden daha belirgin bir veri türünü belirtir. Bu durumda, tarih ve saat değil yalnızca tarih görüntülenmelidir. Veri [türü numaralandırması](/dotnet/api/system.componentmodel.dataannotations.datatype?view=netframework-4.7.1) , tarih, saat, PhoneNumber, para birimi, emaadresi vb. gibi birçok veri türü sağlar. `DataType` Özniteliği Ayrıca uygulamanın türe özgü özellikleri otomatik olarak sağlamasını da sağlayabilir. Örnek:
+[DataType](/dotnet/api/system.componentmodel.dataannotations.datatypeattribute) özniteliği, veritabanı iç türünden daha belirgin bir veri türünü belirtir. Bu durumda, tarih ve saat değil yalnızca tarih görüntülenmelidir. Veri [türü numaralandırması](/dotnet/api/system.componentmodel.dataannotations.datatype) , tarih, saat, PhoneNumber, para birimi, emaadresi vb. gibi birçok veri türü sağlar. `DataType` Özniteliği Ayrıca uygulamanın türe özgü özellikleri otomatik olarak sağlamasını da sağlayabilir. Örneğin:
 
 * `mailto:`Bağlantı için otomatik olarak oluşturulur `DataType.EmailAddress` .
 * Tarih Seçici çoğu tarayıcıda için verilmiştir `DataType.Date` .
@@ -790,13 +790,13 @@ Uygulamayı çalıştırın. Öğrenciler dizin sayfasına gidin. Süreler artı
 
 ### <a name="the-stringlength-attribute"></a>StringLength özniteliği
 
-Veri doğrulama kuralları ve doğrulama hatası iletileri özniteliklerle belirtilebilir. [StringLength](/dotnet/api/system.componentmodel.dataannotations.stringlengthattribute?view=netframework-4.7.1) özniteliği, bir veri alanında izin verilen en düşük ve en fazla karakter uzunluğunu belirtir. `StringLength`Öznitelik Ayrıca istemci tarafı ve sunucu tarafı doğrulaması sağlar. En küçük değerin veritabanı şeması üzerinde hiçbir etkisi yoktur.
+Veri doğrulama kuralları ve doğrulama hatası iletileri özniteliklerle belirtilebilir. [StringLength](/dotnet/api/system.componentmodel.dataannotations.stringlengthattribute) özniteliği, bir veri alanında izin verilen en düşük ve en fazla karakter uzunluğunu belirtir. `StringLength`Öznitelik Ayrıca istemci tarafı ve sunucu tarafı doğrulaması sağlar. En küçük değerin veritabanı şeması üzerinde hiçbir etkisi yoktur.
 
 `Student`Modeli aşağıdaki kodla güncelleştirin:
 
 [!code-csharp[](intro/samples/cu21/Models/Student.cs?name=snippet_StringLength&highlight=10,12)]
 
-Yukarıdaki kod, adları 50 karakterden fazla olmayacak şekilde sınırlandırır. Öznitelik, bir `StringLength` kullanıcının ad için boşluk girmesini engellemez. [Cevap içerisinde RegularExpression](/dotnet/api/system.componentmodel.dataannotations.regularexpressionattribute?view=netframework-4.7.1) özniteliği, girişe kısıtlamalar uygulamak için kullanılır. Örneğin, aşağıdaki kod ilk karakterin büyük küçük harf olmasını ve geri kalan karakterlerin alfabetik olmasını gerektirir:
+Yukarıdaki kod, adları 50 karakterden fazla olmayacak şekilde sınırlandırır. Öznitelik, bir `StringLength` kullanıcının ad için boşluk girmesini engellemez. [Cevap içerisinde RegularExpression](/dotnet/api/system.componentmodel.dataannotations.regularexpressionattribute) özniteliği, girişe kısıtlamalar uygulamak için kullanılır. Örneğin, aşağıdaki kod ilk karakterin büyük küçük harf olmasını ve geri kalan karakterlerin alfabetik olmasını gerektirir:
 
 ```csharp
 [RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]

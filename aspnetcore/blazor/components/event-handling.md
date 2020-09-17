@@ -5,7 +5,7 @@ description: Olay Blazor bağımsız değişkeni türleri, olay geri çağırmal
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/06/2020
+ms.date: 09/17/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/event-handling
-ms.openlocfilehash: c15a4e3407cfca6a78c8c9ea90034795ddf4645e
-ms.sourcegitcommit: 4cce99cbd44372fd4575e8da8c0f4345949f4d9a
+ms.openlocfilehash: cb7009946f56b3c8f1e5eeabb09b81075749c720
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/31/2020
-ms.locfileid: "89153512"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722455"
 ---
 # <a name="aspnet-core-no-locblazor-event-handling"></a>ASP.NET Core Blazor olay işleme
 
@@ -89,8 +89,29 @@ private void ShowMessage(MouseEventArgs e)
 
 Desteklenir <xref:System.EventArgs> , aşağıdaki tabloda gösterilmiştir.
 
-| Olay            | Sınıf                | DOM olayları ve notları |
-| ---------------- | -------------------- | -------------------- |
+::: moniker range=">= aspnetcore-5.0"
+
+| Olay            | Sınıf  | DOM olayları ve notları |
+| ---------------- | ------ | -------------------- |
+| Pano        | <xref:Microsoft.AspNetCore.Components.Web.ClipboardEventArgs> | `oncut`, `oncopy`, `onpaste` |
+| Sürükleyin             | <xref:Microsoft.AspNetCore.Components.Web.DragEventArgs> | `ondrag`, `ondragstart`, `ondragenter`, `ondragleave`, `ondragover`, `ondrop`, `ondragend`<br><br><xref:Microsoft.AspNetCore.Components.Web.DataTransfer> ve <xref:Microsoft.AspNetCore.Components.Web.DataTransferItem> öğe verilerini sürüklemiş tutun. |
+| Hata            | <xref:Microsoft.AspNetCore.Components.Web.ErrorEventArgs> | `onerror` |
+| Olay            | <xref:System.EventArgs> | *Genel*<br>`onactivate`, `onbeforeactivate`, `onbeforedeactivate`, `ondeactivate`, `onfullscreenchange`, `onfullscreenerror`, `onloadeddata`, `onloadedmetadata`, `onpointerlockchange`, `onpointerlockerror`, `onreadystatechange`, `onscroll`<br><br>*Pano*<br>`onbeforecut`, `onbeforecopy`, `onbeforepaste`<br><br>*Giriş*<br>`oninvalid`, `onreset`, `onselect`, `onselectionchange`, `onselectstart`, `onsubmit`<br><br>*Medya*<br>`oncanplay`, `oncanplaythrough`, `oncuechange`, `ondurationchange`, `onemptied`, `onended`, `onpause`, `onplay`, `onplaying`, `onratechange`, `onseeked`, `onseeking`, `onstalled`, `onstop`, `onsuspend`, `ontimeupdate`, `ontoggle`, `onvolumechange`, `onwaiting`<br><br><xref:Microsoft.AspNetCore.Components.Web.EventHandlers> olay adlarıyla olay bağımsız değişken türleri arasındaki eşlemeleri yapılandırmak için öznitelikleri tutar. |
+| Odaklanma            | <xref:Microsoft.AspNetCore.Components.Web.FocusEventArgs> | `onfocus`, `onblur`, `onfocusin`, `onfocusout`<br><br>İçin destek içermez `relatedTarget` . |
+| Giriş            | <xref:Microsoft.AspNetCore.Components.ChangeEventArgs> | `onchange`, `oninput` |
+| Klavye         | <xref:Microsoft.AspNetCore.Components.Web.KeyboardEventArgs> | `onkeydown`, `onkeypress`, `onkeyup` |
+| Fare            | <xref:Microsoft.AspNetCore.Components.Web.MouseEventArgs> | `onclick`, `oncontextmenu`, `ondblclick`, `onmousedown`, `onmouseup`, `onmouseover`, `onmousemove`, `onmouseout` |
+| Fare işaretçisi    | <xref:Microsoft.AspNetCore.Components.Web.PointerEventArgs> | `onpointerdown`, `onpointerup`, `onpointercancel`, `onpointermove`, `onpointerover`, `onpointerout`, `onpointerenter`, `onpointerleave`, `ongotpointercapture`, `onlostpointercapture` |
+| Fare tekerleği      | <xref:Microsoft.AspNetCore.Components.Web.WheelEventArgs> | `onwheel`, `onmousewheel` |
+| İlerleme Durumu         | <xref:Microsoft.AspNetCore.Components.Web.ProgressEventArgs> | `onabort`, `onload`, `onloadend`, `onloadstart`, `onprogress`, `ontimeout` |
+| Dokunma            | <xref:Microsoft.AspNetCore.Components.Web.TouchEventArgs> | `ontouchstart`, `ontouchend`, `ontouchmove`, `ontouchenter`, `ontouchleave`, `ontouchcancel`<br><br><xref:Microsoft.AspNetCore.Components.Web.TouchPoint> dokunarak duyarlı bir cihazdaki tek bir iletişim noktasını temsil eder. |
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+| Olay            | Sınıf | DOM olayları ve notları |
+| ---------------- | ----- | -------------------- |
 | Pano        | <xref:Microsoft.AspNetCore.Components.Web.ClipboardEventArgs> | `oncut`, `oncopy`, `onpaste` |
 | Sürükleyin             | <xref:Microsoft.AspNetCore.Components.Web.DragEventArgs> | `ondrag`, `ondragstart`, `ondragenter`, `ondragleave`, `ondragover`, `ondrop`, `ondragend`<br><br><xref:Microsoft.AspNetCore.Components.Web.DataTransfer> ve <xref:Microsoft.AspNetCore.Components.Web.DataTransferItem> öğe verilerini sürüklemiş tutun. |
 | Hata            | <xref:Microsoft.AspNetCore.Components.Web.ErrorEventArgs> | `onerror` |
@@ -104,9 +125,11 @@ Desteklenir <xref:System.EventArgs> , aşağıdaki tabloda gösterilmiştir.
 | İlerleme Durumu         | <xref:Microsoft.AspNetCore.Components.Web.ProgressEventArgs> | `onabort`, `onload`, `onloadend`, `onloadstart`, `onprogress`, `ontimeout` |
 | Dokunma            | <xref:Microsoft.AspNetCore.Components.Web.TouchEventArgs> | `ontouchstart`, `ontouchend`, `ontouchmove`, `ontouchenter`, `ontouchleave`, `ontouchcancel`<br><br><xref:Microsoft.AspNetCore.Components.Web.TouchPoint> dokunarak duyarlı bir cihazdaki tek bir iletişim noktasını temsil eder. |
 
+::: moniker-end
+
 Daha fazla bilgi için aşağıdaki kaynaklara bakın:
 
-* [ `EventArgs` ASP.NET Core başvuru kaynağındaki sınıflar (DotNet/aspnetcore sürümü/3.1 dalı)](https://github.com/dotnet/aspnetcore/tree/release/3.1/src/Components/Web/src/Web).
+* [ `EventArgs` ASP.NET Core başvuru kaynağındaki sınıflar (DotNet/aspnetcore `master` dalı)](https://github.com/dotnet/aspnetcore/tree/master/src/Components/Web/src/Web). `master`Dal, *sonraki* ASP.NET Core sürümü için geliştirme aşamasındaki API 'yi temsil eder. Geçerli sürüm için uygun GitHub depo dalını (örneğin, `release/3.1` ) seçin.
 * [MDN Web belgeleri: GlobalEventHandlers](https://developer.mozilla.org/docs/Web/API/GlobalEventHandlers): hangi HTML ÖĞELERININ her Dom olayını destekledikleri hakkında bilgiler içerir.
 
 ## <a name="lambda-expressions"></a>Lambda ifadeleri

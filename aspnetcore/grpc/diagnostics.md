@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/diagnostics
-ms.openlocfilehash: 5c4c05e74a8223db3ade03b067bd66921439c99f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 7d2da20d04b93ebcd16fb58a4b74b5b67d37bd72
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633272"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722929"
 ---
 # <a name="logging-and-diagnostics-in-grpc-on-net"></a>.NET üzerinde gRPC 'de günlüğe kaydetme ve tanılama
 
@@ -31,8 +31,8 @@ ms.locfileid: "88633272"
 Bu makale, sorunları gidermeye yardımcı olmak için bir gRPC uygulamasından tanılamayı toplamaya yönelik rehberlik sağlar. Ele alınan konular:
 
 * **Günlüğe kaydetme** - [.NET Core günlüğe](xref:fundamentals/logging/index)yazma ile yazılan yapılandırılmış Günlükler. <xref:Microsoft.Extensions.Logging.ILogger> , uygulama çerçeveleri tarafından, günlükleri yazmak için ve kullanıcılar tarafından bir uygulamada kendi günlüğe kaydetme için kullanılır.
-* **İzleme** -ve kullanılarak yazılmış bir işlemle ilgili olaylar `DiaganosticSource` `Activity` . Tanılama kaynağından alınan izlemeler, [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-core) ve [opentelemetri](https://github.com/open-telemetry/opentelemetry-dotnet)gibi kitaplıklara göre uygulama telemetrisini toplamak için yaygın olarak kullanılır.
-* **Ölçümler** -saniye başına isteklerin zaman aralıklarıyla veri ölçülerinin temsili. Ölçümler kullanılarak dağıtılır `EventCounter` ve [DotNet-Counters](https://docs.microsoft.com/dotnet/core/diagnostics/dotnet-counters) komut satırı aracı kullanılarak veya [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters)ile gözlemlenebilir.
+* **İzleme** -ve kullanılarak yazılmış bir işlemle ilgili olaylar `DiaganosticSource` `Activity` . Tanılama kaynağından alınan izlemeler, [Application Insights](/azure/azure-monitor/app/asp-net-core) ve [opentelemetri](https://github.com/open-telemetry/opentelemetry-dotnet)gibi kitaplıklara göre uygulama telemetrisini toplamak için yaygın olarak kullanılır.
+* **Ölçümler** -saniye başına isteklerin zaman aralıklarıyla veri ölçülerinin temsili. Ölçümler kullanılarak dağıtılır `EventCounter` ve [DotNet-Counters](/dotnet/core/diagnostics/dotnet-counters) komut satırı aracı kullanılarak veya [Application Insights](/azure/azure-monitor/app/eventcounters)ile gözlemlenebilir.
 
 ## <a name="logging"></a>Günlüğe Kaydetme
 
@@ -111,7 +111,7 @@ Uygulamanız DI kullanıyorsa, `ILoggerFactory` [Loggerfactory. Create](xref:Mic
 
 #### <a name="grpc-client-log-scopes"></a>gRPC istemci günlüğü kapsamları
 
-GRPC istemcisi, gRPC çağrısı sırasında yapılan günlüklere bir [günlüğe kaydetme kapsamı](https://docs.microsoft.com/aspnet/core/fundamentals/logging#log-scopes) ekler. Kapsamda gRPC çağrısıyla ilgili meta veriler vardır:
+GRPC istemcisi, gRPC çağrısı sırasında yapılan günlüklere bir [günlüğe kaydetme kapsamı](../fundamentals/logging/index.md#log-scopes) ekler. Kapsamda gRPC çağrısıyla ilgili meta veriler vardır:
 
 * **Grpcmethodtype** -GRPC Yöntem türü. Olası değerler, enum 'tan adlardır `Grpc.Core.MethodType` , örneğin Birli
 * **Grpcuri** -GRPC yönteminin göreli URI 'si; Örneğin,/bir. Greeter/Saymerhaba s
@@ -133,7 +133,7 @@ dbug: Grpc.Net.Client.Internal.GrpcCall[4]
 
 ## <a name="tracing"></a>İzleme
 
-gRPC Hizmetleri ve gRPC istemcisi, [Diagnosticsource](https://docs.microsoft.com/dotnet/api/system.diagnostics.diagnosticsource) ve [Activity](https://docs.microsoft.com/dotnet/api/system.diagnostics.activity)kullanarak GRPC çağrıları hakkında bilgi sağlar.
+gRPC Hizmetleri ve gRPC istemcisi, [Diagnosticsource](/dotnet/api/system.diagnostics.diagnosticsource) ve [Activity](/dotnet/api/system.diagnostics.activity)kullanarak GRPC çağrıları hakkında bilgi sağlar.
 
 * .NET gRPC, bir gRPC çağrısını temsil eden bir etkinlik kullanır.
 * İzleme olayları, gRPC çağrısı etkinliğinin başlangıcında ve durdurulduğunda tanılama kaynağına yazılır.
@@ -159,7 +159,7 @@ gRPC Hizmetleri, gelen HTTP istekleriyle ilgili olayları raporlayan ASP.NET Cor
 
 ### <a name="collecting-tracing"></a>İzleme toplanıyor
 
-Kullanmanın en kolay yolu, `DiagnosticSource` uygulamanızda [Application Insights](https://docs.microsoft.com/azure/azure-monitor/app/asp-net-core) veya [opentelemetri](https://github.com/open-telemetry/opentelemetry-dotnet) gibi bir telemetri kitaplığı yapılandırmaktır. Bu kitaplık, gRPC ile diğer uygulama telemetrisini çağıran bilgileri işleyecek.
+Kullanmanın en kolay yolu, `DiagnosticSource` uygulamanızda [Application Insights](/azure/azure-monitor/app/asp-net-core) veya [opentelemetri](https://github.com/open-telemetry/opentelemetry-dotnet) gibi bir telemetri kitaplığı yapılandırmaktır. Bu kitaplık, gRPC ile diğer uygulama telemetrisini çağıran bilgileri işleyecek.
 
 İzleme Application Insights gibi bir yönetilen hizmette görüntülenebilir veya kendi dağıtılmış izleme sisteminizi çalıştırmayı tercih edebilirsiniz. Opentelemetri, izleme verilerinin [Caeger](https://www.jaegertracing.io/) ve [zipy](https://zipkin.io/)'ye verilmesini destekler.
 
@@ -203,7 +203,7 @@ gRPC istemci ölçümleri `Grpc.Net.Client` olay kaynağında raporlanır.
 
 ### <a name="observe-metrics"></a>Ölçümleri gözlemleyin
 
-[DotNet sayaçları](https://docs.microsoft.com/dotnet/core/diagnostics/dotnet-counters) , geçici sistem durumu izleme ve ilk düzey performans araştırması için bir performans izleme aracıdır. Bir .NET uygulamasını `Grpc.AspNetCore.Server` ya da `Grpc.Net.Client` sağlayıcı adıyla birlikte izleyin.
+[DotNet sayaçları](/dotnet/core/diagnostics/dotnet-counters) , geçici sistem durumu izleme ve ilk düzey performans araştırması için bir performans izleme aracıdır. Bir .NET uygulamasını `Grpc.AspNetCore.Server` ya da `Grpc.Net.Client` sağlayıcı adıyla birlikte izleyin.
 
 ```console
 > dotnet-counters monitor --process-id 1902 Grpc.AspNetCore.Server
@@ -220,7 +220,7 @@ Press p to pause, r to resume, q to quit.
     Total Calls Unimplemented                   0
 ```
 
-GRPC ölçümlerini gözlemlemeye yönelik başka bir yol da Application Insights [Microsoft. ApplicationInsights. EventCounterCollector paketini](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters)kullanarak sayaç verilerini yakalemektir. Kurulumdan sonra, Application Insights çalışma zamanında ortak .NET sayaçlarını toplar. gRPC 'nin sayaçları varsayılan olarak toplanmaz, ancak uygulama öngörüleri [ek sayaçlar içerecek şekilde özelleştirilebilir](https://docs.microsoft.com/azure/azure-monitor/app/eventcounters#customizing-counters-to-be-collected).
+GRPC ölçümlerini gözlemlemeye yönelik başka bir yol da Application Insights [Microsoft. ApplicationInsights. EventCounterCollector paketini](/azure/azure-monitor/app/eventcounters)kullanarak sayaç verilerini yakalemektir. Kurulumdan sonra, Application Insights çalışma zamanında ortak .NET sayaçlarını toplar. gRPC 'nin sayaçları varsayılan olarak toplanmaz, ancak uygulama öngörüleri [ek sayaçlar içerecek şekilde özelleştirilebilir](/azure/azure-monitor/app/eventcounters#customizing-counters-to-be-collected).
 
 *Startup.cs*Içinde toplanacak uygulama öngörüleri Için GRPC sayaçlarını belirtin:
 

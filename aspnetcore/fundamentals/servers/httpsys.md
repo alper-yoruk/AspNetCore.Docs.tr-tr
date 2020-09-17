@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: 29af28f512764b9efec682b44c8de1d2ae03ee04
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e5346c1e58127747d777b5040fe7bc7d99b9a489
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631140"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722877"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>ASP.NET Core Web sunucusu uygulamasını HTTP.sys
 
@@ -255,7 +255,7 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
 
    *netsh.exe*için başvuru belgeleri:
 
-   * [Köprü Metni Aktarım Protokolü (HTTP) için Netsh komutları](https://technet.microsoft.com/library/cc725882.aspx)
+   * [Köprü Metni Aktarım Protokolü (HTTP) için Netsh komutları](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10))
    * [UrlPrefix dizeleri](/windows/win32/http/urlprefix-strings)
 
 1. Uygulamayı çalıştırın.
@@ -506,7 +506,7 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
 
    *netsh.exe*için başvuru belgeleri:
 
-   * [Köprü Metni Aktarım Protokolü (HTTP) için Netsh komutları](https://technet.microsoft.com/library/cc725882.aspx)
+   * [Köprü Metni Aktarım Protokolü (HTTP) için Netsh komutları](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10))
    * [UrlPrefix dizeleri](/windows/win32/http/urlprefix-strings)
 
 1. Uygulamayı çalıştırın.
@@ -759,7 +759,7 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
 
    *netsh.exe*için başvuru belgeleri:
 
-   * [Köprü Metni Aktarım Protokolü (HTTP) için Netsh komutları](https://technet.microsoft.com/library/cc725882.aspx)
+   * [Köprü Metni Aktarım Protokolü (HTTP) için Netsh komutları](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10))
    * [UrlPrefix dizeleri](/windows/win32/http/urlprefix-strings)
 
 1. Uygulamayı çalıştırın.
@@ -1012,7 +1012,7 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
 
    *netsh.exe*için başvuru belgeleri:
 
-   * [Köprü Metni Aktarım Protokolü (HTTP) için Netsh komutları](https://technet.microsoft.com/library/cc725882.aspx)
+   * [Köprü Metni Aktarım Protokolü (HTTP) için Netsh komutları](/previous-versions/windows/it-pro/windows-server-2008-R2-and-2008/cc725882(v=ws.10))
    * [UrlPrefix dizeleri](/windows/win32/http/urlprefix-strings)
 
 1. Uygulamayı çalıştırın.

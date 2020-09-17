@@ -18,17 +18,17 @@ no-loc:
 - Razor
 - SignalR
 uid: security/docker-compose-https
-ms.openlocfilehash: 75a205c1eb21394ed36c00359f0dc4ca7e6d09e0
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 71ead7dcce32dab090a9b0b3573aa855d00fa7f1
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631647"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722767"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-compose-over-https"></a>HTTPS üzerinden Docker Compose olan ASP.NET Core görüntülerini barındırma
 
 
-ASP.NET Core [Varsayılan olarak https](/aspnet/core/security/enforcing-ssl)kullanır. [Https](https://en.wikipedia.org/wiki/HTTPS) , güven, kimlik ve şifreleme için [sertifikalara](https://en.wikipedia.org/wiki/Public_key_certificate) bağımlıdır.
+ASP.NET Core [Varsayılan olarak https](./enforcing-ssl.md)kullanır. [Https](https://en.wikipedia.org/wiki/HTTPS) , güven, kimlik ve şifreleme için [sertifikalara](https://en.wikipedia.org/wiki/Public_key_certificate) bağımlıdır.
 
 Bu belgede önceden oluşturulmuş kapsayıcı görüntülerinin HTTPS ile nasıl çalıştırılacağı açıklanmaktadır.
 
@@ -36,7 +36,7 @@ Geliştirme senaryoları için bkz. [https üzerinden Docker ile ASP.NET Core uy
 
 Bu örnek, [Docker Istemcisinin](https://www.docker.com/products/docker) [Docker 17,06](https://docs.docker.com/release-notes/docker-ce) veya sonraki bir sürümünü gerektirir.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 Bu belgedeki bazı yönergeler için [.NET Core 2,2 SDK](https://dotnet.microsoft.com/download) veya üzeri gereklidir.
 

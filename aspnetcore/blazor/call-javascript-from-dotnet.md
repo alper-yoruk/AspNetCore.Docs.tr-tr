@@ -5,7 +5,7 @@ description: Uygulamalarda .NET metotlarından JavaScript işlevlerini çağırm
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/07/2020
+ms.date: 09/17/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: e7f23a4b44a0adb1d0b97c88e1d17f96aa2d28bd
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a62462e3a0a2366a8662573ada5d2e7589c14c0d
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625394"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722481"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>ASP.NET Core .NET metotlarından JavaScript işlevlerini çağırın Blazor
 
@@ -109,6 +109,13 @@ Bu konuya eşlik eden istemci tarafı örnek uygulamada, Kullanıcı girişi alm
 .NET yöntemleri, çağırarak dosyadaki JavaScript işlevleriyle birlikte çalışır `exampleJsInterop.js` <xref:Microsoft.JSInterop.IJSRuntime.InvokeAsync%2A?displayProperty=nameWithType> .
 
 <xref:Microsoft.JSInterop.IJSRuntime>Soyutlama, senaryolara izin vermek için zaman uyumsuzdur Blazor Server . Uygulama bir Blazor WebAssembly uygulama ise ve bir JavaScript işlevini zaman uyumlu olarak çağırmak istiyorsanız, bunun yerine alt türe çevirme yapın <xref:Microsoft.JSInterop.IJSInProcessRuntime> ve çağırın <xref:Microsoft.JSInterop.IJSInProcessRuntime.Invoke%2A> . Çoğu JS birlikte çalışma kitaplıklarının, kitaplıkların tüm senaryolarda kullanılabilir olmasını sağlamak için zaman uyumsuz API 'Leri kullanmasını öneririz.
+
+::: moniker range=">= aspnetcore-5.0"
+
+> [!NOTE]
+> Standart [JavaScript modüllerinde](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules)JavaScript yalıtımını etkinleştirmek için [ Blazor JavaScript yalıtım ve nesne başvuruları](#blazor-javascript-isolation-and-object-references) bölümüne bakın.
+
+::: moniker-end
 
 Örnek uygulama, JS birlikte çalışabilirliği göstermek için bir bileşeni içerir. Bileşen:
 
@@ -485,6 +492,43 @@ Daha fazla bilgi için aşağıdaki konulara bakın:
 
 * [Döngüsel başvurular desteklenmez, iki alma (DotNet/aspnetcore #20525)](https://github.com/dotnet/aspnetcore/issues/20525)
 * [Teklif: serileştirilirken döngüsel başvuruları işlemek için mekanizma ekleyin (DotNet/Runtime #30820)](https://github.com/dotnet/runtime/issues/30820)
+
+::: moniker range=">= aspnetcore-5.0"
+
+## <a name="no-locblazor-javascript-isolation-and-object-references"></a>Blazor JavaScript yalıtımı ve nesne başvuruları
+
+Blazor Standart [JavaScript modüllerinde](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules)JavaScript yalıtımına izin vermez. JavaScript yalıtımı aşağıdaki avantajları sağlar:
+
+* İçeri aktarılan JavaScript artık genel ad alanını pollutes.
+* İlişkili JavaScript 'in içe aktarılması için bir kitaplık ve bileşenlerin tüketicileri gerekli değildir.
+
+Örneğin, aşağıdaki JavaScript modülü bir tarayıcı istemi göstermek için bir JavaScript işlevi dışarı aktarır:
+
+```javascript
+export function showPrompt(message) {
+  return prompt(message, 'Type anything here');
+}
+```
+
+Önceki JavaScript modülünü bir .NET kitaplığına statik web varlığı () olarak ekleyin `wwwroot/exampleJsInterop.js` ve ardından hizmeti kullanarak modülü .net koduna aktarın <xref:Microsoft.JSInterop.IJSRuntime> . Hizmet, `jsRuntime` Aşağıdaki örnek için (gösterilmez) olarak eklenir:
+
+```csharp
+var module = await jsRuntime.InvokeAsync<JSObjectReference>(
+    "import", "./_content/MyComponents/exampleJsInterop.js");
+```
+
+`import`Önceki örnekteki tanımlayıcı, özellikle bir JavaScript modülünü içeri aktarmak için kullanılan özel bir tanıtıcıdır. Sabit statik Web varlık yolunu kullanarak modülü belirtin: `_content/{LIBRARY NAME}/{PATH UNDER WWWROOT}` . Yer tutucu, `{LIBRARY NAME}` kitaplık adıdır. Yer tutucu, `{PATH UNDER WWWROOT}` altında betiğin yoludur `wwwroot` .
+
+<xref:Microsoft.JSInterop.IJSRuntime> modülünü `JSObjectReference` .NET kodundan bir JavaScript nesnesine başvuruyu temsil eden bir olarak içeri aktarır. Modülünden, `JSObjectReference` içe aktarılmış JavaScript işlevlerini çağırmak için kullanın:
+
+```csharp
+public async ValueTask<string> Prompt(string message)
+{
+    return await module.InvokeAsync<string>("showPrompt", message);
+}
+```
+
+::: moniker-end
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

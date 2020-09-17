@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/publish-to-azure-webapp-using-vs
-ms.openlocfilehash: 380e18d1826159fa0780909aba58fe8334ede8bb
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: ebfe89d68725d597d6975015bbf84414ff818829
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631946"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722916"
 ---
 # <a name="publish-an-aspnet-core-app-to-azure-with-visual-studio"></a>Visual Studio ile Azure 'da ASP.NET Core uygulaması yayımlama
 
@@ -34,7 +34,7 @@ Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 ::: moniker-end
 
 
-MacOS 'ta çalışıyorsanız [Mac için Visual Studio kullanarak Azure App Service Için Web uygulaması yayımlama](https://docs.microsoft.com/visualstudio/mac/publish-app-svc?view=vsmac-2019) konusuna bakın.
+MacOS 'ta çalışıyorsanız [Mac için Visual Studio kullanarak Azure App Service Için Web uygulaması yayımlama](/visualstudio/mac/publish-app-svc?view=vsmac-2019) konusuna bakın.
 
 App Service dağıtım sorununu gidermek için, bkz <xref:test/troubleshoot-azure-iis> ..
 

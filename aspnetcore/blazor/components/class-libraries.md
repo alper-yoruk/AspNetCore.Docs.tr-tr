@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/class-libraries
-ms.openlocfilehash: 82969bf92965bfdeb1d1474ab47ca74ecbe6dd97
-ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
+ms.openlocfilehash: afd1bfffae11520a5d9abccc1d2ee4cf3a46a4bf
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90080309"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722468"
 ---
 # <a name="aspnet-core-no-locrazor-components-class-libraries"></a>ASP.NET Core Razor bileşenleri sınıf kitaplıkları
 
@@ -170,6 +170,43 @@ RCL statik varlıkları içerebilir. Statik varlıklar, kitaplığı kullanan t�
 ## <a name="supply-components-and-static-assets-to-multiple-hosted-no-locblazor-apps"></a>Birden çok barındırılan uygulamaya bileşenleri ve statik varlıkları sağlama Blazor
 
 Daha fazla bilgi için bkz. <xref:blazor/host-and-deploy/webassembly#static-assets-and-class-libraries>.
+
+::: moniker range=">= aspnetcore-5.0"
+
+## <a name="browser-compatibility-analyzer-for-no-locblazor-webassembly"></a>İçin tarayıcı uyumluluk Çözümleyicisi Blazor WebAssembly
+
+Blazor WebAssembly uygulamalar tam .NET API yüzey alanını hedefletir, ancak tüm .NET API 'Leri, tarayıcı korumalı alan kısıtlamaları nedeniyle WebAssembly üzerinde desteklenmez. <xref:System.PlatformNotSupportedException>WebAssembly üzerinde çalışırken desteklenmeyen API 'ler oluşturur. Uygulama, uygulamanın hedef platformları tarafından desteklenmeyen API 'Ler kullandığında, bir platform uyumluluğu Çözümleyicisi geliştiriciyi uyarır. Blazor WebAssemblyUygulamalar için bu, API 'lerin tarayıcılarda desteklendiği anlamına gelir. Uyumluluk Çözümleyicisi için .NET Framework API 'Lerine açıklama ekleme işlemi devam eder, bu nedenle tüm .NET Framework API 'SI Şu anda açıklanmamaktadır.
+
+Blazor WebAssemblyve Razor sınıf kitaplığı projeleri *automatically* `browser` , MSBuild öğesiyle desteklenen bir platform olarak ekleyerek tarayıcı uyumluluk denetimlerini otomatik olarak etkinleştirir `SupportedPlatform` . Kitaplık geliştiricileri, `SupportedPlatform` özelliği etkinleştirmek için öğeyi bir kitaplığın proje dosyasına el ile ekleyebilir:
+
+```xml
+<ItemGroup>
+  <SupportedPlatform Include="browser" />
+</ItemGroup>
+```
+
+Bir kitaplık yazarken belirli bir API 'nin şu şekilde belirterek tarayıcılarda desteklenmediğini belirtin `browser` <xref:System.Runtime.Versioning.UnsupportedOSPlatformAttribute> :
+
+```csharp
+[UnsupportedOSPlatform("browser")]
+private static string GetLoggingDirectory()
+{
+    ...
+}
+```
+
+Daha fazla bilgi için bkz. [belirli platformlarda API 'Leri açıklama ekleme (DotNet/Designs GitHub deposu](https://github.com/dotnet/designs/blob/main/accepted/2020/platform-exclusion/platform-exclusion.md#build-configuration-for-platforms).
+
+## <a name="no-locblazor-javascript-isolation-and-object-references"></a>Blazor JavaScript yalıtımı ve nesne başvuruları
+
+Blazor Standart [JavaScript modüllerinde](https://developer.mozilla.org/docs/Web/JavaScript/Guide/Modules)JavaScript yalıtımına izin vermez. JavaScript yalıtımı aşağıdaki avantajları sağlar:
+
+* İçeri aktarılan JavaScript artık genel ad alanını pollutes.
+* Kitaplık ve bileşenlerin tüketicileri, ilgili JavaScript 'ı el ile içeri aktarmak için gerekli değildir.
+
+Daha fazla bilgi için bkz. <xref:blazor/call-javascript-from-dotnet#blazor-javascript-isolation-and-object-references>.
+
+::: moniker-end
 
 ## <a name="build-pack-and-ship-to-nuget"></a>NuGet 'i derleyin, paketleyebilir ve iade edin
 

@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/filter
-ms.openlocfilehash: b6d6585c0cbd52715c4192d4ab3bee756dbb41b3
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 436d640130b378e2c770322186020c6e252872ef
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635053"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722520"
 ---
 # <a name="filter-methods-for-no-locrazor-pages-in-aspnet-core"></a>RazorASP.NET Core sayfaların filtre yöntemleri
 
@@ -39,7 +39,7 @@ Razor Sayfa filtreleri:
 * İşleyici yöntemi yürütüldükten sonra kodu çalıştırın.
 * , Bir sayfada veya genel olarak uygulanabilir.
 * Belirli sayfa işleyici yöntemlerine uygulanamaz.
-* , [Bağımlılık ekleme](xref:fundamentals/dependency-injection) (dı) tarafından doldurulmuş Oluşturucu bağımlılıkları olabilir. Daha fazla bilgi için bkz. [Servicefilterattribute](/aspnet/core/mvc/controllers/filters#servicefilterattribute) ve [typefilterattribute](/aspnet/core/mvc/controllers/filters#typefilterattribute).
+* , [Bağımlılık ekleme](xref:fundamentals/dependency-injection) (dı) tarafından doldurulmuş Oluşturucu bağımlılıkları olabilir. Daha fazla bilgi için bkz. [Servicefilterattribute](../mvc/controllers/filters.md#servicefilterattribute) ve [typefilterattribute](../mvc/controllers/filters.md#typefilterattribute).
 
 Sayfa oluşturucular ve ara yazılım, bir işleyici yöntemi yürütmeden önce özel kod yürütmeyi etkinleştirirken, yalnızca Razor sayfa filtreleri <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel.HttpContext> ve sayfasına erişimi etkinleştirir. Ara yazılım, `HttpContext` "sayfa bağlamına" değil, öğesine erişebilir. Filtrelerin <xref:Microsoft.AspNetCore.Mvc.Filters.FilterContext> , öğesine erişim sağlayan bir türetilmiş parametresi vardır `HttpContext` . Sayfa filtresi için bir örnek aşağıda verilmiştir: yanıta bir üst bilgi ekleyen [bir filtre özniteliği uygulama](#ifa) , oluşturucular veya ara yazılım ile gerçekleştirilemez. Sayfa bağlamına erişim, sayfanın ve bu modelin modeline erişimi içerir, yalnızca filtreler, işleyiciler veya bir sayfanın gövdesi çalıştırılırken kullanılabilir Razor .
 

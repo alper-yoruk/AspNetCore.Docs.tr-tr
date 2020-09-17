@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/concurrency
-ms.openlocfilehash: e03711d970c83c2b7d6cc76039cb0d556a751018
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 0f0f1a9c70a2d6725cbb68ac62850cf6aa332d36
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628918"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90721846"
 ---
 # <a name="part-8-no-locrazor-pages-with-ef-core-in-aspnet-core---concurrency"></a>8. bölüm, Razor ASP.NET Core EF Core olan sayfalar-eşzamanlılık
 
@@ -443,14 +443,14 @@ John, hala $350.000,00 bütçesini gösteren bir düzenleme sayfasında **Kaydet
 
 Bir özellik [eşzamanlılık belirteci](/ef/core/modeling/concurrency)olarak yapılandırıldığında:
 
-* EF Core, özelliğin getirildikten sonra değiştirilmediğini doğrular. Bu denetim, [SaveChanges](/dotnet/api/microsoft.entityframeworkcore.dbcontext.savechanges?view=efcore-2.0#Microsoft_EntityFrameworkCore_DbContext_SaveChanges) veya [Savechangesasync](/dotnet/api/microsoft.entityframeworkcore.dbcontext.savechangesasync?view=efcore-2.0#Microsoft_EntityFrameworkCore_DbContext_SaveChangesAsync_System_Threading_CancellationToken_) çağrıldığında gerçekleşir.
-* Özellik alındıktan sonra değiştirilmişse, bir [DbUpdateConcurrencyException](/dotnet/api/microsoft.entityframeworkcore.dbupdateconcurrencyexception?view=efcore-2.0) oluşturulur. 
+* EF Core, özelliğin getirildikten sonra değiştirilmediğini doğrular. Bu denetim, [SaveChanges](/dotnet/api/microsoft.entityframeworkcore.dbcontext.savechanges#Microsoft_EntityFrameworkCore_DbContext_SaveChanges) veya [Savechangesasync](/dotnet/api/microsoft.entityframeworkcore.dbcontext.savechangesasync#Microsoft_EntityFrameworkCore_DbContext_SaveChangesAsync_System_Threading_CancellationToken_) çağrıldığında gerçekleşir.
+* Özellik alındıktan sonra değiştirilmişse, bir [DbUpdateConcurrencyException](/dotnet/api/microsoft.entityframeworkcore.dbupdateconcurrencyexception) oluşturulur. 
 
 DB ve veri modeli, üretilmesini destekleyecek şekilde yapılandırılmalıdır `DbUpdateConcurrencyException` .
 
 ### <a name="detecting-concurrency-conflicts-on-a-property"></a>Bir özellikte eşzamanlılık çakışmalarını algılama
 
-Eşzamanlılık çakışmaları özellik düzeyinde [ConcurrencyCheck](/dotnet/api/system.componentmodel.dataannotations.concurrencycheckattribute?view=netcore-2.0) özniteliğiyle algılanabilir. Öznitelik, modeldeki birden çok özelliğe uygulanabilir. Daha fazla bilgi için bkz. [veri ek açıklamaları-ConcurrencyCheck](/ef/core/modeling/concurrency#data-annotations).
+Eşzamanlılık çakışmaları özellik düzeyinde [ConcurrencyCheck](/dotnet/api/system.componentmodel.dataannotations.concurrencycheckattribute) özniteliğiyle algılanabilir. Öznitelik, modeldeki birden çok özelliğe uygulanabilir. Daha fazla bilgi için bkz. [veri ek açıklamaları-ConcurrencyCheck](/ef/core/modeling/concurrency#data-annotations).
 
 `[ConcurrencyCheck]`Öznitelik bu öğreticide kullanılmıyor.
 
@@ -561,7 +561,7 @@ Aşağıdaki kodla *Pages\Departments\Edit.cshtml.cs* güncelleştirin:
 
 [!code-csharp[](intro/samples/cu/Pages/Departments/Edit.cshtml.cs?name=snippet)]
 
-Bir eşzamanlılık sorunu tespit etmek için [OriginalValue](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyentry.originalvalue?view=efcore-2.0#Microsoft_EntityFrameworkCore_ChangeTracking_PropertyEntry_OriginalValue) , `rowVersion` getirilen varlıktaki değeri ile güncelleştirilir. EF Core, özgün değeri içeren WHERE yan tümcesiyle bir SQL UPDATE komutu oluşturur `RowVersion` . UPDATE komutundan hiçbir satır etkilenmeden (hiçbir satır özgün değere sahip değilse `RowVersion` ), bir `DbUpdateConcurrencyException` özel durum oluşturulur.
+Bir eşzamanlılık sorunu tespit etmek için [OriginalValue](/dotnet/api/microsoft.entityframeworkcore.changetracking.propertyentry.originalvalue#Microsoft_EntityFrameworkCore_ChangeTracking_PropertyEntry_OriginalValue) , `rowVersion` getirilen varlıktaki değeri ile güncelleştirilir. EF Core, özgün değeri içeren WHERE yan tümcesiyle bir SQL UPDATE komutu oluşturur `RowVersion` . UPDATE komutundan hiçbir satır etkilenmeden (hiçbir satır özgün değere sahip değilse `RowVersion` ), bir `DbUpdateConcurrencyException` özel durum oluşturulur.
 
 [!code-csharp[](intro/samples/cu/Pages/Departments/Edit.cshtml.cs?name=snippet_rv&highlight=24-999)]
 

@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/docker/building-net-docker-images
-ms.openlocfilehash: dfb807d5e8d8b949feb0ea87f7f6bcecd04817e8
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 791cc14feac30ad8a571d155624ab821dfd77981
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627331"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722864"
 ---
 # <a name="docker-images-for-aspnet-core"></a>ASP.NET Core için Docker görüntüleri
 
@@ -51,7 +51,7 @@ Bu öğreticide, ASP.NET Core örnek bir uygulama indirir ve Docker kapsayıcıl
 
    Örnek, uygulamayı çalıştırmak için bu görüntüyü kullanır. Görüntü, ASP.NET Core çalışma zamanını ve kitaplıklarını içerir ve üretimde uygulamaları çalıştırmak için iyileştirilmiştir. Dağıtım ve uygulama başlatma hızı için tasarlanan görüntü görece küçüktür, bu nedenle Docker kayıt defterinden Docker ana bilgisayarına ağ performansı en iyi duruma getirilmiştir. Yalnızca bir uygulamayı çalıştırmak için gereken ikili dosyalar ve içerikler kapsayıcıya kopyalanır. İçerik çalıştırılmaya hazırlanmaya, en hızlı süreyi uygulama başlatmaya kadar etkinleştirir `Docker run` . Docker modelinde dinamik kod derlemesi gerekli değildir.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 ::: moniker range="< aspnetcore-3.0"
 
 * [.NET Core 2,2 SDK](https://dotnet.microsoft.com/download/dotnet-core)
@@ -264,8 +264,8 @@ ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 * [Docker derleme komutu](https://docs.docker.com/engine/reference/commandline/build)
 * [Docker Run komutu](https://docs.docker.com/engine/reference/commandline/run)
 * [Docker örneğine ASP.NET Core](https://github.com/dotnet/dotnet-docker) (Bu öğreticide kullanılan bir tane).
-* [Proxy sunucularıyla ve yük dengeleyicilerle çalışacak ASP.NET Core yapılandırma](/aspnet/core/host-and-deploy/proxy-load-balancer)
-* [Visual Studio Docker araçlarıyla çalışma](https://docs.microsoft.com/aspnet/core/publishing/visual-studio-tools-for-docker)
+* [Proxy sunucularıyla ve yük dengeleyicilerle çalışacak ASP.NET Core yapılandırma](../proxy-load-balancer.md)
+* [Visual Studio Docker araçlarıyla çalışma](./visual-studio-tools-for-docker.md)
 * [Visual Studio Code ile hata ayıklama](https://code.visualstudio.com/docs/nodejs/debugging-recipes#_debug-nodejs-in-docker-containers)
 * [Docker ve küçük kapsayıcılar kullanılarak GC](xref:performance/memory#sc)
 

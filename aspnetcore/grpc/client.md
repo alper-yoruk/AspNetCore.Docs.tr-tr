@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/client
-ms.openlocfilehash: 9406c2a34126f3e5cd1406a55c3585e7a28f3dd9
-ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
+ms.openlocfilehash: 6515e87845cc5aa101532c18711d175a73581bee
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90593053"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722715"
 ---
 # <a name="call-grpc-services-with-the-net-client"></a>.NET istemcisiyle gRPC hizmetlerini çağırma
 
@@ -33,7 +33,7 @@ ms.locfileid: "90593053"
 
 ## <a name="configure-grpc-client"></a>GRPC istemcisini yapılandırma
 
-gRPC istemcileri [ * \* . proto* dosyalarından oluşturulan](xref:grpc/basics#generated-c-assets)somut istemci türleridir. Somut gRPC istemcisinde * \* . proto* dosyasındaki GRPC hizmetine çeviren yöntemler vardır.
+gRPC istemcileri [ * \* . proto* dosyalarından oluşturulan](xref:grpc/basics#generated-c-assets)somut istemci türleridir. Somut gRPC istemcisinde * \* . proto* dosyasındaki GRPC hizmetine çeviren yöntemler vardır. Örneğin, adlı bir hizmet `Greeter` `GreeterClient` hizmeti çağırmak için yöntemler içeren bir tür üretir.
 
 Bir kanaldan gRPC istemcisi oluşturulur. `GrpcChannel.ForAddress`' I kullanarak bir kanal oluşturun ve ardından bir gRPC istemcisi oluşturmak için kanalı kullanın:
 
@@ -57,7 +57,7 @@ var counterClient = new Count.CounterClient(channel);
 
 Bir gRPC istemcisinin, çağrılan hizmetle aynı bağlantı düzeyi güvenliği kullanması gerekir. GRPC istemci Aktarım Katmanı Güvenliği (TLS), gRPC kanalı oluşturulduğunda yapılandırılır. Bir gRPC istemcisi, bir hizmet çağırdığında bir hata oluşturur ve kanalın ve hizmetin bağlantı düzeyi güvenliği eşleşmez.
 
-TLS kullanmak için bir gRPC kanalını yapılandırmak üzere sunucu adresinin ile başladığı emin olun `https` . Örneğin, `GrpcChannel.ForAddress("https://localhost:5001")` https protokolünü kullanır. GRPC kanalı, TLS ile güvenliği sağlanmış bir bağlantıyı otomatik olarak alır ve gRPC çağrıları yapmak için güvenli bir bağlantı kullanır.
+TLS kullanmak için bir gRPC kanalını yapılandırmak üzere sunucu adresinin ile başladığı emin olun `https` . Örneğin, `GrpcChannel.ForAddress("https://localhost:5001")` https protokolünü kullanır. GRPC kanalı, TLS ile güvenliği sağlanmış bir bağlantıyı otomatik olarak belirler ve gRPC çağrıları yapmak için güvenli bir bağlantı kullanır.
 
 > [!TIP]
 > gRPC, TLS üzerinden istemci sertifikası kimlik doğrulamasını destekler. Bir gRPC kanalı ile istemci sertifikalarını yapılandırma hakkında bilgi için bkz <xref:grpc/authn-and-authz#client-certificate-authentication> ..

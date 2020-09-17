@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/localization
-ms.openlocfilehash: d5be01c67f455a2706a654574ef9f5e273551e70
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 478e9e58f265a8c372dd048f9ba8593424050e01
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865442"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722676"
 ---
 # <a name="globalization-and-localization-in-aspnet-core"></a>ASP.NET Core Genelleştirme ve yerelleştirme
 
@@ -66,7 +66,7 @@ Yukarıdaki kod, iki fabrika oluşturma yönteminin her birini gösterir.
 
 Yerelleştirilmiş dizelerinizi denetleyiciye, alana veya yalnızca bir kapsayıcıya göre bölümleyebilirsiniz. Örnek uygulamada, paylaşılan kaynaklar için adlı bir kukla sınıf `SharedResource` kullanılır.
 
-[!code-csharp[](localization/sample/3.x/Localization/Resources/SharedResource.cs)]
+[!code-csharp[](localization/sample/3.x/Localization/SharedResource.cs)]
 
 Bazı geliştiriciler, `Startup` genel veya paylaşılan dizeler içeren sınıfını kullanır. Aşağıdaki örnekte, `InfoController` ve `SharedResource` yerelleştiriciler kullanılır:
 
@@ -420,7 +420,7 @@ Yukarıdaki kod, iki fabrika oluşturma yönteminin her birini gösterir.
 
 Yerelleştirilmiş dizelerinizi denetleyiciye, alana veya yalnızca bir kapsayıcıya göre bölümleyebilirsiniz. Örnek uygulamada, paylaşılan kaynaklar için adlı bir kukla sınıf `SharedResource` kullanılır.
 
-[!code-csharp[](localization/sample/3.x/Localization/Resources/SharedResource.cs)]
+[!code-csharp[](localization/sample/3.x/Localization/SharedResource.cs)]
 
 Bazı geliştiriciler, `Startup` genel veya paylaşılan dizeler içeren sınıfını kullanır. Aşağıdaki örnekte, `InfoController` ve `SharedResource` yerelleştiriciler kullanılır:
 
@@ -775,7 +775,7 @@ Yukarıdaki kod, iki fabrika oluşturma yönteminin her birini gösterir.
 
 Yerelleştirilmiş dizelerinizi denetleyiciye, alana veya yalnızca bir kapsayıcıya göre bölümleyebilirsiniz. Örnek uygulamada, paylaşılan kaynaklar için adlı bir kukla sınıf `SharedResource` kullanılır.
 
-[!code-csharp[](localization/sample/3.x/Localization/Resources/SharedResource.cs)]
+[!code-csharp[](localization/sample/3.x/Localization/SharedResource.cs)]
 
 Bazı geliştiriciler, `Startup` genel veya paylaşılan dizeler içeren sınıfını kullanır. Aşağıdaki örnekte, `InfoController` ve `SharedResource` yerelleştiriciler kullanılır:
 

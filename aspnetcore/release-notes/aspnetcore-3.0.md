@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: a53ba22c301b04aafa1eeb53d91f82f90dab0bad
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a1cbd8f434214ce488fc3febe63d8aaf54db71a3
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631556"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722793"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3,0 ' deki yenilikler
 
@@ -397,7 +397,7 @@ Ana bilgisayar gereksinimleri:
 * Windows Konakları, uygulamayı barındıran Kullanıcı hesabına eklenmiş [hizmet sorumlusu adlarına](/windows/win32/ad/service-principal-names) (SPN) sahip olmalıdır.
 * Linux ve macOS makineleri etki alanına katılmalıdır.
   * Web işlemi için SPN oluşturulması gerekir.
-  * Ana makinede [keytab dosyalarının](https://blogs.technet.microsoft.com/pie/2018/01/03/all-you-need-to-know-about-keytab-files/) oluşturulup yapılandırılması gerekir.
+  * Ana makinede [keytab dosyalarının](/archive/blogs/pie/all-you-need-to-know-about-keytab-files) oluşturulup yapılandırılması gerekir.
 
 Daha fazla bilgi için bkz. <xref:security/authentication/windowsauth>.
 
@@ -550,4 +550,3 @@ Paylaşılan çerçeveden kaldırılan derlemelerin tamamen listesi için bkz [.
 ## Additional information
 For the complete list of changes, see the [ASP.NET Core 3.0 Release Notes](WHERE IS THIS????).
 -->
- 

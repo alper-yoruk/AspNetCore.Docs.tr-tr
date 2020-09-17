@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/enforcing-ssl
-ms.openlocfilehash: 1cb2c2d18b717dc99c6ef4dac9954fef149c6deb
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b5260084c2fdd296168e918f06d8b54faf1865d5
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631569"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722663"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>ASP.NET Core 'de HTTPS 'yi zorla
 
@@ -109,7 +109,7 @@ Aşağıdaki yaklaşımlardan herhangi birini kullanarak HTTPS bağlantı noktas
 
 ::: moniker range=">= aspnetcore-3.0"
 
-* `https_port` [Konak ayarını](/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.0#https_port)ayarlayın:
+* `https_port` [Konak ayarını](../fundamentals/host/generic-host.md?view=aspnetcore-3.0#https_port)ayarlayın:
 
   * Konak yapılandırmasında.
   * `ASPNETCORE_HTTPS_PORT`Ortam değişkenini ayarlayarak.
@@ -117,7 +117,7 @@ Aşağıdaki yaklaşımlardan herhangi birini kullanarak HTTPS bağlantı noktas
 
     [!code-json[](enforcing-ssl/sample-snapshot/3.x/appsettings.json?highlight=2)]
 
-* [ASPNETCORE_URLS ortam değişkenini](/aspnet/core/fundamentals/host/generic-host?view=aspnetcore-3.0#urls)kullanarak güvenli düzene sahip bir bağlantı noktası belirtin. Ortam değişkeni sunucusunu yapılandırır. Ara yazılım, üzerinden HTTPS bağlantı noktasını dolaylı olarak bulur <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> . Bu yaklaşım, ters proxy dağıtımlarında çalışmaz.
+* [ASPNETCORE_URLS ortam değişkenini](../fundamentals/host/generic-host.md?view=aspnetcore-3.0#urls)kullanarak güvenli düzene sahip bir bağlantı noktası belirtin. Ortam değişkeni sunucusunu yapılandırır. Ara yazılım, üzerinden HTTPS bağlantı noktasını dolaylı olarak bulur <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> . Bu yaklaşım, ters proxy dağıtımlarında çalışmaz.
 
 ::: moniker-end
 

@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/middleware
-ms.openlocfilehash: 43b0ef1dcbf6d0137b14be9e58eb056f06ae093d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 7fe9629e1c60a6156c69e546736049653a4229b7
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633454"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722650"
 ---
 # <a name="response-caching-middleware-in-aspnet-core"></a>ASP.NET Core 'de yanıt önbelleğe alma ara yazılımı
 
@@ -59,7 +59,7 @@ Uygulamayı, <xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseRes
 
 Yukarıdaki üstbilgiler yanıta yazılmaz ve bir denetleyici, eylem veya sayfa olduğunda geçersiz kılınır Razor :
 
-* [[Responsecache]](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) özniteliğine sahiptir. Bir özellik ayarlanmamışsa bile bu geçerlidir. Örneğin, [VaryByHeader](/aspnet/core/performance/caching/response#vary) özelliğinin atlanması karşılık gelen üstbilginin yanıttan kaldırılmasına neden olur.
+* [[Responsecache]](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) özniteliğine sahiptir. Bir özellik ayarlanmamışsa bile bu geçerlidir. Örneğin, [VaryByHeader](./response.md#vary) özelliğinin atlanması karşılık gelen üstbilginin yanıttan kaldırılmasına neden olur.
 
 Yanıt önbelleğe alma ara yazılımı yalnızca 200 (Tamam) durum kodu ile sonuçlanan sunucu yanıtlarını önbelleğe alır. [Hata sayfaları](xref:fundamentals/error-handling)dahil diğer tüm yanıtlar, ara yazılım tarafından yok sayılır.
 
@@ -203,7 +203,7 @@ Uygulamayı, <xref:Microsoft.AspNetCore.Builder.ResponseCachingExtensions.UseRes
 
 Yukarıdaki üstbilgiler yanıta yazılmaz ve bir denetleyici, eylem veya sayfa olduğunda geçersiz kılınır Razor :
 
-* [[Responsecache]](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) özniteliğine sahiptir. Bir özellik ayarlanmamışsa bile bu geçerlidir. Örneğin, [VaryByHeader](/aspnet/core/performance/caching/response#vary) özelliğinin atlanması karşılık gelen üstbilginin yanıttan kaldırılmasına neden olur.
+* [[Responsecache]](xref:Microsoft.AspNetCore.Mvc.ResponseCacheAttribute) özniteliğine sahiptir. Bir özellik ayarlanmamışsa bile bu geçerlidir. Örneğin, [VaryByHeader](./response.md#vary) özelliğinin atlanması karşılık gelen üstbilginin yanıttan kaldırılmasına neden olur.
 
 Yanıt önbelleğe alma ara yazılımı yalnızca 200 (Tamam) durum kodu ile sonuçlanan sunucu yanıtlarını önbelleğe alır. [Hata sayfaları](xref:fundamentals/error-handling)dahil diğer tüm yanıtlar, ara yazılım tarafından yok sayılır.
 

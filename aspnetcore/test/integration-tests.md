@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/integration-tests
-ms.openlocfilehash: b06c06fb5e525a0bdc3df1de50236fa8f76daca9
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 9b36a77730a43c7515fcd2c56621412453784c9d
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635118"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722546"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>ASP.NET Core tümleştirme testleri
 
@@ -388,13 +388,13 @@ SUT, Razor aşağıdaki özelliklere sahip bir sayfalar ileti sistemidir:
 
 EF konusunda, [InMemory Ile Test](/ef/core/miscellaneous/testing/in-memory)&#8224;, MSTest ile testler için bellek içi bir veritabanının nasıl kullanılacağını açıklar. Bu konu [xUnit](https://xunit.github.io/) test çerçevesini kullanır. Farklı test çerçeveleri genelinde test kavramları ve test uygulamaları benzerdir ancak aynı değildir.
 
-Uygulama, depo desenini kullanmıyor ve [Iş birimi (UoW) düzeninin](https://martinfowler.com/eaaCatalog/unitOfWork.html)etkin bir örneği olmamasına karşın, Razor Sayfalar bu geliştirme düzenlerini destekler. Daha fazla bilgi için bkz. [altyapı Kalıcılık katmanını tasarlama](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design) ve [Test denetleyicisi mantığı](/aspnet/core/mvc/controllers/testing) (örnek, depo modelini uygular).
+Uygulama, depo desenini kullanmıyor ve [Iş birimi (UoW) düzeninin](https://martinfowler.com/eaaCatalog/unitOfWork.html)etkin bir örneği olmamasına karşın, Razor Sayfalar bu geliştirme düzenlerini destekler. Daha fazla bilgi için bkz. [altyapı Kalıcılık katmanını tasarlama](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design) ve [Test denetleyicisi mantığı](../mvc/controllers/testing.md) (örnek, depo modelini uygular).
 
 ### <a name="test-app-organization"></a>Test uygulaması kuruluşu
 
 Test uygulaması, *testler/ Razor pagesproject. Tests* dizini içindeki bir konsol uygulamasıdır.
 
-| Uygulama dizinini test et | Açıklama |
+| Uygulama dizinini test et | Description |
 | ------------------ | ----------- |
 | *AuthTests* | İçin test yöntemleri içerir:<ul><li>Güvenli bir sayfaya, kimliği doğrulanmamış bir kullanıcıyla erişme.</li><li>Bir sahte ile kimliği doğrulanmış bir kullanıcı tarafından güvenli bir sayfaya erişme <xref:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1> .</li><li>GitHub kullanıcı profilini alma ve profilin Kullanıcı oturum açma bilgilerini denetleme.</li></ul> |
 | *BasicTests* | Yönlendirme ve içerik türü için bir test yöntemi içerir. |
@@ -779,13 +779,13 @@ SUT, Razor aşağıdaki özelliklere sahip bir sayfalar ileti sistemidir:
 
 EF konusunda, [InMemory Ile Test](/ef/core/miscellaneous/testing/in-memory)&#8224;, MSTest ile testler için bellek içi bir veritabanının nasıl kullanılacağını açıklar. Bu konu [xUnit](https://xunit.github.io/) test çerçevesini kullanır. Farklı test çerçeveleri genelinde test kavramları ve test uygulamaları benzerdir ancak aynı değildir.
 
-Uygulama, depo desenini kullanmıyor ve [Iş birimi (UoW) düzeninin](https://martinfowler.com/eaaCatalog/unitOfWork.html)etkin bir örneği olmamasına karşın, Razor Sayfalar bu geliştirme düzenlerini destekler. Daha fazla bilgi için bkz. [altyapı Kalıcılık katmanını tasarlama](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design) ve [Test denetleyicisi mantığı](/aspnet/core/mvc/controllers/testing) (örnek, depo modelini uygular).
+Uygulama, depo desenini kullanmıyor ve [Iş birimi (UoW) düzeninin](https://martinfowler.com/eaaCatalog/unitOfWork.html)etkin bir örneği olmamasına karşın, Razor Sayfalar bu geliştirme düzenlerini destekler. Daha fazla bilgi için bkz. [altyapı Kalıcılık katmanını tasarlama](/dotnet/standard/microservices-architecture/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design) ve [Test denetleyicisi mantığı](../mvc/controllers/testing.md) (örnek, depo modelini uygular).
 
 ### <a name="test-app-organization"></a>Test uygulaması kuruluşu
 
 Test uygulaması, *testler/ Razor pagesproject. Tests* dizini içindeki bir konsol uygulamasıdır.
 
-| Uygulama dizinini test et | Açıklama |
+| Uygulama dizinini test et | Description |
 | ------------------ | ----------- |
 | *AuthTests* | İçin test yöntemleri içerir:<ul><li>Güvenli bir sayfaya, kimliği doğrulanmamış bir kullanıcıyla erişme.</li><li>Bir sahte ile kimliği doğrulanmış bir kullanıcı tarafından güvenli bir sayfaya erişme <xref:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1> .</li><li>GitHub kullanıcı profilini alma ve profilin Kullanıcı oturum açma bilgilerini denetleme.</li></ul> |
 | *BasicTests* | Yönlendirme ve içerik türü için bir test yöntemi içerir. |

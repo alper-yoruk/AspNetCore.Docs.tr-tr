@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/compatibility-version
-ms.openlocfilehash: fb24ca0b3a67ceca03a2666d5a4eb8782e05ba17
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b7d14aa0371fcc01d568cf1e7b9908c4a8d984df
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630360"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722838"
 ---
 # <a name="compatibility-version-for-aspnet-core-mvc"></a>ASP.NET Core MVC için uyumluluk sürümü
 
@@ -37,7 +37,7 @@ Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 * `CompatibilityVersion``Version_2_0`üzerinden değerler `Version_2_2` işaretlenir `[Obsolete(...)]` .
 * Bkz. [Antiforgery, CORS, Diagnostics, MVC ve yönlendirme IÇINDEKI API değişikliklerini bozma](https://github.com/aspnet/Announcements/issues/387). Bu liste, uyumluluk anahtarlarına yönelik son değişiklikleri içerir.
 
-`SetCompatibilityVersion`ASP.NET Core 2. x uygulamalarıyla nasıl çalıştığını görmek için, [bu makalenin ASP.NET Core 2,2 sürümünü](https://docs.microsoft.com/aspnet/core/mvc/compatibility-version?view=aspnetcore-2.2)seçin.
+`SetCompatibilityVersion`ASP.NET Core 2. x uygulamalarıyla nasıl çalıştığını görmek için, [bu makalenin ASP.NET Core 2,2 sürümünü](?view=aspnetcore-2.2)seçin.
 
 ::: moniker-end
 

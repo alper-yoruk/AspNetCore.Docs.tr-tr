@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/protobuf
-ms.openlocfilehash: 60af1add9ae2f8b2b94bc19b65667d7af91fb122
-ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
+ms.openlocfilehash: ea46e04bc4aa6269efbf8917d5f32194402a66ef
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/29/2020
-ms.locfileid: "89102672"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722702"
 ---
 # <a name="create-protobuf-messages-for-net-apps"></a>.NET uygulamaları için Prototipsiz iletiler oluşturma
 
@@ -85,6 +85,10 @@ Prototip, yerel skaler değer türlerini destekler. Aşağıdaki tabloda bunlar�
 | `string`      | `string`     |
 | `bytes`       | `ByteString` |
 
+Skaler değerler her zaman varsayılan bir değere sahiptir ve olarak ayarlanamaz `null` . Bu kısıtlama `string` C# sınıfları içerir ve içerir `ByteString` . `string` Varsayılan değer boş bir dize değerine ve `ByteString` Varsayılan olarak boş bayt değerine sahip olur. Bunları `null` bir hata oluşturur olarak ayarlamaya çalışılıyor.
+
+Null değer [alabilen sarmalayıcı türleri](#nullable-types) , null değerleri desteklemek için kullanılabilir.
+
 ### <a name="dates-and-times"></a>Tarihler ve saatler
 
 Yerel skaler türler, ile eşdeğer tarih ve saat değerleri için sağlamaz. NET <xref:System.DateTimeOffset> , <xref:System.DateTime> ve <xref:System.TimeSpan> . Bu türler, prototipin *Iyi bilinen türler* uzantıları kullanılarak belirtilebilir. Bu uzantılar desteklenen platformlar genelinde karmaşık alan türleri için kod oluşturma ve çalışma zamanı desteği sağlar.
@@ -145,19 +149,42 @@ message Person {
 }
 ```
 
-Prototip, `int?` üretilen ileti özelliği için .net Nullable türler (örneğin,) kullanır.
+`wrappers.proto` türler oluşturulan özelliklerde gösterilmez. Prototip, C# iletilerinde uygun .NET null yapılabilir türleriyle otomatik olarak eşlenir. Örneğin, bir `google.protobuf.Int32Value` alan bir özellik oluşturur `int?` . Ve gibi başvuru türü özellikleri, `string` `ByteString` `null` hata olmadan bunlara atanabilir.
 
 Aşağıdaki tabloda, eşdeğer C# türüyle sarmalayıcı türlerinin tüm listesi gösterilmektedir:
 
-| C# türü   | İyi bilinen tür sarmalayıcısı       |
-| --------- | ----------------------------- |
-| `bool?`   | `google.protobuf.BoolValue`   |
-| `double?` | `google.protobuf.DoubleValue` |
-| `float?`  | `google.protobuf.FloatValue`  |
-| `int?`    | `google.protobuf.Int32Value`  |
-| `long?`   | `google.protobuf.Int64Value`  |
-| `uint?`   | `google.protobuf.UInt32Value` |
-| `ulong?`  | `google.protobuf.UInt64Value` |
+| C# türü      | İyi bilinen tür sarmalayıcısı       |
+| ------------ | ----------------------------- |
+| `bool?`      | `google.protobuf.BoolValue`   |
+| `double?`    | `google.protobuf.DoubleValue` |
+| `float?`     | `google.protobuf.FloatValue`  |
+| `int?`       | `google.protobuf.Int32Value`  |
+| `long?`      | `google.protobuf.Int64Value`  |
+| `uint?`      | `google.protobuf.UInt32Value` |
+| `ulong?`     | `google.protobuf.UInt64Value` |
+| `string`     | `google.protobuf.StringValue` |
+| `ByteString` | `google.protobuf.BytesValue`  |
+
+### <a name="bytes"></a>Bayt
+
+İkili yükleri, skaler değer türü ile prototipte desteklenir `bytes` . C# içinde oluşturulan bir özellik `ByteString` , özellik türü olarak kullanır.
+
+`ByteString.CopyFrom(byte[] data)`Bir bayt dizisinden yeni bir örnek oluşturmak için kullanın:
+
+```csharp
+var data = await File.ReadAllBytesAsync(path);
+
+var payload = new PayloadResponse();
+payload.Data = ByteString.CopyFrom(data);
+```
+
+`ByteString` verilerine doğrudan veya kullanılarak erişilir `ByteString.Span` `ByteString.Memory` . Ya da `ByteString.ToByteArray()` bir örneği bir bayt dizisine geri dönüştürmek için çağırın:
+
+```csharp
+var payload = await client.GetPayload(new PayloadRequest());
+
+await File.WriteAllBytesAsync(path, payload.Data.ToByteArray());
+```
 
 ### <a name="decimals"></a>Ondalıklar
 

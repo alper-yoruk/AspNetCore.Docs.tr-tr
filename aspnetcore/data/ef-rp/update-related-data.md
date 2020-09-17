@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/update-related-data
-ms.openlocfilehash: 603c5e7c9f095c380461f8c6e4ead783ad35abe2
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 17b200f0ba90035c417c96689798263af16551de
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630867"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722825"
 ---
 # <a name="part-7-no-locrazor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>Bölüm 7, Razor ASP.NET Core EF Core olan sayfalar-Ilgili verileri güncelleştir
 
@@ -46,7 +46,7 @@ Aşağıdaki kodla bir *Pages/kurslar/DepartmentNamePageModel. cs* dosyası olu�
 
 [!code-csharp[](intro/samples/cu30/Pages/Courses/DepartmentNamePageModel.cs)]
 
-Yukarıdaki kod, bölüm adlarının listesini içeren bir [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist?view=aspnetcore-2.0) oluşturur. `selectedDepartment`Belirtilmişse, bu departman öğesinde seçilir `SelectList` .
+Yukarıdaki kod, bölüm adlarının listesini içeren bir [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist) oluşturur. `selectedDepartment`Belirtilmişse, bu departman öğesinde seçilir `SelectList` .
 
 Oluşturma ve düzenleme sayfa modeli sınıfları öğesinden türetilir `DepartmentNamePageModel` .
 
@@ -111,7 +111,7 @@ Sayfa `<input type="hidden">` , kurs numarası için gizli bir alan () içerir. 
 
 ## <a name="update-the-course-details-and-delete-pages"></a>Kurs ayrıntılarını güncelleştirme ve sayfaları silme
 
-[Anotracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking?view=efcore-2.0#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) , izleme gerekli olmadığında performansı iyileştirebilir.
+[Anotracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) , izleme gerekli olmadığında performansı iyileştirebilir.
 
 ### <a name="update-the-course-page-models"></a>Kurs sayfası modellerini güncelleştirme
 
@@ -263,7 +263,7 @@ Kurslar/oluştur ve kurslar/Düzenle sayfaları, her birinin departman adları l
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/DepartmentNamePageModel.cshtml.cs?highlight=9,11,20-21)]
 
-Yukarıdaki kod, bölüm adlarının listesini içeren bir [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist?view=aspnetcore-2.0) oluşturur. `selectedDepartment`Belirtilmişse, bu departman öğesinde seçilir `SelectList` .
+Yukarıdaki kod, bölüm adlarının listesini içeren bir [SelectList](/dotnet/api/microsoft.aspnetcore.mvc.rendering.selectlist) oluşturur. `selectedDepartment`Belirtilmişse, bu departman öğesinde seçilir `SelectList` .
 
 Oluşturma ve düzenleme sayfa modeli sınıfları öğesinden türetilir `DepartmentNamePageModel` .
 
@@ -328,7 +328,7 @@ Güncelleştirilmiş kodu test edin. Kurs oluşturun, düzenleyin ve silin.
 
 ## <a name="add-asnotracking-to-the-details-and-delete-page-models"></a>Ayrıntılara AsNoTracking ekleme ve sayfa modellerini silme
 
-[Anotracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking?view=efcore-2.0#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) , izleme gerekli olmadığında performansı iyileştirebilir. `AsNoTracking`Sil ve Ayrıntılar sayfa modeline ekleyin. Aşağıdaki kod, güncelleştirilmiş silme sayfası modelini göstermektedir:
+[Anotracking](/dotnet/api/microsoft.entityframeworkcore.entityframeworkqueryableextensions.asnotracking#Microsoft_EntityFrameworkCore_EntityFrameworkQueryableExtensions_AsNoTracking__1_System_Linq_IQueryable___0__) , izleme gerekli olmadığında performansı iyileştirebilir. `AsNoTracking`Sil ve Ayrıntılar sayfa modeline ekleyin. Aşağıdaki kod, güncelleştirilmiş silme sayfası modelini göstermektedir:
 
 [!code-csharp[](intro/samples/cu/Pages/Courses/Delete.cshtml.cs?name=snippet&highlight=21,23,40,41)]
 

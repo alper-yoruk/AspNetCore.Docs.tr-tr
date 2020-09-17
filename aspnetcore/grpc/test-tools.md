@@ -1,8 +1,8 @@
 ---
-title: GRPC araçlarıyla test hizmetleri
+title: ASP.NET Core 'de Grpkıvle gRPC hizmetlerini test edin
 author: jamesnk
 description: GRPC araçlarıyla Hizmetleri test etme hakkında bilgi edinin. gRPC hizmetleriyle etkileşim kurmak için bir komut satırı aracını GRP. Grpcuı etkileşimli bir Web Kullanıcı arabirimi.
-monikerRange: '>= aspnetcore-3.0'
+monikerRange: '>= aspnetcore-3.1'
 ms.author: jamesnk
 ms.date: 08/09/2020
 no-loc:
@@ -17,18 +17,21 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/test-tools
-ms.openlocfilehash: ba51d9b5db2e9fbc7583856d79ab8658eff9b586
-ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
+ms.openlocfilehash: 15652431ea4bebc879af4c57667cbf854c49330c
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90594433"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90721832"
 ---
-# <a name="test-services-with-grpc-tools"></a>GRPC araçlarıyla test hizmetleri
+# <a name="test-grpc-services-with-grpcurl-in-aspnet-core"></a>ASP.NET Core 'de Grpkıvle gRPC hizmetlerini test edin
 
 , [James bAyKiNg](https://twitter.com/jamesnk)
 
-Araç, geliştiricilerin istemci uygulamaları oluşturmadan Hizmetleri test etmesine olanak tanıyan gRPC için kullanılabilir. [Grpkıvrık](https://github.com/fullstorydev/grpcurl) , GRPC hizmetleriyle etkileşim sağlayan bir komut satırı aracıdır. [Grpcuı](https://github.com/fullstorydev/grpcui) , GRPC için etkileşimli bir Web Kullanıcı arabirimi ekler.
+Araç, geliştiricilerin istemci uygulamaları oluşturmadan Hizmetleri test etmesine olanak tanıyan gRPC için kullanılabilir:
+
+* [Grpkıvrık](https://github.com/fullstorydev/grpcurl) , GRPC hizmetleriyle etkileşim sağlayan bir komut satırı aracıdır.
+* [Grpcuı](https://github.com/fullstorydev/grpcui) , GRP-on üst kısmında derleme yapar ve GRPC Için Postman ve Swagger Kullanıcı arabirimi gibi araçlara benzer bir etkileşimli Web Kullanıcı arabirimi ekler.
 
 Bu makalede nasıl yapılacağı açıklanır:
 
@@ -48,21 +51,31 @@ Grpkıvrık, gRPC topluluğu tarafından oluşturulan bir komut satırı aracıd
 
 İndirme ve yükleme hakkında daha fazla bilgi için `grpcurl` bkz. [Grpkıvrımlı GitHub giriş sayfası](https://github.com/fullstorydev/grpcurl#installation).
 
-## <a name="setup-grpc-reflection"></a>GRPC yansımasını ayarlama
+![Grpkıvrımlı komut satırı](~/grpc/test-tools/static/grpcurl.png)
 
-`grpcurl` , Hizmetleri çağırabilmesi için bunların Prototipsiz sözleşme anlaşması gerektiğini bilmelidir. Bunu yapmak için iki yol vardır:
+## <a name="set-up-grpc-reflection"></a>GRPC yansımasını ayarlama
 
-* Hizmet sözleşmelerini saptamak için gRPC yansımasını kullanın.
-* Komut satırı bağımsız değişkenlerinde *. proto* dosyalarını belirtin.
+`grpcurl` Hizmetleri çağırabilmeniz için önce hizmet sözleşmesi 'nin bir anlaşması bilmelidir. Bunu yapmak için iki yol vardır:
 
-GRPC yansıtma ve hizmet bulma ile Grpkıvtı kullanmak daha kolay. gRPC ASP.NET Core GRPC [. AspNetCore. Server. Reflection](https://www.nuget.org/packages/Grpc.AspNetCore.Server.Reflection) paketiyle GRPC yansıması için yerleşik desteğe sahiptir. Bir uygulamadaki yansımayı yapılandırmak için:
+* Sunucuda [GRPC yansımasını](https://github.com/grpc/grpc/blob/master/doc/server-reflection.md) ayarlayın. Grpkıvrımlı, hizmet sözleşmelerini otomatik olarak bulur.
+* `.proto`Grphizalamak için komut satırı bağımsız değişkenlerinde dosyaları belirtin.
 
-* `Grpc.AspNetCore.Server.Reflection`Paket başvurusu Ekle.
-* Yansımayı *Startup.cs*'e Kaydet:
+GRPC yansımasıyla Grpkıvtı kullanmak daha kolay. gRPC Reflection, uygulamanın Hizmetleri bulma için çağırabildiği uygulamaya yeni bir gRPC hizmeti ekler.
+
+gRPC ASP.NET Core, paket ile gRPC yansıtma için yerleşik desteğe sahiptir [`Grpc.AspNetCore.Server.Reflection`](https://www.nuget.org/packages/Grpc.AspNetCore.Server.Reflection) . Bir uygulamadaki yansımayı yapılandırmak için:
+
+* Bir `Grpc.AspNetCore.Server.Reflection` paket başvurusu ekleyin.
+* Yansımayı Kaydet `Startup.cs` :
   * `AddGrpcReflection` yansımayı etkinleştiren Hizmetleri kaydetmek için.
-  * `MapGrpcReflectionService` yansıma hizmeti uç noktası eklemek için.
+  * `MapGrpcReflectionService` bir yansıma hizmeti uç noktası eklemek için.
 
-[!code-csharp[](~/grpc/test-tools/Startup.cs?name=snippet_1&highlight=4,14)]
+[!code-csharp[](~/grpc/test-tools/Startup.cs?name=snippet_1&highlight=4,15-18)]
+
+GRPC yansıması ayarlandığında:
+
+* Sunucu uygulamasına bir gRPC yansıma hizmeti eklenir.
+* GRPC yansımasını destekleyen istemci uygulamaları, sunucu tarafından barındırılan Hizmetleri bulmaya yönelik yansıma hizmetini çağırabilir.
+* gRPC hizmetleri yine de istemciden çağırılır. Yansıma yalnızca hizmet bulmayı ve sunucu tarafı güvenliği atlamalarını mümkün değildir. [Kimlik doğrulama ve yetkilendirme](xref:grpc/authn-and-authz) tarafından korunan uç noktalar, çağıranın, uç nokta için kimlik bilgilerini başarıyla çağrılacak şekilde geçmesini gerektirir.
 
 ## <a name="use-grpcurl"></a>`grpcurl` komutunu kullanma
 
@@ -108,7 +121,7 @@ message HelloRequest {
 
 ### <a name="call-grpc-services"></a>GRPC hizmetlerini çağırma
 
-Bir hizmet ve Yöntem adı belirterek, istek iletisini temsil eden bir JSON bağımsız değişkeniyle birlikte bir gRPC hizmeti çağırın. JSON, Protoarabelleğe dönüştürülüp hizmete gönderilir.
+İstek iletisini temsil eden bir JSON bağımsız değişkeniyle birlikte bir hizmet ve Yöntem adı belirterek bir gRPC hizmeti çağırın. JSON, Protoarabelleğe dönüştürülüp hizmete gönderilir.
 
 ```powershell
 > grpcurl.exe -d '{ \"name\": \"World\" }' localhost:5001 greet.Greeter/SayHello
@@ -117,21 +130,21 @@ Bir hizmet ve Yöntem adı belirterek, istek iletisini temsil eden bir JSON bağ
 }
 ```
 
-Önceki örnek:
+Yukarıdaki örnekte:
 
-* `-d` bağımsız değişken JSON ile bir istek iletisi belirtir. Bu bağımsız değişken, sunucu adresi ve yöntem adından önce gelmelidir.
+* `-d`Bağımsız DEĞIŞKENI JSON ile bir istek iletisi belirtir. Bu bağımsız değişken, sunucu adresi ve yöntem adından önce gelmelidir.
 * `SayHello`Hizmeti üzerinde yöntemini çağırır `greeter.Greeter` .
 * Yanıt iletisini JSON olarak yazdırır.
 
 ## <a name="about-grpcui"></a>Grpcuı hakkında
 
-Grpcuı, gRPC için etkileşimli bir Web Kullanıcı arabirimi. Bu, Grpwrapper 'ın üzerinde oluşturulur ve, Postman gibi HTTP araçlarına benzer şekilde gRPC hizmetlerini keşfetmek ve test etmek için bir GUI sağlar.
+Grpcuı, gRPC için etkileşimli bir Web Kullanıcı arabirimi. Grpwrapper 'ın üzerine oluþturulur ve gRPC hizmetlerini keşfetmek ve test etmek için Postman veya Swagger Kullanıcı arabirimi gibi HTTP araçlarına benzer bir GUI sağlar.
 
 İndirme ve yükleme hakkında bilgi için `grpcui` bkz. [Grpcuı GitHub ana sayfası](https://github.com/fullstorydev/grpcui#installation).
 
 ## <a name="using-grpcui"></a>`grpcui` kullanma
 
-`grpcui`Bir bağımsız değişken olarak etkileşimde bulunmak için sunucu adresiyle çalıştırın.
+`grpcui`Bir bağımsız değişken olarak etkileşimde bulunmak için sunucu adresiyle çalıştırın:
 
 ```powershell
 > grpcui.exe localhost:5001
@@ -146,4 +159,4 @@ Araç etkileşimli Web Kullanıcı arabirimi ile bir tarayıcı penceresi başla
 
 * [Grpkıvrımlı GitHub giriş sayfası](https://github.com/fullstorydev/grpcurl)
 * [Grpcuı GitHub giriş sayfası](https://github.com/fullstorydev/grpcui)
-* [GRPC. AspNetCore. Server. Reflection](https://www.nuget.org/packages/Grpc.AspNetCore.Server.Reflection)
+* [`Grpc.AspNetCore.Server.Reflection`](https://www.nuget.org/packages/Grpc.AspNetCore.Server.Reflection)

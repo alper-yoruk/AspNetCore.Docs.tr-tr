@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/samesite/mvc21
-ms.openlocfilehash: 0a719ae48199f7854ded534446045eb304d4d9f0
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 38e5f0d1a2ecf5b46f73bf8574f73934a070880f
+ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632362"
+ms.lasthandoff: 09/17/2020
+ms.locfileid: "90722611"
 ---
 # <a name="aspnet-core-21-mvc-samesite-no-loccookie-sample"></a>ASP.NET Core 2,1 MVC SameSite cookie örneği
 
@@ -57,7 +57,7 @@ Response.Cookies.Append(CookieName, "cookieValue", cookieOptions);
 
 ## <a name="setting-no-loccookie-authentication-and-session-state-no-loccookies"></a>CookieKimlik doğrulaması ve oturum durumu cookie s ayarlanıyor
 
-Cookie kimlik doğrulama, oturum durumu ve [diğer diğer bileşenler](https://docs.microsoft.com/aspnet/core/security/samesite?view=aspnetcore-2.1) aynı site seçeneklerini seçenekler aracılığıyla ayarlar Cookie , örneğin
+Cookie kimlik doğrulama, oturum durumu ve [diğer diğer bileşenler](../samesite.md?view=aspnetcore-2.1) aynı site seçeneklerini seçenekler aracılığıyla ayarlar Cookie , örneğin
 
 ```c#
 services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
@@ -90,7 +90,7 @@ cookie"SameSite oluştur" düğmesine tıkladığınızda örnek tarafından olu
 
 cookieKullanıcıların tarayıcı aracısındaki desteğine göre None değerini ayarlamak için, `CookiePolicy` ara yazılımı kullanmanız gerekir. Bu, içinde yazma yapan ve yapılandırılan bileşenlerden **önce** http istek işlem hattının yerleştirilmesi gerekir cookie `ConfigureServices()` .
 
-`app.UseCookiePolicy()` `Configure(IApplicationBuilder, IHostingEnvironment)` [Startup.cs](https://github.com/blowdart/AspNetSameSiteSamples/blob/master/AspNetCore21MVC/Startup.cs)içindeki yönteminde işlem hattı kullanımına eklemek için. Örnek:
+`app.UseCookiePolicy()` `Configure(IApplicationBuilder, IHostingEnvironment)` [Startup.cs](https://github.com/blowdart/AspNetSameSiteSamples/blob/master/AspNetCore21MVC/Startup.cs)içindeki yönteminde işlem hattı kullanımına eklemek için. Örneğin:
 
 ```c#
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -120,7 +120,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 }
 ```
 
-Ardından, `ConfigureServices(IServiceCollection services)` cookie ilke eklendiği veya silindiği zaman bir yardımcı sınıfa çağırmak için ilkeyi yapılandırın cookie . Örnek:
+Ardından, `ConfigureServices(IServiceCollection services)` cookie ilke eklendiği veya silindiği zaman bir yardımcı sınıfa çağırmak için ilkeyi yapılandırın cookie . Örneğin:
 
 ```c#
 public void ConfigureServices(IServiceCollection services)
@@ -172,5 +172,5 @@ ASP.NET Core ve System. Web (ASP.NET Classic), SameSite 'nin bağımsız uygulam
 ### <a name="more-information"></a>Daha Fazla Bilgi
  
 [Chrome güncelleştirmeleri](https://www.chromium.org/updates/same-site) 
- [ASP.NET Core SameSite belgeleri](https://docs.microsoft.com/aspnet/core/security/samesite?view=aspnetcore-2.1) 
+ [ASP.NET Core SameSite belgeleri](../samesite.md?view=aspnetcore-2.1) 
  [ASP.NET Core 2,1 SameSite değişiklik duyurusu](https://github.com/dotnet/aspnetcore/issues/8212)
