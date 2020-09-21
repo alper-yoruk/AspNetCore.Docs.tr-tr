@@ -2,8 +2,8 @@
 
 ## <a name="visual-studio-help"></a>Visual Studio Yardımı
 
-* [Visual Studio kullanarak C# kodunda hata ayıklamayı öğrenin](https://docs.microsoft.com/visualstudio/debugger/getting-started-with-the-debugger?view=vs-2017)
-* [Visual Studio IDE 'ye giriş](https://docs.microsoft.com/visualstudio/ide/visual-studio-ide?view=vs-2017)
+* [Visual Studio kullanarak C# kodunda hata ayıklamayı öğrenin](/visualstudio/debugger/getting-started-with-the-debugger?view=vs-2017)
+* [Visual Studio IDE 'ye giriş](/visualstudio/ide/visual-studio-ide?view=vs-2017)
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -22,7 +22,7 @@
 
 ## <a name="visual-studio-for-mac-help"></a>Yardım Mac için Visual Studio
 
-* [Mac için Visual Studio turu](https://docs.microsoft.com/visualstudio/mac/ide-tour)
-* [Mac için Visual Studio’ya Giriş](https://docs.microsoft.com/visualstudio/mac/)
+* [Mac için Visual Studio turu](/visualstudio/mac/ide-tour)
+* [Mac için Visual Studio’ya Giriş](/visualstudio/mac/)
 
 ---

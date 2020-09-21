@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/comparison
-ms.openlocfilehash: d20740950f7ac56a3a3b2951b474151aaf9c6f5a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 3f0e44bb374214328f589c6ca3952c6d7aab88d8
+ms.sourcegitcommit: 9c031530d2e652fe422e786bd43392bc500d622f
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631231"
+ms.lasthandoff: 09/18/2020
+ms.locfileid: "90770135"
 ---
 # <a name="compare-grpc-services-with-http-apis"></a>gRPC hizmetlerini HTTP API’leriyle karşılaştırma
 
@@ -34,7 +34,7 @@ Bu makalede, [GRPC HIZMETLERININ](https://grpc.io/docs/guides/) JSON Ile HTTP AP
 
 Aşağıdaki tabloda, gRPC ve HTTP API 'Leri arasında JSON ile yüksek düzeyde bir karşılaştırma sunulmaktadır.
 
-| Özellik          | gRPC                                               | JSON ile HTTP API 'Leri           |
+| Öne çıkan özelliği          | gRPC                                               | JSON ile HTTP API 'Leri           |
 | ---------------- | -------------------------------------------------- | ----------------------------- |
 | Sözleşme         | Gerekli (*. proto*)                                | İsteğe bağlı (Openapı)            |
 | Protokol         | HTTP/2                                             | HTTP                          |
@@ -95,6 +95,7 @@ gRPC aşağıdaki senaryolara uygundur:
 * **Noktadan noktaya gerçek zamanlı iletişim**: GRPC, iki yönlü akış için harika desteğe sahiptir. gRPC Hizmetleri, yoklama yapmadan iletileri gerçek zamanlı olarak gönderebilir.
 * **Çok yönlü ortamları**: GRPC araçları, tüm popüler geliştirme dillerini destekler ve bu da GRPC 'yi çok dilli ortamlar için iyi bir seçenek yapar.
 * **Ağ kısıtlamalı ortamlar**: GRPC iletileri, hafif bir ileti biçimi olan protoarabellek ile serileştirilir. GRPC iletisi her zaman denk bir JSON iletisinden daha küçüktür.
+* İşlemler **arası iletişim (IPC)**: UNIX etki alanı yuvaları ve adlandırılmış kanallar gibi IPC aktarımları, aynı makinede bulunan uygulamalar arasında iletişim kurmak Için GRPC ile birlikte kullanılabilir. Daha fazla bilgi için bkz. <xref:grpc/interprocess>.
 
 ## <a name="grpc-weaknesses"></a>gRPC zayıflığı
 
@@ -102,12 +103,15 @@ gRPC aşağıdaki senaryolara uygundur:
 
 Doğrudan bir tarayıcıda bir gRPC hizmetini doğrudan çağırmak olanaksızdır. gRPC, HTTP/2 özelliklerini çok fazla kullanır ve tarayıcı, bir gRPC istemcisini desteklemek için Web istekleri üzerinde gerekli denetim düzeyini sağlar. Örneğin, tarayıcılar arayan HTTP/2 ' nin kullanılmasına izin vermez veya temel alınan HTTP/2 çerçevelerine erişim sağlar.
 
-[GRPC-Web](https://grpc.io/docs/tutorials/basic/web.html) , GRPC ekibinin tarayıcıda sınırlı GRPC desteği sağlayan ek bir teknolojidir. gRPC-Web iki bölümden oluşur: tüm modern tarayıcıları ve sunucudaki gRPC-Web proxy 'sini destekleyen bir JavaScript istemcisi. GRPC-Web istemcisi ara sunucuyu çağırır ve proxy, gRPC isteklerini gRPC sunucusuna iletir.
+GRPC 'yi tarayıcı uygulamalarına getirmek için iki yaygın yaklaşım vardır:
 
-GRPC 'nin özelliklerinin hepsi gRPC-Web tarafından desteklenmez. İstemci ve iki yönlü akış desteklenmez ve sunucu akışı için sınırlı destek vardır.
+* [GRPC-Web](https://grpc.io/docs/tutorials/basic/web.html) , GRPC ekibinin tarayıcıda GRPC desteği sağlayan ek bir teknolojidir. gRPC-Web, tarayıcı uygulamalarının gRPC 'nin yüksek performanslı ve düşük ağ kullanımından faydalanabileceği şekilde izin verir. GRPC 'nin özelliklerinin hepsi gRPC-Web tarafından desteklenmez. İstemci ve iki yönlü akış desteklenmez ve sunucu akışı için sınırlı destek vardır.
 
-> [!TIP]
-> .NET Core, gRPC-Web desteğine sahiptir. <xref:grpc/browser>Daha fazla bilgi için ziyaret edin.
+  .NET Core, gRPC-Web desteğine sahiptir. Daha fazla bilgi için bkz. <xref:grpc/browser>.
+
+* Web API 'Leri, *. proto* dosyasına [http meta verileri](https://cloud.google.com/service-infrastructure/docs/service-management/reference/rpc/google.api#google.api.HttpRule)eklenerek GRPC hizmetlerinden otomatik olarak oluşturulabilir. Bu, bir uygulamanın hem gRPC hem de JSON Web API 'Lerini desteklemesini sağlar. bu sayede her ikisi için ayrı hizmetler oluşturma çabasının çoğaltılması gerekmez.
+
+  .NET Core, gRPC hizmetlerinden JSON Web API 'Leri oluşturmak için deneysel desteğe sahiptir. Daha fazla bilgi için bkz. <xref:grpc/httpapi>.
 
 ### <a name="not-human-readable"></a>Okunabilir değil
 
@@ -123,7 +127,6 @@ Aşağıdaki senaryolarda gRPC üzerinden diğer çerçeveler önerilir:
 
 * **Tarayıcıda erişilebilen API 'ler**: GRPC tarayıcıda tam olarak desteklenmez. gRPC-Web tarayıcı desteği sunabilir, ancak sınırlamaları vardır ve sunucu proxy 'sini tanıtır.
 * **Gerçek zamanlı Iletişim yayınlama**: GRPC akış aracılığıyla gerçek zamanlı iletişimi destekler, ancak kayıtlı bağlantılara bir ileti yayınlama kavramı mevcut değildir. Örneğin, sohbet odasındaki tüm istemcilere yeni sohbet iletilerinin gönderilmesi gereken bir sohbet odası senaryosunda her bir gRPC çağrısı, istemciye yeni sohbet iletilerini tek tek akışa almak için gereklidir. [SignalR](xref:signalr/introduction) Bu senaryo için kullanışlı bir çerçevedir. SignalR , sürekli bağlantılar ve yayın iletileri için yerleşik destek kavramıdır.
-* İşlemler **arası iletişim**: bir işlemin, gelen GRPC çağrılarını kabul etmek IÇIN bir http/2 sunucusunu barındırması gerekir. Windows için, işlemler arası iletişim [kanalları](/dotnet/standard/io/pipe-operations) hızlı ve hafif bir iletişim yöntemidir.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

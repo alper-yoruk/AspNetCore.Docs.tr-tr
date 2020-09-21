@@ -337,6 +337,8 @@
                   href: blazor/forms-validation.md#built-in-forms-components
                 - name: InputDate
                   href: blazor/forms-validation.md#built-in-forms-components
+                - name: InputFile
+                  href: blazor/file-uploads.md
                 - name: InputNumber
                   href: blazor/forms-validation.md#built-in-forms-components
                 - name: InputRadio
@@ -363,6 +365,8 @@
                   href: blazor/fundamentals/routing.md#route-templates
                 - name: Başlık
                   href: blazor/fundamentals/additional-scenarios.md#influence-html-head-tag-elements
+                - name: Virtualize
+                  href: blazor/components/virtualization.md
             - name: Değerleri ve parametreleri basamaklandırma
               uid: blazor/components/cascading-values-and-parameters
             - name: Veri bağlama
@@ -371,6 +375,8 @@
               uid: blazor/components/event-handling
             - name: Yaşam döngüsü
               uid: blazor/components/lifecycle
+            - name: Bileşen sanallaştırma
+              uid: blazor/components/virtualization
             - name: Şablonlu bileşenler
               uid: blazor/components/templated-components
             - name: Bileşenleri tümleştirme
@@ -383,6 +389,8 @@
           uid: blazor/layouts
         - name: Formlar ve doğrulama
           uid: blazor/forms-validation
+        - name: Dosya karşıya yüklemeleri
+          uid: blazor/file-uploads
         - name: .NET’ten JavaScript’i çağırma
           uid: blazor/call-javascript-from-dotnet
         - name: JavaScript’ten .NET’i çağırma
@@ -714,16 +722,20 @@
           uid: grpc/services
         - name: Protobuf iletileri oluşturma
           uid: grpc/protobuf
+        - name: gRPC hizmetlerinin sürümünü oluşturma
+          uid: grpc/versioning
+    - name: C# ile gRPC hizmetlerini çağırma
+      items:
+        - name: Genel Bakış
+          uid: grpc/client
+        - name: gRPC istemci fabrikası tümleştirmesi
+          uid: grpc/clientfactory
+        - name: Son tarihler ve iptal
+          uid: grpc/deadlines-cancellation
     - name: ASP.NET Core içeren gRPC Hizmetleri
       uid: grpc/aspnetcore
-    - name: .NET istemcisiyle gRPC hizmetlerini çağırma
-      uid: grpc/client
-    - name: gRPC istemci fabrikası tümleştirmesi
-      uid: grpc/clientfactory
     - name: Tarayıcı uygulamalarında gRPC kullanma
       uid: grpc/browser
-    - name: Son tarihler ve iptal
-      uid: grpc/deadlines-cancellation
     - name: Yapılandırma
       uid: grpc/configuration
     - name: Kimlik doğrulaması ve yetkilendirme
@@ -734,11 +746,13 @@
       uid: grpc/security
     - name: Performans için en iyi yöntemler
       uid: grpc/performance
-    - name: gRPC hizmetlerinin sürümünü oluşturma
-      uid: grpc/versioning
+    - name: İşlemler arası iletişim
+      uid: grpc/interprocess
+    - name: gRPC'den JSON Web API'leri oluşturma
+      uid: grpc/httpapi
     - name: dotnet-grpc ile Protobuf başvurularını yönetme
       uid: grpc/dotnet-grpc
-    - name: gRPC araçlarıyla test hizmetleri
+    - name: gRPCurl ile gRPC hizmetlerini test etme
       uid: grpc/test-tools
     - name: C-core’dan gRPC hizmetlerini geçirme
       uid: grpc/migration
@@ -746,8 +760,6 @@
       uid: grpc/wcf
     - name: gRPC hizmetlerini HTTP API’leriyle karşılaştırma
       uid: grpc/comparison
-    - name: gRPC'den JSON Web API'leri oluşturma
-      uid: grpc/httpapi
     - name: Örnekler
       href: 'https://github.com/grpc/grpc-dotnet/tree/master/examples'
     - name: Sorun giderme
