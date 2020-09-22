@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/microsoft-logins
-ms.openlocfilehash: 3430d842b6a4f7da30370977f72e6f132e28bb7f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 36341a0e439be57d7da4f787aa6103b92c624e96
+ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634260"
+ms.lasthandoff: 09/22/2020
+ms.locfileid: "90847591"
 ---
 # <a name="microsoft-account-external-login-setup-with-aspnet-core"></a>ASP.NET Core ile Microsoft hesabı dış oturum açma kurulumu
 
@@ -41,6 +41,8 @@ Microsoft hesabı yoksa **bir tane oluştur**' u seçin. Oturum açtıktan sonra
 * **Yeni kayıt** Seç
 * Bir **ad**girin.
 * **Desteklenen hesap türleri**için bir seçenek belirleyin.  <!-- Accounts for any org work with MS domain accounts. Most folks probably want the last option, personal MS accounts. It took 24 hours after setting this up for the keys to work -->
+  * `MicrosoftAccount`Paket, varsayılan olarak "herhangi bir kuruluş dizinindeki hesaplar" veya "herhangi bir kurumsal dizin ve Microsoft hesabı Içindeki hesaplar" seçenekleri kullanılarak oluşturulan uygulama kayıtlarını destekler.
+  * Diğer seçenekleri kullanmak için, `AuthorizationEndpoint` `TokenEndpoint` `MicrosoftAccountOptions` Microsoft hesabı kimlik doğrulamasını, oluşturulduktan sonra uygulama kaydının **uç noktalar** sayfasında görüntülenir ( **genel bakış** sayfasındaki uç noktalar ' a tıklayarak kullanılabilir).
 * **Yeniden yönlendirme URI 'si**altında, eklenen geliştirme URL 'nizi girin `/signin-microsoft` . Örneğin, `https://localhost:5001/signin-microsoft`. Bu örnekte daha sonra yapılandırılan Microsoft kimlik doğrulama şeması, `/signin-microsoft` OAuth akışını uygulamak için rotadaki istekleri otomatik olarak işleymeyecektir.
 * **Kaydol** ' u seçin
 

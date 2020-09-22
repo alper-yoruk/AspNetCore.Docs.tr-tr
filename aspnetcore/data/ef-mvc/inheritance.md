@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/inheritance
-ms.openlocfilehash: 9a17a2ddbdac6b4fc6ba90804a31915d3b96d707
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 34c4ea28103b9eb12601b383a46091084391f120
+ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629190"
+ms.lasthandoff: 09/22/2020
+ms.locfileid: "90847604"
 ---
 # <a name="tutorial-implement-inheritance---aspnet-mvc-with-ef-core"></a>Öğretici: EF Core devralma-ASP.NET MVC uygulama
 
@@ -41,7 +41,7 @@ Bu öğreticide şunları yaptınız:
 > * Geçişleri oluşturma ve güncelleştirme
 > * Uygulamayı test etme
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * [Eşzamanlılık işle](concurrency.md)
 
@@ -62,6 +62,9 @@ Bu devralma yapısının veritabanında temsil edilebilmesi için birkaç yol va
 Tek bir veritabanı tablosundan bir varlık devralma yapısı oluşturmanın bu düzeni, hiyerarşi başına tablo (TPH) devralma olarak adlandırılır.
 
 Alternatif olarak, veritabanının devralma yapısına benzer bir şekilde görünmesini sağlayabilirsiniz. Örneğin, kişi tablosunda yalnızca ad alanları olabilir ve Tarih alanlarıyla ayrı eğitmen ve öğrenci tabloları vardır.
+
+> [!WARNING]
+> Tür başına tablo (TPT) EF Core 3. x tarafından desteklenmez, ancak bu [EF Core 5,0](https://docs.microsoft.com/ef/core/what-is-new/ef-core-5.0/plan)' de uygulanmıştır.
 
 ![Tablo türü devralma](inheritance/_static/tpt.png)
 

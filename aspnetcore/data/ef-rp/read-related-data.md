@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/read-related-data
-ms.openlocfilehash: 41b2ce35a6910df7587af7ebabe8a4984cda6ae5
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: dd00b9d7faf467857ec1e47f4cfb0296d84e5d3f
+ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634975"
+ms.lasthandoff: 09/22/2020
+ms.locfileid: "90847708"
 ---
 # <a name="part-6-no-locrazor-pages-with-ef-core-in-aspnet-core---read-related-data"></a>Bölüm 6, Razor ASP.NET Core EF Core olan sayfalar-Ilgili verileri oku
 
@@ -63,7 +63,7 @@ EF Core bir varlığın gezinti özelliklerine ilgili verileri yükleyebilmenin 
 
   ![Açık yükleme örneği](read-related-data/_static/explicit-loading.png)
 
-* [Yavaş yükleme](/ef/core/querying/related-data#lazy-loading). [Sürüm 2,1 ' de EF Core geç yükleme eklendi](/ef/core/querying/related-data#lazy-loading). Varlık ilk kez okunmadıysa ilgili veriler alınmadı. Gezinti özelliğine ilk kez erişildiğinde, bu gezinti özelliği için gereken veriler otomatik olarak alınır. Bir gezinti özelliğine ilk kez erişildiğinde bir sorgu veritabanına gönderilir.
+* [Yavaş yükleme](/ef/core/querying/related-data#lazy-loading). Varlık ilk kez okunmadıysa ilgili veriler alınmadı. Gezinti özelliğine ilk kez erişildiğinde, bu gezinti özelliği için gereken veriler otomatik olarak alınır. Bir gezinti özelliğine ilk kez erişildiğinde bir sorgu veritabanına gönderilir. Yavaş yükleme performansı zarar verebilir, örneğin, geliştiriciler N + 1 desenler kullanırken, bir üst öğe yüklerken ve alt öğeler aracılığıyla numaralandırıyor.
 
 ## <a name="create-course-pages"></a>Kurs sayfaları oluşturma
 
@@ -310,7 +310,7 @@ Kayıtlı öğrenciler ve bunların onların listesini görmek için bir kurs se
 
 `Single`Bir Where koşulunun kullanımı, kişisel tercihden bağımsız olarak kullanılır. Yöntemi kullanılarak herhangi bir avantaj sağlamaz `Where` .
 
-## <a name="explicit-loading"></a>Açık yükleme
+## <a name="explicit-loading"></a>Belirtik yükleme
 
 Geçerli kod ve için Eager yüklemeyi belirtir `Enrollments` `Students` :
 
@@ -630,7 +630,7 @@ Sayfayı yenileyin ve bir eğitmen seçin. Kayıtlı öğrenciler ve bunların o
 
 Yukarıdaki `Single` yaklaşım, kullanarak herhangi bir avantaj sağlamaz `Where` . Bazı geliştiriciler `Single` yaklaşım stilini tercih eder.
 
-## <a name="explicit-loading"></a>Açık yükleme
+## <a name="explicit-loading"></a>Belirtik yükleme
 
 Geçerli kod ve için Eager yüklemeyi belirtir `Enrollments` `Students` :
 
