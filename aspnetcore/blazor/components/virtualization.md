@@ -5,7 +5,7 @@ description: ASP.NET Core uygulamalarda bileşen sanallaştırmayı nasıl kulla
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/21/2020
+ms.date: 09/22/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,34 +18,31 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/virtualization
-ms.openlocfilehash: 911eeeb445741aa1519e1464dd4a75e26f6f12ab
-ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
+ms.openlocfilehash: 9c3e53bee7535b36bba3474ff50a881568bbd690
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90847578"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393814"
 ---
 # <a name="aspnet-core-no-locblazor-component-virtualization"></a>ASP.NET Core Blazor bileşen Sanallaştırması
 
 [Daniel Roth](https://github.com/danroth27) tarafından
 
-Framework 'ün yerleşik sanallaştırma desteğini kullanarak bileşen işlemenin algılanan performansını geliştirir Blazor . Sanallaştırma, UI işlemesini yalnızca şu anda görünür olan bölümlerle sınırlamak için bir tekniktir. Örneğin sanallaştırma, uygulamanın uzun bir listeyi veya çok sayıda satırı olan bir tabloyu işlemesi gerektiğinde ve belirli bir zamanda yalnızca bir öğe alt kümesi görünür olması gerektiğinde yararlıdır. Blazor`Virtualize`uygulamanın bileşenlerine sanallaştırma eklemek için kullanılabilecek bileşeni sağlar.
+Framework 'ün yerleşik sanallaştırma desteğini kullanarak bileşen işlemenin algılanan performansını geliştirir Blazor . Sanallaştırma, UI işlemesini yalnızca şu anda görünür olan bölümlerle sınırlamak için bir tekniktir. Örneğin sanallaştırma, uygulamanın uzun bir öğe listesini işlemesi gerektiğinde ve belirli bir zamanda bir öğe alt kümesinin görünür olması gerektiğinde faydalıdır. Blazor`Virtualize`uygulamanın bileşenlerine sanallaştırma eklemek için kullanılabilecek bileşeni sağlar.
 
 ::: moniker range=">= aspnetcore-5.0"
 
-Sanallaştırma olmadan, tipik bir liste veya tablo tabanlı bileşen, [`foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) listedeki her öğeyi veya tablodaki her bir satırı işlemek için C# döngüsü kullanabilir:
+Sanallaştırma olmadan tipik bir liste, [`foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) listedeki her öğeyi işlemek için bir C# döngüsü kullanabilir:
 
 ```razor
-<table>
-    @foreach (var employee in employees)
-    {
-        <tr>
-            <td>@employee.FirstName</td>
-            <td>@employee.LastName</td>
-            <td>@employee.JobTitle</td>
-        </tr>
-    }
-</table>
+@foreach (var employee in employees)
+{
+    <p>
+        @employee.FirstName @employee.LastName has the 
+        job title of @employee.JobTitle.
+    </p>
+}
 ```
 
 Listede binlerce öğe varsa, listeyi işlemek uzun zaman alabilir. Kullanıcı, fark edilebilir bir UI gecikmesi yaşayabilir.
@@ -53,47 +50,44 @@ Listede binlerce öğe varsa, listeyi işlemek uzun zaman alabilir. Kullanıcı,
 Listedeki her öğeyi tek seferde işlemek yerine, [`foreach`](/dotnet/csharp/language-reference/keywords/foreach-in) döngüsünü `Virtualize` bileşeniyle değiştirin ve ile birlikte bir sabit öğe kaynağı belirtin `Items` . Yalnızca şu anda görünür olan öğeler işlenir:
 
 ```razor
-<table>
-    <Virtualize Context="employee" Items="@employees">
-        <tr>
-            <td>@employee.FirstName</td>
-            <td>@employee.LastName</td>
-            <td>@employee.JobTitle</td>
-        </tr>
-    </Virtualize>
-</table>
+<Virtualize Context="employee" Items="@employees">
+    <p>
+        @employee.FirstName @employee.LastName has the 
+        job title of @employee.JobTitle.
+    </p>
+</Virtualize>
 ```
 
 Bileşen için bir bağlam belirtmiyorsanız `Context` , `context` `@context.{PROPERTY}` öğe içerik şablonunda () değerini kullanın:
 
 ```razor
-<table>
-    <Virtualize Items="@employees">
-        <tr>
-            <td>@context.FirstName</td>
-            <td>@context.LastName</td>
-            <td>@context.JobTitle</td>
-        </tr>
-    </Virtualize>
-</table>
+<Virtualize Items="@employees">
+    <p>
+        @context.FirstName @context.LastName has the 
+        job title of @context.JobTitle.
+    </p>
+</Virtualize>
 ```
 
 `Virtualize`Bileşen kapsayıcının yüksekliğine ve işlenmiş öğelerin boyutuna göre işlenecek öğe sayısını hesaplar.
+
+Bileşen için öğe içeriği `Virtualize` şunları içerebilir:
+
+* Yukarıdaki örnekte gösterildiği gibi düz HTML ve Razor kod.
+* Bir veya daha fazla Razor bileşen.
+* HTML/ Razor ve Razor bileşenleri karışımı.
 
 ## <a name="item-provider-delegate"></a>Öğe sağlayıcısı temsilcisi
 
 Tüm öğeleri belleğe yüklemek istemiyorsanız, `ItemsProvider` istenen öğeleri istek üzerine zaman uyumsuz olarak alan bileşenin parametresine bir öğe sağlayıcısı temsilci yöntemi belirtebilirsiniz:
 
 ```razor
-<table>
-    <Virtualize Context="employee" ItemsProvider="@LoadEmployees">
-         <tr>
-            <td>@employee.FirstName</td>
-            <td>@employee.LastName</td>
-            <td>@employee.JobTitle</td>
-        </tr>
-    </Virtualize>
-</table>
+<Virtualize Context="employee" ItemsProvider="@LoadEmployees">
+    <p>
+        @employee.FirstName @employee.LastName has the 
+        job title of @employee.JobTitle.
+    </p>
+</Virtualize>
 ```
 
 Öğe sağlayıcısı `ItemsProviderRequest` , belirli bir başlangıç dizininden başlayarak gereken sayıda öğeyi belirten bir alır. Daha sonra öğe sağlayıcısı, istenen öğeleri bir veritabanından veya başka bir hizmetten alır ve bunları `ItemsProviderResult<TItem>` Toplam öğe sayısı ile birlikte döndürür. Öğe sağlayıcısı her bir istek ile öğeleri almayı seçebilir veya bunları hazır olmaları için önbelleğe alabilir. Aynı bileşen için bir öğe sağlayıcısı kullanmayı ve koleksiyonuna bir koleksiyon atamayı denemeyin `Items` `Virtualize` .
@@ -117,22 +111,19 @@ private async ValueTask<ItemsProviderResult<Employee>> LoadEmployees(
 Uzak bir veri kaynağından gelen öğelerin bir süre sürebileceğinden, `<Placeholder>...</Placeholder>` öğe verileri kullanılabilir olana kadar bir yer tutucu () işleme seçeneğiniz vardır:
 
 ```razor
-<table>
-    <Virtualize Context="employee" ItemsProvider="@LoadEmployees">
-        <ItemContent>
-            <tr>
-                <td>@employee.FirstName</td>
-                <td>@employee.LastName</td>
-                <td>@employee.JobTitle</td>
-            </tr>
-        </ItemContent>
-        <Placeholder>
-            <tr>
-                <td>Loading...</td>
-            </tr>
-        </Placeholder>
-    </Virtualize>
-</table>
+<Virtualize Context="employee" ItemsProvider="@LoadEmployees">
+    <ItemContent>
+        <p>
+            @employee.FirstName @employee.LastName has the 
+            job title of @employee.JobTitle.
+        </p>
+    </ItemContent>
+    <Placeholder>
+        <p>
+            Loading&hellip;
+        </p>
+    </Placeholder>
+</Virtualize>
 ```
 
 ## <a name="item-size"></a>Öğe boyutu
@@ -140,11 +131,9 @@ Uzak bir veri kaynağından gelen öğelerin bir süre sürebileceğinden, `<Pla
 Her öğenin piksel cinsinden boyutu ayarlanabilir `ItemSize` (varsayılan: 50px):
 
 ```razor
-<table>
-    <Virtualize Context="employee" Items="@employees" ItemSize="25">
-        ...
-    </Virtualize>
-</table>
+<Virtualize Context="employee" Items="@employees" ItemSize="25">
+    ...
+</Virtualize>
 ```
 
 ## <a name="overscan-count"></a>Fazla tarama sayısı
@@ -152,11 +141,9 @@ Her öğenin piksel cinsinden boyutu ayarlanabilir `ItemSize` (varsayılan: 50px
 `OverscanCount` görünen bölgeden önce ve sonra kaç tane ek öğenin işleneceğini belirler. Bu ayar, kaydırma sırasında işleme sıklığını azaltmaya yardımcı olur. Ancak, daha yüksek değerler sayfada işlenen daha fazla öğenin oluşmasına neden olur (varsayılan: 3):
 
 ```razor
-<table>
-    <Virtualize Context="employee" Items="@employees" OverscanCount="4">
-        ...
-    </Virtualize>
-</table>
+<Virtualize Context="employee" Items="@employees" OverscanCount="4">
+    ...
+</Virtualize>
 ```
 
 ::: moniker-end

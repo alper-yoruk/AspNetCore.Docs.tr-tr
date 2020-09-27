@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/streaming
-ms.openlocfilehash: 29748ebe24fea03415b5a01b21300433e3fbc0f0
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 5a172818f8910a637b731dc1b1315965f448b2ba
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634221"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393580"
 ---
 # <a name="use-streaming-in-aspnet-core-no-locsignalr"></a>ASP.NET Core 'da akış kullanma SignalR
 
@@ -74,7 +74,7 @@ Aşağıdaki örnekte, kanalları kullanarak istemciye veri akışı hakkında t
 > [!NOTE]
 > `ChannelWriter<T>`Arka plan iş parçacığında öğesine yazın ve mümkün olan en `ChannelReader` kısa sürede geri döndürün. Diğer Merkez çağırmaları `ChannelReader` , döndürülünceye kadar engellenir.
 >
-> İçindeki mantığı sarın `try ... catch` . `Channel` `catch` `catch` Hub yöntemi çağrısının doğru şekilde tamamlandığından emin olmak için içindeki ve dışındaki içindeki öğesini doldurun.
+> [ `try ... catch` Deyimdeki](/dotnet/csharp/language-reference/keywords/try-catch)mantığı sarın. ' İ `Channel` bir [ `finally` blokta](/dotnet/csharp/language-reference/keywords/try-catch-finally)doldurun. Bir hata akışı yapmak istiyorsanız, blok içinde yakalayın `catch` ve `finally` bloğa yazın.
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -324,7 +324,7 @@ hubConnection.stream(String.class, "ExampleStreamingHubMethod", "Arg1")
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [Hub'lar](xref:signalr/hubs)
+* [Merkezler](xref:signalr/hubs)
 * [.NET istemcisi](xref:signalr/dotnet-client)
 * [JavaScript istemcisi](xref:signalr/javascript-client)
 * [Azure’da Yayımlama](xref:signalr/publish-to-azure-web-app)

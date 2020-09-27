@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/additional-scenarios
-ms.openlocfilehash: c8bce9572f0c21fdbd7ed585772c2b7965f40598
-ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
+ms.openlocfilehash: 9b3698489300e45cf77c3d51611ff44e2f4e16a5
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90592949"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393671"
 ---
 # <a name="aspnet-core-no-locblazor-server-additional-security-scenarios"></a>ASP.NET Core Blazor Server ek güvenlik senaryoları
 
@@ -33,7 +33,7 @@ Sağlayan [Javier Calvarro Nelson](https://github.com/javiercn)
 
 Bir uygulamadaki bileşenlerin dışında bulunan belirteçler, Razor Blazor Server Bu bölümde açıklanan yaklaşımla birlikte bileşenlere geçirilebilir. Örnek kod için, tam bir örnek de dahil olmak üzere `Startup.ConfigureServices` [belirteçleri sunucu tarafı Blazor uygulamasına geçirme](https://github.com/javiercn/blazor-server-aad-sample)konusuna bakın.
 
-Uygulamanın kimliğini Blazor Server düzenli sayfalar veya MVC uygulamasıyla yaptığınız gibi doğrulayın Razor . Belirteçleri sağlama ve kimlik doğrulamaya kaydetme cookie . Örnek:
+Uygulamanın kimliğini Blazor Server düzenli sayfalar veya MVC uygulamasıyla yaptığınız gibi doğrulayın Razor . Belirteçleri sağlama ve kimlik doğrulamaya kaydetme cookie . Örneğin:
 
 ```csharp
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
@@ -208,15 +208,15 @@ Bir kesimdeki bir kesimde yer alan herhangi bir uygulama, AAD olmayan sağlayıc
           options.Resource = "...";    // REMOVE THIS LINE
           ...
       }
-      ```
+  ```
 
-  For more information, see [Scopes, not resources](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison#scopes-not-resources) in the Azure documentation.
+  Daha fazla bilgi için bkz. Azure belgelerindeki [kaynakları değil kapsamları](/azure/active-directory/azuread-dev/azure-ad-endpoint-comparison#scopes-not-resources) .
 
-### App ID URI
+### <a name="app-id-uri"></a>Uygulama Kimliği URI'si
 
-* When using v2.0 endpoints, APIs define an *`App ID URI`*, which is meant to represent a unique identifier for the API.
-* All scopes include the App ID URI as a prefix, and v2.0 endpoints emit access tokens with the App ID URI as the audience.
-* When using V2.0 endpoints, the client ID configured in the Server API changes from the API Application ID (Client ID) to the App ID URI.
+* V 2.0 uç noktaları kullanılırken API 'Ler bir tanımlar *`App ID URI`* , bu, API için benzersiz bir tanımlayıcıyı temsil eder.
+* Tüm kapsamlar, ön ek olarak uygulama KIMLIĞI URI 'sini içerir ve v 2.0 uç noktaları, uygulama KIMLIĞI URI 'SI ile birlikte erişim belirteçlerini hedef kitle olarak sunar.
+* V 2.0 uç noktaları kullanılırken, sunucu API 'sinde yapılandırılan istemci KIMLIĞI API uygulama KIMLIĞI 'nden (Istemci KIMLIĞI) uygulama KIMLIĞI URI 'sine değişir.
 
 `appsettings.json`:
 

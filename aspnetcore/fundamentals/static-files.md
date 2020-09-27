@@ -15,12 +15,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/static-files
-ms.openlocfilehash: 24fda96dbe48945d172eb36e8a91af31f168ff7f
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 36eeb3532ed5ea6f5f75c20cbe14331ed840a788
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627669"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393944"
 ---
 # <a name="static-files-in-aspnet-core"></a>ASP.NET Core statik dosyalar
 
@@ -127,7 +127,7 @@ Yetkilendirmeyi temel alarak dosyaları sunmaya yönelik alternatif bir yaklaş�
 
 Dizin tarama belirtilen dizinler içinde dizin listelemesine izin verir.
 
-Dizin tarama, güvenlik nedenleriyle varsayılan olarak devre dışıdır. Daha fazla bilgi için bkz. [hususlar](#sc).
+Dizin tarama, güvenlik nedenleriyle varsayılan olarak devre dışıdır. Daha fazla bilgi için bkz. [hususlar](#considerations).
 
 Dizin taramayı etkinleştir:
 
@@ -363,7 +363,7 @@ Statik dosya ara yazılımı yetkilendirme denetimleri sağlamıyor. *Wwwroot*al
 
 ## <a name="enable-directory-browsing"></a>Dizin taramayı etkinleştir
 
-Dizin tarama, Web uygulamanızın kullanıcılarına belirtilen bir dizin içindeki bir dizin listesini ve dosyalarını görmesini sağlar. Dizin tarama, güvenlik nedenleriyle varsayılan olarak devre dışıdır (bkz. [hususlar](#sc)). İçindeki yöntemi çağırarak dizin taramayı etkinleştir <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser%2A> `Startup.Configure` :
+Dizin tarama, Web uygulamanızın kullanıcılarına belirtilen bir dizin içindeki bir dizin listesini ve dosyalarını görmesini sağlar. Dizin tarama, güvenlik nedenleriyle varsayılan olarak devre dışıdır (bkz. [hususlar](#considerations)). İçindeki yöntemi çağırarak dizin taramayı etkinleştir <xref:Microsoft.AspNetCore.Builder.DirectoryBrowserExtensions.UseDirectoryBrowser%2A> `Startup.Configure` :
 
 [!code-csharp[](static-files/samples/1.x/StaticFilesSample/StartupBrowse.cs?name=snippet_ConfigureMethod&highlight=12-17)]
 

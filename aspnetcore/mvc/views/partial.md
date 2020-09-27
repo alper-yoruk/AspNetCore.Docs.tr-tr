@@ -17,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/partial
-ms.openlocfilehash: 7a370042520adfe5b06784b76acf41a81eb2c72d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: bb75d8b7d78c82c9c32605ac645b8895fdfb78e3
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630633"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393658"
 ---
 # <a name="partial-views-in-aspnet-core"></a>ASP.NET Core kısmi görünümler
 
 [Steve Smith](https://ardalis.com/), [Maa jendoubi](https://twitter.com/maherjend), [Rick Anderson](https://twitter.com/RickAndMSFT)ve [Scott Sauber](https://twitter.com/scottsauber)
 
-Kısmi görünüm, [Razor](xref:mvc/views/razor) HTML çıkışını başka bir işaretleme dosyası tarafından oluşturulan çıkış *içinde* işleyen bir biçimlendirme dosyasıdır (*. cshtml*).
+Kısmi görünüm, başka bir [Razor](xref:mvc/views/razor) *.cshtml* [`@page`](xref:mvc/views/razor#page) işaretleme dosyasının işlenmiş çıktısındaki HTML çıkışını işleyen bir yönerge olmadan bir işaretleme *within* dosyasıdır (. cshtml).
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -57,7 +57,7 @@ Biçimlendirmeyi işlemek için karmaşık işleme mantığının veya kod yür�
 
 ::: moniker range=">= aspnetcore-2.0"
 
-Kısmi görünüm, *Görünümler* klasörü (MVC) veya *Sayfalar* klasörü (sayfalar) içinde tutulan bir *. cshtml* biçimlendirme dosyasıdır Razor .
+Kısmi görünüm, *.cshtml* [`@page`](xref:mvc/views/razor#page) *Görünümler* klasörü (MVC) veya *Sayfalar* klasörü (sayfalar) içinde bir yönerge olmadan bir. cshtml biçimlendirme dosyasıdır Razor .
 
 ASP.NET Core MVC 'de, denetleyici <xref:Microsoft.AspNetCore.Mvc.ViewResult> bir görünüm veya kısmi görünüm döndürmektedir. RazorSayfalarda, bir <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> nesne olarak temsil edilen kısmi bir görünüm döndürebilir <xref:Microsoft.AspNetCore.Mvc.PartialViewResult> . Kısmi görünümlere başvurmak ve işlemek [kısmi görünüm başvurusu](#reference-a-partial-view) bölümünde açıklanmaktadır.
 
