@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 7681deb70610a8fbc27ccda7317b73921646794a
-ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
+ms.openlocfilehash: e12b0e6d1bf9eab751f6605b9a156f637f2b0c0f
+ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88876782"
+ms.lasthandoff: 09/27/2020
+ms.locfileid: "91393840"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Hata ayıklama ASP.NET Core Blazor WebAssembly
 
@@ -109,11 +109,55 @@ Bir uygulamada hata ayıklarken Blazor WebAssembly , sunucu kodunda hata ayıkla
 > [!NOTE]
 > Hata ayıklama proxy 'si çalışmadan önce uygulama başlatma sırasında kesme noktaları isabet **etmez** . Bu, `Program.Main` ( `Program.cs` ) ve uygulamadan istenen ilk sayfa tarafından yüklenen bileşen [ `OnInitialized{Async}` yöntemlerinde](xref:blazor/components/lifecycle#component-initialization-methods) kesme noktaları içerir.
 
+Uygulama, farklı bir [uygulama temel yolunda](xref:blazor/host-and-deploy/index#app-base-path) barındırılıyorsa `/` , `Properties/launchSettings.json` uygulamasının temel yolunu yansıtmak için ' de aşağıdaki özellikleri güncelleştirin:
+
+* `applicationUrl`:
+
+  ```json
+  "iisSettings": {
+    ...
+    "iisExpress": {
+      "applicationUrl": "http://localhost:{INSECURE PORT}/{APP BASE PATH}/",
+      "sslPort": {SECURE PORT}
+    }
+  },
+  ```
+
+* `inspectUri` Her profilin:
+
+  ```json
+  "profiles": {
+    ...
+    "{PROFILE 1, 2, ... N}": {
+      ...
+      "inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/{APP BASE PATH}/_framework/debug/ws-proxy?browser={browserInspectUri}",
+      ...
+    }
+  }
+  ```
+
+Önceki ayarlarda yer tutucular:
+
+* `{INSECURE PORT}`: Güvensiz bağlantı noktası. Rastgele bir değer varsayılan olarak sağlanır, ancak özel bir bağlantı noktasına izin verilir.
+* `{APP BASE PATH}`: Uygulamanın temel yolu.
+* `{SECURE PORT}`: Güvenli bağlantı noktası. Rastgele bir değer varsayılan olarak sağlanır, ancak özel bir bağlantı noktasına izin verilir.
+* `{PROFILE 1, 2, ... N}`: Ayarlar profillerini başlatın. Genellikle, bir uygulama varsayılan olarak birden fazla profil belirtir (örneğin, IIS Express için bir profil ve Kestrel Server tarafından kullanılan bir proje profili).
+
+Aşağıdaki örneklerde, uygulama şu `/OAT` şekilde yapılandırılmış bir uygulama temel yolu ile konumunda barındırılır `wwwroot/index.html` `<base href="/OAT/">` :
+
+```json
+"applicationUrl": "http://localhost:{INSECURE PORT}/OAT/",
+```
+
+```json
+"inspectUri": "{wsProtocol}://{url.hostname}:{url.port}/OAT/_framework/debug/ws-proxy?browser={browserInspectUri}",
+```
+
+Uygulamalar için özel bir uygulama temel yolu kullanma hakkında daha fazla bilgi için Blazor WebAssembly bkz <xref:blazor/host-and-deploy/index#app-base-path> ..
+
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-<a id="vscode"></a>
-
-## <a name="debug-standalone-no-locblazor-webassembly"></a>Tek başına hata ayıkla Blazor WebAssembly
+<h2 id="vscode">Tek başına hata ayıkla Blazor WebAssembly</h2>
 
 1. Tek başına Blazor WebAssembly uygulamayı vs Code açın.
 
@@ -257,7 +301,7 @@ Bir uygulamada hata ayıklarken Blazor WebAssembly , sunucu kodunda hata ayıkla
 > [!NOTE]
 > Hata ayıklama proxy 'si çalışmadan önce uygulama başlatma sırasında kesme noktaları isabet **etmez** . Bu, `Program.Main` ( `Program.cs` ) ve uygulamadan istenen ilk sayfa tarafından yüklenen bileşen [ `OnInitialized{Async}` yöntemlerinde](xref:blazor/components/lifecycle#component-initialization-methods) kesme noktaları içerir.
 
-Daha fazla bilgi için bkz. [Mac için Visual Studio Ile hata ayıklama](/visualstudio/mac/debugging?view=vsmac-2019).
+Daha fazla bilgi için bkz. [Mac için Visual Studio Ile hata ayıklama](/visualstudio/mac/debugging).
 
 ---
 
