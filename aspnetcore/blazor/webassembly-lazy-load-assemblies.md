@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-lazy-load-assemblies
-ms.openlocfilehash: eb4aaa2f3d412cdf650ed2daf7c12166991d92a1
-ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
+ms.openlocfilehash: 92287c7205e67d7f2000b53506ec18475517325b
+ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90592910"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91424093"
 ---
 # <a name="lazy-load-assemblies-in-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core 'de geç yük derlemeleri Blazor WebAssembly
 
@@ -106,7 +106,7 @@ Uygulamanın `Router` bileşeninde ( `App.razor` ):
 Framework 'ün yavaş yükleme uygulamasıyla, barındırılan bir çözümde prerendering ile geç yükleme desteklenir Blazor . Prerendering sırasında, yavaş yükleme için işaretlenenler de dahil olmak üzere tüm derlemelerin yüklendiği varsayılır. `LazyAssemblyLoader` *Sunucu* projesinin `Startup.ConfigureServices` yöntemine () el ile kaydolun `Startup.cs` :
 
 ```csharp
-services.AddSingleton<LazyAssemblyLoader>();
+services.AddScoped<LazyAssemblyLoader>();
 ```
 
 ### <a name="user-interaction-with-navigating-content"></a>İçerikle Kullanıcı etkileşimi `<Navigating>`

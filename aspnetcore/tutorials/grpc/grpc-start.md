@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/grpc/grpc-start
-ms.openlocfilehash: 5f4d9a105ad6d0ab53b23d8c1e9f645d69d25888
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 13eb57bbe671dcc70a1678222a98590f4edc6e6f
+ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630282"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91424262"
 ---
 # <a name="tutorial-create-a-grpc-client-and-server-in-aspnet-core"></a>Öğretici: ASP.NET Core bir gRPC istemcisi ve sunucusu oluşturma
 
@@ -40,7 +40,7 @@ Bu öğreticide şunları yaptınız:
 > * GRPC istemcisi oluşturun.
 > * GRPC istemci hizmetini gRPC Greeter hizmeti ile test edin.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -86,7 +86,7 @@ Bu öğreticide şunları yaptınız:
   * `code`Komut, Visual Studio Code yeni bir örneğinde *Grpcgreeter* klasörünü açar.
 
   **Gerekli varlıkların derlenmesi ve hata ayıklaması için ' GrpcGreeter ' içinde eksik bir iletişim kutusu görüntülenir. Bunları ekleyin mi?**
-* **Evet**’i seçin.
+* **Evet** seçeneğini belirleyin.
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
@@ -215,6 +215,12 @@ dotnet add GrpcGreeterClient.csproj package Grpc.Tools
 
 * GRPC istemci projesinde bir *Prototips* klasörü oluşturun.
 * *Protos\bilgisem. proto* dosyasını GRPC Greeter hizmetinden GRPC istemci projesine kopyalayın.
+* Dosyanın içindeki ad alanını `greet.proto` projenin ad alanına güncelleştirin:
+
+  ```
+  option csharp_namespace = "GrpcGreeterClient";
+  ```
+
 * *Grpcgreeterclient. csproj* proje dosyasını düzenleyin:
 
   # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)

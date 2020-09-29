@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/policies
-ms.openlocfilehash: 82ed4cc2ce47d3bd85ca9c2ba2bbeb075eaefcef
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: af282ec1f82b2ac31fd0b46b2406110e24e9211b
+ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635339"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91424249"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>ASP.NET Core ilke tabanlı yetkilendirme
 
@@ -193,7 +193,7 @@ Yukarıdaki kod, `MinimumAgeHandler` çağırarak tek bir olarak kaydedilir `ser
 
 * Diğer gereksinim işleyicileri başarılı olsa bile hatayı güvence altına almak için çağrısı yapın `context.Fail` .
 
-Bir işleyici veya çağırırsa `context.Succeed` `context.Fail` , diğer tüm işleyiciler hala çağırılır. Bu, başka bir işleyicinin bir gereksinimi başarıyla doğrulayan veya başarısız olsa bile, gereksinimlerin günlüğe kaydetme gibi yan etkileri üretmesine olanak tanır. Olarak ayarlandığında `false` , [ınvokehandlersafterfailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) özelliği (ASP.NET Core 1,1 ve üzeri sürümlerde mevcuttur), çağrıldığında işleyicilerin yürütülmesi için kısa devre dışı `context.Fail` . `InvokeHandlersAfterFailure` Varsayılan olarak `true` , bu durumda tüm işleyiciler çağrılır.
+Bir işleyici veya çağırırsa `context.Succeed` `context.Fail` , diğer tüm işleyiciler hala çağırılır. Bu, başka bir işleyicinin bir gereksinimi başarıyla doğrulayan veya başarısız olsa bile, gereksinimlerin günlüğe kaydetme gibi yan etkileri üretmesine olanak tanır. Olarak ayarlandığında `false` , [ınvokehandlersafterfailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) özelliği, çağrıldığında işleyicilerin yürütülmesi kısa devre dışı `context.Fail` olur. `InvokeHandlersAfterFailure` Varsayılan olarak `true` , bu durumda tüm işleyiciler çağrılır.
 
 > [!NOTE]
 > Yetkilendirme işleyicileri, kimlik doğrulama başarısız olsa bile çağrılır.
@@ -427,7 +427,7 @@ Yukarıdaki kod, `MinimumAgeHandler` çağırarak tek bir olarak kaydedilir `ser
 
 * Diğer gereksinim işleyicileri başarılı olsa bile hatayı güvence altına almak için çağrısı yapın `context.Fail` .
 
-Bir işleyici veya çağırırsa `context.Succeed` `context.Fail` , diğer tüm işleyiciler hala çağırılır. Bu, başka bir işleyicinin bir gereksinimi başarıyla doğrulayan veya başarısız olsa bile, gereksinimlerin günlüğe kaydetme gibi yan etkileri üretmesine olanak tanır. Olarak ayarlandığında `false` , [ınvokehandlersafterfailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) özelliği (ASP.NET Core 1,1 ve üzeri sürümlerde mevcuttur), çağrıldığında işleyicilerin yürütülmesi için kısa devre dışı `context.Fail` . `InvokeHandlersAfterFailure` Varsayılan olarak `true` , bu durumda tüm işleyiciler çağrılır.
+Bir işleyici veya çağırırsa `context.Succeed` `context.Fail` , diğer tüm işleyiciler hala çağırılır. Bu, başka bir işleyicinin bir gereksinimi başarıyla doğrulayan veya başarısız olsa bile, gereksinimlerin günlüğe kaydetme gibi yan etkileri üretmesine olanak tanır. Olarak ayarlandığında `false` , [ınvokehandlersafterfailure](/dotnet/api/microsoft.aspnetcore.authorization.authorizationoptions.invokehandlersafterfailure#Microsoft_AspNetCore_Authorization_AuthorizationOptions_InvokeHandlersAfterFailure) özelliği, çağrıldığında işleyicilerin yürütülmesi kısa devre dışı `context.Fail` olur. `InvokeHandlersAfterFailure` Varsayılan olarak `true` , bu durumda tüm işleyiciler çağrılır.
 
 > [!NOTE]
 > Yetkilendirme işleyicileri, kimlik doğrulama başarısız olsa bile çağrılır.

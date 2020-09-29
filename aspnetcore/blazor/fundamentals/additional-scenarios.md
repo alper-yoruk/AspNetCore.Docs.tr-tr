@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/additional-scenarios
-ms.openlocfilehash: 870509a3cbbcbea9b1c4804185c49a831af22630
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: 236d95e54b772ea522911421084ec0d9022c45ff
+ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90009641"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91424145"
 ---
 # <a name="aspnet-core-no-locblazor-hosting-model-configuration"></a>ASP.NET Core Blazor barındırma modeli yapılandırması
 
@@ -120,7 +120,7 @@ Blazor Server uygulamalar, sunucu bağlantısı oluşturulmadan önce sunucudaki
 * , Sayfaya ön gönderilir.
 * , Sayfada statik HTML olarak veya Kullanıcı aracısından bir uygulamayı önyüklemek için gerekli bilgileri içeriyorsa Blazor .
 
-| Oluşturma modu | Açıklama |
+| Oluşturma modu | Description |
 | --- | --- |
 | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.ServerPrerendered> | Bileşeni statik HTML olarak işler ve uygulama için bir işaret içerir Blazor Server . Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . |
 | <xref:Microsoft.AspNetCore.Mvc.Rendering.RenderMode.Server> | Bir uygulama için işaretleyici işler Blazor Server . Bileşen çıkışı dahil değildir. Kullanıcı Aracısı başladığında, bu işaretleyici bir uygulamayı önyüklemek için kullanılır Blazor . |
@@ -177,7 +177,7 @@ JS birlikte çalışma başlatma gibi ek görevler gerçekleştirmek için, `the
 
 ### <a name="configure-the-no-locsignalr-client"></a>İstemciyi yapılandırma SignalR
 
-#### <a name="logging"></a>Günlüğe kaydetme
+#### <a name="logging"></a>Günlüğe Kaydetme
 
 SignalRİstemci günlüğünü yapılandırmak için, `configureSignalR` `configureLogging` istemci Oluşturucu 'da günlük düzeyiyle çağıran bir yapılandırma nesnesi () geçirin:
 
@@ -290,7 +290,15 @@ Yer tutucu, `{ELEMENT ID}` görüntülenecek HTML ÖĞESININ kimliğidir.
 }
 ```
 
-::: moniker-end
+## <a name="disconnect-the-no-locblazor-circuit-from-the-client"></a>BlazorDevresini istemciden bağlantısını kesin
+
+Varsayılan olarak, Blazor [ `unload` sayfa etkinliği](https://developer.mozilla.org/docs/Web/API/Window/unload_event) tetiklendiğinde devre dışı bırakıldığında bağlantı kesilir. Bu bağlantı devresinin, istemcideki diğer senaryolara karşı bağlantısını kesmek için `Blazor.disconnect` uygun olay işleyicisini çağırın. Aşağıdaki örnekte, sayfa gizli olduğunda devre dışı bırakıldığında bağlantı kesilir ([ `pagehide` olay](https://developer.mozilla.org/docs/Web/API/Window/pagehide_event)):
+
+```javascript
+window.addEventListener('pagehide', () => {
+  Blazor.disconnect();
+});
+```
 
 ## <a name="influence-html-head-tag-elements"></a>HTML `<head>` etiketi öğelerini etkiler
 
@@ -322,6 +330,8 @@ Bir alt bileşende çerçeve bileşenlerinden biri kullanıldığında, çerçev
 
 * , Uygulama durumu ile değiştirilebilir. Sabit kodlanmış HTML etiketi uygulama durumu tarafından değiştirilemez.
 * `<head>`Üst bileşen artık IŞLENMEDIĞINDE HTML 'den kaldırılır.
+
+::: moniker-end
 
 ## <a name="static-files"></a>Statik dosyalar
 

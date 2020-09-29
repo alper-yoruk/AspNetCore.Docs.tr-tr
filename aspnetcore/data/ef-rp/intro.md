@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 9dd8d293e189eebe6b61f6f0b35aee71977d2f77
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 35a5758500ae2bc691c8d08eccb22340f9998c39
+ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722559"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91424301"
 ---
 # <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor ASP.NET Core Entity Framework Core olan sayfalar-öğretici 1/8
 
@@ -40,11 +40,11 @@ Bu, bir [ASP.NET Core Razor sayfaları](xref:razor-pages/index) UYGULAMASıNDA E
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-[!INCLUDE[VS prereqs](~/includes/net-core-prereqs-vs-3.0.md)]
+[!INCLUDE[VS prereqs](~/includes/net-core-prereqs-vs-5.0.md)]
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-[!INCLUDE[VS Code prereqs](~/includes/net-core-prereqs-vsc-3.0.md)]
+[!INCLUDE[VS Code prereqs](~/includes/net-core-prereqs-vsc-5.0.md)]
 
 ---
 
@@ -68,49 +68,51 @@ Bu öğreticilerde oluşturulan uygulama, temel bir üniversite web sitesidir. K
 
 ![Öğrenciler düzenleme sayfası](intro/_static/student-edit30.png)
 
-Bu sitenin kullanıcı arabirimi stili yerleşik proje şablonlarına dayalıdır. Öğreticinin odağı, Kullanıcı arabirimini nasıl özelleştireceğinizi değil EF Core kullanma konusunda yer alır.
+Bu sitenin kullanıcı arabirimi stili yerleşik proje şablonlarına dayalıdır. Öğreticinin odağı, Kullanıcı arabirimini nasıl özelleştireceğinizi değil, ASP.NET Core EF Core nasıl kullanacağınızı kullanmaktır.
 
-Tamamlanan projenin kaynak kodunu almak için sayfanın üst kısmındaki bağlantıyı izleyin. *Cu30* klasörü, öğreticinin ASP.NET Core 3,0 sürümü için kod içerir. 1-7 öğreticileri için kodun durumunu yansıtan dosyalar *cu30snapshots* klasöründe bulunabilir.
+<!-- 
+Follow the link at the top of the page to get the source code for the completed project. The *cu50* folder has the code for the ASP.NET Core 5.0 version of the tutorial. Files that reflect the state of the code for tutorials 1-7 can be found in the *cu50snapshots* folder.
 
-# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+# [Visual Studio](#tab/visual-studio)
 
-Tamamlanmış projeyi indirdikten sonra uygulamayı çalıştırmak için:
+To run the app after downloading the completed project:
 
-* Projeyi derleyin.
-* Paket Yöneticisi konsolu 'nda (PMC) aşağıdaki komutu çalıştırın:
+* Build the project.
+* In Package Manager Console (PMC) run the following command:
 
   ```powershell
   Update-Database
   ```
 
-* Veritabanını temel alarak projeyi çalıştırın.
+* Run the project to seed the database.
 
-# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+# [Visual Studio Code](#tab/visual-studio-code)
 
-Tamamlanmış projeyi indirdikten sonra uygulamayı çalıştırmak için:
+To run the app after downloading the completed project:
 
-* *Contosouniversity. csproj*öğesini silin ve *Contosoüniversıtysqlite. csproj* öğesini *contosouniversity. csproj*olarak yeniden adlandırın.
-* *Program.cs*' de, açıklama dışarı bu `#define Startup` şekilde `StartupSQLite` kullanılır.
-* *appSettings.js*silin ve üzerinde *appSettings.js* *appSettingsSQLite.js* yeniden adlandırın.
-* *Geçişler* klasörünü silin ve *migrationssql* öğesini *geçişlerle*yeniden adlandırın.
-* İçin genel arama yapın `#if SQLiteVersion` ve `#if SQLiteVersion` ilgili `#endif` ifadeyi kaldırın.
-* Projeyi derleyin.
-* Proje klasöründeki bir komut isteminde aşağıdaki komutları çalıştırın:
+* In *Program.cs*, remove the comments from `// webBuilder.UseStartup<StartupSQLite>();`  so `StartupSQLite` is used.
+* Copy the contents of *appSettingsSQLite.json* into *appSettings.json*.
+* Delete the *Migrations* folder, and rename *MigrationsSQL* to *Migrations*.
+* Do a global search for `#if SQLiteVersion` and remove `#if SQLiteVersion` and the associated `#endif` statement.
+* Build the project.
+* At a command prompt in the project folder, run the following commands:
 
   ```dotnetcli
-  dotnet tool install --global dotnet-ef
+  dotnet tool install --global dotnet-ef -v 5.0.0-*
   dotnet ef database update
   ```
 
-* SQLite aracında şu SQL ifadesini çalıştırın:
+* In your SQLite tool, run the following SQL statement:
 
   ```sql
   UPDATE Department SET RowVersion = randomblob(8)
   ```
 
-* Veritabanını temel alarak projeyi çalıştırın.
+* Run the project to seed the database.
 
 ---
+
+-->
 
 ## <a name="create-the-web-app-project"></a>Web uygulaması projesi oluşturma
 
@@ -119,36 +121,35 @@ Tamamlanmış projeyi indirdikten sonra uygulamayı çalıştırmak için:
 * Visual Studio **Dosya** menüsünden **Yeni** > **Proje**' yi seçin.
 * **ASP.NET Core Web uygulaması**' nı seçin.
 * Projeyi *Contosouniversity*olarak adlandırın. Büyük harfler de dahil olmak üzere bu tam adı kullanmak önemlidir, bu nedenle kod kopyalanıp yapıştırılırken ad alanları eşleşir.
-* Açılan menüden **.NET Core** ve **3,0 ASP.NET Core** seçin ve ardından **Web uygulaması**' nı seçin.
+* Açılan menüden **.NET Core** ve **5,0 ASP.NET Core** seçin ve ardından **Web uygulaması**' nı seçin.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * Bir terminalde, proje klasörünün oluşturulması gereken klasöre gidin.
-
 * Bir Razor sayfa projesi ve yeni proje klasörü oluşturmak için aşağıdaki komutları çalıştırın `cd` :
 
   ```dotnetcli
   dotnet new webapp -o ContosoUniversity
-  cd ContosoUniversity
+  cd ContosoUniversity  
   ```
 
 ---
 
 ## <a name="set-up-the-site-style"></a>Site stilini ayarlayın
 
-*Sayfa/paylaşılan/_Layout. cshtml*'yi güncelleştirerek site üst bilgisini, alt bilgisini ve menüsünü ayarlayın:
+Aşağıdaki kodu kopyalayıp *Sayfalar/paylaşılan/_Layout. cshtml* dosyasına yapıştırın: [!code-cshtml[Main](intro/samples/cu50/Pages/Shared/_Layout.cshtml?highlight=6,14,21-35,49)]
 
-* "ContosoUniversity" öğesinin her oluşumunu "Contoso Üniversitesi" olarak değiştirin. Üç oluşum vardır.
+Düzen dosyası site üst bilgisini, alt bilgisini ve menüsünü ayarlar. Yukarıdaki kod aşağıdaki değişiklikleri yapar:
 
-* **Giriş** ve **Gizlilik** menü girişlerini silin ve **hakkında**, **öğrenciler**, **Kurslar**, **eğitmenler**ve **Departmanlar**için girişler ekleyin.
+* Her "ContosoUniversity" öğesinin "Contoso Üniversitesi" olarak her oluşumu. Üç oluşum vardır.
+* **Giriş** ve **Gizlilik** menü girişleri silinir.
+* , **Öğrenciler**, **Kurslar**, **eğitmenler**ve **Departmanlar** **için girişler**eklenir.
 
-Değişiklikler vurgulanır.
+*Pages/Index. cshtml*dosyasında, dosyanın içeriğini aşağıdaki kodla değiştirin:
 
-[!code-cshtml[Main](intro/samples/cu30/Pages/Shared/_Layout.cshtml?highlight=6,14,21-35,49)]
+[!code-cshtml[Main](intro/samples/cu50/Pages/Index.cshtml)]
 
-*Pages/Index. cshtml*dosyasında, ASP.NET Core hakkındaki metni bu uygulamayla ilgili metinle değiştirmek için dosyanın içeriğini aşağıdaki kodla değiştirin:
-
-[!code-cshtml[Main](intro/samples/cu30/Pages/Index.cshtml)]
+Yukarıdaki kod, ASP.NET Core ile ilgili metnin yerine bu uygulamayla ilgili metni koyar.
 
 Giriş sayfasının göründüğünü doğrulamak için uygulamayı çalıştırın.
 
@@ -214,51 +215,50 @@ Derleyici hatası olmadığını doğrulamak için projeyi derleyin.
 
 Bu bölümde, oluşturmak için ASP.NET Core scafkatlama aracını kullanırsınız:
 
-* EF Core *bağlamı* sınıfı. Bağlam, belirli bir veri modeli için Entity Framework işlevselliği koordine eden ana sınıftır. `Microsoft.EntityFrameworkCore.DbContext`Sınıfından türetilir.
+* EF Core `DbContext` sınıfı. Bağlam, belirli bir veri modeli için Entity Framework işlevselliği koordine eden ana sınıftır. <xref:Microsoft.EntityFrameworkCore.DbContext?displayProperty=fullName>Sınıfından türetilir.
 * Razor varlık için oluşturma, okuma, güncelleştirme ve silme (CRUD) işlemlerini işleyen sayfalar `Student` .
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* *Sayfalar* klasöründe bir *öğrenciler* klasörü oluşturun.
+* *Sayfalar/öğrenciler* klasörü oluşturun.
 * **Çözüm Gezgini**, *Sayfalar/öğrenciler* klasörüne sağ tıklayın ve **Add** > **yeni yapı iskelesi Ekle öğesini**seçin.
-* **Yapı iskelesi Ekle** iletişim kutusunda ** Razor Entity Framework (CRUD) Ekle öğesini kullanarak sayfalar** ' ı seçin > **ADD**.
+* **Yeni yapı Iskelesi öğesi Ekle** iletişim kutusunda:
+  * Sol sekmede, **yüklü > ortak > Razor sayfaları** ' nı seçin
+  * ** Razor Entity Framework (CRUD) Ekle kullanarak sayfa** seçin > **ADD**.
 * ** Razor Entity Framework (CRUD) kullanarak sayfa ekle** iletişim kutusunda:
   * **Model sınıfı** açılır penceresinde **öğrenci (Contosouniversity. modeller)** öğesini seçin.
   * **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin.
-  * *Contosouniversity. modeller. Contosoüniversıtycontext* olan veri bağlamı adını *Contosouniversity. Data. SchoolContext*olarak değiştirin.
-  * **Ekle**’yi seçin.
+    * Veri bağlamı adını yerine End ile değiştirin `SchoolContext` `ContosoUniversityContext` . Güncelleştirilmiş bağlam adı: `ContosoUniversity.Data.SchoolContext`
+   * **Add (Ekle)** seçeneğini belirleyin.
 
 Aşağıdaki paketler otomatik olarak yüklenir:
 
-* `Microsoft.VisualStudio.Web.CodeGeneration.Design`
 * `Microsoft.EntityFrameworkCore.SqlServer`
-* `Microsoft.Extensions.Logging.Debug`
 * `Microsoft.EntityFrameworkCore.Tools`
+* `Microsoft.VisualStudio.Web.CodeGeneration.Design`
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * Gerekli NuGet paketlerini yüklemek için aşağıdaki .NET Core CLI komutlarını çalıştırın:
-<!-- TO DO  After testing, Replace with
-[!INCLUDE[](~/includes/includes/add-EF-NuGet-SQLite-CLI.md)]
-remove dotnet tool install --global  below
- -->
+
   ```dotnetcli
-  dotnet add package Microsoft.EntityFrameworkCore.SQLite
-  dotnet add package Microsoft.EntityFrameworkCore.SqlServer
-  dotnet add package Microsoft.EntityFrameworkCore.Design
-  dotnet add package Microsoft.EntityFrameworkCore.Tools
-  dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design
-  dotnet add package Microsoft.Extensions.Logging.Debug
+  dotnet add package Microsoft.EntityFrameworkCore.SQLite -v 5.0.0-*
+  dotnet add package Microsoft.EntityFrameworkCore.SqlServer -v 5.0.0-*
+  dotnet add package Microsoft.EntityFrameworkCore.Design -v 5.0.0-*
+  dotnet add package Microsoft.EntityFrameworkCore.Tools -v 5.0.0-*
+  dotnet add package Microsoft.VisualStudio.Web.CodeGeneration.Design -v 5.0.0-*
+  dotnet add package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore -v 5.0.0-*  
   ```
 
-  Yapı iskelesi için Microsoft. VisualStudio. Web. CodeGeneration. Design paketi gereklidir. Uygulama SQL Server kullanmayabilse de, scafkatlama aracı SQL Server paketine ihtiyaç duyuyor.
+   Yapı iskelesi için Microsoft. VisualStudio. Web. CodeGeneration. Design paketi gereklidir. Uygulama SQL Server kullanmayabilse de, scafkatlama aracı SQL Server paketine ihtiyaç duyuyor.
 
 * *Sayfalar/öğrenciler* klasörü oluşturun.
 
 * [ASPNET-CodeGenerator scafkatlama aracı](xref:fundamentals/tools/dotnet-aspnet-codegenerator)'nı yüklemek için aşağıdaki komutu çalıştırın.
 
   ```dotnetcli
-  dotnet tool install --global dotnet-aspnet-codegenerator
+  dotnet tool uninstall --global dotnet-aspnet-codegenerator
+  dotnet tool install --global dotnet-aspnet-codegenerator --version 5.0.0-*  
   ```
 
 * Fkatlama öğrenci sayfalarını iskele almak için aşağıdaki komutu çalıştırın.
@@ -266,18 +266,18 @@ remove dotnet tool install --global  below
   **Windows üzerinde**
 
   ```dotnetcli
-  dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Data.SchoolContext -udl -outDir Pages\Students --referenceScriptLibraries
+  dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Data.SchoolContext -udl -outDir Pages\Students --referenceScriptLibraries -sqlite  
   ```
 
   **MacOS veya Linux üzerinde**
 
   ```dotnetcli
-  dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Data.SchoolContext -udl -outDir Pages/Students --referenceScriptLibraries
+  dotnet aspnet-codegenerator razorpage -m Student -dc ContosoUniversity.Data.SchoolContext -udl -outDir Pages/Students --referenceScriptLibraries -sqlite  
   ```
 
 ---
 
-Önceki adımla ilgili bir sorununuz varsa, projeyi derleyin ve yapı iskelesi adımını yeniden deneyin.
+Önceki adım başarısız olursa, projeyi derleyin ve iskele adımını yeniden deneyin.
 
 Yapı iskelesi işlemi:
 
@@ -293,19 +293,21 @@ Yapı iskelesi işlemi:
 
 ## <a name="database-connection-string"></a>Veritabanı bağlantı dizesi
 
+Scafkatlama aracı dosyadaki *appsettings.js* bir bağlantı dizesi oluşturur.
+
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Bağlantı dizesi [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb)belirtir. 
+Bağlantı dizesi [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb)belirtir:
 
-[!code-json[Main](intro/samples/cu30/appsettings.json?highlight=11)]
+[!code-json[Main](intro/samples/cu50/appsettings.json?highlight=11)]
 
 LocalDB, SQL Server Express veritabanı altyapısının hafif bir sürümüdür ve üretim kullanımı için değil uygulama geliştirmeye yöneliktir. Varsayılan olarak, LocalDB dizinde *. mdf* dosyaları oluşturur `C:/Users/<user>` .
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Bağlantı dizesini *cu. db*adlı bir SQLite veritabanı dosyasını işaret etmek üzere değiştirin:
+*. Db*için SQLite bağlantı dizesini kısaltın:
 
-[!code-json[Main](intro/samples/cu30/appsettingsSQLite.json?highlight=11)]
+[!code-json[Main](intro/samples/cu50/appsettingsSQLite.json?highlight=11)]
 
 ---
 
@@ -313,42 +315,76 @@ Bağlantı dizesini *cu. db*adlı bir SQLite veritabanı dosyasını işaret etm
 
 Belirli bir veri modeli için EF Core işlevselliğini koordine eden ana sınıf veritabanı bağlamı sınıfıdır. Bağlam [Microsoft. EntityFrameworkCore. DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext)öğesinden türetilir. Bağlam, veri modeline hangi varlıkların ekleneceğini belirtir. Bu projede, sınıfı olarak adlandırılır `SchoolContext` .
 
-Aşağıdaki kodla *SchoolContext.cs* güncelleştirin:
+*Data/SchoolContext. cs* öğesini şu kodla güncelleştirin:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Data/SchoolContext.cs?highlight=13-22)]
 
-Vurgulanan kod, her bir varlık kümesi için bir [Dbset \<TEntity> ](/dotnet/api/microsoft.entityframeworkcore.dbset-1) özelliği oluşturur. EF Core terminoloji:
+Yukarıdaki kod tekil ile çoğul arasında değişir `DbSet<Student> Student` `DbSet<Student> Students` . RazorSayfa kodunun yeni adla eşleşmesini sağlamak için `DBSet` , ' den küresel bir değişiklik yapın:`_context.Student.`
+Hedef: `_context.Students.`
 
-* Bir varlık kümesi, genellikle bir veritabanı tablosuna karşılık gelir.
-* Bir varlık, tablodaki bir satıra karşılık gelir.
+8 oluşum vardır.
 
-Bir varlık kümesi birden çok varlık içerdiğinden, DBSet özellikleri çoğul adlar olmalıdır. Yapı iskelesi aracı bir `Student` dbset oluşturduğundan, bu adım çoğul olarak değişir `Students` . 
+Bir varlık kümesi birden çok varlık içerdiğinden birçok geliştirici, `DBSet` özellik adlarının çoğul olması gerektiğini tercih eder.
 
-RazorSayfa kodunun yeni DBSet adıyla eşleşmesini sağlamak için, tüm projesi genelinde küresel bir değişiklik yapın `_context.Student` `_context.Students` .  8 oluşum vardır.
+Vurgulanan kod:
+
+* Her bir varlık kümesi için bir [Dbset \<TEntity> ](/dotnet/api/microsoft.entityframeworkcore.dbset-1) özelliği oluşturur. EF Core terminoloji:
+  * Bir varlık kümesi, genellikle bir veritabanı tablosuna karşılık gelir.
+  * Bir varlık, tablodaki bir satıra karşılık gelir.
+* Çağırır <xref:Microsoft.EntityFrameworkCore.DbContext.OnModelCreating%2A> . `OnModelCreating`:
+  * Başlatıldığı zaman çağrılır `SchoolContext` , ancak model kilitlenmeden önce ve bağlamı başlatmak için kullanılır.
+  * Daha sonraki öğreticide, `Student` varlığın diğer varlıklara başvuruları olacağı için gereklidir.
+  <!-- Review, OnModelCreating needs review -->
 
 Derleyici hatası olmadığını doğrulamak için projeyi derleyin.
 
 ## <a name="startupcs"></a>Startup.cs
 
-ASP.NET Core [bağımlılık ekleme](xref:fundamentals/dependency-injection)ile oluşturulmuştur. Hizmetler (EF Core veritabanı bağlamı gibi) uygulama başlatma sırasında bağımlılık ekleme ile kaydedilir. Bu hizmetleri gerektiren bileşenler (örneğin, Razor Sayfalar) bu hizmetleri Oluşturucu parametreleri aracılığıyla sağlamaktadır. Bir veritabanı bağlamı örneğini alan Oluşturucu kodu öğreticide daha sonra gösterilmiştir.
+ASP.NET Core [bağımlılık ekleme](xref:fundamentals/dependency-injection)ile oluşturulmuştur. Gibi hizmetler, `SchoolContext` uygulamanın başlatılması sırasında bağımlılık ekleme ile kaydedilir. Sayfalar gibi bu hizmetleri gerektiren bileşenler Razor , bu hizmetleri Oluşturucu parametreleri aracılığıyla sağlamaktadır. Bir veritabanı bağlamı örneğini alan Oluşturucu kodu öğreticide daha sonra gösterilmiştir.
 
 Scafkatlama Aracı, bağlam sınıfını bağımlılık ekleme kapsayıcısına otomatik olarak kaydetti.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* `ConfigureServices`' De, vurgulanan satırlar scaffolder tarafından eklenmiştir:
+Aşağıdaki Vurgulanan satırlar scaffolder tarafından eklendi:
 
-  [!code-csharp[Main](intro/samples/cu30/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
+[!code-csharp[Main](intro/samples/cu30/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-* ' De `ConfigureServices` , desteği tarafından eklenen kodun çağrılarından emin olun `UseSqlite` .
+Desteği çağrıları tarafından eklenen kodu doğrulayın `UseSqlite` .
 
-  [!code-csharp[Main](intro/samples/cu30/StartupSQLite.cs?name=snippet_ConfigureServices&highlight=5-6)]
+[!code-csharp[Main](intro/samples/cu30/StartupSQLite.cs?name=snippet_ConfigureServices&highlight=5-6)]
+
+Üretim veritabanını kullanma hakkında bilgi için bkz. [geliştirme Için SQLite kullanma, üretime yönelik SQL Server](xref:tutorials/razor-pages/model#use-sqlite-for-development-sql-server-for-production) .
 
 ---
 
 Bağlantı dizesinin adı, [Dbcontextoptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) nesnesinde bir yöntem çağırarak bağlama geçirilir. Yerel geliştirme için [ASP.NET Core yapılandırma sistemi](xref:fundamentals/configuration/index) dosyadaki *appsettings.js* bağlantı dizesini okur.
+
+### <a name="add-the-database-exception-filter"></a>Veritabanı özel durum filtresini ekleme
+
+`AddDatabaseDeveloperPageExceptionFilter` `ConfigureServices` Aşağıdaki kodda gösterildiği gibi öğesine ekleyin:
+
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+[!code-csharp[Main](intro/samples/cu50/Startup.cs?name=snippet_ConfigureServices&highlight=8)]
+
+[Microsoft. aspnetcore. Diagnostics. EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) NuGet paketini ekleyin.
+
+PMC 'de, NuGet paketini eklemek için aşağıdaki komutu girin:
+
+```powershell
+Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore -Version 5.0.0-rc.1.20451.17
+```
+
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+
+[!code-csharp[Main](intro/samples/cu50/StartupSQLite.cs?name=snippet_ConfigureServices&highlight=8)]
+
+---
+
+`Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore`NuGet paketi, Entity Framework Core hata sayfaları için ASP.NET Core ara yazılım sağlar. Bu ara yazılım Entity Framework Core geçişlerle hataları algılamaya ve tanılamanıza yardımcı olur.
 
 ## <a name="create-the-database"></a>Veritabanını oluşturma
 
@@ -383,7 +419,7 @@ Aşağıdaki kodla *veri/Dbınizer. cs* oluşturun:
 
   Kod, veritabanında herhangi bir öğrenci olup olmadığını denetler. Öğrenci yoksa, veritabanına test verileri ekler. Performansı iyileştirmek için Koleksiyonlar yerine diziler halinde test verileri oluşturur `List<T>` .
 
-* *Program.cs*içinde, `EnsureCreated` çağrıyı bir çağrı ile değiştirin `DbInitializer.Initialize` :
+*Program.cs*içinde, `EnsureCreated` çağrıyı bir çağrı ile değiştirin `DbInitializer.Initialize` :
 
   ```csharp
   // context.Database.EnsureCreated();
@@ -395,8 +431,10 @@ Aşağıdaki kodla *veri/Dbınizer. cs* oluşturun:
 Çalışıyorsa uygulamayı durdurun ve **Paket Yöneticisi konsolunda** (PMC) aşağıdaki komutu çalıştırın:
 
 ```powershell
-Drop-Database
+Drop-Database -Confirm
 ```
+
+`Y`Veritabanını silmek için ile yanıtlayın.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -405,7 +443,6 @@ Drop-Database
 ---
 
 * Uygulamayı yeniden başlatın.
-
 * Sağlanan verileri görmek için öğrenciler sayfasını seçin.
 
 ## <a name="view-the-database"></a>Veritabanını görüntüleme
@@ -428,7 +465,7 @@ Veritabanı şemasını ve sağlanan verileri görüntülemek için SQLite arac�
 
 Zaman uyumsuz programlama, ASP.NET Core ve EF Core için varsayılan moddur.
 
-Web sunucusunda sınırlı sayıda iş parçacığı bulunur ve yüksek yük durumlarında tüm kullanılabilir iş parçacıkları kullanımda olabilir. Bu durumda, sunucu, iş parçacıkları boşaltılana kadar yeni istekleri işleyemez. Zaman uyumlu kodla, çok sayıda iş parçacığı, g/ç 'nin tamamlanmasını beklediği için aslında herhangi bir iş yapmadıklarında bağlı olabilir. Zaman uyumsuz kod ile, bir işlem g/ç 'yi tamamlanmayı beklerken, sunucunun diğer istekleri işlemek için kullanması için iş parçacığı serbest bırakılır. Sonuç olarak, zaman uyumsuz kod sunucu kaynaklarının daha verimli kullanılmasını sağlar ve sunucu gecikmeksizin daha fazla trafiği işleyebilir.
+Web sunucusunda sınırlı sayıda iş parçacığı bulunur ve yüksek yük durumlarında tüm kullanılabilir iş parçacıkları kullanımda olabilir. Bu durumda, sunucu, iş parçacıkları boşaltılana kadar yeni istekleri işleyemez. Zaman uyumlu kod ile, çok sayıda iş parçacığı g/ç 'nin tamamlanmasını beklediği için iş çalışmadıklarında bağlı olabilir. Zaman uyumsuz kod ile, bir işlem g/ç 'yi tamamlanmayı beklerken, sunucunun diğer istekleri işlemek için kullanması için iş parçacığı serbest bırakılır. Sonuç olarak, zaman uyumsuz kod sunucu kaynaklarının daha verimli kullanılmasını sağlar ve sunucu gecikmeksizin daha fazla trafiği işleyebilir.
 
 Zaman uyumsuz kod, çalışma zamanında az miktarda yük getirir. Düşük trafik durumlarında, performans artışı göz ardı edilebilir, ancak yüksek trafik durumları için olası performans iyileştirmesi oldukça önemlidir.
 
@@ -455,6 +492,21 @@ EF Core kullanan zaman uyumsuz kodu yazarken dikkat edilmesi gereken bazı şeyl
 * Zaman uyumsuz kodun performans avantajlarından yararlanmak için, veritabanına sorgu gönderen EF Core yöntemleri çağırıyorsa kitaplık paketlerinin (örneğin, sayfalama için) zaman uyumsuz olarak kullanılacağını doğrulayın.
 
 .NET 'te zaman uyumsuz programlama hakkında daha fazla bilgi için bkz. Async [and await ile](/dotnet/csharp/programming-guide/concepts/async/)zaman uyumsuz [genel bakış](/dotnet/standard/async) ve zaman uyumsuz programlama
+
+<!-- Review: See https://github.com/dotnet/AspNetCore.Docs/issues/14528 -->
+## <a name="performance-considerations"></a>Performansla ilgili önemli noktalar
+
+Genel olarak, bir Web sayfası rastgele sayıda satır yüklememelidir. Bir sorgu, sayfalama veya sınırlandırma yaklaşımını kullanmalıdır. Örneğin, önceki sorgu `Take` döndürülen satırları sınırlamak için kullanabilir:
+
+[!code-csharp[Main](intro/samples/cu50snapshots/Index.cshtml.cs?name=snippet)]
+
+Bir görünümde büyük bir tablonun numaralandırılması, bir veritabanı özel durumu numaralandırma aracılığıyla bir bölüm oluşursa kısmen oluşturulmuş bir HTTP 200 yanıtı döndürebilir.
+
+<xref:Microsoft.AspNetCore.Mvc.MvcOptions.MaxModelBindingCollectionSize> Varsayılan olarak 1024 ' dir. Aşağıdaki kod kümeleri `MaxModelBindingCollectionSize` :
+
+[!code-csharp[Main](intro/samples/cu50/StartupMaxMBsize.cs?name=snippet_ConfigureServices)]
+
+Sayfalama daha sonra öğreticide ele alınmıştır.
 
 ## <a name="next-steps"></a>Sonraki adımlar
 
@@ -533,7 +585,8 @@ Tamamlanmış projeyi indirdikten sonra uygulamayı çalıştırmak için:
 * Proje klasöründeki bir komut isteminde aşağıdaki komutları çalıştırın:
 
   ```dotnetcli
-  dotnet tool install --global dotnet-ef
+  dotnet tool uninstall --global dotnet-ef
+  dotnet tool install --global dotnet-ef --version 5.0.0-*
   dotnet ef database update
   ```
 
@@ -542,7 +595,7 @@ Tamamlanmış projeyi indirdikten sonra uygulamayı çalıştırmak için:
   ```sql
   UPDATE Department SET RowVersion = randomblob(8)
   ```
-
+  
 * Veritabanını temel alarak projeyi çalıştırın.
 
 ---
@@ -599,8 +652,7 @@ Bir öğrenci herhangi bir sayıda kursa kaydolabilir ve bir kurs, kayıtlı say
 
 ![Öğrenci varlık diyagramı](intro/_static/student-entity.png)
 
-* Proje klasöründe bir *modeller* klasörü oluşturun. 
-
+* Proje klasöründe bir *modeller* klasörü oluşturun.
 * Aşağıdaki kodla *modeller/öğrenci. cs* oluşturun:
 
   [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Models/Student.cs)]
@@ -661,7 +713,7 @@ Bu bölümde, oluşturmak için ASP.NET Core scafkatlama aracını kullanırsın
   * **Model sınıfı** açılır penceresinde **öğrenci (Contosouniversity. modeller)** öğesini seçin.
   * **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin.
   * *Contosouniversity. modeller. Contosoüniversıtycontext* olan veri bağlamı adını *Contosouniversity. Data. SchoolContext*olarak değiştirin.
-  * **Ekle**’yi seçin.
+  * **Add (Ekle)** seçeneğini belirleyin.
 
 Aşağıdaki paketler otomatik olarak yüklenir:
 
@@ -730,7 +782,7 @@ Yapı iskelesi işlemi:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Bağlantı dizesi [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb)belirtir. 
+*appsettings.js* dosya [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb)bağlantı dizesini belirtir.
 
 [!code-json[Main](intro/samples/cu30/appsettings.json?highlight=11)]
 
@@ -748,7 +800,7 @@ Bağlantı dizesini *cu. db*adlı bir SQLite veritabanı dosyasını işaret etm
 
 Belirli bir veri modeli için EF Core işlevselliğini koordine eden ana sınıf veritabanı bağlamı sınıfıdır. Bağlam [Microsoft. EntityFrameworkCore. DbContext](/dotnet/api/microsoft.entityframeworkcore.dbcontext)öğesinden türetilir. Bağlam, veri modeline hangi varlıkların ekleneceğini belirtir. Bu projede, sınıfı olarak adlandırılır `SchoolContext` .
 
-Aşağıdaki kodla *SchoolContext.cs* güncelleştirin:
+*Data/SchoolContext. cs* öğesini şu kodla güncelleştirin:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/1-intro/Data/SchoolContext.cs?highlight=13-22)]
 
@@ -1044,7 +1096,7 @@ Bu bölümde öğrenci modeli scafkatdır. Diğer bir deyişle, scafkatlama arac
 * **Model sınıfı** açılır penceresinde **öğrenci (Contosouniversity. modeller)** öğesini seçin.
 * **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin ve üretilen adı **Contosouniversity. modeller. SchoolContext**olarak değiştirin.
 * **Veri bağlamı sınıfı** açılır penceresinde **Contosouniversity. modeller. SchoolContext** öğesini seçin.
-* **Ekle**’yi seçin.
+* **Add (Ekle)** seçeneğini belirleyin.
 
 ![CRUD iletişim kutusu](intro/_static/s1.png)
 

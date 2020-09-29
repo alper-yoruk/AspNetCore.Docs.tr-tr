@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/certauth
-ms.openlocfilehash: 54780e2d67c70d945fd875c41c8d6483aa358bbf
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 57d46e34993148943b1e9680a372405be9c80605
+ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627201"
+ms.lasthandoff: 09/29/2020
+ms.locfileid: "91424210"
 ---
 # <a name="configure-certificate-authentication-in-aspnet-core"></a>ASP.NET Core sertifika kimlik doğrulamasını yapılandırma
 
@@ -198,7 +198,7 @@ services.AddAuthentication(
             {
                 var validationService =
                     context.HttpContext.RequestServices
-                        .GetService<ICertificateValidationService>();
+                        .GetRequiredService<ICertificateValidationService>();
                 
                 if (validationService.ValidateCertificate(
                     context.ClientCertificate))
@@ -643,7 +643,7 @@ Aşağıdaki yaklaşım isteğe bağlı istemci sertifikalarını destekler:
     * [Kestrel](/fundamentals/servers/kestrel):
       * [ListenOptions. UseHttps](xref:fundamentals/servers/kestrel#listenoptionsusehttps)
       * <xref:Microsoft.AspNetCore.Server.Kestrel.Https.HttpsConnectionAdapterOptions.ClientCertificateMode>
-      * Not Kestrel Şu anda tek bir bağlamada birden fazla TLS yapılandırmasını desteklemez, benzersiz IP 'Ler veya bağlantı noktalarıyla iki bağlama gerekecektir. Bakýn https://github.com/dotnet/runtime/issues/31097
+      * Not Kestrel Şu anda tek bir bağlamada birden fazla TLS yapılandırmasını desteklemez, benzersiz IP 'Ler veya bağlantı noktalarıyla iki bağlama gerekecektir. Bkz. https://github.com/dotnet/runtime/issues/31097
     * IIS
       * [IIS barındırma](xref:host-and-deploy/iis/index#create-the-iis-site)
       * [IIS 'de güvenliği yapılandırma](/iis/manage/configuring-security/how-to-set-up-ssl-on-iis#configure-ssl-settings-2)
