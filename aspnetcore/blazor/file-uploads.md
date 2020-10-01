@@ -5,7 +5,7 @@ description: "' De dosyaları Blazor , InputFile bileşeniyle karşıya yükleme
 monikerRange: '>= aspnetcore-5.0'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/17/2020
+ms.date: 09/29/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,24 +18,38 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/file-uploads
-ms.openlocfilehash: de4654f2efc401143e066628b096052efa65d7a0
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 06d1464cb731a8008362fc911f463e4ff8a37b6b
+ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722997"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91606656"
 ---
 # <a name="aspnet-core-no-locblazor-file-uploads"></a>BlazorKarşıya dosya yükleme ASP.NET Core
 
-[Daniel Roth](https://github.com/danroth27) tarafından
+[Daniel Roth](https://github.com/danroth27) ve [Pranav Krishnamoorthy](https://github.com/pranavkm) tarafından
 
-`InputFile`Dosya karşıya yükleme dahil olmak üzere, tarayıcı dosyası verilerini .net Code 'a okumak için bileşeni kullanın. `InputFile`Bileşen türünde BIR HTML girişi olarak işler `file` .
+[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/file-uploads/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
+
+`InputFile`Dosya karşıya yükleme dahil olmak üzere, tarayıcı dosyası verilerini .net Code 'a okumak için bileşeni kullanın.
+
+> [!WARNING]
+> Dosya yükleme en iyi yöntemlerini her zaman izleyin. Daha fazla bilgi için bkz. <xref:mvc/models/file-uploads#security-considerations>.
+
+## <a name="inputfile-component"></a>`InputFile` bileşeni
+
+`InputFile`Bileşen türünde BIR HTML girişi olarak işler `file` .
 
 Varsayılan olarak, Kullanıcı tek dosya seçer. `multiple`Kullanıcının aynı anda birden çok dosya yüklemesine izin vermek için özniteliğini ekleyin. Kullanıcı tarafından bir veya daha fazla dosya seçildiğinde, `InputFile` bileşen bir `OnChange` olayı harekete geçirir ve `InputFileChangeEventArgs` Seçili dosya listesine ve her dosya hakkındaki ayrıntılara erişim sağlayan bir ' de geçirir.
 
+Kullanıcı tarafından seçilen dosyadan veri okumak için:
+
+* Dosyada çağrı yapın `OpenReadStream` ve döndürülen akıştan okuyun. Daha fazla bilgi için [dosya akışları](#file-streams) bölümüne bakın.
+* `ReadAsync` komutunu kullanın. Varsayılan olarak, `ReadAsync` yalnızca boyutu 524.288 kb 'tan (512 KB) daha küçük bir dosyanın okunmasına izin verir. Bu sınır, geliştiricilerin yanlışlıkla bellekteki büyük dosyaları yanlışlıkla okumasını engellemek için vardır. Daha büyük dosyaların desteklenmeleri gerekiyorsa, beklenen en büyük dosya boyutu için makul bir değer belirtin. Gelen dosya akışını doğrudan belleğe okumaktan kaçının. Örneğin, dosya baytlarını bir <xref:System.IO.MemoryStream> bayt dizisi olarak bir veya Read öğesine kopyalamayın. Bu yaklaşımlar, özellikle içinde, performans ve güvenlik sorunlarına neden olabilir Blazor Server . Bunun yerine, dosya baytlarını bir blob veya diskteki bir dosya gibi bir dış depoya kopyalamayı göz önünde bulundurun.
+
 Görüntü dosyası alan bir bileşen, `RequestImageFileAsync` görüntünün uygulamaya akışı tamamlanmadan önce tarayıcının JavaScript çalışma zamanı içindeki görüntü verilerini yeniden boyutlandırmak için dosyanın kullanışlı yöntemini çağırabilir.
 
-Aşağıdaki örnek, bir bileşende birden çok resim dosyasını karşıya yüklemeyi gösterir:
+Aşağıdaki örnek, bir bileşende birden çok resim dosyasını karşıya yüklemeyi gösterir. `InputFileChangeEventArgs.GetMultipleFiles` birden çok dosyanın okunmasına izin verir. Kötü amaçlı bir kullanıcının uygulamanın beklediği kadar çok sayıda dosyayı karşıya yüklemesini engellemek için, okumak istediğiniz en fazla dosya sayısını belirtin. `InputFileChangeEventArgs.File` dosya karşıya yükleme birden çok dosyayı desteklemiyorsa, ilk ve yalnızca dosyanın okunmasına izin verir.
 
 ```razor
 <h3>Upload PNG images</h3>
@@ -46,7 +60,7 @@ Aşağıdaki örnek, bir bileşende birden çok resim dosyasını karşıya yük
 
 @if (imageDataUrls.Count > 0)
 {
-    <h3>Images</h3>
+    <h4>Images</h4>
 
     <div class="card" style="width:30rem;">
         <div class="card-body">
@@ -63,10 +77,10 @@ Aşağıdaki örnek, bir bileşende birden çok resim dosyasını karşıya yük
 
     private async Task OnInputFileChange(InputFileChangeEventArgs e)
     {
-        var imageFiles = e.GetMultipleFiles();
+        var maxAllowedFiles = 3;
         var format = "image/png";
 
-        foreach (var imageFile in imageFiles)
+        foreach (var imageFile in e.GetMultipleFiles(maxAllowedFiles))
         {
             var resizedImageFile = await imageFile.RequestImageFileAsync(format, 
                 100, 100);
@@ -80,4 +94,15 @@ Aşağıdaki örnek, bir bileşende birden çok resim dosyasını karşıya yük
 }
 ```
 
-Kullanıcı tarafından seçilen bir dosyadan veri okumak için, dosyayı çağırın `OpenReadStream` ve döndürülen akıştan okuyun. Bir Blazor WebAssembly uygulamada, veriler doğrudan tarayıcı içindeki .net koduna akışla kaydedilir. Bir Blazor Server uygulamada, dosya akıştan okunana kadar dosya verileri sunucuda .net koduna akışla kaydedilir. 
+`IBrowserFile`[tarayıcı tarafından sunulan](https://developer.mozilla.org/docs/Web/API/File#Instance_properties) meta verileri özellikler olarak döndürür. Bu meta veriler, ön doğrulama için yararlı olabilir. Örneğin, [ `FileUpload.razor` ve `FilePreview.razor` örnek bileşenlerine](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/file-uploads/samples/)bakın.
+
+## <a name="file-streams"></a>Dosya akışları
+
+Bir Blazor WebAssembly uygulamada, veriler doğrudan tarayıcı içindeki .net koduna akışla kaydedilir.
+
+Bir Blazor Server uygulamada, dosya SignalR akışından okunan dosya verileri sunucuda .net koduna bağlantı üzerinden akışa kaydedilir. [`Forms.RemoteBrowserFileStreamOptions`](https://github.com/dotnet/aspnetcore/blob/master/src/Components/Web/src/Forms/InputFile/RemoteBrowserFileStreamOptions.cs) için dosya yükleme özelliklerinin yapılandırılmasını sağlar Blazor Server .
+
+## <a name="additional-resources"></a>Ek kaynaklar
+
+* <xref:mvc/models/file-uploads#security-considerations>
+* <xref:blazor/forms-validation>

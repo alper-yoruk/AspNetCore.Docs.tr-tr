@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 uid: blazor/state-management
 zone_pivot_groups: blazor-hosting-models
-ms.openlocfilehash: 43794fad36efe44cad6fbb2f1a1cae293a2ddad1
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a74f056447839c4cf057948f26a9ece9b5799656
+ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625966"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91606709"
 ---
 # <a name="aspnet-core-no-locblazor-state-management"></a>ASP.NET Core Blazor durum yönetimi
 
@@ -58,11 +58,12 @@ Uygulama, *uygulama durumunu*yalnızca kalıcı hale getirebilirler. Usıs, bile
 
 ## <a name="where-to-persist-state"></a>Durumun nerede kalıcı olduğu
 
-Kalıcı durum için üç ortak konum mevcuttur:
+Kalıcı durum için genel konumlar mevcuttur:
 
 * [Sunucu tarafı depolama](#server-side-storage)
 * [URL](#url)
 * [Tarayıcı depolama](#browser-storage)
+* [Bellek içi durum kapsayıcısı hizmeti](#in-memory-state-container-service)
 
 ### <a name="server-side-storage"></a>Sunucu tarafı depolama
 
@@ -71,7 +72,7 @@ Birden çok kullanıcı ve cihaza yayılan kalıcı veri kalıcılığı için, 
 * Blob depolama
 * Anahtar-değer depolaması
 * İlişkisel veritabanı
-* Tablo depolama
+* Table Storage
 
 Veriler kaydedildikten sonra, kullanıcının durumu korunur ve herhangi bir yeni tarayıcı oturumunda kullanılabilir.
 
@@ -119,6 +120,10 @@ Genellikle, `sessionStorage` kullanmak daha güvenlidir. `sessionStorage` bir ku
 > [!WARNING]
 > Kullanıcılar ve içinde depolanan verileri görüntüleyebilir veya bunlarla karşılaşabilir `localStorage` `sessionStorage` .
 
+## <a name="in-memory-state-container-service"></a>Bellek içi durum kapsayıcısı hizmeti
+
+[!INCLUDE[](~/includes/blazor-state-management/state-container.md)]
+
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * [Bir kimlik doğrulama işleminden önce uygulama durumunu Kaydet](xref:blazor/security/webassembly/additional-scenarios#save-app-state-before-an-authentication-operation)
@@ -162,11 +167,12 @@ Uygulama, *uygulama durumunu*yalnızca kalıcı hale getirebilirler. Usıs, bile
 
 ## <a name="where-to-persist-state"></a>Durumun nerede kalıcı olduğu
 
-Kalıcı durum için üç ortak konum mevcuttur:
+Kalıcı durum için genel konumlar mevcuttur:
 
 * [Sunucu tarafı depolama](#server-side-storage)
 * [URL](#url)
 * [Tarayıcı depolama](#browser-storage)
+* [Bellek içi durum kapsayıcısı hizmeti](#in-memory-state-container-service)
 
 ### <a name="server-side-storage"></a>Sunucu tarafı depolama
 
@@ -175,7 +181,7 @@ Birden çok kullanıcı ve cihaza yayılan kalıcı veri kalıcılığı için, 
 * Blob depolama
 * Anahtar-değer depolaması
 * İlişkisel veritabanı
-* Tablo depolama
+* Table Storage
 
 Veriler kaydedildikten sonra, kullanıcının durumu korunur ve yeni bir devrede kullanılabilir.
 
@@ -701,5 +707,9 @@ Genel olarak, *durum sağlayıcısı üst bileşen* deseninin kullanılması ön
 Birçok farklı durum nesnesini kalıcı hale getirmek ve farklı yerlerde nesnelerin farklı alt kümelerini kullanmak için, kalıcı durumu küresel olarak önlemek daha iyidir.
 
 ::: moniker-end
+
+## <a name="in-memory-state-container-service"></a>Bellek içi durum kapsayıcısı hizmeti
+
+[!INCLUDE[](~/includes/blazor-state-management/state-container.md)]
 
 ::: zone-end

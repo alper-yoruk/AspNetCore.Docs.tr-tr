@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/javascript-client
-ms.openlocfilehash: 359aa2b9e6b7f826d75f10645b7f2b565ab48b7a
-ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
+ms.openlocfilehash: 6fc586d144547585ef75d653bf54193def5c8b7f
+ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90847695"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91606689"
 ---
 # <a name="aspnet-core-no-locsignalr-javascript-client"></a>SignalRJavaScript istemcisi ASP.NET Core
 
@@ -50,7 +50,7 @@ npm install @microsoft/signalr
 
 NPM *node_modules \\ @microsoft\signalr\dist\browser * klasöre paket içeriğini yüklüyor. *Wwwroot \\ kitaplığı* klasörünün altında *SignalR* adlı yeni bir klasör oluşturun. *signalr.js* dosyasını *wwwroot\lib\signalr* klasörüne kopyalayın.
 
-SignalRÖğesindeki JavaScript istemcisine başvurun `<script>` . Örnek:
+SignalRÖğesindeki JavaScript istemcisine başvurun `<script>` . Örneğin:
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -58,7 +58,7 @@ SignalRÖğesindeki JavaScript istemcisine başvurun `<script>` . Örnek:
 
 ### <a name="use-a-content-delivery-network-cdn"></a>Content Delivery Network kullanma (CDN)
 
-İstemci kitaplığını NPM önkoşulu olmadan kullanmak için, istemci kitaplığının CDN ile barındırılan bir kopyasına başvurun. Örnek:
+İstemci kitaplığını NPM önkoşulu olmadan kullanmak için, istemci kitaplığının CDN ile barındırılan bir kopyasına başvurun. Örneğin:
 
 [!code-html[](javascript-client/samples/3.x/SignalRChat/Pages/Index.cshtml?name=snippet_CDN)]
 
@@ -278,6 +278,46 @@ Aşağıdaki kod, genel bir el ile yeniden bağlantı yaklaşımını göstermek
 
 Gerçek dünyada bir uygulama, bir üstel geri kapatmayı kullanır veya vermeden önce belirtilen sayıda kez yeniden dener.
 
+## <a name="troubleshoot-websocket-handshake-errors"></a>WebSocket el sıkışma hatalarında sorun giderme
+
+Bu bölüm, ASP.NET Core hub 'a bağlantı kurmaya çalışırken gerçekleşen *"WebSocket el sıkışması sırasında hata"* özel durumu hakkında yardım sağlar SignalR .
+
+### <a name="response-code-400-or-503"></a>Yanıt kodu 400 veya 503
+
+Aşağıdaki hata için:
+
+```log
+WebSocket connection to 'wss://xxx/HubName' failed: Error during WebSocket handshake: Unexpected response code: 400
+
+Error: Failed to start the connection: Error: There was an error with the transport.
+```
+
+Hata genellikle istemcinin yalnızca WebSockets taşıma kullanmasına neden olur ancak sunucuda WebSockets Protokolü etkinleştirilmemiştir.
+
+### <a name="response-code-307"></a>Yanıt kodu 307
+
+```log
+WebSocket connection to 'ws://xxx/HubName' failed: Error during WebSocket handshake: Unexpected response code: 307
+```
+
+Bu, genellikle merkez sunucu olduğunda meydana gelir SignalR :
+
+* Hem HTTP hem de HTTPS üzerinden yanıt verir.
+* , ' I çağırarak HTTPS 'yi zorlamak üzere yapılandırılmıştır `UseHttpsRedirection` `Startup` veya URL yeniden yazma KURALı aracılığıyla https uygular.
+
+Bu hata, istemci tarafında kullanılarak HTTP URL 'SI belirtilerek oluşabilir `.withUrl("http://xxx/HubName")` . Bu durumun düzeltilmesi, kodu bir HTTPS URL 'SI kullanacak şekilde değiştiriyor.
+
+### <a name="response-code-404"></a>Yanıt kodu 404
+
+```log
+WebSocket connection to 'wss://xxx/HubName' failed: Error during WebSocket handshake: Unexpected response code: 404
+```
+
+Uygulama localhost üzerinde çalışıyorsa, ancak IIS sunucusuna yayımladıktan sonra bu hatayı döndürür:
+
+* ASP.NET Core SignalR uygulamasının BIR IIS alt uygulaması olarak barındırıldığını doğrulayın.
+* JavaScript istemci tarafında alt uygulamanın pathbase ile URL 'YI ayarlama SignalR `.withUrl("/SubAppName/HubName")` .
+
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * [JavaScript API'si başvurusu](/javascript/api/?view=signalr-js-latest&preserve-view=true )
@@ -314,7 +354,7 @@ npm install @aspnet/signalr
 
 NPM *node_modules \\ @aspnet\signalr\dist\browser * klasöre paket içeriğini yüklüyor. *Wwwroot \\ kitaplığı* klasörünün altında *SignalR* adlı yeni bir klasör oluşturun. *signalr.js* dosyasını *wwwroot\lib\signalr* klasörüne kopyalayın.
 
-SignalRÖğesindeki JavaScript istemcisine başvurun `<script>` . Örnek:
+SignalRÖğesindeki JavaScript istemcisine başvurun `<script>` . Örneğin:
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -322,7 +362,7 @@ SignalRÖğesindeki JavaScript istemcisine başvurun `<script>` . Örnek:
 
 ### <a name="use-a-content-delivery-network-cdn"></a>Content Delivery Network kullanma (CDN)
 
-İstemci kitaplığını NPM önkoşulu olmadan kullanmak için, istemci kitaplığının CDN ile barındırılan bir kopyasına başvurun. Örnek:
+İstemci kitaplığını NPM önkoşulu olmadan kullanmak için, istemci kitaplığının CDN ile barındırılan bir kopyasına başvurun. Örneğin:
 
 ```html
 <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.3/signalr.min.js"></script>

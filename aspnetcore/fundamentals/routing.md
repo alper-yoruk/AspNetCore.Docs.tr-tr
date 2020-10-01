@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: 1b8ccb510927fbc8a40f7424ae1ca4a131799095
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 46a9fc7776022a29bedf1c88e8230e1fd52d1607
+ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722890"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91606756"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core yönlendirme
 
@@ -394,7 +394,7 @@ Bu yöntemlerin aşırı yüklemeleri, içeren bağımsız değişkenleri kabul 
 
 Tarafından sunulan yöntemler, <xref:Microsoft.AspNetCore.Routing.LinkGenerator> herhangi bir adres türü için standart bağlantı oluşturma yeteneklerini destekler. Bağlantı oluşturucuyu kullanmanın en kolay yolu, belirli bir adres türü için işlem gerçekleştiren genişletme yöntemlerine yöneliktir:
 
-| Genişletme yöntemi | Description |
+| Genişletme yöntemi | Açıklama |
 | ---------------- | ----------- |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | Belirtilen değerleri temel alarak mutlak bir yola sahip bir URI oluşturur. |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | Belirtilen değerleri temel alarak mutlak bir URI oluşturur.             |
@@ -570,12 +570,12 @@ Yönlendirmelerde kullanılan normal ifadeler, genellikle karakteriyle başlar `
 
 | Expression   | Dize    | Eşleştirme | Yorum               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Yes   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | 123abc456 | Yes   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | MZ        | Yes   | Eşleşen ifadesi    |
-| `[a-z]{2}`   | MZ        | Yes   | Büyük/küçük harfe duyarlı değil    |
-| `^[a-z]{2}$` | hello     | No    | Bkz. `^` ve `$` üzeri |
-| `^[a-z]{2}$` | 123abc456 | No    | Bkz. `^` ve `$` üzeri |
+| `[a-z]{2}`   | hello     | Evet   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | 123abc456 | Evet   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | MZ        | Evet   | Eşleşen ifadesi    |
+| `[a-z]{2}`   | MZ        | Evet   | Büyük/küçük harfe duyarlı değil    |
+| `^[a-z]{2}$` | hello     | Hayır    | Bkz. `^` ve `$` üzeri |
+| `^[a-z]{2}$` | 123abc456 | Hayır    | Bkz. `^` ve `$` üzeri |
 
 Normal ifade sözdizimi hakkında daha fazla bilgi için bkz. [.NET Framework normal ifadeler](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
@@ -1113,7 +1113,7 @@ Bu yöntemlerin aşırı yüklemesi, içeren bağımsız değişkenleri kabul ed
 
 Tarafından sunulan yöntemler, <xref:Microsoft.AspNetCore.Routing.LinkGenerator> herhangi bir adres türü için standart bağlantı oluşturma yeteneklerini destekler. Bağlantı oluşturucuyu kullanmanın en kolay yolu, belirli bir adres türü için işlem gerçekleştiren genişletme yöntemlerine yöneliktir.
 
-| Genişletme yöntemi   | Description                                                         |
+| Genişletme yöntemi   | Açıklama                                                         |
 | ------------------ | ------------------------------------------------------------------- |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetPathByAddress*> | Belirtilen değerleri temel alarak mutlak bir yola sahip bir URI oluşturur. |
 | <xref:Microsoft.AspNetCore.Routing.LinkGenerator.GetUriByAddress*> | Belirtilen değerleri temel alarak mutlak bir URI oluşturur.             |
@@ -1491,12 +1491,12 @@ Yönlendirmelerde kullanılan normal ifadeler, genellikle giriş işareti `^` ka
 
 | Expression   | Dize    | Eşleştirme | Yorum               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Yes   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | 123abc456 | Yes   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | MZ        | Yes   | Eşleşen ifadesi    |
-| `[a-z]{2}`   | MZ        | Yes   | Büyük/küçük harfe duyarlı değil    |
-| `^[a-z]{2}$` | hello     | No    | Bkz. `^` ve `$` üzeri |
-| `^[a-z]{2}$` | 123abc456 | No    | Bkz. `^` ve `$` üzeri |
+| `[a-z]{2}`   | hello     | Evet   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | 123abc456 | Evet   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | MZ        | Evet   | Eşleşen ifadesi    |
+| `[a-z]{2}`   | MZ        | Evet   | Büyük/küçük harfe duyarlı değil    |
+| `^[a-z]{2}$` | hello     | Hayır    | Bkz. `^` ve `$` üzeri |
+| `^[a-z]{2}$` | 123abc456 | Hayır    | Bkz. `^` ve `$` üzeri |
 
 Normal ifade sözdizimi hakkında daha fazla bilgi için bkz. [.NET Framework normal ifadeler](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
@@ -1592,7 +1592,7 @@ Bağlantı oluşturma yalnızca ve için eşleşen değerler sağlandığında b
 
 ## <a name="complex-segments"></a>Karmaşık segmentler
 
-Karmaşık segmentler (örneğin `[Route("/x{token}y")]` ), sabit değerli olmayan değişmez değer ile sağdan sola eşleştirilirken işlenir. Karmaşık segmentlerin nasıl eşleştirileceği hakkında ayrıntılı bir açıklama için [bu koda](https://github.com/dotnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293) bakın. [Kod örneği](https://github.com/dotnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293) ASP.NET Core tarafından kullanılmaz, ancak karmaşık segmentler hakkında iyi bir açıklama sağlar.
+Karmaşık segmentler (örneğin `[Route("/x{token}y")]` ), sabit değerli olmayan değişmez değer ile sağdan sola eşleştirilirken işlenir. Karmaşık segmentlerin nasıl eşleştirileceği hakkında ayrıntılı bir açıklama için [bu koda](https://github.com/dotnet/aspnetcore/blob/v2.2.13/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293) bakın. [Kod örneği](https://github.com/dotnet/aspnetcore/blob/v2.2.13/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293) ASP.NET Core tarafından kullanılmaz, ancak karmaşık segmentler hakkında iyi bir açıklama sağlar.
 <!-- While that code is no longer used by ASP.NET Core for complex segment matching, it provides a good match to the current algorithm. The [current code](https://github.com/dotnet/AspNetCore/blob/91514c9af7e0f4c44029b51f05a01c6fe4c96e4c/src/Http/Routing/src/Matching/DfaMatcherBuilder.cs#L227-L244) is too abstracted from matching to be useful for understanding complex segment matching.
 -->
 
@@ -1935,12 +1935,12 @@ Yönlendirmelerde kullanılan normal ifadeler, genellikle şapka işareti ( `^` 
 
 | Expression   | Dize    | Eşleştirme | Yorum               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Yes   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | 123abc456 | Yes   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | MZ        | Yes   | Eşleşen ifadesi    |
-| `[a-z]{2}`   | MZ        | Yes   | Büyük/küçük harfe duyarlı değil    |
-| `^[a-z]{2}$` | hello     | No    | Bkz. `^` ve `$` üzeri |
-| `^[a-z]{2}$` | 123abc456 | No    | Bkz. `^` ve `$` üzeri |
+| `[a-z]{2}`   | hello     | Evet   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | 123abc456 | Evet   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | MZ        | Evet   | Eşleşen ifadesi    |
+| `[a-z]{2}`   | MZ        | Evet   | Büyük/küçük harfe duyarlı değil    |
+| `^[a-z]{2}$` | hello     | Hayır    | Bkz. `^` ve `$` üzeri |
+| `^[a-z]{2}$` | 123abc456 | Hayır    | Bkz. `^` ve `$` üzeri |
 
 Normal ifade sözdizimi hakkında daha fazla bilgi için bkz. [.NET Framework normal ifadeler](/dotnet/standard/base-types/regular-expression-language-quick-reference).
 
@@ -1998,6 +1998,6 @@ Bağlantı oluşturma yalnızca ve için eşleşen değerler sağlandığında b
 
 ## <a name="complex-segments"></a>Karmaşık segmentler
 
-Karmaşık segmentler (örneğin `[Route("/x{token}y")]` ), sabit değerli olmayan değişmez değer ile sağdan sola eşleştirilirken işlenir. Karmaşık segmentlerin nasıl eşleştirileceği hakkında ayrıntılı bir açıklama için [bu koda](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293) bakın. [Kod örneği](https://github.com/aspnet/AspNetCore/blob/release/2.2/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293) ASP.NET Core tarafından kullanılmaz, ancak karmaşık segmentler hakkında iyi bir açıklama sağlar.
+Karmaşık segmentler (örneğin `[Route("/x{token}y")]` ), sabit değerli olmayan değişmez değer ile sağdan sola eşleştirilirken işlenir. Karmaşık segmentlerin nasıl eşleştirileceği hakkında ayrıntılı bir açıklama için [bu koda](https://github.com/dotnet/aspnetcore/blob/v2.2.13/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293) bakın. [Kod örneği](https://github.com/dotnet/aspnetcore/blob/v2.2.13/src/Http/Routing/src/Patterns/RoutePatternMatcher.cs#L293) ASP.NET Core tarafından kullanılmaz, ancak karmaşık segmentler hakkında iyi bir açıklama sağlar.
 
 ::: moniker-end

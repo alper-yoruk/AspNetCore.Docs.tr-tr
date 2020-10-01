@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/formatting
-ms.openlocfilehash: 618bb60ea382437b2787adb814f319b1f0cea4ca
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b89be93fc33d1eba5c2ad9508adf93fa54014ff8
+ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626538"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91606786"
 ---
 # <a name="format-response-data-in-aspnet-core-web-api"></a>ASP.NET Core Web API 'sindeki yanıt verilerini biçimlendirme
 
@@ -146,7 +146,7 @@ services.AddControllers().AddJsonOptions(options =>
 });
 ```
 
-İşlem başına temelinde çıkış serileştirme seçenekleri kullanılarak yapılandırılabilir `JsonResult` . Örnek:
+İşlem başına temelinde çıkış serileştirme seçenekleri kullanılarak yapılandırılabilir `JsonResult` . Örneğin:
 
 ```csharp
 public IActionResult Get()
@@ -163,6 +163,14 @@ public IActionResult Get()
 ASP.NET Core 3,0 ' dan önce, varsayılan olarak kullanılan JSON formatlayıcıları paket kullanılarak uygulanır `Newtonsoft.Json` . ASP.NET Core 3,0 veya sonraki bir sürümde, varsayılan JSON formatlayıcıları temel alınır `System.Text.Json` . `Newtonsoft.Json`Temel biçimlendirme ve özellikler için destek, [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/) NuGet paketi yüklenerek ve içinde yapılandırılarak kullanılabilir `Startup.ConfigureServices` .
 
 [!code-csharp[](./formatting/3.0sample/StartupNewtonsoftJson.cs?name=snippet)]
+
+Önceki kodda, `AddNewtonsoftJson` kullanılacak aşağıdaki Web API, MVC ve Razor Pages özelliklerini yapılandıran çağrı `Newtonsoft.Json` :
+
+* JSON okuyan ve yazan giriş ve çıkış biçimleri
+* <xref:Microsoft.AspNetCore.Mvc.JsonResult>
+* [JSON yaması](xref:web-api/jsonpatch)
+* <xref:Microsoft.AspNetCore.Mvc.Rendering.IJsonHelper>
+* [TempData](xref:fundamentals/app-state#tempdata)
 
 Bazı özellikler `System.Text.Json` , tabanlı formatlayıcılar ile düzgün çalışmayabilir ve `Newtonsoft.Json` tabanlı formatlara bir başvuru gerektirir. `Newtonsoft.Json`Uygulama şu durumlarda tabanlı formatlayıcıları kullanmaya devam edin:
 
@@ -185,7 +193,7 @@ services.AddControllers().AddNewtonsoftJson(options =>
 });
 ```
 
-İşlem başına temelinde çıkış serileştirme seçenekleri kullanılarak yapılandırılabilir `JsonResult` . Örnek:
+İşlem başına temelinde çıkış serileştirme seçenekleri kullanılarak yapılandırılabilir `JsonResult` . Örneğin:
 
 ```csharp
 public IActionResult Get()
@@ -241,7 +249,7 @@ Bazı özel durumlar, yerleşik formatlayıcılar kullanılarak uygulanır. Vars
 
 Olmadan `StringOutputFormatter` , YERLEŞIK JSON biçimlendiricisi, `string` dönüş türlerini biçimlendirir. Yerleşik JSON biçimlendiricisi kaldırılırsa ve bir XML biçimlendirici varsa, XML biçimlendirici, `string` dönüş türlerini biçimlendirir. Aksi takdirde, `string` dönüş türleri döndürülür `406 Not Acceptable` .
 
-Olmadan `HttpNoContentOutputFormatter` , null nesneler yapılandırılmış biçimlendirici kullanılarak biçimlendirilir. Örnek:
+Olmadan `HttpNoContentOutputFormatter` , null nesneler yapılandırılmış biçimlendirici kullanılarak biçimlendirilir. Örneğin:
 
 * JSON biçimlendiricisi, gövdesi olan bir yanıt döndürür `null` .
 * XML biçimlendiricisi özniteliği ayarlanmış bir boş XML öğesi döndürüyor `xsi:nil="true"` .
@@ -253,7 +261,7 @@ Olmadan `HttpNoContentOutputFormatter` , null nesneler yapılandırılmış biç
 * Sorgu dizesinde veya yolun bir bölümünde.
 * . Xml veya. JSON gibi formata özgü bir dosya uzantısı kullanarak.
 
-İstek yolundan eşleme, API 'nin kullandığı rotada belirtilmelidir. Örnek:
+İstek yolundan eşleme, API 'nin kullandığı rotada belirtilmelidir. Örneğin:
 
 [!code-csharp[](./formatting/sample/Controllers/ProductsController.cs?name=snippet)]
 
