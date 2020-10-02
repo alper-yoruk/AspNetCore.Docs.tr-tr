@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: 1338ecd6205a351b54a58522b1713a6d70e2d22a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: f648837ce42bef4a828d7eda1a6abdfdd8ac07a2
+ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634754"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91654042"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>IIS ile Windows üzerinde ASP.NET Core barındırma
 
@@ -548,24 +548,6 @@ ICACLS C:\sites\MyWebApp /grant "IIS AppPool\DefaultAppPool":F
 ```
 
 Daha fazla bilgi için [ıcacl 'ler](/windows-server/administration/windows-commands/icacls) konusuna bakın.
-
-## <a name="http2-support"></a>HTTP/2 desteği
-
-[Http/2](https://httpwg.org/specs/rfc7540.html) aşağıdaki IIS dağıtım senaryolarında ASP.NET Core desteklenir:
-
-* İşlem içi
-  * Windows Server 2016/Windows 10 veya üzeri; IIS 10 veya üzeri
-  * TLS 1,2 veya üzeri bağlantı
-* İşlem dışı
-  * Windows Server 2016/Windows 10 veya üzeri; IIS 10 veya üzeri
-  * Herkese açık uç sunucu bağlantıları HTTP/2 kullanır, ancak [Kestrel sunucusuyla](xref:fundamentals/servers/kestrel) ters proxy bağlantısı http/1.1 kullanır.
-  * TLS 1,2 veya üzeri bağlantı
-
-Bir HTTP/2 bağlantısı oluşturulduğunda, bir işlem içi dağıtım için, [HttpRequest. Protocol](xref:Microsoft.AspNetCore.Http.HttpRequest.Protocol*) Reports `HTTP/2` . Bir HTTP/2 bağlantısı oluşturulduğunda bir işlem dışı dağıtımı için, [HttpRequest. Protocol](xref:Microsoft.AspNetCore.Http.HttpRequest.Protocol*) raporları `HTTP/1.1` .
-
-İşlem içi ve işlem dışı barındırma modelleri hakkında daha fazla bilgi için bkz <xref:host-and-deploy/aspnet-core-module> ..
-
-HTTP/2 varsayılan olarak etkindir. HTTP/2 bağlantısı kurulmadıysa bağlantılar HTTP/1.1 'ye geri döner. IIS dağıtımları ile HTTP/2 yapılandırması hakkında daha fazla bilgi için bkz. [IIS 'de http/2](/iis/get-started/whats-new-in-iis-10/http2-on-iis).
 
 ## <a name="cors-preflight-requests"></a>CORS ön denetim istekleri
 

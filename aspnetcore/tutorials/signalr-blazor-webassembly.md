@@ -5,7 +5,7 @@ description: İle ASP.NET Core kullanan bir sohbet uygulaması oluşturun Signal
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 06/10/2020
+ms.date: 10/01/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-blazor-webassembly
-ms.openlocfilehash: 4d33e99ceb8273487144447eae324469df67c9ff
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a8b1e7cd94836e89c438045df4bb8dd049da7f72
+ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633389"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91653990"
 ---
 # <a name="use-aspnet-core-no-locsignalr-with-no-locblazor-webassembly"></a>İle ASP.NET Core kullanma SignalRBlazor WebAssembly
 
@@ -43,6 +43,34 @@ Bu öğreticinin sonunda, çalışan bir sohbet uygulamanız olacaktır.
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/signalr-blazor-webassembly/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
 ## <a name="prerequisites"></a>Ön koşullar
+
+::: moniker range=">= aspnetcore-5.0"
+
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+<!-- * [Visual Studio 2019 16.8 or later](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) with the **ASP.NET and web development** workload -->
+* **ASP.net ve Web geliştirme** iş yüküyle [Visual Studio 2019 16,8 veya üzeri (önizlemede)](https://visualstudio.microsoft.com/vs/preview/)
+* [!INCLUDE [.NET Core 5.0 SDK](~/includes/5.0-SDK.md)]
+
+# <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
+
+[!INCLUDE[](~/includes/net-core-prereqs-vsc-5.0.md)]
+
+# <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
+
+<!-- * [Visual Studio for Mac version 8.8 or later (in preview)](https://visualstudio.microsoft.com/vs/mac/) -->
+* [Mac için Visual Studio Sürüm 8,8 veya üzeri (önizlemede)](https://docs.microsoft.com/visualstudio/releasenotes/vs2019-mac-preview-relnotes)
+* [!INCLUDE [.NET Core 5.0 SDK](~/includes/5.0-SDK.md)]
+
+# <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli/)
+
+[!INCLUDE[](~/includes/5.0-SDK.md)]
+
+---
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -64,14 +92,27 @@ Bu öğreticinin sonunda, çalışan bir sohbet uygulamanız olacaktır.
 
 ---
 
+::: moniker-end
+
 ## <a name="create-a-hosted-no-locblazor-webassembly-app-project"></a>Barındırılan Blazor WebAssembly uygulama projesi oluşturma
 
 Araç seçiminiz için yönergeleri izleyin:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
+::: moniker range=">= aspnetcore-5.0"
+
+> [!NOTE]
+> Visual Studio 16,8 veya üzeri ve .NET Core SDK 5.0.0 veya üzeri gereklidir.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 > [!NOTE]
 > Visual Studio 16,6 veya üzeri ve .NET Core SDK 3.1.300 veya üzeri gereklidir.
+
+::: moniker-end
 
 1. Yeni bir proje oluşturma.
 
@@ -176,7 +217,17 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 `BlazorSignalRApp.Server`Projesinde, bir `Hubs` (plural) klasörü oluşturun ve aşağıdaki `ChatHub` sınıfı ( `Hubs/ChatHub.cs` ) ekleyin:
 
+::: moniker range=">= aspnetcore-5.0"
+
+[!code-csharp[](signalr-blazor-webassembly/samples/5.x/BlazorSignalRApp/Server/Hubs/ChatHub.cs)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
 [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Hubs/ChatHub.cs)]
+
+::: moniker-end
 
 ## <a name="add-services-and-an-endpoint-for-the-no-locsignalr-hub"></a>Hub için hizmetler ve uç nokta ekleme SignalR
 
@@ -190,14 +241,34 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. SignalRSıkıştırma ara yazılım hizmetlerini ekleme ve yanıtlama `Startup.ConfigureServices` :
 
+::: moniker range=">= aspnetcore-5.0"
+
+   [!code-csharp[](signalr-blazor-webassembly/samples/5.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_ConfigureServices&highlight=3,5-9)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
    [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_ConfigureServices&highlight=3,5-9)]
+
+::: moniker-end
 
 1. `Startup.Configure` içinde:
 
    * İşlem ardışık düzeninin yapılandırmasının en üstünde yanıt sıkıştırma ara yazılımı ' nı kullanın.
    * Denetleyiciler ve istemci tarafı geri dönüş uç noktaları arasında merkez için bir uç nokta ekleyin.
 
+::: moniker range=">= aspnetcore-5.0"
+
+   [!code-csharp[](signalr-blazor-webassembly/samples/5.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_Configure&highlight=3,25)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
    [!code-csharp[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Server/Startup.cs?name=snippet_Configure&highlight=3,25)]
+
+::: moniker-end
 
 ## <a name="add-no-locrazor-component-code-for-chat"></a>RazorSohbet için bileşen kodu ekle
 
@@ -205,7 +276,17 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. İşaretlemeyi aşağıdaki kodla değiştirin:
 
-[!code-razor[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Client/Pages/Index.razor)]
+::: moniker range=">= aspnetcore-5.0"
+
+   [!code-razor[](signalr-blazor-webassembly/samples/5.x/BlazorSignalRApp/Client/Pages/Index.razor)]
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+   [!code-razor[](signalr-blazor-webassembly/samples/3.x/BlazorSignalRApp/Client/Pages/Index.razor)]
+
+::: moniker-end
 
 ## <a name="run-the-app"></a>Uygulamayı çalıştırma
 
@@ -227,9 +308,21 @@ dotnet add Client package Microsoft.AspNetCore.SignalR.Client
 
 1. VS Code, sunucu uygulaması () için bir başlatma profili oluşturmak üzere teklif edildiğinde `.vscode/launch.json` , `program` uygulamanın derlemesini () göstermek için giriş aşağıdakine benzer şekilde görünür `{APPLICATION NAME}.Server.dll` :
 
+::: moniker range=">= aspnetcore-5.0"
+
+   ```json
+   "program": "${workspaceFolder}/Server/bin/Debug/net5.0/{APPLICATION NAME}.Server.dll"
+   ```
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
    ```json
    "program": "${workspaceFolder}/Server/bin/Debug/netcoreapp3.1/{APPLICATION NAME}.Server.dll"
    ```
+
+::: moniker-end
 
 1. Uygulamayı hata ayıklama olmadan çalıştırmak için <kbd>F5</kbd> tuşuna basın veya uygulamayı hata ayıklamadan çalıştırmak için <kbd>CTRL</kbd> + <kbd>F5</kbd> tuşuna basın.
 

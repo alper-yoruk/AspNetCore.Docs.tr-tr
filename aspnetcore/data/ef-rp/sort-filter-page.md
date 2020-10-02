@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: 5e073845acbecdf0db4c30c4725f12033cfc42ac
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e01704cb10c88f3e9442e74034f5e5d39787f300
+ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634689"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91653899"
 ---
 # <a name="part-3-no-locrazor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>Bölüm 3, Razor ASP.NET Core sıralama, filtreleme, sayfalama EF Core olan sayfalar
 
@@ -42,25 +42,26 @@ Aşağıdaki çizimde tamamlanmış bir sayfa gösterilmektedir. Sütun başlık
 
 *Pages/öğrenciler/Index. cshtml. cs* içindeki kodu, sıralama eklemek için aşağıdaki kodla değiştirin.
 
-[!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_All&highlight=21-24,26,28-52)]
+[!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_All)]
 
 Yukarıdaki kod:
 
+* Ekleme gerektirir `using System;` .
 * Sıralama parametrelerini içeren özellikleri ekler.
 * `Student`Özelliğin adını olarak değiştirir `Students` .
 * Yöntemindeki kodu değiştirir `OnGetAsync` .
 
-`OnGetAsync`Yöntemi, `sortOrder` URL 'deki sorgu dizesinden bir parametre alır. URL (sorgu dizesi dahil), [tutturucu etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)tarafından oluşturulur.
+`OnGetAsync`Yöntemi, `sortOrder` URL 'deki sorgu dizesinden bir parametre alır. URL ve sorgu dizesi, [tutturucu etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper)tarafından oluşturulur.
 
-`sortOrder`Parametre "ad" ya da "Tarih" dır. `sortOrder`Parametre, isteğe bağlı olarak azalan sıra belirtmek için "_DESC" tarafından izlenir. Varsayılan sıralama düzeni artan.
+`sortOrder`Parametresi ya da olur `Name` `Date` . `sortOrder`Parametresi, isteğe bağlı olarak `_desc` azalan sıra belirtmek için tarafından izlenir. Varsayılan sıralama düzeni artan.
 
-**Öğrenciler** bağlantısından Dizin sayfası istendiğinde sorgu dizesi yoktur. Öğrenciler, son ada göre artan sırada görüntülenir. Son ada göre artan sıralama, deyimindeki varsayılan (gelen durumdur) `switch` . Kullanıcı bir sütun başlığı bağlantısına tıkladığında, `sortOrder` sorgu dizesi değerinde uygun değer sağlanır.
+**Öğrenciler** bağlantısından Dizin sayfası istendiğinde sorgu dizesi yoktur. Öğrenciler, son ada göre artan sırada görüntülenir. Son ada göre artan sıralama, `default` `switch` deyimdir. Kullanıcı bir sütun başlığı bağlantısına tıkladığında, `sortOrder` sorgu dizesi değerinde uygun değer sağlanır.
 
 `NameSort` ve `DateSort` Razor sütun başlığı köprülerini uygun sorgu dizesi değerleriyle yapılandırmak için kullanılır:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_Ternary)]
 
-Kod C# koşullu işlecini kullanır [?:](/dotnet/csharp/language-reference/operators/conditional-operator). `?:`İşleci üçlü bir işleçtir (üç işlenen alır). İlk satır, `sortOrder` null veya boş olduğunu belirtir, `NameSort` "name_desc" olarak ayarlanır. `sortOrder`Null veya **not** boş değilse `NameSort` boş bir dize olarak ayarlanır.
+Kod C# [koşullu işlecini kullanır?:](/dotnet/csharp/language-reference/operators/conditional-operator). `?:`İşleci üçlü bir işleçtir, üç işlenen alır. İlk satır, `sortOrder` null veya boş olduğunu belirtir, `NameSort` olarak ayarlanır `name_desc` . `sortOrder`Null veya ***not*** boş değilse `NameSort` boş bir dize olarak ayarlanır.
 
 Bu iki deyim, sayfanın sütun başlığı köprülerini şu şekilde ayarlamanızı sağlar:
 
@@ -110,7 +111,7 @@ Sıralamanın çalıştığını doğrulamak için:
 
 *Öğrenciler/Index. cshtml. cs* dosyasındaki kodu, filtreleme eklemek için aşağıdaki kodla değiştirin:
 
-[!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index2.cshtml.cs?name=snippet_All&highlight=28,33,37-41)]
+[!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index2.cshtml.cs?name=snippet_All&highlight=17,22,26-30)]
 
 Yukarıdaki kod:
 
@@ -119,7 +120,7 @@ Yukarıdaki kod:
 
 ### <a name="iqueryable-vs-ienumerable"></a>IQueryable vs. IEnumerable
 
-Kod, `Where` yöntemi bir nesne üzerinde çağırır `IQueryable` ve filtre sunucuda işlenir. Bazı senaryolarda, uygulama `Where` bir bellek içi koleksiyonda bir genişletme yöntemi olarak yöntemi çağırıyor olabilir. Örneğin, `_context.Students` EF Core 'den `DbSet` bir koleksiyonu döndüren bir depo yöntemine yapılan değişiklikleri varsayın `IEnumerable` . Sonuç normalde aynı olur, ancak bazı durumlarda farklı olabilir.
+Kod, <xref:System.Linq.Queryable.Where%2A> yöntemi bir nesne üzerinde çağırır `IQueryable` ve filtre sunucuda işlenir. Bazı senaryolarda, uygulama `Where` bir bellek içi koleksiyonda bir genişletme yöntemi olarak yöntemi çağırıyor olabilir. Örneğin, `_context.Students` EF Core 'den `DbSet` bir koleksiyonu döndüren bir depo yöntemine yapılan değişiklikleri varsayın `IEnumerable` . Sonuç normalde aynı olur, ancak bazı durumlarda farklı olabilir.
 
 Örneğin, uygulamasının .NET Framework uygulanması `Contains` Varsayılan olarak büyük/küçük harfe duyarlı bir karşılaştırma gerçekleştirir. SQL Server, `Contains` büyük/küçük harf duyarlılığı SQL Server örneğinin harmanlama ayarına göre belirlenir. SQL Server varsayılan olarak büyük/küçük harfe duyarlı değildir. SQLite, büyük/küçük harfe duyarlı olur. `ToUpper` testi açık büyük/küçük harfe duyarsız hale getirmek için çağrılabilir:
 
@@ -139,7 +140,7 @@ Daha fazla bilgi için bkz. [SQLite sağlayıcı ile büyük/küçük harfe duya
 
 ### <a name="update-the-no-locrazor-page"></a>Sayfayı Güncelleştir Razor
 
-*Sayfalar/öğrenciler/Index. cshtml* içindeki kodu, bir **arama** düğmesi ve assıralanan Chrome oluşturmak için değiştirin.
+*Sayfalar/öğrenciler/Index. cshtml* içindeki kodu, bir **arama** düğmesi eklemek için değiştirin.
 
 [!code-cshtml[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index2.cshtml?highlight=14-23)]
 
@@ -151,10 +152,10 @@ Uygulamayı test etme:
 
 * **Ara**' yı seçin.
 
-URL 'nin arama dizesini içerdiğine dikkat edin. Örnek:
+URL 'nin arama dizesini içerdiğine dikkat edin. Örneğin:
 
-```
-https://localhost:<port>/Students?SearchString=an
+```browser-address-bar
+https://localhost:5001/Students?SearchString=an
 ```
 
 Sayfa yer işaretiyle, yer işareti sayfanın URL 'sini ve `SearchString` sorgu dizesini içerir. `method="get"` `form` Etiketi, sorgu dizesinin oluşturulmasına neden oldu.
@@ -181,15 +182,16 @@ Proje klasöründe `PaginatedList.cs` aşağıdaki kodla oluşturun:
 
 *Öğrenciler/Index. cshtml. cs* ' deki kodu, sayfalama eklemek için değiştirin.
 
-[!code-csharp[Main](intro/samples/cu30/Pages/Students/Index.cshtml.cs?name=snippet_All&highlight=26,28-29,31,34-41,68-70)]
+[!code-csharp[Main](intro/samples/cu30/Pages/Students/Index.cshtml.cs?name=snippet_All&highlight=15-20,23-30,57-59)]
 
 Yukarıdaki kod:
 
 * `Students`Özelliğinin türünü `IList<Student>` olarak değiştirir `PaginatedList<Student>` .
 * Sayfa dizinini, geçerli `sortOrder` ve öğesini `currentFilter` `OnGetAsync` Yöntem imzasına ekler.
-* Sıralama düzenini CurrentSort özelliğine kaydeder.
+* Sıralama düzenini `CurrentSort` özelliğe kaydeder.
 * Yeni bir arama dizesi olduğunda sayfa dizinini 1 olarak sıfırlar.
 * `PaginatedList`Öğrenci varlıklarını almak için sınıfını kullanır.
+* `pageSize`3 olarak ayarlanır. Gerçek bir uygulama, sayfa boyutu değerini ayarlamak için [yapılandırmayı](xref:fundamentals/configuration/index) kullanır.
 
 `OnGetAsync`Şu durumlarda alan tüm parametreler null:
 
@@ -212,7 +214,7 @@ Sayfalama sırasında arama dizesi değiştirilirse sayfa 1 ' e sıfırlanır. Y
 
   `PaginatedList.CreateAsync`Yöntemi, öğrenci sorgusunu, sayfalama destekleyen bir koleksiyon türündeki tek bir öğrenci sayfasına dönüştürür. Bu tek öğrenci sayfası Razor sayfaya geçirilir.
 
-  Çağrıdan sonraki iki soru işareti, `pageIndex` `PaginatedList.CreateAsync` [null birleşim işlecini](/dotnet/csharp/language-reference/operators/null-conditional-operator)temsil eder. Null birleşim işleci, null yapılabilir bir tür için varsayılan değeri tanımlar. İfade, `(pageIndex ?? 1)` bir değer içeriyorsa değerini döndürür anlamına gelir `pageIndex` . `pageIndex`Değer yoksa 1 döndürün.
+  Çağrıdan sonraki iki soru işareti, `pageIndex` `PaginatedList.CreateAsync` [null birleşim işlecini](/dotnet/csharp/language-reference/operators/null-conditional-operator)temsil eder. Null birleşim işleci, null yapılabilir bir tür için varsayılan değeri tanımlar. İfadesi değeri `pageIndex ?? 1` varsa değeri döndürür `pageIndex` , aksi takdirde 1 döndürür.
 
 ### <a name="add-paging-links-to-the-no-locrazor-page"></a>Sayfaya sayfalama bağlantıları ekleyin Razor
 
@@ -258,7 +260,7 @@ Aşağıdaki kodla bir *Pages/about. cshtml* dosyası oluşturun:
 
 ### <a name="create-the-page-model"></a>Sayfa modelini oluşturma
 
-Aşağıdaki kodla bir *Pages/about. cshtml. cs* dosyası oluşturun:
+*Pages/about. cshtml. cs* dosyasını aşağıdaki kodla güncelleştirin:
 
 [!code-csharp[Main](intro/samples/cu30/Pages/About.cshtml.cs)]
 

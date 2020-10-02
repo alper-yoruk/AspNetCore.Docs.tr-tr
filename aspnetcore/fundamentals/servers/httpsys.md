@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/httpsys
-ms.openlocfilehash: e5346c1e58127747d777b5040fe7bc7d99b9a489
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 8ed9ec3447205107194ffa5c329c0e5ae0fc5553
+ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722877"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91653977"
 ---
 # <a name="httpsys-web-server-implementation-in-aspnet-core"></a>ASP.NET Core Web sunucusu uygulamasını HTTP.sys
 
@@ -271,6 +271,23 @@ Visual Studio 'da varsayılan başlatma profili IIS Express içindir. Projeyi ko
 ## <a name="proxy-server-and-load-balancer-scenarios"></a>Proxy sunucusu ve yük dengeleyici senaryoları
 
 Internet veya şirket ağından gelen isteklerle etkileşime geçen HTTP.sys tarafından barındırılan uygulamalar için, proxy sunucularının ve yük dengeleyiciler arkasında barındırılırken ek yapılandırma gerekebilir. Daha fazla bilgi için bkz. [proxy sunucularıyla ve yük dengeleyicilerle çalışacak ASP.NET Core yapılandırma](xref:host-and-deploy/proxy-load-balancer).
+
+## <a name="advanced-http2-features-to-support-grpc"></a>GRPC 'yi desteklemeye yönelik gelişmiş HTTP/2 özellikleri
+
+HTTP.sys ' deki ek HTTP/2 özellikleri, yanıt tanıtımları ve sıfırlama çerçeveleri gönderme desteği dahil olmak üzere gRPC 'yi destekler.
+
+GRPC 'yi HTTP.SYS çalıştırma gereksinimleri:
+
+* Windows 10, işletim sistemi derlemesi 19041,508 veya üzeri
+* TLS 1,2 veya üzeri bağlantı
+
+### <a name="trailers"></a>Larına
+
+[!INCLUDE[](~/includes/trailers.md)]
+
+### <a name="reset"></a>Sıfırla
+
+[!INCLUDE[](~/includes/reset.md)]
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

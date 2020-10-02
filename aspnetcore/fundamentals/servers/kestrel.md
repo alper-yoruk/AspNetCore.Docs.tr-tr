@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/kestrel
-ms.openlocfilehash: 5890e56f65712bcd781a3aad278a5aaa7914d0ea
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 44558a0f2fdc61eb860223658f5bef1d0117ba87
+ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635027"
+ms.lasthandoff: 10/02/2020
+ms.locfileid: "91653964"
 ---
 # <a name="kestrel-web-server-implementation-in-aspnet-core"></a>ASP.NET Core Web sunucusu uygulamasını Kestrel
 
@@ -354,6 +354,14 @@ webBuilder.ConfigureKestrel(serverOptions =>
 ```
 
 Varsayılan değer 96 KB 'tır (98.304).
+
+### <a name="trailers"></a>Larına
+
+[!INCLUDE[](~/includes/trailers.md)]
+
+### <a name="reset"></a>Sıfırla
+
+[!INCLUDE[](~/includes/reset.md)]
 
 ### <a name="synchronous-io"></a>Zaman Uyumlu G/Ç
 
