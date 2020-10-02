@@ -6,17 +6,19 @@ metadata:
   description: ASP.NET Core docs 'ta yeni ve güncelleştirilmiş içerik hakkında bilgi edinin.
   ms.topic: landing-page
   ms.date: 08/03/2020
-  ms.openlocfilehash: cb0db16ae400573fb5dafb1d2295037f15e0b9e9
-  ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+  ms.openlocfilehash: 9cbd861f0c10d9dae3722478ca5220598b9007a4
+  ms.sourcegitcommit: c026bf76a0e14a5ee68983519a63574c674e9ff7
   ms.translationtype: MT
   ms.contentlocale: tr-TR
-  ms.lasthandoff: 09/17/2020
-  ms.locfileid: "90721652"
+  ms.lasthandoff: 10/01/2020
+  ms.locfileid: "91636770"
 landingContent:
 - title: ASP.NET Core docs güncelleştirmelerini bulma
   linkLists:
   - linkListType: whats-new
     links:
+    - text: Eylül 2020
+      url: 2020-09.md
     - text: Ağustos 2020
       url: 2020-08.md
     - text: Temmuz 2020
@@ -27,8 +29,6 @@ landingContent:
       url: 2020-05.md
     - text: Nisan 2020
       url: 2020-04.md
-    - text: Mart 2020
-      url: 2020-03.md
 - title: Dahil edin-ASP.NET Core belgelerine katkıda bulunun
   linkLists:
   - linkListType: overview

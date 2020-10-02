@@ -18,14 +18,14 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/aad-groups-roles
-ms.openlocfilehash: 81114768a3600544dda46efbc886e2f56932aba7
-ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
+ms.openlocfilehash: 7a0c606d82dd625c179ec89e22b9313dfa5d18b4
+ms.sourcegitcommit: c026bf76a0e14a5ee68983519a63574c674e9ff7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90592936"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91636783"
 ---
-# <a name="azure-ad-groups-administrative-roles-and-user-defined-roles"></a>Azure AD grupları, yönetim rolleri ve Kullanıcı tanımlı roller
+# <a name="azure-active-directory-aad-groups-administrator-roles-and-user-defined-roles"></a>Azure Active Directory (AAD) grupları, yönetici rolleri ve Kullanıcı tanımlı roller
 
 Sağlayan, [Luke Latham](https://github.com/guardrex) ve [Javier Calvarro Nelson](https://github.com/javiercn)
 
@@ -36,7 +36,7 @@ Azure Active Directory (AAD), ile birleştirilebilir çeşitli yetkilendirme yak
   * Microsoft 365
   * Dağıtım
 * Roller
-  * Yerleşik yönetim rolleri
+  * AAD yönetici rolleri
   * Kullanıcı tanımlı roller
 
 Bu makaledeki kılavuz, Blazor WebAssembly aşağıdaki konularda açıklanan AAD dağıtım senaryoları için geçerlidir:
@@ -47,7 +47,7 @@ Bu makaledeki kılavuz, Blazor WebAssembly aşağıdaki konularda açıklanan AA
 
 ## <a name="microsoft-graph-api-permission"></a>Microsoft Graph API izni
 
-Beş taneden fazla yerleşik AAD yönetici rolü ve güvenlik grubu üyeliğine sahip tüm uygulama kullanıcıları için [MICROSOFT Graph API](/graph/use-the-api) çağrısı gerekir.
+5 ' ten fazla AAD yönetici rolü ve güvenlik grubu üyeliğine sahip tüm uygulama kullanıcıları için [MICROSOFT Graph API](/graph/use-the-api) çağrısı gerekir.
 
 Graph API çağrılarına izin vermek için, Azure portal bir barındırılan çözümün tek başına veya istemci uygulamasına Blazor aşağıdaki [Graph API izinlerinden](/graph/permissions-reference) birini verin:
 
@@ -57,18 +57,18 @@ Graph API çağrılarına izin vermek için, Azure portal bir barındırılan ç
 
 `Directory.Read.All` en az ayrıcalıklı izindir ve bu makalede açıklanan örnek için kullanılan izindir.
 
-## <a name="user-defined-groups-and-built-in-administrative-roles"></a>Kullanıcı tanımlı gruplar ve yerleşik yönetim rolleri
+## <a name="user-defined-groups-and-administrator-roles"></a>Kullanıcı tanımlı gruplar ve yönetici rolleri
 
-Azure portal bir üyelik talebi sağlamak üzere uygulamayı yapılandırmak için `groups` aşağıdaki Azure makalelerine bakın. Kullanıcıları Kullanıcı tanımlı AAD gruplarına ve yerleşik yönetici rollerine atayın.
+Azure portal bir üyelik talebi sağlamak üzere uygulamayı yapılandırmak için `groups` aşağıdaki Azure makalelerine bakın. Kullanıcıları Kullanıcı tanımlı AAD gruplarına ve AAD yönetici rollerine atayın.
 
 * [Azure AD güvenlik gruplarını kullanan roller](/azure/architecture/multitenant-identity/app-roles#roles-using-azure-ad-security-groups)
 * [`groupMembershipClaims` özniteliğe](/azure/active-directory/develop/reference-app-manifest#groupmembershipclaims-attribute)
 
-Aşağıdaki örneklerde, bir kullanıcının AAD yerleşik *Faturalama yöneticisi* rolüne atandığını varsayılır.
+Aşağıdaki örneklerde, bir kullanıcının AAD *faturalandırma Yöneticisi* rolüne atandığını varsayılır.
 
 `groups`AAD tarafından gönderilen tek talep, kullanıcının gruplarını ve rollerini BIR JSON dizisinde nesne kimlikleri (GUID 'ler) olarak sunar. Uygulamanın, bir grup ve rol JSON dizisini, `group` uygulamanın [ilke](xref:security/authorization/policies) derleyebilir ayrı talepler olarak dönüştürmesi gerekir.
 
-Atanan yerleşik Azure yönetim rolleri ve Kullanıcı tanımlı grupların sayısı beş aştığında AAD, `hasgroups` `true` talep göndermek yerine değeri olan bir talep gönderir `groups` . En fazla beş rol ve gruba atanmış olan herhangi bir uygulama, bir kullanıcının rollerini ve gruplarını almak için ayrı bir Graph API çağrısı yapmalıdır. Bu makalede belirtilen örnek uygulama, bu senaryoyu ele alınmaktadır. Daha fazla bilgi için bkz `groups` `hasgroups` . [Microsoft Identity platform erişim belirteçleri](/azure/active-directory/develop/access-tokens#payload-claims) 'nde ve talep bilgileri: yük talepleri makalesi.
+Atanan AAD Yönetici rollerinin ve Kullanıcı tanımlı grupların sayısı beş aştığında AAD, `hasgroups` `true` talep göndermek yerine değeri olan bir talep gönderir `groups` . En fazla beş rol ve gruba atanmış olan herhangi bir uygulama, bir kullanıcının rollerini ve gruplarını almak için ayrı bir Graph API çağrısı yapmalıdır. Bu makalede belirtilen örnek uygulama, bu senaryoyu ele alınmaktadır. Daha fazla bilgi için bkz `groups` `hasgroups` . [Microsoft Identity platform erişim belirteçleri](/azure/active-directory/develop/access-tokens#payload-claims) 'nde ve talep bilgileri: yük talepleri makalesi.
 
 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount>Gruplar ve roller için dizi özelliklerini içerecek şekilde genişletin. `null`Bu özellikler `foreach` daha sonra Döngülerde kullanıldığında gerekli olmaması için her özelliğe boş bir dizi atayın.
 
@@ -267,7 +267,7 @@ builder.Services.AddMsalAuthentication<RemoteAuthenticationState,
     CustomUserFactory>();
 ```
 
-İçindeki her grup veya rol için bir [ilke](xref:security/authorization/policies) oluşturun `Program.Main` . Aşağıdaki örnek, AAD yerleşik *faturalandırma Yöneticisi* rolü için bir ilke oluşturur:
+İçindeki her grup veya rol için bir [ilke](xref:security/authorization/policies) oluşturun `Program.Main` . Aşağıdaki örnek AAD *faturalandırma Yöneticisi* rolü için bir ilke oluşturur:
 
 ```csharp
 builder.Services.AddAuthorizationCore(options =>
@@ -277,7 +277,7 @@ builder.Services.AddAuthorizationCore(options =>
 });
 ```
 
-AAD rolü nesne kimliklerinin tamamı listesi için bkz. [AAD yönetim rolü grubu kimlikleri](#aad-adminstrative-role-group-ids) bölümü.
+AAD rolü nesne kimliklerinin tamamı listesi için bkz. [AAD yönetici rolü nesne kimlikleri](#aad-administrator-role-object-ids) bölümü.
 
 Aşağıdaki örneklerde, uygulama kullanıcıyı yetkilendirmek için yukarıdaki ilkeyi kullanır.
 
@@ -287,7 +287,7 @@ Aşağıdaki örneklerde, uygulama kullanıcıyı yetkilendirmek için yukarıda
 <AuthorizeView Policy="BillingAdministrator">
     <Authorized>
         <p>
-            The user is in the 'Billing Administrator' AAD Administrative Role
+            The user is in the 'Billing Administrator' AAD Administrator Role
             and can see this content.
         </p>
     </Authorized>
@@ -348,6 +348,291 @@ Bir ilke denetimi, [yordamsal mantığa kodunda de gerçekleştirilebilir](xref:
 }
 ```
 
+## <a name="authorize-server-api-access-for-user-defined-groups-and-administrator-roles"></a>Kullanıcı tanımlı gruplar ve yönetici rolleri için sunucu API 'SI erişimini yetkilendir
+
+Sunucu API 'SI, istemci tarafı WebAssembly uygulamasındaki sayfalara ve kaynaklara erişmek için yetkilendirmeye ek olarak, kullanıcılara güvenli API uç noktalarına erişim yetkisi verebilir. *Sunucu* uygulaması kullanıcının erişim belirtecini doğruladıktan sonra:
+
+* Uygulama, Graph API için bir erişim belirteci almak üzere JWT () öğesinden kullanıcının sabit [nesne tanımlayıcı talebini ( `oid` )](/azure/active-directory/develop/id-tokens#payload-claims) kullanır `id_token` .
+* Graph API çağrısı kullanıcının Azure Kullanıcı tanımlı güvenlik grubunu ve yönetici rolü üyeliklerini alır.
+* Üyelikler, talepler oluşturmak için kullanılır `group` .
+* [Yetkilendirme İlkeleri](xref:security/authorization/policies) , sunucu API uç noktalarına Kullanıcı erişimini sınırlamak için kullanılabilir.
+
+> [!NOTE]
+> Bu kılavuz Şu anda kullanıcıları [AAD Kullanıcı tanımlı rollerinin](#user-defined-roles)temelinde yetkilendirmeye dahil değildir.
+
+### <a name="packages"></a>Paketler
+
+Aşağıdaki paketler için *sunucu* uygulamasına paket başvuruları ekleyin:
+
+* [Microsoft. Graph](https://www.nuget.org/packages/Microsoft.Graph)
+* [Microsoft. Identity Model. clients. ActiveDirectory](https://www.nuget.org/packages?q=Microsoft.IdentityModel.Clients.ActiveDirectory)
+
+### <a name="azure-configuration"></a>Azure yapılandırması
+
+* *Sunucu* uygulaması kaydına, `Directory.Read.All` güvenlik grupları için en az ayrıcalıklı erişim düzeyi olan Graph API iznine yönelik API erişimi verildiğini doğrulayın. İzin atamasını yaptıktan sonra, izinlere yönetici onayı uygulandığını doğrulayın.
+* *Sunucu* uygulamasına yeni bir istemci parolası atayın. Uygulama [ayarları](#app-settings) bölümünde uygulamanın yapılandırmasının gizli anahtarını aklınızda edin.
+
+### <a name="app-settings"></a>Uygulama ayarları
+
+Uygulama ayarları dosyasında ( `appsettings.json` veya `appsettings.Production.json` ), `ClientSecret` Azure Portal *sunucu* uygulamasının istemci gizli anahtarı ile bir giriş oluşturun:
+
+```json
+"AzureAd": {
+  "Instance": "https://login.microsoftonline.com/",
+  "Domain": "XXXXXXXXXXXX.onmicrosoft.com",
+  "TenantId": "{GUID}",
+  "ClientId": "{GUID}",
+  "ClientSecret": "{CLIENT SECRET}"
+},
+```
+
+Örneğin:
+
+```json
+"AzureAd": {
+  "Instance": "https://login.microsoftonline.com/",
+  "Domain": "contoso.onmicrosoft.com",
+  "TenantId": "34bf0ec1-7aeb-4b5d-ba42-82b059b3abe8",
+  "ClientId": "05d198e0-38c6-4efc-a67c-8ee87ed9bd3d",
+  "ClientSecret": "54uE~9a.-wW91fe8cRR25ag~-I5gEq_92~"
+},
+```
+
+### <a name="authorization-policies"></a>Yetkilendirme ilkeleri
+
+*Server* [authorization policies](xref:security/authorization/policies) `Startup.ConfigureServices` `Startup.cs` Grup nesne kimlikleri ve [AAD yönetici rolü nesne KIMLIKLERI](#aad-administrator-role-object-ids)temelinde, sunucu uygulamasının () AAD güvenlik grupları ve AAD yönetici rolleri için yetkilendirme ilkeleri oluşturun.
+
+Örneğin, bir Azure Faturalandırma Yöneticisi rol ilkesi aşağıdaki yapılandırmaya sahiptir:
+
+```csharp
+services.AddAuthorization(options =>
+{
+    options.AddPolicy("BillingAdmin", policy => 
+        policy.RequireClaim("group", "69ff516a-b57d-4697-a429-9de4af7b5609"));
+});
+```
+
+Daha fazla bilgi için bkz. <xref:security/authorization/policies>.
+
+### <a name="controller-access"></a>Denetleyici erişimi
+
+*Sunucu* uygulamasının denetleyicilerinde ilke gerektir.
+
+Aşağıdaki örnek, `BillingDataController` ' dan Azure Faturalandırma yöneticileri ' nden, `BillingAdmin` [Yetkilendirme İlkeleri](#authorization-policies) bölümünde yapılandırıldığı gibi, ilke adı ile birlikte faturalandırma verilerine erişimi kısıtlar:
+
+```csharp
+[Authorize(Policy = "BillingAdmin")]
+[ApiController]
+[Route("[controller]")]
+public class BillingDataController : ControllerBase
+{
+    ...
+}
+```
+
+### <a name="service-configuration"></a>Hizmet yapılandırması
+
+*Sunucu* uygulamasının `Startup.ConfigureServices` yönteminde, Graph API çağrısı yapmak ve `group` kullanıcının güvenlik grupları ve rolleri için kullanıcı talepleri oluşturmak için mantık ekleyin.
+
+> [!NOTE]
+> Bu bölümdeki örnek kod, Microsoft Platform v 1.0 'ı temel alan Active Directory Authentication Library (ADAL) kullanır Identity . Bu konu, Identity .NET 5 için v 2.0 için güncelleştirilecektir. Bu iş üzerinde ilerlemeyi izleme [[RC1] Microsoft Identity platformu 2,0 for Blazor (DotNet/AspNetCore.Docs #19503)](https://github.com/dotnet/AspNetCore.Docs/issues/19503).
+
+`Startup` *Sunucu* uygulamasının sınıfındaki kod için ek ad alanları gereklidir. Aşağıdaki deyimler kümesi, `using` Bu bölümde aşağıdaki kod için gereken ad alanlarını içerir:
+
+```csharp
+using System;
+using System.IdentityModel.Tokens.Jwt;
+using System.Linq;
+using System.Net.Http.Headers;
+using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.AzureAD.UI;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using Microsoft.Graph;
+using Microsoft.IdentityModel.Clients.ActiveDirectory;
+using Microsoft.IdentityModel.Logging;
+```
+
+Yapılandırılırken <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerEvents> :
+
+* İsteğe bağlı olarak için işlemeyi içerir <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerEvents.OnAuthenticationFailed?displayProperty=nameWithType> . Örneğin, uygulama başarısız kimlik doğrulamasını günlüğe kaydedebilir.
+* İçinde <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerEvents.OnTokenValidated?displayProperty=nameWithType> , kullanıcının gruplarını ve rollerini almak için bir Graph API çağrısı yapın.
+
+> [!WARNING]
+> <xref:Microsoft.IdentityModel.Logging.IdentityModelEventSource.ShowPII?displayProperty=nameWithType> günlüğe kaydetme iletilerinde kişisel olarak tanımlanabilir bilgiler (PII) sağlar. Yalnızca test Kullanıcı hesaplarıyla hata ayıklama için PII 'yi etkinleştirin.
+
+`Startup.ConfigureServices` içinde:
+
+```csharp
+#if DEBUG
+IdentityModelEventSource.ShowPII = true;
+#endif
+
+services.AddAuthentication(AzureADDefaults.BearerAuthenticationScheme)
+    .AddAzureADBearer(options => Configuration.Bind("AzureAd", options));
+
+services.Configure<JwtBearerOptions>(AzureADDefaults.JwtBearerAuthenticationScheme, 
+    options =>
+{
+    options.Events = new JwtBearerEvents()
+    {
+        OnAuthenticationFailed = context =>
+        {
+            // Optional: Log the exception
+
+#if DEBUG
+            Console.WriteLine($"OnAuthenticationFailed: {context.Exception}");
+#endif
+
+            return Task.FromResult(0);
+        },
+        OnTokenValidated = async context =>
+        {
+            var accessToken = context.SecurityToken as JwtSecurityToken;
+            var oid = accessToken.Claims.FirstOrDefault(x => x.Type == "oid")?
+                .Value;
+
+            if (!string.IsNullOrEmpty(oid))
+            {
+                var authContext = new AuthenticationContext(
+                    Configuration["AzureAd:Instance"] +
+                    Configuration["AzureAd:TenantId"]);
+                AuthenticationResult authResult = null;
+
+                try
+                {
+                    authResult = await authContext.AcquireTokenSilentAsync(
+                        "https://graph.microsoft.com", 
+                        Configuration["AzureAd:ClientId"]);
+                }
+                catch (AdalException adalException)
+                {
+                    if (adalException.ErrorCode == 
+                        AdalError.FailedToAcquireTokenSilently || 
+                        adalException.ErrorCode == 
+                        AdalError.UserInteractionRequired)
+                    {
+                        var userAssertion = new UserAssertion(accessToken.RawData,
+                            "urn:ietf:params:oauth:grant-type:jwt-bearer", oid);
+                        var clientCredential = new ClientCredential(
+                            Configuration["AzureAd:ClientId"],
+                            Configuration["AzureAd:ClientSecret"]);
+                        authResult = await authContext.AcquireTokenAsync(
+                            "https://graph.microsoft.com", clientCredential, 
+                            userAssertion);
+                    }
+                }
+
+                var graphClient = new GraphServiceClient(
+                    new DelegateAuthenticationProvider(async requestMessage => {
+                        requestMessage.Headers.Authorization =
+                            new AuthenticationHeaderValue("Bearer", 
+                                authResult.AccessToken);
+
+                        await Task.CompletedTask;
+                    }));
+
+                var userIdentity = (ClaimsIdentity)context.Principal.Identity;
+
+                IUserMemberOfCollectionWithReferencesPage groupsAndAzureRoles = 
+                    null;
+
+                try
+                {
+                    groupsAndAzureRoles = await graphClient.Users[oid].MemberOf
+                        .Request().GetAsync();
+                }
+                catch (ServiceException serviceException)
+                {
+                    // Optional: Log the error
+
+#if DEBUG
+                    Console.WriteLine(
+                        "OnTokenValidated: Service Exception: " +
+                        $"{serviceException.Message}");
+#endif
+                }
+
+                if (groupsAndAzureRoles != null)
+                {
+                    foreach (var entry in groupsAndAzureRoles)
+                    {
+                        userIdentity.AddClaim(new Claim("group", entry.Id));
+                    }
+                }
+            }
+            else
+            {
+                // Optional: Log missing OID claim
+
+#if DEBUG
+                Console.WriteLine($"OnTokenValidated: OID missing: " +
+                    $"{accessToken.RawData}");
+#endif
+            }
+
+            await Task.FromResult(0);
+        }
+    };
+});
+```
+
+Yukarıdaki örnekte:
+
+* <xref:Microsoft.IdentityModel.Clients.ActiveDirectory.AuthenticationContext.AcquireTokenSilentAsync%2A>Erişim BELIRTECI adal belirteç önbelleğinde zaten depolandığından, sessiz belirteç alımı () önce denenir. Yeni bir belirteç istemek yerine önbellekten belirteç alınması daha hızlıdır.
+* Erişim belirteci önbellekten <xref:Microsoft.IdentityModel.Clients.ActiveDirectory.AdalError.FailedToAcquireTokenSilently?displayProperty=nameWithType> <xref:Microsoft.IdentityModel.Clients.ActiveDirectory.AdalError.UserInteractionRequired?displayProperty=nameWithType> alınmadıysa (veya oluşturulursa), <xref:Microsoft.IdentityModel.Clients.ActiveDirectory.UserAssertion> <xref:Microsoft.IdentityModel.Clients.ActiveDirectory.ClientCredential> Kullanıcı () adına belirteci almak için istemci kimlik bilgileri () ile bir Kullanıcı onaylama () yapılır <xref:Microsoft.IdentityModel.Clients.ActiveDirectory.AuthenticationContext.AcquireTokenAsync%2A> . Sonra, `Microsoft.Graph.GraphServiceClient` Graph API çağrısı yapmak için belirteci kullanmaya devam edebilir. Belirteç ADAL belirteç önbelleğine yerleştirilir. Aynı kullanıcı için gelecekte Graph API çağrılar için belirteç, ile sessizce önbellekten alınır <xref:Microsoft.IdentityModel.Clients.ActiveDirectory.AuthenticationContext.AcquireTokenSilentAsync%2A> .
+
+İçindeki kod <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerEvents.OnTokenValidated> geçişli üyelikleri elde etmez. Doğrudan ve geçişli üyelikleri elde etmek üzere kodu değiştirmek için:
+
+* Kod satırı için:
+
+  ```csharp
+  IUserMemberOfCollectionWithReferencesPage groupsAndAzureRoles = null;
+  ```
+
+  Yukarıdaki satırı ile değiştirin:
+
+  ```csharp
+  IUserTransitiveMemberOfCollectionWithReferencesPage groupsAndAzureRoles = null;
+  ```
+
+* Kod satırı için:
+
+  ```csharp
+  groupsAndAzureRoles = await graphClient.Users[oid].MemberOf.Request().GetAsync();
+  ```
+
+  Yukarıdaki satırı ile değiştirin:
+
+  ```csharp
+  groupsAndAzureRoles = await graphClient.Users[oid].TransitiveMemberOf.Request()
+      .GetAsync();
+  ```
+
+İçindeki kod, <xref:Microsoft.AspNetCore.Authentication.JwtBearer.JwtBearerEvents.OnTokenValidated> talepler oluştururken AAD güvenlik grupları ve AAD yönetici rolleri arasında ayrım yapmaz. Uygulamanın gruplar ve roller arasında ayrım yapmak için `entry.ODataType` gruplar ve roller arasında ne zaman yinelediğini kontrol edin. Ayrı güvenlik grubu ve rol talepleri oluşturmak için aşağıdakilere benzer bir kod kullanın:
+
+```csharp
+foreach (var entry in groupsAndAzureRoles)
+{
+    if (entry.ODataType == "#microsoft.graph.group")
+    {
+        userIdentity.AddClaim(new Claim("group", entry.Id));
+    }
+    else
+    {
+        // entry.ODataType == "#microsoft.graph.directoryRole"
+        userIdentity.AddClaim(new Claim("role", entry.Id));
+    }
+}
+```
+
 ## <a name="user-defined-roles"></a>Kullanıcı tanımlı roller
 
 AAD ile kaydedilen bir uygulama, Kullanıcı tanımlı rolleri kullanmak için de yapılandırılabilir.
@@ -366,7 +651,7 @@ Aşağıdaki örnek, bir uygulamanın iki rolle yapılandırıldığını varsay
 
 `roles`AAD tarafından gönderilen tek talep, Kullanıcı tanımlı rolleri `appRoles` `value` bir JSON dizisinde öğeleri olarak sunar. Uygulama, rollerin JSON dizisini bağımsız taleplerine dönüştürmelidir `role` .
 
-`CustomUserFactory` [Kullanıcı tanımlı gruplar ve AAD yerleşik yönetim rolleri](#user-defined-groups-and-built-in-administrative-roles) bölümünde gösterilen bir `roles` JSON dizi değeri olan bir talep üzerinde işlem yapacak şekilde ayarlanır. `CustomUserFactory` Blazor [Kullanıcı TANıMLı gruplar ve AAD yerleşik yönetici rolleri](#user-defined-groups-and-built-in-administrative-roles) bölümünde gösterildiği gibi barındırılan bir çözümün tek başına uygulamasını veya istemci uygulamasını ekleyin ve kaydedin. Çerçeve tarafından otomatik olarak kaldırıldığı için özgün talebi kaldırmak üzere kod sağlamanız gerekmez `roles` .
+`CustomUserFactory` [Kullanıcı tanımlı gruplar ve AAD yönetici rolleri](#user-defined-groups-and-administrator-roles) bölümünde gösterilen bir `roles` JSON dizi değeri olan bir talep üzerinde işlem yapacak şekilde ayarlanır. `CustomUserFactory` Blazor [Kullanıcı TANıMLı gruplar ve AAD yönetici rolleri](#user-defined-groups-and-administrator-roles) bölümünde gösterildiği gibi barındırılan bir çözümün tek başına uygulamasına veya istemci uygulamasına ekleyin ve kaydedin. Çerçeve tarafından otomatik olarak kaldırıldığı için özgün talebi kaldırmak üzere kod sağlamanız gerekmez `roles` .
 
 `Program.Main`Barındırılan bir çözümün tek başına uygulamasında veya istemci uygulamasında Blazor , `role` rol talebi olarak "" adlı talebi belirtin:
 
@@ -394,11 +679,11 @@ Bu noktada bileşen yetkilendirme yaklaşımları işlevseldir. Bileşenlerdeki 
   }
   ```
 
-## <a name="aad-adminstrative-role-group-ids"></a>AAD yönetim rolü grup kimlikleri
+## <a name="aad-administrator-role-object-ids"></a>AAD yönetici rolü nesne kimlikleri
 
-Aşağıdaki tabloda sunulan nesne kimlikleri, talepler için [ilkeler](xref:security/authorization/policies) oluşturmak üzere kullanılır `group` . İlkeler, bir uygulamanın bir uygulamadaki çeşitli etkinlikler için kullanıcıları yetkilendirmesine izin verir. Daha fazla bilgi için [Kullanıcı tanımlı gruplar ve AAD yerleşik yönetim rolleri](#user-defined-groups-and-built-in-administrative-roles) bölümüne bakın.
+Aşağıdaki tabloda sunulan nesne kimlikleri, talepler için [ilkeler](xref:security/authorization/policies) oluşturmak üzere kullanılır `group` . İlkeler, bir uygulamanın bir uygulamadaki çeşitli etkinlikler için kullanıcıları yetkilendirmesine izin verir. Daha fazla bilgi için [Kullanıcı tanımlı gruplar ve AAD yönetici rolleri](#user-defined-groups-and-administrator-roles) bölümüne bakın.
 
-AAD yönetim rolü | Nesne Kimliği
+AAD yönetici rolü | Nesne Kimliği
 --- | ---
 Uygulama Yöneticisi | fa11557b-4f15-4ddd-85d5-313c7cd74047
 Uygulama geliştiricisi | 68adcbb8-9504-44f6-89f2-5cd48dc74a2c

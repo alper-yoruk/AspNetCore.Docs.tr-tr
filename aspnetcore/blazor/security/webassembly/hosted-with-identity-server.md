@@ -5,7 +5,7 @@ description: Barındırılan bir ASP.NET Core uygulamasının sunucusuyla güven
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/09/2020
+ms.date: 09/02/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 58c21f4dbe831e99570ca8b0d7bc78616c1e5bfb
-ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
+ms.openlocfilehash: 0d63ddbc730d3feef0682f6e49dd1b1b4d5e0301
+ms.sourcegitcommit: c026bf76a0e14a5ee68983519a63574c674e9ff7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/21/2020
-ms.locfileid: "88712382"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91636822"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-no-locidentity-server"></a>Blazor WebAssemblySunucu ile ASP.NET Core barındırılan bir uygulamanın güvenliğini sağlama Identity
 
@@ -466,6 +466,105 @@ Istemci uygulamasında, bileşen yetkilendirme yaklaşımları bu noktada işlev
 `User.Identity.Name` , genellikle oturum açma e-posta adresi olan kullanıcının kullanıcı adıyla Istemci uygulamasına doldurulur.
 
 [!INCLUDE[](~/includes/blazor-security/usermanager-signinmanager.md)]
+
+## <a name="host-in-azure-app-service-with-a-custom-domain"></a>Özel bir etki alanı ile Azure App Service barındırın
+
+Aşağıdaki kılavuzda, Blazor WebAssembly Identity özel bir etki alanı ile [Azure App Service](https://azure.microsoft.com/services/app-service/) üzere barındırılan bir uygulamanın sunucu ile nasıl dağıtılacağı açıklanmaktadır.
+
+Bu barındırma senaryosunda, [ Identity sunucunun belirteç imzalama anahtarı](https://docs.identityserver.io/en/latest/topics/crypto.html#token-signing-and-validation) için aynı SERTIFIKAYı ve sitenin https güvenli iletişimini tarayıcılarla **birlikte kullanmayın:**
+
+* Bu iki gereksinim için farklı sertifikaların kullanılması, her amaçla özel anahtarları yalıtdığından iyi bir güvenlik uygulamasıdır.
+* Tarayıcılarla iletişim için TLS sertifikaları, sunucunun belirteç imzasını etkilemeden bağımsız olarak yönetilir Identity .
+* [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) , özel etki alanı bağlamaya yönelik bir App Service uygulamasına sertifika sağladığı zaman, Identity sunucu, belirteç imzalama için Azure Key Vault aynı sertifikayı elde edemiyor. IdentitySunucuyu fiziksel bir yoldan aynı TLS sertifikasını kullanacak şekilde yapılandırmak mümkün olsa da, güvenlik sertifikalarının kaynak denetimine yerleştirilmesi **kötü bir uygulamadır ve çoğu senaryoda kaçınılmalıdır**.
+
+Aşağıdaki kılavuzda, yalnızca sunucu belirteci imzalama için Azure Key Vault ' de otomatik olarak imzalanan bir sertifika oluşturulur Identity . IdentitySunucu yapılandırması, uygulamanın `My`  >  sertifika deposu aracılığıyla Anahtar Kasası sertifikasını kullanır `CurrentUser` . Özel etki alanları olan HTTPS trafiği için kullanılan diğer sertifikalar, sunucu imzalama sertifikasından ayrı olarak oluşturulur ve yapılandırılır Identity .
+
+Bir uygulamayı, Azure App Service ve Azure Key Vault özel bir etki alanı ve HTTPS ile barındıracak şekilde yapılandırmak için:
+
+1. Plan düzeyi veya daha yüksek bir [App Service planı](/azure/app-service/overview-hosting-plans) oluşturun `Basic B1` . App Service, bir `Basic B1` veya daha yüksek hizmet katmanının özel etki alanlarını kullanmasını gerektirir.
+1. Sitenin güvenli tarayıcı iletişimi (HTTPS protokolü) için, kuruluşunuzun denetlediği sitenin tam etki alanı adı (FQDN) olan bir PFX sertifikası oluşturun (örneğin, `www.contoso.com` ). Sertifikayı şu şekilde oluşturun:
+   * Anahtar kullanımları
+     * Dijital imza doğrulaması ( `digitalSignature` )
+     * Anahtar şifreleme ( `keyEncipherment` )
+   * Gelişmiş/genişletilmiş anahtar kullanımları
+     * İstemci kimlik doğrulaması (1.3.6.1.5.5.7.3.2)
+     * Sunucu kimlik doğrulaması (1.3.6.1.5.5.7.3.1)
+
+   Sertifikayı oluşturmak için aşağıdaki yaklaşımlardan birini veya başka bir uygun aracı ya da çevrimiçi hizmeti kullanın:
+
+   * [Azure Key Vault](/azure/key-vault/certificates/quick-create-portal#add-a-certificate-to-key-vault)
+   * [Windows üzerinde MakeCert](/windows/desktop/seccrypto/makecert)
+   * [OpenSSL](https://www.openssl.org)
+
+   Daha sonra sertifikayı Azure Key Vault aktarmak için kullanılan parolayı unutmayın.
+
+   Azure Key Vault sertifikaları hakkında daha fazla bilgi için bkz. [Azure Key Vault: sertifikalar](/azure/key-vault/certificates/).
+1. Yeni bir Azure Key Vault oluşturun veya Azure aboneliğinizde mevcut bir anahtar kasasını kullanın.
+1. Anahtar kasasının **Sertifikalar** alanında PFX site sertifikasını içeri aktarın. Uygulamanın yapılandırmasında daha sonra kullanılan sertifikanın parmak izini kaydedin.
+1. Azure Key Vault, sunucu belirteci imzalama için otomatik olarak imzalanan yeni bir sertifika oluşturun Identity . Sertifikaya bir **sertifika adı** ve **Konu**verin. **Konusu** , `CN={COMMON NAME}` `{COMMON NAME}` yer tutucunun sertifikanın ortak adı olduğu gibi belirtilir. Ortak ad herhangi bir alfasayısal dize olabilir. Örneğin, `CN=IdentityServerSigning` geçerli bir sertifika **konusudur**. Varsayılan **Gelişmiş Ilke yapılandırma** ayarlarını kullanın. Uygulamanın yapılandırmasında daha sonra kullanılan sertifikanın parmak izini kaydedin.
+1. Azure portal Azure App Service gidin ve aşağıdaki yapılandırmayla yeni bir App Service oluşturun:
+   * **Publish** Kümeyi olarak Yayımla `Code` .
+   * **Çalışma zamanı yığını** , uygulamanın çalışma zamanına ayarlandı.
+   * **SKU ve boyut**için App Service katmanının `Basic B1` veya daha yüksek olduğunu doğrulayın.  App Service, bir `Basic B1` veya daha yüksek hizmet katmanının özel etki alanlarını kullanmasını gerektirir.
+1. Azure App Service oluşturduktan sonra, uygulamanın **yapılandırmasını** açın ve daha önce kaydedilen sertifika parmak izlerini belirten yeni bir uygulama ayarı ekleyin. Uygulama ayarı anahtarı `WEBSITE_LOAD_CERTIFICATES` . Aşağıdaki örnekte gösterildiği gibi, uygulama ayarı değerindeki sertifika parmak izlerini bir virgülle ayırın:
+   * Anahtar: `WEBSITE_LOAD_CERTIFICATES`
+   * Değer: `57443A552A46DB...D55E28D412B943565,29F43A772CB6AF...1D04F0C67F85FB0B1`
+
+   Azure portal, uygulama ayarlarının kaydedilmesi iki adımlı bir işlemdir: `WEBSITE_LOAD_CERTIFICATES` anahtar-değer ayarını kaydedin, ardından dikey pencerenin en üstündeki **Kaydet** düğmesini seçin.
+1. Uygulamanın **TLS/SSL ayarlarını**seçin. **Özel anahtar sertifikaları (. pfx)** seçeneğini belirleyin. HTTPS iletişimi için sitenin sertifikasını ve sitenin otomatik olarak imzalanan sunucu belirteci imzalama sertifikasını içeri aktarmak için **Key Vault sertifikayı Içeri aktar** işlemini iki kez kullanın Identity .
+1. **Özel etki alanları** dikey penceresine gidin. Etki alanı Kaydedicinizin Web sitesinde, etki alanını yapılandırmak için **IP adresini** ve **özel etkı alanı doğrulama kimliğini** kullanın. Tipik bir etki alanı yapılandırması şunları içerir:
+   * Azure portal **ana bilgisayarı** ve IP adresi değeri olan **bir kayıt** `@` .
+   * **Ana bilgisayarı** **TXT Record** `asuid` ve Azure tarafından oluşturulan ve Azure Portal tarafından oluşturulan doğrulama kimliği değeri olan bir TXT kaydı.
+
+   Değişiklikleri etki alanı Kaydedicinizin Web sitesinde doğru bir şekilde kaydettiğinizden emin olun. Bazı kaydedici Web siteleri, etki alanı kayıtlarını kaydetmek için iki adımlı bir işlem gerektirir: bir veya daha fazla kayıt, bir veya daha fazla kaydın ayrı bir düğmeyle güncelleştirilmesi tarafından tek tek kaydedilir.
+1. Azure portal **özel etki alanları** dikey penceresine geri dönün. **Özel etki alanı ekle**'yi seçin. **Bir kayıt** seçeneğini belirleyin. Etki alanını girip **Doğrula**' yı seçin. Etki alanı kayıtları doğruysa ve Internet üzerinden yayıldığında, portal **özel etki alanı Ekle** düğmesini seçmenizi sağlar.
+
+   Etki alanı kayıt şirketiniz tarafından işlendikten sonra, etki alanı kaydı değişikliklerinin Internet etki alanı ad sunucuları (DNS) üzerinden yayılması birkaç gün sürebilir. Etki alanı kayıtları üç iş günü içinde güncellenmemişse, kayıtların etki alanı kaydedicisinde doğru şekilde ayarlandığını onaylayın ve müşteri desteğiyle iletişim kurun.
+1. **Özel etki alanları** dikey penceresinde, etki alanı IÇIN **SSL durumu** işaretlenir `Not Secure` . **Bağlama Ekle** bağlantısını seçin. Özel etki alanı bağlamasının anahtar kasasından site HTTPS sertifikasını seçin.
+1. Visual Studio 'da, *sunucu* projesinin uygulama ayarları dosyasını ( `appsettings.json` veya `appsettings.Production.json` ) açın. IdentitySunucu yapılandırması ' nda aşağıdaki `Key` bölümü ekleyin. Anahtar için otomatik olarak imzalanan sertifika **konusunu** belirtin `Name` . Aşağıdaki örnekte, sertifikanın anahtar kasasında atanan ortak adı ' dır; `IdentityServerSigning` Bu da bir **konuyu** veren `CN=IdentityServerSigning` :
+
+   ```json
+   "IdentityServer": {
+
+     ...
+
+     "Key": {
+       "Type": "Store",
+       "StoreName": "My",
+       "StoreLocation": "CurrentUser",
+       "Name": "CN=IdentityServerSigning"
+     }
+   },
+   ```
+
+1. Visual Studio 'da *sunucu* projesi için bir Azure App Service [Yayımlama profili](xref:host-and-deploy/visual-studio-publish-profiles#publish-profiles) oluşturun. Menü çubuğundan: **derleme**  >  **Publish**  >  **Yeni**  >  **Azure**  >  **Azure App Service** yayımlama (Windows veya Linux) öğesini seçin. Visual Studio bir Azure aboneliğine bağlıyken, Azure kaynaklarının **görünümünü** **kaynak türüne**göre ayarlayabilirsiniz. Uygulamanın App Service bulmak ve bunu seçmek için **Web uygulaması** listesinde gezinin. **Son**’u seçin.
+1. Visual Studio **Yayımla** penceresine döndüğünde, anahtar kasası ve SQL Server veritabanı hizmeti bağımlılıkları otomatik olarak algılanır.
+
+   Anahtar Kasası hizmeti için varsayılan ayarlarda yapılandırma değişikliği yapılması gerekmez.
+
+   Test amacıyla, bir uygulamanın varsayılan olarak şablon tarafından yapılandırılan yerel [SQLite](https://www.sqlite.org/index.html) veritabanı, Blazor ek yapılandırma olmadan uygulamayla birlikte dağıtılabilir. Üretimde sunucu için farklı bir veritabanını yapılandırmak, Identity Bu makalenin kapsamı dışındadır. Daha fazla bilgi için aşağıdaki belge kümelerinde veritabanı kaynaklarına bakın:
+   * [App Service](/azure/app-service/)
+   * [Identity Server](https://identityserver4.readthedocs.io/en/latest/)
+
+1. Pencerenin üst kısmındaki dağıtım profili adı altındaki **Düzenle** bağlantısını seçin. Hedef URL 'yi sitenin özel etki alanı URL 'SI olarak değiştirin (örneğin, `https://www.contoso.com` ). Ayarları kaydedin.
+1. Uygulamayı yayımlayın. Visual Studio bir tarayıcı penceresi açar ve siteyi kendi özel etki alanında ister.
+
+Azure belgeleri, Azure hizmetleri ve özel etki alanlarını, bir kayıt yerine CNAME kayıtlarını kullanma hakkında bilgi dahil olmak üzere App Service 'de TLS bağlama ile kullanmayla ilgili ek bilgiler içerir. Daha fazla bilgi için aşağıdaki kaynaklara bakın:
+
+* [App Service belgeleri](/azure/app-service/)
+* [Öğretici: mevcut bir özel DNS adını Azure App Service eşleme](/azure/app-service/app-service-web-tutorial-custom-domain)
+* [Azure App Service 'de TLS/SSL bağlaması ile özel bir DNS adının güvenliğini sağlama](/azure/app-service/configure-ssl-bindings)
+* [Azure Key Vault](/azure/key-vault/)
+
+Uygulama, uygulama yapılandırması veya Azure portal Azure hizmetlerinde yapılan bir değişiklikten sonra her uygulama test çalışması için yeni bir özel veya geçersiz tarayıcı penceresi kullanmanızı öneririz. cookieÖnceki bir test çalıştırağından kalan öğeleri, site yapılandırması doğru olsa bile siteyi test ederken başarısız kimlik doğrulama veya yetkilendirmeyle sonuçlanabilir. Visual Studio 'Yu her test çalışması için yeni bir özel veya bir tarayıcı penceresi açmak üzere yapılandırma hakkında daha fazla bilgi için, [ Cookie s ve site verileri](#cookies-and-site-data) bölümüne bakın.
+
+Azure portal App Service yapılandırma değiştirildiğinde, güncelleştirmeler genellikle hızla etkili olur ancak anında gerçekleşir. Bazen, bir yapılandırma değişikliğinin etkili olabilmesi için bir App Service yeniden başlatılması için kısa bir süre beklemeniz gerekir.
+
+Bir sertifika yükleme sorununu giderirken, Azure portal [kudu](https://github.com/projectkudu/kudu/wiki/Accessing-the-kudu-service) PowerShell komut kabuğu 'nda aşağıdaki komutu yürütün. Komut, uygulamanın sertifika deposundan erişebileceği sertifikaların bir listesini sağlar `My`  >  `CurrentUser` . Çıktıda sertifika konuları ve parmak izleri, bir uygulamada hata ayıklanırken yararlı olur:
+
+```powershell
+Get-ChildItem -path Cert:\CurrentUser\My -Recurse | Format-List DnsNameList, Subject, Thumbprint, EnhancedKeyUsageList
+```
 
 [!INCLUDE[](~/includes/blazor-security/troubleshoot.md)]
 

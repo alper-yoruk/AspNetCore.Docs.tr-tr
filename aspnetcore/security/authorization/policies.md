@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/policies
-ms.openlocfilehash: af282ec1f82b2ac31fd0b46b2406110e24e9211b
-ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
+ms.openlocfilehash: 140969c80191c9549bc19507b9c4818b88fed0d1
+ms.sourcegitcommit: c026bf76a0e14a5ee68983519a63574c674e9ff7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/29/2020
-ms.locfileid: "91424249"
+ms.lasthandoff: 10/01/2020
+ms.locfileid: "91636809"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>ASP.NET Core ilke tabanlı yetkilendirme
 
@@ -36,7 +36,7 @@ Yetkilendirme ilkesi bir veya daha fazla gereksinimden oluşur. Bu, yetkilendirm
 
 Yukarıdaki örnekte, "AtLeast21" ilkesi oluşturulur. Bu, &mdash; gereksinimle bir parametre olarak sağlanan minimum Age 'in tek bir gereksinimine sahiptir.
 
-## <a name="iauthorizationservice"></a>IAuthorizationService 
+## <a name="iauthorizationservice"></a>IAuthorizationService
 
 Yetkilendirmenin başarılı olup olmadığını belirleyen birincil hizmet <xref:Microsoft.AspNetCore.Authorization.IAuthorizationService> :
 
@@ -122,13 +122,13 @@ public void ConfigureServices(IServiceCollection services)
 
 RazorSayfalar kullanıyorsanız, bkz. bu belgedeki [ Razor sayfalara ilke uygulama](#apply-policies-to-razor-pages) .
 
-İlkeler, `[Authorize]` ilke adı ile özniteliği kullanılarak denetleyicilere uygulanır. Örnek:
+İlkeler, `[Authorize]` ilke adı ile özniteliği kullanılarak denetleyicilere uygulanır. Örneğin:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
 ## <a name="apply-policies-to-no-locrazor-pages"></a>İlkeleri sayfalara uygula Razor
 
-İlkeler, Razor `[Authorize]` ilke adı ile özniteliği kullanılarak sayfalara uygulanır. Örnek:
+İlkeler, Razor `[Authorize]` ilke adı ile özniteliği kullanılarak sayfalara uygulanır. Örneğin:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
@@ -177,7 +177,7 @@ Yukarıdaki kod, [Pendingrequirements](/dotnet/api/microsoft.aspnetcore.authoriz
 
 ### <a name="handler-registration"></a>İşleyici kaydı
 
-İşleyiciler, yapılandırma sırasında hizmetler koleksiyonuna kaydedilir. Örnek:
+İşleyiciler, yapılandırma sırasında hizmetler koleksiyonuna kaydedilir. Örneğin:
 
 [!code-csharp[](policies/samples/3.0PoliciesAuthApp1/Startup.cs?range=31-32,39-40,42-45, 53-55, 58)]
 
@@ -230,7 +230,7 @@ Kodun kodda hızlı bir şekilde kullanılması için bir ilkeyi karşıladığ�
 
 `HandleRequirementAsync`Bir yetkilendirme işleyicisinde uyguladığınız yöntemin iki parametresi vardır: bir `AuthorizationHandlerContext` ve `TRequirement` işleme çalışıyorsunuz. Daha SignalR `Resource` `AuthorizationHandlerContext` fazla bilgi GEÇIRMEK için, MVC gibi çerçeveler veya üzerinde özelliğine herhangi bir nesne eklemek ücretsizdir.
 
-Endpoint Routing kullanılırken, yetkilendirme genellikle yetkilendirme ara yazılımı tarafından işlenir. Bu durumda, `Resource` özelliği öğesinin bir örneğidir <xref:Microsoft.AspNetCore.Http.Endpoint> . Uç noktası, yönlendirolduğunuz temel kaynağı yoklayabilmeniz için kullanılabilir. Örnek:
+Endpoint Routing kullanılırken, yetkilendirme genellikle yetkilendirme ara yazılımı tarafından işlenir. Bu durumda, `Resource` özelliği öğesinin bir örneğidir <xref:Microsoft.AspNetCore.Http.Endpoint> . Uç noktası, yönlendirolduğunuz temel kaynağı yoklayabilmeniz için kullanılabilir. Örneğin:
 
 ```csharp
 if (context.Resource is Endpoint endpoint)
@@ -358,13 +358,13 @@ public void ConfigureServices(IServiceCollection services)
 
 RazorSayfalar kullanıyorsanız, bkz. bu belgedeki [ Razor sayfalara ilke uygulama](#apply-policies-to-razor-pages) .
 
-İlkeler, `[Authorize]` ilke adı ile özniteliği kullanılarak denetleyicilere uygulanır. Örnek:
+İlkeler, `[Authorize]` ilke adı ile özniteliği kullanılarak denetleyicilere uygulanır. Örneğin:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Controllers/AlcoholPurchaseController.cs?name=snippet_AlcoholPurchaseControllerClass&highlight=4)]
 
 ## <a name="apply-policies-to-no-locrazor-pages"></a>İlkeleri sayfalara uygula Razor
 
-İlkeler, Razor `[Authorize]` ilke adı ile özniteliği kullanılarak sayfalara uygulanır. Örnek:
+İlkeler, Razor `[Authorize]` ilke adı ile özniteliği kullanılarak sayfalara uygulanır. Örneğin:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
@@ -411,7 +411,7 @@ Yukarıdaki kod, [Pendingrequirements](/dotnet/api/microsoft.aspnetcore.authoriz
 
 ### <a name="handler-registration"></a>İşleyici kaydı
 
-İşleyiciler, yapılandırma sırasında hizmetler koleksiyonuna kaydedilir. Örnek:
+İşleyiciler, yapılandırma sırasında hizmetler koleksiyonuna kaydedilir. Örneğin:
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Startup.cs?range=32-33,48-53,61,62-63,66)]
 
