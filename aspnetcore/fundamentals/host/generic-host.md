@@ -1,7 +1,7 @@
 ---
-title: .NET genel ana bilgisayar
+title: ASP.NET Core .NET genel ana bilgisayarı
 author: rick-anderson
-description: Uygulama başlatma ve ömür yönetiminden sorumlu .NET Core genel ana bilgisayarı hakkında bilgi edinin.
+description: ASP.NET Core uygulamalarında .NET Core genel ana bilgisayarı kullanın.  Genel ana bilgisayar, uygulama başlatma ve ömür yönetiminden sorumludur.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
@@ -18,18 +18,20 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: 59cfae9ff619f8de894686c4b773d66e5cbe10ad
-ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
+ms.openlocfilehash: d3de81ce7248372279b423da865513ee5db73c79
+ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
 ms.translationtype: MT
 ms.contentlocale: tr-TR
 ms.lasthandoff: 10/06/2020
-ms.locfileid: "91754742"
+ms.locfileid: "91762327"
 ---
-# <a name="net-generic-host"></a>.NET genel ana bilgisayar
+# <a name="net-generic-host-in-aspnet-core"></a>ASP.NET Core .NET genel ana bilgisayarı
 
 ::: moniker range=">= aspnetcore-5.0"
 
 ASP.NET Core şablonları bir .NET Core genel Konağı () oluşturur <xref:Microsoft.Extensions.Hosting.HostBuilder> .
+
+Bu konuda, ASP.NET Core .NET genel Host kullanımı hakkında bilgi verilmektedir. Konsol uygulamalarında .NET genel ana bilgisayarı kullanma hakkında bilgi için bkz. [.NET genel ana bilgisayar](/dotnet/core/extensions/generic-host).
 
 ## <a name="host-definition"></a>Ana bilgisayar tanımı
 
@@ -529,6 +531,8 @@ public class Program
 ::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
 ASP.NET Core şablonları bir .NET Core genel Konağı () oluşturur <xref:Microsoft.Extensions.Hosting.HostBuilder> .
+
+Bu konuda, ASP.NET Core .NET genel Host kullanımı hakkında bilgi verilmektedir. Konsol uygulamalarında .NET genel ana bilgisayarı kullanma hakkında bilgi için bkz. [.NET genel ana bilgisayar](/dotnet/core/extensions/generic-host).
 
 ## <a name="host-definition"></a>Ana bilgisayar tanımı
 

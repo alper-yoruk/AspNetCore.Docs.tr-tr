@@ -5,7 +5,7 @@ description: RazorASP.NET Core uygulamalarda bileşen yaşam döngüsü yönteml
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/06/2020
+ms.date: 10/06/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,18 +18,48 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: 00573f87b65e53a7bfd9cc2aed1d2ed7772b9a4a
-ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
+ms.openlocfilehash: a43268acdb53bf811148fe795ef0434662ddb32f
+ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90847617"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91762233"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor yaşam döngüsü
 
 , [Luke Latham](https://github.com/guardrex) ve [Daniel Roth](https://github.com/danroth27) tarafından
 
 BlazorÇerçeve, zaman uyumlu ve zaman uyumsuz yaşam döngüsü yöntemlerini içerir. Bileşen başlatma ve işleme sırasında bileşenlerde ek işlemler gerçekleştirmek için yaşam döngüsü yöntemlerini geçersiz kılın.
+
+Aşağıdaki diyagramlarda Blazor yaşam döngüsü gösterilmektedir. Yaşam döngüsü yöntemleri, bu makalenin aşağıdaki bölümlerinde örneklerle tanımlanmıştır.
+
+Bileşen yaşam döngüsü olayları:
+
+1. Bileşen bir istek üzerinde ilk kez işleme alıyorsa:
+   * Bileşenin örneğini oluşturun.
+   * Özellik ekleme işlemini gerçekleştirin. Öğesini çalıştırın [`SetParametersAsync`](#before-parameters-are-set) .
+   * Çağrısı yapın [`OnInitialized{Async}`](#component-initialization-methods) . Bir <xref:System.Threading.Tasks.Task> döndürülürse, geri <xref:System.Threading.Tasks.Task> beklemiştir ve bileşen işlenir. Bir <xref:System.Threading.Tasks.Task> döndürülmemişse, bileşeni işle.
+1. Çağrısı yapın [`OnParametersSet{Async}`](#after-parameters-are-set) . Bir <xref:System.Threading.Tasks.Task> döndürülürse, geri <xref:System.Threading.Tasks.Task> beklemiştir ve bileşen işlenir. Bir <xref:System.Threading.Tasks.Task> döndürülmemişse, bileşeni işle.
+
+![Bir::: No-Loc (Razor)::: bileşen::: No-Loc (Blazor)::: içinde bileşen yaşam döngüsü olayları](lifecycle/_static/lifecycle1.png)
+
+Belge Nesne Modeli (DOM) olay işleme:
+
+1. Olay işleyicisi çalıştırıldı.
+1. Bir <xref:System.Threading.Tasks.Task> döndürülürse, geri <xref:System.Threading.Tasks.Task> beklemiştir ve bileşen işlenir. Bir <xref:System.Threading.Tasks.Task> döndürülürse, bileşen işlenir.
+
+![Belge Nesne Modeli (DOM) olay işleme](lifecycle/_static/lifecycle2.png)
+
+`Render`Yaşam döngüsü:
+
+1. Bu bileşen ilk işleme değilse veya [`ShouldRender`](#suppress-ui-refreshing) olarak değerlendiriliyorsa `false` , bileşende başka işlemler yapmayın.
+1. İşleme ağacı farkı (fark) oluşturun ve bileşeni oluşturun.
+1. DOM 'ı güncelleştirmek için Await.
+1. Çağrısı yapın [`OnAfterRender{Async}`](#after-component-render) .
+
+![İşleme yaşam döngüsü](lifecycle/_static/lifecycle3.png)
+
+Geliştirici [`StateHasChanged`](#state-changes) bir işleme yol açacak şekilde çağırır.
 
 ## <a name="lifecycle-methods"></a>Yaşam döngüsü yöntemleri
 
@@ -191,7 +221,7 @@ Yaşam döngüsü olaylarında gerçekleştirilen zaman uyumsuz eylemler, bileş
 
 `Pages/FetchData.razor`Blazor Serverşablonda:
 
-[!code-razor[](lifecycle/samples_snapshot/3.x/FetchData.razor?highlight=9,21,25)]
+[!code-razor[](lifecycle/samples_snapshot/FetchData.razor?highlight=9,21,25)]
 
 ## <a name="handle-errors"></a>Hataları işleme
 
@@ -286,11 +316,11 @@ Bir bileşen uygularsa <xref:System.IDisposable> , bileşen kullanıcı arabirim
 
 * Özel alan ve lambda yaklaşımı
 
-  [!code-razor[](lifecycle/samples_snapshot/3.x/event-handler-disposal-1.razor?highlight=23,28)]
+  [!code-razor[](lifecycle/samples_snapshot/event-handler-disposal-1.razor?highlight=23,28)]
 
 * Özel yöntem yaklaşımı
 
-  [!code-razor[](lifecycle/samples_snapshot/3.x/event-handler-disposal-2.razor?highlight=16,26)]
+  [!code-razor[](lifecycle/samples_snapshot/event-handler-disposal-2.razor?highlight=16,26)]
 
 ## <a name="cancelable-background-work"></a>İptal edilebilen arka plan çalışması
 

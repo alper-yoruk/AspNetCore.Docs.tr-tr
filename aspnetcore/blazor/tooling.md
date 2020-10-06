@@ -5,7 +5,7 @@ description: Uygulama derlemek için kullanılabilen araç hakkında bilgi edini
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/07/2020
+ms.date: 09/28/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -19,12 +19,12 @@ no-loc:
 - SignalR
 uid: blazor/tooling
 zone_pivot_groups: operating-systems
-ms.openlocfilehash: d7e3743d12c235c20cc27f6a3263e2994a9e160a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d1626fe753782d524bf75c398c11235c3110633a
+ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625836"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91762158"
 ---
 # <a name="tooling-for-aspnet-core-no-locblazor"></a>ASP.NET Core için araç oluşturma Blazor
 
@@ -52,13 +52,13 @@ ASP.NET Core HTTPS geliştirme sertifikasını güvenme hakkında daha fazla bil
 
 ::: zone pivot="linux"
 
-1. [.NET Core 3,1 SDK 'sının](https://dotnet.microsoft.com/download/dotnet-core/3.1)en son sürümünü yükler. SDK 'Yı daha önce yüklediyseniz, bir komut kabuğu 'nda aşağıdaki komutu yürüterek yüklü sürümünüzü belirleyebilirsiniz:
+1. [.NET Core SDK](https://dotnet.microsoft.com/download)en son sürümünü yükler. SDK 'Yı daha önce yüklediyseniz, bir komut kabuğu 'nda aşağıdaki komutu yürüterek yüklü sürümünüzü belirleyebilirsiniz:
 
    ```dotnetcli
    dotnet --version
    ```
 
-1. En son [Visual Studio Code](https://code.visualstudio.com/)sürümünü yükler.
+1. En son [Visual Studio Code](https://code.visualstudio.com)sürümünü yükler.
 
 1. [Visual Studio Code uzantısı için](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)en son C# ' i yükler.
 
@@ -78,7 +78,7 @@ ASP.NET Core HTTPS geliştirme sertifikasını güvenme hakkında daha fazla bil
 
 1. `WebApplication1`Visual Studio Code klasörü açın.
 
-1. IDE, projeyi derlemek ve hatalarını ayıklamak için varlık eklemenizi ister. **Evet**’i seçin.
+1. IDE, projeyi derlemek ve hatalarını ayıklamak için varlık eklemenizi ister. **Evet** seçeneğini belirleyin.
 
 1. <kbd>Ctrl</kbd> + Uygulamayı çalıştırmak için CTRL<kbd>F5</kbd> tuşuna basın.
 
@@ -90,7 +90,7 @@ Linux 'ta sertifikaya güvenmenin merkezi bir yolu yoktur. Genellikle aşağıda
 * İçin otomatik olarak imzalanan tüm sertifikalara güvenin `localhost` .
 * Sertifikayı tarayıcıdaki güvenilen sertifikalar listesine ekleyin.
 
-Daha fazla bilgi için, tarayıcı ve Linux dağıtım tarafından sunulan kılavuza bakın.
+Daha fazla bilgi için, tarayıcı üreticiniz ve Linux dağıtım tarafından sunulan kılavuza bakın.
 
 ::: zone-end
 

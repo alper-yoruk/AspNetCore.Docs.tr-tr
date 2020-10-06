@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/options
-ms.openlocfilehash: a6af5a7b1b4bc066a563c7cac59274fd39594cf6
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 6eafad63bd4c49cee6a85108b37a8b61e1214bce
+ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632596"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91762340"
 ---
 # <a name="options-pattern-in-aspnet-core"></a>ASP.NET Core'da seçenek deseni
 
@@ -37,6 +37,8 @@ Seçenekler stili, ilişkili ayarlar gruplarına kesin olarak belirlenmiş eriş
 * [Kaygıları ayrımı](/dotnet/standard/modern-web-apps-azure-architecture/architectural-principles#separation-of-concerns): uygulamanın farklı bölümlerinin ayarları birbirlerine bağımlı değil veya birbirine bağlı değil.
 
 Seçenekler Ayrıca yapılandırma verilerini doğrulamaya yönelik bir mekanizma sağlar. Daha fazla bilgi için [Seçenekler doğrulama](#options-validation) bölümüne bakın.
+
+Bu konu, ASP.NET Core seçenekler düzeniyle ilgili bilgiler sağlar. Konsol uygulamalarında seçenekler deseninin kullanımı hakkında bilgi için bkz. [.net 'Teki seçenekler stili](/dotnet/core/extensions/options).
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/options/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 

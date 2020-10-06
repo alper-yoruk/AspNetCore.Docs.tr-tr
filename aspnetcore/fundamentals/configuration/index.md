@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: c6b77f20792c32a697fff8d1d78ef3c2536c5f8f
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 7565ede55acd936072fc1930918d46808548f287
+ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722903"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91762353"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core yapılandırma
 
@@ -41,6 +41,8 @@ ASP.NET Core yapılandırma bir veya daha fazla [yapılandırma sağlayıcısı]
 * Özel sağlayıcılar, yüklendi veya oluşturuldu
 * Dizin dosyaları
 * Bellek içi .NET nesneleri
+
+Bu konuda ASP.NET Core yapılandırma hakkında bilgi verilmektedir. Konsol uygulamalarında yapılandırmayı kullanma hakkında daha fazla bilgi için bkz. [.NET yapılandırması](/dotnet/core/extensions/configuration).
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
@@ -69,7 +71,7 @@ Aşağıdaki kod, etkin yapılandırma sağlayıcılarını eklendiği sırayla 
 
 [!code-csharp[](index/samples/3.x/ConfigSample/Pages/Index2.cshtml.cs?name=snippet)]
 
-### <a name="appsettingsjson"></a>Üzerinde appsettings.js
+### <a name="appsettingsjson"></a>appsettings.json
 
 Dosyasında aşağıdaki *appsettings.js* göz önünde bulundurun:
 
@@ -81,7 +83,7 @@ Dosyasında aşağıdaki *appsettings.js* göz önünde bulundurun:
 
 Varsayılan <xref:Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider> yapılandırma yapılandırması aşağıdaki sırayla yüklenir:
 
-1. * Üzerindeappsettings.js*
+1. *appsettings.json*
 1. *appSettings.* `Environment` *. JSON* : Örneğin, *appSettings*. ***Üretim***. *JSON* ve *appSettings*. ***Geliştirme***. *JSON* dosyaları. Dosyanın ortam sürümü, [ıhostingenvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*)temel alınarak yüklenir. Daha fazla bilgi için bkz. <xref:fundamentals/environments>.
 
 *appSettings*. `Environment` . *JSON* değerleri *appsettings.jsüzerindeki*anahtarları geçersiz kılar. Örneğin, varsayılan olarak:
@@ -320,7 +322,7 @@ Yapılandırma kaynakları, yapılandırma sağlayıcılarının belirtilme sır
 
 Yapılandırma sağlayıcılarının tipik bir sırası şunlardır:
 
-1. * Üzerindeappsettings.js*
+1. *appsettings.json*
 1. *appSettings*. `Environment` . *JSON*
 1. [Gizli dizi Yöneticisi](xref:security/app-secrets)
 1. Ortam [değişkenleri yapılandırma sağlayıcısını](#evcp)kullanarak ortam değişkenleri.
@@ -1052,7 +1054,7 @@ ASP.NET Core şablonlarına dayalı uygulamalar için, `AddCommandLine` tarafın
 1. Uygulama çalıştırıldıktan sonra, konumundaki uygulamaya bir tarayıcı açın `http://localhost:5000` .
 1. Çıktının ' de belirtilen yapılandırma komut satırı bağımsız değişkeni için anahtar-değer çiftini içerdiğini gözlemleyin `dotnet run` .
 
-### <a name="arguments"></a>Arguments
+### <a name="arguments"></a>Bağımsız değişkenler
 
 Değer bir eşittir işaretini ( `=` ) izlemelidir veya `--` `/` değer bir boşluk izleyen anahtar bir ön eke (ya da) sahip olmalıdır. Eşittir işareti kullanılırsa değer gerekli değildir (örneğin, `CommandLineKey=` ).
 
