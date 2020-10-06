@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/lifecycle
-ms.openlocfilehash: a43268acdb53bf811148fe795ef0434662ddb32f
-ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
+ms.openlocfilehash: 100007a5757c1a54333c57adf573bcb8cc4fdd85
+ms.sourcegitcommit: 652aefa1e0d570df42e8bca15ca43b2d250009f3
 ms.translationtype: MT
 ms.contentlocale: tr-TR
 ms.lasthandoff: 10/06/2020
-ms.locfileid: "91762233"
+ms.locfileid: "91764068"
 ---
 # <a name="aspnet-core-no-locblazor-lifecycle"></a>ASP.NET Core Blazor yaşam döngüsü
 
@@ -41,14 +41,14 @@ Bileşen yaşam döngüsü olayları:
    * Çağrısı yapın [`OnInitialized{Async}`](#component-initialization-methods) . Bir <xref:System.Threading.Tasks.Task> döndürülürse, geri <xref:System.Threading.Tasks.Task> beklemiştir ve bileşen işlenir. Bir <xref:System.Threading.Tasks.Task> döndürülmemişse, bileşeni işle.
 1. Çağrısı yapın [`OnParametersSet{Async}`](#after-parameters-are-set) . Bir <xref:System.Threading.Tasks.Task> döndürülürse, geri <xref:System.Threading.Tasks.Task> beklemiştir ve bileşen işlenir. Bir <xref:System.Threading.Tasks.Task> döndürülmemişse, bileşeni işle.
 
-![Bir::: No-Loc (Razor)::: bileşen::: No-Loc (Blazor)::: içinde bileşen yaşam döngüsü olayları](lifecycle/_static/lifecycle1.png)
+<img src="lifecycle/_static/lifecycle1.png" alt="Component lifecycle events of a Razor component in Blazor" data-linktype="relative-path" style="max-width:50%;display:block;margin:0 auto">
 
 Belge Nesne Modeli (DOM) olay işleme:
 
 1. Olay işleyicisi çalıştırıldı.
 1. Bir <xref:System.Threading.Tasks.Task> döndürülürse, geri <xref:System.Threading.Tasks.Task> beklemiştir ve bileşen işlenir. Bir <xref:System.Threading.Tasks.Task> döndürülürse, bileşen işlenir.
 
-![Belge Nesne Modeli (DOM) olay işleme](lifecycle/_static/lifecycle2.png)
+<img src="lifecycle/_static/lifecycle2.png" alt="Document Object Model (DOM) event processing" data-linktype="relative-path" style="max-width:50%;display:block;margin:0 auto">
 
 `Render`Yaşam döngüsü:
 
@@ -57,7 +57,7 @@ Belge Nesne Modeli (DOM) olay işleme:
 1. DOM 'ı güncelleştirmek için Await.
 1. Çağrısı yapın [`OnAfterRender{Async}`](#after-component-render) .
 
-![İşleme yaşam döngüsü](lifecycle/_static/lifecycle3.png)
+<img src="lifecycle/_static/lifecycle3.png" alt="Render lifecycle" data-linktype="relative-path" style="max-width:50%;display:block;margin:0 auto">
 
 Geliştirici [`StateHasChanged`](#state-changes) bir işleme yol açacak şekilde çağırır.
 
