@@ -918,18 +918,36 @@
         - name: ASP.NET Core Modülü
           displayName: 'deploy, publish'
           uid: host-and-deploy/aspnet-core-module
+        - name: Devam eden barındırma
+          displayName: 'deploy, publish'
+          uid: host-and-deploy/iis/in-process-hosting
+        - name: İşlem dışı barındırma
+          displayName: 'deploy, publish'
+          uid: host-and-deploy/iis/out-of-process-hosting
+        - name: Hosting Paketi
+          displayName: 'deploy, publish'
+          uid: host-and-deploy/iis/hosting-bundle
+        - name: web.config dosyası
+          displayName: 'deploy, publish'
+          uid: host-and-deploy/iis/web-config
         - name: Visual Studio'da IIS desteği
           displayName: 'deploy, publish'
           uid: host-and-deploy/iis/development-time-iis-support
         - name: IIS Modülleri
           displayName: 'deploy, publish'
           uid: host-and-deploy/iis/modules
+        - name: Günlüğe kaydetme ve tanılama
+          displayName: 'deploy, publish'
+          uid: host-and-deploy/iis/logging-and-diagnostics
         - name: Sorun giderme
           displayName: 'deploy, publish'
           uid: test/troubleshoot-azure-iis
         - name: Hata başvurusu
           displayName: 'deploy, publish'
           uid: host-and-deploy/azure-iis-errors-reference
+        - name: Gelişmiş
+          displayName: 'deploy, publish'
+          uid: host-and-deploy/iis/advanced
         - name: Web.config’i dönüştürme
           displayName: 'deploy, publish'
           uid: host-and-deploy/iis/transform-webconfig
