@@ -5,7 +5,7 @@ description: ASP.NET Core için desteklenen platformlar hakkında bilgi edinin B
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/19/2020
+ms.date: 10/01/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,43 +18,63 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/supported-platforms
-ms.openlocfilehash: 692ab63bb48dbfa29021d59cdf035e9549d3039c
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1ffe98636ed200adbf00e89c2c3499eb69792d3f
+ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625953"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91754547"
 ---
 # <a name="aspnet-core-no-locblazor-supported-platforms"></a>BlazorDesteklenen platformları ASP.NET Core
 
 [Luke Latham](https://github.com/guardrex) tarafından
 
-## <a name="browser-requirements"></a>Tarayıcı gereksinimleri
+::: moniker range=">= aspnetcore-5.0"
 
-### Blazor WebAssembly
+Blazor WebAssembly ve Blazor Server Aşağıdaki tabloda gösterilen tarayıcılarda desteklenir.
+
+| Tarayıcı                          | Sürüm         |
+| -------------------------------- | --------------- |
+| İOS dahil Apple Safari      | Geçerli&dagger; |
+| Android dahil Google Chrome | Geçerli&dagger; |
+| Microsoft Edge                   | Geçerli&dagger; |
+| Mozilla Firefox                  | Geçerli&dagger; |  
+
+&dagger;*Geçerli* , tarayıcının en son sürümünü ifade eder.  
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+## Blazor WebAssembly
 
 | Tarayıcı                          | Sürüm               |
-| -------------------------------- | :-------------------: |
-| Microsoft Edge                   | Geçerli               |
-| Mozilla Firefox                  | Geçerli               |
-| Android dahil Google Chrome | Geçerli               |
-| İOS dahil Safari            | Geçerli               |
-| Microsoft Internet Explorer      | Desteklenmiyor&dagger; |
+| -------------------------------- | --------------------- |
+| İOS dahil Apple Safari      | Geçerli&dagger;       |
+| Android dahil Google Chrome | Geçerli&dagger;       |
+| Microsoft Edge                   | Geçerli&dagger;       |
+| Microsoft Internet Explorer      | Desteklenmiyor&Dagger; |
+| Mozilla Firefox                  | Geçerli&dagger;       |  
 
-&dagger;Microsoft Internet Explorer [Webassembly](https://webassembly.org)'yi desteklemez.
+&dagger;*Geçerli* , tarayıcının en son sürümünü ifade eder.  
+&Dagger;Microsoft Internet Explorer [Webassembly](https://webassembly.org)'yi desteklemez.
 
-### Blazor Server
+## Blazor Server
 
-| Tarayıcı                          | Sürüm    |
-| -------------------------------- | :--------: |
-| Microsoft Edge                   | Geçerli    |
-| Mozilla Firefox                  | Geçerli    |
-| Android dahil Google Chrome | Geçerli    |
-| İOS dahil Safari            | Geçerli    |
-| Microsoft Internet Explorer      | üst&dagger; |
+| Tarayıcı                          | Sürüm         |
+| -------------------------------- | --------------- |
+| İOS dahil Apple Safari      | Geçerli&dagger; |
+| Android dahil Google Chrome | Geçerli&dagger; |
+| Microsoft Edge                   | Geçerli&dagger; |
+| Microsoft Internet Explorer      | üst&Dagger;      |
+| Mozilla Firefox                  | Geçerli&dagger; |
 
-&dagger;Ek polydolgular gereklidir (örneğin, bu, bir paket ile eklenebilir [`Polyfill.io`](https://polyfill.io/v3/) ).
+&dagger;*Geçerli* , tarayıcının en son sürümünü ifade eder.  
+&Dagger;Ek polydolgular gereklidir. Örneğin, bir paket aracılığıyla taahhüt eklenebilir [`Polyfill.io`](https://polyfill.io/v3/) .
+
+::: moniker-end
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * <xref:blazor/hosting-models>
+* <xref:signalr/supported-platforms>

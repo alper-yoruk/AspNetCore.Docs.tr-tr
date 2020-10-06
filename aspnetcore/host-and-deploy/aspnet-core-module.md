@@ -1,7 +1,7 @@
 ---
 title: ASP.NET Core Modülü
 author: rick-anderson
-description: ASP.NET Core uygulamalarını barındırmak için ASP.NET Core modülünü yapılandırmayı öğrenin.
+description: IIS ile ASP.NET Core uygulamalarını barındırmak için ASP.NET Core modülü hakkında bilgi edinin.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.custom: mvc
@@ -18,18 +18,39 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/aspnet-core-module
-ms.openlocfilehash: 9197f8509141b30dffcc2ccc11979f8853b37d39
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 8ee9ab2b598bc8ff62faa45a5666615ee7ab239b
+ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633142"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91754677"
 ---
 # <a name="aspnet-core-module"></a>ASP.NET Core Modülü
 
 , [Tom Dykstra](https://github.com/tdykstra), [Rick Strahl](https://github.com/RickStrahl), [Chris](https://github.com/Tratcher)No, [Rick Anderson](https://twitter.com/RickAndMSFT), [sourabh Shirhatti](https://twitter.com/sshirhatti)ve ka [kotalık](https://github.com/jkotalik)
 
-::: moniker range=">= aspnetcore-3.0"
+::: moniker range=">= aspnetcore-5.0"
+
+ASP.NET Core modülü, IIS işlem hattına takılan ve ASP.NET Core uygulamaların IIS ile çalışmasına izin veren yerel bir IIS modülüdür. ASP.NET Core uygulamalarını IIS ile birlikte çalıştırın: 
+
+* `w3wp.exe` [İşlem içi barındırma modeli](xref:host-and-deploy/iis/in-process-hosting)olarak adlandırılan IIS çalışan işleminin () içinde bir ASP.NET Core uygulaması barındırma.
+* Web isteklerini, [işlem dışı barındırma modeli](xref:host-and-deploy/iis/out-of-process-hosting)olarak adlandırılan Kestrel sunucusunu çalıştıran bir arka uç ASP.NET Core uygulamasına iletme.
+
+Barındırma modellerinin her biri arasında denge vardır. Varsayılan olarak, daha iyi performans ve tanılama nedeniyle işlem içi barındırma modeli kullanılır.
+
+## <a name="install-aspnet-core-module"></a>ASP.NET Core modülünü Install
+
+Aşağıdaki bağlantıyı kullanarak yükleyiciyi indirin:
+
+[Geçerli .NET Core barındırma paketi yükleyicisi (doğrudan indirme)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
+
+ASP.NET Core modülünü yükleme veya modülün farklı sürümlerini yükleme hakkında daha fazla bilgi için bkz. [.NET Core barındırma paketi yükleme](xref:host-and-deploy/iis/hosting-bundle).
+
+ASP.NET Core uygulamasını bir IIS sunucusuna yayımlamaya yönelik bir öğretici deneyimi için, bkz <xref:tutorials/publish-to-iis> ..
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
 ASP.NET Core modülü, IIS ardışık düzenine şu şekilde takılan yerel bir IIS modülüdür:
 
@@ -63,15 +84,15 @@ Uygulamalar, işlem içi barındırma modelinde varsayılan olarak ASP.NET Core.
 
 * Uygulama havuzunu uygulamalar arasında paylaşma desteklenmez. Uygulama başına bir uygulama havuzu kullanın.
 
-* [Web dağıtımı](/iis/publish/using-web-deploy/introduction-to-web-deploy) kullanırken veya dağıtıma el ile bir [app_offline.htm dosyası](xref:host-and-deploy/iis/index#locked-deployment-files)yerleştirilirken, açık bir bağlantı varsa uygulama hemen kapanmayabilir. Örneğin, bir WebSocket bağlantısı, uygulamanın kapatılmasını erteleyebilir.
+* [Web dağıtımı](/iis/publish/using-web-deploy/introduction-to-web-deploy) kullanırken veya dağıtıma el ile bir [ `app_offline.htm` Dosya](xref:host-and-deploy/iis/index#locked-deployment-files)yerleştirilirken, açık bir bağlantı varsa uygulama hemen kapanmayabilir. Örneğin, bir WebSocket bağlantısı, uygulamanın kapatılmasını erteleyebilir.
 
 * Uygulamanın mimarisi (bit genişliği) ve yüklü çalışma zamanının (x64 veya x86) uygulama havuzunun mimarisiyle eşleşmesi gerekir.
 
-* İstemci bağlantısı kesiliyor algılandı. İstemci bağlantısı kesildiğinde [HttpContext. RequestAborted](xref:Microsoft.AspNetCore.Http.HttpContext.RequestAborted*) iptal belirteci iptal edilir.
+* İstemci bağlantısı kesiliyor algılandı. [`HttpContext.RequestAborted`](xref:Microsoft.AspNetCore.Http.HttpContext.RequestAborted*)İstemci bağlantısı kesildiğinde iptal belirteci iptal edilir.
 
-* ASP.NET Core 2.2.1 veya önceki sürümlerde, <xref:System.IO.Directory.GetCurrentDirectory*> uygulamanın dizini yerıne IIS tarafından başlatılan işlemin çalışan dizinini döndürür (örneğin, *w3wp.exe*için *c:\Windows\System32\inetsrv* ).
+* ASP.NET Core 2.2.1 veya önceki sürümlerde, <xref:System.IO.Directory.GetCurrentDirectory*> uygulamanın dizini yerıne IIS tarafından başlatılan işlemin çalışan dizinini döndürür (örneğin, `C:\Windows\System32\inetsrv` için `w3wp.exe` ).
 
-  Uygulamanın geçerli dizinini ayarlayan örnek kod için bkz. [Currentdirectoryyardımcıları sınıfı](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/aspnet-core-module/samples_snapshot/3.x/CurrentDirectoryHelpers.cs). Yöntemini çağırın `SetCurrentDirectory` . <xref:System.IO.Directory.GetCurrentDirectory*>Uygulamanın dizinini sağlamak için sonraki çağrılar.
+  Uygulamanın geçerli dizinini ayarlayan örnek kod için, [ `CurrentDirectoryHelpers` sınıfına](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/aspnet-core-module/samples_snapshot/3.x/CurrentDirectoryHelpers.cs)bakın. Yöntemini çağırın `SetCurrentDirectory` . <xref:System.IO.Directory.GetCurrentDirectory*>Uygulamanın dizinini sağlamak için sonraki çağrılar.
 
 * İşlem içi barındırma sırasında, <xref:Microsoft.AspNetCore.Authentication.AuthenticationService.AuthenticateAsync*> bir kullanıcıyı başlatmak için dahili olarak çağrılmaz. Bu nedenle, <xref:Microsoft.AspNetCore.Authentication.IClaimsTransformation> her kimlik doğrulaması sonrasında talepleri dönüştürmek için kullanılan bir uygulama varsayılan olarak etkinleştirilmez. Talepleri bir <xref:Microsoft.AspNetCore.Authentication.IClaimsTransformation> uygulamayla dönüştürürken, <xref:Microsoft.Extensions.DependencyInjection.AuthenticationServiceCollectionExtensions.AddAuthentication*> kimlik doğrulama hizmetleri Ekle ' yi çağırın:
 
@@ -92,7 +113,7 @@ Uygulamalar, işlem içi barındırma modelinde varsayılan olarak ASP.NET Core.
 
 ### <a name="out-of-process-hosting-model"></a>İşlem dışı barındırma modeli
 
-Bir uygulamayı işlem dışı barındırmak üzere yapılandırmak için, `<AspNetCoreHostingModel>` özelliğinin değerini `OutOfProcess` Proje dosyasında (*. csproj*) olarak ayarlayın:
+Bir uygulamayı işlem dışı barındırmak üzere yapılandırmak için, `<AspNetCoreHostingModel>` özelliğinin değerini `OutOfProcess` Proje dosyasında () olarak ayarlayın `.csproj` :
 
 ```xml
 <PropertyGroup>
@@ -106,14 +127,14 @@ Değeri `<AspNetCoreHostingModel>` büyük/küçük harfe duyarlıdır `inproces
 
 IIS HTTP Server () yerine [Kestrel](xref:fundamentals/servers/kestrel) Server kullanılır `IISHttpServer` .
 
-İşlem dışı için [Createdefaultbuilder](xref:fundamentals/host/generic-host#default-builder-settings) aşağıdakileri <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*> öğesine çağırır:
+İşlem dışı için şunu [`CreateDefaultBuilder`](xref:fundamentals/host/generic-host#default-builder-settings) çağırır <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*> :
 
 * ASP.NET Core modülünün arkasında çalışırken sunucunun dinlemesi gereken bağlantı noktasını ve temel yolu yapılandırın.
 * Konağı, başlatma hatalarını yakalamak üzere yapılandırın.
 
 ### <a name="hosting-model-changes"></a>Barındırma modeli değişiklikleri
 
-Ayar, `hostingModel` *web.config* dosyasında değiştirilirse ( [web.configile yapılandırma ](#configuration-with-webconfig) bölümünde açıklanan), modül IIS için çalışan işlemini geri dönüştürür.
+`hostingModel`Ayar `web.config` dosyada değiştirilirse ( [ile `web.config` yapılandırma](#configuration-with-webconfig) bölümünde açıklanmıştır), modül IIS için çalışan işlemini geri dönüştürür.
 
 IIS Express için modül çalışan işlemini geri dönüştürmez, bunun yerine geçerli IIS Express işleminin düzgün bir şekilde kapatılmasını tetikler. Uygulamaya yönelik bir sonraki istek, yeni bir IIS Express işlem olarak çoğaltılır.
 
@@ -137,7 +158,7 @@ ASP.NET Core modülünün nasıl yükleneceğine ilişkin yönergeler için bkz.
 
 ASP.NET Core modülü, `aspNetCore` `system.webServer` sitenin *web.config* dosyasındaki düğümünün bölümüyle yapılandırılır.
 
-Aşağıdaki *web.config* dosyası [çerçeveye bağlı bir dağıtım](/dotnet/articles/core/deploying/#framework-dependent-deployments-fdd) Için yayımlanır ve ASP.NET Core modülünü site isteklerini işleyecek şekilde yapılandırır:
+Aşağıdaki `web.config` Dosya, [çerçeveye bağlı bir dağıtım](/dotnet/articles/core/deploying/#framework-dependent-deployments-fdd) için yayımlanır ve ASP.NET Core modülünü site isteklerini işleyecek şekilde yapılandırır:
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -176,9 +197,9 @@ Aşağıdaki *web.config* , [kendinden bağımsız bir dağıtım](/dotnet/artic
 </configuration>
 ```
 
-<xref:System.Configuration.SectionInformation.InheritInChildApplications*>Özelliği, `false` öğesi içinde belirtilen ayarların [\<location>](/iis/manage/managing-your-configuration-settings/understanding-iis-configuration-delegation#the-concept-of-location) uygulamanın bir alt dizininde bulunan uygulamalar tarafından devralınmadığını belirtmek için olarak ayarlanır.
+<xref:System.Configuration.SectionInformation.InheritInChildApplications*>Özelliği, `false` öğesi içinde belirtilen ayarların [`<location>`](/iis/manage/managing-your-configuration-settings/understanding-iis-configuration-delegation#the-concept-of-location) uygulamanın bir alt dizininde bulunan uygulamalar tarafından devralınmadığını belirtmek için olarak ayarlanır.
 
-Bir uygulama [Azure App Service](https://azure.microsoft.com/services/app-service/)dağıtıldığında, `stdoutLogFile` yol olarak ayarlanır `\\?\%home%\LogFiles\stdout` . Yol, stdout günlüklerini hizmet tarafından otomatik olarak oluşturulan bir konum olan *LogFiles* klasörüne kaydeder.
+Bir uygulama [Azure App Service](https://azure.microsoft.com/services/app-service/)dağıtıldığında, `stdoutLogFile` yol olarak ayarlanır `\\?\%home%\LogFiles\stdout` . Yol, stdout günlüklerini `LogFiles` , hizmet tarafından otomatik olarak oluşturulan bir konum olan klasöre kaydeder.
 
 IIS alt uygulama yapılandırması hakkında bilgi için bkz <xref:host-and-deploy/iis/index#sub-applications> ..
 
@@ -188,7 +209,7 @@ IIS alt uygulama yapılandırması hakkında bilgi için bkz <xref:host-and-depl
 | --------- | ----------- | :-----: |
 | `arguments` | <p>İsteğe bağlı dize özniteliği.</p><p>**ProcessPath**içinde belirtilen yürütülebilir dosya için bağımsız değişkenler.</p> | |
 | `disableStartUpErrorPage` | <p>İsteğe bağlı Boolean özniteliği.</p><p>Doğru ise, **502,5-Işlem hatası** sayfası bastırılır ve *web.config* yapılandırılan 502 durum kodu sayfası önceliklidir.</p> | `false` |
-| `forwardWindowsAuthToken` | <p>İsteğe bağlı Boolean özniteliği.</p><p>True ise belirteç, istek başına ' MS-ASPNETCORE-WıNAUTHTOKEN ' üst bilgisi olarak% ASPNETCORE_PORT% üzerinde dinleme yapan alt işleme iletilir. Bu, istek başına bu belirteçte CloseHandle çağırma işleminin sorumluluğundadır.</p> | `true` |
+| `forwardWindowsAuthToken` | <p>İsteğe bağlı Boolean özniteliği.</p><p>True ise, belirteç `%ASPNETCORE_PORT%` istek başına üst bilgi olarak dinleyen alt işleme iletilir `'MS-ASPNETCORE-WINAUTHTOKEN'` . Bu, istek başına bu belirteçte CloseHandle çağırma işleminin sorumluluğundadır.</p> | `true` |
 | `hostingModel` | <p>İsteğe bağlı dize özniteliği.</p><p>Barındırma modelini işlem içi ( `InProcess` / `inprocess` ) veya işlem dışı () olarak belirtir `OutOfProcess` / `outofprocess` .</p> | `InProcess`<br>`inprocess` |
 | `processesPerApplication` | <p>İsteğe bağlı tamsayı özniteliği.</p><p>**ProcessPath** ayarında belirtilen işlemin örnek sayısını, uygulama başına bir şekilde işleyecek şekilde belirtir.</p><p>&dagger;İşlem içi barındırma için, değer ile sınırlıdır `1` .</p><p>Ayar `processesPerApplication` önerilmez. Bu öznitelik gelecek bir sürümde kaldırılacak.</p> | Varsayılanını `1`<br>Min `1`<br>Biçimlendir `100`&dagger; |
 | `processPath` | <p>Gerekli dize özniteliği.</p><p>HTTP isteklerini dinleyen bir işlemi başlatan yürütülebilir dosyanın yolu. Göreli yollar desteklenir. Yol ile başlıyorsa `.` , yol site köküne göreli olarak kabul edilir.</p> | |
@@ -197,13 +218,13 @@ IIS alt uygulama yapılandırması hakkında bilgi için bkz <xref:host-and-depl
 | `shutdownTimeLimit` | <p>İsteğe bağlı tamsayı özniteliği.</p><p>*app_offline.htm* dosyası algılandığında, modülün yürütülebilir dosyanın düzgün şekilde kapatılmasını beklediği saniye cinsinden süre.</p> | Varsayılanını `10`<br>Min `0`<br>Biçimlendir `600` |
 | `startupTimeLimit` | <p>İsteğe bağlı tamsayı özniteliği.</p><p>Modülün, bağlantı noktasında dinleme yapan bir işlemin başlamasını bekleyeceği saniye cinsinden süre. Bu süre sınırı aşılırsa, modül işlemi bu işlemden sonra da bir kez gider.</p><p>*İşlem içi*barındırma sırasında: **işlem yeniden başlatılmaz** ve **rapidFailsPerMinute** ayarını **kullanmaz.**</p><p>*İşlem dışı*barındırma sırasında, modül yeni bir istek aldığında işlemi yeniden başlatmayı dener ve uygulamanın son geçen dakikada **rapidFailsPerMinute** sayısını başlatamadıkça sonraki gelen isteklerde işlemi yeniden başlatmayı dener.</p><p>0 (sıfır) değeri sonsuz bir zaman aşımı olarak kabul **edilmez** .</p> | Varsayılanını `120`<br>Min `0`<br>Biçimlendir `3600` |
 | `stdoutLogEnabled` | <p>İsteğe bağlı Boolean özniteliği.</p><p>True ise, **processPath** içinde belirtilen işlem için **stdout** ve **stderr** , **stdoutLogFile**içinde belirtilen dosyaya yeniden yönlendirilir.</p> | `false` |
-| `stdoutLogFile` | <p>İsteğe bağlı dize özniteliği.</p><p>**ProcessPath** içinde belirtilen işlemden **stdout** ve **stderr** 'in günlüğe kaydedildiği göreli veya mutlak dosya yolunu belirtir. Göreli yollar, sitenin köküne göredir. İle başlayan tüm `.` yollar, site köküne göredir ve diğer tüm yollar mutlak yollar olarak değerlendirilir. Yolda sunulan klasörler, günlük dosyası oluşturulduğunda modül tarafından oluşturulur. Alt çizgi sınırlayıcılarını kullanma, bir zaman damgası, işlem KIMLIĞI ve dosya uzantısı (*. log*) **stdoutLogFile** yolunun son kesimine eklenir. `.\logs\stdout`Değer olarak sağlandıysa, bir 2/5/2018 işlem 1934 kimliği ile 19:41:32 ' de ' de kaydedildiğinde günlük *logs* dosyasında bir örnek stdout günlüğü *stdout_20180205194132_1934* kaydedilir.</p> | `aspnetcore-stdout` |
+| `stdoutLogFile` | <p>İsteğe bağlı dize özniteliği.</p><p>**ProcessPath** içinde belirtilen işlemden **stdout** ve **stderr** 'in günlüğe kaydedildiği göreli veya mutlak dosya yolunu belirtir. Göreli yollar, sitenin köküne göredir. İle başlayan tüm `.` yollar, site köküne göredir ve diğer tüm yollar mutlak yollar olarak değerlendirilir. Yolda sunulan klasörler, günlük dosyası oluşturulduğunda modül tarafından oluşturulur. Alt çizgi sınırlayıcılarını kullanma, zaman damgası, işlem KIMLIĞI ve dosya uzantısı ( `.log` ), **stdoutLogFile** yolunun son kesimine eklenir. `.\logs\stdout`Değer olarak sağlandıysa, `stdout_20180205194132_1934.log` `logs` 2/5/2018 işlem 1934 kimliği ile 19:41:32 ' de kaydedildiğinde, bir örnek stdout günlüğü klasöre kaydedilir.</p> | `aspnetcore-stdout` |
 
 ### <a name="set-environment-variables"></a>Ortam değişkenlerini belirleme
 
 Özniteliği içindeki işlem için ortam değişkenleri belirtilebilir `processPath` . `<environmentVariable>`Bir koleksiyon öğesinin alt öğesi ile bir ortam değişkeni belirtin `<environmentVariables>` . Bu bölümde ayarlanan ortam değişkenleri, sistem ortamı değişkenlerine göre önceliklidir.
 
-Aşağıdaki örnek *web.config*iki ortam değişkenini ayarlar. `ASPNETCORE_ENVIRONMENT` uygulamanın ortamını olarak yapılandırır `Development` . Bir geliştirici, uygulama özel durumunda hata ayıklarken [Geliştirici özel durum sayfasını](xref:fundamentals/error-handling) yüklemeye zorlamak için bu değeri geçici olarak *web.config* dosyasında ayarlayabilir. `CONFIG_DIR` , geliştiricinin, uygulamanın yapılandırma dosyasını yüklemek için bir yol oluşturmak üzere başlangıçta değeri okuyan kodu yazdığı, Kullanıcı tanımlı ortam değişkenine bir örnektir.
+Aşağıdaki örnek ' de iki ortam değişkenini ayarlar `web.config` . `ASPNETCORE_ENVIRONMENT` uygulamanın ortamını olarak yapılandırır `Development` . Bir geliştirici `web.config` , uygulama özel durumunda hata ayıklarken [Geliştirici özel durum sayfasını](xref:fundamentals/error-handling) yüklemeye zorlamak için dosyada bu değeri geçici olarak ayarlayabilir. `CONFIG_DIR` , geliştiricinin, uygulamanın yapılandırma dosyasını yüklemek için bir yol oluşturmak üzere başlangıçta değeri okuyan kodu yazdığı, Kullanıcı tanımlı ortam değişkenine bir örnektir.
 
 ```xml
 <aspNetCore processPath="dotnet"
@@ -219,7 +240,7 @@ Aşağıdaki örnek *web.config*iki ortam değişkenini ayarlar. `ASPNETCORE_ENV
 ```
 
 > [!NOTE]
-> Ortamı doğrudan *web.config* olarak ayarlamanın alternatifi, `<EnvironmentName>` özelliği [Publish profile (. pubxml)](xref:host-and-deploy/visual-studio-publish-profiles) veya proje dosyasına dahil kullanmaktır. Bu yaklaşım, proje yayımlandığında *web.config* ortamı ayarlar:
+> Ortamın doğrudan ' de ayarlanmasına alternatif olarak `web.config` , `<EnvironmentName>` [Yayımlama profili ( `.pubxml` )](xref:host-and-deploy/visual-studio-publish-profiles) veya proje dosyasına özelliği dahil edilir. Bu yaklaşım, proje yayımlandığında içindeki ortamı ayarlar `web.config` :
 >
 > ```xml
 > <PropertyGroup>
@@ -230,11 +251,11 @@ Aşağıdaki örnek *web.config*iki ortam değişkenini ayarlar. `ASPNETCORE_ENV
 > [!WARNING]
 > `ASPNETCORE_ENVIRONMENT`Ortam değişkenini yalnızca, `Development` Internet gibi güvenilmeyen ağlarla erişilebilen hazırlama ve test etme sunucularında olarak ayarlayın.
 
-## <a name="app_offlinehtm"></a>app_offline.htm
+## `app_offline.htm`
 
-Bir uygulamanın kök dizininde *app_offline.htm* adında bir dosya algılanırsa, ASP.NET Core modülü uygulamayı düzgün bir şekilde kapatmaya ve gelen istekleri işlemeyi durdurmaya çalışır. Uygulama, içinde tanımlanan saniye sayısından sonra hala çalışıyorsa `shutdownTimeLimit` , ASP.NET Core modülü çalışan işlemi de yok eder.
+Uygulamanın kök dizininde ada sahip bir dosya `app_offline.htm` algılanırsa, ASP.NET Core modülü uygulamayı düzgün bir şekilde kapatmaya çalışır ve gelen istekleri işlemeyi durdurur. Uygulama, içinde tanımlanan saniye sayısından sonra hala çalışıyorsa `shutdownTimeLimit` , ASP.NET Core modülü çalışan işlemi de yok eder.
 
-*app_offline.htm* dosyası mevcut olsa da, ASP.NET Core modülü *app_offline.htm* dosyanın içeriğini geri göndererek isteklere yanıt verir. *app_offline.htm* dosyası kaldırıldığında, sonraki istek uygulamayı başlatır.
+`app_offline.htm`Dosya mevcut olsa da, ASP.NET Core modülü dosya içeriğini geri göndererek isteklere yanıt verir `app_offline.htm` . `app_offline.htm`Dosya kaldırıldığında, sonraki istek uygulamayı başlatır.
 
 İşlem dışı barındırma modeli kullanılırken, açık bir bağlantı varsa uygulama hemen kapanmayabilir. Örneğin, bir WebSocket bağlantısı, uygulamanın kapatılmasını erteleyebilir.
 
@@ -248,7 +269,7 @@ ASP.NET Core modülü uygulamayı başlatamadığında işlem içi barındırma 
 
 ASP.NET Core modülü arka uç işlemini başlatamadığında veya arka uç işlemi başlatılırsa ancak yapılandırılmış bağlantı noktasında dinleyemediğinde, işlem dışı barındırma için *502,5-Işlem hatası* durum kodu sayfası görüntülenir.
 
-Bu sayfayı bastırın ve varsayılan IIS 5xx durum kodu sayfasına dönmek için `disableStartUpErrorPage` özniteliğini kullanın. Özel hata iletilerini yapılandırma hakkında daha fazla bilgi için bkz. [http \<httpErrors> hataları ](/iis/configuration/system.webServer/httpErrors/).
+Bu sayfayı bastırın ve varsayılan IIS 5xx durum kodu sayfasına dönmek için `disableStartUpErrorPage` özniteliğini kullanın. Özel hata iletilerini yapılandırma hakkında daha fazla bilgi için bkz. [http `<httpErrors>` hataları ](/iis/configuration/system.webServer/httpErrors/).
 
 ## <a name="log-creation-and-redirection"></a>Günlük oluşturma ve yeniden yönlendirme
 
@@ -260,7 +281,7 @@ Stdout günlüğünün kullanılması yalnızca IIS 'de barındırırken veya [V
 
 Genel uygulama günlüğü amaçları için stdout günlüğünü kullanmayın. ASP.NET Core uygulamasında rutin günlük kaydı için, günlük dosyası boyutunu sınırlayan ve günlükleri döndüren bir günlüğe kaydetme kitaplığı kullanın. Daha fazla bilgi için bkz. [üçüncü taraf günlüğü sağlayıcıları](xref:fundamentals/logging/index#third-party-logging-providers).
 
-Günlük dosyası oluşturulduğunda zaman damgası ve dosya uzantısı otomatik olarak eklenir. Günlük dosyası adı, alt *.log* `stdoutLogFile` çizgi ile ayrılmış yolun (genellikle *stdout*) son KESIMINE zaman damgası, işlem kimliği ve dosya uzantısı (. log) eklenerek oluşur. `stdoutLogFile`Yol *stdout*ile sonlanıyorsa, 1934 ' de 19:42:32 2/5/2018 ' de oluşturulan PID 'sine sahip bir uygulama için günlük *stdout_20180205194132_1934*dosya adı vardır.
+Günlük dosyası oluşturulduğunda zaman damgası ve dosya uzantısı otomatik olarak eklenir. Günlük dosyası adı, zaman damgası, işlem KIMLIĞI ve dosya uzantısı ( `.log` ), yolun son kesimine `stdoutLogFile` (genellikle `stdout` ) alt çizgi ile ayrılmış olarak eklenerek oluşur. `stdoutLogFile`Yol ile sonlanıyorsa `stdout` , 1934 ' de 19:42:32 2/5/2018 ' de oluşturulan bir uygulama için günlük kaydı dosya adına sahiptir `stdout_20180205194132_1934.log` .
 
 `stdoutLogEnabled`Yanlış ise, uygulama başlangıcında oluşan hatalar yakalanır ve 30 KB 'a kadar olay günlüğüne yayınlanır. Başlangıçtan sonra tüm ek Günlükler atılır.
 
@@ -283,7 +304,7 @@ Yol biçimleri hakkında daha fazla bilgi için bkz. [Windows sistemlerinde dosy
 
 ## <a name="enhanced-diagnostic-logs"></a>Gelişmiş tanılama günlükleri
 
-ASP.NET Core modülü, gelişmiş tanılama günlükleri sağlamak için yapılandırılabilir. `<handlerSettings>`Öğesini `<aspNetCore>` *web.config*öğesine ekleyin. İçin ayarı `debugLevel` , `TRACE` Tanılama bilgilerini daha yüksek bir şekilde kullanıma sunar:
+ASP.NET Core modülü, gelişmiş tanılama günlükleri sağlamak için yapılandırılabilir. `<handlerSettings>`Öğesini `<aspNetCore>` içindeki öğesine ekleyin `web.config` . İçin ayarı `debugLevel` , `TRACE` Tanılama bilgilerini daha yüksek bir şekilde kullanıma sunar:
 
 ```xml
 <aspNetCore processPath="dotnet"
@@ -298,7 +319,7 @@ ASP.NET Core modülü, gelişmiş tanılama günlükleri sağlamak için yapıla
 </aspNetCore>
 ```
 
-Yoldaki tüm klasörler (önceki örnekteki*Günlükler* ), günlük dosyası oluşturulduğunda modül tarafından oluşturulur. Uygulama havuzunun, günlüklerin yazıldığı konuma yazma erişimi olması gerekir ( `IIS AppPool\<app_pool_name>` yazma izni sağlamak için kullanın).
+Yoldaki tüm klasörler ( `logs` Önceki örnekte), günlük dosyası oluşturulduğunda modül tarafından oluşturulur. Uygulama havuzunun, günlüklerin yazıldığı konuma yazma erişimi olması gerekir (Bu `IIS AppPool\{APP POOL NAME}` , yer tutucunun, `{APP POOL NAME}` yazma izni sağlamak için uygulama havuzu adı olduğu yerdir).
 
 Hata ayıklama düzeyi ( `debugLevel` ) değerleri hem düzeyi hem de konumu içerebilir.
 
@@ -317,19 +338,19 @@ Konumlar (birden çok konuma izin verilir):
 
 İşleyici ayarları, ortam değişkenleri aracılığıyla da kullanılabilir:
 
-* `ASPNETCORE_MODULE_DEBUG_FILE`: Hata ayıklama günlük dosyasının yolu. (Varsayılan: *aspnetcore-Debug. log*)
+* `ASPNETCORE_MODULE_DEBUG_FILE`: Hata ayıklama günlük dosyasının yolu. (Varsayılan: `aspnetcore-debug.log` )
 * `ASPNETCORE_MODULE_DEBUG`: Hata ayıklama düzeyi ayarı.
 
 > [!WARNING]
 > Bir sorunu gidermek için dağıtımda hata ayıklama günlüğü 'nün gerekenden uzun süre **etkin bırakmayın.** Günlüğün boyutu sınırlı değil. Hata ayıklama günlüğünün etkin bırakılması, kullanılabilir disk alanını tüketebilir ve sunucu veya App Service 'i kilitlemez.
 
-web.configdosyasındaki öğenin bir örneği için [web.configyapılandırma](#configuration-with-webconfig) konusuna bakın `aspNetCore` . *web.config*
+Dosyadaki öğenin bir örneği için [web.configyapılandırma ](#configuration-with-webconfig) konusuna bakın `aspNetCore` `web.config` .
 
 ## <a name="modify-the-stack-size"></a>Yığın boyutunu değiştirme
 
 *Yalnızca işlem içi barındırma modeli kullanılırken geçerlidir.*
 
-Yönetilen yığın boyutunu `stackSize` *web.config*bayt cinsinden ayarla ayarını kullanarak yapılandırın. Varsayılan boyut bayt 'tır `1048576` (1 MB).
+Yönetilen yığın boyutunu `stackSize` içindeki bayt cinsinden ayarını kullanarak yapılandırın `web.config` . Varsayılan boyut 1.048.576 bayttır (1 MB).
 
 ```xml
 <aspNetCore processPath="dotnet"
@@ -353,7 +374,7 @@ Eşleştirme belirteci, Kestrel tarafından alınan isteklerin IIS tarafından p
 
 ## <a name="aspnet-core-module-with-an-iis-shared-configuration"></a>IIS paylaşılan yapılandırmasıyla ASP.NET Core modülü
 
-ASP.NET Core modülü yükleyicisi, **TrustedInstaller** hesabının ayrıcalıklarıyla çalışır. Yerel sistem hesabı, IIS paylaşılan Yapılandırması tarafından kullanılan paylaşım yolu için değiştirme iznine sahip olmadığından, yükleyici paylaşımdaki *applicationHost.config* dosyasında modül ayarlarını yapılandırmaya çalışırken bir erişim reddedildi hatası atar.
+ASP.NET Core modülü yükleyicisi, **TrustedInstaller** hesabının ayrıcalıklarıyla çalışır. Yerel sistem hesabı, IIS paylaşılan Yapılandırması tarafından kullanılan paylaşım yolu için değiştirme iznine sahip olmadığından, yükleyici paylaşımdaki dosyadaki modül ayarlarını yapılandırmaya çalışırken bir erişim reddedildi hatası atar `applicationHost.config` .
 
 IIS yüklemesiyle aynı makinede bir IIS paylaşılan yapılandırması kullanırken, şu şekilde ayarlanan parametre ile birlikte ASP.NET Core barındırma paketi yükleyicisini çalıştırın `OPT_NO_SHARED_CONFIG_CHECK` `1` :
 
@@ -365,19 +386,19 @@ Paylaşılan yapılandırmanın yolu IIS yüklemesiyle aynı makinede olmadığ�
 
 1. IIS paylaşılan yapılandırmasını devre dışı bırakın.
 1. Yükleyiciyi çalıştırın.
-1. Güncelleştirilmiş *applicationHost.config* dosyasını paylaşıma dışarı aktarın.
+1. Güncelleştirilmiş `applicationHost.config` dosyayı paylaşıma dışarı aktarın.
 1. IIS paylaşılan yapılandırmasını yeniden etkinleştirin.
 
 ## <a name="module-version-and-hosting-bundle-installer-logs"></a>Modül sürümü ve barındırma paketi yükleyici günlükleri
 
 Yüklü ASP.NET Core modülünün sürümünü öğrenmek için:
 
-1. Barındırma sisteminde *%windir%\system32\inetsrv dizinine*gidin.
-1. *aspnetcore.dll* dosyasını bulun.
+1. Barındırma sisteminde öğesine gidin `%windir%\System32\inetsrv` .
+1. Dosyayı bulun `aspnetcore.dll` .
 1. Dosyaya sağ tıklayın ve bağlam menüsünden **Özellikler** ' i seçin.
 1. **Ayrıntılar** sekmesini seçin. **Dosya sürümü** ve **ürün sürümü** , modülün yüklü sürümünü temsil eder.
 
-Modülün barındırma paketi yükleyici günlükleri *C: \\ Users \\ % UserName% \\ AppData \\ Local \\ Temp*konumunda bulunur. Dosya *dd_DotNetCoreWinSvrHosting__ \<timestamp> _000_AspNetCoreModule_x64. log*olarak adlandırılmıştır.
+Modülün barındırma paketi yükleyici günlükleri konumunda bulunur `C:\Users\%UserName%\AppData\Local\Temp` . Dosya adı `dd_DotNetCoreWinSvrHosting__{TIMESTAMP}_000_AspNetCoreModule_x64.log` .
 
 ## <a name="module-schema-and-configuration-file-locations"></a>Modül, şema ve yapılandırma dosyası konumları
 
@@ -385,51 +406,51 @@ Modülün barındırma paketi yükleyici günlükleri *C: \\ Users \\ % UserName
 
 **IIS (X86/AMD64):**
 
-* % windir% \System32\inetsrv\aspnetcore.dll
+* `%windir%\System32\inetsrv\aspnetcore.dll`
 
-* % windir% \SysWOW64\inetsrv\aspnetcore.dll
+* `%windir%\SysWOW64\inetsrv\aspnetcore.dll`
 
-* %ProgramFiles%\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll
+* `%ProgramFiles%\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll`
 
-* % ProgramFiles (x86)% \ ııs\ ASP.NET Core Module\V2\aspnetcorev2.dll
+* `%ProgramFiles(x86)%\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll`
 
 **IIS Express (X86/AMD64):**
 
-* %ProgramFiles%\IIS Express\aspnetcore.dll
+* `%ProgramFiles%\IIS Express\aspnetcore.dll`
 
-* % ProgramFiles (x86)% \ IIS Express\aspnetcore.dll
+* `%ProgramFiles(x86)%\IIS Express\aspnetcore.dll`
 
-* %ProgramFiles%\IIS Express\Asp.Net Core Module\V2\aspnetcorev2.dll
+* `%ProgramFiles%\IIS Express\Asp.Net Core Module\V2\aspnetcorev2.dll`
 
-* % ProgramFiles (x86)% \ IIS Express\Asp.Net Core Module\V2\aspnetcorev2.dll
+* `%ProgramFiles(x86)%\IIS Express\Asp.Net Core Module\V2\aspnetcorev2.dll`
 
 ### <a name="schema"></a>Şema
 
 **IIS**
 
-* % windir% \System32\inetsrv\config\schema\aspnetcore_schema.xml
+* `%windir%\System32\inetsrv\config\schema\aspnetcore_schema.xml`
 
-* % windir% \System32\inetsrv\config\schema\aspnetcore_schema_v2.xml
+* `%windir%\System32\inetsrv\config\schema\aspnetcore_schema_v2.xml`
 
 **IIS Express**
 
-* %ProgramFiles%\IIS Express\config\schema\aspnetcore_schema.xml
+* `%ProgramFiles%\IIS Express\config\schema\aspnetcore_schema.xml`
 
-* %ProgramFiles%\IIS Express\config\schema\aspnetcore_schema_v2.xml
+* `%ProgramFiles%\IIS Express\config\schema\aspnetcore_schema_v2.xml`
 
 ### <a name="configuration"></a>Yapılandırma
 
 **IIS**
 
-* % windir% \System32\inetsrv\config\applicationHost.config
+* `%windir%\System32\inetsrv\config\applicationHost.config`
 
 **IIS Express**
 
-* Visual Studio: {APPLICATION ROOT} \\.vs\config\applicationHost.config
+* Visual Studio: `{APPLICATION ROOT}\.vs\config\applicationHost.config`
 
-* *iisexpress.exe* CLı:% USERPROFILE% \Documents\IISExpress\config\applicationhost.config
+* *iisexpress.exe* CLı `%USERPROFILE%\Documents\IISExpress\config\applicationhost.config`
 
-Dosyalar, *applicationHost.config* dosyasında *aspnetcore* ' u arayarak bulunabilir.
+Dosyalar dosyada arayarak bulunabilir `aspnetcore` `applicationHost.config` .
 
 ::: moniker-end
 
@@ -601,24 +622,24 @@ IIS alt uygulama yapılandırması hakkında bilgi için bkz <xref:host-and-depl
 
 | Öznitelik | Açıklama | Varsayılan |
 | --------- | ----------- | :-----: |
-| `arguments` | <p>İsteğe bağlı dize özniteliği.</p><p>**ProcessPath**içinde belirtilen yürütülebilir dosya için bağımsız değişkenler.</p> | |
+| `arguments` | <p>İsteğe bağlı dize özniteliği.</p><p>İçinde belirtilen yürütülebilirin bağımsız değişkenleri `processPath` .</p> | |
 | `disableStartUpErrorPage` | <p>İsteğe bağlı Boolean özniteliği.</p><p>Doğru ise, **502,5-Işlem hatası** sayfası bastırılır ve *web.config* yapılandırılan 502 durum kodu sayfası önceliklidir.</p> | `false` |
 | `forwardWindowsAuthToken` | <p>İsteğe bağlı Boolean özniteliği.</p><p>True ise belirteç, istek başına ' MS-ASPNETCORE-WıNAUTHTOKEN ' üst bilgisi olarak% ASPNETCORE_PORT% üzerinde dinleme yapan alt işleme iletilir. Bu, istek başına bu belirteçte CloseHandle çağırma işleminin sorumluluğundadır.</p> | `true` |
 | `hostingModel` | <p>İsteğe bağlı dize özniteliği.</p><p>Barındırma modelini işlem içi ( `InProcess` / `inprocess` ) veya işlem dışı () olarak belirtir `OutOfProcess` / `outofprocess` .</p> | `OutOfProcess`<br>`outofprocess` |
-| `processesPerApplication` | <p>İsteğe bağlı tamsayı özniteliği.</p><p>**ProcessPath** ayarında belirtilen işlemin örnek sayısını, uygulama başına bir şekilde işleyecek şekilde belirtir.</p><p>&dagger;İşlem içi barındırma için, değer ile sınırlıdır `1` .</p><p>Ayar `processesPerApplication` önerilmez. Bu öznitelik gelecek bir sürümde kaldırılacak.</p> | Varsayılanını `1`<br>Min `1`<br>Biçimlendir `100`&dagger; |
+| `processesPerApplication` | <p>İsteğe bağlı tamsayı özniteliği.</p><p>Ayarda belirtilen işlemin örnek sayısını belirtir `processPath` . Bu ayar, uygulama başına bir işlem yapılabilir.</p><p>&dagger;İşlem içi barındırma için, değer ile sınırlıdır `1` .</p><p>Ayar `processesPerApplication` önerilmez. Bu öznitelik gelecek bir sürümde kaldırılacak.</p> | Varsayılanını `1`<br>Min `1`<br>Biçimlendir `100`&dagger; |
 | `processPath` | <p>Gerekli dize özniteliği.</p><p>HTTP isteklerini dinleyen bir işlemi başlatan yürütülebilir dosyanın yolu. Göreli yollar desteklenir. Yol ile başlıyorsa `.` , yol site köküne göreli olarak kabul edilir.</p> | |
-| `rapidFailsPerMinute` | <p>İsteğe bağlı tamsayı özniteliği.</p><p>**ProcessPath** içinde belirtilen işleme dakika başına kilitlenme için izin verilen sayıyı belirtir. Bu sınır aşılırsa modül, dakika geri kalanı için işlemi başlatmayı durduruyor.</p><p>İşlem içi barındırma ile desteklenmez.</p> | Varsayılanını `10`<br>Min `0`<br>Biçimlendir `100` |
+| `rapidFailsPerMinute` | <p>İsteğe bağlı tamsayı özniteliği.</p><p>İçinde belirtilen işlemin `processPath` dakika başına kilitlenme için izin verileceğini belirtir. Bu sınır aşılırsa modül, dakika geri kalanı için işlemi başlatmayı durduruyor.</p><p>İşlem içi barındırma ile desteklenmez.</p> | Varsayılanını `10`<br>Min `0`<br>Biçimlendir `100` |
 | `requestTimeout` | <p>İsteğe bağlı TimeSpan özniteliği.</p><p>ASP.NET Core modülünün% ASPNETCORE_PORT% üzerinde dinleme işleminden yanıt beklediği süreyi belirtir.</p><p>ASP.NET Core 2,1 veya üzeri sürümü ile birlikte gelen ASP.NET Core modülünün sürümlerinde, `requestTimeout` saat, dakika ve saniye cinsinden belirtilir.</p><p>İşlem içi barındırma için uygulanmaz. İşlem içi barındırma için modül, uygulamanın isteği işlemesini bekler.</p><p>Dizenin dakika ve saniye kesimleri için geçerli değerler 0-59 aralığındadır. Dakika veya saniye değerindeki **60** kullanımı, *500-iç sunucu hatasına*neden olur.</p> | Varsayılanını `00:02:00`<br>Min `00:00:00`<br>Biçimlendir `360:00:00` |
-| `shutdownTimeLimit` | <p>İsteğe bağlı tamsayı özniteliği.</p><p>*app_offline.htm* dosyası algılandığında, modülün yürütülebilir dosyanın düzgün şekilde kapatılmasını beklediği saniye cinsinden süre.</p> | Varsayılanını `10`<br>Min `0`<br>Biçimlendir `600` |
-| `startupTimeLimit` | <p>İsteğe bağlı tamsayı özniteliği.</p><p>Modülün, bağlantı noktasında dinleme yapan bir işlemin başlamasını bekleyeceği saniye cinsinden süre. Bu süre sınırı aşılırsa, modül işlemi bu işlemden sonra da bir kez gider.</p><p>*İşlem içi*barındırma sırasında: **işlem yeniden başlatılmaz** ve **rapidFailsPerMinute** ayarını **kullanmaz.**</p><p>*İşlem dışı*barındırma sırasında, modül yeni bir istek aldığında işlemi yeniden başlatmayı dener ve uygulamanın son geçen dakikada **rapidFailsPerMinute** sayısını başlatamadıkça sonraki gelen isteklerde işlemi yeniden başlatmayı dener.</p><p>0 (sıfır) değeri sonsuz bir zaman aşımı olarak kabul **edilmez** .</p> | Varsayılanını `120`<br>Min `0`<br>Biçimlendir `3600` |
-| `stdoutLogEnabled` | <p>İsteğe bağlı Boolean özniteliği.</p><p>True ise, **processPath** içinde belirtilen işlem için **stdout** ve **stderr** , **stdoutLogFile**içinde belirtilen dosyaya yeniden yönlendirilir.</p> | `false` |
-| `stdoutLogFile` | <p>İsteğe bağlı dize özniteliği.</p><p>**ProcessPath** içinde belirtilen işlemden **stdout** ve **stderr** 'in günlüğe kaydedildiği göreli veya mutlak dosya yolunu belirtir. Göreli yollar, sitenin köküne göredir. İle başlayan tüm `.` yollar, site köküne göredir ve diğer tüm yollar mutlak yollar olarak değerlendirilir. Yolda sunulan klasörler, günlük dosyası oluşturulduğunda modül tarafından oluşturulur. Alt çizgi sınırlayıcılarını kullanma, bir zaman damgası, işlem KIMLIĞI ve dosya uzantısı (*. log*) **stdoutLogFile** yolunun son kesimine eklenir. `.\logs\stdout`Değer olarak sağlandıysa, bir 2/5/2018 işlem 1934 kimliği ile 19:41:32 ' de ' de kaydedildiğinde günlük *logs* dosyasında bir örnek stdout günlüğü *stdout_20180205194132_1934* kaydedilir.</p> | `aspnetcore-stdout` |
+| `shutdownTimeLimit` | <p>İsteğe bağlı tamsayı özniteliği.</p><p>Dosya algılandığında, modülün yürütülebilir dosyanın düzgün şekilde kapatılmasını beklediği saniye cinsinden süre `app_offline.htm` .</p> | Varsayılanını `10`<br>Min `0`<br>Biçimlendir `600` |
+| `startupTimeLimit` | <p>İsteğe bağlı tamsayı özniteliği.</p><p>Modülün, bağlantı noktasında dinleme yapan bir işlemin başlamasını bekleyeceği saniye cinsinden süre. Bu süre sınırı aşılırsa, modül işlemi bu işlemden sonra da bir kez gider.</p><p>*İşlem içi*barındırma sırasında: **işlem yeniden başlatılmaz** ve ayarı kullanılmaz **not** `rapidFailsPerMinute` .</p><p>*İşlem dışı*barındırma sırasında, modül yeni bir istek aldığında işlemi yeniden başlatmayı dener ve uygulamanın `rapidFailsPerMinute` son geçen dakikada bir kez başlamamaya devam etmediği sürece sonraki gelen isteklerde işlemi yeniden başlatmaya çalışır.</p><p>0 (sıfır) değeri sonsuz bir zaman aşımı olarak kabul **edilmez** .</p> | Varsayılanını `120`<br>Min `0`<br>Biçimlendir `3600` |
+| `stdoutLogEnabled` | <p>İsteğe bağlı Boolean özniteliği.</p><p>True ise, içinde belirtilen işlem için **stdout** ve **stderr** , `processPath` **stdoutLogFile**içinde belirtilen dosyaya yeniden yönlendirilir.</p> | `false` |
+| `stdoutLogFile` | <p>İsteğe bağlı dize özniteliği.</p><p>`stdout` `stderr` İçinde belirtilen işlemden ve bu işlemin günlüğe kaydedildiği göreli veya mutlak dosya yolunu belirtir `processPath` . Göreli yollar, sitenin köküne göredir. İle başlayan tüm `.` yollar, site köküne göredir ve diğer tüm yollar mutlak yollar olarak değerlendirilir. Yolda sunulan klasörler, günlük dosyası oluşturulduğunda modül tarafından oluşturulur. Alt çizgi sınırlayıcılarını kullanma, zaman damgası, işlem KIMLIĞI ve dosya uzantısı ( `.log` ) yolun son kesimine eklenir `stdoutLogFile` . `.\logs\stdout`Değer olarak sağlandıysa, `stdout_20180205194132_1934.log` `logs` 2/5/2018 işlem 1934 kimliği ile 19:41:32 ' de kaydedildiğinde, bir örnek stdout günlüğü klasöre kaydedilir.</p> | `aspnetcore-stdout` |
 
 ### <a name="setting-environment-variables"></a>Ortam değişkenlerini ayarlama
 
 Özniteliği içindeki işlem için ortam değişkenleri belirtilebilir `processPath` . `<environmentVariable>`Bir koleksiyon öğesinin alt öğesi ile bir ortam değişkeni belirtin `<environmentVariables>` . Bu bölümde ayarlanan ortam değişkenleri, sistem ortamı değişkenlerine göre önceliklidir.
 
-Aşağıdaki örnek iki ortam değişkenini ayarlar. `ASPNETCORE_ENVIRONMENT` uygulamanın ortamını olarak yapılandırır `Development` . Bir geliştirici, uygulama özel durumunda hata ayıklarken [Geliştirici özel durum sayfasını](xref:fundamentals/error-handling) yüklemeye zorlamak için bu değeri geçici olarak *web.config* dosyasında ayarlayabilir. `CONFIG_DIR` , geliştiricinin, uygulamanın yapılandırma dosyasını yüklemek için bir yol oluşturmak üzere başlangıçta değeri okuyan kodu yazdığı, Kullanıcı tanımlı ortam değişkenine bir örnektir.
+Aşağıdaki örnek iki ortam değişkenini ayarlar. `ASPNETCORE_ENVIRONMENT` uygulamanın ortamını olarak yapılandırır `Development` . Bir geliştirici `web.config` , uygulama özel durumunda hata ayıklarken [Geliştirici özel durum sayfasını](xref:fundamentals/error-handling) yüklemeye zorlamak için dosyada bu değeri geçici olarak ayarlayabilir. `CONFIG_DIR` , geliştiricinin, uygulamanın yapılandırma dosyasını yüklemek için bir yol oluşturmak üzere başlangıçta değeri okuyan kodu yazdığı, Kullanıcı tanımlı ortam değişkenine bir örnektir.
 
 ```xml
 <aspNetCore processPath="dotnet"
@@ -634,7 +655,7 @@ Aşağıdaki örnek iki ortam değişkenini ayarlar. `ASPNETCORE_ENVIRONMENT` uy
 ```
 
 > [!NOTE]
-> Ortamı doğrudan *web.config* olarak ayarlamanın alternatifi, `<EnvironmentName>` özelliği [Publish profile (. pubxml)](xref:host-and-deploy/visual-studio-publish-profiles) veya proje dosyasına dahil kullanmaktır. Bu yaklaşım, proje yayımlandığında *web.config* ortamı ayarlar:
+> Ortamın doğrudan ' de ayarlanmasına bir alternatifi, `web.config` `<EnvironmentName>` özelliği [Publish profile (. pubxml)](xref:host-and-deploy/visual-studio-publish-profiles) veya proje dosyasına dahil etmek için kullanılır. Bu yaklaşım, proje yayımlandığında içindeki ortamı ayarlar `web.config` :
 >
 > ```xml
 > <PropertyGroup>
@@ -647,9 +668,9 @@ Aşağıdaki örnek iki ortam değişkenini ayarlar. `ASPNETCORE_ENVIRONMENT` uy
 
 ## <a name="app_offlinehtm"></a>app_offline.htm
 
-Bir uygulamanın kök dizininde *app_offline.htm* adında bir dosya algılanırsa, ASP.NET Core modülü uygulamayı düzgün bir şekilde kapatmaya ve gelen istekleri işlemeyi durdurmaya çalışır. Uygulama, içinde tanımlanan saniye sayısından sonra hala çalışıyorsa `shutdownTimeLimit` , ASP.NET Core modülü çalışan işlemi de yok eder.
+Uygulamanın kök dizininde ada sahip bir dosya `app_offline.htm` algılanırsa, ASP.NET Core modülü uygulamayı düzgün bir şekilde kapatmaya çalışır ve gelen istekleri işlemeyi durdurur. Uygulama, içinde tanımlanan saniye sayısından sonra hala çalışıyorsa `shutdownTimeLimit` , ASP.NET Core modülü çalışan işlemi de yok eder.
 
-*app_offline.htm* dosyası mevcut olsa da, ASP.NET Core modülü *app_offline.htm* dosyanın içeriğini geri göndererek isteklere yanıt verir. *app_offline.htm* dosyası kaldırıldığında, sonraki istek uygulamayı başlatır.
+`app_offline.htm`Dosya mevcut olsa da, ASP.NET Core modülü dosya içeriğini geri göndererek isteklere yanıt verir `app_offline.htm` . `app_offline.htm`Dosya kaldırıldığında, sonraki istek uygulamayı başlatır.
 
 İşlem dışı barındırma modeli kullanılırken, açık bir bağlantı varsa uygulama hemen kapanmayabilir. Örneğin, bir WebSocket bağlantısı, uygulamanın kapatılmasını erteleyebilir.
 
@@ -667,7 +688,7 @@ Bu sayfayı bastırın ve varsayılan IIS 5xx durum kodu sayfasına dönmek içi
 
 ## <a name="log-creation-and-redirection"></a>Günlük oluşturma ve yeniden yönlendirme
 
-ASP.NET Core modülü, `stdoutLogEnabled` `stdoutLogFile` öğesinin ve öznitelikleri ayarlandıysa stdout ve stderr konsol çıkışını diske yeniden yönlendirir `aspNetCore` . Yoldaki tüm klasörler, `stdoutLogFile` günlük dosyası oluşturulduğunda modül tarafından oluşturulur. Uygulama havuzunun, günlüklerin yazıldığı konuma yazma erişimi olması gerekir ( `IIS AppPool\<app_pool_name>` yazma izni sağlamak için kullanın).
+ASP.NET Core modülü, `stdoutLogEnabled` `stdoutLogFile` öğesinin ve öznitelikleri ayarlandıysa stdout ve stderr konsol çıkışını diske yeniden yönlendirir `aspNetCore` . Yoldaki tüm klasörler, `stdoutLogFile` günlük dosyası oluşturulduğunda modül tarafından oluşturulur. Uygulama havuzunun, günlüklerin yazıldığı konuma yazma erişimi olması gerekir ( `IIS AppPool\{APP POOL NAME}` yer tutucunun `{APP POOL NAME}` uygulama havuzu adı olduğu yazma iznini sağlamak için kullanın).
 
 İşlem geri dönüştürme/yeniden başlatma gerçekleşmediği sürece Günlükler döndürülemez. Bu, günlüklerin tükettiği disk alanını sınırlamak için barındırıcının sorumluluğundadır.
 
@@ -675,11 +696,11 @@ Stdout günlüğünün kullanılması yalnızca IIS 'de barındırırken veya [V
 
 Genel uygulama günlüğü amaçları için stdout günlüğünü kullanmayın. ASP.NET Core uygulamasında rutin günlük kaydı için, günlük dosyası boyutunu sınırlayan ve günlükleri döndüren bir günlüğe kaydetme kitaplığı kullanın. Daha fazla bilgi için bkz. [üçüncü taraf günlüğü sağlayıcıları](xref:fundamentals/logging/index#third-party-logging-providers).
 
-Günlük dosyası oluşturulduğunda zaman damgası ve dosya uzantısı otomatik olarak eklenir. Günlük dosyası adı, alt *.log* `stdoutLogFile` çizgi ile ayrılmış yolun (genellikle *stdout*) son KESIMINE zaman damgası, işlem kimliği ve dosya uzantısı (. log) eklenerek oluşur. `stdoutLogFile`Yol *stdout*ile sonlanıyorsa, 1934 ' de 19:42:32 2/5/2018 ' de oluşturulan PID 'sine sahip bir uygulama için günlük *stdout_20180205194132_1934*dosya adı vardır.
+Günlük dosyası oluşturulduğunda zaman damgası ve dosya uzantısı otomatik olarak eklenir. Günlük dosyası adı, zaman damgası, işlem KIMLIĞI ve dosya uzantısı ( `.log` ), yolun son kesimine `stdoutLogFile` (genellikle `stdout` ) alt çizgi ile ayrılmış olarak eklenerek oluşur. `stdoutLogFile`Yol ile sonlanıyorsa `stdout` , 1934 ' de 19:42:32 2/5/2018 ' de oluşturulan bir uygulama için günlük kaydı dosya adına sahiptir `stdout_20180205194132_1934.log` .
 
 `stdoutLogEnabled`Yanlış ise, uygulama başlangıcında oluşan hatalar yakalanır ve 30 KB 'a kadar olay günlüğüne yayınlanır. Başlangıçtan sonra tüm ek Günlükler atılır.
 
-Aşağıdaki örnek `aspNetCore` öğesi, göreli yoldaki stdout günlüğünü yapılandırır `.\log\` . AppPool Kullanıcı kimliğinin, belirtilen yola yazma izni olduğunu doğrulayın.
+Aşağıdaki örnek `aspNetCore` öğesi, göreli yoldaki stdout günlüğünü yapılandırır `.\log\` . Uygulama havuzu Kullanıcı kimliğinin, belirtilen yola yazma izni olduğunu doğrulayın.
 
 ```xml
 <aspNetCore processPath="dotnet"
@@ -696,7 +717,7 @@ Yol biçimleri hakkında daha fazla bilgi için bkz. [Windows sistemlerinde dosy
 
 ## <a name="enhanced-diagnostic-logs"></a>Gelişmiş tanılama günlükleri
 
-ASP.NET Core modülü, gelişmiş tanılama günlükleri sağlamak için yapılandırılabilir. `<handlerSettings>`Öğesini `<aspNetCore>` *web.config*öğesine ekleyin. İçin ayarı `debugLevel` , `TRACE` Tanılama bilgilerini daha yüksek bir şekilde kullanıma sunar:
+ASP.NET Core modülü, gelişmiş tanılama günlükleri sağlamak için yapılandırılabilir. `<handlerSettings>`Öğesini `<aspNetCore>` içindeki öğesine ekleyin `web.config` . İçin ayarı `debugLevel` , `TRACE` Tanılama bilgilerini daha yüksek bir şekilde kullanıma sunar:
 
 ```xml
 <aspNetCore processPath="dotnet"
@@ -711,7 +732,7 @@ ASP.NET Core modülü, gelişmiş tanılama günlükleri sağlamak için yapıla
 </aspNetCore>
 ```
 
-Değer için belirtilen yoldaki klasörler `<handlerSetting>` (önceki örnekteki*Günlükler* ) modül tarafından otomatik olarak oluşturulmaz ve dağıtımda önceden var olmalıdır. Uygulama havuzunun, günlüklerin yazıldığı konuma yazma erişimi olması gerekir ( `IIS AppPool\<app_pool_name>` yazma izni sağlamak için kullanın).
+Değer için belirtilen yoldaki klasörler `<handlerSetting>` ( `logs` Önceki örnekte) modül tarafından otomatik olarak oluşturulmaz ve dağıtımda önceden var olmalıdır. Uygulama havuzunun, günlüklerin yazıldığı konuma yazma erişimi olması gerekir ( `IIS AppPool\{APP POOL NAME}` yer tutucunun `{APP POOL NAME}` uygulama havuzu adı olduğu yazma iznini sağlamak için kullanın).
 
 Hata ayıklama düzeyi ( `debugLevel` ) değerleri hem düzeyi hem de konumu içerebilir.
 
@@ -730,13 +751,13 @@ Konumlar (birden çok konuma izin verilir):
 
 İşleyici ayarları, ortam değişkenleri aracılığıyla da kullanılabilir:
 
-* `ASPNETCORE_MODULE_DEBUG_FILE`: Hata ayıklama günlük dosyasının yolu. (Varsayılan: *aspnetcore-Debug. log*)
+* `ASPNETCORE_MODULE_DEBUG_FILE`: Hata ayıklama günlük dosyasının yolu. (Varsayılan: `aspnetcore-debug.log` )
 * `ASPNETCORE_MODULE_DEBUG`: Hata ayıklama düzeyi ayarı.
 
 > [!WARNING]
 > Bir sorunu gidermek için dağıtımda hata ayıklama günlüğü 'nün gerekenden uzun süre **etkin bırakmayın.** Günlüğün boyutu sınırlı değil. Hata ayıklama günlüğünün etkin bırakılması, kullanılabilir disk alanını tüketebilir ve sunucu veya App Service 'i kilitlemez.
 
-web.configdosyasındaki öğenin bir örneği için [web.configyapılandırma](#configuration-with-webconfig) konusuna bakın `aspNetCore` . *web.config*
+Dosyadaki öğenin bir örneği için [web.configyapılandırma ](#configuration-with-webconfig) konusuna bakın `aspNetCore` `web.config` .
 
 ## <a name="proxy-configuration-uses-http-protocol-and-a-pairing-token"></a>Proxy yapılandırması HTTP protokolünü ve eşleştirme belirtecini kullanır
 
@@ -748,7 +769,7 @@ Eşleştirme belirteci, Kestrel tarafından alınan isteklerin IIS tarafından p
 
 ## <a name="aspnet-core-module-with-an-iis-shared-configuration"></a>IIS paylaşılan yapılandırmasıyla ASP.NET Core modülü
 
-ASP.NET Core modülü yükleyicisi, **TrustedInstaller** hesabının ayrıcalıklarıyla çalışır. Yerel sistem hesabı, IIS paylaşılan Yapılandırması tarafından kullanılan paylaşım yolu için değiştirme iznine sahip olmadığından, yükleyici paylaşımdaki *applicationHost.config* dosyasında modül ayarlarını yapılandırmaya çalışırken bir erişim reddedildi hatası atar.
+ASP.NET Core modülü yükleyicisi hesap ayrıcalıklarıyla çalışır `TrustedInstaller` . Yerel sistem hesabı, IIS paylaşılan Yapılandırması tarafından kullanılan paylaşım yolu için değiştirme iznine sahip olmadığından, yükleyici paylaşımdaki dosyadaki modül ayarlarını yapılandırmaya çalışırken bir erişim reddedildi hatası atar `applicationHost.config` .
 
 IIS yüklemesiyle aynı makinede bir IIS paylaşılan yapılandırması kullanırken, şu şekilde ayarlanan parametre ile birlikte ASP.NET Core barındırma paketi yükleyicisini çalıştırın `OPT_NO_SHARED_CONFIG_CHECK` `1` :
 
@@ -760,71 +781,71 @@ Paylaşılan yapılandırmanın yolu IIS yüklemesiyle aynı makinede olmadığ�
 
 1. IIS paylaşılan yapılandırmasını devre dışı bırakın.
 1. Yükleyiciyi çalıştırın.
-1. Güncelleştirilmiş *applicationHost.config* dosyasını paylaşıma dışarı aktarın.
+1. Güncelleştirilmiş `applicationHost.config` dosyayı paylaşıma dışarı aktarın.
 1. IIS paylaşılan yapılandırmasını yeniden etkinleştirin.
 
 ## <a name="module-version-and-hosting-bundle-installer-logs"></a>Modül sürümü ve barındırma paketi yükleyici günlükleri
 
 Yüklü ASP.NET Core modülünün sürümünü öğrenmek için:
 
-1. Barındırma sisteminde *%windir%\system32\inetsrv dizinine*gidin.
-1. *aspnetcore.dll* dosyasını bulun.
+1. Barındırma sisteminde öğesine gidin `%windir%\System32\inetsrv` .
+1. Dosyayı bulun `aspnetcore.dll` .
 1. Dosyaya sağ tıklayın ve bağlam menüsünden **Özellikler** ' i seçin.
 1. **Ayrıntılar** sekmesini seçin. **Dosya sürümü** ve **ürün sürümü** , modülün yüklü sürümünü temsil eder.
 
-Modülün barındırma paketi yükleyici günlükleri *C: \\ Users \\ % UserName% \\ AppData \\ Local \\ Temp*konumunda bulunur. Dosya *dd_DotNetCoreWinSvrHosting__ \<timestamp> _000_AspNetCoreModule_x64. log*olarak adlandırılmıştır.
+Modülün barındırma paketi yükleyici günlükleri konumunda bulunur `C:\\Users\\%UserName%\\AppData\\Local\\Temp` . Dosyanın adı `dd_DotNetCoreWinSvrHosting__\{TIMESTAMP}_000_AspNetCoreModule_x64.log` , yer tutucunun `{TIMESTAMP}` zaman damgası olduğu yerdir.
 
 ## <a name="module-schema-and-configuration-file-locations"></a>Modül, şema ve yapılandırma dosyası konumları
 
 ### <a name="module"></a>Modül
 
-**IIS (X86/AMD64):**
+**IIS (X86/AMD64)**:
 
-* % windir% \System32\inetsrv\aspnetcore.dll
+* `%windir%\System32\inetsrv\aspnetcore.dll`
 
-* % windir% \SysWOW64\inetsrv\aspnetcore.dll
+* `%windir%\SysWOW64\inetsrv\aspnetcore.dll`
 
-* %ProgramFiles%\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll
+* `%ProgramFiles%\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll`
 
-* % ProgramFiles (x86)% \ ııs\ ASP.NET Core Module\V2\aspnetcorev2.dll
+* `%ProgramFiles(x86)%\IIS\Asp.Net Core Module\V2\aspnetcorev2.dll`
 
-**IIS Express (X86/AMD64):**
+**IIS Express (X86/AMD64)**:
 
-* %ProgramFiles%\IIS Express\aspnetcore.dll
+* `%ProgramFiles%\IIS Express\aspnetcore.dll`
 
-* % ProgramFiles (x86)% \ IIS Express\aspnetcore.dll
+* `%ProgramFiles(x86)%\IIS Express\aspnetcore.dll`
 
-* %ProgramFiles%\IIS Express\Asp.Net Core Module\V2\aspnetcorev2.dll
+* `%ProgramFiles%\IIS Express\Asp.Net Core Module\V2\aspnetcorev2.dll`
 
-* % ProgramFiles (x86)% \ IIS Express\Asp.Net Core Module\V2\aspnetcorev2.dll
+* `%ProgramFiles(x86)%\IIS Express\Asp.Net Core Module\V2\aspnetcorev2.dll`
 
 ### <a name="schema"></a>Şema
 
 **IIS**
 
-* % windir% \System32\inetsrv\config\schema\aspnetcore_schema.xml
+* `%windir%\System32\inetsrv\config\schema\aspnetcore_schema.xml`
 
-* % windir% \System32\inetsrv\config\schema\aspnetcore_schema_v2.xml
+* `%windir%\System32\inetsrv\config\schema\aspnetcore_schema_v2.xml`
 
 **IIS Express**
 
-* %ProgramFiles%\IIS Express\config\schema\aspnetcore_schema.xml
+* `%ProgramFiles%\IIS Express\config\schema\aspnetcore_schema.xml`
 
-* %ProgramFiles%\IIS Express\config\schema\aspnetcore_schema_v2.xml
+* `%ProgramFiles%\IIS Express\config\schema\aspnetcore_schema_v2.xml`
 
 ### <a name="configuration"></a>Yapılandırma
 
 **IIS**
 
-* % windir% \System32\inetsrv\config\applicationHost.config
+* `%windir%\System32\inetsrv\config\applicationHost.config`
 
 **IIS Express**
 
-* Visual Studio: {APPLICATION ROOT} \\.vs\config\applicationHost.config
+* Visual Studio: `{APPLICATION ROOT}\.vs\config\applicationHost.config`
 
-* *iisexpress.exe* CLı:% USERPROFILE% \Documents\IISExpress\config\applicationhost.config
+* *iisexpress.exe* CLı `%USERPROFILE%\Documents\IISExpress\config\applicationhost.config`
 
-Dosyalar, *applicationHost.config* dosyasında *aspnetcore* ' u arayarak bulunabilir.
+Dosyalar dosyada arayarak bulunabilir `aspnetcore` `applicationHost.config` .
 
 ::: moniker-end
 
@@ -843,7 +864,7 @@ ASP.NET Core uygulamalar IIS çalışan işleminden ayrı bir işlemde çalışt
 
 Aşağıdaki diyagramda IIS, ASP.NET Core modülü ve bir uygulama arasındaki ilişki gösterilmektedir:
 
-![ASP.NET Core Modülü](aspnet-core-module/_static/ancm-outofprocess.png)
+![ASP.NET Core Modülü](iis/index/_static/ancm-outofprocess.png)
 
 İstekler Web 'den çekirdek modu HTTP.sys sürücüsüne ulaşır. Sürücü, istekleri Web sitesinin yapılandırılmış bağlantı noktasında IIS 'ye yönlendirir, genellikle 80 (HTTP) veya 443 (HTTPS). Modül, 80 veya 443 numaralı bağlantı noktası olmayan uygulama için rastgele bir bağlantı noktasında istekleri Kestrel 'e iletir.
 
@@ -953,8 +974,6 @@ Bir uygulamanın kök dizininde *app_offline.htm* adında bir dosya algılanırs
 ## <a name="start-up-error-page"></a>Başlatma hatası sayfası
 
 ASP.NET Core modülü arka uç işlemini başlatamaz veya arka uç işlemi başlatılır, ancak yapılandırılmış bağlantı noktasında dinleme başarısız olursa, *502,5-Işlem hatası* durum kodu sayfası görüntülenir. Bu sayfayı bastırın ve varsayılan IIS 502 durum kodu sayfasına dönmek için `disableStartUpErrorPage` özniteliğini kullanın. Özel hata iletilerini yapılandırma hakkında daha fazla bilgi için bkz. [http \<httpErrors> hataları ](/iis/configuration/system.webServer/httpErrors/).
-
-![502,5 işlem hatası durum kodu sayfası](aspnet-core-module/_static/ANCM-502_5.png)
 
 ## <a name="log-creation-and-redirection"></a>Günlük oluşturma ve yeniden yönlendirme
 

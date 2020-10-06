@@ -18,27 +18,69 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/index
-ms.openlocfilehash: f648837ce42bef4a828d7eda1a6abdfdd8ac07a2
-ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
+ms.openlocfilehash: 7fe3e18b226061260d0c17220ba110bd61486b5f
+ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/02/2020
-ms.locfileid: "91654042"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91754703"
 ---
 # <a name="host-aspnet-core-on-windows-with-iis"></a>IIS ile Windows üzerinde ASP.NET Core barındırma
 
-<!-- 
+::: moniker range=">= aspnetcore-5.0"
 
-    NOTE FOR 5.0
-    
-    When making the 5.0 version of this topic, remove the Hosting Bundle
-    direct download section from the (new) <5.0 & >2.2 version and modify 
-    the text and heading for the *Earlier versions of the installer* 
-    section. See the 2.2 version for an example.
-    
--->
+Internet Information Services (IIS), Web uygulamalarını barındırmak için ASP.NET Core dahil esnek, güvenli ve yönetilebilir bir Web sunucusudur.
 
-::: moniker range=">= aspnetcore-3.0"
+## <a name="supported-platforms"></a>Desteklenen platformlar
+
+Aşağıdaki işletim sistemleri desteklenmektedir:
+
+* Windows 7 veya üzeri
+* Windows Server 2012 R2 veya üzeri
+
+32-bit (x86) veya 64 bit (x64) dağıtımı için yayımlanan uygulamalar desteklenir. Uygulama dışında 32 bitlik bir uygulamayı 32 bit (x86) .NET Core SDK dağıtma:
+
+* 64 bitlik bir uygulama için kullanılabilir daha büyük sanal bellek adres alanını gerektirir.
+* Daha büyük IIS yığın boyutunu gerektirir.
+* 64 bitlik yerel bağımlılıklara sahiptir.
+
+## <a name="install-the-aspnet-core-modulehosting-bundle"></a>ASP.NET Core modülünü/barındırma paketini yükler
+
+Aşağıdaki bağlantıyı kullanarak yükleyiciyi indirin:
+
+[Geçerli .NET Core barındırma paketi yükleyicisi (doğrudan indirme)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
+
+ASP.NET Core modülünü yükleme veya farklı sürümleri yükleme hakkında daha fazla bilgi için bkz. [.NET Core barındırma paketi yükleme](xref:host-and-deploy/iis/hosting-bundle).
+
+## <a name="get-started"></a>başlarken
+
+IIS 'de bir Web sitesi barındırılmasına başlamak için Başlarken [kılavuzumuza](xref:tutorials/publish-to-iis)bakın.
+
+Azure Uygulama Hizmetleri 'nde bir Web sitesi barındırmaya başlamak için bkz. [dağıtım Azure App Service Kılavuzu](xref:host-and-deploy/azure-apps/index).
+
+## <a name="deployment-resources-for-iis-administrators"></a>IIS yöneticileri için dağıtım kaynakları
+
+* [IIS belgeleri](/iis)
+* [IIS 'de IIS Yöneticisi 'Ni kullanmaya başlama](/iis/get-started/getting-started-with-iis/getting-started-with-the-iis-manager-in-iis-7-and-iis-8)
+* [.NET Core uygulama dağıtımı](/dotnet/core/deploying/)
+* <xref:host-and-deploy/aspnet-core-module>
+* <xref:host-and-deploy/directory-structure>
+* <xref:host-and-deploy/iis/modules>
+* <xref:test/troubleshoot-azure-iis>
+* <xref:host-and-deploy/azure-iis-errors-reference>
+
+## <a name="additional-resources"></a>Ek kaynaklar
+
+* <xref:test/troubleshoot>
+* <xref:index>
+* [Resmi Microsoft IIS sitesi](https://www.iis.net/)
+* [Windows Server teknik içerik kitaplığı](/windows-server/windows-server)
+* [IIS üzerinde HTTP/2](/iis/get-started/whats-new-in-iis-10/http2-on-iis)
+* <xref:host-and-deploy/iis/transform-webconfig>
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
 
 ASP.NET Core uygulamasını bir IIS sunucusuna yayımlamaya yönelik bir öğretici deneyimi için, bkz <xref:tutorials/publish-to-iis> ..
 
@@ -99,7 +141,7 @@ IIS HTTP sunucusu isteği tamamladıktan sonra:
 
 İşlem içi barındırma, mevcut uygulamalar için kabul edilir. ASP.NET Core Web şablonları, işlem içi barındırma modelini kullanır.
 
-`CreateDefaultBuilder`<xref:Microsoft.AspNetCore.Hosting.Server.IServer> <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS*> [CoreCLR](/dotnet/standard/glossary#coreclr) 'YI önyüklemek ve uygulamayı IIS çalışan işleminin içinde barındırmak için yöntemini çağırarak bir örnek ekler (*w3wp.exe* veya *iisexpress.exe*). Performans testleri, bir .NET Core uygulamasını işlem içinde barındırmanın, uygulamayı işlem dışı ve [Kestrel](xref:fundamentals/servers/kestrel)'e yönelik proxy istekleri barındırmakla karşılaştırıldığında önemli ölçüde daha yüksek istek aktarım hızı sağladığını gösterir.
+`CreateDefaultBuilder`<xref:Microsoft.AspNetCore.Hosting.Server.IServer> <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS%2A> [CoreCLR](/dotnet/standard/glossary#coreclr) 'YI önyüklemek ve uygulamayı IIS çalışan işleminin (veya) içinde barındırmak için yöntemini çağırarak bir örnek ekler `w3wp.exe` `iisexpress.exe` . Performans testleri, bir .NET Core uygulamasını işlem içinde barındırmanın, uygulamayı işlem dışı ve [Kestrel](xref:fundamentals/servers/kestrel)'e yönelik proxy istekleri barındırmakla karşılaştırıldığında önemli ölçüde daha yüksek istek aktarım hızı sağladığını gösterir.
 
 Tek bir dosya yürütülebilir dosyası olarak yayınlanan uygulamalar, işlem içi barındırma modeliyle yüklenemez.
 
@@ -116,7 +158,7 @@ Aşağıdaki diyagramda IIS, ASP.NET Core modülü ve işlem dışı barındır�
 1. Modül, isteği uygulama için rastgele bir bağlantı noktasında Kestrel 'e iletir. Rastgele bağlantı noktası 80 veya 443 değildir.
 
 <!-- make this a bullet list -->
-ASP.NET Core modülü başlatma sırasında bir ortam değişkeni aracılığıyla bağlantı noktasını belirtir. <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*>Uzantı, sunucuyu dinlemek üzere yapılandırır `http://localhost:{PORT}` . Ek denetimler gerçekleştirilir ve modülünden kaynaklanmayan istekler reddedilir. Modül HTTPS iletmeyi desteklemiyor. İstekler, HTTPS üzerinden IIS tarafından alınsa bile HTTP üzerinden iletilir.
+ASP.NET Core modülü başlatma sırasında bir ortam değişkeni aracılığıyla bağlantı noktasını belirtir. <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration%2A>Uzantı, sunucuyu dinlemek üzere yapılandırır `http://localhost:{PORT}` . Ek denetimler gerçekleştirilir ve modülünden kaynaklanmayan istekler reddedilir. Modül HTTPS iletmeyi desteklemiyor. İstekler, HTTPS üzerinden IIS tarafından alınsa bile HTTP üzerinden iletilir.
 
 Kestrel, isteği modülden başlattıktan sonra, istek ASP.NET Core ara yazılım ardışık düzenine iletilir. Ara yazılım ardışık düzeni isteği işler ve `HttpContext` uygulamanın mantığına bir örnek olarak geçirir. IIS tümleştirmesi tarafından eklenen ara yazılım, isteği Kestrel iletmek için düzen, uzak IP ve pathbase 'i hesaba göre güncelleştirir. Uygulamanın yanıtı IIS 'e geri geçirilir ve bu, isteği başlatan HTTP istemcisine geri iletilir.
 
@@ -128,7 +170,7 @@ Barındırma hakkında daha fazla bilgi için bkz. [ASP.NET Core ana bilgisayar]
 
 ### <a name="enable-the-iisintegration-components"></a>Iısıntegration bileşenlerini etkinleştirin
 
-`CreateHostBuilder`(*Program.cs*) içinde BIR konak oluştururken <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> IIS tümleştirmesini etkinleştirmek için çağırın:
+() İçinde bir konak `CreateHostBuilder` oluştururken `Program.cs` <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder%2A> IIS tümleştirmesini etkinleştirmek için çağırın:
 
 ```csharp
 public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -142,7 +184,7 @@ Hakkında daha fazla bilgi için `CreateDefaultBuilder` bkz <xref:fundamentals/h
 
 **İşlem içi barındırma modeli**
 
-IIS sunucu seçeneklerini yapılandırmak için, içinde için bir hizmet yapılandırması <xref:Microsoft.AspNetCore.Builder.IISServerOptions> ekleyin <xref:Microsoft.AspNetCore.Hosting.IStartup.ConfigureServices*> . Aşağıdaki örnek, Automatıcauthentication 'ı devre dışı bırakır:
+IIS sunucu seçeneklerini yapılandırmak için, içinde için bir hizmet yapılandırması <xref:Microsoft.AspNetCore.Builder.IISServerOptions> ekleyin <xref:Microsoft.AspNetCore.Hosting.IStartup.ConfigureServices%2A> . Aşağıdaki örnek, Automatıcauthentication 'ı devre dışı bırakır:
 
 ```csharp
 services.Configure<IISServerOptions>(options => 
@@ -156,11 +198,11 @@ services.Configure<IISServerOptions>(options =>
 | `AutomaticAuthentication`      | `true`  | `true`IIS sunucusu, `HttpContext.User` [Windows kimlik doğrulaması](xref:security/authentication/windowsauth)tarafından kimliği doğrulanmış olarak ayarlanır. İse `false` , sunucu yalnızca bir kimlik sağlar `HttpContext.User` ve tarafından açıkça istendiğinde sorunları yanıtlar `AuthenticationScheme` . ' Nin çalışması için IIS 'de Windows kimlik doğrulamasının etkinleştirilmesi gerekir `AutomaticAuthentication` . Daha fazla bilgi için bkz. [Windows kimlik doğrulaması](xref:security/authentication/windowsauth). |
 | `AuthenticationDisplayName`    | `null`  | Oturum açma sayfalarındaki kullanıcılara gösterilen görünen adı ayarlar. |
 | `AllowSynchronousIO`           | `false` | Ve için zaman uyumlu g/ç 'ye izin verilip verilmeyeceğini belirtir `HttpContext.Request` `HttpContext.Response` . |
-| `MaxRequestBodySize`           | `30000000`  | İçin en büyük istek gövdesi boyutunu alır veya ayarlar `HttpRequest` . IIS 'nin `maxAllowedContentLength` , içindeki kümesinden önce işlenecek sınıra sahip olduğunu unutmayın `MaxRequestBodySize` `IISServerOptions` . ' Nin değiştirilmesi `MaxRequestBodySize` , etkilemez `maxAllowedContentLength` . Arttırmak için `maxAllowedContentLength` *web.config* daha yüksek bir değere ayarlamak üzere bir giriş ekleyin `maxAllowedContentLength` . Daha fazla ayrıntı için bkz. [yapılandırma](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/#configuration). |
+| `MaxRequestBodySize`           | `30000000`  | İçin en büyük istek gövdesi boyutunu alır veya ayarlar `HttpRequest` . IIS 'nin `maxAllowedContentLength` , içindeki kümesinden önce işlenecek sınıra sahip olduğunu unutmayın `MaxRequestBodySize` `IISServerOptions` . ' Nin değiştirilmesi `MaxRequestBodySize` , etkilemez `maxAllowedContentLength` . Arttırmak için `maxAllowedContentLength` ' de bir giriş ekleyerek `web.config` `maxAllowedContentLength` daha yüksek bir değere ayarlayın. Daha fazla ayrıntı için bkz. [yapılandırma](/iis/configuration/system.webServer/security/requestFiltering/requestLimits/#configuration). |
 
 **İşlem dışı barındırma modeli**
 
-IIS seçeneklerini yapılandırmak için, içinde için bir hizmet yapılandırması <xref:Microsoft.AspNetCore.Builder.IISOptions> ekleyin <xref:Microsoft.AspNetCore.Hosting.IStartup.ConfigureServices*> . Aşağıdaki örnek, uygulamanın doldurulmasını önler `HttpContext.Connection.ClientCertificate` :
+IIS seçeneklerini yapılandırmak için, içinde için bir hizmet yapılandırması <xref:Microsoft.AspNetCore.Builder.IISOptions> ekleyin <xref:Microsoft.AspNetCore.Hosting.IStartup.ConfigureServices%2A> . Aşağıdaki örnek, uygulamanın doldurulmasını önler `HttpContext.Connection.ClientCertificate` :
 
 ```csharp
 services.Configure<IISOptions>(options => 
@@ -186,21 +228,21 @@ services.Configure<IISOptions>(options =>
 
 Ek proxy sunucularının ve yük dengeleyiciler arkasında barındırılan uygulamalar için ek yapılandırma gerekebilir. Daha fazla bilgi için bkz. [proxy sunucularıyla ve yük dengeleyicilerle çalışacak ASP.NET Core yapılandırma](xref:host-and-deploy/proxy-load-balancer).
 
-### <a name="webconfig-file"></a>web.config dosyası
+### <a name="webconfig-file"></a>`web.config` dosyasýný
 
-*web.config* dosyası [ASP.NET Core modülünü](xref:host-and-deploy/aspnet-core-module)yapılandırır. *web.config* dosyası oluşturma, dönüştürme ve yayımlama, proje yayımlandığında MSBuild hedefi () tarafından işlenir `_TransformWebConfig` . Bu hedef, Web SDK hedeflerinde () bulunur `Microsoft.NET.Sdk.Web` . SDK proje dosyasının en üstünde ayarlanır:
+`web.config`Dosya [ASP.NET Core modülünü](xref:host-and-deploy/aspnet-core-module)yapılandırır. Proje yayımlandığında dosyanın oluşturulması, dönüştürülmesi ve yayımlanması `web.config` bir MSBuild hedefi () tarafından işlenir `_TransformWebConfig` . Bu hedef, Web SDK hedeflerinde () bulunur `Microsoft.NET.Sdk.Web` . SDK proje dosyasının en üstünde ayarlanır:
 
 ```xml
 <Project Sdk="Microsoft.NET.Sdk.Web">
 ```
 
-Projede bir *web.config* dosyası yoksa, ASP.NET Core modülünü yapılandırmak için doğru işlem *yolu* ve *bağımsız değişkenlerle* dosya oluşturulur ve [yayımlanan çıktıya](xref:host-and-deploy/directory-structure)taşınır.
+Projede bir `web.config` Dosya yoksa, dosya doğru şekilde oluşturulur `processPath` ve `arguments` ASP.NET Core modülünü yapılandırıp [yayımlanan çıktıya](xref:host-and-deploy/directory-structure)taşınır.
 
-Projede bir *web.config* dosyası varsa, dosya doğru *processPath* ve *bağımsız değişkenlerle* birlikte dönüştürülür ve ASP.NET Core modülünü yapılandırır ve yayımlanan çıktıya taşınır. Dönüştürme, dosyadaki IIS yapılandırma ayarlarını değiştirmez.
+Projede bir `web.config` dosya varsa, dosya doğru şekilde dönüştürülür `processPath` ve `arguments` ASP.NET Core modülünü yapılandırıp yayımlanan çıktıya taşınır. Dönüştürme, dosyadaki IIS yapılandırma ayarlarını değiştirmez.
 
-*web.config* dosyası, etkin IIS modüllerini DENETLEYEN ek IIS yapılandırma ayarları sağlayabilir. ASP.NET Core uygulamalarla istekleri işleyebilen IIS modülleri hakkında daha fazla bilgi için bkz. [IIS modules](xref:host-and-deploy/iis/modules) konusu.
+`web.config`Dosya, ETKIN IIS modüllerini denetleyen ek IIS yapılandırma ayarları sağlayabilir. ASP.NET Core uygulamalarla istekleri işleyebilen IIS modülleri hakkında daha fazla bilgi için bkz. [IIS modules](xref:host-and-deploy/iis/modules) konusu.
 
-Web SDK 'sının *web.config* dosyasını dönüştürmasını engellemek için, **\<IsTransformWebConfigDisabled>** Proje dosyasındaki özelliğini kullanın:
+Web SDK 'sının dosyayı dönüştürülmesini engellemek için `web.config` , `<IsTransformWebConfigDisabled>` Proje dosyasındaki özelliğini kullanın:
 
 ```xml
 <PropertyGroup>
@@ -208,19 +250,19 @@ Web SDK 'sının *web.config* dosyasını dönüştürmasını engellemek için,
 </PropertyGroup>
 ```
 
-Web SDK 'sının dosyayı dönüştürmesiyle devre dışı bırakıldığında, *processPath* ve *bağımsız değişkenler* geliştirici tarafından el ile ayarlanmalıdır. Daha fazla bilgi için bkz. <xref:host-and-deploy/aspnet-core-module>.
+Web SDK 'sının dosyayı dönüştürmesiyle devre dışı bırakılırken, `processPath` ve `arguments` geliştiricisi tarafından el ile ayarlanması gerekir. Daha fazla bilgi için bkz. <xref:host-and-deploy/aspnet-core-module>.
 
-### <a name="webconfig-file-location"></a>web.config dosya konumu
+### <a name="webconfig-file-location"></a>`web.config` dosya konumu
 
-[ASP.NET Core modülünü](xref:host-and-deploy/aspnet-core-module) doğru bir şekilde ayarlamak için, dağıtılan uygulamanın [içerik kök](xref:fundamentals/index#content-root) yolunda (genellikle uygulama temel yolu) *web.config* dosyasının mevcut olması gerekir. Bu, IIS 'ye sunulan Web sitesi fiziksel yoluyla aynı konumdadır. *web.config* dosyası, Web dağıtımı kullanarak birden çok uygulamanın yayımlanmasını sağlamak için uygulamanın kökünde gereklidir.
+[ASP.NET Core modülünü](xref:host-and-deploy/aspnet-core-module) doğru bir şekilde ayarlamak için, `web.config` dağıtılan uygulamanın [içerik kök](xref:fundamentals/index#content-root) yolunda (genellikle uygulama temel yolu), dosyanın mevcut olması gerekir. Bu, IIS 'ye sunulan Web sitesi fiziksel yoluyla aynı konumdadır. `web.config`Web dağıtımı kullanarak birden çok uygulama yayımlamayı etkinleştirmek için uygulamanın kökünde dosya gereklidir.
 
-Önemli dosyalar uygulamanın fiziksel yolunda bulunur (örneğin, * \<assembly>.runtimeconfig.json*, * \<assembly> . xml* (XML belge açıklamaları) ve * \<assembly>.deps.js*. *web.config* dosyası mevcut olduğunda ve site normal olarak başlatıldığında, istenirse IIS bu hassas dosyaları sunmaz. *web.config* dosya eksikse, yanlış şekilde adlandırılmış veya site normal başlatma için YAPıLANDıRıMıŞSA IIS hassas dosyalara genel olarak sunabilir.
+Gizli dosyalar, uygulamanın fiziksel yolunda `{ASSEMBLY}.runtimeconfig.json` `{ASSEMBLY}.xml` (XML belge açıklamaları) bulunur ve `{ASSEMBLY}.deps.json` burada yer tutucunun `{ASSEMBLY}` derleme adıdır. `web.config`Dosya mevcut olduğunda ve site normal olarak başlatıldığında, ISTENIRSE IIS bu hassas dosyaları sunmaz. `web.config`Dosya eksikse, yanlış şekilde adlandırılmış veya site normal başlatma için YAPıLANDıRıMıŞSA IIS hassas dosyalara genel olarak sunabilir.
 
-***web.config* dosyasının her zaman dağıtımda mevcut olması gerekir, doğru şekilde adlandırılmış ve siteyi normal başlangıç için yapılandırabiliyor. *web.config* dosyasını bir üretim dağıtımından hiçbir şekilde kaldırmayın.**
+**`web.config`Dosyanın her zaman dağıtımda mevcut olması, doğru şekilde adlandırılması ve siteyi normal başlangıç için yapılandırabiliyor olması gerekir. `web.config`Dosyayı bir üretim dağıtımından hiçbir şekilde kaldırmayın.**
 
 ### <a name="transform-webconfig"></a>Web.config’i dönüştürme
 
-Yayımla *web.config* dönüştürmeniz gerekiyorsa, bkz <xref:host-and-deploy/iis/transform-webconfig> .. Yapılandırma, profil veya ortama göre ortam değişkenlerini ayarlamak için Yayımla *web.config* dönüştürmeniz gerekebilir.
+`web.config`Yayımlama sırasında dönüştürmeniz gerekiyorsa bkz <xref:host-and-deploy/iis/transform-webconfig> .. `web.config`Yapılandırma, profil veya ortama göre ortam değişkenlerini ayarlamak için Yayımla ' ya dönüştürmeniz gerekebilir.
 
 ## <a name="iis-configuration"></a>IIS yapılandırması
 
@@ -237,7 +279,7 @@ Yayımla *web.config* dönüştürmeniz gerekiyorsa, bkz <xref:host-and-deploy/i
    ![Rol hizmetlerini seçin adımında varsayılan rol hizmetleri seçilidir.](index/_static/role-services-ws2016.png)
 
    **Windows kimlik doğrulaması (Isteğe bağlı)**  
-   Windows kimlik doğrulamasını etkinleştirmek için şu düğümleri genişletin: **Web sunucusu**  >  **güvenliği**. **Windows kimlik doğrulama** özelliğini seçin. Daha fazla bilgi için bkz. [Windows \<windowsAuthentication> kimlik doğrulaması](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) ve [Windows kimlik doğrulamasını yapılandırma](xref:security/authentication/windowsauth).
+   Windows kimlik doğrulamasını etkinleştirmek için şu düğümleri genişletin: **Web sunucusu**  >  **güvenliği**. **Windows kimlik doğrulama** özelliğini seçin. Daha fazla bilgi için bkz. [Windows `<windowsAuthentication>` kimlik doğrulaması](/iis/configuration/system.webServer/security/authentication/windowsAuthentication/) ve [Windows kimlik doğrulamasını yapılandırma](xref:security/authentication/windowsauth).
 
    **WebSockets (Isteğe bağlı)**  
    WebSockets ASP.NET Core 1,1 veya üzeri bir sürümde desteklenir. WebSockets etkinleştirmek için şu düğümleri genişletin: **Web sunucusu**  >  **uygulama geliştirme**. **WebSocket protokolü** özelliğini seçin. Daha fazla bilgi için bkz. [WebSockets](xref:fundamentals/websockets).
@@ -303,7 +345,7 @@ Yükleyicinin önceki bir sürümünü elde etmek için:
    * `OPT_NO_RUNTIME=1`: .NET Core çalışma zamanını yüklemeyi atlayın. Sunucu yalnızca [kendi kendine içerilen dağıtımları (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd)barındırdığınızda kullanılır.
    * `OPT_NO_SHAREDFX=1`: ASP.NET paylaşılan çerçevesini (ASP.NET çalışma zamanı) yüklemeyi atlayın. Sunucu yalnızca [kendi kendine içerilen dağıtımları (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd)barındırdığınızda kullanılır.
    * `OPT_NO_X86=1`: X86 çalışma zamanlarını yüklemeyi atlayın. 32 bitlik uygulamalar barındırmayabildiğinizi bildiğiniz durumlarda bu parametreyi kullanın. Gelecekte 32-bit ve 64 bit uygulamaları barındırabilmeniz gereken herhangi bir şansınız varsa, bu parametreyi kullanmayın ve her iki çalışma zamanını da yüklemeyin.
-   * `OPT_NO_SHARED_CONFIG_CHECK=1`: Paylaşılan yapılandırma (*applicationHost.config*), IIS yüklemesiyle aynı makinada olduğunda, IIS paylaşılan yapılandırması kullanma denetimini devre dışı bırakın. *Yalnızca ASP.NET Core 2,2 veya sonraki bir sürümü Paketcisi yükleyicilerini barındırmak için kullanılabilir.* Daha fazla bilgi için bkz. <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
+   * `OPT_NO_SHARED_CONFIG_CHECK=1`: Paylaşılan yapılandırma ( `applicationHost.config` ), IIS yüklemesiyle aynı makineli olduğunda IIS paylaşılan yapılandırması kullanma denetimini devre dışı bırakın. *Yalnızca ASP.NET Core 2,2 veya sonraki bir sürümü Paketcisi yükleyicilerini barındırmak için kullanılabilir.* Daha fazla bilgi için bkz. <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
 1. Sistemi yeniden başlatın veya komut kabuğu 'nda aşağıdaki komutları yürütün:
 
    ```console
@@ -364,7 +406,7 @@ Daha fazla bilgi için bkz. [Windows kimlik doğrulamasını yapılandırma](xre
 
 ## <a name="deploy-the-app"></a>Uygulamayı dağıtma
 
-Uygulamayı [IIS sitesi oluşturma](#create-the-iis-site) bölümünde oluşturulan IIS **fiziksel yol** klasörüne dağıtın. [Web dağıtımı](/iis/publish/using-web-deploy/introduction-to-web-deploy) dağıtım için önerilen mekanizmadır, ancak uygulamayı projenin *Publish* klasöründen barındırma sisteminin dağıtım klasörüne taşımak için çeşitli seçenekler mevcuttur.
+Uygulamayı [IIS sitesi oluşturma](#create-the-iis-site) bölümünde oluşturulan IIS **fiziksel yol** klasörüne dağıtın. [Web dağıtımı](/iis/publish/using-web-deploy/introduction-to-web-deploy) dağıtım için önerilen mekanizmadır, ancak uygulamayı projenin `publish` klasöründen barındırma sisteminin dağıtım klasörüne taşımak için çeşitli seçenekler mevcuttur.
 
 ### <a name="web-deploy-with-visual-studio"></a>Visual Studio ile Web Dağıtımı
 
@@ -394,9 +436,9 @@ Aşağıdaki örnekte, site bağlantı noktasındaki IIS **ana bilgisayar adına
 
 Dağıtım klasöründeki dosyalar, uygulama çalışırken kilitlenir. Dağıtım sırasında kilitli dosyaların üzerine yazılamaz. Kilitli dosyaları bir dağıtımda serbest bırakmak için aşağıdaki yaklaşımlardan **birini** kullanarak uygulama havuzunu durdurun:
 
-* Proje dosyasında Web Dağıtımı ve başvurusunu kullanın `Microsoft.NET.Sdk.Web` . Bir *app_offline.htm* dosyası Web uygulaması dizininin köküne yerleştirilir. Dosya mevcut olduğunda, ASP.NET Core modülü uygulamayı düzgün bir şekilde kapatır ve dağıtım sırasında *app_offline.htm* dosyasına hizmet verir. Daha fazla bilgi için [ASP.NET Core modülü yapılandırma başvurusuna](xref:host-and-deploy/aspnet-core-module#app_offlinehtm)bakın.
+* Proje dosyasında Web Dağıtımı ve başvurusunu kullanın `Microsoft.NET.Sdk.Web` . `app_offline.htm`Web uygulaması dizininin köküne bir dosya yerleştirilir. Dosya olduğunda, ASP.NET Core modülü uygulamayı düzgün bir şekilde kapatır ve `app_offline.htm` dağıtım sırasında dosyayı hizmet eder. Daha fazla bilgi için [ASP.NET Core modülü yapılandırma başvurusuna](xref:host-and-deploy/aspnet-core-module#app_offlinehtm)bakın.
 * Sunucu üzerindeki IIS Yöneticisi 'nde uygulama havuzunu el ile durdurun.
-* *app_offline.htm* bırakmak için PowerShell kullanın (PowerShell 5 veya üzeri gerektirir):
+* Atmak için PowerShell 'i kullanın `app_offline.htm` (PowerShell 5 veya üzerini gerektirir):
 
   ```powershell
   $pathToApp = 'PATH_TO_APP'
@@ -408,7 +450,6 @@ Dağıtım klasöründeki dosyalar, uygulama çalışırken kilitlenir. Dağıt�
 
   # Restart the AppPool
   Remove-Item -Path $pathToApp app_offline.htm
-
   ```
 
 ## <a name="data-protection"></a>Veri koruma
@@ -531,7 +572,7 @@ IIS çalışan işlemi uygulamaya yükseltilmiş erişim gerektiriyorsa, uygulam
 
 1. **Konumlar** düğmesini seçin ve sistemin seçili olduğundan emin olun.
 
-1. **Seçilecek nesne adlarını girin** alanına ** \\ app_pool_name>IIS AppPool<** girin. **Adları denetle** düğmesini seçin. *DefaultAppPool* için **IIS APPPOOL\DefaultAppPool**kullanarak adları denetleyin. **Adları denetle** düğmesi seçildiğinde, nesne adları alanında bir **DefaultAppPool** değeri gösterilir. Uygulama havuzu adının doğrudan nesne adları alanına girilmesi mümkün değildir. Nesne adı denetlenirken **IIS AppPool \\<APP_POOL_NAME>** biçimini kullanın.
+1. `IIS AppPool\{APP POOL NAME}`Yer tutucusunun `{APP POOL NAME}` uygulama havuzu adı olduğu, burada **Seçilecek nesne adlarını girin** bölümünde yazın. **Adları denetle** düğmesini seçin. *DefaultAppPool* için, kullanarak adları kontrol edin `IIS AppPool\DefaultAppPool` . **Adları denetle** düğmesi seçildiğinde, `DefaultAppPool` nesne adları alanında bir değeri gösterilir. Uygulama havuzu adının doğrudan nesne adları alanına girilmesi mümkün değildir. `IIS AppPool\{APP POOL NAME}` `{APP POOL NAME}` Nesne adı denetlenirken yer tutucunun uygulama havuzu adı olduğu biçimi kullanın.
 
    ![Uygulama klasörü için Kullanıcı veya Grup Seç iletişim kutusu: "ad denetle" seçmeden önce "DefaultAppPool" uygulama havuzu adı, nesne adları alanında "IIS AppPool" öğesine eklenir \" .](index/_static/select-users-or-groups-1.png)
 
@@ -541,7 +582,7 @@ IIS çalışan işlemi uygulamaya yükseltilmiş erişim gerektiriyorsa, uygulam
 
 1. Okuma &amp; yürütme izinleri varsayılan olarak verilmelidir. Gerektiğinde ek izinler sağlayın.
 
-Erişim, **ıacl 'ler** Aracı kullanılarak bir komut isteminde de verilebilir. Örnek olarak *DefaultAppPool* kullanarak, aşağıdaki komut kullanılır:
+Erişim, **ıacl 'ler** Aracı kullanılarak bir komut isteminde de verilebilir. `DefaultAppPool`Örnek olarak kullanarak, aşağıdaki komut kullanılır:
 
 ```console
 ICACLS C:\sites\MyWebApp /grant "IIS AppPool\DefaultAppPool":F
@@ -549,11 +590,29 @@ ICACLS C:\sites\MyWebApp /grant "IIS AppPool\DefaultAppPool":F
 
 Daha fazla bilgi için [ıcacl 'ler](/windows-server/administration/windows-commands/icacls) konusuna bakın.
 
+## <a name="http2-support"></a>HTTP/2 desteği
+
+[Http/2](https://httpwg.org/specs/rfc7540.html) aşağıdaki IIS dağıtım senaryolarında ASP.NET Core desteklenir:
+
+* İşlem içi
+  * Windows Server 2016/Windows 10 veya üzeri; IIS 10 veya üzeri
+  * TLS 1,2 veya üzeri bağlantı
+* İşlem dışı
+  * Windows Server 2016/Windows 10 veya üzeri; IIS 10 veya üzeri
+  * Herkese açık uç sunucu bağlantıları HTTP/2 kullanır, ancak [Kestrel sunucusuyla](xref:fundamentals/servers/kestrel) ters proxy bağlantısı http/1.1 kullanır.
+  * TLS 1,2 veya üzeri bağlantı
+
+Bir HTTP/2 bağlantısı oluşturulduğunda, işlem içi dağıtım için [`HttpRequest.Protocol`](xref:Microsoft.AspNetCore.Http.HttpRequest.Protocol*) raporları `HTTP/2` . Bir HTTP/2 bağlantısı oluşturulduğunda, işlem dışı bir dağıtım için [`HttpRequest.Protocol`](xref:Microsoft.AspNetCore.Http.HttpRequest.Protocol*) raporları `HTTP/1.1` .
+
+İşlem içi ve işlem dışı barındırma modelleri hakkında daha fazla bilgi için bkz <xref:host-and-deploy/aspnet-core-module> ..
+
+HTTP/2 varsayılan olarak etkindir. HTTP/2 bağlantısı kurulmadıysa bağlantılar HTTP/1.1 'ye geri döner. IIS dağıtımları ile HTTP/2 yapılandırması hakkında daha fazla bilgi için bkz. [IIS 'de http/2](/iis/get-started/whats-new-in-iis-10/http2-on-iis).
+
 ## <a name="cors-preflight-requests"></a>CORS ön denetim istekleri
 
 *Bu bölüm, yalnızca .NET Framework hedefleyen ASP.NET Core uygulamalar için geçerlidir.*
 
-.NET Framework hedefleyen ASP.NET Core bir uygulama için, Seçenekler istekleri uygulamaya varsayılan olarak IIS 'de aktarılmaz. *web.config* ' de uygulamanın IIS işleyicilerini seçenek isteklerini geçirmek üzere nasıl yapılandıracağınızı öğrenmek için bkz. [ASP.NET Web API 2 ' de çapraz kaynak ISTEKLERINI etkinleştirme: CORS 'nin nasıl çalıştığı](/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api#how-cors-works).
+.NET Framework hedefleyen ASP.NET Core bir uygulama için, Seçenekler istekleri uygulamaya varsayılan olarak IIS 'de aktarılmaz. ' De uygulama IIS işleyicilerini seçenek isteklerini geçecek şekilde yapılandırma hakkında bilgi edinmek için `web.config` bkz. [ASP.NET Web API 2 ' de çapraz kaynak isteklerini ETKINLEŞTIRME: CORS 'Nin nasıl çalıştığı](/aspnet/web-api/overview/security/enabling-cross-origin-requests-in-web-api#how-cors-works).
 
 ## <a name="application-initialization-module-and-idle-timeout"></a>Uygulama başlatma modülü ve boşta kalma zaman aşımı
 
@@ -593,7 +652,7 @@ Site için uygulama başlatma modülünü etkinleştirmek üzere aşağıdaki ya
   1. Uygulamaya sağ tıklayın ve **Web sitesi** > **Gelişmiş ayarlarını**Yönet ' i seçin.
   1. Varsayılan **önyükleme etkin** ayarı **false**şeklindedir. **Önyükleme etkin** ' i **true**olarak ayarlayın. **Tamam**’ı seçin.
 
-* *web.config*kullanarak, `<applicationInitialization>` öğesini `doAppInitAfterRestart` `true` `<system.webServer>` uygulamasının *web.config* dosyasındaki öğelerine ayarlı olarak ekleyin:
+* Kullanarak `web.config` , `<applicationInitialization>` öğesini `doAppInitAfterRestart` `true` `<system.webServer>` uygulamasının web.config' dosyasındaki öğelerine ayarlı öğesine ekleyin:
 
   ```xml
   <?xml version="1.0" encoding="utf-8"?>
@@ -708,7 +767,7 @@ IIS HTTP sunucusu isteği işlediğinde, istek ASP.NET Core ara yazılım ardı�
 
 İşlem içi barındırma, mevcut uygulamalar için kabul ediyor, ancak tüm IIS ve IIS Express senaryoları için varsayılan [DotNet yeni](/dotnet/core/tools/dotnet-new) şablonlar, işlem içi barındırma modeli için varsayılan olarak kullanılır.
 
-`CreateDefaultBuilder`<xref:Microsoft.AspNetCore.Hosting.Server.IServer> <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS*> [CoreCLR](/dotnet/standard/glossary#coreclr) 'YI önyüklemek ve uygulamayı IIS çalışan işleminin içinde barındırmak için yöntemini çağırarak bir örnek ekler (*w3wp.exe* veya *iisexpress.exe*). Performans testleri, bir .NET Core uygulamasını işlem içinde barındıran uygulamanın, uygulamayı işlem dışı ve [Kestrel](xref:fundamentals/servers/kestrel) sunucusuna proxy alma isteklerinin barındırılmasına kıyasla önemli ölçüde daha yüksek istek aktarım hızı sağladığını gösterir.
+`CreateDefaultBuilder`<xref:Microsoft.AspNetCore.Hosting.Server.IServer> <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIIS%2A> [CoreCLR](/dotnet/standard/glossary#coreclr) 'YI önyüklemek ve uygulamayı IIS çalışan işleminin içinde barındırmak için yöntemini çağırarak bir örnek ekler (*w3wp.exe* veya *iisexpress.exe*). Performans testleri, bir .NET Core uygulamasını işlem içinde barındıran uygulamanın, uygulamayı işlem dışı ve [Kestrel](xref:fundamentals/servers/kestrel) sunucusuna proxy alma isteklerinin barındırılmasına kıyasla önemli ölçüde daha yüksek istek aktarım hızı sağladığını gösterir.
 
 ### <a name="out-of-process-hosting-model"></a>İşlem dışı barındırma modeli
 
@@ -732,7 +791,7 @@ Barındırma hakkında daha fazla bilgi için bkz. [ASP.NET Core ana bilgisayar]
 
 ### <a name="enable-the-iisintegration-components"></a>Iısıntegration bileşenlerini etkinleştirin
 
-`CreateWebHostBuilder`(*Program.cs*) içinde BIR konak oluştururken <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> IIS tümleştirmesini etkinleştirmek için çağırın:
+`CreateWebHostBuilder`(*Program.cs*) içinde BIR konak oluştururken <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> IIS tümleştirmesini etkinleştirmek için çağırın:
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>
@@ -746,7 +805,7 @@ Hakkında daha fazla bilgi için `CreateDefaultBuilder` bkz <xref:fundamentals/h
 
 **İşlem içi barındırma modeli**
 
-IIS sunucu seçeneklerini yapılandırmak için, içinde için bir hizmet yapılandırması <xref:Microsoft.AspNetCore.Builder.IISServerOptions> ekleyin <xref:Microsoft.AspNetCore.Hosting.IStartup.ConfigureServices*> . Aşağıdaki örnek, Automatıcauthentication 'ı devre dışı bırakır:
+IIS sunucu seçeneklerini yapılandırmak için, içinde için bir hizmet yapılandırması <xref:Microsoft.AspNetCore.Builder.IISServerOptions> ekleyin <xref:Microsoft.AspNetCore.Hosting.IStartup.ConfigureServices%2A> . Aşağıdaki örnek, Automatıcauthentication 'ı devre dışı bırakır:
 
 ```csharp
 services.Configure<IISServerOptions>(options => 
@@ -1297,7 +1356,7 @@ Kestrel, isteği modülden başlattıktan sonra, istek ASP.NET Core ara yazılı
 
 `CreateDefaultBuilder` Web sunucusu olarak [Kestrel](xref:fundamentals/servers/kestrel) sunucusunu yapılandırır ve [ASP.NET Core modülü](xref:host-and-deploy/aspnet-core-module)için temel yolu ve bağlantı noktasını yapılandırarak IIS tümleştirmesini sunar.
 
-ASP.NET Core modülü, arka uç işlemine atanacak dinamik bir bağlantı noktası oluşturur. `CreateDefaultBuilder` yöntemini çağırır <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration*> . `UseIISIntegration` Kestrel 'i, localhost IP adresinde () dinamik bağlantı noktasında dinlemek üzere yapılandırır `127.0.0.1` . Dinamik bağlantı noktası 1234 ise, Kestrel dinler `127.0.0.1:1234` . Bu yapılandırma tarafından belirtilen diğer URL yapılandırmalarının yerini alır:
+ASP.NET Core modülü, arka uç işlemine atanacak dinamik bir bağlantı noktası oluşturur. `CreateDefaultBuilder` yöntemini çağırır <xref:Microsoft.AspNetCore.Hosting.WebHostBuilderIISExtensions.UseIISIntegration%2A> . `UseIISIntegration` Kestrel 'i, localhost IP adresinde () dinamik bağlantı noktasında dinlemek üzere yapılandırır `127.0.0.1` . Dinamik bağlantı noktası 1234 ise, Kestrel dinler `127.0.0.1:1234` . Bu yapılandırma tarafından belirtilen diğer URL yapılandırmalarının yerini alır:
 
 * `UseUrls`
 * [Kestrel 'in dinleme API 'SI](xref:fundamentals/servers/kestrel#endpoint-configuration)
@@ -1313,7 +1372,7 @@ Barındırma hakkında daha fazla bilgi için bkz. [ASP.NET Core ana bilgisayar]
 
 ### <a name="enable-the-iisintegration-components"></a>Iısıntegration bileşenlerini etkinleştirin
 
-`CreateWebHostBuilder`(*Program.cs*) içinde BIR konak oluştururken <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> IIS tümleştirmesini etkinleştirmek için çağırın:
+`CreateWebHostBuilder`(*Program.cs*) içinde BIR konak oluştururken <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder%2A> IIS tümleştirmesini etkinleştirmek için çağırın:
 
 ```csharp
 public static IWebHostBuilder CreateWebHostBuilder(string[] args) =>

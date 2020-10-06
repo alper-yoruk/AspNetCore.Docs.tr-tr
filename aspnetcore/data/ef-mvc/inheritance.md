@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/inheritance
-ms.openlocfilehash: 34c4ea28103b9eb12601b383a46091084391f120
-ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
+ms.openlocfilehash: fabb0ed9c0f64a529b516d521d60a7d862e2654a
+ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90847604"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91754573"
 ---
 # <a name="tutorial-implement-inheritance---aspnet-mvc-with-ef-core"></a>Öğretici: EF Core devralma-ASP.NET MVC uygulama
 
@@ -64,7 +64,7 @@ Tek bir veritabanı tablosundan bir varlık devralma yapısı oluşturmanın bu 
 Alternatif olarak, veritabanının devralma yapısına benzer bir şekilde görünmesini sağlayabilirsiniz. Örneğin, kişi tablosunda yalnızca ad alanları olabilir ve Tarih alanlarıyla ayrı eğitmen ve öğrenci tabloları vardır.
 
 > [!WARNING]
-> Tür başına tablo (TPT) EF Core 3. x tarafından desteklenmez, ancak bu [EF Core 5,0](https://docs.microsoft.com/ef/core/what-is-new/ef-core-5.0/plan)' de uygulanmıştır.
+> Tür başına tablo (TPT) EF Core 3. x tarafından desteklenmez, ancak bu [EF Core 5,0](/ef/core/what-is-new/ef-core-5.0/plan)' de uygulanmıştır.
 
 ![Tablo türü devralma](inheritance/_static/tpt.png)
 

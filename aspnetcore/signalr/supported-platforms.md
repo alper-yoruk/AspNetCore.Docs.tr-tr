@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/supported-platforms
-ms.openlocfilehash: 91fd2553803d855b338b1d1b46d55e1d1e4cc21e
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a342dd787eceadd22ac26b57a3615a6b0b21f461
+ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635157"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91754508"
 ---
 # <a name="aspnet-core-no-locsignalr-supported-platforms"></a>SignalRDesteklenen platformları ASP.NET Core
 
@@ -35,13 +35,12 @@ SignalR ASP.NET Core için ASP.NET Core desteklediği tüm sunucu platformunu de
 
 [JavaScript Istemcisi](xref:signalr/javascript-client) NodeJS 8 ve sonraki sürümlerde ve aşağıdaki tarayıcılarda çalışır:
 
-| Tarayıcı                         | Sürüm         |
-| ------------------------------- | --------------- |
-| Microsoft Edge                  | Geçerli&dagger; |
-| Mozilla Firefox                 | Geçerli&dagger; |
-| Google Chrome; Android içerir | Geçerli&dagger; |
-| Uygulamasını iOS içerir            | Geçerli&dagger; |
-| Microsoft Internet Explorer     | 11              |
+| Tarayıcı                          | Sürüm         |
+| -------------------------------- | --------------- |
+| İOS dahil Apple Safari      | Geçerli&dagger; |
+| Android dahil Google Chrome | Geçerli&dagger; |
+| Microsoft Edge                   | Geçerli&dagger; |
+| Mozilla Firefox                  | Geçerli&dagger; |
 
 &dagger;*Geçerli* , tarayıcının en son sürümünü ifade eder.
 

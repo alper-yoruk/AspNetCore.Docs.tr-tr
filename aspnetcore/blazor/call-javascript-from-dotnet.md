@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: 89ffdfe2b714941440d7560b0ff1331a5c5523f6
-ms.sourcegitcommit: c0a15ab8549cb729731a0fdf1d7da0b7feaa11ff
+ms.openlocfilehash: fb74fef2f87f150a9c7db9746a359fbf0a9900ad
+ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/02/2020
-ms.locfileid: "91671749"
+ms.lasthandoff: 10/06/2020
+ms.locfileid: "91754495"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>ASP.NET Core .NET metotlarından JavaScript işlevlerini çağırın Blazor
 
@@ -632,7 +632,7 @@ Yukarıdaki örnek, kullanıcının şu şekilde bir etkileşimli harita Kullan�
 * , Kaydırmak veya yakınlaştırmak için sürükleyebilir.
 * Önceden tanımlanmış konumlara geçmek için düğmeler ' e tıklayın.
 
-<img src="https://user-images.githubusercontent.com/1101362/94939821-92ef6700-04ca-11eb-858e-fff6df0053ae.png" width="600" />
+![Esistol, Birleşik Krallık ve Tokyo, Japonya ' ı seçmek için bkz. Tokyo 'daki mapbox açık Haritası](https://user-images.githubusercontent.com/1101362/94939821-92ef6700-04ca-11eb-858e-fff6df0053ae.png)
 
 Anlaşılması için önemli noktaları şunlardır:
 
