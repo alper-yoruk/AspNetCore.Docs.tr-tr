@@ -5,7 +5,7 @@ description: Uygulamaları ASP.NET Core uygulamalar olarak güvenli hale getirme
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 05/02/2020
+ms.date: 10/06/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/server/index
-ms.openlocfilehash: ba9fe3c0149679fa5760c0c9214cd426f1804c31
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d6d0f6f859dbaef98c6c8a9c53fe9858705cdc0a
+ms.sourcegitcommit: 139c998d37e9f3e3d0e3d72e10dbce8b75957d89
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626460"
+ms.lasthandoff: 10/07/2020
+ms.locfileid: "91805511"
 ---
 # <a name="secure-aspnet-core-no-locblazor-server-apps"></a>Güvenli ASP.NET Core Blazor Server uygulamaları
 
 [Luke Latham](https://github.com/guardrex) tarafından
 
-Blazor Server uygulamalar, güvenlik için ASP.NET Core uygulamalarla aynı şekilde yapılandırılır. Daha fazla bilgi için, altındaki makalelere bakın <xref:security/index> . Bu genel bakışın altındaki konular özellikle için geçerlidir Blazor Server . 
+Blazor Server uygulamalar, güvenlik için ASP.NET Core uygulamalarla aynı şekilde yapılandırılır. Daha fazla bilgi için, altındaki makalelere bakın <xref:security/index> . Bu genel bakışın altındaki konular özellikle için geçerlidir Blazor Server .
 
 ## <a name="no-locblazor-server-project-template"></a>Blazor Server Proje şablonu
 
@@ -108,7 +108,14 @@ Bu `-o|--output` seçeneği kullanarak, komut yer tutucusu için belirtilen değ
 * Proje için bir klasör oluşturun.
 * Projeyi adlandırın.
 
-Daha fazla bilgi için [`dotnet new`](/dotnet/core/tools/dotnet-new) .NET Core kılavuzundaki komutuna bakın.
+Daha fazla bilgi için:
+
+* [`dotnet new`](/dotnet/core/tools/dotnet-new).NET Core kılavuzundaki komutuna bakın.
+* Blazor ServerBir komut kabuğu 'nda () şablonu için Yardım komutunu yürütün `blazorserver` :
+
+  ```dotnetcli
+  dotnet new blazorserver --help
+  ```
 
 ---
 
@@ -118,3 +125,8 @@ IdentityBir projeye yapı iskelesi Blazor Server :
 
 * [Mevcut yetkilendirme olmadan](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-without-existing-authorization).
 * [Yetkilendirme ile](xref:security/authentication/scaffold-identity#scaffold-identity-into-a-blazor-server-project-with-authorization).
+
+## <a name="additional-resources"></a>Ek kaynaklar
+
+* [Hızlı başlangıç: Microsoft 'a ASP.NET Core Web uygulamasına oturum açma ekleme](/azure/active-directory/develop/quickstart-v2-aspnet-core-webapp)
+* [Hızlı başlangıç: ASP.NET Core Web API 'sini Microsoft Identity platformu ile koruma](/azure/active-directory/develop/quickstart-v2-aspnet-core-web-api)

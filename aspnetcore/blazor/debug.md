@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: e12b0e6d1bf9eab751f6605b9a156f637f2b0c0f
-ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
+ms.openlocfilehash: d4fd0d501ff14e37bb55b78bb6493ad43f9e5a87
+ms.sourcegitcommit: 139c998d37e9f3e3d0e3d72e10dbce8b75957d89
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/27/2020
-ms.locfileid: "91393840"
+ms.lasthandoff: 10/07/2020
+ms.locfileid: "91805576"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Hata ayıklama ASP.NET Core Blazor WebAssembly
 
@@ -191,7 +191,7 @@ Uygulamalar için özel bir uygulama temel yolu kullanma hakkında daha fazla bi
 
 1. Barındırılan Blazor WebAssembly uygulamanın çözüm klasörünü vs Code açın.
 
-1. Proje için bir başlatma yapılandırma kümesi yoksa, aşağıdaki bildirim görüntülenir. **Evet** seçeneğini belirleyin.
+1. Proje için bir başlatma yapılandırma kümesi yoksa, aşağıdaki bildirim görüntülenir. **Evet**’i seçin.
 
    > ' {APPLICATION NAME} ' içindeki derleme ve hata ayıklama için gerekli varlıklar eksik. Bunları ekleyin mi?
 
@@ -345,6 +345,9 @@ Hatalar halinde çalıştırıyorsanız, aşağıdaki ipuçları yardımcı olab
 * **Hata ayıklayıcı** sekmesinde, tarayıcınızda Geliştirici Araçları ' nı açın. Konsolunda, `localStorage.clear()` tüm kesme noktalarını kaldırmak için yürütün.
 * ASP.NET Core HTTPS geliştirme sertifikasını yüklediğinizden ve güvendiğini doğrulayın. Daha fazla bilgi için bkz. <xref:security/enforcing-ssl#troubleshoot-certificate-problems>.
 * Visual Studio, **ASP.NET için JavaScript hata ayıklamasını etkinleştir (Chrome, Edge ve IE)** seçeneği için **araç**  >  **seçeneklerinde**  >  **hata ayıklama**  >  **genel**' de gereklidir. Bu, Visual Studio için varsayılan ayardır. Hata ayıklama çalışmıyorsa, seçeneğinin seçili olduğundan emin olun.
+* Ortamınız bir HTTP proxy kullanıyorsa, `localhost` proxy atlama ayarlarına dahil edildiğinden emin olun. Bu, `NO_PROXY` ortam değişkeni şu şekilde ayarlanarak yapılabilir:
+  * `launchSettings.json`Projenin dosyası.
+  * Kullanıcı veya sistem ortamı değişkenleri düzeyinde tüm uygulamalara uygulanır. Bir ortam değişkeni kullanırken, değişikliğin etkili olması için Visual Studio 'Yu yeniden başlatın.
 
 ### <a name="breakpoints-in-oninitializedasync-not-hit"></a>`OnInitialized{Async}`İsabet bulunmayan kesme noktaları
 
