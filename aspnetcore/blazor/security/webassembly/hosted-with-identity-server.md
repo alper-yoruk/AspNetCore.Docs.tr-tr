@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 91cc7ffc46f5f1f68efd7e481479b19938476cb0
-ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
+ms.openlocfilehash: 6ae8c55fcfc85dc725a7dd20a7dbecba063a13e9
+ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91762249"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91900797"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-no-locidentity-server"></a>Blazor WebAssemblySunucu ile ASP.NET Core barındırılan bir uygulamanın güvenliğini sağlama Identity
 
@@ -72,7 +72,7 @@ Blazor WebAssemblyKimlik doğrulama mekanizmasına sahip yeni bir proje oluştur
 
 ---
 
-## <a name="server-app-configuration"></a>Sunucu uygulaması yapılandırması
+## <a name="server-app-configuration"></a>*`Server`* Uygulama yapılandırması
 
 Aşağıdaki bölümlerde, kimlik doğrulama desteği dahil edildiğinde projenin eklemeleri açıklanır.
 
@@ -170,7 +170,7 @@ Proje kökündeki uygulama ayarları dosyasında ( `appsettings.json` ), `Identi
 
 Yer tutucu, `{APP ASSEMBLY}` uygulamanın derleme adıdır (örneğin, `BlazorSample.Client` ).
 
-## <a name="client-app-configuration"></a>İstemci uygulama yapılandırması
+## <a name="client-app-configuration"></a>*`Client`* Uygulama yapılandırması
 
 ### <a name="authentication-package"></a>Kimlik doğrulama paketi
 
@@ -287,7 +287,7 @@ Uygulamayı sunucu projesinden çalıştırın. Visual Studio 'yu kullanırken �
 
 ### <a name="custom-user-factory"></a>Özel Kullanıcı fabrikası
 
-Istemci uygulamasında özel bir Kullanıcı fabrikası oluşturun. Identity Sunucu, tek bir talep içinde birden çok rolü JSON dizisi olarak gönderir `role` . Tek bir rol, talepte bir dize değeri olarak gönderilir. Fabrika, `role` kullanıcının rollerinin her biri için ayrı bir talep oluşturur.
+*`Client`* Uygulamada, özel bir Kullanıcı fabrikası oluşturun. Identity Sunucu, tek bir talep içinde birden çok rolü JSON dizisi olarak gönderir `role` . Tek bir rol, talepte bir dize değeri olarak gönderilir. Fabrika, `role` kullanıcının rollerinin her biri için ayrı bir talep oluşturur.
 
 `CustomUserFactory.cs`:
 
@@ -349,14 +349,14 @@ public class CustomUserFactory
 }
 ```
 
-Istemci uygulamasında, () fabrikasını kaydedin `Program.Main` `Program.cs` :
+*`Client`* Uygulamada, () fabrikasını kaydedin `Program.Main` `Program.cs` :
 
 ```csharp
 builder.Services.AddApiAuthorization()
     .AddAccountClaimsPrincipalFactory<CustomUserFactory>();
 ```
 
-Sunucu uygulamasında, <xref:Microsoft.AspNetCore.Identity.IdentityBuilder.AddRoles*> Identity rol ile ilgili hizmetleri ekleyen Oluşturucu üzerinde çağırın:
+Uygulamada, *`Server`* <xref:Microsoft.AspNetCore.Identity.IdentityBuilder.AddRoles*> Identity rol ile ilgili hizmetleri ekleyen Oluşturucu üzerinde çağırın:
 
 ```csharp
 using Microsoft.AspNetCore.Identity;
@@ -378,7 +378,7 @@ Aşağıdaki yaklaşımlardan **birini** kullanın:
 
 #### <a name="api-authorization-options"></a>API yetkilendirme seçenekleri
 
-Sunucu uygulamasında:
+*`Server`* Uygulamada:
 
 * Identity `name` Ve `role` taleplerini kimlik belirtecine ve erişim belirtecine yerleştirmek için sunucuyu yapılandırın.
 * JWT belirteci işleyicisindeki roller için varsayılan eşlemeyi engelleyin.
@@ -402,7 +402,7 @@ JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("role");
 
 #### <a name="profile-service"></a>Profil hizmeti
 
-Sunucu uygulamasında bir `ProfileService` uygulama oluşturun.
+*`Server`* Uygulamada bir `ProfileService` uygulama oluşturun.
 
 `ProfileService.cs`:
 
@@ -436,7 +436,7 @@ public class ProfileService : IProfileService
 }
 ```
 
-Sunucu uygulamasında profil hizmetini şu şekilde kaydedin `Startup.ConfigureServices` :
+*`Server`* Uygulamada, profil hizmetini şu şekilde kaydedin `Startup.ConfigureServices` :
 
 ```csharp
 using IdentityServer4.Services;
@@ -448,7 +448,7 @@ services.AddTransient<IProfileService, ProfileService>();
 
 ### <a name="use-authorization-mechanisms"></a>Yetkilendirme mekanizmalarını kullanma
 
-Istemci uygulamasında, bileşen yetkilendirme yaklaşımları bu noktada işlevseldir. Bileşenlerdeki yetkilendirme mekanizmalarının herhangi biri, kullanıcıyı yetkilendirmek için bir rol kullanabilir:
+*`Client`* Uygulamada, bileşen yetkilendirme yaklaşımları bu noktada işlevseldir. Bileşenlerdeki yetkilendirme mekanizmalarının herhangi biri, kullanıcıyı yetkilendirmek için bir rol kullanabilir:
 
 * [ `AuthorizeView` bileşen](xref:blazor/security/index#authorizeview-component) (örnek: `<AuthorizeView Roles="admin">` )
 * [ `[Authorize]` Attribute yönergesi](xref:blazor/security/index#authorize-attribute) ( <xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute> ) (örnek: `@attribute [Authorize(Roles = "admin")]` )
@@ -463,7 +463,7 @@ Istemci uygulamasında, bileşen yetkilendirme yaklaşımları bu noktada işlev
   }
   ```
 
-`User.Identity.Name` , genellikle oturum açma e-posta adresi olan kullanıcının kullanıcı adıyla Istemci uygulamasına doldurulur.
+`User.Identity.Name` , *`Client`* genellikle oturum açma e-posta adresi olan kullanıcının kullanıcı adıyla birlikte doldurulur.
 
 [!INCLUDE[](~/includes/blazor-security/usermanager-signinmanager.md)]
 

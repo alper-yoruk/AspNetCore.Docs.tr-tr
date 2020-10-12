@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/logging-and-diagnostics
-ms.openlocfilehash: 9af2311dd1f42cce3547c8215af22d2613453510
-ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
+ms.openlocfilehash: 523eec53d7d21723dcf136c4e5ce299533a78cc6
+ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91755314"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91901031"
 ---
 # <a name="log-creation-and-redirection"></a>Günlük oluşturma ve yeniden yönlendirme
 
@@ -98,4 +98,4 @@ Konumlar (birden çok konuma izin verilir):
 > [!WARNING]
 > Bir sorunu gidermek için dağıtımda hata ayıklama günlüğü 'nün gerekenden uzun süre **etkin bırakmayın.** Günlüğün boyutu sınırlı değil. Hata ayıklama günlüğünün etkin bırakılması, kullanılabilir disk alanını tüketebilir ve sunucu veya App Service 'i kilitlemez.
 
-Dosyadaki [ `web.config` ](xref:host-and-deploy/iis/web-config#configuration-with-webconfig) öğesinin bir örneği Için bkz. yapılandırma `aspNetCore` `web.config` .
+Dosyadaki öğenin bir örneği için [ile `web.config` ASP.NET Core modülün yapılandırmasına](xref:host-and-deploy/iis/web-config#configuration-of-aspnet-core-module-with-webconfig) bakın `aspNetCore` `web.config` .

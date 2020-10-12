@@ -12,7 +12,7 @@ Kalan tanımlama bilgilerinin ve site verilerinin test ve sorun giderme konusund
 
 * Tarayıcı yapılandırma
   * Tarayıcı her kapatıldığında tüm tanımlama bilgilerini ve site verilerini silmek üzere yapılandırabileceğiniz test için bir tarayıcı kullanın.
-  * Tarayıcının el ile veya IDE tarafından, uygulama, test kullanıcısı veya sağlayıcı yapılandırmasındaki herhangi bir değişiklik arasında kapatıldığından emin olun.
+  * Uygulamanın, test kullanıcısının veya sağlayıcı yapılandırmasının herhangi bir değişikliği için tarayıcının el ile veya IDE tarafından kapatıldığından emin olun.
 * Visual Studio 'da veya özel modda tarayıcı açmak için özel bir komut kullanın:
   * Visual Studio 'nun **Çalıştır** düğmesinden iletişim **kutusunu açın.**
   * **Ekle** düğmesini seçin.
@@ -21,13 +21,13 @@ Kalan tanımlama bilgilerinin ve site verilerinin test ve sorun giderme konusund
     * Google Chrome: `C:\Program Files (x86)\Google\Chrome\Application\chrome.exe`
     * Mozilla Firefox: `C:\Program Files\Mozilla Firefox\firefox.exe`
   * **Bağımsız değişkenler** alanında, tarayıcının ınbilito veya Private modunda açmak için kullandığı komut satırı seçeneğini belirtin. Bazı tarayıcılar uygulamanın URL 'sini gerektirir.
-    * Microsoft Edge: `-inprivate`
-    * Google Chrome: `--incognito --new-window https://localhost:5001`
-    * Mozilla Firefox: `-private -url https://localhost:5001`
+    * Microsoft Edge: kullanın `-inprivate` .
+    * Google Chrome: Use `--incognito --new-window {URL}` , yer tutucunun `{URL}` açılacağı URL (örneğin, `https://localhost:5001` ).
+    * Mozilla Firefox: Use `-private -url {URL}` , yer tutucunun `{URL}` açılacağı URL (örneğin, `https://localhost:5001` ).
   * **Kolay ad** alanına bir ad girin. Örneğin, `Firefox Auth Testing`.
   * **Tamam** düğmesini seçin.
   * Her bir uygulamayla test yinelemesi için tarayıcı profilini seçmek zorunda kalmamak için, profili varsayılan olarak **Ayarla** düğmesi ile varsayılan olarak ayarlayın.
-  * Uygulamanın, test kullanıcısının veya sağlayıcı yapılandırmasındaki herhangi bir değişiklik arasında IDE tarafından kapatıldığından emin olun.
+  * Uygulamanın, test kullanıcısının veya sağlayıcı yapılandırmasındaki herhangi bir değişiklik için, tarayıcının IDE tarafından kapatıldığından emin olun.
 
 ### <a name="run-the-server-app"></a>Sunucu uygulamasını çalıştırma
 

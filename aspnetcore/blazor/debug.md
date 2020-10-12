@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: d4fd0d501ff14e37bb55b78bb6493ad43f9e5a87
-ms.sourcegitcommit: 139c998d37e9f3e3d0e3d72e10dbce8b75957d89
+ms.openlocfilehash: b8dd272d673e84b45a39272531385ebfd1d06175
+ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/07/2020
-ms.locfileid: "91805576"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91900992"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Hata ayıklama ASP.NET Core Blazor WebAssembly
 
@@ -49,7 +49,7 @@ Kullanılabilir senaryolar şunlardır:
 * İşlenmemiş özel durumların üzerine bölün.
 * Hata ayıklama proxy 'si çalışmadan önce uygulama başlatılırken kesme noktaları isabet edin. Bu, `Program.Main` ( `Program.cs` ) ve uygulamadan istenen ilk sayfa tarafından yüklenen bileşen [ `OnInitialized{Async}` yöntemlerinde](xref:blazor/components/lifecycle#component-initialization-methods) kesme noktaları içerir.
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 Hata ayıklama aşağıdaki tarayıcılardan birini gerektirir:
 
@@ -93,7 +93,7 @@ Blazor WebAssemblyVisual Studio 'da bir uygulamada hata ayıklamak için:
    > [!NOTE]
    > **Hata ayıklama olmadan Başlat** (<kbd>CTRL</kbd> + <kbd>F5</kbd>) desteklenmez. Uygulama hata ayıklama yapılandırmasında çalıştırıldığında, hata ayıklama ek yükü her zaman küçük bir performans azalmasıyla sonuçlanır.
 
-1. *İstemci* uygulamada, içindeki satırda bir kesme noktası ayarlayın `currentCount++;` `Pages/Counter.razor` .
+1. `*Client*`Uygulamada, içindeki satırda bir kesme noktası ayarlayın `currentCount++;` `Pages/Counter.razor` .
 1. Tarayıcıda `Counter` sayfasına gidin ve kesme noktasına ulaşmak için **bana tıklayın** düğmesini seçin.
 1. Visual Studio 'da, `currentCount` **Yereller** penceresindeki alanın değerini inceleyin.
 1. Yürütmeye devam etmek için <kbd>F5</kbd> tuşuna basın.
@@ -180,7 +180,7 @@ Uygulamalar için özel bir uygulama temel yolu kullanma hakkında daha fazla bi
 
 1. Tek başına uygulama başlatılır ve bir hata ayıklama tarayıcısı açılır.
 
-1. *İstemci* uygulamada, içindeki satırda bir kesme noktası ayarlayın `currentCount++;` `Pages/Counter.razor` .
+1. `*Client*`Uygulamada, içindeki satırda bir kesme noktası ayarlayın `currentCount++;` `Pages/Counter.razor` .
 
 1. Tarayıcıda `Counter` sayfasına gidin ve kesme noktasına ulaşmak için **bana tıklayın** düğmesini seçin.
 
@@ -285,7 +285,7 @@ Mac için Visual Studio bir uygulamada hata ayıklamak için Blazor WebAssembly 
    > [!IMPORTANT]
    > Google Chrome veya Microsoft Edge, hata ayıklama oturumunun seçili tarayıcısı olmalıdır.
 
-1. *İstemci* uygulamada, içindeki satırda bir kesme noktası ayarlayın `currentCount++;` `Pages/Counter.razor` .
+1. `*Client*`Uygulamada, içindeki satırda bir kesme noktası ayarlayın `currentCount++;` `Pages/Counter.razor` .
 1. Tarayıcıda `Counter` sayfasına gidin ve kesme noktasına ulaşmak için **bana tıklayın** düğmesini seçin:
 1. Visual Studio 'da, `currentCount` **Yereller** penceresindeki alanın değerini inceleyin.
 1. <kbd>&#8984;</kbd> + Yürütmeye devam etmek için&#8984;<kbd>&#8617;</kbd> tuşuna basın.

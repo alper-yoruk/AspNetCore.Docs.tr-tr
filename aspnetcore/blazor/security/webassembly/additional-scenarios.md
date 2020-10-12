@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: 2881b5d01f3b2e41659e3166a4e77b64a450f017
-ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
+ms.openlocfilehash: 50d455b37c51fdd6d3b52b10b3e819eb45526de4
+ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90592935"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91900966"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly ek güvenlik senaryoları
 
@@ -177,7 +177,7 @@ BlazorBarındırılan proje şablonunu temel alan bir uygulama için Blazor WebA
 
 ### <a name="graph-api-example"></a>Graph API örneği
 
-Aşağıdaki örnekte <xref:System.Net.Http.HttpClient> Graph API için adlandırılmış bir kullanıcının bir çağrıyı işlemek üzere cep telefonu numarasını almak için kullanılır. `User.Read`Azure Portal AAD alanına MICROSOFT Graph API iznini ekledikten sonra, kapsam barındırılan bir çözümün tek başına uygulamasında veya istemci uygulamasında adlandırılmış istemci için yapılandırılır Blazor .
+Aşağıdaki örnekte <xref:System.Net.Http.HttpClient> Graph API için adlandırılmış bir kullanıcının bir çağrıyı işlemek üzere cep telefonu numarasını almak için kullanılır. `User.Read`Azure Portal AAD alanına MICROSOFT Graph API iznini ekledikten sonra kapsam, *`Client`* barındırılan bir çözümün tek başına uygulamasında veya uygulamasında adlandırılmış istemci için yapılandırılır Blazor .
 
 > [!NOTE]
 > Bu bölümdeki örnek, *bileşen kodundaki*kullanıcı için Graph API verileri alır. Graph API kullanıcı talepleri oluşturmak için aşağıdaki kaynaklara bakın:
@@ -1070,7 +1070,7 @@ Barındırılan uygulama konularından birindeki yönergeleri uyguladıktan sonr
 * Yetkilendirmenin gerekmediği ön ekler yolları.
 * Yetkilendirme gerekli olan PreRender yolları değildir.
 
-Istemci uygulamasının `Program` sınıfında ( `Program.cs` ), ortak hizmet kayıtlarını ayrı bir yönteme (örneğin,) göre çarpanlara koyun `ConfigureCommonServices` :
+*`Client`* Uygulamanın `Program` sınıfında ( `Program.cs` ), ortak hizmet kayıtlarını ayrı bir yöntemde (örneğin,) çarpanlara ayırın `ConfigureCommonServices` :
 
 ```csharp
 public class Program
@@ -1130,7 +1130,7 @@ app.UseEndpoints(endpoints =>
 });
 ```
 
-Sunucu uygulamasında, yoksa bir klasör oluşturun `Pages` . `_Host.cshtml`Sunucu uygulamasının klasörünün içinde bir sayfa oluşturun `Pages` . İçeriği Istemci uygulamasının `wwwroot/index.html` dosyasından `Pages/_Host.cshtml` dosyasına yapıştırın. Dosyanın içeriğini güncelleştirin:
+Sunucu uygulamasında, yoksa bir klasör oluşturun `Pages` . `_Host.cshtml`Sunucu uygulamasının klasörünün içinde bir sayfa oluşturun `Pages` . İçeriği *`Client`* uygulamanın `wwwroot/index.html` dosyasından `Pages/_Host.cshtml` dosyasına yapıştırın. Dosyanın içeriğini güncelleştirin:
 
 * `@page "_Host"`Dosyanın en üstüne ekleyin.
 * `<app>Loading...</app>`Etiketi aşağıdaki kodla değiştirin:

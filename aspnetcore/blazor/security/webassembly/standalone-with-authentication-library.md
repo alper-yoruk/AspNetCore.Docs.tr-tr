@@ -5,7 +5,7 @@ description: Blazor WebAssemblyKimlik doğrulama kitaplığıyla ASP.NET Core te
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/08/2020
+ms.date: 10/08/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-authentication-library
-ms.openlocfilehash: 795709853941f35b1645f72d6865fe1ebf935112
-ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
+ms.openlocfilehash: 03abaf0676860f50a3e4c1cba64039070910ff9d
+ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/21/2020
-ms.locfileid: "88712369"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91900888"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-standalone-app-with-the-authentication-library"></a>Blazor WebAssemblyKimlik doğrulama kitaplığıyla ASP.NET Core tek başına uygulamanın güvenliğini sağlama
 
@@ -109,6 +109,8 @@ Tek başına uygulamalar için kimlik doğrulama desteği, OpenID Connect (OıDC
 
 ## <a name="access-token-scopes"></a>Erişim belirteci kapsamları
 
+Blazor WebAssemblyŞablon, ve için varsayılan kapsamları otomatik olarak yapılandırır `openid` `profile` .
+
 Blazor WebAssemblyŞablon, uygulamayı güvenli BIR API için erişim belirteci isteyecek şekilde otomatik olarak yapılandırmaz. Oturum açma akışının bir parçası olarak bir erişim belirteci sağlamak için, kapsamı varsayılan belirteç kapsamlarına ekleyin <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.OidcProviderOptions> :
 
 ```csharp
@@ -119,7 +121,7 @@ builder.Services.AddOidcAuthentication(options =>
 });
 ```
 
-[!INCLUDE[](~/includes/blazor-security/azure-scope.md)]
+[!INCLUDE[](~/includes/blazor-security/azure-scope-3x.md)]
 
 Daha fazla bilgi için *ek senaryolar* makalesinin aşağıdaki bölümlerine bakın:
 

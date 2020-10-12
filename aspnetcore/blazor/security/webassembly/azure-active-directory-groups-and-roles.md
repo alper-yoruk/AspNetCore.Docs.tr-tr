@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/aad-groups-roles
-ms.openlocfilehash: 7a0c606d82dd625c179ec89e22b9313dfa5d18b4
-ms.sourcegitcommit: c026bf76a0e14a5ee68983519a63574c674e9ff7
+ms.openlocfilehash: ac666a4c7493140d4ae93047e18202c3d8314c7b
+ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91636783"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91900706"
 ---
 # <a name="azure-active-directory-aad-groups-administrator-roles-and-user-defined-roles"></a>Azure Active Directory (AAD) grupları, yönetici rolleri ve Kullanıcı tanımlı roller
 
@@ -49,7 +49,7 @@ Bu makaledeki kılavuz, Blazor WebAssembly aşağıdaki konularda açıklanan AA
 
 5 ' ten fazla AAD yönetici rolü ve güvenlik grubu üyeliğine sahip tüm uygulama kullanıcıları için [MICROSOFT Graph API](/graph/use-the-api) çağrısı gerekir.
 
-Graph API çağrılarına izin vermek için, Azure portal bir barındırılan çözümün tek başına veya istemci uygulamasına Blazor aşağıdaki [Graph API izinlerinden](/graph/permissions-reference) birini verin:
+Graph API çağrılarına izin vermek için, *`Client`* Azure Portal bir barındırılan çözümün tek başına veya uygulamasına Blazor aşağıdaki [Graph API izinlerinden](/graph/permissions-reference) birini verin:
 
 * `Directory.Read.All`
 * `Directory.ReadWrite.All`
@@ -88,7 +88,7 @@ public class CustomUserAccount : RemoteUserAccount
 }
 ```
 
-Bir barındırılan çözümün tek başına uygulamasında veya istemci uygulamasında Blazor özel bir <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> sınıf oluşturun. Rol ve grup bilgilerini elde eden Graph API çağrıları için doğru kapsam (izin) kullanın.
+Tek başına uygulamada veya *`Client`* barındırılan bir Blazor çözümün uygulamasında özel bir <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> sınıf oluşturun. Rol ve grup bilgilerini elde eden Graph API çağrıları için doğru kapsam (izin) kullanın.
 
 `GraphAPIAuthorizationMessageHandler.cs`:
 
@@ -250,7 +250,7 @@ Varsa, özgün talebi kaldırmak için kod sağlamanız gerekmez, çünkü varsa
 >
 > Bu yaklaşım için genel kapsam <xref:blazor/security/webassembly/additional-scenarios#custom-authorizationmessagehandler-class> makalesinde bulabilirsiniz.
 
-`Program.Main` `Program.cs` Bir barındırılan çözümün tek başına uygulamasının veya istemci uygulamasının fabrikasını () kaydedin Blazor . `Directory.Read.All`Uygulama için ek kapsam olarak izin kapsamına onay:
+`Program.Main` `Program.cs` Bir barındırılan çözümün tek başına uygulamasının veya uygulamasının fabrikasını () kaydedin *`Client`* Blazor . `Directory.Read.All`Uygulama için ek kapsam olarak izin kapsamına onay:
 
 ```csharp
 builder.Services.AddMsalAuthentication<RemoteAuthenticationState, 
@@ -651,9 +651,9 @@ Aşağıdaki örnek, bir uygulamanın iki rolle yapılandırıldığını varsay
 
 `roles`AAD tarafından gönderilen tek talep, Kullanıcı tanımlı rolleri `appRoles` `value` bir JSON dizisinde öğeleri olarak sunar. Uygulama, rollerin JSON dizisini bağımsız taleplerine dönüştürmelidir `role` .
 
-`CustomUserFactory` [Kullanıcı tanımlı gruplar ve AAD yönetici rolleri](#user-defined-groups-and-administrator-roles) bölümünde gösterilen bir `roles` JSON dizi değeri olan bir talep üzerinde işlem yapacak şekilde ayarlanır. `CustomUserFactory` Blazor [Kullanıcı TANıMLı gruplar ve AAD yönetici rolleri](#user-defined-groups-and-administrator-roles) bölümünde gösterildiği gibi barındırılan bir çözümün tek başına uygulamasına veya istemci uygulamasına ekleyin ve kaydedin. Çerçeve tarafından otomatik olarak kaldırıldığı için özgün talebi kaldırmak üzere kod sağlamanız gerekmez `roles` .
+`CustomUserFactory` [Kullanıcı tanımlı gruplar ve AAD yönetici rolleri](#user-defined-groups-and-administrator-roles) bölümünde gösterilen bir `roles` JSON dizi değeri olan bir talep üzerinde işlem yapacak şekilde ayarlanır. `CustomUserFactory` *`Client`* Blazor [Kullanıcı tanımlı gruplar ve AAD yönetici rolleri](#user-defined-groups-and-administrator-roles) bölümünde gösterildiği gibi barındırılan bir çözümün tek başına uygulamasına veya uygulamasına ekleyin ve kaydedin. Çerçeve tarafından otomatik olarak kaldırıldığı için özgün talebi kaldırmak üzere kod sağlamanız gerekmez `roles` .
 
-`Program.Main`Barındırılan bir çözümün tek başına uygulamasında veya istemci uygulamasında Blazor , `role` rol talebi olarak "" adlı talebi belirtin:
+`Program.Main`Barındırılan bir çözümün tek başına uygulamasında veya uygulamasında *`Client`* Blazor , `role` rol talebi olarak "" adlı talebi belirtin:
 
 ```csharp
 builder.Services.AddMsalAuthentication(options =>

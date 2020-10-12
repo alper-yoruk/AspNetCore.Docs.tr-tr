@@ -5,7 +5,7 @@ description: ASP.NET Core barındırılan bir uygulamanın güvenliğini Azure A
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/08/2020
+ms.date: 10/08/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-azure-active-directory-b2c
-ms.openlocfilehash: adc45293a6dfd324c12482d2dfffdeaa25eee4a3
-ms.sourcegitcommit: 9a90b956af8d8584d597f1e5c1dbfb0ea9bb8454
+ms.openlocfilehash: aa6c865f5fd51d1634bde3ac96e1fddc7216a801
+ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/21/2020
-ms.locfileid: "88712447"
+ms.lasthandoff: 10/09/2020
+ms.locfileid: "91900953"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>Blazor WebAssemblyAzure Active Directory B2C ile ASP.NET Core barındırılan bir uygulamanın güvenliğini sağlama
 
@@ -47,7 +47,7 @@ Eğitim bölümündeki yönergeleri izleyin: *sunucu API uygulaması* IÇIN bir 
 1. Uygulama için bir **ad** sağlayın (örneğin, ** Blazor Server AAD B2C**).
 1. **Desteklenen hesap türleri**için, birden çok kiracılı seçeneği seçin: **herhangi bir kuruluş dizinindeki hesaplar veya herhangi bir kimlik sağlayıcısı. Azure AD B2C kullanıcıları kimlik doğrulaması için.**
 1. *Sunucu API 'si uygulaması* Bu senaryoda **yeniden yönlendirme URI 'si** gerektirmez, bu nedenle açılan kutudan **Web** 'e ve yeniden yönlendirme URI 'si girmeyin.
-1. **İzinlerin**  >  **OpenID 'ye yönetici onayı verdiğini ve offline_access izinlerinin** etkin olduğunu onaylayın.
+1. **İzinlerin**  >  **OpenID 'ye yönetici onayı verdiğini ve offline_access izinlerinin** seçili olduğunu onaylayın.
 1. **Kaydet**’i seçin.
 
 Aşağıdaki bilgileri kaydedin:
@@ -67,30 +67,52 @@ Aşağıdaki bilgileri kaydedin:
 
 Aşağıdaki bilgileri kaydedin:
 
-* Uygulama KIMLIĞI URI 'SI (örneğin, `https://contoso.onmicrosoft.com/41451fa7-82d9-4673-8fa5-69eff5a761fd` , `api://41451fa7-82d9-4673-8fa5-69eff5a761fd` veya belirttiğiniz özel değer)
+* Uygulama KIMLIĞI URI 'SI (örneğin, `api://41451fa7-82d9-4673-8fa5-69eff5a761fd` , `https://contoso.onmicrosoft.com/41451fa7-82d9-4673-8fa5-69eff5a761fd` veya belirttiğiniz özel değer)
 * Kapsam adı (örneğin, `API.Access` )
-
-Uygulama KIMLIĞI URI 'SI, bu konunun ilerleyen kısımlarında yer aldığı [erişim belirteci kapsamları](#access-token-scopes) bölümünde açıklanan istemci uygulamasında özel bir yapılandırma gerektirebilir.
 
 ### <a name="register-a-client-app"></a>İstemci uygulamasını kaydetme
 
-Eğitim bölümündeki yönergeleri izleyin: *istemci uygulaması* için AAD uygulamasını kaydetmek üzere [Azure Active Directory B2C bir uygulamayı yeniden kaydedin](/azure/active-directory-b2c/tutorial-register-applications) ve ardından aşağıdakileri yapın:
+Eğitim bölümündeki yönergeleri izleyin [:](/azure/active-directory-b2c/tutorial-register-applications) uygulamayı bir AAD uygulaması kaydetmek için Azure Active Directory B2C yeniden kaydedin *`Client`* ve ardından aşağıdakileri yapın:
 
-1. **Azure Active Directory**  >  **uygulama kayıtları** **Yeni kayıt**' ı seçin.
+::: moniker range=">= aspnetcore-5.0"
+
+1. **Azure Active Directory** > **uygulama kayıtları** **Yeni kayıt**' ı seçin.
 1. Uygulama için bir **ad** sağlayın (örneğin, ** Blazor istemci AAD B2C**).
 1. **Desteklenen hesap türleri**için, birden çok kiracılı seçeneği seçin: **herhangi bir kuruluş dizinindeki hesaplar veya herhangi bir kimlik sağlayıcısı. Azure AD B2C kullanıcıları kimlik doğrulaması için.**
-1. **Yeniden yönlendirme URI 'si** açılan öğesini **Web** 'e ayarlı bırakın ve aşağıdaki yeniden yönlendirme URI 'sini sağlayın: `https://localhost:{PORT}/authentication/login-callback` . Kestrel üzerinde çalışan bir uygulamanın varsayılan bağlantı noktası 5001 ' dir. Uygulama farklı bir Kestrel bağlantı noktasında çalışıyorsa, uygulamanın bağlantı noktasını kullanın. IIS Express için, uygulama için rastgele oluşturulan bağlantı noktası, **hata ayıklama** panelinde sunucu uygulamasının özelliklerinde bulunabilir. Uygulama bu noktada mevcut olmadığından ve IIS Express bağlantı noktası bilinmediğinden, uygulama oluşturulduktan sonra bu adıma geri dönün ve yeniden yönlendirme URI 'sini güncelleştirin. [Uygulama oluştur](#create-the-app) bölümünde, kullanıcıların YENIDEN yönlendirme URI 'sini güncelleştirmesi IIS Express hatırlatmak için bir açıklama belirir.
-1. **İzinlerin**  >  **OpenID 'ye yönetici onayı verdiğini ve offline_access izinlerinin** etkin olduğunu onaylayın.
+1. **Yeniden yönlendirme URI 'si** açılan öğesini **tek SAYFALı uygulama (Spa)** olarak ayarlayın ve aşağıdaki yeniden yönlendirme URI 'sini sağlayın: `https://localhost:{PORT}/authentication/login-callback` . Kestrel üzerinde çalışan bir uygulamanın varsayılan bağlantı noktası 5001 ' dir. Uygulama farklı bir Kestrel bağlantı noktasında çalışıyorsa, uygulamanın bağlantı noktasını kullanın. IIS Express için, uygulama için rastgele oluşturulan bağlantı noktası, *`Server`* **hata ayıklama** panelinde uygulamanın özelliklerinde bulunabilir. Uygulama bu noktada mevcut olmadığından ve IIS Express bağlantı noktası bilinmediğinden, uygulama oluşturulduktan sonra bu adıma geri dönün ve yeniden yönlendirme URI 'sini güncelleştirin. [Uygulama oluştur](#create-the-app) bölümünde, kullanıcıların YENIDEN yönlendirme URI 'sini güncelleştirmesi IIS Express hatırlatmak için bir açıklama belirir.
+1. **İzinlerin** > **OpenID 'ye yönetici onayı verdiğini ve offline_access izinlerinin** seçili olduğunu onaylayın.
+1. **Kaydet**’i seçin.
+
+1. Uygulama (istemci) KIMLIĞINI (örneğin, `4369008b-21fa-427c-abaa-9b53bf58e538` ) kaydedin.
+
+**Kimlik doğrulama** > **platformu yapılandırmalarında** > **tek sayfalı uygulama (Spa)**:
+
+1. **Yeniden YÖNLENDIRME URI** 'sinin `https://localhost:{PORT}/authentication/login-callback` mevcut olduğunu onaylayın.
+1. **Örtük verme**Için, **erişim belirteçleri** ve **Kimlik belirteçleri** onay kutularının seçili **olmadığından** emin olun.
+1. Uygulamanın kalan varsayılan değerleri bu deneyim için kabul edilebilir.
+1. **Kaydet** düğmesini seçin.
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+1. **Azure Active Directory** > **uygulama kayıtları** **Yeni kayıt**' ı seçin.
+1. Uygulama için bir **ad** sağlayın (örneğin, ** Blazor istemci AAD B2C**).
+1. **Desteklenen hesap türleri**için, birden çok kiracılı seçeneği seçin: **herhangi bir kuruluş dizinindeki hesaplar veya herhangi bir kimlik sağlayıcısı. Azure AD B2C kullanıcıları kimlik doğrulaması için.**
+1. **Yeniden yönlendirme URI 'si** açılan öğesini **Web** 'e ayarlı bırakın ve aşağıdaki yeniden yönlendirme URI 'sini sağlayın: `https://localhost:{PORT}/authentication/login-callback` . Kestrel üzerinde çalışan bir uygulamanın varsayılan bağlantı noktası 5001 ' dir. Uygulama farklı bir Kestrel bağlantı noktasında çalışıyorsa, uygulamanın bağlantı noktasını kullanın. IIS Express için, uygulama için rastgele oluşturulan bağlantı noktası, *`Server`* **hata ayıklama** panelinde uygulamanın özelliklerinde bulunabilir. Uygulama bu noktada mevcut olmadığından ve IIS Express bağlantı noktası bilinmediğinden, uygulama oluşturulduktan sonra bu adıma geri dönün ve yeniden yönlendirme URI 'sini güncelleştirin. [Uygulama oluştur](#create-the-app) bölümünde, kullanıcıların YENIDEN yönlendirme URI 'sini güncelleştirmesi IIS Express hatırlatmak için bir açıklama belirir.
+1. **İzinlerin** > **OpenID 'ye yönetici onayı verdiğini ve offline_access izinlerinin** seçili olduğunu onaylayın.
 1. **Kaydet**’i seçin.
 
 Uygulama (istemci) KIMLIĞINI (örneğin, `4369008b-21fa-427c-abaa-9b53bf58e538` ) kaydedin.
 
-**Kimlik doğrulama**  >  **platformu yapılandırması**  >  **Web**:
+**Kimlik doğrulama** > **platformu yapılandırması** > **Web**:
 
 1. **Yeniden YÖNLENDIRME URI** 'sinin `https://localhost:{PORT}/authentication/login-callback` mevcut olduğunu onaylayın.
 1. **Örtük izin**Için, **erişim belirteçleri** ve **Kimlik belirteçleri**onay kutularını seçin.
 1. Uygulamanın kalan varsayılan değerleri bu deneyim için kabul edilebilir.
 1. **Kaydet** düğmesini seçin.
+
+::: moniker-end
 
 **API izinleri**:
 
@@ -117,32 +139,30 @@ Aşağıdaki komutta yer tutucuları, daha önce kaydedilen bilgilerle değişti
 dotnet new blazorwasm -au IndividualB2C --aad-b2c-instance "{AAD B2C INSTANCE}" --api-client-id "{SERVER API APP CLIENT ID}" --app-id-uri "{SERVER API APP ID URI}" --client-id "{CLIENT APP CLIENT ID}" --default-scope "{DEFAULT SCOPE}" --domain "{TENANT DOMAIN}" -ho -o {APP NAME} -ssp "{SIGN UP OR SIGN IN POLICY}"
 ```
 
-| Yer tutucu                   | Azure portal adı                                     | Örnek                                |
-| ----------------------------- | ----------------------------------------------------- | -------------------------------------- |
-| `{AAD B2C INSTANCE}`          | Örnek                                              | `https://contoso.b2clogin.com/`        |
-| `{APP NAME}`                  | &mdash;                                               | `BlazorSample`                         |
-| `{CLIENT APP CLIENT ID}`      | *İstemci uygulaması* için uygulama (ISTEMCI) kimliği          | `4369008b-21fa-427c-abaa-9b53bf58e538` |
-| `{DEFAULT SCOPE}`             | Kapsam adı                                            | `API.Access`                           |
-| `{SERVER API APP CLIENT ID}`  | *Sunucu API uygulaması* için uygulama (ISTEMCI) kimliği      | `41451fa7-82d9-4673-8fa5-69eff5a761fd` |
-| `{SERVER API APP ID URI}`     | Uygulama KIMLIĞI URI 'SI ([nota bakın](#access-token-scopes)) | `41451fa7-82d9-4673-8fa5-69eff5a761fd` |
-| `{SIGN UP OR SIGN IN POLICY}` | Kaydolma/oturum açma Kullanıcı akışı                             | `B2C_1_signupsignin1`                  |
-| `{TENANT DOMAIN}`             | Birincil/yayımcı/kiracı etki alanı                       | `contoso.onmicrosoft.com`              |
+| Yer tutucu                   | Azure portal adı                                     | Örnek                                      |
+| ----------------------------- | ----------------------------------------------------- | -------------------------------------------- |
+| `{AAD B2C INSTANCE}`          | Örnek                                              | `https://contoso.b2clogin.com/`              |
+| `{APP NAME}`                  | &mdash;                                               | `BlazorSample`                               |
+| `{CLIENT APP CLIENT ID}`      | Uygulamanın uygulama (istemci) KIMLIĞI *`Client`*        | `4369008b-21fa-427c-abaa-9b53bf58e538`       |
+| `{DEFAULT SCOPE}`             | Kapsam adı                                            | `API.Access`                                 |
+| `{SERVER API APP CLIENT ID}`  | *Sunucu API uygulaması* için uygulama (ISTEMCI) kimliği      | `41451fa7-82d9-4673-8fa5-69eff5a761fd`       |
+| `{SERVER API APP ID URI}`     | Uygulama KIMLIĞI URI 'SI                                    | `api://41451fa7-82d9-4673-8fa5-69eff5a761fd` |
+| `{SIGN UP OR SIGN IN POLICY}` | Kaydolma/oturum açma Kullanıcı akışı                             | `B2C_1_signupsignin1`                        |
+| `{TENANT DOMAIN}`             | Birincil/yayımcı/kiracı etki alanı                       | `contoso.onmicrosoft.com`                    |
 
 Seçeneğiyle belirtilen çıktı konumu, `-o|--output` mevcut değilse bir proje klasörü oluşturur ve uygulamanın adının bir parçası haline gelir.
 
 > [!NOTE]
-> Uygulama KIMLIĞI URI 'sini `app-id-uri` seçeneğe geçirin, ancak [erişim belirteci kapsamları](#access-token-scopes) bölümünde açıklanan istemci uygulamasında bir yapılandırma değişikliği gerekli olabilir.
->
-> Ayrıca, barındırılan şablon tarafından ayarlanan kapsamda Blazor uygulama KIMLIĞI URI ana bilgisayarı yineleniyor olabilir. Koleksiyon için yapılandırılan kapsamın `DefaultAccessTokenScopes` `Program.Main` `Program.cs` *istemci uygulamasının*() içinde doğru olduğundan emin olun.
+> Barındırılan şablon tarafından ayarlanan kapsamda Blazor uygulama KIMLIĞI URI ana bilgisayarı yineleniyor olabilir. Koleksiyon için yapılandırılan kapsamın `DefaultAccessTokenScopes` `Program.Main` uygulamanın () içinde doğru olduğundan emin olun `Program.cs` *`Client`* .
 
 > [!NOTE]
-> Azure Portal, *istemci uygulamasının* **kimlik doğrulama**  >  **platformu yapılandırması**  >  **Web**  >  **yeniden yönlendirme URI 'si** , Kestrel sunucusunda varsayılan ayarlarla çalışan uygulamalar için bağlantı noktası 5001 için yapılandırılır.
+> Azure portal, *`Client`* uygulamanın platform yapılandırması **yeniden yönlendirme URI 'Si** , Kestrel sunucusunda varsayılan ayarlarla çalışan uygulamalar için bağlantı noktası 5001 için yapılandırılır.
 >
-> *İstemci uygulaması* rastgele bir IIS Express bağlantı noktasında çalışıyorsa, uygulamanın bağlantı noktası, **hata ayıklama** panelindeki *sunucu API 'si uygulamasının* özelliklerinde bulunabilir.
+> *`Client`* Uygulama rastgele bir IIS Express bağlantı noktasında çalışıyorsa, uygulamanın bağlantı noktası **hata ayıklama** panelindeki *sunucu API 'si uygulamasının* özelliklerinde bulunabilir.
 >
-> Bağlantı noktası, *istemci uygulamasının* bilinen bağlantı noktasıyla daha önce yapılandırılmamışsa, Azure Portal *istemci uygulamanın* kaydına dönün ve yeniden yönlendirme URI 'sini doğru bağlantı noktasıyla güncelleştirin.
+> Bağlantı noktası, *`Client`* uygulamanın bilinen bağlantı noktasıyla daha önce yapılandırılmamışsa, *`Client`* Azure Portal uygulamanın kaydına dönün ve yenıden yönlendirme URI 'sini doğru bağlantı noktasıyla güncelleştirin.
 
-## <a name="server-app-configuration"></a>Sunucu uygulaması yapılandırması
+## <a name="server-app-configuration"></a>*`Server`* Uygulama yapılandırması
 
 *Bu bölüm, çözümün uygulaması ile ilgilidir **`Server`** .*
 
@@ -243,7 +263,7 @@ public class WeatherForecastController : ControllerBase
 }
 ```
 
-## <a name="client-app-configuration"></a>İstemci uygulama yapılandırması
+## <a name="client-app-configuration"></a>*`Client`* Uygulama yapılandırması
 
 *Bu bölüm, çözümün uygulaması ile ilgilidir **`Client`** .*
 
@@ -334,7 +354,11 @@ builder.Services.AddMsalAuthentication(options =>
 });
 ```
 
-[!INCLUDE[](~/includes/blazor-security/azure-scope.md)]
+İle ek kapsamlar belirtin `AdditionalScopesToConsent` :
+
+```csharp
+options.ProviderOptions.AdditionalScopesToConsent.Add("{ADDITIONAL SCOPE URI}");
+```
 
 Daha fazla bilgi için *ek senaryolar* makalesinin aşağıdaki bölümlerine bakın:
 
