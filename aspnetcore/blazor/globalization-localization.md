@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 2b8820acba564bdfb85f8338ed5482573960fbb4
-ms.sourcegitcommit: 600666440398788db5db25dc0496b9ca8fe50915
+ms.openlocfilehash: be73b0c1e33a2cd15c9ff0dc51044f9bd48c43fe
+ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/14/2020
-ms.locfileid: "90080283"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92113822"
 ---
 # <a name="aspnet-core-no-locblazor-globalization-and-localization"></a>BlazorGenelleştirme ve yerelleştirme ASP.NET Core
 
@@ -66,7 +66,7 @@ Aşağıdaki alan türleri belirli biçimlendirme gereksinimlerine sahiptir ve �
 
 [`@bind`](xref:mvc/views/razor#bind) , bir `@bind:culture` <xref:System.Globalization.CultureInfo?displayProperty=fullName> değeri ayrıştırmak ve biçimlendirmek için bir parametresini destekler. `date`Ve alan türleri kullanılırken bir kültürün belirtilmesi önerilmez `number` . `date` ve `number` Blazor gerekli kültürü sağlayan yerleşik desteğe sahiptir.
 
-## <a name="localization"></a>Yerelleştirme
+## <a name="localization"></a>Localization (Yerelleştirme)
 
 ### Blazor WebAssembly
 
@@ -76,7 +76,15 @@ Kültürü açıkça yapılandırmak için, <xref:System.Globalization.CultureIn
 
 ::: moniker range=">= aspnetcore-5.0"
 
-Varsayılan olarak, Blazor WebAssembly Kullanıcı kültürünün tarih ve para birimi gibi değerleri görüntülemesi için gereken Genelleştirme kaynaklarını taşır. Uygulama yerelleştirmeyi gerektirmiyorsa, uygulamayı kültürü temel alan sabit kültürü destekleyecek şekilde yapılandırabilirsiniz `en-US` :
+Varsayılan olarak, Blazor WebAssembly Kullanıcı kültürünün tarih ve para birimi gibi değerleri görüntülemesi için gereken en az Genelleştirme kaynaklarını taşır. Kültürü dinamik olarak değiştirmeyi desteklemesi gereken uygulamalar `BlazorWebAssemblyLoadAllGlobalizationData` Proje dosyasında yapılandırmalıdır:
+
+```xml
+<PropertyGroup>
+  <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
+</PropertyGroup>
+```
+
+Uygulama yerelleştirmeyi gerektirmiyorsa, uygulamayı kültürü temel alan sabit kültürü destekleyecek şekilde yapılandırabilirsiniz `en-US` :
 
 ```xml
 <PropertyGroup>
@@ -100,12 +108,12 @@ Blazor Server uygulamalar, [Yerelleştirme ara yazılımı](xref:fundamentals/lo
 
 Kültür aşağıdaki yaklaşımlardan biri kullanılarak ayarlanabilir:
 
-* [Cookiemalar](#cookies)
+* [Cookies](#cookies)
 * [Kültürü seçmek için Kullanıcı arabirimi sağlama](#provide-ui-to-choose-the-culture)
 
 Daha fazla bilgi ve örnek için bkz <xref:fundamentals/localization> ..
 
-#### <a name="no-loccookies"></a>Cookiemalar
+#### <a name="no-loccookies"></a>Cookies
 
 Yerelleştirme kültürü cookie kullanıcının kültürünü kalıcı hale getirebilirler. Yerelleştirme ara yazılımı, cookie sonraki istekleri kullanıcının kültürünü ayarlamak için okur. 
 

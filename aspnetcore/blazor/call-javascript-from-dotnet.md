@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: d36140067ba6e75f2d00cb86ea488e40d28bd86f
-ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
+ms.openlocfilehash: a7ba41501b856482c8fcf7efa8e1d78857020bf5
+ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91762171"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92113770"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>ASP.NET Core .NET metotlarından JavaScript işlevlerini çağırın Blazor
 
@@ -164,7 +164,10 @@ Yer tutucu, `{APP ASSEMBLY}` uygulamanın uygulama derleme adıdır (örneğin, 
 
 ## <a name="call-a-void-javascript-function"></a>Void JavaScript işlevini çağırın
 
-[Void (0)/void 0](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void) veya [undefined](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined) döndüren JavaScript işlevleri ile çağırılır <xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType> .
+<xref:Microsoft.JSInterop.JSRuntimeExtensions.InvokeVoidAsync%2A?displayProperty=nameWithType>Aşağıdakiler için kullanın:
+
+* [Void (0)/void 0](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Operators/void) veya [tanımsız](https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/undefined)döndüren JavaScript işlevleri.
+* Bir JavaScript çağrısının sonucunu okumak için .NET gerekmiyorsa.
 
 ## <a name="detect-when-a-no-locblazor-server-app-is-prerendering"></a>Bir uygulamanın ne zaman Blazor Server prerendering olduğunu Algıla
  
@@ -665,8 +668,33 @@ Ayrıca, önceki örnekte, JavaScript mantığını ve bağımlılıklarını bi
 
 ::: moniker-end
 
+## <a name="size-limits-on-js-interop-calls"></a>JS birlikte çalışma çağrılarında boyut sınırları
+
+' De Blazor WebAssembly , çerçeve, JS birlikte çalışma çağrılarının giriş ve çıkışları için sınır vermez.
+
+Blazor Server' De, BIR js birlikte çalışma çağrısının sonucu, varsayılan olarak SignalR <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize> 32 KB olan () tarafından zorlanan en fazla yük boyutu ile sınırlıdır. Bir hatayla daha büyük bir yük ile bir JS birlikte çalışma çağrısına yanıt vermeye çalışacak uygulamalar <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize> . Daha büyük bir sınır, değiştirilerek yapılandırılabilir <xref:Microsoft.AspNetCore.SignalR.HubOptions.MaximumReceiveMessageSize> . Aşağıdaki örnek, en fazla alma iletisi boyutunu 64 KB (64 * 1024 * 1024) olarak ayarlar:
+
+```csharp
+services.AddServerSideBlazor()
+   .AddHubOptions(options => options.MaximumReceiveMessageSize = 64 * 1024 * 1024);
+```
+
+Sınırın artırılması SignalR , daha fazla sunucu kaynağı kullanımını isteme maliyetine gelir ve sunucuyu kötü amaçlı bir kullanıcıdan daha fazla risk artışı için kullanıma sunar. Ayrıca, dizeler veya bayt dizileri olarak bellekte büyük miktarda içeriği okumak, çöp toplayıcıyla kötü olarak çalışan ve ek performans cezaları elde eden ayırmaya neden olabilir. Büyük yükleri okumak için bir seçenek, içeriğin daha küçük parçalara gönderilmesini ve yükün bir olarak işlenmesini düşünmelidir <xref:System.IO.Stream> . Bu, büyük JSON yüklerini okurken veya veriler JavaScript 'te ham bayt olarak kullanılabilir olduğunda kullanılabilir. İçinde, bileşene benzer teknikleri kullanan büyük ikili yükleri göndermeyi gösteren bir örnek için Blazor Server `InputFile` bkz. [ikili gönderme örnek uygulaması](https://github.com/aspnet/samples/tree/master/samples/aspnetcore/blazor/BinarySubmit).
+
+JavaScript arasında büyük miktarda veri aktaran kodu geliştirirken aşağıdaki kılavuzu göz önünde bulundurun Blazor :
+
+* Verileri daha küçük parçalara dilimleyin ve tüm veriler sunucu tarafından alınana kadar veri segmentlerini sırayla gönderin.
+* JavaScript ve C# kodunda büyük nesneler ayırmayın.
+* Veri gönderirken veya alırken uzun süreler için ana UI iş parçacığını engellemez.
+* İşlem tamamlandığında veya iptal edildiğinde tüketilen tüm belleği boşaltın.
+* Güvenlik amaçları için aşağıdaki ek gereksinimleri uygulayın:
+  * Geçirilebilen en büyük dosya veya veri boyutunu bildirin.
+  * İstemciden sunucuya en düşük karşıya yükleme hızını bildirin.
+* Veriler, sunucu tarafından alındıktan sonra şu olabilir:
+  * Tüm segmentler toplanana kadar bir bellek arabelleğinde geçici olarak depolanır.
+  * Hemen tüketildi. Örneğin, veriler bir veritabanında hemen depolanabilir veya her bir segment alındığında diske yazılabilir.
+
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * <xref:blazor/call-dotnet-from-javascript>
 * [InteropComponent. Razor örneği (DotNet/AspNetCore GitHub deposu, 3,1 yayın dalı)](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
-* [Uygulamalarda büyük veri aktarımları gerçekleştirme Blazor Server](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)

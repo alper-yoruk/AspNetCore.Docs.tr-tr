@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/docker/building-net-docker-images
-ms.openlocfilehash: 791cc14feac30ad8a571d155624ab821dfd77981
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 6f94323873937d1428d6cfa1b0ef15e44611fd47
+ms.sourcegitcommit: b3ec60f7682e43211c2b40c60eab3d4e45a48ab1
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722864"
+ms.lasthandoff: 10/17/2020
+ms.locfileid: "92153642"
 ---
 # <a name="docker-images-for-aspnet-core"></a>ASP.NET Core için Docker görüntüleri
 
@@ -99,7 +99,7 @@ Bu öğreticide, ASP.NET Core örnek bir uygulama indirir ve Docker kapsayıcıl
 
 ## <a name="run-in-a-linux-container"></a>Linux kapsayıcısında çalıştırma
 
-* Docker istemcisinde Linux kapsayıcıları ' na geçin.
+* Docker istemcisinde [Linux kapsayıcıları](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers)' na geçin.
 
 * *DotNet-Docker/Samples/aspnetapp*konumundaki Dockerfile klasörüne gidin.
 
@@ -125,7 +125,7 @@ Bu öğreticide, ASP.NET Core örnek bir uygulama indirir ve Docker kapsayıcıl
 
 ## <a name="run-in-a-windows-container"></a>Bir Windows kapsayıcısında Çalıştır
 
-* Docker istemcisinde Windows kapsayıcıları ' na geçin.
+* Docker istemcisinde [Windows kapsayıcıları](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers)' na geçin.
 
 Konumundaki Docker dosya klasörüne gidin `dotnet-docker/samples/aspnetapp` .
 

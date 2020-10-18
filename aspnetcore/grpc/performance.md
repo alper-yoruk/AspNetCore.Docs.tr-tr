@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/performance
-ms.openlocfilehash: 4d50698b8c55f7fb3ef9a2c3102e73e046a22a9c
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: b54d13bfd9207a7b8961c1c4fa9908d3d54a4270
+ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722851"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92113861"
 ---
 # <a name="performance-best-practices-with-grpc"></a>GRPC ile en iyi performans uygulamaları
 
@@ -53,7 +53,7 @@ gRPC istemci fabrikası, kanalları yapılandırmak için merkezi bir yöntem su
 
 ## <a name="connection-concurrency"></a>Bağlantı eşzamanlılık
 
-HTTP/2 bağlantıları genellikle bir bağlantı üzerinde aynı anda [en fazla eşzamanlı akış (ETKIN http isteği)](https://http2.github.io/http2-spec/#rfc.section.5.1.2) sayısı için bir sınıra sahiptir. Varsayılan olarak, çoğu sunucu bu sınırı 100 eşzamanlı akış olarak ayarlar.
+HTTP/2 bağlantıları genellikle bir bağlantı üzerinde aynı anda [en fazla eşzamanlı akış (ETKIN http isteği)](https://httpwg.github.io/specs/rfc7540.html#rfc.section.5.1.2) sayısı için bir sınıra sahiptir. Varsayılan olarak, çoğu sunucu bu sınırı 100 eşzamanlı akış olarak ayarlar.
 
 GRPC kanalı tek bir HTTP/2 bağlantısı kullanır ve eşzamanlı çağrılar bu bağlantı üzerinde çoğullanmış. Etkin çağrıların sayısı bağlantı akışı sınırına ulaştığında, istemci içinde ek çağrılar sıraya alınır. Kuyruğa alınan çağrılar, gönderilmeden önce etkin çağrıların tamamlanmasını bekler. Yüksek yük veya uzun süren akış gRPC çağrılarına sahip uygulamalar, bu sınır nedeniyle çağrı kuyruğu oluşturma nedeniyle oluşan performans sorunlarını görebilir.
 
@@ -122,7 +122,7 @@ Kullanılabilir çok sayıda L7 proxy vardır. Bazı seçenekler şunlardır:
 
 ::: moniker range=">= aspnetcore-5.0"
 
-## <a name="inter-process-communication"></a>İşlem arası iletişim
+## <a name="inter-process-communication"></a>İşlemler arası iletişim
 
 istemci ve hizmet arasındaki gRPC çağrıları genellikle TCP Yuvaları üzerinden gönderilir. TCP bir ağ üzerinden iletişim kurmak için idealdir, ancak istemci ve hizmet aynı makinede olduğunda, [işlemler arası iletişim (IPC)](https://wikipedia.org/wiki/Inter-process_communication) daha etkilidir.
 

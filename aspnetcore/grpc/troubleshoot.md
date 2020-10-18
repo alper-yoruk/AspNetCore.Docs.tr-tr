@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/troubleshoot
-ms.openlocfilehash: 2f2a41af544bc040bd20e15b057ad8fc7fb16cfe
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 0c897c8c640f8713fc7d3b6cad0e6c571131d7a5
+ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633974"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92113848"
 ---
 # <a name="troubleshoot-grpc-on-net-core"></a>.NET Core 'da gRPC sorunlarını giderme
 
@@ -86,7 +86,7 @@ var client = new Greet.GreeterClient(channel);
 
 ## <a name="call-insecure-grpc-services-with-net-core-client"></a>.NET Core istemcisiyle güvenli olmayan gRPC hizmetlerini çağırma
 
-.NET Core istemcisiyle güvenli olmayan gRPC hizmetlerini çağırmak için ek yapılandırma gerekir. GRPC istemcisinin, `System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport` sunucu adresinde anahtarı olarak ayarlanması `true` ve kullanması gerekir `http` :
+Bir uygulama .NET Core 3. x kullanıyorsa, .NET Core istemcisiyle güvenli olmayan gRPC hizmetlerini çağırmak için ek yapılandırma gerekir. GRPC istemcisinin, `System.Net.Http.SocketsHttpHandler.Http2UnencryptedSupport` sunucu adresinde anahtarı olarak ayarlanması `true` ve kullanması gerekir `http` :
 
 ```csharp
 // This switch must be set before creating the GrpcChannel/HttpClient.
@@ -97,6 +97,8 @@ AppContext.SetSwitch(
 var channel = GrpcChannel.ForAddress("http://localhost:5000");
 var client = new Greet.GreeterClient(channel);
 ```
+
+.NET 5 uygulamalarına ek yapılandırma gerekmez, ancak güvenli olmayan gRPC hizmetlerini çağırmak için `Grpc.Net.Client` 2.32.0 veya üzeri sürümlerini kullanmaları gerekir.
 
 ## <a name="unable-to-start-aspnet-core-grpc-app-on-macos"></a>MacOS 'ta ASP.NET Core gRPC uygulaması başlatılamıyor
 

@@ -17,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/new-field
-ms.openlocfilehash: a0c53755bd56b6c169437ca9f0ea915e46ad79ec
-ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
+ms.openlocfilehash: 2a80a9c4848703802b15348a30f2564f9580a24b
+ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91606745"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92113887"
 ---
 # <a name="part-8-add-a-new-field-to-an-aspnet-core-mvc-app"></a>8. bölüm, ASP.NET Core MVC uygulamasına yeni bir alan ekleyin
 
@@ -133,11 +133,16 @@ VERITABANıNDAKI tüm kayıtlar silinirse, Initialize yöntemi VERITABANıNı te
 
 [!INCLUDE[](~/includes/RP-mvc-shared/sqlite-warn.md)]
 
-Veritabanını silin ve geçişleri kullanarak veritabanını yeniden oluşturun. Veritabanını silmek için *Mvcmovie. db* veritabanı dosyasını silin. Ardından şu `ef database update` komutu çalıştırın:
+Veritabanını ve önceki geçişini silip, veritabanını yeniden oluşturmak için geçişleri kullanın:
 
 ```dotnetcli
+dotnet ef migrations remove
+dotnet ef database drop
+dotnet ef migrations add InitialCreate
 dotnet ef database update
 ```
+
+`dotnet ef migrations remove` Son geçişi kaldırır. Birden fazla geçiş varsa, geçişler klasörünü silin.
 
 ---
 <!-- End of VS tabs -->

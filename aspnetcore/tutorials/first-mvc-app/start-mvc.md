@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/start-mvc
-ms.openlocfilehash: 9d70b292a93a5d19cc25b2fc592ec88ce8262434
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 177112106d143a6826c1f927aac807da0aa9f2b4
+ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629996"
+ms.lasthandoff: 10/16/2020
+ms.locfileid: "92113835"
 ---
 # <a name="get-started-with-aspnet-core-mvc"></a>ASP.NET Core MVC ile çalışmaya başlama
 
@@ -67,7 +67,7 @@ Sonunda, film verilerini yönetebilen ve görüntüleyebilen bir uygulamanız va
 
 * Visual Studio 'da **Yeni proje oluştur**' u seçin.
 
-* **ASP.NET Core Web uygulaması** ' nı seçin ve ardından **İleri**' yi seçin.
+* **ASP.NET Core Web uygulaması** > **İleri ' yi**seçin.
 
 ![Yeni ASP.NET Core Web uygulaması](start-mvc/_static/np_2.1.png)
 
@@ -75,7 +75,7 @@ Sonunda, film verilerini yönetebilen ve görüntüleyebilen bir uygulamanız va
 
   ![Yeni ASP.NET Core Web uygulaması](start-mvc/_static/config.png)
 
-* **Web uygulaması (Model-View-Controller)** öğesini seçin ve ardından **Oluştur**' u seçin.
+* **Web uygulaması (Model-View-Controller)** seçeneğini belirleyin. Açılan kutularda **.NET Core** ve **ASP.NET Core 3,1**' i seçin ve ardından **Oluştur**' u seçin.
 
 ![Yeni proje iletişim kutusu, sol bölmede .NET Core, ASP.NET Core Web ](start-mvc/_static/new_project30.png)
 
@@ -94,7 +94,7 @@ Visual Studio, az önce oluşturduğunuz MVC projesi için varsayılan şablonu 
    code -r MvcMovie
    ```
 
-  * **Gerekli varlıkların derlenmesi ve hata ayıklaması için ' Mvcfilmi ' içinde eksik olan bir iletişim kutusu görüntülenir. Bunları ekleyin mi?**  **Evet** ' i seçin
+  * **Gerekli varlıkların derlenmesi ve hata ayıklaması için ' Mvcfilmi ' içinde eksik olan bir iletişim kutusu görüntülenir. Bunları ekleyin mi?**  **Evet**’i seçin
 
   * `dotnet new mvc -o MvcMovie`: *Mvcmovie* klasöründe yeni BIR ASP.NET Core MVC projesi oluşturur.
   * `code -r MvcMovie`: Visual Studio Code ' de *Mvcmovie. csproj* proje dosyasını yükler.
@@ -247,7 +247,7 @@ Visual Studio, az önce oluşturduğunuz MVC projesi için varsayılan şablonu 
    code -r MvcMovie
    ```
 
-  * **Gerekli varlıkların derlenmesi ve hata ayıklaması için ' Mvcfilmi ' içinde eksik olan bir iletişim kutusu görüntülenir. Bunları ekleyin mi?**  **Evet** ' i seçin
+  * **Gerekli varlıkların derlenmesi ve hata ayıklaması için ' Mvcfilmi ' içinde eksik olan bir iletişim kutusu görüntülenir. Bunları ekleyin mi?**  **Evet**’i seçin
 
   * `dotnet new mvc -o MvcMovie`: *Mvcmovie* klasöründe yeni BIR ASP.NET Core MVC projesi oluşturur.
   * `code -r MvcMovie`: Visual Studio Code ' de *Mvcmovie. csproj* proje dosyasını yükler.
