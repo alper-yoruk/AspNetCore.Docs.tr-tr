@@ -177,6 +177,9 @@
             - name: GitHub Actions ile dağıtma >>
               display: 'tutorial, kubernetes, aks, acr, docker, devops'
               href: /learn/modules/microservices-devops-aspnet-core/
+            - name: Günlüğe kaydetme ve izleme >>
+              display: 'tutorial, kubernetes, aks, acr, docker, serilog'
+              href: /learn/modules/microservices-logging-aspnet-core/
         - name: Veri erişimi >>
           displayName: 'tutorial, ef, entity framework'
           href: /learn/modules/persist-data-ef-core/
@@ -1118,6 +1121,8 @@
           uid: security/authorization/policies
         - name: Yetkilendirme ilkesi sağlayıcıları
           uid: security/authorization/iauthorizationpolicyprovider
+        - name: AuthorizationMiddleware davranışını özelleştirme
+          uid: security/authorization/authorizationmiddlewareresulthandler
         - name: Gereksinim işleyicilerine bağımlılık ekleme
           uid: security/authorization/dependencyinjection
         - name: Kaynak tabanlı yetkilendirme
