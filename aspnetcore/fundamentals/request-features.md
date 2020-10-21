@@ -3,7 +3,8 @@ title: ASP.NET Core içindeki istek özellikleri
 author: ardalis
 description: ASP.NET Core arabirimlerde tanımlanan HTTP istekleri ve yanıtları ile ilgili Web sunucusu uygulama ayrıntıları hakkında bilgi edinin.
 ms.author: riande
-ms.date: 10/14/2016
+ms.custom: mvc
+ms.date: 10/20/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -16,70 +17,140 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/request-features
-ms.openlocfilehash: 3b5c929519407de5dc582c10a86745efddc8a38a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 879b775ba2998ee803708ebf231b5fcd363b811c
+ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634520"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92326436"
 ---
-# <a name="request-features-in-aspnet-core"></a><span data-ttu-id="ff842-103">ASP.NET Core içindeki istek özellikleri</span><span class="sxs-lookup"><span data-stu-id="ff842-103">Request Features in ASP.NET Core</span></span>
+# <a name="request-features-in-aspnet-core"></a><span data-ttu-id="68c63-103">ASP.NET Core içindeki istek özellikleri</span><span class="sxs-lookup"><span data-stu-id="68c63-103">Request Features in ASP.NET Core</span></span>
 
-<span data-ttu-id="ff842-104">[Steve Smith](https://ardalis.com/) tarafından</span><span class="sxs-lookup"><span data-stu-id="ff842-104">By [Steve Smith](https://ardalis.com/)</span></span>
+<span data-ttu-id="68c63-104">[Steve Smith](https://ardalis.com/) tarafından</span><span class="sxs-lookup"><span data-stu-id="68c63-104">By [Steve Smith](https://ardalis.com/)</span></span>
 
-<span data-ttu-id="ff842-105">HTTP istekleri ve yanıtları ile ilgili Web sunucusu uygulama ayrıntıları arabirimlerde tanımlanmıştır.</span><span class="sxs-lookup"><span data-stu-id="ff842-105">Web server implementation details related to HTTP requests and responses are defined in interfaces.</span></span> <span data-ttu-id="ff842-106">Bu arabirimler, uygulamanın barındırma işlem hattını oluşturmak ve değiştirmek için sunucu uygulamaları ve ara yazılım tarafından kullanılır.</span><span class="sxs-lookup"><span data-stu-id="ff842-106">These interfaces are used by server implementations and middleware to create and modify the application's hosting pipeline.</span></span>
+<span data-ttu-id="68c63-105">`HttpContext`Uygulamaların ve ara yazılımların istekleri işlemek için kullandığı API 'nin, *özellik arabirimleri*olarak adlandırılan bir soyutlama katmanı vardır.</span><span class="sxs-lookup"><span data-stu-id="68c63-105">The `HttpContext` API that applications and middleware use to process requests has an abstraction layer undernieth it called *feature interfaces*.</span></span> <span data-ttu-id="68c63-106">Her özellik arabirimi tarafından sunulan işlevlerin ayrıntılı bir alt kümesini sağlar `HttpContext` .</span><span class="sxs-lookup"><span data-stu-id="68c63-106">Each feature interface provides a granular subset of the functionality exposed by `HttpContext`.</span></span> <span data-ttu-id="68c63-107">Bu arabirimler, isteğin tamamı yeniden uygulanması gerekmeden işlenirken, sunucu veya ara yazılım tarafından eklenebilir, değiştirilebilir, sarmalanabilir, değiştirilebilir veya kaldırılabilir `HttpContext` .</span><span class="sxs-lookup"><span data-stu-id="68c63-107">These interfaces can be added, modified, wrapped, replaced, or even removed by the server or middleware as the request is processed without having to re-implement the entire `HttpContext`.</span></span> <span data-ttu-id="68c63-108">Ayrıca, test sırasında işlevselliği sahte bir şekilde kullanılabilir.</span><span class="sxs-lookup"><span data-stu-id="68c63-108">They can also be used to mock functionality when testing.</span></span>
 
-## <a name="feature-interfaces"></a><span data-ttu-id="ff842-107">Özellik arabirimleri</span><span class="sxs-lookup"><span data-stu-id="ff842-107">Feature interfaces</span></span>
+## <a name="feature-collections"></a><span data-ttu-id="68c63-109">Özellik koleksiyonları</span><span class="sxs-lookup"><span data-stu-id="68c63-109">Feature collections</span></span>
 
-<span data-ttu-id="ff842-108">ASP.NET Core, `Microsoft.AspNetCore.Http.Features` sunucularının destekledikleri özellikleri tanımlamak için kullandıkları bir dızı http özelliği arabirimini tanımlar.</span><span class="sxs-lookup"><span data-stu-id="ff842-108">ASP.NET Core defines a number of HTTP feature interfaces in `Microsoft.AspNetCore.Http.Features` which are used by servers to identify the features they support.</span></span> <span data-ttu-id="ff842-109">Aşağıdaki özellik arabirimleri istekleri ve dönüş yanıtlarını işler:</span><span class="sxs-lookup"><span data-stu-id="ff842-109">The following feature interfaces handle requests and return responses:</span></span>
+<span data-ttu-id="68c63-110"><xref:Microsoft.AspNetCore.Http.HttpContext.Features>Özelliği, `HttpContext` geçerli istek için özellik arabirimleri koleksiyonuna erişim sağlar.</span><span class="sxs-lookup"><span data-stu-id="68c63-110">The <xref:Microsoft.AspNetCore.Http.HttpContext.Features> property of `HttpContext` provides access to the collection of feature interfaces for the current request.</span></span> <span data-ttu-id="68c63-111">Özellik koleksiyonu bir istek bağlamı içinde bile değişebilir olduğundan, ara yazılım, koleksiyonu değiştirmek ve ek özellikler için destek eklemek üzere kullanılabilir.</span><span class="sxs-lookup"><span data-stu-id="68c63-111">Since the feature collection is mutable even within the context of a request, middleware can be used to modify the collection and add support for additional features.</span></span> <span data-ttu-id="68c63-112">Bazı gelişmiş özellikler yalnızca özellik koleksiyonu aracılığıyla ilişkili arabirime erişerek kullanılabilir.</span><span class="sxs-lookup"><span data-stu-id="68c63-112">Some advanced features are only available by accessing the associated interface through the feature collection.</span></span>
 
-<span data-ttu-id="ff842-110">`IHttpRequestFeature` Protokol, yol, sorgu dizesi, üst bilgiler ve gövde dahil olmak üzere bir HTTP isteğinin yapısını tanımlar.</span><span class="sxs-lookup"><span data-stu-id="ff842-110">`IHttpRequestFeature` Defines the structure of an HTTP request, including the protocol, path, query string, headers, and body.</span></span>
+## <a name="feature-interfaces"></a><span data-ttu-id="68c63-113">Özellik arabirimleri</span><span class="sxs-lookup"><span data-stu-id="68c63-113">Feature interfaces</span></span>
 
-<span data-ttu-id="ff842-111">`IHttpResponseFeature` Durum kodu, üst bilgiler ve yanıtın gövdesi dahil olmak üzere bir HTTP yanıtının yapısını tanımlar.</span><span class="sxs-lookup"><span data-stu-id="ff842-111">`IHttpResponseFeature` Defines the structure of an HTTP response, including the status code, headers, and body of the response.</span></span>
+<span data-ttu-id="68c63-114">ASP.NET Core, ' de <xref:Microsoft.AspNetCore.Http.Features?displayProperty=fullName> destekledikleri özellikleri belirlemek için çeşitli sunucular ve ara yazılım tarafından paylaşılan bir dizi ortak http özelliği arabirimini tanımlar.</span><span class="sxs-lookup"><span data-stu-id="68c63-114">ASP.NET Core defines a number of common HTTP feature interfaces in <xref:Microsoft.AspNetCore.Http.Features?displayProperty=fullName>, which are shared by various servers and middleware to identify the features that they support.</span></span> <span data-ttu-id="68c63-115">Sunucular ve ara yazılım, ek işlevlere sahip kendi arabirimlerini de sağlayabilir.</span><span class="sxs-lookup"><span data-stu-id="68c63-115">Servers and middleware may also provide their own interfaces with additional functionality.</span></span>
 
-<span data-ttu-id="ff842-112">`IHttpAuthenticationFeature``ClaimsPrincipal`, Ve bir kimlik doğrulama işleyicisi belirterek kullanıcıları tanımlama desteğini tanımlar.</span><span class="sxs-lookup"><span data-stu-id="ff842-112">`IHttpAuthenticationFeature` Defines support for identifying users based on a `ClaimsPrincipal` and specifying an authentication handler.</span></span>
+<span data-ttu-id="68c63-116">Çoğu özellik arabirimi isteğe bağlı, açık işlevsellik sağlar ve ilgili `HttpContext` API 'leri, özellik mevcut değilse varsayılan değerleri sağlar.</span><span class="sxs-lookup"><span data-stu-id="68c63-116">Most feature interfaces provide optional, light-up functionality, and their associated `HttpContext` APIs provide defaults if the feature isn't present.</span></span> <span data-ttu-id="68c63-117">Çekirdek istek ve yanıt işlevselliği sağladığından ve isteği işlemek için uygulanması gerektiğinden, aşağıdaki içerikte bazı arabirimler belirtilmiştir.</span><span class="sxs-lookup"><span data-stu-id="68c63-117">A few interfaces are indicated in the following content as required because they provide core request and response functionality and must be implemented in order to process the request.</span></span>
 
-<span data-ttu-id="ff842-113">`IHttpUpgradeFeature` Sunucu, protokolleri değiştirmek isterse, istemcinin kullanmak istediğiniz ek protokolleri belirtmesini sağlayan [http yükseltmeleri](https://tools.ietf.org/html/rfc2616.html#section-14.42)için desteği tanımlar.</span><span class="sxs-lookup"><span data-stu-id="ff842-113">`IHttpUpgradeFeature` Defines support for [HTTP Upgrades](https://tools.ietf.org/html/rfc2616.html#section-14.42), which allow the client to specify which additional protocols it would like to use if the server wishes to switch protocols.</span></span>
+<span data-ttu-id="68c63-118">Aşağıdaki özellik arabirimleri şunlardır <xref:Microsoft.AspNetCore.Http.Features?displayProperty=fullName> :</span><span class="sxs-lookup"><span data-stu-id="68c63-118">The following feature interfaces are from <xref:Microsoft.AspNetCore.Http.Features?displayProperty=fullName>:</span></span>
 
-<span data-ttu-id="ff842-114">`IHttpBufferingFeature` İsteklerin ve/veya yanıtlarının arabelleğe alınması devre dışı bırakma yöntemlerini tanımlar.</span><span class="sxs-lookup"><span data-stu-id="ff842-114">`IHttpBufferingFeature` Defines methods for disabling buffering of requests and/or responses.</span></span>
+<span data-ttu-id="68c63-119"><xref:Microsoft.AspNetCore.Http.Features.IHttpRequestFeature>: Protokol, yol, sorgu dizesi, üst bilgiler ve gövde dahil olmak üzere bir HTTP isteğinin yapısını tanımlar.</span><span class="sxs-lookup"><span data-stu-id="68c63-119"><xref:Microsoft.AspNetCore.Http.Features.IHttpRequestFeature>: Defines the structure of an HTTP request, including the protocol, path, query string, headers, and body.</span></span> <span data-ttu-id="68c63-120">İstekleri işlemek için bu özellik gereklidir.</span><span class="sxs-lookup"><span data-stu-id="68c63-120">This feature is required in order to process requests.</span></span>
 
-<span data-ttu-id="ff842-115">`IHttpConnectionFeature` Yerel ve uzak adresler ve bağlantı noktaları için özellikleri tanımlar.</span><span class="sxs-lookup"><span data-stu-id="ff842-115">`IHttpConnectionFeature` Defines properties for local and remote addresses and ports.</span></span>
+<span data-ttu-id="68c63-121"><xref:Microsoft.AspNetCore.Http.Features.IHttpResponseFeature>: Durum kodu, üst bilgiler ve yanıtın gövdesi dahil olmak üzere bir HTTP yanıtının yapısını tanımlar.</span><span class="sxs-lookup"><span data-stu-id="68c63-121"><xref:Microsoft.AspNetCore.Http.Features.IHttpResponseFeature>: Defines the structure of an HTTP response, including the status code, headers, and body of the response.</span></span> <span data-ttu-id="68c63-122">İstekleri işlemek için bu özellik gereklidir.</span><span class="sxs-lookup"><span data-stu-id="68c63-122">This feature is required in order to process requests.</span></span>
 
-<span data-ttu-id="ff842-116">`IHttpRequestLifetimeFeature` Bağlantıların iptal edilme desteğini tanımlar veya bir isteğin erken sonlandırılıp sonlandırılmayacağını (örneğin, bir istemci bağlantısı kesildiğini) belirler.</span><span class="sxs-lookup"><span data-stu-id="ff842-116">`IHttpRequestLifetimeFeature` Defines support for aborting connections, or detecting if a request has been terminated prematurely, such as by a client disconnect.</span></span>
+::: moniker range=">= aspnetcore-3.0"
 
-<span data-ttu-id="ff842-117">`IHttpSendFileFeature` Dosyaları zaman uyumsuz olarak göndermek için bir yöntem tanımlar.</span><span class="sxs-lookup"><span data-stu-id="ff842-117">`IHttpSendFileFeature` Defines a method for sending files asynchronously.</span></span>
+<span data-ttu-id="68c63-123"><xref:Microsoft.AspNetCore.Http.Features.IHttpResponseBodyFeature>: Bir `Stream` , a veya bir dosya kullanarak yanıt gövdesini yazmanın farklı yollarını tanımlar `PipeWriter` .</span><span class="sxs-lookup"><span data-stu-id="68c63-123"><xref:Microsoft.AspNetCore.Http.Features.IHttpResponseBodyFeature>: Defines different ways of writing out the response body, using either a `Stream`, a `PipeWriter`, or a file.</span></span> <span data-ttu-id="68c63-124">İstekleri işlemek için bu özellik gereklidir.</span><span class="sxs-lookup"><span data-stu-id="68c63-124">This feature is required in order to process requests.</span></span> <span data-ttu-id="68c63-125">Bu ve ' nin yerini alır `IHttpResponseFeature.Body` `IHttpSendFileFeature` .</span><span class="sxs-lookup"><span data-stu-id="68c63-125">This replaces `IHttpResponseFeature.Body` and `IHttpSendFileFeature`.</span></span>
 
-<span data-ttu-id="ff842-118">`IHttpWebSocketFeature` Web yuvalarını desteklemek için bir API tanımlar.</span><span class="sxs-lookup"><span data-stu-id="ff842-118">`IHttpWebSocketFeature` Defines an API for supporting web sockets.</span></span>
+::: moniker-end
 
-<span data-ttu-id="ff842-119">`IHttpRequestIdentifierFeature` İstekleri benzersiz şekilde tanımlamak için uygulanabilecek bir özellik ekler.</span><span class="sxs-lookup"><span data-stu-id="ff842-119">`IHttpRequestIdentifierFeature` Adds a property that can be implemented to uniquely identify requests.</span></span>
+<span data-ttu-id="68c63-126"><xref:Microsoft.AspNetCore.Http.Features.Authentication.IHttpAuthenticationFeature>: <xref:System.Security.Claims.ClaimsPrincipal> Şu anda istekle ilişkili olan öğesini tutar.</span><span class="sxs-lookup"><span data-stu-id="68c63-126"><xref:Microsoft.AspNetCore.Http.Features.Authentication.IHttpAuthenticationFeature>: Holds the <xref:System.Security.Claims.ClaimsPrincipal> currently associated with the request.</span></span>
 
-<span data-ttu-id="ff842-120">`ISessionFeature``ISessionFactory` `ISession` Kullanıcı oturumlarını desteklemek için tanımlar ve soyutlamalar tanımlar.</span><span class="sxs-lookup"><span data-stu-id="ff842-120">`ISessionFeature` Defines `ISessionFactory` and `ISession` abstractions for supporting user sessions.</span></span>
+<span data-ttu-id="68c63-127"><xref:Microsoft.AspNetCore.Http.Features.IFormFeature>: Gelen HTTP ve çok parçalı form gönderilerini ayrıştırmak ve önbelleğe almak için kullanılır.</span><span class="sxs-lookup"><span data-stu-id="68c63-127"><xref:Microsoft.AspNetCore.Http.Features.IFormFeature>: Used to parse and cache incoming HTTP and multipart form submissions.</span></span>
 
-<span data-ttu-id="ff842-121">`ITlsConnectionFeature` İstemci sertifikalarını almak için bir API tanımlar.</span><span class="sxs-lookup"><span data-stu-id="ff842-121">`ITlsConnectionFeature` Defines an API for retrieving client certificates.</span></span>
+::: moniker range=">= aspnetcore-2.0"
 
-<span data-ttu-id="ff842-122">`ITlsTokenBindingFeature` TLS belirteci bağlama parametreleriyle çalışma yöntemlerini tanımlar.</span><span class="sxs-lookup"><span data-stu-id="ff842-122">`ITlsTokenBindingFeature` Defines methods for working with TLS token binding parameters.</span></span>
+<span data-ttu-id="68c63-128"><xref:Microsoft.AspNetCore.Http.Features.IHttpBodyControlFeature>: İstek veya Yanıt gövdeleri için zaman uyumlu GÇ işlemlerine izin verilip verilmeyeceğini denetlemek için kullanılır.</span><span class="sxs-lookup"><span data-stu-id="68c63-128"><xref:Microsoft.AspNetCore.Http.Features.IHttpBodyControlFeature>: Used to control if synchronous IO operations are allowed for the request or response bodies.</span></span>
 
-> [!NOTE]
-> <span data-ttu-id="ff842-123">`ISessionFeature` bir sunucu özelliği değildir, ancak `SessionMiddleware` (bkz. [uygulama durumunu yönetme](app-state.md)) tarafından uygulanır.</span><span class="sxs-lookup"><span data-stu-id="ff842-123">`ISessionFeature` isn't a server feature, but is implemented by the `SessionMiddleware` (see [Managing Application State](app-state.md)).</span></span>
+::: moniker-end
+   
+::: moniker range="< aspnetcore-3.0"
 
-## <a name="feature-collections"></a><span data-ttu-id="ff842-124">Özellik koleksiyonları</span><span class="sxs-lookup"><span data-stu-id="ff842-124">Feature collections</span></span>
+<span data-ttu-id="68c63-129"><xref:Microsoft.AspNetCore.Http.Features.IHttpBufferingFeature>: İsteklerin ve/veya yanıtlarının arabelleğe alınması devre dışı bırakmak için yöntemleri tanımlar.</span><span class="sxs-lookup"><span data-stu-id="68c63-129"><xref:Microsoft.AspNetCore.Http.Features.IHttpBufferingFeature>: Defines methods for disabling buffering of requests and/or responses.</span></span>
 
-<span data-ttu-id="ff842-125">`Features`Özelliği, `HttpContext` geçerli istek IÇIN kullanılabilir http özelliklerini almak ve ayarlamak için bir arabirim sağlar.</span><span class="sxs-lookup"><span data-stu-id="ff842-125">The `Features` property of `HttpContext` provides an interface for getting and setting the available HTTP features for the current request.</span></span> <span data-ttu-id="ff842-126">Özellik koleksiyonu bir istek bağlamı içinde bile değişebilir olduğundan, ara yazılım, koleksiyonu değiştirmek ve ek özellikler için destek eklemek üzere kullanılabilir.</span><span class="sxs-lookup"><span data-stu-id="ff842-126">Since the feature collection is mutable even within the context of a request, middleware can be used to modify the collection and add support for additional features.</span></span>
+::: moniker-end
 
-## <a name="middleware-and-request-features"></a><span data-ttu-id="ff842-127">Ara yazılım ve istek özellikleri</span><span class="sxs-lookup"><span data-stu-id="ff842-127">Middleware and request features</span></span>
+<span data-ttu-id="68c63-130"><xref:Microsoft.AspNetCore.Http.Features.IHttpConnectionFeature>: Bağlantı kimliği ve yerel ve uzak adresler ve bağlantı noktaları için özellikleri tanımlar.</span><span class="sxs-lookup"><span data-stu-id="68c63-130"><xref:Microsoft.AspNetCore.Http.Features.IHttpConnectionFeature>: Defines properties for the connection id and local and remote addresses and ports.</span></span>
 
-<span data-ttu-id="ff842-128">Sunucular Özellik koleksiyonu oluşturmaktan sorumludur, ancak ara yazılım bu koleksiyona ekleyebilir ve koleksiyondaki özellikleri kullanabilir.</span><span class="sxs-lookup"><span data-stu-id="ff842-128">While servers are responsible for creating the feature collection, middleware can both add to this collection and consume features from the collection.</span></span> <span data-ttu-id="ff842-129">Örneğin, `StaticFileMiddleware` `IHttpSendFileFeature` özelliğine erişir.</span><span class="sxs-lookup"><span data-stu-id="ff842-129">For example, the `StaticFileMiddleware` accesses the `IHttpSendFileFeature` feature.</span></span> <span data-ttu-id="ff842-130">Özellik varsa, istenen statik dosyayı fiziksel yolundan göndermek için kullanılır.</span><span class="sxs-lookup"><span data-stu-id="ff842-130">If the feature exists, it's used to send the requested static file from its physical path.</span></span> <span data-ttu-id="ff842-131">Aksi takdirde, dosyayı göndermek için daha yavaş bir alternatif yöntem kullanılır.</span><span class="sxs-lookup"><span data-stu-id="ff842-131">Otherwise, a slower alternative method is used to send the file.</span></span> <span data-ttu-id="ff842-132">Kullanılabilir olduğunda, `IHttpSendFileFeature` işletim sisteminin dosyayı açmasına ve ağ kartına doğrudan bir çekirdek modu kopyalaması gerçekleştirmesine izin verir.</span><span class="sxs-lookup"><span data-stu-id="ff842-132">When available, the `IHttpSendFileFeature` allows the operating system to open the file and perform a direct kernel mode copy to the network card.</span></span>
+::: moniker range=">= aspnetcore-2.0"
 
-<span data-ttu-id="ff842-133">Ayrıca, ara yazılım, sunucu tarafından belirlenen özellik koleksiyonuna eklenebilir.</span><span class="sxs-lookup"><span data-stu-id="ff842-133">Additionally, middleware can add to the feature collection established by the server.</span></span> <span data-ttu-id="ff842-134">Mevcut özellikler, ara yazılım tarafından da değiştirilebilir ve bu da ara yazılım, sunucunun işlevselliğini artırabilir.</span><span class="sxs-lookup"><span data-stu-id="ff842-134">Existing features can even be replaced by middleware, allowing the middleware to augment the functionality of the server.</span></span> <span data-ttu-id="ff842-135">Koleksiyona eklenen özellikler, daha sonra istek ardışık düzeninde bulunan diğer ara yazılım veya temeldeki uygulamanın kendisi için de kullanılabilir.</span><span class="sxs-lookup"><span data-stu-id="ff842-135">Features added to the collection are available immediately to other middleware or the underlying application itself later in the request pipeline.</span></span>
+<span data-ttu-id="68c63-131"><xref:Microsoft.AspNetCore.Http.Features.IHttpMaxRequestBodySizeFeature>: Geçerli istek için izin verilen en fazla istek gövdesi boyutunu denetler.</span><span class="sxs-lookup"><span data-stu-id="68c63-131"><xref:Microsoft.AspNetCore.Http.Features.IHttpMaxRequestBodySizeFeature>: Controls the maximum allowed request body size for the current request.</span></span>
 
-<span data-ttu-id="ff842-136">Özel sunucu uygulamalarını ve belirli ara yazılım geliştirmelerini birleştirerek, bir uygulamanın gerektirdiği kesin özellikler kümesi oluşturulabilir.</span><span class="sxs-lookup"><span data-stu-id="ff842-136">By combining custom server implementations and specific middleware enhancements, the precise set of features an application requires can be constructed.</span></span> <span data-ttu-id="ff842-137">Bu, sunucuda değişiklik gerektirmeden eksik özelliklerin eklenmesine izin verir ve yalnızca en düşük miktarda özelliğin gösterilmesini sağlar, böylece saldırı yüzeyi alanını kısıtlar ve performansı geliştirir.</span><span class="sxs-lookup"><span data-stu-id="ff842-137">This allows missing features to be added without requiring a change in server, and ensures only the minimal amount of features are exposed, thus limiting attack surface area and improving performance.</span></span>
+::: moniker-end
 
-## <a name="summary"></a><span data-ttu-id="ff842-138">Özet</span><span class="sxs-lookup"><span data-stu-id="ff842-138">Summary</span></span>
+::: moniker range=">= aspnetcore-5.0"
 
-<span data-ttu-id="ff842-139">Özellik arabirimleri, belirli bir isteğin destekleyebileceği belirli HTTP özelliklerini tanımlar.</span><span class="sxs-lookup"><span data-stu-id="ff842-139">Feature interfaces define specific HTTP features that a given request may support.</span></span> <span data-ttu-id="ff842-140">Sunucular, özellik koleksiyonlarını ve bu sunucu tarafından desteklenen ilk özellik kümesini tanımlar, ancak bu özellikleri geliştirmek için ara yazılım kullanılabilir.</span><span class="sxs-lookup"><span data-stu-id="ff842-140">Servers define collections of features, and the initial set of features supported by that server, but middleware can be used to enhance these features.</span></span>
+<span data-ttu-id="68c63-132">`IHttpRequestBodyDetectionFeature`: İsteğin bir gövdeye sahip olup olmayacağını gösterir.</span><span class="sxs-lookup"><span data-stu-id="68c63-132">`IHttpRequestBodyDetectionFeature`: Indicates if the request can have a body.</span></span>
 
-## <a name="additional-resources"></a><span data-ttu-id="ff842-141">Ek kaynaklar</span><span class="sxs-lookup"><span data-stu-id="ff842-141">Additional resources</span></span>
+::: moniker-end
 
-* [<span data-ttu-id="ff842-142">Sunucular</span><span class="sxs-lookup"><span data-stu-id="ff842-142">Servers</span></span>](xref:fundamentals/servers/index)
-* [<span data-ttu-id="ff842-143">Ara yazılım</span><span class="sxs-lookup"><span data-stu-id="ff842-143">Middleware</span></span>](xref:fundamentals/middleware/index)
-* [<span data-ttu-id="ff842-144">.NET için Açık Web Arabirimi (OWIN)</span><span class="sxs-lookup"><span data-stu-id="ff842-144">Open Web Interface for .NET (OWIN)</span></span>](xref:fundamentals/owin)
+<span data-ttu-id="68c63-133"><xref:Microsoft.AspNetCore.Http.Features.IHttpRequestIdentifierFeature>: İstekleri benzersiz şekilde tanımlamak için uygulanabilecek bir özellik ekler.</span><span class="sxs-lookup"><span data-stu-id="68c63-133"><xref:Microsoft.AspNetCore.Http.Features.IHttpRequestIdentifierFeature>: Adds a property that can be implemented to uniquely identify requests.</span></span>
+
+<span data-ttu-id="68c63-134"><xref:Microsoft.AspNetCore.Http.Features.IHttpRequestLifetimeFeature>: Bağlantı iptal etme veya bir isteğin erken sonlandırılıp sonlandırılmayacağını (örneğin, bir istemcinin bağlantısının kesilmesi) için desteği tanımlar.</span><span class="sxs-lookup"><span data-stu-id="68c63-134"><xref:Microsoft.AspNetCore.Http.Features.IHttpRequestLifetimeFeature>: Defines support for aborting connections or detecting if a request has been terminated prematurely, such as by a client disconnect.</span></span>
+
+::: moniker range=">= aspnetcore-3.0"
+
+<span data-ttu-id="68c63-135"><xref:Microsoft.AspNetCore.Http.Features.IHttpRequestTrailersFeature>: Varsa istek artbilgisi üst bilgilerine erişim sağlar.</span><span class="sxs-lookup"><span data-stu-id="68c63-135"><xref:Microsoft.AspNetCore.Http.Features.IHttpRequestTrailersFeature>: Provides access to the request trailer headers, if any.</span></span>
+
+<span data-ttu-id="68c63-136"><xref:Microsoft.AspNetCore.Http.Features.IHttpResetFeature>: HTTP/2 veya HTTP/3 gibi bunları destekleyen protokoller için sıfırlama iletileri göndermek için kullanılır.</span><span class="sxs-lookup"><span data-stu-id="68c63-136"><xref:Microsoft.AspNetCore.Http.Features.IHttpResetFeature>: Used to send reset messages for protocols that support them such as HTTP/2 or HTTP/3.</span></span>
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-2.2"
+
+<span data-ttu-id="68c63-137"><xref:Microsoft.AspNetCore.Http.Features.IHttpResponseTrailersFeature>: Destekleniyorsa yanıt artbilgisi bilgilerini sağlar.</span><span class="sxs-lookup"><span data-stu-id="68c63-137"><xref:Microsoft.AspNetCore.Http.Features.IHttpResponseTrailersFeature>: Enables the application to provide response trailer headers if supported.</span></span>
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-3.0"
+
+<span data-ttu-id="68c63-138"><xref:Microsoft.AspNetCore.Http.Features.IHttpSendFileFeature>: Dosyaları zaman uyumsuz olarak göndermek için bir yöntem tanımlar.</span><span class="sxs-lookup"><span data-stu-id="68c63-138"><xref:Microsoft.AspNetCore.Http.Features.IHttpSendFileFeature>: Defines a method for sending files asynchronously.</span></span>
+
+::: moniker-end
+
+<span data-ttu-id="68c63-139"><xref:Microsoft.AspNetCore.Http.Features.IHttpUpgradeFeature>: Sunucu protokolleri değiştirmek isterse, istemcinin kullanmak istediğiniz ek protokolleri belirtmesini sağlayan [http yükseltmeleri](https://tools.ietf.org/html/rfc2616.html#section-14.42)için desteği tanımlar.</span><span class="sxs-lookup"><span data-stu-id="68c63-139"><xref:Microsoft.AspNetCore.Http.Features.IHttpUpgradeFeature>: Defines support for [HTTP Upgrades](https://tools.ietf.org/html/rfc2616.html#section-14.42), which allow the client to specify which additional protocols it would like to use if the server wishes to switch protocols.</span></span>
+
+<span data-ttu-id="68c63-140"><xref:Microsoft.AspNetCore.Http.Features.IHttpWebSocketFeature>: Web yuvalarını desteklemek için bir API tanımlar.</span><span class="sxs-lookup"><span data-stu-id="68c63-140"><xref:Microsoft.AspNetCore.Http.Features.IHttpWebSocketFeature>: Defines an API for supporting web sockets.</span></span>
+
+::: moniker range=">= aspnetcore-3.0"
+
+<span data-ttu-id="68c63-141"><xref:Microsoft.AspNetCore.Http.Features.IHttpsCompressionFeature>: Yanıt sıkıştırmasının HTTPS bağlantıları üzerinden kullanılması gerekip gerekmediğini denetler.</span><span class="sxs-lookup"><span data-stu-id="68c63-141"><xref:Microsoft.AspNetCore.Http.Features.IHttpsCompressionFeature>: Controls if response compression should be used over HTTPS connections.</span></span>
+
+::: moniker-end
+
+<span data-ttu-id="68c63-142"><xref:Microsoft.AspNetCore.Http.Features.IItemsFeature>: <xref:Microsoft.AspNetCore.Http.Features.IItemsFeature.Items> İstek başına uygulama durumu için koleksiyonu depolar.</span><span class="sxs-lookup"><span data-stu-id="68c63-142"><xref:Microsoft.AspNetCore.Http.Features.IItemsFeature>: Stores the <xref:Microsoft.AspNetCore.Http.Features.IItemsFeature.Items> collection for per request application state.</span></span>
+
+<span data-ttu-id="68c63-143"><xref:Microsoft.AspNetCore.Http.Features.IQueryFeature>: Sorgu dizesini ayrıştırır ve önbelleğe alır.</span><span class="sxs-lookup"><span data-stu-id="68c63-143"><xref:Microsoft.AspNetCore.Http.Features.IQueryFeature>: Parses and caches the query string.</span></span>
+   
+::: moniker range=">= aspnetcore-3.0"
+
+<span data-ttu-id="68c63-144"><xref:Microsoft.AspNetCore.Http.Features.IRequestBodyPipeFeature>: İstek gövdesini bir olarak temsil eder <xref:System.IO.Pipelines.PipeReader> .</span><span class="sxs-lookup"><span data-stu-id="68c63-144"><xref:Microsoft.AspNetCore.Http.Features.IRequestBodyPipeFeature>: Represents the request body as a <xref:System.IO.Pipelines.PipeReader>.</span></span>
+ 
+::: moniker-end
+
+<span data-ttu-id="68c63-145"><xref:Microsoft.AspNetCore.Http.Features.IRequestCookiesFeature>: İstek üst bilgisi değerlerini ayrıştırır ve önbelleğe alır `Cookie` .</span><span class="sxs-lookup"><span data-stu-id="68c63-145"><xref:Microsoft.AspNetCore.Http.Features.IRequestCookiesFeature>: Parses and caches the request `Cookie` header values.</span></span>
+
+<span data-ttu-id="68c63-146"><xref:Microsoft.AspNetCore.Http.Features.IResponseCookiesFeature>: Yanıtın üstbilgiye nasıl cookie uygulanacağını denetler `Set-Cookie` .</span><span class="sxs-lookup"><span data-stu-id="68c63-146"><xref:Microsoft.AspNetCore.Http.Features.IResponseCookiesFeature>: Controls how response cookies are applied to the `Set-Cookie` header.</span></span>
+
+::: moniker range=">= aspnetcore-2.2"
+
+<span data-ttu-id="68c63-147"><xref:Microsoft.AspNetCore.Http.Features.IServerVariablesFeature>: Bu özellik, IIS tarafından sağlananlar gibi istek sunucusu değişkenlerine erişim sağlar.</span><span class="sxs-lookup"><span data-stu-id="68c63-147"><xref:Microsoft.AspNetCore.Http.Features.IServerVariablesFeature>: This feature provides access to request server variables such as those provided by IIS.</span></span>
+
+::: moniker-end
+   
+<span data-ttu-id="68c63-148"><xref:Microsoft.AspNetCore.Http.Features.IServiceProvidersFeature>: <xref:System.IServiceProvider> Kapsamlı bir istek hizmetleriyle erişim sağlar.</span><span class="sxs-lookup"><span data-stu-id="68c63-148"><xref:Microsoft.AspNetCore.Http.Features.IServiceProvidersFeature>: Provides access to an <xref:System.IServiceProvider> with scoped request services.</span></span>
+
+<span data-ttu-id="68c63-149"><xref:Microsoft.AspNetCore.Http.Features.ISessionFeature>: `ISessionFactory` <xref:Microsoft.AspNetCore.Http.ISession> Kullanıcı oturumlarını desteklemek için tanımlar ve soyutlamalar tanımlar.</span><span class="sxs-lookup"><span data-stu-id="68c63-149"><xref:Microsoft.AspNetCore.Http.Features.ISessionFeature>: Defines `ISessionFactory` and <xref:Microsoft.AspNetCore.Http.ISession> abstractions for supporting user sessions.</span></span> <span data-ttu-id="68c63-150">`ISessionFeature` , <xref:Microsoft.AspNetCore.Session.SessionMiddleware> (bkz <xref:fundamentals/app-state> .) tarafından uygulanır.</span><span class="sxs-lookup"><span data-stu-id="68c63-150">`ISessionFeature` is implemented by the <xref:Microsoft.AspNetCore.Session.SessionMiddleware> (see <xref:fundamentals/app-state>).</span></span>
+
+<span data-ttu-id="68c63-151"><xref:Microsoft.AspNetCore.Http.Features.ITlsConnectionFeature>: İstemci sertifikalarını almak için bir API tanımlar.</span><span class="sxs-lookup"><span data-stu-id="68c63-151"><xref:Microsoft.AspNetCore.Http.Features.ITlsConnectionFeature>: Defines an API for retrieving client certificates.</span></span>
+
+<span data-ttu-id="68c63-152"><xref:Microsoft.AspNetCore.Http.Features.ITlsTokenBindingFeature>: TLS belirteci bağlama parametreleriyle çalışma yöntemlerini tanımlar.</span><span class="sxs-lookup"><span data-stu-id="68c63-152"><xref:Microsoft.AspNetCore.Http.Features.ITlsTokenBindingFeature>: Defines methods for working with TLS token binding parameters.</span></span>
+   
+::: moniker range=">= aspnetcore-2.2"
+   
+<span data-ttu-id="68c63-153"><xref:Microsoft.AspNetCore.Http.Features.ITrackingConsentFeature>: Site etkinliğiyle ve işlevlerle ilgili Kullanıcı bilgilerinin depolanması ile ilgili Kullanıcı onayını sorgulamak, vermek ve geri çekmek için kullanılır.</span><span class="sxs-lookup"><span data-stu-id="68c63-153"><xref:Microsoft.AspNetCore.Http.Features.ITrackingConsentFeature>: Used to query, grant, and withdraw user consent regarding the storage of user information related to site activity and functionality.</span></span>
+   
+::: moniker-end
+
+## <a name="additional-resources"></a><span data-ttu-id="68c63-154">Ek kaynaklar</span><span class="sxs-lookup"><span data-stu-id="68c63-154">Additional resources</span></span>
+
+* <xref:fundamentals/servers/index>
+* <xref:fundamentals/middleware/index>
