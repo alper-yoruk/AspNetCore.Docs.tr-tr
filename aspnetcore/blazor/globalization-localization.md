@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: be73b0c1e33a2cd15c9ff0dc51044f9bd48c43fe
-ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
+ms.openlocfilehash: 4345dd8525c2e72aaddc8e45a4fd4d9bfdd63040
+ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/16/2020
-ms.locfileid: "92113822"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92326523"
 ---
 # <a name="aspnet-core-no-locblazor-globalization-and-localization"></a>BlazorGenelleştirme ve yerelleştirme ASP.NET Core
 
@@ -66,7 +66,7 @@ Aşağıdaki alan türleri belirli biçimlendirme gereksinimlerine sahiptir ve �
 
 [`@bind`](xref:mvc/views/razor#bind) , bir `@bind:culture` <xref:System.Globalization.CultureInfo?displayProperty=fullName> değeri ayrıştırmak ve biçimlendirmek için bir parametresini destekler. `date`Ve alan türleri kullanılırken bir kültürün belirtilmesi önerilmez `number` . `date` ve `number` Blazor gerekli kültürü sağlayan yerleşik desteğe sahiptir.
 
-## <a name="localization"></a>Localization (Yerelleştirme)
+## <a name="localization"></a>Yerelleştirme
 
 ### Blazor WebAssembly
 
@@ -83,6 +83,19 @@ Varsayılan olarak, Blazor WebAssembly Kullanıcı kültürünün tarih ve para 
   <BlazorWebAssemblyLoadAllGlobalizationData>true</BlazorWebAssemblyLoadAllGlobalizationData>
 </PropertyGroup>
 ```
+
+Blazor WebAssembly Ayrıca, öğesine geçirilen seçenekler kullanılarak belirli bir uygulama kültürü kullanılarak başlatılacak şekilde yapılandırılabilir `Blazor.start` . Örneğin, aşağıdaki örnekte kültür kullanılarak başlatılacak şekilde yapılandırılmış bir uygulama gösterilmektedir `en-GB` :
+
+```html
+<script src="_framework/blazor.webassembly.js" autostart="false"></script>
+<script>
+  Blazor.start({
+    applicationCulture: 'en-GB'
+  });
+</script>
+```
+
+Değeri `applicationCulture` [BCP-47 dil etiketi biçimine](https://tools.ietf.org/html/bcp47)uymalıdır.
 
 Uygulama yerelleştirmeyi gerektirmiyorsa, uygulamayı kültürü temel alan sabit kültürü destekleyecek şekilde yapılandırabilirsiniz `en-US` :
 

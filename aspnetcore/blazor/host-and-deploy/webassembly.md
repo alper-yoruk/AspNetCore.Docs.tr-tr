@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 63954bd2fbb8fdb2e347d552a10adc52263c3ad6
-ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
+ms.openlocfilehash: c3f537ff3b55f295db478cb097bc99023cc71a87
+ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/09/2020
-ms.locfileid: "91900719"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92326507"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core barındırma ve dağıtma Blazor WebAssembly
 
@@ -450,7 +450,13 @@ Bir Blazor Proje yayımlandığında, `web.config` aşağıdaki IIS yapılandır
   
 #### <a name="use-a-custom-webconfig"></a>Özel bir web.config kullanma
 
-Özel bir dosya kullanmak için `web.config` , özel `web.config` dosyayı proje klasörünün köküne yerleştirin ve projeyi yayımlayın.
+Özel bir dosya kullanmak için `web.config` , özel `web.config` dosyayı proje klasörünün köküne yerleştirin. Projeyi uygulamanın proje dosyasında kullanarak IIS 'e özgü varlıkları yayımlayacak şekilde yapılandırın `PublishIISAssets` ve projeyi yayımlayın:
+
+```xml
+<PropertyGroup>
+  <PublishIISAssets>true</PublishIISAssets>
+</PropertyGroup>
+```
 
 #### <a name="install-the-url-rewrite-module"></a>URL yeniden yazma modülünü yükler
 
@@ -508,7 +514,7 @@ IIS, `web.config` Brotli veya gzip ile sıkıştırılan varlıkları sunacak ş
 
 IIS ile dağıtım sorunlarını giderme hakkında daha fazla bilgi için bkz <xref:test/troubleshoot-azure-iis> ..
 
-### <a name="azure-storage"></a>Azure Storage
+### <a name="azure-storage"></a>Azure Depolama
 
 [Azure depolama](/azure/storage/) statik dosya barındırma, sunucusuz Blazor uygulama barındırmayı sağlar. Özel etki alanı adları, Azure Content Delivery Network (CDN) ve HTTPS desteklenir.
 

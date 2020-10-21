@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-javascript-from-dotnet
-ms.openlocfilehash: a7ba41501b856482c8fcf7efa8e1d78857020bf5
-ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
+ms.openlocfilehash: 3bd881b124e00b91ab0aa9d3eb7531f10ef895f2
+ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/16/2020
-ms.locfileid: "92113770"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92326504"
 ---
 # <a name="call-javascript-functions-from-net-methods-in-aspnet-core-no-locblazor"></a>ASP.NET Core .NET metotlarından JavaScript işlevlerini çağırın Blazor
 
@@ -260,9 +260,7 @@ public static ValueTask<T> GenericMethod<T>(this ElementReference elementRef,
 
 ## <a name="reference-elements-across-components"></a>Bileşenler arasında başvuru öğeleri
 
-<xref:Microsoft.AspNetCore.Components.ElementReference>Yalnızca bir bileşen <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> yönteminde (ve bir öğe başvurusu bir) garanti edilir `struct` , bu nedenle bileşenler arasında bir öğe başvurusu geçirilememelidir.
-
-Bir üst bileşen için bir öğe başvurusunu diğer bileşenlere kullanılabilir hale getirmek için, üst bileşen şunları yapabilir:
+<xref:Microsoft.AspNetCore.Components.ElementReference>Örnek yalnızca bir bileşen <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> yönteminde (ve bir öğe başvurusu bir) garanti edilir `struct` , bu nedenle bileşenler arasında bir öğe başvurusu geçirilememelidir. Bir üst bileşen için bir öğe başvurusunu diğer bileşenlere kullanılabilir hale getirmek için, üst bileşen şunları yapabilir:
 
 * Alt bileşenlerin geri çağırmaları kaydetmesine izin ver.
 * Geçirilen öğe başvurusuyla olay sırasında kayıtlı geri çağırmaları çağırın <xref:Microsoft.AspNetCore.Components.ComponentBase.OnAfterRender%2A> . Bu yaklaşım dolaylı olarak, alt bileşenlerin üst öğenin öğe başvurusuyla etkileşime geçmesini sağlar.

@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/mvc
-ms.openlocfilehash: d615f67fc5cb23499ee7e14b747390a7a1b5a693
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 51228e59284b5edf0554e9929b16deafe08ea31e
+ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865131"
+ms.lasthandoff: 10/21/2020
+ms.locfileid: "92326635"
 ---
 # <a name="migrate-from-aspnet-mvc-to-aspnet-core-mvc"></a>ASP.NET MVC 'den ASP.NET Core MVC 'ye geçiş
 
@@ -38,7 +38,7 @@ ASP.NET MVC 'den geçiş çok adımlı bir işlemdir. Bu makalede şunları ele 
 
 Yapılandırma ve kodu geçirmek için Identity bkz. [yapılandırmayı ASP.NET Core](xref:migration/configuration) ve [geçiş kimlik doğrulaması ve Identity ASP.NET Core geçirme](xref:migration/identity).
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 [!INCLUDE [prerequisites](../includes/net-core-prereqs-vs-3.1.md)]
 
@@ -57,7 +57,7 @@ Geçirilecek yeni bir ASP.NET Core projesi ile yeni bir çözüm oluşturun:
 
 1. Visual Studio 'nun ikinci bir örneğini başlatın.
 1. **Dosya** menüsünden **Yeni** > **Proje**' yi seçin.
-1. **ASP.NET Web Core Web uygulaması** ' nı seçin ve ardından **İleri**' yi seçin.
+1. **ASP.NET Core Web uygulaması** ' nı seçin ve ardından **İleri**' yi seçin.
 1. **Yeni projenizi yapılandırın** iletişim kutusunda projeyi *WebApp1*olarak adlandırın.
 1. Aynı proje adını kullanmak için konumu önceki projeden farklı bir dizine ayarlayın. Aynı ad alanının kullanılması, kodu iki proje arasında kopyalamayı kolaylaştırır. **Oluştur**’u seçin.
 1. **Yeni bir ASP.NET Core Web uygulaması oluştur** iletişim kutusunda, **.net Core** ve **ASP.NET Core 3,1** ' un seçili olduğunu doğrulayın. **Web uygulaması (Model-View-Controller)** proje şablonunu seçin ve **Oluştur**' u seçin.
