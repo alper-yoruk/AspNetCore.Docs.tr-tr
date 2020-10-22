@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/javascript-client
-ms.openlocfilehash: 6fc586d144547585ef75d653bf54193def5c8b7f
-ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
+ms.openlocfilehash: 6f611e56ec62ad7aea8a93e4761e1f67d0f76574
+ms.sourcegitcommit: fad0cd264c9d07a48a8c6ba1690807e0f8728898
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91606689"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92379462"
 ---
 # <a name="aspnet-core-no-locsignalr-javascript-client"></a>SignalRJavaScript istemcisi ASP.NET Core
 
@@ -278,46 +278,6 @@ Aşağıdaki kod, genel bir el ile yeniden bağlantı yaklaşımını göstermek
 
 Gerçek dünyada bir uygulama, bir üstel geri kapatmayı kullanır veya vermeden önce belirtilen sayıda kez yeniden dener.
 
-## <a name="troubleshoot-websocket-handshake-errors"></a>WebSocket el sıkışma hatalarında sorun giderme
-
-Bu bölüm, ASP.NET Core hub 'a bağlantı kurmaya çalışırken gerçekleşen *"WebSocket el sıkışması sırasında hata"* özel durumu hakkında yardım sağlar SignalR .
-
-### <a name="response-code-400-or-503"></a>Yanıt kodu 400 veya 503
-
-Aşağıdaki hata için:
-
-```log
-WebSocket connection to 'wss://xxx/HubName' failed: Error during WebSocket handshake: Unexpected response code: 400
-
-Error: Failed to start the connection: Error: There was an error with the transport.
-```
-
-Hata genellikle istemcinin yalnızca WebSockets taşıma kullanmasına neden olur ancak sunucuda WebSockets Protokolü etkinleştirilmemiştir.
-
-### <a name="response-code-307"></a>Yanıt kodu 307
-
-```log
-WebSocket connection to 'ws://xxx/HubName' failed: Error during WebSocket handshake: Unexpected response code: 307
-```
-
-Bu, genellikle merkez sunucu olduğunda meydana gelir SignalR :
-
-* Hem HTTP hem de HTTPS üzerinden yanıt verir.
-* , ' I çağırarak HTTPS 'yi zorlamak üzere yapılandırılmıştır `UseHttpsRedirection` `Startup` veya URL yeniden yazma KURALı aracılığıyla https uygular.
-
-Bu hata, istemci tarafında kullanılarak HTTP URL 'SI belirtilerek oluşabilir `.withUrl("http://xxx/HubName")` . Bu durumun düzeltilmesi, kodu bir HTTPS URL 'SI kullanacak şekilde değiştiriyor.
-
-### <a name="response-code-404"></a>Yanıt kodu 404
-
-```log
-WebSocket connection to 'wss://xxx/HubName' failed: Error during WebSocket handshake: Unexpected response code: 404
-```
-
-Uygulama localhost üzerinde çalışıyorsa, ancak IIS sunucusuna yayımladıktan sonra bu hatayı döndürür:
-
-* ASP.NET Core SignalR uygulamasının BIR IIS alt uygulaması olarak barındırıldığını doğrulayın.
-* JavaScript istemci tarafında alt uygulamanın pathbase ile URL 'YI ayarlama SignalR `.withUrl("/SubAppName/HubName")` .
-
 ## <a name="additional-resources"></a>Ek kaynaklar
 
 * [JavaScript API'si başvurusu](/javascript/api/?view=signalr-js-latest&preserve-view=true )
@@ -328,6 +288,7 @@ Uygulama localhost üzerinde çalışıyorsa, ancak IIS sunucusuna yayımladıkt
 * [Azure’da Yayımlama](xref:signalr/publish-to-azure-web-app)
 * [Çıkış noktaları arası Istekler (CORS)](xref:security/cors)
 * [Azure SignalR hizmeti sunucusuz belgeler](/azure/azure-signalr/signalr-concept-serverless-development-config)
+* [Bağlantı hatalarını giderme](xref:signalr/troubleshoot)
 
 ::: moniker-end
 

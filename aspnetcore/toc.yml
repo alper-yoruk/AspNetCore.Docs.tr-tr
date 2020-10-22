@@ -705,6 +705,9 @@
     - name: Günlüğe kaydetme ve tanılama
       displayName: signalr
       uid: signalr/diagnostics
+    - name: Sorun giderme
+      displayName: signalr
+      uid: signalr/troubleshoot
     - name: Belirtimler
       displayName: 'signalr, specs'
       items:

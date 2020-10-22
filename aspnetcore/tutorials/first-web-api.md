@@ -18,12 +18,12 @@ no-loc:
 - SignalR
 - Models
 uid: tutorials/first-web-api
-ms.openlocfilehash: 212d8a80bdc466479c34bc5fbd9c3261ca9d54c4
-ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
+ms.openlocfilehash: 9f67f8104eb5c21f244449ca3a4aaa96c750836d
+ms.sourcegitcommit: fad0cd264c9d07a48a8c6ba1690807e0f8728898
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/27/2020
-ms.locfileid: "91393918"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92379474"
 ---
 # <a name="tutorial-create-a-web-api-with-aspnet-core"></a>Öğretici: ASP.NET Core bir Web API 'SI oluşturma
 
@@ -60,7 +60,7 @@ Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
 ![İstemci, sol taraftaki bir kutu ile temsil edilir. Bir istek gönderir ve sağ tarafta çizilmiş bir kutu olan uygulamadan bir yanıt alır. Uygulama kutusu içinde, üç kutu denetleyiciyi, modeli ve veri erişim katmanını temsil eder. İstek uygulamanın denetleyicisine gelir ve denetleyici ile veri erişim katmanı arasında okuma/yazma işlemleri gerçekleştirilir. Model serileştirilir ve yanıtta istemciye döndürülür.](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -520,7 +520,7 @@ Bir yapılacaklar öğesini silmek için Postman kullanın:
 * Silinecek nesnenin URI 'sini ayarlayın (örneğin `https://localhost:5001/api/TodoItems/1` ).
 * **Gönder**’i seçin.
 
-<a name="over-post"></a>
+<a name="over-post-v5"></a>
 
 ## <a name="prevent-over-posting"></a>Fazla nakletmeyi engelle
 
@@ -586,7 +586,7 @@ Aşağıdaki diyagramda uygulamanın tasarımı gösterilmektedir.
 
 ![İstemci, sol taraftaki bir kutu ile temsil edilir. Bir istek gönderir ve sağ tarafta çizilmiş bir kutu olan uygulamadan bir yanıt alır. Uygulama kutusu içinde, üç kutu denetleyiciyi, modeli ve veri erişim katmanını temsil eder. İstek uygulamanın denetleyicisine gelir ve denetleyici ile veri erişim katmanı arasında okuma/yazma işlemleri gerçekleştirilir. Model serileştirilir ve yanıtta istemciye döndürülür.](first-web-api/_static/architecture.png)
 
-## <a name="prerequisites"></a>Önkoşullar
+## <a name="prerequisites"></a>Ön koşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -1008,6 +1008,7 @@ Bir yapılacaklar öğesini silmek için Postman kullanın:
 * **Gönder**’i seçin.
 
 <a name="over-post"></a>
+<a name="over-post-v3"></a>
 
 ## <a name="prevent-over-posting"></a>Fazla nakletmeyi engelle
 
@@ -1389,7 +1390,7 @@ Yukarıdaki kod, özniteliğiyle gösterildiği gibi bir HTTP POST yöntemidir [
   ![Postman konsolunun üstbilgiler sekmesi](first-web-api/_static/pmc2.png)
 
 * ALıNACAK yöntemi ayarlayın.
-* URI değerini olarak ayarlayın  `https://localhost:<port>/api/TodoItems/2` .Örneğin,  `https://localhost:5001/api/TodoItems/2` .
+* URI değerini olarak ayarlayın `https://localhost:<port>/api/TodoItems/2` . Örneğin, `https://localhost:5001/api/TodoItems/2`.
 * **Gönder**’i seçin.
 
 ## <a name="add-a-puttodoitem-method-21"></a>PutTodoItem yöntemi ekleme 2,1
