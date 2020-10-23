@@ -5,7 +5,7 @@ description: Uygulamalardaki bileşenler ve DOM öğeleri için veri bağlama ö
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/19/2020
+ms.date: 10/22/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/data-binding
-ms.openlocfilehash: 0884b0bedd9ed31b8c85790c6950c7c5d63bdf44
-ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
+ms.openlocfilehash: 5a4d50d88ebdf606da397666bf3003232cddd955
+ms.sourcegitcommit: d84a225ec3381355c343460deed50f2fa5722f60
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/02/2020
-ms.locfileid: "91653912"
+ms.lasthandoff: 10/22/2020
+ms.locfileid: "92429104"
 ---
 # <a name="aspnet-core-no-locblazor-data-binding"></a>ASP.NET Core Blazor veri bağlama
 
@@ -141,9 +141,15 @@ Yukarıdaki kodda, `<input>` öğesinin alan türü ( `type` ) varsayılan olara
 <input type="date" @bind="startDate" @bind:format="yyyy-MM-dd">
 ```
 
-## <a name="parent-to-child-binding-with-component-parameters"></a>Bileşen parametreleriyle üst-alt öğe bağlama
+## <a name="binding-with-component-parameters"></a>Bileşen parametreleriyle bağlama
+
+Yaygın bir senaryo, alt bileşendeki bir özelliği üst öğesinde bir özelliğe bağlamadır. Birden çok bağlama düzeyi aynı anda gerçekleştiğinden, bu senaryoya *zincirleme bağlama* denir.
 
 Bileşen parametreleri bir üst bileşenin sözdizimi ile bağlama özelliklerine ve alanlarına izin verir `@bind-{PROPERTY OR FIELD}` .
+
+Zincirli bağlamalar [`@bind`](xref:mvc/views/razor#bind) alt bileşendeki sözdizimiyle uygulanamaz. Alt bileşenden üst öğe içindeki özelliği güncelleştirmeyi desteklemek için bir olay işleyicisi ve değeri ayrı olarak belirtilmelidir.
+
+Üst bileşen, [`@bind`](xref:mvc/views/razor#bind) alt bileşenle veri bağlamayı ayarlamak için söz dizimini kullanır.
 
 Aşağıdaki `Child` bileşende ( `Shared/Child.razor` ) bir `Year` bileşen parametresi ve `YearChanged` geri çağırması vardır:
 
@@ -155,16 +161,25 @@ Aşağıdaki `Child` bileşende ( `Shared/Child.razor` ) bir `Year` bileşen par
     </div>
 </div>
 
+<button @onclick="UpdateYearFromChild">Update Year from Child</button>
+
 @code {
+    private Random r = new Random();
+
     [Parameter]
     public int Year { get; set; }
 
     [Parameter]
     public EventCallback<int> YearChanged { get; set; }
+
+    private async Task UpdateYearFromChild()
+    {
+        await YearChanged.InvokeAsync(r.Next(1950, 2021));
+    }
 }
 ```
 
-Geri çağırma ( <xref:Microsoft.AspNetCore.Components.EventCallback%601> ), bileşen parametre adı olarak " `Changed` " soneki () ile adlandırılmalıdır `{PARAMETER NAME}Changed` . Önceki örnekte, geri çağırma adlandırılır `YearChanged` . Hakkında daha fazla bilgi için <xref:Microsoft.AspNetCore.Components.EventCallback%601> bkz <xref:blazor/components/event-handling#eventcallback> ..
+Geri çağırma ( <xref:Microsoft.AspNetCore.Components.EventCallback%601> ), bileşen parametre adı olarak " `Changed` " soneki () ile adlandırılmalıdır `{PARAMETER NAME}Changed` . Önceki örnekte, geri çağırma adlandırılır `YearChanged` . <xref:Microsoft.AspNetCore.Components.EventCallback.InvokeAsync%2A?displayProperty=nameWithType> Belirtilen bağımsız değişkenle bağlama ile ilişkili temsilciyi çağırır ve değiştirilen özellik için bir olay bildirimi gönderir.
 
 Aşağıdaki `Parent` bileşende ( `Parent.razor` ), `year` alanı `Year` alt bileşenin parametresine bağlanır:
 
@@ -198,13 +213,7 @@ Kurala göre, bir özellik işleyiciye atanmış bir özniteliği ekleyerek kar�
 <Child @bind-Year="year" @bind-Year:event="YearChanged" />
 ```
 
-## <a name="child-to-parent-binding-with-chained-bind"></a>Zincirli bağlama ile üstten üst öğe bağlama
-
-Yaygın bir senaryo, bir veri bağlama parametresini bileşen çıkışında bir sayfa öğesine zincirlemesini sağlar. Birden çok bağlama düzeyi aynı anda gerçekleştiğinden, bu senaryoya *zincirleme bağlama* denir.
-
-Bir zincir bağlama [`@bind`](xref:mvc/views/razor#bind) alt bileşende sözdizimi ile uygulanamaz. Olay işleyicisi ve değeri ayrı olarak belirtilmelidir. Ancak bir üst bileşen, [`@bind`](xref:mvc/views/razor#bind) alt bileşenin parametresiyle birlikte sözdizimini kullanabilir.
-
-Aşağıdaki `PasswordField` bileşen ( `PasswordField.razor` ):
+Daha karmaşık ve gerçek dünyada bir örnekte, aşağıdaki `PasswordField` bileşen ( `PasswordField.razor` ):
 
 * Bir `<input>` öğenin değerini bir `password` alana ayarlar.
 * Bir özelliğin değişikliklerini, `Password` [`EventCallback`](xref:blazor/components/event-handling#eventcallback) alt öğenin geçerli değerinde bağımsız değişkeni olarak geçen bir üst bileşene gösterir `password` .
@@ -315,6 +324,8 @@ Password:
     }
 }
 ```
+
+Hakkında daha fazla bilgi için <xref:Microsoft.AspNetCore.Components.EventCallback%601> bkz <xref:blazor/components/event-handling#eventcallback> ..
 
 ## <a name="bind-across-more-than-two-components"></a>İkiden fazla bileşen arasında bağlama
 
