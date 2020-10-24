@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/servers/kestrel
-ms.openlocfilehash: 44558a0f2fdc61eb860223658f5bef1d0117ba87
-ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
+ms.openlocfilehash: 50bf2a60f14238c9b71fe90a64c284da202bff59
+ms.sourcegitcommit: d5ecad1103306fac8d5468128d3e24e529f1472c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/02/2020
-ms.locfileid: "91653964"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92491606"
 ---
 # <a name="kestrel-web-server-implementation-in-aspnet-core"></a>ASP.NET Core Web sunucusu uygulamasını Kestrel
 
@@ -354,6 +354,34 @@ webBuilder.ConfigureKestrel(serverOptions =>
 ```
 
 Varsayılan değer 96 KB 'tır (98.304).
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-5.0"
+
+### <a name="http2-keep-alive-ping-configuration"></a>HTTP/2 canlı tutmayı ping yapılandırması
+
+Kestrel, bağlı istemcilere HTTP/2 pingler gönderecek şekilde yapılandırılabilir. HTTP/2 ping işlemleri birden çok amaca hizmet eder:
+
+* Boştaki bağlantıları canlı tutun. Bazı istemciler ve proxy sunucular, boşta olan bağlantıları kapatır. HTTP/2 pingler bir bağlantıda etkinlik olarak değerlendirilir ve bağlantının boşta olarak kapatılmasını önler.
+* Sağlıksız bağlantıları kapatın. İstemcinin yapılandırılan süre içinde canlı tut ping komutuna yanıt vermediği bağlantılar sunucu tarafından kapalıdır.
+
+HTTP/2 canlı tut ping işlemleri ile ilgili iki yapılandırma seçeneği vardır:
+
+* `Http2.KeepAlivePingInterval` , `TimeSpan` ping iç öğesini yapılandıran bir. Sunucu, bu süre boyunca herhangi bir çerçeve almazsa istemciye canlı bir ping gönderir. Bu seçenek olarak ayarlandığında Canlı ping pingler devre dışı bırakılır `TimeSpan.MaxValue` . Varsayılan değer: `TimeSpan.MaxValue`.
+* `Http2.KeepAlivePingTimeout` , `TimeSpan` ping zaman aşımını yapılandıran bir. Sunucu yanıt ping gibi bir çerçeve almazsa, bu zaman aşımı sırasında bağlantı kapatılır. Bu seçenek olarak ayarlandığında Canlı kalma zaman aşımını devre dışı bırakın `TimeSpan.MaxValue` . Varsayılan değer 20 saniyedir.
+
+```csharp
+webBuilder.ConfigureKestrel(serverOptions =>
+{
+    serverOptions.Limits.Http2.KeepAlivePingInterval = TimeSpan.FromSeconds(30);
+    serverOptions.Limits.Http2.KeepAlivePingTimeout = TimeSpan.FromSeconds(60);
+});
+```
+
+::: moniker-end
+
+::: moniker range=">= aspnetcore-3.0"
 
 ### <a name="trailers"></a>Larına
 

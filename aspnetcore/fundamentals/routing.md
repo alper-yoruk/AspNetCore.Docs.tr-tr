@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: 46a9fc7776022a29bedf1c88e8230e1fd52d1607
-ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
+ms.openlocfilehash: e3dd7168e6974f63fa963d3732bc5df41814c70e
+ms.sourcegitcommit: d5ecad1103306fac8d5468128d3e24e529f1472c
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91606756"
+ms.lasthandoff: 10/23/2020
+ms.locfileid: "92491632"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core yönlendirme
 
@@ -76,7 +76,7 @@ Yönlendirme, ve tarafından kaydedilen bir dizi ara yazılımı <xref:Microsoft
   * `Hello World!` HTTP yanıtına yazılır. Varsayılan olarak, kök URL 'sidir `/` `https://localhost:5001/` .
 * İstek yöntemi yoksa `GET` veya kök URL 'si değilse `/` , hiçbir yol eşleşmesi ve bir HTTP 404 döndürülür.
 
-### <a name="endpoint"></a>Uç Noktası
+### <a name="endpoint"></a>Uç Nokta
 
 <a name="endpoint"></a>
 
@@ -339,8 +339,6 @@ Yönlendirme tarafından sunulan genişletilebilirlik türleri nedeniyle, yönle
 > 
 > * Bir yol kavramı yoktur.
 > * Sıralama garantisi sağlamaz. Tüm uç noktalar aynı anda işlenir.
->
-> Bu, eski yönlendirme sistemini kullanarak çıkdıysanız, [Yardım için bir GitHub sorunu açın](https://github.com/dotnet/aspnetcore/issues).
 
 <a name="rtp"></a>
 
@@ -570,10 +568,10 @@ Yönlendirmelerde kullanılan normal ifadeler, genellikle karakteriyle başlar `
 
 | Expression   | Dize    | Eşleştirme | Yorum               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Evet   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | 123abc456 | Evet   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | MZ        | Evet   | Eşleşen ifadesi    |
-| `[a-z]{2}`   | MZ        | Evet   | Büyük/küçük harfe duyarlı değil    |
+| `[a-z]{2}`   | hello     | Yes   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | 123abc456 | Yes   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | MZ        | Yes   | Eşleşen ifadesi    |
+| `[a-z]{2}`   | MZ        | Yes   | Büyük/küçük harfe duyarlı değil    |
 | `^[a-z]{2}$` | hello     | Hayır    | Bkz. `^` ve `$` üzeri |
 | `^[a-z]{2}$` | 123abc456 | Hayır    | Bkz. `^` ve `$` üzeri |
 
@@ -1379,7 +1377,7 @@ Framework, yollar () oluşturmak için bir genişletme yöntemleri kümesi sağl
 * <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapRoute*>
 * <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapVerb*>
 
-`Map[Verb]`Yöntemler, yöntem ADıNDAKI http fiili ile rotayı sınırlandırmak için kısıtlamalar kullanır. Örneğin, bkz <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*> . ve <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapVerb*> .
+`Map[Verb]`Yöntemler, yöntem ADıNDAKI http fiili ile rotayı sınırlandırmak için kısıtlamalar kullanır. Örnek için bkz. <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*> ve <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapVerb*>.
 
 ## <a name="route-template-reference"></a>Rota şablonu başvurusu
 
@@ -1491,10 +1489,10 @@ Yönlendirmelerde kullanılan normal ifadeler, genellikle giriş işareti `^` ka
 
 | Expression   | Dize    | Eşleştirme | Yorum               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Evet   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | 123abc456 | Evet   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | MZ        | Evet   | Eşleşen ifadesi    |
-| `[a-z]{2}`   | MZ        | Evet   | Büyük/küçük harfe duyarlı değil    |
+| `[a-z]{2}`   | hello     | Yes   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | 123abc456 | Yes   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | MZ        | Yes   | Eşleşen ifadesi    |
+| `[a-z]{2}`   | MZ        | Yes   | Büyük/küçük harfe duyarlı değil    |
 | `^[a-z]{2}$` | hello     | Hayır    | Bkz. `^` ve `$` üzeri |
 | `^[a-z]{2}$` | 123abc456 | Hayır    | Bkz. `^` ve `$` üzeri |
 
@@ -1841,7 +1839,7 @@ Framework, yollar () oluşturmak için bir genişletme yöntemleri kümesi sağl
 
 Gibi listelenen yöntemlerin bazıları için <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*> gerekir <xref:Microsoft.AspNetCore.Http.RequestDelegate> . <xref:Microsoft.AspNetCore.Http.RequestDelegate>Yol eşleştiğinde *yol işleyicisi* olarak kullanılır. Bu ailedeki diğer yöntemler, yönlendirme işleyicisi olarak kullanılmak üzere bir ara yazılım ardışık düzeni yapılandırmaya olanak tanır. Yöntemi gibi `Map*` bir işleyiciyi kabul etmez, <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapRoute*> öğesini kullanır <xref:Microsoft.AspNetCore.Routing.RouteBuilder.DefaultHandler*> .
 
-`Map[Verb]`Yöntemler, yöntem ADıNDAKI http fiili ile rotayı sınırlandırmak için kısıtlamalar kullanır. Örneğin, bkz <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*> . ve <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapVerb*> .
+`Map[Verb]`Yöntemler, yöntem ADıNDAKI http fiili ile rotayı sınırlandırmak için kısıtlamalar kullanır. Örnek için bkz. <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapGet*> ve <xref:Microsoft.AspNetCore.Routing.RequestDelegateRouteBuilderExtensions.MapVerb*>.
 
 ## <a name="route-template-reference"></a>Rota şablonu başvurusu
 
@@ -1935,10 +1933,10 @@ Yönlendirmelerde kullanılan normal ifadeler, genellikle şapka işareti ( `^` 
 
 | Expression   | Dize    | Eşleştirme | Yorum               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Evet   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | 123abc456 | Evet   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | MZ        | Evet   | Eşleşen ifadesi    |
-| `[a-z]{2}`   | MZ        | Evet   | Büyük/küçük harfe duyarlı değil    |
+| `[a-z]{2}`   | hello     | Yes   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | 123abc456 | Yes   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | MZ        | Yes   | Eşleşen ifadesi    |
+| `[a-z]{2}`   | MZ        | Yes   | Büyük/küçük harfe duyarlı değil    |
 | `^[a-z]{2}$` | hello     | Hayır    | Bkz. `^` ve `$` üzeri |
 | `^[a-z]{2}$` | 123abc456 | Hayır    | Bkz. `^` ve `$` üzeri |
 

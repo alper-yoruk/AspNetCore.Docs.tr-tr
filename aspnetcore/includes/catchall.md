@@ -1,7 +1,9 @@
+::: moniker range=">= aspnetcore-3.0 < aspnetcore-5.0"
+
 > [!WARNING]
 > Bir **catch-all** parametresi, yönlendirdeki bir [hata](https://github.com/dotnet/aspnetcore/issues/18677) nedeniyle yollarla yanlış bir şekilde eşleşmeyebilir. Bu hatadan etkilenen uygulamalar aşağıdaki özelliklere sahiptir:
 >
-> * Örneğin, bir catch-all rotası`{**slug}"`
+> * Örneğin, bir catch-all rotası `{**slug}"`
 > * Catch-all yolu eşleşmesi gereken isteklerle eşleşemez.
 > * Diğer yolların kaldırılması, catch-all yolunun çalışmaya başlamasını sağlar.
 >
@@ -18,3 +20,5 @@
 >}
 >// Remaining code removed for brevity.
 >```
+
+::: moniker-end
