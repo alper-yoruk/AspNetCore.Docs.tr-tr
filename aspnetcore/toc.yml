@@ -385,6 +385,8 @@
               uid: blazor/components/virtualization
             - name: Şablonlu bileşenler
               uid: blazor/components/templated-components
+            - name: CSS yalıtımı
+              uid: blazor/components/css-isolation
             - name: Bileşenleri tümleştirme
               uid: blazor/components/integrate-components-into-razor-pages-and-mvc-apps
             - name: Bileşen kitaplıkları
@@ -447,7 +449,7 @@
           uid: blazor/webassembly-lazy-load-assemblies
         - name: WebAssembly performansı
           uid: blazor/webassembly-performance-best-practices
-        - name: Test etme
+        - name: Test bileşenleri
           uid: blazor/test
         - name: Aşamalı Web Uygulamaları
           uid: blazor/progressive-web-app
