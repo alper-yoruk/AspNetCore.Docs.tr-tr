@@ -5,7 +5,7 @@ description: BlazorWebassemlby uygulamalarını tek sayfalı uygulamalar (maça 
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 07/16/2020
+ms.date: 10/27/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/index
-ms.openlocfilehash: e1af8f1de61edd934505a44e75ea07e0f09a67b5
-ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
+ms.openlocfilehash: 2c160f21ccccb44f9047cf23c67bc191ad1b2b3d
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90592962"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690375"
 ---
 # <a name="secure-aspnet-core-no-locblazor-webassembly"></a>Güvenli ASP.NET Core Blazor WebAssembly
 
@@ -31,7 +31,7 @@ Sağlayan [Javier Calvarro Nelson](https://github.com/javiercn)
 
 Blazor WebAssembly uygulamalar, tek sayfalı uygulamalarla (maça 'Lar) aynı şekilde güvenli hale getirilir. Kullanıcıların maça üzerinde kimlik doğrulaması için birkaç yaklaşım vardır, ancak en yaygın ve kapsamlı yaklaşım, [OpenID Connect (OıDC)](https://openid.net/connect/)gibi [OAuth 2,0 protokolüne](https://oauth.net/)dayalı bir uygulama kullanmaktır.
 
-## <a name="authentication-library"></a>Kimlik doğrulama kitaplığı
+## <a name="authentication-library"></a>Kimlik doğrulaması kitaplığı
 
 Blazor WebAssembly , kitaplık aracılığıyla OıDC kullanarak uygulamalara kimlik doğrulama ve yetkilendirme işlemini destekler [`Microsoft.AspNetCore.Components.WebAssembly.Authentication`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.WebAssembly.Authentication) . Kitaplığı ASP.NET Core arka uçlara karşı sorunsuz kimlik doğrulama için bir dizi temel sağlar. Kitaplık, ASP.NET Core Identity [ Identity sunucu](https://identityserver.io/)üzerinde oluşturulan API yetkilendirme desteğiyle tümleştirilir. Kitaplık, Identity OpenID sağlayıcıları (OP) olarak adlandırılan OIDC 'yi destekleyen herhangi bir üçüncü taraf sağlayıcıya (IP) kimlik doğrulaması yapabilir.
 
@@ -123,4 +123,17 @@ Barındırılan Blazor WebAssembly uygulamalar:
 * [Azure Active Directory (AAD) B2C](xref:blazor/security/webassembly/hosted-with-azure-active-directory-b2c)
 * [Identity Server](xref:blazor/security/webassembly/hosted-with-identity-server)
 
-Yapılandırma hakkında daha fazla bilgi için bkz <xref:blazor/security/webassembly/additional-scenarios> ..
+::: moniker range=">= aspnetcore-5.0"
+
+Aşağıdaki makalelerde daha fazla yapılandırma kılavuzu bulunur:
+
+* <xref:blazor/security/webassembly/additional-scenarios>
+* <xref:blazor/security/webassembly/graph-api>
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0"
+
+Daha fazla yapılandırma kılavuzu için bkz <xref:blazor/security/webassembly/additional-scenarios> ..
+
+::: moniker-end

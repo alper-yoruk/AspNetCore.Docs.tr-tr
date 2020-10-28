@@ -5,7 +5,7 @@ description: Blazor WebAssemblyEk güvenlik senaryoları için nasıl yapıland�
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 08/03/2020
+ms.date: 10/27/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: 50d455b37c51fdd6d3b52b10b3e819eb45526de4
-ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
+ms.openlocfilehash: 055e248abfadd9092c173e4630e56ea69517da3b
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/09/2020
-ms.locfileid: "91900966"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690588"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly ek güvenlik senaryoları
 
@@ -33,7 +33,7 @@ ms.locfileid: "91900966"
 
 <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AuthorizationMessageHandler> , <xref:System.Net.Http.DelegatingHandler> giden örneklere erişim belirteçleri eklemek için kullanılır <xref:System.Net.Http.HttpResponseMessage> . Belirteçler, <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.IAccessTokenProvider> Framework tarafından kaydedilen hizmet kullanılarak alınır. Bir belirteç alınamadığından, bir oluşturulur <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException> . <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException><xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.AccessTokenNotAvailableException.Redirect%2A>, yeni bir belirteç almak için kullanıcıdan kimlik sağlayıcısına gitmek üzere kullanılabilecek bir yönteme sahiptir.
 
-Kolaylık olması için Framework, <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> uygulamanın temel adresiyle önceden yapılandırılmış bir yetkili URL 'si sağlar. **Erişim belirteçleri yalnızca istek URI 'si uygulamanın temel URI 'SI içinde olduğunda eklenir.** Giden istek URI 'Leri uygulamanın temel URI 'SI içinde olmadığında, [özel bir sınıf kullanın `AuthorizationMessageHandler` (*önerilir*)](#custom-authorizationmessagehandler-class) veya öğesini [yapılandırın `AuthorizationMessageHandler` ](#configure-authorizationmessagehandler).
+Kolaylık olması için Framework, <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.BaseAddressAuthorizationMessageHandler> uygulamanın temel adresiyle önceden yapılandırılmış bir yetkili URL 'si sağlar. **Erişim belirteçleri yalnızca istek URI 'si uygulamanın temel URI 'SI içinde olduğunda eklenir.** Giden istek URI 'Leri uygulamanın temel URI 'SI içinde olmadığında, [özel bir sınıf kullanın `AuthorizationMessageHandler` ( *önerilir* )](#custom-authorizationmessagehandler-class) veya öğesini [yapılandırın `AuthorizationMessageHandler`](#configure-authorizationmessagehandler).
 
 > [!NOTE]
 > Sunucu API 'SI erişimi için istemci uygulama yapılandırmasına ek olarak, istemci ve sunucu aynı temel adreste olmadığında sunucu API 'SI de çıkış noktaları arası isteklere (CORS) izin vermelidir. Sunucu tarafı CORS yapılandırması hakkında daha fazla bilgi için bu makalenin ilerleyen bölümlerindeki [çıkış noktaları arası kaynak paylaşımı (CORS)](#cross-origin-resource-sharing-cors) bölümüne bakın.
@@ -174,128 +174,6 @@ BlazorBarındırılan proje şablonunu temel alan bir uygulama için Blazor WebA
 
 * <xref:System.Net.Http.HttpClient.BaseAddress?displayProperty=nameWithType>( `new Uri(builder.HostEnvironment.BaseAddress)` ).
 * Dizinin URL 'SI `authorizedUrls` .
-
-### <a name="graph-api-example"></a>Graph API örneği
-
-Aşağıdaki örnekte <xref:System.Net.Http.HttpClient> Graph API için adlandırılmış bir kullanıcının bir çağrıyı işlemek üzere cep telefonu numarasını almak için kullanılır. `User.Read`Azure Portal AAD alanına MICROSOFT Graph API iznini ekledikten sonra kapsam, *`Client`* barındırılan bir çözümün tek başına uygulamasında veya uygulamasında adlandırılmış istemci için yapılandırılır Blazor .
-
-> [!NOTE]
-> Bu bölümdeki örnek, *bileşen kodundaki*kullanıcı için Graph API verileri alır. Graph API kullanıcı talepleri oluşturmak için aşağıdaki kaynaklara bakın:
->
-> * [Kullanıcı bölümünü özelleştirme](#customize-the-user)
-> * <xref:blazor/security/webassembly/aad-groups-roles>
-
-`GraphAuthorizationMessageHandler.cs`:
-
-```csharp
-public class GraphAPIAuthorizationMessageHandler : AuthorizationMessageHandler
-{
-    public GraphAPIAuthorizationMessageHandler(IAccessTokenProvider provider,
-        NavigationManager navigationManager)
-        : base(provider, navigationManager)
-    {
-        ConfigureHandler(
-            authorizedUrls: new[] { "https://graph.microsoft.com" },
-            scopes: new[] { "https://graph.microsoft.com/User.Read" });
-    }
-}
-```
-
-İçinde `Program.Main` ( `Program.cs` ):
-
-```csharp
-builder.Services.AddScoped<GraphAPIAuthorizationMessageHandler>();
-
-builder.Services.AddHttpClient("GraphAPI",
-        client => client.BaseAddress = new Uri("https://graph.microsoft.com"))
-    .AddHttpMessageHandler<GraphAPIAuthorizationMessageHandler>();
-```
-
-Bir Razor bileşende ( `Pages/CallUser.razor` ):
-
-```razor
-@page "/CallUser"
-@using System.ComponentModel.DataAnnotations
-@using System.Text.Json.Serialization
-@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
-@using Microsoft.Extensions.Logging
-@inject IAccessTokenProvider TokenProvider
-@inject IHttpClientFactory ClientFactory
-@inject ILogger<CallUser> Logger
-@inject ICallProcessor CallProcessor
-
-<h3>Call User</h3>
-
-<EditForm Model="@callInfo" OnValidSubmit="@HandleValidSubmit">
-    <DataAnnotationsValidator />
-    <ValidationSummary />
-
-    <p>
-        <label>
-            Message:
-            <InputTextArea @bind-Value="callInfo.Message" />
-        </label>
-    </p>
-
-    <button type="submit">Place call</button>
-
-    <p>
-        @formStatus
-    </p>
-</EditForm>
-
-@code {
-    private string formStatus;
-    private CallInfo callInfo = new CallInfo();
-
-    private async Task HandleValidSubmit()
-    {
-        var tokenResult = await TokenProvider.RequestAccessToken(
-            new AccessTokenRequestOptions
-            {
-                Scopes = new[] { "https://graph.microsoft.com/User.Read" }
-            });
-
-        if (tokenResult.TryGetToken(out var token))
-        {
-            var client = ClientFactory.CreateClient("GraphAPI");
-
-            var userInfo = await client.GetFromJsonAsync<UserInfo>("v1.0/me");
-
-            if (userInfo != null)
-            {
-                CallProcessor.Send(userInfo.MobilePhone, callInfo.Message);
-
-                formStatus = "Form successfully processed.";
-                Logger.LogInformation(
-                    $"Form successfully processed at {DateTime.UtcNow}. " +
-                    $"Mobile Phone: {userInfo.MobilePhone}");
-            }
-        }
-        else
-        {
-            formStatus = "There was a problem processing the form.";
-            Logger.LogError("Token failure");
-        }
-    }
-
-    private class CallInfo
-    {
-        [Required]
-        [StringLength(1000, ErrorMessage = "Message too long (1,000 char limit)")]
-        public string Message { get; set; }
-    }
-
-    private class UserInfo
-    {
-        [JsonPropertyName("mobilePhone")]
-        public string MobilePhone { get; set; }
-    }
-}
-```
-
-> [!NOTE]
-> Önceki örnekte, geliştirici özel `ICallProcessor` ( `CallProcessor` ) kuyruğuna uygular ve sonra otomatik çağrılar yerleştirir.
 
 ## <a name="typed-httpclient"></a>Girdiyseniz `HttpClient`
 
@@ -931,134 +809,6 @@ public class CustomAccountFactory
           CustomUserAccount, CustomAccountFactory>();
   ```
 
-### <a name="customize-the-user-with-graph-api-claims"></a>Kullanıcıyı Graph API talep ile özelleştirme
-
-Aşağıdaki örnekte, uygulama, Graph API kullanarak Kullanıcı için bir cep telefonu numarası talebi oluşturur <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> . Uygulamanın `User.Read` AAD 'de yapılandırılmış Graph API izni (scope) olmalıdır.
-
-`GraphAuthorizationMessageHandler.cs`:
-
-```csharp
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
-
-public class GraphAPIAuthorizationMessageHandler : AuthorizationMessageHandler
-{
-    public GraphAPIAuthorizationMessageHandler(IAccessTokenProvider provider,
-        NavigationManager navigationManager)
-        : base(provider, navigationManager)
-    {
-        ConfigureHandler(
-            authorizedUrls: new[] { "https://graph.microsoft.com" },
-            scopes: new[] { "https://graph.microsoft.com/User.Read" });
-    }
-}
-```
-
-Graph API için adlandırılmış bir adı <xref:System.Net.Http.HttpClient> `Program.Main` `Program.cs` , () içinde kullanılarak oluşturulur `GraphAPIAuthorizationMessageHandler` :
-
-```csharp
-using System;
-
-...
-
-builder.Services.AddScoped<GraphAPIAuthorizationMessageHandler>();
-
-builder.Services.AddHttpClient("GraphAPI",
-        client => client.BaseAddress = new Uri("https://graph.microsoft.com"))
-    .AddHttpMessageHandler<GraphAPIAuthorizationMessageHandler>();
-```
-
-`Models/UserInfo.cs`:
-
-```csharp
-using System.Text.Json.Serialization;
-
-public class UserInfo
-{
-    [JsonPropertyName("mobilePhone")]
-    public string MobilePhone { get; set; }
-}
-```
-
-Aşağıdaki `CustomAccountFactory` ( `CustomAccountFactory.cs` ), çerçeve <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> kullanıcının hesabını temsil eder. Uygulamanın genişlettiği özel bir kullanıcı hesabı sınıfı gerekiyorsa <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> , aşağıdaki kodda için özel kullanıcı hesabı sınıfını değiştirin <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> :
-
-```csharp
-using System.Net.Http;
-using System.Net.Http.Json;
-using System.Security.Claims;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
-using Microsoft.AspNetCore.Components.WebAssembly.Authentication.Internal;
-using Microsoft.Extensions.Logging;
-
-public class CustomAccountFactory
-    : AccountClaimsPrincipalFactory<RemoteUserAccount>
-{
-    private readonly ILogger<CustomAccountFactory> logger;
-    private readonly IHttpClientFactory clientFactory;
-
-    public CustomAccountFactory(IAccessTokenProviderAccessor accessor, 
-        IHttpClientFactory clientFactory, 
-        ILogger<CustomAccountFactory> logger)
-        : base(accessor)
-    {
-        this.clientFactory = clientFactory;
-        this.logger = logger;
-    }
-
-    public async override ValueTask<ClaimsPrincipal> CreateUserAsync(
-        RemoteUserAccount account,
-        RemoteAuthenticationUserOptions options)
-    {
-        var initialUser = await base.CreateUserAsync(account, options);
-
-        if (initialUser.Identity.IsAuthenticated)
-        {
-            var userIdentity = (ClaimsIdentity)initialUser.Identity;
-
-            try
-            {
-                var client = clientFactory.CreateClient("GraphAPI");
-
-                var userInfo = await client.GetFromJsonAsync<UserInfo>("v1.0/me");
-
-                if (userInfo != null)
-                {
-                    userIdentity.AddClaim(new Claim("mobilephone", userInfo.MobilePhone));
-                }
-            }
-            catch (AccessTokenNotAvailableException exception)
-            {
-                logger.LogError("Graph API access token failure: {MESSAGE}",
-                    exception.Message);
-            }
-        }
-
-        return initialUser;
-    }
-}
-```
-
-`Program.Main`( `Program.cs` ) İçinde, uygulamayı özel fabrika kullanacak şekilde yapılandırın. Uygulama, genişleten özel kullanıcı hesabı sınıfını kullanıyorsa <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> , aşağıdaki kodda için özel kullanıcı hesabı sınıfını değiştirin <xref:Microsoft.AspNetCore.Components.WebAssembly.Authentication.RemoteUserAccount> :
-
-```csharp
-using Microsoft.Extensions.Configuration;
-using Microsoft.AspNetCore.Components.WebAssembly.Authentication;
-
-...
-
-builder.Services.AddMsalAuthentication<RemoteAuthenticationState, 
-    RemoteUserAccount>(options =>
-    {
-        builder.Configuration.Bind("AzureAd", 
-            options.ProviderOptions.Authentication);
-    })
-    .AddAccountClaimsPrincipalFactory<RemoteAuthenticationState, RemoteUserAccount, 
-        CustomAccountFactory>();
-```
-
-Yukarıdaki örnek, MSAL ile AAD kimlik doğrulaması kullanan bir uygulama içindir. OıDC ve API kimlik doğrulaması için benzer desenler mevcuttur. Daha fazla bilgi için, [kullanıcıyı bir yük talebi Ile özelleştirme](#customize-the-user-with-a-payload-claim) bölümünün sonundaki örneklere bakın.
-
 ### <a name="aad-security-groups-and-roles-with-a-custom-user-account-class"></a>Özel bir kullanıcı hesabı sınıfına sahip AAD güvenlik grupları ve rolleri
 
 AAD güvenlik grupları ve AAD yönetici rolleriyle ve özel bir kullanıcı hesabı sınıfıyla birlikte çalışarak ek bir örnek için bkz <xref:blazor/security/webassembly/aad-groups-roles> ..
@@ -1299,4 +1049,5 @@ Daha fazla bilgi için bkz. <xref:grpc/browser>.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
+* <xref:blazor/security/webassembly/graph-api>
 * [`HttpClient` ve `HttpRequestMessage` Fetch API isteği seçenekleriyle](xref:blazor/call-web-api#httpclient-and-httprequestmessage-with-fetch-api-request-options)

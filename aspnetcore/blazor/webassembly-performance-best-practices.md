@@ -4,7 +4,7 @@ author: pranavkm
 description: ASP.NET Core uygulamalarında performansı artırma Blazor WebAssembly ve sık karşılaşılan performans sorunlarından kaçınmaya yönelik ipuçları.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
-ms.custom: mvc
+ms.custom: mvc, devx-track-js
 ms.date: 10/09/2020
 no-loc:
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/webassembly-performance-best-practices
-ms.openlocfilehash: ea3f197e5bab82f4fb40238fe31cd5ce29ab62ad
-ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
+ms.openlocfilehash: 0e827680e7024eabed09b989466476a3a80eb225
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/09/2020
-ms.locfileid: "91900979"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690266"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-performance-best-practices"></a>ASP.NET Core Blazor WebAssembly performans en iyi yöntemleri
 
@@ -31,8 +31,8 @@ ms.locfileid: "91900979"
 
 Blazor WebAssembly , en gerçekçi uygulama kullanıcı arabirimi senaryolarında yüksek performansa olanak tanımak için dikkatle tasarlanır ve iyileştirilir. Ancak en iyi sonuçları üretmek, doğru desenleri ve özellikleri kullanan geliştiricilere bağlıdır. Aşağıdaki noktaları göz önünde bulundurun:
 
-* **Çalışma zamanı işleme**: .NET kodu WebAssembly çalışma zamanının içindeki yorumlayıcı üzerinde çalışır, bu nedenle CPU üretilen işi sınırlıdır. Yoğun senaryolarda uygulama, [işleme hızını iyileştirmenin](#optimize-rendering-speed)avantajlarından yararlanır.
-* **Başlangıç zamanı**: uygulama bir .NET çalışma zamanını tarayıcıya aktarır, bu nedenle [uygulama indirme boyutunu en aza indirecek](#minimize-app-download-size)Özellikler kullanılması önemlidir.
+* **Çalışma zamanı işleme** : .NET kodu WebAssembly çalışma zamanının içindeki yorumlayıcı üzerinde çalışır, bu nedenle CPU üretilen işi sınırlıdır. Yoğun senaryolarda uygulama, [işleme hızını iyileştirmenin](#optimize-rendering-speed)avantajlarından yararlanır.
+* **Başlangıç zamanı** : uygulama bir .NET çalışma zamanını tarayıcıya aktarır, bu nedenle [uygulama indirme boyutunu en aza indirecek](#minimize-app-download-size)Özellikler kullanılması önemlidir.
 
 ## <a name="optimize-rendering-speed"></a>İşleme hızını iyileştirme
 

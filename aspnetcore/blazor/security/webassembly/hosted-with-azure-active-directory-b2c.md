@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-azure-active-directory-b2c
-ms.openlocfilehash: aa6c865f5fd51d1634bde3ac96e1fddc7216a801
-ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
+ms.openlocfilehash: 744613fffc6305ae830526e86a50ccdf67e3b585
+ms.sourcegitcommit: c06a5bf419541d17595af30e4cf6f2787c21855e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/09/2020
-ms.locfileid: "91900953"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92678512"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-azure-active-directory-b2c"></a>Blazor WebAssemblyAzure Active Directory B2C ile ASP.NET Core barındırılan bir uygulamanın güvenliğini sağlama
 
@@ -43,27 +43,27 @@ AAD B2C örneğini kaydedin (örneğin, `https://contoso.b2clogin.com/` sonunda 
 
 Eğitim bölümündeki yönergeleri izleyin: *sunucu API uygulaması* IÇIN bir AAD uygulaması kaydetmek üzere [Azure Active Directory B2C bir uygulamayı kaydetme](/azure/active-directory-b2c/tutorial-register-applications) ve ardından aşağıdakileri yapın:
 
-1. **Azure Active Directory**  >  **uygulama kayıtları** **Yeni kayıt**' ı seçin.
-1. Uygulama için bir **ad** sağlayın (örneğin, ** Blazor Server AAD B2C**).
-1. **Desteklenen hesap türleri**için, birden çok kiracılı seçeneği seçin: **herhangi bir kuruluş dizinindeki hesaplar veya herhangi bir kimlik sağlayıcısı. Azure AD B2C kullanıcıları kimlik doğrulaması için.**
+1. **Azure Active Directory**  >  **uygulama kayıtları** **Yeni kayıt** ' ı seçin.
+1. Uygulama için bir **ad** sağlayın (örneğin, **Blazor Server AAD B2C** ).
+1. **Desteklenen hesap türleri** için, çok kiracılı seçeneğini belirleyin: **herhangi bir kimlik sağlayıcısındaki veya kuruluş dizinindeki hesaplar (Kullanıcı akışları olan kullanıcıların kimliğini doğrulamak için)**
 1. *Sunucu API 'si uygulaması* Bu senaryoda **yeniden yönlendirme URI 'si** gerektirmez, bu nedenle açılan kutudan **Web** 'e ve yeniden yönlendirme URI 'si girmeyin.
 1. **İzinlerin**  >  **OpenID 'ye yönetici onayı verdiğini ve offline_access izinlerinin** seçili olduğunu onaylayın.
-1. **Kaydet**’i seçin.
+1. **Kaydet** ’i seçin.
 
 Aşağıdaki bilgileri kaydedin:
 
 * *Sunucu API 'si uygulaması* Uygulama (istemci) KIMLIĞI (örneğin, `41451fa7-82d9-4673-8fa5-69eff5a761fd` )
 * AAD birincil/yayımcı/kiracı etki alanı (örneğin, `contoso.onmicrosoft.com` ): etki alanı, kayıtlı uygulama için Azure Portal **marka** dikey penceresinde **Yayımcı etki alanı** olarak kullanılabilir.
 
-**API 'Yi kullanıma**sunma bölümünde:
+**API 'Yi kullanıma** sunma bölümünde:
 
-1. **Kapsam ekle**’yi seçin.
-1. **Kaydet ve devam et**’i seçin.
+1. **Kapsam ekle** ’yi seçin.
+1. **Kaydet ve devam et** ’i seçin.
 1. Bir **kapsam adı** sağlayın (örneğin, `API.Access` ).
 1. **Yönetici izni görünen adı** sağlayın (örneğin, `Access API` ).
 1. **Yönetici onay açıklaması** sağlayın (örneğin, `Allows the app to access server app API endpoints.` ).
-1. **Durumun** **etkin**olarak ayarlandığını onaylayın.
-1. **Kapsam Ekle**' yi seçin.
+1. **Durumun** **etkin** olarak ayarlandığını onaylayın.
+1. **Kapsam Ekle** ' yi seçin.
 
 Aşağıdaki bilgileri kaydedin:
 
@@ -76,19 +76,19 @@ Eğitim bölümündeki yönergeleri izleyin [:](/azure/active-directory-b2c/tuto
 
 ::: moniker range=">= aspnetcore-5.0"
 
-1. **Azure Active Directory** > **uygulama kayıtları** **Yeni kayıt**' ı seçin.
-1. Uygulama için bir **ad** sağlayın (örneğin, ** Blazor istemci AAD B2C**).
-1. **Desteklenen hesap türleri**için, birden çok kiracılı seçeneği seçin: **herhangi bir kuruluş dizinindeki hesaplar veya herhangi bir kimlik sağlayıcısı. Azure AD B2C kullanıcıları kimlik doğrulaması için.**
+1. **Azure Active Directory** > **uygulama kayıtları** **Yeni kayıt** ' ı seçin.
+1. Uygulama için bir **ad** sağlayın (örneğin, **Blazor istemci AAD B2C** ).
+1. **Desteklenen hesap türleri** için, çok kiracılı seçeneğini belirleyin: **herhangi bir kimlik sağlayıcısındaki veya kuruluş dizinindeki hesaplar (Kullanıcı akışları olan kullanıcıların kimliğini doğrulamak için)**
 1. **Yeniden yönlendirme URI 'si** açılan öğesini **tek SAYFALı uygulama (Spa)** olarak ayarlayın ve aşağıdaki yeniden yönlendirme URI 'sini sağlayın: `https://localhost:{PORT}/authentication/login-callback` . Kestrel üzerinde çalışan bir uygulamanın varsayılan bağlantı noktası 5001 ' dir. Uygulama farklı bir Kestrel bağlantı noktasında çalışıyorsa, uygulamanın bağlantı noktasını kullanın. IIS Express için, uygulama için rastgele oluşturulan bağlantı noktası, *`Server`* **hata ayıklama** panelinde uygulamanın özelliklerinde bulunabilir. Uygulama bu noktada mevcut olmadığından ve IIS Express bağlantı noktası bilinmediğinden, uygulama oluşturulduktan sonra bu adıma geri dönün ve yeniden yönlendirme URI 'sini güncelleştirin. [Uygulama oluştur](#create-the-app) bölümünde, kullanıcıların YENIDEN yönlendirme URI 'sini güncelleştirmesi IIS Express hatırlatmak için bir açıklama belirir.
 1. **İzinlerin** > **OpenID 'ye yönetici onayı verdiğini ve offline_access izinlerinin** seçili olduğunu onaylayın.
-1. **Kaydet**’i seçin.
+1. **Kaydet** ’i seçin.
 
 1. Uygulama (istemci) KIMLIĞINI (örneğin, `4369008b-21fa-427c-abaa-9b53bf58e538` ) kaydedin.
 
-**Kimlik doğrulama** > **platformu yapılandırmalarında** > **tek sayfalı uygulama (Spa)**:
+**Kimlik doğrulama** > **platformu yapılandırmalarında** > **tek sayfalı uygulama (Spa)** :
 
 1. **Yeniden YÖNLENDIRME URI** 'sinin `https://localhost:{PORT}/authentication/login-callback` mevcut olduğunu onaylayın.
-1. **Örtük verme**Için, **erişim belirteçleri** ve **Kimlik belirteçleri** onay kutularının seçili **olmadığından** emin olun.
+1. **Örtük verme** Için, **erişim belirteçleri** ve **Kimlik belirteçleri** onay kutularının seçili **olmadığından** emin olun.
 1. Uygulamanın kalan varsayılan değerleri bu deneyim için kabul edilebilir.
 1. **Kaydet** düğmesini seçin.
 
@@ -96,34 +96,34 @@ Eğitim bölümündeki yönergeleri izleyin [:](/azure/active-directory-b2c/tuto
 
 ::: moniker range="< aspnetcore-5.0"
 
-1. **Azure Active Directory** > **uygulama kayıtları** **Yeni kayıt**' ı seçin.
-1. Uygulama için bir **ad** sağlayın (örneğin, ** Blazor istemci AAD B2C**).
-1. **Desteklenen hesap türleri**için, birden çok kiracılı seçeneği seçin: **herhangi bir kuruluş dizinindeki hesaplar veya herhangi bir kimlik sağlayıcısı. Azure AD B2C kullanıcıları kimlik doğrulaması için.**
+1. **Azure Active Directory** > **uygulama kayıtları** **Yeni kayıt** ' ı seçin.
+1. Uygulama için bir **ad** sağlayın (örneğin, **Blazor istemci AAD B2C** ).
+1. **Desteklenen hesap türleri** için, çok kiracılı seçeneğini belirleyin: **herhangi bir kimlik sağlayıcısındaki veya kuruluş dizinindeki hesaplar (Kullanıcı akışları olan kullanıcıların kimliğini doğrulamak için)**
 1. **Yeniden yönlendirme URI 'si** açılan öğesini **Web** 'e ayarlı bırakın ve aşağıdaki yeniden yönlendirme URI 'sini sağlayın: `https://localhost:{PORT}/authentication/login-callback` . Kestrel üzerinde çalışan bir uygulamanın varsayılan bağlantı noktası 5001 ' dir. Uygulama farklı bir Kestrel bağlantı noktasında çalışıyorsa, uygulamanın bağlantı noktasını kullanın. IIS Express için, uygulama için rastgele oluşturulan bağlantı noktası, *`Server`* **hata ayıklama** panelinde uygulamanın özelliklerinde bulunabilir. Uygulama bu noktada mevcut olmadığından ve IIS Express bağlantı noktası bilinmediğinden, uygulama oluşturulduktan sonra bu adıma geri dönün ve yeniden yönlendirme URI 'sini güncelleştirin. [Uygulama oluştur](#create-the-app) bölümünde, kullanıcıların YENIDEN yönlendirme URI 'sini güncelleştirmesi IIS Express hatırlatmak için bir açıklama belirir.
 1. **İzinlerin** > **OpenID 'ye yönetici onayı verdiğini ve offline_access izinlerinin** seçili olduğunu onaylayın.
-1. **Kaydet**’i seçin.
+1. **Kaydet** ’i seçin.
 
 Uygulama (istemci) KIMLIĞINI (örneğin, `4369008b-21fa-427c-abaa-9b53bf58e538` ) kaydedin.
 
-**Kimlik doğrulama** > **platformu yapılandırması** > **Web**:
+**Kimlik doğrulama** > **platformu yapılandırması** > **Web** :
 
 1. **Yeniden YÖNLENDIRME URI** 'sinin `https://localhost:{PORT}/authentication/login-callback` mevcut olduğunu onaylayın.
-1. **Örtük izin**Için, **erişim belirteçleri** ve **Kimlik belirteçleri**onay kutularını seçin.
+1. **Örtük izin** Için, **erişim belirteçleri** ve **Kimlik belirteçleri** onay kutularını seçin.
 1. Uygulamanın kalan varsayılan değerleri bu deneyim için kabul edilebilir.
 1. **Kaydet** düğmesini seçin.
 
 ::: moniker-end
 
-**API izinleri**:
+**API izinleri** :
 
-1. **Izin Ekle** ' yi ve ardından **API 'lerim**' i seçin.
-1. **Ad** SÜTUNUNDAN *sunucu API uygulamasını* seçin (örneğin, ** Blazor Server AAD B2C**).
+1. **Izin Ekle** ' yi ve ardından **API 'lerim** ' i seçin.
+1. **Ad** SÜTUNUNDAN *sunucu API uygulamasını* seçin (örneğin, **Blazor Server AAD B2C** ).
 1. **API** listesini açın.
 1. API 'ye erişimi etkinleştirin (örneğin, `API.Access` ).
-1. **Izin Ekle**' yi seçin.
-1. **{Tenant Name} için yönetici onayı Izni ver** düğmesini seçin. Onaylamak için **Evet**’i seçin.
+1. **Izin Ekle** ' yi seçin.
+1. **{Tenant Name} için yönetici onayı Izni ver** düğmesini seçin. Onaylamak için **Evet** ’i seçin.
 
-**Giriş**  >  **Azure AD B2C**  >  **Kullanıcı akışları**' nda:
+**Giriş**  >  **Azure AD B2C**  >  **Kullanıcı akışları** ' nda:
 
 [Kaydolma ve oturum açma Kullanıcı akışı oluşturma](/azure/active-directory-b2c/tutorial-create-user-flows)
 
@@ -244,7 +244,7 @@ services.Configure<JwtBearerOptions>(
 
 ### <a name="weatherforecast-controller"></a>Hava tahmin denetleyicisi
 
-Dalgalı tahmin denetleyicisi (*denetleyiciler/dalgalı Therforetcontroller. cs*), BIR korumalı API 'yi [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) denetleyiciye uygulanmış şekilde gösterir. Bunun anlaşılması **önemlidir** :
+Dalgalı tahmin denetleyicisi ( *denetleyiciler/dalgalı Therforetcontroller. cs* ), BIR korumalı API 'yi [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) denetleyiciye uygulanmış şekilde gösterir. Bunun anlaşılması **önemlidir** :
 
 * Bu [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) API denetleyicisindeki özniteliği, bu API 'yi yetkisiz erişime karşı koruyan tek şeydir.
 * [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)Uygulamada kullanılan özniteliği yalnızca uygulamanın, Blazor WebAssembly uygulamanın düzgün şekilde çalışması için yetkilendirilmiş olması gerektiğine yönelik bir ipucu görevi görür.

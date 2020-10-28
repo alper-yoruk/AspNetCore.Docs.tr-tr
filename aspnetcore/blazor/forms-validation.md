@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/forms-validation
-ms.openlocfilehash: 88c3ded79db65557d9426fde6f43aace4d9d8ae2
-ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
+ms.openlocfilehash: ad244c29c8e8e904793745119366cd677389b12d
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91606675"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690615"
 ---
 # <a name="aspnet-core-no-locblazor-forms-and-validation"></a>BlazorForms ve doğrulama ASP.NET Core
 
@@ -224,7 +224,7 @@ Aşağıdaki form, modelde tanımlanan doğrulamayı kullanarak Kullanıcı giri
 
 , <xref:Microsoft.AspNetCore.Components.Forms.EditForm> <xref:Microsoft.AspNetCore.Components.Forms.EditContext> Hangi alanların değiştirildiği ve geçerli doğrulama iletileri de dahil olmak üzere düzenleme işlemiyle ilgili meta verileri izleyen [basamaklı bir değer](xref:blazor/components/cascading-values-and-parameters) olarak oluşturur.
 
-Ya **da** ' a atayın <xref:Microsoft.AspNetCore.Components.Forms.EditContext> **or** <xref:Microsoft.AspNetCore.Components.Forms.EditForm.Model?displayProperty=nameWithType> <xref:Microsoft.AspNetCore.Components.Forms.EditForm> . Her ikisinin atanması desteklenmez ve bir **çalışma zamanı hatası**oluşturur.
+Ya **da** ' a atayın <xref:Microsoft.AspNetCore.Components.Forms.EditContext> **or** <xref:Microsoft.AspNetCore.Components.Forms.EditForm.Model?displayProperty=nameWithType> <xref:Microsoft.AspNetCore.Components.Forms.EditForm> . Her ikisinin atanması desteklenmez ve bir **çalışma zamanı hatası** oluşturur.
 
 <xref:Microsoft.AspNetCore.Components.Forms.EditForm>Geçerli ve geçersiz form gönderimi için uygun olaylar sağlar:
 
@@ -450,7 +450,7 @@ Sunucu doğrulama, bir sunucu [Doğrulayıcı bileşeniyle](#validator-component
 * Bileşeniyle birlikte istemci tarafı doğrulamayı işleyin <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> .
 * Form, istemci tarafı doğrulaması ( <xref:Microsoft.AspNetCore.Components.Forms.EditForm.OnValidSubmit> çağrıldığında) geçtiğinde, <xref:Microsoft.AspNetCore.Components.Forms.EditContext.Model?displayProperty=nameWithType> Form işleme için bir arka uç sunucu API 'sine gönderin.
 * Sunucuda işlem modeli doğrulaması.
-* Sunucu API 'SI, geliştirici tarafından sağlanan yerleşik Framework veri ek açıklamaları doğrulama ve özel doğrulama mantığını içerir. Sunucuda doğrulama başarılı olursa, formu işleyin ve bir başarı durum kodu geri gönderin (*200-Tamam*). Doğrulama başarısız olursa, bir hata durum kodu (*400-hatalı istek*) ve alan doğrulama hatalarını döndürün.
+* Sunucu API 'SI, geliştirici tarafından sağlanan yerleşik Framework veri ek açıklamaları doğrulama ve özel doğrulama mantığını içerir. Sunucuda doğrulama başarılı olursa, formu işleyin ve bir başarı durum kodu geri gönderin ( *200-Tamam* ). Doğrulama başarısız olursa, bir hata durum kodu ( *400-hatalı istek* ) ve alan doğrulama hatalarını döndürün.
 * Başarı durumunda formu devre dışı bırakın ya da hataları görüntüleyin.
 
 Aşağıdaki örnek temel alınarak verilmiştir:
@@ -519,7 +519,7 @@ namespace BlazorSample.Server.Controllers
             }
             catch (Exception ex)
             {
-                logger.LogError("Validation Error: {MESSAGE}", ex.Message);
+                logger.LogError("Validation Error: {Message}", ex.Message);
             }
 
             return BadRequest(ModelState);
@@ -706,7 +706,7 @@ Daha fazla bilgi için bkz. <xref:web-api/handle-errors#validation-failure-error
         }
         catch (Exception ex)
         {
-            Logger.LogError("Form processing error: {MESSAGE}", ex.Message);
+            Logger.LogError("Form processing error: {Message}", ex.Message);
             disabled = true;
             messageStyles = "color:red";
             message = "There was an error processing the form.";
@@ -1059,7 +1059,7 @@ private class MyFieldClassProvider : FieldCssClassProvider
 
 ### <a name="no-locblazor-data-annotations-validation-package"></a>Blazor veri ek açıklamaları doğrulama paketi
 
-, [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) Bileşeni kullanarak doğrulama deneyimini boşlukları dolduran bir pakettir <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> . Paket şu anda *deneysel*.
+, [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation) Bileşeni kullanarak doğrulama deneyimini boşlukları dolduran bir pakettir <xref:Microsoft.AspNetCore.Components.Forms.DataAnnotationsValidator> . Paket şu anda *deneysel* .
 
 > [!NOTE]
 > [`Microsoft.AspNetCore.Components.DataAnnotations.Validation`](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation)Paketin en son sürüm *adayı* sürümü [NuGet.org](https://www.nuget.org/packages/Microsoft.AspNetCore.Components.DataAnnotations.Validation)adresinde bulunur. Şu anda *deneysel* yayın aday paketini kullanmaya devam edin. Paketin derlemesi, gelecekteki bir sürümdeki çerçeveye veya çalışma zamanına taşınmış olabilir. Daha fazla güncelleştirme için [Duyurular GitHub deposu](https://github.com/aspnet/Announcements), [DotNet/aspnetcore GitHub deposu](https://github.com/dotnet/aspnetcore)veya bu konu başlığı bölümüne bakın.

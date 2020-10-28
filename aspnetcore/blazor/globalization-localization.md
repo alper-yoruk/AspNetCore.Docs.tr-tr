@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/globalization-localization
-ms.openlocfilehash: 4345dd8525c2e72aaddc8e45a4fd4d9bfdd63040
-ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
+ms.openlocfilehash: 52810cb5a5961ffe932a7f5ac2a3a03033781cc9
+ms.sourcegitcommit: c06a5bf419541d17595af30e4cf6f2787c21855e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92326523"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92678481"
 ---
 # <a name="aspnet-core-no-locblazor-globalization-and-localization"></a>BlazorGenelleştirme ve yerelleştirme ASP.NET Core
 
@@ -66,7 +66,7 @@ Aşağıdaki alan türleri belirli biçimlendirme gereksinimlerine sahiptir ve �
 
 [`@bind`](xref:mvc/views/razor#bind) , bir `@bind:culture` <xref:System.Globalization.CultureInfo?displayProperty=fullName> değeri ayrıştırmak ve biçimlendirmek için bir parametresini destekler. `date`Ve alan türleri kullanılırken bir kültürün belirtilmesi önerilmez `number` . `date` ve `number` Blazor gerekli kültürü sağlayan yerleşik desteğe sahiptir.
 
-## <a name="localization"></a>Yerelleştirme
+## <a name="localization"></a>Localization (Yerelleştirme)
 
 ### Blazor WebAssembly
 
@@ -121,12 +121,12 @@ Blazor Server uygulamalar, [Yerelleştirme ara yazılımı](xref:fundamentals/lo
 
 Kültür aşağıdaki yaklaşımlardan biri kullanılarak ayarlanabilir:
 
-* [Cookies](#cookies)
+* [Cookiemalar](#cookies)
 * [Kültürü seçmek için Kullanıcı arabirimi sağlama](#provide-ui-to-choose-the-culture)
 
 Daha fazla bilgi ve örnek için bkz <xref:fundamentals/localization> ..
 
-#### <a name="no-loccookies"></a>Cookies
+#### <a name="no-loccookies"></a>Cookiemalar
 
 Yerelleştirme kültürü cookie kullanıcının kültürünü kalıcı hale getirebilirler. Yerelleştirme ara yazılımı, cookie sonraki istekleri kullanıcının kültürünü ayarlamak için okur. 
 
@@ -164,6 +164,19 @@ Yerelleştirme, uygulama tarafından aşağıdaki olay dizisinde işlenir:
 1. Tarayıcı, etkileşimli bir oturum oluşturmak için bir WebSocket bağlantısı açar Blazor Server .
 1. Yerelleştirme ara yazılımı okur cookie ve kültürü atar.
 1. Blazor ServerOturum doğru kültür ile başlar.
+
+İle çalışırken <xref:Microsoft.AspNetCore.Mvc.Razor.RazorPage> , <xref:Microsoft.AspNetCore.Mvc.Razor.RazorPage.Context> özelliğini kullanın:
+
+```razor
+@{
+    this.Context.Response.Cookies.Append(
+        CookieRequestCultureProvider.DefaultCookieName,
+        CookieRequestCultureProvider.MakeCookieValue(
+            new RequestCulture(
+                CultureInfo.CurrentCulture,
+                CultureInfo.CurrentUICulture)));
+}
+```
 
 #### <a name="provide-ui-to-choose-the-culture"></a>Kültürü seçmek için Kullanıcı arabirimi sağlama
 

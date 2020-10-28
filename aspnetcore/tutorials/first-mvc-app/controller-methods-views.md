@@ -16,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/controller-methods-views
-ms.openlocfilehash: 07b67cd7c267c39b99277114b73642b5caa3e312
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 745703aaa4ceb39c75789bab0bde4564f3d79a30
+ms.sourcegitcommit: c06a5bf419541d17595af30e4cf6f2787c21855e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632843"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92678552"
 ---
 # <a name="part-6-controller-methods-and-views-in-aspnet-core"></a>ASP.NET Core Bölüm 6, denetleyici yöntemleri ve görünümleri
 
@@ -43,7 +43,7 @@ Sonraki öğreticide [veri ek açıklamalarını](/aspnet/mvc/overview/older-ver
 
 ![Düzenleme bağlantısı üzerinde fare ile tarayıcı penceresi ve bağlantı URL 'Si https://localhost:5001/Movies/Edit/5 gösteriliyor](~/tutorials/first-mvc-app/controller-methods-views/_static/edit7.png)
 
-**Düzenle**, **Ayrıntılar**ve **Sil** bağlantıları, *Görünümler/fılmler/Index. cshtml* dosyasındaki Core MVC bağlayıcı etiketi Yardımcısı tarafından oluşturulur.
+**Düzenle** , **Ayrıntılar** ve **Sil** bağlantıları, *Görünümler/fılmler/Index. cshtml* dosyasındaki Core MVC bağlayıcı etiketi Yardımcısı tarafından oluşturulur.
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/IndexOriginal.cshtml?highlight=1-3&range=46-50)]
 
@@ -107,7 +107,7 @@ Aşağıdaki kod, `HTTP POST Edit` postalanan film değerlerini işleyen yöntem
 
 `HttpPost`Öznitelik, bu `Edit` yöntemin *yalnızca* istekler için çağrılabilecek olduğunu belirtir `POST` . `[HttpGet]`Özniteliği ilk düzenleme yöntemine uygulayabilirsiniz, ancak bu gerekli değildir çünkü `[HttpGet]` varsayılan.
 
-`ValidateAntiForgeryToken`Özniteliği, [bir isteğin bir kısmını engellemek](xref:security/anti-request-forgery) için kullanılır ve düzenleme görünümü dosyasında (*Görünümler/filmler/Düzenle. cshtml*) oluşturulan bir güvenlik yumuşatma belirteci ile eşleştirilmiş olur. Düzenleme görünümü dosyası, [form etiketi Yardımcısı](xref:mvc/views/working-with-forms)ile karşı koruma belirteci oluşturur.
+`ValidateAntiForgeryToken`Özniteliği, [bir isteğin bir kısmını engellemek](xref:security/anti-request-forgery) için kullanılır ve düzenleme görünümü dosyasında ( *Görünümler/filmler/Düzenle. cshtml* ) oluşturulan bir güvenlik yumuşatma belirteci ile eşleştirilmiş olur. Düzenleme görünümü dosyası, [form etiketi Yardımcısı](xref:mvc/views/working-with-forms)ile karşı koruma belirteci oluşturur.
 
 [!code-cshtml[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Views/Movies/Edit.cshtml?range=9)]
 
@@ -149,7 +149,7 @@ Aşağıdaki listede `[HttpPost]` `Edit` eylem yönteminin sürümü gösterilme
 
 `[ValidateAntiForgeryToken]`Öznitelik, [form etiketi Yardımcısı](xref:mvc/views/working-with-forms) 'nda Anti-forgery belirteç Oluşturucu tarafından oluşturulan gizli [XSRF](xref:security/anti-request-forgery) belirtecini doğrular
 
-[Model bağlama](xref:mvc/models/model-binding) sistemi, postalanan form değerlerini alır ve `Movie` parametresi olarak geçirilmiş bir nesne oluşturur `movie` . `ModelState.IsValid`Yöntemi, formda gönderilen verilerin bir nesneyi değiştirmek (düzenlemek veya güncelleştirmek) için kullanılabileceğini doğrular `Movie` . Veriler geçerliyse, kaydedilir. Güncelleştirilmiş (düzenlenmiş) film verileri veritabanı bağlamı yöntemine çağrı yaparak veritabanına kaydedilir `SaveChangesAsync` . Veriler kaydedildikten sonra kod, kullanıcıyı, `Index` `MoviesController` Yeni yapılan değişiklikler dahil olmak üzere, film koleksiyonunu görüntüleyen sınıfının Action yöntemine yönlendirir.
+[Model bağlama](xref:mvc/models/model-binding) sistemi, postalanan form değerlerini alır ve `Movie` parametresi olarak geçirilmiş bir nesne oluşturur `movie` . `ModelState.IsValid`Özelliği, formda gönderilen verilerin bir nesneyi değiştirmek (düzenlemek veya güncelleştirmek) için kullanılabileceğini doğrular `Movie` . Veriler geçerliyse, kaydedilir. Güncelleştirilmiş (düzenlenmiş) film verileri veritabanı bağlamı yöntemine çağrı yaparak veritabanına kaydedilir `SaveChangesAsync` . Veriler kaydedildikten sonra kod, kullanıcıyı, `Index` `MoviesController` Yeni yapılan değişiklikler dahil olmak üzere, film koleksiyonunu görüntüleyen sınıfının Action yöntemine yönlendirir.
 
 Form sunucuya gönderilmeden önce, istemci tarafı doğrulaması alanlarda tüm doğrulama kurallarını denetler. Herhangi bir doğrulama hatası varsa, bir hata iletisi görüntülenir ve form nakledilmez. JavaScript devre dışıysa, istemci tarafı doğrulamaya sahip olmayacaktır, ancak sunucu geçerli olmayan gönderilen değerleri tespit eder ve form değerleri hata iletileriyle birlikte görüntülenir. Öğreticide daha sonra [model doğrulamayı](xref:mvc/models/validation) daha ayrıntılı bir şekilde inceleyeceğiz. *Görünümler/filmler/Edit. cshtml* görünüm şablonundaki [doğrulama etiketi Yardımcısı](xref:mvc/views/working-with-forms) , uygun hata iletilerini görüntülemeyi üstlenir.
 

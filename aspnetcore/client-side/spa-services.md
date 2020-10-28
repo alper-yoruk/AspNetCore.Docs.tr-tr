@@ -4,7 +4,7 @@ author: scottaddie
 description: ASP.NET Core tarafından desteklenen tek sayfalı uygulama (SPA) oluşturmak için JavaScript Hizmetleri kullanmanın avantajları hakkında bilgi edinin.
 monikerRange: '>= aspnetcore-2.1'
 ms.author: scaddie
-ms.custom: H1Hack27Feb2017
+ms.custom: H1Hack27Feb2017, devx-track-js
 ms.date: 09/06/2019
 no-loc:
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/spa-services
-ms.openlocfilehash: 379a8f52dab36d331bc42c1fee8d64b3971e9e91
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 33ae16c033142aa1c0f4cea53ca746e8a6aaf052
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625667"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690660"
 ---
 # <a name="use-javascript-services-to-create-single-page-applications-in-aspnet-core"></a>ASP.NET Core içinde tek sayfalı uygulamalar oluşturmak için JavaScript hizmetlerini kullanın
 
@@ -132,7 +132,7 @@ Alınan `UserName` bağımsız değişken YERLEŞIK JSON seri hale getirici kull
 
 [!code-typescript[](../client-side/spa-services/sample/SpaServicesSampleApp/ClientApp/boot-server.ts?range=6,10-21,38-52,79-)]
 
-Etiket yardımcılarının geçirildiği Özellik adları **PascalCase** gösterimi ile temsil edilir. Aynı özellik adlarının **camelCase**ile temsil edildiği JavaScript 'e kontrast. Varsayılan JSON serileştirme yapılandırması, bu farkından sorumludur.
+Etiket yardımcılarının geçirildiği Özellik adları **PascalCase** gösterimi ile temsil edilir. Aynı özellik adlarının **camelCase** ile temsil edildiği JavaScript 'e kontrast. Varsayılan JSON serileştirme yapılandırması, bu farkından sorumludur.
 
 Yukarıdaki kod örneğini genişletmek için, işlevine verilen özelliği hibir şekilde görüntüleyerek, veriler sunucudan görünüme geçirilebilir `globals` `resolve` :
 
@@ -252,10 +252,10 @@ dotnet new angular
 
 İki birincil çalışma zamanı yapılandırma modu var:
 
-* **Geliştirme**:
+* **Geliştirme** :
   * Hata ayıklamayı kolaylaştırmak için kaynak haritaları içerir.
   * , Performans için istemci tarafı kodunu iyileştirmez.
-* **Üretim**:
+* **Üretim** :
   * Kaynak eşlemelerini dışlar.
   * Paketleme ve küçültmeye göre istemci tarafı kodunu iyileştirir.
 

@@ -5,7 +5,7 @@ description: ASP.NET Core barındırılan bir uygulamanın güvenliğini Azure A
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: devx-track-csharp, mvc
-ms.date: 10/08/2020
+ms.date: 10/27/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,18 +18,25 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-azure-active-directory
-ms.openlocfilehash: e6f514793a2efde120f70ac58f4ad4be7516ada7
-ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
+ms.openlocfilehash: cb1deb71723660964954c2faae4512b7df9b2ed4
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/09/2020
-ms.locfileid: "91900862"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690544"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-azure-active-directory"></a>Blazor WebAssemblyAzure Active Directory ile ASP.NET Core barındırılan bir uygulamanın güvenliğini sağlama
 
 , [Javier Calvarro Nelson](https://github.com/javiercn) ve [Luke Latham](https://github.com/guardrex) 'e göre
 
 Bu makalede, kimlik doğrulaması için [Azure Active Directory (AAD)](https://azure.microsoft.com/services/active-directory/) kullanan bir [barındırılan Blazor WebAssembly uygulamanın](xref:blazor/hosting-models#blazor-webassembly) nasıl oluşturulacağı açıklanır.
+
+::: moniker range=">= aspnetcore-5.0"
+
+> [!NOTE]
+> Visual Blazor WebAssembly Studio 'da oluşturulan ve bır AAD kurumsal dizinindeki hesapları destekleyecek şekilde yapılandırılan uygulamalar için, Visual Studio uygulamayı proje nesli üzerinde doğru şekilde yapılandırmaz. Bu, Visual Studio 'nun gelecek bir sürümünde değinilecek. Bu makalede .NET Core CLI komutuyla uygulamanın nasıl oluşturulacağı gösterilmektedir `dotnet new` . IDE 'yi ASP.NET Core 5,0 ' deki en son şablonlar için güncelleştirmeden önce Visual Studio ile oluşturmayı tercih ediyorsanız Blazor , bu makalenin her bölümüne başvurun ve Visual Studio uygulamayı oluşturduktan sonra uygulamanın yapılandırmasını onaylayın veya güncelleştirin.
+
+::: moniker-end
 
 ## <a name="register-apps-in-aad-and-create-solution"></a>AAD 'de uygulama kaydetme ve çözüm oluşturma
 
@@ -41,12 +48,12 @@ Hızlı başlangıç: AAD 'de kiracı oluşturmak için [bir kiracı ayarlama](/
 
 Hızlı Başlangıç bölümündeki yönergeleri izleyin: *sunucu API uygulaması* IÇIN bir AAD uygulaması kaydetmek üzere Microsoft Identity platformu ve sonrakı Azure AAD konularıyla [bir uygulama kaydetme](/azure/active-directory/develop/quickstart-register-app) ve ardından aşağıdakileri yapın:
 
-1. **Azure Active Directory**  >  **uygulama kayıtları** **Yeni kayıt**' ı seçin.
-1. Uygulama için bir **ad** sağlayın (örneğin, ** Blazor Server AAD**).
-1. Desteklenen bir **Hesap türü**seçin. Bu deneyim için **yalnızca bu kuruluş dizininde** (tek kiracı) hesaplar seçebilirsiniz.
+1. **Azure Active Directory**  >  **uygulama kayıtları** **Yeni kayıt** ' ı seçin.
+1. Uygulama için bir **ad** sağlayın (örneğin, **Blazor Server AAD** ).
+1. Desteklenen bir **Hesap türü** seçin. Bu deneyim için **yalnızca bu kuruluş dizininde** (tek kiracı) hesaplar seçebilirsiniz.
 1. *Sunucu API 'si uygulaması* Bu senaryoda **yeniden yönlendirme URI 'si** gerektirmez, bu nedenle açılan kutudan **Web** 'e ve yeniden yönlendirme URI 'si girmeyin.
 1. **Permissions**  >  **OpenID ve offline_access izinleri için yönetici onayı verme** izinleri onay kutusunu temizleyin.
-1. **Kaydet**’i seçin.
+1. **Kaydet** ’i seçin.
 
 Aşağıdaki bilgileri kaydedin:
 
@@ -54,17 +61,17 @@ Aşağıdaki bilgileri kaydedin:
 * Dizin (kiracı) KIMLIĞI (örneğin, `e86c78e2-8bb4-4c41-aefd-918e0565a45e` )
 * AAD birincil/yayımcı/kiracı etki alanı (örneğin, `contoso.onmicrosoft.com` ): etki alanı, kayıtlı uygulama için Azure Portal **marka** dikey penceresinde **Yayımcı etki alanı** olarak kullanılabilir.
 
-**API izinlerinde**, **Microsoft Graph**  >  uygulama oturum açma veya Kullanıcı profili erişimi gerektirmediğinden Microsoft Graph**User. Read** iznini kaldırın.
+**API izinlerinde** , **Microsoft Graph**  >  uygulama oturum açma veya Kullanıcı profili erişimi gerektirmediğinden Microsoft Graph **User. Read** iznini kaldırın.
 
-**API 'Yi kullanıma**sunma bölümünde:
+**API 'Yi kullanıma** sunma bölümünde:
 
-1. **Kapsam ekle**’yi seçin.
-1. **Kaydet ve devam et**’i seçin.
+1. **Kapsam ekle** ’yi seçin.
+1. **Kaydet ve devam et** ’i seçin.
 1. Bir **kapsam adı** sağlayın (örneğin, `API.Access` ).
 1. **Yönetici izni görünen adı** sağlayın (örneğin, `Access API` ).
 1. **Yönetici onay açıklaması** sağlayın (örneğin, `Allows the app to access server app API endpoints.` ).
-1. **Durumun** **etkin**olarak ayarlandığını onaylayın.
-1. **Kapsam Ekle**' yi seçin.
+1. **Durumun** **etkin** olarak ayarlandığını onaylayın.
+1. **Kapsam Ekle** ' yi seçin.
 
 Aşağıdaki bilgileri kaydedin:
 
@@ -77,19 +84,19 @@ Aşağıdaki bilgileri kaydedin:
 
 ::: moniker range=">= aspnetcore-5.0"
 
-1. **Azure Active Directory** > **uygulama kayıtları** **Yeni kayıt**' ı seçin.
-1. Uygulama için bir **ad** sağlayın (örneğin, ** Blazor istemci AAD**).
-1. Desteklenen bir **Hesap türü**seçin. Bu deneyim için **yalnızca bu kuruluş dizininde** (tek kiracı) hesaplar seçebilirsiniz.
+1. **Azure Active Directory** > **uygulama kayıtları** **Yeni kayıt** ' ı seçin.
+1. Uygulama için bir **ad** sağlayın (örneğin, **Blazor istemci AAD** ).
+1. Desteklenen bir **Hesap türü** seçin. Bu deneyim için **yalnızca bu kuruluş dizininde** (tek kiracı) hesaplar seçebilirsiniz.
 1. **Yeniden yönlendirme URI 'si** açılan öğesini **tek SAYFALı uygulama (Spa)** olarak ayarlayın ve aşağıdaki yeniden yönlendirme URI 'sini sağlayın: `https://localhost:{PORT}/authentication/login-callback` . Kestrel üzerinde çalışan bir uygulamanın varsayılan bağlantı noktası 5001 ' dir. Uygulama farklı bir Kestrel bağlantı noktasında çalışıyorsa, uygulamanın bağlantı noktasını kullanın. IIS Express için, uygulama için rastgele oluşturulan bağlantı noktası, *`Server`* **hata ayıklama** panelinde uygulamanın özelliklerinde bulunabilir. Uygulama bu noktada mevcut olmadığından ve IIS Express bağlantı noktası bilinmediğinden, uygulama oluşturulduktan sonra bu adıma geri dönün ve yeniden yönlendirme URI 'sini güncelleştirin. [Uygulama oluştur](#create-the-app) bölümünde, kullanıcıların YENIDEN yönlendirme URI 'sini güncelleştirmesi IIS Express hatırlatmak için bir açıklama belirir.
 1. **Permissions** > **OpenID ve offline_access izinleri için yönetici onayı verme** izinleri onay kutusunu temizleyin.
-1. **Kaydet**’i seçin.
+1. **Kaydet** ’i seçin.
 
 *`Client`* Uygulama uygulaması (istemci) kimliğini (örneğin, `4369008b-21fa-427c-abaa-9b53bf58e538` ) kaydedin.
 
-**Kimlik doğrulama** > **platformu yapılandırmalarında** > **tek sayfalı uygulama (Spa)**:
+**Kimlik doğrulama** > **platformu yapılandırmalarında** > **tek sayfalı uygulama (Spa)** :
 
 1. **Yeniden YÖNLENDIRME URI** 'sinin `https://localhost:{PORT}/authentication/login-callback` mevcut olduğunu onaylayın.
-1. **Örtük verme**Için, **erişim belirteçleri** ve **Kimlik belirteçleri** onay kutularının seçili **olmadığından** emin olun.
+1. **Örtük verme** Için, **erişim belirteçleri** ve **Kimlik belirteçleri** onay kutularının seçili **olmadığından** emin olun.
 1. Uygulamanın kalan varsayılan değerleri bu deneyim için kabul edilebilir.
 1. **Kaydet** düğmesini seçin.
 
@@ -97,33 +104,33 @@ Aşağıdaki bilgileri kaydedin:
 
 ::: moniker range="< aspnetcore-5.0"
 
-1. **Azure Active Directory** > **uygulama kayıtları** **Yeni kayıt**' ı seçin.
-1. Uygulama için bir **ad** sağlayın (örneğin, ** Blazor istemci AAD**).
-1. Desteklenen bir **Hesap türü**seçin. Bu deneyim için **yalnızca bu kuruluş dizininde** (tek kiracı) hesaplar seçebilirsiniz.
+1. **Azure Active Directory** > **uygulama kayıtları** **Yeni kayıt** ' ı seçin.
+1. Uygulama için bir **ad** sağlayın (örneğin, **Blazor istemci AAD** ).
+1. Desteklenen bir **Hesap türü** seçin. Bu deneyim için **yalnızca bu kuruluş dizininde** (tek kiracı) hesaplar seçebilirsiniz.
 1. **Yeniden yönlendirme URI 'si** açılan öğesini **Web** 'e ayarlı bırakın ve aşağıdaki yeniden yönlendirme URI 'sini sağlayın: `https://localhost:{PORT}/authentication/login-callback` . Kestrel üzerinde çalışan bir uygulamanın varsayılan bağlantı noktası 5001 ' dir. Uygulama farklı bir Kestrel bağlantı noktasında çalışıyorsa, uygulamanın bağlantı noktasını kullanın. IIS Express için, uygulama için rastgele oluşturulan bağlantı noktası, *`Server`* **hata ayıklama** panelinde uygulamanın özelliklerinde bulunabilir. Uygulama bu noktada mevcut olmadığından ve IIS Express bağlantı noktası bilinmediğinden, uygulama oluşturulduktan sonra bu adıma geri dönün ve yeniden yönlendirme URI 'sini güncelleştirin. [Uygulama oluştur](#create-the-app) bölümünde, kullanıcıların YENIDEN yönlendirme URI 'sini güncelleştirmesi IIS Express hatırlatmak için bir açıklama belirir.
 1. **Permissions** > **OpenID ve offline_access izinleri için yönetici onayı verme** izinleri onay kutusunu temizleyin.
-1. **Kaydet**’i seçin.
+1. **Kaydet** ’i seçin.
 
 *`Client`* Uygulama uygulaması (istemci) kimliğini (örneğin, `4369008b-21fa-427c-abaa-9b53bf58e538` ) kaydedin.
 
-**Kimlik doğrulama** > **platformu yapılandırması** > **Web**:
+**Kimlik doğrulama** > **platformu yapılandırması** > **Web** :
 
 1. **Yeniden YÖNLENDIRME URI** 'sinin `https://localhost:{PORT}/authentication/login-callback` mevcut olduğunu onaylayın.
-1. **Örtük izin**Için, **erişim belirteçleri** ve **Kimlik belirteçleri**onay kutularını seçin.
+1. **Örtük izin** Için, **erişim belirteçleri** ve **Kimlik belirteçleri** onay kutularını seçin.
 1. Uygulamanın kalan varsayılan değerleri bu deneyim için kabul edilebilir.
 1. **Kaydet** düğmesini seçin.
 
 ::: moniker-end
 
-**API izinleri**:
+**API izinleri** :
 
 1. Uygulamanın **Microsoft Graph**  >  **User. Read** iznine sahip olduğunu doğrulayın.
-1. **Izin Ekle** ' yi ve ardından **API 'lerim**' i seçin.
-1. **Ad** SÜTUNUNDAN *sunucu API uygulamasını* (örneğin, ** Blazor Server AAD**) seçin.
+1. **Izin Ekle** ' yi ve ardından **API 'lerim** ' i seçin.
+1. **Ad** SÜTUNUNDAN *sunucu API uygulamasını* (örneğin, **Blazor Server AAD** ) seçin.
 1. **API** listesini açın.
 1. API 'ye erişimi etkinleştirin (örneğin, `API.Access` ).
-1. **Izin Ekle**' yi seçin.
-1. **{Tenant Name} için yönetici onayı Izni ver** düğmesini seçin. Onaylamak için **Evet**’i seçin.
+1. **Izin Ekle** ' yi seçin.
+1. **{Tenant Name} için yönetici onayı Izni ver** düğmesini seçin. Onaylamak için **Evet** ’i seçin.
 
 ### <a name="create-the-app"></a>Uygulama oluşturma
 
@@ -321,7 +328,7 @@ services.Configure<JwtBearerOptions>(
 
 ### <a name="weatherforecast-controller"></a>Hava tahmin denetleyicisi
 
-Dalgalı tahmin denetleyicisi (*denetleyiciler/dalgalı Therforetcontroller. cs*), BIR korumalı API 'yi [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) denetleyiciye uygulanmış şekilde gösterir. Bunun anlaşılması **önemlidir** :
+Dalgalı tahmin denetleyicisi ( *denetleyiciler/dalgalı Therforetcontroller. cs* ), BIR korumalı API 'yi [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) denetleyiciye uygulanmış şekilde gösterir. Bunun anlaşılması **önemlidir** :
 
 * Bu [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute) API denetleyicisindeki özniteliği, bu API 'yi yetkisiz erişime karşı koruyan tek şeydir.
 * [`[Authorize]`](xref:Microsoft.AspNetCore.Authorization.AuthorizeAttribute)Uygulamada kullanılan özniteliği yalnızca uygulamanın, Blazor WebAssembly uygulamanın düzgün şekilde çalışması için yetkilendirilmiş olması gerektiğine yönelik bir ipucu görevi görür.

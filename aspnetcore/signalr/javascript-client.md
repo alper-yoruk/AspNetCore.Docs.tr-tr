@@ -4,7 +4,7 @@ author: bradygaster
 description: JavaScript istemcisine ASP.NET Core genel bakış SignalR .
 monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
-ms.custom: mvc
+ms.custom: mvc, devx-track-js
 ms.date: 04/08/2020
 no-loc:
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/javascript-client
-ms.openlocfilehash: 6f611e56ec62ad7aea8a93e4761e1f67d0f76574
-ms.sourcegitcommit: fad0cd264c9d07a48a8c6ba1690807e0f8728898
+ms.openlocfilehash: be271272c952487fccc5136307c84fdf49391848
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/22/2020
-ms.locfileid: "92379462"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690645"
 ---
 # <a name="aspnet-core-no-locsignalr-javascript-client"></a>SignalRJavaScript istemcisi ASP.NET Core
 
@@ -41,14 +41,14 @@ SignalRJavaScript istemci kitaplığı [NPM](https://www.npmjs.com/) paketi olar
 
 ### <a name="install-with-npm"></a>NPM ile yüklensin
 
-Visual Studio için kök klasörde, **Paket Yöneticisi konsolundan** aşağıdaki komutları çalıştırın. Visual Studio Code için, **Tümleşik terminalden**aşağıdaki komutları çalıştırın.
+Visual Studio için kök klasörde, **Paket Yöneticisi konsolundan** aşağıdaki komutları çalıştırın. Visual Studio Code için, **Tümleşik terminalden** aşağıdaki komutları çalıştırın.
 
 ```bash
 npm init -y
 npm install @microsoft/signalr
 ```
 
-NPM *node_modules \\ @microsoft\signalr\dist\browser * klasöre paket içeriğini yüklüyor. *Wwwroot \\ kitaplığı* klasörünün altında *SignalR* adlı yeni bir klasör oluşturun. *signalr.js* dosyasını *wwwroot\lib\signalr* klasörüne kopyalayın.
+NPM *node_modules \\ @microsoft\signalr\dist\browser* klasöre paket içeriğini yüklüyor. *Wwwroot \\ kitaplığı* klasörünün altında *SignalR* adlı yeni bir klasör oluşturun. *signalr.js* dosyasını *wwwroot\lib\signalr* klasörüne kopyalayın.
 
 SignalRÖğesindeki JavaScript istemcisine başvurun `<script>` . Örneğin:
 
@@ -285,7 +285,7 @@ Gerçek dünyada bir uygulama, bir üstel geri kapatmayı kullanır veya vermede
 * [WebPack ve TypeScript öğreticisi](xref:tutorials/signalr-typescript-webpack)
 * [Merkezler](xref:signalr/hubs)
 * [.NET istemcisi](xref:signalr/dotnet-client)
-* [Azure’da Yayımlama](xref:signalr/publish-to-azure-web-app)
+* [Azure 'da yayımlama](xref:signalr/publish-to-azure-web-app)
 * [Çıkış noktaları arası Istekler (CORS)](xref:security/cors)
 * [Azure SignalR hizmeti sunucusuz belgeler](/azure/azure-signalr/signalr-concept-serverless-development-config)
 * [Bağlantı hatalarını giderme](xref:signalr/troubleshoot)
@@ -306,14 +306,14 @@ SignalRJavaScript istemci kitaplığı [NPM](https://www.npmjs.com/) paketi olar
 
 ### <a name="install-with-npm"></a>NPM ile yüklensin
 
-Visual Studio kullanıyorsanız, kök klasörde **Paket Yöneticisi konsolundan** aşağıdaki komutları çalıştırın. Visual Studio Code için, **Tümleşik terminalden**aşağıdaki komutları çalıştırın.
+Visual Studio kullanıyorsanız, kök klasörde **Paket Yöneticisi konsolundan** aşağıdaki komutları çalıştırın. Visual Studio Code için, **Tümleşik terminalden** aşağıdaki komutları çalıştırın.
 
 ```bash
 npm init -y
 npm install @aspnet/signalr
 ```
 
-NPM *node_modules \\ @aspnet\signalr\dist\browser * klasöre paket içeriğini yüklüyor. *Wwwroot \\ kitaplığı* klasörünün altında *SignalR* adlı yeni bir klasör oluşturun. *signalr.js* dosyasını *wwwroot\lib\signalr* klasörüne kopyalayın.
+NPM *node_modules \\ @aspnet\signalr\dist\browser* klasöre paket içeriğini yüklüyor. *Wwwroot \\ kitaplığı* klasörünün altında *SignalR* adlı yeni bir klasör oluşturun. *signalr.js* dosyasını *wwwroot\lib\signalr* klasörüne kopyalayın.
 
 SignalRÖğesindeki JavaScript istemcisine başvurun `<script>` . Örneğin:
 
@@ -430,7 +430,7 @@ Gerçek dünyada bir uygulama, bir üstel geri kapatmayı kullanır veya vermede
 * [WebPack ve TypeScript öğreticisi](xref:tutorials/signalr-typescript-webpack)
 * [Merkezler](xref:signalr/hubs)
 * [.NET istemcisi](xref:signalr/dotnet-client)
-* [Azure’da Yayımlama](xref:signalr/publish-to-azure-web-app)
+* [Azure 'da yayımlama](xref:signalr/publish-to-azure-web-app)
 * [Çıkış noktaları arası Istekler (CORS)](xref:security/cors)
 * [Azure SignalR hizmeti sunucusuz belgeler](/azure/azure-signalr/signalr-concept-serverless-development-config)
 

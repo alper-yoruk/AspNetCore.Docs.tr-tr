@@ -4,7 +4,7 @@ author: guardrex
 description: ASP.NET Core uygulamasında Blazor .NET ile etkileşimli istemci tarafı Web Kullanıcı arabirimi oluşturmak için bir yol ASP.NET Core keşfedelim.
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
-ms.custom: mvc, seoapril2019
+ms.custom: mvc, seoapril2019, devx-track-js
 ms.date: 09/25/2020
 no-loc:
 - ASP.NET Core Identity
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/index
-ms.openlocfilehash: 7ad374fdc7452664e3367d6ef214fd4cebdf3b08
-ms.sourcegitcommit: 139c998d37e9f3e3d0e3d72e10dbce8b75957d89
+ms.openlocfilehash: bae3e96021971e373ad743a0b52da7f69d839c40
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/07/2020
-ms.locfileid: "91805536"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690592"
 ---
 # <a name="introduction-to-aspnet-core-no-locblazor"></a>ASP.NET Core giriş Blazor
 
@@ -49,7 +49,7 @@ Blazor , [.net](/dotnet/standard/tour)ile etkileşimli istemci tarafı Web Kulla
 
 ## <a name="components"></a>Bileşenler
 
-Blazor uygulamalar *bileşenleri*temel alır. İçindeki bir bileşeni Blazor , bir sayfa, iletişim veya veri girişi formu gibi bir kullanıcı arabirimi öğesidir.
+Blazor uygulamalar *bileşenleri* temel alır. İçindeki bir bileşeni Blazor , bir sayfa, iletişim veya veri girişi formu gibi bir kullanıcı arabirimi öğesidir.
 
 Bileşenler, [.NET derlemeleri](/dotnet/standard/assembly/) yerleşik olarak bulunan .NET C# sınıflarıdır:
 
@@ -58,7 +58,7 @@ Bileşenler, [.NET derlemeleri](/dotnet/standard/assembly/) yerleşik olarak bul
 * İç içe ve yeniden kullanılabilir olabilir.
 * , [ Razor Sınıf kitaplıkları](xref:razor-pages/ui-class) veya [NuGet paketleri](/nuget/what-is-nuget)olarak paylaşılabilir ve dağıtılabilir.
 
-Bileşen sınıfı, genellikle [Razor](xref:mvc/views/razor) bir dosya uzantısına sahip bir biçimlendirme sayfası biçiminde yazılır `.razor` . İçindeki bileşenler Blazor , resmi olarak * Razor bileşen*olarak adlandırılır. Razor , HTML işaretlemesini geliştirici üretkenliği için tasarlanan C# kodu ile birleştirmek için bir sözdizimidir. Razor Visual Studio 'da [IntelliSense](/visualstudio/ide/using-intellisense) programlama desteğiyle aynı dosyada HTML Işaretlemesi ile C# arasında geçiş yapmanıza olanak sağlar. Razor Sayfalar ve MVC de kullanır Razor . RazorBir istek/yanıt modeli etrafında oluşturulan sayfaların ve MVC 'nin aksine, bileşenler özellikle istemci tarafı UI mantığı ve bileşimi için kullanılır.
+Bileşen sınıfı, genellikle [Razor](xref:mvc/views/razor) bir dosya uzantısına sahip bir biçimlendirme sayfası biçiminde yazılır `.razor` . İçindeki bileşenler Blazor , resmi olarak *Razor bileşen* olarak adlandırılır. Razor , HTML işaretlemesini geliştirici üretkenliği için tasarlanan C# kodu ile birleştirmek için bir sözdizimidir. Razor Visual Studio 'da [IntelliSense](/visualstudio/ide/using-intellisense) programlama desteğiyle aynı dosyada HTML Işaretlemesi ile C# arasında geçiş yapmanıza olanak sağlar. Razor Sayfalar ve MVC de kullanır Razor . RazorBir istek/yanıt modeli etrafında oluşturulan sayfaların ve MVC 'nin aksine, bileşenler özellikle istemci tarafı UI mantığı ve bileşimi için kullanılır.
 
 Blazor UI bileşimi için doğal HTML etiketleri kullanır. Aşağıdaki Razor biçimlendirme `Dialog.razor` bir iletişim kutusu görüntüleyen ve Kullanıcı bir düğme seçtiğinde bir olayı işleyen bir bileşeni () gösterir:
 
@@ -107,7 +107,7 @@ Yukarıdaki örnekte, `OnYes` düğme olayının tetiklediği bir C# yöntemidir
 
 ![İletişim kutusu bileşeni, Dizin bileşeninin içinde iç içe geçmiş tarayıcıda işlendi. Tarayıcı geliştirici araçları konsolu, Kullanıcı Evet ' i seçtiğinde C# kodu tarafından yazılan iletiyi gösterir! düğmesine basın.](index/_static/dialog.png)
 
-Bileşenler, Kullanıcı arabirimini esnek ve verimli bir şekilde güncelleştirmek için kullanılan bir *işleme ağacı*adlı, tarayıcı [belge nesne modeli (DOM)](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction) ' ın bellek içi gösterimine işlenir.
+Bileşenler, Kullanıcı arabirimini esnek ve verimli bir şekilde güncelleştirmek için kullanılan bir *işleme ağacı* adlı, tarayıcı [belge nesne modeli (DOM)](https://developer.mozilla.org/docs/Web/API/Document_Object_Model/Introduction) ' ın bellek içi gösterimine işlenir.
 
 ## Blazor WebAssembly
 
@@ -115,7 +115,7 @@ Blazor WebAssembly , .NET ile etkileşimli istemci tarafı Web uygulamaları olu
 
 Web tarayıcıları içinde .NET kodu çalıştırmak, [Webassembly](https://webassembly.org) (kısaltılmış) tarafından mümkün hale getirilir `wasm` . WebAssembly hızlı indirme ve en yüksek yürütme hızı için iyileştirilmiş bir sıkıştırma kodu biçimidir. WebAssembly, açık bir web standardıdır ve eklentileri olmayan Web tarayıcılarında desteklenir.
 
-WebAssembly Code, JavaScript birlikte *çalışabilirliği*olarak adlandırılan JavaScript aracılığıyla tarayıcının tüm işlevlerine erişebilir, genellikle *JavaScript birlikte çalışma* veya *js birlikte çalışma*olarak kısaltılır. Tarayıcıda WebAssembly aracılığıyla yürütülen .NET kodu, sanal makinenin istemci makinesindeki kötü amaçlı eylemlere karşı sağladığı korumalar ile tarayıcının JavaScript korumalı alanında çalışır.
+WebAssembly Code, JavaScript birlikte *çalışabilirliği* olarak adlandırılan JavaScript aracılığıyla tarayıcının tüm işlevlerine erişebilir, genellikle *JavaScript birlikte çalışma* veya *js birlikte çalışma* olarak kısaltılır. Tarayıcıda WebAssembly aracılığıyla yürütülen .NET kodu, sanal makinenin istemci makinesindeki kötü amaçlı eylemlere karşı sağladığı korumalar ile tarayıcının JavaScript korumalı alanında çalışır.
 
 ![::: No-Loc (Blazor WebAssembly)::: .NET kodunu WebAssembly ile tarayıcıda çalıştırır.](index/_static/blazor-webassembly.png)
 
@@ -125,7 +125,7 @@ Bir Blazor WebAssembly uygulama bir tarayıcıda oluşturulup çalıştırıldı
 * Derlemeler ve [.NET çalışma zamanı](/dotnet/framework/get-started/overview) tarayıcıya indirilir.
 * Blazor WebAssembly .NET çalışma zamanı önyükleme ve çalışma zamanını uygulamanın derlemelerini yükleyecek şekilde yapılandırır. Blazor WebAssemblyÇalışma zamanı, DOM işleme ve tarayıcı API çağrılarını işlemek Için JavaScript birlikte çalışabilirliği kullanır.
 
-Yayınlanan uygulamanın boyutu, *Yük boyutu*, uygulamanın useyeteneğinin önemli bir performans etkendir. Büyük bir uygulamanın tarayıcıya indirmesi oldukça uzun sürer ve bu da Kullanıcı deneyimini azaltabilecek. Blazor WebAssembly yükleme sürelerini azaltmak için yük boyutunu iyileştirir:
+Yayınlanan uygulamanın boyutu, *Yük boyutu* , uygulamanın useyeteneğinin önemli bir performans etkendir. Büyük bir uygulamanın tarayıcıya indirmesi oldukça uzun sürer ve bu da Kullanıcı deneyimini azaltabilecek. Blazor WebAssembly yükleme sürelerini azaltmak için yük boyutunu iyileştirir:
 
 ::: moniker range=">= aspnetcore-5.0"
 

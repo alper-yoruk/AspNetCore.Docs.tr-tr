@@ -5,7 +5,7 @@ description: Barındırılan bir ASP.NET Core uygulamasının sunucusuyla güven
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: mvc
-ms.date: 09/02/2020
+ms.date: 10/27/2020
 no-loc:
 - ASP.NET Core Identity
 - cookie
@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-identity-server
-ms.openlocfilehash: 5d92d12a1fcd3797dcffb301998b529935751e8b
-ms.sourcegitcommit: d5ecad1103306fac8d5468128d3e24e529f1472c
+ms.openlocfilehash: a6fd005e19f532089ac1a1914756fb03eabb24c4
+ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/23/2020
-ms.locfileid: "92491489"
+ms.lasthandoff: 10/27/2020
+ms.locfileid: "92690476"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-no-locidentity-server"></a>Blazor WebAssemblySunucu ile ASP.NET Core barındırılan bir uygulamanın güvenliğini sağlama Identity
 
@@ -38,7 +38,7 @@ Bu makalede, kullanıcıların ve API çağrılarının kimliğini doğrulamak i
 
 Blazor WebAssemblyKimlik doğrulama mekanizmasına sahip yeni bir proje oluşturmak için:
 
-1. **Yeni bir ASP.NET Core Web uygulaması oluştur** iletişim kutusunda ** Blazor WebAssembly uygulama** şablonunu seçtikten sonra, **kimlik doğrulaması**altında **Değiştir** ' i seçin.
+1. **Yeni bir ASP.NET Core Web uygulaması oluştur** iletişim kutusunda **Blazor WebAssembly uygulama** şablonunu seçtikten sonra, **kimlik doğrulaması** altında **Değiştir** ' i seçin.
 
 1. ASP.NET Core sistemi kullanarak uygulama içinde kullanıcıları depolamak için **Kullanıcı hesaplarını depola ve uygulama Içi** **Kullanıcı hesapları** seçeneğini belirleyin [Identity](xref:security/authentication/identity) .
 
@@ -475,7 +475,7 @@ Bu barındırma senaryosunda, [ Identity sunucunun belirteç imzalama anahtarı]
 
 * Bu iki gereksinim için farklı sertifikaların kullanılması, her amaçla özel anahtarları yalıtdığından iyi bir güvenlik uygulamasıdır.
 * Tarayıcılarla iletişim için TLS sertifikaları, sunucunun belirteç imzasını etkilemeden bağımsız olarak yönetilir Identity .
-* [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) , özel etki alanı bağlamaya yönelik bir App Service uygulamasına sertifika sağladığı zaman, Identity sunucu, belirteç imzalama için Azure Key Vault aynı sertifikayı elde edemiyor. IdentitySunucuyu fiziksel bir yoldan aynı TLS sertifikasını kullanacak şekilde yapılandırmak mümkün olsa da, güvenlik sertifikalarının kaynak denetimine yerleştirilmesi **kötü bir uygulamadır ve çoğu senaryoda kaçınılmalıdır**.
+* [Azure Key Vault](https://azure.microsoft.com/services/key-vault/) , özel etki alanı bağlamaya yönelik bir App Service uygulamasına sertifika sağladığı zaman, Identity sunucu, belirteç imzalama için Azure Key Vault aynı sertifikayı elde edemiyor. IdentitySunucuyu fiziksel bir yoldan aynı TLS sertifikasını kullanacak şekilde yapılandırmak mümkün olsa da, güvenlik sertifikalarının kaynak denetimine yerleştirilmesi **kötü bir uygulamadır ve çoğu senaryoda kaçınılmalıdır** .
 
 Aşağıdaki kılavuzda, yalnızca sunucu belirteci imzalama için Azure Key Vault ' de otomatik olarak imzalanan bir sertifika oluşturulur Identity . IdentitySunucu yapılandırması, uygulamanın `My`  >  sertifika deposu aracılığıyla Anahtar Kasası sertifikasını kullanır `CurrentUser` . Özel etki alanları olan HTTPS trafiği için kullanılan diğer sertifikalar, sunucu imzalama sertifikasından ayrı olarak oluşturulur ve yapılandırılır Identity .
 
@@ -501,23 +501,23 @@ Bir uygulamayı, Azure App Service ve Azure Key Vault özel bir etki alanı ve H
    Azure Key Vault sertifikaları hakkında daha fazla bilgi için bkz. [Azure Key Vault: sertifikalar](/azure/key-vault/certificates/).
 1. Yeni bir Azure Key Vault oluşturun veya Azure aboneliğinizde mevcut bir anahtar kasasını kullanın.
 1. Anahtar kasasının **Sertifikalar** alanında PFX site sertifikasını içeri aktarın. Uygulamanın yapılandırmasında daha sonra kullanılan sertifikanın parmak izini kaydedin.
-1. Azure Key Vault, sunucu belirteci imzalama için otomatik olarak imzalanan yeni bir sertifika oluşturun Identity . Sertifikaya bir **sertifika adı** ve **Konu**verin. **Konusu** , `CN={COMMON NAME}` `{COMMON NAME}` yer tutucunun sertifikanın ortak adı olduğu gibi belirtilir. Ortak ad herhangi bir alfasayısal dize olabilir. Örneğin, `CN=IdentityServerSigning` geçerli bir sertifika **konusudur**. Varsayılan **Gelişmiş Ilke yapılandırma** ayarlarını kullanın. Uygulamanın yapılandırmasında daha sonra kullanılan sertifikanın parmak izini kaydedin.
+1. Azure Key Vault, sunucu belirteci imzalama için otomatik olarak imzalanan yeni bir sertifika oluşturun Identity . Sertifikaya bir **sertifika adı** ve **Konu** verin. **Konusu** , `CN={COMMON NAME}` `{COMMON NAME}` yer tutucunun sertifikanın ortak adı olduğu gibi belirtilir. Ortak ad herhangi bir alfasayısal dize olabilir. Örneğin, `CN=IdentityServerSigning` geçerli bir sertifika **konusudur** . Varsayılan **Gelişmiş Ilke yapılandırma** ayarlarını kullanın. Uygulamanın yapılandırmasında daha sonra kullanılan sertifikanın parmak izini kaydedin.
 1. Azure portal Azure App Service gidin ve aşağıdaki yapılandırmayla yeni bir App Service oluşturun:
    * **Publish** Kümeyi olarak Yayımla `Code` .
    * **Çalışma zamanı yığını** , uygulamanın çalışma zamanına ayarlandı.
-   * **SKU ve boyut**için App Service katmanının `Basic B1` veya daha yüksek olduğunu doğrulayın.  App Service, bir `Basic B1` veya daha yüksek hizmet katmanının özel etki alanlarını kullanmasını gerektirir.
+   * **SKU ve boyut** için App Service katmanının `Basic B1` veya daha yüksek olduğunu doğrulayın.  App Service, bir `Basic B1` veya daha yüksek hizmet katmanının özel etki alanlarını kullanmasını gerektirir.
 1. Azure App Service oluşturduktan sonra, uygulamanın **yapılandırmasını** açın ve daha önce kaydedilen sertifika parmak izlerini belirten yeni bir uygulama ayarı ekleyin. Uygulama ayarı anahtarı `WEBSITE_LOAD_CERTIFICATES` . Aşağıdaki örnekte gösterildiği gibi, uygulama ayarı değerindeki sertifika parmak izlerini bir virgülle ayırın:
    * Anahtar: `WEBSITE_LOAD_CERTIFICATES`
    * Değer: `57443A552A46DB...D55E28D412B943565,29F43A772CB6AF...1D04F0C67F85FB0B1`
 
    Azure portal, uygulama ayarlarının kaydedilmesi iki adımlı bir işlemdir: `WEBSITE_LOAD_CERTIFICATES` anahtar-değer ayarını kaydedin, ardından dikey pencerenin en üstündeki **Kaydet** düğmesini seçin.
-1. Uygulamanın **TLS/SSL ayarlarını**seçin. **Özel anahtar sertifikaları (. pfx)** seçeneğini belirleyin. HTTPS iletişimi için sitenin sertifikasını ve sitenin otomatik olarak imzalanan sunucu belirteci imzalama sertifikasını içeri aktarmak için **Key Vault sertifikayı Içeri aktar** işlemini iki kez kullanın Identity .
+1. Uygulamanın **TLS/SSL ayarlarını** seçin. **Özel anahtar sertifikaları (. pfx)** seçeneğini belirleyin. HTTPS iletişimi için sitenin sertifikasını ve sitenin otomatik olarak imzalanan sunucu belirteci imzalama sertifikasını içeri aktarmak için **Key Vault sertifikayı Içeri aktar** işlemini iki kez kullanın Identity .
 1. **Özel etki alanları** dikey penceresine gidin. Etki alanı Kaydedicinizin Web sitesinde, etki alanını yapılandırmak için **IP adresini** ve **özel etkı alanı doğrulama kimliğini** kullanın. Tipik bir etki alanı yapılandırması şunları içerir:
    * Azure portal **ana bilgisayarı** ve IP adresi değeri olan **bir kayıt** `@` .
    * **Ana bilgisayarı** **TXT Record** `asuid` ve Azure tarafından oluşturulan ve Azure Portal tarafından oluşturulan doğrulama kimliği değeri olan bir TXT kaydı.
 
    Değişiklikleri etki alanı Kaydedicinizin Web sitesinde doğru bir şekilde kaydettiğinizden emin olun. Bazı kaydedici Web siteleri, etki alanı kayıtlarını kaydetmek için iki adımlı bir işlem gerektirir: bir veya daha fazla kayıt, bir veya daha fazla kaydın ayrı bir düğmeyle güncelleştirilmesi tarafından tek tek kaydedilir.
-1. Azure portal **özel etki alanları** dikey penceresine geri dönün. **Özel etki alanı ekle**'yi seçin. **Bir kayıt** seçeneğini belirleyin. Etki alanını girip **Doğrula**' yı seçin. Etki alanı kayıtları doğruysa ve Internet üzerinden yayıldığında, portal **özel etki alanı Ekle** düğmesini seçmenizi sağlar.
+1. Azure portal **özel etki alanları** dikey penceresine geri dönün. **Özel etki alanı ekle** 'yi seçin. **Bir kayıt** seçeneğini belirleyin. Etki alanını girip **Doğrula** ' yı seçin. Etki alanı kayıtları doğruysa ve Internet üzerinden yayıldığında, portal **özel etki alanı Ekle** düğmesini seçmenizi sağlar.
 
    Etki alanı kayıt şirketiniz tarafından işlendikten sonra, etki alanı kaydı değişikliklerinin Internet etki alanı ad sunucuları (DNS) üzerinden yayılması birkaç gün sürebilir. Etki alanı kayıtları üç iş günü içinde güncellenmemişse, kayıtların etki alanı kaydedicisinde doğru şekilde ayarlandığını onaylayın ve müşteri desteğiyle iletişim kurun.
 1. **Özel etki alanları** dikey penceresinde, etki alanı IÇIN **SSL durumu** işaretlenir `Not Secure` . **Bağlama Ekle** bağlantısını seçin. Özel etki alanı bağlamasının anahtar kasasından site HTTPS sertifikasını seçin.
@@ -537,7 +537,7 @@ Bir uygulamayı, Azure App Service ve Azure Key Vault özel bir etki alanı ve H
    },
    ```
 
-1. Visual Studio 'da *sunucu* projesi için bir Azure App Service [Yayımlama profili](xref:host-and-deploy/visual-studio-publish-profiles#publish-profiles) oluşturun. Menü çubuğundan: **derleme**  >  **Publish**  >  **Yeni**  >  **Azure**  >  **Azure App Service** yayımlama (Windows veya Linux) öğesini seçin. Visual Studio bir Azure aboneliğine bağlıyken, Azure kaynaklarının **görünümünü** **kaynak türüne**göre ayarlayabilirsiniz. Uygulamanın App Service bulmak ve bunu seçmek için **Web uygulaması** listesinde gezinin. **Son**’u seçin.
+1. Visual Studio 'da *sunucu* projesi için bir Azure App Service [Yayımlama profili](xref:host-and-deploy/visual-studio-publish-profiles#publish-profiles) oluşturun. Menü çubuğundan: **derleme**  >  **Publish**  >  **Yeni**  >  **Azure**  >  **Azure App Service** yayımlama (Windows veya Linux) öğesini seçin. Visual Studio bir Azure aboneliğine bağlıyken, Azure kaynaklarının **görünümünü** **kaynak türüne** göre ayarlayabilirsiniz. Uygulamanın App Service bulmak ve bunu seçmek için **Web uygulaması** listesinde gezinin. **Son** ’u seçin.
 1. Visual Studio **Yayımla** penceresine döndüğünde, anahtar kasası ve SQL Server veritabanı hizmeti bağımlılıkları otomatik olarak algılanır.
 
    Anahtar Kasası hizmeti için varsayılan ayarlarda yapılandırma değişikliği yapılması gerekmez.
