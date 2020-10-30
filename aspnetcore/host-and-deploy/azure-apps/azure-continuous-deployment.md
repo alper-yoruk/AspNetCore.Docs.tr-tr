@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: devx-track-csharp, mvc
 ms.date: 12/06/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/azure-apps/azure-continuous-deployment
-ms.openlocfilehash: 1f3fca62b39125d9f23042c5929de829ab243865
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1485e1a97e51bb4d12d0d74ca1550e5cf18258d8
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633181"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053793"
 ---
 # <a name="continuous-deployment-to-azure-with-visual-studio-and-git-with-aspnet-core"></a>ASP.NET Core ile Visual Studio ve Git kullanarak Azure’a sürekli dağıtım
 
@@ -37,7 +38,7 @@ Ayrıca, Azure DevOps Services kullanarak [Azure App Service](/azure/app-service
 > [!NOTE]
 > Bu öğreticiyi tamamlayabilmeniz için bir Microsoft Azure hesabı gereklidir. Bir hesap almak için [MSDN abone avantajlarını etkinleştirin](https://azure.microsoft.com/pricing/member-offers/credit-for-visual-studio-subscribers/?WT.mc_id=A261C142F) veya [ücretsiz deneme için kaydolun](https://azure.microsoft.com/free/dotnet/?WT.mc_id=A261C142F).
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 Bu öğreticide aşağıdaki yazılımların yüklü olduğu varsayılmaktadır:
 
@@ -49,13 +50,13 @@ Bu öğreticide aşağıdaki yazılımların yüklü olduğu varsayılmaktadır:
 
 1. Visual Studio’yu çalıştırın.
 
-1. **Dosya** menüsünden **Yeni**  >  **Proje**' yi seçin.
+1. **Dosya** menüsünden **Yeni**  >  **Proje** ' yi seçin.
 
-1. **ASP.NET Core Web uygulaması** proje şablonunu seçin. **Yüklü**  >  **Şablonlar**  >  **Visual C#**  >  **.NET Core**altında görüntülenir. Projeyi adlandırın `SampleWebAppDemo` . **Yeni git deposu oluştur** seçeneğini belirleyip **Tamam**' a tıklayın.
+1. **ASP.NET Core Web uygulaması** proje şablonunu seçin. **Yüklü**  >  **Şablonlar**  >  **Visual C#**  >  **.NET Core** altında görüntülenir. Projeyi adlandırın `SampleWebAppDemo` . **Yeni git deposu oluştur** seçeneğini belirleyip **Tamam** ' a tıklayın.
 
    ![Yeni Proje iletişim kutusu](azure-continuous-deployment/_static/01-new-project.png)
 
-1. **Yeni ASP.NET Core projesi** Iletişim kutusunda **boş** şablon ASP.NET Core seçin ve ardından **Tamam**' a tıklayın.
+1. **Yeni ASP.NET Core projesi** Iletişim kutusunda **boş** şablon ASP.NET Core seçin ve ardından **Tamam** ' a tıklayın.
 
    ![Yeni ASP.NET Core projesi iletişim kutusu](azure-continuous-deployment/_static/02-web-site-template.png)
 
@@ -64,7 +65,7 @@ Bu öğreticide aşağıdaki yazılımların yüklü olduğu varsayılmaktadır:
 
 ### <a name="running-the-web-app-locally"></a>Web uygulamasını yerel olarak çalıştırma
 
-1. Visual Studio uygulamayı oluşturmayı tamamladıktan sonra **Hata Ayıkla**  >  **başlatma hata ayıklamayı**seçerek uygulamayı çalıştırın. Alternatif olarak **F5**tuşuna basın.
+1. Visual Studio uygulamayı oluşturmayı tamamladıktan sonra **Hata Ayıkla**  >  **başlatma hata ayıklamayı** seçerek uygulamayı çalıştırın. Alternatif olarak **F5** tuşuna basın.
 
    Visual Studio 'Yu ve yeni uygulamayı başlatmak zaman alabilir. Tamamlandıktan sonra tarayıcı, çalışan uygulamayı gösterir.
 
@@ -80,11 +81,11 @@ Aşağıdaki adımlar Azure portalında bir Web uygulaması oluşturur:
 
 1. Portal arabiriminin sol üst kısmındaki **Yeni** ' yi seçin.
 
-1. **Web ve mobil**  >  **Web uygulaması**' nı seçin.
+1. **Web ve mobil**  >  **Web uygulaması** ' nı seçin.
 
    ![Microsoft Azure Portal: yeni düğme: market altında Web ve Mobil: öne çıkan uygulamalar altında Web uygulaması düğmesi](azure-continuous-deployment/_static/05-azure-newwebapp.png)
 
-1. **Web uygulaması** dikey penceresinde, **App Service adı**için benzersiz bir değer girin.
+1. **Web uygulaması** dikey penceresinde, **App Service adı** için benzersiz bir değer girin.
 
    ![Web uygulaması dikey penceresi](azure-continuous-deployment/_static/06-azure-newappblade.png)
 
@@ -93,7 +94,7 @@ Aşağıdaki adımlar Azure portalında bir Web uygulaması oluşturur:
 
    Ayrıca, **Web uygulaması** dikey penceresinde, mevcut bir **App Service planı/konumu** seçin veya yeni bir tane oluşturun. Yeni bir plan oluşturuyorsanız, fiyatlandırma katmanını, konumunu ve diğer seçenekleri seçin. App Service planları hakkında daha fazla bilgi için bkz. [Azure App Service planlar ayrıntılı genel bakış](/azure/app-service/azure-web-sites-web-hosting-plans-in-depth-overview).
 
-1. **Oluştur**’u seçin. Azure, Web uygulamasını sağlayacak ve başlatacak.
+1. **Oluştur** ’u seçin. Azure, Web uygulamasını sağlayacak ve başlatacak.
 
    ![Azure portalı: örnek Web uygulaması tanıtımı 01 Essentials dikey penceresi](azure-continuous-deployment/_static/07-azure-webappblade.png)
 
@@ -107,19 +108,19 @@ Git, bir Azure App Service Web uygulaması dağıtmak için kullanılabilen bir 
 
 1. Bu öğreticinin önceki bölümünde oluşturulan Web uygulamasını seçin.
 
-1. **Dağıtım** dikey penceresinde **dağıtım seçenekleri**  >  **kaynak**  >  **yerel Git deposu**' nu seçin.
+1. **Dağıtım** dikey penceresinde **dağıtım seçenekleri**  >  **kaynak**  >  **yerel Git deposu** ' nu seçin.
 
    ![Ayarlar dikey penceresi: dağıtım kaynağı dikey penceresi: kaynak dikey penceresini seçin](azure-continuous-deployment/_static/deployment-options.png)
 
-1. **Tamam**’ı seçin.
+1. **Tamam** ’ı seçin.
 
 1. Bir Web uygulamasını yayınlamak için dağıtım kimlik bilgileri App Service veya daha önce ayarlanmamışsa, bu uygulamaları şimdi ayarlayın:
 
-   * **Ayarlar**  >  **dağıtım kimlik bilgileri**' ni seçin. **Dağıtım kimlik bilgilerini ayarla** dikey penceresi görüntülenir.
+   * **Ayarlar**  >  **dağıtım kimlik bilgileri** ' ni seçin. **Dağıtım kimlik bilgilerini ayarla** dikey penceresi görüntülenir.
    * Bir kullanıcı adı ve parola oluşturun. Git ayarlanırken daha sonra kullanmak üzere parolayı kaydedin.
-   * **Kaydet**’i seçin.
+   * **Kaydet** ’i seçin.
 
-1. **Web uygulaması** dikey penceresinde **Ayarlar**  >  **Özellikler**' i seçin. Dağıtım yapılacak uzak git deposunun URL 'SI **GIT URL 'si**altında gösterilir.
+1. **Web uygulaması** dikey penceresinde **Ayarlar**  >  **Özellikler** ' i seçin. Dağıtım yapılacak uzak git deposunun URL 'SI **GIT URL 'si** altında gösterilir.
 
 1. Öğreticide daha sonra kullanmak için **GIT URL 'si** değerini kopyalayın.
 
@@ -133,41 +134,41 @@ Bu bölümde, Visual Studio 'Yu kullanarak yerel bir git deposu oluşturun ve We
 * Proje değişikliklerini Yürüt.
 * Yerel depodan Azure 'daki uzak depoya proje değişiklikleri gönderin.
 
-1. **Çözüm Gezgini** **' Samplewebappdemo ' çözümüne** sağ tıklayın ve **Yürüt**' ü seçin. **Takım Gezgini** görüntülenir.
+1. **Çözüm Gezgini** **' Samplewebappdemo ' çözümüne** sağ tıklayın ve **Yürüt** ' ü seçin. **Takım Gezgini** görüntülenir.
 
    ![Takım Gezgini Bağlan sekmesi](azure-continuous-deployment/_static/10-team-explorer.png)
 
-1. **Takım Gezgini** **, >** **ayarları**  >  **Depo ayarları**' nı seçin.
+1. **Takım Gezgini** **, >** **ayarları**  >  **Depo ayarları** ' nı seçin.
 
-1. **Depo Ayarları**’nın **Uzak öğeler** bölümünde **Ekle**’yi seçin. **Uzak Öğe Ekle** iletişim kutusu görüntülenir.
+1. **Depo Ayarları** ’nın **Uzak öğeler** bölümünde **Ekle** ’yi seçin. **Uzak Öğe Ekle** iletişim kutusu görüntülenir.
 
-1. Uzak **adını** **Azure-SampleApp**olarak ayarlayın.
+1. Uzak **adını** **Azure-SampleApp** olarak ayarlayın.
 
-1. **Fetch** için değeri bu öğreticide daha önce Azure 'Dan KOPYALANMıŞ **Git URL** 'sine ayarlayın. Bunun, **. git**Ile biten URL olduğunu unutmayın.
+1. **Fetch** için değeri bu öğreticide daha önce Azure 'Dan KOPYALANMıŞ **Git URL** 'sine ayarlayın. Bunun, **. git** Ile biten URL olduğunu unutmayın.
 
    ![Uzak iletişim kutusunu Düzenle](azure-continuous-deployment/_static/11-add-remote.png)
 
    > [!NOTE]
-   > Alternatif olarak, **komut penceresinden komut** **penceresini açıp, proje**dizinine giderek ve komutu girerek, uzak depoyu belirtin. Örnek:
+   > Alternatif olarak, **komut penceresinden komut** **penceresini açıp, proje** dizinine giderek ve komutu girerek, uzak depoyu belirtin. Örnek:
    >
    > `git remote add Azure-SampleApp https://me@sampleapp.scm.azurewebsites.net:443/SampleApp.git`
 
-1. **Home** **Ayarlar**  >  **genel ayarları**> giriş (giriş simgesi) seçeneğini belirleyin. Adın ve e-posta adresinin ayarlandığını onaylayın. Gerekirse **Güncelleştir** ' i seçin.
+1. **Home** **Ayarlar**  >  **genel ayarları** > giriş (giriş simgesi) seçeneğini belirleyin. Adın ve e-posta adresinin ayarlandığını onaylayın. Gerekirse **Güncelleştir** ' i seçin.
 
-1. **Home**  >  **Değişiklikler** görünümüne geri dönmek için ana**değişiklikler** ' i seçin.
+1. **Home**  >  **Değişiklikler** görünümüne geri dönmek için ana **değişiklikler** ' i seçin.
 
-1. **Ilk gönderme #1** gibi bir teslim iletisi girin ve **Kaydet**' i seçin. Bu eylem yerel olarak bir *işleme* oluşturur.
+1. **Ilk gönderme #1** gibi bir teslim iletisi girin ve **Kaydet** ' i seçin. Bu eylem yerel olarak bir *işleme* oluşturur.
 
    ![Takım Gezgini Bağlan sekmesi](azure-continuous-deployment/_static/12-initial-commit.png)
 
    > [!NOTE]
-   > Alternatif olarak **, komut penceresini açıp, proje**dizini olarak değiştirerek ve git komutlarını girerek **komut penceresinden** değişiklikleri işleyin. Örnek:
+   > Alternatif olarak **, komut penceresini açıp, proje** dizini olarak değiştirerek ve git komutlarını girerek **komut penceresinden** değişiklikleri işleyin. Örnek:
    >
    > `git add .`
    >
    > `git commit -am "Initial Push #1"`
 
-1. **Ana**  >  **eşitleme**  >  **eylemlerini**seçin  >  **komut istemi 'ni açın**. Komut istemi proje dizini için açılır.
+1. **Ana**  >  **eşitleme**  >  **eylemlerini** seçin  >  **komut istemi 'ni açın** . Komut istemi proje dizini için açılır.
 
 1. Komut penceresine aşağıdaki komutu girin:
 
@@ -193,7 +194,7 @@ Bu bölümde, Visual Studio 'Yu kullanarak yerel bir git deposu oluşturun ve We
 
 Yerel ortamdan Azure 'a Web uygulaması aktarımının başarılı olduğunu doğrulayın.
 
-[Azure portalında](https://portal.azure.com)Web uygulamasını seçin. **Dağıtım**  >  **dağıtım seçeneklerini**belirleyin.
+[Azure portalında](https://portal.azure.com)Web uygulamasını seçin. **Dağıtım**  >  **dağıtım seçeneklerini** belirleyin.
 
 ![Azure portalı: ayarlar dikey penceresi: başarılı dağıtımı gösteren dağıtımlar dikey penceresi](azure-continuous-deployment/_static/13-verify-deployment.png)
 
@@ -218,18 +219,18 @@ Yerel kodda değişiklikler yaptıktan sonra, yeniden yayımlayın:
    await context.Response.WriteAsync("Hello World! Deploy to Azure.");
    ```
 
-1. Değişiklikleri *Startup.cs*'ye kaydedin.
+1. Değişiklikleri *Startup.cs* 'ye kaydedin.
 
-1. **Çözüm Gezgini** **' Samplewebappdemo ' çözümüne** sağ tıklayın ve **Yürüt**' ü seçin. **Takım Gezgini** görüntülenir.
+1. **Çözüm Gezgini** **' Samplewebappdemo ' çözümüne** sağ tıklayın ve **Yürüt** ' ü seçin. **Takım Gezgini** görüntülenir.
 
 1. Gibi bir kayıt iletisi girin `Update #2` .
 
 1. Proje değişikliklerini yürütmek için **Yürüt** düğmesine basın.
 
-1. **Ana**  >  **eşitleme**  >  **eylemleri**  >  **Gönder**' i seçin.
+1. **Ana**  >  **eşitleme**  >  **eylemleri**  >  **Gönder** ' i seçin.
 
 > [!NOTE]
-> Alternatif olarak **, komut penceresini açıp, proje**dizinine değiştirerek ve bir git komutu girerek değişiklikleri **komut penceresinden** gönderin. Örnek:
+> Alternatif olarak **, komut penceresini açıp, proje** dizinine değiştirerek ve bir git komutu girerek değişiklikleri **komut penceresinden** gönderin. Örnek:
 > 
 > `git push -u Azure-SampleApp master`
 

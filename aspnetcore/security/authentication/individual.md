@@ -5,6 +5,7 @@ description: Bireysel kullanıcı hesaplarıyla oluşturulan ASP.NET Core projel
 ms.author: riande
 ms.date: 12/11/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/individual
-ms.openlocfilehash: 0cbde7cf0be830dab9dd094df6d102d81f9f0949
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 656006396de120b7feae6f2e08b5dad3b5a170b5
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632622"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053351"
 ---
 # <a name="articles-based-on-aspnet-core-projects-created-with-individual-user-accounts"></a>Bireysel kullanıcı hesaplarıyla oluşturulan ASP.NET Core projelerine dayalı makaleler
 
@@ -53,7 +54,7 @@ Web API kimlik doğrulaması için [Bu GitHub sorununa](https://github.com/dotne
 
 ## <a name="no-authentication"></a>Kimlik Doğrulaması Yok
 
-Kimlik doğrulaması, .NET Core CLI `-au` seçeneğiyle belirtilir. Visual Studio 'da **kimlik doğrulaması Değiştir** iletişim kutusu yeni Web uygulamaları için kullanılabilir. Visual Studio 'da yeni Web uygulamaları için varsayılan değer **kimlik doğrulaması**değildir.
+Kimlik doğrulaması, .NET Core CLI `-au` seçeneğiyle belirtilir. Visual Studio 'da **kimlik doğrulaması Değiştir** iletişim kutusu yeni Web uygulamaları için kullanılabilir. Visual Studio 'da yeni Web uygulamaları için varsayılan değer **kimlik doğrulaması** değildir.
 
 Kimlik doğrulaması olmadan oluşturulan projeler:
 

@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 02/06/2019
 ms.topic: tutorial
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/intro
-ms.openlocfilehash: e081c13f9ffb33c1ff137cb0989e747d51571ea7
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 36d72e037087399c8893d5ecb4a6fffdca3a3608
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629203"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054248"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Öğretici: bir ASP.NET MVC web uygulamasında EF Core kullanmaya başlama
 
@@ -53,7 +54,7 @@ Bu öğreticide şunları yaptınız:
 > * Denetleyici ve görünüm oluşturma
 > * Veritabanını görüntüleme
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * [.NET Core SDK 2,2](https://dotnet.microsoft.com/download)
 * Aşağıdaki iş yükleriyle [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019) :
@@ -81,21 +82,21 @@ Kullanıcılar öğrenci, kurs ve eğitmen bilgilerini görüntüleyebilir ve g�
 
 * Visual Studio'yu açın.
 
-* **Dosya** menüsünden **Yeni > proje**' yi seçin.
+* **Dosya** menüsünden **Yeni > proje** ' yi seçin.
 
-* Sol bölmeden, **yüklü > Visual C# > Web**' i seçin.
+* Sol bölmeden, **yüklü > Visual C# > Web** ' i seçin.
 
 * **ASP.NET Core Web uygulaması** proje şablonunu seçin.
 
-* Ad olarak **Contosouniversity** yazın ve **Tamam**' a tıklayın.
+* Ad olarak **Contosouniversity** yazın ve **Tamam** ' a tıklayın.
 
   ![Yeni Proje iletişim kutusu](intro/_static/new-project2.png)
 
 * **Yeni ASP.NET Core Web uygulaması** iletişim kutusunun görünmesini bekleyin.
 
-* **.NET Core**, **ASP.NET Core 2,2** ve **Web uygulaması (Model-View-Controller)** şablonu ' nu seçin.
+* **.NET Core** , **ASP.NET Core 2,2** ve **Web uygulaması (Model-View-Controller)** şablonu ' nu seçin.
 
-* **Kimlik doğrulamanın** **kimlik doğrulaması yok**olarak ayarlandığından emin olun.
+* **Kimlik doğrulamanın** **kimlik doğrulaması yok** olarak ayarlandığından emin olun.
 
 * **Tamam 'ı** seçin
 
@@ -109,13 +110,13 @@ Birkaç basit değişiklik, site menüsünü, düzeni ve giriş sayfasını ayar
 
 * "ContosoUniversity" öğesinin her oluşumunu "Contoso Üniversitesi" olarak değiştirin. Üç oluşum vardır.
 
-* **Hakkında**, **öğrenciler**, **Kurslar**, **eğitmenler**ve **Departmanlar**için menü girişleri ekleyin ve **Gizlilik** menü girişini silin.
+* **Hakkında** , **öğrenciler** , **Kurslar** , **eğitmenler** ve **Departmanlar** için menü girişleri ekleyin ve **Gizlilik** menü girişini silin.
 
 Değişiklikler vurgulanır.
 
 [!code-cshtml[](intro/samples/cu/Views/Shared/_Layout.cshtml?highlight=6,34-48,63)]
 
-*Görünümler/Home/Index. cshtml*'de, ASP.net ve MVC hakkındaki metni bu uygulamayla ilgili metinle değiştirmek için dosyanın içeriğini aşağıdaki kodla değiştirin:
+*Görünümler/Home/Index. cshtml* 'de, ASP.net ve MVC hakkındaki metni bu uygulamayla ilgili metinle değiştirmek için dosyanın içeriğini aşağıdaki kodla değiştirin:
 
 [!code-cshtml[](intro/samples/cu/Views/Home/Index.cshtml)]
 
@@ -189,9 +190,9 @@ Entity Framework, bir özelliği bir yabancı anahtar özelliği olarak `<naviga
 
 Belirli bir veri modeli için Entity Framework işlevselliğini koordine eden ana sınıf veritabanı bağlamı sınıfıdır. Sınıfından türeterek bu sınıfı oluşturursunuz `Microsoft.EntityFrameworkCore.DbContext` . Kodunuzda, veri modeline hangi varlıkların ekleneceğini belirtirsiniz. Ayrıca, belirli Entity Framework davranışlarını özelleştirebilirsiniz. Bu projede, sınıfı olarak adlandırılır `SchoolContext` .
 
-Proje klasöründe, *veri*adlı bir klasör oluşturun.
+Proje klasöründe, *veri* adlı bir klasör oluşturun.
 
-*Veri* klasöründe, *SchoolContext.cs*adlı yeni bir sınıf dosyası oluşturun ve şablon kodunu şu kodla değiştirin:
+*Veri* klasöründe, *SchoolContext.cs* adlı yeni bir sınıf dosyası oluşturun ve şablon kodunu şu kodla değiştirin:
 
 [!code-csharp[](intro/samples/cu/Data/SchoolContext.cs?name=snippet_Intro)]
 
@@ -207,17 +208,17 @@ Veritabanı oluşturulduğunda EF, özellik adlarıyla aynı adlara sahip tablol
 
 ASP.NET Core, varsayılan olarak [bağımlılık ekleme](../../fundamentals/dependency-injection.md) işlemini uygular. Hizmetler (EF veritabanı bağlamı gibi) uygulama başlatma sırasında bağımlılık ekleme ile kaydedilir. Bu hizmetleri gerektiren bileşenler (MVC denetleyicileri gibi) bu hizmetleri Oluşturucu parametreleri aracılığıyla sağlamaktadır. Bu öğreticide daha sonra bir bağlam örneği alan denetleyici Oluşturucu kodunu görürsünüz.
 
-`SchoolContext`Hizmet olarak kaydetmek için *Startup.cs*açın ve vurgulanan satırları `ConfigureServices` yöntemine ekleyin.
+`SchoolContext`Hizmet olarak kaydetmek için *Startup.cs* açın ve vurgulanan satırları `ConfigureServices` yöntemine ekleyin.
 
 [!code-csharp[](intro/samples/cu/Startup.cs?name=snippet_SchoolContext&highlight=9-10)]
 
-Bağlantı dizesinin adı bir nesne üzerinde bir yöntem çağırarak bağlama geçirilir `DbContextOptionsBuilder` . Yerel geliştirme için [ASP.NET Core yapılandırma sistemi](xref:fundamentals/configuration/index) dosyadaki *appsettings.js* bağlantı dizesini okur.
+Bağlantı dizesinin adı bir nesne üzerinde bir yöntem çağırarak bağlama geçirilir `DbContextOptionsBuilder` . Yerel geliştirme için [ASP.NET Core yapılandırma sistemi](xref:fundamentals/configuration/index) dosyadaki bağlantı dizesini okur *appsettings.json* .
 
 `using` `ContosoUniversity.Data` Ve ad alanları için deyimler ekleyin `Microsoft.EntityFrameworkCore` ve ardından projeyi derleyin.
 
 [!code-csharp[](intro/samples/cu/Startup.cs?name=snippet_Usings)]
 
-appsettings.jsdosya * üzerinde* açın ve aşağıdaki örnekte gösterildiği gibi bir bağlantı dizesi ekleyin.
+Dosyayı açın *appsettings.json* ve aşağıdaki örnekte gösterildiği gibi bir bağlantı dizesi ekleyin.
 
 [!code-json[](./intro/samples/cu/appsettings1.json?highlight=2-4)]
 
@@ -237,7 +238,7 @@ Burada, `EnsureCreated` veritabanını otomatik olarak oluşturmak için yöntem
 
 Kod, veritabanında herhangi bir öğrenci olup olmadığını denetler ve yoksa, veritabanının yeni olduğunu ve test verileriyle hazırlanması gerektiğini varsayar. Performansı iyileştirmek için test verilerini koleksiyonlar yerine dizilere yükler `List<T>` .
 
-*Program.cs*' de, `Main` Uygulama başlangıcında aşağıdakini yapmak için yöntemini değiştirin:
+*Program.cs* ' de, `Main` Uygulama başlangıcında aşağıdakini yapmak için yöntemini değiştirin:
 
 * Bağımlılık ekleme kapsayıcısından bir veritabanı bağlamı örneği alın.
 * Temel yöntemi çağırın ve bu yönteme geçerek bağlamı geçer.
@@ -249,7 +250,7 @@ Kod, veritabanında herhangi bir öğrenci olup olmadığını denetler ve yoksa
 
 [!code-csharp[](intro/samples/cu/Program.cs?name=snippet_Usings)]
 
-Eski öğreticilerde, `Configure` *Startup.cs*içinde yönteminde benzer bir kod görebilirsiniz. `Configure`Yöntemini yalnızca istek ardışık düzenini ayarlamak için kullanmanızı öneririz. Uygulama başlangıç kodu `Main` yöntemine aittir.
+Eski öğreticilerde, `Configure` *Startup.cs* içinde yönteminde benzer bir kod görebilirsiniz. `Configure`Yöntemini yalnızca istek ardışık düzenini ayarlamak için kullanmanızı öneririz. Uygulama başlangıç kodu `Main` yöntemine aittir.
 
 Uygulamayı ilk kez çalıştırdığınızda veritabanı oluşturulur ve test verileriyle birlikte gösterilir. Veri modelinizi her değiştirdiğinizde, veritabanını silebilir, çekirdek yönteminizi güncelleştirebilir ve yeni bir veritabanıyla aynı şekilde bir baştan başlatabilirsiniz. Sonraki öğreticilerde, veri modeli değiştiğinde ve yeniden oluşturmadan veritabanını nasıl değiştireceğiniz hakkında bilgi edineceksiniz.
 
@@ -259,27 +260,27 @@ Daha sonra, verileri sorgulamak ve kaydetmek için EF 'i kullanacak bir MVC dene
 
 CRUD eylem yöntemlerinin ve görünümlerinin otomatik olarak oluşturulması, yapı iskelesi olarak bilinir. Yapı iskelesi, yapı oluşturma işleminden farklı olarak, kendi gereksinimlerinize uyacak şekilde değiştirebileceğiniz bir başlangıç noktası ve genellikle oluşturulan kodu değiştirmezsiniz. Oluşturulan kodu özelleştirmeniz gerektiğinde, kısmi sınıfları kullanırsınız veya işlemler değiştiğinde kodu yeniden oluşturmanız gerekir.
 
-* **Çözüm Gezgini** ' de **denetleyiciler** klasörüne sağ tıklayın ve **> yeni iskele öğe Ekle**' yi seçin.
+* **Çözüm Gezgini** ' de **denetleyiciler** klasörüne sağ tıklayın ve **> yeni iskele öğe Ekle** ' yi seçin.
 
 * **Yapı Iskelesi Ekle** iletişim kutusunda:
 
-  * **Entity Framework kullanarak, görünümlerle MVC denetleyicisi ' ni**seçin.
+  * **Entity Framework kullanarak, görünümlerle MVC denetleyicisi ' ni** seçin.
 
-  * **Ekle**'ye tıklayın. **Görünümler Ile MVC denetleyicisi ekleme, Entity Framework kullanma** iletişim kutusu görüntülenir.
+  * **Ekle** 'ye tıklayın. **Görünümler Ile MVC denetleyicisi ekleme, Entity Framework kullanma** iletişim kutusu görüntülenir.
 
     ![Yapı iskelesi öğrenci](intro/_static/scaffold-student2.png)
 
-  * **Model sınıfı** ' nda **öğrenci**' yi seçin.
+  * **Model sınıfı** ' nda **öğrenci** ' yi seçin.
 
-  * **Veri bağlamı sınıfında** **SchoolContext**öğesini seçin.
+  * **Veri bağlamı sınıfında** **SchoolContext** öğesini seçin.
 
   * Varsayılan **Studentscontroller** adını olarak kabul edin.
 
-  * **Ekle**'ye tıklayın.
+  * **Ekle** 'ye tıklayın.
 
-  **Ekle**' ye tıkladığınızda, Visual Studio yapı iskelesi altyapısı, denetleyicisiyle birlikte çalışan bir *StudentsController.cs* dosyası ve bir dizi görünüm (*. cshtml* dosyası) oluşturur.
+  **Ekle** ' ye tıkladığınızda, Visual Studio yapı iskelesi altyapısı, denetleyicisiyle birlikte çalışan bir *StudentsController.cs* dosyası ve bir dizi görünüm ( *. cshtml* dosyası) oluşturur.
 
-(Yapı iskelesi altyapısı, daha önce Bu öğreticide yaptığınız gibi, daha önce el ile oluşturmazsanız, sizin için veritabanı bağlamını de oluşturabilir. **Veri bağlam sınıfının**sağ tarafındaki artı Işaretine tıklayarak **Denetleyici Ekle** kutusunda yeni bir bağlam sınıfı belirtebilirsiniz.  Daha sonra, Visual Studio `DbContext` sınıfınızın yanı sıra denetleyiciyi ve görünümleri de oluşturacaktır.)
+(Yapı iskelesi altyapısı, daha önce Bu öğreticide yaptığınız gibi, daha önce el ile oluşturmazsanız, sizin için veritabanı bağlamını de oluşturabilir. **Veri bağlam sınıfının** sağ tarafındaki artı Işaretine tıklayarak **Denetleyici Ekle** kutusunda yeni bir bağlam sınıfı belirtebilirsiniz.  Daha sonra, Visual Studio `DbContext` sınıfınızın yanı sıra denetleyiciyi ve görünümleri de oluşturacaktır.)
 
 Denetleyicinin bir oluşturucu parametresi olarak aldığını fark edeceksiniz `SchoolContext` .
 
@@ -313,7 +314,7 @@ Tarayıcıyı kapatın.
 
 SSOX penceresi henüz açık değilse, Visual Studio 'daki **Görünüm** menüsünden bunu seçin.
 
-SSOX 'te **(LocalDB) \MSSQLLocalDB > veritabanları**' na tıklayın ve ardından *appsettings.jsüzerindeki* bağlantı dizesinde bulunan veritabanı adı için girişe tıklayın.
+SSOX 'te **(LocalDB) \MSSQLLocalDB > veritabanları** ' na tıklayın ve ardından dosyanızdaki bağlantı dizesinde bulunan veritabanı adı için girişe tıklayın *appsettings.json* .
 
 Veritabanınızdaki tabloları görmek için **Tablolar** düğümünü genişletin.
 
@@ -323,7 +324,7 @@ Oluşturulan sütunları ve tabloya eklenmiş satırları görmek için **öğre
 
 ![SSOX 'te öğrenci tablosu](intro/_static/ssox-student-table.png)
 
-*. Mdf* ve *. ldf* veritabanı dosyaları * \\ \<yourusername> C:\Users* klasöründedir.
+*. Mdf* ve *. ldf* veritabanı dosyaları *\\ \<yourusername> C:\Users* klasöründedir.
 
 `EnsureCreated`Uygulama başlatma sırasında çalışan Başlatıcı metodunu çağırırken, artık sınıfta bir değişiklik yapabilir, `Student` veritabanını silebilir, uygulamayı yeniden çalıştırabilirsiniz ve veritabanı, değişikliklerinizi eşleştirmek için otomatik olarak yeniden oluşturulur. Örneğin, `EmailAddress` sınıfa bir özellik eklerseniz `Student` , `EmailAddress` yeniden oluşturulan tabloda yeni bir sütun görürsünüz.
 

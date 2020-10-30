@@ -5,6 +5,7 @@ description: ASP.NET Core Grönyı kullanma
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/using-grunt
-ms.openlocfilehash: e8e4459f7fe496135d6cfd7f4ff52511a5e1c064
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 374c23f440dcf301b3a1e1e9e6684dd050f218c6
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628033"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054560"
 ---
 # <a name="use-grunt-in-aspnet-core"></a>ASP.NET Core Grönyı kullanma
 
@@ -31,17 +32,17 @@ Bu örnek, başlangıç noktası olarak boş bir ASP.NET Core projesi kullanarak
 
 Tamamlanmış örnek, hedef dağıtım dizinini temizler, JavaScript dosyalarını birleştirir, kod kalitesini denetler, JavaScript dosya içeriğini daraltabilir ve Web uygulamanızın köküne dağıtır. Aşağıdaki paketleri kullanacağız:
 
-* **gryeniden bağlama**: gryeniden görev Çalıştırıcısı paketi.
+* **gryeniden bağlama** : gryeniden görev Çalıştırıcısı paketi.
 
-* **gryeniden bağlama-contrib-Clean**: dosya veya dizinleri kaldıran bir eklenti.
+* **gryeniden bağlama-contrib-Clean** : dosya veya dizinleri kaldıran bir eklenti.
 
-* **grkıt-contrib-jshınt**: JavaScript kod kalitesini inceleyen bir eklenti.
+* **grkıt-contrib-jshınt** : JavaScript kod kalitesini inceleyen bir eklenti.
 
-* **gryeniden bağlama-contrib-Concat**: dosyaları tek bir dosyaya birleştiren bir eklenti.
+* **gryeniden bağlama-contrib-Concat** : dosyaları tek bir dosyaya birleştiren bir eklenti.
 
-* **gryeniden bağlama-contrib-utimy**: boyutu azaltmak Için JavaScript 'i mini görüntüleyen bir eklenti.
+* **gryeniden bağlama-contrib-utimy** : boyutu azaltmak Için JavaScript 'i mini görüntüleyen bir eklenti.
 
-* **gryeniden bağlama-contrib-Watch**: dosya etkinliğini izleyen bir eklenti.
+* **gryeniden bağlama-contrib-Watch** : dosya etkinliğini izleyen bir eklenti.
 
 ## <a name="preparing-the-application"></a>Uygulama hazırlanıyor
 
@@ -57,7 +58,7 @@ Başlamak için yeni bir boş Web uygulaması ayarlayın ve TypeScript örnek do
 
 4. Proje dizininize adlı yeni bir klasör ekleyin `TypeScript` .
 
-5. Herhangi bir dosya eklemeden önce, Visual Studio 'Nun TypeScript dosyaları için ' kaydetme sırasında derle ' seçeneğinin işaretli olduğundan emin olun. **Araçlar**  >  **Seçenekler**  >  **metin Düzenleyicisi**  >  **TypeScript**  >  **projesinde**git:
+5. Herhangi bir dosya eklemeden önce, Visual Studio 'Nun TypeScript dosyaları için ' kaydetme sırasında derle ' seçeneğinin işaretli olduğundan emin olun. **Araçlar**  >  **Seçenekler**  >  **metin Düzenleyicisi**  >  **TypeScript**  >  **projesinde** git:
 
     ![TypeScript dosyalarının otomatik derlemesini ayarlama seçenekleri](using-grunt/_static/typescript-options.png)
 
@@ -98,7 +99,7 @@ Başlamak için yeni bir boş Web uygulaması ayarlayın ve TypeScript örnek do
 
 Daha sonra, NPM 'yi, grer ve grsıt-görevler 'i indirmek için yapılandırın
 
-1. Çözüm Gezgini, projeye sağ tıklayın ve bağlam menüsünden **> yeni öğe Ekle** ' yi seçin. **NPM yapılandırma dosyası** öğesini seçin, varsayılan adı bırakın, *package.js*ve **Ekle** düğmesine tıklayın.
+1. Çözüm Gezgini, projeye sağ tıklayın ve bağlam menüsünden **> yeni öğe Ekle** ' yi seçin. **NPM yapılandırma dosyası** öğesini seçin, varsayılan adı bırakın, *package.js* ve **Ekle** düğmesine tıklayın.
 
 2. Dosyadaki *package.js* , `devDependencies` nesne ayraçları içinde "grönbağlama" yazın. `grunt`IntelliSense listesinden seçin ve ENTER tuşuna basın. Visual Studio gryeniden paket adını teklif eder ve iki nokta üst üste ekler. İki nokta üst üste sağ tarafta, IntelliSense listesinin en üstünden paketin en son kararlı sürümünü seçin ( `Ctrl-Space` IntelliSense görünmüyorsa tuşuna basın).
 
@@ -107,7 +108,7 @@ Daha sonra, NPM 'yi, grer ve grsıt-görevler 'i indirmek için yapılandırın
     > [!NOTE]
     > NPM, bağımlılıkları düzenlemek için [anlamsal sürüm oluşturmayı](https://semver.org/) kullanır. SemVer olarak da bilinen anlamsal sürüm, numaralandırma düzenine sahip paketleri tanımlar \<major> . \<minor> . \<patch> . IntelliSense yalnızca birkaç ortak seçeneği göstererek anlamsal sürüm oluşturmayı basitleştirir. IntelliSense listesindeki üst öğe (Yukarıdaki örnekte 0.4.5), paketin en son kararlı sürümü olarak değerlendirilir. Şapka (^) simgesi en son ana sürümle eşleşir ve tilde (~) en son ikincil sürümle eşleşir. SemVer 'in sağladığı tam ifade çekimi için bir kılavuz olarak [NPM semver sürüm ayrıştırıcısı başvurusuna](https://www.npmjs.com/package/semver) bakın.
 
-3. \*Aşağıdaki örnekte gösterildiği gibi *Clean*, *jshınt*, *Concat*, *uıshowmy*ve *Watch* için Load grkıt-contrib-Packages için daha fazla bağımlılık ekleyin. Sürümlerin örnekle eşleşmesi gerekmez.
+3. \*Aşağıdaki örnekte gösterildiği gibi *Clean* , *jshınt* , *Concat* , *uıshowmy* ve *Watch* için Load grkıt-contrib-Packages için daha fazla bağımlılık ekleyin. Sürümlerin örnekle eşleşmesi gerekmez.
 
     ```json
     "devDependencies": {
@@ -135,9 +136,9 @@ Her `devDependencies` bir öğe için paketler, her paketin gerektirdiği tüm d
 
 Gryeniden Çalıştır, el ile çalıştırılabilecek veya Visual Studio 'daki olaylara göre otomatik olarak çalışacak şekilde yapılandırılmış olan *Gruntfile.js* adlı bir bildirim kullanılarak yapılandırılır.
 
-1. Projeye sağ tıklayın ve **Add**  >  **Yeni öğe**Ekle ' yi seçin. **JavaScript dosya** öğesi şablonunu seçin, adı *Gruntfile.js*olarak değiştirin ve **Ekle** düğmesine tıklayın.
+1. Projeye sağ tıklayın ve **Add**  >  **Yeni öğe** Ekle ' yi seçin. **JavaScript dosya** öğesi şablonunu seçin, adı *Gruntfile.js* olarak değiştirin ve **Ekle** düğmesine tıklayın.
 
-1. *Gruntfile.js*için aşağıdaki kodu ekleyin. `initConfig`İşlevi her bir paket için seçenekleri ayarlar ve modülün geri kalanı görevleri yükler ve kaydeder.
+1. *Gruntfile.js* için aşağıdaki kodu ekleyin. `initConfig`İşlevi her bir paket için seçenekleri ayarlar ve modülün geri kalanı görevleri yükler ve kaydeder.
 
    ```javascript
    module.exports = function (grunt) {
@@ -162,7 +163,7 @@ Gryeniden Çalıştır, el ile çalıştırılabilecek veya Visual Studio 'daki 
     grunt.loadNpmTasks("grunt-contrib-clean");
     ```
 
-1. *Gruntfile.js*kaydedin. Dosya aşağıdaki ekran görüntüsüne benzer şekilde görünmelidir.
+1. *Gruntfile.js* kaydedin. Dosya aşağıdaki ekran görüntüsüne benzer şekilde görünmelidir.
 
     ![ilk gruntfile](using-grunt/_static/gruntfile-js-initial.png)
 
@@ -215,7 +216,7 @@ Gryeniden Çalıştır, el ile çalıştırılabilecek veya Visual Studio 'daki 
 
 1. `uglify`Aşağıdaki kodu kullanarak görevi ekleyin.
 
-    Görev, Temp dizininde bulunan *combined.js* dosyasını mini olarak büyütür ve standart adlandırma kuralı * \<file name\>.min.js*takip eden Wwwroot/lib içinde sonuç dosyasını oluşturur.
+    Görev, Temp dizininde bulunan *combined.js* dosyasını mini olarak büyütür ve standart adlandırma kuralı *\<file name\>.min.js* takip eden Wwwroot/lib içinde sonuç dosyasını oluşturur.
 
     ```javascript
     uglify: {
@@ -234,15 +235,15 @@ Gryeniden Çalıştır, el ile çalıştırılabilecek veya Visual Studio 'daki 
     grunt.loadNpmTasks('grunt-contrib-uglify');
     ```
 
-1. *Gruntfile.js*kaydedin. Dosya aşağıdaki örnekteki gibi görünmelidir.
+1. *Gruntfile.js* kaydedin. Dosya aşağıdaki örnekteki gibi görünmelidir.
 
     ![Tüm gryeniden dosya örneğini doldurun](using-grunt/_static/gruntfile-js-complete.png)
 
-1. **Görev çalıştırıcı Gezgini** görev listesinin `clean` , `concat` `jshint` ve görevlerini içerdiğine dikkat edin `uglify` . Her görevi sırayla çalıştırın ve **Çözüm Gezgini**sonuçları gözlemleyin. Her görev hatasız çalışmalıdır.
+1. **Görev çalıştırıcı Gezgini** görev listesinin `clean` , `concat` `jshint` ve görevlerini içerdiğine dikkat edin `uglify` . Her görevi sırayla çalıştırın ve **Çözüm Gezgini** sonuçları gözlemleyin. Her görev hatasız çalışmalıdır.
 
     ![görev çalıştırıcı Gezgini her görevi çalıştır](using-grunt/_static/task-runner-explorer-run-each-task.png)
 
-    Concat görevi yeni bir *combined.js* dosyası oluşturur ve bunu Temp dizinine koyar. `jshint`Görev yalnızca çalışır ve çıkış üretmez. `uglify`Görev yeni bir *combined.min.js* dosyası oluşturur ve bunu *Wwwroot/lib*'e koyar. Tamamlandığında, çözüm aşağıdaki ekran görüntüsüne benzer şekilde görünmelidir:
+    Concat görevi yeni bir *combined.js* dosyası oluşturur ve bunu Temp dizinine koyar. `jshint`Görev yalnızca çalışır ve çıkış üretmez. `uglify`Görev yeni bir *combined.min.js* dosyası oluşturur ve bunu *Wwwroot/lib* 'e koyar. Tamamlandığında, çözüm aşağıdaki ekran görüntüsüne benzer şekilde görünmelidir:
 
     ![tüm görevlerden sonra Çözüm Gezgini](using-grunt/_static/solution-explorer-after-all-tasks.png)
 
@@ -284,7 +285,7 @@ Görev çalıştırıcı Gezgini ' nde gözcü görevine sağ tıklayın ve bağ
 
 ## <a name="binding-to-visual-studio-events"></a>Visual Studio olaylarına bağlama
 
-Visual Studio 'da her çalıştığınızda görevlerinizi el ile başlatmak istemediğiniz müddetçe, derleme, **Temizleme**ve **proje açık** olayları **sonrasında** **derlemeden önce**görevleri bağlayın.
+Visual Studio 'da her çalıştığınızda görevlerinizi el ile başlatmak istemediğiniz müddetçe, derleme, **Temizleme** ve **proje açık** olayları **sonrasında** **derlemeden önce** görevleri bağlayın.
 
 `watch`Visual Studio her açıldığında çalışacak şekilde bağlayın. Görev çalıştırıcı Gezgini ' nde, izle görevine sağ tıklayın ve bağlam menüsünden **bağlamalar**  >  **projesi aç** ' ı seçin.
 

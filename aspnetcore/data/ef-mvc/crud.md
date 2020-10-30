@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 02/04/2019
 ms.topic: tutorial
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/crud
-ms.openlocfilehash: c17461f8d1d43335230a967a4b62943c055c06b9
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 043fe513f370cf63637733b66ca195e7887faab0
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629216"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054300"
 ---
 # <a name="tutorial-implement-crud-functionality---aspnet-mvc-with-ef-core"></a>Öğretici: EF Core ile CRUD Işlevselliği uygulama-ASP.NET MVC
 
@@ -41,7 +42,7 @@ Bu öğreticide şunları yaptınız:
 > * Silme sayfasını Güncelleştir
 > * Veritabanı bağlantılarını kapat
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * [EF Core ve ASP.NET Core MVC ile çalışmaya başlama](intro.md)
 
@@ -49,7 +50,7 @@ Bu öğreticide şunları yaptınız:
 
 Bu özellik bir koleksiyon içerdiğinden, öğrenciler dizin sayfasına yönelik scafkatlama kodu `Enrollments` özelliği kalmadı. **Ayrıntılar** sayfasında, koleksiyonun IÇERIĞINI bir HTML tablosunda görüntüleyeceksiniz.
 
-*Controllers/StudentsController. cs*dosyasında, Ayrıntılar görünümü için eylem yöntemi `SingleOrDefaultAsync` tek bir varlığı almak için yöntemini kullanır `Student` . Çağıran kodu ekleyin `Include` . `ThenInclude`ve `AsNoTracking` aşağıdaki vurgulanmış kodda gösterildiği gibi yöntemleri.
+*Controllers/StudentsController. cs* dosyasında, Ayrıntılar görünümü için eylem yöntemi `SingleOrDefaultAsync` tek bir varlığı almak için yöntemini kullanır `Student` . Çağıran kodu ekleyin `Include` . `ThenInclude`ve `AsNoTracking` aşağıdaki vurgulanmış kodda gösterildiği gibi yöntemleri.
 
 [!code-csharp[](intro/samples/cu/Controllers/StudentsController.cs?name=snippet_Details&highlight=8-12)]
 
@@ -59,7 +60,7 @@ Bu özellik bir koleksiyon içerdiğinden, öğrenciler dizin sayfasına yöneli
 
 ### <a name="route-data"></a>Veri yönlendirme
 
-Yöntemine geçirilen anahtar değeri `Details` *Rota verilerinden*gelir. Rota verileri, model cildin URL 'nin bir kesiminde bulduğu veriler olur. Örneğin, varsayılan yol denetleyiciyi, eylemi ve kimlik segmentlerini belirtir:
+Yöntemine geçirilen anahtar değeri `Details` *Rota verilerinden* gelir. Rota verileri, model cildin URL 'nin bir kesiminde bulduğu veriler olur. Örneğin, varsayılan yol denetleyiciyi, eylemi ve kimlik segmentlerini belirtir:
 
 [!code-csharp[](intro/samples/cu/Startup.cs?name=snippet_Route&highlight=5)]
 
@@ -103,7 +104,7 @@ Etiket Yardımcıları hakkında daha fazla bilgi için bkz <xref:mvc/views/tag-
 
 ### <a name="add-enrollments-to-the-details-view"></a>Ayrıntılar görünümüne kayıtları ekleyin
 
-*Görünümleri/öğrencileri/details. cshtml*dosyasını açın. Her alan `DisplayNameFor` `DisplayFor` , aşağıdaki örnekte gösterildiği gibi, ve yardımcıları kullanılarak görüntülenir:
+*Görünümleri/öğrencileri/details. cshtml* dosyasını açın. Her alan `DisplayNameFor` `DisplayFor` , aşağıdaki örnekte gösterildiği gibi, ve yardımcıları kullanılarak görüntülenir:
 
 [!code-cshtml[](intro/samples/cu/Views/Students/Details.cshtml?range=13-18&highlight=2,5)]
 
@@ -121,7 +122,7 @@ Uygulamayı çalıştırın, **öğrenciler** sekmesini seçin ve bir öğrenci 
 
 ## <a name="update-the-create-page"></a>Oluştur sayfasını Güncelleştir
 
-*StudentsController.cs*' de, HttpPost `Create` yöntemini bir try-catch bloğu ekleyerek ve öznitelikten ID 'yi kaldırarak değiştirin `Bind` .
+*StudentsController.cs* ' de, HttpPost `Create` yöntemini bir try-catch bloğu ekleyerek ve öznitelikten ID 'yi kaldırarak değiştirin `Bind` .
 
 [!code-csharp[](intro/samples/cu/Controllers/StudentsController.cs?name=snippet_Create&highlight=4,6-7,14-21)]
 
@@ -129,7 +130,7 @@ Bu kod, ASP.NET Core MVC model Ciltçi tarafından oluşturulan öğrenci varlı
 
 KIMLIĞI, `ID` `Bind` satır eklendiğinde SQL Server otomatik olarak ayarlanacak birincil anahtar değeri olduğundan, bu öznitelikten kaldırdınız. Kullanıcı girişi, KIMLIK değerini ayarladı.
 
-`Bind`Özniteliği dışında, try-catch bloğu, scafkatlanmış kodda yapmış olduğunuz tek değişikdir. ' Den türetilen bir özel durum, `DbUpdateException` değişiklikler kaydedilirken yakalanmışsa, genel bir hata iletisi görüntülenir. `DbUpdateException` Bazen bir programlama hatası yerine uygulamanın harici bir şeyi neden olduğundan, kullanıcının yeniden denemek önerilir. Bu örnekte uygulanmamış olsa da, bir üretim kalitesi uygulaması özel durumu günlüğe kaydeder. Daha fazla bilgi için bkz. Izleme ve telemetri bölümünde **Öngörüler Için günlük** [(Azure Ile gerçek bulut uygulamaları oluşturma)](/aspnet/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/monitoring-and-telemetry).
+`Bind`Özniteliği dışında, try-catch bloğu, scafkatlanmış kodda yapmış olduğunuz tek değişikdir. ' Den türetilen bir özel durum, `DbUpdateException` değişiklikler kaydedilirken yakalanmışsa, genel bir hata iletisi görüntülenir. `DbUpdateException` Bazen bir programlama hatası yerine uygulamanın harici bir şeyi neden olduğundan, kullanıcının yeniden denemek önerilir. Bu örnekte uygulanmamış olsa da, bir üretim kalitesi uygulaması özel durumu günlüğe kaydeder. Daha fazla bilgi için bkz. Izleme ve telemetri bölümünde **Öngörüler Için günlük** bölümü [(Azure Ile Real-World bulut uygulamaları oluşturma)](/aspnet/aspnet/overview/developing-apps-with-windows-azure/building-real-world-cloud-apps-with-windows-azure/monitoring-and-telemetry).
 
 `ValidateAntiForgeryToken`Öznitelik, siteler arası istek sahteciliği (CSRF) saldırılarını önlemeye yardımcı olur. Belirteç, [Formtaghelper](xref:mvc/views/working-with-forms#the-form-tag-helper) tarafından otomatik olarak görünüme eklenir ve form kullanıcı tarafından gönderildiğinde dahil edilir. Belirteç özniteliği tarafından onaylanır `ValidateAntiForgeryToken` . Daha fazla bilgi için bkz. <xref:security/anti-request-forgery>.
 
@@ -164,7 +165,7 @@ Birçok geliştirici tarafından tercih edilen aşırı nakletmeyi önlemenin al
 
 *Views/öğrenciler/Create. cshtml* içindeki kod her bir `label` `input` `span` alan için, ve (doğrulama iletileri için) etiket yardımcıları kullanır.
 
-Uygulamayı çalıştırın, **öğrenciler** sekmesini seçin ve **Yeni oluştur**' a tıklayın.
+Uygulamayı çalıştırın, **öğrenciler** sekmesini seçin ve **Yeni oluştur** ' a tıklayın.
 
 Ad ve tarih girin. Tarayıcınız bunu yapmanızı sağlar, geçersiz bir tarih girmeyi deneyin. (Bazı tarayıcılar bir tarih seçici kullanmanıza zorlar.) Hata iletisini görmek için **Oluştur** ' a tıklayın.
 
@@ -178,7 +179,7 @@ Tarihi geçerli bir değer olarak değiştirin ve yeni öğrencinin **Dizin** sa
 
 ## <a name="update-the-edit-page"></a>Düzenleme sayfasını Güncelleştir
 
-*StudentController.cs*' de, HttpGet `Edit` Yöntemi (özniteliği olmayan), `HttpPost` `SingleOrDefaultAsync` yönteminde gördüğünüz gibi seçili öğrenci varlığını almak için yöntemini kullanır `Details` . Bu yöntemi değiştirmeniz gerekmez.
+*StudentController.cs* ' de, HttpGet `Edit` Yöntemi (özniteliği olmayan), `HttpPost` `SingleOrDefaultAsync` yönteminde gördüğünüz gibi seçili öğrenci varlığını almak için yöntemini kullanır `Details` . Bu yöntemi değiştirmeniz gerekmez.
 
 ### <a name="recommended-httppost-edit-code-read-and-update"></a>Önerilen HttpPost düzenleme kodu: okuma ve güncelleştirme
 
@@ -234,11 +235,11 @@ Uygulamayı çalıştırın, **öğrenciler** sekmesini seçin ve köprü **Düz
 
 ![Öğrenciler düzenleme sayfası](crud/_static/student-edit.png)
 
-Bazı verileri değiştirin ve **Kaydet**' e tıklayın. **Dizin** sayfası açılır ve değiştirilen verileri görürsünüz.
+Bazı verileri değiştirin ve **Kaydet** ' e tıklayın. **Dizin** sayfası açılır ve değiştirilen verileri görürsünüz.
 
 ## <a name="update-the-delete-page"></a>Silme sayfasını Güncelleştir
 
-*StudentController.cs*' de, HttpGet yönteminin şablon kodu, `Delete` `SingleOrDefaultAsync` Ayrıntılar ve düzenleme yöntemlerinde gördüğünüz gibi seçili öğrenci varlığını almak için yöntemini kullanır. Ancak, çağrı başarısız olursa özel bir hata iletisi uygulamak için `SaveChanges` Bu yönteme ve buna karşılık gelen görünüme bazı işlevler eklersiniz.
+*StudentController.cs* ' de, HttpGet yönteminin şablon kodu, `Delete` `SingleOrDefaultAsync` Ayrıntılar ve düzenleme yöntemlerinde gördüğünüz gibi seçili öğrenci varlığını almak için yöntemini kullanır. Ancak, çağrı başarısız olursa özel bir hata iletisi uygulamak için `SaveChanges` Bu yönteme ve buna karşılık gelen görünüme bazı işlevler eklersiniz.
 
 Güncelleştirme ve oluşturma işlemleri için gördüğünüz gibi silme işlemleri için iki eylem yöntemi gerekir. GET isteğine yanıt olarak çağrılan yöntem, kullanıcıya silme işlemini onaylama veya iptal etme şansı veren bir görünüm görüntüler. Kullanıcı onu onayladığında, bir POST isteği oluşturulur. Bu durumda, HttpPost `Delete` yöntemi çağrılır ve bu yöntem aslında silme işlemini gerçekleştirir.
 
@@ -268,7 +269,7 @@ Varlığın de silinmesi gereken ilgili veriler varsa, veritabanında Cascade si
 
 ### <a name="update-the-delete-view"></a>Silme görünümünü Güncelleştir
 
-*Görünümler/öğrenci/delete. cshtml*' de, aşağıdaki örnekte gösterildiği gibi, H2 başlığı ve H3 başlığı arasına bir hata iletisi ekleyin:
+*Görünümler/öğrenci/delete. cshtml* ' de, aşağıdaki örnekte gösterildiği gibi, H2 başlığı ve H3 başlığı arasına bir hata iletisi ekleyin:
 
 [!code-cshtml[](intro/samples/cu/Views/Students/Delete.cshtml?range=7-9&highlight=2)]
 
@@ -276,13 +277,13 @@ Uygulamayı çalıştırın, **öğrenciler** sekmesini seçin ve bir **Delete**
 
 ![Onay sayfasını Sil](crud/_static/student-delete.png)
 
-**Sil**'e tıklayın. Dizin sayfası, silinen öğrenci olmadan görüntülenir. (Eşzamanlılık öğreticisinde işlem içinde kodu işleme hatası hakkında bir örnek görürsünüz.)
+**Sil** 'e tıklayın. Dizin sayfası, silinen öğrenci olmadan görüntülenir. (Eşzamanlılık öğreticisinde işlem içinde kodu işleme hatası hakkında bir örnek görürsünüz.)
 
 ## <a name="close-database-connections"></a>Veritabanı bağlantılarını kapat
 
 Bir veritabanı bağlantısının tuttuğu kaynakları boşaltmak için bağlam örneği, bununla işiniz bittiğinde en kısa sürede atılmalıdır. ASP.NET Core yerleşik [bağımlılık ekleme](../../fundamentals/dependency-injection.md) , sizin için bu görevi gerçekleştirir.
 
-*Startup.cs*' de, sınıfı ASP.NET Core dı kapsayıcısında sağlamak Için [adddbcontext genişletme yöntemini](https://github.com/aspnet/EntityFrameworkCore/blob/03bcb5122e3f577a84498545fcf130ba79a3d987/src/Microsoft.EntityFrameworkCore/EntityFrameworkServiceCollectionExtensions.cs) çağırın `DbContext` . Bu yöntem, hizmet ömrünü `Scoped` Varsayılan olarak olarak ayarlar. `Scoped` , Web isteği ömrü boyunca saatle çakışan bağlam nesnesi yaşam süresi anlamına gelir ve `Dispose` Bu yöntem Web isteğinin sonunda otomatik olarak çağrılır.
+*Startup.cs* ' de, sınıfı ASP.NET Core dı kapsayıcısında sağlamak Için [adddbcontext genişletme yöntemini](https://github.com/aspnet/EntityFrameworkCore/blob/03bcb5122e3f577a84498545fcf130ba79a3d987/src/Microsoft.EntityFrameworkCore/EntityFrameworkServiceCollectionExtensions.cs) çağırın `DbContext` . Bu yöntem, hizmet ömrünü `Scoped` Varsayılan olarak olarak ayarlar. `Scoped` , Web isteği ömrü boyunca saatle çakışan bağlam nesnesi yaşam süresi anlamına gelir ve `Dispose` Bu yöntem Web isteğinin sonunda otomatik olarak çağrılır.
 
 ## <a name="handle-transactions"></a>İşlemleri işle
 

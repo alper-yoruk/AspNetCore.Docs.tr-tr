@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/libman/libman-cli
-ms.openlocfilehash: 8b883269a82a1a6e55bf04bd40bfcbab28ae1fb3
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: dad9136439b61ad98523061d181fe44d3bf1273d
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625706"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054755"
 ---
 # <a name="use-the-libman-cli-with-aspnet-core"></a>ASP.NET Core ile LibMan CLı kullanın
 
@@ -30,7 +31,7 @@ ms.locfileid: "88625706"
 
 [Libman](xref:client-side/libman/index) CLI, .NET Core 'un desteklendiği her yerde desteklenen platformlar arası bir araçtır.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * [!INCLUDE [2.1-SDK](../../includes/2.1-SDK.md)]
 
@@ -118,11 +119,11 @@ Komutu için aşağıdaki seçenekler kullanılabilir `libman init` :
 
 * `-d|--default-destination <PATH>`
 
-  Geçerli klasöre göreli bir yol. Kitaplık dosyaları, `destination` * üzerindelibman.js*bir kitaplık için tanımlı bir özellik yoksa bu konuma yüklenir. `<PATH>`Değer, `defaultDestination` *üzerindelibman.js*özelliğine yazılır.
+  Geçerli klasöre göreli bir yol. Kitaplık dosyaları, `destination` *üzerindelibman.js* bir kitaplık için tanımlı bir özellik yoksa bu konuma yüklenir. `<PATH>`Değer, `defaultDestination` *üzerindelibman.js* özelliğine yazılır.
 
 * `-p|--default-provider <PROVIDER>`
 
-  Belirli bir kitaplık için hiçbir sağlayıcı tanımlanmamışsa kullanılacak sağlayıcı. `<PROVIDER>`Değer, `defaultProvider` *üzerindelibman.js*özelliğine yazılır. `<PROVIDER>`Aşağıdaki değerlerden biriyle değiştirin:
+  Belirli bir kitaplık için hiçbir sağlayıcı tanımlanmamışsa kullanılacak sağlayıcı. `<PROVIDER>`Değer, `defaultProvider` *üzerindelibman.js* özelliğine yazılır. `<PROVIDER>`Aşağıdaki değerlerden biriyle değiştirin:
 
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
@@ -178,7 +179,7 @@ Komutu için aşağıdaki seçenekler kullanılabilir `libman install` :
 
 * `-d|--destination <PATH>`
 
-  Kitaplığın yükleneceği konum. Belirtilmemişse, varsayılan konum kullanılır. `defaultDestination` *Üzerindelibman.js*hiçbir özellik belirtilmemişse, bu seçenek gereklidir.
+  Kitaplığın yükleneceği konum. Belirtilmemişse, varsayılan konum kullanılır. `defaultDestination` *Üzerindelibman.js* hiçbir özellik belirtilmemişse, bu seçenek gereklidir.
 
 * `--files <FILE>`
 
@@ -190,7 +191,7 @@ Komutu için aşağıdaki seçenekler kullanılabilir `libman install` :
   
   [!INCLUDE [LibMan provider names](../../includes/libman-cli/provider-names.md)]
 
-  Belirtilmemişse, `defaultProvider` *libman.json* özelliği kullanılır. `defaultProvider` *Üzerindelibman.js*hiçbir özellik belirtilmemişse, bu seçenek gereklidir.
+  Belirtilmemişse, `defaultProvider` *libman.json* özelliği kullanılır. `defaultProvider` *Üzerindelibman.js* hiçbir özellik belirtilmemişse, bu seçenek gereklidir.
 
 [!INCLUDE [standard-cli-options](../../includes/libman-cli/standard-cli-options.md)]
 
@@ -272,7 +273,7 @@ Varsayılan hedefi kabul ettikten sonra, dosyadaki *libman.js* aşağıdakine be
 
 ## <a name="restore-library-files"></a>Kitaplık dosyalarını geri yükleme
 
-`libman restore`Komut, *üzerindelibman.js*tanımlı kitaplık dosyalarını yüklüyor. Aşağıdaki kurallar geçerlidir:
+`libman restore`Komut, *üzerindelibman.js* tanımlı kitaplık dosyalarını yüklüyor. Aşağıdaki kurallar geçerlidir:
 
 * Proje kökünde *libman.js* dosya varsa, bir hata döndürülür.
 * Bir kitaplık bir sağlayıcıyı belirtiyorsa, `defaultProvider` *libman.json* özelliği yok sayılır.
@@ -293,7 +294,7 @@ Komutu için aşağıdaki seçenekler kullanılabilir `libman restore` :
 
 ### <a name="examples"></a>Örnekler
 
-*Üzerindelibman.js*tanımlanan kitaplık dosyalarını geri yüklemek için:
+*Üzerindelibman.js* tanımlanan kitaplık dosyalarını geri yüklemek için:
 
 ```console
 libman restore
@@ -328,8 +329,8 @@ libman clean
 
 `libman uninstall`Komut:
 
-* Belirtilen kitaplıkla ilişkili tüm dosyaları, *libman.jsüzerindeki*hedefle siler.
-* *Üzerindelibman.js*ilişkili kitaplık yapılandırmasını kaldırır.
+* Belirtilen kitaplıkla ilişkili tüm dosyaları, *libman.jsüzerindeki* hedefle siler.
+* *Üzerindelibman.js* ilişkili kitaplık yapılandırmasını kaldırır.
 
 Şu durumlarda bir hata oluşur:
 

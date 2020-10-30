@@ -5,6 +5,7 @@ description: Alanların ilgili işlevleri bir grup içinde ayrı bir ad alanı (
 ms.author: riande
 ms.date: 03/21/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/areas
-ms.openlocfilehash: 033b57f5406d0344347b2f787fa2b2fbb2da8604
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 42eec406813adce4d7edbc1ab66a1f689c4aca0e
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630256"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053533"
 ---
 # <a name="areas-in-aspnet-core"></a>ASP.NET Core bölgeler
 
@@ -62,7 +63,7 @@ Alanları, denetleyicileri ve görünümleri kullanan tipik bir ASP.NET Core Web
 
 ### <a name="area-folder-structure"></a>Alan klasörü yapısı
 
-İki mantıksal grup, *ürün* ve *hizmet*içeren bir uygulamayı düşünün. Alan kullanarak, klasör yapısı aşağıdakine benzer olacaktır:
+İki mantıksal grup, *ürün* ve *hizmet* içeren bir uygulamayı düşünün. Alan kullanarak, klasör yapısı aşağıdakine benzer olacaktır:
 
 * Proje adı
   * Alanlar
@@ -148,7 +149,7 @@ Uygulama kök klasörü, ASP.NET Core şablonları ile oluşturulan Web uygulama
 
 ### <a name="_viewimportscshtml"></a>_ViewImports. cshtml
 
- */Views/_ViewImports. cshtml*, MVC için */pages/_ViewImports. cshtml* for Pages, Razor alanlardaki görünümlere aktarılmaz. Tüm görünümlere görünüm içeri aktarmaları sağlamak için aşağıdaki yaklaşımlardan birini kullanın:
+ */Views/_ViewImports. cshtml* , MVC için */pages/_ViewImports. cshtml* for Pages, Razor alanlardaki görünümlere aktarılmaz. Tüm görünümlere görünüm içeri aktarmaları sağlamak için aşağıdaki yaklaşımlardan birini kullanın:
 
 * [Uygulama kök klasörüne](#arf) *_ViewImports. cshtml* ekleyin. Uygulama kök klasöründeki bir *_ViewImports. cshtml* uygulamadaki tüm görünümlere uygulanır.
 * *_ViewImports. cshtml* dosyasını, alanlarda uygun görünüm klasörüne kopyalayın.
@@ -264,7 +265,7 @@ Alanları, denetleyicileri ve görünümleri kullanan tipik bir ASP.NET Core Web
 
 ### <a name="area-folder-structure"></a>Alan klasörü yapısı
 
-İki mantıksal grup, *ürün* ve *hizmet*içeren bir uygulamayı düşünün. Alan kullanarak, klasör yapısı aşağıdakine benzer olacaktır:
+İki mantıksal grup, *ürün* ve *hizmet* içeren bir uygulamayı düşünün. Alan kullanarak, klasör yapısı aşağıdakine benzer olacaktır:
 
 * Proje adı
   * Alanlar

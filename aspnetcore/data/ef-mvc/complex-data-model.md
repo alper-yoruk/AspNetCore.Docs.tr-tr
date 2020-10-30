@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/complex-data-model
-ms.openlocfilehash: 07f5e910236f78105c039e462ab51d6e62b09439
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: cee9e9eb4c5435f3f63f7d1d04f131d88effe9f6
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626941"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054482"
 ---
 # <a name="tutorial-create-a-complex-data-model---aspnet-mvc-with-ef-core"></a>Öğretici: EF Core ile karmaşık veri modeli oluşturma-ASP.NET MVC
 
@@ -45,11 +46,11 @@ Bu öğreticide şunları yaptınız:
 > * Kayıt varlığını değiştirme
 > * Veritabanı bağlamını güncelleştirme
 > * Test verileriyle çekirdek veritabanı
-> * Geçiş Ekle
+> * Geçiş ekleme
 > * Bağlantı dizesini değiştirme
 > * Veritabanını güncelleştirme
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * [EF Core geçişleri kullanma](migrations.md)
 
@@ -61,7 +62,7 @@ Bu bölümde, biçimlendirme, doğrulama ve veritabanı eşleme kurallarını be
 
 Öğrenci kayıt tarihleri için tüm Web sayfaları Şu anda tarihle birlikte görüntülenir, ancak bu alan için tüm önemli bir tarih olması gerekir. Veri ek açıklaması özniteliklerini kullanarak, verileri gösteren her görünümde görüntü biçimini giderecek bir kod değişikliği yapabilirsiniz. Bunun nasıl yapılacağını gösteren bir örnek görmek için, sınıfındaki özelliğine bir özniteliği ekleyeceksiniz `EnrollmentDate` `Student` .
 
-*Modeller/öğrenci. cs*' de, `using` ad alanı için bir ifade ekleyin `System.ComponentModel.DataAnnotations` ve `DataType` `DisplayFormat` `EnrollmentDate` Aşağıdaki örnekte gösterildiği gibi özelliğe ve özniteliklerini ekleyin:
+*Modeller/öğrenci. cs* ' de, `using` ad alanı için bir ifade ekleyin `System.ComponentModel.DataAnnotations` ve `DataType` `DisplayFormat` `EnrollmentDate` Aşağıdaki örnekte gösterildiği gibi özelliğe ve özniteliklerini ekleyin:
 
 [!code-csharp[](intro/samples/cu/Models/Student.cs?name=snippet_DataType&highlight=3,12-13)]
 
@@ -117,11 +118,11 @@ dotnet ef migrations add MaxLengthOnNames
 dotnet ef database update
 ```
 
-`migrations add`Bu komut, iki sütun için en fazla uzunluğu daha kısa hale yaptığından, veri kaybının gerçekleşebileceğini uyarır.  Geçişler * \<timeStamp> _MaxLengthOnNames. cs*adlı bir dosya oluşturur. Bu dosya, `Up` geçerli veri modeliyle eşleşecek şekilde veritabanını güncelleştirecek yöntemdeki kodu içerir. `database update`Komut bu kodu çalıştırdı.
+`migrations add`Bu komut, iki sütun için en fazla uzunluğu daha kısa hale yaptığından, veri kaybının gerçekleşebileceğini uyarır.  Geçişler *\<timeStamp> _MaxLengthOnNames. cs* adlı bir dosya oluşturur. Bu dosya, `Up` geçerli veri modeliyle eşleşecek şekilde veritabanını güncelleştirecek yöntemdeki kodu içerir. `database update`Komut bu kodu çalıştırdı.
 
 Geçiş dosyası adının ön eki olan zaman damgası, geçişleri sıralamak için Entity Framework tarafından kullanılır. Update-database komutunu çalıştırmadan önce birden çok geçiş oluşturabilirsiniz ve sonra tüm geçişler oluşturuldukları sırada uygulanır.
 
-Uygulamayı çalıştırın, **öğrenciler** sekmesini seçin, **Yeni oluştur**' a tıklayın ve 50 karakterden daha uzun bir ad girmeyi deneyin. Uygulamanın bunu yapmasını önleyebilmelidir. 
+Uygulamayı çalıştırın, **öğrenciler** sekmesini seçin, **Yeni oluştur** ' a tıklayın ve 50 karakterden daha uzun bir ad girmeyi deneyin. Uygulamanın bunu yapmasını önleyebilmelidir. 
 
 ### <a name="the-column-attribute"></a>Column özniteliği
 
@@ -158,7 +159,7 @@ dotnet ef database update
 
 ![Öğrenci varlığı](complex-data-model/_static/student-entity.png)
 
-*Modeller/öğrenci. cs*' de, daha önce eklediğiniz kodu aşağıdaki kodla değiştirin. Değişiklikler vurgulanır.
+*Modeller/öğrenci. cs* ' de, daha önce eklediğiniz kodu aşağıdaki kodla değiştirin. Değişiklikler vurgulanır.
 
 [!code-csharp[](intro/samples/cu/Models/Student.cs?name=snippet_BeforeInheritance&highlight=11,13,15,18,22,24-31)]
 
@@ -187,7 +188,7 @@ public string LastName { get; set; }
 
 ![Eğitmen varlığı](complex-data-model/_static/instructor-entity.png)
 
-Şablon kodunu aşağıdaki kodla değiştirerek *modeller/eğitmen. cs*oluşturun:
+Şablon kodunu aşağıdaki kodla değiştirerek *modeller/eğitmen. cs* oluşturun:
 
 [!code-csharp[](intro/samples/cu/Models/Instructor.cs?name=snippet_BeforeInheritance)]
 
@@ -250,7 +251,7 @@ Eğitmen varlığı, null yapılabilir bir `OfficeAssignment` gezinti özelliği
 
 ![Kurs varlığı](complex-data-model/_static/course-entity.png)
 
-*Modeller/kurs. cs*' de, daha önce eklediğiniz kodu aşağıdaki kodla değiştirin. Değişiklikler vurgulanır.
+*Modeller/kurs. cs* ' de, daha önce eklediğiniz kodu aşağıdaki kodla değiştirin. Değişiklikler vurgulanır.
 
 [!code-csharp[](intro/samples/cu/Models/Course.cs?name=snippet_Final&highlight=2,10,13,16,19,21,23)]
 
@@ -345,7 +346,7 @@ public ICollection<Course> Courses { get; set; }
 
 ![Kayıt varlığı](complex-data-model/_static/enrollment-entity.png)
 
-*Modeller/kayıt. cs*' de, daha önce eklediğiniz kodu aşağıdaki kodla değiştirin:
+*Modeller/kayıt. cs* ' de, daha önce eklediğiniz kodu aşağıdaki kodla değiştirin:
 
 [!code-csharp[](intro/samples/cu/Models/Enrollment.cs?name=snippet_Final&highlight=1-2,16)]
 
@@ -373,7 +374,7 @@ public Student Student { get; set; }
 
 Aşağıdaki çizimde bu ilişkilerin bir varlık diyagramında nasıl göründüğünü gösterilmektedir. (Bu diyagram EF 6. x için Entity Framework güç araçları kullanılarak oluşturulmuştur; diyagramı oluşturmak öğreticinin bir parçası değildir, burada yalnızca bir çizim olarak kullanılmaktadır.)
 
-![Öğrenci-çok fazla ilişki](complex-data-model/_static/student-course.png)
+![Çok fazla ilişki Student-Course](complex-data-model/_static/student-course.png)
 
 Her ilişki satırında 1 bir sonda ve diğeri de bir yıldız işareti (*) bulunur. Bu, bire çok ilişkiyi belirtir.
 
@@ -442,7 +443,7 @@ Bire çok ilişki çizgilerinin yanı sıra (1 ' den fazla \* ), eğitmen ve Off
 
 İlk öğreticide gördüğünüz gibi, bu kodun çoğu yalnızca yeni varlık nesneleri oluşturur ve test için gereken şekilde, örnek verileri özelliklere yükler. Çoktan çoğa ilişkilerin nasıl işlendiği hakkında dikkat edin: kod, `Enrollments` ve varlık kümelerinde varlıklar oluşturarak ilişkiler oluşturur `CourseAssignment` .
 
-## <a name="add-a-migration"></a>Geçiş Ekle
+## <a name="add-a-migration"></a>Geçiş ekleme
 
 Değişikliklerinizi kaydedin ve projeyi derleyin. Ardından proje klasöründe komut penceresini açın ve `migrations add` komutu girin (henüz Update-database komutunu yapmayın):
 
@@ -481,7 +482,7 @@ Değişikliklerinizi kaydedin ve projeyi derleyin.
 
 ## <a name="change-the-connection-string"></a>Bağlantı dizesini değiştirme
 
-Artık `DbInitializer` sınıfta yeni varlıklar için tohum verilerini boş bir veritabanına ekleyen yeni kodunuz var. EF 'in yeni boş bir veritabanı oluşturmasını sağlamak için, *appsettings.jsüzerindeki* bağlantı dizesinde veritabanının adını ContosoUniversity3 veya kullandığınız bilgisayarda kullanmadığınız başka bir adla değiştirin.
+Artık `DbInitializer` sınıfta yeni varlıklar için tohum verilerini boş bir veritabanına ekleyen yeni kodunuz var. EF 'in yeni boş bir veritabanı oluşturmasını sağlamak için, içindeki bağlantı dizesindeki veritabanının adını *appsettings.json* ContosoUniversity3 veya kullandığınız bilgisayarda kullanmadığınız başka bir ad olarak değiştirin.
 
 ```json
 {
@@ -490,7 +491,7 @@ Artık `DbInitializer` sınıfta yeni varlıklar için tohum verilerini boş bir
   },
 ```
 
-*appsettings.js*değişikliklerinizi kaydedin.
+Değişiklerinizi kaydedin *appsettings.json* .
 
 > [!NOTE]
 > Veritabanı adını değiştirmeye alternatif olarak, veritabanını silebilirsiniz. **SQL Server Nesne Gezgini** (ssox) veya `database drop` CLI komutunu kullanın:

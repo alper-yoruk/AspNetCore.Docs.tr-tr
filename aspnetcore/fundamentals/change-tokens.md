@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 10/07/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/change-tokens
-ms.openlocfilehash: 891cce975c5852b0192fd7ff22b21060d1dac8ac
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: f20d44c7767b284f727ce19a46224dae0cf6a5e1
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634923"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053780"
 ---
 # <a name="detect-changes-with-change-tokens-in-aspnet-core"></a>ASP.NET Core değişiklik belirteçleriyle değişiklikleri Algıla
 
@@ -66,7 +67,7 @@ Değişiklik belirteçleri, nesnelerde yapılan değişiklikleri izlemek için A
 
 ## <a name="monitor-for-configuration-changes"></a>Yapılandırma değişikliklerini izle
 
-ASP.NET Core şablonlar, uygulama yapılandırma ayarlarını yüklemek için varsayılan olarak [JSON yapılandırma dosyalarını](xref:fundamentals/configuration/index#json-configuration-provider) (*appsettings.js*, *appsettings.Development.jsaçık*ve *appsettings.Production.jsüzerinde*) kullanır.
+Varsayılan olarak ASP.NET Core şablonlar, uygulama yapılandırma ayarlarını yüklemek için [JSON yapılandırma dosyalarını](xref:fundamentals/configuration/index#json-configuration-provider) ( *appsettings.json* , *appsettings.Development.jsaçık* ve *appsettings.Production.js* ) kullanır.
 
 Bu dosyalar, üzerinde bir parametre kabul eden [Addjsonfile (IController, String, Boolean, Boolean)](xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*) genişletme yöntemi kullanılarak yapılandırılır <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder> `reloadOnChange` . `reloadOnChange` yapılandırmanın dosya değişikliklerinde yeniden yüklenmesi gerekip gerekmediğini gösterir. Bu ayar <xref:Microsoft.Extensions.Hosting.Host> kolaylık yönteminde görünür <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> :
 
@@ -84,7 +85,7 @@ Varsayılan olarak, `IFileMonitor` <xref:Microsoft.Extensions.FileProviders.Phys
 
 Bir yapılandırma dosyası `FileSystemWatcher` , tek bir yapılandırma dosyası değişikliği için birden çok belirteç geri çağırmaları tetikleyebilir. Özel kodun, birden fazla belirteç geri çağırma işlemi tetiklendiğinde yalnızca bir kez çalıştığından emin olmak için, örnek uygulama dosya karmalarını denetler. Örnek, SHA1 dosya karma kullanır. Bir yeniden deneme, üstel geri dönme ile uygulanır. Dosya kilitlemesi, geçici olarak bir dosyada yeni bir karma işlem yapılmasını önleyen dosya kilitleme gerçekleşebileceğinden, yeniden deneme vardır.
 
-*Yardımcı programlar/yardımcı programlar. cs*:
+*Yardımcı programlar/yardımcı programlar. cs* :
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Utilities/Utilities.cs?name=snippet1)]
 
@@ -114,7 +115,7 @@ Uygulama çalıştığı sürece bu sistem çalışır ve Kullanıcı tarafında
 
 Örnek bir arabirim oluşturur `IConfigurationMonitor` .
 
-*Uzantılar/ConfigurationMonitor. cs*:
+*Uzantılar/ConfigurationMonitor. cs* :
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Extensions/ConfigurationMonitor.cs?name=snippet1)]
 
@@ -140,7 +141,7 @@ Bir örnek `ConfigurationMonitor` , içinde bir hizmet olarak kaydedilir `Startu
 
 Dizin sayfası, yapılandırma izleme üzerinde Kullanıcı denetimi sağlar. Örneği `IConfigurationMonitor` öğesine eklenir `IndexModel` .
 
-*Pages/Index. cshtml. cs*:
+*Pages/Index. cshtml. cs* :
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Pages/Index.cshtml.cs?name=snippet1)]
 
@@ -152,7 +153,7 @@ Yapılandırma İzleyicisi ( `_monitor` ), izlemeyi etkinleştirmek veya devre d
 
 Kullanıcı arabirimindeki düğmeler izlemeyi etkinleştirir ve devre dışı bırakır.
 
-*Sayfa/dizin. cshtml*:
+*Sayfa/dizin. cshtml* :
 
 [!code-cshtml[](change-tokens/samples/3.x/SampleApp/Pages/Index.cshtml?name=snippet_Buttons)]
 
@@ -169,11 +170,11 @@ Bir dosya önbelleğe alma senaryosunda değişiklik belirteçlerini kullanmak �
 * Dosya içeriğini döndürür.
 * Bir dosya kilidinin geçici olarak bir dosya okumayı engellediği durumları kapsamak için üstel geri ile yeniden deneme algoritması uygulayın.
 
-*Yardımcı programlar/yardımcı programlar. cs*:
+*Yardımcı programlar/yardımcı programlar. cs* :
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Utilities/Utilities.cs?name=snippet2)]
 
-`FileService`Önbelleğe alınmış dosya aramalarını işlemek için oluşturulur. `GetFileContent`Hizmetin Yöntem çağrısı, bellek içi önbellekten dosya içeriğini almaya çalışır ve bunu çağırana (*Services/FileService. cs*) döndürebilir.
+`FileService`Önbelleğe alınmış dosya aramalarını işlemek için oluşturulur. `GetFileContent`Hizmetin Yöntem çağrısı, bellek içi önbellekten dosya içeriğini almaya çalışır ve bunu çağırana ( *Services/FileService. cs* ) döndürebilir.
 
 Önbellek anahtarı kullanılarak önbelleğe alınmış içerik bulunamazsa, aşağıdaki eylemler gerçekleştirilir:
 
@@ -193,7 +194,7 @@ Aşağıdaki örnekte, dosyalar uygulamanın [içerik kökünde](xref:fundamenta
 
 Sayfa modeli, hizmeti kullanarak dosyanın içeriğini yükler.
 
-Dizin sayfasının `OnGet` yönteminde (*Pages/Index. cshtml. cs*):
+Dizin sayfasının `OnGet` yönteminde ( *Pages/Index. cshtml. cs* ):
 
 [!code-csharp[](change-tokens/samples/3.x/SampleApp/Pages/Index.cshtml.cs?name=snippet3)]
 
@@ -264,7 +265,7 @@ Değişiklik belirteçleri, nesnelerde yapılan değişiklikleri izlemek için A
 
 ## <a name="monitor-for-configuration-changes"></a>Yapılandırma değişikliklerini izle
 
-ASP.NET Core şablonlar, uygulama yapılandırma ayarlarını yüklemek için varsayılan olarak [JSON yapılandırma dosyalarını](xref:fundamentals/configuration/index#json-configuration-provider) (*appsettings.js*, *appsettings.Development.jsaçık*ve *appsettings.Production.jsüzerinde*) kullanır.
+Varsayılan olarak ASP.NET Core şablonlar, uygulama yapılandırma ayarlarını yüklemek için [JSON yapılandırma dosyalarını](xref:fundamentals/configuration/index#json-configuration-provider) ( *appsettings.json* , *appsettings.Development.jsaçık* ve *appsettings.Production.js* ) kullanır.
 
 Bu dosyalar, üzerinde bir parametre kabul eden [Addjsonfile (IController, String, Boolean, Boolean)](xref:Microsoft.Extensions.Configuration.JsonConfigurationExtensions.AddJsonFile*) genişletme yöntemi kullanılarak yapılandırılır <xref:Microsoft.Extensions.Configuration.ConfigurationBuilder> `reloadOnChange` . `reloadOnChange` yapılandırmanın dosya değişikliklerinde yeniden yüklenmesi gerekip gerekmediğini gösterir. Bu ayar <xref:Microsoft.AspNetCore.WebHost> kolaylık yönteminde görünür <xref:Microsoft.AspNetCore.WebHost.CreateDefaultBuilder*> :
 
@@ -282,7 +283,7 @@ Varsayılan olarak, `IFileMonitor` <xref:Microsoft.Extensions.FileProviders.Phys
 
 Bir yapılandırma dosyası `FileSystemWatcher` , tek bir yapılandırma dosyası değişikliği için birden çok belirteç geri çağırmaları tetikleyebilir. Özel kodun, birden fazla belirteç geri çağırma işlemi tetiklendiğinde yalnızca bir kez çalıştığından emin olmak için, örnek uygulama dosya karmalarını denetler. Örnek, SHA1 dosya karma kullanır. Bir yeniden deneme, üstel geri dönme ile uygulanır. Dosya kilitlemesi, geçici olarak bir dosyada yeni bir karma işlem yapılmasını önleyen dosya kilitleme gerçekleşebileceğinden, yeniden deneme vardır.
 
-*Yardımcı programlar/yardımcı programlar. cs*:
+*Yardımcı programlar/yardımcı programlar. cs* :
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Utilities/Utilities.cs?name=snippet1)]
 
@@ -312,7 +313,7 @@ Uygulama çalıştığı sürece bu sistem çalışır ve Kullanıcı tarafında
 
 Örnek bir arabirim oluşturur `IConfigurationMonitor` .
 
-*Uzantılar/ConfigurationMonitor. cs*:
+*Uzantılar/ConfigurationMonitor. cs* :
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Extensions/ConfigurationMonitor.cs?name=snippet1)]
 
@@ -338,7 +339,7 @@ Bir örnek `ConfigurationMonitor` , içinde bir hizmet olarak kaydedilir `Startu
 
 Dizin sayfası, yapılandırma izleme üzerinde Kullanıcı denetimi sağlar. Örneği `IConfigurationMonitor` öğesine eklenir `IndexModel` .
 
-*Pages/Index. cshtml. cs*:
+*Pages/Index. cshtml. cs* :
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Pages/Index.cshtml.cs?name=snippet1)]
 
@@ -350,7 +351,7 @@ Yapılandırma İzleyicisi ( `_monitor` ), izlemeyi etkinleştirmek veya devre d
 
 Kullanıcı arabirimindeki düğmeler izlemeyi etkinleştirir ve devre dışı bırakır.
 
-*Sayfa/dizin. cshtml*:
+*Sayfa/dizin. cshtml* :
 
 [!code-cshtml[](change-tokens/samples/2.x/SampleApp/Pages/Index.cshtml?name=snippet_Buttons)]
 
@@ -367,11 +368,11 @@ Bir dosya önbelleğe alma senaryosunda değişiklik belirteçlerini kullanmak �
 * Dosya içeriğini döndürür.
 * Bir dosya kilidinin geçici olarak bir dosya okumayı engellediği durumları kapsamak için üstel geri ile yeniden deneme algoritması uygulayın.
 
-*Yardımcı programlar/yardımcı programlar. cs*:
+*Yardımcı programlar/yardımcı programlar. cs* :
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Utilities/Utilities.cs?name=snippet2)]
 
-`FileService`Önbelleğe alınmış dosya aramalarını işlemek için oluşturulur. `GetFileContent`Hizmetin Yöntem çağrısı, bellek içi önbellekten dosya içeriğini almaya çalışır ve bunu çağırana (*Services/FileService. cs*) döndürebilir.
+`FileService`Önbelleğe alınmış dosya aramalarını işlemek için oluşturulur. `GetFileContent`Hizmetin Yöntem çağrısı, bellek içi önbellekten dosya içeriğini almaya çalışır ve bunu çağırana ( *Services/FileService. cs* ) döndürebilir.
 
 Önbellek anahtarı kullanılarak önbelleğe alınmış içerik bulunamazsa, aşağıdaki eylemler gerçekleştirilir:
 
@@ -391,7 +392,7 @@ Aşağıdaki örnekte, dosyalar uygulamanın [içerik kökünde](xref:fundamenta
 
 Sayfa modeli, hizmeti kullanarak dosyanın içeriğini yükler.
 
-Dizin sayfasının `OnGet` yönteminde (*Pages/Index. cshtml. cs*):
+Dizin sayfasının `OnGet` yönteminde ( *Pages/Index. cshtml. cs* ):
 
 [!code-csharp[](change-tokens/samples/2.x/SampleApp/Pages/Index.cshtml.cs?name=snippet3)]
 

@@ -5,6 +5,7 @@ description: RazorSayfaların 2. bölümü ve Entity Framework öğretici serisi
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/crud
-ms.openlocfilehash: 083214c01dbec6c6f44d6b82f5b514a029e57cbe
-ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
+ms.openlocfilehash: c5b9be64ea30cce7a3178bfbb244ef893e9639d2
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91606734"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053871"
 ---
 # <a name="part-2-no-locrazor-pages-with-ef-core-in-aspnet-core---crud"></a>Bölüm 2, Razor ASP.NET Core EF Core olan sayfalar-CRUD
 
@@ -136,7 +137,7 @@ Kullanmak `StudentVM` yerine, oluşturma sayfası kullanımını gerektirir `Stu
 
 ## <a name="update-the-edit-page"></a>Düzenleme sayfasını Güncelleştir
 
-*Sayfalar/öğrenciler/Edit. cshtml. cs*' de, `OnGetAsync` ve `OnPostAsync` yöntemlerini aşağıdaki kodla değiştirin.
+*Sayfalar/öğrenciler/Edit. cshtml. cs* ' de, `OnGetAsync` ve `OnPostAsync` yöntemlerini aşağıdaki kodla değiştirin.
 
 [!code-csharp[Main](intro/samples/cu30/Pages/Students/Edit.cshtml.cs?name=snippet_OnGetPost)]
 
@@ -183,7 +184,7 @@ Yukarıdaki kod, isteğe bağlı parametresini `saveChangesError` `OnGetAsync` Y
 * Veritabanı özel durumu yakalandı.
 * Sayfaları Sil `OnGetAsync` yöntemi ile çağırılır `saveChangesError=true` .
 
-*Sayfalara/öğrencilerine/delete. cshtml*öğesine bir hata iletisi ekleyin:
+*Sayfalara/öğrencilerine/delete. cshtml* öğesine bir hata iletisi ekleyin:
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Students/Delete.cshtml?highlight=10)]
 
@@ -299,7 +300,7 @@ Kullanılması `StudentVM` Için [Create. cshtml](https://github.com/dotnet/AspN
 
 ## <a name="update-the-edit-page"></a>Düzenleme sayfasını Güncelleştir
 
-*Sayfalar/öğrenciler/Edit. cshtml. cs*' de, `OnGetAsync` ve `OnPostAsync` yöntemlerini aşağıdaki kodla değiştirin.
+*Sayfalar/öğrenciler/Edit. cshtml. cs* ' de, `OnGetAsync` ve `OnPostAsync` yöntemlerini aşağıdaki kodla değiştirin.
 
 [!code-csharp[Main](intro/samples/cu30/Pages/Students/Edit.cshtml.cs?name=snippet_OnGetPost)]
 
@@ -346,7 +347,7 @@ Yukarıdaki kod, isteğe bağlı parametresini `saveChangesError` `OnGetAsync` Y
 * Veritabanı özel durumu yakalandı.
 * Sayfaları Sil `OnGetAsync` yöntemi ile çağırılır `saveChangesError=true` .
 
-Silme sayfasına bir hata iletisi ekleyin Razor (*Sayfalar/öğrenciler/delete. cshtml*):
+Silme sayfasına bir hata iletisi ekleyin Razor ( *Sayfalar/öğrenciler/delete. cshtml* ):
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Students/Delete.cshtml?highlight=10)]
 
@@ -404,7 +405,7 @@ Ancak `Include` başka varlıklar istiyorsanız `FindAsync` artık uygun değild
 
 ## <a name="customize-the-details-page"></a>Ayrıntılar sayfasını özelleştirme
 
-Sayfaya gidin `Pages/Students` . **Düzenle**, **Ayrıntılar**ve **Sil** bağlantıları, *Sayfalar/öğrenciler/Index. cshtml* dosyasındaki [tutturucu etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) tarafından oluşturulur.
+Sayfaya gidin `Pages/Students` . **Düzenle** , **Ayrıntılar** ve **Sil** bağlantıları, *Sayfalar/öğrenciler/Index. cshtml* dosyasındaki [tutturucu etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) tarafından oluşturulur.
 
 [!code-cshtml[](intro/samples/cu21/Pages/Students/Index1.cshtml?name=snippet)]
 
@@ -438,7 +439,7 @@ Uygulamayı çalıştırın, Ayrıntılar bağlantısına tıklayın ve URL 'nin
 
 ### <a name="display-related-enrollments-on-the-details-page"></a>Ayrıntılar sayfasında ilgili kayıtları görüntüleme
 
-*Sayfaları/öğrencileri/ayrıntıları. cshtml*'yi açın. Kayıtlar listesini göstermek için aşağıdaki vurgulanmış kodu ekleyin:
+*Sayfaları/öğrencileri/ayrıntıları. cshtml* 'yi açın. Kayıtlar listesini göstermek için aşağıdaki vurgulanmış kodu ekleyin:
 
 [!code-cshtml[](intro/samples/cu21/Pages/Students/Details.cshtml?highlight=32-53)]
 

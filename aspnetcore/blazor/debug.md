@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/26/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: b8dd272d673e84b45a39272531385ebfd1d06175
-ms.sourcegitcommit: daa9ccf580df531254da9dce8593441ac963c674
+ms.openlocfilehash: 669ebaf6dcd05561340aefda4a75b6fe1068d207
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/09/2020
-ms.locfileid: "91900992"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056198"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Hata ayıklama ASP.NET Core Blazor WebAssembly
 
@@ -44,12 +45,12 @@ Kullanılabilir senaryolar şunlardır:
 * *Yereller* penceresinde, yerel değişkenlerin değerlerini gözlemleyin.
 * JavaScript ve .NET arasındaki çağrı zincirleri dahil olmak üzere çağrı yığınına bakın.
 
-Şimdilik şunları *yapamazsınız*:
+Şimdilik şunları *yapamazsınız* :
 
 * İşlenmemiş özel durumların üzerine bölün.
 * Hata ayıklama proxy 'si çalışmadan önce uygulama başlatılırken kesme noktaları isabet edin. Bu, `Program.Main` ( `Program.cs` ) ve uygulamadan istenen ilk sayfa tarafından yüklenen bileşen [ `OnInitialized{Async}` yöntemlerinde](xref:blazor/components/lifecycle#component-initialization-methods) kesme noktaları içerir.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 Hata ayıklama aşağıdaki tarayıcılardan birini gerektirir:
 
@@ -91,7 +92,7 @@ Blazor WebAssemblyVisual Studio 'da bir uygulamada hata ayıklamak için:
 1. Uygulamayı hata ayıklayıcıda çalıştırmak için <kbd>F5</kbd> tuşuna basın.
 
    > [!NOTE]
-   > **Hata ayıklama olmadan Başlat** (<kbd>CTRL</kbd> + <kbd>F5</kbd>) desteklenmez. Uygulama hata ayıklama yapılandırmasında çalıştırıldığında, hata ayıklama ek yükü her zaman küçük bir performans azalmasıyla sonuçlanır.
+   > **Hata ayıklama olmadan Başlat** ( <kbd>CTRL</kbd> + <kbd>F5</kbd>) desteklenmez. Uygulama hata ayıklama yapılandırmasında çalıştırıldığında, hata ayıklama ek yükü her zaman küçük bir performans azalmasıyla sonuçlanır.
 
 1. `*Client*`Uygulamada, içindeki satırda bir kesme noktası ayarlayın `currentCount++;` `Pages/Counter.razor` .
 1. Tarayıcıda `Counter` sayfasına gidin ve kesme noktasına ulaşmak için **bana tıklayın** düğmesini seçin.
@@ -167,16 +168,16 @@ Uygulamalar için özel bir uygulama temel yolu kullanma hakkında daha fazla bi
 
    Bildirimi alırsanız:
 
-   * [Visual Studio Code uzantısının](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) en son C# ' nin yüklü olduğunu doğrulayın. Yüklü uzantıları denetlemek için, menü çubuğundan **uzantıları görüntüle**' yi açın  >  **Extensions** veya **etkinlik** kenar çubuğunda **Uzantılar** simgesini seçin.
-   * JavaScript önizlemesi hata ayıklamanın etkinleştirildiğini doğrulayın. Menü çubuğundan (**Dosya**  >  **tercihleri**  >  **ayarları**) ayarları açın. Anahtar sözcüklerini kullanarak arama yapın `debug preview` . Arama sonuçlarında, **hata ayıkla > JavaScript: önizleme kullan** onay kutusunun işaretli olduğundan emin olun. Önizleme hata ayıklamayı etkinleştirme seçeneği yoksa, VS Code en son sürümüne yükseltin veya [JavaScript hata ayıklayıcı uzantısı](https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly) 'nı (vs Code 1,46 veya önceki bir sürümü) yüklersiniz.
+   * [Visual Studio Code uzantısının](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp) en son C# ' nin yüklü olduğunu doğrulayın. Yüklü uzantıları denetlemek için, menü çubuğundan **uzantıları görüntüle** ' yi açın  >  **Extensions** veya **etkinlik** kenar çubuğunda **Uzantılar** simgesini seçin.
+   * JavaScript önizlemesi hata ayıklamanın etkinleştirildiğini doğrulayın. Menü çubuğundan ( **Dosya**  >  **tercihleri**  >  **ayarları** ) ayarları açın. Anahtar sözcüklerini kullanarak arama yapın `debug preview` . Arama sonuçlarında, **hata ayıkla > JavaScript: önizleme kullan** onay kutusunun işaretli olduğundan emin olun. Önizleme hata ayıklamayı etkinleştirme seçeneği yoksa, VS Code en son sürümüne yükseltin veya [JavaScript hata ayıklayıcı uzantısı](https://marketplace.visualstudio.com/items?itemName=ms-vscode.js-debug-nightly) 'nı (vs Code 1,46 veya önceki bir sürümü) yüklersiniz.
    * Pencereyi yeniden yükleyin.
 
 1. <kbd>F5</kbd> klavye kısayolunu veya menü öğesini kullanarak hata ayıklamayı başlatın.
 
    > [!NOTE]
-   > **Hata ayıklama olmadan Başlat** (<kbd>CTRL</kbd> + <kbd>F5</kbd>) desteklenmez. Uygulama hata ayıklama yapılandırmasında çalıştırıldığında, hata ayıklama ek yükü her zaman küçük bir performans azalmasıyla sonuçlanır.
+   > **Hata ayıklama olmadan Başlat** ( <kbd>CTRL</kbd> + <kbd>F5</kbd>) desteklenmez. Uygulama hata ayıklama yapılandırmasında çalıştırıldığında, hata ayıklama ek yükü her zaman küçük bir performans azalmasıyla sonuçlanır.
 
-1. İstendiğinde, hata ayıklamayı başlatmak için ** Blazor WebAssembly Hata Ayıkla** seçeneğini belirleyin.
+1. İstendiğinde, hata ayıklamayı başlatmak için **Blazor WebAssembly Hata Ayıkla** seçeneğini belirleyin.
 
 1. Tek başına uygulama başlatılır ve bir hata ayıklama tarayıcısı açılır.
 
@@ -191,7 +192,7 @@ Uygulamalar için özel bir uygulama temel yolu kullanma hakkında daha fazla bi
 
 1. Barındırılan Blazor WebAssembly uygulamanın çözüm klasörünü vs Code açın.
 
-1. Proje için bir başlatma yapılandırma kümesi yoksa, aşağıdaki bildirim görüntülenir. **Evet**’i seçin.
+1. Proje için bir başlatma yapılandırma kümesi yoksa, aşağıdaki bildirim görüntülenir. **Evet** ’i seçin.
 
    > ' {APPLICATION NAME} ' içindeki derleme ve hata ayıklama için gerekli varlıklar eksik. Bunları ekleyin mi?
 
@@ -280,7 +281,7 @@ Mac için Visual Studio bir uygulamada hata ayıklamak için Blazor WebAssembly 
 1. <kbd>&#8984;</kbd> + Uygulamayı hata ayıklayıcıda çalıştırmak için&#8984;<kbd>&#8617;</kbd> tuşuna basın.
 
    > [!NOTE]
-   > **Hata ayıklama olmadan Başlat** (<kbd>&#8997;</kbd> + <kbd>&#8984;</kbd> + <kbd>&#8617;</kbd>) desteklenmez. Uygulama hata ayıklama yapılandırmasında çalıştırıldığında, hata ayıklama ek yükü her zaman küçük bir performans azalmasıyla sonuçlanır.
+   > **Hata ayıklama olmadan Başlat** ( <kbd>&#8997;</kbd> + <kbd>&#8984;</kbd> + <kbd>&#8617;</kbd>) desteklenmez. Uygulama hata ayıklama yapılandırmasında çalıştırıldığında, hata ayıklama ek yükü her zaman küçük bir performans azalmasıyla sonuçlanır.
 
    > [!IMPORTANT]
    > Google Chrome veya Microsoft Edge, hata ayıklama oturumunun seçili tarayıcısı olmalıdır.
@@ -344,7 +345,7 @@ Hatalar halinde çalıştırıyorsanız, aşağıdaki ipuçları yardımcı olab
 
 * **Hata ayıklayıcı** sekmesinde, tarayıcınızda Geliştirici Araçları ' nı açın. Konsolunda, `localStorage.clear()` tüm kesme noktalarını kaldırmak için yürütün.
 * ASP.NET Core HTTPS geliştirme sertifikasını yüklediğinizden ve güvendiğini doğrulayın. Daha fazla bilgi için bkz. <xref:security/enforcing-ssl#troubleshoot-certificate-problems>.
-* Visual Studio, **ASP.NET için JavaScript hata ayıklamasını etkinleştir (Chrome, Edge ve IE)** seçeneği için **araç**  >  **seçeneklerinde**  >  **hata ayıklama**  >  **genel**' de gereklidir. Bu, Visual Studio için varsayılan ayardır. Hata ayıklama çalışmıyorsa, seçeneğinin seçili olduğundan emin olun.
+* Visual Studio, **ASP.NET için JavaScript hata ayıklamasını etkinleştir (Chrome, Edge ve IE)** seçeneği için **araç**  >  **seçeneklerinde**  >  **hata ayıklama**  >  **genel** ' de gereklidir. Bu, Visual Studio için varsayılan ayardır. Hata ayıklama çalışmıyorsa, seçeneğinin seçili olduğundan emin olun.
 * Ortamınız bir HTTP proxy kullanıyorsa, `localhost` proxy atlama ayarlarına dahil edildiğinden emin olun. Bu, `NO_PROXY` ortam değişkeni şu şekilde ayarlanarak yapılabilir:
   * `launchSettings.json`Projenin dosyası.
   * Kullanıcı veya sistem ortamı değişkenleri düzeyinde tüm uygulamalara uygulanır. Bir ortam değişkeni kullanırken, değişikliğin etkili olması için Visual Studio 'Yu yeniden başlatın.

@@ -7,6 +7,7 @@ ms.author: stevesa
 ms.custom: mvc
 ms.date: 02/06/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: spa/angular
-ms.openlocfilehash: c4afddca1d0c2428371c90013f5dbd5c1afb5108
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 2fff0d60b71bbbab9347dbe74cad023264247388
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628787"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054573"
 ---
 # <a name="use-the-angular-project-template-with-aspnet-core"></a>Angular proje şablonunu ASP.NET Core ile kullanma
 
@@ -65,7 +66,7 @@ Now listening on: http://localhost:<port>
 Bu URL 'yi bir tarayıcıda gezin.
 
 > [!WARNING]
-> Uygulama arka planda angular CLı sunucusunun bir örneğini başlatır. Aşağıdakine benzer bir ileti günlüğe kaydedilir: *ng Live Development Server, localhost: &lt; otherport &gt; , için bir tarayıcı açın, http://localhost:&lt diğer bir deyişle, diğer bağlantı &gt; / noktası*. Bu iletiyi yoksay &mdash; birleşik ASP.NET Core ve angular CLI uygulamasının URL 'si **değildir** .
+> Uygulama arka planda angular CLı sunucusunun bir örneğini başlatır. Aşağıdakine benzer bir ileti günlüğe kaydedilir: *ng Live Development Server, localhost: &lt; otherport &gt; , için bir tarayıcı açın, http://localhost:&lt diğer bir deyişle, diğer bağlantı &gt; / noktası* . Bu iletiyi yoksay &mdash; birleşik ASP.NET Core ve angular CLI uygulamasının URL 'si **değildir** .
 
 ---
 
@@ -91,7 +92,7 @@ cd ClientApp
 
 ## <a name="install-npm-packages"></a>NPM paketlerini yükler
 
-Üçüncü taraf NPM paketlerini yüklemek için *clientapp* alt dizininde bir komut istemi kullanın. Örnek:
+Üçüncü taraf NPM paketlerini yüklemek için *clientapp* alt dizininde bir komut istemi kullanın. Örneğin:
 
 ```console
 cd ClientApp

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/20/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/request-features
-ms.openlocfilehash: 879b775ba2998ee803708ebf231b5fcd363b811c
-ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
+ms.openlocfilehash: d906474b0fd291cc4a68390f390b2bf538e21eff
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92326436"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053715"
 ---
 # <a name="request-features-in-aspnet-core"></a>ASP.NET Core içindeki istek özellikleri
 
 [Steve Smith](https://ardalis.com/) tarafından
 
-`HttpContext`Uygulamaların ve ara yazılımların istekleri işlemek için kullandığı API 'nin, *özellik arabirimleri*olarak adlandırılan bir soyutlama katmanı vardır. Her özellik arabirimi tarafından sunulan işlevlerin ayrıntılı bir alt kümesini sağlar `HttpContext` . Bu arabirimler, isteğin tamamı yeniden uygulanması gerekmeden işlenirken, sunucu veya ara yazılım tarafından eklenebilir, değiştirilebilir, sarmalanabilir, değiştirilebilir veya kaldırılabilir `HttpContext` . Ayrıca, test sırasında işlevselliği sahte bir şekilde kullanılabilir.
+`HttpContext`Uygulamaların ve ara yazılımların istekleri işlemek için kullandığı API 'nin, *özellik arabirimleri* olarak adlandırılan bir soyutlama katmanı vardır. Her özellik arabirimi tarafından sunulan işlevlerin ayrıntılı bir alt kümesini sağlar `HttpContext` . Bu arabirimler, isteğin tamamı yeniden uygulanması gerekmeden işlenirken, sunucu veya ara yazılım tarafından eklenebilir, değiştirilebilir, sarmalanabilir, değiştirilebilir veya kaldırılabilir `HttpContext` . Ayrıca, test sırasında işlevselliği sahte bir şekilde kullanılabilir.
 
 ## <a name="feature-collections"></a>Özellik koleksiyonları
 

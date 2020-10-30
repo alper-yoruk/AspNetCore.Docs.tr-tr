@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/concurrency
-ms.openlocfilehash: 629baeba545142e156e1a51107b470c932dae3cb
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d476c836e8d497ca1291992dda38da1fc9f59ed2
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629281"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054378"
 ---
 # <a name="tutorial-handle-concurrency---aspnet-mvc-with-ef-core"></a>Öğretici: EF Core eşzamanlılık-ASP.NET MVC 'yi Işleme
 
@@ -48,7 +49,7 @@ Bu öğreticide şunları yaptınız:
 > * Silme sayfasını Güncelleştir
 > * Güncelleştirme ayrıntıları ve görünüm oluşturma
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * [İlgili verileri güncelleştirme](update-related-data.md)
 
@@ -68,7 +69,7 @@ Kötümser eşzamanlılık yerine iyimser eşzamanlılık yapılır. İyimser e�
 
 ![Bütçeyi 0 olarak değiştirme](concurrency/_static/change-budget.png)
 
-Kemal, **Kaydet**' i tıklamadan önce, John aynı sayfayı ziyaret ettiğinde başlangıç tarihi alanını 9/1/2007 ' den 9/1/2013 ' e değiştirir.
+Kemal, **Kaydet** ' i tıklamadan önce, John aynı sayfayı ziyaret ettiğinde başlangıç tarihi alanını 9/1/2007 ' den 9/1/2013 ' e değiştirir.
 
 ![Başlangıç tarihini 2013 olarak değiştirme](concurrency/_static/change-date.png)
 
@@ -110,13 +111,13 @@ Bu öğreticinin geri kalanında, `rowversion` Departman varlığına bir izleme
 
 ## <a name="add-a-tracking-property"></a>İzleme özelliği Ekle
 
-*Modeller/departman. cs*' de, rowversion adlı bir izleme özelliği ekleyin:
+*Modeller/departman. cs* ' de, rowversion adlı bir izleme özelliği ekleyin:
 
 [!code-csharp[](intro/samples/cu/Models/Department.cs?name=snippet_Final&highlight=26,27)]
 
 `Timestamp`Özniteliği, bu sütunun veritabanına gönderilen WHERE yan tümcesine ve DELETE komutlarına dahil edileceğini belirtir. Özniteliği, `Timestamp` önceki SQL Server sürümleri SQL `timestamp` veri türü tarafından değiştirilmeden önce kullanıldığından, bu öznitelik çağrılır `rowversion` . İçin .NET türü `rowversion` bir bayt dizisidir.
 
-Fluent API kullanmayı tercih ediyorsanız, `IsConcurrencyToken` Aşağıdaki örnekte gösterildiği gibi, izleme özelliğini belirtmek için yöntemini ( *Data/SchoolContext. cs*) kullanabilirsiniz:
+Fluent API kullanmayı tercih ediyorsanız, `IsConcurrencyToken` Aşağıdaki örnekte gösterildiği gibi, izleme özelliğini belirtmek için yöntemini ( *Data/SchoolContext. cs* ) kullanabilirsiniz:
 
 ```csharp
 modelBuilder.Entity<Department>()
@@ -187,7 +188,7 @@ Kod, kullanıcının düzenleme sayfasına girdikten farklı veritabanı değerl
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?range=174-178)]
 
-Son olarak, kod `RowVersion` değerini `departmentToUpdate` veritabanından alınan yeni değere ayarlar. Bu yeni `RowVersion` değer, düzenleme sayfası yeniden görüntülenirken gizli alanda saklanır ve Kullanıcı **Kaydet**' i tıkladığında, düzenleme sayfasının yeniden görüntülenmesinden bu yana yalnızca gerçekleşen eşzamanlılık hataları yakalanacaktır.
+Son olarak, kod `RowVersion` değerini `departmentToUpdate` veritabanından alınan yeni değere ayarlar. Bu yeni `RowVersion` değer, düzenleme sayfası yeniden görüntülenirken gizli alanda saklanır ve Kullanıcı **Kaydet** ' i tıkladığında, düzenleme sayfasının yeniden görüntülenmesinden bu yana yalnızca gerçekleşen eşzamanlılık hataları yakalanacaktır.
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?range=199-200)]
 
@@ -195,7 +196,7 @@ Son olarak, kod `RowVersion` değerini `departmentToUpdate` veritabanından alı
 
 ## <a name="update-edit-view"></a>Güncelleştirme düzenleme görünümü
 
-*Görünümler/departmanlar/Düzenle. cshtml*'de aşağıdaki değişiklikleri yapın:
+*Görünümler/departmanlar/Düzenle. cshtml* 'de aşağıdaki değişiklikleri yapın:
 
 * Özellik değerini kaydetmek için `RowVersion` , özelliği için gizli alandan hemen sonra bir gizli alan ekleyin `DepartmentID` .
 
@@ -205,9 +206,9 @@ Son olarak, kod `RowVersion` değerini `departmentToUpdate` veritabanından alı
 
 ## <a name="test-concurrency-conflicts"></a>Eşzamanlılık çakışmalarını test et
 
-Uygulamayı çalıştırın ve departmanlar dizini sayfasına gidin. Ingilizce departman için **düzenleme** köprüsüne sağ tıklayın ve **Yeni sekmesinde aç**' ı seçin ve ardından İngilizce bölümünün **düzenleme** Köprüsü ' ne tıklayın. İki tarayıcı sekmesi artık aynı bilgileri görüntüler.
+Uygulamayı çalıştırın ve departmanlar dizini sayfasına gidin. Ingilizce departman için **düzenleme** köprüsüne sağ tıklayın ve **Yeni sekmesinde aç** ' ı seçin ve ardından İngilizce bölümünün **düzenleme** Köprüsü ' ne tıklayın. İki tarayıcı sekmesi artık aynı bilgileri görüntüler.
 
-İlk tarayıcı sekmesinde bir alanı değiştirin ve **Kaydet**' e tıklayın.
+İlk tarayıcı sekmesinde bir alanı değiştirin ve **Kaydet** ' e tıklayın.
 
 ![Bölüm Düzenle sayfa 1 değişiklikten sonra](concurrency/_static/edit-after-change-1.png)
 
@@ -217,7 +218,7 @@ Tarayıcı, değiştirilen değeri olan dizin sayfasını gösterir.
 
 ![Değişiklik sonrasında bölüm düzenleme sayfası 2](concurrency/_static/edit-after-change-2.png)
 
-**Kaydet**’e tıklayın. Bir hata iletisi görürsünüz:
+**Kaydet** ’e tıklayın. Bir hata iletisi görürsünüz:
 
 ![Bölüm düzenleme sayfası hata iletisi](concurrency/_static/edit-error.png)
 
@@ -229,7 +230,7 @@ Silme sayfası için Entity Framework, başka birinin departmanı benzer bir şe
 
 ### <a name="update-the-delete-methods-in-the-departments-controller"></a>Departmanlar denetleyicisindeki silme yöntemlerini güncelleştirme
 
-*DepartmentsController.cs*' de, HttpGet `Delete` yöntemini aşağıdaki kodla değiştirin:
+*DepartmentsController.cs* ' de, HttpGet `Delete` yöntemini aşağıdaki kodla değiştirin:
 
 [!code-csharp[](intro/samples/cu/Controllers/DepartmentsController.cs?name=snippet_DeleteGet&highlight=1,10,14-17,21-29)]
 
@@ -259,7 +260,7 @@ Bir eşzamanlılık hatası yakalanmışsa, kod silme onayı sayfasını yeniden
 
 ### <a name="update-the-delete-view"></a>Silme görünümünü Güncelleştir
 
-*Views/departmanlar/delete. cshtml*içinde, scafkatkli kodunu, DepartmentID ve rowversion özellikleri için bir hata iletisi alanı ve gizli alanları ekleyen aşağıdaki kodla değiştirin. Değişiklikler vurgulanır.
+*Views/departmanlar/delete. cshtml* içinde, scafkatkli kodunu, DepartmentID ve rowversion özellikleri için bir hata iletisi alanı ve gizli alanları ekleyen aşağıdaki kodla değiştirin. Değişiklikler vurgulanır.
 
 [!code-cshtml[](intro/samples/cu/Views/Departments/Delete.cshtml?highlight=9,38,44,45,48)]
 
@@ -273,13 +274,13 @@ Bu, aşağıdaki değişiklikleri yapar:
 
 * Özelliği için gizli bir alan ekler `RowVersion` .
 
-Uygulamayı çalıştırın ve departmanlar dizini sayfasına gidin. Ingilizce departman için **Sil** köprüsünü sağ tıklayın ve **Yeni sekmede aç**' ı seçin ve ardından ilk sekmede İngilizce departman için **düzenleme** Köprüsü ' ne tıklayın.
+Uygulamayı çalıştırın ve departmanlar dizini sayfasına gidin. Ingilizce departman için **Sil** köprüsünü sağ tıklayın ve **Yeni sekmede aç** ' ı seçin ve ardından ilk sekmede İngilizce departman için **düzenleme** Köprüsü ' ne tıklayın.
 
-İlk pencerede, değerlerden birini değiştirin ve **Kaydet**' e tıklayın:
+İlk pencerede, değerlerden birini değiştirin ve **Kaydet** ' e tıklayın:
 
 ![Silmeden önce değişiklikten sonra departman düzenleme sayfası](concurrency/_static/edit-after-change-for-delete.png)
 
-İkinci sekmede **Sil**' e tıklayın. Eşzamanlılık hata iletisini görürsünüz ve departman değerleri şu anda veritabanında olan ile yenilenir.
+İkinci sekmede **Sil** ' e tıklayın. Eşzamanlılık hata iletisini görürsünüz ve departman değerleri şu anda veritabanında olan ile yenilenir.
 
 ![Eşzamanlılık hatası olan departman silme onayı sayfası](concurrency/_static/delete-error.png)
 

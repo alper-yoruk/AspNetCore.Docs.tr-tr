@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/19/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/index
-ms.openlocfilehash: f198cef0cf990dcc2806d3967130db64af47c1d0
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 6110f51eb5d5ee40d6ce5a5d49ddda3329d1f033
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627838"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055548"
 ---
 # <a name="aspnet-core-no-locblazor-authentication-and-authorization"></a>ASP.NET Core Blazor kimlik doğrulaması ve yetkilendirme
 
@@ -246,8 +247,8 @@ Bir kullanıcının kimliği doğrulandıktan sonra, kullanıcının neler yapab
 Erişim, genellikle aşağıdakileri yapıp verilmeksizin verilir veya reddedilir:
 
 * Bir kullanıcının kimliği doğrulanır (oturum açıldı).
-* Bir Kullanıcı bir *roldür*.
-* Bir kullanıcının *talebi*vardır.
+* Bir Kullanıcı bir *roldür* .
+* Bir kullanıcının *talebi* vardır.
 * Bir *ilke* karşılandı.
 
 Bu kavramların her biri, ASP.NET Core MVC veya Pages uygulamasındaki ile aynıdır Razor . ASP.NET Core güvenliği hakkında daha fazla bilgi için [ASP.NET Core güvenlik ve Identity ](xref:security/index)altındaki makalelere bakın.
@@ -321,7 +322,7 @@ Ne <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView.Roles> de <
 
 ### <a name="content-displayed-during-asynchronous-authentication"></a>Zaman uyumsuz kimlik doğrulaması sırasında görünen içerik
 
-Blazor kimlik doğrulaması durumunun *zaman uyumsuz*olarak belirlenmesine izin verir. Bu yaklaşım için birincil senaryo, Blazor WebAssembly kimlik doğrulaması için bir dış uç noktaya istek yapan uygulamalarda yer alan uygulamalardır.
+Blazor kimlik doğrulaması durumunun *zaman uyumsuz* olarak belirlenmesine izin verir. Bu yaklaşım için birincil senaryo, Blazor WebAssembly kimlik doğrulaması için bir dış uç noktaya istek yapan uygulamalarda yer alan uygulamalardır.
 
 Kimlik doğrulama devam ederken, <xref:Microsoft.AspNetCore.Components.Authorization.AuthorizeView> Varsayılan olarak içerik görüntülemez. Kimlik doğrulama sırasında içeriği göstermek için `<Authorizing>` etiketini kullanın:
 
@@ -476,7 +477,7 @@ Uygulama, yordamsal mantığın bir parçası olarak yetkilendirme kurallarını
 
 ## <a name="troubleshoot-errors"></a>Sorun giderme hataları
 
-Yaygın hatalar:
+Sık karşılaşılan hatalar:
 
 * **Yetkilendirme, türünde basamaklı bir parametre gerektirir `Task\<AuthenticationState>` . `CascadingAuthenticationState` Bunu sağlamak için kullanmayı düşünün.**
 

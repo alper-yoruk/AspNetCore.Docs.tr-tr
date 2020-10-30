@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/10/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/test
-ms.openlocfilehash: 572b9a293e2fd6f51431cd1de6ada737addf5efa
-ms.sourcegitcommit: dd0e87abf2bb50ee992d9185bb256ed79d48f545
+ms.openlocfilehash: cd4aee66fd6df6cc0ce520d8ca66e0a2cf130eff
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/21/2020
-ms.locfileid: "88746539"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054872"
 ---
 # <a name="test-components-in-aspnet-core-no-locblazor"></a>ASP.NET Core 'de test bileşenleri Blazor
 
@@ -41,7 +42,7 @@ Bir bileşeni test etmek için Blazor , test (kes) *altındaki bileşen* :
 
 Bileşenleri test etmek için iki yaygın yaklaşım Blazor , uçtan uca (e2e) test ve birim sınamalardır:
 
-* **Birim testi**: [birim testleri](/dotnet/core/testing/) şunları sağlayan bir birim testi kitaplığıyla yazılır:
+* **Birim testi** : [birim testleri](/dotnet/core/testing/) şunları sağlayan bir birim testi kitaplığıyla yazılır:
   * Bileşen işleme.
   * Bileşen çıkışının ve durumunun incelemesi.
   * Olay işleyicileri ve yaşam döngüsü yöntemlerinin tetiklenmesi.
@@ -49,7 +50,7 @@ Bileşenleri test etmek için iki yaygın yaklaşım Blazor , uçtan uca (e2e) t
 
   [bunbu](https://github.com/egil/bUnit) , bileşen birim testini sağlayan bir kitaplık örneğidir Razor .
 
-* **E2e**testi: Test Çalıştırıcısı Blazor , BIR tarayıcı örneğini kesme ve otomatikleştirir olarak içeren bir uygulamayı çalıştırır. Test aracı tarayıcı aracılığıyla göz atma ve bunlarla etkileşim kurma. [Selenium](https://github.com/SeleniumHQ/selenium) , uygulamalarla KULLANıLABILECEK bir e2e test çerçevesinin örneğidir Blazor .
+* **E2e** testi: Test Çalıştırıcısı Blazor , BIR tarayıcı örneğini kesme ve otomatikleştirir olarak içeren bir uygulamayı çalıştırır. Test aracı tarayıcı aracılığıyla göz atma ve bunlarla etkileşim kurma. [Selenium](https://github.com/SeleniumHQ/selenium) , uygulamalarla KULLANıLABILECEK bir e2e test çerçevesinin örneğidir Blazor .
 
 Birim testinde yalnızca Blazor bileşen ( Razor /c #) dahil edilir. Hizmetler ve JS birlikte çalışma gibi dış bağımlılıklar, moclanmış olmalıdır. E2E testinde, Blazor bileşeni ve tüm yardımcı altyapısı, CSS, js ve DOM ve tarayıcı API 'leri dahil olmak üzere testin bir parçasıdır.
 
@@ -63,12 +64,12 @@ E2E testi, genellikle zayıf test güvenilirliğini sağlayan birden çok işlem
 
 Aşağıdaki tabloda iki test yaklaşımının farkı özetlenmektedir.
 
-| Özellik                       | Birim testi                     | E2E testi                             |
+| Yetenek                       | Birim testi                     | E2E testi                             |
 | -------------------------------- | -------------------------------- | --------------------------------------- |
 | Test kapsamı                       | Blazor yalnızca bileşen ( Razor /c #) | BlazorRazorCSS/JS ile bileşen (/c #) |
 | Test yürütme süresi              | Mayacak                     | Saniye                                 |
-| Bileşen örneğine erişim | Evet                              | Hayır                                      |
-| Ortamla duyarlı     | Hayır                               | Evet                                     |
+| Bileşen örneğine erişim | Yes                              | Hayır                                      |
+| Ortamla duyarlı     | Hayır                               | Yes                                     |
 | Güvenilirlik                      | Daha güvenilir                    | Daha az güvenilir                           |
 
 ## <a name="choose-the-most-appropriate-test-approach"></a>En uygun test yaklaşımını seçin
@@ -142,11 +143,11 @@ public void CounterShouldIncrementWhenSelected()
 
 Testin her adımında aşağıdaki eylemler gerçekleşir:
 
-* *Düzenle*: `Counter` Bileşen, bunit ' i kullanılarak işlenir `TestContext` . KESILEN paragraf öğesi ( `<p>` ) bulunur ve öğesine atanır `paraElm` .
+* *Düzenle* : `Counter` Bileşen, bunit ' i kullanılarak işlenir `TestContext` . KESILEN paragraf öğesi ( `<p>` ) bulunur ve öğesine atanır `paraElm` .
 
-* *Sahne*: düğmenin öğesi ( `<button>` ) bulunur ve sonra öğesini çağırarak seçilir ve bu da `Click` sayacı artırmanız ve paragraf etiketinin () içeriğini güncelleştirmelidir `<p>` . Paragraf öğesi metin içeriği çağırarak elde edilir `TextContent` .
+* *Sahne* : düğmenin öğesi ( `<button>` ) bulunur ve sonra öğesini çağırarak seçilir ve bu da `Click` sayacı artırmanız ve paragraf etiketinin () içeriğini güncelleştirmelidir `<p>` . Paragraf öğesi metin içeriği çağırarak elde edilir `TextContent` .
 
-* *Assert*Onay: `MarkupMatches` metin içeriğinde, bir olan beklenen dizeyle eşleştiğini doğrulamak için çağrılır `Current count: 1` .
+* *Assert* Onay: `MarkupMatches` metin içeriğinde, bir olan beklenen dizeyle eşleştiğini doğrulamak için çağrılır `Current count: 1` .
 
 > [!NOTE]
 > `MarkupMatches`Onaylama yöntemi bir normal dize karşılaştırma onaylamadan farklıdır (örneğin, `Assert.Equal("Current count: 1", paraElmText);` ) `MarkupMatches` girişin anlam KARŞıLAŞTıRMASıNı ve beklenen HTML işaretlemesini gerçekleştirir. Anlamsal bir karşılaştırma, HTML semantiğinin farkındadır, yani çok önemli boşluk gibi şeyler yok sayılır. Bu, daha kararlı testlere neden olur. Daha fazla bilgi için bkz. [anlam HTML karşılaştırmasını özelleştirme](https://bunit.egilhansen.com/docs/verification/semantic-html-comparison).

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/23/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/social/index
-ms.openlocfilehash: da025cb8dced8ac8a6ecf559d4de7795c9797f71
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1f7c8cd0716f1ada3517add0d37a09e419f38774
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634286"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053312"
 ---
 # <a name="facebook-google-and-external-provider-authentication-in-aspnet-core"></a>ASP.NET Core Facebook, Google ve dış sağlayıcı kimlik doğrulaması
 
@@ -44,11 +45,11 @@ Sosyal oturumların trafik ve müşteri dönüştürmelerini nasıl ve ne şekil
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * Yeni bir proje oluşturma.
-* **ASP.NET Core Web uygulaması** ' nı ve **İleri ' yi**seçin.
-* Bir **Proje adı** girin ve **konumu**onaylayın veya değiştirin. **Oluştur**’u seçin.
-* Açılan kutuda ASP.NET Core en son sürümünü (**ASP.NET Core {X. Y}**) seçin ve ardından **Web uygulaması**' nı seçin.
-* **Kimlik doğrulaması**altında **Değiştir** ' i seçin ve kimlik doğrulamasını **bireysel kullanıcı hesapları**olarak ayarlayın. **Tamam**’ı seçin.
-* **Yeni ASP.NET Core Web uygulaması oluştur** penceresinde **Oluştur**' u seçin.
+* **ASP.NET Core Web uygulaması** ' nı ve **İleri ' yi** seçin.
+* Bir **Proje adı** girin ve **konumu** onaylayın veya değiştirin. **Oluştur** ’u seçin.
+* Açılan kutuda ASP.NET Core en son sürümünü ( **ASP.NET Core {X. Y}** ) seçin ve ardından **Web uygulaması** ' nı seçin.
+* **Kimlik doğrulaması** altında **Değiştir** ' i seçin ve kimlik doğrulamasını **bireysel kullanıcı hesapları** olarak ayarlayın. **Tamam** ’ı seçin.
+* **Yeni ASP.NET Core Web uygulaması oluştur** penceresinde **Oluştur** ' u seçin.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
@@ -78,14 +79,14 @@ Sosyal oturumların trafik ve müşteri dönüştürmelerini nasıl ve ne şekil
 ## <a name="apply-migrations"></a>Geçişleri Uygula
 
 * Uygulamayı çalıştırın ve **Kaydet** bağlantısını seçin.
-* Yeni hesap için e-posta ve parolayı girip **Kaydet**' i seçin.
+* Yeni hesap için e-posta ve parolayı girip **Kaydet** ' i seçin.
 * Geçişleri uygulamak için yönergeleri izleyin.
 
 [!INCLUDE[Forward request information when behind a proxy or load balancer section](includes/forwarded-headers-middleware.md)]
 
 ## <a name="use-secretmanager-to-store-tokens-assigned-by-login-providers"></a>Oturum açma sağlayıcıları tarafından atanan belirteçleri depolamak için SecretManager kullanın
 
-Sosyal oturum açma sağlayıcıları, kayıt işlemi sırasında **uygulama kimliği** ve **uygulama gizli** belirteçleri atar. Tam belirteç adları sağlayıcıya göre farklılık gösterir. Bu belirteçler, uygulamanızın API 'lerine erişmek için kullandığı kimlik bilgilerini temsil eder. Belirteçler, [gizli yöneticinin](xref:security/app-secrets#secret-manager)yardımıyla uygulama yapılandırmanızla bağlantılı olabilecek "gizli dizileri" oluşturur. Gizli dizi, belirteçleri *appsettings.js*gibi bir yapılandırma dosyasında depolamanın daha güvenli bir alternatifidir.
+Sosyal oturum açma sağlayıcıları, kayıt işlemi sırasında **uygulama kimliği** ve **uygulama gizli** belirteçleri atar. Tam belirteç adları sağlayıcıya göre farklılık gösterir. Bu belirteçler, uygulamanızın API 'lerine erişmek için kullandığı kimlik bilgilerini temsil eder. Belirteçler, [gizli yöneticinin](xref:security/app-secrets#secret-manager)yardımıyla uygulama yapılandırmanızla bağlantılı olabilecek "gizli dizileri" oluşturur. Gizli dizi, belirteçleri bir yapılandırma dosyasında depolamanın daha güvenli bir alternatifidir *appsettings.json* .
 
 > [!IMPORTANT]
 > Gizli yönetici yalnızca geliştirme amaçlıdır. [Azure Key Vault yapılandırma sağlayıcısıyla](xref:security/key-vault-configuration)Azure test ve üretim gizli dizilerini saklayabilir ve koruyabilirsiniz.
@@ -110,11 +111,11 @@ Bir dış oturum açma sağlayıcısına kaydolduysanız, uygulamaya kayıtlı b
 
 Bir parola oluşturmak ve dış sağlayıcılar ile oturum açma işlemi sırasında ayarladığınız e-postanızı kullanarak oturum açmak için:
 
-* **Yönet** görünümüne gitmek için sağ üst köşedeki **Merhaba &lt; e-posta diğer adı &gt; ** bağlantısını seçin.
+* **Yönet** görünümüne gitmek için sağ üst köşedeki **Merhaba &lt; e-posta diğer adı &gt;** bağlantısını seçin.
 
 ![Web uygulaması yönetme görünümü](index/_static/pass1a.png)
 
-* **Oluştur**’u seçin
+* **Oluştur** ’u seçin
 
 ![Parola sayfanızı ayarlama](index/_static/pass2a.png)
 

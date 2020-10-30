@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/complex-data-model
-ms.openlocfilehash: 55269c6985534b49cc2567b2d197e46d9b7b1fd7
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 1ac9d6303daac82f3973c5d027fe1f453dc32e02
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722533"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054105"
 ---
 # <a name="part-5-no-locrazor-pages-with-ef-core-in-aspnet-core---data-model"></a>Bölüm 5, Razor ASP.NET Core veri modelinde EF Core olan sayfalar
 
@@ -236,7 +237,7 @@ Bu öğreticide, bu hatayı geçmenin yolu ilk geçişi silmek ve yeniden oluşt
 
 * Uygulamayı çalıştırın ve öğrenciler sayfasına gidin.
 * Saatin giriş veya tarih ile birlikte görüntülenmediğine dikkat edin.
-* **Yeni oluştur**' u seçin ve 50 karakterden daha uzun bir ad girmeyi deneyin.
+* **Yeni oluştur** ' u seçin ve 50 karakterden daha uzun bir ad girmeyi deneyin.
 
 > [!Note]
 > Aşağıdaki bölümlerde, uygulamanın bazı aşamalardan oluşturulması derleyici hataları oluşturur. Yönergeler uygulamanın ne zaman derbir olduğunu belirtir.
@@ -444,7 +445,7 @@ Ve varlıkları arasında çoktan çoğa bir ilişki vardır `Student` `Course` 
 
 Aşağıdaki çizimde bu ilişkilerin bir varlık diyagramında nasıl göründüğünü gösterilmektedir. (Bu diyagram EF 6. x için [EF güç araçları](https://marketplace.visualstudio.com/items?itemName=ErikEJ.EntityFramework6PowerToolsCommunityEdition) kullanılarak oluşturulmuştur. Diyagram oluşturmak öğreticinin bir parçası değildir.)
 
-![Öğrenci-çok fazla ilişki](complex-data-model/_static/student-course.png)
+![Çok fazla ilişki Student-Course](complex-data-model/_static/student-course.png)
 
 Her ilişki satırında 1 bir sonda ve diğeri de bir yıldız işareti (*) bulunur. Bu, bire çok ilişkiyi belirtir.
 
@@ -472,7 +473,7 @@ Veri modelleri basit ve büyümeye başlar. Yük (PJTs) olmayan ekleme tablolar�
 
 ### <a name="composite-key"></a>Bileşik anahtar
 
-(Ve) içindeki iki FKs, `CourseAssignment` `InstructorID` `CourseID` tablonun her satırını benzersiz bir şekilde tanımlar `CourseAssignment` . `CourseAssignment` adanmış bir PK gerektirmez. `InstructorID`Ve `CourseID` özellikleri BILEŞIK bir PK olarak çalışır. EF Core bileşik PKs 'leri belirtmenin tek yolu *Fluent API*' dir. Sonraki bölümde, bileşik PK 'nin nasıl yapılandırılacağı gösterilmektedir.
+(Ve) içindeki iki FKs, `CourseAssignment` `InstructorID` `CourseID` tablonun her satırını benzersiz bir şekilde tanımlar `CourseAssignment` . `CourseAssignment` adanmış bir PK gerektirmez. `InstructorID`Ve `CourseID` özellikleri BILEŞIK bir PK olarak çalışır. EF Core bileşik PKs 'leri belirtmenin tek yolu *Fluent API* ' dir. Sonraki bölümde, bileşik PK 'nin nasıl yapılandırılacağı gösterilmektedir.
 
 Bileşik anahtar şunları sağlar:
 
@@ -537,13 +538,13 @@ Aşağıdaki çizimde, tamamlanmış okul modeli için EF Power Tools 'un oluşt
 
 ## <a name="seed-the-database"></a>Veritabanını çekirdek
 
-*Data/Dbınizer. cs*dosyasındaki kodu güncelleştirin:
+*Data/Dbınizer. cs* dosyasındaki kodu güncelleştirin:
 
 [!code-csharp[](intro/samples/cu30/Data/DbInitializer.cs)]
 
 Yukarıdaki kod, yeni varlıklar için tohum verileri sağlar. Bu kodun çoğu yeni varlık nesneleri oluşturur ve örnek verileri yükler. Örnek veriler test için kullanılır. `Enrollments` `CourseAssignments` Birden çok-çok JOIN tablosunun nasıl çalıştırılabilir olduğunu gösteren örnekler için bkz. ve.
 
-## <a name="add-a-migration"></a>Geçiş Ekle
+## <a name="add-a-migration"></a>Geçiş ekleme
 
 Projeyi derleyin.
 
@@ -590,7 +591,7 @@ Sonraki bölümde, bu hatanın nasıl önleneceğini görürsünüz.
 Artık var olan bir veritabanınız olduğuna göre, değişikliklere nasıl uygulanacağını düşünmeniz gerekir. Bu öğreticide iki alternatif gösterilmektedir:
 
 * [Veritabanını bırakıp yeniden oluşturun](#drop). SQLite kullanıyorsanız bu bölümü seçin.
-* [Geçişi mevcut veritabanına uygulayın](#applyexisting). Bu bölümdeki yönergeler yalnızca SQL Server için geçerlidir, **SQLite için değildir**. 
+* [Geçişi mevcut veritabanına uygulayın](#applyexisting). Bu bölümdeki yönergeler yalnızca SQL Server için geçerlidir, **SQLite için değildir** . 
 
 Her iki seçenek de SQL Server için geçerlidir. Apply-Migration yöntemi daha karmaşıktır ve zaman alabilir. Bu, gerçek dünyada üretim ortamları için tercih edilen yaklaşımdır. 
 
@@ -649,7 +650,7 @@ Veritabanını SSOX içinde açın:
 
 * **Courseatama** tablosunu inceleyin:
 
-  * **Courseatama** tablosuna sağ tıklayın ve **verileri görüntüle**' yi seçin.
+  * **Courseatama** tablosuna sağ tıklayın ve **verileri görüntüle** ' yi seçin.
   * **Courseatama** tablosunun veri içerdiğini doğrulayın.
 
   ![SSOX 'te Courseatama verileri](complex-data-model/_static/ssox-ci-data.png)
@@ -802,11 +803,11 @@ Yukarıdaki kod, adları 50 karakterden fazla olmayacak şekilde sınırlandır�
 [RegularExpression(@"^[A-Z]+[a-zA-Z]*$")]
 ```
 
-Uygulamayı çalıştırın: 
+Uygulamayı çalıştırın:
 
 * Öğrenciler sayfasına gidin.
-* **Yeni oluştur**' u seçin ve 50 karakterden daha uzun bir ad girin.
-* **Oluştur**' u seçin, istemci tarafı doğrulama bir hata iletisi gösterir.
+* **Yeni oluştur** ' u seçin ve 50 karakterden daha uzun bir ad girin.
+* **Oluştur** ' u seçin, istemci tarafı doğrulama bir hata iletisi gösterir.
 
 ![Öğrenciler Dizin sayfası dize uzunluğu hatalarını gösteriyor](complex-data-model/_static/string-length-errors.png)
 
@@ -1147,7 +1148,7 @@ Ve varlıkları arasında çoktan çoğa bir ilişki vardır `Student` `Course` 
 
 Aşağıdaki çizimde bu ilişkilerin bir varlık diyagramında nasıl göründüğünü gösterilmektedir. (Bu diyagram EF 6. x için [EF güç araçları](https://marketplace.visualstudio.com/items?itemName=ErikEJ.EntityFramework6PowerToolsCommunityEdition) kullanılarak oluşturulmuştur. Diyagram oluşturmak öğreticinin bir parçası değildir.)
 
-![Öğrenci-çok fazla ilişki](complex-data-model/_static/student-course.png)
+![Çok fazla ilişki Student-Course](complex-data-model/_static/student-course.png)
 
 Her ilişki satırında 1 bir sonda ve diğeri de bir yıldız işareti (*) bulunur. Bu, bire çok ilişkiyi belirtir.
 
@@ -1180,7 +1181,7 @@ Veri modelleri basit ve büyümeye başlar. Yük yükü dahil olmak üzere genel
 
 ### <a name="composite-key"></a>Bileşik anahtar
 
-FKs null değer atanamaz. (Ve) içindeki iki FKs, `CourseAssignment` `InstructorID` `CourseID` tablonun her satırını benzersiz bir şekilde tanımlar `CourseAssignment` . `CourseAssignment` adanmış bir PK gerektirmez. `InstructorID`Ve `CourseID` özellikleri BILEŞIK bir PK olarak çalışır. EF Core bileşik PKs 'leri belirtmenin tek yolu *Fluent API*' dir. Sonraki bölümde, bileşik PK 'nin nasıl yapılandırılacağı gösterilmektedir.
+FKs null değer atanamaz. (Ve) içindeki iki FKs, `CourseAssignment` `InstructorID` `CourseID` tablonun her satırını benzersiz bir şekilde tanımlar `CourseAssignment` . `CourseAssignment` adanmış bir PK gerektirmez. `InstructorID`Ve `CourseID` özellikleri BILEŞIK bir PK olarak çalışır. EF Core bileşik PKs 'leri belirtmenin tek yolu *Fluent API* ' dir. Sonraki bölümde, bileşik PK 'nin nasıl yapılandırılacağı gösterilmektedir.
 
 Bileşik anahtar şunları sağlar:
 
@@ -1195,7 +1196,7 @@ Bileşik anahtar şunları sağlar:
 
 ## <a name="update-the-db-context"></a>DB bağlamını güncelleştirme
 
-*Data/SchoolContext. cs*' ye aşağıdaki vurgulanmış kodu ekleyin:
+*Data/SchoolContext. cs* ' ye aşağıdaki vurgulanmış kodu ekleyin:
 
 [!code-csharp[](intro/samples/cu21/Data/SchoolContext.cs?name=snippet_BeforeInheritance&highlight=15-18,25-31)]
 
@@ -1245,13 +1246,13 @@ Aşağıdaki çizimde, tamamlanmış okul modeli için EF Power Tools 'un oluşt
 
 ## <a name="seed-the-db-with-test-data"></a>VERITABANıNı test verileriyle çekirdek olarak
 
-*Data/Dbınizer. cs*dosyasındaki kodu güncelleştirin:
+*Data/Dbınizer. cs* dosyasındaki kodu güncelleştirin:
 
 [!code-csharp[](intro/samples/cu21/Data/DbInitializer.cs?name=snippet_Final)]
 
 Yukarıdaki kod, yeni varlıklar için tohum verileri sağlar. Bu kodun çoğu yeni varlık nesneleri oluşturur ve örnek verileri yükler. Örnek veriler test için kullanılır. `Enrollments` `CourseAssignments` Birden çok-çok JOIN tablosunun nasıl çalıştırılabilir olduğunu gösteren örnekler için bkz. ve.
 
-## <a name="add-a-migration"></a>Geçiş Ekle
+## <a name="add-a-migration"></a>Geçiş ekleme
 
 Projeyi derleyin.
 
@@ -1289,7 +1290,7 @@ database "ContosoUniversity", table "dbo.Department", column 'DepartmentID'.
 Artık var olan bir veritabanınız olduğuna göre, bundan sonraki değişikliklere nasıl uygulanacağını düşünmeniz gerekir. Bu öğreticide iki yaklaşım gösterilmektedir:
 
 * [Veritabanını bırakıp yeniden oluşturun](#drop)
-* [Geçişi mevcut veritabanına uygulayın](#applyexisting). Bu yöntem daha karmaşıktır ve zaman alabilir. Bu, gerçek dünyada üretim ortamları için tercih edilen yaklaşımdır. **Note**: Bu, öğreticinin isteğe bağlı bir bölümüdür. Bırakma ve yeniden oluşturma adımlarını gerçekleştirebilir ve bu bölümü atlayabilirsiniz. Bu bölümdeki adımları izlemek isterseniz, bırakma ve yeniden oluşturma adımlarını yapmayın. 
+* [Geçişi mevcut veritabanına uygulayın](#applyexisting). Bu yöntem daha karmaşıktır ve zaman alabilir. Bu, gerçek dünyada üretim ortamları için tercih edilen yaklaşımdır. **Note** : Bu, öğreticinin isteğe bağlı bir bölümüdür. Bırakma ve yeniden oluşturma adımlarını gerçekleştirebilir ve bu bölümü atlayabilirsiniz. Bu bölümdeki adımları izlemek isterseniz, bırakma ve yeniden oluşturma adımlarını yapmayın. 
 
 <a name="drop"></a>
 
@@ -1332,7 +1333,7 @@ VERITABANıNı SSOX içinde açın:
 
 **Courseatama** tablosunu inceleyin:
 
-* **Courseatama** tablosuna sağ tıklayın ve **verileri görüntüle**' yi seçin.
+* **Courseatama** tablosuna sağ tıklayın ve **verileri görüntüle** ' yi seçin.
 * **Courseatama** tablosunun veri içerdiğini doğrulayın.
 
 ![SSOX 'te Courseatama verileri](complex-data-model/_static/ssox-ci-data.png)

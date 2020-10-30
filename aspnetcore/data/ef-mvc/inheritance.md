@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/inheritance
-ms.openlocfilehash: fabb0ed9c0f64a529b516d521d60a7d862e2654a
-ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
+ms.openlocfilehash: 581a31bad4069523699fbbac63862c9dff12034d
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91754573"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054222"
 ---
 # <a name="tutorial-implement-inheritance---aspnet-mvc-with-ef-core"></a>Öğretici: EF Core devralma-ASP.NET MVC uygulama
 
@@ -87,17 +88,17 @@ Modeller klasöründe Person.cs oluşturun ve şablon kodunu şu kodla değişti
 
 ## <a name="update-instructor-and-student"></a>Eğitmeni ve öğrenci 'yi güncelleştirme
 
-*Instructor.cs*' de, kişi sınıfından eğitmen sınıfını türetirsiniz ve anahtar ve ad alanlarını kaldırın. Kod aşağıdaki örneğe benzer şekilde görünür:
+*Instructor.cs* ' de, kişi sınıfından eğitmen sınıfını türetirsiniz ve anahtar ve ad alanlarını kaldırın. Kod aşağıdaki örneğe benzer şekilde görünür:
 
 [!code-csharp[](intro/samples/cu/Models/Instructor.cs?name=snippet_AfterInheritance&highlight=8)]
 
-*Student.cs*' de aynı değişiklikleri yapın.
+*Student.cs* ' de aynı değişiklikleri yapın.
 
 [!code-csharp[](intro/samples/cu/Models/Student.cs?name=snippet_AfterInheritance&highlight=8)]
 
 ## <a name="add-person-to-the-model"></a>Modele kişi ekleme
 
-Kişi varlık türünü *SchoolContext.cs*öğesine ekleyin. Yeni satırlar vurgulanır.
+Kişi varlık türünü *SchoolContext.cs* öğesine ekleyin. Yeni satırlar vurgulanır.
 
 [!code-csharp[](intro/samples/cu/Data/SchoolContext.cs?name=snippet_AfterInheritance&highlight=19,30)]
 
@@ -154,7 +155,7 @@ dotnet ef database update
 
 Uygulamayı çalıştırın ve çeşitli sayfaları deneyin. Her şey, daha önce olduğu gibi çalışmaktadır.
 
-**SQL Server Nesne Gezgini**, **veri bağlantıları/SchoolContext** ve ardından **Tablolar**' ı genişletin ve öğrenci ve eğitmen tablolarının bir kişi tablosu ile değiştirildiğini görürsünüz. Kişi tablosu tasarımcısını açın ve öğrencinin ve eğitmen tablolarında kullanılan tüm sütunları olduğunu görürsünüz.
+**SQL Server Nesne Gezgini** , **veri bağlantıları/SchoolContext** ve ardından **Tablolar** ' ı genişletin ve öğrenci ve eğitmen tablolarının bir kişi tablosu ile değiştirildiğini görürsünüz. Kişi tablosu tasarımcısını açın ve öğrencinin ve eğitmen tablolarında kullanılan tüm sütunları olduğunu görürsünüz.
 
 ![SSOX 'teki kişi tablosu](inheritance/_static/ssox-person-table.png)
 

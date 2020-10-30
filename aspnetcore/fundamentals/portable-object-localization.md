@@ -5,6 +5,7 @@ description: Bu makale, taşınabilir nesne dosyalarını tanıtır ve bunları 
 ms.author: scaddie
 ms.date: 09/26/2017
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/portable-object-localization
-ms.openlocfilehash: f471c5b7511434cf42717e52ef271663c2e36647
-ms.sourcegitcommit: 6ecdc481d5b9a10d2c6e091217f017b36bdba957
+ms.openlocfilehash: 2e28ebaf1962ebd834c43f1cfbc28929b1937c40
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90456055"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053728"
 ---
 # <a name="configure-portable-object-localization-in-aspnet-core"></a>ASP.NET Core taşınabilir nesne yerelleştirmesini yapılandırma
 
@@ -88,11 +89,11 @@ Bu örnek, Visual Studio 2017 proje şablonundan oluşturulan ASP.NET Core MVC u
 
 ### <a name="registering-the-service"></a>Hizmet kaydediliyor
 
-Gerekli Hizmetleri `ConfigureServices` *Startup.cs*yöntemine ekleyin:
+Gerekli Hizmetleri `ConfigureServices` *Startup.cs* yöntemine ekleyin:
 
 [!code-csharp[](localization/sample/3.x/POLocalization/Startup.cs?name=snippet_ConfigureServices&highlight=4-21)]
 
-Gerekli ara yazılımı `Configure` *Startup.cs*yöntemine ekleyin:
+Gerekli ara yazılımı `Configure` *Startup.cs* yöntemine ekleyin:
 
 [!code-csharp[](localization/sample/3.x/POLocalization/Startup.cs?name=snippet_Configure&highlight=15)]
 
@@ -104,7 +105,7 @@ Aşağıdaki kodu tercih ettiğiniz görünüme ekleyin Razor . Bu örnekte *. c
 
 ### <a name="creating-a-po-file"></a>PO dosyası oluşturma
 
-Uygulama kök klasörünüzde * \<culture code> . Po* adlı bir dosya oluşturun. Bu örnekte, Fransızca dili kullanıldığından dosya adı *fr. Po* olur:
+Uygulama kök klasörünüzde *\<culture code> . Po* adlı bir dosya oluşturun. Bu örnekte, Fransızca dili kullanıldığından dosya adı *fr. Po* olur:
 
 [!code-text[](localization/sample/3.x/POLocalization/fr.po)]
 
@@ -214,7 +215,7 @@ msgstr "Bonjour le monde!"
 
 `msgctxt`Bu şekilde ayarlandığında, ' ye gidildiğinde metin çevirisi oluşur `/Home/About?culture=fr-FR` . Çeviri, ' a gidildiğinde gerçekleşmez `/Home/Contact?culture=fr-FR` .
 
-Belirli bir giriş belirli bir dosya bağlamıyla eşleşmediğinde, Orchard Core 'un geri dönüş mekanizması bağlam olmadan uygun bir PO dosyası arar. *Görünümler/Home/Contact. cshtml*için tanımlanan belirli bir dosya bağlamı olmadığı varsayılarak, gezinmek IÇIN `/Home/Contact?culture=fr-FR` bir PO dosyası yükler:
+Belirli bir giriş belirli bir dosya bağlamıyla eşleşmediğinde, Orchard Core 'un geri dönüş mekanizması bağlam olmadan uygun bir PO dosyası arar. *Görünümler/Home/Contact. cshtml* için tanımlanan belirli bir dosya bağlamı olmadığı varsayılarak, gezinmek IÇIN `/Home/Contact?culture=fr-FR` bir PO dosyası yükler:
 
 [!code-text[](localization/sample/3.x/POLocalization/fr.po)]
 
@@ -303,11 +304,11 @@ Bu örnek, Visual Studio 2017 proje şablonundan oluşturulan ASP.NET Core MVC u
 
 ### <a name="registering-the-service"></a>Hizmet kaydediliyor
 
-Gerekli Hizmetleri `ConfigureServices` *Startup.cs*yöntemine ekleyin:
+Gerekli Hizmetleri `ConfigureServices` *Startup.cs* yöntemine ekleyin:
 
 [!code-csharp[](localization/sample/2.x/POLocalization/Startup.cs?name=snippet_ConfigureServices&highlight=4-21)]
 
-Gerekli ara yazılımı `Configure` *Startup.cs*yöntemine ekleyin:
+Gerekli ara yazılımı `Configure` *Startup.cs* yöntemine ekleyin:
 
 [!code-csharp[](localization/sample/2.x/POLocalization/Startup.cs?name=snippet_Configure&highlight=15)]
 
@@ -319,7 +320,7 @@ Aşağıdaki kodu tercih ettiğiniz görünüme ekleyin Razor . Bu örnekte *. c
 
 ### <a name="creating-a-po-file"></a>PO dosyası oluşturma
 
-Uygulama kök klasörünüzde * \<culture code> . Po* adlı bir dosya oluşturun. Bu örnekte, Fransızca dili kullanıldığından dosya adı *fr. Po* olur:
+Uygulama kök klasörünüzde *\<culture code> . Po* adlı bir dosya oluşturun. Bu örnekte, Fransızca dili kullanıldığından dosya adı *fr. Po* olur:
 
 [!code-text[](localization/sample/2.x/POLocalization/fr.po)]
 
@@ -429,7 +430,7 @@ msgstr "Bonjour le monde!"
 
 `msgctxt`Bu şekilde ayarlandığında, ' ye gidildiğinde metin çevirisi oluşur `/Home/About?culture=fr-FR` . Çeviri, ' a gidildiğinde gerçekleşmez `/Home/Contact?culture=fr-FR` .
 
-Belirli bir giriş belirli bir dosya bağlamıyla eşleşmediğinde, Orchard Core 'un geri dönüş mekanizması bağlam olmadan uygun bir PO dosyası arar. *Görünümler/Home/Contact. cshtml*için tanımlanan belirli bir dosya bağlamı olmadığı varsayılarak, gezinmek IÇIN `/Home/Contact?culture=fr-FR` bir PO dosyası yükler:
+Belirli bir giriş belirli bir dosya bağlamıyla eşleşmediğinde, Orchard Core 'un geri dönüş mekanizması bağlam olmadan uygun bir PO dosyası arar. *Görünümler/Home/Contact. cshtml* için tanımlanan belirli bir dosya bağlamı olmadığı varsayılarak, gezinmek IÇIN `/Home/Contact?culture=fr-FR` bir PO dosyası yükler:
 
 [!code-text[](localization/sample/2.x/POLocalization/fr.po)]
 

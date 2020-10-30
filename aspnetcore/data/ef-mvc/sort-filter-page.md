@@ -6,6 +6,7 @@ ms.author: riande
 ms.date: 03/27/2019
 ms.topic: tutorial
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/sort-filter-page
-ms.openlocfilehash: 16a0b264f8395670b02d091afd44e71d0dad4d0b
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 8e425d413471912c763c4892a90e9d12039efec4
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629359"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053988"
 ---
 # <a name="tutorial-add-sorting-filtering-and-paging---aspnet-mvc-with-ef-core"></a>Öğretici: EF Core sıralama, filtreleme ve sayfalama-ASP.NET MVC ekleme
 
@@ -42,7 +43,7 @@ Bu öğreticide şunları yaptınız:
 > * Sayfalama bağlantıları Ekle
 > * Hakkında bir sayfa oluşturun
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * [CRUD Işlevlerini uygulama](crud.md)
 
@@ -52,7 +53,7 @@ Bu öğreticide şunları yaptınız:
 
 ### <a name="add-sorting-functionality-to-the-index-method"></a>Dizin yöntemine sıralama Işlevi ekleme
 
-*StudentsController.cs*içinde, `Index` yöntemini aşağıdaki kodla değiştirin:
+*StudentsController.cs* içinde, `Index` yöntemini aşağıdaki kodla değiştirin:
 
 [!code-csharp[](intro/samples/cu/Controllers/StudentsController.cs?name=snippet_SortOnly)]
 
@@ -79,7 +80,7 @@ Bu kod çok sayıda sütunla ayrıntı alabilir. [Bu serideki son öğretici,](a
 
 ### <a name="add-column-heading-hyperlinks-to-the-student-index-view"></a>Öğrenci dizini görünümüne sütun başlığı köprüleri ekleme
 
-*Görünümler/öğrenciler/Index. cshtml*içindeki kodu, sütun başlığı köprüleri eklemek için aşağıdaki kodla değiştirin. Değiştirilen çizgiler vurgulanır.
+*Görünümler/öğrenciler/Index. cshtml* içindeki kodu, sütun başlığı köprüleri eklemek için aşağıdaki kodla değiştirin. Değiştirilen çizgiler vurgulanır.
 
 [!code-cshtml[](intro/samples/cu/Views/Students/Index2.cshtml?highlight=16,22)]
 
@@ -95,7 +96,7 @@ Uygulamayı çalıştırın, **öğrenciler** sekmesini seçin ve sıralamanın 
 
 ### <a name="add-filtering-functionality-to-the-index-method"></a>Dizin yöntemine filtreleme işlevi ekleme
 
-*StudentsController.cs*içinde, `Index` yöntemini aşağıdaki kodla değiştirin (değişiklikler vurgulanır).
+*StudentsController.cs* içinde, `Index` yöntemini aşağıdaki kodla değiştirin (değişiklikler vurgulanır).
 
 [!code-csharp[](intro/samples/cu/Controllers/StudentsController.cs?name=snippet_SortFilter&highlight=1,5,9-13)]
 
@@ -104,11 +105,11 @@ Yöntemine bir parametre eklediniz `searchString` `Index` . Arama dizesi değeri
 > [!NOTE]
 > Burada `Where` yöntemi bir nesne üzerinde arıyorsanız `IQueryable` ve filtrenin sunucuda işlenmesi gerekir. Bazı senaryolarda, `Where` bir bellek içi koleksiyonda yöntemi bir genişletme yöntemi olarak çağırmak isteyebilirsiniz. (Örneğin, başvurusunu, `_context.Students` `DbSet` bir koleksiyon döndüren bir depo yöntemine başvurduğu bir değer yerine, olarak değiştirdiğinizi varsayın `IEnumerable` .) Sonuç normalde aynı olur, ancak bazı durumlarda farklı olabilir.
 >
->Örneğin, yöntemi .NET Framework uygulama `Contains` Varsayılan olarak büyük/küçük harfe duyarlı bir karşılaştırma gerçekleştirir, ancak SQL Server bu, SQL Server örneğinin harmanlama ayarı tarafından belirlenir. Bu ayar varsayılan olarak büyük/küçük harfe duyarsız olur. `ToUpper`Testi açık büyük/küçük harfe duyarsız yapmak için yöntemini çağırabilirsiniz: *burada (s => s. LastName. ToUpper (). Contains (searchString. ToUpper ())*. Bu, kodu daha sonra bir nesne yerine bir koleksiyon döndüren depoyu kullanacak şekilde değiştirirseniz sonuçların aynı kalmasını sağlar `IEnumerable` `IQueryable` . ( `Contains` Bir koleksiyonda yöntemini çağırdığınızda `IEnumerable` .NET Framework uygulamasını alırsınız; bir nesne üzerinde çağırdığınızda `IQueryable` , veritabanı sağlayıcısı uygulamasını alırsınız.) Ancak, bu çözüm için bir performans cezası vardır. `ToUpper`Kod, TSQL Select IFADESININ WHERE yan tümcesine bir işlev koyar. Bu, iyileştiricinin bir dizin kullanmasını engelleyecek. SQL 'in çoğu büyük küçük harfe duyarsız olarak yüklendiği için, `ToUpper` büyük/küçük harfe duyarlı bir veri deposuna geçiş yapılıncaya kadar koddan kaçınmak en iyisidir.
+>Örneğin, yöntemi .NET Framework uygulama `Contains` Varsayılan olarak büyük/küçük harfe duyarlı bir karşılaştırma gerçekleştirir, ancak SQL Server bu, SQL Server örneğinin harmanlama ayarı tarafından belirlenir. Bu ayar varsayılan olarak büyük/küçük harfe duyarsız olur. `ToUpper`Testi açık büyük/küçük harfe duyarsız yapmak için yöntemini çağırabilirsiniz: *burada (s => s. LastName. ToUpper (). Contains (searchString. ToUpper ())* . Bu, kodu daha sonra bir nesne yerine bir koleksiyon döndüren depoyu kullanacak şekilde değiştirirseniz sonuçların aynı kalmasını sağlar `IEnumerable` `IQueryable` . ( `Contains` Bir koleksiyonda yöntemini çağırdığınızda `IEnumerable` .NET Framework uygulamasını alırsınız; bir nesne üzerinde çağırdığınızda `IQueryable` , veritabanı sağlayıcısı uygulamasını alırsınız.) Ancak, bu çözüm için bir performans cezası vardır. `ToUpper`Kod, TSQL Select IFADESININ WHERE yan tümcesine bir işlev koyar. Bu, iyileştiricinin bir dizin kullanmasını engelleyecek. SQL 'in çoğu büyük küçük harfe duyarsız olarak yüklendiği için, `ToUpper` büyük/küçük harfe duyarlı bir veri deposuna geçiş yapılıncaya kadar koddan kaçınmak en iyisidir.
 
 ### <a name="add-a-search-box-to-the-student-index-view"></a>Öğrenci dizini görünümüne arama kutusu ekleme
 
-*Görünümler/öğrenci/Index. cshtml*'de, bir başlık, metin kutusu ve bir **arama** düğmesi oluşturmak için, açılan tablo etiketinden hemen önce vurgulanan kodu ekleyin.
+*Görünümler/öğrenci/Index. cshtml* 'de, bir başlık, metin kutusu ve bir **arama** düğmesi oluşturmak için, açılan tablo etiketinden hemen önce vurgulanan kodu ekleyin.
 
 [!code-cshtml[](intro/samples/cu/Views/Students/Index3.cshtml?range=9-23&highlight=5-13)]
 
@@ -144,7 +145,7 @@ Proje klasöründe, `PaginatedList.cs` şablon kodunu oluşturun ve aşağıdaki
 
 ## <a name="add-paging-to-index-method"></a>Dizin yöntemine sayfalama ekleme
 
-*StudentsController.cs*içinde, `Index` yöntemini aşağıdaki kodla değiştirin.
+*StudentsController.cs* içinde, `Index` yöntemini aşağıdaki kodla değiştirin.
 
 [!code-csharp[](intro/samples/cu/Controllers/StudentsController.cs?name=snippet_SortFilterPage&highlight=1-5,7,11-18,45-46)]
 
@@ -187,7 +188,7 @@ return View(await PaginatedList<Student>.CreateAsync(students.AsNoTracking(), pa
 
 ## <a name="add-paging-links"></a>Sayfalama bağlantıları Ekle
 
-*Görünümler/öğrenciler/Index. cshtml*'de, mevcut kodu aşağıdaki kodla değiştirin. Değişiklikler vurgulanır.
+*Görünümler/öğrenciler/Index. cshtml* 'de, mevcut kodu aşağıdaki kodla değiştirin. Değişiklikler vurgulanır.
 
 [!code-cshtml[](intro/samples/cu/Views/Students/Index.cshtml?highlight=1,27,30,33,61-79)]
 
@@ -235,7 +236,7 @@ Yeni klasörde, *EnrollmentDateGroup.cs* bir sınıf dosyası ekleyin ve şablon
 
 ### <a name="modify-the-home-controller"></a>Ana denetleyiciyi değiştirme
 
-*HomeController.cs*' de, aşağıdaki using deyimlerini dosyanın en üstüne ekleyin:
+*HomeController.cs* ' de, aşağıdaki using deyimlerini dosyanın en üstüne ekleyin:
 
 [!code-csharp[](intro/samples/cu/Controllers/HomeController.cs?name=snippet_Usings1)]
 

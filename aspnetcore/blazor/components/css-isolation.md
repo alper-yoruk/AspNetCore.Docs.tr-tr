@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/20/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/css-isolation
-ms.openlocfilehash: c154e746c4c88fc919b2c0dddaea5fd585427a82
-ms.sourcegitcommit: d84a225ec3381355c343460deed50f2fa5722f60
+ms.openlocfilehash: 628e7dc897912beaae0df792b82958517ac70ca4
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/22/2020
-ms.locfileid: "92431842"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056328"
 ---
 # <a name="aspnet-core-no-locblazor-css-isolation"></a>BlazorCSS yalıtımı ASP.NET Core
 
@@ -33,7 +34,7 @@ CSS yalıtımı, genel stillerdeki bağımlılıkları önleyerek uygulamanın C
 
 ## <a name="enable-css-isolation"></a>CSS yalıtımını etkinleştir 
 
-Bileşene özgü stiller tanımlamak için, `razor.css` bileşenin dosya adıyla eşleşen bir dosya oluşturun `.razor` . Bu `razor.css` dosya kapsamlı BIR *CSS dosyasıdır*. 
+Bileşene özgü stiller tanımlamak için, `razor.css` bileşenin dosya adıyla eşleşen bir dosya oluşturun `.razor` . Bu `razor.css` dosya kapsamlı BIR *CSS dosyasıdır* . 
 
 `MyComponent`Bir dosya içeren bir bileşen için `MyComponent.razor` , adlı bileşenin yanında bir dosya oluşturun `MyComponent.razor.css` . `MyComponent` `razor.css` Dosya adının değeri büyük/küçük harfe duyarlı **değildir** .
 

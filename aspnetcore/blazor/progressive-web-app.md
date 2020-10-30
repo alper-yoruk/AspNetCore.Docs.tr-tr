@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/10/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/progressive-web-app
-ms.openlocfilehash: 4f184a1264614b16ce98ba5474aacd60f175bd8a
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: c8ff2fc0f2f4d4e75f535f379ec94ea9de2e3ecb
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865219"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93055704"
 ---
 # <a name="build-progressive-web-applications-with-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core ile aşamalı Web uygulamaları oluşturma Blazor WebAssembly
 
@@ -46,7 +47,7 @@ Aşamalı bir Web uygulaması (PWA) genellikle modern tarayıcı API 'Leri ve ma
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Yeni bir **proje oluştur** iletişim kutusunda yeni bir ** Blazor WebAssembly uygulama** oluştururken, **aşamalı Web uygulaması** onay kutusunu seçin:
+Yeni bir **proje oluştur** iletişim kutusunda yeni bir **Blazor WebAssembly uygulama** oluştururken, **aşamalı Web uygulaması** onay kutusunu seçin:
 
 ![Visual Studio yeni proje iletişim kutusunda ' aşamalı Web uygulaması ' onay kutusu seçilidir.](progressive-web-app/_static/image1.png)
 
@@ -74,7 +75,7 @@ PWA şablonu kullanılarak oluşturulan bir uygulamayı ziyaret ederken, kullan�
 
 ![Google Chrome 'daki onay iletişim kutusu kullanıcıya ' My::: No-Loc (Blazor):::P WA ' uygulaması için bir Install düğmesi sunar.](progressive-web-app/_static/image2.png)
 
-İOS 'ta, ziyaretçiler Safari 'nin **Share** düğmesini ve **Add to HOMESCREEN** seçeneğini kullanarak PWA 'yı yükleyebilir. Android için Chrome 'da kullanıcılar, sağ üst köşedeki **menü** düğmesini ve ardından **Giriş ekranına Ekle**' yi seçer.
+İOS 'ta, ziyaretçiler Safari 'nin **Share** düğmesini ve **Add to HOMESCREEN** seçeneğini kullanarak PWA 'yı yükleyebilir. Android için Chrome 'da kullanıcılar, sağ üst köşedeki **menü** düğmesini ve ardından **Giriş ekranına Ekle** ' yi seçer.
 
 Yüklendikten sonra uygulama, adres çubuğu olmadan kendi penceresinde görünür:
 
@@ -144,7 +145,7 @@ Bir akıl modeli olarak, yüklenebilen bir mobil uygulama gibi davranan bir çev
 
 BlazorPWA şablonu, Kullanıcı her ziyaret ettiğinde ve çalışan bir ağ bağlantısı olduğunda kendiliğinden otomatik olarak güncelleştirmeyi deneyen uygulamalar üretir. Bu şekilde çalışma şekli şöyledir:
 
-* Derleme sırasında, proje bir *hizmet çalışanı varlık bildirimi*oluşturur. Varsayılan olarak, bu çağırılır `service-worker-assets.js` . Bildirim, uygulamanın, içerik karmaları dahil .NET derlemeleri, JavaScript dosyaları ve CSS gibi çevrimdışı çalışması için gereken tüm statik kaynakları listeler. Kaynak listesi, hangi kaynakların önbellekte olduğunu bilmesi için hizmet çalışanı tarafından yüklenir.
+* Derleme sırasında, proje bir *hizmet çalışanı varlık bildirimi* oluşturur. Varsayılan olarak, bu çağırılır `service-worker-assets.js` . Bildirim, uygulamanın, içerik karmaları dahil .NET derlemeleri, JavaScript dosyaları ve CSS gibi çevrimdışı çalışması için gereken tüm statik kaynakları listeler. Kaynak listesi, hangi kaynakların önbellekte olduğunu bilmesi için hizmet çalışanı tarafından yüklenir.
 * Kullanıcı uygulamayı her ziyaret ettiğinde, tarayıcı yeniden istekleri `service-worker.js` ve `service-worker-assets.js` arka planda. Dosyalar, mevcut yüklü hizmet çalışanı ile bayt için bayt olarak karşılaştırılır. Sunucu, bu dosyalardan herhangi biri için değiştirilen içerik döndürürse, hizmet çalışanı kendi yeni bir sürümünü yüklemeye çalışır.
 * Yeni bir sürümü yüklenirken, hizmet çalışanı çevrimdışı kaynaklar için yeni, ayrı bir önbellek oluşturur ve önbelleğin ' de listelenen kaynaklarla doldurulmasına başlar `service-worker-assets.js` . Bu mantık `onInstall` içindeki işlevinde uygulanır `service-worker.published.js` .
 * Tüm kaynaklar hatasız olarak yüklendiğinde ve tüm içerik karmalarının eşleşmesi durumunda işlem başarıyla tamamlanır. Başarılı olursa, yeni hizmet çalışanı *etkinleştirme durumunu bekliyor* olarak girer. Kullanıcı uygulamayı kapatır (uygulama sekmeleri veya pencereler olmadan), yeni hizmet çalışanı *etkin* hale gelir ve sonraki uygulama ziyaretleri için kullanılır. Eski hizmet çalışanı ve önbelleği silinir.

@@ -7,6 +7,7 @@ ms.custom: seoapril2019, mvc, seodec18
 ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/facebook-logins
-ms.openlocfilehash: ce0e7ad30c137562b74dc9fe5c53235e3599e575
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: be0b655645fd2bd0eab9f9c30a65485f386cead3
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634364"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053364"
 ---
 # <a name="facebook-external-login-setup-in-aspnet-core"></a>ASP.NET Core 'da Facebook dış oturum açma kurulumu
 
@@ -48,7 +49,7 @@ Kod örnekleri ile bu öğreticide, kullanıcılarınızın [önceki sayfada](xr
 
   ![Yeni bir uygulama KIMLIĞI formu oluşturun](index/_static/FBNewAppId.png)
 
-* Yeni uygulama kartında **Ürün Ekle**' yi seçin.  **Facebook oturum açma** kartında **Ayarla** ' ya tıklayın. 
+* Yeni uygulama kartında **Ürün Ekle** ' yi seçin.  **Facebook oturum açma** kartında **Ayarla** ' ya tıklayın. 
 
   ![Ürün kurulum sayfası](index/_static/FBProductSetup.png)
 
@@ -65,9 +66,9 @@ Kod örnekleri ile bu öğreticide, kullanıcılarınızın [önceki sayfada](xr
 > [!NOTE]
 > URI */SignIn-Facebook* , Facebook kimlik doğrulama sağlayıcısı 'nın varsayılan geri çağırması olarak ayarlanır. Facebook kimlik doğrulama ara yazılımını, çok [yönlü önyükleme](/dotnet/api/microsoft.aspnetcore.authentication.facebook.facebookoptions) sınıfının devralınan [remoteauthenticationoptions. callbackpath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) özelliği aracılığıyla YAPıLANDıRıRKEN varsayılan geri çağırma URI 'sini değiştirebilirsiniz.
 
-* **Değişiklikleri Kaydet**’e tıklayın.
+* **Değişiklikleri Kaydet** ’e tıklayın.
 
-* **Settings**  >  Sol gezinti bölmesinde ayarlar**temel** bağlantısı ' na tıklayın.
+* **Settings**  >  Sol gezinti bölmesinde ayarlar **temel** bağlantısı ' na tıklayın.
 
   Bu sayfada, ve bilgilerinizi bir yere unutmayın `App ID` `App Secret` . Bir sonraki bölümde ASP.NET Core uygulamanıza her ikisini de ekleyeceksiniz:
 
@@ -104,7 +105,7 @@ services.AddAuthentication().AddFacebook(facebookOptions =>
 ## <a name="sign-in-with-facebook"></a>Facebook ile oturum açma
 
 * Uygulamayı çalıştırın ve **oturum aç '** ı seçin. 
-* **Oturum açmak için başka bir hizmet kullan**' ın altında Facebook ' ı seçin.
+* **Oturum açmak için başka bir hizmet kullan** ' ın altında Facebook ' ı seçin.
 * Kimlik doğrulaması için **Facebook** 'a yönlendirilirsiniz.
 * Facebook kimlik bilgilerinizi girin.
 * Sitenize geri yönlendirilirsiniz ve e-postanızı ayarlayabiliyorsunuz.
@@ -132,7 +133,7 @@ Aşağıdaki kod öğesini olarak ayarlar `AccessDeniedPath` `"/AccessDeniedPath
 * [Facebook.com](https://www.facebook.com/) adresine gidin
 * Oturum açtıysanız oturumunuzu kapatmalısınız.
 * Uygulamayı çalıştırın ve Facebook oturum açma ' yı seçin.
-* **Şimdi değil**' i seçin. Belirtilen `AccessDeniedPath` sayfaya yönlendirilirsiniz.
+* **Şimdi değil** ' i seçin. Belirtilen `AccessDeniedPath` sayfaya yönlendirilirsiniz.
 
 <!-- End of React  -->
 [!INCLUDE[Forward request information when behind a proxy or load balancer section](includes/forwarded-headers-middleware.md)]
@@ -146,7 +147,7 @@ Facebook kimlik doğrulaması tarafından desteklenen yapılandırma seçenekler
 
 ## <a name="troubleshooting"></a>Sorun giderme
 
-* **Yalnızca 2. x ASP.NET Core:** Identity `services.AddIdentity` ' De çağırarak yapılandırılmamışsa `ConfigureServices` , kimlik doğrulamaya çalışmak ArgumentException ile sonuçlanır *: ' signınscheme ' seçeneği sağlanmalıdır*. Bu öğreticide kullanılan proje şablonu bunun yapılmasını sağlar.
+* **Yalnızca 2. x ASP.NET Core:** Identity `services.AddIdentity` ' De çağırarak yapılandırılmamışsa `ConfigureServices` , kimlik doğrulamaya çalışmak ArgumentException ile sonuçlanır *: ' signınscheme ' seçeneği sağlanmalıdır* . Bu öğreticide kullanılan proje şablonu bunun yapılmasını sağlar.
 * Site veritabanı ilk geçiş uygulanarak oluşturulmadıysa, *istek hatasını Işlerken bir veritabanı işlemi başarısız oldu* . Veritabanını oluşturmak için **geçişleri Uygula** ' ya dokunun ve hatanın ötesinde devam etmek için yenileyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar

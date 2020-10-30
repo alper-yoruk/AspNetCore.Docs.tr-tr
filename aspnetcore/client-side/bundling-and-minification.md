@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 09/02/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: client-side/bundling-and-minification
-ms.openlocfilehash: f696df0b421e5aab6f50cfaec3ca8edac894cea9
-ms.sourcegitcommit: c9b03d8a6a4dcc59e4aacb30a691f349235a74c8
+ms.openlocfilehash: 7dd11ceb7a7c01ce1042f50595013b7fe7f1cd5c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/02/2020
-ms.locfileid: "89379399"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054846"
 ---
 # <a name="bundle-and-minify-static-assets-in-aspnet-core"></a>ASP.NET Core statik varlıkları paketleyin ve azın
 
@@ -89,25 +90,25 @@ ASP.NET Core 2,0 veya önceki sürümlerde, MVC ve Razor Sayfalar proje şablonl
 
 ::: moniker range=">= aspnetcore-2.1"
 
-ASP.NET Core 2,1 veya üzeri sürümlerde, MVC veya Pages proje köküne *bundleconfig.js*adlı yenı bir JSON dosyası ekleyin Razor . Aşağıdaki JSON 'yi bir başlangıç noktası olarak bu dosyaya ekleyin:
+ASP.NET Core 2,1 veya üzeri sürümlerde, MVC veya Pages proje köküne *bundleconfig.js* adlı yenı bir JSON dosyası ekleyin Razor . Aşağıdaki JSON 'yi bir başlangıç noktası olarak bu dosyaya ekleyin:
 
 ::: moniker-end
 
 [!code-json[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/bundleconfig.json)]
 
-Dosyadaki *bundleconfig.js* her bir paket için seçenekleri tanımlar. Yukarıdaki örnekte, özel JavaScript (*Wwwroot/js/site.js*) ve stil sayfası (*Wwwroot/CSS/site. css*) dosyaları için tek bir paket yapılandırması tanımlanmıştır.
+Dosyadaki *bundleconfig.js* her bir paket için seçenekleri tanımlar. Yukarıdaki örnekte, özel JavaScript ( *Wwwroot/js/site.js* ) ve stil sayfası ( *Wwwroot/CSS/site. css* ) dosyaları için tek bir paket yapılandırması tanımlanmıştır.
 
 Yapılandırma seçenekleri şunlardır:
 
 * `outputFileName`: Çıkış yapılacak paket dosyasının adı. Dosyadaki *bundleconfig.js* göreli bir yol içerebilir. **Gerekli**
-* `inputFiles`: Birlikte paketedilecek dosya dizisi. Bunlar yapılandırma dosyasına yönelik göreli yollardır. **isteğe bağlı*** boş bir değer boş bir çıktı dosyasıyla sonuçlanır. [Glob](https://www.tldp.org/LDP/abs/html/globbingref.html) desenleri desteklenir.
-* `minify`: Çıkış türü için minbirleşme seçenekleri. **isteğe bağlı**, *varsayılan `minify: { enabled: true }` -*
+* `inputFiles`: Birlikte paketedilecek dosya dizisi. Bunlar yapılandırma dosyasına yönelik göreli yollardır. **isteğe bağlı** * boş bir değer boş bir çıktı dosyasıyla sonuçlanır. [Glob](https://www.tldp.org/LDP/abs/html/globbingref.html) desenleri desteklenir.
+* `minify`: Çıkış türü için minbirleşme seçenekleri. **isteğe bağlı** , *varsayılan `minify: { enabled: true }` -*
   * Yapılandırma seçenekleri çıkış dosyası türü başına kullanılabilir.
     * [CSS minifier](https://github.com/madskristensen/BundlerMinifier/wiki/cssminifier)
     * [JavaScript minifier](https://github.com/madskristensen/BundlerMinifier/wiki/JavaScript-Minifier-settings)
     * [HTML minifier](https://github.com/madskristensen/BundlerMinifier/wiki)
-* `includeInProject`: Oluşturulan dosyalar proje dosyasına eklenip eklenmeyeceğini belirten bayrak. **isteğe bağlı**, *Varsayılan-yanlış*
-* `sourceMap`: Paketlenmiş dosya için bir kaynak eşlemesi oluşturulup oluşturulmayacağını belirten bayrak. **isteğe bağlı**, *Varsayılan-yanlış*
+* `includeInProject`: Oluşturulan dosyalar proje dosyasına eklenip eklenmeyeceğini belirten bayrak. **isteğe bağlı** , *Varsayılan-yanlış*
+* `sourceMap`: Paketlenmiş dosya için bir kaynak eşlemesi oluşturulup oluşturulmayacağını belirten bayrak. **isteğe bağlı** , *Varsayılan-yanlış*
 * `sourceMapRootPath`: Oluşturulan kaynak eşleme dosyasını depolamak için kök yolu.
 
 ## <a name="add-files-to-workflow"></a>İş akışına dosya ekleme
@@ -116,7 +117,7 @@ Aşağıdakilere benzer bir ek *özel. css* dosyası eklendiğini bir örnek dü
 
 [!code-css[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/wwwroot/css/custom.css)]
 
-*Custom. css* dosyasını küçültmeye ve *site. css* ' yi bir *site. min. css* dosyasına paketleyip, göreli yolu *üzerinebundleconfig.js*ekleyin:
+*Custom. css* dosyasını küçültmeye ve *site. css* ' yi bir *site. min. css* dosyasına paketleyip, göreli yolu *üzerinebundleconfig.js* ekleyin:
 
 [!code-json[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/bundleconfig2.json?highlight=6)]
 
@@ -178,7 +179,7 @@ Aşağıdaki gibi, proje köküne bir dosya *package.js* ekleyin `devDependencie
 
 [!code-json[](../client-side/bundling-and-minification/samples/BuildBundlerMinifierApp/package.json?range=5-13)]
 
-Aşağıdaki komutu *package.js*ile aynı düzeyde çalıştırarak bağımlılıkları yükler:
+Aşağıdaki komutu *package.js* ile aynı düzeyde çalıştırarak bağımlılıkları yükler:
 
 ```bash
 npm i

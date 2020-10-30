@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 9/26/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 35a5758500ae2bc691c8d08eccb22340f9998c39
-ms.sourcegitcommit: 6c82d78662332cd40d614019b9ed17c46e25be28
+ms.openlocfilehash: c4b4f2b89be2018857abaafb448f052c3848ec59
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/29/2020
-ms.locfileid: "91424301"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93054092"
 ---
 # <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor ASP.NET Core Entity Framework Core olan sayfalar-öğretici 1/8
 
@@ -118,10 +119,10 @@ To run the app after downloading the completed project:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Visual Studio **Dosya** menüsünden **Yeni** > **Proje**' yi seçin.
-* **ASP.NET Core Web uygulaması**' nı seçin.
-* Projeyi *Contosouniversity*olarak adlandırın. Büyük harfler de dahil olmak üzere bu tam adı kullanmak önemlidir, bu nedenle kod kopyalanıp yapıştırılırken ad alanları eşleşir.
-* Açılan menüden **.NET Core** ve **5,0 ASP.NET Core** seçin ve ardından **Web uygulaması**' nı seçin.
+* Visual Studio **Dosya** menüsünden **Yeni** > **Proje** ' yi seçin.
+* **ASP.NET Core Web uygulaması** ' nı seçin.
+* Projeyi *Contosouniversity* olarak adlandırın. Büyük harfler de dahil olmak üzere bu tam adı kullanmak önemlidir, bu nedenle kod kopyalanıp yapıştırılırken ad alanları eşleşir.
+* Açılan menüden **.NET Core** ve **5,0 ASP.NET Core** seçin ve ardından **Web uygulaması** ' nı seçin.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -143,9 +144,9 @@ Düzen dosyası site üst bilgisini, alt bilgisini ve menüsünü ayarlar. Yukar
 
 * Her "ContosoUniversity" öğesinin "Contoso Üniversitesi" olarak her oluşumu. Üç oluşum vardır.
 * **Giriş** ve **Gizlilik** menü girişleri silinir.
-* , **Öğrenciler**, **Kurslar**, **eğitmenler**ve **Departmanlar** **için girişler**eklenir.
+* , **Öğrenciler** , **Kurslar** , **eğitmenler** ve **Departmanlar** **için girişler** eklenir.
 
-*Pages/Index. cshtml*dosyasında, dosyanın içeriğini aşağıdaki kodla değiştirin:
+*Pages/Index. cshtml* dosyasında, dosyanın içeriğini aşağıdaki kodla değiştirin:
 
 [!code-cshtml[Main](intro/samples/cu50/Pages/Index.cshtml)]
 
@@ -221,15 +222,15 @@ Bu bölümde, oluşturmak için ASP.NET Core scafkatlama aracını kullanırsın
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * *Sayfalar/öğrenciler* klasörü oluşturun.
-* **Çözüm Gezgini**, *Sayfalar/öğrenciler* klasörüne sağ tıklayın ve **Add** > **yeni yapı iskelesi Ekle öğesini**seçin.
+* **Çözüm Gezgini** , *Sayfalar/öğrenciler* klasörüne sağ tıklayın ve **Add** > **yeni yapı iskelesi Ekle öğesini** seçin.
 * **Yeni yapı Iskelesi öğesi Ekle** iletişim kutusunda:
   * Sol sekmede, **yüklü > ortak > Razor sayfaları** ' nı seçin
-  * ** Razor Entity Framework (CRUD) Ekle kullanarak sayfa** seçin > **ADD**.
-* ** Razor Entity Framework (CRUD) kullanarak sayfa ekle** iletişim kutusunda:
+  * **Razor Entity Framework (CRUD) Ekle kullanarak sayfa** seçin > **ADD** .
+* **Razor Entity Framework (CRUD) kullanarak sayfa ekle** iletişim kutusunda:
   * **Model sınıfı** açılır penceresinde **öğrenci (Contosouniversity. modeller)** öğesini seçin.
   * **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin.
     * Veri bağlamı adını yerine End ile değiştirin `SchoolContext` `ContosoUniversityContext` . Güncelleştirilmiş bağlam adı: `ContosoUniversity.Data.SchoolContext`
-   * **Add (Ekle)** seçeneğini belirleyin.
+   * **Ekle** ’yi seçin.
 
 Aşağıdaki paketler otomatik olarak yüklenir:
 
@@ -287,13 +288,13 @@ Yapı iskelesi işlemi:
   * *Details. cshtml* ve *details.cshtml.cs*
   * *. Cshtml* ve *Edit.cshtml.cs* Düzenle
   * *Index. cshtml* ve *Index.cshtml.cs*
-* *Data/SchoolContext. cs*oluşturur.
-* *Startup.cs*içinde bağımlılık eklenmesine bağlam ekler.
-* *appsettings.js*için bir veritabanı bağlantı dizesi ekler.
+* *Data/SchoolContext. cs* oluşturur.
+* *Startup.cs* içinde bağımlılık eklenmesine bağlam ekler.
+* Öğesine bir veritabanı bağlantı dizesi ekler *appsettings.json* .
 
 ## <a name="database-connection-string"></a>Veritabanı bağlantı dizesi
 
-Scafkatlama aracı dosyadaki *appsettings.js* bir bağlantı dizesi oluşturur.
+Scafkatlama aracı dosyada bir bağlantı dizesi oluşturur *appsettings.json* .
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -305,7 +306,7 @@ LocalDB, SQL Server Express veritabanı altyapısının hafif bir sürümüdür 
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-*. Db*için SQLite bağlantı dizesini kısaltın:
+*. Db* için SQLite bağlantı dizesini kısaltın:
 
 [!code-json[Main](intro/samples/cu50/appsettingsSQLite.json?highlight=11)]
 
@@ -360,7 +361,7 @@ Desteği çağrıları tarafından eklenen kodu doğrulayın `UseSqlite` .
 
 ---
 
-Bağlantı dizesinin adı, [Dbcontextoptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) nesnesinde bir yöntem çağırarak bağlama geçirilir. Yerel geliştirme için [ASP.NET Core yapılandırma sistemi](xref:fundamentals/configuration/index) dosyadaki *appsettings.js* bağlantı dizesini okur.
+Bağlantı dizesinin adı, [Dbcontextoptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) nesnesinde bir yöntem çağırarak bağlama geçirilir. Yerel geliştirme için [ASP.NET Core yapılandırma sistemi](xref:fundamentals/configuration/index) dosyadaki bağlantı dizesini okur *appsettings.json* .
 
 ### <a name="add-the-database-exception-filter"></a>Veritabanı özel durum filtresini ekleme
 
@@ -406,7 +407,7 @@ Bu iş akışı, verileri korumanıza gerek olmadığı sürece, şema hızlı b
 ### <a name="test-the-app"></a>Uygulamayı test etme
 
 * Uygulamayı çalıştırın.
-* **Öğrenciler** bağlantısını seçin ve ardından **Yeni oluştur**.
+* **Öğrenciler** bağlantısını seçin ve ardından **Yeni oluştur** .
 * Düzenle, Ayrıntılar ve Sil bağlantılarını test edin.
 
 ## <a name="seed-the-database"></a>Veritabanını çekirdek
@@ -419,7 +420,7 @@ Aşağıdaki kodla *veri/Dbınizer. cs* oluşturun:
 
   Kod, veritabanında herhangi bir öğrenci olup olmadığını denetler. Öğrenci yoksa, veritabanına test verileri ekler. Performansı iyileştirmek için Koleksiyonlar yerine diziler halinde test verileri oluşturur `List<T>` .
 
-*Program.cs*içinde, `EnsureCreated` çağrıyı bir çağrı ile değiştirin `DbInitializer.Initialize` :
+*Program.cs* içinde, `EnsureCreated` çağrıyı bir çağrı ile değiştirin `DbInitializer.Initialize` :
 
   ```csharp
   // context.Database.EnsureCreated();
@@ -576,10 +577,10 @@ Tamamlanmış projeyi indirdikten sonra uygulamayı çalıştırmak için:
 
 Tamamlanmış projeyi indirdikten sonra uygulamayı çalıştırmak için:
 
-* *Contosouniversity. csproj*öğesini silin ve *Contosoüniversıtysqlite. csproj* öğesini *contosouniversity. csproj*olarak yeniden adlandırın.
-* *Program.cs*' de, açıklama dışarı bu `#define Startup` şekilde `StartupSQLite` kullanılır.
-* *appSettings.js*silin ve üzerinde *appSettings.js* *appSettingsSQLite.js* yeniden adlandırın.
-* *Geçişler* klasörünü silin ve *migrationssql* öğesini *geçişlerle*yeniden adlandırın.
+* *Contosouniversity. csproj* öğesini silin ve *Contosoüniversıtysqlite. csproj* öğesini *contosouniversity. csproj* olarak yeniden adlandırın.
+* *Program.cs* ' de, açıklama dışarı bu `#define Startup` şekilde `StartupSQLite` kullanılır.
+* *appSettings.js* silin ve üzerinde *appSettings.js* *appSettingsSQLite.js* yeniden adlandırın.
+* *Geçişler* klasörünü silin ve *migrationssql* öğesini *geçişlerle* yeniden adlandırın.
 * İçin genel arama yapın `#if SQLiteVersion` ve `#if SQLiteVersion` ilgili `#endif` ifadeyi kaldırın.
 * Projeyi derleyin.
 * Proje klasöründeki bir komut isteminde aşağıdaki komutları çalıştırın:
@@ -604,10 +605,10 @@ Tamamlanmış projeyi indirdikten sonra uygulamayı çalıştırmak için:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Visual Studio **Dosya** menüsünden **Yeni** > **Proje**' yi seçin.
-* **ASP.NET Core Web uygulaması**' nı seçin.
-* Projeyi *Contosouniversity*olarak adlandırın. Büyük harfler de dahil olmak üzere bu tam adı kullanmak önemlidir, bu nedenle kod kopyalanıp yapıştırılırken ad alanları eşleşir.
-* Açılan menüden **.NET Core** ve **3,0 ASP.NET Core** seçin ve ardından **Web uygulaması**' nı seçin.
+* Visual Studio **Dosya** menüsünden **Yeni** > **Proje** ' yi seçin.
+* **ASP.NET Core Web uygulaması** ' nı seçin.
+* Projeyi *Contosouniversity* olarak adlandırın. Büyük harfler de dahil olmak üzere bu tam adı kullanmak önemlidir, bu nedenle kod kopyalanıp yapıştırılırken ad alanları eşleşir.
+* Açılan menüden **.NET Core** ve **3,0 ASP.NET Core** seçin ve ardından **Web uygulaması** ' nı seçin.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
@@ -624,17 +625,17 @@ Tamamlanmış projeyi indirdikten sonra uygulamayı çalıştırmak için:
 
 ## <a name="set-up-the-site-style"></a>Site stilini ayarlayın
 
-*Sayfa/paylaşılan/_Layout. cshtml*'yi güncelleştirerek site üst bilgisini, alt bilgisini ve menüsünü ayarlayın:
+*Sayfa/paylaşılan/_Layout. cshtml* 'yi güncelleştirerek site üst bilgisini, alt bilgisini ve menüsünü ayarlayın:
 
 * "ContosoUniversity" öğesinin her oluşumunu "Contoso Üniversitesi" olarak değiştirin. Üç oluşum vardır.
 
-* **Giriş** ve **Gizlilik** menü girişlerini silin ve **hakkında**, **öğrenciler**, **Kurslar**, **eğitmenler**ve **Departmanlar**için girişler ekleyin.
+* **Giriş** ve **Gizlilik** menü girişlerini silin ve **hakkında** , **öğrenciler** , **Kurslar** , **eğitmenler** ve **Departmanlar** için girişler ekleyin.
 
 Değişiklikler vurgulanır.
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Shared/_Layout.cshtml?highlight=6,14,21-35,49)]
 
-*Pages/Index. cshtml*dosyasında, ASP.NET Core hakkındaki metni bu uygulamayla ilgili metinle değiştirmek için dosyanın içeriğini aşağıdaki kodla değiştirin:
+*Pages/Index. cshtml* dosyasında, ASP.NET Core hakkındaki metni bu uygulamayla ilgili metinle değiştirmek için dosyanın içeriğini aşağıdaki kodla değiştirin:
 
 [!code-cshtml[Main](intro/samples/cu30/Pages/Index.cshtml)]
 
@@ -707,13 +708,13 @@ Bu bölümde, oluşturmak için ASP.NET Core scafkatlama aracını kullanırsın
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * *Sayfalar* klasöründe bir *öğrenciler* klasörü oluşturun.
-* **Çözüm Gezgini**, *Sayfalar/öğrenciler* klasörüne sağ tıklayın ve **Add** > **yeni yapı iskelesi Ekle öğesini**seçin.
-* **Yapı iskelesi Ekle** iletişim kutusunda ** Razor Entity Framework (CRUD) Ekle öğesini kullanarak sayfalar** ' ı seçin > **ADD**.
-* ** Razor Entity Framework (CRUD) kullanarak sayfa ekle** iletişim kutusunda:
+* **Çözüm Gezgini** , *Sayfalar/öğrenciler* klasörüne sağ tıklayın ve **Add** > **yeni yapı iskelesi Ekle öğesini** seçin.
+* **Yapı iskelesi Ekle** iletişim kutusunda **Razor Entity Framework (CRUD) Ekle öğesini kullanarak sayfalar** ' ı seçin > **ADD** .
+* **Razor Entity Framework (CRUD) kullanarak sayfa ekle** iletişim kutusunda:
   * **Model sınıfı** açılır penceresinde **öğrenci (Contosouniversity. modeller)** öğesini seçin.
   * **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin.
-  * *Contosouniversity. modeller. Contosoüniversıtycontext* olan veri bağlamı adını *Contosouniversity. Data. SchoolContext*olarak değiştirin.
-  * **Add (Ekle)** seçeneğini belirleyin.
+  * *Contosouniversity. modeller. Contosoüniversıtycontext* olan veri bağlamı adını *Contosouniversity. Data. SchoolContext* olarak değiştirin.
+  * **Ekle** ’yi seçin.
 
 Aşağıdaki paketler otomatik olarak yüklenir:
 
@@ -774,15 +775,15 @@ Yapı iskelesi işlemi:
   * *Details. cshtml* ve *details.cshtml.cs*
   * *. Cshtml* ve *Edit.cshtml.cs* Düzenle
   * *Index. cshtml* ve *Index.cshtml.cs*
-* *Data/SchoolContext. cs*oluşturur.
-* *Startup.cs*içinde bağımlılık eklenmesine bağlam ekler.
-* *appsettings.js*için bir veritabanı bağlantı dizesi ekler.
+* *Data/SchoolContext. cs* oluşturur.
+* *Startup.cs* içinde bağımlılık eklenmesine bağlam ekler.
+* Öğesine bir veritabanı bağlantı dizesi ekler *appsettings.json* .
 
 ## <a name="database-connection-string"></a>Veritabanı bağlantı dizesi
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-*appsettings.js* dosya [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb)bağlantı dizesini belirtir.
+*appsettings.json* Dosya, [SQL Server LocalDB](/sql/database-engine/configure-windows/sql-server-2016-express-localdb)bağlantı dizesini belirtir.
 
 [!code-json[Main](intro/samples/cu30/appsettings.json?highlight=11)]
 
@@ -790,7 +791,7 @@ LocalDB, SQL Server Express veritabanı altyapısının hafif bir sürümüdür 
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-Bağlantı dizesini *cu. db*adlı bir SQLite veritabanı dosyasını işaret etmek üzere değiştirin:
+Bağlantı dizesini *cu. db* adlı bir SQLite veritabanı dosyasını işaret etmek üzere değiştirin:
 
 [!code-json[Main](intro/samples/cu30/appsettingsSQLite.json?highlight=11)]
 
@@ -835,7 +836,7 @@ Scafkatlama Aracı, bağlam sınıfını bağımlılık ekleme kapsayıcısına 
 
 ---
 
-Bağlantı dizesinin adı, [Dbcontextoptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) nesnesinde bir yöntem çağırarak bağlama geçirilir. Yerel geliştirme için [ASP.NET Core yapılandırma sistemi](xref:fundamentals/configuration/index) dosyadaki *appsettings.js* bağlantı dizesini okur.
+Bağlantı dizesinin adı, [Dbcontextoptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) nesnesinde bir yöntem çağırarak bağlama geçirilir. Yerel geliştirme için [ASP.NET Core yapılandırma sistemi](xref:fundamentals/configuration/index) dosyadaki bağlantı dizesini okur *appsettings.json* .
 
 ## <a name="create-the-database"></a>Veritabanını oluşturma
 
@@ -857,7 +858,7 @@ Bu iş akışı, verileri korumanıza gerek olmadığı sürece, şema hızlı b
 ### <a name="test-the-app"></a>Uygulamayı test etme
 
 * Uygulamayı çalıştırın.
-* **Öğrenciler** bağlantısını seçin ve ardından **Yeni oluştur**.
+* **Öğrenciler** bağlantısını seçin ve ardından **Yeni oluştur** .
 * Düzenle, Ayrıntılar ve Sil bağlantılarını test edin.
 
 ## <a name="seed-the-database"></a>Veritabanını çekirdek
@@ -870,7 +871,7 @@ Aşağıdaki kodla *veri/Dbınizer. cs* oluşturun:
 
   Kod, veritabanında herhangi bir öğrenci olup olmadığını denetler. Öğrenci yoksa, veritabanına test verileri ekler. Performansı iyileştirmek için Koleksiyonlar yerine diziler halinde test verileri oluşturur `List<T>` .
 
-* *Program.cs*içinde, `EnsureCreated` çağrıyı bir çağrı ile değiştirin `DbInitializer.Initialize` :
+* *Program.cs* içinde, `EnsureCreated` çağrıyı bir çağrı ile değiştirin `DbInitializer.Initialize` :
 
   ```csharp
   // context.Database.EnsureCreated();
@@ -992,9 +993,9 @@ Bu sitenin kullanıcı arabirimi stili yerleşik şablonlar tarafından üretilm
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Visual Studio **Dosya** menüsünden **Yeni** > **Proje**' yi seçin.
-* Yeni bir ASP.NET Core Web uygulaması oluşturun. Projeyi **Contosouniversity**olarak adlandırın. Kod kopyalama/yapıştırma olduğunda, ad alanlarının eşleşmesi için *Contosouniversity* projesini adlandırmak önemlidir.
-* Açılan listede **ASP.NET Core 2,1** ' i seçin ve ardından **Web uygulaması**' nı seçin.
+* Visual Studio **Dosya** menüsünden **Yeni** > **Proje** ' yi seçin.
+* Yeni bir ASP.NET Core Web uygulaması oluşturun. Projeyi **Contosouniversity** olarak adlandırın. Kod kopyalama/yapıştırma olduğunda, ad alanlarının eşleşmesi için *Contosouniversity* projesini adlandırmak önemlidir.
+* Açılan listede **ASP.NET Core 2,1** ' i seçin ve ardından **Web uygulaması** ' nı seçin.
 
 Yukarıdaki adımların görüntüleri için bkz. [ Razor Web uygulaması oluşturma](xref:tutorials/razor-pages/razor-pages-start#create-a-razor-pages-web-app).
 Uygulamayı çalıştırın.
@@ -1015,13 +1016,13 @@ Site menüsünü, düzeni ve giriş sayfasını birkaç değişiklik ayarlar. *S
 
 * "ContosoUniversity" öğesinin her oluşumunu "Contoso Üniversitesi" olarak değiştirin. Üç oluşum vardır.
 
-* **Öğrenciler**, **Kurslar**, **eğitmenler**ve **Departmanlar**için menü girişleri ekleyin ve **kişi** menü girişini silin.
+* **Öğrenciler** , **Kurslar** , **eğitmenler** ve **Departmanlar** için menü girişleri ekleyin ve **kişi** menü girişini silin.
 
 Değişiklikler vurgulanır. (Tüm *biçimlendirme gösterilmez.* )
 
 [!code-cshtml[](intro/samples/cu21/Pages/Shared/_Layout.cshtml?highlight=6,29,35-38,50&name=snippet)]
 
-*Pages/Index. cshtml*dosyasında, ASP.net ve MVC hakkındaki metni bu uygulamayla ilgili metinle değiştirmek için dosyanın içeriğini aşağıdaki kodla değiştirin:
+*Pages/Index. cshtml* dosyasında, ASP.net ve MVC hakkındaki metni bu uygulamayla ilgili metinle değiştirmek için dosyanın içeriğini aşağıdaki kodla değiştirin:
 
 [!code-cshtml[](intro/samples/cu21/Pages/Index.cshtml)]
 
@@ -1088,15 +1089,15 @@ Bu bölümde öğrenci modeli scafkatdır. Diğer bir deyişle, scafkatlama arac
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **Çözüm Gezgini**, *Sayfalar/öğrenciler* klasörüne sağ tıklayarak **Add** > **yeni yapı iskelesi öğesi**ekleyin >.
-* **Yapı iskelesi Ekle** iletişim kutusunda ** Razor Entity Framework (CRUD) Ekle öğesini kullanarak sayfalar** ' ı seçin > **ADD**.
+* **Çözüm Gezgini** , *Sayfalar/öğrenciler* klasörüne sağ tıklayarak **Add** > **yeni yapı iskelesi öğesi** ekleyin >.
+* **Yapı iskelesi Ekle** iletişim kutusunda **Razor Entity Framework (CRUD) Ekle öğesini kullanarak sayfalar** ' ı seçin > **ADD** .
 
-** Razor Entity Framework (CRUD) kullanarak sayfa ekle** iletişim kutusunu doldurun:
+**Razor Entity Framework (CRUD) kullanarak sayfa ekle** iletişim kutusunu doldurun:
 
 * **Model sınıfı** açılır penceresinde **öğrenci (Contosouniversity. modeller)** öğesini seçin.
-* **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin ve üretilen adı **Contosouniversity. modeller. SchoolContext**olarak değiştirin.
+* **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin ve üretilen adı **Contosouniversity. modeller. SchoolContext** olarak değiştirin.
 * **Veri bağlamı sınıfı** açılır penceresinde **Contosouniversity. modeller. SchoolContext** öğesini seçin.
-* **Add (Ekle)** seçeneğini belirleyin.
+* **Ekle** ’yi seçin.
 
 ![CRUD iletişim kutusu](intro/_static/s1.png)
 
@@ -1124,7 +1125,7 @@ Yapı iskelesi işlemi oluşturulur ve aşağıdaki dosyaları değiştirdi:
 ### <a name="file-updates"></a>Dosya güncelleştirmeleri
 
 * *Startup.cs* : Bu dosyadaki değişiklikler sonraki bölümde ayrıntılıdır.
-* *appsettings.js* : yerel bir veritabanına bağlanmak için kullanılan bağlantı dizesi eklenir.
+* *appsettings.json* : Yerel bir veritabanına bağlanmak için kullanılan bağlantı dizesi eklenir.
 
 ## <a name="examine-the-context-registered-with-dependency-injection"></a>Bağımlılık ekleme ile kaydedilen bağlamı inceleyin
 
@@ -1132,15 +1133,15 @@ ASP.NET Core [bağımlılık ekleme](xref:fundamentals/dependency-injection)ile 
 
 Scafkatlama aracı otomatik olarak bir DB bağlamı oluşturup bağımlılık ekleme kapsayıcısına kaydettirdi.
 
-`ConfigureServices` *Startup.cs*içindeki yöntemi inceleyin. Vurgulanan satır, scaffolder tarafından eklendi:
+`ConfigureServices` *Startup.cs* içindeki yöntemi inceleyin. Vurgulanan satır, scaffolder tarafından eklendi:
 
 [!code-csharp[](intro/samples/cu21/Startup.cs?name=snippet_SchoolContext&highlight=13-14)]
 
-Bağlantı dizesinin adı, [Dbcontextoptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) nesnesinde bir yöntem çağırarak bağlama geçirilir. Yerel geliştirme için [ASP.NET Core yapılandırma sistemi](xref:fundamentals/configuration/index) dosyadaki *appsettings.js* bağlantı dizesini okur.
+Bağlantı dizesinin adı, [Dbcontextoptions](/dotnet/api/microsoft.entityframeworkcore.dbcontextoptions) nesnesinde bir yöntem çağırarak bağlama geçirilir. Yerel geliştirme için [ASP.NET Core yapılandırma sistemi](xref:fundamentals/configuration/index) dosyadaki bağlantı dizesini okur *appsettings.json* .
 
 ## <a name="update-main"></a>Ana güncelleştirme
 
-*Program.cs*' de, `Main` aşağıdakileri yapmak için yöntemini değiştirin:
+*Program.cs* ' de, `Main` aşağıdakileri yapmak için yöntemini değiştirin:
 
 * Bağımlılık ekleme kapsayıcısından bir DB bağlam örneği alın.
 * Yeniden  [oluşturulmasını](/dotnet/api/microsoft.entityframeworkcore.infrastructure.databasefacade.ensurecreated#Microsoft_EntityFrameworkCore_Infrastructure_DatabaseFacade_EnsureCreated)çağırın.
@@ -1165,7 +1166,7 @@ Aşağıdaki kod güncelleştirilmiş *program.cs* dosyasını gösterir.
 
 Uygulamayı çalıştırın ve ilkeyi kabul edin cookie . Bu uygulama, kişisel bilgileri saklar. İlke hakkında, cookie [AB Genel VERI koruma YÖNETMELIĞI (GDPR) desteğiyle](xref:security/gdpr)ilgili bilgi edinebilirsiniz.
 
-* **Öğrenciler** bağlantısını seçin ve ardından **Yeni oluştur**.
+* **Öğrenciler** bağlantısını seçin ve ardından **Yeni oluştur** .
 * Düzenle, Ayrıntılar ve Sil bağlantılarını test edin.
 
 ## <a name="examine-the-schoolcontext-db-context"></a>SchoolContext DB bağlamını inceleyin
@@ -1201,7 +1202,7 @@ Kod, VERITABANıNDA herhangi bir öğrenci olup olmadığını denetler. Veritab
 
 `EnsureCreated`YÖNTEMI DB bağlamı için otomatik olarak DB oluşturur. VERITABANı varsa, `EnsureCreated` veritabanını değiştirmeden döndürür.
 
-*Program.cs*içinde, `Main` çağrısı yapılacak yöntemi değiştirin `Initialize` :
+*Program.cs* içinde, `Main` çağrısı yapılacak yöntemi değiştirin `Initialize` :
 
 [!code-csharp[](intro/samples/cu21/Program.cs?name=snippet2&highlight=14-15)]
 
@@ -1223,7 +1224,7 @@ Drop-Database
 
 Veritabanı adı, daha önce belirttiğiniz bağlam adından ve bir tire ve bir GUID ile oluşturulur. Bu nedenle, veritabanı adı "SchoolContext-{GUID}" olacaktır. GUID her kullanıcı için farklı olacaktır.
 Visual Studio 'daki **Görünüm** menüsünden **SQL Server Nesne Gezgini** (ssox) öğesini açın.
-SSOX 'te, **(LocalDB) \MSSQLLocalDB > veritabanları > SchoolContext-{GUID}**' a tıklayın.
+SSOX 'te, **(LocalDB) \MSSQLLocalDB > veritabanları > SchoolContext-{GUID}** ' a tıklayın.
 
 **Tables** düğümünü genişletin.
 

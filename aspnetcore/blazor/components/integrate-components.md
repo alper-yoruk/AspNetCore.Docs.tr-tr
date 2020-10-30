@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/25/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/components/integrate-components-into-razor-pages-and-mvc-apps
-ms.openlocfilehash: e2045d7d169e81c85f4c7dbd97357455ecd70ea3
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e56a08be082cef4ba3a0a58fdfa9d3800d244f75
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628488"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056263"
 ---
 # <a name="integrate-aspnet-core-no-locrazor-components-into-no-locrazor-pages-and-mvc-apps"></a>ASP.NET Core Razor bileşenlerini Razor Sayfalar ve MVC uygulamalarıyla tümleştirme
 
@@ -50,7 +51,7 @@ Mevcut Razor Sayfalar ve MVC uygulamaları, Razor bileşenleri sayfalar ve gör�
      <base href="~/" />
      ```
 
-     `href`Yukarıdaki örnekte yer alan değer ( *uygulama temel yolu*), uygulamanın kök URL yolunda () bulunduğunu varsayar `/` . Uygulama bir alt uygulama ise, makalenin *uygulama temel yolu* bölümündeki yönergeleri izleyin <xref:blazor/host-and-deploy/index#app-base-path> .
+     `href`Yukarıdaki örnekte yer alan değer ( *uygulama temel yolu* ), uygulamanın kök URL yolunda () bulunduğunu varsayar `/` . Uygulama bir alt uygulama ise, makalenin *uygulama temel yolu* bölümündeki yönergeleri izleyin <xref:blazor/host-and-deploy/index#app-base-path> .
 
      `_Layout.cshtml`Dosya, BIR MVC uygulamasında sayfalar uygulaması veya görünümler/paylaşılan klasöründe *Sayfalar/paylaşılan* klasöründe bulunur Razor . *Views/Shared*
 
@@ -152,7 +153,7 @@ RazorSayfalar uygulamalarında yönlendirilebilir bileşenleri desteklemek için
    });
    ```
 
-1. Uygulamaya yönlendirilebilir bileşenler ekleyin. Örnek:
+1. Uygulamaya yönlendirilebilir bileşenler ekleyin. Örneğin:
 
    ```razor
    @page "/counter"
@@ -235,7 +236,7 @@ RazorMVC uygulamalarında yönlendirilebilir bileşenleri desteklemek için:
    });
    ```
 
-1. Bir `Pages` klasör oluşturun ve uygulamaya yönlendirilebilir bileşenler ekleyin. Örnek:
+1. Bir `Pages` klasör oluşturun ve uygulamaya yönlendirilebilir bileşenler ekleyin. Örneğin:
 
    ```razor
    @page "/counter"
