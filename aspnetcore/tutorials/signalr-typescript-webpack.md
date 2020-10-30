@@ -6,6 +6,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 02/10/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/signalr-typescript-webpack
-ms.openlocfilehash: 912f6f5d20add99cd0173b6d1ebcf06161c448f5
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 949276bf4aae33c3af3fd1b8219a83868095f378
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629684"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056848"
 ---
 # <a name="use-aspnet-core-no-locsignalr-with-typescript-and-webpack"></a>SignalRTypeScript ve WebPack ile ASP.NET Core kullanma
 
@@ -30,7 +31,7 @@ ms.locfileid: "88629684"
 
 [WebPack](https://webpack.js.org/) , geliştiricilerin bir Web uygulamasının istemci tarafı kaynaklarını paketleyip oluşturmalarına olanak sağlar. Bu öğretici SignalR , Istemcisinin [TypeScript](https://www.typescriptlang.org/)'te yazıldığı bir ASP.NET Core Web uygulamasında WebPack 'in kullanımını gösterir.
 
-Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
+Bu öğreticide aşağıdakilerin nasıl yapılacağını öğreneceksiniz:
 
 > [!div class="checklist"]
 > * Bir başlatıcı ASP.NET Core SignalR uygulaması oluşturma
@@ -43,7 +44,7 @@ Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -66,37 +67,37 @@ Bu öğreticide şunların nasıl yapıldığını öğreneceksiniz:
 
 Visual Studio 'Yu, *Path* ortam değişkeninde NPM için arama yapmak üzere yapılandırın. Varsayılan olarak, Visual Studio yükleme dizininde bulunan NPM sürümünü kullanır. Visual Studio 'da şu yönergeleri izleyin:
 
-1. Visual Studio 'Yu başlatın. Başlangıç penceresinde, **kod olmadan devam et**' i seçin.
-1. **Araçlar** > **Seçenekler** > **Projeler ve çözümler** > **Web paket yönetimi** > **dış Web araçları**' na gidin.
-1. Listeden *$ (yol)* girişini seçin. Yukarı oka tıklayarak girişi listedeki ikinci konuma taşıyın ve **Tamam**' ı seçin.
+1. Visual Studio 'Yu başlatın. Başlangıç penceresinde, **kod olmadan devam et** ' i seçin.
+1. **Araçlar** > **Seçenekler** > **Projeler ve çözümler** > **Web paket yönetimi** > **dış Web araçları** ' na gidin.
+1. Listeden *$ (yol)* girişini seçin. Yukarı oka tıklayarak girişi listedeki ikinci konuma taşıyın ve **Tamam** ' ı seçin.
 
     ![Visual Studio yapılandırması](signalr-typescript-webpack/_static/signalr-configure-path-visual-studio.png)
 
 Visual Studio yapılandırması tamamlanmıştır.
 
-1. **Dosya**  >  **Yeni**  >  **Proje** menü seçeneğini kullanın ve **ASP.NET Core Web uygulaması** şablonunu seçin. **İleri**’yi seçin.
-1. Projeyi * SignalR WebPack*olarak adlandırın ve **Oluştur**' u seçin.
-1. Hedef çerçeve açılır listesinden *.NET Core* ' u seçin ve çerçeve Seçicisi açılır listesinden *ASP.NET Core 3,1* ' ı seçin. **Boş** şablonu seçin ve **Oluştur**' u seçin.
+1. **Dosya**  >  **Yeni**  >  **Proje** menü seçeneğini kullanın ve **ASP.NET Core Web uygulaması** şablonunu seçin. **İleri** ’yi seçin.
+1. Projeyi *SignalR WebPack* olarak adlandırın ve **Oluştur** ' u seçin.
+1. Hedef çerçeve açılır listesinden *.NET Core* ' u seçin ve çerçeve Seçicisi açılır listesinden *ASP.NET Core 3,1* ' ı seçin. **Boş** şablonu seçin ve **Oluştur** ' u seçin.
 
 `Microsoft.TypeScript.MSBuild`Paketi projeye ekleyin:
 
-1. **Çözüm Gezgini** (sağ bölme) içinde, proje düğümüne sağ tıklayın ve **NuGet Paketlerini Yönet**' i seçin. Araştır sekmesine **gidin** `Microsoft.TypeScript.MSBuild` ve ardından paketi yüklemek için sağ tarafta bulunan **Install** ara ' yı tıklatın.
+1. **Çözüm Gezgini** (sağ bölme) içinde, proje düğümüne sağ tıklayın ve **NuGet Paketlerini Yönet** ' i seçin. Araştır sekmesine **gidin** `Microsoft.TypeScript.MSBuild` ve ardından paketi yüklemek için sağ tarafta bulunan **Install** ara ' yı tıklatın.
 
-Visual Studio, NuGet paketini **Çözüm Gezgini**' deki **Bağımlılıklar** düğümüne ekler ve projede TypeScript derlemesini etkinleştirir.
+Visual Studio, NuGet paketini **Çözüm Gezgini** ' deki **Bağımlılıklar** düğümüne ekler ve projede TypeScript derlemesini etkinleştirir.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-**Tümleşik terminalde**aşağıdaki komutu çalıştırın:
+**Tümleşik terminalde** aşağıdaki komutu çalıştırın:
 
 ```dotnetcli
 dotnet new web -o SignalRWebPack
 code -r SignalRWebPack
 ```
 
-* `dotnet new`Komut, bir * SignalR WebPack* dizininde boş bir ASP.NET Core Web uygulaması oluşturur.
-* `code`Komut, Visual Studio Code geçerli örneğindeki * SignalR WebPack* klasörünü açar.
+* `dotnet new`Komut, bir *SignalR WebPack* dizininde boş bir ASP.NET Core Web uygulaması oluşturur.
+* `code`Komut, Visual Studio Code geçerli örneğindeki *SignalR WebPack* klasörünü açar.
 
-**Tümleşik terminalde**aşağıdaki .NET Core CLI komutunu çalıştırın:
+**Tümleşik terminalde** aşağıdaki .NET Core CLI komutunu çalıştırın:
 
 ```dotnetcli
 dotnet add package Microsoft.TypeScript.MSBuild
@@ -131,7 +132,7 @@ Aşağıdaki adımlar, TypeScript 'in JavaScript 'e dönüştürülmesini ve ist
     Aklınızda bazı komut ayrıntıları:
 
     * Sürüm numarası `@` her paket adı için işareti izler. NPM bu özel paket sürümlerini yüklüyor.
-    * Bu `-E` seçenek, NPM 'nin [anlam sürümü oluşturma](https://semver.org/) aralığı işleçlerini *package.js*için varsayılan davranışını devre dışı bırakır. Örneğin, `"webpack": "4.41.5"` yerine kullanılır `"webpack": "^4.41.5"` . Bu seçenek, daha yeni paket sürümlerine istenmeden yükseltme yapılmasını engeller.
+    * Bu `-E` seçenek, NPM 'nin [anlam sürümü oluşturma](https://semver.org/) aralığı işleçlerini *package.js* için varsayılan davranışını devre dışı bırakır. Örneğin, `"webpack": "4.41.5"` yerine kullanılır `"webpack": "^4.41.5"` . Bu seçenek, daha yeni paket sürümlerine istenmeden yükseltme yapılmasını engeller.
 
     Daha fazla ayrıntı için bkz. [NPM-Install](https://docs.npmjs.com/cli/install) docs.
 
@@ -151,13 +152,13 @@ Aşağıdaki adımlar, TypeScript 'in JavaScript 'e dönüştürülmesini ve ist
     * `release`: İstemci tarafı kaynaklarını üretim modunda paketlayın.
     * `publish`: `release` İstemci tarafı kaynaklarını üretim modunda paketleyip betiği çalıştırır. Uygulamayı yayımlamak için .NET Core CLI [Publish](/dotnet/core/tools/dotnet-publish) komutunu çağırır.
 
-1. Proje kökünde aşağıdaki kodla *webpack.config.js*adlı bir dosya oluşturun:
+1. Proje kökünde aşağıdaki kodla *webpack.config.js* adlı bir dosya oluşturun:
 
     [!code-javascript[webpack.config.js](signalr-typescript-webpack/sample/3.x/webpack.config.js)]
 
     Yukarıdaki dosya Web paketi derlemesini yapılandırır. Aklınızda bazı yapılandırma ayrıntıları:
 
-    * `output`Özelliği, *dağ*'ın varsayılan değerini geçersiz kılar. Paket, *Wwwroot* dizininde yayınlanır.
+    * `output`Özelliği, *dağ* 'ın varsayılan değerini geçersiz kılar. Paket, *Wwwroot* dizininde yayınlanır.
     * `resolve.extensions`Dizi, Istemci JavaScript 'i içeri aktarmak için *. js* içerir SignalR .
 
 1. Projenin istemci tarafı varlıklarını depolamak için proje kökünde yeni bir *src* dizini oluşturun.
@@ -207,7 +208,7 @@ Aşağıdaki adımlar, TypeScript 'in JavaScript 'e dönüştürülmesini ve ist
 
    [!code-csharp[Startup](signalr-typescript-webpack/sample/3.x/Startup.cs?name=snippet_AddSignalR)]
 
-1. Hub 'ı depolamak için proje kök * SignalR WebPack/* içindeki *hub* adlı yeni bir dizin oluşturun SignalR .
+1. Hub 'ı depolamak için proje kök *SignalR WebPack/* içindeki *hub* adlı yeni bir dizin oluşturun SignalR .
 
 1. Aşağıdaki kodla hub *hub 'ları/ChatHub. cs* oluşturun:
 
@@ -264,7 +265,7 @@ Uygulamanın aşağıdaki adımlarla çalıştığından emin olun.
 
     [!INCLUDE [npm-run-release](../includes/signalr-typescript-webpack/npm-run-release.md)]
 
-1. Hata **Debug**  >  ayıklayıcıyı eklemeden uygulamayı tarayıcıda başlatmak için hata ayıklama**olmadan Başlat** ' ı seçin. *Wwwroot/index.html* dosyası ' de sunulur `http://localhost:<port_number>` .
+1. Hata **Debug**  >  ayıklayıcıyı eklemeden uygulamayı tarayıcıda başlatmak için hata ayıklama **olmadan Başlat** ' ı seçin. *Wwwroot/index.html* dosyası ' de sunulur `http://localhost:<port_number>` .
 
    Derleme hataları alırsanız, çözümü kapatıp yeniden açmayı deneyin. 
 
@@ -300,7 +301,7 @@ Uygulamanın aşağıdaki adımlarla çalıştığından emin olun.
 
 ::: moniker range="< aspnetcore-3.0"
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -323,7 +324,7 @@ Uygulamanın aşağıdaki adımlarla çalıştığından emin olun.
 
 Visual Studio 'Yu, *Path* ortam değişkeninde NPM için arama yapmak üzere yapılandırın. Varsayılan olarak, Visual Studio yükleme dizininde bulunan NPM sürümünü kullanır. Visual Studio 'da şu yönergeleri izleyin:
 
-1. **Araçlar** > **Seçenekler** > **Projeler ve çözümler** > **Web paket yönetimi** > **dış Web araçları**' na gidin.
+1. **Araçlar** > **Seçenekler** > **Projeler ve çözümler** > **Web paket yönetimi** > **dış Web araçları** ' na gidin.
 1. Listeden *$ (yol)* girişini seçin. Girdiyi listedeki ikinci konuma taşımak için yukarı oka tıklayın.
 
     ![Visual Studio yapılandırması](signalr-typescript-webpack/_static/signalr-configure-path-visual-studio.png)
@@ -331,18 +332,18 @@ Visual Studio 'Yu, *Path* ortam değişkeninde NPM için arama yapmak üzere yap
 Visual Studio yapılandırması tamamlandı. Projeyi oluşturma zamanı.
 
 1. **Dosya** > **Yeni** > **Proje** menü seçeneğini kullanın ve **ASP.NET Core Web uygulaması** şablonunu seçin.
-1. Projeyi * SignalR WebPack*olarak adlandırın ve **Oluştur**' u seçin.
-1. Hedef çerçeve açılır listesinden *.NET Core* ' u seçin ve çerçeve Seçicisi açılır listesinden *ASP.NET Core 2,2* ' ı seçin. **Boş** şablonu seçin ve **Oluştur**' u seçin.
+1. Projeyi *SignalR WebPack* olarak adlandırın ve **Oluştur** ' u seçin.
+1. Hedef çerçeve açılır listesinden *.NET Core* ' u seçin ve çerçeve Seçicisi açılır listesinden *ASP.NET Core 2,2* ' ı seçin. **Boş** şablonu seçin ve **Oluştur** ' u seçin.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-**Tümleşik terminalde**aşağıdaki komutu çalıştırın:
+**Tümleşik terminalde** aşağıdaki komutu çalıştırın:
 
 ```dotnetcli
 dotnet new web -o SignalRWebPack
 ```
 
-.NET Core 'u hedefleyen boş bir ASP.NET Core Web uygulaması bir * SignalR WebPack* dizininde oluşturulur.
+.NET Core 'u hedefleyen boş bir ASP.NET Core Web uygulaması bir *SignalR WebPack* dizininde oluşturulur.
 
 ---
 
@@ -371,7 +372,7 @@ Aşağıdaki adımlar, TypeScript 'in JavaScript 'e dönüştürülmesini ve ist
     Aklınızda bazı komut ayrıntıları:
 
     * Sürüm numarası `@` her paket adı için işareti izler. NPM bu özel paket sürümlerini yüklüyor.
-    * Bu `-E` seçenek, NPM 'nin [anlam sürümü oluşturma](https://semver.org/) aralığı işleçlerini *package.js*için varsayılan davranışını devre dışı bırakır. Örneğin, `"webpack": "4.29.3"` yerine kullanılır `"webpack": "^4.29.3"` . Bu seçenek, daha yeni paket sürümlerine istenmeden yükseltme yapılmasını engeller.
+    * Bu `-E` seçenek, NPM 'nin [anlam sürümü oluşturma](https://semver.org/) aralığı işleçlerini *package.js* için varsayılan davranışını devre dışı bırakır. Örneğin, `"webpack": "4.29.3"` yerine kullanılır `"webpack": "^4.29.3"` . Bu seçenek, daha yeni paket sürümlerine istenmeden yükseltme yapılmasını engeller.
 
     Daha fazla ayrıntı için bkz. [NPM-Install](https://docs.npmjs.com/cli/install) docs.
 
@@ -397,7 +398,7 @@ Aşağıdaki adımlar, TypeScript 'in JavaScript 'e dönüştürülmesini ve ist
 
     Yukarıdaki dosya Web paketi derlemesini yapılandırır. Aklınızda bazı yapılandırma ayrıntıları:
 
-    * `output`Özelliği, *dağ*'ın varsayılan değerini geçersiz kılar. Paket, *Wwwroot* dizininde yayınlanır.
+    * `output`Özelliği, *dağ* 'ın varsayılan değerini geçersiz kılar. Paket, *Wwwroot* dizininde yayınlanır.
     * `resolve.extensions`Dizi, Istemci JavaScript 'i içeri aktarmak için *. js* içerir SignalR .
 
 1. Projenin istemci tarafı varlıklarını depolamak için proje kökünde yeni bir *src* dizini oluşturun.
@@ -447,7 +448,7 @@ Aşağıdaki adımlar, TypeScript 'in JavaScript 'e dönüştürülmesini ve ist
 
     [!code-csharp[Startup](signalr-typescript-webpack/sample/2.x/Startup.cs?name=snippet_UseSignalR)]
 
-1. Proje kökünde *hub*olarak adlandırılan yeni bir dizin oluşturun. Amacı, bir SignalR sonraki adımda oluşturulan hub 'ı deposağlamaktır.
+1. Proje kökünde *hub* olarak adlandırılan yeni bir dizin oluşturun. Amacı, bir SignalR sonraki adımda oluşturulan hub 'ı deposağlamaktır.
 
 1. Aşağıdaki kodla hub *hub 'ları/ChatHub. cs* oluşturun:
 
@@ -501,7 +502,7 @@ Uygulamanın aşağıdaki adımlarla çalıştığından emin olun.
 
     [!INCLUDE [npm-run-release](../includes/signalr-typescript-webpack/npm-run-release.md)]
 
-1. Hata **Debug**  >  ayıklayıcıyı eklemeden uygulamayı tarayıcıda başlatmak için hata ayıklama**olmadan Başlat** ' ı seçin. *Wwwroot/index.html* dosyası ' de sunulur `http://localhost:<port_number>` .
+1. Hata **Debug**  >  ayıklayıcıyı eklemeden uygulamayı tarayıcıda başlatmak için hata ayıklama **olmadan Başlat** ' ı seçin. *Wwwroot/index.html* dosyası ' de sunulur `http://localhost:<port_number>` .
 
 1. Başka bir tarayıcı örneği (herhangi bir tarayıcı) açın. URL 'YI adres çubuğuna yapıştırın.
 

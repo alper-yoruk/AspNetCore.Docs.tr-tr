@@ -5,6 +5,7 @@ description: Sayfalardaki eğitim serisinin 4. bölümü Razor .
 ms.author: riande
 ms.date: 7/22/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/sql
-ms.openlocfilehash: d2e18782411b1801c74fa33ba1b31bad9662f3b2
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d592cf7d8a96a7e4ec2e53418843a186488951be
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627123"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058161"
 ---
 # <a name="part-4-with-a-database-and-aspnet-core"></a>4. bölüm, bir veritabanı ve ASP.NET Core
 
@@ -43,7 +44,7 @@ By [Rick Anderson](https://twitter.com/RickAndMSFT) ve [ali Audette](https://twi
 
 ---
 
-ASP.NET Core [yapılandırma](xref:fundamentals/configuration/index) sistemi okur `ConnectionString` . Yerel geliştirme için, dosyadaki *appsettings.js* bağlantı dizesini alır.
+ASP.NET Core [yapılandırma](xref:fundamentals/configuration/index) sistemi okur `ConnectionString` . Yerel geliştirme için, dosyadaki bağlantı dizesini alır *appsettings.json* .
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -70,7 +71,7 @@ LocalDB, program geliştirmeye yönelik SQL Server Express veritabanı altyapıs
 
   ![Görünüm menüsü](sql/_static/ssox.png)
 
-* Tabloya sağ tıklayıp `Movie` **Görünüm Tasarımcısı**' nı seçin:
+* Tabloya sağ tıklayıp `Movie` **Görünüm Tasarımcısı** ' nı seçin:
 
   ![Film tablosunda açık bağlamsal menüler](sql/_static/design.png)
 
@@ -78,7 +79,7 @@ LocalDB, program geliştirmeye yönelik SQL Server Express veritabanı altyapıs
 
 Seçeneğinin yanında bulunan anahtar simgesine göz önünde edin `ID` . Varsayılan olarak, EF birincil anahtar için adlı bir özellik oluşturur `ID` .
 
-* Tabloya sağ tıklayın `Movie` ve **verileri görüntüle**' yi seçin:
+* Tabloya sağ tıklayın `Movie` ve **verileri görüntüle** ' yi seçin:
 
   ![Tablo verilerini gösteren film tablosu açma](sql/_static/vd22.png)
 
@@ -108,7 +109,7 @@ if (context.Movie.Any())
 
 ### <a name="add-the-seed-initializer"></a>Tohum başlatıcısı ekleme
 
-*Program.cs*' de, `Main` aşağıdakileri yapmak için yöntemini değiştirin:
+*Program.cs* ' de, `Main` aşağıdakileri yapmak için yöntemini değiştirin:
 
 * Bağımlılık ekleme kapsayıcısından bir DB bağlam örneği alın.
 * Temel yöntemi çağırın ve bu yönteme geçerek bağlamı geçer.
@@ -130,7 +131,7 @@ Aşağıdaki kod güncelleştirilmiş *program.cs* dosyasını gösterir.
 * VERITABANıNDAKI tüm kayıtları silin. Bunu, tarayıcıda veya [Ssox](xref:tutorials/razor-pages/new-field#ssox) 'ten silme bağlantılarıyla yapabilirsiniz
 * Çekirdek yöntemin çalışması için uygulamayı başlamaya zorlayın (sınıftaki yöntemleri çağırın `Startup` ). Başlatmayı zorlamak için IIS Express durdurulup yeniden başlatılması gerekir. Bunu aşağıdaki yaklaşımlardan biriyle yapabilirsiniz:
 
-  * Bildirim alanında IIS Express sistem tepsisi simgesine sağ tıklayın ve **Çıkış** veya **siteyi durdur**' a dokunun:
+  * Bildirim alanında IIS Express sistem tepsisi simgesine sağ tıklayın ve **Çıkış** veya **siteyi durdur** ' a dokunun:
 
     ![IIS Express sistem tepsisi simgesi](../first-mvc-app/working-with-sql/_static/iisExIcon.png)
 
@@ -178,7 +179,7 @@ Sonraki öğreticide, verilerin sunumu gelişmeyecektir.
 * [ASP.NET Core Için ab genel veri koruma yönetmeliği (GDPR) desteği](xref:security/gdpr) `CookiePolicyOptions` .
 * [SetCompatibilityVersion](xref:mvc/compatibility-version)
 
-ASP.NET Core [yapılandırma](xref:fundamentals/configuration/index) sistemi okur `ConnectionString` . Yerel geliştirme için, dosyadaki *appsettings.js* bağlantı dizesini alır.
+ASP.NET Core [yapılandırma](xref:fundamentals/configuration/index) sistemi okur `ConnectionString` . Yerel geliştirme için, dosyadaki bağlantı dizesini alır *appsettings.json* .
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -209,7 +210,7 @@ LocalDB, program geliştirmeye yönelik SQL Server Express veritabanı altyapıs
 
   ![Görünüm menüsü](sql/_static/ssox.png)
 
-* Tabloya sağ tıklayıp `Movie` **Görünüm Tasarımcısı**' nı seçin:
+* Tabloya sağ tıklayıp `Movie` **Görünüm Tasarımcısı** ' nı seçin:
 
   ![Film tablosunda bağlam menüsü açık](sql/_static/design.png)
 
@@ -217,7 +218,7 @@ LocalDB, program geliştirmeye yönelik SQL Server Express veritabanı altyapıs
 
 Seçeneğinin yanında bulunan anahtar simgesine göz önünde edin `ID` . Varsayılan olarak, EF birincil anahtar için adlı bir özellik oluşturur `ID` .
 
-* Tabloya sağ tıklayın `Movie` ve **verileri görüntüle**' yi seçin:
+* Tabloya sağ tıklayın `Movie` ve **verileri görüntüle** ' yi seçin:
 
   ![Tablo verilerini gösteren film tablosu açma](sql/_static/vd22.png)
 
@@ -252,7 +253,7 @@ if (context.Movie.Any())
 
 ### <a name="add-the-seed-initializer"></a>Tohum başlatıcısı ekleme
 
-*Program.cs*' de, `Main` aşağıdakileri yapmak için yöntemini değiştirin:
+*Program.cs* ' de, `Main` aşağıdakileri yapmak için yöntemini değiştirin:
 
 * Bağımlılık ekleme kapsayıcısından bir DB bağlam örneği alın.
 * Temel yöntemi çağırın ve bu yönteme geçerek bağlamı geçer.
@@ -274,7 +275,7 @@ SqlException: Razor oturum açma tarafından istenen "pagesmoviecontext-21" veri
 * VERITABANıNDAKI tüm kayıtları silin. Bunu, tarayıcıda veya [Ssox](xref:tutorials/razor-pages/new-field#ssox) 'ten silme bağlantılarıyla yapabilirsiniz
 * Çekirdek yöntemin çalışması için uygulamayı başlamaya zorlayın (sınıftaki yöntemleri çağırın `Startup` ). Başlatmayı zorlamak için IIS Express durdurulup yeniden başlatılması gerekir. Bunu aşağıdaki yaklaşımlardan biriyle yapabilirsiniz:
 
-  * Bildirim alanında IIS Express sistem tepsisi simgesine sağ tıklayın ve **Çıkış** veya **siteyi durdur**' a dokunun:
+  * Bildirim alanında IIS Express sistem tepsisi simgesine sağ tıklayın ve **Çıkış** veya **siteyi durdur** ' a dokunun:
 
     ![IIS Express sistem tepsisi simgesi](../first-mvc-app/working-with-sql/_static/iisExIcon.png)
 

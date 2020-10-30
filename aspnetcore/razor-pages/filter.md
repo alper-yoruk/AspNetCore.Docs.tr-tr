@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 2/18/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: razor-pages/filter
-ms.openlocfilehash: 436d640130b378e2c770322186020c6e252872ef
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: a6d25c1b88e09560c1aad9aefd9148f7fe293909
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722520"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056835"
 ---
 # <a name="filter-methods-for-no-locrazor-pages-in-aspnet-core"></a>RazorASP.NET Core sayfaların filtre yöntemleri
 
@@ -72,7 +73,7 @@ Aşağıdaki kod, sınıfında şunları sunar `SampleAsyncPageFilter` `Startup`
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/Startup.cs?name=snippet2)]
 
-Aşağıdaki kod <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection.AddFolderApplicationModelConvention*> , `SampleAsyncPageFilter` yalnızca */filmlerde*bulunan sayfalara uygulamak için çağırır:
+Aşağıdaki kod <xref:Microsoft.AspNetCore.Mvc.ApplicationModels.PageConventionCollection.AddFolderApplicationModelConvention*> , `SampleAsyncPageFilter` yalnızca */filmlerde* bulunan sayfalara uygulamak için çağırır:
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/Startup2.cs?name=snippet2)]
 
@@ -102,7 +103,7 @@ Aşağıdaki kod `AddHeader` özniteliğini uygular:
 
 [!code-csharp[Main](filter/3.1sample/PageFilter/Pages/Movies/Test.cshtml.cs)]
 
-Üst bilgileri incelemek için tarayıcı geliştirici araçları gibi bir araç kullanın. **Yanıt üst bilgileri**altında `author: Rick` görüntülenir.
+Üst bilgileri incelemek için tarayıcı geliştirici araçları gibi bir araç kullanın. **Yanıt üst bilgileri** altında `author: Rick` görüntülenir.
 
 Sıralamayı geçersiz kılma yönergeleri için bkz. [varsayılan sırayı geçersiz kılma](xref:mvc/controllers/filters#overriding-the-default-order) .
 
@@ -168,7 +169,7 @@ Aşağıdaki kod, tüm sınıfı gösterir `Startup` :
 
 [!code-csharp[Main](filter/sample/PageFilter/Startup.cs?name=snippet1)]
 
-Aşağıdaki kod `AddFolderApplicationModelConvention` `SampleAsyncPageFilter` yalnızca */alt klasöründeki*sayfalara uygulamak için çağırır:
+Aşağıdaki kod `AddFolderApplicationModelConvention` `SampleAsyncPageFilter` yalnızca */alt klasöründeki* sayfalara uygulamak için çağırır:
 
 [!code-csharp[Main](filter/sample/PageFilter/Startup2.cs?name=snippet2)]
 

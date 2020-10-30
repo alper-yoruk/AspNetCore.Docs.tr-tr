@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 08/23/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/protobuf
-ms.openlocfilehash: ea46e04bc4aa6269efbf8917d5f32194402a66ef
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: b70a5ee00405eecfce900b86dc631a54682dce1a
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722702"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058902"
 ---
 # <a name="create-protobuf-messages-for-net-apps"></a>.NET uygulamaları için Prototipsiz iletiler oluşturma
 
@@ -95,7 +96,7 @@ Yerel skaler türler, ile eşdeğer tarih ve saat değerleri için sağlamaz. NE
 
 Aşağıdaki tabloda tarih ve saat türleri gösterilmektedir:
 
-| .NET türü        | Prototip Iyi bilinen tür    |
+| .NET türü        | Prototip Well-Known türü    |
 | ---------------- | --------------------------- |
 | `DateTimeOffset` | `google.protobuf.Timestamp` |
 | `DateTime`       | `google.protobuf.Timestamp` |
@@ -136,7 +137,7 @@ var duration = meeting.Duration?.ToTimeSpan();
 
 C# için prototip kod oluşturma, gibi yerel türleri kullanır `int` `int32` . Bu nedenle değerler her zaman dahil edilir ve olamaz `null` .
 
-`null`C# kodunda kullanılması gibi açık gerektiren değerler için `int?` , Prototipen Iyi bilinen türler, null yapılabilir C# türlerine derlenen sarmalayıcıları içerir. Bunları kullanmak için, `wrappers.proto` `.proto` Aşağıdaki kod gibi dosyanıza içeri aktarın:
+C# kodunda kullanmak gibi açık gerektiren değerler için `null` `int?` , prototipli c# türlerine derlenen sarmalayıcıları, prototip Well-Known türler içerir. Bunları kullanmak için, `wrappers.proto` `.proto` Aşağıdaki kod gibi dosyanıza içeri aktarın:
 
 ```protobuf  
 syntax = "proto3"
@@ -153,7 +154,7 @@ message Person {
 
 Aşağıdaki tabloda, eşdeğer C# türüyle sarmalayıcı türlerinin tüm listesi gösterilmektedir:
 
-| C# türü      | İyi bilinen tür sarmalayıcısı       |
+| C# türü      | Well-Known sarmalayıcı türü       |
 | ------------ | ----------------------------- |
 | `bool?`      | `google.protobuf.BoolValue`   |
 | `double?`    | `google.protobuf.DoubleValue` |
@@ -188,7 +189,7 @@ await File.WriteAllBytesAsync(path, payload.Data.ToByteArray());
 
 ### <a name="decimals"></a>Ondalıklar
 
-Prototip `decimal` , yalnızca ve .NET türünü yerel olarak desteklemez `double` `float` . Yaygın olarak bilinen türlere standart bir ondalık tür ekleme olasılığa ve bunu destekleyen diller ve çerçeveler için platform desteğiyle, prototip projesinde devam eden bir tartışma vardır. Henüz hiçbir şey uygulanmadı.
+Prototip `decimal` , yalnızca ve .NET türünü yerel olarak desteklemez `double` `float` . Prototip projesinde, Well-Known türlerine standart bir ondalık tür ekleme olasılığa ilişkin, bunu destekleyen diller ve çerçeveler için platform desteği ile birlikte devam eden bir tartışma vardır. Henüz hiçbir şey uygulanmadı.
 
 `decimal`.NET istemcileri ve sunucuları arasında güvenli seri hale getirme için kullanılan türü temsil eden bir ileti tanımı oluşturmak mümkündür. Ancak diğer platformlardaki geliştiricilerin, kullanılmakta olan biçimi anlaması ve onun için kendi işlemesini uygulaması gerekir.
 
@@ -319,7 +320,7 @@ Prototip, bir sözleşmenin ilk ileti biçimidir. Uygulama oluşturulduğunda, b
 
 Prototip, bu senaryoları desteklemek için dil özellikleri ve türleri sunar.
 
-### <a name="any"></a>Herhangi biri
+### <a name="any"></a>Herhangi bir
 
 `Any`Türü, kendi tanımına sahip olmayan iletileri katıştırılmış tür olarak kullanmanıza olanak tanır `.proto` . Türünü kullanmak için `Any` içeri aktarın `any.proto` .
 
@@ -388,7 +389,7 @@ switch (response.ResultCase)
 
 ### <a name="value"></a>Değer
 
-`Value`Tür, dinamik olarak yazılmış bir değeri temsil eder. Bu, `null` bir sayı, bir dize, Boole değeri, değerlerin bir sözlüğü ( `Struct` ) veya bir değerler listesi ( `ValueList` ) olabilir. `Value` , daha önce tartışılan özelliği kullanan, prototip Iyi bilinen bir türdür `oneof` . Türünü kullanmak için `Value` içeri aktarın `struct.proto` .
+`Value`Tür, dinamik olarak yazılmış bir değeri temsil eder. Bu, `null` bir sayı, bir dize, Boole değeri, değerlerin bir sözlüğü ( `Struct` ) veya bir değerler listesi ( `ValueList` ) olabilir. `Value` , daha önce tartışılan özelliği kullanan bir prototip Well-Known türüdür `oneof` . Türünü kullanmak için `Value` içeri aktarın `struct.proto` .
 
 ```protobuf
 import "google/protobuf/struct.proto";

@@ -5,6 +5,7 @@ description: ASP.NET Core uygulamasında açık yeniden yönlendirme saldırıla
 ms.author: riande
 ms.date: 07/07/2017
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/preventing-open-redirects
-ms.openlocfilehash: 5226e301960a56145b94b6128d0034c40b86bffd
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e546cd852367921c7c694db3639f7a233f606e75
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633467"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058395"
 ---
 # <a name="prevent-open-redirect-attacks-in-aspnet-core"></a>ASP.NET Core 'da açık yeniden yönlendirme saldırılarını önleme
 
@@ -39,7 +40,7 @@ Hedef URL isteğin QueryString öğesinde belirtildiğinden, kötü niyetli bir 
 
 Kötü niyetli bir Kullanıcı, kötü niyetli kullanıcıların bir kullanıcının kimlik bilgilerine veya gizli bilgilere erişmesine izin veren bir saldırı geliştirebilir. Kötü amaçlı Kullanıcı, saldırının başlaması için kullanıcıyı, `returnUrl` URL 'ye bir QueryString değeri eklenerek sitenizin oturum açma sayfasının bağlantısını tıklamayı ikna eder. Örneğin, ' de bir `contoso.com` oturum açma sayfası içeren bir uygulama düşünün `http://contoso.com/Account/LogOn?returnUrl=/Home/About` . Saldırı aşağıdaki adımları izler:
 
-1. Kullanıcı kötü amaçlı bir bağlantıyı tıklatır `http://contoso.com/Account/LogOn?returnUrl=http://contoso1.com/Account/LogOn` (ıkıncı URL "contoso**1**. com", "contoso.com" değil).
+1. Kullanıcı kötü amaçlı bir bağlantıyı tıklatır `http://contoso.com/Account/LogOn?returnUrl=http://contoso1.com/Account/LogOn` (ıkıncı URL "contoso **1** . com", "contoso.com" değil).
 2. Kullanıcı başarıyla oturum açar.
 3. Kullanıcı (site tarafından) öğesine `http://contoso1.com/Account/LogOn` (tam olarak gerçek site gibi görünen kötü amaçlı bir site) yönlendirilir.
 4. Kullanıcı yeniden oturum açar (kötü amaçlı site kimlik bilgileri verir) ve gerçek siteye yeniden yönlendirilir.

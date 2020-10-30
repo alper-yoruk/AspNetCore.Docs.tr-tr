@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/22/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/health-checks
-ms.openlocfilehash: fcd6a679c5401ec58cc219f56b5dce1cfee07372
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 32b7a4c6722ba45ba998f9430f5d6da6ddca53f9
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629697"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058668"
 ---
 # <a name="health-checks-in-aspnet-core"></a>ASP.NET Core durum denetimleri
 
@@ -43,7 +44,7 @@ Sistem durumu denetimleri, bir uygulama tarafından HTTP uç noktaları olarak g
 
 Örnek uygulama, bu konuda açıklanan senaryoların örneklerini içerir. Örnek uygulamayı belirli bir senaryo için çalıştırmak için, bir komut kabuğunda projenin klasöründen [DotNet Run](/dotnet/core/tools/dotnet-run) komutunu kullanın. Örnek uygulamayı kullanma hakkında ayrıntılı bilgi için bu konudaki örnek uygulamanın *README.MD* dosyasına ve senaryo açıklamalarına bakın.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 Durum denetimleri, genellikle bir uygulamanın durumunu denetlemek için bir dış izleme hizmeti veya kapsayıcı Orchestrator ile birlikte kullanılır. Bir uygulamaya sistem durumu denetimleri eklemeden önce, hangi izleme sisteminin kullanılacağını belirleyin. İzleme sistemi ne tür bir sistem durumu denetimi oluşturulacağını ve bunların uç noktalarını nasıl yapılandıracağınızı belirler.
 
@@ -51,7 +52,7 @@ Durum denetimleri, genellikle bir uygulamanın durumunu denetlemek için bir dı
 
 Örnek uygulama, çeşitli senaryolar için sistem durumu denetimlerini göstermek üzere başlangıç kodu sağlar. [Veritabanı araştırma](#database-probe) senaryosu, [Aspnetcore. Diagnostics. healthdenetimleri](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks)kullanarak bir veritabanı bağlantısının sistem durumunu denetler. [DbContext araştırma](#entity-framework-core-dbcontext-probe) senaryosu bir EF Core kullanarak bir veritabanını denetler `DbContext` . Örnek uygulama olan veritabanı senaryolarını araştırmak için:
 
-* Bir veritabanı oluşturur ve *appsettings.js* dosyadaki bağlantı dizesini sağlar.
+* Bir veritabanı oluşturur ve bunun bağlantı dizesini *appsettings.json* dosyada sağlar.
 * , Proje dosyasında aşağıdaki paket başvurularına sahiptir:
   * [AspNetCore. Healthdenetimleri. SqlServer](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer/)
   * [Microsoft. Extensions. Diagnostics. Healthdenetimleri. EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore/)
@@ -63,13 +64,13 @@ Başka bir sistem durumu denetimi senaryosunda, sistem durumu denetimlerinin bir
 
 ## <a name="basic-health-probe"></a>Temel sistem durumu araştırması
 
-Birçok uygulama için, uygulamanın istekleri işleme için kullanılabilirliğini raporlayan temel bir durum araştırma yapılandırması, uygulamanın durumunu öğrenmek*liveness*için yeterlidir.
+Birçok uygulama için, uygulamanın istekleri işleme için kullanılabilirliğini raporlayan temel bir durum araştırma yapılandırması, uygulamanın durumunu öğrenmek *liveness* için yeterlidir.
 
 Temel yapılandırma, sistem durumu denetimi hizmetlerini kaydeder ve sistem durumu denetimleri ara yazılımını çağırarak bir URL uç noktasında bir sistem durumu yanıtı ile yanıt verir. Varsayılan olarak, belirli bir bağımlılığı veya alt sistemi test etmek için belirli bir sistem durumu denetimi kayıtlı değildir. Sistem durumu uç nokta URL 'sinde yanıt veriyorsa, uygulama sağlıklı olarak değerlendirilir. Varsayılan yanıt yazıcı, durumu ( <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus> ) istemciye geri düz metin yanıtı olarak yazar [. sağlıklı](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus)durum, sistem sağlığı durumu [. düşürülmüş](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus) veya [HealthStatus. sağlıksız](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus) durum.
 
 İle sistem durumu denetimi hizmetlerini <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks*> kaydedin `Startup.ConfigureServices` . ' İ çağırarak bir sistem durumu denetim uç noktası oluşturun `MapHealthChecks` `Startup.Configure` .
 
-Örnek uygulamada, sistem durumu denetimi uç noktası şurada oluşturulur `/health` (*BasicStartup.cs*):
+Örnek uygulamada, sistem durumu denetimi uç noktası şurada oluşturulur `/health` ( *BasicStartup.cs* ):
 
 ```csharp
 public class BasicStartup
@@ -348,11 +349,11 @@ Bir sistem durumu denetimi, veritabanının normal olarak yanıt verip vermediğ
 
 [Aspnetcore. Healthdenetimlerin. SqlServer](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer/)öğesine bir paket başvurusu ekleyin.
 
-Örnek uygulamanın dosyasında *appsettings.js* geçerli bir veritabanı bağlantı dizesi sağlayın. Uygulama, adında bir SQL Server veritabanı kullanır `HealthCheckSample` :
+Örnek uygulama dosyasında geçerli bir veritabanı bağlantı dizesi sağlayın *appsettings.json* . Uygulama, adında bir SQL Server veritabanı kullanır `HealthCheckSample` :
 
 [!code-json[](health-checks/samples/3.x/HealthChecksSample/appsettings.json?highlight=3)]
 
-İle sistem durumu denetimi hizmetlerini <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks*> kaydedin `Startup.ConfigureServices` . Örnek uygulama, `AddSqlServer` yöntemini veritabanının bağlantı dizesiyle (*DbHealthStartup.cs*) çağırır:
+İle sistem durumu denetimi hizmetlerini <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks*> kaydedin `Startup.ConfigureServices` . Örnek uygulama, `AddSqlServer` yöntemini veritabanının bağlantı dizesiyle ( *DbHealthStartup.cs* ) çağırır:
 
 [!code-csharp[](health-checks/samples/3.x/HealthChecksSample/DbHealthStartup.cs?name=snippet_ConfigureServices)]
 
@@ -388,7 +389,7 @@ Varsayılan olarak:
 * `DbContextHealthCheck`EF Core `CanConnectAsync` yöntemini çağırır. Yöntem aşırı yüklerini kullanarak sistem durumunu denetlerken hangi işlemin çalıştırılacağını özelleştirebilirsiniz `AddDbContextCheck` .
 * Sistem durumu denetiminin adı, `TContext` türün adıdır.
 
-Örnek uygulamada, `AppDbContext` `AddDbContextCheck` içinde bir hizmet olarak sağlanır ve `Startup.ConfigureServices` (*DbContextHealthStartup.cs*) olarak kaydedilir:
+Örnek uygulamada, `AppDbContext` `AddDbContextCheck` içinde bir hizmet olarak sağlanır ve `Startup.ConfigureServices` ( *DbContextHealthStartup.cs* ) olarak kaydedilir:
 
 [!code-csharp[](health-checks/samples/3.x/HealthChecksSample/DbContextHealthStartup.cs?name=snippet_ConfigureServices)]
 
@@ -452,15 +453,15 @@ Bazı barındırma senaryolarında iki uygulama durumunu ayırt eden bir çift s
 
 Aşağıdaki örneği göz önünde bulundurun: bir uygulamanın istekleri işlemeye hazırlanmadan önce büyük bir yapılandırma dosyasını indirmesi gerekir. Uygulamanın dosyayı birkaç kez indirmeyi yeniden denemesini sağladığından, ilk indirme işlemi başarısız olursa uygulamanın yeniden başlatılmasını istemiyoruz. İşlemin desteklerini betimleyen, ek denetimler gerçekleştirilmeyen bir *araştırma* kullanıyoruz. Yapılandırma dosyası indirmesi başarılı olmadan önce isteklerin uygulamaya gönderilmesini de engellemek istiyoruz. İndirme başarılı olana ve uygulama istekleri almaya hazır olana kadar "hazır değil" durumunu göstermek için bir *hazırlık araştırması* kullanıyoruz.
 
-Örnek uygulama, [barındırılan bir hizmette](xref:fundamentals/host/hosted-services)uzun süre çalışan başlatma görevinin tamamlandığını raporlamak için bir sistem durumu denetimi içerir. , `StartupHostedServiceHealthCheck` `StartupTaskCompleted` Barındırılan hizmetin uzun süre çalışan görevi bittiğinde olarak ayarlayabilmesini sağlayan bir özelliği sunar `true` (*StartupHostedServiceHealthCheck.cs*):
+Örnek uygulama, [barındırılan bir hizmette](xref:fundamentals/host/hosted-services)uzun süre çalışan başlatma görevinin tamamlandığını raporlamak için bir sistem durumu denetimi içerir. , `StartupHostedServiceHealthCheck` `StartupTaskCompleted` Barındırılan hizmetin uzun süre çalışan görevi bittiğinde olarak ayarlayabilmesini sağlayan bir özelliği sunar `true` ( *StartupHostedServiceHealthCheck.cs* ):
 
 [!code-csharp[](health-checks/samples/3.x/HealthChecksSample/StartupHostedServiceHealthCheck.cs?name=snippet1&highlight=7-11)]
 
-Uzun süre çalışan arka plan görevi bir [barındırılan hizmet](xref:fundamentals/host/hosted-services) (*Hizmetler/startuphostedservice*) tarafından başlatılır. Görevin sonunda şu `StartupHostedServiceHealthCheck.StartupTaskCompleted` şekilde ayarlanır `true` :
+Uzun süre çalışan arka plan görevi bir [barındırılan hizmet](xref:fundamentals/host/hosted-services) ( *Hizmetler/startuphostedservice* ) tarafından başlatılır. Görevin sonunda şu `StartupHostedServiceHealthCheck.StartupTaskCompleted` şekilde ayarlanır `true` :
 
 [!code-csharp[](health-checks/samples/3.x/HealthChecksSample/Services/StartupHostedService.cs?name=snippet1&highlight=18-20)]
 
-Sistem durumu denetimi <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck*> `Startup.ConfigureServices` barındırılan hizmetle birlikte ' de kaydedilir. Barındırılan hizmetin, sistem durumu denetiminde özelliği ayarlaması gerektiğinden, sistem durumu denetimi de hizmet kapsayıcısına kaydedilir (*LivenessProbeStartup.cs*):
+Sistem durumu denetimi <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck*> `Startup.ConfigureServices` barındırılan hizmetle birlikte ' de kaydedilir. Barındırılan hizmetin, sistem durumu denetiminde özelliği ayarlaması gerektiğinden, sistem durumu denetimi de hizmet kapsayıcısına kaydedilir ( *LivenessProbeStartup.cs* ):
 
 [!code-csharp[](health-checks/samples/3.x/HealthChecksSample/LivenessProbeStartup.cs?name=snippet_ConfigureServices)]
 
@@ -495,7 +496,7 @@ app.UseEndpoints(endpoints =>
 dotnet run --scenario liveness
 ```
 
-Bir tarayıcıda, `/health/ready` 15 saniye geçtikten sonra birkaç kez ziyaret edin. Sistem durumu denetimi ilk 15 saniye boyunca *sağlıksız* durum bildiriyor. 15 saniye sonra, uç nokta, barındırılan hizmet tarafından uzun süre çalışan görevin tamamlandığını yansıtan *sağlıklı*şekilde raporlar.
+Bir tarayıcıda, `/health/ready` 15 saniye geçtikten sonra birkaç kez ziyaret edin. Sistem durumu denetimi ilk 15 saniye boyunca *sağlıksız* durum bildiriyor. 15 saniye sonra, uç nokta, barındırılan hizmet tarafından uzun süre çalışan görevin tamamlandığını yansıtan *sağlıklı* şekilde raporlar.
 
 Bu örnek ayrıca <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheckPublisher> , iki saniyelik bir gecikmeyle ilk hazırlık denetimini çalıştıran bir sistem durumu denetimi yayımcısı (uygulama) oluşturur. Daha fazla bilgi için bkz. [sistem durumu denetimi yayımcısı](#health-check-publisher) bölümü.
 
@@ -526,7 +527,7 @@ spec:
 
 Örnek uygulama, özel bir yanıt yazıcısı ile bir bellek durumu denetimini gösterir.
 
-`MemoryHealthCheck` uygulama belirli bir bellek eşiğini (örnek uygulamada 1 GB) kullanıyorsa, düzeyi düşürülmüş bir durum bildirir. , <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult> Uygulama Için çöp toplayıcı (GC) bilgilerini içerir (*MemoryHealthCheck.cs*):
+`MemoryHealthCheck` uygulama belirli bir bellek eşiğini (örnek uygulamada 1 GB) kullanıyorsa, düzeyi düşürülmüş bir durum bildirir. , <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult> Uygulama Için çöp toplayıcı (GC) bilgilerini içerir ( *MemoryHealthCheck.cs* ):
 
 [!code-csharp[](health-checks/samples/3.x/HealthChecksSample/MemoryHealthCheck.cs?name=snippet1)]
 
@@ -619,9 +620,9 @@ app.UseEndpoints(endpoints =>
 ```
 
 > [!NOTE]
-> Yönetim bağlantı noktasını kodda açıkça ayarlayarak örnek uygulamada *launchSettings.js* dosya oluşturmaktan kaçınabilirsiniz. Uygulamasının oluşturulduğu *program.cs* içinde, <xref:Microsoft.Extensions.Hosting.HostBuilder> için bir çağrı ekleyin <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenAnyIP*> ve uygulamanın yönetim bağlantı noktası uç noktasını sağlayın. `Configure` *ManagementPortStartup.cs*' de, ile yönetim bağlantı noktasını belirtin `RequireHost` :
+> Yönetim bağlantı noktasını kodda açıkça ayarlayarak örnek uygulamada *launchSettings.js* dosya oluşturmaktan kaçınabilirsiniz. Uygulamasının oluşturulduğu *program.cs* içinde, <xref:Microsoft.Extensions.Hosting.HostBuilder> için bir çağrı ekleyin <xref:Microsoft.AspNetCore.Server.Kestrel.Core.KestrelServerOptions.ListenAnyIP*> ve uygulamanın yönetim bağlantı noktası uç noktasını sağlayın. `Configure` *ManagementPortStartup.cs* ' de, ile yönetim bağlantı noktasını belirtin `RequireHost` :
 >
-> *Program.cs*:
+> *Program.cs* :
 >
 > ```csharp
 > return new HostBuilder()
@@ -637,7 +638,7 @@ app.UseEndpoints(endpoints =>
 >     .Build();
 > ```
 >
-> *ManagementPortStartup.cs*:
+> *ManagementPortStartup.cs* :
 >
 > ```csharp
 > app.UseEndpoints(endpoints =>
@@ -812,7 +813,7 @@ Sistem durumu denetimleri, bir uygulama tarafından HTTP uç noktaları olarak g
 
 Örnek uygulama, bu konuda açıklanan senaryoların örneklerini içerir. Örnek uygulamayı belirli bir senaryo için çalıştırmak için, bir komut kabuğunda projenin klasöründen [DotNet Run](/dotnet/core/tools/dotnet-run) komutunu kullanın. Örnek uygulamayı kullanma hakkında ayrıntılı bilgi için bu konudaki örnek uygulamanın *README.MD* dosyasına ve senaryo açıklamalarına bakın.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 Durum denetimleri, genellikle bir uygulamanın durumunu denetlemek için bir dış izleme hizmeti veya kapsayıcı Orchestrator ile birlikte kullanılır. Bir uygulamaya sistem durumu denetimleri eklemeden önce, hangi izleme sisteminin kullanılacağını belirleyin. İzleme sistemi ne tür bir sistem durumu denetimi oluşturulacağını ve bunların uç noktalarını nasıl yapılandıracağınızı belirler.
 
@@ -820,7 +821,7 @@ Microsoft. aspnetcore [. app metapackage](xref:fundamentals/metapackage-app) 'e 
 
 Örnek uygulama, çeşitli senaryolar için sistem durumu denetimlerini göstermek üzere başlangıç kodu sağlar. [Veritabanı araştırma](#database-probe) senaryosu, [Aspnetcore. Diagnostics. healthdenetimleri](https://github.com/Xabaril/AspNetCore.Diagnostics.HealthChecks)kullanarak bir veritabanı bağlantısının sistem durumunu denetler. [DbContext araştırma](#entity-framework-core-dbcontext-probe) senaryosu bir EF Core kullanarak bir veritabanını denetler `DbContext` . Örnek uygulama olan veritabanı senaryolarını araştırmak için:
 
-* Bir veritabanı oluşturur ve *appsettings.js* dosyadaki bağlantı dizesini sağlar.
+* Bir veritabanı oluşturur ve bunun bağlantı dizesini *appsettings.json* dosyada sağlar.
 * , Proje dosyasında aşağıdaki paket başvurularına sahiptir:
   * [AspNetCore. Healthdenetimleri. SqlServer](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer/)
   * [Microsoft. Extensions. Diagnostics. Healthdenetimleri. EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.Extensions.Diagnostics.HealthChecks.EntityFrameworkCore/)
@@ -832,13 +833,13 @@ Başka bir sistem durumu denetimi senaryosunda, sistem durumu denetimlerinin bir
 
 ## <a name="basic-health-probe"></a>Temel sistem durumu araştırması
 
-Birçok uygulama için, uygulamanın istekleri işleme için kullanılabilirliğini raporlayan temel bir durum araştırma yapılandırması, uygulamanın durumunu öğrenmek*liveness*için yeterlidir.
+Birçok uygulama için, uygulamanın istekleri işleme için kullanılabilirliğini raporlayan temel bir durum araştırma yapılandırması, uygulamanın durumunu öğrenmek *liveness* için yeterlidir.
 
 Temel yapılandırma, sistem durumu denetimi hizmetlerini kaydeder ve sistem durumu denetimleri ara yazılımını çağırarak bir URL uç noktasında bir sistem durumu yanıtı ile yanıt verir. Varsayılan olarak, belirli bir bağımlılığı veya alt sistemi test etmek için belirli bir sistem durumu denetimi kayıtlı değildir. Sistem durumu uç nokta URL 'sinde yanıt veriyorsa, uygulama sağlıklı olarak değerlendirilir. Varsayılan yanıt yazıcı, durumu ( <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus> ) istemciye geri düz metin yanıtı olarak yazar [. sağlıklı](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus)durum, sistem sağlığı durumu [. düşürülmüş](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus) veya [HealthStatus. sağlıksız](xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthStatus) durum.
 
 İle sistem durumu denetimi hizmetlerini <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks*> kaydedin `Startup.ConfigureServices` . İstek işleme ardışık düzeninde bulunan sistem durumu denetimleri ara yazılımı için bir uç nokta ekleyin <xref:Microsoft.AspNetCore.Builder.HealthCheckApplicationBuilderExtensions.UseHealthChecks*> `Startup.Configure` .
 
-Örnek uygulamada, sistem durumu denetimi uç noktası şurada oluşturulur `/health` (*BasicStartup.cs*):
+Örnek uygulamada, sistem durumu denetimi uç noktası şurada oluşturulur `/health` ( *BasicStartup.cs* ):
 
 ```csharp
 public class BasicStartup
@@ -1067,11 +1068,11 @@ Bir sistem durumu denetimi, veritabanının normal olarak yanıt verip vermediğ
 
 [Aspnetcore. Healthdenetimlerin. SqlServer](https://www.nuget.org/packages/AspNetCore.HealthChecks.SqlServer/)öğesine bir paket başvurusu ekleyin.
 
-Örnek uygulamanın dosyasında *appsettings.js* geçerli bir veritabanı bağlantı dizesi sağlayın. Uygulama, adında bir SQL Server veritabanı kullanır `HealthCheckSample` :
+Örnek uygulama dosyasında geçerli bir veritabanı bağlantı dizesi sağlayın *appsettings.json* . Uygulama, adında bir SQL Server veritabanı kullanır `HealthCheckSample` :
 
 [!code-json[](health-checks/samples/2.x/HealthChecksSample/appsettings.json?highlight=3)]
 
-İle sistem durumu denetimi hizmetlerini <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks*> kaydedin `Startup.ConfigureServices` . Örnek uygulama, `AddSqlServer` yöntemini veritabanının bağlantı dizesiyle (*DbHealthStartup.cs*) çağırır:
+İle sistem durumu denetimi hizmetlerini <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks*> kaydedin `Startup.ConfigureServices` . Örnek uygulama, `AddSqlServer` yöntemini veritabanının bağlantı dizesiyle ( *DbHealthStartup.cs* ) çağırır:
 
 [!code-csharp[](health-checks/samples/2.x/HealthChecksSample/DbHealthStartup.cs?name=snippet_ConfigureServices)]
 
@@ -1104,7 +1105,7 @@ Varsayılan olarak:
 * `DbContextHealthCheck`EF Core `CanConnectAsync` yöntemini çağırır. Yöntem aşırı yüklerini kullanarak sistem durumunu denetlerken hangi işlemin çalıştırılacağını özelleştirebilirsiniz `AddDbContextCheck` .
 * Sistem durumu denetiminin adı, `TContext` türün adıdır.
 
-Örnek uygulamada, `AppDbContext` `AddDbContextCheck` içinde bir hizmet olarak sağlanır ve `Startup.ConfigureServices` (*DbContextHealthStartup.cs*) olarak kaydedilir:
+Örnek uygulamada, `AppDbContext` `AddDbContextCheck` içinde bir hizmet olarak sağlanır ve `Startup.ConfigureServices` ( *DbContextHealthStartup.cs* ) olarak kaydedilir:
 
 [!code-csharp[](health-checks/samples/2.x/HealthChecksSample/DbContextHealthStartup.cs?name=snippet_ConfigureServices)]
 
@@ -1165,15 +1166,15 @@ Bazı barındırma senaryolarında iki uygulama durumunu ayırt eden bir çift s
 
 Aşağıdaki örneği göz önünde bulundurun: bir uygulamanın istekleri işlemeye hazırlanmadan önce büyük bir yapılandırma dosyasını indirmesi gerekir. Uygulamanın dosyayı birkaç kez indirmeyi yeniden denemesini sağladığından, ilk indirme işlemi başarısız olursa uygulamanın yeniden başlatılmasını istemiyoruz. İşlemin desteklerini betimleyen, ek denetimler gerçekleştirilmeyen bir *araştırma* kullanıyoruz. Yapılandırma dosyası indirmesi başarılı olmadan önce isteklerin uygulamaya gönderilmesini de engellemek istiyoruz. İndirme başarılı olana ve uygulama istekleri almaya hazır olana kadar "hazır değil" durumunu göstermek için bir *hazırlık araştırması* kullanıyoruz.
 
-Örnek uygulama, [barındırılan bir hizmette](xref:fundamentals/host/hosted-services)uzun süre çalışan başlatma görevinin tamamlandığını raporlamak için bir sistem durumu denetimi içerir. , `StartupHostedServiceHealthCheck` `StartupTaskCompleted` Barındırılan hizmetin uzun süre çalışan görevi bittiğinde olarak ayarlayabilmesini sağlayan bir özelliği sunar `true` (*StartupHostedServiceHealthCheck.cs*):
+Örnek uygulama, [barındırılan bir hizmette](xref:fundamentals/host/hosted-services)uzun süre çalışan başlatma görevinin tamamlandığını raporlamak için bir sistem durumu denetimi içerir. , `StartupHostedServiceHealthCheck` `StartupTaskCompleted` Barındırılan hizmetin uzun süre çalışan görevi bittiğinde olarak ayarlayabilmesini sağlayan bir özelliği sunar `true` ( *StartupHostedServiceHealthCheck.cs* ):
 
 [!code-csharp[](health-checks/samples/2.x/HealthChecksSample/StartupHostedServiceHealthCheck.cs?name=snippet1&highlight=7-11)]
 
-Uzun süre çalışan arka plan görevi bir [barındırılan hizmet](xref:fundamentals/host/hosted-services) (*Hizmetler/startuphostedservice*) tarafından başlatılır. Görevin sonunda şu `StartupHostedServiceHealthCheck.StartupTaskCompleted` şekilde ayarlanır `true` :
+Uzun süre çalışan arka plan görevi bir [barındırılan hizmet](xref:fundamentals/host/hosted-services) ( *Hizmetler/startuphostedservice* ) tarafından başlatılır. Görevin sonunda şu `StartupHostedServiceHealthCheck.StartupTaskCompleted` şekilde ayarlanır `true` :
 
 [!code-csharp[](health-checks/samples/2.x/HealthChecksSample/Services/StartupHostedService.cs?name=snippet1&highlight=18-20)]
 
-Sistem durumu denetimi <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck*> `Startup.ConfigureServices` barındırılan hizmetle birlikte ' de kaydedilir. Barındırılan hizmetin, sistem durumu denetiminde özelliği ayarlaması gerektiğinden, sistem durumu denetimi de hizmet kapsayıcısına kaydedilir (*LivenessProbeStartup.cs*):
+Sistem durumu denetimi <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck*> `Startup.ConfigureServices` barındırılan hizmetle birlikte ' de kaydedilir. Barındırılan hizmetin, sistem durumu denetiminde özelliği ayarlaması gerektiğinden, sistem durumu denetimi de hizmet kapsayıcısına kaydedilir ( *LivenessProbeStartup.cs* ):
 
 [!code-csharp[](health-checks/samples/2.x/HealthChecksSample/LivenessProbeStartup.cs?name=snippet_ConfigureServices)]
 
@@ -1197,7 +1198,7 @@ app.UseHealthChecks("/health/live", new HealthCheckOptions()
 dotnet run --scenario liveness
 ```
 
-Bir tarayıcıda, `/health/ready` 15 saniye geçtikten sonra birkaç kez ziyaret edin. Sistem durumu denetimi ilk 15 saniye boyunca *sağlıksız* durum bildiriyor. 15 saniye sonra, uç nokta, barındırılan hizmet tarafından uzun süre çalışan görevin tamamlandığını yansıtan *sağlıklı*şekilde raporlar.
+Bir tarayıcıda, `/health/ready` 15 saniye geçtikten sonra birkaç kez ziyaret edin. Sistem durumu denetimi ilk 15 saniye boyunca *sağlıksız* durum bildiriyor. 15 saniye sonra, uç nokta, barındırılan hizmet tarafından uzun süre çalışan görevin tamamlandığını yansıtan *sağlıklı* şekilde raporlar.
 
 Bu örnek ayrıca <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheckPublisher> , iki saniyelik bir gecikmeyle ilk hazırlık denetimini çalıştıran bir sistem durumu denetimi yayımcısı (uygulama) oluşturur. Daha fazla bilgi için bkz. [sistem durumu denetimi yayımcısı](#health-check-publisher) bölümü.
 
@@ -1228,13 +1229,13 @@ spec:
 
 Örnek uygulama, özel bir yanıt yazıcısı ile bir bellek durumu denetimini gösterir.
 
-`MemoryHealthCheck` uygulama belirli bir bellek eşiğini (örnek uygulamada 1 GB) kullanıyorsa sağlıksız bir durum bildirir. , <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult> Uygulama Için çöp toplayıcı (GC) bilgilerini içerir (*MemoryHealthCheck.cs*):
+`MemoryHealthCheck` uygulama belirli bir bellek eşiğini (örnek uygulamada 1 GB) kullanıyorsa sağlıksız bir durum bildirir. , <xref:Microsoft.Extensions.Diagnostics.HealthChecks.HealthCheckResult> Uygulama Için çöp toplayıcı (GC) bilgilerini içerir ( *MemoryHealthCheck.cs* ):
 
 [!code-csharp[](health-checks/samples/2.x/HealthChecksSample/MemoryHealthCheck.cs?name=snippet1)]
 
 İle sistem durumu denetimi hizmetlerini <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks*> kaydedin `Startup.ConfigureServices` . Durum denetimini öğesine geçirerek etkinleştirmek yerine, <xref:Microsoft.Extensions.DependencyInjection.HealthChecksBuilderAddCheckExtensions.AddCheck*> `MemoryHealthCheck` hizmet olarak kaydedilir. Tüm <xref:Microsoft.Extensions.Diagnostics.HealthChecks.IHealthCheck> kayıtlı hizmetler, sistem durumu denetimi Hizmetleri ve ara yazılım tarafından kullanılabilir. Sistem durumu denetimi hizmetlerini tek hizmet olarak kaydetmeyi öneririz.
 
-Örnek uygulamada (*CustomWriterStartup.cs*):
+Örnek uygulamada ( *CustomWriterStartup.cs* ):
 
 [!code-csharp[](health-checks/samples/2.x/HealthChecksSample/CustomWriterStartup.cs?name=snippet_ConfigureServices&highlight=4)]
 
@@ -1294,14 +1295,14 @@ Yönetim bağlantı noktası yapılandırmasını göstermek üzere örnek uygul
 }
 ```
 
-İle sistem durumu denetimi hizmetlerini <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks*> kaydedin `Startup.ConfigureServices` . İçin yapılan çağrı, <xref:Microsoft.AspNetCore.Builder.HealthCheckApplicationBuilderExtensions.UseHealthChecks*> Yönetim bağlantı noktasını belirtir (*ManagementPortStartup.cs*):
+İle sistem durumu denetimi hizmetlerini <xref:Microsoft.Extensions.DependencyInjection.HealthCheckServiceCollectionExtensions.AddHealthChecks*> kaydedin `Startup.ConfigureServices` . İçin yapılan çağrı, <xref:Microsoft.AspNetCore.Builder.HealthCheckApplicationBuilderExtensions.UseHealthChecks*> Yönetim bağlantı noktasını belirtir ( *ManagementPortStartup.cs* ):
 
 [!code-csharp[](health-checks/samples/2.x/HealthChecksSample/ManagementPortStartup.cs?name=snippet1&highlight=17)]
 
 > [!NOTE]
 > Kod içinde açıkça URL 'Ler ve yönetim bağlantı noktası ayarlayarak örnek uygulamada *launchSettings.js* oluşturmaktan kaçınabilirsiniz. *Program.cs* içinde oluşturulduğu yerde <xref:Microsoft.AspNetCore.Hosting.WebHostBuilder> , için bir çağrı ekleyin <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseUrls*> ve uygulamanın normal yanıt uç noktasını ve yönetim bağlantı noktası uç noktasını sağlayın. *ManagementPortStartup.cs* burada <xref:Microsoft.AspNetCore.Builder.HealthCheckApplicationBuilderExtensions.UseHealthChecks*> çağrıldığında, yönetim bağlantı noktasını açıkça belirtin.
 >
-> *Program.cs*:
+> *Program.cs* :
 >
 > ```csharp
 > return new WebHostBuilder()
@@ -1318,7 +1319,7 @@ Yönetim bağlantı noktası yapılandırmasını göstermek üzere örnek uygul
 >     .Build();
 > ```
 >
-> *ManagementPortStartup.cs*:
+> *ManagementPortStartup.cs* :
 >
 > ```csharp
 > app.UseHealthChecks("/health", port: 5001);

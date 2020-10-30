@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc, devx-track-azurecli
 ms.date: 05/20/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/http-repl
-ms.openlocfilehash: b12f4b10230f2631392011a6e443156bf9a2d843
-ms.sourcegitcommit: d5ecad1103306fac8d5468128d3e24e529f1472c
+ms.openlocfilehash: efd2208044ad6392131216266afc34187d738b78
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/23/2020
-ms.locfileid: "92491450"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058980"
 ---
 # <a name="test-web-apis-with-the-http-repl"></a>HTTP REPL ile Web API 'Lerini test etme
 
@@ -376,7 +377,7 @@ pref set editor.command.default.arguments "--disable-extensions --new-window"
 
 Varsayılan olarak, HTTP REPL, komutu seçeneği olmadan yürütürken Swagger belgesini bulmak için kullandığı bir göreli yollar kümesine sahiptir `connect` `--swagger` . Bu göreli yollar, komutta belirtilen kök ve taban yollarla birleştirilir `connect` . Varsayılan göreli yollar şunlardır:
 
-- * Üzerindeswagger.js*
+- *Üzerindeswagger.js*
 - *Swagger/v1/swagger.jsaçık*
 - */swagger.js*
 - */Swagger/v1/swagger.js*
@@ -565,7 +566,7 @@ Varsa, ilişkili denetleyici eylem yöntemi tarafından beklenen rota parametres
 
 HTTP PUT isteği vermek için:
 
-1. *Isteğe bağlı*: `get` verileri değiştirmeden önce görüntülemek için komutunu çalıştırın:
+1. *Isteğe bağlı* : `get` verileri değiştirmeden önce görüntülemek için komutunu çalıştırın:
 
     ```console
     https://localhost:5001/fruits~ get
@@ -627,7 +628,7 @@ HTTP PUT isteği vermek için:
     Server: Kestrel
     ```
 
-1. *Isteğe bağlı*: `get` değişiklikleri görmek için bir komut verin. Örneğin, metin düzenleyicisinde "Chraz" yazdıysanız, bir, `get` şunu döndürür:
+1. *Isteğe bağlı* : `get` değişiklikleri görmek için bir komut verin. Örneğin, metin düzenleyicisinde "Chraz" yazdıysanız, bir, `get` şunu döndürür:
 
     ```console
     https://localhost:5001/fruits~ get
@@ -678,7 +679,7 @@ Varsa, ilişkili denetleyici eylem yöntemi tarafından beklenen rota parametres
 
 HTTP SILME isteği vermek için:
 
-1. *Isteğe bağlı*: `get` verileri değiştirmeden önce görüntülemek için komutunu çalıştırın:
+1. *Isteğe bağlı* : `get` verileri değiştirmeden önce görüntülemek için komutunu çalıştırın:
 
     ```console
     https://localhost:5001/fruits~ get
@@ -718,7 +719,7 @@ HTTP SILME isteği vermek için:
     Server: Kestrel
     ```
 
-1. *Isteğe bağlı*: `get` değişiklikleri görmek için bir komut verin. Bu örnekte, bir, `get` şunu döndürür:
+1. *Isteğe bağlı* : `get` değişiklikleri görmek için bir komut verin. Bu örnekte, bir, `get` şunu döndürür:
 
     ```console
     https://localhost:5001/fruits~ get

@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 09/24/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/messagepackhubprotocol
-ms.openlocfilehash: 15ae8911e2ffba43c7bb885efd153d8b6803bc2a
-ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
+ms.openlocfilehash: e7d19a42e48048d2be4b87d6b0ac1ba6b2596ff1
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/27/2020
-ms.locfileid: "91393684"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058175"
 ---
 # <a name="use-messagepack-hub-protocol-in-no-locsignalr-for-aspnet-core"></a>ASP.NET Core için ' de MessagePack hub protokolünü kullanın SignalR
 
@@ -96,10 +97,10 @@ NPM paketini yükledikten sonra modül, doğrudan bir JavaScript Modül Yükleyi
 
 *node_modules\\@microsoft\signalr-protocol-msgpack\dist\browser\signalr-protocol-msgpack.js* 
 
-Bir tarayıcıda, `msgpack5` Kitaplığa da başvurulmalıdır. `<script>`Başvuru oluşturmak için bir etiket kullanın. Kitaplık *node_modules\msgpack5\dist\msgpack5.js*bulunabilir.
+Bir tarayıcıda, `msgpack5` Kitaplığa da başvurulmalıdır. `<script>`Başvuru oluşturmak için bir etiket kullanın. Kitaplık *node_modules\msgpack5\dist\msgpack5.js* bulunabilir.
 
 > [!NOTE]
-> `<script>`Öğesi kullanılırken, sıra önemlidir. *msgpack5.js*önce *signalr-protocol-msgpack.js* başvuruluyorsa, MessagePack ile bağlantı kurmaya çalışırken bir hata oluşur. *signalr-protocol-msgpack.js*önce de *signalr.js* gerekir.
+> `<script>`Öğesi kullanılırken, sıra önemlidir. *msgpack5.js* önce *signalr-protocol-msgpack.js* başvuruluyorsa, MessagePack ile bağlantı kurmaya çalışırken bir hata oluşur. *signalr-protocol-msgpack.js* önce de *signalr.js* gerekir.
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -141,7 +142,7 @@ JavaScript istemcisinden gönderirken, büyük/ `PascalCased` küçük harf C# s
 connection.invoke("SomeMethod", { Sender: "Sally", Message: "Hello!" });
 ```
 
-`camelCased`Adların kullanılması C# sınıfına düzgün şekilde bağlanmaz. `Key`MessagePack özelliği için farklı bir ad belirtmek üzere özniteliğini kullanarak bu soruna geçici bir çözüm bulabilirsiniz. Daha fazla bilgi için bkz. [MessagePack-CSharp belgeleri](https://github.com/neuecc/MessagePack-CSharp#object-serialization).
+`camelCased`Adların kullanılması C# sınıfına düzgün şekilde bağlanmaz. `Key`MessagePack özelliği için farklı bir ad belirtmek üzere özniteliğini kullanarak bu soruna geçici bir çözüm bulabilirsiniz. Daha fazla bilgi için [MessagePack-CSharp belgelerine](https://github.com/neuecc/MessagePack-CSharp#object-serialization)bakın.
 
 ### <a name="datetimekind-is-not-preserved-when-serializingdeserializing"></a>Seri hale getirme/seri durumdan çıkarma sırasında DateTime. Kind korunmaz
 
@@ -161,7 +162,7 @@ Bu sınırlama hakkında daha fazla bilgi için bkz. GitHub sorun [ASPNET/ Signa
 
 ### <a name="messagepack-support-in-ahead-of-time-compilation-environment"></a>"Zamanında" derleme ortamında MessagePack desteği
 
-.NET istemcisi ve sunucusu tarafından kullanılan [MessagePack-CSharp](https://github.com/neuecc/MessagePack-CSharp/tree/v2.1.90) kitaplığı, serileştirme işlemini iyileştirmek için kod oluşturmayı kullanır. Sonuç olarak, "güncel olmayan" derleme (Xamarin iOS veya Unity gibi) kullanan ortamlarda varsayılan olarak desteklenmez. Seri hale getirici/seri hale getirici kodunu "önceden oluşturma" yoluyla bu ortamlarda MessagePack kullanmak mümkündür. Daha fazla bilgi için bkz. [MessagePack-CSharp belgeleri](https://github.com/neuecc/MessagePack-CSharp/tree/v2.1.90#aot-code-generation-to-support-unityxamarin). Serileştiriciler önceden oluşturulduktan sonra, geçirilen yapılandırma temsilcisini kullanarak bunları kaydedebilirsiniz `AddMessagePackProtocol` :
+.NET istemcisi ve sunucusu tarafından kullanılan [MessagePack-CSharp](https://github.com/neuecc/MessagePack-CSharp/tree/v2.1.90) kitaplığı, serileştirme işlemini iyileştirmek için kod oluşturmayı kullanır. Sonuç olarak, "güncel olmayan" derleme (Xamarin iOS veya Unity gibi) kullanan ortamlarda varsayılan olarak desteklenmez. Seri hale getirici/seri hale getirici kodunu "önceden oluşturma" yoluyla bu ortamlarda MessagePack kullanmak mümkündür. Daha fazla bilgi için [MessagePack-CSharp belgelerine](https://github.com/neuecc/MessagePack-CSharp/tree/v2.1.90#aot-code-generation-to-support-unityxamarin)bakın. Serileştiriciler önceden oluşturulduktan sonra, geçirilen yapılandırma temsilcisini kullanarak bunları kaydedebilirsiniz `AddMessagePackProtocol` :
 
 ```csharp
 services.AddSignalR()
@@ -276,10 +277,10 @@ NPM paketini yükledikten sonra modül, doğrudan bir JavaScript Modül Yükleyi
 
 *node_modules\\@microsoft\signalr-protocol-msgpack\dist\browser\signalr-protocol-msgpack.js* 
 
-Bir tarayıcıda, `msgpack5` Kitaplığa da başvurulmalıdır. `<script>`Başvuru oluşturmak için bir etiket kullanın. Kitaplık *node_modules\msgpack5\dist\msgpack5.js*bulunabilir.
+Bir tarayıcıda, `msgpack5` Kitaplığa da başvurulmalıdır. `<script>`Başvuru oluşturmak için bir etiket kullanın. Kitaplık *node_modules\msgpack5\dist\msgpack5.js* bulunabilir.
 
 > [!NOTE]
-> `<script>`Öğesi kullanılırken, sıra önemlidir. *msgpack5.js*önce *signalr-protocol-msgpack.js* başvuruluyorsa, MessagePack ile bağlantı kurmaya çalışırken bir hata oluşur. *signalr-protocol-msgpack.js*önce de *signalr.js* gerekir.
+> `<script>`Öğesi kullanılırken, sıra önemlidir. *msgpack5.js* önce *signalr-protocol-msgpack.js* başvuruluyorsa, MessagePack ile bağlantı kurmaya çalışırken bir hata oluşur. *signalr-protocol-msgpack.js* önce de *signalr.js* gerekir.
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -321,7 +322,7 @@ JavaScript istemcisinden gönderirken, büyük/ `PascalCased` küçük harf C# s
 connection.invoke("SomeMethod", { Sender: "Sally", Message: "Hello!" });
 ```
 
-`camelCased`Adların kullanılması C# sınıfına düzgün şekilde bağlanmaz. `Key`MessagePack özelliği için farklı bir ad belirtmek üzere özniteliğini kullanarak bu soruna geçici bir çözüm bulabilirsiniz. Daha fazla bilgi için bkz. [MessagePack-CSharp belgeleri](https://github.com/neuecc/MessagePack-CSharp#object-serialization).
+`camelCased`Adların kullanılması C# sınıfına düzgün şekilde bağlanmaz. `Key`MessagePack özelliği için farklı bir ad belirtmek üzere özniteliğini kullanarak bu soruna geçici bir çözüm bulabilirsiniz. Daha fazla bilgi için [MessagePack-CSharp belgelerine](https://github.com/neuecc/MessagePack-CSharp#object-serialization)bakın.
 
 ### <a name="datetimekind-is-not-preserved-when-serializingdeserializing"></a>Seri hale getirme/seri durumdan çıkarma sırasında DateTime. Kind korunmaz
 
@@ -343,7 +344,7 @@ Bu sınırlama hakkında daha fazla bilgi için bkz. GitHub sorun [ASPNET/ Signa
 
 ### <a name="messagepack-support-in-ahead-of-time-compilation-environment"></a>"Zamanında" derleme ortamında MessagePack desteği
 
-.NET istemcisi ve sunucusu tarafından kullanılan [MessagePack-CSharp](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80) kitaplığı, serileştirme işlemini iyileştirmek için kod oluşturmayı kullanır. Sonuç olarak, "güncel olmayan" derleme (Xamarin iOS veya Unity gibi) kullanan ortamlarda varsayılan olarak desteklenmez. Seri hale getirici/seri hale getirici kodunu "önceden oluşturma" yoluyla bu ortamlarda MessagePack kullanmak mümkündür. Daha fazla bilgi için bkz. [MessagePack-CSharp belgeleri](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80#pre-code-generationunityxamarin-supports). Serileştiriciler önceden oluşturulduktan sonra, geçirilen yapılandırma temsilcisini kullanarak bunları kaydedebilirsiniz `AddMessagePackProtocol` :
+.NET istemcisi ve sunucusu tarafından kullanılan [MessagePack-CSharp](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80) kitaplığı, serileştirme işlemini iyileştirmek için kod oluşturmayı kullanır. Sonuç olarak, "güncel olmayan" derleme (Xamarin iOS veya Unity gibi) kullanan ortamlarda varsayılan olarak desteklenmez. Seri hale getirici/seri hale getirici kodunu "önceden oluşturma" yoluyla bu ortamlarda MessagePack kullanmak mümkündür. Daha fazla bilgi için [MessagePack-CSharp belgelerine](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80#pre-code-generationunityxamarin-supports)bakın. Serileştiriciler önceden oluşturulduktan sonra, geçirilen yapılandırma temsilcisini kullanarak bunları kaydedebilirsiniz `AddMessagePackProtocol` :
 
 ```csharp
 services.AddSignalR()
@@ -456,10 +457,10 @@ NPM paketini yükledikten sonra modül, doğrudan bir JavaScript Modül Yükleyi
 
 *node_modules\\@aspnet\signalr-protocol-msgpack\dist\browser\signalr-protocol-msgpack.js*
 
-Bir tarayıcıda, `msgpack5` Kitaplığa da başvurulmalıdır. `<script>`Başvuru oluşturmak için bir etiket kullanın. Kitaplık *node_modules\msgpack5\dist\msgpack5.js*bulunabilir.
+Bir tarayıcıda, `msgpack5` Kitaplığa da başvurulmalıdır. `<script>`Başvuru oluşturmak için bir etiket kullanın. Kitaplık *node_modules\msgpack5\dist\msgpack5.js* bulunabilir.
 
 > [!NOTE]
-> `<script>`Öğesi kullanılırken, sıra önemlidir. *msgpack5.js*önce *signalr-protocol-msgpack.js* başvuruluyorsa, MessagePack ile bağlantı kurmaya çalışırken bir hata oluşur. *signalr-protocol-msgpack.js*önce de *signalr.js* gerekir.
+> `<script>`Öğesi kullanılırken, sıra önemlidir. *msgpack5.js* önce *signalr-protocol-msgpack.js* başvuruluyorsa, MessagePack ile bağlantı kurmaya çalışırken bir hata oluşur. *signalr-protocol-msgpack.js* önce de *signalr.js* gerekir.
 
 ```html
 <script src="~/lib/signalr/signalr.js"></script>
@@ -501,7 +502,7 @@ JavaScript istemcisinden gönderirken, büyük/ `PascalCased` küçük harf C# s
 connection.invoke("SomeMethod", { Sender: "Sally", Message: "Hello!" });
 ```
 
-`camelCased`Adların kullanılması C# sınıfına düzgün şekilde bağlanmaz. `Key`MessagePack özelliği için farklı bir ad belirtmek üzere özniteliğini kullanarak bu soruna geçici bir çözüm bulabilirsiniz. Daha fazla bilgi için bkz. [MessagePack-CSharp belgeleri](https://github.com/neuecc/MessagePack-CSharp#object-serialization).
+`camelCased`Adların kullanılması C# sınıfına düzgün şekilde bağlanmaz. `Key`MessagePack özelliği için farklı bir ad belirtmek üzere özniteliğini kullanarak bu soruna geçici bir çözüm bulabilirsiniz. Daha fazla bilgi için [MessagePack-CSharp belgelerine](https://github.com/neuecc/MessagePack-CSharp#object-serialization)bakın.
 
 ### <a name="datetimekind-is-not-preserved-when-serializingdeserializing"></a>Seri hale getirme/seri durumdan çıkarma sırasında DateTime. Kind korunmaz
 
@@ -523,7 +524,7 @@ Bu sınırlama hakkında daha fazla bilgi için bkz. GitHub sorun [ASPNET/ Signa
 
 ### <a name="messagepack-support-in-ahead-of-time-compilation-environment"></a>"Zamanında" derleme ortamında MessagePack desteği
 
-.NET istemcisi ve sunucusu tarafından kullanılan [MessagePack-CSharp](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80) kitaplığı, serileştirme işlemini iyileştirmek için kod oluşturmayı kullanır. Sonuç olarak, "güncel olmayan" derleme (Xamarin iOS veya Unity gibi) kullanan ortamlarda varsayılan olarak desteklenmez. Seri hale getirici/seri hale getirici kodunu "önceden oluşturma" yoluyla bu ortamlarda MessagePack kullanmak mümkündür. Daha fazla bilgi için bkz. [MessagePack-CSharp belgeleri](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80#pre-code-generationunityxamarin-supports). Serileştiriciler önceden oluşturulduktan sonra, geçirilen yapılandırma temsilcisini kullanarak bunları kaydedebilirsiniz `AddMessagePackProtocol` :
+.NET istemcisi ve sunucusu tarafından kullanılan [MessagePack-CSharp](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80) kitaplığı, serileştirme işlemini iyileştirmek için kod oluşturmayı kullanır. Sonuç olarak, "güncel olmayan" derleme (Xamarin iOS veya Unity gibi) kullanan ortamlarda varsayılan olarak desteklenmez. Seri hale getirici/seri hale getirici kodunu "önceden oluşturma" yoluyla bu ortamlarda MessagePack kullanmak mümkündür. Daha fazla bilgi için [MessagePack-CSharp belgelerine](https://github.com/neuecc/MessagePack-CSharp/tree/v1.8.80#pre-code-generationunityxamarin-supports)bakın. Serileştiriciler önceden oluşturulduktan sonra, geçirilen yapılandırma temsilcisini kullanarak bunları kaydedebilirsiniz `AddMessagePackProtocol` :
 
 ```csharp
 services.AddSignalR()

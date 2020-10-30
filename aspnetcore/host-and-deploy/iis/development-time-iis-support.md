@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/development-time-iis-support
-ms.openlocfilehash: 5636abef928ed8a8122ec907ef025d55baa65127
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: ab892b2cdfa61378ac7328c0380c8a6cffc6d376
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635365"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058460"
 ---
 # <a name="development-time-iis-support-in-visual-studio-for-aspnet-core"></a>ASP.NET Core için Visual Studio'da geliştirme zamanı IIS desteği
 
@@ -33,7 +34,7 @@ ms.locfileid: "88635365"
 
 Bu makalede, Windows Server 'da IIS ile çalışan ASP.NET Core hata ayıklama için [Visual Studio](https://visualstudio.microsoft.com) desteği açıklanmaktadır. Bu konu başlığı altında, bu senaryonun etkinleştirilmesi ve bir projenin kurulması anlatılmaktadır.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * [Windows için Visual Studio](https://visualstudio.microsoft.com/downloads/)
 * **ASP.net ve Web geliştirme** iş yükü
@@ -43,7 +44,7 @@ Bu makalede, Windows Server 'da IIS ile çalışan ASP.NET Core hata ayıklama i
 ## <a name="enable-iis"></a>IIS 'yi etkinleştirme
 
 1. Windows 'ta, **Denetim Masası** > **programları** > **Programlar ve Özellikler** > **Windows özelliklerini aç veya kapat** (ekranın sol tarafı) bölümüne gidin.
-1. **Internet Information Services** onay kutusunu seçin. **Tamam**’ı seçin.
+1. **Internet Information Services** onay kutusunu seçin. **Tamam** ’ı seçin.
 
 IIS yüklemesi için sistemin yeniden başlatılması gerekebilir.
 
@@ -51,7 +52,7 @@ IIS yüklemesi için sistemin yeniden başlatılması gerekebilir.
 
 IIS 'nin aşağıdaki ile yapılandırılmış bir Web sitesine sahip olması gerekir:
 
-* **Ana bilgisayar adı**: genellikle **varsayılan Web sitesi** , bir **ana bilgisayar adıyla** kullanılır `localhost` . Ancak, benzersiz bir ana bilgisayar adına sahip geçerli bir IIS Web sitesi çalışmaktadır.
+* **Ana bilgisayar adı** : genellikle **varsayılan Web sitesi** , bir **ana bilgisayar adıyla** kullanılır `localhost` . Ancak, benzersiz bir ana bilgisayar adına sahip geçerli bir IIS Web sitesi çalışmaktadır.
 * **Site bağlama**
   * HTTPS gerektiren uygulamalar için, sertifika ile 443 numaralı bağlantı noktasına bir bağlama oluşturun. Genellikle **IIS Express geliştirme sertifikası** kullanılır, ancak geçerli bir sertifika çalışıyor olur.
   * HTTP kullanan uygulamalar için, 80 veya yeni bir site için bağlantı noktası 80 ' e bir bağlama oluşturmak için bir bağlamanın mevcut olduğunu onaylayın.
@@ -79,8 +80,8 @@ HTTP kullanan bir proje için, [https yeniden yönlendirme ve HSTS ara yazılım
 
 Geliştirme zamanı IIS desteği eklemek için yeni bir başlatma profili oluşturun:
 
-1. **Çözüm Gezgini**projeye sağ tıklayın. **Özellikler**’i seçin. **Hata Ayıkla** sekmesini açın.
-1. **Profil**için **Yeni** düğmesini seçin. Profili, açılan pencerede "IIS" olarak adlandırın. Profili oluşturmak için **Tamam ' ı** seçin.
+1. **Çözüm Gezgini** projeye sağ tıklayın. **Özellikler** ’i seçin. **Hata Ayıkla** sekmesini açın.
+1. **Profil** için **Yeni** düğmesini seçin. Profili, açılan pencerede "IIS" olarak adlandırın. Profili oluşturmak için **Tamam ' ı** seçin.
 1. **Başlatma** ayarı Için listeden **IIS** ' yi seçin.
 1. **Başlat tarayıcısı** onay kutusunu seçin ve uç nokta URL 'sini sağlayın.
 
@@ -127,7 +128,7 @@ Visual Studio kullanmadığınız durumlarda, *Özellikler* klasöründeki [laun
 
 Visual Studio 'Yu yönetici olarak çalıştırın:
 
-* Derleme yapılandırması açılır listesinin **hata ayıklama**olarak ayarlandığını onaylayın.
+* Derleme yapılandırması açılır listesinin **hata ayıklama** olarak ayarlandığını onaylayın.
 * [Hata ayıklamayı Başlat düğmesini](/visualstudio/debugger/debugger-feature-tour) **IIS** profiline ayarlayın ve uygulamayı başlatmak için düğmeyi seçin.
 
 Visual Studio, yönetici olarak çalışmıyorsa bir yeniden başlatma isteyebilir. İstenirse, Visual Studio 'Yu yeniden başlatın.
@@ -148,7 +149,7 @@ Güvenilmeyen bir geliştirme sertifikası kullanılırsa, tarayıcı güvenilme
 
 Bu makalede, Windows Server 'da IIS ile çalışan ASP.NET Core hata ayıklama için [Visual Studio](https://visualstudio.microsoft.com) desteği açıklanmaktadır. Bu konu başlığı altında, bu senaryonun etkinleştirilmesi ve bir projenin kurulması anlatılmaktadır.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * [Windows için Visual Studio](https://visualstudio.microsoft.com/downloads/)
 * **ASP.net ve Web geliştirme** iş yükü
@@ -158,7 +159,7 @@ Bu makalede, Windows Server 'da IIS ile çalışan ASP.NET Core hata ayıklama i
 ## <a name="enable-iis"></a>IIS 'yi etkinleştirme
 
 1. Windows 'ta, **Denetim Masası** > **programları** > **Programlar ve Özellikler** > **Windows özelliklerini aç veya kapat** (ekranın sol tarafı) bölümüne gidin.
-1. **Internet Information Services** onay kutusunu seçin. **Tamam**’ı seçin.
+1. **Internet Information Services** onay kutusunu seçin. **Tamam** ’ı seçin.
 
 IIS yüklemesi için sistemin yeniden başlatılması gerekebilir.
 
@@ -166,7 +167,7 @@ IIS yüklemesi için sistemin yeniden başlatılması gerekebilir.
 
 IIS 'nin aşağıdaki ile yapılandırılmış bir Web sitesine sahip olması gerekir:
 
-* **Ana bilgisayar adı**: genellikle **varsayılan Web sitesi** , bir **ana bilgisayar adıyla** kullanılır `localhost` . Ancak, benzersiz bir ana bilgisayar adına sahip geçerli bir IIS Web sitesi çalışmaktadır.
+* **Ana bilgisayar adı** : genellikle **varsayılan Web sitesi** , bir **ana bilgisayar adıyla** kullanılır `localhost` . Ancak, benzersiz bir ana bilgisayar adına sahip geçerli bir IIS Web sitesi çalışmaktadır.
 * **Site bağlama**
   * HTTPS gerektiren uygulamalar için, sertifika ile 443 numaralı bağlantı noktasına bir bağlama oluşturun. Genellikle **IIS Express geliştirme sertifikası** kullanılır, ancak geçerli bir sertifika çalışıyor olur.
   * HTTP kullanan uygulamalar için, 80 veya yeni bir site için bağlantı noktası 80 ' e bir bağlama oluşturmak için bir bağlamanın mevcut olduğunu onaylayın.
@@ -194,8 +195,8 @@ HTTP kullanan bir proje için, [https yeniden yönlendirme ve HSTS ara yazılım
 
 Geliştirme zamanı IIS desteği eklemek için yeni bir başlatma profili oluşturun:
 
-1. **Çözüm Gezgini**projeye sağ tıklayın. **Özellikler**’i seçin. **Hata Ayıkla** sekmesini açın.
-1. **Profil**için **Yeni** düğmesini seçin. Profili, açılan pencerede "IIS" olarak adlandırın. Profili oluşturmak için **Tamam ' ı** seçin.
+1. **Çözüm Gezgini** projeye sağ tıklayın. **Özellikler** ’i seçin. **Hata Ayıkla** sekmesini açın.
+1. **Profil** için **Yeni** düğmesini seçin. Profili, açılan pencerede "IIS" olarak adlandırın. Profili oluşturmak için **Tamam ' ı** seçin.
 1. **Başlatma** ayarı Için listeden **IIS** ' yi seçin.
 1. **Başlat tarayıcısı** onay kutusunu seçin ve uç nokta URL 'sini sağlayın.
 
@@ -242,7 +243,7 @@ Visual Studio kullanmadığınız durumlarda, *Özellikler* klasöründeki [laun
 
 Visual Studio 'Yu yönetici olarak çalıştırın:
 
-* Derleme yapılandırması açılır listesinin **hata ayıklama**olarak ayarlandığını onaylayın.
+* Derleme yapılandırması açılır listesinin **hata ayıklama** olarak ayarlandığını onaylayın.
 * [Hata ayıklamayı Başlat düğmesini](/visualstudio/debugger/debugger-feature-tour) **IIS** profiline ayarlayın ve uygulamayı başlatmak için düğmeyi seçin.
 
 Visual Studio, yönetici olarak çalışmıyorsa bir yeniden başlatma isteyebilir. İstenirse, Visual Studio 'Yu yeniden başlatın.

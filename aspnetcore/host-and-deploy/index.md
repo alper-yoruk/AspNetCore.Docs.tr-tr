@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/index
-ms.openlocfilehash: f8271d71f34487062484581ba6b3b8445a62439c
-ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
+ms.openlocfilehash: 19e888859cea35624491a516404c57e30aa9db05
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/16/2020
-ms.locfileid: "92113797"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057225"
 ---
 # <a name="host-and-deploy-aspnet-core"></a>ASP.NET Core barındırma ve dağıtma
 
@@ -43,7 +44,7 @@ Genel olarak, bir ASP.NET Core uygulamasını barındırma ortamına dağıtmak 
 
 *Yayımla* klasörü bir veya daha fazla uygulama derleme dosyası, bağımlılık ve isteğe bağlı olarak .NET çalışma zamanı içerir.
 
-.NET Core uygulaması, *kendi içinde* veya *çerçeveye bağımlı dağıtım*olarak yayımlanabilir. Uygulama kendi kendine dahil ise, .NET çalışma zamanını içeren derleme dosyaları *Yayımla* klasörüne dahil edilir. Uygulama çerçeveye bağımlıysa, .NET çalışma zamanı dosyaları dahil değildir çünkü uygulamanın, sunucuda yüklü bir .NET sürümüne başvurusu vardır. Varsayılan dağıtım modeli çerçeveye bağımlıdır. Daha fazla bilgi için bkz. [.NET Core uygulama dağıtımı](/dotnet/core/deploying/).
+.NET Core uygulaması, *kendi içinde* veya *çerçeveye bağımlı dağıtım* olarak yayımlanabilir. Uygulama kendi kendine dahil ise, .NET çalışma zamanını içeren derleme dosyaları *Yayımla* klasörüne dahil edilir. Uygulama çerçeveye bağımlıysa, .NET çalışma zamanı dosyaları dahil değildir çünkü uygulamanın, sunucuda yüklü bir .NET sürümüne başvurusu vardır. Varsayılan dağıtım modeli çerçeveye bağımlıdır. Daha fazla bilgi için bkz. [.NET Core uygulama dağıtımı](/dotnet/core/deploying/).
 
 *. Exe* ve *. dll* dosyalarına ek olarak, bir ASP.NET Core uygulamasının *Yayımla* klasörü genellikle yapılandırma dosyalarını, statik varlıkları ve MVC görünümlerini içerir. Daha fazla bilgi için bkz. <xref:host-and-deploy/directory-structure>.
 
@@ -52,7 +53,7 @@ Genel olarak, bir ASP.NET Core uygulamasını barındırma ortamına dağıtmak 
 ASP.NET Core uygulaması, bir sunucu önyüklendiğinde ve kilitlenirse yeniden başlatıldığında başlatılması gereken bir konsol uygulamasıdır. Otomatik hale getirmek ve yeniden başlatmaları otomatikleştirmek için bir işlem Yöneticisi gereklidir. ASP.NET Core için en yaygın işlem yöneticileri şunlardır:
 
 * Linux
-  * [NGINX](xref:host-and-deploy/linux-nginx)
+  * [Nginx](xref:host-and-deploy/linux-nginx)
   * [Apache](xref:host-and-deploy/linux-apache)
 * Windows
   * [IIS](xref:host-and-deploy/iis/index)
@@ -121,7 +122,7 @@ Genel olarak, bir ASP.NET Core uygulamasını barındırma ortamına dağıtmak 
 
 *Yayımla* klasörü bir veya daha fazla uygulama derleme dosyası, bağımlılık ve isteğe bağlı olarak .NET çalışma zamanı içerir.
 
-.NET Core uygulaması, *kendi içinde* veya *çerçeveye bağımlı dağıtım*olarak yayımlanabilir. Uygulama kendi kendine dahil ise, .NET çalışma zamanını içeren derleme dosyaları *Yayımla* klasörüne dahil edilir. Uygulama çerçeveye bağımlıysa, .NET çalışma zamanı dosyaları dahil değildir çünkü uygulamanın, sunucuda yüklü bir .NET sürümüne başvurusu vardır. Varsayılan dağıtım modeli çerçeveye bağımlıdır. Daha fazla bilgi için bkz. [.NET Core uygulama dağıtımı](/dotnet/core/deploying/).
+.NET Core uygulaması, *kendi içinde* veya *çerçeveye bağımlı dağıtım* olarak yayımlanabilir. Uygulama kendi kendine dahil ise, .NET çalışma zamanını içeren derleme dosyaları *Yayımla* klasörüne dahil edilir. Uygulama çerçeveye bağımlıysa, .NET çalışma zamanı dosyaları dahil değildir çünkü uygulamanın, sunucuda yüklü bir .NET sürümüne başvurusu vardır. Varsayılan dağıtım modeli çerçeveye bağımlıdır. Daha fazla bilgi için bkz. [.NET Core uygulama dağıtımı](/dotnet/core/deploying/).
 
 *. Exe* ve *. dll* dosyalarına ek olarak, bir ASP.NET Core uygulamasının *Yayımla* klasörü genellikle yapılandırma dosyalarını, statik varlıkları ve MVC görünümlerini içerir. Daha fazla bilgi için bkz. <xref:host-and-deploy/directory-structure>.
 
@@ -130,7 +131,7 @@ Genel olarak, bir ASP.NET Core uygulamasını barındırma ortamına dağıtmak 
 ASP.NET Core uygulaması, bir sunucu önyüklendiğinde ve kilitlenirse yeniden başlatıldığında başlatılması gereken bir konsol uygulamasıdır. Otomatik hale getirmek ve yeniden başlatmaları otomatikleştirmek için bir işlem Yöneticisi gereklidir. ASP.NET Core için en yaygın işlem yöneticileri şunlardır:
 
 * Linux
-  * [NGINX](xref:host-and-deploy/linux-nginx)
+  * [Nginx](xref:host-and-deploy/linux-nginx)
   * [Apache](xref:host-and-deploy/linux-apache)
 * Windows
   * [IIS](xref:host-and-deploy/iis/index)

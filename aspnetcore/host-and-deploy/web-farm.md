@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,23 +19,23 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/web-farm
-ms.openlocfilehash: 13f1ad5dcd4a230ec05b08c402f4ee9e455c3c29
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: ee78e80a4eda3089943765700aa6bb62c6c1e07d
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634143"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057524"
 ---
 # <a name="host-aspnet-core-in-a-web-farm"></a>Web çiftliğinde ASP.NET Core ana bilgisayar
 
 [Chris](https://github.com/Tratcher) 'e göre
 
-Bir *Web grubu* , bir uygulamanın birden çok örneğini barındıran iki veya daha fazla Web sunucusu (veya *düğüm*) grubudur. Kullanıcılardan gelen istekler bir Web grubuna ulaştığında, *yük dengeleyici* istekleri Web grubunun düğümlerine dağıtır. Web gruplarının geliştirilmesi:
+Bir *Web grubu* , bir uygulamanın birden çok örneğini barındıran iki veya daha fazla Web sunucusu (veya *düğüm* ) grubudur. Kullanıcılardan gelen istekler bir Web grubuna ulaştığında, *yük dengeleyici* istekleri Web grubunun düğümlerine dağıtır. Web gruplarının geliştirilmesi:
 
-* **Güvenilirlik/kullanılabilirlik**: bir veya daha fazla düğüm başarısız olduğunda, yük dengeleyici istekleri işlemeye devam etmek için istekleri diğer çalışan düğümlere yönlendirebilir.
-* **Kapasite/performans**: birden çok düğüm, tek bir sunucudan daha fazla istek işleyebilir. Yük dengeleyici istekleri düğümlere dağıtarak iş yükünü dengeler.
-* **Ölçeklenebilirlik**: daha fazla veya daha az kapasite gerektiğinde, etkin düğümlerin sayısı artılarak iş yüküne uyacak şekilde artırılabilir veya azaltılabilir. [Azure App Service](https://azure.microsoft.com/services/app-service/)gibi Web grubu platformu teknolojileri, Sistem Yöneticisi isteğine otomatik olarak veya insan müdahalesi olmadan otomatik olarak düğüm ekleyebilir veya kaldırabilir.
-* Bakım **: bir**Web grubunun düğümleri, daha kolay sistem yönetimi ile sonuçlanan bir dizi paylaşılan hizmete bağlı olabilir. Örneğin, bir Web grubunun düğümleri tek bir veritabanı sunucusunu ve görüntüler ve indirilebilir dosyalar gibi statik kaynaklar için ortak bir ağ konumunu temel alabilir.
+* **Güvenilirlik/kullanılabilirlik** : bir veya daha fazla düğüm başarısız olduğunda, yük dengeleyici istekleri işlemeye devam etmek için istekleri diğer çalışan düğümlere yönlendirebilir.
+* **Kapasite/performans** : birden çok düğüm, tek bir sunucudan daha fazla istek işleyebilir. Yük dengeleyici istekleri düğümlere dağıtarak iş yükünü dengeler.
+* **Ölçeklenebilirlik** : daha fazla veya daha az kapasite gerektiğinde, etkin düğümlerin sayısı artılarak iş yüküne uyacak şekilde artırılabilir veya azaltılabilir. [Azure App Service](https://azure.microsoft.com/services/app-service/)gibi Web grubu platformu teknolojileri, Sistem Yöneticisi isteğine otomatik olarak veya insan müdahalesi olmadan otomatik olarak düğüm ekleyebilir veya kaldırabilir.
+* Bakım **: bir** Web grubunun düğümleri, daha kolay sistem yönetimi ile sonuçlanan bir dizi paylaşılan hizmete bağlı olabilir. Örneğin, bir Web grubunun düğümleri tek bir veritabanı sunucusunu ve görüntüler ve indirilebilir dosyalar gibi statik kaynaklar için ortak bir ağ konumunu temel alabilir.
 
 Bu konuda, paylaşılan kaynaklara bağlı bir Web çiftliğinde barındırılan ASP.NET Core uygulamaları için yapılandırma ve bağımlılıklar açıklanmaktadır.
 
@@ -59,7 +60,7 @@ Veri koruma ve önbelleğe alma, bir Web grubuna dağıtılan uygulamalar için 
 
 ### <a name="data-protection"></a>Veri Koruma
 
-[ASP.NET Core Data Protection sistemi](xref:security/data-protection/introduction) , uygulamalar tarafından verileri korumak için kullanılır. Veri koruma, *anahtar halkaında*depolanan bir şifreleme anahtarı kümesini temel alır. Veri koruma sistemi başlatıldığında, anahtar halkasını yerel olarak depolayan [varsayılan ayarları](xref:security/data-protection/configuration/default-settings) uygular. Varsayılan yapılandırma altında, Web grubunun her bir düğümüne benzersiz bir anahtar halkası depolanır. Sonuç olarak, her Web grubu düğümü diğer düğümlerde bir uygulama tarafından şifrelenen verilerin şifresini çözemez. Varsayılan yapılandırma, uygulamaları bir Web grubunda barındırmak için genellikle uygun değildir. Paylaşılan anahtar halkasını uygulamaya bir alternatif, her zaman kullanıcı isteklerini aynı düğüme yönlendirkullanmaktır. Web grubu dağıtımları için veri koruma sistem yapılandırması hakkında daha fazla bilgi için bkz <xref:security/data-protection/configuration/overview> ..
+[ASP.NET Core Data Protection sistemi](xref:security/data-protection/introduction) , uygulamalar tarafından verileri korumak için kullanılır. Veri koruma, *anahtar halkaında* depolanan bir şifreleme anahtarı kümesini temel alır. Veri koruma sistemi başlatıldığında, anahtar halkasını yerel olarak depolayan [varsayılan ayarları](xref:security/data-protection/configuration/default-settings) uygular. Varsayılan yapılandırma altında, Web grubunun her bir düğümüne benzersiz bir anahtar halkası depolanır. Sonuç olarak, her Web grubu düğümü diğer düğümlerde bir uygulama tarafından şifrelenen verilerin şifresini çözemez. Varsayılan yapılandırma, uygulamaları bir Web grubunda barındırmak için genellikle uygun değildir. Paylaşılan anahtar halkasını uygulamaya bir alternatif, her zaman kullanıcı isteklerini aynı düğüme yönlendirkullanmaktır. Web grubu dağıtımları için veri koruma sistem yapılandırması hakkında daha fazla bilgi için bkz <xref:security/data-protection/configuration/overview> ..
 
 ### <a name="caching"></a>Önbelleğe Alma
 
@@ -85,7 +86,7 @@ Veri koruma veya önbelleğe alma bir Web grubu ortamı için yapılandırılmad
 
 Kimlik doğrulaması kullanarak uygulamada oturum açan bir kullanıcıyı göz önünde bulundurun cookie . Kullanıcı uygulamada bir Web grubu düğümünde oturum açar. Bir sonraki isteği, oturum açtıkları aynı düğüme alınırsa, uygulama kimlik doğrulamasının şifresini çözebilir cookie ve uygulamanın kaynağına erişim izni verebilir. Sonraki istekleri farklı bir düğüme alınırsa, uygulama cookie kullanıcının oturum açmadığı düğümden kimlik doğrulamasının şifresini çözemez ve istenen kaynak için yetkilendirme başarısız olur.
 
-Aşağıdaki belirtilerden herhangi biri **zaman zaman**meydana geldiğinde, sorun genellikle hatalı veri korumasına veya bir Web grubu ortamı için önbelleğe alma yapılandırmasına göre izlenmelidir:
+Aşağıdaki belirtilerden herhangi biri **zaman zaman** meydana geldiğinde, sorun genellikle hatalı veri korumasına veya bir Web grubu ortamı için önbelleğe alma yapılandırmasına göre izlenmelidir:
 
 * Kimlik doğrulama sonları: kimlik doğrulaması cookie yanlış yapılandırılmış veya şifresi çözülemiyor. OAuth (Facebook, Microsoft, Twitter) veya Openıdconnect oturumları "bağıntı başarısız oldu" hatasıyla başarısız oluyor.
 * Yetkilendirme sonları: Identity kaybedildi.

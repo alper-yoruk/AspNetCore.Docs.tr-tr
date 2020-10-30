@@ -7,6 +7,7 @@ ms.author: prkrishn
 ms.custom: mvc
 ms.date: 09/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/analyzers
-ms.openlocfilehash: 1bc76f3965009dbdd66c58b197f4c12bd44faf18
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: cf0415e7d72e21a48db8bbeb4540f05e0b0a4198
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633038"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057927"
 ---
 # <a name="use-web-api-analyzers"></a>Web API Çözümleyicileri kullanma
 
@@ -59,7 +60,7 @@ Aşağıdaki yaklaşımlardan biriyle [Microsoft. AspNetCore. Mvc. api. çözüm
 ### <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 **Paket Yöneticisi konsol** penceresinde:
-  * **View** > **Diğer Windows** > **Paket Yöneticisi konsolunu**görüntüle ' ye gidin.
+  * **View** > **Diğer Windows** > **Paket Yöneticisi konsolunu** görüntüle ' ye gidin.
   * *Apiconventions. csproj* dosyasının bulunduğu dizine gidin.
   * Şu kodu yürütün:
 
@@ -69,14 +70,14 @@ Aşağıdaki yaklaşımlardan biriyle [Microsoft. AspNetCore. Mvc. api. çözüm
 
 ### <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-* *Packages* **Çözüm bölmesi** > **paket Ekle...**' da paketler klasörüne sağ tıklayın.
+* *Packages* **Çözüm bölmesi** > **paket Ekle...** ' da paketler klasörüne sağ tıklayın.
 * **Paket Ekle** penceresinin **kaynak** açılan penceresini "NuGet.org" olarak ayarlayın.
 * Arama kutusuna "Microsoft. AspNetCore. Mvc. api. çözümleyiciler" yazın.
-* Sonuçlar bölmesinden "Microsoft. AspNetCore. Mvc. api. çözümleyiciler" paketini seçin ve **paket Ekle**' ye tıklayın.
+* Sonuçlar bölmesinden "Microsoft. AspNetCore. Mvc. api. çözümleyiciler" paketini seçin ve **paket Ekle** ' ye tıklayın.
 
 ### <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-**Tümleşik terminalden**aşağıdaki komutu çalıştırın:
+**Tümleşik terminalden** aşağıdaki komutu çalıştırın:
 
 ```dotnetcli
 dotnet add ApiConventions.csproj package Microsoft.AspNetCore.Mvc.Api.Analyzers

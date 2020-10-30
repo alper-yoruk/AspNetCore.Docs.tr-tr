@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 07/06/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/web-api-help-pages-using-swagger
-ms.openlocfilehash: c40aede044c78122a9057613f0eece9acf84df7b
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b4b27e6b845d960b4b92612b90938f0770f23170
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634000"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056679"
 ---
 # <a name="aspnet-core-web-api-help-pages-with-swagger--openapi"></a>Swagger/Openapı ile Web API Yardım sayfaları ASP.NET Core
 
@@ -42,7 +43,7 @@ Swagger, [rest](https://en.wikipedia.org/wiki/Representational_state_transfer) A
 
 ## <a name="openapi-specification-openapijson"></a>Openapı belirtimi (openapi.json)
 
-Openapı akışının çekirdeği, &mdash; Varsayılan olarak, *openapi.js*adlı bir belge olan belirtimdir. Bu, hizmetinize bağlı olarak Openapı araç zinciri (veya bunun üçüncü taraf uygulamaları) tarafından oluşturulmuştur. API 'nizin yeteneklerini ve HTTP ile nasıl erişebileceğinizi açıklar. Swagger Kullanıcı arabirimini yürütür ve araç zinciri tarafından keşif ve istemci kodu oluşturmayı etkinleştirmek için kullanılır. Aşağıda, breçekimi için azaltılmış bir Openapı belirtimi örneği verilmiştir:
+Openapı akışının çekirdeği, &mdash; Varsayılan olarak, *openapi.js* adlı bir belge olan belirtimdir. Bu, hizmetinize bağlı olarak Openapı araç zinciri (veya bunun üçüncü taraf uygulamaları) tarafından oluşturulmuştur. API 'nizin yeteneklerini ve HTTP ile nasıl erişebileceğinizi açıklar. Swagger Kullanıcı arabirimini yürütür ve araç zinciri tarafından keşif ve istemci kodu oluşturmayı etkinleştirmek için kullanılır. Aşağıda, breçekimi için azaltılmış bir Openapı belirtimi örneği verilmiştir:
 
 ```json
 {
@@ -136,7 +137,7 @@ Openapı akışının çekirdeği, &mdash; Varsayılan olarak, *openapi.js*adlı
 
 ![Swagger Kullanıcı arabirimi](web-api-help-pages-using-swagger/_static/swagger-ui.png)
 
-Denetleyicilerinizdeki her genel eylem yöntemi kullanıcı arabiriminden test edilebilir. Bölümü genişletmek için bir yöntem adına tıklayın. Gerekli parametreleri ekleyin ve **deneyin!**' e tıklayın.
+Denetleyicilerinizdeki her genel eylem yöntemi kullanıcı arabiriminden test edilebilir. Bölümü genişletmek için bir yöntem adına tıklayın. Gerekli parametreleri ekleyin ve **deneyin!** ' e tıklayın.
 
 ![Örnek Swagger GET testi](web-api-help-pages-using-swagger/_static/get-try-it-out.png)
 

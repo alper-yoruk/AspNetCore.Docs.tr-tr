@@ -6,6 +6,7 @@ ms.author: casoper
 ms.custom: devx-track-csharp, mvc, seodec18
 ms.date: 07/10/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/monitor
-ms.openlocfilehash: d5d5189563760cb8a61c188436caa3838e75a31e
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 74e789828bf5d54e3457f235657f8ed7086df80d
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626915"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056757"
 ---
 # <a name="monitor-and-debug"></a>İzleme ve hata ayıklama
 
@@ -42,17 +43,17 @@ Bu bölümde, aşağıdaki görevleri tamamlayacaksınız:
 
 App Service Web Apps gerçek zamanlı olarak kolayca izlenir. Azure portal ölçümleri kolay anlaşılır grafikler ve grafiklerde işler.
 
-1. [Azure Portal](https://portal.azure.com)açın ve ardından *MyWebApp \<unique_number\> * App Service gidin.
+1. [Azure Portal](https://portal.azure.com)açın ve ardından *MyWebApp \<unique_number\>* App Service gidin.
 
 1. **Genel bakış** sekmesi, son ölçümleri görüntüleyen grafikler dahil yararlı "bir bakışta" bilgileri görüntüler.
 
     ![Genel bakış panelini gösteren ekran görüntüsü](./media/monitoring/overview.png)
 
-    * **Http 5xx**: sunucu tarafı hatalarının sayısı, genellikle ASP.NET Core kodundaki özel durumlar.
-    * **Veri girişi**: Web uygulamanıza gelen veri girişi.
-    * **Giden veri**: Web uygulamanızdan istemcilere giden veri çıkışı.
-    * **İstekler**: http isteklerinin sayısı.
-    * **Ortalama yanıt süresi**: Web uygulamasının http isteklerine yanıt vermesi için geçen ortalama süre.
+    * **Http 5xx** : sunucu tarafı hatalarının sayısı, genellikle ASP.NET Core kodundaki özel durumlar.
+    * **Veri girişi** : Web uygulamanıza gelen veri girişi.
+    * **Giden veri** : Web uygulamanızdan istemcilere giden veri çıkışı.
+    * **İstekler** : http isteklerinin sayısı.
+    * **Ortalama yanıt süresi** : Web uygulamasının http isteklerine yanıt vermesi için geçen ortalama süre.
 
     Sorun giderme ve iyileştirme için birkaç self servis aracı da bu sayfada bulunur.
 
@@ -70,7 +71,7 @@ App Service Web Apps gerçek zamanlı olarak kolayca izlenir. Azure portal ölç
 
 [Application Insights](/azure/application-insights/app-insights-overview) , Web uygulamalarının performansını ve kararlılığını ve kullanıcıların bunları nasıl kullandığını analiz eden bir Azure hizmetidir. Application Insights veriler Azure Izleyici 'den daha geniş ve daha ayrıntılı. Veriler geliştiricilere ve yöneticilere uygulamaları iyileştirmek için önemli bilgiler sağlayabilir. Application Insights, kod değişikliği olmadan bir Azure App Service kaynağına eklenebilir.
 
-1. [Azure Portal](https://portal.azure.com)açın ve ardından *MyWebApp \<unique_number\> * App Service gidin.
+1. [Azure Portal](https://portal.azure.com)açın ve ardından *MyWebApp \<unique_number\>* App Service gidin.
 1. **Genel bakış** sekmesinden **Application Insights** kutucuğuna tıklayın.
 
     ![Application Insights kutucuğu](./media/monitoring/app-insights.png)
@@ -79,8 +80,8 @@ App Service Web Apps gerçek zamanlı olarak kolayca izlenir. Azure portal ölç
 
     ![Application Insights kurulum](./media/monitoring/new-app-insights.png)
 
-1. **Çalışma zamanı/çerçeve**için **ASP.NET Core**seçin. Varsayılan ayarları kabul edin.
-1. **Tamam**’ı seçin. Onaylamanız istenirse **devam**' ı seçin.
+1. **Çalışma zamanı/çerçeve** için **ASP.NET Core** seçin. Varsayılan ayarları kabul edin.
+1. **Tamam** ’ı seçin. Onaylamanız istenirse **devam** ' ı seçin.
 1. Kaynak oluşturulduktan sonra, Application Insights sayfasına doğrudan gitmek için Application Insights kaynak adına tıklayın.
 
     ![Yeni Application Insights kaynak hazırlanıyor](./media/monitoring/new-app-insights-done.png)
@@ -95,15 +96,15 @@ Application Insights, ek yapılandırma olmadan yararlı sunucu tarafı bilgiler
 
 Web sunucusu ve uygulama günlükleri Azure App Service ' de varsayılan olarak devre dışıdır. Aşağıdaki adımlarla günlükleri etkinleştirin:
 
-1. [Azure Portal](https://portal.azure.com)açın ve *MyWebApp \<unique_number\> * App Service gidin.
-1. Soldaki menüde, **izleme** bölümüne gidin. **Tanılama günlükleri**' ni seçin.
+1. [Azure Portal](https://portal.azure.com)açın ve *MyWebApp \<unique_number\>* App Service gidin.
+1. Soldaki menüde, **izleme** bölümüne gidin. **Tanılama günlükleri** ' ni seçin.
 
     ![Tanılama günlükleri bağlantısı](./media/monitoring/logging.png)
 
-1. **Uygulama günlüğünü açın (dosya sistemi)**. İstenirse, Web uygulamasında uygulama günlüğünü etkinleştirmek için uzantıları yüklemek üzere kutuya tıklayın.
-1. **Web sunucusu günlüğünü** **dosya sistemine**ayarlayın.
+1. **Uygulama günlüğünü açın (dosya sistemi)** . İstenirse, Web uygulamasında uygulama günlüğünü etkinleştirmek için uzantıları yüklemek üzere kutuya tıklayın.
+1. **Web sunucusu günlüğünü** **dosya sistemine** ayarlayın.
 1. **Saklama süresini** gün olarak girin. Örneğin, 30.
-1. **Kaydet**’e tıklayın.
+1. **Kaydet** ’e tıklayın.
 
 Web uygulaması için ASP.NET Core ve Web sunucusu (App Service) günlükleri oluşturulur. Bunlar, görüntülendikleri FTP/FTPS bilgileri kullanılarak indirilebilirler. Parola, bu kılavuzda daha önce oluşturulan dağıtım kimlik bilgileri ile aynıdır. Günlükler [doğrudan PowerShell veya Azure CLI ile yerel makinenize akışla](/azure/app-service/web-sites-enable-diagnostic-log#download)eklenebilir. Günlükler, Application Insights de [görüntülenebilir](/azure/app-service/web-sites-enable-diagnostic-log#how-to-view-logs-in-application-insights).
 
@@ -111,8 +112,8 @@ Web uygulaması için ASP.NET Core ve Web sunucusu (App Service) günlükleri ol
 
 Uygulama ve Web sunucusu günlükleri, Portal aracılığıyla gerçek zamanlı olarak akışla eklenebilir.
 
-1. [Azure Portal](https://portal.azure.com)açın ve *MyWebApp \<unique_number\> * App Service gidin.
-1. Soldaki menüde, **izleme** bölümüne gidin ve **günlük akışı**' nı seçin.
+1. [Azure Portal](https://portal.azure.com)açın ve *MyWebApp \<unique_number\>* App Service gidin.
+1. Soldaki menüde, **izleme** bölümüne gidin ve **günlük akışı** ' nı seçin.
 
     ![Günlük akışı bağlantısını gösteren ekran görüntüsü](./media/monitoring/log-stream.png)
 

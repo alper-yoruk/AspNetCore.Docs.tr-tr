@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 11/04/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/response
-ms.openlocfilehash: 9516410399ce69f1d69b09781b2530d052a11e7a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 2864de5b9931ed255569cb087c67c71004c4df92
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631881"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059019"
 ---
 # <a name="response-caching-in-aspnet-core"></a>ASP.NET Core 'de yanıt önbelleğe alma
 
@@ -38,30 +39,30 @@ HTTP 1,1 önbelleğe alma belirtimini izleyen sunucu tarafında önbelleğe alma
 
 ## <a name="http-based-response-caching"></a>HTTP tabanlı yanıt önbelleğe alma
 
-[HTTP 1,1 önbelleğe alma belirtimi](https://tools.ietf.org/html/rfc7234) , Internet önbelleklerinin nasıl davranması gerektiğini açıklar. Önbelleğe alma için kullanılan birincil HTTP üst bilgisi cache [-Control](https://tools.ietf.org/html/rfc7234#section-5.2)' dır, önbellek *yönergeleri*belirtmek için kullanılır. Yönergeler denetim önbelleği, istek olarak önbelleğe alma davranışını istemcilerden sunuculara ve yanıt olarak sunuculardan istemcilere geri doğru bir şekilde getirir. İstekler ve yanıtlar proxy sunucuları üzerinden taşınır ve proxy sunucuları da HTTP 1,1 önbelleğe alma belirtimine uymalıdır.
+[HTTP 1,1 önbelleğe alma belirtimi](https://tools.ietf.org/html/rfc7234) , Internet önbelleklerinin nasıl davranması gerektiğini açıklar. Önbelleğe alma için kullanılan birincil HTTP üst bilgisi cache [-Control](https://tools.ietf.org/html/rfc7234#section-5.2)' dır, önbellek *yönergeleri* belirtmek için kullanılır. Yönergeler denetim önbelleği, istek olarak önbelleğe alma davranışını istemcilerden sunuculara ve yanıt olarak sunuculardan istemcilere geri doğru bir şekilde getirir. İstekler ve yanıtlar proxy sunucuları üzerinden taşınır ve proxy sunucuları da HTTP 1,1 önbelleğe alma belirtimine uymalıdır.
 
 Ortak `Cache-Control` yönergeler aşağıdaki tabloda gösterilmiştir.
 
 | Deki                                                       | Eylem |
 | --------------------------------------------------------------- | ------ |
 | [genel](https://tools.ietf.org/html/rfc7234#section-5.2.2.5)   | Önbellek, yanıtı saklayabilir. |
-| [private](https://tools.ietf.org/html/rfc7234#section-5.2.2.6)  | Yanıtın paylaşılan bir önbellek tarafından depolanması gerekir. Özel bir önbellek, yanıtı depolayıp yeniden kullanabilir. |
+| [özelleştirme](https://tools.ietf.org/html/rfc7234#section-5.2.2.6)  | Yanıtın paylaşılan bir önbellek tarafından depolanması gerekir. Özel bir önbellek, yanıtı depolayıp yeniden kullanabilir. |
 | [Maksimum yaş](https://tools.ietf.org/html/rfc7234#section-5.2.1.1)  | İstemci, yaşı belirtilen saniyeden daha büyük olan bir yanıtı kabul etmez. Örnekler: `max-age=60` (60 saniye), `max-age=2592000` (1 ay) |
-| [önbellek yok](https://tools.ietf.org/html/rfc7234#section-5.2.1.4) | **İsteklerde**: bir önbellek, isteği karşılamak için depolanan bir yanıt kullanmamalıdır. Kaynak sunucu, istemcinin yanıtını yeniden oluşturur ve ara yazılım, depolanan yanıtı önbelleğinde güncelleştirir.<br><br>**Yanıtlar**: yanıt, kaynak sunucuda doğrulamadan sonraki bir istek için kullanılmamalıdır. |
-| [mağaza yok](https://tools.ietf.org/html/rfc7234#section-5.2.1.5) | **Istekler üzerinde**: bir önbelleğin isteği depolaması gerekir.<br><br>**Yanıtlar**: bir önbellek, yanıtın herhangi bir parçasını depolamamalıdır. |
+| [önbellek yok](https://tools.ietf.org/html/rfc7234#section-5.2.1.4) | **İsteklerde** : bir önbellek, isteği karşılamak için depolanan bir yanıt kullanmamalıdır. Kaynak sunucu, istemcinin yanıtını yeniden oluşturur ve ara yazılım, depolanan yanıtı önbelleğinde güncelleştirir.<br><br>**Yanıtlar** : yanıt, kaynak sunucuda doğrulamadan sonraki bir istek için kullanılmamalıdır. |
+| [mağaza yok](https://tools.ietf.org/html/rfc7234#section-5.2.1.5) | **Istekler üzerinde** : bir önbelleğin isteği depolaması gerekir.<br><br>**Yanıtlar** : bir önbellek, yanıtın herhangi bir parçasını depolamamalıdır. |
 
 Önbelleğe alma işleminde bir rol oynatacak diğer önbellek üstbilgileri aşağıdaki tabloda gösterilmiştir.
 
 | Üst bilgi                                                     | İşlev |
 | ---------------------------------------------------------- | -------- |
-| [Yaş](https://tools.ietf.org/html/rfc7234#section-5.1)     | Yanıt oluşturulduktan veya kaynak sunucuda başarıyla doğrulandıktan sonra geçen sürenin saniye cinsinden tahmini. |
+| [Age](https://tools.ietf.org/html/rfc7234#section-5.1)     | Yanıt oluşturulduktan veya kaynak sunucuda başarıyla doğrulandıktan sonra geçen sürenin saniye cinsinden tahmini. |
 | [Bitiminden](https://tools.ietf.org/html/rfc7234#section-5.3) | Yanıtın eski kabul edildiği zaman. |
 | [Prag](https://tools.ietf.org/html/rfc7234#section-5.4)  | Ayar davranışı için HTTP/1.0 önbellekler ile geriye dönük uyumluluk için mevcuttur `no-cache` . `Cache-Control`Üst bilgi varsa, `Pragma` üst bilgi yok sayılır. |
 | [Değiş](https://tools.ietf.org/html/rfc7231#section-7.1.4)  | Tüm `Vary` üst bilgi alanları önbelleğe alınan yanıtın orijinal isteği ve yeni istek ile eşleşmediği takdirde, önbelleğe alınmış bir yanıtın gönderilmemesi gerektiğini belirtir. |
 
-## <a name="http-based-caching-respects-request-cache-control-directives"></a>HTTP tabanlı önbelleğe alma istek önbelleği-denetim yönergeleri
+## <a name="http-based-caching-respects-request-cache-control-directives"></a>HTTP tabanlı önbellek ve istek Cache-Control yönergeleri
 
-[Cache-Control üst bilgisi Için HTTP 1,1 önbelleğe alma belirtiminin](https://tools.ietf.org/html/rfc7234#section-5.2) , istemci tarafından gönderilen geçerli bir üst bilgiyi kabul etmek için bir önbellek gerekir `Cache-Control` . İstemci `no-cache` , bir üst bilgi değeri ile istek yapabilir ve sunucuyu her istek için yeni bir yanıt oluşturmaya zorlayabilir.
+[Cache-Control üst bilgisi Için HTTP 1,1 önbelleğe alma belirtimi](https://tools.ietf.org/html/rfc7234#section-5.2) , istemci tarafından gönderilen geçerli bir üst bilgiyi kabul etmek için bir önbellek gerektirir `Cache-Control` . İstemci `no-cache` , bir üst bilgi değeri ile istek yapabilir ve sunucuyu her istek için yeni bir yanıt oluşturmaya zorlayabilir.
 
 İstemci `Cache-Control` isteği üst bilgilerinin her zaman dikkate alınması, http önbelleği hedefini düşünüyorsanız anlamlı hale getirir. Resmi belirtim altında, önbelleğe alma, istemcilerin, proxy 'lerin ve sunucuların bir ağı üzerinde istekleri karşılayan gecikme süresini ve ağ yükünü azaltmaya yöneliktir. Kaynak sunucu üzerindeki yükü denetlemek için bir yol değildir.
 
@@ -71,7 +72,7 @@ Yazılım, resmi önbellek belirtimine bağlı olduğundan, [yanıt önbelleğe 
 
 ### <a name="in-memory-caching"></a>Bellek içi önbellek
 
-Bellek içi önbelleğe alma, önbelleğe alınmış verileri depolamak için sunucu belleğini kullanır. Bu tür bir önbelleğe alma, *yapışkan oturumları*kullanan tek bir sunucu veya birden çok sunucu için uygundur. Yapışkan oturumlar, bir istemciden gelen isteklerin işlenmek üzere her zaman aynı sunucuya yönlendirildiği anlamına gelir.
+Bellek içi önbelleğe alma, önbelleğe alınmış verileri depolamak için sunucu belleğini kullanır. Bu tür bir önbelleğe alma, *yapışkan oturumları* kullanan tek bir sunucu veya birden çok sunucu için uygundur. Yapışkan oturumlar, bir istemciden gelen isteklerin işlenmek üzere her zaman aynı sunucuya yönlendirildiği anlamına gelir.
 
 Daha fazla bilgi için bkz. <xref:performance/caching/memory>.
 

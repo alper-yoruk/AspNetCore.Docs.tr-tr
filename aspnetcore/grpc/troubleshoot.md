@@ -7,6 +7,7 @@ ms.author: jamesnk
 ms.custom: mvc
 ms.date: 07/09/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/troubleshoot
-ms.openlocfilehash: 0c897c8c640f8713fc7d3b6cad0e6c571131d7a5
-ms.sourcegitcommit: ecae2aa432628b9181d1fa11037c231c7dd56c9e
+ms.openlocfilehash: cbce85caf7ba792253ba62c6be084c8905acd00f
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/16/2020
-ms.locfileid: "92113848"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058720"
 ---
 # <a name="troubleshoot-grpc-on-net-core"></a>.NET Core 'da gRPC sorunlarını giderme
 
@@ -108,7 +109,7 @@ Kestrel, macOS ve Windows 7 gibi eski Windows sürümlerindeki TLS ile HTTP/2 ' 
 
 Bu sorunu geçici olarak çözmek için Kestrel ve gRPC istemcisini TLS *olmadan* http/2 kullanacak şekilde yapılandırın. Bunu yalnızca geliştirme sırasında yapmanız gerekir. TLS 'nin kullanılması, gRPC iletilerinin şifrelenmeden gönderilmesine neden olur.
 
-Kestrel, *program.cs*içinde TLS olmadan bir http/2 uç noktası yapılandırmalıdır:
+Kestrel, *program.cs* içinde TLS olmadan bir http/2 uç noktası yapılandırmalıdır:
 
 ```csharp
 public static IHostBuilder CreateHostBuilder(string[] args) =>
@@ -166,9 +167,9 @@ WPF projelerinde, gRPC kod oluşturmanın düzgün çalışmasını engelleyen [
 Bu soruna geçici çözüm olarak şunları yapabilirsiniz:
 
 1. Yeni bir .NET Core sınıf kitaplığı projesi oluşturun.
-2. Yeni projede, [ * \* . proto* dosyalarından C# kod üretimini](xref:grpc/basics#generated-c-assets)etkinleştirmek için başvurular ekleyin:
+2. Yeni projede, [ *\* . proto* dosyalarından C# kod üretimini](xref:grpc/basics#generated-c-assets)etkinleştirmek için başvurular ekleyin:
     * [GRPC. Tools](https://www.nuget.org/packages/Grpc.Tools/) paketine bir paket başvurusu ekleyin.
-    * * \* . Proto* dosyalarını `<Protobuf>` öğe grubuna ekleyin.
+    * *\* . Proto* dosyalarını `<Protobuf>` öğe grubuna ekleyin.
 3. WPF uygulamasında yeni projeye bir başvuru ekleyin.
 
 WPF uygulaması, yeni sınıf kitaplığı projesinden gRPC tarafından oluşturulan türleri kullanabilir.

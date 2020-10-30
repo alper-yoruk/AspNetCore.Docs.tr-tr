@@ -6,6 +6,7 @@ ms.assetid: 0be164aa-1d72-4192-bd6b-192c9c301164
 ms.author: riande
 ms.date: 12/18/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/model-binding
-ms.openlocfilehash: ca2f071ccb84fdb2eb06f533fc4d088ad1b1c785
-ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
+ms.openlocfilehash: a3be22134246c76b0a809ddb97b33ff97ace9a5b
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/27/2020
-ms.locfileid: "91393892"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057511"
 ---
 # <a name="model-binding-in-aspnet-core"></a>ASP.NET Core 'de model bağlama
 
@@ -80,7 +81,7 @@ Model bağlama, aşağıdaki tür hedeflerin değerlerini bulmayı dener:
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Pages/Instructors/Edit.cshtml.cs?name=snippet_BindProperty&highlight=3-4)]
 
-### <a name="bindpropertiesattribute"></a>[BindProperties] özniteliği
+### <a name="bindproperties-attribute"></a>[BindProperties] özniteliği
 
 ASP.NET Core 2,1 ve üzeri sürümlerde kullanılabilir.  `PageModel`Model bağlamaya, sınıfın tüm ortak özelliklerini hedeflemesini bildirmek için bir denetleyiciye veya sınıfa uygulanabilir:
 
@@ -158,7 +159,7 @@ Giriş biçimleri yalnızca gövdeyi okur ve bağlama kaynak özniteliklerini an
 
 ### <a name="additional-sources"></a>Ek kaynaklar
 
-Kaynak verileri, model bağlama sistemine *değer sağlayıcılara*göre sağlanır. Diğer kaynaklardan model bağlamaya yönelik verileri alan özel değer sağlayıcıları yazabilir ve kaydedebilirsiniz. Örneğin, verilerin cookie veya oturum durumunun olmasını isteyebilirsiniz. Yeni bir kaynaktan veri almak için:
+Kaynak verileri, model bağlama sistemine *değer sağlayıcılara* göre sağlanır. Diğer kaynaklardan model bağlamaya yönelik verileri alan özel değer sağlayıcıları yazabilir ve kaydedebilirsiniz. Örneğin, verilerin cookie veya oturum durumunun olmasını isteyebilirsiniz. Yeni bir kaynaktan veri almak için:
 
 * Uygulayan bir sınıf oluşturun `IValueProvider` .
 * Uygulayan bir sınıf oluşturun `IValueProviderFactory` .
@@ -223,7 +224,7 @@ Model cildin kaynak dizeleri dönüştürebileceğiniz basit türler aşağıdak
 
 Karmaşık bir türün bağlanması için ortak bir varsayılan Oluşturucusu ve ortak yazılabilir özellikleri olmalıdır. Model bağlama gerçekleştiğinde, sınıf ortak varsayılan Oluşturucu kullanılarak oluşturulur. 
 
-Karmaşık türün her özelliği için model bağlama, ad modeli ön eki için kaynakları arar *. property_name*. Hiçbir şey bulunamazsa, ön ek olmadan yalnızca *property_name* arar.
+Karmaşık türün her özelliği için model bağlama *prefix.property_name* ad deseninin kaynaklarını arar. Hiçbir şey bulunamazsa, ön ek olmadan yalnızca *property_name* arar.
 
 Bir parametreye bağlama için, önek parametre adıdır. Ortak özelliğe bağlama için `PageModel` , önek ortak özellik adıdır. Bazı özniteliklerin `Prefix` , parametre veya özellik adının varsayılan kullanımını geçersiz kılabilmenizi sağlayan bir özelliği vardır.
 
@@ -279,11 +280,11 @@ Karmaşık türlerin model bağlamasını denetlemek için birkaç yerleşik öz
 * `[BindNever]`
 
 > [!WARNING]
-> Bu öznitelikler, gönderilen form verileri değer kaynağı olduğunda model bağlamayı etkiler. Bunlar, gönderilen JSON ve XML istek gövdelerini işleyen giriş formatlayıcıları ***'nı etkilemez.*** Giriş biçimleri [Bu makalenin ilerleyen kısımlarında](#input-formatters)açıklanmıştır.
+> Bu öznitelikler, gönderilen form verileri değer kaynağı olduğunda model bağlamayı etkiler. Bunlar, gönderilen JSON ve XML istek gövdelerini işleyen giriş formatlarını **etkilemez.** Giriş biçimleri [Bu makalenin ilerleyen kısımlarında](#input-formatters)açıklanmıştır.
 
 ### <a name="bind-attribute"></a>[Bind] özniteliği
 
-, Bir sınıfa veya yöntem parametresine uygulanabilir. Model bağlamasındaki bir modelin hangi özelliklerinin dahil edileceğini belirtir. `[Bind]`Giriş ***formatlarını etkilemez.***
+, Bir sınıfa veya yöntem parametresine uygulanabilir. Model bağlamasındaki bir modelin hangi özelliklerinin dahil edileceğini belirtir. `[Bind]`Giriş _*_formatlarını etkilemez._*_
 
 Aşağıdaki örnekte, `Instructor` herhangi bir işleyici veya eylem yöntemi çağrıldığında yalnızca modelin belirtilen özellikleri bağlanır:
 
@@ -299,7 +300,7 @@ Aşağıdaki örnekte, `Instructor` yöntemi çağrıldığında yalnızca model
 public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor instructor)
 ```
 
-`[Bind]`Özniteliği, *oluşturma* senaryolarında fazla nakline karşı korumak için kullanılabilir. Dışlanan Özellikler null ya da boş değer olarak ayarlandığı için, düzenleme senaryolarında iyi çalışmaz. Fazla naklin savunma için, öznitelik yerine görüntüleme modelleri önerilir `[Bind]` . Daha fazla bilgi için bkz. fazla [nakil hakkında güvenlik NOI](xref:data/ef-mvc/crud#security-note-about-overposting).
+`[Bind]`Özniteliği, _Create * senaryolarında fazla nakline karşı korumak için kullanılabilir. Dışlanan Özellikler null ya da boş değer olarak ayarlandığı için, düzenleme senaryolarında iyi çalışmaz. Fazla naklin savunma için, öznitelik yerine görüntüleme modelleri önerilir `[Bind]` . Daha fazla bilgi için bkz. fazla [nakil hakkında güvenlik NOI](xref:data/ef-mvc/crud#security-note-about-overposting).
 
 ### <a name="bindrequired-attribute"></a>[BindRequired] özniteliği
 
@@ -317,7 +318,7 @@ Ayrıca bkz `[Required]` . [model doğrulama](xref:mvc/models/validation#require
 
 ## <a name="collections"></a>Koleksiyonlar
 
-Basit türlerin koleksiyonları olan hedefler için model bağlama, *parameter_name* veya *property_name*ile eşleşmeleri arar. Eşleşme bulunmazsa, ön ek olmadan desteklenen biçimlerden birini arar. Örneğin:
+Basit türlerin koleksiyonları olan hedefler için model bağlama, *parameter_name* veya *property_name* ile eşleşmeleri arar. Eşleşme bulunmazsa, ön ek olmadan desteklenen biçimlerden birini arar. Örneğin:
 
 * Bağlanacak parametrenin adlı bir dizi olduğunu varsayalım `selectedCourses` :
 
@@ -362,7 +363,7 @@ Basit türlerin koleksiyonları olan hedefler için model bağlama, *parameter_n
 
 ## <a name="dictionaries"></a>Sözlükler
 
-`Dictionary`Hedefler için, model bağlama *parameter_name* veya *property_name*eşleşme arar. Eşleşme bulunmazsa, ön ek olmadan desteklenen biçimlerden birini arar. Örneğin:
+`Dictionary`Hedefler için, model bağlama *parameter_name* veya *property_name* eşleşme arar. Eşleşme bulunmazsa, ön ek olmadan desteklenen biçimlerden birini arar. Örneğin:
 
 * Hedef parametrenin bir adlandırılmış olduğunu varsayalım `Dictionary<int, string>` `selectedCourses` :
 
@@ -608,7 +609,7 @@ Model bağlama, aşağıdaki tür hedeflerin değerlerini bulmayı dener:
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Pages/Instructors/Edit.cshtml.cs?name=snippet_BindProperty&highlight=3-4)]
 
-### <a name="bindpropertiesattribute"></a>[BindProperties] özniteliği
+### <a name="bindproperties-attribute"></a>[BindProperties] özniteliği
 
 ASP.NET Core 2,1 ve üzeri sürümlerde kullanılabilir.  `PageModel`Model bağlamaya, sınıfın tüm ortak özelliklerini hedeflemesini bildirmek için bir denetleyiciye veya sınıfa uygulanabilir:
 
@@ -686,7 +687,7 @@ Giriş biçimleri yalnızca gövdeyi okur ve bağlama kaynak özniteliklerini an
 
 ### <a name="additional-sources"></a>Ek kaynaklar
 
-Kaynak verileri, model bağlama sistemine *değer sağlayıcılara*göre sağlanır. Diğer kaynaklardan model bağlamaya yönelik verileri alan özel değer sağlayıcıları yazabilir ve kaydedebilirsiniz. Örneğin, verilerin cookie veya oturum durumunun olmasını isteyebilirsiniz. Yeni bir kaynaktan veri almak için:
+Kaynak verileri, model bağlama sistemine *değer sağlayıcılara* göre sağlanır. Diğer kaynaklardan model bağlamaya yönelik verileri alan özel değer sağlayıcıları yazabilir ve kaydedebilirsiniz. Örneğin, verilerin cookie veya oturum durumunun olmasını isteyebilirsiniz. Yeni bir kaynaktan veri almak için:
 
 * Uygulayan bir sınıf oluşturun `IValueProvider` .
 * Uygulayan bir sınıf oluşturun `IValueProviderFactory` .
@@ -751,7 +752,7 @@ Model cildin kaynak dizeleri dönüştürebileceğiniz basit türler aşağıdak
 
 Karmaşık bir türün bağlanması için ortak bir varsayılan Oluşturucusu ve ortak yazılabilir özellikleri olmalıdır. Model bağlama gerçekleştiğinde, sınıf ortak varsayılan Oluşturucu kullanılarak oluşturulur. 
 
-Karmaşık türün her özelliği için model bağlama, ad modeli ön eki için kaynakları arar *. property_name*. Hiçbir şey bulunamazsa, ön ek olmadan yalnızca *property_name* arar.
+Karmaşık türün her özelliği için model bağlama *prefix.property_name* ad deseninin kaynaklarını arar. Hiçbir şey bulunamazsa, ön ek olmadan yalnızca *property_name* arar.
 
 Bir parametreye bağlama için, önek parametre adıdır. Ortak özelliğe bağlama için `PageModel` , önek ortak özellik adıdır. Bazı özniteliklerin `Prefix` , parametre veya özellik adının varsayılan kullanımını geçersiz kılabilmenizi sağlayan bir özelliği vardır.
 
@@ -845,7 +846,7 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 ## <a name="collections"></a>Koleksiyonlar
 
-Basit türlerin koleksiyonları olan hedefler için model bağlama, *parameter_name* veya *property_name*ile eşleşmeleri arar. Eşleşme bulunmazsa, ön ek olmadan desteklenen biçimlerden birini arar. Örneğin:
+Basit türlerin koleksiyonları olan hedefler için model bağlama, *parameter_name* veya *property_name* ile eşleşmeleri arar. Eşleşme bulunmazsa, ön ek olmadan desteklenen biçimlerden birini arar. Örneğin:
 
 * Bağlanacak parametrenin adlı bir dizi olduğunu varsayalım `selectedCourses` :
 
@@ -890,7 +891,7 @@ Basit türlerin koleksiyonları olan hedefler için model bağlama, *parameter_n
 
 ## <a name="dictionaries"></a>Sözlükler
 
-`Dictionary`Hedefler için, model bağlama *parameter_name* veya *property_name*eşleşme arar. Eşleşme bulunmazsa, ön ek olmadan desteklenen biçimlerden birini arar. Örneğin:
+`Dictionary`Hedefler için, model bağlama *parameter_name* veya *property_name* eşleşme arar. Eşleşme bulunmazsa, ön ek olmadan desteklenen biçimlerden birini arar. Örneğin:
 
 * Hedef parametrenin bir adlandırılmış olduğunu varsayalım `Dictionary<int, string>` `selectedCourses` :
 

@@ -1,5 +1,5 @@
 ---
-title: Barındırma paketi
+title: Hosting Paketi
 author: rick-anderson
 description: .NET Core barındırma paketi 'nin nasıl yapılandırılacağını öğrenin.
 monikerRange: '>= aspnetcore-5.0'
@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/hosting-bundle
-ms.openlocfilehash: 888f517d86cb9456ea8b933d3de842a0a21423b5
-ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
+ms.openlocfilehash: ecf3dd45575390eee263a275e7f1fb9ec50011bb
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91755293"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058447"
 ---
 # <a name="the-net-core-hosting-bundle"></a>.NET Core barındırma paketi
 

@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/publish-to-azure-web-app
-ms.openlocfilehash: b9d32e2f3c37f652be15c5857d14ac48f66695ad
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e00eea81788c9b335691b7e5ffe6a46534c3c492
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631933"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058226"
 ---
 # <a name="publish-an-aspnet-core-no-locsignalr-app-to-azure-app-service"></a>SignalRAzure App Service için ASP.NET Core uygulaması yayımlama
 
@@ -38,13 +39,13 @@ ms.locfileid: "88631933"
 
 Bu makalede, Visual Studio 'daki araçları kullanarak yayımlama ele alınmaktadır. Visual Studio Code kullanıcılar, Azure 'da uygulama yayımlamak için [Azure CLI](/cli/azure) komutlarını kullanabilir. Daha fazla bilgi için bkz. [komut satırı araçlarıyla Azure 'da ASP.NET Core uygulama yayımlama](/azure/app-service/app-service-web-get-started-dotnet).
 
-1. **Çözüm Gezgini** projede projeye sağ tıklayın ve **Yayımla**' yı seçin.
+1. **Çözüm Gezgini** projede projeye sağ tıklayın ve **Yayımla** ' yı seçin.
 
 1. **Bir yayımlama hedefi seç** iletişim kutusunda **App Service** ve **Yeni oluştur** ' un seçili olduğunu doğrulayın.
 
 1. **Yayımla** düğmesi açılan listesinden **Profil oluştur** ' u seçin.
 
-   **App Service oluştur** iletişim kutusunda aşağıdaki tabloda açıklanan bilgileri girin ve **Oluştur**' u seçin.
+   **App Service oluştur** iletişim kutusunda aşağıdaki tabloda açıklanan bilgileri girin ve **Oluştur** ' u seçin.
 
    | Öğe               | Açıklama |
    | ------------------ | ----------- |
@@ -53,13 +54,13 @@ Bu makalede, Visual Studio 'daki araçları kullanarak yayımlama ele alınmakta
    | **Kaynak Grubu** | Uygulamanın ait olduğu ilgili kaynaklar grubu. |
    | **Barındırma Planı**   | Web uygulaması için fiyatlandırma planı. |
 
-1. **Bağımlılıklar**ekleme açılan listesinden **Azure SignalR hizmetini** seçin  >  **Add** :
+1. **Bağımlılıklar** ekleme açılan listesinden **Azure SignalR hizmetini** seçin  >  **Add** :
 
    ![Ekle açılan listesinde Azure::: No-Loc (SignalR)::: Service seçimini gösteren bağımlılıklar alanı](publish-to-azure-web-app/_static/signalr-service-dependency.png)
 
-1. **Azure SignalR hizmeti** iletişim kutusunda **Yeni bir Azure SignalR hizmet örneği oluştur**' u seçin.
+1. **Azure SignalR hizmeti** iletişim kutusunda **Yeni bir Azure SignalR hizmet örneği oluştur** ' u seçin.
 
-1. Bir **ad**, **kaynak grubu**ve **konum**belirtin. **Azure SignalR hizmeti** iletişim kutusuna dönün ve **Ekle**' yi seçin.
+1. Bir **ad** , **kaynak grubu** ve **konum** belirtin. **Azure SignalR hizmeti** iletişim kutusuna dönün ve **Ekle** ' yi seçin.
 
 Visual Studio aşağıdaki görevleri tamamlar:
 
@@ -82,12 +83,12 @@ Bir Preview .NET Core sürümünü hedefleyen bir uygulama dağıtırken HTTP *5
 Azure hizmeti olmadan barındırılan uygulamalar için SignalR şunları etkinleştirin:
 
 * [ARR benzeşimi] ( https://azure.github.io/AppService/2016/05/16/Disable-Session-affinity- cookie -(ARR- cookie ) -for-Azure-web-apps.html) bir kullanıcıdan gelen istekleri yeniden aynı App Service örneğine yönlendirmek için. Varsayılan ayar **Açık '** dır.
-* Web Sockets taşımanın çalışmasına izin veren [Web Yuvaları](xref:fundamentals/websockets) . Varsayılan ayar **kapalıdır**.
+* Web Sockets taşımanın çalışmasına izin veren [Web Yuvaları](xref:fundamentals/websockets) . Varsayılan ayar **kapalıdır** .
 
-1. Azure portal, **uygulama hizmetleri**' nde Web uygulamasına gidin.
-1. **Yapılandırma**  >  **genel ayarlarını**açın.
-1. **Web yuvalarını** **Açık**olarak ayarlayın.
-1. **ARR benzeşiminin** **Açık**olarak ayarlandığını doğrulayın.
+1. Azure portal, **uygulama hizmetleri** ' nde Web uygulamasına gidin.
+1. **Yapılandırma**  >  **genel ayarlarını** açın.
+1. **Web yuvalarını** **Açık** olarak ayarlayın.
+1. **ARR benzeşiminin** **Açık** olarak ayarlandığını doğrulayın.
 
 ## <a name="app-service-plan-limits"></a>App Service planı limitleri
 

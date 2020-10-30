@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/13/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/transform-webconfig
-ms.openlocfilehash: a2f26f32d2a282189b391aa9bb8c4637723dc60a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 259b5bf9bf2a6de987494b5771897355e3ea67db
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634637"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057322"
 ---
 # <a name="transform-webconfig"></a>Web.config’i dönüştürme
 
@@ -47,7 +48,7 @@ Derleme yapılandırma dönüştürmeleri önce çalıştırılır.
 
 Bir *Web ekleyin. { Her derleme yapılandırması için CONFIGURATION}. config* dosyası [(Hata Ayıkla | Yayın)](/dotnet/core/tools/dotnet-publish#options) *web.config* dönüştürmesi gerektirir.
 
-Aşağıdaki örnekte, yapılandırmaya özgü bir ortam değişkeni *web.Release.config*olarak ayarlanır:
+Aşağıdaki örnekte, yapılandırmaya özgü bir ortam değişkeni *web.Release.config* olarak ayarlanır:
 
 ```xml
 <?xml version="1.0"?>
@@ -67,7 +68,7 @@ Aşağıdaki örnekte, yapılandırmaya özgü bir ortam değişkeni *web.Releas
 </configuration>
 ```
 
-Yapılandırma *yayın*olarak ayarlandığında dönüşüm uygulanır:
+Yapılandırma *yayın* olarak ayarlandığında dönüşüm uygulanır:
 
 ```dotnetcli
 dotnet publish --configuration Release
@@ -79,7 +80,7 @@ Yapılandırma için MSBuild özelliği `$(Configuration)` .
 
 Profil dönüştürmeleri, [Derleme yapılandırması](#build-configuration) dönüşümlerinden sonra ikinci çalıştırılır.
 
-Bir *Web ekleyin. { * Her profil yapılandırması için bir *web.config* dönüşümü gerektiren profile}. config dosyası.
+Bir *Web ekleyin. {* Her profil yapılandırması için bir *web.config* dönüşümü gerektiren profile}. config dosyası.
 
 Aşağıdaki örnekte, bir klasör yayımlama profili için *web.FolderProfile.config* profile özgü bir ortam değişkeni ayarlanır:
 
@@ -101,7 +102,7 @@ Aşağıdaki örnekte, bir klasör yayımlama profili için *web.FolderProfile.c
 </configuration>
 ```
 
-Profil *Folderprofile*olduğunda dönüştürme uygulanır:
+Profil *Folderprofile* olduğunda dönüştürme uygulanır:
 
 ```dotnetcli
 dotnet publish --configuration Release /p:PublishProfile=FolderProfile
@@ -137,7 +138,7 @@ Aşağıdaki örnekte, ortama özgü bir ortam değişkeni, üretim ortamı içi
 </configuration>
 ```
 
-Dönüşüm, ortam *Üretim*olduğunda uygulanır:
+Dönüşüm, ortam *Üretim* olduğunda uygulanır:
 
 ```dotnetcli
 dotnet publish --configuration Release /p:EnvironmentName=Production
@@ -155,7 +156,7 @@ Ortam `ASPNETCORE_ENVIRONMENT` değişkeni, ortam adı belirtildiğinde *web.con
 
 *web.config* dönüştürmesi gerektiren her özel yapılandırma için bir *{CUSTOM_NAME}. Transform* dosyası ekleyin.
 
-Aşağıdaki örnekte, özel bir Transform ortam değişkeni *Custom. Transform*olarak ayarlanır:
+Aşağıdaki örnekte, özel bir Transform ortam değişkeni *Custom. Transform* olarak ayarlanır:
 
 ```xml
 <?xml version="1.0"?>

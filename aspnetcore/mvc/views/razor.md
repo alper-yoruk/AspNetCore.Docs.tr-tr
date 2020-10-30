@@ -5,6 +5,7 @@ description: RazorSunucu tabanlı kodu Web sayfalarına eklemek için biçimlend
 ms.author: riande
 ms.date: 02/12/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/razor
-ms.openlocfilehash: 9c2bbd2d463af8a2ea7db716d01bf1436338ea77
-ms.sourcegitcommit: cd861463faf44956855e3c4b3669483bbc4a7463
+ms.openlocfilehash: c1278b0cd3e58814b1c06dca81efd662c3de0c54
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/29/2020
-ms.locfileid: "89101367"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059201"
 ---
 # <a name="no-locrazor-syntax-reference-for-aspnet-core"></a>Razor ASP.NET Core için sözdizimi başvurusu
 
 By [Rick Anderson](https://twitter.com/RickAndMSFT), [Taylor Mullen](https://twitter.com/ntaylormullen)ve [dan vicarel](https://github.com/Rabadash8820)
 
-Razor , Web sayfalarına sunucu tabanlı kod eklemeye yönelik biçimlendirme sözdizimidir. RazorSöz dizimi, Razor biçimlendirme, C# ve HTML 'den oluşur. Genellikle içeren dosyaların Razor *. cshtml* dosya uzantısı vardır. RazorAyrıca, [ Razor Bileşenler](xref:blazor/components/index) dosyalarında (*. Razor*) bulunur.
+Razor , Web sayfalarına sunucu tabanlı kod eklemeye yönelik biçimlendirme sözdizimidir. RazorSöz dizimi, Razor biçimlendirme, C# ve HTML 'den oluşur. Genellikle içeren dosyaların Razor *. cshtml* dosya uzantısı vardır. RazorAyrıca, [ Razor Bileşenler](xref:blazor/components/index) dosyalarında ( *. Razor* ) bulunur.
 
 ## <a name="rendering-html"></a>HTML işleniyor
 
@@ -657,7 +658,7 @@ Razor`Model`görünüme geçirilen modele erişim için bir özellik sunar:
 
 RazorAşağıdaki tabloda gösterilen sayfalar örneği için:
 
-* Her sayfa *sayfaları/_ViewImports. cshtml*'yi içeri aktarır.
+* Her sayfa *sayfaları/_ViewImports. cshtml* 'yi içeri aktarır.
 * *Pages/_ViewImports. cshtml* içerir `@namespace Hello.World` .
 * Her sayfa `Hello.World` , ad alanının kökü olarak bulunur.
 
@@ -930,7 +931,7 @@ C# Razor anahtar sözcükleri ile çift kaçış olmalıdır `@(@C# Razor Keywor
 
 ::: moniker range=">= aspnetcore-2.1"
 
-.NET Core SDK 2,1 veya sonraki bir sürümü ile [ Razor SDK](xref:razor-pages/sdk) , dosyaların derlemesini işler Razor . Bir proje oluştururken, Razor SDK proje kökünde bir *obj/<build_configuration>/<target_framework_moniker>/ Razor * dizin oluşturur. Dizin içindeki dizin yapısı *Razor* , projenin dizin yapısını yansıtır.
+.NET Core SDK 2,1 veya sonraki bir sürümü ile [ Razor SDK](xref:razor-pages/sdk) , dosyaların derlemesini işler Razor . Bir proje oluştururken, Razor SDK proje kökünde bir *obj/<build_configuration>/<target_framework_moniker>/ Razor* dizin oluşturur. Dizin içindeki dizin yapısı *Razor* , projenin dizin yapısını yansıtır.
 
 ASP.NET Core 2,1 Razor sayfaları projesinde .NET Core 2,1 ' i hedefleyen aşağıdaki dizin yapısını göz önünde bulundurun:
 
@@ -968,7 +969,7 @@ Projenin *hata ayıklama* yapılandırmasında oluşturulması aşağıdaki *obj
            Index.g.cshtml.cs
 ```
 
-*Pages/Index. cshtml*için oluşturulan sınıfı görüntülemek için *obj/Debug/netcoreapp 2.1/ Razor /Pages/Index.g.cshtml.cs*öğesini açın.
+*Pages/Index. cshtml* için oluşturulan sınıfı görüntülemek için *obj/Debug/netcoreapp 2.1/ Razor /Pages/Index.g.cshtml.cs* öğesini açın.
 
 ::: moniker-end
 
@@ -993,8 +994,8 @@ Bildiriminde bir kesme noktası ayarlayın `return csharpDocument;` `CustomTempl
 RazorGörünüm altyapısı, görünümler için büyük/küçük harfe duyarlı aramalar gerçekleştirir. Ancak gerçek arama, temel alınan dosya sistemine göre belirlenir:
 
 * Dosya tabanlı kaynak:
-  * Büyük/küçük harf duyarsız dosya sistemlerine (örneğin, Windows) sahip işletim sistemlerinde, fiziksel dosya sağlayıcısı aramaları büyük/küçük harfe duyarsızdır. Örneğin, `return View("Test")` */views/Home/test.exe*, */views/Home/test.exe*ve diğer tüm büyük/küçük harf çeşitlerüyle sonuçlanır.
-  * Büyük/küçük harf duyarlı dosya sistemlerinde (örneğin, Linux, OSX ve ile `EmbeddedFileProvider` ), aramalar büyük/küçük harfe duyarlıdır. Örneğin, `return View("Test")` özellikle */views/Home/test.exe. cshtml*ile eşleşir.
+  * Büyük/küçük harf duyarsız dosya sistemlerine (örneğin, Windows) sahip işletim sistemlerinde, fiziksel dosya sağlayıcısı aramaları büyük/küçük harfe duyarsızdır. Örneğin, `return View("Test")` */views/Home/test.exe* , */views/Home/test.exe* ve diğer tüm büyük/küçük harf çeşitlerüyle sonuçlanır.
+  * Büyük/küçük harf duyarlı dosya sistemlerinde (örneğin, Linux, OSX ve ile `EmbeddedFileProvider` ), aramalar büyük/küçük harfe duyarlıdır. Örneğin, `return View("Test")` özellikle */views/Home/test.exe. cshtml* ile eşleşir.
 * Önceden derlenmiş görünümler: ASP.NET Core 2,0 ve üzeri sürümlerde, önceden derlenmiş görünümleri aramak tüm işletim sistemlerinde büyük/küçük harfe duyarlıdır. Davranış, fiziksel dosya sağlayıcısının Windows 'daki davranışlarıyla aynıdır. Ön derlenmiş iki görünüm yalnızca bir durumda farklıysa, arama sonucu belirleyici değildir.
 
 Geliştiricilerin dosya ve dizin adlarını büyük küçük harf olarak eşleşmesi önerilir:

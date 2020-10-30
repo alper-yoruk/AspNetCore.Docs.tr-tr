@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 01/07/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: getting-started
-ms.openlocfilehash: afded8890afe3b8f7b1d0b5634fc7764906bc9d7
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: fef5ae525a7c01d0ea7733e990233f413aac61a7
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635014"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057797"
 ---
 # <a name="tutorial-get-started-with-aspnet-core"></a>Öğretici: ASP.NET Core kullanmaya başlayın
 
@@ -40,7 +41,7 @@ Sonunda, yerel makinenizde çalışan bir çalışan Web uygulamanız olacaktır
 
 ![Web uygulaması giriş sayfası](_static/home-page.png)
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 [!INCLUDE[](~/includes/3.1-SDK.md)]
 

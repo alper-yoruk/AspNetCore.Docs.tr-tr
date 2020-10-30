@@ -3,8 +3,9 @@ title: ASP.NET Core .NET Core gRPC istemcisi ve sunucusu oluşturma
 author: juntaoluo
 description: Bu öğreticide, ASP.NET Core bir gRPC hizmeti ve gRPC istemcisinin nasıl oluşturulacağı gösterilmektedir. GRPC hizmeti projesi oluşturmayı, Proto dosyasını düzenlemeyi ve çift yönlü akış araması eklemeyi öğrenin.
 ms.author: johluo
-ms.date: 04/08/2020
+ms.date: 10/23/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/grpc/grpc-start
-ms.openlocfilehash: fbfd37b8f796990ff035f7fffeb906e23a8739d4
-ms.sourcegitcommit: c06a5bf419541d17595af30e4cf6f2787c21855e
+ms.openlocfilehash: 9388a2f814008ebb50171f85b8baccf6dadfac27
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92678596"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057030"
 ---
 # <a name="tutorial-create-a-grpc-client-and-server-in-aspnet-core"></a>Öğretici: ASP.NET Core bir gRPC istemcisi ve sunucusu oluşturma
 
@@ -40,7 +41,7 @@ Bu öğreticide şunları yaptınız:
 > * GRPC istemcisi oluşturun.
 > * GRPC istemci hizmetini gRPC Greeter hizmeti ile test edin.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -63,9 +64,9 @@ Bu öğreticide şunları yaptınız:
 * Visual Studio 'Yu başlatın ve **Yeni proje oluştur** ' u seçin. Alternatif olarak, Visual Studio **Dosya** menüsünden **Yeni**  >  **Proje** ' yi seçin.
 * **Yeni proje oluştur** Iletişim kutusunda **GRPC hizmeti** ' ni seçin ve **İleri** ' yi seçin:
 
-  ![Yeni proje iletişim kutusu oluştur](~/tutorials/grpc/grpc-start/static/cnp.png)
+  ![Visual Studio 'da yeni bir proje iletişim kutusu oluşturma](~/tutorials/grpc/grpc-start/static/cnp.png)
 
-* Projeyi **Grpcgreeter** olarak adlandırın. Kodu kopyalayıp yapıştırdığınızda ad alanlarının eşleşmesi için, proje *Grpcgreeter* adında bir ad vermek önemlidir.
+* Projeyi **Grpcgreeter** olarak adlandırın. Kodu kopyaladığınızda ve yapıştırdığınızda ad alanlarının eşleşmesi için, proje *Grpcgreeter* adında bir ad vermek önemlidir.
 * **Oluştur** ’u seçin.
 * **Yeni bir gRPC hizmeti oluştur** iletişim kutusunda:
   * **GRPC hizmeti** şablonu seçilidir.
@@ -74,7 +75,7 @@ Bu öğreticide şunları yaptınız:
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * [Tümleşik terminali](https://code.visualstudio.com/docs/editor/integrated-terminal)açın.
-* Dizinleri ( `cd` ), projeyi içerecek bir klasöre değiştirin.
+* Dizinleri ( `cd` ) proje için bir klasöre değiştirin.
 * Aşağıdaki komutları çalıştırın:
 
   ```dotnetcli
@@ -93,10 +94,10 @@ Bu öğreticide şunları yaptınız:
 * Mac için Visual Studio başlatın ve **Yeni proje oluştur** ' u seçin. Alternatif olarak, Visual Studio **Dosya** menüsünden **Yeni**  >  **Proje** ' yi seçin.
 * **Yeni proje oluştur** iletişim kutusunda **Web ve konsol**  >  **uygulaması**  >  **GRPC hizmeti** ' ni seçin ve **İleri** ' yi seçin:
 
-  ![Yeni proje iletişim kutusu oluştur](~/tutorials/grpc/grpc-start/static/cnp-mac.png)
+  ![MacOS 'ta yeni bir proje iletişim kutusu oluşturma](~/tutorials/grpc/grpc-start/static/cnp-mac.png)
 
-* Hedef çerçeve için **.NET Core 3,1** ' i seçin ve **İleri** ' ye tıklayın.
-* Projeyi **Grpcgreeter** olarak adlandırın. Kodu kopyalayıp yapıştırdığınızda ad alanlarının eşleşmesi için, proje *Grpcgreeter* adında bir ad vermek önemlidir.
+* Hedef çerçeve için **.NET Core 3,1** ' ı seçin ve **İleri ' yi** seçin.
+* Projeyi **Grpcgreeter** olarak adlandırın. Kodu kopyaladığınızda ve yapıştırdığınızda ad alanlarının eşleşmesi için, proje *Grpcgreeter* adında bir ad vermek önemlidir.
 * **Oluştur** ’u seçin.
 ---
 
@@ -141,7 +142,7 @@ info: Microsoft.Hosting.Lifetime[0]
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * [Tümleşik terminali](https://code.visualstudio.com/docs/editor/integrated-terminal)açın.
-* Dizinleri ( `cd` ), projeyi içerecek bir klasöre değiştirin.
+* Dizinleri ( `cd` ) proje için bir klasöre değiştirin.
 * Aşağıdaki komutları çalıştırın:
 
   ```dotnetcli
@@ -181,7 +182,7 @@ Paket Yöneticisi Konsolu (PMC) veya NuGet Paketlerini Yönet ' i kullanarak pak
 
 #### <a name="manage-nuget-packages-option-to-install-packages"></a>Paket yüklemek için NuGet Paketlerini Yönet seçeneği
 
-* **Çözüm Gezgini**  >  **NuGet Paketlerini Yönet** ' de projeye sağ tıklayın
+* **Çözüm Gezgini**  >  **NuGet Paketlerini Yönet** ' de projeye sağ tıklayın.
 * **Gözat** sekmesini seçin.
 * Arama kutusuna **GRPC .net. Client** girin.
 * **Araştır** sekmesinden **GRPC .net. Client** paketini seçin ve ardından **Install** ' ı seçin.
@@ -202,7 +203,7 @@ dotnet add GrpcGreeterClient.csproj package Grpc.Tools
 * **Çözüm bölmesi** **Grpcgreeterclient** projesi öğesine sağ tıklayın ve **NuGet Paketlerini Yönet** ' i seçin.
 * Arama kutusuna **GRPC .net. Client** girin.
 * Sonuçlar bölmesinden **GRPC .net. Client** paketini seçin ve **paket Ekle** ' yi seçin.
-* **Lisansı kabul et** Iletişim kutusunda **kabul et** düğmesine tıklayın.
+* **Lisansı kabul et** Iletişim kutusunda **kabul et** düğmesini seçin.
 * Ve için `Google.Protobuf` tekrarlayın `Grpc.Tools` .
 
 ---

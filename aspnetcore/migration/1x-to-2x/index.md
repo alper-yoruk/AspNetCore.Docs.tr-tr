@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/1x-to-2x/index
-ms.openlocfilehash: 6160dfd117235065ba4b990b95bbc1f4abdf1626
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 6d67924d87cdbe72cb08c5305dfe45c5b22b31bc
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634351"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057122"
 ---
 # <a name="migrate-from-aspnet-core-1x-to-20"></a>ASP.NET Core 1. x ile 2,0 arasında geçiş yapın
 
@@ -34,7 +35,7 @@ Mevcut ASP.NET Core 1. x uygulamaları sürüme özgü proje şablonlarını tem
 
 <a name="prerequisites"></a>
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 Bkz. [ASP.NET Core kullanmaya başlama](xref:getting-started).
 
@@ -129,13 +130,13 @@ Unable to create an object of type '<Context>'. Add an implementation of 'IDesig
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Startup.cs?name=snippet_1xStartup)]
 
-Yukarıdaki örnek, `Configuration` üyeyiappsettings.jsve tüm appSettings * 'teki* yapılandırma ayarlarıyla yükler *. \<EnvironmentName\> * özelliği ile eşleşen JSON dosyası `IHostingEnvironment.EnvironmentName` . Bu dosyaların konumu *Startup.cs*ile aynı yoldur.
+Önceki örnek, `Configuration` üyeyi yapılandırma ayarları ile birlikte, *appsettings.json* herhangi bir appSettings ile yükler *. \<EnvironmentName\>* özelliği ile eşleşen JSON dosyası `IHostingEnvironment.EnvironmentName` . Bu dosyaların konumu *Startup.cs* ile aynı yoldur.
 
 2,0 projesinde, 1. x projelerine devralınan ortak yapılandırma kodu, arka planda çalışır. Örneğin, ortam değişkenleri ve uygulama ayarları başlangıçta yüklenir. Denk *Startup.cs* kodu, `IConfiguration` eklenen örnekle başlatılacak şekilde azaltılır:
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/Startup.cs?name=snippet_2xStartup)]
 
-Tarafından eklenen varsayılan sağlayıcıları kaldırmak için `WebHostBuilder.CreateDefaultBuilder` , `Clear` `IConfigurationBuilder.Sources` içindeki özelliğindeki yöntemi çağırın `ConfigureAppConfiguration` . Sağlayıcıları geri eklemek için `ConfigureAppConfiguration` *program.cs*içindeki yöntemi kullanın:
+Tarafından eklenen varsayılan sağlayıcıları kaldırmak için `WebHostBuilder.CreateDefaultBuilder` , `Clear` `IConfigurationBuilder.Sources` içindeki özelliğindeki yöntemi çağırın `ConfigureAppConfiguration` . Sağlayıcıları geri eklemek için `ConfigureAppConfiguration` *program.cs* içindeki yöntemi kullanın:
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/Program.cs?name=snippet_ProgramMainConfigProviders&highlight=9-14)]
 
@@ -159,11 +160,11 @@ Startup.cs yönteminde aşağıdaki 1. x çekirdek başlatma kodunu göz önünd
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Startup.cs?name=snippet_ConfigureSeedData&highlight=8)]
 
-2,0 projesinde, `SeedData.Initialize` çağrıyı `Main` *program.cs*yöntemine taşıyın:
+2,0 projesinde, `SeedData.Initialize` çağrıyı `Main` *program.cs* yöntemine taşıyın:
 
 [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore2App/AspNetCoreDotNetCore2App/Program2.cs?name=snippet_Main2Code&highlight=10)]
 
-2,0 itibariyle, `BuildWebHost` Web konağını derleme ve yapılandırma dışında içinde herhangi bir şey yapmak hatalı bir uygulamadır. Uygulamayı çalıştırmaya ilişkin her şey, `BuildWebHost` &mdash; genellikle `Main` *program.cs*yönteminde dışında işlenmelidir.
+2,0 itibariyle, `BuildWebHost` Web konağını derleme ve yapılandırma dışında içinde herhangi bir şey yapmak hatalı bir uygulamadır. Uygulamayı çalıştırmaya ilişkin her şey, `BuildWebHost` &mdash; genellikle `Main` *program.cs* yönteminde dışında işlenmelidir.
 
 <a name="view-compilation"></a>
 
@@ -173,7 +174,7 @@ Daha hızlı uygulama başlangıç süresi ve daha küçük yayımlanmış paket
 
 `MvcRazorCompileOnPublish`Özelliği true olarak ayarlamak artık gerekli değildir. Görünümü derlemeyi devre dışı bırakmadığınız takdirde, özelliği *. csproj* dosyasından kaldırılabilir.
 
-.NET Framework hedeflenirken, yine de [Microsoft. AspNetCore. Mvc öğesine açıkça başvurmanız gerekir. Razor ](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.ViewCompilation) *. Csproj* dosyanızdaki viewcompilation NuGet paketi:
+.NET Framework hedeflenirken, yine de [Microsoft. AspNetCore. Mvc öğesine açıkça başvurmanız gerekir. Razor](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.ViewCompilation) *. Csproj* dosyanızdaki viewcompilation NuGet paketi:
 
 [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App/AspNetCoreDotNetFx2.0App.csproj?range=15)]
 
@@ -183,17 +184,17 @@ Daha hızlı uygulama başlangıç süresi ve daha küçük yayımlanmış paket
 
 Uygulama performansı izleme için daha kolay bir kurulum önemlidir. Artık, Visual Studio 2017 Tooling ' de bulunan yeni [Application Insights](/azure/application-insights/app-insights-overview) "hafif" özelliklerine güvenebilirsiniz.
 
-Visual Studio 2017 ' de oluşturulan ASP.NET Core 1,1 projeleri varsayılan olarak Application Insights eklenmiştir. Application Insights SDK 'yı doğrudan *program.cs* ve *Startup.cs*dışında kullanmıyorsanız, şu adımları izleyin:
+Visual Studio 2017 ' de oluşturulan ASP.NET Core 1,1 projeleri varsayılan olarak Application Insights eklenmiştir. Application Insights SDK 'yı doğrudan *program.cs* ve *Startup.cs* dışında kullanmıyorsanız, şu adımları izleyin:
 
 1. .NET Core 'u hedefliyorsanız, `<PackageReference />` *. csproj* dosyasından aşağıdaki düğümü kaldırın:
 
     [!code-xml[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App.csproj?range=10)]
 
-2. .NET Core 'u hedefliyorsanız, `UseApplicationInsights` *program.cs*öğesinden genişletme yöntemi çağrısını kaldırın:
+2. .NET Core 'u hedefliyorsanız, `UseApplicationInsights` *program.cs* öğesinden genişletme yöntemi çağrısını kaldırın:
 
     [!code-csharp[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Program.cs?name=snippet_ProgramCsMain&highlight=8)]
 
-3. *_Layout. cshtml*'den Application Insights ISTEMCI tarafı API çağrısını kaldırın. Aşağıdaki iki satır kodu içerir:
+3. *_Layout. cshtml* 'den Application Insights ISTEMCI tarafı API çağrısını kaldırın. Aşağıdaki iki satır kodu içerir:
 
     [!code-cshtml[](../1x-to-2x/samples/AspNetCoreDotNetCore1App/AspNetCoreDotNetCore1App/Views/Shared/_Layout.cshtml?range=1,19&dedent=4)]
 

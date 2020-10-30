@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/04/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/filters
-ms.openlocfilehash: eeae167286e793ecd5a547cea0142cf7d8014ece
-ms.sourcegitcommit: c0a15ab8549cb729731a0fdf1d7da0b7feaa11ff
+ms.openlocfilehash: ecb4de3439656eb56507b920db704048d8f96759
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/02/2020
-ms.locfileid: "91671788"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058512"
 ---
 # <a name="filters-in-aspnet-core"></a>ASP.NET Core filtreler
 
@@ -48,7 +49,7 @@ Bu belge Razor , görünümler içeren sayfalar, API denetleyicileri ve denetley
 
 ## <a name="how-filters-work"></a>Filtreler nasıl çalışır?
 
-Filtreler, bazen *Filtre işlem hattı*olarak da adlandırılan *ASP.NET Core eylemi çağırma işlem hattı*içinde çalışır. Filtre işlem hattı çalıştırılacak eylemi ASP.NET Core seçtikten sonra çalışır.
+Filtreler, bazen *Filtre işlem hattı* olarak da adlandırılan *ASP.NET Core eylemi çağırma işlem hattı* içinde çalışır. Filtre işlem hattı çalıştırılacak eylemi ASP.NET Core seçtikten sonra çalışır.
 
 ![İstek diğer ara yazılım, yönlendirme ara yazılımı, eylem seçimi ve eylem çağırma Işlem hattı aracılığıyla işlenir. İstek işleme, istemciye gönderilen bir yanıt olmadan önce eylem seçimi, yönlendirme ara yazılımı ve diğer diğer ara yazılım aracılığıyla yeniden devam eder.](filters/_static/filter-pipeline-1.png)
 
@@ -117,7 +118,7 @@ ASP.NET Core, alt sınıflanmış ve özelleştirilebilen yerleşik öznitelik t
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet_AddHeader&highlight=1)]
 
-Üst bilgileri incelemek için [tarayıcı geliştirici araçları](https://developer.mozilla.org/docs/Learn/Common_questions/What_are_browser_developer_tools) gibi bir araç kullanın. **Yanıt üst bilgileri**altında `author: Rick Anderson` görüntülenir.
+Üst bilgileri incelemek için [tarayıcı geliştirici araçları](https://developer.mozilla.org/docs/Learn/Common_questions/What_are_browser_developer_tools) gibi bir araç kullanın. **Yanıt üst bilgileri** altında `author: Rick Anderson` görüntülenir.
 
 Aşağıdaki kod şunları uygular `ActionFilterAttribute` :
 
@@ -126,7 +127,7 @@ Aşağıdaki kod şunları uygular `ActionFilterAttribute` :
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/MyActionFilterAttribute.cs?name=snippet)]
 
-Yapılandırma seçenekleri, [Seçenekler deseninin](xref:fundamentals/configuration/options)kullanıldığı [yapılandırma sisteminden](xref:fundamentals/configuration/index) sağlanır. Örneğin, dosyadaki *appsettings.js* :
+Yapılandırma seçenekleri, [Seçenekler deseninin](xref:fundamentals/configuration/options)kullanıldığı [yapılandırma sisteminden](xref:fundamentals/configuration/index) sağlanır. Örneğin, *appsettings.json* dosyasından:
 
 [!code-json[](filters/3.1sample/FiltersSample/appsettings.json)]
 
@@ -145,7 +146,7 @@ Aşağıdaki kod `MyActionFilterAttribute` yöntemi için geçerlidir `Index2` :
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Controllers/SampleController.cs?name=snippet2&highlight=9)]
 
-**Yanıt üst bilgileri**altında `author: Rick Anderson` , ve `Editor: Joe Smith` `Sample/Index2` uç nokta çağrıldığında görüntülenir.
+**Yanıt üst bilgileri** altında `author: Rick Anderson` , ve `Editor: Joe Smith` `Sample/Index2` uç nokta çağrıldığında görüntülenir.
 
 Aşağıdaki kod, `MyActionFilterAttribute` ve `AddHeaderAttribute` Razor sayfasını sayfasına uygular:
 
@@ -166,7 +167,7 @@ Filtre öznitelikleri:
 
 ## <a name="filter-scopes-and-order-of-execution"></a>Kapsamları ve yürütme sırasını filtrele
 
-Üç *kapsamından*birindeki işlem hattına bir filtre eklenebilir:
+Üç *kapsamından* birindeki işlem hattına bir filtre eklenebilir:
 
 * Bir denetleyici eyleminde bir özniteliği kullanma. Filtre öznitelikleri, Razor sayfa işleyici yöntemlerine uygulanamaz.
 * Bir denetleyici veya sayfada bir özniteliği kullanma Razor .
@@ -210,7 +211,7 @@ Temel sınıftan devralan her denetleyici <xref:Microsoft.AspNetCore.Mvc.Control
 
 Örneğin, indirme örneğinde, `MySampleActionFilter` başlangıçta genel olarak uygulanır.
 
-`TestController`:
+`TestController`Şunları yapın:
 
 * `SampleActionFilterAttribute` `[SampleActionFilter]` Eyleme () uygular `FilterTest2` .
 * Geçersiz kılmalar `OnActionExecuting` ve `OnActionExecuted` .
@@ -282,7 +283,7 @@ Filtre işlem hattı, <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingCo
 
 [!code-csharp[](./filters/3.1sample/FiltersSample/Filters/ShortCircuitingResourceFilterAttribute.cs?name=snippet)]
 
-Aşağıdaki kodda, `ShortCircuitingResourceFilter` ve `AddHeader` filtresi `SomeResource` Action metodunu hedefleyin. `ShortCircuitingResourceFilter`:
+Aşağıdaki kodda, `ShortCircuitingResourceFilter` ve `AddHeader` filtresi `SomeResource` Action metodunu hedefleyin. `ShortCircuitingResourceFilter`Şunları yapın:
 
 * İlk olarak bir kaynak filtresi olduğundan ve bir `AddHeader` eylem filtresiyle çalışır.
 * Kısa süreli işlem hattının geri kalanı.
@@ -637,7 +638,7 @@ Bu belge Razor , görünümler içeren sayfalar, API denetleyicileri ve denetley
 
 ## <a name="how-filters-work"></a>Filtreler nasıl çalışır?
 
-Filtreler, bazen *Filtre işlem hattı*olarak da adlandırılan *ASP.NET Core eylemi çağırma işlem hattı*içinde çalışır.  Filtre işlem hattı çalıştırılacak eylemi ASP.NET Core seçtikten sonra çalışır.
+Filtreler, bazen *Filtre işlem hattı* olarak da adlandırılan *ASP.NET Core eylemi çağırma işlem hattı* içinde çalışır.  Filtre işlem hattı çalıştırılacak eylemi ASP.NET Core seçtikten sonra çalışır.
 
 ![İstek diğer ara yazılım, yönlendirme ara yazılımı, eylem seçimi ve ASP.NET Core eylemi çağırma Işlem hattı aracılığıyla işlenir. İstek işleme, istemciye gönderilen bir yanıt olmadan önce eylem seçimi, yönlendirme ara yazılımı ve diğer diğer ara yazılım aracılığıyla yeniden devam eder.](filters/_static/filter-pipeline-1.png)
 
@@ -710,7 +711,7 @@ Filtre öznitelikleri:
 
 ## <a name="filter-scopes-and-order-of-execution"></a>Kapsamları ve yürütme sırasını filtrele
 
-Üç *kapsamından*birindeki işlem hattına bir filtre eklenebilir:
+Üç *kapsamından* birindeki işlem hattına bir filtre eklenebilir:
 
 * Bir eylem üzerinde bir öznitelik kullanma.
 * Bir denetleyicide bir özniteliği kullanma.
@@ -722,7 +723,7 @@ Yukarıdaki kod, [Mvcoptions. Filters](xref:Microsoft.AspNetCore.Mvc.MvcOptions.
 
 ### <a name="default-order-of-execution"></a>Varsayılan yürütme sırası
 
-*Aynı türde*birden çok filtre olduğunda kapsam, filtre yürütmenin varsayılan sırasını belirler.  Genel filtreler saran sınıf filtreleri. Sınıf filtreleri surround yöntemi filtreleri.
+*Aynı türde* birden çok filtre olduğunda kapsam, filtre yürütmenin varsayılan sırasını belirler.  Genel filtreler saran sınıf filtreleri. Sınıf filtreleri surround yöntemi filtreleri.
 
 Filtre iç içe geçme sonucu *olarak, filtrenin kodu,* *önceki* kodun ters sırasına göre çalışır. Filtre sırası:
 
@@ -761,7 +762,7 @@ Temel sınıftan devralan her denetleyici <xref:Microsoft.AspNetCore.Mvc.Control
 
 Örneğin, indirme örneğinde, `MySampleActionFilter` başlangıçta genel olarak uygulanır.
 
-`TestController`:
+`TestController`Şunları yapın:
 
 * `SampleActionFilterAttribute` `[SampleActionFilter]` Eyleme () uygular `FilterTest2` .
 * Geçersiz kılmalar `OnActionExecuting` ve `OnActionExecuted` .
@@ -814,7 +815,7 @@ Filtre işlem hattı, <xref:Microsoft.AspNetCore.Mvc.Filters.ResourceExecutingCo
 
 [!code-csharp[](./filters/sample/FiltersSample/Filters/ShortCircuitingResourceFilterAttribute.cs?name=snippet)]
 
-Aşağıdaki kodda, `ShortCircuitingResourceFilter` ve `AddHeader` filtresi `SomeResource` Action metodunu hedefleyin. `ShortCircuitingResourceFilter`:
+Aşağıdaki kodda, `ShortCircuitingResourceFilter` ve `AddHeader` filtresi `SomeResource` Action metodunu hedefleyin. `ShortCircuitingResourceFilter`Şunları yapın:
 
 * İlk olarak bir kaynak filtresi olduğundan ve bir `AddHeader` eylem filtresiyle çalışır.
 * Kısa süreli işlem hattının geri kalanı.

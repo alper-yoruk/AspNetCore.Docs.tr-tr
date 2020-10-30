@@ -1,11 +1,12 @@
 ---
-title: WCF 'yi ASP.NET Core gRPC 'ye neden geçirin
+title: WCF neden ASP.NET Core gRPC’ye geçirilmeli?
 author: markrendle
 description: Bu makalede, ASP.NET Core gRPC 'nin neden modern mimarilere ve platformlara geçiş yapmak isteyen Windows Communication Foundation (WCF) geliştiricileri için uygun bir Özet olduğunu bulabilirsiniz.
 monikerRange: '>= aspnetcore-3.0'
 ms.author: wpickett
 ms.date: 09/02/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/wcf
-ms.openlocfilehash: 811e6037b058b26fcf91063123d04d448a9a28a8
-ms.sourcegitcommit: 8fcb08312a59c37e3542e7a67dad25faf5bb8e76
+ms.openlocfilehash: 26629b4aa5510f4ef5f53f57b64e45f6c32d4014
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/11/2020
-ms.locfileid: "90012762"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93058694"
 ---
 # <a name="grpc-for-windows-communication-foundation-wcf-developers"></a>Windows Communication Foundation için gRPC (WCF) geliştiricileri
 
@@ -55,7 +56,7 @@ gRPC, iletileri seri hale getirmek için etkin bir ikili biçimi olan Protoarabe
 
 gRPC, bant genişliği kısıtlamalarına sahip mobil cihazlar ve ağlar için iyi bir çözümdür.
 
-### <a name="interoperability"></a>Birlikte Çalışabilirlik
+### <a name="interoperability"></a>Birlikte çalışabilirlik
 
 .NET, Java, Python, Go, C++, Node.js, Swift, Dart, Ruby ve PHP dahil olmak üzere tüm önemli programlama dilleri ve platformları için gRPC araçları ve kitaplıkları vardır. Her platform için Prototipsiz ikili kablo biçimi ve verimli kod üretimi sayesinde geliştiriciler platformlar arası, performanslı uygulamalar oluşturabilir.
 

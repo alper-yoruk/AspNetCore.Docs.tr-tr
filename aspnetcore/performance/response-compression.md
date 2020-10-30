@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/response-compression
-ms.openlocfilehash: b8947e3c3c4f634fbd838c22ff60799257143480
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 9327c98c22a4d42d31ea8ba1eb8337153040b5b5
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635001"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93056978"
 ---
 # <a name="response-compression-in-aspnet-core"></a>ASP.NET Core 'de yanıt sıkıştırması
 
@@ -56,12 +57,12 @@ Bir istemci sıkıştırılmış içeriği işleyebilir, istemci, `Accept-Encodi
 | `Accept-Encoding` üst bilgi değerleri | Desteklenen ara yazılım | Açıklama |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | Evet (varsayılan)        | [Brotli sıkıştırılmış veri biçimi](https://tools.ietf.org/html/rfc7932) |
-| `deflate`                       | No                   | [Sıkıştırılmış veri biçimini söndür](https://tools.ietf.org/html/rfc1951) |
-| `exi`                           | No                   | [W3C verimli XML değişim](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
-| `gzip`                          | Yes                  | [Gzip dosya biçimi](https://tools.ietf.org/html/rfc1952) |
-| `identity`                      | Yes                  | "Kodlama yok" tanımlayıcısı: Yanıt kodlanmamalıdır. |
-| `pack200-gzip`                  | No                   | [Java arşivleri için ağ aktarım biçimi](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
-| `*`                             | Yes                  | Tüm kullanılabilir içerik kodlamaları açıkça istenmedi |
+| `deflate`                       | Hayır                   | [Sıkıştırılmış veri biçimini söndür](https://tools.ietf.org/html/rfc1951) |
+| `exi`                           | Hayır                   | [W3C verimli XML değişim](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
+| `gzip`                          | Evet                  | [Gzip dosya biçimi](https://tools.ietf.org/html/rfc1952) |
+| `identity`                      | Evet                  | "Kodlama yok" tanımlayıcısı: Yanıt kodlanmamalıdır. |
+| `pack200-gzip`                  | Hayır                   | [Java arşivleri için ağ aktarım biçimi](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
+| `*`                             | Evet                  | Tüm kullanılabilir içerik kodlamaları açıkça istenmedi |
 
 Daha fazla bilgi için, [IANA resmi Içerik kodlama listesine](https://www.iana.org/assignments/http-parameters/http-parameters.xml#http-content-coding-registry)bakın.
 
@@ -117,7 +118,7 @@ Notlar:
 
 Üstbilgi olmadan örnek uygulamaya bir istek gönderir `Accept-Encoding` ve yanıtın sıkıştırılmamış olduğunu gözlemleyin. `Content-Encoding`Ve `Vary` başlıkları yanıtta yok.
 
-![Accept-Encoding üst bilgisi olmadan bir isteğin sonucunu gösteren Fiddler penceresi. Yanıt sıkıştırılmaz.](response-compression/_static/request-uncompressed.png)
+![Accept-Encoding üstbilgisi olmayan bir isteğin sonucunu gösteren Fiddler penceresi. Yanıt sıkıştırılmaz.](response-compression/_static/request-uncompressed.png)
 
 Üstbilgi (Brotli Compression) ile örnek uygulamaya bir istek gönderir `Accept-Encoding: br` ve yanıtın sıkıştırıldığını gözlemleyin. `Content-Encoding`Ve `Vary` üstbilgileri yanıtta mevcuttur.
 
@@ -233,7 +234,7 @@ Ara yazılım, sıkıştırma için varsayılan bir MIME türleri kümesi belirt
 * `text/plain`
 * `text/xml`
 
-MIME türlerini, yanıt sıkıştırma ara yazılım seçenekleriyle değiştirin veya ekleyin. Gibi joker karakter MIME türlerinin `text/*` desteklenmediğini unutmayın. Örnek uygulama, için bir MIME türü ekler `image/svg+xml` ve ASP.NET Core başlık görüntüsünü (*Banner. SVG*) sıkıştırır ve sunar.
+MIME türlerini, yanıt sıkıştırma ara yazılım seçenekleriyle değiştirin veya ekleyin. Gibi joker karakter MIME türlerinin `text/*` desteklenmediğini unutmayın. Örnek uygulama, için bir MIME türü ekler `image/svg+xml` ve ASP.NET Core başlık görüntüsünü ( *Banner. SVG* ) sıkıştırır ve sunar.
 
 [!code-csharp[](response-compression/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=8-10)]
 
@@ -302,12 +303,12 @@ Bir istemci sıkıştırılmış içeriği işleyebilir, istemci, `Accept-Encodi
 | `Accept-Encoding` üst bilgi değerleri | Desteklenen ara yazılım | Açıklama |
 | ------------------------------- | :------------------: | ----------- |
 | `br`                            | Evet (varsayılan)        | [Brotli sıkıştırılmış veri biçimi](https://tools.ietf.org/html/rfc7932) |
-| `deflate`                       | No                   | [Sıkıştırılmış veri biçimini söndür](https://tools.ietf.org/html/rfc1951) |
-| `exi`                           | No                   | [W3C verimli XML değişim](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
-| `gzip`                          | Yes                  | [Gzip dosya biçimi](https://tools.ietf.org/html/rfc1952) |
-| `identity`                      | Yes                  | "Kodlama yok" tanımlayıcısı: Yanıt kodlanmamalıdır. |
-| `pack200-gzip`                  | No                   | [Java arşivleri için ağ aktarım biçimi](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
-| `*`                             | Yes                  | Tüm kullanılabilir içerik kodlamaları açıkça istenmedi |
+| `deflate`                       | Hayır                   | [Sıkıştırılmış veri biçimini söndür](https://tools.ietf.org/html/rfc1951) |
+| `exi`                           | Hayır                   | [W3C verimli XML değişim](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
+| `gzip`                          | Evet                  | [Gzip dosya biçimi](https://tools.ietf.org/html/rfc1952) |
+| `identity`                      | Evet                  | "Kodlama yok" tanımlayıcısı: Yanıt kodlanmamalıdır. |
+| `pack200-gzip`                  | Hayır                   | [Java arşivleri için ağ aktarım biçimi](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
+| `*`                             | Evet                  | Tüm kullanılabilir içerik kodlamaları açıkça istenmedi |
 
 Daha fazla bilgi için, [IANA resmi Içerik kodlama listesine](https://www.iana.org/assignments/http-parameters/http-parameters.xml#http-content-coding-registry)bakın.
 
@@ -363,7 +364,7 @@ Notlar:
 
 Üstbilgi olmadan örnek uygulamaya bir istek gönderir `Accept-Encoding` ve yanıtın sıkıştırılmamış olduğunu gözlemleyin. `Content-Encoding`Ve `Vary` başlıkları yanıtta yok.
 
-![Accept-Encoding üst bilgisi olmadan bir isteğin sonucunu gösteren Fiddler penceresi. Yanıt sıkıştırılmaz.](response-compression/_static/request-uncompressed.png)
+![Accept-Encoding üstbilgisi olmayan bir isteğin sonucunu gösteren Fiddler penceresi. Yanıt sıkıştırılmaz.](response-compression/_static/request-uncompressed.png)
 
 Üstbilgi (Brotli Compression) ile örnek uygulamaya bir istek gönderir `Accept-Encoding: br` ve yanıtın sıkıştırıldığını gözlemleyin. `Content-Encoding`Ve `Vary` üstbilgileri yanıtta mevcuttur.
 
@@ -478,7 +479,7 @@ Ara yazılım, sıkıştırma için varsayılan bir MIME türleri kümesi belirt
 * `text/plain`
 * `text/xml`
 
-MIME türlerini, yanıt sıkıştırma ara yazılım seçenekleriyle değiştirin veya ekleyin. Gibi joker karakter MIME türlerinin `text/*` desteklenmediğini unutmayın. Örnek uygulama, için bir MIME türü ekler `image/svg+xml` ve ASP.NET Core başlık görüntüsünü (*Banner. SVG*) sıkıştırır ve sunar.
+MIME türlerini, yanıt sıkıştırma ara yazılım seçenekleriyle değiştirin veya ekleyin. Gibi joker karakter MIME türlerinin `text/*` desteklenmediğini unutmayın. Örnek uygulama, için bir MIME türü ekler `image/svg+xml` ve ASP.NET Core başlık görüntüsünü ( *Banner. SVG* ) sıkıştırır ve sunar.
 
 [!code-csharp[](response-compression/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=8-10)]
 
@@ -546,13 +547,13 @@ Bir istemci sıkıştırılmış içeriği işleyebilir, istemci, `Accept-Encodi
 
 | `Accept-Encoding` üst bilgi değerleri | Desteklenen ara yazılım | Açıklama |
 | ------------------------------- | :------------------: | ----------- |
-| `br`                            | No                   | [Brotli sıkıştırılmış veri biçimi](https://tools.ietf.org/html/rfc7932) |
-| `deflate`                       | No                   | [Sıkıştırılmış veri biçimini söndür](https://tools.ietf.org/html/rfc1951) |
-| `exi`                           | No                   | [W3C verimli XML değişim](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
+| `br`                            | Hayır                   | [Brotli sıkıştırılmış veri biçimi](https://tools.ietf.org/html/rfc7932) |
+| `deflate`                       | Hayır                   | [Sıkıştırılmış veri biçimini söndür](https://tools.ietf.org/html/rfc1951) |
+| `exi`                           | Hayır                   | [W3C verimli XML değişim](https://tools.ietf.org/id/draft-varga-netconf-exi-capability-00.html) |
 | `gzip`                          | Evet (varsayılan)        | [Gzip dosya biçimi](https://tools.ietf.org/html/rfc1952) |
-| `identity`                      | Yes                  | "Kodlama yok" tanımlayıcısı: Yanıt kodlanmamalıdır. |
-| `pack200-gzip`                  | No                   | [Java arşivleri için ağ aktarım biçimi](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
-| `*`                             | Yes                  | Tüm kullanılabilir içerik kodlamaları açıkça istenmedi |
+| `identity`                      | Evet                  | "Kodlama yok" tanımlayıcısı: Yanıt kodlanmamalıdır. |
+| `pack200-gzip`                  | Hayır                   | [Java arşivleri için ağ aktarım biçimi](https://jcp.org/aboutJava/communityprocess/review/jsr200/index.html) |
+| `*`                             | Evet                  | Tüm kullanılabilir içerik kodlamaları açıkça istenmedi |
 
 Daha fazla bilgi için, [IANA resmi Içerik kodlama listesine](https://www.iana.org/assignments/http-parameters/http-parameters.xml#http-content-coding-registry)bakın.
 
@@ -608,11 +609,11 @@ Notlar:
 
 Üstbilgi olmadan örnek uygulamaya bir istek gönderir `Accept-Encoding` ve yanıtın sıkıştırılmamış olduğunu gözlemleyin. `Content-Encoding`Ve `Vary` başlıkları yanıtta yok.
 
-![Accept-Encoding üst bilgisi olmadan bir isteğin sonucunu gösteren Fiddler penceresi. Yanıt sıkıştırılmaz.](response-compression/_static/request-uncompressed.png)
+![Accept-Encoding üstbilgisi olmayan bir isteğin sonucunu gösteren Fiddler penceresi. Yanıt sıkıştırılmaz.](response-compression/_static/request-uncompressed.png)
 
 Üstbilgi ile örnek uygulamaya bir istek gönderir `Accept-Encoding: gzip` ve yanıtın sıkıştırıldığını gözlemleyin. `Content-Encoding`Ve `Vary` üstbilgileri yanıtta mevcuttur.
 
-![Accept-Encoding üst bilgisi ve gzip değeri ile bir isteğin sonucunu gösteren Fiddler penceresi. Değişiklik ve Içerik kodlama üstbilgileri yanıta eklenir. Yanıt sıkıştırıldı.](response-compression/_static/request-compressed.png)
+![Accept-Encoding üst bilgisi ve gzip değeri olan bir isteğin sonucunu gösteren Fiddler penceresi. Değişiklik ve Içerik kodlama üstbilgileri yanıta eklenir. Yanıt sıkıştırıldı.](response-compression/_static/request-compressed.png)
 
 ## <a name="providers"></a>Sağlayıcılar
 
@@ -683,7 +684,7 @@ Ara yazılım, sıkıştırma için varsayılan bir MIME türleri kümesi belirt
 * `text/plain`
 * `text/xml`
 
-MIME türlerini, yanıt sıkıştırma ara yazılım seçenekleriyle değiştirin veya ekleyin. Gibi joker karakter MIME türlerinin `text/*` desteklenmediğini unutmayın. Örnek uygulama, için bir MIME türü ekler `image/svg+xml` ve ASP.NET Core başlık görüntüsünü (*Banner. SVG*) sıkıştırır ve sunar.
+MIME türlerini, yanıt sıkıştırma ara yazılım seçenekleriyle değiştirin veya ekleyin. Gibi joker karakter MIME türlerinin `text/*` desteklenmediğini unutmayın. Örnek uygulama, için bir MIME türü ekler `image/svg+xml` ve ASP.NET Core başlık görüntüsünü ( *Banner. SVG* ) sıkıştırır ve sunar.
 
 [!code-csharp[](response-compression/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=8-10)]
 

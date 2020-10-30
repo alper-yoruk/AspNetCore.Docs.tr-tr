@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 09/03/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/aspnetcore
-ms.openlocfilehash: 11237c93832e095abb03d761773d213dfa336052
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b120aa4ab6922445f2c53f3b1cb3bd5c159d8a84
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633896"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057836"
 ---
 # <a name="grpc-services-with-aspnet-core"></a>ASP.NET Core içeren gRPC Hizmetleri
 
@@ -30,7 +31,7 @@ Bu belgede, ASP.NET Core kullanarak gRPC Hizmetleri ile çalışmaya başlama g�
 
 [!INCLUDE[](~/includes/gRPCazure.md)]
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -66,7 +67,7 @@ gRPC, [GRPC. AspNetCore](https://www.nuget.org/packages/Grpc.AspNetCore) paketin
 
 ### <a name="configure-grpc"></a>GRPC 'yi yapılandırma
 
-*Startup.cs*içinde:
+*Startup.cs* içinde:
 
 * gRPC, `AddGrpc` yöntemiyle etkinleştirilir.
 * Her gRPC hizmeti, yönlendirme ardışık düzenine yöntemi aracılığıyla eklenir `MapGrpcService` .
@@ -93,11 +94,11 @@ Kestrel çoğu modern işletim sisteminde [http/2 destekler](xref:fundamentals/s
 
 GRPC için kullanılan Kestrel uç noktaları TLS ile güvenli hale gelmelidir. Geliştirme aşamasında, `https://localhost:5001` ASP.NET Core geliştirme sertifikası mevcut olduğunda, TLS ile güvenli bir uç nokta otomatik olarak oluşturulur. Yapılandırma gerekmez. `https`Ön ek, Kestrel uç NOKTASıNıN TLS kullandığını doğrular.
 
-Üretimde, TLS açıkça yapılandırılmalıdır. Aşağıdaki *appsettings.js* örnekte, TLS ile güvenliği SAĞLANMıŞ bir http/2 uç noktası verilmiştir:
+Üretimde, TLS açıkça yapılandırılmalıdır. Aşağıdaki *appsettings.json* örnekte, TLS ile güvenliği sağlanmış BIR http/2 uç noktası verilmiştir:
 
 [!code-json[](~/grpc/aspnetcore/sample/appsettings.json?highlight=4)]
 
-Alternatif olarak, Kestrel uç noktaları *program.cs*içinde yapılandırılabilir:
+Alternatif olarak, Kestrel uç noktaları *program.cs* içinde yapılandırılabilir:
 
 [!code-csharp[](~/grpc/aspnetcore/sample/Program.cs?highlight=7&name=snippet)]
 

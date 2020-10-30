@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/1/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/websockets
-ms.openlocfilehash: 11cd1c266516c696859c4116c940400e90d09ab4
-ms.sourcegitcommit: c06a5bf419541d17595af30e4cf6f2787c21855e
+ms.openlocfilehash: 83a41d503b2d56bca3f1bac14eeb9d54a8257642
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92678536"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057784"
 ---
 # <a name="websockets-support-in-aspnet-core"></a>ASP.NET Core desteği WebSockets
 
@@ -41,7 +42,7 @@ Bu makalede, ASP.NET Core ' de WebSockets ile çalışmaya başlama açıklanmak
 
 Bazı uygulamalarda, [.net 'Teki GRPC](xref:grpc/index) , WebSockets için bir alternatif sağlar.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * ASP.NET Core destekleyen herhangi bir işletim sistemi:  
   * Windows 7/Windows Server 2008 veya üzeri

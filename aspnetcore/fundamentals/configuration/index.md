@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 3/29/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/configuration/index
-ms.openlocfilehash: 7565ede55acd936072fc1930918d46808548f287
-ms.sourcegitcommit: d7991068bc6b04063f4bd836fc5b9591d614d448
+ms.openlocfilehash: 9e744ec6d0f0dd72bded8284e98fd9ce53056b84
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91762353"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057979"
 ---
 # <a name="configuration-in-aspnet-core"></a>ASP.NET Core yapılandırma
 
@@ -33,7 +34,7 @@ Tarafından [Rick Anderson](https://twitter.com/RickAndMSFT) ve [Kirk larkabağ�
 
 ASP.NET Core yapılandırma bir veya daha fazla [yapılandırma sağlayıcısı](#cp)kullanılarak gerçekleştirilir. Yapılandırma sağlayıcıları çeşitli yapılandırma kaynakları kullanarak anahtar-değer çiftlerinden yapılandırma verilerini okur:
 
-* *appsettings.js* gibi ayarlar dosyaları
+* Gibi ayarlar dosyaları *appsettings.json*
 * Ortam değişkenleri
 * Azure Key Vault
 * Azure Uygulama Yapılandırması
@@ -57,13 +58,13 @@ Bu konuda ASP.NET Core yapılandırma hakkında bilgi verilmektedir. Konsol uygu
  <xref:Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder*> uygulama için varsayılan yapılandırmayı aşağıdaki sırayla sağlar:
 
 1. [Chainedconfigurationprovider](xref:Microsoft.Extensions.Configuration.ChainedConfigurationSource) : var olan bir `IConfiguration` kaynak olarak ekler. Varsayılan yapılandırma durumunda, [ana bilgisayar](#hvac) yapılandırmasını ekler ve _uygulama_ yapılandırması için ilk kaynak olarak ayarlar.
-1. [JSON yapılandırma sağlayıcısını](#file-configuration-provider)kullanarak [appsettings.js](#appsettingsjson) .
-1. *appSettings.* `Environment` [JSON yapılandırma sağlayıcısı](#file-configuration-provider)kullanılarak *. JSON* . Örneğin, *appSettings*. ***Üretim***. *JSON* ve *appSettings*. ***Geliştirme***. *JSON*.
+1. [appsettings.json](#appsettingsjson)[JSON yapılandırma sağlayıcısını](#file-configuration-provider)kullanma.
+1. *appSettings.* `Environment` [JSON yapılandırma sağlayıcısı](#file-configuration-provider)kullanılarak *. JSON* . Örneğin, *appSettings* . ***Üretim * * _._json* ve *appSettings* . * * * geliştirme** _._json *.
 1. Uygulama ortamda çalıştırıldığında [uygulama gizli](xref:security/app-secrets) dizileri `Development` .
 1. Ortam [değişkenleri yapılandırma sağlayıcısını](#evcp)kullanarak ortam değişkenleri.
 1. Komut satırı [yapılandırma sağlayıcısını](#command-line)kullanan komut satırı bağımsız değişkenleri.
 
-Daha sonra eklenen yapılandırma sağlayıcıları önceki anahtar ayarlarını geçersiz kılar. Örneğin, `MyKey` ve ortamında hem *appsettings.js* hem de ortamda ayarlandıysa, ortam değeri kullanılır. Varsayılan yapılandırma sağlayıcılarını kullanarak,  [komut satırı yapılandırma sağlayıcısı](#clcp) diğer tüm sağlayıcıları geçersiz kılar.
+Daha sonra eklenen yapılandırma sağlayıcıları önceki anahtar ayarlarını geçersiz kılar. Örneğin, hem hem de `MyKey` *appsettings.json* ortamında ayarlandıysa, ortam değeri kullanılır. Varsayılan yapılandırma sağlayıcılarını kullanarak,  [komut satırı yapılandırma sağlayıcısı](#clcp) diğer tüm sağlayıcıları geçersiz kılar.
 
 Hakkında daha fazla bilgi için `CreateDefaultBuilder` bkz. [Varsayılan Oluşturucu ayarları](xref:fundamentals/host/generic-host#default-builder-settings).
 
@@ -71,9 +72,9 @@ Aşağıdaki kod, etkin yapılandırma sağlayıcılarını eklendiği sırayla 
 
 [!code-csharp[](index/samples/3.x/ConfigSample/Pages/Index2.cshtml.cs?name=snippet)]
 
-### <a name="appsettingsjson"></a>appsettings.json
+### appsettings.json
 
-Dosyasında aşağıdaki *appsettings.js* göz önünde bulundurun:
+Aşağıdaki dosyayı göz önünde bulundurun *appsettings.json* :
 
 [!code-json[](index/samples/3.x/ConfigSample/appsettings.json)]
 
@@ -84,12 +85,12 @@ Dosyasında aşağıdaki *appsettings.js* göz önünde bulundurun:
 Varsayılan <xref:Microsoft.Extensions.Configuration.Json.JsonConfigurationProvider> yapılandırma yapılandırması aşağıdaki sırayla yüklenir:
 
 1. *appsettings.json*
-1. *appSettings.* `Environment` *. JSON* : Örneğin, *appSettings*. ***Üretim***. *JSON* ve *appSettings*. ***Geliştirme***. *JSON* dosyaları. Dosyanın ortam sürümü, [ıhostingenvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*)temel alınarak yüklenir. Daha fazla bilgi için bkz. <xref:fundamentals/environments>.
+1. *appSettings.* `Environment` *. JSON* : Örneğin, *appSettings* . ***Üretim * * _._json* ve *appSettings* . * * * geliştirme** _._json * dosyaları. Dosyanın ortam sürümü, [ıhostingenvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*)temel alınarak yüklenir. Daha fazla bilgi için bkz. <xref:fundamentals/environments>.
 
-*appSettings*. `Environment` . *JSON* değerleri *appsettings.jsüzerindeki*anahtarları geçersiz kılar. Örneğin, varsayılan olarak:
+*appSettings* . `Environment` . *JSON* değerleri içindeki anahtarları geçersiz kılar *appsettings.json* . Örneğin, varsayılan olarak:
 
-* Geliştirme sürümünde *appSettings*. ***Geliştirme***. *JSON* yapılandırması, * üzerindeappsettings.js*bulunan değerlerin üzerine yazar.
-* Üretimde, *appSettings*. ***Üretim***. *JSON* yapılandırması, * üzerindeappsettings.js*bulunan değerlerin üzerine yazar. Örneğin, uygulamayı Azure 'a dağıtma.
+* Geliştirme aşamasında *appSettings* . * **geliştirme** _._json * yapılandırması, içinde bulunan değerlerin üzerine yazar *appsettings.json* .
+* Üretimde, *appSettings* . * **Üretim** _._json * yapılandırması, içinde bulunan değerlerin üzerine yazar *appsettings.json* . Örneğin, uygulamayı Azure 'a dağıtma.
 
 <a name="optpat"></a>
 
@@ -97,7 +98,7 @@ Varsayılan <xref:Microsoft.Extensions.Configuration.Json.JsonConfigurationProvi
 
 [!INCLUDE[](~/includes/bind.md)]
 
-[Varsayılan](#default) yapılandırmayı kullanarak *appsettings.js* ve appSettings ' i kullanın *.* `Environment` *. JSON* dosyaları [reloadonchange: true](https://github.com/dotnet/extensions/blob/release/3.1/src/Hosting/Hosting/src/Host.cs#L74-L75)ile etkinleştirilir. Ve appSettings *üzerindeappsettings.js* yapılan değişiklikler *.* `Environment` uygulama başladıktan ***sonra*** *. JSON* dosyası [JSON yapılandırma sağlayıcısı](#jcp)tarafından okundu.
+[Varsayılan](#default) yapılandırmayı kullanarak *appsettings.json* ve *appSettings.* `Environment` *. JSON* dosyaları [reloadonchange: true](https://github.com/dotnet/extensions/blob/release/3.1/src/Hosting/Hosting/src/Host.cs#L74-L75)ile etkinleştirilir. Ve appSettings üzerinde yapılan *appsettings.json* değişiklikler *.* `Environment` *. JSON* dosyası * **After _ sonra** , uygulama başlatılır [JSON yapılandırma sağlayıcısı](#jcp)tarafından okundu.
 
 Ek JSON yapılandırma dosyaları ekleme hakkında bilgi için bu belgede [JSON yapılandırma sağlayıcısına](#jcp) bakın.
 
@@ -111,11 +112,11 @@ Ek JSON yapılandırma dosyaları ekleme hakkında bilgi için bu belgede [JSON 
 
 Yapılandırma verileri yönergeleri:
 
-* Yapılandırma sağlayıcısı kodunda veya düz metin yapılandırma dosyalarında parolaları veya diğer hassas verileri hiçbir şekilde depolamayin. [Gizli](xref:security/app-secrets) dizi, geliştirmelerde gizli dizileri depolamak için kullanılabilir.
+_ Yapılandırma sağlayıcısı kodunda veya düz metin yapılandırma dosyalarında parolaları veya diğer hassas verileri hiçbir şekilde depolamayin. [Gizli](xref:security/app-secrets) dizi, geliştirmelerde gizli dizileri depolamak için kullanılabilir.
 * Geliştirme veya test ortamlarında üretim gizli dizileri kullanmayın.
 * Yanlışlıkla bir kaynak kodu deposuna uygulanamazlar için proje dışındaki gizli dizileri belirtin.
 
-[Varsayılan](#default)olarak, [gizli yönetici](xref:security/app-secrets) *appsettings.json* ve appSettings sonrasında yapılandırma ayarlarını okur *.* `Environment` *. JSON*.
+[Varsayılan](#default)olarak, [gizli yönetici](xref:security/app-secrets) yapılandırma ayarlarını *appsettings.json* ve appSettings sonrasında okur *.* `Environment` *. JSON* .
 
 Parolaları veya diğer hassas verileri depolama hakkında daha fazla bilgi için:
 
@@ -128,7 +129,7 @@ Parolaları veya diğer hassas verileri depolama hakkında daha fazla bilgi içi
 
 ## <a name="environment-variables"></a>Ortam değişkenleri
 
-[Varsayılan](#default) yapılandırmayı kullanarak, <xref:Microsoft.Extensions.Configuration.EnvironmentVariables.EnvironmentVariablesConfigurationProvider> yapılandırma *appsettings.json*, appSettings sonrasında anahtar-değer çiftlerinde bulunan yapılandırmayı yükler *.* `Environment` *. JSON*ve [gizli yönetici](xref:security/app-secrets). Bu nedenle, ortamdan okunan anahtar değerleri, *appsettings.json*, appSettings öğesinden okunan değerleri geçersiz kılar *.* `Environment` *. JSON*ve gizli yönetici.
+[Varsayılan](#default) yapılandırmayı kullanarak, <xref:Microsoft.Extensions.Configuration.EnvironmentVariables.EnvironmentVariablesConfigurationProvider> yapılandırma, appSettings sonrasında anahtar-değer çiftleri ' nden yapılandırmayı yükler *appsettings.json* *.* `Environment` *. JSON* ve [gizli yönetici](xref:security/app-secrets). Bu nedenle, ortamdan okunan anahtar değerleri, öğesinden okunan değerleri geçersiz *appsettings.json* kılar *.* `Environment` *. JSON* ve gizli yönetici.
 
 [!INCLUDE[](~/includes/environmentVarableColon.md)]
 
@@ -157,7 +158,7 @@ setx Position__Title Setx_Environment_Editor /M
 setx Position__Name Environment_Rick /M
 ```
 
-Yukarıdaki komutların ve appSettings *appsettings.js* geçersiz kılmasını test etmek *.* `Environment` *. JSON*:
+Önceki komutların geçersiz kılındığını ve appSettings 'i test etmek *appsettings.json* *.* `Environment` *. JSON* :
 
 * Visual Studio ile: Exit ve Visual Studio 'Yu yeniden başlatın.
 * CLı ile: yeni bir komut penceresi başlatın ve girin `dotnet run` .
@@ -203,7 +204,7 @@ Azure veritabanı bağlantı dizeleri hakkında bilgi için bkz. [bağlantı diz
 
 [Varsayılan](#default) yapılandırmayı kullanarak, <xref:Microsoft.Extensions.Configuration.CommandLine.CommandLineConfigurationProvider> aşağıdaki yapılandırma kaynaklarından sonra komut satırı bağımsız değişkeninden anahtar-değer çiftlerinden yapılandırma yükler:
 
-* Ve *appsettings* *appsettings.js* . `Environment` .. *JSON* dosyaları.
+* *appsettings.json* ve *appSettings* . `Environment` . *JSON* dosyaları.
 * Geliştirme ortamında [uygulama gizli dizileri (gizli yönetici)](xref:security/app-secrets) .
 * Ortam değişkenleri.
 
@@ -267,7 +268,7 @@ Anahtar eşlemeleri kullanan uygulamalar için, ' ye yapılan çağrı `CreateDe
 
 Yapılandırma API 'SI, hiyerarşik verileri, yapılandırma anahtarlarında bir sınırlayıcı kullanımıyla birlikte düzleştirerek hiyerarşik yapılandırma verilerini okur.
 
-[Örnek indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) , dosyasında aşağıdaki *appsettings.js* içerir:
+[Örnek indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) aşağıdaki *appsettings.json* dosyayı içerir:
 
 [!code-json[](index/samples/3.x/ConfigSample/appsettings.json)]
 
@@ -323,7 +324,7 @@ Yapılandırma kaynakları, yapılandırma sağlayıcılarının belirtilme sır
 Yapılandırma sağlayıcılarının tipik bir sırası şunlardır:
 
 1. *appsettings.json*
-1. *appSettings*. `Environment` . *JSON*
+1. *appSettings* . `Environment` . *JSON*
 1. [Gizli dizi Yöneticisi](xref:security/app-secrets)
 1. Ortam [değişkenleri yapılandırma sağlayıcısını](#evcp)kullanarak ortam değişkenleri.
 1. Komut satırı [yapılandırma sağlayıcısını](#command-line-configuration-provider)kullanan komut satırı bağımsız değişkenleri.
@@ -375,7 +376,7 @@ Aşağıdaki kod tüm yapılandırma sağlayıcılarını temizler ve çeşitli 
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramINI.cs?name=snippet&highlight=10-30)]
 
-Yukarıdaki kodda, *MyIniConfig.ini* ve  *Myıniconfig*içindeki `Environment` ayarlar. *ını* dosyaları, içindeki ayarlar tarafından geçersiz kılınır:
+Yukarıdaki kodda, *MyIniConfig.ini* ve  *Myıniconfig* içindeki `Environment` ayarlar. *ını* dosyaları, içindeki ayarlar tarafından geçersiz kılınır:
 
 * [Ortam değişkenleri yapılandırma sağlayıcısı](#evcp)
 * [Komut satırı yapılandırma sağlayıcısı](#clcp).
@@ -410,15 +411,15 @@ Yukarıdaki kod:
   * `reloadOnChange: true` : Değişiklikler kaydedildiğinde dosya yeniden yüklenir.
 * Dosyadaki *MyConfig.js* önce [varsayılan yapılandırma sağlayıcılarını](#default) okur. [Ortam değişkenleri yapılandırma sağlayıcısı](#evcp) ve [komut satırı yapılandırma sağlayıcısı](#clcp)da dahil olmak üzere varsayılan yapılandırma sağlayıcılarındaki *MyConfig.js* dosya geçersiz kılma ayarı ayarları.
 
-Genellikle, [ortam değişkenleri Yapılandırma sağlayıcısında](#evcp) ve [komut satırı yapılandırma sağlayıcısında](#clcp)ayarlanmış özel bir JSON dosyası değerlerini geçersiz ***kılmayı istemezsiniz.***
+Genellikle * **yok** _, [ortam değişkenleri Yapılandırma sağlayıcısında](#evcp) ve [komut satırı yapılandırma sağlayıcısında](#clcp)ayarlanan değerleri geçersiz kılan özel bir JSON dosyası istemezsiniz.
 
 Aşağıdaki kod tüm yapılandırma sağlayıcılarını temizler ve çeşitli yapılandırma sağlayıcıları ekler:
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramJSON2.cs?name=snippet)]
 
-Yukarıdaki kodda, ve *MyConfig* *MyConfig.js* `Environment` ayarlar. *JSON* dosyaları:
+Yukarıdaki kodda, * ve  *MyConfig* üzerindeki _MyConfig.js`Environment` ayarlar. *JSON* dosyaları:
 
-* *appsettings.json* ve *appSettings*içindeki ayarları geçersiz kılın. `Environment` . *JSON* dosyaları.
+* Ve appSettings içindeki ayarları geçersiz kılın *appsettings.json* *appsettings* . `Environment` .. *JSON* dosyaları.
 * , [Ortam değişkenleri yapılandırma sağlayıcısı](#evcp) ve [komut satırı yapılandırma sağlayıcısı](#clcp)ayarları tarafından geçersiz kılınır.
 
 [Örnek indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/configuration/index/samples/3.x/ConfigSample) , dosyasında aşağıdaki *MyConfig.js* içerir:
@@ -437,7 +438,7 @@ Aşağıdaki kod tüm yapılandırma sağlayıcılarını temizler ve çeşitli 
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramXML.cs?name=snippet)]
 
-Yukarıdaki kodda, *MyXMLFile.xml* ve  *myXMLfile*içindeki ayarlar. `Environment` .. *XML* dosyaları, içindeki ayarlar tarafından geçersiz kılınır:
+Yukarıdaki kodda, *MyXMLFile.xml* ve  *myXMLfile* içindeki ayarlar. `Environment` .. *XML* dosyaları, içindeki ayarlar tarafından geçersiz kılınır:
 
 * [Ortam değişkenleri yapılandırma sağlayıcısı](#evcp)
 * [Komut satırı yapılandırma sağlayıcısı](#clcp).
@@ -613,7 +614,7 @@ Dizin 3 &num; `ArrayExample` &num; anahtar/değer çiftini okuyan herhangi bir y
 
 [!code-json[](index/samples/3.x/ConfigSample/Value3.json)]
 
-Aşağıdaki kod, ve * üzerindeValue3.js* için yapılandırma içerir `arrayDict` `Dictionary` :
+Aşağıdaki kod, ve *üzerindeValue3.js* için yapılandırma içerir `arrayDict` `Dictionary` :
 
 [!code-csharp[](index/samples/3.x/ConfigSample/ProgramArray.cs?name=snippet2)]
 
@@ -646,35 +647,35 @@ Sağlayıcı aşağıdaki özelliklere sahiptir:
 
 `EFConfigurationValue`Yapılandırma değerlerini veritabanında depolamak için bir varlık tanımlayın.
 
-*Modeller/EFConfigurationValue. cs*:
+*Modeller/EFConfigurationValue. cs* :
 
 [!code-csharp[](index/samples/3.x/ConfigurationSample/Models/EFConfigurationValue.cs?name=snippet1)]
 
 Bir `EFConfigurationContext` mağazaya ekleyin ve yapılandırılan değerlere erişin.
 
-*Efconfigurationprovider/EFConfigurationContext. cs*:
+*Efconfigurationprovider/EFConfigurationContext. cs* :
 
 [!code-csharp[](index/samples/3.x/ConfigurationSample/EFConfigurationProvider/EFConfigurationContext.cs?name=snippet1)]
 
 Uygulayan bir sınıf oluşturun <xref:Microsoft.Extensions.Configuration.IConfigurationSource> .
 
-*Efconfigurationprovider/EFConfigurationSource. cs*:
+*Efconfigurationprovider/EFConfigurationSource. cs* :
 
 [!code-csharp[](index/samples/3.x/ConfigurationSample/EFConfigurationProvider/EFConfigurationSource.cs?name=snippet1)]
 
 Öğesinden devralarak özel yapılandırma sağlayıcısını oluşturun <xref:Microsoft.Extensions.Configuration.ConfigurationProvider> . Yapılandırma sağlayıcısı boş olduğunda veritabanını başlatır. [Yapılandırma anahtarları büyük/küçük harfe duyarsız](#keys)olduğundan, veritabanını başlatmak için kullanılan sözlük, büyük/küçük harf duyarsız karşılaştırıcı ([StringComparer. OrdinalIgnoreCase](xref:System.StringComparer.OrdinalIgnoreCase)) ile oluşturulur.
 
-*Efconfigurationprovider/efconfigurationprovider. cs*:
+*Efconfigurationprovider/efconfigurationprovider. cs* :
 
 [!code-csharp[](index/samples/3.x/ConfigurationSample/EFConfigurationProvider/EFConfigurationProvider.cs?name=snippet1)]
 
 `AddEFConfiguration`Genişletme yöntemi, yapılandırma kaynağını bir öğesine eklemeye izin verir `ConfigurationBuilder` .
 
-*Uzantılar/EntityFrameworkExtensions. cs*:
+*Uzantılar/EntityFrameworkExtensions. cs* :
 
 [!code-csharp[](index/samples/3.x/ConfigurationSample/Extensions/EntityFrameworkExtensions.cs?name=snippet1)]
 
-Aşağıdaki kod, `EFConfigurationProvider` *program.cs*içinde özel kullanımı göstermektedir:
+Aşağıdaki kod, `EFConfigurationProvider` *program.cs* içinde özel kullanımı göstermektedir:
 
 [!code-csharp[](index/samples_snippets/3.x/ConfigurationSample/Program.cs?highlight=7-8)]
 
@@ -722,7 +723,7 @@ Aşağıdaki kod, seçenek değerlerini görüntüler:
 
 [!code-csharp[](options/samples/3.x/OptionsSample/Pages/Test2.cshtml.cs?name=snippet)]
 
-Yukarıdaki örnekte, `Option1` ve değerleri `Option2` * üzerindeappsettings.js* belirtilmiştir ve sonra yapılandırılan temsilci tarafından geçersiz kılınır.
+Önceki örnekte, `Option1` ve değerleri `Option2` içinde belirtilir *appsettings.json* ve sonra yapılandırılan temsilci tarafından geçersiz kılınır.
 
 <a name="hvac"></a>
 
@@ -747,7 +748,7 @@ Uygulama yapılandırıldıktan ve başlatılmadan önce, bir *konak* yapıland�
 
 ## <a name="other-configuration"></a>Diğer yapılandırma
 
-Bu konu yalnızca *uygulama yapılandırması*ile ilgilidir. ASP.NET Core uygulamalarını çalıştırmanın diğer yönleri, bu konuda kapsanmayan yapılandırma dosyaları kullanılarak yapılandırılır:
+Bu konu yalnızca *uygulama yapılandırması* ile ilgilidir. ASP.NET Core uygulamalarını çalıştırmanın diğer yönleri, bu konuda kapsanmayan yapılandırma dosyaları kullanılarak yapılandırılır:
 
 * *Üzerindelaunch.js* / *ÜzerindelaunchSettings.js* , geliştirme ortamı için açıklanan yapılandırma dosyalarıdır:
   * İçinde <xref:fundamentals/environments#development> .
@@ -774,7 +775,7 @@ Uygulama <xref:Microsoft.AspNetCore.Hosting.IHostingStartup> , uygulamanın sın
 
 ::: moniker range="< aspnetcore-3.0"
 
-ASP.NET Core içindeki uygulama yapılandırması, *yapılandırma sağlayıcıları*tarafından belirlenen anahtar-değer çiftlerini temel alır. Yapılandırma sağlayıcıları yapılandırma verilerini çeşitli yapılandırma kaynaklarından anahtar-değer çiftlerine okur:
+ASP.NET Core içindeki uygulama yapılandırması, *yapılandırma sağlayıcıları* tarafından belirlenen anahtar-değer çiftlerini temel alır. Yapılandırma sağlayıcıları yapılandırma verilerini çeşitli yapılandırma kaynaklarından anahtar-değer çiftlerine okur:
 
 * Azure Key Vault
 * Azure Uygulama Yapılandırması
@@ -803,7 +804,7 @@ Uygulama yapılandırıldıktan ve başlatılmadan önce, bir *konak* yapıland�
 
 ## <a name="other-configuration"></a>Diğer yapılandırma
 
-Bu konu yalnızca *uygulama yapılandırması*ile ilgilidir. ASP.NET Core uygulamalarını çalıştırmanın diğer yönleri, bu konuda kapsanmayan yapılandırma dosyaları kullanılarak yapılandırılır:
+Bu konu yalnızca *uygulama yapılandırması* ile ilgilidir. ASP.NET Core uygulamalarını çalıştırmanın diğer yönleri, bu konuda kapsanmayan yapılandırma dosyaları kullanılarak yapılandırılır:
 
 * *Üzerindelaunch.js* / *ÜzerindelaunchSettings.js* , geliştirme ortamı için açıklanan yapılandırma dosyalarıdır:
   * İçinde <xref:fundamentals/environments#development> .
@@ -824,8 +825,8 @@ Ana bilgisayar oluştururken ASP.NET Core [DotNet yeni](/dotnet/core/tools/dotne
   * Ortam değişkenleri `ASPNETCORE_` `ASPNETCORE_ENVIRONMENT` [yapılandırma sağlayıcısı](#environment-variables-configuration-provider)kullanılarak (örneğin,) ön eki olan ortam değişkenleri. `ASPNETCORE_`Yapılandırma anahtar-değer çiftleri yüklendiğinde önek () çıkarılır.
   * Komut satırı [yapılandırma sağlayıcısını](#command-line-configuration-provider)kullanan komut satırı bağımsız değişkenleri.
 * Uygulama yapılandırması şuradan sağlanır:
-  * [Dosya yapılandırma sağlayıcısını](#file-configuration-provider)kullanarak *appsettings.js* .
-  * *appSettings. * [Dosya yapılandırma sağlayıcısı](#file-configuration-provider)kullanılarak {Environment}. JSON.
+  * *appsettings.json*[dosya yapılandırma sağlayıcısını](#file-configuration-provider)kullanma.
+  * *appSettings.* [Dosya yapılandırma sağlayıcısı](#file-configuration-provider)kullanılarak {Environment}. JSON.
   * [Secret Manager](xref:security/app-secrets) Uygulama, `Development` giriş derlemesini kullanarak ortamda çalıştırıldığında gizli Yöneticisi.
   * Ortam [değişkenleri yapılandırma sağlayıcısını](#environment-variables-configuration-provider)kullanarak ortam değişkenleri.
   * Komut satırı [yapılandırma sağlayıcısını](#command-line-configuration-provider)kullanan komut satırı bağımsız değişkenleri.
@@ -936,7 +937,7 @@ Aşağıdaki tabloda ASP.NET Core uygulamalar için kullanılabilen yapılandır
 
 | Sağlayıcı | Şuradan yapılandırma sağlar&hellip; |
 | -------- | ----------------------------------- |
-| [Azure Key Vault yapılandırma sağlayıcısı](xref:security/key-vault-configuration) (*güvenlik* konuları) | Azure Key Vault |
+| [Azure Key Vault yapılandırma sağlayıcısı](xref:security/key-vault-configuration) ( *güvenlik* konuları) | Azure Key Vault |
 | [Azure uygulama yapılandırma sağlayıcısı](/azure/azure-app-configuration/quickstart-aspnet-core-app) (Azure belgeleri) | Azure Uygulama Yapılandırması |
 | [Komut satırı yapılandırma sağlayıcısı](#command-line-configuration-provider) | Komut satırı parametreleri |
 | [Özel yapılandırma sağlayıcısı](#custom-configuration-provider) | Özel kaynak |
@@ -944,13 +945,13 @@ Aşağıdaki tabloda ASP.NET Core uygulamalar için kullanılabilen yapılandır
 | [Dosya yapılandırma sağlayıcısı](#file-configuration-provider) | Dosyalar (ıNı, JSON, XML) |
 | [Dosya başına anahtar yapılandırma sağlayıcısı](#key-per-file-configuration-provider) | Dizin dosyaları |
 | [Bellek yapılandırma sağlayıcısı](#memory-configuration-provider) | Bellek içi Koleksiyonlar |
-| [Kullanıcı gizli dizileri (gizli yönetici)](xref:security/app-secrets) (*güvenlik* konuları) | Kullanıcı profili dizinindeki dosya |
+| [Kullanıcı gizli dizileri (gizli yönetici)](xref:security/app-secrets) ( *güvenlik* konuları) | Kullanıcı profili dizinindeki dosya |
 
 Yapılandırma kaynakları, başlangıçta yapılandırma sağlayıcılarının belirtilme sırasına göre okundu. Bu konu başlığı altında açıklanan yapılandırma sağlayıcıları, kodun onları düzenler sırasına göre değil alfabetik sırayla açıklanmıştır. Koddaki yapılandırma sağlayıcılarını, uygulamanın gerektirdiği temel yapılandırma kaynakları için önceliklere uyacak şekilde sıralayın.
 
 Yapılandırma sağlayıcılarının tipik bir sırası şunlardır:
 
-1. Dosyalar (*appsettings.json*, *appSettings. { Environment}. JSON*, `{Environment}` uygulamanın geçerli barındırma ortamıdır
+1. Dosyalar ( *appsettings.json* , *appSettings. { Environment}. JSON* , `{Environment}` uygulamanın geçerli barındırma ortamıdır
 1. [Azure Key Vault](xref:security/key-vault-configuration)
 1. [Kullanıcı gizli dizileri (gizli yönetici)](xref:security/app-secrets) (yalnızca geliştirme ortamı)
 1. Ortam değişkenleri
@@ -1027,7 +1028,7 @@ Komut satırı yapılandırmasını etkinleştirmek için, <xref:Microsoft.Exten
 
 `CreateDefaultBuilder` Ayrıca yüklenir:
 
-* *appsettings.json* ve appSettings 'ten isteğe bağlı yapılandırma *. { Environment}. JSON* dosyaları.
+* Ve appSettings 'ten isteğe bağlı yapılandırma *appsettings.json* *. { Environment}. JSON* dosyaları.
 * Geliştirme ortamında [Kullanıcı gizli dizileri (gizli yönetici)](xref:security/app-secrets) .
 * Ortam değişkenleri.
 
@@ -1054,7 +1055,7 @@ ASP.NET Core şablonlarına dayalı uygulamalar için, `AddCommandLine` tarafın
 1. Uygulama çalıştırıldıktan sonra, konumundaki uygulamaya bir tarayıcı açın `http://localhost:5000` .
 1. Çıktının ' de belirtilen yapılandırma komut satırı bağımsız değişkeni için anahtar-değer çiftini içerdiğini gözlemleyin `dotnet run` .
 
-### <a name="arguments"></a>Bağımsız değişkenler
+### <a name="arguments"></a>Arguments
 
 Değer bir eşittir işaretini ( `=` ) izlemelidir veya `--` `/` değer bir boşluk izleyen anahtar bir ön eke (ya da) sahip olmalıdır. Eşittir işareti kullanılırsa değer gerekli değildir (örneğin, `CommandLineKey=` ).
 
@@ -1142,7 +1143,7 @@ Ortam değişkenleri yapılandırmasını etkinleştirmek için, <xref:Microsoft
 `CreateDefaultBuilder` Ayrıca yüklenir:
 
 * Önek olmadan çağırarak ön eki edilmemiş ortam değişkenlerinden uygulama yapılandırması `AddEnvironmentVariables` .
-* *appsettings.json* ve appSettings 'ten isteğe bağlı yapılandırma *. { Environment}. JSON* dosyaları.
+* Ve appSettings 'ten isteğe bağlı yapılandırma *appsettings.json* *. { Environment}. JSON* dosyaları.
 * Geliştirme ortamında [Kullanıcı gizli dizileri (gizli yönetici)](xref:security/app-secrets) .
 * Komut satırı bağımsız değişkenleri.
 
@@ -1295,8 +1296,8 @@ Aşırı yüklemeler belirtmeye izin ver:
 
 `AddJsonFile` , ile yeni bir ana bilgisayar Oluşturucu başlatıldığında otomatik olarak iki kez çağrılır `CreateDefaultBuilder` . Yöntemi, yapılandırmayı şuradan yüklemek için çağrılır:
 
-* *appsettings.js*: Bu dosya ilk kez okundu. Dosyanın ortam sürümü, *appsettings.js* dosya tarafından belirtilen değerleri geçersiz kılabilir.
-* *appSettings. {Environment}. JSON*: dosyanın ortam sürümü [ıhostingenvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*)temel alınarak yüklenir.
+* *appsettings.json* : Bu dosya ilk kez okundu. Dosyanın ortam sürümü, dosya tarafından belirtilen değerleri geçersiz kılabilir *appsettings.json* .
+* *appSettings. {Environment}. JSON* : dosyanın ortam sürümü [ıhostingenvironment. EnvironmentName](xref:Microsoft.Extensions.Hosting.IHostingEnvironment.EnvironmentName*)temel alınarak yüklenir.
 
 Daha fazla bilgi için [varsayılan yapılandırma](#default-configuration) bölümüne bakın.
 
@@ -1308,7 +1309,7 @@ Daha fazla bilgi için [varsayılan yapılandırma](#default-configuration) böl
 
 JSON yapılandırma sağlayıcısı önce oluşturulur. Bu nedenle, Kullanıcı gizli dizileri, ortam değişkenleri ve komut satırı bağımsız değişkenleri, *appSettings* dosyaları tarafından ayarlanan yapılandırmayı geçersiz kılar.
 
-`ConfigureAppConfiguration`Ana bilgisayarı oluştururken, *appsettings.json* ve appSettings dışındaki dosyalar için uygulamanın yapılandırmasını belirtmek üzere çağırın *. { Environment}. JSON*:
+`ConfigureAppConfiguration`Ana bilgisayarı derlerken, ve appSettings dışındaki dosyalar için uygulamanın yapılandırmasını belirtecek çağrı *appsettings.json* *. { Environment}. JSON* :
 
 ```csharp
 .ConfigureAppConfiguration((hostingContext, config) =>
@@ -1322,11 +1323,11 @@ JSON yapılandırma sağlayıcısı önce oluşturulur. Bu nedenle, Kullanıcı 
 
 Örnek uygulama, `CreateDefaultBuilder` için iki çağrı içeren konağı oluşturmak için statik kolaylık yönteminden yararlanır `AddJsonFile` :
 
-* `AddJsonFile` *' Dekiappsettings.js*yapılandırmayı yükleyen ilk çağrı:
+* `AddJsonFile`Yapılandırmayı şuradan yükleyen ilk çağrı *appsettings.json* :
 
   [!code-json[](index/samples/2.x/ConfigurationSample/appsettings.json)]
 
-* `AddJsonFile`Yapılandırma appSettings 'ten yüklenen ikinci çağrı *. { Environment}. JSON*. Örnek uygulamada *appsettings.Development.js* için aşağıdaki dosya yüklenir:
+* `AddJsonFile`Yapılandırma appSettings 'ten yüklenen ikinci çağrı *. { Environment}. JSON* . Örnek uygulamada *appsettings.Development.js* için aşağıdaki dosya yüklenir:
 
   [!code-json[](index/samples/2.x/ConfigurationSample/appsettings.Development.json)]
 
@@ -1336,7 +1337,7 @@ JSON yapılandırma sağlayıcısı önce oluşturulur. Bu nedenle, Kullanıcı 
    1. Dosyadaki *Özellikler/launchSettings.js* açın.
    1. `ConfigurationSample`Profilde, `ASPNETCORE_ENVIRONMENT` ortam değişkeninin değerini olarak değiştirin `Production` .
    1. Dosyayı kaydedin ve uygulamayı `dotnet run` bir komut kabuğu içinde çalıştırın.
-1. *appsettings.Development.jsüzerindeki* ayarlar artık *appsettings.jsüzerindeki*ayarları geçersiz kılmaz. Anahtarın günlük düzeyi `Logging:LogLevel:Default` `Warning` .
+1. *Üzerindeappsettings.Development.js* ayarları artık içindeki ayarları geçersiz kılmaz *appsettings.json* . Anahtarın günlük düzeyi `Logging:LogLevel:Default` `Warning` .
 
 ### <a name="xml-configuration-provider"></a>XML yapılandırma sağlayıcısı
 
@@ -1593,7 +1594,7 @@ var sectionExists = _config.GetSection("section2:subsection2").Exists();
 
 <xref:Microsoft.Extensions.Configuration.ConfigurationBinder.Bind*> , bir POCO nesne grafiğinin tamamına bağlama yeteneğine sahiptir. Basit bir nesne bağlamakla birlikte yalnızca genel okuma/yazma özellikleri bağlanır.
 
-Örnek, `TvShow` nesne grafı içeren ve sınıfları olan bir model içerir `Metadata` `Actors` (*modeller/tvshow. cs*):
+Örnek, `TvShow` nesne grafı içeren ve sınıfları olan bir model içerir `Metadata` `Actors` ( *modeller/tvshow. cs* ):
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/Models/TvShow.cs?name=snippet1)]
 
@@ -1669,7 +1670,7 @@ Bir örneği olan bağlantılı nesne, `ArrayExample` yapılandırmadan dizi ver
 
 &num; `ArrayExample` Yapılandırmada doğru anahtar-değer çiftini üreten herhangi bir yapılandırma sağlayıcısı tarafından örneğe bağlamadan önce dizin 3 için eksik yapılandırma öğesi sağlanabilir. Örnek, eksik anahtar-değer çiftine sahip ek bir JSON yapılandırma sağlayıcısı içeriyorsa, `ArrayExample.Entries` tam yapılandırma dizisiyle eşleşir:
 
-*missing_value.js*:
+*missing_value.js* :
 
 ```json
 {
@@ -1740,35 +1741,35 @@ Sağlayıcı aşağıdaki özelliklere sahiptir:
 
 `EFConfigurationValue`Yapılandırma değerlerini veritabanında depolamak için bir varlık tanımlayın.
 
-*Modeller/EFConfigurationValue. cs*:
+*Modeller/EFConfigurationValue. cs* :
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/Models/EFConfigurationValue.cs?name=snippet1)]
 
 Bir `EFConfigurationContext` mağazaya ekleyin ve yapılandırılan değerlere erişin.
 
-*Efconfigurationprovider/EFConfigurationContext. cs*:
+*Efconfigurationprovider/EFConfigurationContext. cs* :
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/EFConfigurationProvider/EFConfigurationContext.cs?name=snippet1)]
 
 Uygulayan bir sınıf oluşturun <xref:Microsoft.Extensions.Configuration.IConfigurationSource> .
 
-*Efconfigurationprovider/EFConfigurationSource. cs*:
+*Efconfigurationprovider/EFConfigurationSource. cs* :
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/EFConfigurationProvider/EFConfigurationSource.cs?name=snippet1)]
 
 Öğesinden devralarak özel yapılandırma sağlayıcısını oluşturun <xref:Microsoft.Extensions.Configuration.ConfigurationProvider> . Yapılandırma sağlayıcısı boş olduğunda veritabanını başlatır.
 
-*Efconfigurationprovider/efconfigurationprovider. cs*:
+*Efconfigurationprovider/efconfigurationprovider. cs* :
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/EFConfigurationProvider/EFConfigurationProvider.cs?name=snippet1)]
 
 `AddEFConfiguration`Genişletme yöntemi, yapılandırma kaynağını bir öğesine eklemeye izin verir `ConfigurationBuilder` .
 
-*Uzantılar/EntityFrameworkExtensions. cs*:
+*Uzantılar/EntityFrameworkExtensions. cs* :
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/Extensions/EntityFrameworkExtensions.cs?name=snippet1)]
 
-Aşağıdaki kod, `EFConfigurationProvider` *program.cs*içinde özel kullanımı göstermektedir:
+Aşağıdaki kod, `EFConfigurationProvider` *program.cs* içinde özel kullanımı göstermektedir:
 
 [!code-csharp[](index/samples/2.x/ConfigurationSample/Program.cs?name=snippet_Program&highlight=29-30)]
 

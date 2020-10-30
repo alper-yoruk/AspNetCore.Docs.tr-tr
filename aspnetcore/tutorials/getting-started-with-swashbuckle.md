@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 06/26/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/get-started-with-swashbuckle
-ms.openlocfilehash: 84094dce306e10470ec7b7be3efe6da024470330
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 9fbd4bc5e91d8f05afc99a4f04c706399f83a518
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88628852"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057615"
 ---
 # <a name="get-started-with-swashbuckle-and-aspnet-core"></a>Swashbuckle ve ASP.NET Core kullanmaya başlayın
 
@@ -70,7 +71,7 @@ Aşağıdaki yaklaşımlar ile swashbuckle eklenebilir:
 
 ### <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-**Tümleşik terminalden**aşağıdaki komutu çalıştırın:
+**Tümleşik terminalden** aşağıdaki komutu çalıştırın:
 
 ```dotnetcli
 dotnet add TodoApi.csproj package Swashbuckle.AspNetCore -v 5.5.0
@@ -179,7 +180,7 @@ XML açıklamaları aşağıdaki yaklaşımlar ile etkinleştirilebilir:
 
 ::: moniker range=">= aspnetcore-2.0"
 
-* **Çözüm Gezgini** projeye sağ tıklayın ve **>. csproj Project_Name <Düzenle**' yi seçin.
+* **Çözüm Gezgini** projeye sağ tıklayın ve **>. csproj Project_Name <Düzenle** ' yi seçin.
 * Vurgulanan satırları *. csproj* dosyasına el ile ekleyin:
 
 [!code-xml[](../tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.Swashbuckle/TodoApi.csproj?name=snippet_SuppressWarnings&highlight=1-2,4)]
@@ -188,7 +189,7 @@ XML açıklamaları aşağıdaki yaklaşımlar ile etkinleştirilebilir:
 
 ::: moniker range="<= aspnetcore-1.1"
 
-* **Çözüm Gezgini** ' de projeye sağ tıklayın ve **Özellikler**' i seçin.
+* **Çözüm Gezgini** ' de projeye sağ tıklayın ve **Özellikler** ' i seçin.
 * **Build** sekmesinin **output** bölümünün altındaki **XML belge dosyası** kutusunu işaretleyin.
 
 ::: moniker-end
@@ -197,7 +198,7 @@ XML açıklamaları aşağıdaki yaklaşımlar ile etkinleştirilebilir:
 
 ::: moniker range=">= aspnetcore-2.0"
 
-* *Çözüm bölmesi*, **Denetim** ' e basın ve proje adına tıklayın. **Araçlar**  >  **dosya düzenleme**sayfasına gidin.
+* *Çözüm bölmesi* , **Denetim** ' e basın ve proje adına tıklayın. **Araçlar**  >  **dosya düzenleme** sayfasına gidin.
 * Vurgulanan satırları *. csproj* dosyasına el ile ekleyin:
 
 [!code-xml[](../tutorials/web-api-help-pages-using-swagger/samples/2.1/TodoApi.Swashbuckle/TodoApi.csproj?name=snippet_SuppressWarnings&highlight=1-2,4)]
@@ -408,7 +409,7 @@ Bu özniteliğin varlığı, Kullanıcı arabirimi davranışını değiştirir 
 },
 ```
 
-`[Produces("application/json")]`ÖZNITELIĞI API denetleyicisine ekleyin. Amaç, denetleyicinin eylemlerinin bir *uygulama/JSON*yanıt içerik türünü desteklediğini bildirsağlamaktır:
+`[Produces("application/json")]`ÖZNITELIĞI API denetleyicisine ekleyin. Amaç, denetleyicinin eylemlerinin bir *uygulama/JSON* yanıt içerik türünü desteklediğini bildirsağlamaktır:
 
 ::: moniker range="<= aspnetcore-2.0"
 

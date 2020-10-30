@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 6/23/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/static-files
-ms.openlocfilehash: 36eeb3532ed5ea6f5f75c20cbe14331ed840a788
-ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
+ms.openlocfilehash: 2e25af03a8a6aaff5b343885711c6ebb68340fac
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/27/2020
-ms.locfileid: "91393944"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93057862"
 ---
 # <a name="static-files-in-aspnet-core"></a>ASP.NET Core statik dosyalar
 
@@ -57,7 +58,7 @@ Varsayılan Web uygulaması şablonları <xref:Owin.StaticFileExtensions.UseStat
 
 [!code-csharp[](~/fundamentals/static-files/samples/3.x/StaticFilesSample/Startup.cs?name=snippet_Configure&highlight=15)]
 
-Parametresiz `UseStaticFiles` yöntemi aşırı yüklemesi, [Web kökündeki](xref:fundamentals/index#web-root) dosyaları servable olarak işaretler. Aşağıdaki biçimlendirme *Wwwroot/görüntüler/MyImage.jpg*başvuruyor:
+Parametresiz `UseStaticFiles` yöntemi aşırı yüklemesi, [Web kökündeki](xref:fundamentals/index#web-root) dosyaları servable olarak işaretler. Aşağıdaki biçimlendirme *Wwwroot/görüntüler/MyImage.jpg* başvuruyor:
 
 ```html
 <img src="~/images/MyImage.jpg" class="img" alt="My image" />
@@ -83,7 +84,7 @@ Bir istek `red-rose.jpg` statik dosya ara yazılımını aşağıdaki şekilde y
 
 Yukarıdaki kodda, *mystaticfiles* dizin hiyerarşisi, *staticfiles* URI segmenti aracılığıyla herkese açıktır. `https://<hostname>/StaticFiles/images/red-rose.jpg` *red-rose.jpg* dosyasına hizmet vermek için bir istek.
 
-Aşağıdaki biçimlendirme *Mystaticfiles/Images/red-rose.jpg*başvurular:
+Aşağıdaki biçimlendirme *Mystaticfiles/Images/red-rose.jpg* başvurular:
 
 ```html
 <img src="~/StaticFiles/images/red-rose.jpg" class="img" alt="A red rose" />
@@ -157,7 +158,7 @@ Varsayılan bir sayfanın ayarlanması, ziyaretçilerin bir sitede başlangıç 
 
 Listedeki ilk dosya, istek tam URI olmasına rağmen olarak sunulur. Tarayıcı URL 'SI, istenen URI 'yi yansıtacak şekilde devam ediyor.
 
-Aşağıdaki kod, varsayılan dosya adını *mydefault.html*olarak değiştirir:
+Aşağıdaki kod, varsayılan dosya adını *mydefault.html* olarak değiştirir:
 
 [!code-csharp[](~/fundamentals/static-files/samples/3.x/StaticFilesSample/StartupDefault.cs?name=snippet_DefaultFiles)]
 
@@ -265,7 +266,7 @@ Yukarıdaki kodla, bilinmeyen içerik türüne sahip bir dosya isteği görünt�
 > [!WARNING]
 > IIS statik dosya işleyicisi etkinse **ve** ASP.NET Core modülü yanlış yapılandırılmışsa, statik dosyalar sunulur. Bu, örneğin *web.config* dosyası dağıtılmamışsa oluşur.
 
-* *. Cs* ve *. cshtml*dahil olmak üzere kod dosyalarını uygulama projesinin [Web kökünün](xref:fundamentals/index#web-root)dışına yerleştirin. Bu nedenle, uygulamanın istemci tarafı içeriği ile sunucu tabanlı kod arasında bir mantıksal ayrım oluşturulur. Bu, sunucu tarafı kodun sızmasını önler.
+* *. Cs* ve *. cshtml* dahil olmak üzere kod dosyalarını uygulama projesinin [Web kökünün](xref:fundamentals/index#web-root)dışına yerleştirin. Bu nedenle, uygulamanın istemci tarafı içeriği ile sunucu tabanlı kod arasında bir mantıksal ayrım oluşturulur. Bu, sunucu tarafı kodun sızmasını önler.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
@@ -284,7 +285,7 @@ HTML, CSS, resim ve JavaScript gibi statik dosyalar, ASP.NET Core bir uygulaman�
 
 ## <a name="serve-static-files"></a>Statik dosyaları sunma
 
-Statik dosyalar projenin [Web kök](xref:fundamentals/index#web-root) dizininde depolanır. Varsayılan dizin *{Content root}/Wwwroot*' dır, ancak yöntemi aracılığıyla değiştirilebilir <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseWebRoot%2A> . Daha fazla bilgi için bkz. [içerik kökü](xref:fundamentals/index#content-root) ve [Web kök](xref:fundamentals/index#web-root) .
+Statik dosyalar projenin [Web kök](xref:fundamentals/index#web-root) dizininde depolanır. Varsayılan dizin *{Content root}/Wwwroot* ' dır, ancak yöntemi aracılığıyla değiştirilebilir <xref:Microsoft.AspNetCore.Hosting.HostingAbstractionsWebHostBuilderExtensions.UseWebRoot%2A> . Daha fazla bilgi için bkz. [içerik kökü](xref:fundamentals/index#content-root) ve [Web kök](xref:fundamentals/index#web-root) .
 
 Uygulamanın Web ana bilgisayarı, içerik kök dizininden haberdar olmalıdır.
 
@@ -299,7 +300,7 @@ Statik dosyalara, [Web köküne](xref:fundamentals/index#web-root)göre bir yol 
   * `images`
   * `js`
 
-*Görüntüler* alt klasöründeki bir dosyaya erışmek için urı biçimi *http:// \<server_address> /images/ \<image_file_name> *olur. Örneğin, *http://localhost:9189/images/banner3.svg*.
+*Görüntüler* alt klasöründeki bir dosyaya erışmek için urı biçimi *http:// \<server_address> /images/ \<image_file_name>* olur. Örneğin, *http://localhost:9189/images/banner3.svg* .
 
 .NET Framework hedefliyorsanız, [Microsoft. AspNetCore. StaticFiles](https://www.nuget.org/packages/Microsoft.AspNetCore.StaticFiles/) paketini projeye ekleyin. .NET Core hedefleniyorsa, [Microsoft. AspNetCore. app metapackage](xref:fundamentals/metapackage-app) bu paketi içerir.
 
@@ -311,7 +312,7 @@ Statik dosyaları sunmaya izin veren [ara yazılımı](xref:fundamentals/middlew
 
 [!code-csharp[](static-files/samples/1.x/StaticFilesSample/StartupStaticFiles.cs?name=snippet_ConfigureMethod&highlight=3)]
 
-Parametresiz `UseStaticFiles` yöntemi aşırı yüklemesi, [Web kökündeki](xref:fundamentals/index#web-root) dosyaları servable olarak işaretler. Aşağıdaki biçimlendirme *Wwwroot/Images/banner1. SVG*öğesine başvuruyor:
+Parametresiz `UseStaticFiles` yöntemi aşırı yüklemesi, [Web kökündeki](xref:fundamentals/index#web-root) dosyaları servable olarak işaretler. Aşağıdaki biçimlendirme *Wwwroot/Images/banner1. SVG* öğesine başvuruyor:
 
 [!code-cshtml[](static-files/samples/1.x/StaticFilesSample/Views/Home/Index.cshtml?name=snippet_static_file_wwwroot)]
 
@@ -335,7 +336,7 @@ Bir istek statik dosya ara yazılımını aşağıdaki şekilde yapılandırarak
 
 Yukarıdaki kodda, *mystaticfiles* dizin hiyerarşisi, *staticfiles* URI segmenti aracılığıyla herkese açıktır. *Http:// \<server_address> /StaticFiles/images/banner1.SVG* için bir istek *banner1. SVG* dosyasına hizmet verir.
 
-Aşağıdaki biçimlendirme *Mystaticfiles/Images/banner1. SVG*' ye başvurur:
+Aşağıdaki biçimlendirme *Mystaticfiles/Images/banner1. SVG* ' ye başvurur:
 
 [!code-cshtml[](static-files/samples/1.x/StaticFilesSample/Views/Home/Index.cshtml?name=snippet_static_file_outside)]
 
@@ -354,7 +355,7 @@ Dosyalar, geliştirme ortamında 10 dakika (600 saniye) için genel olarak önbe
 
 ## <a name="static-file-authorization"></a>Statik dosya yetkilendirmesi
 
-Statik dosya ara yazılımı yetkilendirme denetimleri sağlamıyor. *Wwwroot*altındakiler de dahil olmak üzere hizmet tarafından sunulan tüm dosyalar herkese açık olarak erişilebilir. Dosyalara yetkilendirme temelinde hizmeti sağlamak için:
+Statik dosya ara yazılımı yetkilendirme denetimleri sağlamıyor. *Wwwroot* altındakiler de dahil olmak üzere hizmet tarafından sunulan tüm dosyalar herkese açık olarak erişilebilir. Dosyalara yetkilendirme temelinde hizmeti sağlamak için:
 
 * Onları *Wwwroot* dışında ve statik dosya ara yazılımı tarafından erişilebilen herhangi bir dizinle saklayın.
 * Yetkilendirmeyi uygulanan bir eylem yöntemi aracılığıyla onlara sunar. Bir <xref:Microsoft.AspNetCore.Mvc.FileResult> nesne döndürün:
@@ -371,13 +372,13 @@ Yöntemi şuradan çağırarak gerekli hizmetleri ekleyin <xref:Microsoft.Extens
 
 [!code-csharp[](static-files/samples/1.x/StaticFilesSample/StartupBrowse.cs?name=snippet_ConfigureServicesMethod&highlight=3)]
 
-Yukarıdaki kod, her bir dosya ve klasörün bağlantılarıyla birlikte *http:// \<server_address> /MYıMAGES*URL 'sini kullanarak *Wwwroot/görüntüler* klasöründe Dizin taramasına izin verir:
+Yukarıdaki kod, her bir dosya ve klasörün bağlantılarıyla birlikte *http:// \<server_address> /MYıMAGES* URL 'sini kullanarak *Wwwroot/görüntüler* klasöründe Dizin taramasına izin verir:
 
 ![dizin tarama](static-files/_static/dir-browse.png)
 
 Göz atmayı etkinleştirirken güvenlik riskleri hakkındaki [noktalara](#considerations) göz atın.
 
-Aşağıdaki örnekteki iki çağrının olduğunu aklınızda edin `UseStaticFiles` . İlk çağrı *Wwwroot* klasöründeki statik dosyaları sunmaya izin veriyor. İkinci çağrı, *http:// \<server_address> /MYıMAGES*URL 'sini kullanarak *Wwwroot/görüntüler* klasöründe dizin taramayı mümkün bir şekilde sunar:
+Aşağıdaki örnekteki iki çağrının olduğunu aklınızda edin `UseStaticFiles` . İlk çağrı *Wwwroot* klasöründeki statik dosyaları sunmaya izin veriyor. İkinci çağrı, *http:// \<server_address> /MYıMAGES* URL 'sini kullanarak *Wwwroot/görüntüler* klasöründe dizin taramayı mümkün bir şekilde sunar:
 
 [!code-csharp[](static-files/samples/1.x/StaticFilesSample/StartupBrowse.cs?name=snippet_ConfigureMethod&highlight=3,5)]
 
@@ -399,7 +400,7 @@ Varsayılan ana sayfanın ayarlanması, ziyaretçi sitenizi ziyaret ederken mant
 
 Listedeki ilk dosya, istek tam URI olmasına rağmen olarak sunulur. Tarayıcı URL 'SI, istenen URI 'yi yansıtacak şekilde devam ediyor.
 
-Aşağıdaki kod, varsayılan dosya adını *mydefault.html*olarak değiştirir:
+Aşağıdaki kod, varsayılan dosya adını *mydefault.html* olarak değiştirir:
 
 [!code-csharp[](static-files/samples/1.x/StaticFilesSample/StartupDefault.cs?name=snippet_ConfigureMethod)]
 
@@ -477,12 +478,12 @@ Yukarıdaki kodla, bilinmeyen içerik türüne sahip bir dosya isteği görünt�
 
 ## <a name="serve-files-from-multiple-locations"></a>Birden çok konumdan dosyaları sunma
 
-`UseStaticFiles` ve `UseFileServer` Varsayılan olarak *Wwwroot*' a işaret eden dosya sağlayıcısına sahiptir. `UseStaticFiles` `UseFileServer` Diğer konumlardan dosya sunmak için diğer dosya sağlayıcılarının yanı sıra ek örnekler de sağlayabilirsiniz. Daha fazla bilgi için [Bu GitHub sorununa](https://github.com/dotnet/AspNetCore.Docs/issues/15578)bakın.
+`UseStaticFiles` ve `UseFileServer` Varsayılan olarak *Wwwroot* ' a işaret eden dosya sağlayıcısına sahiptir. `UseStaticFiles` `UseFileServer` Diğer konumlardan dosya sunmak için diğer dosya sağlayıcılarının yanı sıra ek örnekler de sağlayabilirsiniz. Daha fazla bilgi için [Bu GitHub sorununa](https://github.com/dotnet/AspNetCore.Docs/issues/15578)bakın.
 
 ### <a name="considerations"></a>Dikkat edilmesi gerekenler
 
 > [!WARNING]
-> `UseDirectoryBrowser` ve `UseStaticFiles` gizli dizileri sızdırabilirsiniz. Üretimde dizin taramayı devre dışı bırakmak önemle önerilir. Veya ile hangi dizinlerin etkinleştirildiğini dikkatle gözden `UseStaticFiles` geçirin `UseDirectoryBrowser` . Tüm dizin ve alt dizinleri herkese açık şekilde erişilebilir hale gelir. Özel bir dizinde genel kullanıma sunma için uygun dosyaları, örneğin * \<content_root> /Wwwroot*gibi depolayın. Bu dosyaları MVC görünümlerini, Razor sayfaları (yalnızca 2. x), yapılandırma dosyalarını vb. ayırın.
+> `UseDirectoryBrowser` ve `UseStaticFiles` gizli dizileri sızdırabilirsiniz. Üretimde dizin taramayı devre dışı bırakmak önemle önerilir. Veya ile hangi dizinlerin etkinleştirildiğini dikkatle gözden `UseStaticFiles` geçirin `UseDirectoryBrowser` . Tüm dizin ve alt dizinleri herkese açık şekilde erişilebilir hale gelir. Özel bir dizinde genel kullanıma sunma için uygun dosyaları, örneğin *\<content_root> /Wwwroot* gibi depolayın. Bu dosyaları MVC görünümlerini, Razor sayfaları (yalnızca 2. x), yapılandırma dosyalarını vb. ayırın.
 
 * Ve ile sunulan içerik URL 'Leri `UseDirectoryBrowser` , `UseStaticFiles` temel dosya sisteminin büyük küçük harf duyarlılığı ve karakter kısıtlamalarına tabidir. Örneğin, Windows büyük/küçük harfe duyarsız &mdash; MacOS ve Linux değildir.
 
@@ -496,7 +497,7 @@ Yukarıdaki kodla, bilinmeyen içerik türüne sahip bir dosya isteği görünt�
 > [!WARNING]
 > IIS statik dosya işleyicisi etkinse **ve** ASP.NET Core modülü yanlış yapılandırılmışsa, statik dosyalar sunulur. Bu, örneğin *web.config* dosyası dağıtılmamışsa oluşur.
 
-* Kod dosyalarını ( *. cs* ve *. cshtml*dahil) uygulama projesinin [Web kökünün](xref:fundamentals/index#web-root)dışına yerleştirin. Bu nedenle, uygulamanın istemci tarafı içeriği ile sunucu tabanlı kod arasında bir mantıksal ayrım oluşturulur. Bu, sunucu tarafı kodun sızmasını önler.
+* Kod dosyalarını ( *. cs* ve *. cshtml* dahil) uygulama projesinin [Web kökünün](xref:fundamentals/index#web-root)dışına yerleştirin. Bu nedenle, uygulamanın istemci tarafı içeriği ile sunucu tabanlı kod arasında bir mantıksal ayrım oluşturulur. Bu, sunucu tarafı kodun sızmasını önler.
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 

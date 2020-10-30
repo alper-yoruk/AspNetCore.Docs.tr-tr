@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/14/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/view-compilation
-ms.openlocfilehash: 3d76eff93d5c7c53b57136e5183e1ca5287dec81
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 77ca96b329136ee044ab6fc5f6b5ebb5b67fe64c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631127"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059084"
 ---
 # <a name="no-locrazor-file-compilation-in-aspnet-core"></a>Razor ASP.NET Core 'de dosya derleme
 
@@ -45,7 +46,7 @@ RazorSayfalar ve MVC proje şablonları, proje oluşturulduğunda çalışma zam
 **Yeni ASP.NET Core Web uygulaması oluştur** iletişim kutusunda:
 
 1. **Web uygulaması** veya **Web uygulaması (Model-View-Controller)** proje şablonunu seçin.
-1. ** Razor Çalışma zamanı derlemesini etkinleştir** onay kutusunu seçin.
+1. **Razor Çalışma zamanı derlemesini etkinleştir** onay kutusunu seçin.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
@@ -62,7 +63,7 @@ dotnet new webapp --razor-runtime-compilation
 Mevcut bir projedeki tüm ortamlarda çalışma zamanı derlemesini etkinleştirmek için:
 
 1. [Microsoft. AspNetCore. Mvc 'yi yükler. Razor RuntimeCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/) NuGet paketi.
-1. `Startup.ConfigureServices`İçin bir çağrı içerecek şekilde projenin metodunu güncelleştirin <xref:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation*> . Örnek:
+1. `Startup.ConfigureServices`İçin bir çağrı içerecek şekilde projenin metodunu güncelleştirin <xref:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation*> . Örneğin:
 
     ```csharp
     public void ConfigureServices(IServiceCollection services)
@@ -84,7 +85,7 @@ Mevcut bir projedeki tüm ortamlarda çalışma zamanı derlemesini etkinleştir
 Çalışma zamanı derlemesini yalnızca geliştirme ortamında etkinleştirmek için:
 
 1. [Microsoft. AspNetCore. Mvc 'yi yükler. Razor RuntimeCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/) NuGet paketi.
-1. `environmentVariables` *ÜzerindelaunchSettings.js*başlatma profili bölümünü değiştirin:
+1. `environmentVariables` *ÜzerindelaunchSettings.js* başlatma profili bölümünü değiştirin:
     * Verify `ASPNETCORE_ENVIRONMENT` olarak ayarlanır `"Development"` .
     * `ASPNETCORE_HOSTINGSTARTUPASSEMBLIES`Olarak ayarlayın `"Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation"` .
 
@@ -96,7 +97,7 @@ Projenin sınıfında kod değişikliği yapılması gerekmez `Startup` . Çalı
 
 ## <a name="enable-runtime-compilation-for-a-no-locrazor-class-library"></a>Sınıf kitaplığı için çalışma zamanı derlemesini Etkinleştir Razor
 
-Bir Razor sayfa projesinin *myclasslib*adlı bir [ Razor sınıf kitaplığına (RCL)](xref:razor-pages/ui-class) başvurduğu bir senaryo düşünün. RCL, tüm takımınızın MVC ve sayfa projelerinin tükettiği bir *_Layout. cshtml* dosyası içerir Razor . Bu RCL 'de *_Layout. cshtml* dosyası için çalışma zamanı derlemesini etkinleştirmek istiyorsunuz. Sayfalar projesinde aşağıdaki değişiklikleri yapın Razor :
+Bir Razor sayfa projesinin *myclasslib* adlı bir [ Razor sınıf kitaplığına (RCL)](xref:razor-pages/ui-class) başvurduğu bir senaryo düşünün. RCL, tüm takımınızın MVC ve sayfa projelerinin tükettiği bir *_Layout. cshtml* dosyası içerir Razor . Bu RCL 'de *_Layout. cshtml* dosyası için çalışma zamanı derlemesini etkinleştirmek istiyorsunuz. Sayfalar projesinde aşağıdaki değişiklikleri yapın Razor :
 
 1. [Mevcut bir projede çalışma zamanı derlemesini koşullu olarak etkinleştirme](#conditionally-enable-runtime-compilation-in-an-existing-project)yönergelerini kullanarak çalışma zamanı derlemesini etkinleştirin.
 1. Çalışma zamanı derleme seçeneklerini şu şekilde yapılandırın `Startup.ConfigureServices` :
@@ -128,7 +129,7 @@ Tüm ortamlar ve yapılandırma modları için çalışma zamanı derlemesini et
 
 1. [Microsoft. AspNetCore. Mvc 'yi yükler. Razor RuntimeCompilation](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation/) NuGet paketi.
 
-1. `Startup.ConfigureServices`İçin bir çağrı içerecek şekilde projenin metodunu güncelleştirin <xref:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation*> . Örnek:
+1. `Startup.ConfigureServices`İçin bir çağrı içerecek şekilde projenin metodunu güncelleştirin <xref:Microsoft.Extensions.DependencyInjection.RazorRuntimeCompilationMvcBuilderExtensions.AddRazorRuntimeCompilation*> . Örneğin:
 
     ```csharp
     public void ConfigureServices(IServiceCollection services)

@@ -6,6 +6,7 @@ description: Sayfalardaki ve görünümlerde bileşenleri işlemek için ASP.NET
 ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/component-tag-helper
-ms.openlocfilehash: 1a0422da6bd48049cac73debe7d335da91e311be
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: cddbca7f95e4d2143d4632aaa83133bc6210e251
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633922"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059162"
 ---
 # <a name="component-tag-helper-in-aspnet-core"></a>ASP.NET Core bileşen etiketi Yardımcısı
 
@@ -30,7 +31,7 @@ ms.locfileid: "88633922"
 
 Bir sayfadan veya görünümden bir bileşeni işlemek için [bileşen etiketi yardımcısını](xref:Microsoft.AspNetCore.Mvc.TagHelpers.ComponentTagHelper)kullanın.
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 Makalenin *Sayfalar ve görünümlerde bileşenleri kullanmak için uygulamayı hazırlama* bölümündeki yönergeleri izleyin <xref:blazor/components/integrate-components-into-razor-pages-and-mvc-apps#prepare-the-app> .
 
@@ -106,7 +107,7 @@ Parametre türünün JSON serileştirilebilir olması gerekir, bu, genellikle t�
 
 Aşağıdaki örnekte, bileşene bir sınıf nesnesi geçirilir:
 
-*MyClass.cs*:
+*MyClass.cs* :
 
 ```csharp
 public class MyClass
@@ -122,7 +123,7 @@ public class MyClass
 
 **Sınıf ortak parametresiz bir oluşturucuya sahip olmalıdır.**
 
-*Shared/MyComponent. Razor*:
+*Shared/MyComponent. Razor* :
 
 ```razor
 <h2>MyComponent</h2>
@@ -137,7 +138,7 @@ public class MyClass
 }
 ```
 
-*Pages/MyPage. cshtml*:
+*Pages/MyPage. cshtml* :
 
 ```cshtml
 @addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
