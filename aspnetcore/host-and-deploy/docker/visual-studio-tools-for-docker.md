@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 09/12/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/docker/visual-studio-tools-for-docker
-ms.openlocfilehash: 68ecc4961401211f1304ac4a26fff1b31e4ad7eb
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 2cfd200c44290a0931cdeb2f68e99b90c11aa612
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627344"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059825"
 ---
 # <a name="visual-studio-container-tools-with-aspnet-core"></a>ASP.NET Core ile Visual Studio kapsayıcı araçları
 
@@ -30,7 +31,7 @@ Visual Studio 2017 ve üzeri sürümleri, .NET Core 'u hedefleyen ASP.NET Core K
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/host-and-deploy/docker/visual-studio-tools-for-docker/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 * [Docker for Windows](https://docs.docker.com/docker-for-windows/install/)
 * **.NET Core platformlar arası geliştirme** iş yüküyle [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/?utm_medium=microsoft&utm_source=docs.microsoft.com&utm_campaign=inline+link&utm_content=download+vs2019)
@@ -39,7 +40,7 @@ Visual Studio 2017 ve üzeri sürümleri, .NET Core 'u hedefleyen ASP.NET Core K
 
 Docker yüklemesi için öncelikle [Docker for Windows: yüklemeden önce bilmeniz](https://docs.docker.com/docker-for-windows/install/#what-to-know-before-you-install)gereken bilgileri gözden geçirin. Ardından, [Windows Için Docker](https://docs.docker.com/docker-for-windows/install/)'ı yüklersiniz.
 
-Docker for Windows içindeki **[paylaşılan sürücüler](https://docs.docker.com/docker-for-windows/#shared-drives)** , birim eşlemesini ve hata ayıklamayı destekleyecek şekilde yapılandırılmalıdır. Sistem tepsisinin Docker simgesine sağ tıklayın, **Ayarlar**' ı seçin ve **paylaşılan sürücüler**' i seçin. Docker 'ın dosyaları depoladığı sürücüyü seçin. **Uygula**’ya tıklayın.
+Docker for Windows içindeki **[paylaşılan sürücüler](https://docs.docker.com/docker-for-windows/#shared-drives)** , birim eşlemesini ve hata ayıklamayı destekleyecek şekilde yapılandırılmalıdır. Sistem tepsisinin Docker simgesine sağ tıklayın, **Ayarlar** ' ı seçin ve **paylaşılan sürücüler** ' i seçin. Docker 'ın dosyaları depoladığı sürücüyü seçin. **Uygula** 'ya tıklayın.
 
 ![Kapsayıcılar için yerel C sürücüsü paylaşımını seçme iletişim kutusu](visual-studio-tools-for-docker/_static/settings-shared-drives-win.png)
 
@@ -50,7 +51,7 @@ Docker for Windows içindeki **[paylaşılan sürücüler](https://docs.docker.c
 
 ASP.NET Core bir projeyi Kapsayıcılı hale getirmek için, projenin .NET Core 'u hedeflemesi gerekir. Hem Linux hem de Windows kapsayıcıları desteklenir.
 
-Bir projeye Docker desteği eklerken, bir Windows veya Linux kapsayıcısı seçin. Docker ana bilgisayarı aynı kapsayıcı türünü çalıştırıyor olmalıdır. Çalışan Docker örneğindeki kapsayıcı türünü değiştirmek için, sistem tepsisinin Docker simgesine sağ tıklayın ve **Windows kapsayıcılarına geç...** ' i seçin veya **Linux kapsayıcılarına geç..**..
+Bir projeye Docker desteği eklerken, bir Windows veya Linux kapsayıcısı seçin. Docker ana bilgisayarı aynı kapsayıcı türünü çalıştırıyor olmalıdır. Çalışan Docker örneğindeki kapsayıcı türünü değiştirmek için, sistem tepsisinin Docker simgesine sağ tıklayın ve **Windows kapsayıcılarına geç...** ' i seçin veya **Linux kapsayıcılarına geç..** ..
 
 ### <a name="new-app"></a>Yeni uygulama
 
@@ -65,13 +66,13 @@ Hedef çerçeve .NET Core ise, **Işletim sistemi** açılır listesi bir kapsay
 .NET Core 'u hedefleyen ASP.NET Core projeleri için, araç aracılığıyla Docker desteği eklemenin iki seçeneği vardır. Visual Studio 'da projeyi açın ve aşağıdaki seçeneklerden birini belirleyin:
 
 * **Proje** menüsünden **Docker desteği** ' ni seçin.
-* **Çözüm Gezgini** projeye sağ tıklayın ve **Add**  >  **Docker desteği**Ekle ' yi seçin.
+* **Çözüm Gezgini** projeye sağ tıklayın ve **Add**  >  **Docker desteği** Ekle ' yi seçin.
 
 Visual Studio kapsayıcı araçları, .NET Framework hedefleme ASP.NET Core var olan bir projeye Docker eklemeyi desteklemez.
 
 ## <a name="dockerfile-overview"></a>Dockerfile genel bakış
 
-Bir *Dockerfile*, son bir Docker görüntüsü oluşturmak için tarif, proje köküne eklenir. İçindeki komutları anlamak için [Dockerfile başvurusuna](https://docs.docker.com/engine/reference/builder/) bakın. Bu belirli *Dockerfile* , dört farklı, adlandırılmış derleme aşamaları ile [çok aşamalı bir yapı](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) kullanır:
+Bir *Dockerfile* , son bir Docker görüntüsü oluşturmak için tarif, proje köküne eklenir. İçindeki komutları anlamak için [Dockerfile başvurusuna](https://docs.docker.com/engine/reference/builder/) bakın. Bu belirli *Dockerfile* , dört farklı, adlandırılmış derleme aşamaları ile [çok aşamalı bir yapı](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) kullanır:
 
 ::: moniker range=">= aspnetcore-2.1"
 
@@ -93,9 +94,9 @@ Yukarıdaki *Dockerfile* , [Microsoft/aspnetcore](https://hub.docker.com/r/micro
 
 ## <a name="add-container-orchestrator-support-to-an-app"></a>Bir uygulamaya kapsayıcı Orchestrator desteği ekleme
 
-Visual Studio 2017, tek kapsayıcı düzenleme çözümü olarak [Docker Compose](https://docs.docker.com/compose/overview/) 15,7 veya önceki bir sürümü destekler. Docker Compose yapıtlar, **Add**  >  **Docker desteği**Ekle aracılığıyla eklenir.
+Visual Studio 2017, tek kapsayıcı düzenleme çözümü olarak [Docker Compose](https://docs.docker.com/compose/overview/) 15,7 veya önceki bir sürümü destekler. Docker Compose yapıtlar, **Add**  >  **Docker desteği** Ekle aracılığıyla eklenir.
 
-Visual Studio 2017 sürümleri 15,8 veya üzeri bir düzenleme çözümünü yalnızca sorulduğunda ekleyin. **Çözüm Gezgini** ' de projeye sağ tıklayın ve **Add**  >  **kapsayıcı Orchestrator desteği**Ekle ' yi seçin. Aşağıdaki seçenekler kullanılabilir: 
+Visual Studio 2017 sürümleri 15,8 veya üzeri bir düzenleme çözümünü yalnızca sorulduğunda ekleyin. **Çözüm Gezgini** ' de projeye sağ tıklayın ve **Add**  >  **kapsayıcı Orchestrator desteği** Ekle ' yi seçin. Aşağıdaki seçenekler kullanılabilir: 
 
 * [Docker Compose](#docker-compose)
 * [Service Fabric](#service-fabric)
@@ -105,10 +106,10 @@ Visual Studio 2017 sürümleri 15,8 veya üzeri bir düzenleme çözümünü yal
 
 Visual Studio kapsayıcı araçları, aşağıdaki dosyalarla çözüme bir *Docker-Compose* projesi ekler:
 
-* *Docker-Compose. dcproj*: projeyi temsil eden dosya. `<DockerTargetOS>`Kullanılacak işletim sistemini belirleyen bir öğesi içerir.
-* *. dockerıgnore*: derleme bağlamı oluşturulurken dışlanacak dosya ve Dizin düzenlerini listeler.
-* *Docker-Compose. yml*: sırasıyla ve ile oluşturulan ve çalıştıran görüntülerin koleksiyonunu tanımlamak için kullanılan temel [Docker Compose](https://docs.docker.com/compose/overview/) dosyası `docker-compose build` `docker-compose run` .
-* *Docker-Compose. override. yml*: isteğe bağlı bir dosya, Docker Compose tarafından okunan hizmetler için yapılandırma geçersiz kılmalarıyla. Visual Studio `docker-compose -f "docker-compose.yml" -f "docker-compose.override.yml"` Bu dosyaları birleştirmek için yürütülür.
+* *Docker-Compose. dcproj* : projeyi temsil eden dosya. `<DockerTargetOS>`Kullanılacak işletim sistemini belirleyen bir öğesi içerir.
+* *. dockerıgnore* : derleme bağlamı oluşturulurken dışlanacak dosya ve Dizin düzenlerini listeler.
+* *Docker-Compose. yml* : sırasıyla ve ile oluşturulan ve çalıştıran görüntülerin koleksiyonunu tanımlamak için kullanılan temel [Docker Compose](https://docs.docker.com/compose/overview/) dosyası `docker-compose build` `docker-compose run` .
+* *Docker-Compose. override. yml* : isteğe bağlı bir dosya, Docker Compose tarafından okunan hizmetler için yapılandırma geçersiz kılmalarıyla. Visual Studio `docker-compose -f "docker-compose.yml" -f "docker-compose.override.yml"` Bu dosyaları birleştirmek için yürütülür.
 
 *Docker-Compose. yml* dosyası, proje çalışırken oluşturulan görüntünün adına başvurur:
 
@@ -118,7 +119,7 @@ Yukarıdaki örnekte, `image: hellodockertools` `hellodockertools:dev` uygulama 
 
 Görüntü kayıt defterine itilse, görüntü adını [Docker Hub](https://hub.docker.com/) Kullanıcı adı (örneğin,) ile önek yapın `dockerhubusername/hellodockertools` . Alternatif olarak, yapılandırmaya bağlı olarak, görüntü adını özel kayıt defteri URL 'sini (örneğin,) içerecek şekilde değiştirin `privateregistry.domain.com/hellodockertools` .
 
-Yapı yapılandırmasına (örneğin, hata ayıklama veya sürüm) göre farklı davranışlar istiyorsanız, yapılandırmaya özgü *Docker-Compose* dosyaları ekleyin. Dosyalar derleme yapılandırmasına göre adlandırılmalıdır (örneğin, *Docker-Compose. vs. Debug. yıml* ve *Docker-Compose. vs. Release. yıml*) ve *Docker-Compose-override. yıml* dosyasıyla aynı konuma yerleştirildi. 
+Yapı yapılandırmasına (örneğin, hata ayıklama veya sürüm) göre farklı davranışlar istiyorsanız, yapılandırmaya özgü *Docker-Compose* dosyaları ekleyin. Dosyalar derleme yapılandırmasına göre adlandırılmalıdır (örneğin, *Docker-Compose. vs. Debug. yıml* ve *Docker-Compose. vs. Release. yıml* ) ve *Docker-Compose-override. yıml* dosyasıyla aynı konuma yerleştirildi. 
 
 Yapılandırmaya özgü geçersiz kılma dosyalarını kullanarak, hata ayıklama ve yayın derleme yapılandırmaları için farklı yapılandırma ayarları (ortam değişkenleri veya giriş noktaları gibi) belirtebilirsiniz.
 
@@ -135,8 +136,8 @@ Service Fabric, Windows 'da yerel geliştirme kümesinde Linux kapsayıcıları 
 
 Visual Studio kapsayıcı araçları aşağıdaki görevleri yapılır:
 
-* Çözüme bir * &lt; project_name &gt; uygulaması* **Service Fabric uygulama** projesi ekler.
-* ASP.NET Core projesine bir *dockerfile* ve *. dockerıgnore* dosyası ekler. ASP.NET Core projesinde zaten bir *Dockerfile* varsa, *dockerfile. orijinal*olarak yeniden adlandırılır. Aşağıdakine benzer yeni bir *Dockerfile*oluşturulur:
+* Çözüme bir *&lt; project_name &gt; uygulaması* **Service Fabric uygulama** projesi ekler.
+* ASP.NET Core projesine bir *dockerfile* ve *. dockerıgnore* dosyası ekler. ASP.NET Core projesinde zaten bir *Dockerfile* varsa, *dockerfile. orijinal* olarak yeniden adlandırılır. Aşağıdakine benzer yeni bir *Dockerfile* oluşturulur:
 
     [!code-dockerfile[](visual-studio-tools-for-docker/samples/2.1/HelloDockerTools/Dockerfile)]
 
@@ -160,7 +161,7 @@ Araç çubuğundaki hata ayıklama açılır listesinden **Docker** ' ı seçin 
 * Uygulama kapsayıcıya kopyalanır.
 * Varsayılan tarayıcı, dinamik olarak atanan bağlantı noktası kullanılarak kapsayıcıya eklenmiş hata ayıklayıcı ile başlatılır.
 
-Uygulamanın elde edilen Docker görüntüsü *dev*olarak etiketlendi. Görüntü, *Microsoft/DotNet* temel görüntüsünün *2,1-aspnetcore-Runtime* etiketine dayalıdır. `docker images`Komutunu **Paket Yöneticisi konsolu** (PMC) penceresinde çalıştırın. Makinedeki görüntüler görüntülenir:
+Uygulamanın elde edilen Docker görüntüsü *dev* olarak etiketlendi. Görüntü, *Microsoft/DotNet* temel görüntüsünün *2,1-aspnetcore-Runtime* etiketine dayalıdır. `docker images`Komutunu **Paket Yöneticisi konsolu** (PMC) penceresinde çalıştırın. Makinedeki görüntüler görüntülenir:
 
 ```console
 REPOSITORY        TAG                     IMAGE ID      CREATED         SIZE
@@ -178,7 +179,7 @@ microsoft/dotnet  2.1-aspnetcore-runtime  fcc3887985bb  6 days ago      255MB
 * Uygulama kapsayıcıya kopyalanır.
 * Varsayılan tarayıcı, dinamik olarak atanan bağlantı noktası kullanılarak kapsayıcıya eklenmiş hata ayıklayıcı ile başlatılır.
 
-Uygulamanın elde edilen Docker görüntüsü *dev*olarak etiketlendi. Görüntü, *Microsoft/aspnetcore* temel görüntüsünü temel alır. `docker images`Komutunu **Paket Yöneticisi konsolu** (PMC) penceresinde çalıştırın. Makinedeki görüntüler görüntülenir:
+Uygulamanın elde edilen Docker görüntüsü *dev* olarak etiketlendi. Görüntü, *Microsoft/aspnetcore* temel görüntüsünü temel alır. `docker images`Komutunu **Paket Yöneticisi konsolu** (PMC) penceresinde çalıştırın. Makinedeki görüntüler görüntülenir:
 
 ```console
 REPOSITORY            TAG  IMAGE ID      CREATED        SIZE
@@ -242,7 +243,7 @@ microsoft/aspnetcore        2.0     c69d39472da9  13 days ago     347MB
 ::: moniker-end
 
 > [!NOTE]
-> `docker images`Komut, havuz adları ve etiketleri *\<none>* (Yukarıda listelenmeyen) ile tanımlanmış olan aracı görüntülerini döndürür. Bu adlandırılmamış görüntüler, [çok aşamalı derleme](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) *dockerfile*tarafından üretilir. Son görüntünün oluşturulması verimliliği artırır &mdash; ancak değişiklikler gerçekleştiğinde yalnızca gerekli katmanlar yeniden oluşturulur. Ara görüntülere artık gerek kalmadığında [Docker rmi](https://docs.docker.com/engine/reference/commandline/rmi/) komutunu kullanarak bunları silin.
+> `docker images`Komut, havuz adları ve etiketleri *\<none>* (Yukarıda listelenmeyen) ile tanımlanmış olan aracı görüntülerini döndürür. Bu adlandırılmamış görüntüler, [çok aşamalı derleme](https://docs.docker.com/engine/userguide/eng-image/multistage-build/) *dockerfile* tarafından üretilir. Son görüntünün oluşturulması verimliliği artırır &mdash; ancak değişiklikler gerçekleştiğinde yalnızca gerekli katmanlar yeniden oluşturulur. Ara görüntülere artık gerek kalmadığında [Docker rmi](https://docs.docker.com/engine/reference/commandline/rmi/) komutunu kullanarak bunları silin.
 
 *Geliştirme* görüntüsüne kıyasla üretim veya yayın görüntüsünün boyutunun daha küçük olması için bir beklentisi olabilir. Birim eşleme nedeniyle, hata ayıklayıcı ve uygulama, kapsayıcıda değil, yerel makineden çalıştırılıyor. *En son* görüntü, uygulamayı bir konak makinesinde çalıştırmak için gerekli uygulama kodunu paketlendi. Bu nedenle, Delta uygulama kodunun boyutudur.
 

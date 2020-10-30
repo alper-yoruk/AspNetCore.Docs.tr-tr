@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/14/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -15,12 +16,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/entity-framework-6
-ms.openlocfilehash: 64d420d7076f1da453ee423cc4a3732eeb47b221
-ms.sourcegitcommit: 4df148cbbfae9ec8d377283ee71394944a284051
+ms.openlocfilehash: 086418c161677f585b08ed360555c93d8575e701
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88876704"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059461"
 ---
 # <a name="aspnet-core-and-entity-framework-6"></a>ASP.NET Core ve Entity Framework 6
 ::: moniker range=">= aspnetcore-3.0"
@@ -33,7 +34,7 @@ ms.locfileid: "88876704"
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [Kod tabanlı Entity Framework yapılandırma](/ef/ef6/fundamentals/configuring/code-based)
+* [Entity Framework Code-Based yapılandırma](/ef/ef6/fundamentals/configuring/code-based)
 
 ::: moniker-end
 
@@ -104,9 +105,9 @@ Bu örnek, Visual Studio 'da aşağıdaki adımlarla sıfırdan oluşturulabilir
 
 * Çekirdek projede, sınıf kitaplığı projesine bir proje başvurusu ekleyin.    
 
-* Çekirdek projede, *Startup.cs*IÇINDE, dı için bağlamını kaydedin.    
+* Çekirdek projede, *Startup.cs* IÇINDE, dı için bağlamını kaydedin.    
 
-* Çekirdek projede, *appsettings.jsüzerinde*, bağlantı dizesini ekleyin.    
+* Temel projede, içinde *appsettings.json* bağlantı dizesini ekleyin.  
 
 * Temel projede, verileri okuyabildiğinizi ve yazabildiğinizi doğrulamak için bir denetleyici ve görünüm ekleyin. (ASP.NET Core MVC yapı iskelesi, sınıf kitaplığından başvurulan EF6 bağlamıyla çalışmaz.)
 

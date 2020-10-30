@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/10/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/host/hosted-services
-ms.openlocfilehash: 04841eb4f6adfec76020d3fe61601037c3fc0733
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b8d6ec079ed39fb3a2c314816ebae6cea0847a36
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635352"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061086"
 ---
 # <a name="background-tasks-with-hosted-services-in-aspnet-core"></a>ASP.NET Core içinde barındırılan hizmetlerle arka plan görevleri
 
@@ -31,7 +32,7 @@ ms.locfileid: "88635352"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core, arka plan görevleri *barındırılan hizmetler*olarak uygulanabilir. Barındırılan hizmet, arabirimi uygulayan bir arka plan görevi mantığı olan bir sınıftır <xref:Microsoft.Extensions.Hosting.IHostedService> . Bu konuda üç barındırılan hizmet örneği sunulmaktadır:
+ASP.NET Core, arka plan görevleri *barındırılan hizmetler* olarak uygulanabilir. Barındırılan hizmet, arabirimi uygulayan bir arka plan görevi mantığı olan bir sınıftır <xref:Microsoft.Extensions.Hosting.IHostedService> . Bu konuda üç barındırılan hizmet örneği sunulmaktadır:
 
 * Bir Zamanlayıcı üzerinde çalışan arka plan görevi.
 * [Kapsamlı bir hizmeti](xref:fundamentals/dependency-injection#service-lifetimes)etkinleştiren barındırılan hizmet. Kapsamlı hizmet [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection)kullanabilir.
@@ -53,7 +54,7 @@ ASP.NET Core Worker hizmeti şablonu, uzun süre çalışan hizmet uygulamaları
 
 ## <a name="package"></a>Paket
 
-Çalışan hizmeti şablonunu temel alan bir uygulama `Microsoft.NET.Sdk.Worker` SDK kullanır ve [Microsoft. Extensions. Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) paketine açık bir paket başvurusu içerir. Örneğin, örnek uygulamanın proje dosyasına (*Backgroundtaskssample. csproj*) bakın.
+Çalışan hizmeti şablonunu temel alan bir uygulama `Microsoft.NET.Sdk.Worker` SDK kullanır ve [Microsoft. Extensions. Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) paketine açık bir paket başvurusu içerir. Örneğin, örnek uygulamanın proje dosyasına ( *Backgroundtaskssample. csproj* ) bakın.
 
 SDK kullanan Web uygulamaları için `Microsoft.NET.Sdk.Web` , [Microsoft. Extensions. Hosting](https://www.nuget.org/packages/Microsoft.Extensions.Hosting) paketine, paylaşılan çerçeveden dolaylı olarak başvurulur. Uygulamanın proje dosyasındaki açık bir paket başvurusu gerekli değildir.
 
@@ -127,7 +128,7 @@ Zamanlanmış bir arka plan görevi, [System. Threading. Timer](xref:System.Thre
 
 , <xref:System.Threading.Timer> Önceki yürütmelerin bitmesini beklemez, bu `DoWork` nedenle gösterilen yaklaşım her senaryo için uygun olmayabilir. [Interkilitlendi. Increment](xref:System.Threading.Interlocked.Increment*) , yürütme sayacını bir atomik işlem olarak artırmak için kullanılır, bu da birden çok iş parçacığının eşzamanlı olarak güncelleştirilmesini sağlar `executionCount` .
 
-Hizmet, `IHostBuilder.ConfigureServices` (*program.cs*) `AddHostedService` öğesine uzantı yöntemiyle kaydedilir:
+Hizmet, `IHostBuilder.ConfigureServices` ( *program.cs* ) `AddHostedService` öğesine uzantı yöntemiyle kaydedilir:
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet1)]
 
@@ -146,7 +147,7 @@ Barındırılan hizmet, yöntemini çağırmak için kapsamlı arka plan görev 
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/ConsumeScopedServiceHostedService.cs?name=snippet1&highlight=19,22-35)]
 
-Hizmetler ' de kaydedilir `IHostBuilder.ConfigureServices` (*program.cs*). Barındırılan hizmet, `AddHostedService` uzantı yöntemiyle kaydedilir:
+Hizmetler ' de kaydedilir `IHostBuilder.ConfigureServices` ( *program.cs* ). Barındırılan hizmet, `AddHostedService` uzantı yöntemiyle kaydedilir:
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet2)]
 
@@ -169,12 +170,12 @@ Bir `MonitorLoop` hizmet, giriş cihazında anahtar her seçildiğinde barındı
 * , `IBackgroundTaskQueue` `MonitorLoop` Hizmete eklenir.
 * `IBackgroundTaskQueue.QueueBackgroundWorkItem` bir iş öğesini kuyruğa almak için çağrılır.
 * Çalışma öğesi uzun süre çalışan bir arka plan görevinin benzetimini yapar:
-  * Üç 5-ikinci gecikme () yürütülür `Task.Delay` .
+  * 3 5-ikinci gecikmeler yürütülür ( `Task.Delay` ).
   * `try-catch` <xref:System.OperationCanceledException> Görev iptal edildiğinde bir ifade yakalar.
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Services/MonitorLoop.cs?name=snippet_Monitor&highlight=7,33)]
 
-Hizmetler ' de kaydedilir `IHostBuilder.ConfigureServices` (*program.cs*). Barındırılan hizmet, `AddHostedService` uzantı yöntemiyle kaydedilir:
+Hizmetler ' de kaydedilir `IHostBuilder.ConfigureServices` ( *program.cs* ). Barındırılan hizmet, `AddHostedService` uzantı yöntemiyle kaydedilir:
 
 [!code-csharp[](hosted-services/samples/3.x/BackgroundTasksSample/Program.cs?name=snippet3)]
 
@@ -186,7 +187,7 @@ Hizmetler ' de kaydedilir `IHostBuilder.ConfigureServices` (*program.cs*). Barı
 
 ::: moniker range="< aspnetcore-3.0"
 
-ASP.NET Core, arka plan görevleri *barındırılan hizmetler*olarak uygulanabilir. Barındırılan hizmet, arabirimi uygulayan bir arka plan görevi mantığı olan bir sınıftır <xref:Microsoft.Extensions.Hosting.IHostedService> . Bu konuda üç barındırılan hizmet örneği sunulmaktadır:
+ASP.NET Core, arka plan görevleri *barındırılan hizmetler* olarak uygulanabilir. Barındırılan hizmet, arabirimi uygulayan bir arka plan görevi mantığı olan bir sınıftır <xref:Microsoft.Extensions.Hosting.IHostedService> . Bu konuda üç barındırılan hizmet örneği sunulmaktadır:
 
 * Bir Zamanlayıcı üzerinde çalışan arka plan görevi.
 * [Kapsamlı bir hizmeti](xref:fundamentals/dependency-injection#service-lifetimes)etkinleştiren barındırılan hizmet. Kapsamlı hizmet [bağımlılık ekleme (dı)](xref:fundamentals/dependency-injection) kullanabilir

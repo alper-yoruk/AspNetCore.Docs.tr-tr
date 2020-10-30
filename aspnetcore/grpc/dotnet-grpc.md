@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 10/17/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,18 +18,18 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/dotnet-grpc
-ms.openlocfilehash: 18d504d7a130aeaa9f8ab6cca6c92dab5febfae6
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: f34e1543d9695e138a85db3b79e013cf5fb6d138
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633246"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059916"
 ---
 # <a name="manage-protobuf-references-with-dotnet-grpc"></a>dotnet-grpc ile Protobuf başvurularını yönetme
 
 [John Luo](https://github.com/juntaoluo) tarafından
 
-`dotnet-grpc` , bir .NET gRPC projesindeki [prototip (*. proto*)](xref:grpc/basics#proto-file) başvurularını yönetmeye yönelik .NET Core küresel bir araçtır. Araç, prototipleme başvurularını eklemek, yenilemek, kaldırmak ve listelemek için kullanılabilir.
+`dotnet-grpc` , bir .NET gRPC projesindeki [prototip ( *. proto* )](xref:grpc/basics#proto-file) başvurularını yönetmeye yönelik .NET Core küresel bir araçtır. Araç, prototipleme başvurularını eklemek, yenilemek, kaldırmak ve listelemek için kullanılabilir.
 
 ## <a name="installation"></a>Yükleme
 
@@ -82,7 +83,7 @@ dotnet grpc add-file [options] <files>...
 | -p | --Proje | Üzerinde çalışılacak proje dosyasının yolu. Bir dosya belirtilmemişse, komut geçerli dizinde bir arama yapar.
 | -s | --Hizmetler | Oluşturulması gereken gRPC Hizmetleri türü. `Default`Belirtilmişse, `Both` Web projeleri için kullanılır ve `Client` Web dışı projeler için kullanılır. Kabul edilen değerler,,,, `Both` `Client` `Default` `None` `Server` .
 | -i | --ek-içeri aktarma-Dizin | Prototip dosyaları için içeri aktarmalar çözümlenirken kullanılacak ek dizinler. Bu, yolların noktalı virgülle ayrılmış listesidir.
-| | --erişim | Oluşturulan C# sınıfları için kullanılacak erişim değiştiricisi. Varsayılan değer: `Public`. Kabul edilen değerler `Internal` şunlardır `Public` .
+| | --erişim | Oluşturulan C# sınıfları için kullanılacak erişim değiştiricisi. `Public` varsayılan değerdir. Kabul edilen değerler `Internal` şunlardır `Public` .
 
 ### <a name="add-url"></a>URL Ekle
 
@@ -108,7 +109,7 @@ dotnet-grpc add-url [options] <url>
 | -p | --Proje | Üzerinde çalışılacak proje dosyasının yolu. Bir dosya belirtilmemişse, komut geçerli dizinde bir arama yapar.
 | -s | --Hizmetler | Oluşturulması gereken gRPC Hizmetleri türü. `Default`Belirtilmişse, `Both` Web projeleri için kullanılır ve `Client` Web dışı projeler için kullanılır. Kabul edilen değerler,,,, `Both` `Client` `Default` `None` `Server` .
 | -i | --ek-içeri aktarma-Dizin | Prototip dosyaları için içeri aktarmalar çözümlenirken kullanılacak ek dizinler. Bu, yolların noktalı virgülle ayrılmış listesidir.
-| | --erişim | Oluşturulan C# sınıfları için kullanılacak erişim değiştiricisi. Varsayılan değer `Public` . Kabul edilen değerler `Internal` şunlardır `Public` .
+| | --erişim | Oluşturulan C# sınıfları için kullanılacak erişim değiştiricisi. Varsayılan değer `Public` olarak belirlenmiştir. Kabul edilen değerler `Internal` şunlardır `Public` .
 
 ## <a name="remove"></a>Kaldır
 

@@ -5,6 +5,7 @@ description: ASP.NET Core veri koruma anahtarı depolama biçiminin uygulama ayr
 ms.author: riande
 ms.date: 04/08/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-storage-format
-ms.openlocfilehash: daf86d3e3357d42ddad74d5e2f06e00e0e24db07
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 4a8503964c98d1828dc9d02640a7621b370e679c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631998"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060150"
 ---
 # <a name="key-storage-format-in-aspnet-core"></a>ASP.NET Core 'de anahtar depolama biçimi
 
@@ -34,7 +35,7 @@ Nesneler, XML gösteriminde Rest olarak depolanır. Anahtar depolaması için va
 
 ## <a name="the-key-element"></a>\<key>Öğe
 
-Anahtarlar, anahtar deposundaki üst düzey nesneler olarak mevcuttur. Kural anahtarlarına göre anahtar adı **-{Guid}. xml**, burada {GUID} anahtar kimliğidir. Bu tür dosyalar tek bir anahtar içerir. Dosya biçimi aşağıdaki gibidir.
+Anahtarlar, anahtar deposundaki üst düzey nesneler olarak mevcuttur. Kural anahtarlarına göre anahtar adı **-{Guid}. xml** , burada {GUID} anahtar kimliğidir. Bu tür dosyalar tek bir anahtar içerir. Dosya biçimi aşağıdaki gibidir.
 
 ```xml
 <?xml version="1.0" encoding="utf-8"?>
@@ -77,7 +78,7 @@ Dıştaki \<descriptor> öğe, ıauthenticatedencryptordescriptordeserializer uy
 
 ## <a name="the-encryptedsecret-element"></a>\<encryptedSecret>Öğe
 
-[Rest üzerinde gizli dizi şifrelemesi etkinse](xref:security/data-protection/implementation/key-encryption-at-rest)gizli anahtar malzemesinin şifrelenmiş biçimini içeren bir ** &lt; &gt; encryptedsecret** öğesi mevcut olabilir. Özniteliği, `decryptorType` [ıxmldecryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmldecryptor)uygulayan bir türün derleme nitelikli adıdır. Bu tür, iç ** &lt; EncryptedKey &gt; ** öğesini okumaktan ve özgün düz metin kurtarmak için şifresini çözmekten sorumludur.
+[Rest üzerinde gizli dizi şifrelemesi etkinse](xref:security/data-protection/implementation/key-encryption-at-rest)gizli anahtar malzemesinin şifrelenmiş biçimini içeren bir **&lt; &gt; encryptedsecret** öğesi mevcut olabilir. Özniteliği, `decryptorType` [ıxmldecryptor](/dotnet/api/microsoft.aspnetcore.dataprotection.xmlencryption.ixmldecryptor)uygulayan bir türün derleme nitelikli adıdır. Bu tür, iç **&lt; EncryptedKey &gt;** öğesini okumaktan ve özgün düz metin kurtarmak için şifresini çözmekten sorumludur.
 
 ' De olduğu gibi `<descriptor>` , öğesinin belirli biçimi `<encryptedSecret>` kullanımda olan Rest şifreleme mekanizmasına bağlıdır. Yukarıdaki örnekte, ana anahtar açıklama başına Windows DPAPI kullanılarak şifrelenir.
 

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/memory
-ms.openlocfilehash: 7f1d20687f6dd588e125acf3815815c2bcf0cd04
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 6d2a89ec7c64728bc585ad235293f2277f9a66f7
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722689"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061489"
 ---
 # <a name="memory-management-and-garbage-collection-gc-in-aspnet-core"></a>ASP.NET Core 'de bellek yönetimi ve çöp toplama (GC)
 
@@ -137,8 +138,8 @@ Yukarıdaki grafik şunları gösterir:
 
 .NET atık toplayıcısı 'nda iki farklı mod vardır:
 
-* **Iş Istasyonu GC**: Masaüstü için iyileştirildi.
-* **Sunucu GC**. ASP.NET Core uygulamalar için varsayılan GC. Sunucu için iyileştirildi.
+* **Iş Istasyonu GC** : Masaüstü için iyileştirildi.
+* **Sunucu GC** . ASP.NET Core uygulamalar için varsayılan GC. Sunucu için iyileştirildi.
 
 GC modu, proje dosyasında veya yayımlanan uygulamanın dosyası *runtimeconfig.js* açık olarak ayarlanabilir. Aşağıdaki biçimlendirme `ServerGarbageCollection` Proje dosyasındaki ayarı gösterir:
 
@@ -235,7 +236,7 @@ Kullanıcı kodunda, aşağıdakilerden biri ile aynı sızıntı gerçekleşece
 
 ### <a name="large-objects-heap"></a>Büyük nesne yığını
 
-Sık bellek ayırma/ücretsiz döngüler, özellikle büyük bellek öbekleri ayrılırken belleği parçalara ayırıyor. Nesneler bitişik bellek bloklarına ayrılır. Parçalanmayı azaltmak için, GC belleği serbest bırakır, birleştirmeyi dener. Bu işleme **sıkıştırma**adı verilir. Sıkıştırma, nesneleri taşımayı içerir. Büyük nesnelerin taşınması, bir performans cezası getirir. Bu nedenle GC, büyük [nesne yığını](/dotnet/standard/garbage-collection/large-object-heap) (LOH) olarak adlandırılan _büyük_ nesneler için özel bir bellek bölgesi oluşturur. 85.000 bayttan (yaklaşık 83 KB) büyük olan nesneler şunlardır:
+Sık bellek ayırma/ücretsiz döngüler, özellikle büyük bellek öbekleri ayrılırken belleği parçalara ayırıyor. Nesneler bitişik bellek bloklarına ayrılır. Parçalanmayı azaltmak için, GC belleği serbest bırakır, birleştirmeyi dener. Bu işleme **sıkıştırma** adı verilir. Sıkıştırma, nesneleri taşımayı içerir. Büyük nesnelerin taşınması, bir performans cezası getirir. Bu nedenle GC, büyük [nesne yığını](/dotnet/standard/garbage-collection/large-object-heap) (LOH) olarak adlandırılan _büyük_ nesneler için özel bir bellek bölgesi oluşturur. 85.000 bayttan (yaklaşık 83 KB) büyük olan nesneler şunlardır:
 
 * LOH 'ye yerleştirildi.
 * Düzenlenmedi.
@@ -271,7 +272,7 @@ Aşağıdaki grafikte `/api/loh/84975` , en fazla yük altında uç nokta çağ�
 
 ![önceki grafik](memory/_static/loh1.png)
 
-Aşağıdaki grafik, uç noktayı çağırmanın bellek profilini gösterir `/api/loh/84976` ve *yalnızca bir bayt daha*ayırarak aşağıda verilmiştir:
+Aşağıdaki grafik, uç noktayı çağırmanın bellek profilini gösterir `/api/loh/84976` ve *yalnızca bir bayt daha* ayırarak aşağıda verilmiştir:
 
 ![önceki grafik](memory/_static/loh2.png)
 

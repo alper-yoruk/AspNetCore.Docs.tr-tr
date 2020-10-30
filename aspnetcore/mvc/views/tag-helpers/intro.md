@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: H1Hack27Feb2017
 ms.date: 03/18/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/intro
-ms.openlocfilehash: 345d20494111b808dac9678637de060169730a53
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 781365d99c6d36d8abaec9681128ba712db8cb88
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865352"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060670"
 ---
 # <a name="tag-helpers-in-aspnet-core"></a>ASP.NET Core etiket yardımcıları
 
@@ -75,13 +76,13 @@ Etiket Yardımcıları kapsamı `@addTagHelper` ,, `@removeTagHelper` ve "!" ger
 
 ### <a name="addtaghelper-makes-tag-helpers-available"></a>`@addTagHelper` Etiket Yardımcıları kullanılabilir hale getirir
 
-*Authoringtaghelmakaadı*adlı yeni bir ASP.NET Core Web uygulaması oluşturursanız, projenize aşağıdaki *Görünümler/_ViewImports. cshtml* dosyası eklenecektir:
+*Authoringtaghelmakaadı* adlı yeni bir ASP.NET Core Web uygulaması oluşturursanız, projenize aşağıdaki *Görünümler/_ViewImports. cshtml* dosyası eklenecektir:
 
 [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopy.cshtml?highlight=2&range=2-3)]
 
-`@addTagHelper`Yönerge, etiket yardımcılarını görünüm için kullanılabilir hale getirir. Bu durumda, görünüm dosyası sayfalar */_ViewImports. cshtml*'dir ve varsayılan olarak *Sayfalar* klasörü ve alt klasörlerdeki tüm dosyalar tarafından devralınır. Etiket Yardımcıları kullanılabilir hale getirme. Yukarıdaki kod, \* belirtilen derlemedeki tüm etiket yardımcılarını (*Microsoft. Aspnetcore. Mvc. Taghelmakat*), *Görünümler* dizinindeki veya alt dizininde bulunan her görünüm dosyası için kullanılabilir olacağını belirtmek için joker karakter sözdizimini ("") kullanır. Sonraki ilk parametre, `@addTagHelper` yüklenecek etiket yardımcıları (" \* " tüm etiket yardımcıları için kullanıyoruz) ve ikinci parametre olan "Microsoft. aspnetcore. Mvc. Taghel,", etiket yardımcıları içeren derlemeyi belirtir. *Microsoft. AspNetCore. Mvc. Taghelmakatem* , yerleşik ASP.NET Core etiket yardımcıları için derlemedir.
+`@addTagHelper`Yönerge, etiket yardımcılarını görünüm için kullanılabilir hale getirir. Bu durumda, görünüm dosyası sayfalar */_ViewImports. cshtml* 'dir ve varsayılan olarak *Sayfalar* klasörü ve alt klasörlerdeki tüm dosyalar tarafından devralınır. Etiket Yardımcıları kullanılabilir hale getirme. Yukarıdaki kod, \* belirtilen derlemedeki tüm etiket yardımcılarını ( *Microsoft. Aspnetcore. Mvc. Taghelmakat* ), *Görünümler* dizinindeki veya alt dizininde bulunan her görünüm dosyası için kullanılabilir olacağını belirtmek için joker karakter sözdizimini ("") kullanır. Sonraki ilk parametre, `@addTagHelper` yüklenecek etiket yardımcıları (" \* " tüm etiket yardımcıları için kullanıyoruz) ve ikinci parametre olan "Microsoft. aspnetcore. Mvc. Taghel,", etiket yardımcıları içeren derlemeyi belirtir. *Microsoft. AspNetCore. Mvc. Taghelmakatem* , yerleşik ASP.NET Core etiket yardımcıları için derlemedir.
 
-Bu projedeki tüm etiket yardımcılarını ortaya çıkarmak için ( *Authoringtaghelmakatı*adlı bir derleme oluşturur), aşağıdakileri kullanın:
+Bu projedeki tüm etiket yardımcılarını ortaya çıkarmak için ( *Authoringtaghelmakatı* adlı bir derleme oluşturur), aşağıdakileri kullanın:
 
 [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImportsCopy.cshtml?highlight=3)]
 
@@ -93,7 +94,7 @@ Projeniz `EmailTagHelper` varsayılan ad alanı () ile bir içeriyorsa `Authorin
 @addTagHelper AuthoringTagHelpers.TagHelpers.EmailTagHelper, AuthoringTagHelpers
 ```
 
-Bir FQN kullanarak bir görünüme bir etiket Yardımcısı eklemek için, önce FQN ( `AuthoringTagHelpers.TagHelpers.EmailTagHelper` ) ve ardından derleme adı (*Authoringtaghelmakaı*) eklersiniz. Çoğu geliştirici " \* " joker sözdizimini kullanmayı tercih eder. Joker karakter sözdizimi "" joker karakterini \* BIR FQN soneki olarak eklemenize olanak tanır. Örneğin, aşağıdaki yönergelerden herhangi biri içine alınacaktır `EmailTagHelper` :
+Bir FQN kullanarak bir görünüme bir etiket Yardımcısı eklemek için, önce FQN ( `AuthoringTagHelpers.TagHelpers.EmailTagHelper` ) ve ardından derleme adı ( *Authoringtaghelmakaı* ) eklersiniz. Çoğu geliştirici " \* " joker sözdizimini kullanmayı tercih eder. Joker karakter sözdizimi "" joker karakterini \* BIR FQN soneki olarak eklemenize olanak tanır. Örneğin, aşağıdaki yönergelerden herhangi biri içine alınacaktır `EmailTagHelper` :
 
 ```cshtml
 @addTagHelper AuthoringTagHelpers.TagHelpers.E*, AuthoringTagHelpers
@@ -106,7 +107,7 @@ Daha önce bahsedildiği gibi, `@addTagHelper` *views/_ViewImports. cshtml* dosy
 
 ### <a name="removetaghelper-removes-tag-helpers"></a>`@removeTagHelper` Etiket Yardımcıları kaldırır
 
-, İle `@removeTagHelper` aynı iki parametreye sahiptir `@addTagHelper` ve daha önce eklenmiş bir etiket yardımcısını kaldırır. Örneğin, `@removeTagHelper` belirli bir görünüme uygulandığında, belirtilen etiket Yardımcısı görünümden kaldırılır. `@removeTagHelper`Bir *views/Folder/_ViewImports. cshtml* dosyasında kullanmak, belirtilen etiket yardımcısını *klasördeki*tüm görünümlerden kaldırır.
+, İle `@removeTagHelper` aynı iki parametreye sahiptir `@addTagHelper` ve daha önce eklenmiş bir etiket yardımcısını kaldırır. Örneğin, `@removeTagHelper` belirli bir görünüme uygulandığında, belirtilen etiket Yardımcısı görünümden kaldırılır. `@removeTagHelper`Bir *views/Folder/_ViewImports. cshtml* dosyasında kullanmak, belirtilen etiket yardımcısını *klasördeki* tüm görünümlerden kaldırır.
 
 ### <a name="controlling-tag-helper-scope-with-the-_viewimportscshtml-file"></a>Etiket Yardımcısı kapsamını *_ViewImports. cshtml* dosyası ile denetleme
 
@@ -272,7 +273,7 @@ Visual Studio Düzenleyicisi, kayıt formunun etiket Yardımcısı yaklaşımın
 
 ## <a name="customizing-the-tag-helper-element-font"></a>Etiket Yardımcısı öğe yazı tipini özelleştirme
 
-Yazı tipini ve renklendirmeyi **Araçlar**  >  **Seçenekler**  >  **ortam**  >  **yazı tiplerinden ve renklerinden**özelleştirebilirsiniz:
+Yazı tipini ve renklendirmeyi **Araçlar**  >  **Seçenekler**  >  **ortam**  >  **yazı tiplerinden ve renklerinden** özelleştirebilirsiniz:
 
 ![image](intro/_static/fontoptions2.png)
 

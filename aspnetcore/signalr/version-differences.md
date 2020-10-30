@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: bradyg
 ms.date: 11/21/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/version-differences
-ms.openlocfilehash: 965fbb3d8007cb64aaf51d82d87ed7a3a5298e9b
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: c4c0ff83cb789e9aa35085496daa461404615726
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90721794"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061216"
 ---
 # <a name="differences-between-aspnet-no-locsignalr-and-aspnet-core-no-locsignalr"></a>ASP.NET SignalR ve ASP.NET Core arasındaki farklar SignalR
 
@@ -38,7 +39,7 @@ ASP.NET Core SignalR , ASP.NET için istemcilerle veya sunucularla uyumlu değil
 | **İstemci NuGet paketleri** | [Microsoft. AspNet. SignalR . İstemcilerinin](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.Client/)<br>[Microsoft. AspNet. SignalR . JS](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.JS/) | [Microsoft. AspNetCore. SignalR . İstemcilerinin](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) |
 | **JavaScript istemcisi NPM paketi** | [SignalR](https://www.npmjs.com/package/signalr) | [`@microsoft/signalr`](https://www.npmjs.com/package/@microsoft/signalr) |
 | **Java istemcisi** | [GitHub deposu](https://github.com/SignalR/java-client) (kullanım dışı)  | Maven paketi [com. Microsoft. SignalR](https://search.maven.org/artifact/com.microsoft.signalr/signalr) |
-| **Sunucu uygulaması türü** | ASP.NET (System. Web) veya OWıN Self-Host | ASP.NET Core |
+| **Sunucu uygulaması türü** | ASP.NET (System. Web) veya OWIN Self-Host | ASP.NET Core |
 | **Desteklenen sunucu platformları** | .NET Framework 4,5 veya üzeri | .NET Core 3,0 veya üzeri |
 
 ::: moniker-end
@@ -51,7 +52,7 @@ ASP.NET Core SignalR , ASP.NET için istemcilerle veya sunucularla uyumlu değil
 | **İstemci NuGet paketleri** | [Microsoft. AspNet. SignalR . İstemcilerinin](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.Client/)<br>[Microsoft. AspNet. SignalR . JS](https://www.nuget.org/packages/Microsoft.AspNet.SignalR.JS/) | [Microsoft. AspNetCore. SignalR . İstemcilerinin](https://www.nuget.org/packages/Microsoft.AspNetCore.SignalR.Client/) |
 | **JavaScript istemcisi NPM paketi** | [SignalR](https://www.npmjs.com/package/signalr) | [`@aspnet/signalr`](https://www.npmjs.com/package/@aspnet/signalr) |
 | **Java istemcisi** | [GitHub deposu](https://github.com/SignalR/java-client) (kullanım dışı)  | Maven paketi [com. Microsoft. SignalR](https://search.maven.org/artifact/com.microsoft.signalr/signalr) |
-| **Sunucu uygulaması türü** | ASP.NET (System. Web) veya OWıN Self-Host | ASP.NET Core |
+| **Sunucu uygulaması türü** | ASP.NET (System. Web) veya OWIN Self-Host | ASP.NET Core |
 | **Desteklenen sunucu platformları** | .NET Framework 4,5 veya üzeri | .NET Framework 4.6.1 veya üzeri<br>.NET Core 2,1 veya üzeri |
 
 ::: moniker-end
@@ -202,7 +203,8 @@ JQuery üzerindeki bağımlılık kaldırılmıştır, ancak projeler jQuery kul
 
 ### <a name="internet-explorer-support"></a>Internet Explorer desteği
 
-ASP.NET Core, SignalR Microsoft Internet Explorer 11 veya üstünü gerektirir (ASP.net SignalR desteklenen Microsoft Internet Explorer 8 ve üzeri).
+ASP.NET Core Microsoft SignalR Internet Explorer 11 veya üstünü destekler, ancak ASP.net SignalR Microsoft Internet Explorer 8 veya üstünü destekler.
+Tarayıcı desteği hakkında daha fazla bilgi için [desteklenen platformlarda](xref:signalr/supported-platforms#javascript-client)bulunabilir.
 
 ### <a name="javascript-client-method-syntax"></a>JavaScript istemci yöntemi sözdizimi
 

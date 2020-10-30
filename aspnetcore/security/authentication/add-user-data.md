@@ -6,6 +6,7 @@ ms.author: riande
 ms.date: 03/26/2020
 ms.custom: mvc, seodec18
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/add-user-data
-ms.openlocfilehash: a71395e82ed15dae753888a438471495208a14da
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a4e1fd780947cfa5f09fb1e03964595fa09f0f18
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631855"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061424"
 ---
 # <a name="add-download-and-delete-custom-user-data-to-no-locidentity-in-an-aspnet-core-project"></a>ASP.NET Core projesindeki özel kullanıcı verilerini ekleme, indirme ve silme Identity
 
@@ -37,7 +38,7 @@ Proje örneği bir sayfalar Web uygulamasından oluşturulur Razor , ancak yöne
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/authentication/add-user-data) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -57,7 +58,7 @@ Proje örneği bir sayfalar Web uygulamasından oluşturulur Razor , ancak yöne
 
 ::: moniker range=">= aspnetcore-3.0"
 
-* Visual Studio **Dosya** menüsünden **Yeni**  >  **Proje**' yi seçin. [İndirme örnek](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data) kodunun ad alanıyla eşleştirmek Istiyorsanız projeyi **WebApp1** olarak adlandırın.
+* Visual Studio **Dosya** menüsünden **Yeni**  >  **Proje** ' yi seçin. [İndirme örnek](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data) kodunun ad alanıyla eşleştirmek Istiyorsanız projeyi **WebApp1** olarak adlandırın.
 * **ASP.NET Core Web uygulaması** > **Tamam ' ı** seçin
 * Açılan listede **ASP.NET Core 3,0** ' i seçin
 * **Web uygulaması** > **Tamam 'ı** seçin
@@ -67,7 +68,7 @@ Proje örneği bir sayfalar Web uygulamasından oluşturulur Razor , ancak yöne
 
 ::: moniker range="< aspnetcore-3.0"
 
-* Visual Studio **Dosya** menüsünden **Yeni**  >  **Proje**' yi seçin. [İndirme örnek](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data) kodunun ad alanıyla eşleştirmek Istiyorsanız projeyi **WebApp1** olarak adlandırın.
+* Visual Studio **Dosya** menüsünden **Yeni**  >  **Proje** ' yi seçin. [İndirme örnek](https://github.com/dotnet/AspNetCore.Docs/tree/live/aspnetcore/security/authentication/add-user-data) kodunun ad alanıyla eşleştirmek Istiyorsanız projeyi **WebApp1** olarak adlandırın.
 * **ASP.NET Core Web uygulaması** > **Tamam ' ı** seçin
 * Açılan listede **ASP.NET Core 2,2** ' i seçin
 * **Web uygulaması** > **Tamam 'ı** seçin
@@ -88,16 +89,16 @@ dotnet new webapp -o WebApp1
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **Çözüm Gezgini**, projeye sağ tıklayıp **Add**  >  **Yeni iskli öğe**Ekle >.
-* **Yapı iskelesi Ekle** iletişim kutusunun sol bölmesinde Ekle ' yi seçin **Identity**  >  **Add**.
-* **Ekle Identity ** iletişim kutusunda aşağıdaki seçenekler:
+* **Çözüm Gezgini** , projeye sağ tıklayıp **Add**  >  **Yeni iskli öğe** Ekle >.
+* **Yapı iskelesi Ekle** iletişim kutusunun sol bölmesinde Ekle ' yi seçin **Identity**  >  **Add** .
+* **Ekle Identity** iletişim kutusunda aşağıdaki seçenekler:
   * Var olan düzen dosyasını seçin  *~/Pages/Shared/_Layout. cshtml*
   * Geçersiz kılmak için aşağıdaki dosyaları seçin:
     * **Hesap/kayıt**
     * **Hesap/yönet/Dizin**
-  * **+** Yeni bir **veri bağlamı sınıfı**oluşturmak için düğmeyi seçin. Proje **WebApp1**olarak adlandırılmışsa türü (**WebApp1. modeller. WebApp1Context** ) kabul edin.
-  * **+** Yeni bir **Kullanıcı sınıfı**oluşturmak için düğmeyi seçin. **Ekle**> ( **projenin adı****WebApp1User** ) öğesini kabul edin.
-* **Ekle**’yi seçin.
+  * **+** Yeni bir **veri bağlamı sınıfı** oluşturmak için düğmeyi seçin. Proje **WebApp1** olarak adlandırılmışsa türü ( **WebApp1. modeller. WebApp1Context** ) kabul edin.
+  * **+** Yeni bir **Kullanıcı sınıfı** oluşturmak için düğmeyi seçin. **Ekle** > ( **projenin adı****WebApp1User** ) öğesini kabul edin.
+* **Ekle** ’yi seçin.
 
 # <a name="net-core-cli"></a>[.NET Core CLI](#tab/netcore-cli)
 
@@ -142,7 +143,7 @@ Aşağıdaki adımları gerçekleştirmek için [geçişler, UseAuthentication v
 
 ## <a name="add-custom-user-data-to-the-no-locidentity-db"></a>Veritabanına özel kullanıcı verileri ekleme Identity
 
-`IdentityUser`Türetilmiş sınıfı özel özelliklerle güncelleştirin. Projeyi WebApp1 olarak adlandırdıysanız, dosya */ Identity /Data/webapp1user.cs*olarak adlandırılır. Dosyayı aşağıdaki kodla güncelleştirin:
+`IdentityUser`Türetilmiş sınıfı özel özelliklerle güncelleştirin. Projeyi WebApp1 olarak adlandırdıysanız, dosya */ Identity /Data/webapp1user.cs* olarak adlandırılır. Dosyayı aşağıdaki kodla güncelleştirin:
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -216,7 +217,7 @@ Projeyi derleyin.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Visual Studio **Paket Yöneticisi konsolunda**:
+Visual Studio **Paket Yöneticisi konsolunda** :
 
 ```powershell
 Add-Migration CustomUserData

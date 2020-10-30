@@ -5,6 +5,7 @@ description: Bir ASP.NET Core uygulamasında görünümler işlemeden önce orta
 ms.author: riande
 ms.date: 07/30/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/layout
-ms.openlocfilehash: 308e567e0480f83972ab7a55c7b957af83a164fd
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 502df268e7f5f33acfffccd5ec0bd65267fa12da
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630698"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060982"
 ---
 # <a name="layout-in-aspnet-core"></a>ASP.NET Core düzen
 
@@ -46,7 +47,7 @@ Bu belge, ASP.NET Core MVC için iki farklı yaklaşım için düzenleri açıkl
 
 Betikler ve stil sayfaları gibi ortak HTML yapıları da bir uygulama içindeki birçok sayfa tarafından sık kullanılır. Bu paylaşılan öğelerin tümü, bir *Düzen* dosyasında tanımlanabilir ve bu daha sonra uygulama içinde kullanılan herhangi bir görünüm tarafından başvurulabilirler. Düzenler görünümlerde yinelenen kodu azaltır.
 
-Kurala göre, bir ASP.NET Core uygulamasının varsayılan düzeni *_Layout. cshtml*olarak adlandırılır. Şablonlarla oluşturulan yeni ASP.NET Core projelerine yönelik düzen dosyaları şunlardır:
+Kurala göre, bir ASP.NET Core uygulamasının varsayılan düzeni *_Layout. cshtml* olarak adlandırılır. Şablonlarla oluşturulan yeni ASP.NET Core projelerine yönelik düzen dosyaları şunlardır:
 
 * Razor Sayfalar: *sayfa/paylaşılan/_Layout. cshtml*
 
@@ -68,7 +69,7 @@ Razor Görünümler bir `Layout` özelliğe sahiptir. Bireysel görünümler bu 
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/_ViewStart.cshtml?highlight=2)]
 
-Belirtilen Düzen tam yol (örneğin, */Pages/Shared/_Layout. cshtml* veya */views/Shared/_Layout. cshtml*) ya da kısmi bir ad kullanabilir (örnek: `_Layout` ). Kısmi bir ad sağlandığında, Razor Görünüm altyapısı, kendi standart bulma işlemini kullanarak düzen dosyasını arar. Önce işleyici yönteminin (veya denetleyicinin) bulunduğu klasör, sonra *paylaşılan* klasör tarafından aranır. Bu bulma işlemi, [kısmi görünümleri](xref:mvc/views/partial#partial-view-discovery)bulmak için kullanılan işlemle aynıdır.
+Belirtilen Düzen tam yol (örneğin, */Pages/Shared/_Layout. cshtml* veya */views/Shared/_Layout. cshtml* ) ya da kısmi bir ad kullanabilir (örnek: `_Layout` ). Kısmi bir ad sağlandığında, Razor Görünüm altyapısı, kendi standart bulma işlemini kullanarak düzen dosyasını arar. Önce işleyici yönteminin (veya denetleyicinin) bulunduğu klasör, sonra *paylaşılan* klasör tarafından aranır. Bu bulma işlemi, [kısmi görünümleri](xref:mvc/views/partial#partial-view-discovery)bulmak için kullanılan işlemle aynıdır.
 
 Varsayılan olarak, tüm mizanpajın çağırması gerekir `RenderBody` . Çağrısının yerleştirildiği her yerde `RenderBody` , görünümün içerikleri işlenir.
 
@@ -76,7 +77,7 @@ Varsayılan olarak, tüm mizanpajın çağırması gerekir `RenderBody` . Çağr
 <!-- https://stackoverflow.com/questions/23327578 -->
 ### <a name="sections"></a>Bölümler
 
-Bir düzen, çağırarak, isteğe bağlı olarak bir veya daha fazla *bölüme*başvurabilir `RenderSection` . Bölümler, belirli sayfa öğelerinin yerleştirilmesi gereken yerleri düzenlemek için bir yol sağlar. Her çağrısı, `RenderSection` Bu bölümün gerekli veya isteğe bağlı olup olmadığını belirtebilir:
+Bir düzen, çağırarak, isteğe bağlı olarak bir veya daha fazla *bölüme* başvurabilir `RenderSection` . Bölümler, belirli sayfa öğelerinin yerleştirilmesi gereken yerleri düzenlemek için bir yol sağlar. Her çağrısı, `RenderSection` Bu bölümün gerekli veya isteğe bağlı olup olmadığını belirtebilir:
 
 ```html
 <script type="text/javascript" src="~/scripts/global.js"></script>
@@ -96,7 +97,7 @@ Gerekli bir bölüm bulunamazsa, bir özel durum oluşturulur. Tek görünümler
 
 Yukarıdaki kodda *betikler/main.js* `scripts` sayfa veya görünümdeki bölümüne eklenir. Aynı uygulamadaki diğer sayfalar veya görünümler bu betiği gerektirmeyebilir ve betikler bölümü tanımlamaz.
 
-Aşağıdaki biçimlendirme *_ValidationScriptsPartial. cshtml*öğesini Işlemek Için [kısmi etiket yardımcısını](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper) kullanır:
+Aşağıdaki biçimlendirme *_ValidationScriptsPartial. cshtml* öğesini Işlemek Için [kısmi etiket yardımcısını](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper) kullanır:
 
 ```html
 @section Scripts {
@@ -136,7 +137,7 @@ Dosya Razor , işlevler ve bölüm tanımları gibi diğer özellikleri destekle
 
 [!code-cshtml[](../../common/samples/WebApplication1/Views/_ViewImports.cshtml)]
 
-ASP.NET Core MVC uygulamasının *_ViewImports. cshtml* dosyası genellikle *Sayfalar* (veya *Görünümler*) klasörüne yerleştirilir. Bir *_ViewImports. cshtml* dosyası herhangi bir klasöre yerleştirilebilir, bu durumda yalnızca söz konusu klasör ve alt klasörleri içindeki sayfalara veya görünümlere uygulanacaktır. `_ViewImports` dosyalar, kök düzeyinden başlayarak işlenir ve sonra her bir klasör için sayfanın konumu veya görünümü görüntülenir. `_ViewImports` kök düzeyinde belirtilen ayarlar klasör düzeyinde geçersiz kılınabilir.
+ASP.NET Core MVC uygulamasının *_ViewImports. cshtml* dosyası genellikle *Sayfalar* (veya *Görünümler* ) klasörüne yerleştirilir. Bir *_ViewImports. cshtml* dosyası herhangi bir klasöre yerleştirilebilir, bu durumda yalnızca söz konusu klasör ve alt klasörleri içindeki sayfalara veya görünümlere uygulanacaktır. `_ViewImports` dosyalar, kök düzeyinden başlayarak işlenir ve sonra her bir klasör için sayfanın konumu veya görünümü görüntülenir. `_ViewImports` kök düzeyinde belirtilen ayarlar klasör düzeyinde geçersiz kılınabilir.
 
 Örneğin, şunu varsayın:
 
@@ -158,7 +159,7 @@ Dosya hiyerarşisinde birden çok *_ViewImports. cshtml* dosyası bulunursa, yö
 
 ## <a name="running-code-before-each-view"></a>Her görünümden önce kod çalıştırma
 
-Her görünüm veya sayfadan önce çalıştırılması gereken kod *_ViewStart. cshtml* dosyasına yerleştirilmelidir. Kurala göre, *_ViewStart. cshtml* dosyası *Sayfalar* (veya *Görünümler*) klasöründe bulunur. *_ViewStart. cshtml* 'de listelenen deyimler her tam görünüm (düzen değil ve kısmi görünümler değil) öncesinde çalıştırılır. [Viewwimports. cshtml](xref:mvc/views/layout#viewimports)gibi *_ViewStart. cshtml* de hiyerarşiktir. Görünüm veya sayfalar klasöründe bir *_ViewStart. cshtml* dosyası tanımlanmışsa, *Sayfalar* (veya *Görünümler*) klasörünün kökünde (varsa) tanımlandıktan sonra çalıştırılır.
+Her görünüm veya sayfadan önce çalıştırılması gereken kod *_ViewStart. cshtml* dosyasına yerleştirilmelidir. Kurala göre, *_ViewStart. cshtml* dosyası *Sayfalar* (veya *Görünümler* ) klasöründe bulunur. *_ViewStart. cshtml* 'de listelenen deyimler her tam görünüm (düzen değil ve kısmi görünümler değil) öncesinde çalıştırılır. [Viewwimports. cshtml](xref:mvc/views/layout#viewimports)gibi *_ViewStart. cshtml* de hiyerarşiktir. Görünüm veya sayfalar klasöründe bir *_ViewStart. cshtml* dosyası tanımlanmışsa, *Sayfalar* (veya *Görünümler* ) klasörünün kökünde (varsa) tanımlandıktan sonra çalıştırılır.
 
 Örnek bir *_ViewStart. cshtml* dosyası:
 
@@ -166,4 +167,4 @@ Her görünüm veya sayfadan önce çalıştırılması gereken kod *_ViewStart.
 
 Yukarıdaki dosya tüm görünümlerin *_Layout. cshtml* mizanpajını kullanacağı belirtir.
 
-*_ViewStart. cshtml* ve *_ViewImports. cshtml* genellikle */Pages/Shared* (veya */views/Shared*) klasörüne **yerleştirilmez** . Bu dosyaların uygulama düzeyi sürümleri doğrudan */Pages* (veya */views*) klasörüne yerleştirilmelidir.
+*_ViewStart. cshtml* ve *_ViewImports. cshtml* genellikle */Pages/Shared* (veya */views/Shared* ) klasörüne **yerleştirilmez** . Bu dosyaların uygulama düzeyi sürümleri doğrudan */Pages* (veya */views* ) klasörüne yerleştirilmelidir.

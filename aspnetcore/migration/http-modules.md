@@ -5,6 +5,7 @@ description: ''
 ms.author: riande
 ms.date: 12/07/2016
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/http-modules
-ms.openlocfilehash: 808215d103db9c5d63fe63b6875a222e6b0ba1fa
-ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
+ms.openlocfilehash: 9664f49bd709d2c9e46130773211c339e391d1f6
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92326620"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060709"
 ---
 # <a name="migrate-http-handlers-and-modules-to-aspnet-core-middleware"></a>ASP.NET Core ara yazılıma HTTP işleyicileri ve modülleri geçirme
 
@@ -57,7 +58,7 @@ ASP.NET Core ara yazılıma devam etmeden önce, ilk olarak HTTP modüllerinin v
 
 1. , <https://docs.microsoft.com/previous-versions/ms227673(v=vs.140)> ASP.NET tarafından tetiklenen bir dizi olaydır: [BeginRequest](/dotnet/api/system.web.httpapplication.beginrequest), [kimlik doğrulayan terequest](/dotnet/api/system.web.httpapplication.authenticaterequest), vb. Her modül, bir veya daha fazla olay için bir işleyici oluşturabilir.
 
-2. Aynı olay için, *Web.config*yapılandırıldığı sıra.
+2. Aynı olay için, *Web.config* yapılandırıldığı sıra.
 
 Modüllere ek olarak, *Global.asax.cs* dosyanıza yaşam döngüsü olaylarının işleyicilerini ekleyebilirsiniz. Bu işleyiciler, yapılandırılan modüllerdeki işleyicilerden sonra çalışır.
 
@@ -65,7 +66,7 @@ Modüllere ek olarak, *Global.asax.cs* dosyanıza yaşam döngüsü olaylarını
 
 **Ara yazılım HTTP modülleriyle ve işleyicilerinden daha basittir:**
 
-* Modüller, işleyiciler, *Global.asax.cs*, *Web.config* (IIS yapılandırması hariç) ve uygulama yaşam döngüsü kayboldu
+* Modüller, işleyiciler, *Global.asax.cs* , *Web.config* (IIS yapılandırması hariç) ve uygulama yaşam döngüsü kayboldu
 
 * Her iki modülün ve işleyicinin rolleri, ara yazılım tarafından ele alınmıştır
 
@@ -132,7 +133,7 @@ Modülünüzün işlevselliğini yeni ara yazılıma geçirdiğinizde, `HttpCont
 
 ## <a name="migrating-module-insertion-into-the-request-pipeline"></a>Modül ekleme isteği ardışık düzenine geçiriliyor
 
-HTTP modülleri, genellikle *Web.config*kullanarak istek ardışık düzenine eklenir:
+HTTP modülleri, genellikle *Web.config* kullanarak istek ardışık düzenine eklenir:
 
 [!code-xml[](../migration/http-modules/sample/Asp.Net4/Asp.Net4/Web.config?highlight=6&range=1-3,32-33,36,43,50,101)]
 
@@ -140,7 +141,7 @@ HTTP modülleri, genellikle *Web.config*kullanarak istek ardışık düzenine ek
 
 [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_Configure&highlight=16)]
 
-Yeni ara hattınızı eklediğiniz işlem hattının tam noktası, bir modül ( `BeginRequest` , `EndRequest` , vb.) olarak işlenen olaya ve *Web.config*içindeki modüller listenizde sıraya bağlıdır.
+Yeni ara hattınızı eklediğiniz işlem hattının tam noktası, bir modül ( `BeginRequest` , `EndRequest` , vb.) olarak işlenen olaya ve *Web.config* içindeki modüller listenizde sıraya bağlıdır.
 
 Daha önce belirtildiği gibi, ASP.NET Core hiçbir uygulama yaşam döngüsü yoktur ve bu işlem, yaşam döngüsünün işlenme sırası modüller tarafından kullanılan siparişten farklıdır. Bu, sipariş kararlarınızı daha zor hale getirir.
 
@@ -180,7 +181,7 @@ Dal tüm isteklerde çağrılmadan önce işlem hattına eklenen ara yazılım; 
 
 ## <a name="loading-middleware-options-using-the-options-pattern"></a>Seçenekler modelini kullanarak ara yazılım seçeneklerini yükleme
 
-Bazı modüller ve işleyiciler *Web.config*depolanan yapılandırma seçeneklerine sahiptir. Ancak ASP.NET Core *Web.config*yerine yeni bir yapılandırma modeli kullanılır.
+Bazı modüller ve işleyiciler *Web.config* depolanan yapılandırma seçeneklerine sahiptir. Ancak ASP.NET Core *Web.config* yerine yeni bir yapılandırma modeli kullanılır.
 
 Yeni [yapılandırma sistemi](xref:fundamentals/configuration/index) , bunu çözümlemek için size bu seçenekleri sunar:
 
@@ -194,7 +195,7 @@ Yeni [yapılandırma sistemi](xref:fundamentals/configuration/index) , bunu çö
 
 2. Seçenek değerlerini depolama
 
-   Yapılandırma sistemi istediğiniz her yerde seçenek değerlerini depolamanıza olanak tanır. Ancak, çoğu site * üzerindeappsettings.js*kullanır, bu nedenle bu yaklaşımı ele alacağız:
+   Yapılandırma sistemi istediğiniz her yerde seçenek değerlerini depolamanıza olanak tanır. Ancak, çoğu site *appsettings.json* tarafından kullanılır, bu yaklaşım şu şekilde ele alacağız:
 
    [!code-json[](http-modules/sample/Asp.Net.Core/appsettings.json?range=1,14-18)]
 
@@ -206,7 +207,7 @@ Yeni [yapılandırma sistemi](xref:fundamentals/configuration/index) , bunu çö
 
     Sınıfınızı güncelleştirin `Startup` :
 
-   1. *Üzerindeappsettings.js*kullanıyorsanız, bunu oluşturucuda yapılandırma oluşturucusuna ekleyin `Startup` :
+   1. Kullanıyorsanız *appsettings.json* , oluşturucunun yapılandırma oluşturucusuna ekleyin `Startup` :
 
       [!code-csharp[](../migration/http-modules/sample/Asp.Net.Core/Startup.cs?name=snippet_Ctor&highlight=5-6)]
 
@@ -234,9 +235,9 @@ Bu, farklı seçeneklerle aynı ara yazılımı iki kez kullanmak istiyorsanız 
 
 Çözüm, seçenek nesnelerini sınıfınıza gerçek seçenek değerleriyle almak `Startup` ve bunları doğrudan ara yazılım örneğine iletmektir.
 
-1. *appsettings.js* için ikinci bir anahtar ekleyin
+1. İkinci bir anahtar Ekle *appsettings.json*
 
-   Dosyadaki *appsettings.js* ikinci bir seçenek kümesini eklemek için, benzersiz bir şekilde tanımlamak için yeni bir anahtar kullanın:
+   Dosyaya ikinci bir seçenek kümesi eklemek için *appsettings.json* , benzersiz bir şekilde tanımlamak için yeni bir anahtar kullanın:
 
    [!code-json[](http-modules/sample/Asp.Net.Core/appsettings.json?range=1,10-18&highlight=2-5)]
 
@@ -323,7 +324,7 @@ Size her istek için benzersiz bir kimlik verir. Günlüklerinizi eklemek çok y
 [!code-csharp[](http-modules/sample/Asp.Net.Core/Middleware/HttpContextDemoMiddleware.cs?name=snippet_Form)]
 
 > [!WARNING]
-> Form değerlerini yalnızca içerik alt türü *x-www-form-urlencoded* veya *form-Data*ise okuyun.
+> Form değerlerini yalnızca içerik alt türü *x-www-form-urlencoded* veya *form-Data* ise okuyun.
 
 **HttpContext. Request. InputStream** şu şekilde çevirir:
 
@@ -379,7 +380,7 @@ public async Task Invoke(HttpContext httpContext)
 
 **HttpContext. Response. Cookie malar**
 
-Cookies, bir *set- Cookie * Response üst bilgisinde tarayıcıya seyahat ediyor. Sonuç olarak, ' cookie ın gönderilmesi yanıt üst bilgilerini göndermek için kullanılan geri çağırma işlemini gerektirir:
+Cookies, bir *set- Cookie* Response üst bilgisinde tarayıcıya seyahat ediyor. Sonuç olarak, ' cookie ın gönderilmesi yanıt üst bilgilerini göndermek için kullanılan geri çağırma işlemini gerektirir:
 
 ```csharp
 public async Task Invoke(HttpContext httpContext)

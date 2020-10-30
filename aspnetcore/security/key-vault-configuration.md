@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc, devx-track-azurecli
 ms.date: 02/07/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/key-vault-configuration
-ms.openlocfilehash: e3adbe127f618b8851b3a83025b27c066947e8b4
-ms.sourcegitcommit: d5ecad1103306fac8d5468128d3e24e529f1472c
+ms.openlocfilehash: 10a949831c180f51bc6bb9b8294150a558f9343c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/23/2020
-ms.locfileid: "92491580"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060137"
 ---
 # <a name="azure-key-vault-configuration-provider-in-aspnet-core"></a>ASP.NET Core Azure Key Vault yapılandırma sağlayıcısı
 
@@ -86,7 +87,7 @@ Hızlı başlangıç tarafından sunulan yönergeler [: Azure CLI kullanarak Azu
 
 1. [Azure Portal](https://portal.azure.com/)aşağıdaki yöntemlerden birini kullanarak Azure Cloud Shell 'i açın:
 
-   * Kod bloğunun sağ üst köşesindeki **Deneyin**’i seçin. Metin kutusunda "Azure CLı" arama dizesini kullanın.
+   * Kod bloğunun sağ üst köşesindeki **Deneyin** ’i seçin. Metin kutusunda "Azure CLı" arama dizesini kullanın.
    * **Cloud Shell Başlat** düğmesini kullanarak tarayıcınızda Cloud Shell açın.
    * Azure portal sağ üst köşesindeki menüdeki **Cloud Shell** düğmesini seçin.
 
@@ -119,30 +120,30 @@ Hızlı başlangıç tarafından sunulan yönergeler [: Azure CLI kullanarak Azu
 
 ## <a name="use-application-id-and-x509-certificate-for-non-azure-hosted-apps"></a>Azure 'da barındırılan uygulamalar için uygulama KIMLIĞI ve X. 509.440 sertifikası kullanın
 
-**Uygulama Azure dışında barındırıldığı zaman**bir anahtar kasasında kimlik doğrulaması yapmak IÇIN Azure AD, Azure Key Vault ve uygulamayı bir Azure ACTIVE DIRECTORY uygulama kimliği ve X. 509.440 sertifikası kullanacak şekilde yapılandırın. Daha fazla bilgi için bkz. [anahtarlar, gizlilikler ve sertifikalar hakkında](/azure/key-vault/about-keys-secrets-and-certificates).
+**Uygulama Azure dışında barındırıldığı zaman** bir anahtar kasasında kimlik doğrulaması yapmak IÇIN Azure AD, Azure Key Vault ve uygulamayı bir Azure ACTIVE DIRECTORY uygulama kimliği ve X. 509.440 sertifikası kullanacak şekilde yapılandırın. Daha fazla bilgi için bkz. [anahtarlar, gizlilikler ve sertifikalar hakkında](/azure/key-vault/about-keys-secrets-and-certificates).
 
 > [!NOTE]
 > Azure 'da barındırılan uygulamalar için uygulama KIMLIĞI ve X. 509.440 sertifikası kullanılması desteklenmekle birlikte, Azure 'da bir uygulama barındırılırken [Azure kaynakları Için Yönetilen kimlikler](#use-managed-identities-for-azure-resources) kullanmanızı öneririz. Yönetilen kimlikler, uygulamada veya geliştirme ortamında bir sertifikanın depolanmasını gerektirmez.
 
 Örnek uygulama, `#define` *program.cs* dosyasının en üstündeki ifade olarak AYARLANDıĞıNDA bir uygulama kimliği ve X. 509.440 sertifikası kullanır `Certificate` .
 
-1. PKCS # 12 Arşivi (*. pfx*) sertifikası oluşturun. Sertifika oluşturma seçenekleri Windows ve [OpenSSL](https://www.openssl.org/) [üzerinde MakeCert](/windows/desktop/seccrypto/makecert) içerir.
+1. PKCS # 12 Arşivi ( *. pfx* ) sertifikası oluşturun. Sertifika oluşturma seçenekleri Windows ve [OpenSSL](https://www.openssl.org/) [üzerinde MakeCert](/windows/desktop/seccrypto/makecert) içerir.
 1. Sertifikayı geçerli kullanıcının kişisel sertifika deposuna yükler. Anahtarı verilebilir olarak işaretlemek isteğe bağlıdır. Sertifikanın daha sonra bu işlemde kullanılan parmak izini aklınızda bulunur.
-1. PKCS # 12 Arşivi (*. pfx*) sertifikasını der kodlu bir sertifika (*. cer*) olarak dışarı aktarın.
-1. Uygulamayı Azure AD 'ye kaydedin (**uygulama kayıtları**).
-1. DER kodlu sertifikayı (*. cer*) Azure AD 'ye yükleyin:
+1. PKCS # 12 Arşivi ( *. pfx* ) sertifikasını der kodlu bir sertifika ( *. cer* ) olarak dışarı aktarın.
+1. Uygulamayı Azure AD 'ye kaydedin ( **uygulama kayıtları** ).
+1. DER kodlu sertifikayı ( *. cer* ) Azure AD 'ye yükleyin:
    1. Azure AD 'de uygulamayı seçin.
-   1. **Sertifikalar & gizli**dizi sayfasına gidin.
-   1. Ortak anahtarı içeren sertifikayı karşıya yüklemek için **sertifikayı karşıya yükle** ' yi seçin. *. Cer*, *. pek*veya *. CRT* sertifikası kabul edilebilir.
-1. Anahtar Kasası adı, uygulama KIMLIĞI ve sertifika parmak izini, uygulamanın *appsettings.js* dosyada depolayın.
+   1. **Sertifikalar & gizli** dizi sayfasına gidin.
+   1. Ortak anahtarı içeren sertifikayı karşıya yüklemek için **sertifikayı karşıya yükle** ' yi seçin. *. Cer* , *. pek* veya *. CRT* sertifikası kabul edilebilir.
+1. Anahtar Kasası adı, uygulama KIMLIĞI ve sertifika parmak izini uygulamanın *appsettings.json* dosyasına depolayın.
 1. Azure portal **ana** kasaları ' ne gidin.
 1. Azure Key Vault bölümünde, [üretim ortamındaki gizli dizi deposunda](#secret-storage-in-the-production-environment-with-azure-key-vault) oluşturduğunuz anahtar kasasını seçin.
-1. **Erişim ilkeleri**' ni seçin.
-1. **Erişim Ilkesi Ekle**' yi seçin.
+1. **Erişim ilkeleri** ' ni seçin.
+1. **Erişim Ilkesi Ekle** ' yi seçin.
 1. **Gizli izinleri** açın ve uygulamaya **Get** ve **list** izinleri sağlayın.
 1. **Sorumlu Seç** ' i seçin ve kayıtlı uygulamayı ada göre seçin. **Seç** düğmesini belirleyin.
-1. **Tamam**’ı seçin.
-1. **Kaydet**’i seçin.
+1. **Tamam** ’ı seçin.
+1. **Kaydet** ’i seçin.
 1. Uygulamayı dağıtın.
 
 `Certificate`Örnek uygulama, yapılandırma değerlerini, `IConfigurationRoot` parola adı ile aynı adla alır:
@@ -152,7 +153,7 @@ Hızlı başlangıç tarafından sunulan yönergeler [: Azure CLI kullanarak Azu
   * `config["Section:SecretName"]`
   * `config.GetSection("Section")["SecretName"]`
 
-X. 509.440 sertifikası işletim sistemi tarafından yönetiliyor. Uygulama, <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> *appsettings.js* dosya tarafından sağlanan değerlerle çağırır:
+X. 509.440 sertifikası işletim sistemi tarafından yönetiliyor. Uygulama <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> , dosya tarafından sağlanan değerlerle çağırır *appsettings.json* :
 
 [!code-csharp[](key-vault-configuration/samples/3.x/SampleApp/Program.cs?name=snippet1&highlight=20-23)]
 
@@ -162,7 +163,7 @@ X. 509.440 sertifikası işletim sistemi tarafından yönetiliyor. Uygulama, <xr
 * Uygulama KIMLIĞI: `627e911e-43cc-61d4-992e-12db9c81b413`
 * Sertifika parmak izi: `fe14593dd66b2406c5269d742d04b6e1ab03adb1`
 
-*appsettings.js*:
+*appsettings.json* :
 
 [!code-json[](key-vault-configuration/samples/3.x/SampleApp/appsettings.json?highlight=10-12)]
 
@@ -174,7 +175,7 @@ Azure **'a dağıtılan bir uygulama** , [Azure kaynakları için yönetilen kim
 
 Örnek uygulama, `#define` *program.cs* dosyasının en üstündeki Ifade olarak ayarlandığında Azure kaynakları için Yönetilen kimlikler kullanır `Managed` .
 
-Dosyanın * üzerine uygulamanınappsettings.js* kasa adını girin. Örnek uygulama sürüme ayarlandığında bir uygulama KIMLIĞI ve parola (Istemci gizli anahtarı) gerektirmez `Managed` , bu nedenle bu yapılandırma girişlerini yoksayabilirsiniz. Uygulama Azure 'a dağıtılır ve Azure, yalnızca *appsettings.json* dosyasında depolanan kasa adını kullanarak Azure Key Vault erişmek için uygulamanın kimliğini doğrular.
+Kasa adını uygulamanın *appsettings.json* dosyasına girin. Örnek uygulama sürüme ayarlandığında bir uygulama KIMLIĞI ve parola (Istemci gizli anahtarı) gerektirmez `Managed` , bu nedenle bu yapılandırma girişlerini yoksayabilirsiniz. Uygulama Azure 'a dağıtılır ve Azure, yalnızca dosyada depolanan kasa adını kullanarak Azure Key Vault erişmek için uygulamanın kimliğini doğrular *appsettings.json* .
 
 Azure App Service için örnek uygulamayı dağıtın.
 
@@ -198,7 +199,7 @@ Azure CLı, PowerShell veya Azure portal kullanarak **uygulamayı yeniden başla
 
 Anahtar Kasası adı örnek değeri: `contosovault`
     
-*appsettings.js*:
+*appsettings.json* :
 
 ```json
 {
@@ -304,7 +305,7 @@ Anahtarların iki nokta () ayırıcılar içermesine izin veren bir yapılandır
 
 Azure Key Vault anahtarlar ayırıcı olarak iki nokta üst üste kullanamaz. Bu konuda açıklanan yaklaşım, `--` hiyerarşik değerler (bölümler) için bir ayırıcı olarak çift tire () kullanır. Dizi anahtarları çift tireler ve sayısal anahtar kesimleri ( `--0--` ,,) ile birlikte Azure Key Vault `--1--` depolanır &hellip; `--{n}--` .
 
-Bir JSON dosyası tarafından sunulan aşağıdaki [Serilog](https://serilog.net/) günlük sağlayıcısı yapılandırmasını inceleyin. `WriteTo`Dizide günlüğe kaydetme hedeflerini açıklayan Iki Serilog girişi yansıtan iki nesne değişmez değeri *sinks*vardır:
+Bir JSON dosyası tarafından sunulan aşağıdaki [Serilog](https://serilog.net/) günlük sağlayıcısı yapılandırmasını inceleyin. `WriteTo`Dizide günlüğe kaydetme hedeflerini açıklayan Iki Serilog girişi yansıtan iki nesne değişmez değeri *sinks* vardır:
 
 ```json
 "Serilog": {
@@ -432,7 +433,7 @@ Hızlı başlangıç tarafından sunulan yönergeler [: Azure CLI kullanarak Azu
 
 1. [Azure Portal](https://portal.azure.com/)aşağıdaki yöntemlerden birini kullanarak Azure Cloud Shell 'i açın:
 
-   * Kod bloğunun sağ üst köşesindeki **Deneyin**’i seçin. Metin kutusunda "Azure CLı" arama dizesini kullanın.
+   * Kod bloğunun sağ üst köşesindeki **Deneyin** ’i seçin. Metin kutusunda "Azure CLı" arama dizesini kullanın.
    * **Cloud Shell Başlat** düğmesini kullanarak tarayıcınızda Cloud Shell açın.
    * Azure portal sağ üst köşesindeki menüdeki **Cloud Shell** düğmesini seçin.
 
@@ -465,30 +466,30 @@ Hızlı başlangıç tarafından sunulan yönergeler [: Azure CLI kullanarak Azu
 
 ## <a name="use-application-id-and-x509-certificate-for-non-azure-hosted-apps"></a>Azure 'da barındırılan uygulamalar için uygulama KIMLIĞI ve X. 509.440 sertifikası kullanın
 
-**Uygulama Azure dışında barındırıldığı zaman**bir anahtar kasasında kimlik doğrulaması yapmak IÇIN Azure AD, Azure Key Vault ve uygulamayı bir Azure ACTIVE DIRECTORY uygulama kimliği ve X. 509.440 sertifikası kullanacak şekilde yapılandırın. Daha fazla bilgi için bkz. [anahtarlar, gizlilikler ve sertifikalar hakkında](/azure/key-vault/about-keys-secrets-and-certificates).
+**Uygulama Azure dışında barındırıldığı zaman** bir anahtar kasasında kimlik doğrulaması yapmak IÇIN Azure AD, Azure Key Vault ve uygulamayı bir Azure ACTIVE DIRECTORY uygulama kimliği ve X. 509.440 sertifikası kullanacak şekilde yapılandırın. Daha fazla bilgi için bkz. [anahtarlar, gizlilikler ve sertifikalar hakkında](/azure/key-vault/about-keys-secrets-and-certificates).
 
 > [!NOTE]
 > Azure 'da barındırılan uygulamalar için uygulama KIMLIĞI ve X. 509.440 sertifikası kullanılması desteklenmekle birlikte, Azure 'da bir uygulama barındırılırken [Azure kaynakları Için Yönetilen kimlikler](#use-managed-identities-for-azure-resources) kullanmanızı öneririz. Yönetilen kimlikler, uygulamada veya geliştirme ortamında bir sertifikanın depolanmasını gerektirmez.
 
 Örnek uygulama, `#define` *program.cs* dosyasının en üstündeki ifade olarak AYARLANDıĞıNDA bir uygulama kimliği ve X. 509.440 sertifikası kullanır `Certificate` .
 
-1. PKCS # 12 Arşivi (*. pfx*) sertifikası oluşturun. Sertifika oluşturma seçenekleri Windows ve [OpenSSL](https://www.openssl.org/) [üzerinde MakeCert](/windows/desktop/seccrypto/makecert) içerir.
+1. PKCS # 12 Arşivi ( *. pfx* ) sertifikası oluşturun. Sertifika oluşturma seçenekleri Windows ve [OpenSSL](https://www.openssl.org/) [üzerinde MakeCert](/windows/desktop/seccrypto/makecert) içerir.
 1. Sertifikayı geçerli kullanıcının kişisel sertifika deposuna yükler. Anahtarı verilebilir olarak işaretlemek isteğe bağlıdır. Sertifikanın daha sonra bu işlemde kullanılan parmak izini aklınızda bulunur.
-1. PKCS # 12 Arşivi (*. pfx*) sertifikasını der kodlu bir sertifika (*. cer*) olarak dışarı aktarın.
-1. Uygulamayı Azure AD 'ye kaydedin (**uygulama kayıtları**).
-1. DER kodlu sertifikayı (*. cer*) Azure AD 'ye yükleyin:
+1. PKCS # 12 Arşivi ( *. pfx* ) sertifikasını der kodlu bir sertifika ( *. cer* ) olarak dışarı aktarın.
+1. Uygulamayı Azure AD 'ye kaydedin ( **uygulama kayıtları** ).
+1. DER kodlu sertifikayı ( *. cer* ) Azure AD 'ye yükleyin:
    1. Azure AD 'de uygulamayı seçin.
-   1. **Sertifikalar & gizli**dizi sayfasına gidin.
-   1. Ortak anahtarı içeren sertifikayı karşıya yüklemek için **sertifikayı karşıya yükle** ' yi seçin. *. Cer*, *. pek*veya *. CRT* sertifikası kabul edilebilir.
-1. Anahtar Kasası adı, uygulama KIMLIĞI ve sertifika parmak izini, uygulamanın *appsettings.js* dosyada depolayın.
+   1. **Sertifikalar & gizli** dizi sayfasına gidin.
+   1. Ortak anahtarı içeren sertifikayı karşıya yüklemek için **sertifikayı karşıya yükle** ' yi seçin. *. Cer* , *. pek* veya *. CRT* sertifikası kabul edilebilir.
+1. Anahtar Kasası adı, uygulama KIMLIĞI ve sertifika parmak izini uygulamanın *appsettings.json* dosyasına depolayın.
 1. Azure portal **ana** kasaları ' ne gidin.
 1. Azure Key Vault bölümünde, [üretim ortamındaki gizli dizi deposunda](#secret-storage-in-the-production-environment-with-azure-key-vault) oluşturduğunuz anahtar kasasını seçin.
-1. **Erişim ilkeleri**' ni seçin.
-1. **Erişim Ilkesi Ekle**' yi seçin.
+1. **Erişim ilkeleri** ' ni seçin.
+1. **Erişim Ilkesi Ekle** ' yi seçin.
 1. **Gizli izinleri** açın ve uygulamaya **Get** ve **list** izinleri sağlayın.
 1. **Sorumlu Seç** ' i seçin ve kayıtlı uygulamayı ada göre seçin. **Seç** düğmesini belirleyin.
-1. **Tamam**’ı seçin.
-1. **Kaydet**’i seçin.
+1. **Tamam** ’ı seçin.
+1. **Kaydet** ’i seçin.
 1. Uygulamayı dağıtın.
 
 `Certificate`Örnek uygulama, yapılandırma değerlerini, `IConfigurationRoot` parola adı ile aynı adla alır:
@@ -498,7 +499,7 @@ Hızlı başlangıç tarafından sunulan yönergeler [: Azure CLI kullanarak Azu
   * `config["Section:SecretName"]`
   * `config.GetSection("Section")["SecretName"]`
 
-X. 509.440 sertifikası işletim sistemi tarafından yönetiliyor. Uygulama, <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> *appsettings.js* dosya tarafından sağlanan değerlerle çağırır:
+X. 509.440 sertifikası işletim sistemi tarafından yönetiliyor. Uygulama <xref:Microsoft.Extensions.Configuration.AzureKeyVaultConfigurationExtensions.AddAzureKeyVault*> , dosya tarafından sağlanan değerlerle çağırır *appsettings.json* :
 
 [!code-csharp[](key-vault-configuration/samples/2.x/SampleApp/Program.cs?name=snippet1&highlight=20-23)]
 
@@ -508,7 +509,7 @@ X. 509.440 sertifikası işletim sistemi tarafından yönetiliyor. Uygulama, <xr
 * Uygulama KIMLIĞI: `627e911e-43cc-61d4-992e-12db9c81b413`
 * Sertifika parmak izi: `fe14593dd66b2406c5269d742d04b6e1ab03adb1`
 
-*appsettings.js*:
+*appsettings.json* :
 
 [!code-json[](key-vault-configuration/samples/2.x/SampleApp/appsettings.json?highlight=10-12)]
 
@@ -520,7 +521,7 @@ Azure **'a dağıtılan bir uygulama** , [Azure kaynakları için yönetilen kim
 
 Örnek uygulama, `#define` *program.cs* dosyasının en üstündeki Ifade olarak ayarlandığında Azure kaynakları için Yönetilen kimlikler kullanır `Managed` .
 
-Dosyanın * üzerine uygulamanınappsettings.js* kasa adını girin. Örnek uygulama sürüme ayarlandığında bir uygulama KIMLIĞI ve parola (Istemci gizli anahtarı) gerektirmez `Managed` , bu nedenle bu yapılandırma girişlerini yoksayabilirsiniz. Uygulama Azure 'a dağıtılır ve Azure, yalnızca *appsettings.json* dosyasında depolanan kasa adını kullanarak Azure Key Vault erişmek için uygulamanın kimliğini doğrular.
+Kasa adını uygulamanın *appsettings.json* dosyasına girin. Örnek uygulama sürüme ayarlandığında bir uygulama KIMLIĞI ve parola (Istemci gizli anahtarı) gerektirmez `Managed` , bu nedenle bu yapılandırma girişlerini yoksayabilirsiniz. Uygulama Azure 'a dağıtılır ve Azure, yalnızca dosyada depolanan kasa adını kullanarak Azure Key Vault erişmek için uygulamanın kimliğini doğrular *appsettings.json* .
 
 Azure App Service için örnek uygulamayı dağıtın.
 
@@ -544,7 +545,7 @@ Azure CLı, PowerShell veya Azure portal kullanarak **uygulamayı yeniden başla
 
 Anahtar Kasası adı örnek değeri: `contosovault`
     
-*appsettings.js*:
+*appsettings.json* :
 
 ```json
 {
@@ -631,7 +632,7 @@ Anahtarların iki nokta () ayırıcılar içermesine izin veren bir yapılandır
 
 Azure Key Vault anahtarlar ayırıcı olarak iki nokta üst üste kullanamaz. Bu konuda açıklanan yaklaşım, `--` hiyerarşik değerler (bölümler) için bir ayırıcı olarak çift tire () kullanır. Dizi anahtarları çift tireler ve sayısal anahtar kesimleri ( `--0--` ,,) ile birlikte Azure Key Vault `--1--` depolanır &hellip; `--{n}--` .
 
-Bir JSON dosyası tarafından sunulan aşağıdaki [Serilog](https://serilog.net/) günlük sağlayıcısı yapılandırmasını inceleyin. `WriteTo`Dizide günlüğe kaydetme hedeflerini açıklayan Iki Serilog girişi yansıtan iki nesne değişmez değeri *sinks*vardır:
+Bir JSON dosyası tarafından sunulan aşağıdaki [Serilog](https://serilog.net/) günlük sağlayıcısı yapılandırmasını inceleyin. `WriteTo`Dizide günlüğe kaydetme hedeflerini açıklayan Iki Serilog girişi yansıtan iki nesne değişmez değeri *sinks* vardır:
 
 ```json
 "Serilog": {

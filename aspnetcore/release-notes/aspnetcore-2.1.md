@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.1
-ms.openlocfilehash: d10fd89a3eac34e855ba92673033edc541aa6393
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 62fc9d866adcf05ff024501db68cce8bb8b11a98
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632414"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059721"
 ---
 # <a name="whats-new-in-aspnet-core-21"></a>ASP.NET Core 2,1 ' deki yenilikler
 
@@ -92,7 +93,7 @@ ASP.NET Core, bazı [ab genel veri koruma yönetmeliği (GDPR)](https://www.eugd
 
 Test oluşturma ve yürütmeyi kolaylaştıran yeni bir paket tanıtılmıştır. [Microsoft. AspNetCore. Mvc. Testing](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.Testing/) paketi aşağıdaki görevleri gerçekleştirir:
 
-* Bağımlılık dosyasını (* \* . Deps*) test projesinin *bin* klasörüne kopyalar.
+* Bağımlılık dosyasını ( *\* . Deps* ) test projesinin *bin* klasörüne kopyalar.
 * Testler yürütüldüğünde statik dosya ve sayfa/görünümlerin bulunması için, içerik kökünü test edilen uygulamanın proje köküne ayarlar.
 * [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver)ile sınanan uygulamayı daha kolay hale getirmek Için [webapplicationfactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) sınıfını sağlar.
 
@@ -172,7 +173,7 @@ Daha fazla bilgi için bkz.
 
 ## <a name="no-locrazor-pages-in-an-area"></a>Razor Bir alandaki sayfalar
 
-Razor Sayfalar artık [bölgeleri](xref:mvc/controllers/areas)destekliyor. Bir alan örneği görmek için Razor bireysel kullanıcı hesaplarıyla yeni bir sayfa Web uygulaması oluşturun. RazorBireysel kullanıcı hesapları içeren bir sayfa Web uygulaması */Areas/ Identity /Pages*içerir.
+Razor Sayfalar artık [bölgeleri](xref:mvc/controllers/areas)destekliyor. Bir alan örneği görmek için Razor bireysel kullanıcı hesaplarıyla yeni bir sayfa Web uygulaması oluşturun. RazorBireysel kullanıcı hesapları içeren bir sayfa Web uygulaması */Areas/ Identity /Pages* içerir.
 
 ## <a name="mvc-compatibility-version"></a>MVC uyumluluk sürümü
 

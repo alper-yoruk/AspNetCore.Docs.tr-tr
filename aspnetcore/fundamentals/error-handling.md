@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/error-handling
-ms.openlocfilehash: da7f50b27e447b86bd8a06851b767488d51b7050
-ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
+ms.openlocfilehash: c8174c7e253a596d02dbc6cec183453b3723bc24
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90592897"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060475"
 ---
 # <a name="handle-errors-in-aspnet-core"></a>ASP.NET Core hataları işleme
 
@@ -45,11 +46,11 @@ Yukarıdaki vurgulanmış kod, uygulama [geliştirme ortamında](xref:fundamenta
 
 Şablonlar, <xref:Microsoft.AspNetCore.Builder.DeveloperExceptionPageExtensions.UseDeveloperExceptionPage%2A> izleyen ara yazılım içinde oluşturulan özel durumları yakalayabilmesi için, ara yazılım ardışık düzenine erken yerleştirir.
 
-Yukarıdaki kod, geliştirici özel durum sayfasını ***yalnızca*** uygulama geliştirme ortamında çalıştırıldığında etkinleştirilir. Ayrıntılı özel durum bilgileri, uygulama üretim ortamında çalıştırıldığında herkese açık bir şekilde gösterilmemelidir. Ortamları yapılandırma hakkında daha fazla bilgi için bkz <xref:fundamentals/environments> ..
+Yukarıdaki kod, uygulama geliştirme ortamında çalıştırıldığında geliştirici özel durum sayfasını * **yalnızca** _ öğesine izin vermez. Ayrıntılı özel durum bilgileri, uygulama üretim ortamında çalıştırıldığında herkese açık bir şekilde gösterilmemelidir. Ortamları yapılandırma hakkında daha fazla bilgi için bkz <xref:fundamentals/environments> ..
 
 Geliştirici özel durum sayfası, özel durum ve istek hakkında şu bilgileri içerir:
 
-* Yığın izleme
+_ Yığın izleme
 * Varsa sorgu dizesi parametreleri
 * Cookievarsa s
 * Üst Bilgiler
@@ -65,7 +66,7 @@ Aşağıdaki örnekte, <xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtens
 
 [!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_DevPageAndHandlerPage&highlight=5-9)]
 
-RazorSayfalar uygulama şablonu, sayfalar klasöründe bir hata sayfası (*. cshtml*) ve <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> Sınıf ( `ErrorModel` ) sağlar *Pages* . MVC uygulaması için proje şablonu, `Error` giriş denetleyicisi için bir eylem yöntemi ve bir hata görünümü içerir.
+RazorSayfalar uygulama şablonu, sayfalar klasöründe bir hata sayfası ( *. cshtml* ) ve <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> Sınıf ( `ErrorModel` ) sağlar *Pages* . MVC uygulaması için proje şablonu, `Error` giriş denetleyicisi için bir eylem yöntemi ve bir hata görünümü içerir.
 
 Hata işleyicisi eylem yöntemini, gibi HTTP yöntemi öznitelikleriyle işaretlemeyin `HttpGet` . Açık fiiller bazı isteklerin eylem yöntemine ulaşmasını önler. Kimliği doğrulanmamış kullanıcılar hata görünümünü görüyse, metoda anonim erişime izin verin.
 
@@ -107,7 +108,7 @@ In the preceding code, `await context.Response.WriteAsync(new string(' ', 512));
 
 ## <a name="usestatuscodepages"></a>UseStatusCodePages
 
-Varsayılan olarak, bir ASP.NET Core uygulama HTTP hata durum kodları için *404-bulunamadı*gibi bir durum kodu sayfası sağlamaz. Uygulama, gövdesi olmayan bir HTTP 400-499 hata durumuyla karşılaştığında, durum kodunu ve boş bir yanıt gövdesini döndürür. Durum kodu sayfaları sağlamak için durum kodu sayfaları ara yazılımını kullanın. Ortak hata durum kodları için varsayılan salt metin işleyicilerini etkinleştirmek üzere <xref:Microsoft.AspNetCore.Builder.StatusCodePagesExtensions.UseStatusCodePages%2A> `Startup.Configure` yöntemi çağırın:
+Varsayılan olarak, bir ASP.NET Core uygulama HTTP hata durum kodları için *404-bulunamadı* gibi bir durum kodu sayfası sağlamaz. Uygulama, gövdesi olmayan bir HTTP 400-499 hata durumuyla karşılaştığında, durum kodunu ve boş bir yanıt gövdesini döndürür. Durum kodu sayfaları sağlamak için durum kodu sayfaları ara yazılımını kullanın. Ortak hata durum kodları için varsayılan salt metin işleyicilerini etkinleştirmek üzere <xref:Microsoft.AspNetCore.Builder.StatusCodePagesExtensions.UseStatusCodePages%2A> `Startup.Configure` yöntemi çağırın:
 
 [!code-csharp[](error-handling/samples/5.x/ErrorHandlingSample/StartupUseStatusCodePages.cs?name=snippet&highlight=13)]
 
@@ -143,7 +144,7 @@ Yukarıdaki kodda, `{0}` hata kodu için bir yer tutucudur.
 
 `UseStatusCodePages` bir biçim dizesi, genellikle üretimde kullanılmıyor çünkü kullanıcılara faydalı olmayan bir ileti döndürüyor.
 
-`UseStatusCodePages` [Örnek uygulamada](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)test etmek için, `webBuilder.UseStartup<StartupFormat>();` *program.cs*içindeki açıklamaları kaldırın.
+`UseStatusCodePages` [Örnek uygulamada](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)test etmek için, `webBuilder.UseStartup<StartupFormat>();` *program.cs* içindeki açıklamaları kaldırın.
 
 ### <a name="usestatuscodepages-with-lambda"></a>Lambda ile UseStatusCodePages
 
@@ -153,7 +154,7 @@ Yukarıdaki kodda, `{0}` hata kodu için bir yer tutucudur.
 
 `UseStatusCodePages` Lambda ile, kullanıcılar için faydalı olmayan bir ileti döndürdüğünden, genellikle üretimde kullanılmaz.
 
-`UseStatusCodePages` [Örnek uygulamada](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)test etmek için, `webBuilder.UseStartup<StartupStatusLambda>();` *program.cs*içindeki açıklamaları kaldırın.
+`UseStatusCodePages` [Örnek uygulamada](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)test etmek için, `webBuilder.UseStartup<StartupStatusLambda>();` *program.cs* içindeki açıklamaları kaldırın.
 
 ### <a name="usestatuscodepageswithredirects"></a>Usestatuscodepageswithyönlendirmeler
 
@@ -171,7 +172,7 @@ Bu yöntem genellikle uygulama şu şekilde kullanılır:
 * , Genellikle farklı bir uygulamanın hatayı işlediği durumlarda istemciyi farklı bir uç noktaya yönlendirmelidir. Web Apps için, istemcinin tarayıcı adres çubuğu yeniden yönlendirilen uç noktayı yansıtır.
 * İlk yeniden yönlendirme yanıtıyla birlikte özgün durum kodunu korumamalıdır ve döndürmemelidir.
 
-`UseStatusCodePages` [Örnek uygulamada](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)test etmek için, `webBuilder.UseStartup<StartupSCredirect>();` *program.cs*içindeki açıklamaları kaldırın.
+`UseStatusCodePages` [Örnek uygulamada](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)test etmek için, `webBuilder.UseStartup<StartupSCredirect>();` *program.cs* içindeki açıklamaları kaldırın.
 
 ### <a name="usestatuscodepageswithreexecute"></a>UseStatusCodePagesWithReExecute
 
@@ -208,7 +209,7 @@ Hatayı işleyen uç nokta, aşağıdaki örnekte gösterildiği gibi, hatayı o
 
 Bir Razor Sayfalar örneği için [örnek uygulamadaki](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x) [Pages/MyStatusCode2. cshtml](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x/ErrorHandlingSample/Pages) bölümüne bakın.
 
-`UseStatusCodePages` [Örnek uygulamada](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)test etmek için, `webBuilder.UseStartup<StartupSCreX>();` *program.cs*içindeki açıklamaları kaldırın.
+`UseStatusCodePages` [Örnek uygulamada](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/error-handling/samples/5.x)test etmek için, `webBuilder.UseStartup<StartupSCreX>();` *program.cs* içindeki açıklamaları kaldırın.
 
 ## <a name="disable-status-code-pages"></a>Durum kodu sayfalarını devre dışı bırak
 
@@ -293,7 +294,7 @@ Yukarıdaki kod, uygulama [geliştirme ortamında](xref:fundamentals/environment
 
 Şablonlar, <xref:Microsoft.AspNetCore.Builder.DeveloperExceptionPageExtensions.UseDeveloperExceptionPage%2A> izleyen ara yazılım içinde özel durumların yakalanabilmesi için herhangi bir ara yazılımın önüne yerleştirir.
 
-Yukarıdaki kod, geliştirici özel durum sayfasını **yalnızca uygulama geliştirme ortamında çalışırken**sunar. Ayrıntılı özel durum bilgileri, uygulama üretimde çalıştırıldığında herkese açık bir şekilde gösterilmemelidir. Ortamları yapılandırma hakkında daha fazla bilgi için bkz <xref:fundamentals/environments> ..
+Yukarıdaki kod, geliştirici özel durum sayfasını **yalnızca uygulama geliştirme ortamında çalışırken** sunar. Ayrıntılı özel durum bilgileri, uygulama üretimde çalıştırıldığında herkese açık bir şekilde gösterilmemelidir. Ortamları yapılandırma hakkında daha fazla bilgi için bkz <xref:fundamentals/environments> ..
 
 Geliştirici özel durum sayfası, özel durum ve istek hakkında şu bilgileri içerir:
 
@@ -313,7 +314,7 @@ Aşağıdaki örnekte, <xref:Microsoft.AspNetCore.Builder.ExceptionHandlerExtens
 
 [!code-csharp[](error-handling/samples/2.x/ErrorHandlingSample/Startup.cs?name=snippet_DevPageAndHandlerPage&highlight=5-9)]
 
-RazorSayfalar uygulama şablonu, sayfalar klasöründe bir hata sayfası (*. cshtml*) ve <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> Sınıf ( `ErrorModel` ) sağlar *Pages* . MVC uygulaması için proje şablonu, ana denetleyicide bir hata eylemi yöntemi ve bir hata görünümü içerir.
+RazorSayfalar uygulama şablonu, sayfalar klasöründe bir hata sayfası ( *. cshtml* ) ve <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> Sınıf ( `ErrorModel` ) sağlar *Pages* . MVC uygulaması için proje şablonu, ana denetleyicide bir hata eylemi yöntemi ve bir hata görünümü içerir.
 
 Hata işleyicisi eylem yöntemini, gibi HTTP yöntemi öznitelikleriyle işaretlemeyin `HttpGet` . Açık fiiller bazı isteklerin yönteme ulaşmasını önler. Kimliği doğrulanmamış kullanıcılar hata görünümünü görüyse, metoda anonim erişime izin verin.
 
@@ -345,7 +346,7 @@ Yukarıdaki kodda, `await context.Response.WriteAsync(new string(' ', 512));` In
 
 ## <a name="usestatuscodepages"></a>UseStatusCodePages
 
-Varsayılan olarak, bir ASP.NET Core uygulama HTTP durum kodları için *404-bulunamadı*gibi bir durum kodu sayfası sağlamaz. Uygulama bir durum kodu ve boş bir yanıt gövdesi döndürür. Durum kodu sayfaları sağlamak için durum kodu sayfaları ara yazılımını kullanın.
+Varsayılan olarak, bir ASP.NET Core uygulama HTTP durum kodları için *404-bulunamadı* gibi bir durum kodu sayfası sağlamaz. Uygulama bir durum kodu ve boş bir yanıt gövdesi döndürür. Durum kodu sayfaları sağlamak için durum kodu sayfaları ara yazılımını kullanın.
 
 Ara yazılım [Microsoft. AspNetCore. Diagnostics](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics/) paketi tarafından kullanılabilir hale getirilir.
 

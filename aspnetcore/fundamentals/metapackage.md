@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 10/25/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/metapackage
-ms.openlocfilehash: 133eee71fcd85a95ac53684c3c6e475a54592967
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b739398c2a440f21c8bdfdc1f4d8e25412358a6a
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634572"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060696"
 ---
 # <a name="microsoftaspnetcoreall-metapackage-for-aspnet-core-20"></a>ASP.NET Core 2,0 için Microsoft. AspNetCore. All metapackage
 
@@ -38,7 +39,7 @@ ms.locfileid: "88634572"
 
 Bu özellik, .NET Core 2. x 'i hedefleyen ASP.NET Core 2. x gerektirir.
 
-[Microsoft. AspNetCore. All](https://www.nuget.org/packages/Microsoft.AspNetCore.All) , paylaşılan bir çerçeveye başvuran bir metapackage. *Paylaşılan çerçeve* , uygulamanın klasörlerinde olmayan derlemelerin (*. dll* dosyaları) bir kümesidir. Uygulamayı çalıştırmak için makinede paylaşılan çerçeve yüklü olmalıdır. Daha fazla bilgi için bkz. [paylaşılan çerçeve](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/).
+[Microsoft. AspNetCore. All](https://www.nuget.org/packages/Microsoft.AspNetCore.All) , paylaşılan bir çerçeveye başvuran bir metapackage. *Paylaşılan çerçeve* , uygulamanın klasörlerinde olmayan derlemelerin ( *. dll* dosyaları) bir kümesidir. Uygulamayı çalıştırmak için makinede paylaşılan çerçeve yüklü olmalıdır. Daha fazla bilgi için bkz. [paylaşılan çerçeve](https://natemcmaster.com/blog/2018/08/29/netcore-primitives-2/).
 
 Öğesine başvuran paylaşılan çerçeve şunları `Microsoft.AspNetCore.All` içerir:
 
@@ -96,7 +97,7 @@ Aşağıdaki paketler `Microsoft.AspNetCore.All` paketine dahil değildir ancak 
 
 `Microsoft.AspNetCore.All` `Microsoft.AspNetCore.App` Uygulamanız, yukarıdaki paketlerin veya bu paketler tarafından getirilen paketlerin herhangi bir API 'sini kullanıyorsa, ' dan ' a geçiş yapmak için projenizdeki bu paketlere başvurular ekleyin.
 
-Önceki paketlerin bağımlılığı olmayan tüm bağımlılıkları `Microsoft.AspNetCore.App` örtük olarak dahil edilmez. Örnek:
+Önceki paketlerin bağımlılığı olmayan tüm bağımlılıkları `Microsoft.AspNetCore.App` örtük olarak dahil edilmez. Örneğin:
 
 * `StackExchange.Redis` bağımlılığı olarak `Microsoft.Extensions.Caching.Redis`
 * `Microsoft.ApplicationInsights` bağımlılığı olarak `Microsoft.AspNetCore.ApplicationInsights.HostingStartup`

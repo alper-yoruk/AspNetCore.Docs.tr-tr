@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 09/20/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/index
-ms.openlocfilehash: 4a2f86d906c7b268b1fb2a63c50a1b8f0dd2b154
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 80f44e3845cc1e3c87d5d657807a318eb65e6c6f
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633194"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059903"
 ---
 # <a name="introduction-to-grpc-on-net-core"></a>.NET Core 'da gRPC 'ye giriş
 
@@ -46,7 +47,7 @@ Bu avantajlar, gRPC 'yi ideal hale getirir:
 
 ## <a name="c-tooling-support-for-proto-files"></a>. Proto dosyaları için C# araçları desteği
 
-gRPC, API geliştirmesi için bir sözleşmenin ilk yaklaşımını kullanır. Hizmetler ve mesajlar * \* . proto* dosyalarında tanımlanmıştır:
+gRPC, API geliştirmesi için bir sözleşmenin ilk yaklaşımını kullanır. Hizmetler ve mesajlar *\* . proto* dosyalarında tanımlanmıştır:
 
 ```protobuf
 syntax = "proto3";
@@ -64,10 +65,10 @@ message HelloReply {
 }
 ```
 
-Hizmetler, istemciler ve iletiler için .NET türleri bir projedeki * \* . proto* dosyaları eklenerek otomatik olarak oluşturulur:
+Hizmetler, istemciler ve iletiler için .NET türleri bir projedeki *\* . proto* dosyaları eklenerek otomatik olarak oluşturulur:
 
 * [GRPC. Tools](https://www.nuget.org/packages/Grpc.Tools/) paketine bir paket başvurusu ekleyin.
-* * \* . Proto* dosyalarını `<Protobuf>` öğe grubuna ekleyin.
+* *\* . Proto* dosyalarını `<Protobuf>` öğe grubuna ekleyin.
 
 ```xml
 <ItemGroup>
@@ -105,7 +106,7 @@ public class GreeterService : Greeter.GreeterBase
 }
 ```
 
-`GreeterService``GreeterBase`, `Greeter` * \* . proto* dosyasındaki hizmetten oluşturulan türden devralır. Hizmet, *Startup.cs*içindeki istemciler için erişilebilir hale getirilir:
+`GreeterService``GreeterBase`, `Greeter` *\* . proto* dosyasındaki hizmetten oluşturulan türden devralır. Hizmet, *Startup.cs* içindeki istemciler için erişilebilir hale getirilir:
 
 ```csharp
 app.UseEndpoints(endpoints =>
@@ -118,7 +119,7 @@ ASP.NET Core 'de gRPC hizmetleri hakkında daha fazla bilgi edinmek için bkz <x
 
 ## <a name="call-grpc-services-with-a-net-client"></a>Bir .NET istemcisiyle gRPC hizmetlerini çağırma
 
-gRPC istemcileri [ * \* . proto* dosyalarından oluşturulan](xref:grpc/basics#generated-c-assets)somut istemci türleridir. Somut gRPC istemcisinde * \* . proto* dosyasındaki GRPC hizmetine çeviren yöntemler vardır.
+gRPC istemcileri [ *\* . proto* dosyalarından oluşturulan](xref:grpc/basics#generated-c-assets)somut istemci türleridir. Somut gRPC istemcisinde *\* . proto* dosyasındaki GRPC hizmetine çeviren yöntemler vardır.
 
 ```csharp
 var channel = GrpcChannel.ForAddress("https://localhost:5001");

@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/09/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/directory-structure
-ms.openlocfilehash: b557f1d1650b3deadcda679f300b1bc45a6202e7
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 918bc11e06b8f2bea5506d3b61f462e15998efa0
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627383"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059864"
 ---
 # <a name="aspnet-core-directory-structure"></a>ASP.NET Core dizin yapısı
 
@@ -39,12 +40,12 @@ ms.locfileid: "88627383"
 
 | Uygulama Türü | Dizin yapısı |
 | -------- | ------------------- |
-| [Çerçeveye bağımlı yürütülebilir (FDE)](/dotnet/core/deploying/#framework-dependent-executables-fde) | <ul><li>yayınlamanız&dagger;<ul><li>&dagger;Görüntüleme MVC uygulamaları; görünümler önceden derlenmiş değilse</li><li>&dagger; Razor Sayfalar önceden derlenmiş değilse, MVC veya Pages uygulamaları</li><li>wwwroot&dagger;</li><li>\*. dll dosyaları</li><li>{ASSEMBLY NAME} üzerinde .deps.js</li><li>{Bütünleştirilmiş kod adı}. dll</li><li>{BÜTÜNLEŞTIRILMIŞ KOD ADı} {. Windows üzerinde uzantı}. exe uzantısı, macOS veya Linux üzerinde uzantı yok</li><li>{Bütünleştirilmiş kod adı}. pdb</li><li>{BÜTÜNLEŞTIRILMIŞ KOD ADı} .Views.dll</li><li>{BÜTÜNLEŞTIRILMIŞ KOD ADı}. Views. pdb</li><li>{ASSEMBLY NAME} üzerinde .runtimeconfig.js</li><li>web.config (IIS dağıtımları)</li><li>createdump ([Linux createdump yardımcı programı](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/xplat-minidump-generation.md#configurationpolicy))</li><li>\*. so (Linux paylaşılan nesne kitaplığı)</li><li>\*. a (macOS Arşivi)</li><li>\*. dylib (macOS dinamik kitaplığı)</li></ul></li></ul> |
-| [Kendi içinde dağıtım (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) | <ul><li>yayınlamanız&dagger;<ul><li>&dagger;Görünümler önceden derlenmiş değilse MVC uygulamalarını görüntüler</li><li>&dagger; Razor Sayfalar önceden derlenmiş değilse, MVC veya Pages uygulamaları</li><li>wwwroot&dagger;</li><li>\*. dll dosyaları</li><li>{ASSEMBLY NAME} üzerinde .deps.js</li><li>{Bütünleştirilmiş kod adı}. dll</li><li>{Bütünleştirilmiş kod adı}. exe</li><li>{Bütünleştirilmiş kod adı}. pdb</li><li>{BÜTÜNLEŞTIRILMIŞ KOD ADı} .Views.dll</li><li>{BÜTÜNLEŞTIRILMIŞ KOD ADı}. Views. pdb</li><li>{ASSEMBLY NAME} üzerinde .runtimeconfig.js</li><li>web.config (IIS dağıtımları)</li></ul></li></ul> |
+| [Çerçeveye bağımlı yürütülebilir (FDE)](/dotnet/core/deploying/#framework-dependent-executables-fde) | <ul><li>yayınlamanız&dagger;<ul><li>&dagger;Görüntüleme MVC uygulamaları; görünümler önceden derlenmiş değilse</li><li>&dagger; Razor Sayfalar önceden derlenmiş değilse, MVC veya Pages uygulamaları</li><li>Wwwroot&dagger;</li><li>\*. dll dosyaları</li><li>{ASSEMBLY NAME} üzerinde .deps.js</li><li>{Bütünleştirilmiş kod adı}. dll</li><li>{BÜTÜNLEŞTIRILMIŞ KOD ADı} {. Windows üzerinde uzantı}. exe uzantısı, macOS veya Linux üzerinde uzantı yok</li><li>{Bütünleştirilmiş kod adı}. pdb</li><li>{BÜTÜNLEŞTIRILMIŞ KOD ADı} .Views.dll</li><li>{BÜTÜNLEŞTIRILMIŞ KOD ADı}. Views. pdb</li><li>{ASSEMBLY NAME} üzerinde .runtimeconfig.js</li><li>web.config (IIS dağıtımları)</li><li>createdump ([Linux createdump yardımcı programı](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/xplat-minidump-generation.md#configurationpolicy))</li><li>\*. so (Linux paylaşılan nesne kitaplığı)</li><li>\*. a (macOS Arşivi)</li><li>\*. dylib (macOS dinamik kitaplığı)</li></ul></li></ul> |
+| [Kendi içinde dağıtım (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) | <ul><li>yayınlamanız&dagger;<ul><li>&dagger;Görünümler önceden derlenmiş değilse MVC uygulamalarını görüntüler</li><li>&dagger; Razor Sayfalar önceden derlenmiş değilse, MVC veya Pages uygulamaları</li><li>Wwwroot&dagger;</li><li>\*. dll dosyaları</li><li>{ASSEMBLY NAME} üzerinde .deps.js</li><li>{Bütünleştirilmiş kod adı}. dll</li><li>{Bütünleştirilmiş kod adı}. exe</li><li>{Bütünleştirilmiş kod adı}. pdb</li><li>{BÜTÜNLEŞTIRILMIŞ KOD ADı} .Views.dll</li><li>{BÜTÜNLEŞTIRILMIŞ KOD ADı}. Views. pdb</li><li>{ASSEMBLY NAME} üzerinde .runtimeconfig.js</li><li>web.config (IIS dağıtımları)</li></ul></li></ul> |
 
 &dagger;Bir dizini belirtir
 
-*Yayımla* dizini, dağıtımın *uygulama temel yolu*olarak da adlandırılan *içerik kök yolunu*temsil eder. Sunucuda dağıtılan uygulamanın *Yayımlama* dizinine hangi ad verildiğinde, konumu sunucunun barındırılan uygulamanın fiziksel yolu olarak görev yapar.
+*Yayımla* dizini, dağıtımın *uygulama temel yolu* olarak da adlandırılan *içerik kök yolunu* temsil eder. Sunucuda dağıtılan uygulamanın *Yayımlama* dizinine hangi ad verildiğinde, konumu sunucunun barındırılan uygulamanın fiziksel yolu olarak görev yapar.
 
 Varsa, *Wwwroot* dizini yalnızca statik varlıkları içerir.
 
@@ -69,12 +70,12 @@ Varsa, *Wwwroot* dizini yalnızca statik varlıkları içerir.
 
 | Uygulama Türü | Dizin yapısı |
 | -------- | ------------------- |
-| [Çerçeveye bağımlı yürütülebilir (FDE)](/dotnet/core/deploying/#framework-dependent-executables-fde) | <ul><li>yayınlamanız&dagger;<ul><li>&dagger;Görüntüleme MVC uygulamaları; görünümler önceden derlenmiş değilse</li><li>&dagger; Razor Sayfalar önceden derlenmiş değilse, MVC veya Pages uygulamaları</li><li>wwwroot&dagger;</li><li>\*. dll dosyaları</li><li>{ASSEMBLY NAME} üzerinde .deps.js</li><li>{Bütünleştirilmiş kod adı}. dll</li><li>{BÜTÜNLEŞTIRILMIŞ KOD ADı} {. Windows üzerinde uzantı}. exe uzantısı, macOS veya Linux üzerinde uzantı yok</li><li>{Bütünleştirilmiş kod adı}. pdb</li><li>{BÜTÜNLEŞTIRILMIŞ KOD ADı} .Views.dll</li><li>{BÜTÜNLEŞTIRILMIŞ KOD ADı}. Views. pdb</li><li>{ASSEMBLY NAME} üzerinde .runtimeconfig.js</li><li>web.config (IIS dağıtımları)</li><li>createdump ([Linux createdump yardımcı programı](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/xplat-minidump-generation.md#configurationpolicy))</li><li>\*. so (Linux paylaşılan nesne kitaplığı)</li><li>\*. a (macOS Arşivi)</li><li>\*. dylib (macOS dinamik kitaplığı)</li></ul></li></ul> |
-| [Kendi içinde dağıtım (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) | <ul><li>yayınlamanız&dagger;<ul><li>&dagger;Görünümler önceden derlenmiş değilse MVC uygulamalarını görüntüler</li><li>&dagger; Razor Sayfalar önceden derlenmiş değilse, MVC veya Pages uygulamaları</li><li>wwwroot&dagger;</li><li>\*. dll dosyaları</li><li>{ASSEMBLY NAME} üzerinde .deps.js</li><li>{Bütünleştirilmiş kod adı}. dll</li><li>{Bütünleştirilmiş kod adı}. exe</li><li>{Bütünleştirilmiş kod adı}. pdb</li><li>{BÜTÜNLEŞTIRILMIŞ KOD ADı} .Views.dll</li><li>{BÜTÜNLEŞTIRILMIŞ KOD ADı}. Views. pdb</li><li>{ASSEMBLY NAME} üzerinde .runtimeconfig.js</li><li>web.config (IIS dağıtımları)</li></ul></li></ul> |
+| [Çerçeveye bağımlı yürütülebilir (FDE)](/dotnet/core/deploying/#framework-dependent-executables-fde) | <ul><li>yayınlamanız&dagger;<ul><li>&dagger;Görüntüleme MVC uygulamaları; görünümler önceden derlenmiş değilse</li><li>&dagger; Razor Sayfalar önceden derlenmiş değilse, MVC veya Pages uygulamaları</li><li>Wwwroot&dagger;</li><li>\*. dll dosyaları</li><li>{ASSEMBLY NAME} üzerinde .deps.js</li><li>{Bütünleştirilmiş kod adı}. dll</li><li>{BÜTÜNLEŞTIRILMIŞ KOD ADı} {. Windows üzerinde uzantı}. exe uzantısı, macOS veya Linux üzerinde uzantı yok</li><li>{Bütünleştirilmiş kod adı}. pdb</li><li>{BÜTÜNLEŞTIRILMIŞ KOD ADı} .Views.dll</li><li>{BÜTÜNLEŞTIRILMIŞ KOD ADı}. Views. pdb</li><li>{ASSEMBLY NAME} üzerinde .runtimeconfig.js</li><li>web.config (IIS dağıtımları)</li><li>createdump ([Linux createdump yardımcı programı](https://github.com/dotnet/coreclr/blob/master/Documentation/botr/xplat-minidump-generation.md#configurationpolicy))</li><li>\*. so (Linux paylaşılan nesne kitaplığı)</li><li>\*. a (macOS Arşivi)</li><li>\*. dylib (macOS dinamik kitaplığı)</li></ul></li></ul> |
+| [Kendi içinde dağıtım (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd) | <ul><li>yayınlamanız&dagger;<ul><li>&dagger;Görünümler önceden derlenmiş değilse MVC uygulamalarını görüntüler</li><li>&dagger; Razor Sayfalar önceden derlenmiş değilse, MVC veya Pages uygulamaları</li><li>Wwwroot&dagger;</li><li>\*. dll dosyaları</li><li>{ASSEMBLY NAME} üzerinde .deps.js</li><li>{Bütünleştirilmiş kod adı}. dll</li><li>{Bütünleştirilmiş kod adı}. exe</li><li>{Bütünleştirilmiş kod adı}. pdb</li><li>{BÜTÜNLEŞTIRILMIŞ KOD ADı} .Views.dll</li><li>{BÜTÜNLEŞTIRILMIŞ KOD ADı}. Views. pdb</li><li>{ASSEMBLY NAME} üzerinde .runtimeconfig.js</li><li>web.config (IIS dağıtımları)</li></ul></li></ul> |
 
 &dagger;Bir dizini belirtir
 
-*Yayımla* dizini, dağıtımın *uygulama temel yolu*olarak da adlandırılan *içerik kök yolunu*temsil eder. Sunucuda dağıtılan uygulamanın *Yayımlama* dizinine hangi ad verildiğinde, konumu sunucunun barındırılan uygulamanın fiziksel yolu olarak görev yapar.
+*Yayımla* dizini, dağıtımın *uygulama temel yolu* olarak da adlandırılan *içerik kök yolunu* temsil eder. Sunucuda dağıtılan uygulamanın *Yayımlama* dizinine hangi ad verildiğinde, konumu sunucunun barındırılan uygulamanın fiziksel yolu olarak görev yapar.
 
 Varsa, *Wwwroot* dizini yalnızca statik varlıkları içerir.
 

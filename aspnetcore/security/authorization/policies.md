@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/15/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/policies
-ms.openlocfilehash: 140969c80191c9549bc19507b9c4818b88fed0d1
-ms.sourcegitcommit: c026bf76a0e14a5ee68983519a63574c674e9ff7
+ms.openlocfilehash: 286dc3bcc66b86a2a6b7d3cb7b6052bf7b474aff
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91636809"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060215"
 ---
 # <a name="policy-based-authorization-in-aspnet-core"></a>ASP.NET Core ilke tabanlı yetkilendirme
 
@@ -132,7 +133,7 @@ RazorSayfalar kullanıyorsanız, bkz. bu belgedeki [ Razor sayfalara ilke uygula
 
 [!code-csharp[](policies/samples/PoliciesAuthApp2/Pages/AlcoholPurchase.cshtml.cs?name=snippet_AlcoholPurchaseModelClass&highlight=4)]
 
-İlkeler ***not*** Razor sayfa işleyici düzeyinde uygulanamazlar, sayfaya uygulanmaları gerekir.
+İlkeler, sayfa işleyici düzeyinde uygulanamaz * **değil** Razor , sayfaya uygulanmaları gerekir.
 
 İlkeler, Razor bir [Yetkilendirme kuralı](xref:security/authorization/razor-pages-authorization)kullanılarak sayfalara uygulanabilir.
 
@@ -142,7 +143,7 @@ Yetkilendirme gereksinimi, bir ilkenin geçerli kullanıcı sorumlusunu değerle
 
 [!code-csharp[](policies/samples/PoliciesAuthApp1/Services/Requirements/MinimumAgeRequirement.cs?name=snippet_MinimumAgeRequirementClass)]
 
-Yetkilendirme ilkesi birden çok yetkilendirme gereksinimi içeriyorsa, ilke değerlendirmesinin başarılı olması için tüm gereksinimlerin geçmesi gerekir. Diğer bir deyişle, tek bir yetkilendirme ilkesine eklenen birden çok yetkilendirme gereksinimi bir **ve** temelinde değerlendirilir.
+Yetkilendirme ilkesi birden çok yetkilendirme gereksinimi içeriyorsa, ilke değerlendirmesinin başarılı olması için tüm gereksinimlerin geçmesi gerekir. Diğer bir deyişle, tek bir yetkilendirme ilkesine eklenen birden çok yetkilendirme gereksinimi, _ *ve* * temelinde değerlendirilir.
 
 > [!NOTE]
 > Bir gereksinimin veri veya özellikleri olması gerekmez.
@@ -202,7 +203,7 @@ Bir işleyici veya çağırırsa `context.Succeed` `context.Fail` , diğer tüm 
 
 ## <a name="why-would-i-want-multiple-handlers-for-a-requirement"></a>Bir gereksinim için neden birden çok işleyici istiyorum?
 
-Değerlendirmenin bir **veya** temelinde olmasını istediğiniz durumlarda, tek bir gereksinim için birden çok işleyici uygulayın. Örneğin, Microsoft yalnızca ana kartlarla açık olan kapılara sahiptir. Ana kartınızı evden bırakırsanız, alıcı geçici bir etiket yazdırır ve kapıyı sizin için açar. Bu senaryoda, tek bir gereksinimi incelerken tek bir gereksinimin, *Buildingentry*, ancak birden çok işleyici vardır.
+Değerlendirmenin bir **veya** temelinde olmasını istediğiniz durumlarda, tek bir gereksinim için birden çok işleyici uygulayın. Örneğin, Microsoft yalnızca ana kartlarla açık olan kapılara sahiptir. Ana kartınızı evden bırakırsanız, alıcı geçici bir etiket yazdırır ve kapıyı sizin için açar. Bu senaryoda, tek bir gereksinimi incelerken tek bir gereksinimin, *Buildingentry* , ancak birden çok işleyici vardır.
 
 *BuildingEntryRequirement.cs*
 
@@ -436,7 +437,7 @@ Bir işleyici veya çağırırsa `context.Succeed` `context.Fail` , diğer tüm 
 
 ## <a name="why-would-i-want-multiple-handlers-for-a-requirement"></a>Bir gereksinim için neden birden çok işleyici istiyorum?
 
-Değerlendirmenin bir **veya** temelinde olmasını istediğiniz durumlarda, tek bir gereksinim için birden çok işleyici uygulayın. Örneğin, Microsoft yalnızca ana kartlarla açık olan kapılara sahiptir. Ana kartınızı evden bırakırsanız, alıcı geçici bir etiket yazdırır ve kapıyı sizin için açar. Bu senaryoda, tek bir gereksinimi incelerken tek bir gereksinimin, *Buildingentry*, ancak birden çok işleyici vardır.
+Değerlendirmenin bir **veya** temelinde olmasını istediğiniz durumlarda, tek bir gereksinim için birden çok işleyici uygulayın. Örneğin, Microsoft yalnızca ana kartlarla açık olan kapılara sahiptir. Ana kartınızı evden bırakırsanız, alıcı geçici bir etiket yazdırır ve kapıyı sizin için açar. Bu senaryoda, tek bir gereksinimi incelerken tek bir gereksinimin, *Buildingentry* , ancak birden çok işleyici vardır.
 
 *BuildingEntryRequirement.cs*
 

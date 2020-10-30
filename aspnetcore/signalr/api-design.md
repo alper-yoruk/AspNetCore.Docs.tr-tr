@@ -7,6 +7,7 @@ ms.author: anurse
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/api-design
-ms.openlocfilehash: 4a838c3a051476bd3d281e133d08b643656ae3b7
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 87665a7950edbc70b664230d2f078598e9dbc0aa
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632908"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059656"
 ---
 # <a name="no-locsignalr-api-design-considerations"></a>SignalR API tasarımı konuları
 
@@ -33,7 +34,7 @@ Bu makalede, yapı SignalR tabanlı API 'ler için rehberlik sunulmaktadır.
 
 ## <a name="use-custom-object-parameters-to-ensure-backwards-compatibility"></a>Geriye dönük uyumluluk sağlamak için özel nesne parametreleri kullanın
 
-Bir SignalR hub yöntemine (istemcide veya sunucuda) parametre eklenmesi, bir *son değişiklikten*sonra yapılır. Bu, eski istemcilerin/sunucuların, yöntemi uygun sayıda parametre olmadan çağırmaya çalıştıklarında hata alabileceği anlamına gelir. Ancak, özel bir nesne parametresine özellikler eklemek, bir son değişiklik **değildir** . Bu, istemci veya sunucu üzerindeki değişikliklere dayanıklı olan uyumlu API 'Ler tasarlamak için kullanılabilir.
+Bir SignalR hub yöntemine (istemcide veya sunucuda) parametre eklenmesi, bir *son değişiklikten* sonra yapılır. Bu, eski istemcilerin/sunucuların, yöntemi uygun sayıda parametre olmadan çağırmaya çalıştıklarında hata alabileceği anlamına gelir. Ancak, özel bir nesne parametresine özellikler eklemek, bir son değişiklik **değildir** . Bu, istemci veya sunucu üzerindeki değişikliklere dayanıklı olan uyumlu API 'Ler tasarlamak için kullanılabilir.
 
 Örneğin, aşağıdaki gibi bir sunucu tarafı API göz önünde bulundurun:
 
@@ -43,7 +44,7 @@ JavaScript istemcisi şu şekilde kullanarak bu yöntemi çağırır `invoke` :
 
 [!code-typescript[CallWithOneParameter](api-design/sample/Samples.ts?name=CallWithOneParameter)]
 
-Daha sonra sunucu yöntemine ikinci bir parametre eklerseniz, eski istemciler bu parametre değerini sağlamaz. Örnek:
+Daha sonra sunucu yöntemine ikinci bir parametre eklerseniz, eski istemciler bu parametre değerini sağlamaz. Örneğin:
 
 [!code-csharp[ParameterBasedNewVersion](api-design/sample/Samples.cs?name=ParameterBasedNewVersion)]
 

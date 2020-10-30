@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 09/07/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/deadlines-cancellation
-ms.openlocfilehash: 59b737a032ea37a554ad5ddd0f4d44e4e1602d88
-ms.sourcegitcommit: a07f83b00db11f32313045b3492e5d1ff83c4437
+ms.openlocfilehash: a735ed4d2ca8db1c9b7998acd14f9be761fe7ec6
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90594439"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059929"
 ---
 # <a name="reliable-grpc-services-with-deadlines-and-cancellation"></a>Son tarihleri ve iptali olan güvenilir gRPC Hizmetleri
 
@@ -57,7 +58,7 @@ Son Tarih aşılırsa, istemci ve hizmetin farklı bir davranışı vardır:
 
 ### <a name="propagating-deadlines"></a>Son tarihleri yayma
 
-Çalıştırılan bir gRPC hizmetinden bir gRPC çağrısı yapıldığında, son tarih yayılmalıdır. Örnek:
+Çalıştırılan bir gRPC hizmetinden bir gRPC çağrısı yapıldığında, son tarih yayılmalıdır. Örneğin:
 
 1. `FrontendService.GetUser`Son tarihi olan istemci uygulaması çağrıları.
 2. `FrontendService` çağırır `UserService.GetUser` . İstemci tarafından belirtilen son tarih, yeni gRPC çağrısıyla belirtilmelidir.
@@ -76,7 +77,7 @@ Son tarihleri el ile yayma, mabera olabilir. Son tarihin her çağrıya geçiril
 
 Daha fazla bilgi için bkz. <xref:grpc/clientfactory#deadline-and-cancellation-propagation>.
 
-## <a name="cancellation"></a>İptal
+## <a name="cancellation"></a>İptal Etme
 
 İptal etme, gRPC istemcisinin artık gerekli olmayan uzun çalışan çağrıları iptal etmesine olanak tanır. Örneğin, Kullanıcı bir Web sitesindeki sayfayı ziyaret ettiğinde gerçek zamanlı güncelleştirmeleri akıp bir gRPC çağrısı başlatılır. Kullanıcı sayfadan uzaklaştığında akış iptal edilmelidir.
 

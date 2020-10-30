@@ -7,6 +7,7 @@ ms.author: anurse
 ms.custom: devx-track-csharp, signalr, devx-track-js
 ms.date: 06/12/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/diagnostics
-ms.openlocfilehash: 890359c9e9f6c3c60f3105124f52c66b09a8a4fb
-ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
+ms.openlocfilehash: 6e5e9d866a1e03e69856cc63dcfe30284048dd6d
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92690669"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061320"
 ---
 # <a name="logging-and-diagnostics-in-aspnet-core-no-locsignalr"></a>ASP.NET Core 'de günlüğe kaydetme ve tanılama SignalR
 
@@ -43,7 +44,7 @@ SignalR İki Günlükçü kategorisi kullanır:
 * `Microsoft.AspNetCore.SignalR`: Merkez protokolleriyle ilgili Günlükler için, hub 'Ları etkinleştirme, yöntemleri çağırma ve hub ile ilgili diğer etkinlikler için.
 * `Microsoft.AspNetCore.Http.Connections`: WebSockets, uzun yoklama, Server-Sent olayları ve alt düzey altyapı gibi aktarımlarıyla ilgili Günlükler için SignalR .
 
-Ayrıntılı günlükleri ' den etkinleştirmek için SignalR , `Debug` aşağıdaki öğeleri içindeki alt bölümüne ekleyerek önceki ön eklerin her ikisini de *appsettings.jsdosya üzerinde* bir düzeye yapılandırın `LogLevel` `Logging` :
+Ayrıntılı günlükleri ' den etkinleştirmek için SignalR , `Debug` *appsettings.json* aşağıdaki öğeleri `LogLevel` içindeki alt bölümüne ekleyerek önceki ön eklerin her ikisini de dosyanızdaki düzeye yapılandırın `Logging` :
 
 [!code-json[](diagnostics/logging-config.json?highlight=7-8)]
 

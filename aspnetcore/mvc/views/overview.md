@@ -5,6 +5,7 @@ description: Görünümlerin ASP.NET Core MVC 'de uygulamanın veri sunumunu ve 
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/overview
-ms.openlocfilehash: 6afd69414f2dc0158f724c6e6f7b3a3e51c1e92c
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 373b17377740441d3859e3b7d942017a22bc7a68
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630685"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060631"
 ---
 # <a name="views-in-aspnet-core-mvc"></a>ASP.NET Core MVC 'deki görünümler
 
@@ -35,7 +36,7 @@ ASP.NET Core MVC 'de, görünümler, biçimlendirme içinde [C# programlama dili
 
 ![Visual Studio Çözüm Gezgini Görünüm klasörü,. cshtml, Contact. cshtml ve Index. cshtml dosyalarını göstermek için açık giriş klasörüyle açıktır](overview/_static/views_solution_explorer.png)
 
-*Ana* denetleyici, *Görünümler* klasörünün içindeki bir *giriş* klasörüyle temsil edilir. *Giriş* klasörü, *hakkında*, *iletişim*ve *Dizin* (giriş sayfası) Web sayfalarının görünümlerini içerir. Bir Kullanıcı bu üç Web sayfasından birini istediğinde, *ana* denetleyicideki denetleyici eylemleri, Kullanıcı için bir Web sayfası oluşturmak ve döndürmek için kullanılan üç görünümden hangisinin kullanıldığını tespit ediyor.
+*Ana* denetleyici, *Görünümler* klasörünün içindeki bir *giriş* klasörüyle temsil edilir. *Giriş* klasörü, *hakkında* , *iletişim* ve *Dizin* (giriş sayfası) Web sayfalarının görünümlerini içerir. Bir Kullanıcı bu üç Web sayfasından birini istediğinde, *ana* denetleyicideki denetleyici eylemleri, Kullanıcı için bir Web sayfası oluşturmak ve döndürmek için kullanılan üç görünümden hangisinin kullanıldığını tespit ediyor.
 
 Tutarlı Web sayfası bölümleri sağlamak ve kod tekrarlamayı azaltmak için [düzenleri](xref:mvc/views/layout) kullanın. Düzenler genellikle üstbilgiyi, gezinti ve menü öğelerini ve alt bilgisini içerir. Üst bilgi ve altbilgi genellikle birçok meta veri öğesi için ortak biçimlendirme ve betik ve stil varlıklarına bağlantılar içerir. Düzenler, görünümlerinizde bu ortak biçimlendirmeyi önlemenize yardımcı olur.
 
@@ -98,7 +99,7 @@ Bu eylem döndüğünde, son bölümde gösterilen *hakkında. cshtml* görünü
 
 Bir eylem bir görünüm döndürdüğünde, *görünüm bulma* adlı bir işlem gerçekleşir. Bu işlem, görünüm adına göre hangi görünüm dosyasının kullanıldığını belirler. 
 
-Yönteminin varsayılan davranışı `View` ( `return View();` ), çağrılan eylem yöntemiyle aynı ada sahip bir görünüm döndürmemelidir. Örneğin, denetleyicinin *hakkında* `ActionResult` yöntemi adı *. cshtml*adlı bir görünüm dosyasını aramak için kullanılır. İlk olarak, çalışma zamanı görünümün *Görünümler/[ControllerName]* klasörüne bakar. Burada eşleşen bir görünüm bulamazsa, görünümün *paylaşılan* klasörünü arar.
+Yönteminin varsayılan davranışı `View` ( `return View();` ), çağrılan eylem yöntemiyle aynı ada sahip bir görünüm döndürmemelidir. Örneğin, denetleyicinin *hakkında* `ActionResult` yöntemi adı *. cshtml* adlı bir görünüm dosyasını aramak için kullanılır. İlk olarak, çalışma zamanı görünümün *Görünümler/[ControllerName]* klasörüne bakar. Burada eşleşen bir görünüm bulamazsa, görünümün *paylaşılan* klasörünü arar.
 
 ' İ örtülü olarak döndürmeniz ya da `ViewResult` `return View();` açıkça görünüm adını ile yöntemine iletmeniz önemi yoktur `View` `return View("<ViewName>");` . Her iki durumda da, eşleşen bir görünüm dosyası için bulma aramalarını şu sırayla görüntüleyin:
 
@@ -142,9 +143,9 @@ Görünümlerinizin dosya yapısını, bakım ve açıklık için denetleyiciler
 
 ### <a name="strongly-typed-data-viewmodel"></a>Kesin tür belirtilmiş veriler (ViewModel)
 
-En güçlü yaklaşım, görünümde bir [model](xref:mvc/models/model-binding) türü belirtmektir. Bu model genellikle *ViewModel*olarak adlandırılır. ViewModel türünün bir örneğini eylemden görünüme geçirirsiniz.
+En güçlü yaklaşım, görünümde bir [model](xref:mvc/models/model-binding) türü belirtmektir. Bu model genellikle *ViewModel* olarak adlandırılır. ViewModel türünün bir örneğini eylemden görünüme geçirirsiniz.
 
-Görünümü bir görünüme aktarmak için ViewModel kullanmak, görünümün *tanımlayıcı* tür denetlemesinin avantajlarından yararlanmasını sağlar. *Güçlü yazma* (veya *kesin belirlenmiş*), her değişken ve sabitin açıkça tanımlanmış bir tür (örneğin,, `string` veya) olduğu anlamına gelir `int` `DateTime` . Bir görünümde kullanılan türlerin geçerliliği derleme zamanında denetlenir.
+Görünümü bir görünüme aktarmak için ViewModel kullanmak, görünümün *tanımlayıcı* tür denetlemesinin avantajlarından yararlanmasını sağlar. *Güçlü yazma* (veya *kesin belirlenmiş* ), her değişken ve sabitin açıkça tanımlanmış bir tür (örneğin,, `string` veya) olduğu anlamına gelir `int` `DateTime` . Bir görünümde kullanılan türlerin geçerliliği derleme zamanında denetlenir.
 
 [Visual Studio](https://visualstudio.microsoft.com) ve [Visual Studio Code](https://code.visualstudio.com/) listesi [IntelliSense](/visualstudio/ide/using-intellisense)adlı bir özellik kullanılarak türü kesin belirlenmiş sınıf üyeleridir. ViewModel özelliklerini görmek istediğinizde, ViewModel için değişken adını ve ardından bir nokta ( `.` ) yazın. Bu, daha az hata vererek kodu daha hızlı yazmanıza yardımcı olur.
 
@@ -181,7 +182,7 @@ public IActionResult Contact()
 }
 ```
 
-Bir görünüme sağlayabilmeniz için model türlerinde hiçbir kısıtlama yoktur. Basit eski CLR nesnesi (POCO) viewmodeller için çok az veya hiç davranış (Yöntem) tanımlanmış olarak kullanılması önerilir. Genellikle ViewModel sınıfları, uygulamanın kökündeki *modeller* klasöründe veya ayrı bir *viewmodeller* klasöründe depolanır. Yukarıdaki örnekte kullanılan *Adres* viewmodel, *Address.cs*adlı bir dosyada depolanan bir poco ViewModel modelidir:
+Bir görünüme sağlayabilmeniz için model türlerinde hiçbir kısıtlama yoktur. Basit eski CLR nesnesi (POCO) viewmodeller için çok az veya hiç davranış (Yöntem) tanımlanmış olarak kullanılması önerilir. Genellikle ViewModel sınıfları, uygulamanın kökündeki *modeller* klasöründe veya ayrı bir *viewmodeller* klasöründe depolanır. Yukarıdaki örnekte kullanılan *Adres* viewmodel, *Address.cs* adlı bir dosyada depolanan bir poco ViewModel modelidir:
 
 ```csharp
 namespace WebApplication1.ViewModels
@@ -205,7 +206,7 @@ Hiçbir şey, hem ViewModel türleriniz hem de iş modeli türleriniz için ayn�
 
 `ViewBag`*içinde Razor kullanılamaz Sayfalar.*
 
-Türü kesin belirlenmiş görünümlere ek olarak, görünümler, verilerin bir *zayıf türü* olan ( *gevşek olarak yazılmış*) bir veri koleksiyonu erişimi vardır. Güçlü türlerin aksine, *zayıf türler* (veya *gevşek türler*), kullanmakta olduğunuz veri türünü açıkça bildirmeyeceğiniz anlamına gelir. Denetleyicilerde ve görünümlerde küçük miktarlarda veri iletmek için zayıf yazılmış verilerin toplanmasını kullanabilirsiniz.
+Türü kesin belirlenmiş görünümlere ek olarak, görünümler, verilerin bir *zayıf türü* olan ( *gevşek olarak yazılmış* ) bir veri koleksiyonu erişimi vardır. Güçlü türlerin aksine, *zayıf türler* (veya *gevşek türler* ), kullanmakta olduğunuz veri türünü açıkça bildirmeyeceğiniz anlamına gelir. Denetleyicilerde ve görünümlerde küçük miktarlarda veri iletmek için zayıf yazılmış verilerin toplanmasını kullanabilirsiniz.
 
 | Verileri bir... arasında geçirme                        | Örnek                                                                        |
 | ------------------------------------------------- | ------------------------------------------------------------------------------ |

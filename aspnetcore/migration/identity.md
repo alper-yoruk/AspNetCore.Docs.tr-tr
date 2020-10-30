@@ -5,6 +5,7 @@ description: Bir ASP.NET MVC projesinden kimlik doğrulaması ve kimliği ASP.NE
 ms.author: riande
 ms.date: 3/22/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/identity
-ms.openlocfilehash: c8e6a1a8bf9ef06d98db0e7e0a6a0e5ff393e322
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 8ceff0596c069d815c38b9bb526477a9d1430951
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865534"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060657"
 ---
 # <a name="migrate-authentication-and-no-locidentity-to-aspnet-core"></a>Kimlik doğrulamasını ve Identity ASP.NET Core geçir
 
@@ -31,7 +32,7 @@ ms.locfileid: "88865534"
 
 ## <a name="configure-no-locidentity-and-membership"></a>Yapılandırma Identity ve üyelik
 
-ASP.NET MVC 'de, kimlik doğrulama ve kimlik özellikleri Identity *App_Start* klasöründe bulunan *Startup.Auth.cs* ve * Identity config.cs*ile ASP.NET kullanılarak yapılandırılır. ASP.NET Core MVC 'de, bu özellikler *Startup.cs*' de yapılandırılır.
+ASP.NET MVC 'de, kimlik doğrulama ve kimlik özellikleri Identity *App_Start* klasöründe bulunan *Startup.Auth.cs* ve *Identity config.cs* ile ASP.NET kullanılarak yapılandırılır. ASP.NET Core MVC 'de, bu özellikler *Startup.cs* ' de yapılandırılır.
 
 Aşağıdaki NuGet paketlerini yükleyin:
 
@@ -39,7 +40,7 @@ Aşağıdaki NuGet paketlerini yükleyin:
 * `Microsoft.AspNetCore.Authentication.Cookies`
 * `Microsoft.EntityFrameworkCore.SqlServer`
 
-*Startup.cs*' de, `Startup.ConfigureServices` Entity Framework ve hizmetlerini kullanmak için yöntemi güncelleştirin Identity :
+*Startup.cs* ' de, `Startup.ConfigureServices` Entity Framework ve hizmetlerini kullanmak için yöntemi güncelleştirin Identity :
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -56,9 +57,9 @@ public void ConfigureServices(IServiceCollection services)
 }
 ```
 
-Bu noktada, yukarıdaki kodda henüz ASP.NET MVC projesinden geçirdiğimiz iki tür vardır: `ApplicationDbContext` ve `ApplicationUser` . ASP.NET Core projesinde yeni *modeller* klasörü oluşturun ve bu türlere karşılık gelen kendisine iki sınıf ekleyin. Bu sınıfların ASP.NET MVC sürümlerini */models/ Identity models.cs*içinde bulacaksınız, ancak daha açık olan bu yana geçirilmiş projede sınıf başına bir dosya kullanacağız.
+Bu noktada, yukarıdaki kodda henüz ASP.NET MVC projesinden geçirdiğimiz iki tür vardır: `ApplicationDbContext` ve `ApplicationUser` . ASP.NET Core projesinde yeni *modeller* klasörü oluşturun ve bu türlere karşılık gelen kendisine iki sınıf ekleyin. Bu sınıfların ASP.NET MVC sürümlerini */models/ Identity models.cs* içinde bulacaksınız, ancak daha açık olan bu yana geçirilmiş projede sınıf başına bir dosya kullanacağız.
 
-*ApplicationUser.cs*:
+*ApplicationUser.cs* :
 
 ```csharp
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -71,7 +72,7 @@ namespace NewMvcProject.Models
 }
 ```
 
-*ApplicationDbContext.cs*:
+*ApplicationDbContext.cs* :
 
 ```csharp
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -114,9 +115,9 @@ Uygulamamız artık kimlik doğrulama ve Hizmetleri desteklemeye hazırdır Iden
 
 ## <a name="migrate-registration-and-login-logic"></a>Kayıt ve oturum açma mantığını geçirme
 
-IdentityUygulama için yapılandırılmış hizmetler ve Entity Framework ve SQL Server kullanılarak yapılandırılmış veri erişimi sayesinde, kayıt ve uygulamaya oturum açma desteği eklemeye hazırız. [Daha önce geçiş sürecinde,](xref:migration/mvc#migrate-the-layout-file) *_Layout. cshtml*içindeki *_LoginPartial* bir başvuruyu yorumlayacağız. Artık bu koda geri dönmeli, bu kodun açıklamasını kaldırın ve oturum açma işlevlerini desteklemek için gerekli denetleyiciler ve görünümlerde ekleme zamanı vardır.
+IdentityUygulama için yapılandırılmış hizmetler ve Entity Framework ve SQL Server kullanılarak yapılandırılmış veri erişimi sayesinde, kayıt ve uygulamaya oturum açma desteği eklemeye hazırız. [Daha önce geçiş sürecinde,](xref:migration/mvc#migrate-the-layout-file) *_Layout. cshtml* içindeki *_LoginPartial* bir başvuruyu yorumlayacağız. Artık bu koda geri dönmeli, bu kodun açıklamasını kaldırın ve oturum açma işlevlerini desteklemek için gerekli denetleyiciler ve görünümlerde ekleme zamanı vardır.
 
-`@Html.Partial` *_Layout. cshtml*içindeki satırın açıklamasını kaldırın:
+`@Html.Partial` *_Layout. cshtml* içindeki satırın açıklamasını kaldırın:
 
 ```cshtml
       <li>@Html.ActionLink("Contact", "Contact", "Home")</li>

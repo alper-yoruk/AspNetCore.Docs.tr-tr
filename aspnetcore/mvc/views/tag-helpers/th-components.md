@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.0'
 ms.author: scaddie
 ms.date: 06/12/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/th-components
-ms.openlocfilehash: d3bae9cd5b4a5c7315c795229c7eafbf1e44e22d
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 15bddd8ce18546bef7ee7e6ec2e32e369d0858a3
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88627591"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060566"
 ---
 # <a name="tag-helper-components-in-aspnet-core"></a>ASP.NET Core içindeki etiket Yardımcısı bileşenleri
 
@@ -30,7 +31,7 @@ ms.locfileid: "88627591"
 
 Etiket Yardımcısı bileşeni, sunucu tarafı kodundan HTML öğelerini koşullu olarak değiştirmenize veya eklemenize olanak sağlayan bir etiket yardımcıdır. Bu özellik ASP.NET Core 2,0 veya üzeri sürümlerde kullanılabilir.
 
-ASP.NET Core iki yerleşik etiket Yardımcısı bileşeni içerir: `head` ve `body` . Bunlar <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers> ad alanında bulunur ve hem MVC hem de Razor sayfalarında kullanılabilir. Etiket Yardımcısı bileşenleri *_ViewImports. cshtml*'de uygulamayla kayıt gerektirmez.
+ASP.NET Core iki yerleşik etiket Yardımcısı bileşeni içerir: `head` ve `body` . Bunlar <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers> ad alanında bulunur ve hem MVC hem de Razor sayfalarında kullanılabilir. Etiket Yardımcısı bileşenleri *_ViewImports. cshtml* 'de uygulamayla kayıt gerektirmez.
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/views/tag-helpers/th-components/samples) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
@@ -123,7 +124,7 @@ Yukarıdaki kodda:
 
 * Öğesinden türeten bir ortak sınıf oluşturun <xref:Microsoft.AspNetCore.Mvc.Razor.TagHelpers.TagHelperComponentTagHelper> .
 * Sınıfına bir [`[HtmlTargetElement]`](xref:Microsoft.AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute) öznitelik uygulayın. Hedef HTML öğesinin adını belirtin.
-* *Isteğe bağlı*: [`[EditorBrowsable(EditorBrowsableState.Never)]`](xref:System.ComponentModel.EditorBrowsableAttribute) türün IntelliSense 'de görüntülenmesini engellemek için sınıfa bir öznitelik uygulayın.
+* *Isteğe bağlı* : [`[EditorBrowsable(EditorBrowsableState.Never)]`](xref:System.ComponentModel.EditorBrowsableAttribute) türün IntelliSense 'de görüntülenmesini engellemek için sınıfa bir öznitelik uygulayın.
 
 Aşağıdaki kod, HTML öğesini hedefleyen özel bir etiket Yardımcısı bileşeni oluşturur `<address>` :
 

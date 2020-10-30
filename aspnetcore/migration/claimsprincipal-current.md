@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 03/26/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/claimsprincipal-current
-ms.openlocfilehash: 426fd90374a460cb283d0d3ba921e1312fb17940
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 3aa0adb299789efbb071cdb934d43832a84cf540
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634078"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059773"
 ---
 # <a name="migrate-from-claimsprincipalcurrent"></a>ClaimsPrincipal. Current öğesinden geçir
 
@@ -36,10 +37,10 @@ ASP.NET Core kullanılırken, her ikisi de değeri `ClaimsPrincipal.Current` `Th
 
 Şu yerine, kimliği doğrulanmış geçerli kullanıcının ASP.NET Core alınması için birkaç seçenek vardır `ClaimsPrincipal` `ClaimsPrincipal.Current` :
 
-* **ControllerBase. User**. MVC denetleyicileri, geçerli kimliği doğrulanmış kullanıcıya [Kullanıcı](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.user) özelliği ile erişebilir.
-* **HttpContext. User**. Geçerli kullanıcıya erişimi olan bileşenler `HttpContext` (örneğin, ara yazılım), geçerli kullanıcıyı `ClaimsPrincipal` [HttpContext. User](/dotnet/api/microsoft.aspnetcore.http.httpcontext.user)öğesinden alabilir.
-* **Çağırandan geçirildi**. Güncel erişimi olmayan kitaplıklar, `HttpContext` genellikle denetleyiciler veya ara yazılım bileşenlerinden çağırılır ve geçerli kullanıcının kimliği bir bağımsız değişken olarak geçirilebilir.
-* **Ihttpcontextaccessor**. ASP.NET Core geçirilecek proje, geçerli kullanıcının kimliğini tüm gerekli konumlara kolayca geçiremeyecek kadar büyük olabilir. Bu gibi durumlarda, [ıhttpcontextaccessor](/dotnet/api/microsoft.aspnetcore.http.ihttpcontextaccessor) geçici çözüm olarak kullanılabilir. `IHttpContextAccessor` geçerli `HttpContext` (varsa) erişebilir. Eğer dı kullanılıyorsa, bkz <xref:fundamentals/httpcontext> .. Geçerli kullanıcının kimliğini, ASP.NET Core dı odaklı mimarisiyle çalışacak şekilde güncelleştirilmemiş kodda almaya yönelik kısa süreli bir çözüm şu şekilde olacaktır:
+* **ControllerBase. User** . MVC denetleyicileri, geçerli kimliği doğrulanmış kullanıcıya [Kullanıcı](/dotnet/api/microsoft.aspnetcore.mvc.controllerbase.user) özelliği ile erişebilir.
+* **HttpContext. User** . Geçerli kullanıcıya erişimi olan bileşenler `HttpContext` (örneğin, ara yazılım), geçerli kullanıcıyı `ClaimsPrincipal` [HttpContext. User](/dotnet/api/microsoft.aspnetcore.http.httpcontext.user)öğesinden alabilir.
+* **Çağırandan geçirildi** . Güncel erişimi olmayan kitaplıklar, `HttpContext` genellikle denetleyiciler veya ara yazılım bileşenlerinden çağırılır ve geçerli kullanıcının kimliği bir bağımsız değişken olarak geçirilebilir.
+* **Ihttpcontextaccessor** . ASP.NET Core geçirilecek proje, geçerli kullanıcının kimliğini tüm gerekli konumlara kolayca geçiremeyecek kadar büyük olabilir. Bu gibi durumlarda, [ıhttpcontextaccessor](/dotnet/api/microsoft.aspnetcore.http.ihttpcontextaccessor) geçici çözüm olarak kullanılabilir. `IHttpContextAccessor` geçerli `HttpContext` (varsa) erişebilir. Eğer dı kullanılıyorsa, bkz <xref:fundamentals/httpcontext> .. Geçerli kullanıcının kimliğini, ASP.NET Core dı odaklı mimarisiyle çalışacak şekilde güncelleştirilmemiş kodda almaya yönelik kısa süreli bir çözüm şu şekilde olacaktır:
 
   * `IHttpContextAccessor`' De [Addhttpcontextaccessor](https://github.com/aspnet/Hosting/issues/793) 'ı çağırarak dı kapsayıcısında kullanılabilir hale getirin `Startup.ConfigureServices` .
   * Başlatma sırasında bir örneğini alın `IHttpContextAccessor` ve statik bir değişkende depolayın. Örnek, daha önce geçerli kullanıcıyı statik bir özellikten alan kod için kullanılabilir hale getirilir.

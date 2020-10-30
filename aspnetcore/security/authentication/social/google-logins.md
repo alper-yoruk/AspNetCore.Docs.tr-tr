@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc, seodec18
 ms.date: 03/19/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/google-logins
-ms.openlocfilehash: a7a5260a2446ac3f3be00755ef051e56080a7485
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 111ea7c972778dfd5296d0401c16563aeaa36a63
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634299"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060319"
 ---
 # <a name="google-external-login-setup-in-aspnet-core"></a>ASP.NET Core 'de Google dış oturum açma kurulumu
 
@@ -33,11 +34,11 @@ Bu öğreticide, kullanıcıların [önceki sayfada](xref:security/authenticatio
 ## <a name="create-a-google-api-console-project-and-client-id"></a>Google API konsol projesi ve istemci KIMLIĞI oluşturma
 
 * [Microsoft. AspNetCore. Authentication. Google](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.Google)'ı yükler.
-* [Google oturum açma ile Web uygulamanızı tümleştirme](https://developers.google.com/identity/sign-in/web/sign-in) ve **Proje yapılandırma**' yı seçme bölümüne gidin.
-* **OAuth Istemcinizi yapılandırın** Iletişim kutusunda **Web sunucusu**' nu seçin.
+* [Google Sign-In Web uygulamanıza tümleştirmek](https://developers.google.com/identity/sign-in/web/sign-in) ve **Proje Yapılandır** ' ı seçmek için gezinin.
+* **OAuth Istemcinizi yapılandırın** Iletişim kutusunda **Web sunucusu** ' nu seçin.
 * **Yetkili yeniden yönlendirme URI 'leri** metin girişi kutusunda, YENIDEN yönlendirme URI 'sini ayarlayın. Örneğin, `https://localhost:44312/signin-google`
-* **ISTEMCI kimliğini** ve **istemci parolasını**kaydedin.
-* Siteyi dağıttığınızda, **Google konsolundan**yeni ortak URL 'yi kaydedin.
+* **ISTEMCI kimliğini** ve **istemci parolasını** kaydedin.
+* Siteyi dağıttığınızda, **Google konsolundan** yeni ortak URL 'yi kaydedin.
 
 ## <a name="store-the-google-client-id-and-secret"></a>Google istemci KIMLIĞINI ve gizli anahtarını depolayın
 
@@ -65,7 +66,7 @@ Google hizmetini şu şekilde ekleyin `Startup.ConfigureServices` :
 
 ## <a name="sign-in-with-google"></a>Google ile oturum açın
 
-* Uygulamayı çalıştırın ve **oturum aç**' a tıklayın. Google ile oturum açma seçeneği görüntülenir.
+* Uygulamayı çalıştırın ve **oturum aç** ' a tıklayın. Google ile oturum açma seçeneği görüntülenir.
 * Kimlik doğrulaması için Google 'a yönlendiren **Google** düğmesine tıklayın.
 * Google kimlik bilgilerinizi girdikten sonra, Web sitesine geri yönlendirilirsiniz.
 
@@ -82,7 +83,7 @@ URI segmenti, `/signin-google` Google kimlik doğrulama sağlayıcısı 'nın va
 ## <a name="troubleshooting"></a>Sorun giderme
 
 * Oturum açma işe yaramazsa ve herhangi bir hata alamıyorsanız, sorunu ayıklamanın daha kolay olması için geliştirme moduna geçin.
-* IdentityÇağrısı yaparak yapılandırılmamışsa `services.AddIdentity` `ConfigureServices` , ArgumentException 'de sonuçların kimlik doğrulaması deneniyor *: ' signınscheme ' seçeneğinin sağlanması gerekir*. Bu öğreticide kullanılan proje şablonu bunun yapılmasını sağlar.
+* IdentityÇağrısı yaparak yapılandırılmamışsa `services.AddIdentity` `ConfigureServices` , ArgumentException 'de sonuçların kimlik doğrulaması deneniyor *: ' signınscheme ' seçeneğinin sağlanması gerekir* . Bu öğreticide kullanılan proje şablonu bunun yapılmasını sağlar.
 * Site veritabanı ilk geçiş uygulanarak oluşturulmadıysa, *istek hatasını Işlerken bir veritabanı işlemi başarısız oldu* . Veritabanını oluşturmak için **geçişleri Uygula** ' yı seçin ve hatanın ötesinde devam etmek için sayfayı yenileyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar

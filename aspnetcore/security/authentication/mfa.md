@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/17/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/mfa
-ms.openlocfilehash: 76a11aa7b89b3ce60ed11bd7553a7e5898f661f4
-ms.sourcegitcommit: d1a897ebd89daa05170ac448e4831d327f6b21a8
+ms.openlocfilehash: 873f7d113df84c931ad7fbf2c72aa292e4e87c48
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/01/2020
-ms.locfileid: "91606795"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060397"
 ---
 # <a name="multi-factor-authentication-in-aspnet-core"></a>ASP.NET Core 'de çok faktörlü kimlik doğrulaması
 
@@ -151,7 +152,7 @@ namespace IdentityStandaloneMfa
 }
 ```
 
-IdentityHizmet kurulumu sınıfında değiştiği için `Startup` , Identity güncelleştirilmeleri gereken düzenler. IdentitySayfaları uygulamaya dönüştürün. * Identity /Account/Manage/_Layout. cshtml* dosyasında düzeni tanımlayın.
+IdentityHizmet kurulumu sınıfında değiştiği için `Startup` , Identity güncelleştirilmeleri gereken düzenler. IdentitySayfaları uygulamaya dönüştürün. *Identity /Account/Manage/_Layout. cshtml* dosyasında düzeni tanımlayın.
 
 ```cshtml
 @{
@@ -332,7 +333,7 @@ You can enable MFA to login here:
 
 `Login`Yönteminde, `IIdentityServerInteractionService` `_interaction` OpenID Connect istek parametrelerine erişmek için arabirim uygulama kullanılır. `acr_values`Parametresi, özelliği kullanılarak erişilir `AcrValues` . İstemci bu `mfa` ayarı kümesiyle gönderdiğinden, bu daha sonra denetlenebilir.
 
-MFA gerekliyse ve içindeki Kullanıcı ASP.NET Core Identity MFA 'yı etkinleştirmişse, oturum açma işlemi devam eder. Kullanıcının MFA özelliği etkin olmadığında, Kullanıcı *ErrorEnable2FA. cshtml*özel görünümüne yönlendirilir. Ardından ASP.NET Core Identity Kullanıcı oturumunu kapatır.
+MFA gerekliyse ve içindeki Kullanıcı ASP.NET Core Identity MFA 'yı etkinleştirmişse, oturum açma işlemi devam eder. Kullanıcının MFA özelliği etkin olmadığında, Kullanıcı *ErrorEnable2FA. cshtml* özel görünümüne yönlendirilir. Ardından ASP.NET Core Identity Kullanıcı oturumunu kapatır.
 
 ```csharp
 //

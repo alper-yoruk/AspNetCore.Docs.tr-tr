@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/21/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/file-uploads
-ms.openlocfilehash: 6ff78b26e8e2363cf6c54ebb2a392f390fb2995c
-ms.sourcegitcommit: cd412a44f26cb416ceb348fc0a1ccc9a6e9ca73e
+ms.openlocfilehash: 14561bace565c104d0a9c926cad3105c4865e72a
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/21/2020
-ms.locfileid: "88720285"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061177"
 ---
 # <a name="upload-files-in-aspnet-core"></a>ASP.NET Core dosyaları karşıya yükleme
 
@@ -35,7 +36,7 @@ ASP.NET Core, daha küçük dosyalar için arabellekli model bağlama ve daha b�
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="security-considerations"></a>Güvenlik konuları
+## <a name="security-considerations"></a>Güvenlikle ilgili dikkat edilmesi gerekenler
 
 Kullanıcılara bir sunucuya dosya yükleme yeteneği sağlarken dikkatli olun. Saldırganlar şunları deneyebilir:
 
@@ -124,7 +125,7 @@ Akış büyük dosyaları [akış ile büyük dosyaları karşıya yükle](#uplo
 
 Küçük dosyaları karşıya yüklemek için, çok parçalı bir form kullanın veya JavaScript kullanarak bir POST isteği oluşturun.
 
-Aşağıdaki örnek, Razor tek bir dosyayı karşıya yüklemek için sayfalar formunun kullanımını gösterir (örnek uygulamada*Pages/Bufferedsinglefileuploadfiziksel. cshtml* ):
+Aşağıdaki örnek, Razor tek bir dosyayı karşıya yüklemek için sayfalar formunun kullanımını gösterir (örnek uygulamada *Pages/Bufferedsinglefileuploadfiziksel. cshtml* ):
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -239,7 +240,7 @@ Sunucuya yüklenen tek dosyalara, kullanılarak [model bağlama](xref:mvc/models
 >
 > Bu nedenle, şu ana kadar dikkate alınması gereken örnekler aşağıda verilmiştir. Ek bilgiler aşağıdaki bölümler ve [örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)tarafından sağlanır:
 >
-> * [Güvenlik konuları](#security-considerations)
+> * [Güvenlikle ilgili dikkat edilmesi gerekenler](#security-considerations)
 > * [Doğrulama](#validation)
 
 Model bağlama kullanarak dosyaları karşıya yüklerken <xref:Microsoft.AspNetCore.Http.IFormFile> , eylem yöntemi kabul edebilir:
@@ -410,7 +411,7 @@ Yukarıdaki örnek, örnek uygulamada gösterilen senaryoya benzerdir:
 >
 > Belirtilen örneklerde dikkate alınması gereken önemli noktalar. Ek bilgiler aşağıdaki bölümler ve [örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)tarafından sağlanır:
 >
-> * [Güvenlik konuları](#security-considerations)
+> * [Güvenlikle ilgili dikkat edilmesi gerekenler](#security-considerations)
 > * [Doğrulama](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>Akışa sahip büyük dosyaları karşıya yükleme
@@ -435,7 +436,7 @@ Model bağlama formu okumadığından formdan bağlanan parametreler bağlanamaz
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Controllers/StreamingController.cs?name=snippet_UploadDatabase)]
 
-`MultipartRequestHelper` (*Utilities/MultipartRequestHelper. cs*):
+`MultipartRequestHelper` ( *Utilities/MultipartRequestHelper. cs* ):
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Utilities/MultipartRequestHelper.cs)]
 
@@ -533,7 +534,7 @@ Birçok uygulama, dosyanın var olduğunu bir denetim içermelidir; Aksi takdird
 
 Karşıya yüklenen dosyaların boyutunu sınırlayın.
 
-Örnek uygulamada, dosyanın boyutu 2 MB ile sınırlıdır (bayt cinsinden gösterilir). Sınır, dosyadaki *appsettings.js* [yapılandırma](xref:fundamentals/configuration/index) yoluyla sağlanır:
+Örnek uygulamada, dosyanın boyutu 2 MB ile sınırlıdır (bayt cinsinden gösterilir). Sınır, dosyadaki [yapılandırma](xref:fundamentals/configuration/index) yoluyla sağlanır *appsettings.json* :
 
 ```json
 {
@@ -759,7 +760,7 @@ ASP.NET Core, daha küçük dosyalar için arabellekli model bağlama ve daha b�
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="security-considerations"></a>Güvenlik konuları
+## <a name="security-considerations"></a>Güvenlikle ilgili dikkat edilmesi gerekenler
 
 Kullanıcılara bir sunucuya dosya yükleme yeteneği sağlarken dikkatli olun. Saldırganlar şunları deneyebilir:
 
@@ -848,7 +849,7 @@ Akış büyük dosyaları [akış ile büyük dosyaları karşıya yükle](#uplo
 
 Küçük dosyaları karşıya yüklemek için, çok parçalı bir form kullanın veya JavaScript kullanarak bir POST isteği oluşturun.
 
-Aşağıdaki örnek, Razor tek bir dosyayı karşıya yüklemek için sayfalar formunun kullanımını gösterir (örnek uygulamada*Pages/Bufferedsinglefileuploadfiziksel. cshtml* ):
+Aşağıdaki örnek, Razor tek bir dosyayı karşıya yüklemek için sayfalar formunun kullanımını gösterir (örnek uygulamada *Pages/Bufferedsinglefileuploadfiziksel. cshtml* ):
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -963,7 +964,7 @@ Sunucuya yüklenen tek dosyalara, kullanılarak [model bağlama](xref:mvc/models
 >
 > Bu nedenle, şu ana kadar dikkate alınması gereken örnekler aşağıda verilmiştir. Ek bilgiler aşağıdaki bölümler ve [örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)tarafından sağlanır:
 >
-> * [Güvenlik konuları](#security-considerations)
+> * [Güvenlikle ilgili dikkat edilmesi gerekenler](#security-considerations)
 > * [Doğrulama](#validation)
 
 Model bağlama kullanarak dosyaları karşıya yüklerken <xref:Microsoft.AspNetCore.Http.IFormFile> , eylem yöntemi kabul edebilir:
@@ -1134,7 +1135,7 @@ Yukarıdaki örnek, örnek uygulamada gösterilen senaryoya benzerdir:
 >
 > Belirtilen örneklerde dikkate alınması gereken önemli noktalar. Ek bilgiler aşağıdaki bölümler ve [örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)tarafından sağlanır:
 >
-> * [Güvenlik konuları](#security-considerations)
+> * [Güvenlikle ilgili dikkat edilmesi gerekenler](#security-considerations)
 > * [Doğrulama](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>Akışa sahip büyük dosyaları karşıya yükleme
@@ -1159,7 +1160,7 @@ Model bağlama formu okumadığından formdan bağlanan parametreler bağlanamaz
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Controllers/StreamingController.cs?name=snippet_UploadDatabase)]
 
-`MultipartRequestHelper` (*Utilities/MultipartRequestHelper. cs*):
+`MultipartRequestHelper` ( *Utilities/MultipartRequestHelper. cs* ):
 
 [!code-csharp[](file-uploads/samples/3.x/SampleApp/Utilities/MultipartRequestHelper.cs)]
 
@@ -1257,7 +1258,7 @@ Birçok uygulama, dosyanın var olduğunu bir denetim içermelidir; Aksi takdird
 
 Karşıya yüklenen dosyaların boyutunu sınırlayın.
 
-Örnek uygulamada, dosyanın boyutu 2 MB ile sınırlıdır (bayt cinsinden gösterilir). Sınır, dosyadaki *appsettings.js* [yapılandırma](xref:fundamentals/configuration/index) yoluyla sağlanır:
+Örnek uygulamada, dosyanın boyutu 2 MB ile sınırlıdır (bayt cinsinden gösterilir). Sınır, dosyadaki [yapılandırma](xref:fundamentals/configuration/index) yoluyla sağlanır *appsettings.json* :
 
 ```json
 {
@@ -1494,7 +1495,7 @@ ASP.NET Core, daha küçük dosyalar için arabellekli model bağlama ve daha b�
 
 [Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))
 
-## <a name="security-considerations"></a>Güvenlik konuları
+## <a name="security-considerations"></a>Güvenlikle ilgili dikkat edilmesi gerekenler
 
 Kullanıcılara bir sunucuya dosya yükleme yeteneği sağlarken dikkatli olun. Saldırganlar şunları deneyebilir:
 
@@ -1583,7 +1584,7 @@ Akış büyük dosyaları [akış ile büyük dosyaları karşıya yükle](#uplo
 
 Küçük dosyaları karşıya yüklemek için, çok parçalı bir form kullanın veya JavaScript kullanarak bir POST isteği oluşturun.
 
-Aşağıdaki örnek, Razor tek bir dosyayı karşıya yüklemek için sayfalar formunun kullanımını gösterir (örnek uygulamada*Pages/Bufferedsinglefileuploadfiziksel. cshtml* ):
+Aşağıdaki örnek, Razor tek bir dosyayı karşıya yüklemek için sayfalar formunun kullanımını gösterir (örnek uygulamada *Pages/Bufferedsinglefileuploadfiziksel. cshtml* ):
 
 ```cshtml
 <form enctype="multipart/form-data" method="post">
@@ -1698,7 +1699,7 @@ Sunucuya yüklenen tek dosyalara, kullanılarak [model bağlama](xref:mvc/models
 >
 > Bu nedenle, şu ana kadar dikkate alınması gereken örnekler aşağıda verilmiştir. Ek bilgiler aşağıdaki bölümler ve [örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)tarafından sağlanır:
 >
-> * [Güvenlik konuları](#security-considerations)
+> * [Güvenlikle ilgili dikkat edilmesi gerekenler](#security-considerations)
 > * [Doğrulama](#validation)
 
 Model bağlama kullanarak dosyaları karşıya yüklerken <xref:Microsoft.AspNetCore.Http.IFormFile> , eylem yöntemi kabul edebilir:
@@ -1869,7 +1870,7 @@ Yukarıdaki örnek, örnek uygulamada gösterilen senaryoya benzerdir:
 >
 > Belirtilen örneklerde dikkate alınması gereken önemli noktalar. Ek bilgiler aşağıdaki bölümler ve [örnek uygulama](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/mvc/models/file-uploads/samples/)tarafından sağlanır:
 >
-> * [Güvenlik konuları](#security-considerations)
+> * [Güvenlikle ilgili dikkat edilmesi gerekenler](#security-considerations)
 > * [Doğrulama](#validation)
 
 ### <a name="upload-large-files-with-streaming"></a>Akışa sahip büyük dosyaları karşıya yükleme
@@ -1894,7 +1895,7 @@ Model bağlama formu okumadığından formdan bağlanan parametreler bağlanamaz
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Controllers/StreamingController.cs?name=snippet_UploadDatabase)]
 
-`MultipartRequestHelper` (*Utilities/MultipartRequestHelper. cs*):
+`MultipartRequestHelper` ( *Utilities/MultipartRequestHelper. cs* ):
 
 [!code-csharp[](file-uploads/samples/2.x/SampleApp/Utilities/MultipartRequestHelper.cs)]
 
@@ -1992,7 +1993,7 @@ Birçok uygulama, dosyanın var olduğunu bir denetim içermelidir; Aksi takdird
 
 Karşıya yüklenen dosyaların boyutunu sınırlayın.
 
-Örnek uygulamada, dosyanın boyutu 2 MB ile sınırlıdır (bayt cinsinden gösterilir). Sınır, dosyadaki *appsettings.js* [yapılandırma](xref:fundamentals/configuration/index) yoluyla sağlanır:
+Örnek uygulamada, dosyanın boyutu 2 MB ile sınırlıdır (bayt cinsinden gösterilir). Sınır, dosyadaki [yapılandırma](xref:fundamentals/configuration/index) yoluyla sağlanır *appsettings.json* :
 
 ```json
 {

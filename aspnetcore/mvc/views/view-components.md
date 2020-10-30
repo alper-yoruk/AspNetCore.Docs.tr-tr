@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/18/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/view-components
-ms.openlocfilehash: 32ae699c4ef501096a9c4ab7bca6673139910f02
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e0ff97b53d12fbf6c6a89e94704de1aee9d7f9e6
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635092"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060592"
 ---
 # <a name="view-components-in-aspnet-core"></a>ASP.NET Core bileşenleri görüntüleme
 
@@ -95,7 +96,7 @@ Bir görünüm bileşeni, bir `InvokeAsync` `Task<IViewComponentResult>` veya d�
 
 Arama yolu, denetleyiciler + görünümler ve sayfalar kullanan projeler için geçerlidir Razor .
 
-Bir görünüm bileşeni için varsayılan görünüm adı *varsayılandır*, yani görünüm dosyanız genellikle *default. cshtml*olarak adlandırılır. Görünüm bileşeni sonucunu oluştururken veya yöntemini çağırırken farklı bir görünüm adı belirtebilirsiniz `View` .
+Bir görünüm bileşeni için varsayılan görünüm adı *varsayılandır* , yani görünüm dosyanız genellikle *default. cshtml* olarak adlandırılır. Görünüm bileşeni sonucunu oluştururken veya yöntemini çağırırken farklı bir görünüm adı belirtebilirsiniz `View` .
 
 Görünüm dosyasını *default. cshtml* olarak yazmanız ve *görünümleri/paylaşılan/bileşenler/{görünüm bileşen adı}/{View Name}* yolunu kullanmanız önerilir. `PriorityList`Bu örnekte kullanılan görünüm bileşeni görünüm bileşeni görünümü Için *Görünümler/paylaşılan/bileşenler/PriorityList/default. cshtml* kullanır.
 
@@ -179,7 +180,7 @@ Bir *Viewcomponents* klasörü oluşturun ve aşağıdaki sınıfı ekleyin `Pri
 Koda notlar:
 
 * Görünüm bileşen sınıfları projedeki **herhangi bir** klasörde bulunabilir.
-* PriorityList**viewcomponent** sınıf adı, son ek **viewcomponent**ile sona ertiğinden, çalışma zamanı bir görünümden sınıf bileşenine başvururken "prioritylist" dizesini kullanır. Daha sonra ayrıntılı olarak açıklayacağım.
+* PriorityList **viewcomponent** sınıf adı, son ek **viewcomponent** ile sona ertiğinden, çalışma zamanı bir görünümden sınıf bileşenine başvururken "prioritylist" dizesini kullanır. Daha sonra ayrıntılı olarak açıklayacağım.
 * `[ViewComponent]`Özniteliği bir görünüm bileşenine başvurmak için kullanılan adı değiştirebilir. Örneğin, sınıfını adlandırdık `XYZ` ve özniteliği uygulamış olduğumuz `ViewComponent` :
 
   ```csharp
@@ -203,9 +204,9 @@ Koda notlar:
 
   [!code-cshtml[](view-components/sample/ViewCompFinal/Views/Shared/Components/PriorityList/Default1.cshtml)]
 
-   RazorGörünüm bir listesini alır `TodoItem` ve görüntüler. Görünüm bileşeni yöntemi, `InvokeAsync` görünümün adını (örneğimizde olduğu gibi) geçirmezse, *varsayılan* olarak kurala göre görünüm adı için kullanılır. Öğreticide daha sonra görünümün adının nasıl geçirileceğini göstereceğiz. Belirli bir denetleyicinin varsayılan stilini geçersiz kılmak için denetleyiciye özgü görünüm klasörüne bir görünüm ekleyin (örneğin, *Görünümler/Todo/Components/PriorityList/default. cshtml)*.
+   RazorGörünüm bir listesini alır `TodoItem` ve görüntüler. Görünüm bileşeni yöntemi, `InvokeAsync` görünümün adını (örneğimizde olduğu gibi) geçirmezse, *varsayılan* olarak kurala göre görünüm adı için kullanılır. Öğreticide daha sonra görünümün adının nasıl geçirileceğini göstereceğiz. Belirli bir denetleyicinin varsayılan stilini geçersiz kılmak için denetleyiciye özgü görünüm klasörüne bir görünüm ekleyin (örneğin, *Görünümler/Todo/Components/PriorityList/default. cshtml)* .
 
-    Görünüm bileşeni denetleyiciye özgü ise, denetleyiciyi denetleyiciye özgü klasöre ekleyebilirsiniz (*Görünümler/Todo/bileşenler/PriorityList/default. cshtml*).
+    Görünüm bileşeni denetleyiciye özgü ise, denetleyiciyi denetleyiciye özgü klasöre ekleyebilirsiniz ( *Görünümler/Todo/bileşenler/PriorityList/default. cshtml* ).
 
 * `div`Priority listesi bileşenine, *Görünümler/Todo/index. cshtml* dosyasının altına bir çağrı içeren bir çağrı ekleyin:
 
@@ -229,11 +230,11 @@ Karmaşık bir görünüm bileşeninin bazı koşullarda varsayılan olmayan bir
 
 [!code-csharp[](../../mvc/views/view-components/sample/ViewCompFinal/ViewComponents/PriorityListViewComponentFinal.cs?highlight=4,5,6,7,8,9&range=28-39)]
 
-*Görünümleri/paylaşılan/bileşenler/prioritylist/default. cshtml* dosyasını *views/Shared/Components/PRIORITYLIST/PVC. cshtml*adlı bir görünüme kopyalayın. PVC görünümünün kullanıldığını belirtmek için bir başlık ekleyin.
+*Görünümleri/paylaşılan/bileşenler/prioritylist/default. cshtml* dosyasını *views/Shared/Components/PRIORITYLIST/PVC. cshtml* adlı bir görünüme kopyalayın. PVC görünümünün kullanıldığını belirtmek için bir başlık ekleyin.
 
 [!code-cshtml[](../../mvc/views/view-components/sample/ViewCompFinal/Views/Shared/Components/PriorityList/PVC.cshtml?highlight=3)]
 
-Güncelleştirme *görünümleri/Todo/Index. cshtml*:
+Güncelleştirme *görünümleri/Todo/Index. cshtml* :
 
 <!-- Views/ToDo/Index.cshtml is never imported, so change to test tutorial -->
 
@@ -248,7 +249,7 @@ PVC görünümü işlenmemişse, görünüm bileşenini 4 veya daha yüksek bir 
 ### <a name="examine-the-view-path"></a>Görünüm yolunu inceleyin
 
 * Öncelik görünümü döndürülmemesi için öncelik parametresini üç veya daha az olacak şekilde değiştirin.
-* *Views/Todo/Components/PriorityList/default. cshtml* 'Yi *1default. cshtml*olarak geçici olarak yeniden adlandırın.
+* *Views/Todo/Components/PriorityList/default. cshtml* 'Yi *1default. cshtml* olarak geçici olarak yeniden adlandırın.
 * Uygulamayı test edin, şu hatayı alırsınız:
 
    ```
@@ -259,7 +260,7 @@ PVC görünümü işlenmemişse, görünüm bileşenini 4 veya daha yüksek bir 
    EnsureSuccessful
    ```
 
-* Görünümleri/ *Todo/bileşenler/PriorityList/1Default. cshtml* 'yi *views/Shared/Components/Prioritylist/default. cshtml*olarak kopyalayın.
+* Görünümleri/ *Todo/bileşenler/PriorityList/1Default. cshtml* 'yi *views/Shared/Components/Prioritylist/default. cshtml* olarak kopyalayın.
 * Görünümün *paylaşılan* klasörden olduğunu göstermek için *paylaşılan* Todo görünümü bileşen görünümüne bir biçimlendirme ekleyin.
 * **Paylaşılan** bileşen görünümünü test edin.
 
@@ -290,7 +291,7 @@ public class PriorityList : ViewComponent
 }
 ```
 
-Görünüm bileşeni Razor dosyası yöntemine geçirilen dizeleri listeler `Invoke` (*Görünümler/Home/Components/Prioritylist/default. cshtml*):
+Görünüm bileşeni Razor dosyası yöntemine geçirilen dizeleri listeler `Invoke` ( *Görünümler/Home/Components/Prioritylist/default. cshtml* ):
 
 ```cshtml
 @model List<string>
@@ -306,7 +307,7 @@ Görünüm bileşeni Razor dosyası yöntemine geçirilen dizeleri listeler `Inv
 
 ::: moniker range=">= aspnetcore-1.1"
 
-Görünüm bileşeni, Razor aşağıdaki yaklaşımlardan birini kullanarak bir dosyada (örneğin, *views/Home/Index. cshtml*) çağrılır:
+Görünüm bileşeni, Razor aşağıdaki yaklaşımlardan birini kullanarak bir dosyada (örneğin, *views/Home/Index. cshtml* ) çağrılır:
 
 * <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper>
 * [Etiket Yardımcısı](xref:mvc/views/tag-helpers/intro)
@@ -317,7 +318,7 @@ Yaklaşımı kullanmak için <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper
 
 ::: moniker range="< aspnetcore-1.1"
 
-Görünüm bileşeni Razor ile bir dosyada (örneğin, *views/Home/Index. cshtml*) çağrılır <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper> .
+Görünüm bileşeni Razor ile bir dosyada (örneğin, *views/Home/Index. cshtml* ) çağrılır <xref:Microsoft.AspNetCore.Mvc.IViewComponentHelper> .
 
 Çağrı `Component.InvokeAsync` :
 

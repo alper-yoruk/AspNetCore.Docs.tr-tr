@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/14/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/dotnet-client
-ms.openlocfilehash: f56beb634689b42aec3fe193c389e52de746c92a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 7849322e50aeceda0850d94f9c9bcda79a6051c8
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634013"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061229"
 ---
 # <a name="aspnet-core-no-locsignalr-net-client"></a>ASP.NET Core SignalR .NET istemcisi
 
@@ -267,7 +268,7 @@ Try-catch ifadesiyle hataları işleyin. `Exception`Bir hata oluştuktan sonra g
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
-* [Hub'lar](xref:signalr/hubs)
+* [Merkezler](xref:signalr/hubs)
 * [JavaScript istemcisi](xref:signalr/javascript-client)
-* [Azure’da Yayımlama](xref:signalr/publish-to-azure-web-app)
+* [Azure 'da yayımlama](xref:signalr/publish-to-azure-web-app)
 * [Azure SignalR hizmeti sunucusuz belgeler](/azure/azure-signalr/signalr-concept-serverless-development-config)

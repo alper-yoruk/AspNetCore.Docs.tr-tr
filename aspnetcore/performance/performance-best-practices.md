@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-2.1'
 ms.author: riande
 ms.date: 04/06/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/performance-best-practices
-ms.openlocfilehash: 01575ec87d2d346da7367523ca5e257d53de4983
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: a3fc398569fafefc0b4634e80433a5d4e0e1b4ff
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722624"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061008"
 ---
 # <a name="aspnet-core-performance-best-practices"></a>ASP.NET Core performans En Iyi yöntemleri
 
@@ -44,13 +45,13 @@ ASP.NET Core uygulamalar aynı anda birçok isteği işleyecek şekilde tasarlan
 
 ASP.NET Core uygulamalarda yaygın bir performans sorunu, zaman uyumsuz olabilecek çağrıları engelliyor. Birçok zaman uyumlu engelleme çağrısı, [Iş parçacığı havuzu](/archive/blogs/vancem/diagnosing-net-core-threadpool-starvation-with-perfview-why-my-service-is-not-saturating-all-cores-or-seems-to-stall) ve azaltılmış yanıt sürelerinin oluşmasına yol açabilir.
 
-**Şunları yapın**:
+**Şunları yapın** :
 
 * [Task. Wait](/dotnet/api/system.threading.tasks.task.wait) veya [Task. Result](/dotnet/api/system.threading.tasks.task-1.result)çağırarak zaman uyumsuz yürütmeyi engelleyin.
 * Ortak kod yollarındaki kilitleri alın. ASP.NET Core uygulamalar, kodu paralel olarak çalıştırmak için tasarlanmış olduğunda en iyi performansı sağlar.
 * [Task. Run](/dotnet/api/system.threading.tasks.task.run) çağırın ve hemen bekler. ASP.NET Core, uygulama kodunu normal Iş parçacığı havuzu iş parçacıklarında zaten çalıştırıyor, bu nedenle görevi çağırıyor. yalnızca ek gereksiz Iş parçacığı havuzu zamanlaması ile sonuçları çalıştırın. Zamanlanan kod bir iş parçacığını engelleyebilse bile, Task. Run bunu engellemez.
 
-**Şunları yapın**:
+**Şunları yapın** :
 
 * [Etkin kod yollarını](#understand-hot-code-paths) zaman uyumsuz yapın.
 * Zaman uyumsuz bir API kullanılabiliyorsa veri erişimi, g/ç ve uzun süre çalışan işlem API 'Lerini çağrı zaman uyumsuz olarak çağırın. Zaman uyumlu bir API zaman **uyumsuz yapmak Için** [Task. Run](/dotnet/api/system.threading.tasks.task.run) kullanmayın.
@@ -71,7 +72,7 @@ ASP.NET Core 3,0 ' den başlayarak, `IAsyncEnumerable<T>` `IEnumerable<T>` zaman
 Öneri
 
 * Sık kullanılan büyük nesneleri önbelleğe **almayı düşünün.** Büyük nesnelerin önbelleğe alınması pahalı ayırmaları önler.
-* Büyük dizileri depolamak için [Arraypool \<T> ](/dotnet/api/system.buffers.arraypool-1) kullanarak havuz arabellekleri **yapın** .
+* Büyük dizileri depolamak için [Arraypool \<T>](/dotnet/api/system.buffers.arraypool-1) kullanarak havuz arabellekleri **yapın** .
 * [Sık erişimli kod yollarında](#understand-hot-code-paths)çok sayıda, kısa süreli büyük **nesneler ayırmayın** .
 
 Yukarıdaki gibi bellek sorunları, [PerfView](https://github.com/Microsoft/perfview) ve İnceleme içindeki çöp toplama (GC) istatistiklerini inceleyerek tanılanabilir:
@@ -117,7 +118,7 @@ Sorgu sorunları, [Application Insights](/azure/application-insights/app-insight
 
 ## <a name="keep-common-code-paths-fast"></a>Ortak kod yollarını hızlı tutun
 
-Tüm kodunuzun hızlı olmasını istiyorsunuz. Yaygın olarak çağrılan kod yolları en kritik öneme sahiptir. Bu güncelleştirmeler şunlardır:
+Tüm kodunuzun hızlı olmasını istiyorsunuz. Yaygın olarak çağrılan kod yolları en kritik öneme sahiptir. Bunlar:
 
 * Uygulamanın istek işleme ardışık düzeninde bulunan ara yazılım bileşenleri, özellikle de ara yazılım ardışık düzende çalışır. Bu bileşenlerin performansı üzerinde büyük bir etkisi vardır.
 * Her istek için veya istek başına birden çok kez yürütülen kod. Örneğin, özel günlük kaydı, yetkilendirme işleyicileri veya geçici Hizmetleri başlatma.

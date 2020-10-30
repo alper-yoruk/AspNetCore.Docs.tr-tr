@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/22/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/sort-filter-page
-ms.openlocfilehash: e01704cb10c88f3e9442e74034f5e5d39787f300
-ms.sourcegitcommit: e519d95d17443abafba8f712ac168347b15c8b57
+ms.openlocfilehash: 51a1e2a90259898262ac655b7a0e8a55d766f0c7
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/02/2020
-ms.locfileid: "91653899"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061047"
 ---
 # <a name="part-3-no-locrazor-pages-with-ef-core-in-aspnet-core---sort-filter-paging"></a>Bölüm 3, Razor ASP.NET Core sıralama, filtreleme, sayfalama EF Core olan sayfalar
 
@@ -61,7 +62,7 @@ Yukarıdaki kod:
 
 [!code-csharp[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml.cs?name=snippet_Ternary)]
 
-Kod C# [koşullu işlecini kullanır?:](/dotnet/csharp/language-reference/operators/conditional-operator). `?:`İşleci üçlü bir işleçtir, üç işlenen alır. İlk satır, `sortOrder` null veya boş olduğunu belirtir, `NameSort` olarak ayarlanır `name_desc` . `sortOrder`Null veya ***not*** boş değilse `NameSort` boş bir dize olarak ayarlanır.
+Kod C# [koşullu işlecini kullanır?:](/dotnet/csharp/language-reference/operators/conditional-operator). `?:`İşleci üçlü bir işleçtir, üç işlenen alır. İlk satır, `sortOrder` null veya boş olduğunu belirtir, `NameSort` olarak ayarlanır `name_desc` . `sortOrder`*_Not_* _ null ya da boş ise `NameSort` boş bir dize olarak ayarlanır.
 
 Bu iki deyim, sayfanın sütun başlığı köprülerini şu şekilde ayarlamanızı sağlar:
 
@@ -84,7 +85,7 @@ Bir `IQueryable` oluşturulduğunda veya değiştirildiğinde, veritabanına hi�
 
 ### <a name="add-column-heading-hyperlinks-to-the-student-index-page"></a>Öğrenci dizini sayfasına sütun başlığı köprüleri ekleme
 
-*Öğrenciler/Index. cshtml*içindeki kodu aşağıdaki kodla değiştirin. Değişiklikler vurgulanır.
+_Students/Index.cshtml * içindeki kodu aşağıdaki kodla değiştirin. Değişiklikler vurgulanır.
 
 [!code-cshtml[Main](intro/samples/cu30snapshots/3-sorting/Pages/Students/Index1.cshtml?highlight=5,8,17-19,22,25-27,33)]
 
@@ -150,7 +151,7 @@ Uygulamayı test etme:
 
 * **Öğrenciler** sekmesini seçin ve bir arama dizesi girin. SQLite kullanıyorsanız, filtre yalnızca daha önce gösterilen isteğe bağlı kodu uyguladıysanız, büyük/küçük harfe duyarlıdır `ToUpper` .
 
-* **Ara**' yı seçin.
+* **Ara** ' yı seçin.
 
 URL 'nin arama dizesini içerdiğine dikkat edin. Örneğin:
 
@@ -340,7 +341,7 @@ Yöntemi, sıralama yapılacak sütunu belirtmek için LINQ to Entities kullanı
 
 ### <a name="add-column-heading-hyperlinks-to-the-student-index-page"></a>Öğrenci dizini sayfasına sütun başlığı köprüleri ekleme
 
-*Öğrenciler/Index. cshtml*içindeki kodu aşağıdaki vurgulanmış kodla değiştirin:
+*Öğrenciler/Index. cshtml* içindeki kodu aşağıdaki vurgulanmış kodla değiştirin:
 
 [!code-cshtml[](intro/samples/cu21/Pages/Students/Index2.cshtml?highlight=17-19,25-27)]
 
@@ -352,14 +353,14 @@ Yukarıdaki kod:
 Sıralamanın çalıştığını doğrulamak için:
 
 * Uygulamayı çalıştırın ve **öğrenciler** sekmesini seçin.
-* **Son ad**' a tıklayın.
-* **Kayıt tarihi**' ne tıklayın.
+* **Son ad** ' a tıklayın.
+* **Kayıt tarihi** ' ne tıklayın.
 
 Kodu daha iyi anlamak için:
 
-* *Öğrenciler/Index. cshtml. cs*dosyasında, üzerinde bir kesme noktası ayarlayın `switch (sortOrder)` .
+* *Öğrenciler/Index. cshtml. cs* dosyasında, üzerinde bir kesme noktası ayarlayın `switch (sortOrder)` .
 * Ve için bir izleme `NameSort` ekleyin `DateSort` .
-* *Öğrenciler/Index. cshtml*'de, üzerinde bir kesme noktası ayarlayın `@Html.DisplayNameFor(model => model.Student[0].LastName)` .
+* *Öğrenciler/Index. cshtml* 'de, üzerinde bir kesme noktası ayarlayın `@Html.DisplayNameFor(model => model.Student[0].LastName)` .
 
 Hata ayıklayıcıda adım adım.
 
@@ -396,7 +397,7 @@ Yukarıdaki kod, kodun kullanım için değişiklik yaptığı durumlarda sonuç
 
 ### <a name="add-a-search-box-to-the-student-index-page"></a>Öğrenci dizin sayfasına bir arama kutusu ekleyin
 
-*Sayfalar/öğrenciler/Index. cshtml*' de, bir **arama** düğmesi ve asi grafik Chrome oluşturmak için aşağıdaki vurgulanmış kodu ekleyin.
+*Sayfalar/öğrenciler/Index. cshtml* ' de, bir **arama** düğmesi ve asi grafik Chrome oluşturmak için aşağıdaki vurgulanmış kodu ekleyin.
 
 [!code-cshtml[](intro/samples/cu21/Pages/Students/Index3.cshtml?highlight=14-23&range=1-25)]
 
@@ -405,7 +406,7 @@ Yukarıdaki kod, `<form>` Arama metin kutusu ve düğme eklemek için [etiket ya
 Uygulamayı test etme:
 
 * **Öğrenciler** sekmesini seçin ve bir arama dizesi girin.
-* **Ara**' yı seçin.
+* **Ara** ' yı seçin.
 
 URL 'nin arama dizesini içerdiğine dikkat edin.
 
@@ -433,7 +434,7 @@ Proje klasöründe `PaginatedList.cs` aşağıdaki kodla oluşturun:
 
 ## <a name="add-paging-functionality-to-the-index-method"></a>Dizin yöntemine sayfalama işlevselliği ekleme
 
-*Öğrenciler/Index. cshtml. cs*dosyasında, türünü `Student` ile arasında güncelleştirin `IList<Student>` `PaginatedList<Student>` :
+*Öğrenciler/Index. cshtml. cs* dosyasında, türünü `Student` ile arasında güncelleştirin `IList<Student>` `PaginatedList<Student>` :
 
 [!code-csharp[](intro/samples/cu21/Pages/Students/Index.cshtml.cs?name=snippet_SortFilterPageType)]
 
@@ -474,7 +475,7 @@ Sayfalama sırasında arama dizesi değiştirilirse sayfa 1 ' e sıfırlanır. Y
 
 ## <a name="add-paging-links-to-the-student-no-locrazor-page"></a>Öğrenci sayfasına sayfalama bağlantıları ekleme Razor
 
-*Öğrenciler/Index. cshtml*'de biçimlendirmeyi güncelleştirin. Değişiklikler vurgulanır:
+*Öğrenciler/Index. cshtml* 'de biçimlendirmeyi güncelleştirin. Değişiklikler vurgulanır:
 
 [!code-cshtml[](intro/samples/cu21/Pages/Students/Index.cshtml?highlight=28-31,37-40,68-999)]
 
@@ -495,9 +496,9 @@ Uygulamayı çalıştırın ve öğrenciler sayfasına gidin.
 
 Kodu daha iyi anlamak için:
 
-* *Öğrenciler/Index. cshtml. cs*dosyasında, üzerinde bir kesme noktası ayarlayın `switch (sortOrder)` .
+* *Öğrenciler/Index. cshtml. cs* dosyasında, üzerinde bir kesme noktası ayarlayın `switch (sortOrder)` .
 * ,, Ve için bir izleme ekleyin `NameSort` `DateSort` `CurrentSort` `Model.Student.PageIndex` .
-* *Öğrenciler/Index. cshtml*'de, üzerinde bir kesme noktası ayarlayın `@Html.DisplayNameFor(model => model.Student[0].LastName)` .
+* *Öğrenciler/Index. cshtml* 'de, üzerinde bir kesme noktası ayarlayın `@Html.DisplayNameFor(model => model.Student[0].LastName)` .
 
 Hata ayıklayıcıda adım adım.
 

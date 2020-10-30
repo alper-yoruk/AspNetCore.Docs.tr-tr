@@ -5,6 +5,7 @@ description: Yerel mobil uygulamaları desteklemek için ASP.NET Core MVC kullan
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mobile/native-mobile-backend
-ms.openlocfilehash: 00e0c93d200e7eec6fd6bdac1f1246fe0909fc54
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 0bbf740cb49b77b476e7e015afee311110bbe5ea
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630542"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060995"
 ---
 # <a name="create-backend-services-for-native-mobile-apps-with-aspnet-core"></a>ASP.NET Core ile yerel mobil uygulamalar için arka uç hizmetleri oluşturma
 
@@ -39,7 +40,7 @@ Bu öğreticide, yerel mobil uygulamaları desteklemek üzere ASP.NET Core MVC k
 
 ### <a name="features"></a>Özellikler
 
-ToDoRest uygulaması, yapılacaklar öğelerini listelemeyi, eklemeyi, silmeyi ve güncellemeyi destekler. Her öğe bir KIMLIĞE, bir ada, notlara ve henüz gerçekleştirilip yapılmadığını gösteren bir özelliğe sahiptir.
+ToDoRest uygulaması, To-Do öğelerinin listesini, eklenmesini, silinmesini ve güncelleştirilmesini destekler. Her öğe bir KIMLIĞE, bir ada, notlara ve henüz gerçekleştirilip yapılmadığını gösteren bir özelliğe sahiptir.
 
 Öğelerin ana görünümü yukarıda gösterildiği gibi, her öğenin adını listeler ve bir onay işaretiyle gerçekleştirilip yapılmadığını gösterir.
 
@@ -63,7 +64,7 @@ public static string RestUrl = "http://192.168.1.207:5000/api/todoitems/{0}";
 
 ## <a name="creating-the-aspnet-core-project"></a>ASP.NET Core projesi oluşturma
 
-Visual Studio 'da yeni bir ASP.NET Core Web uygulaması oluşturun. Web API şablonunu ve kimlik doğrulaması yok ' ı seçin. Projeyi *ToDoApi*olarak adlandırın.
+Visual Studio 'da yeni bir ASP.NET Core Web uygulaması oluşturun. Web API şablonunu ve kimlik doğrulaması yok ' ı seçin. Projeyi *ToDoApi* olarak adlandırın.
 
 ![Web API 'SI proje şablonu seçiliyken yeni ASP.NET Web uygulaması iletişim kutusu](native-mobile-backend/_static/web-api-template.png)
 
@@ -74,7 +75,7 @@ Uygulama, 5000 numaralı bağlantı noktasına yapılan tüm isteklere yanıt ve
 > [!NOTE]
 > Varsayılan olarak yerel olmayan istekleri yok sayan IIS Express arkasında değil, uygulamayı doğrudan çalıştırdığınızdan emin olun. Bir komut isteminden [DotNet Run](/dotnet/core/tools/dotnet-run) komutunu çalıştırın veya Visual Studio araç çubuğunda hata ayıklama hedefi açılır listesinden uygulama adı profilini seçin.
 
-Yapılacaklar öğelerini temsil etmek için bir model sınıfı ekleyin. Gerekli alanları `[Required]` özniteliğiyle işaretle:
+To-Do öğelerini temsil etmek için bir model sınıfı ekleyin. Gerekli alanları `[Required]` özniteliğiyle işaretle:
 
 [!code-csharp[](native-mobile-backend/sample/ToDoApi/src/ToDoApi/Models/ToDoItem.cs)]
 
@@ -86,18 +87,18 @@ Bu örnek için, uygulama yalnızca özel bir öğe koleksiyonu kullanır:
 
 [!code-csharp[](native-mobile-backend/sample/ToDoApi/src/ToDoApi/Services/ToDoRepository.cs)]
 
-*Startup.cs*'de uygulamayı yapılandırın:
+*Startup.cs* 'de uygulamayı yapılandırın:
 
 [!code-csharp[](native-mobile-backend/sample/ToDoApi/src/ToDoApi/Startup.cs?highlight=6&range=29-35)]
 
-Bu noktada, *ToDoItemsController*oluşturmak için hazırsınız demektir.
+Bu noktada, *ToDoItemsController* oluşturmak için hazırsınız demektir.
 
 > [!TIP]
 > [ASP.NET Core MVC ve Visual Studio ile Ilk Web API 'Nizi derleme](../tutorials/first-web-api.md)bölümünde Web API 'leri oluşturma hakkında daha fazla bilgi edinin.
 
 ## <a name="creating-the-controller"></a>Denetleyici oluşturma
 
-Projeye yeni bir denetleyici ekleyin, *ToDoItemsController*. Microsoft. AspNetCore. Mvc. Controller öğesinden devralması gerekir. `Route`Denetleyicinin ile başlayan yollara yapılan istekleri işleyeceğini göstermek için bir öznitelik ekleyin `api/todoitems` . `[controller]`Yoldaki belirteç, denetleyicinin adı ile değiştirilmiştir ( `Controller` son eki atlayarak) ve özellikle genel yollar için yararlıdır. [Yönlendirme](../fundamentals/routing.md)hakkında daha fazla bilgi edinin.
+Projeye yeni bir denetleyici ekleyin, *ToDoItemsController* . Microsoft. AspNetCore. Mvc. Controller öğesinden devralması gerekir. `Route`Denetleyicinin ile başlayan yollara yapılan istekleri işleyeceğini göstermek için bir öznitelik ekleyin `api/todoitems` . `[controller]`Yoldaki belirteç, denetleyicinin adı ile değiştirilmiştir ( `Controller` son eki atlayarak) ve özellikle genel yollar için yararlıdır. [Yönlendirme](../fundamentals/routing.md)hakkında daha fazla bilgi edinin.
 
 Denetleyici bir `IToDoRepository` to işlevi gerektirir; denetleyicinin Oluşturucusu aracılığıyla bu türde bir örnek isteyin. Çalışma zamanında bu örnek, çerçevenin [bağımlılık ekleme](../fundamentals/dependency-injection.md)desteği kullanılarak sağlanacaktır.
 

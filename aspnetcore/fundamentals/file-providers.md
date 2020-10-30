@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/06/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/file-providers
-ms.openlocfilehash: 30c28e7bd4cd9c926b157f5a7b9e6688bd5b9b9a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 16e5ead9898125c804da4d60322510474201d897
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634611"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059448"
 ---
 # <a name="file-providers-in-aspnet-core"></a>ASP.NET Core dosya sağlayıcıları
 
@@ -31,7 +32,7 @@ ms.locfileid: "88634611"
 
 ::: moniker range=">= aspnetcore-3.0"
 
-ASP.NET Core dosya sistemi erişimini dosya sağlayıcılarının kullanımı üzerinden soyutlar. Dosya sağlayıcıları ASP.NET Core Framework boyunca kullanılır. Örnek:
+ASP.NET Core dosya sistemi erişimini dosya sağlayıcılarının kullanımı üzerinden soyutlar. Dosya sağlayıcıları ASP.NET Core Framework boyunca kullanılır. Örneğin:
 
 * <xref:Microsoft.AspNetCore.Hosting.IWebHostEnvironment> uygulamanın [içerik kökünü](xref:fundamentals/index#content-root) ve [Web kökünü](xref:fundamentals/index#web-root) türler olarak gösterir `IFileProvider` .
 * [Statik dosya ara yazılımı](xref:fundamentals/static-files) , statik dosyaları bulmak Için dosya sağlayıcılarını kullanır.
@@ -114,7 +115,7 @@ Derlemeye eklemek üzere bir veya daha fazla dosya belirtmek için [Glob desenle
 
 *Fileprovidersample* örnek uygulaması bir oluşturur `ManifestEmbeddedFileProvider` ve şu anda yürütülmekte olan derlemeyi oluşturucusuna geçirir.
 
-*Startup.cs*:
+*Startup.cs* :
 
 ```csharp
 var manifestEmbeddedProvider = 
@@ -161,7 +162,7 @@ Docker kapsayıcıları ve ağ paylaşımları gibi bazı dosya sistemleri, değ
 
 ### <a name="glob-patterns"></a>Glob desenleri
 
-Dosya sistemi yolları, *Glob (veya glob) desenleri*adlı joker karakter desenleri kullanır. Bu desenlerle dosya gruplarını belirtin. İki joker karakter şunlardır `*` `**` :
+Dosya sistemi yolları, *Glob (veya glob) desenleri* adlı joker karakter desenleri kullanır. Bu desenlerle dosya gruplarını belirtin. İki joker karakter şunlardır `*` `**` :
 
 **`*`**  
 Geçerli klasör düzeyindeki her şeyi, dosya adını veya herhangi bir dosya uzantısını eşleştirir. Eşleşmeler, `/` `.` dosya yolundaki karakterler ile sonlandırılır.
@@ -175,7 +176,7 @@ Aşağıdaki tabloda, glob desenlerinin yaygın örnekleri verilmiştir.
 |---------|---------|
 |`directory/file.txt`|Belirli bir dizindeki belirli bir dosyayla eşleşir.|
 |`directory/*.txt`|Belirli bir dizinde *. txt* uzantılı tüm dosyaları eşleştirir.|
-|`directory/*/appsettings.json`|Dizinler içindeki dosyalardaki tüm *appsettings.js* , *Dizin* klasörünün altında tam olarak bir düzey ile eşleşir.|
+|`directory/*/appsettings.json`|*appsettings.json* Dizinteki tüm dosyaları, *Dizin* klasörünün altında tam olarak bir düzey eşler.|
 |`directory/**/*.txt`|*. Txt* uzantılı tüm dosyaları, *Dizin* klasörünün altında herhangi bir yerde buldu.|
 
 ::: moniker-end
@@ -261,7 +262,7 @@ Derlemeye eklemek üzere bir veya daha fazla dosya belirtmek için [Glob desenle
 
 Örnek uygulama bir oluşturur `ManifestEmbeddedFileProvider` ve şu anda yürütülmekte olan derlemeyi oluşturucusuna geçirir.
 
-*Startup.cs*:
+*Startup.cs* :
 
 ```csharp
 var manifestEmbeddedProvider = 
@@ -303,7 +304,7 @@ Docker kapsayıcıları ve ağ paylaşımları gibi bazı dosya sistemleri, değ
 
 ## <a name="glob-patterns"></a>Glob desenleri
 
-Dosya sistemi yolları, *Glob (veya glob) desenleri*adlı joker karakter desenleri kullanır. Bu desenlerle dosya gruplarını belirtin. İki joker karakter şunlardır `*` `**` :
+Dosya sistemi yolları, *Glob (veya glob) desenleri* adlı joker karakter desenleri kullanır. Bu desenlerle dosya gruplarını belirtin. İki joker karakter şunlardır `*` `**` :
 
 **`*`**  
 Geçerli klasör düzeyindeki her şeyi, dosya adını veya herhangi bir dosya uzantısını eşleştirir. Eşleşmeler, `/` `.` dosya yolundaki karakterler ile sonlandırılır.

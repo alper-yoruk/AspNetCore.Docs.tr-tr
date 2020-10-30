@@ -5,6 +5,7 @@ description: ASP.NET Core MVC üzerinde öğretici serisinin Bölüm 7.
 ms.author: riande
 ms.date: 12/13/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,18 +17,18 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/search
-ms.openlocfilehash: fcb96300c08d9f985cbfe4d3bf055036be7d2eb0
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 657072803f59feb99de8b31ddb3a6433d832aa30
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629580"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059630"
 ---
 # <a name="part-7-add-search-to-an-aspnet-core-mvc-app"></a>Bölüm 7, ASP.NET Core MVC uygulamasına arama ekleme
 
 Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
-Bu bölümde, `Index` film metoduna *tarz* veya *ada*göre arama özelliği ekleyebilirsiniz.
+Bu bölümde, `Index` film metoduna *tarz* veya *ada* göre arama özelliği ekleyebilirsiniz.
 
 `Index` *Controllers/MoviesController. cs* içinde bulunan yöntemi aşağıdaki kodla güncelleştirin:
 
@@ -54,7 +55,7 @@ Not: [Contains](/dotnet/api/system.data.objects.dataclasses.entitycollection-1.c
 
 ![Dizin görünümü](~/tutorials/first-mvc-app/search/_static/ghost.png)
 
-`Index`Yönteminin imzasını adlı bir parametreye sahip olacak şekilde değiştirirseniz `id` , `id` parametresi `{id}` *Startup.cs*içinde ayarlanan varsayılan yollar için isteğe bağlı yer tutucuya eşleşir.
+`Index`Yönteminin imzasını adlı bir parametreye sahip olacak şekilde değiştirirseniz `id` , `id` parametresi `{id}` *Startup.cs* içinde ayarlanan varsayılan yollar için isteğe bağlı yer tutucuya eşleşir.
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Startup.cs?highlight=5&name=snippet_1)]
 

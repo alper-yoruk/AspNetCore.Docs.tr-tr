@@ -5,6 +5,7 @@ description: ASP.NET Core iki öğeli kimlik doğrulamasıyla çalışan TOTP Au
 ms.author: riande
 ms.date: 08/14/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-enable-qrcodes
-ms.openlocfilehash: e61aa925262fc9fe25c7bb2d37958cfaa308aeaf
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b778e7238911ec9966edf7f0f7becd113b1e197a
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630802"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060839"
 ---
 # <a name="enable-qr-code-generation-for-totp-authenticator-apps-in-aspnet-core"></a>ASP.NET Core 'daki TOTP Authenticator uygulamaları için QR kodu oluşturmayı etkinleştirme
 
@@ -49,8 +50,8 @@ Bu yönergeler depoyu *qrcode.js* kullanır https://davidshimjs.github.io/qrcode
 
 ::: moniker range=">= aspnetcore-2.1"
 
-* */Areas/ Identity /Pages/Account/Manage/enabledoğru* [ Identity ](xref:security/authentication/scaffold-identity)
-* */Areas/ Identity /Pages/Account/Manage/enabledoğrulayıcısı Tor.exe*içinde, `Scripts` dosyanın sonundaki bölümü bulun:
+* */Areas/ Identity /Pages/Account/Manage/enabledoğru* [ Identity](xref:security/authentication/scaffold-identity)
+* */Areas/ Identity /Pages/Account/Manage/enabledoğrulayıcısı Tor.exe* içinde, `Scripts` dosyanın sonundaki bölümü bulun:
 
 ::: moniker-end
 
@@ -96,7 +97,7 @@ Uygulamanızı çalıştırın ve QR kodunu taramanızı ve kimlik doğrulayıc�
 
 ::: moniker range=">= aspnetcore-2.1"
 
-QR kodundaki site adı, projenizi ilk kez oluştururken seçtiğiniz proje adından alınır. `GenerateQrCodeUri(string email, string unformattedKey)` */Areas/ Identity /Pages/Account/Manage/EnableAuthenticator.cshtml.cs*içindeki yöntemi arayarak bunu değiştirebilirsiniz.
+QR kodundaki site adı, projenizi ilk kez oluştururken seçtiğiniz proje adından alınır. `GenerateQrCodeUri(string email, string unformattedKey)` */Areas/ Identity /Pages/Account/Manage/EnableAuthenticator.cshtml.cs* içindeki yöntemi arayarak bunu değiştirebilirsiniz.
 
 ::: moniker-end
 
@@ -134,6 +135,6 @@ QR kodu için doğru şekilde biçimlendirilen URL şu şekilde kullanılabilir:
 
 ## <a name="totp-client-and-server-time-skew"></a>TOTP istemci ve sunucu saati eğriltme
 
-TOTP (zaman tabanlı bir kerelik parola) kimlik doğrulaması, hem sunucu hem de Doğrulayıcı cihazına doğru bir zamana sahip olur. Belirteçler yalnızca en az 30 saniye için geçerlidir. TOTP 2FA oturum açma işlemleri başarısız olursa, sunucu saatinin doğru olduğundan ve tercihen doğru bir NTP hizmeti ile eşitlendiğinden emin olun.
+TOTP (zamana dayalı One-Time parolası) kimlik doğrulaması, hem sunucu hem de Doğrulayıcı cihazına doğru bir zamana sahip olur. Belirteçler yalnızca en az 30 saniye için geçerlidir. TOTP 2FA oturum açma işlemleri başarısız olursa, sunucu saatinin doğru olduğundan ve tercihen doğru bir NTP hizmeti ile eşitlendiğinden emin olun.
 
 ::: moniker-end

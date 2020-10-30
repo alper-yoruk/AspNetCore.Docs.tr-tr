@@ -5,6 +5,7 @@ description: ASP.NET Core deposundaki kimlik doğrulama örneklerine bağlantıl
 ms.author: riande
 ms.date: 01/31/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/samples
-ms.openlocfilehash: 290c956b2035e47e5b34dba15fbec665461dd94a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 4153a443748dbff40be19e25fc1c719ee4e39609
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630750"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060345"
 ---
 # <a name="authentication-samples-for-aspnet-core"></a>ASP.NET Core için kimlik doğrulama örnekleri
 

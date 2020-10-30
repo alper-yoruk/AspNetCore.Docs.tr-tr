@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 04/06/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/partial-tag-helper
-ms.openlocfilehash: 4a9f1958cd26bb57fcf3944aabacd57c470fb17e
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 124f23caa4a757f63a80dfea627304204ba2cdca
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626954"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061437"
 ---
 # <a name="partial-tag-helper-in-aspnet-core"></a>ASP.NET Core kısmi etiket Yardımcısı
 
@@ -66,7 +67,7 @@ Aşağıdaki biçimlendirme, *_ProductPartial. cshtml* 'nin *paylaşılan* klas�
 
 `for`Özniteliği, geçerli modele göre değerlendirilecek bir [modelexpression](/dotnet/api/microsoft.aspnetcore.mvc.viewfeatures.modelexpression) atar. `ModelExpression`Sözdizimi, sözdizimini anlar `@Model.` . Örneğin, `for="Product"` yerine kullanılabilir `for="@Model.Product"` . Bu varsayılan çıkarım davranışı, `@` bir satır içi ifade tanımlamak için simgesi kullanılarak geçersiz kılınır.
 
-Aşağıdaki biçimlendirme *_ProductPartial. cshtml*'yi yükler:
+Aşağıdaki biçimlendirme *_ProductPartial. cshtml* 'yi yükler:
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Pages/Product.cshtml?name=snippet_For)]
 

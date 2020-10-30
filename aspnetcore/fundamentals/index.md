@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/30/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/index
-ms.openlocfilehash: 8fa44f567906ecf36a9bbaa5076cd36c75c10781
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 25348f8486ec6ccb53ebf527ad4519638dd5f73e
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634884"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059383"
 ---
 # <a name="aspnet-core-fundamentals"></a>ASP.NET Core temelleri
 
@@ -48,7 +49,7 @@ Daha fazla bilgi için bkz. <xref:fundamentals/startup>.
 
 ASP.NET Core, yapılandırılmış Hizmetleri bir uygulama genelinde kullanılabilir hale getiren yerleşik bağımlılık ekleme (dı) çerçevesini içerir. Örneğin, bir günlük bileşeni bir hizmettir.
 
-Hizmetleri yapılandırmak (veya *kaydettirmek*) için kod `Startup.ConfigureServices` yöntemine eklenmiştir. Örnek:
+Hizmetleri yapılandırmak (veya *kaydettirmek* ) için kod `Startup.ConfigureServices` yöntemine eklenmiştir. Örneğin:
 
 [!code-csharp[](index/samples_snapshot/3.x/ConfigureServices.cs)]
 
@@ -76,9 +77,9 @@ ASP.NET Core zengin bir yerleşik ara yazılım kümesi içerir. Özel ara yazı
 
 Daha fazla bilgi için bkz. <xref:fundamentals/middleware/index>.
 
-## <a name="host"></a>Konak
+## <a name="host"></a>Yönetici
 
-Başlangıçta ASP.NET Core bir uygulama bir *konak*oluşturur. Konak, uygulamanın tüm kaynaklarını kapsüller, örneğin:
+Başlangıçta ASP.NET Core bir uygulama bir *konak* oluşturur. Konak, uygulamanın tüm kaynaklarını kapsüller, örneğin:
 
 * Bir HTTP sunucusu uygulama
 * Ara yazılım bileşenleri
@@ -100,7 +101,7 @@ Aşağıdaki örnek bir .NET genel ana bilgisayarı oluşturur:
 `CreateDefaultBuilder`Ve `ConfigureWebHostDefaults` yöntemleri, bir ana bilgisayarı varsayılan bir seçenek kümesiyle yapılandırır, örneğin:
 
 * Web sunucusu olarak [Kestrel](#servers) kullanın ve IIS tümleştirmesini etkinleştirin.
-* Yapılandırma *appsettings.json*, *appSettings. { Ortam adı}. JSON*, ortam değişkenleri, komut satırı bağımsız değişkenleri ve diğer yapılandırma kaynakları.
+* Yapılandırmayı yükleme *appsettings.json* , *appSettings. { Ortam adı}. JSON* , ortam değişkenleri, komut satırı bağımsız değişkenleri ve diğer yapılandırma kaynakları.
 * Günlüğe kaydetme çıkışını konsola ve hata ayıklama sağlayıcılarına gönderin.
 
 Daha fazla bilgi için bkz. <xref:fundamentals/host/generic-host>.
@@ -137,7 +138,7 @@ Daha fazla bilgi için bkz. <xref:fundamentals/servers/index>.
 
 ASP.NET Core, ayarları sıralı bir yapılandırma sağlayıcıları kümesinden ad-değer çiftleri olarak alan bir yapılandırma çerçevesi sağlar. Yerleşik yapılandırma sağlayıcıları *. JSON* dosyaları, *. xml* dosyaları, ortam değişkenleri ve komut satırı bağımsız değişkenleri gibi çeşitli kaynaklar için kullanılabilir. Diğer kaynakları desteklemek için özel yapılandırma sağlayıcıları yazın.
 
-[Varsayılan](xref:fundamentals/configuration/index#default)olarak, ASP.NET Core uygulamalar *appsettings.json*, ortam değişkenleri, komut satırı ve daha fazlasını okumak üzere yapılandırılır. Uygulamanın yapılandırması yüklendiğinde, ortam değişkenlerinin değerleri * üzerindekiappsettings.js*değerleri geçersiz kılar.
+[Varsayılan](xref:fundamentals/configuration/index#default)olarak, ASP.NET Core uygulamalar *appsettings.json* , ortam değişkenleri, komut satırı ve daha fazlasını okumak üzere yapılandırılır. Uygulamanın yapılandırması yüklendiğinde, ortam değişkenlerinin değerleri, değerlerini geçersiz kılar *appsettings.json* .
 
 İlgili yapılandırma değerlerini okumak için tercih edilen yol, [Seçenekler modelini](xref:fundamentals/configuration/options)kullanmaktır. Daha fazla bilgi için bkz. [Seçenekler modelini kullanarak hiyerarşik yapılandırma verilerini bağlama](xref:fundamentals/configuration/index#optpat).
 
@@ -167,7 +168,7 @@ ASP.NET Core, çeşitli yerleşik ve üçüncü taraf günlük sağlayıcıları
 * Azure App Service
 * Azure Application Insights
 
-Günlükler oluşturmak için, bir <xref:Microsoft.Extensions.Logging.ILogger%601> hizmeti bağımlılık ekleme (dı) ve çağrı günlüğü yöntemlerinden bir hizmete çözümleyin <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogInformation*> . Örnek:
+Günlükler oluşturmak için, bir <xref:Microsoft.Extensions.Logging.ILogger%601> hizmeti bağımlılık ekleme (dı) ve çağrı günlüğü yöntemlerinden bir hizmete çözümleyin <xref:Microsoft.Extensions.Logging.LoggerExtensions.LogInformation*> . Örneğin:
 
 [!code-csharp[](index/samples_snapshot/3.x/TodoController.cs?highlight=5,13,19)]
 
@@ -198,7 +199,7 @@ Uygulamasının bir uygulamasına `IHttpClientFactory` örnek oluşturmak için 
 
 * , Mantıksal örnekleri adlandırmak ve yapılandırmak için merkezi bir konum sağlar `HttpClient` . Örneğin, GitHub 'a erişmek için bir *GitHub* istemcisini kaydedin ve yapılandırın. Varsayılan bir istemciyi başka amaçlar için kaydedin ve yapılandırın.
 * , Bir giden istek ara yazılım işlem hattı oluşturmak için birden çok temsilci seçme işleyicisinin kaydını ve zincirlemeyi destekler. Bu düzen ASP.NET Core gelen ara yazılım ardışık düzenine benzer. Bu model, önbelleğe alma, hata işleme, serileştirme ve günlüğe kaydetme dahil olmak üzere HTTP istekleri için çapraz kesme sorunlarını yönetmek için bir mekanizma sağlar.
-* Geçici hata işleme için popüler bir üçüncü taraf kitaplığı olan *Polly*ile tümleşir.
+* Geçici hata işleme için popüler bir üçüncü taraf kitaplığı olan *Polly* ile tümleşir.
 * `HttpClientHandler`Yaşam sürelerini el ile yönetirken oluşan YAYGıN DNS sorunlarından kaçınmak için temeldeki örneklerin biriktirmesini ve ömrünü yönetir `HttpClient` .
 * <xref:Microsoft.Extensions.Logging.ILogger>Fabrika tarafından oluşturulan istemciler aracılığıyla gönderilen tüm istekler için aracılığıyla yapılandırılabilir bir günlük deneyimi ekler.
 
@@ -208,12 +209,12 @@ Daha fazla bilgi için bkz. <xref:fundamentals/http-requests>.
 
 İçerik kökü, için temel yoldur:
 
-* Uygulamayı barındıran yürütülebilir dosya (*. exe*).
-* Uygulamayı oluşturan derlenmiş derlemeler (*. dll*).
+* Uygulamayı barındıran yürütülebilir dosya ( *. exe* ).
+* Uygulamayı oluşturan derlenmiş derlemeler ( *. dll* ).
 * Uygulama tarafından kullanılan içerik dosyaları, örneğin:
-  * Razor dosyalar (*. cshtml*, *. Razor*)
-  * Yapılandırma dosyaları (*. JSON*, *. xml*)
-  * Veri dosyaları (*. db*)
+  * Razor dosyalar ( *. cshtml* , *. Razor* )
+  * Yapılandırma dosyaları ( *. JSON* , *. xml* )
+  * Veri dosyaları ( *. db* )
 * [Web kökü](#web-root), genellikle *Wwwroot* klasörü.
 
 Geliştirme sırasında, içerik kökü, projenin kök dizinini varsayılan olarak belirler. Bu dizin Ayrıca uygulamanın içerik dosyaları ve [Web kökünün](#web-root)temel yoludur. [Konağı oluştururken](#host)yolunu ayarlayarak farklı bir içerik kökü belirtin. Daha fazla bilgi için bkz. [içerik kökü](xref:fundamentals/host/generic-host#contentroot).
@@ -222,11 +223,11 @@ Geliştirme sırasında, içerik kökü, projenin kök dizinini varsayılan olar
 
 Web kökü, genel, statik kaynak dosyaları için temel yoldur, örneğin:
 
-* Stil sayfaları (*. css*)
-* JavaScript (*. js*)
-* Görüntüler (*. png*, *. jpg*)
+* Stil sayfaları ( *. css* )
+* JavaScript ( *. js* )
+* Görüntüler ( *. png* , *. jpg* )
 
-Varsayılan olarak, statik dosyalar yalnızca Web kök dizininden ve alt dizinlerinden sunulur. Web kök yolu, varsayılan olarak *{Content root}/Wwwroot*olarak belirlenmiştir. [Konağı oluştururken](#host)yolunu ayarlayarak farklı bir Web kökü belirtin. Daha fazla bilgi için bkz. [Web root](xref:fundamentals/host/generic-host#webroot).
+Varsayılan olarak, statik dosyalar yalnızca Web kök dizininden ve alt dizinlerinden sunulur. Web kök yolu, varsayılan olarak *{Content root}/Wwwroot* olarak belirlenmiştir. [Konağı oluştururken](#host)yolunu ayarlayarak farklı bir Web kökü belirtin. Daha fazla bilgi için bkz. [Web root](xref:fundamentals/host/generic-host#webroot).
 
 Proje dosyasındaki [ \<Content> Proje öğesi](/visualstudio/msbuild/common-msbuild-project-items#content) ile *Wwwroot* 'da dosya yayımlamayı önleyin. Aşağıdaki örnek, *Wwwroot/yerel* ve alt dizinlerinde içerik yayımlamayı engeller:
 
@@ -236,7 +237,7 @@ Proje dosyasındaki [ \<Content> Proje öğesi](/visualstudio/msbuild/common-msb
 </ItemGroup>
 ```
 
-Razor *. Cshtml* dosyalarında, tilde-eğik çizgi ( `~/` ) Web köküne işaret eder. İle başlayan bir yol `~/` , *sanal yol*olarak adlandırılır.
+Razor *. Cshtml* dosyalarında, tilde-eğik çizgi ( `~/` ) Web köküne işaret eder. İle başlayan bir yol `~/` , *sanal yol* olarak adlandırılır.
 
 Daha fazla bilgi için bkz. <xref:fundamentals/static-files>.
 
@@ -253,7 +254,7 @@ Bu makale, ASP.NET Core uygulamaları geliştirmeyi anlamak için önemli konula
 * Uygulamanın gerektirdiği hizmetler yapılandırıldı.
 * İstek işleme işlem hattı tanımlandı.
 
-*Hizmetler* , uygulama tarafından kullanılan bileşenlerdir. Örneğin, bir günlük bileşeni bir hizmettir. Hizmetleri yapılandırmak (veya *kaydettirmek*) için kod `Startup.ConfigureServices` yöntemine eklenmiştir.
+*Hizmetler* , uygulama tarafından kullanılan bileşenlerdir. Örneğin, bir günlük bileşeni bir hizmettir. Hizmetleri yapılandırmak (veya *kaydettirmek* ) için kod `Startup.ConfigureServices` yöntemine eklenmiştir.
 
 İstek işleme işlem hattı, bir dizi *Ara yazılım* bileşeni olarak oluşur. Örneğin, bir ara yazılım statik dosyalar için istekleri işleyebilir veya HTTP isteklerini HTTPS 'ye yeniden yönlendirebilir. Her bir ara yazılım bir üzerinde zaman uyumsuz işlemler gerçekleştirir `HttpContext` ve ardından işlem hattında sonraki ara yazılımı çağırır veya isteği sonlandırır. İstek işleme işlem hattını yapılandırma kodu `Startup.Configure` yöntemine eklenir.
 
@@ -289,7 +290,7 @@ ASP.NET Core, zengin bir yerleşik ara yazılım kümesi içerir ve özel ara ya
 
 Daha fazla bilgi için bkz. <xref:fundamentals/middleware/index>.
 
-## <a name="host"></a>Konak
+## <a name="host"></a>Yönetici
 
 ASP.NET Core bir uygulama, başlangıçta bir *konak* oluşturur. Ana bilgisayar, uygulamanın tüm kaynaklarını kapsülleyen bir nesnedir, örneğin:
 
@@ -310,7 +311,7 @@ Bir konak oluşturma kodu `Program.Main` :
 `CreateDefaultBuilder`Yöntemi, aşağıdaki gibi yaygın olarak kullanılan seçeneklere sahip bir ana bilgisayar yapılandırır:
 
 * Web sunucusu olarak [Kestrel](#servers) kullanın ve IIS tümleştirmesini etkinleştirin.
-* Yapılandırma *appsettings.json*, *appSettings. { Ortam adı}. JSON*, ortam değişkenleri, komut satırı bağımsız değişkenleri ve diğer yapılandırma kaynakları.
+* Yapılandırmayı yükleme *appsettings.json* , *appSettings. { Ortam adı}. JSON* , ortam değişkenleri, komut satırı bağımsız değişkenleri ve diğer yapılandırma kaynakları.
 * Günlüğe kaydetme çıkışını konsola ve hata ayıklama sağlayıcılarına gönderin.
 
 Daha fazla bilgi için bkz. <xref:fundamentals/host/web-host>.
@@ -376,7 +377,7 @@ Daha fazla bilgi için bkz. <xref:fundamentals/servers/index>.
 
 ASP.NET Core, ayarları sıralı bir yapılandırma sağlayıcıları kümesinden ad-değer çiftleri olarak alan bir yapılandırma çerçevesi sağlar. *. JSON* dosyaları, *. xml* dosyaları, ortam değişkenleri ve komut satırı bağımsız değişkenleri gibi çeşitli kaynaklar için yerleşik yapılandırma sağlayıcıları vardır. Ayrıca, özel yapılandırma sağlayıcıları da yazabilirsiniz.
 
-Örneğin, yapılandırmanın *appsettings.js* ve ortam değişkenlerinden geldiğini belirtebilirsiniz. Ardından, *ConnectionString* değeri istendiğinde, çerçeve *appsettings.js* dosyadaki ilk ' ı arar. Değer aynı zamanda bir ortam değişkeninde bulunursa, ortam değişkeninin değeri öncelikli olur.
+Örneğin, yapılandırmanın *appsettings.json* ve ortam değişkenlerinden geldiğini belirtebilirsiniz. Ardından, *ConnectionString* değeri istendiğinde, çerçeve dosyada ilk olarak görünür *appsettings.json* . Değer aynı zamanda bir ortam değişkeninde bulunursa, ortam değişkeninin değeri öncelikli olur.
 
 Parolalar gibi gizli yapılandırma verilerini yönetmek için ASP.NET Core bir [gizli dizi Yöneticisi aracı](xref:security/app-secrets)sağlar. Üretim gizli dizileri için [Azure Key Vault](xref:security/key-vault-configuration)önerilir.
 
@@ -394,7 +395,7 @@ Daha fazla bilgi için bkz. <xref:fundamentals/configuration/options>.
 
 ## <a name="environments"></a>Ortamlar
 
-*Geliştirme*, *hazırlık*ve *üretim*gibi yürütme ortamları, ASP.NET Core birinci sınıf kavramlardır. Ortam değişkenini ayarlayarak bir uygulamanın çalıştığı ortamı belirtebilirsiniz `ASPNETCORE_ENVIRONMENT` . ASP.NET Core, uygulamanın başlangıcında bu ortam değişkenini okur ve değeri bir `IHostingEnvironment` uygulamada depolar. Ortam nesnesi, uygulama tarafından her yerde DI aracılığıyla kullanılabilir.
+*Geliştirme* , *hazırlık* ve *üretim* gibi yürütme ortamları, ASP.NET Core birinci sınıf kavramlardır. Ortam değişkenini ayarlayarak bir uygulamanın çalıştığı ortamı belirtebilirsiniz `ASPNETCORE_ENVIRONMENT` . ASP.NET Core, uygulamanın başlangıcında bu ortam değişkenini okur ve değeri bir `IHostingEnvironment` uygulamada depolar. Ortam nesnesi, uygulama tarafından her yerde DI aracılığıyla kullanılabilir.
 
 Sınıfından aşağıdaki örnek kod, `Startup` uygulamayı yalnızca geliştirmede çalıştırıldığında ayrıntılı hata bilgilerini sunacak şekilde yapılandırır:
 
@@ -447,7 +448,7 @@ Uygulamasının bir uygulamasına `IHttpClientFactory` örnek oluşturmak için 
 
 * , Mantıksal örnekleri adlandırmak ve yapılandırmak için merkezi bir konum sağlar `HttpClient` . Örneğin, *GitHub istemcisi kayıtlı ve GitHub 'a* erişebilecek şekilde yapılandırılabilir. Varsayılan istemci, diğer amaçlar için kaydedilebilir.
 * , Bir giden istek ara yazılım işlem hattı oluşturmak için birden çok temsilci seçme işleyicisinin kaydını ve zincirlemeyi destekler. Bu düzen, ASP.NET Core gelen ara yazılım ardışık düzenine benzer. Bu model, önbelleğe alma, hata işleme, serileştirme ve günlüğe kaydetme dahil olmak üzere HTTP istekleri etrafında çapraz kesme sorunlarını yönetmek için bir mekanizma sağlar.
-* Geçici hata işleme için popüler bir üçüncü taraf kitaplığı olan *Polly*ile tümleşir.
+* Geçici hata işleme için popüler bir üçüncü taraf kitaplığı olan *Polly* ile tümleşir.
 * `HttpClientHandler`Yaşam sürelerini el ile yönetirken gerçekleşen YAYGıN DNS sorunlarından kaçınmak için temeldeki örneklerin biriktirmesini ve ömrünü yönetir `HttpClient` .
 * `ILogger`Fabrika tarafından oluşturulan istemciler aracılığıyla gönderilen tüm istekler için yapılandırılabilir bir günlüğe kaydetme deneyimi ekler (aracılığıyla).
 
@@ -457,12 +458,12 @@ Daha fazla bilgi için bkz. <xref:fundamentals/http-requests>.
 
 İçerik kökü, için temel yoldur:
 
-* Uygulamayı barındıran yürütülebilir dosya (*. exe*).
-* Uygulamayı oluşturan derlenmiş derlemeler (*. dll*).
+* Uygulamayı barındıran yürütülebilir dosya ( *. exe* ).
+* Uygulamayı oluşturan derlenmiş derlemeler ( *. dll* ).
 * Uygulama tarafından kullanılan kod olmayan içerik dosyaları, örneğin:
-  * Razor dosyalar (*. cshtml*, *. Razor*)
-  * Yapılandırma dosyaları (*. JSON*, *. xml*)
-  * Veri dosyaları (*. db*)
+  * Razor dosyalar ( *. cshtml* , *. Razor* )
+  * Yapılandırma dosyaları ( *. JSON* , *. xml* )
+  * Veri dosyaları ( *. db* )
 * [Web kökü](#web-root), genellikle yayınlanan *Wwwroot* klasörü.
 
 Geliştirme sırasında:
@@ -478,13 +479,13 @@ Geliştirme sırasında:
 
 Web kökü, genel, kod olmayan statik kaynak dosyalarının temel yoludur, örneğin:
 
-* Stil sayfaları (*. css*)
-* JavaScript (*. js*)
-* Görüntüler (*. png*, *. jpg*)
+* Stil sayfaları ( *. css* )
+* JavaScript ( *. js* )
+* Görüntüler ( *. png* , *. jpg* )
 
 Statik dosyalar yalnızca Web kök dizininden (ve alt dizinlerde) varsayılan olarak sunulur.
 
-Web kök yolu varsayılan olarak *{Content root}/Wwwroot*olarak belirlenir, ancak [konak oluşturulurken](#host)farklı bir Web kökü belirtilebilir. Daha fazla bilgi için bkz. [Web root](xref:fundamentals/host/web-host#web-root).
+Web kök yolu varsayılan olarak *{Content root}/Wwwroot* olarak belirlenir, ancak [konak oluşturulurken](#host)farklı bir Web kökü belirtilebilir. Daha fazla bilgi için bkz. [Web root](xref:fundamentals/host/web-host#web-root).
 
 Proje dosyasındaki [ \<Content> Proje öğesi](/visualstudio/msbuild/common-msbuild-project-items#content) ile *Wwwroot* 'da dosya yayımlamayı önleyin. Aşağıdaki örnek, *Wwwroot/yerel* dizin ve alt dizinlerde içerik yayımlamayı engeller:
 
@@ -494,7 +495,7 @@ Proje dosyasındaki [ \<Content> Proje öğesi](/visualstudio/msbuild/common-msb
 </ItemGroup>
 ```
 
-Razor(*. Cshtml*) dosyalarında, tilde eğik çizgi ( `~/` ) Web köküne işaret eder. İle başlayan bir yol `~/` , *sanal yol*olarak adlandırılır.
+Razor( *. Cshtml* ) dosyalarında, tilde eğik çizgi ( `~/` ) Web köküne işaret eder. İle başlayan bir yol `~/` , *sanal yol* olarak adlandırılır.
 
 Daha fazla bilgi için bkz. <xref:fundamentals/static-files>.
 

@@ -5,6 +5,7 @@ description: ASP.NET Core MVC denetleyicilerinin bağımlılıklarını açıkç
 ms.author: riande
 ms.date: 02/24/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/controllers/dependency-injection
-ms.openlocfilehash: 74c43e4f01e5b0d6923bf06f8859341c49088ef6
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1282cd984584be423fba755e64e5d2f1afd2af89
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635248"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060618"
 ---
 # <a name="dependency-injection-into-controllers-in-aspnet-core"></a>ASP.NET Core denetleyicilere bağımlılık ekleme
 
@@ -65,7 +66,7 @@ Uygulamayı çalıştırın ve zamana göre bir ileti görüntülenir.
 
 Bir denetleyici içinden uygulama veya yapılandırma ayarlarına erişmek ortak bir modeldir. ' Da açıklanan *Seçenekler deseninin* <xref:fundamentals/configuration/options> ayarları yönetmek için tercih edilen yaklaşım vardır. Genellikle, <xref:Microsoft.Extensions.Configuration.IConfiguration> bir denetleyiciye doğrudan eklemeyin.
 
-Seçenekleri temsil eden bir sınıf oluşturun. Örnek:
+Seçenekleri temsil eden bir sınıf oluşturun. Örneğin:
 
 [!code-csharp[](dependency-injection/3.1sample/ControllerDI/Models/SampleWebSettings.cs?name=snippet)]
 
@@ -129,7 +130,7 @@ Uygulamayı çalıştırın ve zamana göre bir ileti görüntülenir.
 
 Bir denetleyici içinden uygulama veya yapılandırma ayarlarına erişmek ortak bir modeldir. ' Da açıklanan *Seçenekler deseninin* <xref:fundamentals/configuration/options> ayarları yönetmek için tercih edilen yaklaşım vardır. Genellikle, <xref:Microsoft.Extensions.Configuration.IConfiguration> bir denetleyiciye doğrudan eklemeyin.
 
-Seçenekleri temsil eden bir sınıf oluşturun. Örnek:
+Seçenekleri temsil eden bir sınıf oluşturun. Örneğin:
 
 [!code-csharp[](dependency-injection/sample/ControllerDI/Models/SampleWebSettings.cs?name=snippet)]
 

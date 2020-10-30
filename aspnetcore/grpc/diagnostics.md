@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: jamesnk
 ms.date: 09/23/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/diagnostics
-ms.openlocfilehash: 7d2da20d04b93ebcd16fb58a4b74b5b67d37bd72
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 1f25ae76e5a480e5e6f247e4ac78d06dd4e778e9
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722929"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060449"
 ---
 # <a name="logging-and-diagnostics-in-grpc-on-net"></a>.NET üzerinde gRPC 'de günlüğe kaydetme ve tanılama
 
@@ -45,7 +46,7 @@ gRPC Hizmetleri ve gRPC istemcisi [.NET Core günlüğü](xref:fundamentals/logg
 
 GRPC Hizmetleri ASP.NET Core üzerinde barındırıldığından, bu, ASP.NET Core günlük sistemini kullanır. Varsayılan yapılandırmada, gRPC çok az bilgiyi günlüğe kaydeder, ancak bu yapılandırılabilir. ASP.NET Core günlüğü yapılandırma hakkında ayrıntılar için [ASP.NET Core günlüğe kaydetme](xref:fundamentals/logging/index#configuration) hakkındaki belgelere bakın.
 
-gRPC, kategori altına Günlükler ekler `Grpc` . GRPC 'den ayrıntılı günlükleri etkinleştirmek için, `Grpc` `Debug` aşağıdaki öğeleri içindeki alt bölümüne ekleyerek, ön ekleri dosyadaki *appsettings.js* düzeyine yapılandırın `LogLevel` `Logging` :
+gRPC, kategori altına Günlükler ekler `Grpc` . GRPC 'den ayrıntılı günlükleri etkinleştirmek için, `Grpc` `Debug` *appsettings.json* aşağıdaki öğeleri içindeki alt bölümüne ekleyerek ön ekleri dosyanızdaki düzeye yapılandırın `LogLevel` `Logging` :
 
 [!code-json[](diagnostics/sample/logging-config.json?highlight=7)]
 
@@ -222,7 +223,7 @@ Press p to pause, r to resume, q to quit.
 
 GRPC ölçümlerini gözlemlemeye yönelik başka bir yol da Application Insights [Microsoft. ApplicationInsights. EventCounterCollector paketini](/azure/azure-monitor/app/eventcounters)kullanarak sayaç verilerini yakalemektir. Kurulumdan sonra, Application Insights çalışma zamanında ortak .NET sayaçlarını toplar. gRPC 'nin sayaçları varsayılan olarak toplanmaz, ancak uygulama öngörüleri [ek sayaçlar içerecek şekilde özelleştirilebilir](/azure/azure-monitor/app/eventcounters#customizing-counters-to-be-collected).
 
-*Startup.cs*Içinde toplanacak uygulama öngörüleri Için GRPC sayaçlarını belirtin:
+*Startup.cs* Içinde toplanacak uygulama öngörüleri Için GRPC sayaçlarını belirtin:
 
 ```csharp
     using Microsoft.ApplicationInsights.Extensibility.EventCounterCollector;

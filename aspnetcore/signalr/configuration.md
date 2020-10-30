@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 04/12/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/configuration
-ms.openlocfilehash: 8851246dbaa076af1fdbc4e5e4f1ada0e4e3988a
-ms.sourcegitcommit: b5ebaf42422205d212e3dade93fcefcf7f16db39
+ms.openlocfilehash: 7dac8c84683553a52e07ecc61c8bcf8616e77dc6
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/21/2020
-ms.locfileid: "92326588"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061242"
 ---
 # <a name="aspnet-core-no-locsignalr-configuration"></a>ASP.NET Core SignalR yapılandırması
 
@@ -196,14 +197,14 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-Aşağıdaki tabloda kullanılabilir günlük düzeyleri listelenmektedir. Sağladığınız değer, günlüğe kaydedilecek `configureLogging` **Minimum** günlük düzeyini belirler. Bu düzeyde günlüğe kaydedilen iletiler **veya tabloda bundan sonra listelenen düzeyler**günlüğe kaydedilir.
+Aşağıdaki tabloda kullanılabilir günlük düzeyleri listelenmektedir. Sağladığınız değer, günlüğe kaydedilecek `configureLogging` **Minimum** günlük düzeyini belirler. Bu düzeyde günlüğe kaydedilen iletiler **veya tabloda bundan sonra listelenen düzeyler** günlüğe kaydedilir.
 
 | Dize                      | LogLevel               |
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info` **veya** `information` | `LogLevel.Information` |
-| `warn` **veya** `warning`     | `LogLevel.Warning`     |
+| `info`**ya da**`information` | `LogLevel.Information` |
+| `warn`**ya da**`warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -342,7 +343,7 @@ Zaman aşımını ve canlı tutma davranışını yapılandırmaya yönelik ek s
 | .NET seçeneği |  Varsayılan değer | Açıklama |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | HTTP isteklerinde taşıyıcı kimlik doğrulama belirteci olarak belirtilen bir dize döndüren bir işlev. |
-| `SkipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `SkipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 | `ClientCertificates` | Olmamalıdır | Kimlik doğrulaması isteklerine gönderilmek üzere TLS sertifikaları koleksiyonu. |
 | `Cookies` | Olmamalıdır | cookieHer HTTP isteğiyle gönderilmek üzere BIR http s koleksiyonu. |
 | `Credentials` | Olmamalıdır | Her HTTP isteğiyle gönderilen kimlik bilgileri. |
@@ -361,7 +362,7 @@ Zaman aşımını ve canlı tutma davranışını yapılandırmaya yönelik ek s
 | `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>Bağlantı için kullanılacak aktarımı belirten bir değer. |
 | `headers` | `null` | Her HTTP isteğiyle gönderilen üstbilgilerin sözlüğü. Üst bilgilerin tarayıcıda gönderilmesi WebSockets veya Stream için çalışmaz <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType.ServerSentEvents> . |
 | `logMessageContent` | `null` | `true`İstemci tarafından gönderilen ve alınan iletilerin bayt/karakter sayısını günlüğe kaydetmek için olarak ayarlayın. |
-| `skipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `skipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 | `withCredentials` | `true` | CORS isteğiyle kimlik bilgilerinin gönderilip gönderilmeyeceğini belirtir. Azure App Service cookie , yapışkan oturum için s kullanır ve bu seçeneğin doğru şekilde çalışmasını gerektirir. CORS hakkında daha fazla bilgi için SignalR bkz <xref:signalr/security#cross-origin-resource-sharing> .. |
 
 # <a name="java"></a>[Java](#tab/java)
@@ -369,7 +370,7 @@ Zaman aşımını ve canlı tutma davranışını yapılandırmaya yönelik ek s
 | Java seçeneği | Varsayılan değer | Açıklama |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | HTTP isteklerinde taşıyıcı kimlik doğrulama belirteci olarak belirtilen bir dize döndüren bir işlev. |
-| `shouldSkipNegotiate` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `shouldSkipNegotiate` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 | `withHeader` `withHeaders` | Olmamalıdır | Her HTTP isteğiyle birlikte gönderilmek üzere ek HTTP üstbilgileri haritası. |
 
 ---
@@ -588,14 +589,14 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-Aşağıdaki tabloda kullanılabilir günlük düzeyleri listelenmektedir. Sağladığınız değer, günlüğe kaydedilecek `configureLogging` **Minimum** günlük düzeyini belirler. Bu düzeyde günlüğe kaydedilen iletiler **veya tabloda bundan sonra listelenen düzeyler**günlüğe kaydedilir.
+Aşağıdaki tabloda kullanılabilir günlük düzeyleri listelenmektedir. Sağladığınız değer, günlüğe kaydedilecek `configureLogging` **Minimum** günlük düzeyini belirler. Bu düzeyde günlüğe kaydedilen iletiler **veya tabloda bundan sonra listelenen düzeyler** günlüğe kaydedilir.
 
 | Dize                      | LogLevel               |
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info` **veya** `information` | `LogLevel.Information` |
-| `warn` **veya** `warning`     | `LogLevel.Warning`     |
+| `info`**ya da**`information` | `LogLevel.Information` |
+| `warn`**ya da**`warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -734,7 +735,7 @@ Zaman aşımını ve canlı tutma davranışını yapılandırmaya yönelik ek s
 | .NET seçeneği |  Varsayılan değer | Açıklama |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | HTTP isteklerinde taşıyıcı kimlik doğrulama belirteci olarak belirtilen bir dize döndüren bir işlev. |
-| `SkipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `SkipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 | `ClientCertificates` | Olmamalıdır | Kimlik doğrulaması isteklerine gönderilmek üzere TLS sertifikaları koleksiyonu. |
 | `Cookies` | Olmamalıdır | cookieHer HTTP isteğiyle gönderilmek üzere BIR http s koleksiyonu. |
 | `Credentials` | Olmamalıdır | Her HTTP isteğiyle gönderilen kimlik bilgileri. |
@@ -752,14 +753,14 @@ Zaman aşımını ve canlı tutma davranışını yapılandırmaya yönelik ek s
 | `accessTokenFactory` | `null` | HTTP isteklerinde taşıyıcı kimlik doğrulama belirteci olarak belirtilen bir dize döndüren bir işlev. |
 | `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>Bağlantı için kullanılacak aktarımı belirten bir değer. |
 | `logMessageContent` | `null` | `true`İstemci tarafından gönderilen ve alınan iletilerin bayt/karakter sayısını günlüğe kaydetmek için olarak ayarlayın. |
-| `skipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `skipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 
 # <a name="java"></a>[Java](#tab/java)
 
 | Java seçeneği | Varsayılan değer | Açıklama |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | HTTP isteklerinde taşıyıcı kimlik doğrulama belirteci olarak belirtilen bir dize döndüren bir işlev. |
-| `shouldSkipNegotiate` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `shouldSkipNegotiate` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 | `withHeader` `withHeaders` | Olmamalıdır | Her HTTP isteğiyle birlikte gönderilmek üzere ek HTTP üstbilgileri haritası. |
 
 ---
@@ -974,14 +975,14 @@ let connection = new signalR.HubConnectionBuilder()
     .build();
 ```
 
-Aşağıdaki tabloda kullanılabilir günlük düzeyleri listelenmektedir. Sağladığınız değer, günlüğe kaydedilecek `configureLogging` **Minimum** günlük düzeyini belirler. Bu düzeyde günlüğe kaydedilen iletiler **veya tabloda bundan sonra listelenen düzeyler**günlüğe kaydedilir.
+Aşağıdaki tabloda kullanılabilir günlük düzeyleri listelenmektedir. Sağladığınız değer, günlüğe kaydedilecek `configureLogging` **Minimum** günlük düzeyini belirler. Bu düzeyde günlüğe kaydedilen iletiler **veya tabloda bundan sonra listelenen düzeyler** günlüğe kaydedilir.
 
 | Dize                      | LogLevel               |
 | --------------------------- | ---------------------- |
 | `trace`                     | `LogLevel.Trace`       |
 | `debug`                     | `LogLevel.Debug`       |
-| `info` **veya** `information` | `LogLevel.Information` |
-| `warn` **veya** `warning`     | `LogLevel.Warning`     |
+| `info`**ya da**`information` | `LogLevel.Information` |
+| `warn`**ya da**`warning`     | `LogLevel.Warning`     |
 | `error`                     | `LogLevel.Error`       |
 | `critical`                  | `LogLevel.Critical`    |
 | `none`                      | `LogLevel.None`        |
@@ -1120,7 +1121,7 @@ Zaman aşımını ve canlı tutma davranışını yapılandırmaya yönelik ek s
 | .NET seçeneği |  Varsayılan değer | Açıklama |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | HTTP isteklerinde taşıyıcı kimlik doğrulama belirteci olarak belirtilen bir dize döndüren bir işlev. |
-| `SkipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `SkipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 | `ClientCertificates` | Olmamalıdır | Kimlik doğrulaması isteklerine gönderilmek üzere TLS sertifikaları koleksiyonu. |
 | `Cookies` | Olmamalıdır | cookieHer HTTP isteğiyle gönderilmek üzere BIR http s koleksiyonu. |
 | `Credentials` | Olmamalıdır | Her HTTP isteğiyle gönderilen kimlik bilgileri. |
@@ -1138,14 +1139,14 @@ Zaman aşımını ve canlı tutma davranışını yapılandırmaya yönelik ek s
 | `accessTokenFactory` | `null` | HTTP isteklerinde taşıyıcı kimlik doğrulama belirteci olarak belirtilen bir dize döndüren bir işlev. |
 | `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>Bağlantı için kullanılacak aktarımı belirten bir değer. |
 | `logMessageContent` | `null` | `true`İstemci tarafından gönderilen ve alınan iletilerin bayt/karakter sayısını günlüğe kaydetmek için olarak ayarlayın. |
-| `skipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `skipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 
 # <a name="java"></a>[Java](#tab/java)
 
 | Java seçeneği | Varsayılan değer | Açıklama |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | HTTP isteklerinde taşıyıcı kimlik doğrulama belirteci olarak belirtilen bir dize döndüren bir işlev. |
-| `shouldSkipNegotiate` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `shouldSkipNegotiate` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 | `withHeader` `withHeaders` | Olmamalıdır | Her HTTP isteğiyle birlikte gönderilmek üzere ek HTTP üstbilgileri haritası. |
 
 ---
@@ -1470,7 +1471,7 @@ Zaman aşımını ve canlı tutma davranışını yapılandırmaya yönelik ek s
 | .NET seçeneği |  Varsayılan değer | Açıklama |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | HTTP isteklerinde taşıyıcı kimlik doğrulama belirteci olarak belirtilen bir dize döndüren bir işlev. |
-| `SkipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `SkipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 | `ClientCertificates` | Olmamalıdır | Kimlik doğrulaması isteklerine gönderilmek üzere TLS sertifikaları koleksiyonu. |
 | `Cookies` | Olmamalıdır | cookieHer HTTP isteğiyle gönderilmek üzere BIR http s koleksiyonu. |
 | `Credentials` | Olmamalıdır | Her HTTP isteğiyle gönderilen kimlik bilgileri. |
@@ -1488,14 +1489,14 @@ Zaman aşımını ve canlı tutma davranışını yapılandırmaya yönelik ek s
 | `accessTokenFactory` | `null` | HTTP isteklerinde taşıyıcı kimlik doğrulama belirteci olarak belirtilen bir dize döndüren bir işlev. |
 | `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>Bağlantı için kullanılacak aktarımı belirten bir değer. |
 | `logMessageContent` | `null` | `true`İstemci tarafından gönderilen ve alınan iletilerin bayt/karakter sayısını günlüğe kaydetmek için olarak ayarlayın. |
-| `skipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `skipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 
 # <a name="java"></a>[Java](#tab/java)
 
 | Java seçeneği | Varsayılan değer | Açıklama |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | HTTP isteklerinde taşıyıcı kimlik doğrulama belirteci olarak belirtilen bir dize döndüren bir işlev. |
-| `shouldSkipNegotiate` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `shouldSkipNegotiate` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 | `withHeader` `withHeaders` | Olmamalıdır | Her HTTP isteğiyle birlikte gönderilmek üzere ek HTTP üstbilgileri haritası. |
 
 ---
@@ -1814,7 +1815,7 @@ Zaman aşımını ve canlı tutma davranışını yapılandırmaya yönelik ek s
 | .NET seçeneği |  Varsayılan değer | Açıklama |
 | ----------- | -------------- | ----------- |
 | `AccessTokenProvider` | `null` | HTTP isteklerinde taşıyıcı kimlik doğrulama belirteci olarak belirtilen bir dize döndüren bir işlev. |
-| `SkipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `SkipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 | `ClientCertificates` | Olmamalıdır | Kimlik doğrulaması isteklerine gönderilmek üzere TLS sertifikaları koleksiyonu. |
 | `Cookies` | Olmamalıdır | cookieHer HTTP isteğiyle gönderilmek üzere BIR http s koleksiyonu. |
 | `Credentials` | Olmamalıdır | Her HTTP isteğiyle gönderilen kimlik bilgileri. |
@@ -1832,14 +1833,14 @@ Zaman aşımını ve canlı tutma davranışını yapılandırmaya yönelik ek s
 | `accessTokenFactory` | `null` | HTTP isteklerinde taşıyıcı kimlik doğrulama belirteci olarak belirtilen bir dize döndüren bir işlev. |
 | `transport` | `null` | <xref:Microsoft.AspNetCore.Http.Connections.HttpTransportType>Bağlantı için kullanılacak aktarımı belirten bir değer. |
 | `logMessageContent` | `null` | `true`İstemci tarafından gönderilen ve alınan iletilerin bayt/karakter sayısını günlüğe kaydetmek için olarak ayarlayın. |
-| `skipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `skipNegotiation` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 
 # <a name="java"></a>[Java](#tab/java)
 
 | Java seçeneği | Varsayılan değer | Açıklama |
 | ----------- | ------------- | ----------- |
 | `withAccessTokenProvider` | `null` | HTTP isteklerinde taşıyıcı kimlik doğrulama belirteci olarak belirtilen bir dize döndüren bir işlev. |
-| `shouldSkipNegotiate` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir**. Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
+| `shouldSkipNegotiate` | `false` | `true`Anlaşma adımını atlamak için bunu olarak ayarlayın. **Yalnızca WebSockets taşıması etkin olan tek taşıma olduğunda desteklenir** . Bu ayar, Azure hizmeti kullanılırken etkinleştirilemez SignalR . |
 | `withHeader` `withHeaders` | Olmamalıdır | Her HTTP isteğiyle birlikte gönderilmek üzere ek HTTP üstbilgileri haritası. |
 
 ---

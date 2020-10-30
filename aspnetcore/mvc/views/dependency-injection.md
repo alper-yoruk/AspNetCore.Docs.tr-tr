@@ -5,6 +5,7 @@ description: ASP.NET Core MVC görünümlerine bağımlılık ekleme işlemini n
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/dependency-injection
-ms.openlocfilehash: 5ab79740d2068a50e4138e5b86f1622af8ef5ec7
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a596d05e3d1d73d4faa2f84d97a40e4a2c1234e4
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633610"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059292"
 ---
 # <a name="dependency-injection-into-views-in-aspnet-core"></a>ASP.NET Core görünümlere bağımlılık ekleme
 
@@ -33,9 +34,9 @@ ASP.NET Core, görünümlere [bağımlılık ekleme](xref:fundamentals/dependenc
 
 ## <a name="configuration-injection"></a>Yapılandırma ekleme
 
-Değerler *üzerindeappsettings.js* doğrudan bir görünüme eklenebilir.
+*appsettings.json* değerler doğrudan bir görünüme eklenebilir.
 
-Dosyadaki bir *appsettings.js* örneği:
+*appsettings.json* Dosya örneği:
 
 ```json
 {
@@ -66,7 +67,7 @@ Bir hizmet, yönergesini kullanarak bir görünüme eklenebilir `@inject` . `@in
 
 [!code-cshtml[](../../mvc/views/dependency-injection/sample/src/ViewInjectSample/Views/ToDo/Index.cshtml?highlight=4,5,15,16,17)]
 
-Bu görünüm `ToDoItem` , örneklerin listesini, genel istatistikleri gösteren bir Özet ile birlikte görüntüler. Özet, eklenen öğesinden doldurulur `StatisticsService` . Bu hizmet, Startup.cs içinde bağımlılık ekleme için `ConfigureServices` kaydedilir *Startup.cs*:
+Bu görünüm `ToDoItem` , örneklerin listesini, genel istatistikleri gösteren bir Özet ile birlikte görüntüler. Özet, eklenen öğesinden doldurulur `StatisticsService` . Bu hizmet, Startup.cs içinde bağımlılık ekleme için `ConfigureServices` kaydedilir *Startup.cs* :
 
 [!code-csharp[](../../mvc/views/dependency-injection/sample/src/ViewInjectSample/Startup.cs?highlight=6,7&range=15-22)]
 

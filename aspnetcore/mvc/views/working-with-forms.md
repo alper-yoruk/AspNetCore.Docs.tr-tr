@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/working-with-forms
-ms.openlocfilehash: c337e727a4683b0b3c67307af93ef8efa246e2ad
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: a568ad481eb09587e2ddce8e84d0ac3eff01e990
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631023"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060904"
 ---
 # <a name="tag-helpers-in-forms-in-aspnet-core"></a>ASP.NET Core formlardaki etiket yardımcıları
 
@@ -67,7 +68,7 @@ MVC çalışma zamanı, `action` form etiketi yardımcı öznitelikleri ve ' den
 
 [!code-cshtml[](../../mvc/views/working-with-forms/sample/final/Views/Demo/RegisterRoute.cshtml)]
 
-*Görünümler/hesap* klasöründeki görünümlerin birçoğu ( *bireysel kullanıcı hesaplarıyla*yeni bir Web uygulaması oluşturduğunuzda oluşturulur), [ASP-Route-ReturnUrl](xref:mvc/views/working-with-forms) özniteliğini içerir:
+*Görünümler/hesap* klasöründeki görünümlerin birçoğu ( *bireysel kullanıcı hesaplarıyla* yeni bir Web uygulaması oluşturduğunuzda oluşturulur), [ASP-Route-ReturnUrl](xref:mvc/views/working-with-forms) özniteliğini içerir:
 
 ```cshtml
 <form asp-controller="Account" asp-action="Login"
@@ -182,7 +183,7 @@ Söz dizimi:
 
 Giriş etiketi Yardımcısı:
 
-* `id` `name` Özniteliğinde belirtilen ifade adı için ve HTML özniteliklerini üretir `asp-for` . `asp-for="Property1.Property2"` değerine eşdeğerdir `m => m.Property1.Property2` . İfadenin adı, öznitelik değeri için kullanılan şeydir `asp-for` . Ek bilgi için [ifade adları](#expression-names) bölümüne bakın.
+* `id` `name` Özniteliğinde belirtilen ifade adı için ve HTML özniteliklerini üretir `asp-for` . `asp-for="Property1.Property2"`, `m => m.Property1.Property2` ile eşdeğerdir. İfadenin adı, öznitelik değeri için kullanılan şeydir `asp-for` . Ek bilgi için [ifade adları](#expression-names) bölümüne bakın.
 
 * Model `type` özelliğine uygulanan model türüne ve  [veri ek açıklaması](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.iattributeadapter) özniteliklerine göre html öznitelik değerini ayarlar
 
@@ -464,7 +465,7 @@ Sunucu tarafı doğrulama hatası oluştuğunda (örneğin, özel sunucu tarafı
 |ASP-doğrulama-Özet|Görünen doğrulama iletileri|
 |--- |--- |
 |ValidationSummary. All|Özellik ve model düzeyi|
-|Yalnızca ValidationSummary. model|Modelleme|
+|Yalnızca ValidationSummary. model|Model|
 |ValidationSummary. None|Yok|
 
 ### <a name="sample"></a>Örnek
@@ -502,7 +503,7 @@ Oluşturulan HTML (model geçerli olduğunda):
 
 * Bir HTML Yardımcısı alternatifi `Html.DropDownListFor` ve `Html.ListBoxFor`
 
-, `Select Tag Helper` `asp-for` [Select](https://www.w3.org/wiki/HTML/Elements/select) öğesi için model özelliği adını belirtir ve `asp-items` [seçenek](https://www.w3.org/wiki/HTML/Elements/option) öğelerini belirtir.  Örnek:
+, `Select Tag Helper` `asp-for` [Select](https://www.w3.org/wiki/HTML/Elements/select) öğesi için model özelliği adını belirtir ve `asp-items` [seçenek](https://www.w3.org/wiki/HTML/Elements/option) öğelerini belirtir.  Örneğin:
 
 [!code-cshtml[](working-with-forms/sample/final/Views/Home/Index.cshtml?range=4)]
 

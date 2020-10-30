@@ -6,6 +6,7 @@ monikerRange: '>= aspnetcore-3.0'
 ms.author: johluo
 ms.date: 07/09/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: grpc/basics
-ms.openlocfilehash: aacaf9cca131d3fba1c3ae96cf42d51d3fdc17b6
-ms.sourcegitcommit: 47c9a59ff8a359baa6bca2637d3af87ddca1245b
+ms.openlocfilehash: 4968ac889cd3b4e0780ce73dc729d0107a416932
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/27/2020
-ms.locfileid: "88945434"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061021"
 ---
 # <a name="grpc-services-with-c"></a>C ile gRPC Hizmetleri\#
 
@@ -32,7 +33,7 @@ Bu belgede, C# dilinde [GRPC](https://grpc.io/docs/guides/) uygulamaları yazmak
 
 ## <a name="proto-file"></a>Proto dosyası
 
-gRPC, API geliştirmesi için bir sözleşmenin ilk yaklaşımını kullanır. Protokol arabellekleri (protoarabellek) varsayılan olarak arabirim tanım dili (IDL) olarak kullanılır. * \* . Proto* dosyası şunları içerir:
+gRPC, API geliştirmesi için bir sözleşmenin ilk yaklaşımını kullanır. Protokol arabellekleri (protoarabellek) varsayılan olarak arabirim tanım dili (IDL) olarak kullanılır. *\* . Proto* dosyası şunları içerir:
 
 * GRPC hizmetinin tanımı.
 * İstemciler ve sunucular arasında gönderilen iletiler.
@@ -50,7 +51,7 @@ Prototipsiz dosyaların sözdizimi hakkında daha fazla bilgi için bkz <xref:gr
 
 ## <a name="add-a-proto-file-to-a-c-app"></a>C uygulamasına bir. proto dosyası ekleyin \#
 
-* \* . Proto* dosyası bir projeye öğe grubuna eklenerek dahil edilir `<Protobuf>` :
+*\* . Proto* dosyası bir projeye öğe grubuna eklenerek dahil edilir `<Protobuf>` :
 
 [!code-xml[](~/tutorials/grpc/grpc-start/sample/GrpcGreeter/GrpcGreeter.csproj?highlight=2&range=7-9)]
 
@@ -63,7 +64,7 @@ Varsayılan olarak, `<Protobuf>` başvuru somut bir istemci ve hizmet temel sın
 
 ## <a name="c-tooling-support-for-proto-files"></a>. Proto dosyaları için C# araçları desteği
 
-Araçları Paketi [GRPC. Tools](https://www.nuget.org/packages/Grpc.Tools/) , * \* . proto* dosyalarından C# varlıkları oluşturmak için gereklidir. Oluşturulan varlıklar (dosyalar):
+Araçları Paketi [GRPC. Tools](https://www.nuget.org/packages/Grpc.Tools/) , *\* . proto* dosyalarından C# varlıkları oluşturmak için gereklidir. Oluşturulan varlıklar (dosyalar):
 
 * , Projenin oluşturulduğu her seferinde gerekli olarak oluşturulur.
 * Projeye eklenmez veya kaynak denetimine iade edilmedi.
@@ -79,7 +80,7 @@ Bu paket hem sunucu hem de istemci projeleri için gereklidir. `Grpc.AspNetCore`
 
 ## <a name="generated-c-assets"></a>Oluşturulan C# varlıkları
 
-Araç paketi, eklenen * \* . proto* dosyalarında tanımlanan Iletileri temsil eden C# türlerini üretir.
+Araç paketi, eklenen *\* . proto* dosyalarında tanımlanan Iletileri temsil eden C# türlerini üretir.
 
 Sunucu tarafı varlıklar için, soyut bir hizmet temel türü oluşturulur. Temel tür, *. proto* dosyasında bulunan tüm GRPC çağrılarının tanımlarını içerir. Bu temel türden türetilen somut bir hizmet uygulamasını oluşturun ve gRPC çağrılarının mantığını uygular. `greet.proto`Daha önce açıklanan örnek için, `GreeterBase` sanal bir yöntemi içeren bir soyut tür `SayHello` oluşturulur. Somut bir uygulama `GreeterService` , yöntemini geçersiz kılar ve gRPC çağrısını işleme mantığını uygular.
 
@@ -89,7 +90,7 @@ Sunucu tarafı varlıklar için, soyut bir hizmet temel türü oluşturulur. Tem
 
 [!code-csharp[](~/tutorials/grpc/grpc-start/sample/GrpcGreeterClient/Program.cs?name=snippet)]
 
-Varsayılan olarak, sunucu ve istemci varlıkları öğe grubuna dahil edilen her * \* . proto* dosyası için oluşturulur `<Protobuf>` . Sunucu projesinde yalnızca sunucu varlıklarının oluşturulmasını sağlamak için `GrpcServices` özniteliği olarak ayarlanır `Server` .
+Varsayılan olarak, sunucu ve istemci varlıkları öğe grubuna dahil edilen her *\* . proto* dosyası için oluşturulur `<Protobuf>` . Sunucu projesinde yalnızca sunucu varlıklarının oluşturulmasını sağlamak için `GrpcServices` özniteliği olarak ayarlanır `Server` .
 
 [!code-xml[](~/tutorials/grpc/grpc-start/sample/GrpcGreeter/GrpcGreeter.csproj?highlight=2&range=7-9)]
 

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 06/12/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/partial
-ms.openlocfilehash: bb75d8b7d78c82c9c32605ac645b8895fdfb78e3
-ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
+ms.openlocfilehash: 01fb87205f7855f0995cbcd135b6b01f15835e3b
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/27/2020
-ms.locfileid: "91393658"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060605"
 ---
 # <a name="partial-views-in-aspnet-core"></a>ASP.NET Core kısmi görünümler
 
@@ -32,7 +33,7 @@ Kısmi görünüm, başka bir [Razor](xref:mvc/views/razor) *.cshtml* [`@page`](
 
 ::: moniker range=">= aspnetcore-2.1"
 
-*Kısmi görünüm* terimi, biçimlendirme dosyaları *Görünümler*olarak adlandırılan bir MVC uygulaması veya Razor biçimlendirme dosyalarının *Sayfalar*olarak adlandırıldığını bir sayfalar uygulaması geliştirirken kullanılır. Bu konu genel olarak, MVC görünümleri ve Razor Sayfalar sayfalarını *biçimlendirme dosyaları*olarak gösterir.
+*Kısmi görünüm* terimi, biçimlendirme dosyaları *Görünümler* olarak adlandırılan bir MVC uygulaması veya Razor biçimlendirme dosyalarının *Sayfalar* olarak adlandırıldığını bir sayfalar uygulaması geliştirirken kullanılır. Bu konu genel olarak, MVC görünümleri ve Razor Sayfalar sayfalarını *biçimlendirme dosyaları* olarak gösterir.
 
 ::: moniker-end
 
@@ -61,7 +62,7 @@ Kısmi görünüm, *.cshtml* [`@page`](xref:mvc/views/razor#page) *Görünümler
 
 ASP.NET Core MVC 'de, denetleyici <xref:Microsoft.AspNetCore.Mvc.ViewResult> bir görünüm veya kısmi görünüm döndürmektedir. RazorSayfalarda, bir <xref:Microsoft.AspNetCore.Mvc.RazorPages.PageModel> nesne olarak temsil edilen kısmi bir görünüm döndürebilir <xref:Microsoft.AspNetCore.Mvc.PartialViewResult> . Kısmi görünümlere başvurmak ve işlemek [kısmi görünüm başvurusu](#reference-a-partial-view) bölümünde açıklanmaktadır.
 
-MVC görünümü veya sayfa işleme farklı olarak, kısmi bir görünüm *_ViewStart. cshtml*çalıştırmaz. *_ViewStart. cshtml*hakkında daha fazla bilgi için bkz <xref:mvc/views/layout> ..
+MVC görünümü veya sayfa işleme farklı olarak, kısmi bir görünüm *_ViewStart. cshtml* çalıştırmaz. *_ViewStart. cshtml* hakkında daha fazla bilgi için bkz <xref:mvc/views/layout> ..
 
 Kısmi görünüm dosya adları genellikle bir alt çizgi () ile başlar `_` . Bu adlandırma kuralı gerekli değildir, ancak görünüm ve sayfalardan kısmi görünümleri görsel açıdan ayırt etmeye yardımcı olur.
 
@@ -73,7 +74,7 @@ Kısmi görünüm, *Görünümler* klasörü içinde tutulan bir *. cshtml* biç
 
 Denetleyicinin <xref:Microsoft.AspNetCore.Mvc.ViewResult> bir görünüm veya kısmi görünüm döndürme özelliği vardır. Kısmi görünümlere başvurmak ve işlemek [kısmi görünüm başvurusu](#reference-a-partial-view) bölümünde açıklanmaktadır.
 
-MVC görünüm işlemenin aksine, kısmi bir görünüm *_ViewStart. cshtml*çalıştırmaz. *_ViewStart. cshtml*hakkında daha fazla bilgi için bkz <xref:mvc/views/layout> ..
+MVC görünüm işlemenin aksine, kısmi bir görünüm *_ViewStart. cshtml* çalıştırmaz. *_ViewStart. cshtml* hakkında daha fazla bilgi için bkz <xref:mvc/views/layout> ..
 
 Kısmi görünüm dosya adları genellikle bir alt çizgi () ile başlar `_` . Bu adlandırma kuralı gerekli değildir, ancak kısmen görünümlerini görünümlerde görsel açıdan ayırt etmeye yardımcı olur.
 
@@ -85,7 +86,7 @@ Kısmi görünüm dosya adları genellikle bir alt çizgi () ile başlar `_` . B
 
 ### <a name="use-a-partial-view-in-a-no-locrazor-pages-pagemodel"></a>Sayfalarda PageModel içinde kısmi bir görünüm kullanma Razor
 
-ASP.NET Core 2,0 veya 2,1 ' de, aşağıdaki işleyici yöntemi * \_ authorpartialrp. cshtml* kısmi görünümünü yanıta işler:
+ASP.NET Core 2,0 veya 2,1 ' de, aşağıdaki işleyici yöntemi *\_ authorpartialrp. cshtml* kısmi görünümünü yanıta işler:
 
 ```csharp
 public IActionResult OnGetPartial() =>
@@ -273,8 +274,8 @@ Bir dosya uzantısı olmayan kısmi bir görünüme ad ile başvurulduğunda, a�
 Kısmi görünüm bulma için aşağıdaki kurallar geçerlidir:
 
 * Kısmi görünümler farklı klasörlerde olduğunda aynı dosya adına sahip farklı kısmi görünümlere izin verilir.
-* Dosya uzantısı olmadan kısmi bir görünüme ada göre başvurulması ve kısmi görünümün hem arayanın klasöründe hem de *paylaşılan* klasörde mevcut olması halinde, çağıranın klasöründeki kısmi görünüm kısmi görünümü sağlar. Kısmi görünüm çağıranın klasöründe yoksa, kısmi görünüm *paylaşılan* klasörden sağlanır. *Paylaşılan* klasördeki kısmi görünümler, *paylaşılan kısmi görünümler* veya *varsayılan kısmi görünümler*olarak adlandırılır.
-* Kısmi Görünümler *zincirleme*olabilir kısmi &mdash; Görünüm, çağrılar tarafından bir döngüsel başvuru oluşturulmadığı durumlarda başka bir kısmi görünümü çağırabilir. Göreli yollar her zaman geçerli dosyaya göredir, dosyanın köküne veya üst öğesine göre değil.
+* Dosya uzantısı olmadan kısmi bir görünüme ada göre başvurulması ve kısmi görünümün hem arayanın klasöründe hem de *paylaşılan* klasörde mevcut olması halinde, çağıranın klasöründeki kısmi görünüm kısmi görünümü sağlar. Kısmi görünüm çağıranın klasöründe yoksa, kısmi görünüm *paylaşılan* klasörden sağlanır. *Paylaşılan* klasördeki kısmi görünümler, *paylaşılan kısmi görünümler* veya *varsayılan kısmi görünümler* olarak adlandırılır.
+* Kısmi Görünümler *zincirleme* olabilir kısmi &mdash; Görünüm, çağrılar tarafından bir döngüsel başvuru oluşturulmadığı durumlarda başka bir kısmi görünümü çağırabilir. Göreli yollar her zaman geçerli dosyaya göredir, dosyanın köküne veya üst öğesine göre değil.
 
 > [!NOTE]
 > [Razor](xref:mvc/views/razor) `section` Kısmi görünümde tanımlanan bir öğe, üst biçimlendirme dosyaları için görünmez değildir. `section`Yalnızca tanımlandığı kısmi görünüm için görülebilir.
@@ -327,7 +328,7 @@ Bir modeli kısmi bir görünüme geçirebilirsiniz. Model özel bir nesne olabi
 
 [!code-cshtml[](partial/sample/PartialViewsSample/Views/Articles/_ArticleSection.cshtml)]
 
-Çalışma zamanında, partiler, kendisini paylaşılan *_Layout. cshtml*içinde işlenen üst biçimlendirme dosyasının işlenmiş çıktısına işlenir. İlk kısmi görünüm, makalenin adını ve yayımlama tarihini işler:
+Çalışma zamanında, partiler, kendisini paylaşılan *_Layout. cshtml* içinde işlenen üst biçimlendirme dosyasının işlenmiş çıktısına işlenir. İlk kısmi görünüm, makalenin adını ve yayımlama tarihini işler:
 
 > Abrayhelincoln
 >

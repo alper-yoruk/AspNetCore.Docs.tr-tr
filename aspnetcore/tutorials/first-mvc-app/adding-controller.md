@@ -5,6 +5,7 @@ description: ASP.NET Core MVC 'deki öğretici serisinin 2. bölümü.
 ms.author: riande
 ms.date: 08/05/2017
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-controller
-ms.openlocfilehash: b5ef99d5645e0bbd453d09809a446bf4af38a975
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 11832efa6715f96856665f174d65b094806d2810
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634052"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061294"
 ---
 # <a name="part-2-add-a-controller-to-an-aspnet-core-mvc-app"></a>2. bölüm, ASP.NET Core MVC uygulamasına denetleyici ekleme
 
@@ -29,45 +30,45 @@ Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Model-View-Controller (MVC) mimari modeli, bir uygulamayı üç ana bileşene ayırır: **M**odel, **V**IEW ve **C**ontroller. MVC deseninin daha kararlı ve geleneksel tek parçalı uygulamalardan güncelleştirilmesi daha kolay olan uygulamalar oluşturmanıza yardımcı olur. MVC tabanlı uygulamalar şunları içerir:
+Model-View-Controller (MVC) mimari modeli, bir uygulamayı üç ana bileşene ayırır: **M** odel, **V** IEW ve **C** ontroller. MVC deseninin daha kararlı ve geleneksel tek parçalı uygulamalardan güncelleştirilmesi daha kolay olan uygulamalar oluşturmanıza yardımcı olur. MVC tabanlı uygulamalar şunları içerir:
 
-* **D**odels: uygulamanın verilerini temsil eden sınıflar. Model sınıfları, bu veriler için iş kurallarını zorlamak üzere doğrulama mantığını kullanır. Genellikle, model nesneleri bir veritabanında model durumunu alır ve saklar. Bu öğreticide, bir `Movie` model bir veritabanından film verileri alır, bunu görünüme sağlar veya güncelleştirir. Güncelleştirilmiş veriler bir veritabanına yazılır.
+* **D** odels: uygulamanın verilerini temsil eden sınıflar. Model sınıfları, bu veriler için iş kurallarını zorlamak üzere doğrulama mantığını kullanır. Genellikle, model nesneleri bir veritabanında model durumunu alır ve saklar. Bu öğreticide, bir `Movie` model bir veritabanından film verileri alır, bunu görünüme sağlar veya güncelleştirir. Güncelleştirilmiş veriler bir veritabanına yazılır.
 
-* **V**ıews: görünümler, uygulamanın kullanıcı ARABIRIMINI (UI) görüntüleyen bileşenlerdir. Genellikle, bu kullanıcı arabirimi model verilerini görüntüler.
+* **V** ıews: görünümler, uygulamanın kullanıcı ARABIRIMINI (UI) görüntüleyen bileşenlerdir. Genellikle, bu kullanıcı arabirimi model verilerini görüntüler.
 
-* **C**ontrolleyiciler: tarayıcı Isteklerini işleyen sınıflar. Model verileri alır ve yanıt döndüren çağrı görünümü şablonları. MVC uygulamasında, görünüm yalnızca bilgileri görüntüler; denetleyici, Kullanıcı girişini ve etkileşimini işler ve yanıtlar. Örneğin, denetleyici rota verilerini ve sorgu dizesi değerlerini işler ve bu değerleri modele geçirir. Model bu değerleri veritabanını sorgulamak için kullanabilir. Örneğin, `https://localhost:5001/Home/Privacy` `Home` (denetleyici) ve `Privacy` (ana denetleyicide çağrılacak eylem yöntemi) verilerinin yolunu içerir. `https://localhost:5001/Movies/Edit/5` filmi film denetleyicisi kullanarak, ID = 5 olan filmi düzenleme isteği. Rota verileri öğreticide daha sonra açıklanmaktadır.
+* **C** ontrolleyiciler: tarayıcı Isteklerini işleyen sınıflar. Model verileri alır ve yanıt döndüren çağrı görünümü şablonları. MVC uygulamasında, görünüm yalnızca bilgileri görüntüler; denetleyici, Kullanıcı girişini ve etkileşimini işler ve yanıtlar. Örneğin, denetleyici rota verilerini ve sorgu dizesi değerlerini işler ve bu değerleri modele geçirir. Model bu değerleri veritabanını sorgulamak için kullanabilir. Örneğin, `https://localhost:5001/Home/Privacy` `Home` (denetleyici) ve `Privacy` (ana denetleyicide çağrılacak eylem yöntemi) verilerinin yolunu içerir. `https://localhost:5001/Movies/Edit/5` filmi film denetleyicisi kullanarak, ID = 5 olan filmi düzenleme isteği. Rota verileri öğreticide daha sonra açıklanmaktadır.
 
 MVC deseninin uygulamanın farklı yönlerini (Giriş mantığı, iş mantığı ve Kullanıcı arabirimi mantığı) ayıran uygulamalar oluşturmanıza yardımcı olur. bu öğeler arasında gevşek bir bağ sağlanır. Bu model, her bir mantık türünün uygulamada nerede bulunması gerektiğini belirtir. Kullanıcı arabirimi mantığı görünüme aittir. Giriş mantığı denetleyiciye aittir. İş mantığı modele aittir. Bu ayrım, bir uygulama oluşturduğunuzda karmaşıklığın yönetilmesine yardımcı olur, çünkü uygulamanın bir tek tarafında, başka bir kodu etkilemeden bir kez çalışmanıza olanak sağlar. Örneğin, iş mantığı koduna bağlı kalmadan görünüm kodu üzerinde çalışabilirsiniz.
 
-Bu kavramları, bu öğretici serisinde ele alınmaktadır ve bir film uygulaması oluşturmak için nasıl kullanacağınızı gösterir. MVC projesi *denetleyiciler* ve *Görünümler*için klasörler içerir.
+Bu kavramları, bu öğretici serisinde ele alınmaktadır ve bir film uygulaması oluşturmak için nasıl kullanacağınızı gösterir. MVC projesi *denetleyiciler* ve *Görünümler* için klasörler içerir.
 
 ## <a name="add-a-controller"></a>Denetleyici ekleme
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **Çözüm Gezgini**, denetleyiciler öğesine sağ tıklayın **> > denetleyicisi** 
+* **Çözüm Gezgini** , denetleyiciler öğesine sağ tıklayın **> > denetleyicisi** 
    ![ bağlamsal menü ekleyin](adding-controller/_static/add_controller.png)
 
 * **Yapı Iskelesi Ekle** iletişim kutusunda, **Denetleyici sınıfı-boş** seçeneğini belirleyin
 
   ![MVC denetleyicisi ekleme ve adlandırma](adding-controller/_static/ac.png)
 
-* **Boş MVC denetleyicisi Ekle iletişim kutusunda**, **Merhaba worldcontroller** yazın ve **Ekle**' yi seçin.
+* **Boş MVC denetleyicisi Ekle iletişim kutusunda** , **Merhaba worldcontroller** yazın ve **Ekle** ' yi seçin.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-**Gezgin** simgesini seçin ve ardından **yeni dosya > denetleyiciler** ' i (sağ tıklayın) ve yeni dosyayı *HelloWorldController.cs*olarak adlandırın.
+**Gezgin** simgesini seçin ve ardından **yeni dosya > denetleyiciler** ' i (sağ tıklayın) ve yeni dosyayı *HelloWorldController.cs* olarak adlandırın.
 
   ![Bağlamsal menü](~/tutorials/first-mvc-app-xplat/adding-controller/_static/new_file.png)
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-**Çözüm Gezgini**, denetleyiciler ' e sağ tıklayın **> yeni > dosya ekleyin**.
+**Çözüm Gezgini** , denetleyiciler ' e sağ tıklayın **> yeni > dosya ekleyin** .
 ![Bağlamsal menü](~/tutorials/first-mvc-app-mac/adding-controller/_static/add_controller.png)
 
-**ASP.NET Core** ve **Denetleyici sınıfını**seçin.
+**ASP.NET Core** ve **Denetleyici sınıfını** seçin.
 
-Denetleyiciyi **Merhaba Dünya denetleyicisine**adlandırın.
+Denetleyiciyi **Merhaba Dünya denetleyicisine** adlandırın.
 
 ![MVC denetleyicisi ekleme ve adlandırma](~/tutorials/first-mvc-app-mac/adding-controller/_static/ac.png)
 
@@ -97,7 +98,7 @@ Yönlendirme biçimi `Configure` *Startup.cs* dosyasındaki yönteminde ayarlan�
 
 Uygulamaya gözatıp hiçbir URL kesimini sağlamadığınızda, varsayılan olarak "giriş" denetleyicisi ve yukarıda vurgulanan şablon satırında belirtilen "Dizin" yöntemi varsayılan olarak belirtilir.
 
-İlk URL segmenti, çalıştırılacak denetleyici sınıfını belirler. Bu nedenle `localhost:{PORT}/HelloWorld` **HelloWorld**Controller sınıfıyla eşlenir. URL segmentinin ikinci bölümü, sınıfındaki Action metodunu belirler. Bu nedenle, `localhost:{PORT}/HelloWorld/Index` `Index` sınıfın yönteminin çalışmasına neden olur `HelloWorldController` . Yalnızca göz atmanızı `localhost:{PORT}/HelloWorld` ve `Index` yönteme varsayılan olarak çağrıldığına dikkat edin. Bunun nedeni `Index` , açıkça bir yöntem adı belirtilmemişse bir denetleyicide çağrılacak varsayılan yöntemdir. URL segmentinin () üçüncü bölümü `id` Rota verileri içindir. Rota verileri öğreticide daha sonra açıklanmaktadır.
+İlk URL segmenti, çalıştırılacak denetleyici sınıfını belirler. Bu nedenle `localhost:{PORT}/HelloWorld` **HelloWorld** Controller sınıfıyla eşlenir. URL segmentinin ikinci bölümü, sınıfındaki Action metodunu belirler. Bu nedenle, `localhost:{PORT}/HelloWorld/Index` `Index` sınıfın yönteminin çalışmasına neden olur `HelloWorldController` . Yalnızca göz atmanızı `localhost:{PORT}/HelloWorld` ve `Index` yönteme varsayılan olarak çağrıldığına dikkat edin. Bunun nedeni `Index` , açıkça bir yöntem adı belirtilmemişse bir denetleyicide çağrılacak varsayılan yöntemdir. URL segmentinin () üçüncü bölümü `id` Rota verileri içindir. Rota verileri öğreticide daha sonra açıklanmaktadır.
 
 `https://localhost:{PORT}/HelloWorld/Welcome` adresine gidin. `Welcome`Yöntemi çalışır ve dizeyi döndürür `This is the Welcome action method...` . Bu URL için denetleyici, `HelloWorld` ve `Welcome` eylem yöntemidir. `[Parameters]`URL 'nin bir bölümünü henüz kullanmadınız.
 
@@ -133,7 +134,7 @@ Bu kez, üçüncü URL segmenti rota parametresiyle eşleşti `id` . `Welcome`Y�
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_1&highlight=5)]
 
-Bu örneklerde, denetleyici MVC 'nin "VC" bölümünü (yani, **V**IEW ve **C**) çalışır. Denetleyici HTML 'i doğrudan döndürüyor. Genellikle, bu, kod ve bakım için çok daha fazla hale geldiği için denetleyicilerin doğrudan HTML döndürmesini istemezsiniz. Bunun yerine Razor , genellıkle HTML yanıtı oluşturmak için ayrı bir görünüm şablonu dosyası kullanırsınız. Bunu bir sonraki öğreticide yapabilirsiniz.
+Bu örneklerde, denetleyici MVC 'nin "VC" bölümünü (yani, **V** IEW ve **C** ) çalışır. Denetleyici HTML 'i doğrudan döndürüyor. Genellikle, bu, kod ve bakım için çok daha fazla hale geldiği için denetleyicilerin doğrudan HTML döndürmesini istemezsiniz. Bunun yerine Razor , genellıkle HTML yanıtı oluşturmak için ayrı bir görünüm şablonu dosyası kullanırsınız. Bunu bir sonraki öğreticide yapabilirsiniz.
 
 > [!div class="step-by-step"]
 > [Önceki](start-mvc.md) 
@@ -143,45 +144,45 @@ Bu örneklerde, denetleyici MVC 'nin "VC" bölümünü (yani, **V**IEW ve **C**)
 
 ::: moniker range="< aspnetcore-3.0"
 
-Model-View-Controller (MVC) mimari modeli, bir uygulamayı üç ana bileşene ayırır: **M**odel, **V**IEW ve **C**ontroller. MVC deseninin daha kararlı ve geleneksel tek parçalı uygulamalardan güncelleştirilmesi daha kolay olan uygulamalar oluşturmanıza yardımcı olur. MVC tabanlı uygulamalar şunları içerir:
+Model-View-Controller (MVC) mimari modeli, bir uygulamayı üç ana bileşene ayırır: **M** odel, **V** IEW ve **C** ontroller. MVC deseninin daha kararlı ve geleneksel tek parçalı uygulamalardan güncelleştirilmesi daha kolay olan uygulamalar oluşturmanıza yardımcı olur. MVC tabanlı uygulamalar şunları içerir:
 
-* **D**odels: uygulamanın verilerini temsil eden sınıflar. Model sınıfları, bu veriler için iş kurallarını zorlamak üzere doğrulama mantığını kullanır. Genellikle, model nesneleri bir veritabanında model durumunu alır ve saklar. Bu öğreticide, bir `Movie` model bir veritabanından film verileri alır, bunu görünüme sağlar veya güncelleştirir. Güncelleştirilmiş veriler bir veritabanına yazılır.
+* **D** odels: uygulamanın verilerini temsil eden sınıflar. Model sınıfları, bu veriler için iş kurallarını zorlamak üzere doğrulama mantığını kullanır. Genellikle, model nesneleri bir veritabanında model durumunu alır ve saklar. Bu öğreticide, bir `Movie` model bir veritabanından film verileri alır, bunu görünüme sağlar veya güncelleştirir. Güncelleştirilmiş veriler bir veritabanına yazılır.
 
-* **V**ıews: görünümler, uygulamanın kullanıcı ARABIRIMINI (UI) görüntüleyen bileşenlerdir. Genellikle, bu kullanıcı arabirimi model verilerini görüntüler.
+* **V** ıews: görünümler, uygulamanın kullanıcı ARABIRIMINI (UI) görüntüleyen bileşenlerdir. Genellikle, bu kullanıcı arabirimi model verilerini görüntüler.
 
-* **C**ontrolleyiciler: tarayıcı Isteklerini işleyen sınıflar. Model verileri alır ve yanıt döndüren çağrı görünümü şablonları. MVC uygulamasında, görünüm yalnızca bilgileri görüntüler; denetleyici, Kullanıcı girişini ve etkileşimini işler ve yanıtlar. Örneğin, denetleyici rota verilerini ve sorgu dizesi değerlerini işler ve bu değerleri modele geçirir. Model bu değerleri veritabanını sorgulamak için kullanabilir. Örneğin, `https://localhost:5001/Home/About` `Home` (denetleyici) ve `About` (ana denetleyicide çağrılacak eylem yöntemi) verilerinin yolunu içerir. `https://localhost:5001/Movies/Edit/5` filmi film denetleyicisi kullanarak, ID = 5 olan filmi düzenleme isteği. Rota verileri öğreticide daha sonra açıklanmaktadır.
+* **C** ontrolleyiciler: tarayıcı Isteklerini işleyen sınıflar. Model verileri alır ve yanıt döndüren çağrı görünümü şablonları. MVC uygulamasında, görünüm yalnızca bilgileri görüntüler; denetleyici, Kullanıcı girişini ve etkileşimini işler ve yanıtlar. Örneğin, denetleyici rota verilerini ve sorgu dizesi değerlerini işler ve bu değerleri modele geçirir. Model bu değerleri veritabanını sorgulamak için kullanabilir. Örneğin, `https://localhost:5001/Home/About` `Home` (denetleyici) ve `About` (ana denetleyicide çağrılacak eylem yöntemi) verilerinin yolunu içerir. `https://localhost:5001/Movies/Edit/5` filmi film denetleyicisi kullanarak, ID = 5 olan filmi düzenleme isteği. Rota verileri öğreticide daha sonra açıklanmaktadır.
 
 MVC deseninin uygulamanın farklı yönlerini (Giriş mantığı, iş mantığı ve Kullanıcı arabirimi mantığı) ayıran uygulamalar oluşturmanıza yardımcı olur. bu öğeler arasında gevşek bir bağ sağlanır. Bu model, her bir mantık türünün uygulamada nerede bulunması gerektiğini belirtir. Kullanıcı arabirimi mantığı görünüme aittir. Giriş mantığı denetleyiciye aittir. İş mantığı modele aittir. Bu ayrım, bir uygulama oluşturduğunuzda karmaşıklığın yönetilmesine yardımcı olur, çünkü uygulamanın bir tek tarafında, başka bir kodu etkilemeden bir kez çalışmanıza olanak sağlar. Örneğin, iş mantığı koduna bağlı kalmadan görünüm kodu üzerinde çalışabilirsiniz.
 
-Bu kavramları, bu öğretici serisinde ele alınmaktadır ve bir film uygulaması oluşturmak için nasıl kullanacağınızı gösterir. MVC projesi *denetleyiciler* ve *Görünümler*için klasörler içerir.
+Bu kavramları, bu öğretici serisinde ele alınmaktadır ve bir film uygulaması oluşturmak için nasıl kullanacağınızı gösterir. MVC projesi *denetleyiciler* ve *Görünümler* için klasörler içerir.
 
 ## <a name="add-a-controller"></a>Denetleyici ekleme
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* **Çözüm Gezgini**, denetleyiciler öğesine sağ tıklayın **> > denetleyicisi** 
+* **Çözüm Gezgini** , denetleyiciler öğesine sağ tıklayın **> > denetleyicisi** 
    ![ bağlamsal menü ekleyin](adding-controller/_static/add_controller.png)
 
 * **Yapı Iskelesi Ekle** iletişim kutusunda, **MVC denetleyicisi-boş** seçeneğini belirleyin
 
   ![MVC denetleyicisi ekleme ve adlandırma](adding-controller/_static/ac.png)
 
-* **Boş MVC denetleyicisi Ekle iletişim kutusunda**, **Merhaba worldcontroller** yazın ve **Ekle**' yi seçin.
+* **Boş MVC denetleyicisi Ekle iletişim kutusunda** , **Merhaba worldcontroller** yazın ve **Ekle** ' yi seçin.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-**Gezgin** simgesini seçin ve ardından **yeni dosya > denetleyiciler** ' i (sağ tıklayın) ve yeni dosyayı *HelloWorldController.cs*olarak adlandırın.
+**Gezgin** simgesini seçin ve ardından **yeni dosya > denetleyiciler** ' i (sağ tıklayın) ve yeni dosyayı *HelloWorldController.cs* olarak adlandırın.
 
   ![Bağlamsal menü](~/tutorials/first-mvc-app-xplat/adding-controller/_static/new_file.png)
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-**Çözüm Gezgini**, denetleyiciler ' e sağ tıklayın **> yeni > dosya ekleyin**.
+**Çözüm Gezgini** , denetleyiciler ' e sağ tıklayın **> yeni > dosya ekleyin** .
 ![Bağlamsal menü](~/tutorials/first-mvc-app-mac/adding-controller/_static/add_controller.png)
 
-**ASP.NET Core** ve **MVC denetleyici sınıfı**' nı seçin.
+**ASP.NET Core** ve **MVC denetleyici sınıfı** ' nı seçin.
 
-Denetleyiciyi **Merhaba Dünya denetleyicisine**adlandırın.
+Denetleyiciyi **Merhaba Dünya denetleyicisine** adlandırın.
 
 ![MVC denetleyicisi ekleme ve adlandırma](~/tutorials/first-mvc-app-mac/adding-controller/_static/ac.png)
 

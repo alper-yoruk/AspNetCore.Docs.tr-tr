@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 7/23/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/validation
-ms.openlocfilehash: 86c523c69d3ee85f56bf1a51719a0bd93cbe97fc
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 991a0f29c0edc5a220dfde69bd22dc4ed758394d
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633558"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060735"
 ---
 # <a name="part-8-add-validation-to-an-aspnet-core-no-locrazor-page"></a>8. bölüm, ASP.NET Core sayfasına doğrulama ekleme Razor
 
@@ -32,7 +33,7 @@ Bu bölümde, doğrulama mantığı `Movie` modele eklenir. Doğrulama kurallar�
 
 ## <a name="validation"></a>Doğrulama
 
-Yazılım geliştirmeye yönelik temel bir temel [kuru](https://wikipedia.org/wiki/Don%27t_repeat_yourself) ("**D**on't **R**epeon **Y**ourself") olarak adlandırılır. Razor Sayfalar, işlevlerin bir kez belirtildiği ve uygulama genelinde yansıtıldığı durumlarda geliştirmeyi teşvik eder. Kuru şu şekilde yardımcı olabilir:
+Yazılım geliştirmeye yönelik temel bir temel [kuru](https://wikipedia.org/wiki/Don%27t_repeat_yourself) (" **D** on't **R** epeon **Y** ourself") olarak adlandırılır. Razor Sayfalar, işlevlerin bir kez belirtildiği ve uygulama genelinde yansıtıldığı durumlarda geliştirmeyi teşvik eder. Kuru şu şekilde yardımcı olabilir:
 
 * Uygulamadaki kod miktarını azaltın.
 * Kodu daha az hata haline getirin ve test ve bakım yapmayı kolaylaştırın.
@@ -82,7 +83,7 @@ Formun geçersiz bir değer içeren her alanda otomatik olarak bir doğrulama ha
 
 Form verileri, istemci tarafı doğrulama hatası kalmayana kadar sunucuya nakledilmez. Form verilerinin aşağıdaki yaklaşımlardan bir veya daha fazlası tarafından nakledilmediğinden emin olun:
 
-* Yöntemine bir kesme noktası koyun `OnPostAsync` . Formu gönder ( **Oluştur** veya **Kaydet**' i seçin). Kesme noktası hiçbir şekilde isabet ettirilmez.
+* Yöntemine bir kesme noktası koyun `OnPostAsync` . Formu gönder ( **Oluştur** veya **Kaydet** ' i seçin). Kesme noktası hiçbir şekilde isabet ettirilmez.
 * [Fiddler aracını](https://www.telerik.com/fiddler)kullanın.
 * Ağ trafiğini izlemek için tarayıcı Geliştirici Araçları ' nı kullanın.
 
@@ -186,7 +187,7 @@ CREATE TABLE [dbo].[Movie] (
 
 Önceki şema değişiklikleri, EF 'in özel durum oluşturmasına neden olmaz. Ancak, şemanın modelle tutarlı olması için bir geçiş oluşturun.
 
-**Araçlar** menüsünde **NuGet Paket Yöneticisi > Paket Yöneticisi konsolu**' nu seçin.
+**Araçlar** menüsünde **NuGet Paket Yöneticisi > Paket Yöneticisi konsolu** ' nu seçin.
 PMC 'de aşağıdaki komutları girin:
 
 ```powershell

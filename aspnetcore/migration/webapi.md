@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 05/26/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/webapi
-ms.openlocfilehash: e3e46f8050ba87c3108885341675c9d2a2cb7847
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 320805c0d40bf06cee384e6d98caea5c420d45bc
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635170"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061476"
 ---
 # <a name="migrate-from-aspnet-web-api-to-aspnet-core"></a>ASP.NET Web API 'sinden ASP.NET Core 'e geçiş
 
@@ -34,7 +35,7 @@ ASP.NET 4. x Web API 'SI, tarayıcılar ve mobil cihazlar dahil olmak üzere ço
 
 ::: moniker range=">= aspnetcore-3.0"
 
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 [!INCLUDE [prerequisites](../includes/net-core-prereqs-vs-3.1.md)]
 
@@ -42,7 +43,7 @@ ASP.NET 4. x Web API 'SI, tarayıcılar ve mobil cihazlar dahil olmak üzere ço
 
 Bu makale, [ASP.NET Web API 2 Ile çalışmaya](/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api)başlama bölümünde oluşturulan *productsapp* projesini kullanır. Bu projede, temel bir ASP.NET 4. x Web API projesi aşağıdaki şekilde yapılandırılır.
 
-*Global.asax.cs*' de, şu şekilde bir çağrı yapılır `WebApiConfig.Register` :
+*Global.asax.cs* ' de, şu şekilde bir çağrı yapılır `WebApiConfig.Register` :
 
 [!code-csharp[](webapi/sample/3.x/ProductsApp/Global.asax.cs?highlight=14)]
 
@@ -62,16 +63,16 @@ Aşağıdaki bölümlerde, Web API projesinin ASP.NET Core MVC 'ye geçişi gös
 
 Visual Studio 'da yeni bir boş çözüm oluşturun ve geçirilecek ASP.NET 4. x Web API projesini ekleyin:
 
-1. **Dosya** menüsünden **Yeni** > **Proje**' yi seçin.
-1. **Boş çözüm** şablonunu seçin ve Ileri ' **yi**seçin.
-1. Çözümü *WebAPIMigration*olarak adlandırın. **Oluştur**’u seçin.
+1. **Dosya** menüsünden **Yeni** > **Proje** ' yi seçin.
+1. **Boş çözüm** şablonunu seçin ve Ileri ' **yi** seçin.
+1. Çözümü *WebAPIMigration* olarak adlandırın. **Oluştur** ’u seçin.
 1. Varolan *Productsapp* projesini çözüme ekleyin.
 
 Geçirilecek yeni bir API projesi ekleyin:
 
 1. Çözüme yeni bir **ASP.NET Core Web uygulaması** projesi ekleyin.
-1. **Yeni projenizi yapılandırın** iletişim kutusunda, proje *Productscore*' ı adlandırın ve **Oluştur**' u seçin.
-1. **Yeni bir ASP.NET Core Web uygulaması oluştur** iletişim kutusunda, **.net Core** ve **ASP.NET Core 3,1** ' un seçili olduğunu doğrulayın. **API** proje şablonunu seçin ve **Oluştur**' u seçin.
+1. **Yeni projenizi yapılandırın** iletişim kutusunda, proje *Productscore* ' ı adlandırın ve **Oluştur** ' u seçin.
+1. **Yeni bir ASP.NET Core Web uygulaması oluştur** iletişim kutusunda, **.net Core** ve **ASP.NET Core 3,1** ' un seçili olduğunu doğrulayın. **API** proje şablonunu seçin ve **Oluştur** ' u seçin.
 1. *WeatherForecast.cs* ve *Controllers/dalgalı sıra. cs* örnek dosyalarını yeni *productscore* projesinden kaldırın.
 
 Çözüm artık iki proje içerir. Aşağıdaki bölümlerde *Productsapp* projesinin Içeriğinin *productscore* projesine geçirilmesi açıklanmaktadır.
@@ -82,7 +83,7 @@ ASP.NET Core *App_Start* klasörünü veya *Global. asax* dosyasını kullanmaz.
 
 `Startup` sınıfı:
 
-* *Global. asax*öğesini değiştirir.
+* *Global. asax* öğesini değiştirir.
 * Tüm uygulama başlangıç görevlerini işler.
 
 Daha fazla bilgi için bkz. <xref:fundamentals/startup>.
@@ -156,7 +157,7 @@ Geçirilen projeyi çalıştırın ve konumuna gidin `/api/products` . Üç ür�
 ::: moniker-end
 
 ::: moniker range="<= aspnetcore-2.2"
-## <a name="prerequisites"></a>Ön koşullar
+## <a name="prerequisites"></a>Önkoşullar
 
 [!INCLUDE [prerequisites](../includes/net-core-prereqs-vs2019-2.2.md)]
 
@@ -164,7 +165,7 @@ Geçirilen projeyi çalıştırın ve konumuna gidin `/api/products` . Üç ür�
 
 Bu makale, [ASP.NET Web API 2 Ile çalışmaya](/aspnet/web-api/overview/getting-started-with-aspnet-web-api/tutorial-your-first-web-api)başlama bölümünde oluşturulan *productsapp* projesini kullanır. Bu projede, temel bir ASP.NET 4. x Web API projesi aşağıdaki şekilde yapılandırılır.
 
-*Global.asax.cs*' de, şu şekilde bir çağrı yapılır `WebApiConfig.Register` :
+*Global.asax.cs* ' de, şu şekilde bir çağrı yapılır `WebApiConfig.Register` :
 
 [!code-csharp[](webapi/sample/2.x/ProductsApp/Global.asax.cs?highlight=14)]
 
@@ -180,9 +181,9 @@ Aşağıdaki bölümlerde, Web API projesinin ASP.NET Core MVC 'ye geçişi gös
 
 Visual Studio 'da aşağıdaki adımları uygulayın:
 
-* **Dosya**  >  **Yeni**  >  **Proje**  >  **diğer proje türleri**  >  **Visual Studio çözümleri**' ne gidin. **Boş çözüm**' i seçin ve çözümü *WebAPIMigration*olarak adlandırın. **Tamam** düğmesine tıklayın.
+* **Dosya**  >  **Yeni**  >  **Proje**  >  **diğer proje türleri**  >  **Visual Studio çözümleri** ' ne gidin. **Boş çözüm** ' i seçin ve çözümü *WebAPIMigration* olarak adlandırın. **Tamam** düğmesine tıklayın.
 * Varolan *Productsapp* projesini çözüme ekleyin.
-* Çözüme yeni bir **ASP.NET Core Web uygulaması** projesi ekleyin. Açılan listeden **.NET Core** hedef çerçevesini seçin ve **API** proje şablonunu seçin. Projeyi *Productscore*olarak adlandırın ve **Tamam** düğmesine tıklayın.
+* Çözüme yeni bir **ASP.NET Core Web uygulaması** projesi ekleyin. Açılan listeden **.NET Core** hedef çerçevesini seçin ve **API** proje şablonunu seçin. Projeyi *Productscore* olarak adlandırın ve **Tamam** düğmesine tıklayın.
 
 Çözüm artık iki proje içerir. Aşağıdaki bölümlerde *Productsapp* projesinin Içeriğinin *productscore* projesine geçirilmesi açıklanmaktadır.
 
@@ -195,7 +196,7 @@ ASP.NET Core şunu kullanmaz:
 
 `Startup` sınıfı:
 
-* *Global. asax*öğesini değiştirir.
+* *Global. asax* öğesini değiştirir.
 * Tüm uygulama başlangıç görevlerini işler.
 
 Daha fazla bilgi için bkz. <xref:fundamentals/startup>.

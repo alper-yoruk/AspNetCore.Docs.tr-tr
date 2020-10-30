@@ -5,6 +5,7 @@ description: Sayfaların Bölüm 7 Razor ve Entity Framework öğretici serisi.
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/update-related-data
-ms.openlocfilehash: 17b200f0ba90035c417c96689798263af16551de
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 3ec88a862697c540a1a98e733c31d76922f81f7c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722825"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060540"
 ---
 # <a name="part-7-no-locrazor-pages-with-ef-core-in-aspnet-core---update-related-data"></a>Bölüm 7, Razor ASP.NET Core EF Core olan sayfalar-Ilgili verileri güncelleştir
 
@@ -76,7 +77,7 @@ Yukarıdaki kod:
 
 Yukarıdaki kod aşağıdaki değişiklikleri yapar:
 
-* **DepartmentID** etiketini **departmana**dönüştürür.
+* **DepartmentID** etiketini **departmana** dönüştürür.
 * `"ViewBag.DepartmentID"`İle değiştirir `DepartmentNameSL` (taban sınıfından).
 * "Departmanı Seç" seçeneğini ekler. Bu değişiklik, ilk departman yerine henüz bir departman seçilmedikçe açılan kutuda "departmanı Seç" i işler.
 * Departman seçili olmadığında bir doğrulama iletisi ekler.
@@ -104,10 +105,10 @@ Değişiklikler, oluşturma sayfası modelinde yapılanlarla benzerdir. Yukarıd
 Yukarıdaki kod aşağıdaki değişiklikleri yapar:
 
 * Kurs KIMLIĞINI görüntüler. Genellikle bir varlığın birincil anahtarı (PK) gösterilmez. PKs 'ler genellikle kullanıcılara daha az anlamlı olur. Bu durumda, PK kurs numarasıdır.
-* Bölüm açılan başlığını **DepartmentID** ' dan **departmana**dönüştürür.
+* Bölüm açılan başlığını **DepartmentID** ' dan **departmana** dönüştürür.
 * `"ViewBag.DepartmentID"`İle değiştirir `DepartmentNameSL` (taban sınıfından).
 
-Sayfa `<input type="hidden">` , kurs numarası için gizli bir alan () içerir. `<label>`Etiket Yardımcısı ekleme, `asp-for="Course.CourseID"` gizli alan gereksinimini ortadan kaldırmaz. `<input type="hidden">` Kullanıcı **Kaydet**' e tıkladığında, gönderilen veriler için kurs numarasının dahil olması gerekir.
+Sayfa `<input type="hidden">` , kurs numarası için gizli bir alan () içerir. `<label>`Etiket Yardımcısı ekleme, `asp-for="Course.CourseID"` gizli alan gereksinimini ortadan kaldırmaz. `<input type="hidden">` Kullanıcı **Kaydet** ' e tıkladığında, gönderilen veriler için kurs numarasının dahil olması gerekir.
 
 ## <a name="update-the-course-details-and-delete-pages"></a>Kurs ayrıntılarını güncelleştirme ve sayfaları silme
 
@@ -293,7 +294,7 @@ Yukarıdaki kod:
 
 Yukarıdaki biçimlendirme aşağıdaki değişiklikleri yapar:
 
-* **DepartmentID** etiketini **departmana**dönüştürür.
+* **DepartmentID** etiketini **departmana** dönüştürür.
 * `"ViewBag.DepartmentID"`İle değiştirir `DepartmentNameSL` (taban sınıfından).
 * "Departmanı Seç" seçeneğini ekler. Bu değişiklik, ilk departman yerine "departmanı Seç" i işler.
 * Departman seçili olmadığında bir doğrulama iletisi ekler.
@@ -319,10 +320,10 @@ Değişiklikler, oluşturma sayfası modelinde yapılanlarla benzerdir. Yukarıd
 Yukarıdaki biçimlendirme aşağıdaki değişiklikleri yapar:
 
 * Kurs KIMLIĞINI görüntüler. Genellikle bir varlığın birincil anahtarı (PK) gösterilmez. PKs 'ler genellikle kullanıcılara daha az anlamlı olur. Bu durumda, PK kurs numarasıdır.
-* **DepartmentID** etiketini **departmana**dönüştürür.
+* **DepartmentID** etiketini **departmana** dönüştürür.
 * `"ViewBag.DepartmentID"`İle değiştirir `DepartmentNameSL` (taban sınıfından).
 
-Sayfa `<input type="hidden">` , kurs numarası için gizli bir alan () içerir. `<label>`Etiket Yardımcısı ekleme, `asp-for="Course.CourseID"` gizli alan gereksinimini ortadan kaldırmaz. `<input type="hidden">` Kullanıcı **Kaydet**' e tıkladığında, gönderilen veriler için kurs numarasının dahil olması gerekir.
+Sayfa `<input type="hidden">` , kurs numarası için gizli bir alan () içerir. `<label>`Etiket Yardımcısı ekleme, `asp-for="Course.CourseID"` gizli alan gereksinimini ortadan kaldırmaz. `<input type="hidden">` Kullanıcı **Kaydet** ' e tıkladığında, gönderilen veriler için kurs numarasının dahil olması gerekir.
 
 Güncelleştirilmiş kodu test edin. Kurs oluşturun, düzenleyin ve silin.
 

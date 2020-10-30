@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 08/16/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/url-rewriting
-ms.openlocfilehash: a1d31428945adade6748185c17d42ef60a61b5dc
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: e7bd5f4d61661dd23eb0907f896d0d32b7799aac
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631712"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061307"
 ---
 # <a name="url-rewriting-middleware-in-aspnet-core"></a>ASP.NET Core içinde URL yeniden yazma ara yazılımı
 
@@ -117,7 +118,7 @@ Yeniden yazma kurallarınızın her biri için uzantı yöntemleriyle [Rewriteop
 
 ### <a name="url-redirect"></a>URL yeniden yönlendirme
 
-<xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirect*>İstekleri yeniden yönlendirmek için kullanın. İlk parametre gelen URL 'nin yolu ile eşleşen Regex içerir. İkinci parametre değiştirme dizesidir. Varsa, üçüncü parametre durum kodunu belirtir. Durum kodunu belirtmezseniz, durum kodu varsayılan olarak *302-bulunur*; bu da kaynağın geçici olarak taşındığını veya değiştirildiğini gösterir.
+<xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirect*>İstekleri yeniden yönlendirmek için kullanın. İlk parametre gelen URL 'nin yolu ile eşleşen Regex içerir. İkinci parametre değiştirme dizesidir. Varsa, üçüncü parametre durum kodunu belirtir. Durum kodunu belirtmezseniz, durum kodu varsayılan olarak *302-bulunur* ; bu da kaynağın geçici olarak taşındığını veya değiştirildiğini gösterir.
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=9)]
 
@@ -126,22 +127,22 @@ Geliştirici araçları etkinleştirilmiş bir tarayıcıda, örnek uygulamaya y
 * İkinci istek uygulamadan *200-Tamam* yanıtı alır.
 * Yanıtın gövdesi, yeniden yönlendirme URL 'sini gösterir.
 
-Bir URL *yeniden yönlendirildiğinde*sunucuya gidiş dönüş yapılır.
+Bir URL *yeniden yönlendirildiğinde* sunucuya gidiş dönüş yapılır.
 
 > [!WARNING]
-> Yeniden yönlendirme kuralları oluştururken dikkatli olun. Yeniden yönlendirme kuralları, bir yeniden yönlendirmeden sonra dahil olmak üzere, uygulamaya yapılan her istekte değerlendirilir. Yanlışlıkla *sonsuz yeniden yönlendirmeler döngüsü*oluşturmak kolaydır.
+> Yeniden yönlendirme kuralları oluştururken dikkatli olun. Yeniden yönlendirme kuralları, bir yeniden yönlendirmeden sonra dahil olmak üzere, uygulamaya yapılan her istekte değerlendirilir. Yanlışlıkla *sonsuz yeniden yönlendirmeler döngüsü* oluşturmak kolaydır.
 
 Özgün Istek: `/redirect-rule/1234/5678`
 
 ![İstekleri ve yanıtları izleyen Geliştirici Araçları tarayıcı penceresi](url-rewriting/_static/add_redirect.png)
 
-Parantez içinde yer alan ifadenin kısmına bir *yakalama grubu*denir. İfadenin nokta ( `.` ), *herhangi bir karakterle eşleşir*anlamına gelir. Yıldız işareti ( `*` ) *, önceki karakterle sıfır veya daha fazla kez eşleşme*gösterir. Bu nedenle, URL 'nin son iki yol kesimi, `1234/5678` yakalama grubu tarafından yakalanır `(.*)` . Sonrasında istek URL 'sinde sağladığınız herhangi bir değer `redirect-rule/` Bu tek yakalama grubu tarafından yakalandıktan sonra.
+Parantez içinde yer alan ifadenin kısmına bir *yakalama grubu* denir. İfadenin nokta ( `.` ), *herhangi bir karakterle eşleşir* anlamına gelir. Yıldız işareti ( `*` ) *, önceki karakterle sıfır veya daha fazla kez eşleşme* gösterir. Bu nedenle, URL 'nin son iki yol kesimi, `1234/5678` yakalama grubu tarafından yakalanır `(.*)` . Sonrasında istek URL 'sinde sağladığınız herhangi bir değer `redirect-rule/` Bu tek yakalama grubu tarafından yakalandıktan sonra.
 
 Değiştirme dizesinde, yakalanan gruplar, dolar işareti ( `$` ) ve ardından yakalamanın sıra numarası ile birlikte dizeye eklenir. İlk yakalama grubu değeri ile elde edilir `$1` , ikincisi ile `$2` ve normal Regex yakalama grupları için sırayla devam eder. Örnek uygulamadaki yeniden yönlendirme kuralı Regex bölümünde yalnızca bir tane yakalanan grup bulunur, bu nedenle değiştirme dizesinde yalnızca bir tane eklenmiş grup vardır `$1` . Kural uygulandığında, URL olur `/redirected/1234/5678` .
 
 ### <a name="url-redirect-to-a-secure-endpoint"></a>Güvenli bir uç noktaya URL yönlendirmesi
 
-<xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToHttps*>Http ISTEKLERINI https protokolünü kullanarak aynı konağa ve yola yeniden yönlendirmek için kullanın. Durum kodu sağlanmazsa, ara yazılım varsayılan olarak *302-bulunur*. Bağlantı noktası sağlanmazsa:
+<xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToHttps*>Http ISTEKLERINI https protokolünü kullanarak aynı konağa ve yola yeniden yönlendirmek için kullanın. Durum kodu sağlanmazsa, ara yazılım varsayılan olarak *302-bulunur* . Bağlantı noktası sağlanmazsa:
 
 * Ara yazılım varsayılan olarak olur `null` .
 * Şema `https` (https Protokolü) olarak değişir ve istemci, 443 numaralı bağlantı noktasında kaynağa erişir.
@@ -158,7 +159,7 @@ public void Configure(IApplicationBuilder app)
 }
 ```
 
-<xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToHttpsPermanent*>Güvenli olmayan istekleri, bağlantı noktası 443 üzerinde GÜVENLI https Protokolü ile aynı konağa ve yola yeniden yönlendirmek için kullanın. Ara yazılım durum kodunu 301 olarak ayarlar ve *kalıcı olarak taşınır*.
+<xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToHttpsPermanent*>Güvenli olmayan istekleri, bağlantı noktası 443 üzerinde GÜVENLI https Protokolü ile aynı konağa ve yola yeniden yönlendirmek için kullanın. Ara yazılım durum kodunu 301 olarak ayarlar ve *kalıcı olarak taşınır* .
 
 ```csharp
 public void Configure(IApplicationBuilder app)
@@ -199,19 +200,19 @@ Kullanarak özgün Istek `AddRedirectToHttpsPermanent` : `http://localhost:5000/
 
 | Yol                               | Eşleştirme |
 | ---------------------------------- | :---: |
-| `/redirect-rule/1234/5678`         | Yes   |
-| `/my-cool-redirect-rule/1234/5678` | Yes   |
-| `/anotherredirect-rule/1234/5678`  | Yes   |
+| `/redirect-rule/1234/5678`         | Evet   |
+| `/my-cool-redirect-rule/1234/5678` | Evet   |
+| `/anotherredirect-rule/1234/5678`  | Evet   |
 
 Yeniden yazma kuralı, `^rewrite-rule/(\d+)/(\d+)` yalnızca ile başlarsa yollarla eşleşir `rewrite-rule/` . Aşağıdaki tabloda, eşleşen farkı aklınızda.
 
 | Yol                              | Eşleştirme |
 | --------------------------------- | :---: |
-| `/rewrite-rule/1234/5678`         | Yes   |
+| `/rewrite-rule/1234/5678`         | Evet   |
 | `/my-cool-rewrite-rule/1234/5678` | Hayır    |
 | `/anotherrewrite-rule/1234/5678`  | Hayır    |
 
-`^rewrite-rule/`İfadenin bölümünü takip eden iki yakalama grubu vardır `(\d+)/(\d+)` . `\d`Belirtir *bir sayıyla (sayı) eşleşir*. Artı işareti ( `+` ) *bir veya daha fazla önceki karakterden eşleşiyor*demektir. Bu nedenle, URL bir sayı içermeli ve ardından İleri eğik çizgi ve ardından başka bir sayı içermelidir. Bu yakalama grupları, ve olarak yeniden yazan URL 'sine `$1` eklenir `$2` . Yeniden yazma kuralı değiştirme dizesi yakalanan grupları sorgu dizesine koyar. İstenen yolu, `/rewrite-rule/1234/5678` kaynağı elde etmek için yeniden yazılır `/rewritten?var1=1234&var2=5678` . Özgün istekte bir sorgu dizesi varsa, URL yeniden yazdığınızda korunur.
+`^rewrite-rule/`İfadenin bölümünü takip eden iki yakalama grubu vardır `(\d+)/(\d+)` . `\d`Belirtir *bir sayıyla (sayı) eşleşir* . Artı işareti ( `+` ) *bir veya daha fazla önceki karakterden eşleşiyor* demektir. Bu nedenle, URL bir sayı içermeli ve ardından İleri eğik çizgi ve ardından başka bir sayı içermelidir. Bu yakalama grupları, ve olarak yeniden yazan URL 'sine `$1` eklenir `$2` . Yeniden yazma kuralı değiştirme dizesi yakalanan grupları sorgu dizesine koyar. İstenen yolu, `/rewrite-rule/1234/5678` kaynağı elde etmek için yeniden yazılır `/rewritten?var1=1234&var2=5678` . Özgün istekte bir sorgu dizesi varsa, URL yeniden yazdığınızda korunur.
 
 Kaynağı almak için sunucuya gidiş dönüş yok. Kaynak varsa, bu, alınır ve istemciye *200-ok* durum kodu ile döndürülür. İstemci yeniden yönlendirmediği için tarayıcının adres çubuğundaki URL değişmez. İstemciler, sunucuda bir URL yeniden yazma işleminin gerçekleştiğini algılayamaz.
 
@@ -229,7 +230,7 @@ Kaynağı almak için sunucuya gidiş dönüş yok. Kaynak varsa, bu, alınır v
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=3-4,12)]
 
-Örnek uygulama, istekleri ' den ' e yeniden yönlendirir `/apache-mod-rules-redirect/(.\*)` `/redirected?id=$1` . Yanıt durum kodu *302-bulundu*.
+Örnek uygulama, istekleri ' den ' e yeniden yönlendirir `/apache-mod-rules-redirect/(.\*)` `/redirected?id=$1` . Yanıt durum kodu *302-bulundu* .
 
 [!code[](url-rewriting/samples/3.x/SampleApp/ApacheModRewrite.txt)]
 
@@ -336,9 +337,9 @@ Ara yazılım aşağıdaki IIS URL yeniden yazma modülü sunucu değişkenlerin
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=14)]
 
-Örnek uygulama, *. xml*ile biten yollar için istekleri yeniden yönlendiren bir yöntemi gösterir. İçin bir istek yapılırsa `/file.xml` , istek öğesine yeniden yönlendirilir `/xmlfiles/file.xml` . Durum kodu *301*olarak ayarlanır. Tarayıcı */xmlfiles/file.xml*için yeni bir istek yaptığında, statik dosya ara yazılımı dosyayı *Wwwroot/xmlfiles* klasöründen istemciye sunar. Yeniden yönlendirme için, yanıtın durum kodunu açık olarak ayarlayın. Aksi takdirde, *200-ok* durum kodu döndürülür ve yeniden yönlendirme istemcide gerçekleşmez.
+Örnek uygulama, *. xml* ile biten yollar için istekleri yeniden yönlendiren bir yöntemi gösterir. İçin bir istek yapılırsa `/file.xml` , istek öğesine yeniden yönlendirilir `/xmlfiles/file.xml` . Durum kodu *301* olarak ayarlanır. Tarayıcı */xmlfiles/file.xml* için yeni bir istek yaptığında, statik dosya ara yazılımı dosyayı *Wwwroot/xmlfiles* klasöründen istemciye sunar. Yeniden yönlendirme için, yanıtın durum kodunu açık olarak ayarlayın. Aksi takdirde, *200-ok* durum kodu döndürülür ve yeniden yönlendirme istemcide gerçekleşmez.
 
-*RewriteRules.cs*:
+*RewriteRules.cs* :
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/RewriteRules.cs?name=snippet_RedirectXmlFileRequests&highlight=14-18)]
 
@@ -346,7 +347,7 @@ Bu yaklaşım ayrıca istekleri yeniden yazabilir. Örnek uygulama, herhangi bir
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=15,22)]
 
-*RewriteRules.cs*:
+*RewriteRules.cs* :
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/RewriteRules.cs?name=snippet_RewriteTextFileRequests&highlight=7-8)]
 
@@ -356,7 +357,7 @@ Bu yaklaşım ayrıca istekleri yeniden yazabilir. Örnek uygulama, herhangi bir
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/Startup.cs?name=snippet1&highlight=16-17)]
 
-Ve için örnek uygulamadaki parametrelerin değerleri, `extension` `newPath` çeşitli koşullara uyacak şekilde denetlenir. `extension`Bir değer içermeli ve değer *. png*, *. jpg*veya *. gif*olmalıdır. `newPath`Geçerli değilse, bir oluşturulur <xref:System.ArgumentException> . *image.png*için bir istek yapılırsa, istek öğesine yeniden yönlendirilir `/png-images/image.png` . *image.jpg*için bir istek yapılırsa, istek öğesine yeniden yönlendirilir `/jpg-images/image.jpg` . Durum kodu 301 olarak ayarlanır ve *kalıcı olarak taşınır*ve `context.Result` kuralları işlemeyi durdur ve yanıtı gönder olarak ayarlanır.
+Ve için örnek uygulamadaki parametrelerin değerleri, `extension` `newPath` çeşitli koşullara uyacak şekilde denetlenir. `extension`Bir değer içermeli ve değer *. png* , *. jpg* veya *. gif* olmalıdır. `newPath`Geçerli değilse, bir oluşturulur <xref:System.ArgumentException> . *image.png* için bir istek yapılırsa, istek öğesine yeniden yönlendirilir `/png-images/image.png` . *image.jpg* için bir istek yapılırsa, istek öğesine yeniden yönlendirilir `/jpg-images/image.jpg` . Durum kodu 301 olarak ayarlanır ve *kalıcı olarak taşınır* ve `context.Result` kuralları işlemeyi durdur ve yanıtı gönder olarak ayarlanır.
 
 [!code-csharp[](url-rewriting/samples/3.x/SampleApp/RewriteRules.cs?name=snippet_RedirectImageRequests)]
 
@@ -471,7 +472,7 @@ Yeniden yazma kurallarınızın her biri için uzantı yöntemleriyle [Rewriteop
 
 ### <a name="url-redirect"></a>URL yeniden yönlendirme
 
-<xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirect*>İstekleri yeniden yönlendirmek için kullanın. İlk parametre gelen URL 'nin yolu ile eşleşen Regex içerir. İkinci parametre değiştirme dizesidir. Varsa, üçüncü parametre durum kodunu belirtir. Durum kodunu belirtmezseniz, durum kodu varsayılan olarak *302-bulunur*; bu da kaynağın geçici olarak taşındığını veya değiştirildiğini gösterir.
+<xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirect*>İstekleri yeniden yönlendirmek için kullanın. İlk parametre gelen URL 'nin yolu ile eşleşen Regex içerir. İkinci parametre değiştirme dizesidir. Varsa, üçüncü parametre durum kodunu belirtir. Durum kodunu belirtmezseniz, durum kodu varsayılan olarak *302-bulunur* ; bu da kaynağın geçici olarak taşındığını veya değiştirildiğini gösterir.
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=9)]
 
@@ -480,22 +481,22 @@ Geliştirici araçları etkinleştirilmiş bir tarayıcıda, örnek uygulamaya y
 * İkinci istek uygulamadan *200-Tamam* yanıtı alır.
 * Yanıtın gövdesi, yeniden yönlendirme URL 'sini gösterir.
 
-Bir URL *yeniden yönlendirildiğinde*sunucuya gidiş dönüş yapılır.
+Bir URL *yeniden yönlendirildiğinde* sunucuya gidiş dönüş yapılır.
 
 > [!WARNING]
-> Yeniden yönlendirme kuralları oluştururken dikkatli olun. Yeniden yönlendirme kuralları, bir yeniden yönlendirmeden sonra dahil olmak üzere, uygulamaya yapılan her istekte değerlendirilir. Yanlışlıkla *sonsuz yeniden yönlendirmeler döngüsü*oluşturmak kolaydır.
+> Yeniden yönlendirme kuralları oluştururken dikkatli olun. Yeniden yönlendirme kuralları, bir yeniden yönlendirmeden sonra dahil olmak üzere, uygulamaya yapılan her istekte değerlendirilir. Yanlışlıkla *sonsuz yeniden yönlendirmeler döngüsü* oluşturmak kolaydır.
 
 Özgün Istek: `/redirect-rule/1234/5678`
 
 ![İstekleri ve yanıtları izleyen Geliştirici Araçları tarayıcı penceresi](url-rewriting/_static/add_redirect.png)
 
-Parantez içinde yer alan ifadenin kısmına bir *yakalama grubu*denir. İfadenin nokta ( `.` ), *herhangi bir karakterle eşleşir*anlamına gelir. Yıldız işareti ( `*` ) *, önceki karakterle sıfır veya daha fazla kez eşleşme*gösterir. Bu nedenle, URL 'nin son iki yol kesimi, `1234/5678` yakalama grubu tarafından yakalanır `(.*)` . Sonrasında istek URL 'sinde sağladığınız herhangi bir değer `redirect-rule/` Bu tek yakalama grubu tarafından yakalandıktan sonra.
+Parantez içinde yer alan ifadenin kısmına bir *yakalama grubu* denir. İfadenin nokta ( `.` ), *herhangi bir karakterle eşleşir* anlamına gelir. Yıldız işareti ( `*` ) *, önceki karakterle sıfır veya daha fazla kez eşleşme* gösterir. Bu nedenle, URL 'nin son iki yol kesimi, `1234/5678` yakalama grubu tarafından yakalanır `(.*)` . Sonrasında istek URL 'sinde sağladığınız herhangi bir değer `redirect-rule/` Bu tek yakalama grubu tarafından yakalandıktan sonra.
 
 Değiştirme dizesinde, yakalanan gruplar, dolar işareti ( `$` ) ve ardından yakalamanın sıra numarası ile birlikte dizeye eklenir. İlk yakalama grubu değeri ile elde edilir `$1` , ikincisi ile `$2` ve normal Regex yakalama grupları için sırayla devam eder. Örnek uygulamadaki yeniden yönlendirme kuralı Regex bölümünde yalnızca bir tane yakalanan grup bulunur, bu nedenle değiştirme dizesinde yalnızca bir tane eklenmiş grup vardır `$1` . Kural uygulandığında, URL olur `/redirected/1234/5678` .
 
 ### <a name="url-redirect-to-a-secure-endpoint"></a>Güvenli bir uç noktaya URL yönlendirmesi
 
-<xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToHttps*>Http ISTEKLERINI https protokolünü kullanarak aynı konağa ve yola yeniden yönlendirmek için kullanın. Durum kodu sağlanmazsa, ara yazılım varsayılan olarak *302-bulunur*. Bağlantı noktası sağlanmazsa:
+<xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToHttps*>Http ISTEKLERINI https protokolünü kullanarak aynı konağa ve yola yeniden yönlendirmek için kullanın. Durum kodu sağlanmazsa, ara yazılım varsayılan olarak *302-bulunur* . Bağlantı noktası sağlanmazsa:
 
 * Ara yazılım varsayılan olarak olur `null` .
 * Şema `https` (https Protokolü) olarak değişir ve istemci, 443 numaralı bağlantı noktasında kaynağa erişir.
@@ -512,7 +513,7 @@ public void Configure(IApplicationBuilder app)
 }
 ```
 
-<xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToHttpsPermanent*>Güvenli olmayan istekleri, bağlantı noktası 443 üzerinde GÜVENLI https Protokolü ile aynı konağa ve yola yeniden yönlendirmek için kullanın. Ara yazılım durum kodunu 301 olarak ayarlar ve *kalıcı olarak taşınır*.
+<xref:Microsoft.AspNetCore.Rewrite.RewriteOptionsExtensions.AddRedirectToHttpsPermanent*>Güvenli olmayan istekleri, bağlantı noktası 443 üzerinde GÜVENLI https Protokolü ile aynı konağa ve yola yeniden yönlendirmek için kullanın. Ara yazılım durum kodunu 301 olarak ayarlar ve *kalıcı olarak taşınır* .
 
 ```csharp
 public void Configure(IApplicationBuilder app)
@@ -553,19 +554,19 @@ Kullanarak özgün Istek `AddRedirectToHttpsPermanent` : `http://localhost:5000/
 
 | Yol                               | Eşleştirme |
 | ---------------------------------- | :---: |
-| `/redirect-rule/1234/5678`         | Yes   |
-| `/my-cool-redirect-rule/1234/5678` | Yes   |
-| `/anotherredirect-rule/1234/5678`  | Yes   |
+| `/redirect-rule/1234/5678`         | Evet   |
+| `/my-cool-redirect-rule/1234/5678` | Evet   |
+| `/anotherredirect-rule/1234/5678`  | Evet   |
 
 Yeniden yazma kuralı, `^rewrite-rule/(\d+)/(\d+)` yalnızca ile başlarsa yollarla eşleşir `rewrite-rule/` . Aşağıdaki tabloda, eşleşen farkı aklınızda.
 
 | Yol                              | Eşleştirme |
 | --------------------------------- | :---: |
-| `/rewrite-rule/1234/5678`         | Yes   |
+| `/rewrite-rule/1234/5678`         | Evet   |
 | `/my-cool-rewrite-rule/1234/5678` | Hayır    |
 | `/anotherrewrite-rule/1234/5678`  | Hayır    |
 
-`^rewrite-rule/`İfadenin bölümünü takip eden iki yakalama grubu vardır `(\d+)/(\d+)` . `\d`Belirtir *bir sayıyla (sayı) eşleşir*. Artı işareti ( `+` ) *bir veya daha fazla önceki karakterden eşleşiyor*demektir. Bu nedenle, URL bir sayı içermeli ve ardından İleri eğik çizgi ve ardından başka bir sayı içermelidir. Bu yakalama grupları, ve olarak yeniden yazan URL 'sine `$1` eklenir `$2` . Yeniden yazma kuralı değiştirme dizesi yakalanan grupları sorgu dizesine koyar. İstenen yolu, `/rewrite-rule/1234/5678` kaynağı elde etmek için yeniden yazılır `/rewritten?var1=1234&var2=5678` . Özgün istekte bir sorgu dizesi varsa, URL yeniden yazdığınızda korunur.
+`^rewrite-rule/`İfadenin bölümünü takip eden iki yakalama grubu vardır `(\d+)/(\d+)` . `\d`Belirtir *bir sayıyla (sayı) eşleşir* . Artı işareti ( `+` ) *bir veya daha fazla önceki karakterden eşleşiyor* demektir. Bu nedenle, URL bir sayı içermeli ve ardından İleri eğik çizgi ve ardından başka bir sayı içermelidir. Bu yakalama grupları, ve olarak yeniden yazan URL 'sine `$1` eklenir `$2` . Yeniden yazma kuralı değiştirme dizesi yakalanan grupları sorgu dizesine koyar. İstenen yolu, `/rewrite-rule/1234/5678` kaynağı elde etmek için yeniden yazılır `/rewritten?var1=1234&var2=5678` . Özgün istekte bir sorgu dizesi varsa, URL yeniden yazdığınızda korunur.
 
 Kaynağı almak için sunucuya gidiş dönüş yok. Kaynak varsa, bu, alınır ve istemciye *200-ok* durum kodu ile döndürülür. İstemci yeniden yönlendirmediği için tarayıcının adres çubuğundaki URL değişmez. İstemciler, sunucuda bir URL yeniden yazma işleminin gerçekleştiğini algılayamaz.
 
@@ -583,7 +584,7 @@ Kaynağı almak için sunucuya gidiş dönüş yok. Kaynak varsa, bu, alınır v
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=3-4,12)]
 
-Örnek uygulama, istekleri ' den ' e yeniden yönlendirir `/apache-mod-rules-redirect/(.\*)` `/redirected?id=$1` . Yanıt durum kodu *302-bulundu*.
+Örnek uygulama, istekleri ' den ' e yeniden yönlendirir `/apache-mod-rules-redirect/(.\*)` `/redirected?id=$1` . Yanıt durum kodu *302-bulundu* .
 
 [!code[](url-rewriting/samples/2.x/SampleApp/ApacheModRewrite.txt)]
 
@@ -690,9 +691,9 @@ Ara yazılım aşağıdaki IIS URL yeniden yazma modülü sunucu değişkenlerin
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=14)]
 
-Örnek uygulama, *. xml*ile biten yollar için istekleri yeniden yönlendiren bir yöntemi gösterir. İçin bir istek yapılırsa `/file.xml` , istek öğesine yeniden yönlendirilir `/xmlfiles/file.xml` . Durum kodu *301*olarak ayarlanır. Tarayıcı */xmlfiles/file.xml*için yeni bir istek yaptığında, statik dosya ara yazılımı dosyayı *Wwwroot/xmlfiles* klasöründen istemciye sunar. Yeniden yönlendirme için, yanıtın durum kodunu açık olarak ayarlayın. Aksi takdirde, *200-ok* durum kodu döndürülür ve yeniden yönlendirme istemcide gerçekleşmez.
+Örnek uygulama, *. xml* ile biten yollar için istekleri yeniden yönlendiren bir yöntemi gösterir. İçin bir istek yapılırsa `/file.xml` , istek öğesine yeniden yönlendirilir `/xmlfiles/file.xml` . Durum kodu *301* olarak ayarlanır. Tarayıcı */xmlfiles/file.xml* için yeni bir istek yaptığında, statik dosya ara yazılımı dosyayı *Wwwroot/xmlfiles* klasöründen istemciye sunar. Yeniden yönlendirme için, yanıtın durum kodunu açık olarak ayarlayın. Aksi takdirde, *200-ok* durum kodu döndürülür ve yeniden yönlendirme istemcide gerçekleşmez.
 
-*RewriteRules.cs*:
+*RewriteRules.cs* :
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/RewriteRules.cs?name=snippet_RedirectXmlFileRequests&highlight=14-18)]
 
@@ -700,7 +701,7 @@ Bu yaklaşım ayrıca istekleri yeniden yazabilir. Örnek uygulama, herhangi bir
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=15,22)]
 
-*RewriteRules.cs*:
+*RewriteRules.cs* :
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/RewriteRules.cs?name=snippet_RewriteTextFileRequests&highlight=7-8)]
 
@@ -710,7 +711,7 @@ Bu yaklaşım ayrıca istekleri yeniden yazabilir. Örnek uygulama, herhangi bir
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/Startup.cs?name=snippet1&highlight=16-17)]
 
-Ve için örnek uygulamadaki parametrelerin değerleri, `extension` `newPath` çeşitli koşullara uyacak şekilde denetlenir. `extension`Bir değer içermeli ve değer *. png*, *. jpg*veya *. gif*olmalıdır. `newPath`Geçerli değilse, bir oluşturulur <xref:System.ArgumentException> . *image.png*için bir istek yapılırsa, istek öğesine yeniden yönlendirilir `/png-images/image.png` . *image.jpg*için bir istek yapılırsa, istek öğesine yeniden yönlendirilir `/jpg-images/image.jpg` . Durum kodu 301 olarak ayarlanır ve *kalıcı olarak taşınır*ve `context.Result` kuralları işlemeyi durdur ve yanıtı gönder olarak ayarlanır.
+Ve için örnek uygulamadaki parametrelerin değerleri, `extension` `newPath` çeşitli koşullara uyacak şekilde denetlenir. `extension`Bir değer içermeli ve değer *. png* , *. jpg* veya *. gif* olmalıdır. `newPath`Geçerli değilse, bir oluşturulur <xref:System.ArgumentException> . *image.png* için bir istek yapılırsa, istek öğesine yeniden yönlendirilir `/png-images/image.png` . *image.jpg* için bir istek yapılırsa, istek öğesine yeniden yönlendirilir `/jpg-images/image.jpg` . Durum kodu 301 olarak ayarlanır ve *kalıcı olarak taşınır* ve `context.Result` kuralları işlemeyi durdur ve yanıtı gönder olarak ayarlanır.
 
 [!code-csharp[](url-rewriting/samples/2.x/SampleApp/RewriteRules.cs?name=snippet_RedirectImageRequests)]
 

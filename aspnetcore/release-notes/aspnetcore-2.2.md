@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-2.2
-ms.openlocfilehash: 085a26d508af5bdce506ab923a3256046b3894ab
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 67581904c686b0f8b6736b751c8e3f1545f6a286
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722494"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059708"
 ---
 # <a name="whats-new-in-aspnet-core-22"></a>ASP.NET Core 2,2 ' deki yenilikler
 
@@ -73,7 +74,7 @@ HTTP/2, HTTP protokolünün önemli bir düzeltmesidir. HTTP/2 ' nin önemli öz
 
 Http/2, HTTP 'nin semantiğini (örneğin, HTTP üst bilgileri ve yöntemleri) korur, ancak istemci ve sunucu arasında verilerin nasıl çerçeveli ve gönderilir olduğunu HTTP/1. x ' den önemli bir değişiklik olur.
 
-Çerçeveleme içindeki bu değişikliğin bir sonucu olarak, sunucuların ve istemcilerin kullanılan protokol sürümünü anlaşması gerekir. Uygulama katmanı protokol anlaşması (ALPN), sunucunun ve istemcisinin TLS el sıkışmasının bir parçası olarak kullanılan protokol sürümünü anlaşmasına izin veren bir TLS uzantısıdır. Sunucu ve protokoldeki istemci arasında bir önceki bilgi sahibi olmak mümkün olsa da, tüm büyük tarayıcılarda bir HTTP/2 bağlantısı kurmak için tek yol olarak tüm büyük tarayıcılar desteklenir.
+Çerçeveleme içindeki bu değişikliğin bir sonucu olarak, sunucuların ve istemcilerin kullanılan protokol sürümünü anlaşması gerekir. Application-Layer protokol anlaşması (ALPN), sunucunun ve istemcisinin TLS el sıkışmasının bir parçası olarak kullanılan protokol sürümünü anlaşmasına izin veren bir TLS uzantısıdır. Sunucu ve protokoldeki istemci arasında bir önceki bilgi sahibi olmak mümkün olsa da, tüm büyük tarayıcılarda bir HTTP/2 bağlantısı kurmak için tek yol olarak tüm büyük tarayıcılar desteklenir.
 
 Daha fazla bilgi için bkz. [http/2 desteği](xref:fundamentals/servers/index?view=aspnetcore-2.2#http2-support).
 
@@ -86,7 +87,7 @@ ASP.NET Core önceki sürümlerinde, Kestrel seçenekleri çağırarak yapıland
 
 ## <a name="iis-in-process-hosting"></a>IIS işlem içi barındırma
 
-ASP.NET Core önceki sürümlerinde IIS, ters proxy işlevi görür. 2,2 ' de ASP.NET Core modülü CoreCLR 'yi önyükleyebilir ve bir uygulamayı IIS çalışan işleminin içinde barındırabilir (*w3wp.exe*). İşlem içi barındırma, IIS ile çalışırken performans ve tanılama kazançları sağlar.
+ASP.NET Core önceki sürümlerinde IIS, ters proxy işlevi görür. 2,2 ' de ASP.NET Core modülü CoreCLR 'yi önyükleyebilir ve bir uygulamayı IIS çalışan işleminin içinde barındırabilir ( *w3wp.exe* ). İşlem içi barındırma, IIS ile çalışırken performans ve tanılama kazançları sağlar.
 
 Daha fazla bilgi için bkz. [IIS için işlem içi barındırma](xref:host-and-deploy/aspnet-core-module?view=aspnetcore-2.2#in-process-hosting-model).
 

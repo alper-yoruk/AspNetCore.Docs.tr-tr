@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 10/13/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/builtin-th/anchor-tag-helper
-ms.openlocfilehash: fcb58e2e0bfc6598edeb8c7f79986c3faf84e316
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d39db59b0fc273fe4193a4864f302ecd3f4ad348
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633935"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060917"
 ---
 # <a name="anchor-tag-helper-in-aspnet-core"></a>ASP.NET Core 'de bağlayıcı etiketi Yardımcısı
 
@@ -52,7 +53,7 @@ Oluşturulan HTML:
 <a href="/Speaker">All Speakers</a>
 ```
 
-`asp-controller`Özniteliği belirtilmişse ve `asp-action` yoksa, varsayılan `asp-action` değer şu anda yürütülmekte olan görünümle ilişkili denetleyici eylemi olur. `asp-action`Önceki biçimlendirmeden atlanırsa ve bağlayıcı etiketi Yardımcısı *HomeController*'ın *Dizin* görünümünde (*/Home*) kullanılırsa, oluşturulan HTML:
+`asp-controller`Özniteliği belirtilmişse ve `asp-action` yoksa, varsayılan `asp-action` değer şu anda yürütülmekte olan görünümle ilişkili denetleyici eylemi olur. `asp-action`Önceki biçimlendirmeden atlanırsa ve bağlayıcı etiketi Yardımcısı *HomeController* 'ın *Dizin* görünümünde ( */Home* ) kullanılırsa, oluşturulan HTML:
 
 ```html
 <a href="/Home">All Speakers</a>
@@ -82,7 +83,7 @@ Aşağıdaki denetleyici eylemini göz önünde bulundurun:
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Controllers/BuiltInTagController.cs?name=snippet_AnchorTagHelperAction)]
 
-*Startup.Configure*içinde tanımlanmış bir varsayılan yol şablonuyla:
+*Startup.Configure* içinde tanımlanmış bir varsayılan yol şablonuyla:
 
 [!code-csharp[](samples/TagHelpersBuiltIn/Startup.cs?name=snippet_UseMvc&highlight=8-10)]
 
@@ -138,7 +139,7 @@ Aşağıdaki biçimlendirmede `asp-route` öznitelik, adlandırılmış yola ba�
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspRoute)]
 
-Tutturucu etiketi Yardımcısı, */Hoparlörker/değerlendirmeleri*URL 'sini kullanarak bu denetleyiciye doğrudan bir yol oluşturur. Oluşturulan HTML:
+Tutturucu etiketi Yardımcısı, */Hoparlörker/değerlendirmeleri* URL 'sini kullanarak bu denetleyiciye doğrudan bir yol oluşturur. Oluşturulan HTML:
 
 ```html
 <a href="/Speaker/Evaluations">Speaker Evaluations</a>
@@ -229,7 +230,7 @@ Aşağıdaki dizin hiyerarşisini göz önünde bulundurun:
       * **Denetleyiciler**
         * *HomeController.cs*
       * **Görünümler**
-        * **Giriş**
+        * **Giriş Ekranı**
           * *AboutBlog. cshtml*
           * *Index.cshtml*
         * *\_ViewStart. cshtml*
@@ -246,13 +247,13 @@ Oluşturulan HTML:
 ```
 
 > [!TIP]
-> MVC uygulamasındaki bölgeleri desteklemek için, yol şablonu varsa alana bir başvuru içermelidir. Bu şablon `routes.MapRoute` *Startup.Configure*içindeki yöntem çağrısının ikinci parametresiyle temsil edilir:
+> MVC uygulamasındaki bölgeleri desteklemek için, yol şablonu varsa alana bir başvuru içermelidir. Bu şablon `routes.MapRoute` *Startup.Configure* içindeki yöntem çağrısının ikinci parametresiyle temsil edilir:
 >
 > [!code-csharp[](samples/TagHelpersBuiltIn/Startup.cs?name=snippet_UseMvc&highlight=5)]
 
 ### <a name="asp-protocol"></a>ASP-protokol
 
-[ASP-Protocol](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Protocol*) ÖZNITELIĞI, URL 'niz için bir protokol (gibi) belirtmek içindir `https` . Örnek:
+[ASP-Protocol](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Protocol*) ÖZNITELIĞI, URL 'niz için bir protokol (gibi) belirtmek içindir `https` . Örneğin:
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspProtocol)]
 
@@ -266,7 +267,7 @@ Oluşturulan HTML:
 
 ### <a name="asp-host"></a>ASP-ana bilgisayar
 
-[ASP-Host](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Host*) ÖZNITELIĞI, URL 'niz için bir ana bilgisayar adı belirtmektir. Örnek:
+[ASP-Host](xref:Microsoft.AspNetCore.Mvc.TagHelpers.AnchorTagHelper.Host*) ÖZNITELIĞI, URL 'niz için bir ana bilgisayar adı belirtmektir. Örneğin:
 
 [!code-cshtml[](samples/TagHelpersBuiltIn/Views/Home/Index.cshtml?name=snippet_AspHost)]
 

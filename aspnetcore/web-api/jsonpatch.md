@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/02/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/jsonpatch
-ms.openlocfilehash: e57c5185323305ccbef7960653c9174931e45d75
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: da507974b88c21de22e2c7a56950943207565138
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635404"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060553"
 ---
 # <a name="jsonpatch-in-aspnet-core-web-api"></a>ASP.NET Core Web API 'sinde JsonPatch
 
@@ -37,7 +38,7 @@ Bu makalede, ASP.NET Core Web API 'sinde JSON Patch isteklerinin nasıl işlenec
 Uygulamanızda JSON yama desteğini etkinleştirmek için aşağıdaki adımları izleyin:
 
 1. [`Microsoft.AspNetCore.Mvc.NewtonsoftJson`](https://www.nuget.org/packages/Microsoft.AspNetCore.Mvc.NewtonsoftJson/)NuGet paketini yükler.
-1. `Startup.ConfigureServices`Çağırmak için projenin metodunu güncelleştirin <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> . Örnek:
+1. `Startup.ConfigureServices`Çağırmak için projenin metodunu güncelleştirin <xref:Microsoft.Extensions.DependencyInjection.NewtonsoftJsonMvcBuilderExtensions.AddNewtonsoftJson*> . Örneğin:
 
     ```csharp
     services
@@ -67,7 +68,7 @@ PUT ve [Patch](https://tools.ietf.org/html/rfc5789) yöntemleri, var olan bir ka
 
 ## <a name="json-patch"></a>JSON yaması
 
-[JSON yaması](https://tools.ietf.org/html/rfc6902) , bir kaynağa uygulanacak güncelleştirmelerin belirtilmesine yönelik bir biçimdir. JSON yama belgesinde bir dizi *işlem*vardır. Her işlem belirli bir değişiklik türünü tanımlar. Bu tür değişikliklere örnek olarak bir dizi öğesi ekleme veya bir özellik değeri değiştirme sayılabilir.
+[JSON yaması](https://tools.ietf.org/html/rfc6902) , bir kaynağa uygulanacak güncelleştirmelerin belirtilmesine yönelik bir biçimdir. JSON yama belgesinde bir dizi *işlem* vardır. Her işlem belirli bir değişiklik türünü tanımlar. Bu tür değişikliklere örnek olarak bir dizi öğesi ekleme veya bir özellik değeri değiştirme sayılabilir.
 
 Örneğin, aşağıdaki JSON belgeleri bir kaynağı, kaynak için bir JSON yama belgesini ve düzeltme eki işlemlerini uygulamanın sonucunu temsil eder.
 
@@ -79,7 +80,7 @@ PUT ve [Patch](https://tools.ietf.org/html/rfc5789) yöntemleri, var olan bir ka
 
 [!code-json[](jsonpatch/samples/2.2/JSON/add.json)]
 
-Önceki JSON 'da:
+Yukarıdaki JSON kodunda:
 
 * `op`Özelliği, işlem türünü gösterir.
 * `path`Özelliği güncelleştirilecek öğeyi gösterir.
@@ -279,7 +280,7 @@ PUT ve [Patch](https://tools.ietf.org/html/rfc5789) yöntemleri, var olan bir ka
 
 ## <a name="json-patch"></a>JSON yaması
 
-[JSON yaması](https://tools.ietf.org/html/rfc6902) , bir kaynağa uygulanacak güncelleştirmelerin belirtilmesine yönelik bir biçimdir. JSON yama belgesinde bir dizi *işlem*vardır. Her işlem, bir dizi öğesi ekleme veya bir özellik değerini değiştirme gibi belirli bir değişiklik türünü tanımlar.
+[JSON yaması](https://tools.ietf.org/html/rfc6902) , bir kaynağa uygulanacak güncelleştirmelerin belirtilmesine yönelik bir biçimdir. JSON yama belgesinde bir dizi *işlem* vardır. Her işlem, bir dizi öğesi ekleme veya bir özellik değerini değiştirme gibi belirli bir değişiklik türünü tanımlar.
 
 Örneğin, aşağıdaki JSON belgeleri bir kaynağı, kaynak için bir JSON yama belgesini ve düzeltme eki işlemlerini uygulamanın sonucunu temsil eder.
 
@@ -291,7 +292,7 @@ PUT ve [Patch](https://tools.ietf.org/html/rfc5789) yöntemleri, var olan bir ka
 
 [!code-json[](jsonpatch/samples/2.2/JSON/add.json)]
 
-Önceki JSON 'da:
+Yukarıdaki JSON kodunda:
 
 * `op`Özelliği, işlem türünü gösterir.
 * `path`Özelliği güncelleştirilecek öğeyi gösterir.

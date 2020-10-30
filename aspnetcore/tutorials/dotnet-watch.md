@@ -5,6 +5,7 @@ description: Bu öğreticide, .NET Core CLI dosya İzleyicisi (DotNet Watch) ara
 ms.author: riande
 ms.date: 05/31/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/dotnet-watch
-ms.openlocfilehash: 3569e9440b8e431ec0e5357e548af2e3783481ac
-ms.sourcegitcommit: 422e02bad384775bfe19a90910737340ad106c5b
+ms.openlocfilehash: 27420fe00ba6375e15b67fb359be06df055eff1f
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90083459"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060046"
 ---
 # <a name="develop-aspnet-core-apps-using-a-file-watcher"></a>Dosya İzleyicisi kullanarak ASP.NET Core uygulamalar geliştirme
 
@@ -80,7 +81,7 @@ Bir web tarayıcısında `http://localhost:<port number>/api/math/sum?a=4&b=5` s
 
 ## <a name="run-net-core-cli-commands-using-dotnet-watch"></a>Kullanarak .NET Core CLI komutları çalıştırma `dotnet watch`
 
-Tüm [.NET Core CLI komutları](/dotnet/core/tools#cli-commands) ile çalıştırılabilir `dotnet watch` . Örnek:
+Tüm [.NET Core CLI komutları](/dotnet/core/tools#cli-commands) ile çalıştırılabilir `dotnet watch` . Örneğin:
 
 | Komut | İzle komutu |
 | ---- | ----- |
@@ -130,7 +131,7 @@ Verify `http://localhost:<port number>/api/math/product?a=4&b=5` doğru sonucu d
 1. `Product`Toplamı döndürmek için *MathController.cs* yöntemini geri değiştirin. Dosyayı kaydedin.
 1. Bir komut kabuğunda *Webapptests* klasörüne gidin.
 1. [DotNet restore](/dotnet/core/tools/dotnet-restore)çalıştırın.
-1. `dotnet watch test` öğesini çalıştırın. Çıktısı bir testin başarısız olduğunu ve izleyicinin dosya değişikliklerini beklediğini gösterir:
+1. Şu komutu çalıştırın: `dotnet watch test`. Çıktısı bir testin başarısız olduğunu ve izleyicinin dosya değişikliklerini beklediğini gösterir:
 
      ```console
      Total tests: 2. Passed: 1. Failed: 1. Skipped: 0.
@@ -216,7 +217,7 @@ Bazı yapılandırma seçenekleri, `dotnet watch` ortam değişkenleri aracılı
 | ------------- | ------------- |
 | `DOTNET_USE_POLLING_FILE_WATCHER`                | "1" veya "true" olarak ayarlandıysa `dotnet watch` CoreFx yerine bir yoklama Dosya İzleyicisi kullanır `FileSystemWatcher` . Ağ paylaşımlarında veya Docker takılmış birimlerde dosya izlerken kullanılır.                       |
 | `DOTNET_WATCH_SUPPRESS_MSBUILD_INCREMENTALISM`   | Varsayılan olarak, `dotnet watch` her dosya değişikliğine geri yükleme çalıştırma veya izlenen dosyalar kümesini yeniden değerlendirme gibi belirli işlemleri önleyerek derlemeyi iyileştirir. "1" veya "true" olarak ayarlanırsa, bu iyileştirmeler devre dışı bırakılır. |
-| `DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER`   | `dotnet watch run``launchBrowser` *launchSettings.jsüzerinde*yapılandırılmış Web uygulamaları için tarayıcıları başlatmaya çalışır. "1" veya "true" olarak ayarlanırsa, bu davranış bastırılır. |
+| `DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER`   | `dotnet watch run``launchBrowser` *launchSettings.jsüzerinde* yapılandırılmış Web uygulamaları için tarayıcıları başlatmaya çalışır. "1" veya "true" olarak ayarlanırsa, bu davranış bastırılır. |
 | `DOTNET_WATCH_SUPPRESS_BROWSER_REFRESH`   | `dotnet watch run` dosya değişikliklerini algıladığında tarayıcıları yenilemeyi dener. "1" veya "true" olarak ayarlanırsa, bu davranış bastırılır. Ayarlanırsa, bu davranış da bastırılır `DOTNET_WATCH_SUPPRESS_LAUNCH_BROWSER` . |
 
 ## <a name="dotnet-watch-in-github"></a>`dotnet-watch` GitHub 'da

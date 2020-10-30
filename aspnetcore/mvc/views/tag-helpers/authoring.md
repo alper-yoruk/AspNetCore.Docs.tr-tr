@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/views/tag-helpers/authoring
-ms.openlocfilehash: c1891b8093c5a4c1599cd3c4ed4e5e60e2fd13e8
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 306416db3d9ae0219f859c3cf459eb08a5b778cf
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629008"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060930"
 ---
 # <a name="author-tag-helpers-in-aspnet-core"></a>ASP.NET Core etiket yardımcıları yazma
 
@@ -36,13 +37,13 @@ Bu öğreticide programlama etiketi yardımcıları hakkında bir giriş sunulma
 
 Etiket Yardımcısı, arabirimini uygulayan herhangi bir sınıftır `ITagHelper` . Bununla birlikte, bir etiket Yardımcısı yazdığınızda, genellikle ' dan türetirsiniz `TagHelper` , yönteme erişmenizi sağlar `Process` .
 
-1. **Authoringtaghelmakası**adlı yeni bir ASP.NET Core projesi oluşturun. Bu proje için kimlik doğrulamaya gerek yok.
+1. **Authoringtaghelmakası** adlı yeni bir ASP.NET Core projesi oluşturun. Bu proje için kimlik doğrulamaya gerek yok.
 
-1. *Taghelmakası*adlı etiket yardımcılarını tutacak bir klasör oluşturun. *Taghelmakacıları* klasörü gerekli *değildir* , ancak makul bir kuraldır. Şimdi bazı basit etiket yardımcıları yazmaya başlaalım.
+1. *Taghelmakası* adlı etiket yardımcılarını tutacak bir klasör oluşturun. *Taghelmakacıları* klasörü gerekli *değildir* , ancak makul bir kuraldır. Şimdi bazı basit etiket yardımcıları yazmaya başlaalım.
 
 ## <a name="a-minimal-tag-helper"></a>En az bir etiket Yardımcısı
 
-Bu bölümde, bir e-posta etiketini güncelleştiren bir etiket Yardımcısı yazarsınız. Örnek:
+Bu bölümde, bir e-posta etiketini güncelleştiren bir etiket Yardımcısı yazarsınız. Örneğin:
 
 ```html
 <email>Support</email>
@@ -60,7 +61,7 @@ Diğer bir deyişle, bu e-posta bağlantısını yapan bir bağlantı etikettir.
 
    [!code-csharp[](authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/TagHelpers/z1EmailTagHelperCopy.cs)]
 
-   * Etiket Yardımcıları, kök sınıf adı öğelerini hedefleyen bir adlandırma kuralı kullanır (sınıf adının sonunda *Taghelof* kısmı). Bu örnekte, **Emailtaghelper** 'nin kök adı *e-posta*olduğundan `<email>` etiketi hedeflenecek. Bu adlandırma kuralı, daha sonra bu şekilde nasıl geçersiz kılabileceğiniz hakkında etiket yardımcıları için çalışmalıdır.
+   * Etiket Yardımcıları, kök sınıf adı öğelerini hedefleyen bir adlandırma kuralı kullanır (sınıf adının sonunda *Taghelof* kısmı). Bu örnekte, **Emailtaghelper** 'nin kök adı *e-posta* olduğundan `<email>` etiketi hedeflenecek. Bu adlandırma kuralı, daha sonra bu şekilde nasıl geçersiz kılabileceğiniz hakkında etiket yardımcıları için çalışmalıdır.
 
    * `EmailTagHelper`Sınıfı öğesinden türetilir `TagHelper` . `TagHelper`Sınıfı, etiket yardımcıları yazmak için yöntemler ve özellikler sağlar.
 
@@ -70,7 +71,7 @@ Diğer bir deyişle, bu e-posta bağlantısını yapan bir bağlantı etikettir.
 
    * `Process`(Ve) çıkış parametresi, `ProcessAsync` bir HTML etiketi ve içeriği oluşturmak için kullanılan orijinal kaynağın durum BILGISI olan HTML öğesi temsilcisini içerir.
 
-   * Sınıfımızın adı, gerekli *olmayan* bir **ıghelper**sonekine sahiptir ancak en iyi yöntem kuralı olarak kabul edilir. Sınıfı şu şekilde bildirebilirsiniz:
+   * Sınıfımızın adı, gerekli *olmayan* bir **ıghelper** sonekine sahiptir ancak en iyi yöntem kuralı olarak kabul edilir. Sınıfı şu şekilde bildirebilirsiniz:
 
    ```csharp
    public class Email : TagHelper
@@ -93,7 +94,7 @@ the following snippet uses TagHelpers3 and should use TagHelpers (not the 3)
     [!code-cshtml[](../../../mvc/views/tag-helpers/authoring/sample/AuthoringTagHelpers/src/AuthoringTagHelpers/Views/_ViewImports.cshtml?highlight=3&range=1-3)]
 -->
 
-Bir FQN kullanarak bir görünüme etiket Yardımcısı eklemek için, önce FQN ( `AuthoringTagHelpers.TagHelpers.EmailTagHelper` ) ve ardından **derleme adı** (*authoringtaghelmakaı* `namespace` ) eklersiniz. Çoğu geliştirici joker karakter söz dizimini kullanmayı tercih eder. [Etiket yardımcılarına giriş](intro.md) , etiket Yardımcısı ekleme, kaldırma, hiyerarşi ve joker karakter sözdizimi hakkında ayrıntılı bilgi sağlar.
+Bir FQN kullanarak bir görünüme etiket Yardımcısı eklemek için, önce FQN ( `AuthoringTagHelpers.TagHelpers.EmailTagHelper` ) ve ardından **derleme adı** ( *authoringtaghelmakaı* `namespace` ) eklersiniz. Çoğu geliştirici joker karakter söz dizimini kullanmayı tercih eder. [Etiket yardımcılarına giriş](intro.md) , etiket Yardımcısı ekleme, kaldırma, hiyerarşi ve joker karakter sözdizimi hakkında ayrıntılı bilgi sağlar.
 
 1. *Görünümler/Home/Contact. cshtml* dosyasındaki biçimlendirmeyi şu değişikliklerle güncelleştirin:
 
@@ -172,7 +173,7 @@ Bu bölümde, zaman uyumsuz bir e-posta Yardımcısı yazılacak.
 
    `[HtmlTargetElement]`Yukarıdaki özniteliği yalnızca "Bold" öznitelik adını sağlayan HTML işaretlemesini hedefler. `<bold>`Öğe etiket Yardımcısı tarafından değiştirilmedi.
 
-1. `[HtmlTargetElement]`Öznitelik satırını açıklama satırı olarak `<bold>` , diğer bir deyişle, formun HTML biçimlemesini hedeflemek için varsayılan olarak kullanılır `<bold>` . Varsayılan adlandırma kuralının etiket adı **kalın**taghelper etiketli olacak şekilde eşleştiğini unutmayın `<bold>` .
+1. `[HtmlTargetElement]`Öznitelik satırını açıklama satırı olarak `<bold>` , diğer bir deyişle, formun HTML biçimlemesini hedeflemek için varsayılan olarak kullanılır `<bold>` . Varsayılan adlandırma kuralının etiket adı **kalın** taghelper etiketli olacak şekilde eşleştiğini unutmayın `<bold>` .
 
 1. Uygulamayı çalıştırın ve `<bold>` etiketin etiket Yardımcısı tarafından işlendiğini doğrulayın.
 

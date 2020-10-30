@@ -7,6 +7,7 @@ ms.custom: mvc
 ms.date: 03/19/2020
 monikerRange: '>= aspnetcore-3.0'
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/microsoft-logins
-ms.openlocfilehash: 36341a0e439be57d7da4f787aa6103b92c624e96
-ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
+ms.openlocfilehash: 3161e4f0f735294d69dd51634b424d1ed573e615
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90847591"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060306"
 ---
 # <a name="microsoft-account-external-login-setup-with-aspnet-core"></a>ASP.NET Core ile Microsoft hesabı dış oturum açma kurulumu
 
@@ -36,25 +37,25 @@ Bu örnek, [önceki sayfada](xref:security/authentication/social/index)oluşturu
 * Projeye [Microsoft. AspNetCore. Authentication. MicrosoftAccount](https://www.nuget.org/packages/Microsoft.AspNetCore.Authentication.MicrosoftAccount/) NuGet paketini ekleyin.
 * [Azure portal uygulama kayıtları](https://go.microsoft.com/fwlink/?linkid=2083908) sayfasına gidin ve bir Microsoft hesabı oluşturun veya oturum açın:
 
-Microsoft hesabı yoksa **bir tane oluştur**' u seçin. Oturum açtıktan sonra, **uygulama kayıtları** sayfasına yönlendirilirsiniz:
+Microsoft hesabı yoksa **bir tane oluştur** ' u seçin. Oturum açtıktan sonra, **uygulama kayıtları** sayfasına yönlendirilirsiniz:
 
 * **Yeni kayıt** Seç
-* Bir **ad**girin.
-* **Desteklenen hesap türleri**için bir seçenek belirleyin.  <!-- Accounts for any org work with MS domain accounts. Most folks probably want the last option, personal MS accounts. It took 24 hours after setting this up for the keys to work -->
+* Bir **ad** girin.
+* **Desteklenen hesap türleri** için bir seçenek belirleyin.  <!-- Accounts for any org work with MS domain accounts. Most folks probably want the last option, personal MS accounts. It took 24 hours after setting this up for the keys to work -->
   * `MicrosoftAccount`Paket, varsayılan olarak "herhangi bir kuruluş dizinindeki hesaplar" veya "herhangi bir kurumsal dizin ve Microsoft hesabı Içindeki hesaplar" seçenekleri kullanılarak oluşturulan uygulama kayıtlarını destekler.
   * Diğer seçenekleri kullanmak için, `AuthorizationEndpoint` `TokenEndpoint` `MicrosoftAccountOptions` Microsoft hesabı kimlik doğrulamasını, oluşturulduktan sonra uygulama kaydının **uç noktalar** sayfasında görüntülenir ( **genel bakış** sayfasındaki uç noktalar ' a tıklayarak kullanılabilir).
-* **Yeniden yönlendirme URI 'si**altında, eklenen geliştirme URL 'nizi girin `/signin-microsoft` . Örneğin, `https://localhost:5001/signin-microsoft`. Bu örnekte daha sonra yapılandırılan Microsoft kimlik doğrulama şeması, `/signin-microsoft` OAuth akışını uygulamak için rotadaki istekleri otomatik olarak işleymeyecektir.
+* **Yeniden yönlendirme URI 'si** altında, eklenen geliştirme URL 'nizi girin `/signin-microsoft` . Örneğin, `https://localhost:5001/signin-microsoft`. Bu örnekte daha sonra yapılandırılan Microsoft kimlik doğrulama şeması, `/signin-microsoft` OAuth akışını uygulamak için rotadaki istekleri otomatik olarak işleymeyecektir.
 * **Kaydol** ' u seçin
 
 ### <a name="create-client-secret"></a>İstemci parolası oluştur
 
-* Sol bölmede **sertifikalar & gizlilikler**' ı seçin.
-* **İstemci gizli**dizileri altında **yeni istemci parolası** ' nı seçin.
+* Sol bölmede **sertifikalar & gizlilikler** ' ı seçin.
+* **İstemci gizli** dizileri altında **yeni istemci parolası** ' nı seçin.
 
   * İstemci parolası için bir açıklama ekleyin.
   * **Ekle** düğmesini seçin.
 
-* **İstemci**gizli dizileri altında, istemci parolasının değerini kopyalayın.
+* **İstemci** gizli dizileri altında, istemci parolasının değerini kopyalayın.
 
 URI segmenti, `/signin-microsoft` Microsoft kimlik doğrulama sağlayıcısı 'nın varsayılan geri çağırması olarak ayarlanır. Microsoft kimlik doğrulama ara yazılımını, [Microsoftaccountoptions](/dotnet/api/microsoft.aspnetcore.authentication.microsoftaccount.microsoftaccountoptions) sınıfının devralınmış [remoteauthenticationoptions. callbackpath](/dotnet/api/microsoft.aspnetcore.authentication.remoteauthenticationoptions.callbackpath) özelliği aracılığıyla YAPıLANDıRıRKEN varsayılan geri çağırma URI 'sini değiştirebilirsiniz.
 
@@ -84,7 +85,7 @@ Microsoft hesabı kimlik doğrulaması tarafından desteklenen yapılandırma se
 
 ## <a name="sign-in-with-microsoft-account"></a>Microsoft hesabıyla oturum açın hesabı
 
-Uygulamayı çalıştırın ve **oturum aç**' a tıklayın. Microsoft ile oturum açma seçeneği görüntülenir. Microsoft 'a tıkladığınızda, kimlik doğrulaması için Microsoft 'a yönlendirilirsiniz. Microsoft hesabınızla oturum açtıktan sonra uygulamanın bilgilerinize erişmesine izin vermek isteyip istemediğiniz sorulur:
+Uygulamayı çalıştırın ve **oturum aç** ' a tıklayın. Microsoft ile oturum açma seçeneği görüntülenir. Microsoft 'a tıkladığınızda, kimlik doğrulaması için Microsoft 'a yönlendirilirsiniz. Microsoft hesabınızla oturum açtıktan sonra uygulamanın bilgilerinize erişmesine izin vermek isteyip istemediğiniz sorulur:
 
 **Evet** ' e dokunduktan sonra, e-postanızı ayarlayabileceğiniz Web sitesine geri yönlendirilirsiniz.
 
@@ -99,7 +100,7 @@ Uygulamayı çalıştırın ve **oturum aç**' a tıklayın. Microsoft ile oturu
 * Microsoft hesabı sağlayıcısı sizi bir oturum açma hatası sayfasına yönlendirirse, `#` URI 'deki (hashtag) hata başlığına ve açıklama sorgu dizesi parametrelerine göz önüne alın.
 
   Hata iletisi Microsoft kimlik doğrulamasıyla ilgili bir sorun olduğunu gösteriyorsa, en sık karşılaşılan neden, uygulama URI 'niz **Web** platformu Için belirtilen **yeniden yönlendirme URI** 'lerinden hiçbiriyle eşleşmemedir.
-* Identity `services.AddIdentity` ' De çağırarak yapılandırılmamışsa `ConfigureServices` , kimlik doğrulamaya çalışmak ArgumentException ile sonuçlanır *: ' signınscheme ' seçeneği sağlanmalıdır*. Bu örnekte kullanılan proje şablonu bunun yapılmasını sağlar.
+* Identity `services.AddIdentity` ' De çağırarak yapılandırılmamışsa `ConfigureServices` , kimlik doğrulamaya çalışmak ArgumentException ile sonuçlanır *: ' signınscheme ' seçeneği sağlanmalıdır* . Bu örnekte kullanılan proje şablonu bunun yapılmasını sağlar.
 * Site veritabanı ilk geçiş uygulanarak oluşturulmadıysa, *istek hatasını Işlerken bir veritabanı işlemi başarısız* olur. Veritabanını oluşturmak için **geçişleri Uygula** ' ya dokunun ve hatanın ötesinde devam etmek için yenileyin.
 
 ## <a name="next-steps"></a>Sonraki adımlar

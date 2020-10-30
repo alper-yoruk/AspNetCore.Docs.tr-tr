@@ -5,6 +5,7 @@ description: ASP.NET Core uygulamasında yetkilendirme için talep denetimleri e
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/claims
-ms.openlocfilehash: 0615e9f13b0eca7d7ac924d90ae2004e41a51586
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: d6317da6bca69b4c46d74a2f76d81af4059d1cd8
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632609"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060280"
 ---
 # <a name="claims-based-authorization-in-aspnet-core"></a>ASP.NET Core 'de talep tabanlı yetkilendirme
 
@@ -157,7 +158,7 @@ Talep değeri tek bir değer değilse veya bir dönüşüm gerekliyse, [Requirea
 
 ## <a name="multiple-policy-evaluation"></a>Birden çok Ilke değerlendirmesi
 
-Bir denetleyiciye veya eyleme birden çok ilke uygularsanız, erişim verilmeden önce tüm ilkelerin geçmesi gerekir. Örnek:
+Bir denetleyiciye veya eyleme birden çok ilke uygularsanız, erişim verilmeden önce tüm ilkelerin geçmesi gerekir. Örneğin:
 
 ```csharp
 [Authorize(Policy = "EmployeeOnly")]

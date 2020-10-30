@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 4/1/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/routing
-ms.openlocfilehash: e3dd7168e6974f63fa963d3732bc5df41814c70e
-ms.sourcegitcommit: d5ecad1103306fac8d5468128d3e24e529f1472c
+ms.openlocfilehash: 5b07a2839daf190d99b2787db70998373d34cd44
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/23/2020
-ms.locfileid: "92491632"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060007"
 ---
 # <a name="routing-in-aspnet-core"></a>ASP.NET Core yönlendirme
 
@@ -80,7 +81,7 @@ Yönlendirme, ve tarafından kaydedilen bir dizi ara yazılımı <xref:Microsoft
 
 <a name="endpoint"></a>
 
-`MapGet`Yöntemi, bir **uç noktayı**tanımlamak için kullanılır. Uç nokta şöyle olabilir:
+`MapGet`Yöntemi, bir **uç noktayı** tanımlamak için kullanılır. Uç nokta şöyle olabilir:
 
 * URL ve HTTP yöntemiyle eşleştirerek seçilir.
 * , Temsilcisi çalıştırılarak yürütülür.
@@ -96,7 +97,7 @@ Aşağıdaki örnekte, daha karmaşık bir yol şablonuyla yönlendirme gösteri
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/RouteTemplateStartup.cs?name=snippet)]
 
-Dize `/hello/{name:alpha}` bir **yol şablonudur**. Uç noktanın nasıl eşleştirileceği yapılandırmak için kullanılır. Bu durumda, şablon eşleşir:
+Dize `/hello/{name:alpha}` bir **yol şablonudur** . Uç noktanın nasıl eşleştirileceği yapılandırmak için kullanılır. Bu durumda, şablon eşleşir:
 
 * Şunun gibi bir URL `/hello/Ryan`
 * `/hello/`Arkasından bir alfabetik karakter dizisi ile başlayan herhangi BIR URL yolu.  `:alpha` yalnızca alfabetik karakterlerle eşleşen bir rota kısıtlaması uygular. [Yol kısıtlamaları](#route-constraint-reference) bu belgenin ilerleyen kısımlarında açıklanmıştır.
@@ -130,7 +131,7 @@ Yukarıdaki örnekte nasıl yapılacağı gösterilmektedir:
 
 ### <a name="endpoint-metadata"></a>Uç nokta meta verileri
 
-Yukarıdaki örnekte, iki uç nokta bulunur, ancak yalnızca sistem durumu denetimi uç noktasına bağlı bir yetkilendirme ilkesi vardır. İstek sistem durumu denetimi uç noktasıyla eşleşiyorsa, `/healthz` bir yetkilendirme denetimi gerçekleştirilir. Bu, uç noktalara eklenen ek verilere sahip olduğunu gösterir. Bu ek verilere uç nokta **meta verileri**denir:
+Yukarıdaki örnekte, iki uç nokta bulunur, ancak yalnızca sistem durumu denetimi uç noktasına bağlı bir yetkilendirme ilkesi vardır. İstek sistem durumu denetimi uç noktasıyla eşleşiyorsa, `/healthz` bir yetkilendirme denetimi gerçekleştirilir. Bu, uç noktalara eklenen ek verilere sahip olduğunu gösterir. Bu ek verilere uç nokta **meta verileri** denir:
 
 * Meta veriler, yönlendirme kullanan ara yazılım tarafından işlenebilir.
 * Meta veriler herhangi bir .NET türü olabilir.
@@ -209,12 +210,12 @@ Yukarıdaki örnekte iki önemli kavram gösterilmektedir:
 
 Yukarıdaki kodda, uç nokta başına ilkeleri destekleyen özel bir ara yazılım örneği gösterilmektedir. Ara yazılım, gizli verilere erişim *denetim günlüğünü* konsola yazar. Ara yazılım, meta verileri olan bir uç noktayı *denetlemek* üzere yapılandırılabilir `AuditPolicyAttribute` . Bu örnek, yalnızca hassas olarak işaretlenen bitiş noktalarının denetlendiği bir *katılım* modelini gösterir. Örneğin, güvenli olarak işaretlenmemiş her şeyi denetlemek için bu mantığı ters olarak tanımlamak mümkündür. Uç nokta meta veri sistemi esnektir. Bu mantık, kullanım örneğine uygun herhangi bir şekilde tasarlanabilir.
 
-Önceki örnek kod, uç noktaların temel kavramlarını göstermek için tasarlanmıştır. **Örnek, üretim kullanımı için tasarlanmamıştır**. *Denetim günlüğü* ara yazılımı 'nın daha kapsamlı bir sürümü şöyle olacaktır:
+Önceki örnek kod, uç noktaların temel kavramlarını göstermek için tasarlanmıştır. **Örnek, üretim kullanımı için tasarlanmamıştır** . *Denetim günlüğü* ara yazılımı 'nın daha kapsamlı bir sürümü şöyle olacaktır:
 
 * Bir dosya veya veritabanında oturum açın.
 * Kullanıcı, IP adresi, hassas bitiş noktasının adı ve daha fazlası gibi ayrıntıları dahil edin.
 
-Denetim ilkesi meta verileri, `AuditPolicyAttribute` `Attribute` denetleyiciler ve gibi sınıf tabanlı çerçeveler ile daha kolay kullanılmak üzere tanımlanır SignalR . *Kod yolu*kullanırken:
+Denetim ilkesi meta verileri, `AuditPolicyAttribute` `Attribute` denetleyiciler ve gibi sınıf tabanlı çerçeveler ile daha kolay kullanılmak üzere tanımlanır SignalR . *Kod yolu* kullanırken:
 
 * Meta veriler bir Oluşturucu API 'siyle birlikte eklenir.
 * Sınıf tabanlı çerçeveler, uç noktalar oluştururken karşılık gelen Yöntem ve sınıftaki tüm öznitelikleri içerir.
@@ -229,7 +230,7 @@ Aşağıdaki kod örneği, yönlendirmeyi kullanarak ara yazılım kullanarak ka
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/TerminalMiddlewareStartup.cs?name=snippet)]
 
-İle gösterilen ara yazılım stili, `Approach 1:` **Terminal ara yazılımı**. Bu, eşleşen bir işlem yaptığı için Terminal ara yazılımı olarak adlandırılır:
+İle gösterilen ara yazılım stili, `Approach 1:` **Terminal ara yazılımı** . Bu, eşleşen bir işlem yaptığı için Terminal ara yazılımı olarak adlandırılır:
 
 * Yukarıdaki örnekteki eşleştirme işlemi, `Path == "/"` Ara yazılım ve `Path == "/Movie"` yönlendirme içindir.
 * Bir eşleşme başarılı olduğunda, ara yazılımı çağırmak yerine bazı işlevleri yürütür ve döndürür `next` .
@@ -372,7 +373,7 @@ URL oluşturma:
 
 Endpoint Routing <xref:Microsoft.AspNetCore.Routing.LinkGenerator> API 'yi içerir. `LinkGenerator` , [dı](xref:fundamentals/dependency-injection)tarafından kullanılabilen bir tek hizmettir. `LinkGenerator`API, yürütülen bir istek bağlamı dışında kullanılabilir. Etiket Yardımcıları, HTML Yardımcıları ve eylem sonuçları gibi ' i kullanan [Mvc. ıurlhelper](xref:Microsoft.AspNetCore.Mvc.IUrlHelper) ve senaryoları <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> , [Action Results](xref:mvc/controllers/actions) [Tag Helpers](xref:mvc/views/tag-helpers/intro) `LinkGenerator` bağlantı oluşturma yetenekleri sağlamak için API 'yi dahili olarak kullanır.
 
-Bağlantı Oluşturucu, bir **Adres** ve **Adres şemaları**kavramıyla desteklenir. Adres şeması, bağlantı oluşturma için göz önünde bulundurmanız gereken uç noktaları belirlemenin bir yoludur. Örneğin, yol adı ve yol değerleri senaryoları birçok kullanıcı, denetleyicilerden ve Razor sayfalardan bir adres düzeni olarak uygulanır.
+Bağlantı Oluşturucu, bir **Adres** ve **Adres şemaları** kavramıyla desteklenir. Adres şeması, bağlantı oluşturma için göz önünde bulundurmanız gereken uç noktaları belirlemenin bir yoludur. Örneğin, yol adı ve yol değerleri senaryoları birçok kullanıcı, denetleyicilerden ve Razor sayfalardan bir adres düzeni olarak uygulanır.
 
 Bağlantı Oluşturucu Razor aşağıdaki genişletme yöntemleri aracılığıyla denetleyicilere ve sayfalara bağlanabilir:
 
@@ -568,10 +569,10 @@ Yönlendirmelerde kullanılan normal ifadeler, genellikle karakteriyle başlar `
 
 | Expression   | Dize    | Eşleştirme | Yorum               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Yes   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | 123abc456 | Yes   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | MZ        | Yes   | Eşleşen ifadesi    |
-| `[a-z]{2}`   | MZ        | Yes   | Büyük/küçük harfe duyarlı değil    |
+| `[a-z]{2}`   | hello     | Evet   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | 123abc456 | Evet   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | MZ        | Evet   | Eşleşen ifadesi    |
+| `[a-z]{2}`   | MZ        | Evet   | Büyük/küçük harfe duyarlı değil    |
 | `^[a-z]{2}$` | hello     | Hayır    | Bkz. `^` ve `$` üzeri |
 | `^[a-z]{2}$` | 123abc456 | Hayır    | Bkz. `^` ve `$` üzeri |
 
@@ -696,7 +697,7 @@ Adres şemasının rolü, rastgele ölçütlere göre adres ve eşleşen uç nok
 
 ### <a name="ambient-values-and-explicit-values"></a>Çevresel değerler ve açık değerler
 
-Yönlendirme geçerli istekten, geçerli isteğin rota değerlerine erişir `HttpContext.Request.RouteValues` . Geçerli istekle ilişkili değerler **çevresel değerler**olarak adlandırılır. Netlik amacı doğrultusunda, belgeler yöntemlere geçirilen yol değerlerini **açık değerler**olarak ifade eder.
+Yönlendirme geçerli istekten, geçerli isteğin rota değerlerine erişir `HttpContext.Request.RouteValues` . Geçerli istekle ilişkili değerler **çevresel değerler** olarak adlandırılır. Netlik amacı doğrultusunda, belgeler yöntemlere geçirilen yol değerlerini **açık değerler** olarak ifade eder.
 
 Aşağıdaki örnek, ortam değerlerini ve açık değerleri gösterir. Geçerli istekten ve açık değerlerden çevresel değerler sağlar: `{ id = 17, }` :
 
@@ -756,7 +757,7 @@ Aday uç noktalar kümesi bulunduğunda, URL oluşturma algoritması:
 * Son noktaları yinelemeli olarak işler.
 * İlk başarılı sonucu döndürür.
 
-Bu işlemdeki ilk adıma **Rota değeri ınvalidation**adı verilir.  Rota değeri geçersiz kılma, yönlendirmenin çevresel değerlerden hangi rota değerlerinin kullanılması gerektiğini ve göz ardı edileceğine yönelik bir işlemdir. Her ortam değeri, açık değerlerle birlikte değerlendirilir ve yok sayılır.
+Bu işlemdeki ilk adıma **Rota değeri ınvalidation** adı verilir.  Rota değeri geçersiz kılma, yönlendirmenin çevresel değerlerden hangi rota değerlerinin kullanılması gerektiğini ve göz ardı edileceğine yönelik bir işlemdir. Her ortam değeri, açık değerlerle birlikte değerlendirilir ve yok sayılır.
 
 Ortam değerlerinin rolünü düşünmenin en iyi yolu, bazı yaygın durumlarda, yazma uygulama geliştiricilerinin kaydedilmesini denedikleri değerlerdir. Geleneksel olarak, ortam değerlerinin yararlı olduğu senaryolar MVC ile ilgilidir:
 
@@ -972,7 +973,7 @@ Aşağıdaki örnekte gösterildiği gibi meta verileri **geçersiz kılmak müm
 
 [!code-csharp[](routing/samples/3.x/RoutingSample/ICoolMetadata.cs?name=snippet)]
 
-Bu yönergeleri izlemek için en iyi yol, **işaretleyici meta verileri**tanımlamayı önleyemaktır:
+Bu yönergeleri izlemek için en iyi yol, **işaretleyici meta verileri** tanımlamayı önleyemaktır:
 
 * Yalnızca meta veri türünün varolup olmadığını göz atın.
 * Meta verilerde bir özellik tanımlayın ve özelliği denetleyin.
@@ -1071,7 +1072,7 @@ Yönlendirme, sınıfı tarafından bulunan [Ara yazılım](xref:fundamentals/mi
 
 ### <a name="url-matching"></a>URL eşleştirme
 
-URL eşleştirme, yönlendirmenin bir *uç noktaya*gelen isteği gönderdiği işlemdir. Bu işlem, URL yolundaki verileri temel alır, ancak istekteki verileri göz önünde bulundurmanız için genişletilebilir. Ayrı işleyicilere istek gönderme özelliği, bir uygulamanın boyutunu ve karmaşıklığını ölçeklendirmeye yönelik anahtardır.
+URL eşleştirme, yönlendirmenin bir *uç noktaya* gelen isteği gönderdiği işlemdir. Bu işlem, URL yolundaki verileri temel alır, ancak istekteki verileri göz önünde bulundurmanız için genişletilebilir. Ayrı işleyicilere istek gönderme özelliği, bir uygulamanın boyutunu ve karmaşıklığını ölçeklendirmeye yönelik anahtardır.
 
 Uç nokta yönlendirmesinde yönlendirme sistemi tüm gönderme kararlarından sorumludur. Ara yazılım, seçili uç noktaya göre ilkeler uyguladığı için, yönlendirme sisteminde güvenlik ilkelerinin dağıtımını etkileyebilecek veya uygulamanın uygulanmasını etkileyebilecek herhangi bir kararın olması önemlidir.
 
@@ -1091,7 +1092,7 @@ URL oluşturma, yönlendirmenin bir yol değerleri kümesine göre bir URL yolu 
 
 Endpoint Routing, bağlantı Oluşturucu API 'SI ( <xref:Microsoft.AspNetCore.Routing.LinkGenerator> ) içerir. <xref:Microsoft.AspNetCore.Routing.LinkGenerator> , [dı](xref:fundamentals/dependency-injection)'den alınabilecek bir tek hizmettir. API, yürütülen bir istek bağlamı dışında kullanılabilir. <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> <xref:Microsoft.AspNetCore.Mvc.IUrlHelper> [Etiket Yardımcıları](xref:mvc/views/tag-helpers/intro), HTML Yardımcıları ve [eylem sonuçları](xref:mvc/controllers/actions)gibi mvc 'nin ve senaryolarına yönelik senaryolar, bağlantı oluşturma özellikleri sağlamak için bağlantı oluşturucuyu kullanır.
 
-Bağlantı Oluşturucu, bir *Adres* ve *Adres şemaları*kavramıyla desteklenir. Adres şeması, bağlantı oluşturma için göz önünde bulundurmanız gereken uç noktaları belirlemenin bir yoludur. Örneğin, çok sayıda kullanıcının yol adı ve yol değerleri senaryoları, MVC/ Razor sayfalardan bir adres düzeni olarak uygulanır.
+Bağlantı Oluşturucu, bir *Adres* ve *Adres şemaları* kavramıyla desteklenir. Adres şeması, bağlantı oluşturma için göz önünde bulundurmanız gereken uç noktaları belirlemenin bir yoludur. Örneğin, çok sayıda kullanıcının yol adı ve yol değerleri senaryoları, MVC/ Razor sayfalardan bir adres düzeni olarak uygulanır.
 
 Bağlantı Oluşturucu, MVC/ Razor Pages eylemlerine ve sayfalarına aşağıdaki genişletme yöntemleri aracılığıyla bağlanabilir:
 
@@ -1177,14 +1178,14 @@ ASP.NET Core 2,2 veya üzeri ve daha önceki yönlendirme sürümlerindeki ASP.N
 
   ASP.NET Core 2,1 veya önceki sürümlerde aşağıdaki örneği göz önünde bulundurun. Başka bir eyleme (veya başka bir sayfaya) bağlanırken, yol değerleri istenmeyen yollarla yeniden kullanılabilir.
 
-  */Pages/Store/Product.exe*:
+  */Pages/Store/Product.exe* :
 
   ```cshtml
   @page "{id}"
   @Url.Page("/Login")
   ```
 
-  */Pages/Login.exe*içinde:
+  */Pages/Login.exe* içinde:
 
   ```cshtml
   @page "{id?}"
@@ -1433,7 +1434,7 @@ Aşağıdaki anahtar sözcükler ayrılmış isimlerdir ve yol adları veya para
 Yol kısıtlamaları, gelen URL 'de bir eşleşme meydana geldiğinde ve URL yolu yol değerlerinde simgeleştirilir yürütülür. Rota kısıtlamaları genellikle yol şablonu aracılığıyla ilişkili rota değerini inceler ve değerin kabul edilebilir olup olmadığı konusunda bir Evet/Hayır kararı getirir. Bazı rota kısıtlamaları, isteğin yönlendirilip yönlendirilmeyeceğini göz önünde bulundurmanız için yol değeri dışındaki verileri kullanır. Örneğin, <xref:Microsoft.AspNetCore.Routing.Constraints.HttpMethodRouteConstraint> bir ISTEğI http fiiline bağlı olarak kabul edebilir veya reddedebilir. Kısıtlamalar, yönlendirme isteklerinde ve bağlantı oluşturmada kullanılır.
 
 > [!WARNING]
-> **Giriş doğrulaması**için kısıtlamaları kullanmayın. **Giriş doğrulaması**için kısıtlamalar kullanılıyorsa, doğru bir hata iletisine sahip *400-Bad isteği* yerine *404-* olmayan bir Yanıt ile geçersiz giriş oluşur. Yol kısıtlamaları, belirli bir rota için girdileri doğrulamak üzere değil, benzer yolların **belirsizliğini ortadan** kaldırmak için kullanılır.
+> **Giriş doğrulaması** için kısıtlamaları kullanmayın. **Giriş doğrulaması** için kısıtlamalar kullanılıyorsa, doğru bir hata iletisine sahip *400-Bad isteği* yerine *404-* olmayan bir Yanıt ile geçersiz giriş oluşur. Yol kısıtlamaları, belirli bir rota için girdileri doğrulamak üzere değil, benzer yolların **belirsizliğini ortadan** kaldırmak için kullanılır.
 
 Aşağıdaki tabloda örnek yol kısıtlamaları ve bunların beklenen davranışları gösterilmektedir.
 
@@ -1489,10 +1490,10 @@ Yönlendirmelerde kullanılan normal ifadeler, genellikle giriş işareti `^` ka
 
 | Expression   | Dize    | Eşleştirme | Yorum               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Yes   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | 123abc456 | Yes   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | MZ        | Yes   | Eşleşen ifadesi    |
-| `[a-z]{2}`   | MZ        | Yes   | Büyük/küçük harfe duyarlı değil    |
+| `[a-z]{2}`   | hello     | Evet   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | 123abc456 | Evet   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | MZ        | Evet   | Eşleşen ifadesi    |
+| `[a-z]{2}`   | MZ        | Evet   | Büyük/küçük harfe duyarlı değil    |
 | `^[a-z]{2}$` | hello     | Hayır    | Bkz. `^` ve `$` üzeri |
 | `^[a-z]{2}$` | 123abc456 | Hayır    | Bkz. `^` ve `$` üzeri |
 
@@ -1566,7 +1567,7 @@ Aşağıdaki örnek, yol değerlerinin ve bir sözlüğünün bir sözlüğüne 
 
 <xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath>Önceki örnek sonunda oluşturulan `/package/create/123` . Sözlük, `operation` `id` "paket yolunu izle" şablonunun ve rota değerlerini sağlar `package/{operation}/{id}` . Ayrıntılar için, [yönlendirme ara yazılımı kullanma](#use-routing-middleware) bölümünde veya [örnek uygulamada](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples)örnek koda bakın.
 
-Oluşturucunun ikinci parametresi <xref:Microsoft.AspNetCore.Routing.VirtualPathContext> bir *ortam değerleri*koleksiyonudur. Ortam değerleri, bir geliştiricinin bir istek bağlamı içinde belirtmesi gereken değer sayısını sınırlandırdığından kullanım için uygundur. Geçerli isteğin geçerli yol değerleri, bağlantı oluşturma için çevresel değerler olarak kabul edilir. ASP.NET Core MVC uygulamasının `About` öğesinin eyleminde, `HomeController` `Index` &mdash; ortam değeri kullanılan eyleme bağlamak için denetleyici yol değerini belirtmeniz gerekmez `Home` .
+Oluşturucunun ikinci parametresi <xref:Microsoft.AspNetCore.Routing.VirtualPathContext> bir *ortam değerleri* koleksiyonudur. Ortam değerleri, bir geliştiricinin bir istek bağlamı içinde belirtmesi gereken değer sayısını sınırlandırdığından kullanım için uygundur. Geçerli isteğin geçerli yol değerleri, bağlantı oluşturma için çevresel değerler olarak kabul edilir. ASP.NET Core MVC uygulamasının `About` öğesinin eyleminde, `HomeController` `Index` &mdash; ortam değeri kullanılan eyleme bağlamak için denetleyici yol değerini belirtmeniz gerekmez `Home` .
 
 Bir parametreyle eşleşmeyen çevresel değerler yok sayılır. Ayrıca, açıkça sağlanmış bir değer çevresel değeri geçersiz kıldığında çevresel değerler de yoksayılır. Eşleştirme, URL 'de soldan sağa doğru gerçekleşir.
 
@@ -1629,7 +1630,7 @@ URL oluşturma desteği, uygulamanın, uygulamayı birbirine bağlamak için sab
 
 Yönlendirme, ' nin rotalar uygulamalarını kullanır <xref:Microsoft.AspNetCore.Routing.IRouter> :
 
-* Gelen istekleri *Rota işleyicilerine*eşleyin.
+* Gelen istekleri *Rota işleyicilerine* eşleyin.
 * Yanıtlarda kullanılan URL 'Leri oluşturun.
 
 Varsayılan olarak, bir uygulama tek bir yollar koleksiyonuna sahiptir. Bir istek geldiğinde koleksiyondaki yollar, koleksiyonda var olan sırada işlenir. Çerçeve koleksiyondaki her bir rotada yöntemini çağırarak, bir gelen istek URL 'sini koleksiyondaki bir yola eşleştirmeye çalışır <xref:Microsoft.AspNetCore.Routing.IRouter.RouteAsync*> . Yanıt, yönlendirme bilgilerine göre URL (örneğin, yeniden yönlendirme veya bağlantılar için) oluşturmak için yönlendirmeyi kullanabilir ve bu sayede bakım yapılmasına yardımcı olan sabit kodlanmış URL 'Lerden kaçınabilirsiniz.
@@ -1647,7 +1648,7 @@ Yönlendirme, sınıfı tarafından bulunan [Ara yazılım](xref:fundamentals/mi
 
 ### <a name="url-matching"></a>URL eşleştirme
 
-URL eşleştirme, yönlendirmenin bir *işleyiciye*gelen istek gönderdiğine yönelik işlemdir. Bu işlem, URL yolundaki verileri temel alır, ancak istekteki verileri göz önünde bulundurmanız için genişletilebilir. Ayrı işleyicilere istek gönderme özelliği, bir uygulamanın boyutunu ve karmaşıklığını ölçeklendirmeye yönelik anahtardır.
+URL eşleştirme, yönlendirmenin bir *işleyiciye* gelen istek gönderdiğine yönelik işlemdir. Bu işlem, URL yolundaki verileri temel alır, ancak istekteki verileri göz önünde bulundurmanız için genişletilebilir. Ayrı işleyicilere istek gönderme özelliği, bir uygulamanın boyutunu ve karmaşıklığını ölçeklendirmeye yönelik anahtardır.
 
 Gelen istekler, <xref:Microsoft.AspNetCore.Builder.RouterMiddleware> <xref:Microsoft.AspNetCore.Routing.IRouter.RouteAsync*> sırayla her bir yoldaki yöntemi çağıran öğesini girer. <xref:Microsoft.AspNetCore.Routing.IRouter>Örnek, [routecontext. Handler](xref:Microsoft.AspNetCore.Routing.RouteContext.Handler*) değerini null olmayan olarak ayarlayarak isteğin *işleneceğini* seçer <xref:Microsoft.AspNetCore.Http.RequestDelegate> . Bir yol istek için bir işleyici ayarlarsa, yol işleme duraklar ve işleyici isteği işlemek için çağrılır. İsteği işlemek için yol işleyicisi bulunmazsa, ara yazılım istek ardışık düzeninde sonraki bir ara yazılım için isteği kapatır.
 
@@ -1883,7 +1884,7 @@ Bir şablon kullanmak genellikle yönlendirmeye en basit yaklaşımdır. Kısıt
 Yol kısıtlamaları, gelen URL 'de bir eşleşme meydana geldiğinde ve URL yolu yol değerlerinde simgeleştirilir yürütülür. Rota kısıtlamaları genellikle yol şablonu aracılığıyla ilişkili rota değerini inceler ve değerin kabul edilebilir olup olmadığı konusunda bir Evet/Hayır kararı getirir. Bazı rota kısıtlamaları, isteğin yönlendirilip yönlendirilmeyeceğini göz önünde bulundurmanız için yol değeri dışındaki verileri kullanır. Örneğin, <xref:Microsoft.AspNetCore.Routing.Constraints.HttpMethodRouteConstraint> bir ISTEğI http fiiline bağlı olarak kabul edebilir veya reddedebilir. Kısıtlamalar, yönlendirme isteklerinde ve bağlantı oluşturmada kullanılır.
 
 > [!WARNING]
-> **Giriş doğrulaması**için kısıtlamaları kullanmayın. **Giriş doğrulaması**için kısıtlamalar kullanılıyorsa, doğru bir hata iletisine sahip *400-Bad isteği* yerine *404-* olmayan bir Yanıt ile geçersiz giriş oluşur. Yol kısıtlamaları, belirli bir rota için girdileri doğrulamak üzere değil, benzer yolların **belirsizliğini ortadan** kaldırmak için kullanılır.
+> **Giriş doğrulaması** için kısıtlamaları kullanmayın. **Giriş doğrulaması** için kısıtlamalar kullanılıyorsa, doğru bir hata iletisine sahip *400-Bad isteği* yerine *404-* olmayan bir Yanıt ile geçersiz giriş oluşur. Yol kısıtlamaları, belirli bir rota için girdileri doğrulamak üzere değil, benzer yolların **belirsizliğini ortadan** kaldırmak için kullanılır.
 
 Aşağıdaki tabloda örnek yol kısıtlamaları ve bunların beklenen davranışları gösterilmektedir.
 
@@ -1933,10 +1934,10 @@ Yönlendirmelerde kullanılan normal ifadeler, genellikle şapka işareti ( `^` 
 
 | Expression   | Dize    | Eşleştirme | Yorum               |
 | ------------ | --------- | :---: |  -------------------- |
-| `[a-z]{2}`   | hello     | Yes   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | 123abc456 | Yes   | Alt dize eşleşmeleri     |
-| `[a-z]{2}`   | MZ        | Yes   | Eşleşen ifadesi    |
-| `[a-z]{2}`   | MZ        | Yes   | Büyük/küçük harfe duyarlı değil    |
+| `[a-z]{2}`   | hello     | Evet   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | 123abc456 | Evet   | Alt dize eşleşmeleri     |
+| `[a-z]{2}`   | MZ        | Evet   | Eşleşen ifadesi    |
+| `[a-z]{2}`   | MZ        | Evet   | Büyük/küçük harfe duyarlı değil    |
 | `^[a-z]{2}$` | hello     | Hayır    | Bkz. `^` ve `$` üzeri |
 | `^[a-z]{2}$` | 123abc456 | Hayır    | Bkz. `^` ve `$` üzeri |
 
@@ -1972,7 +1973,7 @@ Aşağıdaki örnek, yol değerlerinin ve bir sözlüğünün bir sözlüğüne 
 
 <xref:Microsoft.AspNetCore.Routing.VirtualPathData.VirtualPath>Önceki örnek sonunda oluşturulan `/package/create/123` . Sözlük, `operation` `id` "paket yolunu izle" şablonunun ve rota değerlerini sağlar `package/{operation}/{id}` . Ayrıntılar için, [yönlendirme ara yazılımı kullanma](#use-routing-middleware) bölümünde veya [örnek uygulamada](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/fundamentals/routing/samples)örnek koda bakın.
 
-Oluşturucunun ikinci parametresi <xref:Microsoft.AspNetCore.Routing.VirtualPathContext> bir *ortam değerleri*koleksiyonudur. Ortam değerleri, bir geliştiricinin bir istek bağlamı içinde belirtmesi gereken değer sayısını sınırlandırdığından kullanım için uygundur. Geçerli isteğin geçerli yol değerleri, bağlantı oluşturma için çevresel değerler olarak kabul edilir. ASP.NET Core MVC uygulamasının `About` öğesinin eyleminde, `HomeController` `Index` &mdash; ortam değeri kullanılan eyleme bağlamak için denetleyici yol değerini belirtmeniz gerekmez `Home` .
+Oluşturucunun ikinci parametresi <xref:Microsoft.AspNetCore.Routing.VirtualPathContext> bir *ortam değerleri* koleksiyonudur. Ortam değerleri, bir geliştiricinin bir istek bağlamı içinde belirtmesi gereken değer sayısını sınırlandırdığından kullanım için uygundur. Geçerli isteğin geçerli yol değerleri, bağlantı oluşturma için çevresel değerler olarak kabul edilir. ASP.NET Core MVC uygulamasının `About` öğesinin eyleminde, `HomeController` `Index` &mdash; ortam değeri kullanılan eyleme bağlamak için denetleyici yol değerini belirtmeniz gerekmez `Home` .
 
 Bir parametreyle eşleşmeyen çevresel değerler yok sayılır. Ayrıca, açıkça sağlanmış bir değer çevresel değeri geçersiz kıldığında çevresel değerler de yoksayılır. Eşleştirme, URL 'de soldan sağa doğru gerçekleşir.
 

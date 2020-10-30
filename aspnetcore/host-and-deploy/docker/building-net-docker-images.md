@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 05/12/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/docker/building-net-docker-images
-ms.openlocfilehash: 6f94323873937d1428d6cfa1b0ef15e44611fd47
-ms.sourcegitcommit: b3ec60f7682e43211c2b40c60eab3d4e45a48ab1
+ms.openlocfilehash: 81daa1d4a996519f44e513b4f61c27cdf2b6ef5e
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/17/2020
-ms.locfileid: "92153642"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93059812"
 ---
 # <a name="docker-images-for-aspnet-core"></a>ASP.NET Core için Docker görüntüleri
 
@@ -85,7 +86,7 @@ Bu öğreticide, ASP.NET Core örnek bir uygulama indirir ve Docker kapsayıcıl
 
 ## <a name="run-the-app-locally"></a>Uygulamayı yerel olarak çalıştırma
 
-* *DotNet-Docker/Samples/aspnetapp/aspnetapp*konumundaki proje klasörüne gidin.
+* *DotNet-Docker/Samples/aspnetapp/aspnetapp* konumundaki proje klasörüne gidin.
 
 * Uygulamayı yerel olarak derlemek ve çalıştırmak için aşağıdaki komutu çalıştırın:
 
@@ -101,7 +102,7 @@ Bu öğreticide, ASP.NET Core örnek bir uygulama indirir ve Docker kapsayıcıl
 
 * Docker istemcisinde [Linux kapsayıcıları](https://docs.docker.com/docker-for-windows/#switch-between-windows-and-linux-containers)' na geçin.
 
-* *DotNet-Docker/Samples/aspnetapp*konumundaki Dockerfile klasörüne gidin.
+* *DotNet-Docker/Samples/aspnetapp* konumundaki Dockerfile klasörüne gidin.
 
 * Örneği Docker 'da derlemek ve çalıştırmak için aşağıdaki komutları çalıştırın:
 
@@ -157,7 +158,7 @@ Konumundaki Docker dosya klasörüne gidin `dotnet-docker/samples/aspnetapp` .
 
 Bazı senaryolarda, çalışma zamanında gerekli olan uygulama dosyalarını kopyalayarak bir kapsayıcıya uygulama dağıtmak isteyebilirsiniz. Bu bölümde nasıl el ile dağıtım yapılacağı gösterilmektedir.
 
-* *DotNet-Docker/Samples/aspnetapp/aspnetapp*konumundaki proje klasörüne gidin.
+* *DotNet-Docker/Samples/aspnetapp/aspnetapp* konumundaki proje klasörüne gidin.
 
 * [DotNet Publish](/dotnet/core/tools/dotnet-publish) komutunu çalıştırın:
 
@@ -255,7 +256,7 @@ COPY --from=build /app/aspnetapp/out ./
 ENTRYPOINT ["dotnet", "aspnetapp.dll"]
 ```
 
-Önceki Dockerfile içinde belirtildiği gibi, `*.csproj` dosyalar ayrı *Katmanlar*olarak kopyalanır ve geri yüklenir. `docker build`Komut bir görüntü oluşturduğunda, yerleşik bir önbellek kullanır. `*.csproj`Komutun son çalıştırılmasından bu yana dosyalar değiştirilmediyse `docker build` , `dotnet restore` komutun yeniden çalıştırılması gerekmez. Bunun yerine, karşılık gelen katman için yerleşik önbellek `dotnet restore` yeniden kullanılır. Daha fazla bilgi için bkz. [Dockerfiles yazmak Için en iyi uygulamalar](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache).
+Önceki Dockerfile içinde belirtildiği gibi, `*.csproj` dosyalar ayrı *Katmanlar* olarak kopyalanır ve geri yüklenir. `docker build`Komut bir görüntü oluşturduğunda, yerleşik bir önbellek kullanır. `*.csproj`Komutun son çalıştırılmasından bu yana dosyalar değiştirilmediyse `docker build` , `dotnet restore` komutun yeniden çalıştırılması gerekmez. Bunun yerine, karşılık gelen katman için yerleşik önbellek `dotnet restore` yeniden kullanılır. Daha fazla bilgi için bkz. [Dockerfiles yazmak Için en iyi uygulamalar](https://docs.docker.com/develop/develop-images/dockerfile_best-practices/#leverage-build-cache).
 
 ::: moniker-end
 

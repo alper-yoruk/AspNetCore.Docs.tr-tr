@@ -5,6 +5,7 @@ description: RazorSayfaların 4. bölümü ve Entity Framework öğretici serisi
 ms.author: riande
 ms.date: 07/22/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/migrations
-ms.openlocfilehash: 78eb466fcfeb130e411df490f033114b3fdebeef
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: e6d1b9f041e892aaa37840c28fdb3153bf098b0d
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722637"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93061112"
 ---
 # <a name="part-4-no-locrazor-pages-with-ef-core-migrations-in-aspnet-core"></a>Bölüm 4, Razor ASP.NET Core EF Core geçişleri olan sayfalar
 
@@ -113,7 +114,7 @@ Dosya adı için geçiş adı parametresi (örnekteki "ınitialcreate") kullanı
 
 ## <a name="the-data-model-snapshot"></a>Veri modeli anlık görüntüsü
 
-Geçişler, *geçiş/SchoolContextModelSnapshot. cs*içindeki geçerli veri modelinin *anlık görüntüsünü* oluşturur. Bir geçiş eklediğinizde, EF geçerli veri modelini Snapshot dosyası ile karşılaştırarak nelerin değiştirildiğini belirler.
+Geçişler, *geçiş/SchoolContextModelSnapshot. cs* içindeki geçerli veri modelinin *anlık görüntüsünü* oluşturur. Bir geçiş eklediğinizde, EF geçerli veri modelini Snapshot dosyası ile karşılaştırarak nelerin değiştirildiğini belirler.
 
 Anlık görüntü dosyası veri modelinin durumunu izlediğinden, dosyayı silerek bir geçişi silemezsiniz `<timestamp>_<migrationname>.cs` . En son geçişi geri yüklemek için komutunu kullanmanız gerekir `migrations remove` . Bu komut, geçişi siler ve anlık görüntünün doğru şekilde sıfırlanmasını sağlar. Daha fazla bilgi için bkz. [DotNet EF geçişleri kaldır](/ef/core/miscellaneous/cli/dotnet#dotnet-ef-migrations-remove).
 
@@ -123,7 +124,7 @@ Bu öğretici serisi kullanılarak başlatıldı `EnsureCreated` . `EnsureCreate
 
 Bu noktadan sonra öğreticiler, geçişleri kullanacaktır.
 
-*Data/Dbınınitializer. cs*dosyasında aşağıdaki satırı açıklama olarak inceleyin:
+*Data/Dbınınitializer. cs* dosyasında aşağıdaki satırı açıklama olarak inceleyin:
 
 ```csharp
 context.Database.EnsureCreated();
@@ -250,13 +251,13 @@ Daha önce VERITABANı bırakılmıştı ve mevcut olmadığından geçişler ye
 
 ### <a name="the-data-model-snapshot"></a>Veri modeli anlık görüntüsü
 
-Geçişler *geçişlerde/SchoolContextModelSnapshot. cs*' de geçerli veritabanı şemasının *anlık görüntüsünü* oluşturur. Bir geçiş eklediğinizde EF, veri modeli Snapshot dosyası ile karşılaştırılarak nelerin değiştirildiğini belirler.
+Geçişler *geçişlerde/SchoolContextModelSnapshot. cs* ' de geçerli veritabanı şemasının *anlık görüntüsünü* oluşturur. Bir geçiş eklediğinizde EF, veri modeli Snapshot dosyası ile karşılaştırılarak nelerin değiştirildiğini belirler.
 
 Bir geçişi silmek için aşağıdaki komutu kullanın:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Geçişi Kaldır
+Remove-Migration
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
