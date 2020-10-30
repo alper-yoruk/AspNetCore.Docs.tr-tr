@@ -5,33 +5,34 @@ description: Bağımlılık ekleme kullanarak ASP.NET Core uygulamasına yetkile
 ms.author: riande
 ms.date: 10/14/2016
 no-loc:
-- ASP.NET Core Identity
-- cookie
-- Cookie
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- ':::no-loc(appsettings.json):::'
+- ':::no-loc(ASP.NET Core Identity):::'
+- ':::no-loc(cookie):::'
+- ':::no-loc(Cookie):::'
+- ':::no-loc(Blazor):::'
+- ':::no-loc(Blazor Server):::'
+- ':::no-loc(Blazor WebAssembly):::'
+- ':::no-loc(Identity):::'
+- ":::no-loc(Let's Encrypt):::"
+- ':::no-loc(Razor):::'
+- ':::no-loc(SignalR):::'
 uid: security/authorization/dependencyinjection
-ms.openlocfilehash: 4bc7eb38262c8a94a84aacc978737a778bfd71a1
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 6598a9c9cfd1e6597fffcc1aa0c53fa493532458
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632570"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93060267"
 ---
-# <a name="dependency-injection-in-requirement-handlers-in-aspnet-core"></a><span data-ttu-id="dbaea-103">ASP.NET Core 'de gereksinim işleyicilerde bağımlılık ekleme</span><span class="sxs-lookup"><span data-stu-id="dbaea-103">Dependency injection in requirement handlers in ASP.NET Core</span></span>
+# <a name="dependency-injection-in-requirement-handlers-in-aspnet-core"></a><span data-ttu-id="e2ff3-103">ASP.NET Core 'de gereksinim işleyicilerde bağımlılık ekleme</span><span class="sxs-lookup"><span data-stu-id="e2ff3-103">Dependency injection in requirement handlers in ASP.NET Core</span></span>
 
 <a name="security-authorization-di"></a>
 
-<span data-ttu-id="dbaea-104">[Yetkilendirme işleyicilerinin](xref:security/authorization/policies#handler-registration) yapılandırma sırasında hizmet koleksiyonunda kayıtlı olması gerekir ( [bağımlılık ekleme](xref:fundamentals/dependency-injection)kullanılarak).</span><span class="sxs-lookup"><span data-stu-id="dbaea-104">[Authorization handlers must be registered](xref:security/authorization/policies#handler-registration) in the service collection during configuration (using [dependency injection](xref:fundamentals/dependency-injection)).</span></span>
+<span data-ttu-id="e2ff3-104">[Yetkilendirme işleyicilerinin](xref:security/authorization/policies#handler-registration) , [bağımlılık ekleme](xref:fundamentals/dependency-injection)kullanılarak yapılandırma sırasında hizmet koleksiyonunda kayıtlı olması gerekir.</span><span class="sxs-lookup"><span data-stu-id="e2ff3-104">[Authorization handlers must be registered](xref:security/authorization/policies#handler-registration) in the service collection during configuration using [dependency injection](xref:fundamentals/dependency-injection).</span></span>
 
-<span data-ttu-id="dbaea-105">Bir yetkilendirme işleyicisinde değerlendirmek istediğiniz bir kural deposudur olduğunu ve bu deponun hizmet koleksiyonunda kayıtlı olduğunu varsayalım.</span><span class="sxs-lookup"><span data-stu-id="dbaea-105">Suppose you had a repository of rules you wanted to evaluate inside an authorization handler and that repository was registered in the service collection.</span></span> <span data-ttu-id="dbaea-106">Yetkilendirme çözülecek ve oluşturucuya eklenecektir.</span><span class="sxs-lookup"><span data-stu-id="dbaea-106">Authorization will resolve and inject that into your constructor.</span></span>
+<span data-ttu-id="e2ff3-105">Bir yetkilendirme işleyicisinde değerlendirmek istediğiniz bir kural deposudur olduğunu ve bu deponun hizmet koleksiyonunda kayıtlı olduğunu varsayalım.</span><span class="sxs-lookup"><span data-stu-id="e2ff3-105">Suppose you had a repository of rules you wanted to evaluate inside an authorization handler and that repository was registered in the service collection.</span></span> <span data-ttu-id="e2ff3-106">Yetkilendirme, oluşturucunun içinde çözümlenmek ve bunları çıkarır.</span><span class="sxs-lookup"><span data-stu-id="e2ff3-106">Authorization resolves and injects that into the constructor.</span></span>
 
-<span data-ttu-id="dbaea-107">Örneğin, ASP 'yi kullanmak isterseniz. İşleyicinizden eklemek istediğiniz NET 'in günlük altyapısı `ILoggerFactory` .</span><span class="sxs-lookup"><span data-stu-id="dbaea-107">For example, if you wanted to use ASP.NET's logging infrastructure you would want to inject `ILoggerFactory` into your handler.</span></span> <span data-ttu-id="dbaea-108">Böyle bir işleyici şöyle görünebilir:</span><span class="sxs-lookup"><span data-stu-id="dbaea-108">Such a handler might look like:</span></span>
+<span data-ttu-id="e2ff3-107">Örneğin, ASP 'yi kullanmak için. NET ' in günlük altyapısı, `ILoggerFactory` işleyiciye ekleme.</span><span class="sxs-lookup"><span data-stu-id="e2ff3-107">For example, to use ASP.NET's logging infrastructure, inject `ILoggerFactory` into the handler.</span></span> <span data-ttu-id="e2ff3-108">Böyle bir işleyici aşağıdaki kod gibi görünebilir:</span><span class="sxs-lookup"><span data-stu-id="e2ff3-108">Such a handler might look like the following code:</span></span>
 
 ```csharp
 public class LoggingAuthorizationHandler : AuthorizationHandler<MyRequirement>
@@ -52,13 +53,13 @@ public class LoggingAuthorizationHandler : AuthorizationHandler<MyRequirement>
    }
    ```
 
-<span data-ttu-id="dbaea-109">İşleyiciyi şu ile kaydedersiniz `services.AddSingleton()` :</span><span class="sxs-lookup"><span data-stu-id="dbaea-109">You would register the handler with `services.AddSingleton()`:</span></span>
+<span data-ttu-id="e2ff3-109">Önceki işleyici, herhangi bir [hizmet ömrüyle](/dotnet/core/extensions/dependency-injection#service-lifetimes)kaydedilebilir.</span><span class="sxs-lookup"><span data-stu-id="e2ff3-109">The preceding handler can be registered with any [service lifetime](/dotnet/core/extensions/dependency-injection#service-lifetimes).</span></span> <span data-ttu-id="e2ff3-110">Aşağıdaki kod, `AddSingleton` önceki işleyiciyi kaydetmek için kullanır:</span><span class="sxs-lookup"><span data-stu-id="e2ff3-110">The following code uses `AddSingleton` to register the preceding handler:</span></span>
 
 ```csharp
 services.AddSingleton<IAuthorizationHandler, LoggingAuthorizationHandler>();
 ```
 
-<span data-ttu-id="dbaea-110">Uygulamanız başlatıldığında işleyicinin bir örneği oluşturulacaktır ve dı, oluşturucuya kayıtlı olarak eklenir `ILoggerFactory` .</span><span class="sxs-lookup"><span data-stu-id="dbaea-110">An instance of the handler will be created when your application starts, and DI will inject the registered `ILoggerFactory` into your constructor.</span></span>
+<span data-ttu-id="e2ff3-111">Uygulama başlatıldığında işleyicinin bir örneği oluşturulur ve bu Oluşturucu, oluşturucuya kayıtlı öğesini çıkartır `ILoggerFactory` .</span><span class="sxs-lookup"><span data-stu-id="e2ff3-111">An instance of the handler is created when the app starts, and DI injects the registered `ILoggerFactory` into the constructor.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="dbaea-111">Entity Framework kullanan işleyiciler tekton olarak kaydedilmelidir.</span><span class="sxs-lookup"><span data-stu-id="dbaea-111">Handlers that use Entity Framework shouldn't be registered as singletons.</span></span>
+> <span data-ttu-id="e2ff3-112">Entity Framework kullanan işleyiciler tekton olarak kaydedilmelidir.</span><span class="sxs-lookup"><span data-stu-id="e2ff3-112">Handlers that use Entity Framework shouldn't be registered as singletons.</span></span>
