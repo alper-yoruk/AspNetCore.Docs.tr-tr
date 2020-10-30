@@ -1,48 +1,49 @@
 ---
-title: ASP.NET Core 2,1 MVC SameSite cookie örneği
+title: 'ASP.NET Core 2,1 MVC SameSite :::no-loc(cookie)::: örneği'
 author: rick-anderson
-description: ASP.NET Core 2,1 MVC SameSite cookie örneği
+description: 'ASP.NET Core 2,1 MVC SameSite :::no-loc(cookie)::: örneği'
 monikerRange: '>= aspnetcore-2.1 < aspnetcore-3.0'
 ms.author: riande
 ms.custom: mvc
 ms.date: 12/03/2019
 no-loc:
-- ASP.NET Core Identity
-- cookie
-- Cookie
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- ':::no-loc(appsettings.json):::'
+- ':::no-loc(ASP.NET Core Identity):::'
+- ':::no-loc(cookie):::'
+- ':::no-loc(Cookie):::'
+- ':::no-loc(Blazor):::'
+- ':::no-loc(Blazor Server):::'
+- ':::no-loc(Blazor WebAssembly):::'
+- ':::no-loc(Identity):::'
+- ":::no-loc(Let's Encrypt):::"
+- ':::no-loc(Razor):::'
+- ':::no-loc(SignalR):::'
 uid: security/samesite/mvc21
-ms.openlocfilehash: 38e5f0d1a2ecf5b46f73bf8574f73934a070880f
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 61878af0f9af72284b43ffd46cca42b0cf043326
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722611"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051557"
 ---
-# <a name="aspnet-core-21-mvc-samesite-no-loccookie-sample"></a><span data-ttu-id="59fdd-103">ASP.NET Core 2,1 MVC SameSite cookie örneği</span><span class="sxs-lookup"><span data-stu-id="59fdd-103">ASP.NET Core 2.1 MVC SameSite cookie sample</span></span>
+# <a name="aspnet-core-21-mvc-samesite-no-loccookie-sample"></a><span data-ttu-id="58e96-103">ASP.NET Core 2,1 MVC SameSite :::no-loc(cookie)::: örneği</span><span class="sxs-lookup"><span data-stu-id="58e96-103">ASP.NET Core 2.1 MVC SameSite :::no-loc(cookie)::: sample</span></span>
 
-<span data-ttu-id="59fdd-104">ASP.NET Core 2,1, [SameSite](https://www.owasp.org/index.php/SameSite) özniteliği için yerleşik desteğe sahiptir, ancak özgün standart olarak yazılmıştır.</span><span class="sxs-lookup"><span data-stu-id="59fdd-104">ASP.NET Core 2.1 has built-in support for the [SameSite](https://www.owasp.org/index.php/SameSite) attribute, but it was written to the original standard.</span></span> <span data-ttu-id="59fdd-105">[Düzeltme eki uygulanmış davranış](https://github.com/dotnet/aspnetcore/issues/8212) , `SameSite.None` `None` değerini değeri bir değere yaymaması yerine, ' ın bir değeriyle birlikte göstermek için öğesinin anlamını değiştirdi.</span><span class="sxs-lookup"><span data-stu-id="59fdd-105">The [patched behavior](https://github.com/dotnet/aspnetcore/issues/8212) changed the meaning of `SameSite.None` to emit the sameSite attribute with a value of `None`, rather than not emit the value at all.</span></span> <span data-ttu-id="59fdd-106">Değeri göstermek istiyorsanız, `SameSite` özelliğini-1 ' de ayarlayabilirsiniz cookie .</span><span class="sxs-lookup"><span data-stu-id="59fdd-106">If you want to not emit the value you can set the `SameSite` property on a cookie to -1.</span></span>
+<span data-ttu-id="58e96-104">ASP.NET Core 2,1, [SameSite](https://www.owasp.org/index.php/SameSite) özniteliği için yerleşik desteğe sahiptir, ancak özgün standart olarak yazılmıştır.</span><span class="sxs-lookup"><span data-stu-id="58e96-104">ASP.NET Core 2.1 has built-in support for the [SameSite](https://www.owasp.org/index.php/SameSite) attribute, but it was written to the original standard.</span></span> <span data-ttu-id="58e96-105">[Düzeltme eki uygulanmış davranış](https://github.com/dotnet/aspnetcore/issues/8212) , `SameSite.None` `None` değerini değeri bir değere yaymaması yerine, ' ın bir değeriyle birlikte göstermek için öğesinin anlamını değiştirdi.</span><span class="sxs-lookup"><span data-stu-id="58e96-105">The [patched behavior](https://github.com/dotnet/aspnetcore/issues/8212) changed the meaning of `SameSite.None` to emit the sameSite attribute with a value of `None`, rather than not emit the value at all.</span></span> <span data-ttu-id="58e96-106">Değeri göstermek istiyorsanız, `SameSite` özelliğini-1 ' de ayarlayabilirsiniz :::no-loc(cookie)::: .</span><span class="sxs-lookup"><span data-stu-id="58e96-106">If you want to not emit the value you can set the `SameSite` property on a :::no-loc(cookie)::: to -1.</span></span>
 
-[!INCLUDE[](~/includes/SameSiteIdentity.md)]
+[!INCLUDE[](~/includes/SameSite:::no-loc(Identity):::.md)]
 
-## <a name="writing-the-samesite-attribute"></a><a name="sampleCode"></a><span data-ttu-id="59fdd-107">SameSite özniteliği yazılıyor</span><span class="sxs-lookup"><span data-stu-id="59fdd-107">Writing the SameSite attribute</span></span>
+## <a name="writing-the-samesite-attribute"></a><a name="sampleCode"></a><span data-ttu-id="58e96-107">SameSite özniteliği yazılıyor</span><span class="sxs-lookup"><span data-stu-id="58e96-107">Writing the SameSite attribute</span></span>
 
-<span data-ttu-id="59fdd-108">Aşağıdakilerden birine bir SameSite özniteliği yazma örneği verilmiştir cookie :</span><span class="sxs-lookup"><span data-stu-id="59fdd-108">Following is an example of how to write a SameSite attribute on a cookie:</span></span>
+<span data-ttu-id="58e96-108">Aşağıdakilerden birine bir SameSite özniteliği yazma örneği verilmiştir :::no-loc(cookie)::: :</span><span class="sxs-lookup"><span data-stu-id="58e96-108">Following is an example of how to write a SameSite attribute on a :::no-loc(cookie)::::</span></span>
 
 ```c#
-var cookieOptions = new CookieOptions
+var :::no-loc(cookie):::Options = new :::no-loc(Cookie):::Options
 {
     // Set the secure flag, which Chrome's changes will require for SameSite none.
     // Note this will also require you to be running on HTTPS
     Secure = true,
 
-    // Set the cookie to HTTP only which is good practice unless you really do need
+    // Set the :::no-loc(cookie)::: to HTTP only which is good practice unless you really do need
     // to access it client side in scripts.
     HttpOnly = true,
 
@@ -51,46 +52,46 @@ var cookieOptions = new CookieOptions
     SameSite = SameSiteMode.None
 };
 
-// Add the cookie to the response cookie collection
-Response.Cookies.Append(CookieName, "cookieValue", cookieOptions);
+// Add the :::no-loc(cookie)::: to the response :::no-loc(cookie)::: collection
+Response.:::no-loc(Cookie):::s.Append(:::no-loc(Cookie):::Name, ":::no-loc(cookie):::Value", :::no-loc(cookie):::Options);
 ```
 
-## <a name="setting-no-loccookie-authentication-and-session-state-no-loccookies"></a><span data-ttu-id="59fdd-109">CookieKimlik doğrulaması ve oturum durumu cookie s ayarlanıyor</span><span class="sxs-lookup"><span data-stu-id="59fdd-109">Setting Cookie Authentication and Session State cookies</span></span>
+## <a name="setting-no-loccookie-authentication-and-session-state-no-loccookies"></a><span data-ttu-id="58e96-109">:::no-loc(Cookie):::Kimlik doğrulaması ve oturum durumu :::no-loc(cookie)::: s ayarlanıyor</span><span class="sxs-lookup"><span data-stu-id="58e96-109">Setting :::no-loc(Cookie)::: Authentication and Session State :::no-loc(cookie):::s</span></span>
 
-<span data-ttu-id="59fdd-110">Cookie kimlik doğrulama, oturum durumu ve [diğer diğer bileşenler](../samesite.md?view=aspnetcore-2.1) aynı site seçeneklerini seçenekler aracılığıyla ayarlar Cookie , örneğin</span><span class="sxs-lookup"><span data-stu-id="59fdd-110">Cookie authentication, session state and [various other components](../samesite.md?view=aspnetcore-2.1) set their sameSite options via Cookie options, for example</span></span>
+<span data-ttu-id="58e96-110">:::no-loc(Cookie)::: kimlik doğrulama, oturum durumu ve [diğer diğer bileşenler](../samesite.md?view=aspnetcore-2.1) aynı site seçeneklerini seçenekler aracılığıyla ayarlar :::no-loc(Cookie)::: , örneğin</span><span class="sxs-lookup"><span data-stu-id="58e96-110">:::no-loc(Cookie)::: authentication, session state and [various other components](../samesite.md?view=aspnetcore-2.1) set their sameSite options via :::no-loc(Cookie)::: options, for example</span></span>
 
 ```c#
-services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-    .AddCookie(options =>
+services.AddAuthentication(:::no-loc(Cookie):::AuthenticationDefaults.AuthenticationScheme)
+    .Add:::no-loc(Cookie):::(options =>
     {
-        options.Cookie.SameSite = SameSiteMode.None;
-        options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-        options.Cookie.IsEssential = true;
+        options.:::no-loc(Cookie):::.SameSite = SameSiteMode.None;
+        options.:::no-loc(Cookie):::.SecurePolicy = :::no-loc(Cookie):::SecurePolicy.Always;
+        options.:::no-loc(Cookie):::.IsEssential = true;
     });
 
 services.AddSession(options =>
 {
-    options.Cookie.SameSite = SameSiteMode.None;
-    options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
-    options.Cookie.IsEssential = true;
+    options.:::no-loc(Cookie):::.SameSite = SameSiteMode.None;
+    options.:::no-loc(Cookie):::.SecurePolicy = :::no-loc(Cookie):::SecurePolicy.Always;
+    options.:::no-loc(Cookie):::.IsEssential = true;
 });
 ```
 
-<span data-ttu-id="59fdd-111">Yukarıdaki kodda, hem cookie kimlik doğrulaması hem de oturum durumu, `None` özniteliği bir değerle yayın `None` ve ayrıca güvenli özniteliğini true olarak ayarlayın.</span><span class="sxs-lookup"><span data-stu-id="59fdd-111">In the preceding code, both cookie authentication and session state set their sameSite attribute to `None`, emitting the attribute with a `None` value, and also set the Secure attribute to true.</span></span>
+<span data-ttu-id="58e96-111">Yukarıdaki kodda, hem :::no-loc(cookie)::: kimlik doğrulaması hem de oturum durumu, `None` özniteliği bir değerle yayın `None` ve ayrıca güvenli özniteliğini true olarak ayarlayın.</span><span class="sxs-lookup"><span data-stu-id="58e96-111">In the preceding code, both :::no-loc(cookie)::: authentication and session state set their sameSite attribute to `None`, emitting the attribute with a `None` value, and also set the Secure attribute to true.</span></span>
 
-### <a name="run-the-sample"></a><span data-ttu-id="59fdd-112">Örneği çalıştırma</span><span class="sxs-lookup"><span data-stu-id="59fdd-112">Run the sample</span></span>
+### <a name="run-the-sample"></a><span data-ttu-id="58e96-112">Örneği çalıştırma</span><span class="sxs-lookup"><span data-stu-id="58e96-112">Run the sample</span></span>
 
-<span data-ttu-id="59fdd-113">[Örnek projeyi](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore21MVC)çalıştırırsanız, tarayıcı hata ayıklayıcıyı ilk sayfaya yükleyin ve site koleksiyonunu görüntülemek için kullanın cookie .</span><span class="sxs-lookup"><span data-stu-id="59fdd-113">If you run the [sample project](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore21MVC), load your browser debugger on the initial page and use it to view the cookie collection for the site.</span></span> <span data-ttu-id="59fdd-114">Bunu Edge ve Chrome 'da yapmak için `F12` , `Application` sekmesini seçin ve bölümünde seçeneğinin altındaki site URL 'sine tıklayın `Cookies` `Storage` .</span><span class="sxs-lookup"><span data-stu-id="59fdd-114">To do so in Edge and Chrome press `F12` then select the `Application` tab and click the site URL under the `Cookies` option in the `Storage` section.</span></span>
+<span data-ttu-id="58e96-113">[Örnek projeyi](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore21MVC)çalıştırırsanız, tarayıcı hata ayıklayıcıyı ilk sayfaya yükleyin ve site koleksiyonunu görüntülemek için kullanın :::no-loc(cookie)::: .</span><span class="sxs-lookup"><span data-stu-id="58e96-113">If you run the [sample project](https://github.com/blowdart/AspNetSameSiteSamples/tree/master/AspNetCore21MVC), load your browser debugger on the initial page and use it to view the :::no-loc(cookie)::: collection for the site.</span></span> <span data-ttu-id="58e96-114">Bunu Edge ve Chrome 'da yapmak için `F12` , `Application` sekmesini seçin ve bölümünde seçeneğinin altındaki site URL 'sine tıklayın `:::no-loc(Cookie):::s` `Storage` .</span><span class="sxs-lookup"><span data-stu-id="58e96-114">To do so in Edge and Chrome press `F12` then select the `Application` tab and click the site URL under the `:::no-loc(Cookie):::s` option in the `Storage` section.</span></span>
 
 ![Tarayıcı hata ayıklayıcı::: No-Loc (Cookie)::: List](BrowserDebugger.png)
 
-<span data-ttu-id="59fdd-116">cookie"SameSite oluştur" düğmesine tıkladığınızda örnek tarafından oluşturulan görüntüden Cookie `Lax` , [örnek kodda](#sampleCode)ayarlanan değerle eşleşen bir SameSite özniteliği değeri olduğunu görebilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="59fdd-116">You can see from the image above that the cookie created by the sample when you click the "Create SameSite Cookie" button has a SameSite attribute value of `Lax`, matching the value set in the [sample code](#sampleCode).</span></span>
+<span data-ttu-id="58e96-116">:::no-loc(cookie):::"SameSite oluştur" düğmesine tıkladığınızda örnek tarafından oluşturulan görüntüden :::no-loc(Cookie)::: `Lax` , [örnek kodda](#sampleCode)ayarlanan değerle eşleşen bir SameSite özniteliği değeri olduğunu görebilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="58e96-116">You can see from the image above that the :::no-loc(cookie)::: created by the sample when you click the "Create SameSite :::no-loc(Cookie):::" button has a SameSite attribute value of `Lax`, matching the value set in the [sample code](#sampleCode).</span></span>
 
-## <a name="intercepting-no-loccookies"></a><a name="interception"></a><span data-ttu-id="59fdd-117">Kesintiye cookie uğrat</span><span class="sxs-lookup"><span data-stu-id="59fdd-117">Intercepting cookies</span></span>
+## <a name="intercepting-no-loccookies"></a><a name="interception"></a><span data-ttu-id="58e96-117">Kesintiye :::no-loc(cookie)::: uğrat</span><span class="sxs-lookup"><span data-stu-id="58e96-117">Intercepting :::no-loc(cookie):::s</span></span>
 
-<span data-ttu-id="59fdd-118">cookieKullanıcıların tarayıcı aracısındaki desteğine göre None değerini ayarlamak için, `CookiePolicy` ara yazılımı kullanmanız gerekir.</span><span class="sxs-lookup"><span data-stu-id="59fdd-118">In order to intercept cookies, to adjust the none value according to its support in the user's browser agent you must use the `CookiePolicy` middleware.</span></span> <span data-ttu-id="59fdd-119">Bu, içinde yazma yapan ve yapılandırılan bileşenlerden **önce** http istek işlem hattının yerleştirilmesi gerekir cookie `ConfigureServices()` .</span><span class="sxs-lookup"><span data-stu-id="59fdd-119">This must be placed into the http request pipeline **before** any components that write cookies and configured within `ConfigureServices()`.</span></span>
+<span data-ttu-id="58e96-118">:::no-loc(cookie):::Kullanıcıların tarayıcı aracısındaki desteğine göre None değerini ayarlamak için, `:::no-loc(Cookie):::Policy` ara yazılımı kullanmanız gerekir.</span><span class="sxs-lookup"><span data-stu-id="58e96-118">In order to intercept :::no-loc(cookie):::s, to adjust the none value according to its support in the user's browser agent you must use the `:::no-loc(Cookie):::Policy` middleware.</span></span> <span data-ttu-id="58e96-119">Bu, içinde yazma yapan ve yapılandırılan bileşenlerden **önce** http istek işlem hattının yerleştirilmesi gerekir :::no-loc(cookie)::: `ConfigureServices()` .</span><span class="sxs-lookup"><span data-stu-id="58e96-119">This must be placed into the http request pipeline **before** any components that write :::no-loc(cookie):::s and configured within `ConfigureServices()`.</span></span>
 
-<span data-ttu-id="59fdd-120">`app.UseCookiePolicy()` `Configure(IApplicationBuilder, IHostingEnvironment)` [Startup.cs](https://github.com/blowdart/AspNetSameSiteSamples/blob/master/AspNetCore21MVC/Startup.cs)içindeki yönteminde işlem hattı kullanımına eklemek için.</span><span class="sxs-lookup"><span data-stu-id="59fdd-120">To insert it into the pipeline use `app.UseCookiePolicy()` in the `Configure(IApplicationBuilder, IHostingEnvironment)` method in [Startup.cs](https://github.com/blowdart/AspNetSameSiteSamples/blob/master/AspNetCore21MVC/Startup.cs).</span></span> <span data-ttu-id="59fdd-121">Örneğin:</span><span class="sxs-lookup"><span data-stu-id="59fdd-121">For example:</span></span>
+<span data-ttu-id="58e96-120">`app.Use:::no-loc(Cookie):::Policy()` `Configure(IApplicationBuilder, IHostingEnvironment)` [Startup.cs](https://github.com/blowdart/AspNetSameSiteSamples/blob/master/AspNetCore21MVC/Startup.cs)içindeki yönteminde işlem hattı kullanımına eklemek için.</span><span class="sxs-lookup"><span data-stu-id="58e96-120">To insert it into the pipeline use `app.Use:::no-loc(Cookie):::Policy()` in the `Configure(IApplicationBuilder, IHostingEnvironment)` method in [Startup.cs](https://github.com/blowdart/AspNetSameSiteSamples/blob/master/AspNetCore21MVC/Startup.cs).</span></span> <span data-ttu-id="58e96-121">Örneğin:</span><span class="sxs-lookup"><span data-stu-id="58e96-121">For example:</span></span>
 
 ```c#
 public void Configure(IApplicationBuilder app, IHostingEnvironment env)
@@ -107,7 +108,7 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 
     app.UseHttpsRedirection();
     app.UseStaticFiles();
-    app.UseCookiePolicy();
+    app.Use:::no-loc(Cookie):::Policy();
     app.UseAuthentication();
     app.UseSession();
 
@@ -120,23 +121,23 @@ public void Configure(IApplicationBuilder app, IHostingEnvironment env)
 }
 ```
 
-<span data-ttu-id="59fdd-122">Ardından, `ConfigureServices(IServiceCollection services)` cookie ilke eklendiği veya silindiği zaman bir yardımcı sınıfa çağırmak için ilkeyi yapılandırın cookie .</span><span class="sxs-lookup"><span data-stu-id="59fdd-122">Then in the `ConfigureServices(IServiceCollection services)` configure the cookie policy to call out to a helper class when cookies are appended or deleted.</span></span> <span data-ttu-id="59fdd-123">Örneğin:</span><span class="sxs-lookup"><span data-stu-id="59fdd-123">For example:</span></span>
+<span data-ttu-id="58e96-122">Ardından, `ConfigureServices(IServiceCollection services)` :::no-loc(cookie)::: ilke eklendiği veya silindiği zaman bir yardımcı sınıfa çağırmak için ilkeyi yapılandırın :::no-loc(cookie)::: .</span><span class="sxs-lookup"><span data-stu-id="58e96-122">Then in the `ConfigureServices(IServiceCollection services)` configure the :::no-loc(cookie)::: policy to call out to a helper class when :::no-loc(cookie):::s are appended or deleted.</span></span> <span data-ttu-id="58e96-123">Örneğin:</span><span class="sxs-lookup"><span data-stu-id="58e96-123">For example:</span></span>
 
 ```c#
 public void ConfigureServices(IServiceCollection services)
 {
-    services.Configure<CookiePolicyOptions>(options =>
+    services.Configure<:::no-loc(Cookie):::PolicyOptions>(options =>
     {
         options.CheckConsentNeeded = context => true;
         options.MinimumSameSitePolicy = SameSiteMode.None;
-        options.OnAppendCookie = cookieContext =>
-            CheckSameSite(cookieContext.Context, cookieContext.CookieOptions);
-        options.OnDeleteCookie = cookieContext =>
-            CheckSameSite(cookieContext.Context, cookieContext.CookieOptions);
+        options.OnAppend:::no-loc(Cookie)::: = :::no-loc(cookie):::Context =>
+            CheckSameSite(:::no-loc(cookie):::Context.Context, :::no-loc(cookie):::Context.:::no-loc(Cookie):::Options);
+        options.OnDelete:::no-loc(Cookie)::: = :::no-loc(cookie):::Context =>
+            CheckSameSite(:::no-loc(cookie):::Context.Context, :::no-loc(cookie):::Context.:::no-loc(Cookie):::Options);
     });
 }
 
-private void CheckSameSite(HttpContext httpContext, CookieOptions options)
+private void CheckSameSite(HttpContext httpContext, :::no-loc(Cookie):::Options options)
 {
     if (options.SameSite == SameSiteMode.None)
     {
@@ -149,30 +150,30 @@ private void CheckSameSite(HttpContext httpContext, CookieOptions options)
 }
 ```
 
-<span data-ttu-id="59fdd-124">Yardımcı işlevi `CheckSameSite(HttpContext, CookieOptions)` :</span><span class="sxs-lookup"><span data-stu-id="59fdd-124">The helper function `CheckSameSite(HttpContext, CookieOptions)`:</span></span>
+<span data-ttu-id="58e96-124">Yardımcı işlevi `CheckSameSite(HttpContext, :::no-loc(Cookie):::Options)` :</span><span class="sxs-lookup"><span data-stu-id="58e96-124">The helper function `CheckSameSite(HttpContext, :::no-loc(Cookie):::Options)`:</span></span>
 
-* <span data-ttu-id="59fdd-125">cookieİstekleri isteğin sonuna eklendiğinde veya istekten silindiği zaman çağrılır.</span><span class="sxs-lookup"><span data-stu-id="59fdd-125">Is called when cookies are appended to the request or deleted from the request.</span></span>
-* <span data-ttu-id="59fdd-126">`SameSite`Özelliğinin olarak ayarlanmış olup olmadığını denetler `None` .</span><span class="sxs-lookup"><span data-stu-id="59fdd-126">Checks to see if the `SameSite` property is set to `None`.</span></span>
-* <span data-ttu-id="59fdd-127">`SameSite`, Olarak ayarlanmışsa `None` ve geçerli kullanıcı aracısına None öznitelik değerini desteklemediği bilinmektedir.</span><span class="sxs-lookup"><span data-stu-id="59fdd-127">If `SameSite` is set to `None` and the current user agent is known to not support the none attribute value.</span></span> <span data-ttu-id="59fdd-128">Denetim, [Samesitesupport](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/samesite/sample/snippets/SameSiteSupport.cs) sınıfı kullanılarak yapılır:</span><span class="sxs-lookup"><span data-stu-id="59fdd-128">The check is done using the [SameSiteSupport](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/samesite/sample/snippets/SameSiteSupport.cs) class:</span></span>
-  * <span data-ttu-id="59fdd-129">`SameSite`Özelliği özelliği olarak ayarlayarak değeri yaymayan ayarlar`(SameSiteMode)(-1)`</span><span class="sxs-lookup"><span data-stu-id="59fdd-129">Sets `SameSite` to not emit the value by setting the property to `(SameSiteMode)(-1)`</span></span>
+* <span data-ttu-id="58e96-125">:::no-loc(cookie):::İstekleri isteğin sonuna eklendiğinde veya istekten silindiği zaman çağrılır.</span><span class="sxs-lookup"><span data-stu-id="58e96-125">Is called when :::no-loc(cookie):::s are appended to the request or deleted from the request.</span></span>
+* <span data-ttu-id="58e96-126">`SameSite`Özelliğinin olarak ayarlanmış olup olmadığını denetler `None` .</span><span class="sxs-lookup"><span data-stu-id="58e96-126">Checks to see if the `SameSite` property is set to `None`.</span></span>
+* <span data-ttu-id="58e96-127">`SameSite`, Olarak ayarlanmışsa `None` ve geçerli kullanıcı aracısına None öznitelik değerini desteklemediği bilinmektedir.</span><span class="sxs-lookup"><span data-stu-id="58e96-127">If `SameSite` is set to `None` and the current user agent is known to not support the none attribute value.</span></span> <span data-ttu-id="58e96-128">Denetim, [Samesitesupport](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/samesite/sample/snippets/SameSiteSupport.cs) sınıfı kullanılarak yapılır:</span><span class="sxs-lookup"><span data-stu-id="58e96-128">The check is done using the [SameSiteSupport](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/security/samesite/sample/snippets/SameSiteSupport.cs) class:</span></span>
+  * <span data-ttu-id="58e96-129">`SameSite`Özelliği özelliği olarak ayarlayarak değeri yaymayan ayarlar`(SameSiteMode)(-1)`</span><span class="sxs-lookup"><span data-stu-id="58e96-129">Sets `SameSite` to not emit the value by setting the property to `(SameSiteMode)(-1)`</span></span>
 
-## <a name="targeting-net-framework"></a><span data-ttu-id="59fdd-130">Hedefleme .NET Framework</span><span class="sxs-lookup"><span data-stu-id="59fdd-130">Targeting .NET Framework</span></span>
+## <a name="targeting-net-framework"></a><span data-ttu-id="58e96-130">Hedefleme .NET Framework</span><span class="sxs-lookup"><span data-stu-id="58e96-130">Targeting .NET Framework</span></span>
 
-<span data-ttu-id="59fdd-131">ASP.NET Core ve System. Web (ASP.NET Classic), SameSite 'nin bağımsız uygulamalarına sahiptir.</span><span class="sxs-lookup"><span data-stu-id="59fdd-131">ASP.NET Core and System.Web (ASP.NET Classic) have independent implementations of SameSite.</span></span> <span data-ttu-id="59fdd-132">ASP.NET Core kullanılıyorsa veya System. Web SameSite en düşük çerçeve sürümü gereksinimi (.NET 4.7.2) ASP.NET Core için .NET Framework, için SameSite KB yamaları gerekli değildir.</span><span class="sxs-lookup"><span data-stu-id="59fdd-132">The SameSite KB patches for .NET Framework are not required if using ASP.NET Core nor does the System.Web SameSite minimum framework version requirement (.NET 4.7.2) apply to ASP.NET Core.</span></span>
+<span data-ttu-id="58e96-131">ASP.NET Core ve System. Web (ASP.NET Classic), SameSite 'nin bağımsız uygulamalarına sahiptir.</span><span class="sxs-lookup"><span data-stu-id="58e96-131">ASP.NET Core and System.Web (ASP.NET Classic) have independent implementations of SameSite.</span></span> <span data-ttu-id="58e96-132">ASP.NET Core kullanılıyorsa veya System. Web SameSite en düşük çerçeve sürümü gereksinimi (.NET 4.7.2) ASP.NET Core için .NET Framework, için SameSite KB yamaları gerekli değildir.</span><span class="sxs-lookup"><span data-stu-id="58e96-132">The SameSite KB patches for .NET Framework are not required if using ASP.NET Core nor does the System.Web SameSite minimum framework version requirement (.NET 4.7.2) apply to ASP.NET Core.</span></span>
 
-<span data-ttu-id="59fdd-133">.NET üzerindeki ASP.NET Core, uygun düzeltmeleri almak için NuGet paket bağımlılıklarının güncelleştirilmesini gerektirir.</span><span class="sxs-lookup"><span data-stu-id="59fdd-133">ASP.NET Core on .NET requires updating nuget package dependencies to get the appropriate fixes.</span></span>
+<span data-ttu-id="58e96-133">.NET üzerindeki ASP.NET Core, uygun düzeltmeleri almak için NuGet paket bağımlılıklarının güncelleştirilmesini gerektirir.</span><span class="sxs-lookup"><span data-stu-id="58e96-133">ASP.NET Core on .NET requires updating nuget package dependencies to get the appropriate fixes.</span></span>
 
-<span data-ttu-id="59fdd-134">.NET Framework ASP.NET Core değişiklikleri almak için, düzeltme eki uygulanmış paketlere ve sürümlere (2.1.14 veya üzeri 2,1 sürümler) doğrudan başvurtığınızdan emin olun.</span><span class="sxs-lookup"><span data-stu-id="59fdd-134">To get the ASP.NET Core changes for .NET Framework ensure that you have a direct reference to the patched packages and versions (2.1.14 or later 2.1 versions).</span></span>
+<span data-ttu-id="58e96-134">.NET Framework ASP.NET Core değişiklikleri almak için, düzeltme eki uygulanmış paketlere ve sürümlere (2.1.14 veya üzeri 2,1 sürümler) doğrudan başvurtığınızdan emin olun.</span><span class="sxs-lookup"><span data-stu-id="58e96-134">To get the ASP.NET Core changes for .NET Framework ensure that you have a direct reference to the patched packages and versions (2.1.14 or later 2.1 versions).</span></span>
 
 ```xml
 <PackageReference Include="Microsoft.Net.Http.Headers" Version="2.1.14" />
-<PackageReference Include="Microsoft.AspNetCore.CookiePolicy" Version="2.1.14" />
+<PackageReference Include="Microsoft.AspNetCore.:::no-loc(Cookie):::Policy" Version="2.1.14" />
 ```
 
-### <a name="more-information"></a><span data-ttu-id="59fdd-135">Daha Fazla Bilgi</span><span class="sxs-lookup"><span data-stu-id="59fdd-135">More Information</span></span>
+### <a name="more-information"></a><span data-ttu-id="58e96-135">Daha Fazla Bilgi</span><span class="sxs-lookup"><span data-stu-id="58e96-135">More Information</span></span>
  
-<span data-ttu-id="59fdd-136">[Chrome güncelleştirmeleri](https://www.chromium.org/updates/same-site) 
+<span data-ttu-id="58e96-136">[Chrome güncelleştirmeleri](https://www.chromium.org/updates/same-site) 
  [ASP.NET Core SameSite belgeleri](../samesite.md?view=aspnetcore-2.1) 
- [ASP.NET Core 2,1 SameSite değişiklik duyurusu](https://github.com/dotnet/aspnetcore/issues/8212)</span><span class="sxs-lookup"><span data-stu-id="59fdd-136">[Chrome Updates](https://www.chromium.org/updates/same-site)
+ [ASP.NET Core 2,1 SameSite değişiklik duyurusu](https://github.com/dotnet/aspnetcore/issues/8212)</span><span class="sxs-lookup"><span data-stu-id="58e96-136">[Chrome Updates](https://www.chromium.org/updates/same-site)
 [ASP.NET Core SameSite Documentation](../samesite.md?view=aspnetcore-2.1)
 [ASP.NET Core 2.1 SameSite Change Announcement](https://github.com/dotnet/aspnetcore/issues/8212)</span></span>

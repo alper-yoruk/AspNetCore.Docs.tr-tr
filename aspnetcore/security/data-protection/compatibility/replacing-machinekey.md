@@ -5,55 +5,56 @@ description: Yeni ve daha güvenli bir veri koruma sisteminin kullanımına izin
 ms.author: riande
 ms.date: 04/06/2019
 no-loc:
-- ASP.NET Core Identity
-- cookie
-- Cookie
-- Blazor
-- Blazor Server
-- Blazor WebAssembly
-- Identity
-- Let's Encrypt
-- Razor
-- SignalR
+- ':::no-loc(appsettings.json):::'
+- ':::no-loc(ASP.NET Core Identity):::'
+- ':::no-loc(cookie):::'
+- ':::no-loc(Cookie):::'
+- ':::no-loc(Blazor):::'
+- ':::no-loc(Blazor Server):::'
+- ':::no-loc(Blazor WebAssembly):::'
+- ':::no-loc(Identity):::'
+- ":::no-loc(Let's Encrypt):::"
+- ':::no-loc(Razor):::'
+- ':::no-loc(SignalR):::'
 uid: security/data-protection/compatibility/replacing-machinekey
-ms.openlocfilehash: 8cae0b8f1c4582e272061ff87868b32568dfe595
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 7c6766fa20b0df021013da77b5d88fecefd40c62
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625576"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053065"
 ---
-# <a name="replace-the-aspnet-machinekey-in-aspnet-core"></a><span data-ttu-id="d13fa-103">ASP.NET Core ASP.NET machineKey değiştirme</span><span class="sxs-lookup"><span data-stu-id="d13fa-103">Replace the ASP.NET machineKey in ASP.NET Core</span></span>
+# <a name="replace-the-aspnet-machinekey-in-aspnet-core"></a><span data-ttu-id="20cb5-103">ASP.NET Core ASP.NET machineKey değiştirme</span><span class="sxs-lookup"><span data-stu-id="20cb5-103">Replace the ASP.NET machineKey in ASP.NET Core</span></span>
 
 <a name="compatibility-replacing-machinekey"></a>
 
-<span data-ttu-id="d13fa-104">`<machineKey>`ASP.NET içindeki öğesinin uygulanması [değiştirilebilir](https://blogs.msdn.microsoft.com/webdev/2012/10/23/cryptographic-improvements-in-asp-net-4-5-pt-2/).</span><span class="sxs-lookup"><span data-stu-id="d13fa-104">The implementation of the `<machineKey>` element in ASP.NET [is replaceable](https://blogs.msdn.microsoft.com/webdev/2012/10/23/cryptographic-improvements-in-asp-net-4-5-pt-2/).</span></span> <span data-ttu-id="d13fa-105">Bu, ASP.NET şifreleme yordamlarına yapılan çağrıların, yeni veri koruma sistemi dahil olmak üzere bir değiştirme veri koruma mekanizması aracılığıyla yönlendirilmesini sağlar.</span><span class="sxs-lookup"><span data-stu-id="d13fa-105">This allows most calls to ASP.NET cryptographic routines to be routed through a replacement data protection mechanism, including the new data protection system.</span></span>
+<span data-ttu-id="20cb5-104">`<machineKey>`ASP.NET içindeki öğesinin uygulanması [değiştirilebilir](https://blogs.msdn.microsoft.com/webdev/2012/10/23/cryptographic-improvements-in-asp-net-4-5-pt-2/).</span><span class="sxs-lookup"><span data-stu-id="20cb5-104">The implementation of the `<machineKey>` element in ASP.NET [is replaceable](https://blogs.msdn.microsoft.com/webdev/2012/10/23/cryptographic-improvements-in-asp-net-4-5-pt-2/).</span></span> <span data-ttu-id="20cb5-105">Bu, ASP.NET şifreleme yordamlarına yapılan çağrıların, yeni veri koruma sistemi dahil olmak üzere bir değiştirme veri koruma mekanizması aracılığıyla yönlendirilmesini sağlar.</span><span class="sxs-lookup"><span data-stu-id="20cb5-105">This allows most calls to ASP.NET cryptographic routines to be routed through a replacement data protection mechanism, including the new data protection system.</span></span>
 
-## <a name="package-installation"></a><span data-ttu-id="d13fa-106">Paket yüklemesi</span><span class="sxs-lookup"><span data-stu-id="d13fa-106">Package installation</span></span>
+## <a name="package-installation"></a><span data-ttu-id="20cb5-106">Paket yüklemesi</span><span class="sxs-lookup"><span data-stu-id="20cb5-106">Package installation</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="d13fa-107">Yeni veri koruma sistemi yalnızca .NET 4.5.1 veya üstünü hedefleyen mevcut bir ASP.NET uygulamasına yüklenebilir.</span><span class="sxs-lookup"><span data-stu-id="d13fa-107">The new data protection system can only be installed into an existing ASP.NET application targeting .NET 4.5.1 or later.</span></span> <span data-ttu-id="d13fa-108">Uygulama .NET 4,5 veya daha düşük bir düzeye hedefliyorsa yükleme başarısız olur.</span><span class="sxs-lookup"><span data-stu-id="d13fa-108">Installation will fail if the application targets .NET 4.5 or lower.</span></span>
+> <span data-ttu-id="20cb5-107">Yeni veri koruma sistemi yalnızca .NET 4.5.1 veya üstünü hedefleyen mevcut bir ASP.NET uygulamasına yüklenebilir.</span><span class="sxs-lookup"><span data-stu-id="20cb5-107">The new data protection system can only be installed into an existing ASP.NET application targeting .NET 4.5.1 or later.</span></span> <span data-ttu-id="20cb5-108">Uygulama .NET 4,5 veya daha düşük bir düzeye hedefliyorsa yükleme başarısız olur.</span><span class="sxs-lookup"><span data-stu-id="20cb5-108">Installation will fail if the application targets .NET 4.5 or lower.</span></span>
 
-<span data-ttu-id="d13fa-109">Yeni veri koruma sistemini var olan bir ASP.NET 4.5.1 + projesine yüklemek için, Microsoft.AspNetCore.DataProtection.SystemWeb paketini yüklemelisiniz.</span><span class="sxs-lookup"><span data-stu-id="d13fa-109">To install the new data protection system into an existing ASP.NET 4.5.1+ project, install the package Microsoft.AspNetCore.DataProtection.SystemWeb.</span></span> <span data-ttu-id="d13fa-110">Bu, [varsayılan yapılandırma](xref:security/data-protection/configuration/default-settings) ayarları kullanılarak veri koruma sisteminin örneğini oluşturur.</span><span class="sxs-lookup"><span data-stu-id="d13fa-110">This will instantiate the data protection system using the [default configuration](xref:security/data-protection/configuration/default-settings) settings.</span></span>
+<span data-ttu-id="20cb5-109">Yeni veri koruma sistemini var olan bir ASP.NET 4.5.1 + projesine yüklemek için, Microsoft.AspNetCore.DataProtection.SystemWeb paketini yüklemelisiniz.</span><span class="sxs-lookup"><span data-stu-id="20cb5-109">To install the new data protection system into an existing ASP.NET 4.5.1+ project, install the package Microsoft.AspNetCore.DataProtection.SystemWeb.</span></span> <span data-ttu-id="20cb5-110">Bu, [varsayılan yapılandırma](xref:security/data-protection/configuration/default-settings) ayarları kullanılarak veri koruma sisteminin örneğini oluşturur.</span><span class="sxs-lookup"><span data-stu-id="20cb5-110">This will instantiate the data protection system using the [default configuration](xref:security/data-protection/configuration/default-settings) settings.</span></span>
 
-<span data-ttu-id="d13fa-111">Paketi yüklediğinizde, ASP.NET 'e, form kimlik doğrulaması, Görünüm durumu ve MachineKey. Protect çağrıları dahil olmak üzere [çoğu şifreleme işlemi](https://blogs.msdn.microsoft.com/webdev/2012/10/23/cryptographic-improvements-in-asp-net-4-5-pt-2/)için bunu kullanmasını söyleyen *Web.config* bir çizgi ekler.</span><span class="sxs-lookup"><span data-stu-id="d13fa-111">When you install the package, it inserts a line into *Web.config* that tells ASP.NET to use it for [most cryptographic operations](https://blogs.msdn.microsoft.com/webdev/2012/10/23/cryptographic-improvements-in-asp-net-4-5-pt-2/), including forms authentication, view state, and calls to MachineKey.Protect.</span></span> <span data-ttu-id="d13fa-112">Eklenen satır aşağıdaki gibi okur.</span><span class="sxs-lookup"><span data-stu-id="d13fa-112">The line that's inserted reads as follows.</span></span>
+<span data-ttu-id="20cb5-111">Paketi yüklediğinizde, ASP.NET 'e, form kimlik doğrulaması, Görünüm durumu ve MachineKey. Protect çağrıları dahil olmak üzere [çoğu şifreleme işlemi](https://blogs.msdn.microsoft.com/webdev/2012/10/23/cryptographic-improvements-in-asp-net-4-5-pt-2/)için bunu kullanmasını söyleyen *Web.config* bir çizgi ekler.</span><span class="sxs-lookup"><span data-stu-id="20cb5-111">When you install the package, it inserts a line into *Web.config* that tells ASP.NET to use it for [most cryptographic operations](https://blogs.msdn.microsoft.com/webdev/2012/10/23/cryptographic-improvements-in-asp-net-4-5-pt-2/), including forms authentication, view state, and calls to MachineKey.Protect.</span></span> <span data-ttu-id="20cb5-112">Eklenen satır aşağıdaki gibi okur.</span><span class="sxs-lookup"><span data-stu-id="20cb5-112">The line that's inserted reads as follows.</span></span>
 
 ```xml
 <machineKey compatibilityMode="Framework45" dataProtectorType="..." />
 ```
 
 >[!TIP]
-> <span data-ttu-id="d13fa-113">Yeni veri koruma sisteminin, `__VIEWSTATE` Aşağıdaki örnekte olduğu gibi "CfDJ8" ile başlaması gereken alanları inceleyerek, etkin olup olmadığını söyleyebilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="d13fa-113">You can tell if the new data protection system is active by inspecting fields like `__VIEWSTATE`, which should begin with "CfDJ8" as in the example below.</span></span> <span data-ttu-id="d13fa-114">"CfDJ8", veri koruma sistemi tarafından korunan bir yükü tanımlayan Magic "09 F0 C9 F0" üstbilgisinin Base64 gösterimidir.</span><span class="sxs-lookup"><span data-stu-id="d13fa-114">"CfDJ8" is the base64 representation of the magic "09 F0 C9 F0" header that identifies a payload protected by the data protection system.</span></span>
+> <span data-ttu-id="20cb5-113">Yeni veri koruma sisteminin, `__VIEWSTATE` Aşağıdaki örnekte olduğu gibi "CfDJ8" ile başlaması gereken alanları inceleyerek, etkin olup olmadığını söyleyebilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="20cb5-113">You can tell if the new data protection system is active by inspecting fields like `__VIEWSTATE`, which should begin with "CfDJ8" as in the example below.</span></span> <span data-ttu-id="20cb5-114">"CfDJ8", veri koruma sistemi tarafından korunan bir yükü tanımlayan Magic "09 F0 C9 F0" üstbilgisinin Base64 gösterimidir.</span><span class="sxs-lookup"><span data-stu-id="20cb5-114">"CfDJ8" is the base64 representation of the magic "09 F0 C9 F0" header that identifies a payload protected by the data protection system.</span></span>
 
 ```html
 <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="CfDJ8AWPr2EQPTBGs3L2GCZOpk...">
 ```
 
-## <a name="package-configuration"></a><span data-ttu-id="d13fa-115">Paket yapılandırması</span><span class="sxs-lookup"><span data-stu-id="d13fa-115">Package configuration</span></span>
+## <a name="package-configuration"></a><span data-ttu-id="20cb5-115">Paket yapılandırması</span><span class="sxs-lookup"><span data-stu-id="20cb5-115">Package configuration</span></span>
 
-<span data-ttu-id="d13fa-116">Veri koruma sistemi, varsayılan sıfır kurulum yapılandırmasıyla birlikte oluşturulur.</span><span class="sxs-lookup"><span data-stu-id="d13fa-116">The data protection system is instantiated with a default zero-setup configuration.</span></span> <span data-ttu-id="d13fa-117">Ancak, varsayılan anahtarlar yerel dosya sistemine kalıcı olduğundan, bu, bir gruba dağıtılan uygulamalar için çalışmaz.</span><span class="sxs-lookup"><span data-stu-id="d13fa-117">However, since by default keys are persisted to the local file system, this won't work for applications which are deployed in a farm.</span></span> <span data-ttu-id="d13fa-118">Bu sorunu çözmek için, alt sınıfları DataProtectionStartup ve ConfigureServices metodunu geçersiz kılan bir tür oluşturarak yapılandırmayı sağlayabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="d13fa-118">To resolve this, you can provide configuration by creating a type which subclasses DataProtectionStartup and overrides its ConfigureServices method.</span></span>
+<span data-ttu-id="20cb5-116">Veri koruma sistemi, varsayılan sıfır kurulum yapılandırmasıyla birlikte oluşturulur.</span><span class="sxs-lookup"><span data-stu-id="20cb5-116">The data protection system is instantiated with a default zero-setup configuration.</span></span> <span data-ttu-id="20cb5-117">Ancak, varsayılan anahtarlar yerel dosya sistemine kalıcı olduğundan, bu, bir gruba dağıtılan uygulamalar için çalışmaz.</span><span class="sxs-lookup"><span data-stu-id="20cb5-117">However, since by default keys are persisted to the local file system, this won't work for applications which are deployed in a farm.</span></span> <span data-ttu-id="20cb5-118">Bu sorunu çözmek için, alt sınıfları DataProtectionStartup ve ConfigureServices metodunu geçersiz kılan bir tür oluşturarak yapılandırmayı sağlayabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="20cb5-118">To resolve this, you can provide configuration by creating a type which subclasses DataProtectionStartup and overrides its ConfigureServices method.</span></span>
 
-<span data-ttu-id="d13fa-119">Aşağıda, her ikisi de anahtarların kalıcı olduğu ve REST 'de nasıl şifrelendikleri üzerinde yapılandırılmış bir özel veri koruma başlangıç türü örneği verilmiştir.</span><span class="sxs-lookup"><span data-stu-id="d13fa-119">Below is an example of a custom data protection startup type which configured both where keys are persisted and how they're encrypted at rest.</span></span> <span data-ttu-id="d13fa-120">Ayrıca, kendi uygulama adını sağlayarak varsayılan uygulama yalıtımı ilkesini geçersiz kılar.</span><span class="sxs-lookup"><span data-stu-id="d13fa-120">It also overrides the default app isolation policy by providing its own application name.</span></span>
+<span data-ttu-id="20cb5-119">Aşağıda, her ikisi de anahtarların kalıcı olduğu ve REST 'de nasıl şifrelendikleri üzerinde yapılandırılmış bir özel veri koruma başlangıç türü örneği verilmiştir.</span><span class="sxs-lookup"><span data-stu-id="20cb5-119">Below is an example of a custom data protection startup type which configured both where keys are persisted and how they're encrypted at rest.</span></span> <span data-ttu-id="20cb5-120">Ayrıca, kendi uygulama adını sağlayarak varsayılan uygulama yalıtımı ilkesini geçersiz kılar.</span><span class="sxs-lookup"><span data-stu-id="20cb5-120">It also overrides the default app isolation policy by providing its own application name.</span></span>
 
 ```csharp
 using System;
@@ -78,9 +79,9 @@ namespace DataProtectionDemo
 ```
 
 >[!TIP]
-> <span data-ttu-id="d13fa-121">Ayrıca, `<machineKey applicationName="my-app" ... />` SetApplicationName 'e açık bir çağrı yerine kullanabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="d13fa-121">You can also use `<machineKey applicationName="my-app" ... />` in place of an explicit call to SetApplicationName.</span></span> <span data-ttu-id="d13fa-122">Bu, geliştiricilerin yapılandırmak istiyorlarsa, uygulama adı ayarlarsa, geliştiricinin bir DataProtectionStartup ile türetilmiş tür oluşturmasını zormaktan kaçınmak için kullanışlı bir mekanizmadır.</span><span class="sxs-lookup"><span data-stu-id="d13fa-122">This is a convenience mechanism to avoid forcing the developer to create a DataProtectionStartup-derived type if all they wanted to configure was setting the application name.</span></span>
+> <span data-ttu-id="20cb5-121">Ayrıca, `<machineKey applicationName="my-app" ... />` SetApplicationName 'e açık bir çağrı yerine kullanabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="20cb5-121">You can also use `<machineKey applicationName="my-app" ... />` in place of an explicit call to SetApplicationName.</span></span> <span data-ttu-id="20cb5-122">Bu, geliştiricilerin yapılandırmak istiyorlarsa, uygulama adı ayarlarsa, geliştiricinin bir DataProtectionStartup ile türetilmiş tür oluşturmasını zormaktan kaçınmak için kullanışlı bir mekanizmadır.</span><span class="sxs-lookup"><span data-stu-id="20cb5-122">This is a convenience mechanism to avoid forcing the developer to create a DataProtectionStartup-derived type if all they wanted to configure was setting the application name.</span></span>
 
-<span data-ttu-id="d13fa-123">Bu özel yapılandırmayı etkinleştirmek için, Web.config dönün ve `<appSettings>` paket yüklemesinin yapılandırma dosyasına eklendiği öğeyi bulun.</span><span class="sxs-lookup"><span data-stu-id="d13fa-123">To enable this custom configuration, go back to Web.config and look for the `<appSettings>` element that the package install added to the config file.</span></span> <span data-ttu-id="d13fa-124">Aşağıdaki biçimlendirme gibi görünür:</span><span class="sxs-lookup"><span data-stu-id="d13fa-124">It will look like the following markup:</span></span>
+<span data-ttu-id="20cb5-123">Bu özel yapılandırmayı etkinleştirmek için, Web.config dönün ve `<appSettings>` paket yüklemesinin yapılandırma dosyasına eklendiği öğeyi bulun.</span><span class="sxs-lookup"><span data-stu-id="20cb5-123">To enable this custom configuration, go back to Web.config and look for the `<appSettings>` element that the package install added to the config file.</span></span> <span data-ttu-id="20cb5-124">Aşağıdaki biçimlendirme gibi görünür:</span><span class="sxs-lookup"><span data-stu-id="20cb5-124">It will look like the following markup:</span></span>
 
 ```xml
 <appSettings>
@@ -93,11 +94,11 @@ namespace DataProtectionDemo
 </appSettings>
 ```
 
-<span data-ttu-id="d13fa-125">Yeni oluşturduğunuz DataProtectionStartup türetilmiş türünün derleme nitelikli adı ile boş değeri girin.</span><span class="sxs-lookup"><span data-stu-id="d13fa-125">Fill in the blank value with the assembly-qualified name of the DataProtectionStartup-derived type you just created.</span></span> <span data-ttu-id="d13fa-126">Uygulamanın adı DataProtectionDemo ise, bu, aşağıdaki gibi görünür.</span><span class="sxs-lookup"><span data-stu-id="d13fa-126">If the name of the application is DataProtectionDemo, this would look like the below.</span></span>
+<span data-ttu-id="20cb5-125">Yeni oluşturduğunuz DataProtectionStartup türetilmiş türünün derleme nitelikli adı ile boş değeri girin.</span><span class="sxs-lookup"><span data-stu-id="20cb5-125">Fill in the blank value with the assembly-qualified name of the DataProtectionStartup-derived type you just created.</span></span> <span data-ttu-id="20cb5-126">Uygulamanın adı DataProtectionDemo ise, bu, aşağıdaki gibi görünür.</span><span class="sxs-lookup"><span data-stu-id="20cb5-126">If the name of the application is DataProtectionDemo, this would look like the below.</span></span>
 
 ```xml
 <add key="aspnet:dataProtectionStartupType"
      value="DataProtectionDemo.MyDataProtectionStartup, DataProtectionDemo" />
 ```
 
-<span data-ttu-id="d13fa-127">Yeni yapılandırılan veri koruma sistemi artık uygulamanın içinde kullanıma hazırdır.</span><span class="sxs-lookup"><span data-stu-id="d13fa-127">The newly-configured data protection system is now ready for use inside the application.</span></span>
+<span data-ttu-id="20cb5-127">Yeni yapılandırılan veri koruma sistemi artık uygulamanın içinde kullanıma hazırdır.</span><span class="sxs-lookup"><span data-stu-id="20cb5-127">The newly-configured data protection system is now ready for use inside the application.</span></span>
