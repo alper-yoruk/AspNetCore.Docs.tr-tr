@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/23/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-custom-storage-providers
-ms.openlocfilehash: a8414efeece1afd55d0f30d232ef360d0a21714c
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: c89098bf0b2c4396f9856aca2be9967af5df0cb7
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630139"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051908"
 ---
 # <a name="custom-storage-providers-for-no-locaspnet-core-identity"></a>İçin özel depolama sağlayıcıları ASP.NET Core Identity
 
@@ -34,7 +35,7 @@ ASP.NET Core Identity , özel bir depolama sağlayıcısı oluşturmanızı ve u
 
 ## <a name="introduction"></a>Giriş
 
-Varsayılan olarak, ASP.NET Core Identity sistem, Entity Framework Core kullanarak Kullanıcı bilgilerini bir SQL Server veritabanında depolar. Birçok uygulama için bu yaklaşım iyi bir sonuç verir. Ancak, farklı bir Kalıcılık mekanizması veya veri şeması kullanmayı tercih edebilirsiniz. Örnek:
+Varsayılan olarak, ASP.NET Core Identity sistem, Entity Framework Core kullanarak Kullanıcı bilgilerini bir SQL Server veritabanında depolar. Birçok uygulama için bu yaklaşım iyi bir sonuç verir. Ancak, farklı bir Kalıcılık mekanizması veya veri şeması kullanmayı tercih edebilirsiniz. Örneğin:
 
 * [Azure Tablo depolama](/azure/storage/) veya başka bir veri deposu kullanıyorsunuz.
 * Veritabanı tablolarınız farklı bir yapıya sahip. 
@@ -180,7 +181,7 @@ Sınıfı içinde `UserStore` , işlemleri gerçekleştirmek için oluşturduğu
 * **Iqueryableuserstore**  
  [Iqueryableuserstore &lt; Tuser &gt; ](/dotnet/api/microsoft.aspnetcore.identity.iqueryableuserstore-1) arabirimi, bir sorgulanabilir kullanıcı deposu sağlamak için uyguladığınız üyeleri tanımlar.
 
-Yalnızca uygulamanızda gerekli olan arabirimleri uygulayabilirsiniz. Örnek:
+Yalnızca uygulamanızda gerekli olan arabirimleri uygulayabilirsiniz. Örneğin:
 
 ```csharp
 public class UserStore : IUserStore<IdentityUser>,

@@ -5,6 +5,7 @@ description: E-posta onayı ve parola sıfırlama ile ASP.NET Core bir uygulama 
 ms.author: riande
 ms.date: 03/11/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/accconfirm
-ms.openlocfilehash: d6ea37ceb83ffbaa94187e0c541c79428594e4b4
-ms.sourcegitcommit: 2039e60eb7b482da8298f82dcd5eda27cf747f32
+ms.openlocfilehash: 91148c67d5dc0bf97e2f926f50dcff5dd0708f4b
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88906455"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052324"
 ---
 # <a name="account-confirmation-and-password-recovery-in-aspnet-core"></a>ASP.NET Core hesap onaylama ve parola kurtarma
 
@@ -30,7 +31,7 @@ By [Rick Anderson](https://twitter.com/RickAndMSFT), [Ponant](https://github.com
 Bu öğreticide, e-posta onayı ve parola sıfırlama ile bir ASP.NET Core uygulamasının nasıl oluşturulacağı gösterilmektedir. Bu öğretici bir başlangıç konusu **değildir** . Şunu tanımanız gerekir:
 
 * [ASP.NET Core](xref:tutorials/razor-pages/razor-pages-start)
-* [Kimlik doğrulaması](xref:security/authentication/identity)
+* [Kimlik Doğrulaması](xref:security/authentication/identity)
 * [Entity Framework Core](xref:data/ef-mvc/intro)
 
 <!-- see C:/Dropbox/wrk/Code/SendGridConsole/Program.cs -->
@@ -56,7 +57,7 @@ Uygulamayı çalıştırın, **Kaydet** bağlantısını seçin ve bir Kullanıc
 * `Click here to confirm your account` bağlantısını seçin.
 * **Oturum açma** bağlantısını seçin ve aynı kimlik bilgileriyle oturum açın.
 * `Hello YourEmail@provider.com!`Sizi sayfaya yönlendiren bağlantıyı seçin `/Identity/Account/Manage/PersonalData` .
-* Sol taraftaki **kişisel veri** sekmesini seçin ve **Sil**' i seçin.
+* Sol taraftaki **kişisel veri** sekmesini seçin ve **Sil** ' i seçin.
 
 ### <a name="configure-an-email-provider"></a>E-posta sağlayıcısı yapılandırma
 
@@ -64,13 +65,13 @@ Bu öğreticide, [SendGrid](https://sendgrid.com) e-posta göndermek için kulla
 
 SendGrid hesabı, [gönderici ekleme](https://sendgrid.com/docs/ui/sending-email/senders/)gerektirebilir.
 
-Güvenli e-posta anahtarını getirmek için bir sınıf oluşturun. Bu örnek için *Hizmetler/Authiletienderoptions. cs*oluşturun:
+Güvenli e-posta anahtarını getirmek için bir sınıf oluşturun. Bu örnek için *Hizmetler/Authiletienderoptions. cs* oluşturun:
 
 [!code-csharp[](accconfirm/sample/WebPWrecover30/Services/AuthMessageSenderOptions.cs?name=snippet1)]
 
 #### <a name="configure-sendgrid-user-secrets"></a>SendGrid Kullanıcı gizli dizilerini yapılandırma
 
-Ve öğesini `SendGridUser` `SendGridKey` [gizli-Manager aracı](xref:security/app-secrets)ile ayarlayın. Örnek:
+Ve öğesini `SendGridUser` `SendGridKey` [gizli-Manager aracı](xref:security/app-secrets)ile ayarlayın. Örneğin:
 
 ```dotnetcli
 dotnet user-secrets set SendGridUser RickAndMSFT
@@ -155,7 +156,7 @@ Web uygulamasını çalıştırın ve hesap onaylama ve parola kurtarma akışı
 
 ### <a name="test-password-reset"></a>Sınama parolası sıfırlama
 
-* Oturum açtıysanız **Oturumu Kapat**' ı seçin.
+* Oturum açtıysanız **Oturumu Kapat** ' ı seçin.
 * **Oturum aç** bağlantısını seçin ve **parolanızı unuttum?** bağlantısını seçin.
 * Hesabı kaydettirmek için kullandığınız e-postayı girin.
 * Parolanızı sıfırlamaya yönelik bağlantı içeren bir e-posta gönderilir. E-postanızı kontrol edin ve parolanızı sıfırlamak için bağlantıya tıklayın. Parolanız başarıyla sıfırlandıktan sonra, e-posta ve yeni parolanızla oturum açabilirsiniz.
@@ -266,7 +267,7 @@ Uygulamayı çalıştırın, **Kaydet** bağlantısını seçin ve bir Kullanıc
 
 Tablonun `EmailConfirmed` alanının olduğunu aklınızda edin `False` .
 
-Uygulama bir onay e-postası gönderdiğinde bir sonraki adımda bu e-postayı yeniden kullanmak isteyebilirsiniz. Satıra sağ tıklayın ve **Sil**' i seçin. E-posta diğer adını silmek aşağıdaki adımlarda daha kolay hale gelir.
+Uygulama bir onay e-postası gönderdiğinde bir sonraki adımda bu e-postayı yeniden kullanmak isteyebilirsiniz. Satıra sağ tıklayın ve **Sil** ' i seçin. E-posta diğer adını silmek aşağıdaki adımlarda daha kolay hale gelir.
 
 <a name="prevent-login-at-registration"></a>
 
@@ -286,13 +287,13 @@ Genellikle yeni kullanıcıların, onaylanan bir e-posta almadan önce Web siten
 
 Bu öğreticide, [SendGrid](https://sendgrid.com) e-posta göndermek için kullanılır. E-posta göndermek için bir SendGrid hesabına ve anahtarına ihtiyacınız vardır. Diğer e-posta sağlayıcılarını kullanabilirsiniz. ASP.NET Core 2. x içerir `System.Net.Mail` . Bu, uygulamanızdan e-posta göndermenize olanak tanır. E-posta göndermek için SendGrid veya başka bir e-posta hizmeti kullanmanızı öneririz. Güvenli hale getirmek ve düzgün şekilde ayarlamak zordur.
 
-Güvenli e-posta anahtarını getirmek için bir sınıf oluşturun. Bu örnek için *Hizmetler/Authiletienderoptions. cs*oluşturun:
+Güvenli e-posta anahtarını getirmek için bir sınıf oluşturun. Bu örnek için *Hizmetler/Authiletienderoptions. cs* oluşturun:
 
 [!code-csharp[](accconfirm/sample/WebPWrecover22/Services/AuthMessageSenderOptions.cs?name=snippet1)]
 
 #### <a name="configure-sendgrid-user-secrets"></a>SendGrid Kullanıcı gizli dizilerini yapılandırma
 
-Ve öğesini `SendGridUser` `SendGridKey` [gizli-Manager aracı](xref:security/app-secrets)ile ayarlayın. Örnek:
+Ve öğesini `SendGridUser` `SendGridKey` [gizli-Manager aracı](xref:security/app-secrets)ile ayarlayın. Örneğin:
 
 ```console
 C:/WebAppl>dotnet user-secrets set SendGridUser RickAndMSFT
@@ -355,7 +356,7 @@ Aşağıdaki kodu `ConfigureServices` *Startup.cs* dosyasındaki yöntemine ekle
 
 ## <a name="enable-account-confirmation-and-password-recovery"></a>Hesap onaylama ve parola kurtarmayı etkinleştirme
 
-Şablonda hesap onaylama ve parola kurtarma için kod bulunur. `OnPostAsync`Yöntemini */ Identity /Pages/Account/Register.cshtml.cs*içinde bulun.
+Şablonda hesap onaylama ve parola kurtarma için kod bulunur. `OnPostAsync`Yöntemini */ Identity /Pages/Account/Register.cshtml.cs* içinde bulun.
 
 Yeni kayıtlı kullanıcıların aşağıdaki satırı açıklama ekleyerek otomatik olarak oturum açmasını engelleyin:
 
@@ -385,7 +386,7 @@ Yönet sayfası, **profil** sekmesi seçili olarak görüntülenir. **E** -posta
 
 ### <a name="test-password-reset"></a>Sınama parolası sıfırlama
 
-* Oturum açtıysanız **Oturumu Kapat**' ı seçin.
+* Oturum açtıysanız **Oturumu Kapat** ' ı seçin.
 * **Oturum aç** bağlantısını seçin ve **parolanızı unuttum?** bağlantısını seçin.
 * Hesabı kaydettirmek için kullandığınız e-postayı girin.
 * Parolanızı sıfırlamaya yönelik bağlantı içeren bir e-posta gönderilir. E-postanızı kontrol edin ve parolanızı sıfırlamak için bağlantıya tıklayın. Parolanız başarıyla sıfırlandıktan sonra, e-posta ve yeni parolanızla oturum açabilirsiniz.

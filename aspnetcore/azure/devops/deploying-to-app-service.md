@@ -6,6 +6,7 @@ ms.author: casoper
 ms.custom: devx-track-csharp, mvc, seodec18, devx-track-azurecli
 ms.date: 10/24/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/deploy-to-app-service
-ms.openlocfilehash: e6d8b4bcbbbe909fde971a8c706287654fcc98ba
-ms.sourcegitcommit: 62cc131969b2379f7a45c286a751e22d961dfbdb
+ms.openlocfilehash: 52c4905ecb3a76f1dd10629f834b2b541b698774
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/22/2020
-ms.locfileid: "90847630"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052363"
 ---
 # <a name="deploy-an-app-to-app-service"></a>App Service için uygulama dağıtma
 
@@ -78,7 +79,7 @@ Bir komut kabuğundan kodu indirin, projeyi derleyin ve aşağıdaki gibi çalı
 
      ![RSS akışı içeriğini görüntüleyen uygulama](./media/deploying-to-app-service/app-in-browser.png)
 
-6. Uygulamanın doğru şekilde çalışmaya başladıktan sonra **Ctrl** + komut kabuğu 'nda CTRL**C** tuşuna basarak kapatın.
+6. Uygulamanın doğru şekilde çalışmaya başladıktan sonra **Ctrl** + komut kabuğu 'nda CTRL **C** tuşuna basarak kapatın.
 
 ## <a name="create-the-azure-app-service-web-app"></a>Azure App Service Web uygulaması oluşturma
 
@@ -120,13 +121,13 @@ Uygulamayı dağıtmak için bir App Service [Web uygulaması](/azure/app-servic
     az webapp deployment user set --user-name REPLACE_WITH_USER_NAME --password REPLACE_WITH_PASSWORD
     ```
 
-    f. Web uygulamasını yerel git 'ten dağıtımları kabul edecek şekilde yapılandırın ve *Git DAĞıTıM URL*'sini görüntüleyin. **Başvuru için bu URL 'yi daha sonra dikkate alın**.
+    f. Web uygulamasını yerel git 'ten dağıtımları kabul edecek şekilde yapılandırın ve *Git DAĞıTıM URL* 'sini görüntüleyin. **Başvuru için bu URL 'yi daha sonra dikkate alın** .
 
     ```azurecli
     echo Git deployment URL: $(az webapp deployment source config-local-git --name $webappname --resource-group AzureTutorial --query url --output tsv)
     ```
 
-    örneğin: *Web uygulaması URL 'sini*görüntüleyin. Boş Web uygulamasını görmek için bu URL 'ye gidin. **Başvuru için bu URL 'yi daha sonra dikkate alın**.
+    örneğin: *Web uygulaması URL 'sini* görüntüleyin. Boş Web uygulamasını görmek için bu URL 'ye gidin. **Başvuru için bu URL 'yi daha sonra dikkate alın** .
 
     ```console
     echo Web app URL: http://$webappname.azurewebsites.net
@@ -157,14 +158,14 @@ Uygulamayı dağıtmak için bir App Service [Web uygulaması](/azure/app-servic
 Uygulama, komut kabuğundan zaten dağıtıldı. Uygulamaya bir güncelleştirme dağıtmak için Visual Studio 'nun tümleşik araçlarını kullanalım. Visual Studio, arka planda komut satırı araçlarıyla aynı şeyi gerçekleştirir, ancak Visual Studio 'nun tanıdık kullanıcı arabirimi içinde.
 
 1. Visual Studio 'da *Simplefeedreader. sln* ' i açın.
-2. Çözüm Gezgini, *Pages\ındex.cshtml*dosyasını açın. `<h2>Simple Feed Reader</h2>`Olarak değiştirin `<h2>Simple Feed Reader - V2</h2>` .
-3. **Ctrl** + **Shift** + Uygulamayı derlemek için CTRL SHIFT**B** tuşlarına basın.
-4. Çözüm Gezgini, projeye sağ tıklayın ve **Yayımla**' ya tıklayın.
+2. Çözüm Gezgini, *Pages\ındex.cshtml* dosyasını açın. `<h2>Simple Feed Reader</h2>`Olarak değiştirin `<h2>Simple Feed Reader - V2</h2>` .
+3. **Ctrl** + **Shift** + Uygulamayı derlemek için CTRL SHIFT **B** tuşlarına basın.
+4. Çözüm Gezgini, projeye sağ tıklayın ve **Yayımla** ' ya tıklayın.
 
     ![Sağ tıklama, yayımlamayı gösteren ekran görüntüsü](./media/deploying-to-app-service/publish.png)
-5. Visual Studio yeni bir App Service kaynağı oluşturabilir, ancak bu güncelleştirme mevcut dağıtım üzerinden yayımlanacak. **Bir yayımlama hedefi seç** iletişim kutusunda, sol taraftaki listeden **App Service** ' yi seçin ve ardından **Varolanı Seç**' i seçin. **Yayımla**’ya tıklayın.
+5. Visual Studio yeni bir App Service kaynağı oluşturabilir, ancak bu güncelleştirme mevcut dağıtım üzerinden yayımlanacak. **Bir yayımlama hedefi seç** iletişim kutusunda, sol taraftaki listeden **App Service** ' yi seçin ve ardından **Varolanı Seç** ' i seçin. **Yayımla** ’ya tıklayın.
 6. **App Service** iletişim kutusunda, Azure aboneliğinizi oluşturmak Için kullanılan Microsoft veya kuruluş hesabının sağ üst köşede görüntülendiğini doğrulayın. Aksi takdirde, açılan eklentiye tıklayın ve ekleyin.
-7. Doğru Azure **aboneliğinin** seçili olduğunu onaylayın. **Görünüm**Için **kaynak grubu**' nu seçin. **AzureTutorial** kaynak grubunu genişletin ve ardından mevcut Web uygulamasını seçin. **Tamam**’a tıklayın.
+7. Doğru Azure **aboneliğinin** seçili olduğunu onaylayın. **Görünüm** Için **kaynak grubu** ' nu seçin. **AzureTutorial** kaynak grubunu genişletin ve ardından mevcut Web uygulamasını seçin. **Tamam** ’a tıklayın.
 
     ![Yayımla App Service iletişim kutusunu gösteren ekran görüntüsü](./media/deploying-to-app-service/publish-dialog.png)
 
@@ -179,19 +180,19 @@ Dağıtım yuvaları, üretimde çalışan uygulamayı etkilemeden değişiklikl
 1. Henüz oturum açmadıysanız [Azure Cloud Shell](https://shell.azure.com/bash)oturum açın.
 2. Hazırlama yuvasını oluşturun.
 
-    a. *Hazırlama*adına sahip bir dağıtım yuvası oluşturun.
+    a. *Hazırlama* adına sahip bir dağıtım yuvası oluşturun.
 
     ```azurecli
     az webapp deployment slot create --name $webappname --resource-group AzureTutorial --slot staging
     ```
 
-    b. Hazırlama yuvasını yerel git 'ten dağıtımı kullanacak şekilde yapılandırın ve **hazırlama** dağıtımı URL 'sini alın. **Başvuru için bu URL 'yi daha sonra dikkate alın**.
+    b. Hazırlama yuvasını yerel git 'ten dağıtımı kullanacak şekilde yapılandırın ve **hazırlama** dağıtımı URL 'sini alın. **Başvuru için bu URL 'yi daha sonra dikkate alın** .
 
     ```azurecli
     echo Git deployment URL for staging: $(az webapp deployment source config-local-git --name $webappname --resource-group AzureTutorial --slot staging --query url --output tsv)
     ```
 
-    c. Hazırlama yuvasının URL 'sini görüntüleyin. Boş hazırlama yuvasını görmek için URL 'ye gidin. **Başvuru için bu URL 'yi daha sonra dikkate alın**.
+    c. Hazırlama yuvasının URL 'sini görüntüleyin. Boş hazırlama yuvasını görmek için URL 'ye gidin. **Başvuru için bu URL 'yi daha sonra dikkate alın** .
 
     ```console
     echo Staging web app URL: http://$webappname-staging.azurewebsites.net

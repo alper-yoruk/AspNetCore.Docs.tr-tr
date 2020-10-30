@@ -7,6 +7,7 @@ ms.author: riande
 ms.date: 09/22/2018
 ms.custom: mvc, seodec18
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/2fa
-ms.openlocfilehash: e5e606afaf0219f3a0eb7301203b7142a00322be
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1ee9e656c2e631c9b5588149e0a75e07108baff1
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634117"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051271"
 ---
 # <a name="two-factor-authentication-with-sms-in-aspnet-core"></a>ASP.NET Core 'de SMS ile iki öğeli kimlik doğrulama
 
@@ -48,17 +49,17 @@ Bireysel kullanıcı hesaplarıyla adlı yeni bir ASP.NET Core Web uygulaması o
 
 **Twilio**
 
-Twilio hesabınızın Pano sekmesinden **Hesap SID** 'Sini ve **kimlik doğrulama belirtecini**kopyalayın.
+Twilio hesabınızın Pano sekmesinden **Hesap SID** 'Sini ve **kimlik doğrulama belirtecini** kopyalayın.
 
 **ASPSMS:**
 
-Hesap ayarlarınızda **userKey** ' e gidin ve **parolanızla**birlikte kopyalayın.
+Hesap ayarlarınızda **userKey** ' e gidin ve **parolanızla** birlikte kopyalayın.
 
 Bu değerleri daha sonra anahtarlar içindeki gizli-Manager aracıyla birlikte depolayacağız `SMSAccountIdentification` `SMSAccountPassword` .
 
 #### <a name="specifying-senderid--originator"></a>SenderId/oluşturana belirtme
 
-**Twilio:** Sayılar sekmesinden Twilio **telefon numaranızı**kopyalayın.
+**Twilio:** Sayılar sekmesinden Twilio **telefon numaranızı** kopyalayın.
 
 **Aspsms:** Kilit açma/kaldırma menüsünde, bir veya daha fazla kaynaktan yararlanın veya alfasayısal bir kaynağı (tüm ağlar tarafından desteklenmez) seçin.
 
@@ -72,7 +73,7 @@ Kullanıcı hesabına ve anahtar ayarlarına erişmek için [Seçenekler modelin
 
 [!code-csharp[](2fa/sample/Web2FA/Services/SMSoptions.cs)]
 
-`SMSAccountIdentification`, Ve öğesini `SMSAccountPassword` `SMSAccountFrom` [gizli-Manager aracı](xref:security/app-secrets)ile ayarlayın. Örnek:
+`SMSAccountIdentification`, Ve öğesini `SMSAccountPassword` `SMSAccountFrom` [gizli-Manager aracı](xref:security/app-secrets)ile ayarlayın. Örneğin:
 
 ```none
 C:/Web2FA/src/WebApp1>dotnet user-secrets set SMSAccountIdentification 12345
@@ -99,7 +100,7 @@ info: Successfully saved SMSAccountIdentification = 12345 to the secret store.
 
 ### <a name="configure-startup-to-use-smsoptions"></a>Başlangıç 'yi kullanacak şekilde yapılandırma `SMSoptions`
 
-`SMSoptions` `ConfigureServices` *Startup.cs*içindeki yönteminde hizmet kapsayıcısına ekleyin:
+`SMSoptions` `ConfigureServices` *Startup.cs* içindeki yönteminde hizmet kapsayıcısına ekleyin:
 
 [!code-csharp[](2fa/sample/Web2FA/Startup.cs?name=snippet1&highlight=4)]
 
@@ -117,7 +118,7 @@ info: Successfully saved SMSAccountIdentification = 12345 to the secret store.
 
 ![Yönetme görünümü-"Ekle" bağlantısına dokunun](2fa/_static/login2fa2.png)
 
-* Doğrulama kodunu alacak bir telefon numarası ekleyin ve **doğrulama kodu gönder**' e dokunun.
+* Doğrulama kodunu alacak bir telefon numarası ekleyin ve **doğrulama kodu gönder** ' e dokunun.
 
 ![Telefon numarası Ekle sayfası](2fa/_static/login2fa3.png)
 
@@ -141,13 +142,13 @@ Kısa mesaj alamazsanız, bkz. Twilio günlük sayfası.
 
 * Oturum açın.
 
-* Kullanıcı hesabı iki öğeli kimlik doğrulamayı etkinleştirdi, bu nedenle ikinci kimlik doğrulama faktörünü sağlamanız gerekir. Bu öğreticide, telefon doğrulamasını etkinleştirdiniz. Yerleşik şablonlar, e-postayı ikinci faktör olarak ayarlamanıza de olanak tanır. QR kodları gibi kimlik doğrulaması için ek ikinci faktörleri ayarlayabilirsiniz. **Gönder**' e dokunun.
+* Kullanıcı hesabı iki öğeli kimlik doğrulamayı etkinleştirdi, bu nedenle ikinci kimlik doğrulama faktörünü sağlamanız gerekir. Bu öğreticide, telefon doğrulamasını etkinleştirdiniz. Yerleşik şablonlar, e-postayı ikinci faktör olarak ayarlamanıza de olanak tanır. QR kodları gibi kimlik doğrulaması için ek ikinci faktörleri ayarlayabilirsiniz. **Gönder** ' e dokunun.
 
 ![Doğrulama kodu görünümü gönder](2fa/_static/login2fa7.png)
 
 * SMS iletisinde aldığınız kodu girin.
 
-* **Bu tarayıcıya** göz atma onay kutusunu tıklatmak, aynı cihaz ve tarayıcıyı kullanırken oturum açmak için 2FA kullanmaya gerek duymasını sağlar. 2FA 'yı etkinleştirmek ve **Bu tarayıcıyı unutmamak** , cihazınıza erişimi olmadığı sürece hesabınıza erişmeye çalışan kötü amaçlı kullanıcılardan güçlü 2FA koruması sağlar. Bunu, düzenli olarak kullandığınız tüm özel cihazlarda yapabilirsiniz. **Bu tarayıcıyı aklınızda**bulundurarak, düzenli olarak kullanmayan CIHAZLARDAN 2FA 'nın ek güvenliğine sahip olursunuz ve kendi cihazlarınızda 2FA 'yı kullanmaya gerek kalmadan rahatlığını elde edersiniz.
+* **Bu tarayıcıya** göz atma onay kutusunu tıklatmak, aynı cihaz ve tarayıcıyı kullanırken oturum açmak için 2FA kullanmaya gerek duymasını sağlar. 2FA 'yı etkinleştirmek ve **Bu tarayıcıyı unutmamak** , cihazınıza erişimi olmadığı sürece hesabınıza erişmeye çalışan kötü amaçlı kullanıcılardan güçlü 2FA koruması sağlar. Bunu, düzenli olarak kullandığınız tüm özel cihazlarda yapabilirsiniz. **Bu tarayıcıyı aklınızda** bulundurarak, düzenli olarak kullanmayan CIHAZLARDAN 2FA 'nın ek güvenliğine sahip olursunuz ve kendi cihazlarınızda 2FA 'yı kullanmaya gerek kalmadan rahatlığını elde edersiniz.
 
 ![Görünümü doğrula](2fa/_static/login2fa8.png)
 

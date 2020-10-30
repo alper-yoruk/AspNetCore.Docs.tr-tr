@@ -5,6 +5,7 @@ description: ASP.NET Core 'de anahtar depolama sağlayıcıları ve anahtar depo
 ms.author: riande
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/implementation/key-storage-providers
-ms.openlocfilehash: fb21f7d4d784451096db5c420f2ffd4532c2b490
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 36e8bc494125d0770347ddf32390365d83a91d27
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631335"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051752"
 ---
 # <a name="key-storage-providers-in-aspnet-core"></a>ASP.NET Core 'de anahtar depolama sağlayıcıları
 
@@ -131,7 +132,7 @@ Daha fazla bilgi edinmek için aşağıdaki kaynaklara bakın:
 
 **Yalnızca Windows dağıtımları için geçerlidir.**
 
-Bazen uygulamanın dosya sistemine yazma erişimi olmayabilir. Bir uygulamanın sanal hizmet hesabı (örneğin, *w3wp.exe*uygulama havuzu kimliği) olarak çalıştığı bir senaryo düşünün. Bu durumlarda, yönetici hizmet hesabı kimliği tarafından erişilebilen bir kayıt defteri anahtarı sağlayabilir. Aşağıda gösterildiği gibi, [Persistkeystoregistry](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.persistkeystoregistry) uzantı yöntemini çağırın. Şifreleme anahtarlarının saklanacağı konuma işaret eden bir [RegistryKey](/dotnet/api/microsoft.aspnetcore.dataprotection.repositories.registryxmlrepository.registrykey) belirtin:
+Bazen uygulamanın dosya sistemine yazma erişimi olmayabilir. Bir uygulamanın sanal hizmet hesabı (örneğin, *w3wp.exe* uygulama havuzu kimliği) olarak çalıştığı bir senaryo düşünün. Bu durumlarda, yönetici hizmet hesabı kimliği tarafından erişilebilen bir kayıt defteri anahtarı sağlayabilir. Aşağıda gösterildiği gibi, [Persistkeystoregistry](/dotnet/api/microsoft.aspnetcore.dataprotection.dataprotectionbuilderextensions.persistkeystoregistry) uzantı yöntemini çağırın. Şifreleme anahtarlarının saklanacağı konuma işaret eden bir [RegistryKey](/dotnet/api/microsoft.aspnetcore.dataprotection.repositories.registryxmlrepository.registrykey) belirtin:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)

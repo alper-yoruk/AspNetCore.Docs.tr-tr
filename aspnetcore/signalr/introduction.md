@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/27/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/introduction
-ms.openlocfilehash: ab850fa8afbee9d2664868937362388a03374908
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 1810fef903362addcef4a6c9ec53264604f58d2b
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634702"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051479"
 ---
 # <a name="introduction-to-aspnet-core-no-locsignalr"></a>ASP.NET Core giriş SignalR
 
@@ -54,12 +55,12 @@ Kaynak [ SignalR GitHub 'daki bir depoda](https://github.com/dotnet/AspNetCore/t
 SignalR gerçek zamanlı iletişimi işlemek için aşağıdaki teknikleri destekler (düzgün geri dönüş sırasında):
 
 * [WebSockets](https://tools.ietf.org/html/rfc7118)
-* Sunucu tarafından gönderilen olaylar
+* Server-Sent olaylar
 * Uzun yoklama
 
 SignalR sunucu ve istemci özellikleri içinde en iyi taşıma yöntemini otomatik olarak seçer.
 
-## <a name="hubs"></a>Hub'lar
+## <a name="hubs"></a>Merkezler
 
 SignalR istemciler ve sunucular arasında iletişim kurmak için *hub 'ları* kullanır.
 
@@ -71,5 +72,5 @@ Hub 'lar, istemci tarafı yönteminin adını ve parametrelerini içeren iletile
 
 * [SignalRASP.NET Core için kullanmaya başlama](xref:tutorials/signalr)
 * [Desteklenen platformlar](xref:signalr/supported-platforms)
-* [Hub'lar](xref:signalr/hubs)
+* [Merkezler](xref:signalr/hubs)
 * [JavaScript istemcisi](xref:signalr/javascript-client)

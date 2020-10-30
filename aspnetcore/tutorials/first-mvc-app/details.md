@@ -5,6 +5,7 @@ description: ASP.NET Core MVC 'de öğretici serisinin Bölüm 10 ' dur.
 ms.author: riande
 ms.date: 12/13/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/details
-ms.openlocfilehash: 4683f106b3372a2f14f289b39c8a0b8b6c8b5aa1
-ms.sourcegitcommit: c9b03d8a6a4dcc59e4aacb30a691f349235a74c8
+ms.openlocfilehash: 9ceb6c3c8a6622d6e203641c2ce97a483d3d4325
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/02/2020
-ms.locfileid: "89379373"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93050751"
 ---
 # <a name="part-10-examine-the-details-and-delete-methods-of-an-aspnet-core-app"></a>10. kısım, ASP.NET Core uygulamasının ayrıntılarını ve silme yöntemlerini inceleyin
 
@@ -31,7 +32,7 @@ Film denetleyicisini açın ve `Details` yöntemi inceleyin:
 
 [!code-csharp[](start-mvc/sample/MvcMovie22/Controllers/MoviesController.cs?name=snippet_details)]
 
-Bu eylem yöntemini oluşturan MVC yapı iskelesi altyapısı, yöntemi çağıran bir HTTP isteğini gösteren bir açıklama ekler. Bu durumda, üç URL segmentine, `Movies` denetleyiciye, `Details` yönteme ve bir değere sahıp bir get isteği olur `id` . Bu kesimleri geri çağır *Startup.cs*içinde tanımlanmıştır.
+Bu eylem yöntemini oluşturan MVC yapı iskelesi altyapısı, yöntemi çağıran bir HTTP isteğini gösteren bir açıklama ekler. Bu durumda, üç URL segmentine, `Movies` denetleyiciye, `Details` yönteme ve bir değere sahıp bir get isteği olur `id` . Bu kesimleri geri çağır *Startup.cs* içinde tanımlanmıştır.
 
 [!code-csharp[](start-mvc/sample/MvcMovie3/Startup.cs?highlight=5&name=snippet_1)]
 

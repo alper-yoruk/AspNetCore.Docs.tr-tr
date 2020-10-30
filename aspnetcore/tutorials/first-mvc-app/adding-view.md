@@ -5,6 +5,7 @@ description: ASP.NET Core MVC 'de öğretici serisinin 3. bölümü.
 ms.author: riande
 ms.date: 8/04/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/adding-view
-ms.openlocfilehash: 970cc1fe6e0a0e0204ddafec09c15db6fed9aa66
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 078329d1e5dfe41a7713b1e53894a9b09886752d
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88629762"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052675"
 ---
 # <a name="part-3-add-a-view-to-an-aspnet-core-mvc-app"></a>Bölüm 3, ASP.NET Core MVC uygulamasına bir görünüm ekleme
 
@@ -37,25 +38,25 @@ Kullanarak bir görünüm şablonu dosyası oluşturursunuz Razor . Razortabanl�
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_4)]
 
-Önceki kod denetleyicinin <xref:Microsoft.AspNetCore.Mvc.Controller.View*> yöntemini çağırır. HTML yanıtı oluşturmak için bir görünüm şablonu kullanır. Yukarıdaki yöntem gibi denetleyici Yöntemleri ( *eylem yöntemleri*olarak da bilinir), `Index` genellikle <xref:Microsoft.AspNetCore.Mvc.IActionResult> <xref:Microsoft.AspNetCore.Mvc.ActionResult> gibi bir tür değil, genellikle bir (veya öğesinden türetilmiş bir sınıf) döndürür `string` .
+Önceki kod denetleyicinin <xref:Microsoft.AspNetCore.Mvc.Controller.View*> yöntemini çağırır. HTML yanıtı oluşturmak için bir görünüm şablonu kullanır. Yukarıdaki yöntem gibi denetleyici Yöntemleri ( *eylem yöntemleri* olarak da bilinir), `Index` genellikle <xref:Microsoft.AspNetCore.Mvc.IActionResult> <xref:Microsoft.AspNetCore.Mvc.ActionResult> gibi bir tür değil, genellikle bir (veya öğesinden türetilmiş bir sınıf) döndürür `string` .
 
 ## <a name="add-a-view"></a>Görünüm ekleme
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* *Görünümler* klasörüne sağ tıklayın ve ardından **Yeni > klasör ekleyin** ve *HelloWorld*klasörünü adlandırın.
+* *Görünümler* klasörüne sağ tıklayın ve ardından **Yeni > klasör ekleyin** ve *HelloWorld* klasörünü adlandırın.
 
-* *Görünümler/HelloWorld* klasörüne sağ tıklayın ve ardından **> yeni öğe ekleyin**.
+* *Görünümler/HelloWorld* klasörüne sağ tıklayın ve ardından **> yeni öğe ekleyin** .
 
 * **Yeni öğe Ekle-Mvcfilmi** iletişim kutusunda
 
   * Sağ üst köşedeki arama kutusuna *Görünüm* girin
 
-  * ** Razor Görünüm** Seç
+  * **Razor Görünüm** Seç
 
   * *Index. cshtml* **adlı ad** kutusu değerini saklayın.
 
-  * **Ekle** 'yi seçin
+  * **Ekle** ’yi seçin
 
 ![Yeni öğe Ekle iletişim kutusu](adding-view/_static/add_view.png)
 
@@ -63,19 +64,19 @@ Kullanarak bir görünüm şablonu dosyası oluşturursunuz Razor . Razortabanl�
 
 İçin bir `Index` görünüm ekleyin `HelloWorldController` .
 
-* *Views/HelloWorld*adlı yeni bir klasör ekleyin.
-* *Views/HelloWorld* klasör adı *Index. cshtml*dosyasına yeni bir dosya ekleyin.
+* *Views/HelloWorld* adlı yeni bir klasör ekleyin.
+* *Views/HelloWorld* klasör adı *Index. cshtml* dosyasına yeni bir dosya ekleyin.
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-* *Görünümler* klasörüne sağ tıklayın ve ardından **Yeni > klasör ekleyin** ve *HelloWorld*klasörünü adlandırın.
-* *Görünümler/HelloWorld* klasörüne sağ tıklayın ve ardından **> yeni dosya ekleyin**.
+* *Görünümler* klasörüne sağ tıklayın ve ardından **Yeni > klasör ekleyin** ve *HelloWorld* klasörünü adlandırın.
+* *Görünümler/HelloWorld* klasörüne sağ tıklayın ve ardından **> yeni dosya ekleyin** .
 * **Yeni dosya** iletişim kutusunda:
 
   * Sol bölmedeki **ASP .NET Core** ' u seçin.
   * Orta bölmedeki **MVC görünümü sayfasını** seçin.
   * **Ad** kutusuna *Index* yazın.
-  * **Yeni**’yi seçin.
+  * **Yeni** 'yi seçin.
 
 ![Yeni öğe Ekle iletişim kutusu](adding-view/_static/add_view_mac.png)
 
@@ -91,7 +92,7 @@ Kullanarak bir görünüm şablonu dosyası oluşturursunuz Razor . Razortabanl�
 
 ## <a name="change-views-and-layout-pages"></a>Görünümleri ve düzen sayfalarını değiştirme
 
-Menü bağlantılarını (**Mvcmovie**, **Home**ve **Gizlilik**) seçin. Her sayfada aynı menü düzeni gösterilir. Menü düzeni *Görünümler/Shared/_Layout. cshtml* dosyasında uygulanır. *Görünümler/paylaşılan/_Layout. cshtml* dosyasını açın.
+Menü bağlantılarını ( **Mvcmovie** , **Home** ve **Gizlilik** ) seçin. Her sayfada aynı menü düzeni gösterilir. Menü düzeni *Görünümler/Shared/_Layout. cshtml* dosyasında uygulanır. *Görünümler/paylaşılan/_Layout. cshtml* dosyasını açın.
 
 [Düzen](xref:mvc/views/layout) şablonları, sitenizin HTML kapsayıcı yerleşimini tek bir yerde belirtmenize ve sonra sitenizdeki birden çok sayfaya uygulamanıza olanak tanır. Satırı bulun `@RenderBody()` . `RenderBody` , oluşturduğunuz tüm görünüme özgü sayfaların, Düzen sayfasında *kaydırılan* bir yer tutucudur. Örneğin, **Gizlilik** bağlantısını seçerseniz, **Görünümler/Home/privacy. cshtml** görünümü yöntemin içinde işlenir `RenderBody` .
 
@@ -108,13 +109,13 @@ Yukarıdaki biçimlendirme aşağıdaki değişiklikleri yaptı:
 
 Önceki biçimlendirmede, `asp-area=""` Bu uygulama [alan](xref:mvc/controllers/areas)kullandığından [tutturucu etiketi Yardımcısı özniteliği](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) ve öznitelik değeri atlandı.
 
-**Not**: `Movies` Denetleyici uygulanmadı. Bu noktada `Movie App` bağlantı işlevsel değildir.
+**Not** : `Movies` Denetleyici uygulanmadı. Bu noktada `Movie App` bağlantı işlevsel değildir.
 
-Değişikliklerinizi kaydedin ve **Gizlilik** bağlantısını seçin. Tarayıcı sekmesindeki başlığın Gizlilik ilkesi yerine bir **film uygulaması** (Gizlilik ilkesi değil) nasıl görüntülediğini fark edin **-MVC filmi**:
+Değişikliklerinizi kaydedin ve **Gizlilik** bağlantısını seçin. Tarayıcı sekmesindeki başlığın Gizlilik ilkesi yerine bir **film uygulaması** (Gizlilik ilkesi değil) nasıl görüntülediğini fark edin **-MVC filmi** :
 
 ![Gizlilik sekmesi](~/tutorials/first-mvc-app/adding-view/_static/about2.png)
 
-**Giriş** bağlantısını seçin ve başlık ve bağlantı metninin **film uygulamasını**da görüntülediğine dikkat edin. Düzen şablonunda değişikliği bir kez yapabildik ve sitedeki tüm sayfalar yeni bağlantı metnini ve yeni başlığı yansıtmaktadır.
+**Giriş** bağlantısını seçin ve başlık ve bağlantı metninin **film uygulamasını** da görüntülediğine dikkat edin. Düzen şablonunda değişikliği bir kez yapabildik ve sitedeki tüm sayfalar yeni bağlantı metnini ve yeni başlığı yansıtmaktadır.
 
 *Views/_ViewStart. cshtml* dosyasını inceleyin:
 
@@ -154,13 +155,13 @@ Bir görünüm şablonunun yanıt işlemesi için gereken verileri sağlamaktan 
 
 Şu anda, `Welcome` `HelloWorldController` sınıfındaki yöntemi bir `name` ve parametresi alır `ID` ve sonra değerleri doğrudan tarayıcıya çıkarır. Denetleyicinin bu yanıtı bir dize olarak işlemesini sağlamak yerine, denetleyiciyi bir görünüm şablonu kullanacak şekilde değiştirin. Görünüm şablonu dinamik bir yanıt üretir, bu, yanıtı oluşturmak için denetleyiciden görünüme uygun veri bitlerinin geçirilmesi gereken anlamına gelir. Bu, denetleyicinin görünüm şablonu tarafından daha sonra erişebileceği bir sözlükte görünüm şablonunun gerektirdiği dinamik verileri (parametreler) yerleştirerek bunu yapın `ViewData` .
 
-*HelloWorldController.cs*içinde, `Welcome` sözlüğe bir ve değeri eklemek için yöntemini değiştirin `Message` `NumTimes` `ViewData` . `ViewData`Sözlük dinamik bir nesnedir, yani herhangi bir tür kullanılabilir; `ViewData` nesnenin içine bir öğe yerleştirene kadar tanımlanmış bir özelliği yoktur. [MVC modeli bağlama sistemi](xref:mvc/models/model-binding) , adlandırılmış parametreleri ( `name` ve `numTimes` ) adres çubuğundaki sorgu dizesinden, yöntemizdeki parametrelere otomatik olarak eşler. Tüm *HelloWorldController.cs* dosyası şuna benzer:
+*HelloWorldController.cs* içinde, `Welcome` sözlüğe bir ve değeri eklemek için yöntemini değiştirin `Message` `NumTimes` `ViewData` . `ViewData`Sözlük dinamik bir nesnedir, yani herhangi bir tür kullanılabilir; `ViewData` nesnenin içine bir öğe yerleştirene kadar tanımlanmış bir özelliği yoktur. [MVC modeli bağlama sistemi](xref:mvc/models/model-binding) , adlandırılmış parametreleri ( `name` ve `numTimes` ) adres çubuğundaki sorgu dizesinden, yöntemizdeki parametrelere otomatik olarak eşler. Tüm *HelloWorldController.cs* dosyası şuna benzer:
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_5)]
 
 `ViewData`Sözlük nesnesi görünüme geçirilecek verileri içerir.
 
-*Görünümler/HelloWorld/Welcome. cshtml*adlı bir hoş geldiniz görünüm şablonu oluşturun.
+*Görünümler/HelloWorld/Welcome. cshtml* adlı bir hoş geldiniz görünüm şablonu oluşturun.
 
 *Welcome. cshtml* görünüm şablonunda "Hello" öğesini görüntüleyen bir döngü oluşturacaksınız `NumTimes` . *Views/HelloWorld/Welcome. cshtml* içeriğini aşağıdakiler ile değiştirin:
 
@@ -194,25 +195,25 @@ Kullanarak bir görünüm şablonu dosyası oluşturursunuz Razor . Razortabanl�
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_4)]
 
-Önceki kod denetleyicinin <xref:Microsoft.AspNetCore.Mvc.Controller.View*> yöntemini çağırır. HTML yanıtı oluşturmak için bir görünüm şablonu kullanır. Yukarıdaki yöntem gibi denetleyici Yöntemleri ( *eylem yöntemleri*olarak da bilinir), `Index` genellikle <xref:Microsoft.AspNetCore.Mvc.IActionResult> <xref:Microsoft.AspNetCore.Mvc.ActionResult> gibi bir tür değil, genellikle bir (veya öğesinden türetilmiş bir sınıf) döndürür `string` .
+Önceki kod denetleyicinin <xref:Microsoft.AspNetCore.Mvc.Controller.View*> yöntemini çağırır. HTML yanıtı oluşturmak için bir görünüm şablonu kullanır. Yukarıdaki yöntem gibi denetleyici Yöntemleri ( *eylem yöntemleri* olarak da bilinir), `Index` genellikle <xref:Microsoft.AspNetCore.Mvc.IActionResult> <xref:Microsoft.AspNetCore.Mvc.ActionResult> gibi bir tür değil, genellikle bir (veya öğesinden türetilmiş bir sınıf) döndürür `string` .
 
 ## <a name="add-a-view"></a>Görünüm ekleme
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* *Görünümler* klasörüne sağ tıklayın ve ardından **Yeni > klasör ekleyin** ve *HelloWorld*klasörünü adlandırın.
+* *Görünümler* klasörüne sağ tıklayın ve ardından **Yeni > klasör ekleyin** ve *HelloWorld* klasörünü adlandırın.
 
-* *Görünümler/HelloWorld* klasörüne sağ tıklayın ve ardından **> yeni öğe ekleyin**.
+* *Görünümler/HelloWorld* klasörüne sağ tıklayın ve ardından **> yeni öğe ekleyin** .
 
 * **Yeni öğe Ekle-Mvcfilmi** iletişim kutusunda
 
   * Sağ üst köşedeki arama kutusuna *Görünüm* girin
 
-  * ** Razor Görünüm** Seç
+  * **Razor Görünüm** Seç
 
   * *Index. cshtml* **adlı ad** kutusu değerini saklayın.
 
-  * **Ekle** 'yi seçin
+  * **Ekle** ’yi seçin
 
 ![Yeni öğe Ekle iletişim kutusu](adding-view/_static/add_view.png)
 
@@ -220,19 +221,19 @@ Kullanarak bir görünüm şablonu dosyası oluşturursunuz Razor . Razortabanl�
 
 İçin bir `Index` görünüm ekleyin `HelloWorldController` .
 
-* *Views/HelloWorld*adlı yeni bir klasör ekleyin.
-* *Views/HelloWorld* klasör adı *Index. cshtml*dosyasına yeni bir dosya ekleyin.
+* *Views/HelloWorld* adlı yeni bir klasör ekleyin.
+* *Views/HelloWorld* klasör adı *Index. cshtml* dosyasına yeni bir dosya ekleyin.
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-* *Görünümler* klasörüne sağ tıklayın ve ardından **Yeni > klasör ekleyin** ve *HelloWorld*klasörünü adlandırın.
-* *Görünümler/HelloWorld* klasörüne sağ tıklayın ve ardından **> yeni dosya ekleyin**.
+* *Görünümler* klasörüne sağ tıklayın ve ardından **Yeni > klasör ekleyin** ve *HelloWorld* klasörünü adlandırın.
+* *Görünümler/HelloWorld* klasörüne sağ tıklayın ve ardından **> yeni dosya ekleyin** .
 * **Yeni dosya** iletişim kutusunda:
 
   * Sol bölmedeki **Web** ' i seçin.
   * Orta bölmedeki **boş HTML dosyasını** seçin.
   * **Ad** kutusuna *Index. cshtml* yazın.
-  * **Yeni**’yi seçin.
+  * **Yeni** 'yi seçin.
 
 ![Yeni öğe Ekle iletişim kutusu](adding-view/_static/add_view_mac.png)
 
@@ -248,7 +249,7 @@ Kullanarak bir görünüm şablonu dosyası oluşturursunuz Razor . Razortabanl�
 
 ## <a name="change-views-and-layout-pages"></a>Görünümleri ve düzen sayfalarını değiştirme
 
-Menü bağlantılarını (**Mvcmovie**, **Home**ve **Gizlilik**) seçin. Her sayfada aynı menü düzeni gösterilir. Menü düzeni *Görünümler/Shared/_Layout. cshtml* dosyasında uygulanır. *Görünümler/paylaşılan/_Layout. cshtml* dosyasını açın.
+Menü bağlantılarını ( **Mvcmovie** , **Home** ve **Gizlilik** ) seçin. Her sayfada aynı menü düzeni gösterilir. Menü düzeni *Görünümler/Shared/_Layout. cshtml* dosyasında uygulanır. *Görünümler/paylaşılan/_Layout. cshtml* dosyasını açın.
 
 [Düzen](xref:mvc/views/layout) şablonları, sitenizin HTML kapsayıcı yerleşimini tek bir yerde belirtmenize ve sonra sitenizdeki birden çok sayfaya uygulamanıza olanak tanır. Satırı bulun `@RenderBody()` . `RenderBody` , oluşturduğunuz tüm görünüme özgü sayfaların, Düzen sayfasında *kaydırılan* bir yer tutucudur. Örneğin, **Gizlilik** bağlantısını seçerseniz, **Görünümler/Home/privacy. cshtml** görünümü yöntemin içinde işlenir `RenderBody` .
 
@@ -268,13 +269,13 @@ Aşağıdaki biçimlendirme vurgulanan değişiklikleri göstermektedir:
 > We haven't implemented the `Movies` controller yet, so if you click the `Movie App` link, you get a 404 (Not found) error.
 -->
 
-**Not**: `Movies` Denetleyici uygulanmadı. Bu noktada `Movie App` bağlantı işlevsel değildir.
+**Not** : `Movies` Denetleyici uygulanmadı. Bu noktada `Movie App` bağlantı işlevsel değildir.
 
-Değişikliklerinizi kaydedin ve **Gizlilik** bağlantısını seçin. Tarayıcı sekmesindeki başlığın Gizlilik ilkesi yerine bir **film uygulaması** (Gizlilik ilkesi değil) nasıl görüntülediğini fark edin **-MVC filmi**:
+Değişikliklerinizi kaydedin ve **Gizlilik** bağlantısını seçin. Tarayıcı sekmesindeki başlığın Gizlilik ilkesi yerine bir **film uygulaması** (Gizlilik ilkesi değil) nasıl görüntülediğini fark edin **-MVC filmi** :
 
 ![Gizlilik sekmesi](~/tutorials/first-mvc-app/adding-view/_static/about2.png)
 
-**Giriş** bağlantısını seçin ve başlık ve bağlantı metninin **film uygulamasını**da görüntülediğine dikkat edin. Düzen şablonunda değişikliği bir kez yapabildik ve sitedeki tüm sayfalar yeni bağlantı metnini ve yeni başlığı yansıtmaktadır.
+**Giriş** bağlantısını seçin ve başlık ve bağlantı metninin **film uygulamasını** da görüntülediğine dikkat edin. Düzen şablonunda değişikliği bir kez yapabildik ve sitedeki tüm sayfalar yeni bağlantı metnini ve yeni başlığı yansıtmaktadır.
 
 *Views/_ViewStart. cshtml* dosyasını inceleyin:
 
@@ -314,13 +315,13 @@ Bir görünüm şablonunun yanıt işlemesi için gereken verileri sağlamaktan 
 
 Şu anda, `Welcome` `HelloWorldController` sınıfındaki yöntemi bir `name` ve parametresi alır `ID` ve sonra değerleri doğrudan tarayıcıya çıkarır. Denetleyicinin bu yanıtı bir dize olarak işlemesini sağlamak yerine, denetleyiciyi bir görünüm şablonu kullanacak şekilde değiştirin. Görünüm şablonu dinamik bir yanıt üretir, bu, yanıtı oluşturmak için denetleyiciden görünüme uygun veri bitlerinin geçirilmesi gereken anlamına gelir. Bu, denetleyicinin görünüm şablonu tarafından daha sonra erişebileceği bir sözlükte görünüm şablonunun gerektirdiği dinamik verileri (parametreler) yerleştirerek bunu yapın `ViewData` .
 
-*HelloWorldController.cs*içinde, `Welcome` sözlüğe bir ve değeri eklemek için yöntemini değiştirin `Message` `NumTimes` `ViewData` . `ViewData`Sözlük dinamik bir nesnedir, yani herhangi bir tür kullanılabilir; `ViewData` nesnenin içine bir öğe yerleştirene kadar tanımlanmış bir özelliği yoktur. [MVC modeli bağlama sistemi](xref:mvc/models/model-binding) , adlandırılmış parametreleri ( `name` ve `numTimes` ) adres çubuğundaki sorgu dizesinden, yöntemizdeki parametrelere otomatik olarak eşler. Tüm *HelloWorldController.cs* dosyası şuna benzer:
+*HelloWorldController.cs* içinde, `Welcome` sözlüğe bir ve değeri eklemek için yöntemini değiştirin `Message` `NumTimes` `ViewData` . `ViewData`Sözlük dinamik bir nesnedir, yani herhangi bir tür kullanılabilir; `ViewData` nesnenin içine bir öğe yerleştirene kadar tanımlanmış bir özelliği yoktur. [MVC modeli bağlama sistemi](xref:mvc/models/model-binding) , adlandırılmış parametreleri ( `name` ve `numTimes` ) adres çubuğundaki sorgu dizesinden, yöntemizdeki parametrelere otomatik olarak eşler. Tüm *HelloWorldController.cs* dosyası şuna benzer:
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie/Controllers/HelloWorldController.cs?name=snippet_5)]
 
 `ViewData`Sözlük nesnesi görünüme geçirilecek verileri içerir.
 
-*Görünümler/HelloWorld/Welcome. cshtml*adlı bir hoş geldiniz görünüm şablonu oluşturun.
+*Görünümler/HelloWorld/Welcome. cshtml* adlı bir hoş geldiniz görünüm şablonu oluşturun.
 
 *Welcome. cshtml* görünüm şablonunda "Hello" öğesini görüntüleyen bir döngü oluşturacaksınız `NumTimes` . *Views/HelloWorld/Welcome. cshtml* içeriğini aşağıdakiler ile değiştirin:
 

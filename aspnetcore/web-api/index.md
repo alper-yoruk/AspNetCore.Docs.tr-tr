@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 07/20/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/index
-ms.openlocfilehash: 594d3dcbf55ed0a3476bb580df8e122cedb1dcd3
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 51f76bc33d2da6097d26c1ffe17b1c93046a7b88
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634377"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052467"
 ---
 # <a name="create-web-apis-with-aspnet-core"></a>ASP.NET Core ile web API’leri oluşturma
 
@@ -163,7 +164,7 @@ namespace WebApiSample
 
 ## <a name="attribute-routing-requirement"></a>Öznitelik yönlendirme gereksinimi
 
-`[ApiController]`Öznitelik, öznitelik yönlendirme bir gereksinim yapar. Örnek:
+`[ApiController]`Öznitelik, öznitelik yönlendirme bir gereksinim yapar. Örneğin:
 
 ::: moniker range=">= aspnetcore-3.0"
 
@@ -378,7 +379,7 @@ Bir denetleyici eyleminde aşağıdaki kodu göz önünde bulundurun:
 
 [!code-csharp[](index/samples/2.x/2.2/Controllers/PetsController.cs?name=snippet_ProblemDetailsStatusCode)]
 
-`NotFound`Yöntemi, gövdesi olan BIR HTTP 404 durum kodu üretir `ProblemDetails` . Örnek:
+`NotFound`Yöntemi, gövdesi olan BIR HTTP 404 durum kodu üretir `ProblemDetails` . Örneğin:
 
 ```json
 {

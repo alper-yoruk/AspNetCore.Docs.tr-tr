@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/07/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: performance/caching/middleware
-ms.openlocfilehash: 7fe9629e1c60a6156c69e546736049653a4229b7
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 3c28b6c736f07c0d0483152eeec4300a5a92224c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722650"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052116"
 ---
 # <a name="response-caching-middleware-in-aspnet-core"></a>ASP.NET Core 'de yanıt önbelleğe alma ara yazılımı
 
@@ -74,7 +75,7 @@ Yanıt önbelleğe alma seçenekleri aşağıdaki tabloda gösterilmiştir.
 | ------ | ----------- |
 | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.MaximumBodySize> | Yanıt gövdesi için bayt cinsinden en büyük önbelleklenebilir boyut. Varsayılan değer `64 * 1024 * 1024` (64 MB). |
 | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.SizeLimit> | Yanıt önbelleği ara yazılımı için bayt cinsinden boyut sınırı. Varsayılan değer `100 * 1024 * 1024` (100 MB). |
-| <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.UseCaseSensitivePaths> | Yanıtların büyük/küçük harfe duyarlı yollarda önbelleğe alınıp alınmayacağını belirler. Varsayılan değer: `false`. |
+| <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.UseCaseSensitivePaths> | Yanıtların büyük/küçük harfe duyarlı yollarda önbelleğe alınıp alınmayacağını belirler. `false` varsayılan değerdir. |
 
 Aşağıdaki örnek, şu şekilde bir ara yazılım yapılandırır:
 
@@ -113,7 +114,7 @@ Aşağıdaki tabloda, yanıt önbelleğini etkileyen HTTP üstbilgileri hakkınd
 | Üst bilgi | Ayrıntılar |
 | ------ | ------- |
 | `Authorization` | Üst bilgi varsa yanıt önbelleğe alınmaz. |
-| `Cache-Control` | Ara yazılım yalnızca önbellek yönergesi ile işaretlenmiş önbelleğe alma yanıtlarını dikkate alır `public` . Aşağıdaki parametrelerle önbelleğe alma denetimi:<ul><li>Maksimum yaş</li><li>en fazla-eski&#8224;</li><li>en az-yeni</li><li>yeniden doğrulama gerekir</li><li>önbellek yok</li><li>mağaza yok</li><li>yalnızca-if-önbelleğe alındı</li><li>private</li><li>public</li><li>s-maxage</li><li>Proxy-yeniden doğrulama&#8225;</li></ul>&#8224;hiçbir sınır belirtilmemişse `max-stale` , ara yazılım hiçbir eylemde bulunmaz.<br>&#8225;`proxy-revalidate` , ile aynı etkiye sahiptir `must-revalidate` .<br><br>Daha fazla bilgi için bkz. [RFC 7231: Istek Cache-Control yönergeleri](https://tools.ietf.org/html/rfc7234#section-5.2.1). |
+| `Cache-Control` | Ara yazılım yalnızca önbellek yönergesi ile işaretlenmiş önbelleğe alma yanıtlarını dikkate alır `public` . Aşağıdaki parametrelerle önbelleğe alma denetimi:<ul><li>Maksimum yaş</li><li>en fazla-eski&#8224;</li><li>en az-yeni</li><li>yeniden doğrulama gerekir</li><li>önbellek yok</li><li>mağaza yok</li><li>yalnızca-if-önbelleğe alındı</li><li>private</li><li>public</li><li>s-maxage</li><li>Proxy-yeniden doğrulama&#8225;</li></ul>&#8224;hiçbir sınır belirtilmemişse `max-stale` , ara yazılım hiçbir eylemde bulunmaz.<br>&#8225;`proxy-revalidate` , ile aynı etkiye sahiptir `must-revalidate` .<br><br>Daha fazla bilgi için bkz. [RFC 7231: istek Cache-Control yönergeleri](https://tools.ietf.org/html/rfc7234#section-5.2.1). |
 | `Pragma` | `Pragma: no-cache`İstekteki bir üst bilgi, ile aynı etkiyi üretir `Cache-Control: no-cache` . Bu üst bilgi, varsa başlıktaki ilgili yönergeler tarafından geçersiz kılınır `Cache-Control` . HTTP/1.0 ile geriye dönük uyumluluk için değerlendirilir. |
 | `Set-Cookie` | Üst bilgi varsa yanıt önbelleğe alınmaz. İstek işleme ardışık düzeninde bir veya daha fazla s ayarlayan herhangi bir ara yazılım, cookie yanıt önbelleğe alma ara hattının yanıtı önbelleğe almasını engeller (örneğin, [ cookie tabanlı TempData sağlayıcısı](xref:fundamentals/app-state#tempdata)).  |
 | `Vary` | Üst bilgi, `Vary` başka bir üst bilgi tarafından önbelleğe alınan yanıtı değiştirmek için kullanılır. Örneğin, üst bilgi `Vary: Accept-Encoding` `Accept-Encoding: gzip` ve ayrı ayrı istekler için yanıtları önbelleğe alan üstbilgiyi ekleyerek kodlamaya göre yanıtları önbelleğe alır `Accept-Encoding: text/plain` . Üstbilgi değeri olan bir yanıt hiçbir şekilde `*` depolanmaz. |
@@ -218,7 +219,7 @@ Yanıt önbelleğe alma seçenekleri aşağıdaki tabloda gösterilmiştir.
 | ------ | ----------- |
 | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.MaximumBodySize> | Yanıt gövdesi için bayt cinsinden en büyük önbelleklenebilir boyut. Varsayılan değer `64 * 1024 * 1024` (64 MB). |
 | <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.SizeLimit> | Yanıt önbelleği ara yazılımı için bayt cinsinden boyut sınırı. Varsayılan değer `100 * 1024 * 1024` (100 MB). |
-| <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.UseCaseSensitivePaths> | Yanıtların büyük/küçük harfe duyarlı yollarda önbelleğe alınıp alınmayacağını belirler. Varsayılan değer: `false`. |
+| <xref:Microsoft.AspNetCore.ResponseCaching.ResponseCachingOptions.UseCaseSensitivePaths> | Yanıtların büyük/küçük harfe duyarlı yollarda önbelleğe alınıp alınmayacağını belirler. `false` varsayılan değerdir. |
 
 Aşağıdaki örnek, şu şekilde bir ara yazılım yapılandırır:
 
@@ -257,7 +258,7 @@ Aşağıdaki tabloda, yanıt önbelleğini etkileyen HTTP üstbilgileri hakkınd
 | Üst bilgi | Ayrıntılar |
 | ------ | ------- |
 | `Authorization` | Üst bilgi varsa yanıt önbelleğe alınmaz. |
-| `Cache-Control` | Ara yazılım yalnızca önbellek yönergesi ile işaretlenmiş önbelleğe alma yanıtlarını dikkate alır `public` . Aşağıdaki parametrelerle önbelleğe alma denetimi:<ul><li>Maksimum yaş</li><li>en fazla-eski&#8224;</li><li>en az-yeni</li><li>yeniden doğrulama gerekir</li><li>önbellek yok</li><li>mağaza yok</li><li>yalnızca-if-önbelleğe alındı</li><li>private</li><li>public</li><li>s-maxage</li><li>Proxy-yeniden doğrulama&#8225;</li></ul>&#8224;hiçbir sınır belirtilmemişse `max-stale` , ara yazılım hiçbir eylemde bulunmaz.<br>&#8225;`proxy-revalidate` , ile aynı etkiye sahiptir `must-revalidate` .<br><br>Daha fazla bilgi için bkz. [RFC 7231: Istek Cache-Control yönergeleri](https://tools.ietf.org/html/rfc7234#section-5.2.1). |
+| `Cache-Control` | Ara yazılım yalnızca önbellek yönergesi ile işaretlenmiş önbelleğe alma yanıtlarını dikkate alır `public` . Aşağıdaki parametrelerle önbelleğe alma denetimi:<ul><li>Maksimum yaş</li><li>en fazla-eski&#8224;</li><li>en az-yeni</li><li>yeniden doğrulama gerekir</li><li>önbellek yok</li><li>mağaza yok</li><li>yalnızca-if-önbelleğe alındı</li><li>private</li><li>public</li><li>s-maxage</li><li>Proxy-yeniden doğrulama&#8225;</li></ul>&#8224;hiçbir sınır belirtilmemişse `max-stale` , ara yazılım hiçbir eylemde bulunmaz.<br>&#8225;`proxy-revalidate` , ile aynı etkiye sahiptir `must-revalidate` .<br><br>Daha fazla bilgi için bkz. [RFC 7231: istek Cache-Control yönergeleri](https://tools.ietf.org/html/rfc7234#section-5.2.1). |
 | `Pragma` | `Pragma: no-cache`İstekteki bir üst bilgi, ile aynı etkiyi üretir `Cache-Control: no-cache` . Bu üst bilgi, varsa başlıktaki ilgili yönergeler tarafından geçersiz kılınır `Cache-Control` . HTTP/1.0 ile geriye dönük uyumluluk için değerlendirilir. |
 | `Set-Cookie` | Üst bilgi varsa yanıt önbelleğe alınmaz. İstek işleme ardışık düzeninde bir veya daha fazla s ayarlayan herhangi bir ara yazılım, cookie yanıt önbelleğe alma ara hattının yanıtı önbelleğe almasını engeller (örneğin, [ cookie tabanlı TempData sağlayıcısı](xref:fundamentals/app-state#tempdata)).  |
 | `Vary` | Üst bilgi, `Vary` başka bir üst bilgi tarafından önbelleğe alınan yanıtı değiştirmek için kullanılır. Örneğin, üst bilgi `Vary: Accept-Encoding` `Accept-Encoding: gzip` ve ayrı ayrı istekler için yanıtları önbelleğe alan üstbilgiyi ekleyerek kodlamaya göre yanıtları önbelleğe alır `Accept-Encoding: text/plain` . Üstbilgi değeri olan bir yanıt hiçbir şekilde `*` depolanmaz. |

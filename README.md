@@ -1,7 +1,7 @@
-# <a name="aspnet-core-docs"></a>ASP.NET Çekirdek Dokümanlar
+# <a name="aspnet-core-docs"></a>ASP.NET Core docs
 
-Bu depo, [docs.microsoft.com/aspnet/core](https://docs.microsoft.com/aspnet/core)barındırılan kavramsal ASP.NET Çekirdek dokümantasyoniçerir. Yardım etmek isterseniz [Katkıda Bulunan Lar Kılavuzu'na](CONTRIBUTING.md) ve [sorunlar listesine](https://github.com/dotnet/AspNetCore.Docs/issues) bakın.
+Bu depo, [docs.Microsoft.com/ASPNET/Core](https://docs.microsoft.com/aspnet/core/getting-started)adresinde barındırılan kavramsal ASP.NET Core belgelerini içerir. Yardımcı olmak istiyorsanız [katkıda bulunan kılavuzuna](CONTRIBUTING.md) ve [sorunlar listesine](https://github.com/dotnet/AspNetCore.Docs/issues) bakın.
 
-API dokümantasyon [değişiklikleri, AspNetApiDocs deposunda](https://github.com/dotnet/AspNetApiDocs) üçlü `///` eğik çizgi açıklamalarına karşı yapılır.
+API belge değişiklikleri, [Aspnetapidocs deposunda](https://github.com/dotnet/AspNetApiDocs) Üçlü eğik çizgi açıklamalarına göre yapılır `///` .
 
-ASP.NET 4.x dokümantasyon değişiklikleri [dotnet/AspNetDocs deposunda](https://github.com/dotnet/AspNetDocs)yapılır.
+ASP.NET 4. x belge değişiklikleri [DotNet/AspNetDocs deposunda](https://github.com/dotnet/AspNetDocs)yapılır.

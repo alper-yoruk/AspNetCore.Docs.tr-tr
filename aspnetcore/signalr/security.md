@@ -7,6 +7,7 @@ ms.author: anurse
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/security
-ms.openlocfilehash: 12293c5cb3dc49d505225f1b44e824e9273cfffc
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 5ecbf07b1527e9c68443870f7fce77adc29a5416
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88630997"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93050842"
 ---
 # <a name="security-considerations-in-aspnet-core-no-locsignalr"></a>ASP.NET Core güvenlik konuları SignalR
 
@@ -33,7 +34,7 @@ Bu makalede, güvenliğini sağlama hakkında bilgi sağlanır SignalR .
 
 ## <a name="cross-origin-resource-sharing"></a>Çıkış noktaları arası kaynak paylaşma
 
-[Çapraz kaynak kaynak paylaşımı (CORS)](https://www.w3.org/TR/cors/) , tarayıcıda çapraz kaynak bağlantılarına izin vermek için kullanılabilir SignalR . JavaScript kodu uygulamadan farklı bir etki alanında barındırılıyorsa SignalR , JavaScript 'in uygulamaya bağlanmasına izin vermek Için [CORS ara yazılımı](xref:security/cors) etkinleştirilmelidir SignalR . Yalnızca güvendiğiniz veya denetlediğiniz etki alanlarından çıkış noktaları arası isteklere izin verin. Örnek:
+[Çapraz kaynak kaynak paylaşımı (CORS)](https://www.w3.org/TR/cors/) , tarayıcıda çapraz kaynak bağlantılarına izin vermek için kullanılabilir SignalR . JavaScript kodu uygulamadan farklı bir etki alanında barındırılıyorsa SignalR , JavaScript 'in uygulamaya bağlanmasına izin vermek Için [CORS ara yazılımı](xref:security/cors) etkinleştirilmelidir SignalR . Yalnızca güvendiğiniz veya denetlediğiniz etki alanlarından çıkış noktaları arası isteklere izin verin. Örneğin:
 
 * Siteniz üzerinde barındırılıyor `http://www.example.com`
 * SignalRUygulamanız üzerinde barındırılıyor`http://signalr.example.com`
@@ -101,14 +102,14 @@ CORS tarafından sunulan korumalar WebSockets için geçerlidir. WebSockets üze
 
 ::: moniker range="< aspnetcore-2.2"
 
-CORS tarafından sunulan korumalar WebSockets için geçerlidir. Tarayıcılar şunları **desteklemez**:
+CORS tarafından sunulan korumalar WebSockets için geçerlidir. Tarayıcılar şunları **desteklemez** :
 
 * CORS ön uçuş istekleri gerçekleştirin.
 * `Access-Control`WebSocket istekleri yapılırken üst bilgilerde belirtilen kısıtlamalara saygı.
 
 Ancak, tarayıcılar `Origin` WebSocket istekleri verirken üstbilgiyi gönderir. Yalnızca beklenen kaynaklardan gelen WebSockets izin verildiğinden emin olmak için uygulamalar bu üstbilgileri doğrulamak üzere yapılandırılmalıdır.
 
-ASP.NET Core 2,1 ve üzeri sürümlerde, daha önce yerleştirilmiş özel bir ara yazılım ** `UseSignalR` ve içindeki kimlik doğrulama ara yazılımı** kullanılarak üst bilgi doğrulaması elde edilebilir `Configure` :
+ASP.NET Core 2,1 ve üzeri sürümlerde, daha önce yerleştirilmiş özel bir ara yazılım **`UseSignalR` ve içindeki kimlik doğrulama ara yazılımı** kullanılarak üst bilgi doğrulaması elde edilebilir `Configure` :
 
 [!code-csharp[Main](security/sample/Startup.cs?name=snippet2)]
 
@@ -123,7 +124,7 @@ ASP.NET Core 2,1 ve üzeri sürümlerde, daha önce yerleştirilmiş özel bir a
 
 ## <a name="access-token-logging"></a>Erişim belirteci günlüğe kaydetme
 
-WebSockets veya sunucu tarafından gönderilen olaylar kullanılırken, tarayıcı istemcisi erişim belirtecini sorgu dizesinde gönderir. Sorgu dizesi aracılığıyla erişim belirtecinin alınması genellikle standart `Authorization` üst bilgi kullanılarak güvenlidir. İstemci ve sunucu arasında güvenli bir uçtan uca bağlantı sağlamak için her zaman HTTPS kullanın. Birçok Web sunucusu, sorgu dizesi dahil olmak üzere her bir isteğin URL 'sini günlüğe kaydeder. URL 'Leri günlüğe kaydetme erişim belirtecini günlüğe alabilir. ASP.NET Core, her isteğin URL 'sini varsayılan olarak günlüğe kaydeder ve bu sorgu dizesini içerir. Örnek:
+WebSockets veya Server-Sent olaylarını kullanırken, tarayıcı istemcisi erişim belirtecini sorgu dizesinde gönderir. Sorgu dizesi aracılığıyla erişim belirtecinin alınması genellikle standart `Authorization` üst bilgi kullanılarak güvenlidir. İstemci ve sunucu arasında güvenli bir uçtan uca bağlantı sağlamak için her zaman HTTPS kullanın. Birçok Web sunucusu, sorgu dizesi dahil olmak üzere her bir isteğin URL 'sini günlüğe kaydeder. URL 'Leri günlüğe kaydetme erişim belirtecini günlüğe alabilir. ASP.NET Core, her isteğin URL 'sini varsayılan olarak günlüğe kaydeder ve bu sorgu dizesini içerir. Örneğin:
 
 ```
 info: Microsoft.AspNetCore.Hosting.Internal.WebHost[1]

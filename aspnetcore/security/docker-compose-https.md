@@ -7,6 +7,7 @@ ms.author: ravipal
 ms.custom: mvc
 ms.date: 03/28/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/docker-compose-https
-ms.openlocfilehash: cd46fdcbe10dc0b7829fbe7eaef821889f395df4
-ms.sourcegitcommit: 74f4a4ddbe3c2f11e2e09d05d2a979784d89d3f5
+ms.openlocfilehash: 37a0142dac1e26afd26dbf2aad46bee20693652e
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/27/2020
-ms.locfileid: "91393710"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051648"
 ---
 # <a name="hosting-aspnet-core-images-with-docker-compose-over-https"></a>HTTPS üzerinden Docker Compose olan ASP.NET Core görüntülerini barındırma
 
@@ -51,7 +52,7 @@ Bu belge, üzerine önceden oluşturulmuş görüntüleri barındırmak için [o
 * `dotnet dev-certs`Araç gerekli değildir.
 * Sertifikaların, yönergelerde kullanılan konumda depolanması gerekmez. Sertifikaları, site dizini dışında herhangi bir konumda depolayın.
 
-Aşağıdaki bölümde yer alan yönergeler, `volumes` *Docker-Compose. yıml* içindeki özelliğini kullanarak sertifikaları kapsayıcılara bağlama. `COPY` *Dockerfile*dosyasında bir komutla kapsayıcı görüntülerine sertifika ekleyebilirsiniz, ancak bunu yapmanız önerilmez. Sertifikaları bir görüntüye kopyalamak aşağıdaki nedenlerden dolayı önerilmez:
+Aşağıdaki bölümde yer alan yönergeler, `volumes` *Docker-Compose. yıml* içindeki özelliğini kullanarak sertifikaları kapsayıcılara bağlama. `COPY` *Dockerfile* dosyasında bir komutla kapsayıcı görüntülerine sertifika ekleyebilirsiniz, ancak bunu yapmanız önerilmez. Sertifikaları bir görüntüye kopyalamak aşağıdaki nedenlerden dolayı önerilmez:
 
 * Geliştirici sertifikaları ile test için aynı görüntünün kullanımını zorlaştırır.
 * Üretim sertifikaları ile barındırmak için aynı görüntünün kullanımını zorlaştırır.

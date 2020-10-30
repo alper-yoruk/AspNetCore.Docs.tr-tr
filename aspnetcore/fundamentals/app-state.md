@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 03/06/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/app-state
-ms.openlocfilehash: 95035ec372ab6adb5bafb40f2b939c549ac6f839
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: c11b748f9d79235b14c9541019da6e1fb3428af6
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88633818"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051414"
 ---
 # <a name="session-and-state-management-in-aspnet-core"></a>ASP.NET Core’da oturum ve durum yönetimi
 
@@ -141,7 +142,7 @@ Oturum varsayılanlarını geçersiz kılmak için cookie şunu kullanın <xref:
 
 Uygulama, <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> bir oturumun, sunucunun önbelleğindeki içeriği terk edilmeden önce ne kadar süreyle boşta kalabileceğini anlamak için özelliğini kullanır. Bu özellik, cookie süre sonundan bağımsızdır. [Oturum ara yazılımı](xref:Microsoft.AspNetCore.Session.SessionMiddleware) üzerinden geçen her istek zaman aşımını sıfırlar.
 
-Oturum durumu *kilitli*değil. İki istek aynı anda bir oturumun içeriğini değiştirmeyi denerseniz, son istek ilk geçersiz kılar. `Session`*tutarlı bir oturum*olarak uygulanır, yani tüm içerikler birlikte depolanır. İki istek farklı oturum değerlerini değiştirmek için arama yaparken, son istek ilk tarafından yapılan oturum değişikliklerini geçersiz kılabilir.
+Oturum durumu *kilitli* değil. İki istek aynı anda bir oturumun içeriğini değiştirmeyi denerseniz, son istek ilk geçersiz kılar. `Session`*tutarlı bir oturum* olarak uygulanır, yani tüm içerikler birlikte depolanır. İki istek farklı oturum değerlerini değiştirmek için arama yaparken, son istek ilk tarafından yapılan oturum değişikliklerini geçersiz kılabilir.
 
 ### <a name="set-and-get-session-values"></a>Oturum değerlerini ayarlama ve edinme
 
@@ -401,7 +402,7 @@ Oturum varsayılanlarını geçersiz kılmak için cookie şunu kullanın `Sessi
 
 Uygulama, <xref:Microsoft.AspNetCore.Builder.SessionOptions.IdleTimeout> bir oturumun, sunucunun önbelleğindeki içeriği terk edilmeden önce ne kadar süreyle boşta kalabileceğini anlamak için özelliğini kullanır. Bu özellik, cookie süre sonundan bağımsızdır. [Oturum ara yazılımı](xref:Microsoft.AspNetCore.Session.SessionMiddleware) üzerinden geçen her istek zaman aşımını sıfırlar.
 
-Oturum durumu *kilitli*değil. İki istek aynı anda bir oturumun içeriğini değiştirmeyi denerseniz, son istek ilk geçersiz kılar. `Session`*tutarlı bir oturum*olarak uygulanır, yani tüm içerikler birlikte depolanır. İki istek farklı oturum değerlerini değiştirmek için arama yaparken, son istek ilk tarafından yapılan oturum değişikliklerini geçersiz kılabilir.
+Oturum durumu *kilitli* değil. İki istek aynı anda bir oturumun içeriğini değiştirmeyi denerseniz, son istek ilk geçersiz kılar. `Session`*tutarlı bir oturum* olarak uygulanır, yani tüm içerikler birlikte depolanır. İki istek farklı oturum değerlerini değiştirmek için arama yaparken, son istek ilk tarafından yapılan oturum değişikliklerini geçersiz kılabilir.
 
 ### <a name="set-and-get-session-values"></a>Oturum değerlerini ayarlama ve edinme
 

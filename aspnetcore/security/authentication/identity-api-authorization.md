@@ -5,8 +5,9 @@ description: IdentityASP.NET Core uygulamasının içinde barındırılan tek sa
 monikerRange: '>= aspnetcore-3.0'
 ms.author: scaddie
 ms.custom: mvc
-ms.date: 11/08/2019
+ms.date: 10/27/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,30 +19,30 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity/spa
-ms.openlocfilehash: 1e50fb2f2f5e3621b189f756c53e80a2dd64c8a6
-ms.sourcegitcommit: d60bfd52bfb559e805abd654b87a2a0c7eb69cf8
+ms.openlocfilehash: 8acc34c88bf62b3da1b920acc7318c94435c100e
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/06/2020
-ms.locfileid: "91754534"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051986"
 ---
 # <a name="authentication-and-authorization-for-spas"></a>Maça kimlik doğrulaması ve yetkilendirme
 
 ASP.NET Core 3,1 ve üzeri şablonlar, API yetkilendirmesi desteğini kullanarak tek sayfalı uygulamalarda (Spaon) kimlik doğrulaması sunar. ASP.NET Core Identitykimlik doğrulamak ve depolamak için, OpenID Connect 'i uygulamak üzere [ Identity sunucu](https://identityserver.io/) ile birleştirilir.
 
-Bir kimlik doğrulama parametresi, **angular** 'a eklenmiştir ve **Web uygulamasındaki (model-görünüm-denetleyici)** (MVC) ve **Web uygulaması** (sayfalar) proje şablonlarında kimlik doğrulama parametresine benzer olan proje şablonlarına **tepki** verir Razor . İzin verilen parametre değerleri **none** ve **bireysel**. **React.js ve Redux** proje şablonu, kimlik doğrulama parametresini Şu anda desteklemiyor.
+Bir kimlik doğrulama parametresi, **angular** 'a eklenmiştir ve **Web uygulamasındaki (model-görünüm-denetleyici)** (MVC) ve **Web uygulaması** (sayfalar) proje şablonlarında kimlik doğrulama parametresine benzer olan proje şablonlarına **tepki** verir Razor . İzin verilen parametre değerleri **none** ve **bireysel** . **React.js ve Redux** proje şablonu, kimlik doğrulama parametresini Şu anda desteklemiyor.
 
 ## <a name="create-an-app-with-api-authorization-support"></a>API yetkilendirme desteğiyle uygulama oluşturma
 
 Kullanıcı kimlik doğrulaması ve yetkilendirme, hem angular ile hem de maça 'Ları ile kullanılabilir. Bir komut kabuğu açın ve şu komutu çalıştırın:
 
-**Angular**:
+**Angular** :
 
 ```dotnetcli
 dotnet new angular -o <output_directory_name> -au Individual
 ```
 
-**Tepki**verme:
+**Tepki** verme:
 
 ```dotnetcli
 dotnet new react -o <output_directory_name> -au Individual
@@ -119,9 +120,9 @@ Veritabanı şemasının tam denetimini elde etmek için, kullanılabilir Identi
 
 *Controllers\oıdcconfigurationcontroller.cs* dosyasında, istemcinin kullanması gereken OIDC parametrelerine hizmeti sağlaması için sağlanan uç noktaya dikkat edin.
 
-### <a name="appsettingsjson"></a>appsettings.json
+### appsettings.json
 
-Proje kökünün dosyasındaki *appsettings.js* , `IdentityServer` yapılandırılmış istemciler listesini açıklayan yeni bir bölüm vardır. Aşağıdaki örnekte, tek bir istemci vardır. İstemci adı, uygulama adına karşılık gelir ve kural tarafından OAuth `ClientId` parametresine eşlenir. Profil, yapılandırılan uygulama türünü gösterir. Sunucu için yapılandırma işlemini basitleştiren kuralları yönlendirmek için dahili olarak kullanılır. [Uygulama profilleri](#application-profiles) bölümünde açıklandığı gibi çeşitli profiller mevcuttur.
+*appsettings.json* Proje kökü dosyasında, `IdentityServer` yapılandırılmış istemciler listesini açıklayan yeni bir bölüm vardır. Aşağıdaki örnekte, tek bir istemci vardır. İstemci adı, uygulama adına karşılık gelir ve kural tarafından OAuth `ClientId` parametresine eşlenir. Profil, yapılandırılan uygulama türünü gösterir. Sunucu için yapılandırma işlemini basitleştiren kuralları yönlendirmek için dahili olarak kullanılır. [Uygulama profilleri](#application-profiles) bölümünde açıklandığı gibi çeşitli profiller mevcuttur.
 
 ```json
 "IdentityServer": {
@@ -150,9 +151,9 @@ Proje kökünün dosyasındaki *appsettings.Development.js* , `IdentityServer` b
 Angular şablonundaki kimlik doğrulama ve API yetkilendirme desteği *Clientapp\src\api-Authorization* dizinindeki kendi angular modülünde yer alır. Modül aşağıdaki öğelerden oluşur:
 
 * 3 bileşen:
-  * *login. Component. TS*: uygulamanın oturum açma akışını işler.
-  * *Logout. Component. TS*: uygulamanın oturum kapatma akışını işler.
-  * *login-Menu. Component. TS*: aşağıdaki bağlantı kümelerinden birini görüntüleyen pencere öğesi:
+  * *login. Component. TS* : uygulamanın oturum açma akışını işler.
+  * *Logout. Component. TS* : uygulamanın oturum kapatma akışını işler.
+  * *login-Menu. Component. TS* : aşağıdaki bağlantı kümelerinden birini görüntüleyen pencere öğesi:
     * Kullanıcı profili yönetimi ve kullanıcının kimlik doğrulaması yapıldığında oturum kapatma bağlantıları.
     * Kullanıcının kimlik doğrulaması olmadığında kayıt ve oturum açma bağlantıları.
 * `AuthorizeGuard`Rotalara eklenebilen ve yolu ziyaret etmeden önce bir kullanıcının kimliğinin doğrulanmasını gerektiren bir Route koruyucusu.
@@ -165,12 +166,12 @@ Angular şablonundaki kimlik doğrulama ve API yetkilendirme desteği *Clientapp
 Yanıt verme şablonunda kimlik doğrulama ve API yetkilendirmesi desteği *Clientapp\src\\disk api-Authorization* dizininde bulunur. Şu öğelerden oluşur:
 
 * 4 bileşen:
-  * *Login.js*: uygulamanın oturum açma akışını işler.
-  * *Logout.js*: uygulamanın oturum kapatma akışını işler.
-  * *LoginMenu.js*: aşağıdaki bağlantı kümelerinden birini görüntüleyen pencere öğesi:
+  * *Login.js* : uygulamanın oturum açma akışını işler.
+  * *Logout.js* : uygulamanın oturum kapatma akışını işler.
+  * *LoginMenu.js* : aşağıdaki bağlantı kümelerinden birini görüntüleyen pencere öğesi:
     * Kullanıcı profili yönetimi ve kullanıcının kimlik doğrulaması yapıldığında oturum kapatma bağlantıları.
     * Kullanıcının kimlik doğrulaması olmadığında kayıt ve oturum açma bağlantıları.
-  * *AuthorizeRoute.js*: bir kullanıcının, parametresinde belirtilen bileşeni işlemeden önce kimliğinin doğrulanmasını gerektiren bir rota bileşeni `Component` .
+  * *AuthorizeRoute.js* : bir kullanıcının, parametresinde belirtilen bileşeni işlemeden önce kimliğinin doğrulanmasını gerektiren bir rota bileşeni `Component` .
 * `authService` `AuthorizeService` Kimlik doğrulama işleminin alt düzey ayrıntılarını işleyen ve kimliği doğrulanmış kullanıcı hakkındaki bilgileri, tüketim için uygulamanın geri kalanına getiren, dışa aktarılmış bir sınıf örneği.
 
 Artık çözümün ana bileşenlerini gördüğünüze göre, uygulama için ayrı senaryolara daha ayrıntılı bir şekilde göz atabilirsiniz.
@@ -197,7 +198,7 @@ services.Configure<JwtBearerOptions>(
 
 API 'nin JWT işleyicisi, kullanarak kimlik doğrulama işlemi üzerinde denetimi etkinleştiren olaylar oluşturur `JwtBearerEvents` . API yetkilendirmesi için destek sağlamak üzere `AddIdentityServerJwt` kendi olay işleyicilerini kaydeder.
 
-Bir olayın işlenmesini özelleştirmek için, var olan olay işleyicisini gereken ek mantığla sarın. Örnek:
+Bir olayın işlenmesini özelleştirmek için, var olan olay işleyicisini gereken ek mantığla sarın. Örneğin:
 
 ```csharp
 services.Configure<JwtBearerOptions>(
@@ -282,11 +283,32 @@ Uygulamayı üretime dağıtmak için aşağıdaki kaynakların sağlanması ger
   * PowerShell veya OpenSSL gibi standart araçlarla oluşturulabilir.
   * Hedef makinelerdeki sertifika deposuna yüklenebilir veya güçlü bir parolayla bir *. pfx* dosyası olarak dağıtılabilir.
 
+### <a name="example-deploy-to-a-non-azure-web-hosting-provider"></a>Örnek: Azure olmayan bir Web barındırma sağlayıcısına dağıtma
+
+Web barındırma panelinde sertifikanızı oluşturun veya yükleyin. Ardından, uygulama dosyasında, *appsettings.json* `IdentityServer` önemli ayrıntıları dahil etmek için bölümünü değiştirin. Örneğin:
+
+```json
+"IdentityServer": {
+  "Key": {
+    "Type": "Store",
+    "StoreName": "WebHosting",
+    "StoreLocation": "CurrentUser",
+    "Name": "CN=MyApplication"
+  }
+}
+```
+
+Yukarıdaki örnekte:
+
+* `StoreName` Sertifikanın depolandığı sertifika deposunun adını temsil eder. Bu durumda, Web barındırma deposuna işaret eder.
+* `StoreLocation` Sertifikanın nereden yükleneceğini temsil eder ( `CurrentUser` Bu durumda).
+* `Name` Sertifikanın ayırt edici konusuna karşılık gelir.
+
 ### <a name="example-deploy-to-azure-app-service"></a>Örnek: Azure App Service dağıt
 
 Bu bölümde, sertifika deposunda depolanan bir sertifikayı kullanarak Azure App Service uygulamanın dağıtımı açıklanmaktadır. Uygulamayı sertifika deposundan bir sertifika yükleyecek şekilde değiştirmek için, daha sonraki bir adımda Azure portal uygulamayı yapılandırdığınızda standart bir katman hizmeti planı veya daha iyi bir seçenektir.
 
-Uygulamanın dosyada *appsettings.js* , `IdentityServer` önemli ayrıntıları içerecek şekilde bölümünü değiştirin:
+Uygulamanın *appsettings.json* dosyasında, `IdentityServer` önemli ayrıntıları dahil etmek için bölümünü değiştirin:
 
 ```json
 "IdentityServer": {

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/06/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/enforcing-ssl
-ms.openlocfilehash: b5260084c2fdd296168e918f06d8b54faf1865d5
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: e473da9a7cbd91a601ad4af0c7c02c7f576f348c
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722663"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051128"
 ---
 # <a name="enforce-https-in-aspnet-core"></a>ASP.NET Core 'de HTTPS 'yi zorla
 
@@ -113,7 +114,7 @@ Aşağıdaki yaklaşımlardan herhangi birini kullanarak HTTPS bağlantı noktas
 
   * Konak yapılandırmasında.
   * `ASPNETCORE_HTTPS_PORT`Ortam değişkenini ayarlayarak.
-  * *Üzerindeappsettings.js*en üst düzey bir giriş ekleyerek:
+  * ' De bir üst düzey giriş ekleyerek *appsettings.json* :
 
     [!code-json[](enforcing-ssl/sample-snapshot/3.x/appsettings.json?highlight=2)]
 
@@ -127,7 +128,7 @@ Aşağıdaki yaklaşımlardan herhangi birini kullanarak HTTPS bağlantı noktas
 
   * Konak yapılandırmasında.
   * `ASPNETCORE_HTTPS_PORT`Ortam değişkenini ayarlayarak.
-  * *Üzerindeappsettings.js*en üst düzey bir giriş ekleyerek:
+  * ' De bir üst düzey giriş ekleyerek *appsettings.json* :
 
     [!code-json[](enforcing-ssl/sample-snapshot/2.x/appsettings.json?highlight=2)]
 
@@ -135,7 +136,7 @@ Aşağıdaki yaklaşımlardan herhangi birini kullanarak HTTPS bağlantı noktas
 
 ::: moniker-end
 
-* Geliştirme aşamasında, * üzerindelaunchsettings.js*bir https URL 'si ayarlayın. IIS Express kullanıldığında HTTPS 'yi etkinleştirin.
+* Geliştirme aşamasında, *üzerindelaunchsettings.js* bir https URL 'si ayarlayın. IIS Express kullanıldığında HTTPS 'yi etkinleştirin.
 
 * [Kestrel](xref:fundamentals/servers/kestrel) server veya [HTTP.sys](xref:fundamentals/servers/httpsys) Server 'ın herkese açık BIR uç dağıtımı için https URL uç noktası yapılandırın. Uygulama tarafından yalnızca **BIR HTTPS bağlantı noktası** kullanılır. Ara yazılım, ile bağlantı noktasını bulur <xref:Microsoft.AspNetCore.Hosting.Server.Features.IServerAddressesFeature> .
 
@@ -192,7 +193,7 @@ Ara yazılım varsayılan olarak tüm yeniden yönlendirmelere bir [Status307Tem
 
 ::: moniker range=">= aspnetcore-3.0"
 
-*Startup.cs*'de Hizmetleri yapılandırırken:
+*Startup.cs* 'de Hizmetleri yapılandırırken:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)
@@ -213,7 +214,7 @@ public void ConfigureServices(IServiceCollection services)
 
 ::: moniker range="<= aspnetcore-2.2"
 
-*Startup.cs*'de Hizmetleri yapılandırırken:
+*Startup.cs* 'de Hizmetleri yapılandırırken:
 
 ```csharp
 public void ConfigureServices(IServiceCollection services)

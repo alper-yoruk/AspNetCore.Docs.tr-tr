@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc, devx-track-js
 ms.date: 04/08/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/javascript-client
-ms.openlocfilehash: be271272c952487fccc5136307c84fdf49391848
-ms.sourcegitcommit: 2e3a967331b2c69f585dd61e9ad5c09763615b44
+ms.openlocfilehash: b4b1bc6131a6676710adbf2503efe3f304d89a58
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/27/2020
-ms.locfileid: "92690645"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93050855"
 ---
 # <a name="aspnet-core-no-locsignalr-javascript-client"></a>SignalRJavaScript istemcisi ASP.NET Core
 
@@ -81,6 +82,9 @@ Aşağıdaki kod bir bağlantı oluşturur ve başlatır. Hub 'ın adı büyük/
 ### <a name="cross-origin-connections"></a>Çapraz kaynak bağlantıları
 
 Genellikle, tarayıcılar istenen sayfayla aynı etki alanındaki bağlantıları yükler. Ancak, başka bir etki alanına bağlantı gerektiğinde bu durumlar vardır.
+
+> [!IMPORTANT]
+> İstemci kodunun göreli URL yerine mutlak URL kullanması gerekir. `.withUrl("/chathub")`Olarak değiştirin `.withUrl("https://myappurl/chathub")` .
 
 Kötü amaçlı bir sitenin başka bir siteden hassas verileri okumasını engellemek için, [Çıkış](xref:security/cors) noktaları varsayılan olarak devre dışı bırakılır. Bir çapraz kaynak isteğine izin vermek için `Startup` sınıfında etkinleştirin:
 

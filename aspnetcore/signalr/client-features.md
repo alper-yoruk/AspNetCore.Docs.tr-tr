@@ -6,6 +6,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 11/12/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/client-features
-ms.openlocfilehash: bb8352b11e78582c4a32b67da7dcb701d020b0d9
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 1d1778f95c53179ca05eaced3d1913f208220df4
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90721716"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93050985"
 ---
 # <a name="aspnet-core-no-locsignalr-clients"></a>ASP.NET Core SignalR istemcileri
 
@@ -46,14 +47,14 @@ SignalR2,1 ve 2,2 .NET Core yayınlarına eşlenecek ve aynı yaşam süresine s
 
 Aşağıdaki tabloda, gerçek zamanlı destek sunan istemciler için özellikler ve destek gösterilmektedir. Her özellik için, bu özelliği destekleyen *En düşük* sürüm listelenir. Listelenen bir sürüm yoksa özellik desteklenmez.
 
-| Öne çıkan özelliği | Sunucu | .NET istemcisi | JavaScript istemcisi | Java istemcisi |
+| Özellik | Sunucu | .NET istemcisi | JavaScript istemcisi | Java istemcisi |
 | ---- | :-: | :-: | :-: | :-: |
 | Azure SignalR hizmeti desteği |2.1.0|1.0.0|1.0.0|1.0.0|
 | [Sunucudan istemciye akış](xref:signalr/streaming)          |2.1.0|1.0.0|1.0.0|1.0.0|
 | [İstemciden sunucuya akış](xref:signalr/streaming)          |3.0.0|3.0.0|3.0.0|3.0.0|
 | Otomatik yeniden bağlanma ([.net](./dotnet-client.md?tabs=visual-studio&view=aspnetcore-3.0#handle-lost-connection), [JavaScript](./javascript-client.md?view=aspnetcore-3.0#reconnect-clients))          |3.0.0|3.0.0|3.0.0|❌|
 | WebSockets taşıma |2.1.0|1.0.0|1.0.0|1.0.0|
-| Sunucu tarafından gönderilen olay aktarımı |2.1.0|1.0.0|1.0.0|❌|
+| Server-Sent olay aktarımı |2.1.0|1.0.0|1.0.0|❌|
 | Uzun yoklama taşıması |2.1.0|1.0.0|1.0.0|3.0.0|
 | JSON hub 'ı Protokolü |2.1.0|1.0.0|1.0.0|1.0.0|
 | MessagePack Hub Protokolü |2.1.0|1.0.0|1.0.0|❌|

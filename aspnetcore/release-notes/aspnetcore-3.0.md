@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: aspnetcore-3.0
-ms.openlocfilehash: a1cbd8f434214ce488fc3febe63d8aaf54db71a3
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: 235daac5c08248ca2052de6b44e66a8162ce23ad
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722793"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051245"
 ---
 # <a name="whats-new-in-aspnet-core-30"></a>ASP.NET Core 3,0 ' deki yenilikler
 
@@ -218,7 +219,7 @@ public class ChatHub : Hub
 
 İlkeyi oluşturmak `DomainRestricted` şunları içerebilir:
 
-* *Startup.cs*' de, yeni ilkeyi ekleme.
+* *Startup.cs* ' de, yeni ilkeyi ekleme.
 * Özel `DomainRestrictedRequirement` gereksinimi parametre olarak belirtin.
 * `DomainRestricted`Yetkilendirme ara yazılımı ile kaydetme.
 
@@ -481,7 +482,7 @@ Durum denetimleri uç noktaları şunları yapabilir:
 * Yetkilendirme gerektir.
 * CORS gerektir.
 
-Daha fazla bilgi için aşağıdaki makaleleri inceleyin:
+Daha fazla bilgi için aşağıdaki makalelere bakın:
 
 * <xref:migration/22-to-30#health-checks>
 * <xref:host-and-deploy/health-checks>
@@ -512,7 +513,7 @@ Daha fazla bilgi için bkz.
 
 Bu senaryo ASP.NET Core 3,0 ' de düzeltilmiştir. Ortam değişkeni olarak ayarlandığında, ana bilgisayar [Iletilen üstbilgiler ara yazılımını](xref:host-and-deploy/proxy-load-balancer#forwarded-headers-middleware-options) sağlar `ASPNETCORE_FORWARDEDHEADERS_ENABLED` `true` . `ASPNETCORE_FORWARDEDHEADERS_ENABLED` , `true` kapsayıcı görüntülerimizde olarak ayarlanır.
 
-## <a name="performance-improvements"></a>Performans geliştirmeleri
+## <a name="performance-improvements"></a>Performans iyileştirmeleri
 
 ASP.NET Core 3,0, bellek kullanımını azaltan ve üretilen işi geliştiren birçok geliştirme içerir:
 

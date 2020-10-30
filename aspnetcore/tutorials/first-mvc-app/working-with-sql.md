@@ -5,6 +5,7 @@ description: 5. bölüm, ASP.NET Core MVC uygulamasına model ekleme
 ms.author: riande
 ms.date: 8/16/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/first-mvc-app/working-with-sql
-ms.openlocfilehash: 23ecee4e3482b3ee82ae597671a8c45515eb4589
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: f893aa1041a42c12514b825fb3c8e96a6104358d
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634936"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051583"
 ---
 # <a name="part-5-work-with-a-database-in-an-aspnet-core-mvc-app"></a>5. bölüm, ASP.NET Core MVC uygulamasındaki bir veritabanıyla çalışma
 
@@ -35,7 +36,7 @@ Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_ConfigureServices&highlight=5-6)]
 
-ASP.NET Core [yapılandırma](xref:fundamentals/configuration/index) sistemi okur `ConnectionString` . Yerel geliştirme için, dosyadaki *appsettings.js* bağlantı dizesini alır:
+ASP.NET Core [yapılandırma](xref:fundamentals/configuration/index) sistemi okur `ConnectionString` . Yerel geliştirme için, dosyadaki bağlantı dizesini alır *appsettings.json* :
 
 [!code-json[](start-mvc/sample/MvcMovie/appsettings.json?highlight=2&range=8-10)]
 
@@ -43,7 +44,7 @@ ASP.NET Core [yapılandırma](xref:fundamentals/configuration/index) sistemi oku
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie3/Startup.cs?name=snippet_UseSqlite&highlight=5-6)]
 
-ASP.NET Core [yapılandırma](xref:fundamentals/configuration/index) sistemi okur `ConnectionString` . Yerel geliştirme için, dosyadaki *appsettings.js* bağlantı dizesini alır:
+ASP.NET Core [yapılandırma](xref:fundamentals/configuration/index) sistemi okur `ConnectionString` . Yerel geliştirme için, dosyadaki bağlantı dizesini alır *appsettings.json* :
 
 [!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/appsettingsSQLite.json?highlight=2&range=8-10)]
 
@@ -147,7 +148,7 @@ Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Startup.cs?name=snippet_ConfigureServices&highlight=13-99)]
 
-ASP.NET Core [yapılandırma](xref:fundamentals/configuration/index) sistemi okur `ConnectionString` . Yerel geliştirme için, dosyadaki *appsettings.js* bağlantı dizesini alır:
+ASP.NET Core [yapılandırma](xref:fundamentals/configuration/index) sistemi okur `ConnectionString` . Yerel geliştirme için, dosyadaki bağlantı dizesini alır *appsettings.json* :
 
 [!code-json[](start-mvc/sample/MvcMovie/appsettings.json?highlight=2&range=8-10)]
 
@@ -155,7 +156,7 @@ ASP.NET Core [yapılandırma](xref:fundamentals/configuration/index) sistemi oku
 
 [!code-csharp[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/Startup.cs?name=snippet_UseSqlite&highlight=11-12)]
 
-ASP.NET Core [yapılandırma](xref:fundamentals/configuration/index) sistemi okur `ConnectionString` . Yerel geliştirme için, dosyadaki *appsettings.js* bağlantı dizesini alır:
+ASP.NET Core [yapılandırma](xref:fundamentals/configuration/index) sistemi okur `ConnectionString` . Yerel geliştirme için, dosyadaki bağlantı dizesini alır *appsettings.json* :
 
 [!code-json[](~/tutorials/first-mvc-app/start-mvc/sample/MvcMovie22/appsettingsSQLite.json?highlight=2&range=8-10)]
 

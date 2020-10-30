@@ -7,6 +7,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 12/05/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: web-api/advanced/conventions
-ms.openlocfilehash: 425f1aaf1fa86f10d857c34e621c302f2db258e5
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 0c5ea8ba69e4c6287afce1771ac9cee65bb188a8
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88626798"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052545"
 ---
 # <a name="use-web-api-conventions"></a>Web API 'SI kurallarını kullanma
 
@@ -36,7 +37,7 @@ Bir kural şunları yapmanıza olanak sağlar:
 * Belirli bir eylem türünden döndürülen en yaygın dönüş türlerini ve durum kodlarını tanımlayın.
 * Tanımlanan standartta saptacak eylemleri belirler.
 
-ASP.NET Core MVC 2,2 ve üzeri, içinde bir dizi varsayılan kural içerir <xref:Microsoft.AspNetCore.Mvc.DefaultApiConventions?displayProperty=fullName> . Kurallar ASP.NET Core **API** proje şablonunda belirtilen denetleyiciyi (*ValuesController.cs*) temel alır. Eylemleriniz şablondaki desenleri izledikten sonra varsayılan kuralları kullanarak başarılı olmanız gerekir. Varsayılan kurallar ihtiyaçlarınızı karşılamıyorsa, bkz. [Web API kuralları oluşturma](#create-web-api-conventions).
+ASP.NET Core MVC 2,2 ve üzeri, içinde bir dizi varsayılan kural içerir <xref:Microsoft.AspNetCore.Mvc.DefaultApiConventions?displayProperty=fullName> . Kurallar ASP.NET Core **API** proje şablonunda belirtilen denetleyiciyi ( *ValuesController.cs* ) temel alır. Eylemleriniz şablondaki desenleri izledikten sonra varsayılan kuralları kullanarak başarılı olmanız gerekir. Varsayılan kurallar ihtiyaçlarınızı karşılamıyorsa, bkz. [Web API kuralları oluşturma](#create-web-api-conventions).
 
 Çalışma zamanında, <xref:Microsoft.AspNetCore.Mvc.ApiExplorer> kuralları anlamıştır. `ApiExplorer` , [Openapı](https://www.openapis.org/) (Swagger olarak da bilinir) belge oluşturucuları ile iletişim kurmak için MVC 'nin soyutlamasıdır. Uygulanan kuraldaki öznitelikler bir eylemle ilişkilendirilir ve eylemin Openapı belgelerine dahil edilir. [API Çözümleyicileri](xref:web-api/advanced/analyzers) , kuralları da anlalar. Eyleminiz geleneksel değilse (örneğin, uygulanan kural tarafından belgelenmemiş bir durum kodu döndürürse), durum kodunu belgeleyerek bir uyarı görürsünüz.
 
@@ -65,7 +66,7 @@ Kurallar oluşturma; Her eylem, tam olarak bir kurala göre ilişkilendirilebili
 
 1. `Microsoft.AspNetCore.Mvc.ApiConventionTypeAttribute` bir denetleyiciye uygulanan &mdash; , belirtilen kural türünü denetleyicideki tüm eylemlere uygular. Kural yöntemi, kural yönteminin uygulandığı eylemleri belirleyen ipuçlarıyla işaretlenir. İpuçları hakkında daha fazla bilgi için bkz. [Web API kuralları oluşturma](#create-web-api-conventions)).
 
-    Aşağıdaki örnekte, varsayılan kurallar kümesi *ContactsConventionController*içindeki tüm eylemlere uygulanır:
+    Aşağıdaki örnekte, varsayılan kurallar kümesi *ContactsConventionController* içindeki tüm eylemlere uygulanır:
 
     [!code-csharp[](conventions/sample/Controllers/ContactsConventionController.cs?name=snippet_ApiConventionTypeAttribute&highlight=2)]
 
@@ -84,7 +85,7 @@ Varsayılan API kuralları gereksinimlerinizi karşılamıyorsa, kendi kurallar�
 
 ### <a name="response-types"></a>Yanıt türleri
 
-Bu yöntemlere `[ProducesResponseType]` veya öznitelikleriyle açıklama eklenir `[ProducesDefaultResponseType]` . Örnek:
+Bu yöntemlere `[ProducesResponseType]` veya öznitelikleriyle açıklama eklenir `[ProducesDefaultResponseType]` . Örneğin:
 
 ```csharp
 public static class MyAppConventions
@@ -104,7 +105,7 @@ Daha özel meta veri öznitelikleri yoksa, bu kuralı bir derlemeye uygulamak ş
 
 ### <a name="naming-requirements"></a>Adlandırma gereksinimleri
 
-`[ApiConventionNameMatch]`Ve `[ApiConventionTypeMatch]` öznitelikleri, uygulandıkları eylemleri belirleyen kural yöntemine uygulanabilir. Örnek:
+`[ApiConventionNameMatch]`Ve `[ApiConventionTypeMatch]` öznitelikleri, uygulandıkları eylemleri belirleyen kural yöntemine uygulanabilir. Örneğin:
 
 ```csharp
 [ProducesResponseType(StatusCodes.Status200OK)]

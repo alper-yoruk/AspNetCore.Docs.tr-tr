@@ -5,6 +5,7 @@ description: Bu makalede, için temel alınan Entity Framework Core veri modelin
 ms.author: avickers
 ms.date: 07/01/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/customize_identity_model
-ms.openlocfilehash: 71f532aa00c2afeeb0d6b93c01cb6a1fbd0a686c
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 6e520c76a3377e889166ca8d08b75754ef34b6a1
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634312"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052051"
 ---
 # <a name="no-locidentity-model-customization-in-aspnet-core"></a>Identity ASP.NET Core model özelleştirmesi
 
@@ -220,7 +221,7 @@ Identity Yukarıda listelenen her varlık türü için varsayılan [ortak dil ç
 
 Bu türleri doğrudan kullanmak yerine, türler uygulamanın kendi türleri için temel sınıflar olarak kullanılabilir. `DbContext`Tarafından tanımlanan sınıflar Identity geneldir, örneğin, modeldeki bir veya daha fazla varlık türü IÇIN farklı clr türleri kullanılabilir. Bu genel türler Ayrıca `User` birincil anahtar (PK) veri türünün değiştirilmesine izin verir.
 
-IdentityRol desteğiyle birlikte kullanıldığında bir <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> sınıf kullanılmalıdır. Örnek:
+IdentityRol desteğiyle birlikte kullanıldığında bir <xref:Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityDbContext> sınıf kullanılmalıdır. Örneğin:
 
 ```csharp
 // Uses all the built-in Identity types
@@ -435,7 +436,7 @@ PK türünü değiştirmek için şu adımları izleyin:
 
     ::: moniker-end
 
-4. Özel bir `ApplicationUser` sınıf kullanılıyorsa, öğesinden devralacak olan sınıfı güncelleştirin `IdentityUser` . Örnek:
+4. Özel bir `ApplicationUser` sınıf kullanılıyorsa, öğesinden devralacak olan sınıfı güncelleştirin `IdentityUser` . Örneğin:
 
     ::: moniker range="<= aspnetcore-1.1"
 
@@ -503,7 +504,7 @@ PK türünü değiştirmek için şu adımları izleyin:
 
     ::: moniker-end
 
-5. Özel bir `ApplicationRole` sınıf kullanılıyorsa, öğesinden devralacak olan sınıfı güncelleştirin `IdentityRole<TKey>` . Örnek:
+5. Özel bir `ApplicationRole` sınıf kullanılıyorsa, öğesinden devralacak olan sınıfı güncelleştirin `IdentityRole<TKey>` . Örneğin:
 
     [!code-csharp[](customize-identity-model/samples/2.1/RazorPagesSampleApp/Data/ApplicationRole.cs?name=snippet_ApplicationRole&highlight=4)]
 
@@ -952,7 +953,7 @@ protected override void OnModelCreating(ModelBuilder modelBuilder)
 
 ### <a name="map-to-a-different-schema"></a>Farklı bir şemaya eşleme
 
-Şemalar, veritabanı sağlayıcıları genelinde farklı davranabilir. SQL Server için varsayılan, *dbo* şemasında tüm tabloları oluşturmaktır. Tablolar farklı bir şemada oluşturulabilir. Örnek:
+Şemalar, veritabanı sağlayıcıları genelinde farklı davranabilir. SQL Server için varsayılan, *dbo* şemasında tüm tabloları oluşturmaktır. Tablolar farklı bir şemada oluşturulabilir. Örneğin:
 
 ```csharp
 protected override void OnModelCreating(ModelBuilder modelBuilder)

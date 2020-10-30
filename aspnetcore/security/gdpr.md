@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/11/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/gdpr
-ms.openlocfilehash: 35a12cb8d2a9617e51d886e798cff5ee60b0a8ad
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: ec65a2c8362c15716bebd6b22f5639785ba74c98
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634715"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051011"
 ---
 # <a name="eu-general-data-protection-regulation-gdpr-support-in-aspnet-core"></a>ASP.NET Core içinde AB Genel Veri Koruma Yönetmeliği (GDPR) desteği
 
@@ -46,7 +47,7 @@ cookieASP.NET Core 3,0 şablonu tarafından oluşturulan bir uygulamada ASP.NET 
 
   [!code-cshtml[Main](gdpr/sample/RP3.0/Pages/Shared/_Layout.cshtml?name=snippet&highlight=4)]
 
-* * \_ Cookie Consentpartial. cshtml* dosyasını projeye ekleyin:
+* *\_ Cookie Consentpartial. cshtml* dosyasını projeye ekleyin:
 
   [!code-cshtml[Main](gdpr/sample/RP3.0/Pages/Shared/_CookieConsentPartial.cshtml)]
 
@@ -71,8 +72,8 @@ cookieASP.NET Core 3,0 şablonu tarafından oluşturulan bir uygulamada ASP.NET 
 Razor Proje Şablonlarıyla oluşturulan sayfalar ve MVC projeleri aşağıdaki GDPR desteğini içerir:
 
 * [ Cookie Policyoptions](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyoptions) ve [Use Cookie ilkesi](/dotnet/api/microsoft.aspnetcore.builder.cookiepolicyappbuilderextensions.usecookiepolicy) `Startup` sınıfında ayarlanır.
-* * \_ Cookie Consentpartial. cshtml* [kısmi görünümü](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper). Bu dosyaya bir **kabul** düğmesi dahildir. Kullanıcı **kabul et** düğmesine tıkladığında, Store 'lar için onay cookie sağlanır.
-* *Sayfalar/gizlilik. cshtml* sayfası veya *Görünümler/Home/privacy. cshtml* görünümü sitenizin gizlilik ilkesini ayrıntılandırmakta olan bir sayfa sağlar. * \_ Cookie Consentpartial. cshtml* dosyası gizlilik sayfasına bir bağlantı oluşturur.
+* *\_ Cookie Consentpartial. cshtml* [kısmi görünümü](xref:mvc/views/tag-helpers/builtin-th/partial-tag-helper). Bu dosyaya bir **kabul** düğmesi dahildir. Kullanıcı **kabul et** düğmesine tıkladığında, Store 'lar için onay cookie sağlanır.
+* *Sayfalar/gizlilik. cshtml* sayfası veya *Görünümler/Home/privacy. cshtml* görünümü sitenizin gizlilik ilkesini ayrıntılandırmakta olan bir sayfa sağlar. *\_ Cookie Consentpartial. cshtml* dosyası gizlilik sayfasına bir bağlantı oluşturur.
 * Bireysel kullanıcı hesaplarıyla oluşturulan uygulamalarda, Yönet sayfası [kişisel kullanıcı verilerini](#pd)indirmek ve silmek için bağlantılar sağlar.
 
 ### <a name="no-loccookiepolicyoptions-and-useno-loccookiepolicy"></a>CookiePoliyoptions ve kullanım Cookie ilkesi
@@ -87,13 +88,13 @@ Razor Proje Şablonlarıyla oluşturulan sayfalar ve MVC projeleri aşağıdaki 
 
 ### <a name="_no-loccookieconsentpartialcshtml-partial-view"></a>\_CookieConsentPartial. cshtml kısmi görünümü
 
-* \_ Cookie Consentpartial. cshtml* kısmi görünümü:
+*\_ Cookie Consentpartial. cshtml* kısmi görünümü:
 
 [!code-cshtml[](gdpr/sample/RP2.2/Pages/Shared/_CookieConsentPartial.cshtml)]
 
 Bu kısmi:
 
-* Kullanıcı için izleme durumunu alır. Uygulama izin gerektirecek şekilde yapılandırıldıysa, s 'nin izlenebilmesi için kullanıcının onayı gerekir cookie . İzin gerekliyse, cookie izin paneli * \_ Layout. cshtml* dosyası tarafından oluşturulan gezinti çubuğunun üstünde düzeltilir.
+* Kullanıcı için izleme durumunu alır. Uygulama izin gerektirecek şekilde yapılandırıldıysa, s 'nin izlenebilmesi için kullanıcının onayı gerekir cookie . İzin gerekliyse, cookie izin paneli *\_ Layout. cshtml* dosyası tarafından oluşturulan gezinti çubuğunun üstünde düzeltilir.
 * `<p>`Gizliliğinizi özetlemek ve ilkeyi kullanmak için BIR HTML öğesi sağlar cookie .
 * Gizlilik sayfasına bir bağlantı sağlar veya sitenizin gizlilik ilkesini ayrıntılandırınızın ne olduğunu görebilirsiniz.
 
@@ -121,7 +122,7 @@ Depolama için izin cookie sağlanmazsa, tarayıcıya yalnızca, cookie temel ol
 
 Bireysel kullanıcı hesaplarıyla oluşturulan ASP.NET Core uygulamalar, kişisel verileri indirmek ve silmek için kod içerir.
 
-Kullanıcı adını seçin ve **kişisel veriler**' i seçin:
+Kullanıcı adını seçin ve **kişisel veriler** ' i seçin:
 
 ![Kişisel verileri yönetme sayfası](gdpr/_static/pd.png)
 
@@ -143,13 +144,13 @@ Bazı veritabanları ve depolama mekanizmaları, bekleyen şifreleme için izin 
 * En kolay ve en güvenli seçenektir.
 * Veritabanının anahtarları ve şifrelemeyi yönetmesine izin verir.
 
-Örnek:
+Örneğin:
 
 * Microsoft SQL ve Azure SQL, [Saydam veri şifrelemesi](/sql/relational-databases/security/encryption/transparent-data-encryption) (tde) sağlar.
 * [SQL Azure, varsayılan olarak veritabanını şifreler](https://azure.microsoft.com/updates/newly-created-azure-sql-databases-encrypted-by-default/)
 * [Azure Blobları, dosyalar, tablo ve kuyruk depolaması varsayılan olarak şifrelenir](https://azure.microsoft.com/blog/announcing-default-encryption-for-azure-blobs-files-table-and-queue-storage/).
 
-Bekleyen şifreleme sağlamayan veritabanları için aynı korumayı sağlamak üzere disk şifrelemeyi kullanabilirsiniz. Örnek:
+Bekleyen şifreleme sağlamayan veritabanları için aynı korumayı sağlamak üzere disk şifrelemeyi kullanabilirsiniz. Örneğin:
 
 * [Windows Server için BitLocker](/windows/security/information-protection/bitlocker/bitlocker-how-to-deploy-on-windows-server)
 * Linux:

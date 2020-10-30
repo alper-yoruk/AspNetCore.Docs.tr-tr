@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 12/03/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - SignalR
 - Electron
 uid: security/samesite
-ms.openlocfilehash: 3ba033b4165b19131d11311e5ae9d64e6afe48ca
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: 6f826416e3045df32abf41e94e667120e71ae717
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865429"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051622"
 ---
 # <a name="work-with-samesite-no-loccookies-in-aspnet-core"></a>cookieASP.NET Core ' de SameSite s ile çalışma
 
@@ -157,7 +158,7 @@ Kasım 2019 ' de 2016 standartdan 2019 standardına güncelleştirme için [düz
 
 ## <a name="supporting-older-browsers"></a>Eski tarayıcıları destekleme
 
-2016 SameSite Standard uygulanan, bilinmeyen değerlerin değer olarak değerlendirilmelidir `SameSite=Strict` . 2016 SameSite standardını destekleyen eski tarayıcılardan erişilen uygulamalar, bir değeri olan bir SameSite özelliği edindiklerinde kesintiye uğramayabilir `None` . Web uygulamaları, eski tarayıcıları desteklemek istiyorlarsa, tarayıcı algılaması gerçekleştirmelidir. ASP.NET Core tarayıcı algılamayı uygulamaz, çünkü kullanıcı aracıları değerleri yüksek ölçüde geçici ve sık sık değiştirilir. İçindeki bir uzantı noktası, <xref:Microsoft.AspNetCore.CookiePolicy> kullanıcı aracısına özel mantık takmayı sağlar.
+2016 SameSite Standard uygulanan, bilinmeyen değerlerin değer olarak değerlendirilmelidir `SameSite=Strict` . 2016 SameSite standardını destekleyen eski tarayıcılardan erişilen uygulamalar, bir değeri olan bir SameSite özelliği edindiklerinde kesintiye uğramayabilir `None` . Web uygulamaları, eski tarayıcıları desteklemek istiyorlarsa, tarayıcı algılaması gerçekleştirmelidir. ASP.NET Core tarayıcı algılamayı uygulamaz çünkü User-Agents değerler yüksek ölçüde geçici ve sık sık değiştirilir. İçindeki bir uzantı noktası <xref:Microsoft.AspNetCore.CookiePolicy> , belirli bir mantık User-Agent takmayı sağlar.
 
 İçinde `Startup.Configure` , çağrılmadan önce çağıran kodu ekleyin <xref:Microsoft.AspNetCore.Builder.CookiePolicyAppBuilderExtensions.UseCookiePolicy*> <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication*> veya şunu yazan *herhangi bir* yöntemi cookie :
 
@@ -201,7 +202,7 @@ Yeni SameSite davranışını kabul edebilir bir istemci sürümünü kullanarak
 
 ### <a name="test-with-chrome"></a>Chrome ile test etme
 
-Chrome 78 + bir yerde geçici bir risk azaltma yaptığından yanıltıcı sonuçlar verir. Chrome 78 + geçici risk azaltma, cookie iki dakikadan daha eski bir süre için izin verir. Uygun test bayraklarıyla etkin olan Chrome 76 veya 77 daha doğru sonuçlar sağlar. Yeni bir SameSite davranışını test etmek için `chrome://flags/#same-site-by-default-cookies` **etkin**olarak değiştirin. Chrome 'un (75 ve üzeri) eski sürümleri, yeni ayar ile başarısız olarak bildirilir `None` . Bkz. bu belgede [eski tarayıcıları destekleme](#sob) .
+Chrome 78 + bir yerde geçici bir risk azaltma yaptığından yanıltıcı sonuçlar verir. Chrome 78 + geçici risk azaltma, cookie iki dakikadan daha eski bir süre için izin verir. Uygun test bayraklarıyla etkin olan Chrome 76 veya 77 daha doğru sonuçlar sağlar. Yeni bir SameSite davranışını test etmek için `chrome://flags/#same-site-by-default-cookies` **etkin** olarak değiştirin. Chrome 'un (75 ve üzeri) eski sürümleri, yeni ayar ile başarısız olarak bildirilir `None` . Bkz. bu belgede [eski tarayıcıları destekleme](#sob) .
 
 Google, eski Chrome sürümlerini kullanılabilir hale getirir. Chrome 'un eski sürümlerini test etmek için [Kmıum indirme](https://www.chromium.org/getting-involved/download-chromium) bölümündeki yönergeleri izleyin. Chrome 'un eski sürümlerini arayarak sunulan bağlantılardan **Chrome indirmeyin** .
 

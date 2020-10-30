@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.date: 10/24/2018
 ms.custom: devx-track-csharp, mvc, seodec18
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: azure/devops/cicd
-ms.openlocfilehash: 3632f1c4bd419aae08105005de3d81fc2cb9e410
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: eddd7034bf1860fb35cf00eefb7a11a408869700
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625888"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052649"
 ---
 # <a name="continuous-integration-and-deployment"></a>Sürekli tümleştirme ve dağıtım
 
@@ -42,14 +43,14 @@ Bu bölümde, aşağıdaki görevleri tamamlayacaksınız:
 ## <a name="publish-the-apps-code-to-github"></a>Uygulamanın kodunu GitHub 'a yayımlama
 
 1. Bir tarayıcı penceresi açın ve adresine gidin `https://github.com` .
-1. **+** Başlıktaki aşağı açılan düğmesine tıklayın ve **yeni depo**' ı seçin:
+1. **+** Başlıktaki aşağı açılan düğmesine tıklayın ve **yeni depo** ' ı seçin:
 
     ![GitHub yeni depo seçeneği](media/cicd/github-new-repo.png)
 
 1. **Sahip** açılır penceresinde hesabınızı seçin ve **Depo adı** metin kutusuna *basit-Feed-Reader* girin.
 1. **Depo oluştur** düğmesine tıklayın.
 1. Yerel makinenizin komut kabuğunu açın. *Basit akış okuyucusu* git deposunun depolandığı dizine gidin.
-1. Var olan *kaynağı* uzak *yukarı akış*olarak yeniden adlandırın. Şu kodu yürütün:
+1. Var olan *kaynağı* uzak *yukarı akış* olarak yeniden adlandırın. Şu kodu yürütün:
 
     ```console
     git remote rename origin upstream
@@ -77,16 +78,16 @@ Yerel git dağıtımını aşağıdaki adımlarla kaldırın. Azure Pipelines (b
 
     ![hazırlama Web uygulaması arama terimi](media/cicd/portal-search-box.png)
 
-1. **Dağıtım Merkezi**' ne tıklayın. Yeni bir panel belirir. Önceki bölümde eklenen yerel git kaynak denetimi yapılandırmasını kaldırmak için **bağlantıyı kes** ' e tıklayın. **Evet** düğmesine tıklayarak kaldırma işlemini onaylayın.
+1. **Dağıtım Merkezi** ' ne tıklayın. Yeni bir panel belirir. Önceki bölümde eklenen yerel git kaynak denetimi yapılandırmasını kaldırmak için **bağlantıyı kes** ' e tıklayın. **Evet** düğmesine tıklayarak kaldırma işlemini onaylayın.
 1. *MyWebApp<unique_number>* App Service gidin. Bir anımsatıcı olarak, App Service hızlı bir şekilde bulmak için portalın arama kutusu kullanılabilir.
-1. **Dağıtım Merkezi**' ne tıklayın. Yeni bir panel belirir. Önceki bölümde eklenen yerel git kaynak denetimi yapılandırmasını kaldırmak için **bağlantıyı kes** ' e tıklayın. **Evet** düğmesine tıklayarak kaldırma işlemini onaylayın.
+1. **Dağıtım Merkezi** ' ne tıklayın. Yeni bir panel belirir. Önceki bölümde eklenen yerel git kaynak denetimi yapılandırmasını kaldırmak için **bağlantıyı kes** ' e tıklayın. **Evet** düğmesine tıklayarak kaldırma işlemini onaylayın.
 
 ## <a name="create-an-azure-devops-organization"></a>Azure DevOps kuruluşu oluşturma
 
 1. Bir tarayıcı açın ve [Azure DevOps kuruluş oluşturma sayfasına](https://go.microsoft.com/fwlink/?LinkId=307137)gidin.
 1. Azure DevOps kuruluşunuza erişmek için URL 'YI biçimlendirmek üzere **hatırlayabileceğiniz bir ad seçin** metin kutusuna benzersiz bir ad yazın.
 1. Kod bir GitHub deposunda barındırıldığından **Git** radyo düğmesini seçin.
-1. **Devam** düğmesine tıklayın. Kısa bir bekleme sonrasında, *Myfirstproject*adlı bir hesap ve takım projesi oluşturulur.
+1. **Devam** düğmesine tıklayın. Kısa bir bekleme sonrasında, *Myfirstproject* adlı bir hesap ve takım projesi oluşturulur.
 
     ![Azure DevOps kuruluş oluşturma sayfası](media/cicd/vsts-account-creation.png)
 
@@ -94,7 +95,7 @@ Yerel git dağıtımını aşağıdaki adımlarla kaldırın. Azure Pipelines (b
 
     ![Proje düğmesini başlatın](media/cicd/vsts-start-project.png)
 
-1. Bir tarayıcı, * \<account_name\> . VisualStudio.com*için açılır. Projenin DevOps ardışık düzenini yapılandırmaya başlamak için *Myfirstproject* bağlantısına tıklayın.
+1. Bir tarayıcı, *\<account_name\> . VisualStudio.com* için açılır. Projenin DevOps ardışık düzenini yapılandırmaya başlamak için *Myfirstproject* bağlantısına tıklayın.
 
 ## <a name="configure-the-azure-pipelines-pipeline"></a>Azure Pipelines işlem hattını yapılandırma
 
@@ -110,7 +111,7 @@ Tamamlanacak üç farklı adım vardır. Aşağıdaki üç bölümde bulunan ad�
 
     ![Kaynak seçin-GitHub](media/cicd/vsts-select-source.png)
 
-1. Azure DevOps 'ın GitHub deponuza erişebilmesi için yetkilendirme gereklidir. **Bağlantı adı** metin kutusuna *GitHub bağlantısı><GitHub_username* girin. Örnek:
+1. Azure DevOps 'ın GitHub deponuza erişebilmesi için yetkilendirme gereklidir. **Bağlantı adı** metin kutusuna *GitHub bağlantısı><GitHub_username* girin. Örneğin:
 
     ![GitHub bağlantı adı](media/cicd/vsts-repo-authz.png)
 
@@ -127,7 +128,7 @@ Tamamlanacak üç farklı adım vardır. Aşağıdaki üç bölümde bulunan ad�
 
 1. Şablon arama sonuçları görüntülenir. **ASP.NET Core** şablonun üzerine gelin ve **Uygula** düğmesine tıklayın.
 1. Yapı tanımının **Görevler** sekmesi görüntülenir. **Tetikleyiciler** sekmesini tıklatın.
-1. **Sürekli tümleştirmeyi etkinleştir** kutusunu işaretleyin. **Dal filtreleri** bölümünde, **tür** açılır seçeneğinin *dahil*olarak ayarlandığını doğrulayın. **Dal belirtimi** açılır öğesini *ana*olarak ayarlayın.
+1. **Sürekli tümleştirmeyi etkinleştir** kutusunu işaretleyin. **Dal filtreleri** bölümünde, **tür** açılır seçeneğinin *dahil* olarak ayarlandığını doğrulayın. **Dal belirtimi** açılır öğesini *ana* olarak ayarlayın.
 
     ![Sürekli tümleştirme ayarlarını etkinleştir](media/cicd/vsts-enable-ci.png)
 
@@ -165,19 +166,19 @@ Tamamlanacak üç farklı adım vardır. Aşağıdaki üç bölümde bulunan ad�
 
 1. **Kaynak türü** bölümünden **Yapı** kutucuğunu seçin. Bu tür, yayın işlem hattının derleme tanımına bağlanmasına izin verir.
 1. **Proje** açılır listesinden *myfirstproject* ' i seçin.
-1. **Kaynak (derleme tanımı)** açılır listesinden derleme tanımı adı, *MYFIRSTPROJECT-ASP.NET Core-CI*' ı seçin.
+1. **Kaynak (derleme tanımı)** açılır listesinden derleme tanımı adı, *MYFIRSTPROJECT-ASP.NET Core-CI* ' ı seçin.
 1. **Varsayılan sürüm** açılır listesinden *en son* ' u seçin. Bu seçenek derleme tanımının en son çalıştırması tarafından oluşturulan yapıtları oluşturur.
-1. **Kaynak diğer ad** metin kutusundaki metni *Drop*ile değiştirin.
+1. **Kaynak diğer ad** metin kutusundaki metni *Drop* ile değiştirin.
 1. **Ekle** düğmesine tıklayın. **Yapıtlar** bölümü, değişiklikleri görüntüleyecek şekilde güncelleştirilir.
 1. Sürekli dağıtımları etkinleştirmek için şimşek simgesine tıklayın:
 
     ![Yayın işlem hattı yapıtları-şimşek sürgüsü simgesi](media/cicd/vsts-artifacts-lightning-bolt.png)
 
     Bu seçenek etkinken, her yeni derleme kullanılabilir olduğunda bir dağıtım oluşur.
-1. Doğru bir **sürekli dağıtım tetikleme** paneli görüntülenir. Özelliği etkinleştirmek için iki durumlu düğmeye tıklayın. **Çekme isteği tetikleyicisini**etkinleştirmek gerekli değildir.
+1. Doğru bir **sürekli dağıtım tetikleme** paneli görüntülenir. Özelliği etkinleştirmek için iki durumlu düğmeye tıklayın. **Çekme isteği tetikleyicisini** etkinleştirmek gerekli değildir.
 1. **Yapı Dalı filtreleri** bölümünde **Ekle** açılan düğmesine tıklayın. **Derleme tanımının varsayılan dal** seçeneğini belirleyin. Bu filtre, yayının yalnızca GitHub deposunun *ana* dalından bir derleme için tetiklenmesine neden olur.
 1. **Kaydet** düğmesine tıklayın. Elde edilen **kaydetme** kalıcı Iletişim kutusunda **Tamam** düğmesine tıklayın.
-1. **Ortam 1** kutusuna tıklayın. Sağ tarafta bir **ortam** paneli görüntülenir. **Ortam adı** metin kutusundaki *ortam 1* metnini *Üretim*olarak değiştirin.
+1. **Ortam 1** kutusuna tıklayın. Sağ tarafta bir **ortam** paneli görüntülenir. **Ortam adı** metin kutusundaki *ortam 1* metnini *Üretim* olarak değiştirin.
 
    ![Yayın işlem hattı-ortam adı metin kutusu](media/cicd/vsts-environment-name-textbox.png)
 
@@ -202,8 +203,8 @@ Tamamlanacak üç farklı adım vardır. Aşağıdaki üç bölümde bulunan ad�
 ## <a name="commit-changes-to-github-and-automatically-deploy-to-azure"></a>GitHub'daki değişiklikleri işleme ve Azure'a otomatik olarak dağıtma
 
 1. Visual Studio 'da *Simplefeedreader. sln* ' i açın.
-1. Çözüm Gezgini, *Pages\ındex.cshtml*dosyasını açın. `<h2>Simple Feed Reader - V3</h2>`Olarak değiştirin `<h2>Simple Feed Reader - V4</h2>` .
-1. **Ctrl** + **Shift** + Uygulamayı derlemek için CTRL SHIFT**B** tuşlarına basın.
+1. Çözüm Gezgini, *Pages\ındex.cshtml* dosyasını açın. `<h2>Simple Feed Reader - V3</h2>`Olarak değiştirin `<h2>Simple Feed Reader - V4</h2>` .
+1. **Ctrl** + **Shift** + Uygulamayı derlemek için CTRL SHIFT **B** tuşlarına basın.
 1. Dosyayı GitHub deposuna yürütün. Visual Studio 'nun *Takım Gezgini* sekmesindeki **değişiklikler** sayfasını kullanın veya yerel makinenin komut kabuğunu kullanarak aşağıdakini yürütün:
 
     ```console
@@ -224,7 +225,7 @@ Tamamlanacak üç farklı adım vardır. Aşağıdaki üç bölümde bulunan ad�
 
     ![Sürekli tümleştirmeyi etkinleştir](media/cicd/enable-ci.png)
 
-1. Azure DevOps Services **Azure Pipelines**yapılar sayfasının **sıraya alınmış** sekmesine gidin  >  **Builds** . Sıraya alınan yapı, derlemeyi tetikleyen dalı ve yürütmeyi gösterir:
+1. Azure DevOps Services **Azure Pipelines** yapılar sayfasının **sıraya alınmış** sekmesine gidin  >  **Builds** . Sıraya alınan yapı, derlemeyi tetikleyen dalı ve yürütmeyi gösterir:
 
     ![Kuyruğa Alınan derleme](media/cicd/build-queued.png)
 
@@ -236,7 +237,7 @@ Tamamlanacak üç farklı adım vardır. Aşağıdaki üç bölümde bulunan ad�
 
 ### <a name="build-definition"></a>Derleme tanımı
 
-*MyFirstProject-ASP.NET Core-CI*adında bir derleme tanımı oluşturuldu. Tamamlandıktan sonra, derleme yayımlanacak varlıkları içeren bir *. zip* dosyası üretir. Yayın işlem hattı bu varlıkları Azure 'a dağıtır.
+*MyFirstProject-ASP.NET Core-CI* adında bir derleme tanımı oluşturuldu. Tamamlandıktan sonra, derleme yayımlanacak varlıkları içeren bir *. zip* dosyası üretir. Yayın işlem hattı bu varlıkları Azure 'a dağıtır.
 
 Yapı tanımının **Görevler** sekmesi, kullanılan adımları listeler. Beş derleme görevi vardır.
 
@@ -247,10 +248,10 @@ Yapı tanımının **Görevler** sekmesi, kullanılan adımları listeler. Beş 
 1. **Test et** &mdash; `dotnet test --configuration release --logger trx --results-directory <local_path_on_build_agent>` Uygulamanın birim testlerini çalıştırmak için komutunu yürütür. Birim testleri, glob düzeniyle eşleşen herhangi bir C# projesi içinde yürütülür `**/*Tests/*.csproj` . Test sonuçları, seçeneği tarafından belirtilen konumdaki bir *. trx* dosyasına kaydedilir `--results-directory` . Herhangi bir test başarısız olursa, yapı başarısız olur ve dağıtılmaz.
 
     > [!NOTE]
-    > Birim testlerinin çalışmasını doğrulamak için, *Simplefeedreader. Tests\Services\NewsServiceTests.cs* ' yi, testlerin birini tam olarak kesin olarak bölmek için değiştirin. Örneğin, `Assert.True(result.Count > 0);` yönteminde olarak değiştirin `Assert.False(result.Count > 0);` `Returns_News_Stories_Given_Valid_Uri` . Değişiklikleri yürütün ve GitHub 'a gönderin. Derleme tetiklenir ve başarısız olur. Derleme ardışık düzeni durumu **başarısız**olarak değişir. Değişikliği, yürütmeyi ve yeniden gönderin. Derleme başarılı oldu.
+    > Birim testlerinin çalışmasını doğrulamak için, *Simplefeedreader. Tests\Services\NewsServiceTests.cs* ' yi, testlerin birini tam olarak kesin olarak bölmek için değiştirin. Örneğin, `Assert.True(result.Count > 0);` yönteminde olarak değiştirin `Assert.False(result.Count > 0);` `Returns_News_Stories_Given_Valid_Uri` . Değişiklikleri yürütün ve GitHub 'a gönderin. Derleme tetiklenir ve başarısız olur. Derleme ardışık düzeni durumu **başarısız** olarak değişir. Değişikliği, yürütmeyi ve yeniden gönderin. Derleme başarılı oldu.
 
-1. **Yayımla** &mdash; `dotnet publish --configuration release --output <local_path_on_build_agent>` Dağıtılacak yapıtlar içeren bir *. zip* dosyası üretmek için komutunu yürütür. `--output`Seçeneği, *. zip* dosyasının yayımlama konumunu belirtir. Bu konum adlı [önceden tanımlanmış bir değişken](/azure/devops/pipelines/build/variables) geçirilerek belirtilir `$(build.artifactstagingdirectory)` . Bu değişken, derleme aracısında *c:\agent \_ work\1\a*gibi bir yerel yola genişletilir.
-1. **Yapıtı Yayımla** &mdash; **Yayımla** görevi tarafından oluşturulan *. zip* dosyasını yayımlar. Görev *. zip* dosya konumunu bir parametre olarak kabul eder, bu, önceden tanımlanmış değişkenidir `$(build.artifactstagingdirectory)` . *. Zip* dosyası *Drop*adlı bir klasör olarak yayımlanır.
+1. **Yayımla** &mdash; `dotnet publish --configuration release --output <local_path_on_build_agent>` Dağıtılacak yapıtlar içeren bir *. zip* dosyası üretmek için komutunu yürütür. `--output`Seçeneği, *. zip* dosyasının yayımlama konumunu belirtir. Bu konum adlı [önceden tanımlanmış bir değişken](/azure/devops/pipelines/build/variables) geçirilerek belirtilir `$(build.artifactstagingdirectory)` . Bu değişken, derleme aracısında *c:\agent \_ work\1\a* gibi bir yerel yola genişletilir.
+1. **Yapıtı Yayımla** &mdash; **Yayımla** görevi tarafından oluşturulan *. zip* dosyasını yayımlar. Görev *. zip* dosya konumunu bir parametre olarak kabul eder, bu, önceden tanımlanmış değişkenidir `$(build.artifactstagingdirectory)` . *. Zip* dosyası *Drop* adlı bir klasör olarak yayımlanır.
 
 Tanım içeren derlemelerin geçmişini görüntülemek için derleme tanımının **Özet** bağlantısına tıklayın:
 
@@ -268,11 +269,11 @@ Yayımlanan yapıtları incelemek için **İndir** ve **keşfet** bağlantılar�
 
 ### <a name="release-pipeline"></a>Yayın işlem hattı
 
-*MyFirstProject-ASP.NET Core-CD*adlı bir yayın işlem hattı oluşturuldu:
+*MyFirstProject-ASP.NET Core-CD* adlı bir yayın işlem hattı oluşturuldu:
 
 ![Yayın ardışık düzenine genel bakış gösteren ekran görüntüsü](media/cicd/release-definition-overview.png)
 
-Yayın işlem hattının iki ana bileşeni **yapıtlar** ve **ortamlardır**. **Yapıtlar** bölümündeki kutuya tıklanması aşağıdaki paneli ortaya çıkarır:
+Yayın işlem hattının iki ana bileşeni **yapıtlar** ve **ortamlardır** . **Yapıtlar** bölümündeki kutuya tıklanması aşağıdaki paneli ortaya çıkarır:
 
 ![Yayın işlem hattı yapılarını gösteren ekran görüntüsü](media/cicd/release-definition-artifacts.png)
 
@@ -280,11 +281,11 @@ Yayın işlem hattının iki ana bileşeni **yapıtlar** ve **ortamlardır**. **
 
 ![Yayın ardışık düzen görevlerini gösteren ekran görüntüsü](media/cicd/release-definition-tasks.png)
 
-Yayın işlem hattı iki görevden oluşur: *yuvaya Azure App Service dağıtın* ve *Azure App Service yuvası değiştirme 'yi yönetir*. İlk göreve tıkladığınızda aşağıdaki görev yapılandırması görünür:
+Yayın işlem hattı iki görevden oluşur: *yuvaya Azure App Service dağıtın* ve *Azure App Service yuvası değiştirme 'yi yönetir* . İlk göreve tıkladığınızda aşağıdaki görev yapılandırması görünür:
 
 ![Yayın işlem hattı dağıtım görevini gösteren ekran görüntüsü](media/cicd/release-definition-task1.png)
 
-Azure aboneliği, hizmet türü, Web uygulaması adı, kaynak grubu ve dağıtım yuvası dağıtım görevinde tanımlanmıştır. **Package veya Folder** metin kutusu Ayıklanacak ve * \<unique_number\> MyWebApp* Web uygulamasının *hazırlama* yuvasına dağıtılacak *. zip* dosya yolunu barındırır.
+Azure aboneliği, hizmet türü, Web uygulaması adı, kaynak grubu ve dağıtım yuvası dağıtım görevinde tanımlanmıştır. **Package veya Folder** metin kutusu Ayıklanacak ve *\<unique_number\> MyWebApp* Web uygulamasının *hazırlama* yuvasına dağıtılacak *. zip* dosya yolunu barındırır.
 
 Yuva takas görevine tıkladığınızda aşağıdaki görev yapılandırması görünür:
 

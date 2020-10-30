@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 07/14/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/integration-tests
-ms.openlocfilehash: 9b36a77730a43c7515fcd2c56621412453784c9d
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: f1ce6a209ef3ca85abe0a6f1ac61d85bec52d17a
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722546"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93050830"
 ---
 # <a name="integration-tests-in-aspnet-core"></a>ASP.NET Core tümleştirme testleri
 
@@ -57,7 +58,7 @@ Bu geniş testler, uygulamanın altyapısını ve tüm çatısını test etmek i
 * Ağ gereçleri
 * İstek-yanıt işlem hattı
 
-Birim testleri, altyapı bileşenlerinin yerine, *Fakes* veya *sahte nesneler*olarak bilinen fabriccomponents bileşenlerini kullanır.
+Birim testleri, altyapı bileşenlerinin yerine, *Fakes* veya *sahte nesneler* olarak bilinen fabriccomponents bileşenlerini kullanır.
 
 Birim testlerinin aksine, tümleştirme testleri:
 
@@ -71,7 +72,7 @@ Bu nedenle, tümleştirme testlerinin kullanımını en önemli altyapı senaryo
 > Veritabanları ve dosya sistemleriyle ilgili her olası veri ve dosya erişimi için tümleştirme testleri yazma. Bir uygulamadaki kaç yerde veritabanlarıyla ve dosya sistemleriyle etkileşime girdiğinize bakılmaksızın, bir dizi Read, Write, Update ve DELETE tümleştirme testi, genellikle veritabanı ve dosya sistemi bileşenlerinin yeterli şekilde test edilmesine sahip olur. Bu bileşenlerle etkileşime geçen Yöntem mantığının rutin testleri için birim testleri kullanın. Birim testlerinde, altyapı kullanımı ve moizler 'in kullanılması daha hızlı test yürütmesiyle sonuçlanır.
 
 > [!NOTE]
-> Tümleştirme testlerinin tartışmalarında, test edilen proje genellikle *test altındaki sistem*veya kısa IÇIN "sut" olarak adlandırılır.
+> Tümleştirme testlerinin tartışmalarında, test edilen proje genellikle *test altındaki sistem* veya kısa IÇIN "sut" olarak adlandırılır.
 >
 > *Bu konu başlığı altında, sınanan ASP.NET Core uygulamasına başvurmak için "SUT" kullanılır.*
 
@@ -83,7 +84,7 @@ ASP.NET Core tümleştirme testleri şunları gerektirir:
 * Test projesi SUT için bir test Web Konağı oluşturur ve SUT ile istekleri ve yanıtları işlemek için bir test sunucusu istemcisi kullanır.
 * Test Çalıştırıcısı, testleri yürütmek ve test sonuçlarını raporlamak için kullanılır.
 
-Tümleştirme testleri, olağan *düzenleme*, *hareket*ve *onaylama* testi adımlarını içeren bir olay dizisini izler:
+Tümleştirme testleri, olağan *düzenleme* , *hareket* ve *onaylama* testi adımlarını içeren bir olay dizisini izler:
 
 1. SUT 'un web ana bilgisayarı yapılandırıldı.
 1. İstekleri uygulamaya göndermek için bir test sunucusu istemcisi oluşturulur.
@@ -99,7 +100,7 @@ Test Web Konağı ve bellek içi test sunucusu ([TestServer](/dotnet/api/microso
 
 `Microsoft.AspNetCore.Mvc.Testing`Paket aşağıdaki görevleri gerçekleştirir:
 
-* Bağımlılıklar dosyasını (*. Deps*) sut 'den test projesinin *bin* dizinine kopyalar.
+* Bağımlılıklar dosyasını ( *. Deps* ) sut 'den test projesinin *bin* dizinine kopyalar.
 * , Testler yürütüldüğünde statik dosya ve sayfa/görünümlerin bulunması için [içerik kökünü](xref:fundamentals/index#content-root) sut 'nin proje köküne ayarlar.
 * , İle SUT önyükleyiciyi kolaylaştırmak için [Webapplicationfactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) sınıfını sağlar `TestServer` .
 
@@ -139,7 +140,7 @@ SUT [ortamı](xref:fundamentals/environments) ayarlanmamışsa, ortam varsayıla
 
 [Webapplicationfactory \<TEntryPoint> ](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) , tümleştirme testleri için bir [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) oluşturmak için kullanılır. `TEntryPoint` , genellikle sınıfının, SUT 'ın giriş noktası sınıfıdır `Startup` .
 
-Test sınıfları sınıfı testlerin içerdiğini göstermek ve sınıftaki testler arasında paylaşılan nesne örnekleri sağlamak için bir *sınıf armatürü* arabirimi ([ıssfixture](https://xunit.github.io/docs/shared-context#class-fixture)) uygular.
+Test sınıfları sınıfı testlerin içerdiğini göstermek ve sınıftaki testler arasında paylaşılan nesne örnekleri sağlamak için bir *sınıf armatürü* arabirimi ( [ıssfixture](https://xunit.github.io/docs/shared-context#class-fixture)) uygular.
 
 Aşağıdaki test sınıfı, `BasicTests` SUT 'yi önyüklemek `WebApplicationFactory` ve bir test yöntemine [HttpClient](/dotnet/api/system.net.http.httpclient) sağlamak için öğesini kullanır `Get_EndpointsReturnSuccessAndCorrectContentType` . Yöntemi, yanıt durum kodunun başarılı olup olmadığını denetler (200-299 aralığındaki durum kodları) ve `Content-Type` üst bilgi `text/html; charset=utf-8` birçok uygulama sayfasına yöneliktir.
 
@@ -161,7 +162,7 @@ Web ana bilgisayar yapılandırması, öğesinden devralarak `WebApplicationFact
 
    SUT 'un veritabanı bağlamı `Startup.ConfigureServices` yöntemine kaydedilir. Test uygulamasının `builder.ConfigureServices` geri çağırması, uygulamanın kodu yürütüldükten *sonra* yürütülür `Startup.ConfigureServices` . Yürütme sırası, [genel ana bilgisayar](xref:fundamentals/host/generic-host) için ASP.NET Core 3,0 sürümüne sahip bir son değişiklikten oluşur. Uygulamanın veritabanından farklı testler için farklı bir veritabanı kullanmak istiyorsanız, uygulamanın veritabanı bağlamı içinde değiştirilmelidir `builder.ConfigureServices` .
 
-   Hala [Web ana bilgisayarını](xref:fundamentals/host/web-host)kullanan sımlar için, test uygulamasının `builder.ConfigureServices` geri çağırması sut kodundan *önce* yürütülür `Startup.ConfigureServices` . Test uygulamasının `builder.ConfigureTestServices` geri çağırması *sonra*yürütülür.
+   Hala [Web ana bilgisayarını](xref:fundamentals/host/web-host)kullanan sımlar için, test uygulamasının `builder.ConfigureServices` geri çağırması sut kodundan *önce* yürütülür `Startup.ConfigureServices` . Test uygulamasının `builder.ConfigureTestServices` geri çağırması *sonra* yürütülür.
 
    Örnek uygulama, veritabanı bağlamı için hizmet tanımlayıcısını bulur ve hizmet kaydını kaldırmak için tanımlayıcıyı kullanır. Ardından, fabrika, `ApplicationDbContext` testler için bellek içi veritabanı kullanan yeni bir ekler.
 
@@ -194,7 +195,7 @@ SUT 'a yönelik herhangi bir POST isteği, uygulamanın [veri koruma antiforgery
 1. Timeforgery cookie ve istek doğrulama belirtecini ayrıştırın.
 1. POST isteğini, antiforgery cookie ve istek doğrulama belirteciyle birlikte yapın.
 
-`SendAsync`Örnek uygulamadaki yardımcı uzantı yöntemleri (*yardımcılar/Httpclienconversionsions. cs*) ve `GetDocumentAsync` yardımcı yöntemi (*yardımcılar/htmlyardımcıları. cs*), aşağıdaki [sample app](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/) yöntemlerle Antiforgery denetimini işlemek için [anglesharp](https://anglesharp.github.io/) ayrıştırıcısını kullanır:
+`SendAsync`Örnek uygulamadaki yardımcı uzantı yöntemleri ( *yardımcılar/Httpclienconversionsions. cs* ) ve `GetDocumentAsync` yardımcı yöntemi ( *yardımcılar/htmlyardımcıları. cs* ), aşağıdaki [sample app](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/) yöntemlerle Antiforgery denetimini işlemek için [anglesharp](https://anglesharp.github.io/) ayrıştırıcısını kullanır:
 
 * `GetDocumentAsync`: [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) 'ı alır ve döndürür `IHtmlDocument` . `GetDocumentAsync` , orijinalin temelinde bir *sanal yanıt* hazırlayan bir fabrika kullanır `HttpResponseMessage` . Daha fazla bilgi için bkz. [Anglesharp belgeleri](https://github.com/AngleSharp/AngleSharp#documentation).
 * `SendAsync``HttpClient`bir [HttpRequestMessage](/dotnet/api/system.net.http.httprequestmessage) oluşturun ve istekleri sut 'A göndermek Için [Sendadsync (HttpRequestMessage)](/dotnet/api/system.net.http.httpclient.sendasync#System_Net_Http_HttpClient_SendAsync_System_Net_Http_HttpRequestMessage_) çağrısı yapın. `SendAsync`HTML biçimini kabul etmek için aşırı yüklemeler ( `IHtmlFormElement` ) ve şunları yapın:
@@ -245,23 +246,23 @@ Hizmetler, ana bilgisayar tasarımcısında [Configuretestservices](/dotnet/api/
 
 Örnek SUT, bir teklif döndüren kapsamlı bir hizmet içerir. Dizin sayfası istendiğinde, teklif Dizin sayfasındaki gizli bir alana katıştırılır.
 
-*Hizmetler/ıquoteservice. cs*:
+*Hizmetler/ıquoteservice. cs* :
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/src/RazorPagesProject/Services/IQuoteService.cs?name=snippet1)]
 
-*Hizmetler/QuoteService. cs*:
+*Hizmetler/QuoteService. cs* :
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/src/RazorPagesProject/Services/QuoteService.cs?name=snippet1)]
 
-*Startup.cs*:
+*Startup.cs* :
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/src/RazorPagesProject/Startup.cs?name=snippet2)]
 
-*Pages/Index. cshtml. cs*:
+*Pages/Index. cshtml. cs* :
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/src/RazorPagesProject/Pages/Index.cshtml.cs?name=snippet1&highlight=4,9,20,26)]
 
-*Sayfa/dizin. cs*:
+*Sayfa/dizin. cs* :
 
 [!code-cshtml[](integration-tests/samples/3.x/IntegrationTestsSample/src/RazorPagesProject/Pages/Index.cshtml?name=snippet_Quote)]
 
@@ -274,7 +275,7 @@ Aşağıdaki biçimlendirme, SUT uygulaması çalıştırıldığında oluşturu
 
 Bir tümleştirme testinde hizmet ve teklif ekleme işlemini test etmek için, test tarafından SUT 'ye bir sahte hizmet eklenir. Sahte hizmet, uygulamanın `QuoteService` adı verilen test uygulaması tarafından verilen bir hizmetle değiştirilir `TestQuoteService` :
 
-*IntegrationTests.IndexPageTests.cs*:
+*IntegrationTests.IndexPageTests.cs* :
 
 [!code-csharp[](integration-tests/samples/3.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/IndexPageTests.cs?name=snippet4)]
 
@@ -342,7 +343,7 @@ protected override IWebHostBuilder CreateWebHostBuilder() =>
 
 ## <a name="how-the-test-infrastructure-infers-the-app-content-root-path"></a>Test altyapısının uygulama içeriği kök yolunu nasıl öğrendiğini
 
-`WebApplicationFactory`Oluşturucu, derleme üzerinde bir anahtarla eşit anahtar olan tümleştirme testlerini içeren bir [Webapplicationfactorycontentrootattribute](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactorycontentrootattribute) arayarak uygulama [içeriği kök](xref:fundamentals/index#content-root) yolunu alır `TEntryPoint` `System.Reflection.Assembly.FullName` . Doğru anahtara sahip bir özniteliğin bulunamaması durumunda, `WebApplicationFactory` bir çözüm dosyası (*. sln*) aramaya geri döner ve `TEntryPoint` derleme adını çözüm dizinine ekler. Uygulama kök dizini (içerik kök yolu) görünümleri ve içerik dosyalarını saptamak için kullanılır.
+`WebApplicationFactory`Oluşturucu, derleme üzerinde bir anahtarla eşit anahtar olan tümleştirme testlerini içeren bir [Webapplicationfactorycontentrootattribute](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactorycontentrootattribute) arayarak uygulama [içeriği kök](xref:fundamentals/index#content-root) yolunu alır `TEntryPoint` `System.Reflection.Assembly.FullName` . Doğru anahtara sahip bir özniteliğin bulunamaması durumunda, `WebApplicationFactory` bir çözüm dosyası ( *. sln* ) aramaya geri döner ve `TEntryPoint` derleme adını çözüm dizinine ekler. Uygulama kök dizini (içerik kök yolu) görünümleri ve içerik dosyalarını saptamak için kullanılır.
 
 ## <a name="disable-shadow-copying"></a>Gölge kopyalamayı devre dışı bırak
 
@@ -379,10 +380,10 @@ dotnet test
 
 SUT, Razor aşağıdaki özelliklere sahip bir sayfalar ileti sistemidir:
 
-* Uygulamanın (*Pages/Index. cshtml* ve *Pages/index. cshtml. cs*) dizin sayfası, iletilerin eklenmesi, silinmesini ve ANALIZINI denetlemek için bir UI ve sayfa modeli yöntemleri sağlar (ileti başına ortalama sözcük).
-* Bir ileti, `Message` sınıfı (*Data/Message. cs*) ile iki özelliği olan ( `Id` anahtar) ve `Text` (ileti) açıklanmaktadır. `Text`Özelliği gereklidir ve 200 karakterle sınırlıdır.
+* Uygulamanın ( *Pages/Index. cshtml* ve *Pages/index. cshtml. cs* ) dizin sayfası, iletilerin eklenmesi, silinmesini ve ANALIZINI denetlemek için bir UI ve sayfa modeli yöntemleri sağlar (ileti başına ortalama sözcük).
+* Bir ileti, `Message` sınıfı ( *Data/Message. cs* ) ile iki özelliği olan ( `Id` anahtar) ve `Text` (ileti) açıklanmaktadır. `Text`Özelliği gereklidir ve 200 karakterle sınırlıdır.
 * İletiler, [Entity Framework bellek içi veritabanı](/ef/core/providers/in-memory/)&#8224; kullanılarak depolanır.
-* Uygulama, veritabanı bağlamı sınıfında ( `AppDbContext` *Data/AppDbContext. cs*) bir veri ERIŞIM katmanı (dal) içerir.
+* Uygulama, veritabanı bağlamı sınıfında ( `AppDbContext` *Data/AppDbContext. cs* ) bir veri ERIŞIM katmanı (dal) içerir.
 * Veritabanı uygulama başlangıcında boşsa, ileti deposu üç iletiyle başlatılır.
 * Uygulama `/SecurePage` yalnızca kimliği doğrulanmış bir kullanıcı tarafından erişilebilen bir içerir.
 
@@ -394,7 +395,7 @@ Uygulama, depo desenini kullanmıyor ve [Iş birimi (UoW) düzeninin](https://ma
 
 Test uygulaması, *testler/ Razor pagesproject. Tests* dizini içindeki bir konsol uygulamasıdır.
 
-| Uygulama dizinini test et | Description |
+| Uygulama dizinini test et | Açıklama |
 | ------------------ | ----------- |
 | *AuthTests* | İçin test yöntemleri içerir:<ul><li>Güvenli bir sayfaya, kimliği doğrulanmamış bir kullanıcıyla erişme.</li><li>Bir sahte ile kimliği doğrulanmış bir kullanıcı tarafından güvenli bir sayfaya erişme <xref:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1> .</li><li>GitHub kullanıcı profilini alma ve profilin Kullanıcı oturum açma bilgilerini denetleme.</li></ul> |
 | *BasicTests* | Yönlendirme ve içerik türü için bir test yöntemi içerir. |
@@ -413,7 +414,7 @@ Tümleştirme testleri genellikle veritabanında test yürütmeden önce küçü
 
 SUT 'un veritabanı bağlamı `Startup.ConfigureServices` yöntemine kaydedilir. Test uygulamasının `builder.ConfigureServices` geri çağırması, uygulamanın kodu yürütüldükten *sonra* yürütülür `Startup.ConfigureServices` . Testler için farklı bir veritabanı kullanmak istiyorsanız, uygulamanın veritabanı bağlamı içinde değiştirilmelidir `builder.ConfigureServices` . Daha fazla bilgi için, [WebApplicationFactory 'Yi özelleştirme](#customize-webapplicationfactory) bölümüne bakın.
 
-Hala [Web ana bilgisayarını](xref:fundamentals/host/web-host)kullanan sımlar için, test uygulamasının `builder.ConfigureServices` geri çağırması sut kodundan *önce* yürütülür `Startup.ConfigureServices` . Test uygulamasının `builder.ConfigureTestServices` geri çağırması *sonra*yürütülür.
+Hala [Web ana bilgisayarını](xref:fundamentals/host/web-host)kullanan sımlar için, test uygulamasının `builder.ConfigureServices` geri çağırması sut kodundan *önce* yürütülür `Startup.ConfigureServices` . Test uygulamasının `builder.ConfigureTestServices` geri çağırması *sonra* yürütülür.
 
 ::: moniker-end
 
@@ -445,7 +446,7 @@ Bu geniş testler, uygulamanın altyapısını ve tüm çatısını test etmek i
 * Ağ gereçleri
 * İstek-yanıt işlem hattı
 
-Birim testleri, altyapı bileşenlerinin yerine, *Fakes* veya *sahte nesneler*olarak bilinen fabriccomponents bileşenlerini kullanır.
+Birim testleri, altyapı bileşenlerinin yerine, *Fakes* veya *sahte nesneler* olarak bilinen fabriccomponents bileşenlerini kullanır.
 
 Birim testlerinin aksine, tümleştirme testleri:
 
@@ -459,7 +460,7 @@ Bu nedenle, tümleştirme testlerinin kullanımını en önemli altyapı senaryo
 > Veritabanları ve dosya sistemleriyle ilgili her olası veri ve dosya erişimi için tümleştirme testleri yazma. Bir uygulamadaki kaç yerde veritabanlarıyla ve dosya sistemleriyle etkileşime girdiğinize bakılmaksızın, bir dizi Read, Write, Update ve DELETE tümleştirme testi, genellikle veritabanı ve dosya sistemi bileşenlerinin yeterli şekilde test edilmesine sahip olur. Bu bileşenlerle etkileşime geçen Yöntem mantığının rutin testleri için birim testleri kullanın. Birim testlerinde, altyapı kullanımı ve moizler 'in kullanılması daha hızlı test yürütmesiyle sonuçlanır.
 
 > [!NOTE]
-> Tümleştirme testlerinin tartışmalarında, test edilen proje genellikle *test altındaki sistem*veya kısa IÇIN "sut" olarak adlandırılır.
+> Tümleştirme testlerinin tartışmalarında, test edilen proje genellikle *test altındaki sistem* veya kısa IÇIN "sut" olarak adlandırılır.
 >
 > *Bu konu başlığı altında, sınanan ASP.NET Core uygulamasına başvurmak için "SUT" kullanılır.*
 
@@ -471,7 +472,7 @@ ASP.NET Core tümleştirme testleri şunları gerektirir:
 * Test projesi SUT için bir test Web Konağı oluşturur ve SUT ile istekleri ve yanıtları işlemek için bir test sunucusu istemcisi kullanır.
 * Test Çalıştırıcısı, testleri yürütmek ve test sonuçlarını raporlamak için kullanılır.
 
-Tümleştirme testleri, olağan *düzenleme*, *hareket*ve *onaylama* testi adımlarını içeren bir olay dizisini izler:
+Tümleştirme testleri, olağan *düzenleme* , *hareket* ve *onaylama* testi adımlarını içeren bir olay dizisini izler:
 
 1. SUT 'un web ana bilgisayarı yapılandırıldı.
 1. İstekleri uygulamaya göndermek için bir test sunucusu istemcisi oluşturulur.
@@ -487,7 +488,7 @@ Test Web Konağı ve bellek içi test sunucusu ([TestServer](/dotnet/api/microso
 
 `Microsoft.AspNetCore.Mvc.Testing`Paket aşağıdaki görevleri gerçekleştirir:
 
-* Bağımlılıklar dosyasını (*. Deps*) sut 'den test projesinin *bin* dizinine kopyalar.
+* Bağımlılıklar dosyasını ( *. Deps* ) sut 'den test projesinin *bin* dizinine kopyalar.
 * , Testler yürütüldüğünde statik dosya ve sayfa/görünümlerin bulunması için [içerik kökünü](xref:fundamentals/index#content-root) sut 'nin proje köküne ayarlar.
 * , İle SUT önyükleyiciyi kolaylaştırmak için [Webapplicationfactory](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) sınıfını sağlar `TestServer` .
 
@@ -521,7 +522,7 @@ SUT [ortamı](xref:fundamentals/environments) ayarlanmamışsa, ortam varsayıla
 
 [Webapplicationfactory \<TEntryPoint> ](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactory-1) , tümleştirme testleri için bir [TestServer](/dotnet/api/microsoft.aspnetcore.testhost.testserver) oluşturmak için kullanılır. `TEntryPoint` , genellikle sınıfının, SUT 'ın giriş noktası sınıfıdır `Startup` .
 
-Test sınıfları sınıfı testlerin içerdiğini göstermek ve sınıftaki testler arasında paylaşılan nesne örnekleri sağlamak için bir *sınıf armatürü* arabirimi ([ıssfixture](https://xunit.github.io/docs/shared-context#class-fixture)) uygular.
+Test sınıfları sınıfı testlerin içerdiğini göstermek ve sınıftaki testler arasında paylaşılan nesne örnekleri sağlamak için bir *sınıf armatürü* arabirimi ( [ıssfixture](https://xunit.github.io/docs/shared-context#class-fixture)) uygular.
 
 Aşağıdaki test sınıfı, `BasicTests` SUT 'yi önyüklemek `WebApplicationFactory` ve bir test yöntemine [HttpClient](/dotnet/api/system.net.http.httpclient) sağlamak için öğesini kullanır `Get_EndpointsReturnSuccessAndCorrectContentType` . Yöntemi, yanıt durum kodunun başarılı olup olmadığını denetler (200-299 aralığındaki durum kodları) ve `Content-Type` üst bilgi `text/html; charset=utf-8` birçok uygulama sayfasına yöneliktir.
 
@@ -557,7 +558,7 @@ SUT 'a yönelik herhangi bir POST isteği, uygulamanın [veri koruma antiforgery
 1. Timeforgery cookie ve istek doğrulama belirtecini ayrıştırın.
 1. POST isteğini, antiforgery cookie ve istek doğrulama belirteciyle birlikte yapın.
 
-`SendAsync`Örnek uygulamadaki yardımcı uzantı yöntemleri (*yardımcılar/Httpclienconversionsions. cs*) ve `GetDocumentAsync` yardımcı yöntemi (*yardımcılar/htmlyardımcıları. cs*), aşağıdaki [sample app](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/) yöntemlerle Antiforgery denetimini işlemek için [anglesharp](https://anglesharp.github.io/) ayrıştırıcısını kullanır:
+`SendAsync`Örnek uygulamadaki yardımcı uzantı yöntemleri ( *yardımcılar/Httpclienconversionsions. cs* ) ve `GetDocumentAsync` yardımcı yöntemi ( *yardımcılar/htmlyardımcıları. cs* ), aşağıdaki [sample app](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/test/integration-tests/samples/) yöntemlerle Antiforgery denetimini işlemek için [anglesharp](https://anglesharp.github.io/) ayrıştırıcısını kullanır:
 
 * `GetDocumentAsync`: [HttpResponseMessage](/dotnet/api/system.net.http.httpresponsemessage) 'ı alır ve döndürür `IHtmlDocument` . `GetDocumentAsync` , orijinalin temelinde bir *sanal yanıt* hazırlayan bir fabrika kullanır `HttpResponseMessage` . Daha fazla bilgi için bkz. [Anglesharp belgeleri](https://github.com/AngleSharp/AngleSharp#documentation).
 * `SendAsync``HttpClient`bir [HttpRequestMessage](/dotnet/api/system.net.http.httprequestmessage) oluşturun ve istekleri sut 'A göndermek Için [Sendadsync (HttpRequestMessage)](/dotnet/api/system.net.http.httpclient.sendasync#System_Net_Http_HttpClient_SendAsync_System_Net_Http_HttpRequestMessage_) çağrısı yapın. `SendAsync`HTML biçimini kabul etmek için aşırı yüklemeler ( `IHtmlFormElement` ) ve şunları yapın:
@@ -608,23 +609,23 @@ Hizmetler, ana bilgisayar tasarımcısında [Configuretestservices](/dotnet/api/
 
 Örnek SUT, bir teklif döndüren kapsamlı bir hizmet içerir. Dizin sayfası istendiğinde, teklif Dizin sayfasındaki gizli bir alana katıştırılır.
 
-*Hizmetler/ıquoteservice. cs*:
+*Hizmetler/ıquoteservice. cs* :
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/src/RazorPagesProject/Services/IQuoteService.cs?name=snippet1)]
 
-*Hizmetler/QuoteService. cs*:
+*Hizmetler/QuoteService. cs* :
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/src/RazorPagesProject/Services/QuoteService.cs?name=snippet1)]
 
-*Startup.cs*:
+*Startup.cs* :
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/src/RazorPagesProject/Startup.cs?name=snippet2)]
 
-*Pages/Index. cshtml. cs*:
+*Pages/Index. cshtml. cs* :
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/src/RazorPagesProject/Pages/Index.cshtml.cs?name=snippet1&highlight=4,9,20,26)]
 
-*Sayfa/dizin. cs*:
+*Sayfa/dizin. cs* :
 
 [!code-cshtml[](integration-tests/samples/2.x/IntegrationTestsSample/src/RazorPagesProject/Pages/Index.cshtml?name=snippet_Quote)]
 
@@ -637,7 +638,7 @@ Aşağıdaki biçimlendirme, SUT uygulaması çalıştırıldığında oluşturu
 
 Bir tümleştirme testinde hizmet ve teklif ekleme işlemini test etmek için, test tarafından SUT 'ye bir sahte hizmet eklenir. Sahte hizmet, uygulamanın `QuoteService` adı verilen test uygulaması tarafından verilen bir hizmetle değiştirilir `TestQuoteService` :
 
-*IntegrationTests.IndexPageTests.cs*:
+*IntegrationTests.IndexPageTests.cs* :
 
 [!code-csharp[](integration-tests/samples/2.x/IntegrationTestsSample/tests/RazorPagesProject.Tests/IntegrationTests/IndexPageTests.cs?name=snippet4)]
 
@@ -723,7 +724,7 @@ public class CustomWebApplicationFactory<TStartup>
 
 ## <a name="how-the-test-infrastructure-infers-the-app-content-root-path"></a>Test altyapısının uygulama içeriği kök yolunu nasıl öğrendiğini
 
-`WebApplicationFactory`Oluşturucu, derleme üzerinde bir anahtarla eşit anahtar olan tümleştirme testlerini içeren bir [Webapplicationfactorycontentrootattribute](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactorycontentrootattribute) arayarak uygulama [içeriği kök](xref:fundamentals/index#content-root) yolunu alır `TEntryPoint` `System.Reflection.Assembly.FullName` . Doğru anahtara sahip bir özniteliğin bulunamaması durumunda, `WebApplicationFactory` bir çözüm dosyası (*. sln*) aramaya geri döner ve `TEntryPoint` derleme adını çözüm dizinine ekler. Uygulama kök dizini (içerik kök yolu) görünümleri ve içerik dosyalarını saptamak için kullanılır.
+`WebApplicationFactory`Oluşturucu, derleme üzerinde bir anahtarla eşit anahtar olan tümleştirme testlerini içeren bir [Webapplicationfactorycontentrootattribute](/dotnet/api/microsoft.aspnetcore.mvc.testing.webapplicationfactorycontentrootattribute) arayarak uygulama [içeriği kök](xref:fundamentals/index#content-root) yolunu alır `TEntryPoint` `System.Reflection.Assembly.FullName` . Doğru anahtara sahip bir özniteliğin bulunamaması durumunda, `WebApplicationFactory` bir çözüm dosyası ( *. sln* ) aramaya geri döner ve `TEntryPoint` derleme adını çözüm dizinine ekler. Uygulama kök dizini (içerik kök yolu) görünümleri ve içerik dosyalarını saptamak için kullanılır.
 
 ## <a name="disable-shadow-copying"></a>Gölge kopyalamayı devre dışı bırak
 
@@ -737,7 +738,7 @@ Aşağıdaki içeriğe sahip test projesinin köküne dosya *xunit.runner.js* ek
 }
 ```
 
-Visual Studio kullanıyorsanız, dosyanın **Çıkış Dizinine Kopyala** özelliğini **her zaman Kopyala**olarak ayarlayın. Visual Studio kullanmıyorsanız, `Content` Test uygulamasının proje dosyasına bir hedef ekleyin:
+Visual Studio kullanıyorsanız, dosyanın **Çıkış Dizinine Kopyala** özelliğini **her zaman Kopyala** olarak ayarlayın. Visual Studio kullanmıyorsanız, `Content` Test uygulamasının proje dosyasına bir hedef ekleyin:
 
 ```xml
 <ItemGroup>
@@ -770,10 +771,10 @@ dotnet test
 
 SUT, Razor aşağıdaki özelliklere sahip bir sayfalar ileti sistemidir:
 
-* Uygulamanın (*Pages/Index. cshtml* ve *Pages/index. cshtml. cs*) dizin sayfası, iletilerin eklenmesi, silinmesini ve ANALIZINI denetlemek için bir UI ve sayfa modeli yöntemleri sağlar (ileti başına ortalama sözcük).
-* Bir ileti, `Message` sınıfı (*Data/Message. cs*) ile iki özelliği olan ( `Id` anahtar) ve `Text` (ileti) açıklanmaktadır. `Text`Özelliği gereklidir ve 200 karakterle sınırlıdır.
+* Uygulamanın ( *Pages/Index. cshtml* ve *Pages/index. cshtml. cs* ) dizin sayfası, iletilerin eklenmesi, silinmesini ve ANALIZINI denetlemek için bir UI ve sayfa modeli yöntemleri sağlar (ileti başına ortalama sözcük).
+* Bir ileti, `Message` sınıfı ( *Data/Message. cs* ) ile iki özelliği olan ( `Id` anahtar) ve `Text` (ileti) açıklanmaktadır. `Text`Özelliği gereklidir ve 200 karakterle sınırlıdır.
 * İletiler, [Entity Framework bellek içi veritabanı](/ef/core/providers/in-memory/)&#8224; kullanılarak depolanır.
-* Uygulama, veritabanı bağlamı sınıfında ( `AppDbContext` *Data/AppDbContext. cs*) bir veri ERIŞIM katmanı (dal) içerir.
+* Uygulama, veritabanı bağlamı sınıfında ( `AppDbContext` *Data/AppDbContext. cs* ) bir veri ERIŞIM katmanı (dal) içerir.
 * Veritabanı uygulama başlangıcında boşsa, ileti deposu üç iletiyle başlatılır.
 * Uygulama `/SecurePage` yalnızca kimliği doğrulanmış bir kullanıcı tarafından erişilebilen bir içerir.
 
@@ -785,7 +786,7 @@ Uygulama, depo desenini kullanmıyor ve [Iş birimi (UoW) düzeninin](https://ma
 
 Test uygulaması, *testler/ Razor pagesproject. Tests* dizini içindeki bir konsol uygulamasıdır.
 
-| Uygulama dizinini test et | Description |
+| Uygulama dizinini test et | Açıklama |
 | ------------------ | ----------- |
 | *AuthTests* | İçin test yöntemleri içerir:<ul><li>Güvenli bir sayfaya, kimliği doğrulanmamış bir kullanıcıyla erişme.</li><li>Bir sahte ile kimliği doğrulanmış bir kullanıcı tarafından güvenli bir sayfaya erişme <xref:Microsoft.AspNetCore.Authentication.AuthenticationHandler`1> .</li><li>GitHub kullanıcı profilini alma ve profilin Kullanıcı oturum açma bilgilerini denetleme.</li></ul> |
 | *BasicTests* | Yönlendirme ve içerik türü için bir test yöntemi içerir. |

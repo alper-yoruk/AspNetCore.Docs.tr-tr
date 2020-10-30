@@ -5,6 +5,7 @@ description: ASP.NET Core uygulamasında bu güvenlik açığını gidermeye yö
 ms.author: riande
 ms.date: 10/02/2018
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/cross-site-scripting
-ms.openlocfilehash: 38e9e102e9ac18ec14bceebf391c11a434492ac9
-ms.sourcegitcommit: 6ecdc481d5b9a10d2c6e091217f017b36bdba957
+ms.openlocfilehash: 1c90a786efe8c3c205a729a2da9d3a99d0222012
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/15/2020
-ms.locfileid: "90456068"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053091"
 ---
 # <a name="prevent-cross-site-scripting-xss-in-aspnet-core"></a>ASP.NET Core siteler arası komut dosyası (XSS) engelle
 
@@ -68,7 +69,7 @@ Bu görünüm *Untrustedınput* değişkeninin içeriğini verir. Bu değişken,
 
 ## <a name="javascript-encoding-using-no-locrazor"></a>Kullanılarak JavaScript kodlaması Razor
 
-Görünümünüzde işlemek için JavaScript 'e bir değer eklemek istediğiniz zaman olabilir. Bunu yapmanın iki yolu vardır. Değer eklemenin en güvenli yolu, değeri bir etiketinin veri özniteliğinde yerleştirmenin ve JavaScript 'te alamaktır. Örnek:
+Görünümünüzde işlemek için JavaScript 'e bir değer eklemek istediğiniz zaman olabilir. Bunu yapmanın iki yolu vardır. Değer eklemenin en güvenli yolu, değeri bir etiketinin veri özniteliğinde yerleştirmenin ve JavaScript 'te alamaktır. Örneğin:
 
 ```cshtml
 @{
@@ -161,10 +162,9 @@ Yukarıdaki kod aşağıdaki çıktıyı üretir:
 ```
 
 >[!WARNING]
-> DOM ***NOT*** öğeleri oluşturmak veya `document.write()` dinamik olarak oluşturulan Içerikte kullanmak için JavaScript 'te güvenilmeyen girişi birleştirme.
+> DOM öğeleri **NOT** oluşturmak veya `document.write()` dinamik olarak oluşturulan Içerikte kullanmak için JavaScript 'te güvenilmeyen girişi birleştirme.
 >
-> Kodun DOM tabanlı XSS 'ye gösterilmesini engellemek için aşağıdaki yaklaşımlardan birini kullanın:
-> * `createElement()` ve uygun yöntemler veya düğüm gibi özelliklerle özellik değerleri atayın `node.textContent=` . InnerText = '.
+> Kodun DOM tabanlı XSS: _ ' e gösterilmesini engellemek için aşağıdaki yaklaşımlardan birini kullanın `createElement()` ve uygun yöntemlerle ya da düğüm gibi özelliklerle özellik değerleri atayın `node.textContent=` . InnerText = '.
 > * `document.CreateTextNode()` ve uygun DOM konumuna ekleyin.
 > * `element.SetAttribute()`
 > * `element[attribute]=`
@@ -173,7 +173,7 @@ Yukarıdaki kod aşağıdaki çıktıyı üretir:
 
 HTML, JavaScript ve URL kodlayıcıları kodunuzda iki şekilde kullanılabilir, bunları [bağımlılık ekleme](xref:fundamentals/dependency-injection) yoluyla ekleyebilir veya ad alanında bulunan varsayılan kodlayıcıları kullanabilirsiniz `System.Text.Encodings.Web` . Varsayılan kodlayıcıları kullanırsanız, güvenli olarak değerlendirilecek karakter aralıklarına uyguladığınız her türlü, varsayılan kodlayıcılar mümkün olan en güvenli kodlama kurallarını kullanır.
 
-Yapılandırıcılar aracılığıyla yapılandırılabilir kodlayıcıları kullanmak için, kurucularınız uygun şekilde bir *Htmlencoder*, *javascriptencoder* ve *URLEncoder* parametresi almalıdır. Örneğin;
+Yapılandırıcılar aracılığıyla yapılandırılabilir kodlayıcıları kullanmak için, kurucularınız uygun şekilde bir *Htmlencoder* , *javascriptencoder* ve *URLEncoder* parametresi almalıdır. Örneğin;
 
 ```csharp
 public class HomeController : Controller

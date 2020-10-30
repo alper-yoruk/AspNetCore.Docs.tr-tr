@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 02/11/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/identity-configuration
-ms.openlocfilehash: ae4a2eb9d95339651c3810a9f8489d703d73a3fe
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: b11a2d584b7275a9065c9915021ac945823531f8
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88632687"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051999"
 ---
 # <a name="configure-no-locaspnet-core-identity"></a>Yapılandırma ASP.NET Core Identity
 
@@ -130,7 +131,7 @@ Aşağıdaki kod ayarları ayarlar `SignIn` (varsayılan değerlere göre):
 
 ### <a name="no-loccookie-settings"></a>Cookie ayarları
 
-Uygulamasının cookie içinde yapılandırma `Startup.ConfigureServices` . [Configureapplication Cookie ](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__) , veya çağrıldıktan **sonra** çağrılmalıdır `AddIdentity` `AddDefaultIdentity` .
+Uygulamasının cookie içinde yapılandırma `Startup.ConfigureServices` . [Configureapplication Cookie](/dotnet/api/microsoft.extensions.dependencyinjection.identityservicecollectionextensions.configureapplicationcookie#Microsoft_Extensions_DependencyInjection_IdentityServiceCollectionExtensions_ConfigureApplicationCookie_Microsoft_Extensions_DependencyInjection_IServiceCollection_System_Action_Microsoft_AspNetCore_Authentication_Cookies_CookieAuthenticationOptions__) , veya çağrıldıktan **sonra** çağrılmalıdır `AddIdentity` `AddDefaultIdentity` .
 
 [!code-csharp[](identity-configuration/sample/Startup.cs?name=snippet_cookie)]
 
@@ -142,7 +143,7 @@ Daha fazla bilgi için bkz. [ Cookie authenticationoptions](/dotnet/api/microsof
 
 | Seçenek | Açıklama |
 | ------ | ----------- |
-| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> | Yeni parolalar Karma oluşturulurken kullanılan uyumluluk modu. Varsayılan olarak olur <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3> . Karma parolanın *Biçim işaretleyicisi*olarak adlandırılan ilk baytı, parolayı karma olarak kullanılan karma algoritmanın sürümünü belirtir. Bir karmaya karşı bir parola doğrulanırken, <xref:Microsoft.AspNetCore.Identity.PasswordHasher`1.VerifyHashedPassword*> Yöntem ilk bayta göre doğru algoritmayı seçer. Bir istemci, parolayı karma hale almak için hangi algoritma sürümünün kullanıldığına bakılmaksızın kimlik doğrulaması yapabilir. Uyumluluk modunun ayarlanması *yeni parolaların*karmasını etkiler. |
+| <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> | Yeni parolalar Karma oluşturulurken kullanılan uyumluluk modu. Varsayılan olarak olur <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3> . Karma parolanın *Biçim işaretleyicisi* olarak adlandırılan ilk baytı, parolayı karma olarak kullanılan karma algoritmanın sürümünü belirtir. Bir karmaya karşı bir parola doğrulanırken, <xref:Microsoft.AspNetCore.Identity.PasswordHasher`1.VerifyHashedPassword*> Yöntem ilk bayta göre doğru algoritmayı seçer. Bir istemci, parolayı karma hale almak için hangi algoritma sürümünün kullanıldığına bakılmaksızın kimlik doğrulaması yapabilir. Uyumluluk modunun ayarlanması *yeni parolaların* karmasını etkiler. |
 | <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> | PBKDF2 kullanarak parolaları karmalama sırasında kullanılan yineleme sayısı. Bu değer yalnızca, <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.CompatibilityMode> olarak ayarlandığında kullanılır <xref:Microsoft.AspNetCore.Identity.PasswordHasherCompatibilityMode.IdentityV3> . Değer pozitif bir tamsayı olmalı ve varsayılan olarak olarak ayarlanmalıdır `10000` . |
 
 Aşağıdaki örnekte, <xref:Microsoft.AspNetCore.Identity.PasswordHasherOptions.IterationCount> içinde olarak ayarlanır `12000` `Startup.ConfigureServices` :

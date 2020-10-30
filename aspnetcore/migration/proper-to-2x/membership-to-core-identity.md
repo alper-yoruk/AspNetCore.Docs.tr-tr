@@ -6,6 +6,7 @@ ms.author: scaddie
 ms.custom: mvc
 ms.date: 01/10/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: migration/proper-to-2x/membership-to-core-identity
-ms.openlocfilehash: a9ec02381b156a6599042d8e504a476036246302
-ms.sourcegitcommit: f09407d128634d200c893bfb1c163e87fa47a161
+ms.openlocfilehash: d981c424fd2d6cad95b9164420f093672325c347
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/26/2020
-ms.locfileid: "88865566"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051362"
 ---
 # <a name="migrate-from-aspnet-membership-authentication-to-aspnet-core-20-no-locidentity"></a>ASP.NET üyelik kimlik doğrulamasından ASP.NET Core 2,0 ' ye geçiş Identity
 
@@ -47,16 +48,16 @@ ASP.NET Core 2,0, [Identity](/aspnet/identity/index) ASP.NET 4,5 ' de tanıtıla
 
 ASP.NET Core 2,0 şemasını görüntülemenin en hızlı yolu, Identity Yeni bir ASP.NET Core 2,0 uygulaması oluşturmaktır. Visual Studio 2017 'de şu adımları izleyin:
 
-1. **Dosya**  >  **Yeni**  >  **Proje**' yi seçin.
-1. *Çekirdek Identity örnek*adlı yeni bir **ASP.NET Core Web uygulaması** projesi oluşturun.
-1. Açılan listede **ASP.NET Core 2,0** ' i seçin ve ardından **Web uygulaması**' nı seçin. Bu şablon bir [ Razor Sayfalar](xref:razor-pages/index) uygulaması oluşturur. **Tamam**' a tıklamadan önce **kimlik doğrulamasını Değiştir**' e tıklayın.
-1. Şablonlar için **bireysel kullanıcı hesapları** seçin Identity . Son olarak **Tamam**' a ve ardından **Tamam**' a tıklayın. Visual Studio, şablonu kullanarak bir proje oluşturur ASP.NET Core Identity .
-1. **Tools**  >  Paket Yöneticisi Konsolu (PMC) penceresini açmak için Araçlar**NuGet Paket Yöneticisi**  >  **Paket Yöneticisi konsolu** **Package Manager Console** ' nu seçin.
+1. **Dosya**  >  **Yeni**  >  **Proje** ' yi seçin.
+1. *Çekirdek Identity örnek* adlı yeni bir **ASP.NET Core Web uygulaması** projesi oluşturun.
+1. Açılan listede **ASP.NET Core 2,0** ' i seçin ve ardından **Web uygulaması** ' nı seçin. Bu şablon bir [ Razor Sayfalar](xref:razor-pages/index) uygulaması oluşturur. **Tamam** ' a tıklamadan önce **kimlik doğrulamasını Değiştir** ' e tıklayın.
+1. Şablonlar için **bireysel kullanıcı hesapları** seçin Identity . Son olarak **Tamam** ' a ve ardından **Tamam** ' a tıklayın. Visual Studio, şablonu kullanarak bir proje oluşturur ASP.NET Core Identity .
+1. **Tools**  >  Paket Yöneticisi Konsolu (PMC) penceresini açmak için Araçlar **NuGet Paket Yöneticisi**  >  **Paket Yöneticisi konsolu** **Package Manager Console** ' nu seçin.
 1. PMC 'de Proje köküne gidin ve [Entity Framework (EF) Core](/ef/core) `Update-Database` komutunu çalıştırın.
 
     ASP.NET Core 2,0, Identity kimlik doğrulama verilerini depolayan veritabanıyla etkileşime geçmek için EF Core kullanır. Yeni oluşturulan uygulamanın çalışması için, bu verileri depolamak üzere bir veritabanı olması gerekir. Yeni bir uygulama oluşturduktan sonra, bir veritabanı ortamında şemayı incelemenize en hızlı yol, [EF Core geçişlerini](/ef/core/managing-schemas/migrations/)kullanarak veritabanını oluşturmaktır. Bu işlem, yerel olarak veya başka bir yerde, bu şemayı taklit eden bir veritabanı oluşturur. Daha fazla bilgi için önceki belgeleri gözden geçirin.
 
-    EF Core komutları * üzerindeappsettings.js*belirtilen veritabanı için bağlantı dizesini kullanır. Aşağıdaki bağlantı dizesi, *ASP-NET-Core-Identity*adlı *localhost* üzerinde bir veritabanını hedefler. Bu ayarda, EF Core bağlantı dizesini kullanacak şekilde yapılandırılır `DefaultConnection` .
+    EF Core komutları ' de belirtilen veritabanı için bağlantı dizesini kullanır *appsettings.json* . Aşağıdaki bağlantı dizesi, *ASP-NET-Core-Identity* adlı *localhost* üzerinde bir veritabanını hedefler. Bu ayarda, EF Core bağlantı dizesini kullanacak şekilde yapılandırılır `DefaultConnection` .
 
     ```json
     {
@@ -66,7 +67,7 @@ ASP.NET Core 2,0 şemasını görüntülemenin en hızlı yolu, Identity Yeni bi
     }
     ```
 
-1. SQL Server Nesne Gezgini **görüntüle**' yi seçin  >  **SQL Server Object Explorer**. `ConnectionStrings:DefaultConnection` *appsettings.json*özelliğinde belirtilen veritabanı adına karşılık gelen düğümü genişletin.
+1. SQL Server Nesne Gezgini **görüntüle** ' yi seçin  >  **SQL Server Object Explorer** . Özelliğinde belirtilen veritabanı adına karşılık gelen düğümü genişletin `ConnectionStrings:DefaultConnection` *appsettings.json* .
 
     `Update-Database`Komut, şema ile belirtilen veritabanını ve uygulama başlatma için gereken tüm verileri oluşturdu. Aşağıdaki görüntüde, önceki adımlarla oluşturulan tablo yapısı gösterilmektedir.
 
@@ -74,7 +75,7 @@ ASP.NET Core 2,0 şemasını görüntülemenin en hızlı yolu, Identity Yeni bi
 
 ## <a name="migrate-the-schema"></a>Şemayı geçirme
 
-Her iki üyelik ve için tablo yapılarında ve alanlarında hafif farklar vardır ASP.NET Core Identity . Bu model, ASP.NET ve ASP.NET Core uygulamalarıyla kimlik doğrulama/yetkilendirme için önemli ölçüde değiştirilmiştir. İle hala kullanılan temel nesneler Identity *Kullanıcılar* ve *rollerdir*. *Kullanıcılar*, *Roller*ve Kullanıcı *rolleri*için eşleme tabloları aşağıda verilmiştir.
+Her iki üyelik ve için tablo yapılarında ve alanlarında hafif farklar vardır ASP.NET Core Identity . Bu model, ASP.NET ve ASP.NET Core uygulamalarıyla kimlik doğrulama/yetkilendirme için önemli ölçüde değiştirilmiştir. İle hala kullanılan temel nesneler Identity *Kullanıcılar* ve *rollerdir* . *Kullanıcılar* , *Roller* ve Kullanıcı *rolleri* için eşleme tabloları aşağıda verilmiştir.
 
 ### <a name="users"></a>Kullanıcılar
 
@@ -106,7 +107,7 @@ Her iki üyelik ve için tablo yapılarında ve alanlarında hafif farklar vard�
 |`RoleId`                 |`string`  |`RoleId`      |`string`                   |
 |`UserId`                 |`string`  |`UserId`      |`string`                   |
 
-*Kullanıcılar* ve *Roller*için bir geçiş betiği oluştururken önceki eşleme tablolarına başvurun. Aşağıdaki örnek, bir veritabanı sunucusunda iki veritabanınız olduğunu varsayar. Bir veritabanı var olan ASP.NET üyelik şemasını ve verilerini içerir. Diğer *çekirdek Identity örnek* veritabanı, daha önce açıklanan adımlar kullanılarak oluşturulmuştur. Daha ayrıntılı bilgi için açıklamalar satır içi olarak eklenir.
+*Kullanıcılar* ve *Roller* için bir geçiş betiği oluştururken önceki eşleme tablolarına başvurun. Aşağıdaki örnek, bir veritabanı sunucusunda iki veritabanınız olduğunu varsayar. Bir veritabanı var olan ASP.NET üyelik şemasını ve verilerini içerir. Diğer *çekirdek Identity örnek* veritabanı, daha önce açıklanan adımlar kullanılarak oluşturulmuştur. Daha ayrıntılı bilgi için açıklamalar satır içi olarak eklenir.
 
 ```sql
 -- THIS SCRIPT NEEDS TO RUN FROM THE CONTEXT OF THE MEMBERSHIP DB
@@ -200,7 +201,7 @@ COMMIT TRANSACTION MigrateUsersAndRoles
 > [!NOTE]
 > Üyelik sisteminde kullanıcılara, e-posta adresiyle eşleşmeyen Kullanıcı adları varsa, bu, daha önce oluşturulan uygulamanın buna uyum sağlaması için değişiklikler yapmanız gerekir. Varsayılan şablon `UserName` `Email` , ve için aynı olmasını bekler. Farklı oldukları durumlar için, oturum açma işleminin yerine kullanılacak şekilde değiştirilmesi gerekir `UserName` `Email` .
 
-`PageModel` *Pages\Account\Login.cshtml.cs*adresinde bulunan oturum açma sayfasında, `[EmailAddress]` *e-posta* özelliğinden özniteliği kaldırın. *Kullanıcı adı*olarak yeniden adlandırın. Bu, `EmailAddress` *Görünüm* ve *pagemodel*içinde bahsedilen her yerde bir değişiklik yapılmasını gerektirir. Sonuç aşağıdakine benzer:
+`PageModel` *Pages\Account\Login.cshtml.cs* adresinde bulunan oturum açma sayfasında, `[EmailAddress]` *e-posta* özelliğinden özniteliği kaldırın. *Kullanıcı adı* olarak yeniden adlandırın. Bu, `EmailAddress` *Görünüm* ve *pagemodel* içinde bahsedilen her yerde bir değişiklik yapılmasını gerektirir. Sonuç aşağıdakine benzer:
 
  ![Sabit oturum açma](identity/_static/fixed-login.png)
 

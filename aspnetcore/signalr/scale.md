@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/17/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/scale
-ms.openlocfilehash: 2bfe05748e6740043be7f1ccc6dbe22ad4b0ca44
-ms.sourcegitcommit: 24106b7ffffc9fff410a679863e28aeb2bbe5b7e
+ms.openlocfilehash: d3e9cd23a55702bcf9b002dcce556428683afeca
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 09/17/2020
-ms.locfileid: "90722572"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052779"
 ---
 # <a name="aspnet-core-no-locsignalr-hosting-and-scaling"></a>SignalRBarındırma ve ölçeklendirmeyi ASP.NET Core
 
@@ -45,7 +46,7 @@ Tüm diğer koşullarda (Redsıs geri düzlemi kullanıldığında dahil), sunuc
 
 ## <a name="tcp-connection-resources"></a>TCP bağlantı kaynakları
 
-Bir Web sunucusunun destekleyebileceği eşzamanlı TCP bağlantısı sayısı sınırlıdır. Standart HTTP istemcileri, *kısa ömürlü* bağlantıları kullanır. Bu bağlantılar, istemci boşta kaldığında ve daha sonra yeniden açıldığı zaman kapatılabilir. Öte yandan bir SignalR bağlantı *kalıcıdır*. SignalR istemci boşta kaldığında bile bağlantılar açık kalır. Çok sayıda istemciye hizmet veren yüksek trafikli bir uygulamada, bu kalıcı bağlantılar sunucuların en fazla bağlantı sayısına ulaşmasına neden olabilir.
+Bir Web sunucusunun destekleyebileceği eşzamanlı TCP bağlantısı sayısı sınırlıdır. Standart HTTP istemcileri, *kısa ömürlü* bağlantıları kullanır. Bu bağlantılar, istemci boşta kaldığında ve daha sonra yeniden açıldığı zaman kapatılabilir. Öte yandan bir SignalR bağlantı *kalıcıdır* . SignalR istemci boşta kaldığında bile bağlantılar açık kalır. Çok sayıda istemciye hizmet veren yüksek trafikli bir uygulamada, bu kalıcı bağlantılar sunucuların en fazla bağlantı sayısına ulaşmasına neden olabilir.
 
 Kalıcı bağlantılar, her bağlantıyı izlemek için ek bellek de tüketir.
 
@@ -120,14 +121,85 @@ Yukarıdaki koşullar, istemci işletim sistemi üzerindeki 10 bağlantı sını
 
 ## <a name="linux-with-nginx"></a>Nginx ile Linux
 
-Proxy 'nin `Connection` ve `Upgrade` üst bilgilerini WebSockets için aşağıdaki şekilde ayarlayın SignalR :
+Aşağıdakiler için WebSockets, ServerSentEvents ve LongPolling 'i etkinleştirmek üzere gereken en düşük ayarları içerir SignalR :
 
 ```nginx
-proxy_set_header Upgrade $http_upgrade;
-proxy_set_header Connection $connection_upgrade;
+http {
+  map $http_connection $connection_upgrade {
+    "~*Upgrade" $http_connection;
+    default keep-alive;
+}
+
+  server {
+    listen 80;
+    server_name example.com *.example.com;
+
+    # Configure the SignalR Endpoint
+    location /hubroute {
+      # App server url
+      proxy_pass http://localhost:5000;
+
+      # Configuration for WebSockets
+      proxy_set_header Upgrade $http_upgrade;
+      proxy_set_header Connection $connection_upgrade;
+      proxy_cache off;
+
+      # Configuration for ServerSentEvents
+      proxy_buffering off;
+
+      # Configuration for LongPolling or if your KeepAliveInterval is longer than 60 seconds
+      proxy_read_timeout 100s;
+
+      proxy_set_header Host $host;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto $scheme;
+    }
+  }
+}
 ```
 
-Daha fazla bilgi için bkz. [WebSocket proxy 'si olarak NGINX](https://www.nginx.com/blog/websocket-nginx/).
+Birden fazla arka uç sunucusu kullanıldığında, bağlantı kurulurken bağlantıların değiştirilmesini engellemek için yapışkan oturumlar eklenmelidir SignalR . NGINX içinde yapışkan oturum eklemenin birden çok yolu vardır. Aşağıdaki seçeneklere bağlı olarak iki yaklaşım aşağıda gösterilmiştir.
+
+Önceki yapılandırmaya ek olarak aşağıdakiler eklenmiştir. Aşağıdaki örneklerde, `backend` sunucu grubunun adıdır.
+
+[NGINX açık kaynak](https://nginx.org/en/)ile, `ip_hash` istemcinin IP adresine bağlı olarak bir sunucuya bağlantı yönlendirmek için kullanın:
+
+```nginx
+http {
+  upstream backend {
+    # App server 1
+    server http://localhost:5000;
+    # App server 2
+    server http://localhost:5002;
+
+    ip_hash;
+  }
+}
+```
+
+[NGINX Plus](https://www.nginx.com/products/nginx)ile, `sticky` bir cookie istek eklemek ve kullanıcının isteklerini bir sunucusuna sabitlemek için kullanın:
+
+```nginx
+http {
+  upstream backend {
+    # App server 1
+    server http://localhost:5000;
+    # App server 2
+    server http://localhost:5002;
+
+    sticky cookie srv_id expires=max domain=.example.com path=/ httponly;
+  }
+}
+```
+
+Son olarak, `proxy_pass http://localhost:5000` bölümünde öğesini `server` olarak değiştirin `proxy_pass http://backend` .
+
+NGINX üzerinden WebSockets hakkında daha fazla bilgi için bkz. [WebSocket proxy 'si olarak NGINX](https://www.nginx.com/blog/websocket-nginx).
+
+Yük Dengeleme ve yapışkan oturumlar hakkında daha fazla bilgi için bkz. [NGINX Yük Dengeleme](https://docs.nginx.com/nginx/admin-guide/load-balancer/http-load-balancer/).
+
+NGINX ile ASP.NET Core hakkında daha fazla bilgi için aşağıdaki makaleye bakın:
+* <xref:host-and-deploy/linux-nginx>
 
 ## <a name="third-party-no-locsignalr-backplane-providers"></a>Üçüncü taraf SignalR arka düzlem sağlayıcıları
 

@@ -7,6 +7,7 @@ ms.author: bradyg
 ms.custom: mvc
 ms.date: 01/16/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: signalr/hubs
-ms.openlocfilehash: 71ca0896bc645b7625f60c3a9e8fe321079d524a
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 4a31c16eb44e2244574d0df49c30e7a44b2bba6e
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88631283"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93050946"
 ---
 # <a name="use-hubs-in-no-locsignalr-for-aspnet-core"></a>ASP.NET Core için hub 'ları kullanın SignalR
 
@@ -155,7 +156,7 @@ Bu arabirim, önceki örneği yeniden düzenleme için kullanılabilir `ChatHub`
 
 Kullanımı `Hub<IChatClient>` , istemci yöntemlerinin derleme zamanı denetimini sunar. Bu, `Hub<T>` yalnızca arabirimde tanımlanan yöntemlere erişim sağlayabileceğinizden, sihirli dizeler kullanılarak oluşan sorunları önler.
 
-Türü kesin belirlenmiş kullanılması `Hub<T>` , kullanma yeteneğini devre dışı bırakır `SendAsync` . Arabirim üzerinde tanımlanan Yöntemler hala zaman uyumsuz olarak tanımlanabilir. Aslında, bu yöntemlerin her biri bir döndürmelidir `Task` . Bir arabirim olduğundan `async` anahtar sözcüğünü kullanmayın. Örnek:
+Türü kesin belirlenmiş kullanılması `Hub<T>` , kullanma yeteneğini devre dışı bırakır `SendAsync` . Arabirim üzerinde tanımlanan Yöntemler hala zaman uyumsuz olarak tanımlanabilir. Aslında, bu yöntemlerin her biri bir döndürmelidir `Task` . Bir arabirim olduğundan `async` anahtar sözcüğünü kullanmayın. Örneğin:
 
 ```csharp
 public interface IClient
@@ -191,7 +192,7 @@ Hub yöntemleriniz içinde oluşturulan özel durumlar, yöntemi çağıran iste
 
 [!code-javascript[Error](hubs/sample/wwwroot/js/chat.js?range=23)]
 
-Hub 'ınız bir özel durum oluşturursa, bağlantılar kapanmamıştır. Varsayılan olarak, SignalR istemciye genel bir hata iletisi döndürür. Örnek:
+Hub 'ınız bir özel durum oluşturursa, bağlantılar kapanmamıştır. Varsayılan olarak, SignalR istemciye genel bir hata iletisi döndürür. Örneğin:
 
 ```
 Microsoft.AspNetCore.SignalR.HubException: An unexpected error occurred invoking 'MethodName' on the server.
@@ -210,4 +211,4 @@ Beklenmeyen özel durumlar genellikle veritabanı bağlantısı başarısız old
 
 * [ASP.NET Core giriş SignalR](xref:signalr/introduction)
 * [JavaScript istemcisi](xref:signalr/javascript-client)
-* [Azure’da Yayımlama](xref:signalr/publish-to-azure-web-app)
+* [Azure 'da yayımlama](xref:signalr/publish-to-azure-web-app)

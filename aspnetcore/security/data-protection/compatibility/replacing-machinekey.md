@@ -5,6 +5,7 @@ description: Yeni ve daha güvenli bir veri koruma sisteminin kullanımına izin
 ms.author: riande
 ms.date: 04/06/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -16,12 +17,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/data-protection/compatibility/replacing-machinekey
-ms.openlocfilehash: 8cae0b8f1c4582e272061ff87868b32568dfe595
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 7c6766fa20b0df021013da77b5d88fecefd40c62
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88625576"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053065"
 ---
 # <a name="replace-the-aspnet-machinekey-in-aspnet-core"></a>ASP.NET Core ASP.NET machineKey değiştirme
 

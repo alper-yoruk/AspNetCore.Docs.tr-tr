@@ -7,6 +7,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 5/12/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -18,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: test/middleware
-ms.openlocfilehash: 1a5259f65261fb95fcfaa59df3f04da14d3f1ae3
-ms.sourcegitcommit: 7258e94cf60c16e5b6883138e5e68516751ead0f
+ms.openlocfilehash: 2dd5fa127af4432c612bb654d50eb4147aea6868
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/29/2020
-ms.locfileid: "89102871"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93051440"
 ---
 # <a name="test-aspnet-core-middleware"></a>Test ASP.NET Core ara yazılımı
 
@@ -67,7 +68,7 @@ Test projesinde bir test oluşturun:
 
 Sonucu onaylama. İlk olarak, bir onaylama işlemi beklediğinizi sonucun tersini yapın. Hatalı pozitif bir onaylama işlemi olan ilk çalıştırma, ara yazılım doğru çalışırken testin başarısız olduğunu onaylar. Testi çalıştırın ve testin başarısız olduğunu onaylayın.
 
-Aşağıdaki örnekte, kök uç noktası istendiğinde, ara yazılım 404 durum kodu döndürmelidir (*bulunamadı*). Başarısız olması gereken ilk testi çalıştırın `Assert.NotEqual( ... );` :
+Aşağıdaki örnekte, kök uç noktası istendiğinde, ara yazılım 404 durum kodu döndürmelidir ( *bulunamadı* ). Başarısız olması gereken ilk testi çalıştırın `Assert.NotEqual( ... );` :
 
 [!code-csharp[](middleware/samples_snapshot/3.x/false-failure-check.cs?highlight=22)]
 
@@ -135,14 +136,14 @@ public async Task TestMiddleware_ExpectedResponse()
 TestServer:
 
 * , Sunucu davranışlarını test eden yazılım için çoğaltmak üzere oluşturulmuştur.
-* Tüm davranışları ***çoğaltmayı denemez*** <xref:System.Net.Http.HttpClient> .
-* İstemci erişimine mümkün olduğunca çok denetim sağlamak ve sunucu üzerinde mümkün olduğunca fazla görünürlük sağlamak için denemeler yapmaya çalışır. Örneğin, `HttpClient` sunucu durumunu doğrudan iletmek için normalde tarafından oluşturulan özel durumlar oluşturabilir.
+* * **Not** _ tüm davranışları çoğaltmaya çalışır <xref:System.Net.Http.HttpClient> .
+_ İstemciye sunucu üzerinde mümkün olduğunca çok denetim izni vermek ve sunucu üzerinde mümkün olduğunca fazla görünürlük sağlamak için denemeler yapmaya çalışır. Örneğin, `HttpClient` sunucu durumunu doğrudan iletmek için normalde tarafından oluşturulan özel durumlar oluşturabilir.
 * Genellikle ara yazılım ile ilgili olmadığından, bazı aktarıma özgü üstbilgiler varsayılan olarak ayarlanamaz. Daha fazla bilgi için sonraki bölüme bakın.
 
-### <a name="content-length-and-transfer-encoding-headers"></a>Content-Length ve Transfer-Encoding üstbilgileri
+### <a name="content-length-and-transfer-encoding-headers"></a>İçerik uzunluğu ve Transfer-Encoding üst bilgileri
 
-TestServer, taşıma ile ilgili istek ya da [Içerik uzunluğu](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Length) veya [aktarım kodlaması](https://developer.mozilla.org/docs/Web/HTTP/Headers/Transfer-Encoding)gibi yanıt üst ***bilgileri ayarlanmamış.*** Kullanımları istemci, senaryo ve protokole göre değiştiğinden uygulamalar bu üstbilgilere bağlı olarak kaçınmalıdır. `Content-Length`Ve `Transfer-Encoding` belirli bir senaryoyu test etmek için gerekliyse, veya oluştururken test içinde belirtilenebilir <xref:System.Net.Http.HttpRequestMessage> <xref:Microsoft.AspNetCore.Http.HttpContext> . Daha fazla bilgi için bkz. aşağıdaki GitHub sorunları:
+TestServer, taşıma **not** ile ilgili istek ya da [İçerik-Uzunluk](https://developer.mozilla.org/docs/Web/HTTP/Headers/Content-Length) veya [aktarım kodlaması](https://developer.mozilla.org/docs/Web/HTTP/Headers/Transfer-Encoding)gibi yanıt üst bilgilerini ayarlar. Kullanımları istemci, senaryo ve protokole göre değiştiğinden uygulamalar bu üstbilgilere bağlı olarak kaçınmalıdır. `Content-Length`Ve `Transfer-Encoding` belirli bir senaryoyu test etmek için gerekliyse, veya oluştururken test içinde belirtilenebilir <xref:System.Net.Http.HttpRequestMessage> <xref:Microsoft.AspNetCore.Http.HttpContext> . Daha fazla bilgi için bkz. aşağıdaki GitHub sorunları:
 
-* [DotNet/aspnetcore # 21677](https://github.com/dotnet/aspnetcore/issues/21677)
+_ [DotNet/aspnetcore # 21677](https://github.com/dotnet/aspnetcore/issues/21677)
 * [DotNet/aspnetcore # 18463](https://github.com/dotnet/aspnetcore/issues/18463)
 * [DotNet/aspnetcore # 13273](https://github.com/dotnet/aspnetcore/issues/13273)

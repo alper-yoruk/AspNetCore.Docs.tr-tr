@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 11/14/2019
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authorization/iauthorizationpolicyprovider
-ms.openlocfilehash: 2d231440847270b3b2fe47fbe29359f494900292
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 0f6f628cee0623c21a2a93aa11470005f8c78c58
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88635209"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93053143"
 ---
 # <a name="custom-authorization-policy-providers-using-iauthorizationpolicyprovider-in-aspnet-core"></a>ASP.NET Core 'de ıauthorizationpolicyprovider kullanan özel yetkilendirme Ilkesi sağlayıcıları 
 
@@ -187,9 +188,9 @@ public Task<AuthorizationPolicy> GetFallbackPolicyAsync() =>
 
 ## <a name="use-a-custom-iauthorizationpolicyprovider"></a>Özel bir ıauthorizationpolicyprovider kullanın
 
-Özel ilkeleri bir ile kullanmak için şunları yapmanız `IAuthorizationPolicyProvider` ***gerekir***:
+Özel ilkeleri bir ile kullanmak için `IAuthorizationPolicyProvider` * * **olmalıdır** :
 
-* İlke tabanlı yetkilendirme `AuthorizationHandler` senaryolarında olduğu gibi, bağımlılık ekleme ( [ilke tabanlı yetkilendirme](xref:security/authorization/policies#authorization-handlers)bölümünde açıklanmıştır) ile uygun türleri kaydedin.
+_ Uygun `AuthorizationHandler` türleri, tüm ilke tabanlı yetkilendirme senaryolarında olduğu gibi bağımlılık ekleme ( [ilke tabanlı yetkilendirme](xref:security/authorization/policies#authorization-handlers)bölümünde açıklanmıştır) ile kaydedin.
 * `IAuthorizationPolicyProvider` `Startup.ConfigureServices` Varsayılan ilke sağlayıcısını değiştirmek için içindeki uygulamanın bağımlılık ekleme hizmeti koleksiyonuna özel türü kaydedin.
 
   ```csharp

@@ -6,6 +6,7 @@ ms.author: riande
 ms.custom: mvc
 ms.date: 04/17/2020
 no-loc:
+- appsettings.json
 - ASP.NET Core Identity
 - cookie
 - Cookie
@@ -17,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: index
-ms.openlocfilehash: f1235337748bacdb6eaa775a5853238bf729e605
-ms.sourcegitcommit: 65add17f74a29a647d812b04517e46cbc78258f9
+ms.openlocfilehash: 4301e0d59364573767ab4cae25a4818ff84b9abc
+ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 08/19/2020
-ms.locfileid: "88634559"
+ms.lasthandoff: 10/30/2020
+ms.locfileid: "93052233"
 ---
 # <a name="introduction-to-aspnet-core"></a>ASP.NET Core’a Giriş
 
@@ -57,7 +58,7 @@ ASP.NET Core MVC, [web API’leri](xref:tutorials/first-web-api) ve [web uygulam
 
 ## <a name="client-side-development"></a>İstemci tarafı geliştirme
 
-ASP.NET Core [Blazor](xref:blazor/index) , [angular](xref:spa/angular), [tepki](xref:spa/react)verme ve [önyükleme](https://getbootstrap.com/)gibi popüler istemci tarafı çerçeveleri ve kitaplıkları ile sorunsuz bir şekilde tümleşir. Daha fazla bilgi için bkz <xref:blazor/index> . *istemci tarafı geliştirme*altındaki ilgili konular.
+ASP.NET Core [Blazor](xref:blazor/index) , [angular](xref:spa/angular), [tepki](xref:spa/react)verme ve [önyükleme](https://getbootstrap.com/)gibi popüler istemci tarafı çerçeveleri ve kitaplıkları ile sorunsuz bir şekilde tümleşir. Daha fazla bilgi için bkz <xref:blazor/index> . *istemci tarafı geliştirme* altındaki ilgili konular.
 
 <a name="target-framework"></a>
 
@@ -136,7 +137,7 @@ ASP.NET Core MVC, [web API’leri](xref:tutorials/first-web-api) ve [web uygulam
 
 ## <a name="client-side-development"></a>İstemci tarafı geliştirme
 
-ASP.NET Core [Blazor](xref:blazor/index) , [angular](xref:spa/angular), [tepki](xref:spa/react)verme ve [önyükleme](https://getbootstrap.com/)gibi popüler istemci tarafı çerçeveleri ve kitaplıkları ile sorunsuz bir şekilde tümleşir. Daha fazla bilgi için bkz <xref:blazor/index> . *istemci tarafı geliştirme*altındaki ilgili konular.
+ASP.NET Core [Blazor](xref:blazor/index) , [angular](xref:spa/angular), [tepki](xref:spa/react)verme ve [önyükleme](https://getbootstrap.com/)gibi popüler istemci tarafı çerçeveleri ve kitaplıkları ile sorunsuz bir şekilde tümleşir. Daha fazla bilgi için bkz <xref:blazor/index> . *istemci tarafı geliştirme* altındaki ilgili konular.
 
 <a name="target-framework"></a>
 
