@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: security/authentication/scaffold-identity
-ms.openlocfilehash: c79dfc64d4311088c3f9ea03aad7570189000e2a
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 813dd7837c265c78c584d66dd51bc23399d12fbe
+ms.sourcegitcommit: 5156eab2118584405eb663e1fcd82f8bd7764504
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93053325"
+ms.lasthandoff: 10/31/2020
+ms.locfileid: "93141501"
 ---
 # <a name="scaffold-no-locidentity-in-aspnet-core-projects"></a>ASP.NET Core projelerinde yapı iskelesi Identity
 
@@ -372,6 +372,14 @@ Yeni bir `NavMenu_IdentityLayout` bileşen oluşturun ( *paylaşılan/NavMenu_ I
 
 Bazı Identity Seçenekler, *alanlarda/ Identity / Identity HostingStartup.cs* içinde yapılandırılır. Daha fazla bilgi için bkz. [ıhostingstartup](xref:fundamentals/configuration/platform-specific-configuration).
 
+## <a name="standalone-or-hosted-no-locblazor-webassembly-apps"></a>Tek başına veya barındırılan Blazor WebAssembly uygulamalar
+
+İstemci tarafı Blazor WebAssembly uygulamalar kendi Identity Kullanıcı arabirimi yaklaşımlarını kullanır ve ASP.NET Core Identity Yapı iskelesi kullanamaz. Barındırılan çözümlerin sunucu tarafı ASP.NET Core Uygulamaları Blazor , Razor Bu makaledeki sayfalar/MVC kılavuzlarını izleyebilir ve ' nin desteklediği diğer ASP.NET Core uygulama türleri gibi yapılandırılır Identity .
+
+BlazorÇerçeve, Razor UI sayfalarının bileşen sürümlerini içermez Identity . Identity UI Razor bileşenleri, desteklenmeyen üçüncü taraf kaynaklarından özel olarak oluşturulmuş veya alınmış olabilir.
+
+Daha fazla bilgi için bkz. [ Blazor güvenlik ve Identity makaleler](xref:blazor/security/index).
+
 <a name="full"></a>
 
 ## <a name="create-full-no-locidentity-ui-source"></a>Tam Identity UI kaynağı oluştur
@@ -550,7 +558,7 @@ Identity, *alanlarında/ Identity / Identity HostingStartup.cs* ' de yapılandı
 
 ### <a name="enable-authentication"></a>Kimlik doğrulamayı etkinleştir
 
-`Configure` `Startup` Sınıfının yönteminde, sonrasında [UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) ' ı çağırın `UseStaticFiles` :
+`Configure` `Startup` Sınıfının yönteminde, <xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication%2A> öğesinden sonra çağırın `UseStaticFiles` :
 
 [!code-csharp[](scaffold-identity/sample/StartupRPnoAuth.cs?name=snippet1&highlight=29)]
 
@@ -607,7 +615,7 @@ Identity, *alanlarında/ Identity / Identity HostingStartup.cs* ' de yapılandı
 
 [!INCLUDE[](~/includes/scaffold-identity/migrations.md)]
 
-Şu tarihten sonra [UseAuthentication](/dotnet/api/microsoft.aspnetcore.builder.authappbuilderextensions.useauthentication?view=aspnetcore-2.0#Microsoft_AspNetCore_Builder_AuthAppBuilderExtensions_UseAuthentication_Microsoft_AspNetCore_Builder_IApplicationBuilder_) çağrısı `UseStaticFiles` :
+<xref:Microsoft.AspNetCore.Builder.AuthAppBuilderExtensions.UseAuthentication%2A>Sonra çağır `UseStaticFiles` :
 
 [!code-csharp[](scaffold-identity/sample/StartupMvcNoAuth.cs?name=snippet1&highlight=23)]
 
