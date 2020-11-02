@@ -12,8 +12,10 @@
       href: /dotnet/standard/choosing-core-framework-server?toc=/aspnet/core/toc.json&bc=/aspnet/core/breadcrumb/toc.json
 - name: Kullanmaya başlayın
   uid: getting-started
-- name: Sürüm notları
+- name: Yenilikler
   items:
+    - name: 5.0 sürümündeki yenilikler
+      uid: aspnetcore-5.0
     - name: 3.1 sürümündeki yenilikler
       uid: aspnetcore-3.1
     - name: 3.0 sürümündeki yenilikler
@@ -357,20 +359,14 @@
                   href: blazor/forms-validation.md#built-in-forms-components
                 - name: InputTextArea
                   href: blazor/forms-validation.md#built-in-forms-components
-                - name: Bağlantı
-                  href: blazor/fundamentals/additional-scenarios.md#influence-html-head-tag-elements
                 - name: MainLayout
                   href: blazor/layouts.md#mainlayout-component
-                - name: Meta
-                  href: blazor/fundamentals/additional-scenarios.md#influence-html-head-tag-elements
                 - name: NavLink
                   href: blazor/fundamentals/routing.md#navlink-component
                 - name: NavMenu
                   href: blazor/fundamentals/routing.md#navlink-component
                 - name: Yönlendirici
                   href: blazor/fundamentals/routing.md#route-templates
-                - name: Başlık
-                  href: blazor/fundamentals/additional-scenarios.md#influence-html-head-tag-elements
                 - name: Virtualize
                   uid: blazor/components/virtualization
             - name: Değerleri ve parametreleri basamaklandırma
