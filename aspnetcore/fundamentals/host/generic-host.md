@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: fundamentals/host/generic-host
-ms.openlocfilehash: 3020734917fbf4d093420ad99114633d04e2a31b
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 3e44932c302713132a37534b97fffdd91acce2c7
+ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060501"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93234562"
 ---
 # <a name="net-generic-host-in-aspnet-core"></a>ASP.NET Core .NET genel ana bilgisayarı
 
@@ -126,7 +126,7 @@ Uygulama Entity Framework Core kullanıyorsa, yöntemin adını veya imzasını 
   * Olay günlüğü (yalnızca Windows üzerinde çalışırken)
 * Ortam geliştirme sırasında [kapsam doğrulaması](xref:fundamentals/dependency-injection#scope-validation) ve [bağımlılık doğrulaması](xref:Microsoft.Extensions.DependencyInjection.ServiceProviderOptions.ValidateOnBuild) etkinleştirilir.
 
-`ConfigureWebHostDefaults`Yöntemi:
+<xref:Microsoft.Extensions.Hosting.GenericHostBuilderExtensions.ConfigureWebHostDefaults*>Yöntemi:
 
 * Ön ekli ortam değişkenlerinden ana bilgisayar yapılandırmasını yükler `ASPNETCORE_` .
 * [Kestrel](xref:fundamentals/servers/kestrel) sunucusunu Web sunucusu olarak ayarlar ve uygulamanın barındırma yapılandırma sağlayıcılarını kullanarak yapılandırır. Kestrel sunucusunun varsayılan seçenekleri için bkz <xref:fundamentals/servers/kestrel#kestrel-options> ..
@@ -197,7 +197,7 @@ Daha fazla bilgi için [ASP.NET Core yapılandırma](xref:fundamentals/configura
 
 ## <a name="settings-for-all-app-types"></a>Tüm uygulama türleri için ayarlar
 
-Bu bölüm, hem HTTP hem de HTTP olmayan iş yükleri için uygulanan konak ayarlarını listeler. Varsayılan olarak, bu ayarları yapılandırmak için kullanılan ortam değişkenlerinin bir `DOTNET_` veya öneki olabilir `ASPNETCORE_` .
+Bu bölüm, hem HTTP hem de HTTP olmayan iş yükleri için uygulanan konak ayarlarını listeler. Varsayılan olarak, bu ayarları yapılandırmak için kullanılan ortam değişkenlerinin bir `DOTNET_` veya öneki olabilir `ASPNETCORE_` . Daha fazla bilgi için [Varsayılan Oluşturucu ayarları](#default-builder-settings) bölümüne bakın.
 
 <!-- In the following sections, two spaces at end of line are used to force line breaks in the rendered page. -->
 

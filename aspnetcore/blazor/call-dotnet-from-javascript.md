@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/call-dotnet-from-javascript
-ms.openlocfilehash: 91452ac9c7ab627cac2d5a05ed60e4117c87ebfa
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 456339d46cf2991baaa27ae2a3a97a5c221fd3b0
+ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056588"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93234406"
 ---
 # <a name="call-net-methods-from-javascript-functions-in-aspnet-core-no-locblazor"></a>ASP.NET Core içindeki JavaScript işlevlerinden .NET yöntemlerini çağırın Blazor
 
@@ -125,7 +125,7 @@ JavaScript 'ten de .NET örnek yöntemlerini çağırabilirsiniz. JavaScript 'te
 @code {
     public async Task TriggerNetInstanceMethod()
     {
-        var exampleJsInterop = new ExampleJsInterop(JSRuntime);
+        var exampleJsInterop = new ExampleJsInterop(JS);
         await exampleJsInterop.CallHelloHelperSayHello("Blazor");
     }
 }
@@ -160,19 +160,19 @@ Bir bellek sızıntısını önlemek ve oluşturan bir bileşende çöp toplamay
   ```csharp
   public class ExampleJsInterop : IDisposable
   {
-      private readonly IJSRuntime jsRuntime;
+      private readonly IJSRuntime js;
       private DotNetObjectReference<HelloHelper> objRef;
 
-      public ExampleJsInterop(IJSRuntime jsRuntime)
+      public ExampleJsInterop(IJSRuntime js)
       {
-          this.jsRuntime = jsRuntime;
+          this.js = js;
       }
 
       public ValueTask<string> CallHelloHelperSayHello(string name)
       {
           objRef = DotNetObjectReference.Create(new HelloHelper(name));
 
-          return jsRuntime.InvokeAsync<string>(
+          return js.InvokeAsync<string>(
               "exampleJsFunctions.sayHello",
               objRef);
       }
@@ -190,7 +190,7 @@ Bir bellek sızıntısını önlemek ve oluşturan bir bileşende çöp toplamay
   @page "/JSInteropComponent"
   @using {APP ASSEMBLY}.JsInteropClasses
   @implements IDisposable
-  @inject IJSRuntime JSRuntime
+  @inject IJSRuntime JS
 
   <h1>JavaScript Interop</h1>
 
@@ -205,7 +205,7 @@ Bir bellek sızıntısını önlemek ve oluşturan bir bileşende çöp toplamay
       {
           objRef = DotNetObjectReference.Create(new HelloHelper("Blazor"));
 
-          await JSRuntime.InvokeAsync<string>(
+          await JS.InvokeAsync<string>(
               "exampleJsFunctions.sayHello",
               objRef);
       }
@@ -396,7 +396,7 @@ Yer tutucu, `{APP ASSEMBLY}` uygulamanın uygulama derleme adıdır (örneğin, 
 `Shared/ListItem.razor`:
 
 ```razor
-@inject IJSRuntime JsRuntime
+@inject IJSRuntime JS
 
 <li>
     @message
@@ -415,7 +415,7 @@ Yer tutucu, `{APP ASSEMBLY}` uygulamanın uygulama derleme adıdır (örneğin, 
 
     protected async Task InteropCall()
     {
-        await JsRuntime.InvokeVoidAsync("updateMessageCallerJS",
+        await JS.InvokeVoidAsync("updateMessageCallerJS",
             DotNetObjectReference.Create(messageUpdateInvokeHelper));
     }
 

@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/additional-scenarios
-ms.openlocfilehash: 22c8ab52a93e7ea7df6be608501bebf33764b711
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 88970b0e53b456467bdc2218a3a6b943bbbf0df5
+ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055340"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93234393"
 ---
 # <a name="aspnet-core-no-locblazor-webassembly-additional-security-scenarios"></a>ASP.NET Core Blazor WebAssembly ek güvenlik senaryoları
 
@@ -65,7 +65,7 @@ Yapılandırma, <xref:System.Net.Http.HttpClient> model kullanarak yetkili istek
 
 ```razor
 @using Microsoft.AspNetCore.Components.WebAssembly.Authentication
-@inject HttpClient Client
+@inject HttpClient Http
 
 ...
 
@@ -76,7 +76,7 @@ protected override async Task OnInitializedAsync()
     try
     {
         examples = 
-            await Client.GetFromJsonAsync<ExampleType[]>("ExampleAPIMethod");
+            await Http.GetFromJsonAsync<ExampleType[]>("ExampleAPIMethod");
 
         ...
     }
@@ -191,11 +191,11 @@ using static {APP ASSEMBLY}.Data;
 
 public class WeatherForecastClient
 {
-    private readonly HttpClient client;
+    private readonly HttpClient http;
  
-    public WeatherForecastClient(HttpClient client)
+    public WeatherForecastClient(HttpClient http)
     {
-        this.client = client;
+        this.http = http;
     }
  
     public async Task<WeatherForecast[]> GetForecastAsync()
@@ -204,7 +204,7 @@ public class WeatherForecastClient
 
         try
         {
-            forecasts = await client.GetFromJsonAsync<WeatherForecast[]>(
+            forecasts = await http.GetFromJsonAsync<WeatherForecast[]>(
                 "WeatherForecast");
         }
         catch (AccessTokenNotAvailableException exception)
@@ -411,6 +411,11 @@ Aşağıdaki örnek, aşağıdakilerin nasıl yapılacağını göstermektedir:
 * Önceki durumu daha sonra sorgu dizesi parametresini kullanarak kimlik doğrulamasını kurtarın.
 
 ```razor
+...
+@using Microsoft.AspNetCore.Components.WebAssembly.Authentication
+@inject IAccessTokenProvider TokenProvider
+...
+
 <EditForm Model="User" @onsubmit="OnSaveAsync">
     <label>User
         <InputText @bind-Value="User.Name" />
@@ -442,12 +447,12 @@ Aşağıdaki örnek, aşağıdakilerin nasıl yapılacağını göstermektedir:
 
     public async Task OnSaveAsync()
     {
-        var httpClient = new HttpClient();
-        httpClient.BaseAddress = new Uri(Navigation.BaseUri);
+        var http = new HttpClient();
+        http.BaseAddress = new Uri(Navigation.BaseUri);
 
         var resumeUri = Navigation.Uri + $"?state=resumeSavingProfile";
 
-        var tokenResult = await AuthenticationService.RequestAccessToken(
+        var tokenResult = await TokenProvider.RequestAccessToken(
             new AccessTokenRequestOptions
             {
                 ReturnUrl = resumeUri
@@ -455,9 +460,9 @@ Aşağıdaki örnek, aşağıdakilerin nasıl yapılacağını göstermektedir:
 
         if (tokenResult.TryGetToken(out var token))
         {
-            httpClient.DefaultRequestHeaders.Add("Authorization", 
+            http.DefaultRequestHeaders.Add("Authorization", 
                 $"Bearer {token.Value}");
-            await httpClient.PostAsJsonAsync("Save", User);
+            await http.PostAsJsonAsync("Save", User);
         }
         else
         {

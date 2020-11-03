@@ -5,7 +5,7 @@ description: ASP.NET Core barındırılan bir uygulamanın güvenliğini Azure A
 monikerRange: '>= aspnetcore-3.1'
 ms.author: riande
 ms.custom: devx-track-csharp, mvc
-ms.date: 10/27/2020
+ms.date: 11/02/2020
 no-loc:
 - appsettings.json
 - ASP.NET Core Identity
@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/hosted-with-azure-active-directory
-ms.openlocfilehash: 3d0cc8d9891e0f656651a83dcd0bfdebfc266920
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 17f96be762ece8c59577445eb2ae630a8ee3b3dd
+ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055327"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93234484"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-hosted-app-with-azure-active-directory"></a>Blazor WebAssemblyAzure Active Directory ile ASP.NET Core barındırılan bir uygulamanın güvenliğini sağlama
 
@@ -141,15 +141,17 @@ Boş bir klasörde, aşağıdaki komutta yer tutucuları daha önce kaydedilen b
 dotnet new blazorwasm -au SingleOrg --api-client-id "{SERVER API APP CLIENT ID}" --app-id-uri "{SERVER API APP ID URI}" --client-id "{CLIENT APP CLIENT ID}" --default-scope "{DEFAULT SCOPE}" --domain "{TENANT DOMAIN}" -ho -o {APP NAME} --tenant-id "{TENANT ID}"
 ```
 
-| Yer tutucu                  | Azure portal adı                                     | Örnek                                      |
-| ---------------------------- | ----------------------------------------------------- | -------------------------------------------- |
-| `{APP NAME}`                 | &mdash;                                               | `BlazorSample`                               |
-| `{CLIENT APP CLIENT ID}`     | Uygulamanın uygulama (istemci) KIMLIĞI *`Client`*        | `4369008b-21fa-427c-abaa-9b53bf58e538`       |
-| `{DEFAULT SCOPE}`            | Kapsam adı                                            | `API.Access`                                 |
-| `{SERVER API APP CLIENT ID}` | *Sunucu API uygulaması* için uygulama (ISTEMCI) kimliği      | `41451fa7-82d9-4673-8fa5-69eff5a761fd`       |
-| `{SERVER API APP ID URI}`    | Uygulama KIMLIĞI URI 'SI                                    | `api://41451fa7-82d9-4673-8fa5-69eff5a761fd` |
-| `{TENANT DOMAIN}`            | Birincil/yayımcı/kiracı etki alanı                       | `contoso.onmicrosoft.com`                    |
-| `{TENANT ID}`                | Dizin (kiracı) kimliği                                 | `e86c78e2-8bb4-4c41-aefd-918e0565a45e`       |
+| Yer tutucu                  | Azure portal adı                                     | Örnek                                        |
+| ---------------------------- | ----------------------------------------------------- | ---------------------------------------------- |
+| `{APP NAME}`                 | &mdash;                                               | `BlazorSample`                                 |
+| `{CLIENT APP CLIENT ID}`     | Uygulamanın uygulama (istemci) KIMLIĞI *`Client`*        | `4369008b-21fa-427c-abaa-9b53bf58e538`         |
+| `{DEFAULT SCOPE}`            | Kapsam adı                                            | `API.Access`                                   |
+| `{SERVER API APP CLIENT ID}` | *Sunucu API uygulaması* için uygulama (ISTEMCI) kimliği      | `41451fa7-82d9-4673-8fa5-69eff5a761fd`         |
+| `{SERVER API APP ID URI}`    | Uygulama KIMLIĞI URI 'SI&dagger;                            | `41451fa7-82d9-4673-8fa5-69eff5a761fd`&dagger; |
+| `{TENANT DOMAIN}`            | Birincil/yayımcı/kiracı etki alanı                       | `contoso.onmicrosoft.com`                      |
+| `{TENANT ID}`                | Dizin (kiracı) kimliği                                 | `e86c78e2-8bb4-4c41-aefd-918e0565a45e`         |
+
+&dagger;Blazor WebAssemblyŞablon, `api://` komutta GEÇIRILEN uygulama kimliği URI bağımsız değişkenine otomatik olarak bir şeması ekler `dotnet new` . Yer tutucu için uygulama KIMLIĞI URI 'SI sağlarken `{SERVER API APP ID URI}` ve düzen ise, `api://` `api://` Yukarıdaki tabloda örnek değer olarak gösterildiği gibi, bağımsız değişkenden düzeni () kaldırın. Uygulama KIMLIĞI URI 'SI özel bir değer ise veya başka bir şemaya sahipse (örneğin, `https://` güvenilir olmayan bir yayımcı etki alanı için `https://contoso.onmicrosoft.com/41451fa7-82d9-4673-8fa5-69eff5a761fd` ), varsayılan kapsam URI 'sini el ile güncelleştirmeniz ve `api://` *`Client`* uygulama şablon tarafından oluşturulduktan sonra düzeni kaldırmanız gerekir. Daha fazla bilgi için, [erişim belirteci kapsamları](#access-token-scopes) bölümündeki nota bakın. Blazor WebAssemblyŞablon bu senaryolara yönelik ASP.NET Core gelecek bir sürümünde değiştirilebilir. Daha fazla bilgi için bkz. [IStream şablonuyla uygulama kimliği URI 'si Için çift düzen ( Blazor barındırılan, tek kuruluş) (DotNet/aspnetcore #27417)](https://github.com/dotnet/aspnetcore/issues/27417).
 
 Seçeneğiyle belirtilen çıktı konumu, `-o|--output` mevcut değilse bir proje klasörü oluşturur ve uygulamanın adının bir parçası haline gelir.
 
@@ -438,6 +440,29 @@ builder.Services.AddMsalAuthentication(options =>
     options.ProviderOptions.DefaultAccessTokenScopes.Add("{SCOPE URI}");
 });
 ```
+
+> [!NOTE]
+> Blazor WebAssemblyŞablon, `api://` komutta GEÇIRILEN uygulama kimliği URI bağımsız değişkenine otomatik olarak bir şeması ekler `dotnet new` . Proje şablonundan bir uygulama oluştururken Blazor , varsayılan erişim belirteci kapsamı değerinin Azure Portal belirttiğiniz doğru özel uygulama KIMLIĞI URI değerini ya da aşağıdaki biçimlerden **birine** sahip bir değeri kullandığını doğrulayın:
+>
+> * Dizinin yayımcı etki alanına **güvenilirse** , varsayılan erişim belirteci kapsamı genellikle aşağıdaki örneğe benzer bir değerdir; burada `API.Access` varsayılan kapsam adıdır:
+>
+>   ```csharp
+>   options.ProviderOptions.DefaultAccessTokenScopes.Add(
+>       "api://41451fa7-82d9-4673-8fa5-69eff5a761fd/API.Access");
+>   ```
+>
+>   Çift düzen () için değeri inceleyin `api://api://...` . Bir çift düzen varsa, ilk `api://` düzeni değerden kaldırın.
+>
+> * Dizinin yayımcı etki alanı **güvenilir** olmadığında, varsayılan erişim belirteci kapsamı genellikle aşağıdaki örneğe benzer bir değerdir; burada `API.Access` varsayılan kapsam adıdır:
+>
+>   ```csharp
+>   options.ProviderOptions.DefaultAccessTokenScopes.Add(
+>       "https://contoso.onmicrosoft.com/41451fa7-82d9-4673-8fa5-69eff5a761fd/API.Access");
+>   ```
+>
+>   Ek bir `api://` düzenin () değerini inceleyin `api://https://contoso.onmicrosoft.com/...` . Ek bir `api://` düzen varsa, `api://` düzeni değerden kaldırın.
+>
+> Blazor WebAssemblyŞablon bu senaryolara yönelik ASP.NET Core gelecek bir sürümünde değiştirilebilir. Daha fazla bilgi için bkz. [IStream şablonuyla uygulama kimliği URI 'si Için çift düzen ( Blazor barındırılan, tek kuruluş) (DotNet/aspnetcore #27417)](https://github.com/dotnet/aspnetcore/issues/27417).
 
 İle ek kapsamlar belirtin `AdditionalScopesToConsent` :
 
