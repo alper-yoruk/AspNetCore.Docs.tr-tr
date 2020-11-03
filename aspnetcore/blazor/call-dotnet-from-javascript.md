@@ -19,30 +19,30 @@ no-loc:
 - ':::no-loc(Razor):::'
 - ':::no-loc(SignalR):::'
 uid: blazor/call-dotnet-from-javascript
-ms.openlocfilehash: 91452ac9c7ab627cac2d5a05ed60e4117c87ebfa
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 456339d46cf2991baaa27ae2a3a97a5c221fd3b0
+ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056588"
+ms.lasthandoff: 11/03/2020
+ms.locfileid: "93234406"
 ---
-# <a name="call-net-methods-from-javascript-functions-in-aspnet-core-no-locblazor"></a><span data-ttu-id="2df7e-103">ASP.NET Core içindeki JavaScript işlevlerinden .NET yöntemlerini çağırın :::no-loc(Blazor):::</span><span class="sxs-lookup"><span data-stu-id="2df7e-103">Call .NET methods from JavaScript functions in ASP.NET Core :::no-loc(Blazor):::</span></span>
+# <a name="call-net-methods-from-javascript-functions-in-aspnet-core-no-locblazor"></a><span data-ttu-id="2fa15-103">ASP.NET Core içindeki JavaScript işlevlerinden .NET yöntemlerini çağırın :::no-loc(Blazor):::</span><span class="sxs-lookup"><span data-stu-id="2fa15-103">Call .NET methods from JavaScript functions in ASP.NET Core :::no-loc(Blazor):::</span></span>
 
-<span data-ttu-id="2df7e-104">, [Javier Calvarro Nelson](https://github.com/javiercn), [Daniel Roth](https://github.com/danroth27), [Shashikant Rudrawadi](http://wisne.co)ve [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="2df7e-104">By [Javier Calvarro Nelson](https://github.com/javiercn), [Daniel Roth](https://github.com/danroth27), [Shashikant Rudrawadi](http://wisne.co), and [Luke Latham](https://github.com/guardrex)</span></span>
+<span data-ttu-id="2fa15-104">, [Javier Calvarro Nelson](https://github.com/javiercn), [Daniel Roth](https://github.com/danroth27), [Shashikant Rudrawadi](http://wisne.co)ve [Luke Latham](https://github.com/guardrex)</span><span class="sxs-lookup"><span data-stu-id="2fa15-104">By [Javier Calvarro Nelson](https://github.com/javiercn), [Daniel Roth](https://github.com/danroth27), [Shashikant Rudrawadi](http://wisne.co), and [Luke Latham](https://github.com/guardrex)</span></span>
 
-<span data-ttu-id="2df7e-105">Bir :::no-loc(Blazor)::: uygulama, JavaScript işlevlerinden .net yöntemleri ve .net yöntemlerinden JavaScript işlevlerini çağırabilir.</span><span class="sxs-lookup"><span data-stu-id="2df7e-105">A :::no-loc(Blazor)::: app can invoke JavaScript functions from .NET methods and .NET methods from JavaScript functions.</span></span> <span data-ttu-id="2df7e-106">Bu senaryolar *JavaScript birlikte çalışabilirliği* ( *js birlikte çalışma* ) olarak adlandırılır.</span><span class="sxs-lookup"><span data-stu-id="2df7e-106">These scenarios are called *JavaScript interoperability* ( *JS interop* ).</span></span>
+<span data-ttu-id="2fa15-105">Bir :::no-loc(Blazor)::: uygulama, JavaScript işlevlerinden .net yöntemleri ve .net yöntemlerinden JavaScript işlevlerini çağırabilir.</span><span class="sxs-lookup"><span data-stu-id="2fa15-105">A :::no-loc(Blazor)::: app can invoke JavaScript functions from .NET methods and .NET methods from JavaScript functions.</span></span> <span data-ttu-id="2fa15-106">Bu senaryolar *JavaScript birlikte çalışabilirliği* ( *js birlikte çalışma* ) olarak adlandırılır.</span><span class="sxs-lookup"><span data-stu-id="2fa15-106">These scenarios are called *JavaScript interoperability* ( *JS interop* ).</span></span>
 
-<span data-ttu-id="2df7e-107">Bu makalede, JavaScript 'ten .NET yöntemlerini çağırma ele alınmaktadır.</span><span class="sxs-lookup"><span data-stu-id="2df7e-107">This article covers invoking .NET methods from JavaScript.</span></span> <span data-ttu-id="2df7e-108">.NET JavaScript işlevlerinin nasıl çağrılacağını öğrenmek için bkz <xref:blazor/call-javascript-from-dotnet> ..</span><span class="sxs-lookup"><span data-stu-id="2df7e-108">For information on how to call JavaScript functions from .NET, see <xref:blazor/call-javascript-from-dotnet>.</span></span>
+<span data-ttu-id="2fa15-107">Bu makalede, JavaScript 'ten .NET yöntemlerini çağırma ele alınmaktadır.</span><span class="sxs-lookup"><span data-stu-id="2fa15-107">This article covers invoking .NET methods from JavaScript.</span></span> <span data-ttu-id="2fa15-108">.NET JavaScript işlevlerinin nasıl çağrılacağını öğrenmek için bkz <xref:blazor/call-javascript-from-dotnet> ..</span><span class="sxs-lookup"><span data-stu-id="2fa15-108">For information on how to call JavaScript functions from .NET, see <xref:blazor/call-javascript-from-dotnet>.</span></span>
 
-<span data-ttu-id="2df7e-109">[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="2df7e-109">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([how to download](xref:index#how-to-download-a-sample))</span></span>
+<span data-ttu-id="2fa15-109">[Örnek kodu görüntüleme veya indirme](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([nasıl indirileceği](xref:index#how-to-download-a-sample))</span><span class="sxs-lookup"><span data-stu-id="2fa15-109">[View or download sample code](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/blazor/common/samples/) ([how to download](xref:index#how-to-download-a-sample))</span></span>
 
-## <a name="static-net-method-call"></a><span data-ttu-id="2df7e-110">Statik .NET yöntemi çağrısı</span><span class="sxs-lookup"><span data-stu-id="2df7e-110">Static .NET method call</span></span>
+## <a name="static-net-method-call"></a><span data-ttu-id="2fa15-110">Statik .NET yöntemi çağrısı</span><span class="sxs-lookup"><span data-stu-id="2fa15-110">Static .NET method call</span></span>
 
-<span data-ttu-id="2df7e-111">JavaScript 'ten statik bir .NET yöntemi çağırmak için `DotNet.invokeMethod` veya `DotNet.invokeMethodAsync` işlevlerini kullanın.</span><span class="sxs-lookup"><span data-stu-id="2df7e-111">To invoke a static .NET method from JavaScript, use the `DotNet.invokeMethod` or `DotNet.invokeMethodAsync` functions.</span></span> <span data-ttu-id="2df7e-112">Çağırmak istediğiniz statik metodun tanımlayıcısını, işlevi içeren derlemenin adını ve tüm bağımsız değişkenleri geçirin.</span><span class="sxs-lookup"><span data-stu-id="2df7e-112">Pass in the identifier of the static method you wish to call, the name of the assembly containing the function, and any arguments.</span></span> <span data-ttu-id="2df7e-113">Zaman uyumsuz sürüm, senaryoları desteklemek için tercih edilir :::no-loc(Blazor Server)::: .</span><span class="sxs-lookup"><span data-stu-id="2df7e-113">The asynchronous version is preferred to support :::no-loc(Blazor Server)::: scenarios.</span></span> <span data-ttu-id="2df7e-114">.NET yöntemi genel, statik ve [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) özniteliği olmalıdır.</span><span class="sxs-lookup"><span data-stu-id="2df7e-114">The .NET method must be public, static, and have the [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) attribute.</span></span> <span data-ttu-id="2df7e-115">Açık genel yöntemlerin çağrılması Şu anda desteklenmiyor.</span><span class="sxs-lookup"><span data-stu-id="2df7e-115">Calling open generic methods isn't currently supported.</span></span>
+<span data-ttu-id="2fa15-111">JavaScript 'ten statik bir .NET yöntemi çağırmak için `DotNet.invokeMethod` veya `DotNet.invokeMethodAsync` işlevlerini kullanın.</span><span class="sxs-lookup"><span data-stu-id="2fa15-111">To invoke a static .NET method from JavaScript, use the `DotNet.invokeMethod` or `DotNet.invokeMethodAsync` functions.</span></span> <span data-ttu-id="2fa15-112">Çağırmak istediğiniz statik metodun tanımlayıcısını, işlevi içeren derlemenin adını ve tüm bağımsız değişkenleri geçirin.</span><span class="sxs-lookup"><span data-stu-id="2fa15-112">Pass in the identifier of the static method you wish to call, the name of the assembly containing the function, and any arguments.</span></span> <span data-ttu-id="2fa15-113">Zaman uyumsuz sürüm, senaryoları desteklemek için tercih edilir :::no-loc(Blazor Server)::: .</span><span class="sxs-lookup"><span data-stu-id="2fa15-113">The asynchronous version is preferred to support :::no-loc(Blazor Server)::: scenarios.</span></span> <span data-ttu-id="2fa15-114">.NET yöntemi genel, statik ve [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) özniteliği olmalıdır.</span><span class="sxs-lookup"><span data-stu-id="2fa15-114">The .NET method must be public, static, and have the [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) attribute.</span></span> <span data-ttu-id="2fa15-115">Açık genel yöntemlerin çağrılması Şu anda desteklenmiyor.</span><span class="sxs-lookup"><span data-stu-id="2fa15-115">Calling open generic methods isn't currently supported.</span></span>
 
-<span data-ttu-id="2df7e-116">Örnek uygulama, bir dizi döndürmek için C# yöntemi içerir `int` .</span><span class="sxs-lookup"><span data-stu-id="2df7e-116">The sample app includes a C# method to return an `int` array.</span></span> <span data-ttu-id="2df7e-117">[`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute)Özniteliği yöntemine uygulanır.</span><span class="sxs-lookup"><span data-stu-id="2df7e-117">The [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) attribute is applied to the method.</span></span>
+<span data-ttu-id="2fa15-116">Örnek uygulama, bir dizi döndürmek için C# yöntemi içerir `int` .</span><span class="sxs-lookup"><span data-stu-id="2fa15-116">The sample app includes a C# method to return an `int` array.</span></span> <span data-ttu-id="2fa15-117">[`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute)Özniteliği yöntemine uygulanır.</span><span class="sxs-lookup"><span data-stu-id="2fa15-117">The [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) attribute is applied to the method.</span></span>
 
-<span data-ttu-id="2df7e-118">`Pages/JsInterop.razor`:</span><span class="sxs-lookup"><span data-stu-id="2df7e-118">`Pages/JsInterop.razor`:</span></span>
+<span data-ttu-id="2fa15-118">`Pages/JsInterop.razor`:</span><span class="sxs-lookup"><span data-stu-id="2fa15-118">`Pages/JsInterop.razor`:</span></span>
 
 ```razor
 <button type="button" class="btn btn-primary"
@@ -59,23 +59,23 @@ ms.locfileid: "93056588"
 }
 ```
 
-<span data-ttu-id="2df7e-119">İstemciye sunulan JavaScript, C# .NET yöntemini çağırır.</span><span class="sxs-lookup"><span data-stu-id="2df7e-119">JavaScript served to the client invokes the C# .NET method.</span></span>
+<span data-ttu-id="2fa15-119">İstemciye sunulan JavaScript, C# .NET yöntemini çağırır.</span><span class="sxs-lookup"><span data-stu-id="2fa15-119">JavaScript served to the client invokes the C# .NET method.</span></span>
 
-<span data-ttu-id="2df7e-120">`wwwroot/exampleJsInterop.js`:</span><span class="sxs-lookup"><span data-stu-id="2df7e-120">`wwwroot/exampleJsInterop.js`:</span></span>
+<span data-ttu-id="2fa15-120">`wwwroot/exampleJsInterop.js`:</span><span class="sxs-lookup"><span data-stu-id="2fa15-120">`wwwroot/exampleJsInterop.js`:</span></span>
 
 [!code-javascript[](./common/samples/3.x/:::no-loc(Blazor):::WebAssemblySample/wwwroot/exampleJsInterop.js?highlight=8-14)]
 
-<span data-ttu-id="2df7e-121">**`Trigger .NET static method ReturnArrayAsync`** Düğme seçildiğinde, tarayıcının Web geliştirici araçlarında konsol çıkışını inceleyin.</span><span class="sxs-lookup"><span data-stu-id="2df7e-121">When the **`Trigger .NET static method ReturnArrayAsync`** button is selected, examine the console output in the browser's web developer tools.</span></span>
+<span data-ttu-id="2fa15-121">**`Trigger .NET static method ReturnArrayAsync`** Düğme seçildiğinde, tarayıcının Web geliştirici araçlarında konsol çıkışını inceleyin.</span><span class="sxs-lookup"><span data-stu-id="2fa15-121">When the **`Trigger .NET static method ReturnArrayAsync`** button is selected, examine the console output in the browser's web developer tools.</span></span>
 
-<span data-ttu-id="2df7e-122">Konsol çıktısı:</span><span class="sxs-lookup"><span data-stu-id="2df7e-122">The console output is:</span></span>
+<span data-ttu-id="2fa15-122">Konsol çıktısı:</span><span class="sxs-lookup"><span data-stu-id="2fa15-122">The console output is:</span></span>
 
 ```console
 Array(4) [ 1, 2, 3, 4 ]
 ```
 
-<span data-ttu-id="2df7e-123">Dördüncü dizi değeri `data.push(4);` tarafından döndürülen diziye () gönderilir `ReturnArrayAsync` .</span><span class="sxs-lookup"><span data-stu-id="2df7e-123">The fourth array value is pushed to the array (`data.push(4);`) returned by `ReturnArrayAsync`.</span></span>
+<span data-ttu-id="2fa15-123">Dördüncü dizi değeri `data.push(4);` tarafından döndürülen diziye () gönderilir `ReturnArrayAsync` .</span><span class="sxs-lookup"><span data-stu-id="2fa15-123">The fourth array value is pushed to the array (`data.push(4);`) returned by `ReturnArrayAsync`.</span></span>
 
-<span data-ttu-id="2df7e-124">Varsayılan olarak, yöntem tanımlayıcısı yöntem adıdır, ancak öznitelik oluşturucusunu kullanarak farklı bir tanımlayıcı belirtebilirsiniz [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) :</span><span class="sxs-lookup"><span data-stu-id="2df7e-124">By default, the method identifier is the method name, but you can specify a different identifier using the [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) attribute constructor:</span></span>
+<span data-ttu-id="2fa15-124">Varsayılan olarak, yöntem tanımlayıcısı yöntem adıdır, ancak öznitelik oluşturucusunu kullanarak farklı bir tanımlayıcı belirtebilirsiniz [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) :</span><span class="sxs-lookup"><span data-stu-id="2fa15-124">By default, the method identifier is the method name, but you can specify a different identifier using the [`[JSInvokable]`](xref:Microsoft.JSInterop.JSInvokableAttribute) attribute constructor:</span></span>
 
 ```csharp
 @code {
@@ -87,7 +87,7 @@ Array(4) [ 1, 2, 3, 4 ]
 }
 ```
 
-<span data-ttu-id="2df7e-125">İstemci tarafı JavaScript dosyasında:</span><span class="sxs-lookup"><span data-stu-id="2df7e-125">In the client-side JavaScript file:</span></span>
+<span data-ttu-id="2fa15-125">İstemci tarafı JavaScript dosyasında:</span><span class="sxs-lookup"><span data-stu-id="2fa15-125">In the client-side JavaScript file:</span></span>
 
 ```javascript
 returnArrayAsyncJs: function () {
@@ -99,23 +99,23 @@ returnArrayAsyncJs: function () {
 }
 ```
 
-<span data-ttu-id="2df7e-126">Yer tutucu, `{APP ASSEMBLY}` uygulamanın uygulama derleme adıdır (örneğin, `:::no-loc(Blazor):::Sample` ).</span><span class="sxs-lookup"><span data-stu-id="2df7e-126">The placeholder `{APP ASSEMBLY}` is the app's app assembly name (for example, `:::no-loc(Blazor):::Sample`).</span></span>
+<span data-ttu-id="2fa15-126">Yer tutucu, `{APP ASSEMBLY}` uygulamanın uygulama derleme adıdır (örneğin, `:::no-loc(Blazor):::Sample` ).</span><span class="sxs-lookup"><span data-stu-id="2fa15-126">The placeholder `{APP ASSEMBLY}` is the app's app assembly name (for example, `:::no-loc(Blazor):::Sample`).</span></span>
 
-## <a name="instance-method-call"></a><span data-ttu-id="2df7e-127">Örnek yöntem çağrısı</span><span class="sxs-lookup"><span data-stu-id="2df7e-127">Instance method call</span></span>
+## <a name="instance-method-call"></a><span data-ttu-id="2fa15-127">Örnek yöntem çağrısı</span><span class="sxs-lookup"><span data-stu-id="2fa15-127">Instance method call</span></span>
 
-<span data-ttu-id="2df7e-128">JavaScript 'ten de .NET örnek yöntemlerini çağırabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="2df7e-128">You can also call .NET instance methods from JavaScript.</span></span> <span data-ttu-id="2df7e-129">JavaScript 'ten bir .NET örnek yöntemi çağırmak için:</span><span class="sxs-lookup"><span data-stu-id="2df7e-129">To invoke a .NET instance method from JavaScript:</span></span>
+<span data-ttu-id="2fa15-128">JavaScript 'ten de .NET örnek yöntemlerini çağırabilirsiniz.</span><span class="sxs-lookup"><span data-stu-id="2fa15-128">You can also call .NET instance methods from JavaScript.</span></span> <span data-ttu-id="2fa15-129">JavaScript 'ten bir .NET örnek yöntemi çağırmak için:</span><span class="sxs-lookup"><span data-stu-id="2fa15-129">To invoke a .NET instance method from JavaScript:</span></span>
 
-* <span data-ttu-id="2df7e-130">.NET örneğini JavaScript 'e başvuruya göre geçirin:</span><span class="sxs-lookup"><span data-stu-id="2df7e-130">Pass the .NET instance by reference to JavaScript:</span></span>
-  * <span data-ttu-id="2df7e-131">İçin statik bir çağrı yapın <xref:Microsoft.JSInterop.DotNetObjectReference.Create%2A?displayProperty=nameWithType> .</span><span class="sxs-lookup"><span data-stu-id="2df7e-131">Make a static call to <xref:Microsoft.JSInterop.DotNetObjectReference.Create%2A?displayProperty=nameWithType>.</span></span>
-  * <span data-ttu-id="2df7e-132">Örneği bir örnek içinde sarın <xref:Microsoft.JSInterop.DotNetObjectReference> ve <xref:Microsoft.JSInterop.DotNetObjectReference.Create%2A> örnek üzerinde çağırın <xref:Microsoft.JSInterop.DotNetObjectReference> .</span><span class="sxs-lookup"><span data-stu-id="2df7e-132">Wrap the instance in a <xref:Microsoft.JSInterop.DotNetObjectReference> instance and call <xref:Microsoft.JSInterop.DotNetObjectReference.Create%2A> on the <xref:Microsoft.JSInterop.DotNetObjectReference> instance.</span></span> <span data-ttu-id="2df7e-133">Nesneleri atma <xref:Microsoft.JSInterop.DotNetObjectReference> (Bu bölümün ilerleyen kısımlarında bir örnek görünür).</span><span class="sxs-lookup"><span data-stu-id="2df7e-133">Dispose of <xref:Microsoft.JSInterop.DotNetObjectReference> objects (an example appears later in this section).</span></span>
-* <span data-ttu-id="2df7e-134">Or işlevlerini kullanarak örnekte .NET örnek yöntemlerini çağırın `invokeMethod` `invokeMethodAsync` .</span><span class="sxs-lookup"><span data-stu-id="2df7e-134">Invoke .NET instance methods on the instance using the `invokeMethod` or `invokeMethodAsync` functions.</span></span> <span data-ttu-id="2df7e-135">.NET örneği, JavaScript 'ten başka .NET yöntemleri çağrılırken bir bağımsız değişken olarak da geçirilebilir.</span><span class="sxs-lookup"><span data-stu-id="2df7e-135">The .NET instance can also be passed as an argument when invoking other .NET methods from JavaScript.</span></span>
+* <span data-ttu-id="2fa15-130">.NET örneğini JavaScript 'e başvuruya göre geçirin:</span><span class="sxs-lookup"><span data-stu-id="2fa15-130">Pass the .NET instance by reference to JavaScript:</span></span>
+  * <span data-ttu-id="2fa15-131">İçin statik bir çağrı yapın <xref:Microsoft.JSInterop.DotNetObjectReference.Create%2A?displayProperty=nameWithType> .</span><span class="sxs-lookup"><span data-stu-id="2fa15-131">Make a static call to <xref:Microsoft.JSInterop.DotNetObjectReference.Create%2A?displayProperty=nameWithType>.</span></span>
+  * <span data-ttu-id="2fa15-132">Örneği bir örnek içinde sarın <xref:Microsoft.JSInterop.DotNetObjectReference> ve <xref:Microsoft.JSInterop.DotNetObjectReference.Create%2A> örnek üzerinde çağırın <xref:Microsoft.JSInterop.DotNetObjectReference> .</span><span class="sxs-lookup"><span data-stu-id="2fa15-132">Wrap the instance in a <xref:Microsoft.JSInterop.DotNetObjectReference> instance and call <xref:Microsoft.JSInterop.DotNetObjectReference.Create%2A> on the <xref:Microsoft.JSInterop.DotNetObjectReference> instance.</span></span> <span data-ttu-id="2fa15-133">Nesneleri atma <xref:Microsoft.JSInterop.DotNetObjectReference> (Bu bölümün ilerleyen kısımlarında bir örnek görünür).</span><span class="sxs-lookup"><span data-stu-id="2fa15-133">Dispose of <xref:Microsoft.JSInterop.DotNetObjectReference> objects (an example appears later in this section).</span></span>
+* <span data-ttu-id="2fa15-134">Or işlevlerini kullanarak örnekte .NET örnek yöntemlerini çağırın `invokeMethod` `invokeMethodAsync` .</span><span class="sxs-lookup"><span data-stu-id="2fa15-134">Invoke .NET instance methods on the instance using the `invokeMethod` or `invokeMethodAsync` functions.</span></span> <span data-ttu-id="2fa15-135">.NET örneği, JavaScript 'ten başka .NET yöntemleri çağrılırken bir bağımsız değişken olarak da geçirilebilir.</span><span class="sxs-lookup"><span data-stu-id="2fa15-135">The .NET instance can also be passed as an argument when invoking other .NET methods from JavaScript.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="2df7e-136">Örnek uygulama, iletileri istemci tarafı konsoluna kaydeder.</span><span class="sxs-lookup"><span data-stu-id="2df7e-136">The sample app logs messages to the client-side console.</span></span> <span data-ttu-id="2df7e-137">Örnek uygulama tarafından gösterilen aşağıdaki örnekler için tarayıcının geliştirici araçlarında tarayıcının konsol çıkışını inceleyin.</span><span class="sxs-lookup"><span data-stu-id="2df7e-137">For the following examples demonstrated by the sample app, examine the browser's console output in the browser's developer tools.</span></span>
+> <span data-ttu-id="2fa15-136">Örnek uygulama, iletileri istemci tarafı konsoluna kaydeder.</span><span class="sxs-lookup"><span data-stu-id="2fa15-136">The sample app logs messages to the client-side console.</span></span> <span data-ttu-id="2fa15-137">Örnek uygulama tarafından gösterilen aşağıdaki örnekler için tarayıcının geliştirici araçlarında tarayıcının konsol çıkışını inceleyin.</span><span class="sxs-lookup"><span data-stu-id="2fa15-137">For the following examples demonstrated by the sample app, examine the browser's console output in the browser's developer tools.</span></span>
 
-<span data-ttu-id="2df7e-138">**`Trigger .NET instance method HelloHelper.SayHello`** Düğme seçildiğinde, `ExampleJsInterop.CallHelloHelperSayHello` çağrılır ve yöntemine bir ad geçirir `:::no-loc(Blazor):::` .</span><span class="sxs-lookup"><span data-stu-id="2df7e-138">When the **`Trigger .NET instance method HelloHelper.SayHello`** button is selected, `ExampleJsInterop.CallHelloHelperSayHello` is called and passes a name, `:::no-loc(Blazor):::`, to the method.</span></span>
+<span data-ttu-id="2fa15-138">**`Trigger .NET instance method HelloHelper.SayHello`** Düğme seçildiğinde, `ExampleJsInterop.CallHelloHelperSayHello` çağrılır ve yöntemine bir ad geçirir `:::no-loc(Blazor):::` .</span><span class="sxs-lookup"><span data-stu-id="2fa15-138">When the **`Trigger .NET instance method HelloHelper.SayHello`** button is selected, `ExampleJsInterop.CallHelloHelperSayHello` is called and passes a name, `:::no-loc(Blazor):::`, to the method.</span></span>
 
-<span data-ttu-id="2df7e-139">`Pages/JsInterop.razor`:</span><span class="sxs-lookup"><span data-stu-id="2df7e-139">`Pages/JsInterop.razor`:</span></span>
+<span data-ttu-id="2fa15-139">`Pages/JsInterop.razor`:</span><span class="sxs-lookup"><span data-stu-id="2fa15-139">`Pages/JsInterop.razor`:</span></span>
 
 ```razor
 <button type="button" class="btn btn-primary" @onclick="TriggerNetInstanceMethod">
@@ -125,54 +125,54 @@ returnArrayAsyncJs: function () {
 @code {
     public async Task TriggerNetInstanceMethod()
     {
-        var exampleJsInterop = new ExampleJsInterop(JSRuntime);
+        var exampleJsInterop = new ExampleJsInterop(JS);
         await exampleJsInterop.CallHelloHelperSayHello(":::no-loc(Blazor):::");
     }
 }
 ```
 
-<span data-ttu-id="2df7e-140">`CallHelloHelperSayHello` JavaScript işlevini `sayHello` Yeni bir örneğiyle çağırır `HelloHelper` .</span><span class="sxs-lookup"><span data-stu-id="2df7e-140">`CallHelloHelperSayHello` invokes the JavaScript function `sayHello` with a new instance of `HelloHelper`.</span></span>
+<span data-ttu-id="2fa15-140">`CallHelloHelperSayHello` JavaScript işlevini `sayHello` Yeni bir örneğiyle çağırır `HelloHelper` .</span><span class="sxs-lookup"><span data-stu-id="2fa15-140">`CallHelloHelperSayHello` invokes the JavaScript function `sayHello` with a new instance of `HelloHelper`.</span></span>
 
-<span data-ttu-id="2df7e-141">`JsInteropClasses/ExampleJsInterop.cs`:</span><span class="sxs-lookup"><span data-stu-id="2df7e-141">`JsInteropClasses/ExampleJsInterop.cs`:</span></span>
+<span data-ttu-id="2fa15-141">`JsInteropClasses/ExampleJsInterop.cs`:</span><span class="sxs-lookup"><span data-stu-id="2fa15-141">`JsInteropClasses/ExampleJsInterop.cs`:</span></span>
 
 [!code-csharp[](./common/samples/3.x/:::no-loc(Blazor):::WebAssemblySample/JsInteropClasses/ExampleJsInterop.cs?name=snippet1&highlight=11-18)]
 
-<span data-ttu-id="2df7e-142">`wwwroot/exampleJsInterop.js`:</span><span class="sxs-lookup"><span data-stu-id="2df7e-142">`wwwroot/exampleJsInterop.js`:</span></span>
+<span data-ttu-id="2fa15-142">`wwwroot/exampleJsInterop.js`:</span><span class="sxs-lookup"><span data-stu-id="2fa15-142">`wwwroot/exampleJsInterop.js`:</span></span>
 
 [!code-javascript[](./common/samples/3.x/:::no-loc(Blazor):::WebAssemblySample/wwwroot/exampleJsInterop.js?highlight=15-18)]
 
-<span data-ttu-id="2df7e-143">Ad, `HelloHelper` özelliğini ayarlayan oluşturucuya geçirilir `HelloHelper.Name` .</span><span class="sxs-lookup"><span data-stu-id="2df7e-143">The name is passed to `HelloHelper`'s constructor, which sets the `HelloHelper.Name` property.</span></span> <span data-ttu-id="2df7e-144">JavaScript işlevi `sayHello` yürütüldüğünde, `HelloHelper.SayHello` `Hello, {Name}!` JavaScript işlevi tarafından konsola yazılan iletiyi döndürür.</span><span class="sxs-lookup"><span data-stu-id="2df7e-144">When the JavaScript function `sayHello` is executed, `HelloHelper.SayHello` returns the `Hello, {Name}!` message, which is written to the console by the JavaScript function.</span></span>
+<span data-ttu-id="2fa15-143">Ad, `HelloHelper` özelliğini ayarlayan oluşturucuya geçirilir `HelloHelper.Name` .</span><span class="sxs-lookup"><span data-stu-id="2fa15-143">The name is passed to `HelloHelper`'s constructor, which sets the `HelloHelper.Name` property.</span></span> <span data-ttu-id="2fa15-144">JavaScript işlevi `sayHello` yürütüldüğünde, `HelloHelper.SayHello` `Hello, {Name}!` JavaScript işlevi tarafından konsola yazılan iletiyi döndürür.</span><span class="sxs-lookup"><span data-stu-id="2fa15-144">When the JavaScript function `sayHello` is executed, `HelloHelper.SayHello` returns the `Hello, {Name}!` message, which is written to the console by the JavaScript function.</span></span>
 
-<span data-ttu-id="2df7e-145">`JsInteropClasses/HelloHelper.cs`:</span><span class="sxs-lookup"><span data-stu-id="2df7e-145">`JsInteropClasses/HelloHelper.cs`:</span></span>
+<span data-ttu-id="2fa15-145">`JsInteropClasses/HelloHelper.cs`:</span><span class="sxs-lookup"><span data-stu-id="2fa15-145">`JsInteropClasses/HelloHelper.cs`:</span></span>
 
 [!code-csharp[](./common/samples/3.x/:::no-loc(Blazor):::WebAssemblySample/JsInteropClasses/HelloHelper.cs?name=snippet1&highlight=5,10-11)]
 
-<span data-ttu-id="2df7e-146">Tarayıcının Web geliştirici araçlarında konsol çıkışı:</span><span class="sxs-lookup"><span data-stu-id="2df7e-146">Console output in the browser's web developer tools:</span></span>
+<span data-ttu-id="2fa15-146">Tarayıcının Web geliştirici araçlarında konsol çıkışı:</span><span class="sxs-lookup"><span data-stu-id="2fa15-146">Console output in the browser's web developer tools:</span></span>
 
 ```console
 Hello, :::no-loc(Blazor):::!
 ```
 
-<span data-ttu-id="2df7e-147">Bir bellek sızıntısını önlemek ve oluşturan bir bileşende çöp toplamaya izin vermek için <xref:Microsoft.JSInterop.DotNetObjectReference> aşağıdaki yaklaşımlardan birini benimseyin:</span><span class="sxs-lookup"><span data-stu-id="2df7e-147">To avoid a memory leak and allow garbage collection on a component that creates a <xref:Microsoft.JSInterop.DotNetObjectReference>, adopt one of the following approaches:</span></span>
+<span data-ttu-id="2fa15-147">Bir bellek sızıntısını önlemek ve oluşturan bir bileşende çöp toplamaya izin vermek için <xref:Microsoft.JSInterop.DotNetObjectReference> aşağıdaki yaklaşımlardan birini benimseyin:</span><span class="sxs-lookup"><span data-stu-id="2fa15-147">To avoid a memory leak and allow garbage collection on a component that creates a <xref:Microsoft.JSInterop.DotNetObjectReference>, adopt one of the following approaches:</span></span>
 
-* <span data-ttu-id="2df7e-148">Örneği oluşturan sınıftaki nesneyi atma <xref:Microsoft.JSInterop.DotNetObjectReference> :</span><span class="sxs-lookup"><span data-stu-id="2df7e-148">Dispose of the object in the class that created the <xref:Microsoft.JSInterop.DotNetObjectReference> instance:</span></span>
+* <span data-ttu-id="2fa15-148">Örneği oluşturan sınıftaki nesneyi atma <xref:Microsoft.JSInterop.DotNetObjectReference> :</span><span class="sxs-lookup"><span data-stu-id="2fa15-148">Dispose of the object in the class that created the <xref:Microsoft.JSInterop.DotNetObjectReference> instance:</span></span>
 
   ```csharp
   public class ExampleJsInterop : IDisposable
   {
-      private readonly IJSRuntime jsRuntime;
+      private readonly IJSRuntime js;
       private DotNetObjectReference<HelloHelper> objRef;
 
-      public ExampleJsInterop(IJSRuntime jsRuntime)
+      public ExampleJsInterop(IJSRuntime js)
       {
-          this.jsRuntime = jsRuntime;
+          this.js = js;
       }
 
       public ValueTask<string> CallHelloHelperSayHello(string name)
       {
           objRef = DotNetObjectReference.Create(new HelloHelper(name));
 
-          return jsRuntime.InvokeAsync<string>(
+          return js.InvokeAsync<string>(
               "exampleJsFunctions.sayHello",
               objRef);
       }
@@ -184,13 +184,13 @@ Hello, :::no-loc(Blazor):::!
   }
   ```
 
-  <span data-ttu-id="2df7e-149">Sınıfında gösterilen önceki model `ExampleJsInterop` de bir bileşende uygulanabilir:</span><span class="sxs-lookup"><span data-stu-id="2df7e-149">The preceding pattern shown in the `ExampleJsInterop` class can also be implemented in a component:</span></span>
+  <span data-ttu-id="2fa15-149">Sınıfında gösterilen önceki model `ExampleJsInterop` de bir bileşende uygulanabilir:</span><span class="sxs-lookup"><span data-stu-id="2fa15-149">The preceding pattern shown in the `ExampleJsInterop` class can also be implemented in a component:</span></span>
 
   ```razor
   @page "/JSInteropComponent"
   @using {APP ASSEMBLY}.JsInteropClasses
   @implements IDisposable
-  @inject IJSRuntime JSRuntime
+  @inject IJSRuntime JS
 
   <h1>JavaScript Interop</h1>
 
@@ -205,7 +205,7 @@ Hello, :::no-loc(Blazor):::!
       {
           objRef = DotNetObjectReference.Create(new HelloHelper(":::no-loc(Blazor):::"));
 
-          await JSRuntime.InvokeAsync<string>(
+          await JS.InvokeAsync<string>(
               "exampleJsFunctions.sayHello",
               objRef);
       }
@@ -217,9 +217,9 @@ Hello, :::no-loc(Blazor):::!
   }
   ```
   
-  <span data-ttu-id="2df7e-150">Yer tutucu, `{APP ASSEMBLY}` uygulamanın uygulama derleme adıdır (örneğin, `:::no-loc(Blazor):::Sample` ).</span><span class="sxs-lookup"><span data-stu-id="2df7e-150">The placeholder `{APP ASSEMBLY}` is the app's app assembly name (for example, `:::no-loc(Blazor):::Sample`).</span></span>
+  <span data-ttu-id="2fa15-150">Yer tutucu, `{APP ASSEMBLY}` uygulamanın uygulama derleme adıdır (örneğin, `:::no-loc(Blazor):::Sample` ).</span><span class="sxs-lookup"><span data-stu-id="2fa15-150">The placeholder `{APP ASSEMBLY}` is the app's app assembly name (for example, `:::no-loc(Blazor):::Sample`).</span></span>
 
-* <span data-ttu-id="2df7e-151">Bileşen veya sınıf öğesini atmazsa <xref:Microsoft.JSInterop.DotNetObjectReference> , şunu çağırarak istemci üzerindeki nesnesini atın `.dispose()` :</span><span class="sxs-lookup"><span data-stu-id="2df7e-151">When the component or class doesn't dispose of the <xref:Microsoft.JSInterop.DotNetObjectReference>, dispose of the object on the client by calling `.dispose()`:</span></span>
+* <span data-ttu-id="2fa15-151">Bileşen veya sınıf öğesini atmazsa <xref:Microsoft.JSInterop.DotNetObjectReference> , şunu çağırarak istemci üzerindeki nesnesini atın `.dispose()` :</span><span class="sxs-lookup"><span data-stu-id="2fa15-151">When the component or class doesn't dispose of the <xref:Microsoft.JSInterop.DotNetObjectReference>, dispose of the object on the client by calling `.dispose()`:</span></span>
 
   ```javascript
   window.myFunction = (dotnetHelper) => {
@@ -228,19 +228,19 @@ Hello, :::no-loc(Blazor):::!
   }
   ```
 
-## <a name="component-instance-method-call"></a><span data-ttu-id="2df7e-152">Bileşen örneği Yöntem çağrısı</span><span class="sxs-lookup"><span data-stu-id="2df7e-152">Component instance method call</span></span>
+## <a name="component-instance-method-call"></a><span data-ttu-id="2fa15-152">Bileşen örneği Yöntem çağrısı</span><span class="sxs-lookup"><span data-stu-id="2fa15-152">Component instance method call</span></span>
 
-<span data-ttu-id="2df7e-153">Bir bileşenin .NET yöntemlerini çağırmak için:</span><span class="sxs-lookup"><span data-stu-id="2df7e-153">To invoke a component's .NET methods:</span></span>
+<span data-ttu-id="2fa15-153">Bir bileşenin .NET yöntemlerini çağırmak için:</span><span class="sxs-lookup"><span data-stu-id="2fa15-153">To invoke a component's .NET methods:</span></span>
 
-* <span data-ttu-id="2df7e-154">`invokeMethod` `invokeMethodAsync` Bileşene statik yöntem çağrısı yapmak için or işlevini kullanın.</span><span class="sxs-lookup"><span data-stu-id="2df7e-154">Use the `invokeMethod` or `invokeMethodAsync` function to make a static method call to the component.</span></span>
-* <span data-ttu-id="2df7e-155">Bileşenin static yöntemi, çağırma yöntemi olarak çağrılır <xref:System.Action> .</span><span class="sxs-lookup"><span data-stu-id="2df7e-155">The component's static method wraps the call to its instance method as an invoked <xref:System.Action>.</span></span>
+* <span data-ttu-id="2fa15-154">`invokeMethod` `invokeMethodAsync` Bileşene statik yöntem çağrısı yapmak için or işlevini kullanın.</span><span class="sxs-lookup"><span data-stu-id="2fa15-154">Use the `invokeMethod` or `invokeMethodAsync` function to make a static method call to the component.</span></span>
+* <span data-ttu-id="2fa15-155">Bileşenin static yöntemi, çağırma yöntemi olarak çağrılır <xref:System.Action> .</span><span class="sxs-lookup"><span data-stu-id="2fa15-155">The component's static method wraps the call to its instance method as an invoked <xref:System.Action>.</span></span>
 
 > [!NOTE]
-> <span data-ttu-id="2df7e-156">:::no-loc(Blazor Server):::Birden çok kullanıcının aynı bileşeni aynı anda kullandığı uygulamalarda, örnek yöntemleri çağırmak için bir yardımcı sınıfı kullanın.</span><span class="sxs-lookup"><span data-stu-id="2df7e-156">For :::no-loc(Blazor Server)::: apps, where several users might be concurrently using the same component, use a helper class to invoke instance methods.</span></span>
+> <span data-ttu-id="2fa15-156">:::no-loc(Blazor Server):::Birden çok kullanıcının aynı bileşeni aynı anda kullandığı uygulamalarda, örnek yöntemleri çağırmak için bir yardımcı sınıfı kullanın.</span><span class="sxs-lookup"><span data-stu-id="2fa15-156">For :::no-loc(Blazor Server)::: apps, where several users might be concurrently using the same component, use a helper class to invoke instance methods.</span></span>
 >
-> <span data-ttu-id="2df7e-157">Daha fazla bilgi için bkz. [bileşen örnek yöntemi yardımcı sınıfı](#component-instance-method-helper-class) bölümü.</span><span class="sxs-lookup"><span data-stu-id="2df7e-157">For more information, see the [Component instance method helper class](#component-instance-method-helper-class) section.</span></span>
+> <span data-ttu-id="2fa15-157">Daha fazla bilgi için bkz. [bileşen örnek yöntemi yardımcı sınıfı](#component-instance-method-helper-class) bölümü.</span><span class="sxs-lookup"><span data-stu-id="2fa15-157">For more information, see the [Component instance method helper class](#component-instance-method-helper-class) section.</span></span>
 
-<span data-ttu-id="2df7e-158">İstemci tarafı JavaScript 'te:</span><span class="sxs-lookup"><span data-stu-id="2df7e-158">In the client-side JavaScript:</span></span>
+<span data-ttu-id="2fa15-158">İstemci tarafı JavaScript 'te:</span><span class="sxs-lookup"><span data-stu-id="2fa15-158">In the client-side JavaScript:</span></span>
 
 ```javascript
 function updateMessageCallerJS() {
@@ -248,9 +248,9 @@ function updateMessageCallerJS() {
 }
 ```
 
-<span data-ttu-id="2df7e-159">Yer tutucu, `{APP ASSEMBLY}` uygulamanın uygulama derleme adıdır (örneğin, `:::no-loc(Blazor):::Sample` ).</span><span class="sxs-lookup"><span data-stu-id="2df7e-159">The placeholder `{APP ASSEMBLY}` is the app's app assembly name (for example, `:::no-loc(Blazor):::Sample`).</span></span>
+<span data-ttu-id="2fa15-159">Yer tutucu, `{APP ASSEMBLY}` uygulamanın uygulama derleme adıdır (örneğin, `:::no-loc(Blazor):::Sample` ).</span><span class="sxs-lookup"><span data-stu-id="2fa15-159">The placeholder `{APP ASSEMBLY}` is the app's app assembly name (for example, `:::no-loc(Blazor):::Sample`).</span></span>
 
-<span data-ttu-id="2df7e-160">`Pages/JSInteropComponent.razor`:</span><span class="sxs-lookup"><span data-stu-id="2df7e-160">`Pages/JSInteropComponent.razor`:</span></span>
+<span data-ttu-id="2fa15-160">`Pages/JSInteropComponent.razor`:</span><span class="sxs-lookup"><span data-stu-id="2fa15-160">`Pages/JSInteropComponent.razor`:</span></span>
 
 ```razor
 @page "/JSInteropComponent"
@@ -286,9 +286,9 @@ function updateMessageCallerJS() {
 }
 ```
 
-<span data-ttu-id="2df7e-161">Bağımsız değişkenleri örnek yöntemine geçirmek için:</span><span class="sxs-lookup"><span data-stu-id="2df7e-161">To pass arguments to the instance method:</span></span>
+<span data-ttu-id="2fa15-161">Bağımsız değişkenleri örnek yöntemine geçirmek için:</span><span class="sxs-lookup"><span data-stu-id="2fa15-161">To pass arguments to the instance method:</span></span>
 
-* <span data-ttu-id="2df7e-162">JS yöntem çağrısına parametreler ekleyin.</span><span class="sxs-lookup"><span data-stu-id="2df7e-162">Add parameters to the JS method invocation.</span></span> <span data-ttu-id="2df7e-163">Aşağıdaki örnekte yöntemine bir ad geçirilir.</span><span class="sxs-lookup"><span data-stu-id="2df7e-163">In the following example, a name is passed to the method.</span></span> <span data-ttu-id="2df7e-164">Gerektiğinde, ek parametreler listeye eklenebilir.</span><span class="sxs-lookup"><span data-stu-id="2df7e-164">Additional parameters can be added to the list as needed.</span></span>
+* <span data-ttu-id="2fa15-162">JS yöntem çağrısına parametreler ekleyin.</span><span class="sxs-lookup"><span data-stu-id="2fa15-162">Add parameters to the JS method invocation.</span></span> <span data-ttu-id="2fa15-163">Aşağıdaki örnekte yöntemine bir ad geçirilir.</span><span class="sxs-lookup"><span data-stu-id="2fa15-163">In the following example, a name is passed to the method.</span></span> <span data-ttu-id="2fa15-164">Gerektiğinde, ek parametreler listeye eklenebilir.</span><span class="sxs-lookup"><span data-stu-id="2fa15-164">Additional parameters can be added to the list as needed.</span></span>
 
   ```javascript
   function updateMessageCallerJS(name) {
@@ -296,11 +296,11 @@ function updateMessageCallerJS() {
   }
   ```
   
-  <span data-ttu-id="2df7e-165">Yer tutucu, `{APP ASSEMBLY}` uygulamanın uygulama derleme adıdır (örneğin, `:::no-loc(Blazor):::Sample` ).</span><span class="sxs-lookup"><span data-stu-id="2df7e-165">The placeholder `{APP ASSEMBLY}` is the app's app assembly name (for example, `:::no-loc(Blazor):::Sample`).</span></span>
+  <span data-ttu-id="2fa15-165">Yer tutucu, `{APP ASSEMBLY}` uygulamanın uygulama derleme adıdır (örneğin, `:::no-loc(Blazor):::Sample` ).</span><span class="sxs-lookup"><span data-stu-id="2fa15-165">The placeholder `{APP ASSEMBLY}` is the app's app assembly name (for example, `:::no-loc(Blazor):::Sample`).</span></span>
 
-* <span data-ttu-id="2df7e-166">Parametreleri için doğru türleri sağlayın <xref:System.Action> .</span><span class="sxs-lookup"><span data-stu-id="2df7e-166">Provide the correct types to the <xref:System.Action> for the parameters.</span></span> <span data-ttu-id="2df7e-167">C# yöntemlerine parametre listesini sağlayın.</span><span class="sxs-lookup"><span data-stu-id="2df7e-167">Provide the parameter list to the C# methods.</span></span> <span data-ttu-id="2df7e-168"><xref:System.Action>() Parametreleriyle () öğesini çağırın `UpdateMessage` `action.Invoke(name)` .</span><span class="sxs-lookup"><span data-stu-id="2df7e-168">Invoke the <xref:System.Action> (`UpdateMessage`) with the parameters (`action.Invoke(name)`).</span></span>
+* <span data-ttu-id="2fa15-166">Parametreleri için doğru türleri sağlayın <xref:System.Action> .</span><span class="sxs-lookup"><span data-stu-id="2fa15-166">Provide the correct types to the <xref:System.Action> for the parameters.</span></span> <span data-ttu-id="2fa15-167">C# yöntemlerine parametre listesini sağlayın.</span><span class="sxs-lookup"><span data-stu-id="2fa15-167">Provide the parameter list to the C# methods.</span></span> <span data-ttu-id="2fa15-168"><xref:System.Action>() Parametreleriyle () öğesini çağırın `UpdateMessage` `action.Invoke(name)` .</span><span class="sxs-lookup"><span data-stu-id="2fa15-168">Invoke the <xref:System.Action> (`UpdateMessage`) with the parameters (`action.Invoke(name)`).</span></span>
 
-  <span data-ttu-id="2df7e-169">`Pages/JSInteropComponent.razor`:</span><span class="sxs-lookup"><span data-stu-id="2df7e-169">`Pages/JSInteropComponent.razor`:</span></span>
+  <span data-ttu-id="2fa15-169">`Pages/JSInteropComponent.razor`:</span><span class="sxs-lookup"><span data-stu-id="2fa15-169">`Pages/JSInteropComponent.razor`:</span></span>
 
   ```razor
   @page "/JSInteropComponent"
@@ -338,26 +338,26 @@ function updateMessageCallerJS() {
   }
   ```
 
-  <span data-ttu-id="2df7e-170">`message` **Çağıran js yöntemi** düğmesi seçildiğinde çıkış:</span><span class="sxs-lookup"><span data-stu-id="2df7e-170">Output `message` when the **Call JS Method** button is selected:</span></span>
+  <span data-ttu-id="2fa15-170">`message` **Çağıran js yöntemi** düğmesi seçildiğinde çıkış:</span><span class="sxs-lookup"><span data-stu-id="2fa15-170">Output `message` when the **Call JS Method** button is selected:</span></span>
 
   ```
   Sarah Jane, UpdateMessage Called!
   ```
 
-## <a name="component-instance-method-helper-class"></a><span data-ttu-id="2df7e-171">Bileşen örnek yöntemi yardımcı sınıfı</span><span class="sxs-lookup"><span data-stu-id="2df7e-171">Component instance method helper class</span></span>
+## <a name="component-instance-method-helper-class"></a><span data-ttu-id="2fa15-171">Bileşen örnek yöntemi yardımcı sınıfı</span><span class="sxs-lookup"><span data-stu-id="2fa15-171">Component instance method helper class</span></span>
 
-<span data-ttu-id="2df7e-172">Yardımcı sınıfı bir örnek yöntemini bir olarak çağırmak için kullanılır <xref:System.Action> .</span><span class="sxs-lookup"><span data-stu-id="2df7e-172">The helper class is used to invoke an instance method as an <xref:System.Action>.</span></span> <span data-ttu-id="2df7e-173">Yardımcı sınıflar şu durumlarda yararlı olur:</span><span class="sxs-lookup"><span data-stu-id="2df7e-173">Helper classes are useful when:</span></span>
+<span data-ttu-id="2fa15-172">Yardımcı sınıfı bir örnek yöntemini bir olarak çağırmak için kullanılır <xref:System.Action> .</span><span class="sxs-lookup"><span data-stu-id="2fa15-172">The helper class is used to invoke an instance method as an <xref:System.Action>.</span></span> <span data-ttu-id="2fa15-173">Yardımcı sınıflar şu durumlarda yararlı olur:</span><span class="sxs-lookup"><span data-stu-id="2fa15-173">Helper classes are useful when:</span></span>
 
-* <span data-ttu-id="2df7e-174">Aynı türdeki birçok bileşen aynı sayfada işlenir.</span><span class="sxs-lookup"><span data-stu-id="2df7e-174">Several components of the same type are rendered on the same page.</span></span>
-* <span data-ttu-id="2df7e-175">:::no-loc(Blazor Server):::Birden çok kullanıcının aynı anda bir bileşen kullandığı bir uygulama kullanılır.</span><span class="sxs-lookup"><span data-stu-id="2df7e-175">A :::no-loc(Blazor Server)::: app is used, where multiple users might be using a component concurrently.</span></span>
+* <span data-ttu-id="2fa15-174">Aynı türdeki birçok bileşen aynı sayfada işlenir.</span><span class="sxs-lookup"><span data-stu-id="2fa15-174">Several components of the same type are rendered on the same page.</span></span>
+* <span data-ttu-id="2fa15-175">:::no-loc(Blazor Server):::Birden çok kullanıcının aynı anda bir bileşen kullandığı bir uygulama kullanılır.</span><span class="sxs-lookup"><span data-stu-id="2fa15-175">A :::no-loc(Blazor Server)::: app is used, where multiple users might be using a component concurrently.</span></span>
 
-<span data-ttu-id="2df7e-176">Aşağıdaki örnekte:</span><span class="sxs-lookup"><span data-stu-id="2df7e-176">In the following example:</span></span>
+<span data-ttu-id="2fa15-176">Aşağıdaki örnekte:</span><span class="sxs-lookup"><span data-stu-id="2fa15-176">In the following example:</span></span>
 
-* <span data-ttu-id="2df7e-177">`JSInteropExample`Bileşen birkaç bileşen içerir `ListItem` .</span><span class="sxs-lookup"><span data-stu-id="2df7e-177">The `JSInteropExample` component contains several `ListItem` components.</span></span>
-* <span data-ttu-id="2df7e-178">Her `ListItem` bileşen bir ileti ve bir düğmeden oluşur.</span><span class="sxs-lookup"><span data-stu-id="2df7e-178">Each `ListItem` component is composed of a message and a button.</span></span>
-* <span data-ttu-id="2df7e-179">Bir `ListItem` bileşen düğmesi seçildiğinde, bu `ListItem` `UpdateMessage` Yöntem liste öğesi metnini değiştirir ve düğmeyi gizler.</span><span class="sxs-lookup"><span data-stu-id="2df7e-179">When a `ListItem` component button is selected, that `ListItem`'s `UpdateMessage` method changes the list item text and hides the button.</span></span>
+* <span data-ttu-id="2fa15-177">`JSInteropExample`Bileşen birkaç bileşen içerir `ListItem` .</span><span class="sxs-lookup"><span data-stu-id="2fa15-177">The `JSInteropExample` component contains several `ListItem` components.</span></span>
+* <span data-ttu-id="2fa15-178">Her `ListItem` bileşen bir ileti ve bir düğmeden oluşur.</span><span class="sxs-lookup"><span data-stu-id="2fa15-178">Each `ListItem` component is composed of a message and a button.</span></span>
+* <span data-ttu-id="2fa15-179">Bir `ListItem` bileşen düğmesi seçildiğinde, bu `ListItem` `UpdateMessage` Yöntem liste öğesi metnini değiştirir ve düğmeyi gizler.</span><span class="sxs-lookup"><span data-stu-id="2fa15-179">When a `ListItem` component button is selected, that `ListItem`'s `UpdateMessage` method changes the list item text and hides the button.</span></span>
 
-<span data-ttu-id="2df7e-180">`MessageUpdateInvokeHelper.cs`:</span><span class="sxs-lookup"><span data-stu-id="2df7e-180">`MessageUpdateInvokeHelper.cs`:</span></span>
+<span data-ttu-id="2fa15-180">`MessageUpdateInvokeHelper.cs`:</span><span class="sxs-lookup"><span data-stu-id="2fa15-180">`MessageUpdateInvokeHelper.cs`:</span></span>
 
 ```csharp
 using System;
@@ -380,9 +380,9 @@ public class MessageUpdateInvokeHelper
 }
 ```
 
-<span data-ttu-id="2df7e-181">Yer tutucu, `{APP ASSEMBLY}` uygulamanın uygulama derleme adıdır (örneğin, `:::no-loc(Blazor):::Sample` ).</span><span class="sxs-lookup"><span data-stu-id="2df7e-181">The placeholder `{APP ASSEMBLY}` is the app's app assembly name (for example, `:::no-loc(Blazor):::Sample`).</span></span>
+<span data-ttu-id="2fa15-181">Yer tutucu, `{APP ASSEMBLY}` uygulamanın uygulama derleme adıdır (örneğin, `:::no-loc(Blazor):::Sample` ).</span><span class="sxs-lookup"><span data-stu-id="2fa15-181">The placeholder `{APP ASSEMBLY}` is the app's app assembly name (for example, `:::no-loc(Blazor):::Sample`).</span></span>
 
-<span data-ttu-id="2df7e-182">İstemci tarafı JavaScript 'te:</span><span class="sxs-lookup"><span data-stu-id="2df7e-182">In the client-side JavaScript:</span></span>
+<span data-ttu-id="2fa15-182">İstemci tarafı JavaScript 'te:</span><span class="sxs-lookup"><span data-stu-id="2fa15-182">In the client-side JavaScript:</span></span>
 
 ```javascript
 window.updateMessageCallerJS = (dotnetHelper) => {
@@ -391,12 +391,12 @@ window.updateMessageCallerJS = (dotnetHelper) => {
 }
 ```
 
-<span data-ttu-id="2df7e-183">Yer tutucu, `{APP ASSEMBLY}` uygulamanın uygulama derleme adıdır (örneğin, `:::no-loc(Blazor):::Sample` ).</span><span class="sxs-lookup"><span data-stu-id="2df7e-183">The placeholder `{APP ASSEMBLY}` is the app's app assembly name (for example, `:::no-loc(Blazor):::Sample`).</span></span>
+<span data-ttu-id="2fa15-183">Yer tutucu, `{APP ASSEMBLY}` uygulamanın uygulama derleme adıdır (örneğin, `:::no-loc(Blazor):::Sample` ).</span><span class="sxs-lookup"><span data-stu-id="2fa15-183">The placeholder `{APP ASSEMBLY}` is the app's app assembly name (for example, `:::no-loc(Blazor):::Sample`).</span></span>
 
-<span data-ttu-id="2df7e-184">`Shared/ListItem.razor`:</span><span class="sxs-lookup"><span data-stu-id="2df7e-184">`Shared/ListItem.razor`:</span></span>
+<span data-ttu-id="2fa15-184">`Shared/ListItem.razor`:</span><span class="sxs-lookup"><span data-stu-id="2fa15-184">`Shared/ListItem.razor`:</span></span>
 
 ```razor
-@inject IJSRuntime JsRuntime
+@inject IJSRuntime JS
 
 <li>
     @message
@@ -415,7 +415,7 @@ window.updateMessageCallerJS = (dotnetHelper) => {
 
     protected async Task InteropCall()
     {
-        await JsRuntime.InvokeVoidAsync("updateMessageCallerJS",
+        await JS.InvokeVoidAsync("updateMessageCallerJS",
             DotNetObjectReference.Create(messageUpdateInvokeHelper));
     }
 
@@ -428,7 +428,7 @@ window.updateMessageCallerJS = (dotnetHelper) => {
 }
 ```
 
-<span data-ttu-id="2df7e-185">`Pages/JSInteropExample.razor`:</span><span class="sxs-lookup"><span data-stu-id="2df7e-185">`Pages/JSInteropExample.razor`:</span></span>
+<span data-ttu-id="2fa15-185">`Pages/JSInteropExample.razor`:</span><span class="sxs-lookup"><span data-stu-id="2fa15-185">`Pages/JSInteropExample.razor`:</span></span>
 
 ```razor
 @page "/JSInteropExample"
@@ -445,20 +445,20 @@ window.updateMessageCallerJS = (dotnetHelper) => {
 
 [!INCLUDE[Share interop code in a class library](~/includes/blazor-share-interop-code.md)]
 
-## <a name="avoid-circular-object-references"></a><span data-ttu-id="2df7e-186">Döngüsel nesne başvurularından kaçının</span><span class="sxs-lookup"><span data-stu-id="2df7e-186">Avoid circular object references</span></span>
+## <a name="avoid-circular-object-references"></a><span data-ttu-id="2fa15-186">Döngüsel nesne başvurularından kaçının</span><span class="sxs-lookup"><span data-stu-id="2fa15-186">Avoid circular object references</span></span>
 
-<span data-ttu-id="2df7e-187">Döngüsel başvurular içeren nesneler, her biri için istemcide serileştirilemiyor:</span><span class="sxs-lookup"><span data-stu-id="2df7e-187">Objects that contain circular references can't be serialized on the client for either:</span></span>
+<span data-ttu-id="2fa15-187">Döngüsel başvurular içeren nesneler, her biri için istemcide serileştirilemiyor:</span><span class="sxs-lookup"><span data-stu-id="2fa15-187">Objects that contain circular references can't be serialized on the client for either:</span></span>
 
-* <span data-ttu-id="2df7e-188">.NET yöntemi çağrıları.</span><span class="sxs-lookup"><span data-stu-id="2df7e-188">.NET method calls.</span></span>
-* <span data-ttu-id="2df7e-189">Dönüş türünün döngüsel başvuruları olduğunda C# ' den JavaScript Yöntem çağrıları.</span><span class="sxs-lookup"><span data-stu-id="2df7e-189">JavaScript method calls from C# when the return type has circular references.</span></span>
+* <span data-ttu-id="2fa15-188">.NET yöntemi çağrıları.</span><span class="sxs-lookup"><span data-stu-id="2fa15-188">.NET method calls.</span></span>
+* <span data-ttu-id="2fa15-189">Dönüş türünün döngüsel başvuruları olduğunda C# ' den JavaScript Yöntem çağrıları.</span><span class="sxs-lookup"><span data-stu-id="2fa15-189">JavaScript method calls from C# when the return type has circular references.</span></span>
 
-<span data-ttu-id="2df7e-190">Daha fazla bilgi için aşağıdaki konulara bakın:</span><span class="sxs-lookup"><span data-stu-id="2df7e-190">For more information, see the following issues:</span></span>
+<span data-ttu-id="2fa15-190">Daha fazla bilgi için aşağıdaki konulara bakın:</span><span class="sxs-lookup"><span data-stu-id="2fa15-190">For more information, see the following issues:</span></span>
 
-* [<span data-ttu-id="2df7e-191">Döngüsel başvurular desteklenmez, iki alma (DotNet/aspnetcore #20525)</span><span class="sxs-lookup"><span data-stu-id="2df7e-191">Circular references are not supported, take two (dotnet/aspnetcore #20525)</span></span>](https://github.com/dotnet/aspnetcore/issues/20525)
-* [<span data-ttu-id="2df7e-192">Teklif: serileştirilirken döngüsel başvuruları işlemek için mekanizma ekleyin (DotNet/Runtime #30820)</span><span class="sxs-lookup"><span data-stu-id="2df7e-192">Proposal: Add mechanism to handle circular references when serializing (dotnet/runtime #30820)</span></span>](https://github.com/dotnet/runtime/issues/30820)
+* [<span data-ttu-id="2fa15-191">Döngüsel başvurular desteklenmez, iki alma (DotNet/aspnetcore #20525)</span><span class="sxs-lookup"><span data-stu-id="2fa15-191">Circular references are not supported, take two (dotnet/aspnetcore #20525)</span></span>](https://github.com/dotnet/aspnetcore/issues/20525)
+* [<span data-ttu-id="2fa15-192">Teklif: serileştirilirken döngüsel başvuruları işlemek için mekanizma ekleyin (DotNet/Runtime #30820)</span><span class="sxs-lookup"><span data-stu-id="2fa15-192">Proposal: Add mechanism to handle circular references when serializing (dotnet/runtime #30820)</span></span>](https://github.com/dotnet/runtime/issues/30820)
 
-## <a name="additional-resources"></a><span data-ttu-id="2df7e-193">Ek kaynaklar</span><span class="sxs-lookup"><span data-stu-id="2df7e-193">Additional resources</span></span>
+## <a name="additional-resources"></a><span data-ttu-id="2fa15-193">Ek kaynaklar</span><span class="sxs-lookup"><span data-stu-id="2fa15-193">Additional resources</span></span>
 
 * <xref:blazor/call-javascript-from-dotnet>
-* [<span data-ttu-id="2df7e-194">`InteropComponent.razor` örnek (DotNet/AspNetCore GitHub deposu, 3,1 yayın dalı)</span><span class="sxs-lookup"><span data-stu-id="2df7e-194">`InteropComponent.razor` example (dotnet/AspNetCore GitHub repository, 3.1 release branch)</span></span>](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
-* [<span data-ttu-id="2df7e-195">Uygulamalarda büyük veri aktarımları gerçekleştirme :::no-loc(Blazor Server):::</span><span class="sxs-lookup"><span data-stu-id="2df7e-195">Perform large data transfers in :::no-loc(Blazor Server)::: apps</span></span>](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)
+* [<span data-ttu-id="2fa15-194">`InteropComponent.razor` örnek (DotNet/AspNetCore GitHub deposu, 3,1 yayın dalı)</span><span class="sxs-lookup"><span data-stu-id="2fa15-194">`InteropComponent.razor` example (dotnet/AspNetCore GitHub repository, 3.1 release branch)</span></span>](https://github.com/dotnet/AspNetCore/blob/release/3.1/src/Components/test/testassets/BasicTestApp/InteropComponent.razor)
+* [<span data-ttu-id="2fa15-195">Uygulamalarda büyük veri aktarımları gerçekleştirme :::no-loc(Blazor Server):::</span><span class="sxs-lookup"><span data-stu-id="2fa15-195">Perform large data transfers in :::no-loc(Blazor Server)::: apps</span></span>](xref:blazor/advanced-scenarios#perform-large-data-transfers-in-blazor-server-apps)
