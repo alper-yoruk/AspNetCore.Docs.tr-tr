@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: host-and-deploy/iis/hosting-bundle
-ms.openlocfilehash: ecf3dd45575390eee263a275e7f1fb9ec50011bb
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: a580c70d3141177be2508a0513f612eee56dbbf9
+ms.sourcegitcommit: 45aa1c24c3fdeb939121e856282b00bdcf00ea55
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93058447"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93343643"
 ---
 # <a name="the-net-core-hosting-bundle"></a>.NET Core barındırma paketi
 
@@ -37,13 +37,20 @@ ms.locfileid: "93058447"
 >
 > .NET Core 'un 64 bit (x64) sürümünü yükledikten sonra barındırma paketi yüklenirse, SDK 'lar eksik gibi görünebilir ([hiçbir .NET Core SDK 'sı algılanmadı](xref:test/troubleshoot#no-net-core-sdks-were-detected)). Sorunu çözmek için bkz <xref:test/troubleshoot#missing-sdk-after-installing-the-net-core-hosting-bundle> ..
 
-### <a name="direct-download-current-version"></a>Doğrudan indirme (geçerli sürüm)
+## <a name="direct-download-current-version"></a>Doğrudan indirme (geçerli sürüm)
 
 Aşağıdaki bağlantıyı kullanarak yükleyiciyi indirin:
 
 [Geçerli .NET Core barındırma paketi yükleyicisi (doğrudan indirme)](https://dotnet.microsoft.com/permalink/dotnetcore-current-windows-runtime-bundle-installer)
 
-### <a name="earlier-versions-of-the-installer"></a>Yükleyicinin önceki sürümleri
+## <a name="visual-c-redistributable-requirement"></a>Yeniden dağıtılabilir gereksinim Visual C++
+
+Windows 'un eski sürümlerinde (örneğin, Windows Server 2012 R2), Visual Studio C++ 2015, 2017, 2019 yeniden dağıtılabilir ' i yükler. Aksi takdirde, Windows olay günlüğündeki kafa karıştırıcı bir hata iletisi şunu bildirir `The data is the error.`
+
+[Geçerli x64 vs C++ yeniden dağıtılabilir](https://aka.ms/vs/16/release/vc_redist.x64.exe) 
+ [Geçerli x86 vs C++ yeniden dağıtılabilir](https://aka.ms/vs/16/release/vc_redist.x86.exe)
+
+## <a name="earlier-versions-of-the-installer"></a>Yükleyicinin önceki sürümleri
 
 Yükleyicinin önceki bir sürümünü elde etmek için:
 
@@ -55,32 +62,29 @@ Yükleyicinin önceki bir sürümünü elde etmek için:
 > [!WARNING]
 > Bazı yükleyicilerle yaşam süresi (EOL) gelmiş olan ve artık Microsoft tarafından desteklenmeyen yayın sürümlerini içerir. Daha fazla bilgi için bkz. [destek ilkesi](https://dotnet.microsoft.com/platform/support/policy/dotnet-core).
 
-### <a name="install-the-hosting-bundle"></a>Barındırma paketini yükler
+## <a name="options"></a>Seçenekler
 
-1. Yükleyiciyi sunucuda çalıştırın. Aşağıdaki parametreler, yükleyiciyi yönetici komut kabuğu 'ndan çalıştırırken kullanılabilir:
+1. Aşağıdaki parametreler, yükleyiciyi yönetici komut kabuğu 'ndan çalıştırırken kullanılabilir:
 
    * `OPT_NO_ANCM=1`: ASP.NET Core modülünü yüklemeyi atlayın.
    * `OPT_NO_RUNTIME=1`: .NET Core çalışma zamanını yüklemeyi atlayın. Sunucu yalnızca [kendi kendine içerilen dağıtımları (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd)barındırdığınızda kullanılır.
    * `OPT_NO_SHAREDFX=1`: ASP.NET paylaşılan çerçevesini (ASP.NET çalışma zamanı) yüklemeyi atlayın. Sunucu yalnızca [kendi kendine içerilen dağıtımları (SCD)](/dotnet/core/deploying/#self-contained-deployments-scd)barındırdığınızda kullanılır.
    * `OPT_NO_X86=1`: X86 çalışma zamanlarını yüklemeyi atlayın. 32 bitlik uygulamalar barındırmayabildiğinizi bildiğiniz durumlarda bu parametreyi kullanın. Gelecekte 32-bit ve 64 bit uygulamaları barındırabilmeniz gereken herhangi bir şansınız varsa, bu parametreyi kullanmayın ve her iki çalışma zamanını da yüklemeyin.
    * `OPT_NO_SHARED_CONFIG_CHECK=1`: Paylaşılan yapılandırma ( `applicationHost.config` ), IIS yüklemesiyle aynı makineli olduğunda IIS paylaşılan yapılandırması kullanma denetimini devre dışı bırakın. *Yalnızca ASP.NET Core 2,2 veya sonraki bir sürümü Paketcisi yükleyicilerini barındırmak için kullanılabilir.* Daha fazla bilgi için bkz. <xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration>.
-1. Sistemi yeniden başlatın veya komut kabuğu 'nda aşağıdaki komutları yürütün:
 
-   ```console
-   net stop was /y
-   net start w3svc
-   ```
-   IIS 'nin yeniden başlatılması, yükleyici tarafından oluşturulan bir ortam değişkeni olan sistem yolunda bir değişiklik seçer.
+> [!NOTE]
+> IIS paylaşılan Yapılandırması hakkında bilgi için bkz. [IIS paylaşılan yapılandırması ile ASP.NET Core modülü](xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration).
 
-ASP.NET Core, paylaşılan çerçeve paketlerinin yama sürümleri için geri iletme davranışını benimsemez. Yeni bir barındırma paketi yükleyerek paylaşılan çerçeveyi yükselttikten sonra, sistemi yeniden başlatın veya komut kabuğu 'nda aşağıdaki komutları yürütün:
+## <a name="restart-iis"></a>IIS 'yi yeniden Başlat
+
+Barındırma paketi yüklendikten sonra el ile IIS yeniden başlatma gerekebilir. Örneğin, `dotnet` CLI araçları (komut), IIS çalışan işlemlerinin ÇALıŞTıRıLMASı yolunda bulunmayabilir.
+
+IIS 'yi el ile durdurmak ve başlatmak için, yükseltilmiş bir komut kabuğu 'nda aşağıdaki komutları yürütün:
 
 ```console
 net stop was /y
 net start w3svc
 ```
-
-> [!NOTE]
-> IIS paylaşılan Yapılandırması hakkında bilgi için bkz. [IIS paylaşılan yapılandırması ile ASP.NET Core modülü](xref:host-and-deploy/aspnet-core-module#aspnet-core-module-with-an-iis-shared-configuration).
 
 ## <a name="module-version-and-hosting-bundle-installer-logs"></a>Modül sürümü ve barındırma paketi yükleyici günlükleri
 

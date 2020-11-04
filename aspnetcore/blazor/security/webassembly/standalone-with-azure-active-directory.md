@@ -19,33 +19,25 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-azure-active-directory
-ms.openlocfilehash: ce8e677cd774238faab7789d4e24bf1c755e5105
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 4e8c22c56b7023301499fd273a9194b8c7b58f3d
+ms.sourcegitcommit: 45aa1c24c3fdeb939121e856282b00bdcf00ea55
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055145"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93343721"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-standalone-app-with-azure-active-directory"></a>Blazor WebAssemblyAzure Active Directory ile ASP.NET Core tek başına uygulamanın güvenliğini sağlama
 
 , [Javier Calvarro Nelson](https://github.com/javiercn) ve [Luke Latham](https://github.com/guardrex) 'e göre
 
-Bu makalede Blazor WebAssembly , Azure Active Directory (AAD) ile ASP.NET Core bağımsız bir uygulamanın güvenliğini sağlama ele alınmaktadır.
+Bu makalede, kimlik doğrulaması için [Azure Active Directory (AAD)](https://azure.microsoft.com/services/active-directory/) kullanan [tek başına bir Blazor WebAssembly uygulamanın](xref:blazor/hosting-models#blazor-webassembly) nasıl oluşturulacağı ele alınmaktadır.
 
 ::: moniker range=">= aspnetcore-5.0"
 
 > [!NOTE]
 > Visual Blazor WebAssembly Studio 'da oluşturulan ve bır AAD kurumsal dizinindeki hesapları destekleyecek şekilde yapılandırılan uygulamalar için, Visual Studio uygulamayı proje nesli üzerinde doğru şekilde yapılandırmaz. Bu, Visual Studio 'nun gelecek bir sürümünde değinilecek. Bu makalede .NET Core CLI komutuyla uygulamanın nasıl oluşturulacağı gösterilmektedir `dotnet new` . IDE 'yi ASP.NET Core 5,0 ' deki en son şablonlar için güncelleştirmeden önce Visual Studio ile oluşturmayı tercih ediyorsanız Blazor , bu makalenin her bölümüne başvurun ve Visual Studio uygulamayı oluşturduktan sonra uygulamanın yapılandırmasını onaylayın veya güncelleştirin.
 
-::: moniker-end
-
-Kimlik doğrulaması için [Azure Active Directory (AAD)](https://azure.microsoft.com/services/active-directory/) kullanan [tek başına bir Blazor WebAssembly uygulama](xref:blazor/hosting-models#blazor-webassembly) oluşturmak için:
-
-[AAD kiracısı ve Web uygulaması oluşturma](/azure/active-directory/develop/v2-overview):
-
-Azure Portal **Azure Active Directory**  >  **uygulama kayıtları** alanına bir AAD uygulaması kaydedin:
-
-::: moniker range=">= aspnetcore-5.0"
+Azure Portal **Azure Active Directory** > **uygulama kayıtları** alanına bir AAD uygulaması kaydedin:
 
 1. Uygulama için bir **ad** sağlayın (örneğin, **Blazor tek başına AAD** ).
 1. Desteklenen bir **Hesap türü** seçin. Bu **kuruluş dizininde yalnızca** bu deneyim için hesaplar seçebilirsiniz.
@@ -68,6 +60,8 @@ Aşağıdaki bilgileri kaydedin:
 ::: moniker-end
 
 ::: moniker range="< aspnetcore-5.0"
+
+Azure Portal **Azure Active Directory** > **uygulama kayıtları** alanına bir AAD uygulaması kaydedin:
 
 1. Uygulama için bir **ad** sağlayın (örneğin, **Blazor tek başına AAD** ).
 1. Desteklenen bir **Hesap türü** seçin. Bu **kuruluş dizininde yalnızca** bu deneyim için hesaplar seçebilirsiniz.

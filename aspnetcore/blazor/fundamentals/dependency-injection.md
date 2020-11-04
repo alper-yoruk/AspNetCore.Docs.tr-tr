@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/fundamentals/dependency-injection
-ms.openlocfilehash: a636498ee3fedbbf0fe021407a718f95a02f70c3
-ms.sourcegitcommit: d64bf0cbe763beda22a7728c7f10d07fc5e19262
+ms.openlocfilehash: 32228cc98b4650d5871369511808e519a4f65be4
+ms.sourcegitcommit: 45aa1c24c3fdeb939121e856282b00bdcf00ea55
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/03/2020
-ms.locfileid: "93234172"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93343682"
 ---
 # <a name="aspnet-core-no-locblazor-dependency-injection"></a>ASP.NET Core Blazor bağımlılığı ekleme
 
@@ -43,7 +43,7 @@ Varsayılan hizmetler, uygulamanın hizmet koleksiyonuna otomatik olarak eklenir
 
 | Hizmet | Ömür | Açıklama |
 | ------- | -------- | ----------- |
-| <xref:System.Net.Http.HttpClient> | Yayıl | HTTP istekleri göndermek ve bir URI tarafından tanımlanan bir kaynaktan HTTP yanıtlarını almak için yöntemler sağlar.<br><br><xref:System.Net.Http.HttpClient>Bir uygulamadaki örneği, Blazor WebAssembly arka planda HTTP trafiğini işlemek için tarayıcıyı kullanır.<br><br>Blazor Server uygulamalar <xref:System.Net.Http.HttpClient> Varsayılan olarak yapılandırılmış bir hizmet olarak yapılandırılmamış. Bir <xref:System.Net.Http.HttpClient> Blazor Server uygulamaya bir uygulama sağlayın.<br><br>Daha fazla bilgi için bkz. <xref:blazor/call-web-api>. |
+| <xref:System.Net.Http.HttpClient> | Yayıl | HTTP istekleri göndermek ve bir URI tarafından tanımlanan bir kaynaktan HTTP yanıtlarını almak için yöntemler sağlar.<br><br><xref:System.Net.Http.HttpClient>Bir uygulamadaki örneği, Blazor WebAssembly arka planda HTTP trafiğini işlemek için tarayıcıyı kullanır.<br><br>Blazor Server uygulamalar <xref:System.Net.Http.HttpClient> Varsayılan olarak yapılandırılmış bir hizmet olarak yapılandırılmamış. Bir <xref:System.Net.Http.HttpClient> Blazor Server uygulamaya bir uygulama sağlayın.<br><br>Daha fazla bilgi için bkz. <xref:blazor/call-web-api>.<br><br><xref:System.Net.Http.HttpClient>Tek değil, kapsamlı bir hizmet olarak kaydedilir. Daha fazla bilgi için [hizmet ömrü](#service-lifetime) bölümüne bakın. |
 | <xref:Microsoft.JSInterop.IJSRuntime> | Singleton ( Blazor WebAssembly )<br>Kapsamlı ( Blazor Server ) | JavaScript çağrılarının dağıtıldığı bir JavaScript çalışma zamanının örneğini temsil eder. Daha fazla bilgi için bkz. <xref:blazor/call-javascript-from-dotnet>. |
 | <xref:Microsoft.AspNetCore.Components.NavigationManager> | Singleton ( Blazor WebAssembly )<br>Kapsamlı ( Blazor Server ) | URI 'Ler ve gezinme durumu ile çalışmaya yönelik yardımcıları içerir. Daha fazla bilgi için bkz. [URI ve gezinti durumu yardımcıları](xref:blazor/fundamentals/routing#uri-and-navigation-state-helpers). |
 
@@ -166,7 +166,7 @@ Hizmetler, aşağıdaki tabloda gösterilen ömürlerle yapılandırılabilir.
 
 | Ömür | Açıklama |
 | -------- | ----------- |
-| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | Blazor WebAssembly uygulamalar şu anda bir dı kapsamları kavramı içermez. `Scoped`-kayıtlı hizmetler hizmetler gibi davranır `Singleton` . Ancak, Blazor Server barındırma modeli `Scoped` yaşam süresini destekler. Blazor ServerUygulamalarda, kapsamlı bir hizmet kaydı *bağlantının* kapsamına alınır. Bu nedenle, geçerli amaç tarayıcıda istemci tarafı çalıştırmak olsa bile, kapsama alınmış hizmetlerin kullanılması geçerli kullanıcı kapsamında olması gereken hizmetler için tercih edilir. |
+| <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Scoped%2A> | Blazor WebAssembly uygulamalar şu anda bir dı kapsamları kavramı içermez. `Scoped`-kayıtlı hizmetler hizmetler gibi davranır `Singleton` . Ancak, Blazor Server barındırma modeli `Scoped` yaşam süresini destekler. Blazor ServerUygulamalarda, kapsamlı bir hizmet kaydı *bağlantının* kapsamına alınır. Bu nedenle, geçerli amaç bir uygulamadaki tarayıcıda istemci tarafını çalıştırmak olsa bile, kapsama alınmış hizmetlerin kullanılması geçerli kullanıcı kapsamında olması gereken hizmetler için tercih edilir Blazor WebAssembly . |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Singleton%2A> | Dı, hizmetin *tek bir örneğini* oluşturur. Hizmet gerektiren tüm bileşenler `Singleton` aynı hizmetin bir örneğini alır. |
 | <xref:Microsoft.Extensions.DependencyInjection.ServiceDescriptor.Transient%2A> | Bir bileşen hizmet kapsayıcısından bir hizmetin örneğini edindiğinde `Transient` , hizmetin *Yeni bir örneğini* alır. |
 

@@ -19,29 +19,27 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/security/webassembly/standalone-with-azure-active-directory-b2c
-ms.openlocfilehash: 423c7ad9f00a991c634f24a170c52d6dcb035ee1
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 14eda03419e22538e17b7b4d6fa697d61cb384c8
+ms.sourcegitcommit: 45aa1c24c3fdeb939121e856282b00bdcf00ea55
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055158"
+ms.lasthandoff: 11/04/2020
+ms.locfileid: "93343719"
 ---
 # <a name="secure-an-aspnet-core-no-locblazor-webassembly-standalone-app-with-azure-active-directory-b2c"></a>Blazor WebAssemblyAzure Active Directory B2C ile ASP.NET Core tek başına uygulamanın güvenliğini sağlama
 
 , [Javier Calvarro Nelson](https://github.com/javiercn) ve [Luke Latham](https://github.com/guardrex) 'e göre
 
-Kimlik doğrulaması için [Azure Active Directory (AAD) B2C](/azure/active-directory-b2c/overview) kullanan [tek başına bir Blazor WebAssembly uygulama](xref:blazor/hosting-models#blazor-webassembly) oluşturmak için:
+Bu makalede kimlik doğrulaması için [Azure Active Directory (AAD) B2C](/azure/active-directory-b2c/overview) kullanan [tek başına bir Blazor WebAssembly uygulamanın](xref:blazor/hosting-models#blazor-webassembly) nasıl oluşturulacağı ele alınmaktadır.
 
-Bir kiracı oluşturmak ve bir Web uygulamasını Azure portalında kaydetmek için aşağıdaki konulardaki yönergeleri izleyin:
-
-[AAD B2C kiracı oluşturma](/azure/active-directory-b2c/tutorial-create-tenant)
+Bir kiracı oluşturun veya [AAD B2C kiracı (Azure belgeleri) oluşturma](/azure/active-directory-b2c/tutorial-create-tenant) makalesindeki kılavuzu izleyerek Azure Portal kullanmak üzere uygulama için mevcut bir B2C kiracısı tanımla.
 
 Aşağıdaki bilgileri kaydedin:
 
 * AAD B2C örneği (örneğin, `https://contoso.b2clogin.com/` sonunda eğik çizgi içeren): örnek, Azure portal **uygulama kayıtları** sayfasından **uç noktalar** PENCERESI açılarak bulunan bir Azure B2C uygulama kaydının şeması ve barındırmadır.
 * Birincil/yayımcı/kiracı etki alanını AAD B2C (örneğin, `contoso.onmicrosoft.com` ): etki alanı, kayıtlı uygulama için Azure Portal **marka** dikey penceresinde **Yayımcı etki alanı** olarak kullanılabilir.
 
-Eğitim bölümündeki yönergeleri izleyin [:](/azure/active-directory-b2c/tutorial-register-applications) uygulamayı bir AAD uygulaması kaydetmek için Azure Active Directory B2C yeniden kaydedin *`Client`* ve ardından aşağıdakileri yapın:
+Bir AAD B2C uygulamasını kaydetme (Azure belgelerine ilgili kılavuz: [öğretici: bir uygulamayı Azure Active Directory B2C kaydetme](/azure/active-directory-b2c/tutorial-register-applications)):
 
 ::: moniker range=">= aspnetcore-5.0"
 
