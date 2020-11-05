@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: c4b4f2b89be2018857abaafb448f052c3848ec59
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 74f65b916c2d5b7de61ec29f4259a51584ee5989
+ms.sourcegitcommit: 33f631a4427b9a422755601ac9119953db0b4a3e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93054092"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93365424"
 ---
 # <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor ASP.NET Core Entity Framework Core olan sayfalar-öğretici 1/8
 
@@ -119,9 +119,10 @@ To run the app after downloading the completed project:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Visual Studio **Dosya** menüsünden **Yeni** > **Proje** ' yi seçin.
-* **ASP.NET Core Web uygulaması** ' nı seçin.
+* Visual Studio 'Yu başlatın ve **Yeni proje oluştur** ' u seçin.
+* **ASP.NET Core Web uygulaması** > **İleri ' yi** seçin.
 * Projeyi *Contosouniversity* olarak adlandırın. Büyük harfler de dahil olmak üzere bu tam adı kullanmak önemlidir, bu nedenle kod kopyalanıp yapıştırılırken ad alanları eşleşir.
+* **Oluştur** ’u seçin.
 * Açılan menüden **.NET Core** ve **5,0 ASP.NET Core** seçin ve ardından **Web uygulaması** ' nı seçin.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
@@ -225,7 +226,7 @@ Bu bölümde, oluşturmak için ASP.NET Core scafkatlama aracını kullanırsın
 * **Çözüm Gezgini** , *Sayfalar/öğrenciler* klasörüne sağ tıklayın ve **Add** > **yeni yapı iskelesi Ekle öğesini** seçin.
 * **Yeni yapı Iskelesi öğesi Ekle** iletişim kutusunda:
   * Sol sekmede, **yüklü > ortak > Razor sayfaları** ' nı seçin
-  * **Razor Entity Framework (CRUD) Ekle kullanarak sayfa** seçin > **ADD** .
+  * **Razor Entity Framework (CRUD) Ekle kullanarak sayfa** seçin > **ADD**.
 * **Razor Entity Framework (CRUD) kullanarak sayfa ekle** iletişim kutusunda:
   * **Model sınıfı** açılır penceresinde **öğrenci (Contosouniversity. modeller)** öğesini seçin.
   * **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin.
@@ -365,7 +366,7 @@ Bağlantı dizesinin adı, [Dbcontextoptions](/dotnet/api/microsoft.entityframew
 
 ### <a name="add-the-database-exception-filter"></a>Veritabanı özel durum filtresini ekleme
 
-`AddDatabaseDeveloperPageExceptionFilter` `ConfigureServices` Aşağıdaki kodda gösterildiği gibi öğesine ekleyin:
+<xref:Microsoft.Extensions.DependencyInjection.DatabaseDeveloperPageExceptionFilterServiceExtensions.AddDatabaseDeveloperPageExceptionFilter%2A> `ConfigureServices` Aşağıdaki kodda gösterildiği gibi öğesine ekleyin:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -373,10 +374,10 @@ Bağlantı dizesinin adı, [Dbcontextoptions](/dotnet/api/microsoft.entityframew
 
 [Microsoft. aspnetcore. Diagnostics. EntityFrameworkCore](https://www.nuget.org/packages/Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore) NuGet paketini ekleyin.
 
-PMC 'de, NuGet paketini eklemek için aşağıdaki komutu girin:
+Şu şekilde, NuGet paketini eklemek için aşağıdakileri girin:
 
 ```powershell
-Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore -Version 5.0.0-rc.1.20451.17
+Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore -Version 5.0.0-rc.2.20475.17
 ```
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
@@ -386,6 +387,8 @@ Install-Package Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore -Version 5.
 ---
 
 `Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore`NuGet paketi, Entity Framework Core hata sayfaları için ASP.NET Core ara yazılım sağlar. Bu ara yazılım Entity Framework Core geçişlerle hataları algılamaya ve tanılamanıza yardımcı olur.
+
+, `AddDatabaseDeveloperPageExceptionFilter` [Geliştirme ortamında](xref:fundamentals/environments)yararlı hata bilgileri sağlar.
 
 ## <a name="create-the-database"></a>Veritabanını oluşturma
 
@@ -407,7 +410,7 @@ Bu iş akışı, verileri korumanıza gerek olmadığı sürece, şema hızlı b
 ### <a name="test-the-app"></a>Uygulamayı test etme
 
 * Uygulamayı çalıştırın.
-* **Öğrenciler** bağlantısını seçin ve ardından **Yeni oluştur** .
+* **Öğrenciler** bağlantısını seçin ve ardından **Yeni oluştur**.
 * Düzenle, Ayrıntılar ve Sil bağlantılarını test edin.
 
 ## <a name="seed-the-database"></a>Veritabanını çekirdek
@@ -709,7 +712,7 @@ Bu bölümde, oluşturmak için ASP.NET Core scafkatlama aracını kullanırsın
 
 * *Sayfalar* klasöründe bir *öğrenciler* klasörü oluşturun.
 * **Çözüm Gezgini** , *Sayfalar/öğrenciler* klasörüne sağ tıklayın ve **Add** > **yeni yapı iskelesi Ekle öğesini** seçin.
-* **Yapı iskelesi Ekle** iletişim kutusunda **Razor Entity Framework (CRUD) Ekle öğesini kullanarak sayfalar** ' ı seçin > **ADD** .
+* **Yapı iskelesi Ekle** iletişim kutusunda **Razor Entity Framework (CRUD) Ekle öğesini kullanarak sayfalar** ' ı seçin > **ADD**.
 * **Razor Entity Framework (CRUD) kullanarak sayfa ekle** iletişim kutusunda:
   * **Model sınıfı** açılır penceresinde **öğrenci (Contosouniversity. modeller)** öğesini seçin.
   * **Veri bağlamı sınıfı** satırında, **+** (artı) işaretini seçin.
@@ -858,7 +861,7 @@ Bu iş akışı, verileri korumanıza gerek olmadığı sürece, şema hızlı b
 ### <a name="test-the-app"></a>Uygulamayı test etme
 
 * Uygulamayı çalıştırın.
-* **Öğrenciler** bağlantısını seçin ve ardından **Yeni oluştur** .
+* **Öğrenciler** bağlantısını seçin ve ardından **Yeni oluştur**.
 * Düzenle, Ayrıntılar ve Sil bağlantılarını test edin.
 
 ## <a name="seed-the-database"></a>Veritabanını çekirdek
@@ -1090,7 +1093,7 @@ Bu bölümde öğrenci modeli scafkatdır. Diğer bir deyişle, scafkatlama arac
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
 * **Çözüm Gezgini** , *Sayfalar/öğrenciler* klasörüne sağ tıklayarak **Add** > **yeni yapı iskelesi öğesi** ekleyin >.
-* **Yapı iskelesi Ekle** iletişim kutusunda **Razor Entity Framework (CRUD) Ekle öğesini kullanarak sayfalar** ' ı seçin > **ADD** .
+* **Yapı iskelesi Ekle** iletişim kutusunda **Razor Entity Framework (CRUD) Ekle öğesini kullanarak sayfalar** ' ı seçin > **ADD**.
 
 **Razor Entity Framework (CRUD) kullanarak sayfa ekle** iletişim kutusunu doldurun:
 
@@ -1166,7 +1169,7 @@ Aşağıdaki kod güncelleştirilmiş *program.cs* dosyasını gösterir.
 
 Uygulamayı çalıştırın ve ilkeyi kabul edin cookie . Bu uygulama, kişisel bilgileri saklar. İlke hakkında, cookie [AB Genel VERI koruma YÖNETMELIĞI (GDPR) desteğiyle](xref:security/gdpr)ilgili bilgi edinebilirsiniz.
 
-* **Öğrenciler** bağlantısını seçin ve ardından **Yeni oluştur** .
+* **Öğrenciler** bağlantısını seçin ve ardından **Yeni oluştur**.
 * Düzenle, Ayrıntılar ve Sil bağlantılarını test edin.
 
 ## <a name="examine-the-schoolcontext-db-context"></a>SchoolContext DB bağlamını inceleyin

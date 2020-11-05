@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: mvc/models/model-binding
-ms.openlocfilehash: a3be22134246c76b0a809ddb97b33ff97ace9a5b
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 49300d32096e577db9b13a0510cc310b91ddb51d
+ms.sourcegitcommit: 33f631a4427b9a422755601ac9119953db0b4a3e
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93057511"
+ms.lasthandoff: 11/05/2020
+ms.locfileid: "93365359"
 ---
 # <a name="model-binding-in-aspnet-core"></a>ASP.NET Core 'de model bağlama
 
@@ -302,9 +302,30 @@ public IActionResult OnPost([Bind("LastName,FirstMidName,HireDate")] Instructor 
 
 `[Bind]`Özniteliği, _Create * senaryolarında fazla nakline karşı korumak için kullanılabilir. Dışlanan Özellikler null ya da boş değer olarak ayarlandığı için, düzenleme senaryolarında iyi çalışmaz. Fazla naklin savunma için, öznitelik yerine görüntüleme modelleri önerilir `[Bind]` . Daha fazla bilgi için bkz. fazla [nakil hakkında güvenlik NOI](xref:data/ef-mvc/crud#security-note-about-overposting).
 
+### <a name="modelbinder-attribute"></a>[Modelciltçi] özniteliği
+
+<xref:Microsoft.AspNetCore.Mvc.ModelBinderAttribute> türlere, özelliklere veya parametrelere uygulanabilir. Belirli örneği veya türü bağlamak için kullanılan model Bağlayıcısı türünü belirtmeyi sağlar. Örneğin:
+
+```C#
+[HttpPost]
+public IActionResult OnPost([ModelBinder(typeof(MyInstructorModelBinder))] Instructor instructor)
+```
+
+`[ModelBinder]`Öznitelik, model bağlandığında bir özelliğin veya parametrenin adını değiştirmek için de kullanılabilir:
+
+```C#
+public class Instructor
+{
+    [ModelBinder(Name = "instructor_id")]
+    public string Id { get; set; }
+    
+    public string Name { get; set; }
+}
+```
+
 ### <a name="bindrequired-attribute"></a>[BindRequired] özniteliği
 
-, Yöntem parametrelerine değil yalnızca model özelliklerine uygulanabilir. Modelin özelliği için bağlama gerçekleşmemişse model bağlamasının model durumu hatası eklemesine neden olur. Aşağıda bir örnek verilmiştir:
+, Yöntem parametrelerine değil yalnızca model özelliklerine uygulanabilir. Modelin özelliği için bağlama gerçekleşmemişse model bağlamasının model durumu hatası eklemesine neden olur. İşte bir örnek:
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/InstructorWithCollection.cs?name=snippet_BindRequired&highlight=8-9)]
 
@@ -312,7 +333,7 @@ Ayrıca bkz `[Required]` . [model doğrulama](xref:mvc/models/validation#require
 
 ### <a name="bindnever-attribute"></a>[Bindhiç] özniteliği
 
-, Yöntem parametrelerine değil yalnızca model özelliklerine uygulanabilir. Model bağlamasının model özelliğini değiştirmesini engeller. Aşağıda bir örnek verilmiştir:
+, Yöntem parametrelerine değil yalnızca model özelliklerine uygulanabilir. Model bağlamasının model özelliğini değiştirmesini engeller. İşte bir örnek:
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Models/InstructorWithDictionary.cs?name=snippet_BindNever&highlight=3-4)]
 
@@ -533,7 +554,7 @@ Belirtilen türdeki özelliklerde doğrulamayı devre dışı bırakmak için i�
 
 ## <a name="manual-model-binding"></a>El ile model bağlama 
 
-Model bağlama yöntemi kullanılarak el ile çağrılabilir <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> . Yöntemi hem hem de sınıflarında tanımlanmıştır `ControllerBase` `PageModel` . Yöntem aşırı yüklemeleri, kullanılacak öneki ve değer sağlayıcısını belirtmenizi sağlar. Yöntemi `false` model bağlamanın başarısız olup olmadığını döndürür. Aşağıda bir örnek verilmiştir:
+Model bağlama yöntemi kullanılarak el ile çağrılabilir <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> . Yöntemi hem hem de sınıflarında tanımlanmıştır `ControllerBase` `PageModel` . Yöntem aşırı yüklemeleri, kullanılacak öneki ve değer sağlayıcısını belirtmenizi sağlar. Yöntemi `false` model bağlamanın başarısız olup olmadığını döndürür. İşte bir örnek:
 
 [!code-csharp[](model-binding/samples/3.x/ModelBindingSample/Pages/InstructorsWithCollection/Create.cshtml.cs?name=snippet_TryUpdate&highlight=1-4)]
 
@@ -814,13 +835,13 @@ Karmaşık türlerin model bağlamasını denetlemek için birkaç yerleşik öz
 
 ### <a name="bindrequired-attribute"></a>[BindRequired] özniteliği
 
-, Yöntem parametrelerine değil yalnızca model özelliklerine uygulanabilir. Modelin özelliği için bağlama gerçekleşmemişse model bağlamasının model durumu hatası eklemesine neden olur. Aşağıda bir örnek verilmiştir:
+, Yöntem parametrelerine değil yalnızca model özelliklerine uygulanabilir. Modelin özelliği için bağlama gerçekleşmemişse model bağlamasının model durumu hatası eklemesine neden olur. İşte bir örnek:
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Models/InstructorWithCollection.cs?name=snippet_BindRequired&highlight=8-9)]
 
 ### <a name="bindnever-attribute"></a>[Bindhiç] özniteliği
 
-, Yöntem parametrelerine değil yalnızca model özelliklerine uygulanabilir. Model bağlamasının model özelliğini değiştirmesini engeller. Aşağıda bir örnek verilmiştir:
+, Yöntem parametrelerine değil yalnızca model özelliklerine uygulanabilir. Model bağlamasının model özelliğini değiştirmesini engeller. İşte bir örnek:
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Models/InstructorWithDictionary.cs?name=snippet_BindNever&highlight=3-4)]
 
@@ -1002,7 +1023,7 @@ Belirtilen türdeki özelliklerde doğrulamayı devre dışı bırakmak için i�
 
 ## <a name="manual-model-binding"></a>El ile model bağlama
 
-Model bağlama yöntemi kullanılarak el ile çağrılabilir <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> . Yöntemi hem hem de sınıflarında tanımlanmıştır `ControllerBase` `PageModel` . Yöntem aşırı yüklemeleri, kullanılacak öneki ve değer sağlayıcısını belirtmenizi sağlar. Yöntemi `false` model bağlamanın başarısız olup olmadığını döndürür. Aşağıda bir örnek verilmiştir:
+Model bağlama yöntemi kullanılarak el ile çağrılabilir <xref:Microsoft.AspNetCore.Mvc.ControllerBase.TryUpdateModelAsync*> . Yöntemi hem hem de sınıflarında tanımlanmıştır `ControllerBase` `PageModel` . Yöntem aşırı yüklemeleri, kullanılacak öneki ve değer sağlayıcısını belirtmenizi sağlar. Yöntemi `false` model bağlamanın başarısız olup olmadığını döndürür. İşte bir örnek:
 
 [!code-csharp[](model-binding/samples/2.x/ModelBindingSample/Pages/InstructorsWithCollection/Create.cshtml.cs?name=snippet_TryUpdate&highlight=1-4)]
 
