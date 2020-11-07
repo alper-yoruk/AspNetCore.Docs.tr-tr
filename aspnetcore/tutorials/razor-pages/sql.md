@@ -1,10 +1,13 @@
 ---
-title: 4. bölüm, bir veritabanı ve ASP.NET Core
+title: 4. bölüm, bir veritabanıyla çalışma
 author: rick-anderson
 description: Sayfalardaki eğitim serisinin 4. bölümü Razor .
 ms.author: riande
-ms.date: 7/22/2019
+ms.date: 09/26/2020
 no-loc:
+- Index
+- Create
+- Delete
 - appsettings.json
 - ASP.NET Core Identity
 - cookie
@@ -17,20 +20,20 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/sql
-ms.openlocfilehash: d592cf7d8a96a7e4ec2e53418843a186488951be
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 3e78b5b6dab7145413ae8612bfeb352f328ec86a
+ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93058161"
+ms.lasthandoff: 11/07/2020
+ms.locfileid: "94360733"
 ---
-# <a name="part-4-with-a-database-and-aspnet-core"></a>4. bölüm, bir veritabanı ve ASP.NET Core
+# <a name="part-4-work-with-a-database-and-aspnet-core"></a>4. bölüm, bir veritabanı ve ASP.NET Core çalışma
 
 By [Rick Anderson](https://twitter.com/RickAndMSFT) ve [ali Audette](https://twitter.com/joeaudette)
 
-::: moniker range=">= aspnetcore-3.0"
+::: moniker range=">= aspnetcore-5.0"
 
-[!INCLUDE[](~/includes/rp/download.md)]
+[Örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50) ([nasıl indirilir](xref:index#how-to-download-a-sample)).
 
 `RazorPagesMovieContext`Nesnesi veritabanına bağlanma ve `Movie` nesneleri veritabanı kayıtlarına eşleme görevini işler. Veritabanı bağlamı, Startup.cs içindeki yöntemde [bağımlılık ekleme](xref:fundamentals/dependency-injection) kapsayıcısına kaydedilir `ConfigureServices` : *Startup.cs*
 
@@ -44,11 +47,11 @@ By [Rick Anderson](https://twitter.com/RickAndMSFT) ve [ali Audette](https://twi
 
 ---
 
-ASP.NET Core [yapılandırma](xref:fundamentals/configuration/index) sistemi okur `ConnectionString` . Yerel geliştirme için, dosyadaki bağlantı dizesini alır *appsettings.json* .
+ASP.NET Core [yapılandırma](xref:fundamentals/configuration/index) sistemi `ConnectionString` anahtarı okur. Yerel geliştirme için, yapılandırma bağlantı dizesini *appsettings.json* dosyadan alır.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Veritabanı () için ad değeri, `Database={Database name}` üretilen kodunuz için farklı olacaktır. Ad değeri rastgele.
+Oluşturulan bağlantı dizesi aşağıdakine benzer olacaktır:
 
 [!code-json[](razor-pages-start/sample/RazorPagesMovie30/appsettings.json?highlight=10-12)]
 
@@ -58,7 +61,161 @@ Veritabanı () için ad değeri, `Database={Database name}` üretilen kodunuz i�
 
 ---
 
-Uygulama bir test veya üretim sunucusuna dağıtıldığında, bağlantı dizesini gerçek bir veritabanı sunucusuna ayarlamak için bir ortam değişkeni kullanılabilir. Daha fazla bilgi için bkz. [yapılandırma](xref:fundamentals/configuration/index) .
+Uygulama bir test veya üretim sunucusuna dağıtıldığında, bağlantı dizesini bir test veya üretim veritabanı sunucusuna ayarlamak için bir ortam değişkeni kullanılabilir. Daha fazla bilgi için bkz. [yapılandırma](xref:fundamentals/configuration/index).
+
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+## <a name="sql-server-express-localdb"></a>SQL Server Express LocalDB
+
+LocalDB, program geliştirmeye yönelik SQL Server Express veritabanı altyapısının hafif bir sürümüdür. LocalDB, istek üzerine başlar ve kullanıcı modunda çalışır, bu nedenle karmaşık bir yapılandırma yoktur. Varsayılan olarak, LocalDB veritabanı `*.mdf` dizinde dosya oluşturur `C:\Users\<user>\` .
+
+<a name="ssox"></a>
+1. **Görünüm** menüsünden **SQL Server Nesne Gezgini** (ssox) öğesini açın.
+
+   ![Görünüm menüsü](sql/_static/5/ssox.png)
+
+1. Tabloya sağ tıklayıp `Movie` **Görünüm Tasarımcısı** ' nı seçin:
+
+   ![Film tablosunda açık bağlamsal menüler](sql/_static/5/design.png)
+
+   ![Tasarımcı 'da açık film tabloları](sql/_static/dv.png)
+
+   Seçeneğinin yanında bulunan anahtar simgesine göz önünde edin `ID` . Varsayılan olarak, EF birincil anahtar için adlı bir özellik oluşturur `ID` .
+
+1. Tabloya sağ tıklayın `Movie` ve **verileri görüntüle** ' yi seçin:
+
+   ![Tablo verilerini gösteren film tablosu açma](sql/_static/vd22.png)
+
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
+
+## <a name="sqlite"></a>SQLite
+
+[SQLite](https://www.sqlite.org/) Web sitesi şunları belirtir:
+
+> SQLite, kendinden bağımsız, yüksek güvenilirlik, gömülü, tam özellikli, genel etki alanı, SQL veritabanı altyapısı. SQLite, dünyanın en çok kullanılan veritabanı altyapısıdır.
+
+Bir SQLite veritabanını yönetmek ve görüntülemek için indirebileceğiniz birçok üçüncü taraf araç vardır. Aşağıdaki görüntü, [SQLite Için veritabanı tarayıcısıdır](https://sqlitebrowser.org/). En sevdiğiniz bir SQLite aracınız varsa, onunla ilgili olarak istediğiniz gibi bir yorum bırakın.
+
+![Film veritabanını gösteren SQLite için DB tarayıcısı](~/tutorials/first-mvc-app-xplat/working-with-sql/_static/dbb.png)
+
+> [!NOTE]
+> Bu öğreticide, Entity Framework Core *geçişleri* özelliği mümkün olan yerlerde kullanılır. Geçişler, veritabanı şemasını veri modelindeki değişikliklerle eşleşecek şekilde güncelleştirir. Ancak, geçişler yalnızca EF Core sağlayıcının desteklediği değişiklik türlerini yapabilir ve SQLite sağlayıcının özellikleri sınırlıdır. Örneğin, bir sütun ekleme desteklenir, ancak bir sütunun kaldırılması veya değiştirilmesi desteklenmez. Bir sütunu kaldırmak veya değiştirmek için bir geçiş oluşturulursa, `ef migrations add` komut başarılı olur ancak `ef database update` komut başarısız olur. Bu kısıtlamalar nedeniyle, bu öğretici SQLite şema değişiklikleri için geçişleri kullanmaz. Bunun yerine, şema değiştiğinde veritabanı bırakılır ve yeniden oluşturulur.
+>
+>SQLite sınırlamalarına yönelik geçici çözüm, tablodaki bir şeyler değiştiğinde tablo yeniden oluşturmak için geçiş kodunu el ile yazmak için kullanılır. Tablo yeniden oluşturma şunları içerir:
+>
+>* Yeni bir tablo oluşturuluyor.
+>* Eski tablodaki veriler yeni tabloya kopyalanıyor.
+>* Eski tablo bırakılıyor.
+>* Yeni tablo yeniden adlandırılıyor.
+>
+>Daha fazla bilgi için aşağıdaki kaynaklara bakın:
+> * [SQLite EF Core veritabanı sağlayıcısı sınırlamaları](/ef/core/providers/sqlite/limitations)
+> * [Geçiş kodunu özelleştirme](/ef/core/managing-schemas/migrations/#customize-migration-code)
+> * [Veri çekirdeği oluşturma](/ef/core/modeling/data-seeding)
+> * [SQLite ALTER TABLE ifadesi](https://sqlite.org/lang_altertable.html)
+
+---
+
+## <a name="seed-the-database"></a>Veritabanını çekirdek
+
+Create`SeedData` *modeller* klasöründe aşağıdaki kodla adlı yeni bir sınıf:
+
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/SeedData.cs?name=snippet_1)]
+
+Veritabanında herhangi bir film varsa, tohum başlatıcısı döner ve hiçbir film eklenmez.
+
+```csharp
+if (context.Movie.Any())
+{
+    return;
+}
+```
+
+<a name="si"></a>
+
+### <a name="add-the-seed-initializer"></a>Tohum başlatıcısı ekleme
+
+*Program.cs* dosyasının içeriğini aşağıdaki kodla değiştirin:
+
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie50/Program.cs)]
+
+Önceki kodda, `Main` yöntemi aşağıdaki şekilde değiştirilmiştir:
+
+* Bağımlılık ekleme kapsayıcısından bir veritabanı bağlamı örneği alın.
+* Yöntemini çağırın `seedData.Initialize` , bunu veritabanı bağlamı örneğine geçirerek.
+* Çekirdek yöntemi tamamlandığında bağlamı atın. [Using deyimleri](https://docs.microsoft.com/dotnet/csharp/language-reference/keywords/using-statement) , içeriğin atılmasını sağlar.
+
+Çalıştırılmayan aşağıdaki özel durum oluşur `Update-Database` :
+
+> `SqlException: Cannot open database "RazorPagesMovieContext-" requested by the login. The login failed.`
+> `Login failed for user 'user name'.`
+
+### <a name="test-the-app"></a>Uygulamayı test etme
+
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+1. Delete veritabanındaki tüm kayıtlar. Tarayıcıda veya [Ssox](xref:tutorials/razor-pages/new-field#ssox) 'ten silme bağlantılarını kullanma
+
+1. Sınıfında yöntemleri çağırarak uygulamayı başlamaya zorlayın `Startup` , böylece çekirdek yöntemi çalışır. Başlatmayı zorlamak için IIS Express durdurulup yeniden başlatılması gerekir. Aşağıdaki yaklaşımlardan biriyle IIS 'yi durdurun ve yeniden başlatın:
+
+   1. Bildirim alanında IIS Express sistem tepsisi simgesine sağ tıklayın ve **Çıkış** veya **siteyi durdur** ' u seçin:
+
+      ![IIS Express sistem tepsisi simgesi](../first-mvc-app/working-with-sql/_static/iisExIcon.png)
+
+      ![Bağlamsal menü](sql/_static/stopIIS.png)
+
+   1. Uygulama hata ayıklamasız modda çalışıyorsa, hata ayıklama modunda çalıştırmak için <kbd>F5</kbd> tuşuna basın.
+   1. Uygulama hata ayıklama modunda olduğunda, hata ayıklayıcıyı durdurun ve <kbd>F5</kbd>tuşuna basın.
+
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
+
+Delete veritabanındaki tüm kayıtlar, bu nedenle çekirdek yöntemi çalışacaktır. Veritabanını temel alarak uygulamayı durdurup başlatın.
+
+---
+
+Uygulama, sağlanan verileri gösterir:
+
+![Film verilerini gösteren tarayıcıda açık film uygulaması](sql/_static/5/m55.png)
+
+## <a name="additional-resources"></a>Ek kaynaklar
+
+> [!div class="step-by-step"]
+> [Önceki: Scafkatlanmış Razor ](xref:tutorials/razor-pages/page) 
+>  [Sonraki sayfalar: sayfaları güncelleştirme](xref:tutorials/razor-pages/da1)
+
+::: moniker-end
+
+::: moniker range="< aspnetcore-5.0 >= aspnetcore-3.0"
+
+[Örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30) ([nasıl indirilir](xref:index#how-to-download-a-sample)).
+
+`RazorPagesMovieContext`Nesnesi veritabanına bağlanma ve `Movie` nesneleri veritabanı kayıtlarına eşleme görevini işler. Veritabanı bağlamı, Startup.cs içindeki yöntemde [bağımlılık ekleme](xref:fundamentals/dependency-injection) kapsayıcısına kaydedilir `ConfigureServices` : *Startup.cs*
+
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Startup.cs?name=snippet_ConfigureServices&highlight=15-18)]
+
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
+
+[!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Startup.cs?name=snippet_UseSqlite&highlight=11-12)]
+
+---
+
+ASP.NET Core [yapılandırma](xref:fundamentals/configuration/index) sistemi `ConnectionString` anahtarı okur. Yerel geliştirme için, yapılandırma bağlantı dizesini *appsettings.json* dosyadan alır.
+
+# <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
+
+Oluşturulan bağlantı dizesi aşağıdakine benzer olacaktır:
+
+[!code-json[](razor-pages-start/sample/RazorPagesMovie30/appsettings.json?highlight=10-12)]
+
+# <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
+
+[!code-json[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie/appsettings_SQLite.json?highlight=8-10)]
+
+---
+
+Uygulama bir test veya üretim sunucusuna dağıtıldığında, bağlantı dizesini bir test veya üretim veritabanı sunucusuna ayarlamak için bir ortam değişkeni kullanılabilir. Daha fazla bilgi için bkz. [yapılandırma](xref:fundamentals/configuration/index) .
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -85,23 +242,46 @@ Seçeneğinin yanında bulunan anahtar simgesine göz önünde edin `ID` . Varsa
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
-[!INCLUDE[](~/includes/rp/sqlite.md)]
-[!INCLUDE[](~/includes/RP-mvc-shared/sqlite-warn.md)]
+## <a name="sqlite"></a>SQLite
+
+[SQLite](https://www.sqlite.org/) Web sitesi şunları belirtir:
+
+> SQLite, kendinden bağımsız, yüksek güvenilirlik, gömülü, tam özellikli, genel etki alanı, SQL veritabanı altyapısı. SQLite, dünyanın en çok kullanılan veritabanı altyapısıdır.
+
+Bir SQLite veritabanını yönetmek ve görüntülemek için indirebileceğiniz birçok üçüncü taraf araç vardır. Aşağıdaki görüntü, [SQLite Için veritabanı tarayıcısıdır](https://sqlitebrowser.org/). En sevdiğiniz bir SQLite aracınız varsa, onunla ilgili olarak istediğiniz gibi bir yorum bırakın.
+
+![Film veritabanını gösteren SQLite için DB tarayıcısı](~/tutorials/first-mvc-app-xplat/working-with-sql/_static/dbb.png)
+
+> [!NOTE]
+> Bu öğreticide, Entity Framework Core *geçişleri* özelliği mümkün olan yerlerde kullanılır. Geçişler, veritabanı şemasını veri modelindeki değişikliklerle eşleşecek şekilde güncelleştirir. Ancak, geçişler yalnızca EF Core sağlayıcının desteklediği değişiklik türlerini yapabilir ve SQLite sağlayıcının özellikleri sınırlıdır. Örneğin, bir sütun ekleme desteklenir, ancak bir sütunun kaldırılması veya değiştirilmesi desteklenmez. Bir sütunu kaldırmak veya değiştirmek için bir geçiş oluşturulursa, `ef migrations add` komut başarılı olur ancak `ef database update` komut başarısız olur. Bu kısıtlamalar nedeniyle, bu öğretici SQLite şema değişiklikleri için geçişleri kullanmaz. Bunun yerine, şema değiştiğinde veritabanı bırakılır ve yeniden oluşturulur.
+>
+>SQLite sınırlamalarına yönelik geçici çözüm, tablodaki bir şeyler değiştiğinde tablo yeniden oluşturmak için geçiş kodunu el ile yazmak için kullanılır. Tablo yeniden oluşturma şunları içerir:
+>
+>* Yeni bir tablo oluşturuluyor.
+>* Eski tablodaki veriler yeni tabloya kopyalanıyor.
+>* Eski tablo bırakılıyor.
+>* Yeni tablo yeniden adlandırılıyor.
+>
+>Daha fazla bilgi için aşağıdaki kaynaklara bakın:
+> * [SQLite EF Core veritabanı sağlayıcısı sınırlamaları](/ef/core/providers/sqlite/limitations)
+> * [Geçiş kodunu özelleştirme](/ef/core/managing-schemas/migrations/#customize-migration-code)
+> * [Veri çekirdeği oluşturma](/ef/core/modeling/data-seeding)
+> * [SQLite ALTER TABLE ifadesi](https://sqlite.org/lang_altertable.html)
 
 ---
 
 ## <a name="seed-the-database"></a>Veritabanını çekirdek
 
-`SeedData` *Modeller* klasöründe aşağıdaki kodla adlı yeni bir sınıf oluşturun:
+Create`SeedData` *modeller* klasöründe aşağıdaki kodla adlı yeni bir sınıf:
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Models/SeedData.cs?name=snippet_1)]
 
-VERITABANıNDA herhangi bir film varsa, tohum başlatıcısı döner ve hiçbir film eklenmez.
+Veritabanında herhangi bir film varsa, tohum başlatıcısı döner ve hiçbir film eklenmez.
 
 ```csharp
 if (context.Movie.Any())
 {
-    return;   // DB has been seeded.
+    return;
 }
 ```
 
@@ -109,15 +289,15 @@ if (context.Movie.Any())
 
 ### <a name="add-the-seed-initializer"></a>Tohum başlatıcısı ekleme
 
-*Program.cs* ' de, `Main` aşağıdakileri yapmak için yöntemini değiştirin:
-
-* Bağımlılık ekleme kapsayıcısından bir DB bağlam örneği alın.
-* Temel yöntemi çağırın ve bu yönteme geçerek bağlamı geçer.
-* Çekirdek yöntemi tamamlandığında bağlamı atın.
-
-Aşağıdaki kod güncelleştirilmiş *program.cs* dosyasını gösterir.
+*Program.cs* dosyasının içeriğini aşağıdaki kodla değiştirin:
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie30/Program.cs)]
+
+Önceki kodda, `Main` yöntemi aşağıdaki şekilde değiştirilmiştir:
+
+* Bağımlılık ekleme kapsayıcısından bir veritabanı bağlamı örneği alın.
+* Yöntemini çağırın `seedData.Initialize` , bunu veritabanı bağlamı örneğine geçirerek.
+* Çekirdek yöntemi tamamlandığında bağlamı atın. [Using deyimleri](https://docs.microsoft.com/dotnet/csharp/language-reference/keywords/using-statement) , içeriğin atılmasını sağlar.
 
 Çalıştırılmayan aşağıdaki özel durum oluşur `Update-Database` :
 
@@ -128,8 +308,8 @@ Aşağıdaki kod güncelleştirilmiş *program.cs* dosyasını gösterir.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* VERITABANıNDAKI tüm kayıtları silin. Bunu, tarayıcıda veya [Ssox](xref:tutorials/razor-pages/new-field#ssox) 'ten silme bağlantılarıyla yapabilirsiniz
-* Çekirdek yöntemin çalışması için uygulamayı başlamaya zorlayın (sınıftaki yöntemleri çağırın `Startup` ). Başlatmayı zorlamak için IIS Express durdurulup yeniden başlatılması gerekir. Bunu aşağıdaki yaklaşımlardan biriyle yapabilirsiniz:
+* Delete veritabanındaki tüm kayıtlar. Tarayıcıda veya [Ssox](xref:tutorials/razor-pages/new-field#ssox)'ten silme bağlantılarını kullanın.
+* Sınıfında yöntemleri çağırarak uygulamayı başlamaya zorlayın `Startup` , böylece çekirdek yöntemi çalışır. Başlatmayı zorlamak için IIS Express durdurulup yeniden başlatılması gerekir. Aşağıdaki yaklaşımlardan biriyle IIS 'yi durdurun ve yeniden başlatın:
 
   * Bildirim alanında IIS Express sistem tepsisi simgesine sağ tıklayın ve **Çıkış** veya **siteyi durdur** ' a dokunun:
 
@@ -137,18 +317,18 @@ Aşağıdaki kod güncelleştirilmiş *program.cs* dosyasını gösterir.
 
     ![Bağlamsal menü](sql/_static/stopIIS.png)
 
-    * VS hata ayıklama modunda çalıştırıyorsanız, hata ayıklama modunda çalıştırmak için F5 tuşuna basın.
-    * Ile hata ayıklama modunda çalıştırıyorsanız, hata ayıklayıcıyı durdurun ve F5 tuşuna basın.
+    * Uygulama hata ayıklamasız modda çalışıyorsa, hata ayıklama modunda çalıştırmak için <kbd>F5</kbd> tuşuna basın.
+    * Uygulama hata ayıklama modunda olduğunda, hata ayıklayıcıyı durdurun ve <kbd>F5</kbd>tuşuna basın.
 
 # <a name="visual-studio-code--visual-studio-for-mac"></a>[Visual Studio Code/Mac için Visual Studio](#tab/visual-studio-code+visual-studio-mac)
 
-VERITABANıNDAKI tüm kayıtları silin (Bu nedenle çekirdek yöntemi çalışacaktır). Veritabanını temel alarak uygulamayı durdurup başlatın.
-
-Uygulama, sağlanan verileri gösterir.
+Delete veritabanındaki tüm kayıtlar, bu nedenle çekirdek yöntemi çalışacaktır. Veritabanını temel alarak uygulamayı durdurup başlatın.
 
 ---
 
-Sonraki öğreticide, verilerin sunumu gelişmeyecektir.
+Uygulama, sağlanan verileri gösterir:
+
+![Film verilerini gösteren Chrome 'da film uygulaması açık](sql/_static/m55https.png)
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
@@ -160,7 +340,7 @@ Sonraki öğreticide, verilerin sunumu gelişmeyecektir.
 
 ::: moniker range="< aspnetcore-3.0"
 
-[!INCLUDE[](~/includes/rp/download.md)]
+[Örnek kodu görüntüleyin veya indirin](https://github.com/dotnet/AspNetCore.Docs/tree/master/aspnetcore/tutorials/razor-pages/razor-pages-start) ([nasıl indirilir](xref:index#how-to-download-a-sample)).
 
 `RazorPagesMovieContext`Nesnesi veritabanına bağlanma ve `Movie` nesneleri veritabanı kayıtlarına eşleme görevini işler. Veritabanı bağlamı, Startup.cs içindeki yöntemde [bağımlılık ekleme](xref:fundamentals/dependency-injection) kapsayıcısına kaydedilir `ConfigureServices` : *Startup.cs*
 
@@ -179,11 +359,11 @@ Sonraki öğreticide, verilerin sunumu gelişmeyecektir.
 * [ASP.NET Core Için ab genel veri koruma yönetmeliği (GDPR) desteği](xref:security/gdpr) `CookiePolicyOptions` .
 * [SetCompatibilityVersion](xref:mvc/compatibility-version)
 
-ASP.NET Core [yapılandırma](xref:fundamentals/configuration/index) sistemi okur `ConnectionString` . Yerel geliştirme için, dosyadaki bağlantı dizesini alır *appsettings.json* .
+ASP.NET Core [yapılandırma](xref:fundamentals/configuration/index) sistemi `ConnectionString` anahtarı okur. Yerel geliştirme için, yapılandırma bağlantı dizesini *appsettings.json* dosyadan alır.
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-Veritabanı () için ad değeri, `Database={Database name}` üretilen kodunuz için farklı olacaktır. Ad değeri rastgele.
+Oluşturulan bağlantı dizesi aşağıdakine benzer olacaktır:
 
 [!code-json[](razor-pages-start/sample/RazorPagesMovie22/appsettings.json)]
 
@@ -197,7 +377,7 @@ Veritabanı () için ad değeri, `Database={Database name}` üretilen kodunuz i�
 
 ---
 
-Uygulama bir test veya üretim sunucusuna dağıtıldığında, bağlantı dizesini gerçek bir veritabanı sunucusuna ayarlamak için bir ortam değişkeni kullanılabilir. Daha fazla bilgi için bkz. [yapılandırma](xref:fundamentals/configuration/index) .
+Uygulama bir test veya üretim sunucusuna dağıtıldığında, bağlantı dizesini bir test veya üretim veritabanı sunucusuna ayarlamak için bir ortam değişkeni kullanılabilir. Daha fazla bilgi için bkz. [yapılandırma](xref:fundamentals/configuration/index) .
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
@@ -236,16 +416,16 @@ Seçeneğinin yanında bulunan anahtar simgesine göz önünde edin `ID` . Varsa
 
 ## <a name="seed-the-database"></a>Veritabanını çekirdek
 
-`SeedData` *Modeller* klasöründe aşağıdaki kodla adlı yeni bir sınıf oluşturun:
+Create`SeedData` *modeller* klasöründe aşağıdaki kodla adlı yeni bir sınıf:
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Models/SeedData.cs?name=snippet_1)]
 
-VERITABANıNDA herhangi bir film varsa, tohum başlatıcısı döner ve hiçbir film eklenmez.
+Veritabanında herhangi bir film varsa, tohum başlatıcısı döner ve hiçbir film eklenmez.
 
 ```csharp
 if (context.Movie.Any())
 {
-    return;   // DB has been seeded.
+    return;
 }
 ```
 
@@ -253,15 +433,15 @@ if (context.Movie.Any())
 
 ### <a name="add-the-seed-initializer"></a>Tohum başlatıcısı ekleme
 
-*Program.cs* ' de, `Main` aşağıdakileri yapmak için yöntemini değiştirin:
-
-* Bağımlılık ekleme kapsayıcısından bir DB bağlam örneği alın.
-* Temel yöntemi çağırın ve bu yönteme geçerek bağlamı geçer.
-* Çekirdek yöntemi tamamlandığında bağlamı atın.
-
-Aşağıdaki kod güncelleştirilmiş *program.cs* dosyasını gösterir.
+*Program.cs* dosyasının içeriğini aşağıdaki kodla değiştirin:
 
 [!code-csharp[](razor-pages-start/sample/RazorPagesMovie22/Program.cs)]
+
+Önceki kodda, `Main` yöntemi aşağıdaki şekilde değiştirilmiştir:
+
+* Bağımlılık ekleme kapsayıcısından bir veritabanı bağlamı örneği alın.
+* Yöntemini çağırın `seedData.Initialize` , bunu veritabanı bağlamı örneğine geçirerek.
+* Çekirdek yöntemi tamamlandığında bağlamı atın. [Using deyimleri](https://docs.microsoft.com/dotnet/csharp/language-reference/keywords/using-statement) , içeriğin atılmasını sağlar.
 
 Bir üretim uygulaması çağırmaz `Database.Migrate` . Çalıştırılmayan aşağıdaki özel durumu engellemek için önceki koda eklenir `Update-Database` :
 
@@ -272,8 +452,8 @@ SqlException: Razor oturum açma tarafından istenen "pagesmoviecontext-21" veri
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* VERITABANıNDAKI tüm kayıtları silin. Bunu, tarayıcıda veya [Ssox](xref:tutorials/razor-pages/new-field#ssox) 'ten silme bağlantılarıyla yapabilirsiniz
-* Çekirdek yöntemin çalışması için uygulamayı başlamaya zorlayın (sınıftaki yöntemleri çağırın `Startup` ). Başlatmayı zorlamak için IIS Express durdurulup yeniden başlatılması gerekir. Bunu aşağıdaki yaklaşımlardan biriyle yapabilirsiniz:
+* Delete veritabanındaki tüm kayıtlar. Bunu, tarayıcıda veya [Ssox](xref:tutorials/razor-pages/new-field#ssox) 'ten silme bağlantılarıyla yapabilirsiniz
+* Sınıfında yöntemleri çağırarak uygulamayı başlamaya zorlayın `Startup` , böylece çekirdek yöntemi çalışır. Başlatmayı zorlamak için IIS Express durdurulup yeniden başlatılması gerekir. Bunu aşağıdaki yaklaşımlardan biriyle yapabilirsiniz:
 
   * Bildirim alanında IIS Express sistem tepsisi simgesine sağ tıklayın ve **Çıkış** veya **siteyi durdur** ' a dokunun:
 
@@ -281,26 +461,22 @@ SqlException: Razor oturum açma tarafından istenen "pagesmoviecontext-21" veri
 
     ![Bağlamsal menü](sql/_static/stopIIS.png)
 
-    * VS hata ayıklama modunda çalıştırıyorsanız, hata ayıklama modunda çalıştırmak için F5 tuşuna basın.
-    * Ile hata ayıklama modunda çalıştırıyorsanız, hata ayıklayıcıyı durdurun ve F5 tuşuna basın.
+    * Uygulama hata ayıklamasız modda çalışıyorsa, hata ayıklama modunda çalıştırmak için <kbd>F5</kbd> tuşuna basın.
+    * Uygulama hata ayıklama modunda olduğunda, hata ayıklayıcıyı durdurun ve <kbd>F5</kbd>tuşuna basın.
 
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
-VERITABANıNDAKI tüm kayıtları silin (Bu nedenle çekirdek yöntemi çalışacaktır). Veritabanını temel alarak uygulamayı durdurup başlatın.
-
-Uygulama, sağlanan verileri gösterir.
+Delete veritabanındaki tüm kayıtlar, bu nedenle çekirdek yöntemi çalışacaktır. Veritabanını temel alarak uygulamayı durdurup başlatın.
 
 # <a name="visual-studio-for-mac"></a>[Mac için Visual Studio](#tab/visual-studio-mac)
 
-VERITABANıNDAKI tüm kayıtları silin (Bu nedenle çekirdek yöntemi çalışacaktır). Veritabanını temel alarak uygulamayı durdurup başlatın.
-
-Uygulama, sağlanan verileri gösterir.
+Delete veritabanındaki tüm kayıtlar, bu nedenle çekirdek yöntemi çalışacaktır. Veritabanını temel alarak uygulamayı durdurup başlatın.
 
 ---
 
 Uygulama, sağlanan verileri gösterir:
 
-![Film verilerini gösteren Chrome 'da film uygulaması açık](sql/_static/m55.png)
+![Film verilerini gösteren Chrome 'da film uygulaması açık](sql/_static/m55https.png)
 
 Sonraki öğretici, verilerin sunumunu temizler.
 

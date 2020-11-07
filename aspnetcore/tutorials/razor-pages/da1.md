@@ -1,10 +1,13 @@
 ---
-title: 5. bölüm, ASP.NET Core uygulamasında oluşturulan sayfaları güncelleştirme
+title: 5. kısım, oluşturulan sayfaları güncelleştirme
 author: rick-anderson
 description: Sayfalardaki eğitim serisinin 5. bölümü Razor .
 ms.author: riande
-ms.date: 12/20/2018
+ms.date: 09/20/2020
 no-loc:
+- Index
+- Create
+- Delete
 - appsettings.json
 - ASP.NET Core Identity
 - cookie
@@ -17,12 +20,12 @@ no-loc:
 - Razor
 - SignalR
 uid: tutorials/razor-pages/da1
-ms.openlocfilehash: 7d25dae67c928fa659654ce4ab34cfdad08b5300
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 7146c1955a578502a63578de4f1abce932cb8b32
+ms.sourcegitcommit: 342588e10ae0054a6d6dc0fd11dae481006be099
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93060072"
+ms.lasthandoff: 11/07/2020
+ms.locfileid: "94360614"
 ---
 # <a name="part-5-update-the-generated-pages-in-an-aspnet-core-app"></a>5. bölüm, ASP.NET Core uygulamasında oluşturulan sayfaları güncelleştirme
 
@@ -30,9 +33,9 @@ Gönderen [Rick Anderson](https://twitter.com/RickAndMSFT)
 
 ::: moniker range=">= aspnetcore-3.0"
 
-Yapı iskelesi film uygulamasının iyi bir başlangıcı vardır ancak sunum ideal değildir. **ReleaseDate** **Yayın tarihi** (iki sözcük) olmalıdır.
+Yapı iskelesi film uygulamasının iyi bir başlangıcı vardır ancak sunum ideal değildir. **ReleaseDate** iki sözcük, **Yayın tarihi** olmalıdır.
 
-![Chrome 'da açık film uygulaması](sql/_static/m55.png)
+![Chrome 'da açık film uygulaması](sql/_static/5/m55.png)
 
 ## <a name="update-the-generated-code"></a>Oluşturulan kodu Güncelleştir
 
@@ -40,21 +43,27 @@ Yapı iskelesi film uygulamasının iyi bir başlangıcı vardır ancak sunum id
 
 [!code-csharp[Main](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Models/MovieDateFixed.cs?name=snippet_1&highlight=3,12,17)]
 
-`[Column(TypeName = "decimal(18, 2)")]`Veri ek açıklaması, Entity Framework Core veritabanındaki para birimiyle doğru şekilde eşlenmesine olanak sağlar `Price` . Daha fazla bilgi için bkz. [veri türleri](/ef/core/modeling/relational/data-types).
+Önceki kodda:
 
-[Veri açıklamaları](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) sonraki öğreticide ele alınmıştır. [Display](/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.metadata.displaymetadata) özniteliği bir alanın adı için (Bu durumda "ReleaseDate" yerine "Yayın tarihi") görüntüleneceğini belirtir. [DataType](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.internal.datatypeattributeadapter) özniteliği verilerin türünü belirtir (Tarih), bu nedenle alanda depolanan zaman bilgileri gösterilmez.
+* `[Column(TypeName = "decimal(18, 2)")]`Veri ek açıklaması, Entity Framework Core veritabanındaki para birimiyle doğru şekilde eşlenmesine olanak sağlar `Price` . Daha fazla bilgi için bkz. [veri türleri](/ef/core/modeling/relational/data-types).
+* [[Display]](xref:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DisplayMetadata) özniteliği bir alanın görünen adını belirtir. Yukarıdaki kodda, "ReleaseDate" yerine "Yayın tarihi".
+* [[DataType]](xref:System.ComponentModel.DataAnnotations.DataTypeAttribute) özniteliği, veri türünü belirtir ( `Date` ). Alanda depolanan zaman bilgileri gösterilmez.
 
-Hedef URL 'yi görmek için sayfalara/filmlere gidin ve bir **düzenleme** bağlantısının üzerine gelin.
+[Veri açıklamaları](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) sonraki öğreticide ele alınmıştır.
 
-![Düzenleme bağlantısı üzerinde fare ile tarayıcı penceresi ve bağlantı URL 'Si http://localhost:1234/Movies/Edit/5 gösteriliyor](~/tutorials/razor-pages/da1/edit7.png)
+Hedef URL 'yi görmek için *sayfalara/filmlere* gidin ve bir **düzenleme** bağlantısının üzerine gelin.
 
-**Düzenle** , **Ayrıntılar** ve **Sil** bağlantıları, *Sayfalar/filmler/Index. cshtml* dosyasındaki [tutturucu etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) tarafından oluşturulur.
+![Düzenleme bağlantısı üzerinde fare ile tarayıcı penceresi ve bağlantı URL 'Si https://localhost:1234/Movies/Edit/5 gösteriliyor](~/tutorials/razor-pages/da1/edit7.png)
+
+**Düzenle** , **Ayrıntılar** ve bağlantılar, **Delete** *Sayfalar/filmler/ Index . cshtml* dosyasındaki [tutturucu etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) tarafından oluşturulur.
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?highlight=16-18&range=32-)]
 
-[Etiket Yardımcıları](xref:mvc/views/tag-helpers/intro) , sunucu tarafı kodun dosyalarda HTML öğeleri oluşturma ve işlemeye katılmasını sağlar Razor . Yukarıdaki kodda, `AnchorTagHelper` HTML öznitelik değerini sayfadan dinamik olarak oluşturur `href` Razor (yol göreli olur),, `asp-page` ve yol kimliği ( `asp-route-id` ). Daha fazla bilgi için bkz. [Sayfalar Için URL oluşturma](xref:razor-pages/index#url-generation-for-pages) .
+[Etiket Yardımcıları](xref:mvc/views/tag-helpers/intro) , sunucu tarafı kodun dosyalarda HTML öğeleri oluşturma ve işlemeye katılmasını sağlar Razor .
 
-Oluşturulan biçimlendirmeyi incelemek için sık kullandığınız tarayıcıdan **Görünüm kaynağını** kullanın. Oluşturulan HTML 'nin bir bölümü aşağıda gösterilmiştir:
+Yukarıdaki kodda, [tutturucu etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) , sayfada HTML öznitelik değerini dinamik olarak oluşturur `href` Razor (yol göreli olur),, `asp-page` ve yol tanımlayıcısı ( `asp-route-id` ). Daha fazla bilgi için bkz. [Sayfalar Için URL oluşturma](xref:razor-pages/index#url-generation-for-pages).
+
+Oluşturulan biçimlendirmeyi incelemek için bir tarayıcıdan **Görünüm kaynağı** ' nı kullanın. Oluşturulan HTML 'nin bir bölümü aşağıda gösterilmiştir:
 
 ```html
 <td>
@@ -64,11 +73,13 @@ Oluşturulan biçimlendirmeyi incelemek için sık kullandığınız tarayıcıd
 </td>
 ```
 
-Dinamik olarak oluşturulan bağlantılar film KIMLIĞINI bir sorgu dizesiyle (örneğin, `?id=1` içinde  `https://localhost:5001/Movies/Details?id=1` ) iletir.
+   Dinamik olarak oluşturulan bağlantılar film KIMLIĞINI bir sorgu dizesiyle iletir. Örneğin, `?id=1` içinde `https://localhost:5001/Movies/Details?id=1` .
 
 ### <a name="add-route-template"></a>Rota şablonu Ekle
 
-Razor"{İd: int}" yol şablonunu kullanmak Için düzenleme, Ayrıntılar ve silme sayfalarını güncelleştirin. Bu sayfaların her biri için Page yönergesini ' den ' `@page` e değiştirin `@page "{id:int}"` . Uygulamayı çalıştırın ve kaynağı görüntüleyin. Oluşturulan HTML, URL 'nin yol bölümüne KIMLIĞI ekler:
+Delete Razor Yol şablonunu kullanmak için düzenleme, Ayrıntılar ve sayfaları güncelleştirin `{id:int}` . Bu sayfaların her biri için Page yönergesini ' den ' `@page` e değiştirin `@page "{id:int}"` . Uygulamayı çalıştırın ve kaynağı görüntüleyin.
+
+Oluşturulan HTML, URL 'nin yol bölümüne KIMLIĞI ekler:
 
 ```html
 <td>
@@ -78,19 +89,21 @@ Razor"{İd: int}" yol şablonunu kullanmak Için düzenleme, Ayrıntılar ve sil
 </td>
 ```
 
-Tamsayıyı **içermeyen "** {id: int}" yol şablonuna sahip sayfaya yönelik bir Istek, HTTP 404 (bulunamadı) hatası döndürüyor. Örneğin, `http://localhost:5000/Movies/Details` bir 404 hatası döndürür. KIMLIĞI isteğe bağlı yapmak için `?` yol kısıtlamasına ekleyin:
+Tamsayı içermeyen yol şablonuna sahip sayfaya yönelik bir istek, `{id:int}` HTTP **not** 404 (bulunamadı) hatası döndürür. Örneğin, `https://localhost:5001/Movies/Details` bir 404 hatası döndürür. KIMLIĞI isteğe bağlı yapmak için `?` yol kısıtlamasına ekleyin:
 
- ```cshtml
+```cshtml
 @page "{id:int?}"
 ```
 
-Davranışını test etmek için `@page "{id:int?}"` :
+Davranışını test edin `@page "{id:int?}"` :
 
-* *Pages/filmler/details. cshtml* içindeki Page yönergesini olarak ayarlayın `@page "{id:int?}"` .
-* İçinde bir kesme noktası ayarlayın `public async Task<IActionResult> OnGetAsync(int? id)` ( *sayfalarda/filmlerde/details. cshtml. cs* ).
-* `https://localhost:5001/Movies/Details/` sayfasına gidin.
+1. *Pages/filmler/details. cshtml* içindeki Page yönergesini olarak ayarlayın `@page "{id:int?}"` .
+1. `public async Task<IActionResult> OnGetAsync(int? id)` *Sayfalarda/filmlerde/details. cshtml. cs* ' de bir kesme noktası ayarlayın.
+1. `https://localhost:5001/Movies/Details/` sayfasına gidin.
 
-`@page "{id:int}"`Yönergeyle, kesme noktası hiçbir şekilde vurılmaz. Yönlendirme Altyapısı HTTP 404 döndürür. Kullanarak `@page "{id:int?}"` , `OnGetAsync` yöntemi döndürür `NotFound` (HTTP 404).
+`@page "{id:int}"`Yönergeyle, kesme noktası hiçbir şekilde vurılmaz. Yönlendirme Altyapısı HTTP 404 döndürür. Kullanarak `@page "{id:int?}"` , `OnGetAsync` yöntemi döndürür `NotFound` (HTTP 404):
+
+[!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie50/Pages/Movies/Details.cshtml.cs?name=snippet1&highlight=10-13)]
 
 ### <a name="review-concurrency-exception-handling"></a>Eşzamanlılık özel durum işlemeyi gözden geçirme
 
@@ -98,14 +111,14 @@ Davranışını test etmek için `@page "{id:int?}"` :
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Edit.cshtml.cs?name=snippet)]
 
-Önceki kod, bir istemci filmi sildiği ve diğer istemci filmle değişiklik yaptığı zaman eşzamanlılık özel durumlarını algılar.
+Önceki kod, bir istemci filmi sildiğinde ve diğer istemci filmle değişiklik yaptığı zaman eşzamanlılık özel durumlarını algılar.
 
 Bloğu test etmek için `catch` :
 
-* Üzerinde bir kesme noktası ayarlayın `catch (DbUpdateConcurrencyException)`
-* Film için **Düzenle** ' yi seçin, değişiklikler yapın, ancak **Kaydet** ' i girmeyin.
-* Başka bir tarayıcı penceresinde, aynı filmin **Sil** bağlantısını seçin ve ardından filmi silin.
-* Önceki tarayıcı penceresinde filmdeki değişiklikleri gönderin.
+1. Üzerinde bir kesme noktası ayarlayın `catch (DbUpdateConcurrencyException)` .
+1. Film için **Düzenle** ' yi seçin, değişiklikler yapın, ancak **Kaydet** ' i girmeyin.
+1. Başka bir tarayıcı penceresinde, **Delete** aynı filmin bağlantısını seçin ve ardından filmi silin.
+1. Önceki tarayıcı penceresinde filmdeki değişiklikleri gönderin.
 
 Üretim kodu eşzamanlılık çakışmalarını algılamak isteyebilir. Daha fazla bilgi için bkz. [eşzamanlılık çakışmalarını işleme](xref:data/ef-rp/concurrency) .
 
@@ -115,10 +128,10 @@ Bloğu test etmek için `catch` :
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/SnapShots/Edit.cshtml.cs?name=snippet2)]
 
-Filmler/düzenleme sayfasına HTTP GET isteği yapıldığında (örneğin, `http://localhost:5000/Movies/Edit/2` ):
+Filmler/düzenleme sayfasına HTTP GET isteği yapıldığında, örneğin `https://localhost:5001/Movies/Edit/3` :
 
 * `OnGetAsync`Yöntemi, filmi veritabanından getirir ve `Page` yöntemi döndürür.
-* `Page`Yöntemi *Sayfalar/filmler/Edit. cshtml* Razor sayfasını işler. *Pages/filmler/Edit. cshtml* dosyası, `@model RazorPagesMovie.Pages.Movies.EditModel` film modelinin sayfada kullanılabilir olmasını sağlayan model yönergesini () içerir.
+* `Page`Yöntemi *Sayfalar/filmler/Edit. cshtml* Razor sayfasını işler. *Pages/filmler/Edit. cshtml* dosyası model yönergesini içerir `@model RazorPagesMovie.Pages.Movies.EditModel` , bu da film modelini sayfada kullanılabilir hale getirir.
 * Düzenleme formu filmdeki değerlerle birlikte görüntülenir.
 
 Filmler/Düzenle sayfası gönderildiğinde:
@@ -130,10 +143,10 @@ Filmler/Düzenle sayfası gönderildiğinde:
   public Movie Movie { get; set; }
   ```
 
-* Model durumunda hatalar varsa (örneğin, `ReleaseDate` bir tarihe dönüştürülemez), form gönderilen değerlerle yeniden görüntülenir.
+* Model durumunda hatalar varsa, örneğin, `ReleaseDate` bir tarihe dönüştürülemiyorsa, form gönderilen değerlerle birlikte görüntülenir.
 * Model hatası yoksa, film kaydedilir.
 
-Dizin, oluşturma ve silme sayfalarında HTTP GET yöntemleri Razor benzer bir düzene uyar. `OnPostAsync`Oluşturma SAYFASıNDAKI http post yöntemi, Razor `OnPostAsync` düzenleme sayfasındaki yöntemine benzer bir düzen izler Razor .
+, Ve sayfalarındaki HTTP GET metotları Index Create Delete Razor benzer bir düzene uyar. Sayfadaki HTTP POST `OnPostAsync` yöntemi, Create Razor düzenleme sayfasındaki yöntemine benzer bir düzen izler `OnPostAsync` Razor .
 
 ## <a name="additional-resources"></a>Ek kaynaklar
 
@@ -145,9 +158,9 @@ Dizin, oluşturma ve silme sayfalarında HTTP GET yöntemleri Razor benzer bir d
 
 ::: moniker range="< aspnetcore-3.0"
 
-Yapı iskelesi film uygulamasının iyi bir başlangıcı vardır ancak sunum ideal değildir. **ReleaseDate** **Yayın tarihi** (iki sözcük) olmalıdır.
+Yapı iskelesi film uygulamasının iyi bir başlangıcı vardır ancak sunum ideal değildir. **ReleaseDate** iki sözcük, **Yayın tarihi** olmalıdır.
 
-![Chrome 'da açık film uygulaması](sql/_static/m55.png)
+![Chrome 'da açık film uygulaması](sql/_static/m55https.png)
 
 ## <a name="update-the-generated-code"></a>Oluşturulan kodu Güncelleştir
 
@@ -157,19 +170,19 @@ Yapı iskelesi film uygulamasının iyi bir başlangıcı vardır ancak sunum id
 
 `[Column(TypeName = "decimal(18, 2)")]`Veri ek açıklaması, Entity Framework Core veritabanındaki para birimiyle doğru şekilde eşlenmesine olanak sağlar `Price` . Daha fazla bilgi için bkz. [veri türleri](/ef/core/modeling/relational/data-types).
 
-[Veri açıklamaları](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) sonraki öğreticide ele alınmıştır. [Display](/dotnet/api/microsoft.aspnetcore.mvc.modelbinding.metadata.displaymetadata) özniteliği bir alanın adı için (Bu durumda "ReleaseDate" yerine "Yayın tarihi") görüntüleneceğini belirtir. [DataType](/dotnet/api/microsoft.aspnetcore.mvc.dataannotations.internal.datatypeattributeadapter) özniteliği verilerin türünü belirtir (Tarih), bu nedenle alanda depolanan zaman bilgileri gösterilmez.
+[Veri açıklamaları](/aspnet/mvc/overview/older-versions/mvc-music-store/mvc-music-store-part-6) sonraki öğreticide ele alınmıştır. [[Display]](xref:Microsoft.AspNetCore.Mvc.ModelBinding.Metadata.DisplayMetadata) özniteliği, "ReleaseDate" yerine "Yayın tarihi" Bu örnekte, bir alanın adı için nelerin gösterileceğini belirtir. [DataType](xref:System.ComponentModel.DataAnnotations.DataTypeAttribute) özniteliği verilerin türünü belirtir ( `Date` ), bu nedenle alanda depolanan zaman bilgileri gösterilmez.
 
 Hedef URL 'yi görmek için sayfalara/filmlere gidin ve bir **düzenleme** bağlantısının üzerine gelin.
 
 ![Düzenleme bağlantısı üzerinde fare ile tarayıcı penceresi ve bağlantı URL 'Si http://localhost:1234/Movies/Edit/5 gösteriliyor](~/tutorials/razor-pages/da1/edit7.png)
 
-**Düzenle** , **Ayrıntılar** ve **Sil** bağlantıları, *Sayfalar/filmler/Index. cshtml* dosyasındaki [tutturucu etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) tarafından oluşturulur.
+**Düzenle** , **Ayrıntılar** ve bağlantılar, **Delete** *Sayfalar/filmler/ Index . cshtml* dosyasındaki [tutturucu etiketi Yardımcısı](xref:mvc/views/tag-helpers/builtin-th/anchor-tag-helper) tarafından oluşturulur.
 
 [!code-cshtml[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Index.cshtml?highlight=16-18&range=32-)]
 
 [Etiket Yardımcıları](xref:mvc/views/tag-helpers/intro) , sunucu tarafı kodun dosyalarda HTML öğeleri oluşturma ve işlemeye katılmasını sağlar Razor . Yukarıdaki kodda, `AnchorTagHelper` HTML öznitelik değerini sayfadan dinamik olarak oluşturur `href` Razor (yol göreli olur),, `asp-page` ve yol kimliği ( `asp-route-id` ). Daha fazla bilgi için bkz. [Sayfalar Için URL oluşturma](xref:razor-pages/index#url-generation-for-pages) .
 
-Oluşturulan biçimlendirmeyi incelemek için sık kullandığınız tarayıcıdan **Görünüm kaynağını** kullanın. Oluşturulan HTML 'nin bir bölümü aşağıda gösterilmiştir:
+Oluşturulan biçimlendirmeyi incelemek için bir tarayıcıdan **Görünüm kaynağı** ' nı kullanın. Oluşturulan HTML 'nin bir bölümü aşağıda gösterilmiştir:
 
 ```html
 <td>
@@ -179,9 +192,9 @@ Oluşturulan biçimlendirmeyi incelemek için sık kullandığınız tarayıcıd
 </td>
 ```
 
-Dinamik olarak oluşturulan bağlantılar film KIMLIĞINI bir sorgu dizesiyle (örneğin, `?id=1` içinde  `https://localhost:5001/Movies/Details?id=1` ) iletir.
+Dinamik olarak oluşturulan bağlantılar film KIMLIĞINI bir sorgu dizesiyle iletir. Örneğin, `?id=1` içinde  `https://localhost:5001/Movies/Details?id=1` .
 
-Razor"{İd: int}" yol şablonunu kullanmak Için düzenleme, Ayrıntılar ve silme sayfalarını güncelleştirin. Bu sayfaların her biri için Page yönergesini ' den ' `@page` e değiştirin `@page "{id:int}"` . Uygulamayı çalıştırın ve kaynağı görüntüleyin. Oluşturulan HTML, URL 'nin yol bölümüne KIMLIĞI ekler:
+Delete Razor "{İd: int}" yol şablonunu kullanmak için düzenleme, Ayrıntılar ve sayfaları güncelleştirin. Bu sayfaların her biri için Page yönergesini ' den ' `@page` e değiştirin `@page "{id:int}"` . Uygulamayı çalıştırın ve kaynağı görüntüleyin. Oluşturulan HTML, URL 'nin yol bölümüne KIMLIĞI ekler:
 
 ```html
 <td>
@@ -191,7 +204,7 @@ Razor"{İd: int}" yol şablonunu kullanmak Için düzenleme, Ayrıntılar ve sil
 </td>
 ```
 
-Tamsayıyı **içermeyen "** {id: int}" yol şablonuna sahip sayfaya yönelik bir Istek, HTTP 404 (bulunamadı) hatası döndürüyor. Örneğin, `http://localhost:5000/Movies/Details` bir 404 hatası döndürür. KIMLIĞI isteğe bağlı yapmak için `?` yol kısıtlamasına ekleyin:
+Tamsayıyı **içermeyen "** {id: int}" yol şablonuna sahip sayfaya yönelik bir Istek, HTTP 404 (bulunamadı) hatası döndürüyor. Örneğin, `https://localhost:5001/Movies/Details` bir 404 hatası döndürür. KIMLIĞI isteğe bağlı yapmak için `?` yol kısıtlamasına ekleyin:
 
  ```cshtml
 @page "{id:int?}"
@@ -200,10 +213,12 @@ Tamsayıyı **içermeyen "** {id: int}" yol şablonuna sahip sayfaya yönelik bi
 Davranışını test etmek için `@page "{id:int?}"` :
 
 * *Pages/filmler/details. cshtml* içindeki Page yönergesini olarak ayarlayın `@page "{id:int?}"` .
-* İçinde bir kesme noktası ayarlayın `public async Task<IActionResult> OnGetAsync(int? id)` ( *sayfalarda/filmlerde/details. cshtml. cs* ).
+* `public async Task<IActionResult> OnGetAsync(int? id)` *Sayfalarda/filmlerde/details. cshtml. cs* ' de bir kesme noktası ayarlayın.
 * `https://localhost:5001/Movies/Details/` sayfasına gidin.
 
-`@page "{id:int}"`Yönergeyle, kesme noktası hiçbir şekilde vurılmaz. Yönlendirme Altyapısı HTTP 404 döndürür. Kullanarak `@page "{id:int?}"` , `OnGetAsync` yöntemi döndürür `NotFound` (HTTP 404).
+`@page "{id:int}"`Yönergeyle, kesme noktası hiçbir şekilde vurılmaz. Yönlendirme Altyapısı HTTP 404 döndürür. Kullanarak `@page "{id:int?}"` , `OnGetAsync` yöntemi döndürür `NotFound` (HTTP 404):
+
+[!code-csharp[](~/tutorials/razor-pages/razor-pages-start/sample/RazorPagesMovie30/Pages/Movies/Details.cshtml.cs?name=snippet1&highlight=10-13)]
 
 ### <a name="review-concurrency-exception-handling"></a>Eşzamanlılık özel durum işlemeyi gözden geçirme
 
@@ -217,7 +232,7 @@ Bloğu test etmek için `catch` :
 
 * Üzerinde bir kesme noktası ayarlayın `catch (DbUpdateConcurrencyException)`
 * Film için **Düzenle** ' yi seçin, değişiklikler yapın, ancak **Kaydet** ' i girmeyin.
-* Başka bir tarayıcı penceresinde, aynı filmin **Sil** bağlantısını seçin ve ardından filmi silin.
+* Başka bir tarayıcı penceresinde, **Delete** aynı filmin bağlantısını seçin ve ardından filmi silin.
 * Önceki tarayıcı penceresinde filmdeki değişiklikleri gönderin.
 
 Üretim kodu eşzamanlılık çakışmalarını algılamak isteyebilir. Daha fazla bilgi için bkz. [eşzamanlılık çakışmalarını işleme](xref:data/ef-rp/concurrency) .
@@ -228,10 +243,10 @@ Bloğu test etmek için `catch` :
 
 [!code-csharp[](~/tutorials/razor-pages/razor-pages-start/snapshot_sample/RazorPagesMovie/Pages/Movies/Edit21.cshtml.cs?name=snippet2)]
 
-Filmler/düzenleme sayfasına HTTP GET isteği yapıldığında (örneğin, `http://localhost:5000/Movies/Edit/2` ):
+Filmler/düzenleme sayfasına HTTP GET isteği yapıldığında, örneğin `https://localhost:5001/Movies/Edit/3` :
 
 * `OnGetAsync`Yöntemi, filmi veritabanından getirir ve `Page` yöntemi döndürür. 
-* `Page`Yöntemi *Sayfalar/filmler/Edit. cshtml* Razor sayfasını işler. *Pages/filmler/Edit. cshtml* dosyası, `@model RazorPagesMovie.Pages.Movies.EditModel` film modelinin sayfada kullanılabilir olmasını sağlayan model yönergesini () içerir.
+* `Page`Yöntemi *Sayfalar/filmler/Edit. cshtml* Razor sayfasını işler. *Pages/filmler/Edit. cshtml* dosyası model yönergesini içerir `@model RazorPagesMovie.Pages.Movies.EditModel` , bu da film modelini sayfada kullanılabilir hale getirir.
 * Düzenleme formu filmdeki değerlerle birlikte görüntülenir.
 
 Filmler/Düzenle sayfası gönderildiğinde:
@@ -243,10 +258,10 @@ Filmler/Düzenle sayfası gönderildiğinde:
   public Movie Movie { get; set; }
   ```
 
-* Model durumunda hatalar varsa (örneğin, `ReleaseDate` bir tarihe dönüştürülemez), form gönderilen değerlerle birlikte görüntülenir.
+* Model durumunda hatalar varsa, örneğin, `ReleaseDate` bir tarihe dönüştürülemiyorsa, form gönderilen değerlerle birlikte görüntülenir.
 * Model hatası yoksa, film kaydedilir.
 
-Dizin, oluşturma ve silme sayfalarında HTTP GET yöntemleri Razor benzer bir düzene uyar. `OnPostAsync`Oluşturma SAYFASıNDAKI http post yöntemi, Razor `OnPostAsync` düzenleme sayfasındaki yöntemine benzer bir düzen izler Razor .
+, Ve sayfalarındaki HTTP GET metotları Index Create Delete Razor benzer bir düzene uyar. Sayfadaki HTTP POST `OnPostAsync` yöntemi, Create Razor düzenleme sayfasındaki yöntemine benzer bir düzen izler `OnPostAsync` Razor .
 
 Arama sonraki öğreticiye eklenir.
 

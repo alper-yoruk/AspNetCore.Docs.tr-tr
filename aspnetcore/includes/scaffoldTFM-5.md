@@ -1,0 +1,21 @@
+Bir yapı iskelesi hatası alırsanız, hedef çerçeve adının (tfd) proje dosyasındaki NuGet paket sürümüyle eşleştiğini doğrulayın. Örneğin, aşağıdaki proje dosyası .NET için 5,0 sürümünü ve listelenen NuGet paketlerini kullanır:
+
+```xml
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.0-*" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0-*" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.0-*" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="5.0.0-*" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.0-*" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.0-*" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.0-*" />
+  </ItemGroup>
+
+</Project>
+```
