@@ -18,12 +18,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-rp/intro
-ms.openlocfilehash: 74f65b916c2d5b7de61ec29f4259a51584ee5989
-ms.sourcegitcommit: 33f631a4427b9a422755601ac9119953db0b4a3e
+ms.openlocfilehash: 5849f4bfb9d0355177ceb5c2f4236c6d39dd9e92
+ms.sourcegitcommit: bb475e69cb647f22cf6d2c6f93d0836c160080d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/05/2020
-ms.locfileid: "93365424"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "94340042"
 ---
 # <a name="no-locrazor-pages-with-entity-framework-core-in-aspnet-core---tutorial-1-of-8"></a>Razor ASP.NET Core Entity Framework Core olan sayfalar-öğretici 1/8
 
@@ -119,12 +119,16 @@ To run the app after downloading the completed project:
 
 # <a name="visual-studio"></a>[Visual Studio](#tab/visual-studio)
 
-* Visual Studio 'Yu başlatın ve **Yeni proje oluştur** ' u seçin.
-* **ASP.NET Core Web uygulaması** > **İleri ' yi** seçin.
-* Projeyi *Contosouniversity* olarak adlandırın. Büyük harfler de dahil olmak üzere bu tam adı kullanmak önemlidir, bu nedenle kod kopyalanıp yapıştırılırken ad alanları eşleşir.
-* **Oluştur** ’u seçin.
-* Açılan menüden **.NET Core** ve **5,0 ASP.NET Core** seçin ve ardından **Web uygulaması** ' nı seçin.
-
+1. Visual Studio 'Yu başlatın ve **Yeni proje oluştur** ' u seçin.
+1. **Yeni proje oluştur** iletişim kutusunda **ASP.NET Core Web uygulaması** > **İleri** ' yi seçin.
+1. **Yeni projenizi yapılandırın** Iletişim kutusunda `ContosoUniversity` **Proje adı** ' nı girin. Büyük harfler de dahil olmak üzere bu tam adı kullanmak önemlidir. bu nedenle, `namespace` Kod kopyalanırken her biri eşleşir.
+1. **Oluştur** ’u seçin.
+1. **Yeni ASP.NET Core Web uygulaması oluştur** iletişim kutusunda şunları seçin:
+    1. **.NET Core** ve **ASP.NET Core 5,0** açılır.
+    1. **ASP.NET Core Web uygulaması (Model-View-Controller)**.
+    1. **Create** 
+       Oluştur ![ Yeni ASP.NET Core projesi iletişim kutusu](~/data/ef-mvc/intro/_static/new-aspnet5.png)
+    
 # <a name="visual-studio-code"></a>[Visual Studio Code](#tab/visual-studio-code)
 
 * Bir terminalde, proje klasörünün oluşturulması gereken klasöre gidin.

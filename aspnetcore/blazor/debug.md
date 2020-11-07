@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/debug
-ms.openlocfilehash: 669ebaf6dcd05561340aefda4a75b6fe1068d207
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: b7e246c20bf12f8ddf07cff54864836cb535aa60
+ms.sourcegitcommit: bb475e69cb647f22cf6d2c6f93d0836c160080d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93056198"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "94340003"
 ---
 # <a name="debug-aspnet-core-no-locblazor-webassembly"></a>Hata ayıklama ASP.NET Core Blazor WebAssembly
 
@@ -56,6 +56,8 @@ Hata ayıklama aşağıdaki tarayıcılardan birini gerektirir:
 
 * Google Chrome (sürüm 70 veya üzeri) (varsayılan)
 * Microsoft Edge (sürüm 80 veya üzeri)
+
+Güvenlik duvarları veya proxy 'lerin hata ayıklama proxy 'si (işlem) ile iletişimi engellemediğinden emin olun `NodeJS` . Daha fazla bilgi için [güvenlik duvarı yapılandırması](#firewall-configuration) bölümüne bakın.
 
 Mac için Visual Studio Sürüm 8,8 (derleme 1532) veya üzeri gerektirir:
 
@@ -339,6 +341,23 @@ Blazor[Chrome DevTools protokolünü](https://chromedevtools.github.io/devtools-
 
 Tarayıcı kaynak haritaları tarayıcının derlenmiş dosyaları özgün kaynak dosyalarına geri eşlemesine ve istemci tarafı hata ayıklama için yaygın olarak kullanılmasına izin verir. Ancak, Blazor Şu anda C# ' yi doğrudan JavaScript/te olarak eşleştirmez. Bunun yerine, Blazor tarayıcı IÇINDE Il yorumu yapar, bu nedenle kaynak haritaları ilgili değildir.
 
+## <a name="firewall-configuration"></a>Güvenlik duvarı yapılandırması
+
+Bir güvenlik duvarı hata ayıklama proxy 'si ile iletişimi engelliyorsa, tarayıcı ve işlem arasında iletişime izin veren bir güvenlik duvarı özel durumu kuralı oluşturun `NodeJS` .
+
+> [!WARNING]
+> Güvenlik güvenliği güvenlik açıklarını oluşturmaktan kaçınmak için bir güvenlik duvarı yapılandırmasının değiştirilmesi dikkatli yapılmalıdır. Güvenlik kılavuzunu dikkatle uygulayın, en iyi güvenlik uygulamalarını izleyin ve güvenlik duvarının üreticisi tarafından verilen uyarıları dikkate edin.
+>
+> İşlemle iletişimi açmaya izin verme `NodeJS` :
+>
+> * Güvenlik duvarının özelliklerine ve yapılandırmasına bağlı olarak düğüm sunucusunu herhangi bir bağlantıda açar.
+> * Ağınıza bağlı olarak riskli olabilir.
+> * **Yalnızca geliştirici makinelerinde önerilir.**
+>
+> Mümkünse, yalnızca `NodeJS` **Güvenilen veya özel ağlardaki** işlemle açık iletişime izin verin.
+
+[Windows Güvenlik Duvarı](/windows/security/threat-protection/windows-firewall/windows-firewall-with-advanced-security) yapılandırma kılavuzu için bkz. [bir gelen program veya hizmet kuralı oluşturma](/windows/security/threat-protection/windows-firewall/create-an-inbound-program-or-service-rule). Daha fazla bilgi için Windows Güvenlik Duvarı belge kümesindeki [Gelişmiş Güvenlik Özellikli Windows Defender güvenlik duvarı](/windows/security/threat-protection/windows-firewall/windows-firewall-with-advanced-security) ve ilgili makalelere bakın.
+
 ## <a name="troubleshoot"></a>Sorun giderme
 
 Hatalar halinde çalıştırıyorsanız, aşağıdaki ipuçları yardımcı olabilir:
@@ -349,6 +368,7 @@ Hatalar halinde çalıştırıyorsanız, aşağıdaki ipuçları yardımcı olab
 * Ortamınız bir HTTP proxy kullanıyorsa, `localhost` proxy atlama ayarlarına dahil edildiğinden emin olun. Bu, `NO_PROXY` ortam değişkeni şu şekilde ayarlanarak yapılabilir:
   * `launchSettings.json`Projenin dosyası.
   * Kullanıcı veya sistem ortamı değişkenleri düzeyinde tüm uygulamalara uygulanır. Bir ortam değişkeni kullanırken, değişikliğin etkili olması için Visual Studio 'Yu yeniden başlatın.
+* Güvenlik duvarları veya proxy 'lerin hata ayıklama proxy 'si (işlem) ile iletişimi engellemediğinden emin olun `NodeJS` . Daha fazla bilgi için [güvenlik duvarı yapılandırması](#firewall-configuration) bölümüne bakın.
 
 ### <a name="breakpoints-in-oninitializedasync-not-hit"></a>`OnInitialized{Async}`İsabet bulunmayan kesme noktaları
 

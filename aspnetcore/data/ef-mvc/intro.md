@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: data/ef-mvc/intro
-ms.openlocfilehash: 77cf1e9ad51b7044a35e1a9b2c125b0fdd91435e
-ms.sourcegitcommit: 33f631a4427b9a422755601ac9119953db0b4a3e
+ms.openlocfilehash: ef1d94ce7a0aa853336260b8d73b9d4036c907ac
+ms.sourcegitcommit: bb475e69cb647f22cf6d2c6f93d0836c160080d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 11/05/2020
-ms.locfileid: "93365385"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "94340016"
 ---
 # <a name="tutorial-get-started-with-ef-core-in-an-aspnet-mvc-web-app"></a>Öğretici: bir ASP.NET MVC web uygulamasında EF Core kullanmaya başlama
 
@@ -73,11 +73,15 @@ Kullanıcılar öğrenci, kurs ve eğitmen bilgilerini görüntüleyebilir ve g�
 
 ## <a name="create-web-app"></a>Web uygulaması oluşturma
 
-* Visual Studio 'yu başlatın ve **ardından ASP.NET Core Web uygulaması** ' nı seçin > **NEXT**.
-* Projeyi adlandırın `ContosoUniversity` . Büyük harfler de dahil olmak üzere bu tam adı kullanmak önemlidir, bu nedenle kod kopyalanırken ad alanları eşleşir.
-* **Oluştur** ’u seçin.
-* Açılan menüden **.NET Core** ve **5,0 ASP.NET Core** seçin ve ardından **Web uygulaması (Model-View-Controller)** şablonu ' nu seçin.
-  ![Yeni ASP.NET Core projesi iletişim kutusu](intro/_static/new-aspnet5.png)
+1. Visual Studio 'Yu başlatın ve **Yeni proje oluştur** ' u seçin.
+1. **Yeni proje oluştur** iletişim kutusunda **ASP.NET Core Web uygulaması** > **İleri** ' yi seçin.
+1. **Yeni projenizi yapılandırın** Iletişim kutusunda `ContosoUniversity` **Proje adı** ' nı girin. Büyük harfler de dahil olmak üzere bu tam adı kullanmak önemlidir. bu nedenle, `namespace` Kod kopyalanırken her biri eşleşir.
+1. **Oluştur** ’u seçin.
+1. **Yeni ASP.NET Core Web uygulaması oluştur** iletişim kutusunda şunları seçin:
+    1. **.NET Core** ve **ASP.NET Core 5,0** açılır.
+    1. **ASP.NET Core Web uygulaması (Model-View-Controller)**.
+    1. **Create** 
+       Oluştur ![ Yeni ASP.NET Core projesi iletişim kutusu](~/data/ef-mvc/intro/_static/new-aspnet5.png)
 
 ## <a name="set-up-the-site-style"></a>Site stilini ayarlayın
 
@@ -388,11 +392,13 @@ Temel CRUD (oluşturma, okuma, güncelleştirme, silme) işlemlerini nasıl ger�
 
 ::: moniker-end
 
-::: moniker range="< aspnetcore-3.0"
+::: moniker range="<= aspnetcore-3.1"
 
 [!INCLUDE [RP better than MVC](~/includes/RP-EF/rp-over-mvc.md)]
 
 Contoso Üniversitesi örnek Web uygulaması, Entity Framework (EF) Core 2,2 ve Visual Studio 2017 veya 2019 kullanarak ASP.NET Core 2,2 MVC web uygulamalarının nasıl oluşturulacağını gösterir.
+
+Bu öğretici ASP.NET Core 3,1 için güncelleştirilmedi. [ASP.NET Core 5,0](xref:data/ef-mvc/intro?view=aspnetcore-5.0)için güncelleştirilmiştir.
 
 Örnek uygulama, kurgusal bir Contoso Üniversitesi için bir Web sitesidir. Öğrenci giriş, kurs oluşturma ve eğitmen atamaları gibi işlevleri içerir. Bu, Contoso Üniversitesi örnek uygulamasının sıfırdan nasıl oluşturulacağını açıklayan bir öğretici serisinin ilkisidir.
 

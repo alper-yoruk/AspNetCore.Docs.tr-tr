@@ -19,12 +19,12 @@ no-loc:
 - Razor
 - SignalR
 uid: blazor/host-and-deploy/webassembly
-ms.openlocfilehash: 0912b3fbcd0b891deb4985eaa18841c22f4f3264
-ms.sourcegitcommit: ca34c1ac578e7d3daa0febf1810ba5fc74f60bbf
+ms.openlocfilehash: 7ae462ff9abd06fe4ab4b3e00a71515b76b0ee7d
+ms.sourcegitcommit: bb475e69cb647f22cf6d2c6f93d0836c160080d7
 ms.translationtype: MT
 ms.contentlocale: tr-TR
-ms.lasthandoff: 10/30/2020
-ms.locfileid: "93055756"
+ms.lasthandoff: 11/06/2020
+ms.locfileid: "94339990"
 ---
 # <a name="host-and-deploy-aspnet-core-no-locblazor-webassembly"></a>ASP.NET Core barındırma ve dağıtma Blazor WebAssembly
 
@@ -523,7 +523,16 @@ Tek başına bir uygulama bir IIS alt uygulaması olarak barındırılıyorsa, a
 
 #### <a name="brotli-and-gzip-compression"></a>Brotli ve gzip sıkıştırması
 
-IIS, `web.config` Brotli veya gzip ile sıkıştırılan varlıkları sunacak şekilde yapılandırılabilir Blazor . Örnek bir yapılandırma için bkz [`web.config`](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/web.config?raw=true) ..
+*Bu bölüm yalnızca tek başına uygulamalar için geçerlidir Blazor WebAssembly . barındırılan Blazor uygulamalar `web.config` , bu bölümde bağlantılı dosyayı değil, varsayılan bir ASP.NET Core uygulama dosyası kullanır.*
+
+IIS, `web.config` Blazor tek başına uygulamalar için Brotli veya gzip ile sıkıştırılmış varlıklar sunacak şekilde yapılandırılabilir Blazor WebAssembly . Örnek bir yapılandırma dosyası için bkz [`web.config`](https://github.com/dotnet/AspNetCore.Docs/blob/master/aspnetcore/blazor/host-and-deploy/webassembly/_samples/web.config?raw=true) ..
+
+Örnek dosyanın ek yapılandırması `web.config` aşağıdaki senaryolarda gerekli olabilir:
+
+* Uygulamanın belirtimi aşağıdakilerden birini çağırır:
+  * Örnek dosya tarafından yapılandırılmayan sıkıştırılmış dosyalara hizmet sunma `web.config` .
+  * Sıkıştırılmış dosyalara, sıkıştırılmamış biçimde örnek dosya tarafından yapılandırılmış olarak sunma `web.config` .
+* Sunucunun IIS yapılandırması (örneğin, `applicationHost.config` ) sunucu DÜZEYINDE IIS Varsayılanları sağlar. Sunucu düzeyindeki yapılandırmaya bağlı olarak, uygulama örnek dosyanın içerenden farklı bir IIS yapılandırması gerektirebilir `web.config` .
 
 #### <a name="troubleshooting"></a>Sorun giderme
 
@@ -531,7 +540,7 @@ IIS, `web.config` Brotli veya gzip ile sıkıştırılan varlıkları sunacak ş
 
 IIS ile dağıtım sorunlarını giderme hakkında daha fazla bilgi için bkz <xref:test/troubleshoot-azure-iis> ..
 
-### <a name="azure-storage"></a>Azure Storage
+### <a name="azure-storage"></a>Azure Depolama
 
 [Azure depolama](/azure/storage/) statik dosya barındırma, sunucusuz Blazor uygulama barındırmayı sağlar. Özel etki alanı adları, Azure Content Delivery Network (CDN) ve HTTPS desteklenir.
 
